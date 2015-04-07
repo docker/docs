@@ -55,7 +55,11 @@ func main() {
 	tlsConfig.Rand = rand.Reader
 
 	r := mux.NewRouter()
-	r.HandleFunc("/", handlers.MainHandler)
+	// TODO (endophage): use correct regexes for image and tag names
+	r.Methods("PUT").Path("/{imageName}/init").HandlerFunc(handlers.GenKeysHandler)
+	r.Methods("GET").Path("/{imageName}/{tufFile}").HandlerFunc(handlers.GetHandler)
+	r.Methods("DELETE").Path("/{imageName}/{tag}").HandlerFunc(handlers.RemoveHandler)
+	r.Methods("POST").Path("/{imageName}/{tag}").HandlerFunc(handlers.AddHandler)
 
 	server := http.Server{
 		Addr:      ADDR,
