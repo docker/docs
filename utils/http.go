@@ -1,3 +1,4 @@
+// http.go contains useful http utilities.
 package utils
 
 import (
@@ -27,9 +28,12 @@ func BaseHandler(handler BetterHandler) http.Handler {
 	return errorHandler(baseWrapper)
 }
 
-func AuthorizedHandler(handler BetterHandler, scopes ...auth.Scope) http.Handler {
+func AuthorizedHandler(handler BetterHandler, auth IAuthorizer, scopes ...Scope) http.Handler {
 	authorizedWrapper := func(ctx IContext, w http.ResponseWriter, r *http.Request) errors.DockerError {
-		auth.Authorize(ctx, scopes...)
+		if err := auth.Authorize(ctx, scopes...); err != nil {
+			http.Error(w, err.Error(), http.StatusUnauthorized)
+			return
+		}
 		return handler(ctx, w, r)
 	}
 	return BaseHandler(authorizedWrapper)
