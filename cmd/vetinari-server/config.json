@@ -1,0 +1,7 @@
+{
+	"Server": {
+		"addr": ":4443"
+		"tls_cert_file": "../../fixtures/ca.pem" 
+		"tls_key_file": "../../fixtures/ca-key.pem"
+	}
+}

@@ -12,6 +12,7 @@ type HTTPError struct {
 	Err        error
 }
 
+// Error implements the error interface
 func (he *HTTPError) Error() string {
 	msg := ""
 	if he.Err != nil {
