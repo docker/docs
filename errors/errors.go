@@ -4,12 +4,16 @@ import (
 	"fmt"
 )
 
-type DockerError struct {
+type HTTPError struct {
 	HTTPStatus int
 	Code       int
-	Error      error
+	Err        error
 }
 
-func (de *DockerError) Error() string {
-	fmt.Sprintf("%d: %s", de.Code, de.Error.Error())
+func (he *HTTPError) Error() string {
+	msg := ""
+	if he.Err != nil {
+		msg = he.Err.Error()
+	}
+	return fmt.Sprintf("%d: %s", he.Code, msg)
 }

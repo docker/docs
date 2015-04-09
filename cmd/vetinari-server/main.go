@@ -11,6 +11,7 @@ import (
 
 	_ "github.com/docker/distribution/health"
 	"github.com/docker/vetinari/server/handlers"
+	"github.com/docker/vetinari/utils"
 	"github.com/gorilla/mux"
 )
 
@@ -54,12 +55,14 @@ func main() {
 	}
 	tlsConfig.Rand = rand.Reader
 
+	hand := utils.RootHandlerFactory(&utils.InsecureAuthorizer{}, utils.ContextFactory)
+
 	r := mux.NewRouter()
 	// TODO (endophage): use correct regexes for image and tag names
-	r.Methods("PUT").Path("/{imageName}/init").HandlerFunc(handlers.GenKeysHandler)
-	r.Methods("GET").Path("/{imageName}/{tufFile}").HandlerFunc(handlers.GetHandler)
-	r.Methods("DELETE").Path("/{imageName}/{tag}").HandlerFunc(handlers.RemoveHandler)
-	r.Methods("POST").Path("/{imageName}/{tag}").HandlerFunc(handlers.AddHandler)
+	r.Methods("PUT").Path("/{imageName}/init").Handler(hand(handlers.GenKeysHandler, utils.SSCreate))
+	r.Methods("GET").Path("/{imageName}/{tufFile}").Handler(hand(handlers.GetHandler, utils.SSNoAuth))
+	r.Methods("DELETE").Path("/{imageName}/{tag}").Handler(hand(handlers.RemoveHandler, utils.SSDelete))
+	r.Methods("POST").Path("/{imageName}/{tag}").Handler(hand(handlers.AddHandler, utils.SSUpdate))
 
 	server := http.Server{
 		Addr:      ADDR,

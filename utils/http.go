@@ -4,37 +4,34 @@ package utils
 import (
 	"net/http"
 
-	"github.com/docker/vetinari/auth"
 	"github.com/docker/vetinari/errors"
 )
 
-type BetterHandler func(ctx IContext, w http.ResponseWriter, r *http.Request) *errors.DockerError
+type BetterHandler func(ctx IContext, w http.ResponseWriter, r *http.Request) *errors.HTTPError
 
-func errorHandler(handler BetterHandler) {
-	errorWrapper := func(w http.ResponseWriter, r *http.Request) {
-		if err := handler(); err != nil {
-			// TODO: Log error
-			http.Error(w, err.Error(), err.HTTPStatus)
-		}
-	}
-	return errorWrapper
+type RootHandler struct {
+	handler BetterHandler
+	auth    IAuthorizer
+	scopes  []IScope
+	context IContextFactory
 }
 
-func BaseHandler(handler BetterHandler) http.Handler {
-	baseWrapper := func(w http.ResponseWriter, r *http.Request) *errors.DockerError {
-		ctx := generateContext(r)
-		return handler(ctx, w, r)
+func RootHandlerFactory(auth IAuthorizer, ctxFac IContextFactory) func(BetterHandler, ...IScope) *RootHandler {
+	return func(handler BetterHandler, scopes ...IScope) *RootHandler {
+		return &RootHandler{handler, auth, scopes, ctxFac}
 	}
-	return errorHandler(baseWrapper)
 }
 
-func AuthorizedHandler(handler BetterHandler, auth IAuthorizer, scopes ...Scope) http.Handler {
-	authorizedWrapper := func(ctx IContext, w http.ResponseWriter, r *http.Request) errors.DockerError {
-		if err := auth.Authorize(ctx, scopes...); err != nil {
-			http.Error(w, err.Error(), http.StatusUnauthorized)
-			return
-		}
-		return handler(ctx, w, r)
+func (root *RootHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	ctx := root.context(r)
+	if err := root.auth.Authorize(ctx, root.scopes...); err != nil {
+		http.Error(w, err.Error(), http.StatusUnauthorized)
+		return
 	}
-	return BaseHandler(authorizedWrapper)
+	if err := root.handler(ctx, w, r); err != nil {
+		// TODO: Log error
+		http.Error(w, err.Error(), err.HTTPStatus)
+		return
+	}
+	return
 }

@@ -15,41 +15,36 @@ type IContext interface {
 	// Resource return the QDN of the resource being accessed
 	Resource() string
 
-	// Scopes returns the scopes required for the request to be
-	// successfully completed.
-	Scopes() []Scope
-
 	// Authorized returns a boolean indicating whether the user
 	// has been successfully authorized for this request.
-	Authorized() bool
+	Authorization() IAuthorization
 
 	// SetAuthStatus should be called to change the authorization
 	// status of the context (and therefore the request)
-	SetAuthStatus(bool)
+	SetAuthorization(IAuthorization)
 }
+
+type IContextFactory func(*http.Request) IContext
 
 type Context struct {
-	resource   string
-	scopes     []Scope
-	authorized bool
+	resource      string
+	authorization IAuthorization
 }
 
-func generateContext(r *http.Request) Context {
-	return Context{authorized: false}
+func ContextFactory(r *http.Request) IContext {
+	return &Context{
+		resource: r.URL.Path,
+	}
 }
 
 func (ctx *Context) Resource() string {
 	return ctx.resource
 }
 
-func (ctx *Context) Scopes() string {
-	return ctx.scopes
+func (ctx *Context) Authorization() IAuthorization {
+	return ctx.authorization
 }
 
-func (ctx *Context) Authorized() string {
-	return ctx.authorized
-}
-
-func (ctx *Context) SetAuthStatus(newStatus bool) string {
-	ctx.authorized = newStatus
+func (ctx *Context) SetAuthorization(authzn IAuthorization) {
+	ctx.authorization = authzn
 }
