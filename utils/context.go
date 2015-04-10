@@ -4,6 +4,7 @@ import (
 	"net/http"
 )
 
+// IContext defines an interface for managing authorizations.
 type IContext interface {
 	// TODO: define a set of standard getters. Using getters
 	//       will allow us to easily and transparently cache
@@ -24,27 +25,36 @@ type IContext interface {
 	SetAuthorization(IAuthorization)
 }
 
+// IContextFactory creates a IContext from an http request.
 type IContextFactory func(*http.Request) IContext
 
+// Context represents an authorization context for a resource.
 type Context struct {
 	resource      string
 	authorization IAuthorization
 }
 
+// ContextFactory creates a new authorization context with the
+// given HTTP request path as the resource.
 func ContextFactory(r *http.Request) IContext {
 	return &Context{
 		resource: r.URL.Path,
 	}
 }
 
+// Resource returns the resource value for the context.
 func (ctx *Context) Resource() string {
 	return ctx.resource
 }
 
+// Authorization returns an IAuthorization implementation for
+// the context.
 func (ctx *Context) Authorization() IAuthorization {
 	return ctx.authorization
 }
 
+// SetAuthorization allows setting an IAuthorization for
+// the context.
 func (ctx *Context) SetAuthorization(authzn IAuthorization) {
 	ctx.authorization = authzn
 }

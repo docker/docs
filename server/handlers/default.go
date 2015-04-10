@@ -16,6 +16,7 @@ import (
 
 var db = util.GetSqliteDB()
 
+// MainHandler is the default handler for the server
 func MainHandler(ctx utils.IContext, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
 	if r.Method == "GET" {
 		err := json.NewEncoder(w).Encode("{}")
@@ -24,7 +25,11 @@ func MainHandler(ctx utils.IContext, w http.ResponseWriter, r *http.Request) *er
 		}
 	} else {
 		w.WriteHeader(http.StatusNotFound)
-		return &errors.HTTPError{http.StatusNotFound, 9999, nil}
+		return &errors.HTTPError{
+			HTTPStatus: http.StatusNotFound,
+			Code:       9999,
+			Err:        nil,
+		}
 	}
 	return nil
 }
@@ -40,32 +45,56 @@ func AddHandler(ctx utils.IContext, w http.ResponseWriter, r *http.Request) *err
 	err := decoder.Decode(&meta)
 	defer r.Body.Close()
 	if err != nil {
-		return &errors.HTTPError{http.StatusInternalServerError, 9999, err}
+		return &errors.HTTPError{
+			HTTPStatus: http.StatusInternalServerError,
+			Code:       9999,
+			Err:        err,
+		}
 	}
 	// add to targets
 	local.AddBlob(vars["tag"], meta)
 	tufRepo, err := repo.NewRepo(local, "sha256", "sha512")
 	if err != nil {
-		return &errors.HTTPError{http.StatusInternalServerError, 9999, err}
+		return &errors.HTTPError{
+			HTTPStatus: http.StatusInternalServerError,
+			Code:       9999,
+			Err:        err,
+		}
 	}
 	_ = tufRepo.Init(true)
 	err = tufRepo.AddTarget(vars["tag"], json.RawMessage{})
 	if err != nil {
-		return &errors.HTTPError{http.StatusInternalServerError, 9999, err}
+		return &errors.HTTPError{
+			HTTPStatus: http.StatusInternalServerError,
+			Code:       9999,
+			Err:        err,
+		}
 	}
 	err = tufRepo.Sign("targets.json")
 	if err != nil {
-		return &errors.HTTPError{http.StatusInternalServerError, 9999, err}
+		return &errors.HTTPError{
+			HTTPStatus: http.StatusInternalServerError,
+			Code:       9999,
+			Err:        err,
+		}
 	}
 	tufRepo.Snapshot(repo.CompressionTypeNone)
 	err = tufRepo.Sign("snapshot.json")
 	if err != nil {
-		return &errors.HTTPError{http.StatusInternalServerError, 9999, err}
+		return &errors.HTTPError{
+			HTTPStatus: http.StatusInternalServerError,
+			Code:       9999,
+			Err:        err,
+		}
 	}
 	tufRepo.Timestamp()
 	err = tufRepo.Sign("timestamp.json")
 	if err != nil {
-		return &errors.HTTPError{http.StatusInternalServerError, 9999, err}
+		return &errors.HTTPError{
+			HTTPStatus: http.StatusInternalServerError,
+			Code:       9999,
+			Err:        err,
+		}
 	}
 	return nil
 }
@@ -79,23 +108,39 @@ func RemoveHandler(ctx utils.IContext, w http.ResponseWriter, r *http.Request) *
 	local.RemoveBlob(vars["tag"])
 	tufRepo, err := repo.NewRepo(local, "sha256", "sha512")
 	if err != nil {
-		return &errors.HTTPError{http.StatusInternalServerError, 9999, err}
+		return &errors.HTTPError{
+			HTTPStatus: http.StatusInternalServerError,
+			Code:       9999,
+			Err:        err,
+		}
 	}
 	_ = tufRepo.Init(true)
 	tufRepo.RemoveTarget(vars["tag"])
 	err = tufRepo.Sign("targets.json")
 	if err != nil {
-		return &errors.HTTPError{http.StatusInternalServerError, 9999, err}
+		return &errors.HTTPError{
+			HTTPStatus: http.StatusInternalServerError,
+			Code:       9999,
+			Err:        err,
+		}
 	}
 	tufRepo.Snapshot(repo.CompressionTypeNone)
 	err = tufRepo.Sign("snapshot.json")
 	if err != nil {
-		return &errors.HTTPError{http.StatusInternalServerError, 9999, err}
+		return &errors.HTTPError{
+			HTTPStatus: http.StatusInternalServerError,
+			Code:       9999,
+			Err:        err,
+		}
 	}
 	tufRepo.Timestamp()
 	err = tufRepo.Sign("timestamp.json")
 	if err != nil {
-		return &errors.HTTPError{http.StatusInternalServerError, 9999, err}
+		return &errors.HTTPError{
+			HTTPStatus: http.StatusInternalServerError,
+			Code:       9999,
+			Err:        err,
+		}
 	}
 	return nil
 }
@@ -109,12 +154,17 @@ func GetHandler(ctx utils.IContext, w http.ResponseWriter, r *http.Request) *err
 
 	meta, err := local.GetMeta()
 	if err != nil {
-		return &errors.HTTPError{http.StatusInternalServerError, 9999, err}
+		return &errors.HTTPError{
+			HTTPStatus: http.StatusInternalServerError,
+			Code:       9999,
+			Err:        err,
+		}
 	}
 	w.Write(meta[vars["tufFile"]])
 	return nil
 }
 
+// GenKeysHandler is the handler for generate keys endpoint
 func GenKeysHandler(ctx utils.IContext, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
 	log.Printf("GenKeysHandler")
 	// remove tag from tagets list
@@ -122,7 +172,11 @@ func GenKeysHandler(ctx utils.IContext, w http.ResponseWriter, r *http.Request) 
 	local := store.DBStore(db, vars["imageName"])
 	tufRepo, err := repo.NewRepo(local, "sha256", "sha512")
 	if err != nil {
-		return &errors.HTTPError{http.StatusInternalServerError, 9999, err}
+		return &errors.HTTPError{
+			HTTPStatus: http.StatusInternalServerError,
+			Code:       9999,
+			Err:        err,
+		}
 	}
 	tufRepo.GenKey("root")
 	tufRepo.GenKey("targets")
