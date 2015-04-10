@@ -15,8 +15,11 @@ import (
 	"github.com/gorilla/mux"
 )
 
-const ADDR = ":4443"
-const DEBUG_ADDR = "localhost:8080"
+// ServerAddress is the secure server address to listen on
+const ServerAddress = ":4443"
+
+// DebugAddress is the debug server address to listen on
+const DebugAddress = "localhost:8080"
 
 var debug bool
 var certFile, keyFile string
@@ -31,8 +34,8 @@ func main() {
 	flag.Usage = usage
 	flag.Parse()
 
-	if DEBUG_ADDR != "" {
-		go debugServer(DEBUG_ADDR)
+	if DebugAddress != "" {
+		go debugServer(DebugAddress)
 	}
 
 	if certFile == "" || keyFile == "" {
@@ -65,13 +68,13 @@ func main() {
 	r.Methods("POST").Path("/{imageName}/{tag}").Handler(hand(handlers.AddHandler, utils.SSUpdate))
 
 	server := http.Server{
-		Addr:      ADDR,
+		Addr:      ServerAddress,
 		Handler:   r,
 		TLSConfig: tlsConfig,
 	}
 
 	if debug {
-		log.Println("[Vetinari Server] : Listening on", ADDR)
+		log.Println("[Vetinari Server] : Listening on", ServerAddress)
 	}
 
 	err := server.ListenAndServeTLS(certFile, keyFile)
@@ -81,7 +84,7 @@ func main() {
 }
 
 func usage() {
-	log.Println(os.Stderr, "usage:", os.Args[0], "<config>")
+	log.Println("usage:", os.Args[0], "<config>")
 	flag.PrintDefaults()
 }
 

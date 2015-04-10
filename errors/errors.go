@@ -4,6 +4,8 @@ import (
 	"fmt"
 )
 
+// HTTPError represents an application error which will map to
+// an HTTP status code and returned error object.
 type HTTPError struct {
 	HTTPStatus int
 	Code       int
