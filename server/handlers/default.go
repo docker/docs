@@ -5,12 +5,12 @@ import (
 	"log"
 	"net/http"
 
-	repo "github.com/docker/go-tuf"
-	"github.com/docker/go-tuf/data"
-	"github.com/docker/go-tuf/store"
-	"github.com/docker/go-tuf/util"
 	"github.com/docker/vetinari/errors"
 	"github.com/docker/vetinari/utils"
+	repo "github.com/endophage/go-tuf"
+	"github.com/endophage/go-tuf/data"
+	"github.com/endophage/go-tuf/store"
+	"github.com/endophage/go-tuf/util"
 	"github.com/gorilla/mux"
 )
 
