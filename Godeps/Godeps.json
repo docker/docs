@@ -1,0 +1,38 @@
+{
+	"ImportPath": "github.com/docker/vetinari",
+	"GoVersion": "go1.4.1",
+	"Packages": [
+		"./cmd/vetinari-server"
+	],
+	"Deps": [
+		{
+			"ImportPath": "code.google.com/p/go-sqlite/go1/sqlite3",
+			"Comment": "null-50",
+			"Rev": "6e75c20f8fc4b936bccab88336915333ae165754"
+		},
+		{
+			"ImportPath": "github.com/agl/ed25519",
+			"Rev": "d2b94fd789ea21d12fac1a4443dd3a3f79cda72c"
+		},
+		{
+			"ImportPath": "github.com/endophage/go-tuf",
+			"Rev": "a06029e9b42bff41f0277e5ceb482ad00299210a"
+		},
+		{
+			"ImportPath": "github.com/gorilla/context",
+			"Rev": "14f550f51af52180c2eefed15e5fd18d63c0a64a"
+		},
+		{
+			"ImportPath": "github.com/gorilla/mux",
+			"Rev": "e444e69cbd2e2e3e0749a2f3c717cec491552bbf"
+		},
+		{
+			"ImportPath": "github.com/tent/canonical-json-go",
+			"Rev": "96e4ba3a7613a1216cbd1badca4efe382adea337"
+		},
+		{
+			"ImportPath": "golang.org/x/net/context",
+			"Rev": "1dfe7915deaf3f80b962c163b918868d8a6d8974"
+		}
+	]
+}
