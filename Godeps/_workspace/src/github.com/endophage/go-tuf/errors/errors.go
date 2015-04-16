@@ -1,4 +1,4 @@
-package tuf
+package errors
 
 import (
 	"errors"

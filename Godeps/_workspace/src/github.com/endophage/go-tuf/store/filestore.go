@@ -1,7 +1,6 @@
 package store
 
 import (
-	"bytes"
 	"encoding/json"
 	"io"
 	"io/ioutil"
@@ -11,75 +10,16 @@ import (
 
 	"github.com/endophage/go-tuf/data"
 	"github.com/endophage/go-tuf/encrypted"
+	"github.com/endophage/go-tuf/errors"
 	"github.com/endophage/go-tuf/util"
 )
 
-func MemoryStore(meta map[string]json.RawMessage, files map[string][]byte) LocalStore {
-	if meta == nil {
-		meta = make(map[string]json.RawMessage)
-	}
-	return &memoryStore{
-		meta:  meta,
-		files: files,
-		keys:  make(map[string][]*data.Key),
-	}
-}
-
-type memoryStore struct {
-	meta  map[string]json.RawMessage
-	files map[string][]byte
-	keys  map[string][]*data.Key
-}
-
-func (m *memoryStore) GetMeta() (map[string]json.RawMessage, error) {
-	return m.meta, nil
-}
-
-func (m *memoryStore) SetMeta(name string, meta json.RawMessage) error {
-	m.meta[name] = meta
-	return nil
-}
-
-func (m *memoryStore) WalkStagedTargets(paths []string, targetsFn targetsWalkFunc) error {
-	if len(paths) == 0 {
-		for path, data := range m.files {
-			if err := targetsFn(path, bytes.NewReader(data)); err != nil {
-				return err
-			}
-		}
-		return nil
-	}
-
-	for _, path := range paths {
-		data, ok := m.files[path]
-		if !ok {
-			return ErrFileNotFound{path}
-		}
-		if err := targetsFn(path, bytes.NewReader(data)); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-
-func (m *memoryStore) Commit(map[string]json.RawMessage, bool, map[string]data.Hashes) error {
-	return nil
-}
-
-func (m *memoryStore) GetKeys(role string) ([]*data.Key, error) {
-	return m.keys[role], nil
-}
-
-func (m *memoryStore) SaveKey(role string, key *data.Key) error {
-	if _, ok := m.keys[role]; !ok {
-		m.keys[role] = make([]*data.Key, 0)
-	}
-	m.keys[role] = append(m.keys[role], key)
-	return nil
-}
-
-func (m *memoryStore) Clean() error {
-	return nil
+// topLevelManifests determines the order signatures are verified when committing.
+var topLevelManifests = []string{
+	"root.json",
+	"targets.json",
+	"snapshot.json",
+	"timestamp.json",
 }
 
 type persistedKeys struct {
@@ -171,7 +111,11 @@ func (f *fileSystemStore) WalkStagedTargets(paths []string, targetsFn targetsWal
 				return err
 			}
 			defer file.Close()
-			return targetsFn(rel, file)
+			meta, err := util.GenerateFileMeta(file, "sha256")
+			if err != nil {
+				return err
+			}
+			return targetsFn(rel, meta)
 		}
 		return filepath.Walk(filepath.Join(f.stagedDir(), "targets"), walkFunc)
 	}
@@ -181,7 +125,7 @@ func (f *fileSystemStore) WalkStagedTargets(paths []string, targetsFn targetsWal
 		realPath := filepath.Join(f.stagedDir(), "targets", path)
 		if _, err := os.Stat(realPath); err != nil {
 			if os.IsNotExist(err) {
-				return ErrFileNotFound{realPath}
+				return errors.ErrFileNotFound{realPath}
 			}
 			return err
 		}
@@ -192,11 +136,15 @@ func (f *fileSystemStore) WalkStagedTargets(paths []string, targetsFn targetsWal
 		file, err := os.Open(realPath)
 		if err != nil {
 			if os.IsNotExist(err) {
-				return ErrFileNotFound{realPath}
+				return errors.ErrFileNotFound{realPath}
 			}
 			return err
 		}
-		err = targetsFn(path, file)
+		meta, err := util.GenerateFileMeta(file, "sha256")
+		if err != nil {
+			return err
+		}
+		err = targetsFn(path, meta)
 		file.Close()
 		if err != nil {
 			return err
@@ -382,7 +330,7 @@ func (f *fileSystemStore) loadKeys(role string) ([]*data.Key, []byte, error) {
 
 	// the keys are encrypted so cannot be loaded if passphraseFunc is not set
 	if f.passphraseFunc == nil {
-		return nil, nil, ErrPassphraseRequired{role}
+		return nil, nil, errors.ErrPassphraseRequired{role}
 	}
 
 	pass, err := f.passphraseFunc(role, false)

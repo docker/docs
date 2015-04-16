@@ -6,10 +6,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/agl/ed25519"
+	"github.com/endophage/go-tuf/Godeps/_workspace/src/github.com/agl/ed25519"
+	"github.com/endophage/go-tuf/Godeps/_workspace/src/github.com/tent/canonical-json-go"
 	"github.com/endophage/go-tuf/data"
 	"github.com/endophage/go-tuf/keys"
-	"github.com/tent/canonical-json-go"
 )
 
 var (
@@ -74,8 +74,8 @@ func VerifySignatures(s *data.Signed, role string, db *keys.DB) error {
 	}
 
 	valid := make(map[string]struct{})
-	var sigBytes [ed25519.SignatureSize]byte
 	for _, sig := range s.Signatures {
+		var sigBytes [ed25519.SignatureSize]byte
 		if sig.Method != "ed25519" {
 			return ErrWrongMethod
 		}
@@ -92,7 +92,9 @@ func VerifySignatures(s *data.Signed, role string, db *keys.DB) error {
 		}
 
 		copy(sigBytes[:], sig.Signature)
-		if !ed25519.Verify(&key.Public, msg, &sigBytes) {
+		var keyBytes [32]byte
+		copy(keyBytes[:], key.Value.Public)
+		if !ed25519.Verify(&keyBytes, msg, &sigBytes) {
 			return ErrInvalid
 		}
 		valid[sig.KeyID] = struct{}{}

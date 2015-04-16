@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/endophage/go-tuf/data"
+	"github.com/endophage/go-tuf/errors"
 	"github.com/endophage/go-tuf/keys"
 	"github.com/endophage/go-tuf/signed"
 	"github.com/endophage/go-tuf/store"
@@ -37,13 +38,14 @@ var snapshotManifests = []string{
 }
 
 type Repo struct {
+	trust          signed.Signer
 	local          store.LocalStore
 	hashAlgorithms []string
 	meta           map[string]json.RawMessage
 }
 
-func NewRepo(local store.LocalStore, hashAlgorithms ...string) (*Repo, error) {
-	r := &Repo{local: local, hashAlgorithms: hashAlgorithms}
+func NewRepo(trust *signed.Signer, local store.LocalStore, hashAlgorithms ...string) (*Repo, error) {
+	r := &Repo{trust: *trust, local: local, hashAlgorithms: hashAlgorithms}
 
 	var err error
 	r.meta, err = local.GetMeta()
@@ -59,7 +61,7 @@ func (r *Repo) Init(consistentSnapshot bool) error {
 		return err
 	}
 	if len(t.Targets) > 0 {
-		return ErrInitNotAllowed
+		return errors.ErrInitNotAllowed
 	}
 	root := data.NewRoot()
 	root.ConsistentSnapshot = consistentSnapshot
@@ -72,8 +74,8 @@ func (r *Repo) db() (*keys.DB, error) {
 	if err != nil {
 		return nil, err
 	}
-	for id, k := range root.Keys {
-		if err := db.AddKey(id, k); err != nil {
+	for _, k := range root.Keys {
+		if err := db.AddKey(&keys.PublicKey{*k, k.ID()}); err != nil {
 			return nil, err
 		}
 	}
@@ -94,7 +96,7 @@ func (r *Repo) root() (*data.Root, error) {
 	if err := json.Unmarshal(rootJSON, s); err != nil {
 		return nil, err
 	}
-	root := &data.Root{}
+	root := data.NewRoot()
 	if err := json.Unmarshal(s.Signed, root); err != nil {
 		return nil, err
 	}
@@ -155,11 +157,11 @@ func (r *Repo) GenKey(role string) (string, error) {
 
 func (r *Repo) GenKeyWithExpires(keyRole string, expires time.Time) (string, error) {
 	if !keys.ValidRole(keyRole) {
-		return "", ErrInvalidRole{keyRole}
+		return "", errors.ErrInvalidRole{keyRole}
 	}
 
 	if !validExpires(expires) {
-		return "", ErrInvalidExpires{expires}
+		return "", errors.ErrInvalidExpires{expires}
 	}
 
 	root, err := r.root()
@@ -167,11 +169,11 @@ func (r *Repo) GenKeyWithExpires(keyRole string, expires time.Time) (string, err
 		return "", err
 	}
 
-	key, err := keys.NewKey()
+	key, err := r.trust.NewKey()
 	if err != nil {
 		return "", err
 	}
-	if err := r.local.SaveKey(keyRole, key.SerializePrivate()); err != nil {
+	if err := r.local.SaveKey(keyRole, &key.Key); err != nil {
 		return "", err
 	}
 
@@ -182,7 +184,7 @@ func (r *Repo) GenKeyWithExpires(keyRole string, expires time.Time) (string, err
 	}
 	role.KeyIDs = append(role.KeyIDs, key.ID)
 
-	root.Keys[key.ID] = key.Serialize()
+	root.Keys[key.ID] = &key.Key
 	root.Expires = expires.Round(time.Second)
 	root.Version++
 
@@ -219,11 +221,11 @@ func (r *Repo) RevokeKey(role, id string) error {
 
 func (r *Repo) RevokeKeyWithExpires(keyRole, id string, expires time.Time) error {
 	if !keys.ValidRole(keyRole) {
-		return ErrInvalidRole{keyRole}
+		return errors.ErrInvalidRole{keyRole}
 	}
 
 	if !validExpires(expires) {
-		return ErrInvalidExpires{expires}
+		return errors.ErrInvalidExpires{expires}
 	}
 
 	root, err := r.root()
@@ -232,12 +234,12 @@ func (r *Repo) RevokeKeyWithExpires(keyRole, id string, expires time.Time) error
 	}
 
 	if _, ok := root.Keys[id]; !ok {
-		return ErrKeyNotFound{keyRole, id}
+		return errors.ErrKeyNotFound{keyRole, id}
 	}
 
 	role, ok := root.Roles[keyRole]
 	if !ok {
-		return ErrKeyNotFound{keyRole, id}
+		return errors.ErrKeyNotFound{keyRole, id}
 	}
 
 	keyIDs := make([]string, 0, len(role.KeyIDs))
@@ -248,7 +250,7 @@ func (r *Repo) RevokeKeyWithExpires(keyRole, id string, expires time.Time) error
 		keyIDs = append(keyIDs, keyID)
 	}
 	if len(keyIDs) == len(role.KeyIDs) {
-		return ErrKeyNotFound{keyRole, id}
+		return errors.ErrKeyNotFound{keyRole, id}
 	}
 	role.KeyIDs = keyIDs
 
@@ -265,7 +267,7 @@ func (r *Repo) setMeta(name string, meta interface{}) error {
 	if err != nil {
 		return err
 	}
-	s, err := signed.Marshal(meta, keys...)
+	s, err := r.trust.Marshal(meta, keys...)
 	if err != nil {
 		return err
 	}
@@ -280,7 +282,7 @@ func (r *Repo) setMeta(name string, meta interface{}) error {
 func (r *Repo) Sign(name string) error {
 	role := strings.TrimSuffix(name, ".json")
 	if !keys.ValidRole(role) {
-		return ErrInvalidRole{role}
+		return errors.ErrInvalidRole{role}
 	}
 
 	s, err := r.signedMeta(name)
@@ -293,11 +295,10 @@ func (r *Repo) Sign(name string) error {
 		return err
 	}
 	if len(keys) == 0 {
-		return ErrInsufficientKeys{name}
+		return errors.ErrInsufficientKeys{name}
 	}
-	for _, k := range keys {
-		signed.Sign(s, k)
-	}
+
+	r.trust.Sign(s, keys...)
 
 	b, err := json.Marshal(s)
 	if err != nil {
@@ -313,13 +314,17 @@ func (r *Repo) Sign(name string) error {
 // been revoked are omitted), except for the root role in which case all local
 // keys are returned (revoked root keys still need to sign new root metadata so
 // clients can verify the new root.json and update their keys db accordingly).
-func (r *Repo) getKeys(name string) ([]*data.Key, error) {
+func (r *Repo) getKeys(name string) ([]*keys.PublicKey, error) {
 	localKeys, err := r.local.GetKeys(name)
 	if err != nil {
 		return nil, err
 	}
 	if name == "root" {
-		return localKeys, nil
+		rootkeys := make([]*keys.PublicKey, 0, len(localKeys))
+		for _, key := range localKeys {
+			rootkeys = append(rootkeys, &keys.PublicKey{*key, key.ID()})
+		}
+		return rootkeys, nil
 	}
 	db, err := r.db()
 	if err != nil {
@@ -332,19 +337,19 @@ func (r *Repo) getKeys(name string) ([]*data.Key, error) {
 	if len(role.KeyIDs) == 0 {
 		return nil, nil
 	}
-	keys := make([]*data.Key, 0, len(role.KeyIDs))
+	rolekeys := make([]*keys.PublicKey, 0, len(role.KeyIDs))
 	for _, key := range localKeys {
-		if _, ok := role.KeyIDs[key.ID()]; ok {
-			keys = append(keys, key)
+		if role.ValidKey(key.ID()) {
+			rolekeys = append(rolekeys, &keys.PublicKey{*key, key.ID()})
 		}
 	}
-	return keys, nil
+	return rolekeys, nil
 }
 
 func (r *Repo) signedMeta(name string) (*data.Signed, error) {
 	b, ok := r.meta[name]
 	if !ok {
-		return nil, ErrMissingMetadata{name}
+		return nil, errors.ErrMissingMetadata{name}
 	}
 	s := &data.Signed{}
 	if err := json.Unmarshal(b, s); err != nil {
@@ -376,7 +381,7 @@ func (r *Repo) AddTargetWithExpires(path string, custom json.RawMessage, expires
 
 func (r *Repo) AddTargetsWithExpires(paths []string, custom json.RawMessage, expires time.Time) error {
 	if !validExpires(expires) {
-		return ErrInvalidExpires{expires}
+		return errors.ErrInvalidExpires{expires}
 	}
 
 	t, err := r.targets()
@@ -388,7 +393,7 @@ func (r *Repo) AddTargetsWithExpires(paths []string, custom json.RawMessage, exp
 		normalizedPaths[i] = util.NormalizeTarget(path)
 	}
 	if err := r.local.WalkStagedTargets(normalizedPaths, func(path string, meta data.FileMeta) (err error) {
-		t.Targets[path] = meta
+		t.Targets[util.NormalizeTarget(path)] = meta
 		return nil
 	}); err != nil {
 		return err
@@ -413,7 +418,7 @@ func (r *Repo) RemoveTargetWithExpires(path string, expires time.Time) error {
 // If paths is empty, all targets will be removed.
 func (r *Repo) RemoveTargetsWithExpires(paths []string, expires time.Time) error {
 	if !validExpires(expires) {
-		return ErrInvalidExpires{expires}
+		return errors.ErrInvalidExpires{expires}
 	}
 
 	t, err := r.targets()
@@ -447,7 +452,7 @@ func (r *Repo) Snapshot(t CompressionType) error {
 
 func (r *Repo) SnapshotWithExpires(t CompressionType, expires time.Time) error {
 	if !validExpires(expires) {
-		return ErrInvalidExpires{expires}
+		return errors.ErrInvalidExpires{expires}
 	}
 
 	snapshot, err := r.snapshot()
@@ -480,7 +485,7 @@ func (r *Repo) Timestamp() error {
 
 func (r *Repo) TimestampWithExpires(expires time.Time) error {
 	if !validExpires(expires) {
-		return ErrInvalidExpires{expires}
+		return errors.ErrInvalidExpires{expires}
 	}
 
 	db, err := r.db()
@@ -535,7 +540,7 @@ func (r *Repo) Commit() error {
 	// check we have all the metadata
 	for _, name := range topLevelManifests {
 		if _, ok := r.meta[name]; !ok {
-			return ErrMissingMetadata{name}
+			return errors.ErrMissingMetadata{name}
 		}
 	}
 
@@ -546,7 +551,7 @@ func (r *Repo) Commit() error {
 	}
 	for name, role := range root.Roles {
 		if len(role.KeyIDs) < role.Threshold {
-			return ErrNotEnoughKeys{name, len(role.KeyIDs), role.Threshold}
+			return errors.ErrNotEnoughKeys{name, len(role.KeyIDs), role.Threshold}
 		}
 	}
 
@@ -611,7 +616,7 @@ func (r *Repo) verifySignature(name string, db *keys.DB) error {
 	}
 	role := strings.TrimSuffix(name, ".json")
 	if err := signed.Verify(s, role, 0, db); err != nil {
-		return ErrInsufficientSignatures{name, err}
+		return errors.ErrInsufficientSignatures{name, err}
 	}
 	return nil
 }
@@ -619,7 +624,7 @@ func (r *Repo) verifySignature(name string, db *keys.DB) error {
 func (r *Repo) fileMeta(name string) (data.FileMeta, error) {
 	b, ok := r.meta[name]
 	if !ok {
-		return data.FileMeta{}, ErrMissingMetadata{name}
+		return data.FileMeta{}, errors.ErrMissingMetadata{name}
 	}
 	return util.GenerateFileMeta(bytes.NewReader(b), r.hashAlgorithms...)
 }

@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"path/filepath"
 
-	. "gopkg.in/check.v1"
+	. "github.com/flynn/go-tuf/Godeps/_workspace/src/gopkg.in/check.v1"
 )
 
 type LocalStoreSuite struct{}

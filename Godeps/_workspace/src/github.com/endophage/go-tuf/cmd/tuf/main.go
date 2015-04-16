@@ -11,9 +11,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/docker/docker/pkg/term"
-	"github.com/flynn/go-docopt"
+	"github.com/endophage/go-tuf/signed"
+	"github.com/endophage/go-tuf/store"
 	"github.com/flynn/go-tuf"
+	"github.com/flynn/go-tuf/Godeps/_workspace/src/github.com/docker/docker/pkg/term"
+	"github.com/flynn/go-tuf/Godeps/_workspace/src/github.com/flynn/go-docopt"
 	"github.com/flynn/go-tuf/util"
 )
 
@@ -107,7 +109,8 @@ func runCommand(name string, args []string, dir string, insecure bool) error {
 	if !insecure {
 		p = getPassphrase
 	}
-	repo, err := tuf.NewRepo(tuf.FileSystemStore(dir, p))
+	signer := signed.Ed25519{}
+	repo, err := tuf.NewRepo(signer, store.FileSystemStore(dir, p), "sha256")
 	if err != nil {
 		return err
 	}

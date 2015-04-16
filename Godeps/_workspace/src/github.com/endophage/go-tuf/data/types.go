@@ -6,20 +6,14 @@ import (
 	"encoding/json"
 	"time"
 
-	"github.com/tent/canonical-json-go"
+	cjson "github.com/endophage/go-tuf/Godeps/_workspace/src/github.com/tent/canonical-json-go"
 )
 
 const KeyIDLength = sha256.Size * 2
 
-type Signed struct {
-	Signed     json.RawMessage `json:"signed"`
-	Signatures []Signature     `json:"signatures"`
-}
-
-type Signature struct {
-	KeyID     string   `json:"keyid"`
-	Method    string   `json:"method"`
-	Signature HexBytes `json:"sig"`
+type KeyValue struct {
+	Public HexBytes `json:"public"`
+	//	Private HexBytes `json:"private,omitempty"`
 }
 
 type Key struct {
@@ -37,9 +31,15 @@ func (k *Key) ID() string {
 	return hex.EncodeToString(digest[:])
 }
 
-type KeyValue struct {
-	Public HexBytes `json:"public"`
-	//Private HexBytes `json:"private,omitempty"`
+type Signed struct {
+	Signed     json.RawMessage `json:"signed"`
+	Signatures []Signature     `json:"signatures"`
+}
+
+type Signature struct {
+	KeyID     string   `json:"keyid"`
+	Method    string   `json:"method"`
+	Signature HexBytes `json:"sig"`
 }
 
 func DefaultExpires(role string) time.Time {
@@ -80,6 +80,15 @@ func NewRoot() *Root {
 type Role struct {
 	KeyIDs    []string `json:"keyids"`
 	Threshold int      `json:"threshold"`
+}
+
+func (r *Role) ValidKey(id string) bool {
+	for _, key := range r.KeyIDs {
+		if key == id {
+			return true
+		}
+	}
+	return false
 }
 
 type Files map[string]FileMeta

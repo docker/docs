@@ -1,10 +1,8 @@
 package keys
 
 import (
-	"crypto/rand"
 	"errors"
 
-	"github.com/agl/ed25519"
 	"github.com/endophage/go-tuf/data"
 )
 
@@ -18,79 +16,59 @@ var (
 	ErrInvalidThreshold = errors.New("tuf: invalid role threshold")
 )
 
-func NewKey() (*Key, error) {
-	pub, priv, err := ed25519.GenerateKey(rand.Reader)
-	if err != nil {
-		return nil, err
+type PublicKey struct {
+	data.Key
+	ID string
+}
+
+func NewPublicKey(keyType string, public []byte) *PublicKey {
+	// create a copy so the private key is not included
+	key := data.Key{
+		Type:  keyType,
+		Value: data.KeyValue{Public: public},
 	}
-	k := &Key{
-		Public:  *pub,
-		Private: priv,
-	}
-	k.ID = k.Serialize().ID()
-	return k, nil
+	return &PublicKey{key, key.ID()}
 }
 
-type Key struct {
-	ID     string
-	Public [ed25519.PublicKeySize]byte
-	//Private *[ed25519.PrivateKeySize]byte
-}
-
-func (k *Key) Serialize() *data.Key {
-	return &data.Key{
-		Type:  "ed25519",
-		Value: data.KeyValue{Public: k.Public[:]},
-	}
-}
-
-func (k *Key) SerializePrivate() *data.Key {
-	return &data.Key{
-		Type: "ed25519",
-		Value: data.KeyValue{
-			Public:  k.Public[:],
-			Private: k.Private[:],
-		},
-	}
-}
-
-type Role struct {
-	KeyIDs    map[string]struct{}
-	Threshold int
-}
-
-func (r *Role) ValidKey(id string) bool {
-	_, ok := r.KeyIDs[id]
-	return ok
+type PrivateKey struct {
+	PublicKey
+	Private []byte
 }
 
 type DB struct {
-	roles map[string]*Role
-	keys  map[string]*Key
+	types map[string]int
+	roles map[string]*data.Role
+	keys  map[string]*PublicKey
 }
 
 func NewDB() *DB {
 	return &DB{
-		roles: make(map[string]*Role),
-		keys:  make(map[string]*Key),
+		roles: make(map[string]*data.Role),
+		keys:  make(map[string]*PublicKey),
 	}
 }
 
-func (db *DB) AddKey(id string, k *data.Key) error {
-	if k.Type != "ed25519" {
-		return ErrWrongType
-	}
-	if id != k.ID() {
-		return ErrWrongID
-	}
-	if len(k.Value.Public) != ed25519.PublicKeySize {
-		return ErrInvalidKey
+func (db *DB) AddKey(k *PublicKey) error {
+	//if _, ok := db.types[k.Type]; !ok {
+	//	return ErrWrongType
+	//}
+	//if len(k.Value.Public) != ed25519.PublicKeySize {
+	//	return ErrInvalidKey
+	//}
+
+	key := PublicKey{
+		Key: data.Key{
+			Type: k.Type,
+			Value: data.KeyValue{
+				Public: make([]byte, len(k.Value.Public)),
+			},
+		},
+		ID: k.ID,
 	}
 
-	var key Key
-	copy(key.Public[:], k.Value.Public)
-	key.ID = id
-	db.keys[id] = &key
+	copy(key.Value.Public, k.Value.Public)
+
+	db.keys[k.ID] = &key
 	return nil
 }
 
@@ -114,25 +92,21 @@ func (db *DB) AddRole(name string, r *data.Role) error {
 		return ErrInvalidThreshold
 	}
 
-	role := &Role{
-		KeyIDs:    make(map[string]struct{}),
-		Threshold: r.Threshold,
-	}
+	// validate all key ids have the correct length
 	for _, id := range r.KeyIDs {
 		if len(id) != data.KeyIDLength {
 			return ErrInvalidKeyID
 		}
-		role.KeyIDs[id] = struct{}{}
 	}
 
-	db.roles[name] = role
+	db.roles[name] = r
 	return nil
 }
 
-func (db *DB) GetKey(id string) *Key {
+func (db *DB) GetKey(id string) *PublicKey {
 	return db.keys[id]
 }
 
-func (db *DB) GetRole(name string) *Role {
+func (db *DB) GetRole(name string) *data.Role {
 	return db.roles[name]
 }
