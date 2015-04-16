@@ -16,3 +16,11 @@ func TestContextFactory(t *testing.T) {
 		t.Fatalf("Context has incorrect resource")
 	}
 }
+
+func TestContext(t *testing.T) {
+	ctx := Context{}
+
+	if ctx.Signer() != nil {
+		t.Fatalf("Update this test now that Signer has been implemented")
+	}
+}

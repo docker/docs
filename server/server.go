@@ -52,6 +52,9 @@ func Run(ctx context.Context, conf *config.Configuration) error {
 	}
 	tlsLsnr := tls.NewListener(lsnr, tlsConfig)
 
+	// This is a basic way to shutdown the running listeners.
+	// A more complete implementation would ensure each individual connection
+	// gets cleaned up.
 	go func() {
 		doneChan := ctx.Done()
 		<-doneChan

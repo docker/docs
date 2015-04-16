@@ -4,6 +4,19 @@ import (
 	"testing"
 )
 
+func TestInsecureAuthorization(t *testing.T) {
+	auther := InsecureAuthorizer{}
+	ctx := Context{}
+	err := auther.Authorize(&ctx, SSNoAuth)
+	if err != nil {
+		t.Fatalf("Failed to authorize with InsecureAuthorizer")
+	}
+	if !ctx.Authorization().HasScope(SSCreate) {
+		t.Fatalf("InsecureAuthorization failed to approve a scope")
+	}
+
+}
+
 func TestNoAuthorization(t *testing.T) {
 	auth := NoAuthorization{}
 	if auth.HasScope(SSCreate) {

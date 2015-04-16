@@ -1,5 +1,9 @@
 package utils
 
+import (
+	"errors"
+)
+
 // IScope is an identifier scope
 type IScope interface {
 	ID() string
@@ -49,6 +53,15 @@ func (authzn *InsecureAuthorization) HasScope(scope IScope) bool {
 }
 
 // ### END INSECURE AUTHORIZATION TOOLS ###
+
+// NoAuthorizer is a factory for NoAuthorization object
+type NoAuthorizer struct{}
+
+// Authorize implements the IAuthorizer interface
+func (auth *NoAuthorizer) Authorize(ctx IContext, scopes ...IScope) error {
+	ctx.SetAuthorization(&NoAuthorization{})
+	return errors.New("User not authorized")
+}
 
 // NoAuthorization is an implementation of IAuthorization
 // which never allows a scope to be valid.

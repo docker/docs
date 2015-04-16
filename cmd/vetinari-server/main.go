@@ -6,6 +6,8 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"os/signal"
+	"syscall"
 
 	"golang.org/x/net/context"
 
@@ -32,15 +34,41 @@ func main() {
 		go debugServer(DebugAddress)
 	}
 
-	conf, err := config.Load(configFile)
-	if err != nil {
-		// TODO: log and exit
+	ctx := context.Background()
+
+	var cancel context.CancelFunc
+	cancelable := func() {
+		var childCtx context.Context
+		childCtx, cancel = context.WithCancel(ctx)
+		conf, err := config.Load(configFile)
+		if err != nil {
+			// TODO: log and exit
+		}
+
+		server.Run(childCtx, conf)
 	}
 
-	ctx := context.Background()
-	childCtx, _ := context.WithCancel(ctx)
-	server.Run(childCtx, conf)
+	sigHup := make(chan os.Signal)
+	sigKill := make(chan os.Signal)
 
+	signal.Notify(sigHup, syscall.SIGHUP)
+	signal.Notify(sigKill, syscall.SIGKILL)
+
+	for {
+		go cancelable()
+
+		select {
+		// On a sighup we cancel and restart a new server
+		// with updated config
+		case <-sigHup:
+			cancel()
+			continue
+			// On sigkill we cancel and shutdown
+		case <-sigKill:
+			cancel()
+			os.Exit(0)
+		}
+	}
 }
 
 func usage() {

@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"github.com/endophage/go-tuf/signed"
 	"net/http"
 )
 
@@ -23,6 +24,8 @@ type IContext interface {
 	// SetAuthStatus should be called to change the authorization
 	// status of the context (and therefore the request)
 	SetAuthorization(IAuthorization)
+
+	Signer() *signed.Signer
 }
 
 // IContextFactory creates a IContext from an http request.
@@ -57,4 +60,9 @@ func (ctx *Context) Authorization() IAuthorization {
 // the context.
 func (ctx *Context) SetAuthorization(authzn IAuthorization) {
 	ctx.authorization = authzn
+}
+
+// Signer returns the instantiated signer for the context
+func (ctx *Context) Signer() *signed.Signer {
+	return nil
 }
