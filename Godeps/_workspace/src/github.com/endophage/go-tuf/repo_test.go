@@ -11,9 +11,9 @@ import (
 	"time"
 
 	"github.com/agl/ed25519"
+	. "gopkg.in/check.v1"
 	"github.com/endophage/go-tuf/data"
 	"github.com/endophage/go-tuf/store"
-	. "gopkg.in/check.v1"
 	//	"github.com/endophage/go-tuf/encrypted"
 	tuferr "github.com/endophage/go-tuf/errors"
 	"github.com/endophage/go-tuf/signed"
@@ -29,7 +29,6 @@ var _ = Suite(&RepoSuite{})
 
 func (RepoSuite) TestNewRepo(c *C) {
 	trust := signed.NewEd25519()
-	signer := signed.NewSigner(trust)
 
 	meta := map[string]json.RawMessage{
 		"root.json": []byte(`{
@@ -78,7 +77,7 @@ func (RepoSuite) TestNewRepo(c *C) {
 		local.SetMeta(k, v)
 	}
 
-	r, err := NewRepo(signer, local, "sha256")
+	r, err := NewRepo(trust, local, "sha256")
 	c.Assert(err, IsNil)
 
 	root, err := r.root()
@@ -112,7 +111,6 @@ func (RepoSuite) TestNewRepo(c *C) {
 
 func (RepoSuite) TestInit(c *C) {
 	trust := signed.NewEd25519()
-	signer := signed.NewSigner(trust)
 
 	db := util.GetSqliteDB()
 	defer util.FlushDB(db)
@@ -123,7 +121,7 @@ func (RepoSuite) TestInit(c *C) {
 	)
 	local.AddBlob("/foo.txt", util.SampleMeta())
 
-	r, err := NewRepo(signer, local, "sha256")
+	r, err := NewRepo(trust, local, "sha256")
 	c.Assert(err, IsNil)
 
 	// Init() sets root.ConsistentSnapshot
@@ -147,12 +145,11 @@ func genKey(c *C, r *Repo, role string) string {
 
 func (RepoSuite) TestGenKey(c *C) {
 	trust := signed.NewEd25519()
-	signer := signed.NewSigner(trust)
 
 	sqldb := util.GetSqliteDB()
 	defer util.FlushDB(sqldb)
 	local := store.DBStore(sqldb, "")
-	r, err := NewRepo(signer, local, "sha256")
+	r, err := NewRepo(trust, local, "sha256")
 	c.Assert(err, IsNil)
 
 	// generate a key for an unknown role
@@ -279,12 +276,11 @@ func (RepoSuite) TestGenKey(c *C) {
 
 func (RepoSuite) TestRevokeKey(c *C) {
 	trust := signed.NewEd25519()
-	signer := signed.NewSigner(trust)
 
 	db := util.GetSqliteDB()
 	defer util.FlushDB(db)
 	local := store.DBStore(db, "")
-	r, err := NewRepo(signer, local, "sha256")
+	r, err := NewRepo(trust, local, "sha256")
 	c.Assert(err, IsNil)
 
 	// revoking a key for an unknown role returns ErrInvalidRole
@@ -332,14 +328,13 @@ func (RepoSuite) TestRevokeKey(c *C) {
 
 func (RepoSuite) TestSign(c *C) {
 	trust := signed.NewEd25519()
-	signer := signed.NewSigner(trust)
 
 	baseMeta := map[string]json.RawMessage{"root.json": []byte(`{"signed":{},"signatures":[]}`)}
 	db := util.GetSqliteDB()
 	defer util.FlushDB(db)
 	local := store.DBStore(db, "")
 	local.SetMeta("root.json", baseMeta["root.json"])
-	r, err := NewRepo(signer, local, "sha256")
+	r, err := NewRepo(trust, local, "sha256")
 	c.Assert(err, IsNil)
 
 	// signing with no keys returns ErrInsufficientKeys
@@ -363,7 +358,7 @@ func (RepoSuite) TestSign(c *C) {
 	}
 
 	// signing with an available key generates a signature
-	//key, err := signer.NewKey()
+	//key, err := signer.Create()
 	kID, err := r.GenKey("root")
 	c.Assert(err, IsNil)
 	//c.Assert(local.SaveKey("root", key.SerializePrivate()), IsNil)
@@ -375,7 +370,7 @@ func (RepoSuite) TestSign(c *C) {
 	checkSigIDs(kID)
 
 	// signing with a new available key generates another signature
-	//newKey, err := signer.NewKey()
+	//newKey, err := signer.Create()
 	newkID, err := r.GenKey("root")
 	c.Assert(err, IsNil)
 	//c.Assert(local.SaveKey("root", newKey.SerializePrivate()), IsNil)
@@ -385,13 +380,12 @@ func (RepoSuite) TestSign(c *C) {
 
 func (RepoSuite) TestCommit(c *C) {
 	trust := signed.NewEd25519()
-	signer := signed.NewSigner(trust)
 
 	//files := map[string][]byte{"/foo.txt": []byte("foo"), "/bar.txt": []byte("bar")}
 	db := util.GetSqliteDB()
 	defer util.FlushDB(db)
 	local := store.DBStore(db, "")
-	r, err := NewRepo(signer, local, "sha256")
+	r, err := NewRepo(trust, local, "sha256")
 	c.Assert(err, IsNil)
 
 	// commit without root.json
@@ -532,10 +526,9 @@ func (t *tmpDir) readFile(path string) []byte {
 
 func (RepoSuite) TestCommitFileSystem(c *C) {
 	trust := signed.NewEd25519()
-	signer := signed.NewSigner(trust)
 	tmp := newTmpDir(c)
 	local := store.FileSystemStore(tmp.path, nil)
-	r, err := NewRepo(signer, local, "sha256")
+	r, err := NewRepo(trust, local, "sha256")
 	c.Assert(err, IsNil)
 
 	// don't use consistent snapshots to make the checks simpler
@@ -612,10 +605,9 @@ func (RepoSuite) TestCommitFileSystem(c *C) {
 
 func (RepoSuite) TestConsistentSnapshot(c *C) {
 	trust := signed.NewEd25519()
-	signer := signed.NewSigner(trust)
 	tmp := newTmpDir(c)
 	local := store.FileSystemStore(tmp.path, nil)
-	r, err := NewRepo(signer, local, "sha512", "sha256")
+	r, err := NewRepo(trust, local, "sha512", "sha256")
 	c.Assert(err, IsNil)
 
 	genKey(c, r, "root")
@@ -659,7 +651,7 @@ func (RepoSuite) TestConsistentSnapshot(c *C) {
 	tmp.assertNotExist("repository/targets/foo.txt")
 
 	// targets should be returned by new repo
-	newRepo, err := NewRepo(signer, local, "sha512", "sha256")
+	newRepo, err := NewRepo(trust, local, "sha512", "sha256")
 	c.Assert(err, IsNil)
 	t, err := newRepo.targets()
 	c.Assert(err, IsNil)
@@ -671,13 +663,12 @@ func (RepoSuite) TestConsistentSnapshot(c *C) {
 
 func (RepoSuite) TestExpiresAndVersion(c *C) {
 	trust := signed.NewEd25519()
-	signer := signed.NewSigner(trust)
 
 	//files := map[string][]byte{"/foo.txt": []byte("foo")}
 	db := util.GetSqliteDB()
 	defer util.FlushDB(db)
 	local := store.DBStore(db, "")
-	r, err := NewRepo(signer, local, "sha256")
+	r, err := NewRepo(trust, local, "sha256")
 	c.Assert(err, IsNil)
 
 	past := time.Now().Add(-1 * time.Second)
@@ -762,7 +753,6 @@ func (RepoSuite) TestExpiresAndVersion(c *C) {
 
 func (RepoSuite) TestHashAlgorithm(c *C) {
 	trust := signed.NewEd25519()
-	signer := signed.NewSigner(trust)
 
 	//files := map[string][]byte{"/foo.txt": []byte("foo")}
 	db := util.GetSqliteDB()
@@ -778,7 +768,7 @@ func (RepoSuite) TestHashAlgorithm(c *C) {
 		{args: []string{"sha512", "sha256"}},
 	} {
 		// generate metadata with specific hash functions
-		r, err := NewRepo(signer, local, test.args...)
+		r, err := NewRepo(trust, local, test.args...)
 		c.Assert(err, IsNil)
 		genKey(c, r, "root")
 		genKey(c, r, "targets")
@@ -882,10 +872,9 @@ func testPassphraseFunc(p []byte) util.PassphraseFunc {
 
 func (RepoSuite) TestManageMultipleTargets(c *C) {
 	trust := signed.NewEd25519()
-	signer := signed.NewSigner(trust)
 	tmp := newTmpDir(c)
 	local := store.FileSystemStore(tmp.path, nil)
-	r, err := NewRepo(signer, local)
+	r, err := NewRepo(trust, local)
 	c.Assert(err, IsNil)
 	// don't use consistent snapshots to make the checks simpler
 	c.Assert(r.Init(false), IsNil)

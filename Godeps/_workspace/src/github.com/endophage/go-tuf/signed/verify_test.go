@@ -5,10 +5,11 @@ import (
 	"time"
 
 	"github.com/agl/ed25519"
+	cjson "github.com/tent/canonical-json-go"
+	. "gopkg.in/check.v1"
+
 	"github.com/endophage/go-tuf/data"
 	"github.com/endophage/go-tuf/keys"
-
-	. "gopkg.in/check.v1"
 )
 
 // Hook up gocheck into the "go test" runner.
@@ -19,9 +20,11 @@ type VerifySuite struct{}
 var _ = Suite(&VerifySuite{})
 
 func (VerifySuite) Test(c *C) {
+	trust := NewEd25519()
+	signer := NewSigner(trust)
 	type test struct {
 		name  string
-		keys  []*data.Key
+		keys  []*keys.PublicKey
 		roles map[string]*data.Role
 		s     *data.Signed
 		ver   int
@@ -76,9 +79,9 @@ func (VerifySuite) Test(c *C) {
 		{
 			name: "more than enough signatures",
 			mut: func(t *test) {
-				k, _ := keys.NewKey()
-				Sign(t.s, k.SerializePrivate())
-				t.keys = append(t.keys, k.Serialize())
+				k, _ := signer.Create()
+				signer.Sign(t.s, k)
+				t.keys = append(t.keys, k)
 				t.roles["root"].KeyIDs = append(t.roles["root"].KeyIDs, k.ID)
 			},
 		},
@@ -93,15 +96,15 @@ func (VerifySuite) Test(c *C) {
 		{
 			name: "unknown key",
 			mut: func(t *test) {
-				k, _ := keys.NewKey()
-				Sign(t.s, k.Serialize())
+				k, _ := signer.Create()
+				signer.Sign(t.s, k)
 			},
 		},
 		{
 			name: "unknown key below threshold",
 			mut: func(t *test) {
-				k, _ := keys.NewKey()
-				Sign(t.s, k.Serialize())
+				k, _ := signer.Create()
+				signer.Sign(t.s, k)
 				t.roles["root"].Threshold = 2
 			},
 			err: ErrRoleThreshold,
@@ -109,17 +112,17 @@ func (VerifySuite) Test(c *C) {
 		{
 			name: "unknown keys in db",
 			mut: func(t *test) {
-				k, _ := keys.NewKey()
-				Sign(t.s, k.Serialize())
-				t.keys = append(t.keys, k.Serialize())
+				k, _ := signer.Create()
+				signer.Sign(t.s, k)
+				t.keys = append(t.keys, k)
 			},
 		},
 		{
 			name: "unknown keys in db below threshold",
 			mut: func(t *test) {
-				k, _ := keys.NewKey()
-				Sign(t.s, k.Serialize())
-				t.keys = append(t.keys, k.Serialize())
+				k, _ := signer.Create()
+				signer.Sign(t.s, k)
+				t.keys = append(t.keys, k)
 				t.roles["root"].Threshold = 2
 			},
 			err: ErrRoleThreshold,
@@ -155,14 +158,20 @@ func (VerifySuite) Test(c *C) {
 			t.typ = t.role
 		}
 		if t.keys == nil && t.s == nil {
-			k, _ := keys.NewKey()
-			t.s, _ = Marshal(&signedMeta{Type: t.typ, Version: t.ver, Expires: *t.exp}, k.SerializePrivate())
-			t.keys = []*data.Key{k.Serialize()}
+			k, _ := signer.Create()
+			meta := &signedMeta{Type: t.typ, Version: t.ver, Expires: *t.exp}
+
+			b, err := cjson.Marshal(meta)
+			c.Assert(err, IsNil)
+			s := &data.Signed{Signed: b}
+			signer.Sign(s, k)
+			t.s = s
+			t.keys = []*keys.PublicKey{k}
 		}
 		if t.roles == nil {
 			t.roles = map[string]*data.Role{
 				"root": &data.Role{
-					KeyIDs:    []string{t.keys[0].ID()},
+					KeyIDs:    []string{t.keys[0].ID},
 					Threshold: 1,
 				},
 			}
@@ -173,7 +182,7 @@ func (VerifySuite) Test(c *C) {
 
 		db := keys.NewDB()
 		for _, k := range t.keys {
-			err := db.AddKey(k.ID(), k)
+			err := db.AddKey(k)
 			c.Assert(err, IsNil)
 		}
 		for n, r := range t.roles {

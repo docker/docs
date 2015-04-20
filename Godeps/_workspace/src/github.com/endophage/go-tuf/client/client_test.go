@@ -11,11 +11,11 @@ import (
 	"time"
 
 	"github.com/flynn/go-tuf"
+	. "gopkg.in/check.v1"
 	"github.com/flynn/go-tuf/data"
 	"github.com/flynn/go-tuf/keys"
 	"github.com/flynn/go-tuf/signed"
 	"github.com/flynn/go-tuf/util"
-	. "gopkg.in/check.v1"
 )
 
 // Hook up gocheck into the "go test" runner.

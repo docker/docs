@@ -8,21 +8,23 @@ import (
 )
 
 type MockTrustService struct {
-	testSig data.Signature
 	testKey keys.PublicKey
 }
 
-func (mts *MockTrustService) Sign(keyIDs []string, data []byte) ([]data.Signature, error) {
-	sigs := []data.Signature{mts.testSig}
+func (mts *MockTrustService) Sign(keyIDs []string, _ []byte) ([]data.Signature, error) {
+	sigs := make([]data.Signature, 0, len(keyIDs))
+	for _, keyID := range keyIDs {
+		sigs = append(sigs, data.Signature{KeyID: keyID})
+	}
 	return sigs, nil
 }
 
-func (mts *MockTrustService) Create(keyType string) (keys.PublicKey, error) {
-	return keys.PublicKey{mts.testKey}, nil
+func (mts *MockTrustService) Create() (*keys.PublicKey, error) {
+	return &mts.testKey, nil
 }
 
-func (mts *MockTrustService) PublicKeys(keyIDs ...string) (map[string]keys.PublicKey, error) {
-	keys := map[string]keys.PublicKey{"testID": mts.testKey}
+func (mts *MockTrustService) PublicKeys(keyIDs ...string) (map[string]*keys.PublicKey, error) {
+	keys := map[string]*keys.PublicKey{"testID": &mts.testKey}
 	return keys, nil
 }
 
@@ -31,13 +33,15 @@ var _ TrustService = &MockTrustService{}
 // Test signing and ensure the expected signature is added
 func TestBasicSign(t *testing.T) {
 	signer := Signer{&MockTrustService{
-		testSig: data.Signature{KeyID: "testID"},
-		testKey: keys.PublicKey{},
+		testKey: keys.PublicKey{ID: "testID"},
 	}}
-	key := keys.PublicKey{}
+	key, err := signer.Create()
+	if err != nil {
+		t.Fatal(err)
+	}
 	testData := data.Signed{}
 
-	signer.Sign(&testData, &key)
+	signer.Sign(&testData, key)
 
 	if len(testData.Signatures) != 1 {
 		t.Fatalf("Incorrect number of signatures: %d", len(testData.Signatures))
@@ -54,7 +58,6 @@ func TestBasicSign(t *testing.T) {
 // should be cleaning previous signatures by the KeyID when asked to sign again)
 func TestReSign(t *testing.T) {
 	signer := Signer{&MockTrustService{
-		testSig: data.Signature{KeyID: "testID"},
 		testKey: keys.PublicKey{},
 	}}
 	key := keys.PublicKey{ID: "testID"}
@@ -74,10 +77,7 @@ func TestReSign(t *testing.T) {
 }
 
 func TestMultiSign(t *testing.T) {
-	signer := Signer{&MockTrustService{
-		testSig: data.Signature{KeyID: "testID"},
-		testKey: keys.PublicKey{},
-	}}
+	signer := Signer{&MockTrustService{}}
 	key := keys.PublicKey{ID: "testID1"}
 	testData := data.Signed{}
 
@@ -99,14 +99,16 @@ func TestMultiSign(t *testing.T) {
 
 }
 
-func TestNewKey(t *testing.T) {
+func TestCreate(t *testing.T) {
 	signer := Signer{&MockTrustService{
-		testSig: data.Signature{},
 		testKey: keys.PublicKey{ID: "testID"},
 	}}
 
-	key := signer.NewKey("testType")
+	key, err := signer.Create()
 
+	if err != nil {
+		t.Fatal(err)
+	}
 	if key.ID != "testID" {
 		t.Fatalf("Expected key ID not found: %s", key.ID)
 	}

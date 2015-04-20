@@ -11,11 +11,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/docker/docker/pkg/term"
 	"github.com/endophage/go-tuf/signed"
 	"github.com/endophage/go-tuf/store"
-	"github.com/flynn/go-docopt"
 	"github.com/flynn/go-tuf"
+	"github.com/docker/docker/pkg/term"
+	"github.com/flynn/go-docopt"
 	"github.com/flynn/go-tuf/util"
 )
 

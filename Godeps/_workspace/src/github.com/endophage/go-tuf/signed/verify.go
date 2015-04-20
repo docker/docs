@@ -7,9 +7,9 @@ import (
 	"time"
 
 	"github.com/agl/ed25519"
+	"github.com/tent/canonical-json-go"
 	"github.com/endophage/go-tuf/data"
 	"github.com/endophage/go-tuf/keys"
-	"github.com/tent/canonical-json-go"
 )
 
 var (

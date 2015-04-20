@@ -1,32 +1,9 @@
 package signed
 
 import (
-	cjson "github.com/tent/canonical-json-go"
-
 	"github.com/endophage/go-tuf/data"
 	"github.com/endophage/go-tuf/keys"
 )
-
-// Sign takes a data.Signed and a key, calculated and adds the signature
-// to the data.Signed
-//func Sign(s *data.Signed, k *data.Key) {
-//	id := k.ID()
-//	signatures := make([]data.Signature, 0, len(s.Signatures)+1)
-//	for _, sig := range s.Signatures {
-//		if sig.KeyID == id {
-//			continue
-//		}
-//		signatures = append(signatures, sig)
-//	}
-//	priv := [ed25519.PrivateKeySize]byte{}
-//	copy(priv[:], k.Value.Private)
-//	sig := ed25519.Sign(&priv, s.Signed)
-//	s.Signatures = append(signatures, data.Signature{
-//		KeyID:     id,
-//		Method:    "ed25519",
-//		Signature: sig[:],
-//	})
-//}
 
 // Signer encapsulates a signing service with some convenience methods to
 // interface between TUF keys and the generic service interface
@@ -63,16 +40,20 @@ func (signer *Signer) Sign(s *data.Signed, keys ...*keys.PublicKey) error {
 	return nil
 }
 
-func (signer *Signer) Marshal(v interface{}, keys ...*keys.PublicKey) (*data.Signed, error) {
-	b, err := cjson.Marshal(v)
-	if err != nil {
-		return nil, err
-	}
-	s := &data.Signed{Signed: b}
-	err = signer.Sign(s, keys...)
-	return s, err // err may be nil but there's no point in checking, just return it
+//func (signer *Signer) Marshal(v interface{}, keys ...*keys.PublicKey) (*data.Signed, error) {
+//	b, err := cjson.Marshal(v)
+//	if err != nil {
+//		return nil, err
+//	}
+//	s := &data.Signed{Signed: b}
+//	err = signer.Sign(s, keys...)
+//	return s, err // err may be nil but there's no point in checking, just return it
+//}
+
+func (signer *Signer) Create() (*keys.PublicKey, error) {
+	return signer.service.Create()
 }
 
-func (signer *Signer) NewKey() (*keys.PublicKey, error) {
-	return signer.service.Create()
+func (signer *Signer) PublicKeys(keyIDs ...string) (map[string]*keys.PublicKey, error) {
+	return signer.service.PublicKeys(keyIDs...)
 }

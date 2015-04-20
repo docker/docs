@@ -9,6 +9,8 @@ import (
 	"strings"
 	"time"
 
+	cjson "github.com/tent/canonical-json-go"
+
 	"github.com/endophage/go-tuf/data"
 	"github.com/endophage/go-tuf/errors"
 	"github.com/endophage/go-tuf/keys"
@@ -32,20 +34,27 @@ var topLevelManifests = []string{
 	"timestamp.json",
 }
 
+// snapshotManifests is the list of default filenames that should be included in the
+// snapshots.json. If using delegated targets, additional, dynamic files should also
+// be included in snapshots.
 var snapshotManifests = []string{
 	"root.json",
 	"targets.json",
 }
 
+// Repo represents an instance of a TUF repo
 type Repo struct {
-	trust          signed.Signer
+	trust          *signed.Signer
 	local          store.LocalStore
 	hashAlgorithms []string
 	meta           map[string]json.RawMessage
 }
 
-func NewRepo(trust *signed.Signer, local store.LocalStore, hashAlgorithms ...string) (*Repo, error) {
-	r := &Repo{trust: *trust, local: local, hashAlgorithms: hashAlgorithms}
+// NewRepo is a factory function for instantiating new TUF repos objects.
+// If the local store is already populated, local.GetMeta() will initialise
+// the Repo with the appropriate state.
+func NewRepo(trust signed.TrustService, local store.LocalStore, hashAlgorithms ...string) (*Repo, error) {
+	r := &Repo{trust: signed.NewSigner(trust), local: local, hashAlgorithms: hashAlgorithms}
 
 	var err error
 	r.meta, err = local.GetMeta()
@@ -55,6 +64,8 @@ func NewRepo(trust *signed.Signer, local store.LocalStore, hashAlgorithms ...str
 	return r, nil
 }
 
+// Init attempts to initialize a brand new TUF repo. It will fail if
+// an existing targets file is detected.
 func (r *Repo) Init(consistentSnapshot bool) error {
 	t, err := r.targets()
 	if err != nil {
@@ -112,7 +123,7 @@ func (r *Repo) snapshot() (*data.Snapshot, error) {
 	if err := json.Unmarshal(snapshotJSON, s); err != nil {
 		return nil, err
 	}
-	snapshot := &data.Snapshot{}
+	snapshot := data.NewSnapshot()
 	if err := json.Unmarshal(s.Signed, snapshot); err != nil {
 		return nil, err
 	}
@@ -128,7 +139,7 @@ func (r *Repo) targets() (*data.Targets, error) {
 	if err := json.Unmarshal(targetsJSON, s); err != nil {
 		return nil, err
 	}
-	targets := &data.Targets{}
+	targets := data.NewTargets()
 	if err := json.Unmarshal(s.Signed, targets); err != nil {
 		return nil, err
 	}
@@ -144,7 +155,7 @@ func (r *Repo) timestamp() (*data.Timestamp, error) {
 	if err := json.Unmarshal(timestampJSON, s); err != nil {
 		return nil, err
 	}
-	timestamp := &data.Timestamp{}
+	timestamp := data.NewTimestamp()
 	if err := json.Unmarshal(s.Signed, timestamp); err != nil {
 		return nil, err
 	}
@@ -169,7 +180,7 @@ func (r *Repo) GenKeyWithExpires(keyRole string, expires time.Time) (string, err
 		return "", err
 	}
 
-	key, err := r.trust.NewKey()
+	key, err := r.trust.Create()
 	if err != nil {
 		return "", err
 	}
@@ -267,11 +278,16 @@ func (r *Repo) setMeta(name string, meta interface{}) error {
 	if err != nil {
 		return err
 	}
-	s, err := r.trust.Marshal(meta, keys...)
+	b, err := cjson.Marshal(meta)
 	if err != nil {
 		return err
 	}
-	b, err := json.Marshal(s)
+	s := &data.Signed{Signed: b}
+	err = r.trust.Sign(s, keys...)
+	if err != nil {
+		return err
+	}
+	b, err = json.Marshal(s)
 	if err != nil {
 		return err
 	}

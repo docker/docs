@@ -16,7 +16,7 @@
 		},
 		{
 			"ImportPath": "github.com/endophage/go-tuf",
-			"Rev": "913d6f239a809f317bf3642019bc480d18e80cfc"
+			"Rev": "69d16ac22ea8a8310775803a498f7f4d83208d1c"
 		},
 		{
 			"ImportPath": "github.com/gorilla/context",
