@@ -9,6 +9,7 @@ import (
 	"testing"
 
 	"github.com/docker/vetinari/errors"
+	"github.com/endophage/go-tuf/signed"
 )
 
 func MockBetterHandler(ctx IContext, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
@@ -24,7 +25,7 @@ func MockBetterErrorHandler(ctx IContext, w http.ResponseWriter, r *http.Request
 }
 
 func TestRootHandlerFactory(t *testing.T) {
-	hand := RootHandlerFactory(&InsecureAuthorizer{}, ContextFactory)
+	hand := RootHandlerFactory(&InsecureAuthorizer{}, ContextFactory, &signed.Ed25519{})
 	handler := hand(MockBetterHandler)
 	if _, ok := interface{}(handler).(http.Handler); !ok {
 		t.Fatalf("A RootHandler must implement the http.Handler interface")
@@ -43,7 +44,7 @@ func TestRootHandlerFactory(t *testing.T) {
 }
 
 func TestRootHandlerUnauthorized(t *testing.T) {
-	hand := RootHandlerFactory(&NoAuthorizer{}, ContextFactory)
+	hand := RootHandlerFactory(&NoAuthorizer{}, ContextFactory, &signed.Ed25519{})
 	handler := hand(MockBetterHandler)
 
 	ts := httptest.NewServer(handler)
@@ -59,7 +60,7 @@ func TestRootHandlerUnauthorized(t *testing.T) {
 }
 
 func TestRootHandlerError(t *testing.T) {
-	hand := RootHandlerFactory(&InsecureAuthorizer{}, ContextFactory)
+	hand := RootHandlerFactory(&InsecureAuthorizer{}, ContextFactory, &signed.Ed25519{})
 	handler := hand(MockBetterErrorHandler)
 
 	ts := httptest.NewServer(handler)

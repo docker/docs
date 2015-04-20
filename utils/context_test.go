@@ -3,6 +3,8 @@ package utils
 import (
 	"net/http"
 	"testing"
+
+	"github.com/endophage/go-tuf/signed"
 )
 
 func TestContextFactory(t *testing.T) {
@@ -10,7 +12,7 @@ func TestContextFactory(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Error creating request: %s", err.Error())
 	}
-	ctx := ContextFactory(r)
+	ctx := ContextFactory(r, &signed.Ed25519{})
 
 	if ctx.Resource() != "/test/url" {
 		t.Fatalf("Context has incorrect resource")
@@ -20,7 +22,7 @@ func TestContextFactory(t *testing.T) {
 func TestContext(t *testing.T) {
 	ctx := Context{}
 
-	if ctx.Signer() != nil {
-		t.Fatalf("Update this test now that Signer has been implemented")
+	if ctx.Trust() != nil {
+		t.Fatalf("Update this test now that Trust has been implemented")
 	}
 }
