@@ -25,6 +25,7 @@ type IContext interface {
 	// status of the context (and therefore the request)
 	SetAuthorization(IAuthorization)
 
+	// Trust returns the trust service to be used
 	Trust() signed.TrustService
 }
 
@@ -64,7 +65,7 @@ func (ctx *Context) SetAuthorization(authzn IAuthorization) {
 	ctx.authorization = authzn
 }
 
-// Signer returns the instantiated signer for the context
+// Trust returns the instantiated TrustService for the context
 func (ctx *Context) Trust() signed.TrustService {
 	return ctx.trust
 }
