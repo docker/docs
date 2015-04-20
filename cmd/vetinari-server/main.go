@@ -42,9 +42,13 @@ func main() {
 		log.Println("[Vetinari] Starting Server")
 		var childCtx context.Context
 		childCtx, cancel = context.WithCancel(ctx)
-		conf, err := config.Load(configFile)
+		file, err := os.Open(configFile)
 		if err != nil {
-			// TODO: log and exit
+			log.Fatal(err)
+		}
+
+		conf, err := config.Load(file)
+		if err != nil {
 			log.Fatal(err)
 		}
 

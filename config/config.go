@@ -2,7 +2,7 @@ package config
 
 import (
 	"encoding/json"
-	"os"
+	"io"
 )
 
 // Configuration is the top level object that
@@ -22,14 +22,10 @@ type ServerConf struct {
 // Load takes a filename (relative path from pwd) and attempts
 // to parse the file as a JSON obejct into the Configuration
 // struct
-func Load(filename string) (*Configuration, error) {
-	file, err := os.Open(filename)
-	if err != nil {
-		return nil, err
-	}
+func Load(data io.Reader) (*Configuration, error) {
 	conf := Configuration{}
-	decoder := json.NewDecoder(file)
-	err = decoder.Decode(&conf)
+	decoder := json.NewDecoder(data)
+	err := decoder.Decode(&conf)
 	if err != nil {
 		return nil, err
 	}
