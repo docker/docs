@@ -19,10 +19,14 @@ func SampleMeta() data.FileMeta {
 }
 
 func GetSqliteDB() *sqlite3.Conn {
-	conn, err := sqlite3.Open("/Users/david/gopath/src/github.com/endophage/go-tuf/db/files.db")
+	conn, err := sqlite3.Open("")
 	if err != nil {
 		panic("can't connect to db")
 	}
+	conn.Exec("CREATE TABLE keys (id int auto_increment, namespace varchar(255) not null, role varchar(255) not null, key text not null, primary key (id));")
+	conn.Exec("CREATE TABLE filehashes(namespace varchar(255) not null, path varchar(255) not null, alg varchar(10) not null, hash varchar(128) not null, primary key (namespace, path, alg));")
+	conn.Exec("CREATE TABLE filemeta(namespace varchar(255) not null, path varchar(255) not null, size int not null, custom text default null, primary key (namespace, path));")
+	conn.Commit()
 	return conn
 }
 
