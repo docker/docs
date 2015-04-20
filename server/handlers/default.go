@@ -14,6 +14,8 @@ import (
 	"github.com/gorilla/mux"
 )
 
+// TODO: This is just for PoC. The real DB should be injected as part of
+// the context for a final version.
 var db = util.GetSqliteDB()
 
 // MainHandler is the default handler for the server
@@ -24,7 +26,7 @@ func MainHandler(ctx utils.IContext, w http.ResponseWriter, r *http.Request) *er
 			w.Write([]byte("{server_error: 'Could not parse error message'}"))
 		}
 	} else {
-		w.WriteHeader(http.StatusNotFound)
+		//w.WriteHeader(http.StatusNotFound)
 		return &errors.HTTPError{
 			HTTPStatus: http.StatusNotFound,
 			Code:       9999,

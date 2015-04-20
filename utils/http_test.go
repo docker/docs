@@ -8,8 +8,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/docker/vetinari/errors"
 	"github.com/endophage/go-tuf/signed"
+
+	"github.com/docker/vetinari/errors"
 )
 
 func MockBetterHandler(ctx IContext, w http.ResponseWriter, r *http.Request) *errors.HTTPError {

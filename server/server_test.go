@@ -72,7 +72,7 @@ func TestRunGoodCancel(t *testing.T) {
 	err := Run(ctx, config)
 
 	if _, ok := err.(*net.OpError); !ok {
-		t.Fatal("Received unexpected err: %s", err.Error())
+		t.Fatalf("Received unexpected err: %s", err.Error())
 	}
 	if !strings.Contains(err.Error(), "use of closed network connection") {
 		t.Fatalf("Received unexpected err: %s", err.Error())
