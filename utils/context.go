@@ -25,23 +25,25 @@ type IContext interface {
 	// status of the context (and therefore the request)
 	SetAuthorization(IAuthorization)
 
-	Signer() *signed.Signer
+	Trust() signed.TrustService
 }
 
 // IContextFactory creates a IContext from an http request.
-type IContextFactory func(*http.Request) IContext
+type IContextFactory func(*http.Request, signed.TrustService) IContext
 
 // Context represents an authorization context for a resource.
 type Context struct {
 	resource      string
 	authorization IAuthorization
+	trust         signed.TrustService
 }
 
 // ContextFactory creates a new authorization context with the
 // given HTTP request path as the resource.
-func ContextFactory(r *http.Request) IContext {
+func ContextFactory(r *http.Request, trust signed.TrustService) IContext {
 	return &Context{
 		resource: r.URL.Path,
+		trust:    trust,
 	}
 }
 
@@ -63,6 +65,6 @@ func (ctx *Context) SetAuthorization(authzn IAuthorization) {
 }
 
 // Signer returns the instantiated signer for the context
-func (ctx *Context) Signer() *signed.Signer {
-	return nil
+func (ctx *Context) Trust() signed.TrustService {
+	return ctx.trust
 }

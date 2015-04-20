@@ -7,6 +7,7 @@ import (
 	"net"
 	"net/http"
 
+	"github.com/endophage/go-tuf/signed"
 	"github.com/gorilla/mux"
 	"golang.org/x/net/context"
 
@@ -63,7 +64,9 @@ func Run(ctx context.Context, conf *config.Configuration) error {
 		tlsLsnr.Close()
 	}()
 
-	hand := utils.RootHandlerFactory(&utils.InsecureAuthorizer{}, utils.ContextFactory)
+	trust := signed.NewEd25519()
+
+	hand := utils.RootHandlerFactory(&utils.InsecureAuthorizer{}, utils.ContextFactory, trust)
 
 	r := mux.NewRouter()
 	// TODO (endophage): use correct regexes for image and tag names

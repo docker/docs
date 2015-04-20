@@ -1,7 +1,7 @@
 package signed
 
 import (
-	cjson "github.com/endophage/go-tuf/Godeps/_workspace/src/github.com/tent/canonical-json-go"
+	cjson "github.com/tent/canonical-json-go"
 
 	"github.com/endophage/go-tuf/data"
 	"github.com/endophage/go-tuf/keys"

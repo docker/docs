@@ -16,7 +16,11 @@ func MockBetterHandler(ctx IContext, w http.ResponseWriter, r *http.Request) *er
 }
 
 func MockBetterErrorHandler(ctx IContext, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
-	return &errors.HTTPError{http.StatusInternalServerError, 9999, fmt.Errorf("TestError")}
+	return &errors.HTTPError{
+		HTTPStatus: http.StatusInternalServerError,
+		Code:       9999,
+		Err:        fmt.Errorf("TestError"),
+	}
 }
 
 func TestRootHandlerFactory(t *testing.T) {

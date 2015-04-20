@@ -29,7 +29,7 @@ func Load(filename string) (*Configuration, error) {
 	}
 	conf := Configuration{}
 	decoder := json.NewDecoder(file)
-	err = decoder.Decode(conf)
+	err = decoder.Decode(&conf)
 	if err != nil {
 		return nil, err
 	}

@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/flynn/go-tuf/Godeps/_workspace/src/github.com/flynn/go-docopt"
+	"github.com/flynn/go-docopt"
 	tuf "github.com/flynn/go-tuf/client"
 	"github.com/flynn/go-tuf/util"
 )

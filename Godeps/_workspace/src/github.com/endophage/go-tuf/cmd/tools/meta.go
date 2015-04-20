@@ -7,8 +7,8 @@ import (
 	"os"
 
 	"github.com/endophage/go-tuf"
-	"github.com/endophage/go-tuf/Godeps/_workspace/src/github.com/flynn/go-docopt"
 	"github.com/endophage/go-tuf/util"
+	"github.com/flynn/go-docopt"
 )
 
 func init() {

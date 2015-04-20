@@ -5,8 +5,8 @@ import (
 	"os"
 	"text/tabwriter"
 
-	"github.com/flynn/go-tuf/Godeps/_workspace/src/github.com/dustin/go-humanize"
-	"github.com/flynn/go-tuf/Godeps/_workspace/src/github.com/flynn/go-docopt"
+	"github.com/dustin/go-humanize"
+	"github.com/flynn/go-docopt"
 	tuf "github.com/flynn/go-tuf/client"
 )
 

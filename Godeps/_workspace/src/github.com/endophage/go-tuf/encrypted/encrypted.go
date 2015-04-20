@@ -12,8 +12,8 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/flynn/go-tuf/Godeps/_workspace/src/golang.org/x/crypto/nacl/secretbox"
-	"github.com/flynn/go-tuf/Godeps/_workspace/src/golang.org/x/crypto/scrypt"
+	"golang.org/x/crypto/nacl/secretbox"
+	"golang.org/x/crypto/scrypt"
 )
 
 const saltSize = 32

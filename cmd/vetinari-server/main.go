@@ -5,6 +5,7 @@ import (
 	"flag"
 	"log"
 	"net/http"
+	_ "net/http/pprof"
 	"os"
 	"os/signal"
 	"syscall"
@@ -38,11 +39,13 @@ func main() {
 
 	var cancel context.CancelFunc
 	cancelable := func() {
+		log.Println("[Vetinari] Starting Server")
 		var childCtx context.Context
 		childCtx, cancel = context.WithCancel(ctx)
 		conf, err := config.Load(configFile)
 		if err != nil {
 			// TODO: log and exit
+			log.Fatal(err)
 		}
 
 		server.Run(childCtx, conf)
@@ -62,10 +65,12 @@ func main() {
 		// with updated config
 		case <-sigHup:
 			cancel()
+			log.Println("[Vetinari] Stopping server for restart")
 			continue
 			// On sigkill we cancel and shutdown
 		case <-sigKill:
 			cancel()
+			log.Println("[Vetinari] Shutting Down Hard")
 			os.Exit(0)
 		}
 	}

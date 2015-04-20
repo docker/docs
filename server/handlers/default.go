@@ -53,7 +53,7 @@ func AddHandler(ctx utils.IContext, w http.ResponseWriter, r *http.Request) *err
 	}
 	// add to targets
 	local.AddBlob(vars["tag"], meta)
-	tufRepo, err := repo.NewRepo(ctx.Signer(), local, "sha256", "sha512")
+	tufRepo, err := repo.NewRepo(ctx.Trust(), local, "sha256", "sha512")
 	if err != nil {
 		return &errors.HTTPError{
 			HTTPStatus: http.StatusInternalServerError,
@@ -106,7 +106,7 @@ func RemoveHandler(ctx utils.IContext, w http.ResponseWriter, r *http.Request) *
 	vars := mux.Vars(r)
 	local := store.DBStore(db, vars["imageName"])
 	local.RemoveBlob(vars["tag"])
-	tufRepo, err := repo.NewRepo(ctx.Signer(), local, "sha256", "sha512")
+	tufRepo, err := repo.NewRepo(ctx.Trust(), local, "sha256", "sha512")
 	if err != nil {
 		return &errors.HTTPError{
 			HTTPStatus: http.StatusInternalServerError,
@@ -170,7 +170,7 @@ func GenKeysHandler(ctx utils.IContext, w http.ResponseWriter, r *http.Request) 
 	// remove tag from tagets list
 	vars := mux.Vars(r)
 	local := store.DBStore(db, vars["imageName"])
-	tufRepo, err := repo.NewRepo(ctx.Signer(), local, "sha256", "sha512")
+	tufRepo, err := repo.NewRepo(ctx.Trust(), local, "sha256", "sha512")
 	if err != nil {
 		return &errors.HTTPError{
 			HTTPStatus: http.StatusInternalServerError,
