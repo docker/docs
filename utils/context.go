@@ -6,7 +6,7 @@ import (
 )
 
 // IContext defines an interface for managing authorizations.
-type IContext interface {
+type Context interface {
 	// TODO: define a set of standard getters. Using getters
 	//       will allow us to easily and transparently cache
 	//       fields or load them on demand. Using this interface
@@ -19,53 +19,53 @@ type IContext interface {
 
 	// Authorized returns a boolean indicating whether the user
 	// has been successfully authorized for this request.
-	Authorization() IAuthorization
+	Authorization() Authorization
 
 	// SetAuthStatus should be called to change the authorization
 	// status of the context (and therefore the request)
-	SetAuthorization(IAuthorization)
+	SetAuthorization(Authorization)
 
 	// Trust returns the trust service to be used
 	Trust() signed.TrustService
 }
 
 // IContextFactory creates a IContext from an http request.
-type IContextFactory func(*http.Request, signed.TrustService) IContext
+type ContextFactory func(*http.Request, signed.TrustService) Context
 
 // Context represents an authorization context for a resource.
-type Context struct {
+type context struct {
 	resource      string
-	authorization IAuthorization
+	authorization Authorization
 	trust         signed.TrustService
 }
 
 // ContextFactory creates a new authorization context with the
 // given HTTP request path as the resource.
-func ContextFactory(r *http.Request, trust signed.TrustService) IContext {
-	return &Context{
+func NewContext(r *http.Request, trust signed.TrustService) Context {
+	return &context{
 		resource: r.URL.Path,
 		trust:    trust,
 	}
 }
 
 // Resource returns the resource value for the context.
-func (ctx *Context) Resource() string {
+func (ctx *context) Resource() string {
 	return ctx.resource
 }
 
 // Authorization returns an IAuthorization implementation for
 // the context.
-func (ctx *Context) Authorization() IAuthorization {
+func (ctx *context) Authorization() Authorization {
 	return ctx.authorization
 }
 
 // SetAuthorization allows setting an IAuthorization for
 // the context.
-func (ctx *Context) SetAuthorization(authzn IAuthorization) {
+func (ctx *context) SetAuthorization(authzn Authorization) {
 	ctx.authorization = authzn
 }
 
 // Trust returns the instantiated TrustService for the context
-func (ctx *Context) Trust() signed.TrustService {
+func (ctx *context) Trust() signed.TrustService {
 	return ctx.trust
 }

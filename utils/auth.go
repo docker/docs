@@ -4,25 +4,25 @@ import (
 	"errors"
 )
 
-// IScope is an identifier scope
-type IScope interface {
+// Scope is an identifier scope
+type Scope interface {
 	ID() string
-	Compare(IScope) bool
+	Compare(Scope) bool
 }
 
 // IAuthorizer is an interfaces to authorize a scope
-type IAuthorizer interface {
+type Authorizer interface {
 	// Authorize is expected to set the Authorization on the Context. If
 	// Authorization fails, an error should be returned, but additionally,
 	// the Authorization on the Context should be set to an instance of
 	// NoAuthorization
-	Authorize(IContext, ...IScope) error
+	Authorize(Context, ...Scope) error
 }
 
 // IAuthorization is an interface to determine whether
 // an object has a scope
-type IAuthorization interface {
-	HasScope(IScope) bool
+type Authorization interface {
+	HasScope(Scope) bool
 }
 
 // ### START INSECURE AUTHORIZATION TOOLS ###
@@ -35,7 +35,7 @@ type InsecureAuthorizer struct{}
 
 // Authorize authorizes any scope
 // WARNING: LIKE I SAID, VERY INSECURE
-func (auth *InsecureAuthorizer) Authorize(ctx IContext, scopes ...IScope) error {
+func (auth *InsecureAuthorizer) Authorize(ctx Context, scopes ...Scope) error {
 	ctx.SetAuthorization(&InsecureAuthorization{})
 	return nil
 }
@@ -48,7 +48,7 @@ type InsecureAuthorization struct {
 
 // HasScope always returns true for any scope
 // WARNING: THIS IS JUST INCREDIBLY INSECURE
-func (authzn *InsecureAuthorization) HasScope(scope IScope) bool {
+func (authzn *InsecureAuthorization) HasScope(scope Scope) bool {
 	return true
 }
 
@@ -58,7 +58,7 @@ func (authzn *InsecureAuthorization) HasScope(scope IScope) bool {
 type NoAuthorizer struct{}
 
 // Authorize implements the IAuthorizer interface
-func (auth *NoAuthorizer) Authorize(ctx IContext, scopes ...IScope) error {
+func (auth *NoAuthorizer) Authorize(ctx Context, scopes ...Scope) error {
 	ctx.SetAuthorization(&NoAuthorization{})
 	return errors.New("User not authorized")
 }
@@ -68,7 +68,7 @@ func (auth *NoAuthorizer) Authorize(ctx IContext, scopes ...IScope) error {
 type NoAuthorization struct{}
 
 // HasScope returns false for any scope
-func (authzn *NoAuthorization) HasScope(scope IScope) bool {
+func (authzn *NoAuthorization) HasScope(scope Scope) bool {
 	return false
 }
 
@@ -81,7 +81,7 @@ func (ss SimpleScope) ID() string {
 }
 
 // Compare compares to the given scope for equality.
-func (ss SimpleScope) Compare(toCompare IScope) bool {
+func (ss SimpleScope) Compare(toCompare Scope) bool {
 	return ss.ID() == toCompare.ID()
 }
 

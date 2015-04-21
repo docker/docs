@@ -66,7 +66,7 @@ func Run(ctx context.Context, conf *config.Configuration) error {
 
 	trust := signed.NewEd25519()
 
-	hand := utils.RootHandlerFactory(&utils.InsecureAuthorizer{}, utils.ContextFactory, trust)
+	hand := utils.RootHandlerFactory(&utils.InsecureAuthorizer{}, utils.NewContext, trust)
 
 	r := mux.NewRouter()
 	// TODO (endophage): use correct regexes for image and tag names

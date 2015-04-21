@@ -13,11 +13,11 @@ import (
 	"github.com/docker/vetinari/errors"
 )
 
-func MockcontextHandler(ctx IContext, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
+func MockContextHandler(ctx Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
 	return nil
 }
 
-func MockBetterErrorHandler(ctx IContext, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
+func MockBetterErrorHandler(ctx Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
 	return &errors.HTTPError{
 		HTTPStatus: http.StatusInternalServerError,
 		Code:       9999,
@@ -26,8 +26,8 @@ func MockBetterErrorHandler(ctx IContext, w http.ResponseWriter, r *http.Request
 }
 
 func TestRootHandlerFactory(t *testing.T) {
-	hand := RootHandlerFactory(&InsecureAuthorizer{}, ContextFactory, &signed.Ed25519{})
-	handler := hand(MockcontextHandler)
+	hand := RootHandlerFactory(&InsecureAuthorizer{}, NewContext, &signed.Ed25519{})
+	handler := hand(MockContextHandler)
 	if _, ok := interface{}(handler).(http.Handler); !ok {
 		t.Fatalf("A rootHandler must implement the http.Handler interface")
 	}
@@ -45,8 +45,8 @@ func TestRootHandlerFactory(t *testing.T) {
 }
 
 func TestRootHandlerUnauthorized(t *testing.T) {
-	hand := RootHandlerFactory(&NoAuthorizer{}, ContextFactory, &signed.Ed25519{})
-	handler := hand(MockcontextHandler)
+	hand := RootHandlerFactory(&NoAuthorizer{}, NewContext, &signed.Ed25519{})
+	handler := hand(MockContextHandler)
 
 	ts := httptest.NewServer(handler)
 	defer ts.Close()
@@ -61,7 +61,7 @@ func TestRootHandlerUnauthorized(t *testing.T) {
 }
 
 func TestRootHandlerError(t *testing.T) {
-	hand := RootHandlerFactory(&InsecureAuthorizer{}, ContextFactory, &signed.Ed25519{})
+	hand := RootHandlerFactory(&InsecureAuthorizer{}, NewContext, &signed.Ed25519{})
 	handler := hand(MockBetterErrorHandler)
 
 	ts := httptest.NewServer(handler)

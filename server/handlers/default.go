@@ -19,7 +19,7 @@ import (
 var db = util.GetSqliteDB()
 
 // MainHandler is the default handler for the server
-func MainHandler(ctx utils.IContext, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
+func MainHandler(ctx utils.Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
 	if r.Method == "GET" {
 		err := json.NewEncoder(w).Encode("{}")
 		if err != nil {
@@ -37,7 +37,7 @@ func MainHandler(ctx utils.IContext, w http.ResponseWriter, r *http.Request) *er
 }
 
 // AddHandler accepts urls in the form /<imagename>/<tag>
-func AddHandler(ctx utils.IContext, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
+func AddHandler(ctx utils.Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
 	log.Printf("AddHandler")
 	vars := mux.Vars(r)
 	local := store.DBStore(db, vars["imageName"])
@@ -102,7 +102,7 @@ func AddHandler(ctx utils.IContext, w http.ResponseWriter, r *http.Request) *err
 }
 
 // RemoveHandler accepts urls in the form /<imagename>/<tag>
-func RemoveHandler(ctx utils.IContext, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
+func RemoveHandler(ctx utils.Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
 	log.Printf("RemoveHandler")
 	// remove tag from tagets list
 	vars := mux.Vars(r)
@@ -148,7 +148,7 @@ func RemoveHandler(ctx utils.IContext, w http.ResponseWriter, r *http.Request) *
 }
 
 // GetHandler accepts urls in the form /<imagename>/<tuf file>.json
-func GetHandler(ctx utils.IContext, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
+func GetHandler(ctx utils.Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
 	log.Printf("GetHandler")
 	// generate requested file and serve
 	vars := mux.Vars(r)
@@ -167,7 +167,7 @@ func GetHandler(ctx utils.IContext, w http.ResponseWriter, r *http.Request) *err
 }
 
 // GenKeysHandler is the handler for generate keys endpoint
-func GenKeysHandler(ctx utils.IContext, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
+func GenKeysHandler(ctx utils.Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
 	log.Printf("GenKeysHandler")
 	// remove tag from tagets list
 	vars := mux.Vars(r)

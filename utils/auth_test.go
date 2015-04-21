@@ -6,7 +6,7 @@ import (
 
 func TestInsecureAuthorization(t *testing.T) {
 	auther := InsecureAuthorizer{}
-	ctx := Context{}
+	ctx := context{}
 	err := auther.Authorize(&ctx, SSNoAuth)
 	if err != nil {
 		t.Fatalf("Failed to authorize with InsecureAuthorizer")

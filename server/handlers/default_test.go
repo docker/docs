@@ -11,7 +11,7 @@ import (
 )
 
 func TestMainHandlerGet(t *testing.T) {
-	hand := utils.RootHandlerFactory(&utils.InsecureAuthorizer{}, utils.ContextFactory, &signed.Ed25519{})
+	hand := utils.RootHandlerFactory(&utils.InsecureAuthorizer{}, utils.NewContext, &signed.Ed25519{})
 	handler := hand(MainHandler)
 	ts := httptest.NewServer(handler)
 	defer ts.Close()
@@ -23,7 +23,7 @@ func TestMainHandlerGet(t *testing.T) {
 }
 
 func TestMainHandlerNotGet(t *testing.T) {
-	hand := utils.RootHandlerFactory(&utils.InsecureAuthorizer{}, utils.ContextFactory, &signed.Ed25519{})
+	hand := utils.RootHandlerFactory(&utils.InsecureAuthorizer{}, utils.NewContext, &signed.Ed25519{})
 	handler := hand(MainHandler)
 	ts := httptest.NewServer(handler)
 	defer ts.Close()

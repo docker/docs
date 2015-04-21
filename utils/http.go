@@ -9,15 +9,15 @@ import (
 
 // contextHandler defines an alterate HTTP handler interface which takes in
 // a context for authorization and returns an HTTP application error.
-type contextHandler func(ctx IContext, w http.ResponseWriter, r *http.Request) *errors.HTTPError
+type contextHandler func(ctx Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError
 
 // rootHandler is an implementation of an HTTP request handler which handles
 // authorization and calling out to the defined alternate http handler.
 type rootHandler struct {
 	handler contextHandler
-	auth    IAuthorizer
-	scopes  []IScope
-	context IContextFactory
+	auth    Authorizer
+	scopes  []Scope
+	context ContextFactory
 	trust   signed.TrustService
 }
 
@@ -25,8 +25,8 @@ type rootHandler struct {
 // Context creator and authorizer.  The returned factory allows creating
 // new rootHandlers from the alternate http handler contextHandler and
 // a scope.
-func RootHandlerFactory(auth IAuthorizer, ctxFac IContextFactory, trust signed.TrustService) func(contextHandler, ...IScope) *rootHandler {
-	return func(handler contextHandler, scopes ...IScope) *rootHandler {
+func RootHandlerFactory(auth Authorizer, ctxFac ContextFactory, trust signed.TrustService) func(contextHandler, ...Scope) *rootHandler {
+	return func(handler contextHandler, scopes ...Scope) *rootHandler {
 		return &rootHandler{handler, auth, scopes, ctxFac, trust}
 	}
 }
