@@ -10,7 +10,7 @@ type Scope interface {
 	Compare(Scope) bool
 }
 
-// IAuthorizer is an interfaces to authorize a scope
+// Authorizer is an interfaces to authorize a scope
 type Authorizer interface {
 	// Authorize is expected to set the Authorization on the Context. If
 	// Authorization fails, an error should be returned, but additionally,
@@ -19,7 +19,7 @@ type Authorizer interface {
 	Authorize(Context, ...Scope) error
 }
 
-// IAuthorization is an interface to determine whether
+// Authorization is an interface to determine whether
 // an object has a scope
 type Authorization interface {
 	HasScope(Scope) bool

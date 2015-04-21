@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-// IContext defines an interface for managing authorizations.
+// Context defines an interface for managing authorizations.
 type Context interface {
 	// TODO: define a set of standard getters. Using getters
 	//       will allow us to easily and transparently cache
@@ -29,7 +29,7 @@ type Context interface {
 	Trust() signed.TrustService
 }
 
-// IContextFactory creates a IContext from an http request.
+// ContextFactory creates a IContext from an http request.
 type ContextFactory func(*http.Request, signed.TrustService) Context
 
 // Context represents an authorization context for a resource.
@@ -39,7 +39,7 @@ type context struct {
 	trust         signed.TrustService
 }
 
-// ContextFactory creates a new authorization context with the
+// NewContext creates a new authorization context with the
 // given HTTP request path as the resource.
 func NewContext(r *http.Request, trust signed.TrustService) Context {
 	return &context{
