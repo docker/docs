@@ -37,45 +37,43 @@ func main() {
 
 	ctx := context.Background()
 
-	var cancel context.CancelFunc
-	cancelable := func() {
-		log.Println("[Vetinari] Starting Server")
-		var childCtx context.Context
-		childCtx, cancel = context.WithCancel(ctx)
-		file, err := os.Open(configFile)
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		conf, err := config.Load(file)
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		server.Run(childCtx, conf)
+	conf, err := parseConfig(configFile)
+	if err != nil {
+		log.Fatalf("Error parsing config: %s", err.Error())
 	}
 
 	sigHup := make(chan os.Signal)
-	sigKill := make(chan os.Signal)
+	sigTerm := make(chan os.Signal)
 
 	signal.Notify(sigHup, syscall.SIGHUP)
-	signal.Notify(sigKill, syscall.SIGKILL)
+	signal.Notify(sigTerm, syscall.SIGTERM)
 
 	for {
-		go cancelable()
+		log.Println("[Vetinari] Starting Server")
+		childCtx, cancel := context.WithCancel(ctx)
+		go server.Run(childCtx, conf)
 
-		select {
-		// On a sighup we cancel and restart a new server
-		// with updated config
-		case <-sigHup:
-			cancel()
-			log.Println("[Vetinari] Stopping server for restart")
-			continue
+		for {
+			select {
+			// On a sighup we cancel and restart a new server
+			// with updated config
+			case <-sigHup:
+				log.Printf("[Vetinari] Server restart requested. Attempting to parse config at %s", configFile)
+				conf, err = parseConfig(configFile)
+				if err != nil {
+					log.Printf("[Vetinari] Unable to parse config. Old configuration will keep running. Parse Err: %s", err.Error())
+					continue
+				} else {
+					cancel()
+					log.Println("[Vetinari] Stopping server for restart")
+					break
+				}
 			// On sigkill we cancel and shutdown
-		case <-sigKill:
-			cancel()
-			log.Println("[Vetinari] Shutting Down Hard")
-			os.Exit(0)
+			case <-sigTerm:
+				cancel()
+				log.Println("[Vetinari] Shutting Down Hard")
+				os.Exit(0)
+			}
 		}
 	}
 }
@@ -93,4 +91,14 @@ func debugServer(addr string) {
 	if err := http.ListenAndServe(addr, nil); err != nil {
 		log.Fatalf("[Vetinari Debug Server] error listening on debug interface: %v", err)
 	}
+}
+
+func parseConfig(path string) (*config.Configuration, error) {
+	file, err := os.Open(path)
+	defer file.Close()
+	if err != nil {
+		return nil, err
+	}
+
+	return config.Load(file)
 }
