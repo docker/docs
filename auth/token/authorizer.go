@@ -163,7 +163,7 @@ func (ac *tokenAuthorizer) Authorize(r *http.Request, scopes ...auth.Scope) (*au
 		return nil, challenge
 	}
 
-	resource := auth.Resource{"repo", utils.ResourceName(r)}
+	resource := auth.Resource{Type: "repo", Name: utils.ResourceName(r)}
 
 	return ac.authorize(token, resource, scopes...)
 }
@@ -204,7 +204,7 @@ func (ac *tokenAuthorizer) authorize(token *Token, resource auth.Resource, scope
 		}
 	}
 
-	return &auth.User{token.Claims.Subject}, nil
+	return &auth.User{Name: token.Claims.Subject}, nil
 
 }
 
