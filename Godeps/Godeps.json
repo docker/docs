@@ -15,6 +15,10 @@
 			"Rev": "d2b94fd789ea21d12fac1a4443dd3a3f79cda72c"
 		},
 		{
+			"ImportPath": "github.com/docker/libtrust",
+			"Rev": "fa567046d9b14f6aa788882a950d69651d230b21"
+		},
+		{
 			"ImportPath": "github.com/endophage/go-tuf",
 			"Rev": "61a691cc603507ec09f6c3ac13030c9afacecd25"
 		},

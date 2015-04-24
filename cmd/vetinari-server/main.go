@@ -12,6 +12,7 @@ import (
 
 	"golang.org/x/net/context"
 
+	_ "github.com/docker/vetinari/auth/token"
 	"github.com/docker/vetinari/config"
 	"github.com/docker/vetinari/server"
 )
