@@ -7,10 +7,10 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"log"
 	"strings"
 	"time"
 
-	log "github.com/Sirupsen/logrus"
 	"github.com/docker/libtrust"
 
 	"github.com/docker/vetinari/auth"
@@ -85,7 +85,7 @@ func NewToken(rawToken string) (*Token, error) {
 
 	defer func() {
 		if err != nil {
-			log.Errorf("error while unmarshalling raw token: %s", err)
+			log.Printf("error while unmarshalling raw token: %s", err)
 		}
 	}()
 
@@ -125,39 +125,39 @@ func NewToken(rawToken string) (*Token, error) {
 func (t *Token) Verify(verifyOpts VerifyOptions) error {
 	// Verify that the Issuer claim is a trusted authority.
 	if !contains(verifyOpts.TrustedIssuers, t.Claims.Issuer) {
-		log.Errorf("token from untrusted issuer: %q", t.Claims.Issuer)
+		log.Printf("token from untrusted issuer: %q", t.Claims.Issuer)
 		return ErrInvalidToken
 	}
 
 	// Verify that the Audience claim is allowed.
 	if !contains(verifyOpts.AcceptedAudiences, t.Claims.Audience) {
-		log.Errorf("token intended for another audience: %q", t.Claims.Audience)
+		log.Printf("token intended for another audience: %q", t.Claims.Audience)
 		return ErrInvalidToken
 	}
 
 	// Verify that the token is currently usable and not expired.
 	currentUnixTime := time.Now().Unix()
 	if !(t.Claims.NotBefore <= currentUnixTime && currentUnixTime <= t.Claims.Expiration) {
-		log.Errorf("token not to be used before %d or after %d - currently %d", t.Claims.NotBefore, t.Claims.Expiration, currentUnixTime)
+		log.Printf("token not to be used before %d or after %d - currently %d", t.Claims.NotBefore, t.Claims.Expiration, currentUnixTime)
 		return ErrInvalidToken
 	}
 
 	// Verify the token signature.
 	if len(t.Signature) == 0 {
-		log.Error("token has no signature")
+		log.Println("token has no signature")
 		return ErrInvalidToken
 	}
 
 	// Verify that the signing key is trusted.
 	signingKey, err := t.verifySigningKey(verifyOpts)
 	if err != nil {
-		log.Error(err)
+		log.Println(err)
 		return ErrInvalidToken
 	}
 
 	// Finally, verify the signature of the token using the key which signed it.
 	if err := signingKey.Verify(strings.NewReader(t.Raw), t.Header.SigningAlg, t.Signature); err != nil {
-		log.Errorf("unable to verify token signature: %s", err)
+		log.Printf("unable to verify token signature: %s", err)
 		return ErrInvalidToken
 	}
 
