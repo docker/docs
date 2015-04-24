@@ -3,8 +3,10 @@ package utils
 import (
 	"net/http"
 
-	"github.com/docker/vetinari/errors"
 	"github.com/endophage/go-tuf/signed"
+	"github.com/gorilla/mux"
+
+	"github.com/docker/vetinari/errors"
 )
 
 // contextHandler defines an alterate HTTP handler interface which takes in
@@ -44,4 +46,12 @@ func (root *rootHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	return
+}
+
+func ResourceName(r *http.Request) string {
+	params := mux.Vars(r)
+	if resource, ok := params["imageName"]; ok {
+		return resource
+	}
+	return ""
 }
