@@ -18,6 +18,8 @@ import (
 	"github.com/docker/vetinari/utils"
 )
 
+// ConfigSection is the name used to identify the tokenAuthorizer config
+// in the config json
 const ConfigSection string = "token_auth"
 
 type tokenConfig struct {
@@ -90,7 +92,7 @@ type tokenAuthorizer struct {
 	trustedKeys map[string]libtrust.PublicKey
 }
 
-// newAccessController creates an accessController using the given options.
+// NewTokenAuthorizer creates an Authorizer that operates with JWTs.
 func NewTokenAuthorizer(conf []byte) (auth.Authorizer, error) {
 	tokenConf := new(tokenConfig)
 	err := json.Unmarshal(conf, tokenConf)

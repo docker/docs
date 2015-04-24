@@ -5,10 +5,13 @@ import (
 	"net/http"
 )
 
+// User represents an entity
 type User struct {
 	Name string
 }
 
+// Resource represents something that can be accessed and manipulated
+// by a User
 type Resource struct {
 	Type string `json:"type"`
 	Name string `json:"name"`
@@ -86,8 +89,8 @@ func (ss SimpleScope) ID() string {
 	return string(ss)
 }
 
-// TODO: possibly rename to Equals
 // Compare compares to the given scope for equality.
+// TODO: possibly rename to Equals
 func (ss SimpleScope) Compare(toCompare Scope) bool {
 	return ss.ID() == toCompare.ID()
 }

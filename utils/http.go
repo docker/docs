@@ -48,6 +48,9 @@ func (root *rootHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	return
 }
 
+// ResourceName parses the name of the resource being accessed from the request.
+// It relies on gorilla mux being used and will need to be updated if that
+// changes
 func ResourceName(r *http.Request) string {
 	params := mux.Vars(r)
 	if resource, ok := params["imageName"]; ok {
