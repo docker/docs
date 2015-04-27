@@ -13,7 +13,7 @@ import (
 	pb "github.com/docker/rufus/proto"
 )
 
-// RufusSigner implements a simple in memory keystore and trust service
+// RufusSigner implements a RPC based Trust service that calls the Rufus Service
 type RufusSigner struct {
 	kmClient pb.KeyManagementClient
 	sClient  pb.SignerClient
@@ -37,16 +37,18 @@ func (trust *RufusSigner) addKey(k *keys.PrivateKey) error {
 	return errors.New("Not implemented: RufusSigner.addKey")
 }
 
+// RemoveKey allows you to remove a private key from the trust service
 func (trust *RufusSigner) RemoveKey(keyID string) error {
 	toBeDeletedKeyID := &pb.KeyID{ID: keyID}
 	_, err := trust.kmClient.DeleteKey(context.Background(), toBeDeletedKeyID)
 	return err
 }
 
+// Sign signs a byte string with a number of KeyIDs
 func (trust *RufusSigner) Sign(keyIDs []string, toSign []byte) ([]data.Signature, error) {
 	signatures := make([]data.Signature, 0, len(keyIDs))
-	for _, kID := range keyIDs {
-		keyID := pb.KeyID{ID: kID}
+	for _, ID := range keyIDs {
+		keyID := pb.KeyID{ID: ID}
 		sr := &pb.SignatureRequest{
 			Content: toSign,
 			KeyID:   &keyID,
@@ -64,6 +66,7 @@ func (trust *RufusSigner) Sign(keyIDs []string, toSign []byte) ([]data.Signature
 	return signatures, nil
 }
 
+// Create creates a remote key and returns the PublicKey associated with the remote private key
 func (trust *RufusSigner) Create() (*keys.PublicKey, error) {
 	publicKey, err := trust.kmClient.CreateKey(context.Background(), &pb.Void{})
 	if err != nil {
@@ -74,10 +77,11 @@ func (trust *RufusSigner) Create() (*keys.PublicKey, error) {
 	return public, nil
 }
 
+// PublicKeys returns the public key(s) associated with the passed in keyIDs
 func (trust *RufusSigner) PublicKeys(keyIDs ...string) (map[string]*keys.PublicKey, error) {
 	publicKeys := make(map[string]*keys.PublicKey)
-	for _, kID := range keyIDs {
-		keyID := pb.KeyID{ID: kID}
+	for _, ID := range keyIDs {
+		keyID := pb.KeyID{ID: ID}
 		sig, err := trust.kmClient.GetKeyInfo(context.Background(), &keyID)
 		if err != nil {
 			return nil, err
