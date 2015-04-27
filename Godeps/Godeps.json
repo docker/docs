@@ -2,7 +2,7 @@
 	"ImportPath": "github.com/docker/vetinari",
 	"GoVersion": "go1.4.2",
 	"Packages": [
-		"github.com/docker/vetinari/cmd/vetinari-server"
+		"./..."
 	],
 	"Deps": [
 		{
@@ -15,12 +15,24 @@
 			"Rev": "d2b94fd789ea21d12fac1a4443dd3a3f79cda72c"
 		},
 		{
+			"ImportPath": "github.com/bradfitz/http2",
+			"Rev": "97124afb234048ae0c91b8883c59fcd890bf8145"
+		},
+		{
 			"ImportPath": "github.com/docker/libtrust",
 			"Rev": "fa567046d9b14f6aa788882a950d69651d230b21"
 		},
 		{
+			"ImportPath": "github.com/docker/rufus/proto",
+			"Rev": "99fc7bbb1d7e985eb60e9889de7dbb5fb5852f3e"
+		},
+		{
 			"ImportPath": "github.com/endophage/go-tuf",
 			"Rev": "61a691cc603507ec09f6c3ac13030c9afacecd25"
+		},
+		{
+			"ImportPath": "github.com/golang/protobuf/proto",
+			"Rev": "655cdfa588ea190e901bc5590e65d5621688847c"
 		},
 		{
 			"ImportPath": "github.com/gorilla/context",
@@ -57,6 +69,22 @@
 		{
 			"ImportPath": "golang.org/x/net/context",
 			"Rev": "1dfe7915deaf3f80b962c163b918868d8a6d8974"
+		},
+		{
+			"ImportPath": "golang.org/x/oauth2",
+			"Rev": "ce5ea7da934b76b1066c527632359e2b8f65db97"
+		},
+		{
+			"ImportPath": "google.golang.org/cloud/compute/metadata",
+			"Rev": "f20d6dcccb44ed49de45ae3703312cb46e627db1"
+		},
+		{
+			"ImportPath": "google.golang.org/cloud/internal",
+			"Rev": "f20d6dcccb44ed49de45ae3703312cb46e627db1"
+		},
+		{
+			"ImportPath": "google.golang.org/grpc",
+			"Rev": "343e5059046a2e012dbe72e51ea06cae88e3c081"
 		}
 	]
 }

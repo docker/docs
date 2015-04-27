@@ -12,7 +12,9 @@ import (
 )
 
 func TestRunBadCerts(t *testing.T) {
-	err := Run(context.Background(), &config.Configuration{Server: config.ServerConf{}})
+	err := Run(context.Background(), &config.Configuration{
+		Server:       config.ServerConf{},
+		TrustService: config.TrustServiceConf{}})
 	if err == nil {
 		t.Fatal("Passed empty certs, Run should have failed")
 	}

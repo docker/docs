@@ -64,7 +64,13 @@ func Run(ctx context.Context, conf *config.Configuration) error {
 		tlsLsnr.Close()
 	}()
 
-	trust := signed.NewEd25519()
+	var trust signed.TrustService
+	if conf.TrustService.Type == "remote" {
+		netAddr := net.JoinHostPort(conf.TrustService.Hostname, conf.TrustService.Port)
+		trust = newRufusSigner(netAddr)
+	} else {
+		trust = signed.NewEd25519()
+	}
 
 	hand := utils.RootHandlerFactory(&utils.InsecureAuthorizer{}, utils.NewContext, trust)
 
