@@ -9,7 +9,7 @@ import (
 // all other configuration is namespaced under
 type Configuration struct {
 	Server       ServerConf       `json:"server,omitempty"`
-	TrustService TrustServiceConf `json:"signingservice,omitempty"`
+	TrustService TrustServiceConf `json:"trust_service,omitempty"`
 }
 
 // ServerConf specifically addresses configuration related to
@@ -25,8 +25,8 @@ type ServerConf struct {
 // `remote` will be used for
 type TrustServiceConf struct {
 	Type     string `json:"type"`
-	Hostname string `json:"hostname"`
-	Port     string `json:"port"`
+	Hostname string `json:"hostname,omitempty"`
+	Port     string `json:"port,omitempty"`
 }
 
 // Load takes a filename (relative path from pwd) and attempts
