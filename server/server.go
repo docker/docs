@@ -21,6 +21,15 @@ import (
 // use directly for the TLS server, and generate children off for requests
 func Run(ctx context.Context, conf *config.Configuration) error {
 
+	var trust signed.TrustService
+	if conf.TrustService.Type == "remote" {
+		log.Println("[Vetinari Server] : Using remote signing service")
+		trust = newRufusSigner(conf.TrustService.Hostname, conf.TrustService.Port)
+	} else {
+		log.Println("[Vetinari Server] : Using local signing service")
+		trust = signed.NewEd25519()
+	}
+
 	keypair, err := tls.LoadX509KeyPair(conf.Server.TLSCertFile, conf.Server.TLSKeyFile)
 	if err != nil {
 		return err
@@ -64,13 +73,6 @@ func Run(ctx context.Context, conf *config.Configuration) error {
 		tlsLsnr.Close()
 	}()
 
-	var trust signed.TrustService
-	if conf.TrustService.Type == "remote" {
-		netAddr := net.JoinHostPort(conf.TrustService.Hostname, conf.TrustService.Port)
-		trust = newRufusSigner(netAddr)
-	} else {
-		trust = signed.NewEd25519()
-	}
 
 	hand := utils.RootHandlerFactory(&utils.InsecureAuthorizer{}, utils.NewContext, trust)
 

@@ -3,12 +3,14 @@ package server
 import (
 	"errors"
 	"log"
+	"net"
 
 	"github.com/endophage/go-tuf/data"
 	"github.com/endophage/go-tuf/keys"
 
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
 
 	pb "github.com/docker/rufus/proto"
 )
@@ -19,8 +21,12 @@ type RufusSigner struct {
 	sClient  pb.SignerClient
 }
 
-func newRufusSigner(hostNameAndPort string) *RufusSigner {
-	conn, err := grpc.Dial(hostNameAndPort)
+func newRufusSigner(hostname string, port string) *RufusSigner {
+	var opts []grpc.DialOption
+	netAddr := net.JoinHostPort(hostname, port)
+	creds := credentials.NewClientTLSFromCert(nil, hostname)
+	opts = append(opts, grpc.WithTransportCredentials(creds))
+	conn, err := grpc.Dial(netAddr, opts...)
 	if err != nil {
 		log.Fatalf("fail to dial: %v", err)
 	}
