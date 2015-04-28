@@ -63,7 +63,7 @@ func AddHandler(ctx utils.Context, w http.ResponseWriter, r *http.Request) *erro
 			Err:        err,
 		}
 	}
-	_ = tufRepo.Init(true)
+	_ = tufRepo.Init(false)
 	err = tufRepo.AddTarget(vars["tag"], json.RawMessage{})
 	if err != nil {
 		return &errors.HTTPError{
@@ -116,7 +116,7 @@ func RemoveHandler(ctx utils.Context, w http.ResponseWriter, r *http.Request) *e
 			Err:        err,
 		}
 	}
-	_ = tufRepo.Init(true)
+	_ = tufRepo.Init(false)
 	tufRepo.RemoveTarget(vars["tag"])
 	err = tufRepo.Sign("targets.json")
 	if err != nil {

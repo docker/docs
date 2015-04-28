@@ -84,10 +84,10 @@ func Run(ctx context.Context, conf *config.Configuration) error {
 
 	r := mux.NewRouter()
 	// TODO (endophage): use correct regexes for image and tag names
-	r.Methods("PUT").Path("/{imageName}/init").Handler(hand(handlers.GenKeysHandler, utils.SSCreate))
-	r.Methods("GET").Path("/{imageName}/{tufFile}").Handler(hand(handlers.GetHandler, utils.SSNoAuth))
-	r.Methods("DELETE").Path("/{imageName}:{tag}").Handler(hand(handlers.RemoveHandler, utils.SSDelete))
-	r.Methods("POST").Path("/{imageName}:{tag}").Handler(hand(handlers.AddHandler, utils.SSUpdate))
+	r.Methods("PUT").Path("/{imageName:.*}/init").Handler(hand(handlers.GenKeysHandler, utils.SSCreate))
+	r.Methods("GET").Path("/{imageName:.*}/{tufFile:(root.json|targets.json|timestamp.json|snapshot.json)}").Handler(hand(handlers.GetHandler, utils.SSNoAuth))
+	r.Methods("DELETE").Path("/{imageName:.*}/{tag:[a-zA-Z0-9]+}").Handler(hand(handlers.RemoveHandler, utils.SSDelete))
+	r.Methods("POST").Path("/{imageName:.*}/{tag:[a-zA-Z0-9]+}").Handler(hand(handlers.AddHandler, utils.SSUpdate))
 
 	log.Println("server")
 	server := http.Server{
