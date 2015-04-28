@@ -18,6 +18,7 @@ type ServerConf struct {
 	Addr        string `json:"addr"`
 	TLSCertFile string `json:"tls_cert_file"`
 	TLSKeyFile  string `json:"tls_key_file"`
+	TLSCAFile   string `json:"tls_ca_file,omitempty"`
 }
 
 // TrustServiceConf specificies the service to use for signing.

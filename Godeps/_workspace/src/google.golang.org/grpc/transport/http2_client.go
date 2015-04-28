@@ -98,11 +98,19 @@ type http2Client struct {
 // and starts to receive messages on it. Non-nil error returns if construction
 // fails.
 func newHTTP2Client(addr string, opts *ConnectOptions) (_ ClientTransport, err error) {
-	var (
-		connErr error
-		conn    net.Conn
-	)
+	if opts.Dialer == nil {
+		// Set the default Dialer.
+		opts.Dialer = func(addr string, timeout time.Duration) (net.Conn, error) {
+			return net.DialTimeout("tcp", addr, timeout)
+		}
+	}
 	scheme := "http"
+	startT := time.Now()
+	timeout := opts.Timeout
+	conn, connErr := opts.Dialer(addr, timeout)
+	if connErr != nil {
+		return nil, ConnectionErrorf("transport: %v", connErr)
+	}
 	for _, c := range opts.AuthOptions {
 		if ccreds, ok := c.(credentials.TransportAuthenticator); ok {
 			scheme = "https"
@@ -110,12 +118,12 @@ func newHTTP2Client(addr string, opts *ConnectOptions) (_ ClientTransport, err e
 			// multiple ones provided. Revisit this if it is not appropriate. Probably
 			// place the ClientTransport construction into a separate function to make
 			// things clear.
-			conn, connErr = ccreds.DialWithDialer(&net.Dialer{Timeout: opts.Timeout}, "tcp", addr)
+			if timeout > 0 {
+				timeout -= time.Since(startT)
+			}
+			conn, connErr = ccreds.Handshake(addr, conn, timeout)
 			break
 		}
-	}
-	if scheme == "http" {
-		conn, connErr = net.DialTimeout("tcp", addr, opts.Timeout)
 	}
 	if connErr != nil {
 		return nil, ConnectionErrorf("transport: %v", connErr)
@@ -479,11 +487,12 @@ func (t *http2Client) getStream(f http2.Frame) (*Stream, bool) {
 // Window updates will deliver to the controller for sending when
 // the cumulative quota exceeds the corresponding threshold.
 func (t *http2Client) updateWindow(s *Stream, n uint32) {
-	if q := t.fc.onRead(n); q > 0 {
-		t.controlBuf.put(&windowUpdate{0, q})
+	swu, cwu := s.fc.onRead(n)
+	if swu > 0 {
+		t.controlBuf.put(&windowUpdate{s.id, swu})
 	}
-	if q := s.fc.onRead(n); q > 0 {
-		t.controlBuf.put(&windowUpdate{s.id, q})
+	if cwu > 0 {
+		t.controlBuf.put(&windowUpdate{0, cwu})
 	}
 }
 
@@ -564,7 +573,7 @@ func (t *http2Client) handleSettings(f *http2.SettingsFrame) {
 }
 
 func (t *http2Client) handlePing(f *http2.PingFrame) {
-	// TODO(zhaoq): PingFrame handler to be implemented"
+	t.controlBuf.put(&ping{true})
 }
 
 func (t *http2Client) handleGoAway(f *http2.GoAwayFrame) {
@@ -592,7 +601,11 @@ func (t *http2Client) operateHeaders(hDec *hpackDecoder, s *Stream, frame header
 			hDec.state = decodeState{}
 		}
 	}()
-	endHeaders, err := hDec.decodeClientHTTP2Headers(s, frame)
+	endHeaders, err := hDec.decodeClientHTTP2Headers(frame)
+	if s == nil {
+		// s has been closed.
+		return nil
+	}
 	if err != nil {
 		s.write(recvMsg{err: err})
 		// Something wrong. Stops reading even when there is remaining.
@@ -658,16 +671,13 @@ func (t *http2Client) reader() {
 		}
 		switch frame := frame.(type) {
 		case *http2.HeadersFrame:
-			var ok bool
-			if curStream, ok = t.getStream(frame); !ok {
-				continue
-			}
+			// operateHeaders has to be invoked regardless the value of curStream
+			// because the HPACK decoder needs to be updated using the received
+			// headers.
+			curStream, _ = t.getStream(frame)
 			endStream := frame.Header().Flags.Has(http2.FlagHeadersEndStream)
 			curStream = t.operateHeaders(hDec, curStream, frame, endStream)
 		case *http2.ContinuationFrame:
-			if curStream == nil {
-				continue
-			}
 			curStream = t.operateHeaders(hDec, curStream, frame, false)
 		case *http2.DataFrame:
 			t.handleData(frame)
@@ -709,6 +719,10 @@ func (t *http2Client) controller() {
 					t.framer.writeRSTStream(true, i.streamID, i.code)
 				case *flushIO:
 					t.framer.flushWrite()
+				case *ping:
+					// TODO(zhaoq): Ack with all-0 data now. will change to some
+					// meaningful content when this is actually in use.
+					t.framer.writePing(true, i.ack, [8]byte{})
 				default:
 					log.Printf("transport: http2Client.controller got unexpected item type %v\n", i)
 				}

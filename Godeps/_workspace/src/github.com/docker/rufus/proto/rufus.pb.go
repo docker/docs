@@ -163,9 +163,9 @@ func RegisterKeyManagementServer(s *grpc.Server, srv KeyManagementServer) {
 	s.RegisterService(&_KeyManagement_serviceDesc, srv)
 }
 
-func _KeyManagement_CreateKey_Handler(srv interface{}, ctx context.Context, buf []byte) (interface{}, error) {
+func _KeyManagement_CreateKey_Handler(srv interface{}, ctx context.Context, codec grpc.Codec, buf []byte) (interface{}, error) {
 	in := new(Void)
-	if err := proto1.Unmarshal(buf, in); err != nil {
+	if err := codec.Unmarshal(buf, in); err != nil {
 		return nil, err
 	}
 	out, err := srv.(KeyManagementServer).CreateKey(ctx, in)
@@ -175,9 +175,9 @@ func _KeyManagement_CreateKey_Handler(srv interface{}, ctx context.Context, buf 
 	return out, nil
 }
 
-func _KeyManagement_DeleteKey_Handler(srv interface{}, ctx context.Context, buf []byte) (interface{}, error) {
+func _KeyManagement_DeleteKey_Handler(srv interface{}, ctx context.Context, codec grpc.Codec, buf []byte) (interface{}, error) {
 	in := new(KeyID)
-	if err := proto1.Unmarshal(buf, in); err != nil {
+	if err := codec.Unmarshal(buf, in); err != nil {
 		return nil, err
 	}
 	out, err := srv.(KeyManagementServer).DeleteKey(ctx, in)
@@ -187,9 +187,9 @@ func _KeyManagement_DeleteKey_Handler(srv interface{}, ctx context.Context, buf 
 	return out, nil
 }
 
-func _KeyManagement_GetKeyInfo_Handler(srv interface{}, ctx context.Context, buf []byte) (interface{}, error) {
+func _KeyManagement_GetKeyInfo_Handler(srv interface{}, ctx context.Context, codec grpc.Codec, buf []byte) (interface{}, error) {
 	in := new(KeyID)
-	if err := proto1.Unmarshal(buf, in); err != nil {
+	if err := codec.Unmarshal(buf, in); err != nil {
 		return nil, err
 	}
 	out, err := srv.(KeyManagementServer).GetKeyInfo(ctx, in)
@@ -254,9 +254,9 @@ func RegisterSignerServer(s *grpc.Server, srv SignerServer) {
 	s.RegisterService(&_Signer_serviceDesc, srv)
 }
 
-func _Signer_Sign_Handler(srv interface{}, ctx context.Context, buf []byte) (interface{}, error) {
+func _Signer_Sign_Handler(srv interface{}, ctx context.Context, codec grpc.Codec, buf []byte) (interface{}, error) {
 	in := new(SignatureRequest)
-	if err := proto1.Unmarshal(buf, in); err != nil {
+	if err := codec.Unmarshal(buf, in); err != nil {
 		return nil, err
 	}
 	out, err := srv.(SignerServer).Sign(ctx, in)

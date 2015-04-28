@@ -21,10 +21,22 @@ import (
 // use directly for the TLS server, and generate children off for requests
 func Run(ctx context.Context, conf *config.Configuration) error {
 
+	var trust signed.TrustService
+	if conf.TrustService.Type == "remote" {
+		log.Println("[Vetinari Server] : Using remote signing service")
+		trust = newRufusSigner(conf.TrustService.Hostname, conf.TrustService.Port, conf.Server.TLSCAFile)
+		log.Println("return from RufusSigner")
+	} else {
+		log.Println("[Vetinari Server] : Using local signing service")
+		trust = signed.NewEd25519()
+	}
+
 	keypair, err := tls.LoadX509KeyPair(conf.Server.TLSCertFile, conf.Server.TLSKeyFile)
 	if err != nil {
+		log.Printf("error loading keys %s", err)
 		return err
 	}
+	log.Println("loaded x509")
 
 	tlsConfig := &tls.Config{
 		MinVersion:               tls.VersionTLS12,
@@ -43,14 +55,17 @@ func Run(ctx context.Context, conf *config.Configuration) error {
 		Rand:         rand.Reader,
 	}
 
+	log.Println("resolving tcpaddr")
 	tcpAddr, err := net.ResolveTCPAddr("tcp", conf.Server.Addr)
 	if err != nil {
 		return err
 	}
+	log.Println("setup listen tcp")
 	lsnr, err := net.ListenTCP("tcp", tcpAddr)
 	if err != nil {
 		return err
 	}
+	log.Println("new listener")
 	tlsLsnr := tls.NewListener(lsnr, tlsConfig)
 
 	// This is a basic way to shutdown the running listeners.
@@ -64,14 +79,7 @@ func Run(ctx context.Context, conf *config.Configuration) error {
 		tlsLsnr.Close()
 	}()
 
-	var trust signed.TrustService
-	if conf.TrustService.Type == "remote" {
-		netAddr := net.JoinHostPort(conf.TrustService.Hostname, conf.TrustService.Port)
-		trust = newRufusSigner(netAddr)
-	} else {
-		trust = signed.NewEd25519()
-	}
-
+	log.Println("roothandlerfactory")
 	hand := utils.RootHandlerFactory(&utils.InsecureAuthorizer{}, utils.NewContext, trust)
 
 	r := mux.NewRouter()
@@ -81,6 +89,7 @@ func Run(ctx context.Context, conf *config.Configuration) error {
 	r.Methods("DELETE").Path("/{imageName}:{tag}").Handler(hand(handlers.RemoveHandler, utils.SSDelete))
 	r.Methods("POST").Path("/{imageName}:{tag}").Handler(hand(handlers.AddHandler, utils.SSUpdate))
 
+	log.Println("server")
 	server := http.Server{
 		Addr:    conf.Server.Addr,
 		Handler: r,

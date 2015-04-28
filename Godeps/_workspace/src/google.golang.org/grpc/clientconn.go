@@ -36,6 +36,8 @@ package grpc
 import (
 	"errors"
 	"log"
+	"net"
+	"strings"
 	"sync"
 	"time"
 
@@ -95,6 +97,13 @@ func WithTimeout(d time.Duration) DialOption {
 	}
 }
 
+// WithDialer returns a DialOption that specifies a function to use for dialing network addresses.
+func WithDialer(f func(addr string, timeout time.Duration) (net.Conn, error)) DialOption {
+	return func(o *dialOptions) {
+		o.copts.Dialer = f
+	}
+}
+
 // Dial creates a client connection the given target.
 // TODO(zhaoq): Have an option to make Dial return immediately without waiting
 // for connection to complete.
@@ -108,6 +117,11 @@ func Dial(target string, opts ...DialOption) (*ClientConn, error) {
 	for _, opt := range opts {
 		opt(&cc.dopts)
 	}
+	colonPos := strings.LastIndex(target, ":")
+	if colonPos == -1 {
+		colonPos = len(target)
+	}
+	cc.authority = target[:colonPos]
 	if cc.dopts.codec == nil {
 		// Set the default codec.
 		cc.dopts.codec = protoCodec{}
@@ -124,6 +138,7 @@ func Dial(target string, opts ...DialOption) (*ClientConn, error) {
 // ClientConn represents a client connection to an RPC service.
 type ClientConn struct {
 	target       string
+	authority    string
 	dopts        dialOptions
 	shutdownChan chan struct{}
 

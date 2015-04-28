@@ -109,7 +109,7 @@ func (h *testStreamHandler) handleStreamSuspension(s *Stream) {
 func (h *testStreamHandler) handleStreamMisbehave(s *Stream) {
 	conn, ok := s.ServerTransport().(*http2Server)
 	if !ok {
-		log.Fatalf("Failed to convert %v to *http2Server")
+		log.Fatalf("Failed to convert %v to *http2Server", s.ServerTransport())
 	}
 	size := 1
 	if s.Method() == "foo.MaxFrame" {
@@ -461,7 +461,7 @@ func TestServerWithMisbehavedClient(t *testing.T) {
 	// Drain the stream flow control window
 	<-cc.writableChan
 	if err = cc.framer.writeData(true, s.id, false, make([]byte, http2MaxFrameLen)); err != nil {
-		t.Fatalf("Failed to write data: ", err)
+		t.Fatalf("Failed to write data: %v", err)
 	}
 	cc.writableChan <- 0
 	sent += http2MaxFrameLen
@@ -489,11 +489,11 @@ func TestServerWithMisbehavedClient(t *testing.T) {
 	// Keep sending until the server inbound window is drained for that stream.
 	for sent <= initialWindowSize {
 		<-cc.writableChan
-		if err = cc.framer.writeData(true, s.id, false, make([]byte, http2MaxFrameLen)); err != nil {
-			t.Fatalf("Failed to write data: ", err)
+		if err = cc.framer.writeData(true, s.id, false, make([]byte, 1)); err != nil {
+			t.Fatalf("Failed to write data: %v", err)
 		}
 		cc.writableChan <- 0
-		sent += http2MaxFrameLen
+		sent += 1
 	}
 	// Server sent a resetStream for s already.
 	code := http2RSTErrConvTab[http2.ErrCodeFlowControl]
@@ -501,8 +501,8 @@ func TestServerWithMisbehavedClient(t *testing.T) {
 		t.Fatalf("%v got err %v with statusCode %d, want err <EOF> with statusCode %d", s, err, s.statusCode, code)
 	}
 
-	if ss.fc.pendingData != 0 || ss.fc.pendingUpdate != 0 || sc.fc.pendingData != 0 || sc.fc.pendingUpdate != 0 {
-		t.Fatalf("Server mistakenly resets inbound flow control params: got %d, %d, %d, %d; want 0, 0, 0, 0", ss.fc.pendingData, ss.fc.pendingUpdate, sc.fc.pendingData, sc.fc.pendingUpdate)
+	if ss.fc.pendingData != 0 || ss.fc.pendingUpdate != 0 || sc.fc.pendingData != 0 || sc.fc.pendingUpdate != initialWindowSize {
+		t.Fatalf("Server mistakenly resets inbound flow control params: got %d, %d, %d, %d; want 0, 0, 0, %d", ss.fc.pendingData, ss.fc.pendingUpdate, sc.fc.pendingData, sc.fc.pendingUpdate, initialWindowSize)
 	}
 	ct.CloseStream(s, nil)
 	// Test server behavior for violation of connection flow control window size restriction.
@@ -512,14 +512,11 @@ func TestServerWithMisbehavedClient(t *testing.T) {
 	for {
 		s, err := ct.NewStream(context.Background(), callHdr)
 		if err != nil {
-			t.Fatalf("Failed to open stream: %v", err)
-		}
-		<-cc.writableChan
-		// Write will fail when connection flow control window runs out.
-		if err := cc.framer.writeData(true, s.id, true, make([]byte, http2MaxFrameLen)); err != nil {
 			// The server tears down the connection.
 			break
 		}
+		<-cc.writableChan
+		cc.framer.writeData(true, s.id, true, make([]byte, http2MaxFrameLen))
 		cc.writableChan <- 0
 	}
 	ct.Close()
@@ -558,8 +555,8 @@ func TestClientWithMisbehavedServer(t *testing.T) {
 		t.Fatalf("Got err %v and the status code %d, want <EOF> and the code %d", err, s.statusCode, codes.Internal)
 	}
 	conn.CloseStream(s, err)
-	if s.fc.pendingData != 0 || s.fc.pendingUpdate != 0 || conn.fc.pendingData != 0 || conn.fc.pendingUpdate != 0 {
-		t.Fatalf("Client mistakenly resets inbound flow control params: got %d, %d, %d, %d; want 0, 0, 0, 0", s.fc.pendingData, s.fc.pendingUpdate, conn.fc.pendingData, conn.fc.pendingUpdate)
+	if s.fc.pendingData != 0 || s.fc.pendingUpdate != 0 || conn.fc.pendingData != 0 || conn.fc.pendingUpdate != initialWindowSize {
+		t.Fatalf("Client mistakenly resets inbound flow control params: got %d, %d, %d, %d; want 0, 0, 0, %d", s.fc.pendingData, s.fc.pendingUpdate, conn.fc.pendingData, conn.fc.pendingUpdate, initialWindowSize)
 	}
 	// Test the logic for the violation of the connection flow control window size restriction.
 	//

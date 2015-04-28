@@ -197,9 +197,8 @@ type Stream struct {
 	// multiple times.
 	headerDone bool
 	// the status received from the server.
-	statusCode  codes.Code
-	statusDesc  string
-	pendingData uint32
+	statusCode codes.Code
+	statusDesc string
 }
 
 // Header acquires the key-value pairs of header metadata once it
@@ -316,7 +315,7 @@ func NewServerTransport(protocol string, conn net.Conn, maxStreams uint32) (Serv
 
 // ConnectOptions covers all relevant options for dialing a server.
 type ConnectOptions struct {
-	Protocol    string
+	Dialer      func(string, time.Duration) (net.Conn, error)
 	AuthOptions []credentials.Credentials
 	Timeout     time.Duration
 }

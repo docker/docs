@@ -24,7 +24,7 @@
 		},
 		{
 			"ImportPath": "github.com/docker/rufus/proto",
-			"Rev": "99fc7bbb1d7e985eb60e9889de7dbb5fb5852f3e"
+			"Rev": "61b53384b24bfa83e8e0a5f11f28ae83457fd80c"
 		},
 		{
 			"ImportPath": "github.com/endophage/go-tuf",
@@ -84,7 +84,7 @@
 		},
 		{
 			"ImportPath": "google.golang.org/grpc",
-			"Rev": "343e5059046a2e012dbe72e51ea06cae88e3c081"
+			"Rev": "97f42dd262e97f4632986eddbc74c19fa022ea08"
 		}
 	]
 }

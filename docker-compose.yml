@@ -1,0 +1,12 @@
+vetinari:
+  build: .
+  links:
+   - rufus
+  ports:
+   - "8080:8080"
+   - "4444:4444"
+rufus:
+  build: ../rufus
+  ports:
+   - "7899:7899"
+
