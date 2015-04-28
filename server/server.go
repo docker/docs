@@ -79,7 +79,6 @@ func Run(ctx context.Context, conf *config.Configuration) error {
 		tlsLsnr.Close()
 	}()
 
-
 	log.Println("roothandlerfactory")
 	hand := utils.RootHandlerFactory(&utils.InsecureAuthorizer{}, utils.NewContext, trust)
 
