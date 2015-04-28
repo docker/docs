@@ -43,6 +43,8 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net"
+	"strings"
+	"time"
 
 	"golang.org/x/net/context"
 	"golang.org/x/oauth2"
@@ -71,36 +73,19 @@ type Credentials interface {
 // TransportAuthenticator defines the common interface all supported transport
 // authentication protocols (e.g., TLS, SSL) must implement.
 type TransportAuthenticator interface {
-	// Dial connects to the given network address using net.Dial and then
-	// does the authentication handshake specified by the corresponding
-	// authentication protocol.
-	Dial(network, addr string) (net.Conn, error)
-	// DialWithDialer connects to the given network address using
-	// dialer.Dial does the authentication handshake specified by the
-	// corresponding authentication protocol. Any timeout or deadline
-	// given in the dialer apply to connection and handshake as a whole.
-	DialWithDialer(dialer *net.Dialer, network, addr string) (net.Conn, error)
+	// Handshake does the authentication handshake specified by the corresponding
+	// authentication protocol on rawConn.
+	Handshake(addr string, rawConn net.Conn, timeout time.Duration) (net.Conn, error)
 	// NewListener creates a listener which accepts connections with requested
 	// authentication handshake.
 	NewListener(lis net.Listener) net.Listener
 	Credentials
 }
 
-// tlsCreds is the credentials required for authenticating a connection.
+// tlsCreds is the credentials required for authenticating a connection using TLS.
 type tlsCreds struct {
-	// serverName is used to verify the hostname on the returned
-	// certificates. It is also included in the client's handshake
-	// to support virtual hosting. This is optional. If it is not
-	// set gRPC internals will use the dialing address instead.
-	serverName string
-	// rootCAs defines the set of root certificate authorities
-	// that clients use when verifying server certificates.
-	// If rootCAs is nil, tls uses the host's root CA set.
-	rootCAs *x509.CertPool
-	// certificates contains one or more certificate chains
-	// to present to the other side of the connection.
-	// Server configurations must include at least one certificate.
-	certificates []tls.Certificate
+	// TLS configuration
+	config tls.Config
 }
 
 // GetRequestMetadata returns nil, nil since TLS credentials does not have
@@ -109,41 +94,59 @@ func (c *tlsCreds) GetRequestMetadata(ctx context.Context) (map[string]string, e
 	return nil, nil
 }
 
-func (c *tlsCreds) DialWithDialer(dialer *net.Dialer, network, addr string) (_ net.Conn, err error) {
-	name := c.serverName
-	if name == "" {
-		name, _, err = net.SplitHostPort(addr)
-		if err != nil {
-			return nil, fmt.Errorf("credentials: failed to parse server address %v", err)
-		}
+type timeoutError struct{}
+
+func (timeoutError) Error() string   { return "credentials: Dial timed out" }
+func (timeoutError) Timeout() bool   { return true }
+func (timeoutError) Temporary() bool { return true }
+
+func (c *tlsCreds) Handshake(addr string, rawConn net.Conn, timeout time.Duration) (_ net.Conn, err error) {
+	// borrow some code from tls.DialWithDialer
+	var errChannel chan error
+	if timeout != 0 {
+		errChannel = make(chan error, 2)
+		time.AfterFunc(timeout, func() {
+			errChannel <- timeoutError{}
+		})
 	}
-	return tls.DialWithDialer(dialer, "tcp", addr, &tls.Config{
-		RootCAs:    c.rootCAs,
-		NextProtos: alpnProtoStr,
-		ServerName: name,
-	})
+	if c.config.ServerName == "" {
+		colonPos := strings.LastIndex(addr, ":")
+		if colonPos == -1 {
+			colonPos = len(addr)
+		}
+		c.config.ServerName = addr[:colonPos]
+	}
+	conn := tls.Client(rawConn, &c.config)
+	if timeout == 0 {
+		err = conn.Handshake()
+	} else {
+		go func() {
+			errChannel <- conn.Handshake()
+		}()
+		err = <-errChannel
+	}
+	if err != nil {
+		rawConn.Close()
+		return nil, err
+	}
+	return conn, nil
 }
 
-// Dial connects to addr and performs TLS handshake.
-func (c *tlsCreds) Dial(network, addr string) (_ net.Conn, err error) {
-	return c.DialWithDialer(new(net.Dialer), network, addr)
-}
-
-// NewListener creates a net.Listener with a TLS configuration constructed
-// from the information in tlsCreds.
+// NewListener creates a net.Listener using the information in tlsCreds.
 func (c *tlsCreds) NewListener(lis net.Listener) net.Listener {
-	return tls.NewListener(lis, &tls.Config{
-		Certificates: c.certificates,
-		NextProtos:   alpnProtoStr,
-	})
+	return tls.NewListener(lis, &c.config)
+}
+
+// NewTLS uses c to construct a TransportAuthenticator based on TLS.
+func NewTLS(c *tls.Config) TransportAuthenticator {
+	tc := &tlsCreds{*c}
+	tc.config.NextProtos = alpnProtoStr
+	return tc
 }
 
 // NewClientTLSFromCert constructs a TLS from the input certificate for client.
 func NewClientTLSFromCert(cp *x509.CertPool, serverName string) TransportAuthenticator {
-	return &tlsCreds{
-		serverName: serverName,
-		rootCAs:    cp,
-	}
+	return NewTLS(&tls.Config{ServerName: serverName, RootCAs: cp})
 }
 
 // NewClientTLSFromFile constructs a TLS from the input certificate file for client.
@@ -156,17 +159,12 @@ func NewClientTLSFromFile(certFile, serverName string) (TransportAuthenticator, 
 	if !cp.AppendCertsFromPEM(b) {
 		return nil, fmt.Errorf("credentials: failed to append certificates")
 	}
-	return &tlsCreds{
-		serverName: serverName,
-		rootCAs:    cp,
-	}, nil
+	return NewTLS(&tls.Config{ServerName: serverName, RootCAs: cp}), nil
 }
 
 // NewServerTLSFromCert constructs a TLS from the input certificate for server.
 func NewServerTLSFromCert(cert *tls.Certificate) TransportAuthenticator {
-	return &tlsCreds{
-		certificates: []tls.Certificate{*cert},
-	}
+	return NewTLS(&tls.Config{Certificates: []tls.Certificate{*cert}})
 }
 
 // NewServerTLSFromFile constructs a TLS from the input certificate file and key
@@ -176,20 +174,16 @@ func NewServerTLSFromFile(certFile, keyFile string) (TransportAuthenticator, err
 	if err != nil {
 		return nil, err
 	}
-	return &tlsCreds{
-		certificates: []tls.Certificate{cert},
-	}, nil
+	return NewTLS(&tls.Config{Certificates: []tls.Certificate{cert}}), nil
 }
 
-// computeEngine represents credentials for the built-in service account for
-// the currently running Google Compute Engine (GCE) instance. It uses the
-// metadata server to get access tokens.
-type computeEngine struct {
-	ts oauth2.TokenSource
+// TokenSource supplies credentials from an oauth2.TokenSource.
+type TokenSource struct {
+	oauth2.TokenSource
 }
 
-func (c computeEngine) GetRequestMetadata(ctx context.Context) (map[string]string, error) {
-	token, err := c.ts.Token()
+func (ts TokenSource) GetRequestMetadata(ctx context.Context) (map[string]string, error) {
+	token, err := ts.Token()
 	if err != nil {
 		return nil, err
 	}
@@ -201,10 +195,9 @@ func (c computeEngine) GetRequestMetadata(ctx context.Context) (map[string]strin
 // NewComputeEngine constructs the credentials that fetches access tokens from
 // Google Compute Engine (GCE)'s metadata server. It is only valid to use this
 // if your program is running on a GCE instance.
+// TODO(dsymonds): Deprecate and remove this.
 func NewComputeEngine() Credentials {
-	return computeEngine{
-		ts: google.ComputeTokenSource(""),
-	}
+	return TokenSource{google.ComputeTokenSource("")}
 }
 
 // serviceAccount represents credentials via JWT signing key.
@@ -240,4 +233,14 @@ func NewServiceAccountFromFile(keyFile string, scope ...string) (Credentials, er
 		return nil, fmt.Errorf("credentials: failed to read the service account key file: %v", err)
 	}
 	return NewServiceAccountFromKey(jsonKey, scope...)
+}
+
+// NewApplicationDefault returns "Application Default Credentials". For more
+// detail, see https://developers.google.com/accounts/docs/application-default-credentials.
+func NewApplicationDefault(ctx context.Context, scope ...string) (Credentials, error) {
+	t, err := google.DefaultTokenSource(ctx, scope...)
+	if err != nil {
+		return nil, err
+	}
+	return TokenSource{t}, nil
 }

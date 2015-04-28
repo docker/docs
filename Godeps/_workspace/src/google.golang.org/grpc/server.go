@@ -49,7 +49,7 @@ import (
 	"google.golang.org/grpc/transport"
 )
 
-type methodHandler func(srv interface{}, ctx context.Context, buf []byte) (interface{}, error)
+type methodHandler func(srv interface{}, ctx context.Context, codec Codec, buf []byte) (interface{}, error)
 
 // MethodDesc represents an RPC service's method specification.
 type MethodDesc struct {
@@ -253,7 +253,7 @@ func (s *Server) processUnaryRPC(t transport.ServerTransport, stream *transport.
 		case compressionNone:
 			statusCode := codes.OK
 			statusDesc := ""
-			reply, appErr := md.Handler(srv.server, stream.Context(), req)
+			reply, appErr := md.Handler(srv.server, stream.Context(), s.opts.codec, req)
 			if appErr != nil {
 				if err, ok := appErr.(rpcError); ok {
 					statusCode = err.code
@@ -283,9 +283,7 @@ func (s *Server) processUnaryRPC(t transport.ServerTransport, stream *transport.
 					statusDesc = err.Error()
 				}
 			}
-			if err := t.WriteStatus(stream, statusCode, statusDesc); err != nil {
-				log.Printf("grpc: Server.processUnaryRPC failed to write status: %v", err)
-			}
+			t.WriteStatus(stream, statusCode, statusDesc)
 		default:
 			panic(fmt.Sprintf("payload format to be supported: %d", pf))
 		}
@@ -308,9 +306,7 @@ func (s *Server) processStreamingRPC(t transport.ServerTransport, stream *transp
 			ss.statusDesc = appErr.Error()
 		}
 	}
-	if err := t.WriteStatus(ss.s, ss.statusCode, ss.statusDesc); err != nil {
-		log.Printf("grpc: Server.processStreamingRPC failed to write status: %v", err)
-	}
+	t.WriteStatus(ss.s, ss.statusCode, ss.statusDesc)
 }
 
 func (s *Server) handleStream(t transport.ServerTransport, stream *transport.Stream) {
@@ -371,8 +367,8 @@ func (s *Server) TestingCloseConns() {
 	s.mu.Lock()
 	for c := range s.conns {
 		c.Close()
-		delete(s.conns, c)
 	}
+	s.conns = make(map[transport.ServerTransport]bool)
 	s.mu.Unlock()
 }
 

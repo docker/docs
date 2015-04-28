@@ -34,12 +34,15 @@
 package grpc_test
 
 import (
+	"fmt"
 	"io"
 	"log"
 	"math"
 	"net"
 	"reflect"
+	"runtime"
 	"sync"
+	"syscall"
 	"testing"
 	"time"
 
@@ -263,18 +266,37 @@ func TestReconnectTimeout(t *testing.T) {
 	}
 }
 
-func setUp(useTLS bool, maxStream uint32) (s *grpc.Server, cc *grpc.ClientConn) {
-	lis, err := net.Listen("tcp", ":0")
+func unixDialer(addr string, timeout time.Duration) (net.Conn, error) {
+	return net.DialTimeout("unix", addr, timeout)
+}
+
+type env struct {
+	network  string // The type of network such as tcp, unix, etc.
+	dialer   func(addr string, timeout time.Duration) (net.Conn, error)
+	security string // The security protocol such as TLS, SSH, etc.
+}
+
+func listTestEnv() []env {
+	if runtime.GOOS == "windows" {
+		return []env{env{"tcp", nil, ""}, env{"tcp", nil, "tls"}}
+	}
+	return []env{env{"tcp", nil, ""}, env{"tcp", nil, "tls"}, env{"unix", unixDialer, ""}, env{"unix", unixDialer, "tls"}}
+}
+
+func setUp(maxStream uint32, e env) (s *grpc.Server, cc *grpc.ClientConn) {
+	s = grpc.NewServer(grpc.MaxConcurrentStreams(maxStream))
+	la := ":0"
+	switch e.network {
+	case "unix":
+		la = "/tmp/testsock" + fmt.Sprintf("%p", s)
+		syscall.Unlink(la)
+	}
+	lis, err := net.Listen(e.network, la)
 	if err != nil {
 		log.Fatalf("Failed to listen: %v", err)
 	}
-	_, port, err := net.SplitHostPort(lis.Addr().String())
-	if err != nil {
-		log.Fatalf("Failed to parse listener address: %v", err)
-	}
-	s = grpc.NewServer(grpc.MaxConcurrentStreams(maxStream))
 	testpb.RegisterTestServiceServer(s, &testServer{})
-	if useTLS {
+	if e.security == "tls" {
 		creds, err := credentials.NewServerTLSFromFile(tlsDir+"server1.pem", tlsDir+"server1.key")
 		if err != nil {
 			log.Fatalf("Failed to generate credentials %v", err)
@@ -283,15 +305,24 @@ func setUp(useTLS bool, maxStream uint32) (s *grpc.Server, cc *grpc.ClientConn) 
 	} else {
 		go s.Serve(lis)
 	}
-	addr := "localhost:" + port
-	if useTLS {
+	addr := la
+	switch e.network {
+	case "unix":
+	default:
+		_, port, err := net.SplitHostPort(lis.Addr().String())
+		if err != nil {
+			log.Fatalf("Failed to parse listener address: %v", err)
+		}
+		addr = "localhost:" + port
+	}
+	if e.security == "tls" {
 		creds, err := credentials.NewClientTLSFromFile(tlsDir+"ca.pem", "x.test.youtube.com")
 		if err != nil {
 			log.Fatalf("Failed to create credentials %v", err)
 		}
-		cc, err = grpc.Dial(addr, grpc.WithTransportCredentials(creds))
+		cc, err = grpc.Dial(addr, grpc.WithTransportCredentials(creds), grpc.WithDialer(e.dialer))
 	} else {
-		cc, err = grpc.Dial(addr)
+		cc, err = grpc.Dial(addr, grpc.WithDialer(e.dialer))
 	}
 	if err != nil {
 		log.Fatalf("Dial(%q) = %v", addr, err)
@@ -305,7 +336,13 @@ func tearDown(s *grpc.Server, cc *grpc.ClientConn) {
 }
 
 func TestTimeoutOnDeadServer(t *testing.T) {
-	s, cc := setUp(false, math.MaxUint32)
+	for _, e := range listTestEnv() {
+		testTimeoutOnDeadServer(t, e)
+	}
+}
+
+func testTimeoutOnDeadServer(t *testing.T, e env) {
+	s, cc := setUp(math.MaxUint32, e)
 	tc := testpb.NewTestServiceClient(cc)
 	s.Stop()
 	// Set -1 as the timeout to make sure if transportMonitor gets error
@@ -319,7 +356,13 @@ func TestTimeoutOnDeadServer(t *testing.T) {
 }
 
 func TestEmptyUnary(t *testing.T) {
-	s, cc := setUp(true, math.MaxUint32)
+	for _, e := range listTestEnv() {
+		testEmptyUnary(t, e)
+	}
+}
+
+func testEmptyUnary(t *testing.T, e env) {
+	s, cc := setUp(math.MaxUint32, e)
 	tc := testpb.NewTestServiceClient(cc)
 	defer tearDown(s, cc)
 	reply, err := tc.EmptyCall(context.Background(), &testpb.Empty{})
@@ -329,7 +372,13 @@ func TestEmptyUnary(t *testing.T) {
 }
 
 func TestFailedEmptyUnary(t *testing.T) {
-	s, cc := setUp(true, math.MaxUint32)
+	for _, e := range listTestEnv() {
+		testFailedEmptyUnary(t, e)
+	}
+}
+
+func testFailedEmptyUnary(t *testing.T, e env) {
+	s, cc := setUp(math.MaxUint32, e)
 	tc := testpb.NewTestServiceClient(cc)
 	defer tearDown(s, cc)
 	ctx := metadata.NewContext(context.Background(), testMetadata)
@@ -339,7 +388,13 @@ func TestFailedEmptyUnary(t *testing.T) {
 }
 
 func TestLargeUnary(t *testing.T) {
-	s, cc := setUp(true, math.MaxUint32)
+	for _, e := range listTestEnv() {
+		testLargeUnary(t, e)
+	}
+}
+
+func testLargeUnary(t *testing.T, e env) {
+	s, cc := setUp(math.MaxUint32, e)
 	tc := testpb.NewTestServiceClient(cc)
 	defer tearDown(s, cc)
 	argSize := 271828
@@ -361,7 +416,13 @@ func TestLargeUnary(t *testing.T) {
 }
 
 func TestMetadataUnaryRPC(t *testing.T) {
-	s, cc := setUp(true, math.MaxUint32)
+	for _, e := range listTestEnv() {
+		testMetadataUnaryRPC(t, e)
+	}
+}
+
+func testMetadataUnaryRPC(t *testing.T, e env) {
+	s, cc := setUp(math.MaxUint32, e)
 	tc := testpb.NewTestServiceClient(cc)
 	defer tearDown(s, cc)
 	argSize := 2718
@@ -405,11 +466,17 @@ func performOneRPC(t *testing.T, tc testpb.TestServiceClient, wg *sync.WaitGroup
 	wg.Done()
 }
 
+func TestRetry(t *testing.T) {
+	for _, e := range listTestEnv() {
+		testRetry(t, e)
+	}
+}
+
 // This test mimics a user who sends 1000 RPCs concurrently on a faulty transport.
 // TODO(zhaoq): Refactor to make this clearer and add more cases to test racy
 // and error-prone paths.
-func TestRetry(t *testing.T) {
-	s, cc := setUp(true, math.MaxUint32)
+func testRetry(t *testing.T, e env) {
+	s, cc := setUp(math.MaxUint32, e)
 	tc := testpb.NewTestServiceClient(cc)
 	defer tearDown(s, cc)
 	var wg sync.WaitGroup
@@ -431,9 +498,15 @@ func TestRetry(t *testing.T) {
 	wg.Wait()
 }
 
-// TODO(zhaoq): Have a better test coverage of timeout and cancellation mechanism.
 func TestRPCTimeout(t *testing.T) {
-	s, cc := setUp(true, math.MaxUint32)
+	for _, e := range listTestEnv() {
+		testRPCTimeout(t, e)
+	}
+}
+
+// TODO(zhaoq): Have a better test coverage of timeout and cancellation mechanism.
+func testRPCTimeout(t *testing.T, e env) {
+	s, cc := setUp(math.MaxUint32, e)
 	tc := testpb.NewTestServiceClient(cc)
 	defer tearDown(s, cc)
 	argSize := 2718
@@ -456,7 +529,13 @@ func TestRPCTimeout(t *testing.T) {
 }
 
 func TestCancel(t *testing.T) {
-	s, cc := setUp(true, math.MaxUint32)
+	for _, e := range listTestEnv() {
+		testCancel(t, e)
+	}
+}
+
+func testCancel(t *testing.T, e env) {
+	s, cc := setUp(math.MaxUint32, e)
 	tc := testpb.NewTestServiceClient(cc)
 	defer tearDown(s, cc)
 	argSize := 2718
@@ -482,7 +561,13 @@ var (
 )
 
 func TestPingPong(t *testing.T) {
-	s, cc := setUp(true, math.MaxUint32)
+	for _, e := range listTestEnv() {
+		testPingPong(t, e)
+	}
+}
+
+func testPingPong(t *testing.T, e env) {
+	s, cc := setUp(math.MaxUint32, e)
 	tc := testpb.NewTestServiceClient(cc)
 	defer tearDown(s, cc)
 	stream, err := tc.FullDuplexCall(context.Background())
@@ -527,7 +612,13 @@ func TestPingPong(t *testing.T) {
 }
 
 func TestMetadataStreamingRPC(t *testing.T) {
-	s, cc := setUp(true, math.MaxUint32)
+	for _, e := range listTestEnv() {
+		testMetadataStreamingRPC(t, e)
+	}
+}
+
+func testMetadataStreamingRPC(t *testing.T, e env) {
+	s, cc := setUp(math.MaxUint32, e)
 	tc := testpb.NewTestServiceClient(cc)
 	defer tearDown(s, cc)
 	ctx := metadata.NewContext(context.Background(), testMetadata)
@@ -578,7 +669,13 @@ func TestMetadataStreamingRPC(t *testing.T) {
 }
 
 func TestServerStreaming(t *testing.T) {
-	s, cc := setUp(true, math.MaxUint32)
+	for _, e := range listTestEnv() {
+		testServerStreaming(t, e)
+	}
+}
+
+func testServerStreaming(t *testing.T, e env) {
+	s, cc := setUp(math.MaxUint32, e)
 	tc := testpb.NewTestServiceClient(cc)
 	defer tearDown(s, cc)
 	respParam := make([]*testpb.ResponseParameters, len(respSizes))
@@ -624,7 +721,13 @@ func TestServerStreaming(t *testing.T) {
 }
 
 func TestFailedServerStreaming(t *testing.T) {
-	s, cc := setUp(true, math.MaxUint32)
+	for _, e := range listTestEnv() {
+		testFailedServerStreaming(t, e)
+	}
+}
+
+func testFailedServerStreaming(t *testing.T, e env) {
+	s, cc := setUp(math.MaxUint32, e)
 	tc := testpb.NewTestServiceClient(cc)
 	defer tearDown(s, cc)
 	respParam := make([]*testpb.ResponseParameters, len(respSizes))
@@ -648,7 +751,13 @@ func TestFailedServerStreaming(t *testing.T) {
 }
 
 func TestClientStreaming(t *testing.T) {
-	s, cc := setUp(true, math.MaxUint32)
+	for _, e := range listTestEnv() {
+		testClientStreaming(t, e)
+	}
+}
+
+func testClientStreaming(t *testing.T, e env) {
+	s, cc := setUp(math.MaxUint32, e)
 	tc := testpb.NewTestServiceClient(cc)
 	defer tearDown(s, cc)
 	stream, err := tc.StreamingInputCall(context.Background())
@@ -676,8 +785,14 @@ func TestClientStreaming(t *testing.T) {
 }
 
 func TestExceedMaxStreamsLimit(t *testing.T) {
+	for _, e := range listTestEnv() {
+		testExceedMaxStreamsLimit(t, e)
+	}
+}
+
+func testExceedMaxStreamsLimit(t *testing.T, e env) {
 	// Only allows 1 live stream per server transport.
-	s, cc := setUp(true, 1)
+	s, cc := setUp(1, e)
 	tc := testpb.NewTestServiceClient(cc)
 	defer tearDown(s, cc)
 	var err error
