@@ -4,7 +4,7 @@ vetinari:
    - rufus
   ports:
    - "8080:8080"
-   - "127.0.0.1:4443:4443"
+   - "4444:4444"
 rufus:
   build: ../rufus
   ports:

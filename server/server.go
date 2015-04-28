@@ -25,6 +25,7 @@ func Run(ctx context.Context, conf *config.Configuration) error {
 	if conf.TrustService.Type == "remote" {
 		log.Println("[Vetinari Server] : Using remote signing service")
 		trust = newRufusSigner(conf.TrustService.Hostname, conf.TrustService.Port, conf.Server.TLSCAFile)
+		log.Println("return from RufusSigner")
 	} else {
 		log.Println("[Vetinari Server] : Using local signing service")
 		trust = signed.NewEd25519()
@@ -34,6 +35,7 @@ func Run(ctx context.Context, conf *config.Configuration) error {
 	if err != nil {
 		return err
 	}
+	log.Println("loaded x509")
 
 	tlsConfig := &tls.Config{
 		MinVersion:               tls.VersionTLS12,
@@ -52,14 +54,17 @@ func Run(ctx context.Context, conf *config.Configuration) error {
 		Rand:         rand.Reader,
 	}
 
+	log.Println("resolving tcpaddr")
 	tcpAddr, err := net.ResolveTCPAddr("tcp", conf.Server.Addr)
 	if err != nil {
 		return err
 	}
+	log.Println("setup listen tcp")
 	lsnr, err := net.ListenTCP("tcp", tcpAddr)
 	if err != nil {
 		return err
 	}
+	log.Println("new listener")
 	tlsLsnr := tls.NewListener(lsnr, tlsConfig)
 
 	// This is a basic way to shutdown the running listeners.
@@ -74,6 +79,7 @@ func Run(ctx context.Context, conf *config.Configuration) error {
 	}()
 
 
+	log.Println("roothandlerfactory")
 	hand := utils.RootHandlerFactory(&utils.InsecureAuthorizer{}, utils.NewContext, trust)
 
 	r := mux.NewRouter()
@@ -83,6 +89,7 @@ func Run(ctx context.Context, conf *config.Configuration) error {
 	r.Methods("DELETE").Path("/{imageName}:{tag}").Handler(hand(handlers.RemoveHandler, utils.SSDelete))
 	r.Methods("POST").Path("/{imageName}:{tag}").Handler(hand(handlers.AddHandler, utils.SSUpdate))
 
+	log.Println("server")
 	server := http.Server{
 		Addr:    conf.Server.Addr,
 		Handler: r,
