@@ -33,6 +33,7 @@ func Run(ctx context.Context, conf *config.Configuration) error {
 
 	keypair, err := tls.LoadX509KeyPair(conf.Server.TLSCertFile, conf.Server.TLSKeyFile)
 	if err != nil {
+		log.Printf("error loading keys %s", err)
 		return err
 	}
 	log.Println("loaded x509")

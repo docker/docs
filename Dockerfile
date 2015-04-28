@@ -6,4 +6,6 @@ RUN GOPATH=/go/:/go/src/github.com/docker/vetinari/Godeps/_workspace go install 
 
 EXPOSE 4444
 
-CMD vetinari-server -config /go/src/github.com/docker/vetinari/cmd/vetinari-server/dev-config.json
+WORKDIR /go/src/github.com/docker/vetinari
+
+CMD vetinari-server -config cmd/vetinari-server/dev-config.json
