@@ -1,8 +1,9 @@
 {
 	"server": {
 		"addr": ":4443",
-		"tls_cert_file": "../../fixtures/ca.pem",
-		"tls_key_file": "../../fixtures/ca-key.pem"
+		"tls_cert_file": "../../fixtures/vetinari.key",
+		"tls_key_file": "../../fixtures/vetinari.pem",
+		"tls_ca_file": "/go/src/github.com/docker/vetinari/fixtures/ca.cert"
 	},
 	"trust_service": {
 		"type": "remote",

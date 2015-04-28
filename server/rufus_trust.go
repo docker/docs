@@ -21,10 +21,13 @@ type RufusSigner struct {
 	sClient  pb.SignerClient
 }
 
-func newRufusSigner(hostname string, port string) *RufusSigner {
+func newRufusSigner(hostname string, port string, tlscafile string) *RufusSigner {
 	var opts []grpc.DialOption
 	netAddr := net.JoinHostPort(hostname, port)
-	creds := credentials.NewClientTLSFromCert(nil, hostname)
+	creds, err := credentials.NewClientTLSFromFile(tlscafile, hostname)
+	if err != nil {
+		log.Fatalf("fail to read: %v", err)
+	}
 	opts = append(opts, grpc.WithTransportCredentials(creds))
 	conn, err := grpc.Dial(netAddr, opts...)
 	if err != nil {

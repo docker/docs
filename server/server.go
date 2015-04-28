@@ -24,7 +24,7 @@ func Run(ctx context.Context, conf *config.Configuration) error {
 	var trust signed.TrustService
 	if conf.TrustService.Type == "remote" {
 		log.Println("[Vetinari Server] : Using remote signing service")
-		trust = newRufusSigner(conf.TrustService.Hostname, conf.TrustService.Port)
+		trust = newRufusSigner(conf.TrustService.Hostname, conf.TrustService.Port, conf.Server.TLSCAFile)
 	} else {
 		log.Println("[Vetinari Server] : Using local signing service")
 		trust = signed.NewEd25519()
