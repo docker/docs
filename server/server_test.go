@@ -40,8 +40,8 @@ func TestRunReservedPort(t *testing.T) {
 	config := &config.Configuration{
 		Server: config.ServerConf{
 			Addr:        "localhost:80",
-			TLSCertFile: "../fixtures/ca.pem",
-			TLSKeyFile:  "../fixtures/ca-key.pem",
+			TLSCertFile: "../fixtures/vetinari.pem",
+			TLSKeyFile:  "../fixtures/vetinari.key",
 		},
 	}
 
@@ -61,8 +61,8 @@ func TestRunGoodCancel(t *testing.T) {
 	config := &config.Configuration{
 		Server: config.ServerConf{
 			Addr:        "localhost:8002",
-			TLSCertFile: "../fixtures/ca.pem",
-			TLSKeyFile:  "../fixtures/ca-key.pem",
+			TLSCertFile: "../fixtures/vetinari.pem",
+			TLSKeyFile:  "../fixtures/vetinari.key",
 		},
 	}
 
