@@ -6,9 +6,9 @@
 	],
 	"Deps": [
 		{
-			"ImportPath": "code.google.com/p/go-sqlite/go1/sqlite3",
-			"Comment": "null-50",
-			"Rev": "6e75c20f8fc4b936bccab88336915333ae165754"
+			"ImportPath": "code.google.com/p/gosqlite/sqlite3",
+			"Comment": "null-16",
+			"Rev": "74691fb6f83716190870cde1b658538dd4b18eb0"
 		},
 		{
 			"ImportPath": "github.com/agl/ed25519",
