@@ -36,7 +36,6 @@ func Run(ctx context.Context, conf *config.Configuration) error {
 		log.Printf("error loading keys %s", err)
 		return err
 	}
-	log.Println("loaded x509")
 
 	tlsConfig := &tls.Config{
 		MinVersion:               tls.VersionTLS12,
@@ -55,17 +54,14 @@ func Run(ctx context.Context, conf *config.Configuration) error {
 		Rand:         rand.Reader,
 	}
 
-	log.Println("resolving tcpaddr")
 	tcpAddr, err := net.ResolveTCPAddr("tcp", conf.Server.Addr)
 	if err != nil {
 		return err
 	}
-	log.Println("setup listen tcp")
 	lsnr, err := net.ListenTCP("tcp", tcpAddr)
 	if err != nil {
 		return err
 	}
-	log.Println("new listener")
 	tlsLsnr := tls.NewListener(lsnr, tlsConfig)
 
 	// This is a basic way to shutdown the running listeners.
@@ -79,7 +75,6 @@ func Run(ctx context.Context, conf *config.Configuration) error {
 		tlsLsnr.Close()
 	}()
 
-	log.Println("roothandlerfactory")
 	hand := utils.RootHandlerFactory(&utils.InsecureAuthorizer{}, utils.NewContext, trust)
 
 	r := mux.NewRouter()
@@ -89,7 +84,6 @@ func Run(ctx context.Context, conf *config.Configuration) error {
 	r.Methods("DELETE").Path("/{imageName:.*}/{tag:[a-zA-Z0-9]+}").Handler(hand(handlers.RemoveHandler, utils.SSDelete))
 	r.Methods("POST").Path("/{imageName:.*}/{tag:[a-zA-Z0-9]+}").Handler(hand(handlers.AddHandler, utils.SSUpdate))
 
-	log.Println("server")
 	server := http.Server{
 		Addr:    conf.Server.Addr,
 		Handler: r,

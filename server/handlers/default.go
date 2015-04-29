@@ -38,8 +38,9 @@ func MainHandler(ctx utils.Context, w http.ResponseWriter, r *http.Request) *err
 
 // AddHandler accepts urls in the form /<imagename>/<tag>
 func AddHandler(ctx utils.Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
-	log.Printf("AddHandler")
 	vars := mux.Vars(r)
+	log.Printf("AddHandler request for images name: %s and tag: %s", vars["imageName"], vars["tag"])
+
 	local := store.DBStore(db, vars["imageName"])
 	// parse body for correctness
 	meta := data.FileMeta{}
@@ -103,9 +104,10 @@ func AddHandler(ctx utils.Context, w http.ResponseWriter, r *http.Request) *erro
 
 // RemoveHandler accepts urls in the form /<imagename>/<tag>
 func RemoveHandler(ctx utils.Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
-	log.Printf("RemoveHandler")
 	// remove tag from tagets list
 	vars := mux.Vars(r)
+	log.Printf("RemoveHandler request for images name: %s and tag: %s", vars["imageName"], vars["tag"])
+
 	local := store.DBStore(db, vars["imageName"])
 	local.RemoveBlob(vars["tag"])
 	tufRepo, err := repo.NewRepo(ctx.Trust(), local, "sha256", "sha512")
@@ -149,9 +151,10 @@ func RemoveHandler(ctx utils.Context, w http.ResponseWriter, r *http.Request) *e
 
 // GetHandler accepts urls in the form /<imagename>/<tuf file>.json
 func GetHandler(ctx utils.Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
-	log.Printf("GetHandler")
 	// generate requested file and serve
 	vars := mux.Vars(r)
+	log.Printf("GetHandler request for image name: %s and tuf-file: %s", vars["imageName"], vars["tufFile"])
+
 	local := store.DBStore(db, vars["imageName"])
 
 	meta, err := local.GetMeta()
@@ -168,9 +171,10 @@ func GetHandler(ctx utils.Context, w http.ResponseWriter, r *http.Request) *erro
 
 // GenKeysHandler is the handler for generate keys endpoint
 func GenKeysHandler(ctx utils.Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
-	log.Printf("GenKeysHandler")
 	// remove tag from tagets list
 	vars := mux.Vars(r)
+	log.Printf("GenKeysHandler request for: %s", vars["imageName"])
+
 	local := store.DBStore(db, vars["imageName"])
 	tufRepo, err := repo.NewRepo(ctx.Trust(), local, "sha256", "sha512")
 	if err != nil {

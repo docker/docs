@@ -28,11 +28,9 @@ func newRufusSigner(hostname string, port string, tlscafile string) *RufusSigner
 	if err != nil {
 		log.Fatalf("fail to read: %v", err)
 	}
-	log.Println("before dial")
 	opts = append(opts, grpc.WithTransportCredentials(creds))
-	log.Println("after dial")
 	conn, err := grpc.Dial(netAddr, opts...)
-	log.Println("finished dial")
+
 	if err != nil {
 		log.Fatalf("fail to dial: %v", err)
 	}

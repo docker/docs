@@ -6,6 +6,9 @@ vetinari:
    - "8080:8080"
    - "4444:4444"
 rufus:
+  volumes:
+   - /dev/bus/usb/003/010:/dev/bus/usb/002/010
+   - /var/run/pcscd/pcscd.comm:/var/run/pcscd/pcscd.comm
   build: ../rufus
   ports:
    - "7899:7899"
