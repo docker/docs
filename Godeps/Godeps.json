@@ -28,7 +28,7 @@
 		},
 		{
 			"ImportPath": "github.com/endophage/go-tuf",
-			"Rev": "cd186d4fbdde1fd51b632bce0d1e8ee81ca4900b"
+			"Rev": "f8c0df8132ecbf29c6011cd39a64a100a24fff6c"
 		},
 		{
 			"ImportPath": "github.com/golang/protobuf/proto",
