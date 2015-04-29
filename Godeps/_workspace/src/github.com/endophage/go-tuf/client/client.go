@@ -596,6 +596,9 @@ func (c *Client) Verify(name string, r io.Reader, size int64, dest Destination) 
 
 	// read the data, simultaneously writing it to dest and generating metadata
 	actual, err := util.GenerateFileMeta(io.TeeReader(stream, dest), localMeta.HashAlgorithms()...)
+	for algo, hash := range actual.Hashes {
+		fmt.Println("Actual hash", algo, hash.String())
+	}
 	if err != nil {
 		return ErrDownloadFailed{name, err}
 	}

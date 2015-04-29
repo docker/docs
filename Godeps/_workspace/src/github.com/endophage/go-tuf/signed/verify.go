@@ -4,10 +4,15 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"log"
 	"strings"
 	"time"
 
-	"github.com/agl/ed25519"
+	"crypto"
+	"crypto/rsa"
+	"crypto/sha256"
+	"crypto/x509"
+	//"github.com/agl/ed25519"
 	"github.com/endophage/go-tuf/data"
 	"github.com/endophage/go-tuf/keys"
 	"github.com/tent/canonical-json-go"
@@ -77,29 +82,56 @@ func VerifySignatures(s *data.Signed, role string, db *keys.DB) error {
 
 	valid := make(map[string]struct{})
 	for _, sig := range s.Signatures {
-		var sigBytes [ed25519.SignatureSize]byte
-		if sig.Method != "ed25519" {
-			return ErrWrongMethod
-		}
-		if len(sig.Signature) != len(sigBytes) {
-			return ErrInvalid
-		}
+		//var sigBytes [ed25519.SignatureSize]byte
+		//if sig.Method != "ed25519" {
+		//	return ErrWrongMethod
+		//}
+		//if len(sig.Signature) != len(sigBytes) {
+		//	return ErrInvalid
+		//}
 
-		if !roleData.ValidKey(sig.KeyID) {
-			continue
-		}
+		//if !roleData.ValidKey(sig.KeyID) {
+		//log.Printf("continuing b/c keyid was invalid: %s for roledata %s\n", sig.KeyID, roleData)
+		//continue
+		//}
 		key := db.GetKey(sig.KeyID)
 		if key == nil {
+			log.Printf("continuing b/c keyid lookup was nil: %s\n", sig.KeyID)
 			continue
 		}
 
-		copy(sigBytes[:], sig.Signature)
-		var keyBytes [ed25519.PublicKeySize]byte
-		copy(keyBytes[:], key.Value.Public)
-		if !ed25519.Verify(&keyBytes, msg, &sigBytes) {
-			return ErrInvalid
+		//copy(sigBytes[:], sig.Signature)
+		//var keyBytes [ed25519.PublicKeySize]byte
+		//copy(keyBytes[:], key.Value.Public)
+
+		//if !ed25519.Verify(&keyBytes, msg, &sigBytes) {
+		//	return ErrInvalid
+		//}
+		//valid[sig.KeyID] = struct{}{}
+
+		//TODO(mccauley): move this to rsa.verify routine
+		digest := sha256.Sum256(msg)
+		pub, err := x509.ParsePKIXPublicKey(key.Value.Public)
+		if err != nil {
+			log.Printf("Failed to parse public key: %s\n", err)
+			return err
 		}
-		valid[sig.KeyID] = struct{}{}
+
+		rsaPub, ok := pub.(*rsa.PublicKey)
+		if !ok {
+			log.Printf("Value returned from ParsePKIXPublicKey was not an RSA public key")
+			return err
+		}
+
+		err = rsa.VerifyPKCS1v15(rsaPub, crypto.SHA256, digest[:], sig.Signature)
+		if err != nil {
+			log.Printf("Failed verification: %s", err)
+			return err
+		} else {
+			log.Printf("---------------Verification succeeded!!!---------------")
+			valid[sig.KeyID] = struct{}{}
+		}
+
 	}
 	if len(valid) < roleData.Threshold {
 		return ErrRoleThreshold
