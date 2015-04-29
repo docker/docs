@@ -3,7 +3,7 @@ package main
 import (
 	//	"encoding/json"
 
-	"github.com/flynn/go-tuf"
+	"github.com/endophage/go-tuf"
 	"github.com/flynn/go-docopt"
 )
 

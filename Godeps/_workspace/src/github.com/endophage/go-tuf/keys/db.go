@@ -2,6 +2,7 @@ package keys
 
 import (
 	"errors"
+	"fmt"
 
 	"github.com/endophage/go-tuf/data"
 )
@@ -55,6 +56,7 @@ func (db *DB) AddKey(k *PublicKey) error {
 	//if len(k.Value.Public) != ed25519.PublicKeySize {
 	//	return ErrInvalidKey
 	//}
+	fmt.Println("Adding Key", k.ID)
 
 	key := PublicKey{
 		Key: data.Key{
@@ -85,6 +87,7 @@ func ValidRole(name string) bool {
 }
 
 func (db *DB) AddRole(name string, r *data.Role) error {
+	fmt.Println("Adding Role", name)
 	if !ValidRole(name) {
 		return ErrInvalidRole
 	}

@@ -1,6 +1,7 @@
 package client
 
 import (
+	"crypto/tls"
 	"fmt"
 	"io"
 	"net/http"
@@ -26,12 +27,17 @@ func HTTPRemoteStore(baseURL string, opts *HTTPRemoteOptions) (RemoteStore, erro
 	if opts.TargetsPath == "" {
 		opts.TargetsPath = "targets"
 	}
-	return &httpRemoteStore{baseURL, opts}, nil
+	tr := &http.Transport{
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+	}
+	client := &http.Client{Transport: tr}
+	return &httpRemoteStore{baseURL, opts, client}, nil
 }
 
 type httpRemoteStore struct {
 	baseURL string
 	opts    *HTTPRemoteOptions
+	client  *http.Client
 }
 
 func (h *httpRemoteStore) GetMeta(name string) (io.ReadCloser, int64, error) {
@@ -44,6 +50,9 @@ func (h *httpRemoteStore) GetTarget(name string) (io.ReadCloser, int64, error) {
 
 func (h *httpRemoteStore) get(s string) (io.ReadCloser, int64, error) {
 	u := h.url(s)
+	fmt.Println("###########")
+	fmt.Println(u)
+	fmt.Println("###########")
 	req, err := http.NewRequest("GET", u, nil)
 	if err != nil {
 		return nil, 0, err
@@ -51,7 +60,7 @@ func (h *httpRemoteStore) get(s string) (io.ReadCloser, int64, error) {
 	if h.opts.UserAgent != "" {
 		req.Header.Set("User-Agent", h.opts.UserAgent)
 	}
-	res, err := http.DefaultClient.Do(req)
+	res, err := h.client.Do(req)
 	if err != nil {
 		return nil, 0, err
 	}

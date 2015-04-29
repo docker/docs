@@ -35,6 +35,10 @@ func (m *memoryStore) SetMeta(name string, meta json.RawMessage) error {
 	return nil
 }
 
+func (m *memoryStore) AddBlob(path string, meta data.FileMeta) {
+
+}
+
 func (m *memoryStore) WalkStagedTargets(paths []string, targetsFn targetsWalkFunc) error {
 	if len(paths) == 0 {
 		for path, data := range m.files {

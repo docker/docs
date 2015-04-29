@@ -13,7 +13,7 @@ import (
 func TestDBStore(t *testing.T) {
 	db := util.GetSqliteDB()
 	defer util.FlushDB(db)
-	_ = DBStore(nil, "")
+	_ = DBStore(db, "")
 }
 
 func TestLoadFiles(t *testing.T) {

@@ -12,11 +12,13 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/flynn/go-tuf"
 	"github.com/agl/ed25519"
+	"github.com/endophage/go-tuf"
+	"github.com/endophage/go-tuf/data"
+	"github.com/endophage/go-tuf/signed"
+	"github.com/endophage/go-tuf/store"
+	"github.com/endophage/go-tuf/util"
 	. "gopkg.in/check.v1"
-	"github.com/flynn/go-tuf/data"
-	"github.com/flynn/go-tuf/util"
 )
 
 type InteropSuite struct{}
@@ -78,7 +80,8 @@ func (InteropSuite) TestGoClientPythonGenerated(c *C) {
 }
 
 func generateRepoFS(c *C, dir string, files map[string][]byte, consistentSnapshot bool) *tuf.Repo {
-	repo, err := tuf.NewRepo(tuf.FileSystemStore(dir, nil))
+	signer := signed.NewEd25519()
+	repo, err := tuf.NewRepo(signer, store.FileSystemStore(dir, nil), "sha256")
 	c.Assert(err, IsNil)
 	if !consistentSnapshot {
 		c.Assert(repo.Init(false), IsNil)

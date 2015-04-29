@@ -10,19 +10,20 @@ import (
 	"testing"
 	"time"
 
-	"github.com/flynn/go-tuf"
+	"github.com/endophage/go-tuf"
+	"github.com/endophage/go-tuf/data"
+	"github.com/endophage/go-tuf/keys"
+	"github.com/endophage/go-tuf/signed"
+	"github.com/endophage/go-tuf/store"
+	"github.com/endophage/go-tuf/util"
 	. "gopkg.in/check.v1"
-	"github.com/flynn/go-tuf/data"
-	"github.com/flynn/go-tuf/keys"
-	"github.com/flynn/go-tuf/signed"
-	"github.com/flynn/go-tuf/util"
 )
 
 // Hook up gocheck into the "go test" runner.
 func Test(t *testing.T) { TestingT(t) }
 
 type ClientSuite struct {
-	store       tuf.LocalStore
+	store       store.LocalStore
 	repo        *tuf.Repo
 	local       LocalStore
 	remote      *fakeRemoteStore
@@ -88,11 +89,12 @@ var targetFiles = map[string][]byte{
 }
 
 func (s *ClientSuite) SetUpTest(c *C) {
-	s.store = tuf.MemoryStore(nil, targetFiles)
+	s.store = store.MemoryStore(nil, targetFiles)
 
 	// create a valid repo containing foo.txt
 	var err error
-	s.repo, err = tuf.NewRepo(s.store)
+	signer := signed.NewEd25519()
+	s.repo, err = tuf.NewRepo(signer, s.store, "sha256")
 	c.Assert(err, IsNil)
 	// don't use consistent snapshots to make testing easier (consistent
 	// snapshots are tested explicitly elsewhere)
@@ -335,7 +337,7 @@ func (s *ClientSuite) TestNewRoot(c *C) {
 		c.Assert(key.ID, Equals, id)
 		role := client.db.GetRole(name)
 		c.Assert(role, NotNil)
-		c.Assert(role.KeyIDs, DeepEquals, map[string]struct{}{id: {}})
+		c.Assert(role.KeyIDs, DeepEquals, []string{id})
 	}
 }
 
@@ -388,7 +390,7 @@ func (s *ClientSuite) TestNewTimestampKey(c *C) {
 	c.Assert(key.ID, Equals, newID)
 	role := client.db.GetRole("timestamp")
 	c.Assert(role, NotNil)
-	c.Assert(role.KeyIDs, DeepEquals, map[string]struct{}{newID: {}})
+	c.Assert(role.KeyIDs, DeepEquals, []string{newID})
 }
 
 func (s *ClientSuite) TestNewSnapshotKey(c *C) {
@@ -422,7 +424,7 @@ func (s *ClientSuite) TestNewSnapshotKey(c *C) {
 	c.Assert(key.ID, Equals, newID)
 	role := client.db.GetRole("snapshot")
 	c.Assert(role, NotNil)
-	c.Assert(role.KeyIDs, DeepEquals, map[string]struct{}{newID: {}})
+	c.Assert(role.KeyIDs, DeepEquals, []string{newID})
 }
 
 func (s *ClientSuite) TestNewTargetsKey(c *C) {
@@ -459,7 +461,7 @@ func (s *ClientSuite) TestNewTargetsKey(c *C) {
 	c.Assert(key.ID, Equals, newID)
 	role := client.db.GetRole("targets")
 	c.Assert(role, NotNil)
-	c.Assert(role.KeyIDs, DeepEquals, map[string]struct{}{newID: {}})
+	c.Assert(role.KeyIDs, DeepEquals, []string{newID})
 }
 
 func (s *ClientSuite) TestLocalExpired(c *C) {

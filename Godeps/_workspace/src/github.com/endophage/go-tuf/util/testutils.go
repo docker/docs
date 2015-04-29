@@ -1,11 +1,15 @@
 package util
 
 import (
+	"database/sql"
+	"fmt"
 	"os"
 
-	"code.google.com/p/go-sqlite/go1/sqlite3"
+	_ "code.google.com/p/gosqlite/sqlite3"
 	"github.com/endophage/go-tuf/data"
 )
+
+var counter int = 1
 
 func SampleMeta() data.FileMeta {
 	meta := data.FileMeta{
@@ -18,22 +22,25 @@ func SampleMeta() data.FileMeta {
 	return meta
 }
 
-func GetSqliteDB() *sqlite3.Conn {
-	conn, err := sqlite3.Open("")
+func GetSqliteDB() *sql.DB {
+	conn, err := sql.Open("sqlite3", fmt.Sprintf("/tmp/sqlite/file%d.db", counter))
 	if err != nil {
 		panic("can't connect to db")
 	}
-	conn.Exec("CREATE TABLE keys (id int auto_increment, namespace varchar(255) not null, role varchar(255) not null, key text not null, primary key (id));")
-	conn.Exec("CREATE TABLE filehashes(namespace varchar(255) not null, path varchar(255) not null, alg varchar(10) not null, hash varchar(128) not null, primary key (namespace, path, alg));")
-	conn.Exec("CREATE TABLE filemeta(namespace varchar(255) not null, path varchar(255) not null, size int not null, custom text default null, primary key (namespace, path));")
-	conn.Commit()
+	counter++
+	tx, _ := conn.Begin()
+	tx.Exec("CREATE TABLE keys (id int auto_increment, namespace varchar(255) not null, role varchar(255) not null, key text not null, primary key (id));")
+	tx.Exec("CREATE TABLE filehashes(namespace varchar(255) not null, path varchar(255) not null, alg varchar(10) not null, hash varchar(128) not null, primary key (namespace, path, alg));")
+	tx.Exec("CREATE TABLE filemeta(namespace varchar(255) not null, path varchar(255) not null, size int not null, custom text default null, primary key (namespace, path));")
+	tx.Commit()
 	return conn
 }
 
-func FlushDB(db *sqlite3.Conn) {
-	db.Exec("DELETE FROM `filemeta`")
-	db.Exec("DELETE FROM `filehashes`")
-	db.Exec("DELETE FROM `keys`")
-
+func FlushDB(db *sql.DB) {
+	tx, _ := db.Begin()
+	tx.Exec("DELETE FROM `filemeta`")
+	tx.Exec("DELETE FROM `filehashes`")
+	tx.Exec("DELETE FROM `keys`")
+	tx.Commit()
 	os.RemoveAll("/tmp/tuf")
 }

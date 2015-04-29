@@ -1,6 +1,7 @@
 package store
 
 import (
+	"database/sql"
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
@@ -10,7 +11,6 @@ import (
 	"path"
 	"strings"
 
-	"code.google.com/p/go-sqlite/go1/sqlite3"
 	"github.com/endophage/go-tuf/data"
 	"github.com/endophage/go-tuf/util"
 )
@@ -21,14 +21,14 @@ const (
 
 // implements LocalStore
 type dbStore struct {
-	db        *sqlite3.Conn
+	db        sql.DB
 	imageName string
 }
 
 // DBStore takes a database connection and the QDN of the image
-func DBStore(db *sqlite3.Conn, imageName string) *dbStore {
+func DBStore(db *sql.DB, imageName string) *dbStore {
 	store := dbStore{
-		db:        db,
+		db:        *db,
 		imageName: imageName,
 	}
 
@@ -99,11 +99,17 @@ func (dbs *dbStore) Commit(metafiles map[string]json.RawMessage, consistent bool
 // GetKeys returns private keys
 func (dbs *dbStore) GetKeys(role string) ([]*data.Key, error) {
 	keys := []*data.Key{}
+	var r *sql.Rows
 	var err error
-	var r *sqlite3.Stmt
 	sql := "SELECT `key` FROM `keys` WHERE `role` = ? AND `namespace` = ?;"
-	r, err = dbs.db.Query(sql, role, dbs.imageName)
-	for ; err == nil; err = r.Next() {
+	tx, err := dbs.db.Begin()
+	defer tx.Rollback()
+	r, err = tx.Query(sql, role, dbs.imageName)
+	if err != nil {
+		return nil, err
+	}
+	defer r.Close()
+	for r.Next() {
 		var jsonStr string
 		key := data.Key{}
 		r.Scan(&jsonStr)
@@ -122,7 +128,14 @@ func (dbs *dbStore) SaveKey(role string, key *data.Key) error {
 	if err != nil {
 		return fmt.Errorf("Could not JSON Marshal Key")
 	}
-	return dbs.db.Exec("INSERT INTO `keys` (`namespace`, `role`, `key`) VALUES (?,?,?);", dbs.imageName, role, string(jsonBytes))
+	tx, err := dbs.db.Begin()
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+	_, err = tx.Exec("INSERT INTO `keys` (`namespace`, `role`, `key`) VALUES (?,?,?);", dbs.imageName, role, string(jsonBytes))
+	tx.Commit()
+	return err
 }
 
 // Clean removes staged targets
@@ -139,41 +152,67 @@ func (dbs *dbStore) AddBlob(path string, meta data.FileMeta) {
 		jsonbytes, _ = meta.Custom.MarshalJSON()
 	}
 
-	err := dbs.db.Exec("INSERT OR REPLACE INTO `filemeta` VALUES (?,?,?,?);", dbs.imageName, path, meta.Length, jsonbytes)
+	tx, err := dbs.db.Begin()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	_, err = tx.Exec("INSERT OR REPLACE INTO `filemeta` VALUES (?,?,?,?);", dbs.imageName, path, meta.Length, jsonbytes)
 	if err != nil {
 		fmt.Println(err)
 	}
+	tx.Commit()
 	dbs.addBlobHashes(path, meta.Hashes)
 }
 
 func (dbs *dbStore) addBlobHashes(path string, hashes data.Hashes) {
-	sql := "INSERT OR REPLACE INTO `filehashes` VALUES (?,?,?,?);"
-	var err error
+	tx, err := dbs.db.Begin()
+	if err != nil {
+		fmt.Println(err)
+	}
 	for alg, hash := range hashes {
-		err = dbs.db.Exec(sql, dbs.imageName, path, alg, hex.EncodeToString(hash))
+		_, err := tx.Exec("INSERT OR REPLACE INTO `filehashes` VALUES (?,?,?,?);", dbs.imageName, path, alg, hex.EncodeToString(hash))
 		if err != nil {
 			fmt.Println(err)
 		}
 	}
+	tx.Commit()
 }
 
 // RemoveBlob removes an object from the store
 func (dbs *dbStore) RemoveBlob(path string) error {
-	return dbs.db.Exec("DELETE FROM `filemeta` WHERE `path`=? AND `namespace`=?", path, dbs.imageName)
+	tx, err := dbs.db.Begin()
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+	_, err = tx.Exec("DELETE FROM `filemeta` WHERE `path`=? AND `namespace`=?", path, dbs.imageName)
+	if err == nil {
+		tx.Commit()
+	} else {
+		tx.Rollback()
+	}
+	return err
 }
 
 func (dbs *dbStore) loadTargets(path string) map[string]data.FileMeta {
 	var err error
-	var r *sqlite3.Stmt
+	var r *sql.Rows
+	tx, err := dbs.db.Begin()
+	defer tx.Rollback()
 	files := make(map[string]data.FileMeta)
 	sql := "SELECT `filemeta`.`path`, `size`, `alg`, `hash`, `custom` FROM `filemeta` JOIN `filehashes` ON `filemeta`.`path` = `filehashes`.`path` AND `filemeta`.`namespace` = `filehashes`.`namespace` WHERE `filemeta`.`namespace`=?"
 	if path != "" {
 		sql = fmt.Sprintf("%s %s", sql, "AND `filemeta`.`path`=?")
-		r, err = dbs.db.Query(sql, dbs.imageName, path)
+		r, err = tx.Query(sql, dbs.imageName, path)
 	} else {
-		r, err = dbs.db.Query(sql, dbs.imageName)
+		r, err = tx.Query(sql, dbs.imageName)
 	}
-	for ; err == nil; err = r.Next() {
+	if err != nil {
+		return files
+	}
+	defer r.Close()
+	for r.Next() {
 		var absPath, alg, hash string
 		var size int64
 		var custom json.RawMessage

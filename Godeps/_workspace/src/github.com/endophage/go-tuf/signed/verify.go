@@ -3,13 +3,14 @@ package signed
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"strings"
 	"time"
 
 	"github.com/agl/ed25519"
-	"github.com/tent/canonical-json-go"
 	"github.com/endophage/go-tuf/data"
 	"github.com/endophage/go-tuf/keys"
+	"github.com/tent/canonical-json-go"
 )
 
 var (
@@ -59,6 +60,7 @@ func VerifySignatures(s *data.Signed, role string, db *keys.DB) error {
 		return ErrNoSignatures
 	}
 
+	fmt.Println("Role:", role)
 	roleData := db.GetRole(role)
 	if roleData == nil {
 		return ErrUnknownRole
@@ -92,7 +94,7 @@ func VerifySignatures(s *data.Signed, role string, db *keys.DB) error {
 		}
 
 		copy(sigBytes[:], sig.Signature)
-		var keyBytes [32]byte
+		var keyBytes [ed25519.PublicKeySize]byte
 		copy(keyBytes[:], key.Value.Public)
 		if !ed25519.Verify(&keyBytes, msg, &sigBytes) {
 			return ErrInvalid

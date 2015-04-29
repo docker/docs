@@ -5,9 +5,10 @@ import (
 	"log"
 
 	"github.com/endophage/go-tuf"
-	"github.com/flynn/go-docopt"
+	"github.com/endophage/go-tuf/signed"
 	"github.com/endophage/go-tuf/store"
 	"github.com/endophage/go-tuf/util"
+	"github.com/flynn/go-docopt"
 )
 
 func main() {
@@ -74,7 +75,8 @@ func runCommand(name string, args []string) error {
 
 	db := util.GetSqliteDB()
 	local := store.DBStore(db, "")
-	repo, err := tuf.NewRepo(local)
+	signer := signed.Ed25519{}
+	repo, err := tuf.NewRepo(&signer, local, "sha256")
 	if err != nil {
 		return err
 	}
