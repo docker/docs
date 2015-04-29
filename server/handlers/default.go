@@ -191,22 +191,6 @@ func GenKeysHandler(ctx utils.Context, w http.ResponseWriter, r *http.Request) *
 			Err:        err,
 		}
 	}
-	_, err = tufRepo.GenKey("root")
-	if err != nil {
-		log.Println(err)
-	}
-	_, err = tufRepo.GenKey("targets")
-	if err != nil {
-		log.Println(err)
-	}
-	_, err = tufRepo.GenKey("snapshot")
-	if err != nil {
-		log.Println(err)
-	}
-	_, err = tufRepo.GenKey("timestamp")
-	if err != nil {
-		log.Println(err)
-	}
 	_ = tufRepo.Init(false)
 	return nil
 }

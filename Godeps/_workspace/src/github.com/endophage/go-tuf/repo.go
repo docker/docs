@@ -80,6 +80,22 @@ func (r *Repo) Init(consistentSnapshot bool) error {
 	if err != nil {
 		return err
 	}
+	_, err = r.GenKey("root")
+	if err != nil {
+		return err
+	}
+	_, err = r.GenKey("targets")
+	if err != nil {
+		return err
+	}
+	_, err = r.GenKey("snapshot")
+	if err != nil {
+		return err
+	}
+	_, err = r.GenKey("timestamp")
+	if err != nil {
+		return err
+	}
 	t.Expires = data.DefaultExpires("targets").Round(time.Second)
 	t.Version++
 	err = r.setMeta("targets.json", t)
