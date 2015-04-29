@@ -64,7 +64,7 @@ func AddHandler(ctx utils.Context, w http.ResponseWriter, r *http.Request) *erro
 			Err:        err,
 		}
 	}
-	//err = tufRepo.Init(false)
+	//	err = tufRepo.Init(false)
 	//if err != nil {
 	//	return &errors.HTTPError{
 	//		HTTPStatus: http.StatusInternalServerError,
@@ -191,7 +191,6 @@ func GenKeysHandler(ctx utils.Context, w http.ResponseWriter, r *http.Request) *
 			Err:        err,
 		}
 	}
-	_ = tufRepo.Init(false)
 	_, err = tufRepo.GenKey("root")
 	if err != nil {
 		log.Println(err)
@@ -208,5 +207,6 @@ func GenKeysHandler(ctx utils.Context, w http.ResponseWriter, r *http.Request) *
 	if err != nil {
 		log.Println(err)
 	}
+	_ = tufRepo.Init(false)
 	return nil
 }
