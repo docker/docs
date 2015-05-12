@@ -191,6 +191,21 @@ func GenKeysHandler(ctx utils.Context, w http.ResponseWriter, r *http.Request) *
 			Err:        err,
 		}
 	}
-	_ = tufRepo.Init(false)
+	// init repo
+	err = tufRepo.Init(false)
+	if err != nil {
+		return &errors.HTTPError{
+			HTTPStatus: http.StatusInternalServerError,
+			Code:       9999,
+			Err:        err,
+		}
+	}
+	// gen keys
+
+	// generate empty targets file
+
+	// snapshot
+
+	// timestamp
 	return nil
 }

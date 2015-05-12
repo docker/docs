@@ -2,17 +2,15 @@ package server
 
 import (
 	"errors"
-	"log"
 	"net"
 
+	"github.com/Sirupsen/logrus"
+	pb "github.com/docker/rufus/proto"
 	"github.com/endophage/go-tuf/data"
 	"github.com/endophage/go-tuf/keys"
-
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
-
-	pb "github.com/docker/rufus/proto"
 )
 
 // RufusSigner implements a RPC based Trust service that calls the Rufus Service
@@ -26,13 +24,13 @@ func newRufusSigner(hostname string, port string, tlscafile string) *RufusSigner
 	netAddr := net.JoinHostPort(hostname, port)
 	creds, err := credentials.NewClientTLSFromFile(tlscafile, hostname)
 	if err != nil {
-		log.Fatalf("fail to read: %v", err)
+		logrus.Fatal("fail to read: ", err)
 	}
 	opts = append(opts, grpc.WithTransportCredentials(creds))
 	conn, err := grpc.Dial(netAddr, opts...)
 
 	if err != nil {
-		log.Fatalf("fail to dial: %v", err)
+		logrus.Fatal("fail to dial: ", err)
 	}
 	kmClient := pb.NewKeyManagementClient(conn)
 	sClient := pb.NewSignerClient(conn)

@@ -3,6 +3,7 @@ package server
 import (
 	"crypto/rand"
 	"crypto/tls"
+	"encoding/json"
 	"log"
 	"net"
 	"net/http"
@@ -19,19 +20,16 @@ import (
 // Run sets up and starts a TLS server that can be cancelled using the
 // given configuration. The context it is passed is the context it should
 // use directly for the TLS server, and generate children off for requests
-func Run(ctx context.Context, conf *config.Configuration) error {
+func Run(ctx context.Context, conf config.ServerConf, trust signed.TrustService) error {
 
-	var trust signed.TrustService
-	if conf.TrustService.Type == "remote" {
-		log.Println("[Vetinari Server] : Using remote signing service")
-		trust = newRufusSigner(conf.TrustService.Hostname, conf.TrustService.Port, conf.Server.TLSCAFile)
-		log.Println("return from RufusSigner")
-	} else {
-		log.Println("[Vetinari Server] : Using local signing service")
-		trust = signed.NewEd25519()
-	}
+	// TODO: check validity of config
 
-	keypair, err := tls.LoadX509KeyPair(conf.Server.TLSCertFile, conf.Server.TLSKeyFile)
+	return run(ctx, conf.Addr, conf.TLSCertFile, conf.TLSKeyFile, trust)
+}
+
+func run(ctx context.Context, addr, tlsCertFile, tlsKeyFile string, trust signed.TrustService) error {
+
+	keypair, err := tls.LoadX509KeyPair(tlsCertFile, tlsKeyFile)
 	if err != nil {
 		log.Printf("error loading keys %s", err)
 		return err
@@ -54,7 +52,7 @@ func Run(ctx context.Context, conf *config.Configuration) error {
 		Rand:         rand.Reader,
 	}
 
-	tcpAddr, err := net.ResolveTCPAddr("tcp", conf.Server.Addr)
+	tcpAddr, err := net.ResolveTCPAddr("tcp", addr)
 	if err != nil {
 		return err
 	}
@@ -85,11 +83,11 @@ func Run(ctx context.Context, conf *config.Configuration) error {
 	r.Methods("POST").Path("/{imageName:.*}/{tag:[a-zA-Z0-9]+}").Handler(hand(handlers.AddHandler, utils.SSUpdate))
 
 	server := http.Server{
-		Addr:    conf.Server.Addr,
+		Addr:    addr,
 		Handler: r,
 	}
 
-	log.Println("[Vetinari Server] : Listening on", conf.Server.Addr)
+	log.Println("[Vetinari Server] : Listening on", addr)
 
 	err = server.Serve(tlsLsnr)
 

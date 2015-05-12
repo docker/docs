@@ -3,6 +3,7 @@ package main
 import (
 	_ "expvar"
 	"flag"
+	"fmt"
 	"log"
 	"net/http"
 	_ "net/http/pprof"
@@ -10,6 +11,8 @@ import (
 	"os/signal"
 	"syscall"
 
+	"github.com/Sirupsen/logrus"
+	"github.com/endophage/go-tuf/signed"
 	"golang.org/x/net/context"
 
 	_ "github.com/docker/vetinari/auth/token"
@@ -40,7 +43,8 @@ func main() {
 
 	conf, err := parseConfig(configFile)
 	if err != nil {
-		log.Fatalf("Error parsing config: %s", err.Error())
+		logrus.Fatal("Error parsing config: ", err.Error())
+		return // not strictly needed but let's be explicit
 	}
 
 	sigHup := make(chan os.Signal)
@@ -49,30 +53,39 @@ func main() {
 	signal.Notify(sigHup, syscall.SIGHUP)
 	signal.Notify(sigTerm, syscall.SIGTERM)
 
+	var trust signed.TrustService
+	if conf.TrustServiceConf.Type == "remote" {
+		logrus.Info("[Vetinari Server] : Using remote signing service")
+		trust = newRufusSigner(conf.TrustServiceConf.Hostname, conf.TrustServiceConf.Port, conf.TrustServiceConf.TLSCAFile)
+	} else {
+		logrus.Info("[Vetinari Server] : Using local signing service")
+		trust = signed.NewEd25519()
+	}
+
 	for {
-		log.Println("[Vetinari] Starting Server")
+		logrus.Info("[Vetinari] Starting Server")
 		childCtx, cancel := context.WithCancel(ctx)
-		go server.Run(childCtx, conf)
+		go server.Run(childCtx, conf.Server, trust)
 
 		for {
 			select {
 			// On a sighup we cancel and restart a new server
 			// with updated config
 			case <-sigHup:
-				log.Printf("[Vetinari] Server restart requested. Attempting to parse config at %s", configFile)
+				logrus.Infof("[Vetinari] Server restart requested. Attempting to parse config at %s", configFile)
 				conf, err = parseConfig(configFile)
 				if err != nil {
-					log.Printf("[Vetinari] Unable to parse config. Old configuration will keep running. Parse Err: %s", err.Error())
+					logrus.Infof("[Vetinari] Unable to parse config. Old configuration will keep running. Parse Err: %s", err.Error())
 					continue
 				} else {
 					cancel()
-					log.Println("[Vetinari] Stopping server for restart")
+					logrus.Info("[Vetinari] Stopping server for restart")
 					break
 				}
 			// On sigkill we cancel and shutdown
 			case <-sigTerm:
 				cancel()
-				log.Println("[Vetinari] Shutting Down Hard")
+				logrus.Info("[Vetinari] Shutting Down Hard")
 				os.Exit(0)
 			}
 		}
@@ -80,7 +93,7 @@ func main() {
 }
 
 func usage() {
-	log.Println("usage:", os.Args[0], "<config>")
+	fmt.Println("usage:", os.Args[0], "<config>")
 	flag.PrintDefaults()
 }
 
@@ -88,9 +101,9 @@ func usage() {
 // endpoints. The addr should not be exposed externally. For most of these to
 // work, tls cannot be enabled on the endpoint, so it is generally separate.
 func debugServer(addr string) {
-	log.Println("[Vetinari Debug Server] server listening on", addr)
+	logrus.Info("[Vetinari Debug Server] server listening on", addr)
 	if err := http.ListenAndServe(addr, nil); err != nil {
-		log.Fatalf("[Vetinari Debug Server] error listening on debug interface: %v", err)
+		logrus.Fatal("[Vetinari Debug Server] error listening on debug interface: ", err)
 	}
 }
 
@@ -98,6 +111,7 @@ func parseConfig(path string) (*config.Configuration, error) {
 	file, err := os.Open(path)
 	defer file.Close()
 	if err != nil {
+		logrus.Error("Failed to open configuration file located at: ", path)
 		return nil, err
 	}
 

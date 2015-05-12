@@ -3,6 +3,8 @@ package config
 import (
 	"encoding/json"
 	"io"
+
+	"github.com/Sirupsen/logrus"
 )
 
 // Configuration is the top level object that
@@ -18,16 +20,16 @@ type ServerConf struct {
 	Addr        string `json:"addr"`
 	TLSCertFile string `json:"tls_cert_file"`
 	TLSKeyFile  string `json:"tls_key_file"`
-	TLSCAFile   string `json:"tls_ca_file,omitempty"`
 }
 
 // TrustServiceConf specificies the service to use for signing.
 // `Type` will be `local` for library based signing implementations,
 // `remote` will be used for
 type TrustServiceConf struct {
-	Type     string `json:"type"`
-	Hostname string `json:"hostname,omitempty"`
-	Port     string `json:"port,omitempty"`
+	Type      string `json:"type"`
+	Hostname  string `json:"hostname,omitempty"`
+	Port      string `json:"port,omitempty"`
+	TLSCAFile string `json:"tls_ca_file,omitempty"`
 }
 
 // Load takes a filename (relative path from pwd) and attempts
@@ -38,6 +40,7 @@ func Load(data io.Reader) (*Configuration, error) {
 	decoder := json.NewDecoder(data)
 	err := decoder.Decode(&conf)
 	if err != nil {
+		logrus.Error("[Vetinari Server] : Failed to parse configuration: ", err.Error())
 		return nil, err
 	}
 	return &conf, nil
