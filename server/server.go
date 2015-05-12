@@ -3,7 +3,6 @@ package server
 import (
 	"crypto/rand"
 	"crypto/tls"
-	"encoding/json"
 	"log"
 	"net"
 	"net/http"

@@ -6,29 +6,30 @@ import (
 	"testing"
 	"time"
 
+	"github.com/endophage/go-tuf/signed"
 	"golang.org/x/net/context"
 
 	"github.com/docker/vetinari/config"
 )
 
 func TestRunBadCerts(t *testing.T) {
-	err := Run(context.Background(), &config.Configuration{
-		Server:       config.ServerConf{},
-		TrustService: config.TrustServiceConf{}})
+	err := Run(
+		context.Background(),
+		config.ServerConf{},
+		signed.NewEd25519(),
+	)
 	if err == nil {
 		t.Fatal("Passed empty certs, Run should have failed")
 	}
 }
 
 func TestRunBadAddr(t *testing.T) {
-	config := &config.Configuration{
-		Server: config.ServerConf{
-			Addr:        "testAddr",
-			TLSCertFile: "../fixtures/ca.pem",
-			TLSKeyFile:  "../fixtures/ca-key.pem",
-		},
+	config := config.ServerConf{
+		Addr:        "testAddr",
+		TLSCertFile: "../fixtures/ca.pem",
+		TLSKeyFile:  "../fixtures/ca-key.pem",
 	}
-	err := Run(context.Background(), config)
+	err := Run(context.Background(), config, signed.NewEd25519())
 	if err == nil {
 		t.Fatal("Passed bad addr, Run should have failed")
 	}
@@ -37,15 +38,13 @@ func TestRunBadAddr(t *testing.T) {
 func TestRunReservedPort(t *testing.T) {
 	ctx, _ := context.WithCancel(context.Background())
 
-	config := &config.Configuration{
-		Server: config.ServerConf{
-			Addr:        "localhost:80",
-			TLSCertFile: "../fixtures/vetinari.pem",
-			TLSKeyFile:  "../fixtures/vetinari.key",
-		},
+	config := config.ServerConf{
+		Addr:        "localhost:80",
+		TLSCertFile: "../fixtures/vetinari.pem",
+		TLSKeyFile:  "../fixtures/vetinari.key",
 	}
 
-	err := Run(ctx, config)
+	err := Run(ctx, config, signed.NewEd25519())
 
 	if _, ok := err.(*net.OpError); !ok {
 		t.Fatalf("Received unexpected err: %s", err.Error())
@@ -58,12 +57,10 @@ func TestRunReservedPort(t *testing.T) {
 func TestRunGoodCancel(t *testing.T) {
 	ctx, cancelFunc := context.WithCancel(context.Background())
 
-	config := &config.Configuration{
-		Server: config.ServerConf{
-			Addr:        "localhost:8002",
-			TLSCertFile: "../fixtures/vetinari.pem",
-			TLSKeyFile:  "../fixtures/vetinari.key",
-		},
+	config := config.ServerConf{
+		Addr:        "localhost:8002",
+		TLSCertFile: "../fixtures/vetinari.pem",
+		TLSKeyFile:  "../fixtures/vetinari.key",
 	}
 
 	go func() {
@@ -71,7 +68,7 @@ func TestRunGoodCancel(t *testing.T) {
 		cancelFunc()
 	}()
 
-	err := Run(ctx, config)
+	err := Run(ctx, config, signed.NewEd25519())
 
 	if _, ok := err.(*net.OpError); !ok {
 		t.Fatalf("Received unexpected err: %s", err.Error())
