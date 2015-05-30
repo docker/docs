@@ -19,6 +19,10 @@ ${PREFIX}/bin/vetinari-server: version/version.go $(shell find . -type f -name '
 	@echo "+ $@"
 	@go build -o $@ ${GO_LDFLAGS} ./cmd/vetinari-server
 
+${PREFIX}/bin/trustmanager: version/version.go $(shell find . -type f -name '*.go')
+	@echo "+ $@"
+	@go build -o $@ ${GO_LDFLAGS} ./cmd/trustmanager
+
 vet:
 	@echo "+ $@"
 	@test -z "$$(go tool vet -printf=false . 2>&1 | grep -v Godeps/_workspace/src/ | tee /dev/stderr)"
@@ -49,9 +53,9 @@ protos:
 clean-protos:
 	@rm proto/*.pb.go
 
-binaries: ${PREFIX}/bin/vetinari-server
+binaries: ${PREFIX}/bin/vetinari-server ${PREFIX}/bin/trustmanager
 	@echo "+ $@"
 
 clean:
 	@echo "+ $@"
-	@rm -rf "${PREFIX}/bin/vetinari-server"
+	@rm -rf "${PREFIX}/bin/vetinari-server" "${PREFIX}/bin/trustmanager"
