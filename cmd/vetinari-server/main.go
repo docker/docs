@@ -4,7 +4,6 @@ import (
 	_ "expvar"
 	"flag"
 	"fmt"
-	"log"
 	"net/http"
 	_ "net/http/pprof"
 	"os"
@@ -18,6 +17,7 @@ import (
 	_ "github.com/docker/vetinari/auth/token"
 	"github.com/docker/vetinari/config"
 	"github.com/docker/vetinari/server"
+	"github.com/docker/vetinari/signer"
 )
 
 // DebugAddress is the debug server address to listen on
@@ -54,9 +54,9 @@ func main() {
 	signal.Notify(sigTerm, syscall.SIGTERM)
 
 	var trust signed.TrustService
-	if conf.TrustServiceConf.Type == "remote" {
+	if conf.TrustService.Type == "remote" {
 		logrus.Info("[Vetinari Server] : Using remote signing service")
-		trust = newRufusSigner(conf.TrustServiceConf.Hostname, conf.TrustServiceConf.Port, conf.TrustServiceConf.TLSCAFile)
+		trust = signer.NewRufusSigner(conf.TrustService.Hostname, conf.TrustService.Port, conf.TrustService.TLSCAFile)
 	} else {
 		logrus.Info("[Vetinari Server] : Using local signing service")
 		trust = signed.NewEd25519()

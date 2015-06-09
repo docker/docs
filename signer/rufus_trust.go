@@ -1,4 +1,4 @@
-package server
+package signer
 
 import (
 	"errors"
@@ -19,7 +19,7 @@ type RufusSigner struct {
 	sClient  pb.SignerClient
 }
 
-func newRufusSigner(hostname string, port string, tlscafile string) *RufusSigner {
+func NewRufusSigner(hostname string, port string, tlscafile string) *RufusSigner {
 	var opts []grpc.DialOption
 	netAddr := net.JoinHostPort(hostname, port)
 	creds, err := credentials.NewClientTLSFromFile(tlscafile, hostname)
