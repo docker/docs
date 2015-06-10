@@ -36,7 +36,7 @@ DTR is perfect for:
 
 DTR is built on [version 2 of the Docker registry](https://github.com/docker/distribution).
 
-> **Note:** This initial release of DHE has limited access. To get access,
+> **Note:** This initial release of DTR has limited access. To get access,
 > you will need an account on [Docker Hub](https://hub.docker.com/). Once you're
 > logged in to the Hub with your account, visit the
 > [early access registration page](https://registry.hub.docker.com/earlyaccess/)

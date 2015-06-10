@@ -25,7 +25,7 @@ Specifically, installation requires completion of these steps, in order:
 3. Install DTR
 4. Add your license to your DTR instance
 
-> **Note:** This initial release of DHE has limited access. To get access,
+> **Note:** This initial release of DTR has limited access. To get access,
 > you will need an account on [Docker Hub](https://hub.docker.com/). Once you're
 > logged in to the Hub with your account, visit the
 > [early access registration page](https://registry.hub.docker.com/earlyaccess/)
@@ -152,8 +152,8 @@ so upgrading the Engine only requires you to run the update commands on your ser
 
 ### RHEL 7.0/7.1 upgrade
 
-The following commands will stop the running DHE, upgrade CS Docker Engine,
-and then start DHE again:
+The following commands will stop the running DTR, upgrade CS Docker Engine,
+and then start DTR again:
 
 ```
     $ sudo bash -c "$(sudo docker run docker/trusted-registry stop)"
@@ -164,8 +164,8 @@ and then start DHE again:
 
 ### Ubuntu 14.04 LTS upgrade
 
-The following commands will stop the running DHE, upgrade CS Docker Engine,
-and then start DHE again:
+The following commands will stop the running DTR, upgrade CS Docker Engine,
+and then start DTR again:
 
 ```
     $ sudo bash -c "$(sudo docker run docker/trusted-registry stop)"
