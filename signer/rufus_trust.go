@@ -6,8 +6,8 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	pb "github.com/docker/rufus/proto"
-	"github.com/endophage/go-tuf/data"
-	"github.com/endophage/go-tuf/keys"
+	"github.com/endophage/gotuf/data"
+	"github.com/endophage/gotuf/keys"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"

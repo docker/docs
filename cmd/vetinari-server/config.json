@@ -8,5 +8,8 @@
 		"type": "local",
 		"hostname": "",
 		"port": ""
+	},
+	"logging": {
+		"level": 5
 	}
 }

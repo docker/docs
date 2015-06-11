@@ -11,10 +11,10 @@ import (
 	"syscall"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/endophage/go-tuf/signed"
+	_ "github.com/docker/distribution/registry/auth/token"
+	"github.com/endophage/gotuf/signed"
 	"golang.org/x/net/context"
 
-	_ "github.com/docker/vetinari/auth/token"
 	"github.com/docker/vetinari/config"
 	"github.com/docker/vetinari/server"
 	"github.com/docker/vetinari/signer"
@@ -27,8 +27,12 @@ var debug bool
 var configFile string
 
 func init() {
+	// Set default logging level to Error
+	logrus.SetLevel(logrus.ErrorLevel)
+
+	// Setup flags
 	flag.StringVar(&configFile, "config", "", "Path to configuration file")
-	flag.BoolVar(&debug, "debug", false, "show the version and exit")
+	flag.BoolVar(&debug, "debug", false, "Enable the debugging server on localhost:8080")
 }
 
 func main() {
@@ -46,6 +50,9 @@ func main() {
 		logrus.Fatal("Error parsing config: ", err.Error())
 		return // not strictly needed but let's be explicit
 	}
+	if conf.Logging {
+		logrus.SetLevel(conf.Logging.Level)
+	}
 
 	sigHup := make(chan os.Signal)
 	sigTerm := make(chan os.Signal)
@@ -55,10 +62,10 @@ func main() {
 
 	var trust signed.TrustService
 	if conf.TrustService.Type == "remote" {
-		logrus.Info("[Vetinari Server] : Using remote signing service")
+		logrus.Info("[Vetinari] : Using remote signing service")
 		trust = signer.NewRufusSigner(conf.TrustService.Hostname, conf.TrustService.Port, conf.TrustService.TLSCAFile)
 	} else {
-		logrus.Info("[Vetinari Server] : Using local signing service")
+		logrus.Info("[Vetinari] : Using local signing service")
 		trust = signed.NewEd25519()
 	}
 

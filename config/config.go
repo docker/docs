@@ -12,6 +12,7 @@ import (
 type Configuration struct {
 	Server       ServerConf       `json:"server,omitempty"`
 	TrustService TrustServiceConf `json:"trust_service,omitempty"`
+	Logging      LoggingConf      `json:"logging,omitempty"`
 }
 
 // ServerConf specifically addresses configuration related to
@@ -30,6 +31,10 @@ type TrustServiceConf struct {
 	Hostname  string `json:"hostname,omitempty"`
 	Port      string `json:"port,omitempty"`
 	TLSCAFile string `json:"tls_ca_file,omitempty"`
+}
+
+type LoggingConf struct {
+	Level uint8 `json:"level,omitempty"`
 }
 
 // Load takes a filename (relative path from pwd) and attempts

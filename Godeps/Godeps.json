@@ -6,9 +6,13 @@
 	],
 	"Deps": [
 		{
-			"ImportPath": "code.google.com/p/gosqlite/sqlite3",
-			"Comment": "null-16",
-			"Rev": "74691fb6f83716190870cde1b658538dd4b18eb0"
+			"ImportPath": "code.google.com/p/go-uuid/uuid",
+			"Comment": "null-15",
+			"Rev": "35bc42037350f0078e3c974c6ea690f1926603ab"
+		},
+		{
+			"ImportPath": "github.com/Sirupsen/logrus",
+			"Rev": "55eb11d21d2a31a3cc93838241d04800f52e823d"
 		},
 		{
 			"ImportPath": "github.com/agl/ed25519",
@@ -19,6 +23,21 @@
 			"Rev": "97124afb234048ae0c91b8883c59fcd890bf8145"
 		},
 		{
+			"ImportPath": "github.com/docker/distribution/context",
+			"Comment": "v2.0.0-228-gb230183",
+			"Rev": "b230183b0fe8b8ed3c9ae2898c47c8c8618dc80f"
+		},
+		{
+			"ImportPath": "github.com/docker/distribution/registry/auth",
+			"Comment": "v2.0.0-228-gb230183",
+			"Rev": "b230183b0fe8b8ed3c9ae2898c47c8c8618dc80f"
+		},
+		{
+			"ImportPath": "github.com/docker/distribution/uuid",
+			"Comment": "v2.0.0-228-gb230183",
+			"Rev": "b230183b0fe8b8ed3c9ae2898c47c8c8618dc80f"
+		},
+		{
 			"ImportPath": "github.com/docker/libtrust",
 			"Rev": "fa567046d9b14f6aa788882a950d69651d230b21"
 		},
@@ -27,8 +46,20 @@
 			"Rev": "61b53384b24bfa83e8e0a5f11f28ae83457fd80c"
 		},
 		{
-			"ImportPath": "github.com/endophage/go-tuf",
-			"Rev": "73f8528774f93cfe707851ab2ff7503a8756ff4b"
+			"ImportPath": "github.com/endophage/gotuf/data",
+			"Rev": "930a4e1cc71f866a412aea60c960ee4345f0c76a"
+		},
+		{
+			"ImportPath": "github.com/endophage/gotuf/errors",
+			"Rev": "930a4e1cc71f866a412aea60c960ee4345f0c76a"
+		},
+		{
+			"ImportPath": "github.com/endophage/gotuf/keys",
+			"Rev": "930a4e1cc71f866a412aea60c960ee4345f0c76a"
+		},
+		{
+			"ImportPath": "github.com/endophage/gotuf/signed",
+			"Rev": "930a4e1cc71f866a412aea60c960ee4345f0c76a"
 		},
 		{
 			"ImportPath": "github.com/golang/protobuf/proto",
@@ -43,32 +74,8 @@
 			"Rev": "e444e69cbd2e2e3e0749a2f3c717cec491552bbf"
 		},
 		{
-			"ImportPath": "github.com/Sirupsen/logrus",
-			"Rev": "55eb11d21d2a31a3cc93838241d04800f52e823d"
-		},
-		{
 			"ImportPath": "github.com/tent/canonical-json-go",
 			"Rev": "96e4ba3a7613a1216cbd1badca4efe382adea337"
-		},
-		{
-			"ImportPath": "golang.org/x/crypto/nacl/secretbox",
-			"Rev": "bfc286917c5fcb7420d7e3092b50bbfd31b38a98"
-		},
-		{
-			"ImportPath": "golang.org/x/crypto/pbkdf2",
-			"Rev": "bfc286917c5fcb7420d7e3092b50bbfd31b38a98"
-		},
-		{
-			"ImportPath": "golang.org/x/crypto/poly1305",
-			"Rev": "bfc286917c5fcb7420d7e3092b50bbfd31b38a98"
-		},
-		{
-			"ImportPath": "golang.org/x/crypto/salsa20/salsa",
-			"Rev": "bfc286917c5fcb7420d7e3092b50bbfd31b38a98"
-		},
-		{
-			"ImportPath": "golang.org/x/crypto/scrypt",
-			"Rev": "bfc286917c5fcb7420d7e3092b50bbfd31b38a98"
 		},
 		{
 			"ImportPath": "golang.org/x/net/context",

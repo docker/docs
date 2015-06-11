@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/endophage/go-tuf/signed"
+	"github.com/endophage/gotuf/signed"
 	"golang.org/x/net/context"
 
 	"github.com/docker/vetinari/config"

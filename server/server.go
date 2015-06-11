@@ -3,11 +3,14 @@ package server
 import (
 	"crypto/rand"
 	"crypto/tls"
-	"log"
 	"net"
 	"net/http"
+	"time"
 
-	"github.com/endophage/go-tuf/signed"
+	"code.google.com/p/go-uuid/uuid"
+	"github.com/Sirupsen/logrus"
+	"github.com/docker/distribution/registry/auth"
+	"github.com/endophage/gotuf/signed"
 	"github.com/gorilla/mux"
 	"golang.org/x/net/context"
 
@@ -16,21 +19,54 @@ import (
 	"github.com/docker/vetinari/utils"
 )
 
+type HTTPServer struct {
+	http.Server
+	conns map[net.Conn]struct{}
+	id    string
+}
+
+func NewHTTPServer(s http.Server) *HTTPServer {
+	return &HTTPServer{
+		Server: s,
+		conns:  make(map[net.Conn]struct{}),
+		id:     uuid.New(),
+	}
+}
+
+// Track connections for cleanup on shutdown.
+func (svr *HTTPServer) ConnState(conn net.Conn, state http.ConnState) {
+	switch state {
+	case http.StateNew:
+		svr.conns[conn] = struct{}{}
+	case http.StateClosed, http.StateHijacked:
+		delete(svr.conns, conn)
+	}
+}
+
+// This should only be called after closing the server's listeners.
+func (svr *HTTPServer) TimeoutConnections() {
+	time.Sleep(time.Second * 30)
+	for conn, _ := range svr.conns {
+		conn.Close()
+	}
+	logrus.Infof("[Vetinari] All connections closed for server %s", svr.id)
+}
+
 // Run sets up and starts a TLS server that can be cancelled using the
 // given configuration. The context it is passed is the context it should
 // use directly for the TLS server, and generate children off for requests
-func Run(ctx context.Context, conf config.ServerConf, trust signed.TrustService) error {
+func Run(ctx context.Context, conf config.ServerConf, trust signed.CryptoService) error {
 
 	// TODO: check validity of config
 
 	return run(ctx, conf.Addr, conf.TLSCertFile, conf.TLSKeyFile, trust)
 }
 
-func run(ctx context.Context, addr, tlsCertFile, tlsKeyFile string, trust signed.TrustService) error {
+func run(ctx context.Context, addr, tlsCertFile, tlsKeyFile string, trust signed.CryptoService) error {
 
 	keypair, err := tls.LoadX509KeyPair(tlsCertFile, tlsKeyFile)
 	if err != nil {
-		log.Printf("error loading keys %s", err)
+		logrus.Errorf("[Vetinari] Error loading keys %s", err)
 		return err
 	}
 
@@ -61,34 +97,39 @@ func run(ctx context.Context, addr, tlsCertFile, tlsKeyFile string, trust signed
 	}
 	tlsLsnr := tls.NewListener(lsnr, tlsConfig)
 
-	// This is a basic way to shutdown the running listeners.
-	// A more complete implementation would ensure each individual connection
-	// gets cleaned up.
-	go func() {
-		doneChan := ctx.Done()
-		<-doneChan
-		// TODO: log that we received close signal
-		lsnr.Close()
-		tlsLsnr.Close()
-	}()
-
-	hand := utils.RootHandlerFactory(&utils.InsecureAuthorizer{}, utils.NewContext, trust)
+	ac, err := auth.GetAccessController("token", map[string]interface{}{})
+	if err != nil {
+		return err
+	}
+	hand := utils.RootHandlerFactory(ac, context.Background(), trust)
 
 	r := mux.NewRouter()
 	// TODO (endophage): use correct regexes for image and tag names
-	r.Methods("PUT").Path("/{imageName:.*}/init").Handler(hand(handlers.GenKeysHandler, utils.SSCreate))
-	r.Methods("GET").Path("/{imageName:.*}/{tufFile:(root.json|targets.json|timestamp.json|snapshot.json)}").Handler(hand(handlers.GetHandler, utils.SSNoAuth))
-	r.Methods("DELETE").Path("/{imageName:.*}/{tag:[a-zA-Z0-9]+}").Handler(hand(handlers.RemoveHandler, utils.SSDelete))
-	r.Methods("POST").Path("/{imageName:.*}/{tag:[a-zA-Z0-9]+}").Handler(hand(handlers.AddHandler, utils.SSUpdate))
+	r.Methods("GET").Path("/v2/{imageName:.*}/_trust/tuf/{tufFile:(root.json|targets.json|timestamp.json|snapshot.json)}").Handler(hand(handlers.GetHandler, "pull"))
+	r.Methods("POST").Path("/v2/{imageName:.*}/_trust/tuf/{tufFile:(root.json|targets.json|timestamp.json|snapshot.json)}").Handler(hand(handlers.UpdateHandler, "push", "pull"))
 
-	server := http.Server{
-		Addr:    addr,
-		Handler: r,
-	}
+	svr := NewHTTPServer(
+		http.Server{
+			Addr:    addr,
+			Handler: r,
+		},
+	)
 
-	log.Println("[Vetinari Server] : Listening on", addr)
+	logrus.Info("[Vetinari] : Listening on", addr)
 
-	err = server.Serve(tlsLsnr)
+	go stopWatcher(ctx, svr, lsnr, tlsLsnr)
+
+	err = svr.Serve(tlsLsnr)
 
 	return err
+}
+
+func stopWatcher(ctx context.Context, svr *HTTPServer, ls ...net.Listener) {
+	doneChan := ctx.Done()
+	<-doneChan
+	logrus.Debug("[Vetinari] Received close signal")
+	for _, l := range ls {
+		l.Close()
+	}
+	svr.TimeoutConnections()
 }

@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/endophage/go-tuf/signed"
+	"github.com/endophage/gotuf/signed"
 
 	"github.com/docker/vetinari/errors"
 )
