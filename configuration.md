@@ -279,7 +279,7 @@ by the [Registry 2.0](http://docs.docker.com/registry/configuration/).
 The "Authentication" settings tab lets DTR administrators control access
 to the DTR web admin tool and to the DTR Registry.
 
-The current authentication methods are `None`, `Basic` and `LDAP`.
+The current authentication methods are `None`, `Managed` and `LDAP`.
 
 > **Note**: if you have issues logging into the DTR admin web interface after changing the authentication
 > settings, you may need to use the [emergency access to the DTR admin web interface](./adminguide.md#Emergency-access-to-the-dtr-admin-web-interface).
@@ -289,21 +289,19 @@ The current authentication methods are `None`, `Basic` and `LDAP`.
 No authentication means that everyone that can access your DTR web administration
 site. This is not recommended for any use other than testing.
 
+### Managed authentication
 
-### Basic authentication
+With `Managed` authentication, the DTR admin can control users' access by setting
+username/password pairs.
+These users must then be given "admin", "read-write" or "read-only" roles.
+The "read-only" role can only pull images from the registry, "read-write" can
+push and pull images, and the "admin" role can push and pull and also access
+the web administration UI and metrics dashboard.
 
-The `Basic` authentication setting allows the admin to provide username/password pairs local to DTR.
-Any user who can successfully authenticate can use DTR to push and pull Docker images.
-You can optionally filter the list of users to a subset of just those users with access to the DTR
-admin web interface.
-
-![Basic authentication settings page</admin/settings#auth>](../assets/admin-settings-authentication-basic.png)
+![Managed authentication settings page</admin/settings#auth>](../assets/admin-settings-authentication-basic.png)
 
 * A button to add one user, or to upload a CSV file containing username,
-password pairs
-* A DTR website Administrator Filter, allowing you to either
-* * *Allow all authenticated users*: to log into the DTR admin web interface, or
-* * *Whitelist usernames*: which allows you to restrict access to the web interface to a listed set of users.
+  password pairs, and selection boxes for "admin", "read-write", and "read-only" roles.
 
 ### LDAP authentication
 
