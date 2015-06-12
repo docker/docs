@@ -36,38 +36,37 @@ Follow these steps:
 
 2. Visit a Docker repository and press the **Watch** button.
 
-	This tells GitHub to notify you of new issues. Depending on your settings,
-	notification go to your GitHub or email inbox. Some of repositories you can watch are:
-	<table class="tg" >
-		<col width="20%">
-		<col width="80%">
-		<tr>
-			<td class="tg-031e"><a href="https://github.com/docker/docker" target="_blank">docker/docker</a></td>
-			<td class="tg-031e">Docker the open-source application container engine</td>
-		</tr>
-		<tr>
-			<td class="tg-031e"><a href="https://github.com/docker/machine" target="_blank">docker/machine</a></td>
-			<td class="tg-031e">Software for the easy and quick creation of Docker hosts on your computer, on cloud providers, and inside your own data center.</td>
-		</tr>
-	<tr>
-			<td class="tg-031e"><a href="https://github.com/kitematic/kitematic" target="_blank">kitematic/kitematic</a></td>
-			<td class="tg-031e">Kitematic is a simple application for managing Docker containers on Mac OS X.</td>
-   </tr>
-</td>
-		</tr>
-		<tr>
-			<td class="tg-031e"><a href="https://github.com/docker/swarm" target="_blank">docker/swarm</a></td>
-			<td class="tg-031e">Native clustering for Docker; manage several Docker hosts as a single, virtual host.</td>
-		</tr>
-		<tr>
-			<td class="tg-031e"><a href="https://github.com/docker/compose" target="_blank">docker/compose</a></td>
-			<td class="tg-031e">Define and run complex applications using one or many interlinked containers.</td>
-		</tr>
-	</table>
+This tells GitHub to notify you of new issues. Depending on your settings,
+notification go to your GitHub or email inbox. Some of repositories you can watch are:
+<table class="tg" >
+    <col width="20%">
+    <col width="80%">
+    <tr>
+        <td class="tg-031e"><a href="https://github.com/docker/docker" target="_blank">docker/docker</a></td>
+        <td class="tg-031e">Docker the open-source application container engine</td>
+    </tr>
+    <tr>
+        <td class="tg-031e"><a href="https://github.com/docker/machine" target="_blank">docker/machine</a></td>
+        <td class="tg-031e">Software for the easy and quick creation of Docker hosts on your computer, on cloud providers, and inside your own data center.</td>
+    </tr>
+    <tr>
+        <td class="tg-031e"><a href="https://github.com/kitematic/kitematic" target="_blank">kitematic/kitematic</a></td>
+        <td class="tg-031e">Kitematic is a simple application for managing Docker containers on Mac OS X.</td>
+    </tr>
+    </tr>
+    <tr>
+        <td class="tg-031e"><a href="https://github.com/docker/swarm" target="_blank">docker/swarm</a></td>
+        <td class="tg-031e">Native clustering for Docker; manage several Docker hosts as a single, virtual host.</td>
+    </tr>
+    <tr>
+        <td class="tg-031e"><a href="https://github.com/docker/compose" target="_blank">docker/compose</a></td>
+        <td class="tg-031e">Define and run complex applications using one or many interlinked containers.</td>
+    </tr>
+</table>
 
-	
-	See <a href="https://github.com/docker" target="_blank">the complete list of
-	Docker repositories</a> on GitHub.
+
+See <a href="https://github.com/docker" target="_blank">the complete list of
+Docker repositories</a> on GitHub.
 	
 3. Choose an issue from the <a
 href="https://github.com/docker/docker/issues?q=is%3Aopen+is%3Aissue+-label%
@@ -80,14 +79,14 @@ href="https://github.com/docker/docker/issues?q=is%3Aopen+is%3Aissue+-label%
 href="https://github.com/docker/docker/blob/master/project/ISSUE-TRIAGE.md"
 target="_blank">the triage process</a> to triage the issue. 
 
-	The triage process asks you to add both a `kind/` and a `exp/` label to each
-	issue. Because you are not a Docker maintainer, you add these through comments.
-	Simply add a `+label` keyword to an issue comment: 
-	
-	![Example](/images/triage-label.png)
-	
-	For example, the `+exp/beginner` and `+kind/writing` labels would triage an issue as
-	beginner writing task. For descriptions of valid labels, see the <a
+The triage process asks you to add both a `kind/` and a `exp/` label to each
+issue. Because you are not a Docker maintainer, you add these through comments.
+Simply add a `+label` keyword to an issue comment: 
+
+![Example](/images/triage-label.png)
+
+For example, the `+exp/beginner` and `+kind/writing` labels would triage an issue as
+beginner writing task. For descriptions of valid labels, see the <a
 href="https://github.com/docker/docker/blob/master/project/ISSUE-TRIAGE.md">the triage process</a> 
 
 5. Triage another issue.

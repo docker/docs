@@ -25,16 +25,9 @@ href="http://goo.gl/HSz8UT" target="_blank">helping others</a> is a great way to
 boost your own well being.
 
 
-# Where to help
-
-If you are reading this at a Docker birthday event, look around you.  Is there
-someone who looks puzzled or frustrated? Smile at this person and say *"Hey, can
-I help you with something?"*  The next few sections list some other places to help.
-
 ## Docker users
 
-Docker users are people using Docker in their daily work. For example, a user
-might be deploying a Postgres database in a container. To help Docker users, visit:
+Docker users are people using Docker in their daily work. To help Docker users, visit:
 
 * the <a href="https://groups.google.com/forum/#!forum/docker-user"
 target="_blank">Docker-user</a> Google group
@@ -45,7 +38,7 @@ target="_blank">StackOverflow</a>
 You can also check the <a href="http://goo.gl/Kv8EdU" target="_blank">list of
 open user questions</a> on the Docker project.
 
-      
+
 ## Docker contributors
 
 Docker contributors are people like you contributing to Docker open source. 
