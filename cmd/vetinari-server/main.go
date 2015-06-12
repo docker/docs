@@ -50,8 +50,8 @@ func main() {
 		logrus.Fatal("Error parsing config: ", err.Error())
 		return // not strictly needed but let's be explicit
 	}
-	if conf.Logging {
-		logrus.SetLevel(conf.Logging.Level)
+	if conf.Logging.Level > 0 {
+		logrus.SetLevel(logrus.Level(conf.Logging.Level))
 	}
 
 	sigHup := make(chan os.Signal)
@@ -60,7 +60,7 @@ func main() {
 	signal.Notify(sigHup, syscall.SIGHUP)
 	signal.Notify(sigTerm, syscall.SIGTERM)
 
-	var trust signed.TrustService
+	var trust signed.CryptoService
 	if conf.TrustService.Type == "remote" {
 		logrus.Info("[Vetinari] : Using remote signing service")
 		trust = signer.NewRufusSigner(conf.TrustService.Hostname, conf.TrustService.Port, conf.TrustService.TLSCAFile)

@@ -7,7 +7,6 @@ import (
 	"github.com/Sirupsen/logrus"
 	pb "github.com/docker/rufus/proto"
 	"github.com/endophage/gotuf/data"
-	"github.com/endophage/gotuf/keys"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
@@ -41,7 +40,7 @@ func NewRufusSigner(hostname string, port string, tlscafile string) *RufusSigner
 }
 
 // addKey allows you to add a private key to the trust service
-func (trust *RufusSigner) addKey(k *keys.PrivateKey) error {
+func (trust *RufusSigner) addKey(k *data.PrivateKey) error {
 	return errors.New("Not implemented: RufusSigner.addKey")
 }
 
@@ -75,19 +74,19 @@ func (trust *RufusSigner) Sign(keyIDs []string, toSign []byte) ([]data.Signature
 }
 
 // Create creates a remote key and returns the PublicKey associated with the remote private key
-func (trust *RufusSigner) Create() (*keys.PublicKey, error) {
+func (trust *RufusSigner) Create() (*data.PublicKey, error) {
 	publicKey, err := trust.kmClient.CreateKey(context.Background(), &pb.Void{})
 	if err != nil {
 		return nil, err
 	}
 	//TODO(mccauley): Update API to return algorithm and/or take it as a param
-	public := keys.NewPublicKey("TODOALGORITHM", publicKey.PublicKey)
+	public := data.NewPublicKey("TODOALGORITHM", string(publicKey.PublicKey))
 	return public, nil
 }
 
 // PublicKeys returns the public key(s) associated with the passed in keyIDs
-func (trust *RufusSigner) PublicKeys(keyIDs ...string) (map[string]*keys.PublicKey, error) {
-	publicKeys := make(map[string]*keys.PublicKey)
+func (trust *RufusSigner) PublicKeys(keyIDs ...string) (map[string]*data.PublicKey, error) {
+	publicKeys := make(map[string]*data.PublicKey)
 	for _, ID := range keyIDs {
 		keyID := pb.KeyID{ID: ID}
 		sig, err := trust.kmClient.GetKeyInfo(context.Background(), &keyID)
@@ -95,7 +94,11 @@ func (trust *RufusSigner) PublicKeys(keyIDs ...string) (map[string]*keys.PublicK
 			return nil, err
 		}
 		publicKeys[sig.KeyID.ID] =
-			keys.NewPublicKey("TODOALGORITHM", sig.PublicKey)
+			data.NewPublicKey("TODOALGORITHM", string(sig.PublicKey))
 	}
 	return publicKeys, nil
+}
+
+func (trust *RufusSigner) CanSign(kID string) bool {
+	return true
 }
