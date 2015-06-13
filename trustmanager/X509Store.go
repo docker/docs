@@ -14,11 +14,13 @@ type X509Store interface {
 	GetCertificateBySKID(hexSKID string) (*x509.Certificate, error)
 	GetCertificates() []*x509.Certificate
 	GetCertificatePool() *x509.CertPool
+	GetVerifyOptions(dnsName string) (x509.VerifyOptions, error)
 }
 
 type ID string
 
-// Validator is a convenience type to create validating function
+// Validator is a convenience type to create validating function that filters
+// certificates that get added to the store
 type Validator interface {
 	Validate(cert *x509.Certificate) bool
 }

@@ -254,3 +254,21 @@ func (s X509FileStore) GetCertificateBySKID(hexSKID string) (*x509.Certificate, 
 	}
 	return nil, errors.New("certificate not found in Key Store")
 }
+
+// GetVerifyOptions returns VerifyOptions with the certificates within the KeyStore
+// as part of the roots list. This never allows the use of system roots, returning
+// an error if there are no root CAs.
+func (s X509FileStore) GetVerifyOptions(dnsName string) (x509.VerifyOptions, error) {
+	// If we have no Certificates loaded return error (we don't want to rever to using
+	// system CAs).
+	if len(s.fingerprintMap) == 0 {
+		return x509.VerifyOptions{}, errors.New("no root CAs available")
+	}
+
+	opts := x509.VerifyOptions{
+		DNSName: dnsName,
+		Roots:   s.GetCertificatePool(),
+	}
+
+	return opts, nil
+}

@@ -6,6 +6,7 @@ import (
 	"os"
 	"os/user"
 	"path"
+	"time"
 
 	"github.com/codegangsta/cli"
 	"github.com/spf13/viper"
@@ -55,9 +56,9 @@ func init() {
 	// Ensure the existence of the CAs directory
 	createDirectory(finalcaDir)
 
-	// TODO(diogo): inspect permissions of the directories/files. Warn.
+	// Load all CAs that have BasicConstrains valid, are an actual CA, aren't expired and don't use SHA1
 	caStore = trustmanager.NewX509FilteredFileStore(finalcaDir, func(cert *x509.Certificate) bool {
-		return cert.IsCA
+		return cert.IsCA && cert.BasicConstraintsValid && time.Now().Before(cert.NotAfter) && cert.SignatureAlgorithm != x509.SHA1WithRSA && cert.SignatureAlgorithm != x509.DSAWithSHA1 && cert.SignatureAlgorithm != x509.ECDSAWithSHA1
 	})
 }
 
