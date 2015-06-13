@@ -67,9 +67,9 @@ func main() {
 	app.Usage = "trust keymanager"
 
 	app.Commands = []cli.Command{
-		commandTrust,
+		commandAdd,
 		commandList,
-		commandUntrust,
+		commandRemove,
 	}
 
 	app.RunAndExitOnError()

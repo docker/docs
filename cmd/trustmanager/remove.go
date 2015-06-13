@@ -7,15 +7,15 @@ import (
 )
 
 var (
-	commandUntrust = cli.Command{
-		Name:        "untrust",
+	commandRemove = cli.Command{
+		Name:        "remove",
 		Usage:       "remove trust from a specifice certificate authority",
 		Description: "remove trust from a specifice certificate authority.",
-		Action:      untrust,
+		Action:      remove,
 	}
 )
 
-func untrust(ctx *cli.Context) {
+func remove(ctx *cli.Context) {
 	args := []string(ctx.Args())
 
 	if len(args) < 1 {

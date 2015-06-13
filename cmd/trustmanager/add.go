@@ -8,8 +8,8 @@ import (
 )
 
 var (
-	commandTrust = cli.Command{
-		Name:        "trust",
+	commandAdd = cli.Command{
+		Name:        "add",
 		Usage:       "Add an entry to the trusted certificate authority list.",
 		Description: "Add an entry to the trusted certificate authority list.",
 		Action:      add,
