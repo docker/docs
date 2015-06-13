@@ -21,7 +21,7 @@ func add(ctx *cli.Context) {
 
 	if len(args) < 1 {
 		cli.ShowCommandHelp(ctx, ctx.Command.Name)
-		errorf("must specify a URL or file.")
+		fatalf("must specify a URL or file.")
 	}
 
 	// Verify if argument is a valid URL
@@ -29,14 +29,14 @@ func add(ctx *cli.Context) {
 	if err == nil && url.Scheme != "" {
 		err = caStore.AddCertFromURL(args[0])
 		if err != nil {
-			errorf("error adding certificate to CA Store: %v", err)
+			fatalf("error adding certificate to CA Store: %v", err)
 		}
 		// Verify is argument is a valid file
 	} else if _, err := os.Stat(args[0]); err == nil {
 		if err := caStore.AddCertFromFile(args[0]); err != nil {
-			errorf("error adding certificate from file: %v", err)
+			fatalf("error adding certificate from file: %v", err)
 		}
 	} else {
-		errorf("please provide a file location or URL for CA certificate.")
+		fatalf("please provide a file location or URL for CA certificate.")
 	}
 }

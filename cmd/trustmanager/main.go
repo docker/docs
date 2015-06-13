@@ -23,13 +23,13 @@ func init() {
 	// Retrieve current user to get home directory
 	usr, err := user.Current()
 	if err != nil {
-		errorf("cannot get current user: %v", err)
+		fatalf("cannot get current user: %v", err)
 	}
 
 	// Get home directory for current user
 	homeDir := usr.HomeDir
 	if homeDir == "" {
-		errorf("cannot get current user home directory")
+		fatalf("cannot get current user home directory")
 	}
 
 	// Setup the configuration details
@@ -75,13 +75,14 @@ func main() {
 	app.RunAndExitOnError()
 }
 
-func errorf(format string, args ...interface{}) {
-	fmt.Printf("* fatal: "+format+"\n", args...)
+func fatalf(format string, args ...interface{}) {
+	fmt.Println("* fatal: ", format)
+	fmt.Println(args...)
 	os.Exit(1)
 }
 
 func createDirectory(dir string) {
 	if err := os.MkdirAll(dir, 0700); err != nil {
-		errorf("cannot create directory: %v", err)
+		fatalf("cannot create directory: %v", err)
 	}
 }

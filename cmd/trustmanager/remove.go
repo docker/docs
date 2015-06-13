@@ -9,8 +9,8 @@ import (
 var (
 	commandRemove = cli.Command{
 		Name:        "remove",
-		Usage:       "remove trust from a specifice certificate authority",
-		Description: "remove trust from a specifice certificate authority.",
+		Usage:       "remove trust from a specific certificate authority",
+		Description: "remove trust from a specific certificate authority.",
 		Action:      remove,
 	}
 )
@@ -20,12 +20,12 @@ func remove(ctx *cli.Context) {
 
 	if len(args) < 1 {
 		cli.ShowCommandHelp(ctx, ctx.Command.Name)
-		errorf("must specify a SHA256 SubjectKeyID of the certificate")
+		fatalf("must specify a SHA256 SubjectKeyID of the certificate")
 	}
 
 	cert, err := caStore.GetCertificateBySKID(args[0])
 	if err != nil {
-		errorf("certificate not found")
+		fatalf("certificate not found")
 	}
 
 	fmt.Printf("Removing: ")
@@ -33,6 +33,6 @@ func remove(ctx *cli.Context) {
 
 	err = caStore.RemoveCert(cert)
 	if err != nil {
-		errorf("failed to remove certificate for Key Store")
+		fatalf("failed to remove certificate for Key Store")
 	}
 }

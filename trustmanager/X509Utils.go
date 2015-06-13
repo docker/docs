@@ -66,7 +66,7 @@ func loadCertFromFile(filename string) (*x509.Certificate, error) {
 }
 
 // loadCertFromPEM returns the first certificate found in a bunch of bytes or error
-// if nothing is found
+// if nothing is found. Taken from https://golang.org/src/crypto/x509/cert_pool.go#L85.
 func loadCertFromPEM(pemBytes []byte) (*x509.Certificate, error) {
 	for len(pemBytes) > 0 {
 		var block *pem.Block
