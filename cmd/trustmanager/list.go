@@ -23,17 +23,12 @@ var (
 func list(ctx *cli.Context) {
 	// Load all the certificates
 	trustedCAs := caStore.GetCertificates()
-	trustedRepos := repoStore.GetCertificates()
 
 	fmt.Println("CAs Loaded:")
 	for _, c := range trustedCAs {
 		print_cert(c)
 	}
 
-	fmt.Println("Repos Loaded:")
-	for _, c := range trustedRepos {
-		print_cert(c)
-	}
 }
 
 func print_cert(cert *x509.Certificate) {
