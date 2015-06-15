@@ -15,7 +15,7 @@ weight=5
 ## Overview
 
 This page will help you properly configure Docker Trusted Registry (DTR) so it can
-run in your environment. 
+run in your environment.
 
 Start with DTR loaded in your browser and click  the "Settings" tab to view
 configuration options. You'll see options for configuring:
@@ -309,12 +309,19 @@ the web administration UI and metrics dashboard.
 Using LDAP authentication allows you to integrate your DTR registry into your
 organization's existing user and authentication database.
 
-As this involves existing infrastructure external to DTR and Docker, you will need to
+You can configure the "userFilter" to select the set of users that are candidates
+for each of the "admin", "read-write", and "read-only" roles. Unlike "Managed"
+authentication, the "admin" role is separate to the registry access roles, so
+LDAP users in the "admin" role won't have access to DTR images unless they also
+are given the "read-write" or "read-only" role.
+
+
+As connecting to LDAP involves existing infrastructure external to DTR and Docker, you will need to
 gather the details required to configure DTR for your organization's particular LDAP
 implementation.
 
-You can test that you have the necessary LDAP server information by using it from
-inside a Docker container running on the same server as your DTR:
+You can test that you have the necessary LDAP server information by connecting to
+the LDAP server from inside a Docker container running on the same server as your DTR:
 
 > **Note**: if the LDAP server is configured to use *StartTLS*, then you need to add `-Z` to the
 > `ldapsearch` command examples below.
@@ -323,14 +330,15 @@ inside a Docker container running on the same server as your DTR:
 docker run --rm -it svendowideit/ldapsearch -h <LDAP Server hostname> -b <User Base DN> -D <Search User DN> -w <Search User Password>
 ```
 
-or if the LDAP server is set up to allow anonymous access (which means your *Search User DN* and *Search User Password* settings can remain empty):
+Or if the LDAP server is set up to allow anonymous access (which means your
+*Search User DN* and *Search User Password* settings will remain empty):
 
 ```
 docker run --rm -it svendowideit/ldapsearch -h <LDAP Server hostname> -b <User Base DN> -x
 ```
 
 The result of these queries should be a (very) long list - if you get an authentication error,
-then the details you have been given are not sufficient.
+then the details you have are not sufficient.
 
 The *User Login Attribute* key setting must match the field used in the LDAP server
 for the user's login-name. On OpenLDAP, it's generally `uid`, and on Microsoft Active Directory
@@ -345,15 +353,14 @@ confirm which setting you need.
 * *User Login Attribute*: **required** defaults to null, user login attribute (e.g., - uid or sAMAccountName)
 * *Search User DN*: **required** defaults to null, search user DN (e.g., - domain\username)
 * *Search User Password*: **required** defaults to null, search user password
-* A *DTR Registry User filter*: allowing you to either
-* * *Allow all authenticated users* to push or pull any images, or
-* * *Filter LDAP search results*: which allows you to restrict DTR registry pull and push to users matching the LDAP filter,
-* * *Whitelist usernames*: which allows you to restrict DTR registry pull and push to the listed set of users.
-* A *DTR website Administrator filter*, allowing you to either
-* * *Allow all authenticated users*: to log into the DTR admin web interface, or
-* * *Filter LDAP search results*: which allows you to restrict DTR admin web access to users matching the LDAP filter,
-* * *Whitelist usernames*: which allows you to restrict access to the web interface to the listed set of users.
-
+* *User Search filters*: allowing you to configure LDAP queries to limit the users that have the roles:
+* * *User Filter*: This filter is used to select the objects to use as candidates for the role filters
+* * *Admin Role Filter*: Combined with the "User Filter" to specify users with the
+    "Admin" role - permitted to access the DTR web UI
+* * *Read-Write Role Filter*: Combined with the "User Filter" to specify users permitted to
+    push images to, and pull images from DTR
+* * *Read-Only Role Filter*: Combined with the "User Filter" to specify users permitted to
+    pull images from DTR
 
 ## Next Steps
 
