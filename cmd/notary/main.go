@@ -75,8 +75,6 @@ func main() {
 	}
 
 	NotaryCmd.AddCommand(cmdKeys, cmdTuf)
-	cmdKeys.AddCommand(cmdKeysTrust, cmdKeysList, cmdKeysRemove)
-	cmdTuf.AddCommand(cmdTufInit, cmdTufAdd, cmdTufRemove, cmdTufPush, cmdTufLookup, cmdTufList)
 
 	NotaryCmd.Execute()
 }
