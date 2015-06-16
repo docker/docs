@@ -8,9 +8,45 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
+	"net/http"
+	"net/url"
 	"path"
 	"path/filepath"
 )
+
+// GetCertFromURL tries to get a X509 certificate given a HTTPS URL
+func GetCertFromURL(urlStr string) (*x509.Certificate, error) {
+	url, err := url.Parse(urlStr)
+	if err != nil {
+		return nil, err
+	}
+
+	// Check if we are adding via HTTPS
+	if url.Scheme != "https" {
+		return nil, errors.New("only HTTPS URLs allowed.")
+	}
+
+	// Download the certificate and write to directory
+	resp, err := http.Get(url.String())
+	if err != nil {
+		return nil, err
+	}
+
+	// Copy the content to certBytes
+	defer resp.Body.Close()
+	certBytes, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	// Try to extract the first valid PEM certificate from the bytes
+	cert, err := loadCertFromPEM(certBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	return cert, nil
+}
 
 // saveCertificate is an utility function that saves a certificate as a PEM
 // encoded block to a file.

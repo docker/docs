@@ -4,9 +4,6 @@ import (
 	"crypto/x509"
 	"encoding/pem"
 	"errors"
-	"io/ioutil"
-	"net/http"
-	"net/url"
 )
 
 // X509MemStore implements X509Store as an in-memory object with no persistence
@@ -113,40 +110,6 @@ func (s X509MemStore) AddCertFromPEM(pemCerts []byte) error {
 // AddCertFromFile tries to adds a X509 certificate to the store given a filename
 func (s X509MemStore) AddCertFromFile(originFilname string) error {
 	cert, err := loadCertFromFile(originFilname)
-	if err != nil {
-		return err
-	}
-
-	return s.AddCert(cert)
-}
-
-// AddCertFromURL tries to adds a X509 certificate to the store given a HTTPS URL
-func (s X509MemStore) AddCertFromURL(urlStr string) error {
-	url, err := url.Parse(urlStr)
-	if err != nil {
-		return err
-	}
-
-	// Check if we are adding via HTTPS
-	if url.Scheme != "https" {
-		return errors.New("only HTTPS URLs allowed.")
-	}
-
-	// Download the certificate and write to directory
-	resp, err := http.Get(url.String())
-	if err != nil {
-		return err
-	}
-
-	// Copy the content to certBytes
-	defer resp.Body.Close()
-	certBytes, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return err
-	}
-
-	// Try to extract the first valid PEM certificate from the bytes
-	cert, err := loadCertFromPEM(certBytes)
 	if err != nil {
 		return err
 	}

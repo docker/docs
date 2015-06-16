@@ -56,9 +56,14 @@ func init() {
 	// Ensure the existence of the CAs directory
 	createDirectory(finalcaDir)
 
-	// Load all CAs that have BasicConstrains valid, are an actual CA, aren't expired and don't use SHA1
+	// Load all CAs that aren't expired and don't use SHA1
+	// We could easily add "return cert.IsCA && cert.BasicConstraintsValid" in order
+	// to have only valid CA certificates being loaded
 	caStore = trustmanager.NewX509FilteredFileStore(finalcaDir, func(cert *x509.Certificate) bool {
-		return cert.IsCA && cert.BasicConstraintsValid && time.Now().Before(cert.NotAfter) && cert.SignatureAlgorithm != x509.SHA1WithRSA && cert.SignatureAlgorithm != x509.DSAWithSHA1 && cert.SignatureAlgorithm != x509.ECDSAWithSHA1
+		return time.Now().Before(cert.NotAfter) &&
+			cert.SignatureAlgorithm != x509.SHA1WithRSA &&
+			cert.SignatureAlgorithm != x509.DSAWithSHA1 &&
+			cert.SignatureAlgorithm != x509.ECDSAWithSHA1
 	})
 }
 
@@ -76,8 +81,7 @@ func main() {
 }
 
 func fatalf(format string, args ...interface{}) {
-	fmt.Println("* fatal: ", format)
-	fmt.Println(args...)
+	fmt.Printf("* fatal: "+format+"\n", args...)
 	os.Exit(1)
 }
 

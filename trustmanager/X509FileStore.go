@@ -3,9 +3,6 @@ package trustmanager
 import (
 	"crypto/x509"
 	"errors"
-	"io/ioutil"
-	"net/http"
-	"net/url"
 	"os"
 	"path"
 )
@@ -152,43 +149,6 @@ func (s X509FileStore) AddCertFromFile(originFilname string) error {
 	}
 
 	filename := s.genDestinationCertFilename(cert, originFilname)
-
-	return s.addNamedCert(cert, filename)
-}
-
-// AddCertFromURL tries to adds a X509 certificate to the store given a HTTPS URL
-func (s X509FileStore) AddCertFromURL(urlStr string) error {
-	url, err := url.Parse(urlStr)
-	if err != nil {
-		return err
-	}
-
-	// Check if we are adding via HTTPS
-	if url.Scheme != "https" {
-		return errors.New("only HTTPS URLs allowed.")
-	}
-
-	// Download the certificate and write to directory
-	resp, err := http.Get(url.String())
-	if err != nil {
-		return err
-	}
-
-	// Copy the content to certBytes
-	defer resp.Body.Close()
-	certBytes, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return err
-	}
-
-	// Try to extract the first valid PEM certificate from the bytes
-	cert, err := loadCertFromPEM(certBytes)
-	if err != nil {
-		return err
-	}
-
-	// Generate a unique destination URL based on the path
-	filename := s.genDestinationCertFilename(cert, url.Path)
 
 	return s.addNamedCert(cert, filename)
 }

@@ -1,35 +1,49 @@
 package main
 
 import (
+	"fmt"
 	"net/url"
 	"os"
 
+	"github.com/docker/vetinari/trustmanager"
 	"github.com/spf13/cobra"
 )
 
 var cmdtrust = &cobra.Command{
-	Use:   "trust [path/url of certificate to add]",
+	Use:   "trust [ QDN ] [ certificate ]",
 	Short: "Trusts a new certificate for a specific QDN.",
-	Long:  "Adds a the certificate to the trusted certificate authority list for the specified QDN",
+	Long:  "Adds a the certificate to the trusted certificate authority list for the specified Qualified Docker Name.",
 	Run:   trust,
 }
 
 func trust(cmd *cobra.Command, args []string) {
-	if len(args) < 1 {
+	if len(args) < 2 {
 		cmd.Usage()
-		fatalf("must specify a URL or file.")
+		fatalf("not enough arguments provided")
 	}
 
+	qualifiedDN := args[0]
+	certLocationStr := args[1]
 	// Verify if argument is a valid URL
-	url, err := url.Parse(args[0])
+	url, err := url.Parse(certLocationStr)
 	if err == nil && url.Scheme != "" {
-		err = caStore.AddCertFromURL(args[0])
+
+		cert, err := trustmanager.GetCertFromURL(certLocationStr)
 		if err != nil {
-			fatalf("error adding certificate to CA Store: %v", err)
+			fatalf("error retreiving certificate from url (%s): %v", certLocationStr, err)
 		}
-		// Verify is argument is a valid file
-	} else if _, err := os.Stat(args[0]); err == nil {
-		if err := caStore.AddCertFromFile(args[0]); err != nil {
+		err = cert.VerifyHostname(qualifiedDN)
+		if err != nil {
+			fatalf("certificate does not match the Qualified Docker Name: %v", err)
+		}
+		err = caStore.AddCert(cert)
+		if err != nil {
+			fatalf("error adding certificate from file: %v", err)
+		}
+
+		fmt.Println(string(cert.RawSubject))
+	} else if _, err := os.Stat(certLocationStr); err == nil {
+		if err := caStore.AddCertFromFile(certLocationStr); err != nil {
 			fatalf("error adding certificate from file: %v", err)
 		}
 	} else {

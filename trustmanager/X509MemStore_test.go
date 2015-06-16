@@ -13,7 +13,7 @@ import (
 
 func TestAddCert(t *testing.T) {
 	// Read certificate from file
-	b, err := ioutil.ReadFile("../fixtures/trustmanager/root-ca.crt")
+	b, err := ioutil.ReadFile("../fixtures/notary/root-ca.crt")
 	if err != nil {
 		t.Fatalf("couldn't load fixture: %v", err)
 	}
@@ -46,7 +46,7 @@ func TestAddCert(t *testing.T) {
 
 func TestAddCertFromFile(t *testing.T) {
 	store := trustmanager.NewX509MemStore()
-	err := store.AddCertFromFile("../fixtures/trustmanager/root-ca.crt")
+	err := store.AddCertFromFile("../fixtures/notary/root-ca.crt")
 	if err != nil {
 		t.Fatalf("failed to load certificate from file: %v", err)
 	}
@@ -57,7 +57,7 @@ func TestAddCertFromFile(t *testing.T) {
 }
 
 func TestAddCertFromPEM(t *testing.T) {
-	b, err := ioutil.ReadFile("../fixtures/trustmanager/root-ca.crt")
+	b, err := ioutil.ReadFile("../fixtures/notary/root-ca.crt")
 	if err != nil {
 		t.Fatalf("couldn't load fixture: %v", err)
 	}
@@ -73,13 +73,8 @@ func TestAddCertFromPEM(t *testing.T) {
 	}
 }
 
-// (diogo): Mock GET request and create test for AddCertFromURL
-func TestAddCertFromURL(t *testing.T) {
-	t.Skip("")
-}
-
 func TestRemoveCert(t *testing.T) {
-	b, err := ioutil.ReadFile("../fixtures/trustmanager/root-ca.crt")
+	b, err := ioutil.ReadFile("../fixtures/notary/root-ca.crt")
 	if err != nil {
 		t.Fatalf("couldn't load fixture: %v", err)
 	}
@@ -117,7 +112,7 @@ func TestRemoveCert(t *testing.T) {
 
 func TestInexistentGetCertificateBySKID(t *testing.T) {
 	store := trustmanager.NewX509MemStore()
-	err := store.AddCertFromFile("../fixtures/trustmanager/root-ca.crt")
+	err := store.AddCertFromFile("../fixtures/notary/root-ca.crt")
 	if err != nil {
 		t.Fatalf("failed to load certificate from file: %v", err)
 	}
@@ -129,7 +124,7 @@ func TestInexistentGetCertificateBySKID(t *testing.T) {
 }
 
 func TestGetCertificateBySKID(t *testing.T) {
-	b, err := ioutil.ReadFile("../fixtures/trustmanager/root-ca.crt")
+	b, err := ioutil.ReadFile("../fixtures/notary/root-ca.crt")
 	if err != nil {
 		t.Fatalf("couldn't load fixture: %v", err)
 	}
@@ -172,7 +167,7 @@ func TestGetVerifyOpsErrorsWithoutCerts(t *testing.T) {
 func TestVerifyLeafCertFromIntermediate(t *testing.T) {
 	// Create a store and add a root
 	store := trustmanager.NewX509MemStore()
-	err := store.AddCertFromFile("../fixtures/trustmanager/ca.crt")
+	err := store.AddCertFromFile("../fixtures/notary/ca.crt")
 	if err != nil {
 		t.Fatalf("failed to load certificate from file: %v", err)
 	}
@@ -181,7 +176,7 @@ func TestVerifyLeafCertFromIntermediate(t *testing.T) {
 	opts, err := store.GetVerifyOptions("secure.docker.com")
 
 	// Get leaf certificate
-	b, err := ioutil.ReadFile("../fixtures/trustmanager/secure.docker.com.crt")
+	b, err := ioutil.ReadFile("../fixtures/notary/secure.docker.com.crt")
 	if err != nil {
 		t.Fatalf("couldn't load fixture: %v", err)
 	}
@@ -203,7 +198,7 @@ func TestVerifyLeafCertFromIntermediate(t *testing.T) {
 func TestVerifyIntermediateFromRoot(t *testing.T) {
 	// Create a store and add a root
 	store := trustmanager.NewX509MemStore()
-	err := store.AddCertFromFile("../fixtures/trustmanager/root-ca.crt")
+	err := store.AddCertFromFile("../fixtures/notary/root-ca.crt")
 	if err != nil {
 		t.Fatalf("failed to load certificate from file: %v", err)
 	}
@@ -212,7 +207,7 @@ func TestVerifyIntermediateFromRoot(t *testing.T) {
 	opts, err := store.GetVerifyOptions("Docker CA")
 
 	// Get leaf certificate
-	b, err := ioutil.ReadFile("../fixtures/trustmanager/ca.crt")
+	b, err := ioutil.ReadFile("../fixtures/notary/ca.crt")
 	if err != nil {
 		t.Fatalf("couldn't load fixture: %v", err)
 	}
@@ -237,7 +232,7 @@ func TestNewX509FilteredMemStore(t *testing.T) {
 	})
 
 	// AddCert should succeed because this is a CA being added
-	err := store.AddCertFromFile("../fixtures/trustmanager/root-ca.crt")
+	err := store.AddCertFromFile("../fixtures/notary/root-ca.crt")
 	if err != nil {
 		t.Fatalf("failed to load certificate from file: %v", err)
 	}
@@ -247,7 +242,7 @@ func TestNewX509FilteredMemStore(t *testing.T) {
 	}
 
 	// AddCert should fail because this is a leaf cert being added
-	err = store.AddCertFromFile("../fixtures/trustmanager/secure.docker.com.crt")
+	err = store.AddCertFromFile("../fixtures/notary/secure.docker.com.crt")
 	if err == nil {
 		t.Fatalf("was expecting non-CA certificate to be rejected")
 	}
@@ -256,7 +251,7 @@ func TestNewX509FilteredMemStore(t *testing.T) {
 func TestGetCertificatePool(t *testing.T) {
 	// Create a store and add a root
 	store := trustmanager.NewX509MemStore()
-	err := store.AddCertFromFile("../fixtures/trustmanager/root-ca.crt")
+	err := store.AddCertFromFile("../fixtures/notary/root-ca.crt")
 	if err != nil {
 		t.Fatalf("failed to load certificate from file: %v", err)
 	}

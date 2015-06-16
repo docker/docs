@@ -9,7 +9,6 @@ type X509Store interface {
 	AddCert(cert *x509.Certificate) error
 	AddCertFromPEM(pemCerts []byte) error
 	AddCertFromFile(filename string) error
-	AddCertFromURL(urlStr string) error
 	RemoveCert(cert *x509.Certificate) error
 	GetCertificateBySKID(hexSKID string) (*x509.Certificate, error)
 	GetCertificates() []*x509.Certificate

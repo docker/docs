@@ -6,12 +6,15 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var cmdRemove = &cobra.Command{
-	Use:   "remove [ Subject Key ID ]",
-	Short: "removes trust from a specific certificate authority or certificate",
-	Long:  "remove trust from a specific certificate authority.",
-	Run:   remove,
-}
+var (
+	subjectKeyID string
+	cmdRemove    = &cobra.Command{
+		Use:   "remove [ Subject Key ID ]",
+		Short: "removes trust from a specific certificate authority or certificate",
+		Long:  "remove trust from a specific certificate authority.",
+		Run:   remove,
+	}
+)
 
 func remove(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
