@@ -19,9 +19,9 @@ ${PREFIX}/bin/vetinari-server: version/version.go $(shell find . -type f -name '
 	@echo "+ $@"
 	@go build -o $@ ${GO_LDFLAGS} ./cmd/vetinari-server
 
-${PREFIX}/bin/trustmanager: version/version.go $(shell find . -type f -name '*.go')
+${PREFIX}/bin/notary: version/version.go $(shell find . -type f -name '*.go')
 	@echo "+ $@"
-	@go build -o $@ ${GO_LDFLAGS} ./cmd/trustmanager
+	@go build -o $@ ${GO_LDFLAGS} ./cmd/notary
 
 vet:
 	@echo "+ $@"
@@ -53,9 +53,9 @@ protos:
 clean-protos:
 	@rm proto/*.pb.go
 
-binaries: ${PREFIX}/bin/vetinari-server ${PREFIX}/bin/trustmanager
+binaries: ${PREFIX}/bin/vetinari-server ${PREFIX}/bin/notary
 	@echo "+ $@"
 
 clean:
 	@echo "+ $@"
-	@rm -rf "${PREFIX}/bin/vetinari-server" "${PREFIX}/bin/trustmanager"
+	@rm -rf "${PREFIX}/bin/vetinari-server" "${PREFIX}/bin/notary"
