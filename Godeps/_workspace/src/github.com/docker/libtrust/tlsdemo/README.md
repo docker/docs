@@ -47,4 +47,4 @@ The file `gencert.go` can be used to generate PEM encoded version of the client 
 
 ```
 curl --cert cert.pem --key key.pem -k https://localhost:8888
-```
+``` 

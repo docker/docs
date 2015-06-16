@@ -15,3 +15,4 @@ Trust servers are used as the authorities of the trust graph and allow caching p
 
 Code and documentation copyright 2014 Docker, inc. Code released under the Apache 2.0 license.
 Docs released under Creative commons.
+

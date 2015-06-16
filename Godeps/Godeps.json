@@ -2,7 +2,8 @@
 	"ImportPath": "github.com/docker/vetinari",
 	"GoVersion": "go1.4.2",
 	"Packages": [
-		"./..."
+		"github.com/docker/vetinari/cmd/notary",
+		"github.com/docker/vetinari/cmd/vetinari-server"
 	],
 	"Deps": [
 		{
@@ -12,6 +13,15 @@
 		},
 		{
 			"ImportPath": "github.com/Sirupsen/logrus",
+			"Rev": "55eb11d21d2a31a3cc93838241d04800f52e823d"
+		},
+		{
+			"ImportPath": "github.com/BurntSushi/toml",
+			"Rev": "bd2bdf7f18f849530ef7a1c29a4290217cab32a1"
+		},
+		{
+			"ImportPath": "github.com/Sirupsen/logrus",
+			"Comment": "v0.7.3",
 			"Rev": "55eb11d21d2a31a3cc93838241d04800f52e823d"
 		},
 		{
@@ -52,6 +62,48 @@
 		{
 			"ImportPath": "github.com/endophage/gotuf/errors",
 			"Rev": "930a4e1cc71f866a412aea60c960ee4345f0c76a"
+		},
+		{
+			"ImportPath": "github.com/inconshreveable/mousetrap",
+			"Rev": "76626ae9c91c4f2a10f34cad8ce83ea42c93bb75"
+		},
+		{
+			"ImportPath": "github.com/kr/pretty",
+			"Comment": "go.weekly.2011-12-22-18-gbc9499c",
+			"Rev": "bc9499caa0f45ee5edb2f0209fbd61fbf3d9018f"
+		},
+		{
+			"ImportPath": "github.com/kr/text",
+			"Rev": "6807e777504f54ad073ecef66747de158294b639"
+		},
+		{
+			"ImportPath": "github.com/magiconair/properties",
+			"Comment": "v1.5.3",
+			"Rev": "624009598839a9432bd97bb75552389422357723"
+		},
+		{
+			"ImportPath": "github.com/mitchellh/mapstructure",
+			"Rev": "2caf8efc93669b6c43e0441cdc6aed17546c96f3"
+		},
+		{
+			"ImportPath": "github.com/spf13/cast",
+			"Rev": "4d07383ffe94b5e5a6fa3af9211374a4507a0184"
+		},
+		{
+			"ImportPath": "github.com/spf13/cobra",
+			"Rev": "312092086bed4968099259622145a0c9ae280064"
+		},
+		{
+			"ImportPath": "github.com/spf13/jwalterweatherman",
+			"Rev": "3d60171a64319ef63c78bd45bd60e6eab1e75f8b"
+		},
+		{
+			"ImportPath": "github.com/spf13/pflag",
+			"Rev": "5644820622454e71517561946e3d94b9f9db6842"
+		},
+		{
+			"ImportPath": "github.com/spf13/viper",
+			"Rev": "be5ff3e4840cf692388bde7a057595a474ef379e"
 		},
 		{
 			"ImportPath": "github.com/endophage/gotuf/keys",
@@ -101,6 +153,10 @@
 		{
 			"ImportPath": "google.golang.org/grpc",
 			"Rev": "97f42dd262e97f4632986eddbc74c19fa022ea08"
+		},
+		{
+			"ImportPath": "gopkg.in/yaml.v2",
+			"Rev": "bef53efd0c76e49e6de55ead051f886bea7e9420"
 		}
 	]
 }

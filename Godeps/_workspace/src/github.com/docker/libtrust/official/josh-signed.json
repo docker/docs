@@ -1,0 +1,35 @@
+{
+   "revocations": [],
+   "grants": [
+      {
+         "subject": "/library",
+         "permission": 15,
+         "grantee": "LYRA:YAG2:QQKS:376F:QQXY:3UNK:SXH7:K6ES:Y5AU:XUN5:ZLVY:KBYL"
+      },
+      {
+         "subject": "/library",
+         "permission": 15,
+         "grantee": "OIH7:HQFS:44FK:45VB:3B53:OIAG:TPL4:ATF5:6PNE:MGHN:NHQX:2GE4"
+      },
+      {
+         "subject": "/library",
+         "permission": 15,
+         "grantee": "PTC6:ABN6:Q4GG:GAAP:ZI7C:4TVD:NERQ:IWSC:UWVO:4HUK:DSI6:4NKD"
+      }
+   ],
+   "expiration": "2017-03-19T19:30:00.894517334Z",
+   "issuedAt": "2015-03-19T19:30:00.894517667Z",
+   "signatures": [
+      {
+         "header": {
+            "alg": "ES256",
+            "x5c": [
+               "MIIBnTCCAUSgAwIBAgIBAjAKBggqhkjOPQQDAjBGMUQwQgYDVQQDEztPUUlTOkcyQjQ6UDdRQjpHM1pJOlRIUE46WklUTTpVRFAyOlY3WlM6VVM2SDpDVUxEOlJJWkI6WDdQSTAeFw0xNDA5MTIyMzA3NTNaFw0xNDEyMTEyMzA3NTRaMEYxRDBCBgNVBAMTO1c1MlY6QldDUTpPVVk2OklRNU46WDVYRzpNN0tKOkdYNlA6VFdNUTpaRkhKOk02MzI6SzIzVjpYRjQ1MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEG9rANGMaOxoZ4XzItNBpqrzZLe/hyMY/hnlXARER0rbEp5B5yl5sDYaXEI80VgpUGNvleFOVc7yN3rclT14tm6MjMCEwDgYDVR0PAQH/BAQDAgCAMA8GA1UdEwEB/wQFMAMBAf8wCgYIKoZIzj0EAwIDRwAwRAIgQhkTTERnf/+2i1hM+hHivMngiciCQgqdcxo1UeK53fkCIDzml+Gk4oAFGGcsO3wdHqbxfjyGkNr8hxfuWoq6Wl3U",
+               "MIIBnjCCAUSgAwIBAgIBATAKBggqhkjOPQQDAjBGMUQwQgYDVQQDEztHVzRGOkdTN1A6MjJLWTpTUVhNOkZJNzQ6U1FCUzpLUlhSOlY0VFI6SUc2UTo3TkxMOk9KSVM6M1hYSjAeFw0xNDA5MTIyMzA3NTNaFw0xNDEyMTEyMzA3NTRaMEYxRDBCBgNVBAMTO09RSVM6RzJCNDpQN1FCOkczWkk6VEhQTjpaSVRNOlVEUDI6VjdaUzpVUzZIOkNVTEQ6UklaQjpYN1BJMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEK0pEXXaql80eo8khKBUhwg8fXwDnc+QIR3CB86JnCViEWskUrBmQZvdc8JTDtxBCvfs9nG7yZ8UwRaw6G9QdUqMjMCEwDgYDVR0PAQH/BAQDAgAGMA8GA1UdEwEB/wQFMAMBAf8wCgYIKoZIzj0EAwIDSAAwRQIgCA6aCc66+d2/yz47PmvvZy+GDudWXFxD6plt2KUtuGsCIQDykk/gYQ5MfIUlS8O+UEAwY7okfz6DxlpFGMVSO57gEg=="
+            ]
+         },
+         "signature": "KjhqAzsjY87dEyVdQkGoMgJciUalpFla1bno6KnZR6irMhfTxH_qwP69VAqPRrhHV5UdplAeKCDgTiXI6tphFg",
+         "protected": "eyJmb3JtYXRMZW5ndGgiOjYxNiwiZm9ybWF0VGFpbCI6IkNuMCIsInRpbWUiOiIyMDE1LTAzLTE5VDE5OjMwOjAwWiJ9"
+      }
+   ]
+}
