@@ -1,7 +1,6 @@
 package trustmanager
 
 import (
-	"crypto/sha256"
 	"crypto/x509"
 	"errors"
 	"io/ioutil"
@@ -88,10 +87,6 @@ func (s X509FileStore) addNamedCert(cert *x509.Certificate, filename string) err
 	if !s.validate.Validate(cert) {
 		return errors.New("certificate validation failed")
 	}
-
-	// Overwrite every certificate SubjectKeyID with a SHA256 version.
-	subjectKeyID := sha256.Sum256(cert.Raw)
-	cert.SubjectKeyId = subjectKeyID[:]
 
 	// Add the certificate to our in-memory storage
 	s.fingerprintMap[fingerprint] = cert
