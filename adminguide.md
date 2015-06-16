@@ -92,7 +92,7 @@ other services. Handles log persistence and rotation on disk.
 * `image_storage_X`: Stores Docker images using the [Docker Registry HTTP API V2](https://github.com/docker/distribution/blob/master/doc/SPEC.md). Typically,
 multiple image storage services are used in order to provide greater uptime and
 faster, more efficient resource utilization.
-* `postgres`: A database service used to host authentication (LDAP) data.
+* `postgres`: A database service used to host authentication (LDAP) data and other datasets as needed by DTR.
 
 ## DTR system management
 
