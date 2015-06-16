@@ -2,7 +2,7 @@
 +++
 title = "Docker Trusted Registry: Admin guide"
 description = "Documentation describing administration of Docker Trusted Registry"
-keywords = ["docker, documentation, about, technology, hub,  enterprise"]
+keywords = ["docker, documentation, about, technology, hub, registry, enterprise"]
 [menu.main]
 parent="smn_dhe"
 identifier="smn_dhe_admin"
@@ -25,11 +25,11 @@ images, please visit the [User's Guide](./userguide).
 
 ![System Health page</admin/metrics/>](../assets/admin-metrics.png)
 
-The "System Health" tab displays resource utilization metrics for the DTR host
-as well as for each of its contained services. The CPU and RAM usage meters at
-the top indicate overall resource usage for the host, while detailed time-series
-charts are provided below for each service. You can mouse-over the charts or
-meters to see detailed data points.
+The "System Health" tab displays "hardware" resource utilization and network traffic metrics for the DTR host as well as for each of its contained services. The CPU and RAM usage meters at the top indicate overall resource usage for the host, while detailed time-series charts are provided below for each service.
+
+In addition, if your registry is using a filesystem storage driver, you will see a usage meter indicating used and available space on the storage volume. Third-party storage back-ends are not supported, so if you are using one, this meter will not be displayed.
+
+You can mouse-over the charts or meters to see detailed data points.
 
 Clicking on a service name (i.e., "load_balancer", "admin_server", etc.) will
 display the network, CPU, and memory (RAM) utilization data for the specified
@@ -92,6 +92,7 @@ other services. Handles log persistence and rotation on disk.
 * `image_storage_X`: Stores Docker images using the [Docker Registry HTTP API V2](https://github.com/docker/distribution/blob/master/doc/SPEC.md). Typically,
 multiple image storage services are used in order to provide greater uptime and
 faster, more efficient resource utilization.
+* `postgres`: A database service used to host authentication (LDAP) data and other datasets as needed by DTR.
 
 ## DTR system management
 
