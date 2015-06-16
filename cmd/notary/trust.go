@@ -4,23 +4,19 @@ import (
 	"net/url"
 	"os"
 
-	"github.com/codegangsta/cli"
+	"github.com/spf13/cobra"
 )
 
-var (
-	commandAdd = cli.Command{
-		Name:        "add",
-		Usage:       "Add an entry to the trusted certificate authority list.",
-		Description: "Add an entry to the trusted certificate authority list.",
-		Action:      add,
-	}
-)
+var cmdtrust = &cobra.Command{
+	Use:   "trust [path/url of certificate to add]",
+	Short: "Trusts a new certificate for a specific QDN.",
+	Long:  "Adds a the certificate to the trusted certificate authority list for the specified QDN",
+	Run:   trust,
+}
 
-func add(ctx *cli.Context) {
-	args := []string(ctx.Args())
-
+func trust(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
-		cli.ShowCommandHelp(ctx, ctx.Command.Name)
+		cmd.Usage()
 		fatalf("must specify a URL or file.")
 	}
 

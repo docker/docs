@@ -8,19 +8,17 @@ import (
 	"math"
 	"time"
 
-	"github.com/codegangsta/cli"
+	"github.com/spf13/cobra"
 )
 
-var (
-	commandList = cli.Command{
-		Name:        "list",
-		Usage:       `List the currently trusted certificate authorities.`,
-		Description: `List the currently trusted certificate authorities.`,
-		Action:      list,
-	}
-)
+var cmdList = &cobra.Command{
+	Use:   "list",
+	Short: "List the currently trusted certificate authorities.",
+	Long:  "lists the currently trusted certificate authorities.",
+	Run:   list,
+}
 
-func list(ctx *cli.Context) {
+func list(cmd *cobra.Command, args []string) {
 	// Load all the certificates
 	trustedCAs := caStore.GetCertificates()
 

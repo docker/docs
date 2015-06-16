@@ -8,7 +8,7 @@ import (
 	"path"
 	"time"
 
-	"github.com/codegangsta/cli"
+	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
 	"github.com/docker/vetinari/trustmanager"
@@ -63,17 +63,16 @@ func init() {
 }
 
 func main() {
-	app := cli.NewApp()
-	app.Name = "keymanager"
-	app.Usage = "trust keymanager"
-
-	app.Commands = []cli.Command{
-		commandAdd,
-		commandList,
-		commandRemove,
+	var NotaryCmd = &cobra.Command{
+		Use:   "notary",
+		Short: "notary creates trust for docker",
+		Long:  "notary is the main trust-related command for Docker.",
 	}
 
-	app.RunAndExitOnError()
+	NotaryCmd.AddCommand(keysCmd, tufCmd)
+	keysCmd.AddCommand(cmdtrust, cmdList, cmdRemove)
+
+	NotaryCmd.Execute()
 }
 
 func fatalf(format string, args ...interface{}) {

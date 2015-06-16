@@ -3,23 +3,19 @@ package main
 import (
 	"fmt"
 
-	"github.com/codegangsta/cli"
+	"github.com/spf13/cobra"
 )
 
-var (
-	commandRemove = cli.Command{
-		Name:        "remove",
-		Usage:       "remove trust from a specific certificate authority",
-		Description: "remove trust from a specific certificate authority.",
-		Action:      remove,
-	}
-)
+var cmdRemove = &cobra.Command{
+	Use:   "remove [ Subject Key ID ]",
+	Short: "removes trust from a specific certificate authority or certificate",
+	Long:  "remove trust from a specific certificate authority.",
+	Run:   remove,
+}
 
-func remove(ctx *cli.Context) {
-	args := []string(ctx.Args())
-
+func remove(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
-		cli.ShowCommandHelp(ctx, ctx.Command.Name)
+		cmd.Usage()
 		fatalf("must specify a SHA256 SubjectKeyID of the certificate")
 	}
 
