@@ -60,7 +60,7 @@ func (s X509FileStore) AddCert(cert *x509.Certificate) error {
 		return errors.New("adding nil Certificate to X509Store")
 	}
 
-	fingerprint := fingerprintCert(cert)
+	fingerprint := FingerprintCert(cert)
 	filename := path.Join(s.baseDir, string(fingerprint)+certExtension)
 	if err := s.addNamedCert(cert, filename); err != nil {
 		return err
@@ -76,7 +76,7 @@ func (s X509FileStore) addNamedCert(cert *x509.Certificate, filename string) err
 		return errors.New("adding nil Certificate to X509Store")
 	}
 
-	fingerprint := fingerprintCert(cert)
+	fingerprint := FingerprintCert(cert)
 
 	// Validate if we already loaded this certificate before
 	if _, ok := s.fingerprintMap[fingerprint]; ok {
@@ -109,7 +109,7 @@ func (s X509FileStore) RemoveCert(cert *x509.Certificate) error {
 		return errors.New("removing nil Certificate from X509Store")
 	}
 
-	fingerprint := fingerprintCert(cert)
+	fingerprint := FingerprintCert(cert)
 	delete(s.fingerprintMap, fingerprint)
 	filename := s.fileMap[fingerprint]
 	delete(s.fileMap, fingerprint)
@@ -228,7 +228,7 @@ func (s X509FileStore) genDestinationCertFilename(cert *x509.Certificate, source
 	// If a file with the same name already exists in the destination directory
 	// add hash to filename
 	if _, err := os.Stat(filename); err == nil {
-		fingerprint := fingerprintCert(cert)
+		fingerprint := FingerprintCert(cert)
 		// Add the certificate fingerprint to the file basename_FINGERPRINT.crt
 		filename = path.Join(s.baseDir, bName+"_"+string(fingerprint)+certExtension)
 	}

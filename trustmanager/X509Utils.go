@@ -25,7 +25,7 @@ func saveCertificate(cert *x509.Certificate, filename string) error {
 	return nil
 }
 
-func fingerprintCert(cert *x509.Certificate) ID {
+func FingerprintCert(cert *x509.Certificate) ID {
 	fingerprintBytes := sha256.Sum256(cert.Raw)
 	return ID(hex.EncodeToString(fingerprintBytes[:]))
 }

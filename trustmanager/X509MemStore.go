@@ -50,7 +50,7 @@ func (s X509MemStore) AddCert(cert *x509.Certificate) error {
 		return errors.New("certificate failed validation")
 	}
 
-	fingerprint := fingerprintCert(cert)
+	fingerprint := FingerprintCert(cert)
 
 	s.fingerprintMap[fingerprint] = cert
 	name := string(cert.RawSubject)
@@ -65,7 +65,7 @@ func (s X509MemStore) RemoveCert(cert *x509.Certificate) error {
 		return errors.New("removing nil Certificate to X509Store")
 	}
 
-	fingerprint := fingerprintCert(cert)
+	fingerprint := FingerprintCert(cert)
 	delete(s.fingerprintMap, fingerprint)
 	name := string(cert.RawSubject)
 
