@@ -17,6 +17,7 @@ import (
 const configFileName string = "config"
 const configPath string = ".docker/trust/"
 const caDir string = ".docker/trust/certificate_authorities/"
+const privDir string = ".docker/trust/private/"
 
 var caStore trustmanager.X509Store
 
@@ -49,12 +50,15 @@ func init() {
 
 	// Set up the defaults for our config
 	viper.SetDefault("caDir", path.Join(homeDir, path.Dir(caDir)))
+	viper.SetDefault("privDir", path.Join(homeDir, path.Dir(privDir)))
 
 	// Get the final value for the CA directory
 	finalcaDir := viper.GetString("caDir")
+	finalPrivDir := viper.GetString("privDir")
 
 	// Ensure the existence of the CAs directory
 	createDirectory(finalcaDir)
+	createDirectory(finalPrivDir)
 
 	// Load all CAs that aren't expired and don't use SHA1
 	// We could easily add "return cert.IsCA && cert.BasicConstraintsValid" in order
