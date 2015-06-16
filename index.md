@@ -1,5 +1,6 @@
 <!--[metadata]>
 +++
+aliases = [ "/docker-hub-enterprise/" ]
 title = "Docker Trusted Registry: Overview"
 description = "Docker Trusted Registry"
 keywords = ["docker, documentation, about, technology, understanding, enterprise, hub,  registry"]

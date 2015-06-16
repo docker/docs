@@ -5,6 +5,7 @@ description = "Installation instructions for Docker Trusted Registry"
 keywords = ["docker, documentation, about, technology, understanding, enterprise, hub,  registry"]
 [menu.main]
 parent="mn_install"
+weight=8
 +++
 <![end-metadata]-->
 
@@ -16,7 +17,7 @@ Docker Trusted Registry (DTR). DTR is installed from Docker containers. Once
 installed, you will need to select a method of securing it. This doc will
 explain the options you have for security and help you find the resources needed
 to configure it according to your chosen method. More configuration details can
-be found in the [DTR Configuration page](./configuration.md).
+be found in the [DTR Configuration page](configuration.md).
 
 Specifically, installation requires completion of these steps, in order:
 
