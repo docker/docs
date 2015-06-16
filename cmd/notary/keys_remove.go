@@ -28,7 +28,7 @@ func keysRemove(cmd *cobra.Command, args []string) {
 	}
 
 	fmt.Printf("Removing: ")
-	print_cert(cert)
+	printCert(cert)
 
 	err = caStore.RemoveCert(cert)
 	if err != nil {

@@ -23,12 +23,12 @@ func keysList(cmd *cobra.Command, args []string) {
 	trustedCAs := caStore.GetCertificates()
 
 	for _, c := range trustedCAs {
-		print_cert(c)
+		printCert(c)
 	}
 
 }
 
-func print_cert(cert *x509.Certificate) {
+func printCert(cert *x509.Certificate) {
 	timeDifference := cert.NotAfter.Sub(time.Now())
 	subjectKeyID := trustmanager.FingerprintCert(cert)
 	fmt.Printf("Certificate: %s ; Expires in: %v days; SKID: %s\n", printPkix(cert.Subject), math.Floor(timeDifference.Hours()/24), string(subjectKeyID))

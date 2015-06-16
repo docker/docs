@@ -41,7 +41,7 @@ func keysTrust(cmd *cobra.Command, args []string) {
 			fatalf("error adding certificate from file: %v", err)
 		}
 		fmt.Printf("Adding: ")
-		print_cert(cert)
+		printCert(cert)
 	} else if _, err := os.Stat(certLocationStr); err == nil {
 		if err := caStore.AddCertFromFile(certLocationStr); err != nil {
 			fatalf("error adding certificate from file: %v", err)
