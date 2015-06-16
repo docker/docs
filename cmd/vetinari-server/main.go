@@ -1,6 +1,7 @@
 package main
 
 import (
+	"database/sql"
 	_ "expvar"
 	"flag"
 	"fmt"
@@ -13,10 +14,12 @@ import (
 	"github.com/Sirupsen/logrus"
 	_ "github.com/docker/distribution/registry/auth/token"
 	"github.com/endophage/gotuf/signed"
+	_ "github.com/go-sql-driver/mysql"
 	"golang.org/x/net/context"
 
 	"github.com/docker/vetinari/config"
 	"github.com/docker/vetinari/server"
+	"github.com/docker/vetinari/server/version"
 	"github.com/docker/vetinari/signer"
 )
 
@@ -69,6 +72,12 @@ func main() {
 		trust = signed.NewEd25519()
 	}
 
+	db, err := sql.Open("mysql", "root:@/dockercondemo")
+	if err != nil {
+		logrus.Fatal("Error starting DB driver: ", err.Error())
+		return // not strictly needed but let's be explicit
+	}
+	ctx = context.WithValue(ctx, "versionStore", version.NewVersionDB(db))
 	for {
 		logrus.Info("[Vetinari] Starting Server")
 		childCtx, cancel := context.WithCancel(ctx)

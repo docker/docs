@@ -97,16 +97,17 @@ func run(ctx context.Context, addr, tlsCertFile, tlsKeyFile string, trust signed
 	}
 	tlsLsnr := tls.NewListener(lsnr, tlsConfig)
 
-	ac, err := auth.GetAccessController("token", map[string]interface{}{})
-	if err != nil {
-		return err
-	}
+	var ac auth.AccessController = nil
+	//ac, err := auth.GetAccessController("token", map[string]interface{}{})
+	//if err != nil {
+	//	return err
+	//}
 	hand := utils.RootHandlerFactory(ac, context.Background(), trust)
 
 	r := mux.NewRouter()
 	// TODO (endophage): use correct regexes for image and tag names
-	r.Methods("GET").Path("/v2/{imageName:.*}/_trust/tuf/{tufFile:(root.json|targets.json|timestamp.json|snapshot.json)}").Handler(hand(handlers.GetHandler, "pull"))
-	r.Methods("POST").Path("/v2/{imageName:.*}/_trust/tuf/{tufFile:(root.json|targets.json|timestamp.json|snapshot.json)}").Handler(hand(handlers.UpdateHandler, "push", "pull"))
+	r.Methods("GET").Path("/v2/{imageName:.*}/_trust/tuf/{tufRole:(root|targets|timestamp|snapshot)}.json").Handler(hand(handlers.GetHandler, "pull"))
+	r.Methods("POST").Path("/v2/{imageName:.*}/_trust/tuf/{tufRole:(root|targets|timestamp|snapshot)}.json").Handler(hand(handlers.UpdateHandler, "push", "pull"))
 
 	svr := NewHTTPServer(
 		http.Server{
