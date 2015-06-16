@@ -62,6 +62,11 @@
 			"Rev": "930a4e1cc71f866a412aea60c960ee4345f0c76a"
 		},
 		{
+			"ImportPath": "github.com/go-sql-driver/mysql",
+			"Comment": "v1.2-108-g66b7d5c",
+			"Rev": "66b7d5c4956096efd4c945494d64ad73f1d9ec39"
+		},
+		{
 			"ImportPath": "github.com/golang/protobuf/proto",
 			"Rev": "655cdfa588ea190e901bc5590e65d5621688847c"
 		},
