@@ -9,14 +9,14 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var cmdtrust = &cobra.Command{
+var cmdKeysTrust = &cobra.Command{
 	Use:   "trust [ QDN ] [ certificate ]",
 	Short: "Trusts a new certificate for a specific QDN.",
 	Long:  "Adds a the certificate to the trusted certificate authority list for the specified Qualified Docker Name.",
-	Run:   trust,
+	Run:   keysTrust,
 }
 
-func trust(cmd *cobra.Command, args []string) {
+func keysTrust(cmd *cobra.Command, args []string) {
 	if len(args) < 2 {
 		cmd.Usage()
 		fatalf("not enough arguments provided")
@@ -40,8 +40,8 @@ func trust(cmd *cobra.Command, args []string) {
 		if err != nil {
 			fatalf("error adding certificate from file: %v", err)
 		}
-
-		fmt.Println(string(cert.RawSubject))
+		fmt.Printf("Adding: ")
+		print_cert(cert)
 	} else if _, err := os.Stat(certLocationStr); err == nil {
 		if err := caStore.AddCertFromFile(certLocationStr); err != nil {
 			fatalf("error adding certificate from file: %v", err)

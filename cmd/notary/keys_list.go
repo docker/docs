@@ -11,18 +11,17 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var cmdList = &cobra.Command{
+var cmdKeysList = &cobra.Command{
 	Use:   "list",
 	Short: "List the currently trusted certificate authorities.",
 	Long:  "lists the currently trusted certificate authorities.",
-	Run:   list,
+	Run:   keysList,
 }
 
-func list(cmd *cobra.Command, args []string) {
+func keysList(cmd *cobra.Command, args []string) {
 	// Load all the certificates
 	trustedCAs := caStore.GetCertificates()
 
-	fmt.Println("CAs Loaded:")
 	for _, c := range trustedCAs {
 		print_cert(c)
 	}

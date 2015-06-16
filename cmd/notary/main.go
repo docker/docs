@@ -74,8 +74,9 @@ func main() {
 		Long:  "notary is the main trust-related command for Docker.",
 	}
 
-	NotaryCmd.AddCommand(keysCmd, tufCmd)
-	keysCmd.AddCommand(cmdtrust, cmdList, cmdRemove)
+	NotaryCmd.AddCommand(cmdKeys, cmdTuf)
+	cmdKeys.AddCommand(cmdKeysTrust, cmdKeysList, cmdKeysRemove)
+	cmdTuf.AddCommand(cmdTufInit, cmdTufAdd, cmdTufRemove, cmdTufPush, cmdTufLookup, cmdTufList)
 
 	NotaryCmd.Execute()
 }

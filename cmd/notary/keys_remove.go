@@ -7,16 +7,16 @@ import (
 )
 
 var (
-	subjectKeyID string
-	cmdRemove    = &cobra.Command{
+	subjectKeyID  string
+	cmdKeysRemove = &cobra.Command{
 		Use:   "remove [ Subject Key ID ]",
-		Short: "removes trust from a specific certificate authority or certificate",
+		Short: "removes trust from a specific certificate authority or certificate.",
 		Long:  "remove trust from a specific certificate authority.",
-		Run:   remove,
+		Run:   keysRemove,
 	}
 )
 
-func remove(cmd *cobra.Command, args []string) {
+func keysRemove(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
 		cmd.Usage()
 		fatalf("must specify a SHA256 SubjectKeyID of the certificate")
