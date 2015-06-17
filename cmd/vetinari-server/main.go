@@ -66,7 +66,7 @@ func main() {
 	var trust signed.CryptoService
 	if conf.TrustService.Type == "remote" {
 		logrus.Info("[Vetinari Server] : Using remote signing service")
-		trust = server.NewRufusSigner(conf.TrustService.Hostname, conf.TrustService.Port, conf.TrustService.TLSCAFile)
+		trust = signer.NewRufusSigner(conf.TrustService.Hostname, conf.TrustService.Port, conf.TrustService.TLSCAFile)
 	} else {
 		logrus.Info("[Vetinari] : Using local signing service")
 		trust = signed.NewEd25519()

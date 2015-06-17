@@ -5,13 +5,15 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"golang.org/x/net/context"
+
 	"github.com/endophage/gotuf/signed"
 
 	"github.com/docker/vetinari/utils"
 )
 
 func TestMainHandlerGet(t *testing.T) {
-	hand := utils.RootHandlerFactory(&utils.InsecureAuthorizer{}, utils.NewContext, &signed.Ed25519{})
+	hand := utils.RootHandlerFactory(nil, context.Background(), &signed.Ed25519{})
 	handler := hand(MainHandler)
 	ts := httptest.NewServer(handler)
 	defer ts.Close()
@@ -23,7 +25,7 @@ func TestMainHandlerGet(t *testing.T) {
 }
 
 func TestMainHandlerNotGet(t *testing.T) {
-	hand := utils.RootHandlerFactory(&utils.InsecureAuthorizer{}, utils.NewContext, &signed.Ed25519{})
+	hand := utils.RootHandlerFactory(nil, context.Background(), &signed.Ed25519{})
 	handler := hand(MainHandler)
 	ts := httptest.NewServer(handler)
 	defer ts.Close()

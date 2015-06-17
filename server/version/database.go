@@ -29,7 +29,7 @@ func NewVersionDB(db *sql.DB) *VersionDB {
 
 // Update multiple TUF records in a single transaction.
 // Always insert a new row. The unique constraint will ensure there is only ever
-func (vdb VersionDB) UpdateCurrent(qdn, role string, version int, data []byte) error {
+func (vdb *VersionDB) UpdateCurrent(qdn, role string, version int, data []byte) error {
 	checkStmt := "SELECT 1 FROM `tuf_files` WHERE `qdn`=? AND `role`=? AND `version`=?;"
 	insertStmt := "INSERT INTO `tuf_files` (`qdn`, `role`, `version`, `data`) VALUES (?,?,?,?) ;"
 
@@ -55,7 +55,7 @@ func (vdb VersionDB) UpdateCurrent(qdn, role string, version int, data []byte) e
 }
 
 // Get a specific TUF record
-func (vdb VersionDB) GetCurrent(qdn, tufRole string) (data []byte, err error) {
+func (vdb *VersionDB) GetCurrent(qdn, tufRole string) (data []byte, err error) {
 	stmt := "SELECT `data` FROM `tuf_files` WHERE `qdn`=? AND `role`=? ORDER BY `version` DESC LIMIT 1;"
 	rows, err := vdb.Query(stmt, qdn, tufRole) // this should be a QueryRow()
 	if err != nil {

@@ -7,8 +7,6 @@ import (
 	"encoding/pem"
 	"io/ioutil"
 	"testing"
-
-	"github.com/docker/vetinari/trustmanager"
 )
 
 func TestAddCert(t *testing.T) {
@@ -27,7 +25,7 @@ func TestAddCert(t *testing.T) {
 		t.Fatalf("couldn't parse certificate: %v", err)
 	}
 	// Create a Store and add the certificate to it
-	store := trustmanager.NewX509MemStore()
+	store := NewX509MemStore()
 	err = store.AddCert(cert)
 	if err != nil {
 		t.Fatalf("failed to load certificate: %v", err)
@@ -45,7 +43,7 @@ func TestAddCert(t *testing.T) {
 }
 
 func TestAddCertFromFile(t *testing.T) {
-	store := trustmanager.NewX509MemStore()
+	store := NewX509MemStore()
 	err := store.AddCertFromFile("../fixtures/notary/root-ca.crt")
 	if err != nil {
 		t.Fatalf("failed to load certificate from file: %v", err)
@@ -62,7 +60,7 @@ func TestAddCertFromPEM(t *testing.T) {
 		t.Fatalf("couldn't load fixture: %v", err)
 	}
 
-	store := trustmanager.NewX509MemStore()
+	store := NewX509MemStore()
 	err = store.AddCertFromPEM(b)
 	if err != nil {
 		t.Fatalf("failed to load certificate from PEM: %v", err)
@@ -86,7 +84,7 @@ func TestRemoveCert(t *testing.T) {
 		t.Fatalf("couldn't parse certificate: %v", err)
 	}
 
-	store := trustmanager.NewX509MemStore()
+	store := NewX509MemStore()
 	err = store.AddCert(cert)
 	if err != nil {
 		t.Fatalf("failed to load certificate: %v", err)
@@ -111,7 +109,7 @@ func TestRemoveCert(t *testing.T) {
 }
 
 func TestInexistentGetCertificateBySKID(t *testing.T) {
-	store := trustmanager.NewX509MemStore()
+	store := NewX509MemStore()
 	err := store.AddCertFromFile("../fixtures/notary/root-ca.crt")
 	if err != nil {
 		t.Fatalf("failed to load certificate from file: %v", err)
@@ -136,7 +134,7 @@ func TestGetCertificateBySKID(t *testing.T) {
 		t.Fatalf("couldn't parse certificate: %v", err)
 	}
 
-	store := trustmanager.NewX509MemStore()
+	store := NewX509MemStore()
 	err = store.AddCert(cert)
 	if err != nil {
 		t.Fatalf("failed to load certificate from PEM: %v", err)
@@ -155,7 +153,7 @@ func TestGetCertificateBySKID(t *testing.T) {
 
 func TestGetVerifyOpsErrorsWithoutCerts(t *testing.T) {
 	// Create empty Store
-	store := trustmanager.NewX509MemStore()
+	store := NewX509MemStore()
 
 	// Try to get VerifyOptions without certs added
 	_, err := store.GetVerifyOptions("docker.com")
@@ -166,7 +164,7 @@ func TestGetVerifyOpsErrorsWithoutCerts(t *testing.T) {
 
 func TestVerifyLeafCertFromIntermediate(t *testing.T) {
 	// Create a store and add a root
-	store := trustmanager.NewX509MemStore()
+	store := NewX509MemStore()
 	err := store.AddCertFromFile("../fixtures/notary/ca.crt")
 	if err != nil {
 		t.Fatalf("failed to load certificate from file: %v", err)
@@ -197,7 +195,7 @@ func TestVerifyLeafCertFromIntermediate(t *testing.T) {
 
 func TestVerifyIntermediateFromRoot(t *testing.T) {
 	// Create a store and add a root
-	store := trustmanager.NewX509MemStore()
+	store := NewX509MemStore()
 	err := store.AddCertFromFile("../fixtures/notary/root-ca.crt")
 	if err != nil {
 		t.Fatalf("failed to load certificate from file: %v", err)
@@ -227,7 +225,7 @@ func TestVerifyIntermediateFromRoot(t *testing.T) {
 }
 
 func TestNewX509FilteredMemStore(t *testing.T) {
-	store := trustmanager.NewX509FilteredMemStore(func(cert *x509.Certificate) bool {
+	store := NewX509FilteredMemStore(func(cert *x509.Certificate) bool {
 		return cert.IsCA
 	})
 
@@ -250,7 +248,7 @@ func TestNewX509FilteredMemStore(t *testing.T) {
 
 func TestGetCertificatePool(t *testing.T) {
 	// Create a store and add a root
-	store := trustmanager.NewX509MemStore()
+	store := NewX509MemStore()
 	err := store.AddCertFromFile("../fixtures/notary/root-ca.crt")
 	if err != nil {
 		t.Fatalf("failed to load certificate from file: %v", err)
