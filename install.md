@@ -26,11 +26,8 @@ Specifically, installation requires completion of these steps, in order:
 3. Install DTR
 4. Add your license to your DTR instance
 
-> **Note:** This initial release of DTR has limited access. To get access,
-> you will need an account on [Docker Hub](https://hub.docker.com/). Once you're
-> logged in to the Hub with your account, visit the
-> [early access registration page](https://registry.hub.docker.com/earlyaccess/)
-> and follow the steps there to get signed up.
+ <!-- TODO > **Note:** To get your copy of DTR, visit [the Hub Subscriptions page](hub.docker.com/subscriptions/). -->
+
 
 ## Licensing
 
@@ -52,7 +49,7 @@ Ubuntu 14.04 LTS, RHEL 7.1 or RHEL 7.0 host. (See below for instructions on how
 to install the commercially supported Docker Engine.)
 
 > **Note:** In order to remain in compliance with your DTR support agreement,
-> you must use the current version of commercially supported Docker Engine.
+> you **must** use the current version of commercially supported Docker Engine.
 > Running the regular, open source version of Engine is **not** supported.
 
 * Your Docker daemon needs to be listening to the Unix socket (the default) so
@@ -70,8 +67,8 @@ that obtained an Enterprise license).
 ## Installing the Commercially Supported Docker Engine
 
 Since DTR is installed using Docker, the commercially supported Docker Engine
-must be installed first. This is done with an RPM or DEB repository, which you
-set up using a Bash script downloaded from the [Docker Hub](https://hub.docker.com).
+**must be** installed first. This is done with an RPM or DEB repository, which you set up using a Bash script downloaded from the 
+[Docker Hub](https://hub.docker.com).
 
 ### Download the commercially supported Docker Engine installation script
 
