@@ -98,13 +98,13 @@ func NewFileMeta(r io.Reader, hashAlgorithms ...string) (FileMeta, error) {
 }
 
 type Delegations struct {
-	Keys  map[string]*TUFKey `json:"keys"`
-	Roles []*Role            `json:"roles"`
+	Keys  map[string]*PublicKey `json:"keys"`
+	Roles []*Role               `json:"roles"`
 }
 
 func NewDelegations() *Delegations {
 	return &Delegations{
-		Keys:  make(map[string]*TUFKey),
+		Keys:  make(map[string]*PublicKey),
 		Roles: make([]*Role, 0),
 	}
 }

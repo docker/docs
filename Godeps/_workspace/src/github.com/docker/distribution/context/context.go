@@ -1,7 +1,7 @@
 package context
 
 import (
-	"github.com/docker/distribution/uuid"
+	"code.google.com/p/go-uuid/uuid"
 	"golang.org/x/net/context"
 )
 
@@ -27,7 +27,7 @@ func (ic *instanceContext) Value(key interface{}) interface{} {
 
 var background = &instanceContext{
 	Context: context.Background(),
-	id:      uuid.Generate().String(),
+	id:      uuid.New(),
 }
 
 // Background returns a non-nil, empty Context. The background context

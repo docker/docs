@@ -80,7 +80,7 @@ func (t *SignedTargets) AddTarget(path string, meta FileMeta) {
 	t.Dirty = true
 }
 
-func (t *SignedTargets) AddDelegation(role *Role, keys []*TUFKey) error {
+func (t *SignedTargets) AddDelegation(role *Role, keys []*PublicKey) error {
 	return nil
 }
 

@@ -1,0 +1,78 @@
+{
+	"ImportPath": "github.com/endophage/gotuf",
+	"GoVersion": "go1.4.2",
+	"Packages": [
+		"./..."
+	],
+	"Deps": [
+		{
+			"ImportPath": "code.google.com/p/gosqlite/sqlite3",
+			"Comment": "null-16",
+			"Rev": "74691fb6f83716190870cde1b658538dd4b18eb0"
+		},
+		{
+			"ImportPath": "github.com/Sirupsen/logrus",
+			"Comment": "v0.7.3",
+			"Rev": "55eb11d21d2a31a3cc93838241d04800f52e823d"
+		},
+		{
+			"ImportPath": "github.com/agl/ed25519",
+			"Rev": "d2b94fd789ea21d12fac1a4443dd3a3f79cda72c"
+		},
+		{
+			"ImportPath": "github.com/codegangsta/cli",
+			"Comment": "1.2.0-66-g6086d79",
+			"Rev": "6086d7927ec35315964d9fea46df6c04e6d697c1"
+		},
+		{
+			"ImportPath": "github.com/docker/docker/pkg/term",
+			"Comment": "v1.4.1-775-g70fbd45",
+			"Rev": "70fbd45a5c88f6f39a07b04f81a07721bf5f3eed"
+		},
+		{
+			"ImportPath": "github.com/docker/rufus/keys",
+			"Rev": "17e4b530d71b9222dc043c80987cbde254edcc2a"
+		},
+		{
+			"ImportPath": "github.com/dustin/go-humanize",
+			"Rev": "145fabdb1ab757076a70a886d092a3af27f66f4c"
+		},
+		{
+			"ImportPath": "github.com/flynn/go-docopt",
+			"Comment": "0.6.1-rc2-26-gf6dd2eb",
+			"Rev": "f6dd2ebbb31e9721c860cf1faf5c944aa73e3844"
+		},
+		{
+			"ImportPath": "github.com/miekg/pkcs11",
+			"Rev": "88c9f842544e629ec046105d7fb50d5daafae737"
+		},
+		{
+			"ImportPath": "github.com/tent/canonical-json-go",
+			"Rev": "96e4ba3a7613a1216cbd1badca4efe382adea337"
+		},
+		{
+			"ImportPath": "golang.org/x/crypto/nacl/secretbox",
+			"Rev": "bfc286917c5fcb7420d7e3092b50bbfd31b38a98"
+		},
+		{
+			"ImportPath": "golang.org/x/crypto/pbkdf2",
+			"Rev": "bfc286917c5fcb7420d7e3092b50bbfd31b38a98"
+		},
+		{
+			"ImportPath": "golang.org/x/crypto/poly1305",
+			"Rev": "bfc286917c5fcb7420d7e3092b50bbfd31b38a98"
+		},
+		{
+			"ImportPath": "golang.org/x/crypto/salsa20/salsa",
+			"Rev": "bfc286917c5fcb7420d7e3092b50bbfd31b38a98"
+		},
+		{
+			"ImportPath": "golang.org/x/crypto/scrypt",
+			"Rev": "bfc286917c5fcb7420d7e3092b50bbfd31b38a98"
+		},
+		{
+			"ImportPath": "gopkg.in/check.v1",
+			"Rev": "64131543e7896d5bcc6bd5a76287eb75ea96c673"
+		}
+	]
+}

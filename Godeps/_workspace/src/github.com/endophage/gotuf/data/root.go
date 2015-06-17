@@ -13,15 +13,15 @@ type SignedRoot struct {
 }
 
 type Root struct {
-	Type               string               `json:"_type"`
-	Version            int                  `json:"version"`
-	Expires            string               `json:"expires"`
-	Keys               map[string]*TUFKey   `json:"keys"`
-	Roles              map[string]*RootRole `json:"roles"`
-	ConsistentSnapshot bool                 `json:"consistent_snapshot"`
+	Type               string                `json:"_type"`
+	Version            int                   `json:"version"`
+	Expires            string                `json:"expires"`
+	Keys               map[string]*PublicKey `json:"keys"`
+	Roles              map[string]*RootRole  `json:"roles"`
+	ConsistentSnapshot bool                  `json:"consistent_snapshot"`
 }
 
-func NewRoot(keys map[string]*TUFKey, roles map[string]*RootRole, consistent bool) (*SignedRoot, error) {
+func NewRoot(keys map[string]*PublicKey, roles map[string]*RootRole, consistent bool) (*SignedRoot, error) {
 	return &SignedRoot{
 		Signatures: make([]Signature, 0),
 		Signed: Root{

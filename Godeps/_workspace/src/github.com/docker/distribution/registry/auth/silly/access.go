@@ -66,7 +66,7 @@ func (ac *accessController) Authorized(ctx context.Context, accessRecords ...aut
 		return nil, &challenge
 	}
 
-	return auth.WithUser(ctx, auth.UserInfo{Name: "silly"}), nil
+	return context.WithValue(ctx, "auth.user", auth.UserInfo{Name: "silly"}), nil
 }
 
 type challenge struct {

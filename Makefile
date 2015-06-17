@@ -17,11 +17,11 @@ version/version.go:
 
 ${PREFIX}/bin/vetinari-server: version/version.go $(shell find . -type f -name '*.go')
 	@echo "+ $@"
-	@go build -o $@ ${GO_LDFLAGS} ./cmd/vetinari-server
+	@godep go build -o $@ ${GO_LDFLAGS} ./cmd/vetinari-server
 
 ${PREFIX}/bin/notary: version/version.go $(shell find . -type f -name '*.go')
 	@echo "+ $@"
-	@go build -o $@ ${GO_LDFLAGS} ./cmd/notary
+	@godep go build -o $@ ${GO_LDFLAGS} ./cmd/notary
 
 vet:
 	@echo "+ $@"

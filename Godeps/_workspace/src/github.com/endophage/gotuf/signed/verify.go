@@ -46,8 +46,8 @@ func Verify(s *data.Signed, role string, minVersion int, db *keys.KeyDB) error {
 		return ErrWrongType
 	}
 	if IsExpired(sm.Expires) {
-		//logrus.Errorf("Metadata for %s expired", role)
-		//return ErrExpired{sm.Expires}
+		logrus.Errorf("Metadata for %s expired", role)
+		return ErrExpired{sm.Expires}
 	}
 	if sm.Version < minVersion {
 		return ErrLowVersion{sm.Version, minVersion}

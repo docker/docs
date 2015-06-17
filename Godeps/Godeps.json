@@ -2,18 +2,13 @@
 	"ImportPath": "github.com/docker/vetinari",
 	"GoVersion": "go1.4.2",
 	"Packages": [
-		"github.com/docker/vetinari/cmd/notary",
-		"github.com/docker/vetinari/cmd/vetinari-server"
+		"./..."
 	],
 	"Deps": [
 		{
 			"ImportPath": "code.google.com/p/go-uuid/uuid",
 			"Comment": "null-15",
 			"Rev": "35bc42037350f0078e3c974c6ea690f1926603ab"
-		},
-		{
-			"ImportPath": "github.com/Sirupsen/logrus",
-			"Rev": "55eb11d21d2a31a3cc93838241d04800f52e823d"
 		},
 		{
 			"ImportPath": "github.com/BurntSushi/toml",
@@ -34,18 +29,13 @@
 		},
 		{
 			"ImportPath": "github.com/docker/distribution/context",
-			"Comment": "v2.0.0-228-gb230183",
-			"Rev": "b230183b0fe8b8ed3c9ae2898c47c8c8618dc80f"
+			"Comment": "v2.0.0-rc.3-2-g75919b7",
+			"Rev": "75919b7dcc5d53894d7e8f1584e91ae148335f3a"
 		},
 		{
 			"ImportPath": "github.com/docker/distribution/registry/auth",
-			"Comment": "v2.0.0-228-gb230183",
-			"Rev": "b230183b0fe8b8ed3c9ae2898c47c8c8618dc80f"
-		},
-		{
-			"ImportPath": "github.com/docker/distribution/uuid",
-			"Comment": "v2.0.0-228-gb230183",
-			"Rev": "b230183b0fe8b8ed3c9ae2898c47c8c8618dc80f"
+			"Comment": "v2.0.0-rc.3-2-g75919b7",
+			"Rev": "75919b7dcc5d53894d7e8f1584e91ae148335f3a"
 		},
 		{
 			"ImportPath": "github.com/docker/libtrust",
@@ -56,12 +46,25 @@
 			"Rev": "61b53384b24bfa83e8e0a5f11f28ae83457fd80c"
 		},
 		{
-			"ImportPath": "github.com/endophage/gotuf/data",
-			"Rev": "930a4e1cc71f866a412aea60c960ee4345f0c76a"
+			"ImportPath": "github.com/endophage/gotuf",
+			"Rev": "c7154b63cf6e8485ea4af4c7f299ccbea6731d43"
 		},
 		{
-			"ImportPath": "github.com/endophage/gotuf/errors",
-			"Rev": "930a4e1cc71f866a412aea60c960ee4345f0c76a"
+			"ImportPath": "github.com/go-sql-driver/mysql",
+			"Comment": "v1.2-97-g0cc29e9",
+			"Rev": "0cc29e9fe8e25c2c58cf47bcab566e029bbaa88b"
+		},
+		{
+			"ImportPath": "github.com/golang/protobuf/proto",
+			"Rev": "655cdfa588ea190e901bc5590e65d5621688847c"
+		},
+		{
+			"ImportPath": "github.com/gorilla/context",
+			"Rev": "14f550f51af52180c2eefed15e5fd18d63c0a64a"
+		},
+		{
+			"ImportPath": "github.com/gorilla/mux",
+			"Rev": "e444e69cbd2e2e3e0749a2f3c717cec491552bbf"
 		},
 		{
 			"ImportPath": "github.com/inconshreveable/mousetrap",
@@ -104,31 +107,6 @@
 		{
 			"ImportPath": "github.com/spf13/viper",
 			"Rev": "be5ff3e4840cf692388bde7a057595a474ef379e"
-		},
-		{
-			"ImportPath": "github.com/endophage/gotuf/keys",
-			"Rev": "930a4e1cc71f866a412aea60c960ee4345f0c76a"
-		},
-		{
-			"ImportPath": "github.com/endophage/gotuf/signed",
-			"Rev": "930a4e1cc71f866a412aea60c960ee4345f0c76a"
-		},
-		{
-			"ImportPath": "github.com/go-sql-driver/mysql",
-			"Comment": "v1.2-108-g66b7d5c",
-			"Rev": "66b7d5c4956096efd4c945494d64ad73f1d9ec39"
-		},
-		{
-			"ImportPath": "github.com/golang/protobuf/proto",
-			"Rev": "655cdfa588ea190e901bc5590e65d5621688847c"
-		},
-		{
-			"ImportPath": "github.com/gorilla/context",
-			"Rev": "14f550f51af52180c2eefed15e5fd18d63c0a64a"
-		},
-		{
-			"ImportPath": "github.com/gorilla/mux",
-			"Rev": "e444e69cbd2e2e3e0749a2f3c717cec491552bbf"
 		},
 		{
 			"ImportPath": "github.com/tent/canonical-json-go",
