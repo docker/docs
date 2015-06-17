@@ -4,7 +4,8 @@ title = "Organize our issues"
 description = "Organize our issues"
 keywords = ["governance, board, members, profiles"]
 [menu.main]
-parent="smn_registry_ref"
+parent="mn_opensource"
+weight=6
 +++
 <![end-metadata]-->
 
@@ -83,7 +84,7 @@ The triage process asks you to add both a `kind/` and a `exp/` label to each
 issue. Because you are not a Docker maintainer, you add these through comments.
 Simply add a `+label` keyword to an issue comment: 
 
-![Example](/images/triage-label.png)
+![Example](../images/triage-label.png)
 
 For example, the `+exp/beginner` and `+kind/writing` labels would triage an issue as
 beginner writing task. For descriptions of valid labels, see the <a

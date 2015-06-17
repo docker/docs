@@ -5,7 +5,7 @@ description = "Testing contributions"
 keywords = ["test, source, contributions, Docker"]
 [menu.main]
 parent="mn_opensource"
-weight=3
+weight=8
 +++
 <![end-metadata]-->
 

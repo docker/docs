@@ -1,6 +1,6 @@
 <!--[metadata]>
 +++
-title = "Contribute code"
+title = "Contribute code overview"
 description = "Contribute code"
 keywords = ["governance, board, members, profiles"]
 [menu.main]
@@ -9,7 +9,7 @@ weight=4
 +++
 <![end-metadata]-->
 
-# Contribute code
+# Contribute code overview
 
 If you'd like to improve the code of any of Docker's projects, we would love to
 have your contributions. All of our projects' code repositories are on GitHub:
@@ -103,7 +103,7 @@ pull request</a>.
 	request. Here is an example of a perfect pull request with a good description,
 	issue reference, and signature in the commit:
 	
-	![Sign commits and issues](/images/bonus.png)
+	![Sign commits and issues](../images/bonus.png)
 	
 	We have also have checklist that describes [what each pull request
 	needs](#what-is-the-pre-pull-request-checklist).
