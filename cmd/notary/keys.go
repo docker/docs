@@ -27,21 +27,13 @@ var cmdKeys = &cobra.Command{
 	Use:   "keys",
 	Short: "Operates on keys.",
 	Long:  "operations on signature keys and trusted certificate authorities.",
-	Run:   nil,
+	Run:   keysList,
 }
 
 func init() {
 	cmdKeys.AddCommand(cmdKeysTrust)
-	cmdKeys.AddCommand(cmdKeysList)
 	cmdKeys.AddCommand(cmdKeysRemove)
 	cmdKeys.AddCommand(cmdKeysGenerate)
-}
-
-var cmdKeysList = &cobra.Command{
-	Use:   "list",
-	Short: "List the currently trusted certificate authorities.",
-	Long:  "lists the currently trusted certificate authorities.",
-	Run:   keysList,
 }
 
 var cmdKeysRemove = &cobra.Command{
@@ -71,17 +63,33 @@ func keysRemove(cmd *cobra.Command, args []string) {
 		fatalf("must specify a SHA256 SubjectKeyID of the certificate")
 	}
 
+	failed := true
 	cert, err := caStore.GetCertificateBySKID(args[0])
-	if err != nil {
-		fatalf("certificate not found")
+	if err == nil {
+		fmt.Printf("Removing: ")
+		printCert(cert)
+
+		err = caStore.RemoveCert(cert)
+		if err != nil {
+			fatalf("failed to remove certificate for Root KeyStore")
+		}
+		failed = false
 	}
 
-	fmt.Printf("Removing: ")
-	printCert(cert)
+	cert, err = privStore.GetCertificateBySKID(args[0])
+	if err == nil {
+		fmt.Printf("Removing: ")
+		printCert(cert)
 
-	err = caStore.RemoveCert(cert)
-	if err != nil {
-		fatalf("failed to remove certificate for Key Store")
+		//TODO (diogo): remove associated private key
+		err = privStore.RemoveCert(cert)
+		if err != nil {
+			fatalf("failed to remove certificate for Private KeyStore")
+		}
+		failed = false
+	}
+	if failed {
+		fatalf("certificate not found in any store")
 	}
 }
 
@@ -121,10 +129,21 @@ func keysTrust(cmd *cobra.Command, args []string) {
 }
 
 func keysList(cmd *cobra.Command, args []string) {
-	// Load all the certificates
-	trustedCAs := caStore.GetCertificates()
+	if len(args) > 0 {
+		cmd.Usage()
+		os.Exit(1)
+	}
 
+	fmt.Println("# Trusted Root keys: ")
+	trustedCAs := caStore.GetCertificates()
 	for _, c := range trustedCAs {
+		printCert(c)
+	}
+
+	fmt.Println("")
+	fmt.Println("# Signing keys: ")
+	privateCerts := privStore.GetCertificates()
+	for _, c := range privateCerts {
 		printCert(c)
 	}
 

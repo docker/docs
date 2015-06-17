@@ -20,6 +20,7 @@ const caDir string = ".docker/trust/certificate_authorities/"
 const privDir string = ".docker/trust/private/"
 
 var caStore trustmanager.X509Store
+var privStore trustmanager.X509Store
 
 func init() {
 	// Retrieve current user to get home directory
@@ -64,6 +65,13 @@ func init() {
 	// We could easily add "return cert.IsCA && cert.BasicConstraintsValid" in order
 	// to have only valid CA certificates being loaded
 	caStore = trustmanager.NewX509FilteredFileStore(finalcaDir, func(cert *x509.Certificate) bool {
+		return time.Now().Before(cert.NotAfter) &&
+			cert.SignatureAlgorithm != x509.SHA1WithRSA &&
+			cert.SignatureAlgorithm != x509.DSAWithSHA1 &&
+			cert.SignatureAlgorithm != x509.ECDSAWithSHA1
+	})
+
+	privStore = trustmanager.NewX509FilteredFileStore(finalPrivDir, func(cert *x509.Certificate) bool {
 		return time.Now().Before(cert.NotAfter) &&
 			cert.SignatureAlgorithm != x509.SHA1WithRSA &&
 			cert.SignatureAlgorithm != x509.DSAWithSHA1 &&
