@@ -1,24 +1,19 @@
 package main
 
 import (
-	"crypto"
-	"crypto/ecdsa"
-	"crypto/elliptic"
 	"crypto/rand"
 	"crypto/x509"
 	"crypto/x509/pkix"
-	"encoding/pem"
 	"fmt"
 	"math"
 	"math/big"
 	"net/url"
 	"os"
-	"path/filepath"
 	"time"
 
 	"github.com/docker/vetinari/trustmanager"
+
 	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
 )
 
 var subjectKeyID string
@@ -99,7 +94,7 @@ func keysTrust(cmd *cobra.Command, args []string) {
 		fatalf("not enough arguments provided")
 	}
 
-	qualifiedDN := args[0]
+	gun := args[0]
 	certLocationStr := args[1]
 	// Verify if argument is a valid URL
 	url, err := url.Parse(certLocationStr)
@@ -109,9 +104,9 @@ func keysTrust(cmd *cobra.Command, args []string) {
 		if err != nil {
 			fatalf("error retreiving certificate from url (%s): %v", certLocationStr, err)
 		}
-		err = cert.VerifyHostname(qualifiedDN)
+		err = cert.VerifyHostname(gun)
 		if err != nil {
-			fatalf("certificate does not match the Qualified Docker Name: %v", err)
+			fatalf("certificate does not match the Global Unique Name: %v", err)
 		}
 		err = caStore.AddCert(cert)
 		if err != nil {
@@ -156,33 +151,17 @@ func keysGenerate(cmd *cobra.Command, args []string) {
 	}
 
 	// (diogo): Validate GUNs
-	qualifiedDN := args[0]
+	gun := args[0]
 
-	key, err := generateKey(qualifiedDN)
+	_, cert, err := generateKeyAndCert(gun)
 	if err != nil {
 		fatalf("could not generate key: %v", err)
 	}
 
-	template := newCertificate(qualifiedDN, qualifiedDN)
-	derBytes, err := x509.CreateCertificate(rand.Reader, template, template, key.(crypto.Signer).Public(), key)
-	if err != nil {
-		fatalf("failed to generate certificate: %s", err)
-	}
-
-	certName := filepath.Join(viper.GetString("privDir"), qualifiedDN+".crt")
-	certOut, err := os.Create(certName)
-	if err != nil {
-		fatalf("failed to save certificate: %s", err)
-	}
-
-	defer certOut.Close()
-	err = pem.Encode(certOut, &pem.Block{Type: "CERTIFICATE", Bytes: derBytes})
-	if err != nil {
-		fatalf("failed to save certificate: %s", err)
-	}
+	caStore.AddCertFromPEM(cert)
 }
 
-func newCertificate(qualifiedDN, organization string) *x509.Certificate {
+func newCertificate(gun, organization string) *x509.Certificate {
 	notBefore := time.Now()
 	notAfter := notBefore.Add(time.Hour * 24 * 365 * 2)
 
@@ -196,7 +175,7 @@ func newCertificate(qualifiedDN, organization string) *x509.Certificate {
 		SerialNumber: serialNumber,
 		Subject: pkix.Name{
 			Organization: []string{organization},
-			CommonName:   qualifiedDN,
+			CommonName:   gun,
 		},
 		NotBefore: notBefore,
 		NotAfter:  notAfter,
@@ -205,33 +184,6 @@ func newCertificate(qualifiedDN, organization string) *x509.Certificate {
 		ExtKeyUsage:           []x509.ExtKeyUsage{x509.ExtKeyUsageCodeSigning},
 		BasicConstraintsValid: true,
 	}
-}
-
-func generateKey(qualifiedDN string) (crypto.PrivateKey, error) {
-	curve := elliptic.P384()
-	key, err := ecdsa.GenerateKey(curve, rand.Reader)
-	if err != nil {
-		return nil, fmt.Errorf("could not generate private key: %v", err)
-	}
-
-	keyBytes, err := x509.MarshalECPrivateKey(key)
-	if err != nil {
-		return nil, fmt.Errorf("could not marshal private key: %v", err)
-	}
-
-	keyName := filepath.Join(viper.GetString("privDir"), qualifiedDN+".key")
-	keyOut, err := os.OpenFile(keyName, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0600)
-	if err != nil {
-		return nil, fmt.Errorf("could not write privatekey: %v", err)
-	}
-	defer keyOut.Close()
-
-	err = pem.Encode(keyOut, &pem.Block{Type: "EC PRIVATE KEY", Bytes: keyBytes})
-	if err != nil {
-		return nil, fmt.Errorf("failed to encode key: %v", err)
-	}
-
-	return key, nil
 }
 
 func printCert(cert *x509.Certificate) {

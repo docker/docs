@@ -10,6 +10,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"os"
 	"path"
 	"path/filepath"
 )
@@ -54,7 +55,12 @@ func saveCertificate(cert *x509.Certificate, filename string) error {
 	block := pem.Block{Type: "CERTIFICATE", Bytes: cert.Raw}
 	pemdata := string(pem.EncodeToMemory(&block))
 
-	err := ioutil.WriteFile(filename, []byte(pemdata), 0600)
+	err := CreateDirectory(filename)
+	if err != nil {
+		return err
+	}
+
+	err = ioutil.WriteFile(filename, []byte(pemdata), 0600)
 	if err != nil {
 		return err
 	}
@@ -123,4 +129,12 @@ func loadCertFromPEM(pemBytes []byte) (*x509.Certificate, error) {
 	}
 
 	return nil, errors.New("no certificates found in PEM data")
+}
+
+func CreateDirectory(dir string) error {
+	cleanDir := filepath.Dir(dir)
+	if err := os.MkdirAll(cleanDir, 0700); err != nil {
+		return fmt.Errorf("cannot create directory: %v", err)
+	}
+	return nil
 }

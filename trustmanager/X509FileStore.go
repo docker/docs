@@ -57,8 +57,14 @@ func (s X509FileStore) AddCert(cert *x509.Certificate) error {
 		return errors.New("adding nil Certificate to X509Store")
 	}
 
-	fingerprint := FingerprintCert(cert)
-	filename := path.Join(s.baseDir, string(fingerprint)+certExtension)
+	var filename string
+	if cert.Subject.CommonName != "" {
+		filename = path.Join(s.baseDir, cert.Subject.CommonName+certExtension)
+	} else {
+		fingerprint := FingerprintCert(cert)
+		filename = path.Join(s.baseDir, string(fingerprint)+certExtension)
+	}
+
 	if err := s.addNamedCert(cert, filename); err != nil {
 		return err
 	}

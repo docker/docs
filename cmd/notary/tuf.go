@@ -48,35 +48,35 @@ var cmdTufAdd = &cobra.Command{
 var cmdTufRemove = &cobra.Command{
 	Use:   "remove [ GUN ] <target>",
 	Short: "Removes a target from the TUF repo.",
-	Long:  "removes a target from the local TUF repo identified by a Qualified Docker Name.",
+	Long:  "removes a target from the local TUF repo identified by a Global Unique Name.",
 	Run:   tufRemove,
 }
 
 var cmdTufInit = &cobra.Command{
 	Use:   "init [ GUN ]",
 	Short: "initializes the local TUF repository.",
-	Long:  "creates locally the initial set of TUF metadata for the Qualified Docker Name.",
+	Long:  "creates locally the initial set of TUF metadata for the Global Unique Name.",
 	Run:   tufInit,
 }
 
 var cmdTufList = &cobra.Command{
 	Use:   "list [ GUN ]",
 	Short: "Lists all targets in a TUF repository.",
-	Long:  "lists all the targets in the TUF repository identified by the Qualified Docker Name.",
+	Long:  "lists all the targets in the TUF repository identified by the Global Unique Name.",
 	Run:   tufList,
 }
 
 var cmdTufLookup = &cobra.Command{
 	Use:   "lookup [ GUN ] <target name>",
 	Short: "Looks up a specific TUF target in a repository.",
-	Long:  "looks up a TUF target in a repository given a Qualified Docker Name.",
+	Long:  "looks up a TUF target in a repository given a Global Unique Name.",
 	Run:   tufLookup,
 }
 
 var cmdTufPush = &cobra.Command{
 	Use:   "push [ GUN ]",
 	Short: "initializes the local TUF repository.",
-	Long:  "creates locally the initial set of TUF metadata for the Qualified Docker Name.",
+	Long:  "creates locally the initial set of TUF metadata for the Global Unique Name.",
 	Run:   tufPush,
 }
 
@@ -161,6 +161,7 @@ func tufInit(cmd *cobra.Command, args []string) {
 	}
 
 	gun := args[0]
+	// cryptoService := NewCryptoService(gun)
 	kdb := keys.NewDB()
 	repo := tuf.NewTufRepo(kdb, nil)
 

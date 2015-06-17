@@ -15,9 +15,11 @@ import (
 )
 
 const configFileName string = "config"
+
+// Default paths should end with a '/' so directory creation works correctly
 const configPath string = ".docker/trust/"
-const caDir string = ".docker/trust/certificate_authorities/"
-const privDir string = ".docker/trust/private/"
+const trustDir string = configPath + "repository_certificates/"
+const privDir string = configPath + "private/"
 
 var caStore trustmanager.X509Store
 var privStore trustmanager.X509Store
@@ -45,26 +47,32 @@ func init() {
 	if err != nil {
 		// Ignore if the configuration file doesn't exist, we can use the defaults
 		if !os.IsNotExist(err) {
-			panic(fmt.Errorf("Fatal error config file: %s \n", err))
+			fatalf("fatal error config file: %v", err)
 		}
 	}
 
 	// Set up the defaults for our config
-	viper.SetDefault("caDir", path.Join(homeDir, path.Dir(caDir)))
+	viper.SetDefault("trustDir", path.Join(homeDir, path.Dir(trustDir)))
 	viper.SetDefault("privDir", path.Join(homeDir, path.Dir(privDir)))
 
 	// Get the final value for the CA directory
-	finalcaDir := viper.GetString("caDir")
+	finalTrustDir := viper.GetString("trustDir")
 	finalPrivDir := viper.GetString("privDir")
 
 	// Ensure the existence of the CAs directory
-	createDirectory(finalcaDir)
-	createDirectory(finalPrivDir)
+	err = trustmanager.CreateDirectory(finalTrustDir)
+	if err != nil {
+		fatalf("could not create directory: %v", err)
+	}
+	err = trustmanager.CreateDirectory(finalPrivDir)
+	if err != nil {
+		fatalf("could not create directory: %v", err)
+	}
 
 	// Load all CAs that aren't expired and don't use SHA1
 	// We could easily add "return cert.IsCA && cert.BasicConstraintsValid" in order
 	// to have only valid CA certificates being loaded
-	caStore = trustmanager.NewX509FilteredFileStore(finalcaDir, func(cert *x509.Certificate) bool {
+	caStore = trustmanager.NewX509FilteredFileStore(finalTrustDir, func(cert *x509.Certificate) bool {
 		return time.Now().Before(cert.NotAfter) &&
 			cert.SignatureAlgorithm != x509.SHA1WithRSA &&
 			cert.SignatureAlgorithm != x509.DSAWithSHA1 &&
@@ -94,10 +102,4 @@ func main() {
 func fatalf(format string, args ...interface{}) {
 	fmt.Printf("* fatal: "+format+"\n", args...)
 	os.Exit(1)
-}
-
-func createDirectory(dir string) {
-	if err := os.MkdirAll(dir, 0700); err != nil {
-		fatalf("cannot create directory: %v", err)
-	}
 }
