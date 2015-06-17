@@ -5,7 +5,7 @@ description = "Organize a Docker Meetup"
 keywords = ["Docker, meetup, hosting, organizing"]
 [menu.main]
 parent="mn_opensource"
-weight=2
+weight=7
 +++
 <![end-metadata]-->
 
@@ -52,7 +52,7 @@ Hackday Picture
 
 ## Host a Docker meetup at your location
 
-![Meetup](../images/hackday-600px.jpg)
+![Meetup](../images/docker-friends.png)
 
 ## Want to host a Docker Meetup?
 

@@ -5,7 +5,7 @@ description = "Support the community"
 keywords = ["support, community, users, irc"]
 [menu.main]
 parent="mn_opensource"
-weight=1
+weight=5
 +++
 <![end-metadata]-->
 
