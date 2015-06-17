@@ -39,42 +39,42 @@ func init() {
 }
 
 var cmdTufAdd = &cobra.Command{
-	Use:   "add [ QDN ] <target> <file path>",
+	Use:   "add [ GUN ] <target> <file path>",
 	Short: "pushes local updates.",
 	Long:  "pushes all local updates within a specific TUF repo to remote trust server.",
 	Run:   tufAdd,
 }
 
 var cmdTufRemove = &cobra.Command{
-	Use:   "remove [ QDN ] <target>",
+	Use:   "remove [ GUN ] <target>",
 	Short: "Removes a target from the TUF repo.",
 	Long:  "removes a target from the local TUF repo identified by a Qualified Docker Name.",
 	Run:   tufRemove,
 }
 
 var cmdTufInit = &cobra.Command{
-	Use:   "init [ QDN ]",
+	Use:   "init [ GUN ]",
 	Short: "initializes the local TUF repository.",
 	Long:  "creates locally the initial set of TUF metadata for the Qualified Docker Name.",
 	Run:   tufInit,
 }
 
 var cmdTufList = &cobra.Command{
-	Use:   "list [ QDN ]",
+	Use:   "list [ GUN ]",
 	Short: "Lists all targets in a TUF repository.",
 	Long:  "lists all the targets in the TUF repository identified by the Qualified Docker Name.",
 	Run:   tufList,
 }
 
 var cmdTufLookup = &cobra.Command{
-	Use:   "lookup [ QDN ] <target name>",
+	Use:   "lookup [ GUN ] <target name>",
 	Short: "Looks up a specific TUF target in a repository.",
 	Long:  "looks up a TUF target in a repository given a Qualified Docker Name.",
 	Run:   tufLookup,
 }
 
 var cmdTufPush = &cobra.Command{
-	Use:   "push [ QDN ]",
+	Use:   "push [ GUN ]",
 	Short: "initializes the local TUF repository.",
 	Long:  "creates locally the initial set of TUF metadata for the Qualified Docker Name.",
 	Run:   tufPush,
@@ -83,17 +83,17 @@ var cmdTufPush = &cobra.Command{
 func tufAdd(cmd *cobra.Command, args []string) {
 	if len(args) < 3 {
 		cmd.Usage()
-		fatalf("must specify a QDN, target name, and local path to target data")
+		fatalf("must specify a GUN, target name, and local path to target data")
 	}
 
-	qdn := args[0]
+	gun := args[0]
 	targetName := args[1]
 	targetPath := args[2]
 	kdb := keys.NewDB()
 	repo := tuf.NewTufRepo(kdb, nil)
 
 	filestore, err := store.NewFilesystemStore(
-		path.Join(viper.GetString("tufDir"), qdn), // TODO: base trust dir from config
+		path.Join(viper.GetString("tufDir"), gun), // TODO: base trust dir from config
 		"metadata",
 		"json",
 		"targets",
@@ -157,15 +157,15 @@ func tufAdd(cmd *cobra.Command, args []string) {
 func tufInit(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
 		cmd.Usage()
-		fatalf("must specify a QDN")
+		fatalf("must specify a Global Unique Name")
 	}
 
-	qdn := args[0]
+	gun := args[0]
 	kdb := keys.NewDB()
 	repo := tuf.NewTufRepo(kdb, nil)
 
 	filestore, err := store.NewFilesystemStore(
-		path.Join(viper.GetString("tufDir"), qdn), // TODO: base trust dir from config
+		path.Join(viper.GetString("tufDir"), gun), // TODO: base trust dir from config
 		"metadata",
 		"json",
 		"targets",
@@ -181,24 +181,24 @@ func tufInit(cmd *cobra.Command, args []string) {
 func tufList(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
 		cmd.Usage()
-		fatalf("must specify a QDN")
+		fatalf("must specify a Global Unique Name")
 	}
 }
 
 func tufLookup(cmd *cobra.Command, args []string) {
 	if len(args) < 2 {
 		cmd.Usage()
-		fatalf("must specify a QDN and target path to look up.")
+		fatalf("must specify a Global Unique Name and target path to look up.")
 	}
 
 	fmt.Println("Remote trust server configured: " + remoteTrustServer)
-	qdn := args[0]
+	gun := args[0]
 	targetName := args[1]
 	kdb := keys.NewDB()
 	repo := tuf.NewTufRepo(kdb, nil)
 
 	remote, err := store.NewHTTPStore(
-		"https://localhost:4443/v2"+qdn+"/_trust/tuf/",
+		"https://localhost:4443/v2"+gun+"/_trust/tuf/",
 		"",
 		"json",
 		"",
@@ -231,13 +231,13 @@ func tufLookup(cmd *cobra.Command, args []string) {
 func tufPush(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
 		cmd.Usage()
-		fatalf("must specify a QDN")
+		fatalf("must specify a Global Unique Name")
 	}
 
-	qdn := args[0]
+	gun := args[0]
 
 	remote, err := store.NewHTTPStore(
-		"https://localhost:4443/v2"+qdn+"/_trust/tuf/",
+		"https://localhost:4443/v2"+gun+"/_trust/tuf/",
 		"",
 		"json",
 		"",
@@ -287,7 +287,7 @@ func tufPush(cmd *cobra.Command, args []string) {
 func tufRemove(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
 		cmd.Usage()
-		fatalf("must specify a QDN")
+		fatalf("must specify a Global Unique Name")
 	}
 }
 

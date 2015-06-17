@@ -44,16 +44,16 @@ var cmdKeysRemove = &cobra.Command{
 }
 
 var cmdKeysTrust = &cobra.Command{
-	Use:   "trust [ QDN ] [ certificate ]",
-	Short: "Trusts a new certificate for a specific QDN.",
-	Long:  "Adds a the certificate to the trusted certificate authority list for the specified Qualified Docker Name.",
+	Use:   "trust [ certificate ]",
+	Short: "Trusts a new certificate for a specific GUN.",
+	Long:  "Adds a the certificate to the trusted certificate authority list for the specified Global Unique Name.",
 	Run:   keysTrust,
 }
 
 var cmdKeysGenerate = &cobra.Command{
-	Use:   "generate [ QDN ]",
-	Short: "Generates a new key for a specific QDN.",
-	Long:  "generates a new key for a specific QDN. Qualified Docker Name.",
+	Use:   "generate [ GUN ]",
+	Short: "Generates a new key for a specific GUN.",
+	Long:  "generates a new key for a specific GUN. Global Unique Name.",
 	Run:   keysGenerate,
 }
 
@@ -152,10 +152,10 @@ func keysList(cmd *cobra.Command, args []string) {
 func keysGenerate(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
 		cmd.Usage()
-		fatalf("must specify a QDN")
+		fatalf("must specify a GUN")
 	}
 
-	// (diogo): Validate QDNs
+	// (diogo): Validate GUNs
 	qualifiedDN := args[0]
 
 	key, err := generateKey(qualifiedDN)
