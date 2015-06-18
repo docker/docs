@@ -4,7 +4,7 @@ COPY . /go/src/github.com/docker/vetinari
 
 RUN chmod 777 /tmp/
 
-RUN GOPATH=/go/:/go/src/github.com/docker/vetinari/Godeps/_workspace go install github.com/docker/vetinari/cmd/vetinari-server
+RUN GOPATH="/go/src/github.com/docker/vetinari/Godeps/_workspace:/go/" go install github.com/docker/vetinari/cmd/vetinari-server
 
 EXPOSE 4443
 
