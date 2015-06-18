@@ -20,10 +20,10 @@ import (
 )
 
 var cmdTuf = &cobra.Command{
-	Use:   "tuf",
-	Short: "Manages trust of data for notary.",
-	Long:  "manages signed repository metadata.",
-	Run:   nil,
+	Use:   "tuf [ GUN ]",
+	Short: "Manages trust of data for notary. Lists targets for GUN when no other command given",
+	Long:  "Segments all commands related to managing TUF metadata. In the absence of another command, it lists all targets found under the Globally Unique Name.",
+	Run:   tufList,
 }
 
 var remoteTrustServer string
@@ -36,7 +36,6 @@ func init() {
 	cmdTufPush.Flags().StringVarP(&remoteTrustServer, "remote", "r", "", "Remote trust server location")
 	cmdTuf.AddCommand(cmdTufLookup)
 	cmdTufLookup.Flags().StringVarP(&remoteTrustServer, "remote", "r", "", "Remote trust server location")
-	cmdTuf.AddCommand(cmdTufList)
 }
 
 var cmdTufAdd = &cobra.Command{
@@ -49,35 +48,28 @@ var cmdTufAdd = &cobra.Command{
 var cmdTufRemove = &cobra.Command{
 	Use:   "remove [ GUN ] <target>",
 	Short: "Removes a target from the TUF repo.",
-	Long:  "removes a target from the local TUF repo identified by a Qualified Docker Name.",
+	Long:  "removes a target from the local TUF repo identified by a Globally Unique Name.",
 	Run:   tufRemove,
 }
 
 var cmdTufInit = &cobra.Command{
 	Use:   "init [ GUN ]",
 	Short: "initializes the local TUF repository.",
-	Long:  "creates locally the initial set of TUF metadata for the Qualified Docker Name.",
+	Long:  "creates locally the initial set of TUF metadata for the Globally Unique Name.",
 	Run:   tufInit,
-}
-
-var cmdTufList = &cobra.Command{
-	Use:   "list [ GUN ]",
-	Short: "Lists all targets in a TUF repository.",
-	Long:  "lists all the targets in the TUF repository identified by the Qualified Docker Name.",
-	Run:   tufList,
 }
 
 var cmdTufLookup = &cobra.Command{
 	Use:   "lookup [ GUN ] <target name>",
 	Short: "Looks up a specific TUF target in a repository.",
-	Long:  "looks up a TUF target in a repository given a Qualified Docker Name.",
+	Long:  "looks up a TUF target in a repository given a Globally Unique Name.",
 	Run:   tufLookup,
 }
 
 var cmdTufPush = &cobra.Command{
 	Use:   "push [ GUN ]",
 	Short: "initializes the local TUF repository.",
-	Long:  "creates locally the initial set of TUF metadata for the Qualified Docker Name.",
+	Long:  "creates locally the initial set of TUF metadata for the Globally Unique Name.",
 	Run:   tufPush,
 }
 
