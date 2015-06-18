@@ -1,4 +1,4 @@
-FROM sameersbn/ubuntu:14.04.20150613
+FROM ubuntu:14.04
 MAINTAINER diogo@docker.com
 
 RUN apt-get update \
