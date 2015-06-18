@@ -82,11 +82,6 @@ func (tr *TufRepo) AddBaseKeys(role string, keys ...data.Key) error {
 		tr.Root.Signed.Roles[role].KeyIDs = append(tr.Root.Signed.Roles[role].KeyIDs, key.ID())
 	}
 	tr.Root.Dirty = true
-	signedRoot, err := tr.SignRoot(data.DefaultExpires("root"))
-	err = tr.UpdateSnapshot("root", signedRoot)
-	if err != nil {
-		return err
-	}
 	return nil
 
 }
@@ -126,11 +121,6 @@ func (tr *TufRepo) RemoveBaseKeys(role string, keyIDs ...string) error {
 		delete(tr.Root.Signed.Keys, k)
 	}
 	tr.Root.Dirty = true
-	signedRoot, err := tr.SignRoot(data.DefaultExpires("root"))
-	err = tr.UpdateSnapshot("root", signedRoot)
-	if err != nil {
-		return err
-	}
 	return nil
 }
 
@@ -175,25 +165,8 @@ func (tr *TufRepo) UpdateDelegations(role *data.Role, keys []data.Key, before st
 	}
 	p.Dirty = true
 
-	roleTargets := data.NewTargets()
+	roleTargets := data.NewTargets() // NewTargets always marked Dirty
 	tr.Targets[role.Name] = roleTargets
-
-	signedParent, err := tr.SignTargets(parent, data.DefaultExpires("targets"))
-	if err != nil {
-		return err
-	}
-	err = tr.UpdateSnapshot(role.Name, signedParent)
-	if err != nil {
-		return err
-	}
-	signedTargets, err := tr.SignTargets(role.Name, data.DefaultExpires("targets"))
-	if err != nil {
-		return err
-	}
-	err = tr.UpdateSnapshot(role.Name, signedTargets)
-	if err != nil {
-		return err
-	}
 
 	tr.keysDB.AddRole(role)
 
@@ -410,14 +383,6 @@ func (tr *TufRepo) AddTargets(role string, targets data.Files) (data.Files, erro
 		}
 	}
 	t.Dirty = true
-	signedTargets, err := tr.SignTargets(role, data.DefaultExpires("targets"))
-	if err != nil {
-		return invalid, err
-	}
-	err = tr.UpdateSnapshot(role, signedTargets)
-	if err != nil {
-		return invalid, err
-	}
 	if len(invalid) > 0 {
 		return invalid, fmt.Errorf("Could not add all targets")
 	}
@@ -434,10 +399,26 @@ func (tr *TufRepo) UpdateSnapshot(role string, s *data.Signed) error {
 		return err
 	}
 	tr.Snapshot.Signed.Meta[role] = meta
+	tr.Snapshot.Dirty = true
+	return nil
+}
+
+func (tr *TufRepo) UpdateTimestamp(s *data.Signed) error {
+	jsonData, err := json.Marshal(s)
+	if err != nil {
+		return err
+	}
+	meta, err := data.NewFileMeta(bytes.NewReader(jsonData), "sha256")
+	if err != nil {
+		return err
+	}
+	tr.Timestamp.Signed.Meta["snapshot"] = meta
+	tr.Timestamp.Dirty = true
 	return nil
 }
 
 func (tr *TufRepo) SignRoot(expires time.Time) (*data.Signed, error) {
+	logrus.Debug("SignRoot")
 	signed, err := tr.Root.ToSigned()
 	if err != nil {
 		return nil, err
@@ -452,44 +433,94 @@ func (tr *TufRepo) SignRoot(expires time.Time) (*data.Signed, error) {
 }
 
 func (tr *TufRepo) SignTargets(role string, expires time.Time) (*data.Signed, error) {
+	logrus.Debug("SignTargets")
 	signed, err := tr.Targets[role].ToSigned()
 	if err != nil {
+		logrus.Debug("errored getting targets data.Signed object")
 		return nil, err
 	}
-	targets := tr.keysDB.GetRole(role)
-	signed, err = tr.sign(signed, *targets)
-	if err != nil {
-		return nil, err
+	logrus.Debug("Got targets data.Signed object")
+	if tr.Targets[role].Dirty {
+		targets := tr.keysDB.GetRole(role)
+		logrus.Debug("About to sign ", role)
+		signed, err = tr.sign(signed, *targets)
+		if err != nil {
+			logrus.Debug("errored signing ", role)
+			return nil, err
+		}
+		logrus.Debug("success signing ", role)
+		tr.Targets[role].Signatures = signed.Signatures
 	}
-	tr.Targets[role].Signatures = signed.Signatures
 	return signed, nil
 }
 
 func (tr *TufRepo) SignSnapshot(expires time.Time) (*data.Signed, error) {
+	logrus.Debug("SignSnapshot")
+	if tr.Root.Dirty {
+		signedRoot, err := tr.SignRoot(data.DefaultExpires("root"))
+		if err != nil {
+			return nil, err
+		}
+		err = tr.UpdateSnapshot("root", signedRoot)
+		if err != nil {
+			return nil, err
+		}
+		tr.Root.Dirty = false // root dirty until changes captures in snapshot
+	}
+	for role, targets := range tr.Targets {
+		if !targets.Dirty {
+			continue
+		}
+		signedTargets, err := tr.SignTargets(role, data.DefaultExpires("targets"))
+		if err != nil {
+			return nil, err
+		}
+		err = tr.UpdateSnapshot(role, signedTargets)
+		if err != nil {
+			return nil, err
+		}
+		tr.Targets[role].Dirty = false // target role dirty until changes captured in snapshot
+	}
 	signed, err := tr.Snapshot.ToSigned()
 	if err != nil {
 		return nil, err
 	}
-	snapshot := tr.keysDB.GetRole(data.ValidRoles["snapshot"])
-	signed, err = tr.sign(signed, *snapshot)
-	if err != nil {
-		return nil, err
+	if tr.Snapshot.Dirty {
+		snapshot := tr.keysDB.GetRole(data.ValidRoles["snapshot"])
+		signed, err = tr.sign(signed, *snapshot)
+		if err != nil {
+			return nil, err
+		}
+		tr.Snapshot.Signatures = signed.Signatures
 	}
-	tr.Snapshot.Signatures = signed.Signatures
 	return signed, nil
 }
 
 func (tr *TufRepo) SignTimestamp(expires time.Time) (*data.Signed, error) {
+	logrus.Debug("SignTimestamp")
+	if tr.Snapshot.Dirty {
+		signedSnapshot, err := tr.SignSnapshot(data.DefaultExpires("snapshot"))
+		if err != nil {
+			return nil, err
+		}
+		err = tr.UpdateTimestamp(signedSnapshot)
+		if err != nil {
+			return nil, err
+		}
+	}
 	signed, err := tr.Timestamp.ToSigned()
-	if err != nil {
-		return nil, err
+	if tr.Timestamp.Dirty {
+		if err != nil {
+			return nil, err
+		}
+		timestamp := tr.keysDB.GetRole(data.ValidRoles["timestamp"])
+		signed, err = tr.sign(signed, *timestamp)
+		if err != nil {
+			return nil, err
+		}
+		tr.Timestamp.Signatures = signed.Signatures
+		tr.Snapshot.Dirty = false // snapshot is dirty until changes have been captured in timestamp
 	}
-	timestamp := tr.keysDB.GetRole(data.ValidRoles["timestamp"])
-	signed, err = tr.sign(signed, *timestamp)
-	if err != nil {
-		return nil, err
-	}
-	tr.Timestamp.Signatures = signed.Signatures
 	return signed, nil
 }
 

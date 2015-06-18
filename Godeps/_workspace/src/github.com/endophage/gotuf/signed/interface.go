@@ -10,12 +10,6 @@ type SigningService interface {
 	// Sign takes a slice of keyIDs and a piece of data to sign
 	// and returns a slice of signatures and an error
 	Sign(keyIDs []string, data []byte) ([]data.Signature, error)
-
-	// CanSign takes a single keyID and returns a boolean indicating
-	// whether the caller is able to sign with the keyID (i.e. does
-	// this signing service hold the private key associated with
-	// they keyID)
-	CanSign(keyID string) bool
 }
 
 // KeyService provides management of keys locally. It will never
@@ -27,7 +21,7 @@ type KeyService interface {
 	Create() (*data.PublicKey, error)
 
 	// PublicKeys return the PublicKey instances for the given KeyIDs
-	PublicKeys(keyIDs ...string) (map[string]*data.PublicKey, error)
+	//	PublicKeys(keyIDs ...string) (map[string]*data.PublicKey, error)
 }
 
 // CryptoService defines a unified Signing and Key Service as this

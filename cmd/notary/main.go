@@ -8,6 +8,7 @@ import (
 	"path"
 	"time"
 
+	"github.com/Sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
@@ -20,11 +21,13 @@ const configFileName string = "config"
 const configPath string = ".docker/trust/"
 const trustDir string = configPath + "repository_certificates/"
 const privDir string = configPath + "private/"
+const tufDir string = configPath + "tuf/"
 
 var caStore trustmanager.X509Store
 var privStore trustmanager.X509Store
 
 func init() {
+	logrus.SetLevel(logrus.DebugLevel)
 	// Retrieve current user to get home directory
 	usr, err := user.Current()
 	if err != nil {
@@ -54,6 +57,7 @@ func init() {
 	// Set up the defaults for our config
 	viper.SetDefault("trustDir", path.Join(homeDir, path.Dir(trustDir)))
 	viper.SetDefault("privDir", path.Join(homeDir, path.Dir(privDir)))
+	viper.SetDefault("tufDir", path.Join(homeDir, path.Dir(tufDir)))
 
 	// Get the final value for the CA directory
 	finalTrustDir := viper.GetString("trustDir")

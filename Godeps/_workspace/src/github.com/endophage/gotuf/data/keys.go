@@ -41,6 +41,7 @@ func (k TUFKey) Cipher() string {
 }
 
 func (k *TUFKey) ID() string {
+	logrus.Debug("Generating Key ID")
 	if k.id == "" {
 		logrus.Debug("Generating Key ID")
 		pubK := NewTUFKey(k.Cipher(), k.Public(), "")

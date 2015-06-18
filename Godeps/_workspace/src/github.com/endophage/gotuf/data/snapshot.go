@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 
+	"github.com/Sirupsen/logrus"
 	cjson "github.com/tent/canonical-json-go"
 )
 
@@ -21,12 +22,15 @@ type Snapshot struct {
 }
 
 func NewSnapshot(root *Signed, targets *Signed) (*SignedSnapshot, error) {
-	rootJSON, err := json.Marshal(root)
-	if err != nil {
-		return nil, err
-	}
+	logrus.Debug("NewSnapshot")
 	targetsJSON, err := json.Marshal(targets)
 	if err != nil {
+		logrus.Debug("Error Marshalling Targets")
+		return nil, err
+	}
+	rootJSON, err := json.Marshal(root)
+	if err != nil {
+		logrus.Debug("Error Marshalling Root")
 		return nil, err
 	}
 	rootMeta, err := NewFileMeta(bytes.NewReader(rootJSON), "sha256")
