@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"net/http"
 
+	"github.com/Sirupsen/logrus"
 	"github.com/endophage/gotuf/data"
 	"github.com/gorilla/mux"
 	"golang.org/x/net/context"
@@ -98,6 +99,7 @@ func GetHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *er
 	qdn := vars["imageName"]
 	tufRole := vars["tufRole"]
 	data, err := store.GetCurrent(qdn, tufRole)
+	logrus.Debug("JSON: ", string(data))
 	if err != nil {
 		return &errors.HTTPError{
 			HTTPStatus: http.StatusInternalServerError,
@@ -112,6 +114,7 @@ func GetHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *er
 			Err:        err,
 		}
 	}
-
+	logrus.Debug("Writing data")
+	w.Write(data)
 	return nil
 }

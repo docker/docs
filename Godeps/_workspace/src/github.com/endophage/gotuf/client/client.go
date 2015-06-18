@@ -57,12 +57,12 @@ func (c *Client) Update() error {
 func (c *Client) update() error {
 	err := c.downloadTimestamp()
 	if err != nil {
-		logrus.Errorf("Client Update (Timestamp):", err)
+		logrus.Errorf("Client Update (Timestamp): ", err.Error())
 		return err
 	}
 	err = c.downloadSnapshot()
 	if err != nil {
-		logrus.Errorf("Client Update (Snapshot):", err)
+		logrus.Errorf("Client Update (Snapshot): ", err.Error())
 		return err
 	}
 	err = c.checkRoot()
@@ -71,7 +71,7 @@ func (c *Client) update() error {
 	}
 	err = c.downloadTargets("targets")
 	if err != nil {
-		logrus.Errorf("Client Update (Targets):", err)
+		logrus.Errorf("Client Update (Targets): ", err.Error())
 		return err
 	}
 	return nil
@@ -130,7 +130,7 @@ func (c *Client) downloadTimestamp() error {
 // downloadSnapshot is responsible for downloading the snapshot.json
 func (c *Client) downloadSnapshot() error {
 	role := data.RoleName("snapshot")
-	size := c.local.Timestamp.Signed.Meta[role+".txt"].Length
+	size := c.local.Timestamp.Signed.Meta[role].Length
 	raw, err := c.remote.GetMeta(role, size)
 	if err != nil {
 		return err
@@ -185,7 +185,7 @@ func (c Client) GetTargetsFile(roleName string, keyIDs []string, snapshotMeta da
 	if err != nil {
 		return nil, err
 	}
-	r, err := c.remote.GetMeta(rolePath, snapshotMeta[roleName+".txt"].Length)
+	r, err := c.remote.GetMeta(rolePath, snapshotMeta[roleName].Length)
 	if err != nil {
 		return nil, err
 	}

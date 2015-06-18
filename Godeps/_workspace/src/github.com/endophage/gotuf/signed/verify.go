@@ -89,24 +89,24 @@ func VerifySignatures(s *data.Signed, role string, db *keys.KeyDB) error {
 	valid := make(map[string]struct{})
 	for _, sig := range s.Signatures {
 		if !roleData.ValidKey(sig.KeyID) {
-			logrus.Infof("continuing b/c keyid was invalid: %s for roledata %s\n", sig.KeyID, roleData)
+			logrus.Debugf("continuing b/c keyid was invalid: %s for roledata %s\n", sig.KeyID, roleData)
 			continue
 		}
 		key := db.GetKey(sig.KeyID)
 		if key == nil {
-			logrus.Infof("continuing b/c keyid lookup was nil: %s\n", sig.KeyID)
+			logrus.Debugf("continuing b/c keyid lookup was nil: %s\n", sig.KeyID)
 			continue
 		}
 		// make method lookup consistent with case uniformity.
 		method := strings.ToLower(sig.Method)
 		verifier, ok := Verifiers[method]
 		if !ok {
-			logrus.Infof("continuing b/c signing method is not supported: %s\n", sig.Method)
+			logrus.Debugf("continuing b/c signing method is not supported: %s\n", sig.Method)
 			continue
 		}
 
 		if err := verifier.Verify(key, sig.Signature, msg); err != nil {
-			logrus.Infof("continuing b/c signature was invalid\n")
+			logrus.Debugf("continuing b/c signature was invalid\n")
 			continue
 		}
 		valid[sig.KeyID] = struct{}{}

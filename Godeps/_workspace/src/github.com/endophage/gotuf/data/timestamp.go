@@ -36,7 +36,7 @@ func NewTimestamp(snapshot *Signed) (*SignedTimestamp, error) {
 			Version: 0,
 			Expires: DefaultExpires("timestamp").String(),
 			Meta: Files{
-				ValidRoles["timestamp"]: snapshotMeta,
+				ValidRoles["snapshot"]: snapshotMeta,
 			},
 		},
 	}, nil

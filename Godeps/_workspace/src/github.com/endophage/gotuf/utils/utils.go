@@ -15,7 +15,11 @@ import (
 )
 
 func Download(url url.URL) (*http.Response, error) {
-	return http.Get(url.String())
+	tr := &http.Transport{
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+	}
+	client := &http.Client{Transport: tr}
+	return client.Get(url.String())
 }
 
 func Upload(url string, body io.Reader) (*http.Response, error) {

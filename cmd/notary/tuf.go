@@ -40,42 +40,42 @@ func init() {
 }
 
 var cmdTufAdd = &cobra.Command{
-	Use:   "add [ QDN ] <target> <file path>",
+	Use:   "add [ GUN ] <target> <file path>",
 	Short: "pushes local updates.",
 	Long:  "pushes all local updates within a specific TUF repo to remote trust server.",
 	Run:   tufAdd,
 }
 
 var cmdTufRemove = &cobra.Command{
-	Use:   "remove [ QDN ] <target>",
+	Use:   "remove [ GUN ] <target>",
 	Short: "Removes a target from the TUF repo.",
 	Long:  "removes a target from the local TUF repo identified by a Qualified Docker Name.",
 	Run:   tufRemove,
 }
 
 var cmdTufInit = &cobra.Command{
-	Use:   "init [ QDN ]",
+	Use:   "init [ GUN ]",
 	Short: "initializes the local TUF repository.",
 	Long:  "creates locally the initial set of TUF metadata for the Qualified Docker Name.",
 	Run:   tufInit,
 }
 
 var cmdTufList = &cobra.Command{
-	Use:   "list [ QDN ]",
+	Use:   "list [ GUN ]",
 	Short: "Lists all targets in a TUF repository.",
 	Long:  "lists all the targets in the TUF repository identified by the Qualified Docker Name.",
 	Run:   tufList,
 }
 
 var cmdTufLookup = &cobra.Command{
-	Use:   "lookup [ QDN ] <target name>",
+	Use:   "lookup [ GUN ] <target name>",
 	Short: "Looks up a specific TUF target in a repository.",
 	Long:  "looks up a TUF target in a repository given a Qualified Docker Name.",
 	Run:   tufLookup,
 }
 
 var cmdTufPush = &cobra.Command{
-	Use:   "push [ QDN ]",
+	Use:   "push [ GUN ]",
 	Short: "initializes the local TUF repository.",
 	Long:  "creates locally the initial set of TUF metadata for the Qualified Docker Name.",
 	Run:   tufPush,
@@ -84,7 +84,7 @@ var cmdTufPush = &cobra.Command{
 func tufAdd(cmd *cobra.Command, args []string) {
 	if len(args) < 3 {
 		cmd.Usage()
-		fatalf("must specify a QDN, target name, and local path to target data")
+		fatalf("must specify a GUN, target name, and local path to target data")
 	}
 
 	gun := args[0]
@@ -212,24 +212,65 @@ func tufInit(cmd *cobra.Command, args []string) {
 func tufList(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
 		cmd.Usage()
-		fatalf("must specify a QDN")
+		fatalf("must specify a GUN")
+	}
+	gun := args[0]
+	kdb := keys.NewDB()
+	repo := tuf.NewTufRepo(kdb, nil)
+
+	remote, err := store.NewHTTPStore(
+		"https://vetinari:4443/v2/"+gun+"/_trust/tuf/",
+		"",
+		"json",
+		"",
+	)
+	rootJSON, err := remote.GetMeta("root", 5<<20)
+	if err != nil {
+		fmt.Println("Couldn't get initial root")
+		fatalf(err.Error())
+	}
+	root := &data.Signed{}
+	err = json.Unmarshal(rootJSON, root)
+	if err != nil {
+		fmt.Println("Couldn't parse initial root")
+		fatalf(err.Error())
+	}
+	// TODO: Validate the root file against the key store
+	err = repo.SetRoot(root)
+	if err != nil {
+		fmt.Println("Error setting root")
+		fatalf(err.Error())
+	}
+
+	c := client.NewClient(
+		repo,
+		remote,
+		kdb,
+	)
+
+	err = c.Update()
+	if err != nil {
+		fmt.Println("Update failed")
+		fatalf(err.Error())
+	}
+	for name, meta := range repo.Targets["targets"].Signed.Targets {
+		fmt.Println(name, " ", meta.Hashes["sha256"], " ", meta.Length)
 	}
 }
 
 func tufLookup(cmd *cobra.Command, args []string) {
 	if len(args) < 2 {
 		cmd.Usage()
-		fatalf("must specify a QDN and target path to look up.")
+		fatalf("must specify a GUN and target path to look up.")
 	}
 
-	fmt.Println("Remote trust server configured: " + remoteTrustServer)
-	qdn := args[0]
+	gun := args[0]
 	targetName := args[1]
 	kdb := keys.NewDB()
 	repo := tuf.NewTufRepo(kdb, nil)
 
 	remote, err := store.NewHTTPStore(
-		"https://localhost:4443/v2"+qdn+"/_trust/tuf/",
+		"https://localhost:4443/v2"+gun+"/_trust/tuf/",
 		"",
 		"json",
 		"",
@@ -262,7 +303,7 @@ func tufLookup(cmd *cobra.Command, args []string) {
 func tufPush(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
 		cmd.Usage()
-		fatalf("must specify a QDN")
+		fatalf("must specify a GUN")
 	}
 
 	gun := args[0]
@@ -318,7 +359,7 @@ func tufPush(cmd *cobra.Command, args []string) {
 func tufRemove(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
 		cmd.Usage()
-		fatalf("must specify a QDN")
+		fatalf("must specify a GUN")
 	}
 }
 

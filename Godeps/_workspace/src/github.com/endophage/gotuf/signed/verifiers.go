@@ -22,7 +22,7 @@ import (
 var Verifiers = map[string]Verifier{
 	"ed25519": Ed25519Verifier{},
 	"rsa":     RSAVerifier{},
-	"rsassa-pkcs1-v1_5-sign": RSAPemVerifier{},
+	"rsassa-pkcs1-v1_5-sign": RSAPemVerifier{}, // RSASSA-PKCS1-V1_5-SIGN
 	"pycrypto-pkcs#1 pss":    RSAPSSVerifier{},
 }
 
@@ -95,20 +95,20 @@ func (v RSAPemVerifier) Verify(key data.Key, sig []byte, msg []byte) error {
 	digest := sha256.Sum256(msg)
 
 	k, _ := pem.Decode([]byte(key.Public()))
-	pub, err := x509.ParsePKIXPublicKey(k.Bytes)
+	cert, err := x509.ParseCertificate(k.Bytes)
 	if err != nil {
-		logrus.Infof("Failed to parse public key: %s\n", err)
+		logrus.Errorf("Failed to parse public key: %s\n", err.Error())
 		return ErrInvalid
 	}
 
-	rsaPub, ok := pub.(*rsa.PublicKey)
+	rsaPub, ok := cert.PublicKey.(*rsa.PublicKey)
 	if !ok {
 		logrus.Infof("Value returned from ParsePKIXPublicKey was not an RSA public key")
 		return ErrInvalid
 	}
 
 	if err = rsa.VerifyPKCS1v15(rsaPub, crypto.SHA256, digest[:], sig); err != nil {
-		logrus.Infof("Failed verification: %s", err)
+		logrus.Errorf("Failed verification: %s", err.Error())
 		return ErrInvalid
 	}
 	return nil
