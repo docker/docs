@@ -2,7 +2,6 @@ package signed
 
 import (
 	"github.com/endophage/gotuf/data"
-	"strings"
 )
 
 // Signer encapsulates a signing service with some convenience methods to
@@ -42,7 +41,6 @@ func (signer *Signer) Sign(s *data.Signed, keys ...*data.PublicKey) error {
 
 func (signer *Signer) Create() (*data.PublicKey, error) {
 	key, err := signer.service.Create()
-	key.TUFKey.Value.Public = strings.Replace(key.TUFKey.Value.Public, "\n", "\\n", -1)
 	return key, err
 }
 
