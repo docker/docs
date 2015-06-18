@@ -72,7 +72,7 @@ func main() {
 		trust = signed.NewEd25519()
 	}
 
-	db, err := sql.Open("mysql", "dockercondemo:dockercondemo@tcp(mysql:3306)/dockercondemo")
+	db, err := sql.Open("mysql", "dockercondemo:dockercondemo@tcp(vetinarimysql:3306)/dockercondemo")
 	if err != nil {
 		logrus.Fatal("Error starting DB driver: ", err.Error())
 		return // not strictly needed but let's be explicit
