@@ -14,11 +14,11 @@ func NewFilesystemStore(baseDir, metaSubDir, metaExtension, targetsSubDir string
 	targetsDir := path.Join(baseDir, targetsSubDir)
 
 	// Make sure we can create the necessary dirs and they are writable
-	err := os.MkdirAll(metaDir, 0644)
+	err := os.MkdirAll(metaDir, 0744)
 	if err != nil {
 		return nil, err
 	}
-	err = os.MkdirAll(targetsDir, 0644)
+	err = os.MkdirAll(targetsDir, 0744)
 	if err != nil {
 		return nil, err
 	}

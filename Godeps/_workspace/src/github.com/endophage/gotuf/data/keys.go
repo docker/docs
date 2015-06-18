@@ -16,8 +16,8 @@ type Key interface {
 }
 
 type KeyPair struct {
-	Public  string `json:"public"`
-	Private string `json:"private"`
+	Public  []byte `json:"public"`
+	Private []byte `json:"private"`
 }
 
 type TUFKey struct {
@@ -30,8 +30,8 @@ func NewTUFKey(cipher, public, private string) *TUFKey {
 	return &TUFKey{
 		Type: cipher,
 		Value: KeyPair{
-			Public:  public,
-			Private: private,
+			Public:  []byte(public),
+			Private: []byte(private),
 		},
 	}
 }
@@ -41,6 +41,7 @@ func (k TUFKey) Cipher() string {
 }
 
 func (k *TUFKey) ID() string {
+	logrus.Debug("Generating Key ID")
 	if k.id == "" {
 		logrus.Debug("Generating Key ID")
 		pubK := NewTUFKey(k.Cipher(), k.Public(), "")
@@ -55,7 +56,7 @@ func (k *TUFKey) ID() string {
 }
 
 func (k TUFKey) Public() string {
-	return k.Value.Public
+	return string(k.Value.Public)
 }
 
 type PublicKey struct {
@@ -71,8 +72,8 @@ func NewPublicKey(cipher, public string) *PublicKey {
 		TUFKey{
 			Type: cipher,
 			Value: KeyPair{
-				Public:  public,
-				Private: "",
+				Public:  []byte(public),
+				Private: []byte(""),
 			},
 		},
 	}
@@ -93,13 +94,13 @@ func NewPrivateKey(cipher, public, private string) *PrivateKey {
 		TUFKey{
 			Type: cipher,
 			Value: KeyPair{
-				Public:  public,
-				Private: private,
+				Public:  []byte(public),
+				Private: []byte(private),
 			},
 		},
 	}
 }
 
 func (k PrivateKey) Private() string {
-	return k.Value.Private
+	return string(k.Value.Private)
 }

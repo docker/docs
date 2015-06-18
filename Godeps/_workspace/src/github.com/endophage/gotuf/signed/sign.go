@@ -40,9 +40,10 @@ func (signer *Signer) Sign(s *data.Signed, keys ...*data.PublicKey) error {
 }
 
 func (signer *Signer) Create() (*data.PublicKey, error) {
-	return signer.service.Create()
+	key, err := signer.service.Create()
+	return key, err
 }
 
-func (signer *Signer) PublicKeys(keyIDs ...string) (map[string]*data.PublicKey, error) {
-	return signer.service.PublicKeys(keyIDs...)
-}
+//func (signer *Signer) PublicKeys(keyIDs ...string) (map[string]*data.PublicKey, error) {
+//	return signer.service.PublicKeys(keyIDs...)
+//}

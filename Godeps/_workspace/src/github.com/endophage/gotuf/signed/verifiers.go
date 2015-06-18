@@ -22,7 +22,8 @@ import (
 var Verifiers = map[string]Verifier{
 	"ed25519": Ed25519Verifier{},
 	"rsa":     RSAVerifier{},
-	"pycrypto-pkcs#1 pss": RSAPSSVerifier{},
+	"rsassa-pkcs1-v1_5-sign": RSAPemVerifier{},
+	"pycrypto-pkcs#1 pss":    RSAPSSVerifier{},
 }
 
 // RegisterVerifier provides a convenience function for init() functions
@@ -70,6 +71,31 @@ func (v RSAVerifier) Verify(key data.Key, sig []byte, msg []byte) error {
 	keyReader := base64.NewDecoder(base64.StdEncoding, strings.NewReader(key.Public()))
 	keyBytes, _ := ioutil.ReadAll(keyReader)
 	pub, err := x509.ParsePKIXPublicKey(keyBytes)
+	if err != nil {
+		logrus.Infof("Failed to parse public key: %s\n", err)
+		return ErrInvalid
+	}
+
+	rsaPub, ok := pub.(*rsa.PublicKey)
+	if !ok {
+		logrus.Infof("Value returned from ParsePKIXPublicKey was not an RSA public key")
+		return ErrInvalid
+	}
+
+	if err = rsa.VerifyPKCS1v15(rsaPub, crypto.SHA256, digest[:], sig); err != nil {
+		logrus.Infof("Failed verification: %s", err)
+		return ErrInvalid
+	}
+	return nil
+}
+
+type RSAPemVerifier struct{}
+
+func (v RSAPemVerifier) Verify(key data.Key, sig []byte, msg []byte) error {
+	digest := sha256.Sum256(msg)
+
+	k, _ := pem.Decode([]byte(key.Public()))
+	pub, err := x509.ParsePKIXPublicKey(k.Bytes)
 	if err != nil {
 		logrus.Infof("Failed to parse public key: %s\n", err)
 		return ErrInvalid

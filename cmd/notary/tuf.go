@@ -13,6 +13,7 @@ import (
 	"github.com/endophage/gotuf/client"
 	"github.com/endophage/gotuf/data"
 	"github.com/endophage/gotuf/keys"
+	"github.com/endophage/gotuf/signed"
 	"github.com/endophage/gotuf/store"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -39,61 +40,61 @@ func init() {
 }
 
 var cmdTufAdd = &cobra.Command{
-	Use:   "add [ GUN ] <target> <file path>",
+	Use:   "add [ QDN ] <target> <file path>",
 	Short: "pushes local updates.",
 	Long:  "pushes all local updates within a specific TUF repo to remote trust server.",
 	Run:   tufAdd,
 }
 
 var cmdTufRemove = &cobra.Command{
-	Use:   "remove [ GUN ] <target>",
+	Use:   "remove [ QDN ] <target>",
 	Short: "Removes a target from the TUF repo.",
-	Long:  "removes a target from the local TUF repo identified by a Global Unique Name.",
+	Long:  "removes a target from the local TUF repo identified by a Qualified Docker Name.",
 	Run:   tufRemove,
 }
 
 var cmdTufInit = &cobra.Command{
-	Use:   "init [ GUN ]",
+	Use:   "init [ QDN ]",
 	Short: "initializes the local TUF repository.",
-	Long:  "creates locally the initial set of TUF metadata for the Global Unique Name.",
+	Long:  "creates locally the initial set of TUF metadata for the Qualified Docker Name.",
 	Run:   tufInit,
 }
 
 var cmdTufList = &cobra.Command{
-	Use:   "list [ GUN ]",
+	Use:   "list [ QDN ]",
 	Short: "Lists all targets in a TUF repository.",
-	Long:  "lists all the targets in the TUF repository identified by the Global Unique Name.",
+	Long:  "lists all the targets in the TUF repository identified by the Qualified Docker Name.",
 	Run:   tufList,
 }
 
 var cmdTufLookup = &cobra.Command{
-	Use:   "lookup [ GUN ] <target name>",
+	Use:   "lookup [ QDN ] <target name>",
 	Short: "Looks up a specific TUF target in a repository.",
-	Long:  "looks up a TUF target in a repository given a Global Unique Name.",
+	Long:  "looks up a TUF target in a repository given a Qualified Docker Name.",
 	Run:   tufLookup,
 }
 
 var cmdTufPush = &cobra.Command{
-	Use:   "push [ GUN ]",
+	Use:   "push [ QDN ]",
 	Short: "initializes the local TUF repository.",
-	Long:  "creates locally the initial set of TUF metadata for the Global Unique Name.",
+	Long:  "creates locally the initial set of TUF metadata for the Qualified Docker Name.",
 	Run:   tufPush,
 }
 
 func tufAdd(cmd *cobra.Command, args []string) {
 	if len(args) < 3 {
 		cmd.Usage()
-		fatalf("must specify a GUN, target name, and local path to target data")
+		fatalf("must specify a QDN, target name, and local path to target data")
 	}
 
-	gun := args[0]
+	qdn := args[0]
 	targetName := args[1]
 	targetPath := args[2]
 	kdb := keys.NewDB()
 	repo := tuf.NewTufRepo(kdb, nil)
 
 	filestore, err := store.NewFilesystemStore(
-		path.Join(viper.GetString("tufDir"), gun), // TODO: base trust dir from config
+		path.Join(viper.GetString("tufDir"), qdn), // TODO: base trust dir from config
 		"metadata",
 		"json",
 		"targets",
@@ -157,13 +158,34 @@ func tufAdd(cmd *cobra.Command, args []string) {
 func tufInit(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
 		cmd.Usage()
-		fatalf("must specify a Global Unique Name")
+		fatalf("Must specify a GUN")
 	}
 
 	gun := args[0]
-	// cryptoService := NewCryptoService(gun)
 	kdb := keys.NewDB()
-	repo := tuf.NewTufRepo(kdb, nil)
+	signer := signed.NewSigner(NewCryptoService(gun))
+
+	rootKey, err := signer.Create()
+	targetsKey, err := signer.Create()
+	snapshotKey, err := signer.Create()
+	timestampKey, err := signer.Create()
+
+	kdb.AddKey(rootKey)
+	kdb.AddKey(targetsKey)
+	kdb.AddKey(snapshotKey)
+	kdb.AddKey(timestampKey)
+
+	rootRole, err := data.NewRole("root", 1, []string{rootKey.ID()}, nil, nil)
+	targetsRole, err := data.NewRole("targets", 1, []string{targetsKey.ID()}, nil, nil)
+	snapshotRole, err := data.NewRole("snapshot", 1, []string{snapshotKey.ID()}, nil, nil)
+	timestampRole, err := data.NewRole("timestamp", 1, []string{timestampKey.ID()}, nil, nil)
+
+	kdb.AddRole(rootRole)
+	kdb.AddRole(targetsRole)
+	kdb.AddRole(snapshotRole)
+	kdb.AddRole(timestampRole)
+
+	repo := tuf.NewTufRepo(kdb, signer)
 
 	filestore, err := store.NewFilesystemStore(
 		path.Join(viper.GetString("tufDir"), gun), // TODO: base trust dir from config
@@ -171,6 +193,9 @@ func tufInit(cmd *cobra.Command, args []string) {
 		"json",
 		"targets",
 	)
+	if err != nil {
+		fatalf(err.Error())
+	}
 
 	err = repo.InitRepo(false)
 	if err != nil {
@@ -182,24 +207,24 @@ func tufInit(cmd *cobra.Command, args []string) {
 func tufList(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
 		cmd.Usage()
-		fatalf("must specify a Global Unique Name")
+		fatalf("must specify a QDN")
 	}
 }
 
 func tufLookup(cmd *cobra.Command, args []string) {
 	if len(args) < 2 {
 		cmd.Usage()
-		fatalf("must specify a Global Unique Name and target path to look up.")
+		fatalf("must specify a QDN and target path to look up.")
 	}
 
 	fmt.Println("Remote trust server configured: " + remoteTrustServer)
-	gun := args[0]
+	qdn := args[0]
 	targetName := args[1]
 	kdb := keys.NewDB()
 	repo := tuf.NewTufRepo(kdb, nil)
 
 	remote, err := store.NewHTTPStore(
-		"https://localhost:4443/v2"+gun+"/_trust/tuf/",
+		"https://localhost:4443/v2"+qdn+"/_trust/tuf/",
 		"",
 		"json",
 		"",
@@ -232,13 +257,13 @@ func tufLookup(cmd *cobra.Command, args []string) {
 func tufPush(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
 		cmd.Usage()
-		fatalf("must specify a Global Unique Name")
+		fatalf("must specify a QDN")
 	}
 
-	gun := args[0]
+	qdn := args[0]
 
 	remote, err := store.NewHTTPStore(
-		"https://localhost:4443/v2"+gun+"/_trust/tuf/",
+		"https://localhost:4443/v2"+qdn+"/_trust/tuf/",
 		"",
 		"json",
 		"",
@@ -288,7 +313,7 @@ func tufPush(cmd *cobra.Command, args []string) {
 func tufRemove(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
 		cmd.Usage()
-		fatalf("must specify a Global Unique Name")
+		fatalf("must specify a QDN")
 	}
 }
 
@@ -297,10 +322,12 @@ func saveRepo(repo *tuf.TufRepo, filestore store.MetadataStore) error {
 	if err != nil {
 		return err
 	}
+	fmt.Println("Marshalling root")
 	rootJSON, _ := json.Marshal(signedRoot)
 	filestore.SetMeta("root", rootJSON)
 
 	for r, _ := range repo.Targets {
+		fmt.Println("Marshalling ", r)
 		signedTargets, err := repo.SignTargets(r, data.DefaultExpires("targets"))
 		if err != nil {
 			return err
@@ -315,6 +342,7 @@ func saveRepo(repo *tuf.TufRepo, filestore store.MetadataStore) error {
 	if err != nil {
 		return err
 	}
+	fmt.Println("Marshalling snapshot")
 	snapshotJSON, _ := json.Marshal(signedSnapshot)
 	filestore.SetMeta("snapshot", snapshotJSON)
 
@@ -322,6 +350,7 @@ func saveRepo(repo *tuf.TufRepo, filestore store.MetadataStore) error {
 	if err != nil {
 		return err
 	}
+	fmt.Println("Marshalling timestamp")
 	timestampJSON, _ := json.Marshal(signedTimestamp)
 	filestore.SetMeta("timestamp", timestampJSON)
 	return nil
