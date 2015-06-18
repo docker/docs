@@ -36,6 +36,13 @@ func MainHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *e
 func UpdateHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
 	defer r.Body.Close()
 	s := ctx.Value("versionStore")
+	if s == nil {
+		return &errors.HTTPError{
+			HTTPStatus: http.StatusInternalServerError,
+			Code:       9999,
+			Err:        fmt.Errorf("Version store is nil"),
+		}
+	}
 	store, ok := s.(*version.VersionDB)
 	if !ok {
 		return &errors.HTTPError{
@@ -65,13 +72,20 @@ func UpdateHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) 
 		}
 	}
 	version := meta.Signed.Version
-	store.UpdateCurrent(qdn, tufRole, version, input)
+	err = store.UpdateCurrent(qdn, tufRole, version, input)
+	if err != nil {
+		return &errors.HTTPError{
+			HTTPStatus: http.StatusInternalServerError,
+			Code:       9999,
+			Err:        err,
+		}
+	}
 	return nil
 }
 
 // GetHandler accepts urls in the form /<imagename>/<tuf file>.json
 func GetHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
-	s := ctx.Value("vesionStore")
+	s := ctx.Value("versionStore")
 	store, ok := s.(*version.VersionDB)
 	if !ok {
 		return &errors.HTTPError{

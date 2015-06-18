@@ -265,16 +265,16 @@ func tufPush(cmd *cobra.Command, args []string) {
 		fatalf("must specify a QDN")
 	}
 
-	qdn := args[0]
+	gun := args[0]
 
 	remote, err := store.NewHTTPStore(
-		"https://localhost:4443/v2"+qdn+"/_trust/tuf/",
+		"https://vetinari:4443/v2/"+gun+"/_trust/tuf/",
 		"",
 		"json",
 		"",
 	)
 	filestore, err := store.NewFilesystemStore(
-		"", // TODO: base trust dir from config
+		path.Join(viper.GetString("tufDir"), gun),
 		"metadata",
 		"json",
 		"targets",

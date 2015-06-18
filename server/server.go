@@ -58,7 +58,6 @@ func (svr *HTTPServer) TimeoutConnections() {
 func Run(ctx context.Context, conf config.ServerConf, trust signed.CryptoService) error {
 
 	// TODO: check validity of config
-
 	return run(ctx, conf.Addr, conf.TLSCertFile, conf.TLSKeyFile, trust)
 }
 
@@ -102,7 +101,7 @@ func run(ctx context.Context, addr, tlsCertFile, tlsKeyFile string, trust signed
 	//if err != nil {
 	//	return err
 	//}
-	hand := utils.RootHandlerFactory(ac, context.Background(), trust)
+	hand := utils.RootHandlerFactory(ac, ctx, trust)
 
 	r := mux.NewRouter()
 	// TODO (endophage): use correct regexes for image and tag names

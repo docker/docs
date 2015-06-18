@@ -1,8 +1,8 @@
 {
 	"server": {
 		"addr": ":4443",
-		"tls_cert_file": "../../fixtures/vetinari.pem",
-		"tls_key_file": "../../fixtures/vetinari.key"
+		"tls_cert_file": "./fixtures/vetinari.pem",
+		"tls_key_file": "./fixtures/vetinari.key"
 	},
 	"trust_service":{
 		"type": "local",

@@ -30,17 +30,17 @@ func NewVersionDB(db *sql.DB) *VersionDB {
 // Update multiple TUF records in a single transaction.
 // Always insert a new row. The unique constraint will ensure there is only ever
 func (vdb *VersionDB) UpdateCurrent(qdn, role string, version int, data []byte) error {
-	checkStmt := "SELECT 1 FROM `tuf_files` WHERE `qdn`=? AND `role`=? AND `version`=?;"
+	checkStmt := "SELECT count(*) FROM `tuf_files` WHERE `qdn`=? AND `role`=? AND `version`=?;"
 	insertStmt := "INSERT INTO `tuf_files` (`qdn`, `role`, `version`, `data`) VALUES (?,?,?,?) ;"
 
 	// ensure immediately previous version exists
 	row := vdb.QueryRow(checkStmt, qdn, role, version-1)
-	var exists bool
+	var exists int
 	err := row.Scan(&exists)
 	if err != nil {
 		return err
 	}
-	if !exists {
+	if exists == 0 && version > 0 {
 		return fmt.Errorf("Attempting to increment version by more than 1 for QDN: %s, role: %s, version: %d", qdn, role, version)
 	}
 
