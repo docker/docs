@@ -35,9 +35,14 @@ func (ccs *cliCryptoService) Create(role string) (*data.PublicKey, error) {
 
 	// PEM ENcode the certificate, which will be put directly inside of TUF's root.json
 	block := pem.Block{Type: "CERTIFICATE", Bytes: cert.Raw}
-	pemdata := string(pem.EncodeToMemory(&block))
+	pemdata := pem.EncodeToMemory(&block)
 
-	return data.NewPublicKey("RSA", pemdata), nil
+	// If this key has the role root, save it as a trusted certificate on our caStore
+	if role == "root" {
+		caStore.AddCertFromPEM(pemdata)
+	}
+
+	return data.NewPublicKey("RSA", string(pemdata)), nil
 }
 
 // Sign returns the signatures for data with the given keyIDs
