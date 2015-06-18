@@ -1,13 +1,15 @@
 {
 	"server": {
-		"addr": ":4444",
+		"addr": ":4443",
 		"tls_key_file": "/go/src/github.com/docker/vetinari/fixtures/vetinari.key",
 		"tls_cert_file": "/go/src/github.com/docker/vetinari/fixtures/vetinari.pem"
 	},
 	"trust_service": {
-		"type": "remote",
-		"hostname": "rufus",
-		"port": "7899",
-		"tls_ca_file": "/go/src/github.com/docker/vetinari/fixtures/ca.cert"
+		"type": "local",
+		"hostname": "",
+		"port": ""
+	},
+	"logging": {
+		"level": 5
 	}
 }

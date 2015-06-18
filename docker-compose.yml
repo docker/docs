@@ -1,15 +1,16 @@
 vetinari:
   build: .
   links:
-   - rufus
+   - mysql
   ports:
    - "8080:8080"
-   - "4444:4444"
-rufus:
-  volumes:
-   - /dev/bus/usb/003/010:/dev/bus/usb/002/010
-   - /var/run/pcscd/pcscd.comm:/var/run/pcscd/pcscd.comm
-  build: ../rufus
+   - "4443:4443"
+#rufus:
+#  volumes:
+#   - /dev/bus/usb/003/010:/dev/bus/usb/002/010
+#   - /var/run/pcscd/pcscd.comm:/var/run/pcscd/pcscd.comm
+#  build: ../rufus
+mysql:
+  build: ./mysql/
   ports:
-   - "7899:7899"
-
+    - "3306:3306"

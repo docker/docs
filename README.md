@@ -27,3 +27,8 @@ separate service and server with highly restricted permissions. Rufus
 is provided as a reference implementation of a remote signer. An
 implementation that satisfies the gRPC interface defined in Rufus will
 satisfy Vetinari's requirements.
+
+# Running
+
+`# docker-compose build`
+`# docker-compose up`
