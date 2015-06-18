@@ -262,7 +262,7 @@ func tufLookup(cmd *cobra.Command, args []string) {
 	repo := tuf.NewTufRepo(kdb, nil)
 
 	remote, err := store.NewHTTPStore(
-		"https://localhost:4443/v2"+gun+"/_trust/tuf/",
+		"https://vetinari:4443/v2"+gun+"/_trust/tuf/",
 		"",
 		"json",
 		"",

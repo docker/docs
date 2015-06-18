@@ -27,7 +27,7 @@ func NewCryptoService(gun string) *cliCryptoService {
 }
 
 // Create is used to generate keys for targets, snapshots and timestamps
-func (ccs *cliCryptoService) Create() (*data.PublicKey, error) {
+func (ccs *cliCryptoService) Create(role string) (*data.PublicKey, error) {
 	_, cert, err := generateKeyAndCert(ccs.gun)
 	if err != nil {
 		return nil, err

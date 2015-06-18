@@ -74,7 +74,7 @@ func (trust *RufusSigner) Sign(keyIDs []string, toSign []byte) ([]data.Signature
 }
 
 // Create creates a remote key and returns the PublicKey associated with the remote private key
-func (trust *RufusSigner) Create() (*data.PublicKey, error) {
+func (trust *RufusSigner) Create(role string) (*data.PublicKey, error) {
 	publicKey, err := trust.kmClient.CreateKey(context.Background(), &pb.Void{})
 	if err != nil {
 		return nil, err
