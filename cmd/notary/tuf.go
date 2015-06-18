@@ -87,14 +87,15 @@ func tufAdd(cmd *cobra.Command, args []string) {
 		fatalf("must specify a QDN, target name, and local path to target data")
 	}
 
-	qdn := args[0]
+	gun := args[0]
 	targetName := args[1]
 	targetPath := args[2]
 	kdb := keys.NewDB()
-	repo := tuf.NewTufRepo(kdb, nil)
+	signer := signed.NewSigner(NewCryptoService(gun))
+	repo := tuf.NewTufRepo(kdb, signer)
 
 	filestore, err := store.NewFilesystemStore(
-		path.Join(viper.GetString("tufDir"), qdn), // TODO: base trust dir from config
+		path.Join(viper.GetString("tufDir"), gun),
 		"metadata",
 		"json",
 		"targets",
@@ -150,7 +151,11 @@ func tufAdd(cmd *cobra.Command, args []string) {
 	if err != nil {
 		fatalf(err.Error())
 	}
-	repo.AddTargets("targets", data.Files{targetName: meta})
+
+	_, err = repo.AddTargets("targets", data.Files{targetName: meta})
+	if err != nil {
+		fatalf(err.Error())
+	}
 
 	saveRepo(repo, filestore)
 }

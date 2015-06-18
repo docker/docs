@@ -376,7 +376,7 @@ func (tr *TufRepo) AddTargets(role string, targets data.Files) (data.Files, erro
 		pathDigest := sha256.Sum256([]byte(path))
 		pathHex := hex.EncodeToString(pathDigest[:])
 		r := tr.keysDB.GetRole(role)
-		if r.CheckPaths(path) || r.CheckPrefixes(pathHex) {
+		if role == data.ValidRoles["targets"] || (r.CheckPaths(path) || r.CheckPrefixes(pathHex)) {
 			t.Signed.Targets[path] = target
 		} else {
 			invalid[path] = target
