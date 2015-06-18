@@ -253,29 +253,36 @@ func tufList(cmd *cobra.Command, args []string) {
 func tufLookup(cmd *cobra.Command, args []string) {
 	if len(args) < 2 {
 		cmd.Usage()
-		fatalf("must specify a GUN and target path to look up.")
+		fatalf("must specify a GUN and target name")
 	}
-
 	gun := args[0]
 	targetName := args[1]
 	kdb := keys.NewDB()
 	repo := tuf.NewTufRepo(kdb, nil)
 
 	remote, err := store.NewHTTPStore(
-		"https://vetinari:4443/v2"+gun+"/_trust/tuf/",
+		"https://vetinari:4443/v2/"+gun+"/_trust/tuf/",
 		"",
 		"json",
 		"",
 	)
-
-	rootJSON, err := remote.GetMeta("root", 0)
+	rootJSON, err := remote.GetMeta("root", 5<<20)
+	if err != nil {
+		fmt.Println("Couldn't get initial root")
+		fatalf(err.Error())
+	}
 	root := &data.Signed{}
 	err = json.Unmarshal(rootJSON, root)
 	if err != nil {
+		fmt.Println("Couldn't parse initial root")
 		fatalf(err.Error())
 	}
 	// TODO: Validate the root file against the key store
-	repo.SetRoot(root)
+	err = repo.SetRoot(root)
+	if err != nil {
+		fmt.Println("Error setting root")
+		fatalf(err.Error())
+	}
 
 	c := client.NewClient(
 		repo,
@@ -285,11 +292,14 @@ func tufLookup(cmd *cobra.Command, args []string) {
 
 	err = c.Update()
 	if err != nil {
+		fmt.Println("Update failed")
 		fatalf(err.Error())
 	}
-	m := c.TargetMeta(targetName)
-	// TODO: how to we want to output hash and size
-	fmt.Println(m.Hashes["sha256"], " ", m.Length)
+	meta := c.TargetMeta(targetName)
+	if meta == nil {
+		return
+	}
+	fmt.Println(targetName, fmt.Sprintf("sha256:%s", meta.Hashes["sha256"]), meta.Length)
 }
 
 func tufPush(cmd *cobra.Command, args []string) {
