@@ -45,8 +45,8 @@ func (signer *Signer) Sign(s *data.Signed, keys ...*data.PublicKey) error {
 	return nil
 }
 
-func (signer *Signer) Create() (*data.PublicKey, error) {
-	key, err := signer.service.Create()
+func (signer *Signer) Create(role string) (*data.PublicKey, error) {
+	key, err := signer.service.Create(role)
 	return key, err
 }
 

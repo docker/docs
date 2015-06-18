@@ -18,7 +18,7 @@ type SigningService interface {
 type KeyService interface {
 	// Create issues a new key pair and is responsible for loading
 	// the private key into the appropriate signing service.
-	Create() (*data.PublicKey, error)
+	Create(role string) (*data.PublicKey, error)
 
 	// PublicKeys return the PublicKey instances for the given KeyIDs
 	//	PublicKeys(keyIDs ...string) (map[string]*data.PublicKey, error)

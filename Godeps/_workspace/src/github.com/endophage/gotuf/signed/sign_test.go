@@ -35,7 +35,7 @@ func TestBasicSign(t *testing.T) {
 	signer := Signer{&MockCryptoService{
 		testKey: keys.PublicKey{ID: "testID"},
 	}}
-	key, err := signer.Create()
+	key, err := signer.Create("root")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -104,7 +104,7 @@ func TestCreate(t *testing.T) {
 		testKey: keys.PublicKey{ID: "testID"},
 	}}
 
-	key, err := signer.Create()
+	key, err := signer.Create("root")
 
 	if err != nil {
 		t.Fatal(err)

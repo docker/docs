@@ -46,7 +46,7 @@ func (trust *Ed25519) Sign(keyIDs []string, toSign []byte) ([]data.Signature, er
 
 }
 
-func (trust *Ed25519) Create() (*data.PublicKey, error) {
+func (trust *Ed25519) Create(role string) (*data.PublicKey, error) {
 	pub, priv, err := ed25519.GenerateKey(rand.Reader)
 	if err != nil {
 		return nil, err

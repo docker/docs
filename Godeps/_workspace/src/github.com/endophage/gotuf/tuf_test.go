@@ -15,19 +15,19 @@ import (
 
 func initRepo(t *testing.T, signer *signed.Signer, keyDB *keys.KeyDB) *TufRepo {
 
-	rootKey, err := signer.Create()
+	rootKey, err := signer.Create("root")
 	if err != nil {
 		t.Fatal(err)
 	}
-	targetsKey, err := signer.Create()
+	targetsKey, err := signer.Create("targets")
 	if err != nil {
 		t.Fatal(err)
 	}
-	snapshotKey, err := signer.Create()
+	snapshotKey, err := signer.Create("snapshot")
 	if err != nil {
 		t.Fatal(err)
 	}
-	timestampKey, err := signer.Create()
+	timestampKey, err := signer.Create("timestamp")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -136,7 +136,7 @@ func TestUpdateDelegations(t *testing.T) {
 	keyDB := keys.NewDB()
 	repo := initRepo(t, signer, keyDB)
 
-	testKey, err := signer.Create()
+	testKey, err := signer.Create("targets/test")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -150,7 +150,7 @@ func TestUpdateDelegations(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	testDeepKey, err := signer.Create()
+	testDeepKey, err := signer.Create("targets/test/deep")
 	if err != nil {
 		t.Fatal(err)
 	}

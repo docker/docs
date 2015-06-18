@@ -162,10 +162,10 @@ func tufInit(cmd *cobra.Command, args []string) {
 	kdb := keys.NewDB()
 	signer := signed.NewSigner(NewCryptoService(gun))
 
-	rootKey, err := signer.Create()
-	targetsKey, err := signer.Create()
-	snapshotKey, err := signer.Create()
-	timestampKey, err := signer.Create()
+	rootKey, err := signer.Create("root")
+	targetsKey, err := signer.Create("targets")
+	snapshotKey, err := signer.Create("snapshot")
+	timestampKey, err := signer.Create("timestamp")
 
 	kdb.AddKey(rootKey)
 	kdb.AddKey(targetsKey)

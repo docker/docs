@@ -78,7 +78,7 @@ func (VerifySuite) Test(c *C) {
 		{
 			name: "more than enough signatures",
 			mut: func(t *test) {
-				k, _ := signer.Create()
+				k, _ := signer.Create("root")
 				signer.Sign(t.s, k)
 				t.keys = append(t.keys, k)
 				t.roles["root"].KeyIDs = append(t.roles["root"].KeyIDs, k.ID)
@@ -95,14 +95,14 @@ func (VerifySuite) Test(c *C) {
 		{
 			name: "unknown key",
 			mut: func(t *test) {
-				k, _ := signer.Create()
+				k, _ := signer.Create("root")
 				signer.Sign(t.s, k)
 			},
 		},
 		{
 			name: "unknown key below threshold",
 			mut: func(t *test) {
-				k, _ := signer.Create()
+				k, _ := signer.Create("root")
 				signer.Sign(t.s, k)
 				t.roles["root"].Threshold = 2
 			},
@@ -111,7 +111,7 @@ func (VerifySuite) Test(c *C) {
 		{
 			name: "unknown keys in db",
 			mut: func(t *test) {
-				k, _ := signer.Create()
+				k, _ := signer.Create("root")
 				signer.Sign(t.s, k)
 				t.keys = append(t.keys, k)
 			},
@@ -119,7 +119,7 @@ func (VerifySuite) Test(c *C) {
 		{
 			name: "unknown keys in db below threshold",
 			mut: func(t *test) {
-				k, _ := signer.Create()
+				k, _ := signer.Create("root")
 				signer.Sign(t.s, k)
 				t.keys = append(t.keys, k)
 				t.roles["root"].Threshold = 2
@@ -157,7 +157,7 @@ func (VerifySuite) Test(c *C) {
 			t.typ = t.role
 		}
 		if t.keys == nil && t.s == nil {
-			k, _ := signer.Create()
+			k, _ := signer.Create("root")
 			meta := &signedMeta{Type: t.typ, Version: t.ver, Expires: *t.exp}
 
 			b, err := cjson.Marshal(meta)
