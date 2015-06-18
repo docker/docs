@@ -62,7 +62,7 @@ func keysRemove(cmd *cobra.Command, args []string) {
 	}
 
 	failed := true
-	cert, err := caStore.GetCertificateBySKID(args[0])
+	cert, err := caStore.GetCertificateBykID(args[0])
 	if err == nil {
 		fmt.Printf("Removing: ")
 		printCert(cert)

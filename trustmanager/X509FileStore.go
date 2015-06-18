@@ -175,15 +175,15 @@ func (s X509FileStore) GetCertificatePool() *x509.CertPool {
 	return pool
 }
 
-// GetCertificateBySKID returns the certificate that matches a certain SKID or error
-func (s X509FileStore) GetCertificateBySKID(hexSKID string) (*x509.Certificate, error) {
+// GetCertificateBykID returns the certificate that matches a certain kID or error
+func (s X509FileStore) GetCertificateBykID(hexkID string) (*x509.Certificate, error) {
 	// If it does not look like a hex encoded sha256 hash, error
-	if len(hexSKID) != 64 {
+	if len(hexkID) != 64 {
 		return nil, errors.New("invalid Subject Key Identifier")
 	}
 
 	// Check to see if this subject key identifier exists
-	if cert, ok := s.fingerprintMap[ID(hexSKID)]; ok {
+	if cert, ok := s.fingerprintMap[ID(hexkID)]; ok {
 		return cert, nil
 
 	}

@@ -10,7 +10,7 @@ type X509Store interface {
 	AddCertFromPEM(pemCerts []byte) error
 	AddCertFromFile(filename string) error
 	RemoveCert(cert *x509.Certificate) error
-	GetCertificateBySKID(hexSKID string) (*x509.Certificate, error)
+	GetCertificateBykID(hexkID string) (*x509.Certificate, error)
 	GetCertificates() []*x509.Certificate
 	GetCertificatePool() *x509.CertPool
 	GetVerifyOptions(dnsName string) (x509.VerifyOptions, error)
