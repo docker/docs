@@ -26,7 +26,7 @@ const tufDir string = configPath + "tuf/"
 var caStore trustmanager.X509Store
 
 func init() {
-	logrus.SetLevel(logrus.DebugLevel)
+	logrus.SetLevel(logrus.ErrorLevel)
 	// Retrieve current user to get home directory
 	usr, err := user.Current()
 	if err != nil {

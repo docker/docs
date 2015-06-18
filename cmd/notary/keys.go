@@ -162,8 +162,11 @@ func keysGenerate(cmd *cobra.Command, args []string) {
 		fatalf("must specify a GUN")
 	}
 
-	// (diogo): Validate GUNs
+	//TODO (diogo): Validate GUNs. Don't allow '/' or '\' for now.
 	gun := args[0]
+	if gun[0:1] == "/" || gun[0:1] == "\\" {
+		fatalf("invalid Global Unique Name: %s", gun)
+	}
 
 	_, cert, err := generateKeyAndCert(gun)
 	if err != nil {
