@@ -417,11 +417,14 @@ func (tr *TufRepo) UpdateTimestamp(s *data.Signed) error {
 
 func (tr *TufRepo) SignRoot(expires time.Time) (*data.Signed, error) {
 	logrus.Debug("SignRoot")
+	if tr.Root.Dirty {
+		tr.Root.Signed.Version++
+	}
+	root := tr.keysDB.GetRole(data.ValidRoles["root"])
 	signed, err := tr.Root.ToSigned()
 	if err != nil {
 		return nil, err
 	}
-	root := tr.keysDB.GetRole(data.ValidRoles["root"])
 	signed, err = tr.sign(signed, *root)
 	if err != nil {
 		return nil, err
@@ -432,13 +435,14 @@ func (tr *TufRepo) SignRoot(expires time.Time) (*data.Signed, error) {
 
 func (tr *TufRepo) SignTargets(role string, expires time.Time) (*data.Signed, error) {
 	logrus.Debug("SignTargets")
-	signed, err := tr.Targets[role].ToSigned()
-	if err != nil {
-		logrus.Debug("errored getting targets data.Signed object")
-		return nil, err
-	}
 	logrus.Debug("Got targets data.Signed object")
 	if tr.Targets[role].Dirty {
+		tr.Targets[role].Signed.Version++
+		signed, err := tr.Targets[role].ToSigned()
+		if err != nil {
+			logrus.Debug("errored getting targets data.Signed object")
+			return nil, err
+		}
 		targets := tr.keysDB.GetRole(role)
 		logrus.Debug("About to sign ", role)
 		signed, err = tr.sign(signed, *targets)
@@ -448,8 +452,15 @@ func (tr *TufRepo) SignTargets(role string, expires time.Time) (*data.Signed, er
 		}
 		logrus.Debug("success signing ", role)
 		tr.Targets[role].Signatures = signed.Signatures
+		return signed, nil
+	} else {
+		signed, err := tr.Targets[role].ToSigned()
+		if err != nil {
+			logrus.Debug("errored getting targets data.Signed object")
+			return nil, err
+		}
+		return signed, nil
 	}
-	return signed, nil
 }
 
 func (tr *TufRepo) SignSnapshot(expires time.Time) (*data.Signed, error) {
@@ -479,19 +490,26 @@ func (tr *TufRepo) SignSnapshot(expires time.Time) (*data.Signed, error) {
 		}
 		tr.Targets[role].Dirty = false // target role dirty until changes captured in snapshot
 	}
-	signed, err := tr.Snapshot.ToSigned()
-	if err != nil {
-		return nil, err
-	}
 	if tr.Snapshot.Dirty {
+		tr.Snapshot.Signed.Version++
+		signed, err := tr.Snapshot.ToSigned()
+		if err != nil {
+			return nil, err
+		}
 		snapshot := tr.keysDB.GetRole(data.ValidRoles["snapshot"])
 		signed, err = tr.sign(signed, *snapshot)
 		if err != nil {
 			return nil, err
 		}
 		tr.Snapshot.Signatures = signed.Signatures
+		return signed, nil
+	} else {
+		signed, err := tr.Snapshot.ToSigned()
+		if err != nil {
+			return nil, err
+		}
+		return signed, nil
 	}
-	return signed, nil
 }
 
 func (tr *TufRepo) SignTimestamp(expires time.Time) (*data.Signed, error) {
@@ -506,8 +524,9 @@ func (tr *TufRepo) SignTimestamp(expires time.Time) (*data.Signed, error) {
 			return nil, err
 		}
 	}
-	signed, err := tr.Timestamp.ToSigned()
 	if tr.Timestamp.Dirty {
+		tr.Timestamp.Signed.Version++
+		signed, err := tr.Timestamp.ToSigned()
 		if err != nil {
 			return nil, err
 		}
@@ -518,8 +537,14 @@ func (tr *TufRepo) SignTimestamp(expires time.Time) (*data.Signed, error) {
 		}
 		tr.Timestamp.Signatures = signed.Signatures
 		tr.Snapshot.Dirty = false // snapshot is dirty until changes have been captured in timestamp
+		return signed, nil
+	} else {
+		signed, err := tr.Timestamp.ToSigned()
+		if err != nil {
+			return nil, err
+		}
+		return signed, nil
 	}
-	return signed, nil
 }
 
 func (tr TufRepo) sign(signed *data.Signed, role data.Role) (*data.Signed, error) {
