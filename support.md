@@ -22,3 +22,4 @@ In either case, you'll need to verify your email address, and then you can
 communicate with the support team either by email or web interface.
 
 **The availability of support depends on your [support subscription](https://www.docker.com/enterprise/support/)**
+

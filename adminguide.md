@@ -5,7 +5,6 @@ description = "Documentation describing administration of Docker Trusted Registr
 keywords = ["docker, documentation, about, technology, hub, registry, enterprise"]
 [menu.main]
 parent="smn_dhe"
-identifier="smn_dhe_admin"
 weight=3
 +++
 <![end-metadata]-->
@@ -71,9 +70,9 @@ to get temporary unsecure access to it by running:
 
     $ docker run --rm -it --link docker_trusted_registry_admin_server:admin -p 9999:80 svendowideit/ambassador
 
-> **Note:** This guide assumes you can run Docker commands from a machine where
-> you are a member of the `docker` group, or have root privileges. Otherwise,
-> you may need to add `sudo` to the example command above.
+> **Note:** This guide assumes that you are a member of the `docker` group,
+> or have root privileges. Otherwise, you may need to add `sudo` to the example
+> command above.
 
 This will give you access on port `9999` on your DTR server - `http://<dtr-host-ip>:9999/admin/`.
 
@@ -102,11 +101,210 @@ DTR.
 
      $ sudo bash -c "$(sudo docker run dockerhubenterprise/manager [COMMAND])"
 
-Supported commands are: `install`, `start`, `stop`, `restart`, `status`, and
-`upgrade`.
+Supported commands are: `install`, `start`, `stop`, `restart`, `pull`, `info`,
+`export-settings`, `diagnostics`, `status`, `upgrade`.
 
 > **Note**: `sudo` is needed for `dockerhubenterprise/manager` commands to
 > ensure that the Bash script is run with full access to the Docker host.
+
+### `install`
+
+Install DTR.
+
+### `start`
+
+Start DTR containers that are not running.
+
+### `stop`
+
+Stop DTR containers that are running.
+
+### `restart`
+
+Stop and then start the DTR containers.
+
+### `status`
+
+Display the current running status of only the DTR containers.
+
+```
+$ sudo bash -c "$(docker run dockerhubenterprise/trusted-registry-dev:1.1.0-rc3 status)"
+INFO  [1.1.0-alpha-001472_g8a9ddb4] Attempting to connect to docker engine dockerHost="unix:///var/run/docker.sock"
+INFO  [1.1.0-alpha-001472_g8a9ddb4] Running status command
+docker_trusted_registry_load_balancer
+    Daemon [default (unix:///var/run/docker.sock)]
+        Id: 4d6abd5c39acda25e3d3ccf7cc2acf00f32c7786a7e86fb56daf7fd67584ce9f
+        Created: 2015-06-16 21:52:53+00:00
+        Status: Up 4 minutes
+        Image: dockerhubenterprise/trusted-registry-nginx-dev:1.1.0-alpha-001472_g8a9ddb4
+        Ports:
+            tcp://0.0.0.0:443 -> 443
+            tcp://0.0.0.0:80 -> 80
+        Command:
+            nginxWatcher
+        Linked To:
+            None
+
+docker_trusted_registry_auth_server
+    Daemon [default (unix:///var/run/docker.sock)]
+        Id: 22d5c1cf988338638dd810bc8111295f71713e81338d16298028122d33eed64a
+        Created: 2015-06-16 21:52:46+00:00
+...
+```
+
+### `info`
+
+Display the version and info for the Docker daemon, and version and image ID's
+of DTR.
+
+
+```
+$ sudo bash -c "$(docker run dockerhubenterprise/trusted-registry-dev:1.1.0-rc3 info)"
+INFO  [1.1.0-alpha-001472_g8a9ddb4] Attempting to connect to docker engine dockerHost="unix:///var/run/docker.sock"
+{
+  "DockerEngine": {
+    "Version": {
+      "ApiVersion": "1.20",
+      "Arch": "amd64",
+      "GitCommit": "55bdb51",
+      "GoVersion": "go1.4.2",
+      "KernelVersion": "3.16.0-4-amd64",
+      "Os": "linux",
+      "Version": "1.7.0-dev"
+    },
+    "Info": {
+      "ID": "QUMM:6SGD:6ZK4:TLJD:LTX7:64Z5:WP4Y:NE3N:TY7P:Y2RR:KVGO:IWRX",
+      "Containers": 15,
+      "Driver": "btrfs",
+      "DriverStatus": [],
+      "ExecutionDriver": "native-0.2",
+      "Images": 2793,
+      "KernelVersion": "3.16.0-4-amd64",
+      "OperatingSystem": "Debian GNU/Linux stretch/sid",
+      "NCPU": 4,
+      "MemTotal": 12305711104,
+      "Name": "t440s",
+      "Labels": null,
+      "Debug": true,
+      "NFd": 43,
+      "NGoroutines": 85,
+      "SystemTime": "2015-06-17T04:24:54.634746915+10:00",
+      "NEventsListener": 1,
+      "InitPath": "/usr/bin/docker",
+      "InitSha1": "",
+      "IndexServerAddress": "https://index.docker.io/v1/",
+      "MemoryLimit": false,
+      "SwapLimit": false,
+      "IPv4Forwarding": true,
+      "DockerRootDir": "/data/docker",
+      "HttpProxy": "",
+      "HttpsProxy": "",
+      "NoProxy": ""
+    }
+  },
+  "DTR": {
+    "Version": "1.1.0-alpha-001472_g8a9ddb4",
+    "GitSHA": "8a9ddb4595c3",
+    "StorageDriver": "filesystem",
+    "AuthDriver": "dtr",
+    "ImageIDs": {
+      "Garant": "59bc135c362ad7e44743800b037061976210a9cc6aec323c3ea6eb93ebb513ca",
+      "Registry": "6aba58d8bbe71b14edd538a20ac98e1279577bbef461ca25fd2794dcb017c1dc",
+      "AdminServer": "af4dfb1f386e3e07b612f5f59f08166ce499ef1dfc619d499a42c53c5e424acf",
+      "Manager": "3abc65af8385e63d61af40a1393438d0d720e6bf2a60c1b15b7a17a2a0d8965b",
+      "LogAggregator": "01da5d7ef561a251c0c63b860a95d55b602cc70347192ef34acd3b1c5bcd317f",
+      "Nginx": "631537f98c8876050fae00106c8db424d03e408b27cc14b5eb1fc11abbaba03b"
+    },
+    "LicenseKeyID": "2Y6QPUBxoYEms6pIysneyum6SZY_QxE9v4zLF8i1wBNZ"
+  }
+}
+```
+
+### `diagnostics`
+
+The `diagnostics` command is used to extract configuration and run time data
+about your containers for support purposes.
+
+The output includes the `docker inspect` output for all
+containers, running and not, so please check the resulting files for passwords
+and other proprietary information before sending it.
+
+`$ sudo bash -c "$(docker run dockerhubenterprise/trusted-registry-dev:1.1.0-rc3 diagnostics)" > diagnostics.zip`
+
+> **Warning:** These diagnostics files may contain secrets that you need to remove
+> before passing on - such as raw container log files, azure storage credentials, or passwords that may be
+> sent to non-DTR containers using the `docker run -e PASSWORD=asdf` environment variable
+> options.
+
+Stream to STDOUT a zip file containing CSDE and DTR configuration, state, and log
+files to help the Docker Enterprise support team:
+
+- your Docker host's `ca-certificates.crt`
+- `containers/`: the first 20 running, stopped and paused containers `docker inspect`
+  information and log files.
+- `dockerEngine/`: the Docker daemon's `info` and `version` output
+- `dockerState/`: the Docker daemon's container states, image states, daemon log file, and daemon configuration file
+- `dtrlogs/`: the DTR container log files
+- `manager/`: the DTR `/usr/local/etc/dtr` DTR configuration directory and DTR manager `info` output. See the [export settings section](#export-settings) for more details.
+- `sysinfo/`: Host information
+- `errors.txt`: errors and warnings encountered while running diagnostics
+
+
+### `export-settings`
+
+Export the DTR configuration files for backup or diagnostics use.
+
+`$ sudo bash -c "$(docker run dockerhubenterprise/trusted-registry-dev:1.1.0-rc3 export-settings)" > export-settings.tar.gz`
+
+> **Warning:** These diagnostics files may contain secrets that you need to remove
+> before passing on - such as azure storage credentials.
+
+Stream to STDOUT a gzipped tar file containing the DTR configuration files from `/usr/local/etc/dtr/`:
+
+- `garant.yml`
+- `generatedConfigs/nginx.conf`
+- `generatedConfigs/stacker.yml`
+- `hub.yml`
+- `license.json`
+- `ssl/server.pem`
+- `storage.yml`
+
+## Client Docker Daemon diagnostics
+
+To debug client Docker daemon communication issues with DTR, we also provide
+a diagnostics tool to be run on the client Docker daemon.
+
+> **Warning:** These diagnostics files may contain secrets that you need to remove
+> before passing on - such as raw container log files, azure storage credentials, or passwords that may be
+> sent to non-DTR containers using the `docker run -e PASSWORD=asdf` environment variable
+> options.
+
+You can download and run this tool using the following command:
+
+> **Note:** If you supply an administrator username and password, then the
+> `diagnostics` tool will also download some logs and configuration data
+> from the remote DTR server.
+
+```
+$ wget https://dhe.mycompany.com/admin/bin/diagnostics && chmod +x diagnostics
+$ sudo ./diagnostics dhe.mycompany.com > enduserDiagnostics.zip
+DTR administrator username (provide empty string if there is no admin server authentication): 
+DTR administrator password (provide empty string if there is no admin server authentication): 
+WARN  [1.1.0-alpha-001472_g8a9ddb4] Encountered errors running diagnostics errors=[Failed to copy DTR Adminserver's exported settings into ZIP output: "Failed to read next tar header: \"archive/tar: invalid tar header\"" Failed to copy logs from DTR Adminserver into ZIP output: "Failed to read next tar header: \"archive/tar: invalid tar header\"" error running "sestatus": "exit status 127" error running "dmidecode": "exit status 127"]
+```
+
+The zip file will contain the following information:
+
+- your local Docker host's `ca-certificates.crt`
+- `containers/`: the first 20 running, stopped and paused containers `docker inspect`
+  information and log files.
+- `dockerEngine/`: the local Docker daemon's `info` and `version` output
+- `dockerState/`: the local Docker daemon's container states, image states, log file, and daemon configuration file
+- `dtr/`: Remote DTR services information. This directory will only be populated if the user enters a DTR "admin" username and password.
+- - `dtr/logs/`: the remote DTR container log files. This directory will only be populated if the user enters a DTR "admin" username and password.
+- - `dtr/exportedSettings/`: the DTR manager container's log files and a backup of the `/usr/local/etc/dtr` DTR configuration directory. See the [export settings section](#export-settings) for more details.
+- `sysinfo/`: local Host information
+- `errors.txt`: errors and warnings encountered while running diagnostics
 
 ## Next Steps
 
