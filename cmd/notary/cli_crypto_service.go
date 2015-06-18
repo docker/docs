@@ -33,7 +33,11 @@ func (ccs *cliCryptoService) Create() (*data.PublicKey, error) {
 		return nil, err
 	}
 
-	return data.NewPublicKey("RSA", string(cert)), nil
+	// PEM ENcode the certificate, which will be put directly inside of TUF's root.json
+	block := pem.Block{Type: "CERTIFICATE", Bytes: cert.Raw}
+	pemdata := string(pem.EncodeToMemory(&block))
+
+	return data.NewPublicKey("RSA", pemdata), nil
 }
 
 // Sign returns the signatures for data with the given keyIDs
@@ -76,7 +80,7 @@ func (ccs *cliCryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signa
 }
 
 //TODO (diogo): Add support for EC P384
-func generateKeyAndCert(gun string) (crypto.PrivateKey, []byte, error) {
+func generateKeyAndCert(gun string) (crypto.PrivateKey, *x509.Certificate, error) {
 
 	// Generates a new RSA key
 	key, err := rsa.GenerateKey(rand.Reader, 2048)
@@ -97,14 +101,15 @@ func generateKeyAndCert(gun string) (crypto.PrivateKey, []byte, error) {
 	}
 
 	// Encode the new certificate into PEM
-	cert := pem.EncodeToMemory(&pem.Block{Type: "CERTIFICATE", Bytes: derBytes})
+	cert, err := x509.ParseCertificate(derBytes)
+	if err != nil {
+		return nil, nil, fmt.Errorf("failed to generate the certificate for key: %v", err)
+	}
 
-	// Create new TUF Key so we can compute the TUF-compliant ID
-	tufKey := data.NewTUFKey("RSA", string(cert), "")
-
+	kID := trustmanager.FingerprintCert(cert)
 	// The key is going to be stored in the private directory, using the GUN and
 	// the filename will be the TUF-compliant ID
-	privKeyFilename := filepath.Join(viper.GetString("privDir"), gun, tufKey.ID()+".key")
+	privKeyFilename := filepath.Join(viper.GetString("privDir"), gun, string(kID)+".key")
 
 	// If GUN is in the form of 'foo/bar' ensures that private key is stored in the
 	// adequate sub-directory

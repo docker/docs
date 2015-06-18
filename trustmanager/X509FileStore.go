@@ -144,15 +144,13 @@ func (s X509FileStore) AddCertFromPEM(pemBytes []byte) error {
 }
 
 // AddCertFromFile tries to adds a X509 certificate to the store given a filename
-func (s X509FileStore) AddCertFromFile(originFilname string) error {
-	cert, err := loadCertFromFile(originFilname)
+func (s X509FileStore) AddCertFromFile(filename string) error {
+	cert, err := loadCertFromFile(filename)
 	if err != nil {
 		return err
 	}
 
-	filename := s.genDestinationCertFilename(cert, originFilname)
-
-	return s.addNamedCert(cert, filename)
+	return s.AddCert(cert)
 }
 
 // GetCertificates returns an array with all of the current X509 Certificates.
@@ -175,26 +173,6 @@ func (s X509FileStore) GetCertificatePool() *x509.CertPool {
 		pool.AddCert(v)
 	}
 	return pool
-}
-
-// genDestinationCertFilename generates a unique destination certificate filename
-// given a sourceFilename to help keep indication to where the original file came from
-func (s X509FileStore) genDestinationCertFilename(cert *x509.Certificate, sourceFilename string) string {
-	// Take the file name, extension and base name from filename
-	_, fName := path.Split(sourceFilename)
-	extName := path.Ext(sourceFilename)
-	bName := fName[:len(fName)-len(extName)]
-
-	filename := path.Join(s.baseDir, bName+certExtension)
-
-	// If a file with the same name already exists in the destination directory
-	// add hash to filename
-	if _, err := os.Stat(filename); err == nil {
-		fingerprint := FingerprintCert(cert)
-		// Add the certificate fingerprint to the file basename_FINGERPRINT.crt
-		filename = path.Join(s.baseDir, bName+"_"+string(fingerprint)+certExtension)
-	}
-	return filename
 }
 
 // GetCertificateBySKID returns the certificate that matches a certain SKID or error

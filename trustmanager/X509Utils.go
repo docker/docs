@@ -1,9 +1,7 @@
 package trustmanager
 
 import (
-	"crypto/sha256"
 	"crypto/x509"
-	"encoding/hex"
 	"encoding/pem"
 	"errors"
 	"fmt"
@@ -11,8 +9,9 @@ import (
 	"net/http"
 	"net/url"
 	"os"
-	"path"
 	"path/filepath"
+
+	"github.com/endophage/gotuf/data"
 )
 
 // GetCertFromURL tries to get a X509 certificate given a HTTPS URL
@@ -68,21 +67,35 @@ func saveCertificate(cert *x509.Certificate, filename string) error {
 }
 
 func FingerprintCert(cert *x509.Certificate) ID {
-	fingerprintBytes := sha256.Sum256(cert.Raw)
-	return ID(hex.EncodeToString(fingerprintBytes[:]))
+	block := pem.Block{Type: "CERTIFICATE", Bytes: cert.Raw}
+	pemdata := string(pem.EncodeToMemory(&block))
+
+	// Create new TUF Key so we can compute the TUF-compliant ID
+	tufKey := data.NewTUFKey("RSA", pemdata, "")
+
+	return ID(tufKey.ID())
 }
 
 // loadCertsFromDir receives a store and a directory and calls loadCertFromFile
 // for each certificate found
 func loadCertsFromDir(s *X509FileStore, directory string) {
-	certFiles, _ := filepath.Glob(path.Join(directory, fmt.Sprintf("*%s", certExtension)))
-	for _, f := range certFiles {
-		cert, err := loadCertFromFile(f)
-		// Ignores files that do not contain valid certificates
-		if err == nil {
-			s.addNamedCert(cert, f)
+	filepath.Walk(directory, func(fp string, fi os.FileInfo, err error) error {
+		// If there are errors, ignore this particular file
+		if err != nil {
+			return nil
 		}
-	}
+		// Ignore if it is a directory
+		if !!fi.IsDir() {
+			return nil
+		}
+		// Only allow matches that end with our certificate extension (e.g. *.crt)
+		matched, _ := filepath.Match("*"+certExtension, fi.Name())
+
+		if matched {
+			s.AddCertFromFile(fp)
+		}
+		return nil
+	})
 }
 
 // loadCertFromFile tries to adds a X509 certificate to the store given a filename

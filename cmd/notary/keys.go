@@ -9,11 +9,14 @@ import (
 	"math/big"
 	"net/url"
 	"os"
+	"path/filepath"
+	"strings"
 	"time"
 
 	"github.com/docker/vetinari/trustmanager"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 var subjectKeyID string
@@ -71,18 +74,7 @@ func keysRemove(cmd *cobra.Command, args []string) {
 		failed = false
 	}
 
-	cert, err = privStore.GetCertificateBySKID(args[0])
-	if err == nil {
-		fmt.Printf("Removing: ")
-		printCert(cert)
-
-		//TODO (diogo): remove associated private key
-		err = privStore.RemoveCert(cert)
-		if err != nil {
-			fatalf("failed to remove certificate for Private KeyStore")
-		}
-		failed = false
-	}
+	//TODO (diogo): We might want to delete private keys from the CLI
 	if failed {
 		fatalf("certificate not found in any store")
 	}
@@ -137,11 +129,31 @@ func keysList(cmd *cobra.Command, args []string) {
 
 	fmt.Println("")
 	fmt.Println("# Signing keys: ")
-	privateCerts := privStore.GetCertificates()
-	for _, c := range privateCerts {
-		printCert(c)
-	}
+	filepath.Walk(viper.GetString("privDir"), printAllPrivateKeys)
+}
 
+func printAllPrivateKeys(fp string, fi os.FileInfo, err error) error {
+	// If there are errors, ignore this particular file
+	if err != nil {
+		return nil
+	}
+	// Ignore if it is a directory
+	if !!fi.IsDir() {
+		return nil
+	}
+	//TODO (diogo): make the key extension not be hardcoded
+	// Only allow matches that end with our key extension .key
+	matched, _ := filepath.Match("*.key", fi.Name())
+	if matched {
+		fp = strings.TrimSuffix(fp, filepath.Ext(fp))
+		fp = strings.TrimPrefix(fp, viper.GetString("privDir"))
+
+		fingerprint := filepath.Base(fp)
+		gun := filepath.Dir(fp)[1:]
+
+		fmt.Printf("%s %s\n", gun, fingerprint)
+	}
+	return nil
 }
 
 func keysGenerate(cmd *cobra.Command, args []string) {
@@ -158,7 +170,9 @@ func keysGenerate(cmd *cobra.Command, args []string) {
 		fatalf("could not generate key: %v", err)
 	}
 
-	caStore.AddCertFromPEM(cert)
+	caStore.AddCert(cert)
+	fingerprint := trustmanager.FingerprintCert(cert)
+	fmt.Println("Generated new keypair with ID: ", string(fingerprint))
 }
 
 func newCertificate(gun, organization string) *x509.Certificate {
@@ -189,9 +203,5 @@ func newCertificate(gun, organization string) *x509.Certificate {
 func printCert(cert *x509.Certificate) {
 	timeDifference := cert.NotAfter.Sub(time.Now())
 	subjectKeyID := trustmanager.FingerprintCert(cert)
-	fmt.Printf("Certificate: %s ; Expires in: %v days; SKID: %s\n", printPkix(cert.Subject), math.Floor(timeDifference.Hours()/24), string(subjectKeyID))
-}
-
-func printPkix(pkixName pkix.Name) string {
-	return fmt.Sprintf("%s - %s", pkixName.CommonName, pkixName.Organization)
+	fmt.Printf("%s %s (expires in: %v days)\n", cert.Subject.CommonName, string(subjectKeyID), math.Floor(timeDifference.Hours()/24))
 }
