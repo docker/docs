@@ -12,7 +12,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/docker/vetinari/trustmanager"
+	"github.com/docker/notary/trustmanager"
 	"github.com/endophage/gotuf/data"
 	"github.com/spf13/viper"
 )

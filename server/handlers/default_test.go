@@ -9,7 +9,7 @@ import (
 
 	"github.com/endophage/gotuf/signed"
 
-	"github.com/docker/vetinari/utils"
+	"github.com/docker/notary/utils"
 )
 
 func TestMainHandlerGet(t *testing.T) {

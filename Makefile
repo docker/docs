@@ -15,9 +15,9 @@ AUTHORS: .git/HEAD
 version/version.go:
 	./version/version.sh > $@
 
-${PREFIX}/bin/vetinari-server: version/version.go $(shell find . -type f -name '*.go')
+${PREFIX}/bin/notary-server: version/version.go $(shell find . -type f -name '*.go')
 	@echo "+ $@"
-	@godep go build -o $@ ${GO_LDFLAGS} ./cmd/vetinari-server
+	@godep go build -o $@ ${GO_LDFLAGS} ./cmd/notary-server
 
 ${PREFIX}/bin/notary: version/version.go $(shell find . -type f -name '*.go')
 	@echo "+ $@"
@@ -53,9 +53,9 @@ protos:
 clean-protos:
 	@rm proto/*.pb.go
 
-binaries: ${PREFIX}/bin/vetinari-server ${PREFIX}/bin/notary
+binaries: ${PREFIX}/bin/notary-server ${PREFIX}/bin/notary
 	@echo "+ $@"
 
 clean:
 	@echo "+ $@"
-	@rm -rf "${PREFIX}/bin/vetinari-server" "${PREFIX}/bin/notary"
+	@rm -rf "${PREFIX}/bin/notary-server" "${PREFIX}/bin/notary"

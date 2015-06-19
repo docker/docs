@@ -1,13 +1,13 @@
 FROM golang
 
-COPY . /go/src/github.com/docker/vetinari
+COPY . /go/src/github.com/docker/notary
 
 RUN chmod 777 /tmp/
 
-RUN GOPATH="/go/src/github.com/docker/vetinari/Godeps/_workspace:/go/" go install github.com/docker/vetinari/cmd/vetinari-server
+RUN GOPATH="/go/src/github.com/docker/notary/Godeps/_workspace:/go/" go install github.com/docker/notary/cmd/notary-server
 
 EXPOSE 4443
 
-WORKDIR /go/src/github.com/docker/vetinari
+WORKDIR /go/src/github.com/docker/notary
 
-CMD vetinari-server -config cmd/vetinari-server/dev-config.json
+CMD notary-server -config cmd/notary-server/dev-config.json

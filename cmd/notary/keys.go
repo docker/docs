@@ -13,7 +13,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/docker/vetinari/trustmanager"
+	"github.com/docker/notary/trustmanager"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -146,7 +146,7 @@ func printAllPrivateKeys(fp string, fi os.FileInfo, err error) error {
 		return nil
 	}
 	// Ignore if it is a directory
-	if !!fi.IsDir() {
+	if fi.IsDir() {
 		return nil
 	}
 	//TODO (diogo): make the key extension not be hardcoded

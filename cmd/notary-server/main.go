@@ -17,10 +17,10 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"golang.org/x/net/context"
 
-	"github.com/docker/vetinari/config"
-	"github.com/docker/vetinari/server"
-	"github.com/docker/vetinari/server/version"
-	"github.com/docker/vetinari/signer"
+	"github.com/docker/notary/config"
+	"github.com/docker/notary/server"
+	"github.com/docker/notary/server/version"
+	"github.com/docker/notary/signer"
 )
 
 // DebugAddress is the debug server address to listen on
@@ -65,21 +65,21 @@ func main() {
 
 	var trust signed.CryptoService
 	if conf.TrustService.Type == "remote" {
-		logrus.Info("[Vetinari Server] : Using remote signing service")
+		logrus.Info("[Notary Server] : Using remote signing service")
 		trust = signer.NewRufusSigner(conf.TrustService.Hostname, conf.TrustService.Port, conf.TrustService.TLSCAFile)
 	} else {
-		logrus.Info("[Vetinari] : Using local signing service")
+		logrus.Info("[Notary Server] : Using local signing service")
 		trust = signed.NewEd25519()
 	}
 
-	db, err := sql.Open("mysql", "dockercondemo:dockercondemo@tcp(vetinarimysql:3306)/dockercondemo")
+	db, err := sql.Open("mysql", "dockercondemo:dockercondemo@tcp(notarymysql:3306)/dockercondemo")
 	if err != nil {
 		logrus.Fatal("Error starting DB driver: ", err.Error())
 		return // not strictly needed but let's be explicit
 	}
 	ctx = context.WithValue(ctx, "versionStore", version.NewVersionDB(db))
 	for {
-		logrus.Info("[Vetinari] Starting Server")
+		logrus.Info("[Notary Server] Starting Server")
 		childCtx, cancel := context.WithCancel(ctx)
 		go server.Run(childCtx, conf.Server, trust)
 
@@ -88,20 +88,20 @@ func main() {
 			// On a sighup we cancel and restart a new server
 			// with updated config
 			case <-sigHup:
-				logrus.Infof("[Vetinari] Server restart requested. Attempting to parse config at %s", configFile)
+				logrus.Infof("[Notary Server] Server restart requested. Attempting to parse config at %s", configFile)
 				conf, err = parseConfig(configFile)
 				if err != nil {
-					logrus.Infof("[Vetinari] Unable to parse config. Old configuration will keep running. Parse Err: %s", err.Error())
+					logrus.Infof("[Notary Server] Unable to parse config. Old configuration will keep running. Parse Err: %s", err.Error())
 					continue
 				} else {
 					cancel()
-					logrus.Info("[Vetinari] Stopping server for restart")
+					logrus.Info("[Notary Server] Stopping server for restart")
 					break
 				}
 			// On sigkill we cancel and shutdown
 			case <-sigTerm:
 				cancel()
-				logrus.Info("[Vetinari] Shutting Down Hard")
+				logrus.Info("[Notary Server] Shutting Down Hard")
 				os.Exit(0)
 			}
 		}
@@ -117,9 +117,9 @@ func usage() {
 // endpoints. The addr should not be exposed externally. For most of these to
 // work, tls cannot be enabled on the endpoint, so it is generally separate.
 func debugServer(addr string) {
-	logrus.Info("[Vetinari Debug Server] server listening on", addr)
+	logrus.Info("[Notary Debug Server] server listening on", addr)
 	if err := http.ListenAndServe(addr, nil); err != nil {
-		logrus.Fatal("[Vetinari Debug Server] error listening on debug interface: ", err)
+		logrus.Fatal("[Notary Debug Server] error listening on debug interface: ", err)
 	}
 }
 

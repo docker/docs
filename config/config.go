@@ -45,7 +45,7 @@ func Load(data io.Reader) (*Configuration, error) {
 	decoder := json.NewDecoder(data)
 	err := decoder.Decode(&conf)
 	if err != nil {
-		logrus.Error("[Vetinari Server] : Failed to parse configuration: ", err.Error())
+		logrus.Error("[Notary Server] : Failed to parse configuration: ", err.Error())
 		return nil, err
 	}
 	return &conf, nil

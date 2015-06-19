@@ -166,7 +166,7 @@ func tufList(cmd *cobra.Command, args []string) {
 	repo := tuf.NewTufRepo(kdb, nil)
 
 	remote, err := store.NewHTTPStore(
-		"https://vetinari:4443/v2/"+gun+"/_trust/tuf/",
+		"https://notary:4443/v2/"+gun+"/_trust/tuf/",
 		"",
 		"json",
 		"",
@@ -203,7 +203,7 @@ func tufLookup(cmd *cobra.Command, args []string) {
 	repo := tuf.NewTufRepo(kdb, nil)
 
 	remote, err := store.NewHTTPStore(
-		"https://vetinari:4443/v2/"+gun+"/_trust/tuf/",
+		"https://notary:4443/v2/"+gun+"/_trust/tuf/",
 		"",
 		"json",
 		"",
@@ -239,7 +239,7 @@ func tufPublish(cmd *cobra.Command, args []string) {
 	fmt.Println("Pushing changes to ", gun, ".")
 
 	remote, err := store.NewHTTPStore(
-		"https://vetinari:4443/v2/"+gun+"/_trust/tuf/",
+		"https://notary:4443/v2/"+gun+"/_trust/tuf/",
 		"",
 		"json",
 		"",
@@ -332,7 +332,7 @@ func verify(cmd *cobra.Command, args []string) {
 	repo := tuf.NewTufRepo(kdb, nil)
 
 	remote, err := store.NewHTTPStore(
-		"https://vetinari:4443/v2/"+gun+"/_trust/tuf/",
+		"https://notary:4443/v2/"+gun+"/_trust/tuf/",
 		"",
 		"json",
 		"",
