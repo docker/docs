@@ -1,6 +1,6 @@
 <!--[metadata]>
 +++
-title = "Docker Trusted Registry: Release notes"
+title = "Release notes"
 description = "Release notes for Docker Trusted Registry"
 keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry,  release"]
 [menu.main]
@@ -14,7 +14,7 @@ weight=100
 
 ## Prior Versions
 
-These notes refer to the current release of Docker Trusted Registry and the commercially supported Docker Engine. For notes on older versions of these, see the [prior release notes archive](prior-release-notes.html).
+These notes refer to the current release of Docker Trusted Registry and the commercially supported Docker Engine. For notes on older versions of these, see the [prior release notes archive](prior-release-notes.md).
 
 ## Docker Trusted Registry (DTR)
 

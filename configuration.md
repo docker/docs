@@ -1,11 +1,11 @@
 <!--[metadata]>
 +++
-title = "Docker Trusted Registry: Configuration options"
+title = "Configuration options"
 description = "Configuration instructions for Docker Trusted Registry"
 keywords = ["docker, documentation, about, technology, understanding, enterprise, hub,  registry"]
 [menu.main]
 parent="smn_dhe"
-weight=4
+weight=5
 +++
 <![end-metadata]-->
 

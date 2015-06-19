@@ -1,6 +1,6 @@
 <!--[metadata]>
 +++
-title = "Docker Trusted Registry: Admin guide"
+title = "Admin guide"
 description = "Documentation describing administration of Docker Trusted Registry"
 keywords = ["docker, documentation, about, technology, hub, registry, enterprise"]
 [menu.main]

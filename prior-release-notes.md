@@ -1,6 +1,6 @@
 <!--[metadata]>
 +++
-title = "Docker Trusted Registry: Prior release notes archive"
+title = "Prior release notes archive"
 description = "Archived Release notes for Docker Trusted Registry"
 keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry,  release"]
 [menu.main]
@@ -246,5 +246,5 @@ Because this addition is preventative, no CVE-ID is requested.
 ### CS Docker Engine 1.6.0-cs2
 (23 Apr 2015)
 
-- First release, please see the [Docker Engine 1.6.0 Release notes](/release-notes/)
+- First release, please see the [Docker Engine 1.6.0 Release notes](https://docs.docker.com/docker/misc/release-notes/)
   for more details.

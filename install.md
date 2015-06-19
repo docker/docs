@@ -1,11 +1,11 @@
 <!--[metadata]>
 +++
-title = "Docker Trusted Registry"
+title = "Installation"
 description = "Installation instructions for Docker Trusted Registry"
 keywords = ["docker, documentation, about, technology, understanding, enterprise, hub,  registry"]
 [menu.main]
-parent="mn_install"
-weight=8
+parent="smn_dhe"
+weight=4
 +++
 <![end-metadata]-->
 
@@ -26,7 +26,7 @@ Specifically, installation requires completion of these steps, in order:
 3. Install DTR
 4. Add your license to your DTR instance
 
- <!-- TODO > **Note:** To get your copy of DTR, visit [the Hub Subscriptions page](hub.docker.com/subscriptions/). -->
+ <!-- TODO > **Note:** To get your copy of DTR, visit [the Hub Subscriptions page](https://hub-beta.docker.com/subscriptions/). -->
 
 
 ## Licensing
