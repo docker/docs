@@ -12,7 +12,9 @@ weight=101
 
 # Release Notes
 
-## Docker Trusted Registry
+## Docker Trusted Registry (DTR)
+
+Formerly known as Docker Hub Enterprise (DHE).
 
 ### DTR 1.0.1
 (11 May 2015)
