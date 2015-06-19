@@ -83,53 +83,16 @@ func tufAdd(cmd *cobra.Command, args []string) {
 		"json",
 		"targets",
 	)
+	if err != nil {
+		fatalf(err.Error())
+	}
 
 	b, err := ioutil.ReadFile(targetPath)
 	if err != nil {
 		fatalf(err.Error())
 	}
 
-	fmt.Println("Loading TUF Repository.")
-	rootJSON, err := filestore.GetMeta("root", 0)
-	if err != nil {
-		fatalf(err.Error())
-	}
-	root := &data.Signed{}
-	err = json.Unmarshal(rootJSON, root)
-	if err != nil {
-		fatalf(err.Error())
-	}
-	repo.SetRoot(root)
-	targetsJSON, err := filestore.GetMeta("targets", 0)
-	if err != nil {
-		fatalf(err.Error())
-	}
-	targets := &data.Signed{}
-	err = json.Unmarshal(targetsJSON, targets)
-	if err != nil {
-		fatalf(err.Error())
-	}
-	repo.SetTargets("targets", targets)
-	snapshotJSON, err := filestore.GetMeta("snapshot", 0)
-	if err != nil {
-		fatalf(err.Error())
-	}
-	snapshot := &data.Signed{}
-	err = json.Unmarshal(snapshotJSON, snapshot)
-	if err != nil {
-		fatalf(err.Error())
-	}
-	repo.SetSnapshot(snapshot)
-	timestampJSON, err := filestore.GetMeta("timestamp", 0)
-	if err != nil {
-		fatalf(err.Error())
-	}
-	timestamp := &data.Signed{}
-	err = json.Unmarshal(timestampJSON, timestamp)
-	if err != nil {
-		fatalf(err.Error())
-	}
-	repo.SetTimestamp(timestamp)
+	bootstrapRepo(gun, repo)
 
 	fmt.Println("Generating metadata for target")
 	meta, err := data.NewFileMeta(bytes.NewBuffer(b))
@@ -289,6 +252,9 @@ func tufPublish(cmd *cobra.Command, args []string) {
 		"json",
 		"targets",
 	)
+	if err != nil {
+		fatalf(err.Error())
+	}
 
 	root, err := filestore.GetMeta("root", 0)
 	if err != nil {
@@ -326,10 +292,31 @@ func tufPublish(cmd *cobra.Command, args []string) {
 }
 
 func tufRemove(cmd *cobra.Command, args []string) {
-	if len(args) < 1 {
+	if len(args) < 2 {
 		cmd.Usage()
-		fatalf("must specify a GUN")
+		fatalf("must specify a GUN and target name")
 	}
+	gun := args[0]
+	targetName := args[1]
+	kdb := keys.NewDB()
+	signer := signed.NewSigner(NewCryptoService(gun))
+	repo := tuf.NewTufRepo(kdb, signer)
+
+	filestore, err := store.NewFilesystemStore(
+		path.Join(viper.GetString("tufDir"), gun),
+		"metadata",
+		"json",
+		"targets",
+	)
+	if err != nil {
+		fatalf(err.Error())
+	}
+
+	bootstrapRepo(gun, repo)
+
+	repo.RemoveTargets("targets", targetName)
+
+	saveRepo(repo, filestore)
 }
 
 func saveRepo(repo *tuf.TufRepo, filestore store.MetadataStore) error {
@@ -388,4 +375,55 @@ func bootstrapClient(remote store.RemoteStore, repo *tuf.TufRepo, kdb *keys.KeyD
 		remote,
 		kdb,
 	), nil
+}
+
+func bootstrapRepo(gun string, repo *tuf.TufRepo) {
+	filestore, err := store.NewFilesystemStore(
+		path.Join(viper.GetString("tufDir"), gun),
+		"metadata",
+		"json",
+		"targets",
+	)
+
+	fmt.Println("Loading TUF Repository.")
+	rootJSON, err := filestore.GetMeta("root", 0)
+	if err != nil {
+		fatalf(err.Error())
+	}
+	root := &data.Signed{}
+	err = json.Unmarshal(rootJSON, root)
+	if err != nil {
+		fatalf(err.Error())
+	}
+	repo.SetRoot(root)
+	targetsJSON, err := filestore.GetMeta("targets", 0)
+	if err != nil {
+		fatalf(err.Error())
+	}
+	targets := &data.Signed{}
+	err = json.Unmarshal(targetsJSON, targets)
+	if err != nil {
+		fatalf(err.Error())
+	}
+	repo.SetTargets("targets", targets)
+	snapshotJSON, err := filestore.GetMeta("snapshot", 0)
+	if err != nil {
+		fatalf(err.Error())
+	}
+	snapshot := &data.Signed{}
+	err = json.Unmarshal(snapshotJSON, snapshot)
+	if err != nil {
+		fatalf(err.Error())
+	}
+	repo.SetSnapshot(snapshot)
+	timestampJSON, err := filestore.GetMeta("timestamp", 0)
+	if err != nil {
+		fatalf(err.Error())
+	}
+	timestamp := &data.Signed{}
+	err = json.Unmarshal(timestampJSON, timestamp)
+	if err != nil {
+		fatalf(err.Error())
+	}
+	repo.SetTimestamp(timestamp)
 }
