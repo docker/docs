@@ -4,7 +4,7 @@
 
 ## Overview
 
-The Notary project comprises server and client tools for running and interacting
+The Notary project comprises a [server](cmd/notary-server) and a [client](cmd/notary) for running and interacting
 with trusted collections. Please see the READMEs for the individual tools for
 more information on their specifics.
 
