@@ -29,9 +29,9 @@ var cmdTufList = &cobra.Command{
 }
 
 var cmdTufAdd = &cobra.Command{
-	Use:   "add [ GUN ] <target> <file path>",
-	Short: "pushes local updates.",
-	Long:  "pushes all local updates within a specific TUF repo to remote trust server.",
+	Use:   "add [ GUN ] <target> <file>",
+	Short: "adds the file as a target to the GUN.",
+	Long:  "adds the file as a target to the local trusted collection Global Unique Name.",
 	Run:   tufAdd,
 }
 
@@ -56,11 +56,11 @@ var cmdTufLookup = &cobra.Command{
 	Run:   tufLookup,
 }
 
-var cmdTufPush = &cobra.Command{
-	Use:   "push [ GUN ]",
+var cmdTufPublish = &cobra.Command{
+	Use:   "publish [ GUN ]",
 	Short: "initializes the local TUF repository.",
-	Long:  "creates locally the initial set of TUF metadata for the Globally Unique Name.",
-	Run:   tufPush,
+	Long:  "publishes the local changes to the remote trust server.",
+	Run:   tufPublish,
 }
 
 func tufAdd(cmd *cobra.Command, args []string) {
@@ -292,7 +292,7 @@ func tufLookup(cmd *cobra.Command, args []string) {
 	fmt.Println(targetName, fmt.Sprintf("sha256:%s", meta.Hashes["sha256"]), meta.Length)
 }
 
-func tufPush(cmd *cobra.Command, args []string) {
+func tufPublish(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
 		cmd.Usage()
 		fatalf("must specify a GUN")

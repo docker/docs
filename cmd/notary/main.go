@@ -95,8 +95,8 @@ func main() {
 	NotaryCmd.AddCommand(cmdTufList)
 	NotaryCmd.AddCommand(cmdTufAdd)
 	NotaryCmd.AddCommand(cmdTufRemove)
-	NotaryCmd.AddCommand(cmdTufPush)
-	cmdTufPush.Flags().StringVarP(&remoteTrustServer, "remote", "r", "", "Remote trust server location")
+	NotaryCmd.AddCommand(cmdTufPublish)
+	cmdTufPublish.Flags().StringVarP(&remoteTrustServer, "remote", "r", "", "Remote trust server location")
 	NotaryCmd.AddCommand(cmdTufLookup)
 	cmdTufLookup.Flags().StringVarP(&remoteTrustServer, "remote", "r", "", "Remote trust server location")
 
