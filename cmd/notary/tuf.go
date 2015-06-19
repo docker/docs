@@ -98,7 +98,7 @@ func tufAdd(cmd *cobra.Command, args []string) {
 		fatalf(err.Error())
 	}
 
-	fmt.Printf("Adding target \"%s\" with sha256 \"%s\" and size %s bytes.\n", targetName, meta.Hashes["sha256"], meta.Length)
+	fmt.Printf("Adding target \"%s\" with sha256 \"%s\" and size %d bytes.\n", targetName, meta.Hashes["sha256"], meta.Length)
 	_, err = repo.AddTargets("targets", data.Files{targetName: meta})
 	if err != nil {
 		fatalf(err.Error())
@@ -375,6 +375,7 @@ func verify(cmd *cobra.Command, args []string) {
 	serverHash := fmt.Sprintf("sha256:%s", meta.Hashes["sha256"])
 	if stdinHash != serverHash {
 		_, _ = os.Stderr.Write([]byte("Data not present in the trusted collection.\n"))
+		os.Exit(1)
 	} else {
 		_, _ = os.Stdout.Write(payload)
 	}
