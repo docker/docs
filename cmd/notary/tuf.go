@@ -88,6 +88,7 @@ func tufAdd(cmd *cobra.Command, args []string) {
 		fatalf(err.Error())
 	}
 
+	fmt.Println("Loading TUF Repository.")
 	rootJSON, err := filestore.GetMeta("root", 0)
 	if err != nil {
 		fatalf(err.Error())
@@ -129,11 +130,13 @@ func tufAdd(cmd *cobra.Command, args []string) {
 	}
 	repo.SetTimestamp(timestamp)
 
+	fmt.Println("Generating metadata for target")
 	meta, err := data.NewFileMeta(bytes.NewBuffer(b))
 	if err != nil {
 		fatalf(err.Error())
 	}
 
+	fmt.Printf("Adding target \"%s\" with sha256 \"%s\" and size %s bytes.\n", targetName, meta.Hashes["sha256"], meta.Length)
 	_, err = repo.AddTargets("targets", data.Files{targetName: meta})
 	if err != nil {
 		fatalf(err.Error())
@@ -232,8 +235,7 @@ func tufList(cmd *cobra.Command, args []string) {
 
 	err = c.Update()
 	if err != nil {
-		fmt.Println("Update failed")
-		fatalf(err.Error())
+		return
 	}
 	for name, meta := range repo.Targets["targets"].Signed.Targets {
 		fmt.Println(name, " ", meta.Hashes["sha256"], " ", meta.Length)
@@ -282,8 +284,7 @@ func tufLookup(cmd *cobra.Command, args []string) {
 
 	err = c.Update()
 	if err != nil {
-		fmt.Println("Update failed")
-		fatalf(err.Error())
+		return
 	}
 	meta := c.TargetMeta(targetName)
 	if meta == nil {
@@ -295,10 +296,11 @@ func tufLookup(cmd *cobra.Command, args []string) {
 func tufPublish(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
 		cmd.Usage()
-		fatalf("must specify a GUN")
+		fatalf("Must specify a GUN")
 	}
 
 	gun := args[0]
+	fmt.Println("Pushing changes to ", gun, ".")
 
 	remote, err := store.NewHTTPStore(
 		"https://vetinari:4443/v2/"+gun+"/_trust/tuf/",
@@ -356,16 +358,15 @@ func tufRemove(cmd *cobra.Command, args []string) {
 }
 
 func saveRepo(repo *tuf.TufRepo, filestore store.MetadataStore) error {
+	fmt.Println("Saving changes to TUF Repository.")
 	signedRoot, err := repo.SignRoot(data.DefaultExpires("root"))
 	if err != nil {
 		return err
 	}
-	fmt.Println("Marshalling root")
 	rootJSON, _ := json.Marshal(signedRoot)
 	filestore.SetMeta("root", rootJSON)
 
 	for r, _ := range repo.Targets {
-		fmt.Println("Marshalling ", r)
 		signedTargets, err := repo.SignTargets(r, data.DefaultExpires("targets"))
 		if err != nil {
 			return err
@@ -380,7 +381,6 @@ func saveRepo(repo *tuf.TufRepo, filestore store.MetadataStore) error {
 	if err != nil {
 		return err
 	}
-	fmt.Println("Marshalling snapshot")
 	snapshotJSON, _ := json.Marshal(signedSnapshot)
 	filestore.SetMeta("snapshot", snapshotJSON)
 
@@ -388,7 +388,6 @@ func saveRepo(repo *tuf.TufRepo, filestore store.MetadataStore) error {
 	if err != nil {
 		return err
 	}
-	fmt.Println("Marshalling timestamp")
 	timestampJSON, _ := json.Marshal(signedTimestamp)
 	filestore.SetMeta("timestamp", timestampJSON)
 	return nil
