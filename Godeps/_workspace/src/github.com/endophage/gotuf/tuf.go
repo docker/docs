@@ -387,13 +387,13 @@ func (tr *TufRepo) AddTargets(role string, targets data.Files) (data.Files, erro
 	return nil, nil
 }
 
-func (tr *TufRepo) RemoveTargets(role string, targets data.Files) error {
+func (tr *TufRepo) RemoveTargets(role string, targets ...string) error {
 	t, ok := tr.Targets[role]
 	if !ok {
 		return errors.ErrInvalidRole{role}
 	}
 
-	for path, _ := range targets {
+	for _, path := range targets {
 		delete(t.Signed.Targets, path)
 	}
 	t.Dirty = true

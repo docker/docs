@@ -77,22 +77,12 @@ func tufAdd(cmd *cobra.Command, args []string) {
 	signer := signed.NewSigner(NewCryptoService(gun))
 	repo := tuf.NewTufRepo(kdb, signer)
 
-	filestore, err := store.NewFilesystemStore(
-		path.Join(viper.GetString("tufDir"), gun),
-		"metadata",
-		"json",
-		"targets",
-	)
-	if err != nil {
-		fatalf(err.Error())
-	}
-
 	b, err := ioutil.ReadFile(targetPath)
 	if err != nil {
 		fatalf(err.Error())
 	}
 
-	bootstrapRepo(gun, repo)
+	filestore := bootstrapRepo(gun, repo)
 
 	fmt.Println("Generating metadata for target")
 	meta, err := data.NewFileMeta(bytes.NewBuffer(b))
@@ -302,19 +292,14 @@ func tufRemove(cmd *cobra.Command, args []string) {
 	signer := signed.NewSigner(NewCryptoService(gun))
 	repo := tuf.NewTufRepo(kdb, signer)
 
-	filestore, err := store.NewFilesystemStore(
-		path.Join(viper.GetString("tufDir"), gun),
-		"metadata",
-		"json",
-		"targets",
-	)
+	fmt.Println("Removing target ", targetName, " from ", gun)
+
+	filestore := bootstrapRepo(gun, repo)
+
+	err := repo.RemoveTargets("targets", targetName)
 	if err != nil {
 		fatalf(err.Error())
 	}
-
-	bootstrapRepo(gun, repo)
-
-	repo.RemoveTargets("targets", targetName)
 
 	saveRepo(repo, filestore)
 }
@@ -377,13 +362,16 @@ func bootstrapClient(remote store.RemoteStore, repo *tuf.TufRepo, kdb *keys.KeyD
 	), nil
 }
 
-func bootstrapRepo(gun string, repo *tuf.TufRepo) {
+func bootstrapRepo(gun string, repo *tuf.TufRepo) store.MetadataStore {
 	filestore, err := store.NewFilesystemStore(
 		path.Join(viper.GetString("tufDir"), gun),
 		"metadata",
 		"json",
 		"targets",
 	)
+	if err != nil {
+		fatalf(err.Error())
+	}
 
 	fmt.Println("Loading TUF Repository.")
 	rootJSON, err := filestore.GetMeta("root", 0)
@@ -426,4 +414,5 @@ func bootstrapRepo(gun string, repo *tuf.TufRepo) {
 		fatalf(err.Error())
 	}
 	repo.SetTimestamp(timestamp)
+	return filestore
 }
