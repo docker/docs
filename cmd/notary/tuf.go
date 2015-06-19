@@ -382,7 +382,7 @@ func verify(cmd *cobra.Command, args []string) {
 }
 
 func saveRepo(repo *tuf.TufRepo, filestore store.MetadataStore) error {
-	fmt.Println("Saving changes to TUF Repository.")
+	fmt.Println("Saving changes to Trusted Collection.")
 	signedRoot, err := repo.SignRoot(data.DefaultExpires("root"))
 	if err != nil {
 		return err
