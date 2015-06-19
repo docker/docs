@@ -76,7 +76,7 @@ func FingerprintCert(cert *x509.Certificate) ID {
 	return ID(tufKey.ID())
 }
 
-// loadCertsFromDir receives a store and a directory and calls loadCertFromFile
+// loadCertsFromDir receives a store and a directory and calls AddCertFromFile
 // for each certificate found
 func loadCertsFromDir(s *X509FileStore, directory string) {
 	filepath.Walk(directory, func(fp string, fi os.FileInfo, err error) error {
@@ -98,8 +98,8 @@ func loadCertsFromDir(s *X509FileStore, directory string) {
 	})
 }
 
-// loadCertFromFile tries to adds a X509 certificate to the store given a filename
-func loadCertFromFile(filename string) (*x509.Certificate, error) {
+// LoadCertFromFile tries to adds a X509 certificate to the store given a filename
+func LoadCertFromFile(filename string) (*x509.Certificate, error) {
 	// TODO(diogo): handle multiple certificates in one file. Demultiplex into
 	// multiple files or load only first
 	b, err := ioutil.ReadFile(filename)

@@ -43,8 +43,8 @@ var cmdKeysRemove = &cobra.Command{
 
 var cmdKeysTrust = &cobra.Command{
 	Use:   "trust [ certificate ]",
-	Short: "Trusts a new certificate for a specific GUN.",
-	Long:  "Adds a the certificate to the trusted certificate authority list for the specified Global Unique Name.",
+	Short: "Trusts a new certificate.",
+	Long:  "Adds a the certificate to the trusted certificate authority list.",
 	Run:   keysTrust,
 }
 
@@ -80,39 +80,47 @@ func keysRemove(cmd *cobra.Command, args []string) {
 	}
 }
 
+//TODO (diogo): Ask the use if she wants to trust the GUN in the cert
 func keysTrust(cmd *cobra.Command, args []string) {
-	if len(args) < 2 {
+	if len(args) < 1 {
 		cmd.Usage()
-		fatalf("not enough arguments provided")
+		fatalf("please provide a URL or filename to a certificate")
 	}
 
-	gun := args[0]
-	certLocationStr := args[1]
+	certLocationStr := args[0]
+	var cert *x509.Certificate
+
 	// Verify if argument is a valid URL
 	url, err := url.Parse(certLocationStr)
 	if err == nil && url.Scheme != "" {
-
-		cert, err := trustmanager.GetCertFromURL(certLocationStr)
+		cert, err = trustmanager.GetCertFromURL(certLocationStr)
 		if err != nil {
 			fatalf("error retreiving certificate from url (%s): %v", certLocationStr, err)
 		}
-		err = cert.VerifyHostname(gun)
-		if err != nil {
-			fatalf("certificate does not match the Global Unique Name: %v", err)
-		}
-		err = caStore.AddCert(cert)
-		if err != nil {
-			fatalf("error adding certificate from file: %v", err)
-		}
-		fmt.Printf("Adding: ")
-		printCert(cert)
 	} else if _, err := os.Stat(certLocationStr); err == nil {
-		if err := caStore.AddCertFromFile(certLocationStr); err != nil {
+		// Try to load the certificate from the file
+		cert, err = trustmanager.LoadCertFromFile(certLocationStr)
+		if err != nil {
 			fatalf("error adding certificate from file: %v", err)
 		}
 	} else {
 		fatalf("please provide a file location or URL for CA certificate.")
 	}
+
+	// Ask for confirmation before adding certificate into repository
+	fmt.Printf("Are you sure you want to add trust for: %s? (yes/no)\n", cert.Subject.CommonName)
+	confirmed := askConfirm()
+	if !confirmed {
+		fatalf("aborting action.")
+	}
+
+	err = caStore.AddCert(cert)
+	if err != nil {
+		fatalf("error adding certificate from file: %v", err)
+	}
+	fmt.Printf("Adding: ")
+	printCert(cert)
+
 }
 
 func keysList(cmd *cobra.Command, args []string) {
@@ -207,4 +215,16 @@ func printCert(cert *x509.Certificate) {
 	timeDifference := cert.NotAfter.Sub(time.Now())
 	subjectKeyID := trustmanager.FingerprintCert(cert)
 	fmt.Printf("%s %s (expires in: %v days)\n", cert.Subject.CommonName, string(subjectKeyID), math.Floor(timeDifference.Hours()/24))
+}
+
+func askConfirm() bool {
+	var res string
+	_, err := fmt.Scanln(&res)
+	if err != nil {
+		return false
+	}
+	if strings.EqualFold(res, "y") || strings.EqualFold(res, "yes") {
+		return true
+	}
+	return false
 }

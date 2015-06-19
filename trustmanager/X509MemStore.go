@@ -109,7 +109,7 @@ func (s X509MemStore) AddCertFromPEM(pemCerts []byte) error {
 
 // AddCertFromFile tries to adds a X509 certificate to the store given a filename
 func (s X509MemStore) AddCertFromFile(originFilname string) error {
-	cert, err := loadCertFromFile(originFilname)
+	cert, err := LoadCertFromFile(originFilname)
 	if err != nil {
 		return err
 	}

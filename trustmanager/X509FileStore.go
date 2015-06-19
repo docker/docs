@@ -145,7 +145,7 @@ func (s X509FileStore) AddCertFromPEM(pemBytes []byte) error {
 
 // AddCertFromFile tries to adds a X509 certificate to the store given a filename
 func (s X509FileStore) AddCertFromFile(filename string) error {
-	cert, err := loadCertFromFile(filename)
+	cert, err := LoadCertFromFile(filename)
 	if err != nil {
 		return err
 	}
