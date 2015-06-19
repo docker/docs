@@ -4,24 +4,43 @@ title = "Docker Trusted Registry: Release notes"
 description = "Release notes for Docker Trusted Registry"
 keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry,  release"]
 [menu.main]
-parent="smn_release_notes"
+parent="smn_dhe"
+weight=100
 +++
 <![end-metadata]-->
 
 
-# Release Notes
+# Docker Trusted Registry: Release Notes
 
-## Docker Trusted Registry
+## Prior Versions
 
-### DTR 1.0.1
-(11 May 2015)
+These notes refer to the current release of Docker Trusted Registry and the commercially supported Docker Engine. For notes on older versions of these, see the [prior release notes archive](prior-release-notes.html).
 
-- Addresses compatibility issue with 1.6.1 CS Docker Engine
+## Docker Trusted Registry (DTR)
 
-### DTR 1.0.0
-(23 Apr 2015)
+### DTR 1.1.0
+(23 June 2015)
 
-- First release
+This release of DTR (formerly DHE) adds major integration with the AWS and Azure marketplaces, giving customers a smoother installation path. DTR 1.1 also adds finer-grained permissions and improvements and additions to the UI and logging. Bugs in LDAP/AD integration have also been remediated, improving the stability and usability of DTR. See below for specifics.
+
+#### New Features
+
+* New, more granular, [roles for users](/configuration.md#authentication). DTR users can now be assigned different levels of access (admin, r/w, r/o) to the repositories. **Important:** Existing DTR users should make sure to see the note [below](#upgrade-warning) regarding migrating users before upgrading.
+* A new storage status indicator for storage space. The dashboard now shows used and available storage space for supported storage drivers.
+* A new [diagnostics tool](/adminguide.md#Client-Docker-Daemon-diagnostics) gathers and bundles DTR logs, system information, container information, and other configuration settings for use by Docker support or as a backup.
+* Performance and reliability improvements to the S3 storage backend.
+* DTR images are now available on the Amazon AWS and Microsoft Azure marketplaces.
+
+#### Fixes
+
+The following notable issues have been remediated:
+
+* Fixed an issue that caused DTR logins to fail if some LDAP servers were unreachable.
+* Fixed a resource leak in DTR storage.
+
+### Upgrade Warning
+
+Customers who are currently using DHE 1.0 **must** follow the [upgrading instructions](https://forums.docker.com/t/upgrading-docker-hub-enterprise-to-docker-trusted-registry/1925) in our support Knowledge Base. These instructions will show you how to modify existing authentication data and storage volume settings to move to DTR. Note that automatic upgrading has been disabled for DHE users because of these issues.
 
 ## Commercially Supported Docker Engine
 
@@ -39,8 +58,7 @@ As a result, customers with SELinux will be unable to use hostname-based network
 access in either `docker build` or `docker run`, nor will they be able to
 `docker run` containers
 that use `--volume` or `-v` bind-mounts (with an incorrect SELinux label) in
-their environment. By installing Docker
-Engine 1.6.2-cs5, customers can use Docker as intended on RHEL with SELinux enabled.
+their environment. By installing Docker Engine 1.6.2-cs5, customers can use Docker as intended on RHEL with SELinux enabled.
 
 For example, you see will failures like:
 
@@ -92,7 +110,6 @@ safe thing yum can do is fail. There are a few ways to work "fix" this:
 
 [output truncated]
 ```
-
 
 **Affected Versions**: All previous versions of Docker Engine when SELinux
 is enabled.
@@ -149,99 +166,3 @@ into the container, do the following to create and test your bind-mount:
 		type=AVC msg=audit(1432145409.197:7570): avc:  denied  { read } for  pid=21167 comm="cat" name="foobar.txt" dev="xvda2" ino=17704136 scontext=system_u:system_r:svirt_lxc_net_t:s0:c909,c965 tcontext=unconfined_u:object_r:user_home_t:s0 tclass=file
 
 	Recheck your command line to make sure you passed in the `z` option.
-
-
-### CS Docker Engine 1.6.2-cs4
-(13 May 2015)
-
-Fix mount regression for `/sys`.
-
-### CS Docker Engine 1.6.1-cs3
-(11 May 2015)
-
-Docker Engine version 1.6.1 has been released to address several vulnerabilities
-and is immediately available for all supported platforms. Users are advised to
-upgrade existing installations of the Docker Engine and use 1.6.1 for new installations.
-
-It should be noted that each of the vulnerabilities allowing privilege escalation
-may only be exploited by a malicious Dockerfile or image.  Users are advised to
-run their own images and/or images built by trusted parties, such as those in
-the official images library.
-
-Please send any questions to security@docker.com.
-
-
-#### **[CVE-2015-3629](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3629) Symlink traversal on container respawn allows local privilege escalation**
-
-Libcontainer version 1.6.0 introduced changes which facilitated a mount namespace
-breakout upon respawn of a container. This allowed malicious images to write
-files to the host system and escape containerization.
-
-Libcontainer and Docker Engine 1.6.1 have been released to address this
-vulnerability. Users running untrusted images are encouraged to upgrade Docker Engine.
-
-Discovered by Tõnis Tiigi.
-
-
-#### **[CVE-2015-3627](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3627) Insecure opening of file-descriptor 1 leading to privilege escalation**
-
-The file-descriptor passed by libcontainer to the pid-1 process of a container
-has been found to be opened prior to performing the chroot, allowing insecure
-open and symlink traversal. This allows malicious container images to trigger
-a local privilege escalation.
-
-Libcontainer and Docker Engine 1.6.1 have been released to address this
-vulnerability. Users running untrusted images are encouraged to upgrade
-Docker Engine.
-
-Discovered by Tõnis Tiigi.
-
-#### **[CVE-2015-3630](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3630) Read/write proc paths allow host modification & information disclosure**
-
-Several paths underneath /proc were writable from containers, allowing global
-system manipulation and configuration. These paths included `/proc/asound`,
-`/proc/timer_stats`, `/proc/latency_stats`, and `/proc/fs`.
-
-By allowing writes to `/proc/fs`, it has been noted that CIFS volumes could be
-forced into a protocol downgrade attack by a root user operating inside of a
-container. Machines having loaded the timer_stats module were vulnerable to
-having this mechanism enabled and consumed by a container.
-
-We are releasing Docker Engine 1.6.1 to address this vulnerability. All
-versions up to 1.6.1 are believed vulnerable. Users running untrusted
-images are encouraged to upgrade.
-
-Discovered by Eric Windisch of the Docker Security Team.
-
-#### **[CVE-2015-3631](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3631) Volume mounts allow LSM profile escalation**
-
-By allowing volumes to override files of `/proc` within a mount namespace, a user
-could specify arbitrary policies for Linux Security Modules, including setting
-an unconfined policy underneath AppArmor, or a `docker_t` policy for processes
-managed by SELinux. In all versions of Docker up until 1.6.1, it is possible for
-malicious images to configure volume mounts such that files of proc may be overridden.
-
-We are releasing Docker Engine 1.6.1 to address this vulnerability. All versions
-up to 1.6.1 are believed vulnerable. Users running untrusted images are encouraged
-to upgrade.
-
-Discovered by Eric Windisch of the Docker Security Team.
-
-#### **AppArmor policy improvements**
-
-The 1.6.1 release also marks preventative additions to the AppArmor policy.
-Recently, several CVEs against the kernel have been reported whereby mount
-namespaces could be circumvented through the use of the sys_mount syscall from
-inside of an unprivileged Docker container. In all reported cases, the
-AppArmor policy included in libcontainer and shipped with Docker has been
-sufficient to deflect these attacks. However, we have deemed it prudent to
-proactively tighten the policy further by outright denying the use of the
-`sys_mount` syscall.
-
-Because this addition is preventative, no CVE-ID is requested.
-
-### CS Docker Engine 1.6.0-cs2
-(23 Apr 2015)
-
-- First release, please see the [Docker Engine 1.6.0 Release notes](/release-notes/)
-  for more details.
