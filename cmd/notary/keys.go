@@ -129,7 +129,7 @@ func keysList(cmd *cobra.Command, args []string) {
 		os.Exit(1)
 	}
 
-	fmt.Println("# Trusted Root keys: ")
+	fmt.Println("# Trusted Certificates:")
 	trustedCAs := caStore.GetCertificates()
 	for _, c := range trustedCAs {
 		printCert(c)
