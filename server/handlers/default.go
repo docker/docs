@@ -53,7 +53,7 @@ func UpdateHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) 
 		}
 	}
 	vars := mux.Vars(r)
-	qdn := vars["imageName"]
+	gun := vars["imageName"]
 	tufRole := vars["tufRole"]
 	input, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -73,7 +73,7 @@ func UpdateHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) 
 		}
 	}
 	version := meta.Signed.Version
-	err = store.UpdateCurrent(qdn, tufRole, version, input)
+	err = store.UpdateCurrent(gun, tufRole, version, input)
 	if err != nil {
 		return &errors.HTTPError{
 			HTTPStatus: http.StatusInternalServerError,
@@ -96,11 +96,12 @@ func GetHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *er
 		}
 	}
 	vars := mux.Vars(r)
-	qdn := vars["imageName"]
+	gun := vars["imageName"]
 	tufRole := vars["tufRole"]
-	data, err := store.GetCurrent(qdn, tufRole)
+	data, err := store.GetCurrent(gun, tufRole)
 	logrus.Debug("JSON: ", string(data))
 	if err != nil {
+		logrus.Errorf("[Vetinari] 500 GET repository: %s, role: %s", gun, tufRole)
 		return &errors.HTTPError{
 			HTTPStatus: http.StatusInternalServerError,
 			Code:       9999,
@@ -108,6 +109,7 @@ func GetHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *er
 		}
 	}
 	if data == nil {
+		logrus.Errorf("[Vetinari] 404 GET repository: %s, role: %s", gun, tufRole)
 		return &errors.HTTPError{
 			HTTPStatus: http.StatusNotFound,
 			Code:       9999,

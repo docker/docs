@@ -9,6 +9,7 @@ import (
 	"path"
 	"path/filepath"
 
+	"github.com/Sirupsen/logrus"
 	"github.com/endophage/gotuf"
 	"github.com/endophage/gotuf/client"
 	"github.com/endophage/gotuf/data"
@@ -76,64 +77,20 @@ func tufAdd(cmd *cobra.Command, args []string) {
 	signer := signed.NewSigner(NewCryptoService(gun))
 	repo := tuf.NewTufRepo(kdb, signer)
 
-	filestore, err := store.NewFilesystemStore(
-		path.Join(viper.GetString("tufDir"), gun),
-		"metadata",
-		"json",
-		"targets",
-	)
-
 	b, err := ioutil.ReadFile(targetPath)
 	if err != nil {
 		fatalf(err.Error())
 	}
 
-	rootJSON, err := filestore.GetMeta("root", 0)
-	if err != nil {
-		fatalf(err.Error())
-	}
-	root := &data.Signed{}
-	err = json.Unmarshal(rootJSON, root)
-	if err != nil {
-		fatalf(err.Error())
-	}
-	repo.SetRoot(root)
-	targetsJSON, err := filestore.GetMeta("targets", 0)
-	if err != nil {
-		fatalf(err.Error())
-	}
-	targets := &data.Signed{}
-	err = json.Unmarshal(targetsJSON, targets)
-	if err != nil {
-		fatalf(err.Error())
-	}
-	repo.SetTargets("targets", targets)
-	snapshotJSON, err := filestore.GetMeta("snapshot", 0)
-	if err != nil {
-		fatalf(err.Error())
-	}
-	snapshot := &data.Signed{}
-	err = json.Unmarshal(snapshotJSON, snapshot)
-	if err != nil {
-		fatalf(err.Error())
-	}
-	repo.SetSnapshot(snapshot)
-	timestampJSON, err := filestore.GetMeta("timestamp", 0)
-	if err != nil {
-		fatalf(err.Error())
-	}
-	timestamp := &data.Signed{}
-	err = json.Unmarshal(timestampJSON, timestamp)
-	if err != nil {
-		fatalf(err.Error())
-	}
-	repo.SetTimestamp(timestamp)
+	filestore := bootstrapRepo(gun, repo)
 
+	fmt.Println("Generating metadata for target")
 	meta, err := data.NewFileMeta(bytes.NewBuffer(b))
 	if err != nil {
 		fatalf(err.Error())
 	}
 
+	fmt.Printf("Adding target \"%s\" with sha256 \"%s\" and size %s bytes.\n", targetName, meta.Hashes["sha256"], meta.Length)
 	_, err = repo.AddTargets("targets", data.Files{targetName: meta})
 	if err != nil {
 		fatalf(err.Error())
@@ -206,37 +163,24 @@ func tufList(cmd *cobra.Command, args []string) {
 		"json",
 		"",
 	)
-	rootJSON, err := remote.GetMeta("root", 5<<20)
+	c, err := bootstrapClient(remote, repo, kdb)
 	if err != nil {
-		fmt.Println("Couldn't get initial root")
-		fatalf(err.Error())
+		return
 	}
-	root := &data.Signed{}
-	err = json.Unmarshal(rootJSON, root)
-	if err != nil {
-		fmt.Println("Couldn't parse initial root")
-		fatalf(err.Error())
-	}
-	// TODO: Validate the root file against the key store
-	err = repo.SetRoot(root)
-	if err != nil {
-		fmt.Println("Error setting root")
-		fatalf(err.Error())
-	}
-
-	c := client.NewClient(
-		repo,
-		remote,
-		kdb,
-	)
-
 	err = c.Update()
 	if err != nil {
-		fmt.Println("Update failed")
-		fatalf(err.Error())
+		logrus.Error("Error updating client: ", err.Error())
+		return
 	}
-	for name, meta := range repo.Targets["targets"].Signed.Targets {
-		fmt.Println(name, " ", meta.Hashes["sha256"], " ", meta.Length)
+
+	if rawOutput {
+		for name, meta := range repo.Targets["targets"].Signed.Targets {
+			fmt.Println(name, " ", meta.Hashes["sha256"], " ", meta.Length)
+		}
+	} else {
+		for name, meta := range repo.Targets["targets"].Signed.Targets {
+			fmt.Println(name, " ", meta.Hashes["sha256"], " ", meta.Length)
+		}
 	}
 }
 
@@ -256,49 +200,35 @@ func tufLookup(cmd *cobra.Command, args []string) {
 		"json",
 		"",
 	)
-	rootJSON, err := remote.GetMeta("root", 5<<20)
+	c, err := bootstrapClient(remote, repo, kdb)
 	if err != nil {
-		fmt.Println("Couldn't get initial root")
-		fatalf(err.Error())
+		return
 	}
-	root := &data.Signed{}
-	err = json.Unmarshal(rootJSON, root)
-	if err != nil {
-		fmt.Println("Couldn't parse initial root")
-		fatalf(err.Error())
-	}
-	// TODO: Validate the root file against the key store
-	err = repo.SetRoot(root)
-	if err != nil {
-		fmt.Println("Error setting root")
-		fatalf(err.Error())
-	}
-
-	c := client.NewClient(
-		repo,
-		remote,
-		kdb,
-	)
-
 	err = c.Update()
 	if err != nil {
-		fmt.Println("Update failed")
-		fatalf(err.Error())
+		logrus.Error("Error updating client: ", err.Error())
+		return
 	}
 	meta := c.TargetMeta(targetName)
 	if meta == nil {
+		logrus.Infof("Target %s not found in %s.", targetName, gun)
 		return
 	}
-	fmt.Println(targetName, fmt.Sprintf("sha256:%s", meta.Hashes["sha256"]), meta.Length)
+	if rawOutput {
+		fmt.Println(targetName, fmt.Sprintf("sha256:%s", meta.Hashes["sha256"]), meta.Length)
+	} else {
+		fmt.Println(targetName, fmt.Sprintf("sha256:%s", meta.Hashes["sha256"]), meta.Length)
+	}
 }
 
 func tufPublish(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
 		cmd.Usage()
-		fatalf("must specify a GUN")
+		fatalf("Must specify a GUN")
 	}
 
 	gun := args[0]
+	fmt.Println("Pushing changes to ", gun, ".")
 
 	remote, err := store.NewHTTPStore(
 		"https://vetinari:4443/v2/"+gun+"/_trust/tuf/",
@@ -312,6 +242,9 @@ func tufPublish(cmd *cobra.Command, args []string) {
 		"json",
 		"targets",
 	)
+	if err != nil {
+		fatalf(err.Error())
+	}
 
 	root, err := filestore.GetMeta("root", 0)
 	if err != nil {
@@ -349,23 +282,38 @@ func tufPublish(cmd *cobra.Command, args []string) {
 }
 
 func tufRemove(cmd *cobra.Command, args []string) {
-	if len(args) < 1 {
+	if len(args) < 2 {
 		cmd.Usage()
-		fatalf("must specify a GUN")
+		fatalf("must specify a GUN and target name")
 	}
+	gun := args[0]
+	targetName := args[1]
+	kdb := keys.NewDB()
+	signer := signed.NewSigner(NewCryptoService(gun))
+	repo := tuf.NewTufRepo(kdb, signer)
+
+	fmt.Println("Removing target ", targetName, " from ", gun)
+
+	filestore := bootstrapRepo(gun, repo)
+
+	err := repo.RemoveTargets("targets", targetName)
+	if err != nil {
+		fatalf(err.Error())
+	}
+
+	saveRepo(repo, filestore)
 }
 
 func saveRepo(repo *tuf.TufRepo, filestore store.MetadataStore) error {
+	fmt.Println("Saving changes to TUF Repository.")
 	signedRoot, err := repo.SignRoot(data.DefaultExpires("root"))
 	if err != nil {
 		return err
 	}
-	fmt.Println("Marshalling root")
 	rootJSON, _ := json.Marshal(signedRoot)
 	filestore.SetMeta("root", rootJSON)
 
 	for r, _ := range repo.Targets {
-		fmt.Println("Marshalling ", r)
 		signedTargets, err := repo.SignTargets(r, data.DefaultExpires("targets"))
 		if err != nil {
 			return err
@@ -380,7 +328,6 @@ func saveRepo(repo *tuf.TufRepo, filestore store.MetadataStore) error {
 	if err != nil {
 		return err
 	}
-	fmt.Println("Marshalling snapshot")
 	snapshotJSON, _ := json.Marshal(signedSnapshot)
 	filestore.SetMeta("snapshot", snapshotJSON)
 
@@ -388,8 +335,84 @@ func saveRepo(repo *tuf.TufRepo, filestore store.MetadataStore) error {
 	if err != nil {
 		return err
 	}
-	fmt.Println("Marshalling timestamp")
 	timestampJSON, _ := json.Marshal(signedTimestamp)
 	filestore.SetMeta("timestamp", timestampJSON)
 	return nil
+}
+
+func bootstrapClient(remote store.RemoteStore, repo *tuf.TufRepo, kdb *keys.KeyDB) (*client.Client, error) {
+	rootJSON, err := remote.GetMeta("root", 5<<20)
+	if err != nil {
+		return nil, err
+	}
+	root := &data.Signed{}
+	err = json.Unmarshal(rootJSON, root)
+	if err != nil {
+		return nil, err
+	}
+	// TODO: Validate the root file against the key store
+	err = repo.SetRoot(root)
+	if err != nil {
+		return nil, err
+	}
+	return client.NewClient(
+		repo,
+		remote,
+		kdb,
+	), nil
+}
+
+func bootstrapRepo(gun string, repo *tuf.TufRepo) store.MetadataStore {
+	filestore, err := store.NewFilesystemStore(
+		path.Join(viper.GetString("tufDir"), gun),
+		"metadata",
+		"json",
+		"targets",
+	)
+	if err != nil {
+		fatalf(err.Error())
+	}
+
+	fmt.Println("Loading TUF Repository.")
+	rootJSON, err := filestore.GetMeta("root", 0)
+	if err != nil {
+		fatalf(err.Error())
+	}
+	root := &data.Signed{}
+	err = json.Unmarshal(rootJSON, root)
+	if err != nil {
+		fatalf(err.Error())
+	}
+	repo.SetRoot(root)
+	targetsJSON, err := filestore.GetMeta("targets", 0)
+	if err != nil {
+		fatalf(err.Error())
+	}
+	targets := &data.Signed{}
+	err = json.Unmarshal(targetsJSON, targets)
+	if err != nil {
+		fatalf(err.Error())
+	}
+	repo.SetTargets("targets", targets)
+	snapshotJSON, err := filestore.GetMeta("snapshot", 0)
+	if err != nil {
+		fatalf(err.Error())
+	}
+	snapshot := &data.Signed{}
+	err = json.Unmarshal(snapshotJSON, snapshot)
+	if err != nil {
+		fatalf(err.Error())
+	}
+	repo.SetSnapshot(snapshot)
+	timestampJSON, err := filestore.GetMeta("timestamp", 0)
+	if err != nil {
+		fatalf(err.Error())
+	}
+	timestamp := &data.Signed{}
+	err = json.Unmarshal(timestampJSON, timestamp)
+	if err != nil {
+		fatalf(err.Error())
+	}
+	repo.SetTimestamp(timestamp)
+	return filestore
 }

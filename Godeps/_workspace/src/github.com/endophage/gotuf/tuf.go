@@ -387,6 +387,19 @@ func (tr *TufRepo) AddTargets(role string, targets data.Files) (data.Files, erro
 	return nil, nil
 }
 
+func (tr *TufRepo) RemoveTargets(role string, targets ...string) error {
+	t, ok := tr.Targets[role]
+	if !ok {
+		return errors.ErrInvalidRole{role}
+	}
+
+	for _, path := range targets {
+		delete(t.Signed.Targets, path)
+	}
+	t.Dirty = true
+	return nil
+}
+
 func (tr *TufRepo) UpdateSnapshot(role string, s *data.Signed) error {
 	jsonData, err := json.Marshal(s)
 	if err != nil {
