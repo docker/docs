@@ -49,7 +49,7 @@ func (svr *HTTPServer) TimeoutConnections() {
 	for conn, _ := range svr.conns {
 		conn.Close()
 	}
-	logrus.Infof("[Notary] All connections closed for server %s", svr.id)
+	logrus.Infof("[Notary Server] All connections closed for server %s", svr.id)
 }
 
 // Run sets up and starts a TLS server that can be cancelled using the
@@ -65,7 +65,7 @@ func run(ctx context.Context, addr, tlsCertFile, tlsKeyFile string, trust signed
 
 	keypair, err := tls.LoadX509KeyPair(tlsCertFile, tlsKeyFile)
 	if err != nil {
-		logrus.Errorf("[Notary] Error loading keys %s", err)
+		logrus.Errorf("[Notary Server] Error loading keys %s", err)
 		return err
 	}
 
@@ -115,7 +115,7 @@ func run(ctx context.Context, addr, tlsCertFile, tlsKeyFile string, trust signed
 		},
 	)
 
-	logrus.Info("[Notary] : Listening on", addr)
+	logrus.Info("[Notary Server] : Listening on", addr)
 
 	go stopWatcher(ctx, svr, lsnr, tlsLsnr)
 
@@ -127,7 +127,7 @@ func run(ctx context.Context, addr, tlsCertFile, tlsKeyFile string, trust signed
 func stopWatcher(ctx context.Context, svr *HTTPServer, ls ...net.Listener) {
 	doneChan := ctx.Done()
 	<-doneChan
-	logrus.Debug("[Notary] Received close signal")
+	logrus.Debug("[Notary Server] Received close signal")
 	for _, l := range ls {
 		l.Close()
 	}

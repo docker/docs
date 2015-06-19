@@ -56,7 +56,7 @@ func (root *rootHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	//		return
 	//	}
 	if err := root.handler(ctx, w, r); err != nil {
-		logrus.Error("[Notary] ", err.Error())
+		logrus.Error("[Notary Server] ", err.Error())
 		http.Error(w, err.Error(), err.HTTPStatus)
 		return
 	}

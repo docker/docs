@@ -68,7 +68,7 @@ func main() {
 		logrus.Info("[Notary Server] : Using remote signing service")
 		trust = signer.NewRufusSigner(conf.TrustService.Hostname, conf.TrustService.Port, conf.TrustService.TLSCAFile)
 	} else {
-		logrus.Info("[Notary] : Using local signing service")
+		logrus.Info("[Notary Server] : Using local signing service")
 		trust = signed.NewEd25519()
 	}
 
@@ -79,7 +79,7 @@ func main() {
 	}
 	ctx = context.WithValue(ctx, "versionStore", version.NewVersionDB(db))
 	for {
-		logrus.Info("[Notary] Starting Server")
+		logrus.Info("[Notary Server] Starting Server")
 		childCtx, cancel := context.WithCancel(ctx)
 		go server.Run(childCtx, conf.Server, trust)
 
@@ -88,20 +88,20 @@ func main() {
 			// On a sighup we cancel and restart a new server
 			// with updated config
 			case <-sigHup:
-				logrus.Infof("[Notary] Server restart requested. Attempting to parse config at %s", configFile)
+				logrus.Infof("[Notary Server] Server restart requested. Attempting to parse config at %s", configFile)
 				conf, err = parseConfig(configFile)
 				if err != nil {
-					logrus.Infof("[Notary] Unable to parse config. Old configuration will keep running. Parse Err: %s", err.Error())
+					logrus.Infof("[Notary Server] Unable to parse config. Old configuration will keep running. Parse Err: %s", err.Error())
 					continue
 				} else {
 					cancel()
-					logrus.Info("[Notary] Stopping server for restart")
+					logrus.Info("[Notary Server] Stopping server for restart")
 					break
 				}
 			// On sigkill we cancel and shutdown
 			case <-sigTerm:
 				cancel()
-				logrus.Info("[Notary] Shutting Down Hard")
+				logrus.Info("[Notary Server] Shutting Down Hard")
 				os.Exit(0)
 			}
 		}

@@ -101,7 +101,7 @@ func GetHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *er
 	data, err := store.GetCurrent(gun, tufRole)
 	logrus.Debug("JSON: ", string(data))
 	if err != nil {
-		logrus.Errorf("[Notary] 500 GET repository: %s, role: %s", gun, tufRole)
+		logrus.Errorf("[Notary Server] 500 GET repository: %s, role: %s", gun, tufRole)
 		return &errors.HTTPError{
 			HTTPStatus: http.StatusInternalServerError,
 			Code:       9999,
@@ -109,7 +109,7 @@ func GetHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *er
 		}
 	}
 	if data == nil {
-		logrus.Errorf("[Notary] 404 GET repository: %s, role: %s", gun, tufRole)
+		logrus.Errorf("[Notary Server] 404 GET repository: %s, role: %s", gun, tufRole)
 		return &errors.HTTPError{
 			HTTPStatus: http.StatusNotFound,
 			Code:       9999,
