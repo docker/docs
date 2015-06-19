@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"crypto/sha256"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -62,6 +63,13 @@ var cmdTufPublish = &cobra.Command{
 	Short: "initializes the local TUF repository.",
 	Long:  "publishes the local changes to the remote trust server.",
 	Run:   tufPublish,
+}
+
+var cmdVerify = &cobra.Command{
+	Use:   "verify [ GUN ] <target>",
+	Short: "checks if the content is included in the trusted collection for the GUN",
+	Long:  "reads from STDIN and checks if the content is included in the trusted collection for the Global Unique Name.",
+	Run:   verify,
 }
 
 func tufAdd(cmd *cobra.Command, args []string) {
@@ -302,6 +310,75 @@ func tufRemove(cmd *cobra.Command, args []string) {
 	}
 
 	saveRepo(repo, filestore)
+}
+
+func verify(cmd *cobra.Command, args []string) {
+	if len(args) < 2 {
+		cmd.Usage()
+		fatalf("must specify a GUN and target name")
+	}
+
+	// Reads all of the data on STDIN
+	//TODO (diogo): Change this to do a streaming hash
+	payload, err := ioutil.ReadAll(os.Stdin)
+	if err != nil {
+		fatalf("error reading content from STDIN: %v", err)
+	}
+
+	//TODO (diogo): This code is copy/pasted from lookup.
+	gun := args[0]
+	targetName := args[1]
+	kdb := keys.NewDB()
+	repo := tuf.NewTufRepo(kdb, nil)
+
+	remote, err := store.NewHTTPStore(
+		"https://vetinari:4443/v2/"+gun+"/_trust/tuf/",
+		"",
+		"json",
+		"",
+	)
+	rootJSON, err := remote.GetMeta("root", 5<<20)
+	if err != nil {
+		fmt.Println("Couldn't get initial root")
+		fatalf(err.Error())
+	}
+	root := &data.Signed{}
+	err = json.Unmarshal(rootJSON, root)
+	if err != nil {
+		fmt.Println("Couldn't parse initial root")
+		fatalf(err.Error())
+	}
+	// TODO: Validate the root file against the key store
+	err = repo.SetRoot(root)
+	if err != nil {
+		fatalf("Error setting root %v", err)
+	}
+
+	c := client.NewClient(
+		repo,
+		remote,
+		kdb,
+	)
+
+	err = c.Update()
+	if err != nil {
+		fmt.Println("Update failed")
+		fatalf(err.Error())
+	}
+	meta := c.TargetMeta(targetName)
+	if meta == nil {
+		return
+	}
+
+	// Create hasher and hash data
+	stdinHash := fmt.Sprintf("sha256:%x", sha256.Sum256(payload))
+	serverHash := fmt.Sprintf("sha256:%s", meta.Hashes["sha256"])
+	if stdinHash != serverHash {
+		_, _ = os.Stderr.Write([]byte("Data not present in the trusted collection\n"))
+	} else {
+		_, _ = os.Stdout.Write(payload)
+	}
+	return
 }
 
 func saveRepo(repo *tuf.TufRepo, filestore store.MetadataStore) error {

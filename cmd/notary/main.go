@@ -103,6 +103,7 @@ func main() {
 	NotaryCmd.AddCommand(cmdTufLookup)
 	cmdTufLookup.Flags().BoolVarP(&rawOutput, "raw", "", false, "Instructs notary lookup to output a non-pretty printed version of the targets list. Useful if you need to parse the list.")
 	cmdTufLookup.Flags().StringVarP(&remoteTrustServer, "remote", "r", "", "Remote trust server location")
+	NotaryCmd.AddCommand(cmdVerify)
 
 	NotaryCmd.Execute()
 }
