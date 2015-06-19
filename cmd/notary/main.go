@@ -24,9 +24,11 @@ const privDir string = configPath + "private/"
 const tufDir string = configPath + "tuf/"
 
 var caStore trustmanager.X509Store
+var rawOutput bool
 
 func init() {
 	logrus.SetLevel(logrus.ErrorLevel)
+	logrus.SetOutput(os.Stderr)
 	// Retrieve current user to get home directory
 	usr, err := user.Current()
 	if err != nil {
@@ -93,11 +95,13 @@ func main() {
 	NotaryCmd.AddCommand(cmdKeys)
 	NotaryCmd.AddCommand(cmdTufInit)
 	NotaryCmd.AddCommand(cmdTufList)
+	cmdTufList.Flags().BoolVarP(&rawOutput, "raw", "", false, "Instructs notary list to output a non-pretty printed version of the targets list. Useful if you need to parse the list.")
 	NotaryCmd.AddCommand(cmdTufAdd)
 	NotaryCmd.AddCommand(cmdTufRemove)
 	NotaryCmd.AddCommand(cmdTufPublish)
 	cmdTufPublish.Flags().StringVarP(&remoteTrustServer, "remote", "r", "", "Remote trust server location")
 	NotaryCmd.AddCommand(cmdTufLookup)
+	cmdTufLookup.Flags().BoolVarP(&rawOutput, "raw", "", false, "Instructs notary lookup to output a non-pretty printed version of the targets list. Useful if you need to parse the list.")
 	cmdTufLookup.Flags().StringVarP(&remoteTrustServer, "remote", "r", "", "Remote trust server location")
 
 	NotaryCmd.Execute()

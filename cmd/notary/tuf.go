@@ -9,6 +9,7 @@ import (
 	"path"
 	"path/filepath"
 
+	"github.com/Sirupsen/logrus"
 	"github.com/endophage/gotuf"
 	"github.com/endophage/gotuf/client"
 	"github.com/endophage/gotuf/data"
@@ -209,36 +210,24 @@ func tufList(cmd *cobra.Command, args []string) {
 		"json",
 		"",
 	)
-	rootJSON, err := remote.GetMeta("root", 5<<20)
-	if err != nil {
-		fmt.Println("Couldn't get initial root")
-		fatalf(err.Error())
-	}
-	root := &data.Signed{}
-	err = json.Unmarshal(rootJSON, root)
-	if err != nil {
-		fmt.Println("Couldn't parse initial root")
-		fatalf(err.Error())
-	}
-	// TODO: Validate the root file against the key store
-	err = repo.SetRoot(root)
-	if err != nil {
-		fmt.Println("Error setting root")
-		fatalf(err.Error())
-	}
-
-	c := client.NewClient(
-		repo,
-		remote,
-		kdb,
-	)
-
-	err = c.Update()
+	c, err := bootstrapClient(remote, repo, kdb)
 	if err != nil {
 		return
 	}
-	for name, meta := range repo.Targets["targets"].Signed.Targets {
-		fmt.Println(name, " ", meta.Hashes["sha256"], " ", meta.Length)
+	err = c.Update()
+	if err != nil {
+		logrus.Error("Error updating client: ", err.Error())
+		return
+	}
+
+	if rawOutput {
+		for name, meta := range repo.Targets["targets"].Signed.Targets {
+			fmt.Println(name, " ", meta.Hashes["sha256"], " ", meta.Length)
+		}
+	} else {
+		for name, meta := range repo.Targets["targets"].Signed.Targets {
+			fmt.Println(name, " ", meta.Hashes["sha256"], " ", meta.Length)
+		}
 	}
 }
 
@@ -258,39 +247,25 @@ func tufLookup(cmd *cobra.Command, args []string) {
 		"json",
 		"",
 	)
-	rootJSON, err := remote.GetMeta("root", 5<<20)
+	c, err := bootstrapClient(remote, repo, kdb)
 	if err != nil {
-		fmt.Println("Couldn't get initial root")
-		fatalf(err.Error())
+		return
 	}
-	root := &data.Signed{}
-	err = json.Unmarshal(rootJSON, root)
-	if err != nil {
-		fmt.Println("Couldn't parse initial root")
-		fatalf(err.Error())
-	}
-	// TODO: Validate the root file against the key store
-	err = repo.SetRoot(root)
-	if err != nil {
-		fmt.Println("Error setting root")
-		fatalf(err.Error())
-	}
-
-	c := client.NewClient(
-		repo,
-		remote,
-		kdb,
-	)
-
 	err = c.Update()
 	if err != nil {
+		logrus.Error("Error updating client: ", err.Error())
 		return
 	}
 	meta := c.TargetMeta(targetName)
 	if meta == nil {
+		logrus.Infof("Target %s not found in %s.", targetName, gun)
 		return
 	}
-	fmt.Println(targetName, fmt.Sprintf("sha256:%s", meta.Hashes["sha256"]), meta.Length)
+	if rawOutput {
+		fmt.Println(targetName, fmt.Sprintf("sha256:%s", meta.Hashes["sha256"]), meta.Length)
+	} else {
+		fmt.Println(targetName, fmt.Sprintf("sha256:%s", meta.Hashes["sha256"]), meta.Length)
+	}
 }
 
 func tufPublish(cmd *cobra.Command, args []string) {
@@ -391,4 +366,26 @@ func saveRepo(repo *tuf.TufRepo, filestore store.MetadataStore) error {
 	timestampJSON, _ := json.Marshal(signedTimestamp)
 	filestore.SetMeta("timestamp", timestampJSON)
 	return nil
+}
+
+func bootstrapClient(remote store.RemoteStore, repo *tuf.TufRepo, kdb *keys.KeyDB) (*client.Client, error) {
+	rootJSON, err := remote.GetMeta("root", 5<<20)
+	if err != nil {
+		return nil, err
+	}
+	root := &data.Signed{}
+	err = json.Unmarshal(rootJSON, root)
+	if err != nil {
+		return nil, err
+	}
+	// TODO: Validate the root file against the key store
+	err = repo.SetRoot(root)
+	if err != nil {
+		return nil, err
+	}
+	return client.NewClient(
+		repo,
+		remote,
+		kdb,
+	), nil
 }
