@@ -36,7 +36,7 @@ func init() {
 
 var cmdKeysRemove = &cobra.Command{
 	Use:   "remove [ Subject Key ID ]",
-	Short: "removes trust from a specific certificate authority or certificate.",
+	Short: "Removes trust from a specific certificate authority or certificate.",
 	Long:  "remove trust from a specific certificate authority.",
 	Run:   keysRemove,
 }
@@ -44,14 +44,14 @@ var cmdKeysRemove = &cobra.Command{
 var cmdKeysTrust = &cobra.Command{
 	Use:   "trust [ certificate ]",
 	Short: "Trusts a new certificate.",
-	Long:  "Adds a the certificate to the trusted certificate authority list.",
+	Long:  "adds a the certificate to the trusted certificate authority list.",
 	Run:   keysTrust,
 }
 
 var cmdKeysGenerate = &cobra.Command{
 	Use:   "generate [ GUN ]",
 	Short: "Generates a new key for a specific GUN.",
-	Long:  "generates a new key for a specific GUN. Global Unique Name.",
+	Long:  "generates a new key for a specific Global Unique Name.",
 	Run:   keysGenerate,
 }
 
@@ -69,7 +69,7 @@ func keysRemove(cmd *cobra.Command, args []string) {
 
 		err = caStore.RemoveCert(cert)
 		if err != nil {
-			fatalf("failed to remove certificate for Root KeyStore")
+			fatalf("failed to remove certificate from KeyStore")
 		}
 		failed = false
 	}
@@ -95,7 +95,7 @@ func keysTrust(cmd *cobra.Command, args []string) {
 	if err == nil && url.Scheme != "" {
 		cert, err = trustmanager.GetCertFromURL(certLocationStr)
 		if err != nil {
-			fatalf("error retreiving certificate from url (%s): %v", certLocationStr, err)
+			fatalf("error retrieving certificate from url (%s): %v", certLocationStr, err)
 		}
 	} else if _, err := os.Stat(certLocationStr); err == nil {
 		// Try to load the certificate from the file

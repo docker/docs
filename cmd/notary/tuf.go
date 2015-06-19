@@ -25,57 +25,57 @@ var remoteTrustServer string
 
 var cmdTufList = &cobra.Command{
 	Use:   "list [ GUN ]",
-	Short: "Lists targets for a GUN",
-	Long:  "Lists all targets for a Globally Unique Name.",
+	Short: "Lists targets for a trusted collection.",
+	Long:  "Lists all targets for a trusted collection identified by the Globally Unique Name.",
 	Run:   tufList,
 }
 
 var cmdTufAdd = &cobra.Command{
 	Use:   "add [ GUN ] <target> <file>",
-	Short: "adds the file as a target to the GUN.",
-	Long:  "adds the file as a target to the local trusted collection Global Unique Name.",
+	Short: "adds the file as a target to the trusted collection.",
+	Long:  "adds the file as a target to the local trusted collection identified by the Globally Unique Name.",
 	Run:   tufAdd,
 }
 
 var cmdTufRemove = &cobra.Command{
 	Use:   "remove [ GUN ] <target>",
-	Short: "Removes a target from the TUF repo.",
-	Long:  "removes a target from the local TUF repo identified by a Globally Unique Name.",
+	Short: "Removes a target from a trusted collection.",
+	Long:  "removes a target from the local trusted collection identified by the Globally Unique Name.",
 	Run:   tufRemove,
 }
 
 var cmdTufInit = &cobra.Command{
 	Use:   "init [ GUN ]",
-	Short: "initializes the local TUF repository.",
-	Long:  "creates locally the initial set of TUF metadata for the Globally Unique Name.",
+	Short: "initializes a local trusted collection.",
+	Long:  "initializes a local trusted collection identified by the Globally Unique Name.",
 	Run:   tufInit,
 }
 
 var cmdTufLookup = &cobra.Command{
-	Use:   "lookup [ GUN ] <target name>",
-	Short: "Looks up a specific TUF target in a repository.",
-	Long:  "looks up a TUF target in a repository given a Globally Unique Name.",
+	Use:   "lookup [ GUN ] <target>",
+	Short: "Looks up a specific target in a trusted collection.",
+	Long:  "looks up a specific target in a trusted collection identified by the Globally Unique Name.",
 	Run:   tufLookup,
 }
 
 var cmdTufPublish = &cobra.Command{
 	Use:   "publish [ GUN ]",
-	Short: "initializes the local TUF repository.",
-	Long:  "publishes the local changes to the remote trust server.",
+	Short: "publishes the local trusted collection.",
+	Long:  "publishes the local trusted collection identified by the Globally Unique Name, sending the local changes to a remote trusted server.",
 	Run:   tufPublish,
 }
 
 var cmdVerify = &cobra.Command{
 	Use:   "verify [ GUN ] <target>",
-	Short: "checks if the content is included in the trusted collection for the GUN",
-	Long:  "reads from STDIN and checks if the content is included in the trusted collection for the Global Unique Name.",
+	Short: "verifies if the content is included in the trusted collection",
+	Long:  "verifies if the data passed in STDIN is included in the trusted collection identified by the Global Unique Name.",
 	Run:   verify,
 }
 
 func tufAdd(cmd *cobra.Command, args []string) {
 	if len(args) < 3 {
 		cmd.Usage()
-		fatalf("must specify a GUN, target name, and local path to target data")
+		fatalf("must specify a GUN, target, and path to target data")
 	}
 
 	gun := args[0]
@@ -195,7 +195,7 @@ func tufList(cmd *cobra.Command, args []string) {
 func tufLookup(cmd *cobra.Command, args []string) {
 	if len(args) < 2 {
 		cmd.Usage()
-		fatalf("must specify a GUN and target name")
+		fatalf("must specify a GUN and target")
 	}
 	gun := args[0]
 	targetName := args[1]
@@ -292,7 +292,7 @@ func tufPublish(cmd *cobra.Command, args []string) {
 func tufRemove(cmd *cobra.Command, args []string) {
 	if len(args) < 2 {
 		cmd.Usage()
-		fatalf("must specify a GUN and target name")
+		fatalf("must specify a GUN and target")
 	}
 	gun := args[0]
 	targetName := args[1]
@@ -315,7 +315,7 @@ func tufRemove(cmd *cobra.Command, args []string) {
 func verify(cmd *cobra.Command, args []string) {
 	if len(args) < 2 {
 		cmd.Usage()
-		fatalf("must specify a GUN and target name")
+		fatalf("must specify a GUN and target")
 	}
 
 	// Reads all of the data on STDIN
@@ -374,7 +374,7 @@ func verify(cmd *cobra.Command, args []string) {
 	stdinHash := fmt.Sprintf("sha256:%x", sha256.Sum256(payload))
 	serverHash := fmt.Sprintf("sha256:%s", meta.Hashes["sha256"])
 	if stdinHash != serverHash {
-		_, _ = os.Stderr.Write([]byte("Data not present in the trusted collection\n"))
+		_, _ = os.Stderr.Write([]byte("Data not present in the trusted collection.\n"))
 	} else {
 		_, _ = os.Stdout.Write(payload)
 	}
@@ -450,7 +450,7 @@ func bootstrapRepo(gun string, repo *tuf.TufRepo) store.MetadataStore {
 		fatalf(err.Error())
 	}
 
-	fmt.Println("Loading TUF Repository.")
+	fmt.Println("Loading trusted collection.")
 	rootJSON, err := filestore.GetMeta("root", 0)
 	if err != nil {
 		fatalf(err.Error())

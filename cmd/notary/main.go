@@ -88,8 +88,8 @@ func init() {
 func main() {
 	var NotaryCmd = &cobra.Command{
 		Use:   "notary",
-		Short: "notary creates trust for docker",
-		Long:  "notary is the main trust-related command for Docker.",
+		Short: "notary allows the creation of trusted collections.",
+		Long:  "notary allows the creation and management of collections of signed targets, allowing the signing and validation of arbitrary content.",
 	}
 
 	NotaryCmd.AddCommand(cmdKeys)
