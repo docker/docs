@@ -19,23 +19,13 @@ import (
 	"github.com/spf13/viper"
 )
 
-var cmdTuf = &cobra.Command{
-	Use:   "tuf [ GUN ]",
-	Short: "Manages trust of data for notary. Lists targets for GUN when no other command given",
-	Long:  "Segments all commands related to managing TUF metadata. In the absence of another command, it lists all targets found under the Globally Unique Name.",
-	Run:   tufList,
-}
-
 var remoteTrustServer string
 
-func init() {
-	cmdTuf.AddCommand(cmdTufInit)
-	cmdTuf.AddCommand(cmdTufAdd)
-	cmdTuf.AddCommand(cmdTufRemove)
-	cmdTuf.AddCommand(cmdTufPush)
-	cmdTufPush.Flags().StringVarP(&remoteTrustServer, "remote", "r", "", "Remote trust server location")
-	cmdTuf.AddCommand(cmdTufLookup)
-	cmdTufLookup.Flags().StringVarP(&remoteTrustServer, "remote", "r", "", "Remote trust server location")
+var cmdTufList = &cobra.Command{
+	Use:   "list [ GUN ]",
+	Short: "Lists targets for a GUN",
+	Long:  "Lists all targets for a Globally Unique Name.",
+	Run:   tufList,
 }
 
 var cmdTufAdd = &cobra.Command{
