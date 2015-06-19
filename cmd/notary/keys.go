@@ -146,7 +146,7 @@ func printAllPrivateKeys(fp string, fi os.FileInfo, err error) error {
 		return nil
 	}
 	// Ignore if it is a directory
-	if !!fi.IsDir() {
+	if fi.IsDir() {
 		return nil
 	}
 	//TODO (diogo): make the key extension not be hardcoded
