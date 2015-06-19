@@ -43,7 +43,7 @@ for the image storage service.
 > **Note**: If you need DTR to re-generate a self-signed certificate at some
 > point, you'll need to first delete `/usr/local/etc/dtr/ssl/server.pem`, and
 > then restart the DTR containers, either by changing and saving the "Domain Name",
-> or using `bash -c "$(docker run dockerhubenterprise/manager restart)"`.
+> or using `bash -c "$(docker run docker/trusted-registry restart)"`.
 
 
 ## Security

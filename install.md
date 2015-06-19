@@ -218,7 +218,7 @@ c46d58daad7d: Pulling fs layer
 c46d58daad7d: Download complete
 c46d58daad7d: Download complete
 Status: Downloaded newer image for docker/trusted-registry:latest
-Unable to find image 'docker/trusted-registry:1.0.0_8ce62a61e058' locally
+Unable to find image 'docker/trusted-registry:1.1.0' locally
 Pulling repository docker/trusted-registry
 c46d58daad7d: Download complete
 511136ea3c5a: Download complete
@@ -235,7 +235,7 @@ d4b29764d0d3: Download complete
 0c275f56ca5c: Download complete
 ff2996b1faed: Download complete
 fd7612809d57: Download complete
-Status: Image is up to date for docker/trusted-registry:1.0.0_8ce62a61e058
+Status: Image is up to date for docker/trusted-registry:1.1.0
 INFO  [1.0.0_8ce62a61e058] Attempting to connect to docker engine dockerHost="unix:///var/run/docker.sock"
 INFO  [1.0.0_8ce62a61e058] Running install command
 <...output truncated...>
@@ -245,11 +245,14 @@ Bringing up docker_trusted_registry_log_aggregator.
 Creating container docker_trusted_registry_log_aggregator with docker daemon unix:///var/run/docker.sock
 Starting container docker_trusted_registry_log_aggregator with docker daemon unix:///var/run/docker.sock
 $ docker ps
-CONTAINER ID        IMAGE                                                   COMMAND                CREATED             STATUS         PORTS                                      NAMES
-0168f37b6221        docker/trusted-registry-log-aggregator:1.0.0_8ce62a61e058   "log-aggregator"       4 seconds ago       Up 4 seconds                                              docker_trusted_registry_log_aggregator
-b51c73bebe8b        docker/trusted-registry-nginx:1.0.0_8ce62a61e058            "nginxWatcher"         4 seconds ago       Up 4 seconds   0.0.0.0:80->80/tcp, 0.0.0.0:443->443/tcp   docker_trusted_registry_load_balancer
-e8327864356b        docker/trusted-registry-admin-server:1.0.0_8ce62a61e058     "server"               5 seconds ago       Up 5 seconds   80/tcp                                     docker_trusted_registry_admin_server
-52885a6e830a        docker/trusted-registry-auth_server:alpha-a5a2af8a555e      "garant --authorizat   6 seconds ago       Up 5 seconds   8080/tcp
+CONTAINER ID        IMAGE                                          COMMAND                CREATED             STATUS              PORTS                                      NAMES
+963ec2a4b047        docker/trusted-registry-nginx:1.1.0            "nginxWatcher"         5 minutes ago       Up 5 minutes        0.0.0.0:80->80/tcp, 0.0.0.0:443->443/tcp   docker_trusted_registry_load_balancer     
+7eade5529049        docker/trusted-registry-distribution:v2.0.1    "registry /config/st   5 minutes ago       Up 5 minutes        5000/tcp                                   docker_trusted_registry_image_storage_0   
+b968a8a986f9        docker/trusted-registry-distribution:v2.0.1    "registry /config/st   5 minutes ago       Up 5 minutes        5000/tcp                                   docker_trusted_registry_image_storage_1   
+390d9d68a33a        docker/trusted-registry-admin-server:1.1.0     "server"               5 minutes ago       Up 5 minutes        80/tcp                                     docker_trusted_registry_admin_server      
+3f8a53dc5f35        docker/trusted-registry-log-aggregator:1.1.0   "log-aggregator"       5 minutes ago       Up 5 minutes                                                   docker_trusted_registry_log_aggregator    
+44083421fa16        docker/trusted-registry-garant:1.1.0           "garant /config/gara   5 minutes ago       Up 5 minutes                                                   docker_trusted_registry_auth_server       
+c4102adf73dc        postgres:9.4.1                                 "/docker-entrypoint.   5 minutes ago       Up 5 minutes        5432/tcp                                   docker_trusted_registry_postgres      
 ```
 
 Once this process completes, you should be able to manage and configure your DTR
@@ -356,7 +359,7 @@ You should now [upgrade CS Docker Engine](#upgrading-the-commercially-supported-
 > **Note**: If Docker engine is upgraded first (DTR 1.0.0 on CS Docker Engine 1.6.1),
 > DTR can still be upgraded from the command line by running:
 >
-> `sudo bash -c "$(sudo docker run docker/trusted-registry:1.0.0 upgrade 1.0.1)"`
+> `sudo bash -c "$(sudo docker run docker/trusted-registry:1.1.0 upgrade 1.1.1)"`
 
 ## Next Steps
 

@@ -95,16 +95,16 @@ faster, more efficient resource utilization.
 
 ## DTR system management
 
-The `dockerhubenterprise/manager` image is used to control the DTR system. This
+The `docker/trusted-registry` image is used to control the DTR system. This
 image uses the Docker socket to orchestrate the multiple services that comprise
 DTR.
 
-     $ sudo bash -c "$(sudo docker run dockerhubenterprise/manager [COMMAND])"
+     $ sudo bash -c "$(sudo docker run docker/trusted-registry [COMMAND])"
 
 Supported commands are: `install`, `start`, `stop`, `restart`, `pull`, `info`,
 `export-settings`, `diagnostics`, `status`, `upgrade`.
 
-> **Note**: `sudo` is needed for `dockerhubenterprise/manager` commands to
+> **Note**: `sudo` is needed for `docker/trusted-registry` commands to
 > ensure that the Bash script is run with full access to the Docker host.
 
 ### `install`
@@ -128,7 +128,7 @@ Stop and then start the DTR containers.
 Display the current running status of only the DTR containers.
 
 ```
-$ sudo bash -c "$(docker run dockerhubenterprise/trusted-registry-dev:1.1.0-rc3 status)"
+$ sudo bash -c "$(docker run docker/trusted-registry status)"
 INFO  [1.1.0-alpha-001472_g8a9ddb4] Attempting to connect to docker engine dockerHost="unix:///var/run/docker.sock"
 INFO  [1.1.0-alpha-001472_g8a9ddb4] Running status command
 docker_trusted_registry_load_balancer
@@ -136,7 +136,7 @@ docker_trusted_registry_load_balancer
         Id: 4d6abd5c39acda25e3d3ccf7cc2acf00f32c7786a7e86fb56daf7fd67584ce9f
         Created: 2015-06-16 21:52:53+00:00
         Status: Up 4 minutes
-        Image: dockerhubenterprise/trusted-registry-nginx-dev:1.1.0-alpha-001472_g8a9ddb4
+        Image: docker/trusted-registry-nginx:1.1.0-alpha-001472_g8a9ddb4
         Ports:
             tcp://0.0.0.0:443 -> 443
             tcp://0.0.0.0:80 -> 80
@@ -159,7 +159,7 @@ of DTR.
 
 
 ```
-$ sudo bash -c "$(docker run dockerhubenterprise/trusted-registry-dev:1.1.0-rc3 info)"
+$ sudo bash -c "$(docker run docker/trusted-registry info)"
 INFO  [1.1.0-alpha-001472_g8a9ddb4] Attempting to connect to docker engine dockerHost="unix:///var/run/docker.sock"
 {
   "DockerEngine": {
@@ -170,7 +170,7 @@ INFO  [1.1.0-alpha-001472_g8a9ddb4] Attempting to connect to docker engine docke
       "GoVersion": "go1.4.2",
       "KernelVersion": "3.16.0-4-amd64",
       "Os": "linux",
-      "Version": "1.7.0-dev"
+      "Version": "1.6.0"
     },
     "Info": {
       "ID": "QUMM:6SGD:6ZK4:TLJD:LTX7:64Z5:WP4Y:NE3N:TY7P:Y2RR:KVGO:IWRX",
@@ -229,7 +229,7 @@ The output includes the `docker inspect` output for all
 containers, running and not, so please check the resulting files for passwords
 and other proprietary information before sending it.
 
-`$ sudo bash -c "$(docker run dockerhubenterprise/trusted-registry-dev:1.1.0-rc3 diagnostics)" > diagnostics.zip`
+`$ sudo bash -c "$(docker run docker/trusted-registry diagnostics)" > diagnostics.zip`
 
 > **Warning:** These diagnostics files may contain secrets that you need to remove
 > before passing on - such as raw container log files, azure storage credentials, or passwords that may be
@@ -254,7 +254,7 @@ files to help the Docker Enterprise support team:
 
 Export the DTR configuration files for backup or diagnostics use.
 
-`$ sudo bash -c "$(docker run dockerhubenterprise/trusted-registry-dev:1.1.0-rc3 export-settings)" > export-settings.tar.gz`
+`$ sudo bash -c "$(docker run docker/trusted-registry export-settings)" > export-settings.tar.gz`
 
 > **Warning:** These diagnostics files may contain secrets that you need to remove
 > before passing on - such as azure storage credentials.
