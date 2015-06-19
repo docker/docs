@@ -255,10 +255,12 @@ Then restart the Docker daemon with `sudo /etc/init.d/docker restart`.
 
 ## Image Storage Configuration
 
-DTR offers multiple methods for image storage, which are defined using specific
-storage drivers. Image storage can be local, remote, or on a cloud service such
-as S3. Storage drivers can be added or customized via the DTR storage driver
-API.
+DTR image storage can be configured to use the local filesystem, or a cloud service
+such as S3 or Azure. See the [Registry 2.0
+configuration](http://docs.docker.com/registry/configuration/)
+documentation for the options specific to each driver.
+Storage drivers can be added or customized via the [Docker Registry storage driver
+API](http://docs.docker.com/registry/storagedrivers/#storage-driver-api).
 
 ![Storage settings page</admin/settings#storage>](../assets/admin-settings-storage.png)
 
