@@ -9,7 +9,7 @@ import (
 	"github.com/gorilla/mux"
 	"golang.org/x/net/context"
 
-	"github.com/docker/vetinari/errors"
+	"github.com/docker/notary/errors"
 )
 
 // contextHandler defines an alterate HTTP handler interface which takes in
@@ -56,7 +56,7 @@ func (root *rootHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	//		return
 	//	}
 	if err := root.handler(ctx, w, r); err != nil {
-		logrus.Error("[Vetinari] ", err.Error())
+		logrus.Error("[Notary] ", err.Error())
 		http.Error(w, err.Error(), err.HTTPStatus)
 		return
 	}

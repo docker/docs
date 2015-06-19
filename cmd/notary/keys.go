@@ -13,7 +13,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/docker/vetinari/trustmanager"
+	"github.com/docker/notary/trustmanager"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"

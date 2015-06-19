@@ -1,7 +1,7 @@
-vetinari:
+notary:
   build: .
   links:
-   - vetinarimysql
+   - notarymysql
   ports:
    - "8080:8080"
    - "4443:4443"
@@ -10,7 +10,7 @@ vetinari:
 #   - /dev/bus/usb/003/010:/dev/bus/usb/002/010
 #   - /var/run/pcscd/pcscd.comm:/var/run/pcscd/pcscd.comm
 #  build: ../rufus
-vetinarimysql:
-  build: ./vetinarimysql/
+notarymysql:
+  build: ./notarymysql/
   ports:
     - "3306:3306"

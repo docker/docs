@@ -12,7 +12,7 @@ import (
 
 	"github.com/endophage/gotuf/signed"
 
-	"github.com/docker/vetinari/errors"
+	"github.com/docker/notary/errors"
 )
 
 func MockContextHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {

@@ -1,6 +1,6 @@
 # Roadmap
 
-The Trust project consists of a number of moving parts of which Vetinari is one. Vetinari is the front line metadata service
+The Trust project consists of a number of moving parts of which Notary is one. Notary is the front line metadata service
 that clients interact with. It manages TUF metadata and interacts with a pluggable signing service to issue new TUF timestamp
 files.
 

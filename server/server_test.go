@@ -9,7 +9,7 @@ import (
 	"github.com/endophage/gotuf/signed"
 	"golang.org/x/net/context"
 
-	"github.com/docker/vetinari/config"
+	"github.com/docker/notary/config"
 )
 
 func TestRunBadCerts(t *testing.T) {
@@ -40,8 +40,8 @@ func TestRunReservedPort(t *testing.T) {
 
 	config := config.ServerConf{
 		Addr:        "localhost:80",
-		TLSCertFile: "../fixtures/vetinari.pem",
-		TLSKeyFile:  "../fixtures/vetinari.key",
+		TLSCertFile: "../fixtures/notary.pem",
+		TLSKeyFile:  "../fixtures/notary.key",
 	}
 
 	err := Run(ctx, config, signed.NewEd25519())
@@ -59,8 +59,8 @@ func TestRunGoodCancel(t *testing.T) {
 
 	config := config.ServerConf{
 		Addr:        "localhost:8002",
-		TLSCertFile: "../fixtures/vetinari.pem",
-		TLSKeyFile:  "../fixtures/vetinari.key",
+		TLSCertFile: "../fixtures/notary.pem",
+		TLSKeyFile:  "../fixtures/notary.key",
 	}
 
 	go func() {
