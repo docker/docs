@@ -118,9 +118,21 @@ func tufInit(cmd *cobra.Command, args []string) {
 	signer := signed.NewSigner(NewCryptoService(gun))
 
 	rootKey, err := signer.Create("root")
+	if err != nil {
+		fatalf(err.Error())
+	}
 	targetsKey, err := signer.Create("targets")
+	if err != nil {
+		fatalf(err.Error())
+	}
 	snapshotKey, err := signer.Create("snapshot")
+	if err != nil {
+		fatalf(err.Error())
+	}
 	timestampKey, err := signer.Create("timestamp")
+	if err != nil {
+		fatalf(err.Error())
+	}
 
 	kdb.AddKey(rootKey)
 	kdb.AddKey(targetsKey)
@@ -128,14 +140,38 @@ func tufInit(cmd *cobra.Command, args []string) {
 	kdb.AddKey(timestampKey)
 
 	rootRole, err := data.NewRole("root", 1, []string{rootKey.ID()}, nil, nil)
+	if err != nil {
+		fatalf(err.Error())
+	}
 	targetsRole, err := data.NewRole("targets", 1, []string{targetsKey.ID()}, nil, nil)
+	if err != nil {
+		fatalf(err.Error())
+	}
 	snapshotRole, err := data.NewRole("snapshot", 1, []string{snapshotKey.ID()}, nil, nil)
+	if err != nil {
+		fatalf(err.Error())
+	}
 	timestampRole, err := data.NewRole("timestamp", 1, []string{timestampKey.ID()}, nil, nil)
+	if err != nil {
+		fatalf(err.Error())
+	}
 
-	kdb.AddRole(rootRole)
-	kdb.AddRole(targetsRole)
-	kdb.AddRole(snapshotRole)
-	kdb.AddRole(timestampRole)
+	err = kdb.AddRole(rootRole)
+	if err != nil {
+		fatalf(err.Error())
+	}
+	err = kdb.AddRole(targetsRole)
+	if err != nil {
+		fatalf(err.Error())
+	}
+	err = kdb.AddRole(snapshotRole)
+	if err != nil {
+		fatalf(err.Error())
+	}
+	err = kdb.AddRole(timestampRole)
+	if err != nil {
+		fatalf(err.Error())
+	}
 
 	repo := tuf.NewTufRepo(kdb, signer)
 
