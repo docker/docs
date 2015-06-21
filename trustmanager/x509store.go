@@ -16,7 +16,7 @@ type X509Store interface {
 	GetVerifyOptions(dnsName string) (x509.VerifyOptions, error)
 }
 
-type ID string
+type CertID string
 
 // Validator is a convenience type to create validating function that filters
 // certificates that get added to the store

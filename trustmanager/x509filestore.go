@@ -10,9 +10,9 @@ import (
 // X509FileStore implements X509Store that persists on disk
 type X509FileStore struct {
 	validate       Validator
-	fileMap        map[ID]string
-	fingerprintMap map[ID]*x509.Certificate
-	nameMap        map[string][]ID
+	fileMap        map[CertID]string
+	fingerprintMap map[CertID]*x509.Certificate
+	nameMap        map[string][]CertID
 	fileStore      FileStore
 }
 
@@ -36,9 +36,9 @@ func newX509FileStore(directory string, validate func(*x509.Certificate) bool) (
 
 	s := &X509FileStore{
 		validate:       ValidatorFunc(validate),
-		fileMap:        make(map[ID]string),
-		fingerprintMap: make(map[ID]*x509.Certificate),
-		nameMap:        make(map[string][]ID),
+		fileMap:        make(map[CertID]string),
+		fingerprintMap: make(map[CertID]*x509.Certificate),
+		nameMap:        make(map[string][]CertID),
 		fileStore:      fileStore,
 	}
 
@@ -178,7 +178,7 @@ func (s X509FileStore) GetCertificateBykID(hexkID string) (*x509.Certificate, er
 	}
 
 	// Check to see if this subject key identifier exists
-	if cert, ok := s.fingerprintMap[ID(hexkID)]; ok {
+	if cert, ok := s.fingerprintMap[CertID(hexkID)]; ok {
 		return cert, nil
 
 	}

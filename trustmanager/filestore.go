@@ -21,12 +21,14 @@ type FileStore interface {
 	ListGUN(gun string) []string
 }
 
+// fileStore implements FileStore
 type fileStore struct {
 	baseDir string
 	fileExt string
 	perms   os.FileMode
 }
 
+// NewFileStore creates a directory with 755 permissions
 func NewFileStore(baseDir string, fileExt string) (FileStore, error) {
 	if err := CreateDirectory(baseDir); err != nil {
 		return nil, err
@@ -39,6 +41,7 @@ func NewFileStore(baseDir string, fileExt string) (FileStore, error) {
 	}, nil
 }
 
+// NewPrivateFileStore creates a directory with 700 permissions
 func NewPrivateFileStore(baseDir string, fileExt string) (FileStore, error) {
 	if err := CreatePrivateDirectory(baseDir); err != nil {
 		return nil, err
@@ -51,25 +54,21 @@ func NewPrivateFileStore(baseDir string, fileExt string) (FileStore, error) {
 	}, nil
 }
 
+// Add writes data to a file with a given name
 func (f *fileStore) Add(name string, data []byte) error {
 	filePath := f.genFilePath(name)
 	createDirectory(filepath.Dir(filePath), f.perms)
-	if err := ioutil.WriteFile(filePath, data, f.perms); err != nil {
-		return err
-	}
-
-	return nil
+	return ioutil.WriteFile(filePath, data, f.perms)
 }
 
+// Remove removes a file identified by a name
+// TODO (diogo): We can get rid of RemoveGUN by merging with Remove
 func (f *fileStore) Remove(name string) error {
 	filePath := f.genFilePath(name)
-	if err := os.Remove(filePath); err != nil {
-		return err
-	}
-
-	return nil
+	return os.Remove(filePath)
 }
 
+// RemoveGUN removes a directory identified by the Global Unique Name
 func (f *fileStore) RemoveGUN(gun string) error {
 	dirPath := filepath.Join(f.baseDir, gun)
 
@@ -84,13 +83,10 @@ func (f *fileStore) RemoveGUN(gun string) error {
 		return fmt.Errorf("GUN not found: %s", gun)
 	}
 
-	if err := os.RemoveAll(dirPath); err != nil {
-		return err
-	}
-
-	return nil
+	return os.RemoveAll(dirPath)
 }
 
+// GetData returns the data given a file name
 func (f *fileStore) GetData(name string) ([]byte, error) {
 	filePath := f.genFilePath(name)
 	data, err := ioutil.ReadFile(filePath)
@@ -101,22 +97,27 @@ func (f *fileStore) GetData(name string) ([]byte, error) {
 	return data, nil
 }
 
+// GetPath returns the full final path of a file with a given name
 func (f *fileStore) GetPath(name string) string {
 	return f.genFilePath(name)
 }
 
+// List lists all the files inside of a store
 func (f *fileStore) List() []string {
-	return f.listGUN(f.baseDir)
+	return f.list(f.baseDir)
 }
 
+// ListGUN lists all the files inside of a directory identified by a Global Unique Name.
+// TODO (diogo): We can get rid of ListGUN by merging with List
 func (f *fileStore) ListGUN(gun string) []string {
 	gunPath := filepath.Join(f.baseDir, gun)
-	return f.listGUN(gunPath)
+	return f.list(gunPath)
 }
 
-func (f *fileStore) listGUN(gunPath string) []string {
+// listGUN lists all the files in a directory given a full path
+func (f *fileStore) list(path string) []string {
 	files := make([]string, 0, 0)
-	filepath.Walk(gunPath, func(fp string, fi os.FileInfo, err error) error {
+	filepath.Walk(path, func(fp string, fi os.FileInfo, err error) error {
 		// If there are errors, ignore this particular file
 		if err != nil {
 			return nil
@@ -136,16 +137,18 @@ func (f *fileStore) listGUN(gunPath string) []string {
 	return files
 }
 
+// genFilePath returns the full path with extension given a file name
 func (f *fileStore) genFilePath(name string) string {
 	fileName := fmt.Sprintf("%s.%s", name, f.fileExt)
-	filePath := filepath.Join(f.baseDir, fileName)
-	return filePath
+	return filepath.Join(f.baseDir, fileName)
 }
 
+// CreateDirectory uses createDirectory to create a chmod 755 Directory
 func CreateDirectory(dir string) error {
 	return createDirectory(dir, visible)
 }
 
+// CreatePrivateDirectory uses createDirectory to create a chmod 700 Directory
 func CreatePrivateDirectory(dir string) error {
 	return createDirectory(dir, private)
 }
@@ -157,8 +160,5 @@ func createDirectory(dir string, perms os.FileMode) error {
 	// This prevents someone passing /path/to/dir and 'dir' not being created
 	// If two '//' exist, MkdirAll deals it with correctly
 	dir = dir + "/"
-	if err := os.MkdirAll(dir, perms); err != nil {
-		return err
-	}
-	return nil
+	return os.MkdirAll(dir, perms)
 }

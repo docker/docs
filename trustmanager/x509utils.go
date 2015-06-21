@@ -83,14 +83,14 @@ func loadCertFromPEM(pemBytes []byte) (*x509.Certificate, error) {
 	return nil, errors.New("no certificates found in PEM data")
 }
 
-func FingerprintCert(cert *x509.Certificate) ID {
+func FingerprintCert(cert *x509.Certificate) CertID {
 	block := pem.Block{Type: "CERTIFICATE", Bytes: cert.Raw}
 	pemdata := string(pem.EncodeToMemory(&block))
 
-	// Create new TUF Key so we can compute the TUF-compliant ID
+	// Create new TUF Key so we can compute the TUF-compliant CertID
 	tufKey := data.NewTUFKey("RSA", pemdata, "")
 
-	return ID(tufKey.ID())
+	return CertID(tufKey.ID())
 }
 
 // loadCertsFromDir receives a store AddCertFromFile for each certificate found
