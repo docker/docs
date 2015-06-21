@@ -28,11 +28,52 @@ type signedMeta struct {
 	Version int    `json:"version"`
 }
 
+// VerifyRoot checks if a given root file is valid against a known set of keys.
+func VerifyRoot(s *data.Signed, minVersion int, keys map[string]*data.PublicKey, threshold int) ([]*data.PublicKey, error) {
+	if len(s.Signatures) == 0 {
+		return nil, ErrNoSignatures
+	}
+
+	var decoded map[string]interface{}
+	if err := json.Unmarshal(s.Signed, &decoded); err != nil {
+		return nil, err
+	}
+	msg, err := cjson.Marshal(decoded)
+	if err != nil {
+		return nil, err
+	}
+
+	valid := make(map[string]struct{})
+	for _, sig := range s.Signatures {
+		// make method lookup consistent with case uniformity.
+		method := strings.ToLower(sig.Method)
+		verifier, ok := Verifiers[method]
+		if !ok {
+			logrus.Debugf("continuing b/c signing method is not supported: %s\n", sig.Method)
+			continue
+		}
+
+		if err := verifier.Verify(keys[sig.KeyID], sig.Signature, msg); err != nil {
+			logrus.Debugf("continuing b/c signature was invalid\n")
+			continue
+		}
+		valid[sig.KeyID] = struct{}{}
+
+	}
+	if len(valid) < threshold {
+		return nil, ErrRoleThreshold
+	}
+	return nil, verifyMeta(s, "root", minVersion)
+}
+
 func Verify(s *data.Signed, role string, minVersion int, db *keys.KeyDB) error {
 	if err := VerifySignatures(s, role, db); err != nil {
 		return err
 	}
+	return verifyMeta(s, role, minVersion)
+}
 
+func verifyMeta(s *data.Signed, role string, minVersion int) error {
 	sm := &signedMeta{}
 	if err := json.Unmarshal(s.Signed, sm); err != nil {
 		return err
