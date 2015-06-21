@@ -1,12 +1,11 @@
-// version implementes a versioned store for TUF metadata
-package version
+package storage
 
 import (
 	"database/sql"
 	"fmt"
 )
 
-// VersionDB implements a versioned store using a relational database.
+// MySQLStorage implements a versioned store using a relational database.
 // The database table must look like:
 // CREATE TABLE `tuf_files` (
 //   `id` INT AUTO_INCREMENT,
@@ -17,19 +16,19 @@ import (
 //   PRIMARY KEY (`id`)
 //   UNIQUE INDEX (`qdn`, `role`, `version`)
 // ) DEFAULT CHARSET=utf8;
-type VersionDB struct {
+type MySQLStorage struct {
 	sql.DB
 }
 
-func NewVersionDB(db *sql.DB) *VersionDB {
-	return &VersionDB{
+func NewMySQLStorage(db *sql.DB) *MySQLStorage {
+	return &MySQLStorage{
 		DB: *db,
 	}
 }
 
 // Update multiple TUF records in a single transaction.
 // Always insert a new row. The unique constraint will ensure there is only ever
-func (vdb *VersionDB) UpdateCurrent(qdn, role string, version int, data []byte) error {
+func (vdb *MySQLStorage) UpdateCurrent(qdn, role string, version int, data []byte) error {
 	checkStmt := "SELECT count(*) FROM `tuf_files` WHERE `qdn`=? AND `role`=? AND `version`>=?;"
 	insertStmt := "INSERT INTO `tuf_files` (`qdn`, `role`, `version`, `data`) VALUES (?,?,?,?) ;"
 
@@ -55,7 +54,7 @@ func (vdb *VersionDB) UpdateCurrent(qdn, role string, version int, data []byte) 
 }
 
 // Get a specific TUF record
-func (vdb *VersionDB) GetCurrent(qdn, tufRole string) (data []byte, err error) {
+func (vdb *MySQLStorage) GetCurrent(qdn, tufRole string) (data []byte, err error) {
 	stmt := "SELECT `data` FROM `tuf_files` WHERE `qdn`=? AND `role`=? ORDER BY `version` DESC LIMIT 1;"
 	rows, err := vdb.Query(stmt, qdn, tufRole) // this should be a QueryRow()
 	if err != nil {
