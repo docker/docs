@@ -14,6 +14,7 @@ type X509Store interface {
 	GetCertificates() []*x509.Certificate
 	GetCertificatePool() *x509.CertPool
 	GetVerifyOptions(dnsName string) (x509.VerifyOptions, error)
+	Verify(dnsName string, certs ...*x509.Certificate) error
 }
 
 type ID string
