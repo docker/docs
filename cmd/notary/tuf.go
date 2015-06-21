@@ -373,28 +373,12 @@ func verify(cmd *cobra.Command, args []string) {
 		"json",
 		"",
 	)
-	rootJSON, err := remote.GetMeta("root", 5<<20)
-	if err != nil {
-		fmt.Println("Couldn't get initial root")
-		fatalf(err.Error())
-	}
-	root := &data.Signed{}
-	err = json.Unmarshal(rootJSON, root)
-	if err != nil {
-		fmt.Println("Couldn't parse initial root")
-		fatalf(err.Error())
-	}
-	// TODO: Validate the root file against the key store
-	err = repo.SetRoot(root)
-	if err != nil {
-		fatalf("Error setting root %v", err)
-	}
 
-	c := client.NewClient(
-		repo,
-		remote,
-		kdb,
-	)
+	c, err := bootstrapClient(remote, repo, kdb)
+	if err != nil {
+		logrus.Error("Unable to setup client.")
+		return
+	}
 
 	err = c.Update()
 	if err != nil {
@@ -403,14 +387,15 @@ func verify(cmd *cobra.Command, args []string) {
 	}
 	meta := c.TargetMeta(targetName)
 	if meta == nil {
-		return
+		logrus.Error("notary: data not present in the trusted collection.")
+		os.Exit(1)
 	}
 
 	// Create hasher and hash data
 	stdinHash := fmt.Sprintf("sha256:%x", sha256.Sum256(payload))
 	serverHash := fmt.Sprintf("sha256:%s", meta.Hashes["sha256"])
 	if stdinHash != serverHash {
-		_, _ = os.Stderr.Write([]byte("notary: Data not present in the trusted collection.\n"))
+		logrus.Error("notary: data not present in the trusted collection.")
 		os.Exit(1)
 	} else {
 		_, _ = os.Stdout.Write(payload)
