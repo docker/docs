@@ -1,4 +1,4 @@
-# ALPHA: The project is a work in progress and is not ready for production.
+# Notary is still a work in progress and we invite contributions and reviews from the security community. It will need to go through a formal security review process before it should be used in production.
 
 # Notary
 

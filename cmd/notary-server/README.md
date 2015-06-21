@@ -1,3 +1,5 @@
+# Notary is still a work in progress and we invite contributions and reviews from the security community. It will need to go through a formal security review process before it should be used in production.
+
 # Notary Server
 
 Notary Server manages TUF data over an HTTP API compatible with the
