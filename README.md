@@ -1,4 +1,4 @@
-**N.B. The project is a work in progress and is not ready for production.**
+# ALPHA: The project is a work in progress and is not ready for production.
 
 # Notary
 

@@ -109,7 +109,7 @@ func main() {
 }
 
 func usage() {
-	fmt.Println("usage:", os.Args[0], "<config>")
+	fmt.Println("usage:", os.Args[0])
 	flag.PrintDefaults()
 }
 
