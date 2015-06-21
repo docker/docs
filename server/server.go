@@ -107,6 +107,7 @@ func run(ctx context.Context, addr, tlsCertFile, tlsKeyFile string, trust signed
 	// TODO (endophage): use correct regexes for image and tag names
 	r.Methods("GET").Path("/v2/{imageName:.*}/_trust/tuf/{tufRole:(root|targets|timestamp|snapshot)}.json").Handler(hand(handlers.GetHandler, "pull"))
 	r.Methods("POST").Path("/v2/{imageName:.*}/_trust/tuf/{tufRole:(root|targets|timestamp|snapshot)}.json").Handler(hand(handlers.UpdateHandler, "push", "pull"))
+	r.Methods("DELETE").Path("/v2/{imageName:.*}/_trust/tuf/").Handler(hand(handlers.DeleteHandler, "push", "pull"))
 
 	svr := NewHTTPServer(
 		http.Server{
