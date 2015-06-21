@@ -1,9 +1,15 @@
 # Notary Server
 
-Notary Server manages TUF data. It may be configured to use either JWT
-or HTTP Basic Auth for authentication. Currently it only supports MySQL
-for store of the TUF data, we intend to expand this to other storage
-options.
+Notary Server manages TUF data over an HTTP API compatible with the
+[notary client](../notary/). The API is defined as part of the [distribution
+specification](https://github.com/docker/distribution/blob/master/docs/spec/api.md)
+as it is intended to be used side by side with a docker registry and
+the URL paths are designed to be compatible with the existing registry
+URL structure.
+
+It may be configured to use either JWT or HTTP Basic Auth for authentication.
+Currently it only supports MySQLfor store of the TUF data, we intend to
+expand this to other storage options.
 
 ## Setup for Development
 
