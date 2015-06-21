@@ -106,32 +106,16 @@ func (f *fileStore) GetPath(name string) string {
 }
 
 func (f *fileStore) List() []string {
-	files := make([]string, 0, 0)
-	filepath.Walk(f.baseDir, func(fp string, fi os.FileInfo, err error) error {
-		// If there are errors, ignore this particular file
-		if err != nil {
-			return nil
-		}
-		// Ignore if it is a directory
-		if fi.IsDir() {
-			return nil
-		}
-		// Only allow matches that end with our certificate extension (e.g. *.crt)
-		matched, _ := filepath.Match("*"+f.fileExt, fi.Name())
-
-		if matched {
-			files = append(files, fp)
-		}
-		return nil
-	})
-	return files
+	return f.listGUN(f.baseDir)
 }
 
 func (f *fileStore) ListGUN(gun string) []string {
+	gunPath := filepath.Join(f.baseDir, gun)
+	return f.listGUN(gunPath)
+}
+
+func (f *fileStore) listGUN(gunPath string) []string {
 	files := make([]string, 0, 0)
-	// This prevents someone passing /path/to/dir and 'dir' not being included
-	// If two '//' exist, Walk deals it with correctly
-	gunPath := filepath.Join(f.baseDir, gun) + "/"
 	filepath.Walk(gunPath, func(fp string, fi os.FileInfo, err error) error {
 		// If there are errors, ignore this particular file
 		if err != nil {
