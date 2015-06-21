@@ -3,9 +3,11 @@ package trustmanager
 import (
 	"bytes"
 	"crypto/rand"
+	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"strconv"
 	"testing"
 )
 
@@ -74,7 +76,7 @@ func TestRemoveFile(t *testing.T) {
 		perms:   perms,
 	}
 
-	// Call the Add function
+	// Call the Remove function
 	err = store.Remove(testName)
 	if err != nil {
 		t.Fatalf("failed to remove file from store: %v", err)
@@ -113,7 +115,7 @@ func TestRemoveGUN(t *testing.T) {
 		perms:   perms,
 	}
 
-	// Call the Add function
+	// Call the RemoveGUN function
 	err = store.RemoveGUN(testName)
 	if err != nil {
 		t.Fatalf("failed to remove directory: %v", err)
@@ -156,13 +158,58 @@ func TestList(t *testing.T) {
 		perms:   perms,
 	}
 
-	// Call the Add function
+	// Call the List function
 	files := store.List()
 	if len(files) != 10 {
 		t.Fatalf("expected 10 files in listing, got: %d", len(files))
 	}
 }
 
+func TestListGUN(t *testing.T) {
+	testName := "docker.com/notary/certificate"
+	testExt := "crt"
+	perms := os.FileMode(0755)
+
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	if err != nil {
+		t.Fatalf("failed to create a temporary directory: %v", err)
+	}
+
+	var expectedFilePath string
+	// Create 10 randomfiles
+	for i := 1; i <= 10; i++ {
+		// Since we're generating this manually we need to add the extension '.'
+		fileName := fmt.Sprintf("%s-%s.%s", testName, strconv.Itoa(i), testExt)
+		expectedFilePath = filepath.Join(tempBaseDir, fileName)
+		fmt.Println(expectedFilePath)
+		_, err = generateRandomFile(expectedFilePath, perms)
+		if err != nil {
+			t.Fatalf("failed to generate random file: %v", err)
+		}
+	}
+
+	// Create our FileStore
+	store := &fileStore{
+		baseDir: tempBaseDir,
+		fileExt: testExt,
+		perms:   perms,
+	}
+
+	// Call the ListGUN function
+	files := store.ListGUN("docker.com/")
+	if len(files) != 10 {
+		t.Fatalf("expected 10 files in listing, got: %d", len(files))
+	}
+	files = store.ListGUN("docker.com/notary")
+	if len(files) != 10 {
+		t.Fatalf("expected 10 files in listing, got: %d", len(files))
+	}
+	files = store.ListGUN("fakedocker.com/")
+	if len(files) != 0 {
+		t.Fatalf("expected 0 files in listing, got: %d", len(files))
+	}
+}
 func TestGetPath(t *testing.T) {
 	testExt := "crt"
 	perms := os.FileMode(0755)

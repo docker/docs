@@ -12,12 +12,13 @@ const private os.FileMode = 0700
 
 // FileStore is the interface for all FileStores
 type FileStore interface {
-	Add(name string, data []byte) error
-	Remove(name string) error
+	Add(fileName string, data []byte) error
+	Remove(fileName string) error
 	RemoveGUN(gun string) error
-	GetData(name string) ([]byte, error)
-	GetPath(name string) string
+	GetData(fileName string) ([]byte, error)
+	GetPath(fileName string) string
 	List() []string
+	ListGUN(gun string) []string
 }
 
 type fileStore struct {
@@ -107,6 +108,31 @@ func (f *fileStore) GetPath(name string) string {
 func (f *fileStore) List() []string {
 	files := make([]string, 0, 0)
 	filepath.Walk(f.baseDir, func(fp string, fi os.FileInfo, err error) error {
+		// If there are errors, ignore this particular file
+		if err != nil {
+			return nil
+		}
+		// Ignore if it is a directory
+		if fi.IsDir() {
+			return nil
+		}
+		// Only allow matches that end with our certificate extension (e.g. *.crt)
+		matched, _ := filepath.Match("*"+f.fileExt, fi.Name())
+
+		if matched {
+			files = append(files, fp)
+		}
+		return nil
+	})
+	return files
+}
+
+func (f *fileStore) ListGUN(gun string) []string {
+	files := make([]string, 0, 0)
+	// This prevents someone passing /path/to/dir and 'dir' not being included
+	// If two '//' exist, Walk deals it with correctly
+	gunPath := filepath.Join(f.baseDir, gun) + "/"
+	filepath.Walk(gunPath, func(fp string, fi os.FileInfo, err error) error {
 		// If there are errors, ignore this particular file
 		if err != nil {
 			return nil
