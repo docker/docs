@@ -1,4 +1,4 @@
-# Contributing to the registry
+# Contributing to notary
 
 ## Before reporting an issue...
 
@@ -12,7 +12,7 @@ Then please do not report your issue here - you should instead report it to [htt
 
 ### If you...
 
- - need help setting up your registry
+ - need help setting up notary
  - can't figure out something
  - are not sure what's going on or what your problem is
 
@@ -38,17 +38,13 @@ By following these simple rules you will get better and faster feedback on your 
 
  1. create a new issue, with a succinct title that describes your issue:
    - bad title: "It doesn't work with my docker"
-   - good title: "Private registry push fail: 400 error with E_INVALID_DIGEST"
+   - good title: "Publish fail: 400 error with E_INVALID_DIGEST"
  2. copy the output of:
    - `docker version`
    - `docker info`
    - `docker exec <registry-container> registry -version`
- 3. copy the command line you used to launch your Registry
- 4. restart your docker daemon in debug mode (add `-D` to the daemon launch arguments)
- 5. reproduce your problem and get your docker daemon logs showing the error
- 6. if relevant, copy your registry logs that show the error
- 7. provide any relevant detail about your specific Registry configuration (e.g., storage backend used)
- 8. indicate if you are using an enterprise proxy, Nginx, or anything else between you and your Registry
+ 3. copy the command line you used to run `notary` or launch `notaryserver`
+ 4. if relevant, copy your `notaryserver` logs that show the error
 
 ## Contributing a patch for a known bug, or a small correction
 
