@@ -171,3 +171,27 @@ func (s X509MemStore) GetVerifyOptions(dnsName string) (x509.VerifyOptions, erro
 
 	return opts, nil
 }
+
+// TODO: Create a parent Store object that implements the shared methods
+// and gets embedded into this and the X509MemoryStore
+func (s X509MemStore) Verify(dnsName string, certs ...*x509.Certificate) error {
+	// If we have no Certificates loaded return error (we don't want to rever to using
+	// system CAs).
+	if len(s.fingerprintMap) == 0 {
+		return errors.New("no root CAs available")
+	}
+
+	// TODO: determine which cert in rootCerts is the leaf and add
+	// the intermediates to verifyOpts.Intermediates
+	opts := x509.VerifyOptions{
+		DNSName: dnsName,
+		Roots:   s.GetCertificatePool(),
+	}
+
+	// TODO: assuming only one cert ever passed and that it's the leaf
+	chains, err := certs[0].Verify(opts)
+	if len(chains) == 0 || err != nil {
+		return errors.New("Certificate did not verify")
+	}
+	return nil
+}

@@ -3,7 +3,9 @@ package main
 import (
 	"bytes"
 	"crypto/sha256"
+	"crypto/x509"
 	"encoding/json"
+	"encoding/pem"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -207,7 +209,7 @@ func tufList(cmd *cobra.Command, args []string) {
 		"json",
 		"",
 	)
-	c, err := bootstrapClient(remote, repo, kdb)
+	c, err := bootstrapClient(gun, remote, repo, kdb)
 	if err != nil {
 		return
 	}
@@ -244,7 +246,7 @@ func tufLookup(cmd *cobra.Command, args []string) {
 		"json",
 		"",
 	)
-	c, err := bootstrapClient(remote, repo, kdb)
+	c, err := bootstrapClient(gun, remote, repo, kdb)
 	if err != nil {
 		return
 	}
@@ -439,7 +441,7 @@ func saveRepo(repo *tuf.TufRepo, filestore store.MetadataStore) error {
 	return nil
 }
 
-func bootstrapClient(remote store.RemoteStore, repo *tuf.TufRepo, kdb *keys.KeyDB) (*client.Client, error) {
+func bootstrapClient(gun string, remote store.RemoteStore, repo *tuf.TufRepo, kdb *keys.KeyDB) (*client.Client, error) {
 	rootJSON, err := remote.GetMeta("root", 5<<20)
 	if err != nil {
 		return nil, err
@@ -449,7 +451,10 @@ func bootstrapClient(remote store.RemoteStore, repo *tuf.TufRepo, kdb *keys.KeyD
 	if err != nil {
 		return nil, err
 	}
-	// TODO: Validate the root file against the key store
+	err = validateRoot(gun, root)
+	if err != nil {
+		return nil, err
+	}
 	err = repo.SetRoot(root)
 	if err != nil {
 		return nil, err
@@ -459,6 +464,35 @@ func bootstrapClient(remote store.RemoteStore, repo *tuf.TufRepo, kdb *keys.KeyD
 		remote,
 		kdb,
 	), nil
+}
+
+func validateRoot(gun string, root *data.Signed) error {
+	rootSigned := &data.Root{}
+	err := json.Unmarshal(root.Signed, rootSigned)
+	if err != nil {
+		return err
+	}
+	certs := make(map[string]*data.PublicKey)
+	for _, kID := range rootSigned.Roles["root"].KeyIDs {
+		// TODO: currently assuming only one cert contained in
+		// public key entry
+		k, _ := pem.Decode([]byte(rootSigned.Keys["kid"].Public()))
+		rootCert, err := x509.ParseCertificates(k.Bytes)
+		if err != nil {
+			continue
+		}
+		err = caStore.Verify(gun, rootCert[0])
+		if err != nil {
+			continue
+		}
+		certs[kID] = rootSigned.Keys[kID]
+	}
+	_, err = signed.VerifyRoot(root, 0, certs, 1)
+	if err != nil {
+		// failed to validate the signatures against the certificates
+		return err
+	}
+	return nil
 }
 
 func bootstrapRepo(gun string, repo *tuf.TufRepo) store.MetadataStore {
