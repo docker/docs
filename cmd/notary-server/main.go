@@ -19,7 +19,7 @@ import (
 
 	"github.com/docker/notary/config"
 	"github.com/docker/notary/server"
-	"github.com/docker/notary/server/version"
+	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/signer"
 )
 
@@ -77,7 +77,7 @@ func main() {
 		logrus.Fatal("Error starting DB driver: ", err.Error())
 		return // not strictly needed but let's be explicit
 	}
-	ctx = context.WithValue(ctx, "versionStore", version.NewVersionDB(db))
+	ctx = context.WithValue(ctx, "versionStore", storage.NewMySQLStorage(db))
 	for {
 		logrus.Info("[Notary Server] Starting Server")
 		childCtx, cancel := context.WithCancel(ctx)

@@ -12,7 +12,7 @@ import (
 	"golang.org/x/net/context"
 
 	"github.com/docker/notary/errors"
-	"github.com/docker/notary/server/version"
+	"github.com/docker/notary/server/storage"
 )
 
 // MainHandler is the default handler for the server
@@ -44,7 +44,7 @@ func UpdateHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) 
 			Err:        fmt.Errorf("Version store is nil"),
 		}
 	}
-	store, ok := s.(*version.VersionDB)
+	store, ok := s.(*storage.MySQLStorage)
 	if !ok {
 		return &errors.HTTPError{
 			HTTPStatus: http.StatusInternalServerError,
@@ -87,7 +87,7 @@ func UpdateHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) 
 // GetHandler accepts urls in the form /<imagename>/<tuf file>.json
 func GetHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
 	s := ctx.Value("versionStore")
-	store, ok := s.(*version.VersionDB)
+	store, ok := s.(*storage.MySQLStorage)
 	if !ok {
 		return &errors.HTTPError{
 			HTTPStatus: http.StatusInternalServerError,
