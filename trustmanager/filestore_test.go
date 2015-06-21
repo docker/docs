@@ -87,6 +87,46 @@ func TestRemoveFile(t *testing.T) {
 	}
 }
 
+func TestRemoveGUN(t *testing.T) {
+	testName := "docker.com/diogomonica/"
+	testExt := "key"
+	perms := os.FileMode(0700)
+
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	if err != nil {
+		t.Fatalf("failed to create a temporary directory: %v", err)
+	}
+
+	// Since we're generating this manually we need to add the extension '.'
+	expectedFilePath := filepath.Join(tempBaseDir, testName+"."+testExt)
+
+	_, err = generateRandomFile(expectedFilePath, perms)
+	if err != nil {
+		t.Fatalf("failed to generate random file: %v", err)
+	}
+
+	// Create our FileStore
+	store := &fileStore{
+		baseDir: tempBaseDir,
+		fileExt: testExt,
+		perms:   perms,
+	}
+
+	// Call the Add function
+	err = store.RemoveGUN(testName)
+	if err != nil {
+		t.Fatalf("failed to remove directory: %v", err)
+	}
+
+	expectedDirectory := filepath.Dir(expectedFilePath)
+	// Check to see if file exists
+	_, err = os.Stat(expectedDirectory)
+	if err == nil {
+		t.Fatalf("expected not to find directory: %s", expectedDirectory)
+	}
+}
+
 func TestList(t *testing.T) {
 	testName := "docker.com/notary/certificate"
 	testExt := "crt"

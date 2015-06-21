@@ -14,6 +14,7 @@ const private os.FileMode = 0700
 type FileStore interface {
 	Add(name string, data []byte) error
 	Remove(name string) error
+	RemoveGUN(gun string) error
 	GetData(name string) ([]byte, error)
 	GetPath(name string) string
 	List() []string
@@ -62,6 +63,27 @@ func (f *fileStore) Add(name string, data []byte) error {
 func (f *fileStore) Remove(name string) error {
 	filePath := f.genFilePath(name)
 	if err := os.Remove(filePath); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (f *fileStore) RemoveGUN(gun string) error {
+	dirPath := filepath.Join(f.baseDir, gun)
+
+	// Check to see if file exists
+	fi, err := os.Stat(dirPath)
+	if err != nil {
+		return err
+	}
+
+	// Check to see if it is a directory
+	if !fi.IsDir() {
+		return fmt.Errorf("GUN not found: %s", gun)
+	}
+
+	if err := os.RemoveAll(dirPath); err != nil {
 		return err
 	}
 

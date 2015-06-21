@@ -55,14 +55,17 @@ var cmdKeysGenerate = &cobra.Command{
 	Run:   keysGenerate,
 }
 
+// keysRemove deletes Certificates based on hash and Private Keys
+// based on GUNs.
 func keysRemove(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
 		cmd.Usage()
 		fatalf("must specify a SHA256 SubjectKeyID of the certificate")
 	}
 
-	failed := true
-	cert, err := caStore.GetCertificateBykID(args[0])
+	gunOrID := args[0]
+
+	cert, err := caStore.GetCertificateBykID(gunOrID)
 	if err == nil {
 		fmt.Printf("Removing: ")
 		printCert(cert)
@@ -71,13 +74,21 @@ func keysRemove(cmd *cobra.Command, args []string) {
 		if err != nil {
 			fatalf("failed to remove certificate from KeyStore")
 		}
-		failed = false
+		return
 	}
 
-	//TODO (diogo): We might want to delete private keys from the CLI
-	if failed {
-		fatalf("certificate not found in any store")
+	// Ask for confirmation before adding certificate into repository
+	fmt.Printf("Are you sure you want to remove all keys under this Global Unique Name: %s? (yes/no)\n", gunOrID)
+	confirmed := askConfirm()
+	if !confirmed {
+		fatalf("aborting action.")
 	}
+
+	err = privKeyStore.RemoveGUN(gunOrID)
+	if err != nil {
+		fatalf("failed to remove all Private keys under Global Unique Name: %s", gunOrID)
+	}
+	fmt.Printf("Removing all Private keys form: %s \n", gunOrID)
 }
 
 //TODO (diogo): Ask the use if she wants to trust the GUN in the cert
