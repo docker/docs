@@ -2,7 +2,7 @@ package trustmanager
 
 import "crypto/x509"
 
-const certExtension string = ".crt"
+const certExtension string = "crt"
 
 // X509Store is the interface for all X509Stores
 type X509Store interface {

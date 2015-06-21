@@ -137,31 +137,14 @@ func keysList(cmd *cobra.Command, args []string) {
 
 	fmt.Println("")
 	fmt.Println("# Signing keys: ")
-	filepath.Walk(viper.GetString("privDir"), printAllPrivateKeys)
-}
+	for _, k := range privKeyStore.List() {
+		k = strings.TrimSuffix(k, filepath.Ext(k))
+		k = strings.TrimPrefix(k, viper.GetString("privDir"))
 
-func printAllPrivateKeys(fp string, fi os.FileInfo, err error) error {
-	// If there are errors, ignore this particular file
-	if err != nil {
-		return nil
-	}
-	// Ignore if it is a directory
-	if fi.IsDir() {
-		return nil
-	}
-	//TODO (diogo): make the key extension not be hardcoded
-	// Only allow matches that end with our key extension .key
-	matched, _ := filepath.Match("*.key", fi.Name())
-	if matched {
-		fp = strings.TrimSuffix(fp, filepath.Ext(fp))
-		fp = strings.TrimPrefix(fp, viper.GetString("privDir"))
-
-		fingerprint := filepath.Base(fp)
-		gun := filepath.Dir(fp)[1:]
-
+		fingerprint := filepath.Base(k)
+		gun := filepath.Dir(k)[1:]
 		fmt.Printf("%s %s\n", gun, fingerprint)
 	}
-	return nil
 }
 
 func keysGenerate(cmd *cobra.Command, args []string) {
