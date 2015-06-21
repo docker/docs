@@ -9,8 +9,8 @@ import (
 // X509MemStore implements X509Store as an in-memory object with no persistence
 type X509MemStore struct {
 	validate       Validator
-	fingerprintMap map[ID]*x509.Certificate
-	nameMap        map[string][]ID
+	fingerprintMap map[CertID]*x509.Certificate
+	nameMap        map[string][]CertID
 }
 
 // NewX509MemStore returns a new X509MemStore.
@@ -19,8 +19,8 @@ func NewX509MemStore() *X509MemStore {
 
 	return &X509MemStore{
 		validate:       validate,
-		fingerprintMap: make(map[ID]*x509.Certificate),
-		nameMap:        make(map[string][]ID),
+		fingerprintMap: make(map[CertID]*x509.Certificate),
+		nameMap:        make(map[string][]CertID),
 	}
 }
 
@@ -30,8 +30,8 @@ func NewX509FilteredMemStore(validate func(*x509.Certificate) bool) *X509MemStor
 	s := &X509MemStore{
 
 		validate:       ValidatorFunc(validate),
-		fingerprintMap: make(map[ID]*x509.Certificate),
-		nameMap:        make(map[string][]ID),
+		fingerprintMap: make(map[CertID]*x509.Certificate),
+		nameMap:        make(map[string][]CertID),
 	}
 
 	return s
@@ -147,7 +147,7 @@ func (s X509MemStore) GetCertificateBykID(hexkID string) (*x509.Certificate, err
 	}
 
 	// Check to see if this subject key identifier exists
-	if cert, ok := s.fingerprintMap[ID(hexkID)]; ok {
+	if cert, ok := s.fingerprintMap[CertID(hexkID)]; ok {
 		return cert, nil
 
 	}

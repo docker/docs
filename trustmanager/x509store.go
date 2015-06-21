@@ -2,7 +2,7 @@ package trustmanager
 
 import "crypto/x509"
 
-const certExtension string = ".crt"
+const certExtension string = "crt"
 
 // X509Store is the interface for all X509Stores
 type X509Store interface {
@@ -16,7 +16,7 @@ type X509Store interface {
 	GetVerifyOptions(dnsName string) (x509.VerifyOptions, error)
 }
 
-type ID string
+type CertID string
 
 // Validator is a convenience type to create validating function that filters
 // certificates that get added to the store

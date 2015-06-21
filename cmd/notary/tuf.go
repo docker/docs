@@ -410,7 +410,7 @@ func verify(cmd *cobra.Command, args []string) {
 	stdinHash := fmt.Sprintf("sha256:%x", sha256.Sum256(payload))
 	serverHash := fmt.Sprintf("sha256:%s", meta.Hashes["sha256"])
 	if stdinHash != serverHash {
-		_, _ = os.Stderr.Write([]byte("Data not present in the trusted collection.\n"))
+		_, _ = os.Stderr.Write([]byte("notary: Data not present in the trusted collection.\n"))
 		os.Exit(1)
 	} else {
 		_, _ = os.Stdout.Write(payload)

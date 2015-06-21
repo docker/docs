@@ -9,46 +9,42 @@ import (
 
 // X509FileStore implements X509Store that persists on disk
 type X509FileStore struct {
-	baseDir        string
 	validate       Validator
-	fileMap        map[ID]string
-	fingerprintMap map[ID]*x509.Certificate
-	nameMap        map[string][]ID
+	fileMap        map[CertID]string
+	fingerprintMap map[CertID]*x509.Certificate
+	nameMap        map[string][]CertID
+	fileStore      FileStore
 }
 
 // NewX509FileStore returns a new X509FileStore.
-func NewX509FileStore(directory string) *X509FileStore {
+func NewX509FileStore(directory string) (*X509FileStore, error) {
 	validate := ValidatorFunc(func(cert *x509.Certificate) bool { return true })
-
-	s := &X509FileStore{
-
-		baseDir:        directory,
-		validate:       validate,
-		fileMap:        make(map[ID]string),
-		fingerprintMap: make(map[ID]*x509.Certificate),
-		nameMap:        make(map[string][]ID),
-	}
-
-	loadCertsFromDir(s, directory)
-
-	return s
+	return newX509FileStore(directory, validate)
 }
 
 // NewX509FilteredFileStore returns a new X509FileStore that validates certificates
 // that are added.
-func NewX509FilteredFileStore(directory string, validate func(*x509.Certificate) bool) *X509FileStore {
-	s := &X509FileStore{
+func NewX509FilteredFileStore(directory string, validate func(*x509.Certificate) bool) (*X509FileStore, error) {
+	return newX509FileStore(directory, validate)
+}
 
-		baseDir:        directory,
-		validate:       ValidatorFunc(validate),
-		fileMap:        make(map[ID]string),
-		fingerprintMap: make(map[ID]*x509.Certificate),
-		nameMap:        make(map[string][]ID),
+func newX509FileStore(directory string, validate func(*x509.Certificate) bool) (*X509FileStore, error) {
+	fileStore, err := NewFileStore(directory, certExtension)
+	if err != nil {
+		return nil, err
 	}
 
-	loadCertsFromDir(s, directory)
+	s := &X509FileStore{
+		validate:       ValidatorFunc(validate),
+		fileMap:        make(map[CertID]string),
+		fingerprintMap: make(map[CertID]*x509.Certificate),
+		nameMap:        make(map[string][]CertID),
+		fileStore:      fileStore,
+	}
 
-	return s
+	loadCertsFromDir(s)
+
+	return s, nil
 }
 
 // AddCert creates a filename for a given cert and adds a certificate with that name
@@ -57,11 +53,12 @@ func (s X509FileStore) AddCert(cert *x509.Certificate) error {
 		return errors.New("adding nil Certificate to X509Store")
 	}
 
-	var filename string
-	fingerprint := string(FingerprintCert(cert))
-	filename = path.Join(s.baseDir, cert.Subject.CommonName, fingerprint+certExtension)
-
-	if err := s.addNamedCert(cert, filename); err != nil {
+	// Check if this certificate meets our validation criteria
+	if !s.validate.Validate(cert) {
+		return errors.New("certificate validation failed")
+	}
+	// Attempt to write the certificate to the file
+	if err := s.addNamedCert(cert); err != nil {
 		return err
 	}
 
@@ -70,11 +67,7 @@ func (s X509FileStore) AddCert(cert *x509.Certificate) error {
 
 // addNamedCert allows adding a certificate while controling the filename it gets
 // stored under. If the file does not exist on disk, saves it.
-func (s X509FileStore) addNamedCert(cert *x509.Certificate, filename string) error {
-	if cert == nil {
-		return errors.New("adding nil Certificate to X509Store")
-	}
-
+func (s X509FileStore) addNamedCert(cert *x509.Certificate) error {
 	fingerprint := FingerprintCert(cert)
 
 	// Validate if we already loaded this certificate before
@@ -82,22 +75,24 @@ func (s X509FileStore) addNamedCert(cert *x509.Certificate, filename string) err
 		return errors.New("certificate already in the store")
 	}
 
-	// Check if this certificate meets our validation criteria
-	if !s.validate.Validate(cert) {
-		return errors.New("certificate validation failed")
+	// Convert certificate to PEM
+	certBytes := ToPEM(cert)
+	// Compute FileName
+	fileName := fileName(cert)
+
+	// Save the file to disk if not already there.
+	if _, err := os.Stat(fileName); os.IsNotExist(err) {
+		if err := s.fileStore.Add(fileName, certBytes); err != nil {
+			return err
+		}
 	}
 
-	// Add the certificate to our in-memory storage
+	// We wrote the certificate succcessfully, add it to our in-memory storage
 	s.fingerprintMap[fingerprint] = cert
-	s.fileMap[fingerprint] = filename
+	s.fileMap[fingerprint] = fileName
 
 	name := string(cert.RawSubject)
 	s.nameMap[name] = append(s.nameMap[name], fingerprint)
-
-	// Save the file to disk if not already there.
-	if _, err := os.Stat(filename); os.IsNotExist(err) {
-		return saveCertificate(cert, filename)
-	}
 
 	return nil
 }
@@ -126,7 +121,7 @@ func (s X509FileStore) RemoveCert(cert *x509.Certificate) error {
 
 	s.nameMap[name] = newfpList
 
-	if err := os.Remove(filename); err != nil {
+	if err := s.fileStore.Remove(filename); err != nil {
 		return err
 	}
 
@@ -183,7 +178,7 @@ func (s X509FileStore) GetCertificateBykID(hexkID string) (*x509.Certificate, er
 	}
 
 	// Check to see if this subject key identifier exists
-	if cert, ok := s.fingerprintMap[ID(hexkID)]; ok {
+	if cert, ok := s.fingerprintMap[CertID(hexkID)]; ok {
 		return cert, nil
 
 	}
@@ -206,4 +201,8 @@ func (s X509FileStore) GetVerifyOptions(dnsName string) (x509.VerifyOptions, err
 	}
 
 	return opts, nil
+}
+
+func fileName(cert *x509.Certificate) string {
+	return path.Join(cert.Subject.CommonName, string(FingerprintCert(cert)))
 }

@@ -9,7 +9,6 @@ import (
 	"encoding/pem"
 	"fmt"
 	"io/ioutil"
-	"os"
 	"path/filepath"
 
 	"github.com/docker/notary/trustmanager"
@@ -113,28 +112,8 @@ func generateKeyAndCert(gun string) (crypto.PrivateKey, *x509.Certificate, error
 
 	kID := trustmanager.FingerprintCert(cert)
 	// The key is going to be stored in the private directory, using the GUN and
-	// the filename will be the TUF-compliant ID
-	privKeyFilename := filepath.Join(viper.GetString("privDir"), gun, string(kID)+".key")
-
-	// If GUN is in the form of 'foo/bar' ensures that private key is stored in the
-	// adequate sub-directory
-	err = trustmanager.CreateDirectory(privKeyFilename)
-	if err != nil {
-		return nil, nil, fmt.Errorf("could not create directory for private key: %v", err)
-	}
-
-	// Opens a FD to the file with the correct permissions
-	keyOut, err := os.OpenFile(privKeyFilename, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0600)
-	if err != nil {
-		return nil, nil, fmt.Errorf("could not write privatekey: %v", err)
-	}
-	defer keyOut.Close()
-
-	// Encodes the private key as PEM and writes it
-	err = pem.Encode(keyOut, &pem.Block{Type: "RSA PRIVATE KEY", Bytes: keyBytes})
-	if err != nil {
-		return nil, nil, fmt.Errorf("failed to encode key: %v", err)
-	}
-
+	// the filename will be the TUF-compliant ID. The Store takes care of extensions.
+	privKeyFilename := filepath.Join(gun, string(kID))
+	privKeyStore.Add(privKeyFilename, trustmanager.KeyToPEM(keyBytes))
 	return key, cert, nil
 }

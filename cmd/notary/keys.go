@@ -55,29 +55,55 @@ var cmdKeysGenerate = &cobra.Command{
 	Run:   keysGenerate,
 }
 
+// keysRemove deletes Certificates based on hash and Private Keys
+// based on GUNs.
 func keysRemove(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
 		cmd.Usage()
 		fatalf("must specify a SHA256 SubjectKeyID of the certificate")
 	}
 
-	failed := true
-	cert, err := caStore.GetCertificateBykID(args[0])
+	//TODO (diogo): Validate Global Unique Name. We probably want to reject 1 char GUNs.
+	gunOrID := args[0]
+
+	// Try to retreive the ID from the CA store.
+	cert, err := caStore.GetCertificateBykID(gunOrID)
 	if err == nil {
 		fmt.Printf("Removing: ")
 		printCert(cert)
 
+		// If the ID is found, remove it.
 		err = caStore.RemoveCert(cert)
 		if err != nil {
 			fatalf("failed to remove certificate from KeyStore")
 		}
-		failed = false
+		return
 	}
 
-	//TODO (diogo): We might want to delete private keys from the CLI
-	if failed {
-		fatalf("certificate not found in any store")
+	// We didn't find a certificate with this ID, let's try to see if we can find keys.
+	keyList := privKeyStore.ListGUN(gunOrID)
+	if len(keyList) < 1 {
+		fatalf("no Private Keys found under Global Unique Name: %s", gunOrID)
 	}
+
+	// List all the keys about to be removed
+	fmt.Println("Are you sure you want to remove the following keys? (yes/no)", gunOrID)
+	for _, k := range keyList {
+		printKey(k)
+	}
+
+	// Ask for confirmation before removing keys
+	confirmed := askConfirm()
+	if !confirmed {
+		fatalf("aborting action.")
+	}
+
+	// Remove all the keys under the Global Unique Name
+	err = privKeyStore.RemoveGUN(gunOrID)
+	if err != nil {
+		fatalf("failed to remove all Private keys under Global Unique Name: %s", gunOrID)
+	}
+	fmt.Printf("Removing all Private keys from: %s \n", gunOrID)
 }
 
 //TODO (diogo): Ask the use if she wants to trust the GUN in the cert
@@ -137,31 +163,9 @@ func keysList(cmd *cobra.Command, args []string) {
 
 	fmt.Println("")
 	fmt.Println("# Signing keys: ")
-	filepath.Walk(viper.GetString("privDir"), printAllPrivateKeys)
-}
-
-func printAllPrivateKeys(fp string, fi os.FileInfo, err error) error {
-	// If there are errors, ignore this particular file
-	if err != nil {
-		return nil
+	for _, k := range privKeyStore.List() {
+		printKey(k)
 	}
-	// Ignore if it is a directory
-	if fi.IsDir() {
-		return nil
-	}
-	//TODO (diogo): make the key extension not be hardcoded
-	// Only allow matches that end with our key extension .key
-	matched, _ := filepath.Match("*.key", fi.Name())
-	if matched {
-		fp = strings.TrimSuffix(fp, filepath.Ext(fp))
-		fp = strings.TrimPrefix(fp, viper.GetString("privDir"))
-
-		fingerprint := filepath.Base(fp)
-		gun := filepath.Dir(fp)[1:]
-
-		fmt.Printf("%s %s\n", gun, fingerprint)
-	}
-	return nil
 }
 
 func keysGenerate(cmd *cobra.Command, args []string) {
@@ -215,6 +219,15 @@ func printCert(cert *x509.Certificate) {
 	timeDifference := cert.NotAfter.Sub(time.Now())
 	subjectKeyID := trustmanager.FingerprintCert(cert)
 	fmt.Printf("%s %s (expires in: %v days)\n", cert.Subject.CommonName, string(subjectKeyID), math.Floor(timeDifference.Hours()/24))
+}
+
+func printKey(keyPath string) {
+	keyPath = strings.TrimSuffix(keyPath, filepath.Ext(keyPath))
+	keyPath = strings.TrimPrefix(keyPath, viper.GetString("privDir"))
+
+	fingerprint := filepath.Base(keyPath)
+	gun := filepath.Dir(keyPath)[1:]
+	fmt.Printf("%s %s\n", gun, fingerprint)
 }
 
 func askConfirm() bool {
