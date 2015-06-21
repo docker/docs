@@ -3,6 +3,7 @@ package server
 import (
 	"crypto/rand"
 	"crypto/tls"
+	"fmt"
 	"net"
 	"net/http"
 
@@ -19,7 +20,7 @@ import (
 // Run sets up and starts a TLS server that can be cancelled using the
 // given configuration. The context it is passed is the context it should
 // use directly for the TLS server, and generate children off for requests
-func Run(ctx context.Context, addr, tlsCertFile, tlsKeyFile string, trust signed.CryptoService) error {
+func Run(ctx context.Context, addr, tlsCertFile, tlsKeyFile string, trust signed.CryptoService, authMethod string, authOpts interface{}) error {
 
 	tcpAddr, err := net.ResolveTCPAddr("tcp", addr)
 	if err != nil {
@@ -59,6 +60,18 @@ func Run(ctx context.Context, addr, tlsCertFile, tlsKeyFile string, trust signed
 	}
 
 	var ac auth.AccessController
+	if authMethod == "" {
+		ac = nil
+	} else {
+		authOptions, ok := authOpts.(map[string]interface{})
+		if !ok {
+			return fmt.Errorf("auth.options must be a map[string]interface{}")
+		}
+		ac, err = auth.GetAccessController(authMethod, authOptions)
+		if err != nil {
+			return err
+		}
+	}
 	hand := utils.RootHandlerFactory(ac, ctx, trust)
 
 	r := mux.NewRouter()

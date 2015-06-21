@@ -14,6 +14,7 @@ import (
 	"syscall"
 
 	"github.com/Sirupsen/logrus"
+	_ "github.com/docker/distribution/registry/auth/htpasswd"
 	_ "github.com/docker/distribution/registry/auth/token"
 	"github.com/endophage/gotuf/signed"
 	_ "github.com/go-sql-driver/mysql"
@@ -102,6 +103,8 @@ func main() {
 		viper.GetString("server.tls_cert_file"),
 		viper.GetString("server.tls_key_file"),
 		trust,
+		viper.GetString("auth.type"),
+		viper.Get("auth.options"),
 	)
 
 	logrus.Error("[Notary Server]", err.Error())
