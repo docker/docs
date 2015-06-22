@@ -37,9 +37,7 @@ DTR is perfect for:
 
 DTR is built on [version 2 of the Docker registry](https://github.com/docker/distribution).
 
-<!-- TODO  ## Getting your copy of DTR
-
-To get a copy of DTR, visit [the DTR Hub page](some URL). -->
+To get your copy of DTR, including a free trial, visit [the Docker Subscription page](http://hub-beta.docker.com/enterprise/). For more information on acquiring DTR, see the [install page](http://docs.docker.com/docker-hub-enterprise/install/).
 
 >   **Important**: DTR must be used with the current version of the commercially
 >   supported Docker Engine. You must install this version of Docker before
@@ -65,4 +63,4 @@ setting up and configuring DTR for your particular environment.
 * [**Support**](./support.md) Go here for information on getting support for
 DTR.
 
-Note: DTR requires that you use the Commercially Supported Docker Engine.
+Note: DTR requires that you use the commercially supported Docker Engine.

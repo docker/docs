@@ -88,7 +88,7 @@ configuring settings, and viewing logs.
 to each image storage service (`image_storage_X`).
 * `log_aggregator`: A microservice used for aggregating logs from each of the
 other services. Handles log persistence and rotation on disk.
-* `image_storage_X`: Stores Docker images using the [Docker Registry HTTP API V2](https://github.com/docker/distribution/blob/master/doc/SPEC.md). Typically,
+* `image_storage_X`: Stores Docker images using the [Docker Registry HTTP API V2](http://docs.docker.com/registry/spec/api/). Typically,
 multiple image storage services are used in order to provide greater uptime and
 faster, more efficient resource utilization.
 * `postgres`: A database service used to host authentication (LDAP) data and other datasets as needed by DTR.
@@ -305,6 +305,13 @@ The zip file will contain the following information:
 - - `dtr/exportedSettings/`: the DTR manager container's log files and a backup of the `/usr/local/etc/dtr` DTR configuration directory. See the [export settings section](#export-settings) for more details.
 - `sysinfo/`: local Host information
 - `errors.txt`: errors and warnings encountered while running diagnostics
+
+### Starting and stopping DTR
+
+If you need to stop and/or start DTR (for upgrading, troubleshooting, etc.), use the following commands:
+
+`sudo bash -d "$(docker run docker/trusted-registry stop)"`
+`sudo bash -d "$(docker run docker/trusted-registry start)"`
 
 ## Next Steps
 

@@ -21,28 +21,31 @@ be found in the [DTR Configuration page](configuration.md).
 
 Specifically, installation requires completion of these steps, in order:
 
-1. Acquire a license by purchasing DTR or requesting a trial license.
+1. Acquire a license by purchasing DTR or signing up for a trial license.
 2. Install the commercially supported Docker Engine.
 3. Install DTR
 4. Add your license to your DTR instance
 
- <!-- TODO > **Note:** To get your copy of DTR, visit [the Hub Subscriptions page](https://hub-beta.docker.com/subscriptions/). -->
-
+To get your copy of DTR, including a free trial, visit the [Docker Subscription page](http://hub-beta.docker.com/enterprise/).
 
 ## Licensing
 
-In order to run DTR, you will need to acquire a license, either by purchasing
-DTR or requesting a trial license. The license will be associated with your
+In order to run DTR, you will need to get a license, either by purchasing
+DTR or acquiring a trial license. The license will be associated with your free
 Docker Hub account or Docker Hub organization (so if you don't have an account,
 you'll need to set one up, which can be done at the same time as your license
-request). To get your license or start your trial, please contact our
-[sales department](mailto:sales@docker.com). Upon completion of your purchase or
-request, you will receive an email with further instructions for licensing your
-copy of DTR.
+request). To get your license, visit the [Docker Subscription page](http://hub-beta.docker.com/enterprise/) and select the edition you would like acquire. After completing a brief registration process, follow the steps to acquire a license.
+
+Once you've acquired your license, you can view or download it by logging in to Docker Hub, going to your account settings (gear icon at upper right), and then selecting ["Licenses"](https://hub-beta.docker.com/account/licenses/) from the top nav bar. 
+
+The Licenses page will display your currently available licenses. Click the cloud icon to download your desired license. You may need to disable any pop-up blocker installed on your browser in order to complete the download.
+
+You can also download the commercially supported Docker Engine packages from this page by clicking the download buttons at upper right (see below for details).
+
 
 ## Prerequisites
 
-DTR 1.0.1 requires the following:
+DTR 1.1 requires the following:
 
 * Commercially supported Docker Engine 1.6.1 or later running on an
 Ubuntu 14.04 LTS, RHEL 7.1 or RHEL 7.0 host. (See below for instructions on how
@@ -64,25 +67,23 @@ container port mapping.
 the DTR license (or the user-name of an administrator of the Hub organization
 that obtained an Enterprise license).
 
-## Installing the Commercially Supported Docker Engine
+## Installing the commercially supported Docker Engine
 
 Since DTR is installed using Docker, the commercially supported Docker Engine
-**must be** installed first. This is done with an RPM or DEB repository, which you set up using a Bash script downloaded from the 
-[Docker Hub](https://hub.docker.com).
+**must be** installed first. This is done with an RPM or DEB package, which you access using a script you download from your 
+[Docker Hub Licenses page](https://hub-beta.docker.com/account/licenses/).
 
 ### Download the commercially supported Docker Engine installation script
 
 To download the commercially supported Docker Engine Bash installation script,
-log in to the [Docker Hub](https://hub.docker.com) with the user-name used to
+log in to the [Docker Hub](https://hub-beta.docker.com) with the user-name used to
 obtain your license . Once you're logged in, go to the
-["Enterprise Licenses"](https://registry.hub.docker.com/account/licenses/) page
-in your Hub account's "Settings" section.
+["Licenses"](https://hub-beta.docker.com/account/licenses/) page in your Hub account's "Settings" section (accessed via the gear icon at upper right).
 
-Select your intended host operating system from the "Download CS Engine" drop-
-down at the top right of the page and then, once the Bash setup script is
+Click the button at the top right of the page that corresponds to your intended host operating system. and then, once the Bash setup script is
 downloaded, follow the steps below appropriate for your chosen OS.
 
-![Docker Hub Docker engine install dropdown](../assets/docker-hub-org-enterprise-license-CSDE-dropdown.png)
+![Docker Hub Docker engine install dropdown](../assets/docker-hub-org-enterprise-license.png)
 
 ### RHEL 7.0/7.1 installation
 
@@ -175,7 +176,7 @@ and then start DTR again:
 
 Once the commercially supported Docker Engine is installed, you can install DTR
 itself. DTR is a self-installing application built and distributed using Docker
-and the [Docker Hub](https://registry.hub.docker.com/). It is able to restart
+and the [Docker Hub](https://hub-beta.docker.com/). It is able to restart
 and reconfigure itself using the Docker socket that is bind-mounted to its
 container.
 
@@ -188,8 +189,7 @@ Start installing DTR by running the "docker/trusted-registry" container:
 > **Note**: `sudo` is needed for `docker/trusted-registry` commands to
 > ensure that the Bash script is run with full access to the Docker host.
 
-You can also find this command on the "Enterprise Licenses" section of your Hub
-user profile. The command will execute a shell script that creates the needed
+The command will execute a shell script that creates the needed
 directories and then runs Docker to pull DTR's images and run its containers.
 
 Depending on your internet connection, this process may take several minutes to
@@ -284,9 +284,7 @@ To do that, you'll first download your license from the Docker Hub and then
 upload it to your DTR web admin server. Follow these steps:
 
 1. If needed, log back into the [Docker Hub](https://hub.docker.com)
-   using the user-name you used when obtaining your license. Go to "Settings" (in
-   the menu under your user-name, top right) to get to your account settings, and
-   then click on "Enterprise Licenses" in the side bar at left.
+   using the user-name you used when obtaining your license. Go to "Settings"   (gear icon, top right) to get to your account settings, and then click on "Licenses" in the top nav bar.
 
 2. You'll see a list of available licenses. Click on the download button to
    obtain the license file you'd like to use.
@@ -354,9 +352,9 @@ DTR.
 Assuming you have a decent internet connection, the entire upgrade process
 should complete within a few minutes.
 
-You should now [upgrade CS Docker Engine](#upgrading-the-commercially-supported-docker-engine).
+You should now [upgrade CS Docker Engine](#upgrading-the-commercially-supported-docker-engine) if needed.
 
-> **Note**: If Docker engine is upgraded first (DTR 1.0.0 on CS Docker Engine 1.6.1),
+> **Note**: If Docker engine is upgraded first (DTR 1.1 on CS Docker Engine 1.6.1),
 > DTR can still be upgraded from the command line by running:
 >
 > `sudo bash -c "$(sudo docker run docker/trusted-registry:1.1.0 upgrade 1.1.1)"`
