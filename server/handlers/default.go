@@ -33,7 +33,7 @@ func MainHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *e
 	return nil
 }
 
-// AddHandler accepts urls in the form /<imagename>/<tag>
+// AddHandler adds the provided json data for the role and GUN specified in the URL
 func UpdateHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
 	defer r.Body.Close()
 	s := ctx.Value("versionStore")
@@ -84,7 +84,7 @@ func UpdateHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) 
 	return nil
 }
 
-// GetHandler accepts urls in the form /<imagename>/<tuf file>.json
+// GetHandler returns the json for a specified role and GUN.
 func GetHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
 	s := ctx.Value("versionStore")
 	store, ok := s.(*storage.MySQLStorage)
@@ -118,5 +118,30 @@ func GetHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *er
 	}
 	logrus.Debug("Writing data")
 	w.Write(data)
+	return nil
+}
+
+// DeleteHandler deletes all data for a GUN. A 200 responses indicates success.
+func DeleteHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
+	s := ctx.Value("versionStore")
+	store, ok := s.(*storage.MySQLStorage)
+	if !ok {
+		return &errors.HTTPError{
+			HTTPStatus: http.StatusInternalServerError,
+			Code:       9999,
+			Err:        fmt.Errorf("Version store not configured"),
+		}
+	}
+	vars := mux.Vars(r)
+	gun := vars["imageName"]
+	err := store.Delete(gun)
+	if err != nil {
+		logrus.Errorf("[Notary Server] 500 DELETE repository: %s", gun)
+		return &errors.HTTPError{
+			HTTPStatus: http.StatusInternalServerError,
+			Code:       9999,
+			Err:        err,
+		}
+	}
 	return nil
 }
