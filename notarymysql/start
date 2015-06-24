@@ -106,12 +106,12 @@ if [ -n "${DB_USER}" -o -n "${DB_NAME}" ]; then
         mysql -uroot -e "USE \`$db\`; DROP TABLE IF EXISTS \`$DB_TABLE\`;"
         mysql -uroot -e "USE \`$db\`; CREATE TABLE \`$DB_TABLE\` (
                     \`id\` int(11) NOT NULL AUTO_INCREMENT,
-                    \`qdn\` varchar(255) NOT NULL,
+                    \`gun\` varchar(255) NOT NULL,
                     \`role\` varchar(255) NOT NULL,
                     \`version\` int(11) NOT NULL,
                     \`data\` longblob NOT NULL,
                     PRIMARY KEY (\`id\`),
-                    UNIQUE KEY \`qdn\` (\`qdn\`,\`role\`,\`version\`)
+                    UNIQUE KEY \`gun\` (\`gun\`,\`role\`,\`version\`)
                     ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;"
       done
   fi
