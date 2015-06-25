@@ -30,10 +30,6 @@
 			"Rev": "70fbd45a5c88f6f39a07b04f81a07721bf5f3eed"
 		},
 		{
-			"ImportPath": "github.com/docker/rufus/keys",
-			"Rev": "17e4b530d71b9222dc043c80987cbde254edcc2a"
-		},
-		{
 			"ImportPath": "github.com/dustin/go-humanize",
 			"Rev": "145fabdb1ab757076a70a886d092a3af27f66f4c"
 		},

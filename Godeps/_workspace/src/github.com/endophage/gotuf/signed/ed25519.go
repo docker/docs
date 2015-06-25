@@ -2,7 +2,6 @@ package signed
 
 import (
 	"crypto/rand"
-	"encoding/hex"
 
 	"github.com/agl/ed25519"
 	"github.com/endophage/gotuf/data"
@@ -51,10 +50,8 @@ func (trust *Ed25519) Create(role string) (*data.PublicKey, error) {
 	if err != nil {
 		return nil, err
 	}
-	pubStr := hex.EncodeToString(pub[:])
-	privStr := hex.EncodeToString(priv[:])
-	public := data.NewPublicKey("ed25519", pubStr)
-	private := data.NewPrivateKey("ed25519", pubStr, privStr)
+	public := data.NewPublicKey("ed25519", pub[:])
+	private := data.NewPrivateKey("ed25519", pub[:], priv[:])
 	trust.addKey(private)
 	return public, nil
 }

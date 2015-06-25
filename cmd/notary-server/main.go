@@ -9,6 +9,8 @@ import (
 	_ "net/http/pprof"
 	"os"
 	"os/signal"
+	"path/filepath"
+	"strings"
 	"syscall"
 
 	"github.com/Sirupsen/logrus"
@@ -17,10 +19,10 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"golang.org/x/net/context"
 
-	"github.com/docker/notary/config"
 	"github.com/docker/notary/server"
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/signer"
+	"github.com/spf13/viper"
 )
 
 // DebugAddress is the debug server address to listen on
@@ -30,8 +32,8 @@ var debug bool
 var configFile string
 
 func init() {
-	// Set default logging level to Error
-	logrus.SetLevel(logrus.ErrorLevel)
+	// set default log level to Error
+	viper.SetDefault("logging.level", 2)
 
 	// Setup flags
 	flag.StringVar(&configFile, "config", "", "Path to configuration file")
@@ -42,20 +44,26 @@ func main() {
 	flag.Usage = usage
 	flag.Parse()
 
-	if DebugAddress != "" {
+	if debug {
 		go debugServer(DebugAddress)
 	}
 
 	ctx := context.Background()
 
-	conf, err := parseConfig(configFile)
+	filename := filepath.Base(configFile)
+	ext := filepath.Ext(configFile)
+	configPath := filepath.Dir(configFile)
+
+	viper.SetConfigType(strings.TrimPrefix(ext, "."))
+	viper.SetConfigName(strings.TrimSuffix(filename, ext))
+	viper.AddConfigPath(configPath)
+	err := viper.ReadInConfig()
 	if err != nil {
-		logrus.Fatal("Error parsing config: ", err.Error())
-		return // not strictly needed but let's be explicit
+		logrus.Error("Viper Error: ", err.Error())
+		logrus.Error("Could not read config at ", configFile)
+		os.Exit(1)
 	}
-	if conf.Logging.Level > 0 {
-		logrus.SetLevel(logrus.Level(conf.Logging.Level))
-	}
+	logrus.SetLevel(logrus.Level(viper.GetInt("logging.level")))
 
 	sigHup := make(chan os.Signal)
 	sigTerm := make(chan os.Signal)
@@ -64,48 +72,40 @@ func main() {
 	signal.Notify(sigTerm, syscall.SIGTERM)
 
 	var trust signed.CryptoService
-	if conf.TrustService.Type == "remote" {
+	if viper.GetString("trust_service.type") == "remote" {
 		logrus.Info("[Notary Server] : Using remote signing service")
-		trust = signer.NewRufusSigner(conf.TrustService.Hostname, conf.TrustService.Port, conf.TrustService.TLSCAFile)
+		trust = signer.NewRufusSigner(
+			viper.GetString("trust_service.hostname"),
+			viper.GetString("trust_service.port"),
+			viper.GetString("trust_service.tls_ca_file"),
+		)
 	} else {
 		logrus.Info("[Notary Server] : Using local signing service")
 		trust = signed.NewEd25519()
 	}
 
-	db, err := sql.Open("mysql", "dockercondemo:dockercondemo@tcp(notarymysql:3306)/dockercondemo")
-	if err != nil {
-		logrus.Fatal("Error starting DB driver: ", err.Error())
-		return // not strictly needed but let's be explicit
-	}
-	ctx = context.WithValue(ctx, "versionStore", storage.NewMySQLStorage(db))
-	for {
-		logrus.Info("[Notary Server] Starting Server")
-		childCtx, cancel := context.WithCancel(ctx)
-		go server.Run(childCtx, conf.Server, trust)
-
-		for {
-			select {
-			// On a sighup we cancel and restart a new server
-			// with updated config
-			case <-sigHup:
-				logrus.Infof("[Notary Server] Server restart requested. Attempting to parse config at %s", configFile)
-				conf, err = parseConfig(configFile)
-				if err != nil {
-					logrus.Infof("[Notary Server] Unable to parse config. Old configuration will keep running. Parse Err: %s", err.Error())
-					continue
-				} else {
-					cancel()
-					logrus.Info("[Notary Server] Stopping server for restart")
-					break
-				}
-			// On sigkill we cancel and shutdown
-			case <-sigTerm:
-				cancel()
-				logrus.Info("[Notary Server] Shutting Down Hard")
-				os.Exit(0)
-			}
+	if viper.GetString("store.backend") == "mysql" {
+		dbURL := viper.GetString("storage.db_url")
+		db, err := sql.Open("mysql", dbURL)
+		if err != nil {
+			logrus.Fatal("[Notary Server] Error starting DB driver: ", err.Error())
+			return // not strictly needed but let's be explicit
 		}
+		ctx = context.WithValue(ctx, "metaStore", storage.NewMySQLStorage(db))
+	} else {
+		ctx = context.WithValue(ctx, "metaStore", storage.NewMemStorage())
 	}
+	logrus.Info("[Notary Server] Starting Server")
+	err = server.Run(
+		ctx,
+		viper.GetString("server.addr"),
+		viper.GetString("server.tls_cert_file"),
+		viper.GetString("server.tls_key_file"),
+		trust,
+	)
+
+	logrus.Error("[Notary Server]", err.Error())
+	return
 }
 
 func usage() {
@@ -121,15 +121,4 @@ func debugServer(addr string) {
 	if err := http.ListenAndServe(addr, nil); err != nil {
 		logrus.Fatal("[Notary Debug Server] error listening on debug interface: ", err)
 	}
-}
-
-func parseConfig(path string) (*config.Configuration, error) {
-	file, err := os.Open(path)
-	defer file.Close()
-	if err != nil {
-		logrus.Error("Failed to open configuration file located at: ", path)
-		return nil, err
-	}
-
-	return config.Load(file)
 }

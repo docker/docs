@@ -5,11 +5,8 @@ import (
 	"crypto/rsa"
 	"crypto/sha256"
 	"crypto/x509"
-	"encoding/base64"
 	"encoding/pem"
-	"io/ioutil"
 	"reflect"
-	"strings"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/agl/ed25519"
@@ -68,9 +65,10 @@ type RSAVerifier struct{}
 
 func (v RSAVerifier) Verify(key data.Key, sig []byte, msg []byte) error {
 	digest := sha256.Sum256(msg)
-	keyReader := base64.NewDecoder(base64.StdEncoding, strings.NewReader(key.Public()))
-	keyBytes, _ := ioutil.ReadAll(keyReader)
-	pub, err := x509.ParsePKIXPublicKey(keyBytes)
+	//keyReader := base64.NewDecoder(base64.StdEncoding, strings.NewReader(key.Public()))
+	//keyBytes, _ := ioutil.ReadAll(keyReader)
+	//pub, err := x509.ParsePKIXPublicKey(keyBytes)
+	pub, err := x509.ParsePKIXPublicKey(key.Public())
 	if err != nil {
 		logrus.Infof("Failed to parse public key: %s\n", err)
 		return ErrInvalid

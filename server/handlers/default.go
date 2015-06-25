@@ -8,11 +8,13 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	"github.com/endophage/gotuf/data"
+	"github.com/endophage/gotuf/signed"
 	"github.com/gorilla/mux"
 	"golang.org/x/net/context"
 
 	"github.com/docker/notary/errors"
 	"github.com/docker/notary/server/storage"
+	"github.com/docker/notary/server/timestamp"
 )
 
 // MainHandler is the default handler for the server
@@ -36,7 +38,7 @@ func MainHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *e
 // AddHandler adds the provided json data for the role and GUN specified in the URL
 func UpdateHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
 	defer r.Body.Close()
-	s := ctx.Value("versionStore")
+	s := ctx.Value("metaStore")
 	if s == nil {
 		return &errors.HTTPError{
 			HTTPStatus: http.StatusInternalServerError,
@@ -44,7 +46,7 @@ func UpdateHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) 
 			Err:        fmt.Errorf("Version store is nil"),
 		}
 	}
-	store, ok := s.(*storage.MySQLStorage)
+	store, ok := s.(storage.MetaStore)
 	if !ok {
 		return &errors.HTTPError{
 			HTTPStatus: http.StatusInternalServerError,
@@ -86,8 +88,8 @@ func UpdateHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) 
 
 // GetHandler returns the json for a specified role and GUN.
 func GetHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
-	s := ctx.Value("versionStore")
-	store, ok := s.(*storage.MySQLStorage)
+	s := ctx.Value("metaStore")
+	store, ok := s.(storage.MetaStore)
 	if !ok {
 		return &errors.HTTPError{
 			HTTPStatus: http.StatusInternalServerError,
@@ -98,8 +100,7 @@ func GetHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *er
 	vars := mux.Vars(r)
 	gun := vars["imageName"]
 	tufRole := vars["tufRole"]
-	data, err := store.GetCurrent(gun, tufRole)
-	logrus.Debug("JSON: ", string(data))
+	out, err := store.GetCurrent(gun, tufRole)
 	if err != nil {
 		logrus.Errorf("[Notary Server] 500 GET repository: %s, role: %s", gun, tufRole)
 		return &errors.HTTPError{
@@ -108,7 +109,7 @@ func GetHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *er
 			Err:        err,
 		}
 	}
-	if data == nil {
+	if out == nil {
 		logrus.Errorf("[Notary Server] 404 GET repository: %s, role: %s", gun, tufRole)
 		return &errors.HTTPError{
 			HTTPStatus: http.StatusNotFound,
@@ -117,14 +118,14 @@ func GetHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *er
 		}
 	}
 	logrus.Debug("Writing data")
-	w.Write(data)
+	w.Write(out)
 	return nil
 }
 
 // DeleteHandler deletes all data for a GUN. A 200 responses indicates success.
 func DeleteHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
-	s := ctx.Value("versionStore")
-	store, ok := s.(*storage.MySQLStorage)
+	s := ctx.Value("metaStore")
+	store, ok := s.(storage.MetaStore)
 	if !ok {
 		return &errors.HTTPError{
 			HTTPStatus: http.StatusInternalServerError,
@@ -143,5 +144,86 @@ func DeleteHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) 
 			Err:        err,
 		}
 	}
+	return nil
+}
+
+func GetTimestampHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
+	s := ctx.Value("metaStore")
+	store, ok := s.(storage.MetaStore)
+	if !ok {
+		return &errors.HTTPError{
+			HTTPStatus: http.StatusInternalServerError,
+			Code:       9999,
+			Err:        fmt.Errorf("Version store not configured"),
+		}
+	}
+	sign := ctx.Value("signer")
+	signer, ok := sign.(*signed.Signer)
+	if !ok {
+		return &errors.HTTPError{
+			HTTPStatus: http.StatusInternalServerError,
+			Code:       9999,
+			Err:        fmt.Errorf("Signer not configured"),
+		}
+	}
+
+	vars := mux.Vars(r)
+	gun := vars["imageName"]
+
+	out, err := timestamp.GetOrCreateTimestamp(gun, store, signer)
+	if err != nil {
+		return &errors.HTTPError{
+			HTTPStatus: http.StatusInternalServerError,
+			Code:       9999,
+			Err:        err,
+		}
+	}
+
+	logrus.Debug("Writing data")
+	w.Write(out)
+	return nil
+}
+
+func GetTimestampKeyHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
+	s := ctx.Value("metaStore")
+	store, ok := s.(storage.MetaStore)
+	if !ok {
+		return &errors.HTTPError{
+			HTTPStatus: http.StatusInternalServerError,
+			Code:       9999,
+			Err:        fmt.Errorf("Version store not configured"),
+		}
+	}
+	c := ctx.Value("cryptoService")
+	crypto, ok := c.(signed.CryptoService)
+	if !ok {
+		return &errors.HTTPError{
+			HTTPStatus: http.StatusInternalServerError,
+			Code:       9999,
+			Err:        fmt.Errorf("CryptoService not configured"),
+		}
+	}
+
+	vars := mux.Vars(r)
+	gun := vars["imageName"]
+
+	key, err := timestamp.GetOrCreateTimestampKey(gun, store, crypto)
+	if err != nil {
+		return &errors.HTTPError{
+			HTTPStatus: http.StatusInternalServerError,
+			Code:       9999,
+			Err:        err,
+		}
+	}
+
+	out, err := json.Marshal(key)
+	if err != nil {
+		return &errors.HTTPError{
+			HTTPStatus: http.StatusInternalServerError,
+			Code:       9999,
+			Err:        fmt.Errorf("Error serializing key."),
+		}
+	}
+	w.Write(out)
 	return nil
 }

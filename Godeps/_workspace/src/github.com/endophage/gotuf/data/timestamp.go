@@ -3,6 +3,7 @@ package data
 import (
 	"bytes"
 	"encoding/json"
+	"time"
 
 	cjson "github.com/tent/canonical-json-go"
 )
@@ -14,10 +15,10 @@ type SignedTimestamp struct {
 }
 
 type Timestamp struct {
-	Type    string `json:"_type"`
-	Version int    `json:"version"`
-	Expires string `json:"expires"`
-	Meta    Files  `json:"meta"`
+	Type    string    `json:"_type"`
+	Version int       `json:"version"`
+	Expires time.Time `json:"expires"`
+	Meta    Files     `json:"meta"`
 }
 
 func NewTimestamp(snapshot *Signed) (*SignedTimestamp, error) {
@@ -34,7 +35,7 @@ func NewTimestamp(snapshot *Signed) (*SignedTimestamp, error) {
 		Signed: Timestamp{
 			Type:    TUFTypes["timestamp"],
 			Version: 0,
-			Expires: DefaultExpires("timestamp").String(),
+			Expires: DefaultExpires("timestamp"),
 			Meta: Files{
 				ValidRoles["snapshot"]: snapshotMeta,
 			},

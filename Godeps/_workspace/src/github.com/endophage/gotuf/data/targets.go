@@ -4,6 +4,7 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
+	"time"
 
 	cjson "github.com/tent/canonical-json-go"
 )
@@ -17,7 +18,7 @@ type SignedTargets struct {
 type Targets struct {
 	Type        string      `json:"_type"`
 	Version     int         `json:"version"`
-	Expires     string      `json:"expires"`
+	Expires     time.Time   `json:"expires"`
 	Targets     Files       `json:"targets"`
 	Delegations Delegations `json:"delegations,omitempty"`
 }
@@ -28,7 +29,7 @@ func NewTargets() *SignedTargets {
 		Signed: Targets{
 			Type:        TUFTypes["targets"],
 			Version:     0,
-			Expires:     DefaultExpires("targets").String(),
+			Expires:     DefaultExpires("targets"),
 			Targets:     make(Files),
 			Delegations: *NewDelegations(),
 		},

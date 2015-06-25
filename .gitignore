@@ -1,3 +1,4 @@
 /cmd/notary-server/notary-server
 cover
 bin
+*.swp

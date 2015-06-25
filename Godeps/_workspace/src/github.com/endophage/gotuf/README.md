@@ -11,14 +11,14 @@ the original flynn implementation.
 
 TODOs:
 
-- [ ] Add Targets to existing repo
-- [ ] Sign metadata files
-- [ ] Refactor TufRepo to take care of signing and verification
-- [ ] Ensure consistent capitalization in naming
+- [X] Add Targets to existing repo
+- [X] Sign metadata files
+- [X] Refactor TufRepo to take care of signing ~~and verification~~
+- [ ] Ensure consistent capitalization in naming (TUF\_\_\_ vs Tuf\_\_\_)
 - [ ] Make caching of metadata files smarter
-- [ ] Add configuration for CLI commands. Order of configuration priority from most to least: flags, config file, defaults
+- [ ] ~~Add configuration for CLI commands. Order of configuration priority from most to least: flags, config file, defaults~~ Notary should be the official CLI
 - [ ] Reasses organization of data types. Possibly consolidate a few things into the data package but break up package into a few more distinct files
 - [ ] Comprehensive test cases
 - [ ] Delete files no longer in use
 - [ ] Fix up errors. Some have to be instantiated, others don't, the inconsistency is annoying.
-- [ ] Bump version numbers in meta files
+- [X] Bump version numbers in meta files (could probably be done better)

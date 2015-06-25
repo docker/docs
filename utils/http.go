@@ -24,6 +24,7 @@ type rootHandler struct {
 	actions []string
 	context context.Context
 	trust   signed.CryptoService
+	//cachePool redis.Pool
 }
 
 // RootHandlerFactory creates a new rootHandler factory  using the given
@@ -46,15 +47,14 @@ func RootHandlerFactory(auth auth.AccessController, ctx context.Context, trust s
 func (root *rootHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	ctx := context.WithValue(root.context, "repo", vars["imageName"])
-	ctx = context.WithValue(ctx, "trust", root.trust)
+
+	// endophage: I don't guarantee that a signer will always be stateless but a CryptoService
+	// is expected to be. Create a new Signer for each request.
+	ctx = context.WithValue(ctx, "signer", signed.NewSigner(root.trust))
+	ctx = context.WithValue(ctx, "cryptoService", root.trust)
+
 	ctx = context.WithValue(ctx, "http.request", r)
 
-	//	access := buildAccessRecords(vars["imageName"], root.actions...)
-	//	var err error
-	//	if ctx, err = root.auth.Authorized(ctx, access...); err != nil {
-	//		http.Error(w, err.Error(), http.StatusUnauthorized)
-	//		return
-	//	}
 	if err := root.handler(ctx, w, r); err != nil {
 		logrus.Error("[Notary Server] ", err.Error())
 		http.Error(w, err.Error(), err.HTTPStatus)

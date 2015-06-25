@@ -41,7 +41,7 @@ func (ccs *cliCryptoService) Create(role string) (*data.PublicKey, error) {
 		certificateStore.AddCertFromPEM(pemdata)
 	}
 
-	return data.NewPublicKey("RSA", string(pemdata)), nil
+	return data.NewPublicKey("RSA", pemdata), nil
 }
 
 // Sign returns the signatures for data with the given keyIDs

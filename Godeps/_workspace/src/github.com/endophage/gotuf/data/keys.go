@@ -11,8 +11,8 @@ import (
 type Key interface {
 	ID() string
 	Cipher() string
-	Public() string
-	Private() string
+	Public() []byte
+	Private() []byte
 }
 
 type KeyPair struct {
@@ -26,12 +26,12 @@ type TUFKey struct {
 	Value KeyPair `json:"keyval"`
 }
 
-func NewTUFKey(cipher, public, private string) *TUFKey {
+func NewTUFKey(cipher string, public, private []byte) *TUFKey {
 	return &TUFKey{
 		Type: cipher,
 		Value: KeyPair{
-			Public:  []byte(public),
-			Private: []byte(private),
+			Public:  public,
+			Private: private,
 		},
 	}
 }
@@ -44,7 +44,7 @@ func (k *TUFKey) ID() string {
 	logrus.Debug("Generating Key ID")
 	if k.id == "" {
 		logrus.Debug("Generating Key ID")
-		pubK := NewTUFKey(k.Cipher(), k.Public(), "")
+		pubK := NewTUFKey(k.Cipher(), k.Public(), nil)
 		data, err := cjson.Marshal(&pubK)
 		if err != nil {
 			logrus.Error("Error generating key ID:", err)
@@ -55,25 +55,25 @@ func (k *TUFKey) ID() string {
 	return k.id
 }
 
-func (k TUFKey) Public() string {
-	return string(k.Value.Public)
+func (k TUFKey) Public() []byte {
+	return k.Value.Public
 }
 
 type PublicKey struct {
 	TUFKey
 }
 
-func (k PublicKey) Private() string {
-	return ""
+func (k PublicKey) Private() []byte {
+	return nil
 }
 
-func NewPublicKey(cipher, public string) *PublicKey {
+func NewPublicKey(cipher string, public []byte) *PublicKey {
 	return &PublicKey{
 		TUFKey{
 			Type: cipher,
 			Value: KeyPair{
-				Public:  []byte(public),
-				Private: []byte(""),
+				Public:  public,
+				Private: nil,
 			},
 		},
 	}
@@ -89,7 +89,7 @@ type PrivateKey struct {
 	TUFKey
 }
 
-func NewPrivateKey(cipher, public, private string) *PrivateKey {
+func NewPrivateKey(cipher string, public, private []byte) *PrivateKey {
 	return &PrivateKey{
 		TUFKey{
 			Type: cipher,
@@ -101,6 +101,6 @@ func NewPrivateKey(cipher, public, private string) *PrivateKey {
 	}
 }
 
-func (k PrivateKey) Private() string {
-	return string(k.Value.Private)
+func (k PrivateKey) Private() []byte {
+	return k.Value.Private
 }
