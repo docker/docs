@@ -376,7 +376,7 @@ func verify(cmd *cobra.Command, args []string) {
 		"",
 	)
 
-	c, err := bootstrapClient(remote, repo, kdb)
+	c, err := bootstrapClient(gun, remote, repo, kdb)
 	if err != nil {
 		logrus.Error("Unable to setup client.")
 		return
