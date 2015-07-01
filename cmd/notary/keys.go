@@ -66,7 +66,7 @@ func keysRemove(cmd *cobra.Command, args []string) {
 	//TODO (diogo): Validate Global Unique Name. We probably want to reject 1 char GUNs.
 	gunOrID := args[0]
 
-	// Try to retreive the ID from the CA store.
+	// Try to retrieve the ID from the CA store.
 	cert, err := caStore.GetCertificateBykID(gunOrID)
 	if err == nil {
 		fmt.Printf("Removing: ")
@@ -74,6 +74,20 @@ func keysRemove(cmd *cobra.Command, args []string) {
 
 		// If the ID is found, remove it.
 		err = caStore.RemoveCert(cert)
+		if err != nil {
+			fatalf("failed to remove certificate from KeyStore")
+		}
+		return
+	}
+
+	// Try to retrieve the ID from the Certificate store.
+	cert, err = certificateStore.GetCertificateBykID(gunOrID)
+	if err == nil {
+		fmt.Printf("Removing: ")
+		printCert(cert)
+
+		// If the ID is found, remove it.
+		err = certificateStore.RemoveCert(cert)
 		if err != nil {
 			fatalf("failed to remove certificate from KeyStore")
 		}
@@ -140,10 +154,16 @@ func keysTrust(cmd *cobra.Command, args []string) {
 		fatalf("aborting action.")
 	}
 
-	err = caStore.AddCert(cert)
+	err = nil
+	if cert.IsCA {
+		err = caStore.AddCert(cert)
+	} else {
+		err = certificateStore.AddCert(cert)
+	}
 	if err != nil {
 		fatalf("error adding certificate from file: %v", err)
 	}
+
 	fmt.Printf("Adding: ")
 	printCert(cert)
 
@@ -155,9 +175,16 @@ func keysList(cmd *cobra.Command, args []string) {
 		os.Exit(1)
 	}
 
-	fmt.Println("# Trusted Certificates:")
+	fmt.Println("# Trusted CAs:")
 	trustedCAs := caStore.GetCertificates()
 	for _, c := range trustedCAs {
+		printCert(c)
+	}
+
+	fmt.Println("")
+	fmt.Println("# Trusted Certificates:")
+	trustedCerts := certificateStore.GetCertificates()
+	for _, c := range trustedCerts {
 		printCert(c)
 	}
 
@@ -185,7 +212,7 @@ func keysGenerate(cmd *cobra.Command, args []string) {
 		fatalf("could not generate key: %v", err)
 	}
 
-	caStore.AddCert(cert)
+	certificateStore.AddCert(cert)
 	fingerprint := trustmanager.FingerprintCert(cert)
 	fmt.Println("Generated new keypair with ID: ", string(fingerprint))
 }

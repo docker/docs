@@ -19,11 +19,12 @@ const configFileName string = "config"
 
 // Default paths should end with a '/' so directory creation works correctly
 const configPath string = ".docker/trust/"
-const trustDir string = configPath + "repository_certificates/"
+const trustDir string = configPath + "trusted_certificates/"
 const privDir string = configPath + "private/"
 const tufDir string = configPath + "tuf/"
 
 var caStore trustmanager.X509Store
+var certificateStore trustmanager.X509Store
 var privKeyStore trustmanager.FileStore
 
 var rawOutput bool
@@ -67,10 +68,21 @@ func init() {
 	finalPrivDir := viper.GetString("privDir")
 
 	// Load all CAs that aren't expired and don't use SHA1
-	// We could easily add "return cert.IsCA && cert.BasicConstraintsValid" in order
-	// to have only valid CA certificates being loaded
 	caStore, err = trustmanager.NewX509FilteredFileStore(finalTrustDir, func(cert *x509.Certificate) bool {
-		return time.Now().Before(cert.NotAfter) &&
+		return cert.IsCA && cert.BasicConstraintsValid && cert.SubjectKeyId != nil &&
+			time.Now().Before(cert.NotAfter) &&
+			cert.SignatureAlgorithm != x509.SHA1WithRSA &&
+			cert.SignatureAlgorithm != x509.DSAWithSHA1 &&
+			cert.SignatureAlgorithm != x509.ECDSAWithSHA1
+	})
+	if err != nil {
+		fatalf("could not create X509FileStore: %v", err)
+	}
+
+	// Load all individual (non-CA) certificates that aren't expired and don't use SHA1
+	certificateStore, err = trustmanager.NewX509FilteredFileStore(finalTrustDir, func(cert *x509.Certificate) bool {
+		return !cert.IsCA &&
+			time.Now().Before(cert.NotAfter) &&
 			cert.SignatureAlgorithm != x509.SHA1WithRSA &&
 			cert.SignatureAlgorithm != x509.DSAWithSHA1 &&
 			cert.SignatureAlgorithm != x509.ECDSAWithSHA1

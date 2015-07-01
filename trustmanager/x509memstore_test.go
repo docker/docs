@@ -140,7 +140,7 @@ func TestGetCertificateBykID(t *testing.T) {
 
 	certFingerprint := FingerprintCert(cert)
 
-	// Tries to retreive cert by Subject Key IDs
+	// Tries to retrieve cert by Subject Key IDs
 	_, err = store.GetCertificateBykID(string(certFingerprint))
 	if err != nil {
 		t.Fatalf("expected certificate in store: %s", certFingerprint)

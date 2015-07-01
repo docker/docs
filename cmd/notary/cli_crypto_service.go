@@ -36,9 +36,9 @@ func (ccs *cliCryptoService) Create(role string) (*data.PublicKey, error) {
 	block := pem.Block{Type: "CERTIFICATE", Bytes: cert.Raw}
 	pemdata := pem.EncodeToMemory(&block)
 
-	// If this key has the role root, save it as a trusted certificate on our caStore
+	// If this key has the role root, save it as a trusted certificate on our certificateStore
 	if role == "root" {
-		caStore.AddCertFromPEM(pemdata)
+		certificateStore.AddCertFromPEM(pemdata)
 	}
 
 	return data.NewPublicKey("RSA", string(pemdata)), nil
@@ -85,7 +85,6 @@ func (ccs *cliCryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signa
 
 //TODO (diogo): Add support for EC P384
 func generateKeyAndCert(gun string) (crypto.PrivateKey, *x509.Certificate, error) {
-
 	// Generates a new RSA key
 	key, err := rsa.GenerateKey(rand.Reader, 2048)
 	if err != nil {
