@@ -106,20 +106,20 @@ func TestRemoveCert(t *testing.T) {
 	}
 }
 
-func TestInexistentGetCertificateBykID(t *testing.T) {
+func TestInexistentGetCertificateByFingerprint(t *testing.T) {
 	store := NewX509MemStore()
 	err := store.AddCertFromFile("../fixtures/notary/root-ca.crt")
 	if err != nil {
 		t.Fatalf("failed to load certificate from file: %v", err)
 	}
 
-	_, err = store.GetCertificateBykID("4d06afd30b8bed131d2a84c97d00b37f422021598bfae34285ce98e77b708b5a")
+	_, err = store.GetCertificateByFingerprint("4d06afd30b8bed131d2a84c97d00b37f422021598bfae34285ce98e77b708b5a")
 	if err == nil {
 		t.Fatalf("no error returned for inexistent certificate")
 	}
 }
 
-func TestGetCertificateBykID(t *testing.T) {
+func TestGetCertificateByFingerprint(t *testing.T) {
 	b, err := ioutil.ReadFile("../fixtures/notary/root-ca.crt")
 	if err != nil {
 		t.Fatalf("couldn't load fixture: %v", err)
@@ -141,7 +141,7 @@ func TestGetCertificateBykID(t *testing.T) {
 	certFingerprint := FingerprintCert(cert)
 
 	// Tries to retrieve cert by Subject Key IDs
-	_, err = store.GetCertificateBykID(string(certFingerprint))
+	_, err = store.GetCertificateByFingerprint(certFingerprint)
 	if err != nil {
 		t.Fatalf("expected certificate in store: %s", certFingerprint)
 	}

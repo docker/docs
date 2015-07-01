@@ -67,7 +67,7 @@ func keysRemove(cmd *cobra.Command, args []string) {
 	gunOrID := args[0]
 
 	// Try to retrieve the ID from the CA store.
-	cert, err := caStore.GetCertificateBykID(gunOrID)
+	cert, err := caStore.GetCertificateByFingerprint(gunOrID)
 	if err == nil {
 		fmt.Printf("Removing: ")
 		printCert(cert)
@@ -81,7 +81,7 @@ func keysRemove(cmd *cobra.Command, args []string) {
 	}
 
 	// Try to retrieve the ID from the Certificate store.
-	cert, err = certificateStore.GetCertificateBykID(gunOrID)
+	cert, err = certificateStore.GetCertificateByFingerprint(gunOrID)
 	if err == nil {
 		fmt.Printf("Removing: ")
 		printCert(cert)
@@ -214,7 +214,7 @@ func keysGenerate(cmd *cobra.Command, args []string) {
 
 	certificateStore.AddCert(cert)
 	fingerprint := trustmanager.FingerprintCert(cert)
-	fmt.Println("Generated new keypair with ID: ", string(fingerprint))
+	fmt.Println("Generated new keypair with ID: ", fingerprint)
 }
 
 func newCertificate(gun, organization string) *x509.Certificate {
@@ -244,8 +244,8 @@ func newCertificate(gun, organization string) *x509.Certificate {
 
 func printCert(cert *x509.Certificate) {
 	timeDifference := cert.NotAfter.Sub(time.Now())
-	subjectKeyID := trustmanager.FingerprintCert(cert)
-	fmt.Printf("%s %s (expires in: %v days)\n", cert.Subject.CommonName, string(subjectKeyID), math.Floor(timeDifference.Hours()/24))
+	fingerprint := trustmanager.FingerprintCert(cert)
+	fmt.Printf("%s %s (expires in: %v days)\n", cert.Subject.CommonName, fingerprint, math.Floor(timeDifference.Hours()/24))
 }
 
 func printKey(keyPath string) {

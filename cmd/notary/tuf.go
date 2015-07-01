@@ -496,10 +496,11 @@ func validateRoot(gun string, root *data.Signed) error {
 		return err
 	}
 	certs := make(map[string]*data.PublicKey)
-	for _, kID := range rootSigned.Roles["root"].KeyIDs {
+	for _, fingerprint := range rootSigned.Roles["root"].KeyIDs {
 		// TODO(dlaw): currently assuming only one cert contained in
 		// public key entry. Need to fix when we want to pass in chains.
 		k, _ := pem.Decode([]byte(rootSigned.Keys["kid"].Public()))
+
 		decodedCerts, err := x509.ParseCertificates(k.Bytes)
 		if err != nil {
 			continue
@@ -508,15 +509,15 @@ func validateRoot(gun string, root *data.Signed) error {
 		// TODO(diogo): Assuming that first certificate is the leaf-cert. Need to
 		// iterate over all decodedCerts and find a non-CA one (should be the last).
 		leafCert := decodedCerts[0]
-		leafID := string(trustmanager.FingerprintCert(leafCert))
+		leafID := trustmanager.FingerprintCert(leafCert)
 
 		// Check to see if there is an exact match of this certificate.
 		// Checking the CommonName is not required since ID is calculated over
 		// Cert.Raw. It's included to prevent breaking logic with changes of how the
 		// ID gets computed.
-		_, err = certificateStore.GetCertificateBykID(leafID)
+		_, err = certificateStore.GetCertificateByFingerprint(leafID)
 		if err == nil && leafCert.Subject.CommonName == gun {
-			certs[kID] = rootSigned.Keys[kID]
+			certs[fingerprint] = rootSigned.Keys[fingerprint]
 		}
 
 		// Check to see if this leafCertificate has a chain to one of the Root CAs
@@ -524,15 +525,12 @@ func validateRoot(gun string, root *data.Signed) error {
 		certList := []*x509.Certificate{leafCert}
 		err = trustmanager.Verify(caStore, gun, certList)
 		if err == nil {
-			certs[kID] = rootSigned.Keys[kID]
+			certs[fingerprint] = rootSigned.Keys[fingerprint]
 		}
 	}
 	_, err = signed.VerifyRoot(root, 0, certs, 1)
-	if err != nil {
-		// failed to validate the signatures against the certificates
-		return err
-	}
-	return nil
+
+	return err
 }
 
 func bootstrapRepo(gun string, repo *tuf.TufRepo) store.MetadataStore {

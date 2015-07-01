@@ -68,7 +68,7 @@ func (s X509FileStore) AddCert(cert *x509.Certificate) error {
 // addNamedCert allows adding a certificate while controling the filename it gets
 // stored under. If the file does not exist on disk, saves it.
 func (s X509FileStore) addNamedCert(cert *x509.Certificate) error {
-	fingerprint := FingerprintCert(cert)
+	fingerprint := fingerprintCert(cert)
 
 	// Validate if we already loaded this certificate before
 	if _, ok := s.fingerprintMap[fingerprint]; ok {
@@ -103,7 +103,7 @@ func (s X509FileStore) RemoveCert(cert *x509.Certificate) error {
 		return errors.New("removing nil Certificate from X509Store")
 	}
 
-	fingerprint := FingerprintCert(cert)
+	fingerprint := fingerprintCert(cert)
 	delete(s.fingerprintMap, fingerprint)
 	filename := s.fileMap[fingerprint]
 	delete(s.fileMap, fingerprint)
@@ -170,8 +170,8 @@ func (s X509FileStore) GetCertificatePool() *x509.CertPool {
 	return pool
 }
 
-// GetCertificateBykID returns the certificate that matches a certain kID or error
-func (s X509FileStore) GetCertificateBykID(hexkID string) (*x509.Certificate, error) {
+// GetCertificateByFingerprint returns the certificate that matches a certain kID or error
+func (s X509FileStore) GetCertificateByFingerprint(hexkID string) (*x509.Certificate, error) {
 	// If it does not look like a hex encoded sha256 hash, error
 	if len(hexkID) != 64 {
 		return nil, errors.New("invalid Subject Key Identifier")
@@ -204,5 +204,5 @@ func (s X509FileStore) GetVerifyOptions(dnsName string) (x509.VerifyOptions, err
 }
 
 func fileName(cert *x509.Certificate) string {
-	return path.Join(cert.Subject.CommonName, string(FingerprintCert(cert)))
+	return path.Join(cert.Subject.CommonName, FingerprintCert(cert))
 }

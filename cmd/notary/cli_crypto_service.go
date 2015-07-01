@@ -51,9 +51,9 @@ func (ccs *cliCryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signa
 	hashed := sha256.Sum256(payload)
 
 	signatures := make([]data.Signature, 0, len(keyIDs))
-	for _, kID := range keyIDs {
+	for _, fingerprint := range keyIDs {
 		// Get the PrivateKey filename
-		privKeyFilename := filepath.Join(viper.GetString("privDir"), ccs.gun, kID+".key")
+		privKeyFilename := filepath.Join(viper.GetString("privDir"), ccs.gun, fingerprint+".key")
 		// Read PrivateKey from file
 		privPEMBytes, err := ioutil.ReadFile(privKeyFilename)
 		if err != nil {
@@ -75,7 +75,7 @@ func (ccs *cliCryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signa
 
 		// Append signatures to result array
 		signatures = append(signatures, data.Signature{
-			KeyID:     kID,
+			KeyID:     fingerprint,
 			Method:    "RSASSA-PKCS1-V1_5-SIGN",
 			Signature: sig[:],
 		})
@@ -109,10 +109,10 @@ func generateKeyAndCert(gun string) (crypto.PrivateKey, *x509.Certificate, error
 		return nil, nil, fmt.Errorf("failed to generate the certificate for key: %v", err)
 	}
 
-	kID := trustmanager.FingerprintCert(cert)
+	fingerprint := trustmanager.FingerprintCert(cert)
 	// The key is going to be stored in the private directory, using the GUN and
 	// the filename will be the TUF-compliant ID. The Store takes care of extensions.
-	privKeyFilename := filepath.Join(gun, string(kID))
+	privKeyFilename := filepath.Join(gun, fingerprint)
 	privKeyStore.Add(privKeyFilename, trustmanager.KeyToPEM(keyBytes))
 	return key, cert, nil
 }
