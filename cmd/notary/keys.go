@@ -81,7 +81,7 @@ func keysRemove(cmd *cobra.Command, args []string) {
 	}
 
 	// We didn't find a certificate with this ID, let's try to see if we can find keys.
-	keyList := privKeyStore.ListGUN(gunOrID)
+	keyList := privKeyStore.ListDir(gunOrID)
 	if len(keyList) < 1 {
 		fatalf("no Private Keys found under Global Unique Name: %s", gunOrID)
 	}
@@ -99,7 +99,7 @@ func keysRemove(cmd *cobra.Command, args []string) {
 	}
 
 	// Remove all the keys under the Global Unique Name
-	err = privKeyStore.RemoveGUN(gunOrID)
+	err = privKeyStore.RemoveDir(gunOrID)
 	if err != nil {
 		fatalf("failed to remove all Private keys under Global Unique Name: %s", gunOrID)
 	}
@@ -163,7 +163,7 @@ func keysList(cmd *cobra.Command, args []string) {
 
 	fmt.Println("")
 	fmt.Println("# Signing keys: ")
-	for _, k := range privKeyStore.List() {
+	for _, k := range privKeyStore.ListAll() {
 		printKey(k)
 	}
 }

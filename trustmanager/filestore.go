@@ -14,11 +14,11 @@ const private os.FileMode = 0700
 type FileStore interface {
 	Add(fileName string, data []byte) error
 	Remove(fileName string) error
-	RemoveGUN(gun string) error
+	RemoveDir(directoryName string) error
 	GetData(fileName string) ([]byte, error)
 	GetPath(fileName string) string
-	List() []string
-	ListGUN(gun string) []string
+	ListAll() []string
+	ListDir(directoryName string) []string
 }
 
 // fileStore implements FileStore
@@ -61,18 +61,18 @@ func (f *fileStore) Add(name string, data []byte) error {
 	return ioutil.WriteFile(filePath, data, f.perms)
 }
 
-// Remove removes a file identified by a name
-// TODO (diogo): We can get rid of RemoveGUN by merging with Remove
+// Remove removes a file identified by name
 func (f *fileStore) Remove(name string) error {
+	// Attempt to remove
 	filePath := f.genFilePath(name)
 	return os.Remove(filePath)
 }
 
-// RemoveGUN removes a directory identified by the Global Unique Name
-func (f *fileStore) RemoveGUN(gun string) error {
-	dirPath := filepath.Join(f.baseDir, gun)
+// RemoveDir removes the directory identified by name
+func (f *fileStore) RemoveDir(name string) error {
+	dirPath := filepath.Join(f.baseDir, name)
 
-	// Check to see if file exists
+	// Check to see if directory exists
 	fi, err := os.Stat(dirPath)
 	if err != nil {
 		return err
@@ -80,7 +80,7 @@ func (f *fileStore) RemoveGUN(gun string) error {
 
 	// Check to see if it is a directory
 	if !fi.IsDir() {
-		return fmt.Errorf("GUN not found: %s", gun)
+		return fmt.Errorf("directory not found: %s", name)
 	}
 
 	return os.RemoveAll(dirPath)
@@ -103,18 +103,17 @@ func (f *fileStore) GetPath(name string) string {
 }
 
 // List lists all the files inside of a store
-func (f *fileStore) List() []string {
+func (f *fileStore) ListAll() []string {
 	return f.list(f.baseDir)
 }
 
-// ListGUN lists all the files inside of a directory identified by a Global Unique Name.
-// TODO (diogo): We can get rid of ListGUN by merging with List
-func (f *fileStore) ListGUN(gun string) []string {
-	gunPath := filepath.Join(f.baseDir, gun)
-	return f.list(gunPath)
+// List lists all the files inside of a directory identified by a name
+func (f *fileStore) ListDir(name string) []string {
+	fullPath := filepath.Join(f.baseDir, name)
+	return f.list(fullPath)
 }
 
-// listGUN lists all the files in a directory given a full path
+// list lists all the files in a directory given a full path
 func (f *fileStore) list(path string) []string {
 	files := make([]string, 0, 0)
 	filepath.Walk(path, func(fp string, fi os.FileInfo, err error) error {

@@ -89,7 +89,7 @@ func TestRemoveFile(t *testing.T) {
 	}
 }
 
-func TestRemoveGUN(t *testing.T) {
+func TestRemoveDir(t *testing.T) {
 	testName := "docker.com/diogomonica/"
 	testExt := "key"
 	perms := os.FileMode(0700)
@@ -115,8 +115,8 @@ func TestRemoveGUN(t *testing.T) {
 		perms:   perms,
 	}
 
-	// Call the RemoveGUN function
-	err = store.RemoveGUN(testName)
+	// Call the RemoveDir function
+	err = store.RemoveDir(testName)
 	if err != nil {
 		t.Fatalf("failed to remove directory: %v", err)
 	}
@@ -129,7 +129,7 @@ func TestRemoveGUN(t *testing.T) {
 	}
 }
 
-func TestList(t *testing.T) {
+func TestListAll(t *testing.T) {
 	testName := "docker.com/notary/certificate"
 	testExt := "crt"
 	perms := os.FileMode(0755)
@@ -159,13 +159,13 @@ func TestList(t *testing.T) {
 	}
 
 	// Call the List function
-	files := store.List()
+	files := store.ListAll()
 	if len(files) != 10 {
 		t.Fatalf("expected 10 files in listing, got: %d", len(files))
 	}
 }
 
-func TestListGUN(t *testing.T) {
+func TestListDir(t *testing.T) {
 	testName := "docker.com/notary/certificate"
 	testExt := "crt"
 	perms := os.FileMode(0755)
@@ -196,16 +196,16 @@ func TestListGUN(t *testing.T) {
 		perms:   perms,
 	}
 
-	// Call the ListGUN function
-	files := store.ListGUN("docker.com/")
+	// Call the ListDir function
+	files := store.ListDir("docker.com/")
 	if len(files) != 10 {
 		t.Fatalf("expected 10 files in listing, got: %d", len(files))
 	}
-	files = store.ListGUN("docker.com/notary")
+	files = store.ListDir("docker.com/notary")
 	if len(files) != 10 {
 		t.Fatalf("expected 10 files in listing, got: %d", len(files))
 	}
-	files = store.ListGUN("fakedocker.com/")
+	files = store.ListDir("fakedocker.com/")
 	if len(files) != 0 {
 		t.Fatalf("expected 0 files in listing, got: %d", len(files))
 	}
