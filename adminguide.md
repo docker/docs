@@ -76,6 +76,13 @@ to get temporary unsecure access to it by running:
 
 This will give you access on port `9999` on your DTR server - `http://<dtr-host-ip>:9999/admin/`.
 
+### SSH Access to host
+
+As an extra measure of safety, make sure you have SSH access to the DTR host before you start using DTR. 
+
+If you are hosting DTR on an AWS EC2 host, note that the user is `ec2-user`:
+`/path/to/private_key/id_rsa ec2-user@<dtr-dns-entry>`.
+
 ## Services
 
 DTR runs several Docker services which are essential to its reliability and
