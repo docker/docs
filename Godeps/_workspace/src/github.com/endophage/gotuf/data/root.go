@@ -2,6 +2,7 @@ package data
 
 import (
 	"encoding/json"
+	"time"
 
 	cjson "github.com/tent/canonical-json-go"
 )
@@ -15,7 +16,7 @@ type SignedRoot struct {
 type Root struct {
 	Type               string                `json:"_type"`
 	Version            int                   `json:"version"`
-	Expires            string                `json:"expires"`
+	Expires            time.Time             `json:"expires"`
 	Keys               map[string]*PublicKey `json:"keys"`
 	Roles              map[string]*RootRole  `json:"roles"`
 	ConsistentSnapshot bool                  `json:"consistent_snapshot"`
@@ -27,7 +28,7 @@ func NewRoot(keys map[string]*PublicKey, roles map[string]*RootRole, consistent 
 		Signed: Root{
 			Type:               TUFTypes["root"],
 			Version:            0,
-			Expires:            DefaultExpires("root").String(),
+			Expires:            DefaultExpires("root"),
 			Keys:               keys,
 			Roles:              roles,
 			ConsistentSnapshot: consistent,

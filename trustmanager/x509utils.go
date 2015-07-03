@@ -89,10 +89,10 @@ func FingerprintCert(cert *x509.Certificate) string {
 
 func fingerprintCert(cert *x509.Certificate) CertID {
 	block := pem.Block{Type: "CERTIFICATE", Bytes: cert.Raw}
-	pemdata := string(pem.EncodeToMemory(&block))
+	pemdata := pem.EncodeToMemory(&block)
 
 	// Create new TUF Key so we can compute the TUF-compliant CertID
-	tufKey := data.NewTUFKey("RSA", pemdata, "")
+	tufKey := data.NewTUFKey("RSA", pemdata, nil)
 
 	return CertID(tufKey.ID())
 }

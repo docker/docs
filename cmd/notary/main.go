@@ -30,7 +30,7 @@ var privKeyStore trustmanager.FileStore
 var rawOutput bool
 
 func init() {
-	logrus.SetLevel(logrus.ErrorLevel)
+	logrus.SetLevel(logrus.DebugLevel)
 	logrus.SetOutput(os.Stderr)
 	// Retrieve current user to get home directory
 	usr, err := user.Current()

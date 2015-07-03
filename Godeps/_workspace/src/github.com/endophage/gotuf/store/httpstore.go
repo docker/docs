@@ -28,9 +28,10 @@ type HTTPStore struct {
 	metaPrefix    string
 	metaExtension string
 	targetsPrefix string
+	keyExtension  string
 }
 
-func NewHTTPStore(baseURL, metaPrefix, metaExtension, targetsPrefix string) (*HTTPStore, error) {
+func NewHTTPStore(baseURL, metaPrefix, metaExtension, targetsPrefix, keyExtension string) (*HTTPStore, error) {
 	base, err := url.Parse(baseURL)
 	if err != nil {
 		return nil, err
@@ -43,6 +44,7 @@ func NewHTTPStore(baseURL, metaPrefix, metaExtension, targetsPrefix string) (*HT
 		metaPrefix:    metaPrefix,
 		metaExtension: metaExtension,
 		targetsPrefix: targetsPrefix,
+		keyExtension:  keyExtension,
 	}, nil
 }
 
@@ -88,6 +90,12 @@ func (s HTTPStore) buildTargetsURL(name string) (*url.URL, error) {
 	return s.buildURL(uri)
 }
 
+func (s HTTPStore) buildKeyURL(name string) (*url.URL, error) {
+	filename := fmt.Sprintf("%s.%s", name, s.keyExtension)
+	uri := path.Join(s.metaPrefix, filename)
+	return s.buildURL(uri)
+}
+
 func (s HTTPStore) buildURL(uri string) (*url.URL, error) {
 	sub, err := url.Parse(uri)
 	if err != nil {
@@ -109,4 +117,21 @@ func (s HTTPStore) GetTarget(path string) (io.ReadCloser, error) {
 		return nil, err
 	}
 	return resp.Body, nil
+}
+
+func (s HTTPStore) GetKey(role string) ([]byte, error) {
+	url, err := s.buildKeyURL(role)
+	if err != nil {
+		return nil, err
+	}
+	resp, err := utils.Download(*url)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+	return body, nil
 }

@@ -14,6 +14,10 @@ type MetadataStore interface {
 	SetMeta(name string, blob json.RawMessage) error
 }
 
+type PublicKeyStore interface {
+	GetKey(role string) ([]byte, error)
+}
+
 // [endophage] I'm of the opinion this should go away.
 type TargetStore interface {
 	WalkStagedTargets(paths []string, targetsFn targetsWalkFunc) error
@@ -26,5 +30,6 @@ type LocalStore interface {
 
 type RemoteStore interface {
 	MetadataStore
+	PublicKeyStore
 	GetTarget(path string) (io.ReadCloser, error)
 }

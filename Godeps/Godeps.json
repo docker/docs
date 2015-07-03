@@ -47,7 +47,7 @@
 		},
 		{
 			"ImportPath": "github.com/endophage/gotuf",
-			"Rev": "f45743d59471461fa065fd5f0c67dcc893524b9d"
+			"Rev": "682ec56d6a7b60e432bc2560e17d8e1aec84d171"
 		},
 		{
 			"ImportPath": "github.com/go-sql-driver/mysql",
@@ -107,6 +107,11 @@
 		{
 			"ImportPath": "github.com/spf13/viper",
 			"Rev": "be5ff3e4840cf692388bde7a057595a474ef379e"
+		},
+		{
+			"ImportPath": "github.com/stretchr/testify/assert",
+			"Comment": "v1.0-17-g089c718",
+			"Rev": "089c7181b8c728499929ff09b62d3fdd8df8adff"
 		},
 		{
 			"ImportPath": "github.com/tent/canonical-json-go",

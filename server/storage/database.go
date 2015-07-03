@@ -2,7 +2,8 @@ package storage
 
 import (
 	"database/sql"
-	"fmt"
+
+	"github.com/go-sql-driver/mysql"
 )
 
 // MySQLStorage implements a versioned store using a relational database.
@@ -15,6 +16,12 @@ import (
 //   `data` LONGBLOB
 //   PRIMARY KEY (`id`)
 //   UNIQUE INDEX (`gun`, `role`, `version`)
+// ) DEFAULT CHARSET=utf8;
+//
+// CREATE TABLE `timestamp_keys` (
+//   `gun` VARCHAR(255),
+//   `cipher` VARCHAR(30),
+//   `public` BLOB NOT NULL,
 // ) DEFAULT CHARSET=utf8;
 type MySQLStorage struct {
 	sql.DB
@@ -40,7 +47,7 @@ func (db *MySQLStorage) UpdateCurrent(gun, role string, version int, data []byte
 		return err
 	}
 	if exists != 0 {
-		return fmt.Errorf("Attempting to write an old version for gun: %s, role: %s, version: %d. A newer version is available.", gun, role, version)
+		return &ErrOldVersion{}
 	}
 
 	// attempt to insert. Due to race conditions with the check this could fail.
@@ -48,6 +55,8 @@ func (db *MySQLStorage) UpdateCurrent(gun, role string, version int, data []byte
 	// needs to rebase.
 	_, err = db.Exec(insertStmt, gun, role, version, data)
 	if err != nil {
+		// need to check error type for duplicate key exception
+		// and return ErrOldVersion if duplicate
 		return err
 	}
 	return nil
@@ -63,7 +72,7 @@ func (db *MySQLStorage) GetCurrent(gun, tufRole string) (data []byte, err error)
 	defer rows.Close()
 	// unique constraint on (gun, role) will ensure only one row is returned (or none if no match is found)
 	if !rows.Next() {
-		return nil, nil
+		return nil, &ErrNotFound{}
 	}
 
 	err = rows.Scan(&data)
@@ -77,4 +86,29 @@ func (db *MySQLStorage) Delete(gun string) error {
 	stmt := "DELETE FROM `tuf_files` WHERE `gun`=?;"
 	_, err := db.Exec(stmt, gun)
 	return err
+}
+func (db *MySQLStorage) GetTimestampKey(gun string) (cipher string, public []byte, err error) {
+	stmt := "SELECT `cipher`, `public` FROM `timestamp_keys` WHERE `gun`=?;"
+	row := db.QueryRow(stmt, gun)
+
+	err = row.Scan(&cipher, &public)
+	if err == sql.ErrNoRows {
+		return "", nil, ErrNoKey{gun: gun}
+	} else if err != nil {
+		return "", nil, err
+	}
+
+	return cipher, public, err
+}
+func (db *MySQLStorage) SetTimestampKey(gun, cipher string, public []byte) error {
+	stmt := "INSERT INTO `timestamp_keys` (`gun`, `cipher`, `public`) VALUES (?,?,?);"
+	_, err := db.Exec(stmt, gun, cipher, public)
+	if err, ok := err.(*mysql.MySQLError); ok {
+		if err.Number == 1022 { // duplicate key error
+			return &ErrTimestampKeyExists{gun: gun}
+		}
+	} else if err != nil {
+		return err
+	}
+	return nil
 }

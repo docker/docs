@@ -11,5 +11,8 @@
 	},
 	"logging": {
 		"level": 5
+	},
+	"storage": {
+		"db_url": "dockercondemo:dockercondemo@tcp(notarymysql:3306)/dockercondemo"
 	}
 }

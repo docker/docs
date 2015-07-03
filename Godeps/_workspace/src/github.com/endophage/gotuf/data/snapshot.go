@@ -3,6 +3,7 @@ package data
 import (
 	"bytes"
 	"encoding/json"
+	"time"
 
 	"github.com/Sirupsen/logrus"
 	cjson "github.com/tent/canonical-json-go"
@@ -15,10 +16,10 @@ type SignedSnapshot struct {
 }
 
 type Snapshot struct {
-	Type    string `json:"_type"`
-	Version int    `json:"version"`
-	Expires string `json:"expires"`
-	Meta    Files  `json:"meta"`
+	Type    string    `json:"_type"`
+	Version int       `json:"version"`
+	Expires time.Time `json:"expires"`
+	Meta    Files     `json:"meta"`
 }
 
 func NewSnapshot(root *Signed, targets *Signed) (*SignedSnapshot, error) {
@@ -46,7 +47,7 @@ func NewSnapshot(root *Signed, targets *Signed) (*SignedSnapshot, error) {
 		Signed: Snapshot{
 			Type:    TUFTypes["snapshot"],
 			Version: 0,
-			Expires: DefaultExpires("snapshot").String(),
+			Expires: DefaultExpires("snapshot"),
 			Meta: Files{
 				ValidRoles["root"]:    rootMeta,
 				ValidRoles["targets"]: targetsMeta,

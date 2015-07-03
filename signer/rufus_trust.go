@@ -1,7 +1,6 @@
 package signer
 
 import (
-	"errors"
 	"net"
 
 	"github.com/Sirupsen/logrus"
@@ -39,18 +38,6 @@ func NewRufusSigner(hostname string, port string, tlscafile string) *RufusSigner
 	}
 }
 
-// addKey allows you to add a private key to the trust service
-func (trust *RufusSigner) addKey(k *data.PrivateKey) error {
-	return errors.New("Not implemented: RufusSigner.addKey")
-}
-
-// RemoveKey allows you to remove a private key from the trust service
-func (trust *RufusSigner) RemoveKey(keyID string) error {
-	toBeDeletedKeyID := &pb.KeyID{ID: keyID}
-	_, err := trust.kmClient.DeleteKey(context.Background(), toBeDeletedKeyID)
-	return err
-}
-
 // Sign signs a byte string with a number of KeyIDs
 func (trust *RufusSigner) Sign(keyIDs []string, toSign []byte) ([]data.Signature, error) {
 	signatures := make([]data.Signature, 0, len(keyIDs))
@@ -80,7 +67,7 @@ func (trust *RufusSigner) Create(role string) (*data.PublicKey, error) {
 		return nil, err
 	}
 	//TODO(mccauley): Update API to return algorithm and/or take it as a param
-	public := data.NewPublicKey("TODOALGORITHM", string(publicKey.PublicKey))
+	public := data.NewPublicKey("TODOALGORITHM", publicKey.PublicKey)
 	return public, nil
 }
 
@@ -94,11 +81,7 @@ func (trust *RufusSigner) PublicKeys(keyIDs ...string) (map[string]*data.PublicK
 			return nil, err
 		}
 		publicKeys[sig.KeyID.ID] =
-			data.NewPublicKey("TODOALGORITHM", string(sig.PublicKey))
+			data.NewPublicKey("TODOALGORITHM", sig.PublicKey)
 	}
 	return publicKeys, nil
-}
-
-func (trust *RufusSigner) CanSign(kID string) bool {
-	return true
 }

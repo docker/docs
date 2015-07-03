@@ -120,6 +120,19 @@ func tufInit(cmd *cobra.Command, args []string) {
 	kdb := keys.NewDB()
 	signer := signed.NewSigner(NewCryptoService(gun))
 
+	remote, err := getRemoteStore(gun)
+	rawTSKey, err := remote.GetKey("timestamp")
+	if err != nil {
+		fatalf(err.Error())
+	}
+	fmt.Println("RawKey: ", string(rawTSKey))
+	parsedKey := &data.TUFKey{}
+	err = json.Unmarshal(rawTSKey, parsedKey)
+	if err != nil {
+		fatalf(err.Error())
+	}
+	timestampKey := data.NewPublicKey(parsedKey.Cipher(), parsedKey.Public())
+
 	rootKey, err := signer.Create("root")
 	if err != nil {
 		fatalf(err.Error())
@@ -129,10 +142,6 @@ func tufInit(cmd *cobra.Command, args []string) {
 		fatalf(err.Error())
 	}
 	snapshotKey, err := signer.Create("snapshot")
-	if err != nil {
-		fatalf(err.Error())
-	}
-	timestampKey, err := signer.Create("timestamp")
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -204,12 +213,10 @@ func tufList(cmd *cobra.Command, args []string) {
 	kdb := keys.NewDB()
 	repo := tuf.NewTufRepo(kdb, nil)
 
-	remote, err := store.NewHTTPStore(
-		"https://notary:4443/v2/"+gun+"/_trust/tuf/",
-		"",
-		"json",
-		"",
-	)
+	remote, err := getRemoteStore(gun)
+	if err != nil {
+		return
+	}
 	c, err := bootstrapClient(gun, remote, repo, kdb)
 	if err != nil {
 		return
@@ -241,12 +248,7 @@ func tufLookup(cmd *cobra.Command, args []string) {
 	kdb := keys.NewDB()
 	repo := tuf.NewTufRepo(kdb, nil)
 
-	remote, err := store.NewHTTPStore(
-		"https://notary:4443/v2/"+gun+"/_trust/tuf/",
-		"",
-		"json",
-		"",
-	)
+	remote, err := getRemoteStore(gun)
 	c, err := bootstrapClient(gun, remote, repo, kdb)
 	if err != nil {
 		return
@@ -277,12 +279,7 @@ func tufPublish(cmd *cobra.Command, args []string) {
 	gun := args[0]
 	fmt.Println("Pushing changes to ", gun, ".")
 
-	remote, err := store.NewHTTPStore(
-		"https://notary:4443/v2/"+gun+"/_trust/tuf/",
-		"",
-		"json",
-		"",
-	)
+	remote, err := getRemoteStore(gun)
 	filestore, err := store.NewFilesystemStore(
 		path.Join(viper.GetString("tufDir"), gun),
 		"metadata",
@@ -305,10 +302,6 @@ func tufPublish(cmd *cobra.Command, args []string) {
 	if err != nil {
 		fatalf(err.Error())
 	}
-	timestamp, err := filestore.GetMeta("timestamp", 0)
-	if err != nil {
-		fatalf(err.Error())
-	}
 
 	err = remote.SetMeta("root", root)
 	if err != nil {
@@ -319,10 +312,6 @@ func tufPublish(cmd *cobra.Command, args []string) {
 		fatalf(err.Error())
 	}
 	err = remote.SetMeta("snapshot", snapshot)
-	if err != nil {
-		fatalf(err.Error())
-	}
-	err = remote.SetMeta("timestamp", timestamp)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -370,12 +359,7 @@ func verify(cmd *cobra.Command, args []string) {
 	kdb := keys.NewDB()
 	repo := tuf.NewTufRepo(kdb, nil)
 
-	remote, err := store.NewHTTPStore(
-		"https://notary:4443/v2/"+gun+"/_trust/tuf/",
-		"",
-		"json",
-		"",
-	)
+	remote, err := getRemoteStore(gun)
 
 	c, err := bootstrapClient(gun, remote, repo, kdb)
 	if err != nil {
@@ -433,12 +417,6 @@ func saveRepo(repo *tuf.TufRepo, filestore store.MetadataStore) error {
 	snapshotJSON, _ := json.Marshal(signedSnapshot)
 	filestore.SetMeta("snapshot", snapshotJSON)
 
-	signedTimestamp, err := repo.SignTimestamp(data.DefaultExpires("timestamp"))
-	if err != nil {
-		return err
-	}
-	timestampJSON, _ := json.Marshal(signedTimestamp)
-	filestore.SetMeta("timestamp", timestampJSON)
 	return nil
 }
 
@@ -575,15 +553,16 @@ func bootstrapRepo(gun string, repo *tuf.TufRepo) store.MetadataStore {
 		fatalf(err.Error())
 	}
 	repo.SetSnapshot(snapshot)
-	timestampJSON, err := filestore.GetMeta("timestamp", 0)
-	if err != nil {
-		fatalf(err.Error())
-	}
-	timestamp := &data.Signed{}
-	err = json.Unmarshal(timestampJSON, timestamp)
-	if err != nil {
-		fatalf(err.Error())
-	}
-	repo.SetTimestamp(timestamp)
 	return filestore
+}
+
+// Use this to initialize remote HTTPStores from the config settings
+func getRemoteStore(gun string) (store.RemoteStore, error) {
+	return store.NewHTTPStore(
+		"https://notary:4443/v2/"+gun+"/_trust/tuf/",
+		"",
+		"json",
+		"",
+		"key",
+	)
 }
