@@ -1,12 +1,9 @@
 package main
 
 import (
-	"crypto/rand"
 	"crypto/x509"
-	"crypto/x509/pkix"
 	"fmt"
 	"math"
-	"math/big"
 	"net/url"
 	"os"
 	"path/filepath"
@@ -207,39 +204,14 @@ func keysGenerate(cmd *cobra.Command, args []string) {
 		fatalf("invalid Global Unique Name: %s", gun)
 	}
 
-	_, cert, err := generateKeyAndCert(gun)
-	if err != nil {
-		fatalf("could not generate key: %v", err)
-	}
+	// _, cert, err := generateKeyAndCert(gun)
+	// if err != nil {
+	// 	fatalf("could not generate key: %v", err)
+	// }
 
-	certificateStore.AddCert(cert)
-	fingerprint := trustmanager.FingerprintCert(cert)
-	fmt.Println("Generated new keypair with ID: ", fingerprint)
-}
-
-func newCertificate(gun, organization string) *x509.Certificate {
-	notBefore := time.Now()
-	notAfter := notBefore.Add(time.Hour * 24 * 365 * 2)
-
-	serialNumberLimit := new(big.Int).Lsh(big.NewInt(1), 128)
-	serialNumber, err := rand.Int(rand.Reader, serialNumberLimit)
-	if err != nil {
-		fatalf("failed to generate serial number: %s", err)
-	}
-
-	return &x509.Certificate{
-		SerialNumber: serialNumber,
-		Subject: pkix.Name{
-			Organization: []string{organization},
-			CommonName:   gun,
-		},
-		NotBefore: notBefore,
-		NotAfter:  notAfter,
-
-		KeyUsage:              x509.KeyUsageKeyEncipherment | x509.KeyUsageDigitalSignature,
-		ExtKeyUsage:           []x509.ExtKeyUsage{x509.ExtKeyUsageCodeSigning},
-		BasicConstraintsValid: true,
-	}
+	// certificateStore.AddCert(cert)
+	// fingerprint := trustmanager.FingerprintCert(cert)
+	// fmt.Println("Generated new keypair with ID: ", fingerprint)
 }
 
 func printCert(cert *x509.Certificate) {

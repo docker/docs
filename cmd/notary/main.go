@@ -12,22 +12,20 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
+	notaryclient "github.com/docker/notary/client"
 	"github.com/docker/notary/trustmanager"
 )
 
 const configFileName string = "config"
-
-// Default paths should end with a '/' so directory creation works correctly
 const configPath string = ".docker/trust/"
 const trustDir string = configPath + "trusted_certificates/"
 const privDir string = configPath + "private/"
-const tufDir string = configPath + "tuf/"
-
-var caStore trustmanager.X509Store
-var certificateStore trustmanager.X509Store
-var privKeyStore trustmanager.EncryptedFileStore
 
 var rawOutput bool
+var nClient *notaryclient.NotaryClient
+var caStore trustmanager.X509Store
+var certificateStore trustmanager.X509Store
+var privKeyStore trustmanager.FileStore
 
 func init() {
 	logrus.SetLevel(logrus.DebugLevel)
@@ -48,6 +46,7 @@ func init() {
 	viper.SetConfigName(configFileName)
 	viper.AddConfigPath(path.Join(homeDir, path.Dir(configPath)))
 	viper.SetConfigType("json")
+	configFilePath := path.Join(homeDir, path.Dir(configPath)) + "/" + configFileName + ".json"
 
 	// Find and read the config file
 	err = viper.ReadInConfig()
@@ -60,8 +59,6 @@ func init() {
 
 	// Set up the defaults for our config
 	viper.SetDefault("trustDir", path.Join(homeDir, path.Dir(trustDir)))
-	viper.SetDefault("privDir", path.Join(homeDir, path.Dir(privDir)))
-	viper.SetDefault("tufDir", path.Join(homeDir, path.Dir(tufDir)))
 
 	// Get the final value for the CA directory
 	finalTrustDir := viper.GetString("trustDir")
@@ -79,7 +76,7 @@ func init() {
 		fatalf("could not create X509FileStore: %v", err)
 	}
 
-	// Load all individual (non-CA) certificates that aren't expired and don't use SHA1
+	// Load all individual (nonCA) certificates that aren't expired and don't use SHA1
 	certificateStore, err = trustmanager.NewX509FilteredFileStore(finalTrustDir, func(cert *x509.Certificate) bool {
 		return !cert.IsCA &&
 			time.Now().Before(cert.NotAfter) &&
@@ -96,6 +93,12 @@ func init() {
 		fatalf("could not create FileStore: %v", err)
 	}
 
+	// TODO(diogo): Client should receive the config
+	nClient, err = notaryclient.NewClient(configFilePath)
+	if err != nil {
+		fatalf("could not create FileStore: %v", err)
+	}
+
 }
 
 func main() {
@@ -108,13 +111,13 @@ func main() {
 	NotaryCmd.AddCommand(cmdKeys)
 	NotaryCmd.AddCommand(cmdTufInit)
 	NotaryCmd.AddCommand(cmdTufList)
-	cmdTufList.Flags().BoolVarP(&rawOutput, "raw", "", false, "Instructs notary list to output a non-pretty printed version of the targets list. Useful if you need to parse the list.")
+	cmdTufList.Flags().BoolVarP(&rawOutput, "raw", "", false, "Instructs notary list to output a nonpretty printed version of the targets list. Useful if you need to parse the list.")
 	NotaryCmd.AddCommand(cmdTufAdd)
 	NotaryCmd.AddCommand(cmdTufRemove)
 	NotaryCmd.AddCommand(cmdTufPublish)
 	cmdTufPublish.Flags().StringVarP(&remoteTrustServer, "remote", "r", "", "Remote trust server location")
 	NotaryCmd.AddCommand(cmdTufLookup)
-	cmdTufLookup.Flags().BoolVarP(&rawOutput, "raw", "", false, "Instructs notary lookup to output a non-pretty printed version of the targets list. Useful if you need to parse the list.")
+	cmdTufLookup.Flags().BoolVarP(&rawOutput, "raw", "", false, "Instructs notary lookup to output a nonpretty printed version of the targets list. Useful if you need to parse the list.")
 	cmdTufLookup.Flags().StringVarP(&remoteTrustServer, "remote", "r", "", "Remote trust server location")
 	NotaryCmd.AddCommand(cmdVerify)
 

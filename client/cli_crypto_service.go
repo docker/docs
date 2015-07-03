@@ -1,4 +1,4 @@
-package main
+package client
 
 import (
 	"crypto"
@@ -8,41 +8,42 @@ import (
 	"crypto/x509"
 	"encoding/pem"
 	"fmt"
-	"io/ioutil"
 	"path/filepath"
 
 	"github.com/docker/notary/trustmanager"
 	"github.com/endophage/gotuf/data"
-	"github.com/spf13/viper"
 )
 
 type CliCryptoService struct {
-	privateKeys map[string]*data.PrivateKey
-	gun         string
+	gun      string
+	keyStore trustmanager.FileStore
 }
 
 // NewCryptoService returns an instance ofS cliCryptoService
-func NewCryptoService(gun string) *CliCryptoService {
-	return &CliCryptoService{privateKeys: make(map[string]*data.PrivateKey), gun: gun}
+func NewCryptoService(gun string, keyStore trustmanager.FileStore) *CliCryptoService {
+	return &CliCryptoService{gun: gun, keyStore: keyStore}
 }
 
 // Create is used to generate keys for targets, snapshots and timestamps
 func (ccs *CliCryptoService) Create(role string) (*data.PublicKey, error) {
-	_, cert, err := generateKeyAndCert(ccs.gun)
+	keyData, pemCert, err := GenerateKeyAndCert(ccs.gun)
 	if err != nil {
 		return nil, err
 	}
 
-	// PEM ENcode the certificate, which will be put directly inside of TUF's root.json
-	block := pem.Block{Type: "CERTIFICATE", Bytes: cert.Raw}
-	pemdata := pem.EncodeToMemory(&block)
-
-	// If this key has the role root, save it as a trusted certificate on our certificateStore
-	if role == "root" {
-		certificateStore.AddCertFromPEM(pemdata)
+	fingerprint, err := trustmanager.FingerprintPEMCert(pemCert)
+	if err != nil {
+		return nil, err
 	}
 
-	return data.NewPublicKey("RSA", pemdata), nil
+	// The key is going to be stored in the private directory, using the GUN and
+	// the filename will be the TUF-compliant ID. The Store takes care of extensions.
+	privKeyFilename := filepath.Join(ccs.gun, fingerprint)
+
+	// Store this private key
+	ccs.keyStore.Add(privKeyFilename, keyData)
+
+	return data.NewPublicKey("RSA", pemCert), nil
 }
 
 // Sign returns the signatures for data with the given keyIDs
@@ -54,9 +55,9 @@ func (ccs *CliCryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signa
 	signatures := make([]data.Signature, 0, len(keyIDs))
 	for _, fingerprint := range keyIDs {
 		// Get the PrivateKey filename
-		privKeyFilename := filepath.Join(viper.GetString("privDir"), ccs.gun, fingerprint+".key")
+		privKeyFilename := filepath.Join(ccs.gun, fingerprint)
 		// Read PrivateKey from file
-		privPEMBytes, err := ioutil.ReadFile(privKeyFilename)
+		privPEMBytes, err := ccs.keyStore.Get(privKeyFilename)
 		if err != nil {
 			continue
 		}
@@ -84,8 +85,9 @@ func (ccs *CliCryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signa
 	return signatures, nil
 }
 
-// generateKeyAndCert deals with the creation and storage of a key and returns a cert
-func generateKeyAndCert(gun string) (crypto.PrivateKey, *x509.Certificate, error) {
+// generateKeyAndCert deals with the creation and storage of a key and returns a
+// PEM encoded cert
+func GenerateKeyAndCert(gun string) ([]byte, []byte, error) {
 	// Generates a new RSA key
 	key, err := rsa.GenerateKey(rand.Reader, 2048)
 	if err != nil {
@@ -96,7 +98,7 @@ func generateKeyAndCert(gun string) (crypto.PrivateKey, *x509.Certificate, error
 	// TUF-compliant keyID
 	//TODO (diogo): We're hardcoding the Organization to be the GUN. Probably want to
 	// change it
-	template := newCertificate(gun, gun)
+	template := trustmanager.NewCertificate(gun, gun)
 	derBytes, err := x509.CreateCertificate(rand.Reader, template, template, key.Public(), key)
 	if err != nil {
 		return nil, nil, fmt.Errorf("failed to generate the certificate for key: %v", err)
@@ -108,14 +110,10 @@ func generateKeyAndCert(gun string) (crypto.PrivateKey, *x509.Certificate, error
 		return nil, nil, fmt.Errorf("failed to generate the certificate for key: %v", err)
 	}
 
-	fingerprint := trustmanager.FingerprintCert(cert)
-	// The key is going to be stored in the private directory, using the GUN and
-	// the filename will be the TUF-compliant ID. The Store takes care of extensions.
-	privKeyFilename := filepath.Join(gun, fingerprint)
 	pemKey, err := trustmanager.KeyToPEM(key)
 	if err != nil {
 		return nil, nil, fmt.Errorf("failed to generate the certificate for key: %v", err)
 	}
 
-	return key, cert, privKeyStore.Add(privKeyFilename, pemKey)
+	return pemKey, trustmanager.CertToPEM(cert), nil
 }
