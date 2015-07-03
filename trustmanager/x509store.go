@@ -92,7 +92,7 @@ func Verify(s X509Store, dnsName string, certList []*x509.Certificate) error {
 	// Finally, let's call Verify on our leafCert with our fully configured options
 	chains, err := leafCert.Verify(opts)
 	if len(chains) == 0 || err != nil {
-		return fmt.Errorf("certificate validation failed not verify: %v", err)
+		return fmt.Errorf("certificate verification failed: %v", err)
 	}
 	return nil
 }
