@@ -182,7 +182,6 @@ func TestListDir(t *testing.T) {
 		// Since we're generating this manually we need to add the extension '.'
 		fileName := fmt.Sprintf("%s-%s.%s", testName, strconv.Itoa(i), testExt)
 		expectedFilePath = filepath.Join(tempBaseDir, fileName)
-		fmt.Println(expectedFilePath)
 		_, err = generateRandomFile(expectedFilePath, perms)
 		if err != nil {
 			t.Fatalf("failed to generate random file: %v", err)

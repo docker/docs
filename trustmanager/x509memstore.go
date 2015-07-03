@@ -47,7 +47,7 @@ func (s X509MemStore) AddCert(cert *x509.Certificate) error {
 		return errors.New("certificate failed validation")
 	}
 
-	fingerprint := FingerprintCert(cert)
+	fingerprint := fingerprintCert(cert)
 
 	s.fingerprintMap[fingerprint] = cert
 	name := string(cert.RawSubject)
@@ -62,7 +62,7 @@ func (s X509MemStore) RemoveCert(cert *x509.Certificate) error {
 		return errors.New("removing nil Certificate to X509Store")
 	}
 
-	fingerprint := FingerprintCert(cert)
+	fingerprint := fingerprintCert(cert)
 	delete(s.fingerprintMap, fingerprint)
 	name := string(cert.RawSubject)
 
@@ -139,8 +139,8 @@ func (s X509MemStore) GetCertificatePool() *x509.CertPool {
 	return pool
 }
 
-// GetCertificateBykID returns the certificate that matches a certain kID or error
-func (s X509MemStore) GetCertificateBykID(hexkID string) (*x509.Certificate, error) {
+// GetCertificateByFingerprint returns the certificate that matches a certain kID or error
+func (s X509MemStore) GetCertificateByFingerprint(hexkID string) (*x509.Certificate, error) {
 	// If it does not look like a hex encoded sha256 hash, error
 	if len(hexkID) != 64 {
 		return nil, errors.New("invalid Subject Key Identifier")

@@ -83,7 +83,11 @@ func loadCertFromPEM(pemBytes []byte) (*x509.Certificate, error) {
 	return nil, errors.New("no certificates found in PEM data")
 }
 
-func FingerprintCert(cert *x509.Certificate) CertID {
+func FingerprintCert(cert *x509.Certificate) string {
+	return string(fingerprintCert(cert))
+}
+
+func fingerprintCert(cert *x509.Certificate) CertID {
 	block := pem.Block{Type: "CERTIFICATE", Bytes: cert.Raw}
 	pemdata := string(pem.EncodeToMemory(&block))
 

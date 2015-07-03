@@ -3,7 +3,9 @@ package main
 import (
 	"bytes"
 	"crypto/sha256"
+	"crypto/x509"
 	"encoding/json"
+	"encoding/pem"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -11,6 +13,7 @@ import (
 	"path/filepath"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/docker/notary/trustmanager"
 	"github.com/endophage/gotuf"
 	"github.com/endophage/gotuf/client"
 	"github.com/endophage/gotuf/data"
@@ -207,7 +210,7 @@ func tufList(cmd *cobra.Command, args []string) {
 		"json",
 		"",
 	)
-	c, err := bootstrapClient(remote, repo, kdb)
+	c, err := bootstrapClient(gun, remote, repo, kdb)
 	if err != nil {
 		return
 	}
@@ -244,7 +247,7 @@ func tufLookup(cmd *cobra.Command, args []string) {
 		"json",
 		"",
 	)
-	c, err := bootstrapClient(remote, repo, kdb)
+	c, err := bootstrapClient(gun, remote, repo, kdb)
 	if err != nil {
 		return
 	}
@@ -374,7 +377,7 @@ func verify(cmd *cobra.Command, args []string) {
 		"",
 	)
 
-	c, err := bootstrapClient(remote, repo, kdb)
+	c, err := bootstrapClient(gun, remote, repo, kdb)
 	if err != nil {
 		logrus.Error("Unable to setup client.")
 		return
@@ -439,17 +442,17 @@ func saveRepo(repo *tuf.TufRepo, filestore store.MetadataStore) error {
 	return nil
 }
 
-func bootstrapClient(remote store.RemoteStore, repo *tuf.TufRepo, kdb *keys.KeyDB) (*client.Client, error) {
+func bootstrapClient(gun string, remote store.RemoteStore, repo *tuf.TufRepo, kdb *keys.KeyDB) (*client.Client, error) {
 	rootJSON, err := remote.GetMeta("root", 5<<20)
-	if err != nil {
-		return nil, err
-	}
 	root := &data.Signed{}
 	err = json.Unmarshal(rootJSON, root)
 	if err != nil {
 		return nil, err
 	}
-	// TODO: Validate the root file against the key store
+	err = validateRoot(gun, root)
+	if err != nil {
+		return nil, err
+	}
 	err = repo.SetRoot(root)
 	if err != nil {
 		return nil, err
@@ -459,6 +462,75 @@ func bootstrapClient(remote store.RemoteStore, repo *tuf.TufRepo, kdb *keys.KeyD
 		remote,
 		kdb,
 	), nil
+}
+
+/*
+validateRoot iterates over every root key included in the TUF data and attempts
+to validate the certificate by first checking for an exact match on the certificate
+store, and subsequently trying to find a valid chain on the caStore.
+
+Example TUF Content for root role:
+"roles" : {
+  "root" : {
+    "threshold" : 1,
+      "keyids" : [
+        "e6da5c303d572712a086e669ecd4df7b785adfc844e0c9a7b1f21a7dfc477a38"
+      ]
+  },
+ ...
+}
+
+Example TUF Content for root key:
+"e6da5c303d572712a086e669ecd4df7b785adfc844e0c9a7b1f21a7dfc477a38" : {
+	"keytype" : "RSA",
+	"keyval" : {
+	  "private" : "",
+	  "public" : "Base64-encoded, PEM encoded x509 Certificate"
+	}
+}
+*/
+func validateRoot(gun string, root *data.Signed) error {
+	rootSigned := &data.Root{}
+	err := json.Unmarshal(root.Signed, rootSigned)
+	if err != nil {
+		return err
+	}
+	certs := make(map[string]*data.PublicKey)
+	for _, fingerprint := range rootSigned.Roles["root"].KeyIDs {
+		// TODO(dlaw): currently assuming only one cert contained in
+		// public key entry. Need to fix when we want to pass in chains.
+		k, _ := pem.Decode([]byte(rootSigned.Keys["kid"].Public()))
+
+		decodedCerts, err := x509.ParseCertificates(k.Bytes)
+		if err != nil {
+			continue
+		}
+
+		// TODO(diogo): Assuming that first certificate is the leaf-cert. Need to
+		// iterate over all decodedCerts and find a non-CA one (should be the last).
+		leafCert := decodedCerts[0]
+		leafID := trustmanager.FingerprintCert(leafCert)
+
+		// Check to see if there is an exact match of this certificate.
+		// Checking the CommonName is not required since ID is calculated over
+		// Cert.Raw. It's included to prevent breaking logic with changes of how the
+		// ID gets computed.
+		_, err = certificateStore.GetCertificateByFingerprint(leafID)
+		if err == nil && leafCert.Subject.CommonName == gun {
+			certs[fingerprint] = rootSigned.Keys[fingerprint]
+		}
+
+		// Check to see if this leafCertificate has a chain to one of the Root CAs
+		// of our CA Store.
+		certList := []*x509.Certificate{leafCert}
+		err = trustmanager.Verify(caStore, gun, certList)
+		if err == nil {
+			certs[fingerprint] = rootSigned.Keys[fingerprint]
+		}
+	}
+	_, err = signed.VerifyRoot(root, 0, certs, 1)
+
+	return err
 }
 
 func bootstrapRepo(gun string, repo *tuf.TufRepo) store.MetadataStore {
