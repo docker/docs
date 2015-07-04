@@ -16,17 +16,18 @@ import (
 	"github.com/spf13/viper"
 )
 
-type cliCryptoService struct {
+type CliCryptoService struct {
 	privateKeys map[string]*data.PrivateKey
 	gun         string
 }
 
-func NewCryptoService(gun string) *cliCryptoService {
-	return &cliCryptoService{privateKeys: make(map[string]*data.PrivateKey), gun: gun}
+// NewCryptoService returns an instance ofS cliCryptoService
+func NewCryptoService(gun string) *CliCryptoService {
+	return &CliCryptoService{privateKeys: make(map[string]*data.PrivateKey), gun: gun}
 }
 
 // Create is used to generate keys for targets, snapshots and timestamps
-func (ccs *cliCryptoService) Create(role string) (*data.PublicKey, error) {
+func (ccs *CliCryptoService) Create(role string) (*data.PublicKey, error) {
 	_, cert, err := generateKeyAndCert(ccs.gun)
 	if err != nil {
 		return nil, err
@@ -45,7 +46,7 @@ func (ccs *cliCryptoService) Create(role string) (*data.PublicKey, error) {
 }
 
 // Sign returns the signatures for data with the given keyIDs
-func (ccs *cliCryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signature, error) {
+func (ccs *CliCryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signature, error) {
 	// Create hasher and hash data
 	hash := crypto.SHA256
 	hashed := sha256.Sum256(payload)
@@ -83,15 +84,13 @@ func (ccs *cliCryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signa
 	return signatures, nil
 }
 
-//TODO (diogo): Add support for EC P384
+// generateKeyAndCert deals with the creation and storage of a key and returns a cert
 func generateKeyAndCert(gun string) (crypto.PrivateKey, *x509.Certificate, error) {
 	// Generates a new RSA key
 	key, err := rsa.GenerateKey(rand.Reader, 2048)
 	if err != nil {
 		return nil, nil, fmt.Errorf("could not generate private key: %v", err)
 	}
-
-	keyBytes := x509.MarshalPKCS1PrivateKey(key)
 
 	// Creates a new Certificate template. We need the certificate to calculate the
 	// TUF-compliant keyID
@@ -113,6 +112,10 @@ func generateKeyAndCert(gun string) (crypto.PrivateKey, *x509.Certificate, error
 	// The key is going to be stored in the private directory, using the GUN and
 	// the filename will be the TUF-compliant ID. The Store takes care of extensions.
 	privKeyFilename := filepath.Join(gun, fingerprint)
-	privKeyStore.Add(privKeyFilename, trustmanager.KeyToPEM(keyBytes))
-	return key, cert, nil
+	pemKey, err := trustmanager.KeyToPEM(key)
+	if err != nil {
+		return nil, nil, fmt.Errorf("failed to generate the certificate for key: %v", err)
+	}
+
+	return key, cert, privKeyStore.Add(privKeyFilename, pemKey)
 }
