@@ -35,8 +35,14 @@ func TestAddKey(t *testing.T) {
 		t.Fatalf("could not generate private key: %v", err)
 	}
 
+	// Get the PEM for the key
+	pemKey, err := KeyToPEM(key)
+	if err != nil {
+		t.Fatalf("failed to convert private key to PEM: %v", err)
+	}
+
 	// Call the Add function
-	err = store.Add(testName, key)
+	err = store.Add(testName, pemKey)
 	if err != nil {
 		t.Fatalf("failed to add file to store: %v", err)
 	}
@@ -106,14 +112,9 @@ EMl3eFOJXjIch/wIesRSN+2dGOsl7neercjMh1i9RvpCwHDx/E0=
 	}
 
 	// Call the Get function
-	privKey, err := store.Get(testName)
+	pemKey, err := store.Get(testName)
 	if err != nil {
 		t.Fatalf("failed to get file from store: %v", err)
-	}
-
-	pemKey, err := KeyToPEM(privKey)
-	if err != nil {
-		t.Fatalf("failed to convert key to PEM: %v", err)
 	}
 
 	if !bytes.Equal(testData, pemKey) {
@@ -146,8 +147,14 @@ func TestAddEncryptedAndGetDecrypted(t *testing.T) {
 		t.Fatalf("could not generate private key: %v", err)
 	}
 
+	// Get PEM encodedd key
+	pemKey, err := KeyToPEM(key)
+	if err != nil {
+		t.Fatalf("Could not encode key to PEM: %v", err)
+	}
+
 	// Call the Add function
-	err = store.AddEncrypted(testName, key, "diogomonica")
+	err = store.AddEncrypted(testName, pemKey, "diogomonica")
 	if err != nil {
 		t.Fatalf("failed to add file to store: %v", err)
 	}
@@ -157,17 +164,7 @@ func TestAddEncryptedAndGetDecrypted(t *testing.T) {
 		t.Fatalf("could not decrypt private key: %v", err)
 	}
 
-	pemKey, err := KeyToPEM(key)
-	if err != nil {
-		t.Fatalf("could not convert private key to PEM: %v", err)
-	}
-
-	decryptedPemKey, err := KeyToPEM(pemPrivKey)
-	if err != nil {
-		t.Fatalf("could not convert private key to PEM: %v", err)
-	}
-
-	if !strings.Contains(string(pemKey), string(decryptedPemKey)) {
+	if !strings.Contains(string(pemKey), string(pemPrivKey)) {
 		t.Fatalf("expected private key content in the file: %s", expectedFilePath)
 	}
 }
@@ -197,8 +194,13 @@ func TestGetDecryptedWithTamperedCipherText(t *testing.T) {
 		t.Fatalf("could not generate private key: %v", err)
 	}
 
+	// Get PEM encodedd key
+	pemKey, err := KeyToPEM(key)
+	if err != nil {
+		t.Fatalf("Could not encode key to PEM: %v", err)
+	}
 	// Call the Add function
-	err = store.AddEncrypted(testName, key, "diogomonica")
+	err = store.AddEncrypted(testName, pemKey, "diogomonica")
 	if err != nil {
 		t.Fatalf("failed to add file to store: %v", err)
 	}
@@ -240,8 +242,13 @@ func TestGetDecryptedWithInvalidPassphrase(t *testing.T) {
 		t.Fatalf("could not generate private key: %v", err)
 	}
 
+	// Get PEM encodedd key
+	pemKey, err := KeyToPEM(key)
+	if err != nil {
+		t.Fatalf("Could not encode key to PEM: %v", err)
+	}
 	// Call the Add function
-	err = store.AddEncrypted(testName, key, "diogomonica")
+	err = store.AddEncrypted(testName, pemKey, "diogomonica")
 	if err != nil {
 		t.Fatalf("failed to add file to stoAFre: %v", err)
 	}

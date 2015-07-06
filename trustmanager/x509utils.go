@@ -49,14 +49,14 @@ func GetCertFromURL(urlStr string) (*x509.Certificate, error) {
 	return cert, nil
 }
 
-// ToPEM is an utility function returns a PEM encoded x509 Certificate
-func ToPEM(cert *x509.Certificate) []byte {
+// CertToPEM is an utility function returns a PEM encoded x509 Certificate
+func CertToPEM(cert *x509.Certificate) []byte {
 	pemCert := pem.EncodeToMemory(&pem.Block{Type: "CERTIFICATE", Bytes: cert.Raw})
 
 	return pemCert
 }
 
-// KeyToPEM is an utility function returns a PEM encoded Key
+// KeyToPEM returns a PEM encoded key from a crypto.PrivateKey
 func KeyToPEM(key crypto.PrivateKey) ([]byte, error) {
 	rsaKey, ok := key.(*rsa.PrivateKey)
 	if !ok {
@@ -67,8 +67,9 @@ func KeyToPEM(key crypto.PrivateKey) ([]byte, error) {
 	return pem.EncodeToMemory(&pem.Block{Type: "RSA PRIVATE KEY", Bytes: keyBytes}), nil
 }
 
-// KeyToEncryptedPEM is an utility function returns a PEM encoded Key
-func KeyToEncryptedPEM(key crypto.PrivateKey, passphrase string) ([]byte, error) {
+// EncryptPrivateKey returns an encrypted PEM encoded key given a Private key
+// and a passphrase
+func EncryptPrivateKey(key crypto.PrivateKey, passphrase string) ([]byte, error) {
 	rsaKey, ok := key.(*rsa.PrivateKey)
 	if !ok {
 		return nil, errors.New("only RSA keys are currently supported")
@@ -76,7 +77,6 @@ func KeyToEncryptedPEM(key crypto.PrivateKey, passphrase string) ([]byte, error)
 
 	keyBytes := x509.MarshalPKCS1PrivateKey(rsaKey)
 
-	//TODO(diogo): if we do keystretching, where do we keep the salt + params?
 	password := []byte(passphrase)
 	cipherType := x509.PEMCipherAES256
 	blockType := "RSA PRIVATE KEY"
@@ -168,16 +168,16 @@ func LoadKeyFromFile(filename string) (crypto.PrivateKey, error) {
 		return nil, err
 	}
 
-	key, err := ParseRawPrivateKey(pemBytes)
+	key, err := ParsePEMPrivateKey(pemBytes)
 	if err != nil {
 		return nil, err
 	}
 	return key, nil
 }
 
-// ParseRawPrivateKey returns a private key from a PEM encoded private key. It
+// ParsePEMPrivateKey returns a private key from a PEM encoded private key. It
 // only supports RSA (PKCS#1).
-func ParseRawPrivateKey(pemBytes []byte) (crypto.PrivateKey, error) {
+func ParsePEMPrivateKey(pemBytes []byte) (crypto.PrivateKey, error) {
 	block, _ := pem.Decode(pemBytes)
 	if block == nil {
 		return nil, errors.New("no valid key found")
@@ -191,9 +191,9 @@ func ParseRawPrivateKey(pemBytes []byte) (crypto.PrivateKey, error) {
 	}
 }
 
-// ParseRawEncryptedPrivateKey returns a private key from a PEM encrypted private key. It
+// ParsePEMEncryptedPrivateKey returns a private key from a PEM encrypted private key. It
 // only supports RSA (PKCS#1).
-func ParseRawEncryptedPrivateKey(pemBytes []byte, passphrase string) (crypto.PrivateKey, error) {
+func ParsePEMEncryptedPrivateKey(pemBytes []byte, passphrase string) (crypto.PrivateKey, error) {
 	block, _ := pem.Decode(pemBytes)
 	if block == nil {
 		return nil, errors.New("no valid private key found")

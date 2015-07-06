@@ -113,7 +113,7 @@ func keysRemove(cmd *cobra.Command, args []string) {
 	}
 
 	// Remove all the keys under the Global Unique Name
-	err = privKeyStore.RemoveAll(gunOrID)
+	err = privKeyStore.RemoveDir(gunOrID)
 	if err != nil {
 		fatalf("failed to remove all Private keys under Global Unique Name: %s", gunOrID)
 	}

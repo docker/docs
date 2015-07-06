@@ -26,8 +26,8 @@ func TestAddFile(t *testing.T) {
 	// Since we're generating this manually we need to add the extension '.'
 	expectedFilePath := filepath.Join(tempBaseDir, testName+"."+testExt)
 
-	// Create our FileStore
-	store := &fileStore{
+	// Create our SimpleFileStore
+	store := &SimpleFileStore{
 		baseDir: tempBaseDir,
 		fileExt: testExt,
 		perms:   perms,
@@ -69,8 +69,8 @@ func TestRemoveFile(t *testing.T) {
 		t.Fatalf("failed to generate random file: %v", err)
 	}
 
-	// Create our FileStore
-	store := &fileStore{
+	// Create our SimpleFileStore
+	store := &SimpleFileStore{
 		baseDir: tempBaseDir,
 		fileExt: testExt,
 		perms:   perms,
@@ -108,8 +108,8 @@ func TestRemoveDir(t *testing.T) {
 		t.Fatalf("failed to generate random file: %v", err)
 	}
 
-	// Create our FileStore
-	store := &fileStore{
+	// Create our SimpleFileStore
+	store := &SimpleFileStore{
 		baseDir: tempBaseDir,
 		fileExt: testExt,
 		perms:   perms,
@@ -151,8 +151,8 @@ func TestListAll(t *testing.T) {
 		}
 	}
 
-	// Create our FileStore
-	store := &fileStore{
+	// Create our SimpleFileStore
+	store := &SimpleFileStore{
 		baseDir: tempBaseDir,
 		fileExt: testExt,
 		perms:   perms,
@@ -188,8 +188,8 @@ func TestListDir(t *testing.T) {
 		}
 	}
 
-	// Create our FileStore
-	store := &fileStore{
+	// Create our SimpleFileStore
+	store := &SimpleFileStore{
 		baseDir: tempBaseDir,
 		fileExt: testExt,
 		perms:   perms,
@@ -213,8 +213,8 @@ func TestGetPath(t *testing.T) {
 	testExt := "crt"
 	perms := os.FileMode(0755)
 
-	// Create our FileStore
-	store := &fileStore{
+	// Create our SimpleFileStore
+	store := &SimpleFileStore{
 		baseDir: "",
 		fileExt: testExt,
 		perms:   perms,
@@ -249,13 +249,13 @@ func TestGetData(t *testing.T) {
 		t.Fatalf("failed to generate random file: %v", err)
 	}
 
-	// Create our FileStore
-	store := &fileStore{
+	// Create our SimpleFileStore
+	store := &SimpleFileStore{
 		baseDir: tempBaseDir,
 		fileExt: testExt,
 		perms:   perms,
 	}
-	testData, err := store.GetData(testName)
+	testData, err := store.Get(testName)
 	if err != nil {
 		t.Fatalf("failed to get data from: %s", testName)
 

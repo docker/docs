@@ -25,7 +25,7 @@ const tufDir string = configPath + "tuf/"
 
 var caStore trustmanager.X509Store
 var certificateStore trustmanager.X509Store
-var privKeyStore *trustmanager.KeyFileStore
+var privKeyStore trustmanager.EncryptedFileStore
 
 var rawOutput bool
 
