@@ -76,7 +76,7 @@ func (s X509FileStore) addNamedCert(cert *x509.Certificate) error {
 	}
 
 	// Convert certificate to PEM
-	certBytes := ToPEM(cert)
+	certBytes := CertToPEM(cert)
 	// Compute FileName
 	fileName := fileName(cert)
 

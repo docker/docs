@@ -25,7 +25,7 @@ const tufDir string = configPath + "tuf/"
 
 var caStore trustmanager.X509Store
 var certificateStore trustmanager.X509Store
-var privKeyStore trustmanager.FileStore
+var privKeyStore trustmanager.EncryptedFileStore
 
 var rawOutput bool
 
@@ -91,7 +91,7 @@ func init() {
 		fatalf("could not create X509FileStore: %v", err)
 	}
 
-	privKeyStore, err = trustmanager.NewPrivateFileStore(finalPrivDir, "key")
+	privKeyStore, err = trustmanager.NewKeyFileStore(finalPrivDir)
 	if err != nil {
 		fatalf("could not create FileStore: %v", err)
 	}

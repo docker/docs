@@ -2,7 +2,6 @@ package trustmanager
 
 import (
 	"crypto/x509"
-	"fmt"
 	"testing"
 )
 
@@ -34,10 +33,6 @@ func TestVerifyLeafSuccessfully(t *testing.T) {
 
 	// Get our certList with Leaf Cert and Intermediate
 	certList := []*x509.Certificate{leafCert, intermediateCA}
-
-	// Get the VerifyOptions from our Store
-	opts, err := store.GetVerifyOptions("secure.docker.com")
-	fmt.Println(opts)
 
 	// Try to find a valid chain for cert
 	err = Verify(store, "secure.docker.com", certList)
@@ -75,10 +70,6 @@ func TestVerifyLeafSuccessfullyWithMultipleIntermediates(t *testing.T) {
 	// Get our certList with Leaf Cert and Intermediate
 	certList := []*x509.Certificate{leafCert, intermediateCA, intermediateCA, rootCA}
 
-	// Get the VerifyOptions from our Store
-	opts, err := store.GetVerifyOptions("secure.docker.com")
-	fmt.Println(opts)
-
 	// Try to find a valid chain for cert
 	err = Verify(store, "secure.docker.com", certList)
 	if err != nil {
@@ -109,10 +100,6 @@ func TestVerifyLeafWithNoIntermediate(t *testing.T) {
 	// Get our certList with Leaf Cert and Intermediate
 	certList := []*x509.Certificate{leafCert, leafCert}
 
-	// Get the VerifyOptions from our Store
-	opts, err := store.GetVerifyOptions("secure.docker.com")
-	fmt.Println(opts)
-
 	// Try to find a valid chain for cert
 	err = Verify(store, "secure.docker.com", certList)
 	if err == nil {
@@ -142,10 +129,6 @@ func TestVerifyLeafWithNoLeaf(t *testing.T) {
 
 	// Get our certList with Leaf Cert and Intermediate
 	certList := []*x509.Certificate{intermediateCA, intermediateCA}
-
-	// Get the VerifyOptions from our Store
-	opts, err := store.GetVerifyOptions("secure.docker.com")
-	fmt.Println(opts)
 
 	// Try to find a valid chain for cert
 	err = Verify(store, "secure.docker.com", certList)

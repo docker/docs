@@ -15,14 +15,20 @@ type FileStore interface {
 	Add(fileName string, data []byte) error
 	Remove(fileName string) error
 	RemoveDir(directoryName string) error
-	GetData(fileName string) ([]byte, error)
+	Get(fileName string) ([]byte, error)
 	GetPath(fileName string) string
 	ListAll() []string
 	ListDir(directoryName string) []string
 }
 
-// fileStore implements FileStore
-type fileStore struct {
+type EncryptedFileStore interface {
+	FileStore
+	AddEncrypted(fileName string, keyBytes []byte, passphrase string) error
+	GetDecrypted(fileName string, passphrase string) ([]byte, error)
+}
+
+// SimpleFileStore implements FileStore
+type SimpleFileStore struct {
 	baseDir string
 	fileExt string
 	perms   os.FileMode
@@ -34,7 +40,7 @@ func NewFileStore(baseDir string, fileExt string) (FileStore, error) {
 		return nil, err
 	}
 
-	return &fileStore{
+	return &SimpleFileStore{
 		baseDir: baseDir,
 		fileExt: fileExt,
 		perms:   visible,
@@ -47,7 +53,7 @@ func NewPrivateFileStore(baseDir string, fileExt string) (FileStore, error) {
 		return nil, err
 	}
 
-	return &fileStore{
+	return &SimpleFileStore{
 		baseDir: baseDir,
 		fileExt: fileExt,
 		perms:   private,
@@ -55,21 +61,21 @@ func NewPrivateFileStore(baseDir string, fileExt string) (FileStore, error) {
 }
 
 // Add writes data to a file with a given name
-func (f *fileStore) Add(name string, data []byte) error {
+func (f *SimpleFileStore) Add(name string, data []byte) error {
 	filePath := f.genFilePath(name)
 	createDirectory(filepath.Dir(filePath), f.perms)
 	return ioutil.WriteFile(filePath, data, f.perms)
 }
 
 // Remove removes a file identified by name
-func (f *fileStore) Remove(name string) error {
+func (f *SimpleFileStore) Remove(name string) error {
 	// Attempt to remove
 	filePath := f.genFilePath(name)
 	return os.Remove(filePath)
 }
 
 // RemoveDir removes the directory identified by name
-func (f *fileStore) RemoveDir(name string) error {
+func (f *SimpleFileStore) RemoveDir(name string) error {
 	dirPath := filepath.Join(f.baseDir, name)
 
 	// Check to see if directory exists
@@ -86,8 +92,8 @@ func (f *fileStore) RemoveDir(name string) error {
 	return os.RemoveAll(dirPath)
 }
 
-// GetData returns the data given a file name
-func (f *fileStore) GetData(name string) ([]byte, error) {
+// Get returns the data given a file name
+func (f *SimpleFileStore) Get(name string) ([]byte, error) {
 	filePath := f.genFilePath(name)
 	data, err := ioutil.ReadFile(filePath)
 	if err != nil {
@@ -98,23 +104,23 @@ func (f *fileStore) GetData(name string) ([]byte, error) {
 }
 
 // GetPath returns the full final path of a file with a given name
-func (f *fileStore) GetPath(name string) string {
+func (f *SimpleFileStore) GetPath(name string) string {
 	return f.genFilePath(name)
 }
 
 // List lists all the files inside of a store
-func (f *fileStore) ListAll() []string {
+func (f *SimpleFileStore) ListAll() []string {
 	return f.list(f.baseDir)
 }
 
 // List lists all the files inside of a directory identified by a name
-func (f *fileStore) ListDir(name string) []string {
+func (f *SimpleFileStore) ListDir(name string) []string {
 	fullPath := filepath.Join(f.baseDir, name)
 	return f.list(fullPath)
 }
 
 // list lists all the files in a directory given a full path
-func (f *fileStore) list(path string) []string {
+func (f *SimpleFileStore) list(path string) []string {
 	files := make([]string, 0, 0)
 	filepath.Walk(path, func(fp string, fi os.FileInfo, err error) error {
 		// If there are errors, ignore this particular file
@@ -137,7 +143,7 @@ func (f *fileStore) list(path string) []string {
 }
 
 // genFilePath returns the full path with extension given a file name
-func (f *fileStore) genFilePath(name string) string {
+func (f *SimpleFileStore) genFilePath(name string) string {
 	fileName := fmt.Sprintf("%s.%s", name, f.fileExt)
 	return filepath.Join(f.baseDir, fileName)
 }
