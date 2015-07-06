@@ -1,0 +1,35 @@
+'docker_title' = 'Boot2Docker for Mac OS X';
+
+'choiceDockerCLI_title' = 'Docker client for Mac OS X';
+'choiceDockerCLI_msg' = 'Installs the Docker for Mac OS X client into /usr/local/bin/';
+
+'choiceDockerMachineCLI_title' = 'Docker Machine for Mac OS X';
+'choiceDockerMachineCLI_msg' = 'Installs the Docker Machine binary into /usr/local/bin/';
+
+'choiceDockerComposeCLI_title' = 'Docker Compose for Mac OS X';
+'choiceDockerComposeCLI_msg' = 'Installs the Docker Compose binary into /usr/local/bin/';
+
+'choiceBoot2DockerISO_title' = 'Boot2Docker ISO';
+'choiceBoot2DockerISO_msg' = 'Installs the boot2docker.iso into /usr/local/share/';
+
+'choiceDockerShell_title' = 'Docker Shell Quick-start applet for Mac OS X';
+'choiceDockerShell_msg' = 'Installs the Docker Shell Quick-start applet into /Applications/';
+
+'choiceVBoxKEXTs_title' = 'Oracle VM VirtualBox Kernel Extensions %VBOX_VERSION%';
+'choiceVBoxKEXTs_msg' = 'Installs the Oracle VM VirtualBox Kernel Extensions into /Library/Application Support/VirtualBox.';
+
+'choiceVBox_title' = 'Oracle VM VirtualBox %VBOX_VERSION%';
+'choiceVBox_msg' = 'Installs the Oracle VM VirtualBox application into /Applications.';
+
+'choiceVBoxCLI_title' = 'Oracle VM VirtualBox Command Line Utilities %VBOX_VERSION%';
+'choiceVBoxCLI_msg' = 'Installs the Oracle VM VirtualBox command line utilities into /usr/bin.';
+
+'RUNNING_VMS_TLE' = "Running VirtualBox detected!";
+'RUNNING_VMS_MSG' = "The installer has detected that VirtualBox is still running. Please shutdown all running VirtualBox machines and exit VirtualBox then restart the installation.";
+
+'UNSUPPORTED_HW_MACHINE_TLE' = "Unsupported hardware architecture detected!";
+'UNSUPPORTED_HW_MACHINE_MSG' = "The installer has detected an unsupported architecture. VirtualBox only runs on the x86 and amd64 architectures.";
+
+'UNSUPPORTED_OS_TLE' = "Unsupported OS version detected!";
+'UNSUPPORTED_OS_MSG' = "The installer has detected an unsupported operation system. VirtualBox requires Mac OS X 10.6 or later.";
+
