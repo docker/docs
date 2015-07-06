@@ -80,7 +80,7 @@ This will give you access on port `9999` on your DTR server - `http://<dtr-host-
 
 As an extra measure of safety, make sure you have SSH access to the DTR host before you start using DTR. 
 
-If you are hosting DTR on an AWS EC2 host, note that the user is `ec2-user`:
+If you are hosting DTR on an EC2 host launched from the AWS Marketplace AMI, note that the user is `ec2-user`:
 `/path/to/private_key/id_rsa ec2-user@<dtr-dns-entry>`.
 
 ## Services
