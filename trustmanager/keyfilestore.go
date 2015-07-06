@@ -13,7 +13,7 @@ type KeyFileStore struct {
 
 // NewKeyFileStore returns a new KeyFileStore creating a private directory to
 // hold the keys.
-func NewKeyFileStore(baseDir string) (EncryptedFileStore, error) {
+func NewKeyFileStore(baseDir string) (*KeyFileStore, error) {
 	fileStore, err := NewFileStore(baseDir, keyExtension)
 	if err != nil {
 		return nil, err
