@@ -122,7 +122,7 @@ if [ -n "${DB_USER}" -o -n "${DB_NAME}" ]; then
                     \`gun\` varchar(255) NOT NULL,
                     \`cipher\` int(11) NOT NULL,
                     \`public\` blob NOT NULL,
-                    PRIMARY KEY (\`gun\`),
+                    PRIMARY KEY (\`gun\`)
                     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
       done
   fi
