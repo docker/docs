@@ -22,7 +22,7 @@
 'choiceVBox_msg' = 'Installs the Oracle VM VirtualBox application into /Applications.';
 
 'RUNNING_VMS_TLE' = "Running VirtualBox detected!";
-'RUNNING_VMS_MSG' = "The installer has detected that VirtualBox is still running. Please shutdown all running VirtualBox machines and exit VirtualBox then restart the installation.";
+'RUNNING_VMS_MSG' = "The installer has detected that VirtualBox is still running. Please shutdown all running VirtualBox machines and exit VirtualBox. Then restart the Docker Toolbox installation.";
 
 'UNSUPPORTED_HW_MACHINE_TLE' = "Unsupported hardware architecture detected!";
 'UNSUPPORTED_HW_MACHINE_MSG' = "The installer has detected an unsupported architecture. VirtualBox only runs on the x86 and amd64 architectures.";
