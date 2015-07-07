@@ -2,6 +2,8 @@ package client
 
 import (
 	"bytes"
+	"crypto/rand"
+	"crypto/rsa"
 	"crypto/x509"
 	"encoding/json"
 	"encoding/pem"
@@ -27,6 +29,7 @@ const trustDir string = "/trusted_certificates/"
 const privDir string = "/private/"
 const tufDir string = "/tuf/"
 const rootKeysDir string = "/root_keys/"
+const rsaKeySize int = 2048
 
 // ErrRepositoryNotExist gets returned when trying to make an action over a repository
 /// that doesn't exist
@@ -34,28 +37,32 @@ var ErrRepositoryNotExist = errors.New("repository does not exist")
 
 // Client is the interface that defines the Notary Client type
 type Client interface {
-	ListPrivateKeys() []data.PrivateKey
-	GenRootKey(passphrase string) (*data.PublicKey, error)
+	ListPrivateKeys() []string
+	GenRootKey(passphrase string) (string, error)
+	GetRootKey(rootKeyID string, passphrase string) (UnlockedRootKey, error)
 	GetRepository(gun string, baseURL string, transport http.RoundTripper) (Repository, error)
 }
 
 // Repository is the interface that represents a Notary Repository
 type Repository interface {
-	Update() error
-	Initialize(key *data.PublicKey) error
-
-	AddTarget(target *Target) error
-	ListTargets() ([]*Target, error)
-	GetTargetByName(name string) (*Target, error)
-
+	Initialize(UnlockedRootKey) error
+	AddTarget(target Target) error
+	ListTargets() ([]Target, error)
+	GetTargetByName(name string) (Target, error)
 	Publish() error
+}
+
+type UnlockedRootKey struct {
+	cipher   string
+	pemBytes []byte
+	signer   *signed.Signer
 }
 
 type NotaryClient struct {
 	baseDir          string
 	caStore          trustmanager.X509Store
 	certificateStore trustmanager.X509Store
-	rootKeyStore     trustmanager.EncryptedFileStore
+	rootKeyStore     trustmanager.KeyFileStore
 }
 
 type NotaryRepository struct {
@@ -66,7 +73,7 @@ type NotaryRepository struct {
 	signer           *signed.Signer
 	tufRepo          *tuf.TufRepo
 	fileStore        store.MetadataStore
-	privKeyStore     trustmanager.FileStore
+	privKeyStore     trustmanager.KeyFileStore
 	caStore          trustmanager.X509Store
 	certificateStore trustmanager.X509Store
 }
@@ -110,27 +117,25 @@ func NewClient(baseDir string) (*NotaryClient, error) {
 	return nClient, nil
 }
 
-// Update forces TUF to download the remote timestamps and verify if there are
-// any remote changes.
-func (r *NotaryRepository) Update() error {
-	return nil
-}
-
 // Initialize creates a new repository by using rootKey as the root Key for the
 // TUF repository.
-func (r *NotaryRepository) Initialize(rootKey *data.PublicKey) error {
+func (r *NotaryRepository) Initialize(uRootKey UnlockedRootKey) error {
 	remote, err := getRemoteStore(r.Gun)
 	rawTSKey, err := remote.GetKey("timestamp")
 	if err != nil {
 		return err
 	}
+
 	fmt.Println("RawKey: ", string(rawTSKey))
+
 	parsedKey := &data.TUFKey{}
 	err = json.Unmarshal(rawTSKey, parsedKey)
 	if err != nil {
 		return err
 	}
+
 	timestampKey := data.NewPublicKey(parsedKey.Cipher(), parsedKey.Public())
+	rootKey := data.NewPublicKey(uRootKey.cipher, uRootKey.pemBytes)
 
 	targetsKey, err := r.signer.Create("targets")
 	if err != nil {
@@ -165,6 +170,7 @@ func (r *NotaryRepository) Initialize(rootKey *data.PublicKey) error {
 		return err
 	}
 
+	// TODO(diogo): change to inline error catching
 	err = kdb.AddRole(rootRole)
 	if err != nil {
 		return err
@@ -194,13 +200,23 @@ func (r *NotaryRepository) Initialize(rootKey *data.PublicKey) error {
 		return err
 	}
 
-	err = r.tufRepo.InitRepo(false)
-	if err != nil {
+	if err := r.tufRepo.InitRepo(false); err != nil {
 		return err
 	}
 
-	r.saveRepo()
-	return nil
+	if err := r.saveMetadata(uRootKey.signer); err != nil {
+		return err
+	}
+
+	// Creates and saves a trusted certificate for this store, with this root key
+	rootCert, err := uRootKey.GenerateCertificate(r.Gun)
+	if err != nil {
+		return err
+	}
+	r.certificateStore.AddCert(rootCert)
+
+	// Creates an empty snapshot
+	return r.snapshot()
 }
 
 // AddTarget adds a new target to the repository, forcing a timestamps check from TUF
@@ -215,7 +231,7 @@ func (r *NotaryRepository) AddTarget(target *Target) error {
 		return err
 	}
 
-	r.saveRepo()
+	r.snapshot()
 
 	return nil
 }
@@ -352,18 +368,21 @@ func (r *NotaryRepository) bootstrapRepo() error {
 	return nil
 }
 
-func (r *NotaryRepository) saveRepo() error {
-	signedRoot, err := r.tufRepo.SignRoot(data.DefaultExpires("root"))
+func (r *NotaryRepository) saveMetadata(rootSigner *signed.Signer) error {
+	signedRoot, err := r.tufRepo.SignRoot(data.DefaultExpires("root"), rootSigner)
 	if err != nil {
 		return err
 	}
-	rootJSON, _ := json.Marshal(signedRoot)
-	r.fileStore.SetMeta("root", rootJSON)
 
+	rootJSON, _ := json.Marshal(signedRoot)
+	return r.fileStore.SetMeta("root", rootJSON)
+}
+
+func (r *NotaryRepository) snapshot() error {
 	fmt.Println("Saving changes to Trusted Collection.")
 
 	for t, _ := range r.tufRepo.Targets {
-		signedTargets, err := r.tufRepo.SignTargets(t, data.DefaultExpires("targets"))
+		signedTargets, err := r.tufRepo.SignTargets(t, data.DefaultExpires("targets"), nil)
 		if err != nil {
 			return err
 		}
@@ -373,14 +392,13 @@ func (r *NotaryRepository) saveRepo() error {
 		r.fileStore.SetMeta(t, targetsJSON)
 	}
 
-	signedSnapshot, err := r.tufRepo.SignSnapshot(data.DefaultExpires("snapshot"))
+	signedSnapshot, err := r.tufRepo.SignSnapshot(data.DefaultExpires("snapshot"), nil)
 	if err != nil {
 		return err
 	}
 	snapshotJSON, _ := json.Marshal(signedSnapshot)
-	r.fileStore.SetMeta("snapshot", snapshotJSON)
 
-	return nil
+	return r.fileStore.SetMeta("snapshot", snapshotJSON)
 }
 
 /*
@@ -447,6 +465,11 @@ func (r *NotaryRepository) ValidateRoot(root *data.Signed) error {
 			certs[fingerprint] = rootSigned.Keys[fingerprint]
 		}
 	}
+
+	if len(certs) < 1 {
+		return errors.New("could not validate the path to a trusted root")
+	}
+
 	_, err = signed.VerifyRoot(root, 0, certs, 1)
 
 	return err
@@ -486,7 +509,7 @@ func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
 
 // ListPrivateKeys lists all availables private keys. Does not include private key
 // material
-func (c *NotaryClient) ListPrivateKeys() []data.PrivateKey {
+func (c *NotaryClient) ListPrivateKeys() []string {
 	// TODO(diogo): Make this work
 	for _, k := range c.rootKeyStore.ListAll() {
 		fmt.Println(k)
@@ -495,18 +518,37 @@ func (c *NotaryClient) ListPrivateKeys() []data.PrivateKey {
 }
 
 // GenRootKey generates a new root key protected by a given passphrase
-func (c *NotaryClient) GenRootKey(passphrase string) (*data.PublicKey, error) {
-	// When generating a root key, passing in a GUN  to put into the cert
-	// doesn't make sense since this key can be used for multiple distinct
-	// repositories.
-	pemKey, _, err := GenerateKeyAndCert("TUF root key")
+func (c *NotaryClient) GenRootKey(passphrase string) (string, error) {
+	// Generates a new RSA key
+	key, err := rsa.GenerateKey(rand.Reader, rsaKeySize)
 	if err != nil {
-		return nil, fmt.Errorf("could not generate private key: %v", err)
+		return "", fmt.Errorf("could not generate private key: %v", err)
 	}
 
-	c.rootKeyStore.AddEncrypted("root", pemKey, passphrase)
+	pemKey, err := trustmanager.KeyToPEM(key)
+	if err != nil {
+		return "", fmt.Errorf("failed to generate the certificate for key: %v", err)
+	}
 
-	return data.NewPublicKey("RSA", pemKey), nil
+	keyID := data.NewPublicKey("RSA", pemKey).ID()
+	c.rootKeyStore.AddEncrypted(keyID, pemKey, passphrase)
+
+	return keyID, nil
+}
+
+// GetRootKey retreives a root key that includes the ID and a signer
+func (c *NotaryClient) GetRootKey(rootKeyID, passphrase string) (UnlockedRootKey, error) {
+	rootKeyPem, err := c.rootKeyStore.GetDecrypted(rootKeyID, passphrase)
+	if err != nil {
+		return UnlockedRootKey{}, fmt.Errorf("could not get encrypted root key: %v", err)
+	}
+
+	signer := signed.NewSigner(NewRootCryptoService(c.rootKeyStore, passphrase))
+
+	return UnlockedRootKey{
+		cipher:   "RSA",
+		pemBytes: rootKeyPem,
+		signer:   signer}, nil
 }
 
 // GetRepository returns a new repository
@@ -516,7 +558,7 @@ func (c *NotaryClient) GetRepository(gun string, baseURL string, transport http.
 		return nil, err
 	}
 
-	signer := signed.NewSigner(NewCryptoService(gun, privKeyStore))
+	signer := signed.NewSigner(NewCryptoService(gun, *privKeyStore))
 
 	return &NotaryRepository{Gun: gun,
 		baseURL:          baseURL,
@@ -559,9 +601,36 @@ func (c *NotaryClient) loadKeys(trustDir, rootKeysDir string) error {
 
 	c.caStore = caStore
 	c.certificateStore = certificateStore
-	c.rootKeyStore = rootKeyStore
+	c.rootKeyStore = *rootKeyStore
 
 	return nil
+}
+
+func (uk *UnlockedRootKey) ID() string {
+	return data.NewPublicKey(uk.cipher, uk.pemBytes).ID()
+}
+
+func (uk *UnlockedRootKey) GenerateCertificate(gun string) (*x509.Certificate, error) {
+	privKeyBytes, _ := pem.Decode(uk.pemBytes)
+	privKey, err := x509.ParsePKCS1PrivateKey(privKeyBytes.Bytes)
+	if err != nil {
+		return nil, fmt.Errorf("failed to generate the certificate for key: %v", err)
+	}
+
+	//TODO (diogo): We're hardcoding the Organization to be the GUN. Probably want to change it
+	template := trustmanager.NewCertificate(gun, gun)
+	derBytes, err := x509.CreateCertificate(rand.Reader, template, template, privKey.Public(), privKey)
+	if err != nil {
+		return nil, fmt.Errorf("failed to generate the certificate for key: %v", err)
+	}
+
+	// Encode the new certificate into PEM
+	cert, err := x509.ParseCertificate(derBytes)
+	if err != nil {
+		return nil, fmt.Errorf("failed to generate the certificate for key: %v", err)
+	}
+
+	return cert, nil
 }
 
 // Use this to initialize remote HTTPStores from the config settings

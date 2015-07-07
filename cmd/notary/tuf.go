@@ -102,11 +102,16 @@ func tufInit(cmd *cobra.Command, args []string) {
 
 	// TODO(diogo): We don't want to generate a new root every time. Ask the user
 	// which key she wants to use if there > 0 root keys available.
-	newRootKey, err := nClient.GenRootKey("passphrase")
+	rootKeyID, err := nClient.GenRootKey("passphrase")
 	if err != nil {
 		fatalf(err.Error())
 	}
-	repo.Initialize(newRootKey)
+	rootKey, err := nClient.GetRootKey(rootKeyID, "passphrase")
+	if err != nil {
+		fatalf(err.Error())
+	}
+
+	repo.Initialize(rootKey)
 }
 
 func tufList(cmd *cobra.Command, args []string) {

@@ -7,6 +7,7 @@ import (
 	"crypto/sha256"
 	"crypto/x509"
 	"encoding/pem"
+	"errors"
 	"fmt"
 	"path/filepath"
 
@@ -14,40 +15,52 @@ import (
 	"github.com/endophage/gotuf/data"
 )
 
-type CliCryptoService struct {
+type CryptoService struct {
 	gun      string
-	keyStore trustmanager.FileStore
+	keyStore trustmanager.KeyFileStore
 }
 
-// NewCryptoService returns an instance ofS cliCryptoService
-func NewCryptoService(gun string, keyStore trustmanager.FileStore) *CliCryptoService {
-	return &CliCryptoService{gun: gun, keyStore: keyStore}
+type RootCryptoService struct {
+	// TODO(diogo): support multiple passphrases per key
+	passphrase   string
+	rootKeyStore trustmanager.KeyFileStore
+}
+
+// NewCryptoService returns an instance of CryptoService
+func NewCryptoService(gun string, keyStore trustmanager.KeyFileStore) *CryptoService {
+	return &CryptoService{gun: gun, keyStore: keyStore}
+}
+
+// NewRootCryptoService returns an instance of CryptoService
+func NewRootCryptoService(rootKeyStore trustmanager.KeyFileStore, passphrase string) *RootCryptoService {
+	return &RootCryptoService{rootKeyStore: rootKeyStore, passphrase: passphrase}
 }
 
 // Create is used to generate keys for targets, snapshots and timestamps
-func (ccs *CliCryptoService) Create(role string) (*data.PublicKey, error) {
-	keyData, pemCert, err := GenerateKeyAndCert(ccs.gun)
+func (ccs *CryptoService) Create(role string) (*data.PublicKey, error) {
+	// Generates a new RSA key
+	key, err := rsa.GenerateKey(rand.Reader, rsaKeySize)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("could not generate private key: %v", err)
 	}
 
-	fingerprint, err := trustmanager.FingerprintPEMCert(pemCert)
+	pemKey, err := trustmanager.KeyToPEM(key)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to generate the certificate for key: %v", err)
 	}
 
-	// The key is going to be stored in the private directory, using the GUN and
-	// the filename will be the TUF-compliant ID. The Store takes care of extensions.
-	privKeyFilename := filepath.Join(ccs.gun, fingerprint)
+	tufKey := data.NewPublicKey("RSA", pemKey)
 
-	// Store this private key
-	ccs.keyStore.Add(privKeyFilename, keyData)
+	// Passing in the the GUN + keyID as the name for the private key and adding it
+	// to our KeyFileStore. Final storage will be under $BASE_PATH/GUN/keyID.key
+	privKeyFilename := filepath.Join(ccs.gun, tufKey.ID())
+	ccs.keyStore.Add(privKeyFilename, pemKey)
 
-	return data.NewPublicKey("RSA", pemCert), nil
+	return tufKey, nil
 }
 
 // Sign returns the signatures for data with the given keyIDs
-func (ccs *CliCryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signature, error) {
+func (ccs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signature, error) {
 	// Create hasher and hash data
 	hash := crypto.SHA256
 	hashed := sha256.Sum256(payload)
@@ -85,35 +98,47 @@ func (ccs *CliCryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signa
 	return signatures, nil
 }
 
-// generateKeyAndCert deals with the creation and storage of a key and returns a
-// PEM encoded cert
-func GenerateKeyAndCert(gun string) ([]byte, []byte, error) {
-	// Generates a new RSA key
-	key, err := rsa.GenerateKey(rand.Reader, 2048)
-	if err != nil {
-		return nil, nil, fmt.Errorf("could not generate private key: %v", err)
-	}
+// Create in a root crypto service is not implemented
+func (rcs *RootCryptoService) Create(role string) (*data.PublicKey, error) {
+	return nil, errors.New("create on a root key filestore is not implemented")
+}
 
-	// Creates a new Certificate template. We need the certificate to calculate the
-	// TUF-compliant keyID
-	//TODO (diogo): We're hardcoding the Organization to be the GUN. Probably want to
-	// change it
-	template := trustmanager.NewCertificate(gun, gun)
-	derBytes, err := x509.CreateCertificate(rand.Reader, template, template, key.Public(), key)
-	if err != nil {
-		return nil, nil, fmt.Errorf("failed to generate the certificate for key: %v", err)
-	}
+// Sign returns the signatures for data with the given root Key ID, falling back
+// if not rootKeyID is found
+// TODO(diogo): This code has 1 line change from the Sign from Crypto service. DRY it up.
+func (ccs *RootCryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signature, error) {
+	// Create hasher and hash data
+	hash := crypto.SHA256
+	hashed := sha256.Sum256(payload)
 
-	// Encode the new certificate into PEM
-	cert, err := x509.ParseCertificate(derBytes)
-	if err != nil {
-		return nil, nil, fmt.Errorf("failed to generate the certificate for key: %v", err)
-	}
+	signatures := make([]data.Signature, 0, len(keyIDs))
+	for _, fingerprint := range keyIDs {
+		// Read PrivateKey from file
+		privPEMBytes, err := ccs.rootKeyStore.GetDecrypted(fingerprint, ccs.passphrase)
+		if err != nil {
+			// TODO(diogo): This error should be returned to the user in someway
+			continue
+		}
 
-	pemKey, err := trustmanager.KeyToPEM(key)
-	if err != nil {
-		return nil, nil, fmt.Errorf("failed to generate the certificate for key: %v", err)
-	}
+		// Parse PrivateKey
+		privKeyBytes, _ := pem.Decode(privPEMBytes)
+		privKey, err := x509.ParsePKCS1PrivateKey(privKeyBytes.Bytes)
+		if err != nil {
+			return nil, err
+		}
 
-	return pemKey, trustmanager.CertToPEM(cert), nil
+		// Sign the data
+		sig, err := rsa.SignPKCS1v15(rand.Reader, privKey, hash, hashed[:])
+		if err != nil {
+			return nil, err
+		}
+
+		// Append signatures to result array
+		signatures = append(signatures, data.Signature{
+			KeyID:     fingerprint,
+			Method:    "RSASSA-PKCS1-V1_5-SIGN",
+			Signature: sig[:],
+		})
+	}
+	return signatures, nil
 }

@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	"net/http"
 	"net/url"
 	"path"
 
@@ -61,6 +62,9 @@ func (s HTTPStore) GetMeta(name string, size int64) (json.RawMessage, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if resp.StatusCode == http.StatusNotFound {
+		return nil, &ErrMetaNotFound{role: name}
+	}
 	b := io.LimitReader(resp.Body, int64(size))
 	body, err := ioutil.ReadAll(b)
 

@@ -1,7 +1,5 @@
 package trustmanager
 
-import "errors"
-
 const (
 	keyExtension = "key"
 )
@@ -43,7 +41,7 @@ func (s *KeyFileStore) AddEncrypted(fileName string, pemKey []byte, passphrase s
 func (s *KeyFileStore) GetDecrypted(fileName string, passphrase string) ([]byte, error) {
 	keyBytes, err := s.Get(fileName)
 	if err != nil {
-		return nil, errors.New("could not retrieve private key material")
+		return nil, err
 	}
 
 	// Gets an unencrypted PrivateKey.
