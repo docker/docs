@@ -53,7 +53,7 @@ func (trust *RufusSigner) Sign(keyIDs []string, toSign []byte) ([]data.Signature
 		}
 		signatures = append(signatures, data.Signature{
 			KeyID:     sig.KeyID.ID,
-			Method:    "TODOALGORITHM",
+			Method:    sig.Algorithm,
 			Signature: sig.Content,
 		})
 	}
@@ -67,7 +67,7 @@ func (trust *RufusSigner) Create(role string) (*data.PublicKey, error) {
 		return nil, err
 	}
 	//TODO(mccauley): Update API to return algorithm and/or take it as a param
-	public := data.NewPublicKey("TODOALGORITHM", publicKey.PublicKey)
+	public := data.NewPublicKey(publicKey.Algorithm, publicKey.PublicKey)
 	return public, nil
 }
 
@@ -76,12 +76,12 @@ func (trust *RufusSigner) PublicKeys(keyIDs ...string) (map[string]*data.PublicK
 	publicKeys := make(map[string]*data.PublicKey)
 	for _, ID := range keyIDs {
 		keyID := pb.KeyID{ID: ID}
-		sig, err := trust.kmClient.GetKeyInfo(context.Background(), &keyID)
+		public, err := trust.kmClient.GetKeyInfo(context.Background(), &keyID)
 		if err != nil {
 			return nil, err
 		}
-		publicKeys[sig.KeyID.ID] =
-			data.NewPublicKey("TODOALGORITHM", sig.PublicKey)
+		publicKeys[public.KeyID.ID] =
+			data.NewPublicKey(public.Algorithm, public.PublicKey)
 	}
 	return publicKeys, nil
 }
