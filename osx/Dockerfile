@@ -31,9 +31,11 @@ RUN curl -fsSL -o /docker.tgz https://get.docker.com/builds/Darwin/x86_64/docker
 
 ENV DOCKER_MACHINE_VERSION 0.3.0
 RUN curl -fsSL -o /docker-machine https://github.com/docker/machine/releases/download/v$DOCKER_MACHINE_VERSION/docker-machine_darwin-amd64
+RUN chmod +x /docker-machine
 
 ENV DOCKER_COMPOSE_VERSION 1.3.1
 RUN curl -fsSL -o /docker-compose https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-Darwin-x86_64
+RUN chmod +x /docker-compose
 
 ENV BOOT2DOCKER_ISO_VERSION $DOCKER_VERSION
 RUN curl -fsSL -o /boot2docker.iso https://github.com/boot2docker/boot2docker/releases/download/v${BOOT2DOCKER_ISO_VERSION}/boot2docker.iso
@@ -68,8 +70,9 @@ RUN cd /mpkg/docker.pkg && \
 	mkdir rootfs && \
 	cd rootfs && \
 	tar xvzf /docker.tgz && \
-  cp /docker-machine . && \
-  cp /docker-compose . && \
+  mv /docker-machine usr/local/bin/ && \
+  mv /docker-compose usr/local/bin/ && \
+  ls -al /usr/local/bin/ && \
 	find . | cpio -o --format odc | gzip -c > ../Payload && \
 	mkbom . ../Bom && \
 	sed -i \
@@ -97,17 +100,17 @@ RUN cd /mpkg/boot2dockeriso.pkg && \
 	cd .. && \
 	rm -rf ./rootfs
 
-# dockershell.pkg
-RUN cd /mpkg/dockershell.pkg && \
+# dockercliapp.pkg
+RUN cd /mpkg/dockercliapp.pkg && \
 	mkdir ./rootfs && \
 	cd ./rootfs && \
-	mv /mpkg/Docker\ Shell.app . && \
+	mv /mpkg/Docker\ CLI.app . && \
 	find . | cpio -o --format odc | gzip -c > ../Payload && \
 	mkbom . ../Bom && \
 	sed -i \
-		-e "s/%DOCKERSHELL_NUMBER_OF_FILES%/`find . | wc -l`/g" \
-		-e "s/%DOCKERSHELL_INSTALL_KBYTES%/`du -sk | cut -f1`/g" \
-		-e "s/%DOCKERSHELL_VERSION%/$INSTALLER_VERSION/g" \
+		-e "s/%DOCKERCLIAPP_NUMBER_OF_FILES%/`find . | wc -l`/g" \
+		-e "s/%DOCKERCLIAPP_INSTALL_KBYTES%/`du -sk | cut -f1`/g" \
+		-e "s/%DOCKERCLIAPP_VERSION%/$INSTALLER_VERSION/g" \
 		../PackageInfo /mpkg/Distribution && \
 	cd .. && \
 	rm -rf ./rootfs
