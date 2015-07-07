@@ -40,6 +40,9 @@ RUN chmod +x /docker-compose
 ENV BOOT2DOCKER_ISO_VERSION $DOCKER_VERSION
 RUN curl -fsSL -o /boot2docker.iso https://github.com/boot2docker/boot2docker/releases/download/v${BOOT2DOCKER_ISO_VERSION}/boot2docker.iso
 
+ENV KITEMATIC_VERSION 0.7.4
+RUN curl -fsSL -o /kitematic.zip https://github.com/kitematic/kitematic/releases/download/v$KITEMATIC_VERSION/Kitematic-$KITEMATIC_VERSION-Mac.zip
+
 ENV INSTALLER_VERSION $DOCKER_VERSION
 
 # Start building package
@@ -111,6 +114,22 @@ RUN cd /mpkg/dockercliapp.pkg && \
 		-e "s/%DOCKERCLIAPP_NUMBER_OF_FILES%/`find . | wc -l`/g" \
 		-e "s/%DOCKERCLIAPP_INSTALL_KBYTES%/`du -sk | cut -f1`/g" \
 		-e "s/%DOCKERCLIAPP_VERSION%/$INSTALLER_VERSION/g" \
+		../PackageInfo /mpkg/Distribution && \
+	cd .. && \
+	rm -rf ./rootfs
+
+# kitematicapp.pkg
+RUN cd /mpkg/kitematicapp.pkg && \
+	mkdir ./rootfs && \
+	cd ./rootfs && \
+  7z x /kitematic.zip && \
+  ls -al . && \
+	find . | cpio -o --format odc | gzip -c > ../Payload && \
+	mkbom . ../Bom && \
+	sed -i \
+		-e "s/%KITEMATICAPP_NUMBER_OF_FILES%/`find . | wc -l`/g" \
+		-e "s/%KITEMATICAPP_INSTALL_KBYTES%/`du -sk | cut -f1`/g" \
+		-e "s/%KITEMATICAPP_VERSION%/$INSTALLER_VERSION/g" \
 		../PackageInfo /mpkg/Distribution && \
 	cd .. && \
 	rm -rf ./rootfs

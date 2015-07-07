@@ -12,8 +12,11 @@
 'choiceBoot2DockerISO_title' = 'Boot2Docker ISO';
 'choiceBoot2DockerISO_msg' = 'Installs the boot2docker.iso into /usr/local/share/';
 
-'choiceDockerCLIApp_title' = 'Docker CLI Quick-start applet';
-'choiceDockerCLIApp_msg' = 'Installs the Docker CLI Quick-start applet into /Applications/';
+'choiceDockerCLIAPP_title' = 'Docker CLI Quick-start applet';
+'choiceDockerCLIAPP_msg' = 'Installs the Docker CLI Quick-start applet into /Applications/';
+
+'choiceKitematicAPP_title' = 'Kitematic';
+'choiceKitematicAPP_msg' = 'Installs Kitematic into /Applications/';
 
 'choiceVBox_title' = 'Oracle VM VirtualBox %VBOX_VERSION%';
 'choiceVBox_msg' = 'Installs the Oracle VM VirtualBox application into /Applications.';
