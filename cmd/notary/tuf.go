@@ -122,8 +122,16 @@ func tufList(cmd *cobra.Command, args []string) {
 		fatalf(err.Error())
 	}
 
-	// TODO(diogo): Parse Targets and print them
-	_, _ = repo.ListTargets()
+	// Retreive the remote list of signed targets
+	targetList, err := repo.ListTargets()
+	if err != nil {
+		fatalf(err.Error())
+	}
+
+	// Print all the available targets
+	for _, t := range targetList {
+		fmt.Println(t.Name, " ", t.Hashes["sha256"], " ", t.Length)
+	}
 }
 
 func tufLookup(cmd *cobra.Command, args []string) {

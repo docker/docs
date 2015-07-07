@@ -18,9 +18,9 @@ import (
 
 const configFileName string = "config"
 const configPath string = ".docker/trust/"
-const trustDir string = configPath + "trusted_certificates/"
-const privDir string = configPath + "private/"
-const rootKeysDir string = configPath + "root_keys/"
+const trustDir string = "trusted_certificates/"
+const privDir string = "private/"
+const rootKeysDir string = "root_keys/"
 
 var rawOutput bool
 var nClient *notaryclient.NotaryClient
@@ -58,12 +58,11 @@ func init() {
 	}
 
 	// Set up the defaults for our config
-	viper.SetDefault("trustDir", path.Join(homeDir, path.Dir(trustDir)))
+	viper.SetDefault("baseTrustDir", path.Join(homeDir, path.Dir(configPath)))
 
 	// Get the final value for the CA directory
-	finalTrustDir := viper.GetString("trustDir")
-	finalPrivDir := viper.GetString("privDir")
-	finalRootKeysDir := viper.GetString("rootKeysDir")
+	finalTrustDir := path.Join(viper.GetString("baseTrustDir"), trustDir)
+	finalPrivDir := path.Join(viper.GetString("baseTrustDir"), privDir)
 
 	// Load all CAs that aren't expired and don't use SHA1
 	caStore, err = trustmanager.NewX509FilteredFileStore(finalTrustDir, func(cert *x509.Certificate) bool {
@@ -74,7 +73,7 @@ func init() {
 			cert.SignatureAlgorithm != x509.ECDSAWithSHA1
 	})
 	if err != nil {
-		fatalf("could not create X509FileStore: %v", err)
+		fatalf("could not create CA X509FileStore: %v", err)
 	}
 
 	// Load all individual (nonCA) certificates that aren't expired and don't use SHA1
@@ -86,20 +85,18 @@ func init() {
 			cert.SignatureAlgorithm != x509.ECDSAWithSHA1
 	})
 	if err != nil {
-		fatalf("could not create X509FileStore: %v", err)
+		fatalf("could not create Certificate X509FileStore: %v", err)
 	}
 
 	privKeyStore, err = trustmanager.NewKeyFileStore(finalPrivDir)
 	if err != nil {
-		fatalf("could not create FileStore: %v", err)
+		fatalf("could not create KeyFileStore: %v", err)
 	}
 
-	// TODO(diogo): Client should receive the config
-	nClient, err = notaryclient.NewClient(finalTrustDir, finalRootKeysDir)
+	nClient, err = notaryclient.NewClient(viper.GetString("baseTrustDir"))
 	if err != nil {
-		fatalf("could not create FileStore: %v", err)
+		fatalf("could not create Notary Client: %v", err)
 	}
-
 }
 
 func main() {

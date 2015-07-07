@@ -10,7 +10,6 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
-	"path"
 	"path/filepath"
 	"time"
 
@@ -21,8 +20,6 @@ import (
 	"github.com/endophage/gotuf/keys"
 	"github.com/endophage/gotuf/signed"
 	"github.com/endophage/gotuf/store"
-
-	"github.com/spf13/viper"
 )
 
 // Default paths should end with a '/' so directory creation works correctly
@@ -55,6 +52,7 @@ type Repository interface {
 }
 
 type NotaryClient struct {
+	baseDir          string
 	caStore          trustmanager.X509Store
 	certificateStore trustmanager.X509Store
 	rootKeyStore     trustmanager.EncryptedFileStore
@@ -63,6 +61,7 @@ type NotaryClient struct {
 type NotaryRepository struct {
 	Gun              string
 	baseURL          string
+	tufRepoPath      string
 	transport        http.RoundTripper
 	signer           *signed.Signer
 	tufRepo          *tuf.TufRepo
@@ -97,8 +96,11 @@ func NewTarget(targetName string, targetPath string) (*Target, error) {
 // NewClient is a helper method that returns a new notary Client, given a config
 // file. It makes the assumption that the base directory for the config file will
 // be the place where trust information is being cached locally.
-func NewClient(trustDir, rootKeysDir string) (*NotaryClient, error) {
-	nClient := &NotaryClient{}
+func NewClient(baseDir string) (*NotaryClient, error) {
+	trustDir := filepath.Join(baseDir, trustDir)
+	rootKeysDir := filepath.Join(baseDir, rootKeysDir)
+
+	nClient := &NotaryClient{baseDir: baseDir}
 
 	err := nClient.loadKeys(trustDir, rootKeysDir)
 	if err != nil {
@@ -183,7 +185,7 @@ func (r *NotaryRepository) Initialize(rootKey *data.PublicKey) error {
 	r.tufRepo = tuf.NewTufRepo(kdb, r.signer)
 
 	r.fileStore, err = store.NewFilesystemStore(
-		path.Join(viper.GetString("tufDir")),
+		r.tufRepoPath,
 		"metadata",
 		"json",
 		"targets",
@@ -232,12 +234,13 @@ func (r *NotaryRepository) ListTargets() ([]*Target, error) {
 		return nil, err
 	}
 
-	// TODO(diogo): return hashes
+	targetList := make([]*Target, 0)
 	for name, meta := range r.tufRepo.Targets["targets"].Signed.Targets {
-		fmt.Println(name, " ", meta.Hashes["sha256"], " ", meta.Length)
+		target := &Target{Name: name, Hashes: meta.Hashes, Length: meta.Length}
+		targetList = append(targetList, target)
 	}
 
-	return nil, nil
+	return targetList, nil
 }
 
 // GetTargetByName returns a target given a name
@@ -299,7 +302,7 @@ func (r *NotaryRepository) Publish() error {
 
 func (r *NotaryRepository) bootstrapRepo() error {
 	fileStore, err := store.NewFilesystemStore(
-		path.Join(viper.GetString("tufDir")),
+		r.tufRepoPath,
 		"metadata",
 		"json",
 		"targets",
@@ -415,7 +418,7 @@ func (r *NotaryRepository) ValidateRoot(root *data.Signed) error {
 	for _, fingerprint := range rootSigned.Roles["root"].KeyIDs {
 		// TODO(dlaw): currently assuming only one cert contained in
 		// public key entry. Need to fix when we want to pass in chains.
-		k, _ := pem.Decode([]byte(rootSigned.Keys["kid"].Public()))
+		k, _ := pem.Decode([]byte(rootSigned.Keys[fingerprint].Public()))
 
 		decodedCerts, err := x509.ParseCertificates(k.Bytes)
 		if err != nil {
@@ -508,7 +511,7 @@ func (c *NotaryClient) GenRootKey(passphrase string) (*data.PublicKey, error) {
 
 // GetRepository returns a new repository
 func (c *NotaryClient) GetRepository(gun string, baseURL string, transport http.RoundTripper) (*NotaryRepository, error) {
-	privKeyStore, err := trustmanager.NewKeyFileStore(viper.GetString("privDir"))
+	privKeyStore, err := trustmanager.NewKeyFileStore(filepath.Join(c.baseDir, privDir))
 	if err != nil {
 		return nil, err
 	}
@@ -517,6 +520,7 @@ func (c *NotaryClient) GetRepository(gun string, baseURL string, transport http.
 
 	return &NotaryRepository{Gun: gun,
 		baseURL:          baseURL,
+		tufRepoPath:      filepath.Join(c.baseDir, tufDir),
 		transport:        transport,
 		signer:           signer,
 		caStore:          c.caStore,
