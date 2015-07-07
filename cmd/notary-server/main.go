@@ -33,7 +33,7 @@ var configFile string
 
 func init() {
 	// set default log level to Error
-	viper.SetDefault("logging.level", 2)
+	viper.SetDefault("logging", map[string]interface{}{"level": 2})
 
 	// Setup flags
 	flag.StringVar(&configFile, "config", "", "Path to configuration file")
