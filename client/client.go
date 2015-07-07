@@ -12,7 +12,6 @@ import (
 	"os"
 	"path"
 	"path/filepath"
-	"strings"
 	"time"
 
 	"github.com/docker/notary/trustmanager"
@@ -56,7 +55,6 @@ type Repository interface {
 }
 
 type NotaryClient struct {
-	configFile       string
 	caStore          trustmanager.X509Store
 	certificateStore trustmanager.X509Store
 	rootKeyStore     trustmanager.EncryptedFileStore
@@ -99,9 +97,10 @@ func NewTarget(targetName string, targetPath string) (*Target, error) {
 // NewClient is a helper method that returns a new notary Client, given a config
 // file. It makes the assumption that the base directory for the config file will
 // be the place where trust information is being cached locally.
-func NewClient(configFile string) (*NotaryClient, error) {
-	nClient := &NotaryClient{configFile: configFile}
-	err := nClient.loadKeys()
+func NewClient(trustDir, rootKeysDir string) (*NotaryClient, error) {
+	nClient := &NotaryClient{}
+
+	err := nClient.loadKeys(trustDir, rootKeysDir)
 	if err != nil {
 		return nil, err
 	}
@@ -524,36 +523,9 @@ func (c *NotaryClient) GetRepository(gun string, baseURL string, transport http.
 		certificateStore: c.certificateStore}, nil
 }
 
-func (c *NotaryClient) loadKeys() error {
-	filename := filepath.Base(c.configFile)
-	ext := filepath.Ext(c.configFile)
-	basePath := filepath.Dir(c.configFile)
-
-	viper.SetConfigType(strings.TrimPrefix(ext, "."))
-	viper.SetConfigName(strings.TrimSuffix(filename, ext))
-	viper.AddConfigPath(basePath)
-
-	// Find and read the config file
-	err := viper.ReadInConfig()
-	if err != nil {
-		// Ignore if the configuration file doesn't exist, we can use the defaults
-		if !os.IsNotExist(err) {
-			return err
-		}
-	}
-
-	// Set up the defaults for our config
-	viper.SetDefault("trustDir", path.Join(basePath, path.Dir(trustDir)))
-	viper.SetDefault("privDir", path.Join(basePath, path.Dir(privDir)))
-	viper.SetDefault("tufDir", path.Join(basePath, path.Dir(tufDir)))
-	viper.SetDefault("rootKeysDir", path.Join(basePath, path.Dir(rootKeysDir)))
-
-	// Get the final value for the CA directory
-	finalTrustDir := viper.GetString("trustDir")
-	finalRootKeysDir := viper.GetString("rootKeysDir")
-
+func (c *NotaryClient) loadKeys(trustDir, rootKeysDir string) error {
 	// Load all CAs that aren't expired and don't use SHA1
-	c.caStore, err = trustmanager.NewX509FilteredFileStore(finalTrustDir, func(cert *x509.Certificate) bool {
+	caStore, err := trustmanager.NewX509FilteredFileStore(trustDir, func(cert *x509.Certificate) bool {
 		return cert.IsCA && cert.BasicConstraintsValid && cert.SubjectKeyId != nil &&
 			time.Now().Before(cert.NotAfter) &&
 			cert.SignatureAlgorithm != x509.SHA1WithRSA &&
@@ -565,7 +537,7 @@ func (c *NotaryClient) loadKeys() error {
 	}
 
 	// Load all individual (non-CA) certificates that aren't expired and don't use SHA1
-	c.certificateStore, err = trustmanager.NewX509FilteredFileStore(finalTrustDir, func(cert *x509.Certificate) bool {
+	certificateStore, err := trustmanager.NewX509FilteredFileStore(trustDir, func(cert *x509.Certificate) bool {
 		return !cert.IsCA &&
 			time.Now().Before(cert.NotAfter) &&
 			cert.SignatureAlgorithm != x509.SHA1WithRSA &&
@@ -576,10 +548,14 @@ func (c *NotaryClient) loadKeys() error {
 		return err
 	}
 
-	c.rootKeyStore, err = trustmanager.NewKeyFileStore(finalRootKeysDir)
+	rootKeyStore, err := trustmanager.NewKeyFileStore(rootKeysDir)
 	if err != nil {
 		return err
 	}
+
+	c.caStore = caStore
+	c.certificateStore = certificateStore
+	c.rootKeyStore = rootKeyStore
 
 	return nil
 }

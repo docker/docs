@@ -20,6 +20,7 @@ const configFileName string = "config"
 const configPath string = ".docker/trust/"
 const trustDir string = configPath + "trusted_certificates/"
 const privDir string = configPath + "private/"
+const rootKeysDir string = configPath + "root_keys/"
 
 var rawOutput bool
 var nClient *notaryclient.NotaryClient
@@ -46,7 +47,6 @@ func init() {
 	viper.SetConfigName(configFileName)
 	viper.AddConfigPath(path.Join(homeDir, path.Dir(configPath)))
 	viper.SetConfigType("json")
-	configFilePath := path.Join(homeDir, path.Dir(configPath)) + "/" + configFileName + ".json"
 
 	// Find and read the config file
 	err = viper.ReadInConfig()
@@ -63,6 +63,7 @@ func init() {
 	// Get the final value for the CA directory
 	finalTrustDir := viper.GetString("trustDir")
 	finalPrivDir := viper.GetString("privDir")
+	finalRootKeysDir := viper.GetString("rootKeysDir")
 
 	// Load all CAs that aren't expired and don't use SHA1
 	caStore, err = trustmanager.NewX509FilteredFileStore(finalTrustDir, func(cert *x509.Certificate) bool {
@@ -94,7 +95,7 @@ func init() {
 	}
 
 	// TODO(diogo): Client should receive the config
-	nClient, err = notaryclient.NewClient(configFilePath)
+	nClient, err = notaryclient.NewClient(finalTrustDir, finalRootKeysDir)
 	if err != nil {
 		fatalf("could not create FileStore: %v", err)
 	}
