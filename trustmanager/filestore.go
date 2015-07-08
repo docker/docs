@@ -145,14 +145,25 @@ func (f *SimpleFileStore) list(path string) []string {
 
 // genFilePath returns the full path with extension given a file name
 func (f *SimpleFileStore) genFilePath(name string) string {
-	fileName := fmt.Sprintf("%s.%s", name, f.fileExt)
+	fileName := f.genFileName(name)
 	return filepath.Join(f.baseDir, fileName)
 }
 
-func (f *SimpleFileStore) Link(src, dst string) error {
-	return os.Link(
-		f.genFilePath(src),
-		f.genFilePath(dst),
+// genFileName returns the name using the right extension
+func (f *SimpleFileStore) genFileName(name string) string {
+	return fmt.Sprintf("%s.%s", name, f.fileExt)
+}
+
+// Link creates a symlink beetween the ID of the certificate used by a repository
+// and the ID of the root key that is being used.
+// We use full path for the source and local for the destination to use relative
+// path for the symlink
+func (f *SimpleFileStore) Link(oldname, newname string) error {
+	fmt.Println("Src: ", f.genFileName(oldname))
+	fmt.Println("dst: ", f.genFilePath(newname))
+	return os.Symlink(
+		f.genFileName(oldname),
+		f.genFilePath(newname),
 	)
 }
 
