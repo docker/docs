@@ -25,10 +25,12 @@ import (
 )
 
 // Default paths should end with a '/' so directory creation works correctly
-const trustDir string = "/trusted_certificates/"
-const privDir string = "/private/"
-const tufDir string = "/tuf/"
-const rootKeysDir string = "/root_keys/"
+const (
+	trustDir    string = "/trusted_certificates/"
+	privDir     string = "/private/"
+	tufDir      string = "/tuf/"
+	rootKeysDir string = privDir + "/root_keys/"
+)
 const rsaKeySize int = 2048
 
 // ErrRepositoryNotExist gets returned when trying to make an action over a repository
@@ -432,6 +434,7 @@ func (r *NotaryRepository) ValidateRoot(root *data.Signed) error {
 	if err != nil {
 		return err
 	}
+
 	certs := make(map[string]*data.PublicKey)
 	for _, fingerprint := range rootSigned.Roles["root"].KeyIDs {
 		// TODO(dlaw): currently assuming only one cert contained in
@@ -442,10 +445,10 @@ func (r *NotaryRepository) ValidateRoot(root *data.Signed) error {
 		if err != nil {
 			continue
 		}
-
 		// TODO(diogo): Assuming that first certificate is the leaf-cert. Need to
 		// iterate over all decodedCerts and find a non-CA one (should be the last).
 		leafCert := decodedCerts[0]
+
 		leafID := trustmanager.FingerprintCert(leafCert)
 
 		// Check to see if there is an exact match of this certificate.
