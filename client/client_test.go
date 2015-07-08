@@ -7,7 +7,6 @@ import (
 	"testing"
 
 	"github.com/docker/notary/trustmanager"
-	"github.com/endophage/gotuf/data"
 )
 
 // TestInitRepo runs through the process of initializing a repository and makes
@@ -85,7 +84,7 @@ func TestInitRepo(t *testing.T) {
 		t.Fatalf("unexpected number of certificates (%d)", len(certificates))
 	}
 
-	certID := data.NewPublicKey("RSA", trustmanager.CertToPEM(certificates[0])).ID()
+	certID := trustmanager.FingerprintCert(certificates[0])
 
 	actualDest, err := os.Readlink(filepath.Join(tempBaseDir, "private", "root_keys", certID+".key"))
 	if err != nil {
