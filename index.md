@@ -42,7 +42,7 @@ DTR is built on [version 2 of the Docker registry](https://github.com/docker/dis
 >   **Important**: DTR must be used with the current version of the commercially
 >   supported Docker Engine. You must install this version of Docker before
 >   installing DTR. For instructions on accessing and installing commercially
->   supported Docker Engine, visit the [install page] (http://docs.docker.com/docker-hub-enterprise/install/#download-the-commercially-supported-docker-engine-installation-script).
+>   supported Docker Engine, visit the [install page] (http://docs.docker.com/docker-trusted-registry/install/#download-the-commercially-supported-docker-engine-installation-script).
 
 ## Available Documentation
 
