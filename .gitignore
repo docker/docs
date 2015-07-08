@@ -1,1 +1,3 @@
 DockerToolbox.pkg
+windows/Output/**
+windows/bundle/**
