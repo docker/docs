@@ -1,12 +1,15 @@
 package client
 
 import (
+	"encoding/json"
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
 
 	"github.com/docker/notary/trustmanager"
+	"github.com/endophage/gotuf/data"
 )
 
 // TestInitRepo runs through the process of initializing a repository and makes
@@ -100,16 +103,70 @@ func TestInitRepo(t *testing.T) {
 		t.Fatal("missing trusted certificate")
 	}
 
-	// Check that tuf metadata files were created
+	// Sanity check the TUF metadata files. Verify that they exist, the JSON is
+	// well-formed, and the signatures exist. For the root.json file, also check
+	// that the root, snapshot, and targets key IDs are present.
 	expectedTUFMetadataFiles := []string{
 		filepath.Join("tuf", gun, "metadata", "root.json"),
 		filepath.Join("tuf", gun, "metadata", "snapshot.json"),
 		filepath.Join("tuf", gun, "metadata", "targets.json"),
 	}
 	for _, filename := range expectedTUFMetadataFiles {
-		_, err := os.Stat(filepath.Join(tempBaseDir, filename))
+		fullPath := filepath.Join(tempBaseDir, filename)
+		_, err := os.Stat(fullPath)
 		if err != nil {
 			t.Fatalf("missing TUF metadata file: %s", filename)
+		}
+
+		jsonBytes, err := ioutil.ReadFile(fullPath)
+		if err != nil {
+			t.Fatalf("error reading TUF metadata file %s: %s", filename, err)
+		}
+
+		var decoded data.Signed
+		if err := json.Unmarshal(jsonBytes, &decoded); err != nil {
+			t.Fatalf("error parsing TUF metadata file %s: %s", filename, err)
+		}
+
+		if len(decoded.Signatures) != 1 {
+			t.Fatalf("incorrect number of signatures in TUF metadata file %s", filename)
+		}
+
+		if decoded.Signatures[0].KeyID == "" || decoded.Signatures[0].Method == "" || len(decoded.Signatures[0].Signature) == 0 {
+			t.Fatalf("bad content in signature on TUF metadata file %s", filename)
+		}
+
+		// Special case for root.json: also check that the signed
+		// content for keys and roles
+		if strings.HasSuffix(filename, "root.json") {
+			var decodedRoot data.Root
+			if err := json.Unmarshal(decoded.Signed, &decodedRoot); err != nil {
+				t.Fatalf("error parsing root.json signed section: %s", err)
+			}
+
+			if decodedRoot.Type != "Root" {
+				t.Fatal("_type mismatch in root.json")
+			}
+
+			if decodedRoot.Type != "Root" {
+				t.Fatal("_type mismatch in root.json")
+			}
+
+			// Expect 4 keys in the Keys map: root, targets, snapshot, timestamp
+			if len(decodedRoot.Keys) != 4 {
+				t.Fatal("wrong number of keys in root.json")
+			}
+
+			roleCount := 0
+			for role := range decodedRoot.Roles {
+				roleCount++
+				if role != "root" && role != "snapshot" && role != "targets" && role != "timestamp" {
+					t.Fatalf("unexpected role %s in root.json", role)
+				}
+			}
+			if roleCount != 4 {
+				t.Fatalf("wrong number of roles (%d) in root.json", roleCount)
+			}
 		}
 	}
 }
