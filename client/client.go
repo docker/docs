@@ -66,7 +66,7 @@ type NotaryClient struct {
 	baseDir          string
 	caStore          trustmanager.X509Store
 	certificateStore trustmanager.X509Store
-	rootKeyStore     trustmanager.KeyFileStore
+	rootKeyStore     *trustmanager.KeyFileStore
 }
 
 type NotaryRepository struct {
@@ -77,7 +77,7 @@ type NotaryRepository struct {
 	signer           *signed.Signer
 	tufRepo          *tuf.TufRepo
 	fileStore        store.MetadataStore
-	privKeyStore     trustmanager.KeyFileStore
+	privKeyStore     *trustmanager.KeyFileStore
 	caStore          trustmanager.X509Store
 	certificateStore trustmanager.X509Store
 }
@@ -589,13 +589,14 @@ func (c *NotaryClient) GetRepository(gun string, baseURL string, transport http.
 		return nil, err
 	}
 
-	signer := signed.NewSigner(NewCryptoService(gun, *privKeyStore))
+	signer := signed.NewSigner(NewCryptoService(gun, privKeyStore))
 
 	return &NotaryRepository{Gun: gun,
 		baseURL:          baseURL,
 		tufRepoPath:      filepath.Join(c.baseDir, tufDir, gun),
 		transport:        transport,
 		signer:           signer,
+		privKeyStore:     privKeyStore,
 		caStore:          c.caStore,
 		certificateStore: c.certificateStore}, nil
 }
@@ -619,13 +620,14 @@ func (c *NotaryClient) InitRepository(gun string, baseURL string, transport http
 		return nil, err
 	}
 
-	signer := signed.NewSigner(NewCryptoService(gun, *privKeyStore))
+	signer := signed.NewSigner(NewCryptoService(gun, privKeyStore))
 
 	nRepo := &NotaryRepository{Gun: gun,
 		baseURL:          baseURL,
 		tufRepoPath:      filepath.Join(c.baseDir, tufDir, gun),
 		transport:        transport,
 		signer:           signer,
+		privKeyStore:     privKeyStore,
 		caStore:          c.caStore,
 		certificateStore: c.certificateStore}
 
@@ -669,7 +671,7 @@ func (c *NotaryClient) loadKeys(trustDir, rootKeysDir string) error {
 
 	c.caStore = caStore
 	c.certificateStore = certificateStore
-	c.rootKeyStore = *rootKeyStore
+	c.rootKeyStore = rootKeyStore
 
 	return nil
 }

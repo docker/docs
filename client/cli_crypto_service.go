@@ -17,22 +17,22 @@ import (
 
 type CryptoService struct {
 	gun      string
-	keyStore trustmanager.KeyFileStore
+	keyStore *trustmanager.KeyFileStore
 }
 
 type RootCryptoService struct {
 	// TODO(diogo): support multiple passphrases per key
 	passphrase   string
-	rootKeyStore trustmanager.KeyFileStore
+	rootKeyStore *trustmanager.KeyFileStore
 }
 
 // NewCryptoService returns an instance of CryptoService
-func NewCryptoService(gun string, keyStore trustmanager.KeyFileStore) *CryptoService {
+func NewCryptoService(gun string, keyStore *trustmanager.KeyFileStore) *CryptoService {
 	return &CryptoService{gun: gun, keyStore: keyStore}
 }
 
 // NewRootCryptoService returns an instance of CryptoService
-func NewRootCryptoService(rootKeyStore trustmanager.KeyFileStore, passphrase string) *RootCryptoService {
+func NewRootCryptoService(rootKeyStore *trustmanager.KeyFileStore, passphrase string) *RootCryptoService {
 	return &RootCryptoService{rootKeyStore: rootKeyStore, passphrase: passphrase}
 }
 
