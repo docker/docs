@@ -19,6 +19,7 @@ type FileStore interface {
 	GetPath(fileName string) string
 	ListAll() []string
 	ListDir(directoryName string) []string
+	Link(src, dst string) error
 }
 
 type EncryptedFileStore interface {
@@ -146,6 +147,13 @@ func (f *SimpleFileStore) list(path string) []string {
 func (f *SimpleFileStore) genFilePath(name string) string {
 	fileName := fmt.Sprintf("%s.%s", name, f.fileExt)
 	return filepath.Join(f.baseDir, fileName)
+}
+
+func (f *SimpleFileStore) Link(src, dst string) error {
+	return os.Link(
+		f.genFilePath(src),
+		f.genFilePath(dst),
+	)
 }
 
 // CreateDirectory uses createDirectory to create a chmod 755 Directory

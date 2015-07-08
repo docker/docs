@@ -16,6 +16,7 @@ import (
 	"time"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/docker/notary/client/changelist"
 	"github.com/docker/notary/trustmanager"
 	"github.com/endophage/gotuf"
 	tufclient "github.com/endophage/gotuf/client"
@@ -216,19 +217,24 @@ func (r *NotaryRepository) Initialize(uRootKey UnlockedRootKey, rootKey *data.Pu
 
 // AddTarget adds a new target to the repository, forcing a timestamps check from TUF
 func (r *NotaryRepository) AddTarget(target *Target) error {
-	r.bootstrapRepo()
-
+	cl, err := changelist.NewFileChangelist(filepath.Join(r.tufRepoPath, "changelist"))
+	if err != nil {
+		return err
+	}
 	fmt.Printf("Adding target \"%s\" with sha256 \"%s\" and size %d bytes.\n", target.Name, target.Hashes["sha256"], target.Length)
 
 	meta := data.FileMeta{Length: target.Length, Hashes: target.Hashes}
-	_, err := r.tufRepo.AddTargets("targets", data.Files{target.Name: meta})
+	metaJSON, err := json.Marshal(meta)
 	if err != nil {
 		return err
 	}
 
-	r.snapshot()
-
-	return nil
+	c := changelist.NewTufChange(changelist.ActionCreate, "targets", "target", target.Name, metaJSON)
+	err = cl.Add(c)
+	if err != nil {
+		return err
+	}
+	return cl.Close()
 }
 
 // ListTargets lists all targets for the current repository
@@ -561,7 +567,7 @@ func (c *NotaryClient) GetRepository(gun string, baseURL string, transport http.
 
 	return &NotaryRepository{Gun: gun,
 		baseURL:          baseURL,
-		tufRepoPath:      filepath.Join(c.baseDir, tufDir),
+		tufRepoPath:      filepath.Join(c.baseDir, tufDir, gun),
 		transport:        transport,
 		signer:           signer,
 		caStore:          c.caStore,
@@ -591,7 +597,7 @@ func (c *NotaryClient) InitRepository(gun string, baseURL string, transport http
 
 	nRepo := &NotaryRepository{Gun: gun,
 		baseURL:          baseURL,
-		tufRepoPath:      filepath.Join(c.baseDir, tufDir),
+		tufRepoPath:      filepath.Join(c.baseDir, tufDir, gun),
 		transport:        transport,
 		signer:           signer,
 		caStore:          c.caStore,
@@ -678,4 +684,39 @@ func getRemoteStore(gun string) (store.RemoteStore, error) {
 		"",
 		"key",
 	)
+}
+
+func applyChangelist(repo *tuf.TufRepo, cl changelist.Changelist) error {
+	changes := cl.List()
+	var err error
+	for _, c := range changes {
+		if c.Scope() == "targets" {
+			applyTargetsChange(repo, c)
+		}
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func applyTargetsChange(repo *tuf.TufRepo, c changelist.Change) error {
+	var err error
+	meta := &data.FileMeta{}
+	err = json.Unmarshal(c.Content(), meta)
+	if err != nil {
+		return nil
+	}
+	if c.Action() == changelist.ActionCreate {
+		files := data.Files{c.Path(): *meta}
+		_, err = repo.AddTargets("targets", files)
+	} else if c.Action() == changelist.ActionDelete {
+		err = repo.RemoveTargets("targets", c.Path())
+	}
+	if err != nil {
+		// TODO(endophage): print out rem entries as files that couldn't
+		//                  be added.
+		return err
+	}
+	return nil
 }

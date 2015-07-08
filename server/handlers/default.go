@@ -102,6 +102,13 @@ func GetHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *er
 	tufRole := vars["tufRole"]
 	out, err := store.GetCurrent(gun, tufRole)
 	if err != nil {
+		if _, ok := err.(*storage.ErrNotFound); ok {
+			return &errors.HTTPError{
+				HTTPStatus: http.StatusNotFound,
+				Code:       9999,
+				Err:        err,
+			}
+		}
 		logrus.Errorf("[Notary Server] 500 GET repository: %s, role: %s", gun, tufRole)
 		return &errors.HTTPError{
 			HTTPStatus: http.StatusInternalServerError,
@@ -172,6 +179,13 @@ func GetTimestampHandler(ctx context.Context, w http.ResponseWriter, r *http.Req
 
 	out, err := timestamp.GetOrCreateTimestamp(gun, store, signer)
 	if err != nil {
+		if _, ok := err.(*storage.ErrNoKey); ok {
+			return &errors.HTTPError{
+				HTTPStatus: http.StatusNotFound,
+				Code:       9999,
+				Err:        err,
+			}
+		}
 		return &errors.HTTPError{
 			HTTPStatus: http.StatusInternalServerError,
 			Code:       9999,

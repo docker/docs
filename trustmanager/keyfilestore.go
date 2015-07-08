@@ -53,10 +53,6 @@ func (s *KeyFileStore) GetDecrypted(fileName string, passphrase string) ([]byte,
 	return KeyToPEM(privKey)
 }
 
-func (s *KeyFileStore) Link(base, fileName string) error {
-	keyBytes, err := s.Get(base)
-	if err != nil {
-		return err
-	}
-	return s.Add(fileName, keyBytes)
+func (s *KeyFileStore) Link(src, dst string) error {
+	return s.FileStore.Link(src, dst)
 }

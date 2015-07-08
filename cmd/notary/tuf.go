@@ -9,7 +9,8 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	notaryclient "github.com/docker/notary/client"
-	"github.com/endophage/gotuf/store"
+	"github.com/endophage/gotuf/data"
+	"github.com/endophage/gotuf/keys"
 	"github.com/spf13/cobra"
 )
 
@@ -84,7 +85,10 @@ func tufAdd(cmd *cobra.Command, args []string) {
 	if err != nil {
 		fatalf(err.Error())
 	}
-	repo.AddTarget(target)
+	err = repo.AddTarget(target)
+	if err != nil {
+		fatalf(err.Error())
+	}
 	fmt.Println("Successfully added targets")
 }
 
@@ -188,18 +192,14 @@ func tufRemove(cmd *cobra.Command, args []string) {
 	gun := args[0]
 	targetName := args[1]
 
-	t := &http.Transport{}
-	_, err := nClient.GetRepository(gun, "", t)
-	if err != nil {
-		fatalf(err.Error())
-	}
+	//c := changelist.NewTufChange(changelist.ActionDelete, "targets", "target", targetName, nil)
+	//err := cl.Add(c)
+	//if err != nil {
+	//	fatalf(err.Error())
+	//}
 
 	// TODO(diogo): Implement RemoveTargets in libnotary
 	fmt.Println("Removing target ", targetName, " from ", gun)
-	// repo.RemoveTargets("targets", targetName)
-	// if err != nil {
-	// 	fatalf(err.Error())
-	// }
 }
 
 func verify(cmd *cobra.Command, args []string) {
@@ -243,13 +243,72 @@ func verify(cmd *cobra.Command, args []string) {
 	return
 }
 
-// Use this to initialize remote HTTPStores from the config settings
-func getRemoteStore(gun string) (store.RemoteStore, error) {
-	return store.NewHTTPStore(
-		"https://notary:4443/v2/"+gun+"/_trust/tuf/",
-		"",
-		"json",
-		"",
-		"key",
-	)
+//func generateKeys(kdb *keys.KeyDB, signer *signed.Signer, remote store.RemoteStore) (string, string, string, string, error) {
+//	rawTSKey, err := remote.GetKey("timestamp")
+//	if err != nil {
+//		return "", "", "", "", err
+//	}
+//	fmt.Println("RawKey: ", string(rawTSKey))
+//	parsedKey := &data.TUFKey{}
+//	err = json.Unmarshal(rawTSKey, parsedKey)
+//	if err != nil {
+//		return "", "", "", "", err
+//	}
+//	timestampKey := data.NewPublicKey(parsedKey.Cipher(), parsedKey.Public())
+//
+//	rootKey, err := signer.Create("root")
+//	if err != nil {
+//		return "", "", "", "", err
+//	}
+//	targetsKey, err := signer.Create("targets")
+//	if err != nil {
+//		return "", "", "", "", err
+//	}
+//	snapshotKey, err := signer.Create("snapshot")
+//	if err != nil {
+//		return "", "", "", "", err
+//	}
+//
+//	kdb.AddKey(rootKey)
+//	kdb.AddKey(targetsKey)
+//	kdb.AddKey(snapshotKey)
+//	kdb.AddKey(timestampKey)
+//	return rootKey.ID(), targetsKey.ID(), snapshotKey.ID(), timestampKey.ID(), nil
+//}
+
+func generateRoles(kdb *keys.KeyDB, rootKeyID, targetsKeyID, snapshotKeyID, timestampKeyID string) error {
+	rootRole, err := data.NewRole("root", 1, []string{rootKeyID}, nil, nil)
+	if err != nil {
+		return err
+	}
+	targetsRole, err := data.NewRole("targets", 1, []string{targetsKeyID}, nil, nil)
+	if err != nil {
+		return err
+	}
+	snapshotRole, err := data.NewRole("snapshot", 1, []string{snapshotKeyID}, nil, nil)
+	if err != nil {
+		return err
+	}
+	timestampRole, err := data.NewRole("timestamp", 1, []string{timestampKeyID}, nil, nil)
+	if err != nil {
+		return err
+	}
+
+	err = kdb.AddRole(rootRole)
+	if err != nil {
+		return err
+	}
+	err = kdb.AddRole(targetsRole)
+	if err != nil {
+		return err
+	}
+	err = kdb.AddRole(snapshotRole)
+	if err != nil {
+		return err
+	}
+	err = kdb.AddRole(timestampRole)
+	if err != nil {
+		return err
+	}
+	return nil
 }

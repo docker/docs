@@ -4,10 +4,11 @@
 		"tls_cert_file": "./fixtures/notary.pem",
 		"tls_key_file": "./fixtures/notary.key"
 	},
-	"trust_service":{
-		"type": "local",
-		"hostname": "",
-		"port": ""
+	"trust_service": {
+		"type": "remote",
+		"hostname": "rufus",
+		"port": "7899",
+		"tls_ca_file": "./fixtures/ca.cert"
 	},
 	"logging": {
 		"level": 5
