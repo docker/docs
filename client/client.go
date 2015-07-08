@@ -284,32 +284,58 @@ func (r *NotaryRepository) GetTargetByName(name string) (*Target, error) {
 
 // Publish pushes the local changes in signed material to the remote notary-server
 func (r *NotaryRepository) Publish() error {
-	r.bootstrapRepo()
+	_, err := r.bootstrapClient() // just need the repo to be initialized from remote
+	if err != nil {
+		if _, ok := err.(*store.ErrMetaNotFound); ok {
+			// init or return error to make caller init, then publish again
+		} else {
+			return err
+		}
+	}
+
+	cl, err := changelist.NewFileChangelist(filepath.Join(r.tufRepoPath, "changelist"))
+	if err != nil {
+		return err
+	}
+	applyChangelist(r.tufRepo, cl)
 
 	remote, err := getRemoteStore(r.Gun)
 
-	root, err := r.fileStore.GetMeta("root", 0)
+	root, err := r.tufRepo.SignRoot(data.DefaultExpires("root"), r.signer)
 	if err != nil {
 		return err
 	}
-	targets, err := r.fileStore.GetMeta("targets", 0)
+	targets, err := r.tufRepo.SignTargets("targets", data.DefaultExpires("targets"), nil)
 	if err != nil {
 		return err
 	}
-	snapshot, err := r.fileStore.GetMeta("snapshot", 0)
+	snapshot, err := r.tufRepo.SignSnapshot(data.DefaultExpires("snapshot"), nil)
 	if err != nil {
 		return err
 	}
 
-	err = remote.SetMeta("root", root)
+	rootJSON, err := json.Marshal(root)
 	if err != nil {
 		return err
 	}
-	err = remote.SetMeta("targets", targets)
+	targetsJSON, err := json.Marshal(targets)
 	if err != nil {
 		return err
 	}
-	err = remote.SetMeta("snapshot", snapshot)
+	snapshotJSON, err := json.Marshal(snapshot)
+	if err != nil {
+		return err
+	}
+
+	err = remote.SetMeta("root", rootJSON)
+	if err != nil {
+		return err
+	}
+	err = remote.SetMeta("targets", targetsJSON)
+	if err != nil {
+		return err
+	}
+	err = remote.SetMeta("snapshot", snapshotJSON)
 	if err != nil {
 		return err
 	}
