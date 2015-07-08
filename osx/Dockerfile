@@ -73,8 +73,6 @@ RUN cd /mpkg/docker.pkg && \
 	mkdir rootfs && \
 	cd rootfs && \
 	tar xvzf /docker.tgz && \
-  mv /docker-machine usr/local/bin/ && \
-  mv /docker-compose usr/local/bin/ && \
   ls -al /usr/local/bin/ && \
 	find . | cpio -o --format odc | gzip -c > ../Payload && \
 	mkbom . ../Bom && \
@@ -84,6 +82,40 @@ RUN cd /mpkg/docker.pkg && \
 		-e "s/%DOCKER_VERSION%/$DOCKER_VERSION/g" \
 		-e "s/%DOCKER_MACHINE_VERSION%/$DOCKER_MACHINE_VERSION/g" \
 		-e "s/%DOCKER_COMPOSE_VERSION%/$DOCKER_COMPOSE_VERSION/g" \
+		../PackageInfo /mpkg/Distribution && \
+	cd .. && \
+	rm -rf ./rootfs
+
+# dockermachine.pkg
+RUN cd /mpkg/dockermachine.pkg && \
+	mkdir rootfs && \
+	cd rootfs && \
+  mkdir -p usr/local/bin && \
+  mv /docker-machine usr/local/bin/ && \
+  ls -al /usr/local/bin/ && \
+	find . | cpio -o --format odc | gzip -c > ../Payload && \
+	mkbom . ../Bom && \
+	sed -i \
+		-e "s/%DOCKERMACHINE_NUMBER_OF_FILES%/`find . | wc -l`/g" \
+		-e "s/%DOCKERMACHINE_INSTALL_KBYTES%/`du -sk | cut -f1`/g" \
+		-e "s/%DOCKERMACHINE_VERSION%/$DOCKER_VERSION/g" \
+		../PackageInfo /mpkg/Distribution && \
+	cd .. && \
+	rm -rf ./rootfs
+
+# dockercompose.pkg
+RUN cd /mpkg/dockercompose.pkg && \
+	mkdir rootfs && \
+	cd rootfs && \
+  mkdir -p usr/local/bin && \
+  mv /docker-compose usr/local/bin/ && \
+  ls -al /usr/local/bin/ && \
+	find . | cpio -o --format odc | gzip -c > ../Payload && \
+	mkbom . ../Bom && \
+	sed -i \
+		-e "s/%DOCKERCOMPOSE_NUMBER_OF_FILES%/`find . | wc -l`/g" \
+		-e "s/%DOCKERCOMPOSE_INSTALL_KBYTES%/`du -sk | cut -f1`/g" \
+		-e "s/%DOCKERCOMPOSE_VERSION%/$DOCKER_VERSION/g" \
 		../PackageInfo /mpkg/Distribution && \
 	cd .. && \
 	rm -rf ./rootfs

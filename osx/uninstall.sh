@@ -7,8 +7,8 @@ if [ "${USER}" != "root" ]; then
 	exit 2
 fi
 
-echo "Stopping docker-machine processes..."
-docker-machine rm -f $(docker-machine ls -q)
+echo "Removing dev VirtualBox VM..."
+docker-machine rm -f dev
 
 echo "Removing docker binaries..."
 rm -f /usr/local/bin/docker

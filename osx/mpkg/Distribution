@@ -15,19 +15,19 @@
         <line choice="choiceKitematicAPP"/>
         <line choice="choiceVBox"/>
     </choices-outline>
-    <choice id="choiceDockerCLI" title="choiceDockerCLI_title" description="choiceDockerCLI_msg" start_selected="true" start_enabled="false" start_visible="true">
+    <choice id="choiceDockerCLI" title="choiceDockerCLI_title" description="choiceDockerCLI_msg" start_selected="true" start_enabled="true" start_visible="true">
         <pkg-ref id="io.docker.pkg.docker"/>
     </choice>
-    <choice id="choiceDockerMachineCLI" title="choiceDockerMachineCLI_title" description="choiceDockerCLI_msg" start_selected="true" start_enabled="false" start_visible="true">
-        <pkg-ref id="io.docker.pkg.docker"/>
+    <choice id="choiceDockerMachineCLI" title="choiceDockerMachineCLI_title" description="choiceDockerMachineCLI_msg" start_selected="true" start_enabled="true" start_visible="true">
+        <pkg-ref id="io.docker.pkg.dockermachine"/>
     </choice>
-    <choice id="choiceDockerComposeCLI" title="choiceDockerComposeCLI_title" description="choiceDockerCLI_msg" start_selected="true" start_enabled="false" start_visible="true">
-        <pkg-ref id="io.docker.pkg.docker"/>
+    <choice id="choiceDockerComposeCLI" title="choiceDockerComposeCLI_title" description="choiceDockerComposeCLI_msg" start_selected="true" start_enabled="true" start_visible="true">
+        <pkg-ref id="io.docker.pkg.dockercompose"/>
     </choice>
-    <choice id="choiceBoot2DockerISO" title="choiceBoot2DockerISO_title" description="choiceBoot2DockerISO_msg" start_selected="true" start_enabled="false" start_visible="true">
+    <choice id="choiceBoot2DockerISO" title="choiceBoot2DockerISO_title" description="choiceBoot2DockerISO_msg" start_selected="true" start_enabled="true" start_visible="true">
         <pkg-ref id="io.boot2dockeriso.pkg.boot2dockeriso"/>
     </choice>
-    <choice id="choiceDockerCLIAPP" title="choiceDockerCLIAPP_title" description="choiceDockerCLIAPP_msg" start_selected="true" start_enabled="false" start_visible="true">
+    <choice id="choiceDockerCLIAPP" title="choiceDockerCLIAPP_title" description="choiceDockerCLIAPP_msg" start_selected="true" start_enabled="true" start_visible="true">
         <pkg-ref id="io.docker.pkg.dockercliapp"/>
     </choice>
     <choice id="choiceKitematicAPP" title="choiceKitematicAPP_title" description="choiceKitematicAPP_msg" start_selected="true" start_enabled="true" start_visible="true">
@@ -35,6 +35,14 @@
     </choice>
     <pkg-ref id="io.docker.pkg.docker" auth="Root" version="%DOCKER_VERSION%" installKBytes="%DOCKER_INSTALL_KBYTES%">#docker.pkg</pkg-ref>
     <pkg-ref id="io.docker.pkg.docker">
+        <bundle-version/>
+    </pkg-ref>
+    <pkg-ref id="io.docker.pkg.dockermachine" auth="Root" version="%DOCKERMACHINE_VERSION%" installKBytes="%DOCKERMACHINE_INSTALL_KBYTES%">#dockermachine.pkg</pkg-ref>
+    <pkg-ref id="io.docker.pkg.dockermachine">
+        <bundle-version/>
+    </pkg-ref>
+    <pkg-ref id="io.docker.pkg.dockercompose" auth="Root" version="%DOCKERCOMPOSE_VERSION%" installKBytes="%DOCKERCOMPOSE_INSTALL_KBYTES%">#dockercompose.pkg</pkg-ref>
+    <pkg-ref id="io.docker.pkg.dockercompose">
         <bundle-version/>
     </pkg-ref>
     <pkg-ref id="io.boot2dockeriso.pkg.boot2dockeriso" auth="Root" version="%BOOT2DOCKER_ISO_VERSION%" installKBytes="%BOOT2DOCKER_ISO_INSTALL_KBYTES%">#boot2dockeriso.pkg</pkg-ref>
