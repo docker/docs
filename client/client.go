@@ -138,7 +138,14 @@ func (r *NotaryRepository) Initialize(uRootKey UnlockedRootKey) error {
 	}
 
 	timestampKey := data.NewPublicKey(parsedKey.Cipher(), parsedKey.Public())
-	rootKey := data.NewPublicKey(uRootKey.cipher, uRootKey.pemBytes)
+	//rootKey := data.NewPublicKey(uRootKey.cipher, uRootKey.pemBytes)
+	// Creates and saves a trusted certificate for this store, with this root key
+	rootCert, err := uRootKey.GenerateCertificate(r.Gun)
+	if err != nil {
+		return err
+	}
+	r.certificateStore.AddCert(rootCert)
+	rootKey := data.NewPublicKey("RSA", trustmanager.CertToPEM(rootCert))
 
 	targetsKey, err := r.signer.Create("targets")
 	if err != nil {
@@ -210,13 +217,6 @@ func (r *NotaryRepository) Initialize(uRootKey UnlockedRootKey) error {
 	if err := r.saveMetadata(uRootKey.signer); err != nil {
 		return err
 	}
-
-	// Creates and saves a trusted certificate for this store, with this root key
-	rootCert, err := uRootKey.GenerateCertificate(r.Gun)
-	if err != nil {
-		return err
-	}
-	r.certificateStore.AddCert(rootCert)
 
 	// Creates an empty snapshot
 	return r.snapshot()
@@ -441,7 +441,8 @@ func (r *NotaryRepository) ValidateRoot(root *data.Signed) error {
 		// TODO(dlaw): currently assuming only one cert contained in
 		// public key entry. Need to fix when we want to pass in chains.
 		k, _ := pem.Decode([]byte(rootSigned.Keys[fingerprint].Public()))
-
+		logrus.Debug("Root PEM: ", k)
+		logrus.Debug("Root ID: ", fingerprint)
 		decodedCerts, err := x509.ParseCertificates(k.Bytes)
 		if err != nil {
 			continue

@@ -3,6 +3,7 @@ package trustmanager
 import (
 	"crypto/x509"
 	"errors"
+	"github.com/Sirupsen/logrus"
 	"os"
 	"path"
 )
@@ -69,7 +70,7 @@ func (s X509FileStore) AddCert(cert *x509.Certificate) error {
 // stored under. If the file does not exist on disk, saves it.
 func (s X509FileStore) addNamedCert(cert *x509.Certificate) error {
 	fingerprint := fingerprintCert(cert)
-
+	logrus.Debug("Adding cert with fingerprint: ", fingerprint)
 	// Validate if we already loaded this certificate before
 	if _, ok := s.fingerprintMap[fingerprint]; ok {
 		return errors.New("certificate already in the store")
