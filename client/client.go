@@ -57,9 +57,10 @@ type Repository interface {
 }
 
 type UnlockedRootKey struct {
-	cipher   string
-	pemBytes []byte
-	signer   *signed.Signer
+	cipher     string
+	pemPrivKey []byte
+	pemPubKey  []byte
+	signer     *signed.Signer
 }
 
 type NotaryClient struct {
@@ -561,7 +562,9 @@ func (c *NotaryClient) GenRootKey(passphrase string) (string, error) {
 		return "", fmt.Errorf("failed to generate the certificate for key: %v", err)
 	}
 
-	keyID := data.NewPublicKey("RSA", pemKey).ID()
+	//
+	keyID := data.NewPrivateKey("RSA", pemKey, pemKey).ID()
+
 	c.rootKeyStore.AddEncrypted(keyID, pemKey, passphrase)
 
 	return keyID, nil
@@ -569,7 +572,7 @@ func (c *NotaryClient) GenRootKey(passphrase string) (string, error) {
 
 // GetRootKey retreives a root key that includes the ID and a signer
 func (c *NotaryClient) GetRootKey(rootKeyID, passphrase string) (UnlockedRootKey, error) {
-	rootKeyPem, err := c.rootKeyStore.GetDecrypted(rootKeyID, passphrase)
+	pemPrivKey, err := c.rootKeyStore.GetDecrypted(rootKeyID, passphrase)
 	if err != nil {
 		return UnlockedRootKey{}, fmt.Errorf("could not get encrypted root key: %v", err)
 	}
@@ -577,9 +580,9 @@ func (c *NotaryClient) GetRootKey(rootKeyID, passphrase string) (UnlockedRootKey
 	signer := signed.NewSigner(NewRootCryptoService(c.rootKeyStore, passphrase))
 
 	return UnlockedRootKey{
-		cipher:   "RSA",
-		pemBytes: rootKeyPem,
-		signer:   signer}, nil
+		cipher:     "RSA",
+		pemPrivKey: pemPrivKey,
+		signer:     signer}, nil
 }
 
 // GetRepository returns a new repository
@@ -602,7 +605,6 @@ func (c *NotaryClient) GetRepository(gun string, baseURL string, transport http.
 }
 
 func (c *NotaryClient) InitRepository(gun string, baseURL string, transport http.RoundTripper, uRootKey UnlockedRootKey) (*NotaryRepository, error) {
-	//rootKey := data.NewPublicKey(uRootKey.cipher, uRootKey.pemBytes)
 	// Creates and saves a trusted certificate for this store, with this root key
 	rootCert, err := uRootKey.GenerateCertificate(gun)
 	if err != nil {
@@ -676,12 +678,14 @@ func (c *NotaryClient) loadKeys(trustDir, rootKeysDir string) error {
 	return nil
 }
 
+// ID gets a consistent ID based on the PrivateKey bytes and cipher type
 func (uk *UnlockedRootKey) ID() string {
-	return data.NewPublicKey(uk.cipher, uk.pemBytes).ID()
+	return data.NewPrivateKey(uk.cipher, uk.pemPrivKey, uk.pemPrivKey).ID()
 }
 
+// GenerateCertificate
 func (uk *UnlockedRootKey) GenerateCertificate(gun string) (*x509.Certificate, error) {
-	privKeyBytes, _ := pem.Decode(uk.pemBytes)
+	privKeyBytes, _ := pem.Decode(uk.pemPrivKey)
 	privKey, err := x509.ParsePKCS1PrivateKey(privKeyBytes.Bytes)
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse root key: %v (%s)", gun, err.Error())
