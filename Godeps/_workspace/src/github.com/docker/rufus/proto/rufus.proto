@@ -26,22 +26,30 @@ message KeyID {
   string ID = 1;
 }
 
-// PublicKey has a KeyID that is used to reference the key and opaque bytes of a publicKey
+// Type holds the type of crypto algorithm used
+message Algorithm {
+  string algorithm = 1;
+}
+
+// PublicKey has a KeyID that is used to reference the key, the key type, and opaque bytes of a publicKey
 message PublicKey {
   KeyID keyID = 1;
-  bytes publicKey = 2;
+  Algorithm algorithm = 2;
+  bytes publicKey = 3;
 }
 
-// Signature specifies a KeyID that was used for signing and signed content
+// Signature specifies a KeyID that was used for signing, the key type, and signed content
 message Signature {
   KeyID keyID = 1;
-  bytes content = 2;
+  Algorithm algorithm = 2;
+  bytes content = 3;
 }
 
-// SignatureRequests specifies a KeyID for signing and content to be signed
+// SignatureRequests specifies a KeyID for signing, the type of signature requested, and content to be signed
 message SignatureRequest {
   KeyID keyID = 1;
-  bytes content = 2;
+  Algorithm algorithm = 2;
+  bytes content = 3;
 }
 
 // Void represents an empty message type

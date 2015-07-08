@@ -43,7 +43,7 @@
 		},
 		{
 			"ImportPath": "github.com/docker/rufus/proto",
-			"Rev": "61b53384b24bfa83e8e0a5f11f28ae83457fd80c"
+			"Rev": "7f61f678c264ae0a329f25cbaa8af6fd55ada7b6"
 		},
 		{
 			"ImportPath": "github.com/endophage/gotuf",
