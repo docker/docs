@@ -209,6 +209,51 @@ func TestListDir(t *testing.T) {
 		t.Fatalf("expected 0 files in listing, got: %d", len(files))
 	}
 }
+
+func TestLink(t *testing.T) {
+	testName := "docker.com/notary/certificate"
+	testSymlink := "docker.com/notary/certificate-symlink"
+	testExt := "crt"
+	perms := os.FileMode(0755)
+
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	if err != nil {
+		t.Fatalf("failed to create a temporary directory: %v", err)
+	}
+
+	// Since we're generating this manually we need to add the extension '.'
+	expectedFilePath := filepath.Join(tempBaseDir, testName+"."+testExt)
+	expectedSymlinkPath := filepath.Join(tempBaseDir, testSymlink+"."+testExt)
+
+	_, err = generateRandomFile(expectedFilePath, perms)
+	if err != nil {
+		t.Fatalf("failed to generate random file: %v", err)
+	}
+
+	// Create our SimpleFileStore
+	store := &SimpleFileStore{
+		baseDir: tempBaseDir,
+		fileExt: testExt,
+		perms:   perms,
+	}
+
+	// Call the Link function
+	err = store.Link("certificate", testSymlink)
+	if err != nil {
+		t.Fatalf("failed to create symlink: %v", err)
+	}
+
+	// Check to see if the symlink exists
+	actualSymlinkDest, err := os.Readlink(expectedSymlinkPath)
+	if err != nil {
+		t.Fatalf("expected to find symlink at path: %s", expectedSymlinkPath)
+	}
+	if actualSymlinkDest != "certificate."+testExt {
+		t.Fatalf("symlink has wrong destination: %s", actualSymlinkDest)
+	}
+}
+
 func TestGetPath(t *testing.T) {
 	testExt := "crt"
 	perms := os.FileMode(0755)

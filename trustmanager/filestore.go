@@ -159,8 +159,6 @@ func (f *SimpleFileStore) genFileName(name string) string {
 // We use full path for the source and local for the destination to use relative
 // path for the symlink
 func (f *SimpleFileStore) Link(oldname, newname string) error {
-	fmt.Println("Src: ", f.genFileName(oldname))
-	fmt.Println("dst: ", f.genFilePath(newname))
 	return os.Symlink(
 		f.genFileName(oldname),
 		f.genFilePath(newname),
