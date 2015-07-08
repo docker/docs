@@ -15,6 +15,7 @@ import (
 	"path/filepath"
 	"time"
 
+	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary/trustmanager"
 	"github.com/endophage/gotuf"
 	tufclient "github.com/endophage/gotuf/client"
@@ -240,7 +241,7 @@ func (r *NotaryRepository) AddTarget(target *Target) error {
 
 // ListTargets lists all targets for the current repository
 func (r *NotaryRepository) ListTargets() ([]*Target, error) {
-	r.bootstrapRepo()
+	//r.bootstrapRepo()
 
 	c, err := r.bootstrapClient()
 	if err != nil {
@@ -263,7 +264,7 @@ func (r *NotaryRepository) ListTargets() ([]*Target, error) {
 
 // GetTargetByName returns a target given a name
 func (r *NotaryRepository) GetTargetByName(name string) (*Target, error) {
-	r.bootstrapRepo()
+	//r.bootstrapRepo()
 
 	c, err := r.bootstrapClient()
 	if err != nil {
@@ -483,7 +484,6 @@ func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	rootJSON, err := remote.GetMeta("root", 5<<20)
 	root := &data.Signed{}
 	err = json.Unmarshal(rootJSON, root)
@@ -495,13 +495,16 @@ func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	kdb := keys.NewDB()
+	r.tufRepo = tuf.NewTufRepo(kdb, r.signer)
+
 	err = r.tufRepo.SetRoot(root)
 	if err != nil {
 		return nil, err
 	}
 
 	// TODO(dlaw): Where does this keyDB come in
-	kdb := keys.NewDB()
 
 	return tufclient.NewClient(
 		r.tufRepo,
