@@ -95,10 +95,6 @@ func tufInit(cmd *cobra.Command, args []string) {
 	}
 
 	t := &http.Transport{}
-	repo, err := nClient.GetRepository(args[0], "", t)
-	if err != nil {
-		fatalf(err.Error())
-	}
 
 	// TODO(diogo): We don't want to generate a new root every time. Ask the user
 	// which key she wants to use if there > 0 root keys available.
@@ -111,7 +107,10 @@ func tufInit(cmd *cobra.Command, args []string) {
 		fatalf(err.Error())
 	}
 
-	repo.Initialize(rootKey)
+	_, err = nClient.InitRepository(args[0], "", t, rootKey)
+	if err != nil {
+		fatalf(err.Error())
+	}
 }
 
 func tufList(cmd *cobra.Command, args []string) {

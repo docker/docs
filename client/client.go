@@ -122,7 +122,7 @@ func NewClient(baseDir string) (*NotaryClient, error) {
 
 // Initialize creates a new repository by using rootKey as the root Key for the
 // TUF repository.
-func (r *NotaryRepository) Initialize(uRootKey UnlockedRootKey) error {
+func (r *NotaryRepository) Initialize(uRootKey UnlockedRootKey, rootKey *data.PublicKey) error {
 	remote, err := getRemoteStore(r.Gun)
 	rawTSKey, err := remote.GetKey("timestamp")
 	if err != nil {
@@ -138,14 +138,6 @@ func (r *NotaryRepository) Initialize(uRootKey UnlockedRootKey) error {
 	}
 
 	timestampKey := data.NewPublicKey(parsedKey.Cipher(), parsedKey.Public())
-	//rootKey := data.NewPublicKey(uRootKey.cipher, uRootKey.pemBytes)
-	// Creates and saves a trusted certificate for this store, with this root key
-	rootCert, err := uRootKey.GenerateCertificate(r.Gun)
-	if err != nil {
-		return err
-	}
-	r.certificateStore.AddCert(rootCert)
-	rootKey := data.NewPublicKey("RSA", trustmanager.CertToPEM(rootCert))
 
 	targetsKey, err := r.signer.Create("targets")
 	if err != nil {
@@ -576,6 +568,43 @@ func (c *NotaryClient) GetRepository(gun string, baseURL string, transport http.
 		certificateStore: c.certificateStore}, nil
 }
 
+func (c *NotaryClient) InitRepository(gun string, baseURL string, transport http.RoundTripper, uRootKey UnlockedRootKey) (*NotaryRepository, error) {
+	//rootKey := data.NewPublicKey(uRootKey.cipher, uRootKey.pemBytes)
+	// Creates and saves a trusted certificate for this store, with this root key
+	rootCert, err := uRootKey.GenerateCertificate(gun)
+	if err != nil {
+		return nil, err
+	}
+	c.certificateStore.AddCert(rootCert)
+	rootKey := data.NewPublicKey("RSA", trustmanager.CertToPEM(rootCert))
+	err = c.rootKeyStore.Link(uRootKey.ID(), rootKey.ID())
+	if err != nil {
+		return nil, err
+	}
+
+	privKeyStore, err := trustmanager.NewKeyFileStore(filepath.Join(c.baseDir, privDir))
+	if err != nil {
+		return nil, err
+	}
+
+	signer := signed.NewSigner(NewCryptoService(gun, *privKeyStore))
+
+	nRepo := &NotaryRepository{Gun: gun,
+		baseURL:          baseURL,
+		tufRepoPath:      filepath.Join(c.baseDir, tufDir),
+		transport:        transport,
+		signer:           signer,
+		caStore:          c.caStore,
+		certificateStore: c.certificateStore}
+
+	err = nRepo.Initialize(uRootKey, rootKey)
+	if err != nil {
+		return nil, err
+	}
+
+	return nRepo, nil
+}
+
 func (c *NotaryClient) loadKeys(trustDir, rootKeysDir string) error {
 	// Load all CAs that aren't expired and don't use SHA1
 	caStore, err := trustmanager.NewX509FilteredFileStore(trustDir, func(cert *x509.Certificate) bool {
@@ -621,20 +650,20 @@ func (uk *UnlockedRootKey) GenerateCertificate(gun string) (*x509.Certificate, e
 	privKeyBytes, _ := pem.Decode(uk.pemBytes)
 	privKey, err := x509.ParsePKCS1PrivateKey(privKeyBytes.Bytes)
 	if err != nil {
-		return nil, fmt.Errorf("failed to generate the certificate for key: %v", err)
+		return nil, fmt.Errorf("failed to parse root key: %v (%s)", gun, err.Error())
 	}
 
 	//TODO (diogo): We're hardcoding the Organization to be the GUN. Probably want to change it
 	template := trustmanager.NewCertificate(gun, gun)
 	derBytes, err := x509.CreateCertificate(rand.Reader, template, template, privKey.Public(), privKey)
 	if err != nil {
-		return nil, fmt.Errorf("failed to generate the certificate for key: %v", err)
+		return nil, fmt.Errorf("failed to generate the certificate for: %v (%s)", gun, err.Error())
 	}
 
 	// Encode the new certificate into PEM
 	cert, err := x509.ParseCertificate(derBytes)
 	if err != nil {
-		return nil, fmt.Errorf("failed to generate the certificate for key: %v", err)
+		return nil, fmt.Errorf("failed to parse the certificate for key: %v (%s)", gun, err.Error())
 	}
 
 	return cert, nil
