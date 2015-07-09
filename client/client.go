@@ -188,7 +188,7 @@ func (r *NotaryRepository) Initialize(rootKey *data.PublicKey) error {
 		return err
 	}
 
-	if err := r.saveMetadata(uSigner.signer); err != nil {
+	if err := r.saveMetadata(r.rootSigner.signer); err != nil {
 		return err
 	}
 
@@ -295,7 +295,7 @@ func (r *NotaryRepository) Publish() error {
 		return err
 	}
 
-	root, err := r.tufRepo.SignRoot(data.DefaultExpires("root"), r.rootSigner)
+	root, err := r.tufRepo.SignRoot(data.DefaultExpires("root"), r.rootSigner.signer)
 	if err != nil {
 		return err
 	}

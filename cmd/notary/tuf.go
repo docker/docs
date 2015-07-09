@@ -76,7 +76,7 @@ func tufAdd(cmd *cobra.Command, args []string) {
 	targetPath := args[2]
 
 	t := &http.Transport{}
-	repo, err := nClient.GetRepository(gun, "", t)
+	repo, err := nClient.GetRepository(gun, "", t, nil)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -125,7 +125,7 @@ func tufList(cmd *cobra.Command, args []string) {
 	gun := args[0]
 
 	t := &http.Transport{}
-	repo, err := nClient.GetRepository(gun, "", t)
+	repo, err := nClient.GetRepository(gun, "", t, nil)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -151,7 +151,7 @@ func tufLookup(cmd *cobra.Command, args []string) {
 	targetName := args[1]
 
 	t := &http.Transport{}
-	repo, err := nClient.GetRepository(gun, "", t)
+	repo, err := nClient.GetRepository(gun, "", t, nil)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -176,7 +176,7 @@ func tufPublish(cmd *cobra.Command, args []string) {
 	fmt.Println("Pushing changes to ", gun, ".")
 
 	t := &http.Transport{}
-	repo, err := nClient.GetRepository(gun, "", t)
+	repo, err := nClient.GetRepository(gun, "", t, nil)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -222,7 +222,7 @@ func verify(cmd *cobra.Command, args []string) {
 	gun := args[0]
 	targetName := args[1]
 	t := &http.Transport{}
-	repo, err := nClient.GetRepository(gun, "", t)
+	repo, err := nClient.GetRepository(gun, "", t, nil)
 	if err != nil {
 		fatalf(err.Error())
 	}
