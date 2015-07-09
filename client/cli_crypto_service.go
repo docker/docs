@@ -39,27 +39,33 @@ func NewRootCryptoService(rootKeyStore *trustmanager.KeyFileStore, passphrase st
 // Create is used to generate keys for targets, snapshots and timestamps
 func (ccs *CryptoService) Create(role string) (*data.PublicKey, error) {
 	// Generates a new RSA key
-	key, err := rsa.GenerateKey(rand.Reader, rsaKeySize)
+	rsaPrivKey, err := rsa.GenerateKey(rand.Reader, rsaKeySize)
 	if err != nil {
 		return nil, fmt.Errorf("could not generate private key: %v", err)
 	}
 
-	pemKey, err := trustmanager.KeyToPEM(key)
-	if err != nil {
-		return nil, fmt.Errorf("failed to generate the certificate for key: %v (%s)", role, err)
-	}
-	rsaPublicKey := key.PublicKey
-	// Using x509 to Marshal the Public key into der encoding
+	rsaPublicKey := rsaPrivKey.PublicKey
+
+	// Using x509 to Marshal the Public key into DER encoding
 	pubBytes, err := x509.MarshalPKIXPublicKey(&rsaPublicKey)
 	if err != nil {
 		return nil, errors.New("Failed to Marshal public key.")
 	}
+
 	tufKey := data.NewPublicKey("RSA", pubBytes)
 
 	// Passing in the the GUN + keyID as the name for the private key and adding it
 	// to our KeyFileStore. Final storage will be under $BASE_PATH/GUN/keyID.key
 	privKeyFilename := filepath.Join(ccs.gun, tufKey.ID())
-	ccs.keyStore.Add(privKeyFilename, pemKey)
+
+	// Get a PEM encoded representation of the private key
+	pemRSAPrivKey, err := trustmanager.KeyToPEM(rsaPrivKey)
+	if err != nil {
+		return nil, fmt.Errorf("failed to generate the certificate for key: %v (%s)", role, err)
+	}
+
+	// Store the PEM-encoded private key into our keystore
+	ccs.keyStore.Add(privKeyFilename, pemRSAPrivKey)
 
 	return tufKey, nil
 }

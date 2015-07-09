@@ -26,11 +26,11 @@ func TestInitRepo(t *testing.T) {
 	rootKeyID, err := client.GenRootKey("passphrase")
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootKey, err := client.GetRootKey(rootKeyID, "passphrase")
+	rootSigner, err := client.GetRootSigner(rootKeyID, "passphrase")
 	assert.NoError(t, err, "error retreiving root key: %s", err)
 
 	gun := "docker.com/notary"
-	repo, err := client.InitRepository(gun, "", nil, rootKey)
+	repo, err := client.InitRepository(gun, "", nil, rootSigner)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
 	// Inspect contents of the temporary directory
@@ -61,7 +61,7 @@ func TestInitRepo(t *testing.T) {
 	// Look for keys in root_keys
 	// There should be a file named after the key ID of the root key we
 	// passed in.
-	rootKeyFilename := rootKey.ID() + ".key"
+	rootKeyFilename := rootSigner.ID() + ".key"
 	_, err = os.Stat(filepath.Join(tempBaseDir, "private", "root_keys", rootKeyFilename))
 	assert.NoError(t, err, "missing root key")
 

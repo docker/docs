@@ -39,28 +39,9 @@ const rsaKeySize int = 2048
 /// that doesn't exist
 var ErrRepositoryNotExist = errors.New("repository does not exist")
 
-// Client is the interface that defines the Notary Client type
-type Client interface {
-	ListPrivateKeys() []string
-	GenRootKey(passphrase string) (string, error)
-	GetRootKey(rootKeyID string, passphrase string) (UnlockedRootKey, error)
-	GetRepository(gun string, baseURL string, transport http.RoundTripper) (Repository, error)
-}
-
-// Repository is the interface that represents a Notary Repository
-type Repository interface {
-	Initialize(UnlockedRootKey) error
-	AddTarget(target Target) error
-	ListTargets() ([]Target, error)
-	GetTargetByName(name string) (Target, error)
-	Publish() error
-}
-
-type UnlockedRootKey struct {
-	cipher     string
-	pemPrivKey []byte
-	pemPubKey  []byte
-	signer     *signed.Signer
+type UnlockedSigner struct {
+	privKey *data.PrivateKey
+	signer  *signed.Signer
 }
 
 type NotaryClient struct {
@@ -114,8 +95,7 @@ func NewClient(baseDir string) (*NotaryClient, error) {
 
 	nClient := &NotaryClient{baseDir: baseDir}
 
-	err := nClient.loadKeys(trustDir, rootKeysDir)
-	if err != nil {
+	if err := nClient.loadKeys(trustDir, rootKeysDir); err != nil {
 		return nil, err
 	}
 
@@ -124,14 +104,12 @@ func NewClient(baseDir string) (*NotaryClient, error) {
 
 // Initialize creates a new repository by using rootKey as the root Key for the
 // TUF repository.
-func (r *NotaryRepository) Initialize(uRootKey UnlockedRootKey, rootKey *data.PublicKey) error {
+func (r *NotaryRepository) Initialize(uSigner *UnlockedSigner) error {
 	remote, err := getRemoteStore(r.Gun)
 	rawTSKey, err := remote.GetKey("timestamp")
 	if err != nil {
 		return err
 	}
-
-	fmt.Println("RawKey: ", string(rawTSKey))
 
 	parsedKey := &data.TUFKey{}
 	err = json.Unmarshal(rawTSKey, parsedKey)
@@ -140,6 +118,7 @@ func (r *NotaryRepository) Initialize(uRootKey UnlockedRootKey, rootKey *data.Pu
 	}
 
 	timestampKey := data.NewPublicKey(parsedKey.Cipher(), parsedKey.Public())
+	rootKey := uSigner.PublicKey()
 
 	targetsKey, err := r.signer.Create("targets")
 	if err != nil {
@@ -174,21 +153,16 @@ func (r *NotaryRepository) Initialize(uRootKey UnlockedRootKey, rootKey *data.Pu
 		return err
 	}
 
-	// TODO(diogo): change to inline error catching
-	err = kdb.AddRole(rootRole)
-	if err != nil {
+	if err := kdb.AddRole(rootRole); err != nil {
 		return err
 	}
-	err = kdb.AddRole(targetsRole)
-	if err != nil {
+	if err := kdb.AddRole(targetsRole); err != nil {
 		return err
 	}
-	err = kdb.AddRole(snapshotRole)
-	if err != nil {
+	if err := kdb.AddRole(snapshotRole); err != nil {
 		return err
 	}
-	err = kdb.AddRole(timestampRole)
-	if err != nil {
+	if err := kdb.AddRole(timestampRole); err != nil {
 		return err
 	}
 
@@ -208,7 +182,7 @@ func (r *NotaryRepository) Initialize(uRootKey UnlockedRootKey, rootKey *data.Pu
 		return err
 	}
 
-	if err := r.saveMetadata(uRootKey.signer); err != nil {
+	if err := r.saveMetadata(uSigner.signer); err != nil {
 		return err
 	}
 
@@ -551,38 +525,46 @@ func (c *NotaryClient) ListPrivateKeys() []string {
 
 // GenRootKey generates a new root key protected by a given passphrase
 func (c *NotaryClient) GenRootKey(passphrase string) (string, error) {
+	// TODO(diogo): Refactor TUF Key creation. We should never see crypto.privatekeys
 	// Generates a new RSA key
-	key, err := rsa.GenerateKey(rand.Reader, rsaKeySize)
+	rsaPrivKey, err := rsa.GenerateKey(rand.Reader, rsaKeySize)
 	if err != nil {
 		return "", fmt.Errorf("could not generate private key: %v", err)
 	}
 
-	pemKey, err := trustmanager.KeyToPEM(key)
+	// Encode the private key in PEM format since that is the final storage format
+	pemPrivKey, err := trustmanager.KeyToPEM(rsaPrivKey)
 	if err != nil {
-		return "", fmt.Errorf("failed to generate the certificate for key: %v", err)
+		return "", fmt.Errorf("failed to encode the private key: %v", err)
 	}
 
-	//
-	keyID := data.NewPrivateKey("RSA", pemKey, pemKey).ID()
+	tufPrivKey, err := trustmanager.RSAToPrivateKey(rsaPrivKey)
+	if err != nil {
+		return "", fmt.Errorf("failed to convert private key: ", err)
+	}
 
-	c.rootKeyStore.AddEncrypted(keyID, pemKey, passphrase)
+	c.rootKeyStore.AddEncrypted(tufPrivKey.ID(), pemPrivKey, passphrase)
 
-	return keyID, nil
+	return tufPrivKey.ID(), nil
 }
 
-// GetRootKey retreives a root key that includes the ID and a signer
-func (c *NotaryClient) GetRootKey(rootKeyID, passphrase string) (UnlockedRootKey, error) {
+// GetRootSigner retreives a root key that includes the ID and a signer
+func (c *NotaryClient) GetRootSigner(rootKeyID, passphrase string) (*UnlockedSigner, error) {
 	pemPrivKey, err := c.rootKeyStore.GetDecrypted(rootKeyID, passphrase)
 	if err != nil {
-		return UnlockedRootKey{}, fmt.Errorf("could not get encrypted root key: %v", err)
+		return nil, fmt.Errorf("could not get decrypted root key: %v", err)
+	}
+
+	tufPrivKey, err := trustmanager.TufParsePEMPrivateKey(pemPrivKey)
+	if err != nil {
+		return nil, fmt.Errorf("could not get parse root key: %v", err)
 	}
 
 	signer := signed.NewSigner(NewRootCryptoService(c.rootKeyStore, passphrase))
 
-	return UnlockedRootKey{
-		cipher:     "RSA",
-		pemPrivKey: pemPrivKey,
-		signer:     signer}, nil
+	return &UnlockedSigner{
+		privKey: tufPrivKey,
+		signer:  signer}, nil
 }
 
 // GetRepository returns a new repository
@@ -604,15 +586,15 @@ func (c *NotaryClient) GetRepository(gun string, baseURL string, transport http.
 		certificateStore: c.certificateStore}, nil
 }
 
-func (c *NotaryClient) InitRepository(gun string, baseURL string, transport http.RoundTripper, uRootKey UnlockedRootKey) (*NotaryRepository, error) {
+func (c *NotaryClient) InitRepository(gun string, baseURL string, transport http.RoundTripper, uSigner *UnlockedSigner) (*NotaryRepository, error) {
 	// Creates and saves a trusted certificate for this store, with this root key
-	rootCert, err := uRootKey.GenerateCertificate(gun)
+	rootCert, err := uSigner.GenerateCertificate(gun)
 	if err != nil {
 		return nil, err
 	}
 	c.certificateStore.AddCert(rootCert)
 	rootKey := data.NewPublicKey("RSA", trustmanager.CertToPEM(rootCert))
-	err = c.rootKeyStore.Link(uRootKey.ID(), rootKey.ID())
+	err = c.rootKeyStore.Link(uSigner.ID(), rootKey.ID())
 	if err != nil {
 		return nil, err
 	}
@@ -633,7 +615,7 @@ func (c *NotaryClient) InitRepository(gun string, baseURL string, transport http
 		caStore:          c.caStore,
 		certificateStore: c.certificateStore}
 
-	err = nRepo.Initialize(uRootKey, rootKey)
+	err = nRepo.Initialize(uSigner)
 	if err != nil {
 		return nil, err
 	}
@@ -679,14 +661,18 @@ func (c *NotaryClient) loadKeys(trustDir, rootKeysDir string) error {
 }
 
 // ID gets a consistent ID based on the PrivateKey bytes and cipher type
-func (uk *UnlockedRootKey) ID() string {
-	return data.NewPrivateKey(uk.cipher, uk.pemPrivKey, uk.pemPrivKey).ID()
+func (uk *UnlockedSigner) ID() string {
+	return uk.PublicKey().ID()
+}
+
+// PublicKey Returns the public key associated with the Root Key
+func (uk *UnlockedSigner) PublicKey() *data.PublicKey {
+	return data.PublicKeyFromPrivate(*uk.privKey)
 }
 
 // GenerateCertificate
-func (uk *UnlockedRootKey) GenerateCertificate(gun string) (*x509.Certificate, error) {
-	privKeyBytes, _ := pem.Decode(uk.pemPrivKey)
-	privKey, err := x509.ParsePKCS1PrivateKey(privKeyBytes.Bytes)
+func (uk *UnlockedSigner) GenerateCertificate(gun string) (*x509.Certificate, error) {
+	privKey, err := x509.ParsePKCS1PrivateKey(uk.privKey.Private())
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse root key: %v (%s)", gun, err.Error())
 	}

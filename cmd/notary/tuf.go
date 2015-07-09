@@ -106,12 +106,12 @@ func tufInit(cmd *cobra.Command, args []string) {
 	if err != nil {
 		fatalf(err.Error())
 	}
-	rootKey, err := nClient.GetRootKey(rootKeyID, "passphrase")
+	rootSigner, err := nClient.GetRootSigner(rootKeyID, "passphrase")
 	if err != nil {
 		fatalf(err.Error())
 	}
 
-	_, err = nClient.InitRepository(args[0], "", t, rootKey)
+	_, err = nClient.InitRepository(args[0], "", t, rootSigner)
 	if err != nil {
 		fatalf(err.Error())
 	}
