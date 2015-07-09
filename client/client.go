@@ -26,6 +26,12 @@ import (
 	"github.com/endophage/gotuf/store"
 )
 
+type ErrRepoNotInitialized struct{}
+
+func (err *ErrRepoNotInitialized) Error() string {
+	return "Repository has not been initialized"
+}
+
 // Default paths should end with a '/' so directory creation works correctly
 const (
 	trustDir    string = "/trusted_certificates/"
@@ -259,22 +265,35 @@ func (r *NotaryRepository) GetTargetByName(name string) (*Target, error) {
 
 // Publish pushes the local changes in signed material to the remote notary-server
 func (r *NotaryRepository) Publish() error {
-	_, err := r.bootstrapClient() // just need the repo to be initialized from remote
+	c, err := r.bootstrapClient() // just need the repo to be initialized from remote
 	if err != nil {
 		if _, ok := err.(*store.ErrMetaNotFound); ok {
-			// init or return error to make caller init, then publish again
+			// attempt to load locally to see if it's already init'ed
+			err := r.bootstrapRepo()
+			if err != nil {
+				logrus.Debug("Repository not initialized during Publish")
+				return &ErrRepoNotInitialized{} // caller must init
+			}
 		} else {
+			logrus.Error("Could not publish Repository: ", err.Error())
 			return err
 		}
+	}
+	err = c.Update()
+	if err != nil {
+		return err
 	}
 
 	cl, err := changelist.NewFileChangelist(filepath.Join(r.tufRepoPath, "changelist"))
 	if err != nil {
+		logrus.Debug("Error initializing changelist")
 		return err
 	}
-	applyChangelist(r.tufRepo, cl)
-
-	remote, err := getRemoteStore(r.Gun)
+	err = applyChangelist(r.tufRepo, cl)
+	if err != nil {
+		logrus.Debug("Error applying changelist")
+		return err
+	}
 
 	root, err := r.tufRepo.SignRoot(data.DefaultExpires("root"), r.signer)
 	if err != nil {
@@ -302,6 +321,10 @@ func (r *NotaryRepository) Publish() error {
 		return err
 	}
 
+	remote, err := getRemoteStore(r.Gun)
+	if err != nil {
+		return err
+	}
 	err = remote.SetMeta("root", rootJSON)
 	if err != nil {
 		return err
@@ -485,6 +508,9 @@ func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
 		return nil, err
 	}
 	rootJSON, err := remote.GetMeta("root", 5<<20)
+	if err != nil {
+		return nil, err
+	}
 	root := &data.Signed{}
 	err = json.Unmarshal(rootJSON, root)
 	if err != nil {

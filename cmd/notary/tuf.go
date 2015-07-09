@@ -181,7 +181,10 @@ func tufPublish(cmd *cobra.Command, args []string) {
 		fatalf(err.Error())
 	}
 
-	repo.Publish()
+	err = repo.Publish()
+	if err != nil {
+		fatalf(err.Error())
+	}
 }
 
 func tufRemove(cmd *cobra.Command, args []string) {
