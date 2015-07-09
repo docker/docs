@@ -68,6 +68,7 @@ type NotaryRepository struct {
 	privKeyStore     *trustmanager.KeyFileStore
 	caStore          trustmanager.X509Store
 	certificateStore trustmanager.X509Store
+	rootSigner       *UnlockedSigner
 }
 
 // Target represents a simplified version of the data TUF operates on.
@@ -110,7 +111,7 @@ func NewClient(baseDir string) (*NotaryClient, error) {
 
 // Initialize creates a new repository by using rootKey as the root Key for the
 // TUF repository.
-func (r *NotaryRepository) Initialize(uSigner *UnlockedSigner) error {
+func (r *NotaryRepository) Initialize() error {
 	remote, err := getRemoteStore(r.Gun)
 	rawTSKey, err := remote.GetKey("timestamp")
 	if err != nil {
@@ -124,7 +125,7 @@ func (r *NotaryRepository) Initialize(uSigner *UnlockedSigner) error {
 	}
 
 	timestampKey := data.NewPublicKey(parsedKey.Cipher(), parsedKey.Public())
-	rootKey := uSigner.PublicKey()
+	rootKey := r.rootSigner.PublicKey()
 
 	targetsKey, err := r.signer.Create("targets")
 	if err != nil {
@@ -295,7 +296,7 @@ func (r *NotaryRepository) Publish() error {
 		return err
 	}
 
-	root, err := r.tufRepo.SignRoot(data.DefaultExpires("root"), r.signer)
+	root, err := r.tufRepo.SignRoot(data.DefaultExpires("root"), r.rootSigner)
 	if err != nil {
 		return err
 	}
@@ -594,7 +595,7 @@ func (c *NotaryClient) GetRootSigner(rootKeyID, passphrase string) (*UnlockedSig
 }
 
 // GetRepository returns a new repository
-func (c *NotaryClient) GetRepository(gun string, baseURL string, transport http.RoundTripper) (*NotaryRepository, error) {
+func (c *NotaryClient) GetRepository(gun string, baseURL string, transport http.RoundTripper, uSigner *UnlockedSigner) (*NotaryRepository, error) {
 	privKeyStore, err := trustmanager.NewKeyFileStore(filepath.Join(c.baseDir, privDir))
 	if err != nil {
 		return nil, err
@@ -609,7 +610,9 @@ func (c *NotaryClient) GetRepository(gun string, baseURL string, transport http.
 		signer:           signer,
 		privKeyStore:     privKeyStore,
 		caStore:          c.caStore,
-		certificateStore: c.certificateStore}, nil
+		certificateStore: c.certificateStore,
+		rootSigner:       uSigner,
+	}, nil
 }
 
 func (c *NotaryClient) InitRepository(gun string, baseURL string, transport http.RoundTripper, uSigner *UnlockedSigner) (*NotaryRepository, error) {
@@ -639,9 +642,11 @@ func (c *NotaryClient) InitRepository(gun string, baseURL string, transport http
 		signer:           signer,
 		privKeyStore:     privKeyStore,
 		caStore:          c.caStore,
-		certificateStore: c.certificateStore}
+		certificateStore: c.certificateStore,
+		rootSigner:       uSigner,
+	}
 
-	err = nRepo.Initialize(uSigner)
+	err = nRepo.Initialize()
 	if err != nil {
 		return nil, err
 	}
