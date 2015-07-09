@@ -132,7 +132,7 @@ func (s X509FileStore) RemoveCert(cert *x509.Certificate) error {
 // AddCertFromPEM adds the first certificate that it finds in the byte[], returning
 // an error if no Certificates are found
 func (s X509FileStore) AddCertFromPEM(pemBytes []byte) error {
-	cert, err := loadCertFromPEM(pemBytes)
+	cert, err := LoadCertFromPEM(pemBytes)
 	if err != nil {
 		return err
 	}

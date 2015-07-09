@@ -44,7 +44,7 @@ func GetCertFromURL(urlStr string) (*x509.Certificate, error) {
 	}
 
 	// Try to extract the first valid PEM certificate from the bytes
-	cert, err := loadCertFromPEM(certBytes)
+	cert, err := LoadCertFromPEM(certBytes)
 	if err != nil {
 		return nil, err
 	}
@@ -98,7 +98,7 @@ func EncryptPrivateKey(key crypto.PrivateKey, passphrase string) ([]byte, error)
 
 // loadCertFromPEM returns the first certificate found in a bunch of bytes or error
 // if nothing is found. Taken from https://golang.org/src/crypto/x509/cert_pool.go#L85.
-func loadCertFromPEM(pemBytes []byte) (*x509.Certificate, error) {
+func LoadCertFromPEM(pemBytes []byte) (*x509.Certificate, error) {
 	for len(pemBytes) > 0 {
 		var block *pem.Block
 		block, pemBytes = pem.Decode(pemBytes)
