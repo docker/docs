@@ -111,7 +111,7 @@ func NewClient(baseDir string) (*NotaryClient, error) {
 
 // Initialize creates a new repository by using rootKey as the root Key for the
 // TUF repository.
-func (r *NotaryRepository) Initialize() error {
+func (r *NotaryRepository) Initialize(rootKey *data.PublicKey) error {
 	remote, err := getRemoteStore(r.Gun)
 	rawTSKey, err := remote.GetKey("timestamp")
 	if err != nil {
@@ -125,7 +125,6 @@ func (r *NotaryRepository) Initialize() error {
 	}
 
 	timestampKey := data.NewPublicKey(parsedKey.Cipher(), parsedKey.Public())
-	rootKey := r.rootSigner.PublicKey()
 
 	targetsKey, err := r.signer.Create("targets")
 	if err != nil {
@@ -646,7 +645,7 @@ func (c *NotaryClient) InitRepository(gun string, baseURL string, transport http
 		rootSigner:       uSigner,
 	}
 
-	err = nRepo.Initialize()
+	err = nRepo.Initialize(rootKey)
 	if err != nil {
 		return nil, err
 	}
