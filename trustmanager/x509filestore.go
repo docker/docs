@@ -83,10 +83,12 @@ func (s X509FileStore) addNamedCert(cert *x509.Certificate) error {
 	fileName := fileName(cert)
 
 	// Save the file to disk if not already there.
-	if _, err := os.Stat(fileName); os.IsNotExist(err) {
+	if _, err := os.Stat(s.fileStore.GetPath(fileName)); os.IsNotExist(err) {
 		if err := s.fileStore.Add(fileName, certBytes); err != nil {
 			return err
 		}
+	} else if err != nil {
+		return err
 	}
 
 	// We wrote the certificate succcessfully, add it to our in-memory storage
