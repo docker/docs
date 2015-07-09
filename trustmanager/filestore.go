@@ -17,15 +17,9 @@ type FileStore interface {
 	RemoveDir(directoryName string) error
 	Get(fileName string) ([]byte, error)
 	GetPath(fileName string) string
-	ListAll() []string
-	ListDir(directoryName string) []string
+	ListFiles(symlinks bool) []string
+	ListDir(directoryName string, symlinks bool) []string
 	Link(src, dst string) error
-}
-
-type EncryptedFileStore interface {
-	FileStore
-	AddEncrypted(fileName string, data []byte, passphrase string) error
-	GetDecrypted(fileName, passphrase string) ([]byte, error)
 }
 
 // SimpleFileStore implements FileStore
@@ -36,7 +30,7 @@ type SimpleFileStore struct {
 }
 
 // NewFileStore creates a directory with 755 permissions
-func NewFileStore(baseDir string, fileExt string) (FileStore, error) {
+func NewSimpleFileStore(baseDir string, fileExt string) (FileStore, error) {
 	if err := CreateDirectory(baseDir); err != nil {
 		return nil, err
 	}
@@ -49,7 +43,7 @@ func NewFileStore(baseDir string, fileExt string) (FileStore, error) {
 }
 
 // NewPrivateFileStore creates a directory with 700 permissions
-func NewPrivateFileStore(baseDir string, fileExt string) (FileStore, error) {
+func NewPrivateSimpleFileStore(baseDir string, fileExt string) (FileStore, error) {
 	if err := CreatePrivateDirectory(baseDir); err != nil {
 		return nil, err
 	}
@@ -110,18 +104,18 @@ func (f *SimpleFileStore) GetPath(name string) string {
 }
 
 // List lists all the files inside of a store
-func (f *SimpleFileStore) ListAll() []string {
-	return f.list(f.baseDir)
+func (f *SimpleFileStore) ListFiles(symlinks bool) []string {
+	return f.list(f.baseDir, symlinks)
 }
 
 // List lists all the files inside of a directory identified by a name
-func (f *SimpleFileStore) ListDir(name string) []string {
+func (f *SimpleFileStore) ListDir(name string, symlinks bool) []string {
 	fullPath := filepath.Join(f.baseDir, name)
-	return f.list(fullPath)
+	return f.list(fullPath, symlinks)
 }
 
-// list lists all the files in a directory given a full path
-func (f *SimpleFileStore) list(path string) []string {
+// list lists all the files in a directory given a full path. Ignores symlinks.
+func (f *SimpleFileStore) list(path string, symlinks bool) []string {
 	files := make([]string, 0, 0)
 	filepath.Walk(path, func(fp string, fi os.FileInfo, err error) error {
 		// If there are errors, ignore this particular file
@@ -132,6 +126,12 @@ func (f *SimpleFileStore) list(path string) []string {
 		if fi.IsDir() {
 			return nil
 		}
+
+		// If this is a symlink, and symlinks is true, ignore it
+		if !symlinks && fi.Mode()&os.ModeSymlink == os.ModeSymlink {
+			return nil
+		}
+
 		// Only allow matches that end with our certificate extension (e.g. *.crt)
 		matched, _ := filepath.Match("*"+f.fileExt, fi.Name())
 

@@ -14,7 +14,7 @@ type KeyFileStore struct {
 // NewKeyFileStore returns a new KeyFileStore creating a private directory to
 // hold the keys.
 func NewKeyFileStore(baseDir string) (*KeyFileStore, error) {
-	fileStore, err := NewFileStore(baseDir, keyExtension)
+	fileStore, err := NewPrivateSimpleFileStore(baseDir, keyExtension)
 	if err != nil {
 		return nil, err
 	}
@@ -73,4 +73,11 @@ func (s *KeyFileStore) GetDecryptedKey(name string, passphrase string) (*data.Pr
 	}
 
 	return privKey, nil
+}
+
+// ListKeys returns a list of unique PublicKeys present on the KeyFileStore.
+// There might be symlinks associating Certificate IDs to Public Keys, so this
+// method only returns the IDs that aren't symlinks
+func (s *KeyFileStore) ListKeys() []string {
+	return s.ListFiles(false)
 }

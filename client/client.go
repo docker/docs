@@ -515,7 +515,7 @@ Example TUF Content for root key:
 	}
 }
 */
-func (r *NotaryRepository) ValidateRoot(root *data.Signed) error {
+func (r *NotaryRepository) validateRoot(root *data.Signed) error {
 	rootSigned := &data.Root{}
 	err := json.Unmarshal(root.Signed, rootSigned)
 	if err != nil {
@@ -581,7 +581,7 @@ func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
 		return nil, err
 	}
 
-	err = r.ValidateRoot(root)
+	err = r.validateRoot(root)
 	if err != nil {
 		return nil, err
 	}
@@ -594,8 +594,6 @@ func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
 		return nil, err
 	}
 
-	// TODO(dlaw): Where does this keyDB come in
-
 	return tufclient.NewClient(
 		r.tufRepo,
 		remote,
@@ -603,14 +601,10 @@ func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
 	), nil
 }
 
-// ListPrivateKeys lists all availables private keys. Does not include private key
+// ListPrivateKeys lists all available root keys. Does not include private key
 // material
-func (c *NotaryRepository) ListPrivateKeys() []string {
-	// TODO(diogo): Make this work
-	for _, k := range c.rootKeyStore.ListAll() {
-		fmt.Println(k)
-	}
-	return nil
+func (c *NotaryRepository) ListRootKeys() []string {
+	return c.rootKeyStore.ListKeys()
 }
 
 // GenRootKey generates a new root key protected by a given passphrase

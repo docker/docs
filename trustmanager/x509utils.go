@@ -133,7 +133,7 @@ func fingerprintCert(cert *x509.Certificate) CertID {
 
 // loadCertsFromDir receives a store AddCertFromFile for each certificate found
 func loadCertsFromDir(s *X509FileStore) {
-	certFiles := s.fileStore.ListAll()
+	certFiles := s.fileStore.ListFiles(true)
 	for _, c := range certFiles {
 		s.AddCertFromFile(c)
 	}

@@ -3,9 +3,10 @@ package trustmanager
 import (
 	"crypto/x509"
 	"errors"
-	"github.com/Sirupsen/logrus"
 	"os"
 	"path"
+
+	"github.com/Sirupsen/logrus"
 )
 
 // X509FileStore implements X509Store that persists on disk
@@ -30,7 +31,7 @@ func NewX509FilteredFileStore(directory string, validate func(*x509.Certificate)
 }
 
 func newX509FileStore(directory string, validate func(*x509.Certificate) bool) (*X509FileStore, error) {
-	fileStore, err := NewFileStore(directory, certExtension)
+	fileStore, err := NewSimpleFileStore(directory, certExtension)
 	if err != nil {
 		return nil, err
 	}

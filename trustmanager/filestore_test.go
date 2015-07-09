@@ -129,7 +129,7 @@ func TestRemoveDir(t *testing.T) {
 	}
 }
 
-func TestListAll(t *testing.T) {
+func TestListFiles(t *testing.T) {
 	testName := "docker.com/notary/certificate"
 	testExt := "crt"
 	perms := os.FileMode(0755)
@@ -144,10 +144,17 @@ func TestListAll(t *testing.T) {
 	// Create 10 randomfiles
 	for i := 1; i <= 10; i++ {
 		// Since we're generating this manually we need to add the extension '.'
-		expectedFilePath = filepath.Join(tempBaseDir, testName+string(i)+"."+testExt)
+		expectedFilename := testName + strconv.Itoa(i) + "." + testExt
+		expectedFilePath = filepath.Join(tempBaseDir, expectedFilename)
 		_, err = generateRandomFile(expectedFilePath, perms)
 		if err != nil {
 			t.Fatalf("failed to generate random file: %v", err)
+		}
+
+		// Create symlinks for all the files
+		err = os.Symlink(expectedFilename, filepath.Join(tempBaseDir, expectedFilename+".link."+testExt))
+		if err != nil {
+			t.Fatalf("failed to create symlink: %v", err)
 		}
 	}
 
@@ -158,10 +165,16 @@ func TestListAll(t *testing.T) {
 		perms:   perms,
 	}
 
-	// Call the List function
-	files := store.ListAll()
+	// Call the List function. Expect 10 real files when not listing symlinks
+	files := store.ListFiles(false)
 	if len(files) != 10 {
 		t.Fatalf("expected 10 files in listing, got: %d", len(files))
+	}
+
+	// Call the List function. Expect 20 total files when listing symlinks
+	files = store.ListFiles(true)
+	if len(files) != 20 {
+		t.Fatalf("expected 20 files in listing, got: %d", len(files))
 	}
 }
 
@@ -196,15 +209,15 @@ func TestListDir(t *testing.T) {
 	}
 
 	// Call the ListDir function
-	files := store.ListDir("docker.com/")
+	files := store.ListDir("docker.com/", true)
 	if len(files) != 10 {
 		t.Fatalf("expected 10 files in listing, got: %d", len(files))
 	}
-	files = store.ListDir("docker.com/notary")
+	files = store.ListDir("docker.com/notary", true)
 	if len(files) != 10 {
 		t.Fatalf("expected 10 files in listing, got: %d", len(files))
 	}
-	files = store.ListDir("fakedocker.com/")
+	files = store.ListDir("fakedocker.com/", true)
 	if len(files) != 0 {
 		t.Fatalf("expected 0 files in listing, got: %d", len(files))
 	}

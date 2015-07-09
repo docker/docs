@@ -52,7 +52,7 @@ func TestInitRepo(t *testing.T) {
 
 	// Look for keys in private. The filenames should match the key IDs
 	// in the private key store.
-	privKeyList := repo.privKeyStore.ListAll()
+	privKeyList := repo.privKeyStore.ListFiles(true)
 	for _, privKeyName := range privKeyList {
 		_, err := os.Stat(privKeyName)
 		assert.NoError(t, err, "missing private key: %s", privKeyName)
