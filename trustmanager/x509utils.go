@@ -1,7 +1,6 @@
 package trustmanager
 
 import (
-	"crypto"
 	"crypto/rand"
 	"crypto/rsa"
 	"crypto/x509"
@@ -9,6 +8,7 @@ import (
 	"encoding/pem"
 	"errors"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"math/big"
 	"net/http"
@@ -59,26 +59,22 @@ func CertToPEM(cert *x509.Certificate) []byte {
 	return pemCert
 }
 
-// KeyToPEM returns a PEM encoded key from a crypto.PrivateKey
-func KeyToPEM(key crypto.PrivateKey) ([]byte, error) {
-	rsaKey, ok := key.(*rsa.PrivateKey)
-	if !ok {
+// KeyToPEM returns a PEM encoded key from a Private Key
+func KeyToPEM(privKey *data.PrivateKey) ([]byte, error) {
+	if privKey.Cipher() != "RSA" {
 		return nil, errors.New("only RSA keys are currently supported")
 	}
 
-	keyBytes := x509.MarshalPKCS1PrivateKey(rsaKey)
-	return pem.EncodeToMemory(&pem.Block{Type: "RSA PRIVATE KEY", Bytes: keyBytes}), nil
+	return pem.EncodeToMemory(&pem.Block{Type: "RSA PRIVATE KEY", Bytes: privKey.Private()}), nil
 }
 
-// EncryptPrivateKey returns an encrypted PEM encoded key given a Private key
+// EncryptPrivateKey returns an encrypted PEM key given a Privatekey
 // and a passphrase
-func EncryptPrivateKey(key crypto.PrivateKey, passphrase string) ([]byte, error) {
-	rsaKey, ok := key.(*rsa.PrivateKey)
-	if !ok {
+func EncryptPrivateKey(key *data.PrivateKey, passphrase string) ([]byte, error) {
+	// TODO(diogo): Currently only supports RSA Private keys
+	if key.Cipher() != "RSA" {
 		return nil, errors.New("only RSA keys are currently supported")
 	}
-
-	keyBytes := x509.MarshalPKCS1PrivateKey(rsaKey)
 
 	password := []byte(passphrase)
 	cipherType := x509.PEMCipherAES256
@@ -86,7 +82,7 @@ func EncryptPrivateKey(key crypto.PrivateKey, passphrase string) ([]byte, error)
 
 	encryptedPEMBlock, err := x509.EncryptPEMBlock(rand.Reader,
 		blockType,
-		keyBytes,
+		key.Private(),
 		password,
 		cipherType)
 	if err != nil {
@@ -164,61 +160,55 @@ func LoadCertFromFile(filename string) (*x509.Certificate, error) {
 	return nil, errors.New("could not load certificate from file")
 }
 
-// LoadKeyFromFile returns a PrivateKey given a filename
-func LoadKeyFromFile(filename string) (crypto.PrivateKey, error) {
-	pemBytes, err := ioutil.ReadFile(filename)
-	if err != nil {
-		return nil, err
-	}
-
-	key, err := ParsePEMPrivateKey(pemBytes)
-	if err != nil {
-		return nil, err
-	}
-	return key, nil
-}
-
-// ParsePEMPrivateKey returns a private key from a PEM encoded private key. It
-// only supports RSA (PKCS#1).
-func ParsePEMPrivateKey(pemBytes []byte) (crypto.PrivateKey, error) {
+// ParsePEMPrivateKey returns a data.PrivateKey from a PEM encoded private key. It
+// only supports RSA (PKCS#1) and attempts to decrypt using the passphrase, if encrypted.
+func ParsePEMPrivateKey(pemBytes []byte, passphrase string) (*data.PrivateKey, error) {
 	block, _ := pem.Decode(pemBytes)
 	if block == nil {
-		return nil, errors.New("no valid key found")
+		return nil, errors.New("no valid private key found")
 	}
 
 	switch block.Type {
 	case "RSA PRIVATE KEY":
-		return x509.ParsePKCS1PrivateKey(block.Bytes)
-	default:
-		return nil, fmt.Errorf("unsupported key type %q", block.Type)
-	}
-}
+		var privKeyBytes []byte
+		var err error
 
-// TufParsePEMPrivateKey returns a data.PrivateKey from a PEM encoded private key. It
-// only supports RSA (PKCS#1).
-func TufParsePEMPrivateKey(pemBytes []byte) (*data.PrivateKey, error) {
-	block, _ := pem.Decode(pemBytes)
-	if block == nil {
-		return nil, errors.New("no valid key found")
-	}
+		if x509.IsEncryptedPEMBlock(block) {
+			privKeyBytes, err = x509.DecryptPEMBlock(block, []byte(passphrase))
+			if err != nil {
+				return nil, errors.New("could not decrypt private key")
+			}
+		} else {
+			privKeyBytes = block.Bytes
+		}
 
-	switch block.Type {
-	case "RSA PRIVATE KEY":
-		rsaPrivKey, err := x509.ParsePKCS1PrivateKey(block.Bytes)
+		rsaPrivKey, err := x509.ParsePKCS1PrivateKey(privKeyBytes)
 		if err != nil {
-			return nil, fmt.Errorf("could not parse PEM: %v", err)
+			return nil, fmt.Errorf("could not parse DER encoded key: %v", err)
 		}
 
 		tufRSAPrivateKey, err := RSAToPrivateKey(rsaPrivKey)
 		if err != nil {
-			return nil, fmt.Errorf("could not convert crypto.PrivateKey to PrivateKey: %v", err)
+			return nil, fmt.Errorf("could not convert rsa.PrivateKey to data.PrivateKey: %v", err)
 		}
+
 		return tufRSAPrivateKey, nil
 	default:
 		return nil, fmt.Errorf("unsupported key type %q", block.Type)
 	}
 }
 
+// GenerateRSAKey generates an RSA Private key and returns a TUF PrivateKey
+func GenerateRSAKey(random io.Reader, bits int) (*data.PrivateKey, error) {
+	rsaPrivKey, err := rsa.GenerateKey(random, bits)
+	if err != nil {
+		return nil, fmt.Errorf("could not generate private key: %v", err)
+	}
+
+	return RSAToPrivateKey(rsaPrivKey)
+}
+
+// RSAToPrivateKey converts an rsa.Private key to a TUF data.PrivateKey type
 func RSAToPrivateKey(rsaPrivKey *rsa.PrivateKey) (*data.PrivateKey, error) {
 	// Get a DER-encoded representation of the PublicKey
 	rsaPubBytes, err := x509.MarshalPKIXPublicKey(&rsaPrivKey.PublicKey)
@@ -232,43 +222,23 @@ func RSAToPrivateKey(rsaPrivKey *rsa.PrivateKey) (*data.PrivateKey, error) {
 	return data.NewPrivateKey("RSA", rsaPubBytes, rsaPrivBytes), nil
 }
 
-// ParsePEMEncryptedPrivateKey returns a private key from a PEM encrypted private key. It
-// only supports RSA (PKCS#1).
-func ParsePEMEncryptedPrivateKey(pemBytes []byte, passphrase string) (crypto.PrivateKey, error) {
-	block, _ := pem.Decode(pemBytes)
-	if block == nil {
-		return nil, errors.New("no valid private key found")
-	}
-
-	switch block.Type {
-	case "RSA PRIVATE KEY":
-		if !x509.IsEncryptedPEMBlock(block) {
-			return nil, errors.New("private key is not encrypted")
-		}
-
-		decryptedPEMBlock, err := x509.DecryptPEMBlock(block, []byte(passphrase))
-		if err != nil {
-			return nil, errors.New("could not decrypt private key")
-		}
-
-		return x509.ParsePKCS1PrivateKey(decryptedPEMBlock)
-	default:
-		return nil, fmt.Errorf("unsupported key type %q", block.Type)
-	}
-}
-
-func NewCertificate(gun, organization string) *x509.Certificate {
+// NewCertificate returns an X509 Certificate following a template, given a GUN.
+func NewCertificate(gun string) (*x509.Certificate, error) {
 	notBefore := time.Now()
 	notAfter := notBefore.Add(time.Hour * 24 * 365 * 2)
 
 	serialNumberLimit := new(big.Int).Lsh(big.NewInt(1), 128)
-	// TODO(diogo): Don't silently ignore this error
-	serialNumber, _ := rand.Int(rand.Reader, serialNumberLimit)
 
+	serialNumber, err := rand.Int(rand.Reader, serialNumberLimit)
+	if err != nil {
+		return nil, fmt.Errorf("failed to generate new certificate: %v", err)
+	}
+
+	// TODO(diogo): Currently hard coding organization to be the gun. Revisit.
 	return &x509.Certificate{
 		SerialNumber: serialNumber,
 		Subject: pkix.Name{
-			Organization: []string{organization},
+			Organization: []string{gun},
 			CommonName:   gun,
 		},
 		NotBefore: notBefore,
@@ -277,5 +247,5 @@ func NewCertificate(gun, organization string) *x509.Certificate {
 		KeyUsage:              x509.KeyUsageKeyEncipherment | x509.KeyUsageDigitalSignature,
 		ExtKeyUsage:           []x509.ExtKeyUsage{x509.ExtKeyUsageCodeSigning},
 		BasicConstraintsValid: true,
-	}
+	}, nil
 }

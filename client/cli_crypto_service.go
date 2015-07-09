@@ -6,7 +6,6 @@ import (
 	"crypto/rsa"
 	"crypto/sha256"
 	"crypto/x509"
-	"encoding/pem"
 	"errors"
 	"fmt"
 	"path/filepath"
@@ -38,36 +37,15 @@ func NewRootCryptoService(rootKeyStore *trustmanager.KeyFileStore, passphrase st
 
 // Create is used to generate keys for targets, snapshots and timestamps
 func (ccs *CryptoService) Create(role string) (*data.PublicKey, error) {
-	// Generates a new RSA key
-	rsaPrivKey, err := rsa.GenerateKey(rand.Reader, rsaKeySize)
+	privKey, err := trustmanager.GenerateRSAKey(rand.Reader, rsaKeySize)
 	if err != nil {
-		return nil, fmt.Errorf("could not generate private key: %v", err)
+		return nil, fmt.Errorf("failed to generate RSA key: %v", err)
 	}
 
-	rsaPublicKey := rsaPrivKey.PublicKey
+	// Store the private key into our keystore with the name being: /GUN/ID.key
+	ccs.keyStore.AddKey(filepath.Join(ccs.gun, privKey.ID()), privKey)
 
-	// Using x509 to Marshal the Public key into DER encoding
-	pubBytes, err := x509.MarshalPKIXPublicKey(&rsaPublicKey)
-	if err != nil {
-		return nil, errors.New("Failed to Marshal public key.")
-	}
-
-	tufKey := data.NewPublicKey("RSA", pubBytes)
-
-	// Passing in the the GUN + keyID as the name for the private key and adding it
-	// to our KeyFileStore. Final storage will be under $BASE_PATH/GUN/keyID.key
-	privKeyFilename := filepath.Join(ccs.gun, tufKey.ID())
-
-	// Get a PEM encoded representation of the private key
-	pemRSAPrivKey, err := trustmanager.KeyToPEM(rsaPrivKey)
-	if err != nil {
-		return nil, fmt.Errorf("failed to generate the certificate for key: %v (%s)", role, err)
-	}
-
-	// Store the PEM-encoded private key into our keystore
-	ccs.keyStore.Add(privKeyFilename, pemRSAPrivKey)
-
-	return tufKey, nil
+	return data.PublicKeyFromPrivate(*privKey), nil
 }
 
 // Sign returns the signatures for data with the given keyIDs
@@ -81,29 +59,20 @@ func (ccs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signatur
 		// Get the PrivateKey filename
 		privKeyFilename := filepath.Join(ccs.gun, fingerprint)
 		// Read PrivateKey from file
-		privPEMBytes, err := ccs.keyStore.Get(privKeyFilename)
+		privKey, err := ccs.keyStore.GetKey(privKeyFilename)
 		if err != nil {
 			continue
 		}
 
-		// Parse PrivateKey
-		privKeyBytes, _ := pem.Decode(privPEMBytes)
-		privKey, err := x509.ParsePKCS1PrivateKey(privKeyBytes.Bytes)
-		if err != nil {
-			return nil, err
-		}
-
-		// Sign the data
-		sig, err := rsa.SignPKCS1v15(rand.Reader, privKey, hash, hashed[:])
+		sig, err := sign(privKey, hash, hashed[:])
 		if err != nil {
 			return nil, err
 		}
 
 		// Append signatures to result array
 		signatures = append(signatures, data.Signature{
-			KeyID:  fingerprint,
-			Method: "RSA",
-			//Method:    "RSASSA-PKCS1-V1_5-SIGN",
+			KeyID:     fingerprint,
+			Method:    "RSA",
 			Signature: sig[:],
 		})
 	}
@@ -126,21 +95,13 @@ func (ccs *RootCryptoService) Sign(keyIDs []string, payload []byte) ([]data.Sign
 	signatures := make([]data.Signature, 0, len(keyIDs))
 	for _, fingerprint := range keyIDs {
 		// Read PrivateKey from file
-		privPEMBytes, err := ccs.rootKeyStore.GetDecrypted(fingerprint, ccs.passphrase)
+		privKey, err := ccs.rootKeyStore.GetDecryptedKey(fingerprint, ccs.passphrase)
 		if err != nil {
 			// TODO(diogo): This error should be returned to the user in someway
 			continue
 		}
 
-		// Parse PrivateKey
-		privKeyBytes, _ := pem.Decode(privPEMBytes)
-		privKey, err := x509.ParsePKCS1PrivateKey(privKeyBytes.Bytes)
-		if err != nil {
-			return nil, err
-		}
-
-		// Sign the data
-		sig, err := rsa.SignPKCS1v15(rand.Reader, privKey, hash, hashed[:])
+		sig, err := sign(privKey, hash, hashed[:])
 		if err != nil {
 			return nil, err
 		}
@@ -152,5 +113,27 @@ func (ccs *RootCryptoService) Sign(keyIDs []string, payload []byte) ([]data.Sign
 			Signature: sig[:],
 		})
 	}
+
 	return signatures, nil
+}
+
+func sign(privKey *data.PrivateKey, hash crypto.Hash, hashed []byte) ([]byte, error) {
+	// TODO(diogo): Implement support for ECDSA.
+	if privKey.Cipher() != "RSA" {
+		return nil, fmt.Errorf("private key type not supported: %s", privKey.Cipher())
+	}
+
+	// Create an rsa.PrivateKey out of the private key bytes
+	rsaPrivKey, err := x509.ParsePKCS1PrivateKey(privKey.Private())
+	if err != nil {
+		return nil, err
+	}
+
+	// Use the RSA key to sign the data
+	sig, err := rsa.SignPKCS1v15(rand.Reader, rsaPrivKey, hash, hashed[:])
+	if err != nil {
+		return nil, err
+	}
+
+	return sig, nil
 }

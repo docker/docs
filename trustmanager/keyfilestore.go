@@ -1,5 +1,7 @@
 package trustmanager
 
+import "github.com/endophage/gotuf/data"
+
 const (
 	keyExtension = "key"
 )
@@ -20,39 +22,55 @@ func NewKeyFileStore(baseDir string) (*KeyFileStore, error) {
 	return &KeyFileStore{fileStore}, nil
 }
 
+// AddKey stores the contents of a PEM-encoded private key as a PEM block
+func (s *KeyFileStore) AddKey(name string, privKey *data.PrivateKey) error {
+	pemPrivKey, err := KeyToPEM(privKey)
+	if err != nil {
+		return err
+	}
+
+	return s.Add(name, pemPrivKey)
+}
+
+// GetKey returns the PrivateKey given a KeyID
+func (s *KeyFileStore) GetKey(name string) (*data.PrivateKey, error) {
+	keyBytes, err := s.Get(name)
+	if err != nil {
+		return nil, err
+	}
+
+	// Convert PEM encoded bytes back to a PrivateKey
+	privKey, err := ParsePEMPrivateKey(keyBytes, "")
+	if err != nil {
+		return nil, err
+	}
+
+	return privKey, nil
+}
+
 // AddEncrypted stores the contents of a PEM-encoded private key as an encrypted PEM block
-func (s *KeyFileStore) AddEncrypted(fileName string, pemKey []byte, passphrase string) error {
-
-	privKey, err := ParsePEMPrivateKey(pemKey)
+func (s *KeyFileStore) AddEncryptedKey(name string, privKey *data.PrivateKey, passphrase string) error {
+	encryptedPrivKey, err := EncryptPrivateKey(privKey, passphrase)
 	if err != nil {
 		return err
 	}
 
-	encryptedKey, err := EncryptPrivateKey(privKey, passphrase)
-	if err != nil {
-		return err
-	}
-
-	return s.Add(fileName, encryptedKey)
+	return s.Add(name, encryptedPrivKey)
 }
 
 // GetDecrypted decrypts and returns the PEM Encoded private key given a flename
 // and a passphrase
-func (s *KeyFileStore) GetDecrypted(fileName string, passphrase string) ([]byte, error) {
-	keyBytes, err := s.Get(fileName)
+func (s *KeyFileStore) GetDecryptedKey(name string, passphrase string) (*data.PrivateKey, error) {
+	keyBytes, err := s.Get(name)
 	if err != nil {
 		return nil, err
 	}
 
 	// Gets an unencrypted PrivateKey.
-	privKey, err := ParsePEMEncryptedPrivateKey(keyBytes, passphrase)
+	privKey, err := ParsePEMPrivateKey(keyBytes, passphrase)
 	if err != nil {
 		return nil, err
 	}
 
-	return KeyToPEM(privKey)
-}
-
-func (s *KeyFileStore) Link(src, dst string) error {
-	return s.FileStore.Link(src, dst)
+	return privKey, nil
 }

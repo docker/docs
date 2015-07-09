@@ -3,7 +3,6 @@ package client
 import (
 	"bytes"
 	"crypto/rand"
-	"crypto/rsa"
 	"crypto/x509"
 	"encoding/json"
 	"encoding/pem"
@@ -58,12 +57,12 @@ type NotaryRepository struct {
 	baseURL          string
 	tufRepoPath      string
 	transport        http.RoundTripper
-	signer           *signed.Signer
-	tufRepo          *tuf.TufRepo
-	fileStore        store.MetadataStore
-	privKeyStore     *trustmanager.KeyFileStore
 	caStore          trustmanager.X509Store
 	certificateStore trustmanager.X509Store
+	fileStore        store.MetadataStore
+	signer           *signed.Signer
+	tufRepo          *tuf.TufRepo
+	privKeyStore     *trustmanager.KeyFileStore
 	rootKeyStore     *trustmanager.KeyFileStore
 	rootSigner       *UnlockedSigner
 }
@@ -609,45 +608,29 @@ func (c *NotaryRepository) ListPrivateKeys() []string {
 
 // GenRootKey generates a new root key protected by a given passphrase
 func (c *NotaryRepository) GenRootKey(passphrase string) (string, error) {
-	// TODO(diogo): Refactor TUF Key creation. We should never see crypto.privatekeys
-	// Generates a new RSA key
-	rsaPrivKey, err := rsa.GenerateKey(rand.Reader, rsaKeySize)
-	if err != nil {
-		return "", fmt.Errorf("could not generate private key: %v", err)
-	}
-
-	// Encode the private key in PEM format since that is the final storage format
-	pemPrivKey, err := trustmanager.KeyToPEM(rsaPrivKey)
-	if err != nil {
-		return "", fmt.Errorf("failed to encode the private key: %v", err)
-	}
-
-	tufPrivKey, err := trustmanager.RSAToPrivateKey(rsaPrivKey)
+	privKey, err := trustmanager.GenerateRSAKey(rand.Reader, rsaKeySize)
 	if err != nil {
 		return "", fmt.Errorf("failed to convert private key: ", err)
 	}
 
-	c.rootKeyStore.AddEncrypted(tufPrivKey.ID(), pemPrivKey, passphrase)
+	c.rootKeyStore.AddEncryptedKey(privKey.ID(), privKey, passphrase)
 
-	return tufPrivKey.ID(), nil
+	return privKey.ID(), nil
 }
 
 // GetRootSigner retreives a root key that includes the ID and a signer
 func (c *NotaryRepository) GetRootSigner(rootKeyID, passphrase string) (*UnlockedSigner, error) {
-	pemPrivKey, err := c.rootKeyStore.GetDecrypted(rootKeyID, passphrase)
+	privKey, err := c.rootKeyStore.GetDecryptedKey(rootKeyID, passphrase)
 	if err != nil {
 		return nil, fmt.Errorf("could not get decrypted root key: %v", err)
 	}
 
-	tufPrivKey, err := trustmanager.TufParsePEMPrivateKey(pemPrivKey)
-	if err != nil {
-		return nil, fmt.Errorf("could not get parse root key: %v", err)
-	}
-
+	// This signer will be used for all of the normal TUF operations, except for
+	// when a root key is needed.
 	signer := signed.NewSigner(NewRootCryptoService(c.rootKeyStore, passphrase))
 
 	return &UnlockedSigner{
-		privKey: tufPrivKey,
+		privKey: privKey,
 		signer:  signer}, nil
 }
 
@@ -676,6 +659,7 @@ func (c *NotaryRepository) loadKeys(trustDir, rootKeysDir string) error {
 		return err
 	}
 
+	// Load the keystore that will hold all of our encrypted Root Private Keys
 	rootKeyStore, err := trustmanager.NewKeyFileStore(rootKeysDir)
 	if err != nil {
 		return err
@@ -693,29 +677,32 @@ func (uk *UnlockedSigner) ID() string {
 	return uk.PublicKey().ID()
 }
 
-// PublicKey Returns the public key associated with the Root Key
+// PublicKey Returns the public key associated with the Private Key within the Signer
 func (uk *UnlockedSigner) PublicKey() *data.PublicKey {
 	return data.PublicKeyFromPrivate(*uk.privKey)
 }
 
-// GenerateCertificate
+// GenerateCertificate generates an X509 Certificate from a template, given a GUN
 func (uk *UnlockedSigner) GenerateCertificate(gun string) (*x509.Certificate, error) {
 	privKey, err := x509.ParsePKCS1PrivateKey(uk.privKey.Private())
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse root key: %v (%s)", gun, err.Error())
 	}
 
-	//TODO (diogo): We're hardcoding the Organization to be the GUN. Probably want to change it
-	template := trustmanager.NewCertificate(gun, gun)
+	template, err := trustmanager.NewCertificate(gun)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create the certificate template for: %s (%v)", gun, err)
+	}
+
 	derBytes, err := x509.CreateCertificate(rand.Reader, template, template, privKey.Public(), privKey)
 	if err != nil {
-		return nil, fmt.Errorf("failed to generate the certificate for: %v (%s)", gun, err.Error())
+		return nil, fmt.Errorf("failed to create the certificate for: %s (%v)", gun, err)
 	}
 
 	// Encode the new certificate into PEM
 	cert, err := x509.ParseCertificate(derBytes)
 	if err != nil {
-		return nil, fmt.Errorf("failed to parse the certificate for key: %v (%s)", gun, err.Error())
+		return nil, fmt.Errorf("failed to parse the certificate for key: %s (%v)", gun, err)
 	}
 
 	return cert, nil

@@ -24,8 +24,8 @@ type FileStore interface {
 
 type EncryptedFileStore interface {
 	FileStore
-	AddEncrypted(fileName string, keyBytes []byte, passphrase string) error
-	GetDecrypted(fileName string, passphrase string) ([]byte, error)
+	AddEncrypted(fileName string, data []byte, passphrase string) error
+	GetDecrypted(fileName, passphrase string) ([]byte, error)
 }
 
 // SimpleFileStore implements FileStore
