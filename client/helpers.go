@@ -11,9 +11,9 @@ import (
 )
 
 // Use this to initialize remote HTTPStores from the config settings
-func getRemoteStore(gun string) (store.RemoteStore, error) {
+func getRemoteStore(baseURL, gun string) (store.RemoteStore, error) {
 	return store.NewHTTPStore(
-		"https://notary:4443/v2/"+gun+"/_trust/tuf/",
+		baseURL+"/v2/"+gun+"/_trust/tuf/",
 		"",
 		"json",
 		"",

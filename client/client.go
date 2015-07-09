@@ -9,7 +9,6 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
-	"net/http"
 	"os"
 	"path/filepath"
 	"time"
@@ -56,7 +55,6 @@ type NotaryRepository struct {
 	Gun              string
 	baseURL          string
 	tufRepoPath      string
-	transport        http.RoundTripper
 	caStore          trustmanager.X509Store
 	certificateStore trustmanager.X509Store
 	fileStore        store.MetadataStore
@@ -92,7 +90,7 @@ func NewTarget(targetName string, targetPath string) (*Target, error) {
 // NewClient is a helper method that returns a new notary Client, given a config
 // file. It makes the assumption that the base directory for the config file will
 // be the place where trust information is being cached locally.
-func NewNotaryRepository(baseDir, gun, baseURL string, transport http.RoundTripper) (*NotaryRepository, error) {
+func NewNotaryRepository(baseDir, gun, baseURL string) (*NotaryRepository, error) {
 	trustDir := filepath.Join(baseDir, trustDir)
 	rootKeysDir := filepath.Join(baseDir, rootKeysDir)
 
@@ -108,7 +106,6 @@ func NewNotaryRepository(baseDir, gun, baseURL string, transport http.RoundTripp
 		baseDir:      baseDir,
 		baseURL:      baseURL,
 		tufRepoPath:  filepath.Join(baseDir, tufDir, gun),
-		transport:    transport,
 		signer:       signer,
 		privKeyStore: privKeyStore,
 	}
@@ -134,7 +131,7 @@ func (r *NotaryRepository) Initialize(uSigner *UnlockedSigner) error {
 		return err
 	}
 
-	remote, err := getRemoteStore(r.Gun)
+	remote, err := getRemoteStore(r.baseURL, r.Gun)
 	rawTSKey, err := remote.GetKey("timestamp")
 	if err != nil {
 		return err
@@ -367,7 +364,7 @@ func (r *NotaryRepository) Publish(getPass passwordRetriever) error {
 		return err
 	}
 
-	remote, err := getRemoteStore(r.Gun)
+	remote, err := getRemoteStore(r.baseURL, r.Gun)
 	if err != nil {
 		return err
 	}
@@ -567,7 +564,7 @@ func (r *NotaryRepository) validateRoot(root *data.Signed) error {
 }
 
 func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
-	remote, err := getRemoteStore(r.Gun)
+	remote, err := getRemoteStore(r.baseURL, r.Gun)
 	if err != nil {
 		return nil, err
 	}

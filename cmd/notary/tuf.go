@@ -4,7 +4,6 @@ import (
 	"crypto/sha256"
 	"fmt"
 	"io/ioutil"
-	"net/http"
 	"os"
 
 	"github.com/Sirupsen/logrus"
@@ -14,6 +13,9 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
+
+// FIXME: This should not be hardcoded
+const hardcodedBaseURL = "https://notary:4443"
 
 var remoteTrustServer string
 
@@ -76,8 +78,7 @@ func tufAdd(cmd *cobra.Command, args []string) {
 	targetName := args[1]
 	targetPath := args[2]
 
-	t := &http.Transport{}
-	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, "", t)
+	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -100,9 +101,8 @@ func tufInit(cmd *cobra.Command, args []string) {
 	}
 
 	gun := args[0]
-	t := &http.Transport{}
 
-	nRepo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, "", t)
+	nRepo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -131,8 +131,7 @@ func tufList(cmd *cobra.Command, args []string) {
 	}
 	gun := args[0]
 
-	t := &http.Transport{}
-	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, "", t)
+	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -157,8 +156,7 @@ func tufLookup(cmd *cobra.Command, args []string) {
 	gun := args[0]
 	targetName := args[1]
 
-	t := &http.Transport{}
-	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, "", t)
+	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -182,8 +180,7 @@ func tufPublish(cmd *cobra.Command, args []string) {
 
 	fmt.Println("Pushing changes to ", gun, ".")
 
-	t := &http.Transport{}
-	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, "", t)
+	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -228,8 +225,7 @@ func verify(cmd *cobra.Command, args []string) {
 	//TODO (diogo): This code is copy/pasted from lookup.
 	gun := args[0]
 	targetName := args[1]
-	t := &http.Transport{}
-	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, "", t)
+	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL)
 	if err != nil {
 		fatalf(err.Error())
 	}

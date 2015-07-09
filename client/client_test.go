@@ -2,7 +2,10 @@ package client
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
+	"net/http"
+	"net/http/httptest"
 	"os"
 	"path/filepath"
 	"strings"
@@ -13,6 +16,16 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func createTestServer(t *testing.T) *httptest.Server {
+	// TUF will request /v2/docker.com/notary/_trust/tuf/timestamp.key
+	// Return a canned timestamp.key
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprint(w, `{"keytype":"ed25519","keyval":{"public":"y4wnCW7Y8NYCmKZyWqxxUUj8p7SSoV5Cr1Zc+jqBxBw=","private":null}}`)
+	}))
+
+	return ts
+}
+
 // TestInitRepo runs through the process of initializing a repository and makes
 // sure the repository looks correct on disk.
 func TestInitRepo(t *testing.T) {
@@ -21,7 +34,10 @@ func TestInitRepo(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
-	repo, err := NewNotaryRepository(tempBaseDir, gun, "", nil)
+	ts := createTestServer(t)
+	defer ts.Close()
+
+	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL)
 	assert.NoError(t, err, "error creating repo: %s", err)
 
 	rootKeyID, err := repo.GenRootKey("passphrase")
@@ -148,7 +164,11 @@ func TestAddTarget(t *testing.T) {
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	gun := "docker.com/notary"
-	repo, err := NewNotaryRepository(tempBaseDir, gun, "", nil)
+
+	ts := createTestServer(t)
+	defer ts.Close()
+
+	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
 	rootKeyID, err := repo.GenRootKey("passphrase")
@@ -246,7 +266,11 @@ func TestValidateRootKey(t *testing.T) {
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	gun := "docker.com/notary"
-	repo, err := NewNotaryRepository(tempBaseDir, gun, "", nil)
+
+	ts := createTestServer(t)
+	defer ts.Close()
+
+	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
 	rootKeyID, err := repo.GenRootKey("passphrase")
