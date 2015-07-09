@@ -10,6 +10,7 @@ import (
 
 	"github.com/docker/notary/trustmanager"
 	"github.com/endophage/gotuf/data"
+	"github.com/stretchr/testify/assert"
 )
 
 // TestInitRepo runs through the process of initializing a repository and makes
@@ -17,30 +18,20 @@ import (
 func TestInitRepo(t *testing.T) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	if err != nil {
-		t.Fatalf("failed to create a temporary directory: %s", err)
-	}
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	client, err := NewClient(tempBaseDir)
-	if err != nil {
-		t.Fatalf("error creating client: %s", err)
-	}
+	assert.NoError(t, err, "error creating client: %s", err)
 
 	rootKeyID, err := client.GenRootKey("passphrase")
-	if err != nil {
-		t.Fatalf("error generating root key: %s", err)
-	}
+	assert.NoError(t, err, "error generating root key: %s", err)
 
 	rootKey, err := client.GetRootKey(rootKeyID, "passphrase")
-	if err != nil {
-		t.Fatalf("error retreiving root key: %s", err)
-	}
+	assert.NoError(t, err, "error retreiving root key: %s", err)
 
 	gun := "docker.com/notary"
 	repo, err := client.InitRepository(gun, "", nil, rootKey)
-	if err != nil {
-		t.Fatalf("error creating repository: %s", err)
-	}
+	assert.NoError(t, err, "error creating repository: %s", err)
 
 	// Inspect contents of the temporary directory
 	expectedDirs := []string{
@@ -55,53 +46,40 @@ func TestInitRepo(t *testing.T) {
 	}
 	for _, dir := range expectedDirs {
 		fi, err := os.Stat(filepath.Join(tempBaseDir, dir))
-		if err != nil {
-			t.Fatalf("missing directory in base directory: %s", dir)
-		}
-		if !fi.Mode().IsDir() {
-			t.Fatalf("%s is not a directory", dir)
-		}
+		assert.NoError(t, err, "missing directory in base directory: %s", dir)
+		assert.True(t, fi.Mode().IsDir(), "%s is not a directory", dir)
 	}
 
 	// Look for keys in private. The filenames should match the key IDs
 	// in the private key store.
 	privKeyList := repo.privKeyStore.ListAll()
 	for _, privKeyName := range privKeyList {
-		if _, err := os.Stat(privKeyName); err != nil {
-			t.Fatalf("missing private key: %s", privKeyName)
-		}
+		_, err := os.Stat(privKeyName)
+		assert.NoError(t, err, "missing private key: %s", privKeyName)
 	}
 
 	// Look for keys in root_keys
 	// There should be a file named after the key ID of the root key we
 	// passed in.
 	rootKeyFilename := rootKey.ID() + ".key"
-	if _, err := os.Stat(filepath.Join(tempBaseDir, "private", "root_keys", rootKeyFilename)); err != nil {
-		t.Fatal("missing root key")
-	}
+	_, err = os.Stat(filepath.Join(tempBaseDir, "private", "root_keys", rootKeyFilename))
+	assert.NoError(t, err, "missing root key")
 
 	// Also expect a symlink from the key ID of the certificate key to this
 	// root key
 	certificates := client.certificateStore.GetCertificates()
-	if len(certificates) != 1 {
-		t.Fatalf("unexpected number of certificates (%d)", len(certificates))
-	}
+	assert.Len(t, certificates, 1, "unexpected number of certificates")
 
 	certID := trustmanager.FingerprintCert(certificates[0])
 
 	actualDest, err := os.Readlink(filepath.Join(tempBaseDir, "private", "root_keys", certID+".key"))
-	if err != nil {
-		t.Fatal("missing symlink to root key")
-	}
+	assert.NoError(t, err, "missing symlink to root key")
 
-	if actualDest != rootKeyFilename {
-		t.Fatalf("symlink to root key has wrong destination (got: %s, expected: %s)", actualDest, rootKeyFilename)
-	}
+	assert.Equal(t, rootKeyFilename, actualDest, "symlink to root key has wrong destination")
 
 	// There should be a trusted certificate
-	if _, err := os.Stat(filepath.Join(tempBaseDir, "trusted_certificates", gun, certID+".crt")); err != nil {
-		t.Fatal("missing trusted certificate")
-	}
+	_, err = os.Stat(filepath.Join(tempBaseDir, "trusted_certificates", gun, certID+".crt"))
+	assert.NoError(t, err, "missing trusted certificate")
 
 	// Sanity check the TUF metadata files. Verify that they exist, the JSON is
 	// well-formed, and the signatures exist. For the root.json file, also check
@@ -114,48 +92,32 @@ func TestInitRepo(t *testing.T) {
 	for _, filename := range expectedTUFMetadataFiles {
 		fullPath := filepath.Join(tempBaseDir, filename)
 		_, err := os.Stat(fullPath)
-		if err != nil {
-			t.Fatalf("missing TUF metadata file: %s", filename)
-		}
+		assert.NoError(t, err, "missing TUF metadata file: %s", filename)
 
 		jsonBytes, err := ioutil.ReadFile(fullPath)
-		if err != nil {
-			t.Fatalf("error reading TUF metadata file %s: %s", filename, err)
-		}
+		assert.NoError(t, err, "error reading TUF metadata file %s: %s", filename, err)
 
 		var decoded data.Signed
-		if err := json.Unmarshal(jsonBytes, &decoded); err != nil {
-			t.Fatalf("error parsing TUF metadata file %s: %s", filename, err)
-		}
+		err = json.Unmarshal(jsonBytes, &decoded)
+		assert.NoError(t, err, "error parsing TUF metadata file %s: %s", filename, err)
 
-		if len(decoded.Signatures) != 1 {
-			t.Fatalf("incorrect number of signatures in TUF metadata file %s", filename)
-		}
+		assert.Len(t, decoded.Signatures, 1, "incorrect number of signatures in TUF metadata file %s", filename)
 
-		if decoded.Signatures[0].KeyID == "" || decoded.Signatures[0].Method == "" || len(decoded.Signatures[0].Signature) == 0 {
-			t.Fatalf("bad content in signature on TUF metadata file %s", filename)
-		}
+		assert.NotEmpty(t, decoded.Signatures[0].KeyID, "empty key ID field in TUF metadata file %s", filename)
+		assert.NotEmpty(t, decoded.Signatures[0].Method, "empty method field in TUF metadata file %s", filename)
+		assert.NotEmpty(t, decoded.Signatures[0].Signature, "empty signature in TUF metadata file %s", filename)
 
 		// Special case for root.json: also check that the signed
 		// content for keys and roles
 		if strings.HasSuffix(filename, "root.json") {
 			var decodedRoot data.Root
-			if err := json.Unmarshal(decoded.Signed, &decodedRoot); err != nil {
-				t.Fatalf("error parsing root.json signed section: %s", err)
-			}
+			err := json.Unmarshal(decoded.Signed, &decodedRoot)
+			assert.NoError(t, err, "error parsing root.json signed section: %s", err)
 
-			if decodedRoot.Type != "Root" {
-				t.Fatal("_type mismatch in root.json")
-			}
-
-			if decodedRoot.Type != "Root" {
-				t.Fatal("_type mismatch in root.json")
-			}
+			assert.Equal(t, "Root", decodedRoot.Type, "_type mismatch in root.json")
 
 			// Expect 4 keys in the Keys map: root, targets, snapshot, timestamp
-			if len(decodedRoot.Keys) != 4 {
-				t.Fatal("wrong number of keys in root.json")
-			}
+			assert.Len(t, decodedRoot.Keys, 4, "wrong number of keys in root.json")
 
 			roleCount := 0
 			for role := range decodedRoot.Roles {
@@ -164,9 +126,7 @@ func TestInitRepo(t *testing.T) {
 					t.Fatalf("unexpected role %s in root.json", role)
 				}
 			}
-			if roleCount != 4 {
-				t.Fatalf("wrong number of roles (%d) in root.json", roleCount)
-			}
+			assert.Equal(t, 4, roleCount, "wrong number of roles (%d) in root.json", roleCount)
 		}
 	}
 }
