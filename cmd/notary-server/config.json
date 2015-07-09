@@ -5,7 +5,7 @@
 		"tls_key_file": "./fixtures/notary.key"
 	},
 	"trust_service": {
-		"type": "remote",
+		"type": "local",
 		"hostname": "rufus",
 		"port": "7899",
 		"tls_ca_file": "./fixtures/ca.cert"

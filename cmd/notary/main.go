@@ -12,7 +12,6 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
-	notaryclient "github.com/docker/notary/client"
 	"github.com/docker/notary/trustmanager"
 )
 
@@ -23,7 +22,6 @@ const privDir string = "private/"
 const rootKeysDir string = "root_keys/"
 
 var rawOutput bool
-var nClient *notaryclient.NotaryClient
 var caStore trustmanager.X509Store
 var certificateStore trustmanager.X509Store
 var privKeyStore trustmanager.FileStore
@@ -93,10 +91,6 @@ func init() {
 		fatalf("could not create KeyFileStore: %v", err)
 	}
 
-	nClient, err = notaryclient.NewClient(viper.GetString("baseTrustDir"))
-	if err != nil {
-		fatalf("could not create Notary Client: %v", err)
-	}
 }
 
 func main() {

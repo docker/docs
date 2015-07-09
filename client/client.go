@@ -50,14 +50,8 @@ type UnlockedSigner struct {
 	signer  *signed.Signer
 }
 
-type NotaryClient struct {
-	baseDir          string
-	caStore          trustmanager.X509Store
-	certificateStore trustmanager.X509Store
-	rootKeyStore     *trustmanager.KeyFileStore
-}
-
 type NotaryRepository struct {
+	baseDir          string
 	Gun              string
 	baseURL          string
 	tufRepoPath      string
@@ -68,6 +62,7 @@ type NotaryRepository struct {
 	privKeyStore     *trustmanager.KeyFileStore
 	caStore          trustmanager.X509Store
 	certificateStore trustmanager.X509Store
+	rootKeyStore     *trustmanager.KeyFileStore
 	rootSigner       *UnlockedSigner
 }
 
@@ -96,22 +91,48 @@ func NewTarget(targetName string, targetPath string) (*Target, error) {
 // NewClient is a helper method that returns a new notary Client, given a config
 // file. It makes the assumption that the base directory for the config file will
 // be the place where trust information is being cached locally.
-func NewClient(baseDir string) (*NotaryClient, error) {
+func NewNotaryRepository(baseDir, gun, baseURL string, transport http.RoundTripper) (*NotaryRepository, error) {
 	trustDir := filepath.Join(baseDir, trustDir)
 	rootKeysDir := filepath.Join(baseDir, rootKeysDir)
 
-	nClient := &NotaryClient{baseDir: baseDir}
-
-	if err := nClient.loadKeys(trustDir, rootKeysDir); err != nil {
+	privKeyStore, err := trustmanager.NewKeyFileStore(filepath.Join(baseDir, privDir))
+	if err != nil {
 		return nil, err
 	}
 
-	return nClient, nil
+	signer := signed.NewSigner(NewCryptoService(gun, privKeyStore))
+
+	nRepo := &NotaryRepository{
+		Gun:          gun,
+		baseDir:      baseDir,
+		baseURL:      baseURL,
+		tufRepoPath:  filepath.Join(baseDir, tufDir, gun),
+		transport:    transport,
+		signer:       signer,
+		privKeyStore: privKeyStore,
+	}
+
+	if err := nRepo.loadKeys(trustDir, rootKeysDir); err != nil {
+		return nil, err
+	}
+
+	return nRepo, nil
 }
 
 // Initialize creates a new repository by using rootKey as the root Key for the
 // TUF repository.
-func (r *NotaryRepository) Initialize(rootKey *data.PublicKey) error {
+func (r *NotaryRepository) Initialize(uSigner *UnlockedSigner) error {
+	rootCert, err := uSigner.GenerateCertificate(r.Gun)
+	if err != nil {
+		return err
+	}
+	r.certificateStore.AddCert(rootCert)
+	rootKey := data.NewPublicKey("RSA", trustmanager.CertToPEM(rootCert))
+	err = r.rootKeyStore.Link(uSigner.ID(), rootKey.ID())
+	if err != nil {
+		return err
+	}
+
 	remote, err := getRemoteStore(r.Gun)
 	rawTSKey, err := remote.GetKey("timestamp")
 	if err != nil {
@@ -188,7 +209,7 @@ func (r *NotaryRepository) Initialize(rootKey *data.PublicKey) error {
 		return err
 	}
 
-	if err := r.saveMetadata(r.rootSigner.signer); err != nil {
+	if err := r.saveMetadata(uSigner.signer); err != nil {
 		return err
 	}
 
@@ -264,7 +285,7 @@ func (r *NotaryRepository) GetTargetByName(name string) (*Target, error) {
 }
 
 // Publish pushes the local changes in signed material to the remote notary-server
-func (r *NotaryRepository) Publish() error {
+func (r *NotaryRepository) Publish(passphrase string) error {
 	c, err := r.bootstrapClient() // just need the repo to be initialized from remote
 	if err != nil {
 		if _, ok := err.(*store.ErrMetaNotFound); ok {
@@ -278,10 +299,11 @@ func (r *NotaryRepository) Publish() error {
 			logrus.Error("Could not publish Repository: ", err.Error())
 			return err
 		}
-	}
-	err = c.Update()
-	if err != nil {
-		return err
+	} else {
+		err = c.Update()
+		if err != nil {
+			return err
+		}
 	}
 
 	cl, err := changelist.NewFileChangelist(filepath.Join(r.tufRepoPath, "changelist"))
@@ -295,7 +317,13 @@ func (r *NotaryRepository) Publish() error {
 		return err
 	}
 
-	root, err := r.tufRepo.SignRoot(data.DefaultExpires("root"), r.rootSigner.signer)
+	rootKeyID := r.tufRepo.Root.Signed.Roles["root"].KeyIDs[0]
+	rootSigner, err := r.GetRootSigner(rootKeyID, passphrase)
+	if err != nil {
+		return err
+	}
+
+	root, err := r.tufRepo.SignRoot(data.DefaultExpires("root"), rootSigner.signer)
 	if err != nil {
 		return err
 	}
@@ -541,7 +569,7 @@ func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
 
 // ListPrivateKeys lists all availables private keys. Does not include private key
 // material
-func (c *NotaryClient) ListPrivateKeys() []string {
+func (c *NotaryRepository) ListPrivateKeys() []string {
 	// TODO(diogo): Make this work
 	for _, k := range c.rootKeyStore.ListAll() {
 		fmt.Println(k)
@@ -550,7 +578,7 @@ func (c *NotaryClient) ListPrivateKeys() []string {
 }
 
 // GenRootKey generates a new root key protected by a given passphrase
-func (c *NotaryClient) GenRootKey(passphrase string) (string, error) {
+func (c *NotaryRepository) GenRootKey(passphrase string) (string, error) {
 	// TODO(diogo): Refactor TUF Key creation. We should never see crypto.privatekeys
 	// Generates a new RSA key
 	rsaPrivKey, err := rsa.GenerateKey(rand.Reader, rsaKeySize)
@@ -575,7 +603,7 @@ func (c *NotaryClient) GenRootKey(passphrase string) (string, error) {
 }
 
 // GetRootSigner retreives a root key that includes the ID and a signer
-func (c *NotaryClient) GetRootSigner(rootKeyID, passphrase string) (*UnlockedSigner, error) {
+func (c *NotaryRepository) GetRootSigner(rootKeyID, passphrase string) (*UnlockedSigner, error) {
 	pemPrivKey, err := c.rootKeyStore.GetDecrypted(rootKeyID, passphrase)
 	if err != nil {
 		return nil, fmt.Errorf("could not get decrypted root key: %v", err)
@@ -593,67 +621,7 @@ func (c *NotaryClient) GetRootSigner(rootKeyID, passphrase string) (*UnlockedSig
 		signer:  signer}, nil
 }
 
-// GetRepository returns a new repository
-func (c *NotaryClient) GetRepository(gun string, baseURL string, transport http.RoundTripper, uSigner *UnlockedSigner) (*NotaryRepository, error) {
-	privKeyStore, err := trustmanager.NewKeyFileStore(filepath.Join(c.baseDir, privDir))
-	if err != nil {
-		return nil, err
-	}
-
-	signer := signed.NewSigner(NewCryptoService(gun, privKeyStore))
-
-	return &NotaryRepository{Gun: gun,
-		baseURL:          baseURL,
-		tufRepoPath:      filepath.Join(c.baseDir, tufDir, gun),
-		transport:        transport,
-		signer:           signer,
-		privKeyStore:     privKeyStore,
-		caStore:          c.caStore,
-		certificateStore: c.certificateStore,
-		rootSigner:       uSigner,
-	}, nil
-}
-
-func (c *NotaryClient) InitRepository(gun string, baseURL string, transport http.RoundTripper, uSigner *UnlockedSigner) (*NotaryRepository, error) {
-	// Creates and saves a trusted certificate for this store, with this root key
-	rootCert, err := uSigner.GenerateCertificate(gun)
-	if err != nil {
-		return nil, err
-	}
-	c.certificateStore.AddCert(rootCert)
-	rootKey := data.NewPublicKey("RSA", trustmanager.CertToPEM(rootCert))
-	err = c.rootKeyStore.Link(uSigner.ID(), rootKey.ID())
-	if err != nil {
-		return nil, err
-	}
-
-	privKeyStore, err := trustmanager.NewKeyFileStore(filepath.Join(c.baseDir, privDir))
-	if err != nil {
-		return nil, err
-	}
-
-	signer := signed.NewSigner(NewCryptoService(gun, privKeyStore))
-
-	nRepo := &NotaryRepository{Gun: gun,
-		baseURL:          baseURL,
-		tufRepoPath:      filepath.Join(c.baseDir, tufDir, gun),
-		transport:        transport,
-		signer:           signer,
-		privKeyStore:     privKeyStore,
-		caStore:          c.caStore,
-		certificateStore: c.certificateStore,
-		rootSigner:       uSigner,
-	}
-
-	err = nRepo.Initialize(rootKey)
-	if err != nil {
-		return nil, err
-	}
-
-	return nRepo, nil
-}
-
-func (c *NotaryClient) loadKeys(trustDir, rootKeysDir string) error {
+func (c *NotaryRepository) loadKeys(trustDir, rootKeysDir string) error {
 	// Load all CAs that aren't expired and don't use SHA1
 	caStore, err := trustmanager.NewX509FilteredFileStore(trustDir, func(cert *x509.Certificate) bool {
 		return cert.IsCA && cert.BasicConstraintsValid && cert.SubjectKeyId != nil &&

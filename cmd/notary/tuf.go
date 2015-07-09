@@ -12,6 +12,7 @@ import (
 	"github.com/endophage/gotuf/data"
 	"github.com/endophage/gotuf/keys"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 var remoteTrustServer string
@@ -76,7 +77,7 @@ func tufAdd(cmd *cobra.Command, args []string) {
 	targetPath := args[2]
 
 	t := &http.Transport{}
-	repo, err := nClient.GetRepository(gun, "", t, nil)
+	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, "", t)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -98,20 +99,26 @@ func tufInit(cmd *cobra.Command, args []string) {
 		fatalf("Must specify a GUN")
 	}
 
+	gun := args[0]
 	t := &http.Transport{}
+
+	nRepo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, "", t)
+	if err != nil {
+		fatalf(err.Error())
+	}
 
 	// TODO(diogo): We don't want to generate a new root every time. Ask the user
 	// which key she wants to use if there > 0 root keys available.
-	rootKeyID, err := nClient.GenRootKey("passphrase")
+	rootKeyID, err := nRepo.GenRootKey("passphrase")
 	if err != nil {
 		fatalf(err.Error())
 	}
-	rootSigner, err := nClient.GetRootSigner(rootKeyID, "passphrase")
+	rootSigner, err := nRepo.GetRootSigner(rootKeyID, "passphrase")
 	if err != nil {
 		fatalf(err.Error())
 	}
 
-	_, err = nClient.InitRepository(args[0], "", t, rootSigner)
+	nRepo.Initialize(rootSigner)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -125,7 +132,7 @@ func tufList(cmd *cobra.Command, args []string) {
 	gun := args[0]
 
 	t := &http.Transport{}
-	repo, err := nClient.GetRepository(gun, "", t, nil)
+	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, "", t)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -151,7 +158,7 @@ func tufLookup(cmd *cobra.Command, args []string) {
 	targetName := args[1]
 
 	t := &http.Transport{}
-	repo, err := nClient.GetRepository(gun, "", t, nil)
+	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, "", t)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -176,12 +183,12 @@ func tufPublish(cmd *cobra.Command, args []string) {
 	fmt.Println("Pushing changes to ", gun, ".")
 
 	t := &http.Transport{}
-	repo, err := nClient.GetRepository(gun, "", t, nil)
+	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, "", t)
 	if err != nil {
 		fatalf(err.Error())
 	}
 
-	err = repo.Publish()
+	err = repo.Publish("passphrase")
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -222,7 +229,7 @@ func verify(cmd *cobra.Command, args []string) {
 	gun := args[0]
 	targetName := args[1]
 	t := &http.Transport{}
-	repo, err := nClient.GetRepository(gun, "", t, nil)
+	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, "", t)
 	if err != nil {
 		fatalf(err.Error())
 	}

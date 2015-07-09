@@ -16,21 +16,21 @@ import (
 // TestInitRepo runs through the process of initializing a repository and makes
 // sure the repository looks correct on disk.
 func TestInitRepo(t *testing.T) {
+	gun := "docker.com/notary"
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
-	client, err := NewClient(tempBaseDir)
-	assert.NoError(t, err, "error creating client: %s", err)
+	repo, err := NewNotaryRepository(tempBaseDir, gun, "", nil)
+	assert.NoError(t, err, "error creating repo: %s", err)
 
-	rootKeyID, err := client.GenRootKey("passphrase")
+	rootKeyID, err := repo.GenRootKey("passphrase")
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootSigner, err := client.GetRootSigner(rootKeyID, "passphrase")
+	rootSigner, err := repo.GetRootSigner(rootKeyID, "passphrase")
 	assert.NoError(t, err, "error retreiving root key: %s", err)
 
-	gun := "docker.com/notary"
-	repo, err := client.InitRepository(gun, "", nil, rootSigner)
+	err = repo.Initialize(rootSigner)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
 	// Inspect contents of the temporary directory
@@ -67,7 +67,7 @@ func TestInitRepo(t *testing.T) {
 
 	// Also expect a symlink from the key ID of the certificate key to this
 	// root key
-	certificates := client.certificateStore.GetCertificates()
+	certificates := repo.certificateStore.GetCertificates()
 	assert.Len(t, certificates, 1, "unexpected number of certificates")
 
 	certID := trustmanager.FingerprintCert(certificates[0])
