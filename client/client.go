@@ -288,6 +288,8 @@ func (r *NotaryRepository) GetTargetByName(name string) (*Target, error) {
 // Publish pushes the local changes in signed material to the remote notary-server
 // Conceptually it performs an operation similar to a `git rebase`
 func (r *NotaryRepository) Publish(getPass passwordRetriever) error {
+	var updateRoot bool
+	var root *data.Signed
 	// attempt to initialize the repo from the remote store
 	c, err := r.bootstrapClient()
 	if err != nil {
@@ -302,6 +304,13 @@ func (r *NotaryRepository) Publish(getPass passwordRetriever) error {
 				logrus.Debug("Repository not initialized during Publish")
 				return &ErrRepoNotInitialized{}
 			}
+			// We had local data but the server doesn't know about the repo yet,
+			// ensure we will push the initial root file
+			root, err = r.tufRepo.Root.ToSigned()
+			if err != nil {
+				return err
+			}
+			updateRoot = true
 		} else {
 			// The remote store returned an error other than 404. We're
 			// unable to determine if the repo has been initialized or not.
@@ -332,8 +341,6 @@ func (r *NotaryRepository) Publish(getPass passwordRetriever) error {
 	}
 
 	// check if our root file is nearing expiry. Resign if it is.
-	var updateRoot bool
-	var root *data.Signed
 	if nearExpiry(r.tufRepo.Root) || r.tufRepo.Root.Dirty {
 		passphrase, err := getPass()
 		if err != nil {
