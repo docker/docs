@@ -32,6 +32,7 @@ func (cl fileChangelist) List() []Change {
 	if err != nil {
 		return changes
 	}
+	defer dir.Close()
 	fileInfos, err := dir.Readdir(0)
 	if err != nil {
 		return changes
@@ -73,6 +74,7 @@ func (cl fileChangelist) Clear(archive string) error {
 	if err != nil {
 		return err
 	}
+	defer dir.Close()
 	files, err := dir.Readdir(0)
 	if err != nil {
 		return err
