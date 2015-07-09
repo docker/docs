@@ -147,17 +147,17 @@ func TestAddTarget(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
-	client, err := NewClient(tempBaseDir)
-	assert.NoError(t, err, "error creating client: %s", err)
+	gun := "docker.com/notary"
+	repo, err := NewNotaryRepository(tempBaseDir, gun, "", nil)
+	assert.NoError(t, err, "error creating repository: %s", err)
 
-	rootKeyID, err := client.GenRootKey("passphrase")
+	rootKeyID, err := repo.GenRootKey("passphrase")
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootKey, err := client.GetRootSigner(rootKeyID, "passphrase")
+	rootSigner, err := repo.GetRootSigner(rootKeyID, "passphrase")
 	assert.NoError(t, err, "error retreiving root key: %s", err)
 
-	gun := "docker.com/notary"
-	repo, err := client.InitRepository(gun, "", nil, rootKey)
+	err = repo.Initialize(rootSigner)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
 	// Add fixtures/ca.cert as a target. There's no particular reason
@@ -245,17 +245,17 @@ func TestValidateRootKey(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
-	client, err := NewClient(tempBaseDir)
-	assert.NoError(t, err, "error creating client: %s", err)
+	gun := "docker.com/notary"
+	repo, err := NewNotaryRepository(tempBaseDir, gun, "", nil)
+	assert.NoError(t, err, "error creating repository: %s", err)
 
-	rootKeyID, err := client.GenRootKey("passphrase")
+	rootKeyID, err := repo.GenRootKey("passphrase")
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootSigner, err := client.GetRootSigner(rootKeyID, "passphrase")
+	rootSigner, err := repo.GetRootSigner(rootKeyID, "passphrase")
 	assert.NoError(t, err, "error retreiving root key: %s", err)
 
-	gun := "docker.com/notary"
-	_, err = client.InitRepository(gun, "", nil, rootSigner)
+	err = repo.Initialize(rootSigner)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
 	rootJSONFile := filepath.Join(tempBaseDir, "tuf", gun, "metadata", "root.json")
