@@ -325,8 +325,8 @@ implementation.
 You can test that you have the necessary LDAP server information by connecting to
 the LDAP server from inside a Docker container running on the same server as your DTR:
 
-> **Note**: if the LDAP server is configured to use *StartTLS*, then you need to add `-Z` to the
-> `ldapsearch` command examples below.
+> **Note**: if the LDAP server is configured to use *StartTLS*, then you need to
+> add `-Z` to the `ldapsearch` command examples below.
 
 ```
 docker run --rm -it svendowideit/ldapsearch -h <LDAP Server hostname> -b <User Base DN> -D <Search User DN> -w <Search User Password>
@@ -363,6 +363,12 @@ confirm which setting you need.
     push images to, and pull images from DTR
 * * *Read-Only Role Filter*: Combined with the "User Filter" to specify users permitted to
     pull images from DTR
+    
+> **Note**: While the "role" filters are optional, keep in mind that if they are
+> left empty, all users will get those full privileges. In other words, if the
+> "admin" filter is left empty, all users will get admin privileges, if the
+> "read-write" filter is empty, all users can push/pull any image, etc. (This
+> behavior will be corrected in future versions.)
 
 ## Next Steps
 
