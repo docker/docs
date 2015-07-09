@@ -28,6 +28,8 @@ import (
 
 type ErrRepoNotInitialized struct{}
 
+type passwordRetriever func() (string, error)
+
 func (err *ErrRepoNotInitialized) Error() string {
 	return "Repository has not been initialized"
 }
@@ -285,48 +287,71 @@ func (r *NotaryRepository) GetTargetByName(name string) (*Target, error) {
 }
 
 // Publish pushes the local changes in signed material to the remote notary-server
-func (r *NotaryRepository) Publish(passphrase string) error {
-	c, err := r.bootstrapClient() // just need the repo to be initialized from remote
+// Conceptually it performs an operation similar to a `git rebase`
+func (r *NotaryRepository) Publish(getPass passwordRetriever) error {
+	// attempt to initialize the repo from the remote store
+	c, err := r.bootstrapClient()
 	if err != nil {
 		if _, ok := err.(*store.ErrMetaNotFound); ok {
-			// attempt to load locally to see if it's already init'ed
+			// if the remote store return a 404 (translated into ErrMetaNotFound),
+			// the repo hasn't been initialized yet. Attempt to load it from disk.
 			err := r.bootstrapRepo()
 			if err != nil {
+				// Repo hasn't been initialized, It must be initialized before
+				// it can be published. Return an error and let caller determine
+				// what it wants to do.
 				logrus.Debug("Repository not initialized during Publish")
-				return &ErrRepoNotInitialized{} // caller must init
+				return &ErrRepoNotInitialized{}
 			}
 		} else {
+			// The remote store returned an error other than 404. We're
+			// unable to determine if the repo has been initialized or not.
 			logrus.Error("Could not publish Repository: ", err.Error())
 			return err
 		}
 	} else {
+		// If we were successfully able to bootstrap the client (which only pulls
+		// root.json), update it the rest of the tuf metadata in preparation for
+		// applying the changelist.
 		err = c.Update()
 		if err != nil {
 			return err
 		}
 	}
 
+	// load the changelist for this repo
 	cl, err := changelist.NewFileChangelist(filepath.Join(r.tufRepoPath, "changelist"))
 	if err != nil {
 		logrus.Debug("Error initializing changelist")
 		return err
 	}
+	// apply the changelist to the repo
 	err = applyChangelist(r.tufRepo, cl)
 	if err != nil {
 		logrus.Debug("Error applying changelist")
 		return err
 	}
 
-	rootKeyID := r.tufRepo.Root.Signed.Roles["root"].KeyIDs[0]
-	rootSigner, err := r.GetRootSigner(rootKeyID, passphrase)
-	if err != nil {
-		return err
+	// check if our root file is nearing expiry. Resign if it is.
+	var updateRoot bool
+	var root *data.Signed
+	if nearExpiry(r.tufRepo.Root) || r.tufRepo.Root.Dirty {
+		passphrase, err := getPass()
+		if err != nil {
+			return err
+		}
+		rootKeyID := r.tufRepo.Root.Signed.Roles["root"].KeyIDs[0]
+		rootSigner, err := r.GetRootSigner(rootKeyID, passphrase)
+		if err != nil {
+			return err
+		}
+		root, err = r.tufRepo.SignRoot(data.DefaultExpires("root"), rootSigner.signer)
+		if err != nil {
+			return err
+		}
+		updateRoot = true
 	}
-
-	root, err := r.tufRepo.SignRoot(data.DefaultExpires("root"), rootSigner.signer)
-	if err != nil {
-		return err
-	}
+	// we will always resign targets and snapshots
 	targets, err := r.tufRepo.SignTargets("targets", data.DefaultExpires("targets"), nil)
 	if err != nil {
 		return err
@@ -336,10 +361,12 @@ func (r *NotaryRepository) Publish(passphrase string) error {
 		return err
 	}
 
-	rootJSON, err := json.Marshal(root)
+	remote, err := getRemoteStore(r.Gun)
 	if err != nil {
 		return err
 	}
+
+	// ensure we can marshal all the json before sending anything to remote
 	targetsJSON, err := json.Marshal(targets)
 	if err != nil {
 		return err
@@ -349,13 +376,16 @@ func (r *NotaryRepository) Publish(passphrase string) error {
 		return err
 	}
 
-	remote, err := getRemoteStore(r.Gun)
-	if err != nil {
-		return err
-	}
-	err = remote.SetMeta("root", rootJSON)
-	if err != nil {
-		return err
+	// if we need to update the root, marshal it and push the update to remote
+	if updateRoot {
+		rootJSON, err := json.Marshal(root)
+		if err != nil {
+			return err
+		}
+		err = remote.SetMeta("root", rootJSON)
+		if err != nil {
+			return err
+		}
 	}
 	err = remote.SetMeta("targets", targetsJSON)
 	if err != nil {
@@ -689,50 +719,4 @@ func (uk *UnlockedSigner) GenerateCertificate(gun string) (*x509.Certificate, er
 	}
 
 	return cert, nil
-}
-
-// Use this to initialize remote HTTPStores from the config settings
-func getRemoteStore(gun string) (store.RemoteStore, error) {
-	return store.NewHTTPStore(
-		"https://notary:4443/v2/"+gun+"/_trust/tuf/",
-		"",
-		"json",
-		"",
-		"key",
-	)
-}
-
-func applyChangelist(repo *tuf.TufRepo, cl changelist.Changelist) error {
-	changes := cl.List()
-	var err error
-	for _, c := range changes {
-		if c.Scope() == "targets" {
-			applyTargetsChange(repo, c)
-		}
-		if err != nil {
-			return err
-		}
-	}
-	return nil
-}
-
-func applyTargetsChange(repo *tuf.TufRepo, c changelist.Change) error {
-	var err error
-	meta := &data.FileMeta{}
-	err = json.Unmarshal(c.Content(), meta)
-	if err != nil {
-		return nil
-	}
-	if c.Action() == changelist.ActionCreate {
-		files := data.Files{c.Path(): *meta}
-		_, err = repo.AddTargets("targets", files)
-	} else if c.Action() == changelist.ActionDelete {
-		err = repo.RemoveTargets("targets", c.Path())
-	}
-	if err != nil {
-		// TODO(endophage): print out rem entries as files that couldn't
-		//                  be added.
-		return err
-	}
-	return nil
 }

@@ -188,7 +188,7 @@ func tufPublish(cmd *cobra.Command, args []string) {
 		fatalf(err.Error())
 	}
 
-	err = repo.Publish("passphrase")
+	err = repo.Publish(passwordRetriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -321,4 +321,8 @@ func generateRoles(kdb *keys.KeyDB, rootKeyID, targetsKeyID, snapshotKeyID, time
 		return err
 	}
 	return nil
+}
+
+func passwordRetriever() (string, error) {
+	return "passphrase", nil
 }
