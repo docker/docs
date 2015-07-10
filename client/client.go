@@ -62,7 +62,7 @@ type UnlockedSigner struct {
 // repository.
 type NotaryRepository struct {
 	baseDir          string
-	Gun              string
+	gun              string
 	baseURL          string
 	tufRepoPath      string
 	caStore          trustmanager.X509Store
@@ -111,10 +111,11 @@ func NewNotaryRepository(baseDir, gun, baseURL string, rt http.RoundTripper) (*N
 		return nil, err
 	}
 
+	fmt.Println("creating non-root cryptoservice")
 	signer := signed.NewSigner(NewCryptoService(gun, privKeyStore))
 
 	nRepo := &NotaryRepository{
-		Gun:          gun,
+		gun:          gun,
 		baseDir:      baseDir,
 		baseURL:      baseURL,
 		tufRepoPath:  filepath.Join(baseDir, tufDir, gun),
@@ -133,7 +134,7 @@ func NewNotaryRepository(baseDir, gun, baseURL string, rt http.RoundTripper) (*N
 // Initialize creates a new repository by using rootKey as the root Key for the
 // TUF repository.
 func (r *NotaryRepository) Initialize(uSigner *UnlockedSigner) error {
-	rootCert, err := uSigner.GenerateCertificate(r.Gun)
+	rootCert, err := uSigner.GenerateCertificate(r.gun)
 	if err != nil {
 		return err
 	}
@@ -144,7 +145,7 @@ func (r *NotaryRepository) Initialize(uSigner *UnlockedSigner) error {
 		return err
 	}
 
-	remote, err := getRemoteStore(r.baseURL, r.Gun, r.roundTrip)
+	remote, err := getRemoteStore(r.baseURL, r.gun, r.roundTrip)
 	rawTSKey, err := remote.GetKey("timestamp")
 	if err != nil {
 		return err
@@ -377,7 +378,7 @@ func (r *NotaryRepository) Publish(getPass passwordRetriever) error {
 		return err
 	}
 
-	remote, err := getRemoteStore(r.baseURL, r.Gun, r.roundTrip)
+	remote, err := getRemoteStore(r.baseURL, r.gun, r.roundTrip)
 	if err != nil {
 		return err
 	}
@@ -554,14 +555,14 @@ func (r *NotaryRepository) validateRoot(root *data.Signed) error {
 		// Cert.Raw. It's included to prevent breaking logic with changes of how the
 		// ID gets computed.
 		_, err = r.certificateStore.GetCertificateByFingerprint(leafID)
-		if err == nil && leafCert.Subject.CommonName == r.Gun {
+		if err == nil && leafCert.Subject.CommonName == r.gun {
 			certs[fingerprint] = rootSigned.Keys[fingerprint]
 		}
 
 		// Check to see if this leafCertificate has a chain to one of the Root CAs
 		// of our CA Store.
 		certList := []*x509.Certificate{leafCert}
-		err = trustmanager.Verify(r.caStore, r.Gun, certList)
+		err = trustmanager.Verify(r.caStore, r.gun, certList)
 		if err == nil {
 			certs[fingerprint] = rootSigned.Keys[fingerprint]
 		}
@@ -577,7 +578,7 @@ func (r *NotaryRepository) validateRoot(root *data.Signed) error {
 }
 
 func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
-	remote, err := getRemoteStore(r.baseURL, r.Gun, r.roundTrip)
+	remote, err := getRemoteStore(r.baseURL, r.gun, r.roundTrip)
 	if err != nil {
 		return nil, err
 	}
@@ -638,7 +639,12 @@ func (r *NotaryRepository) GetRootSigner(rootKeyID, passphrase string) (*Unlocke
 
 	// This signer will be used for all of the normal TUF operations, except for
 	// when a root key is needed.
-	signer := signed.NewSigner(NewRootCryptoService(r.rootKeyStore, passphrase))
+
+	// Passing an empty GUN because root keys aren't associated with a GUN.
+	fmt.Println("creating root cryptoservice with passphrase", passphrase)
+	ccs := NewCryptoService("", r.rootKeyStore)
+	ccs.SetPassphrase(passphrase)
+	signer := signed.NewSigner(ccs)
 
 	return &UnlockedSigner{
 		privKey: privKey,

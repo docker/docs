@@ -177,16 +177,13 @@ func (tr *TufRepo) UpdateDelegations(role *data.Role, keys []data.Key, before st
 // also relies on the keysDB having already been populated with the keys and
 // roles.
 func (tr *TufRepo) InitRepo(consistent bool) error {
-	err := tr.InitRoot(consistent)
-	if err != nil {
+	if err := tr.InitRoot(consistent); err != nil {
 		return err
 	}
-	tr.InitTargets()
-	if err != nil {
+	if err := tr.InitTargets(); err != nil {
 		return err
 	}
-	tr.InitSnapshot()
-	if err != nil {
+	if err := tr.InitSnapshot(); err != nil {
 		return err
 	}
 	return tr.InitTimestamp()
