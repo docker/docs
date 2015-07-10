@@ -92,7 +92,7 @@ func EncryptPrivateKey(key *data.PrivateKey, passphrase string) ([]byte, error) 
 	return pem.EncodeToMemory(encryptedPEMBlock), nil
 }
 
-// loadCertFromPEM returns the first certificate found in a bunch of bytes or error
+// LoadCertFromPEM returns the first certificate found in a bunch of bytes or error
 // if nothing is found. Taken from https://golang.org/src/crypto/x509/cert_pool.go#L85.
 func LoadCertFromPEM(pemBytes []byte) (*x509.Certificate, error) {
 	for len(pemBytes) > 0 {

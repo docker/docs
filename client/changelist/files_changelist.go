@@ -13,21 +13,24 @@ import (
 	"github.com/Sirupsen/logrus"
 )
 
-type fileChangelist struct {
+// FileChangelist stores all the changes as files
+type FileChangelist struct {
 	dir string
 }
 
-func NewFileChangelist(dir string) (*fileChangelist, error) {
+// NewFileChangelist is a convenience method for returning FileChangeLists
+func NewFileChangelist(dir string) (*FileChangelist, error) {
 	logrus.Debug("Making dir path: ", dir)
 	err := os.MkdirAll(dir, 0700)
 	if err != nil {
 		return nil, err
 	}
-	return &fileChangelist{dir: dir}, nil
+	return &FileChangelist{dir: dir}, nil
 }
 
-func (cl fileChangelist) List() []Change {
-	changes := make([]Change, 0)
+// List returns a list of sorted changes
+func (cl FileChangelist) List() []Change {
+	var changes []Change
 	dir, err := os.Open(cl.dir)
 	if err != nil {
 		return changes
@@ -48,7 +51,7 @@ func (cl fileChangelist) List() []Change {
 			fmt.Println(err.Error())
 			continue
 		}
-		c := &tufChange{}
+		c := &TufChange{}
 		err = json.Unmarshal(raw, c)
 		if err != nil {
 			// TODO(david): How should we handle this?
@@ -60,16 +63,18 @@ func (cl fileChangelist) List() []Change {
 	return changes
 }
 
-func (cl fileChangelist) Add(c Change) error {
-	cJson, err := json.Marshal(c)
+// Add adds a change to the file change list
+func (cl FileChangelist) Add(c Change) error {
+	cJSON, err := json.Marshal(c)
 	if err != nil {
 		return err
 	}
 	filename := fmt.Sprintf("%020d_%s.change", time.Now().UnixNano(), uuid.New())
-	return ioutil.WriteFile(path.Join(cl.dir, filename), cJson, 0644)
+	return ioutil.WriteFile(path.Join(cl.dir, filename), cJSON, 0644)
 }
 
-func (cl fileChangelist) Clear(archive string) error {
+// Clear clears the change list
+func (cl FileChangelist) Clear(archive string) error {
 	dir, err := os.Open(cl.dir)
 	if err != nil {
 		return err
@@ -85,21 +90,25 @@ func (cl fileChangelist) Clear(archive string) error {
 	return nil
 }
 
-func (cl fileChangelist) Close() error {
+// Close is a no-op
+func (cl FileChangelist) Close() error {
 	// Nothing to do here
 	return nil
 }
 
 type fileChanges []os.FileInfo
 
+// Len returns the length of a file change list
 func (cs fileChanges) Len() int {
 	return len(cs)
 }
 
+// Less compares the names of two different file changes
 func (cs fileChanges) Less(i, j int) bool {
 	return cs[i].Name() < cs[j].Name()
 }
 
+// Swap swaps the position of two file changes
 func (cs fileChanges) Swap(i, j int) {
 	tmp := cs[i]
 	cs[i] = cs[j]

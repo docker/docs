@@ -14,11 +14,15 @@ import (
 	"github.com/endophage/gotuf/data"
 )
 
+// CryptoService implements Sign and Create, holding a specific GUN and keystore to
+// operate on
 type CryptoService struct {
 	gun      string
 	keyStore *trustmanager.KeyFileStore
 }
 
+// RootCryptoService implements Sign and Create and operates on a rootKeyStore,
+// taking in a passphrase and calling decrypt when signing.
 type RootCryptoService struct {
 	// TODO(diogo): support multiple passphrases per key
 	passphrase   string
@@ -87,7 +91,7 @@ func (rcs *RootCryptoService) Create(role string) (*data.PublicKey, error) {
 // Sign returns the signatures for data with the given root Key ID, falling back
 // if not rootKeyID is found
 // TODO(diogo): This code has 1 line change from the Sign from Crypto service. DRY it up.
-func (ccs *RootCryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signature, error) {
+func (rcs *RootCryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signature, error) {
 	// Create hasher and hash data
 	hash := crypto.SHA256
 	hashed := sha256.Sum256(payload)
@@ -95,7 +99,7 @@ func (ccs *RootCryptoService) Sign(keyIDs []string, payload []byte) ([]data.Sign
 	signatures := make([]data.Signature, 0, len(keyIDs))
 	for _, fingerprint := range keyIDs {
 		// Read PrivateKey from file
-		privKey, err := ccs.rootKeyStore.GetDecryptedKey(fingerprint, ccs.passphrase)
+		privKey, err := rcs.rootKeyStore.GetDecryptedKey(fingerprint, rcs.passphrase)
 		if err != nil {
 			// TODO(diogo): This error should be returned to the user in someway
 			continue

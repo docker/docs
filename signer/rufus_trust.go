@@ -17,6 +17,7 @@ type RufusSigner struct {
 	sClient  pb.SignerClient
 }
 
+// NewRufusSigner is a convinience method that returns RufusSigner
 func NewRufusSigner(hostname string, port string, tlscafile string) *RufusSigner {
 	var opts []grpc.DialOption
 	netAddr := net.JoinHostPort(hostname, port)

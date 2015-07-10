@@ -1,7 +1,7 @@
 package changelist
 
-// tufChange represents a change to a TUF repo
-type tufChange struct {
+// TufChange represents a change to a TUF repo
+type TufChange struct {
 	// Abbreviated because Go doesn't permit a field and method of the same name
 	Actn       int    `json:"action"`
 	Role       string `json:"role"`
@@ -11,8 +11,8 @@ type tufChange struct {
 }
 
 // NewTufChange initializes a tufChange object
-func NewTufChange(action int, role, changeType, changePath string, content []byte) *tufChange {
-	return &tufChange{
+func NewTufChange(action int, role, changeType, changePath string, content []byte) *TufChange {
+	return &TufChange{
 		Actn:       action,
 		Role:       role,
 		ChangeType: changeType,
@@ -22,25 +22,26 @@ func NewTufChange(action int, role, changeType, changePath string, content []byt
 }
 
 // Action return c.Actn
-func (c tufChange) Action() int {
+func (c TufChange) Action() int {
 	return c.Actn
 }
 
 // Scope returns c.Role
-func (c tufChange) Scope() string {
+func (c TufChange) Scope() string {
 	return c.Role
 }
 
 // Type returns c.ChangeType
-func (c tufChange) Type() string {
+func (c TufChange) Type() string {
 	return c.ChangeType
 }
 
 // Path return c.ChangePath
-func (c tufChange) Path() string {
+func (c TufChange) Path() string {
 	return c.ChangePath
 }
 
-func (c tufChange) Content() []byte {
+// Content returns c.Data
+func (c TufChange) Content() []byte {
 	return c.Data
 }

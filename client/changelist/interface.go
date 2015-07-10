@@ -1,5 +1,6 @@
 package changelist
 
+// Changelist is the interface for all TUF change lists
 type Changelist interface {
 	// List returns the ordered list of changes
 	// currently stored
@@ -20,11 +21,15 @@ type Changelist interface {
 }
 
 const (
+	// ActionCreate represents a Create action
 	ActionCreate = iota
+	// ActionUpdate represents an Update action
 	ActionUpdate
+	// ActionDelete represents a Delete action
 	ActionDelete
 )
 
+// Change is the interface for a TUF Change
 type Change interface {
 	// "create","update", or "delete"
 	Action() int

@@ -29,7 +29,7 @@ type SimpleFileStore struct {
 	perms   os.FileMode
 }
 
-// NewFileStore creates a directory with 755 permissions
+// NewSimpleFileStore creates a directory with 755 permissions
 func NewSimpleFileStore(baseDir string, fileExt string) (FileStore, error) {
 	if err := CreateDirectory(baseDir); err != nil {
 		return nil, err
@@ -42,7 +42,7 @@ func NewSimpleFileStore(baseDir string, fileExt string) (FileStore, error) {
 	}, nil
 }
 
-// NewPrivateFileStore creates a directory with 700 permissions
+// NewPrivateSimpleFileStore creates a directory with 700 permissions
 func NewPrivateSimpleFileStore(baseDir string, fileExt string) (FileStore, error) {
 	if err := CreatePrivateDirectory(baseDir); err != nil {
 		return nil, err
@@ -103,12 +103,12 @@ func (f *SimpleFileStore) GetPath(name string) string {
 	return f.genFilePath(name)
 }
 
-// List lists all the files inside of a store
+// ListFiles lists all the files inside of a store
 func (f *SimpleFileStore) ListFiles(symlinks bool) []string {
 	return f.list(f.baseDir, symlinks)
 }
 
-// List lists all the files inside of a directory identified by a name
+// ListDir lists all the files inside of a directory identified by a name
 func (f *SimpleFileStore) ListDir(name string, symlinks bool) []string {
 	fullPath := filepath.Join(f.baseDir, name)
 	return f.list(fullPath, symlinks)

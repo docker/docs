@@ -58,7 +58,7 @@ func Run(ctx context.Context, addr, tlsCertFile, tlsKeyFile string, trust signed
 		lsnr = tls.NewListener(lsnr, tlsConfig)
 	}
 
-	var ac auth.AccessController = nil
+	var ac auth.AccessController
 	hand := utils.RootHandlerFactory(ac, ctx, trust)
 
 	r := mux.NewRouter()

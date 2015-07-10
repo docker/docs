@@ -24,32 +24,41 @@ import (
 	"github.com/endophage/gotuf/store"
 )
 
+// ErrRepoNotInitialized is returned when trying to can publish on an uninitialized
+// notary repository
 type ErrRepoNotInitialized struct{}
 
 type passwordRetriever func() (string, error)
 
+// ErrRepoNotInitialized is returned when trying to can publish on an uninitialized
+// notary repository
 func (err *ErrRepoNotInitialized) Error() string {
 	return "Repository has not been initialized"
 }
 
 // Default paths should end with a '/' so directory creation works correctly
 const (
-	trustDir    string = "/trusted_certificates/"
-	privDir     string = "/private/"
-	tufDir      string = "/tuf/"
-	rootKeysDir string = privDir + "/root_keys/"
+	trustDir       string = "/trusted_certificates/"
+	privDir        string = "/private/"
+	tufDir         string = "/tuf/"
+	rootKeysDir    string = privDir + "/root_keys/"
+	rsaKeySize     int    = 2048 // Used for snapshots and targets keys
+	rsaRootKeySize int    = 4096 // Used for new root keys
 )
-const rsaKeySize int = 2048
 
 // ErrRepositoryNotExist gets returned when trying to make an action over a repository
-/// that doesn't exist
+/// that doesn't exist.
 var ErrRepositoryNotExist = errors.New("repository does not exist")
 
+// UnlockedSigner encapsulates a private key and a signer that uses that private key,
+// providing convinience methods for generation of certificates.
 type UnlockedSigner struct {
 	privKey *data.PrivateKey
 	signer  *signed.Signer
 }
 
+// NotaryRepository stores all the information needed to operate on a notary
+// repository.
 type NotaryRepository struct {
 	baseDir          string
 	Gun              string
@@ -65,7 +74,8 @@ type NotaryRepository struct {
 	rootSigner       *UnlockedSigner
 }
 
-// Target represents a simplified version of the data TUF operates on.
+// Target represents a simplified version of the data TUF operates on, so external
+// applications don't have to depend on tuf data types.
 type Target struct {
 	Name   string
 	Hashes data.Hashes
@@ -87,9 +97,9 @@ func NewTarget(targetName string, targetPath string) (*Target, error) {
 	return &Target{Name: targetName, Hashes: meta.Hashes, Length: meta.Length}, nil
 }
 
-// NewClient is a helper method that returns a new notary Client, given a config
-// file. It makes the assumption that the base directory for the config file will
-// be the place where trust information is being cached locally.
+// NewNotaryRepository is a helper method that returns a new notary repository.
+// It takes the base directory under where all the trust files will be stored
+// (usually ~/.docker/trust/).
 func NewNotaryRepository(baseDir, gun, baseURL string) (*NotaryRepository, error) {
 	trustDir := filepath.Join(baseDir, trustDir)
 	rootKeysDir := filepath.Join(baseDir, rootKeysDir)
@@ -251,7 +261,7 @@ func (r *NotaryRepository) ListTargets() ([]*Target, error) {
 		return nil, err
 	}
 
-	targetList := make([]*Target, 0)
+	var targetList []*Target
 	for name, meta := range r.tufRepo.Targets["targets"].Signed.Targets {
 		target := &Target{Name: name, Hashes: meta.Hashes, Length: meta.Length}
 		targetList = append(targetList, target)
@@ -467,7 +477,7 @@ func (r *NotaryRepository) saveMetadata(rootSigner *signed.Signer) error {
 func (r *NotaryRepository) snapshot() error {
 	fmt.Println("Saving changes to Trusted Collection.")
 
-	for t, _ := range r.tufRepo.Targets {
+	for t := range r.tufRepo.Targets {
 		signedTargets, err := r.tufRepo.SignTargets(t, data.DefaultExpires("targets"), nil)
 		if err != nil {
 			return err
@@ -598,41 +608,41 @@ func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
 	), nil
 }
 
-// ListPrivateKeys lists all available root keys. Does not include private key
-// material
-func (c *NotaryRepository) ListRootKeys() []string {
-	return c.rootKeyStore.ListKeys()
+// ListRootKeys returns the IDs for all of the root keys. It ignores symlinks
+// if any exist.
+func (r *NotaryRepository) ListRootKeys() []string {
+	return r.rootKeyStore.ListKeys()
 }
 
 // GenRootKey generates a new root key protected by a given passphrase
-func (c *NotaryRepository) GenRootKey(passphrase string) (string, error) {
-	privKey, err := trustmanager.GenerateRSAKey(rand.Reader, rsaKeySize)
+func (r *NotaryRepository) GenRootKey(passphrase string) (string, error) {
+	privKey, err := trustmanager.GenerateRSAKey(rand.Reader, rsaRootKeySize)
 	if err != nil {
 		return "", fmt.Errorf("failed to convert private key: ", err)
 	}
 
-	c.rootKeyStore.AddEncryptedKey(privKey.ID(), privKey, passphrase)
+	r.rootKeyStore.AddEncryptedKey(privKey.ID(), privKey, passphrase)
 
 	return privKey.ID(), nil
 }
 
 // GetRootSigner retreives a root key that includes the ID and a signer
-func (c *NotaryRepository) GetRootSigner(rootKeyID, passphrase string) (*UnlockedSigner, error) {
-	privKey, err := c.rootKeyStore.GetDecryptedKey(rootKeyID, passphrase)
+func (r *NotaryRepository) GetRootSigner(rootKeyID, passphrase string) (*UnlockedSigner, error) {
+	privKey, err := r.rootKeyStore.GetDecryptedKey(rootKeyID, passphrase)
 	if err != nil {
 		return nil, fmt.Errorf("could not get decrypted root key: %v", err)
 	}
 
 	// This signer will be used for all of the normal TUF operations, except for
 	// when a root key is needed.
-	signer := signed.NewSigner(NewRootCryptoService(c.rootKeyStore, passphrase))
+	signer := signed.NewSigner(NewRootCryptoService(r.rootKeyStore, passphrase))
 
 	return &UnlockedSigner{
 		privKey: privKey,
 		signer:  signer}, nil
 }
 
-func (c *NotaryRepository) loadKeys(trustDir, rootKeysDir string) error {
+func (r *NotaryRepository) loadKeys(trustDir, rootKeysDir string) error {
 	// Load all CAs that aren't expired and don't use SHA1
 	caStore, err := trustmanager.NewX509FilteredFileStore(trustDir, func(cert *x509.Certificate) bool {
 		return cert.IsCA && cert.BasicConstraintsValid && cert.SubjectKeyId != nil &&
@@ -663,9 +673,9 @@ func (c *NotaryRepository) loadKeys(trustDir, rootKeysDir string) error {
 		return err
 	}
 
-	c.caStore = caStore
-	c.certificateStore = certificateStore
-	c.rootKeyStore = rootKeyStore
+	r.caStore = caStore
+	r.certificateStore = certificateStore
+	r.rootKeyStore = rootKeyStore
 
 	return nil
 }
