@@ -88,7 +88,7 @@ func writeRepo(t *testing.T, dir string, repo *TufRepo) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	signedRoot, err := repo.SignRoot(data.DefaultExpires("root"))
+	signedRoot, err := repo.SignRoot(data.DefaultExpires("root"), nil)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -96,7 +96,7 @@ func writeRepo(t *testing.T, dir string, repo *TufRepo) {
 	ioutil.WriteFile(dir+"/root.json", rootJSON, 0755)
 
 	for r, _ := range repo.Targets {
-		signedTargets, err := repo.SignTargets(r, data.DefaultExpires("targets"))
+		signedTargets, err := repo.SignTargets(r, data.DefaultExpires("targets"), nil)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -107,14 +107,14 @@ func writeRepo(t *testing.T, dir string, repo *TufRepo) {
 		ioutil.WriteFile(p, targetsJSON, 0755)
 	}
 
-	signedSnapshot, err := repo.SignSnapshot(data.DefaultExpires("snapshot"))
+	signedSnapshot, err := repo.SignSnapshot(data.DefaultExpires("snapshot"), nil)
 	if err != nil {
 		t.Fatal(err)
 	}
 	snapshotJSON, _ := json.Marshal(signedSnapshot)
 	ioutil.WriteFile(dir+"/snapshot.json", snapshotJSON, 0755)
 
-	signedTimestamp, err := repo.SignTimestamp(data.DefaultExpires("timestamp"))
+	signedTimestamp, err := repo.SignTimestamp(data.DefaultExpires("timestamp"), nil)
 	if err != nil {
 		t.Fatal(err)
 	}

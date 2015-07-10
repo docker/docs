@@ -35,7 +35,7 @@ func MainHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *e
 	return nil
 }
 
-// AddHandler adds the provided json data for the role and GUN specified in the URL
+// UpdateHandler adds the provided json data for the role and GUN specified in the URL
 func UpdateHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
 	defer r.Body.Close()
 	s := ctx.Value("metaStore")
@@ -102,6 +102,13 @@ func GetHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *er
 	tufRole := vars["tufRole"]
 	out, err := store.GetCurrent(gun, tufRole)
 	if err != nil {
+		if _, ok := err.(*storage.ErrNotFound); ok {
+			return &errors.HTTPError{
+				HTTPStatus: http.StatusNotFound,
+				Code:       9999,
+				Err:        err,
+			}
+		}
 		logrus.Errorf("[Notary Server] 500 GET repository: %s, role: %s", gun, tufRole)
 		return &errors.HTTPError{
 			HTTPStatus: http.StatusInternalServerError,
@@ -147,6 +154,7 @@ func DeleteHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) 
 	return nil
 }
 
+// GetTimestampHandler returns a timestamp.json given a GUN
 func GetTimestampHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
 	s := ctx.Value("metaStore")
 	store, ok := s.(storage.MetaStore)
@@ -172,6 +180,13 @@ func GetTimestampHandler(ctx context.Context, w http.ResponseWriter, r *http.Req
 
 	out, err := timestamp.GetOrCreateTimestamp(gun, store, signer)
 	if err != nil {
+		if _, ok := err.(*storage.ErrNoKey); ok {
+			return &errors.HTTPError{
+				HTTPStatus: http.StatusNotFound,
+				Code:       9999,
+				Err:        err,
+			}
+		}
 		return &errors.HTTPError{
 			HTTPStatus: http.StatusInternalServerError,
 			Code:       9999,
@@ -184,6 +199,8 @@ func GetTimestampHandler(ctx context.Context, w http.ResponseWriter, r *http.Req
 	return nil
 }
 
+// GetTimestampKeyHandler returns a timestamp public key, creating a new key-pair
+// it if it doesn't yet exist
 func GetTimestampKeyHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
 	s := ctx.Value("metaStore")
 	store, ok := s.(storage.MetaStore)

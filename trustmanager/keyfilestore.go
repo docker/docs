@@ -1,6 +1,11 @@
 package trustmanager
 
-import "errors"
+import (
+	"path/filepath"
+	"strings"
+
+	"github.com/endophage/gotuf/data"
+)
 
 const (
 	keyExtension = "key"
@@ -14,7 +19,7 @@ type KeyFileStore struct {
 // NewKeyFileStore returns a new KeyFileStore creating a private directory to
 // hold the keys.
 func NewKeyFileStore(baseDir string) (*KeyFileStore, error) {
-	fileStore, err := NewFileStore(baseDir, keyExtension)
+	fileStore, err := NewPrivateSimpleFileStore(baseDir, keyExtension)
 	if err != nil {
 		return nil, err
 	}
@@ -22,35 +27,67 @@ func NewKeyFileStore(baseDir string) (*KeyFileStore, error) {
 	return &KeyFileStore{fileStore}, nil
 }
 
-// AddEncrypted stores the contents of a PEM-encoded private key as an encrypted PEM block
-func (s *KeyFileStore) AddEncrypted(fileName string, pemKey []byte, passphrase string) error {
-
-	privKey, err := ParsePEMPrivateKey(pemKey)
+// AddKey stores the contents of a PEM-encoded private key as a PEM block
+func (s *KeyFileStore) AddKey(name string, privKey *data.PrivateKey) error {
+	pemPrivKey, err := KeyToPEM(privKey)
 	if err != nil {
 		return err
 	}
 
-	encryptedKey, err := EncryptPrivateKey(privKey, passphrase)
-	if err != nil {
-		return err
-	}
-
-	return s.Add(fileName, encryptedKey)
+	return s.Add(name, pemPrivKey)
 }
 
-// GetDecrypted decrypts and returns the PEM Encoded private key given a flename
-// and a passphrase
-func (s *KeyFileStore) GetDecrypted(fileName string, passphrase string) ([]byte, error) {
-	keyBytes, err := s.Get(fileName)
-	if err != nil {
-		return nil, errors.New("could not retrieve private key material")
-	}
-
-	// Gets an unencrypted PrivateKey.
-	privKey, err := ParsePEMEncryptedPrivateKey(keyBytes, passphrase)
+// GetKey returns the PrivateKey given a KeyID
+func (s *KeyFileStore) GetKey(name string) (*data.PrivateKey, error) {
+	keyBytes, err := s.Get(name)
 	if err != nil {
 		return nil, err
 	}
 
-	return KeyToPEM(privKey)
+	// Convert PEM encoded bytes back to a PrivateKey
+	privKey, err := ParsePEMPrivateKey(keyBytes, "")
+	if err != nil {
+		return nil, err
+	}
+
+	return privKey, nil
+}
+
+// AddEncryptedKey stores the contents of a PEM-encoded private key as an encrypted PEM block
+func (s *KeyFileStore) AddEncryptedKey(name string, privKey *data.PrivateKey, passphrase string) error {
+	encryptedPrivKey, err := EncryptPrivateKey(privKey, passphrase)
+	if err != nil {
+		return err
+	}
+
+	return s.Add(name, encryptedPrivKey)
+}
+
+// GetDecryptedKey decrypts and returns the PEM Encoded private key given a flename
+// and a passphrase
+func (s *KeyFileStore) GetDecryptedKey(name string, passphrase string) (*data.PrivateKey, error) {
+	keyBytes, err := s.Get(name)
+	if err != nil {
+		return nil, err
+	}
+
+	// Gets an unencrypted PrivateKey.
+	privKey, err := ParsePEMPrivateKey(keyBytes, passphrase)
+	if err != nil {
+		return nil, err
+	}
+
+	return privKey, nil
+}
+
+// ListKeys returns a list of unique PublicKeys present on the KeyFileStore.
+// There might be symlinks associating Certificate IDs to Public Keys, so this
+// method only returns the IDs that aren't symlinks
+func (s *KeyFileStore) ListKeys() []string {
+	var keyIDList []string
+	for _, f := range s.ListFiles(false) {
+		keyID := strings.TrimSpace(strings.TrimSuffix(filepath.Base(f), filepath.Ext(f)))
+		keyIDList = append(keyIDList, keyID)
+	}
+	return keyIDList
 }

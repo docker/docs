@@ -3,7 +3,6 @@ package trustmanager
 import (
 	"bytes"
 	"crypto/rand"
-	"crypto/rsa"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -30,19 +29,13 @@ func TestAddKey(t *testing.T) {
 		t.Fatalf("failed to create new key filestore: %v", err)
 	}
 
-	key, err := rsa.GenerateKey(rand.Reader, 1024)
+	privKey, err := GenerateRSAKey(rand.Reader, 512)
 	if err != nil {
 		t.Fatalf("could not generate private key: %v", err)
 	}
 
-	// Get the PEM for the key
-	pemKey, err := KeyToPEM(key)
-	if err != nil {
-		t.Fatalf("failed to convert private key to PEM: %v", err)
-	}
-
-	// Call the Add function
-	err = store.Add(testName, pemKey)
+	// Call the AddKey function
+	err = store.AddKey(testName, privKey)
 	if err != nil {
 		t.Fatalf("failed to add file to store: %v", err)
 	}
@@ -111,19 +104,23 @@ EMl3eFOJXjIch/wIesRSN+2dGOsl7neercjMh1i9RvpCwHDx/E0=
 		t.Fatalf("failed to create new key filestore: %v", err)
 	}
 
-	// Call the Get function
-	pemKey, err := store.Get(testName)
+	// Call the GetKey function
+	privKey, err := store.GetKey(testName)
 	if err != nil {
 		t.Fatalf("failed to get file from store: %v", err)
 	}
 
-	if !bytes.Equal(testData, pemKey) {
+	pemPrivKey, err := KeyToPEM(privKey)
+	if err != nil {
+		t.Fatalf("failed to convert key to PEM: %v", err)
+	}
+
+	if !bytes.Equal(testData, pemPrivKey) {
 		t.Fatalf("unexpected content in the file: %s", filePath)
 	}
 }
 
 func TestAddEncryptedAndGetDecrypted(t *testing.T) {
-	testName := "docker.com/notary/root"
 	testExt := "key"
 
 	// Temporary directory where test files will be created
@@ -131,9 +128,6 @@ func TestAddEncryptedAndGetDecrypted(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to create a temporary directory: %v", err)
 	}
-
-	// Since we're generating this manually we need to add the extension '.'
-	expectedFilePath := filepath.Join(tempBaseDir, testName+"."+testExt)
 
 	// Create our FileStore
 	store, err := NewKeyFileStore(tempBaseDir)
@@ -142,35 +136,38 @@ func TestAddEncryptedAndGetDecrypted(t *testing.T) {
 	}
 
 	// Generate new PrivateKey
-	key, err := rsa.GenerateKey(rand.Reader, 1024)
+	privKey, err := GenerateRSAKey(rand.Reader, 512)
 	if err != nil {
 		t.Fatalf("could not generate private key: %v", err)
 	}
 
-	// Get PEM encodedd key
-	pemKey, err := KeyToPEM(key)
-	if err != nil {
-		t.Fatalf("Could not encode key to PEM: %v", err)
-	}
-
-	// Call the Add function
-	err = store.AddEncrypted(testName, pemKey, "diogomonica")
+	// Call the AddEncryptedKey function
+	err = store.AddEncryptedKey(privKey.ID(), privKey, "diogomonica")
 	if err != nil {
 		t.Fatalf("failed to add file to store: %v", err)
 	}
 
-	pemPrivKey, err := store.GetDecrypted(testName, "diogomonica")
+	// Since we're generating this manually we need to add the extension '.'
+	expectedFilePath := filepath.Join(tempBaseDir, privKey.ID()+"."+testExt)
+
+	// Check to see if file exists
+	_, err = ioutil.ReadFile(expectedFilePath)
+	if err != nil {
+		t.Fatalf("expected file not found: %v", err)
+	}
+
+	// Call the GetDecryptedKey function
+	readPrivKey, err := store.GetDecryptedKey(privKey.ID(), "diogomonica")
 	if err != nil {
 		t.Fatalf("could not decrypt private key: %v", err)
 	}
 
-	if !strings.Contains(string(pemKey), string(pemPrivKey)) {
-		t.Fatalf("expected private key content in the file: %s", expectedFilePath)
+	if !bytes.Equal(privKey.Private(), readPrivKey.Private()) {
+		t.Fatalf("written key and loaded key do not match")
 	}
 }
 
 func TestGetDecryptedWithTamperedCipherText(t *testing.T) {
-	testName := "docker.com/notary/root"
 	testExt := "key"
 
 	// Temporary directory where test files will be created
@@ -179,9 +176,6 @@ func TestGetDecryptedWithTamperedCipherText(t *testing.T) {
 		t.Fatalf("failed to create a temporary directory: %v", err)
 	}
 
-	// Since we're generating this manually we need to add the extension '.'
-	expectedFilePath := filepath.Join(tempBaseDir, testName+"."+testExt)
-
 	// Create our FileStore
 	store, err := NewKeyFileStore(tempBaseDir)
 	if err != nil {
@@ -189,24 +183,22 @@ func TestGetDecryptedWithTamperedCipherText(t *testing.T) {
 	}
 
 	// Generate a new Private Key
-	key, err := rsa.GenerateKey(rand.Reader, 1024)
+	privKey, err := GenerateRSAKey(rand.Reader, 512)
 	if err != nil {
 		t.Fatalf("could not generate private key: %v", err)
 	}
 
-	// Get PEM encodedd key
-	pemKey, err := KeyToPEM(key)
-	if err != nil {
-		t.Fatalf("Could not encode key to PEM: %v", err)
-	}
-	// Call the Add function
-	err = store.AddEncrypted(testName, pemKey, "diogomonica")
+	// Call the AddEncryptedKey function
+	err = store.AddEncryptedKey(privKey.ID(), privKey, "diogomonica")
 	if err != nil {
 		t.Fatalf("failed to add file to store: %v", err)
 	}
 
+	// Since we're generating this manually we need to add the extension '.'
+	expectedFilePath := filepath.Join(tempBaseDir, privKey.ID()+"."+testExt)
+
 	// Get file description, open file
-	fp, _ := os.OpenFile(expectedFilePath, os.O_WRONLY, 0600)
+	fp, err := os.OpenFile(expectedFilePath, os.O_WRONLY, 0600)
 	if err != nil {
 		t.Fatalf("expected file not found: %v", err)
 	}
@@ -215,7 +207,7 @@ func TestGetDecryptedWithTamperedCipherText(t *testing.T) {
 	fp.WriteAt([]byte("a"), int64(1))
 
 	// Try to decrypt the file
-	_, err = store.GetDecrypted(testName, "diogomonica")
+	_, err = store.GetDecryptedKey(privKey.ID(), "diogomonica")
 	if err == nil {
 		t.Fatalf("expected error while decrypting the content due to invalid cipher text")
 	}
@@ -237,24 +229,19 @@ func TestGetDecryptedWithInvalidPassphrase(t *testing.T) {
 	}
 
 	// Generate a new random RSA Key
-	key, err := rsa.GenerateKey(rand.Reader, 1024)
+	privKey, err := GenerateRSAKey(rand.Reader, 512)
 	if err != nil {
 		t.Fatalf("could not generate private key: %v", err)
 	}
 
-	// Get PEM encodedd key
-	pemKey, err := KeyToPEM(key)
-	if err != nil {
-		t.Fatalf("Could not encode key to PEM: %v", err)
-	}
-	// Call the Add function
-	err = store.AddEncrypted(testName, pemKey, "diogomonica")
+	// Call the AddEncryptedKey function
+	err = store.AddEncryptedKey(privKey.ID(), privKey, "diogomonica")
 	if err != nil {
 		t.Fatalf("failed to add file to stoAFre: %v", err)
 	}
 
 	// Try to decrypt the file with an invalid passphrase
-	_, err = store.GetDecrypted(testName, "diegomonica")
+	_, err = store.GetDecryptedKey(testName, "diegomonica")
 	if err == nil {
 		t.Fatalf("expected error while decrypting the content due to invalid passphrase")
 	}

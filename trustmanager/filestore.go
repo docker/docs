@@ -17,14 +17,9 @@ type FileStore interface {
 	RemoveDir(directoryName string) error
 	Get(fileName string) ([]byte, error)
 	GetPath(fileName string) string
-	ListAll() []string
-	ListDir(directoryName string) []string
-}
-
-type EncryptedFileStore interface {
-	FileStore
-	AddEncrypted(fileName string, keyBytes []byte, passphrase string) error
-	GetDecrypted(fileName string, passphrase string) ([]byte, error)
+	ListFiles(symlinks bool) []string
+	ListDir(directoryName string, symlinks bool) []string
+	Link(src, dst string) error
 }
 
 // SimpleFileStore implements FileStore
@@ -34,8 +29,8 @@ type SimpleFileStore struct {
 	perms   os.FileMode
 }
 
-// NewFileStore creates a directory with 755 permissions
-func NewFileStore(baseDir string, fileExt string) (FileStore, error) {
+// NewSimpleFileStore creates a directory with 755 permissions
+func NewSimpleFileStore(baseDir string, fileExt string) (FileStore, error) {
 	if err := CreateDirectory(baseDir); err != nil {
 		return nil, err
 	}
@@ -47,8 +42,8 @@ func NewFileStore(baseDir string, fileExt string) (FileStore, error) {
 	}, nil
 }
 
-// NewPrivateFileStore creates a directory with 700 permissions
-func NewPrivateFileStore(baseDir string, fileExt string) (FileStore, error) {
+// NewPrivateSimpleFileStore creates a directory with 700 permissions
+func NewPrivateSimpleFileStore(baseDir string, fileExt string) (FileStore, error) {
 	if err := CreatePrivateDirectory(baseDir); err != nil {
 		return nil, err
 	}
@@ -108,19 +103,19 @@ func (f *SimpleFileStore) GetPath(name string) string {
 	return f.genFilePath(name)
 }
 
-// List lists all the files inside of a store
-func (f *SimpleFileStore) ListAll() []string {
-	return f.list(f.baseDir)
+// ListFiles lists all the files inside of a store
+func (f *SimpleFileStore) ListFiles(symlinks bool) []string {
+	return f.list(f.baseDir, symlinks)
 }
 
-// List lists all the files inside of a directory identified by a name
-func (f *SimpleFileStore) ListDir(name string) []string {
+// ListDir lists all the files inside of a directory identified by a name
+func (f *SimpleFileStore) ListDir(name string, symlinks bool) []string {
 	fullPath := filepath.Join(f.baseDir, name)
-	return f.list(fullPath)
+	return f.list(fullPath, symlinks)
 }
 
-// list lists all the files in a directory given a full path
-func (f *SimpleFileStore) list(path string) []string {
+// list lists all the files in a directory given a full path. Ignores symlinks.
+func (f *SimpleFileStore) list(path string, symlinks bool) []string {
 	files := make([]string, 0, 0)
 	filepath.Walk(path, func(fp string, fi os.FileInfo, err error) error {
 		// If there are errors, ignore this particular file
@@ -131,6 +126,12 @@ func (f *SimpleFileStore) list(path string) []string {
 		if fi.IsDir() {
 			return nil
 		}
+
+		// If this is a symlink, and symlinks is true, ignore it
+		if !symlinks && fi.Mode()&os.ModeSymlink == os.ModeSymlink {
+			return nil
+		}
+
 		// Only allow matches that end with our certificate extension (e.g. *.crt)
 		matched, _ := filepath.Match("*"+f.fileExt, fi.Name())
 
@@ -144,8 +145,24 @@ func (f *SimpleFileStore) list(path string) []string {
 
 // genFilePath returns the full path with extension given a file name
 func (f *SimpleFileStore) genFilePath(name string) string {
-	fileName := fmt.Sprintf("%s.%s", name, f.fileExt)
+	fileName := f.genFileName(name)
 	return filepath.Join(f.baseDir, fileName)
+}
+
+// genFileName returns the name using the right extension
+func (f *SimpleFileStore) genFileName(name string) string {
+	return fmt.Sprintf("%s.%s", name, f.fileExt)
+}
+
+// Link creates a symlink beetween the ID of the certificate used by a repository
+// and the ID of the root key that is being used.
+// We use full path for the source and local for the destination to use relative
+// path for the symlink
+func (f *SimpleFileStore) Link(oldname, newname string) error {
+	return os.Symlink(
+		f.genFileName(oldname),
+		f.genFilePath(newname),
+	)
 }
 
 // CreateDirectory uses createDirectory to create a chmod 755 Directory

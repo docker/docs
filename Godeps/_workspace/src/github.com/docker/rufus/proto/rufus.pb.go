@@ -10,6 +10,7 @@ It is generated from these files:
 
 It has these top-level messages:
 	KeyID
+	Algorithm
 	PublicKey
 	Signature
 	SignatureRequest
@@ -40,10 +41,20 @@ func (m *KeyID) Reset()         { *m = KeyID{} }
 func (m *KeyID) String() string { return proto1.CompactTextString(m) }
 func (*KeyID) ProtoMessage()    {}
 
-// PublicKey has a KeyID that is used to reference the key and opaque bytes of a publicKey
+// Type holds the type of crypto algorithm used
+type Algorithm struct {
+	Algorithm string `protobuf:"bytes,1,opt,name=algorithm" json:"algorithm,omitempty"`
+}
+
+func (m *Algorithm) Reset()         { *m = Algorithm{} }
+func (m *Algorithm) String() string { return proto1.CompactTextString(m) }
+func (*Algorithm) ProtoMessage()    {}
+
+// PublicKey has a KeyID that is used to reference the key, the key type, and opaque bytes of a publicKey
 type PublicKey struct {
-	KeyID     *KeyID `protobuf:"bytes,1,opt,name=keyID" json:"keyID,omitempty"`
-	PublicKey []byte `protobuf:"bytes,2,opt,name=publicKey,proto3" json:"publicKey,omitempty"`
+	KeyID     *KeyID     `protobuf:"bytes,1,opt,name=keyID" json:"keyID,omitempty"`
+	Algorithm *Algorithm `protobuf:"bytes,2,opt,name=algorithm" json:"algorithm,omitempty"`
+	PublicKey []byte     `protobuf:"bytes,3,opt,name=publicKey,proto3" json:"publicKey,omitempty"`
 }
 
 func (m *PublicKey) Reset()         { *m = PublicKey{} }
@@ -57,10 +68,18 @@ func (m *PublicKey) GetKeyID() *KeyID {
 	return nil
 }
 
-// Signature specifies a KeyID that was used for signing and signed content
+func (m *PublicKey) GetAlgorithm() *Algorithm {
+	if m != nil {
+		return m.Algorithm
+	}
+	return nil
+}
+
+// Signature specifies a KeyID that was used for signing, the key type, and signed content
 type Signature struct {
-	KeyID   *KeyID `protobuf:"bytes,1,opt,name=keyID" json:"keyID,omitempty"`
-	Content []byte `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
+	KeyID     *KeyID     `protobuf:"bytes,1,opt,name=keyID" json:"keyID,omitempty"`
+	Algorithm *Algorithm `protobuf:"bytes,2,opt,name=algorithm" json:"algorithm,omitempty"`
+	Content   []byte     `protobuf:"bytes,3,opt,name=content,proto3" json:"content,omitempty"`
 }
 
 func (m *Signature) Reset()         { *m = Signature{} }
@@ -74,10 +93,18 @@ func (m *Signature) GetKeyID() *KeyID {
 	return nil
 }
 
-// SignatureRequests specifies a KeyID for signing and content to be signed
+func (m *Signature) GetAlgorithm() *Algorithm {
+	if m != nil {
+		return m.Algorithm
+	}
+	return nil
+}
+
+// SignatureRequests specifies a KeyID for signing, the type of signature requested, and content to be signed
 type SignatureRequest struct {
-	KeyID   *KeyID `protobuf:"bytes,1,opt,name=keyID" json:"keyID,omitempty"`
-	Content []byte `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
+	KeyID     *KeyID     `protobuf:"bytes,1,opt,name=keyID" json:"keyID,omitempty"`
+	Algorithm *Algorithm `protobuf:"bytes,2,opt,name=algorithm" json:"algorithm,omitempty"`
+	Content   []byte     `protobuf:"bytes,3,opt,name=content,proto3" json:"content,omitempty"`
 }
 
 func (m *SignatureRequest) Reset()         { *m = SignatureRequest{} }
@@ -87,6 +114,13 @@ func (*SignatureRequest) ProtoMessage()    {}
 func (m *SignatureRequest) GetKeyID() *KeyID {
 	if m != nil {
 		return m.KeyID
+	}
+	return nil
+}
+
+func (m *SignatureRequest) GetAlgorithm() *Algorithm {
+	if m != nil {
+		return m.Algorithm
 	}
 	return nil
 }

@@ -17,6 +17,7 @@ type RufusSigner struct {
 	sClient  pb.SignerClient
 }
 
+// NewRufusSigner is a convinience method that returns RufusSigner
 func NewRufusSigner(hostname string, port string, tlscafile string) *RufusSigner {
 	var opts []grpc.DialOption
 	netAddr := net.JoinHostPort(hostname, port)
@@ -53,7 +54,7 @@ func (trust *RufusSigner) Sign(keyIDs []string, toSign []byte) ([]data.Signature
 		}
 		signatures = append(signatures, data.Signature{
 			KeyID:     sig.KeyID.ID,
-			Method:    sig.Algorithm,
+			Method:    sig.Algorithm.Algorithm,
 			Signature: sig.Content,
 		})
 	}
@@ -67,7 +68,7 @@ func (trust *RufusSigner) Create(role string) (*data.PublicKey, error) {
 		return nil, err
 	}
 	//TODO(mccauley): Update API to return algorithm and/or take it as a param
-	public := data.NewPublicKey(publicKey.Algorithm, publicKey.PublicKey)
+	public := data.NewPublicKey(publicKey.Algorithm.Algorithm, publicKey.PublicKey)
 	return public, nil
 }
 
@@ -81,7 +82,7 @@ func (trust *RufusSigner) PublicKeys(keyIDs ...string) (map[string]*data.PublicK
 			return nil, err
 		}
 		publicKeys[public.KeyID.ID] =
-			data.NewPublicKey(public.Algorithm, public.PublicKey)
+			data.NewPublicKey(public.Algorithm.Algorithm, public.PublicKey)
 	}
 	return publicKeys, nil
 }

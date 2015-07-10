@@ -27,13 +27,14 @@ type MySQLStorage struct {
 	sql.DB
 }
 
+// NewMySQLStorage is a convenience method to create a MySQLStorage
 func NewMySQLStorage(db *sql.DB) *MySQLStorage {
 	return &MySQLStorage{
 		DB: *db,
 	}
 }
 
-// Update multiple TUF records in a single transaction.
+// UpdateCurrent updates multiple TUF records in a single transaction.
 // Always insert a new row. The unique constraint will ensure there is only ever
 func (db *MySQLStorage) UpdateCurrent(gun, role string, version int, data []byte) error {
 	checkStmt := "SELECT count(*) FROM `tuf_files` WHERE `gun`=? AND `role`=? AND `version`>=?;"
@@ -62,7 +63,7 @@ func (db *MySQLStorage) UpdateCurrent(gun, role string, version int, data []byte
 	return nil
 }
 
-// Get a specific TUF record
+// GetCurrent gets a specific TUF record
 func (db *MySQLStorage) GetCurrent(gun, tufRole string) (data []byte, err error) {
 	stmt := "SELECT `data` FROM `tuf_files` WHERE `gun`=? AND `role`=? ORDER BY `version` DESC LIMIT 1;"
 	rows, err := db.Query(stmt, gun, tufRole) // this should be a QueryRow()
@@ -82,11 +83,14 @@ func (db *MySQLStorage) GetCurrent(gun, tufRole string) (data []byte, err error)
 	return data, nil
 }
 
+// Delete deletes all the records for a specific GUN
 func (db *MySQLStorage) Delete(gun string) error {
 	stmt := "DELETE FROM `tuf_files` WHERE `gun`=?;"
 	_, err := db.Exec(stmt, gun)
 	return err
 }
+
+// GetTimestampKey returns the timestamps Public Key data
 func (db *MySQLStorage) GetTimestampKey(gun string) (cipher string, public []byte, err error) {
 	stmt := "SELECT `cipher`, `public` FROM `timestamp_keys` WHERE `gun`=?;"
 	row := db.QueryRow(stmt, gun)
@@ -100,6 +104,8 @@ func (db *MySQLStorage) GetTimestampKey(gun string) (cipher string, public []byt
 
 	return cipher, public, err
 }
+
+// SetTimestampKey attempts to write a TimeStamp key and returns an error if it already exists
 func (db *MySQLStorage) SetTimestampKey(gun, cipher string, public []byte) error {
 	stmt := "INSERT INTO `timestamp_keys` (`gun`, `cipher`, `public`) VALUES (?,?,?);"
 	_, err := db.Exec(stmt, gun, cipher, public)

@@ -16,23 +16,24 @@ type ver struct {
 	data    []byte
 }
 
-// memStorage is really just designed for dev and testing. It is very
+// MemStorage is really just designed for dev and testing. It is very
 // inefficient in many scenarios
-type memStorage struct {
+type MemStorage struct {
 	lock    sync.Mutex
 	tufMeta map[string][]*ver
 	tsKeys  map[string]*key
 }
 
 // NewMemStorage instantiates a memStorage instance
-func NewMemStorage() *memStorage {
-	return &memStorage{
+func NewMemStorage() *MemStorage {
+	return &MemStorage{
 		tufMeta: make(map[string][]*ver),
 		tsKeys:  make(map[string]*key),
 	}
 }
 
-func (st *memStorage) UpdateCurrent(gun, role string, version int, data []byte) error {
+// UpdateCurrent updates the meta data for a specific role
+func (st *MemStorage) UpdateCurrent(gun, role string, version int, data []byte) error {
 	id := entryKey(gun, role)
 	st.lock.Lock()
 	defer st.lock.Unlock()
@@ -47,7 +48,8 @@ func (st *memStorage) UpdateCurrent(gun, role string, version int, data []byte) 
 	return nil
 }
 
-func (st *memStorage) GetCurrent(gun, role string) (data []byte, err error) {
+// GetCurrent returns the metadada for a given role, under a GUN
+func (st *MemStorage) GetCurrent(gun, role string) (data []byte, err error) {
 	id := entryKey(gun, role)
 	st.lock.Lock()
 	defer st.lock.Unlock()
@@ -58,10 +60,11 @@ func (st *memStorage) GetCurrent(gun, role string) (data []byte, err error) {
 	return space[len(st.tufMeta[id])-1].data, nil
 }
 
-func (st *memStorage) Delete(gun string) error {
+// Delete delets all the metadata for a given GUN
+func (st *MemStorage) Delete(gun string) error {
 	st.lock.Lock()
 	defer st.lock.Unlock()
-	for k, _ := range st.tufMeta {
+	for k := range st.tufMeta {
 		if strings.HasPrefix(k, gun) {
 			delete(st.tufMeta, k)
 		}
@@ -69,17 +72,20 @@ func (st *memStorage) Delete(gun string) error {
 	return nil
 }
 
-func (st *memStorage) GetTimestampKey(gun string) (cipher string, public []byte, err error) {
+// GetTimestampKey returns the public key material of the timestamp key of a given gun
+func (st *MemStorage) GetTimestampKey(gun string) (cipher string, public []byte, err error) {
 	// no need for lock. It's ok to return nil if an update
 	// wasn't observed
-	if k, ok := st.tsKeys[gun]; !ok {
+	k, ok := st.tsKeys[gun]
+	if !ok {
 		return "", nil, &ErrNoKey{gun: gun}
-	} else {
-		return k.cipher, k.public, nil
 	}
+
+	return k.cipher, k.public, nil
 }
 
-func (st *memStorage) SetTimestampKey(gun, cipher string, public []byte) error {
+// SetTimestampKey sets a Timestamp key under a gun
+func (st *MemStorage) SetTimestampKey(gun, cipher string, public []byte) error {
 	k := &key{cipher: cipher, public: public}
 	st.lock.Lock()
 	defer st.lock.Unlock()

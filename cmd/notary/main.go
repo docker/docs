@@ -16,18 +16,15 @@ import (
 )
 
 const configFileName string = "config"
-
-// Default paths should end with a '/' so directory creation works correctly
 const configPath string = ".docker/trust/"
-const trustDir string = configPath + "trusted_certificates/"
-const privDir string = configPath + "private/"
-const tufDir string = configPath + "tuf/"
-
-var caStore trustmanager.X509Store
-var certificateStore trustmanager.X509Store
-var privKeyStore trustmanager.EncryptedFileStore
+const trustDir string = "trusted_certificates/"
+const privDir string = "private/"
+const rootKeysDir string = "root_keys/"
 
 var rawOutput bool
+var caStore trustmanager.X509Store
+var certificateStore trustmanager.X509Store
+var privKeyStore trustmanager.FileStore
 
 func init() {
 	logrus.SetLevel(logrus.DebugLevel)
@@ -59,13 +56,11 @@ func init() {
 	}
 
 	// Set up the defaults for our config
-	viper.SetDefault("trustDir", path.Join(homeDir, path.Dir(trustDir)))
-	viper.SetDefault("privDir", path.Join(homeDir, path.Dir(privDir)))
-	viper.SetDefault("tufDir", path.Join(homeDir, path.Dir(tufDir)))
+	viper.SetDefault("baseTrustDir", path.Join(homeDir, path.Dir(configPath)))
 
 	// Get the final value for the CA directory
-	finalTrustDir := viper.GetString("trustDir")
-	finalPrivDir := viper.GetString("privDir")
+	finalTrustDir := path.Join(viper.GetString("baseTrustDir"), trustDir)
+	finalPrivDir := path.Join(viper.GetString("baseTrustDir"), privDir)
 
 	// Load all CAs that aren't expired and don't use SHA1
 	caStore, err = trustmanager.NewX509FilteredFileStore(finalTrustDir, func(cert *x509.Certificate) bool {
@@ -76,10 +71,10 @@ func init() {
 			cert.SignatureAlgorithm != x509.ECDSAWithSHA1
 	})
 	if err != nil {
-		fatalf("could not create X509FileStore: %v", err)
+		fatalf("could not create CA X509FileStore: %v", err)
 	}
 
-	// Load all individual (non-CA) certificates that aren't expired and don't use SHA1
+	// Load all individual (nonCA) certificates that aren't expired and don't use SHA1
 	certificateStore, err = trustmanager.NewX509FilteredFileStore(finalTrustDir, func(cert *x509.Certificate) bool {
 		return !cert.IsCA &&
 			time.Now().Before(cert.NotAfter) &&
@@ -88,12 +83,12 @@ func init() {
 			cert.SignatureAlgorithm != x509.ECDSAWithSHA1
 	})
 	if err != nil {
-		fatalf("could not create X509FileStore: %v", err)
+		fatalf("could not create Certificate X509FileStore: %v", err)
 	}
 
 	privKeyStore, err = trustmanager.NewKeyFileStore(finalPrivDir)
 	if err != nil {
-		fatalf("could not create FileStore: %v", err)
+		fatalf("could not create KeyFileStore: %v", err)
 	}
 
 }
@@ -108,13 +103,13 @@ func main() {
 	NotaryCmd.AddCommand(cmdKeys)
 	NotaryCmd.AddCommand(cmdTufInit)
 	NotaryCmd.AddCommand(cmdTufList)
-	cmdTufList.Flags().BoolVarP(&rawOutput, "raw", "", false, "Instructs notary list to output a non-pretty printed version of the targets list. Useful if you need to parse the list.")
+	cmdTufList.Flags().BoolVarP(&rawOutput, "raw", "", false, "Instructs notary list to output a nonpretty printed version of the targets list. Useful if you need to parse the list.")
 	NotaryCmd.AddCommand(cmdTufAdd)
 	NotaryCmd.AddCommand(cmdTufRemove)
 	NotaryCmd.AddCommand(cmdTufPublish)
 	cmdTufPublish.Flags().StringVarP(&remoteTrustServer, "remote", "r", "", "Remote trust server location")
 	NotaryCmd.AddCommand(cmdTufLookup)
-	cmdTufLookup.Flags().BoolVarP(&rawOutput, "raw", "", false, "Instructs notary lookup to output a non-pretty printed version of the targets list. Useful if you need to parse the list.")
+	cmdTufLookup.Flags().BoolVarP(&rawOutput, "raw", "", false, "Instructs notary lookup to output a nonpretty printed version of the targets list. Useful if you need to parse the list.")
 	cmdTufLookup.Flags().StringVarP(&remoteTrustServer, "remote", "r", "", "Remote trust server location")
 	NotaryCmd.AddCommand(cmdVerify)
 

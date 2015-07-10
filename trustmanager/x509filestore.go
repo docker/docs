@@ -5,6 +5,8 @@ import (
 	"errors"
 	"os"
 	"path"
+
+	"github.com/Sirupsen/logrus"
 )
 
 // X509FileStore implements X509Store that persists on disk
@@ -29,7 +31,7 @@ func NewX509FilteredFileStore(directory string, validate func(*x509.Certificate)
 }
 
 func newX509FileStore(directory string, validate func(*x509.Certificate) bool) (*X509FileStore, error) {
-	fileStore, err := NewFileStore(directory, certExtension)
+	fileStore, err := NewSimpleFileStore(directory, certExtension)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +71,7 @@ func (s X509FileStore) AddCert(cert *x509.Certificate) error {
 // stored under. If the file does not exist on disk, saves it.
 func (s X509FileStore) addNamedCert(cert *x509.Certificate) error {
 	fingerprint := fingerprintCert(cert)
-
+	logrus.Debug("Adding cert with fingerprint: ", fingerprint)
 	// Validate if we already loaded this certificate before
 	if _, ok := s.fingerprintMap[fingerprint]; ok {
 		return errors.New("certificate already in the store")
@@ -81,10 +83,12 @@ func (s X509FileStore) addNamedCert(cert *x509.Certificate) error {
 	fileName := fileName(cert)
 
 	// Save the file to disk if not already there.
-	if _, err := os.Stat(fileName); os.IsNotExist(err) {
+	if _, err := os.Stat(s.fileStore.GetPath(fileName)); os.IsNotExist(err) {
 		if err := s.fileStore.Add(fileName, certBytes); err != nil {
 			return err
 		}
+	} else if err != nil {
+		return err
 	}
 
 	// We wrote the certificate succcessfully, add it to our in-memory storage
@@ -131,7 +135,7 @@ func (s X509FileStore) RemoveCert(cert *x509.Certificate) error {
 // AddCertFromPEM adds the first certificate that it finds in the byte[], returning
 // an error if no Certificates are found
 func (s X509FileStore) AddCertFromPEM(pemBytes []byte) error {
-	cert, err := loadCertFromPEM(pemBytes)
+	cert, err := LoadCertFromPEM(pemBytes)
 	if err != nil {
 		return err
 	}
