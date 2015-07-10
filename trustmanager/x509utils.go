@@ -1,6 +1,8 @@
 package trustmanager
 
 import (
+	"crypto/ecdsa"
+	"crypto/elliptic"
 	"crypto/rand"
 	"crypto/rsa"
 	"crypto/x509"
@@ -213,13 +215,42 @@ func RSAToPrivateKey(rsaPrivKey *rsa.PrivateKey) (*data.PrivateKey, error) {
 	// Get a DER-encoded representation of the PublicKey
 	rsaPubBytes, err := x509.MarshalPKIXPublicKey(&rsaPrivKey.PublicKey)
 	if err != nil {
-		return nil, fmt.Errorf("failed to marshal private key: %v", err)
+		return nil, fmt.Errorf("failed to marshal public key: %v", err)
 	}
 
 	// Get a DER-encoded representation of the PrivateKey
 	rsaPrivBytes := x509.MarshalPKCS1PrivateKey(rsaPrivKey)
 
 	return data.NewPrivateKey("RSA", rsaPubBytes, rsaPrivBytes), nil
+}
+
+// GenerateECDSAKey generates an ECDSA Private key and returns a TUF PrivateKey
+func GenerateECDSAKey(random io.Reader) (*data.PrivateKey, error) {
+	// TODO(diogo): For now hardcode P256. There were timming attacks on the other
+	// curves, but I can't seem to find the issue.
+	ecdsaPrivKey, err := ecdsa.GenerateKey(elliptic.P256(), random)
+	if err != nil {
+		return nil, err
+	}
+
+	return ECDSAToPrivateKey(ecdsaPrivKey)
+}
+
+// ECDSAToPrivateKey converts an rsa.Private key to a TUF data.PrivateKey type
+func ECDSAToPrivateKey(ecdsaPrivKey *ecdsa.PrivateKey) (*data.PrivateKey, error) {
+	// Get a DER-encoded representation of the PublicKey
+	ecdsaPubBytes, err := x509.MarshalPKIXPublicKey(&ecdsaPrivKey.PublicKey)
+	if err != nil {
+		return nil, fmt.Errorf("failed to marshal public key: %v", err)
+	}
+
+	// Get a DER-encoded representation of the PrivateKey
+	ecdsaPrivKeyBytes, err := x509.MarshalECPrivateKey(ecdsaPrivKey)
+	if err != nil {
+		return nil, fmt.Errorf("failed to marshal private key: %v", err)
+	}
+
+	return data.NewPrivateKey("ECDSA", ecdsaPubBytes, ecdsaPrivKeyBytes), nil
 }
 
 // NewCertificate returns an X509 Certificate following a template, given a GUN.

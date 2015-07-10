@@ -111,8 +111,8 @@ func NewNotaryRepository(baseDir, gun, baseURL string, rt http.RoundTripper) (*N
 		return nil, err
 	}
 
-	logrus.Debugf("creating non-root cryptoservice")
-	signer := signed.NewSigner(NewCryptoService(gun, privKeyStore))
+	fmt.Println("creating non-root cryptoservice")
+	signer := signed.NewSigner(NewRSACryptoService(gun, privKeyStore, ""))
 
 	nRepo := &NotaryRepository{
 		gun:          gun,
@@ -641,8 +641,8 @@ func (r *NotaryRepository) GetRootSigner(rootKeyID, passphrase string) (*Unlocke
 	// when a root key is needed.
 
 	// Passing an empty GUN because root keys aren't associated with a GUN.
-	ccs := NewCryptoService("", r.rootKeyStore)
-	ccs.SetPassphrase(passphrase)
+	fmt.Println("creating root cryptoservice with passphrase", passphrase)
+	ccs := NewRSACryptoService("", r.rootKeyStore, passphrase)
 	signer := signed.NewSigner(ccs)
 
 	return &UnlockedSigner{
