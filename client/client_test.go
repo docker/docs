@@ -11,19 +11,27 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/docker/notary/client/changelist"
 	"github.com/docker/notary/trustmanager"
 	"github.com/endophage/gotuf/data"
 	"github.com/stretchr/testify/assert"
 )
 
-func createTestServer(t *testing.T) *httptest.Server {
+const timestampKeyJSON = `{"keytype":"RSA","keyval":{"public":"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyyvBtTg2xzYS+MTTIBqSpI4V78tt8Yzqi7Jki/Z6NqjiDvcnbgcTqNR2t6B2W5NjGdp/hSaT2jyHM+kdmEGaPxg/zIuHbL3NIp4e0qwovWiEgACPIaELdn8O/kt5swsSKl1KMvLCH1sM86qMibNMAZ/hXOwd90TcHXCgZ91wHEAmsdjDC3dB0TT+FBgOac8RM01Y196QrZoOaDMTWh0EQfw7YbXAElhFVDFxBzDdYWbcIHSIogXQmq0CP+zaL/1WgcZZIClt2M6WCaxxF1S34wNn45gCvVZiZQ/iKWHerSr/2dGQeGo+7ezMSutRzvJ+01fInD86RS/CEtBCFZ1VyQIDAQAB","private":"MIIEpAIBAAKCAQEAyyvBtTg2xzYS+MTTIBqSpI4V78tt8Yzqi7Jki/Z6NqjiDvcnbgcTqNR2t6B2W5NjGdp/hSaT2jyHM+kdmEGaPxg/zIuHbL3NIp4e0qwovWiEgACPIaELdn8O/kt5swsSKl1KMvLCH1sM86qMibNMAZ/hXOwd90TcHXCgZ91wHEAmsdjDC3dB0TT+FBgOac8RM01Y196QrZoOaDMTWh0EQfw7YbXAElhFVDFxBzDdYWbcIHSIogXQmq0CP+zaL/1WgcZZIClt2M6WCaxxF1S34wNn45gCvVZiZQ/iKWHerSr/2dGQeGo+7ezMSutRzvJ+01fInD86RS/CEtBCFZ1VyQIDAQABAoIBAHar8FFxrE1gAGTeUpOF8fG8LIQMRwO4U6eVY7V9GpWiv6gOJTHXYFxU/aL0Ty3eQRxwy9tyVRo8EJz5pRex+e6ws1M+jLOviYqW4VocxQ8dZYd+zBvQfWmRfah7XXJ/HPUx2I05zrmR7VbGX6Bu4g5w3KnyIO61gfyQNKF2bm2Q3yblfupx3URvX0bl180R/+QN2Aslr4zxULFE6b+qJqBydrztq+AAP3WmskRxGa6irFnKxkspJqUpQN1mFselj6iQrzAcwkRPoCw0RwCCMq1/OOYvQtgxTJcO4zDVlbw54PvnxPZtcCWw7fO8oZ2Fvo2SDo75CDOATOGaT4Y9iqECgYEAzWZSpFbN9ZHmvq1lJQg//jFAyjsXRNn/nSvyLQILXltz6EHatImnXo3v+SivG91tfzBI1GfDvGUGaJpvKHoomB+qmhd8KIQhO5MBdAKZMf9fZqZofOPTD9xRXECCwdi+XqHBmL+l1OWz+O9Bh+Qobs2as/hQVgHaoXhQpE0NkTcCgYEA/Tjf6JBGl1+WxQDoGZDJrXoejzG9OFW19RjMdmPrg3t4fnbDtqTpZtCzXxPTCSeMrvplKbqAqZglWyq227ksKw4p7O6YfyhdtvC58oJmivlLr6sFaTsER7mDcYce8sQpqm+XQ8IPbnOk0Z1l6g56euTwTnew49uy25M6U1xL0P8CgYEAxEXv2Kw+OVhHV5PX4BBHHj6we88FiDyMfwM8cvfOJ0datekf9X7ImZkmZEAVPJpWBMD+B0J0jzU2b4SLjfFVkzBHVOH2Ob0xCH2MWPAWtekin7OKizUlPbW5ZV8b0+Kq30DQ/4a7D3rEhK8UPqeuX1tHZox1MAqrgbq3zJj4yvcCgYEAktYPKPm4pYCdmgFrlZ+bA0iEPf7Wvbsd91F5BtHsOOM5PQQ7e0bnvWIaEXEad/2CG9lBHlBy2WVLjDEZthILpa/h6e11ao8KwNGY0iKBuebT17rxOVMqqTjPGt8CuD2994IcEgOPFTpkAdUmyvG4XlkxbB8F6St17NPUB5DGuhsCgYA//Lfytk0FflXEeRQ16LT1YXgV7pcR2jsha4+4O5pxSFw/kTsOfJaYHg8StmROoyFnyE3sg76dCgLn0LENRCe5BvDhJnp5bMpQldG3XwcAxH8FGFNY4LtV/2ZKnJhxcONkfmzQPOmTyedOzrKQ+bNURsqLukCypP7/by6afBY4dA=="}}`
+
+func createTestServer(t *testing.T) (*httptest.Server, *http.ServeMux) {
+	mux := http.NewServeMux()
 	// TUF will request /v2/docker.com/notary/_trust/tuf/timestamp.key
 	// Return a canned timestamp.key
-	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprint(w, `{"keytype":"ed25519","keyval":{"public":"y4wnCW7Y8NYCmKZyWqxxUUj8p7SSoV5Cr1Zc+jqBxBw=","private":null}}`)
-	}))
+	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/timestamp.key", func(w http.ResponseWriter, r *http.Request) {
+		// Also contains the private key, but for the purpose of this
+		// test, we don't care
+		fmt.Fprint(w, timestampKeyJSON)
+	})
 
-	return ts
+	ts := httptest.NewServer(mux)
+
+	return ts, mux
 }
 
 // TestInitRepo runs through the process of initializing a repository and makes
@@ -36,7 +44,7 @@ func TestInitRepo(t *testing.T) {
 
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
-	ts := createTestServer(t)
+	ts, _ := createTestServer(t)
 	defer ts.Close()
 
 	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport)
@@ -158,9 +166,11 @@ type tufChange struct {
 	Data       []byte `json:"data"`
 }
 
-// TestAddTarget adds a target to the repo and confirms that the changelist
-// is updated correctly.
-func TestAddTarget(t *testing.T) {
+// TestAddListTarget adds a target to the repo and confirms that the changelist
+// is updated correctly. Then it calls ListTargets and checks the return value.
+// Using ListTargets involves serving signed metadata files over the test's
+// internal HTTP server.
+func TestAddListTarget(t *testing.T) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)
@@ -169,7 +179,7 @@ func TestAddTarget(t *testing.T) {
 
 	gun := "docker.com/notary"
 
-	ts := createTestServer(t)
+	ts, mux := createTestServer(t)
 	defer ts.Close()
 
 	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport)
@@ -187,9 +197,9 @@ func TestAddTarget(t *testing.T) {
 	// Add fixtures/ca.cert as a target. There's no particular reason
 	// for using this file except that it happens to be available as
 	// a fixture.
-	target, err := NewTarget("latest", "../fixtures/ca.cert")
+	latestTarget, err := NewTarget("latest", "../fixtures/ca.cert")
 	assert.NoError(t, err, "error creating target")
-	err = repo.AddTarget(target)
+	err = repo.AddTarget(latestTarget)
 	assert.NoError(t, err, "error adding target")
 
 	// Look for the changelist file
@@ -221,9 +231,9 @@ func TestAddTarget(t *testing.T) {
 	changelistDir.Close()
 
 	// Create a second target
-	target, err = NewTarget("current", "../fixtures/ca.cert")
+	currentTarget, err := NewTarget("current", "../fixtures/ca.cert")
 	assert.NoError(t, err, "error creating target")
-	err = repo.AddTarget(target)
+	err = repo.AddTarget(currentTarget)
 	assert.NoError(t, err, "error adding target")
 
 	changelistDir, err = os.Open(changelistDirPath)
@@ -260,6 +270,80 @@ func TestAddTarget(t *testing.T) {
 	assert.True(t, newFileFound, "second changelist file not found")
 
 	changelistDir.Close()
+
+	// Now test ListTargets. In preparation, we need to expose some signed
+	// metadata files on the internal HTTP server.
+
+	// Apply the changelist. Normally, this would be done by Publish
+
+	// load the changelist for this repo
+	cl, err := changelist.NewFileChangelist(filepath.Join(tempBaseDir, "tuf", gun, "changelist"))
+	assert.NoError(t, err, "could not open changelist")
+
+	// apply the changelist to the repo
+	err = applyChangelist(repo.tufRepo, cl)
+	assert.NoError(t, err, "could not apply changelist")
+
+	var tempKey data.PrivateKey
+	json.Unmarshal([]byte(timestampKeyJSON), &tempKey)
+
+	repo.privKeyStore.AddKey(filepath.Join(gun, tempKey.ID()), &tempKey)
+
+	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/root.json", func(w http.ResponseWriter, r *http.Request) {
+		rootJSONFile := filepath.Join(tempBaseDir, "tuf", gun, "metadata", "root.json")
+		rootFileBytes, err := ioutil.ReadFile(rootJSONFile)
+		assert.NoError(t, err)
+		fmt.Fprint(w, string(rootFileBytes))
+	})
+
+	// Because ListTargets will clear this
+	savedTUFRepo := repo.tufRepo
+
+	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/timestamp.json", func(w http.ResponseWriter, r *http.Request) {
+		signedTimestamp, err := savedTUFRepo.SignTimestamp(data.DefaultExpires("timestamp"), nil)
+		assert.NoError(t, err)
+		timestampJSON, _ := json.Marshal(signedTimestamp)
+		fmt.Fprint(w, string(timestampJSON))
+	})
+
+	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/snapshot.json", func(w http.ResponseWriter, r *http.Request) {
+		signedSnapshot, err := savedTUFRepo.SignSnapshot(data.DefaultExpires("snapshot"), nil)
+		assert.NoError(t, err)
+		snapshotJSON, _ := json.Marshal(signedSnapshot)
+		fmt.Fprint(w, string(snapshotJSON))
+	})
+
+	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/targets.json", func(w http.ResponseWriter, r *http.Request) {
+		signedTargets, err := savedTUFRepo.SignTargets("targets", data.DefaultExpires("targets"), nil)
+		assert.NoError(t, err)
+		targetsJSON, _ := json.Marshal(signedTargets)
+		fmt.Fprint(w, string(targetsJSON))
+	})
+
+	targets, err := repo.ListTargets()
+	assert.NoError(t, err)
+
+	// Should be two targets
+	assert.Len(t, targets, 2, "unexpected number of targets returned by ListTargets")
+
+	if targets[0].Name == "latest" {
+		assert.Equal(t, latestTarget, targets[0], "latest target does not match")
+		assert.Equal(t, currentTarget, targets[1], "current target does not match")
+	} else if targets[0].Name == "current" {
+		assert.Equal(t, currentTarget, targets[0], "current target does not match")
+		assert.Equal(t, latestTarget, targets[1], "latest target does not match")
+	} else {
+		t.Fatalf("unexpected target name: %s", targets[0].Name)
+	}
+
+	// Also test GetTargetByName
+	newLatestTarget, err := repo.GetTargetByName("latest")
+	assert.NoError(t, err)
+	assert.Equal(t, latestTarget, newLatestTarget, "latest target does not match")
+
+	newCurrentTarget, err := repo.GetTargetByName("current")
+	assert.NoError(t, err)
+	assert.Equal(t, currentTarget, newCurrentTarget, "current target does not match")
 }
 
 // TestValidateRootKey verifies that the public data in root.json for the root
@@ -273,7 +357,7 @@ func TestValidateRootKey(t *testing.T) {
 
 	gun := "docker.com/notary"
 
-	ts := createTestServer(t)
+	ts, _ := createTestServer(t)
 	defer ts.Close()
 
 	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport)
