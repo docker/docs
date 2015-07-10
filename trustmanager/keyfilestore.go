@@ -1,6 +1,11 @@
 package trustmanager
 
-import "github.com/endophage/gotuf/data"
+import (
+	"path/filepath"
+	"strings"
+
+	"github.com/endophage/gotuf/data"
+)
 
 const (
 	keyExtension = "key"
@@ -79,5 +84,10 @@ func (s *KeyFileStore) GetDecryptedKey(name string, passphrase string) (*data.Pr
 // There might be symlinks associating Certificate IDs to Public Keys, so this
 // method only returns the IDs that aren't symlinks
 func (s *KeyFileStore) ListKeys() []string {
-	return s.ListFiles(false)
+	var keyIDList []string
+	for _, f := range s.ListFiles(false) {
+		keyID := strings.TrimSpace(strings.TrimSuffix(filepath.Base(f), filepath.Ext(f)))
+		keyIDList = append(keyIDList, keyID)
+	}
+	return keyIDList
 }

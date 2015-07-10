@@ -618,7 +618,7 @@ func (r *NotaryRepository) ListRootKeys() []string {
 func (r *NotaryRepository) GenRootKey(passphrase string) (string, error) {
 	privKey, err := trustmanager.GenerateRSAKey(rand.Reader, rsaRootKeySize)
 	if err != nil {
-		return "", fmt.Errorf("failed to convert private key: ", err)
+		return "", fmt.Errorf("failed to convert private key: %v", err)
 	}
 
 	r.rootKeyStore.AddEncryptedKey(privKey.ID(), privKey, passphrase)

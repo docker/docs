@@ -2,14 +2,13 @@ package main
 
 import (
 	"crypto/sha256"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"os"
 
 	"github.com/Sirupsen/logrus"
 	notaryclient "github.com/docker/notary/client"
-	"github.com/endophage/gotuf/data"
-	"github.com/endophage/gotuf/keys"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -107,13 +106,30 @@ func tufInit(cmd *cobra.Command, args []string) {
 		fatalf(err.Error())
 	}
 
-	// TODO(diogo): We don't want to generate a new root every time. Ask the user
-	// which key she wants to use if there > 0 root keys available.
-	rootKeyID, err := nRepo.GenRootKey("passphrase")
-	if err != nil {
-		fatalf(err.Error())
+	keysList := nRepo.ListRootKeys()
+	var passphrase string
+	var rootKeyID string
+	if len(keysList) < 1 {
+		fmt.Println("No root keys found. Generating a new root key...")
+		passphrase, err = passphraseRetriever()
+		if err != nil {
+			fatalf(err.Error())
+		}
+		rootKeyID, err = nRepo.GenRootKey(passphrase)
+		if err != nil {
+			fatalf(err.Error())
+		}
+	} else {
+		rootKeyID = keysList[0]
+		fmt.Println("Root key found.")
+		fmt.Printf("Enter passphrase for: %s (%d)\n", rootKeyID, len(rootKeyID))
+		passphrase, err = passphraseRetriever()
+		if err != nil {
+			fatalf(err.Error())
+		}
 	}
-	rootSigner, err := nRepo.GetRootSigner(rootKeyID, "passphrase")
+
+	rootSigner, err := nRepo.GetRootSigner(rootKeyID, passphrase)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -185,7 +201,7 @@ func tufPublish(cmd *cobra.Command, args []string) {
 		fatalf(err.Error())
 	}
 
-	err = repo.Publish(passwordRetriever)
+	err = repo.Publish(passphraseRetriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -249,76 +265,16 @@ func verify(cmd *cobra.Command, args []string) {
 	return
 }
 
-//func generateKeys(kdb *keys.KeyDB, signer *signed.Signer, remote store.RemoteStore) (string, string, string, string, error) {
-//	rawTSKey, err := remote.GetKey("timestamp")
-//	if err != nil {
-//		return "", "", "", "", err
-//	}
-//	fmt.Println("RawKey: ", string(rawTSKey))
-//	parsedKey := &data.TUFKey{}
-//	err = json.Unmarshal(rawTSKey, parsedKey)
-//	if err != nil {
-//		return "", "", "", "", err
-//	}
-//	timestampKey := data.NewPublicKey(parsedKey.Cipher(), parsedKey.Public())
-//
-//	rootKey, err := signer.Create("root")
-//	if err != nil {
-//		return "", "", "", "", err
-//	}
-//	targetsKey, err := signer.Create("targets")
-//	if err != nil {
-//		return "", "", "", "", err
-//	}
-//	snapshotKey, err := signer.Create("snapshot")
-//	if err != nil {
-//		return "", "", "", "", err
-//	}
-//
-//	kdb.AddKey(rootKey)
-//	kdb.AddKey(targetsKey)
-//	kdb.AddKey(snapshotKey)
-//	kdb.AddKey(timestampKey)
-//	return rootKey.ID(), targetsKey.ID(), snapshotKey.ID(), timestampKey.ID(), nil
-//}
-
-func generateRoles(kdb *keys.KeyDB, rootKeyID, targetsKeyID, snapshotKeyID, timestampKeyID string) error {
-	rootRole, err := data.NewRole("root", 1, []string{rootKeyID}, nil, nil)
+func passphraseRetriever() (string, error) {
+	fmt.Println("Please provide a passphrase for this root key: ")
+	var passphrase string
+	_, err := fmt.Scanln(&passphrase)
 	if err != nil {
-		return err
+		return "", err
 	}
-	targetsRole, err := data.NewRole("targets", 1, []string{targetsKeyID}, nil, nil)
-	if err != nil {
-		return err
+	if len(passphrase) < 8 {
+		fmt.Println("Please use a password manager to generate and store a good random passphrase.")
+		return "", errors.New("Passphrase too short")
 	}
-	snapshotRole, err := data.NewRole("snapshot", 1, []string{snapshotKeyID}, nil, nil)
-	if err != nil {
-		return err
-	}
-	timestampRole, err := data.NewRole("timestamp", 1, []string{timestampKeyID}, nil, nil)
-	if err != nil {
-		return err
-	}
-
-	err = kdb.AddRole(rootRole)
-	if err != nil {
-		return err
-	}
-	err = kdb.AddRole(targetsRole)
-	if err != nil {
-		return err
-	}
-	err = kdb.AddRole(snapshotRole)
-	if err != nil {
-		return err
-	}
-	err = kdb.AddRole(timestampRole)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-func passwordRetriever() (string, error) {
-	return "passphrase", nil
+	return passphrase, nil
 }
