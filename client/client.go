@@ -9,6 +9,7 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
+	"net/http"
 	"os"
 	"path/filepath"
 	"time"
@@ -72,6 +73,7 @@ type NotaryRepository struct {
 	privKeyStore     *trustmanager.KeyFileStore
 	rootKeyStore     *trustmanager.KeyFileStore
 	rootSigner       *UnlockedSigner
+	roundTrip        http.RoundTripper
 }
 
 // Target represents a simplified version of the data TUF operates on, so external
@@ -100,7 +102,7 @@ func NewTarget(targetName string, targetPath string) (*Target, error) {
 // NewNotaryRepository is a helper method that returns a new notary repository.
 // It takes the base directory under where all the trust files will be stored
 // (usually ~/.docker/trust/).
-func NewNotaryRepository(baseDir, gun, baseURL string) (*NotaryRepository, error) {
+func NewNotaryRepository(baseDir, gun, baseURL string, rt http.RoundTripper) (*NotaryRepository, error) {
 	trustDir := filepath.Join(baseDir, trustDir)
 	rootKeysDir := filepath.Join(baseDir, rootKeysDir)
 
@@ -118,6 +120,7 @@ func NewNotaryRepository(baseDir, gun, baseURL string) (*NotaryRepository, error
 		tufRepoPath:  filepath.Join(baseDir, tufDir, gun),
 		signer:       signer,
 		privKeyStore: privKeyStore,
+		roundTrip:    rt,
 	}
 
 	if err := nRepo.loadKeys(trustDir, rootKeysDir); err != nil {
@@ -141,7 +144,7 @@ func (r *NotaryRepository) Initialize(uSigner *UnlockedSigner) error {
 		return err
 	}
 
-	remote, err := getRemoteStore(r.baseURL, r.Gun)
+	remote, err := getRemoteStore(r.baseURL, r.Gun, r.roundTrip)
 	rawTSKey, err := remote.GetKey("timestamp")
 	if err != nil {
 		return err
@@ -374,7 +377,7 @@ func (r *NotaryRepository) Publish(getPass passwordRetriever) error {
 		return err
 	}
 
-	remote, err := getRemoteStore(r.baseURL, r.Gun)
+	remote, err := getRemoteStore(r.baseURL, r.Gun, r.roundTrip)
 	if err != nil {
 		return err
 	}
@@ -574,7 +577,7 @@ func (r *NotaryRepository) validateRoot(root *data.Signed) error {
 }
 
 func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
-	remote, err := getRemoteStore(r.baseURL, r.Gun)
+	remote, err := getRemoteStore(r.baseURL, r.Gun, r.roundTrip)
 	if err != nil {
 		return nil, err
 	}

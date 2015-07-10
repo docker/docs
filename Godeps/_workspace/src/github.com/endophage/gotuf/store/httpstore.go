@@ -12,7 +12,6 @@ import (
 	"path"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/endophage/gotuf/utils"
 )
 
 // HTTPStore manages pulling and pushing metadata from and to a remote
@@ -30,9 +29,10 @@ type HTTPStore struct {
 	metaExtension string
 	targetsPrefix string
 	keyExtension  string
+	roundTrip     http.RoundTripper
 }
 
-func NewHTTPStore(baseURL, metaPrefix, metaExtension, targetsPrefix, keyExtension string) (*HTTPStore, error) {
+func NewHTTPStore(baseURL, metaPrefix, metaExtension, targetsPrefix, keyExtension string, roundTrip http.RoundTripper) (*HTTPStore, error) {
 	base, err := url.Parse(baseURL)
 	if err != nil {
 		return nil, err
@@ -46,6 +46,7 @@ func NewHTTPStore(baseURL, metaPrefix, metaExtension, targetsPrefix, keyExtensio
 		metaExtension: metaExtension,
 		targetsPrefix: targetsPrefix,
 		keyExtension:  keyExtension,
+		roundTrip:     roundTrip,
 	}, nil
 }
 
@@ -57,7 +58,11 @@ func (s HTTPStore) GetMeta(name string, size int64) (json.RawMessage, error) {
 	if err != nil {
 		return nil, err
 	}
-	resp, err := utils.Download(*url)
+	req, err := http.NewRequest("GET", url.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+	resp, err := s.roundTrip.RoundTrip(req)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +84,11 @@ func (s HTTPStore) SetMeta(name string, blob json.RawMessage) error {
 	if err != nil {
 		return err
 	}
-	_, err = utils.Upload(url.String(), bytes.NewReader(blob))
+	req, err := http.NewRequest("POST", url.String(), bytes.NewReader(blob))
+	if err != nil {
+		return err
+	}
+	_, err = s.roundTrip.RoundTrip(req)
 	return err
 }
 
@@ -116,7 +125,11 @@ func (s HTTPStore) GetTarget(path string) (io.ReadCloser, error) {
 		return nil, err
 	}
 	logrus.Debug("Attempting to download target: ", url.String())
-	resp, err := utils.Download(*url)
+	req, err := http.NewRequest("GET", url.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+	resp, err := s.roundTrip.RoundTrip(req)
 	if err != nil {
 		return nil, err
 	}
@@ -128,7 +141,11 @@ func (s HTTPStore) GetKey(role string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	resp, err := utils.Download(*url)
+	req, err := http.NewRequest("GET", url.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+	resp, err := s.roundTrip.RoundTrip(req)
 	if err != nil {
 		return nil, err
 	}

@@ -39,7 +39,7 @@ func TestInitRepo(t *testing.T) {
 	ts := createTestServer(t)
 	defer ts.Close()
 
-	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL)
+	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport)
 	assert.NoError(t, err, "error creating repo: %s", err)
 
 	rootKeyID, err := repo.GenRootKey("passphrase")
@@ -172,7 +172,7 @@ func TestAddTarget(t *testing.T) {
 	ts := createTestServer(t)
 	defer ts.Close()
 
-	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL)
+	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
 	rootKeyID, err := repo.GenRootKey("passphrase")
@@ -276,7 +276,7 @@ func TestValidateRootKey(t *testing.T) {
 	ts := createTestServer(t)
 	defer ts.Close()
 
-	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL)
+	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
 	rootKeyID, err := repo.GenRootKey("passphrase")

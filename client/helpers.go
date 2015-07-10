@@ -2,6 +2,7 @@ package client
 
 import (
 	"encoding/json"
+	"net/http"
 	"time"
 
 	"github.com/docker/notary/client/changelist"
@@ -11,13 +12,14 @@ import (
 )
 
 // Use this to initialize remote HTTPStores from the config settings
-func getRemoteStore(baseURL, gun string) (store.RemoteStore, error) {
+func getRemoteStore(baseURL, gun string, rt http.RoundTripper) (store.RemoteStore, error) {
 	return store.NewHTTPStore(
 		baseURL+"/v2/"+gun+"/_trust/tuf/",
 		"",
 		"json",
 		"",
 		"key",
+		rt,
 	)
 }
 
