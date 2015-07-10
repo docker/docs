@@ -1,0 +1,131 @@
+{{ partial "page-head.html" . }}
+
+<div class="hero">
+  <div class="navbar">
+    <div class="name"><a href="/"><img src="{{.Site.BaseURL}}/images/docker-logo.png"></a></div>
+    <div class="actions">
+      <div class="link">
+        <a href="#faq" class="one-page-link">FAQ</a>
+      </div>
+      <div class="link">
+        <a href="#" class="docs-link" target="_blank">Docs</a>
+      </div>
+      <div class="link">
+        <a href="https://github.com/docker/toolbox" target="_blank">Github</a>
+      </div>
+    </div>
+  </div>
+  <h2><img src="{{.Site.BaseURL}}/images/docker-toolbox-logo.png">docker toolbox</h2>
+  <p>
+    Installs everything you need to get started with Docker.
+  </p>
+  <div class="cta">
+    <a href="#" class="btn download-link">Download Docker Toolbox</a>
+  </div>
+  <div class="whale-box">
+    <img src="{{.Site.BaseURL}}/images/whale-box.png">
+  </div>
+</div>
+<div id="about" class="content">
+  <div class="wrapper-details">
+    <h2>What's in the box?</h2>
+    <div class="items">
+      <div class="item">
+        <div class="info">
+          <img src="{{.Site.BaseURL}}/images/engine.png">
+          <h3>Docker Client + Engine</h3>
+          <p>Creates and runs Docker containers.</p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="info">
+          <img src="{{.Site.BaseURL}}/images/machine.png">
+          <h3>Docker Machine</h3>
+          <p>Automatic Docker provisioning.</p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="info">
+          <img src="{{.Site.BaseURL}}/images/compose.png">
+          <h3>Docker Compose</h3>
+          <p>Define multi-container applications.</p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="info">
+          <img src="{{.Site.BaseURL}}/images/swarm.png">
+          <h3>Docker Swarm</h3>
+          <p>Host clustering and container scheduling.</p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="info">
+          <img src="{{.Site.BaseURL}}/images/kitematic.png">
+          <h3>Docker Kitematic</h3>
+          <p>Desktop GUI for Docker.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="documentation" class="content blue center">
+  <div class="documentation">
+    <h3>Get started with Docker from tutorials.</h3>
+    <div class="cta">
+      <a href="#" target="_blank" class="btn docs-link">New to Docker</a>
+      <a href="#" target="_blank" class="btn docs-exp-link">Already Using Docker</a>
+    </div>
+  </div>
+</div>
+<div id="faq" class="content">
+  <div class="wrapper-details">
+    <h2>FAQ</h2>
+    <div class="qnas">
+      <div class="qna">
+        <div class="question">
+          <h3>I already use boot2docker. How do I migrate to using machine in Docker Toolbox?</h3>
+        </div>
+        <div class="answer">
+          <p>
+            To migrate from boot2docker to Docker machine, please type the following command in your terminal:
+          </p>
+          <pre>docker-machine create -d virtualbox --virtualbox-import-boot2docker-vm boot2docker-vm docker-vm</pre>
+          <p>
+            The Docker machine command-line interface (CLI) is slightly different than the boot2docker CLI.
+            Please see the <a href="https://github.com/docker/machine/blob/master/experimental/b2d_migration.md#command-comparison" target="_blank">command comparison docs</a>
+            for differences.
+          </p>
+          <p>
+            If you are still having trouble, please visit the full
+            <a href="https://github.com/docker/machine/blob/master/experimental/b2d_migration.md" target="_blank">boot2docker migration docs</a>
+            or file an issue on <a href="https://github.com/docker/toolbox" target="_blank">Github</a>.
+          </p>
+        </div>
+      </div>
+      <div class="qna">
+        <div class="question">
+          <h3>I've created a new virtual machine from Docker machine. Where did my old containers and images go?</h3>
+        </div>
+        <div class="answer">
+          <p>
+            Docker Toolbox includes a tool called Docker machine, and it creates new and separate virtual machines (VM) from your old boot2docker VM.
+            Your old containers and images are still in the old boot2docker VM and are not lost. You can migrate your boot2docker VM to
+            machine by typing in the command in the previous Q&amp;A.
+        </div>
+      </div>
+      <div class="qna">
+        <div class="question">
+          <h3>What do I do next? How to I get started with Docker?</h3>
+        </div>
+        <div class="answer">
+          <p>
+            There are a set of <a href="#" target="_blank" class="docs-link">official Docker tutorials</a> to get you started.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{{ partial "footer.html" . }}

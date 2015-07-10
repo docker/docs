@@ -1,0 +1,12 @@
+baseurl = "https://toolbox.docker.com"
+languageCode = "en-us"
+title = "Docker Toolbox"
+author = "Sean Li"
+copyright = "Copyright (c) 2015, Docker Inc."
+canonifyurls = true
+paginate = 3
+
+[params]
+  DateForm = "Mon, Jan 2, 2006"
+  github = "docker/toolbox" # optional
+  googleAnalyticsUserID = "UA-64352818-2" # optional
