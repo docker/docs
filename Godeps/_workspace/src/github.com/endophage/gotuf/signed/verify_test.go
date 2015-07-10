@@ -23,7 +23,7 @@ func (VerifySuite) Test(c *C) {
 	signer := NewSigner(trust)
 	type test struct {
 		name  string
-		keys  []*keys.PublicKey
+		keys  []*data.PublicKey
 		roles map[string]*data.Role
 		s     *data.Signed
 		ver   int
@@ -81,7 +81,7 @@ func (VerifySuite) Test(c *C) {
 				k, _ := signer.Create("root")
 				signer.Sign(t.s, k)
 				t.keys = append(t.keys, k)
-				t.roles["root"].KeyIDs = append(t.roles["root"].KeyIDs, k.ID)
+				t.roles["root"].KeyIDs = append(t.roles["root"].KeyIDs, k.ID())
 			},
 		},
 		{
@@ -139,7 +139,7 @@ func (VerifySuite) Test(c *C) {
 		{
 			name: "expired",
 			exp:  &expiredTime,
-			err:  ErrExpired{expiredTime},
+			err:  ErrExpired{expiredTime.Format("2006-01-02 15:04:05 MST")},
 		},
 	}
 	for _, t := range tests {
@@ -154,24 +154,27 @@ func (VerifySuite) Test(c *C) {
 			t.exp = &expires
 		}
 		if t.typ == "" {
-			t.typ = t.role
+			t.typ = data.TUFTypes[t.role]
 		}
 		if t.keys == nil && t.s == nil {
 			k, _ := signer.Create("root")
-			meta := &signedMeta{Type: t.typ, Version: t.ver, Expires: *t.exp}
+			meta := &signedMeta{Type: t.typ, Version: t.ver, Expires: t.exp.Format("2006-01-02 15:04:05 MST")}
 
 			b, err := cjson.Marshal(meta)
 			c.Assert(err, IsNil)
 			s := &data.Signed{Signed: b}
 			signer.Sign(s, k)
 			t.s = s
-			t.keys = []*keys.PublicKey{k}
+			t.keys = []*data.PublicKey{k}
 		}
 		if t.roles == nil {
 			t.roles = map[string]*data.Role{
 				"root": &data.Role{
-					KeyIDs:    []string{t.keys[0].ID},
-					Threshold: 1,
+					RootRole: data.RootRole{
+						KeyIDs:    []string{t.keys[0].ID()},
+						Threshold: 1,
+					},
+					Name: "root",
 				},
 			}
 		}
@@ -181,11 +184,10 @@ func (VerifySuite) Test(c *C) {
 
 		db := keys.NewDB()
 		for _, k := range t.keys {
-			err := db.AddKey(k)
-			c.Assert(err, IsNil)
+			db.AddKey(k)
 		}
-		for n, r := range t.roles {
-			err := db.AddRole(n, r)
+		for _, r := range t.roles {
+			err := db.AddRole(r)
 			c.Assert(err, IsNil)
 		}
 
@@ -203,5 +205,5 @@ func assertErrExpired(c *C, err error, expected ErrExpired) {
 	if !ok {
 		c.Fatalf("expected err to have type ErrExpired, got %T", err)
 	}
-	c.Assert(actual.Expired.Unix(), Equals, expected.Expired.Unix())
+	c.Assert(actual.Expired, Equals, expected.Expired)
 }

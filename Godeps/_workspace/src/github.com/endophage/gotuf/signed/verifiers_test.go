@@ -1,10 +1,10 @@
 package signed
 
 import (
-	"crypto"
-	"crypto/rsa"
-	"crypto/sha256"
-	"crypto/x509"
+	_ "crypto"
+	_ "crypto/rsa"
+	_ "crypto/sha256"
+	_ "crypto/x509"
 	"testing"
 )
 
