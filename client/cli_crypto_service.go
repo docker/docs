@@ -9,6 +9,7 @@ import (
 	"errors"
 	"fmt"
 	"path/filepath"
+	"strings"
 
 	"github.com/docker/notary/trustmanager"
 	"github.com/endophage/gotuf/data"
@@ -76,7 +77,7 @@ func (ccs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signatur
 		// Append signatures to result array
 		signatures = append(signatures, data.Signature{
 			KeyID:     fingerprint,
-			Method:    "RSA",
+			Method:    "RSASSA-PSS",
 			Signature: sig[:],
 		})
 	}
@@ -113,7 +114,7 @@ func (rcs *RootCryptoService) Sign(keyIDs []string, payload []byte) ([]data.Sign
 		// Append signatures to result array
 		signatures = append(signatures, data.Signature{
 			KeyID:     fingerprint,
-			Method:    "RSASSA-PKCS1-V1_5-SIGN",
+			Method:    "RSASSA-PSS-X509",
 			Signature: sig[:],
 		})
 	}
@@ -123,7 +124,7 @@ func (rcs *RootCryptoService) Sign(keyIDs []string, payload []byte) ([]data.Sign
 
 func sign(privKey *data.PrivateKey, hash crypto.Hash, hashed []byte) ([]byte, error) {
 	// TODO(diogo): Implement support for ECDSA.
-	if privKey.Cipher() != "RSA" {
+	if strings.ToLower(privKey.Cipher()) != "rsa" {
 		return nil, fmt.Errorf("private key type not supported: %s", privKey.Cipher())
 	}
 
@@ -134,7 +135,7 @@ func sign(privKey *data.PrivateKey, hash crypto.Hash, hashed []byte) ([]byte, er
 	}
 
 	// Use the RSA key to sign the data
-	sig, err := rsa.SignPKCS1v15(rand.Reader, rsaPrivKey, hash, hashed[:])
+	sig, err := rsa.SignPSS(rand.Reader, rsaPrivKey, hash, hashed[:], &rsa.PSSOptions{SaltLength: rsa.PSSSaltLengthEqualsHash})
 	if err != nil {
 		return nil, err
 	}

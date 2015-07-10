@@ -46,23 +46,23 @@ func TestGetTimestampKey(t *testing.T) {
 	//_, _, err := s.GetTimestampKey("gun")
 	//assert.IsType(t, &ErrNoKey{}, err, "Expected err to be ErrNoKey")
 
-	s.SetTimestampKey("gun", "rsa", []byte("test"))
+	s.SetTimestampKey("gun", "RSA", []byte("test"))
 
 	c, k, err := s.GetTimestampKey("gun")
 	assert.Nil(t, err, "Expected error to be nil")
-	assert.Equal(t, "rsa", c, "Expected cipher rsa, received %s", c)
+	assert.Equal(t, "RSA", c, "Expected cipher rsa, received %s", c)
 	assert.Equal(t, []byte("test"), k, "Key data was wrong")
 }
 
 func TestSetTimestampKey(t *testing.T) {
 	s := NewMemStorage()
-	s.SetTimestampKey("gun", "rsa", []byte("test"))
+	s.SetTimestampKey("gun", "RSA", []byte("test"))
 
-	err := s.SetTimestampKey("gun", "rsa", []byte("test2"))
+	err := s.SetTimestampKey("gun", "RSA", []byte("test2"))
 	assert.IsType(t, &ErrTimestampKeyExists{}, err, "Expected err to be ErrTimestampKeyExists")
 
 	k := s.tsKeys["gun"]
-	assert.Equal(t, "rsa", k.cipher, "Expected cipher to be rsa, received %s", k.cipher)
+	assert.Equal(t, "RSA", k.cipher, "Expected cipher to be rsa, received %s", k.cipher)
 	assert.Equal(t, []byte("test"), k.public, "Public key did not match expected")
 
 }
