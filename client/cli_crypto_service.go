@@ -6,7 +6,6 @@ import (
 	"crypto/rsa"
 	"crypto/sha256"
 	"crypto/x509"
-	"errors"
 	"fmt"
 	"path/filepath"
 	"strings"
@@ -18,26 +17,14 @@ import (
 // CryptoService implements Sign and Create, holding a specific GUN and keystore to
 // operate on
 type CryptoService struct {
-	gun      string
-	keyStore *trustmanager.KeyFileStore
-}
-
-// RootCryptoService implements Sign and Create and operates on a rootKeyStore,
-// taking in a passphrase and calling decrypt when signing.
-type RootCryptoService struct {
-	// TODO(diogo): support multiple passphrases per key
-	passphrase   string
-	rootKeyStore *trustmanager.KeyFileStore
+	gun        string
+	passphrase string
+	keyStore   *trustmanager.KeyFileStore
 }
 
 // NewCryptoService returns an instance of CryptoService
 func NewCryptoService(gun string, keyStore *trustmanager.KeyFileStore) *CryptoService {
 	return &CryptoService{gun: gun, keyStore: keyStore}
-}
-
-// NewRootCryptoService returns an instance of CryptoService
-func NewRootCryptoService(rootKeyStore *trustmanager.KeyFileStore, passphrase string) *RootCryptoService {
-	return &RootCryptoService{rootKeyStore: rootKeyStore, passphrase: passphrase}
 }
 
 // Create is used to generate keys for targets, snapshots and timestamps
@@ -53,7 +40,14 @@ func (ccs *CryptoService) Create(role string) (*data.PublicKey, error) {
 	return data.PublicKeyFromPrivate(*privKey), nil
 }
 
-// Sign returns the signatures for data with the given keyIDs
+// SetPassphrase tells the cryptoservice the passphrase. Use only if the key needs
+// to be decrypted.
+func (ccs *CryptoService) SetPassphrase(passphrase string) {
+	ccs.passphrase = passphrase
+}
+
+// Sign returns the signatures for data with the given root Key ID, falling back
+// if not rootKeyID is found
 func (ccs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signature, error) {
 	// Create hasher and hash data
 	hash := crypto.SHA256
@@ -61,11 +55,27 @@ func (ccs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signatur
 
 	signatures := make([]data.Signature, 0, len(keyIDs))
 	for _, fingerprint := range keyIDs {
-		// Get the PrivateKey filename
-		privKeyFilename := filepath.Join(ccs.gun, fingerprint)
+		// ccs.gun will be empty if this is the root key
+		keyName := filepath.Join(ccs.gun, fingerprint)
+
+		var privKey *data.PrivateKey
+		var err error
+		var method string
+
 		// Read PrivateKey from file
-		privKey, err := ccs.keyStore.GetKey(privKeyFilename)
+		if ccs.passphrase != "" {
+			// This is a root key
+			privKey, err = ccs.keyStore.GetDecryptedKey(keyName, ccs.passphrase)
+			method = "RSASSA-PSS-X509"
+		} else {
+			privKey, err = ccs.keyStore.GetKey(keyName)
+			method = "RSASSA-PSS"
+		}
 		if err != nil {
+			// Note that GetDecryptedKey always fails on InitRepo.
+			// InitRepo gets a signer that doesn't have access to
+			// the root keys. Continuing here is safe because we
+			// end up not returning any signatures.
 			continue
 		}
 
@@ -77,44 +87,7 @@ func (ccs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signatur
 		// Append signatures to result array
 		signatures = append(signatures, data.Signature{
 			KeyID:     fingerprint,
-			Method:    "RSASSA-PSS",
-			Signature: sig[:],
-		})
-	}
-	return signatures, nil
-}
-
-// Create in a root crypto service is not implemented
-func (rcs *RootCryptoService) Create(role string) (*data.PublicKey, error) {
-	return nil, errors.New("create on a root key filestore is not implemented")
-}
-
-// Sign returns the signatures for data with the given root Key ID, falling back
-// if not rootKeyID is found
-// TODO(diogo): This code has 1 line change from the Sign from Crypto service. DRY it up.
-func (rcs *RootCryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signature, error) {
-	// Create hasher and hash data
-	hash := crypto.SHA256
-	hashed := sha256.Sum256(payload)
-
-	signatures := make([]data.Signature, 0, len(keyIDs))
-	for _, fingerprint := range keyIDs {
-		// Read PrivateKey from file
-		privKey, err := rcs.rootKeyStore.GetDecryptedKey(fingerprint, rcs.passphrase)
-		if err != nil {
-			// TODO(diogo): This error should be returned to the user in someway
-			continue
-		}
-
-		sig, err := sign(privKey, hash, hashed[:])
-		if err != nil {
-			return nil, err
-		}
-
-		// Append signatures to result array
-		signatures = append(signatures, data.Signature{
-			KeyID:     fingerprint,
-			Method:    "RSASSA-PSS-X509",
+			Method:    method,
 			Signature: sig[:],
 		})
 	}
