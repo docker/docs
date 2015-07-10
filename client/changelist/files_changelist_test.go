@@ -10,6 +10,8 @@ import (
 
 func TestAdd(t *testing.T) {
 	tmpDir, err := ioutil.TempDir("/tmp", "test")
+	defer os.RemoveAll(tmpDir)
+
 	if err != nil {
 		t.Fatal(err.Error())
 	}
@@ -43,6 +45,8 @@ func TestAdd(t *testing.T) {
 
 func TestListOrder(t *testing.T) {
 	tmpDir, err := ioutil.TempDir("/tmp", "test")
+	defer os.RemoveAll(tmpDir)
+
 	if err != nil {
 		t.Fatal(err.Error())
 	}

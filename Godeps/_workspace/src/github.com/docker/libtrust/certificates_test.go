@@ -76,6 +76,8 @@ func TestLoadCertificates(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+	defer os.RemoveAll(d)
+
 	caFile := path.Join(d, "ca.pem")
 	f, err := os.OpenFile(caFile, os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {

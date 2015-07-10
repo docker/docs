@@ -22,6 +22,7 @@ func TestAddFile(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to create a temporary directory: %v", err)
 	}
+	defer os.RemoveAll(tempBaseDir)
 
 	// Since we're generating this manually we need to add the extension '.'
 	expectedFilePath := filepath.Join(tempBaseDir, testName+"."+testExt)
@@ -60,6 +61,7 @@ func TestRemoveFile(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to create a temporary directory: %v", err)
 	}
+	defer os.RemoveAll(tempBaseDir)
 
 	// Since we're generating this manually we need to add the extension '.'
 	expectedFilePath := filepath.Join(tempBaseDir, testName+"."+testExt)
@@ -99,6 +101,7 @@ func TestRemoveDir(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to create a temporary directory: %v", err)
 	}
+	defer os.RemoveAll(tempBaseDir)
 
 	// Since we're generating this manually we need to add the extension '.'
 	expectedFilePath := filepath.Join(tempBaseDir, testName+"."+testExt)
@@ -139,6 +142,7 @@ func TestListFiles(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to create a temporary directory: %v", err)
 	}
+	defer os.RemoveAll(tempBaseDir)
 
 	var expectedFilePath string
 	// Create 10 randomfiles
@@ -188,6 +192,7 @@ func TestListDir(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to create a temporary directory: %v", err)
 	}
+	defer os.RemoveAll(tempBaseDir)
 
 	var expectedFilePath string
 	// Create 10 randomfiles
@@ -234,6 +239,7 @@ func TestLink(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to create a temporary directory: %v", err)
 	}
+	defer os.RemoveAll(tempBaseDir)
 
 	// Since we're generating this manually we need to add the extension '.'
 	expectedFilePath := filepath.Join(tempBaseDir, testName+"."+testExt)
@@ -298,6 +304,7 @@ func TestGetData(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to create a temporary directory: %v", err)
 	}
+	defer os.RemoveAll(tempBaseDir)
 
 	// Since we're generating this manually we need to add the extension '.'
 	expectedFilePath := filepath.Join(tempBaseDir, testName+"."+testExt)
@@ -331,6 +338,7 @@ func TestCreateDirectory(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to create a temporary directory: %v", err)
 	}
+	defer os.RemoveAll(tempBaseDir)
 
 	dirPath := filepath.Join(tempBaseDir, testDir)
 
@@ -362,6 +370,7 @@ func TestCreatePrivateDirectory(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to create a temporary directory: %v", err)
 	}
+	defer os.RemoveAll(tempBaseDir)
 
 	dirPath := filepath.Join(tempBaseDir, testDir)
 

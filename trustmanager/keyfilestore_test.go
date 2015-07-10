@@ -19,6 +19,7 @@ func TestAddKey(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to create a temporary directory: %v", err)
 	}
+	defer os.RemoveAll(tempBaseDir)
 
 	// Since we're generating this manually we need to add the extension '.'
 	expectedFilePath := filepath.Join(tempBaseDir, testName+"."+testExt)
@@ -89,6 +90,7 @@ EMl3eFOJXjIch/wIesRSN+2dGOsl7neercjMh1i9RvpCwHDx/E0=
 	if err != nil {
 		t.Fatalf("failed to create a temporary directory: %v", err)
 	}
+	defer os.RemoveAll(tempBaseDir)
 
 	// Since we're generating this manually we need to add the extension '.'
 	filePath := filepath.Join(tempBaseDir, testName+"."+testExt)
@@ -128,6 +130,7 @@ func TestAddEncryptedAndGetDecrypted(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to create a temporary directory: %v", err)
 	}
+	defer os.RemoveAll(tempBaseDir)
 
 	// Create our FileStore
 	store, err := NewKeyFileStore(tempBaseDir)
@@ -175,6 +178,7 @@ func TestGetDecryptedWithTamperedCipherText(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to create a temporary directory: %v", err)
 	}
+	defer os.RemoveAll(tempBaseDir)
 
 	// Create our FileStore
 	store, err := NewKeyFileStore(tempBaseDir)
@@ -221,6 +225,7 @@ func TestGetDecryptedWithInvalidPassphrase(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to create a temporary directory: %v", err)
 	}
+	defer os.RemoveAll(tempBaseDir)
 
 	// Create our FileStore
 	store, err := NewKeyFileStore(tempBaseDir)

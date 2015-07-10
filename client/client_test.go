@@ -32,6 +32,8 @@ func TestInitRepo(t *testing.T) {
 	gun := "docker.com/notary"
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	defer os.RemoveAll(tempBaseDir)
+
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	ts := createTestServer(t)
@@ -161,6 +163,8 @@ type tufChange struct {
 func TestAddTarget(t *testing.T) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	defer os.RemoveAll(tempBaseDir)
+
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	gun := "docker.com/notary"
@@ -263,6 +267,8 @@ func TestAddTarget(t *testing.T) {
 func TestValidateRootKey(t *testing.T) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	defer os.RemoveAll(tempBaseDir)
+
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	gun := "docker.com/notary"
