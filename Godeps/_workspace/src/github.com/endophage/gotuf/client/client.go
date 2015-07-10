@@ -57,12 +57,12 @@ func (c *Client) Update() error {
 func (c *Client) update() error {
 	err := c.downloadTimestamp()
 	if err != nil {
-		logrus.Errorf("Client Update (Timestamp): ", err.Error())
+		logrus.Errorf("Client Update (Timestamp): %s", err.Error())
 		return err
 	}
 	err = c.downloadSnapshot()
 	if err != nil {
-		logrus.Errorf("Client Update (Snapshot): ", err.Error())
+		logrus.Errorf("Client Update (Snapshot): %s", err.Error())
 		return err
 	}
 	err = c.checkRoot()
@@ -71,7 +71,7 @@ func (c *Client) update() error {
 	}
 	err = c.downloadTargets("targets")
 	if err != nil {
-		logrus.Errorf("Client Update (Targets): ", err.Error())
+		logrus.Errorf("Client Update (Targets): %s", err.Error())
 		return err
 	}
 	return nil

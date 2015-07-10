@@ -41,7 +41,7 @@ var _ CryptoService = &MockCryptoService{}
 // Test signing and ensure the expected signature is added
 func TestBasicSign(t *testing.T) {
 	testKey, _ := pem.Decode([]byte(testKeyPEM1))
-	k := data.NewPublicKey("rsa", testKey.Bytes)
+	k := data.NewPublicKey("RSA", testKey.Bytes)
 	signer := Signer{&MockCryptoService{
 		testKey: *k,
 	}}
@@ -68,7 +68,7 @@ func TestBasicSign(t *testing.T) {
 // should be cleaning previous signatures by the KeyID when asked to sign again)
 func TestReSign(t *testing.T) {
 	testKey, _ := pem.Decode([]byte(testKeyPEM1))
-	k := data.NewPublicKey("rsa", testKey.Bytes)
+	k := data.NewPublicKey("RSA", testKey.Bytes)
 	signer := Signer{&MockCryptoService{
 		testKey: *k,
 	}}
@@ -92,11 +92,11 @@ func TestMultiSign(t *testing.T) {
 	testData := data.Signed{}
 
 	testKey, _ := pem.Decode([]byte(testKeyPEM1))
-	key := data.NewPublicKey("rsa", testKey.Bytes)
+	key := data.NewPublicKey("RSA", testKey.Bytes)
 	signer.Sign(&testData, key)
 
 	testKey, _ = pem.Decode([]byte(testKeyPEM2))
-	key = data.NewPublicKey("rsa", testKey.Bytes)
+	key = data.NewPublicKey("RSA", testKey.Bytes)
 	signer.Sign(&testData, key)
 
 	if len(testData.Signatures) != 2 {
@@ -114,7 +114,7 @@ func TestMultiSign(t *testing.T) {
 
 func TestCreate(t *testing.T) {
 	testKey, _ := pem.Decode([]byte(testKeyPEM1))
-	k := data.NewPublicKey("rsa", testKey.Bytes)
+	k := data.NewPublicKey("RSA", testKey.Bytes)
 	signer := Signer{&MockCryptoService{
 		testKey: *k,
 	}}

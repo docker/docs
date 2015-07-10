@@ -37,7 +37,7 @@ func (trust *Ed25519) Sign(keyIDs []string, toSign []byte) ([]data.Signature, er
 		sig := ed25519.Sign(&priv, toSign)
 		signatures = append(signatures, data.Signature{
 			KeyID:     kID,
-			Method:    "ed25519",
+			Method:    "ED25519",
 			Signature: sig[:],
 		})
 	}
@@ -50,8 +50,8 @@ func (trust *Ed25519) Create(role string) (*data.PublicKey, error) {
 	if err != nil {
 		return nil, err
 	}
-	public := data.NewPublicKey("ed25519", pub[:])
-	private := data.NewPrivateKey("ed25519", pub[:], priv[:])
+	public := data.NewPublicKey("ED25519", pub[:])
+	private := data.NewPrivateKey("ED25519", pub[:], priv[:])
 	trust.addKey(private)
 	return public, nil
 }

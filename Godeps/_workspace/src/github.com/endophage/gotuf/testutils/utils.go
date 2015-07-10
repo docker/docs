@@ -23,12 +23,16 @@ func SampleMeta() data.FileMeta {
 }
 
 func GetSqliteDB() *sql.DB {
+	os.Mkdir("/tmp/sqlite", 0755)
 	conn, err := sql.Open("sqlite3", fmt.Sprintf("/tmp/sqlite/file%d.db", counter))
 	if err != nil {
 		panic("can't connect to db")
 	}
 	counter++
-	tx, _ := conn.Begin()
+	tx, err := conn.Begin()
+	if err != nil {
+		panic("can't begin db transaction")
+	}
 	tx.Exec("CREATE TABLE keys (id int auto_increment, namespace varchar(255) not null, role varchar(255) not null, key text not null, primary key (id));")
 	tx.Exec("CREATE TABLE filehashes(namespace varchar(255) not null, path varchar(255) not null, alg varchar(10) not null, hash varchar(128) not null, primary key (namespace, path, alg));")
 	tx.Exec("CREATE TABLE filemeta(namespace varchar(255) not null, path varchar(255) not null, size int not null, custom text default null, primary key (namespace, path));")
