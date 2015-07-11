@@ -24,7 +24,7 @@
     <choice id="choiceDockerComposeCLI" title="choiceDockerComposeCLI_title" description="choiceDockerComposeCLI_msg" start_selected="true" start_enabled="true" start_visible="true">
         <pkg-ref id="io.docker.pkg.dockercompose"/>
     </choice>
-    <choice id="choiceBoot2DockerISO" title="choiceBoot2DockerISO_title" description="choiceBoot2DockerISO_msg" start_selected="true" start_enabled="true" start_visible="true">
+    <choice id="choiceBoot2DockerISO" title="choiceBoot2DockerISO_title" description="choiceBoot2DockerISO_msg" start_selected="true" start_enabled="true" start_visible="false">
         <pkg-ref id="io.boot2dockeriso.pkg.boot2dockeriso"/>
     </choice>
     <choice id="choiceDockerCLIAPP" title="choiceDockerCLIAPP_title" description="choiceDockerCLIAPP_msg" start_selected="true" start_enabled="true" start_visible="true">

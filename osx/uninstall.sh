@@ -8,7 +8,7 @@ if [ "${USER}" != "root" ]; then
 fi
 
 echo "Removing dev VirtualBox VM..."
-docker-machine rm -f dev
+docker-machine rm -f $(docker-machine ls -q)
 
 echo "Removing docker binaries..."
 rm -f /usr/local/bin/docker
