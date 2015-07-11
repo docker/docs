@@ -111,7 +111,7 @@ func NewNotaryRepository(baseDir, gun, baseURL string, rt http.RoundTripper) (*N
 		return nil, err
 	}
 
-	fmt.Println("creating non-root cryptoservice")
+	logrus.Debugf("creating non-root cryptoservice")
 	signer := signed.NewSigner(NewCryptoService(gun, privKeyStore))
 
 	nRepo := &NotaryRepository{
@@ -430,7 +430,7 @@ func (r *NotaryRepository) bootstrapRepo() error {
 	kdb := keys.NewDB()
 	tufRepo := tuf.NewTufRepo(kdb, r.signer)
 
-	fmt.Println("Loading trusted collection.")
+	logrus.Debugf("Loading trusted collection.")
 	rootJSON, err := fileStore.GetMeta("root", 0)
 	if err != nil {
 		return err
@@ -479,7 +479,7 @@ func (r *NotaryRepository) saveMetadata(rootSigner *signed.Signer) error {
 }
 
 func (r *NotaryRepository) snapshot() error {
-	fmt.Println("Saving changes to Trusted Collection.")
+	logrus.Debugf("Saving changes to Trusted Collection.")
 
 	for t := range r.tufRepo.Targets {
 		signedTargets, err := r.tufRepo.SignTargets(t, data.DefaultExpires("targets"), nil)
@@ -641,7 +641,6 @@ func (r *NotaryRepository) GetRootSigner(rootKeyID, passphrase string) (*Unlocke
 	// when a root key is needed.
 
 	// Passing an empty GUN because root keys aren't associated with a GUN.
-	fmt.Println("creating root cryptoservice with passphrase", passphrase)
 	ccs := NewCryptoService("", r.rootKeyStore)
 	ccs.SetPassphrase(passphrase)
 	signer := signed.NewSigner(ccs)
