@@ -42,7 +42,7 @@ DefaultGroupName=Docker Inc
 ;InfoBeforeFile=.\LICENSE
 ;DisableFinishedPage
 ;InfoAfterFile=
-OutputBaseFilename=docker-toolbox
+OutputBaseFilename=DockerToolbox
 Compression=lzma
 SolidCompression=yes
 WizardImageFile=windows-installer-side.bmp
