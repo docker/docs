@@ -1,4 +1,5 @@
 # Install go if needed
+cd site
 export TOOLS_ROOT_DIR=$HOME/site/deployments/tools
 export HUGOROOT=$TOOLS_ROOT_DIR/hugo
 export PATH=$PATH:$HUGOROOT
@@ -13,9 +14,9 @@ if [ ! -e "$HUGOROOT" ]; then
 fi
 
 export BASE_URL="https://$WEBSITE_HOSTNAME"
-if [ "$WEBSITE_HOSTNAME" == "docker-toolbox.azurewebsites.net" ]; then
-  export BASE_URL="https://toolbox.docker.com"
-fi
+#if [ "$WEBSITE_HOSTNAME" == "docker-toolbox.azurewebsites.net" ]; then
+#  export BASE_URL="https://toolbox.docker.com"
+#fi
 
 # Create and store unique artifact name
 hugo_0.14_windows_amd64.exe --baseUrl=$BASE_URL -d $DEPLOYMENT_TARGET
