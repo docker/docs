@@ -79,7 +79,7 @@ func GetOrCreateTimestamp(gun string, store storage.MetaStore, cryptoService sig
 		logrus.Error("Failed to marshal new timestamp")
 		return nil, err
 	}
-	err = store.UpdateCurrent(gun, "timestamp", version, out)
+	err = store.UpdateCurrent(gun, storage.MetaUpdate{"timestamp", version, out})
 	if err != nil {
 		return nil, err
 	}

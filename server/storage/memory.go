@@ -35,18 +35,25 @@ func NewMemStorage() *MemStorage {
 }
 
 // UpdateCurrent updates the meta data for a specific role
-func (st *MemStorage) UpdateCurrent(gun, role string, version int, data []byte) error {
-	id := entryKey(gun, role)
+func (st *MemStorage) UpdateCurrent(gun string, update MetaUpdate) error {
+	id := entryKey(gun, update.Role)
 	st.lock.Lock()
 	defer st.lock.Unlock()
 	if space, ok := st.tufMeta[id]; ok {
 		for _, v := range space {
-			if v.version >= version {
+			if v.version >= update.Version {
 				return &ErrOldVersion{}
 			}
 		}
 	}
-	st.tufMeta[id] = append(st.tufMeta[id], &ver{version: version, data: data})
+	st.tufMeta[id] = append(st.tufMeta[id], &ver{version: update.Version, data: update.Data})
+	return nil
+}
+
+func (st *MemStorage) UpdateMany(gun string, updates []MetaUpdate) error {
+	for _, u := range updates {
+		st.UpdateCurrent(gun, u)
+	}
 	return nil
 }
 

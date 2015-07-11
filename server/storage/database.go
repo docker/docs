@@ -3,6 +3,7 @@ package storage
 import (
 	"database/sql"
 
+	"github.com/Sirupsen/logrus"
 	"github.com/endophage/gotuf/data"
 	"github.com/go-sql-driver/mysql"
 )
@@ -37,31 +38,49 @@ func NewMySQLStorage(db *sql.DB) *MySQLStorage {
 
 // UpdateCurrent updates multiple TUF records in a single transaction.
 // Always insert a new row. The unique constraint will ensure there is only ever
-func (db *MySQLStorage) UpdateCurrent(gun, role string, version int, data []byte) error {
-	checkStmt := "SELECT count(*) FROM `tuf_files` WHERE `gun`=? AND `role`=? AND `version`>=?;"
+func (db *MySQLStorage) UpdateCurrent(gun, update MetaUpdate) error {
 	insertStmt := "INSERT INTO `tuf_files` (`gun`, `role`, `version`, `data`) VALUES (?,?,?,?) ;"
-
-	// ensure immediately previous version exists
-	row := db.QueryRow(checkStmt, gun, role, version)
-	var exists int
-	err := row.Scan(&exists)
-	if err != nil {
-		return err
-	}
-	if exists != 0 {
-		return &ErrOldVersion{}
-	}
 
 	// attempt to insert. Due to race conditions with the check this could fail.
 	// That's OK, we're doing first write wins. The client will be messaged it
 	// needs to rebase.
-	_, err = db.Exec(insertStmt, gun, role, version, data)
+	_, err := db.Exec(insertStmt, gun, update.Role, update.Version, update.Data)
 	if err != nil {
+		if err, ok := err.(*mysql.MySQLError); ok {
+			if err.Number == 1022 { // duplicate key error
+				return &ErrOldVersion{}
+			}
+		}
 		// need to check error type for duplicate key exception
 		// and return ErrOldVersion if duplicate
 		return err
 	}
 	return nil
+}
+
+func (db *MySQLStorage) UpdateMany(gun string, updates []MetaUpdate) error {
+	insertStmt := "INSERT INTO `tuf_files` (`gun`, `role`, `version`, `data`) VALUES (?,?,?,?) ;"
+
+	tx, err := db.Begin()
+	for _, u := range updates {
+		// attempt to insert. Due to race conditions with the check this could fail.
+		// That's OK, we're doing first write wins. The client will be messaged it
+		// needs to rebase.
+		_, err = tx.Exec(insertStmt, gun, u.Role, u.Version, u.Data)
+		if err != nil {
+			// need to check error type for duplicate key exception
+			// and return ErrOldVersion if duplicate
+			rbErr := tx.Rollback()
+			if rbErr != nil {
+				logrus.Panic("Failed on Tx rollback with error: ", err.Error())
+			}
+			if err, ok := err.(*mysql.MySQLError); ok && err.Number == 1022 { // duplicate key error
+				return &ErrOldVersion{}
+			}
+			return err
+		}
+	}
+	return tx.Commit()
 }
 
 // GetCurrent gets a specific TUF record
