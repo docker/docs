@@ -45,17 +45,19 @@ DefaultGroupName=Docker Inc
 OutputBaseFilename=docker-toolbox
 Compression=lzma
 SolidCompression=yes
-WizardImageFile=logo-docker-side.bmp
-WizardSmallImageFile=logo-docker-small.bmp
+WizardImageFile=windows-installer-side.bmp
+WizardSmallImageFile=windows-installer-logo.bmp
 WizardImageStretch=no
 WizardImageBackColor=$325461
 
 ; in the installer itself:
-SetupIconFile=toolbox.ico
+
 ; in the "Add/Remove" list:
 UninstallDisplayIcon={app}\toolbox.ico
 
 SignTool=ksign /d $q{#MyAppName}$q /du $q{#MyAppURL}$q $f
+
+SetupIconFile=toolbox.ico
 
 ; for modpath.iss
 ChangesEnvironment=true
@@ -75,8 +77,8 @@ Name: rebootwindows; Description: "&Reboot Windows at the end of installation"; 
 
 [Components]
 Name: "Docker"; Description: "Docker Client for Windows" ; Types: full upgrade
+Name: "DockerMachine"; Description: "Docker Machine for Windows" ; Types: full upgrade
 Name: "Kitematic"; Description: "Kitematic for Windows" ; Types: full upgrade
-Name: "Boot2Docker"; Description: "Boot2Docker ISO" ; Types: full upgrade
 Name: "VirtualBox"; Description: "VirtualBox"; Types: full
 Name: "MSYS"; Description: "MSYS-git UNIX tools"; Types: full
 
@@ -85,15 +87,17 @@ Source: ".\toolbox.ico"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Docker
 Source: "{#dockerCli}"; DestDir: "{app}"; Flags: ignoreversion; Components: "Docker"
-Source: "{#dockerMachineCli}"; DestDir: "{app}"; Flags: ignoreversion; Components: "Docker"
 Source: ".\start.sh"; DestDir: "{app}"; Flags: ignoreversion; Components: "Docker"
 Source: ".\delete.sh"; DestDir: "{app}"; Flags: ignoreversion; Components: "Docker"
+
+; DockerMachine
+Source: "{#dockerMachineCli}"; DestDir: "{app}"; Flags: ignoreversion; Components: "DockerMachine"
 
 ; Kitematic
 Source: "{#kitematicSetup}"; DestDir: "{app}\installers\kitematic"; Flags: ignoreversion; AfterInstall: RunInstallKitematic(); Components: "Kitematic"
 
 ; Boot2Docker
-Source: "{#b2dIso}"; DestDir: "{app}"; Flags: ignoreversion; Components: "Boot2Docker"
+Source: "{#b2dIso}"; DestDir: "{app}"; Flags: ignoreversion; Components: "DockerMachine"
 
 ; msys-Git
 Source: "{#msysGit}"; DestDir: "{app}\installers\msys-git"; DestName: "msys-git.exe"; AfterInstall: RunInstallMSYS();  Components: "MSYS"
@@ -106,10 +110,10 @@ Source: "{#virtualBoxMsi}"; DestDir: "{app}\installers\virtualbox"; DestName: "v
 
 [Icons]
 Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
-Name: "{group}\Docker CLI"; WorkingDir: "{app}"; Filename: "{app}\start.sh"; IconFilename: "{app}/toolbox.ico"
-Name: "{commondesktop}\Docker CLI"; WorkingDir: "{app}"; Filename: "{app}\start.sh"; IconFilename: "{app}/toolbox.ico"; Tasks: desktopicon
-Name: "{commonprograms}\Docker CLI"; WorkingDir: "{app}"; Filename: "{app}\start.sh"; IconFilename: "{app}/toolbox.ico"
-Name: "{group}\Delete VirtualBox Dev VM"; WorkingDir: "{app}"; Filename: "{app}\delete.sh"
+Name: "{group}\Docker CLI"; WorkingDir: "{app}"; Filename: "{app}\start.sh"; IconFilename: "{app}/toolbox.ico"; Components: "Docker"
+Name: "{commondesktop}\Docker CLI"; WorkingDir: "{app}"; Filename: "{app}\start.sh"; IconFilename: "{app}/toolbox.ico"; Tasks: desktopicon; Components: "Docker"
+Name: "{commonprograms}\Docker CLI"; WorkingDir: "{app}"; Filename: "{app}\start.sh"; IconFilename: "{app}/toolbox.ico"; Components: "Docker"
+Name: "{group}\Delete VirtualBox Dev VM"; WorkingDir: "{app}"; Filename: "{app}\delete.sh"; Components: "DockerMachine"
 
 [UninstallRun]
 Filename: "{app}\delete.sh"
