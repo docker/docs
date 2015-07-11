@@ -83,7 +83,7 @@ Name: "VirtualBox"; Description: "VirtualBox"; Types: full
 Name: "MSYS"; Description: "MSYS-git UNIX tools"; Types: full
 
 [Files]
-Source: ".\toolbox.ico"; DestDir: "{app}"; Flags: ignoreversion
+Source: ".\docker-cli.ico"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Docker
 Source: "{#dockerCli}"; DestDir: "{app}"; Flags: ignoreversion; Components: "Docker"
@@ -110,9 +110,9 @@ Source: "{#virtualBoxMsi}"; DestDir: "{app}\installers\virtualbox"; DestName: "v
 
 [Icons]
 Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
-Name: "{group}\Docker CLI"; WorkingDir: "{app}"; Filename: "{app}\start.sh"; IconFilename: "{app}/toolbox.ico"; Components: "Docker"
-Name: "{commondesktop}\Docker CLI"; WorkingDir: "{app}"; Filename: "{app}\start.sh"; IconFilename: "{app}/toolbox.ico"; Tasks: desktopicon; Components: "Docker"
-Name: "{commonprograms}\Docker CLI"; WorkingDir: "{app}"; Filename: "{app}\start.sh"; IconFilename: "{app}/toolbox.ico"; Components: "Docker"
+Name: "{group}\Docker CLI"; WorkingDir: "{app}"; Filename: "{app}\start.sh"; IconFilename: "{app}/docker-cli.ico"; Components: "Docker"
+Name: "{commondesktop}\Docker CLI"; WorkingDir: "{app}"; Filename: "{app}\start.sh"; IconFilename: "{app}/docker-cli.ico"; Tasks: desktopicon; Components: "Docker"
+Name: "{commonprograms}\Docker CLI"; WorkingDir: "{app}"; Filename: "{app}\start.sh"; IconFilename: "{app}/docker-cli.ico"; Components: "Docker"
 Name: "{group}\Delete VirtualBox Dev VM"; WorkingDir: "{app}"; Filename: "{app}\delete.sh"; Components: "DockerMachine"
 
 [UninstallRun]
@@ -213,15 +213,15 @@ begin
 		//WizardForm.NextButton.Caption := SetupMessage(msgButtonNext);
 	//if CurPageID = wpFinished then
 		//WizardForm.NextButton.Caption := SetupMessage(msgButtonFinish)
-		if CurPageID = wpSelectComponents then
-		begin
-			if IsUpgrade() then
-			begin
-				Wizardform.TypesCombo.ItemIndex := 2
-			end;
-			Wizardform.ComponentsList.Checked[2] := NeedToInstallVirtualBox();
-			Wizardform.ComponentsList.Checked[3] := NeedToInstallMSYS();
-		end;
+		// if CurPageID = wpSelectComponents then
+		// begin
+		//	if IsUpgrade() then
+		//	begin
+		//		Wizardform.TypesCombo.ItemIndex := 2
+		//	end;
+		//	Wizardform.ComponentsList.Checked[3] := NeedToInstallVirtualBox();
+		//	Wizardform.ComponentsList.Checked[4] := NeedToInstallMSYS();
+		// end;
 end;
 
 procedure RunInstallVirtualBox();

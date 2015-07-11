@@ -24,6 +24,8 @@ echo "Setting environment variables for machine $VM..."
 ./docker-machine.exe env $VM | sed  's,\\,\\\\,g' # eval swallows single backslashes in windows style path
 
 eval "$(./docker-machine.exe env $VM 2>/dev/null | sed  's,\\,\\\\,g')"
+
+cd
 clear
 
 cat << EOF
