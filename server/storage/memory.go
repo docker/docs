@@ -50,6 +50,7 @@ func (st *MemStorage) UpdateCurrent(gun string, update MetaUpdate) error {
 	return nil
 }
 
+// UpdateMany updates multiple TUF records
 func (st *MemStorage) UpdateMany(gun string, updates []MetaUpdate) error {
 	for _, u := range updates {
 		st.UpdateCurrent(gun, u)

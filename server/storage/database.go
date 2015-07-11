@@ -58,6 +58,7 @@ func (db *MySQLStorage) UpdateCurrent(gun, update MetaUpdate) error {
 	return nil
 }
 
+// UpdateMany atomically updates many TUF records in a single transaction
 func (db *MySQLStorage) UpdateMany(gun string, updates []MetaUpdate) error {
 	insertStmt := "INSERT INTO `tuf_files` (`gun`, `role`, `version`, `data`) VALUES (?,?,?,?) ;"
 

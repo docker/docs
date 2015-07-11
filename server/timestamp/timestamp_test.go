@@ -52,7 +52,7 @@ func TestGetTimestamp(t *testing.T) {
 	snapshot := &data.SignedSnapshot{}
 	snapJSON, _ := json.Marshal(snapshot)
 
-	store.UpdateCurrent("gun", storage.MetaUpdate{"snapshot", 0, snapJSON})
+	store.UpdateCurrent("gun", storage.MetaUpdate{Role: "snapshot", Version: 0, Data: snapJSON})
 	// create a key to be used by GetTimestamp
 	_, err := GetOrCreateTimestampKey("gun", store, crypto, data.ED25519Key)
 	assert.Nil(t, err, "GetTimestampKey errored")
