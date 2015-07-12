@@ -2,7 +2,10 @@ package client
 
 import (
 	"bytes"
+	"crypto"
+	"crypto/ecdsa"
 	"crypto/rand"
+	"crypto/rsa"
 	"crypto/x509"
 	"encoding/json"
 	"encoding/pem"
@@ -111,8 +114,8 @@ func NewNotaryRepository(baseDir, gun, baseURL string, rt http.RoundTripper) (*N
 		return nil, err
 	}
 
-	fmt.Println("creating non-root cryptoservice")
-	signer := signed.NewSigner(NewRSACryptoService(gun, privKeyStore, ""))
+	// TODO(diogo): This hardcodes snapshots and targets to using EC. Change it.
+	signer := signed.NewSigner(NewECDSACryptoService(gun, privKeyStore, ""))
 
 	nRepo := &NotaryRepository{
 		gun:          gun,
@@ -139,7 +142,9 @@ func (r *NotaryRepository) Initialize(uSigner *UnlockedSigner) error {
 		return err
 	}
 	r.certificateStore.AddCert(rootCert)
-	rootKey := data.NewPublicKey("RSA", trustmanager.CertToPEM(rootCert))
+	logrus.Debugf("Adding certificate with fingerprint: %s to the certificate store.", trustmanager.FingerprintCert(rootCert))
+	rootKey := data.NewPublicKey(uSigner.privKey.Cipher(), trustmanager.CertToPEM(rootCert))
+	logrus.Debugf("Linking %s to %s.", rootKey.ID(), uSigner.ID())
 	err = r.rootKeyStore.Link(uSigner.ID(), rootKey.ID())
 	if err != nil {
 		return err
@@ -538,8 +543,6 @@ func (r *NotaryRepository) validateRoot(root *data.Signed) error {
 		// TODO(dlaw): currently assuming only one cert contained in
 		// public key entry. Need to fix when we want to pass in chains.
 		k, _ := pem.Decode([]byte(rootSigned.Keys[fingerprint].Public()))
-		logrus.Debug("Root PEM: ", k)
-		logrus.Debug("Root ID: ", fingerprint)
 		decodedCerts, err := x509.ParseCertificates(k.Bytes)
 		if err != nil {
 			continue
@@ -619,10 +622,21 @@ func (r *NotaryRepository) ListRootKeys() []string {
 }
 
 // GenRootKey generates a new root key protected by a given passphrase
-func (r *NotaryRepository) GenRootKey(passphrase string) (string, error) {
-	privKey, err := trustmanager.GenerateRSAKey(rand.Reader, rsaRootKeySize)
+func (r *NotaryRepository) GenRootKey(algorithm, passphrase string) (string, error) {
+	var err error
+	var privKey *data.PrivateKey
+
+	switch algorithm {
+	case "RSA":
+		privKey, err = trustmanager.GenerateRSAKey(rand.Reader, rsaRootKeySize)
+	case "ECDSA":
+		privKey, err = trustmanager.GenerateECDSAKey(rand.Reader)
+	default:
+		return "", fmt.Errorf("only RSA or ECDSA keys are currently supported. Found: %s", algorithm)
+
+	}
 	if err != nil {
-		return "", fmt.Errorf("failed to convert private key: %v", err)
+		return "", fmt.Errorf("failed to generate private key: %v", err)
 	}
 
 	r.rootKeyStore.AddEncryptedKey(privKey.ID(), privKey, passphrase)
@@ -634,16 +648,20 @@ func (r *NotaryRepository) GenRootKey(passphrase string) (string, error) {
 func (r *NotaryRepository) GetRootSigner(rootKeyID, passphrase string) (*UnlockedSigner, error) {
 	privKey, err := r.rootKeyStore.GetDecryptedKey(rootKeyID, passphrase)
 	if err != nil {
-		return nil, fmt.Errorf("could not get decrypted root key: %v", err)
+		return nil, fmt.Errorf("could not get decrypted root key with keyID: %s, %v", rootKeyID, err)
 	}
 
-	// This signer will be used for all of the normal TUF operations, except for
-	// when a root key is needed.
-
+	var signer *signed.Signer
+	cipher := privKey.Cipher()
 	// Passing an empty GUN because root keys aren't associated with a GUN.
-	fmt.Println("creating root cryptoservice with passphrase", passphrase)
-	ccs := NewRSACryptoService("", r.rootKeyStore, passphrase)
-	signer := signed.NewSigner(ccs)
+	switch cipher {
+	case "RSA":
+		signer = signed.NewSigner(NewRSACryptoService("", r.rootKeyStore, passphrase))
+	case "ECDSA":
+		signer = signed.NewSigner(NewECDSACryptoService("", r.rootKeyStore, passphrase))
+	default:
+		return nil, fmt.Errorf("only RSA or ECDSA keys are currently supported. Found: %s", cipher)
+	}
 
 	return &UnlockedSigner{
 		privKey: privKey,
@@ -700,9 +718,26 @@ func (uk *UnlockedSigner) PublicKey() *data.PublicKey {
 
 // GenerateCertificate generates an X509 Certificate from a template, given a GUN
 func (uk *UnlockedSigner) GenerateCertificate(gun string) (*x509.Certificate, error) {
-	privKey, err := x509.ParsePKCS1PrivateKey(uk.privKey.Private())
+	cipher := uk.privKey.Cipher()
+	var publicKey crypto.PublicKey
+	var privateKey crypto.PrivateKey
+	var err error
+	switch cipher {
+	case "RSA":
+		var rsaPrivateKey *rsa.PrivateKey
+		rsaPrivateKey, err = x509.ParsePKCS1PrivateKey(uk.privKey.Private())
+		privateKey = rsaPrivateKey
+		publicKey = rsaPrivateKey.Public()
+	case "ECDSA":
+		var ecdsaPrivateKey *ecdsa.PrivateKey
+		ecdsaPrivateKey, err = x509.ParseECPrivateKey(uk.privKey.Private())
+		privateKey = ecdsaPrivateKey
+		publicKey = ecdsaPrivateKey.Public()
+	default:
+		return nil, fmt.Errorf("only RSA or ECDSA keys are currently supported. Found: %s", cipher)
+	}
 	if err != nil {
-		return nil, fmt.Errorf("failed to parse root key: %v (%s)", gun, err.Error())
+		return nil, fmt.Errorf("failed to parse root key: %s (%v)", gun, err)
 	}
 
 	template, err := trustmanager.NewCertificate(gun)
@@ -710,7 +745,7 @@ func (uk *UnlockedSigner) GenerateCertificate(gun string) (*x509.Certificate, er
 		return nil, fmt.Errorf("failed to create the certificate template for: %s (%v)", gun, err)
 	}
 
-	derBytes, err := x509.CreateCertificate(rand.Reader, template, template, privKey.Public(), privKey)
+	derBytes, err := x509.CreateCertificate(rand.Reader, template, template, publicKey, privateKey)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create the certificate for: %s (%v)", gun, err)
 	}

@@ -17,6 +17,7 @@ import (
 	"net/url"
 	"time"
 
+	"github.com/Sirupsen/logrus"
 	"github.com/endophage/gotuf/data"
 )
 
@@ -61,39 +62,6 @@ func CertToPEM(cert *x509.Certificate) []byte {
 	return pemCert
 }
 
-// KeyToPEM returns a PEM encoded key from a Private Key
-func KeyToPEM(privKey *data.PrivateKey) ([]byte, error) {
-	if privKey.Cipher() != "RSA" {
-		return nil, errors.New("only RSA keys are currently supported")
-	}
-
-	return pem.EncodeToMemory(&pem.Block{Type: "RSA PRIVATE KEY", Bytes: privKey.Private()}), nil
-}
-
-// EncryptPrivateKey returns an encrypted PEM key given a Privatekey
-// and a passphrase
-func EncryptPrivateKey(key *data.PrivateKey, passphrase string) ([]byte, error) {
-	// TODO(diogo): Currently only supports RSA Private keys
-	if key.Cipher() != "RSA" {
-		return nil, errors.New("only RSA keys are currently supported")
-	}
-
-	password := []byte(passphrase)
-	cipherType := x509.PEMCipherAES256
-	blockType := "RSA PRIVATE KEY"
-
-	encryptedPEMBlock, err := x509.EncryptPEMBlock(rand.Reader,
-		blockType,
-		key.Private(),
-		password,
-		cipherType)
-	if err != nil {
-		return nil, err
-	}
-
-	return pem.EncodeToMemory(encryptedPEMBlock), nil
-}
-
 // LoadCertFromPEM returns the first certificate found in a bunch of bytes or error
 // if nothing is found. Taken from https://golang.org/src/crypto/x509/cert_pool.go#L85.
 func LoadCertFromPEM(pemBytes []byte) (*x509.Certificate, error) {
@@ -127,8 +95,19 @@ func fingerprintCert(cert *x509.Certificate) CertID {
 	block := pem.Block{Type: "CERTIFICATE", Bytes: cert.Raw}
 	pemdata := pem.EncodeToMemory(&block)
 
+	keyType := ""
+	switch cert.PublicKeyAlgorithm {
+	case x509.RSA:
+		keyType = "RSA"
+	case x509.ECDSA:
+		keyType = "ECDSA"
+	default:
+		logrus.Debug("error while fingerprinting certificate. Got Unknown key type.")
+	}
+
+	logrus.Debugf("certificate fingerprint of key type: %s", keyType)
 	// Create new TUF Key so we can compute the TUF-compliant CertID
-	tufKey := data.NewTUFKey("RSA", pemdata, nil)
+	tufKey := data.NewTUFKey(keyType, pemdata, nil)
 
 	return CertID(tufKey.ID())
 }
@@ -195,6 +174,31 @@ func ParsePEMPrivateKey(pemBytes []byte, passphrase string) (*data.PrivateKey, e
 		}
 
 		return tufRSAPrivateKey, nil
+	case "EC PRIVATE KEY":
+		var privKeyBytes []byte
+		var err error
+
+		if x509.IsEncryptedPEMBlock(block) {
+			privKeyBytes, err = x509.DecryptPEMBlock(block, []byte(passphrase))
+			if err != nil {
+				return nil, errors.New("could not decrypt private key")
+			}
+		} else {
+			privKeyBytes = block.Bytes
+		}
+
+		rsaPrivKey, err := x509.ParseECPrivateKey(privKeyBytes)
+		if err != nil {
+			return nil, fmt.Errorf("could not parse DER encoded private key: %v", err)
+		}
+
+		tufRSAPrivateKey, err := ECDSAToPrivateKey(rsaPrivKey)
+		if err != nil {
+			return nil, fmt.Errorf("could not convert ecdsa.PrivateKey to data.PrivateKey: %v", err)
+		}
+
+		return tufRSAPrivateKey, nil
+
 	default:
 		return nil, fmt.Errorf("unsupported key type %q", block.Type)
 	}
@@ -251,6 +255,53 @@ func ECDSAToPrivateKey(ecdsaPrivKey *ecdsa.PrivateKey) (*data.PrivateKey, error)
 	}
 
 	return data.NewPrivateKey("ECDSA", ecdsaPubBytes, ecdsaPrivKeyBytes), nil
+}
+
+// KeyToPEM returns a PEM encoded key from a Private Key
+func KeyToPEM(privKey *data.PrivateKey) ([]byte, error) {
+	var pemType string
+	cipher := privKey.Cipher()
+
+	switch cipher {
+	case "RSA":
+		pemType = "RSA PRIVATE KEY"
+	case "ECDSA":
+		pemType = "EC PRIVATE KEY"
+	default:
+		return nil, fmt.Errorf("only RSA or ECDSA keys are currently supported. Found: %s", cipher)
+	}
+
+	return pem.EncodeToMemory(&pem.Block{Type: pemType, Bytes: privKey.Private()}), nil
+}
+
+// EncryptPrivateKey returns an encrypted PEM key given a Privatekey
+// and a passphrase
+func EncryptPrivateKey(key *data.PrivateKey, passphrase string) ([]byte, error) {
+	var blockType string
+	cipher := key.Cipher()
+
+	switch cipher {
+	case "RSA":
+		blockType = "RSA PRIVATE KEY"
+	case "ECDSA":
+		blockType = "EC PRIVATE KEY"
+	default:
+		return nil, fmt.Errorf("only RSA or ECDSA keys are currently supported. Found: %s", cipher)
+	}
+
+	password := []byte(passphrase)
+	cipherType := x509.PEMCipherAES256
+
+	encryptedPEMBlock, err := x509.EncryptPEMBlock(rand.Reader,
+		blockType,
+		key.Private(),
+		password,
+		cipherType)
+	if err != nil {
+		return nil, err
+	}
+
+	return pem.EncodeToMemory(encryptedPEMBlock), nil
 }
 
 // NewCertificate returns an X509 Certificate following a template, given a GUN.
