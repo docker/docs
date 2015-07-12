@@ -3,8 +3,9 @@ package changelist
 import (
 	"bufio"
 	"encoding/json"
-	"fmt"
 	"os"
+
+	"github.com/Sirupsen/logrus"
 )
 
 // AppendChangelist represents a list of TUF changes
@@ -38,7 +39,7 @@ func (cl *AppendChangelist) List() []Change {
 		err := json.Unmarshal(line, c)
 		if err != nil {
 			// TODO(david): How should we handle this?
-			fmt.Println(err.Error())
+			logrus.Warn(err.Error())
 			continue
 		}
 		changes = append(changes, c)
