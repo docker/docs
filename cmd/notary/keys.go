@@ -64,7 +64,7 @@ func keysRemove(cmd *cobra.Command, args []string) {
 	gunOrID := args[0]
 
 	// Try to retrieve the ID from the CA store.
-	cert, err := caStore.GetCertificateByFingerprint(gunOrID)
+	cert, err := caStore.GetCertificateByKeyID(gunOrID)
 	if err == nil {
 		fmt.Printf("Removing: ")
 		printCert(cert)
@@ -78,7 +78,7 @@ func keysRemove(cmd *cobra.Command, args []string) {
 	}
 
 	// Try to retrieve the ID from the Certificate store.
-	cert, err = certificateStore.GetCertificateByFingerprint(gunOrID)
+	cert, err = certificateStore.GetCertificateByKeyID(gunOrID)
 	if err == nil {
 		fmt.Printf("Removing: ")
 		printCert(cert)
@@ -216,17 +216,21 @@ func keysGenerate(cmd *cobra.Command, args []string) {
 
 func printCert(cert *x509.Certificate) {
 	timeDifference := cert.NotAfter.Sub(time.Now())
-	fingerprint := trustmanager.FingerprintCert(cert)
-	fmt.Printf("%s %s (expires in: %v days)\n", cert.Subject.CommonName, fingerprint, math.Floor(timeDifference.Hours()/24))
+	keyID, err := trustmanager.FingerprintCert(cert)
+	if err != nil {
+		fatalf("could not fingerprint certificate: %v", err)
+	}
+
+	fmt.Printf("%s %s (expires in: %v days)\n", cert.Subject.CommonName, keyID, math.Floor(timeDifference.Hours()/24))
 }
 
 func printKey(keyPath string) {
 	keyPath = strings.TrimSuffix(keyPath, filepath.Ext(keyPath))
 	keyPath = strings.TrimPrefix(keyPath, viper.GetString("privDir"))
 
-	fingerprint := filepath.Base(keyPath)
+	keyID := filepath.Base(keyPath)
 	gun := filepath.Dir(keyPath)[1:]
-	fmt.Printf("%s %s\n", gun, fingerprint)
+	fmt.Printf("%s %s\n", gun, keyID)
 }
 
 func askConfirm() bool {

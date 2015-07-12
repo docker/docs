@@ -142,9 +142,10 @@ func (r *NotaryRepository) Initialize(uSigner *UnlockedSigner) error {
 		return err
 	}
 	r.certificateStore.AddCert(rootCert)
-	logrus.Debugf("Adding certificate with fingerprint: %s to the certificate store.", trustmanager.FingerprintCert(rootCert))
+
 	rootKey := data.NewPublicKey(uSigner.privKey.Cipher(), trustmanager.CertToPEM(rootCert))
 	logrus.Debugf("Linking %s to %s.", rootKey.ID(), uSigner.ID())
+
 	err = r.rootKeyStore.Link(uSigner.ID(), rootKey.ID())
 	if err != nil {
 		return err
@@ -163,6 +164,8 @@ func (r *NotaryRepository) Initialize(uSigner *UnlockedSigner) error {
 	}
 
 	timestampKey := data.NewPublicKey(parsedKey.Cipher(), parsedKey.Public())
+	logrus.Debugf("got remote %s timestamp key with keyID: %s", parsedKey.Cipher(), timestampKey.ID())
+	logrus.Debugf("timestamp key: %s", rawTSKey)
 
 	targetsKey, err := r.signer.Create("targets")
 	if err != nil {
@@ -539,27 +542,32 @@ func (r *NotaryRepository) validateRoot(root *data.Signed) error {
 	}
 
 	certs := make(map[string]*data.PublicKey)
-	for _, fingerprint := range rootSigned.Roles["root"].KeyIDs {
+	for _, keyID := range rootSigned.Roles["root"].KeyIDs {
 		// TODO(dlaw): currently assuming only one cert contained in
 		// public key entry. Need to fix when we want to pass in chains.
-		k, _ := pem.Decode([]byte(rootSigned.Keys[fingerprint].Public()))
+		k, _ := pem.Decode([]byte(rootSigned.Keys[keyID].Public()))
 		decodedCerts, err := x509.ParseCertificates(k.Bytes)
 		if err != nil {
+			logrus.Debugf("error while parsing root certificate with keyID: %s, %v", keyID, err)
 			continue
 		}
 		// TODO(diogo): Assuming that first certificate is the leaf-cert. Need to
 		// iterate over all decodedCerts and find a non-CA one (should be the last).
 		leafCert := decodedCerts[0]
 
-		leafID := trustmanager.FingerprintCert(leafCert)
+		leafID, err := trustmanager.FingerprintCert(leafCert)
+		if err != nil {
+			logrus.Debugf("error while fingerprinting root certificate with keyID: %s, %v", keyID, err)
+			continue
+		}
 
 		// Check to see if there is an exact match of this certificate.
 		// Checking the CommonName is not required since ID is calculated over
 		// Cert.Raw. It's included to prevent breaking logic with changes of how the
 		// ID gets computed.
-		_, err = r.certificateStore.GetCertificateByFingerprint(leafID)
+		_, err = r.certificateStore.GetCertificateByKeyID(leafID)
 		if err == nil && leafCert.Subject.CommonName == r.gun {
-			certs[fingerprint] = rootSigned.Keys[fingerprint]
+			certs[keyID] = rootSigned.Keys[keyID]
 		}
 
 		// Check to see if this leafCertificate has a chain to one of the Root CAs
@@ -567,7 +575,7 @@ func (r *NotaryRepository) validateRoot(root *data.Signed) error {
 		certList := []*x509.Certificate{leafCert}
 		err = trustmanager.Verify(r.caStore, r.gun, certList)
 		if err == nil {
-			certs[fingerprint] = rootSigned.Keys[fingerprint]
+			certs[keyID] = rootSigned.Keys[keyID]
 		}
 	}
 

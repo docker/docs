@@ -98,7 +98,8 @@ func TestInitRepo(t *testing.T) {
 	certificates := repo.certificateStore.GetCertificates()
 	assert.Len(t, certificates, 1, "unexpected number of certificates")
 
-	certID := trustmanager.FingerprintCert(certificates[0])
+	certID, err := trustmanager.FingerprintCert(certificates[0])
+	assert.NoError(t, err, "unable to fingerprint the certificate")
 
 	actualDest, err := os.Readlink(filepath.Join(tempBaseDir, "private", "root_keys", certID+".key"))
 	assert.NoError(t, err, "missing symlink to root key")

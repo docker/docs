@@ -87,11 +87,16 @@ func LoadCertFromPEM(pemBytes []byte) (*x509.Certificate, error) {
 }
 
 // FingerprintCert returns a TUF compliant fingerprint for a X509 Certificate
-func FingerprintCert(cert *x509.Certificate) string {
-	return string(fingerprintCert(cert))
+func FingerprintCert(cert *x509.Certificate) (string, error) {
+	certID, err := fingerprintCert(cert)
+	if err != nil {
+		return "", err
+	}
+
+	return string(certID), nil
 }
 
-func fingerprintCert(cert *x509.Certificate) CertID {
+func fingerprintCert(cert *x509.Certificate) (CertID, error) {
 	block := pem.Block{Type: "CERTIFICATE", Bytes: cert.Raw}
 	pemdata := pem.EncodeToMemory(&block)
 
@@ -102,14 +107,15 @@ func fingerprintCert(cert *x509.Certificate) CertID {
 	case x509.ECDSA:
 		keyType = "ECDSA"
 	default:
-		logrus.Debug("error while fingerprinting certificate. Got Unknown key type.")
+		return "", fmt.Errorf("error while fingerprinting certificate. Got Unknown key type.")
 	}
 
-	logrus.Debugf("certificate fingerprint of key type: %s", keyType)
 	// Create new TUF Key so we can compute the TUF-compliant CertID
 	tufKey := data.NewTUFKey(keyType, pemdata, nil)
 
-	return CertID(tufKey.ID())
+	logrus.Debugf("certificate fingerprint generated for key type %s: %s", keyType, tufKey.ID())
+
+	return CertID(tufKey.ID()), nil
 }
 
 // loadCertsFromDir receives a store AddCertFromFile for each certificate found
@@ -211,7 +217,14 @@ func GenerateRSAKey(random io.Reader, bits int) (*data.PrivateKey, error) {
 		return nil, fmt.Errorf("could not generate private key: %v", err)
 	}
 
-	return RSAToPrivateKey(rsaPrivKey)
+	tufPrivKey, err := RSAToPrivateKey(rsaPrivKey)
+	if err != nil {
+		return nil, err
+	}
+
+	logrus.Debugf("generated RSA key with keyID: %s", tufPrivKey.ID())
+
+	return tufPrivKey, nil
 }
 
 // RSAToPrivateKey converts an rsa.Private key to a TUF data.PrivateKey type
@@ -237,7 +250,14 @@ func GenerateECDSAKey(random io.Reader) (*data.PrivateKey, error) {
 		return nil, err
 	}
 
-	return ECDSAToPrivateKey(ecdsaPrivKey)
+	tufPrivKey, err := ECDSAToPrivateKey(ecdsaPrivKey)
+	if err != nil {
+		return nil, err
+	}
+
+	logrus.Debugf("generated ECDSA key with keyID: %s", tufPrivKey.ID())
+
+	return tufPrivKey, nil
 }
 
 // ECDSAToPrivateKey converts an rsa.Private key to a TUF data.PrivateKey type

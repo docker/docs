@@ -92,7 +92,7 @@ func (ccs *RSACryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signa
 			// InitRepo gets a signer that doesn't have access to
 			// the root keys. Continuing here is safe because we
 			// end up not returning any signatures.
-			logrus.Debugf("ignoring error attempting to retrieve RSA key ID: %s, %v", privKey.ID(), err)
+			logrus.Debugf("ignoring error attempting to retrieve RSA key ID: %s, %v", keyid, err)
 			continue
 		}
 
@@ -158,7 +158,7 @@ func (ccs *ECDSACryptoService) Create(role string) (*data.PublicKey, error) {
 		return nil, fmt.Errorf("failed to add key to filestore: %v", err)
 	}
 
-	logrus.Debugf("generated new ECDSA key for role: %s with keyID: %s", role, privKey.ID())
+	logrus.Debugf("generated new ECDSA key for role %s with keyID: %s", role, privKey.ID())
 
 	return data.PublicKeyFromPrivate(*privKey), nil
 }
