@@ -26,6 +26,8 @@ eval $($DOCKER_MACHINE env dev --shell=bash)
 clear
 
 cat << EOF
+
+
                         ##         .
                   ## ## ##        ==
                ## ## ## ## ##    ===
@@ -35,10 +37,9 @@ cat << EOF
              \    \         __/
               \____\_______/
 
+
 EOF
-echo ""
-echo "Your shell is configured to use docker with the VM: $VM"
-echo "You can ssh into the VM via 'docker-machine ssh $VM'"
-echo ""
+echo "The Quick Start CLI is configured to use Docker with the $VM VM"
+echo
 
 bash -c "$SHELL"
