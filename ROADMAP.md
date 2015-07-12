@@ -1,7 +1,7 @@
 # Docker Toolbox Roadmap
 
 
-# Documentation Work
+## Documentation Work
 
 * [ ] [Rewrite Mac Installation](https://github.com/docker/docker/issues/14561) 2-3 hours
 * [ ] [Rewrite Windows Installation](https://github.com/docker/docker/issues/14560) 2-3 hours
