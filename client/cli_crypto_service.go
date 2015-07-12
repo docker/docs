@@ -9,7 +9,6 @@ import (
 	"crypto/x509"
 	"fmt"
 	"path/filepath"
-	"strings"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary/trustmanager"
@@ -72,7 +71,6 @@ func (ccs *RSACryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signa
 
 		var privKey *data.PrivateKey
 		var err error
-		var method string
 
 		// Read PrivateKey from file.
 		// TODO(diogo): This assumes both that only root keys are encrypted and
@@ -80,12 +78,8 @@ func (ccs *RSACryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signa
 		if ccs.passphrase != "" {
 			// This is a root key
 			privKey, err = ccs.keyStore.GetDecryptedKey(keyName, ccs.passphrase)
-			// This method is added to the signature so verifiers can decode
-			// the X509 certificate before trying to parse the public materials
-			method = "RSASSA-PSS-X509"
 		} else {
 			privKey, err = ccs.keyStore.GetKey(keyName)
-			method = "RSASSA-PSS"
 		}
 		if err != nil {
 			// Note that GetDecryptedKey always fails on InitRepo.
@@ -107,12 +101,12 @@ func (ccs *RSACryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signa
 			continue
 		}
 
-		logrus.Debugf("appending RSA signature with Key ID: %s and method %s", privKey.ID(), method)
+		logrus.Debugf("appending RSA signature with Key ID: %s", privKey.ID())
 
 		// Append signatures to result array
 		signatures = append(signatures, data.Signature{
 			KeyID:     keyid,
-			Method:    method,
+			Method:    data.RSAPSSSignature,
 			Signature: sig[:],
 		})
 	}
@@ -121,7 +115,7 @@ func (ccs *RSACryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signa
 }
 
 func rsaSign(privKey *data.PrivateKey, hash crypto.Hash, hashed []byte) ([]byte, error) {
-	if strings.ToUpper(privKey.Cipher()) != "RSA" {
+	if privKey.Cipher() != data.RSAKey {
 		return nil, fmt.Errorf("private key type not supported: %s", privKey.Cipher())
 	}
 
@@ -178,7 +172,6 @@ func (ccs *ECDSACryptoService) Sign(keyIDs []string, payload []byte) ([]data.Sig
 
 		var privKey *data.PrivateKey
 		var err error
-		var method string
 
 		// Read PrivateKey from file
 		// TODO(diogo): This assumes both that only root keys are encrypted and
@@ -186,12 +179,8 @@ func (ccs *ECDSACryptoService) Sign(keyIDs []string, payload []byte) ([]data.Sig
 		if ccs.passphrase != "" {
 			// This is a root key
 			privKey, err = ccs.keyStore.GetDecryptedKey(keyName, ccs.passphrase)
-			// This method is added to the signature so verifiers can decode
-			// the X509 certificate before trying to parse the public materials
-			method = "ECDSA-X509"
 		} else {
 			privKey, err = ccs.keyStore.GetKey(keyName)
-			method = "ECDSA"
 		}
 		if err != nil {
 			// Note that GetDecryptedKey always fails on InitRepo.
@@ -218,12 +207,12 @@ func (ccs *ECDSACryptoService) Sign(keyIDs []string, payload []byte) ([]data.Sig
 			continue
 		}
 
-		logrus.Debugf("appending ECDSA signature with Key ID: %s and method: %s", privKey.ID(), method)
+		logrus.Debugf("appending ECDSA signature with Key ID: %s", privKey.ID())
 
 		// Append signatures to result array
 		signatures = append(signatures, data.Signature{
 			KeyID:     keyid,
-			Method:    method,
+			Method:    data.ECDSASignature,
 			Signature: sig[:],
 		})
 	}
@@ -232,7 +221,7 @@ func (ccs *ECDSACryptoService) Sign(keyIDs []string, payload []byte) ([]data.Sig
 }
 
 func ecdsaSign(privKey *data.PrivateKey, hash crypto.Hash, hashed []byte) ([]byte, error) {
-	if strings.ToLower(privKey.Cipher()) != "ecdsa" {
+	if privKey.Cipher() != data.ECDSAKey {
 		return nil, fmt.Errorf("private key type not supported: %s", privKey.Cipher())
 	}
 

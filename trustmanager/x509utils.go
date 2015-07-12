@@ -103,9 +103,9 @@ func fingerprintCert(cert *x509.Certificate) (CertID, error) {
 	keyType := ""
 	switch cert.PublicKeyAlgorithm {
 	case x509.RSA:
-		keyType = "RSA"
+		keyType = data.RSAx509Key
 	case x509.ECDSA:
-		keyType = "ECDSA"
+		keyType = data.ECDSAx509Key
 	default:
 		return "", fmt.Errorf("error while fingerprinting certificate. Got Unknown key type.")
 	}
@@ -174,7 +174,7 @@ func ParsePEMPrivateKey(pemBytes []byte, passphrase string) (*data.PrivateKey, e
 			return nil, fmt.Errorf("could not parse DER encoded key: %v", err)
 		}
 
-		tufRSAPrivateKey, err := RSAToPrivateKey(rsaPrivKey)
+		tufRSAPrivateKey, err := RSAToPrivateKey(rsaPrivKey, data.RSAKey)
 		if err != nil {
 			return nil, fmt.Errorf("could not convert rsa.PrivateKey to data.PrivateKey: %v", err)
 		}
@@ -198,7 +198,7 @@ func ParsePEMPrivateKey(pemBytes []byte, passphrase string) (*data.PrivateKey, e
 			return nil, fmt.Errorf("could not parse DER encoded private key: %v", err)
 		}
 
-		tufRSAPrivateKey, err := ECDSAToPrivateKey(rsaPrivKey)
+		tufRSAPrivateKey, err := ECDSAToPrivateKey(rsaPrivKey, data.ECDSAKey)
 		if err != nil {
 			return nil, fmt.Errorf("could not convert ecdsa.PrivateKey to data.PrivateKey: %v", err)
 		}
@@ -217,7 +217,7 @@ func GenerateRSAKey(random io.Reader, bits int) (*data.PrivateKey, error) {
 		return nil, fmt.Errorf("could not generate private key: %v", err)
 	}
 
-	tufPrivKey, err := RSAToPrivateKey(rsaPrivKey)
+	tufPrivKey, err := RSAToPrivateKey(rsaPrivKey, data.RSAKey)
 	if err != nil {
 		return nil, err
 	}
@@ -228,7 +228,7 @@ func GenerateRSAKey(random io.Reader, bits int) (*data.PrivateKey, error) {
 }
 
 // RSAToPrivateKey converts an rsa.Private key to a TUF data.PrivateKey type
-func RSAToPrivateKey(rsaPrivKey *rsa.PrivateKey) (*data.PrivateKey, error) {
+func RSAToPrivateKey(rsaPrivKey *rsa.PrivateKey, keyType string) (*data.PrivateKey, error) {
 	// Get a DER-encoded representation of the PublicKey
 	rsaPubBytes, err := x509.MarshalPKIXPublicKey(&rsaPrivKey.PublicKey)
 	if err != nil {
@@ -238,7 +238,7 @@ func RSAToPrivateKey(rsaPrivKey *rsa.PrivateKey) (*data.PrivateKey, error) {
 	// Get a DER-encoded representation of the PrivateKey
 	rsaPrivBytes := x509.MarshalPKCS1PrivateKey(rsaPrivKey)
 
-	return data.NewPrivateKey("RSA", rsaPubBytes, rsaPrivBytes), nil
+	return data.NewPrivateKey(keyType, rsaPubBytes, rsaPrivBytes), nil
 }
 
 // GenerateECDSAKey generates an ECDSA Private key and returns a TUF PrivateKey
@@ -250,7 +250,7 @@ func GenerateECDSAKey(random io.Reader) (*data.PrivateKey, error) {
 		return nil, err
 	}
 
-	tufPrivKey, err := ECDSAToPrivateKey(ecdsaPrivKey)
+	tufPrivKey, err := ECDSAToPrivateKey(ecdsaPrivKey, data.ECDSAKey)
 	if err != nil {
 		return nil, err
 	}
@@ -261,7 +261,7 @@ func GenerateECDSAKey(random io.Reader) (*data.PrivateKey, error) {
 }
 
 // ECDSAToPrivateKey converts an rsa.Private key to a TUF data.PrivateKey type
-func ECDSAToPrivateKey(ecdsaPrivKey *ecdsa.PrivateKey) (*data.PrivateKey, error) {
+func ECDSAToPrivateKey(ecdsaPrivKey *ecdsa.PrivateKey, keyType string) (*data.PrivateKey, error) {
 	// Get a DER-encoded representation of the PublicKey
 	ecdsaPubBytes, err := x509.MarshalPKIXPublicKey(&ecdsaPrivKey.PublicKey)
 	if err != nil {
@@ -274,7 +274,7 @@ func ECDSAToPrivateKey(ecdsaPrivKey *ecdsa.PrivateKey) (*data.PrivateKey, error)
 		return nil, fmt.Errorf("failed to marshal private key: %v", err)
 	}
 
-	return data.NewPrivateKey("ECDSA", ecdsaPubBytes, ecdsaPrivKeyBytes), nil
+	return data.NewPrivateKey(keyType, ecdsaPubBytes, ecdsaPrivKeyBytes), nil
 }
 
 // KeyToPEM returns a PEM encoded key from a Private Key
@@ -283,9 +283,9 @@ func KeyToPEM(privKey *data.PrivateKey) ([]byte, error) {
 	cipher := privKey.Cipher()
 
 	switch cipher {
-	case "RSA":
+	case data.RSAKey:
 		pemType = "RSA PRIVATE KEY"
-	case "ECDSA":
+	case data.ECDSAKey:
 		pemType = "EC PRIVATE KEY"
 	default:
 		return nil, fmt.Errorf("only RSA or ECDSA keys are currently supported. Found: %s", cipher)
@@ -301,9 +301,9 @@ func EncryptPrivateKey(key *data.PrivateKey, passphrase string) ([]byte, error) 
 	cipher := key.Cipher()
 
 	switch cipher {
-	case "RSA":
+	case data.RSAKey:
 		blockType = "RSA PRIVATE KEY"
-	case "ECDSA":
+	case data.ECDSAKey:
 		blockType = "EC PRIVATE KEY"
 	default:
 		return nil, fmt.Errorf("only RSA or ECDSA keys are currently supported. Found: %s", cipher)
