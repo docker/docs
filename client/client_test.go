@@ -43,11 +43,13 @@ func createTestServer(t *testing.T) (*httptest.Server, *http.ServeMux) {
 // sure the repository looks correct on disk.
 // We test this with both an RSA and ECDSA root key
 func TestInitRepo(t *testing.T) {
-	testInitRepo(t, data.RSAKey)
 	testInitRepo(t, data.ECDSAKey)
+	if !testing.Short() {
+		testInitRepo(t, data.RSAKey)
+	}
 }
 
-func testInitRepo(t *testing.T, rootType string) {
+func testInitRepo(t *testing.T, rootType data.KeyAlgorithm) {
 	gun := "docker.com/notary"
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
@@ -61,7 +63,7 @@ func testInitRepo(t *testing.T, rootType string) {
 	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport)
 	assert.NoError(t, err, "error creating repo: %s", err)
 
-	rootKeyID, err := repo.GenRootKey(rootType, "passphrase")
+	rootKeyID, err := repo.GenRootKey(rootType.String(), "passphrase")
 	assert.NoError(t, err, "error generating root key: %s", err)
 
 	rootSigner, err := repo.GetRootSigner(rootKeyID, "passphrase")
@@ -184,11 +186,13 @@ type tufChange struct {
 // internal HTTP server.
 // We test this with both an RSA and ECDSA root key
 func TestAddListTarget(t *testing.T) {
-	testAddListTarget(t, data.RSAKey)
 	testAddListTarget(t, data.ECDSAKey)
+	if !testing.Short() {
+		testInitRepo(t, data.RSAKey)
+	}
 }
 
-func testAddListTarget(t *testing.T, rootType string) {
+func testAddListTarget(t *testing.T, rootType data.KeyAlgorithm) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)
@@ -203,7 +207,7 @@ func testAddListTarget(t *testing.T, rootType string) {
 	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
-	rootKeyID, err := repo.GenRootKey(rootType, "passphrase")
+	rootKeyID, err := repo.GenRootKey(rootType.String(), "passphrase")
 	assert.NoError(t, err, "error generating root key: %s", err)
 
 	rootSigner, err := repo.GetRootSigner(rootKeyID, "passphrase")
@@ -367,11 +371,13 @@ func testAddListTarget(t *testing.T, rootType string) {
 // TestValidateRootKey verifies that the public data in root.json for the root
 // key is a valid x509 certificate.
 func TestValidateRootKey(t *testing.T) {
-	testValidateRootKey(t, data.RSAKey)
 	testValidateRootKey(t, data.ECDSAKey)
+	if !testing.Short() {
+		testInitRepo(t, data.RSAKey)
+	}
 }
 
-func testValidateRootKey(t *testing.T, rootType string) {
+func testValidateRootKey(t *testing.T, rootType data.KeyAlgorithm) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)
@@ -386,7 +392,7 @@ func testValidateRootKey(t *testing.T, rootType string) {
 	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
-	rootKeyID, err := repo.GenRootKey(rootType, "passphrase")
+	rootKeyID, err := repo.GenRootKey(rootType.String(), "passphrase")
 	assert.NoError(t, err, "error generating root key: %s", err)
 
 	rootSigner, err := repo.GetRootSigner(rootKeyID, "passphrase")

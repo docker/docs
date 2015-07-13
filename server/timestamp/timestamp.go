@@ -17,28 +17,28 @@ import (
 // found. It attempts to handle the race condition that may occur if 2 servers try to
 // create the key at the same time by simply querying the store a second time if it
 // receives a conflict when writing.
-func GetOrCreateTimestampKey(gun string, store storage.MetaStore, crypto signed.CryptoService) (*data.TUFKey, error) {
-	cipher, public, err := store.GetTimestampKey(gun)
+func GetOrCreateTimestampKey(gun string, store storage.MetaStore, crypto signed.CryptoService, fallBackAlgorithm data.KeyAlgorithm) (*data.TUFKey, error) {
+	keyAlgorithm, public, err := store.GetTimestampKey(gun)
 	if err == nil {
-		return data.NewTUFKey(cipher, public, nil), nil
+		return data.NewTUFKey(keyAlgorithm, public, nil), nil
 	}
 
 	if _, ok := err.(*storage.ErrNoKey); ok {
-		key, err := crypto.Create("timestamp")
+		key, err := crypto.Create("timestamp", fallBackAlgorithm)
 		if err != nil {
 			return nil, err
 		}
-		err = store.SetTimestampKey(gun, key.Cipher(), key.Public())
+		err = store.SetTimestampKey(gun, key.Algorithm(), key.Public())
 		if err == nil {
 			return &key.TUFKey, nil
 		}
 
 		if _, ok := err.(*storage.ErrTimestampKeyExists); ok {
-			cipher, public, err = store.GetTimestampKey(gun)
+			keyAlgorithm, public, err = store.GetTimestampKey(gun)
 			if err != nil {
 				return nil, err
 			}
-			return data.NewTUFKey(cipher, public, nil), nil
+			return data.NewTUFKey(keyAlgorithm, public, nil), nil
 		}
 		return nil, err
 	}
@@ -96,13 +96,13 @@ func timestampExpired(ts *data.SignedTimestamp) bool {
 // version number one higher than prev. The store is used to lookup the current
 // snapshot, this function does not save the newly generated timestamp.
 func createTimestamp(gun string, prev *data.SignedTimestamp, store storage.MetaStore, signer *signed.Signer) (*data.Signed, int, error) {
-	cipher, public, err := store.GetTimestampKey(gun)
+	algorithm, public, err := store.GetTimestampKey(gun)
 	if err != nil {
 		// owner of gun must have generated a timestamp key otherwise
 		// we won't proceed with generating everything.
 		return nil, 0, err
 	}
-	key := data.NewPublicKey(cipher, public)
+	key := data.NewPublicKey(algorithm, public)
 	snapshot, err := store.GetCurrent(gun, "snapshot")
 	if err != nil {
 		return nil, 0, err

@@ -32,11 +32,11 @@ func TestTimestampExpired(t *testing.T) {
 func TestGetTimestampKey(t *testing.T) {
 	store := storage.NewMemStorage()
 	crypto := signed.NewEd25519()
-	k, err := GetOrCreateTimestampKey("gun", store, crypto)
+	k, err := GetOrCreateTimestampKey("gun", store, crypto, data.ED25519Key)
 	assert.Nil(t, err, "Expected nil error")
 	assert.NotNil(t, k, "Key should not be nil")
 
-	k2, err := GetOrCreateTimestampKey("gun", store, crypto)
+	k2, err := GetOrCreateTimestampKey("gun", store, crypto, data.ED25519Key)
 
 	assert.Nil(t, err, "Expected nil error")
 
@@ -55,7 +55,7 @@ func TestGetTimestamp(t *testing.T) {
 
 	store.UpdateCurrent("gun", "snapshot", 0, snapJSON)
 	// create a key to be used by GetTimestamp
-	_, err := GetOrCreateTimestampKey("gun", store, crypto)
+	_, err := GetOrCreateTimestampKey("gun", store, crypto, data.ED25519Key)
 	assert.Nil(t, err, "GetTimestampKey errored")
 
 	_, err = GetOrCreateTimestamp("gun", store, signer)

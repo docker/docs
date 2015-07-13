@@ -4,11 +4,13 @@ import (
 	"fmt"
 	"strings"
 	"sync"
+
+	"github.com/endophage/gotuf/data"
 )
 
 type key struct {
-	cipher string
-	public []byte
+	algorithm data.KeyAlgorithm
+	public    []byte
 }
 
 type ver struct {
@@ -73,7 +75,7 @@ func (st *MemStorage) Delete(gun string) error {
 }
 
 // GetTimestampKey returns the public key material of the timestamp key of a given gun
-func (st *MemStorage) GetTimestampKey(gun string) (cipher string, public []byte, err error) {
+func (st *MemStorage) GetTimestampKey(gun string) (algorithm data.KeyAlgorithm, public []byte, err error) {
 	// no need for lock. It's ok to return nil if an update
 	// wasn't observed
 	k, ok := st.tsKeys[gun]
@@ -81,12 +83,12 @@ func (st *MemStorage) GetTimestampKey(gun string) (cipher string, public []byte,
 		return "", nil, &ErrNoKey{gun: gun}
 	}
 
-	return k.cipher, k.public, nil
+	return k.algorithm, k.public, nil
 }
 
 // SetTimestampKey sets a Timestamp key under a gun
-func (st *MemStorage) SetTimestampKey(gun, cipher string, public []byte) error {
-	k := &key{cipher: cipher, public: public}
+func (st *MemStorage) SetTimestampKey(gun string, algorithm data.KeyAlgorithm, public []byte) error {
+	k := &key{algorithm: algorithm, public: public}
 	st.lock.Lock()
 	defer st.lock.Unlock()
 	if _, ok := st.tsKeys[gun]; ok {

@@ -15,51 +15,52 @@ import (
 	"github.com/endophage/gotuf/data"
 )
 
-type genericCryptoService struct {
+// CryptoService implements Sign and Create, holding a specific GUN and keystore to
+// operate on
+type CryptoService struct {
 	gun        string
 	passphrase string
 	keyStore   *trustmanager.KeyFileStore
 }
 
-// RSACryptoService implements Sign and Create, holding a specific GUN and keystore to
-// operate on
-type RSACryptoService struct {
-	genericCryptoService
-}
-
-// ECDSACryptoService implements Sign and Create, holding a specific GUN and keystore to
-// operate on
-type ECDSACryptoService struct {
-	genericCryptoService
-}
-
-// NewRSACryptoService returns an instance of CryptoService
-func NewRSACryptoService(gun string, keyStore *trustmanager.KeyFileStore, passphrase string) *RSACryptoService {
-	return &RSACryptoService{genericCryptoService{gun: gun, keyStore: keyStore, passphrase: passphrase}}
+// NewCryptoService returns an instance of CryptoService
+func NewCryptoService(gun string, keyStore *trustmanager.KeyFileStore, passphrase string) *CryptoService {
+	return &CryptoService{gun: gun, keyStore: keyStore, passphrase: passphrase}
 }
 
 // Create is used to generate keys for targets, snapshots and timestamps
-func (ccs *RSACryptoService) Create(role string) (*data.PublicKey, error) {
-	privKey, err := trustmanager.GenerateRSAKey(rand.Reader, rsaKeySize)
-	if err != nil {
-		return nil, fmt.Errorf("failed to generate RSA key: %v", err)
+func (ccs *CryptoService) Create(role string, algorithm data.KeyAlgorithm) (*data.PublicKey, error) {
+	var privKey *data.PrivateKey
+	var err error
+
+	switch algorithm {
+	case data.RSAKey:
+		privKey, err = trustmanager.GenerateRSAKey(rand.Reader, rsaKeySize)
+		if err != nil {
+			return nil, fmt.Errorf("failed to generate RSA key: %v", err)
+		}
+	case data.ECDSAKey:
+		privKey, err = trustmanager.GenerateECDSAKey(rand.Reader)
+		if err != nil {
+			return nil, fmt.Errorf("failed to generate EC key: %v", err)
+		}
+	default:
+		return nil, fmt.Errorf("private key type not supported for key generation: %s", algorithm)
 	}
+	logrus.Debugf("generated new %s key for role: %s and keyID: %s", algorithm, role, privKey.ID())
 
 	// Store the private key into our keystore with the name being: /GUN/ID.key
 	err = ccs.keyStore.AddKey(filepath.Join(ccs.gun, privKey.ID()), privKey)
 	if err != nil {
 		return nil, fmt.Errorf("failed to add key to filestore: %v", err)
 	}
-
-	logrus.Debugf("generated new RSA key for role: %s and keyID: %s", role, privKey.ID())
-
 	return data.PublicKeyFromPrivate(*privKey), nil
 }
 
 // Sign returns the signatures for the payload with a set of keyIDs. It ignores
 // errors to sign and expects the called to validate if the number of returned
 // signatures is adequate.
-func (ccs *RSACryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signature, error) {
+func (ccs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signature, error) {
 	// Create hasher and hash data
 	hash := crypto.SHA256
 	hashed := sha256.Sum256(payload)
@@ -72,11 +73,8 @@ func (ccs *RSACryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signa
 		var privKey *data.PrivateKey
 		var err error
 
-		// Read PrivateKey from file.
-		// TODO(diogo): This assumes both that only root keys are encrypted and
-		// that encrypted keys are always X509 encoded
+		// Read PrivateKey from file and decrypt it if there is a passphrase.
 		if ccs.passphrase != "" {
-			// This is a root key
 			privKey, err = ccs.keyStore.GetDecryptedKey(keyName, ccs.passphrase)
 		} else {
 			privKey, err = ccs.keyStore.GetKey(keyName)
@@ -86,27 +84,33 @@ func (ccs *RSACryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signa
 			// InitRepo gets a signer that doesn't have access to
 			// the root keys. Continuing here is safe because we
 			// end up not returning any signatures.
-			logrus.Debugf("ignoring error attempting to retrieve RSA key ID: %s, %v", keyid, err)
+			logrus.Debugf("ignoring error attempting to retrieve key ID: %s, %v", keyid, err)
 			continue
 		}
 
-		sig, err := rsaSign(privKey, hash, hashed[:])
+		algorithm := privKey.Algorithm()
+		var sigAlgorithm data.SigAlgorithm
+		var sig []byte
+
+		switch algorithm {
+		case data.RSAKey:
+			sig, err = rsaSign(privKey, hash, hashed[:])
+			sigAlgorithm = data.RSAPSSSignature
+		case data.ECDSAKey:
+			sig, err = ecdsaSign(privKey, hashed[:])
+			sigAlgorithm = data.ECDSASignature
+		}
 		if err != nil {
-			// If the rsaSign method got called with a non RSA private key,
-			// we ignore this call.
-			// This might happen when root is ECDSA, targets and snapshots RSA, and
-			// gotuf still attempts to sign root with this cryptoserver
-			// return nil, err
-			logrus.Debugf("ignoring error attempting to RSA sign with keyID: %s, %v", keyid, err)
+			logrus.Debugf("ignoring error attempting to %s sign with keyID: %s, %v", algorithm, keyid, err)
 			continue
 		}
 
-		logrus.Debugf("appending RSA signature with Key ID: %s", privKey.ID())
+		logrus.Debugf("appending %s signature with Key ID: %s", algorithm, keyid)
 
 		// Append signatures to result array
 		signatures = append(signatures, data.Signature{
 			KeyID:     keyid,
-			Method:    data.RSAPSSSignature,
+			Method:    sigAlgorithm,
 			Signature: sig[:],
 		})
 	}
@@ -115,8 +119,8 @@ func (ccs *RSACryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signa
 }
 
 func rsaSign(privKey *data.PrivateKey, hash crypto.Hash, hashed []byte) ([]byte, error) {
-	if privKey.Cipher() != data.RSAKey {
-		return nil, fmt.Errorf("private key type not supported: %s", privKey.Cipher())
+	if privKey.Algorithm() != data.RSAKey {
+		return nil, fmt.Errorf("private key type not supported: %s", privKey.Algorithm())
 	}
 
 	// Create an rsa.PrivateKey out of the private key bytes
@@ -134,94 +138,9 @@ func rsaSign(privKey *data.PrivateKey, hash crypto.Hash, hashed []byte) ([]byte,
 	return sig, nil
 }
 
-// NewECDSACryptoService returns an instance of CryptoService
-func NewECDSACryptoService(gun string, keyStore *trustmanager.KeyFileStore, passphrase string) *ECDSACryptoService {
-	return &ECDSACryptoService{genericCryptoService{gun: gun, keyStore: keyStore, passphrase: passphrase}}
-}
-
-// Create is used to generate keys for targets, snapshots and timestamps
-func (ccs *ECDSACryptoService) Create(role string) (*data.PublicKey, error) {
-	privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
-	if err != nil {
-		return nil, fmt.Errorf("failed to generate EC key: %v", err)
-	}
-
-	// Store the private key into our keystore with the name being: /GUN/ID.key
-	err = ccs.keyStore.AddKey(filepath.Join(ccs.gun, privKey.ID()), privKey)
-	if err != nil {
-		return nil, fmt.Errorf("failed to add key to filestore: %v", err)
-	}
-
-	logrus.Debugf("generated new ECDSA key for role %s with keyID: %s", role, privKey.ID())
-
-	return data.PublicKeyFromPrivate(*privKey), nil
-}
-
-// Sign returns the signatures for the payload with a set of keyIDs. It ignores
-// errors to sign and expects the called to validate if the number of returned
-// signatures is adequate.
-func (ccs *ECDSACryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signature, error) {
-	// Create hasher and hash data
-	hashed := sha256.Sum256(payload)
-
-	signatures := make([]data.Signature, 0, len(keyIDs))
-	for _, keyid := range keyIDs {
-		// ccs.gun will be empty if this is the root key
-		keyName := filepath.Join(ccs.gun, keyid)
-
-		var privKey *data.PrivateKey
-		var err error
-
-		// Read PrivateKey from file
-		// TODO(diogo): This assumes both that only root keys are encrypted and
-		// that encrypted keys are always X509 encoded
-		if ccs.passphrase != "" {
-			// This is a root key
-			privKey, err = ccs.keyStore.GetDecryptedKey(keyName, ccs.passphrase)
-		} else {
-			privKey, err = ccs.keyStore.GetKey(keyName)
-		}
-		if err != nil {
-			// Note that GetDecryptedKey always fails on InitRepo.
-			// InitRepo gets a signer that doesn't have access to
-			// the root keys. Continuing here is safe because we
-			// end up not returning any signatures.
-			// TODO(diogo): figure out if there are any specific error types to
-			// check. We're swallowing all errors.
-			logrus.Debugf("Ignoring error attempting to retrieve ECDSA key ID: %s, %v", keyid, err)
-			continue
-		}
-		if err != nil {
-			fmt.Println("ERROR: ", err.Error())
-		}
-
-		sig, err := ecdsaSign(privKey, hashed[:])
-		if err != nil {
-			// If the ecdsaSign method got called with a non ECDSA private key,
-			// we ignore this call.
-			// This might happen when root is RSA, targets and snapshots ECDSA, and
-			// gotuf still attempts to sign root with this cryptoserver
-			// return nil, err
-			logrus.Debugf("ignoring error attempting to ECDSA sign with keyID: %s, %v", privKey.ID(), err)
-			continue
-		}
-
-		logrus.Debugf("appending ECDSA signature with Key ID: %s", privKey.ID())
-
-		// Append signatures to result array
-		signatures = append(signatures, data.Signature{
-			KeyID:     keyid,
-			Method:    data.ECDSASignature,
-			Signature: sig[:],
-		})
-	}
-
-	return signatures, nil
-}
-
 func ecdsaSign(privKey *data.PrivateKey, hashed []byte) ([]byte, error) {
-	if privKey.Cipher() != data.ECDSAKey {
-		return nil, fmt.Errorf("private key type not supported: %s", privKey.Cipher())
+	if privKey.Algorithm() != data.ECDSAKey {
+		return nil, fmt.Errorf("private key type not supported: %s", privKey.Algorithm())
 	}
 
 	// Create an ecdsa.PrivateKey out of the private key bytes

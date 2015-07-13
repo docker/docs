@@ -3,6 +3,7 @@ package storage
 import (
 	"database/sql"
 
+	"github.com/endophage/gotuf/data"
 	"github.com/go-sql-driver/mysql"
 )
 
@@ -91,10 +92,11 @@ func (db *MySQLStorage) Delete(gun string) error {
 }
 
 // GetTimestampKey returns the timestamps Public Key data
-func (db *MySQLStorage) GetTimestampKey(gun string) (cipher string, public []byte, err error) {
+func (db *MySQLStorage) GetTimestampKey(gun string) (algorithm data.KeyAlgorithm, public []byte, err error) {
 	stmt := "SELECT `cipher`, `public` FROM `timestamp_keys` WHERE `gun`=?;"
 	row := db.QueryRow(stmt, gun)
 
+	var cipher string
 	err = row.Scan(&cipher, &public)
 	if err == sql.ErrNoRows {
 		return "", nil, ErrNoKey{gun: gun}
@@ -102,13 +104,13 @@ func (db *MySQLStorage) GetTimestampKey(gun string) (cipher string, public []byt
 		return "", nil, err
 	}
 
-	return cipher, public, err
+	return data.KeyAlgorithm(cipher), public, err
 }
 
 // SetTimestampKey attempts to write a TimeStamp key and returns an error if it already exists
-func (db *MySQLStorage) SetTimestampKey(gun, cipher string, public []byte) error {
+func (db *MySQLStorage) SetTimestampKey(gun string, algorithm data.KeyAlgorithm, public []byte) error {
 	stmt := "INSERT INTO `timestamp_keys` (`gun`, `cipher`, `public`) VALUES (?,?,?);"
-	_, err := db.Exec(stmt, gun, cipher, public)
+	_, err := db.Exec(stmt, gun, string(algorithm), public)
 	if err, ok := err.(*mysql.MySQLError); ok {
 		if err.Number == 1022 { // duplicate key error
 			return &ErrTimestampKeyExists{gun: gun}
