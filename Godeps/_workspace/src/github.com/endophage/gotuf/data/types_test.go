@@ -2,6 +2,7 @@ package data
 
 import (
 	"bytes"
+	"encoding/json"
 
 	. "gopkg.in/check.v1"
 )
@@ -42,4 +43,15 @@ func (TypesSuite) TestGenerateFileMetaExplicit(c *C) {
 		}
 		c.Assert(hash.String(), DeepEquals, val)
 	}
+}
+
+func (TypesSuite) TestSignatureUnmarshalJSON(c *C) {
+	signatureJSON := `{"keyid":"97e8e1b51b6e7cf8720a56b5334bd8692ac5b28233c590b89fab0b0cd93eeedc","method":"RSA","sig":"2230cba525e4f5f8fc744f234221ca9a92924da4cc5faf69a778848882fcf7a20dbb57296add87f600891f2569a9c36706314c240f9361c60fd36f5a915a0e9712fc437b761e8f480868d7a4444724daa0d29a2669c0edbd4046046649a506b3d711d0aa5e70cb9d09dec7381e7de27a3168e77731e08f6ed56fcce2478855e837816fb69aff53412477748cd198dce783850080d37aeb929ad0f81460ebd31e61b772b6c7aa56977c787d4281fa45dbdefbb38d449eb5bccb2702964a52c78811545939712c8280dee0b23b2fa9fbbdd6a0c42476689ace655eba0745b4a21ba108bcd03ad00fdefff416dc74e08486a0538f8fd24989e1b9fc89e675141b7c"}`
+
+	var sig Signature
+	err := json.Unmarshal([]byte(signatureJSON), &sig)
+	c.Assert(err, IsNil)
+
+	// Check that the method string is lowercased
+	c.Assert(sig.Method.String(), Equals, "rsa")
 }
