@@ -51,7 +51,7 @@ func TestGetTimestampKey(t *testing.T) {
 
 	c, k, err := s.GetTimestampKey("gun")
 	assert.Nil(t, err, "Expected error to be nil")
-	assert.Equal(t, data.RSAKey, c, "Expected cipher rsa, received %s", c)
+	assert.Equal(t, data.RSAKey, c, "Expected algorithm rsa, received %s", c)
 	assert.Equal(t, []byte("test"), k, "Key data was wrong")
 }
 
@@ -63,7 +63,7 @@ func TestSetTimestampKey(t *testing.T) {
 	assert.IsType(t, &ErrTimestampKeyExists{}, err, "Expected err to be ErrTimestampKeyExists")
 
 	k := s.tsKeys["gun"]
-	assert.Equal(t, data.RSAKey, k.cipher, "Expected cipher to be rsa, received %s", k.cipher)
+	assert.Equal(t, data.RSAKey, k.algorithm, "Expected algorithm to be rsa, received %s", k.algorithm)
 	assert.Equal(t, []byte("test"), k.public, "Public key did not match expected")
 
 }

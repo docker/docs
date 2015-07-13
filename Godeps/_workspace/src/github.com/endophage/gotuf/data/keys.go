@@ -10,7 +10,7 @@ import (
 
 type Key interface {
 	ID() string
-	Cipher() string
+	Algorithm() KeyAlgorithm
 	Public() []byte
 	Private() []byte
 }
@@ -21,14 +21,14 @@ type KeyPair struct {
 }
 
 type TUFKey struct {
-	id    string  `json:"-"`
-	Type  string  `json:"keytype"`
-	Value KeyPair `json:"keyval"`
+	id    string       `json:"-"`
+	Type  KeyAlgorithm `json:"keytype"`
+	Value KeyPair      `json:"keyval"`
 }
 
-func NewTUFKey(cipher string, public, private []byte) *TUFKey {
+func NewTUFKey(algorithm KeyAlgorithm, public, private []byte) *TUFKey {
 	return &TUFKey{
-		Type: cipher,
+		Type: algorithm,
 		Value: KeyPair{
 			Public:  public,
 			Private: private,
@@ -36,13 +36,13 @@ func NewTUFKey(cipher string, public, private []byte) *TUFKey {
 	}
 }
 
-func (k TUFKey) Cipher() string {
+func (k TUFKey) Algorithm() KeyAlgorithm {
 	return k.Type
 }
 
 func (k *TUFKey) ID() string {
 	if k.id == "" {
-		pubK := NewTUFKey(k.Cipher(), k.Public(), nil)
+		pubK := NewTUFKey(k.Algorithm(), k.Public(), nil)
 		data, err := cjson.Marshal(&pubK)
 		if err != nil {
 			logrus.Error("Error generating key ID:", err)
@@ -65,10 +65,10 @@ func (k PublicKey) Private() []byte {
 	return nil
 }
 
-func NewPublicKey(cipher string, public []byte) *PublicKey {
+func NewPublicKey(algorithm KeyAlgorithm, public []byte) *PublicKey {
 	return &PublicKey{
 		TUFKey{
-			Type: cipher,
+			Type: algorithm,
 			Value: KeyPair{
 				Public:  public,
 				Private: nil,
@@ -87,10 +87,10 @@ type PrivateKey struct {
 	TUFKey
 }
 
-func NewPrivateKey(cipher string, public, private []byte) *PrivateKey {
+func NewPrivateKey(algorithm KeyAlgorithm, public, private []byte) *PrivateKey {
 	return &PrivateKey{
 		TUFKey{
-			Type: cipher,
+			Type: algorithm,
 			Value: KeyPair{
 				Public:  []byte(public),
 				Private: []byte(private),

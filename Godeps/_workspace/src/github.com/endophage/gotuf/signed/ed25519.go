@@ -2,6 +2,7 @@ package signed
 
 import (
 	"crypto/rand"
+	"errors"
 
 	"github.com/agl/ed25519"
 	"github.com/endophage/gotuf/data"
@@ -37,7 +38,7 @@ func (trust *Ed25519) Sign(keyIDs []string, toSign []byte) ([]data.Signature, er
 		sig := ed25519.Sign(&priv, toSign)
 		signatures = append(signatures, data.Signature{
 			KeyID:     kID,
-			Method:    "ED25519",
+			Method:    data.EDDSASignature,
 			Signature: sig[:],
 		})
 	}
@@ -45,13 +46,17 @@ func (trust *Ed25519) Sign(keyIDs []string, toSign []byte) ([]data.Signature, er
 
 }
 
-func (trust *Ed25519) Create(role string) (*data.PublicKey, error) {
+func (trust *Ed25519) Create(role string, algorithm data.KeyAlgorithm) (*data.PublicKey, error) {
+	if algorithm != data.ED25519Key {
+		return nil, errors.New("only ED25519 supported by this cryptoservice")
+	}
+
 	pub, priv, err := ed25519.GenerateKey(rand.Reader)
 	if err != nil {
 		return nil, err
 	}
-	public := data.NewPublicKey("ED25519", pub[:])
-	private := data.NewPrivateKey("ED25519", pub[:], priv[:])
+	public := data.NewPublicKey(data.ED25519Key, pub[:])
+	private := data.NewPrivateKey(data.ED25519Key, pub[:], priv[:])
 	trust.addKey(private)
 	return public, nil
 }

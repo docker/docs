@@ -100,7 +100,7 @@ func fingerprintCert(cert *x509.Certificate) (CertID, error) {
 	block := pem.Block{Type: "CERTIFICATE", Bytes: cert.Raw}
 	pemdata := pem.EncodeToMemory(&block)
 
-	keyType := ""
+	var keyType data.KeyAlgorithm
 	switch cert.PublicKeyAlgorithm {
 	case x509.RSA:
 		keyType = data.RSAx509Key
@@ -228,7 +228,7 @@ func GenerateRSAKey(random io.Reader, bits int) (*data.PrivateKey, error) {
 }
 
 // RSAToPrivateKey converts an rsa.Private key to a TUF data.PrivateKey type
-func RSAToPrivateKey(rsaPrivKey *rsa.PrivateKey, keyType string) (*data.PrivateKey, error) {
+func RSAToPrivateKey(rsaPrivKey *rsa.PrivateKey, keyType data.KeyAlgorithm) (*data.PrivateKey, error) {
 	// Get a DER-encoded representation of the PublicKey
 	rsaPubBytes, err := x509.MarshalPKIXPublicKey(&rsaPrivKey.PublicKey)
 	if err != nil {
@@ -261,7 +261,7 @@ func GenerateECDSAKey(random io.Reader) (*data.PrivateKey, error) {
 }
 
 // ECDSAToPrivateKey converts an rsa.Private key to a TUF data.PrivateKey type
-func ECDSAToPrivateKey(ecdsaPrivKey *ecdsa.PrivateKey, keyType string) (*data.PrivateKey, error) {
+func ECDSAToPrivateKey(ecdsaPrivKey *ecdsa.PrivateKey, keyType data.KeyAlgorithm) (*data.PrivateKey, error) {
 	// Get a DER-encoded representation of the PublicKey
 	ecdsaPubBytes, err := x509.MarshalPKIXPublicKey(&ecdsaPrivKey.PublicKey)
 	if err != nil {
@@ -280,15 +280,15 @@ func ECDSAToPrivateKey(ecdsaPrivKey *ecdsa.PrivateKey, keyType string) (*data.Pr
 // KeyToPEM returns a PEM encoded key from a Private Key
 func KeyToPEM(privKey *data.PrivateKey) ([]byte, error) {
 	var pemType string
-	cipher := privKey.Cipher()
+	algorithm := privKey.Algorithm()
 
-	switch cipher {
+	switch algorithm {
 	case data.RSAKey:
 		pemType = "RSA PRIVATE KEY"
 	case data.ECDSAKey:
 		pemType = "EC PRIVATE KEY"
 	default:
-		return nil, fmt.Errorf("only RSA or ECDSA keys are currently supported. Found: %s", cipher)
+		return nil, fmt.Errorf("only RSA or ECDSA keys are currently supported. Found: %s", algorithm)
 	}
 
 	return pem.EncodeToMemory(&pem.Block{Type: pemType, Bytes: privKey.Private()}), nil
@@ -298,15 +298,15 @@ func KeyToPEM(privKey *data.PrivateKey) ([]byte, error) {
 // and a passphrase
 func EncryptPrivateKey(key *data.PrivateKey, passphrase string) ([]byte, error) {
 	var blockType string
-	cipher := key.Cipher()
+	algorithm := key.Algorithm()
 
-	switch cipher {
+	switch algorithm {
 	case data.RSAKey:
 		blockType = "RSA PRIVATE KEY"
 	case data.ECDSAKey:
 		blockType = "EC PRIVATE KEY"
 	default:
-		return nil, fmt.Errorf("only RSA or ECDSA keys are currently supported. Found: %s", cipher)
+		return nil, fmt.Errorf("only RSA or ECDSA keys are currently supported. Found: %s", algorithm)
 	}
 
 	password := []byte(passphrase)

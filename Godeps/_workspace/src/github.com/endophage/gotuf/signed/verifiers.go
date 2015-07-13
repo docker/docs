@@ -18,7 +18,7 @@ import (
 // Verifiers serves as a map of all verifiers available on the system and
 // can be injected into a verificationService. For testing and configuration
 // purposes, it will not be used by default.
-var Verifiers = map[string]Verifier{
+var Verifiers = map[data.SigAlgorithm]Verifier{
 	data.RSAPSSSignature:   RSAPSSVerifier{},
 	data.PyCryptoSignature: RSAPyCryptoVerifier{},
 	data.ECDSASignature:    ECDSAVerifier{},
@@ -27,8 +27,8 @@ var Verifiers = map[string]Verifier{
 
 // RegisterVerifier provides a convenience function for init() functions
 // to register additional verifiers or replace existing ones.
-func RegisterVerifier(name string, v Verifier) {
-	curr, ok := Verifiers[name]
+func RegisterVerifier(algorithm data.SigAlgorithm, v Verifier) {
+	curr, ok := Verifiers[algorithm]
 	if ok {
 		typOld := reflect.TypeOf(curr)
 		typNew := reflect.TypeOf(v)
@@ -38,9 +38,9 @@ func RegisterVerifier(name string, v Verifier) {
 			typNew.PkgPath(), typNew.Name(),
 		)
 	} else {
-		logrus.Debug("adding verifier for: ", name)
+		logrus.Debug("adding verifier for: ", algorithm)
 	}
-	Verifiers[name] = v
+	Verifiers[algorithm] = v
 }
 
 type Ed25519Verifier struct{}
@@ -83,10 +83,10 @@ type RSAPSSVerifier struct{}
 
 // Verify does the actual check.
 func (v RSAPSSVerifier) Verify(key data.Key, sig []byte, msg []byte) error {
-	cipher := key.Cipher()
+	algorithm := key.Algorithm()
 	var pubKey crypto.PublicKey
 
-	switch cipher {
+	switch algorithm {
 	case data.RSAx509Key:
 		pemCert, _ := pem.Decode([]byte(key.Public()))
 		if pemCert == nil {
@@ -107,7 +107,7 @@ func (v RSAPSSVerifier) Verify(key data.Key, sig []byte, msg []byte) error {
 			return ErrInvalid
 		}
 	default:
-		logrus.Infof("invalid key type for RSAPSS verifier: %s", cipher)
+		logrus.Infof("invalid key type for RSAPSS verifier: %s", algorithm)
 		return ErrInvalid
 	}
 
@@ -145,10 +145,10 @@ type ECDSAVerifier struct{}
 
 // Verify does the actual check.
 func (v ECDSAVerifier) Verify(key data.Key, sig []byte, msg []byte) error {
-	cipher := key.Cipher()
+	algorithm := key.Algorithm()
 	var pubKey crypto.PublicKey
 
-	switch cipher {
+	switch algorithm {
 	case data.ECDSAx509Key:
 		pemCert, _ := pem.Decode([]byte(key.Public()))
 		if pemCert == nil {
@@ -170,7 +170,7 @@ func (v ECDSAVerifier) Verify(key data.Key, sig []byte, msg []byte) error {
 			return ErrInvalid
 		}
 	default:
-		logrus.Infof("invalid key type for ECDSA verifier: %s", cipher)
+		logrus.Infof("invalid key type for ECDSA verifier: %s", algorithm)
 		return ErrInvalid
 	}
 

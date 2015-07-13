@@ -18,10 +18,9 @@ type SigningService interface {
 type KeyService interface {
 	// Create issues a new key pair and is responsible for loading
 	// the private key into the appropriate signing service.
-	Create(role string) (*data.PublicKey, error)
-
-	// PublicKeys return the PublicKey instances for the given KeyIDs
-	//	PublicKeys(keyIDs ...string) (map[string]*data.PublicKey, error)
+	// The role isn't currently used for anything, but it's here to support
+	// future features
+	Create(role string, algorithm data.KeyAlgorithm) (*data.PublicKey, error)
 }
 
 // CryptoService defines a unified Signing and Key Service as this

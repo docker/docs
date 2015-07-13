@@ -8,21 +8,37 @@ import (
 	"hash"
 	"io"
 	"io/ioutil"
+	"strings"
 	"time"
 
 	"github.com/Sirupsen/logrus"
 )
 
+type KeyAlgorithm string
+
+func (k KeyAlgorithm) String() string {
+	return string(k)
+}
+
+type SigAlgorithm string
+
+func (k SigAlgorithm) String() string {
+	return string(k)
+}
+
 const (
 	defaultHashAlgorithm = "sha256"
-	EDDSASignature       = "eddsa"
-	RSAPSSSignature      = "rsapss"
-	ECDSASignature       = "ecdsa"
-	RSAKey               = "rsa"
-	RSAx509Key           = "rsa-x509"
-	ECDSAKey             = "ecdsa"
-	ECDSAx509Key         = "ecdsa-x509"
-	PyCryptoSignature    = "pycrypto-pkcs#1 pss"
+
+	EDDSASignature    SigAlgorithm = "eddsa"
+	RSAPSSSignature   SigAlgorithm = "rsapss"
+	ECDSASignature    SigAlgorithm = "ecdsa"
+	PyCryptoSignature SigAlgorithm = "pycrypto-pkcs#1 pss"
+
+	ED25519Key   KeyAlgorithm = "ed25519"
+	RSAKey       KeyAlgorithm = "rsa"
+	RSAx509Key   KeyAlgorithm = "rsa-x509"
+	ECDSAKey     KeyAlgorithm = "ecdsa"
+	ECDSAx509Key KeyAlgorithm = "ecdsa-x509"
 )
 
 var TUFTypes = map[string]string{
@@ -63,9 +79,9 @@ type Signed struct {
 }
 
 type Signature struct {
-	KeyID     string   `json:"keyid"`
-	Method    string   `json:"method"`
-	Signature HexBytes `json:"sig"`
+	KeyID     string       `json:"keyid"`
+	Method    SigAlgorithm `json:"method"`
+	Signature HexBytes     `json:"sig"`
 }
 
 type Files map[string]FileMeta
@@ -143,4 +159,17 @@ func DefaultExpires(role string) time.Time {
 		return t
 	}
 	return t.UTC().Round(time.Second)
+}
+
+type unmarshalledSignature Signature
+
+func (s *Signature) UnmarshalJSON(data []byte) error {
+	uSignature := unmarshalledSignature{}
+	err := json.Unmarshal(data, &uSignature)
+	if err != nil {
+		return err
+	}
+	uSignature.Method = SigAlgorithm(strings.ToLower(string(uSignature.Method)))
+	*s = Signature(uSignature)
+	return nil
 }

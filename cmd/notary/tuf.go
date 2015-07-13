@@ -13,7 +13,6 @@ import (
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/docker/pkg/term"
 	notaryclient "github.com/docker/notary/client"
-	"github.com/endophage/gotuf/data"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -120,7 +119,7 @@ func tufInit(cmd *cobra.Command, args []string) {
 		if err != nil {
 			fatalf(err.Error())
 		}
-		rootKeyID, err = nRepo.GenRootKey(data.ECDSAKey, passphrase)
+		rootKeyID, err = nRepo.GenRootKey("ECDSA", passphrase)
 		if err != nil {
 			fatalf(err.Error())
 		}
@@ -134,12 +133,12 @@ func tufInit(cmd *cobra.Command, args []string) {
 		}
 	}
 
-	rootSigner, err := nRepo.GetRootSigner(rootKeyID, passphrase)
+	rootCryptoService, err := nRepo.GetRootCryptoService(rootKeyID, passphrase)
 	if err != nil {
 		fatalf(err.Error())
 	}
 
-	nRepo.Initialize(rootSigner)
+	nRepo.Initialize(rootCryptoService)
 	if err != nil {
 		fatalf(err.Error())
 	}

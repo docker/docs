@@ -5,19 +5,9 @@ import (
 	"github.com/endophage/gotuf/data"
 )
 
-// Signer encapsulates a signing service with some convenience methods to
-// interface between TUF keys and the generic service interface
-type Signer struct {
-	service CryptoService
-}
-
-func NewSigner(service CryptoService) *Signer {
-	return &Signer{service}
-}
-
 // Sign takes a data.Signed and a key, calculated and adds the signature
 // to the data.Signed
-func (signer *Signer) Sign(s *data.Signed, keys ...*data.PublicKey) error {
+func Sign(service CryptoService, s *data.Signed, keys ...*data.PublicKey) error {
 	logrus.Debugf("sign called with %d keys", len(keys))
 	signatures := make([]data.Signature, 0, len(s.Signatures)+1)
 	keyIDMemb := make(map[string]struct{})
@@ -34,7 +24,7 @@ func (signer *Signer) Sign(s *data.Signed, keys ...*data.PublicKey) error {
 		}
 		signatures = append(signatures, sig)
 	}
-	newSigs, err := signer.service.Sign(keyIDs, s.Signed)
+	newSigs, err := service.Sign(keyIDs, s.Signed)
 	if err != nil {
 		return err
 	}
@@ -42,12 +32,3 @@ func (signer *Signer) Sign(s *data.Signed, keys ...*data.PublicKey) error {
 	s.Signatures = append(signatures, newSigs...)
 	return nil
 }
-
-func (signer *Signer) Create(role string) (*data.PublicKey, error) {
-	key, err := signer.service.Create(role)
-	return key, err
-}
-
-//func (signer *Signer) PublicKeys(keyIDs ...string) (map[string]*data.PublicKey, error) {
-//	return signer.service.PublicKeys(keyIDs...)
-//}

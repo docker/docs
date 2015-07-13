@@ -27,7 +27,7 @@ func (mts *MockCryptoService) Sign(keyIDs []string, _ []byte) ([]data.Signature,
 	return sigs, nil
 }
 
-func (mts *MockCryptoService) Create(_ string) (*data.PublicKey, error) {
+func (mts *MockCryptoService) Create(_ string, _ data.KeyAlgorithm) (*data.PublicKey, error) {
 	return &mts.testKey, nil
 }
 
@@ -42,16 +42,14 @@ var _ CryptoService = &MockCryptoService{}
 func TestBasicSign(t *testing.T) {
 	testKey, _ := pem.Decode([]byte(testKeyPEM1))
 	k := data.NewPublicKey(data.RSAKey, testKey.Bytes)
-	signer := Signer{&MockCryptoService{
-		testKey: *k,
-	}}
-	key, err := signer.Create("root")
+	mockCryptoService := &MockCryptoService{testKey: *k}
+	key, err := mockCryptoService.Create("root", data.ED25519Key)
 	if err != nil {
 		t.Fatal(err)
 	}
 	testData := data.Signed{}
 
-	signer.Sign(&testData, key)
+	Sign(mockCryptoService, &testData, key)
 
 	if len(testData.Signatures) != 1 {
 		t.Fatalf("Incorrect number of signatures: %d", len(testData.Signatures))
@@ -69,13 +67,11 @@ func TestBasicSign(t *testing.T) {
 func TestReSign(t *testing.T) {
 	testKey, _ := pem.Decode([]byte(testKeyPEM1))
 	k := data.NewPublicKey(data.RSAKey, testKey.Bytes)
-	signer := Signer{&MockCryptoService{
-		testKey: *k,
-	}}
+	mockCryptoService := &MockCryptoService{testKey: *k}
 	testData := data.Signed{}
 
-	signer.Sign(&testData, k)
-	signer.Sign(&testData, k)
+	Sign(mockCryptoService, &testData, k)
+	Sign(mockCryptoService, &testData, k)
 
 	if len(testData.Signatures) != 1 {
 		t.Fatalf("Incorrect number of signatures: %d", len(testData.Signatures))
@@ -88,16 +84,16 @@ func TestReSign(t *testing.T) {
 }
 
 func TestMultiSign(t *testing.T) {
-	signer := Signer{&MockCryptoService{}}
+	mockCryptoService := &MockCryptoService{}
 	testData := data.Signed{}
 
 	testKey, _ := pem.Decode([]byte(testKeyPEM1))
 	key := data.NewPublicKey(data.RSAKey, testKey.Bytes)
-	signer.Sign(&testData, key)
+	Sign(mockCryptoService, &testData, key)
 
 	testKey, _ = pem.Decode([]byte(testKeyPEM2))
 	key = data.NewPublicKey(data.RSAKey, testKey.Bytes)
-	signer.Sign(&testData, key)
+	Sign(mockCryptoService, &testData, key)
 
 	if len(testData.Signatures) != 2 {
 		t.Fatalf("Incorrect number of signatures: %d", len(testData.Signatures))
@@ -115,11 +111,9 @@ func TestMultiSign(t *testing.T) {
 func TestCreate(t *testing.T) {
 	testKey, _ := pem.Decode([]byte(testKeyPEM1))
 	k := data.NewPublicKey(data.RSAKey, testKey.Bytes)
-	signer := Signer{&MockCryptoService{
-		testKey: *k,
-	}}
+	mockCryptoService := &MockCryptoService{testKey: *k}
 
-	key, err := signer.Create("root")
+	key, err := mockCryptoService.Create("root", data.ED25519Key)
 
 	if err != nil {
 		t.Fatal(err)

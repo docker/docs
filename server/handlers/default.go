@@ -165,20 +165,20 @@ func GetTimestampHandler(ctx context.Context, w http.ResponseWriter, r *http.Req
 			Err:        fmt.Errorf("Version store not configured"),
 		}
 	}
-	sign := ctx.Value("signer")
-	signer, ok := sign.(*signed.Signer)
+	cryptoServiceVal := ctx.Value("cryptoService")
+	cryptoService, ok := cryptoServiceVal.(signed.CryptoService)
 	if !ok {
 		return &errors.HTTPError{
 			HTTPStatus: http.StatusInternalServerError,
 			Code:       9999,
-			Err:        fmt.Errorf("Signer not configured"),
+			Err:        fmt.Errorf("CryptoService not configured"),
 		}
 	}
 
 	vars := mux.Vars(r)
 	gun := vars["imageName"]
 
-	out, err := timestamp.GetOrCreateTimestamp(gun, store, signer)
+	out, err := timestamp.GetOrCreateTimestamp(gun, store, cryptoService)
 	if err != nil {
 		if _, ok := err.(*storage.ErrNoKey); ok {
 			return &errors.HTTPError{
@@ -224,7 +224,7 @@ func GetTimestampKeyHandler(ctx context.Context, w http.ResponseWriter, r *http.
 	vars := mux.Vars(r)
 	gun := vars["imageName"]
 
-	key, err := timestamp.GetOrCreateTimestampKey(gun, store, crypto)
+	key, err := timestamp.GetOrCreateTimestampKey(gun, store, crypto, data.ECDSAKey)
 	if err != nil {
 		return &errors.HTTPError{
 			HTTPStatus: http.StatusInternalServerError,

@@ -54,7 +54,7 @@ func (trust *RufusSigner) Sign(keyIDs []string, toSign []byte) ([]data.Signature
 		}
 		signatures = append(signatures, data.Signature{
 			KeyID:     sig.KeyID.ID,
-			Method:    sig.Algorithm.Algorithm,
+			Method:    data.SigAlgorithm(sig.Algorithm.Algorithm),
 			Signature: sig.Content,
 		})
 	}
@@ -62,13 +62,14 @@ func (trust *RufusSigner) Sign(keyIDs []string, toSign []byte) ([]data.Signature
 }
 
 // Create creates a remote key and returns the PublicKey associated with the remote private key
-func (trust *RufusSigner) Create(role string) (*data.PublicKey, error) {
+// TODO(diogo): Ignoring algorithm for now until rufus supports it
+func (trust *RufusSigner) Create(role string, _ data.KeyAlgorithm) (*data.PublicKey, error) {
 	publicKey, err := trust.kmClient.CreateKey(context.Background(), &pb.Void{})
 	if err != nil {
 		return nil, err
 	}
 	//TODO(mccauley): Update API to return algorithm and/or take it as a param
-	public := data.NewPublicKey(publicKey.Algorithm.Algorithm, publicKey.PublicKey)
+	public := data.NewPublicKey(data.KeyAlgorithm(publicKey.Algorithm.Algorithm), publicKey.PublicKey)
 	return public, nil
 }
 
@@ -82,7 +83,7 @@ func (trust *RufusSigner) PublicKeys(keyIDs ...string) (map[string]*data.PublicK
 			return nil, err
 		}
 		publicKeys[public.KeyID.ID] =
-			data.NewPublicKey(public.Algorithm.Algorithm, public.PublicKey)
+			data.NewPublicKey(data.KeyAlgorithm(public.Algorithm.Algorithm), public.PublicKey)
 	}
 	return publicKeys, nil
 }
