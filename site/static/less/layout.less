@@ -286,10 +286,31 @@ p {
   }
 }
 
+ol {
+  font-size: 1.2rem;
+  line-height: 1.7rem;
+  margin-bottom: 1rem;
+  margin-left: 1.8rem;
+  li {
+    list-style-type: decimal;
+    margin-bottom: 1rem;
+  }
+}
+
 pre {
   border-radius: 0.3rem;
-  padding: 0.5rem;
-  margin-bottom: 1rem;
+  padding: 0.2rem 0.5rem;
+  //margin-bottom: 1rem;
+  display: inline-block;
+  font-size: 1rem;
+  font-family: Menlo, monospace;
+  color: @brand-primary;
+  background-color: fade(@brand-primary, 5%);
+}
+
+code {
+  border-radius: 0.3rem;
+  padding: 0.2rem 0.5rem;
   display: inline-block;
   font-size: 1rem;
   font-family: Menlo, monospace;

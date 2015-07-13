@@ -28,12 +28,12 @@
 </div>
 <div id="about" class="content">
   <div class="wrapper-details">
-    <h2>What's in the box?</h2>
+    <h2>What's in the toolbox?</h2>
     <div class="items">
       <div class="item">
         <div class="info">
           <img src="{{.Site.BaseURL}}/images/engine.png">
-          <h3>Docker Client + Engine</h3>
+          <h3>Docker Engine</h3>
           <p>Creates and runs Docker containers.</p>
         </div>
       </div>
@@ -41,14 +41,14 @@
         <div class="info">
           <img src="{{.Site.BaseURL}}/images/machine.png">
           <h3>Docker Machine</h3>
-          <p>Automatic Docker provisioning.</p>
+          <p>Provisions Docker to local or remote machines.</p>
         </div>
       </div>
       <div class="item">
         <div class="info">
           <img src="{{.Site.BaseURL}}/images/compose.png">
           <h3>Docker Compose</h3>
-          <p>Define multi-container applications.</p>
+          <p>Define multi-container applications. (Mac OS X only)</p>
         </div>
       </div>
       <div class="item">
@@ -70,7 +70,7 @@
 </div>
 <div id="documentation" class="content blue center">
   <div class="documentation">
-    <h3>Get started with Docker from tutorials.</h3>
+    <h3>Choose a path to get started.</h3>
     <div class="cta">
       <a href="#" target="_blank" class="btn docs-link">New to Docker</a>
       <a href="#" target="_blank" class="btn docs-exp-link">Already Using Docker</a>
@@ -83,33 +83,39 @@
     <div class="qnas">
       <div class="qna">
         <div class="question">
-          <h3>I already use boot2docker. How do I migrate to using machine in Docker Toolbox?</h3>
+          <h3>I already use Boot2Docker. How do I migrate my existing VMs to Docker Machine management?</h3>
         </div>
         <div class="answer">
           <p>
-            To migrate from boot2docker to Docker machine, please type the following command in your terminal:
+            To migrate a VM name <code>boot2docker-vm</code> from Boot2Docker to Docker Machine, please type the following command in your terminal:
           </p>
-          <pre>docker-machine create -d virtualbox --virtualbox-import-boot2docker-vm boot2docker-vm docker-vm</pre>
+          <ol>
+            <li>Open a terminal or the Docker CLI on your system.</li>
+            <li>Type the following command.<br>
+                <pre>docker-machine create -d virtualbox --virtualbox-import-boot2docker-vm boot2docker-vm docker-vm</pre>
+            </li>
+            <li>Use the <code>docker-machine</code> command to interact with the migrated VM.  </li>
+          </ol>
           <p>
-            The Docker machine command-line interface (CLI) is slightly different than the boot2docker CLI.
-            Please see the <a href="https://github.com/docker/machine/blob/master/experimental/b2d_migration.md#command-comparison" target="_blank">command comparison docs</a>
+            The Docker Machine command-line interface (CLI) is slightly different than the Boot2Docker CLI.
+            Please see the <a href="http://docker-manthony.s3-website-us-east-1.amazonaws.com/installation/mac/#migrate-from-boot2docker-to-docker-machine" target="_blank">command comparison docs</a>
             for differences.
           </p>
           <p>
             If you are still having trouble, please visit the full
-            <a href="https://github.com/docker/machine/blob/master/experimental/b2d_migration.md" target="_blank">boot2docker migration docs</a>
+            <a href="http://docker-manthony.s3-website-us-east-1.amazonaws.com/installation/mac/#migrate-from-boot2docker-to-docker-machine" target="_blank">boot2docker migration docs</a>
             or file an issue on <a href="https://github.com/docker/toolbox" target="_blank">Github</a>.
           </p>
         </div>
       </div>
       <div class="qna">
         <div class="question">
-          <h3>I've created a new virtual machine from Docker machine. Where did my old containers and images go?</h3>
+          <h3>I've created a new virtual machine from Docker Machine. Where did my old containers and images go?</h3>
         </div>
         <div class="answer">
           <p>
-            Docker Toolbox includes a tool called Docker machine, and it creates new and separate virtual machines (VM) from your old boot2docker VM.
-            Your old containers and images are still in the old boot2docker VM and are not lost. You can migrate your boot2docker VM to
+            Docker Toolbox includes a tool called Docker machine, and it creates new and separate virtual machines (VM) from your old Boot2Docker VM.
+            Your old containers and images are still in the old Boot2Docker VM and are not lost. You can migrate your Boot2Docker VM to
             machine by typing in the command in the previous Q&amp;A.
         </div>
       </div>
