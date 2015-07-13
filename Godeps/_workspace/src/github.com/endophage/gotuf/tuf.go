@@ -260,9 +260,8 @@ func (tr *TufRepo) SetRoot(s *data.Signed) error {
 	if err != nil {
 		return err
 	}
-	for kid, key := range r.Signed.Keys {
+	for _, key := range r.Signed.Keys {
 		tr.keysDB.AddKey(key)
-		logrus.Debug("Given Key ID:", kid, "\nGenerated Key ID:", key.ID())
 	}
 	for roleName, role := range r.Signed.Roles {
 		baseRole, err := data.NewRole(
@@ -451,7 +450,7 @@ func (tr *TufRepo) UpdateTimestamp(s *data.Signed) error {
 }
 
 func (tr *TufRepo) SignRoot(expires time.Time, signer *signed.Signer) (*data.Signed, error) {
-	logrus.Debug("SignRoot")
+	logrus.Debug("signing root...")
 	if tr.Root.Dirty {
 		tr.Root.Signed.Version++
 	}
@@ -469,8 +468,7 @@ func (tr *TufRepo) SignRoot(expires time.Time, signer *signed.Signer) (*data.Sig
 }
 
 func (tr *TufRepo) SignTargets(role string, expires time.Time, signer *signed.Signer) (*data.Signed, error) {
-	logrus.Debug("SignTargets")
-	logrus.Debug("Got targets data.Signed object")
+	logrus.Debugf("sign targets called for role %s", role)
 	if tr.Targets[role].Dirty {
 		tr.Targets[role].Signed.Version++
 		signed, err := tr.Targets[role].ToSigned()
@@ -479,13 +477,11 @@ func (tr *TufRepo) SignTargets(role string, expires time.Time, signer *signed.Si
 			return nil, err
 		}
 		targets := tr.keysDB.GetRole(role)
-		logrus.Debug("About to sign ", role)
 		signed, err = tr.sign(signed, *targets, signer)
 		if err != nil {
 			logrus.Debug("errored signing ", role)
 			return nil, err
 		}
-		logrus.Debug("success signing ", role)
 		tr.Targets[role].Signatures = signed.Signatures
 		return signed, nil
 	} else {
@@ -499,7 +495,7 @@ func (tr *TufRepo) SignTargets(role string, expires time.Time, signer *signed.Si
 }
 
 func (tr *TufRepo) SignSnapshot(expires time.Time, signer *signed.Signer) (*data.Signed, error) {
-	logrus.Debug("SignSnapshot")
+	logrus.Debug("signing snapshot...")
 	if tr.Root.Dirty {
 		signedRoot, err := tr.SignRoot(data.DefaultExpires("root"), signer)
 		if err != nil {

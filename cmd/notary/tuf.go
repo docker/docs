@@ -1,6 +1,8 @@
 package main
 
 import (
+	"bufio"
+	"bytes"
 	"crypto/sha256"
 	"errors"
 	"fmt"
@@ -9,7 +11,9 @@ import (
 	"os"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/docker/docker/pkg/term"
 	notaryclient "github.com/docker/notary/client"
+	"github.com/endophage/gotuf/data"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -116,7 +120,7 @@ func tufInit(cmd *cobra.Command, args []string) {
 		if err != nil {
 			fatalf(err.Error())
 		}
-		rootKeyID, err = nRepo.GenRootKey(passphrase)
+		rootKeyID, err = nRepo.GenRootKey(data.ECDSAKey, passphrase)
 		if err != nil {
 			fatalf(err.Error())
 		}
@@ -276,6 +280,46 @@ func passphraseRetriever() (string, error) {
 	if len(passphrase) < 8 {
 		fmt.Println("Please use a password manager to generate and store a good random passphrase.")
 		return "", errors.New("Passphrase too short")
+	}
+	return passphrase, nil
+}
+
+func getPassphrase(confirm bool) ([]byte, error) {
+	if pass := os.Getenv("NOTARY_ROOT_PASSPHRASE"); pass != "" {
+		return []byte(pass), nil
+	}
+
+	state, err := term.SaveState(0)
+	if err != nil {
+		return nil, err
+	}
+	term.DisableEcho(0, state)
+	defer term.RestoreTerminal(0, state)
+
+	stdin := bufio.NewReader(os.Stdin)
+
+	fmt.Printf("Enter root key passphrase: ")
+	passphrase, err := stdin.ReadBytes('\n')
+	fmt.Println()
+	if err != nil {
+		return nil, err
+	}
+	passphrase = passphrase[0 : len(passphrase)-1]
+
+	if !confirm {
+		return passphrase, nil
+	}
+
+	fmt.Printf("Repeat root key passphrase: ")
+	confirmation, err := stdin.ReadBytes('\n')
+	fmt.Println()
+	if err != nil {
+		return nil, err
+	}
+	confirmation = confirmation[0 : len(confirmation)-1]
+
+	if !bytes.Equal(passphrase, confirmation) {
+		return nil, errors.New("The entered passphrases do not match")
 	}
 	return passphrase, nil
 }

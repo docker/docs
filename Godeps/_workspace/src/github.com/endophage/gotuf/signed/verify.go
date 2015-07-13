@@ -49,7 +49,7 @@ func VerifyRoot(s *data.Signed, minVersion int, keys map[string]*data.PublicKey,
 		method := strings.ToLower(sig.Method)
 		verifier, ok := Verifiers[method]
 		if !ok {
-			logrus.Debugf("continuing b/c signing method is not supported: %s\n", sig.Method)
+			logrus.Debugf("continuing b/c signing method is not supported for verify root: %s\n", sig.Method)
 			continue
 		}
 
@@ -78,11 +78,6 @@ func verifyMeta(s *data.Signed, role string, minVersion int) error {
 	if err := json.Unmarshal(s.Signed, sm); err != nil {
 		return err
 	}
-	// This is not the valid way to check types as all targets files will
-	// have the "Targets" type.
-	//if strings.ToLower(sm.Type) != strings.ToLower(role) {
-	//	return ErrWrongType
-	//}
 	if !data.ValidTUFType(sm.Type) {
 		return ErrWrongType
 	}

@@ -3,6 +3,7 @@ package storage
 import (
 	"testing"
 
+	"github.com/endophage/gotuf/data"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -46,23 +47,23 @@ func TestGetTimestampKey(t *testing.T) {
 	//_, _, err := s.GetTimestampKey("gun")
 	//assert.IsType(t, &ErrNoKey{}, err, "Expected err to be ErrNoKey")
 
-	s.SetTimestampKey("gun", "RSA", []byte("test"))
+	s.SetTimestampKey("gun", data.RSAKey, []byte("test"))
 
 	c, k, err := s.GetTimestampKey("gun")
 	assert.Nil(t, err, "Expected error to be nil")
-	assert.Equal(t, "RSA", c, "Expected cipher rsa, received %s", c)
+	assert.Equal(t, data.RSAKey, c, "Expected cipher rsa, received %s", c)
 	assert.Equal(t, []byte("test"), k, "Key data was wrong")
 }
 
 func TestSetTimestampKey(t *testing.T) {
 	s := NewMemStorage()
-	s.SetTimestampKey("gun", "RSA", []byte("test"))
+	s.SetTimestampKey("gun", data.RSAKey, []byte("test"))
 
-	err := s.SetTimestampKey("gun", "RSA", []byte("test2"))
+	err := s.SetTimestampKey("gun", data.RSAKey, []byte("test2"))
 	assert.IsType(t, &ErrTimestampKeyExists{}, err, "Expected err to be ErrTimestampKeyExists")
 
 	k := s.tsKeys["gun"]
-	assert.Equal(t, "RSA", k.cipher, "Expected cipher to be rsa, received %s", k.cipher)
+	assert.Equal(t, data.RSAKey, k.cipher, "Expected cipher to be rsa, received %s", k.cipher)
 	assert.Equal(t, []byte("test"), k.public, "Public key did not match expected")
 
 }
