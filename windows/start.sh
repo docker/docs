@@ -29,6 +29,8 @@ cd
 clear
 
 cat << EOF
+
+
                         ##         .
                   ## ## ##        ==
                ## ## ## ## ##    ===
@@ -39,9 +41,7 @@ cat << EOF
               \____\_______/
 
 EOF
-echo
-echo "Your shell is configured to use docker with the VM: $VM"
-echo "You can ssh into the VM via 'docker-machine ssh $VM'"
+echo "The Quick Start CLI is configured to use Docker with the $VM VM"
 echo
 
 exec "$BASH" --login -i
