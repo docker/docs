@@ -1,3 +1,7 @@
+#!/bin/bash
+
+set -e
+
 ISO=$HOME/.docker/machine/cache/boot2docker.iso
 VM=dev
 DOCKER_MACHINE=/usr/local/bin/docker-machine
@@ -10,7 +14,8 @@ if [ ! -f $ISO ]; then
   cp /usr/local/share/boot2docker/boot2docker.iso $ISO
 fi
 
-machine=$($DOCKER_MACHINE ls -q | grep "^$VM$")
+
+machine=$($DOCKER_MACHINE ls -q | grep "^$VM$") || :
 if [ -z $machine ]; then
   echo "Creating Machine $VM..."
    $DOCKER_MACHINE create -d virtualbox --virtualbox-memory 2048 $VM
