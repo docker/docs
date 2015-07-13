@@ -162,7 +162,6 @@ func (ccs *ECDSACryptoService) Create(role string) (*data.PublicKey, error) {
 // signatures is adequate.
 func (ccs *ECDSACryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signature, error) {
 	// Create hasher and hash data
-	hash := crypto.SHA256
 	hashed := sha256.Sum256(payload)
 
 	signatures := make([]data.Signature, 0, len(keyIDs))
@@ -196,7 +195,7 @@ func (ccs *ECDSACryptoService) Sign(keyIDs []string, payload []byte) ([]data.Sig
 			fmt.Println("ERROR: ", err.Error())
 		}
 
-		sig, err := ecdsaSign(privKey, hash, hashed[:])
+		sig, err := ecdsaSign(privKey, hashed[:])
 		if err != nil {
 			// If the ecdsaSign method got called with a non ECDSA private key,
 			// we ignore this call.
@@ -220,7 +219,7 @@ func (ccs *ECDSACryptoService) Sign(keyIDs []string, payload []byte) ([]data.Sig
 	return signatures, nil
 }
 
-func ecdsaSign(privKey *data.PrivateKey, hash crypto.Hash, hashed []byte) ([]byte, error) {
+func ecdsaSign(privKey *data.PrivateKey, hashed []byte) ([]byte, error) {
 	if privKey.Cipher() != data.ECDSAKey {
 		return nil, fmt.Errorf("private key type not supported: %s", privKey.Cipher())
 	}

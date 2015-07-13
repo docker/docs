@@ -193,17 +193,17 @@ func ParsePEMPrivateKey(pemBytes []byte, passphrase string) (*data.PrivateKey, e
 			privKeyBytes = block.Bytes
 		}
 
-		rsaPrivKey, err := x509.ParseECPrivateKey(privKeyBytes)
+		ecdsaPrivKey, err := x509.ParseECPrivateKey(privKeyBytes)
 		if err != nil {
 			return nil, fmt.Errorf("could not parse DER encoded private key: %v", err)
 		}
 
-		tufRSAPrivateKey, err := ECDSAToPrivateKey(rsaPrivKey, data.ECDSAKey)
+		tufECDSAPrivateKey, err := ECDSAToPrivateKey(ecdsaPrivKey, data.ECDSAKey)
 		if err != nil {
 			return nil, fmt.Errorf("could not convert ecdsa.PrivateKey to data.PrivateKey: %v", err)
 		}
 
-		return tufRSAPrivateKey, nil
+		return tufECDSAPrivateKey, nil
 
 	default:
 		return nil, fmt.Errorf("unsupported key type %q", block.Type)
