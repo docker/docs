@@ -5,6 +5,7 @@ import (
 	"strings"
 	"testing"
 
+	_ "github.com/docker/distribution/registry/auth/silly"
 	"github.com/endophage/gotuf/signed"
 	"golang.org/x/net/context"
 )
@@ -16,6 +17,8 @@ func TestRunBadAddr(t *testing.T) {
 		"../fixtures/ca.pem",
 		"../fixtures/ca-key.pem",
 		signed.NewEd25519(),
+		"",
+		nil,
 	)
 	if err == nil {
 		t.Fatal("Passed bad addr, Run should have failed")
@@ -31,6 +34,8 @@ func TestRunReservedPort(t *testing.T) {
 		"../fixtures/notary.pem",
 		"../fixtures/notary.key",
 		signed.NewEd25519(),
+		"",
+		nil,
 	)
 
 	if _, ok := err.(*net.OpError); !ok {
