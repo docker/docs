@@ -107,7 +107,7 @@ func fingerprintCert(cert *x509.Certificate) (CertID, error) {
 	case x509.ECDSA:
 		keyType = data.ECDSAx509Key
 	default:
-		return "", fmt.Errorf("error while fingerprinting certificate. Got Unknown key type.")
+		return "", fmt.Errorf("got Unknown key type while fingerprinting certificate")
 	}
 
 	// Create new TUF Key so we can compute the TUF-compliant CertID
