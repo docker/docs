@@ -38,6 +38,11 @@
 			"Rev": "75919b7dcc5d53894d7e8f1584e91ae148335f3a"
 		},
 		{
+			"ImportPath": "github.com/docker/docker/pkg/term",
+			"Comment": "v1.4.1-775-g70fbd45",
+			"Rev": "70fbd45a5c88f6f39a07b04f81a07721bf5f3eed"
+		},
+		{
 			"ImportPath": "github.com/docker/libtrust",
 			"Rev": "fa567046d9b14f6aa788882a950d69651d230b21"
 		},
