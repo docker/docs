@@ -13,7 +13,17 @@ import (
 	"github.com/Sirupsen/logrus"
 )
 
-const defaultHashAlgorithm = "sha256"
+const (
+	defaultHashAlgorithm = "sha256"
+	EDDSASignature       = "eddsa"
+	RSAPSSSignature      = "rsapss"
+	ECDSASignature       = "ecdsa"
+	RSAKey               = "rsa"
+	RSAx509Key           = "rsa-x509"
+	ECDSAKey             = "ecdsa"
+	ECDSAx509Key         = "ecdsa-x509"
+	PyCryptoSignature    = "pycrypto-pkcs#1 pss"
+)
 
 var TUFTypes = map[string]string{
 	"targets":   "Targets",

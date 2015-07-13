@@ -18,29 +18,27 @@ func NewSigner(service CryptoService) *Signer {
 // Sign takes a data.Signed and a key, calculated and adds the signature
 // to the data.Signed
 func (signer *Signer) Sign(s *data.Signed, keys ...*data.PublicKey) error {
-	logrus.Debug("signed/sign.go:Sign")
+	logrus.Debugf("sign called with %d keys", len(keys))
 	signatures := make([]data.Signature, 0, len(s.Signatures)+1)
 	keyIDMemb := make(map[string]struct{})
 	keyIDs := make([]string, 0, len(keys))
-	logrus.Debug("Generate list of signing IDs")
+
 	for _, key := range keys {
 		keyIDMemb[key.ID()] = struct{}{}
 		keyIDs = append(keyIDs, key.ID())
 	}
-	logrus.Debug("Filter out sigs we will be resigning")
+	logrus.Debugf("Generated list of signing IDs: %v", keyIDs)
 	for _, sig := range s.Signatures {
 		if _, ok := keyIDMemb[sig.KeyID]; ok {
 			continue
 		}
 		signatures = append(signatures, sig)
 	}
-	logrus.Debug("Performing Signing")
 	newSigs, err := signer.service.Sign(keyIDs, s.Signed)
 	if err != nil {
 		return err
 	}
-
-	logrus.Debug("Updating signatures slice")
+	logrus.Debugf("appending %d new signatures", len(newSigs))
 	s.Signatures = append(signatures, newSigs...)
 	return nil
 }
