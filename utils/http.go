@@ -61,6 +61,7 @@ func (root *rootHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		if ctx, err = root.auth.Authorized(ctx, access...); err != nil {
 			if err, ok := err.(auth.Challenge); ok {
 				err.ServeHTTP(w, r)
+				w.WriteHeader(http.StatusUnauthorized)
 				return
 			}
 			http.Error(w, err.Error(), http.StatusUnauthorized)
