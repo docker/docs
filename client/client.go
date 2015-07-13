@@ -55,11 +55,12 @@ const (
 /// that doesn't exist.
 var ErrRepositoryNotExist = errors.New("repository does not exist")
 
-// UnlockedSigner encapsulates a private key and a signer that uses that private key,
-// providing convinience methods for generation of certificates.
-type UnlockedSigner struct {
-	privKey *data.PrivateKey
-	signer  *signed.Signer
+// UnlockedCryptoService encapsulates a private key and a cryptoservice that
+// uses that private key, providing convinience methods for generation of
+// certificates.
+type UnlockedCryptoService struct {
+	privKey       *data.PrivateKey
+	cryptoService signed.CryptoService
 }
 
 // NotaryRepository stores all the information needed to operate on a notary
@@ -72,12 +73,10 @@ type NotaryRepository struct {
 	caStore          trustmanager.X509Store
 	certificateStore trustmanager.X509Store
 	fileStore        store.MetadataStore
-	signer           *signed.Signer
 	cryptoService    signed.CryptoService
 	tufRepo          *tuf.TufRepo
 	privKeyStore     *trustmanager.KeyFileStore
 	rootKeyStore     *trustmanager.KeyFileStore
-	rootSigner       *UnlockedSigner
 	roundTrip        http.RoundTripper
 }
 
@@ -117,14 +116,12 @@ func NewNotaryRepository(baseDir, gun, baseURL string, rt http.RoundTripper) (*N
 	}
 
 	cryptoService := NewCryptoService(gun, privKeyStore, "")
-	signer := signed.NewSigner(cryptoService)
 
 	nRepo := &NotaryRepository{
 		gun:           gun,
 		baseDir:       baseDir,
 		baseURL:       baseURL,
 		tufRepoPath:   filepath.Join(baseDir, tufDir, gun),
-		signer:        signer,
 		cryptoService: cryptoService,
 		privKeyStore:  privKeyStore,
 		roundTrip:     rt,
@@ -139,8 +136,8 @@ func NewNotaryRepository(baseDir, gun, baseURL string, rt http.RoundTripper) (*N
 
 // Initialize creates a new repository by using rootKey as the root Key for the
 // TUF repository.
-func (r *NotaryRepository) Initialize(uSigner *UnlockedSigner) error {
-	rootCert, err := uSigner.GenerateCertificate(r.gun)
+func (r *NotaryRepository) Initialize(uCryptoService *UnlockedCryptoService) error {
+	rootCert, err := uCryptoService.GenerateCertificate(r.gun)
 	if err != nil {
 		return err
 	}
@@ -152,7 +149,7 @@ func (r *NotaryRepository) Initialize(uSigner *UnlockedSigner) error {
 	// as ECDSAx509 to allow the gotuf verifiers to correctly decode the
 	// key on verification of signatures.
 	var algorithmType data.KeyAlgorithm
-	algorithm := uSigner.privKey.Algorithm()
+	algorithm := uCryptoService.privKey.Algorithm()
 	switch algorithm {
 	case data.RSAKey:
 		algorithmType = data.RSAx509Key
@@ -168,8 +165,8 @@ func (r *NotaryRepository) Initialize(uSigner *UnlockedSigner) error {
 	// Creates a symlink between the certificate ID and the real public key it
 	// is associated with. This is used to be able to retrieve the root private key
 	// associated with a particular certificate
-	logrus.Debugf("Linking %s to %s.", rootKey.ID(), uSigner.ID())
-	err = r.rootKeyStore.Link(uSigner.ID(), rootKey.ID())
+	logrus.Debugf("Linking %s to %s.", rootKey.ID(), uCryptoService.ID())
+	err = r.rootKeyStore.Link(uCryptoService.ID(), rootKey.ID())
 	if err != nil {
 		return err
 	}
@@ -239,7 +236,7 @@ func (r *NotaryRepository) Initialize(uSigner *UnlockedSigner) error {
 		return err
 	}
 
-	r.tufRepo = tuf.NewTufRepo(kdb, r.signer)
+	r.tufRepo = tuf.NewTufRepo(kdb, r.cryptoService)
 
 	r.fileStore, err = store.NewFilesystemStore(
 		r.tufRepoPath,
@@ -255,7 +252,7 @@ func (r *NotaryRepository) Initialize(uSigner *UnlockedSigner) error {
 		return err
 	}
 
-	if err := r.saveMetadata(uSigner.signer); err != nil {
+	if err := r.saveMetadata(uCryptoService.cryptoService); err != nil {
 		return err
 	}
 
@@ -392,11 +389,11 @@ func (r *NotaryRepository) Publish(getPass passwordRetriever) error {
 			return err
 		}
 		rootKeyID := r.tufRepo.Root.Signed.Roles["root"].KeyIDs[0]
-		rootSigner, err := r.GetRootSigner(rootKeyID, passphrase)
+		rootCryptoService, err := r.GetRootCryptoService(rootKeyID, passphrase)
 		if err != nil {
 			return err
 		}
-		root, err = r.tufRepo.SignRoot(data.DefaultExpires("root"), rootSigner.signer)
+		root, err = r.tufRepo.SignRoot(data.DefaultExpires("root"), rootCryptoService.cryptoService)
 		if err != nil {
 			return err
 		}
@@ -462,7 +459,7 @@ func (r *NotaryRepository) bootstrapRepo() error {
 	}
 
 	kdb := keys.NewDB()
-	tufRepo := tuf.NewTufRepo(kdb, r.signer)
+	tufRepo := tuf.NewTufRepo(kdb, r.cryptoService)
 
 	logrus.Debugf("Loading trusted collection.")
 	rootJSON, err := fileStore.GetMeta("root", 0)
@@ -502,8 +499,8 @@ func (r *NotaryRepository) bootstrapRepo() error {
 	return nil
 }
 
-func (r *NotaryRepository) saveMetadata(rootSigner *signed.Signer) error {
-	signedRoot, err := r.tufRepo.SignRoot(data.DefaultExpires("root"), rootSigner)
+func (r *NotaryRepository) saveMetadata(rootCryptoService signed.CryptoService) error {
+	signedRoot, err := r.tufRepo.SignRoot(data.DefaultExpires("root"), rootCryptoService)
 	if err != nil {
 		return err
 	}
@@ -635,7 +632,7 @@ func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
 	}
 
 	kdb := keys.NewDB()
-	r.tufRepo = tuf.NewTufRepo(kdb, r.signer)
+	r.tufRepo = tuf.NewTufRepo(kdb, r.cryptoService)
 
 	err = r.tufRepo.SetRoot(root)
 	if err != nil {
@@ -683,18 +680,18 @@ func (r *NotaryRepository) GenRootKey(algorithm, passphrase string) (string, err
 	return privKey.ID(), nil
 }
 
-// GetRootSigner retreives a root key that includes the ID and a signer
-func (r *NotaryRepository) GetRootSigner(rootKeyID, passphrase string) (*UnlockedSigner, error) {
+// GetRootCryptoService retreives a root key and a cryptoservice to use with it
+func (r *NotaryRepository) GetRootCryptoService(rootKeyID, passphrase string) (*UnlockedCryptoService, error) {
 	privKey, err := r.rootKeyStore.GetDecryptedKey(rootKeyID, passphrase)
 	if err != nil {
 		return nil, fmt.Errorf("could not get decrypted root key with keyID: %s, %v", rootKeyID, err)
 	}
 
-	signer := signed.NewSigner(NewCryptoService("", r.rootKeyStore, passphrase))
+	cryptoService := NewCryptoService("", r.rootKeyStore, passphrase)
 
-	return &UnlockedSigner{
-		privKey: privKey,
-		signer:  signer}, nil
+	return &UnlockedCryptoService{
+		privKey:       privKey,
+		cryptoService: cryptoService}, nil
 }
 
 func (r *NotaryRepository) loadKeys(trustDir, rootKeysDir string) error {
@@ -736,30 +733,30 @@ func (r *NotaryRepository) loadKeys(trustDir, rootKeysDir string) error {
 }
 
 // ID gets a consistent ID based on the PrivateKey bytes and algorithm type
-func (uk *UnlockedSigner) ID() string {
-	return uk.PublicKey().ID()
+func (ucs *UnlockedCryptoService) ID() string {
+	return ucs.PublicKey().ID()
 }
 
-// PublicKey Returns the public key associated with the Private Key within the Signer
-func (uk *UnlockedSigner) PublicKey() *data.PublicKey {
-	return data.PublicKeyFromPrivate(*uk.privKey)
+// PublicKey Returns the public key associated with the private key
+func (ucs *UnlockedCryptoService) PublicKey() *data.PublicKey {
+	return data.PublicKeyFromPrivate(*ucs.privKey)
 }
 
 // GenerateCertificate generates an X509 Certificate from a template, given a GUN
-func (uk *UnlockedSigner) GenerateCertificate(gun string) (*x509.Certificate, error) {
-	algorithm := uk.privKey.Algorithm()
+func (ucs *UnlockedCryptoService) GenerateCertificate(gun string) (*x509.Certificate, error) {
+	algorithm := ucs.privKey.Algorithm()
 	var publicKey crypto.PublicKey
 	var privateKey crypto.PrivateKey
 	var err error
 	switch algorithm {
 	case data.RSAKey:
 		var rsaPrivateKey *rsa.PrivateKey
-		rsaPrivateKey, err = x509.ParsePKCS1PrivateKey(uk.privKey.Private())
+		rsaPrivateKey, err = x509.ParsePKCS1PrivateKey(ucs.privKey.Private())
 		privateKey = rsaPrivateKey
 		publicKey = rsaPrivateKey.Public()
 	case data.ECDSAKey:
 		var ecdsaPrivateKey *ecdsa.PrivateKey
-		ecdsaPrivateKey, err = x509.ParseECPrivateKey(uk.privKey.Private())
+		ecdsaPrivateKey, err = x509.ParseECPrivateKey(ucs.privKey.Private())
 		privateKey = ecdsaPrivateKey
 		publicKey = ecdsaPrivateKey.Public()
 	default:

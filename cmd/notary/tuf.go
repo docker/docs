@@ -133,12 +133,12 @@ func tufInit(cmd *cobra.Command, args []string) {
 		}
 	}
 
-	rootSigner, err := nRepo.GetRootSigner(rootKeyID, passphrase)
+	rootCryptoService, err := nRepo.GetRootCryptoService(rootKeyID, passphrase)
 	if err != nil {
 		fatalf(err.Error())
 	}
 
-	nRepo.Initialize(rootSigner)
+	nRepo.Initialize(rootCryptoService)
 	if err != nil {
 		fatalf(err.Error())
 	}

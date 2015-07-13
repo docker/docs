@@ -66,10 +66,10 @@ func testInitRepo(t *testing.T, rootType data.KeyAlgorithm) {
 	rootKeyID, err := repo.GenRootKey(rootType.String(), "passphrase")
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootSigner, err := repo.GetRootSigner(rootKeyID, "passphrase")
+	rootCryptoService, err := repo.GetRootCryptoService(rootKeyID, "passphrase")
 	assert.NoError(t, err, "error retrieving root key: %s", err)
 
-	err = repo.Initialize(rootSigner)
+	err = repo.Initialize(rootCryptoService)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
 	// Inspect contents of the temporary directory
@@ -100,7 +100,7 @@ func testInitRepo(t *testing.T, rootType data.KeyAlgorithm) {
 	// Look for keys in root_keys
 	// There should be a file named after the key ID of the root key we
 	// passed in.
-	rootKeyFilename := rootSigner.ID() + ".key"
+	rootKeyFilename := rootCryptoService.ID() + ".key"
 	_, err = os.Stat(filepath.Join(tempBaseDir, "private", "root_keys", rootKeyFilename))
 	assert.NoError(t, err, "missing root key")
 
@@ -210,10 +210,10 @@ func testAddListTarget(t *testing.T, rootType data.KeyAlgorithm) {
 	rootKeyID, err := repo.GenRootKey(rootType.String(), "passphrase")
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootSigner, err := repo.GetRootSigner(rootKeyID, "passphrase")
+	rootCryptoService, err := repo.GetRootCryptoService(rootKeyID, "passphrase")
 	assert.NoError(t, err, "error retreiving root key: %s", err)
 
-	err = repo.Initialize(rootSigner)
+	err = repo.Initialize(rootCryptoService)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
 	// Add fixtures/ca.cert as a target. There's no particular reason
@@ -395,10 +395,10 @@ func testValidateRootKey(t *testing.T, rootType data.KeyAlgorithm) {
 	rootKeyID, err := repo.GenRootKey(rootType.String(), "passphrase")
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootSigner, err := repo.GetRootSigner(rootKeyID, "passphrase")
+	rootCryptoService, err := repo.GetRootCryptoService(rootKeyID, "passphrase")
 	assert.NoError(t, err, "error retreiving root key: %s", err)
 
-	err = repo.Initialize(rootSigner)
+	err = repo.Initialize(rootCryptoService)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
 	rootJSONFile := filepath.Join(tempBaseDir, "tuf", gun, "metadata", "root.json")

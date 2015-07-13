@@ -48,7 +48,7 @@ func GetOrCreateTimestampKey(gun string, store storage.MetaStore, crypto signed.
 // GetOrCreateTimestamp returns the current timestamp for the gun. This may mean
 // a new timestamp is generated either because none exists, or because the current
 // one has expired. Once generated, the timestamp is saved in the store.
-func GetOrCreateTimestamp(gun string, store storage.MetaStore, signer *signed.Signer) ([]byte, error) {
+func GetOrCreateTimestamp(gun string, store storage.MetaStore, cryptoService signed.CryptoService) ([]byte, error) {
 	d, err := store.GetCurrent(gun, "timestamp")
 	if err != nil {
 		if _, ok := err.(*storage.ErrNotFound); !ok {
@@ -69,7 +69,7 @@ func GetOrCreateTimestamp(gun string, store storage.MetaStore, signer *signed.Si
 			return d, nil
 		}
 	}
-	sgnd, version, err := createTimestamp(gun, ts, store, signer)
+	sgnd, version, err := createTimestamp(gun, ts, store, cryptoService)
 	if err != nil {
 		logrus.Error("Failed to create a new timestamp")
 		return nil, err
@@ -95,7 +95,7 @@ func timestampExpired(ts *data.SignedTimestamp) bool {
 // is assumed this is the immediately previous one, and the new one will have a
 // version number one higher than prev. The store is used to lookup the current
 // snapshot, this function does not save the newly generated timestamp.
-func createTimestamp(gun string, prev *data.SignedTimestamp, store storage.MetaStore, signer *signed.Signer) (*data.Signed, int, error) {
+func createTimestamp(gun string, prev *data.SignedTimestamp, store storage.MetaStore, cryptoService signed.CryptoService) (*data.Signed, int, error) {
 	algorithm, public, err := store.GetTimestampKey(gun)
 	if err != nil {
 		// owner of gun must have generated a timestamp key otherwise
@@ -128,7 +128,7 @@ func createTimestamp(gun string, prev *data.SignedTimestamp, store storage.MetaS
 		Signatures: ts.Signatures,
 		Signed:     sgndTs,
 	}
-	err = signer.Sign(out, key)
+	err = signed.Sign(cryptoService, out, key)
 	if err != nil {
 		return nil, 0, err
 	}

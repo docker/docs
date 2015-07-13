@@ -48,9 +48,6 @@ func (root *rootHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	ctx := context.WithValue(root.context, "repo", vars["imageName"])
 
-	// endophage: I don't guarantee that a signer will always be stateless but a CryptoService
-	// is expected to be. Create a new Signer for each request.
-	ctx = context.WithValue(ctx, "signer", signed.NewSigner(root.trust))
 	ctx = context.WithValue(ctx, "cryptoService", root.trust)
 
 	ctx = context.WithValue(ctx, "http.request", r)

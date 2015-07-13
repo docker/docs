@@ -48,7 +48,6 @@ func TestGetTimestampKey(t *testing.T) {
 func TestGetTimestamp(t *testing.T) {
 	store := storage.NewMemStorage()
 	crypto := signed.NewEd25519()
-	signer := signed.NewSigner(crypto)
 
 	snapshot := &data.SignedSnapshot{}
 	snapJSON, _ := json.Marshal(snapshot)
@@ -58,6 +57,6 @@ func TestGetTimestamp(t *testing.T) {
 	_, err := GetOrCreateTimestampKey("gun", store, crypto, data.ED25519Key)
 	assert.Nil(t, err, "GetTimestampKey errored")
 
-	_, err = GetOrCreateTimestamp("gun", store, signer)
+	_, err = GetOrCreateTimestamp("gun", store, crypto)
 	assert.Nil(t, err, "GetTimestamp errored")
 }
