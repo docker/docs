@@ -9,8 +9,8 @@ import (
 	"sort"
 	"time"
 
-	"code.google.com/p/go-uuid/uuid"
 	"github.com/Sirupsen/logrus"
+	"github.com/docker/distribution/uuid"
 )
 
 // FileChangelist stores all the changes as files
@@ -69,7 +69,7 @@ func (cl FileChangelist) Add(c Change) error {
 	if err != nil {
 		return err
 	}
-	filename := fmt.Sprintf("%020d_%s.change", time.Now().UnixNano(), uuid.New())
+	filename := fmt.Sprintf("%020d_%s.change", time.Now().UnixNano(), uuid.Generate())
 	return ioutil.WriteFile(path.Join(cl.dir, filename), cJSON, 0644)
 }
 

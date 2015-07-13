@@ -66,7 +66,7 @@ func (ac *accessController) Authorized(ctx context.Context, accessRecords ...aut
 		return nil, &challenge
 	}
 
-	return context.WithValue(ctx, "auth.user", auth.UserInfo{Name: "silly"}), nil
+	return auth.WithUser(ctx, auth.UserInfo{Name: "silly"}), nil
 }
 
 type challenge struct {
@@ -83,7 +83,6 @@ func (ch *challenge) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("WWW-Authenticate", header)
-	w.WriteHeader(http.StatusUnauthorized)
 }
 
 func (ch *challenge) Error() string {

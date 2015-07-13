@@ -8,14 +8,15 @@ import (
 	"sync"
 	"time"
 
-	"code.google.com/p/go-uuid/uuid"
 	log "github.com/Sirupsen/logrus"
+	"github.com/docker/distribution/uuid"
 	"github.com/gorilla/mux"
 )
 
 // Common errors used with this package.
 var (
-	ErrNoRequestContext = errors.New("no http request in context")
+	ErrNoRequestContext        = errors.New("no http request in context")
+	ErrNoResponseWriterContext = errors.New("no http response in context")
 )
 
 func parseIP(ipStr string) net.IP {
@@ -78,7 +79,7 @@ func WithRequest(ctx Context, r *http.Request) Context {
 	return &httpRequestContext{
 		Context:   ctx,
 		startedAt: time.Now(),
-		id:        uuid.New(), // assign the request a unique.
+		id:        uuid.Generate().String(),
 		r:         r,
 	}
 }
@@ -108,6 +109,20 @@ func WithResponseWriter(ctx Context, w http.ResponseWriter) (Context, http.Respo
 	}
 
 	return irw, irw
+}
+
+// GetResponseWriter returns the http.ResponseWriter from the provided
+// context. If not present, ErrNoResponseWriterContext is returned. The
+// returned instance provides instrumentation in the context.
+func GetResponseWriter(ctx Context) (http.ResponseWriter, error) {
+	v := ctx.Value("http.response")
+
+	rw, ok := v.(http.ResponseWriter)
+	if !ok || rw == nil {
+		return nil, ErrNoResponseWriterContext
+	}
+
+	return rw, nil
 }
 
 // getVarsFromRequest let's us change request vars implementation for testing
@@ -287,7 +302,7 @@ func (irw *instrumentedResponseWriter) Flush() {
 func (irw *instrumentedResponseWriter) Value(key interface{}) interface{} {
 	if keyStr, ok := key.(string); ok {
 		if keyStr == "http.response" {
-			return irw.ResponseWriter
+			return irw
 		}
 
 		if !strings.HasPrefix(keyStr, "http.response.") {
@@ -307,9 +322,7 @@ func (irw *instrumentedResponseWriter) Value(key interface{}) interface{} {
 		case "written":
 			return irw.written
 		case "status":
-			if irw.status != 0 {
-				return irw.status
-			}
+			return irw.status
 		case "contenttype":
 			contentType := irw.Header().Get("Content-Type")
 			if contentType != "" {
