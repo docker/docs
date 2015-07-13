@@ -38,8 +38,8 @@ func NewMySQLStorage(db *sql.DB) *MySQLStorage {
 
 // UpdateCurrent updates multiple TUF records in a single transaction.
 // Always insert a new row. The unique constraint will ensure there is only ever
-func (db *MySQLStorage) UpdateCurrent(gun, update MetaUpdate) error {
-	insertStmt := "INSERT INTO `tuf_files` (`gun`, `role`, `version`, `data`) VALUES (?,?,?,?) WHERE (SELECT count(*) FROM `tuf_files` WHERE `gun`=? AND `role`=? AND `version`>=?) = 0;"
+func (db *MySQLStorage) UpdateCurrent(gun string, update MetaUpdate) error {
+	insertStmt := "INSERT INTO `tuf_files` (`gun`, `role`, `version`, `data`) VALUES (?,?,?,?) WHERE (SELECT count(*) FROM `tuf_files` WHERE `gun`=? AND `role`=? AND `version`>=?) = 0"
 
 	// attempt to insert. Due to race conditions with the check this could fail.
 	// That's OK, we're doing first write wins. The client will be messaged it
@@ -67,7 +67,7 @@ func (db *MySQLStorage) UpdateMany(gun string, updates []MetaUpdate) error {
 		// attempt to insert. Due to race conditions with the check this could fail.
 		// That's OK, we're doing first write wins. The client will be messaged it
 		// needs to rebase.
-		_, err = tx.Exec(insertStmt, gun, u.Role, u.Version, u.Data, u.Role, u.Version)
+		_, err = tx.Exec(insertStmt, gun, u.Role, u.Version, u.Data, gun, u.Role, u.Version)
 		if err != nil {
 			// need to check error type for duplicate key exception
 			// and return ErrOldVersion if duplicate
@@ -119,7 +119,7 @@ func (db *MySQLStorage) GetTimestampKey(gun string) (algorithm data.KeyAlgorithm
 	var cipher string
 	err = row.Scan(&cipher, &public)
 	if err == sql.ErrNoRows {
-		return "", nil, ErrNoKey{gun: gun}
+		return "", nil, &ErrNoKey{gun: gun}
 	} else if err != nil {
 		return "", nil, err
 	}
@@ -131,11 +131,10 @@ func (db *MySQLStorage) GetTimestampKey(gun string) (algorithm data.KeyAlgorithm
 func (db *MySQLStorage) SetTimestampKey(gun string, algorithm data.KeyAlgorithm, public []byte) error {
 	stmt := "INSERT INTO `timestamp_keys` (`gun`, `cipher`, `public`) VALUES (?,?,?);"
 	_, err := db.Exec(stmt, gun, string(algorithm), public)
-	if err, ok := err.(*mysql.MySQLError); ok {
-		if err.Number == 1022 { // duplicate key error
+	if err != nil {
+		if err, ok := err.(*mysql.MySQLError); ok && err.Number == 1022 {
 			return &ErrTimestampKeyExists{gun: gun}
 		}
-	} else if err != nil {
 		return err
 	}
 	return nil
