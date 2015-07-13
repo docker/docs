@@ -655,8 +655,8 @@ func (r *NotaryRepository) ListRootKeys() []string {
 	return r.rootKeyStore.ListKeys()
 }
 
-// TODO(diogo): show not create keys manually, should use a cryptoservice instead
 // GenRootKey generates a new root key protected by a given passphrase
+// TODO(diogo): show not create keys manually, should use a cryptoservice instead
 func (r *NotaryRepository) GenRootKey(algorithm, passphrase string) (string, error) {
 	var err error
 	var privKey *data.PrivateKey

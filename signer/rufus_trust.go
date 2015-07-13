@@ -61,8 +61,8 @@ func (trust *RufusSigner) Sign(keyIDs []string, toSign []byte) ([]data.Signature
 	return signatures, nil
 }
 
-// TODO(diogo): Ignoring algorithm for now until rufus supports it
 // Create creates a remote key and returns the PublicKey associated with the remote private key
+// TODO(diogo): Ignoring algorithm for now until rufus supports it
 func (trust *RufusSigner) Create(role string, _ data.KeyAlgorithm) (*data.PublicKey, error) {
 	publicKey, err := trust.kmClient.CreateKey(context.Background(), &pb.Void{})
 	if err != nil {
