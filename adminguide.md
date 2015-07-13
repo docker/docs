@@ -317,8 +317,8 @@ The zip file will contain the following information:
 
 If you need to stop and/or start DTR (for upgrading, troubleshooting, etc.), use the following commands:
 
-`sudo bash -d "$(docker run docker/trusted-registry stop)"`
-`sudo bash -d "$(docker run docker/trusted-registry start)"`
+`sudo bash -c "$(docker run docker/trusted-registry stop)"`
+`sudo bash -c "$(docker run docker/trusted-registry start)"`
 
 ## Next Steps
 
