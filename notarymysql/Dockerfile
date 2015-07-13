@@ -7,6 +7,7 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
 
 ADD start /start
+ADD initial.sql /initial.sql
 RUN chmod 755 /start
 
 EXPOSE 3306

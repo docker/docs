@@ -104,26 +104,7 @@ if [ -n "${DB_USER}" -o -n "${DB_NAME}" ]; then
           -e "GRANT ALL PRIVILEGES ON \`$db\`.* TO '${DB_USER}' IDENTIFIED BY '${DB_PASS}';"
         fi
         # Create our Database:
-
-		# Create tuf_files table
-        mysql -uroot -e "USE \`$db\`; DROP TABLE IF EXISTS \`$DB_TABLE_FILES\`;"
-        mysql -uroot -e "USE \`$db\`; CREATE TABLE \`$DB_TABLE_FILES\` (
-                    \`id\` int(11) NOT NULL AUTO_INCREMENT,
-                    \`gun\` varchar(255) NOT NULL,
-                    \`role\` varchar(255) NOT NULL,
-                    \`version\` int(11) NOT NULL,
-                    \`data\` longblob NOT NULL,
-                    PRIMARY KEY (\`id\`),
-                    UNIQUE KEY \`gun\` (\`gun\`,\`role\`,\`version\`)
-                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
-        # Create timestamp_keys table
-        mysql -uroot -e "USE \`$db\`; DROP TABLE IF EXISTS \`$DB_TABLE_KEYS\`;"
-        mysql -uroot -e "USE \`$db\`; CREATE TABLE \`$DB_TABLE_KEYS\` (
-                    \`gun\` varchar(255) NOT NULL,
-                    \`cipher\` int(11) NOT NULL,
-                    \`public\` blob NOT NULL,
-                    PRIMARY KEY (\`gun\`)
-                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
+		mysql -uroot $db < ./initial.sql
       done
   fi
   /usr/bin/mysqladmin --defaults-file=/etc/mysql/debian.cnf shutdown
