@@ -50,21 +50,21 @@ func (err *ErrNotLoaded) Error() string {
 // fetching raw JSON and using the Set* functions to populate
 // the TufRepo instance.
 type TufRepo struct {
-	Root      *data.SignedRoot
-	Targets   map[string]*data.SignedTargets
-	Snapshot  *data.SignedSnapshot
-	Timestamp *data.SignedTimestamp
-	keysDB    *keys.KeyDB
-	signer    *signed.Signer
+	Root          *data.SignedRoot
+	Targets       map[string]*data.SignedTargets
+	Snapshot      *data.SignedSnapshot
+	Timestamp     *data.SignedTimestamp
+	keysDB        *keys.KeyDB
+	cryptoService signed.CryptoService
 }
 
 // NewTufRepo initializes a TufRepo instance with a keysDB and a signer.
 // If the TufRepo will only be used for reading, the signer should be nil.
-func NewTufRepo(keysDB *keys.KeyDB, signer *signed.Signer) *TufRepo {
+func NewTufRepo(keysDB *keys.KeyDB, cryptoService signed.CryptoService) *TufRepo {
 	repo := &TufRepo{
-		Targets: make(map[string]*data.SignedTargets),
-		keysDB:  keysDB,
-		signer:  signer,
+		Targets:       make(map[string]*data.SignedTargets),
+		keysDB:        keysDB,
+		cryptoService: cryptoService,
 	}
 	return repo
 }
@@ -75,7 +75,7 @@ func (tr *TufRepo) AddBaseKeys(role string, keys ...data.Key) error {
 		return &ErrNotLoaded{role: "root"}
 	}
 	for _, k := range keys {
-		key := data.NewPublicKey(k.Cipher(), k.Public())
+		key := data.NewPublicKey(k.Algorithm(), k.Public())
 		tr.Root.Signed.Keys[key.ID()] = key
 		tr.keysDB.AddKey(key)
 		tr.Root.Signed.Roles[role].KeyIDs = append(tr.Root.Signed.Roles[role].KeyIDs, key.ID())
@@ -142,7 +142,7 @@ func (tr *TufRepo) UpdateDelegations(role *data.Role, keys []data.Key, before st
 		return errors.ErrInvalidRole{}
 	}
 	for _, k := range keys {
-		key := data.NewPublicKey(k.Cipher(), k.Public())
+		key := data.NewPublicKey(k.Algorithm(), k.Public())
 		if !utils.StrSliceContains(role.KeyIDs, key.ID()) {
 			role.KeyIDs = append(role.KeyIDs, key.ID())
 		}
@@ -203,7 +203,7 @@ func (tr *TufRepo) InitRoot(consistent bool) error {
 			// checked by KeyDB when role was added.
 			key := tr.keysDB.GetKey(kid)
 			// Create new key object to doubly ensure private key is excluded
-			k := data.NewPublicKey(key.Cipher(), key.Public())
+			k := data.NewPublicKey(key.Algorithm(), key.Public())
 			rootKeys[kid] = k
 		}
 	}
@@ -449,7 +449,7 @@ func (tr *TufRepo) UpdateTimestamp(s *data.Signed) error {
 	return nil
 }
 
-func (tr *TufRepo) SignRoot(expires time.Time, signer *signed.Signer) (*data.Signed, error) {
+func (tr *TufRepo) SignRoot(expires time.Time, cryptoService signed.CryptoService) (*data.Signed, error) {
 	logrus.Debug("signing root...")
 	if tr.Root.Dirty {
 		tr.Root.Signed.Version++
@@ -459,7 +459,7 @@ func (tr *TufRepo) SignRoot(expires time.Time, signer *signed.Signer) (*data.Sig
 	if err != nil {
 		return nil, err
 	}
-	signed, err = tr.sign(signed, *root, signer)
+	signed, err = tr.sign(signed, *root, cryptoService)
 	if err != nil {
 		return nil, err
 	}
@@ -467,7 +467,7 @@ func (tr *TufRepo) SignRoot(expires time.Time, signer *signed.Signer) (*data.Sig
 	return signed, nil
 }
 
-func (tr *TufRepo) SignTargets(role string, expires time.Time, signer *signed.Signer) (*data.Signed, error) {
+func (tr *TufRepo) SignTargets(role string, expires time.Time, cryptoService signed.CryptoService) (*data.Signed, error) {
 	logrus.Debugf("sign targets called for role %s", role)
 	if tr.Targets[role].Dirty {
 		tr.Targets[role].Signed.Version++
@@ -477,7 +477,7 @@ func (tr *TufRepo) SignTargets(role string, expires time.Time, signer *signed.Si
 			return nil, err
 		}
 		targets := tr.keysDB.GetRole(role)
-		signed, err = tr.sign(signed, *targets, signer)
+		signed, err = tr.sign(signed, *targets, cryptoService)
 		if err != nil {
 			logrus.Debug("errored signing ", role)
 			return nil, err
@@ -494,10 +494,10 @@ func (tr *TufRepo) SignTargets(role string, expires time.Time, signer *signed.Si
 	}
 }
 
-func (tr *TufRepo) SignSnapshot(expires time.Time, signer *signed.Signer) (*data.Signed, error) {
+func (tr *TufRepo) SignSnapshot(expires time.Time, cryptoService signed.CryptoService) (*data.Signed, error) {
 	logrus.Debug("signing snapshot...")
 	if tr.Root.Dirty {
-		signedRoot, err := tr.SignRoot(data.DefaultExpires("root"), signer)
+		signedRoot, err := tr.SignRoot(data.DefaultExpires("root"), cryptoService)
 		if err != nil {
 			return nil, err
 		}
@@ -511,7 +511,7 @@ func (tr *TufRepo) SignSnapshot(expires time.Time, signer *signed.Signer) (*data
 		if !targets.Dirty {
 			continue
 		}
-		signedTargets, err := tr.SignTargets(role, data.DefaultExpires("targets"), signer)
+		signedTargets, err := tr.SignTargets(role, data.DefaultExpires("targets"), cryptoService)
 		if err != nil {
 			return nil, err
 		}
@@ -528,7 +528,7 @@ func (tr *TufRepo) SignSnapshot(expires time.Time, signer *signed.Signer) (*data
 			return nil, err
 		}
 		snapshot := tr.keysDB.GetRole(data.ValidRoles["snapshot"])
-		signed, err = tr.sign(signed, *snapshot, signer)
+		signed, err = tr.sign(signed, *snapshot, cryptoService)
 		if err != nil {
 			return nil, err
 		}
@@ -543,10 +543,10 @@ func (tr *TufRepo) SignSnapshot(expires time.Time, signer *signed.Signer) (*data
 	}
 }
 
-func (tr *TufRepo) SignTimestamp(expires time.Time, signer *signed.Signer) (*data.Signed, error) {
+func (tr *TufRepo) SignTimestamp(expires time.Time, cryptoService signed.CryptoService) (*data.Signed, error) {
 	logrus.Debug("SignTimestamp")
 	if tr.Snapshot.Dirty {
-		signedSnapshot, err := tr.SignSnapshot(data.DefaultExpires("snapshot"), signer)
+		signedSnapshot, err := tr.SignSnapshot(data.DefaultExpires("snapshot"), cryptoService)
 		if err != nil {
 			return nil, err
 		}
@@ -562,7 +562,7 @@ func (tr *TufRepo) SignTimestamp(expires time.Time, signer *signed.Signer) (*dat
 			return nil, err
 		}
 		timestamp := tr.keysDB.GetRole(data.ValidRoles["timestamp"])
-		signed, err = tr.sign(signed, *timestamp, signer)
+		signed, err = tr.sign(signed, *timestamp, cryptoService)
 		if err != nil {
 			return nil, err
 		}
@@ -578,7 +578,7 @@ func (tr *TufRepo) SignTimestamp(expires time.Time, signer *signed.Signer) (*dat
 	}
 }
 
-func (tr TufRepo) sign(signed *data.Signed, role data.Role, signer *signed.Signer) (*data.Signed, error) {
+func (tr TufRepo) sign(signedData *data.Signed, role data.Role, cryptoService signed.CryptoService) (*data.Signed, error) {
 	ks := make([]*data.PublicKey, 0, len(role.KeyIDs))
 	for _, kid := range role.KeyIDs {
 		k := tr.keysDB.GetKey(kid)
@@ -590,16 +590,12 @@ func (tr TufRepo) sign(signed *data.Signed, role data.Role, signer *signed.Signe
 	if len(ks) < 1 {
 		return nil, keys.ErrInvalidKey
 	}
-	if signer != nil {
-		err := signer.Sign(signed, ks...)
-		if err != nil {
-			return nil, err
-		}
-	} else {
-		err := tr.signer.Sign(signed, ks...)
-		if err != nil {
-			return nil, err
-		}
+	if cryptoService == nil {
+		cryptoService = tr.cryptoService
 	}
-	return signed, nil
+	err := signed.Sign(cryptoService, signedData, ks...)
+	if err != nil {
+		return nil, err
+	}
+	return signedData, nil
 }

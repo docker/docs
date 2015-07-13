@@ -13,21 +13,20 @@ import (
 	"github.com/endophage/gotuf/signed"
 )
 
-func initRepo(t *testing.T, signer *signed.Signer, keyDB *keys.KeyDB) *TufRepo {
-
-	rootKey, err := signer.Create("root")
+func initRepo(t *testing.T, cryptoService signed.CryptoService, keyDB *keys.KeyDB) *TufRepo {
+	rootKey, err := cryptoService.Create("root", data.ED25519Key)
 	if err != nil {
 		t.Fatal(err)
 	}
-	targetsKey, err := signer.Create("targets")
+	targetsKey, err := cryptoService.Create("targets", data.ED25519Key)
 	if err != nil {
 		t.Fatal(err)
 	}
-	snapshotKey, err := signer.Create("snapshot")
+	snapshotKey, err := cryptoService.Create("snapshot", data.ED25519Key)
 	if err != nil {
 		t.Fatal(err)
 	}
-	timestampKey, err := signer.Create("timestamp")
+	timestampKey, err := cryptoService.Create("timestamp", data.ED25519Key)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -71,7 +70,7 @@ func initRepo(t *testing.T, signer *signed.Signer, keyDB *keys.KeyDB) *TufRepo {
 	keyDB.AddRole(snapshotRole)
 	keyDB.AddRole(timestampRole)
 
-	repo := NewTufRepo(keyDB, signer)
+	repo := NewTufRepo(keyDB, cryptoService)
 	err = repo.InitRepo(false)
 	if err != nil {
 		t.Fatal(err)
@@ -124,19 +123,17 @@ func writeRepo(t *testing.T, dir string, repo *TufRepo) {
 
 func TestInitRepo(t *testing.T) {
 	ed25519 := signed.NewEd25519()
-	signer := signed.NewSigner(ed25519)
 	keyDB := keys.NewDB()
-	repo := initRepo(t, signer, keyDB)
+	repo := initRepo(t, ed25519, keyDB)
 	writeRepo(t, "/tmp/tufrepo", repo)
 }
 
 func TestUpdateDelegations(t *testing.T) {
 	ed25519 := signed.NewEd25519()
-	signer := signed.NewSigner(ed25519)
 	keyDB := keys.NewDB()
-	repo := initRepo(t, signer, keyDB)
+	repo := initRepo(t, ed25519, keyDB)
 
-	testKey, err := signer.Create("targets/test")
+	testKey, err := ed25519.Create("targets/test", data.ED25519Key)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -150,7 +147,7 @@ func TestUpdateDelegations(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	testDeepKey, err := signer.Create("targets/test/deep")
+	testDeepKey, err := ed25519.Create("targets/test/deep", data.ED25519Key)
 	if err != nil {
 		t.Fatal(err)
 	}

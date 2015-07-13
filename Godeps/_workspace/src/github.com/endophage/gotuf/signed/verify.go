@@ -3,7 +3,6 @@ package signed
 import (
 	"encoding/json"
 	"errors"
-	"strings"
 	"time"
 
 	"github.com/Sirupsen/logrus"
@@ -45,8 +44,8 @@ func VerifyRoot(s *data.Signed, minVersion int, keys map[string]*data.PublicKey,
 
 	valid := make(map[string]struct{})
 	for _, sig := range s.Signatures {
-		// make method lookup consistent with case uniformity.
-		method := strings.ToLower(sig.Method)
+		// method lookup is consistent due to Unmarshal JSON doing lower case for us.
+		method := sig.Method
 		verifier, ok := Verifiers[method]
 		if !ok {
 			logrus.Debugf("continuing b/c signing method is not supported for verify root: %s\n", sig.Method)
@@ -133,8 +132,8 @@ func VerifySignatures(s *data.Signed, role string, db *keys.KeyDB) error {
 			logrus.Debugf("continuing b/c keyid lookup was nil: %s\n", sig.KeyID)
 			continue
 		}
-		// make method lookup consistent with case uniformity.
-		method := strings.ToLower(sig.Method)
+		// method lookup is consistent due to Unmarshal JSON doing lower case for us.
+		method := sig.Method
 		verifier, ok := Verifiers[method]
 		if !ok {
 			logrus.Debugf("continuing b/c signing method is not supported: %s\n", sig.Method)
