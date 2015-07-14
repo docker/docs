@@ -2,7 +2,7 @@
 <installer-gui-script minSpecVersion="1">
     <title>docker_title</title>
     <options customize="allow" allow-external-scripts="yes" rootVolumeOnly="true" hostArchitectures="i386"/>
-    <domains enable_anywhere="false" enable_currentUserHome="false" enable_localSystem="true"/>
+    <domains enable_localSystem="true"/>
     <background file="toolbox.png" alignment="bottomleft" scaling="none"/>
     <welcome file="Welcome.html" mime-type="text/html"/>
     <conclusion file="Installed.html" mime-type="text/html"/>

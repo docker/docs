@@ -290,14 +290,18 @@ table {
   -ms-flex-flow: row wrap;
   flex-flow: row wrap;
 }
+.content .items .item {
+  text-align: center;
+}
 .content .items .item img {
   width: 100px;
   height: auto;
 }
 .content .items .item .info {
-  padding-right: 1rem;
+  padding-right: 1.5rem;
 }
 .content .documentation {
+  text-align: center;
   padding: 2rem 0;
 }
 .content .documentation h3 {
@@ -309,8 +313,7 @@ table {
 }
 .content .documentation .cta .btn {
   display: inline-block;
-  margin-right: 1rem;
-  margin-bottom: 1rem;
+  margin: 0.5rem;
   transition: all 100ms;
   background-color: #ff992e;
   box-shadow: 0.4rem 0.4rem 0 rgba(0, 0, 0, 0.05);
@@ -348,8 +351,8 @@ table {
 }
 @media screen and (min-width: 500px) {
   .items .item {
-    max-width: 20%;
-    min-width: 140px;
+    max-width: 25%;
+    min-width: 160px;
   }
 }
 .footer {

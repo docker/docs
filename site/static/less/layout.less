@@ -142,16 +142,18 @@
     .flex-display();
     .flex-flow(row wrap);
     .item {
+      text-align: center;
       img {
         width: 100px;
         height: auto;
       }
       .info {
-        padding-right: 1rem;
+        padding-right: 1.5rem;
       }
     }
   }
   .documentation {
+    text-align: center;
     padding: 2rem 0;
     h3 {
       color: fade(white, 70%);
@@ -161,8 +163,7 @@
       padding: 1rem 0 0 0;
       .btn {
         display: inline-block;
-        margin-right: 1rem;
-        margin-bottom: 1rem;
+        margin: 0.5rem;
         transition: all 100ms;
         background-color: @brand-orange;
         box-shadow: 0.4rem 0.4rem 0 fade(black, 5%);
@@ -212,8 +213,8 @@
 @media screen and (min-width: 500px) {
   .items {
     .item {
-      max-width: 20%;
-      min-width: 140px;
+      max-width: 25%;
+      min-width: 160px;
     }
   }
 }

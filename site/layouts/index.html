@@ -34,28 +34,21 @@
         <div class="info">
           <img src="{{.Site.BaseURL}}/images/engine.png">
           <h3>Docker Engine</h3>
-          <p>Creates and runs Docker containers.</p>
+          <p>Create and runs Docker containers.</p>
         </div>
       </div>
       <div class="item">
         <div class="info">
           <img src="{{.Site.BaseURL}}/images/machine.png">
           <h3>Docker Machine</h3>
-          <p>Provisions Docker to local or remote machines.</p>
+          <p>Provision Docker-ready local or remote machines.</p>
         </div>
       </div>
       <div class="item">
         <div class="info">
           <img src="{{.Site.BaseURL}}/images/compose.png">
           <h3>Docker Compose</h3>
-          <p>Define multi-container applications. (Mac OS X only)</p>
-        </div>
-      </div>
-      <div class="item">
-        <div class="info">
-          <img src="{{.Site.BaseURL}}/images/swarm.png">
-          <h3>Docker Swarm</h3>
-          <p>Host clustering and container scheduling.</p>
+          <p>Define multi-container applications. (OS X only)</p>
         </div>
       </div>
       <div class="item">
@@ -92,7 +85,7 @@
           <ol>
             <li>Open a terminal or the Docker CLI on your system.</li>
             <li>Type the following command.<br>
-                <pre>docker-machine create -d virtualbox --virtualbox-import-boot2docker-vm boot2docker-vm docker-vm</pre>
+                <pre>docker-machine create -d virtualbox --virtualbox-import-boot2docker-vm boot2docker-vm dev</pre>
             </li>
             <li>Use the <code>docker-machine</code> command to interact with the migrated VM.  </li>
           </ol>
