@@ -1,7 +1,7 @@
-Boot2Docker for Mac OS X Installer
+Docker Toolbox for Mac OS X
 =============
 
-Installation [instructions](http://docs.docker.io/installation/mac/) available on the Docker documentation site.
+Installation [instructions](https://docs.docker.com/mac/started/) available on the Docker documentation site.
 
 How to build
 ============
