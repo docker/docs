@@ -78,7 +78,7 @@ func buildAccessRecords(repo string, actions ...string) []auth.Access {
 	for _, action := range actions {
 		requiredAccess = append(requiredAccess, auth.Access{
 			Resource: auth.Resource{
-				Type: "repo",
+				Type: "repository",
 				Name: repo,
 			},
 			Action: action,
