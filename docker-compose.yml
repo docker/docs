@@ -12,6 +12,8 @@ notarysigner:
    - /var/run/pcscd/pcscd.comm:/var/run/pcscd/pcscd.comm
   build: .
   dockerfile: notary-signer-Dockerfile
+  links:
+   - notarymysql
 notarymysql:
   build: ./notarymysql/
   ports:
