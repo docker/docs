@@ -9,7 +9,7 @@ import (
 
 func TestUpdateCurrent(t *testing.T) {
 	s := NewMemStorage()
-	s.UpdateCurrent("gun", "role", 1, []byte("test"))
+	s.UpdateCurrent("gun", MetaUpdate{"role", 1, []byte("test")})
 
 	k := entryKey("gun", "role")
 	gun, ok := s.tufMeta[k]
@@ -25,7 +25,7 @@ func TestGetCurrent(t *testing.T) {
 	_, err := s.GetCurrent("gun", "role")
 	assert.IsType(t, &ErrNotFound{}, err, "Expected error to be ErrNotFound")
 
-	s.UpdateCurrent("gun", "role", 1, []byte("test"))
+	s.UpdateCurrent("gun", MetaUpdate{"role", 1, []byte("test")})
 	d, err := s.GetCurrent("gun", "role")
 	assert.Nil(t, err, "Expected error to be nil")
 	assert.Equal(t, []byte("test"), d, "Data was incorrect")
@@ -33,7 +33,7 @@ func TestGetCurrent(t *testing.T) {
 
 func TestDelete(t *testing.T) {
 	s := NewMemStorage()
-	s.UpdateCurrent("gun", "role", 1, []byte("test"))
+	s.UpdateCurrent("gun", MetaUpdate{"role", 1, []byte("test")})
 	s.Delete("gun")
 
 	k := entryKey("gun", "role")

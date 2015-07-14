@@ -1,10 +1,13 @@
 package handlers
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"net/http"
+	"strings"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/endophage/gotuf/data"
@@ -30,6 +33,86 @@ func MainHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *e
 			HTTPStatus: http.StatusNotFound,
 			Code:       9999,
 			Err:        nil,
+		}
+	}
+	return nil
+}
+
+// AtomicUpdateHandler will accept multiple TUF files and ensure that the storage
+// backend is atomically updated with all the new records.
+func AtomicUpdateHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
+	defer r.Body.Close()
+	s := ctx.Value("metaStore")
+	if s == nil {
+		return &errors.HTTPError{
+			HTTPStatus: http.StatusInternalServerError,
+			Code:       9999,
+			Err:        fmt.Errorf("Version store is nil"),
+		}
+	}
+	store, ok := s.(storage.MetaStore)
+	if !ok {
+		return &errors.HTTPError{
+			HTTPStatus: http.StatusInternalServerError,
+			Code:       9999,
+			Err:        fmt.Errorf("Version store not configured"),
+		}
+	}
+	vars := mux.Vars(r)
+	gun := vars["imageName"]
+	reader, err := r.MultipartReader()
+	if err != nil {
+		return &errors.HTTPError{
+			HTTPStatus: http.StatusBadRequest,
+			Code:       9999,
+			Err:        err,
+		}
+	}
+	var updates []storage.MetaUpdate
+	for {
+		part, err := reader.NextPart()
+		if err == io.EOF {
+			break
+		}
+		role := strings.TrimSuffix(part.FileName(), ".json")
+		if role == "" {
+			return &errors.HTTPError{
+				HTTPStatus: http.StatusBadRequest,
+				Code:       9999,
+				Err:        fmt.Errorf("Empty filename provided. No updates performed"),
+			}
+		} else if !data.ValidRole(role) {
+			return &errors.HTTPError{
+				HTTPStatus: http.StatusBadRequest,
+				Code:       9999,
+				Err:        fmt.Errorf("Invalid role: %s. No updates performed", role),
+			}
+		}
+		meta := &data.SignedTargets{}
+		var input []byte
+		inBuf := bytes.NewBuffer(input)
+		dec := json.NewDecoder(io.TeeReader(part, inBuf))
+		err = dec.Decode(meta)
+		if err != nil {
+			return &errors.HTTPError{
+				HTTPStatus: http.StatusBadRequest,
+				Code:       9999,
+				Err:        err,
+			}
+		}
+		version := meta.Signed.Version
+		updates = append(updates, storage.MetaUpdate{
+			Role:    role,
+			Version: version,
+			Data:    inBuf.Bytes(),
+		})
+	}
+	err = store.UpdateMany(gun, updates)
+	if err != nil {
+		return &errors.HTTPError{
+			HTTPStatus: http.StatusInternalServerError,
+			Code:       9999,
+			Err:        err,
 		}
 	}
 	return nil
@@ -74,8 +157,12 @@ func UpdateHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) 
 			Err:        err,
 		}
 	}
-	version := meta.Signed.Version
-	err = store.UpdateCurrent(gun, tufRole, version, input)
+	update := storage.MetaUpdate{
+		Role:    tufRole,
+		Version: meta.Signed.Version,
+		Data:    input,
+	}
+	err = store.UpdateCurrent(gun, update)
 	if err != nil {
 		return &errors.HTTPError{
 			HTTPStatus: http.StatusInternalServerError,

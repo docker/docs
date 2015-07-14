@@ -10,6 +10,11 @@
 			"Rev": "bd2bdf7f18f849530ef7a1c29a4290217cab32a1"
 		},
 		{
+			"ImportPath": "github.com/DATA-DOG/go-sqlmock",
+			"Comment": "0.1.0-8-ged4836e",
+			"Rev": "ed4836e31d3e9e77420e442ed9b864df55370ee0"
+		},
+		{
 			"ImportPath": "github.com/Sirupsen/logrus",
 			"Comment": "v0.7.3",
 			"Rev": "55eb11d21d2a31a3cc93838241d04800f52e823d"
