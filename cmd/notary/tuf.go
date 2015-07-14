@@ -110,7 +110,7 @@ func tufInit(cmd *cobra.Command, args []string) {
 		fatalf(err.Error())
 	}
 
-	keysList := nRepo.ListRootKeys()
+	keysList := nRepo.KeyStoreManager.RootKeyStore().ListKeys()
 	var passphrase string
 	var rootKeyID string
 	if len(keysList) < 1 {

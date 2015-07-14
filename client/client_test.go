@@ -91,7 +91,7 @@ func testInitRepo(t *testing.T, rootType data.KeyAlgorithm) {
 
 	// Look for keys in private. The filenames should match the key IDs
 	// in the private key store.
-	privKeyList := repo.privKeyStore.ListFiles(true)
+	privKeyList := repo.KeyStoreManager.NonRootKeyStore().ListFiles(true)
 	for _, privKeyName := range privKeyList {
 		_, err := os.Stat(privKeyName)
 		assert.NoError(t, err, "missing private key: %s", privKeyName)
@@ -309,7 +309,7 @@ func testAddListTarget(t *testing.T, rootType data.KeyAlgorithm) {
 	var tempKey data.PrivateKey
 	json.Unmarshal([]byte(timestampECDSAKeyJSON), &tempKey)
 
-	repo.privKeyStore.AddKey(filepath.Join(gun, tempKey.ID()), &tempKey)
+	repo.KeyStoreManager.NonRootKeyStore().AddKey(filepath.Join(gun, tempKey.ID()), &tempKey)
 
 	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/root.json", func(w http.ResponseWriter, r *http.Request) {
 		rootJSONFile := filepath.Join(tempBaseDir, "tuf", gun, "metadata", "root.json")

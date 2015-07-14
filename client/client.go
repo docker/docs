@@ -20,6 +20,7 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary/client/changelist"
+	"github.com/docker/notary/keystoremanager"
 	"github.com/docker/notary/trustmanager"
 	"github.com/endophage/gotuf"
 	tufclient "github.com/endophage/gotuf/client"
@@ -44,9 +45,7 @@ func (err *ErrRepoNotInitialized) Error() string {
 // Default paths should end with a '/' so directory creation works correctly
 const (
 	trustDir       string = "/trusted_certificates/"
-	privDir        string = "/private/"
 	tufDir         string = "/tuf/"
-	rootKeysDir    string = privDir + "/root_keys/"
 	rsaKeySize     int    = 2048 // Used for snapshots and targets keys
 	rsaRootKeySize int    = 4096 // Used for new root keys
 )
@@ -75,9 +74,8 @@ type NotaryRepository struct {
 	fileStore        store.MetadataStore
 	cryptoService    signed.CryptoService
 	tufRepo          *tuf.TufRepo
-	privKeyStore     *trustmanager.KeyFileStore
-	rootKeyStore     *trustmanager.KeyFileStore
 	roundTrip        http.RoundTripper
+	KeyStoreManager  *keystoremanager.KeyStoreManager
 }
 
 // Target represents a simplified version of the data TUF operates on, so external
@@ -108,26 +106,25 @@ func NewTarget(targetName string, targetPath string) (*Target, error) {
 // (usually ~/.docker/trust/).
 func NewNotaryRepository(baseDir, gun, baseURL string, rt http.RoundTripper) (*NotaryRepository, error) {
 	trustDir := filepath.Join(baseDir, trustDir)
-	rootKeysDir := filepath.Join(baseDir, rootKeysDir)
 
-	privKeyStore, err := trustmanager.NewKeyFileStore(filepath.Join(baseDir, privDir))
+	keyStoreManager, err := keystoremanager.NewKeyStoreManager(baseDir)
 	if err != nil {
 		return nil, err
 	}
 
-	cryptoService := NewCryptoService(gun, privKeyStore, "")
+	cryptoService := NewCryptoService(gun, keyStoreManager.NonRootKeyStore(), "")
 
 	nRepo := &NotaryRepository{
-		gun:           gun,
-		baseDir:       baseDir,
-		baseURL:       baseURL,
-		tufRepoPath:   filepath.Join(baseDir, tufDir, gun),
-		cryptoService: cryptoService,
-		privKeyStore:  privKeyStore,
-		roundTrip:     rt,
+		gun:             gun,
+		baseDir:         baseDir,
+		baseURL:         baseURL,
+		tufRepoPath:     filepath.Join(baseDir, tufDir, gun),
+		cryptoService:   cryptoService,
+		roundTrip:       rt,
+		KeyStoreManager: keyStoreManager,
 	}
 
-	if err := nRepo.loadKeys(trustDir, rootKeysDir); err != nil {
+	if err := nRepo.loadKeys(trustDir); err != nil {
 		return nil, err
 	}
 
@@ -166,7 +163,7 @@ func (r *NotaryRepository) Initialize(uCryptoService *UnlockedCryptoService) err
 	// is associated with. This is used to be able to retrieve the root private key
 	// associated with a particular certificate
 	logrus.Debugf("Linking %s to %s.", rootKey.ID(), uCryptoService.ID())
-	err = r.rootKeyStore.Link(uCryptoService.ID(), rootKey.ID())
+	err = r.KeyStoreManager.RootKeyStore().Link(uCryptoService.ID(), rootKey.ID())
 	if err != nil {
 		return err
 	}
@@ -643,12 +640,6 @@ func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
 	), nil
 }
 
-// ListRootKeys returns the IDs for all of the root keys. It ignores symlinks
-// if any exist.
-func (r *NotaryRepository) ListRootKeys() []string {
-	return r.rootKeyStore.ListKeys()
-}
-
 // GenRootKey generates a new root key protected by a given passphrase
 // TODO(diogo): show not create keys manually, should use a cryptoservice instead
 func (r *NotaryRepository) GenRootKey(algorithm, passphrase string) (string, error) {
@@ -672,26 +663,26 @@ func (r *NotaryRepository) GenRootKey(algorithm, passphrase string) (string, err
 	}
 
 	// Changing the root
-	r.rootKeyStore.AddEncryptedKey(privKey.ID(), privKey, passphrase)
+	r.KeyStoreManager.RootKeyStore().AddEncryptedKey(privKey.ID(), privKey, passphrase)
 
 	return privKey.ID(), nil
 }
 
 // GetRootCryptoService retreives a root key and a cryptoservice to use with it
 func (r *NotaryRepository) GetRootCryptoService(rootKeyID, passphrase string) (*UnlockedCryptoService, error) {
-	privKey, err := r.rootKeyStore.GetDecryptedKey(rootKeyID, passphrase)
+	privKey, err := r.KeyStoreManager.RootKeyStore().GetDecryptedKey(rootKeyID, passphrase)
 	if err != nil {
 		return nil, fmt.Errorf("could not get decrypted root key with keyID: %s, %v", rootKeyID, err)
 	}
 
-	cryptoService := NewCryptoService("", r.rootKeyStore, passphrase)
+	cryptoService := NewCryptoService("", r.KeyStoreManager.RootKeyStore(), passphrase)
 
 	return &UnlockedCryptoService{
 		privKey:       privKey,
 		cryptoService: cryptoService}, nil
 }
 
-func (r *NotaryRepository) loadKeys(trustDir, rootKeysDir string) error {
+func (r *NotaryRepository) loadKeys(trustDir string) error {
 	// Load all CAs that aren't expired and don't use SHA1
 	caStore, err := trustmanager.NewX509FilteredFileStore(trustDir, func(cert *x509.Certificate) bool {
 		return cert.IsCA && cert.BasicConstraintsValid && cert.SubjectKeyId != nil &&
@@ -716,15 +707,8 @@ func (r *NotaryRepository) loadKeys(trustDir, rootKeysDir string) error {
 		return err
 	}
 
-	// Load the keystore that will hold all of our encrypted Root Private Keys
-	rootKeyStore, err := trustmanager.NewKeyFileStore(rootKeysDir)
-	if err != nil {
-		return err
-	}
-
 	r.caStore = caStore
 	r.certificateStore = certificateStore
-	r.rootKeyStore = rootKeyStore
 
 	return nil
 }
