@@ -106,7 +106,7 @@ func testInitRepo(t *testing.T, rootType data.KeyAlgorithm) {
 
 	// Also expect a symlink from the key ID of the certificate key to this
 	// root key
-	certificates := repo.certificateStore.GetCertificates()
+	certificates := repo.KeyStoreManager.CertificateStore().GetCertificates()
 	assert.Len(t, certificates, 1, "unexpected number of certificates")
 
 	certID, err := trustmanager.FingerprintCert(certificates[0])

@@ -8,7 +8,6 @@ import (
 	"crypto/rsa"
 	"crypto/x509"
 	"encoding/json"
-	"encoding/pem"
 	"errors"
 	"fmt"
 	"io/ioutil"
@@ -16,7 +15,6 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-	"time"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary/client/changelist"
@@ -44,10 +42,9 @@ func (err *ErrRepoNotInitialized) Error() string {
 
 // Default paths should end with a '/' so directory creation works correctly
 const (
-	trustDir       string = "/trusted_certificates/"
-	tufDir         string = "/tuf/"
-	rsaKeySize     int    = 2048 // Used for snapshots and targets keys
-	rsaRootKeySize int    = 4096 // Used for new root keys
+	tufDir         = "tuf"
+	rsaKeySize     = 2048 // Used for snapshots and targets keys
+	rsaRootKeySize = 4096 // Used for new root keys
 )
 
 // ErrRepositoryNotExist gets returned when trying to make an action over a repository
@@ -65,17 +62,15 @@ type UnlockedCryptoService struct {
 // NotaryRepository stores all the information needed to operate on a notary
 // repository.
 type NotaryRepository struct {
-	baseDir          string
-	gun              string
-	baseURL          string
-	tufRepoPath      string
-	caStore          trustmanager.X509Store
-	certificateStore trustmanager.X509Store
-	fileStore        store.MetadataStore
-	cryptoService    signed.CryptoService
-	tufRepo          *tuf.TufRepo
-	roundTrip        http.RoundTripper
-	KeyStoreManager  *keystoremanager.KeyStoreManager
+	baseDir         string
+	gun             string
+	baseURL         string
+	tufRepoPath     string
+	fileStore       store.MetadataStore
+	cryptoService   signed.CryptoService
+	tufRepo         *tuf.TufRepo
+	roundTrip       http.RoundTripper
+	KeyStoreManager *keystoremanager.KeyStoreManager
 }
 
 // Target represents a simplified version of the data TUF operates on, so external
@@ -105,8 +100,6 @@ func NewTarget(targetName string, targetPath string) (*Target, error) {
 // It takes the base directory under where all the trust files will be stored
 // (usually ~/.docker/trust/).
 func NewNotaryRepository(baseDir, gun, baseURL string, rt http.RoundTripper) (*NotaryRepository, error) {
-	trustDir := filepath.Join(baseDir, trustDir)
-
 	keyStoreManager, err := keystoremanager.NewKeyStoreManager(baseDir)
 	if err != nil {
 		return nil, err
@@ -124,10 +117,6 @@ func NewNotaryRepository(baseDir, gun, baseURL string, rt http.RoundTripper) (*N
 		KeyStoreManager: keyStoreManager,
 	}
 
-	if err := nRepo.loadKeys(trustDir); err != nil {
-		return nil, err
-	}
-
 	return nRepo, nil
 }
 
@@ -138,7 +127,7 @@ func (r *NotaryRepository) Initialize(uCryptoService *UnlockedCryptoService) err
 	if err != nil {
 		return err
 	}
-	r.certificateStore.AddCert(rootCert)
+	r.KeyStoreManager.CertificateStore().AddCert(rootCert)
 
 	// The root key gets stored in the TUF metadata X509 encoded, linking
 	// the tuf root.json to our X509 PKI.
@@ -526,85 +515,6 @@ func (r *NotaryRepository) snapshot() error {
 	return r.fileStore.SetMeta("snapshot", snapshotJSON)
 }
 
-/*
-validateRoot iterates over every root key included in the TUF data and attempts
-to validate the certificate by first checking for an exact match on the certificate
-store, and subsequently trying to find a valid chain on the caStore.
-
-Example TUF Content for root role:
-"roles" : {
-  "root" : {
-    "threshold" : 1,
-      "keyids" : [
-        "e6da5c303d572712a086e669ecd4df7b785adfc844e0c9a7b1f21a7dfc477a38"
-      ]
-  },
- ...
-}
-
-Example TUF Content for root key:
-"e6da5c303d572712a086e669ecd4df7b785adfc844e0c9a7b1f21a7dfc477a38" : {
-	"keytype" : "RSA",
-	"keyval" : {
-	  "private" : "",
-	  "public" : "Base64-encoded, PEM encoded x509 Certificate"
-	}
-}
-*/
-func (r *NotaryRepository) validateRoot(root *data.Signed) error {
-	rootSigned := &data.Root{}
-	err := json.Unmarshal(root.Signed, rootSigned)
-	if err != nil {
-		return err
-	}
-
-	certs := make(map[string]*data.PublicKey)
-	for _, keyID := range rootSigned.Roles["root"].KeyIDs {
-		// TODO(dlaw): currently assuming only one cert contained in
-		// public key entry. Need to fix when we want to pass in chains.
-		k, _ := pem.Decode([]byte(rootSigned.Keys[keyID].Public()))
-		decodedCerts, err := x509.ParseCertificates(k.Bytes)
-		if err != nil {
-			logrus.Debugf("error while parsing root certificate with keyID: %s, %v", keyID, err)
-			continue
-		}
-		// TODO(diogo): Assuming that first certificate is the leaf-cert. Need to
-		// iterate over all decodedCerts and find a non-CA one (should be the last).
-		leafCert := decodedCerts[0]
-
-		leafID, err := trustmanager.FingerprintCert(leafCert)
-		if err != nil {
-			logrus.Debugf("error while fingerprinting root certificate with keyID: %s, %v", keyID, err)
-			continue
-		}
-
-		// Check to see if there is an exact match of this certificate.
-		// Checking the CommonName is not required since ID is calculated over
-		// Cert.Raw. It's included to prevent breaking logic with changes of how the
-		// ID gets computed.
-		_, err = r.certificateStore.GetCertificateByKeyID(leafID)
-		if err == nil && leafCert.Subject.CommonName == r.gun {
-			certs[keyID] = rootSigned.Keys[keyID]
-		}
-
-		// Check to see if this leafCertificate has a chain to one of the Root CAs
-		// of our CA Store.
-		certList := []*x509.Certificate{leafCert}
-		err = trustmanager.Verify(r.caStore, r.gun, certList)
-		if err == nil {
-			certs[keyID] = rootSigned.Keys[keyID]
-		}
-	}
-
-	if len(certs) < 1 {
-		return errors.New("could not validate the path to a trusted root")
-	}
-
-	_, err = signed.VerifyRoot(root, 0, certs, 1)
-
-	return err
-}
-
 func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
 	remote, err := getRemoteStore(r.baseURL, r.gun, r.roundTrip)
 	if err != nil {
@@ -620,7 +530,7 @@ func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
 		return nil, err
 	}
 
-	err = r.validateRoot(root)
+	err = r.KeyStoreManager.ValidateRoot(root, r.gun)
 	if err != nil {
 		return nil, err
 	}
@@ -680,37 +590,6 @@ func (r *NotaryRepository) GetRootCryptoService(rootKeyID, passphrase string) (*
 	return &UnlockedCryptoService{
 		privKey:       privKey,
 		cryptoService: cryptoService}, nil
-}
-
-func (r *NotaryRepository) loadKeys(trustDir string) error {
-	// Load all CAs that aren't expired and don't use SHA1
-	caStore, err := trustmanager.NewX509FilteredFileStore(trustDir, func(cert *x509.Certificate) bool {
-		return cert.IsCA && cert.BasicConstraintsValid && cert.SubjectKeyId != nil &&
-			time.Now().Before(cert.NotAfter) &&
-			cert.SignatureAlgorithm != x509.SHA1WithRSA &&
-			cert.SignatureAlgorithm != x509.DSAWithSHA1 &&
-			cert.SignatureAlgorithm != x509.ECDSAWithSHA1
-	})
-	if err != nil {
-		return err
-	}
-
-	// Load all individual (non-CA) certificates that aren't expired and don't use SHA1
-	certificateStore, err := trustmanager.NewX509FilteredFileStore(trustDir, func(cert *x509.Certificate) bool {
-		return !cert.IsCA &&
-			time.Now().Before(cert.NotAfter) &&
-			cert.SignatureAlgorithm != x509.SHA1WithRSA &&
-			cert.SignatureAlgorithm != x509.DSAWithSHA1 &&
-			cert.SignatureAlgorithm != x509.ECDSAWithSHA1
-	})
-	if err != nil {
-		return err
-	}
-
-	r.caStore = caStore
-	r.certificateStore = certificateStore
-
-	return nil
 }
 
 // ID gets a consistent ID based on the PrivateKey bytes and algorithm type
