@@ -52,9 +52,4 @@ EOF
 echo -e "${BLUE}docker${NC} is configured to use the ${GREEN}dev${NC} machine with IP ${GREEN}$($DOCKER_MACHINE ip dev)${NC}"
 echo
 
-if [[ $SHELL == *"fish" ]]; then
-  $SHELL -c "eval ($DOCKER_MACHINE env $VM)"
-else
-  $SHELL -c "eval $($DOCKER_MACHINE env $VM)"
-fi
-
+eval $($DOCKER_MACHINE env $VM --shell=bash)
