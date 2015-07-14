@@ -4,21 +4,21 @@ import (
 	"net"
 
 	"github.com/Sirupsen/logrus"
-	pb "github.com/docker/rufus/proto"
+	pb "github.com/docker/notary/proto"
 	"github.com/endophage/gotuf/data"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 )
 
-// RufusSigner implements a RPC based Trust service that calls the Rufus Service
-type RufusSigner struct {
+// NotarySigner implements a RPC based Trust service that calls the Notary-signer Service
+type NotarySigner struct {
 	kmClient pb.KeyManagementClient
 	sClient  pb.SignerClient
 }
 
-// NewRufusSigner is a convinience method that returns RufusSigner
-func NewRufusSigner(hostname string, port string, tlscafile string) *RufusSigner {
+// NewNotarySigner is a convinience method that returns NotarySigner
+func NewNotarySigner(hostname string, port string, tlscafile string) *NotarySigner {
 	var opts []grpc.DialOption
 	netAddr := net.JoinHostPort(hostname, port)
 	creds, err := credentials.NewClientTLSFromFile(tlscafile, hostname)
@@ -33,14 +33,14 @@ func NewRufusSigner(hostname string, port string, tlscafile string) *RufusSigner
 	}
 	kmClient := pb.NewKeyManagementClient(conn)
 	sClient := pb.NewSignerClient(conn)
-	return &RufusSigner{
+	return &NotarySigner{
 		kmClient: kmClient,
 		sClient:  sClient,
 	}
 }
 
 // Sign signs a byte string with a number of KeyIDs
-func (trust *RufusSigner) Sign(keyIDs []string, toSign []byte) ([]data.Signature, error) {
+func (trust *NotarySigner) Sign(keyIDs []string, toSign []byte) ([]data.Signature, error) {
 	signatures := make([]data.Signature, 0, len(keyIDs))
 	for _, ID := range keyIDs {
 		keyID := pb.KeyID{ID: ID}
@@ -62,8 +62,8 @@ func (trust *RufusSigner) Sign(keyIDs []string, toSign []byte) ([]data.Signature
 }
 
 // Create creates a remote key and returns the PublicKey associated with the remote private key
-// TODO(diogo): Ignoring algorithm for now until rufus supports it
-func (trust *RufusSigner) Create(role string, _ data.KeyAlgorithm) (*data.PublicKey, error) {
+// TODO(diogo): Ignoring algorithm for now until notary-signer supports it
+func (trust *NotarySigner) Create(role string, _ data.KeyAlgorithm) (*data.PublicKey, error) {
 	publicKey, err := trust.kmClient.CreateKey(context.Background(), &pb.Void{})
 	if err != nil {
 		return nil, err
@@ -74,7 +74,7 @@ func (trust *RufusSigner) Create(role string, _ data.KeyAlgorithm) (*data.Public
 }
 
 // PublicKeys returns the public key(s) associated with the passed in keyIDs
-func (trust *RufusSigner) PublicKeys(keyIDs ...string) (map[string]*data.PublicKey, error) {
+func (trust *NotarySigner) PublicKeys(keyIDs ...string) (map[string]*data.PublicKey, error) {
 	publicKeys := make(map[string]*data.PublicKey)
 	for _, ID := range keyIDs {
 		keyID := pb.KeyID{ID: ID}
