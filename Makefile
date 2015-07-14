@@ -23,13 +23,17 @@ ${PREFIX}/bin/notary: version/version.go $(shell find . -type f -name '*.go')
 	@echo "+ $@"
 	@godep go build -o $@ ${GO_LDFLAGS} ./cmd/notary
 
+${PREFIX}/bin/notary-signer: version/version.go $(shell find . -type f -name '*.go')
+	@echo "+ $@"
+	@godep go build -o $@ ${GO_LDFLAGS} ./cmd/notary-signer
+
 vet:
 	@echo "+ $@"
 	@test -z "$$(go tool vet -printf=false . 2>&1 | grep -v Godeps/_workspace/src/ | tee /dev/stderr)"
 
 fmt:
 	@echo "+ $@"
-	@test -z "$$(gofmt -s -l . | grep -v Godeps/_workspace/src/ | tee /dev/stderr)"
+	@test -z "$$(gofmt -s -l .| grep -v .pb. | grep -v Godeps/_workspace/src/ | tee /dev/stderr)"
 
 lint:
 	@echo "+ $@"
@@ -53,9 +57,9 @@ protos:
 clean-protos:
 	@rm proto/*.pb.go
 
-binaries: ${PREFIX}/bin/notary-server ${PREFIX}/bin/notary
+binaries: ${PREFIX}/bin/notary-server ${PREFIX}/bin/notary ${PREFIX}/bin/notary-signer
 	@echo "+ $@"
 
 clean:
 	@echo "+ $@"
-	@rm -rf "${PREFIX}/bin/notary-server" "${PREFIX}/bin/notary"
+	@rm -rf "${PREFIX}/bin/notary-server" "${PREFIX}/bin/notary" "${PREFIX}/bin/notary-signer"

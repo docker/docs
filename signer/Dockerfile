@@ -1,0 +1,27 @@
+FROM diogomonica/golang-softhsm2
+
+MAINTAINER Diogo Monica "diogo@docker.com"
+
+# CHANGE-ME: Default values for SoftHSM2 PIN and SOPIN, used to initialize the first token
+ENV PIN="1234"
+ENV SOPIN="1234"
+ENV LIBDIR="/usr/local/lib/softhsm/"
+
+# Install openSC and dependencies
+RUN apt-get update
+
+RUN apt-get install -y build-essential autoconf automake libtool gtk-doc-tools gengetopt help2man libpcsclite-dev libzip-dev opensc libssl-dev usbutils vim
+
+# Initialize the SoftHSM2 token on slod 0, using PIN and SOPIN varaibles
+RUN softhsm2-util --init-token --slot 0 --label "test_token" --pin $PIN --so-pin $SOPIN
+
+# Copy the local repo to the expected go path
+COPY . /go/src/github.com/docker/notary
+
+# Install notary-signer
+RUN go get github.com/docker/notary/cmd/notary-signer
+
+EXPOSE 4443
+
+#ENTRYPOINT rufus -cert /go/src/github.com/docker/notary/fixtures/rufus.pem -key /go/src/github.com/docker/notary/fixtures/rufus.key -debug -pkcs11 /usr/lib/x86_64-linux-gnu/opensc-pkcs11.so -pin 123456
+ENTRYPOINT rufus -cert /go/src/github.com/docker/notary/fixtures/rufus.pem -key /go/src/github.com/docker/notary/fixtures/rufus.key -debug -pkcs11 $LIBDIR/libsofthsm2.so -pin 1234

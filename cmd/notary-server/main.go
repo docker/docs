@@ -75,7 +75,7 @@ func main() {
 	var trust signed.CryptoService
 	if viper.GetString("trust_service.type") == "remote" {
 		logrus.Info("[Notary Server] : Using remote signing service")
-		trust = signer.NewRufusSigner(
+		trust = signer.NewNotarySigner(
 			viper.GetString("trust_service.hostname"),
 			viper.GetString("trust_service.port"),
 			viper.GetString("trust_service.tls_ca_file"),
