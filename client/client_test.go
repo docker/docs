@@ -63,10 +63,10 @@ func testInitRepo(t *testing.T, rootType data.KeyAlgorithm) {
 	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport)
 	assert.NoError(t, err, "error creating repo: %s", err)
 
-	rootKeyID, err := repo.GenRootKey(rootType.String(), "passphrase")
+	rootKeyID, err := repo.KeyStoreManager.GenRootKey(rootType.String(), "passphrase")
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootCryptoService, err := repo.GetRootCryptoService(rootKeyID, "passphrase")
+	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID, "passphrase")
 	assert.NoError(t, err, "error retrieving root key: %s", err)
 
 	err = repo.Initialize(rootCryptoService)
@@ -207,10 +207,10 @@ func testAddListTarget(t *testing.T, rootType data.KeyAlgorithm) {
 	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
-	rootKeyID, err := repo.GenRootKey(rootType.String(), "passphrase")
+	rootKeyID, err := repo.KeyStoreManager.GenRootKey(rootType.String(), "passphrase")
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootCryptoService, err := repo.GetRootCryptoService(rootKeyID, "passphrase")
+	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID, "passphrase")
 	assert.NoError(t, err, "error retreiving root key: %s", err)
 
 	err = repo.Initialize(rootCryptoService)
@@ -392,10 +392,10 @@ func testValidateRootKey(t *testing.T, rootType data.KeyAlgorithm) {
 	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
-	rootKeyID, err := repo.GenRootKey(rootType.String(), "passphrase")
+	rootKeyID, err := repo.KeyStoreManager.GenRootKey(rootType.String(), "passphrase")
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootCryptoService, err := repo.GetRootCryptoService(rootKeyID, "passphrase")
+	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID, "passphrase")
 	assert.NoError(t, err, "error retreiving root key: %s", err)
 
 	err = repo.Initialize(rootCryptoService)

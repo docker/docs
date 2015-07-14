@@ -2,11 +2,6 @@ package client
 
 import (
 	"bytes"
-	"crypto"
-	"crypto/ecdsa"
-	"crypto/rand"
-	"crypto/rsa"
-	"crypto/x509"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -14,10 +9,10 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
-	"strings"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary/client/changelist"
+	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/keystoremanager"
 	"github.com/docker/notary/trustmanager"
 	"github.com/endophage/gotuf"
@@ -40,24 +35,13 @@ func (err *ErrRepoNotInitialized) Error() string {
 	return "Repository has not been initialized"
 }
 
-// Default paths should end with a '/' so directory creation works correctly
 const (
-	tufDir         = "tuf"
-	rsaKeySize     = 2048 // Used for snapshots and targets keys
-	rsaRootKeySize = 4096 // Used for new root keys
+	tufDir = "tuf"
 )
 
 // ErrRepositoryNotExist gets returned when trying to make an action over a repository
 /// that doesn't exist.
 var ErrRepositoryNotExist = errors.New("repository does not exist")
-
-// UnlockedCryptoService encapsulates a private key and a cryptoservice that
-// uses that private key, providing convinience methods for generation of
-// certificates.
-type UnlockedCryptoService struct {
-	privKey       *data.PrivateKey
-	cryptoService signed.CryptoService
-}
 
 // NotaryRepository stores all the information needed to operate on a notary
 // repository.
@@ -81,7 +65,7 @@ type Target struct {
 	Length int64
 }
 
-// NewTarget  is a helper method that returns a Target
+// NewTarget is a helper method that returns a Target
 func NewTarget(targetName string, targetPath string) (*Target, error) {
 	b, err := ioutil.ReadFile(targetPath)
 	if err != nil {
@@ -105,7 +89,7 @@ func NewNotaryRepository(baseDir, gun, baseURL string, rt http.RoundTripper) (*N
 		return nil, err
 	}
 
-	cryptoService := NewCryptoService(gun, keyStoreManager.NonRootKeyStore(), "")
+	cryptoService := cryptoservice.NewCryptoService(gun, keyStoreManager.NonRootKeyStore(), "")
 
 	nRepo := &NotaryRepository{
 		gun:             gun,
@@ -122,7 +106,7 @@ func NewNotaryRepository(baseDir, gun, baseURL string, rt http.RoundTripper) (*N
 
 // Initialize creates a new repository by using rootKey as the root Key for the
 // TUF repository.
-func (r *NotaryRepository) Initialize(uCryptoService *UnlockedCryptoService) error {
+func (r *NotaryRepository) Initialize(uCryptoService *cryptoservice.UnlockedCryptoService) error {
 	rootCert, err := uCryptoService.GenerateCertificate(r.gun)
 	if err != nil {
 		return err
@@ -135,7 +119,7 @@ func (r *NotaryRepository) Initialize(uCryptoService *UnlockedCryptoService) err
 	// as ECDSAx509 to allow the gotuf verifiers to correctly decode the
 	// key on verification of signatures.
 	var algorithmType data.KeyAlgorithm
-	algorithm := uCryptoService.privKey.Algorithm()
+	algorithm := uCryptoService.PrivKey.Algorithm()
 	switch algorithm {
 	case data.RSAKey:
 		algorithmType = data.RSAx509Key
@@ -238,7 +222,7 @@ func (r *NotaryRepository) Initialize(uCryptoService *UnlockedCryptoService) err
 		return err
 	}
 
-	if err := r.saveMetadata(uCryptoService.cryptoService); err != nil {
+	if err := r.saveMetadata(uCryptoService.CryptoService); err != nil {
 		return err
 	}
 
@@ -372,11 +356,11 @@ func (r *NotaryRepository) Publish(getPass passwordRetriever) error {
 			return err
 		}
 		rootKeyID := r.tufRepo.Root.Signed.Roles["root"].KeyIDs[0]
-		rootCryptoService, err := r.GetRootCryptoService(rootKeyID, passphrase)
+		rootCryptoService, err := r.KeyStoreManager.GetRootCryptoService(rootKeyID, passphrase)
 		if err != nil {
 			return err
 		}
-		root, err = r.tufRepo.SignRoot(data.DefaultExpires("root"), rootCryptoService.cryptoService)
+		root, err = r.tufRepo.SignRoot(data.DefaultExpires("root"), rootCryptoService.CryptoService)
 		if err != nil {
 			return err
 		}
@@ -548,99 +532,4 @@ func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
 		remote,
 		kdb,
 	), nil
-}
-
-// GenRootKey generates a new root key protected by a given passphrase
-// TODO(diogo): show not create keys manually, should use a cryptoservice instead
-func (r *NotaryRepository) GenRootKey(algorithm, passphrase string) (string, error) {
-	var err error
-	var privKey *data.PrivateKey
-
-	// We don't want external API callers to rely on internal TUF data types, so
-	// the API here should continue to receive a string algorithm, and ensure
-	// that it is downcased
-	switch data.KeyAlgorithm(strings.ToLower(algorithm)) {
-	case data.RSAKey:
-		privKey, err = trustmanager.GenerateRSAKey(rand.Reader, rsaRootKeySize)
-	case data.ECDSAKey:
-		privKey, err = trustmanager.GenerateECDSAKey(rand.Reader)
-	default:
-		return "", fmt.Errorf("only RSA or ECDSA keys are currently supported. Found: %s", algorithm)
-
-	}
-	if err != nil {
-		return "", fmt.Errorf("failed to generate private key: %v", err)
-	}
-
-	// Changing the root
-	r.KeyStoreManager.RootKeyStore().AddEncryptedKey(privKey.ID(), privKey, passphrase)
-
-	return privKey.ID(), nil
-}
-
-// GetRootCryptoService retreives a root key and a cryptoservice to use with it
-func (r *NotaryRepository) GetRootCryptoService(rootKeyID, passphrase string) (*UnlockedCryptoService, error) {
-	privKey, err := r.KeyStoreManager.RootKeyStore().GetDecryptedKey(rootKeyID, passphrase)
-	if err != nil {
-		return nil, fmt.Errorf("could not get decrypted root key with keyID: %s, %v", rootKeyID, err)
-	}
-
-	cryptoService := NewCryptoService("", r.KeyStoreManager.RootKeyStore(), passphrase)
-
-	return &UnlockedCryptoService{
-		privKey:       privKey,
-		cryptoService: cryptoService}, nil
-}
-
-// ID gets a consistent ID based on the PrivateKey bytes and algorithm type
-func (ucs *UnlockedCryptoService) ID() string {
-	return ucs.PublicKey().ID()
-}
-
-// PublicKey Returns the public key associated with the private key
-func (ucs *UnlockedCryptoService) PublicKey() *data.PublicKey {
-	return data.PublicKeyFromPrivate(*ucs.privKey)
-}
-
-// GenerateCertificate generates an X509 Certificate from a template, given a GUN
-func (ucs *UnlockedCryptoService) GenerateCertificate(gun string) (*x509.Certificate, error) {
-	algorithm := ucs.privKey.Algorithm()
-	var publicKey crypto.PublicKey
-	var privateKey crypto.PrivateKey
-	var err error
-	switch algorithm {
-	case data.RSAKey:
-		var rsaPrivateKey *rsa.PrivateKey
-		rsaPrivateKey, err = x509.ParsePKCS1PrivateKey(ucs.privKey.Private())
-		privateKey = rsaPrivateKey
-		publicKey = rsaPrivateKey.Public()
-	case data.ECDSAKey:
-		var ecdsaPrivateKey *ecdsa.PrivateKey
-		ecdsaPrivateKey, err = x509.ParseECPrivateKey(ucs.privKey.Private())
-		privateKey = ecdsaPrivateKey
-		publicKey = ecdsaPrivateKey.Public()
-	default:
-		return nil, fmt.Errorf("only RSA or ECDSA keys are currently supported. Found: %s", algorithm)
-	}
-	if err != nil {
-		return nil, fmt.Errorf("failed to parse root key: %s (%v)", gun, err)
-	}
-
-	template, err := trustmanager.NewCertificate(gun)
-	if err != nil {
-		return nil, fmt.Errorf("failed to create the certificate template for: %s (%v)", gun, err)
-	}
-
-	derBytes, err := x509.CreateCertificate(rand.Reader, template, template, publicKey, privateKey)
-	if err != nil {
-		return nil, fmt.Errorf("failed to create the certificate for: %s (%v)", gun, err)
-	}
-
-	// Encode the new certificate into PEM
-	cert, err := x509.ParseCertificate(derBytes)
-	if err != nil {
-		return nil, fmt.Errorf("failed to parse the certificate for key: %s (%v)", gun, err)
-	}
-
-	return cert, nil
 }

@@ -119,7 +119,7 @@ func tufInit(cmd *cobra.Command, args []string) {
 		if err != nil {
 			fatalf(err.Error())
 		}
-		rootKeyID, err = nRepo.GenRootKey("ECDSA", passphrase)
+		rootKeyID, err = nRepo.KeyStoreManager.GenRootKey("ECDSA", passphrase)
 		if err != nil {
 			fatalf(err.Error())
 		}
@@ -133,7 +133,7 @@ func tufInit(cmd *cobra.Command, args []string) {
 		}
 	}
 
-	rootCryptoService, err := nRepo.GetRootCryptoService(rootKeyID, passphrase)
+	rootCryptoService, err := nRepo.KeyStoreManager.GetRootCryptoService(rootKeyID, passphrase)
 	if err != nil {
 		fatalf(err.Error())
 	}

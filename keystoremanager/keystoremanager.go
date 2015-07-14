@@ -1,14 +1,18 @@
 package keystoremanager
 
 import (
+	"crypto/rand"
 	"crypto/x509"
 	"encoding/json"
 	"encoding/pem"
 	"errors"
+	"fmt"
 	"path/filepath"
+	"strings"
 	"time"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/trustmanager"
 	"github.com/endophage/gotuf/data"
 	"github.com/endophage/gotuf/signed"
@@ -28,6 +32,7 @@ const (
 	trustDir       = "trusted_certificates"
 	privDir        = "private"
 	rootKeysSubdir = "root_keys"
+	rsaRootKeySize = 4096 // Used for new root keys
 )
 
 // NewKeyStoreManager returns an initialized KeyStoreManager, or an error
@@ -100,6 +105,46 @@ func (km *KeyStoreManager) CertificateStore() trustmanager.X509Store {
 // CAStore returns the CA store being managed by this KeyStoreManager
 func (km *KeyStoreManager) CAStore() trustmanager.X509Store {
 	return km.caStore
+}
+
+// GenRootKey generates a new root key protected by a given passphrase
+// TODO(diogo): show not create keys manually, should use a cryptoservice instead
+func (km *KeyStoreManager) GenRootKey(algorithm, passphrase string) (string, error) {
+	var err error
+	var privKey *data.PrivateKey
+
+	// We don't want external API callers to rely on internal TUF data types, so
+	// the API here should continue to receive a string algorithm, and ensure
+	// that it is downcased
+	switch data.KeyAlgorithm(strings.ToLower(algorithm)) {
+	case data.RSAKey:
+		privKey, err = trustmanager.GenerateRSAKey(rand.Reader, rsaRootKeySize)
+	case data.ECDSAKey:
+		privKey, err = trustmanager.GenerateECDSAKey(rand.Reader)
+	default:
+		return "", fmt.Errorf("only RSA or ECDSA keys are currently supported. Found: %s", algorithm)
+
+	}
+	if err != nil {
+		return "", fmt.Errorf("failed to generate private key: %v", err)
+	}
+
+	// Changing the root
+	km.rootKeyStore.AddEncryptedKey(privKey.ID(), privKey, passphrase)
+
+	return privKey.ID(), nil
+}
+
+// GetRootCryptoService retreives a root key and a cryptoservice to use with it
+func (km *KeyStoreManager) GetRootCryptoService(rootKeyID, passphrase string) (*cryptoservice.UnlockedCryptoService, error) {
+	privKey, err := km.rootKeyStore.GetDecryptedKey(rootKeyID, passphrase)
+	if err != nil {
+		return nil, fmt.Errorf("could not get decrypted root key with keyID: %s, %v", rootKeyID, err)
+	}
+
+	cryptoService := cryptoservice.NewCryptoService("", km.rootKeyStore, passphrase)
+
+	return cryptoservice.NewUnlockedCryptoService(privKey, cryptoService), nil
 }
 
 /*
