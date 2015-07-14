@@ -290,12 +290,15 @@ table {
   -ms-flex-flow: row wrap;
   flex-flow: row wrap;
 }
+.content .items .item {
+  text-align: center;
+}
 .content .items .item img {
   width: 100px;
   height: auto;
 }
 .content .items .item .info {
-  padding-right: 1rem;
+  padding-right: 1.5rem;
 }
 .content .documentation {
   padding: 2rem 0;
@@ -348,8 +351,8 @@ table {
 }
 @media screen and (min-width: 500px) {
   .items .item {
-    max-width: 20%;
-    min-width: 140px;
+    max-width: 25%;
+    min-width: 160px;
   }
 }
 .footer {
