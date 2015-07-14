@@ -1,16 +1,27 @@
+#!/bin/bash
+
+set -e
+
 ISO=$HOME/.docker/machine/cache/boot2docker.iso
 VM=dev
 DOCKER_MACHINE=/usr/local/bin/docker-machine
 
+BLUE='\033[0;34m'
+GREEN='\033[0;32m'
+NC='\033[0m'
+
 unset DYLD_LIBRARY_PATH
 unset LD_LIBRARY_PATH
+
+clear
 
 mkdir -p ~/.docker/machine/cache
 if [ ! -f $ISO ]; then
   cp /usr/local/share/boot2docker/boot2docker.iso $ISO
 fi
 
-machine=$($DOCKER_MACHINE ls -q | grep "^$VM$")
+
+machine=$($DOCKER_MACHINE ls -q | grep "^$VM$") || :
 if [ -z $machine ]; then
   echo "Creating Machine $VM..."
    $DOCKER_MACHINE create -d virtualbox --virtualbox-memory 2048 $VM
@@ -19,10 +30,9 @@ else
 fi
 
 echo "Starting machine $VM..."
-$DOCKER_MACHINE start dev
+$DOCKER_MACHINE start $VM
 
 echo "Setting environment variables for machine $VM..."
-eval $($DOCKER_MACHINE env dev --shell=bash)
 clear
 
 cat << EOF
@@ -39,7 +49,12 @@ cat << EOF
 
 
 EOF
-echo "The Quick Start CLI is configured to use Docker with the $VM VM"
+echo -e "${BLUE}docker${NC} is configured to use the ${GREEN}dev${NC} machine with IP ${GREEN}$($DOCKER_MACHINE ip dev)${NC}"
 echo
 
-bash -c "$SHELL"
+if [[ $SHELL == *"fish" ]]; then
+  $SHELL -c "eval ($DOCKER_MACHINE env $VM)"
+else
+  $SHELL -c "eval $($DOCKER_MACHINE env $VM)"
+fi
+
