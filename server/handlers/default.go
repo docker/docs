@@ -311,7 +311,7 @@ func GetTimestampKeyHandler(ctx context.Context, w http.ResponseWriter, r *http.
 	vars := mux.Vars(r)
 	gun := vars["imageName"]
 
-	key, err := timestamp.GetOrCreateTimestampKey(gun, store, crypto, data.ECDSAKey)
+	key, err := timestamp.GetOrCreateTimestampKey(gun, store, crypto, data.ED25519Key)
 	if err != nil {
 		return &errors.HTTPError{
 			HTTPStatus: http.StatusInternalServerError,
