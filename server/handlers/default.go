@@ -7,6 +7,7 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
+	"strings"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/endophage/gotuf/data"
@@ -73,9 +74,19 @@ func AtomicUpdateHandler(ctx context.Context, w http.ResponseWriter, r *http.Req
 		if err == io.EOF {
 			break
 		}
-		role := part.FileName()
+		role := strings.TrimSuffix(part.FileName(), ".json")
 		if role == "" {
-			continue
+			return &errors.HTTPError{
+				HTTPStatus: http.StatusBadRequest,
+				Code:       9999,
+				Err:        fmt.Errorf("Empty filename provided. No updates performed"),
+			}
+		} else if !data.ValidRole(role) {
+			return &errors.HTTPError{
+				HTTPStatus: http.StatusBadRequest,
+				Code:       9999,
+				Err:        fmt.Errorf("Invalid role: %s. No updates performed", role),
+			}
 		}
 		meta := &data.SignedTargets{}
 		var input []byte
