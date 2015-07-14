@@ -1,3 +1,3 @@
 #  Docker Toolbox
 
-![illustration-website copy](https://cloud.githubusercontent.com/assets/251292/8635484/dea7d166-27d8-11e5-93f9-76d20b2fa80e.png)
+![illustration-website copy](https://cloud.githubusercontent.com/assets/251292/8687317/ef0abbd2-2a43-11e5-816d-b0da5f60d0d4.png)
