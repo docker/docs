@@ -1,15 +1,17 @@
-notary:
+notaryserver:
   build: .
+  dockerfile: notary-server-Dockerfile
   links:
    - notarymysql
   ports:
    - "8080:8080"
    - "4443:4443"
-#rufus:
-#  volumes:
-#   - /dev/bus/usb/003/010:/dev/bus/usb/002/010
-#   - /var/run/pcscd/pcscd.comm:/var/run/pcscd/pcscd.comm
-#  build: ../rufus
+notarysigner:
+  volumes:
+   - /dev/bus/usb/003/010:/dev/bus/usb/002/010
+   - /var/run/pcscd/pcscd.comm:/var/run/pcscd/pcscd.comm
+  build: .
+  dockerfile: notary-signer-Dockerfile
 notarymysql:
   build: ./notarymysql/
   ports:
