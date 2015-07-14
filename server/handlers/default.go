@@ -23,9 +23,13 @@ import (
 // MainHandler is the default handler for the server
 func MainHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
 	if r.Method == "GET" {
-		err := json.NewEncoder(w).Encode("{}")
+		_, err := w.Write([]byte("{}"))
 		if err != nil {
-			w.Write([]byte("{server_error: 'Could not parse error message'}"))
+			return &errors.HTTPError{
+				HTTPStatus: http.StatusInternalServerError,
+				Code:       9999,
+				Err:        err,
+			}
 		}
 	} else {
 		//w.WriteHeader(http.StatusNotFound)
