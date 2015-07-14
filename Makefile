@@ -33,7 +33,7 @@ vet:
 
 fmt:
 	@echo "+ $@"
-	@test -z "$$(gofmt -s -l . | grep -v Godeps/_workspace/src/ | tee /dev/stderr)"
+	@test -z "$$(gofmt -s -l .| grep -v .pb. | grep -v Godeps/_workspace/src/ | tee /dev/stderr)"
 
 lint:
 	@echo "+ $@"
