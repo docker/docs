@@ -6,9 +6,7 @@ clear
 
 cd "$(dirname "$BASH_SOURCE")"
 
-( set -x; ./boot2docker.exe stop ) || true
-
-( set -x; ./boot2docker.exe delete; rm -rf "$HOME/.boot2docker" ) || true
+( set -x; ./docker-machine rm -f dev ) || true
 
 echo
 echo '[Press any key to exit]'
