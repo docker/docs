@@ -28,7 +28,7 @@ const (
 	_DebugAddr = "localhost:8080"
 )
 
-var debug, yubikey bool
+var debug bool
 var certFile, keyFile, pkcs11Lib, pin string
 
 func init() {
@@ -36,7 +36,6 @@ func init() {
 	flag.StringVar(&keyFile, "key", "", "Private key file")
 	flag.StringVar(&pkcs11Lib, "pkcs11", "", "enables HSM mode and uses the provided pkcs11 library path")
 	flag.StringVar(&pin, "pin", "", "the PIN to use for the HSM")
-	flag.BoolVar(&yubikey, "yubikey", false, "enables yubikey support mode. should be used with --pkcs11")
 	flag.BoolVar(&debug, "debug", false, "show the version and exit")
 }
 

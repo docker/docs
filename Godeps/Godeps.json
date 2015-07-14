@@ -33,6 +33,11 @@
 			"Rev": "79a4ca2abe6f8622039678ba85a42cb6c7fd8af9"
 		},
 		{
+			"ImportPath": "github.com/docker/distribution/health",
+			"Comment": "v2.0.0-332-g79a4ca2",
+			"Rev": "79a4ca2abe6f8622039678ba85a42cb6c7fd8af9"
+		},
+		{
 			"ImportPath": "github.com/docker/distribution/registry/auth",
 			"Comment": "v2.0.0-332-g79a4ca2",
 			"Rev": "79a4ca2abe6f8622039678ba85a42cb6c7fd8af9"
@@ -50,10 +55,6 @@
 		{
 			"ImportPath": "github.com/docker/libtrust",
 			"Rev": "fa567046d9b14f6aa788882a950d69651d230b21"
-		},
-		{
-			"ImportPath": "github.com/docker/rufus/proto",
-			"Rev": "7f61f678c264ae0a329f25cbaa8af6fd55ada7b6"
 		},
 		{
 			"ImportPath": "github.com/endophage/gotuf",
@@ -95,6 +96,10 @@
 			"Rev": "624009598839a9432bd97bb75552389422357723"
 		},
 		{
+			"ImportPath": "github.com/miekg/pkcs11",
+			"Rev": "88c9f842544e629ec046105d7fb50d5daafae737"
+		},
+		{
 			"ImportPath": "github.com/mitchellh/mapstructure",
 			"Rev": "2caf8efc93669b6c43e0441cdc6aed17546c96f3"
 		},
@@ -119,13 +124,30 @@
 			"Rev": "be5ff3e4840cf692388bde7a057595a474ef379e"
 		},
 		{
+			"ImportPath": "github.com/stretchr/objx",
+			"Rev": "cbeaeb16a013161a98496fad62933b1d21786672"
+		},
+		{
 			"ImportPath": "github.com/stretchr/testify/assert",
+			"Comment": "v1.0-17-g089c718",
+			"Rev": "089c7181b8c728499929ff09b62d3fdd8df8adff"
+		},
+		{
+			"ImportPath": "github.com/stretchr/testify/mock",
 			"Comment": "v1.0-17-g089c718",
 			"Rev": "089c7181b8c728499929ff09b62d3fdd8df8adff"
 		},
 		{
 			"ImportPath": "github.com/tent/canonical-json-go",
 			"Rev": "96e4ba3a7613a1216cbd1badca4efe382adea337"
+		},
+		{
+			"ImportPath": "golang.org/x/crypto/bcrypt",
+			"Rev": "bfc286917c5fcb7420d7e3092b50bbfd31b38a98"
+		},
+		{
+			"ImportPath": "golang.org/x/crypto/blowfish",
+			"Rev": "bfc286917c5fcb7420d7e3092b50bbfd31b38a98"
 		},
 		{
 			"ImportPath": "golang.org/x/net/context",

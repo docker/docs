@@ -23,5 +23,5 @@ RUN go get github.com/docker/notary/cmd/notary-signer
 
 EXPOSE 4443
 
-#ENTRYPOINT rufus -cert /go/src/github.com/docker/notary/fixtures/rufus.pem -key /go/src/github.com/docker/notary/fixtures/rufus.key -debug -pkcs11 /usr/lib/x86_64-linux-gnu/opensc-pkcs11.so -pin 123456 -yubikey
+#ENTRYPOINT rufus -cert /go/src/github.com/docker/notary/fixtures/rufus.pem -key /go/src/github.com/docker/notary/fixtures/rufus.key -debug -pkcs11 /usr/lib/x86_64-linux-gnu/opensc-pkcs11.so -pin 123456
 ENTRYPOINT rufus -cert /go/src/github.com/docker/notary/fixtures/rufus.pem -key /go/src/github.com/docker/notary/fixtures/rufus.key -debug -pkcs11 $LIBDIR/libsofthsm2.so -pin 1234
