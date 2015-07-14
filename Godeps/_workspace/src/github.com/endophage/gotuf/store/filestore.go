@@ -1,7 +1,6 @@
 package store
 
 import (
-	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -9,16 +8,16 @@ import (
 	"path/filepath"
 )
 
-func NewFilesystemStore(baseDir, metaSubDir, metaExtension, targetsSubDir string) (MetadataStore, error) {
+func NewFilesystemStore(baseDir, metaSubDir, metaExtension, targetsSubDir string) (*filesystemStore, error) {
 	metaDir := path.Join(baseDir, metaSubDir)
 	targetsDir := path.Join(baseDir, targetsSubDir)
 
 	// Make sure we can create the necessary dirs and they are writable
-	err := os.MkdirAll(metaDir, 0744)
+	err := os.MkdirAll(metaDir, 0700)
 	if err != nil {
 		return nil, err
 	}
-	err = os.MkdirAll(targetsDir, 0744)
+	err = os.MkdirAll(targetsDir, 0700)
 	if err != nil {
 		return nil, err
 	}
@@ -38,7 +37,7 @@ type filesystemStore struct {
 	targetsDir    string
 }
 
-func (f *filesystemStore) GetMeta(name string, size int64) (json.RawMessage, error) {
+func (f *filesystemStore) GetMeta(name string, size int64) ([]byte, error) {
 	fileName := fmt.Sprintf("%s.%s", name, f.metaExtension)
 	path := filepath.Join(f.metaDir, fileName)
 	meta, err := ioutil.ReadFile(path)
@@ -48,10 +47,20 @@ func (f *filesystemStore) GetMeta(name string, size int64) (json.RawMessage, err
 	return meta, nil
 }
 
-func (f *filesystemStore) SetMeta(name string, meta json.RawMessage) error {
+func (f *filesystemStore) SetMultiMeta(metas map[string][]byte) error {
+	for role, blob := range metas {
+		err := f.SetMeta(role, blob)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func (f *filesystemStore) SetMeta(name string, meta []byte) error {
 	fileName := fmt.Sprintf("%s.%s", name, f.metaExtension)
 	path := filepath.Join(f.metaDir, fileName)
-	if err := ioutil.WriteFile(path, meta, 0644); err != nil {
+	if err := ioutil.WriteFile(path, meta, 0600); err != nil {
 		return err
 	}
 	return nil

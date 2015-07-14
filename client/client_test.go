@@ -317,33 +317,37 @@ func testAddListTarget(t *testing.T, rootType data.KeyAlgorithm) {
 
 	repo.KeyStoreManager.NonRootKeyStore().AddKey(filepath.Join(filepath.FromSlash(gun), tempKey.ID()), &tempKey)
 
+	// Because ListTargets will clear this
+	savedTUFRepo := repo.tufRepo
+
+	rootJSONFile := filepath.Join(tempBaseDir, "tuf", filepath.FromSlash(gun), "metadata", "root.json")
+	rootFileBytes, err := ioutil.ReadFile(rootJSONFile)
+
+	signedTargets, err := savedTUFRepo.SignTargets("targets", data.DefaultExpires("targets"), nil)
+	assert.NoError(t, err)
+
+	signedSnapshot, err := savedTUFRepo.SignSnapshot(data.DefaultExpires("snapshot"), nil)
+	assert.NoError(t, err)
+
+	signedTimestamp, err := savedTUFRepo.SignTimestamp(data.DefaultExpires("timestamp"), nil)
+	assert.NoError(t, err)
+
 	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/root.json", func(w http.ResponseWriter, r *http.Request) {
-		rootJSONFile := filepath.Join(tempBaseDir, "tuf", filepath.FromSlash(gun), "metadata", "root.json")
-		rootFileBytes, err := ioutil.ReadFile(rootJSONFile)
 		assert.NoError(t, err)
 		fmt.Fprint(w, string(rootFileBytes))
 	})
 
-	// Because ListTargets will clear this
-	savedTUFRepo := repo.tufRepo
-
 	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/timestamp.json", func(w http.ResponseWriter, r *http.Request) {
-		signedTimestamp, err := savedTUFRepo.SignTimestamp(data.DefaultExpires("timestamp"), nil)
-		assert.NoError(t, err)
 		timestampJSON, _ := json.Marshal(signedTimestamp)
 		fmt.Fprint(w, string(timestampJSON))
 	})
 
 	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/snapshot.json", func(w http.ResponseWriter, r *http.Request) {
-		signedSnapshot, err := savedTUFRepo.SignSnapshot(data.DefaultExpires("snapshot"), nil)
-		assert.NoError(t, err)
 		snapshotJSON, _ := json.Marshal(signedSnapshot)
 		fmt.Fprint(w, string(snapshotJSON))
 	})
 
 	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/targets.json", func(w http.ResponseWriter, r *http.Request) {
-		signedTargets, err := savedTUFRepo.SignTargets("targets", data.DefaultExpires("targets"), nil)
-		assert.NoError(t, err)
 		targetsJSON, _ := json.Marshal(signedTargets)
 		fmt.Fprint(w, string(targetsJSON))
 	})

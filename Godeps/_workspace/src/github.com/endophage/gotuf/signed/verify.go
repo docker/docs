@@ -28,21 +28,21 @@ type signedMeta struct {
 }
 
 // VerifyRoot checks if a given root file is valid against a known set of keys.
-func VerifyRoot(s *data.Signed, minVersion int, keys map[string]data.PublicKey, threshold int) (data.PublicKey, error) {
+// Threshold is always assumed to be 1
+func VerifyRoot(s *data.Signed, minVersion int, keys map[string]data.PublicKey) error {
 	if len(s.Signatures) == 0 {
-		return nil, ErrNoSignatures
+		return ErrNoSignatures
 	}
 
 	var decoded map[string]interface{}
 	if err := json.Unmarshal(s.Signed, &decoded); err != nil {
-		return nil, err
+		return err
 	}
 	msg, err := cjson.Marshal(decoded)
 	if err != nil {
-		return nil, err
+		return err
 	}
 
-	valid := make(map[string]struct{})
 	for _, sig := range s.Signatures {
 		// method lookup is consistent due to Unmarshal JSON doing lower case for us.
 		method := sig.Method
@@ -56,12 +56,10 @@ func VerifyRoot(s *data.Signed, minVersion int, keys map[string]data.PublicKey, 
 			logrus.Debugf("continuing b/c signature was invalid\n")
 			continue
 		}
-		valid[sig.KeyID] = struct{}{}
+		// threshold of 1 so return on first success
+		return verifyMeta(s, "root", minVersion)
 	}
-	if len(valid) < threshold {
-		return nil, ErrRoleThreshold
-	}
-	return nil, verifyMeta(s, "root", minVersion)
+	return ErrRoleThreshold
 }
 
 func Verify(s *data.Signed, role string, minVersion int, db *keys.KeyDB) error {

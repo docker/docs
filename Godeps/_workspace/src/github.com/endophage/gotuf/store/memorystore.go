@@ -2,15 +2,17 @@ package store
 
 import (
 	"bytes"
-	"encoding/json"
 
 	"github.com/endophage/gotuf/data"
 	"github.com/endophage/gotuf/errors"
 )
 
-func MemoryStore(meta map[string]json.RawMessage, files map[string][]byte) LocalStore {
+func NewMemoryStore(meta map[string][]byte, files map[string][]byte) LocalStore {
 	if meta == nil {
-		meta = make(map[string]json.RawMessage)
+		meta = make(map[string][]byte)
+	}
+	if files == nil {
+		files = make(map[string][]byte)
 	}
 	return &memoryStore{
 		meta:  meta,
@@ -20,17 +22,24 @@ func MemoryStore(meta map[string]json.RawMessage, files map[string][]byte) Local
 }
 
 type memoryStore struct {
-	meta  map[string]json.RawMessage
+	meta  map[string][]byte
 	files map[string][]byte
 	keys  map[string][]data.PrivateKey
 }
 
-func (m *memoryStore) GetMeta(name string, size int64) (json.RawMessage, error) {
+func (m *memoryStore) GetMeta(name string, size int64) ([]byte, error) {
 	return m.meta[name], nil
 }
 
-func (m *memoryStore) SetMeta(name string, meta json.RawMessage) error {
+func (m *memoryStore) SetMeta(name string, meta []byte) error {
 	m.meta[name] = meta
+	return nil
+}
+
+func (m *memoryStore) SetMultiMeta(metas map[string][]byte) error {
+	for role, blob := range metas {
+		m.SetMeta(role, blob)
+	}
 	return nil
 }
 
@@ -68,7 +77,7 @@ func (m *memoryStore) WalkStagedTargets(paths []string, targetsFn targetsWalkFun
 	return nil
 }
 
-func (m *memoryStore) Commit(map[string]json.RawMessage, bool, map[string]data.Hashes) error {
+func (m *memoryStore) Commit(map[string][]byte, bool, map[string]data.Hashes) error {
 	return nil
 }
 

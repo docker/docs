@@ -36,7 +36,7 @@ func DBStore(db *sql.DB, imageName string) *dbStore {
 }
 
 // GetMeta loads existing TUF metadata files
-func (dbs *dbStore) GetMeta(name string) (json.RawMessage, error) {
+func (dbs *dbStore) GetMeta(name string) ([]byte, error) {
 	data, err := dbs.readFile(name)
 	if err != nil {
 		return nil, err
@@ -45,7 +45,7 @@ func (dbs *dbStore) GetMeta(name string) (json.RawMessage, error) {
 }
 
 // SetMeta writes individual TUF metadata files
-func (dbs *dbStore) SetMeta(name string, meta json.RawMessage) error {
+func (dbs *dbStore) SetMeta(name string, meta []byte) error {
 	return dbs.writeFile(name, meta)
 }
 
@@ -75,7 +75,7 @@ func (dbs *dbStore) WalkStagedTargets(paths []string, targetsFn targetsWalkFunc)
 }
 
 // Commit writes a set of consistent (possibly) TUF metadata files
-func (dbs *dbStore) Commit(metafiles map[string]json.RawMessage, consistent bool, hashes map[string]data.Hashes) error {
+func (dbs *dbStore) Commit(metafiles map[string][]byte, consistent bool, hashes map[string]data.Hashes) error {
 	// TODO (endophage): write meta files to cache
 	return nil
 
@@ -200,7 +200,7 @@ func (dbs *dbStore) loadTargets(path string) map[string]data.FileMeta {
 	for r.Next() {
 		var absPath, alg, hash string
 		var size int64
-		var custom json.RawMessage
+		var custom []byte
 		r.Scan(&absPath, &size, &alg, &hash, &custom)
 		hashBytes, err := hex.DecodeString(hash)
 		if err != nil {
@@ -219,7 +219,7 @@ func (dbs *dbStore) loadTargets(path string) map[string]data.FileMeta {
 				},
 			}
 			if custom != nil {
-				file.Custom = &custom
+				file.Custom = json.RawMessage(custom)
 			}
 			files[absPath] = file
 		}

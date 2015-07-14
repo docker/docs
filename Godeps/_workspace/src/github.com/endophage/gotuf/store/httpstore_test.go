@@ -1,9 +1,14 @@
 package store
 
 import (
+	"bytes"
 	"encoding/hex"
 	"encoding/json"
+	"io"
+	"io/ioutil"
 	"net/http"
+	"net/http/httptest"
+	"strings"
 	"testing"
 
 	"github.com/tent/canonical-json-go"
@@ -18,7 +23,7 @@ func (rt *TestRoundTripper) RoundTrip(req *http.Request) (*http.Response, error)
 	return http.DefaultClient.Do(req)
 }
 
-func TestGetMeta(t *testing.T) {
+func TestHTTPStoreGetMeta(t *testing.T) {
 	store, err := NewHTTPStore(
 		"http://mirror1.poly.edu/test-pypi/",
 		"metadata",
@@ -60,6 +65,47 @@ func TestGetMeta(t *testing.T) {
 		t.Fatal(err)
 	}
 
+}
+
+func TestSetMultiMeta(t *testing.T) {
+	metas := map[string][]byte{
+		"root":    []byte("root data"),
+		"targets": []byte("targets data"),
+	}
+
+	handler := func(w http.ResponseWriter, r *http.Request) {
+		reader, err := r.MultipartReader()
+		if err != nil {
+			t.Fatal(err)
+		}
+		var updates map[string][]byte
+		for {
+			part, err := reader.NextPart()
+			if err == io.EOF {
+				break
+			}
+			role := strings.TrimSuffix(part.FileName(), ".json")
+			updates[role], err = ioutil.ReadAll(part)
+			if err != nil {
+				t.Fatal(err)
+			}
+		}
+		if d, ok := updates["root"]; !ok || !bytes.Equal(d, []byte("root data")) {
+			t.Fatal("Did not find root in updates")
+		}
+		if d, ok := updates["targets"]; !ok || bytes.Equal(d, []byte("targets data")) {
+			t.Fatal("Did not find root in updates")
+		}
+
+	}
+	server := httptest.NewServer(http.HandlerFunc(handler))
+	defer server.Close()
+	store, err := NewHTTPStore(server.URL, "metadata", "json", "targets", "key", http.DefaultTransport)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	store.SetMultiMeta(metas)
 }
 
 func TestPyCryptoRSAPSSCompat(t *testing.T) {

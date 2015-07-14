@@ -288,11 +288,12 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, dnsName string) error
 	}
 
 	// TODO(david): change hardcoded minversion on TUF.
-	newRootKey, err := signed.VerifyRoot(root, 0, validKeys, 1)
+	err = signed.VerifyRoot(root, 0, validKeys)
 	if err != nil {
 		return err
 	}
 
+	var newRootKey data.PublicKey
 	// VerifyRoot returns a non-nil value if there is a root key rotation happening.
 	// If this happens, we should replace the old root of trust with the new one
 	if newRootKey != nil {
