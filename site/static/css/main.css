@@ -295,9 +295,11 @@ table {
   height: auto;
 }
 .content .items .item .info {
+  text-align: center;
   padding-right: 1rem;
 }
 .content .documentation {
+  text-align: center;
   padding: 2rem 0;
 }
 .content .documentation h3 {
@@ -309,8 +311,7 @@ table {
 }
 .content .documentation .cta .btn {
   display: inline-block;
-  margin-right: 1rem;
-  margin-bottom: 1rem;
+  margin: 0.5rem;
   transition: all 100ms;
   background-color: #ff992e;
   box-shadow: 0.4rem 0.4rem 0 rgba(0, 0, 0, 0.05);
