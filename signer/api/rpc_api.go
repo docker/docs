@@ -42,22 +42,20 @@ func (s *KeyManagementServer) CreateKey(ctx context.Context, algorithm *pb.Algor
 
 //DeleteKey deletes they key associated with a KeyID
 func (s *KeyManagementServer) DeleteKey(ctx context.Context, keyID *pb.KeyID) (*pb.Void, error) {
-	// TODO(diogo): call resolve method from KeyID -> KeyInfo
-	keyInfo := &pb.KeyInfo{KeyID: keyID, Algorithm: &pb.Algorithm{Algorithm: RSAAlgorithm}}
-	service := s.SigServices[keyInfo.Algorithm.Algorithm]
+	_, service, err := FindKeyByID(s.SigServices, keyID)
 
-	if service == nil {
-		return nil, fmt.Errorf("algorithm %s not supported for delete key", keyInfo.Algorithm.Algorithm)
+	if err != nil {
+		return nil, grpc.Errorf(codes.NotFound, "Invalid keyID: key %s not found", keyID.ID)
 	}
 
-	_, err := service.DeleteKey(keyInfo.KeyID)
-	log.Println("[Notary-signer DeleteKey] : Deleted KeyID ", keyInfo.KeyID.ID)
+	_, err = service.DeleteKey(keyID)
+	log.Println("[Notary-signer DeleteKey] : Deleted KeyID ", keyID.ID)
 	if err != nil {
 		switch err {
 		case keys.ErrInvalidKeyID:
-			return nil, grpc.Errorf(codes.NotFound, "Invalid keyID: key %s not found", keyInfo.KeyID.ID)
+			return nil, grpc.Errorf(codes.NotFound, "Invalid keyID: key %s not found", keyID.ID)
 		default:
-			return nil, grpc.Errorf(codes.Internal, "Key deletion for keyID %s failed", keyInfo.KeyID.ID)
+			return nil, grpc.Errorf(codes.Internal, "Key deletion for keyID %s failed", keyID.ID)
 		}
 	}
 
@@ -66,43 +64,39 @@ func (s *KeyManagementServer) DeleteKey(ctx context.Context, keyID *pb.KeyID) (*
 
 //GetKeyInfo returns they PublicKey associated with a KeyID
 func (s *KeyManagementServer) GetKeyInfo(ctx context.Context, keyID *pb.KeyID) (*pb.PublicKey, error) {
-	// TODO(diogo): call resolve method from KeyID -> KeyInfo
-	keyInfo := &pb.KeyInfo{KeyID: keyID, Algorithm: &pb.Algorithm{Algorithm: RSAAlgorithm}}
-	service := s.SigServices[keyInfo.Algorithm.Algorithm]
+	_, service, err := FindKeyByID(s.SigServices, keyID)
 
-	if service == nil {
-		return nil, fmt.Errorf("algorithm %s not supported for get key info", keyInfo.Algorithm.Algorithm)
-	}
-
-	key, err := service.KeyInfo(keyInfo.KeyID)
 	if err != nil {
-		return nil, grpc.Errorf(codes.NotFound, "Invalid keyID: key %s not found", keyInfo.KeyID.ID)
+		return nil, grpc.Errorf(codes.NotFound, "Invalid keyID: key %s not found", keyID.ID)
 	}
-	log.Println("[Notary-signer GetKeyInfo] : Returning PublicKey for KeyID ", keyInfo.KeyID.ID)
+
+	key, err := service.KeyInfo(keyID)
+	if err != nil {
+		return nil, grpc.Errorf(codes.NotFound, "Invalid keyID: key %s not found", keyID.ID)
+	}
+	log.Println("[Notary-signer GetKeyInfo] : Returning PublicKey for KeyID ", keyID.ID)
 	return key, nil
 }
 
 //Sign signs a message and returns the signature using a private key associate with the KeyID from the SignatureRequest
 func (s *SignerServer) Sign(ctx context.Context, sr *pb.SignatureRequest) (*pb.Signature, error) {
-	// TODO(diogo): call resolve method from KeyID -> KeyInfo
-	keyInfo := &pb.KeyInfo{KeyID: sr.KeyID, Algorithm: &pb.Algorithm{Algorithm: RSAAlgorithm}}
-	service := s.SigServices[keyInfo.Algorithm.Algorithm]
+	_, service, err := FindKeyByID(s.SigServices, sr.KeyID)
 
-	if service == nil {
-		return nil, fmt.Errorf("algorithm %s not supported for sign", keyInfo.Algorithm.Algorithm)
+	if err != nil {
+		return nil, grpc.Errorf(codes.NotFound, "Invalid keyID: key %s not found", sr.KeyID.ID)
 	}
 
-	log.Println("[Notary-signer Sign] : Signing ", string(sr.Content), " with KeyID ", keyInfo.KeyID.ID)
-	signer, err := service.Signer(keyInfo)
+	log.Println("[Notary-signer Sign] : Signing ", string(sr.Content), " with KeyID ", sr.KeyID.ID)
+	signer, err := service.Signer(sr.KeyID)
 	if err == keys.ErrInvalidKeyID {
-		return nil, grpc.Errorf(codes.NotFound, "Invalid keyID: key not found")
+		return nil, grpc.Errorf(codes.NotFound, "Invalid keyID: key %s not found", sr.KeyID.ID)
 	} else if err != nil {
-		return nil, grpc.Errorf(codes.Internal, "Signing failed for keyID %s on hash %s", keyInfo.KeyID.ID, sr.Content)
+		return nil, grpc.Errorf(codes.Internal, "Signing failed for keyID %s on hash %s", sr.KeyID.ID, sr.Content)
 	}
 
 	signature, err := signer.Sign(sr)
 	if err != nil {
-		return nil, grpc.Errorf(codes.Internal, "Signing failed for keyID %s on hash %s", keyInfo.KeyID.ID, sr.Content)
+		return nil, grpc.Errorf(codes.Internal, "Signing failed for keyID %s on hash %s", sr.KeyID.ID, sr.Content)
 	}
 
 	return signature, nil

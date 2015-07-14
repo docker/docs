@@ -84,7 +84,7 @@ func TestSigner(t *testing.T) {
 	sigService := api.NewEdDSASigningService(&m)
 
 	m.On("GetKey", fakeKeyID).Return(&keys.Key{}, nil).Once()
-	_, err := sigService.Signer(&pb.KeyInfo{KeyID: &pb.KeyID{ID: fakeKeyID}})
+	_, err := sigService.Signer(&pb.KeyID{ID: fakeKeyID})
 
 	m.Mock.AssertExpectations(t)
 	assert.Nil(t, err)

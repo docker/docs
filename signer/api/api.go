@@ -47,15 +47,7 @@ func KeyInfo(sigServices signer.SigningServiceIndex) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		vars := mux.Vars(r)
 
-		// TODO(diogo): call resolve method from KeyID -> KeyInfo
-		sigService := getSigningService(w, RSAAlgorithm, sigServices)
-		if sigService == nil {
-			// Error handled inside getSigningService
-			return
-		}
-
-		keyID := &pb.KeyID{ID: vars["ID"]}
-		key, err := sigService.KeyInfo(keyID)
+		key, _, err := FindKeyByID(sigServices, &pb.KeyID{ID: vars["ID"]})
 		if err != nil {
 			switch err {
 			// If we received an ErrInvalidKeyID, the key doesn't exist, return 404
@@ -109,11 +101,21 @@ func DeleteKey(sigServices signer.SigningServiceIndex) http.Handler {
 			return
 		}
 
-		// TODO(diogo): call resolve method from KeyID -> KeyInfo
-		sigService := getSigningService(w, RSAAlgorithm, sigServices)
-		if sigService == nil {
-			// Error handled inside getSigningService
-			return
+		_, sigService, err := FindKeyByID(sigServices, keyID)
+
+		if err != nil {
+			switch err {
+			// If we received an ErrInvalidKeyID, the key doesn't exist, return 404
+			case keys.ErrInvalidKeyID:
+				w.WriteHeader(http.StatusNotFound)
+				w.Write([]byte(err.Error()))
+				return
+			// If we received anything else, it is unexpected, and we return a 500
+			default:
+				w.WriteHeader(http.StatusInternalServerError)
+				w.Write([]byte(err.Error()))
+				return
+			}
 		}
 
 		_, err = sigService.DeleteKey(keyID)
@@ -151,15 +153,19 @@ func Sign(sigServices signer.SigningServiceIndex) http.Handler {
 			return
 		}
 
-		// TODO(diogo): call resolve method from KeyID -> KeyInfo
-		keyInfo := &pb.KeyInfo{KeyID: sigRequest.KeyID, Algorithm: &pb.Algorithm{Algorithm: RSAAlgorithm}}
-		sigService := getSigningService(w, keyInfo.Algorithm.Algorithm, sigServices)
-		if sigService == nil {
-			// Error handled inside getSigningService
+		_, sigService, err := FindKeyByID(sigServices, sigRequest.KeyID)
+		if err == keys.ErrInvalidKeyID {
+			w.WriteHeader(http.StatusNotFound)
+			w.Write([]byte(err.Error()))
+			return
+		} else if err != nil {
+			// We got an unexpected error
+			w.WriteHeader(http.StatusInternalServerError)
+			w.Write([]byte(err.Error()))
 			return
 		}
 
-		signer, err := sigService.Signer(keyInfo)
+		signer, err := sigService.Signer(sigRequest.KeyID)
 		if err == keys.ErrInvalidKeyID {
 			w.WriteHeader(http.StatusNotFound)
 			w.Write([]byte(err.Error()))

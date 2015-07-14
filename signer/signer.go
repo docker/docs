@@ -10,7 +10,7 @@ type SigningService interface {
 	KeyManager
 
 	// Signer returns a Signer for a given keyID
-	Signer(keyID *pb.KeyInfo) (Signer, error)
+	Signer(keyID *pb.KeyID) (Signer, error)
 }
 
 // SigningServiceIndex represents a mapping between a service algorithm string

@@ -139,9 +139,8 @@ func (s RSASigningService) KeyInfo(keyID *pb.KeyID) (*pb.PublicKey, error) {
 }
 
 // Signer returns a Signer for a specific KeyID
-func (s RSASigningService) Signer(keyInfo *pb.KeyInfo) (signer.Signer, error) {
-	// TODO(diogo): Add verification of keyInfo.Algorithm to be RSA.
-	key, ok := s.keys[keyInfo.KeyID.ID]
+func (s RSASigningService) Signer(keyID *pb.KeyID) (signer.Signer, error) {
+	key, ok := s.keys[keyID.ID]
 	if !ok {
 		return nil, keys.ErrInvalidKeyID
 	}

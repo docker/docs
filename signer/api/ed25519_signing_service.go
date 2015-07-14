@@ -52,9 +52,8 @@ func (s EdDSASigningService) KeyInfo(keyID *pb.KeyID) (*pb.PublicKey, error) {
 }
 
 // Signer returns a Signer for a specific KeyID
-func (s EdDSASigningService) Signer(keyInfo *pb.KeyInfo) (signer.Signer, error) {
-	// TODO(diogo): add verification of keyInfo.Algorithm to be ECDSA
-	key, err := s.KeyDB.GetKey(keyInfo.KeyID)
+func (s EdDSASigningService) Signer(keyID *pb.KeyID) (signer.Signer, error) {
+	key, err := s.KeyDB.GetKey(keyID)
 	if err != nil {
 		return nil, keys.ErrInvalidKeyID
 	}
