@@ -11,11 +11,11 @@ import (
 	"log"
 	"math/big"
 
-	"github.com/docker/rufus"
-	"github.com/docker/rufus/keys"
+	"github.com/docker/notary/signer"
+	"github.com/docker/notary/signer/keys"
 	"github.com/miekg/pkcs11"
 
-	pb "github.com/docker/rufus/proto"
+	pb "github.com/docker/notary/proto"
 )
 
 // RSAAlgorithm represents the rsa signing algorithm
@@ -111,40 +111,41 @@ func (s RSASigningService) CreateKey() (*pb.PublicKey, error) {
 
 	s.keys[k.ID] = k
 
-	pubKey := &pb.PublicKey{KeyInfo: &pb.KeyInfo{ID: k.ID, Algorithm: &pb.Algorithm{Algorithm: k.Algorithm}}, PublicKey: k.Public[:]}
+	pubKey := &pb.PublicKey{KeyInfo: &pb.KeyInfo{KeyID: &pb.KeyID{ID: k.ID}, Algorithm: &pb.Algorithm{Algorithm: k.Algorithm}}, PublicKey: k.Public[:]}
 
 	return pubKey, nil
 }
 
 // DeleteKey removes a key from the key database
-func (s RSASigningService) DeleteKey(keyInfo *pb.KeyInfo) (*pb.Void, error) {
-	if _, ok := s.keys[keyInfo.ID]; !ok {
+func (s RSASigningService) DeleteKey(keyID *pb.KeyID) (*pb.Void, error) {
+	if _, ok := s.keys[keyID.ID]; !ok {
 		return nil, keys.ErrInvalidKeyID
 	}
 
-	delete(s.keys, keyInfo.ID)
+	delete(s.keys, keyID.ID)
 	return nil, nil
 }
 
 // KeyInfo returns the public components of a particular key
-func (s RSASigningService) KeyInfo(keyInfo *pb.KeyInfo) (*pb.PublicKey, error) {
-	k, ok := s.keys[keyInfo.ID]
+func (s RSASigningService) KeyInfo(keyID *pb.KeyID) (*pb.PublicKey, error) {
+	k, ok := s.keys[keyID.ID]
 	if !ok {
 		return nil, keys.ErrInvalidKeyID
 	}
 
-	pubKey := &pb.PublicKey{KeyInfo: &pb.KeyInfo{ID: k.ID, Algorithm: &pb.Algorithm{Algorithm: k.Algorithm}}, PublicKey: k.Public[:]}
+	pubKey := &pb.PublicKey{KeyInfo: &pb.KeyInfo{KeyID: keyID, Algorithm: &pb.Algorithm{Algorithm: k.Algorithm}}, PublicKey: k.Public[:]}
 
 	return pubKey, nil
 }
 
 // Signer returns a Signer for a specific KeyID
-func (s RSASigningService) Signer(keyInfo *pb.KeyInfo) (rufus.Signer, error) {
-	key, ok := s.keys[keyInfo.ID]
+func (s RSASigningService) Signer(keyInfo *pb.KeyInfo) (signer.Signer, error) {
+	// TODO(diogo): Add verification of keyInfo.Algorithm to be RSA.
+	key, ok := s.keys[keyInfo.KeyID.ID]
 	if !ok {
 		return nil, keys.ErrInvalidKeyID
 	}
-	// (diogo): Investigate if caching is worth it. Is this object expensive to create?
+	// TODO(diogo): Investigate if caching is worth it. Is this object expensive to create?
 	return &RSASigner{privateKey: key, context: s.context, session: s.session}, nil
 }
 
@@ -197,8 +198,8 @@ func (s *RSASigner) Sign(request *pb.SignatureRequest) (*pb.Signature, error) {
 		return nil, errors.New("Failed to create signature")
 	}
 
-	returnSig := &pb.Signature{KeyInfo: &pb.KeyInfo{ID: s.privateKey.ID, Algorithm: &pb.Algorithm{Algorithm: RSAAlgorithm}}, Content: sig[:]}
-	log.Printf("[Rufus Server] Signature request JSON: %s , response: %s", string(request.Content), returnSig)
+	returnSig := &pb.Signature{KeyInfo: &pb.KeyInfo{KeyID: &pb.KeyID{ID: s.privateKey.ID}, Algorithm: &pb.Algorithm{Algorithm: RSAAlgorithm}}, Content: sig[:]}
+	log.Printf("[Notary-signer Server] Signature request JSON: %s , response: %s", string(request.Content), returnSig)
 	return returnSig, nil
 }
 

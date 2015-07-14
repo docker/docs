@@ -14,6 +14,7 @@ import (
 	"google.golang.org/grpc/credentials"
 
 	_ "github.com/docker/distribution/health"
+	"github.com/docker/notary/signer"
 	"github.com/docker/notary/signer/api"
 	"github.com/docker/notary/signer/keys"
 	"github.com/miekg/pkcs11"

@@ -53,8 +53,8 @@ func (trust *NotarySigner) Sign(keyIDs []string, toSign []byte) ([]data.Signatur
 			return nil, err
 		}
 		signatures = append(signatures, data.Signature{
-			KeyID:     sig.KeyID.ID,
-			Method:    data.SigAlgorithm(sig.Algorithm.Algorithm),
+			KeyID:     sig.KeyInfo.KeyID.ID,
+			Method:    data.SigAlgorithm(sig.KeyInfo.Algorithm.Algorithm),
 			Signature: sig.Content,
 		})
 	}
@@ -63,13 +63,13 @@ func (trust *NotarySigner) Sign(keyIDs []string, toSign []byte) ([]data.Signatur
 
 // Create creates a remote key and returns the PublicKey associated with the remote private key
 // TODO(diogo): Ignoring algorithm for now until notary-signer supports it
-func (trust *NotarySigner) Create(role string, _ data.KeyAlgorithm) (*data.PublicKey, error) {
-	publicKey, err := trust.kmClient.CreateKey(context.Background(), &pb.Void{})
+func (trust *NotarySigner) Create(role string, algorithm data.KeyAlgorithm) (*data.PublicKey, error) {
+	publicKey, err := trust.kmClient.CreateKey(context.Background(), &pb.Algorithm{Algorithm: algorithm.String()})
 	if err != nil {
 		return nil, err
 	}
 	//TODO(mccauley): Update API to return algorithm and/or take it as a param
-	public := data.NewPublicKey(data.KeyAlgorithm(publicKey.Algorithm.Algorithm), publicKey.PublicKey)
+	public := data.NewPublicKey(data.KeyAlgorithm(publicKey.KeyInfo.Algorithm.Algorithm), publicKey.PublicKey)
 	return public, nil
 }
 
@@ -82,8 +82,8 @@ func (trust *NotarySigner) PublicKeys(keyIDs ...string) (map[string]*data.Public
 		if err != nil {
 			return nil, err
 		}
-		publicKeys[public.KeyID.ID] =
-			data.NewPublicKey(data.KeyAlgorithm(public.Algorithm.Algorithm), public.PublicKey)
+		publicKeys[public.KeyInfo.KeyID.ID] =
+			data.NewPublicKey(data.KeyAlgorithm(public.KeyInfo.Algorithm.Algorithm), public.PublicKey)
 	}
 	return publicKeys, nil
 }

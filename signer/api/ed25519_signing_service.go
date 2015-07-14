@@ -6,15 +6,15 @@ import (
 	"encoding/hex"
 
 	"github.com/agl/ed25519"
-	"github.com/docker/rufus"
-	"github.com/docker/rufus/keys"
+	"github.com/docker/notary/signer"
+	"github.com/docker/notary/signer/keys"
 
-	pb "github.com/docker/rufus/proto"
+	pb "github.com/docker/notary/proto"
 )
 
 // EdDSASigningService is an implementation of SigningService
 type EdDSASigningService struct {
-	KeyDB rufus.KeyDatabase
+	KeyDB signer.KeyDatabase
 }
 
 // CreateKey creates a key and returns its public components
@@ -36,24 +36,25 @@ func (s EdDSASigningService) CreateKey() (*pb.PublicKey, error) {
 		return nil, err
 	}
 
-	pubKey := &pb.PublicKey{KeyInfo: &pb.KeyInfo{ID: k.ID, Algorithm: &pb.Algorithm{Algorithm: k.Algorithm}}, PublicKey: k.Public[:]}
+	pubKey := &pb.PublicKey{KeyInfo: &pb.KeyInfo{KeyID: &pb.KeyID{ID: k.ID}, Algorithm: &pb.Algorithm{Algorithm: k.Algorithm}}, PublicKey: k.Public[:]}
 
 	return pubKey, nil
 }
 
 // DeleteKey removes a key from the key database
-func (s EdDSASigningService) DeleteKey(keyInfo *pb.KeyInfo) (*pb.Void, error) {
-	return s.KeyDB.DeleteKey(keyInfo)
+func (s EdDSASigningService) DeleteKey(keyID *pb.KeyID) (*pb.Void, error) {
+	return s.KeyDB.DeleteKey(keyID)
 }
 
 // KeyInfo returns the public components of a particular key
-func (s EdDSASigningService) KeyInfo(keyInfo *pb.KeyInfo) (*pb.PublicKey, error) {
-	return s.KeyDB.KeyInfo(keyInfo)
+func (s EdDSASigningService) KeyInfo(keyID *pb.KeyID) (*pb.PublicKey, error) {
+	return s.KeyDB.KeyInfo(keyID)
 }
 
 // Signer returns a Signer for a specific KeyID
-func (s EdDSASigningService) Signer(keyInfo *pb.KeyInfo) (rufus.Signer, error) {
-	key, err := s.KeyDB.GetKey(keyInfo)
+func (s EdDSASigningService) Signer(keyInfo *pb.KeyInfo) (signer.Signer, error) {
+	// TODO(diogo): add verification of keyInfo.Algorithm to be ECDSA
+	key, err := s.KeyDB.GetKey(keyInfo.KeyID)
 	if err != nil {
 		return nil, keys.ErrInvalidKeyID
 	}
@@ -61,7 +62,7 @@ func (s EdDSASigningService) Signer(keyInfo *pb.KeyInfo) (rufus.Signer, error) {
 }
 
 // NewEdDSASigningService returns an instance of KeyDB
-func NewEdDSASigningService(keyDB rufus.KeyDatabase) *EdDSASigningService {
+func NewEdDSASigningService(keyDB signer.KeyDatabase) *EdDSASigningService {
 	return &EdDSASigningService{
 		KeyDB: keyDB,
 	}

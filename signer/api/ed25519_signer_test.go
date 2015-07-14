@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/agl/ed25519"
-	"github.com/docker/rufus/api"
-	"github.com/docker/rufus/keys"
+	"github.com/docker/notary/signer/api"
+	"github.com/docker/notary/signer/keys"
 	"github.com/stretchr/testify/assert"
 
-	pb "github.com/docker/rufus/proto"
+	pb "github.com/docker/notary/proto"
 )
 
 type zeroReader struct{}
@@ -33,14 +33,14 @@ func TestSign(t *testing.T) {
 
 	signer := api.NewEd25519Signer(&keys.Key{Private: private, Public: *public, ID: "fake_id"})
 
-	sigRequest := &pb.SignatureRequest{KeyInfo: &pb.KeyInfo{ID: "fake_id", Algorithm: &pb.Algorithm{Algorithm: "ed25519"}}, Content: blob}
+	sigRequest := &pb.SignatureRequest{KeyID: &pb.KeyID{ID: "fake_id"}, Content: blob}
 
 	sig, err := signer.Sign(sigRequest)
 	assert.Nil(t, err)
 	signatureHex := fmt.Sprintf("%x", sig.Content)
 
 	assert.Equal(t, directSigHex, signatureHex)
-	assert.Equal(t, sig.KeyInfo.ID, "fake_id")
+	assert.Equal(t, sig.KeyInfo.KeyID.ID, "fake_id")
 }
 
 func BenchmarkSign(b *testing.B) {
@@ -50,10 +50,10 @@ func BenchmarkSign(b *testing.B) {
 	var sigService = api.NewEdDSASigningService(keyDB)
 
 	key, _ := sigService.CreateKey()
-	privkey, _ := keyDB.GetKey(key.KeyInfo)
+	privkey, _ := keyDB.GetKey(key.KeyInfo.KeyID)
 
 	signer := api.NewEd25519Signer(privkey)
-	sigRequest := &pb.SignatureRequest{KeyInfo: &pb.KeyInfo{ID: key.KeyInfo.ID, Algorithm: &pb.Algorithm{Algorithm: "ed25519"}}, Content: blob}
+	sigRequest := &pb.SignatureRequest{KeyID: key.KeyInfo.KeyID, Content: blob}
 
 	for n := 0; n < b.N; n++ {
 		_, _ = signer.Sign(sigRequest)

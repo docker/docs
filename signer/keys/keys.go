@@ -9,11 +9,11 @@ import (
 
 var (
 	// ErrExists happens when a Key already exists in a database
-	ErrExists = errors.New("rufus: key already in db")
+	ErrExists = errors.New("notary-signer: key already in db")
 	// ErrInvalidKeyID error happens when a key isn't found
-	ErrInvalidKeyID = errors.New("rufus: invalid key id")
+	ErrInvalidKeyID = errors.New("notary-signer: invalid key id")
 	// ErrFailedKeyGeneration happens when there is a failure in generating a key
-	ErrFailedKeyGeneration = errors.New("rufus: failed to generate new key")
+	ErrFailedKeyGeneration = errors.New("notary-signer: failed to generate new key")
 )
 
 // Key represents all the information of a key, including the private and public bits

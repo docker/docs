@@ -2,9 +2,9 @@ package api
 
 import (
 	"github.com/agl/ed25519"
-	"github.com/docker/rufus/keys"
+	"github.com/docker/notary/signer/keys"
 
-	pb "github.com/docker/rufus/proto"
+	pb "github.com/docker/notary/proto"
 )
 
 // ED25519 represents an ed25519 algorithm
@@ -21,7 +21,7 @@ func (s *Ed25519Signer) Sign(request *pb.SignatureRequest) (*pb.Signature, error
 	copy(priv[:], s.privateKey.Private[:])
 	sig := ed25519.Sign(&priv, request.Content)
 
-	return &pb.Signature{KeyInfo: &pb.KeyInfo{ID: s.privateKey.ID, Algorithm: &pb.Algorithm{Algorithm: ED25519}}, Content: sig[:]}, nil
+	return &pb.Signature{KeyInfo: &pb.KeyInfo{KeyID: &pb.KeyID{ID: s.privateKey.ID}, Algorithm: &pb.Algorithm{Algorithm: ED25519}}, Content: sig[:]}, nil
 }
 
 // NewEd25519Signer returns a Ed25519Signer, given a private key

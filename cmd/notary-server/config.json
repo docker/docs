@@ -6,7 +6,7 @@
 	},
 	"trust_service": {
 		"type": "local",
-		"hostname": "rufus",
+		"hostname": "signer",
 		"port": "7899",
 		"tls_ca_file": "./fixtures/ca.cert"
 	},

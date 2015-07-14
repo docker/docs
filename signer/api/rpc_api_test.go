@@ -6,15 +6,15 @@ import (
 	"net"
 	"testing"
 
-	"github.com/docker/rufus"
-	"github.com/docker/rufus/api"
-	"github.com/docker/rufus/keys"
+	"github.com/docker/notary/signer"
+	"github.com/docker/notary/signer/api"
+	"github.com/docker/notary/signer/keys"
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 
-	pb "github.com/docker/rufus/proto"
+	pb "github.com/docker/notary/proto"
 )
 
 var (
@@ -26,7 +26,7 @@ var (
 
 func init() {
 	sigService := api.NewEdDSASigningService(keys.NewKeyDB())
-	sigServices := rufus.SigningServiceIndex{api.ED25519: sigService}
+	sigServices := signer.SigningServiceIndex{api.ED25519: sigService, api.RSAAlgorithm: sigService}
 	void = &pb.Void{}
 	//server setup
 	kms := &api.KeyManagementServer{SigServices: sigServices}
@@ -52,9 +52,9 @@ func init() {
 
 func TestDeleteKeyHandlerReturnsNotFoundWithNonexistentKey(t *testing.T) {
 	fakeID := "c62e6d68851cef1f7e55a9d56e3b0c05f3359f16838cad43600f0554e7d3b54d"
-	keyInfo := &pb.KeyInfo{ID: fakeID, Algorithm: &pb.Algorithm{Algorithm: api.ED25519}}
+	keyID := &pb.KeyID{ID: fakeID}
 
-	ret, err := kmClient.DeleteKey(context.Background(), keyInfo)
+	ret, err := kmClient.DeleteKey(context.Background(), keyID)
 	assert.NotNil(t, err)
 	assert.Equal(t, grpc.Code(err), codes.NotFound)
 	assert.Nil(t, ret)
@@ -71,16 +71,16 @@ func TestCreateKeyHandlerCreatesKey(t *testing.T) {
 
 func TestDeleteKeyHandlerDeletesCreatedKey(t *testing.T) {
 	publicKey, err := kmClient.CreateKey(context.Background(), &pb.Algorithm{Algorithm: api.ED25519})
-	ret, err := kmClient.DeleteKey(context.Background(), publicKey.KeyInfo)
+	ret, err := kmClient.DeleteKey(context.Background(), publicKey.KeyInfo.KeyID)
 	assert.Nil(t, err)
 	assert.Equal(t, ret, void)
 }
 
 func TestKeyInfoReturnsCreatedKeys(t *testing.T) {
 	publicKey, err := kmClient.CreateKey(context.Background(), &pb.Algorithm{Algorithm: api.ED25519})
-	fmt.Println("Pubkey ID: " + publicKey.GetKeyInfo().ID)
-	returnedPublicKey, err := kmClient.GetKeyInfo(context.Background(), publicKey.KeyInfo)
-	fmt.Println("returnedPublicKey ID: " + returnedPublicKey.GetKeyInfo().ID)
+	fmt.Println("Pubkey ID: " + publicKey.GetKeyInfo().KeyID.ID)
+	returnedPublicKey, err := kmClient.GetKeyInfo(context.Background(), publicKey.KeyInfo.KeyID)
+	fmt.Println("returnedPublicKey ID: " + returnedPublicKey.GetKeyInfo().KeyID.ID)
 
 	assert.Nil(t, err)
 	assert.Equal(t, publicKey.KeyInfo, returnedPublicKey.KeyInfo)
@@ -99,9 +99,9 @@ func TestCreateKeyCreatesNewKeys(t *testing.T) {
 
 func TestGetKeyInfoReturnsNotFoundOnNonexistKeys(t *testing.T) {
 	fakeID := "c62e6d68851cef1f7e55a9d56e3b0c05f3359f16838cad43600f0554e7d3b54d"
-	keyInfo := &pb.KeyInfo{ID: fakeID, Algorithm: &pb.Algorithm{Algorithm: api.ED25519}}
+	keyID := &pb.KeyID{ID: fakeID}
 
-	ret, err := kmClient.GetKeyInfo(context.Background(), keyInfo)
+	ret, err := kmClient.GetKeyInfo(context.Background(), keyID)
 	assert.NotNil(t, err)
 	assert.Equal(t, grpc.Code(err), codes.NotFound)
 	assert.Nil(t, ret)
@@ -114,7 +114,7 @@ func TestCreatedKeysCanBeUsedToSign(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, publicKey)
 
-	sr := &pb.SignatureRequest{Content: message, KeyInfo: publicKey.KeyInfo}
+	sr := &pb.SignatureRequest{Content: message, KeyID: publicKey.KeyInfo.KeyID}
 	assert.NotNil(t, sr)
 	signature, err := sClient.Sign(context.Background(), sr)
 	assert.Nil(t, err)
@@ -125,9 +125,9 @@ func TestCreatedKeysCanBeUsedToSign(t *testing.T) {
 
 func TestSignReturnsNotFoundOnNonexistKeys(t *testing.T) {
 	fakeID := "c62e6d68851cef1f7e55a9d56e3b0c05f3359f16838cad43600f0554e7d3b54d"
-	keyInfo := &pb.KeyInfo{ID: fakeID, Algorithm: &pb.Algorithm{Algorithm: api.ED25519}}
+	keyID := &pb.KeyID{ID: fakeID}
 	message := []byte{0, 0, 0, 0}
-	sr := &pb.SignatureRequest{Content: message, KeyInfo: keyInfo}
+	sr := &pb.SignatureRequest{Content: message, KeyID: keyID}
 
 	ret, err := sClient.Sign(context.Background(), sr)
 	assert.NotNil(t, err)

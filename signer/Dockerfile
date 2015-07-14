@@ -16,12 +16,12 @@ RUN apt-get install -y build-essential autoconf automake libtool gtk-doc-tools g
 RUN softhsm2-util --init-token --slot 0 --label "test_token" --pin $PIN --so-pin $SOPIN
 
 # Copy the local repo to the expected go path
-COPY . /go/src/github.com/docker/rufus
+COPY . /go/src/github.com/docker/notary
 
-# Install rufus
-RUN go get github.com/docker/rufus/cmd/rufus
+# Install notary-signer
+RUN go get github.com/docker/notary/cmd/notary-signer
 
 EXPOSE 4443
 
-#ENTRYPOINT rufus -cert /go/src/github.com/docker/rufus/fixtures/rufus.pem -key /go/src/github.com/docker/rufus/fixtures/rufus.key -debug -pkcs11 /usr/lib/x86_64-linux-gnu/opensc-pkcs11.so -pin 123456 -yubikey
-ENTRYPOINT rufus -cert /go/src/github.com/docker/rufus/fixtures/rufus.pem -key /go/src/github.com/docker/rufus/fixtures/rufus.key -debug -pkcs11 $LIBDIR/libsofthsm2.so -pin 1234
+#ENTRYPOINT rufus -cert /go/src/github.com/docker/notary/fixtures/rufus.pem -key /go/src/github.com/docker/notary/fixtures/rufus.key -debug -pkcs11 /usr/lib/x86_64-linux-gnu/opensc-pkcs11.so -pin 123456 -yubikey
+ENTRYPOINT rufus -cert /go/src/github.com/docker/notary/fixtures/rufus.pem -key /go/src/github.com/docker/notary/fixtures/rufus.key -debug -pkcs11 $LIBDIR/libsofthsm2.so -pin 1234

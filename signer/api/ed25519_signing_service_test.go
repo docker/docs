@@ -3,12 +3,12 @@ package api_test
 import (
 	"testing"
 
-	"github.com/docker/rufus/api"
-	"github.com/docker/rufus/keys"
+	"github.com/docker/notary/signer/api"
+	"github.com/docker/notary/signer/keys"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 
-	pb "github.com/docker/rufus/proto"
+	pb "github.com/docker/notary/proto"
 )
 
 type FakeKeyDB struct {
@@ -25,18 +25,18 @@ func (m *FakeKeyDB) AddKey(key *keys.Key) error {
 	return args.Error(0)
 }
 
-func (m *FakeKeyDB) DeleteKey(keyInfo *pb.KeyInfo) (*pb.Void, error) {
-	args := m.Mock.Called(keyInfo.ID)
+func (m *FakeKeyDB) DeleteKey(keyID *pb.KeyID) (*pb.Void, error) {
+	args := m.Mock.Called(keyID.ID)
 	return nil, args.Error(0)
 }
 
-func (m *FakeKeyDB) KeyInfo(keyInfo *pb.KeyInfo) (*pb.PublicKey, error) {
-	args := m.Mock.Called(keyInfo.ID)
+func (m *FakeKeyDB) KeyInfo(keyID *pb.KeyID) (*pb.PublicKey, error) {
+	args := m.Mock.Called(keyID.ID)
 	return args.Get(0).(*pb.PublicKey), args.Error(1)
 }
 
-func (m *FakeKeyDB) GetKey(keyInfo *pb.KeyInfo) (*keys.Key, error) {
-	args := m.Mock.Called(keyInfo.ID)
+func (m *FakeKeyDB) GetKey(keyID *pb.KeyID) (*keys.Key, error) {
+	args := m.Mock.Called(keyID.ID)
 	return args.Get(0).(*keys.Key), args.Error(1)
 }
 
@@ -47,7 +47,7 @@ func TestDeleteKey(t *testing.T) {
 	sigService := api.NewEdDSASigningService(&m)
 
 	m.On("DeleteKey", fakeKeyID).Return(nil).Once()
-	_, err := sigService.DeleteKey(&pb.KeyInfo{ID: fakeKeyID})
+	_, err := sigService.DeleteKey(&pb.KeyID{ID: fakeKeyID})
 
 	m.Mock.AssertExpectations(t)
 	assert.Nil(t, err)
@@ -60,7 +60,7 @@ func TestKeyInfo(t *testing.T) {
 	sigService := api.NewEdDSASigningService(&m)
 
 	m.On("KeyInfo", fakeKeyID).Return(&pb.PublicKey{}, nil).Once()
-	_, err := sigService.KeyInfo(&pb.KeyInfo{ID: fakeKeyID})
+	_, err := sigService.KeyInfo(&pb.KeyID{ID: fakeKeyID})
 
 	m.Mock.AssertExpectations(t)
 	assert.Nil(t, err)
@@ -84,7 +84,7 @@ func TestSigner(t *testing.T) {
 	sigService := api.NewEdDSASigningService(&m)
 
 	m.On("GetKey", fakeKeyID).Return(&keys.Key{}, nil).Once()
-	_, err := sigService.Signer(&pb.KeyInfo{ID: fakeKeyID})
+	_, err := sigService.Signer(&pb.KeyInfo{KeyID: &pb.KeyID{ID: fakeKeyID}})
 
 	m.Mock.AssertExpectations(t)
 	assert.Nil(t, err)
