@@ -73,7 +73,6 @@ Name: "custom"; Description: "Custom installation"; Flags: iscustom
 [Tasks]
 Name: desktopicon; Description: "{cm:CreateDesktopIcon}"
 Name: modifypath; Description: "Add docker.exe & docker-machine.exe to &PATH"
-Name: rebootwindows; Description: "&Reboot Windows at the end of installation"; Flags: restart unchecked
 
 [Components]
 Name: "Docker"; Description: "Docker Client for Windows" ; Types: full upgrade
