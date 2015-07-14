@@ -284,7 +284,6 @@ func (r *NotaryRepository) AddTarget(target *Target) error {
 
 // ListTargets lists all targets for the current repository
 func (r *NotaryRepository) ListTargets() ([]*Target, error) {
-	//r.bootstrapRepo()
 
 	c, err := r.bootstrapClient()
 	if err != nil {
@@ -307,8 +306,6 @@ func (r *NotaryRepository) ListTargets() ([]*Target, error) {
 
 // GetTargetByName returns a target given a name
 func (r *NotaryRepository) GetTargetByName(name string) (*Target, error) {
-	//r.bootstrapRepo()
-
 	c, err := r.bootstrapClient()
 	if err != nil {
 		return nil, err
