@@ -33,11 +33,6 @@ show_cover_report() {
     go tool cover -${1}="$profile"
 }
 
-push_to_coveralls() {
-    echo "Pushing coverage statistics to coveralls.io"
-    goveralls -coverprofile="$profile"
-}
-
 generate_cover_data $(go list ./...)
 show_cover_report func
 case "$1" in
