@@ -53,6 +53,8 @@ test-full: vet lint
 
 protos:
 	@protoc --go_out=plugins=grpc:. proto/*.proto
+cov:
+	@sh coverage.sh --html
 
 clean-protos:
 	@rm proto/*.pb.go
