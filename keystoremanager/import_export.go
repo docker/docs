@@ -113,14 +113,9 @@ func moveKeysWithNewPassphrase(oldKeyStore, newKeyStore *trustmanager.KeyFileSto
 	return nil
 }
 
-func addKeysToArchive(zipWriter *zip.Writer, newKeyStore *trustmanager.KeyFileStore, tempBaseDir string, dedup map[string]struct{}) error {
+func addKeysToArchive(zipWriter *zip.Writer, newKeyStore *trustmanager.KeyFileStore, tempBaseDir string) error {
 	// List all files but no symlinks
 	for _, fullKeyPath := range newKeyStore.ListFiles(false) {
-		if _, present := dedup[fullKeyPath]; present {
-			continue
-		}
-		dedup[fullKeyPath] = struct{}{}
-
 		relKeyPath := strings.TrimPrefix(fullKeyPath, tempBaseDir)
 		relKeyPath = strings.TrimPrefix(relKeyPath, string(filepath.Separator))
 
@@ -162,7 +157,7 @@ func (km *KeyStoreManager) ExportAllKeys(dest io.Writer, outputPassphrase string
 	defer os.RemoveAll(tempBaseDir)
 
 	// Create temporary keystores to use as a staging area
-	tempNonRootKeysPath := filepath.Join(tempBaseDir, privDir)
+	tempNonRootKeysPath := filepath.Join(tempBaseDir, privDir, nonRootKeysSubdir)
 	tempNonRootKeyStore, err := trustmanager.NewKeyFileStore(tempNonRootKeysPath)
 	if err != nil {
 		return err
@@ -183,13 +178,10 @@ func (km *KeyStoreManager) ExportAllKeys(dest io.Writer, outputPassphrase string
 
 	zipWriter := zip.NewWriter(dest)
 
-	// Root and non-root stores overlap, so we need to dedup files
-	dedup := make(map[string]struct{})
-
-	if err := addKeysToArchive(zipWriter, tempRootKeyStore, tempBaseDir, dedup); err != nil {
+	if err := addKeysToArchive(zipWriter, tempRootKeyStore, tempBaseDir); err != nil {
 		return err
 	}
-	if err := addKeysToArchive(zipWriter, tempNonRootKeyStore, tempBaseDir, dedup); err != nil {
+	if err := addKeysToArchive(zipWriter, tempNonRootKeyStore, tempBaseDir); err != nil {
 		return err
 	}
 
@@ -208,23 +200,14 @@ func (km *KeyStoreManager) ImportKeysZip(zipReader zip.Reader, passphrase string
 	newRootKeys := make(map[string][]byte)
 	newNonRootKeys := make(map[string]*data.PrivateKey)
 
+	// Note that using / as a separator is okay here - the zip package
+	// guarantees that the separator will be /
+	rootKeysPrefix := privDir + "/" + rootKeysSubdir + "/"
+	nonRootKeysPrefix := privDir + "/" + nonRootKeysSubdir + "/"
+
 	// Iterate through the files in the archive. Don't add the keys
 	for _, f := range zipReader.File {
 		fNameTrimmed := strings.TrimSuffix(f.Name, filepath.Ext(f.Name))
-		// Note that using / as a separator is okay here - the zip
-		// package guarantees that the separator will be /
-		keysPrefix := privDir + "/"
-
-		if !strings.HasPrefix(fNameTrimmed, keysPrefix) {
-			// This path inside the zip archive doesn't start with
-			// "private". That's unexpected, because all keys
-			// should be in that subdirectory. To avoid adding a
-			// file to the filestore that we won't be able to use,
-			// skip this file in the import.
-			logrus.Warnf("skipping import of key with a path that doesn't begin with %s: %s", keysPrefix, f.Name)
-			continue
-		}
-		fNameTrimmed = strings.TrimPrefix(fNameTrimmed, keysPrefix)
 
 		rc, err := f.Open()
 		if err != nil {
@@ -239,21 +222,31 @@ func (km *KeyStoreManager) ImportKeysZip(zipReader zip.Reader, passphrase string
 		// Is this in the root_keys directory?
 		// Note that using / as a separator is okay here - the zip
 		// package guarantees that the separator will be /
-		rootKeysPrefix := rootKeysSubdir + "/"
 		if strings.HasPrefix(fNameTrimmed, rootKeysPrefix) {
 			if err = checkRootKeyIsEncrypted(pemBytes); err != nil {
+				rc.Close()
 				return err
 			}
 			// Root keys are preserved without decrypting
 			keyName := strings.TrimPrefix(fNameTrimmed, rootKeysPrefix)
 			newRootKeys[keyName] = pemBytes
-		} else {
+		} else if strings.HasPrefix(fNameTrimmed, nonRootKeysPrefix) {
 			// Non-root keys need to be decrypted
 			key, err := trustmanager.ParsePEMPrivateKey(pemBytes, passphrase)
 			if err != nil {
+				rc.Close()
 				return err
 			}
-			newNonRootKeys[fNameTrimmed] = key
+			keyName := strings.TrimPrefix(fNameTrimmed, nonRootKeysPrefix)
+			newNonRootKeys[keyName] = key
+		} else {
+			// This path inside the zip archive doesn't look like a
+			// root key or a non-root key. To avoid adding a file
+			// to the filestore that we won't be able to use, skip
+			// this file in the import.
+			logrus.Warnf("skipping import of key with a path that doesn't begin with %s or %s: %s", rootKeysPrefix, nonRootKeysPrefix, f.Name)
+			rc.Close()
+			continue
 		}
 
 		rc.Close()

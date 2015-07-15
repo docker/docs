@@ -75,7 +75,7 @@ func testInitRepo(t *testing.T, rootType data.KeyAlgorithm) {
 	// Inspect contents of the temporary directory
 	expectedDirs := []string{
 		"private",
-		filepath.Join("private", gun),
+		filepath.Join("private", "tuf_keys", gun),
 		filepath.Join("private", "root_keys"),
 		"trusted_certificates",
 		filepath.Join("trusted_certificates", gun),
