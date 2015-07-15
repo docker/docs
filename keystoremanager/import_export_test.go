@@ -2,6 +2,7 @@ package keystoremanager_test
 
 import (
 	"archive/zip"
+	"bytes"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -12,6 +13,7 @@ import (
 	"testing"
 
 	"github.com/docker/notary/client"
+	"github.com/docker/notary/keystoremanager"
 	"github.com/docker/notary/trustmanager"
 	"github.com/endophage/gotuf/data"
 	"github.com/stretchr/testify/assert"
@@ -216,10 +218,10 @@ func TestImportExportRootKey(t *testing.T) {
 	repo2, err := client.NewNotaryRepository(tempBaseDir2, gun, ts.URL, http.DefaultTransport)
 	assert.NoError(t, err, "error creating repo: %s", err)
 
-	rootKeyID2, err := repo2.KeyStoreManager.GenRootKey(data.ECDSAKey.String(), "oldPassphrase")
+	rootKeyID2, err := repo2.KeyStoreManager.GenRootKey(data.ECDSAKey.String(), oldPassphrase)
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootCryptoService2, err := repo2.KeyStoreManager.GetRootCryptoService(rootKeyID2, "oldPassphrase")
+	rootCryptoService2, err := repo2.KeyStoreManager.GetRootCryptoService(rootKeyID2, oldPassphrase)
 	assert.NoError(t, err, "error retrieving root key: %s", err)
 
 	err = repo2.Initialize(rootCryptoService2)
@@ -239,4 +241,20 @@ func TestImportExportRootKey(t *testing.T) {
 	rootKeyFilename := rootKeyID + ".key"
 	_, err = os.Stat(filepath.Join(tempBaseDir2, "private", "root_keys", rootKeyFilename))
 	assert.NoError(t, err, "missing root key")
+
+	// Try to import a decrypted version of the root key and make sure it
+	// doesn't succeed
+	pemBytes, err := ioutil.ReadFile(tempKeyFilePath)
+	assert.NoError(t, err, "could not read key file")
+	privKey, err := trustmanager.ParsePEMPrivateKey(pemBytes, oldPassphrase)
+	assert.NoError(t, err, "could not decrypt key file")
+	decryptedPEMBytes, err := trustmanager.KeyToPEM(privKey)
+	assert.NoError(t, err, "could not convert key to PEM")
+
+	err = repo2.KeyStoreManager.ImportRootKey(bytes.NewReader(decryptedPEMBytes), rootKeyID)
+	assert.EqualError(t, err, keystoremanager.ErrRootKeyNotEncrypted.Error())
+
+	// Try to import garbage and make sure it doesn't succeed
+	err = repo2.KeyStoreManager.ImportRootKey(strings.NewReader("this is not PEM"), rootKeyID)
+	assert.EqualError(t, err, keystoremanager.ErrNoValidPrivateKey.Error())
 }

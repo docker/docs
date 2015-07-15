@@ -16,6 +16,16 @@ import (
 	"github.com/endophage/gotuf/data"
 )
 
+var (
+	// ErrNoValidPrivateKey is returned if a key being imported doesn't
+	// look like a private key
+	ErrNoValidPrivateKey = errors.New("no valid private key found")
+
+	// ErrRootKeyNotEncrypted is returned if a root key being imported is
+	// unencrypted
+	ErrRootKeyNotEncrypted = errors.New("only encrypted root keys may be imported")
+)
+
 // ExportRootKey exports the specified root key to an io.Writer in PEM format.
 // The key's existing encryption is preserved.
 func (km *KeyStoreManager) ExportRootKey(dest io.Writer, keyID string) error {
@@ -28,6 +38,21 @@ func (km *KeyStoreManager) ExportRootKey(dest io.Writer, keyID string) error {
 	return err
 }
 
+// checkRootKeyIsEncrypted makes sure the root key is encrypted. We have
+// internal assumptions that depend on this.
+func checkRootKeyIsEncrypted(pemBytes []byte) error {
+	block, _ := pem.Decode(pemBytes)
+	if block == nil {
+		return ErrNoValidPrivateKey
+	}
+
+	if !x509.IsEncryptedPEMBlock(block) {
+		return ErrRootKeyNotEncrypted
+	}
+
+	return nil
+}
+
 // ImportRootKey imports a root in PEM format key from an io.Reader
 // The key's existing encryption is preserved. The keyID parameter is
 // necessary because otherwise we'd need the passphrase to decrypt the key
@@ -38,8 +63,11 @@ func (km *KeyStoreManager) ImportRootKey(source io.Reader, keyID string) error {
 		return err
 	}
 
-	err = km.rootKeyStore.Add(keyID, pemBytes)
-	if err != nil {
+	if err = checkRootKeyIsEncrypted(pemBytes); err != nil {
+		return err
+	}
+
+	if err = km.rootKeyStore.Add(keyID, pemBytes); err != nil {
 		return err
 	}
 
@@ -60,7 +88,7 @@ func moveKeysWithNewPassphrase(oldKeyStore, newKeyStore *trustmanager.KeyFileSto
 
 		block, _ := pem.Decode(pemBytes)
 		if block == nil {
-			return errors.New("no valid private key found")
+			return ErrNoValidPrivateKey
 		}
 
 		if !x509.IsEncryptedPEMBlock(block) {
@@ -213,6 +241,9 @@ func (km *KeyStoreManager) ImportKeysZip(zipReader zip.Reader, passphrase string
 		// package guarantees that the separator will be /
 		rootKeysPrefix := rootKeysSubdir + "/"
 		if strings.HasPrefix(fNameTrimmed, rootKeysPrefix) {
+			if err = checkRootKeyIsEncrypted(pemBytes); err != nil {
+				return err
+			}
 			// Root keys are preserved without decrypting
 			keyName := strings.TrimPrefix(fNameTrimmed, rootKeysPrefix)
 			newRootKeys[keyName] = pemBytes
