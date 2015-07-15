@@ -50,3 +50,5 @@ echo -e "${BLUE}docker${NC} is configured to use the ${GREEN}dev${NC} machine wi
 echo "For help getting started, check out the docs at https://docs.docker.com"
 echo
 cd
+
+exec "$BASH" --login -i

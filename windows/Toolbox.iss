@@ -108,11 +108,8 @@ Source: "{#virtualBoxMsi}"; DestDir: "{app}\installers\virtualbox"; DestName: "v
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
-Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
 Name: "{group}\Docker CLI"; WorkingDir: "{app}"; Filename: "{app}\start.sh"; IconFilename: "{app}/docker-cli.ico"; Components: "Docker"
 Name: "{commondesktop}\Docker CLI"; WorkingDir: "{app}"; Filename: "{app}\start.sh"; IconFilename: "{app}/docker-cli.ico"; Tasks: desktopicon; Components: "Docker"
-Name: "{commonprograms}\Docker CLI"; WorkingDir: "{app}"; Filename: "{app}\start.sh"; IconFilename: "{app}/docker-cli.ico"; Components: "Docker"
-Name: "{group}\Delete VirtualBox Dev VM"; WorkingDir: "{app}"; Filename: "{app}\delete.sh"; Components: "DockerMachine"
 
 [UninstallRun]
 Filename: "{app}\delete.sh"
@@ -218,8 +215,8 @@ begin
 		//	begin
 		//		Wizardform.TypesCombo.ItemIndex := 2
 		//	end;
-		//	Wizardform.ComponentsList.Checked[3] := NeedToInstallVirtualBox();
-		//	Wizardform.ComponentsList.Checked[4] := NeedToInstallMSYS();
+		// Wizardform.ComponentsList.Checked[3] := NeedToInstallVirtualBox();
+		// Wizardform.ComponentsList.Checked[4] := NeedToInstallMSYS();
 		// end;
 end;
 
