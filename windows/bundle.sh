@@ -4,12 +4,12 @@ set -e
 # Script to grab binaries that are going to be bundled with windows installer.
 # Note to maintainers: Update versions used below with newer releases
 
-boot2dockerIso=1.7.0
-docker=1.7.0
-dockerMachine=0.3.0
-kitematic=0.7.4
-vbox=4.3.28
-vboxRev=100309
+boot2dockerIso=1.7.1
+docker=1.7.1
+dockerMachine=0.3.1-rc1
+kitematic=0.7.5
+vbox=5.0.0
+vboxRev=101573
 msysGit=1.9.5-preview20150319
 
 boot2dockerIsoSrc=boot2docker
