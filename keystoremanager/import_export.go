@@ -24,6 +24,14 @@ var (
 	// ErrRootKeyNotEncrypted is returned if a root key being imported is
 	// unencrypted
 	ErrRootKeyNotEncrypted = errors.New("only encrypted root keys may be imported")
+
+	// ErrNonRootKeyEncrypted is returned if a non-root key is found to
+	// be encrypted while exporting
+	ErrNonRootKeyEncrypted = errors.New("found encrypted non-root key")
+
+	// ErrNoKeysFoundForGUN is returned if no keys are found for the
+	// specified GUN during export
+	ErrNoKeysFoundForGUN = errors.New("no keys found for specified GUN")
 )
 
 // ExportRootKey exports the specified root key to an io.Writer in PEM format.
@@ -263,6 +271,80 @@ func (km *KeyStoreManager) ImportKeysZip(zipReader zip.Reader, passphrase string
 			return err
 		}
 	}
+
+	return nil
+}
+
+func moveKeysByGUN(oldKeyStore, newKeyStore *trustmanager.KeyFileStore, gun, outputPassphrase string) error {
+	// List all files but no symlinks
+	for _, f := range oldKeyStore.ListFiles(false) {
+		fullKeyPath := strings.TrimSpace(strings.TrimSuffix(f, filepath.Ext(f)))
+		relKeyPath := strings.TrimPrefix(fullKeyPath, oldKeyStore.BaseDir())
+		relKeyPath = strings.TrimPrefix(relKeyPath, string(filepath.Separator))
+
+		// Skip keys that aren't associated with this GUN
+		if !strings.HasPrefix(relKeyPath, filepath.FromSlash(gun)) {
+			continue
+		}
+
+		pemBytes, err := oldKeyStore.Get(relKeyPath)
+		if err != nil {
+			return err
+		}
+
+		block, _ := pem.Decode(pemBytes)
+		if block == nil {
+			return ErrNoValidPrivateKey
+		}
+
+		if x509.IsEncryptedPEMBlock(block) {
+			return ErrNonRootKeyEncrypted
+		}
+
+		// Key is not encrypted. Parse it, and add it
+		// to the temporary store as an encrypted key.
+		privKey, err := trustmanager.ParsePEMPrivateKey(pemBytes, "")
+		if err != nil {
+			return err
+		}
+		err = newKeyStore.AddEncryptedKey(relKeyPath, privKey, outputPassphrase)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ExportKeysByGUN exports all keys associated with a specified GUN to an
+// io.Writer in zip format. outputPassphrase is the new passphrase to use to
+// encrypt the keys. If blank, the keys will not be encrypted.
+func (km *KeyStoreManager) ExportKeysByGUN(dest io.Writer, gun, outputPassphrase string) error {
+	tempBaseDir, err := ioutil.TempDir("", "notary-key-export-")
+	defer os.RemoveAll(tempBaseDir)
+
+	// Create temporary keystore to use as a staging area
+	tempNonRootKeysPath := filepath.Join(tempBaseDir, privDir, nonRootKeysSubdir)
+	tempNonRootKeyStore, err := trustmanager.NewKeyFileStore(tempNonRootKeysPath)
+	if err != nil {
+		return err
+	}
+
+	if err := moveKeysByGUN(km.nonRootKeyStore, tempNonRootKeyStore, gun, outputPassphrase); err != nil {
+		return err
+	}
+
+	zipWriter := zip.NewWriter(dest)
+
+	if len(tempNonRootKeyStore.ListKeys()) == 0 {
+		return ErrNoKeysFoundForGUN
+	}
+
+	if err := addKeysToArchive(zipWriter, tempNonRootKeyStore, tempBaseDir); err != nil {
+		return err
+	}
+
+	zipWriter.Close()
 
 	return nil
 }

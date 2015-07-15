@@ -95,7 +95,7 @@ func NewNotaryRepository(baseDir, gun, baseURL string, rt http.RoundTripper) (*N
 		gun:             gun,
 		baseDir:         baseDir,
 		baseURL:         baseURL,
-		tufRepoPath:     filepath.Join(baseDir, tufDir, gun),
+		tufRepoPath:     filepath.Join(baseDir, tufDir, filepath.FromSlash(gun)),
 		cryptoService:   cryptoService,
 		roundTrip:       rt,
 		KeyStoreManager: keyStoreManager,
