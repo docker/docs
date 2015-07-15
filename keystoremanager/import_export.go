@@ -16,6 +16,36 @@ import (
 	"github.com/endophage/gotuf/data"
 )
 
+// ExportRootKey exports the specified root key to an io.Writer in PEM format.
+// The key's existing encryption is preserved.
+func (km *KeyStoreManager) ExportRootKey(dest io.Writer, keyID string) error {
+	pemBytes, err := km.rootKeyStore.Get(keyID)
+	if err != nil {
+		return err
+	}
+
+	_, err = dest.Write(pemBytes)
+	return err
+}
+
+// ImportRootKey imports a root in PEM format key from an io.Reader
+// The key's existing encryption is preserved. The keyID parameter is
+// necessary because otherwise we'd need the passphrase to decrypt the key
+// in order to compute the ID.
+func (km *KeyStoreManager) ImportRootKey(source io.Reader, keyID string) error {
+	pemBytes, err := ioutil.ReadAll(source)
+	if err != nil {
+		return err
+	}
+
+	err = km.rootKeyStore.Add(keyID, pemBytes)
+	if err != nil {
+		return err
+	}
+
+	return err
+}
+
 func moveKeysWithNewPassphrase(oldKeyStore, newKeyStore *trustmanager.KeyFileStore, outputPassphrase string) error {
 	// List all files but no symlinks
 	for _, f := range oldKeyStore.ListFiles(false) {
