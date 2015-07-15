@@ -1,8 +1,6 @@
 {
 	"server": {
-		"addr": ":4443",
-		"tls_cert_file": "./fixtures/notary-server.crt",
-		"tls_key_file": "./fixtures/notary-server.key"
+		"addr": ":4443"
 	},
 	"trust_service": {
 		"type": "local",
@@ -15,6 +13,6 @@
 	},
 	"storage": {
 		"backend": "mysql",
-		"db_url": "root:@tcp(localhost:3306)/test"
+		"db_url": "dockercondemo:dockercondemo@tcp(notarymysql:3306)/dockercondemo"
 	}
 }

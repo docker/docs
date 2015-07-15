@@ -13,4 +13,4 @@ EXPOSE 4443
 
 WORKDIR /go/src/github.com/docker/notary
 
-CMD [ "notary-server", "-config", "cmd/notary-server/dev-config.json" ]
+CMD [ "notary-server", "-config", "cmd/notary-server/config.json" ]
