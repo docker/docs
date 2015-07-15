@@ -20,6 +20,7 @@ type FileStore interface {
 	ListFiles(symlinks bool) []string
 	ListDir(directoryName string, symlinks bool) []string
 	Link(src, dst string) error
+	BaseDir() string
 }
 
 // SimpleFileStore implements FileStore
@@ -163,6 +164,11 @@ func (f *SimpleFileStore) Link(oldname, newname string) error {
 		f.genFileName(oldname),
 		f.genFilePath(newname),
 	)
+}
+
+// BaseDir returns the base directory of the filestore
+func (f *SimpleFileStore) BaseDir() string {
+	return f.baseDir
 }
 
 // CreateDirectory uses createDirectory to create a chmod 755 Directory
