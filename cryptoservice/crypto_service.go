@@ -1,4 +1,4 @@
-package client
+package cryptoservice
 
 import (
 	"crypto"
@@ -13,6 +13,10 @@ import (
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary/trustmanager"
 	"github.com/endophage/gotuf/data"
+)
+
+const (
+	rsaKeySize = 2048 // Used for snapshots and targets keys
 )
 
 // CryptoService implements Sign and Create, holding a specific GUN and keystore to

@@ -63,10 +63,10 @@ func testInitRepo(t *testing.T, rootType data.KeyAlgorithm) {
 	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport)
 	assert.NoError(t, err, "error creating repo: %s", err)
 
-	rootKeyID, err := repo.GenRootKey(rootType.String(), "passphrase")
+	rootKeyID, err := repo.KeyStoreManager.GenRootKey(rootType.String(), "passphrase")
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootCryptoService, err := repo.GetRootCryptoService(rootKeyID, "passphrase")
+	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID, "passphrase")
 	assert.NoError(t, err, "error retrieving root key: %s", err)
 
 	err = repo.Initialize(rootCryptoService)
@@ -91,7 +91,7 @@ func testInitRepo(t *testing.T, rootType data.KeyAlgorithm) {
 
 	// Look for keys in private. The filenames should match the key IDs
 	// in the private key store.
-	privKeyList := repo.privKeyStore.ListFiles(true)
+	privKeyList := repo.KeyStoreManager.NonRootKeyStore().ListFiles(true)
 	for _, privKeyName := range privKeyList {
 		_, err := os.Stat(privKeyName)
 		assert.NoError(t, err, "missing private key: %s", privKeyName)
@@ -106,7 +106,7 @@ func testInitRepo(t *testing.T, rootType data.KeyAlgorithm) {
 
 	// Also expect a symlink from the key ID of the certificate key to this
 	// root key
-	certificates := repo.certificateStore.GetCertificates()
+	certificates := repo.KeyStoreManager.CertificateStore().GetCertificates()
 	assert.Len(t, certificates, 1, "unexpected number of certificates")
 
 	certID, err := trustmanager.FingerprintCert(certificates[0])
@@ -207,10 +207,10 @@ func testAddListTarget(t *testing.T, rootType data.KeyAlgorithm) {
 	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
-	rootKeyID, err := repo.GenRootKey(rootType.String(), "passphrase")
+	rootKeyID, err := repo.KeyStoreManager.GenRootKey(rootType.String(), "passphrase")
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootCryptoService, err := repo.GetRootCryptoService(rootKeyID, "passphrase")
+	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID, "passphrase")
 	assert.NoError(t, err, "error retreiving root key: %s", err)
 
 	err = repo.Initialize(rootCryptoService)
@@ -309,7 +309,7 @@ func testAddListTarget(t *testing.T, rootType data.KeyAlgorithm) {
 	var tempKey data.PrivateKey
 	json.Unmarshal([]byte(timestampECDSAKeyJSON), &tempKey)
 
-	repo.privKeyStore.AddKey(filepath.Join(gun, tempKey.ID()), &tempKey)
+	repo.KeyStoreManager.NonRootKeyStore().AddKey(filepath.Join(gun, tempKey.ID()), &tempKey)
 
 	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/root.json", func(w http.ResponseWriter, r *http.Request) {
 		rootJSONFile := filepath.Join(tempBaseDir, "tuf", gun, "metadata", "root.json")
@@ -392,10 +392,10 @@ func testValidateRootKey(t *testing.T, rootType data.KeyAlgorithm) {
 	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
-	rootKeyID, err := repo.GenRootKey(rootType.String(), "passphrase")
+	rootKeyID, err := repo.KeyStoreManager.GenRootKey(rootType.String(), "passphrase")
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootCryptoService, err := repo.GetRootCryptoService(rootKeyID, "passphrase")
+	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID, "passphrase")
 	assert.NoError(t, err, "error retreiving root key: %s", err)
 
 	err = repo.Initialize(rootCryptoService)
