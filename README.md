@@ -3,7 +3,7 @@
 The Docker Toolbox installs everything you need to get started with
 Docker on Mac OS X and Windows, including:
 
-- Docker (the client)
+- Docker Client
 - Docker Machine
 - Docker Compose
 - Kitematic (Beta)
