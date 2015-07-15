@@ -286,11 +286,76 @@ func TestGetPath(t *testing.T) {
 
 	firstPath := "diogomonica.com/openvpn/0xdeadbeef.crt"
 	secondPath := "/docker.io/testing-dashes/@#$%^&().crt"
-	if store.GetPath("diogomonica.com/openvpn/0xdeadbeef") != firstPath {
+
+	result, err := store.GetPath("diogomonica.com/openvpn/0xdeadbeef")
+	if err != nil {
+		t.Fatalf("unexpected error from GetPath: %v", err)
+	}
+	if result != firstPath {
 		t.Fatalf("Expecting: %s", firstPath)
 	}
-	if store.GetPath("/docker.io/testing-dashes/@#$%^&()") != secondPath {
+
+	result, err = store.GetPath("/docker.io/testing-dashes/@#$%^&()")
+	if err != nil {
+		t.Fatalf("unexpected error from GetPath: %v", err)
+	}
+	if result != secondPath {
 		t.Fatalf("Expecting: %s", secondPath)
+	}
+}
+
+func TestGetPathProtection(t *testing.T) {
+	testExt := "crt"
+	perms := os.FileMode(0755)
+
+	// Create our SimpleFileStore
+	store := &SimpleFileStore{
+		baseDir: "/path/to/filestore/",
+		fileExt: testExt,
+		perms:   perms,
+	}
+
+	// Should deny requests for paths outside the filestore
+	if _, err := store.GetPath("../../etc/passwd"); err != ErrPathOutsideStore {
+		t.Fatalf("expected ErrPathOutsideStore error from GetPath")
+	}
+	if _, err := store.GetPath("private/../../../etc/passwd"); err != ErrPathOutsideStore {
+		t.Fatalf("expected ErrPathOutsideStore error from GetPath")
+	}
+
+	// Convoluted paths should work as long as they end up inside the store
+	expected := "/path/to/filestore/filename.crt"
+	result, err := store.GetPath("private/../../filestore/./filename")
+	if err != nil {
+		t.Fatalf("unexpected error from GetPath: %v", err)
+	}
+	if result != expected {
+		t.Fatalf("Expecting: %s (got: %s)", expected, result)
+	}
+
+	// Repeat tests with a relative baseDir
+	relStore := &SimpleFileStore{
+		baseDir: "relative/file/path",
+		fileExt: testExt,
+		perms:   perms,
+	}
+
+	// Should deny requests for paths outside the filestore
+	if _, err := relStore.GetPath("../../etc/passwd"); err != ErrPathOutsideStore {
+		t.Fatalf("expected ErrPathOutsideStore error from GetPath")
+	}
+	if _, err := relStore.GetPath("private/../../../etc/passwd"); err != ErrPathOutsideStore {
+		t.Fatalf("expected ErrPathOutsideStore error from GetPath")
+	}
+
+	// Convoluted paths should work as long as they end up inside the store
+	expected = "relative/file/path/filename.crt"
+	result, err = relStore.GetPath("private/../../path/./filename")
+	if err != nil {
+		t.Fatalf("unexpected error from GetPath: %v", err)
+	}
+	if result != expected {
+		t.Fatalf("Expecting: %s (got: %s)", expected, result)
 	}
 }
 
