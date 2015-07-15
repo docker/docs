@@ -186,14 +186,7 @@ RUN sed -i \
 		-e "s/%KITEMATICAPP_VERSION%/$KITEMATIC_VERSION/g" \
 		mpkg/Resources/en.lproj/Localizable.strings
 
-# Make DMG rootfs
-RUN mkdir -p /dmg
-
 # Repackage back. Yes, --compression=none is mandatory.
 # or this won't install in OSX.
 RUN cd /mpkg && \
-	xar -c --compression=none -f /dmg/DockerToolbox.pkg .
-
-COPY makedmg.sh /
-
-CMD ["/makedmg.sh", "docker.dmg", "Docker", "/dmg"]
+	xar -c --compression=none -f /DockerToolbox.pkg .
