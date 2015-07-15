@@ -11,7 +11,9 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary/trustmanager"
+	"github.com/endophage/gotuf/data"
 )
 
 func moveKeysWithNewPassphrase(oldKeyStore, newKeyStore *trustmanager.KeyFileStore, outputPassphrase string) error {
@@ -138,10 +140,75 @@ func (km *KeyStoreManager) ExportAllKeys(dest io.Writer, outputPassphrase string
 	return nil
 }
 
-// ImportZip imports keys from a zip file provided as an io.Reader. The keys
-// in the root_keys directory are left encrypted, but the other keys are
+// ImportKeysZip imports keys from a zip file provided as an io.ReaderAt. The
+// keys in the root_keys directory are left encrypted, but the other keys are
 // decrypted with the specified passphrase.
-func (km *KeyStoreManager) ImportZip(zip io.Reader, passphrase string) error {
-	// TODO(aaronl)
+func (km *KeyStoreManager) ImportKeysZip(zipReader zip.Reader, passphrase string) error {
+	// Temporarily store the keys in maps, so we can bail early if there's
+	// an error (for example, wrong passphrase), without leaving the key
+	// store in an inconsistent state
+	newRootKeys := make(map[string][]byte)
+	newNonRootKeys := make(map[string]*data.PrivateKey)
+
+	// Iterate through the files in the archive. Don't add the keys
+	for _, f := range zipReader.File {
+		fNameTrimmed := strings.TrimSuffix(f.Name, filepath.Ext(f.Name))
+		// Note that using / as a separator is okay here - the zip
+		// package guarantees that the separator will be /
+		keysPrefix := privDir + "/"
+
+		if !strings.HasPrefix(fNameTrimmed, keysPrefix) {
+			// This path inside the zip archive doesn't start with
+			// "private". That's unexpected, because all keys
+			// should be in that subdirectory. To avoid adding a
+			// file to the filestore that we won't be able to use,
+			// skip this file in the import.
+			logrus.Warnf("skipping import of key with a path that doesn't begin with %s: %s", keysPrefix, f.Name)
+			continue
+		}
+		fNameTrimmed = strings.TrimPrefix(fNameTrimmed, keysPrefix)
+
+		rc, err := f.Open()
+		if err != nil {
+			return err
+		}
+
+		pemBytes, err := ioutil.ReadAll(rc)
+		if err != nil {
+			return nil
+		}
+
+		// Is this in the root_keys directory?
+		// Note that using / as a separator is okay here - the zip
+		// package guarantees that the separator will be /
+		rootKeysPrefix := rootKeysSubdir + "/"
+		if strings.HasPrefix(fNameTrimmed, rootKeysPrefix) {
+			// Root keys are preserved without decrypting
+			keyName := strings.TrimPrefix(fNameTrimmed, rootKeysPrefix)
+			newRootKeys[keyName] = pemBytes
+		} else {
+			// Non-root keys need to be decrypted
+			key, err := trustmanager.ParsePEMPrivateKey(pemBytes, passphrase)
+			if err != nil {
+				return err
+			}
+			newNonRootKeys[fNameTrimmed] = key
+		}
+
+		rc.Close()
+	}
+
+	for keyName, pemBytes := range newRootKeys {
+		if err := km.rootKeyStore.Add(keyName, pemBytes); err != nil {
+			return err
+		}
+	}
+
+	for keyName, privKey := range newNonRootKeys {
+		if err := km.nonRootKeyStore.AddKey(keyName, privKey); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
