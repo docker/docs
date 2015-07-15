@@ -1,21 +1,21 @@
 'docker_title' = 'Docker Toolbox';
 
-'choiceDockerCLI_title' = 'Docker';
+'choiceDockerCLI_title' = 'Docker Client %DOCKER_VERSION%';
 'choiceDockerCLI_msg' = 'Installs the Docker client for Mac OS X into /usr/local/bin/';
 
-'choiceDockerMachineCLI_title' = 'Docker Machine';
+'choiceDockerMachineCLI_title' = 'Docker Machine %DOCKERMACHINE_VERSION%';
 'choiceDockerMachineCLI_msg' = 'Installs the Docker Machine binary into /usr/local/bin/';
 
-'choiceDockerComposeCLI_title' = 'Docker Compose';
+'choiceDockerComposeCLI_title' = 'Docker Compose %DOCKERCOMPOSE_VERSION%';
 'choiceDockerComposeCLI_msg' = 'Installs the Docker Compose binary into /usr/local/bin/';
 
-'choiceBoot2DockerISO_title' = 'Boot2Docker ISO';
+'choiceBoot2DockerISO_title' = 'Boot2Docker ISO %BOOT2DOCKER_ISO_VERSION%';
 'choiceBoot2DockerISO_msg' = 'Installs the boot2docker.iso into /usr/local/share/';
 
 'choiceDockerCLIAPP_title' = 'Docker CLI Quick-start applet';
 'choiceDockerCLIAPP_msg' = 'Installs the Docker CLI Quick-start applet into /Applications/';
 
-'choiceKitematicAPP_title' = 'Kitematic';
+'choiceKitematicAPP_title' = 'Kitematic %KITEMATICAPP_VERSION%';
 'choiceKitematicAPP_msg' = 'Installs Kitematic into /Applications/';
 
 'choiceVBox_title' = 'Oracle VM VirtualBox %VBOX_VERSION%';
@@ -29,4 +29,3 @@
 
 'UNSUPPORTED_OS_TLE' = "Unsupported OS version detected!";
 'UNSUPPORTED_OS_MSG' = "The installer has detected an unsupported operation system. VirtualBox requires Mac OS X 10.6 or later.";
-

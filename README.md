@@ -1,3 +1,16 @@
-#  Docker Toolbox
+[![docker toolbox logo](https://cloud.githubusercontent.com/assets/251292/8687428/fd6ed9f0-2a44-11e5-9424-a3f1445e4845.png)](https://toolbox.docker.com)
 
-![illustration-website copy](https://cloud.githubusercontent.com/assets/251292/8635484/dea7d166-27d8-11e5-93f9-76d20b2fa80e.png)
+The Docker Toolbox installs everything you need to get started with
+Docker on Mac OS X and Windows, including:
+
+- Docker Client
+- Docker Machine
+- Docker Compose
+- Kitematic (Beta)
+- VirtualBox
+
+## Installation and documentation
+
+Full documentation [is available
+here](https://docs.docker.com/installation/mac/).
+

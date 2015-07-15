@@ -26,10 +26,10 @@ RUN curl -fsSL -o /vbox.dmg http://download.virtualbox.org/virtualbox/$VBOX_VERS
 
 # Download the Docker parts
 
-ENV DOCKER_VERSION 1.7.0
+ENV DOCKER_VERSION 1.7.1
 RUN curl -fsSL -o /docker.tgz https://get.docker.com/builds/Darwin/x86_64/docker-$DOCKER_VERSION.tgz
 
-ENV DOCKER_MACHINE_VERSION 0.3.0
+ENV DOCKER_MACHINE_VERSION 0.3.1-rc1
 RUN curl -fsSL -o /docker-machine https://github.com/docker/machine/releases/download/v$DOCKER_MACHINE_VERSION/docker-machine_darwin-amd64
 RUN chmod +x /docker-machine
 
@@ -80,8 +80,6 @@ RUN cd /mpkg/docker.pkg && \
 		-e "s/%DOCKER_NUMBER_OF_FILES%/`find . | wc -l`/g" \
 		-e "s/%DOCKER_INSTALL_KBYTES%/`du -sk | cut -f1`/g" \
 		-e "s/%DOCKER_VERSION%/$DOCKER_VERSION/g" \
-		-e "s/%DOCKER_MACHINE_VERSION%/$DOCKER_MACHINE_VERSION/g" \
-		-e "s/%DOCKER_COMPOSE_VERSION%/$DOCKER_COMPOSE_VERSION/g" \
 		../PackageInfo /mpkg/Distribution && \
 	cd .. && \
 	rm -rf ./rootfs
@@ -98,7 +96,7 @@ RUN cd /mpkg/dockermachine.pkg && \
 	sed -i \
 		-e "s/%DOCKERMACHINE_NUMBER_OF_FILES%/`find . | wc -l`/g" \
 		-e "s/%DOCKERMACHINE_INSTALL_KBYTES%/`du -sk | cut -f1`/g" \
-		-e "s/%DOCKERMACHINE_VERSION%/$DOCKER_VERSION/g" \
+		-e "s/%DOCKERMACHINE_VERSION%/$DOCKER_MACHINE_VERSION/g" \
 		../PackageInfo /mpkg/Distribution && \
 	cd .. && \
 	rm -rf ./rootfs
@@ -115,7 +113,7 @@ RUN cd /mpkg/dockercompose.pkg && \
 	sed -i \
 		-e "s/%DOCKERCOMPOSE_NUMBER_OF_FILES%/`find . | wc -l`/g" \
 		-e "s/%DOCKERCOMPOSE_INSTALL_KBYTES%/`du -sk | cut -f1`/g" \
-		-e "s/%DOCKERCOMPOSE_VERSION%/$DOCKER_VERSION/g" \
+		-e "s/%DOCKERCOMPOSE_VERSION%/$DOCKER_COMPOSE_VERSION/g" \
 		../PackageInfo /mpkg/Distribution && \
 	cd .. && \
 	rm -rf ./rootfs
@@ -161,7 +159,7 @@ RUN cd /mpkg/kitematicapp.pkg && \
 	sed -i \
 		-e "s/%KITEMATICAPP_NUMBER_OF_FILES%/`find . | wc -l`/g" \
 		-e "s/%KITEMATICAPP_INSTALL_KBYTES%/`du -sk | cut -f1`/g" \
-		-e "s/%KITEMATICAPP_VERSION%/$INSTALLER_VERSION/g" \
+		-e "s/%KITEMATICAPP_VERSION%/$KITEMATIC_VERSION/g" \
 		../PackageInfo /mpkg/Distribution && \
 	cd .. && \
 	rm -rf ./rootfs
@@ -180,16 +178,15 @@ RUN sed -i \
 		/mpkg/Distribution && \
 		sed -i \
 		-e "s/%VBOX_VERSION%/$VBOX_VERSION/g" \
+		-e "s/%DOCKER_VERSION%/$DOCKER_VERSION/g" \
+		-e "s/%DOCKERMACHINE_VERSION%/$DOCKER_MACHINE_VERSION/g" \
+		-e "s/%DOCKERCOMPOSE_VERSION%/$DOCKER_COMPOSE_VERSION/g" \
+		-e "s/%BOOT2DOCKER_ISO_VERSION%/$BOOT2DOCKER_ISO_VERSION/g" \
+		-e "s/%DOCKERCLIAPP_VERSION%/$INSTALLER_VERSION/g" \
+		-e "s/%KITEMATICAPP_VERSION%/$KITEMATIC_VERSION/g" \
 		mpkg/Resources/en.lproj/Localizable.strings
-
-# Make DMG rootfs
-RUN mkdir -p /dmg
 
 # Repackage back. Yes, --compression=none is mandatory.
 # or this won't install in OSX.
 RUN cd /mpkg && \
-	xar -c --compression=none -f /dmg/DockerToolbox.pkg .
-
-COPY makedmg.sh /
-
-CMD ["/makedmg.sh", "docker.dmg", "Docker", "/dmg"]
+	xar -c --compression=none -f /DockerToolbox.pkg .
