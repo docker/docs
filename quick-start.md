@@ -1,4 +1,4 @@
-<!--[metadata]>
+
 +++
 title = "Quick-start: Basic Workflow"
 description = "Brief tutorial on the basics of Docker Trusted Registry user workflow"
@@ -7,7 +7,7 @@ keywords = ["docker, documentation, about, technology, understanding, enterprise
 parent="smn_dhe"
 weight=1
 +++
-<![end-metadata]-->
+
 
 
 

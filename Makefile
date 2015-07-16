@@ -38,10 +38,10 @@ default: docs
 
 test: docs-build
 	$(DOCKER_RUN_DOCS) -p $(if $(DOCSPORT),$(DOCSPORT):)8000 \
-		-v $(CURDIR):/docs/content/docker-hub/ \
+		-v $(CURDIR):/docs/content/docker-trusted-registry/ \
 		-e DOCKERHOST "$(DOCKER_DOCS_IMAGE)" \
 		hugo server \
-			--log --watch --buildDrafts=true \
+			--log=true --watch=true --buildDrafts=true \
 			--port=$(DOCSPORT) --baseUrl=$(HUGO_BASE_URL) --bind=$(HUGO_BIND_IP)
 
 docs: docs-build

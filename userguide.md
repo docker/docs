@@ -1,4 +1,4 @@
-<!--[metadata]>
+
 +++
 title = "User guide"
 description = "Documentation describing basic use of Docker Trusted Registry"
@@ -7,7 +7,7 @@ keywords = ["docker, documentation, about, technology, hub,  enterprise"]
 parent="smn_dhe"
 weight=2
 +++
-<![end-metadata]-->
+
 
 
 

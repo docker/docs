@@ -1,4 +1,4 @@
-<!--[metadata]>
+
 +++
 title = "Installation"
 description = "Installation instructions for Docker Trusted Registry"
@@ -7,7 +7,7 @@ keywords = ["docker, documentation, about, technology, understanding, enterprise
 parent="smn_dhe"
 weight=4
 +++
-<![end-metadata]-->
+
 
 
 # Install Docker Trusted Registry

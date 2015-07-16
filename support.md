@@ -1,4 +1,4 @@
-<!--[metadata]>
+
 +++
 title = "Support"
 description = "Commercial Support"
@@ -7,7 +7,7 @@ keywords = ["docker, documentation, about, technology, understanding, enterprise
 parent="smn_dhe"
 weight=99
 +++
-<![end-metadata]-->
+
 
 
 # Commercial Support Options

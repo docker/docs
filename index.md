@@ -1,4 +1,4 @@
-<!--[metadata]>
+
 +++
 aliases = [ "/docker-hub-enterprise/" ]
 title = "Overview"
@@ -7,7 +7,7 @@ keywords = ["docker, documentation, about, technology, understanding, enterprise
 [menu.main]
 parent="smn_dhe"
 +++
-<![end-metadata]-->
+
 
 
 # Welcome to Docker Trusted Registry

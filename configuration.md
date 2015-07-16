@@ -1,4 +1,4 @@
-<!--[metadata]>
+
 +++
 title = "Configuration options"
 description = "Configuration instructions for Docker Trusted Registry"
@@ -7,7 +7,7 @@ keywords = ["docker, documentation, about, technology, understanding, enterprise
 parent="smn_dhe"
 weight=5
 +++
-<![end-metadata]-->
+
 
 
 # Configuring DTR

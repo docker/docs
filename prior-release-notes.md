@@ -1,4 +1,4 @@
-<!--[metadata]>
+
 +++
 title = "Prior release notes archive"
 description = "Archived Release notes for Docker Trusted Registry"
@@ -7,7 +7,7 @@ keywords = ["docker, documentation, about, technology, understanding, enterprise
 parent="smn_dhe"
 weight=101
 +++
-<![end-metadata]-->
+
 
 
 # Release Notes

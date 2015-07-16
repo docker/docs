@@ -1,4 +1,4 @@
-<!--[metadata]>
+
 +++
 title = "Release notes"
 description = "Release notes for Docker Trusted Registry"
@@ -7,7 +7,7 @@ keywords = ["docker, documentation, about, technology, understanding, enterprise
 parent="smn_dhe"
 weight=100
 +++
-<![end-metadata]-->
+
 
 
 # Docker Trusted Registry: Release Notes
