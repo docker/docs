@@ -57,8 +57,8 @@ The configuration file must be a json file with the following format:
 {
     "server": {
         "addr": ":4443",
-        "tls_cert_file": "./fixtures/notary.pem",
-        "tls_key_file": "./fixtures/notary.key"
+        "tls_cert_file": "./fixtures/notary-server.pem",
+        "tls_key_file": "./fixtures/notary-server.key"
     },
     "logging": {
         "level": 5
