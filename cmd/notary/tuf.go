@@ -19,7 +19,7 @@ import (
 )
 
 // FIXME: This should not be hardcoded
-const hardcodedBaseURL = "https://notary:4443"
+const hardcodedBaseURL = "https://notary-server:4443"
 
 var remoteTrustServer string
 

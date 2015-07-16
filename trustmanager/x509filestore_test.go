@@ -4,10 +4,23 @@ import (
 	"crypto/x509"
 	"encoding/pem"
 	"io/ioutil"
+	"os"
 	"testing"
 )
 
-func TestAddCert(t *testing.T) {
+func TestNewX509FileStore(t *testing.T) {
+	tempDir, err := ioutil.TempDir("", "cert-test")
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer os.RemoveAll(tempDir)
+	store, err := NewX509FileStore(tempDir)
+	if err != nil {
+		t.Fatalf("failed to create a new X509FileStore: %v", store)
+	}
+}
+
+func TestAddCertX509FileStore(t *testing.T) {
 	// Read certificate from file
 	b, err := ioutil.ReadFile("../fixtures/root-ca.crt")
 	if err != nil {
@@ -22,8 +35,12 @@ func TestAddCert(t *testing.T) {
 	if err != nil {
 		t.Fatalf("couldn't parse certificate: %v", err)
 	}
+	tempDir, err := ioutil.TempDir("", "cert-test")
+	if err != nil {
+		t.Fatal(err)
+	}
 	// Create a Store and add the certificate to it
-	store := NewX509MemStore()
+	store, _ := NewX509FileStore(tempDir)
 	err = store.AddCert(cert)
 	if err != nil {
 		t.Fatalf("failed to load certificate: %v", err)
@@ -40,9 +57,13 @@ func TestAddCert(t *testing.T) {
 	}
 }
 
-func TestAddCertFromFile(t *testing.T) {
-	store := NewX509MemStore()
-	err := store.AddCertFromFile("../fixtures/root-ca.crt")
+func TestAddCertFromFileX509FileStore(t *testing.T) {
+	tempDir, err := ioutil.TempDir("", "cert-test")
+	if err != nil {
+		t.Fatal(err)
+	}
+	store, _ := NewX509FileStore(tempDir)
+	err = store.AddCertFromFile("../fixtures/root-ca.crt")
 	if err != nil {
 		t.Fatalf("failed to load certificate from file: %v", err)
 	}
@@ -52,13 +73,17 @@ func TestAddCertFromFile(t *testing.T) {
 	}
 }
 
-func TestAddCertFromPEM(t *testing.T) {
+func TestAddCertFromPEMX509FileStore(t *testing.T) {
 	b, err := ioutil.ReadFile("../fixtures/root-ca.crt")
 	if err != nil {
 		t.Fatalf("couldn't load fixture: %v", err)
 	}
 
-	store := NewX509MemStore()
+	tempDir, err := ioutil.TempDir("", "cert-test")
+	if err != nil {
+		t.Fatal(err)
+	}
+	store, _ := NewX509FileStore(tempDir)
 	err = store.AddCertFromPEM(b)
 	if err != nil {
 		t.Fatalf("failed to load certificate from PEM: %v", err)
@@ -69,7 +94,7 @@ func TestAddCertFromPEM(t *testing.T) {
 	}
 }
 
-func TestRemoveCert(t *testing.T) {
+func TestRemoveCertX509FileStore(t *testing.T) {
 	b, err := ioutil.ReadFile("../fixtures/root-ca.crt")
 	if err != nil {
 		t.Fatalf("couldn't load fixture: %v", err)
@@ -82,7 +107,11 @@ func TestRemoveCert(t *testing.T) {
 		t.Fatalf("couldn't parse certificate: %v", err)
 	}
 
-	store := NewX509MemStore()
+	tempDir, err := ioutil.TempDir("", "cert-test")
+	if err != nil {
+		t.Fatal(err)
+	}
+	store, _ := NewX509FileStore(tempDir)
 	err = store.AddCert(cert)
 	if err != nil {
 		t.Fatalf("failed to load certificate: %v", err)
@@ -106,9 +135,13 @@ func TestRemoveCert(t *testing.T) {
 	}
 }
 
-func TestInexistentGetCertificateByKeyID(t *testing.T) {
-	store := NewX509MemStore()
-	err := store.AddCertFromFile("../fixtures/root-ca.crt")
+func TestInexistentGetCertificateByKeyIDX509FileStore(t *testing.T) {
+	tempDir, err := ioutil.TempDir("", "cert-test")
+	if err != nil {
+		t.Fatal(err)
+	}
+	store, _ := NewX509FileStore(tempDir)
+	err = store.AddCertFromFile("../fixtures/root-ca.crt")
 	if err != nil {
 		t.Fatalf("failed to load certificate from file: %v", err)
 	}
@@ -119,7 +152,7 @@ func TestInexistentGetCertificateByKeyID(t *testing.T) {
 	}
 }
 
-func TestGetCertificateByKeyID(t *testing.T) {
+func TestGetCertificateByKeyIDX509FileStore(t *testing.T) {
 	b, err := ioutil.ReadFile("../fixtures/root-ca.crt")
 	if err != nil {
 		t.Fatalf("couldn't load fixture: %v", err)
@@ -132,7 +165,11 @@ func TestGetCertificateByKeyID(t *testing.T) {
 		t.Fatalf("couldn't parse certificate: %v", err)
 	}
 
-	store := NewX509MemStore()
+	tempDir, err := ioutil.TempDir("", "cert-test")
+	if err != nil {
+		t.Fatal(err)
+	}
+	store, _ := NewX509FileStore(tempDir)
 	err = store.AddCert(cert)
 	if err != nil {
 		t.Fatalf("failed to load certificate from PEM: %v", err)
@@ -150,21 +187,29 @@ func TestGetCertificateByKeyID(t *testing.T) {
 	}
 }
 
-func TestGetVerifyOpsErrorsWithoutCerts(t *testing.T) {
+func TestGetVerifyOpsErrorsWithoutCertsX509FileStore(t *testing.T) {
+	tempDir, err := ioutil.TempDir("", "cert-test")
+	if err != nil {
+		t.Fatal(err)
+	}
 	// Create empty Store
-	store := NewX509MemStore()
+	store, _ := NewX509FileStore(tempDir)
 
 	// Try to get VerifyOptions without certs added
-	_, err := store.GetVerifyOptions("example.com")
+	_, err = store.GetVerifyOptions("example.com")
 	if err == nil {
 		t.Fatalf("expecting an error when getting empty VerifyOptions")
 	}
 }
 
-func TestVerifyLeafCertFromIntermediate(t *testing.T) {
+func TestVerifyLeafCertFromIntermediateX509FileStore(t *testing.T) {
+	tempDir, err := ioutil.TempDir("", "cert-test")
+	if err != nil {
+		t.Fatal(err)
+	}
 	// Create a store and add a root
-	store := NewX509MemStore()
-	err := store.AddCertFromFile("../fixtures/intermediate-ca.crt")
+	store, _ := NewX509FileStore(tempDir)
+	err = store.AddCertFromFile("../fixtures/intermediate-ca.crt")
 	if err != nil {
 		t.Fatalf("failed to load certificate from file: %v", err)
 	}
@@ -192,10 +237,14 @@ func TestVerifyLeafCertFromIntermediate(t *testing.T) {
 	}
 }
 
-func TestVerifyIntermediateFromRoot(t *testing.T) {
+func TestVerifyIntermediateFromRootX509FileStore(t *testing.T) {
+	tempDir, err := ioutil.TempDir("", "cert-test")
+	if err != nil {
+		t.Fatal(err)
+	}
 	// Create a store and add a root
-	store := NewX509MemStore()
-	err := store.AddCertFromFile("../fixtures/root-ca.crt")
+	store, _ := NewX509FileStore(tempDir)
+	err = store.AddCertFromFile("../fixtures/root-ca.crt")
 	if err != nil {
 		t.Fatalf("failed to load certificate from file: %v", err)
 	}
@@ -223,13 +272,19 @@ func TestVerifyIntermediateFromRoot(t *testing.T) {
 	}
 }
 
-func TestNewX509FilteredMemStore(t *testing.T) {
-	store := NewX509FilteredMemStore(func(cert *x509.Certificate) bool {
+func TestNewX509FilteredFileStore(t *testing.T) {
+	tempDir, err := ioutil.TempDir("", "cert-test")
+	if err != nil {
+		t.Fatal(err)
+	}
+	store, err := NewX509FilteredFileStore(tempDir, func(cert *x509.Certificate) bool {
 		return cert.IsCA
 	})
-
+	if err != nil {
+		t.Fatalf("failed to create new X509FilteredFileStore: %v", err)
+	}
 	// AddCert should succeed because this is a CA being added
-	err := store.AddCertFromFile("../fixtures/root-ca.crt")
+	err = store.AddCertFromFile("../fixtures/root-ca.crt")
 	if err != nil {
 		t.Fatalf("failed to load certificate from file: %v", err)
 	}
@@ -245,10 +300,14 @@ func TestNewX509FilteredMemStore(t *testing.T) {
 	}
 }
 
-func TestGetCertificatePool(t *testing.T) {
+func TestGetCertificatePoolX509FileStore(t *testing.T) {
+	tempDir, err := ioutil.TempDir("", "cert-test")
+	if err != nil {
+		t.Fatal(err)
+	}
 	// Create a store and add a root
-	store := NewX509MemStore()
-	err := store.AddCertFromFile("../fixtures/root-ca.crt")
+	store, _ := NewX509FileStore(tempDir)
+	err = store.AddCertFromFile("../fixtures/root-ca.crt")
 	if err != nil {
 		t.Fatalf("failed to load certificate from file: %v", err)
 	}

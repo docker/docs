@@ -1,14 +1,14 @@
 {
 	"server": {
 		"addr": ":4443",
-		"tls_cert_file": "./fixtures/notary.pem",
-		"tls_key_file": "./fixtures/notary.key"
+		"tls_cert_file": "./fixtures/notary-server.crt",
+		"tls_key_file": "./fixtures/notary-server.key"
 	},
 	"trust_service": {
 		"type": "local",
 		"hostname": "signer",
 		"port": "7899",
-		"tls_ca_file": "./fixtures/ca.cert"
+		"tls_ca_file": "./fixtures/root-ca.crt"
 	},
 	"logging": {
 		"level": 5

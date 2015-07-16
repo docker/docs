@@ -216,10 +216,10 @@ func testAddListTarget(t *testing.T, rootType data.KeyAlgorithm) {
 	err = repo.Initialize(rootCryptoService)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
-	// Add fixtures/ca.cert as a target. There's no particular reason
+	// Add fixtures/intermediate-ca.crt as a target. There's no particular reason
 	// for using this file except that it happens to be available as
 	// a fixture.
-	latestTarget, err := NewTarget("latest", "../fixtures/ca.cert")
+	latestTarget, err := NewTarget("latest", "../fixtures/intermediate-ca.crt")
 	assert.NoError(t, err, "error creating target")
 	err = repo.AddTarget(latestTarget)
 	assert.NoError(t, err, "error adding target")
@@ -253,7 +253,7 @@ func testAddListTarget(t *testing.T, rootType data.KeyAlgorithm) {
 	changelistDir.Close()
 
 	// Create a second target
-	currentTarget, err := NewTarget("current", "../fixtures/ca.cert")
+	currentTarget, err := NewTarget("current", "../fixtures/intermediate-ca.crt")
 	assert.NoError(t, err, "error creating target")
 	err = repo.AddTarget(currentTarget)
 	assert.NoError(t, err, "error adding target")

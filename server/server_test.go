@@ -14,8 +14,8 @@ func TestRunBadAddr(t *testing.T) {
 	err := Run(
 		context.Background(),
 		"testAddr",
-		"../fixtures/ca.pem",
-		"../fixtures/ca-key.pem",
+		"../fixtures/notary-server.crt",
+		"../fixtures/notary-server.crt",
 		signed.NewEd25519(),
 		"",
 		nil,
@@ -31,8 +31,8 @@ func TestRunReservedPort(t *testing.T) {
 	err := Run(
 		ctx,
 		"localhost:80",
-		"../fixtures/notary.pem",
-		"../fixtures/notary.key",
+		"../fixtures/notary-server.crt",
+		"../fixtures/notary-server.crt",
 		signed.NewEd25519(),
 		"",
 		nil,
