@@ -9,7 +9,7 @@ import (
 
 func TestAddCert(t *testing.T) {
 	// Read certificate from file
-	b, err := ioutil.ReadFile("../fixtures/notary/root-ca.crt")
+	b, err := ioutil.ReadFile("../fixtures/root-ca.crt")
 	if err != nil {
 		t.Fatalf("couldn't load fixture: %v", err)
 	}
@@ -42,7 +42,7 @@ func TestAddCert(t *testing.T) {
 
 func TestAddCertFromFile(t *testing.T) {
 	store := NewX509MemStore()
-	err := store.AddCertFromFile("../fixtures/notary/root-ca.crt")
+	err := store.AddCertFromFile("../fixtures/root-ca.crt")
 	if err != nil {
 		t.Fatalf("failed to load certificate from file: %v", err)
 	}
@@ -53,7 +53,7 @@ func TestAddCertFromFile(t *testing.T) {
 }
 
 func TestAddCertFromPEM(t *testing.T) {
-	b, err := ioutil.ReadFile("../fixtures/notary/root-ca.crt")
+	b, err := ioutil.ReadFile("../fixtures/root-ca.crt")
 	if err != nil {
 		t.Fatalf("couldn't load fixture: %v", err)
 	}
@@ -70,7 +70,7 @@ func TestAddCertFromPEM(t *testing.T) {
 }
 
 func TestRemoveCert(t *testing.T) {
-	b, err := ioutil.ReadFile("../fixtures/notary/root-ca.crt")
+	b, err := ioutil.ReadFile("../fixtures/root-ca.crt")
 	if err != nil {
 		t.Fatalf("couldn't load fixture: %v", err)
 	}
@@ -108,7 +108,7 @@ func TestRemoveCert(t *testing.T) {
 
 func TestInexistentGetCertificateByKeyID(t *testing.T) {
 	store := NewX509MemStore()
-	err := store.AddCertFromFile("../fixtures/notary/root-ca.crt")
+	err := store.AddCertFromFile("../fixtures/root-ca.crt")
 	if err != nil {
 		t.Fatalf("failed to load certificate from file: %v", err)
 	}
@@ -120,7 +120,7 @@ func TestInexistentGetCertificateByKeyID(t *testing.T) {
 }
 
 func TestGetCertificateByKeyID(t *testing.T) {
-	b, err := ioutil.ReadFile("../fixtures/notary/root-ca.crt")
+	b, err := ioutil.ReadFile("../fixtures/root-ca.crt")
 	if err != nil {
 		t.Fatalf("couldn't load fixture: %v", err)
 	}
@@ -155,7 +155,7 @@ func TestGetVerifyOpsErrorsWithoutCerts(t *testing.T) {
 	store := NewX509MemStore()
 
 	// Try to get VerifyOptions without certs added
-	_, err := store.GetVerifyOptions("docker.com")
+	_, err := store.GetVerifyOptions("example.com")
 	if err == nil {
 		t.Fatalf("expecting an error when getting empty VerifyOptions")
 	}
@@ -164,16 +164,16 @@ func TestGetVerifyOpsErrorsWithoutCerts(t *testing.T) {
 func TestVerifyLeafCertFromIntermediate(t *testing.T) {
 	// Create a store and add a root
 	store := NewX509MemStore()
-	err := store.AddCertFromFile("../fixtures/notary/ca.crt")
+	err := store.AddCertFromFile("../fixtures/intermediate-ca.crt")
 	if err != nil {
 		t.Fatalf("failed to load certificate from file: %v", err)
 	}
 
 	// Get the VerifyOptions from our Store
-	opts, err := store.GetVerifyOptions("secure.docker.com")
+	opts, err := store.GetVerifyOptions("secure.example.com")
 
 	// Get leaf certificate
-	b, err := ioutil.ReadFile("../fixtures/notary/secure.docker.com.crt")
+	b, err := ioutil.ReadFile("../fixtures/secure.example.com.crt")
 	if err != nil {
 		t.Fatalf("couldn't load fixture: %v", err)
 	}
@@ -195,16 +195,16 @@ func TestVerifyLeafCertFromIntermediate(t *testing.T) {
 func TestVerifyIntermediateFromRoot(t *testing.T) {
 	// Create a store and add a root
 	store := NewX509MemStore()
-	err := store.AddCertFromFile("../fixtures/notary/root-ca.crt")
+	err := store.AddCertFromFile("../fixtures/root-ca.crt")
 	if err != nil {
 		t.Fatalf("failed to load certificate from file: %v", err)
 	}
 
 	// Get the VerifyOptions from our Store
-	opts, err := store.GetVerifyOptions("Docker CA")
+	opts, err := store.GetVerifyOptions("Notary Testing CA")
 
 	// Get leaf certificate
-	b, err := ioutil.ReadFile("../fixtures/notary/ca.crt")
+	b, err := ioutil.ReadFile("../fixtures/intermediate-ca.crt")
 	if err != nil {
 		t.Fatalf("couldn't load fixture: %v", err)
 	}
@@ -229,7 +229,7 @@ func TestNewX509FilteredMemStore(t *testing.T) {
 	})
 
 	// AddCert should succeed because this is a CA being added
-	err := store.AddCertFromFile("../fixtures/notary/root-ca.crt")
+	err := store.AddCertFromFile("../fixtures/root-ca.crt")
 	if err != nil {
 		t.Fatalf("failed to load certificate from file: %v", err)
 	}
@@ -239,7 +239,7 @@ func TestNewX509FilteredMemStore(t *testing.T) {
 	}
 
 	// AddCert should fail because this is a leaf cert being added
-	err = store.AddCertFromFile("../fixtures/notary/secure.docker.com.crt")
+	err = store.AddCertFromFile("../fixtures/secure.example.com.crt")
 	if err == nil {
 		t.Fatalf("was expecting non-CA certificate to be rejected")
 	}
@@ -248,7 +248,7 @@ func TestNewX509FilteredMemStore(t *testing.T) {
 func TestGetCertificatePool(t *testing.T) {
 	// Create a store and add a root
 	store := NewX509MemStore()
-	err := store.AddCertFromFile("../fixtures/notary/root-ca.crt")
+	err := store.AddCertFromFile("../fixtures/root-ca.crt")
 	if err != nil {
 		t.Fatalf("failed to load certificate from file: %v", err)
 	}

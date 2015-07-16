@@ -7,19 +7,19 @@ import (
 
 func TestVerifyLeafSuccessfully(t *testing.T) {
 	// Get root certificate
-	rootCA, err := LoadCertFromFile("../fixtures/notary/root-ca.crt")
+	rootCA, err := LoadCertFromFile("../fixtures/root-ca.crt")
 	if err != nil {
 		t.Fatalf("couldn't load fixture: %v", err)
 	}
 
 	// Get intermediate certificate
-	intermediateCA, err := LoadCertFromFile("../fixtures/notary/ca.crt")
+	intermediateCA, err := LoadCertFromFile("../fixtures/intermediate-ca.crt")
 	if err != nil {
 		t.Fatalf("couldn't load fixture: %v", err)
 	}
 
 	// Get leaf certificate
-	leafCert, err := LoadCertFromFile("../fixtures/notary/secure.docker.com.crt")
+	leafCert, err := LoadCertFromFile("../fixtures/secure.example.com.crt")
 	if err != nil {
 		t.Fatalf("couldn't load fixture: %v", err)
 	}
@@ -35,7 +35,7 @@ func TestVerifyLeafSuccessfully(t *testing.T) {
 	certList := []*x509.Certificate{leafCert, intermediateCA}
 
 	// Try to find a valid chain for cert
-	err = Verify(store, "secure.docker.com", certList)
+	err = Verify(store, "secure.example.com", certList)
 	if err != nil {
 		t.Fatalf("expected to find a valid chain for this certificate: %v", err)
 	}
@@ -43,19 +43,19 @@ func TestVerifyLeafSuccessfully(t *testing.T) {
 
 func TestVerifyLeafSuccessfullyWithMultipleIntermediates(t *testing.T) {
 	// Get root certificate
-	rootCA, err := LoadCertFromFile("../fixtures/notary/root-ca.crt")
+	rootCA, err := LoadCertFromFile("../fixtures/root-ca.crt")
 	if err != nil {
 		t.Fatalf("couldn't load fixture: %v", err)
 	}
 
 	// Get intermediate certificate
-	intermediateCA, err := LoadCertFromFile("../fixtures/notary/ca.crt")
+	intermediateCA, err := LoadCertFromFile("../fixtures/intermediate-ca.crt")
 	if err != nil {
 		t.Fatalf("couldn't load fixture: %v", err)
 	}
 
 	// Get leaf certificate
-	leafCert, err := LoadCertFromFile("../fixtures/notary/secure.docker.com.crt")
+	leafCert, err := LoadCertFromFile("../fixtures/secure.example.com.crt")
 	if err != nil {
 		t.Fatalf("couldn't load fixture: %v", err)
 	}
@@ -71,7 +71,7 @@ func TestVerifyLeafSuccessfullyWithMultipleIntermediates(t *testing.T) {
 	certList := []*x509.Certificate{leafCert, intermediateCA, intermediateCA, rootCA}
 
 	// Try to find a valid chain for cert
-	err = Verify(store, "secure.docker.com", certList)
+	err = Verify(store, "secure.example.com", certList)
 	if err != nil {
 		t.Fatalf("expected to find a valid chain for this certificate: %v", err)
 	}
@@ -79,13 +79,13 @@ func TestVerifyLeafSuccessfullyWithMultipleIntermediates(t *testing.T) {
 
 func TestVerifyLeafWithNoIntermediate(t *testing.T) {
 	// Get root certificate
-	rootCA, err := LoadCertFromFile("../fixtures/notary/root-ca.crt")
+	rootCA, err := LoadCertFromFile("../fixtures/root-ca.crt")
 	if err != nil {
 		t.Fatalf("couldn't load fixture: %v", err)
 	}
 
 	// Get leaf certificate
-	leafCert, err := LoadCertFromFile("../fixtures/notary/secure.docker.com.crt")
+	leafCert, err := LoadCertFromFile("../fixtures/secure.example.com.crt")
 	if err != nil {
 		t.Fatalf("couldn't load fixture: %v", err)
 	}
@@ -101,7 +101,7 @@ func TestVerifyLeafWithNoIntermediate(t *testing.T) {
 	certList := []*x509.Certificate{leafCert, leafCert}
 
 	// Try to find a valid chain for cert
-	err = Verify(store, "secure.docker.com", certList)
+	err = Verify(store, "secure.example.com", certList)
 	if err == nil {
 		t.Fatalf("expected error due to more than one leaf certificate")
 	}
@@ -109,13 +109,13 @@ func TestVerifyLeafWithNoIntermediate(t *testing.T) {
 
 func TestVerifyLeafWithNoLeaf(t *testing.T) {
 	// Get root certificate
-	rootCA, err := LoadCertFromFile("../fixtures/notary/root-ca.crt")
+	rootCA, err := LoadCertFromFile("../fixtures/root-ca.crt")
 	if err != nil {
 		t.Fatalf("couldn't load fixture: %v", err)
 	}
 
 	// Get intermediate certificate
-	intermediateCA, err := LoadCertFromFile("../fixtures/notary/ca.crt")
+	intermediateCA, err := LoadCertFromFile("../fixtures/intermediate-ca.crt")
 	if err != nil {
 		t.Fatalf("couldn't load fixture: %v", err)
 	}
@@ -131,7 +131,7 @@ func TestVerifyLeafWithNoLeaf(t *testing.T) {
 	certList := []*x509.Certificate{intermediateCA, intermediateCA}
 
 	// Try to find a valid chain for cert
-	err = Verify(store, "secure.docker.com", certList)
+	err = Verify(store, "secure.example.com", certList)
 	if err == nil {
 		t.Fatalf("expected error due to no leafs provided")
 	}
