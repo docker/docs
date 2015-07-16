@@ -17,7 +17,7 @@ Docker Trusted Registry (DTR). DTR is installed from Docker containers. Once
 installed, you will need to select a method of securing it. This doc will
 explain the options you have for security and help you find the resources needed
 to configure it according to your chosen method. More configuration details can
-be found in the [DTR Configuration page](configuration.md).
+be found in the [DTR Configuration page]({{< relref "configuration.md" >}}).
 
 Specifically, installation requires completion of these steps, in order:
 
@@ -314,7 +314,7 @@ see the [configuration documentation](configuration.md#security)
 Now that you have DTR configured with a "Domain Name" and have your client
 Docker daemons configured with the required security settings, you can test your
 setup by following the instructions for
-[Using DTR to Push and pull images](userguide.md).
+[Using DTR to Push and pull images]({{< relref "userguide.md" >}}).
 
 ### DTR web interface and registry authentication
 
@@ -363,4 +363,4 @@ You should now [upgrade CS Docker Engine](#upgrading-the-commercially-supported-
 ## Next Steps
 
 For information on configuring DTR for your environment, take a look at the
-[Configuration instructions](configuration.md).
+[Configuration instructions]({{< relref "configuration.md" >}}).

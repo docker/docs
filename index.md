@@ -37,7 +37,7 @@ DTR is perfect for:
 
 DTR is built on [version 2 of the Docker registry](https://github.com/docker/distribution).
 
-To get your copy of DTR, including a free trial, visit [the Docker Subscription page](https://hub-beta.docker.com/enterprise/). For more information on acquiring DTR, see the [install page](install.md).
+To get your copy of DTR, including a free trial, visit [the Docker Subscription page](https://hub-beta.docker.com/enterprise/). For more information on acquiring DTR, see the [install page]({{< relref "install.md" >}}).
 
 >   **Important**: DTR must be used with the current version of the commercially
 >   supported Docker Engine. You must install this version of Docker before
@@ -49,18 +49,18 @@ To get your copy of DTR, including a free trial, visit [the Docker Subscription 
 The following documentation for DTR is available:
 
 * **Overview** This page.
-* [**Quick Start: Basic User Workflow**](quick-start.md) Go here to learn the
+* [**Quick Start: Basic User Workflow**]({{< relref "quick-start.md" >}}) Go here to learn the
 fundamentals of how DTR works and how you can set up a simple, but useful
 workflow.
-* [**User Guide**](userguide.md) Go here to learn about using DTR from day to
+* [**User Guide**]({{< relref "userguide.md" >}}) Go here to learn about using DTR from day to
 day.
-* [**Administrator Guide**](adminguide.md) Go here if you are an administrator
+* [**Administrator Guide**]({{< relref "adminguide.md" >}}) Go here if you are an administrator
 responsible for running and maintaining DTR.
-* [**Installation**](install.md) Go here for the steps you'll need to install
+* [**Installation**]({{< relref "install.md" >}}) Go here for the steps you'll need to install
 DTR and get it working.
-* [**Configuration**](configuration.md) Go here to find out details about
+* [**Configuration**]({{< relref "configuration.md" >}}) Go here to find out details about
 setting up and configuring DTR for your particular environment.
-* [**Support**](support.md) Go here for information on getting support for
+* [**Support**]({{< relref "support.md" >}}) Go here for information on getting support for
 DTR.
 
 Note: DTR requires that you use the commercially supported Docker Engine.

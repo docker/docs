@@ -373,5 +373,5 @@ confirm which setting you need.
 ## Next Steps
 
 For information on getting support for DTR, take a look at the
-[Support information](support.md).
+[Support information]({{< relref "support.md" >}}).
 
