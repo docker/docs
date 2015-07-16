@@ -1,14 +1,24 @@
 package trustmanager
 
 import (
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
-const visible os.FileMode = 0755
-const private os.FileMode = 0700
+const (
+	visible os.FileMode = 0755
+	private os.FileMode = 0700
+)
+
+var (
+	// ErrPathOutsideStore indicates that the returned path would be
+	// outside the store
+	ErrPathOutsideStore = errors.New("path outside file store")
+)
 
 // FileStore is the interface for all FileStores
 type FileStore interface {
@@ -16,10 +26,11 @@ type FileStore interface {
 	Remove(fileName string) error
 	RemoveDir(directoryName string) error
 	Get(fileName string) ([]byte, error)
-	GetPath(fileName string) string
+	GetPath(fileName string) (string, error)
 	ListFiles(symlinks bool) []string
 	ListDir(directoryName string, symlinks bool) []string
 	Link(src, dst string) error
+	BaseDir() string
 }
 
 // SimpleFileStore implements FileStore
@@ -31,6 +42,8 @@ type SimpleFileStore struct {
 
 // NewSimpleFileStore creates a directory with 755 permissions
 func NewSimpleFileStore(baseDir string, fileExt string) (FileStore, error) {
+	baseDir = filepath.Clean(baseDir)
+
 	if err := CreateDirectory(baseDir); err != nil {
 		return nil, err
 	}
@@ -57,7 +70,10 @@ func NewPrivateSimpleFileStore(baseDir string, fileExt string) (FileStore, error
 
 // Add writes data to a file with a given name
 func (f *SimpleFileStore) Add(name string, data []byte) error {
-	filePath := f.genFilePath(name)
+	filePath, err := f.GetPath(name)
+	if err != nil {
+		return err
+	}
 	createDirectory(filepath.Dir(filePath), f.perms)
 	return ioutil.WriteFile(filePath, data, f.perms)
 }
@@ -65,7 +81,10 @@ func (f *SimpleFileStore) Add(name string, data []byte) error {
 // Remove removes a file identified by name
 func (f *SimpleFileStore) Remove(name string) error {
 	// Attempt to remove
-	filePath := f.genFilePath(name)
+	filePath, err := f.GetPath(name)
+	if err != nil {
+		return err
+	}
 	return os.Remove(filePath)
 }
 
@@ -89,7 +108,10 @@ func (f *SimpleFileStore) RemoveDir(name string) error {
 
 // Get returns the data given a file name
 func (f *SimpleFileStore) Get(name string) ([]byte, error) {
-	filePath := f.genFilePath(name)
+	filePath, err := f.GetPath(name)
+	if err != nil {
+		return nil, err
+	}
 	data, err := ioutil.ReadFile(filePath)
 	if err != nil {
 		return nil, err
@@ -99,8 +121,14 @@ func (f *SimpleFileStore) Get(name string) ([]byte, error) {
 }
 
 // GetPath returns the full final path of a file with a given name
-func (f *SimpleFileStore) GetPath(name string) string {
-	return f.genFilePath(name)
+func (f *SimpleFileStore) GetPath(name string) (string, error) {
+	fileName := f.genFileName(name)
+	fullPath := filepath.Clean(filepath.Join(f.baseDir, fileName))
+
+	if !strings.HasPrefix(fullPath, f.baseDir) {
+		return "", ErrPathOutsideStore
+	}
+	return fullPath, nil
 }
 
 // ListFiles lists all the files inside of a store
@@ -143,12 +171,6 @@ func (f *SimpleFileStore) list(path string, symlinks bool) []string {
 	return files
 }
 
-// genFilePath returns the full path with extension given a file name
-func (f *SimpleFileStore) genFilePath(name string) string {
-	fileName := f.genFileName(name)
-	return filepath.Join(f.baseDir, fileName)
-}
-
 // genFileName returns the name using the right extension
 func (f *SimpleFileStore) genFileName(name string) string {
 	return fmt.Sprintf("%s.%s", name, f.fileExt)
@@ -159,10 +181,17 @@ func (f *SimpleFileStore) genFileName(name string) string {
 // We use full path for the source and local for the destination to use relative
 // path for the symlink
 func (f *SimpleFileStore) Link(oldname, newname string) error {
-	return os.Symlink(
-		f.genFileName(oldname),
-		f.genFilePath(newname),
-	)
+	newnamePath, err := f.GetPath(newname)
+	if err != nil {
+		return err
+	}
+
+	return os.Symlink(f.genFileName(oldname), newnamePath)
+}
+
+// BaseDir returns the base directory of the filestore
+func (f *SimpleFileStore) BaseDir() string {
+	return f.baseDir
 }
 
 // CreateDirectory uses createDirectory to create a chmod 755 Directory

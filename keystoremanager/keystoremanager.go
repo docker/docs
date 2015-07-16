@@ -29,16 +29,18 @@ type KeyStoreManager struct {
 }
 
 const (
-	trustDir       = "trusted_certificates"
-	privDir        = "private"
-	rootKeysSubdir = "root_keys"
-	rsaRootKeySize = 4096 // Used for new root keys
+	trustDir          = "trusted_certificates"
+	privDir           = "private"
+	rootKeysSubdir    = "root_keys"
+	nonRootKeysSubdir = "tuf_keys"
+	rsaRootKeySize    = 4096 // Used for new root keys
 )
 
 // NewKeyStoreManager returns an initialized KeyStoreManager, or an error
 // if it fails to create the KeyFileStores or load certificates
 func NewKeyStoreManager(baseDir string) (*KeyStoreManager, error) {
-	nonRootKeyStore, err := trustmanager.NewKeyFileStore(filepath.Join(baseDir, privDir))
+	nonRootKeysPath := filepath.Join(baseDir, privDir, nonRootKeysSubdir)
+	nonRootKeyStore, err := trustmanager.NewKeyFileStore(nonRootKeysPath)
 	if err != nil {
 		return nil, err
 	}

@@ -75,13 +75,13 @@ func testInitRepo(t *testing.T, rootType data.KeyAlgorithm) {
 	// Inspect contents of the temporary directory
 	expectedDirs := []string{
 		"private",
-		filepath.Join("private", gun),
+		filepath.Join("private", "tuf_keys", filepath.FromSlash(gun)),
 		filepath.Join("private", "root_keys"),
 		"trusted_certificates",
-		filepath.Join("trusted_certificates", gun),
+		filepath.Join("trusted_certificates", filepath.FromSlash(gun)),
 		"tuf",
-		filepath.Join("tuf", gun, "metadata"),
-		filepath.Join("tuf", gun, "targets"),
+		filepath.Join("tuf", filepath.FromSlash(gun), "metadata"),
+		filepath.Join("tuf", filepath.FromSlash(gun), "targets"),
 	}
 	for _, dir := range expectedDirs {
 		fi, err := os.Stat(filepath.Join(tempBaseDir, dir))
@@ -118,16 +118,16 @@ func testInitRepo(t *testing.T, rootType data.KeyAlgorithm) {
 	assert.Equal(t, rootKeyFilename, actualDest, "symlink to root key has wrong destination")
 
 	// There should be a trusted certificate
-	_, err = os.Stat(filepath.Join(tempBaseDir, "trusted_certificates", gun, certID+".crt"))
+	_, err = os.Stat(filepath.Join(tempBaseDir, "trusted_certificates", filepath.FromSlash(gun), certID+".crt"))
 	assert.NoError(t, err, "missing trusted certificate")
 
 	// Sanity check the TUF metadata files. Verify that they exist, the JSON is
 	// well-formed, and the signatures exist. For the root.json file, also check
 	// that the root, snapshot, and targets key IDs are present.
 	expectedTUFMetadataFiles := []string{
-		filepath.Join("tuf", gun, "metadata", "root.json"),
-		filepath.Join("tuf", gun, "metadata", "snapshot.json"),
-		filepath.Join("tuf", gun, "metadata", "targets.json"),
+		filepath.Join("tuf", filepath.FromSlash(gun), "metadata", "root.json"),
+		filepath.Join("tuf", filepath.FromSlash(gun), "metadata", "snapshot.json"),
+		filepath.Join("tuf", filepath.FromSlash(gun), "metadata", "targets.json"),
 	}
 	for _, filename := range expectedTUFMetadataFiles {
 		fullPath := filepath.Join(tempBaseDir, filename)
@@ -225,7 +225,7 @@ func testAddListTarget(t *testing.T, rootType data.KeyAlgorithm) {
 	assert.NoError(t, err, "error adding target")
 
 	// Look for the changelist file
-	changelistDirPath := filepath.Join(tempBaseDir, "tuf", gun, "changelist")
+	changelistDirPath := filepath.Join(tempBaseDir, "tuf", filepath.FromSlash(gun), "changelist")
 
 	changelistDir, err := os.Open(changelistDirPath)
 	assert.NoError(t, err, "could not open changelist directory")
@@ -299,7 +299,7 @@ func testAddListTarget(t *testing.T, rootType data.KeyAlgorithm) {
 	// Apply the changelist. Normally, this would be done by Publish
 
 	// load the changelist for this repo
-	cl, err := changelist.NewFileChangelist(filepath.Join(tempBaseDir, "tuf", gun, "changelist"))
+	cl, err := changelist.NewFileChangelist(filepath.Join(tempBaseDir, "tuf", filepath.FromSlash(gun), "changelist"))
 	assert.NoError(t, err, "could not open changelist")
 
 	// apply the changelist to the repo
@@ -309,10 +309,10 @@ func testAddListTarget(t *testing.T, rootType data.KeyAlgorithm) {
 	var tempKey data.PrivateKey
 	json.Unmarshal([]byte(timestampECDSAKeyJSON), &tempKey)
 
-	repo.KeyStoreManager.NonRootKeyStore().AddKey(filepath.Join(gun, tempKey.ID()), &tempKey)
+	repo.KeyStoreManager.NonRootKeyStore().AddKey(filepath.Join(filepath.FromSlash(gun), tempKey.ID()), &tempKey)
 
 	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/root.json", func(w http.ResponseWriter, r *http.Request) {
-		rootJSONFile := filepath.Join(tempBaseDir, "tuf", gun, "metadata", "root.json")
+		rootJSONFile := filepath.Join(tempBaseDir, "tuf", filepath.FromSlash(gun), "metadata", "root.json")
 		rootFileBytes, err := ioutil.ReadFile(rootJSONFile)
 		assert.NoError(t, err)
 		fmt.Fprint(w, string(rootFileBytes))
@@ -401,7 +401,7 @@ func testValidateRootKey(t *testing.T, rootType data.KeyAlgorithm) {
 	err = repo.Initialize(rootCryptoService)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
-	rootJSONFile := filepath.Join(tempBaseDir, "tuf", gun, "metadata", "root.json")
+	rootJSONFile := filepath.Join(tempBaseDir, "tuf", filepath.FromSlash(gun), "metadata", "root.json")
 
 	jsonBytes, err := ioutil.ReadFile(rootJSONFile)
 	assert.NoError(t, err, "error reading TUF metadata file %s: %s", rootJSONFile, err)
