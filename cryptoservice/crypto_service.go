@@ -11,6 +11,7 @@ import (
 	"path/filepath"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/agl/ed25519"
 	"github.com/docker/notary/trustmanager"
 	"github.com/endophage/gotuf/data"
 )
@@ -48,6 +49,11 @@ func (ccs *CryptoService) Create(role string, algorithm data.KeyAlgorithm) (*dat
 		if err != nil {
 			return nil, fmt.Errorf("failed to generate EC key: %v", err)
 		}
+	case data.ED25519Key:
+		privKey, err = trustmanager.GenerateED25519Key(rand.Reader)
+		if err != nil {
+			return nil, fmt.Errorf("failed to generate ED25519 key: %v", err)
+		}
 	default:
 		return nil, fmt.Errorf("private key type not supported for key generation: %s", algorithm)
 	}
@@ -65,9 +71,8 @@ func (ccs *CryptoService) Create(role string, algorithm data.KeyAlgorithm) (*dat
 // errors to sign and expects the called to validate if the number of returned
 // signatures is adequate.
 func (ccs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signature, error) {
-	// Create hasher and hash data
-	hash := crypto.SHA256
-	hashed := sha256.Sum256(payload)
+	var sha256Sum [sha256.Size]byte
+	sha256Computed := false
 
 	signatures := make([]data.Signature, 0, len(keyIDs))
 	for _, keyid := range keyIDs {
@@ -98,11 +103,23 @@ func (ccs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signatur
 
 		switch algorithm {
 		case data.RSAKey:
-			sig, err = rsaSign(privKey, hash, hashed[:])
+			if !sha256Computed {
+				sha256Sum = sha256.Sum256(payload)
+				sha256Computed = true
+			}
+			sig, err = rsaSign(privKey, crypto.SHA256, sha256Sum[:])
 			sigAlgorithm = data.RSAPSSSignature
 		case data.ECDSAKey:
-			sig, err = ecdsaSign(privKey, hashed[:])
+			if !sha256Computed {
+				sha256Sum = sha256.Sum256(payload)
+				sha256Computed = true
+			}
+			sig, err = ecdsaSign(privKey, sha256Sum[:])
 			sigAlgorithm = data.ECDSASignature
+		case data.ED25519Key:
+			// ED25519 does not operate on a SHA256 hash
+			sig, err = ed25519Sign(privKey, payload)
+			sigAlgorithm = data.EDDSASignature
 		}
 		if err != nil {
 			logrus.Debugf("ignoring error attempting to %s sign with keyID: %s, %v", algorithm, keyid, err)
@@ -170,4 +187,16 @@ func ecdsaSign(privKey *data.PrivateKey, hashed []byte) ([]byte, error) {
 	sBuf = append(sBuf, sBytes...)
 
 	return append(rBuf, sBuf...), nil
+}
+
+func ed25519Sign(privKey *data.PrivateKey, message []byte) ([]byte, error) {
+	if privKey.Algorithm() != data.ED25519Key {
+		return nil, fmt.Errorf("private key type not supported: %s", privKey.Algorithm())
+	}
+
+	priv := [ed25519.PrivateKeySize]byte{}
+	copy(priv[:], privKey.Private()[ed25519.PublicKeySize:])
+	sig := ed25519.Sign(&priv, message)
+
+	return sig[:], nil
 }
