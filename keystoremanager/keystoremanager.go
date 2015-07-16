@@ -24,8 +24,8 @@ type KeyStoreManager struct {
 	rootKeyStore    *trustmanager.KeyFileStore
 	nonRootKeyStore *trustmanager.KeyFileStore
 
-	caStore          trustmanager.X509Store
-	certificateStore trustmanager.X509Store
+	trustedCAStore          trustmanager.X509Store
+	trustedCertificateStore trustmanager.X509Store
 }
 
 const (
@@ -55,7 +55,7 @@ func NewKeyStoreManager(baseDir string) (*KeyStoreManager, error) {
 	trustPath := filepath.Join(baseDir, trustDir)
 
 	// Load all CAs that aren't expired and don't use SHA1
-	caStore, err := trustmanager.NewX509FilteredFileStore(trustPath, func(cert *x509.Certificate) bool {
+	trustedCAStore, err := trustmanager.NewX509FilteredFileStore(trustPath, func(cert *x509.Certificate) bool {
 		return cert.IsCA && cert.BasicConstraintsValid && cert.SubjectKeyId != nil &&
 			time.Now().Before(cert.NotAfter) &&
 			cert.SignatureAlgorithm != x509.SHA1WithRSA &&
@@ -67,7 +67,7 @@ func NewKeyStoreManager(baseDir string) (*KeyStoreManager, error) {
 	}
 
 	// Load all individual (non-CA) certificates that aren't expired and don't use SHA1
-	certificateStore, err := trustmanager.NewX509FilteredFileStore(trustPath, func(cert *x509.Certificate) bool {
+	trustedCertificateStore, err := trustmanager.NewX509FilteredFileStore(trustPath, func(cert *x509.Certificate) bool {
 		return !cert.IsCA &&
 			time.Now().Before(cert.NotAfter) &&
 			cert.SignatureAlgorithm != x509.SHA1WithRSA &&
@@ -79,10 +79,10 @@ func NewKeyStoreManager(baseDir string) (*KeyStoreManager, error) {
 	}
 
 	return &KeyStoreManager{
-		rootKeyStore:     rootKeyStore,
-		nonRootKeyStore:  nonRootKeyStore,
-		caStore:          caStore,
-		certificateStore: certificateStore,
+		rootKeyStore:            rootKeyStore,
+		nonRootKeyStore:         nonRootKeyStore,
+		trustedCAStore:          trustedCAStore,
+		trustedCertificateStore: trustedCertificateStore,
 	}, nil
 }
 
@@ -98,15 +98,26 @@ func (km *KeyStoreManager) NonRootKeyStore() *trustmanager.KeyFileStore {
 	return km.nonRootKeyStore
 }
 
-// CertificateStore returns the certificate store being managed by this
-// KeyStoreManager
-func (km *KeyStoreManager) CertificateStore() trustmanager.X509Store {
-	return km.certificateStore
+// TrustedCertificateStore returns the trusted certificate store being managed
+// by this KeyStoreManager
+func (km *KeyStoreManager) TrustedCertificateStore() trustmanager.X509Store {
+	return km.trustedCertificateStore
 }
 
-// CAStore returns the CA store being managed by this KeyStoreManager
-func (km *KeyStoreManager) CAStore() trustmanager.X509Store {
-	return km.caStore
+// TrustedCAStore returns the CA store being managed by this KeyStoreManager
+func (km *KeyStoreManager) TrustedCAStore() trustmanager.X509Store {
+	return km.trustedCAStore
+}
+
+// AddTrustedCert adds a cert to the trusted certificate store (not the CA
+// store)
+func (km *KeyStoreManager) AddTrustedCert(cert *x509.Certificate) {
+	km.trustedCertificateStore.AddCert(cert)
+}
+
+// AddTrustedCACert adds a cert to the trusted CA certificate store
+func (km *KeyStoreManager) AddTrustedCACert(cert *x509.Certificate) {
+	km.trustedCAStore.AddCert(cert)
 }
 
 // GenRootKey generates a new root key protected by a given passphrase
@@ -153,7 +164,7 @@ func (km *KeyStoreManager) GetRootCryptoService(rootKeyID, passphrase string) (*
 ValidateRoot iterates over every root key included in the TUF data and
 attempts to validate the certificate by first checking for an exact match on
 the certificate store, and subsequently trying to find a valid chain on the
-caStore.
+trustedCAStore.
 
 When this is being used with a notary repository, the dnsName parameter should
 be the GUN associated with the repository.
@@ -209,7 +220,7 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, dnsName string) error
 		// Checking the CommonName is not required since ID is calculated over
 		// Cert.Raw. It's included to prevent breaking logic with changes of how the
 		// ID gets computed.
-		_, err = km.certificateStore.GetCertificateByKeyID(leafID)
+		_, err = km.trustedCertificateStore.GetCertificateByKeyID(leafID)
 		if err == nil && leafCert.Subject.CommonName == dnsName {
 			certs[keyID] = rootSigned.Keys[keyID]
 		}
@@ -217,7 +228,7 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, dnsName string) error
 		// Check to see if this leafCertificate has a chain to one of the Root CAs
 		// of our CA Store.
 		certList := []*x509.Certificate{leafCert}
-		err = trustmanager.Verify(km.caStore, dnsName, certList)
+		err = trustmanager.Verify(km.trustedCAStore, dnsName, certList)
 		if err == nil {
 			certs[keyID] = rootSigned.Keys[keyID]
 		}

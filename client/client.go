@@ -111,7 +111,7 @@ func (r *NotaryRepository) Initialize(uCryptoService *cryptoservice.UnlockedCryp
 	if err != nil {
 		return err
 	}
-	r.KeyStoreManager.CertificateStore().AddCert(rootCert)
+	r.KeyStoreManager.AddTrustedCert(rootCert)
 
 	// The root key gets stored in the TUF metadata X509 encoded, linking
 	// the tuf root.json to our X509 PKI.
