@@ -85,7 +85,8 @@ func main() {
 		trust = signed.NewEd25519()
 	}
 
-	if viper.GetString("store.backend") == "mysql" {
+	if viper.GetString("storage.backend") == "mysql" {
+		logrus.Debug("Using mysql backend")
 		dbURL := viper.GetString("storage.db_url")
 		db, err := sql.Open("mysql", dbURL)
 		if err != nil {
@@ -94,6 +95,7 @@ func main() {
 		}
 		ctx = context.WithValue(ctx, "metaStore", storage.NewMySQLStorage(db))
 	} else {
+		logrus.Debug("Using memory backend")
 		ctx = context.WithValue(ctx, "metaStore", storage.NewMemStorage())
 	}
 	logrus.Info("[Notary Server] Starting Server")
