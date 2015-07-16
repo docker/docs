@@ -193,27 +193,28 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, dnsName string) error
 		return err
 	}
 
-	// iterate over every keyID for the root role inside of roots.json
+	// Iterate over every keyID for the root role inside of roots.json
 	validKeys := make(map[string]*data.PublicKey)
+	allCerts := make(map[string]*x509.Certificate)
 	for _, keyID := range rootSigned.Signed.Roles["root"].KeyIDs {
-		// decode all the x509 certificates that were bundled with this
-		// specific root key
+		// Decode all the x509 certificates that were bundled with this
+		// Specific root key
 		decodedCerts, err := trustmanager.LoadCertBundleFromPEM([]byte(rootSigned.Signed.Keys[keyID].Public()))
 		if err != nil {
 			logrus.Debugf("error while parsing root certificate with keyID: %s, %v", keyID, err)
 			continue
 		}
 
-		// get all non-CA certificates in the decoded certificates
+		// Get all non-CA certificates in the decoded certificates
 		leafCerts := trustmanager.GetLeafCerts(decodedCerts)
 
-		// gf we got no leaf certificates or we got more than one, fail
+		// If we got no leaf certificates or we got more than one, fail
 		if len(leafCerts) != 1 {
 			logrus.Debugf("error while parsing root certificate with keyID: %s, %v", keyID, err)
 			continue
 		}
 
-		// get the ID of the leaf certificate
+		// Get the ID of the leaf certificate
 		leafCert := leafCerts[0]
 		leafID, err := trustmanager.FingerprintCert(leafCert)
 		if err != nil {
@@ -221,17 +222,20 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, dnsName string) error
 			continue
 		}
 
-		// retrieve all the trusted certificates that match this dns Name
+		// Add all the valid leafs to the certificates map so we can refer to them later
+		allCerts[leafID] = leafCert
+
+		// Retrieve all the trusted certificates that match this dns Name
 		certsForCN, err := km.certificateStore.GetCertificatesByCN(dnsName)
 
-		// if there are no certificates with this CN, lets TOFU!
-		// note that this logic should only exist in docker 1.8
+		// If there are no certificates with this CN, lets TOFU!
+		// Note that this logic should only exist in docker 1.8
 		if len(certsForCN) == 0 {
 			km.certificateStore.AddCert(leafCert)
 			certsForCN = append(certsForCN, leafCert)
 		}
 
-		// iterate over all known certificates for this CN and see if any are trusted
+		// Iterate over all known certificates for this CN and see if any are trusted
 		for _, cert := range certsForCN {
 			// Check to see if there is an exact match of this certificate.
 			certID, err := trustmanager.FingerprintCert(cert)
@@ -258,33 +262,29 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, dnsName string) error
 		return err
 	}
 
-	// VerifyRoot returns a non-nil value if there is a root key rotation happening
-	// if this happens, we should replace the old root of trust with the new one
+	// VerifyRoot returns a non-nil value if there is a root key rotation happening.
+	// If this happens, we should replace the old root of trust with the new one
 	if newRootKey != nil {
-		// retrieve all the certificates associated with the new root key
-		keyID := newRootKey.ID()
-		decodedCerts, err := trustmanager.LoadCertBundleFromPEM([]byte(rootSigned.Signed.Keys[keyID].Public()))
+		// Retrieve the certificate associated with the new root key and trust it
+		newRootKeyCert := allCerts[newRootKey.ID()]
+		err := km.certificateStore.AddCert(newRootKeyCert)
 		if err != nil {
-			logrus.Debugf("error while parsing root certificate with keyID: %s, %v", keyID, err)
+			logrus.Debugf("error while adding new root certificate with keyID: %s, %v", newRootKey.ID(), err)
 			return err
 		}
 
-		// adds trust on the certificate of the new root key
-		leafCerts := trustmanager.GetLeafCerts(decodedCerts)
-		err = km.certificateStore.AddCert(leafCerts[0])
-		if err != nil {
-			return err
-		}
+		// Remove the new root certificate from the certificate mapping so we
+		// can remove trust from all of the remaining ones
+		delete(allCerts, newRootKey.ID())
 
-		// iterate over all old valid keys and removes the associated certificates
-		// were previously valid
-		for _, key := range validKeys {
-			cert, err := km.certificateStore.GetCertificateByCertID(key.ID())
+		// Iterate over all old valid certificates and remove them, essentially
+		// finishing the rotation of the currently trusted root certificate
+		for _, cert := range allCerts {
+			err := km.certificateStore.RemoveCert(cert)
 			if err != nil {
+				logrus.Debugf("error while removing old root certificate: %v", err)
 				return err
 			}
-			// Remove the old certificate
-			km.certificateStore.RemoveCert(cert)
 		}
 	}
 
