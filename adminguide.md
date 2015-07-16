@@ -16,7 +16,7 @@ This guide covers tasks and functions an administrator of Docker Trusted Registr
 (DTR) will need to know about, such as reporting, logging, system management,
 performance metrics, etc.
 For tasks DTR users need to accomplish, such as using DTR to push and pull
-images, please visit the [User's Guide](./userguide).
+images, please visit the [User's Guide](userguide.md).
 
 ## Reporting
 
@@ -322,4 +322,4 @@ If you need to stop and/or start DTR (for upgrading, troubleshooting, etc.), use
 
 ## Next Steps
 
-For information on installing DTR, take a look at the [Installation instructions](./install.md).
+For information on installing DTR, take a look at the [Installation instructions](install.md).

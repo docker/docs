@@ -44,7 +44,7 @@ You should be able to complete this guide in about thirty minutes.
 > **Note:** This guide assumes you have installed a working instance of DTR
 > reachable at dtr.yourdomain.com. If you need help installing and configuring
 > DTR, please consult the
-[installation instructions](./install.md).
+[installation instructions](install.md).
 
 
 ## Pulling the official Jenkins image
@@ -58,7 +58,7 @@ First, you will retrieve a copy of the official Jenkins image from the Docker Hu
 Docker can't find an image locally, it will attempt to pull the image from the
 Docker Hub. From the CLI of a machine running the Docker Engine on your network, use
 the
-[`docker pull`](https://docs.docker.com/reference/commandline/cli/#pull)
+[`docker pull`](https://docs.docker.com/reference/commandline/pull)
 command to pull the public Jenkins image.
 
     $ docker pull jenkins
@@ -67,7 +67,7 @@ command to pull the public Jenkins image.
 > you are a member of the `docker` group, or have root privileges. Otherwise, you may
 > need to add `sudo` to the example commands below.
 
-Docker will start the process of pulling the image from the Hub. Once it has completed, the Jenkins image should be visible in the output of a [`docker images`](https://docs.docker.com/reference/commandline/cli/#images) command, which lists your available images:
+Docker will start the process of pulling the image from the Hub. Once it has completed, the Jenkins image should be visible in the output of a [`docker images`](https://docs.docker.com/reference/commandline/images) command, which lists your available images:
 
     $ docker images
     REPOSITORY  TAG     IMAGE ID      CREATED      VIRTUAL SIZE
@@ -173,7 +173,7 @@ the image being built.
 Now that the `Dockerfile`, the `plugins` file, and the files required for HTTPS
 operation are created in your current working directory, you can build your
 custom image using the
-[`docker build` command](https://docs.docker.com/reference/commandline/cli/#build):
+[`docker build` command](https://docs.docker.com/reference/commandline/build):
 
     docker build -t dtr.yourdomain.com/ci-infrastructure/jnkns-img .
 
@@ -223,7 +223,7 @@ image pulled earlier:
 >     request failed with status: 401 Unauthorized
 
 Now that you’ve created the custom image, it can be pushed to DTR using the
-[`docker push`command](https://docs.docker.com/reference/commandline/cli/#push):
+[`docker push` command](https://docs.docker.com/reference/commandline/push):
 
     $ docker push dtr.yourdomain.com/ci-infrastructure/jnkns-img
     511136ea3c5a: Image successfully pushed
@@ -243,7 +243,7 @@ Docker host that has access to DTR.
 
 ## Pulling from Docker Trusted Registry
 To pull the `jnkns-img` image from DTR, run the
-[`docker pull`](https://docs.docker.com/reference/commandline/cli/#pull)
+[`docker pull`](https://docs.docker.com/reference/commandline/pull)
 command from any Docker Host that has access to your DTR instance:
 
     $ docker pull dtr.yourdomain.com/ci-infrastructure/jnkns-img
@@ -273,7 +273,7 @@ in the output of the `docker images` command:
 
 Now that you’ve successfully pulled the customized Jenkins image from DTR, you
 can create a container from it with the
-[`docker run` command](https://docs.docker.com/reference/commandline/cli/#run):
+[`docker run` command](https://docs.docker.com/reference/commandline/run):
 
 
     $ docker run -p 1973:1973 --name jenkins01 dtr.yourdomain.com/ci-infrastructure/jnkns-img
@@ -296,7 +296,7 @@ can create a container from it with the
 > your environment.
 
 You can view the newly launched a container, called `jenkins01`, using the
-[`docker ps` command](https://docs.docker.com/reference/commandline/cli/#ps):
+[`docker ps` command](https://docs.docker.com/reference/commandline/ps):
 
     $ docker ps
     CONTAINER ID     IMAGE     COMMAND     CREATED      STATUS  ...PORTS     NAMES
@@ -335,4 +335,4 @@ configured, secured Jenkins instance that can run on any infrastructure.
 ## Next Steps
 
 For more information on using DTR, take a look at the
-[User's Guide](./userguide.md).
+[User's Guide](userguide.md).

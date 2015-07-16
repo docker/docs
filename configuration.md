@@ -285,7 +285,7 @@ to the DTR web admin tool and to the DTR Registry.
 The current authentication methods are `None`, `Managed` and `LDAP`.
 
 > **Note**: if you have issues logging into the DTR admin web interface after changing the authentication
-> settings, you may need to use the [emergency access to the DTR admin web interface](./adminguide.md#Emergency-access-to-the-dtr-admin-web-interface).
+> settings, you may need to use the [emergency access to the DTR admin web interface](adminguide.md#emergency-access-to-dtr).
 
 ### No authentication
 
@@ -373,5 +373,5 @@ confirm which setting you need.
 ## Next Steps
 
 For information on getting support for DTR, take a look at the
-[Support information](./support.md).
+[Support information](support.md).
 

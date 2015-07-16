@@ -26,7 +26,7 @@ Specifically, installation requires completion of these steps, in order:
 3. Install DTR
 4. Add your license to your DTR instance
 
-To get your copy of DTR, including a free trial, visit the [Docker Subscription page](http://hub-beta.docker.com/enterprise/).
+To get your copy of DTR, including a free trial, visit the [Docker Subscription page](https://hub-beta.docker.com/enterprise/).
 
 ## Licensing
 
@@ -34,7 +34,7 @@ In order to run DTR, you will need to get a license, either by purchasing
 DTR or acquiring a trial license. The license will be associated with your free
 Docker Hub account or Docker Hub organization (so if you don't have an account,
 you'll need to set one up, which can be done at the same time as your license
-request). To get your license, visit the [Docker Subscription page](http://hub-beta.docker.com/enterprise/) and select the edition you would like acquire. After completing a brief registration process, follow the steps to acquire a license.
+request). To get your license, visit the [Docker Subscription page](https://hub-beta.docker.com/enterprise/) and select the edition you would like acquire. After completing a brief registration process, follow the steps to acquire a license.
 
 Once you've acquired your license, you can view or download it by logging in to Docker Hub, going to your account settings (gear icon at upper right), and then selecting ["Licenses"](https://hub-beta.docker.com/account/licenses/) from the top nav bar. 
 
@@ -143,7 +143,7 @@ CS Docker Engine 1.6.1 contains fixes to security vulnerabilities,
   and customers should upgrade to it immediately.
 
 > **Note**: If you have CS Docker Engine 1.6.0 installed, it must be upgraded;
-  however, due to compatibility issues, [DTR must be upgraded](#upgrading-docker-hub-enterprise)
+  however, due to compatibility issues, [DTR must be upgraded](#upgrading-docker-trusted-registry)
   first.
 
 The CS Docker Engine installation script set up the RHEL/Ubuntu package repositories,
@@ -307,14 +307,14 @@ warning is no longer present.
 Securing DTR is **required**. You will not be able to push or pull from DTR until you secure it.
 
 There are several options and methods for securing DTR. For more information,
-see the [configuration documentation](./configuration.md#security)
+see the [configuration documentation](configuration.md#security)
 
 ### Using DTR to push and pull images
 
 Now that you have DTR configured with a "Domain Name" and have your client
 Docker daemons configured with the required security settings, you can test your
 setup by following the instructions for
-[Using DTR to Push and pull images](./userguide.md#using-dtr-to-push-and-pull-images).
+[Using DTR to Push and pull images](userguide.md).
 
 ### DTR web interface and registry authentication
 
@@ -323,7 +323,7 @@ interface or the DTR registry. You can restrict access using an in-DTR
 configured set of users (and passwords), or you can configure DTR to use LDAP-
 based authentication.
 
-See [DTR Authentication settings](./configuration.md#authentication) for more
+See [DTR Authentication settings](configuration.md#authentication) for more
 details.
 
 ## Upgrading Docker Trusted Registry
@@ -343,6 +343,7 @@ connected to Docker Hub, DTR will prompt you to log in.
 
 The upgrade process requires a small amount of downtime to complete. To complete
 the upgrade, DTR will:
+
 * Connect to the Docker Hub to pull new container images with the new version of
 DTR.
 * Deploy those containers
@@ -362,4 +363,4 @@ You should now [upgrade CS Docker Engine](#upgrading-the-commercially-supported-
 ## Next Steps
 
 For information on configuring DTR for your environment, take a look at the
-[Configuration instructions](./configuration.md).
+[Configuration instructions](configuration.md).

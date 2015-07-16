@@ -16,7 +16,7 @@ weight=2
 This guide covers tasks and functions a user of Docker Trusted Registry (DTR) will
 need to know about, such as pushing or pulling images, etc. For tasks DTR
 administrators need to accomplish, such as configuring or monitoring DTR, please
-visit the [Administrator's Guide](./adminguide.md).
+visit the [Administrator's Guide](adminguide.md).
 
 ## Overview
 
@@ -32,7 +32,7 @@ push` command to add an image to a DTR repository. To learn more about Docker
 images, see
 [User Guide: Working with Docker Images](https://docs.docker.com/userguide/dockerimages/). For a step-by-step
 example of the entire process, see the
-[Quick Start: Basic Workflow Guide](./quick-start.md).
+[Quick Start: Basic Workflow Guide](quick-start.md).
 
 > **Note**: If your DTR instance has authentication enabled, you will need to
 >use your command line to `docker login <dtr-hostname>` (e.g., `docker login
@@ -57,7 +57,7 @@ example of the entire process, see the
 ## Pushing Images
 
 You push an image up to a DTR repository by using the
-[`docker push` command](https://docs.docker.com/reference/commandline/cli/#push).
+[`docker push` command](https://docs.docker.com/reference/commandline/push).
 
 You can add a `tag` to your image so that you can more easily identify it
 amongst other variants and so that it refers to your DTR server.
@@ -89,9 +89,9 @@ Once an image is tagged, you can push it to DTR with:
 ## Pulling images
 
 You can retrieve an image with the
-[`docker pull` command](https://docs.docker.com/reference/commandline/cli/#run),
+[`docker pull` command](https://docs.docker.com/reference/commandline/run),
 or you can retrieve an image and run Docker to build the container with the
-[`docker run`command](https://docs.docker.com/reference/commandline/cli/#run).
+[`docker run`command](https://docs.docker.com/reference/commandline/run).
 
 To retrieve an image from DTR and then run Docker to build the container, add
 the needed info to `docker run`:
@@ -122,7 +122,7 @@ your DTR registry by adding it to the command:
 ## Next Steps
 
 For information on administering DTR, take a look at the
-[Administrator's Guide](./adminguide.md).
+[Administrator's Guide](adminguide.md).
 
 
 <!--TODO:
