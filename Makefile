@@ -36,6 +36,14 @@ GITCOMMIT := $(shell git rev-parse --short HEAD 2>/dev/null)
 
 default: docs
 
+test: docs-build
+	$(DOCKER_RUN_DOCS) -p $(if $(DOCSPORT),$(DOCSPORT):)8000 \
+		-v $(CURDIR):/docs/content/docker-hub/ \
+		-e DOCKERHOST "$(DOCKER_DOCS_IMAGE)" \
+		hugo server \
+			--log --watch --buildDrafts=true \
+			--port=$(DOCSPORT) --baseUrl=$(HUGO_BASE_URL) --bind=$(HUGO_BIND_IP)
+
 docs: docs-build
 	$(DOCKER_RUN_DOCS) -p $(if $(DOCSPORT),$(DOCSPORT):)8000 -e DOCKERHOST "$(DOCKER_DOCS_IMAGE)" hugo server --port=$(DOCSPORT) --baseUrl=$(HUGO_BASE_URL) --bind=$(HUGO_BIND_IP)
 
