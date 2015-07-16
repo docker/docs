@@ -253,7 +253,40 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, dnsName string) error
 	}
 
 	// TODO(david): change hardcoded minversion on TUF.
-	_, err = signed.VerifyRoot(root, 0, validKeys, 1)
+	newRootKey, err := signed.VerifyRoot(root, 0, validKeys, 1)
+	if err != nil {
+		return err
+	}
 
-	return err
+	// VerifyRoot returns a non-nil value if there is a root key rotation happening
+	// if this happens, we should replace the old root of trust with the new one
+	if newRootKey != nil {
+		// retrieve all the certificates associated with the new root key
+		keyID := newRootKey.ID()
+		decodedCerts, err := trustmanager.LoadCertBundleFromPEM([]byte(rootSigned.Signed.Keys[keyID].Public()))
+		if err != nil {
+			logrus.Debugf("error while parsing root certificate with keyID: %s, %v", keyID, err)
+			return err
+		}
+
+		// adds trust on the certificate of the new root key
+		leafCerts := trustmanager.GetLeafCerts(decodedCerts)
+		err = km.certificateStore.AddCert(leafCerts[0])
+		if err != nil {
+			return err
+		}
+
+		// iterate over all old valid keys and removes the associated certificates
+		// were previously valid
+		for _, key := range validKeys {
+			cert, err := km.certificateStore.GetCertificateByCertID(key.ID())
+			if err != nil {
+				return err
+			}
+			// Remove the old certificate
+			km.certificateStore.RemoveCert(cert)
+		}
+	}
+
+	return nil
 }
