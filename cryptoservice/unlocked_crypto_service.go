@@ -36,7 +36,7 @@ func (ucs *UnlockedCryptoService) ID() string {
 
 // PublicKey Returns the public key associated with the private key
 func (ucs *UnlockedCryptoService) PublicKey() *data.PublicKey {
-	return data.PublicKeyFromPrivate(*ucs.PrivKey)
+	return data.PublicKeyFromPrivate(ucs.PrivKey)
 }
 
 // GenerateCertificate generates an X509 Certificate from a template, given a GUN

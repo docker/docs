@@ -7,6 +7,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"sync"
 )
 
 const (
@@ -20,14 +21,21 @@ var (
 	ErrPathOutsideStore = errors.New("path outside file store")
 )
 
-// FileStore is the interface for all FileStores
-type FileStore interface {
+// LimitedFileStore implements the bare bones primitives (no symlinks or
+// hierarchy)
+type LimitedFileStore interface {
 	Add(fileName string, data []byte) error
 	Remove(fileName string) error
-	RemoveDir(directoryName string) error
 	Get(fileName string) ([]byte, error)
-	GetPath(fileName string) (string, error)
 	ListFiles(symlinks bool) []string
+}
+
+// FileStore is the interface for full-featured FileStores
+type FileStore interface {
+	LimitedFileStore
+
+	RemoveDir(directoryName string) error
+	GetPath(fileName string) (string, error)
 	ListDir(directoryName string, symlinks bool) []string
 	Link(src, dst string) error
 	BaseDir() string
@@ -41,7 +49,7 @@ type SimpleFileStore struct {
 }
 
 // NewSimpleFileStore creates a directory with 755 permissions
-func NewSimpleFileStore(baseDir string, fileExt string) (FileStore, error) {
+func NewSimpleFileStore(baseDir string, fileExt string) (*SimpleFileStore, error) {
 	baseDir = filepath.Clean(baseDir)
 
 	if err := CreateDirectory(baseDir); err != nil {
@@ -56,7 +64,7 @@ func NewSimpleFileStore(baseDir string, fileExt string) (FileStore, error) {
 }
 
 // NewPrivateSimpleFileStore creates a directory with 700 permissions
-func NewPrivateSimpleFileStore(baseDir string, fileExt string) (FileStore, error) {
+func NewPrivateSimpleFileStore(baseDir string, fileExt string) (*SimpleFileStore, error) {
 	if err := CreatePrivateDirectory(baseDir); err != nil {
 		return nil, err
 	}
@@ -212,4 +220,69 @@ func createDirectory(dir string, perms os.FileMode) error {
 	// If two '//' exist, MkdirAll deals it with correctly
 	dir = dir + "/"
 	return os.MkdirAll(dir, perms)
+}
+
+// MemoryFileStore is an implementation of LimitedFileStore that keeps
+// the contents in memory.
+type MemoryFileStore struct {
+	sync.Mutex
+
+	files map[string][]byte
+}
+
+// NewMemoryFileStore creates a MemoryFileStore
+func NewMemoryFileStore() *MemoryFileStore {
+	return &MemoryFileStore{
+		files: make(map[string][]byte),
+	}
+}
+
+// ErrMemFileNotFound is returned for a nonexistent "file" in the memory file
+// store
+var ErrMemFileNotFound = errors.New("key not found in memory file store")
+
+// Add writes data to a file with a given name
+func (f *MemoryFileStore) Add(name string, data []byte) error {
+	f.Lock()
+	defer f.Unlock()
+
+	f.files[name] = data
+	return nil
+}
+
+// Remove removes a file identified by name
+func (f *MemoryFileStore) Remove(name string) error {
+	f.Lock()
+	defer f.Unlock()
+
+	if _, present := f.files[name]; !present {
+		return ErrMemFileNotFound
+	}
+	delete(f.files, name)
+
+	return nil
+}
+
+// Get returns the data given a file name
+func (f *MemoryFileStore) Get(name string) ([]byte, error) {
+	f.Lock()
+	defer f.Unlock()
+
+	fileData, present := f.files[name]
+	if !present {
+		return nil, ErrMemFileNotFound
+	}
+
+	return fileData, nil
+}
+
+// ListFiles lists all the files inside of a store
+func (f *MemoryFileStore) ListFiles(symlinks bool) []string {
+	var list []string
+
+	for name := range f.files {
+		list = append(list, name)
+	}
+
+	return list
 }

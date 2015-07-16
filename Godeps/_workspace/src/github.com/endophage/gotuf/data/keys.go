@@ -77,10 +77,13 @@ func NewPublicKey(algorithm KeyAlgorithm, public []byte) *PublicKey {
 	}
 }
 
-func PublicKeyFromPrivate(pk PrivateKey) *PublicKey {
-	return &PublicKey{
+func PublicKeyFromPrivate(pk *PrivateKey) *PublicKey {
+	pub := &PublicKey{
 		pk.TUFKey,
 	}
+	pub.TUFKey.Value.Private = nil
+
+	return pub
 }
 
 type PrivateKey struct {

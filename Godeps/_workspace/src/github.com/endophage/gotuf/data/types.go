@@ -29,10 +29,11 @@ func (k SigAlgorithm) String() string {
 const (
 	defaultHashAlgorithm = "sha256"
 
-	EDDSASignature    SigAlgorithm = "eddsa"
-	RSAPSSSignature   SigAlgorithm = "rsapss"
-	ECDSASignature    SigAlgorithm = "ecdsa"
-	PyCryptoSignature SigAlgorithm = "pycrypto-pkcs#1 pss"
+	EDDSASignature       SigAlgorithm = "eddsa"
+	RSAPSSSignature      SigAlgorithm = "rsapss"
+	RSAPKCS1v15Signature SigAlgorithm = "rsapkcs1v15"
+	ECDSASignature       SigAlgorithm = "ecdsa"
+	PyCryptoSignature    SigAlgorithm = "pycrypto-pkcs#1 pss"
 
 	ED25519Key   KeyAlgorithm = "ed25519"
 	RSAKey       KeyAlgorithm = "rsa"

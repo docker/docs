@@ -18,17 +18,17 @@ var (
 
 type KeyDB struct {
 	roles map[string]*data.Role
-	keys  map[string]*data.PublicKey
+	keys  map[string]data.Key
 }
 
 func NewDB() *KeyDB {
 	return &KeyDB{
 		roles: make(map[string]*data.Role),
-		keys:  make(map[string]*data.PublicKey),
+		keys:  make(map[string]data.Key),
 	}
 }
 
-func (db *KeyDB) AddKey(k *data.PublicKey) {
+func (db *KeyDB) AddKey(k data.Key) {
 	db.keys[k.ID()] = k
 }
 
@@ -51,7 +51,7 @@ func (db *KeyDB) AddRole(r *data.Role) error {
 	return nil
 }
 
-func (db *KeyDB) GetKey(id string) *data.PublicKey {
+func (db *KeyDB) GetKey(id string) data.Key {
 	return db.keys[id]
 }
 

@@ -11,9 +11,10 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/signer"
 	"github.com/docker/notary/signer/api"
-	"github.com/docker/notary/signer/keys"
+	"github.com/docker/notary/trustmanager"
 	"github.com/endophage/gotuf/data"
 	"github.com/miekg/pkcs11"
 	"github.com/stretchr/testify/assert"
@@ -22,14 +23,12 @@ import (
 )
 
 var (
-	server             *httptest.Server
-	reader             io.Reader
-	hsmSigService      *api.RSASigningService
-	softwareSigService *api.EdDSASigningService
-	deleteKeyBaseURL   string
-	createKeyBaseURL   string
-	keyInfoBaseURL     string
-	signBaseURL        string
+	server           *httptest.Server
+	reader           io.Reader
+	deleteKeyBaseURL string
+	createKeyBaseURL string
+	keyInfoBaseURL   string
+	signBaseURL      string
 )
 
 func SetupHSMEnv(t *testing.T) (*pkcs11.Ctx, pkcs11.SessionHandle) {
@@ -65,8 +64,8 @@ func SetupHSMEnv(t *testing.T) (*pkcs11.Ctx, pkcs11.SessionHandle) {
 	return p, session
 }
 
-func setup(sigServices signer.SigningServiceIndex) {
-	server = httptest.NewServer(api.Handlers(sigServices))
+func setup(cryptoServices signer.CryptoServiceIndex) {
+	server = httptest.NewServer(api.Handlers(cryptoServices))
 	deleteKeyBaseURL = fmt.Sprintf("%s/delete", server.URL)
 	createKeyBaseURL = fmt.Sprintf("%s/new", server.URL)
 	keyInfoBaseURL = fmt.Sprintf("%s", server.URL)
@@ -74,10 +73,9 @@ func setup(sigServices signer.SigningServiceIndex) {
 }
 
 func TestDeleteKeyHandlerReturns404WithNonexistentKey(t *testing.T) {
-	// We associate both key types with this signing service to bypass the
-	// ID -> keyType logic in the tests
-	sigService := api.NewEdDSASigningService(keys.NewKeyDB())
-	setup(signer.SigningServiceIndex{data.ED25519Key: sigService, data.RSAKey: sigService})
+	keyStore := trustmanager.NewKeyMemoryStore()
+	cryptoService := cryptoservice.NewCryptoService("", keyStore, "")
+	setup(signer.CryptoServiceIndex{data.ED25519Key: cryptoService, data.RSAKey: cryptoService, data.ECDSAKey: cryptoService})
 
 	fakeID := "c62e6d68851cef1f7e55a9d56e3b0c05f3359f16838cad43600f0554e7d3b54d"
 
@@ -95,14 +93,13 @@ func TestDeleteKeyHandlerReturns404WithNonexistentKey(t *testing.T) {
 }
 
 func TestDeleteKeyHandler(t *testing.T) {
-	// We associate both key types with this signing service to bypass the
-	// ID -> keyType logic in the tests
-	sigService := api.NewEdDSASigningService(keys.NewKeyDB())
-	setup(signer.SigningServiceIndex{data.ED25519Key: sigService, data.RSAKey: sigService})
+	keyStore := trustmanager.NewKeyMemoryStore()
+	cryptoService := cryptoservice.NewCryptoService("", keyStore, "")
+	setup(signer.CryptoServiceIndex{data.ED25519Key: cryptoService, data.RSAKey: cryptoService, data.ECDSAKey: cryptoService})
 
-	key, _ := sigService.CreateKey()
+	tufKey, _ := cryptoService.Create("", data.ED25519Key)
 
-	requestJson, _ := json.Marshal(key.KeyInfo.KeyID)
+	requestJson, _ := json.Marshal(&pb.KeyID{ID: tufKey.ID()})
 	reader = strings.NewReader(string(requestJson))
 
 	request, err := http.NewRequest("POST", deleteKeyBaseURL, reader)
@@ -115,14 +112,13 @@ func TestDeleteKeyHandler(t *testing.T) {
 }
 
 func TestKeyInfoHandler(t *testing.T) {
-	// We associate both key types with this signing service to bypass the
-	// ID -> keyType logic in the tests
-	sigService := api.NewEdDSASigningService(keys.NewKeyDB())
-	setup(signer.SigningServiceIndex{data.ED25519Key: sigService, data.RSAKey: sigService})
+	keyStore := trustmanager.NewKeyMemoryStore()
+	cryptoService := cryptoservice.NewCryptoService("", keyStore, "")
+	setup(signer.CryptoServiceIndex{data.ED25519Key: cryptoService, data.RSAKey: cryptoService, data.ECDSAKey: cryptoService})
 
-	key, _ := sigService.CreateKey()
+	tufKey, _ := cryptoService.Create("", data.ED25519Key)
 
-	keyInfoURL := fmt.Sprintf("%s/%s", keyInfoBaseURL, key.KeyInfo.KeyID.ID)
+	keyInfoURL := fmt.Sprintf("%s/%s", keyInfoBaseURL, tufKey.ID())
 
 	request, err := http.NewRequest("GET", keyInfoURL, nil)
 	assert.Nil(t, err)
@@ -137,15 +133,16 @@ func TestKeyInfoHandler(t *testing.T) {
 	err = json.Unmarshal(jsonBlob, &pubKey)
 	assert.Nil(t, err)
 
-	assert.Equal(t, key.KeyInfo.KeyID.ID, pubKey.KeyInfo.KeyID.ID)
+	assert.Equal(t, tufKey.ID(), pubKey.KeyInfo.KeyID.ID)
 	assert.Equal(t, 200, res.StatusCode)
 }
 
 func TestKeyInfoHandlerReturns404WithNonexistentKey(t *testing.T) {
 	// We associate both key types with this signing service to bypass the
 	// ID -> keyType logic in the tests
-	sigService := api.NewEdDSASigningService(keys.NewKeyDB())
-	setup(signer.SigningServiceIndex{data.ED25519Key: sigService, data.RSAKey: sigService})
+	keyStore := trustmanager.NewKeyMemoryStore()
+	cryptoService := cryptoservice.NewCryptoService("", keyStore, "")
+	setup(signer.CryptoServiceIndex{data.ED25519Key: cryptoService, data.RSAKey: cryptoService, data.ECDSAKey: cryptoService})
 
 	fakeID := "c62e6d68851cef1f7e55a9d56e3b0c05f3359f16838cad43600f0554e7d3b54d"
 	keyInfoURL := fmt.Sprintf("%s/%s", keyInfoBaseURL, fakeID)
@@ -166,10 +163,8 @@ func TestHSMCreateKeyHandler(t *testing.T) {
 	defer ctx.CloseSession(session)
 	defer ctx.Logout(session)
 
-	// We associate both key types with this signing service to bypass the
-	// ID -> keyType logic in the tests
-	sigService := api.NewRSASigningService(ctx, session)
-	setup(signer.SigningServiceIndex{data.ED25519Key: sigService, data.RSAKey: sigService})
+	cryptoService := api.NewRSAHardwareCryptoService(ctx, session)
+	setup(signer.CryptoServiceIndex{data.RSAKey: cryptoService})
 
 	createKeyURL := fmt.Sprintf("%s/%s", createKeyBaseURL, data.RSAKey)
 
@@ -190,10 +185,9 @@ func TestHSMCreateKeyHandler(t *testing.T) {
 }
 
 func TestSoftwareCreateKeyHandler(t *testing.T) {
-	// We associate both key types with this signing service to bypass the
-	// ID -> keyType logic in the tests
-	sigService := api.NewEdDSASigningService(keys.NewKeyDB())
-	setup(signer.SigningServiceIndex{data.ED25519Key: sigService, data.RSAKey: sigService})
+	keyStore := trustmanager.NewKeyMemoryStore()
+	cryptoService := cryptoservice.NewCryptoService("", keyStore, "")
+	setup(signer.CryptoServiceIndex{data.ED25519Key: cryptoService, data.RSAKey: cryptoService, data.ECDSAKey: cryptoService})
 
 	createKeyURL := fmt.Sprintf("%s/%s", createKeyBaseURL, data.ED25519Key)
 
@@ -220,14 +214,12 @@ func TestHSMSignHandler(t *testing.T) {
 	defer ctx.CloseSession(session)
 	defer ctx.Logout(session)
 
-	// We associate both key types with this signing service to bypass the
-	// ID -> keyType logic in the tests
-	sigService := api.NewRSASigningService(ctx, session)
-	setup(signer.SigningServiceIndex{data.ED25519Key: sigService, data.RSAKey: sigService})
+	cryptoService := api.NewRSAHardwareCryptoService(ctx, session)
+	setup(signer.CryptoServiceIndex{data.RSAKey: cryptoService})
 
-	key, _ := sigService.CreateKey()
+	tufKey, _ := cryptoService.Create("", data.RSAKey)
 
-	sigRequest := &pb.SignatureRequest{KeyID: key.KeyInfo.KeyID, Content: make([]byte, 10)}
+	sigRequest := &pb.SignatureRequest{KeyID: &pb.KeyID{ID: tufKey.ID()}, Content: make([]byte, 10)}
 	requestJson, _ := json.Marshal(sigRequest)
 
 	reader = strings.NewReader(string(requestJson))
@@ -246,20 +238,19 @@ func TestHSMSignHandler(t *testing.T) {
 	err = json.Unmarshal(jsonBlob, &sig)
 	assert.Nil(t, err)
 
-	assert.Equal(t, key.KeyInfo.KeyID.ID, sig.KeyInfo.KeyID.ID)
+	assert.Equal(t, tufKey.ID, sig.KeyInfo.KeyID.ID)
 	assert.Equal(t, 200, res.StatusCode)
 }
 
 func TestSoftwareSignHandler(t *testing.T) {
-	// We associate both key types with this signing service to bypass the
-	// ID -> keyType logic in the tests
-	sigService := api.NewEdDSASigningService(keys.NewKeyDB())
-	setup(signer.SigningServiceIndex{data.ED25519Key: sigService, data.RSAKey: sigService})
+	keyStore := trustmanager.NewKeyMemoryStore()
+	cryptoService := cryptoservice.NewCryptoService("", keyStore, "")
+	setup(signer.CryptoServiceIndex{data.ED25519Key: cryptoService, data.RSAKey: cryptoService, data.ECDSAKey: cryptoService})
 
-	key, err := sigService.CreateKey()
+	tufKey, err := cryptoService.Create("", data.ED25519Key)
 	assert.Nil(t, err)
 
-	sigRequest := &pb.SignatureRequest{KeyID: key.KeyInfo.KeyID, Content: make([]byte, 10)}
+	sigRequest := &pb.SignatureRequest{KeyID: &pb.KeyID{ID: tufKey.ID()}, Content: make([]byte, 10)}
 	requestJson, _ := json.Marshal(sigRequest)
 
 	reader = strings.NewReader(string(requestJson))
@@ -280,14 +271,13 @@ func TestSoftwareSignHandler(t *testing.T) {
 	err = json.Unmarshal(jsonBlob, &sig)
 	assert.Nil(t, err)
 
-	assert.Equal(t, key.KeyInfo.KeyID.ID, sig.KeyInfo.KeyID.ID)
+	assert.Equal(t, tufKey.ID(), sig.KeyInfo.KeyID.ID)
 }
 
 func TestSoftwareSignWithInvalidRequestHandler(t *testing.T) {
-	// We associate both key types with this signing service to bypass the
-	// ID -> keyType logic in the tests
-	sigService := api.NewEdDSASigningService(keys.NewKeyDB())
-	setup(signer.SigningServiceIndex{data.ED25519Key: sigService, data.RSAKey: sigService})
+	keyStore := trustmanager.NewKeyMemoryStore()
+	cryptoService := cryptoservice.NewCryptoService("", keyStore, "")
+	setup(signer.CryptoServiceIndex{data.ED25519Key: cryptoService, data.RSAKey: cryptoService, data.ECDSAKey: cryptoService})
 
 	requestJson := "{\"blob\":\"7d16f1d0b95310a7bc557747fc4f20fcd41c1c5095ae42f189df0717e7d7f4a0a2b55debce630f43c4ac099769c612965e3fda3cd4c0078ee6a460f14fa19307\"}"
 	reader = strings.NewReader(requestJson)
@@ -309,14 +299,13 @@ func TestSoftwareSignWithInvalidRequestHandler(t *testing.T) {
 }
 
 func TestSignHandlerReturns404WithNonexistentKey(t *testing.T) {
-	// We associate both key types with this signing service to bypass the
-	// ID -> keyType logic in the tests
-	sigService := api.NewEdDSASigningService(keys.NewKeyDB())
-	setup(signer.SigningServiceIndex{data.ED25519Key: sigService, data.RSAKey: sigService})
+	keyStore := trustmanager.NewKeyMemoryStore()
+	cryptoService := cryptoservice.NewCryptoService("", keyStore, "")
+	setup(signer.CryptoServiceIndex{data.ED25519Key: cryptoService, data.RSAKey: cryptoService, data.ECDSAKey: cryptoService})
 
 	fakeID := "c62e6d68851cef1f7e55a9d56e3b0c05f3359f16838cad43600f0554e7d3b54d"
 
-	sigService.CreateKey()
+	cryptoService.Create("", data.ED25519Key)
 
 	sigRequest := &pb.SignatureRequest{KeyID: &pb.KeyID{ID: fakeID}, Content: make([]byte, 10)}
 	requestJson, _ := json.Marshal(sigRequest)

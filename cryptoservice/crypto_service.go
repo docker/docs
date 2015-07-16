@@ -25,16 +25,16 @@ const (
 type CryptoService struct {
 	gun        string
 	passphrase string
-	keyStore   *trustmanager.KeyFileStore
+	keyStore   trustmanager.KeyStore
 }
 
 // NewCryptoService returns an instance of CryptoService
-func NewCryptoService(gun string, keyStore *trustmanager.KeyFileStore, passphrase string) *CryptoService {
+func NewCryptoService(gun string, keyStore trustmanager.KeyStore, passphrase string) *CryptoService {
 	return &CryptoService{gun: gun, keyStore: keyStore, passphrase: passphrase}
 }
 
 // Create is used to generate keys for targets, snapshots and timestamps
-func (ccs *CryptoService) Create(role string, algorithm data.KeyAlgorithm) (*data.PublicKey, error) {
+func (ccs *CryptoService) Create(role string, algorithm data.KeyAlgorithm) (data.Key, error) {
 	var privKey *data.PrivateKey
 	var err error
 
@@ -64,16 +64,27 @@ func (ccs *CryptoService) Create(role string, algorithm data.KeyAlgorithm) (*dat
 	if err != nil {
 		return nil, fmt.Errorf("failed to add key to filestore: %v", err)
 	}
-	return data.PublicKeyFromPrivate(*privKey), nil
+	return data.PublicKeyFromPrivate(privKey), nil
+}
+
+// GetKey returns a key by ID
+func (ccs *CryptoService) GetKey(keyID string) data.Key {
+	key, err := ccs.keyStore.GetKey(keyID)
+	if err != nil {
+		return nil
+	}
+	return data.PublicKeyFromPrivate(key)
+}
+
+// RemoveKey deletes a key by ID
+func (ccs *CryptoService) RemoveKey(keyID string) error {
+	return ccs.keyStore.Remove(keyID)
 }
 
 // Sign returns the signatures for the payload with a set of keyIDs. It ignores
 // errors to sign and expects the called to validate if the number of returned
 // signatures is adequate.
 func (ccs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signature, error) {
-	var sha256Sum [sha256.Size]byte
-	sha256Computed := false
-
 	signatures := make([]data.Signature, 0, len(keyIDs))
 	for _, keyid := range keyIDs {
 		// ccs.gun will be empty if this is the root key
@@ -103,18 +114,10 @@ func (ccs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signatur
 
 		switch algorithm {
 		case data.RSAKey:
-			if !sha256Computed {
-				sha256Sum = sha256.Sum256(payload)
-				sha256Computed = true
-			}
-			sig, err = rsaSign(privKey, crypto.SHA256, sha256Sum[:])
+			sig, err = rsaSign(privKey, payload)
 			sigAlgorithm = data.RSAPSSSignature
 		case data.ECDSAKey:
-			if !sha256Computed {
-				sha256Sum = sha256.Sum256(payload)
-				sha256Computed = true
-			}
-			sig, err = ecdsaSign(privKey, sha256Sum[:])
+			sig, err = ecdsaSign(privKey, payload)
 			sigAlgorithm = data.ECDSASignature
 		case data.ED25519Key:
 			// ED25519 does not operate on a SHA256 hash
@@ -139,10 +142,12 @@ func (ccs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signatur
 	return signatures, nil
 }
 
-func rsaSign(privKey *data.PrivateKey, hash crypto.Hash, hashed []byte) ([]byte, error) {
+func rsaSign(privKey *data.PrivateKey, message []byte) ([]byte, error) {
 	if privKey.Algorithm() != data.RSAKey {
 		return nil, fmt.Errorf("private key type not supported: %s", privKey.Algorithm())
 	}
+
+	hashed := sha256.Sum256(message)
 
 	// Create an rsa.PrivateKey out of the private key bytes
 	rsaPrivKey, err := x509.ParsePKCS1PrivateKey(privKey.Private())
@@ -151,7 +156,7 @@ func rsaSign(privKey *data.PrivateKey, hash crypto.Hash, hashed []byte) ([]byte,
 	}
 
 	// Use the RSA key to RSASSA-PSS sign the data
-	sig, err := rsa.SignPSS(rand.Reader, rsaPrivKey, hash, hashed[:], &rsa.PSSOptions{SaltLength: rsa.PSSSaltLengthEqualsHash})
+	sig, err := rsa.SignPSS(rand.Reader, rsaPrivKey, crypto.SHA256, hashed[:], &rsa.PSSOptions{SaltLength: rsa.PSSSaltLengthEqualsHash})
 	if err != nil {
 		return nil, err
 	}
@@ -159,10 +164,12 @@ func rsaSign(privKey *data.PrivateKey, hash crypto.Hash, hashed []byte) ([]byte,
 	return sig, nil
 }
 
-func ecdsaSign(privKey *data.PrivateKey, hashed []byte) ([]byte, error) {
+func ecdsaSign(privKey *data.PrivateKey, message []byte) ([]byte, error) {
 	if privKey.Algorithm() != data.ECDSAKey {
 		return nil, fmt.Errorf("private key type not supported: %s", privKey.Algorithm())
 	}
+
+	hashed := sha256.Sum256(message)
 
 	// Create an ecdsa.PrivateKey out of the private key bytes
 	ecdsaPrivKey, err := x509.ParseECPrivateKey(privKey.Private())

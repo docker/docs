@@ -579,7 +579,7 @@ func (tr *TufRepo) SignTimestamp(expires time.Time, cryptoService signed.CryptoS
 }
 
 func (tr TufRepo) sign(signedData *data.Signed, role data.Role, cryptoService signed.CryptoService) (*data.Signed, error) {
-	ks := make([]*data.PublicKey, 0, len(role.KeyIDs))
+	ks := make([]data.Key, 0, len(role.KeyIDs))
 	for _, kid := range role.KeyIDs {
 		k := tr.keysDB.GetKey(kid)
 		if k == nil {
