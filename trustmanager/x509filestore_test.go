@@ -146,7 +146,7 @@ func TestInexistentGetCertificateByKeyIDX509FileStore(t *testing.T) {
 		t.Fatalf("failed to load certificate from file: %v", err)
 	}
 
-	_, err = store.GetCertificateByKeyID("4d06afd30b8bed131d2a84c97d00b37f422021598bfae34285ce98e77b708b5a")
+	_, err = store.GetCertificateByCertID("4d06afd30b8bed131d2a84c97d00b37f422021598bfae34285ce98e77b708b5a")
 	if err == nil {
 		t.Fatalf("no error returned for inexistent certificate")
 	}
@@ -181,7 +181,7 @@ func TestGetCertificateByKeyIDX509FileStore(t *testing.T) {
 	}
 
 	// Tries to retrieve cert by Subject Key IDs
-	_, err = store.GetCertificateByKeyID(keyID)
+	_, err = store.GetCertificateByCertID(keyID)
 	if err != nil {
 		t.Fatalf("expected certificate in store: %s", keyID)
 	}
