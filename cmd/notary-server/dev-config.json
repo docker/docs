@@ -2,7 +2,7 @@
 	"server": {
 		"addr": ":4443",
 		"tls_key_file": "/go/src/github.com/docker/notary/fixtures/notary-server.key",
-		"tls_cert_file": "/go/src/github.com/docker/notary/fixtures/notary-signer.crt"
+		"tls_cert_file": "/go/src/github.com/docker/notary/fixtures/notary-server.crt"
 	},
 	"trust_service": {
 		"type": "local",
