@@ -8,6 +8,7 @@ import (
 	"github.com/agl/ed25519"
 	"github.com/docker/notary/signer/api"
 	"github.com/docker/notary/signer/keys"
+	"github.com/endophage/gotuf/data"
 	"github.com/stretchr/testify/assert"
 
 	pb "github.com/docker/notary/proto"
@@ -31,16 +32,17 @@ func TestSign(t *testing.T) {
 	directSig := ed25519.Sign(private, blob)
 	directSigHex := hex.EncodeToString(directSig[:])
 
-	signer := api.NewEd25519Signer(&keys.Key{Private: private, Public: *public, ID: "fake_id"})
+	key := data.NewPrivateKey(data.ED25519Key, public[:], private[:])
+	signer := api.NewEd25519Signer(key)
 
-	sigRequest := &pb.SignatureRequest{KeyID: &pb.KeyID{ID: "fake_id"}, Content: blob}
+	sigRequest := &pb.SignatureRequest{KeyID: &pb.KeyID{ID: key.ID()}, Content: blob}
 
 	sig, err := signer.Sign(sigRequest)
 	assert.Nil(t, err)
 	signatureHex := fmt.Sprintf("%x", sig.Content)
 
 	assert.Equal(t, directSigHex, signatureHex)
-	assert.Equal(t, sig.KeyInfo.KeyID.ID, "fake_id")
+	assert.Equal(t, sig.KeyInfo.KeyID.ID, key.ID())
 }
 
 func BenchmarkSign(b *testing.B) {

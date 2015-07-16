@@ -6,6 +6,7 @@ import (
 
 	"github.com/docker/notary/signer"
 	"github.com/docker/notary/signer/keys"
+	"github.com/endophage/gotuf/data"
 	"golang.org/x/net/context"
 
 	"google.golang.org/grpc"
@@ -26,7 +27,7 @@ type SignerServer struct {
 
 //CreateKey returns a PublicKey created using KeyManagementServer's SigningService
 func (s *KeyManagementServer) CreateKey(ctx context.Context, algorithm *pb.Algorithm) (*pb.PublicKey, error) {
-	service := s.SigServices[algorithm.Algorithm]
+	service := s.SigServices[data.KeyAlgorithm(algorithm.Algorithm)]
 
 	if service == nil {
 		return nil, fmt.Errorf("algorithm %s not supported for create key", algorithm.Algorithm)

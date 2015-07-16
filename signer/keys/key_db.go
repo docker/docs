@@ -1,10 +1,13 @@
 package keys
 
-import pb "github.com/docker/notary/proto"
+import (
+	pb "github.com/docker/notary/proto"
+	"github.com/endophage/gotuf/data"
+)
 
 // KeyDB represents an in-memory key keystore
 type KeyDB struct {
-	keys map[string]*Key
+	keys map[string]data.Key
 }
 
 // CreateKey is needed to implement KeyManager. Returns an empty key.
@@ -15,17 +18,17 @@ func (db *KeyDB) CreateKey() (*pb.PublicKey, error) {
 }
 
 // AddKey Adds a new key to the database
-func (db *KeyDB) AddKey(key *Key) error {
-	if _, ok := db.keys[key.ID]; ok {
+func (db *KeyDB) AddKey(key data.Key) error {
+	if _, ok := db.keys[key.ID()]; ok {
 		return ErrExists
 	}
-	db.keys[key.ID] = key
+	db.keys[key.ID()] = key
 
 	return nil
 }
 
 // GetKey returns the private bits of a key
-func (db *KeyDB) GetKey(keyID *pb.KeyID) (*Key, error) {
+func (db *KeyDB) GetKey(keyID *pb.KeyID) (data.Key, error) {
 	if key, ok := db.keys[keyID.ID]; ok {
 		return key, nil
 	}
@@ -48,12 +51,12 @@ func (db *KeyDB) KeyInfo(keyID *pb.KeyID) (*pb.PublicKey, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &pb.PublicKey{KeyInfo: &pb.KeyInfo{KeyID: keyID, Algorithm: &pb.Algorithm{Algorithm: key.Algorithm}}, PublicKey: key.Public[:]}, nil
+	return &pb.PublicKey{KeyInfo: &pb.KeyInfo{KeyID: keyID, Algorithm: &pb.Algorithm{Algorithm: key.Algorithm().String()}}, PublicKey: key.Public()}, nil
 }
 
 // NewKeyDB returns an instance of KeyDB
 func NewKeyDB() *KeyDB {
 	return &KeyDB{
-		keys: make(map[string]*Key),
+		keys: make(map[string]data.Key),
 	}
 }

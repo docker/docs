@@ -6,7 +6,6 @@ import (
 	"crypto/rsa"
 	"crypto/sha256"
 	"crypto/x509"
-	"encoding/hex"
 	"errors"
 	"log"
 	"math/big"
@@ -17,9 +16,6 @@ import (
 
 	pb "github.com/docker/notary/proto"
 )
-
-// RSAAlgorithm represents the rsa signing algorithm
-const RSAAlgorithm string = "rsa"
 
 // RSASigningService is an implementation of SigningService
 type RSASigningService struct {
@@ -99,19 +95,13 @@ func (s RSASigningService) CreateKey() (*pb.PublicKey, error) {
 	}
 
 	// (diogo): Ideally I would like to return base64 PEM encoded public keys to the client
-	k := &keys.HSMRSAKey{
-		Algorithm: RSAAlgorithm,
-		Public:    pubBytes,
-		Private:   priv,
-	}
+	k := keys.NewHSMRSAKey(pubBytes, priv)
 
-	// (diogo): Change this to be consistent with how TUF does (canonical JSON)
-	digest := sha256.Sum256(k.Public[:])
-	k.ID = hex.EncodeToString(digest[:])
+	keyID := k.ID()
 
-	s.keys[k.ID] = k
+	s.keys[keyID] = k
 
-	pubKey := &pb.PublicKey{KeyInfo: &pb.KeyInfo{KeyID: &pb.KeyID{ID: k.ID}, Algorithm: &pb.Algorithm{Algorithm: k.Algorithm}}, PublicKey: k.Public[:]}
+	pubKey := &pb.PublicKey{KeyInfo: &pb.KeyInfo{KeyID: &pb.KeyID{ID: keyID}, Algorithm: &pb.Algorithm{Algorithm: k.Algorithm().String()}}, PublicKey: k.Public()}
 
 	return pubKey, nil
 }
@@ -133,7 +123,7 @@ func (s RSASigningService) KeyInfo(keyID *pb.KeyID) (*pb.PublicKey, error) {
 		return nil, keys.ErrInvalidKeyID
 	}
 
-	pubKey := &pb.PublicKey{KeyInfo: &pb.KeyInfo{KeyID: keyID, Algorithm: &pb.Algorithm{Algorithm: k.Algorithm}}, PublicKey: k.Public[:]}
+	pubKey := &pb.PublicKey{KeyInfo: &pb.KeyInfo{KeyID: keyID, Algorithm: &pb.Algorithm{Algorithm: k.Algorithm().String()}}, PublicKey: k.Public()}
 
 	return pubKey, nil
 }
@@ -157,7 +147,7 @@ type RSASigner struct {
 
 // Sign returns a signature for a given signature request
 func (s *RSASigner) Sign(request *pb.SignatureRequest) (*pb.Signature, error) {
-	priv := s.privateKey.Private
+	priv := s.privateKey.PKCS11ObjectHandle()
 	var sig []byte
 	var err error
 	for i := 0; i < 3; i++ {
@@ -172,7 +162,7 @@ func (s *RSASigner) Sign(request *pb.SignatureRequest) (*pb.Signature, error) {
 
 		// (diogo): XXX: Remove this before shipping
 		digest := sha256.Sum256(request.Content)
-		pub, err := x509.ParsePKIXPublicKey(s.privateKey.Public)
+		pub, err := x509.ParsePKIXPublicKey(s.privateKey.Public())
 		if err != nil {
 			log.Printf("Failed to parse public key: %s\n", err)
 			return nil, err
@@ -197,7 +187,7 @@ func (s *RSASigner) Sign(request *pb.SignatureRequest) (*pb.Signature, error) {
 		return nil, errors.New("Failed to create signature")
 	}
 
-	returnSig := &pb.Signature{KeyInfo: &pb.KeyInfo{KeyID: &pb.KeyID{ID: s.privateKey.ID}, Algorithm: &pb.Algorithm{Algorithm: RSAAlgorithm}}, Content: sig[:]}
+	returnSig := &pb.Signature{KeyInfo: &pb.KeyInfo{KeyID: &pb.KeyID{ID: s.privateKey.ID()}, Algorithm: &pb.Algorithm{Algorithm: s.privateKey.Algorithm().String()}}, Content: sig[:]}
 	log.Printf("[Notary-signer Server] Signature request JSON: %s , response: %s", string(request.Content), returnSig)
 	return returnSig, nil
 }

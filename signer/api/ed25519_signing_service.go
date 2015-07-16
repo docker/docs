@@ -2,12 +2,11 @@ package api
 
 import (
 	"crypto/rand"
-	"crypto/sha256"
-	"encoding/hex"
 
 	"github.com/agl/ed25519"
 	"github.com/docker/notary/signer"
 	"github.com/docker/notary/signer/keys"
+	"github.com/endophage/gotuf/data"
 
 	pb "github.com/docker/notary/proto"
 )
@@ -23,20 +22,14 @@ func (s EdDSASigningService) CreateKey() (*pb.PublicKey, error) {
 	if err != nil {
 		return nil, err
 	}
-	k := &keys.Key{
-		Algorithm: ED25519,
-		Public:    *pub,
-		Private:   priv,
-	}
-	digest := sha256.Sum256(k.Public[:])
-	k.ID = hex.EncodeToString(digest[:])
+	k := data.NewPrivateKey(data.ED25519Key, pub[:], priv[:])
 
 	err = s.KeyDB.AddKey(k)
 	if err != nil {
 		return nil, err
 	}
 
-	pubKey := &pb.PublicKey{KeyInfo: &pb.KeyInfo{KeyID: &pb.KeyID{ID: k.ID}, Algorithm: &pb.Algorithm{Algorithm: k.Algorithm}}, PublicKey: k.Public[:]}
+	pubKey := &pb.PublicKey{KeyInfo: &pb.KeyInfo{KeyID: &pb.KeyID{ID: k.ID()}, Algorithm: &pb.Algorithm{Algorithm: k.Algorithm().String()}}, PublicKey: pub[:]}
 
 	return pubKey, nil
 }

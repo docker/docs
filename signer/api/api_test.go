@@ -14,6 +14,7 @@ import (
 	"github.com/docker/notary/signer"
 	"github.com/docker/notary/signer/api"
 	"github.com/docker/notary/signer/keys"
+	"github.com/endophage/gotuf/data"
 	"github.com/miekg/pkcs11"
 	"github.com/stretchr/testify/assert"
 
@@ -76,7 +77,7 @@ func TestDeleteKeyHandlerReturns404WithNonexistentKey(t *testing.T) {
 	// We associate both key types with this signing service to bypass the
 	// ID -> keyType logic in the tests
 	sigService := api.NewEdDSASigningService(keys.NewKeyDB())
-	setup(signer.SigningServiceIndex{api.ED25519: sigService, api.RSAAlgorithm: sigService})
+	setup(signer.SigningServiceIndex{data.ED25519Key: sigService, data.RSAKey: sigService})
 
 	fakeID := "c62e6d68851cef1f7e55a9d56e3b0c05f3359f16838cad43600f0554e7d3b54d"
 
@@ -97,7 +98,7 @@ func TestDeleteKeyHandler(t *testing.T) {
 	// We associate both key types with this signing service to bypass the
 	// ID -> keyType logic in the tests
 	sigService := api.NewEdDSASigningService(keys.NewKeyDB())
-	setup(signer.SigningServiceIndex{api.ED25519: sigService, api.RSAAlgorithm: sigService})
+	setup(signer.SigningServiceIndex{data.ED25519Key: sigService, data.RSAKey: sigService})
 
 	key, _ := sigService.CreateKey()
 
@@ -117,7 +118,7 @@ func TestKeyInfoHandler(t *testing.T) {
 	// We associate both key types with this signing service to bypass the
 	// ID -> keyType logic in the tests
 	sigService := api.NewEdDSASigningService(keys.NewKeyDB())
-	setup(signer.SigningServiceIndex{api.ED25519: sigService, api.RSAAlgorithm: sigService})
+	setup(signer.SigningServiceIndex{data.ED25519Key: sigService, data.RSAKey: sigService})
 
 	key, _ := sigService.CreateKey()
 
@@ -144,7 +145,7 @@ func TestKeyInfoHandlerReturns404WithNonexistentKey(t *testing.T) {
 	// We associate both key types with this signing service to bypass the
 	// ID -> keyType logic in the tests
 	sigService := api.NewEdDSASigningService(keys.NewKeyDB())
-	setup(signer.SigningServiceIndex{api.ED25519: sigService, api.RSAAlgorithm: sigService})
+	setup(signer.SigningServiceIndex{data.ED25519Key: sigService, data.RSAKey: sigService})
 
 	fakeID := "c62e6d68851cef1f7e55a9d56e3b0c05f3359f16838cad43600f0554e7d3b54d"
 	keyInfoURL := fmt.Sprintf("%s/%s", keyInfoBaseURL, fakeID)
@@ -168,9 +169,9 @@ func TestHSMCreateKeyHandler(t *testing.T) {
 	// We associate both key types with this signing service to bypass the
 	// ID -> keyType logic in the tests
 	sigService := api.NewRSASigningService(ctx, session)
-	setup(signer.SigningServiceIndex{api.ED25519: sigService, api.RSAAlgorithm: sigService})
+	setup(signer.SigningServiceIndex{data.ED25519Key: sigService, data.RSAKey: sigService})
 
-	createKeyURL := fmt.Sprintf("%s/%s", createKeyBaseURL, api.RSAAlgorithm)
+	createKeyURL := fmt.Sprintf("%s/%s", createKeyBaseURL, data.RSAKey)
 
 	request, err := http.NewRequest("POST", createKeyURL, nil)
 	assert.Nil(t, err)
@@ -192,9 +193,9 @@ func TestSoftwareCreateKeyHandler(t *testing.T) {
 	// We associate both key types with this signing service to bypass the
 	// ID -> keyType logic in the tests
 	sigService := api.NewEdDSASigningService(keys.NewKeyDB())
-	setup(signer.SigningServiceIndex{api.ED25519: sigService, api.RSAAlgorithm: sigService})
+	setup(signer.SigningServiceIndex{data.ED25519Key: sigService, data.RSAKey: sigService})
 
-	createKeyURL := fmt.Sprintf("%s/%s", createKeyBaseURL, api.ED25519)
+	createKeyURL := fmt.Sprintf("%s/%s", createKeyBaseURL, data.ED25519Key)
 
 	request, err := http.NewRequest("POST", createKeyURL, nil)
 	assert.Nil(t, err)
@@ -222,7 +223,7 @@ func TestHSMSignHandler(t *testing.T) {
 	// We associate both key types with this signing service to bypass the
 	// ID -> keyType logic in the tests
 	sigService := api.NewRSASigningService(ctx, session)
-	setup(signer.SigningServiceIndex{api.ED25519: sigService, api.RSAAlgorithm: sigService})
+	setup(signer.SigningServiceIndex{data.ED25519Key: sigService, data.RSAKey: sigService})
 
 	key, _ := sigService.CreateKey()
 
@@ -253,7 +254,7 @@ func TestSoftwareSignHandler(t *testing.T) {
 	// We associate both key types with this signing service to bypass the
 	// ID -> keyType logic in the tests
 	sigService := api.NewEdDSASigningService(keys.NewKeyDB())
-	setup(signer.SigningServiceIndex{api.ED25519: sigService, api.RSAAlgorithm: sigService})
+	setup(signer.SigningServiceIndex{data.ED25519Key: sigService, data.RSAKey: sigService})
 
 	key, err := sigService.CreateKey()
 	assert.Nil(t, err)
@@ -286,7 +287,7 @@ func TestSoftwareSignWithInvalidRequestHandler(t *testing.T) {
 	// We associate both key types with this signing service to bypass the
 	// ID -> keyType logic in the tests
 	sigService := api.NewEdDSASigningService(keys.NewKeyDB())
-	setup(signer.SigningServiceIndex{api.ED25519: sigService, api.RSAAlgorithm: sigService})
+	setup(signer.SigningServiceIndex{data.ED25519Key: sigService, data.RSAKey: sigService})
 
 	requestJson := "{\"blob\":\"7d16f1d0b95310a7bc557747fc4f20fcd41c1c5095ae42f189df0717e7d7f4a0a2b55debce630f43c4ac099769c612965e3fda3cd4c0078ee6a460f14fa19307\"}"
 	reader = strings.NewReader(requestJson)
@@ -311,7 +312,7 @@ func TestSignHandlerReturns404WithNonexistentKey(t *testing.T) {
 	// We associate both key types with this signing service to bypass the
 	// ID -> keyType logic in the tests
 	sigService := api.NewEdDSASigningService(keys.NewKeyDB())
-	setup(signer.SigningServiceIndex{api.ED25519: sigService, api.RSAAlgorithm: sigService})
+	setup(signer.SigningServiceIndex{data.ED25519Key: sigService, data.RSAKey: sigService})
 
 	fakeID := "c62e6d68851cef1f7e55a9d56e3b0c05f3359f16838cad43600f0554e7d3b54d"
 
