@@ -5,6 +5,7 @@ import (
 
 	"github.com/docker/notary/signer/api"
 	"github.com/docker/notary/signer/keys"
+	"github.com/endophage/gotuf/data"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 
@@ -20,7 +21,7 @@ func (m *FakeKeyDB) CreateKey() (*pb.PublicKey, error) {
 	return args.Get(0).(*pb.PublicKey), args.Error(1)
 }
 
-func (m *FakeKeyDB) AddKey(key *keys.Key) error {
+func (m *FakeKeyDB) AddKey(key data.Key) error {
 	args := m.Mock.Called()
 	return args.Error(0)
 }
@@ -35,9 +36,9 @@ func (m *FakeKeyDB) KeyInfo(keyID *pb.KeyID) (*pb.PublicKey, error) {
 	return args.Get(0).(*pb.PublicKey), args.Error(1)
 }
 
-func (m *FakeKeyDB) GetKey(keyID *pb.KeyID) (*keys.Key, error) {
+func (m *FakeKeyDB) GetKey(keyID *pb.KeyID) (data.Key, error) {
 	args := m.Mock.Called(keyID.ID)
-	return args.Get(0).(*keys.Key), args.Error(1)
+	return args.Get(0).(data.Key), args.Error(1)
 }
 
 func TestDeleteKey(t *testing.T) {
@@ -83,7 +84,7 @@ func TestSigner(t *testing.T) {
 	m := FakeKeyDB{}
 	sigService := api.NewEdDSASigningService(&m)
 
-	m.On("GetKey", fakeKeyID).Return(&keys.Key{}, nil).Once()
+	m.On("GetKey", fakeKeyID).Return(&data.PrivateKey{}, nil).Once()
 	_, err := sigService.Signer(&pb.KeyID{ID: fakeKeyID})
 
 	m.Mock.AssertExpectations(t)

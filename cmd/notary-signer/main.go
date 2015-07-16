@@ -17,6 +17,7 @@ import (
 	"github.com/docker/notary/signer"
 	"github.com/docker/notary/signer/api"
 	"github.com/docker/notary/signer/keys"
+	"github.com/endophage/gotuf/data"
 	"github.com/miekg/pkcs11"
 
 	pb "github.com/docker/notary/proto"
@@ -78,10 +79,10 @@ func main() {
 
 		defer cleanup(ctx, session)
 
-		sigServices[api.RSAAlgorithm] = api.NewRSASigningService(ctx, session)
+		sigServices[data.RSAKey] = api.NewRSASigningService(ctx, session)
 	}
 
-	sigServices[api.ED25519] = api.EdDSASigningService{KeyDB: keys.NewKeyDB()}
+	sigServices[data.ED25519Key] = api.EdDSASigningService{KeyDB: keys.NewKeyDB()}
 
 	//RPC server setup
 	kms := &api.KeyManagementServer{SigServices: sigServices}

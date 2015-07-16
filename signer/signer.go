@@ -2,7 +2,7 @@ package signer
 
 import (
 	pb "github.com/docker/notary/proto"
-	"github.com/docker/notary/signer/keys"
+	"github.com/endophage/gotuf/data"
 )
 
 // SigningService is the interface to implement a key management and signing service
@@ -15,7 +15,7 @@ type SigningService interface {
 
 // SigningServiceIndex represents a mapping between a service algorithm string
 // and a signing service
-type SigningServiceIndex map[string]SigningService
+type SigningServiceIndex map[data.KeyAlgorithm]SigningService
 
 // KeyManager is the interface to implement key management (possibly a key database)
 type KeyManager interface {
@@ -39,8 +39,8 @@ type KeyDatabase interface {
 	KeyManager
 
 	// GetKey returns the private key to do signing operations
-	GetKey(keyID *pb.KeyID) (*keys.Key, error)
+	GetKey(keyID *pb.KeyID) (data.Key, error)
 
 	// AddKey allows the direct addition and removal of keys from the database
-	AddKey(key *keys.Key) error
+	AddKey(key data.Key) error
 }

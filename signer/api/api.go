@@ -6,6 +6,7 @@ import (
 
 	"github.com/docker/notary/signer"
 	"github.com/docker/notary/signer/keys"
+	"github.com/endophage/gotuf/data"
 	"github.com/gorilla/mux"
 
 	pb "github.com/docker/notary/proto"
@@ -32,7 +33,7 @@ func getSigningService(w http.ResponseWriter, algorithm string, sigServices sign
 		return nil
 	}
 
-	service := sigServices[algorithm]
+	service := sigServices[data.KeyAlgorithm(algorithm)]
 
 	if service == nil {
 		http.Error(w, "algorithm "+algorithm+" not supported", http.StatusBadRequest)
