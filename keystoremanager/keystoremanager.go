@@ -193,9 +193,10 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, dnsName string) error
 		return err
 	}
 
+	// iterate over every keyID for the root role inside of roots.json
 	validKeys := make(map[string]*data.PublicKey)
 	for _, keyID := range rootSigned.Signed.Roles["root"].KeyIDs {
-		// Decode all the x509 certificates that were bundled with this
+		// decode all the x509 certificates that were bundled with this
 		// specific root key
 		decodedCerts, err := trustmanager.LoadCertBundleFromPEM([]byte(rootSigned.Signed.Keys[keyID].Public()))
 		if err != nil {
@@ -203,16 +204,16 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, dnsName string) error
 			continue
 		}
 
-		// Get all non-CA certificates in the decoded certificates
+		// get all non-CA certificates in the decoded certificates
 		leafCerts := trustmanager.GetLeafCerts(decodedCerts)
 
-		// If we got no leaf certificates or we got more than one, fail
+		// gf we got no leaf certificates or we got more than one, fail
 		if len(leafCerts) != 1 {
 			logrus.Debugf("error while parsing root certificate with keyID: %s, %v", keyID, err)
 			continue
 		}
 
-		// Get the ID of the leaf certificate
+		// get the ID of the leaf certificate
 		leafCert := leafCerts[0]
 		leafID, err := trustmanager.FingerprintCert(leafCert)
 		if err != nil {
@@ -220,18 +221,28 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, dnsName string) error
 			continue
 		}
 
-		// Check to see if there is an exact match of this certificate.
-		// Checking the CommonName is not required since ID is calculated over
-		// Cert.Raw. It's included to prevent breaking logic with changes of how the
-		// ID gets computed.
-		_, err = km.trustedCertificateStore.GetCertificateByKeyID(leafID)
-		if err == nil && leafCert.Subject.CommonName == dnsName {
-			validKeys[keyID] = rootSigned.Signed.Keys[keyID]
+		// retrieve all the trusted certificates that match this dns Name
+		certsForCN, err := km.certificateStore.GetCertificatesByCN(dnsName)
+
+		// if there are no certificates with this CN, lets TOFU!
+		// note that this logic should only exist in docker 1.8
+		if len(certsForCN) == 0 {
+			km.certificateStore.AddCert(leafCert)
+			certsForCN = append(certsForCN, leafCert)
 		}
 
-		// Check to see if this leafCertificate has a chain to one of the Root // CAs of our CA Store.
-		certList := []*x509.Certificate{leafCert}
-		err = trustmanager.Verify(km.trustedCAStore, dnsName, certList)
+		// iterate over all known certificates for this CN and see if any are trusted
+		for _, cert := range certsForCN {
+			// Check to see if there is an exact match of this certificate.
+			certID, err := trustmanager.FingerprintCert(cert)
+			if err == nil && certID == leafID {
+				validKeys[keyID] = rootSigned.Signed.Keys[keyID]
+			}
+		}
+
+		// Check to see if this leafCertificate has a chain to one of the Root
+		// CAs of our CA Store.
+		err = trustmanager.Verify(km.caStore, dnsName, decodedCerts)
 		if err == nil {
 			validKeys[keyID] = rootSigned.Signed.Keys[keyID]
 		}
@@ -241,6 +252,7 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, dnsName string) error
 		return errors.New("could not validate the path to a trusted root")
 	}
 
+	// TODO(david): change hardcoded minversion on TUF.
 	_, err = signed.VerifyRoot(root, 0, validKeys, 1)
 
 	return err
