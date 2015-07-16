@@ -37,7 +37,7 @@ func NewX509FilteredMemStore(validate func(*x509.Certificate) bool) *X509MemStor
 }
 
 // AddCert adds a certificate to the store
-func (s X509MemStore) AddCert(cert *x509.Certificate) error {
+func (s *X509MemStore) AddCert(cert *x509.Certificate) error {
 	if cert == nil {
 		return errors.New("adding nil Certificate to X509Store")
 	}
@@ -59,7 +59,7 @@ func (s X509MemStore) AddCert(cert *x509.Certificate) error {
 }
 
 // RemoveCert removes a certificate from a X509MemStore.
-func (s X509MemStore) RemoveCert(cert *x509.Certificate) error {
+func (s *X509MemStore) RemoveCert(cert *x509.Certificate) error {
 	if cert == nil {
 		return errors.New("removing nil Certificate to X509Store")
 	}
@@ -84,8 +84,23 @@ func (s X509MemStore) RemoveCert(cert *x509.Certificate) error {
 	return nil
 }
 
+// RemoveAll removes all the certificates from the store
+func (s *X509MemStore) RemoveAll() error {
+
+	for _, cert := range s.fingerprintMap {
+		if err := s.RemoveCert(cert); err != nil {
+			return err
+		}
+	}
+
+	s.fingerprintMap = make(map[CertID]*x509.Certificate)
+	s.nameMap = make(map[string][]CertID)
+
+	return nil
+}
+
 // AddCertFromPEM adds a certificate to the store from a PEM blob
-func (s X509MemStore) AddCertFromPEM(pemBytes []byte) error {
+func (s *X509MemStore) AddCertFromPEM(pemBytes []byte) error {
 	cert, err := LoadCertFromPEM(pemBytes)
 	if err != nil {
 		return err
@@ -94,7 +109,7 @@ func (s X509MemStore) AddCertFromPEM(pemBytes []byte) error {
 }
 
 // AddCertFromFile tries to adds a X509 certificate to the store given a filename
-func (s X509MemStore) AddCertFromFile(originFilname string) error {
+func (s *X509MemStore) AddCertFromFile(originFilname string) error {
 	cert, err := LoadCertFromFile(originFilname)
 	if err != nil {
 		return err
@@ -104,7 +119,7 @@ func (s X509MemStore) AddCertFromFile(originFilname string) error {
 }
 
 // GetCertificates returns an array with all of the current X509 Certificates.
-func (s X509MemStore) GetCertificates() []*x509.Certificate {
+func (s *X509MemStore) GetCertificates() []*x509.Certificate {
 	certs := make([]*x509.Certificate, len(s.fingerprintMap))
 	i := 0
 	for _, v := range s.fingerprintMap {
@@ -116,7 +131,7 @@ func (s X509MemStore) GetCertificates() []*x509.Certificate {
 
 // GetCertificatePool returns an x509 CertPool loaded with all the certificates
 // in the store.
-func (s X509MemStore) GetCertificatePool() *x509.CertPool {
+func (s *X509MemStore) GetCertificatePool() *x509.CertPool {
 	pool := x509.NewCertPool()
 
 	for _, v := range s.fingerprintMap {
@@ -126,12 +141,12 @@ func (s X509MemStore) GetCertificatePool() *x509.CertPool {
 }
 
 // GetCertificateByCertID returns the certificate that matches a certain certID
-func (s X509MemStore) GetCertificateByCertID(certID string) (*x509.Certificate, error) {
+func (s *X509MemStore) GetCertificateByCertID(certID string) (*x509.Certificate, error) {
 	return s.getCertificateByCertID(CertID(certID))
 }
 
 // getCertificateByCertID returns the certificate that matches a certain certID or error
-func (s X509MemStore) getCertificateByCertID(certID CertID) (*x509.Certificate, error) {
+func (s *X509MemStore) getCertificateByCertID(certID CertID) (*x509.Certificate, error) {
 	// If it does not look like a hex encoded sha256 hash, error
 	if len(certID) != 64 {
 		return nil, errors.New("invalid Subject Key Identifier")
@@ -147,7 +162,7 @@ func (s X509MemStore) getCertificateByCertID(certID CertID) (*x509.Certificate, 
 
 // GetCertificatesByCN returns all the certificates that match a specific
 // CommonName
-func (s X509MemStore) GetCertificatesByCN(cn string) ([]*x509.Certificate, error) {
+func (s *X509MemStore) GetCertificatesByCN(cn string) ([]*x509.Certificate, error) {
 	var certs []*x509.Certificate
 	if ids, ok := s.nameMap[cn]; ok {
 		for _, v := range ids {
@@ -170,7 +185,7 @@ func (s X509MemStore) GetCertificatesByCN(cn string) ([]*x509.Certificate, error
 // GetVerifyOptions returns VerifyOptions with the certificates within the KeyStore
 // as part of the roots list. This never allows the use of system roots, returning
 // an error if there are no root CAs.
-func (s X509MemStore) GetVerifyOptions(dnsName string) (x509.VerifyOptions, error) {
+func (s *X509MemStore) GetVerifyOptions(dnsName string) (x509.VerifyOptions, error) {
 	// If we have no Certificates loaded return error (we don't want to rever to using
 	// system CAs).
 	if len(s.fingerprintMap) == 0 {

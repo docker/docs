@@ -50,7 +50,7 @@ func newX509FileStore(directory string, validate func(*x509.Certificate) bool) (
 }
 
 // AddCert creates a filename for a given cert and adds a certificate with that name
-func (s X509FileStore) AddCert(cert *x509.Certificate) error {
+func (s *X509FileStore) AddCert(cert *x509.Certificate) error {
 	if cert == nil {
 		return errors.New("adding nil Certificate to X509Store")
 	}
@@ -69,7 +69,7 @@ func (s X509FileStore) AddCert(cert *x509.Certificate) error {
 
 // addNamedCert allows adding a certificate while controling the filename it gets
 // stored under. If the file does not exist on disk, saves it.
-func (s X509FileStore) addNamedCert(cert *x509.Certificate) error {
+func (s *X509FileStore) addNamedCert(cert *x509.Certificate) error {
 	fileName, certID, err := fileName(cert)
 	if err != nil {
 		return err
@@ -108,7 +108,7 @@ func (s X509FileStore) addNamedCert(cert *x509.Certificate) error {
 }
 
 // RemoveCert removes a certificate from a X509FileStore.
-func (s X509FileStore) RemoveCert(cert *x509.Certificate) error {
+func (s *X509FileStore) RemoveCert(cert *x509.Certificate) error {
 	if cert == nil {
 		return errors.New("removing nil Certificate from X509Store")
 	}
@@ -141,6 +141,20 @@ func (s X509FileStore) RemoveCert(cert *x509.Certificate) error {
 	return nil
 }
 
+// RemoveAll removes all the certificates from the store
+func (s *X509FileStore) RemoveAll() error {
+	for _, filename := range s.fileMap {
+		if err := s.fileStore.Remove(filename); err != nil {
+			return err
+		}
+	}
+	s.fileMap = make(map[CertID]string)
+	s.fingerprintMap = make(map[CertID]*x509.Certificate)
+	s.nameMap = make(map[string][]CertID)
+
+	return nil
+}
+
 // AddCertFromPEM adds the first certificate that it finds in the byte[], returning
 // an error if no Certificates are found
 func (s X509FileStore) AddCertFromPEM(pemBytes []byte) error {
@@ -152,7 +166,7 @@ func (s X509FileStore) AddCertFromPEM(pemBytes []byte) error {
 }
 
 // AddCertFromFile tries to adds a X509 certificate to the store given a filename
-func (s X509FileStore) AddCertFromFile(filename string) error {
+func (s *X509FileStore) AddCertFromFile(filename string) error {
 	cert, err := LoadCertFromFile(filename)
 	if err != nil {
 		return err
@@ -162,7 +176,7 @@ func (s X509FileStore) AddCertFromFile(filename string) error {
 }
 
 // GetCertificates returns an array with all of the current X509 Certificates.
-func (s X509FileStore) GetCertificates() []*x509.Certificate {
+func (s *X509FileStore) GetCertificates() []*x509.Certificate {
 	certs := make([]*x509.Certificate, len(s.fingerprintMap))
 	i := 0
 	for _, v := range s.fingerprintMap {
@@ -174,7 +188,7 @@ func (s X509FileStore) GetCertificates() []*x509.Certificate {
 
 // GetCertificatePool returns an x509 CertPool loaded with all the certificates
 // in the store.
-func (s X509FileStore) GetCertificatePool() *x509.CertPool {
+func (s *X509FileStore) GetCertificatePool() *x509.CertPool {
 	pool := x509.NewCertPool()
 
 	for _, v := range s.fingerprintMap {
@@ -184,12 +198,12 @@ func (s X509FileStore) GetCertificatePool() *x509.CertPool {
 }
 
 // GetCertificateByCertID returns the certificate that matches a certain certID
-func (s X509FileStore) GetCertificateByCertID(certID string) (*x509.Certificate, error) {
+func (s *X509FileStore) GetCertificateByCertID(certID string) (*x509.Certificate, error) {
 	return s.getCertificateByCertID(CertID(certID))
 }
 
 // getCertificateByCertID returns the certificate that matches a certain certID
-func (s X509FileStore) getCertificateByCertID(certID CertID) (*x509.Certificate, error) {
+func (s *X509FileStore) getCertificateByCertID(certID CertID) (*x509.Certificate, error) {
 	// If it does not look like a hex encoded sha256 hash, error
 	if len(certID) != 64 {
 		return nil, errors.New("invalid Subject Key Identifier")
@@ -205,7 +219,7 @@ func (s X509FileStore) getCertificateByCertID(certID CertID) (*x509.Certificate,
 
 // GetCertificatesByCN returns all the certificates that match a specific
 // CommonName
-func (s X509FileStore) GetCertificatesByCN(cn string) ([]*x509.Certificate, error) {
+func (s *X509FileStore) GetCertificatesByCN(cn string) ([]*x509.Certificate, error) {
 	var certs []*x509.Certificate
 	if ids, ok := s.nameMap[cn]; ok {
 		for _, v := range ids {
@@ -228,7 +242,7 @@ func (s X509FileStore) GetCertificatesByCN(cn string) ([]*x509.Certificate, erro
 // GetVerifyOptions returns VerifyOptions with the certificates within the KeyStore
 // as part of the roots list. This never allows the use of system roots, returning
 // an error if there are no root CAs.
-func (s X509FileStore) GetVerifyOptions(dnsName string) (x509.VerifyOptions, error) {
+func (s *X509FileStore) GetVerifyOptions(dnsName string) (x509.VerifyOptions, error) {
 	// If we have no Certificates loaded return error (we don't want to rever to using
 	// system CAs).
 	if len(s.fingerprintMap) == 0 {
