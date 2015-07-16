@@ -23,7 +23,7 @@ func NewX509MemStore() *X509MemStore {
 	}
 }
 
-// NewX509FilteredMemStore returns a new X509FileStore that validates certificates
+// NewX509FilteredMemStore returns a new X509Memstore that validates certificates
 // that are added.
 func NewX509FilteredMemStore(validate func(*x509.Certificate) bool) *X509MemStore {
 	s := &X509MemStore{
@@ -46,14 +46,14 @@ func (s X509MemStore) AddCert(cert *x509.Certificate) error {
 		return errors.New("certificate failed validation")
 	}
 
-	keyID, err := fingerprintCert(cert)
+	certID, err := fingerprintCert(cert)
 	if err != nil {
 		return err
 	}
 
-	s.fingerprintMap[keyID] = cert
+	s.fingerprintMap[certID] = cert
 	name := string(cert.RawSubject)
-	s.nameMap[name] = append(s.nameMap[name], keyID)
+	s.nameMap[name] = append(s.nameMap[name], certID)
 
 	return nil
 }
@@ -64,18 +64,18 @@ func (s X509MemStore) RemoveCert(cert *x509.Certificate) error {
 		return errors.New("removing nil Certificate to X509Store")
 	}
 
-	keyID, err := fingerprintCert(cert)
+	certID, err := fingerprintCert(cert)
 	if err != nil {
 		return err
 	}
-	delete(s.fingerprintMap, keyID)
+	delete(s.fingerprintMap, certID)
 	name := string(cert.RawSubject)
 
 	// Filter the fingerprint out of this name entry
 	fpList := s.nameMap[name]
 	newfpList := fpList[:0]
 	for _, x := range fpList {
-		if x != keyID {
+		if x != certID {
 			newfpList = append(newfpList, x)
 		}
 	}
@@ -125,19 +125,46 @@ func (s X509MemStore) GetCertificatePool() *x509.CertPool {
 	return pool
 }
 
-// GetCertificateByKeyID returns the certificate that matches a certain keyID or error
-func (s X509MemStore) GetCertificateByKeyID(keyID string) (*x509.Certificate, error) {
+// GetCertificateByCertID returns the certificate that matches a certain certID
+func (s X509MemStore) GetCertificateByCertID(certID string) (*x509.Certificate, error) {
+	return s.getCertificateByCertID(CertID(certID))
+}
+
+// getCertificateByCertID returns the certificate that matches a certain certID or error
+func (s X509MemStore) getCertificateByCertID(certID CertID) (*x509.Certificate, error) {
 	// If it does not look like a hex encoded sha256 hash, error
-	if len(keyID) != 64 {
+	if len(certID) != 64 {
 		return nil, errors.New("invalid Subject Key Identifier")
 	}
 
 	// Check to see if this subject key identifier exists
-	if cert, ok := s.fingerprintMap[CertID(keyID)]; ok {
+	if cert, ok := s.fingerprintMap[CertID(certID)]; ok {
 		return cert, nil
 
 	}
 	return nil, errors.New("certificate not found in Key Store")
+}
+
+// GetCertificatesByCN returns all the certificates that match a specific
+// CommonName
+func (s X509MemStore) GetCertificatesByCN(cn string) ([]*x509.Certificate, error) {
+	var certs []*x509.Certificate
+	if ids, ok := s.nameMap[cn]; ok {
+		for _, v := range ids {
+			cert, err := s.getCertificateByCertID(v)
+			if err != nil {
+				// This error should never happen. This would mean that we have
+				// an inconsistent X509MemStore
+				return nil, err
+			}
+			certs = append(certs, cert)
+		}
+	}
+	if len(certs) == 0 {
+		return nil, errors.New("common name not found in Key Store")
+	}
+
+	return certs, nil
 }
 
 // GetVerifyOptions returns VerifyOptions with the certificates within the KeyStore

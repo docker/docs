@@ -106,14 +106,14 @@ func TestRemoveCert(t *testing.T) {
 	}
 }
 
-func TestInexistentGetCertificateByKeyID(t *testing.T) {
+func TestInexistentGetCertificateByCertID(t *testing.T) {
 	store := NewX509MemStore()
 	err := store.AddCertFromFile("../fixtures/root-ca.crt")
 	if err != nil {
 		t.Fatalf("failed to load certificate from file: %v", err)
 	}
 
-	_, err = store.GetCertificateByKeyID("4d06afd30b8bed131d2a84c97d00b37f422021598bfae34285ce98e77b708b5a")
+	_, err = store.GetCertificateByCertID("4d06afd30b8bed131d2a84c97d00b37f422021598bfae34285ce98e77b708b5a")
 	if err == nil {
 		t.Fatalf("no error returned for inexistent certificate")
 	}
@@ -138,15 +138,15 @@ func TestGetCertificateByKeyID(t *testing.T) {
 		t.Fatalf("failed to load certificate from PEM: %v", err)
 	}
 
-	keyID, err := FingerprintCert(cert)
+	certID, err := FingerprintCert(cert)
 	if err != nil {
 		t.Fatalf("failed to fingerprint the certificate: %v", err)
 	}
 
 	// Tries to retrieve cert by Subject Key IDs
-	_, err = store.GetCertificateByKeyID(keyID)
+	_, err = store.GetCertificateByCertID(certID)
 	if err != nil {
-		t.Fatalf("expected certificate in store: %s", keyID)
+		t.Fatalf("expected certificate in store: %s", certID)
 	}
 }
 
