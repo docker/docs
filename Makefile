@@ -41,7 +41,7 @@ test: docs-build
 		-v $(CURDIR):/docs/content/docker-trusted-registry/ \
 		-e DOCKERHOST "$(DOCKER_DOCS_IMAGE)" \
 		hugo server \
-			--log=true --watch=true --buildDrafts=true \
+			--log=true --watch=true \
 			--port=$(DOCSPORT) --baseUrl=$(HUGO_BASE_URL) --bind=$(HUGO_BIND_IP)
 
 docs: docs-build
