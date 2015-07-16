@@ -135,6 +135,52 @@ func TestRemoveCertX509FileStore(t *testing.T) {
 	}
 }
 
+func TestRemoveAllX509FileStore(t *testing.T) {
+	tempDir, err := ioutil.TempDir("", "cert-test")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Add three certificates to store
+	store, _ := NewX509FileStore(tempDir)
+	certFiles := [3]string{"../fixtures/root-ca.crt",
+		"../fixtures/intermediate-ca.crt",
+		"../fixtures/secure.example.com.crt"}
+	for _, file := range certFiles {
+		b, err := ioutil.ReadFile(file)
+		if err != nil {
+			t.Fatalf("couldn't load fixture: %v", err)
+		}
+		var block *pem.Block
+		block, _ = pem.Decode(b)
+
+		cert, err := x509.ParseCertificate(block.Bytes)
+		if err != nil {
+			t.Fatalf("couldn't parse certificate: %v", err)
+		}
+		err = store.AddCert(cert)
+		if err != nil {
+			t.Fatalf("failed to load certificate: %v", err)
+		}
+	}
+
+	// Number of certificates should be 1 since we added the cert
+	numCerts := len(store.GetCertificates())
+	if numCerts != 3 {
+		t.Fatalf("unexpected number of certificates in store: %d", numCerts)
+	}
+
+	// Remove the cert from the store
+	err = store.RemoveAll()
+	if err != nil {
+		t.Fatalf("failed to remove all certificates: %v", err)
+	}
+	// Number of certificates should be 0 since we added and removed the cert
+	numCerts = len(store.GetCertificates())
+	if numCerts != 0 {
+		t.Fatalf("unexpected number of certificates in store: %d", numCerts)
+	}
+}
 func TestInexistentGetCertificateByKeyIDX509FileStore(t *testing.T) {
 	tempDir, err := ioutil.TempDir("", "cert-test")
 	if err != nil {
