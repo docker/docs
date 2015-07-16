@@ -2,7 +2,6 @@ package trustmanager
 
 import (
 	"crypto/x509"
-	"encoding/pem"
 	"errors"
 )
 
@@ -86,31 +85,12 @@ func (s X509MemStore) RemoveCert(cert *x509.Certificate) error {
 }
 
 // AddCertFromPEM adds a certificate to the store from a PEM blob
-func (s X509MemStore) AddCertFromPEM(pemCerts []byte) error {
-	ok := false
-	for len(pemCerts) > 0 {
-		var block *pem.Block
-		block, pemCerts = pem.Decode(pemCerts)
-		if block == nil {
-			return errors.New("no PEM data found")
-		}
-		if block.Type != "CERTIFICATE" || len(block.Headers) != 0 {
-			continue
-		}
-
-		cert, err := x509.ParseCertificate(block.Bytes)
-		if err != nil {
-			return errors.New("error while parsing PEM certificate")
-		}
-
-		s.AddCert(cert)
-		ok = true
+func (s X509MemStore) AddCertFromPEM(pemBytes []byte) error {
+	cert, err := LoadCertFromPEM(pemBytes)
+	if err != nil {
+		return err
 	}
-
-	if !ok {
-		return errors.New("no certificates found in PEM data")
-	}
-	return nil
+	return s.AddCert(cert)
 }
 
 // AddCertFromFile tries to adds a X509 certificate to the store given a filename
