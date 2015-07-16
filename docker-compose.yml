@@ -3,6 +3,7 @@ notaryserver:
   dockerfile: notary-server-Dockerfile
   links:
    - notarymysql
+   - notarysigner
   ports:
    - "8080"
    - "4443"
