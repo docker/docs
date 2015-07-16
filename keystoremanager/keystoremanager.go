@@ -3,8 +3,6 @@ package keystoremanager
 import (
 	"crypto/rand"
 	"crypto/x509"
-	"encoding/json"
-	"encoding/pem"
 	"errors"
 	"fmt"
 	"path/filepath"
@@ -190,26 +188,32 @@ Example TUF Content for root key:
 }
 */
 func (km *KeyStoreManager) ValidateRoot(root *data.Signed, dnsName string) error {
-	rootSigned := &data.Root{}
-	err := json.Unmarshal(root.Signed, rootSigned)
+	rootSigned, err := data.RootFromSigned(root)
 	if err != nil {
 		return err
 	}
 
-	certs := make(map[string]data.PublicKey)
-	for _, keyID := range rootSigned.Roles["root"].KeyIDs {
-		// TODO(dlaw): currently assuming only one cert contained in
-		// public key entry. Need to fix when we want to pass in chains.
-		k, _ := pem.Decode([]byte(rootSigned.Keys[keyID].Public()))
-		decodedCerts, err := x509.ParseCertificates(k.Bytes)
+	validKeys := make(map[string]*data.PublicKey)
+	for _, keyID := range rootSigned.Signed.Roles["root"].KeyIDs {
+		// Decode all the x509 certificates that were bundled with this
+		// specific root key
+		decodedCerts, err := trustmanager.LoadCertBundleFromPEM([]byte(rootSigned.Signed.Keys[keyID].Public()))
 		if err != nil {
 			logrus.Debugf("error while parsing root certificate with keyID: %s, %v", keyID, err)
 			continue
 		}
-		// TODO(diogo): Assuming that first certificate is the leaf-cert. Need to
-		// iterate over all decodedCerts and find a non-CA one (should be the last).
-		leafCert := decodedCerts[0]
 
+		// Get all non-CA certificates in the decoded certificates
+		leafCerts := trustmanager.GetLeafCerts(decodedCerts)
+
+		// If we got no leaf certificates or we got more than one, fail
+		if len(leafCerts) != 1 {
+			logrus.Debugf("error while parsing root certificate with keyID: %s, %v", keyID, err)
+			continue
+		}
+
+		// Get the ID of the leaf certificate
+		leafCert := leafCerts[0]
 		leafID, err := trustmanager.FingerprintCert(leafCert)
 		if err != nil {
 			logrus.Debugf("error while fingerprinting root certificate with keyID: %s, %v", keyID, err)
@@ -222,23 +226,22 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, dnsName string) error
 		// ID gets computed.
 		_, err = km.trustedCertificateStore.GetCertificateByKeyID(leafID)
 		if err == nil && leafCert.Subject.CommonName == dnsName {
-			certs[keyID] = rootSigned.Keys[keyID]
+			validKeys[keyID] = rootSigned.Signed.Keys[keyID]
 		}
 
-		// Check to see if this leafCertificate has a chain to one of the Root CAs
-		// of our CA Store.
+		// Check to see if this leafCertificate has a chain to one of the Root // CAs of our CA Store.
 		certList := []*x509.Certificate{leafCert}
 		err = trustmanager.Verify(km.trustedCAStore, dnsName, certList)
 		if err == nil {
-			certs[keyID] = rootSigned.Keys[keyID]
+			validKeys[keyID] = rootSigned.Signed.Keys[keyID]
 		}
 	}
 
-	if len(certs) < 1 {
+	if len(validKeys) < 1 {
 		return errors.New("could not validate the path to a trusted root")
 	}
 
-	_, err = signed.VerifyRoot(root, 0, certs, 1)
+	_, err = signed.VerifyRoot(root, 0, validKeys, 1)
 
 	return err
 }
