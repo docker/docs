@@ -29,23 +29,28 @@
 		},
 		{
 			"ImportPath": "github.com/docker/distribution/context",
-			"Comment": "v2.0.0-332-g79a4ca2",
-			"Rev": "79a4ca2abe6f8622039678ba85a42cb6c7fd8af9"
+			"Comment": "v2.0.0-353-gfed58bd",
+			"Rev": "fed58bd2d3c096055c0e69c2fb86c9a4965d1b8b"
 		},
 		{
 			"ImportPath": "github.com/docker/distribution/health",
-			"Comment": "v2.0.0-332-g79a4ca2",
-			"Rev": "79a4ca2abe6f8622039678ba85a42cb6c7fd8af9"
+			"Comment": "v2.0.0-353-gfed58bd",
+			"Rev": "fed58bd2d3c096055c0e69c2fb86c9a4965d1b8b"
 		},
 		{
 			"ImportPath": "github.com/docker/distribution/registry/auth",
-			"Comment": "v2.0.0-332-g79a4ca2",
-			"Rev": "79a4ca2abe6f8622039678ba85a42cb6c7fd8af9"
+			"Comment": "v2.0.0-353-gfed58bd",
+			"Rev": "fed58bd2d3c096055c0e69c2fb86c9a4965d1b8b"
+		},
+		{
+			"ImportPath": "github.com/docker/distribution/registry/api/errcode",
+			"Comment": "v2.0.0-353-gfed58bd",
+			"Rev": "fed58bd2d3c096055c0e69c2fb86c9a4965d1b8b"
 		},
 		{
 			"ImportPath": "github.com/docker/distribution/uuid",
-			"Comment": "v2.0.0-332-g79a4ca2",
-			"Rev": "79a4ca2abe6f8622039678ba85a42cb6c7fd8af9"
+			"Comment": "v2.0.0-353-gfed58bd",
+			"Rev": "fed58bd2d3c096055c0e69c2fb86c9a4965d1b8b"
 		},
 		{
 			"ImportPath": "github.com/docker/docker/pkg/term",
