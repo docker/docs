@@ -19,10 +19,11 @@ import (
 // can be injected into a verificationService. For testing and configuration
 // purposes, it will not be used by default.
 var Verifiers = map[data.SigAlgorithm]Verifier{
-	data.RSAPSSSignature:   RSAPSSVerifier{},
-	data.PyCryptoSignature: RSAPyCryptoVerifier{},
-	data.ECDSASignature:    ECDSAVerifier{},
-	data.EDDSASignature:    Ed25519Verifier{},
+	data.RSAPSSSignature:      RSAPSSVerifier{},
+	data.RSAPKCS1v15Signature: RSAPKCS1v15Verifier{},
+	data.PyCryptoSignature:    RSAPyCryptoVerifier{},
+	data.ECDSASignature:       ECDSAVerifier{},
+	data.EDDSASignature:       Ed25519Verifier{},
 }
 
 // RegisterVerifier provides a convenience function for init() functions
@@ -78,11 +79,7 @@ func verifyPSS(key interface{}, digest, sig []byte) error {
 	return nil
 }
 
-// RSAPSSVerifier checks RSASSA-PSS signatures
-type RSAPSSVerifier struct{}
-
-// Verify does the actual check.
-func (v RSAPSSVerifier) Verify(key data.Key, sig []byte, msg []byte) error {
+func getRSAPubKey(key data.Key) (crypto.PublicKey, error) {
 	algorithm := key.Algorithm()
 	var pubKey crypto.PublicKey
 
@@ -91,12 +88,12 @@ func (v RSAPSSVerifier) Verify(key data.Key, sig []byte, msg []byte) error {
 		pemCert, _ := pem.Decode([]byte(key.Public()))
 		if pemCert == nil {
 			logrus.Infof("failed to decode PEM-encoded x509 certificate")
-			return ErrInvalid
+			return nil, ErrInvalid
 		}
 		cert, err := x509.ParseCertificate(pemCert.Bytes)
 		if err != nil {
 			logrus.Infof("failed to parse x509 certificate: %s\n", err)
-			return ErrInvalid
+			return nil, ErrInvalid
 		}
 		pubKey = cert.PublicKey
 	case data.RSAKey:
@@ -104,16 +101,52 @@ func (v RSAPSSVerifier) Verify(key data.Key, sig []byte, msg []byte) error {
 		pubKey, err = x509.ParsePKIXPublicKey(key.Public())
 		if err != nil {
 			logrus.Infof("failed to parse public key: %s\n", err)
-			return ErrInvalid
+			return nil, ErrInvalid
 		}
 	default:
 		logrus.Infof("invalid key type for RSAPSS verifier: %s", algorithm)
-		return ErrInvalid
+		return nil, ErrInvalid
+	}
+
+	return pubKey, nil
+}
+
+// RSAPSSVerifier checks RSASSA-PSS signatures
+type RSAPSSVerifier struct{}
+
+// Verify does the actual check.
+func (v RSAPSSVerifier) Verify(key data.Key, sig []byte, msg []byte) error {
+	pubKey, err := getRSAPubKey(key)
+	if err != nil {
+		return err
 	}
 
 	digest := sha256.Sum256(msg)
 
 	return verifyPSS(pubKey, digest[:], sig)
+}
+
+// RSAPKCS1v15SVerifier checks RSA PKCS1v15 signatures
+type RSAPKCS1v15Verifier struct{}
+
+func (v RSAPKCS1v15Verifier) Verify(key data.Key, sig []byte, msg []byte) error {
+	pubKey, err := getRSAPubKey(key)
+	if err != nil {
+		return err
+	}
+	digest := sha256.Sum256(msg)
+
+	rsaPub, ok := pubKey.(*rsa.PublicKey)
+	if !ok {
+		logrus.Infof("value was not an RSA public key")
+		return ErrInvalid
+	}
+
+	if err = rsa.VerifyPKCS1v15(rsaPub, crypto.SHA256, digest[:], sig); err != nil {
+		logrus.Errorf("Failed verification: %s", err.Error())
+		return ErrInvalid
+	}
+	return nil
 }
 
 // RSAPSSVerifier checks RSASSA-PSS signatures

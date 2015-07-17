@@ -14,9 +14,10 @@ import (
 	"google.golang.org/grpc/credentials"
 
 	_ "github.com/docker/distribution/health"
+	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/signer"
 	"github.com/docker/notary/signer/api"
-	"github.com/docker/notary/signer/keys"
+	"github.com/docker/notary/trustmanager"
 	"github.com/endophage/gotuf/data"
 	"github.com/miekg/pkcs11"
 
@@ -68,7 +69,7 @@ func main() {
 	}
 	tlsConfig.Rand = rand.Reader
 
-	sigServices := make(signer.SigningServiceIndex)
+	cryptoServices := make(signer.CryptoServiceIndex)
 
 	if pkcs11Lib != "" {
 		if pin == "" {
@@ -79,14 +80,18 @@ func main() {
 
 		defer cleanup(ctx, session)
 
-		sigServices[data.RSAKey] = api.NewRSASigningService(ctx, session)
+		cryptoServices[data.RSAKey] = api.NewRSAHardwareCryptoService(ctx, session)
 	}
 
-	sigServices[data.ED25519Key] = api.EdDSASigningService{KeyDB: keys.NewKeyDB()}
+	keyStore := trustmanager.NewKeyMemoryStore()
+	cryptoService := cryptoservice.NewCryptoService("", keyStore, "")
+
+	cryptoServices[data.ED25519Key] = cryptoService
+	cryptoServices[data.ECDSAKey] = cryptoService
 
 	//RPC server setup
-	kms := &api.KeyManagementServer{SigServices: sigServices}
-	ss := &api.SignerServer{SigServices: sigServices}
+	kms := &api.KeyManagementServer{CryptoServices: cryptoServices}
+	ss := &api.SignerServer{CryptoServices: cryptoServices}
 
 	grpcServer := grpc.NewServer()
 	pb.RegisterKeyManagementServer(grpcServer, kms)
@@ -105,7 +110,7 @@ func main() {
 	//HTTP server setup
 	server := http.Server{
 		Addr:      _Addr,
-		Handler:   api.Handlers(sigServices),
+		Handler:   api.Handlers(cryptoServices),
 		TLSConfig: tlsConfig,
 	}
 

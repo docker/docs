@@ -10,23 +10,20 @@ import (
 	"log"
 	"math/big"
 
-	"github.com/docker/notary/signer"
 	"github.com/docker/notary/signer/keys"
+	"github.com/endophage/gotuf/data"
 	"github.com/miekg/pkcs11"
-
-	pb "github.com/docker/notary/proto"
 )
 
-// RSASigningService is an implementation of SigningService
-type RSASigningService struct {
+// RSAHardwareCryptoService is an implementation of SigningService
+type RSAHardwareCryptoService struct {
 	keys    map[string]*keys.HSMRSAKey
 	context *pkcs11.Ctx
 	session pkcs11.SessionHandle
 }
 
-// CreateKey creates a key and returns its public components
-func (s RSASigningService) CreateKey() (*pb.PublicKey, error) {
-
+// Create creates a key and returns its public components
+func (s *RSAHardwareCryptoService) Create(role string, algo data.KeyAlgorithm) (data.Key, error) {
 	// For now generate random labels for keys
 	// (diogo): add link between keyID and label in database so we can support multiple keys
 	randomLabel := make([]byte, 32)
@@ -101,100 +98,87 @@ func (s RSASigningService) CreateKey() (*pb.PublicKey, error) {
 
 	s.keys[keyID] = k
 
-	pubKey := &pb.PublicKey{KeyInfo: &pb.KeyInfo{KeyID: &pb.KeyID{ID: keyID}, Algorithm: &pb.Algorithm{Algorithm: k.Algorithm().String()}}, PublicKey: k.Public()}
-
-	return pubKey, nil
+	return k, nil
 }
 
-// DeleteKey removes a key from the key database
-func (s RSASigningService) DeleteKey(keyID *pb.KeyID) (*pb.Void, error) {
-	if _, ok := s.keys[keyID.ID]; !ok {
-		return nil, keys.ErrInvalidKeyID
+// RemoveKey removes a key from the key database
+func (s *RSAHardwareCryptoService) RemoveKey(keyID string) error {
+	if _, ok := s.keys[keyID]; !ok {
+		return keys.ErrInvalidKeyID
 	}
 
-	delete(s.keys, keyID.ID)
-	return nil, nil
+	delete(s.keys, keyID)
+	return nil
 }
 
-// KeyInfo returns the public components of a particular key
-func (s RSASigningService) KeyInfo(keyID *pb.KeyID) (*pb.PublicKey, error) {
-	k, ok := s.keys[keyID.ID]
-	if !ok {
-		return nil, keys.ErrInvalidKeyID
-	}
-
-	pubKey := &pb.PublicKey{KeyInfo: &pb.KeyInfo{KeyID: keyID, Algorithm: &pb.Algorithm{Algorithm: k.Algorithm().String()}}, PublicKey: k.Public()}
-
-	return pubKey, nil
-}
-
-// Signer returns a Signer for a specific KeyID
-func (s RSASigningService) Signer(keyID *pb.KeyID) (signer.Signer, error) {
-	key, ok := s.keys[keyID.ID]
-	if !ok {
-		return nil, keys.ErrInvalidKeyID
-	}
-	// TODO(diogo): Investigate if caching is worth it. Is this object expensive to create?
-	return &RSASigner{privateKey: key, context: s.context, session: s.session}, nil
-}
-
-// RSASigner implements the Signer interface for RSA keys
-type RSASigner struct {
-	privateKey *keys.HSMRSAKey
-	context    *pkcs11.Ctx
-	session    pkcs11.SessionHandle
+// GetKey returns the public components of a particular key
+func (s *RSAHardwareCryptoService) GetKey(keyID string) data.Key {
+	return s.keys[keyID]
 }
 
 // Sign returns a signature for a given signature request
-func (s *RSASigner) Sign(request *pb.SignatureRequest) (*pb.Signature, error) {
-	priv := s.privateKey.PKCS11ObjectHandle()
-	var sig []byte
-	var err error
-	for i := 0; i < 3; i++ {
-		//TODO(mccauley): move this to RSA OAEP
-		s.context.SignInit(s.session, []*pkcs11.Mechanism{pkcs11.NewMechanism(pkcs11.CKM_SHA256_RSA_PKCS, nil)}, priv)
-
-		sig, err = s.context.Sign(s.session, request.Content)
-		if err != nil {
-			log.Printf("Error while signing: %s", err)
+func (s *RSAHardwareCryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signature, error) {
+	signatures := make([]data.Signature, 0, len(keyIDs))
+	for _, keyid := range keyIDs {
+		privateKey, present := s.keys[keyid]
+		if !present {
+			// We skip keys that aren't found
 			continue
 		}
 
-		// (diogo): XXX: Remove this before shipping
-		digest := sha256.Sum256(request.Content)
-		pub, err := x509.ParsePKIXPublicKey(s.privateKey.Public())
-		if err != nil {
-			log.Printf("Failed to parse public key: %s\n", err)
-			return nil, err
+		priv := privateKey.PKCS11ObjectHandle()
+		var sig []byte
+		var err error
+		for i := 0; i < 3; i++ {
+			//TODO(mccauley): move this to RSA OAEP
+			s.context.SignInit(s.session, []*pkcs11.Mechanism{pkcs11.NewMechanism(pkcs11.CKM_SHA256_RSA_PKCS, nil)}, priv)
+
+			sig, err = s.context.Sign(s.session, payload)
+			if err != nil {
+				log.Printf("Error while signing: %s", err)
+				continue
+			}
+
+			// (diogo): XXX: Remove this before shipping
+			digest := sha256.Sum256(payload)
+			pub, err := x509.ParsePKIXPublicKey(privateKey.Public())
+			if err != nil {
+				log.Printf("Failed to parse public key: %s\n", err)
+				return nil, err
+			}
+
+			rsaPub, ok := pub.(*rsa.PublicKey)
+			if !ok {
+				log.Printf("Value returned from ParsePKIXPublicKey was not an RSA public key")
+				return nil, err
+			}
+
+			err = rsa.VerifyPKCS1v15(rsaPub, crypto.SHA256, digest[:], sig)
+			if err != nil {
+				log.Printf("Failed verification. Retrying: %s", err)
+				continue
+			}
+			break
 		}
 
-		rsaPub, ok := pub.(*rsa.PublicKey)
-		if !ok {
-			log.Printf("Value returned from ParsePKIXPublicKey was not an RSA public key")
-			return nil, err
+		// (diogo): XXX: END Area of removal
+		if sig == nil {
+			return nil, errors.New("Failed to create signature")
 		}
 
-		err = rsa.VerifyPKCS1v15(rsaPub, crypto.SHA256, digest[:], sig)
-		if err != nil {
-			log.Printf("Failed verification. Retrying: %s", err)
-			continue
-		}
-		break
+		signatures = append(signatures, data.Signature{
+			KeyID:     keyid,
+			Method:    data.RSAPKCS1v15Signature,
+			Signature: sig[:],
+		})
 	}
 
-	// (diogo): XXX: END Area of removal
-	if sig == nil {
-		return nil, errors.New("Failed to create signature")
-	}
-
-	returnSig := &pb.Signature{KeyInfo: &pb.KeyInfo{KeyID: &pb.KeyID{ID: s.privateKey.ID()}, Algorithm: &pb.Algorithm{Algorithm: s.privateKey.Algorithm().String()}}, Content: sig[:]}
-	log.Printf("[Notary-signer Server] Signature request JSON: %s , response: %s", string(request.Content), returnSig)
-	return returnSig, nil
+	return signatures, nil
 }
 
-// NewRSASigningService returns an instance of KeyDB
-func NewRSASigningService(ctx *pkcs11.Ctx, session pkcs11.SessionHandle) *RSASigningService {
-	return &RSASigningService{
+// NewRSAHardwareCryptoService returns an instance of RSAHardwareCryptoService
+func NewRSAHardwareCryptoService(ctx *pkcs11.Ctx, session pkcs11.SessionHandle) *RSAHardwareCryptoService {
+	return &RSAHardwareCryptoService{
 		keys:    make(map[string]*keys.HSMRSAKey),
 		context: ctx,
 		session: session,

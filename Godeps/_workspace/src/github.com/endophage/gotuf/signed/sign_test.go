@@ -27,13 +27,19 @@ func (mts *MockCryptoService) Sign(keyIDs []string, _ []byte) ([]data.Signature,
 	return sigs, nil
 }
 
-func (mts *MockCryptoService) Create(_ string, _ data.KeyAlgorithm) (*data.PublicKey, error) {
+func (mts *MockCryptoService) Create(_ string, _ data.KeyAlgorithm) (data.Key, error) {
 	return &mts.testKey, nil
 }
 
-func (mts *MockCryptoService) PublicKeys(keyIDs ...string) (map[string]*data.PublicKey, error) {
-	keys := map[string]*data.PublicKey{"testID": &mts.testKey}
-	return keys, nil
+func (mts *MockCryptoService) GetKey(keyID string) data.Key {
+	if keyID == "testID" {
+		return &mts.testKey
+	}
+	return nil
+}
+
+func (mts *MockCryptoService) RemoveKey(keyID string) error {
+	return nil
 }
 
 var _ CryptoService = &MockCryptoService{}

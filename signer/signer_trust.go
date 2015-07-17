@@ -1,6 +1,7 @@
 package signer
 
 import (
+	"errors"
 	"net"
 
 	"github.com/Sirupsen/logrus"
@@ -62,8 +63,7 @@ func (trust *NotarySigner) Sign(keyIDs []string, toSign []byte) ([]data.Signatur
 }
 
 // Create creates a remote key and returns the PublicKey associated with the remote private key
-// TODO(diogo): Ignoring algorithm for now until notary-signer supports it
-func (trust *NotarySigner) Create(role string, algorithm data.KeyAlgorithm) (*data.PublicKey, error) {
+func (trust *NotarySigner) Create(role string, algorithm data.KeyAlgorithm) (data.Key, error) {
 	publicKey, err := trust.kmClient.CreateKey(context.Background(), &pb.Algorithm{Algorithm: algorithm.String()})
 	if err != nil {
 		return nil, err
@@ -73,17 +73,14 @@ func (trust *NotarySigner) Create(role string, algorithm data.KeyAlgorithm) (*da
 	return public, nil
 }
 
-// PublicKeys returns the public key(s) associated with the passed in keyIDs
-func (trust *NotarySigner) PublicKeys(keyIDs ...string) (map[string]*data.PublicKey, error) {
-	publicKeys := make(map[string]*data.PublicKey)
-	for _, ID := range keyIDs {
-		keyID := pb.KeyID{ID: ID}
-		public, err := trust.kmClient.GetKeyInfo(context.Background(), &keyID)
-		if err != nil {
-			return nil, err
-		}
-		publicKeys[public.KeyInfo.KeyID.ID] =
-			data.NewPublicKey(data.KeyAlgorithm(public.KeyInfo.Algorithm.Algorithm), public.PublicKey)
-	}
-	return publicKeys, nil
+// RemoveKey deletes a key
+func (trust *NotarySigner) RemoveKey(keyid string) error {
+	//TODO(aaronl): Not implemented yet
+	return errors.New("DeleteKey not implemented in NotarySigner")
+}
+
+// GetKey retrieves a key
+func (trust *NotarySigner) GetKey(keyid string) data.Key {
+	//TODO(aaronl): Not implemented yet
+	return nil
 }

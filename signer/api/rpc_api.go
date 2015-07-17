@@ -17,39 +17,47 @@ import (
 
 //KeyManagementServer implements the KeyManagementServer grpc interface
 type KeyManagementServer struct {
-	SigServices signer.SigningServiceIndex
+	CryptoServices signer.CryptoServiceIndex
 }
 
 //SignerServer implements the SignerServer grpc interface
 type SignerServer struct {
-	SigServices signer.SigningServiceIndex
+	CryptoServices signer.CryptoServiceIndex
 }
 
 //CreateKey returns a PublicKey created using KeyManagementServer's SigningService
 func (s *KeyManagementServer) CreateKey(ctx context.Context, algorithm *pb.Algorithm) (*pb.PublicKey, error) {
-	service := s.SigServices[data.KeyAlgorithm(algorithm.Algorithm)]
+	keyAlgo := data.KeyAlgorithm(algorithm.Algorithm)
+
+	service := s.CryptoServices[keyAlgo]
 
 	if service == nil {
 		return nil, fmt.Errorf("algorithm %s not supported for create key", algorithm.Algorithm)
 	}
 
-	key, err := service.CreateKey()
+	tufKey, err := service.Create("", keyAlgo)
 	if err != nil {
 		return nil, grpc.Errorf(codes.Internal, "Key creation failed")
 	}
-	log.Println("[Notary-signer CreateKey] : Created KeyID ", key.KeyInfo.KeyID.ID)
-	return key, nil
+	log.Println("[Notary-signer CreateKey] : Created KeyID ", tufKey.ID())
+	return &pb.PublicKey{
+		KeyInfo: &pb.KeyInfo{
+			KeyID:     &pb.KeyID{ID: tufKey.ID()},
+			Algorithm: &pb.Algorithm{Algorithm: tufKey.Algorithm().String()},
+		},
+		PublicKey: tufKey.Public(),
+	}, nil
 }
 
 //DeleteKey deletes they key associated with a KeyID
 func (s *KeyManagementServer) DeleteKey(ctx context.Context, keyID *pb.KeyID) (*pb.Void, error) {
-	_, service, err := FindKeyByID(s.SigServices, keyID)
+	_, service, err := FindKeyByID(s.CryptoServices, keyID)
 
 	if err != nil {
 		return nil, grpc.Errorf(codes.NotFound, "Invalid keyID: key %s not found", keyID.ID)
 	}
 
-	_, err = service.DeleteKey(keyID)
+	err = service.RemoveKey(keyID.ID)
 	log.Println("[Notary-signer DeleteKey] : Deleted KeyID ", keyID.ID)
 	if err != nil {
 		switch err {
@@ -65,39 +73,47 @@ func (s *KeyManagementServer) DeleteKey(ctx context.Context, keyID *pb.KeyID) (*
 
 //GetKeyInfo returns they PublicKey associated with a KeyID
 func (s *KeyManagementServer) GetKeyInfo(ctx context.Context, keyID *pb.KeyID) (*pb.PublicKey, error) {
-	_, service, err := FindKeyByID(s.SigServices, keyID)
+	_, service, err := FindKeyByID(s.CryptoServices, keyID)
 
 	if err != nil {
 		return nil, grpc.Errorf(codes.NotFound, "Invalid keyID: key %s not found", keyID.ID)
 	}
 
-	key, err := service.KeyInfo(keyID)
-	if err != nil {
+	tufKey := service.GetKey(keyID.ID)
+	if tufKey == nil {
 		return nil, grpc.Errorf(codes.NotFound, "Invalid keyID: key %s not found", keyID.ID)
 	}
 	log.Println("[Notary-signer GetKeyInfo] : Returning PublicKey for KeyID ", keyID.ID)
-	return key, nil
+	return &pb.PublicKey{
+		KeyInfo: &pb.KeyInfo{
+			KeyID:     &pb.KeyID{ID: tufKey.ID()},
+			Algorithm: &pb.Algorithm{Algorithm: tufKey.Algorithm().String()},
+		},
+		PublicKey: tufKey.Public(),
+	}, nil
 }
 
 //Sign signs a message and returns the signature using a private key associate with the KeyID from the SignatureRequest
 func (s *SignerServer) Sign(ctx context.Context, sr *pb.SignatureRequest) (*pb.Signature, error) {
-	_, service, err := FindKeyByID(s.SigServices, sr.KeyID)
+	tufKey, service, err := FindKeyByID(s.CryptoServices, sr.KeyID)
 
 	if err != nil {
 		return nil, grpc.Errorf(codes.NotFound, "Invalid keyID: key %s not found", sr.KeyID.ID)
 	}
 
 	log.Println("[Notary-signer Sign] : Signing ", string(sr.Content), " with KeyID ", sr.KeyID.ID)
-	signer, err := service.Signer(sr.KeyID)
-	if err == keys.ErrInvalidKeyID {
-		return nil, grpc.Errorf(codes.NotFound, "Invalid keyID: key %s not found", sr.KeyID.ID)
-	} else if err != nil {
+
+	signatures, err := service.Sign([]string{sr.KeyID.ID}, sr.Content)
+	if err != nil || len(signatures) != 1 {
 		return nil, grpc.Errorf(codes.Internal, "Signing failed for keyID %s on hash %s", sr.KeyID.ID, sr.Content)
 	}
 
-	signature, err := signer.Sign(sr)
-	if err != nil {
-		return nil, grpc.Errorf(codes.Internal, "Signing failed for keyID %s on hash %s", sr.KeyID.ID, sr.Content)
+	signature := &pb.Signature{
+		KeyInfo: &pb.KeyInfo{
+			KeyID:     &pb.KeyID{ID: tufKey.ID()},
+			Algorithm: &pb.Algorithm{Algorithm: tufKey.Algorithm().String()},
+		},
+		Content: signatures[0].Signature,
 	}
 
 	return signature, nil

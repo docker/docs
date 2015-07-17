@@ -30,7 +30,7 @@ func GetOrCreateTimestampKey(gun string, store storage.MetaStore, crypto signed.
 		}
 		err = store.SetTimestampKey(gun, key.Algorithm(), key.Public())
 		if err == nil {
-			return &key.TUFKey, nil
+			return data.NewTUFKey(key.Algorithm(), key.Public(), key.Private()), nil
 		}
 
 		if _, ok := err.(*storage.ErrTimestampKeyExists); ok {

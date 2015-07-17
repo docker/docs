@@ -6,9 +6,10 @@ import (
 	"net"
 	"testing"
 
+	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/signer"
 	"github.com/docker/notary/signer/api"
-	"github.com/docker/notary/signer/keys"
+	"github.com/docker/notary/trustmanager"
 	"github.com/endophage/gotuf/data"
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/net/context"
@@ -26,12 +27,13 @@ var (
 )
 
 func init() {
-	sigService := api.NewEdDSASigningService(keys.NewKeyDB())
-	sigServices := signer.SigningServiceIndex{data.ED25519Key: sigService, data.RSAKey: sigService}
+	keyStore := trustmanager.NewKeyMemoryStore()
+	cryptoService := cryptoservice.NewCryptoService("", keyStore, "")
+	cryptoServices := signer.CryptoServiceIndex{data.ED25519Key: cryptoService, data.RSAKey: cryptoService, data.ECDSAKey: cryptoService}
 	void = &pb.Void{}
 	//server setup
-	kms := &api.KeyManagementServer{SigServices: sigServices}
-	ss := &api.SignerServer{SigServices: sigServices}
+	kms := &api.KeyManagementServer{CryptoServices: cryptoServices}
+	ss := &api.SignerServer{CryptoServices: cryptoServices}
 	grpcServer = grpc.NewServer()
 	pb.RegisterKeyManagementServer(grpcServer, kms)
 	pb.RegisterSignerServer(grpcServer, ss)
