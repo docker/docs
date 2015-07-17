@@ -2,8 +2,8 @@ FROM golang
 
 RUN apt-get update && apt-get install -y \
     libltdl-dev \
-	--no-install-recommends \
-	&& rm -rf /var/lib/apt/lists/*
+    --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY . /go/src/github.com/docker/notary
 
