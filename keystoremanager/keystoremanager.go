@@ -210,7 +210,7 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, dnsName string) error
 
 		// If we got no leaf certificates or we got more than one, fail
 		if len(leafCerts) != 1 {
-			logrus.Debugf("error while parsing root certificate with keyID: %s, %v", keyID, err)
+			logrus.Debugf("wasn't able to find a leaf certificate in the chain of keyID: %s", keyID)
 			continue
 		}
 
@@ -222,11 +222,26 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, dnsName string) error
 			continue
 		}
 
+		// Validate that this leaf certificate has a CN that matches the exact gun
+		if leafCert.Subject.CommonName != dnsName {
+			logrus.Debugf("error leaf certificate CN: %s doesn't match the given dns name: %s", leafCert.Subject.CommonName, dnsName)
+			continue
+		}
+
 		// Add all the valid leafs to the certificates map so we can refer to them later
 		allCerts[leafID] = leafCert
 
 		// Retrieve all the trusted certificates that match this dns Name
 		certsForCN, err := km.certificateStore.GetCertificatesByCN(dnsName)
+		if err != nil {
+			// If the error that we get back is different than ErrNoCertificatesFound
+			// we couldn't check if there are any certificates with this CN already
+			// trusted. Let's take the conservative approach and not trust this key
+			if _, ok := err.(*trustmanager.ErrNoCertificatesFound); !ok {
+				logrus.Debugf("error retrieving certificates for: %s, %v", dnsName, err)
+				continue
+			}
+		}
 
 		// If there are no certificates with this CN, lets TOFUS!
 		// Note that this logic should only exist in docker 1.8
