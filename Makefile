@@ -7,8 +7,16 @@ GO_LDFLAGS_STATIC=-ldflags "-w -extldflags -static -X `go list ./version`.Versio
 GOOSES = darwin freebsd linux windows
 GOARCHS = amd64 386
 
+# go cover test variables
+COVERDIR=.cover
+COVERPROFILE=$(COVERDIR)/cover.out
+COVERMODE=count
+PKGS = $(shell go list ./... | tr '\n' ' ')
+
 .PHONY: clean all fmt vet lint build test binaries cross
+.DELETE_ON_ERROR: cover
 .DEFAULT: default
+
 all: AUTHORS clean fmt vet fmt lint build test binaries
 
 AUTHORS: .git/HEAD
@@ -56,8 +64,19 @@ test-full: vet lint
 
 protos:
 	@protoc --go_out=plugins=grpc:. proto/*.proto
-cov:
-	@sh coverage.sh --html
+
+
+
+define gocover
+go test -covermode="$(COVERMODE)" -coverprofile="$(COVERDIR)/$(subst /,-,$(1)).cover" "$(1)";
+endef
+
+cover: .cover
+	@mkdir -p "$(COVERDIR)"
+	$(foreach PKG,$(PKGS),$(call gocover,$(PKG)))
+	@echo "mode: $(COVERMODE)" > "$(COVERPROFILE)"
+	@grep -h -v "^mode:" "$(COVERDIR)"/*.cover >> "$(COVERPROFILE)"
+	@go tool cover -func="$(COVERPROFILE)"
 
 clean-protos:
 	@rm proto/*.pb.go
