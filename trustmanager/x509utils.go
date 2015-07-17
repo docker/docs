@@ -127,25 +127,66 @@ func loadCertsFromDir(s *X509FileStore) {
 	}
 }
 
-// LoadCertFromFile tries to adds a X509 certificate to the store given a filename
+// LoadCertFromFile loads the first certificate from the file provided. The
+// data is expected to be PEM Encoded and contain one of more certificates
+// with PEM type "CERTIFICATE"
 func LoadCertFromFile(filename string) (*x509.Certificate, error) {
-	// TODO(diogo): handle multiple certificates in one file.
+	certs, err := LoadCertBundleFromFile(filename)
+	if err != nil {
+		return nil, err
+	}
+	return certs[0], nil
+}
+
+// LoadCertBundleFromFile loads certificates from the []byte provided. The
+// data is expected to be PEM Encoded and contain one of more certificates
+// with PEM type "CERTIFICATE"
+func LoadCertBundleFromFile(filename string) ([]*x509.Certificate, error) {
 	b, err := ioutil.ReadFile(filename)
 	if err != nil {
 		return nil, err
 	}
+
+	return LoadCertBundleFromPEM(b)
+}
+
+// LoadCertBundleFromPEM loads certificates from the []byte provided. The
+// data is expected to be PEM Encoded and contain one of more certificates
+// with PEM type "CERTIFICATE"
+func LoadCertBundleFromPEM(pemBytes []byte) ([]*x509.Certificate, error) {
+	certificates := []*x509.Certificate{}
 	var block *pem.Block
-	block, b = pem.Decode(b)
-	for ; block != nil; block, b = pem.Decode(b) {
+	block, pemBytes = pem.Decode(pemBytes)
+	for ; block != nil; block, pemBytes = pem.Decode(pemBytes) {
 		if block.Type == "CERTIFICATE" {
 			cert, err := x509.ParseCertificate(block.Bytes)
-			if err == nil {
-				return cert, nil
+			if err != nil {
+				return nil, err
 			}
+			certificates = append(certificates, cert)
+		} else {
+			return nil, fmt.Errorf("invalid pem block type: %s", block.Type)
 		}
 	}
 
-	return nil, errors.New("could not load certificate from file")
+	if len(certificates) == 0 {
+		return nil, fmt.Errorf("no valid certificates found")
+	}
+
+	return certificates, nil
+}
+
+// GetLeafCerts parses a list of x509 Certificates and returns all of them
+// that aren't CA
+func GetLeafCerts(certs []*x509.Certificate) []*x509.Certificate {
+	var leafCerts []*x509.Certificate
+	for _, cert := range certs {
+		if cert.IsCA {
+			continue
+		}
+		leafCerts = append(leafCerts, cert)
+	}
+	return leafCerts
 }
 
 // ParsePEMPrivateKey returns a data.PrivateKey from a PEM encoded private key. It

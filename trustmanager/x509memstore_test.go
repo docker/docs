@@ -106,14 +106,55 @@ func TestRemoveCert(t *testing.T) {
 	}
 }
 
-func TestInexistentGetCertificateByKeyID(t *testing.T) {
+func TestRemoveAllX509MemStore(t *testing.T) {
+	// Add three certificates to store
+	store := NewX509MemStore()
+	certFiles := [3]string{"../fixtures/root-ca.crt",
+		"../fixtures/intermediate-ca.crt",
+		"../fixtures/secure.example.com.crt"}
+	for _, file := range certFiles {
+		b, err := ioutil.ReadFile(file)
+		if err != nil {
+			t.Fatalf("couldn't load fixture: %v", err)
+		}
+		var block *pem.Block
+		block, _ = pem.Decode(b)
+
+		cert, err := x509.ParseCertificate(block.Bytes)
+		if err != nil {
+			t.Fatalf("couldn't parse certificate: %v", err)
+		}
+		err = store.AddCert(cert)
+		if err != nil {
+			t.Fatalf("failed to load certificate: %v", err)
+		}
+	}
+
+	// Number of certificates should be 3 since we added the cert
+	numCerts := len(store.GetCertificates())
+	if numCerts != 3 {
+		t.Fatalf("unexpected number of certificates in store: %d", numCerts)
+	}
+
+	// Remove the cert from the store
+	err := store.RemoveAll()
+	if err != nil {
+		t.Fatalf("failed to remove all certificates: %v", err)
+	}
+	// Number of certificates should be 0 since we added and removed the cert
+	numCerts = len(store.GetCertificates())
+	if numCerts != 0 {
+		t.Fatalf("unexpected number of certificates in store: %d", numCerts)
+	}
+}
+func TestInexistentGetCertificateByCertID(t *testing.T) {
 	store := NewX509MemStore()
 	err := store.AddCertFromFile("../fixtures/root-ca.crt")
 	if err != nil {
 		t.Fatalf("failed to load certificate from file: %v", err)
 	}
 
-	_, err = store.GetCertificateByKeyID("4d06afd30b8bed131d2a84c97d00b37f422021598bfae34285ce98e77b708b5a")
+	_, err = store.GetCertificateByCertID("4d06afd30b8bed131d2a84c97d00b37f422021598bfae34285ce98e77b708b5a")
 	if err == nil {
 		t.Fatalf("no error returned for inexistent certificate")
 	}
@@ -138,15 +179,15 @@ func TestGetCertificateByKeyID(t *testing.T) {
 		t.Fatalf("failed to load certificate from PEM: %v", err)
 	}
 
-	keyID, err := FingerprintCert(cert)
+	certID, err := FingerprintCert(cert)
 	if err != nil {
 		t.Fatalf("failed to fingerprint the certificate: %v", err)
 	}
 
 	// Tries to retrieve cert by Subject Key IDs
-	_, err = store.GetCertificateByKeyID(keyID)
+	_, err = store.GetCertificateByCertID(certID)
 	if err != nil {
-		t.Fatalf("expected certificate in store: %s", keyID)
+		t.Fatalf("expected certificate in store: %s", certID)
 	}
 }
 

@@ -251,3 +251,53 @@ func TestGetDecryptedWithInvalidPassphrase(t *testing.T) {
 		t.Fatalf("expected error while decrypting the content due to invalid passphrase")
 	}
 }
+
+func TestRemoveKey(t *testing.T) {
+	testName := "docker.com/notary/root"
+	testExt := "key"
+
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	if err != nil {
+		t.Fatalf("failed to create a temporary directory: %v", err)
+	}
+	defer os.RemoveAll(tempBaseDir)
+
+	// Since we're generating this manually we need to add the extension '.'
+	expectedFilePath := filepath.Join(tempBaseDir, testName+"."+testExt)
+
+	// Create our store
+	store, err := NewKeyFileStore(tempBaseDir)
+	if err != nil {
+		t.Fatalf("failed to create new key filestore: %v", err)
+	}
+
+	privKey, err := GenerateRSAKey(rand.Reader, 512)
+	if err != nil {
+		t.Fatalf("could not generate private key: %v", err)
+	}
+
+	// Call the AddKey function
+	err = store.AddKey(testName, privKey)
+	if err != nil {
+		t.Fatalf("failed to add file to store: %v", err)
+	}
+
+	// Check to see if file exists
+	_, err = ioutil.ReadFile(expectedFilePath)
+	if err != nil {
+		t.Fatalf("expected file not found: %v", err)
+	}
+
+	// Call remove key
+	err = store.RemoveKey(testName)
+	if err != nil {
+		t.Fatalf("unable to remove key: %v", err)
+	}
+
+	// Check to see if file still exists
+	_, err = ioutil.ReadFile(expectedFilePath)
+	if err == nil {
+		t.Fatalf("file should not exist %s", expectedFilePath)
+	}
+}

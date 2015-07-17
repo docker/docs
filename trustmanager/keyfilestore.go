@@ -162,3 +162,8 @@ func listKeys(s LimitedFileStore) []string {
 	}
 	return keyIDList
 }
+
+// RemoveKey removes the key from the keyfilestore
+func (s *KeyFileStore) RemoveKey(name string) error {
+	return s.Remove(name)
+}

@@ -8,13 +8,47 @@ import (
 
 const certExtension string = "crt"
 
+// ErrNoCertificatesFound is returned when no certificates are found for a
+// GetCertificatesBy*
+type ErrNoCertificatesFound struct {
+	query string
+}
+
+// ErrNoCertificatesFound is returned when no certificates are found for a
+// GetCertificatesBy*
+func (err ErrNoCertificatesFound) Error() string {
+	return fmt.Sprintf("error, no certificates found in the keystore match: %s", err.query)
+}
+
+// ErrCertValidation is returned when a certificate doesn't pass the store specific
+// validations
+type ErrCertValidation struct {
+}
+
+// ErrCertValidation is returned when a certificate doesn't pass the store specific
+// validations
+func (err ErrCertValidation) Error() string {
+	return fmt.Sprintf("store-specific certificate validations failed")
+}
+
+// ErrCertExists is returned when a Certificate already exists in the key store
+type ErrCertExists struct {
+}
+
+// ErrCertExists is returned when a Certificate already exists in the key store
+func (err ErrCertExists) Error() string {
+	return fmt.Sprintf("certificate already in the store")
+}
+
 // X509Store is the interface for all X509Stores
 type X509Store interface {
 	AddCert(cert *x509.Certificate) error
 	AddCertFromPEM(pemCerts []byte) error
 	AddCertFromFile(filename string) error
 	RemoveCert(cert *x509.Certificate) error
-	GetCertificateByKeyID(keyID string) (*x509.Certificate, error)
+	RemoveAll() error
+	GetCertificateByCertID(certID string) (*x509.Certificate, error)
+	GetCertificatesByCN(cn string) ([]*x509.Certificate, error)
 	GetCertificates() []*x509.Certificate
 	GetCertificatePool() *x509.CertPool
 	GetVerifyOptions(dnsName string) (x509.VerifyOptions, error)
