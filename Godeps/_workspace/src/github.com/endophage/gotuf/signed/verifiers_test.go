@@ -30,7 +30,7 @@ const baseECDSAx509Key = `{"keytype":"ecdsa-x509","keyval":{"public":"LS0tLS1CRU
 
 func TestRSAPSSVerifier(t *testing.T) {
 	// Unmarshal our private RSA Key
-	var testRSAKey data.PrivateKey
+	var testRSAKey data.TUFKey
 	var jsonKey bytes.Buffer
 
 	// Execute our template
@@ -54,7 +54,7 @@ func TestRSAPSSVerifier(t *testing.T) {
 
 func TestRSAPSSx509Verifier(t *testing.T) {
 	// Unmarshal our public RSA Key
-	var testRSAKey data.PublicKey
+	var testRSAKey data.TUFKey
 	var jsonKey bytes.Buffer
 
 	// Execute our template
@@ -74,7 +74,7 @@ func TestRSAPSSx509Verifier(t *testing.T) {
 }
 
 func TestRSAPSSVerifierWithInvalidKeyType(t *testing.T) {
-	var testRSAKey data.PrivateKey
+	var testRSAKey data.TUFKey
 	var jsonKey bytes.Buffer
 
 	// Execute our template
@@ -94,7 +94,7 @@ func TestRSAPSSVerifierWithInvalidKeyType(t *testing.T) {
 }
 
 func TestRSAPSSVerifierWithInvalidKey(t *testing.T) {
-	var testRSAKey data.PrivateKey
+	var testRSAKey data.TUFKey
 	var jsonKey bytes.Buffer
 
 	// Execute our template
@@ -114,7 +114,7 @@ func TestRSAPSSVerifierWithInvalidKey(t *testing.T) {
 }
 
 func TestRSAPSSVerifierWithInvalidSignature(t *testing.T) {
-	var testRSAKey data.PrivateKey
+	var testRSAKey data.TUFKey
 	var jsonKey bytes.Buffer
 
 	// Execute our template
@@ -141,7 +141,7 @@ func TestRSAPSSVerifierWithInvalidSignature(t *testing.T) {
 
 func TestRSAPKCS1v15Verifier(t *testing.T) {
 	// Unmarshal our private RSA Key
-	var testRSAKey data.PrivateKey
+	var testRSAKey data.TUFKey
 	var jsonKey bytes.Buffer
 
 	// Execute our template
@@ -165,7 +165,7 @@ func TestRSAPKCS1v15Verifier(t *testing.T) {
 
 func TestRSAPKCS1v15x509Verifier(t *testing.T) {
 	// Unmarshal our public RSA Key
-	var testRSAKey data.PublicKey
+	var testRSAKey data.TUFKey
 	var jsonKey bytes.Buffer
 
 	// Execute our template
@@ -185,7 +185,7 @@ func TestRSAPKCS1v15x509Verifier(t *testing.T) {
 }
 
 func TestRSAPKCS1v15VerifierWithInvalidKeyType(t *testing.T) {
-	var testRSAKey data.PrivateKey
+	var testRSAKey data.TUFKey
 	var jsonKey bytes.Buffer
 
 	// Execute our template
@@ -205,7 +205,7 @@ func TestRSAPKCS1v15VerifierWithInvalidKeyType(t *testing.T) {
 }
 
 func TestRSAPKCS1v15VerifierWithInvalidKey(t *testing.T) {
-	var testRSAKey data.PrivateKey
+	var testRSAKey data.TUFKey
 	var jsonKey bytes.Buffer
 
 	// Execute our template
@@ -225,7 +225,7 @@ func TestRSAPKCS1v15VerifierWithInvalidKey(t *testing.T) {
 }
 
 func TestRSAPKCS1v15VerifierWithInvalidSignature(t *testing.T) {
-	var testRSAKey data.PrivateKey
+	var testRSAKey data.TUFKey
 	var jsonKey bytes.Buffer
 
 	// Execute our template
@@ -251,7 +251,7 @@ func TestRSAPKCS1v15VerifierWithInvalidSignature(t *testing.T) {
 }
 
 func TestECDSAVerifier(t *testing.T) {
-	var testECDSAKey data.PrivateKey
+	var testECDSAKey data.TUFKey
 	var jsonKey bytes.Buffer
 
 	// Execute our template
@@ -273,7 +273,7 @@ func TestECDSAVerifier(t *testing.T) {
 }
 
 func TestECDSAx509Verifier(t *testing.T) {
-	var testECDSAKey data.PrivateKey
+	var testECDSAKey data.TUFKey
 	var jsonKey bytes.Buffer
 
 	// Execute our template
@@ -293,7 +293,7 @@ func TestECDSAx509Verifier(t *testing.T) {
 }
 
 func TestECDSAVerifierWithInvalidKeyType(t *testing.T) {
-	var testECDSAKey data.PrivateKey
+	var testECDSAKey data.TUFKey
 	var jsonKey bytes.Buffer
 
 	// Execute our template
@@ -313,7 +313,7 @@ func TestECDSAVerifierWithInvalidKeyType(t *testing.T) {
 }
 
 func TestECDSAVerifierWithInvalidKey(t *testing.T) {
-	var testECDSAKey data.PrivateKey
+	var testECDSAKey data.TUFKey
 	var jsonKey bytes.Buffer
 
 	// Execute our template
@@ -333,7 +333,7 @@ func TestECDSAVerifierWithInvalidKey(t *testing.T) {
 }
 
 func TestECDSAVerifierWithInvalidSignature(t *testing.T) {
-	var testECDSAKey data.PrivateKey
+	var testECDSAKey data.TUFKey
 	var jsonKey bytes.Buffer
 
 	// Execute our template
@@ -358,7 +358,7 @@ func TestECDSAVerifierWithInvalidSignature(t *testing.T) {
 
 }
 
-func rsaPSSSign(privKey *data.PrivateKey, hash crypto.Hash, hashed []byte) ([]byte, error) {
+func rsaPSSSign(privKey data.PrivateKey, hash crypto.Hash, hashed []byte) ([]byte, error) {
 	if privKey.Algorithm() != data.RSAKey {
 		return nil, fmt.Errorf("private key type not supported: %s", privKey.Algorithm())
 	}
@@ -378,7 +378,7 @@ func rsaPSSSign(privKey *data.PrivateKey, hash crypto.Hash, hashed []byte) ([]by
 	return sig, nil
 }
 
-func rsaPKCS1v15Sign(privKey *data.PrivateKey, hash crypto.Hash, hashed []byte) ([]byte, error) {
+func rsaPKCS1v15Sign(privKey data.PrivateKey, hash crypto.Hash, hashed []byte) ([]byte, error) {
 	if privKey.Algorithm() != data.RSAKey {
 		return nil, fmt.Errorf("private key type not supported: %s", privKey.Algorithm())
 	}
@@ -398,7 +398,7 @@ func rsaPKCS1v15Sign(privKey *data.PrivateKey, hash crypto.Hash, hashed []byte) 
 	return sig, nil
 }
 
-func ecdsaSign(privKey *data.PrivateKey, hashed []byte) ([]byte, error) {
+func ecdsaSign(privKey data.PrivateKey, hashed []byte) ([]byte, error) {
 	if privKey.Algorithm() != data.ECDSAKey {
 		return nil, fmt.Errorf("private key type not supported: %s", privKey.Algorithm())
 	}
@@ -432,7 +432,7 @@ func ecdsaSign(privKey *data.PrivateKey, hashed []byte) ([]byte, error) {
 // the test
 func signX509() {
 	// Unmarshal our private RSA Key
-	var testRSAKey data.PrivateKey
+	var testRSAKey data.TUFKey
 	var jsonKey bytes.Buffer
 
 	// Execute our template

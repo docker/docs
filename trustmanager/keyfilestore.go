@@ -15,10 +15,10 @@ const (
 type KeyStore interface {
 	LimitedFileStore
 
-	AddKey(name string, privKey *data.PrivateKey) error
-	GetKey(name string) (*data.PrivateKey, error)
-	AddEncryptedKey(name string, privKey *data.PrivateKey, passphrase string) error
-	GetDecryptedKey(name string, passphrase string) (*data.PrivateKey, error)
+	AddKey(name string, privKey data.PrivateKey) error
+	GetKey(name string) (data.PrivateKey, error)
+	AddEncryptedKey(name string, privKey data.PrivateKey, passphrase string) error
+	GetDecryptedKey(name string, passphrase string) (data.PrivateKey, error)
 	ListKeys() []string
 }
 
@@ -44,23 +44,23 @@ func NewKeyFileStore(baseDir string) (*KeyFileStore, error) {
 }
 
 // AddKey stores the contents of a PEM-encoded private key as a PEM block
-func (s *KeyFileStore) AddKey(name string, privKey *data.PrivateKey) error {
+func (s *KeyFileStore) AddKey(name string, privKey data.PrivateKey) error {
 	return addKey(s, name, privKey)
 }
 
 // GetKey returns the PrivateKey given a KeyID
-func (s *KeyFileStore) GetKey(name string) (*data.PrivateKey, error) {
+func (s *KeyFileStore) GetKey(name string) (data.PrivateKey, error) {
 	return getKey(s, name)
 }
 
 // AddEncryptedKey stores the contents of a PEM-encoded private key as an encrypted PEM block
-func (s *KeyFileStore) AddEncryptedKey(name string, privKey *data.PrivateKey, passphrase string) error {
+func (s *KeyFileStore) AddEncryptedKey(name string, privKey data.PrivateKey, passphrase string) error {
 	return addEncryptedKey(s, name, privKey, passphrase)
 }
 
 // GetDecryptedKey decrypts and returns the PEM Encoded private key given a flename
 // and a passphrase
-func (s *KeyFileStore) GetDecryptedKey(name string, passphrase string) (*data.PrivateKey, error) {
+func (s *KeyFileStore) GetDecryptedKey(name string, passphrase string) (data.PrivateKey, error) {
 	return getDecryptedKey(s, name, passphrase)
 }
 
@@ -79,23 +79,23 @@ func NewKeyMemoryStore() *KeyMemoryStore {
 }
 
 // AddKey stores the contents of a PEM-encoded private key as a PEM block
-func (s *KeyMemoryStore) AddKey(name string, privKey *data.PrivateKey) error {
+func (s *KeyMemoryStore) AddKey(name string, privKey data.PrivateKey) error {
 	return addKey(s, name, privKey)
 }
 
 // GetKey returns the PrivateKey given a KeyID
-func (s *KeyMemoryStore) GetKey(name string) (*data.PrivateKey, error) {
+func (s *KeyMemoryStore) GetKey(name string) (data.PrivateKey, error) {
 	return getKey(s, name)
 }
 
 // AddEncryptedKey stores the contents of a PEM-encoded private key as an encrypted PEM block
-func (s *KeyMemoryStore) AddEncryptedKey(name string, privKey *data.PrivateKey, passphrase string) error {
+func (s *KeyMemoryStore) AddEncryptedKey(name string, privKey data.PrivateKey, passphrase string) error {
 	return addEncryptedKey(s, name, privKey, passphrase)
 }
 
 // GetDecryptedKey decrypts and returns the PEM Encoded private key given a flename
 // and a passphrase
-func (s *KeyMemoryStore) GetDecryptedKey(name string, passphrase string) (*data.PrivateKey, error) {
+func (s *KeyMemoryStore) GetDecryptedKey(name string, passphrase string) (data.PrivateKey, error) {
 	return getDecryptedKey(s, name, passphrase)
 }
 
@@ -106,7 +106,7 @@ func (s *KeyMemoryStore) ListKeys() []string {
 	return listKeys(s)
 }
 
-func addKey(s LimitedFileStore, name string, privKey *data.PrivateKey) error {
+func addKey(s LimitedFileStore, name string, privKey data.PrivateKey) error {
 	pemPrivKey, err := KeyToPEM(privKey)
 	if err != nil {
 		return err
@@ -115,7 +115,7 @@ func addKey(s LimitedFileStore, name string, privKey *data.PrivateKey) error {
 	return s.Add(name, pemPrivKey)
 }
 
-func getKey(s LimitedFileStore, name string) (*data.PrivateKey, error) {
+func getKey(s LimitedFileStore, name string) (data.PrivateKey, error) {
 	keyBytes, err := s.Get(name)
 	if err != nil {
 		return nil, err
@@ -130,7 +130,7 @@ func getKey(s LimitedFileStore, name string) (*data.PrivateKey, error) {
 	return privKey, nil
 }
 
-func addEncryptedKey(s LimitedFileStore, name string, privKey *data.PrivateKey, passphrase string) error {
+func addEncryptedKey(s LimitedFileStore, name string, privKey data.PrivateKey, passphrase string) error {
 	encryptedPrivKey, err := EncryptPrivateKey(privKey, passphrase)
 	if err != nil {
 		return err
@@ -139,7 +139,7 @@ func addEncryptedKey(s LimitedFileStore, name string, privKey *data.PrivateKey, 
 	return s.Add(name, encryptedPrivKey)
 }
 
-func getDecryptedKey(s LimitedFileStore, name string, passphrase string) (*data.PrivateKey, error) {
+func getDecryptedKey(s LimitedFileStore, name string, passphrase string) (data.PrivateKey, error) {
 	keyBytes, err := s.Get(name)
 	if err != nil {
 		return nil, err

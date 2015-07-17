@@ -20,10 +20,10 @@ type KeyService interface {
 	// the private key into the appropriate signing service.
 	// The role isn't currently used for anything, but it's here to support
 	// future features
-	Create(role string, algorithm data.KeyAlgorithm) (data.Key, error)
+	Create(role string, algorithm data.KeyAlgorithm) (data.PublicKey, error)
 
 	// GetKey retrieves the public key if present, otherwise it returns nil
-	GetKey(keyID string) data.Key
+	GetKey(keyID string) data.PublicKey
 
 	// RemoveKey deletes the specified key
 	RemoveKey(keyID string) error
@@ -40,5 +40,5 @@ type CryptoService interface {
 // of this interface should verify signatures for one and only one
 // signing scheme.
 type Verifier interface {
-	Verify(key data.Key, sig []byte, msg []byte) error
+	Verify(key data.PublicKey, sig []byte, msg []byte) error
 }

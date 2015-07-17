@@ -206,7 +206,7 @@ func (km *KeyStoreManager) ImportKeysZip(zipReader zip.Reader, passphrase string
 	// an error (for example, wrong passphrase), without leaving the key
 	// store in an inconsistent state
 	newRootKeys := make(map[string][]byte)
-	newNonRootKeys := make(map[string]*data.PrivateKey)
+	newNonRootKeys := make(map[string]data.PrivateKey)
 
 	// Note that using / as a separator is okay here - the zip package
 	// guarantees that the separator will be /

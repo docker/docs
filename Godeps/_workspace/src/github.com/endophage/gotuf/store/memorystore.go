@@ -15,14 +15,14 @@ func MemoryStore(meta map[string]json.RawMessage, files map[string][]byte) Local
 	return &memoryStore{
 		meta:  meta,
 		files: files,
-		keys:  make(map[string][]*data.Key),
+		keys:  make(map[string][]data.PrivateKey),
 	}
 }
 
 type memoryStore struct {
 	meta  map[string]json.RawMessage
 	files map[string][]byte
-	keys  map[string][]*data.Key
+	keys  map[string][]data.PrivateKey
 }
 
 func (m *memoryStore) GetMeta(name string, size int64) (json.RawMessage, error) {
@@ -72,13 +72,13 @@ func (m *memoryStore) Commit(map[string]json.RawMessage, bool, map[string]data.H
 	return nil
 }
 
-func (m *memoryStore) GetKeys(role string) ([]*data.Key, error) {
+func (m *memoryStore) GetKeys(role string) ([]data.PrivateKey, error) {
 	return m.keys[role], nil
 }
 
-func (m *memoryStore) SaveKey(role string, key *data.Key) error {
+func (m *memoryStore) SaveKey(role string, key data.PrivateKey) error {
 	if _, ok := m.keys[role]; !ok {
-		m.keys[role] = make([]*data.Key, 0)
+		m.keys[role] = make([]data.PrivateKey, 0)
 	}
 	m.keys[role] = append(m.keys[role], key)
 	return nil

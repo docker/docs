@@ -70,15 +70,17 @@ func NewTufRepo(keysDB *keys.KeyDB, cryptoService signed.CryptoService) *TufRepo
 }
 
 // AddBaseKeys is used to add keys to the role in root.json
-func (tr *TufRepo) AddBaseKeys(role string, keys ...data.Key) error {
+func (tr *TufRepo) AddBaseKeys(role string, keys ...*data.TUFKey) error {
 	if tr.Root == nil {
 		return &ErrNotLoaded{role: "root"}
 	}
 	for _, k := range keys {
-		key := data.NewPublicKey(k.Algorithm(), k.Public())
-		tr.Root.Signed.Keys[key.ID()] = key
-		tr.keysDB.AddKey(key)
-		tr.Root.Signed.Roles[role].KeyIDs = append(tr.Root.Signed.Roles[role].KeyIDs, key.ID())
+		// Store only the public portion
+		pubKey := *k
+		pubKey.Value.Private = nil
+		tr.Root.Signed.Keys[pubKey.ID()] = &pubKey
+		tr.keysDB.AddKey(&pubKey)
+		tr.Root.Signed.Roles[role].KeyIDs = append(tr.Root.Signed.Roles[role].KeyIDs, pubKey.ID())
 	}
 	tr.Root.Dirty = true
 	return nil
@@ -191,7 +193,7 @@ func (tr *TufRepo) InitRepo(consistent bool) error {
 
 func (tr *TufRepo) InitRoot(consistent bool) error {
 	rootRoles := make(map[string]*data.RootRole)
-	rootKeys := make(map[string]*data.PublicKey)
+	rootKeys := make(map[string]data.PublicKey)
 	for _, r := range data.ValidRoles {
 		role := tr.keysDB.GetRole(r)
 		if role == nil {
@@ -579,7 +581,7 @@ func (tr *TufRepo) SignTimestamp(expires time.Time, cryptoService signed.CryptoS
 }
 
 func (tr TufRepo) sign(signedData *data.Signed, role data.Role, cryptoService signed.CryptoService) (*data.Signed, error) {
-	ks := make([]data.Key, 0, len(role.KeyIDs))
+	ks := make([]data.PublicKey, 0, len(role.KeyIDs))
 	for _, kid := range role.KeyIDs {
 		k := tr.keysDB.GetKey(kid)
 		if k == nil {

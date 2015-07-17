@@ -306,7 +306,7 @@ func testAddListTarget(t *testing.T, rootType data.KeyAlgorithm) {
 	err = applyChangelist(repo.tufRepo, cl)
 	assert.NoError(t, err, "could not apply changelist")
 
-	var tempKey data.PrivateKey
+	var tempKey data.TUFKey
 	json.Unmarshal([]byte(timestampECDSAKeyJSON), &tempKey)
 
 	repo.KeyStoreManager.NonRootKeyStore().AddKey(filepath.Join(filepath.FromSlash(gun), tempKey.ID()), &tempKey)
@@ -426,7 +426,7 @@ func testValidateRootKey(t *testing.T, rootType data.KeyAlgorithm) {
 		if key, ok := decodedRoot.Keys[keyid]; !ok {
 			t.Fatal("key id not found in keys")
 		} else {
-			_, err := trustmanager.LoadCertFromPEM(key.Value.Public)
+			_, err := trustmanager.LoadCertFromPEM(key.Public())
 			assert.NoError(t, err, "key is not a valid cert")
 		}
 	}

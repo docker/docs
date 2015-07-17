@@ -17,12 +17,12 @@ import (
 // uses that private key, providing convinience methods for generation of
 // certificates.
 type UnlockedCryptoService struct {
-	PrivKey       *data.PrivateKey
+	PrivKey       data.PrivateKey
 	CryptoService signed.CryptoService
 }
 
 // NewUnlockedCryptoService creates an UnlockedCryptoService instance
-func NewUnlockedCryptoService(privKey *data.PrivateKey, cryptoService signed.CryptoService) *UnlockedCryptoService {
+func NewUnlockedCryptoService(privKey data.PrivateKey, cryptoService signed.CryptoService) *UnlockedCryptoService {
 	return &UnlockedCryptoService{
 		PrivKey:       privKey,
 		CryptoService: cryptoService,
@@ -35,7 +35,7 @@ func (ucs *UnlockedCryptoService) ID() string {
 }
 
 // PublicKey Returns the public key associated with the private key
-func (ucs *UnlockedCryptoService) PublicKey() *data.PublicKey {
+func (ucs *UnlockedCryptoService) PublicKey() data.PublicKey {
 	return data.PublicKeyFromPrivate(ucs.PrivKey)
 }
 

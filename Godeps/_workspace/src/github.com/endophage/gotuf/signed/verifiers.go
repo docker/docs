@@ -46,7 +46,7 @@ func RegisterVerifier(algorithm data.SigAlgorithm, v Verifier) {
 
 type Ed25519Verifier struct{}
 
-func (v Ed25519Verifier) Verify(key data.Key, sig []byte, msg []byte) error {
+func (v Ed25519Verifier) Verify(key data.PublicKey, sig []byte, msg []byte) error {
 	var sigBytes [ed25519.SignatureSize]byte
 	if len(sig) != len(sigBytes) {
 		logrus.Infof("signature length is incorrect, must be %d, was %d.", ed25519.SignatureSize, len(sig))
@@ -79,7 +79,7 @@ func verifyPSS(key interface{}, digest, sig []byte) error {
 	return nil
 }
 
-func getRSAPubKey(key data.Key) (crypto.PublicKey, error) {
+func getRSAPubKey(key data.PublicKey) (crypto.PublicKey, error) {
 	algorithm := key.Algorithm()
 	var pubKey crypto.PublicKey
 
@@ -115,7 +115,7 @@ func getRSAPubKey(key data.Key) (crypto.PublicKey, error) {
 type RSAPSSVerifier struct{}
 
 // Verify does the actual check.
-func (v RSAPSSVerifier) Verify(key data.Key, sig []byte, msg []byte) error {
+func (v RSAPSSVerifier) Verify(key data.PublicKey, sig []byte, msg []byte) error {
 	pubKey, err := getRSAPubKey(key)
 	if err != nil {
 		return err
@@ -129,7 +129,7 @@ func (v RSAPSSVerifier) Verify(key data.Key, sig []byte, msg []byte) error {
 // RSAPKCS1v15SVerifier checks RSA PKCS1v15 signatures
 type RSAPKCS1v15Verifier struct{}
 
-func (v RSAPKCS1v15Verifier) Verify(key data.Key, sig []byte, msg []byte) error {
+func (v RSAPKCS1v15Verifier) Verify(key data.PublicKey, sig []byte, msg []byte) error {
 	pubKey, err := getRSAPubKey(key)
 	if err != nil {
 		return err
@@ -155,7 +155,7 @@ type RSAPyCryptoVerifier struct{}
 // Verify does the actual check.
 // N.B. We have not been able to make this work in a way that is compatible
 // with PyCrypto.
-func (v RSAPyCryptoVerifier) Verify(key data.Key, sig []byte, msg []byte) error {
+func (v RSAPyCryptoVerifier) Verify(key data.PublicKey, sig []byte, msg []byte) error {
 	digest := sha256.Sum256(msg)
 
 	k, _ := pem.Decode([]byte(key.Public()))
@@ -177,7 +177,7 @@ func (v RSAPyCryptoVerifier) Verify(key data.Key, sig []byte, msg []byte) error 
 type ECDSAVerifier struct{}
 
 // Verify does the actual check.
-func (v ECDSAVerifier) Verify(key data.Key, sig []byte, msg []byte) error {
+func (v ECDSAVerifier) Verify(key data.PublicKey, sig []byte, msg []byte) error {
 	algorithm := key.Algorithm()
 	var pubKey crypto.PublicKey
 

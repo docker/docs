@@ -63,7 +63,7 @@ func (trust *NotarySigner) Sign(keyIDs []string, toSign []byte) ([]data.Signatur
 }
 
 // Create creates a remote key and returns the PublicKey associated with the remote private key
-func (trust *NotarySigner) Create(role string, algorithm data.KeyAlgorithm) (data.Key, error) {
+func (trust *NotarySigner) Create(role string, algorithm data.KeyAlgorithm) (data.PublicKey, error) {
 	publicKey, err := trust.kmClient.CreateKey(context.Background(), &pb.Algorithm{Algorithm: algorithm.String()})
 	if err != nil {
 		return nil, err
@@ -80,7 +80,7 @@ func (trust *NotarySigner) RemoveKey(keyid string) error {
 }
 
 // GetKey retrieves a key
-func (trust *NotarySigner) GetKey(keyid string) data.Key {
+func (trust *NotarySigner) GetKey(keyid string) data.PublicKey {
 	//TODO(aaronl): Not implemented yet
 	return nil
 }

@@ -39,7 +39,7 @@ func (rsa *HSMRSAKey) Algorithm() data.KeyAlgorithm {
 // ID implements a method of the data.Key interface
 func (rsa *HSMRSAKey) ID() string {
 	if rsa.id == "" {
-		pubK := data.NewTUFKey(rsa.Algorithm(), rsa.Public(), nil)
+		pubK := data.NewPublicKey(rsa.Algorithm(), rsa.Public())
 		rsa.id = pubK.ID()
 	}
 	return rsa.id
@@ -50,7 +50,7 @@ func (rsa *HSMRSAKey) Public() []byte {
 	return rsa.public
 }
 
-// Private implements a method of the data.Key interface
+// Private implements a method of the data.PrivateKey interface
 func (rsa *HSMRSAKey) Private() []byte {
 	// Not possible to return private key bytes from a hardware device
 	return nil
