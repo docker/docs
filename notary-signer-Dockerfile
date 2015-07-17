@@ -1,5 +1,4 @@
 FROM diogomonica/golang-softhsm2
-
 MAINTAINER Diogo Monica "diogo@docker.com"
 
 # CHANGE-ME: Default values for SoftHSM2 PIN and SOPIN, used to initialize the first token
@@ -8,9 +7,14 @@ ENV SOPIN="1234"
 ENV LIBDIR="/usr/local/lib/softhsm/"
 
 # Install openSC and dependencies
-RUN apt-get update
-
-RUN apt-get install -y build-essential autoconf automake libtool gtk-doc-tools gengetopt help2man libpcsclite-dev libzip-dev opensc libssl-dev usbutils vim
+RUN apt-get update && \
+    apt-get install -y \
+    libltdl-dev \
+    libpcsclite-dev \
+    opensc \
+    usbutils \
+    --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
 
 # Initialize the SoftHSM2 token on slod 0, using PIN and SOPIN varaibles
 RUN softhsm2-util --init-token --slot 0 --label "test_token" --pin $PIN --so-pin $SOPIN
@@ -25,5 +29,4 @@ RUN go install github.com/docker/notary/cmd/notary-signer
 
 EXPOSE 4443
 
-#ENTRYPOINT notary-signer -cert /go/src/github.com/docker/notary/fixtures/notary-signer.crt -key /go/src/github.com/docker/notary/fixtures/notary-signer.key -debug -pkcs11 /usr/lib/x86_64-linux-gnu/opensc-pkcs11.so -pin 123456
 ENTRYPOINT notary-signer -cert /go/src/github.com/docker/notary/fixtures/notary-signer.crt -key /go/src/github.com/docker/notary/fixtures/notary-signer.key -debug -pkcs11 $LIBDIR/libsofthsm2.so -pin 1234
