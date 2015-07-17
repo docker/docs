@@ -3,6 +3,8 @@ package trustmanager
 import (
 	"crypto/x509"
 	"errors"
+
+	"github.com/Sirupsen/logrus"
 )
 
 // X509MemStore implements X509Store as an in-memory object with no persistence
@@ -43,7 +45,7 @@ func (s *X509MemStore) AddCert(cert *x509.Certificate) error {
 	}
 
 	if !s.validate.Validate(cert) {
-		return errors.New("certificate failed validation")
+		return &ErrCertValidation{}
 	}
 
 	certID, err := fingerprintCert(cert)
@@ -51,6 +53,9 @@ func (s *X509MemStore) AddCert(cert *x509.Certificate) error {
 		return err
 	}
 
+	logrus.Debug("Adding cert with certID: ", certID)
+
+	// In this store we overwrite the certificate if it already exists
 	s.fingerprintMap[certID] = cert
 	name := string(cert.RawSubject)
 	s.nameMap[name] = append(s.nameMap[name], certID)

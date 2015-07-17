@@ -192,11 +192,23 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, dnsName string) error
 		return err
 	}
 
-	// Iterate over every keyID for the root role inside of roots.json
+	// validKeys will store all the keys that were considered valid either by
+	// direct certificate match, or CA chain path
 	validKeys := make(map[string]*data.PublicKey)
+
+	// allCerts will keep a list of all leafCerts that were found, and is used
+	// to aid on root certificate rotation
 	allCerts := make(map[string]*x509.Certificate)
-	logrus.Debugf("found the following root keys in roots.json: %v", rootSigned.Signed.Keys)
-	for _, keyID := range rootSigned.Signed.Roles["root"].KeyIDs {
+
+	// Before we loop through all root keys available, make sure any exist
+	rootRoles, ok := rootSigned.Signed.Roles["root"]
+	if !ok {
+		return errors.New("no root roles found in tuf metadata")
+	}
+
+	logrus.Debugf("found the following root keys in roots.json: %v", rootRoles.KeyIDs)
+	// Iterate over every keyID for the root role inside of roots.json
+	for _, keyID := range rootRoles.KeyIDs {
 		// Decode all the x509 certificates that were bundled with this
 		// Specific root key
 		decodedCerts, err := trustmanager.LoadCertBundleFromPEM([]byte(rootSigned.Signed.Keys[keyID].Public()))
@@ -285,12 +297,24 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, dnsName string) error
 	// If this happens, we should replace the old root of trust with the new one
 	if newRootKey != nil {
 		logrus.Debugf("got a new root key to rotate to: %s", newRootKey.ID())
+
 		// Retrieve the certificate associated with the new root key and trust it
-		newRootKeyCert := allCerts[newRootKey.ID()]
+		newRootKeyCert, ok := allCerts[newRootKey.ID()]
+		// Paranoid check for the certificate still being in the map
+		if !ok {
+			logrus.Debugf("error while retrieving new root certificate with keyID: %s, %v", newRootKey.ID(), err)
+			return ErrRootRotationFail
+		}
+
+		// Add the new root certificate to our certificate store
 		err := km.certificateStore.AddCert(newRootKeyCert)
 		if err != nil {
-			logrus.Debugf("error while adding new root certificate with keyID: %s, %v", newRootKey.ID(), err)
-			return ErrRootRotationFail
+			// Ignore the error if the certificate already exists
+			if _, ok := err.(*trustmanager.ErrCertExists); !ok {
+				logrus.Debugf("error while adding new root certificate with keyID: %s, %v", newRootKey.ID(), err)
+				return ErrRootRotationFail
+			}
+			logrus.Debugf("root certificate already exists in keystore: %s", newRootKey.ID())
 		}
 
 		// Remove the new root certificate from the certificate mapping so we

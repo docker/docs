@@ -20,6 +20,26 @@ func (err ErrNoCertificatesFound) Error() string {
 	return fmt.Sprintf("error, no certificates found in the keystore match: %s", err.query)
 }
 
+// ErrCertValidation is returned when a certificate doesn't pass the store specific
+// validations
+type ErrCertValidation struct {
+}
+
+// ErrCertValidation is returned when a certificate doesn't pass the store specific
+// validations
+func (err ErrCertValidation) Error() string {
+	return fmt.Sprintf("store-specific certificate validations failed")
+}
+
+// ErrCertExists is returned when a Certificate already exists in the key store
+type ErrCertExists struct {
+}
+
+// ErrInvalidCertificate is returned when an invalid Certificate is given
+func (err ErrCertExists) Error() string {
+	return fmt.Sprintf("certificate already in the store")
+}
+
 // X509Store is the interface for all X509Stores
 type X509Store interface {
 	AddCert(cert *x509.Certificate) error

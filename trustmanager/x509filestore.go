@@ -57,7 +57,7 @@ func (s *X509FileStore) AddCert(cert *x509.Certificate) error {
 
 	// Check if this certificate meets our validation criteria
 	if !s.validate.Validate(cert) {
-		return errors.New("certificate validation failed")
+		return &ErrCertValidation{}
 	}
 	// Attempt to write the certificate to the file
 	if err := s.addNamedCert(cert); err != nil {
@@ -76,9 +76,9 @@ func (s *X509FileStore) addNamedCert(cert *x509.Certificate) error {
 	}
 
 	logrus.Debug("Adding cert with certID: ", certID)
-	// Validate if we already loaded this certificate before
+	// Validate if we already added this certificate before
 	if _, ok := s.fingerprintMap[certID]; ok {
-		return errors.New("certificate already in the store")
+		return &ErrCertExists{}
 	}
 
 	// Convert certificate to PEM
