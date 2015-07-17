@@ -64,13 +64,12 @@ func validateRootSuccessfully(t *testing.T, rootType data.KeyAlgorithm) {
 
 	// Initialize is supposed to have created new certificate for this repository
 	// Lets check for it and store it for later use
-	allCerts := repo.KeyStoreManager.CertificateStore().GetCertificates()
+	allCerts := repo.KeyStoreManager.TrustedCertificateStore().GetCertificates()
 	assert.Len(t, allCerts, 1)
 
 	// Now test ListTargets. In preparation, we need to expose some signed
 	// metadata files on the internal HTTP server.
-
-	var tempKey data.PrivateKey
+	var tempKey data.TUFKey
 	json.Unmarshal([]byte(timestampECDSAKeyJSON), &tempKey)
 
 	repo.KeyStoreManager.NonRootKeyStore().AddKey(filepath.Join(filepath.FromSlash(gun), tempKey.ID()), &tempKey)
@@ -112,14 +111,14 @@ func validateRootSuccessfully(t *testing.T, rootType data.KeyAlgorithm) {
 	//
 	// Test TOFUS logic. We remove all certs and expect a new one to be added after ListTargets
 	//
-	err = repo.KeyStoreManager.CertificateStore().RemoveAll()
+	err = repo.KeyStoreManager.TrustedCertificateStore().RemoveAll()
 	assert.NoError(t, err)
-	assert.Len(t, repo.KeyStoreManager.CertificateStore().GetCertificates(), 0)
+	assert.Len(t, repo.KeyStoreManager.TrustedCertificateStore().GetCertificates(), 0)
 
 	// This list targets is expected to succeed and the certificate store to have the new certificate
 	_, err = repo.ListTargets()
 	assert.NoError(t, err)
-	assert.Len(t, repo.KeyStoreManager.CertificateStore().GetCertificates(), 1)
+	assert.Len(t, repo.KeyStoreManager.TrustedCertificateStore().GetCertificates(), 1)
 
 	//
 	// Test certificate mismatch logic. We remove all certs, and a different cert to the
@@ -127,12 +126,12 @@ func validateRootSuccessfully(t *testing.T, rootType data.KeyAlgorithm) {
 	//
 
 	// First, remove all certs
-	err = repo.KeyStoreManager.CertificateStore().RemoveAll()
+	err = repo.KeyStoreManager.TrustedCertificateStore().RemoveAll()
 	assert.NoError(t, err)
-	assert.Len(t, repo.KeyStoreManager.CertificateStore().GetCertificates(), 0)
+	assert.Len(t, repo.KeyStoreManager.TrustedCertificateStore().GetCertificates(), 0)
 
 	// Add a previously generated certificate with CN=docker.com/notary
-	err = repo.KeyStoreManager.CertificateStore().AddCertFromFile("../fixtures/self-signed_docker.com-notary.crt")
+	err = repo.KeyStoreManager.TrustedCertificateStore().AddCertFromFile("../fixtures/self-signed_docker.com-notary.crt")
 	assert.NoError(t, err)
 
 	// This list targets is expected to fail, since there already exists a certificate
@@ -150,19 +149,19 @@ func validateRootSuccessfully(t *testing.T, rootType data.KeyAlgorithm) {
 	//
 
 	// First, remove all certs and trusted CAs
-	err = repo.KeyStoreManager.CertificateStore().RemoveAll()
+	err = repo.KeyStoreManager.TrustedCertificateStore().RemoveAll()
 	assert.NoError(t, err)
-	assert.Len(t, repo.KeyStoreManager.CertificateStore().GetCertificates(), 0)
-	err = repo.KeyStoreManager.CAStore().RemoveAll()
+	assert.Len(t, repo.KeyStoreManager.TrustedCertificateStore().GetCertificates(), 0)
+	err = repo.KeyStoreManager.TrustedCAStore().RemoveAll()
 	assert.NoError(t, err)
-	assert.Len(t, repo.KeyStoreManager.CAStore().GetCertificates(), 0)
+	assert.Len(t, repo.KeyStoreManager.TrustedCAStore().GetCertificates(), 0)
 
 	// Add a trusted root-ca
-	err = repo.KeyStoreManager.CAStore().AddCertFromFile("../fixtures/root-ca.crt")
+	err = repo.KeyStoreManager.TrustedCAStore().AddCertFromFile("../fixtures/root-ca.crt")
 	assert.NoError(t, err)
 
 	// Add a previously generated certificate with CN=secure.example.com
-	err = repo.KeyStoreManager.CertificateStore().AddCertFromFile("../fixtures/self-signed_secure.example.com.crt")
+	err = repo.KeyStoreManager.TrustedCertificateStore().AddCertFromFile("../fixtures/self-signed_secure.example.com.crt")
 	assert.NoError(t, err)
 
 	// Create a manual rootSigner with a valid intermediate + leaf cert

@@ -194,7 +194,7 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, dnsName string) error
 
 	// validKeys will store all the keys that were considered valid either by
 	// direct certificate match, or CA chain path
-	validKeys := make(map[string]*data.PublicKey)
+	validKeys := make(map[string]data.PublicKey)
 
 	// allCerts will keep a list of all leafCerts that were found, and is used
 	// to aid on root certificate rotation
@@ -244,7 +244,7 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, dnsName string) error
 		allCerts[leafID] = leafCert
 
 		// Retrieve all the trusted certificates that match this dns Name
-		certsForCN, err := km.certificateStore.GetCertificatesByCN(dnsName)
+		certsForCN, err := km.trustedCertificateStore.GetCertificatesByCN(dnsName)
 		if err != nil {
 			// If the error that we get back is different than ErrNoCertificatesFound
 			// we couldn't check if there are any certificates with this CN already
@@ -258,7 +258,7 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, dnsName string) error
 		// If there are no certificates with this CN, lets TOFUS!
 		// Note that this logic should only exist in docker 1.8
 		if len(certsForCN) == 0 {
-			km.certificateStore.AddCert(leafCert)
+			km.trustedCertificateStore.AddCert(leafCert)
 			certsForCN = append(certsForCN, leafCert)
 			logrus.Debugf("using TOFUS on %s with keyID: %s", dnsName, leafID)
 		}
@@ -275,7 +275,7 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, dnsName string) error
 
 		// Check to see if this leafCertificate has a chain to one of the Root
 		// CAs of our CA Store.
-		err = trustmanager.Verify(km.caStore, dnsName, decodedCerts)
+		err = trustmanager.Verify(km.trustedCAStore, dnsName, decodedCerts)
 		if err == nil {
 			validKeys[keyID] = rootSigned.Signed.Keys[keyID]
 			logrus.Debugf("found a CA path for %s with keyID: %s", dnsName, keyID)
@@ -307,7 +307,7 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, dnsName string) error
 		}
 
 		// Add the new root certificate to our certificate store
-		err := km.certificateStore.AddCert(newRootKeyCert)
+		err := km.trustedCertificateStore.AddCert(newRootKeyCert)
 		if err != nil {
 			// Ignore the error if the certificate already exists
 			if _, ok := err.(*trustmanager.ErrCertExists); !ok {
@@ -324,7 +324,7 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, dnsName string) error
 		// Iterate over all old valid certificates and remove them, essentially
 		// finishing the rotation of the currently trusted root certificate
 		for _, cert := range allCerts {
-			err := km.certificateStore.RemoveCert(cert)
+			err := km.trustedCertificateStore.RemoveCert(cert)
 			if err != nil {
 				logrus.Debugf("error while removing old root certificate: %v", err)
 				return ErrRootRotationFail
