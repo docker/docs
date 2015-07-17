@@ -139,7 +139,7 @@ func tufInit(cmd *cobra.Command, args []string) {
 		fatalf(err.Error())
 	}
 
-	nRepo.Initialize(rootCryptoService)
+	err = nRepo.Initialize(rootCryptoService)
 	if err != nil {
 		fatalf(err.Error())
 	}

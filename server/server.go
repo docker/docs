@@ -88,7 +88,7 @@ func Run(ctx context.Context, addr, tlsCertFile, tlsKeyFile string, trust signed
 		Handler: r,
 	}
 
-	logrus.Error("[Notary Server] : Starting on ", addr)
+	logrus.Info("[Notary Server] : Starting on ", addr)
 
 	err = svr.Serve(lsnr)
 
