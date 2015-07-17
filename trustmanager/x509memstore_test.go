@@ -130,7 +130,7 @@ func TestRemoveAllX509MemStore(t *testing.T) {
 		}
 	}
 
-	// Number of certificates should be 1 since we added the cert
+	// Number of certificates should be 3 since we added the cert
 	numCerts := len(store.GetCertificates())
 	if numCerts != 3 {
 		t.Fatalf("unexpected number of certificates in store: %d", numCerts)

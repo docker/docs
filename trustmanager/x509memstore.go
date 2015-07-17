@@ -98,9 +98,6 @@ func (s *X509MemStore) RemoveAll() error {
 		}
 	}
 
-	s.fingerprintMap = make(map[CertID]*x509.Certificate)
-	s.nameMap = make(map[string][]CertID)
-
 	return nil
 }
 

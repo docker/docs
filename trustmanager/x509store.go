@@ -35,7 +35,7 @@ func (err ErrCertValidation) Error() string {
 type ErrCertExists struct {
 }
 
-// ErrInvalidCertificate is returned when an invalid Certificate is given
+// ErrCertExists is returned when a Certificate already exists in the key store
 func (err ErrCertExists) Error() string {
 	return fmt.Sprintf("certificate already in the store")
 }
