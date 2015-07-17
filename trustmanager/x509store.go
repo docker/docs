@@ -8,6 +8,18 @@ import (
 
 const certExtension string = "crt"
 
+// ErrNoCertificatesFound is returned when no certificates are found for a
+// GetCertificatesBy*
+type ErrNoCertificatesFound struct {
+	query string
+}
+
+// ErrNoCertificatesFound is returned when no certificates are found for a
+// GetCertificatesBy*
+func (err ErrNoCertificatesFound) Error() string {
+	return fmt.Sprintf("error, no certificates found in the keystore match: %s", err.query)
+}
+
 // X509Store is the interface for all X509Stores
 type X509Store interface {
 	AddCert(cert *x509.Certificate) error

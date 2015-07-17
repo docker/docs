@@ -169,6 +169,10 @@ func LoadCertBundleFromPEM(pemBytes []byte) ([]*x509.Certificate, error) {
 		}
 	}
 
+	if len(certificates) == 0 {
+		return nil, fmt.Errorf("no valid certificates found")
+	}
+
 	return certificates, nil
 }
 

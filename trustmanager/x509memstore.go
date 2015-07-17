@@ -157,7 +157,7 @@ func (s *X509MemStore) getCertificateByCertID(certID CertID) (*x509.Certificate,
 		return cert, nil
 
 	}
-	return nil, errors.New("certificate not found in Key Store")
+	return nil, &ErrNoCertificatesFound{query: string(certID)}
 }
 
 // GetCertificatesByCN returns all the certificates that match a specific
@@ -176,7 +176,7 @@ func (s *X509MemStore) GetCertificatesByCN(cn string) ([]*x509.Certificate, erro
 		}
 	}
 	if len(certs) == 0 {
-		return nil, errors.New("common name not found in Key Store")
+		return nil, &ErrNoCertificatesFound{query: cn}
 	}
 
 	return certs, nil
