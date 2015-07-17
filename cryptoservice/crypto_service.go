@@ -24,13 +24,12 @@ const (
 // operate on
 type CryptoService struct {
 	gun        string
-	passphrase string
 	keyStore   trustmanager.KeyStore
 }
 
 // NewCryptoService returns an instance of CryptoService
-func NewCryptoService(gun string, keyStore trustmanager.KeyStore, passphrase string) *CryptoService {
-	return &CryptoService{gun: gun, keyStore: keyStore, passphrase: passphrase}
+func NewCryptoService(gun string, keyStore trustmanager.KeyStore) *CryptoService {
+	return &CryptoService{gun: gun, keyStore: keyStore}
 }
 
 // Create is used to generate keys for targets, snapshots and timestamps
@@ -93,14 +92,9 @@ func (ccs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signatur
 		var privKey data.PrivateKey
 		var err error
 
-		// Read PrivateKey from file and decrypt it if there is a passphrase.
-		if ccs.passphrase != "" {
-			privKey, err = ccs.keyStore.GetDecryptedKey(keyName, ccs.passphrase)
-		} else {
-			privKey, err = ccs.keyStore.GetKey(keyName)
-		}
+		privKey, err = ccs.keyStore.GetKey(keyName)
 		if err != nil {
-			// Note that GetDecryptedKey always fails on InitRepo.
+			// Note that GetKey always fails on InitRepo.
 			// InitRepo gets a signer that doesn't have access to
 			// the root keys. Continuing here is safe because we
 			// end up not returning any signatures.

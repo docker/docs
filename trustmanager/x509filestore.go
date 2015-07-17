@@ -67,7 +67,7 @@ func (s *X509FileStore) AddCert(cert *x509.Certificate) error {
 	return nil
 }
 
-// addNamedCert allows adding a certificate while controling the filename it gets
+// addNamedCert allows adding a certificate while controlling the filename it gets
 // stored under. If the file does not exist on disk, saves it.
 func (s *X509FileStore) addNamedCert(cert *x509.Certificate) error {
 	fileName, certID, err := fileName(cert)

@@ -82,7 +82,7 @@ func (km *KeyStoreManager) ImportRootKey(source io.Reader, keyID string) error {
 	return err
 }
 
-func moveKeysWithNewPassphrase(oldKeyStore, newKeyStore *trustmanager.KeyFileStore, outputPassphrase string) error {
+func moveKeys(oldKeyStore, newKeyStore *trustmanager.KeyFileStore) error {
 	// List all files but no symlinks
 	for _, f := range oldKeyStore.ListFiles(false) {
 		fullKeyPath := strings.TrimSpace(strings.TrimSuffix(f, filepath.Ext(f)))
@@ -106,7 +106,7 @@ func moveKeysWithNewPassphrase(oldKeyStore, newKeyStore *trustmanager.KeyFileSto
 			if err != nil {
 				return err
 			}
-			err = newKeyStore.AddEncryptedKey(relKeyPath, privKey, outputPassphrase)
+			err = newKeyStore.AddKey(relKeyPath, privKey)
 		} else {
 			// Encrypted key - pass it through without
 			// decrypting
@@ -160,27 +160,27 @@ func addKeysToArchive(zipWriter *zip.Writer, newKeyStore *trustmanager.KeyFileSt
 // If blank, the keys will not be encrypted. Note that keys which are already
 // encrypted are not re-encrypted. They will be included in the zip with their
 // original encryption.
-func (km *KeyStoreManager) ExportAllKeys(dest io.Writer, outputPassphrase string) error {
+func (km *KeyStoreManager) ExportAllKeys(dest io.Writer, passphraseRetriever trustmanager.PassphraseRetriever) error {
 	tempBaseDir, err := ioutil.TempDir("", "notary-key-export-")
 	defer os.RemoveAll(tempBaseDir)
 
 	// Create temporary keystores to use as a staging area
 	tempNonRootKeysPath := filepath.Join(tempBaseDir, privDir, nonRootKeysSubdir)
-	tempNonRootKeyStore, err := trustmanager.NewKeyFileStore(tempNonRootKeysPath)
+	tempNonRootKeyStore, err := trustmanager.NewKeyFileStore(tempNonRootKeysPath, passphraseRetriever)
 	if err != nil {
 		return err
 	}
 
 	tempRootKeysPath := filepath.Join(tempBaseDir, privDir, rootKeysSubdir)
-	tempRootKeyStore, err := trustmanager.NewKeyFileStore(tempRootKeysPath)
+	tempRootKeyStore, err := trustmanager.NewKeyFileStore(tempRootKeysPath, passphraseRetriever)
 	if err != nil {
 		return err
 	}
 
-	if err := moveKeysWithNewPassphrase(km.rootKeyStore, tempRootKeyStore, outputPassphrase); err != nil {
+	if err := moveKeys(km.rootKeyStore, tempRootKeyStore); err != nil {
 		return err
 	}
-	if err := moveKeysWithNewPassphrase(km.nonRootKeyStore, tempNonRootKeyStore, outputPassphrase); err != nil {
+	if err := moveKeys(km.nonRootKeyStore, tempNonRootKeyStore); err != nil {
 		return err
 	}
 
@@ -275,7 +275,7 @@ func (km *KeyStoreManager) ImportKeysZip(zipReader zip.Reader, passphrase string
 	return nil
 }
 
-func moveKeysByGUN(oldKeyStore, newKeyStore *trustmanager.KeyFileStore, gun, outputPassphrase string) error {
+func moveKeysByGUN(oldKeyStore, newKeyStore *trustmanager.KeyFileStore, gun string) error {
 	// List all files but no symlinks
 	for _, f := range oldKeyStore.ListFiles(false) {
 		fullKeyPath := strings.TrimSpace(strings.TrimSuffix(f, filepath.Ext(f)))
@@ -307,7 +307,7 @@ func moveKeysByGUN(oldKeyStore, newKeyStore *trustmanager.KeyFileStore, gun, out
 		if err != nil {
 			return err
 		}
-		err = newKeyStore.AddEncryptedKey(relKeyPath, privKey, outputPassphrase)
+		err = newKeyStore.AddKey(relKeyPath, privKey)
 		if err != nil {
 			return err
 		}
@@ -319,18 +319,18 @@ func moveKeysByGUN(oldKeyStore, newKeyStore *trustmanager.KeyFileStore, gun, out
 // ExportKeysByGUN exports all keys associated with a specified GUN to an
 // io.Writer in zip format. outputPassphrase is the new passphrase to use to
 // encrypt the keys. If blank, the keys will not be encrypted.
-func (km *KeyStoreManager) ExportKeysByGUN(dest io.Writer, gun, outputPassphrase string) error {
+func (km *KeyStoreManager) ExportKeysByGUN(dest io.Writer, gun string, passphraseRetriever trustmanager.PassphraseRetriever) error {
 	tempBaseDir, err := ioutil.TempDir("", "notary-key-export-")
 	defer os.RemoveAll(tempBaseDir)
 
 	// Create temporary keystore to use as a staging area
 	tempNonRootKeysPath := filepath.Join(tempBaseDir, privDir, nonRootKeysSubdir)
-	tempNonRootKeyStore, err := trustmanager.NewKeyFileStore(tempNonRootKeysPath)
+	tempNonRootKeyStore, err := trustmanager.NewKeyFileStore(tempNonRootKeysPath, passphraseRetriever)
 	if err != nil {
 		return err
 	}
 
-	if err := moveKeysByGUN(km.nonRootKeyStore, tempNonRootKeyStore, gun, outputPassphrase); err != nil {
+	if err := moveKeysByGUN(km.nonRootKeyStore, tempNonRootKeyStore, gun); err != nil {
 		return err
 	}
 

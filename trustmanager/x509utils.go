@@ -314,7 +314,7 @@ func RSAToPrivateKey(rsaPrivKey *rsa.PrivateKey) (data.PrivateKey, error) {
 	return data.NewPrivateKey(data.RSAKey, rsaPubBytes, rsaPrivBytes), nil
 }
 
-// GenerateECDSAKey generates an ECDSA private key and returns a TUF PrivateKey
+// GenerateECDSAKey generates an ECDSA Private key and returns a TUF PrivateKey
 func GenerateECDSAKey(random io.Reader) (data.PrivateKey, error) {
 	ecdsaPrivKey, err := ecdsa.GenerateKey(elliptic.P256(), random)
 	if err != nil {

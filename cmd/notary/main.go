@@ -86,11 +86,13 @@ func init() {
 		fatalf("could not create Certificate X509FileStore: %v", err)
 	}
 
-	privKeyStore, err = trustmanager.NewKeyFileStore(finalPrivDir)
+
+	//TODO(mccauley): Appears unused? Remove it? Or is it here for early failure?
+	privKeyStore, err = trustmanager.NewKeyFileStore(finalPrivDir,
+		func (string, bool, int) (string, bool, error) { return "", false, nil})
 	if err != nil {
 		fatalf("could not create KeyFileStore: %v", err)
 	}
-
 }
 
 func main() {
