@@ -34,6 +34,15 @@ const (
 	rsaRootKeySize    = 4096 // Used for new root keys
 )
 
+var (
+	// ErrValidationFail is returned when there is no trusted certificate in any of the
+	// root keys available in the roots.json
+	ErrValidationFail = errors.New("could not validate the path to a trusted root")
+	// ErrRootRotationFail is returned when we fail to do a full root key rotation
+	// by either failing to add the new root certificate, or delete the old ones
+	ErrRootRotationFail = errors.New("could not rotate trust to a new trusted root")
+)
+
 // NewKeyStoreManager returns an initialized KeyStoreManager, or an error
 // if it fails to create the KeyFileStores or load certificates
 func NewKeyStoreManager(baseDir string) (*KeyStoreManager, error) {
@@ -164,30 +173,20 @@ attempts to validate the certificate by first checking for an exact match on
 the certificate store, and subsequently trying to find a valid chain on the
 trustedCAStore.
 
-When this is being used with a notary repository, the dnsName parameter should
-be the GUN associated with the repository.
+Currently this method operates on a Trust On First Use (TOFU) model: if we
+have never seen a certificate for a particular CN, we trust it. If later we see
+a different certificate for that certificate, we return an ErrValidationFailed error.
 
-Example TUF Content for root role:
-"roles" : {
-  "root" : {
-    "threshold" : 1,
-      "keyids" : [
-        "e6da5c303d572712a086e669ecd4df7b785adfc844e0c9a7b1f21a7dfc477a38"
-      ]
-  },
- ...
-}
+Note that since we only allow trust data to be downloaded over an HTTPS channel
+we are using the current web-of-trust to validate the first download of the certificate
+adding an extra layer of security over the normal (SSH style) trust model.
+We shall call this: TOFUS.
 
-Example TUF Content for root key:
-"e6da5c303d572712a086e669ecd4df7b785adfc844e0c9a7b1f21a7dfc477a38" : {
-	"keytype" : "RSA",
-	"keyval" : {
-	  "private" : "",
-	  "public" : "Base64-encoded, PEM encoded x509 Certificate"
-	}
-}
+ValidateRoot also supports root key rotation, trusting a new certificate that has
+been included in the roots.json, and removing trust in the old one.
 */
 func (km *KeyStoreManager) ValidateRoot(root *data.Signed, dnsName string) error {
+	logrus.Debugf("entered ValidateRoot with dns: %s", dnsName)
 	rootSigned, err := data.RootFromSigned(root)
 	if err != nil {
 		return err
@@ -196,6 +195,7 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, dnsName string) error
 	// Iterate over every keyID for the root role inside of roots.json
 	validKeys := make(map[string]*data.PublicKey)
 	allCerts := make(map[string]*x509.Certificate)
+	logrus.Debugf("found the following root keys in roots.json: %v", rootSigned.Signed.Keys)
 	for _, keyID := range rootSigned.Signed.Roles["root"].KeyIDs {
 		// Decode all the x509 certificates that were bundled with this
 		// Specific root key
@@ -228,11 +228,12 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, dnsName string) error
 		// Retrieve all the trusted certificates that match this dns Name
 		certsForCN, err := km.certificateStore.GetCertificatesByCN(dnsName)
 
-		// If there are no certificates with this CN, lets TOFU!
+		// If there are no certificates with this CN, lets TOFUS!
 		// Note that this logic should only exist in docker 1.8
 		if len(certsForCN) == 0 {
 			km.certificateStore.AddCert(leafCert)
 			certsForCN = append(certsForCN, leafCert)
+			logrus.Debugf("using TOFUS on %s with keyID: %s", dnsName, leafID)
 		}
 
 		// Iterate over all known certificates for this CN and see if any are trusted
@@ -241,6 +242,7 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, dnsName string) error
 			certID, err := trustmanager.FingerprintCert(cert)
 			if err == nil && certID == leafID {
 				validKeys[keyID] = rootSigned.Signed.Keys[keyID]
+				logrus.Debugf("found an exact match for %s with keyID: %s", dnsName, keyID)
 			}
 		}
 
@@ -249,11 +251,13 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, dnsName string) error
 		err = trustmanager.Verify(km.caStore, dnsName, decodedCerts)
 		if err == nil {
 			validKeys[keyID] = rootSigned.Signed.Keys[keyID]
+			logrus.Debugf("found a CA path for %s with keyID: %s", dnsName, keyID)
 		}
 	}
 
 	if len(validKeys) < 1 {
-		return errors.New("could not validate the path to a trusted root")
+		logrus.Debugf("wasn't able to trust any of the root keys")
+		return ErrValidationFail
 	}
 
 	// TODO(david): change hardcoded minversion on TUF.
@@ -265,12 +269,13 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, dnsName string) error
 	// VerifyRoot returns a non-nil value if there is a root key rotation happening.
 	// If this happens, we should replace the old root of trust with the new one
 	if newRootKey != nil {
+		logrus.Debugf("got a new root key to rotate to: %s", newRootKey.ID())
 		// Retrieve the certificate associated with the new root key and trust it
 		newRootKeyCert := allCerts[newRootKey.ID()]
 		err := km.certificateStore.AddCert(newRootKeyCert)
 		if err != nil {
 			logrus.Debugf("error while adding new root certificate with keyID: %s, %v", newRootKey.ID(), err)
-			return err
+			return ErrRootRotationFail
 		}
 
 		// Remove the new root certificate from the certificate mapping so we
@@ -283,10 +288,12 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, dnsName string) error
 			err := km.certificateStore.RemoveCert(cert)
 			if err != nil {
 				logrus.Debugf("error while removing old root certificate: %v", err)
-				return err
+				return ErrRootRotationFail
 			}
+			logrus.Debugf("removed trust from old root certificate")
 		}
 	}
 
+	logrus.Debugf("Root validation succeeded")
 	return nil
 }
