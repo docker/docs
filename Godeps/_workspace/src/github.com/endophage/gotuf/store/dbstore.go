@@ -82,8 +82,8 @@ func (dbs *dbStore) Commit(metafiles map[string]json.RawMessage, consistent bool
 }
 
 // GetKeys returns private keys
-func (dbs *dbStore) GetKeys(role string) ([]*data.Key, error) {
-	keys := []*data.Key{}
+func (dbs *dbStore) GetKeys(role string) ([]data.PrivateKey, error) {
+	keys := []data.PrivateKey{}
 	var r *sql.Rows
 	var err error
 	sql := "SELECT `key` FROM `keys` WHERE `role` = ? AND `namespace` = ?;"
@@ -96,7 +96,7 @@ func (dbs *dbStore) GetKeys(role string) ([]*data.Key, error) {
 	defer r.Close()
 	for r.Next() {
 		var jsonStr string
-		key := new(data.Key)
+		key := new(data.TUFKey)
 		r.Scan(&jsonStr)
 		err := json.Unmarshal([]byte(jsonStr), key)
 		if err != nil {
@@ -108,7 +108,7 @@ func (dbs *dbStore) GetKeys(role string) ([]*data.Key, error) {
 }
 
 // SaveKey saves a new private key
-func (dbs *dbStore) SaveKey(role string, key *data.Key) error {
+func (dbs *dbStore) SaveKey(role string, key data.PrivateKey) error {
 	jsonBytes, err := json.Marshal(key)
 	if err != nil {
 		return fmt.Errorf("Could not JSON Marshal Key")

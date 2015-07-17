@@ -12,6 +12,15 @@ type Key interface {
 	ID() string
 	Algorithm() KeyAlgorithm
 	Public() []byte
+}
+
+type PublicKey interface {
+	Key
+}
+
+type PrivateKey interface {
+	Key
+
 	Private() []byte
 }
 
@@ -20,13 +29,18 @@ type KeyPair struct {
 	Private []byte `json:"private"`
 }
 
+// TUFKey is the structure used for both public and private keys in TUF.
+// Normally it would make sense to use a different structures for public and
+// private keys, but that would change the key ID algorithm (since the canonical
+// JSON would be different). This structure should normally be accessed through
+// the PublicKey or PrivateKey interfaces.
 type TUFKey struct {
 	id    string       `json:"-"`
 	Type  KeyAlgorithm `json:"keytype"`
 	Value KeyPair      `json:"keyval"`
 }
 
-func NewTUFKey(algorithm KeyAlgorithm, public, private []byte) *TUFKey {
+func NewPrivateKey(algorithm KeyAlgorithm, public, private []byte) *TUFKey {
 	return &TUFKey{
 		Type: algorithm,
 		Value: KeyPair{
@@ -42,7 +56,7 @@ func (k TUFKey) Algorithm() KeyAlgorithm {
 
 func (k *TUFKey) ID() string {
 	if k.id == "" {
-		pubK := NewTUFKey(k.Algorithm(), k.Public(), nil)
+		pubK := NewPublicKey(k.Algorithm(), k.Public())
 		data, err := cjson.Marshal(&pubK)
 		if err != nil {
 			logrus.Error("Error generating key ID:", err)
@@ -57,51 +71,26 @@ func (k TUFKey) Public() []byte {
 	return k.Value.Public
 }
 
-type PublicKey struct {
-	TUFKey
-}
-
-func (k PublicKey) Private() []byte {
-	return nil
-}
-
-func NewPublicKey(algorithm KeyAlgorithm, public []byte) *PublicKey {
-	return &PublicKey{
-		TUFKey{
-			Type: algorithm,
-			Value: KeyPair{
-				Public:  public,
-				Private: nil,
-			},
-		},
-	}
-}
-
-func PublicKeyFromPrivate(pk *PrivateKey) *PublicKey {
-	pub := &PublicKey{
-		pk.TUFKey,
-	}
-	pub.TUFKey.Value.Private = nil
-
-	return pub
-}
-
-type PrivateKey struct {
-	TUFKey
-}
-
-func NewPrivateKey(algorithm KeyAlgorithm, public, private []byte) *PrivateKey {
-	return &PrivateKey{
-		TUFKey{
-			Type: algorithm,
-			Value: KeyPair{
-				Public:  []byte(public),
-				Private: []byte(private),
-			},
-		},
-	}
-}
-
-func (k PrivateKey) Private() []byte {
+func (k *TUFKey) Private() []byte {
 	return k.Value.Private
+}
+
+func NewPublicKey(algorithm KeyAlgorithm, public []byte) PublicKey {
+	return &TUFKey{
+		Type: algorithm,
+		Value: KeyPair{
+			Public:  public,
+			Private: nil,
+		},
+	}
+}
+
+func PublicKeyFromPrivate(pk PrivateKey) PublicKey {
+	return &TUFKey{
+		Type: pk.Algorithm(),
+		Value: KeyPair{
+			Public:  pk.Public(),
+			Private: nil,
+		},
+	}
 }

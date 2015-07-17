@@ -112,7 +112,7 @@ func fingerprintCert(cert *x509.Certificate) (CertID, error) {
 	}
 
 	// Create new TUF Key so we can compute the TUF-compliant CertID
-	tufKey := data.NewTUFKey(keyType, pemdata, nil)
+	tufKey := data.NewPublicKey(keyType, pemdata)
 
 	logrus.Debugf("certificate fingerprint generated for key type %s: %s", keyType, tufKey.ID())
 
@@ -150,7 +150,7 @@ func LoadCertFromFile(filename string) (*x509.Certificate, error) {
 
 // ParsePEMPrivateKey returns a data.PrivateKey from a PEM encoded private key. It
 // only supports RSA (PKCS#1) and attempts to decrypt using the passphrase, if encrypted.
-func ParsePEMPrivateKey(pemBytes []byte, passphrase string) (*data.PrivateKey, error) {
+func ParsePEMPrivateKey(pemBytes []byte, passphrase string) (data.PrivateKey, error) {
 	block, _ := pem.Decode(pemBytes)
 	if block == nil {
 		return nil, errors.New("no valid private key found")
@@ -234,7 +234,7 @@ func ParsePEMPrivateKey(pemBytes []byte, passphrase string) (*data.PrivateKey, e
 }
 
 // GenerateRSAKey generates an RSA private key and returns a TUF PrivateKey
-func GenerateRSAKey(random io.Reader, bits int) (*data.PrivateKey, error) {
+func GenerateRSAKey(random io.Reader, bits int) (data.PrivateKey, error) {
 	rsaPrivKey, err := rsa.GenerateKey(random, bits)
 	if err != nil {
 		return nil, fmt.Errorf("could not generate private key: %v", err)
@@ -251,7 +251,7 @@ func GenerateRSAKey(random io.Reader, bits int) (*data.PrivateKey, error) {
 }
 
 // RSAToPrivateKey converts an rsa.Private key to a TUF data.PrivateKey type
-func RSAToPrivateKey(rsaPrivKey *rsa.PrivateKey) (*data.PrivateKey, error) {
+func RSAToPrivateKey(rsaPrivKey *rsa.PrivateKey) (data.PrivateKey, error) {
 	// Get a DER-encoded representation of the PublicKey
 	rsaPubBytes, err := x509.MarshalPKIXPublicKey(&rsaPrivKey.PublicKey)
 	if err != nil {
@@ -265,7 +265,7 @@ func RSAToPrivateKey(rsaPrivKey *rsa.PrivateKey) (*data.PrivateKey, error) {
 }
 
 // GenerateECDSAKey generates an ECDSA private key and returns a TUF PrivateKey
-func GenerateECDSAKey(random io.Reader) (*data.PrivateKey, error) {
+func GenerateECDSAKey(random io.Reader) (data.PrivateKey, error) {
 	// TODO(diogo): For now hardcode P256. There were timming attacks on the other
 	// curves, but I can't seem to find the issue.
 	ecdsaPrivKey, err := ecdsa.GenerateKey(elliptic.P256(), random)
@@ -286,7 +286,7 @@ func GenerateECDSAKey(random io.Reader) (*data.PrivateKey, error) {
 // GenerateED25519Key generates an ED25519 private key and returns a TUF
 // PrivateKey. The serialization format we use is just the public key bytes
 // followed by the private key bytes
-func GenerateED25519Key(random io.Reader) (*data.PrivateKey, error) {
+func GenerateED25519Key(random io.Reader) (data.PrivateKey, error) {
 	pub, priv, err := ed25519.GenerateKey(rand.Reader)
 	if err != nil {
 		return nil, err
@@ -307,7 +307,7 @@ func GenerateED25519Key(random io.Reader) (*data.PrivateKey, error) {
 }
 
 // ECDSAToPrivateKey converts an rsa.Private key to a TUF data.PrivateKey type
-func ECDSAToPrivateKey(ecdsaPrivKey *ecdsa.PrivateKey) (*data.PrivateKey, error) {
+func ECDSAToPrivateKey(ecdsaPrivKey *ecdsa.PrivateKey) (data.PrivateKey, error) {
 	// Get a DER-encoded representation of the PublicKey
 	ecdsaPubBytes, err := x509.MarshalPKIXPublicKey(&ecdsaPrivKey.PublicKey)
 	if err != nil {
@@ -325,7 +325,7 @@ func ECDSAToPrivateKey(ecdsaPrivKey *ecdsa.PrivateKey) (*data.PrivateKey, error)
 
 // ED25519ToPrivateKey converts a serialized ED25519 key to a TUF
 // data.PrivateKey type
-func ED25519ToPrivateKey(privKeyBytes []byte) (*data.PrivateKey, error) {
+func ED25519ToPrivateKey(privKeyBytes []byte) (data.PrivateKey, error) {
 	if len(privKeyBytes) != ed25519.PublicKeySize+ed25519.PrivateKeySize {
 		return nil, errors.New("malformed ed25519 private key")
 	}
@@ -347,7 +347,7 @@ func blockType(algorithm data.KeyAlgorithm) (string, error) {
 }
 
 // KeyToPEM returns a PEM encoded key from a Private Key
-func KeyToPEM(privKey *data.PrivateKey) ([]byte, error) {
+func KeyToPEM(privKey data.PrivateKey) ([]byte, error) {
 	blockType, err := blockType(privKey.Algorithm())
 	if err != nil {
 		return nil, err
@@ -358,7 +358,7 @@ func KeyToPEM(privKey *data.PrivateKey) ([]byte, error) {
 
 // EncryptPrivateKey returns an encrypted PEM key given a Privatekey
 // and a passphrase
-func EncryptPrivateKey(key *data.PrivateKey, passphrase string) ([]byte, error) {
+func EncryptPrivateKey(key data.PrivateKey, passphrase string) ([]byte, error) {
 	blockType, err := blockType(key.Algorithm())
 	if err != nil {
 		return nil, err

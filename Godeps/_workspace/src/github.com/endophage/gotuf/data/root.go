@@ -14,27 +14,47 @@ type SignedRoot struct {
 }
 
 type Root struct {
-	Type               string                `json:"_type"`
-	Version            int                   `json:"version"`
-	Expires            time.Time             `json:"expires"`
-	Keys               map[string]*PublicKey `json:"keys"`
-	Roles              map[string]*RootRole  `json:"roles"`
-	ConsistentSnapshot bool                  `json:"consistent_snapshot"`
+	Type    string    `json:"_type"`
+	Version int       `json:"version"`
+	Expires time.Time `json:"expires"`
+	// These keys are public keys. We use TUFKey instead of PublicKey to
+	// support direct JSON unmarshaling.
+	Keys               map[string]*TUFKey   `json:"keys"`
+	Roles              map[string]*RootRole `json:"roles"`
+	ConsistentSnapshot bool                 `json:"consistent_snapshot"`
 }
 
-func NewRoot(keys map[string]*PublicKey, roles map[string]*RootRole, consistent bool) (*SignedRoot, error) {
-	return &SignedRoot{
+func NewRoot(keys map[string]PublicKey, roles map[string]*RootRole, consistent bool) (*SignedRoot, error) {
+	signedRoot := &SignedRoot{
 		Signatures: make([]Signature, 0),
 		Signed: Root{
 			Type:               TUFTypes["root"],
 			Version:            0,
 			Expires:            DefaultExpires("root"),
-			Keys:               keys,
+			Keys:               make(map[string]*TUFKey),
 			Roles:              roles,
 			ConsistentSnapshot: consistent,
 		},
 		Dirty: true,
-	}, nil
+	}
+
+	// Convert PublicKeys to TUFKey structures
+	// The Signed.Keys map needs to have *TUFKey values, since this
+	// structure gets directly unmarshalled from JSON, and it's not
+	// possible to unmarshal into an interface type. But this function
+	// takes a map with PublicKey values to avoid exposing this ugliness.
+	// The loop below converts to the TUFKey type.
+	for k, v := range keys {
+		signedRoot.Signed.Keys[k] = &TUFKey{
+			Type: v.Algorithm(),
+			Value: KeyPair{
+				Public:  v.Public(),
+				Private: nil,
+			},
+		}
+	}
+
+	return signedRoot, nil
 }
 
 func (r SignedRoot) ToSigned() (*Signed, error) {

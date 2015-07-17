@@ -124,7 +124,7 @@ func (km *KeyStoreManager) AddTrustedCACert(cert *x509.Certificate) {
 // TODO(diogo): show not create keys manually, should use a cryptoservice instead
 func (km *KeyStoreManager) GenRootKey(algorithm, passphrase string) (string, error) {
 	var err error
-	var privKey *data.PrivateKey
+	var privKey data.PrivateKey
 
 	// We don't want external API callers to rely on internal TUF data types, so
 	// the API here should continue to receive a string algorithm, and ensure
@@ -196,7 +196,7 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, dnsName string) error
 		return err
 	}
 
-	certs := make(map[string]*data.PublicKey)
+	certs := make(map[string]data.PublicKey)
 	for _, keyID := range rootSigned.Roles["root"].KeyIDs {
 		// TODO(dlaw): currently assuming only one cert contained in
 		// public key entry. Need to fix when we want to pass in chains.

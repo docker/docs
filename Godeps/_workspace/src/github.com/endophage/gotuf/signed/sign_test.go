@@ -27,13 +27,13 @@ func (mts *MockCryptoService) Sign(keyIDs []string, _ []byte) ([]data.Signature,
 	return sigs, nil
 }
 
-func (mts *MockCryptoService) Create(_ string, _ data.KeyAlgorithm) (data.Key, error) {
-	return &mts.testKey, nil
+func (mts *MockCryptoService) Create(_ string, _ data.KeyAlgorithm) (data.PublicKey, error) {
+	return mts.testKey, nil
 }
 
-func (mts *MockCryptoService) GetKey(keyID string) data.Key {
+func (mts *MockCryptoService) GetKey(keyID string) data.PublicKey {
 	if keyID == "testID" {
-		return &mts.testKey
+		return mts.testKey
 	}
 	return nil
 }
@@ -48,7 +48,7 @@ var _ CryptoService = &MockCryptoService{}
 func TestBasicSign(t *testing.T) {
 	testKey, _ := pem.Decode([]byte(testKeyPEM1))
 	k := data.NewPublicKey(data.RSAKey, testKey.Bytes)
-	mockCryptoService := &MockCryptoService{testKey: *k}
+	mockCryptoService := &MockCryptoService{testKey: k}
 	key, err := mockCryptoService.Create("root", data.ED25519Key)
 	if err != nil {
 		t.Fatal(err)
@@ -73,7 +73,7 @@ func TestBasicSign(t *testing.T) {
 func TestReSign(t *testing.T) {
 	testKey, _ := pem.Decode([]byte(testKeyPEM1))
 	k := data.NewPublicKey(data.RSAKey, testKey.Bytes)
-	mockCryptoService := &MockCryptoService{testKey: *k}
+	mockCryptoService := &MockCryptoService{testKey: k}
 	testData := data.Signed{}
 
 	Sign(mockCryptoService, &testData, k)
@@ -117,7 +117,7 @@ func TestMultiSign(t *testing.T) {
 func TestCreate(t *testing.T) {
 	testKey, _ := pem.Decode([]byte(testKeyPEM1))
 	k := data.NewPublicKey(data.RSAKey, testKey.Bytes)
-	mockCryptoService := &MockCryptoService{testKey: *k}
+	mockCryptoService := &MockCryptoService{testKey: k}
 
 	key, err := mockCryptoService.Create("root", data.ED25519Key)
 

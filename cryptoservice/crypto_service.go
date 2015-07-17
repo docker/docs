@@ -34,8 +34,8 @@ func NewCryptoService(gun string, keyStore trustmanager.KeyStore, passphrase str
 }
 
 // Create is used to generate keys for targets, snapshots and timestamps
-func (ccs *CryptoService) Create(role string, algorithm data.KeyAlgorithm) (data.Key, error) {
-	var privKey *data.PrivateKey
+func (ccs *CryptoService) Create(role string, algorithm data.KeyAlgorithm) (data.PublicKey, error) {
+	var privKey data.PrivateKey
 	var err error
 
 	switch algorithm {
@@ -68,7 +68,7 @@ func (ccs *CryptoService) Create(role string, algorithm data.KeyAlgorithm) (data
 }
 
 // GetKey returns a key by ID
-func (ccs *CryptoService) GetKey(keyID string) data.Key {
+func (ccs *CryptoService) GetKey(keyID string) data.PublicKey {
 	key, err := ccs.keyStore.GetKey(keyID)
 	if err != nil {
 		return nil
@@ -90,7 +90,7 @@ func (ccs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signatur
 		// ccs.gun will be empty if this is the root key
 		keyName := filepath.Join(ccs.gun, keyid)
 
-		var privKey *data.PrivateKey
+		var privKey data.PrivateKey
 		var err error
 
 		// Read PrivateKey from file and decrypt it if there is a passphrase.
@@ -142,7 +142,7 @@ func (ccs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signatur
 	return signatures, nil
 }
 
-func rsaSign(privKey *data.PrivateKey, message []byte) ([]byte, error) {
+func rsaSign(privKey data.PrivateKey, message []byte) ([]byte, error) {
 	if privKey.Algorithm() != data.RSAKey {
 		return nil, fmt.Errorf("private key type not supported: %s", privKey.Algorithm())
 	}
@@ -164,7 +164,7 @@ func rsaSign(privKey *data.PrivateKey, message []byte) ([]byte, error) {
 	return sig, nil
 }
 
-func ecdsaSign(privKey *data.PrivateKey, message []byte) ([]byte, error) {
+func ecdsaSign(privKey data.PrivateKey, message []byte) ([]byte, error) {
 	if privKey.Algorithm() != data.ECDSAKey {
 		return nil, fmt.Errorf("private key type not supported: %s", privKey.Algorithm())
 	}
@@ -196,7 +196,7 @@ func ecdsaSign(privKey *data.PrivateKey, message []byte) ([]byte, error) {
 	return append(rBuf, sBuf...), nil
 }
 
-func ed25519Sign(privKey *data.PrivateKey, message []byte) ([]byte, error) {
+func ed25519Sign(privKey data.PrivateKey, message []byte) ([]byte, error) {
 	if privKey.Algorithm() != data.ED25519Key {
 		return nil, fmt.Errorf("private key type not supported: %s", privKey.Algorithm())
 	}

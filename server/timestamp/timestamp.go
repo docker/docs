@@ -17,10 +17,10 @@ import (
 // found. It attempts to handle the race condition that may occur if 2 servers try to
 // create the key at the same time by simply querying the store a second time if it
 // receives a conflict when writing.
-func GetOrCreateTimestampKey(gun string, store storage.MetaStore, crypto signed.CryptoService, fallBackAlgorithm data.KeyAlgorithm) (*data.TUFKey, error) {
+func GetOrCreateTimestampKey(gun string, store storage.MetaStore, crypto signed.CryptoService, fallBackAlgorithm data.KeyAlgorithm) (data.PublicKey, error) {
 	keyAlgorithm, public, err := store.GetTimestampKey(gun)
 	if err == nil {
-		return data.NewTUFKey(keyAlgorithm, public, nil), nil
+		return data.NewPublicKey(keyAlgorithm, public), nil
 	}
 
 	if _, ok := err.(*storage.ErrNoKey); ok {
@@ -30,7 +30,7 @@ func GetOrCreateTimestampKey(gun string, store storage.MetaStore, crypto signed.
 		}
 		err = store.SetTimestampKey(gun, key.Algorithm(), key.Public())
 		if err == nil {
-			return data.NewTUFKey(key.Algorithm(), key.Public(), key.Private()), nil
+			return key, nil
 		}
 
 		if _, ok := err.(*storage.ErrTimestampKeyExists); ok {
@@ -38,7 +38,7 @@ func GetOrCreateTimestampKey(gun string, store storage.MetaStore, crypto signed.
 			if err != nil {
 				return nil, err
 			}
-			return data.NewTUFKey(keyAlgorithm, public, nil), nil
+			return data.NewPublicKey(keyAlgorithm, public), nil
 		}
 		return nil, err
 	}

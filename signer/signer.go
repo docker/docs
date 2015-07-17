@@ -34,14 +34,3 @@ type KeyManager interface {
 type Signer interface {
 	Sign(request *pb.SignatureRequest) (*pb.Signature, error)
 }
-
-// KeyDatabase is the interface that allows the implementation of multiple database backends
-type KeyDatabase interface {
-	KeyManager
-
-	// GetKey returns the private key to do signing operations
-	GetKey(keyID *pb.KeyID) (data.Key, error)
-
-	// AddKey allows the direct addition and removal of keys from the database
-	AddKey(key data.Key) error
-}

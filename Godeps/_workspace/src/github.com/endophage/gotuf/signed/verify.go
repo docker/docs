@@ -28,7 +28,7 @@ type signedMeta struct {
 }
 
 // VerifyRoot checks if a given root file is valid against a known set of keys.
-func VerifyRoot(s *data.Signed, minVersion int, keys map[string]*data.PublicKey, threshold int) ([]*data.PublicKey, error) {
+func VerifyRoot(s *data.Signed, minVersion int, keys map[string]data.PublicKey, threshold int) (data.PublicKey, error) {
 	if len(s.Signatures) == 0 {
 		return nil, ErrNoSignatures
 	}
@@ -57,7 +57,6 @@ func VerifyRoot(s *data.Signed, minVersion int, keys map[string]*data.PublicKey,
 			continue
 		}
 		valid[sig.KeyID] = struct{}{}
-
 	}
 	if len(valid) < threshold {
 		return nil, ErrRoleThreshold

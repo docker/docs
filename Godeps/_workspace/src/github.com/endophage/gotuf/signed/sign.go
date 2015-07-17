@@ -7,7 +7,7 @@ import (
 
 // Sign takes a data.Signed and a key, calculated and adds the signature
 // to the data.Signed
-func Sign(service CryptoService, s *data.Signed, keys ...data.Key) error {
+func Sign(service CryptoService, s *data.Signed, keys ...data.PublicKey) error {
 	logrus.Debugf("sign called with %d keys", len(keys))
 	signatures := make([]data.Signature, 0, len(s.Signatures)+1)
 	keyIDMemb := make(map[string]struct{})
