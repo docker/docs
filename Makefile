@@ -13,7 +13,7 @@ COVERPROFILE=$(COVERDIR)/cover.out
 COVERMODE=count
 PKGS = $(shell go list ./... | tr '\n' ' ')
 
-.PHONY: clean all fmt vet lint build test binaries cross
+.PHONY: clean all fmt vet lint build test binaries cross cover
 .DELETE_ON_ERROR: cover
 .DEFAULT: default
 
@@ -71,7 +71,7 @@ define gocover
 go test -covermode="$(COVERMODE)" -coverprofile="$(COVERDIR)/$(subst /,-,$(1)).cover" "$(1)";
 endef
 
-cover: .cover
+cover:
 	@mkdir -p "$(COVERDIR)"
 	$(foreach PKG,$(PKGS),$(call gocover,$(PKG)))
 	@echo "mode: $(COVERMODE)" > "$(COVERPROFILE)"
