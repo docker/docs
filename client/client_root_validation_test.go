@@ -3,7 +3,6 @@ package client
 import (
 	"bytes"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"html/template"
 	"io/ioutil"
@@ -125,7 +124,7 @@ func validateRootSuccessfully(t *testing.T, rootType data.KeyAlgorithm) {
 	assert.Len(t, repo.KeyStoreManager.TrustedCertificateStore().GetCertificates(), 1)
 
 	//
-	// Test certificate mismatch logic. We remove all certs, and a different cert to the
+	// Test certificate mismatch logic. We remove all certs, add a different cert to the
 	// same CN, and expect ValidateRoot to fail
 	//
 
@@ -142,7 +141,7 @@ func validateRootSuccessfully(t *testing.T, rootType data.KeyAlgorithm) {
 	// in the store for the dnsName docker.com/notary, so TOFUS doesn't apply
 	_, err = repo.ListTargets()
 	if assert.Error(t, err, "An error was expected") {
-		assert.Equal(t, err, keystoremanager.ErrValidationFail)
+		assert.Equal(t, err, &keystoremanager.ErrValidationFail{Reason: "failed to validate integrity of roots"})
 	}
 
 	//
@@ -187,7 +186,7 @@ func validateRootSuccessfully(t *testing.T, rootType data.KeyAlgorithm) {
 	//
 	err = repo.KeyStoreManager.ValidateRoot(&testSignedRoot, "secure.example.com")
 	if assert.Error(t, err, "An error was expected") {
-		assert.Equal(t, err, errors.New("tuf: valid signatures did not meet threshold"))
+		assert.Equal(t, err, &keystoremanager.ErrValidationFail{Reason: "failed to validate integrity of roots"})
 	}
 }
 
@@ -224,7 +223,7 @@ func TestValidateRootWithInvalidData(t *testing.T) {
 	//
 	err = keyStoreManager.ValidateRoot(&testSignedRoot, "diogomonica.com/notary")
 	if assert.Error(t, err, "An error was expected") {
-		assert.Equal(t, err, keystoremanager.ErrValidationFail)
+		assert.Equal(t, err, &keystoremanager.ErrValidationFail{Reason: "unable to retrieve valid leaf certificates"})
 	}
 
 	//
@@ -252,7 +251,7 @@ func TestValidateRootWithInvalidData(t *testing.T) {
 
 	err = keyStoreManager.ValidateRoot(&testSignedRoot, "docker.com/notary")
 	if assert.Error(t, err, "An error was expected") {
-		assert.Equal(t, err, keystoremanager.ErrValidationFail)
+		assert.Equal(t, err, &keystoremanager.ErrValidationFail{Reason: "unable to retrieve valid leaf certificates"})
 	}
 
 	//
@@ -268,6 +267,6 @@ func TestValidateRootWithInvalidData(t *testing.T) {
 
 	err = keyStoreManager.ValidateRoot(&testSignedRoot, "docker.com/notary")
 	if assert.Error(t, err, "An error was expected") {
-		assert.Equal(t, err, keystoremanager.ErrValidationFail)
+		assert.Equal(t, err, &keystoremanager.ErrValidationFail{Reason: "unable to retrieve valid leaf certificates"})
 	}
 }
