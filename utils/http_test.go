@@ -1,30 +1,24 @@
 package utils
 
 import (
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"strings"
 	"testing"
 
-	"golang.org/x/net/context"
-
 	"github.com/endophage/gotuf/signed"
+	"golang.org/x/net/context"
 
 	"github.com/docker/notary/errors"
 )
 
-func MockContextHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
+func MockContextHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
 	return nil
 }
 
-func MockBetterErrorHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
-	return &errors.HTTPError{
-		HTTPStatus: http.StatusInternalServerError,
-		Code:       9999,
-		Err:        fmt.Errorf("TestError"),
-	}
+func MockBetterErrorHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
+	return errors.ErrUnknown.WithDetail("Test Error")
 }
 
 func TestRootHandlerFactory(t *testing.T) {
@@ -78,7 +72,7 @@ func TestRootHandlerError(t *testing.T) {
 		t.Fatal(err)
 	}
 	contentStr := strings.Trim(string(content), "\r\n\t ")
-	if contentStr != "9999: TestError" {
+	if strings.TrimSpace(contentStr) != `{"errors":[{"code":"UNKNOWN","message":"unknown error","detail":"Test Error"}]}` {
 		t.Fatalf("Error Body Incorrect: `%s`", content)
 	}
 }

@@ -4,17 +4,16 @@ import (
 	"net/http"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/docker/distribution/registry/api/errcode"
 	"github.com/docker/distribution/registry/auth"
 	"github.com/endophage/gotuf/signed"
 	"github.com/gorilla/mux"
 	"golang.org/x/net/context"
-
-	"github.com/docker/notary/errors"
 )
 
 // contextHandler defines an alterate HTTP handler interface which takes in
 // a context for authorization and returns an HTTP application error.
-type contextHandler func(ctx context.Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError
+type contextHandler func(ctx context.Context, w http.ResponseWriter, r *http.Request) error
 
 // rootHandler is an implementation of an HTTP request handler which handles
 // authorization and calling out to the defined alternate http handler.
@@ -67,7 +66,10 @@ func (root *rootHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 	if err := root.handler(ctx, w, r); err != nil {
 		logrus.Error("[Notary Server] ", err.Error())
-		http.Error(w, err.Error(), err.HTTPStatus)
+		e := errcode.ServeJSON(w, err)
+		if e != nil {
+			logrus.Error(e)
+		}
 		return
 	}
 	return

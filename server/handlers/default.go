@@ -3,9 +3,7 @@ package handlers
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"strings"
 
@@ -21,56 +19,32 @@ import (
 )
 
 // MainHandler is the default handler for the server
-func MainHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
+func MainHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
 	if r.Method == "GET" {
 		_, err := w.Write([]byte("{}"))
 		if err != nil {
-			return &errors.HTTPError{
-				HTTPStatus: http.StatusInternalServerError,
-				Code:       9999,
-				Err:        err,
-			}
+			return errors.ErrUnknown.WithDetail(err)
 		}
 	} else {
-		//w.WriteHeader(http.StatusNotFound)
-		return &errors.HTTPError{
-			HTTPStatus: http.StatusNotFound,
-			Code:       9999,
-			Err:        nil,
-		}
+		return errors.ErrGenericNotFound.WithDetail(nil)
 	}
 	return nil
 }
 
 // AtomicUpdateHandler will accept multiple TUF files and ensure that the storage
 // backend is atomically updated with all the new records.
-func AtomicUpdateHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
+func AtomicUpdateHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
 	defer r.Body.Close()
 	s := ctx.Value("metaStore")
-	if s == nil {
-		return &errors.HTTPError{
-			HTTPStatus: http.StatusInternalServerError,
-			Code:       9999,
-			Err:        fmt.Errorf("Version store is nil"),
-		}
-	}
 	store, ok := s.(storage.MetaStore)
 	if !ok {
-		return &errors.HTTPError{
-			HTTPStatus: http.StatusInternalServerError,
-			Code:       9999,
-			Err:        fmt.Errorf("Version store not configured"),
-		}
+		return errors.ErrNoStorage.WithDetail(nil)
 	}
 	vars := mux.Vars(r)
 	gun := vars["imageName"]
 	reader, err := r.MultipartReader()
 	if err != nil {
-		return &errors.HTTPError{
-			HTTPStatus: http.StatusBadRequest,
-			Code:       9999,
-			Err:        err,
-		}
+		return errors.ErrMalformedUpload.WithDetail(nil)
 	}
 	var updates []storage.MetaUpdate
 	for {
@@ -80,17 +54,9 @@ func AtomicUpdateHandler(ctx context.Context, w http.ResponseWriter, r *http.Req
 		}
 		role := strings.TrimSuffix(part.FileName(), ".json")
 		if role == "" {
-			return &errors.HTTPError{
-				HTTPStatus: http.StatusBadRequest,
-				Code:       9999,
-				Err:        fmt.Errorf("Empty filename provided. No updates performed"),
-			}
+			return errors.ErrNoFilename.WithDetail(nil)
 		} else if !data.ValidRole(role) {
-			return &errors.HTTPError{
-				HTTPStatus: http.StatusBadRequest,
-				Code:       9999,
-				Err:        fmt.Errorf("Invalid role: %s. No updates performed", role),
-			}
+			return errors.ErrInvalidRole.WithDetail(role)
 		}
 		meta := &data.SignedTargets{}
 		var input []byte
@@ -98,11 +64,7 @@ func AtomicUpdateHandler(ctx context.Context, w http.ResponseWriter, r *http.Req
 		dec := json.NewDecoder(io.TeeReader(part, inBuf))
 		err = dec.Decode(meta)
 		if err != nil {
-			return &errors.HTTPError{
-				HTTPStatus: http.StatusBadRequest,
-				Code:       9999,
-				Err:        err,
-			}
+			return errors.ErrMalformedJSON.WithDetail(nil)
 		}
 		version := meta.Signed.Version
 		updates = append(updates, storage.MetaUpdate{
@@ -113,80 +75,17 @@ func AtomicUpdateHandler(ctx context.Context, w http.ResponseWriter, r *http.Req
 	}
 	err = store.UpdateMany(gun, updates)
 	if err != nil {
-		return &errors.HTTPError{
-			HTTPStatus: http.StatusInternalServerError,
-			Code:       9999,
-			Err:        err,
-		}
-	}
-	return nil
-}
-
-// UpdateHandler adds the provided json data for the role and GUN specified in the URL
-func UpdateHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
-	defer r.Body.Close()
-	s := ctx.Value("metaStore")
-	if s == nil {
-		return &errors.HTTPError{
-			HTTPStatus: http.StatusInternalServerError,
-			Code:       9999,
-			Err:        fmt.Errorf("Version store is nil"),
-		}
-	}
-	store, ok := s.(storage.MetaStore)
-	if !ok {
-		return &errors.HTTPError{
-			HTTPStatus: http.StatusInternalServerError,
-			Code:       9999,
-			Err:        fmt.Errorf("Version store not configured"),
-		}
-	}
-	vars := mux.Vars(r)
-	gun := vars["imageName"]
-	tufRole := vars["tufRole"]
-	input, err := ioutil.ReadAll(r.Body)
-	if err != nil {
-		return &errors.HTTPError{
-			HTTPStatus: http.StatusBadRequest,
-			Code:       9999,
-			Err:        err,
-		}
-	}
-	meta := &data.SignedTargets{}
-	err = json.Unmarshal(input, meta)
-	if err != nil {
-		return &errors.HTTPError{
-			HTTPStatus: http.StatusBadRequest,
-			Code:       9999,
-			Err:        err,
-		}
-	}
-	update := storage.MetaUpdate{
-		Role:    tufRole,
-		Version: meta.Signed.Version,
-		Data:    input,
-	}
-	err = store.UpdateCurrent(gun, update)
-	if err != nil {
-		return &errors.HTTPError{
-			HTTPStatus: http.StatusInternalServerError,
-			Code:       9999,
-			Err:        err,
-		}
+		return errors.ErrUpdating.WithDetail(err)
 	}
 	return nil
 }
 
 // GetHandler returns the json for a specified role and GUN.
-func GetHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
+func GetHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
 	s := ctx.Value("metaStore")
 	store, ok := s.(storage.MetaStore)
 	if !ok {
-		return &errors.HTTPError{
-			HTTPStatus: http.StatusInternalServerError,
-			Code:       9999,
-			Err:        fmt.Errorf("Version store not configured"),
-		}
+		return errors.ErrNoStorage.WithDetail(nil)
 	}
 	vars := mux.Vars(r)
 	gun := vars["imageName"]
@@ -194,26 +93,14 @@ func GetHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *er
 	out, err := store.GetCurrent(gun, tufRole)
 	if err != nil {
 		if _, ok := err.(*storage.ErrNotFound); ok {
-			return &errors.HTTPError{
-				HTTPStatus: http.StatusNotFound,
-				Code:       9999,
-				Err:        err,
-			}
+			return errors.ErrMetadataNotFound.WithDetail(nil)
 		}
 		logrus.Errorf("[Notary Server] 500 GET repository: %s, role: %s", gun, tufRole)
-		return &errors.HTTPError{
-			HTTPStatus: http.StatusInternalServerError,
-			Code:       9999,
-			Err:        err,
-		}
+		return errors.ErrUnknown.WithDetail(err)
 	}
 	if out == nil {
 		logrus.Errorf("[Notary Server] 404 GET repository: %s, role: %s", gun, tufRole)
-		return &errors.HTTPError{
-			HTTPStatus: http.StatusNotFound,
-			Code:       9999,
-			Err:        err,
-		}
+		return errors.ErrMetadataNotFound.WithDetail(nil)
 	}
 	logrus.Debug("Writing data")
 	w.Write(out)
@@ -221,49 +108,33 @@ func GetHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *er
 }
 
 // DeleteHandler deletes all data for a GUN. A 200 responses indicates success.
-func DeleteHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
+func DeleteHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
 	s := ctx.Value("metaStore")
 	store, ok := s.(storage.MetaStore)
 	if !ok {
-		return &errors.HTTPError{
-			HTTPStatus: http.StatusInternalServerError,
-			Code:       9999,
-			Err:        fmt.Errorf("Version store not configured"),
-		}
+		return errors.ErrNoStorage.WithDetail(nil)
 	}
 	vars := mux.Vars(r)
 	gun := vars["imageName"]
 	err := store.Delete(gun)
 	if err != nil {
 		logrus.Errorf("[Notary Server] 500 DELETE repository: %s", gun)
-		return &errors.HTTPError{
-			HTTPStatus: http.StatusInternalServerError,
-			Code:       9999,
-			Err:        err,
-		}
+		return errors.ErrUnknown.WithDetail(err)
 	}
 	return nil
 }
 
 // GetTimestampHandler returns a timestamp.json given a GUN
-func GetTimestampHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
+func GetTimestampHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
 	s := ctx.Value("metaStore")
 	store, ok := s.(storage.MetaStore)
 	if !ok {
-		return &errors.HTTPError{
-			HTTPStatus: http.StatusInternalServerError,
-			Code:       9999,
-			Err:        fmt.Errorf("Version store not configured"),
-		}
+		return errors.ErrNoStorage.WithDetail(nil)
 	}
 	cryptoServiceVal := ctx.Value("cryptoService")
 	cryptoService, ok := cryptoServiceVal.(signed.CryptoService)
 	if !ok {
-		return &errors.HTTPError{
-			HTTPStatus: http.StatusInternalServerError,
-			Code:       9999,
-			Err:        fmt.Errorf("CryptoService not configured"),
-		}
+		return errors.ErrNoCryptoService.WithDetail(nil)
 	}
 
 	vars := mux.Vars(r)
@@ -272,17 +143,9 @@ func GetTimestampHandler(ctx context.Context, w http.ResponseWriter, r *http.Req
 	out, err := timestamp.GetOrCreateTimestamp(gun, store, cryptoService)
 	if err != nil {
 		if _, ok := err.(*storage.ErrNoKey); ok {
-			return &errors.HTTPError{
-				HTTPStatus: http.StatusNotFound,
-				Code:       9999,
-				Err:        err,
-			}
+			return errors.ErrMetadataNotFound.WithDetail(nil)
 		}
-		return &errors.HTTPError{
-			HTTPStatus: http.StatusInternalServerError,
-			Code:       9999,
-			Err:        err,
-		}
+		return errors.ErrUnknown.WithDetail(err)
 	}
 
 	logrus.Debug("Writing data")
@@ -292,24 +155,16 @@ func GetTimestampHandler(ctx context.Context, w http.ResponseWriter, r *http.Req
 
 // GetTimestampKeyHandler returns a timestamp public key, creating a new key-pair
 // it if it doesn't yet exist
-func GetTimestampKeyHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) *errors.HTTPError {
+func GetTimestampKeyHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
 	s := ctx.Value("metaStore")
 	store, ok := s.(storage.MetaStore)
 	if !ok {
-		return &errors.HTTPError{
-			HTTPStatus: http.StatusInternalServerError,
-			Code:       9999,
-			Err:        fmt.Errorf("Version store not configured"),
-		}
+		return errors.ErrNoStorage.WithDetail(nil)
 	}
 	c := ctx.Value("cryptoService")
 	crypto, ok := c.(signed.CryptoService)
 	if !ok {
-		return &errors.HTTPError{
-			HTTPStatus: http.StatusInternalServerError,
-			Code:       9999,
-			Err:        fmt.Errorf("CryptoService not configured"),
-		}
+		return errors.ErrNoCryptoService.WithDetail(nil)
 	}
 
 	vars := mux.Vars(r)
@@ -317,20 +172,12 @@ func GetTimestampKeyHandler(ctx context.Context, w http.ResponseWriter, r *http.
 
 	key, err := timestamp.GetOrCreateTimestampKey(gun, store, crypto, data.ED25519Key)
 	if err != nil {
-		return &errors.HTTPError{
-			HTTPStatus: http.StatusInternalServerError,
-			Code:       9999,
-			Err:        err,
-		}
+		return errors.ErrUnknown.WithDetail(err)
 	}
 
 	out, err := json.Marshal(key)
 	if err != nil {
-		return &errors.HTTPError{
-			HTTPStatus: http.StatusInternalServerError,
-			Code:       9999,
-			Err:        fmt.Errorf("Error serializing key."),
-		}
+		return errors.ErrUnknown.WithDetail(err)
 	}
 	w.Write(out)
 	return nil
