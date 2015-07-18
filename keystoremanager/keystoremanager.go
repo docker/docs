@@ -163,7 +163,7 @@ func (km *KeyStoreManager) GenRootKey(algorithm string) (string, error) {
 	}
 
 	// Changing the root
-	km.rootKeyStore.AddKey(privKey.ID(), privKey)
+	km.rootKeyStore.AddKey(privKey.ID(), "root", privKey)
 
 	return privKey.ID(), nil
 }

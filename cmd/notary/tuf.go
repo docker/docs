@@ -16,10 +16,17 @@ import (
 	notaryclient "github.com/docker/notary/client"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	"github.com/docker/notary/trustmanager"
 )
 
 // FIXME: This should not be hardcoded
 const hardcodedBaseURL = "https://notary-server:4443"
+
+var retriever trustmanager.PassphraseRetriever
+
+func init() {
+	retriever = getNotaryPassphraseRetriever()
+}
 
 var remoteTrustServer string
 
@@ -83,7 +90,7 @@ func tufAdd(cmd *cobra.Command, args []string) {
 	targetPath := args[2]
 
 	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL,
-		getInsecureTransport(), passphraseRetriever)
+		getInsecureTransport(), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -108,7 +115,7 @@ func tufInit(cmd *cobra.Command, args []string) {
 	gun := args[0]
 
 	nRepo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL,
-		getInsecureTransport(), passphraseRetriever)
+		getInsecureTransport(), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -144,7 +151,7 @@ func tufList(cmd *cobra.Command, args []string) {
 	}
 	gun := args[0]
 	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL,
-		getInsecureTransport(), passphraseRetriever)
+		getInsecureTransport(), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -170,7 +177,7 @@ func tufLookup(cmd *cobra.Command, args []string) {
 	targetName := args[1]
 
 	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL,
-		getInsecureTransport(), passphraseRetriever)
+		getInsecureTransport(), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -195,12 +202,12 @@ func tufPublish(cmd *cobra.Command, args []string) {
 	fmt.Println("Pushing changes to ", gun, ".")
 
 	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL,
-		getInsecureTransport(), passphraseRetriever)
+		getInsecureTransport(), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
 
-	err = repo.Publish(passphraseRetriever)
+	err = repo.Publish(retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -241,7 +248,7 @@ func verify(cmd *cobra.Command, args []string) {
 	gun := args[0]
 	targetName := args[1]
 	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL,
-		getInsecureTransport(), passphraseRetriever)
+		getInsecureTransport(), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -265,51 +272,82 @@ func verify(cmd *cobra.Command, args []string) {
 	return
 }
 
-func passphraseRetriever(keyName string, createNew bool, numAttempts int) (string, bool, error) {
-	fmt.Printf("Retrieving passphrase for key %s: ", keyName)
+func getNotaryPassphraseRetriever() (trustmanager.PassphraseRetriever) {
+	userEnteredTargetsSnapshotsPass := false
+	targetsSnapshotsPass := ""
 
-	if (numAttempts > 3 && !createNew) {
-		return "", true, errors.New("Too many attempts")
+	return func(keyID string, alias string, createNew bool, numAttempts int) (string, bool, error) {
+		fmt.Printf("userEnteredTargetsSnapshotsPass: %s\n", userEnteredTargetsSnapshotsPass)
+		fmt.Printf("targetsSnapshotsPass: %s\n", targetsSnapshotsPass)
+		fmt.Printf("keyID: %s\n", keyID)
+		fmt.Printf("alias: %s\n", alias)
+		fmt.Printf("numAttempts: %s\n", numAttempts)
+
+		if numAttempts == 0 && userEnteredTargetsSnapshotsPass && (alias == "snapshot" || alias == "targets") {
+			fmt.Println("return cached value")
+
+			return targetsSnapshotsPass, false, nil;
+		}
+		if (numAttempts > 3 && !createNew) {
+			return "", true, errors.New("Too many attempts")
+		}
+
+		state, err := term.SaveState(0)
+		if err != nil {
+			return "", false, err
+		}
+		term.DisableEcho(0, state)
+		defer term.RestoreTerminal(0, state)
+
+		stdin := bufio.NewReader(os.Stdin)
+
+		if createNew {
+			fmt.Printf("Enter passphrase for new %s key with id %s: ", alias, keyID)
+		}else {
+			fmt.Printf("Enter key passphrase for %s key with id %s: ", alias, keyID)
+		}
+
+		passphrase, err := stdin.ReadBytes('\n')
+		fmt.Println()
+		if err != nil {
+			return "", false, err
+		}
+		passphrase = passphrase[0 : len(passphrase)-1]
+
+		if !createNew {
+			retPass := string(passphrase)
+			if alias == "snapshot" || alias == "targets" {
+				userEnteredTargetsSnapshotsPass = true
+				targetsSnapshotsPass = retPass
+			}
+			return string(passphrase), false, nil;
+		}
+
+		if len(passphrase) < 8 {
+			fmt.Println("Please use a password manager to generate and store a good random passphrase.")
+			return "", false, errors.New("Passphrase too short")
+		}
+
+		fmt.Printf("Repeat passphrase for new %s key with id %s:: ", alias, keyID)
+		confirmation, err := stdin.ReadBytes('\n')
+		fmt.Println()
+		if err != nil {
+			return "", false, err
+		}
+		confirmation = confirmation[0 : len(confirmation)-1]
+
+		if !bytes.Equal(passphrase, confirmation) {
+			return "", false, errors.New("The entered passphrases do not match")
+		}
+		retPass := string(passphrase)
+
+		if alias == "snapshots" || alias == "targets" {
+			userEnteredTargetsSnapshotsPass = true
+			targetsSnapshotsPass = retPass
+		}
+
+		return retPass, false, nil
 	}
-
-	state, err := term.SaveState(0)
-	if err != nil {
-		return "", false, err
-	}
-	term.DisableEcho(0, state)
-	defer term.RestoreTerminal(0, state)
-
-	stdin := bufio.NewReader(os.Stdin)
-
-	fmt.Printf("Enter %s key passphrase: ", keyName)
-	passphrase, err := stdin.ReadBytes('\n')
-	fmt.Println()
-	if err != nil {
-		return "", false, err
-	}
-	passphrase = passphrase[0 : len(passphrase)-1]
-
-	if !createNew {
-		return string(passphrase), false, nil;
-	}
-
-	if len(passphrase) < 8 {
-		fmt.Println("Please use a password manager to generate and store a good random passphrase.")
-		return "", false, errors.New("Passphrase too short")
-	}
-
-	fmt.Printf("Repeat %s key passphrase: ", keyName)
-	confirmation, err := stdin.ReadBytes('\n')
-	fmt.Println()
-	if err != nil {
-		return "", false, err
-	}
-	confirmation = confirmation[0 : len(confirmation)-1]
-
-	if !bytes.Equal(passphrase, confirmation) {
-		return "", false, errors.New("The entered passphrases do not match")
-	}
-	return string(passphrase), false, nil
 }
 
 func getInsecureTransport() *http.Transport {

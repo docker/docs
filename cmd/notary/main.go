@@ -89,7 +89,7 @@ func init() {
 
 	//TODO(mccauley): Appears unused? Remove it? Or is it here for early failure?
 	privKeyStore, err = trustmanager.NewKeyFileStore(finalPrivDir,
-		func (string, bool, int) (string, bool, error) { return "", false, nil})
+		func (string, string, bool, int) (string, bool, error) { return "", false, nil})
 	if err != nil {
 		fatalf("could not create KeyFileStore: %v", err)
 	}

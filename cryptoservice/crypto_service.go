@@ -58,8 +58,8 @@ func (ccs *CryptoService) Create(role string, algorithm data.KeyAlgorithm) (data
 	}
 	logrus.Debugf("generated new %s key for role: %s and keyID: %s", algorithm, role, privKey.ID())
 
-	// Store the private key into our keystore with the name being: /GUN/ID.key
-	err = ccs.keyStore.AddKey(filepath.Join(ccs.gun, privKey.ID()), privKey)
+	// Store the private key into our keystore with the name being: /GUN/ID.key with an alias of role
+	err = ccs.keyStore.AddKey(filepath.Join(ccs.gun, privKey.ID()), role, privKey)
 	if err != nil {
 		return nil, fmt.Errorf("failed to add key to filestore: %v", err)
 	}

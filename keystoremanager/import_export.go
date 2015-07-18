@@ -34,6 +34,10 @@ var (
 	ErrNoKeysFoundForGUN = errors.New("no keys found for specified GUN")
 )
 
+const (
+	aliasSuffix = ".alias"
+)
+
 // ExportRootKey exports the specified root key to an io.Writer in PEM format.
 // The key's existing encryption is preserved.
 func (km *KeyStoreManager) ExportRootKey(dest io.Writer, keyID string) error {
@@ -89,29 +93,17 @@ func moveKeys(oldKeyStore, newKeyStore *trustmanager.KeyFileStore) error {
 		relKeyPath := strings.TrimPrefix(fullKeyPath, oldKeyStore.BaseDir())
 		relKeyPath = strings.TrimPrefix(relKeyPath, string(filepath.Separator))
 
-		pemBytes, err := oldKeyStore.Get(relKeyPath)
+		pemBytes, err := oldKeyStore.GetKey(relKeyPath)
 		if err != nil {
 			return err
 		}
 
-		block, _ := pem.Decode(pemBytes)
-		if block == nil {
-			return ErrNoValidPrivateKey
+		alias, err := oldKeyStore.GetKeyAlias(relKeyPath)
+		if err != nil {
+			return err
 		}
 
-		if !x509.IsEncryptedPEMBlock(block) {
-			// Key is not encrypted. Parse it, and add it
-			// to the temporary store as an encrypted key.
-			privKey, err := trustmanager.ParsePEMPrivateKey(pemBytes, "")
-			if err != nil {
-				return err
-			}
-			err = newKeyStore.AddKey(relKeyPath, privKey)
-		} else {
-			// Encrypted key - pass it through without
-			// decrypting
-			err = newKeyStore.Add(relKeyPath, pemBytes)
-		}
+		err = newKeyStore.AddKey(relKeyPath, alias, pemBytes)
 
 		if err != nil {
 			return err
@@ -207,11 +199,13 @@ func (km *KeyStoreManager) ImportKeysZip(zipReader zip.Reader, passphrase string
 	// store in an inconsistent state
 	newRootKeys := make(map[string][]byte)
 	newNonRootKeys := make(map[string]data.PrivateKey)
+	newNonRootKeyAliases := make(map[string]string)
 
 	// Note that using / as a separator is okay here - the zip package
 	// guarantees that the separator will be /
 	rootKeysPrefix := privDir + "/" + rootKeysSubdir + "/"
 	nonRootKeysPrefix := privDir + "/" + nonRootKeysSubdir + "/"
+	aliasSuffix := ".alias"
 
 	// Iterate through the files in the archive. Don't add the keys
 	for _, f := range zipReader.File {
@@ -222,7 +216,7 @@ func (km *KeyStoreManager) ImportKeysZip(zipReader zip.Reader, passphrase string
 			return err
 		}
 
-		pemBytes, err := ioutil.ReadAll(rc)
+		fileBytes, err := ioutil.ReadAll(rc)
 		if err != nil {
 			return nil
 		}
@@ -231,25 +225,29 @@ func (km *KeyStoreManager) ImportKeysZip(zipReader zip.Reader, passphrase string
 		// Note that using / as a separator is okay here - the zip
 		// package guarantees that the separator will be /
 		if strings.HasPrefix(fNameTrimmed, rootKeysPrefix) {
-			if err = checkRootKeyIsEncrypted(pemBytes); err != nil {
+			if err = checkRootKeyIsEncrypted(fileBytes); err != nil {
 				rc.Close()
 				return err
 			}
 			// Root keys are preserved without decrypting
 			keyName := strings.TrimPrefix(fNameTrimmed, rootKeysPrefix)
-			newRootKeys[keyName] = pemBytes
+			newRootKeys[keyName] = fileBytes
 		} else if strings.HasPrefix(fNameTrimmed, nonRootKeysPrefix) {
 			// Non-root keys need to be decrypted
-			key, err := trustmanager.ParsePEMPrivateKey(pemBytes, passphrase)
+			key, err := trustmanager.ParsePEMPrivateKey(fileBytes, passphrase)
 			if err != nil {
 				rc.Close()
 				return err
 			}
 			keyName := strings.TrimPrefix(fNameTrimmed, nonRootKeysPrefix)
 			newNonRootKeys[keyName] = key
+		} else if strings.HasSuffix(fNameTrimmed, aliasSuffix) {
+			// Aliases need to be recorded so they can be reintroduced in the new zip
+			fileName := strings.TrimSuffix(fNameTrimmed, aliasSuffix)
+			newNonRootKeyAliases[fileName] = string(fileBytes)
 		} else {
 			// This path inside the zip archive doesn't look like a
-			// root key or a non-root key. To avoid adding a file
+			// root key, non-root key, or alias. To avoid adding a file
 			// to the filestore that we won't be able to use, skip
 			// this file in the import.
 			logrus.Warnf("skipping import of key with a path that doesn't begin with %s or %s: %s", rootKeysPrefix, nonRootKeysPrefix, f.Name)
@@ -261,13 +259,17 @@ func (km *KeyStoreManager) ImportKeysZip(zipReader zip.Reader, passphrase string
 	}
 
 	for keyName, pemBytes := range newRootKeys {
+		if err := km.rootKeyStore.Add(keyName + "." + aliasSuffix, []byte("root")); err != nil {
+			return err
+		}
 		if err := km.rootKeyStore.Add(keyName, pemBytes); err != nil {
 			return err
 		}
 	}
 
 	for keyName, privKey := range newNonRootKeys {
-		if err := km.nonRootKeyStore.AddKey(keyName, privKey); err != nil {
+		alias := newNonRootKeyAliases[keyName]
+		if err := km.nonRootKeyStore.AddKey(keyName, alias, privKey); err != nil {
 			return err
 		}
 	}
@@ -292,6 +294,11 @@ func moveKeysByGUN(oldKeyStore, newKeyStore *trustmanager.KeyFileStore, gun stri
 			return err
 		}
 
+		alias, err := oldKeyStore.GetKeyAlias(relKeyPath)
+		if err != nil {
+			return err
+		}
+
 		block, _ := pem.Decode(pemBytes)
 		if block == nil {
 			return ErrNoValidPrivateKey
@@ -307,7 +314,7 @@ func moveKeysByGUN(oldKeyStore, newKeyStore *trustmanager.KeyFileStore, gun stri
 		if err != nil {
 			return err
 		}
-		err = newKeyStore.AddKey(relKeyPath, privKey)
+		err = newKeyStore.AddKey(relKeyPath, alias, privKey)
 		if err != nil {
 			return err
 		}

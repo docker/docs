@@ -41,7 +41,7 @@ func init() {
 	flag.BoolVar(&debug, "debug", false, "show the version and exit")
 }
 
-func passphraseRetriever(keyName string, createNew bool, attempts int) (passphrase string, giveup bool, err error) {
+func passphraseRetriever(keyName, alias string, createNew bool, attempts int) (passphrase string, giveup bool, err error) {
 
 	//TODO(mccauley) Read from config once we have locked keys in notary-signer
 	return "", false, nil;
