@@ -15,8 +15,8 @@ func SampleMeta() data.FileMeta {
 	meta := data.FileMeta{
 		Length: 1,
 		Hashes: data.Hashes{
-			"sha256": data.HexBytes{0x01, 0x02},
-			"sha512": data.HexBytes{0x03, 0x04},
+			"sha256": []byte{0x01, 0x02},
+			"sha512": []byte{0x03, 0x04},
 		},
 	}
 	return meta

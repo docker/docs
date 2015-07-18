@@ -56,7 +56,7 @@ func NewSnapshot(root *Signed, targets *Signed) (*SignedSnapshot, error) {
 	}, nil
 }
 
-func (sp *SignedSnapshot) hashForRole(role string) HexBytes {
+func (sp *SignedSnapshot) hashForRole(role string) []byte {
 	return sp.Signed.Meta[role].Hashes["sha256"]
 }
 

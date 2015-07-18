@@ -1,7 +1,6 @@
 package store
 
 import (
-	"encoding/json"
 	"io"
 
 	"github.com/endophage/gotuf/data"
@@ -10,8 +9,9 @@ import (
 type targetsWalkFunc func(path string, meta data.FileMeta) error
 
 type MetadataStore interface {
-	GetMeta(name string, size int64) (json.RawMessage, error)
-	SetMeta(name string, blob json.RawMessage) error
+	GetMeta(name string, size int64) ([]byte, error)
+	SetMeta(name string, blob []byte) error
+	SetMultiMeta(map[string][]byte) error
 }
 
 type PublicKeyStore interface {

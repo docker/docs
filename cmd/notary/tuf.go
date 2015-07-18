@@ -165,7 +165,7 @@ func tufList(cmd *cobra.Command, args []string) {
 
 	// Print all the available targets
 	for _, t := range targetList {
-		fmt.Println(t.Name, " ", t.Hashes["sha256"], " ", t.Length)
+		fmt.Printf("%s %x %d\n", t.Name, t.Hashes["sha256"], t.Length)
 	}
 }
 
@@ -188,7 +188,7 @@ func tufLookup(cmd *cobra.Command, args []string) {
 		fatalf(err.Error())
 	}
 
-	fmt.Println(target.Name, fmt.Sprintf("sha256:%s", target.Hashes["sha256"]), target.Length)
+	fmt.Println(target.Name, fmt.Sprintf("sha256:%x", target.Hashes["sha256"]), target.Length)
 }
 
 func tufPublish(cmd *cobra.Command, args []string) {

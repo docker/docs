@@ -80,11 +80,11 @@ func TestAddBlob(t *testing.T) {
 			t.Fatal("Hashes map has been modified")
 		}
 
-		hash := data.HexBytes{0x01, 0x02}
+		hash := []bytes{0x01, 0x02}
 		if sha256[0] != hash[0] || sha256[1] != hash[1] {
 			t.Fatal("SHA256 has been modified")
 		}
-		hash = data.HexBytes{0x03, 0x04}
+		hash = []bytes{0x03, 0x04}
 		if sha512[0] != hash[0] || sha512[1] != hash[1] {
 			t.Fatal("SHA512 has been modified")
 		}

@@ -82,17 +82,17 @@ type Signed struct {
 type Signature struct {
 	KeyID     string       `json:"keyid"`
 	Method    SigAlgorithm `json:"method"`
-	Signature HexBytes     `json:"sig"`
+	Signature []byte       `json:"sig"`
 }
 
 type Files map[string]FileMeta
 
-type Hashes map[string]HexBytes
+type Hashes map[string][]byte
 
 type FileMeta struct {
-	Length int64            `json:"length"`
-	Hashes Hashes           `json:"hashes"`
-	Custom *json.RawMessage `json:"custom,omitempty"`
+	Length int64           `json:"length"`
+	Hashes Hashes          `json:"hashes"`
+	Custom json.RawMessage `json:"custom,omitempty"`
 }
 
 func NewFileMeta(r io.Reader, hashAlgorithms ...string) (FileMeta, error) {

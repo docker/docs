@@ -15,12 +15,12 @@ var ErrWrongLength = errors.New("wrong length")
 
 type ErrWrongHash struct {
 	Type     string
-	Expected data.HexBytes
-	Actual   data.HexBytes
+	Expected []byte
+	Actual   []byte
 }
 
 func (e ErrWrongHash) Error() string {
-	return fmt.Sprintf("wrong %s hash, expected %s got %s", e.Type, hex.EncodeToString(e.Expected), hex.EncodeToString(e.Actual))
+	return fmt.Sprintf("wrong %s hash, expected %#x got %#x", e.Type, e.Expected, e.Actual)
 }
 
 type ErrNoCommonHash struct {
@@ -75,7 +75,7 @@ func NormalizeTarget(path string) string {
 func HashedPaths(path string, hashes data.Hashes) []string {
 	paths := make([]string, 0, len(hashes))
 	for _, hash := range hashes {
-		hashedPath := filepath.Join(filepath.Dir(path), hash.String()+"."+filepath.Base(path))
+		hashedPath := filepath.Join(filepath.Dir(path), hex.EncodeToString(hash)+"."+filepath.Base(path))
 		paths = append(paths, hashedPath)
 	}
 	return paths

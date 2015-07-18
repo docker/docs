@@ -23,7 +23,7 @@ func (UtilSuite) TestFileMetaEqual(c *C) {
 		err  func(test) error
 	}
 	fileMeta := func(length int64, hashes map[string]string) data.FileMeta {
-		m := data.FileMeta{Length: length, Hashes: make(map[string]data.HexBytes, len(hashes))}
+		m := data.FileMeta{Length: length, Hashes: make(map[string][]byte, len(hashes))}
 		for typ, hash := range hashes {
 			v, err := hex.DecodeString(hash)
 			c.Assert(err, IsNil)
@@ -76,7 +76,7 @@ func (UtilSuite) TestNormalizeTarget(c *C) {
 }
 
 func (UtilSuite) TestHashedPaths(c *C) {
-	hexBytes := func(s string) data.HexBytes {
+	hexBytes := func(s string) []byte {
 		v, err := hex.DecodeString(s)
 		c.Assert(err, IsNil)
 		return v

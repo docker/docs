@@ -23,6 +23,8 @@ import (
 	"github.com/endophage/gotuf/store"
 )
 
+const maxSize = 5 << 20
+
 // ErrRepoNotInitialized is returned when trying to can publish on an uninitialized
 // notary repository
 type ErrRepoNotInitialized struct{}
@@ -286,9 +288,11 @@ func (r *NotaryRepository) GetTargetByName(name string) (*Target, error) {
 		return nil, err
 	}
 
-	meta := c.TargetMeta(name)
+	meta, err := c.TargetMeta(name)
 	if meta == nil {
 		return nil, errors.New("Meta is nil for target")
+	} else if err != nil {
+		return nil, err
 	}
 
 	return &Target{Name: name, Hashes: meta.Hashes, Length: meta.Length}, nil
@@ -310,6 +314,7 @@ func (r *NotaryRepository) Publish(getPass passwordRetriever) error {
 				// Repo hasn't been initialized, It must be initialized before
 				// it can be published. Return an error and let caller determine
 				// what it wants to do.
+				logrus.Error(err.Error())
 				logrus.Debug("Repository not initialized during Publish")
 				return &ErrRepoNotInitialized{}
 			}
@@ -390,28 +395,18 @@ func (r *NotaryRepository) Publish(getPass passwordRetriever) error {
 	if err != nil {
 		return err
 	}
-
+	update := make(map[string][]byte)
 	// if we need to update the root, marshal it and push the update to remote
 	if updateRoot {
 		rootJSON, err := json.Marshal(root)
 		if err != nil {
 			return err
 		}
-		err = remote.SetMeta("root", rootJSON)
-		if err != nil {
-			return err
-		}
+		update["root"] = rootJSON
 	}
-	err = remote.SetMeta("targets", targetsJSON)
-	if err != nil {
-		return err
-	}
-	err = remote.SetMeta("snapshot", snapshotJSON)
-	if err != nil {
-		return err
-	}
-
-	return nil
+	update["targets"] = targetsJSON
+	update["snapshot"] = snapshotJSON
+	return remote.SetMultiMeta(update)
 }
 
 func (r *NotaryRepository) bootstrapRepo() error {
@@ -500,13 +495,33 @@ func (r *NotaryRepository) snapshot() error {
 }
 
 func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
-	remote, err := getRemoteStore(r.baseURL, r.gun, r.roundTrip)
+	var cache store.MetadataStore
+	cache, err := store.NewFilesystemStore(
+		filepath.Join(r.tufRepoPath, "cache"),
+		"metadata",
+		"json",
+		"targets",
+	)
 	if err != nil {
-		return nil, err
+		cache = store.NewMemoryStore(nil, nil)
 	}
-	rootJSON, err := remote.GetMeta("root", 5<<20)
+
+	var rootJSON []byte
+	err = nil
+	remote, err := getRemoteStore(r.baseURL, r.gun, r.roundTrip)
+	if err == nil {
+		// if remote store successfully set up, try and get root from remote
+		rootJSON, err = remote.GetMeta("root", maxSize)
+	}
+
+	// if remote store couldn't be setup, or we failed to get a root from it
+	// load the root from cache (offline operation)
 	if err != nil {
-		return nil, err
+		rootJSON, err = cache.GetMeta("root", maxSize)
+		if err != nil {
+			// if cache didn't return a root, we cannot proceed
+			return nil, &store.ErrMetaNotFound{}
+		}
 	}
 	root := &data.Signed{}
 	err = json.Unmarshal(rootJSON, root)
@@ -531,5 +546,6 @@ func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
 		r.tufRepo,
 		remote,
 		kdb,
+		cache,
 	), nil
 }
