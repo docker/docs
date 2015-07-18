@@ -122,6 +122,35 @@ EMl3eFOJXjIch/wIesRSN+2dGOsl7neercjMh1i9RvpCwHDx/E0=
 	}
 }
 
+func TestAddGetKeyMemStore(t *testing.T) {
+	testName := "docker.com/notary/root"
+
+	// Create our store
+	store := NewKeyMemoryStore()
+
+	privKey, err := GenerateRSAKey(rand.Reader, 512)
+	if err != nil {
+		t.Fatalf("could not generate private key: %v", err)
+	}
+
+	// Call the AddKey function
+	err = store.AddKey(testName, privKey)
+	if err != nil {
+		t.Fatalf("failed to add file to store: %v", err)
+	}
+
+	// Check to see if file exists
+	retrievedKey, err := store.GetKey(testName)
+	if err != nil {
+		t.Fatalf("failed to get key from store: %v", err)
+	}
+
+	if !bytes.Equal(retrievedKey.Public(), privKey.Public()) ||
+		!bytes.Equal(retrievedKey.Private(), privKey.Private()) {
+		t.Fatalf("key contents differs after add/get")
+	}
+}
+
 func TestAddEncryptedAndGetDecrypted(t *testing.T) {
 	testExt := "key"
 
@@ -218,8 +247,6 @@ func TestGetDecryptedWithTamperedCipherText(t *testing.T) {
 }
 
 func TestGetDecryptedWithInvalidPassphrase(t *testing.T) {
-	testName := "docker.com/notary/root"
-
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	if err != nil {
@@ -227,11 +254,24 @@ func TestGetDecryptedWithInvalidPassphrase(t *testing.T) {
 	}
 	defer os.RemoveAll(tempBaseDir)
 
-	// Create our FileStore
-	store, err := NewKeyFileStore(tempBaseDir)
+	// Test with KeyFileStore
+	fileStore, err := NewKeyFileStore(tempBaseDir)
 	if err != nil {
 		t.Fatalf("failed to create new key filestore: %v", err)
 	}
+	testGetDecryptedWithInvalidPassphrase(t, fileStore)
+
+	// Test with KeyMemoryStore
+	memStore := NewKeyMemoryStore()
+	if err != nil {
+		t.Fatalf("failed to create new key memorystore: %v", err)
+	}
+	testGetDecryptedWithInvalidPassphrase(t, memStore)
+
+}
+
+func testGetDecryptedWithInvalidPassphrase(t *testing.T, store KeyStore) {
+	testName := "docker.com/notary/root"
 
 	// Generate a new random RSA Key
 	privKey, err := GenerateRSAKey(rand.Reader, 512)
