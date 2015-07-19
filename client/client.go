@@ -189,33 +189,8 @@ func (r *NotaryRepository) Initialize(uCryptoService *cryptoservice.UnlockedCryp
 	kdb.AddKey(snapshotKey)
 	kdb.AddKey(timestampKey)
 
-	rootRole, err := data.NewRole("root", 1, []string{rootKey.ID()}, nil, nil)
+	err = initRoles(kdb, rootKey, targetsKey, snapshotKey, timestampKey)
 	if err != nil {
-		return err
-	}
-	targetsRole, err := data.NewRole("targets", 1, []string{targetsKey.ID()}, nil, nil)
-	if err != nil {
-		return err
-	}
-	snapshotRole, err := data.NewRole("snapshot", 1, []string{snapshotKey.ID()}, nil, nil)
-	if err != nil {
-		return err
-	}
-	timestampRole, err := data.NewRole("timestamp", 1, []string{timestampKey.ID()}, nil, nil)
-	if err != nil {
-		return err
-	}
-
-	if err := kdb.AddRole(rootRole); err != nil {
-		return err
-	}
-	if err := kdb.AddRole(targetsRole); err != nil {
-		return err
-	}
-	if err := kdb.AddRole(snapshotRole); err != nil {
-		return err
-	}
-	if err := kdb.AddRole(timestampRole); err != nil {
 		return err
 	}
 
