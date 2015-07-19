@@ -214,7 +214,7 @@ func (r *NotaryRepository) Initialize(uCryptoService *cryptoservice.UnlockedCryp
 		r.tufRepoPath,
 		"metadata",
 		"json",
-		"targets",
+		"",
 	)
 	if err != nil {
 		return err
@@ -425,7 +425,7 @@ func (r *NotaryRepository) bootstrapRepo() error {
 		r.tufRepoPath,
 		"metadata",
 		"json",
-		"targets",
+		"",
 	)
 	if err != nil {
 		return err
@@ -511,7 +511,7 @@ func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
 		filepath.Join(r.tufRepoPath, "cache"),
 		"metadata",
 		"json",
-		"targets",
+		"",
 	)
 	if err != nil {
 		cache = store.NewMemoryStore(nil, nil)

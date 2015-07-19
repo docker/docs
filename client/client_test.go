@@ -87,7 +87,6 @@ func testInitRepo(t *testing.T, rootType data.KeyAlgorithm) {
 		filepath.Join("trusted_certificates", filepath.FromSlash(gun)),
 		"tuf",
 		filepath.Join("tuf", filepath.FromSlash(gun), "metadata"),
-		filepath.Join("tuf", filepath.FromSlash(gun), "targets"),
 	}
 	for _, dir := range expectedDirs {
 		fi, err := os.Stat(filepath.Join(tempBaseDir, dir))
