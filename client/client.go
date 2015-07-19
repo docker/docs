@@ -214,7 +214,7 @@ func (r *NotaryRepository) Initialize(uCryptoService *cryptoservice.UnlockedCryp
 		r.tufRepoPath,
 		"metadata",
 		"json",
-		"targets",
+		"",
 	)
 	if err != nil {
 		return err
@@ -290,7 +290,7 @@ func (r *NotaryRepository) GetTargetByName(name string) (*Target, error) {
 
 	meta, err := c.TargetMeta(name)
 	if meta == nil {
-		return nil, errors.New("Meta is nil for target")
+		return nil, fmt.Errorf("No trust data for %s", name)
 	} else if err != nil {
 		return nil, err
 	}
@@ -425,7 +425,7 @@ func (r *NotaryRepository) bootstrapRepo() error {
 		r.tufRepoPath,
 		"metadata",
 		"json",
-		"targets",
+		"",
 	)
 	if err != nil {
 		return err
@@ -511,7 +511,7 @@ func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
 		filepath.Join(r.tufRepoPath, "cache"),
 		"metadata",
 		"json",
-		"targets",
+		"",
 	)
 	if err != nil {
 		cache = store.NewMemoryStore(nil, nil)
