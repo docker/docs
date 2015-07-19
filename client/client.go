@@ -136,7 +136,7 @@ func (r *NotaryRepository) Initialize(uCryptoService *cryptoservice.UnlockedCryp
 	// is associated with. This is used to be able to retrieve the root private key
 	// associated with a particular certificate
 	logrus.Debugf("Linking %s to %s.", rootKey.ID(), uCryptoService.ID())
-	err = r.KeyStoreManager.RootKeyStore().Link(uCryptoService.ID(), rootKey.ID())
+	err = r.KeyStoreManager.RootKeyStore().Link(uCryptoService.ID()+"_root", rootKey.ID()+"_root")
 	if err != nil {
 		return err
 	}

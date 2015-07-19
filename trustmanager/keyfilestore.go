@@ -5,6 +5,8 @@ import (
 	"strings"
 
 	"github.com/endophage/gotuf/data"
+	"errors"
+	"fmt"
 )
 
 const (
@@ -66,7 +68,6 @@ func (s *KeyFileStore) GetKey(name string) (data.PrivateKey, error) {
 func (s *KeyFileStore) GetKeyAlias(name string) (string, error) {
 	return getKeyAlias(s, name)
 }
-
 
 // ListKeys returns a list of unique PublicKeys present on the KeyFileStore.
 // There might be symlinks associating Certificate IDs to Public Keys, so this
@@ -144,35 +145,56 @@ func addKey(s LimitedFileStore, passphraseRetriever PassphraseRetriever, name, a
 		}
 	}
 
-	err = s.Add(name + "." + aliasExtension, []byte(alias))
-	if err != nil {
-		return err
-	}
-	return s.Add(name, pemPrivKey)
+	return s.Add(name + "_" + alias, pemPrivKey)
 }
 
-
 func getKeyAlias(s LimitedFileStore, name string) (string, error) {
-	keyAlias, err := s.Get(name + "." + aliasExtension)
-	if err != nil {
-		return "", err
+	files := s.ListFiles(true)
+
+	fmt.Println(name)
+	name = name[strings.LastIndexAny(name, "/\\")+1:]
+	//name = strings.TrimSpace(strings.TrimSuffix(filepath.Base(name), filepath.Ext(name)))
+
+	fmt.Println(name)
+
+	for _, file := range files {
+		fmt.Println(file, " ======= ", name)
+		if strings.HasSuffix(file, keyExtension) {
+			lastPathSeparator := strings.LastIndexAny(file, "/\\")
+			filename := file[lastPathSeparator+1:]
+			//filename := strings.TrimSpace(strings.TrimSuffix(filepath.Base(file), filepath.Ext(file)))
+
+			fmt.Println(filename, " : ", name)
+
+			if strings.HasPrefix(filename, name) {
+				fmt.Println("filename:", filename)
+				fmt.Println("name:", name)
+				aliasPlusDotKey := strings.TrimPrefix(filename, name + "_")
+				fmt.Println("aliasPlusDotKey:", aliasPlusDotKey)
+
+				retVal := strings.TrimSuffix(aliasPlusDotKey, "." + keyExtension)
+				fmt.Println("retVal:", retVal)
+
+				return retVal, nil
+			}
+		}
 	}
 
-	return string(keyAlias), nil
+	return "", errors.New(fmt.Sprintf("keyId %s has no alias", name))
 }
 
 // GetKey returns the PrivateKey given a KeyID
 func getKey(s LimitedFileStore, passphraseRetriever PassphraseRetriever, name string) (data.PrivateKey, error) {
-	keyBytes, err := s.Get(name)
-	if err != nil {
-		return nil, err
-	}
 
 	keyAlias, err := getKeyAlias(s, name)
 	if err != nil {
 		return nil, err
 	}
 
+	keyBytes, err := s.Get(name + "_" + keyAlias)
+	if err != nil {
+		return nil, err
+	}
 
 	// See if the key is encrypted. If its encrypted we'll fail to parse the private key
 	privKey, err := ParsePEMPrivateKey(keyBytes, "")
@@ -205,6 +227,7 @@ func listKeys(s LimitedFileStore) []string {
 	var keyIDList []string
 	for _, f := range s.ListFiles(false) {
 		keyID := strings.TrimSpace(strings.TrimSuffix(filepath.Base(f), filepath.Ext(f)))
+		keyID = keyID[:strings.LastIndex(keyID,"_")]
 		keyIDList = append(keyIDList, keyID)
 	}
 	return keyIDList

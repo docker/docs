@@ -34,10 +34,6 @@ var (
 	ErrNoKeysFoundForGUN = errors.New("no keys found for specified GUN")
 )
 
-const (
-	aliasSuffix = ".alias"
-)
-
 // ExportRootKey exports the specified root key to an io.Writer in PEM format.
 // The key's existing encryption is preserved.
 func (km *KeyStoreManager) ExportRootKey(dest io.Writer, keyID string) error {

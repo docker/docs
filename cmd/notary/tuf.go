@@ -20,7 +20,7 @@ import (
 )
 
 // FIXME: This should not be hardcoded
-const hardcodedBaseURL = "https://notary-server:4443"
+const hardcodedBaseURL = "http://notary-server:4443"
 
 var retriever trustmanager.PassphraseRetriever
 
@@ -277,6 +277,7 @@ func getNotaryPassphraseRetriever() (trustmanager.PassphraseRetriever) {
 	targetsSnapshotsPass := ""
 
 	return func(keyID string, alias string, createNew bool, numAttempts int) (string, bool, error) {
+		return "yellowness", false, nil
 		fmt.Printf("userEnteredTargetsSnapshotsPass: %s\n", userEnteredTargetsSnapshotsPass)
 		fmt.Printf("targetsSnapshotsPass: %s\n", targetsSnapshotsPass)
 		fmt.Printf("keyID: %s\n", keyID)
