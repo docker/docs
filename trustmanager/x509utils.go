@@ -191,10 +191,9 @@ func GetLeafCerts(certs []*x509.Certificate) []*x509.Certificate {
 // ones marked as a CA, to be used as intermediates
 func GetIntermediateCerts(certs []*x509.Certificate) (intCerts []*x509.Certificate) {
 	for _, cert := range certs {
-		if !cert.IsCA {
-			continue
+		if cert.IsCA {
+			intCerts = append(intCerts, cert)
 		}
-		intCerts = append(intCerts, cert)
 	}
 	return intCerts
 }

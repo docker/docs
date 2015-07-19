@@ -313,7 +313,7 @@ func validRootLeafCerts(root *data.SignedRoot, gun string) ([]*x509.Certificate,
 			cert.SignatureAlgorithm == x509.DSAWithSHA1 ||
 			cert.SignatureAlgorithm == x509.ECDSAWithSHA1 {
 
-			logrus.Debugf("error certificate uses old ciphers")
+			logrus.Debugf("error certificate uses deprecated hashing algorithm (SHA1)")
 			continue
 		}
 
@@ -327,6 +327,8 @@ func validRootLeafCerts(root *data.SignedRoot, gun string) ([]*x509.Certificate,
 	return validLeafCerts, nil
 }
 
+// parseAllCerts returns two maps, one with all of the leafCertificates and one
+// with all the intermediate certificates found in signedRoot
 func parseAllCerts(signedRoot *data.SignedRoot) (map[string]*x509.Certificate, map[string][]*x509.Certificate) {
 	leafCerts := make(map[string]*x509.Certificate)
 	intCerts := make(map[string][]*x509.Certificate)
