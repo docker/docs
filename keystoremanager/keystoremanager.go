@@ -219,79 +219,65 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, gun string) error {
 		}
 	}
 
-	// Retrieve all the leaf certificates in which the CN matches the GUN
+	// Retrieve all the leaf certificates in root for which the CN matches the GUN
 	allValidCerts, err := validRootLeafCerts(signedRoot, gun)
 	if err != nil {
 		logrus.Debugf("error retrieving valid leaf certificates for: %s, %v", gun, err)
 		return &ErrValidationFail{Reason: "unable to retrieve valid leaf certificates"}
 	}
 
-	// If there are no certificates with this CN, lets TOFUS!
-	// Note that this logic should only exist in docker 1.8
-	var keysToCheck map[string]data.PublicKey
-	if len(certsForCN) == 0 {
-		// Convert all the valid certificates into public keys to do root validation
-		keysToCheck = trustmanager.CertsToKeys(allValidCerts)
-		logrus.Debugf("found no valid certificates for %s, entering TOFU mode", gun)
-	} else {
-		// Convert all the currently trusted certificates into public keys for root validation
-		keysToCheck = trustmanager.CertsToKeys(certsForCN)
-		logrus.Debugf("found valid certificates for %s", gun)
+	// If there are certificates for this specific GUN, we already have trusted
+	// certificates for this GUN. Let's make sure to check that this root is
+	// signed by them
+	if len(certsForCN) != 0 {
+		logrus.Debugf("found %d valid certificates for %s", len(certsForCN), gun)
+		err = signed.VerifyRoot(root, 0, trustmanager.CertsToKeys(certsForCN))
+		if err != nil {
+			logrus.Debugf("failed to verify TUF data for: %s, %v", gun, err)
+			return &ErrValidationFail{Reason: "failed to validate integrity of roots"}
+		}
 	}
 
-	fmt.Printf("LEN: %d\n", len(certsForCN))
-
-	// Verify the self consistency of the root keys that we're about to trust
-	// or validate this new file with the old keys
-	err = signed.VerifyRoot(root, 0, keysToCheck)
+	// Validate the integrity of the new root (does it have valid signatures)
+	err = signed.VerifyRoot(root, 0, trustmanager.CertsToKeys(allValidCerts))
 	if err != nil {
 		logrus.Debugf("failed to verify TUF data for: %s, %v", gun, err)
 		return &ErrValidationFail{Reason: "failed to validate integrity of roots"}
 	}
 
-	logrus.Debugf("validation of the root succeeded for: %s", gun)
+	// Getting here means A) we had trusted certificates and both the
+	// old and new validated this root; or B) we had no trusted certificates but
+	// the new set of certificates has integrity (self-signed)
+	logrus.Debugf("entering root certificate rotation for: %s", gun)
 
-	// We validated that this new root file has been signed by at least one
-	// of our trusted keys, so let's only trust the currently available keys
-	// First, we delete all the old certificates
-	// rotationFailed keeps track of wether we have been able to delete all old certificates
-	var rotationFailed bool
-	for _, cert := range certsForCN {
-		// Getting the CertID for debug only, we don't care about the error
-		certID, _ := trustmanager.FingerprintCert(cert)
+	// To support root certificate rotation, let trust only the certs present in root
+	// First, we delete all the old certificates that aren't present in the root
+	for certID, cert := range certsToRemove(certsForCN, allValidCerts) {
 		logrus.Debugf("removing certificate with certID: %s", certID)
-
 		err = km.trustedCertificateStore.RemoveCert(cert)
 		if err != nil {
 			logrus.Debugf("failed to remove trusted certificate with keyID: %s, %v", certID, err)
-			rotationFailed = true
+			return &ErrRootRotationFail{Reason: "failed to rotate root keys"}
 		}
 	}
 
-	// We've delete all the old certificates, let's add trust for all the new ones
+	// Now we add all the new certificates (even if they arleady already exist)
 	for _, cert := range allValidCerts {
-		km.trustedCertificateStore.AddCert(cert)
+		err := km.trustedCertificateStore.AddCert(cert)
+		if err != nil {
+			// If the error is anything other than the certificate already exists, fail
+			if _, ok := err.(*trustmanager.ErrCertExists); !ok {
+				logrus.Debugf("error adding new trusted certificate for: %s, %v", gun, err)
+				return &ErrRootRotationFail{Reason: "unable to add trusted certificate"}
+			}
+		}
+
 		// Getting the CertID for debug only, don't care about the error
 		certID, _ := trustmanager.FingerprintCert(cert)
 		logrus.Debugf("adding trust certificate for with certID %s for %s", certID, gun)
 	}
 
-	// If we failed to delete any of the old certificates return an error.
-	// We do it this way, so we're sure to first add the new trusted certificates
-	// before we fail and make the repository unusable
-	if rotationFailed {
-		return &ErrRootRotationFail{Reason: "failed to rotate root keys"}
-	}
-
-	// Check to see if this leafCertificate has a chain to one of the Root
-	// CAs of our CA Store.
-	// err = trustmanager.Verify(km.trustedCAStore, dnsName, decodedCerts)
-	// if err == nil {
-	// 	validKeys[keyID] = signedRoot.Signed.Keys[keyID]
-	// 	logrus.Debugf("found a CA path for %s with keyID: %s", dnsName, keyID)
-	// }
-
-	logrus.Debugf("Root validation succeeded")
+	logrus.Debugf("Root validation succeeded for %s", gun)
 	return nil
 }
 
@@ -365,4 +351,40 @@ func parseAllCerts(signedRoot *data.SignedRoot) (map[string]*x509.Certificate, m
 	}
 
 	return leafCerts, intCerts
+}
+
+// certsToRemove returns all the certifificates from oldCerts that aren't present
+// in newCerts
+func certsToRemove(oldCerts, newCerts []*x509.Certificate) map[string]*x509.Certificate {
+	certsToRemove := make(map[string]*x509.Certificate)
+
+	// If no newCerts were provided
+	if len(newCerts) == 0 {
+		return certsToRemove
+	}
+
+	// Populate a map with all the IDs from newCert
+	var newCertMap = make(map[string]struct{})
+	for _, cert := range newCerts {
+		certID, err := trustmanager.FingerprintCert(cert)
+		if err != nil {
+			logrus.Debugf("error while fingerprinting root certificate with keyID: %s, %v", certID, err)
+			continue
+		}
+		newCertMap[certID] = struct{}{}
+	}
+
+	// Iterate over all the old certificates and check to see if we should remove them
+	for _, cert := range oldCerts {
+		certID, err := trustmanager.FingerprintCert(cert)
+		if err != nil {
+			logrus.Debugf("error while fingerprinting root certificate with certID: %s, %v", certID, err)
+			continue
+		}
+		if _, ok := newCertMap[certID]; !ok {
+			certsToRemove[certID] = cert
+		}
+	}
+
+	return certsToRemove
 }
