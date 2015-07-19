@@ -64,10 +64,10 @@ func (st *MemStorage) GetCurrent(gun, role string) (data []byte, err error) {
 	st.lock.Lock()
 	defer st.lock.Unlock()
 	space, ok := st.tufMeta[id]
-	if !ok {
+	if !ok || len(space) == 0 {
 		return nil, &ErrNotFound{}
 	}
-	return space[len(st.tufMeta[id])-1].data, nil
+	return space[len(space)-1].data, nil
 }
 
 // Delete delets all the metadata for a given GUN

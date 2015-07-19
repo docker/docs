@@ -103,6 +103,17 @@ func NewNotaryRepository(baseDir, gun, baseURL string, rt http.RoundTripper) (*N
 		KeyStoreManager: keyStoreManager,
 	}
 
+	fileStore, err := store.NewFilesystemStore(
+		nRepo.tufRepoPath,
+		"metadata",
+		"json",
+		"",
+	)
+	if err != nil {
+		return nil, err
+	}
+	nRepo.fileStore = fileStore
+
 	return nRepo, nil
 }
 
@@ -209,16 +220,6 @@ func (r *NotaryRepository) Initialize(uCryptoService *cryptoservice.UnlockedCryp
 	}
 
 	r.tufRepo = tuf.NewTufRepo(kdb, r.cryptoService)
-
-	r.fileStore, err = store.NewFilesystemStore(
-		r.tufRepoPath,
-		"metadata",
-		"json",
-		"",
-	)
-	if err != nil {
-		return err
-	}
 
 	if err := r.tufRepo.InitRepo(false); err != nil {
 		return err
@@ -421,21 +422,11 @@ func (r *NotaryRepository) Publish(getPass passwordRetriever) error {
 }
 
 func (r *NotaryRepository) bootstrapRepo() error {
-	fileStore, err := store.NewFilesystemStore(
-		r.tufRepoPath,
-		"metadata",
-		"json",
-		"",
-	)
-	if err != nil {
-		return err
-	}
-
 	kdb := keys.NewDB()
 	tufRepo := tuf.NewTufRepo(kdb, r.cryptoService)
 
 	logrus.Debugf("Loading trusted collection.")
-	rootJSON, err := fileStore.GetMeta("root", 0)
+	rootJSON, err := r.fileStore.GetMeta("root", 0)
 	if err != nil {
 		return err
 	}
@@ -445,7 +436,7 @@ func (r *NotaryRepository) bootstrapRepo() error {
 		return err
 	}
 	tufRepo.SetRoot(root)
-	targetsJSON, err := fileStore.GetMeta("targets", 0)
+	targetsJSON, err := r.fileStore.GetMeta("targets", 0)
 	if err != nil {
 		return err
 	}
@@ -455,7 +446,7 @@ func (r *NotaryRepository) bootstrapRepo() error {
 		return err
 	}
 	tufRepo.SetTargets("targets", targets)
-	snapshotJSON, err := fileStore.GetMeta("snapshot", 0)
+	snapshotJSON, err := r.fileStore.GetMeta("snapshot", 0)
 	if err != nil {
 		return err
 	}
@@ -467,7 +458,6 @@ func (r *NotaryRepository) bootstrapRepo() error {
 	tufRepo.SetSnapshot(snapshot)
 
 	r.tufRepo = tufRepo
-	r.fileStore = fileStore
 
 	return nil
 }
@@ -506,19 +496,7 @@ func (r *NotaryRepository) snapshot() error {
 }
 
 func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
-	var cache store.MetadataStore
-	cache, err := store.NewFilesystemStore(
-		filepath.Join(r.tufRepoPath, "cache"),
-		"metadata",
-		"json",
-		"",
-	)
-	if err != nil {
-		cache = store.NewMemoryStore(nil, nil)
-	}
-
 	var rootJSON []byte
-	err = nil
 	remote, err := getRemoteStore(r.baseURL, r.gun, r.roundTrip)
 	if err == nil {
 		// if remote store successfully set up, try and get root from remote
@@ -528,7 +506,12 @@ func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
 	// if remote store couldn't be setup, or we failed to get a root from it
 	// load the root from cache (offline operation)
 	if err != nil {
-		rootJSON, err = cache.GetMeta("root", maxSize)
+		if err, ok := err.(*store.ErrMetaNotFound); ok {
+			// if the error was MetaNotFound then we successfully contacted
+			// the store and it doesn't know about the repo.
+			return nil, err
+		}
+		rootJSON, err = r.fileStore.GetMeta("root", maxSize)
 		if err != nil {
 			// if cache didn't return a root, we cannot proceed
 			return nil, &store.ErrMetaNotFound{}
@@ -557,6 +540,6 @@ func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
 		r.tufRepo,
 		remote,
 		kdb,
-		cache,
+		r.fileStore,
 	), nil
 }
