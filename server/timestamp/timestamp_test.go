@@ -60,3 +60,31 @@ func TestGetTimestamp(t *testing.T) {
 	_, err = GetOrCreateTimestamp("gun", store, crypto)
 	assert.Nil(t, err, "GetTimestamp errored")
 }
+
+func TestGetTimestampNewSnapshot(t *testing.T) {
+	store := storage.NewMemStorage()
+	crypto := signed.NewEd25519()
+
+	snapshot := data.SignedSnapshot{}
+	snapshot.Signed.Version = 0
+	snapJSON, _ := json.Marshal(snapshot)
+
+	store.UpdateCurrent("gun", storage.MetaUpdate{Role: "snapshot", Version: 0, Data: snapJSON})
+	// create a key to be used by GetTimestamp
+	_, err := GetOrCreateTimestampKey("gun", store, crypto, data.ED25519Key)
+	assert.Nil(t, err, "GetTimestampKey errored")
+
+	ts1, err := GetOrCreateTimestamp("gun", store, crypto)
+	assert.Nil(t, err, "GetTimestamp errored")
+
+	snapshot = data.SignedSnapshot{}
+	snapshot.Signed.Version = 1
+	snapJSON, _ = json.Marshal(snapshot)
+
+	store.UpdateCurrent("gun", storage.MetaUpdate{Role: "snapshot", Version: 1, Data: snapJSON})
+
+	ts2, err := GetOrCreateTimestamp("gun", store, crypto)
+	assert.Nil(t, err, "GetTimestamp errored")
+
+	assert.NotEqual(t, ts1, ts2, "Timestamp was not regenerated when snapshot changed")
+}

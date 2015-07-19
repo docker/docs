@@ -570,6 +570,13 @@ func testPublish(t *testing.T, rootType data.KeyAlgorithm) {
 	})
 	assert.NoError(t, err)
 
+	changelistDir, err = os.Open(changelistDirPath)
+	assert.NoError(t, err, "could not open changelist directory")
+	fileInfos, err = changelistDir.Readdir(0)
+	assert.NoError(t, err, "could not read changelist directory")
+	// Should only be one file in the directory
+	assert.Len(t, fileInfos, 0, "wrong number of changelist files found")
+
 	// Create a new repo and pull from the server
 	tempBaseDir2, err := ioutil.TempDir("", "notary-test-")
 	defer os.RemoveAll(tempBaseDir2)

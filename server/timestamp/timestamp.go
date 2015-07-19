@@ -1,6 +1,7 @@
 package timestamp
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 
@@ -49,6 +50,10 @@ func GetOrCreateTimestampKey(gun string, store storage.MetaStore, crypto signed.
 // a new timestamp is generated either because none exists, or because the current
 // one has expired. Once generated, the timestamp is saved in the store.
 func GetOrCreateTimestamp(gun string, store storage.MetaStore, cryptoService signed.CryptoService) ([]byte, error) {
+	snapshot, err := store.GetCurrent(gun, "snapshot")
+	if err != nil {
+		return nil, err
+	}
 	d, err := store.GetCurrent(gun, "timestamp")
 	if err != nil {
 		if _, ok := err.(*storage.ErrNotFound); !ok {
@@ -65,11 +70,11 @@ func GetOrCreateTimestamp(gun string, store storage.MetaStore, cryptoService sig
 			logrus.Error("Failed to unmarshal existing timestamp")
 			return nil, err
 		}
-		if !timestampExpired(ts) {
+		if !timestampExpired(ts) && !snapshotExpired(ts, snapshot) {
 			return d, nil
 		}
 	}
-	sgnd, version, err := createTimestamp(gun, ts, store, cryptoService)
+	sgnd, version, err := CreateTimestamp(gun, ts, snapshot, store, cryptoService)
 	if err != nil {
 		logrus.Error("Failed to create a new timestamp")
 		return nil, err
@@ -91,11 +96,23 @@ func timestampExpired(ts *data.SignedTimestamp) bool {
 	return time.Now().After(ts.Signed.Expires)
 }
 
-// createTimestamp creates a new timestamp. If a prev timestamp is provided, it
+func snapshotExpired(ts *data.SignedTimestamp, snapshot []byte) bool {
+	meta, err := data.NewFileMeta(bytes.NewReader(snapshot), "sha256")
+	if err != nil {
+		// if we can't generate FileMeta from the current snapshot, we should
+		// continue to serve the old timestamp if it isn't time expired
+		// because we won't be able to generate a new one.
+		return false
+	}
+	hash := meta.Hashes["sha256"]
+	return !bytes.Equal(hash, ts.Signed.Meta["snapshot"].Hashes["sha256"])
+}
+
+// CreateTimestamp creates a new timestamp. If a prev timestamp is provided, it
 // is assumed this is the immediately previous one, and the new one will have a
 // version number one higher than prev. The store is used to lookup the current
 // snapshot, this function does not save the newly generated timestamp.
-func createTimestamp(gun string, prev *data.SignedTimestamp, store storage.MetaStore, cryptoService signed.CryptoService) (*data.Signed, int, error) {
+func CreateTimestamp(gun string, prev *data.SignedTimestamp, snapshot []byte, store storage.MetaStore, cryptoService signed.CryptoService) (*data.Signed, int, error) {
 	algorithm, public, err := store.GetTimestampKey(gun)
 	if err != nil {
 		// owner of gun must have generated a timestamp key otherwise
@@ -103,10 +120,6 @@ func createTimestamp(gun string, prev *data.SignedTimestamp, store storage.MetaS
 		return nil, 0, err
 	}
 	key := data.NewPublicKey(algorithm, public)
-	snapshot, err := store.GetCurrent(gun, "snapshot")
-	if err != nil {
-		return nil, 0, err
-	}
 	sn := &data.Signed{}
 	err = json.Unmarshal(snapshot, sn)
 	if err != nil {
