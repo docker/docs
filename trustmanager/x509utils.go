@@ -472,8 +472,7 @@ func NewCertificate(gun string) (*x509.Certificate, error) {
 	return &x509.Certificate{
 		SerialNumber: serialNumber,
 		Subject: pkix.Name{
-			Organization: []string{gun},
-			CommonName:   gun,
+			CommonName: gun,
 		},
 		NotBefore: notBefore,
 		NotAfter:  notAfter,
