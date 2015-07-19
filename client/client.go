@@ -238,7 +238,7 @@ func (r *NotaryRepository) AddTarget(target *Target) error {
 	if err != nil {
 		return err
 	}
-	fmt.Printf("Adding target \"%s\" with sha256 \"%s\" and size %d bytes.\n", target.Name, target.Hashes["sha256"], target.Length)
+	logrus.Debugf("Adding target \"%s\" with sha256 \"%x\" and size %d bytes.\n", target.Name, target.Hashes["sha256"], target.Length)
 
 	meta := data.FileMeta{Length: target.Length, Hashes: target.Hashes}
 	metaJSON, err := json.Marshal(meta)
@@ -340,9 +340,9 @@ func (r *NotaryRepository) Publish(getPass passwordRetriever) error {
 			return err
 		}
 	}
-
 	// load the changelist for this repo
-	cl, err := changelist.NewFileChangelist(filepath.Join(r.tufRepoPath, "changelist"))
+	changelistDir := filepath.Join(r.tufRepoPath, "changelist")
+	cl, err := changelist.NewFileChangelist(changelistDir)
 	if err != nil {
 		logrus.Debug("Error initializing changelist")
 		return err
@@ -406,7 +406,18 @@ func (r *NotaryRepository) Publish(getPass passwordRetriever) error {
 	}
 	update["targets"] = targetsJSON
 	update["snapshot"] = snapshotJSON
-	return remote.SetMultiMeta(update)
+	err = remote.SetMultiMeta(update)
+	if err != nil {
+		return err
+	}
+	err = cl.Clear("")
+	if err != nil {
+		// This is not a critical problem when only a single host is pushing
+		// but will cause weird behaviour if changelist cleanup is failing
+		// and there are multiple hosts writing to the repo.
+		logrus.Warn("Unable to clear changelist. You may want to manually delete the folder ", changelistDir)
+	}
+	return nil
 }
 
 func (r *NotaryRepository) bootstrapRepo() error {
