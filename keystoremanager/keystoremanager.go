@@ -183,12 +183,24 @@ func (km *KeyStoreManager) GetRootCryptoService(rootKeyID, passphrase string) (*
 }
 
 /*
-ValidateRoot iterates over every root key included in the TUF data and
-attempts to validate the certificate by first checking for an exact match on
-the certificate store, and subsequently trying to find a valid chain on the
-trustedCAStore.
+ValidateRoot receives a new root, validates its correctness and attempts to
+do root key rotation if needed.
 
-Currently this method operates on a Trust On First Use (TOFU) model: if we
+First we list the current trusted certificates we have for a particular GUN. If
+that list is non-empty means that we've already seen this repository before, and
+have a list of trusted certificates for it. In this case, we use this list of
+certificates to attempt to validate this root file.
+
+If the previous validation suceeds, or in the case where we found no trusted
+certificates for this particular GUN, we check the integrity of the root by
+making sure that it is validated by itself. This means that we will attempt to
+validate the root data with the certificates that are included in the root keys
+themselves.
+
+If this last steps succeeds, we attempt to do root rotation, by ensuring that
+we only trust the certificates that are present in the new root.
+
+This mechanism of operation is essentially Trust On First Use (TOFU): if we
 have never seen a certificate for a particular CN, we trust it. If later we see
 a different certificate for that certificate, we return an ErrValidationFailed error.
 
@@ -196,9 +208,6 @@ Note that since we only allow trust data to be downloaded over an HTTPS channel
 we are using the current web-of-trust to validate the first download of the certificate
 adding an extra layer of security over the normal (SSH style) trust model.
 We shall call this: TOFUS.
-
-ValidateRoot also supports root key rotation, trusting a new certificate that has
-been included in the roots.json, and removing trust in the old one.
 */
 func (km *KeyStoreManager) ValidateRoot(root *data.Signed, gun string) error {
 	logrus.Debugf("entered ValidateRoot with dns: %s", gun)
@@ -250,6 +259,7 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, gun string) error {
 	// the new set of certificates has integrity (self-signed)
 	logrus.Debugf("entering root certificate rotation for: %s", gun)
 
+	var rotationFailure bool
 	// To support root certificate rotation, let trust only the certs present in root
 	// First, we delete all the old certificates that aren't present in the root
 	for certID, cert := range certsToRemove(certsForCN, allValidCerts) {
@@ -257,7 +267,7 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, gun string) error {
 		err = km.trustedCertificateStore.RemoveCert(cert)
 		if err != nil {
 			logrus.Debugf("failed to remove trusted certificate with keyID: %s, %v", certID, err)
-			return &ErrRootRotationFail{Reason: "failed to rotate root keys"}
+			rotationFailure = true
 		}
 	}
 
@@ -265,16 +275,20 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, gun string) error {
 	for _, cert := range allValidCerts {
 		err := km.trustedCertificateStore.AddCert(cert)
 		if err != nil {
-			// If the error is anything other than the certificate already exists, fail
-			if _, ok := err.(*trustmanager.ErrCertExists); !ok {
-				logrus.Debugf("error adding new trusted certificate for: %s, %v", gun, err)
-				return &ErrRootRotationFail{Reason: "unable to add trusted certificate"}
+			// If the error is already exists we don't fail the rotation
+			if _, ok := err.(*trustmanager.ErrCertExists); ok {
+				continue
 			}
+			logrus.Debugf("error adding new trusted certificate for: %s, %v", gun, err)
+			rotationFailure = true
 		}
-
 		// Getting the CertID for debug only, don't care about the error
 		certID, _ := trustmanager.FingerprintCert(cert)
 		logrus.Debugf("adding trust certificate for with certID %s for %s", certID, gun)
+	}
+
+	if rotationFailure {
+		return &ErrRootRotationFail{Reason: "failed to rotate root keys"}
 	}
 
 	logrus.Debugf("Root validation succeeded for %s", gun)
@@ -290,7 +304,12 @@ func validRootLeafCerts(root *data.SignedRoot, gun string) ([]*x509.Certificate,
 	for _, cert := range allLeafCerts {
 		// Validate that this leaf certificate has a CN that matches the exact gun
 		if cert.Subject.CommonName != gun {
-			logrus.Debugf("error leaf certificate CN: %s doesn't match the given dns name: %s", cert.Subject.CommonName)
+			logrus.Debugf("error leaf certificate CN: %s doesn't match the given GUN: %s", cert.Subject.CommonName)
+			continue
+		}
+		// Make sure the certificate is not expired
+		if time.Now().After(cert.NotAfter) {
+			logrus.Debugf("error leaf certificate is expired")
 			continue
 		}
 		validLeafCerts = append(validLeafCerts, cert)
