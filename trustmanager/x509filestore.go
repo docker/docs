@@ -121,7 +121,7 @@ func (s *X509FileStore) RemoveCert(cert *x509.Certificate) error {
 	filename := s.fileMap[certID]
 	delete(s.fileMap, certID)
 
-	name := string(cert.RawSubject)
+	name := string(cert.Subject.CommonName)
 
 	// Filter the fingerprint out of this name entry
 	fpList := s.nameMap[name]

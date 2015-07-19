@@ -114,8 +114,6 @@ func fingerprintCert(cert *x509.Certificate) (CertID, error) {
 	// Create new TUF Key so we can compute the TUF-compliant CertID
 	tufKey := data.NewPublicKey(keyType, pemdata)
 
-	logrus.Debugf("certificate fingerprint generated for key type %s: %s", keyType, tufKey.ID())
-
 	return CertID(tufKey.ID()), nil
 }
 
@@ -187,6 +185,17 @@ func GetLeafCerts(certs []*x509.Certificate) []*x509.Certificate {
 		leafCerts = append(leafCerts, cert)
 	}
 	return leafCerts
+}
+
+// GetIntermediateCerts parses a list of x509 Certificates and returns all of the
+// ones marked as a CA, to be used as intermediates
+func GetIntermediateCerts(certs []*x509.Certificate) (intCerts []*x509.Certificate) {
+	for _, cert := range certs {
+		if cert.IsCA {
+			intCerts = append(intCerts, cert)
+		}
+	}
+	return intCerts
 }
 
 // ParsePEMPrivateKey returns a data.PrivateKey from a PEM encoded private key. It
@@ -420,6 +429,32 @@ func EncryptPrivateKey(key data.PrivateKey, passphrase string) ([]byte, error) {
 	return pem.EncodeToMemory(encryptedPEMBlock), nil
 }
 
+// CertsToKeys transforms each of the input certificates into it's corresponding
+// PublicKey
+func CertsToKeys(certs []*x509.Certificate) map[string]data.PublicKey {
+	keys := make(map[string]data.PublicKey)
+	for _, cert := range certs {
+		block := pem.Block{Type: "CERTIFICATE", Bytes: cert.Raw}
+		pemdata := pem.EncodeToMemory(&block)
+
+		var keyType data.KeyAlgorithm
+		switch cert.PublicKeyAlgorithm {
+		case x509.RSA:
+			keyType = data.RSAx509Key
+		case x509.ECDSA:
+			keyType = data.ECDSAx509Key
+		default:
+			logrus.Debugf("unknown certificate type found, ignoring")
+		}
+
+		// Create new the appropriate PublicKey
+		newKey := data.NewPublicKey(keyType, pemdata)
+		keys[newKey.ID()] = newKey
+	}
+
+	return keys
+}
+
 // NewCertificate returns an X509 Certificate following a template, given a GUN.
 func NewCertificate(gun string) (*x509.Certificate, error) {
 	notBefore := time.Now()
@@ -436,8 +471,7 @@ func NewCertificate(gun string) (*x509.Certificate, error) {
 	return &x509.Certificate{
 		SerialNumber: serialNumber,
 		Subject: pkix.Name{
-			Organization: []string{gun},
-			CommonName:   gun,
+			CommonName: gun,
 		},
 		NotBefore: notBefore,
 		NotAfter:  notAfter,

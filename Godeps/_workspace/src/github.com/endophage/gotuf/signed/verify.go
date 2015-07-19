@@ -52,7 +52,13 @@ func VerifyRoot(s *data.Signed, minVersion int, keys map[string]data.PublicKey) 
 			continue
 		}
 
-		if err := verifier.Verify(keys[sig.KeyID], sig.Signature, msg); err != nil {
+		key, ok := keys[sig.KeyID]
+		if !ok {
+			logrus.Debugf("continuing b/c signing key isn't present in keys: %s\n", sig.KeyID)
+			continue
+		}
+
+		if err := verifier.Verify(key, sig.Signature, msg); err != nil {
 			logrus.Debugf("continuing b/c signature was invalid\n")
 			continue
 		}
