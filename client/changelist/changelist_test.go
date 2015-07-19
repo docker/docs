@@ -1,27 +1,17 @@
 package changelist
 
 import (
-	"io/ioutil"
-	"os"
-	"path"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
 
-func TestFileChangelist(t *testing.T) {
-	tmpDir, err := ioutil.TempDir("/tmp", "test")
-	if err != nil {
-		t.Fatal(err.Error())
-	}
-	defer os.RemoveAll(tmpDir)
-	file := path.Join(tmpDir, "list")
-	cl, err := NewAppendChangelist(file)
-	assert.Nil(t, err, "Error initializing appendChangelist")
+func TestMemChangelist(t *testing.T) {
+	cl := memChangelist{}
 
 	c := NewTufChange(ActionCreate, "targets", "target", "test/targ", []byte{1})
 
-	err = cl.Add(c)
+	err := cl.Add(c)
 	assert.Nil(t, err, "Non-nil error while adding change")
 
 	cs := cl.List()
