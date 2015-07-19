@@ -3,7 +3,6 @@ package trustmanager
 import (
 	"crypto/rand"
 	"crypto/x509"
-	"fmt"
 	"strings"
 	"testing"
 	"time"
@@ -77,7 +76,6 @@ func TestKeyOperations(t *testing.T) {
 	// Check to see if ED key it is encoded
 	stringEncodedEDKey := string(edPEM)
 	assert.True(t, strings.Contains(stringEncodedEDKey, "-----BEGIN ED25519 PRIVATE KEY-----"))
-	fmt.Println(stringEncodedEDKey)
 
 	// Check to see if EC key it is encoded
 	stringEncodedECKey := string(ecPEM)

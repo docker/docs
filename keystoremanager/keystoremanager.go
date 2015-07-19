@@ -205,7 +205,7 @@ have never seen a certificate for a particular CN, we trust it. If later we see
 a different certificate for that certificate, we return an ErrValidationFailed error.
 
 Note that since we only allow trust data to be downloaded over an HTTPS channel
-we are using the current web-of-trust to validate the first download of the certificate
+we are using the current public PKI to validate the first download of the certificate
 adding an extra layer of security over the normal (SSH style) trust model.
 We shall call this: TOFUS.
 */
@@ -214,6 +214,13 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, gun string) error {
 	signedRoot, err := data.RootFromSigned(root)
 	if err != nil {
 		return err
+	}
+
+	// Retrieve all the leaf certificates in root for which the CN matches the GUN
+	allValidCerts, err := validRootLeafCerts(signedRoot, gun)
+	if err != nil {
+		logrus.Debugf("error retrieving valid leaf certificates for: %s, %v", gun, err)
+		return &ErrValidationFail{Reason: "unable to retrieve valid leaf certificates"}
 	}
 
 	// Retrieve all the trusted certificates that match this gun
@@ -228,16 +235,8 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, gun string) error {
 		}
 	}
 
-	// Retrieve all the leaf certificates in root for which the CN matches the GUN
-	allValidCerts, err := validRootLeafCerts(signedRoot, gun)
-	if err != nil {
-		logrus.Debugf("error retrieving valid leaf certificates for: %s, %v", gun, err)
-		return &ErrValidationFail{Reason: "unable to retrieve valid leaf certificates"}
-	}
-
-	// If there are certificates for this specific GUN, we already have trusted
-	// certificates for this GUN. Let's make sure to check that this root is
-	// signed by them
+	// If we have certificates that match this specific GUN, let's make sure to
+	// use them first to validate that this new root is valid.
 	if len(certsForCN) != 0 {
 		logrus.Debugf("found %d valid certificates for %s", len(certsForCN), gun)
 		err = signed.VerifyRoot(root, 0, trustmanager.CertsToKeys(certsForCN))
@@ -259,19 +258,8 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, gun string) error {
 	// the new set of certificates has integrity (self-signed)
 	logrus.Debugf("entering root certificate rotation for: %s", gun)
 
-	var rotationFailure bool
-	// To support root certificate rotation, let trust only the certs present in root
-	// First, we delete all the old certificates that aren't present in the root
-	for certID, cert := range certsToRemove(certsForCN, allValidCerts) {
-		logrus.Debugf("removing certificate with certID: %s", certID)
-		err = km.trustedCertificateStore.RemoveCert(cert)
-		if err != nil {
-			logrus.Debugf("failed to remove trusted certificate with keyID: %s, %v", certID, err)
-			rotationFailure = true
-		}
-	}
-
-	// Now we add all the new certificates (even if they arleady already exist)
+	// Do root certificate rotation: we trust only the certs present in the new root
+	// First we add all the new certificates (even if they already exist)
 	for _, cert := range allValidCerts {
 		err := km.trustedCertificateStore.AddCert(cert)
 		if err != nil {
@@ -280,21 +268,28 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, gun string) error {
 				continue
 			}
 			logrus.Debugf("error adding new trusted certificate for: %s, %v", gun, err)
-			rotationFailure = true
 		}
 		// Getting the CertID for debug only, don't care about the error
 		certID, _ := trustmanager.FingerprintCert(cert)
-		logrus.Debugf("adding trust certificate for with certID %s for %s", certID, gun)
+		logrus.Debugf("adding trust certificate with certID %s for %s", certID, gun)
 	}
 
-	if rotationFailure {
-		return &ErrRootRotationFail{Reason: "failed to rotate root keys"}
+	// Now we delete old certificates that aren't present in the new root
+	for certID, cert := range certsToRemove(certsForCN, allValidCerts) {
+		logrus.Debugf("removing certificate with certID: %s", certID)
+		err = km.trustedCertificateStore.RemoveCert(cert)
+		if err != nil {
+			logrus.Debugf("failed to remove trusted certificate with keyID: %s, %v", certID, err)
+			return &ErrRootRotationFail{Reason: "failed to rotate root keys"}
+		}
 	}
 
 	logrus.Debugf("Root validation succeeded for %s", gun)
 	return nil
 }
 
+// validRootLeafCerts returns a list of non-exipired, non-sha1 certificates whoose
+// Common-Names match the provided GUN
 func validRootLeafCerts(root *data.SignedRoot, gun string) ([]*x509.Certificate, error) {
 	// Get a list of all of the leaf certificates present in root
 	allLeafCerts, _ := parseAllCerts(root)
@@ -312,11 +307,21 @@ func validRootLeafCerts(root *data.SignedRoot, gun string) ([]*x509.Certificate,
 			logrus.Debugf("error leaf certificate is expired")
 			continue
 		}
+
+		// We don't allow root certificates that use SHA1
+		if cert.SignatureAlgorithm == x509.SHA1WithRSA ||
+			cert.SignatureAlgorithm == x509.DSAWithSHA1 ||
+			cert.SignatureAlgorithm == x509.ECDSAWithSHA1 {
+
+			logrus.Debugf("error certificate uses old ciphers")
+			continue
+		}
+
 		validLeafCerts = append(validLeafCerts, cert)
 	}
 
 	if len(validLeafCerts) < 1 {
-		return validLeafCerts, errors.New("no valid leaf certificates found in any of the root keys")
+		return nil, errors.New("no valid leaf certificates found in any of the root keys")
 	}
 
 	return validLeafCerts, nil
@@ -336,9 +341,16 @@ func parseAllCerts(signedRoot *data.SignedRoot) (map[string]*x509.Certificate, m
 	logrus.Debugf("found the following root keys: %v", rootRoles.KeyIDs)
 	// Iterate over every keyID for the root role inside of roots.json
 	for _, keyID := range rootRoles.KeyIDs {
+		// check that the key exists in the signed root keys map
+		key, ok := signedRoot.Signed.Keys[keyID]
+		if !ok {
+			logrus.Debugf("error while getting data for keyID: %s", keyID)
+			continue
+		}
+
 		// Decode all the x509 certificates that were bundled with this
 		// Specific root key
-		decodedCerts, err := trustmanager.LoadCertBundleFromPEM([]byte(signedRoot.Signed.Keys[keyID].Public()))
+		decodedCerts, err := trustmanager.LoadCertBundleFromPEM(key.Public())
 		if err != nil {
 			logrus.Debugf("error while parsing root certificate with keyID: %s, %v", keyID, err)
 			continue

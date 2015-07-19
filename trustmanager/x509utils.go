@@ -445,7 +445,7 @@ func CertsToKeys(certs []*x509.Certificate) map[string]data.PublicKey {
 		case x509.ECDSA:
 			keyType = data.ECDSAx509Key
 		default:
-			logrus.Debugf("unknow certificate type found, ignoring")
+			logrus.Debugf("unknown certificate type found, ignoring")
 		}
 
 		// Create new the appropriate PublicKey
