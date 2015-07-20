@@ -1,7 +1,6 @@
 package signer
 
 import (
-	"errors"
 	"net"
 
 	"github.com/Sirupsen/logrus"
@@ -75,12 +74,15 @@ func (trust *NotarySigner) Create(role string, algorithm data.KeyAlgorithm) (dat
 
 // RemoveKey deletes a key
 func (trust *NotarySigner) RemoveKey(keyid string) error {
-	//TODO(aaronl): Not implemented yet
-	return errors.New("DeleteKey not implemented in NotarySigner")
+	_, err := trust.kmClient.DeleteKey(context.Background(), &pb.KeyID{ID: keyid})
+	return err
 }
 
 // GetKey retrieves a key
 func (trust *NotarySigner) GetKey(keyid string) data.PublicKey {
-	//TODO(aaronl): Not implemented yet
-	return nil
+	publicKey, err := trust.kmClient.GetKeyInfo(context.Background(), &pb.KeyID{ID: keyid})
+	if err != nil {
+		return nil
+	}
+	return data.NewPublicKey(data.KeyAlgorithm(publicKey.KeyInfo.Algorithm.Algorithm), publicKey.PublicKey)
 }
