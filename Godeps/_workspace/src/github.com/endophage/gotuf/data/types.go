@@ -136,15 +136,16 @@ func NewDelegations() *Delegations {
 	}
 }
 
-var defaultExpiryTimes = map[string]time.Time{
-	"root":      time.Now().AddDate(1, 0, 0),
-	"targets":   time.Now().AddDate(0, 3, 0),
-	"snapshot":  time.Now().AddDate(0, 0, 7),
-	"timestamp": time.Now().AddDate(0, 0, 1),
+// defines number of days in which something should expire
+var defaultExpiryTimes = map[string]int{
+	"root":      365,
+	"targets":   90,
+	"snapshot":  7,
+	"timestamp": 1,
 }
 
 // SetDefaultExpiryTimes allows one to change the default expiries.
-func SetDefaultExpiryTimes(times map[string]time.Time) {
+func SetDefaultExpiryTimes(times map[string]int) {
 	for key, value := range times {
 		if _, ok := defaultExpiryTimes[key]; !ok {
 			logrus.Errorf("Attempted to set default expiry for an unknown role: %s", key)
@@ -157,7 +158,7 @@ func SetDefaultExpiryTimes(times map[string]time.Time) {
 func DefaultExpires(role string) time.Time {
 	var t time.Time
 	if t, ok := defaultExpiryTimes[role]; ok {
-		return t
+		return time.Now().AddDate(0, 0, t)
 	}
 	return t.UTC().Round(time.Second)
 }

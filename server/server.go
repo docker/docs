@@ -9,6 +9,7 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/distribution/registry/auth"
+	"github.com/endophage/gotuf/data"
 	"github.com/endophage/gotuf/signed"
 	"github.com/gorilla/mux"
 	"golang.org/x/net/context"
@@ -16,6 +17,14 @@ import (
 	"github.com/docker/notary/server/handlers"
 	"github.com/docker/notary/utils"
 )
+
+func init() {
+	data.SetDefaultExpiryTimes(
+		map[string]int{
+			"timestamp": 14,
+		},
+	)
+}
 
 // Run sets up and starts a TLS server that can be cancelled using the
 // given configuration. The context it is passed is the context it should
