@@ -63,13 +63,13 @@ func testInitRepo(t *testing.T, rootType data.KeyAlgorithm) {
 	ts, _ := createTestServer(t)
 	defer ts.Close()
 
-	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport)
+	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport, passphraseRetriever)
 	assert.NoError(t, err, "error creating repo: %s", err)
 
-	rootKeyID, err := repo.KeyStoreManager.GenRootKey(rootType.String(), "passphrase")
+	rootKeyID, err := repo.KeyStoreManager.GenRootKey(rootType.String())
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID, "passphrase")
+	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID)
 	assert.NoError(t, err, "error retrieving root key: %s", err)
 
 	err = repo.Initialize(rootCryptoService)
@@ -95,14 +95,15 @@ func testInitRepo(t *testing.T, rootType data.KeyAlgorithm) {
 	// in the private key store.
 	privKeyList := repo.KeyStoreManager.NonRootKeyStore().ListFiles(true)
 	for _, privKeyName := range privKeyList {
-		_, err := os.Stat(privKeyName)
+		privKeyFileName := filepath.Join(repo.KeyStoreManager.NonRootKeyStore().BaseDir(), privKeyName)
+		_, err := os.Stat(privKeyFileName)
 		assert.NoError(t, err, "missing private key: %s", privKeyName)
 	}
 
 	// Look for keys in root_keys
 	// There should be a file named after the key ID of the root key we
 	// passed in.
-	rootKeyFilename := rootCryptoService.ID() + ".key"
+	rootKeyFilename := rootCryptoService.ID() + "_root.key"
 	_, err = os.Stat(filepath.Join(tempBaseDir, "private", "root_keys", rootKeyFilename))
 	assert.NoError(t, err, "missing root key")
 
@@ -114,7 +115,7 @@ func testInitRepo(t *testing.T, rootType data.KeyAlgorithm) {
 	certID, err := trustmanager.FingerprintCert(certificates[0])
 	assert.NoError(t, err, "unable to fingerprint the certificate")
 
-	actualDest, err := os.Readlink(filepath.Join(tempBaseDir, "private", "root_keys", certID+".key"))
+	actualDest, err := os.Readlink(filepath.Join(tempBaseDir, "private", "root_keys", certID+"_root"+".key"))
 	assert.NoError(t, err, "missing symlink to root key")
 
 	assert.Equal(t, rootKeyFilename, actualDest, "symlink to root key has wrong destination")
@@ -206,13 +207,13 @@ func testAddListTarget(t *testing.T, rootType data.KeyAlgorithm) {
 	ts, mux := createTestServer(t)
 	defer ts.Close()
 
-	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport)
+	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport, passphraseRetriever)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
-	rootKeyID, err := repo.KeyStoreManager.GenRootKey(rootType.String(), "passphrase")
+	rootKeyID, err := repo.KeyStoreManager.GenRootKey(rootType.String())
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID, "passphrase")
+	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID)
 	assert.NoError(t, err, "error retreiving root key: %s", err)
 
 	err = repo.Initialize(rootCryptoService)
@@ -311,7 +312,7 @@ func testAddListTarget(t *testing.T, rootType data.KeyAlgorithm) {
 	var tempKey data.TUFKey
 	json.Unmarshal([]byte(timestampECDSAKeyJSON), &tempKey)
 
-	repo.KeyStoreManager.NonRootKeyStore().AddKey(filepath.Join(filepath.FromSlash(gun), tempKey.ID()), &tempKey)
+	repo.KeyStoreManager.NonRootKeyStore().AddKey(filepath.Join(filepath.FromSlash(gun), tempKey.ID()), "nonroot", &tempKey)
 
 	// Because ListTargets will clear this
 	savedTUFRepo := repo.tufRepo
@@ -395,13 +396,13 @@ func testValidateRootKey(t *testing.T, rootType data.KeyAlgorithm) {
 	ts, _ := createTestServer(t)
 	defer ts.Close()
 
-	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport)
+	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport, passphraseRetriever)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
-	rootKeyID, err := repo.KeyStoreManager.GenRootKey(rootType.String(), "passphrase")
+	rootKeyID, err := repo.KeyStoreManager.GenRootKey(rootType.String())
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID, "passphrase")
+	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID)
 	assert.NoError(t, err, "error retreiving root key: %s", err)
 
 	err = repo.Initialize(rootCryptoService)
@@ -459,7 +460,8 @@ func testPublish(t *testing.T, rootType data.KeyAlgorithm) {
 
 	// Set up server
 	ctx := context.WithValue(context.Background(), "metaStore", storage.NewMemStorage())
-	hand := utils.RootHandlerFactory(nil, ctx, cryptoservice.NewCryptoService("", trustmanager.NewKeyMemoryStore(), ""))
+	hand := utils.RootHandlerFactory(nil, ctx,
+		cryptoservice.NewCryptoService("", trustmanager.NewKeyMemoryStore(passphraseRetriever)))
 
 	r := mux.NewRouter()
 	r.Methods("POST").Path("/v2/{imageName:.*}/_trust/tuf/").Handler(hand(handlers.AtomicUpdateHandler, "push", "pull"))
@@ -471,13 +473,13 @@ func testPublish(t *testing.T, rootType data.KeyAlgorithm) {
 
 	ts := httptest.NewServer(r)
 
-	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport)
+	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport, passphraseRetriever)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
-	rootKeyID, err := repo.KeyStoreManager.GenRootKey(rootType.String(), "passphrase")
+	rootKeyID, err := repo.KeyStoreManager.GenRootKey(rootType.String())
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID, "passphrase")
+	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID)
 	assert.NoError(t, err, "error retreiving root key: %s", err)
 
 	err = repo.Initialize(rootCryptoService)
@@ -561,9 +563,7 @@ func testPublish(t *testing.T, rootType data.KeyAlgorithm) {
 	changelistDir.Close()
 
 	// Now test Publish
-	err = repo.Publish(func() (string, error) {
-		return "passphrase", nil
-	})
+	err = repo.Publish(passphraseRetriever)
 	assert.NoError(t, err)
 
 	changelistDir, err = os.Open(changelistDirPath)
@@ -579,7 +579,7 @@ func testPublish(t *testing.T, rootType data.KeyAlgorithm) {
 
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
-	repo2, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport)
+	repo2, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport, passphraseRetriever)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
 	targets, err := repo2.ListTargets()

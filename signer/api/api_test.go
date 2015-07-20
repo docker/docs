@@ -23,12 +23,13 @@ import (
 )
 
 var (
-	server           *httptest.Server
-	reader           io.Reader
-	deleteKeyBaseURL string
-	createKeyBaseURL string
-	keyInfoBaseURL   string
-	signBaseURL      string
+	server              *httptest.Server
+	reader              io.Reader
+	deleteKeyBaseURL    string
+	createKeyBaseURL    string
+	keyInfoBaseURL      string
+	signBaseURL         string
+	passphraseRetriever = func (string, string, bool, int) (string, bool, error) { return "passphrase", false, nil}
 )
 
 func SetupHSMEnv(t *testing.T) (*pkcs11.Ctx, pkcs11.SessionHandle) {
@@ -73,8 +74,8 @@ func setup(cryptoServices signer.CryptoServiceIndex) {
 }
 
 func TestDeleteKeyHandlerReturns404WithNonexistentKey(t *testing.T) {
-	keyStore := trustmanager.NewKeyMemoryStore()
-	cryptoService := cryptoservice.NewCryptoService("", keyStore, "")
+	keyStore := trustmanager.NewKeyMemoryStore(passphraseRetriever)
+	cryptoService := cryptoservice.NewCryptoService("", keyStore)
 	setup(signer.CryptoServiceIndex{data.ED25519Key: cryptoService, data.RSAKey: cryptoService, data.ECDSAKey: cryptoService})
 
 	fakeID := "c62e6d68851cef1f7e55a9d56e3b0c05f3359f16838cad43600f0554e7d3b54d"
@@ -93,11 +94,12 @@ func TestDeleteKeyHandlerReturns404WithNonexistentKey(t *testing.T) {
 }
 
 func TestDeleteKeyHandler(t *testing.T) {
-	keyStore := trustmanager.NewKeyMemoryStore()
-	cryptoService := cryptoservice.NewCryptoService("", keyStore, "")
+	keyStore := trustmanager.NewKeyMemoryStore(passphraseRetriever)
+	cryptoService := cryptoservice.NewCryptoService("", keyStore)
 	setup(signer.CryptoServiceIndex{data.ED25519Key: cryptoService, data.RSAKey: cryptoService, data.ECDSAKey: cryptoService})
 
 	tufKey, _ := cryptoService.Create("", data.ED25519Key)
+	assert.NotNil(t, tufKey)
 
 	requestJson, _ := json.Marshal(&pb.KeyID{ID: tufKey.ID()})
 	reader = strings.NewReader(string(requestJson))
@@ -112,11 +114,12 @@ func TestDeleteKeyHandler(t *testing.T) {
 }
 
 func TestKeyInfoHandler(t *testing.T) {
-	keyStore := trustmanager.NewKeyMemoryStore()
-	cryptoService := cryptoservice.NewCryptoService("", keyStore, "")
+	keyStore := trustmanager.NewKeyMemoryStore(passphraseRetriever)
+	cryptoService := cryptoservice.NewCryptoService("", keyStore)
 	setup(signer.CryptoServiceIndex{data.ED25519Key: cryptoService, data.RSAKey: cryptoService, data.ECDSAKey: cryptoService})
 
 	tufKey, _ := cryptoService.Create("", data.ED25519Key)
+	assert.NotNil(t, tufKey)
 
 	keyInfoURL := fmt.Sprintf("%s/%s", keyInfoBaseURL, tufKey.ID())
 
@@ -140,8 +143,8 @@ func TestKeyInfoHandler(t *testing.T) {
 func TestKeyInfoHandlerReturns404WithNonexistentKey(t *testing.T) {
 	// We associate both key types with this signing service to bypass the
 	// ID -> keyType logic in the tests
-	keyStore := trustmanager.NewKeyMemoryStore()
-	cryptoService := cryptoservice.NewCryptoService("", keyStore, "")
+	keyStore := trustmanager.NewKeyMemoryStore(passphraseRetriever)
+	cryptoService := cryptoservice.NewCryptoService("", keyStore)
 	setup(signer.CryptoServiceIndex{data.ED25519Key: cryptoService, data.RSAKey: cryptoService, data.ECDSAKey: cryptoService})
 
 	fakeID := "c62e6d68851cef1f7e55a9d56e3b0c05f3359f16838cad43600f0554e7d3b54d"
@@ -185,8 +188,8 @@ func TestHSMCreateKeyHandler(t *testing.T) {
 }
 
 func TestSoftwareCreateKeyHandler(t *testing.T) {
-	keyStore := trustmanager.NewKeyMemoryStore()
-	cryptoService := cryptoservice.NewCryptoService("", keyStore, "")
+	keyStore := trustmanager.NewKeyMemoryStore(passphraseRetriever)
+	cryptoService := cryptoservice.NewCryptoService("", keyStore)
 	setup(signer.CryptoServiceIndex{data.ED25519Key: cryptoService, data.RSAKey: cryptoService, data.ECDSAKey: cryptoService})
 
 	createKeyURL := fmt.Sprintf("%s/%s", createKeyBaseURL, data.ED25519Key)
@@ -243,8 +246,8 @@ func TestHSMSignHandler(t *testing.T) {
 }
 
 func TestSoftwareSignHandler(t *testing.T) {
-	keyStore := trustmanager.NewKeyMemoryStore()
-	cryptoService := cryptoservice.NewCryptoService("", keyStore, "")
+	keyStore := trustmanager.NewKeyMemoryStore(passphraseRetriever)
+	cryptoService := cryptoservice.NewCryptoService("", keyStore)
 	setup(signer.CryptoServiceIndex{data.ED25519Key: cryptoService, data.RSAKey: cryptoService, data.ECDSAKey: cryptoService})
 
 	tufKey, err := cryptoService.Create("", data.ED25519Key)
@@ -275,8 +278,8 @@ func TestSoftwareSignHandler(t *testing.T) {
 }
 
 func TestSoftwareSignWithInvalidRequestHandler(t *testing.T) {
-	keyStore := trustmanager.NewKeyMemoryStore()
-	cryptoService := cryptoservice.NewCryptoService("", keyStore, "")
+	keyStore := trustmanager.NewKeyMemoryStore(passphraseRetriever)
+	cryptoService := cryptoservice.NewCryptoService("", keyStore)
 	setup(signer.CryptoServiceIndex{data.ED25519Key: cryptoService, data.RSAKey: cryptoService, data.ECDSAKey: cryptoService})
 
 	requestJson := "{\"blob\":\"7d16f1d0b95310a7bc557747fc4f20fcd41c1c5095ae42f189df0717e7d7f4a0a2b55debce630f43c4ac099769c612965e3fda3cd4c0078ee6a460f14fa19307\"}"
@@ -299,8 +302,8 @@ func TestSoftwareSignWithInvalidRequestHandler(t *testing.T) {
 }
 
 func TestSignHandlerReturns404WithNonexistentKey(t *testing.T) {
-	keyStore := trustmanager.NewKeyMemoryStore()
-	cryptoService := cryptoservice.NewCryptoService("", keyStore, "")
+	keyStore := trustmanager.NewKeyMemoryStore(passphraseRetriever)
+	cryptoService := cryptoservice.NewCryptoService("", keyStore)
 	setup(signer.CryptoServiceIndex{data.ED25519Key: cryptoService, data.RSAKey: cryptoService, data.ECDSAKey: cryptoService})
 
 	fakeID := "c62e6d68851cef1f7e55a9d56e3b0c05f3359f16838cad43600f0554e7d3b54d"

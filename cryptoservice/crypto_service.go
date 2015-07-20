@@ -77,7 +77,7 @@ func (ccs *CryptoService) GetKey(keyID string) data.PublicKey {
 
 // RemoveKey deletes a key by ID
 func (ccs *CryptoService) RemoveKey(keyID string) error {
-	return ccs.keyStore.Remove(keyID)
+	return ccs.keyStore.RemoveKey(keyID)
 }
 
 // Sign returns the signatures for the payload with a set of keyIDs. It ignores

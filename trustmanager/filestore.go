@@ -172,6 +172,10 @@ func (f *SimpleFileStore) list(path string, symlinks bool) []string {
 		matched, _ := filepath.Match("*"+f.fileExt, fi.Name())
 
 		if matched {
+			fp, err = filepath.Rel(path, fp)
+			if err != nil {
+				return err
+			}
 			files = append(files, fp)
 		}
 		return nil

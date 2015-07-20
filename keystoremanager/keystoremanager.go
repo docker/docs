@@ -142,6 +142,7 @@ func (km *KeyStoreManager) AddTrustedCACert(cert *x509.Certificate) {
 	km.trustedCAStore.AddCert(cert)
 }
 
+// GenRootKey generates a new root key
 func (km *KeyStoreManager) GenRootKey(algorithm string) (string, error) {
 	var err error
 	var privKey data.PrivateKey
@@ -169,6 +170,7 @@ func (km *KeyStoreManager) GenRootKey(algorithm string) (string, error) {
 }
 
 // GetRootCryptoService retrieves a root key and a cryptoservice to use with it
+// TODO(mccauley): remove this as its no longer needed once we have key caching in the keystores
 func (km *KeyStoreManager) GetRootCryptoService(rootKeyID string) (*cryptoservice.UnlockedCryptoService, error) {
 	privKey, err := km.rootKeyStore.GetKey(rootKeyID)
 	if err != nil {

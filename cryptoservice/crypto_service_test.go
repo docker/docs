@@ -17,11 +17,14 @@ func TestCryptoService(t *testing.T) {
 	}
 }
 
+var passphraseretriever = func (string, string, bool, int) (string, bool, error) { return "", false, nil}
+
+
 func testCryptoService(t *testing.T, keyAlgo data.KeyAlgorithm, verifier signed.Verifier) {
 	content := []byte("this is a secret")
 
-	keyStore := trustmanager.NewKeyMemoryStore()
-	cryptoService := NewCryptoService("", keyStore, "")
+	keyStore := trustmanager.NewKeyMemoryStore(passphraseretriever)
+	cryptoService := NewCryptoService("", keyStore)
 
 	// Test Create
 	tufKey, err := cryptoService.Create("", keyAlgo)

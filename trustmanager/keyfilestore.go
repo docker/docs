@@ -64,7 +64,7 @@ func (s *KeyFileStore) GetKey(name string) (data.PrivateKey, error) {
 	return getKey(s, s.PassphraseRetriever, name)
 }
 
-// GetKeyAlias returns the PrivateKey given a KeyID
+// GetKeyAlias returns the PrivateKey's alias given a KeyID
 func (s *KeyFileStore) GetKeyAlias(name string) (string, error) {
 	return getKeyAlias(s, name)
 }
@@ -98,7 +98,7 @@ func (s *KeyMemoryStore) GetKey(name string) (data.PrivateKey, error) {
 	return getKey(s, s.PassphraseRetriever, name)
 }
 
-// GetKeyAlias returns the PrivateKey given a KeyID
+// GetKeyAlias returns the PrivateKey's alias given a KeyID
 func (s *KeyMemoryStore) GetKeyAlias(name string) (string, error) {
 	return getKeyAlias(s, name)
 }
@@ -131,11 +131,14 @@ func addKey(s LimitedFileStore, passphraseRetriever PassphraseRetriever, name, a
 		if err != nil {
 			attempts++
 			continue
-		} else if giveup {
-			return err
-		} else {
-			break
 		}
+		if giveup {
+			return errors.New("obtaining passphrase failed")
+		}
+		if attempts > 10 {
+			return errors.New("sanity check on number of passphrase attempts exceeded")
+		}
+		break
 	}
 
 	if passphrase != "" {
@@ -148,44 +151,26 @@ func addKey(s LimitedFileStore, passphraseRetriever PassphraseRetriever, name, a
 	return s.Add(name + "_" + alias, pemPrivKey)
 }
 
-func getKeyAlias(s LimitedFileStore, name string) (string, error) {
+func getKeyAlias(s LimitedFileStore, keyID string) (string, error) {
 	files := s.ListFiles(true)
-
-	fmt.Println(name)
-	name = name[strings.LastIndexAny(name, "/\\")+1:]
-	//name = strings.TrimSpace(strings.TrimSuffix(filepath.Base(name), filepath.Ext(name)))
-
-	fmt.Println(name)
+	name := strings.TrimSpace(strings.TrimSuffix(filepath.Base(keyID), filepath.Ext(keyID)))
 
 	for _, file := range files {
-		fmt.Println(file, " ======= ", name)
-		if strings.HasSuffix(file, keyExtension) {
-			lastPathSeparator := strings.LastIndexAny(file, "/\\")
-			filename := file[lastPathSeparator+1:]
-			//filename := strings.TrimSpace(strings.TrimSuffix(filepath.Base(file), filepath.Ext(file)))
+		lastPathSeparator := strings.LastIndexAny(file, "/\\")
+		filename := file[lastPathSeparator+1:]
 
-			fmt.Println(filename, " : ", name)
-
-			if strings.HasPrefix(filename, name) {
-				fmt.Println("filename:", filename)
-				fmt.Println("name:", name)
-				aliasPlusDotKey := strings.TrimPrefix(filename, name + "_")
-				fmt.Println("aliasPlusDotKey:", aliasPlusDotKey)
-
-				retVal := strings.TrimSuffix(aliasPlusDotKey, "." + keyExtension)
-				fmt.Println("retVal:", retVal)
-
-				return retVal, nil
-			}
+		if strings.HasPrefix(filename, name) {
+			aliasPlusDotKey := strings.TrimPrefix(filename, name + "_")
+			retVal := strings.TrimSuffix(aliasPlusDotKey, "." + keyExtension)
+			return retVal, nil
 		}
 	}
 
-	return "", errors.New(fmt.Sprintf("keyId %s has no alias", name))
+	return "", fmt.Errorf("keyId %s has no alias", name)
 }
 
 // GetKey returns the PrivateKey given a KeyID
 func getKey(s LimitedFileStore, passphraseRetriever PassphraseRetriever, name string) (data.PrivateKey, error) {
-
 	keyAlias, err := getKeyAlias(s, name)
 	if err != nil {
 		return nil, err
@@ -205,7 +190,10 @@ func getKey(s LimitedFileStore, passphraseRetriever PassphraseRetriever, name st
 			passphrase, giveup, err := passphraseRetriever(name, string(keyAlias), false, attempts)
 			// Check if the passphrase retriever got an error or if it is telling us to give up
 			if giveup || err != nil {
-				return nil, err
+				return nil, errors.New("obtaining passphrase failed")
+			}
+			if attempts > 10 {
+				return nil, errors.New("sanity check on number of passphrase attempts exceeded")
 			}
 
 			// Try to convert PEM encoded bytes back to a PrivateKey using the passphrase
@@ -225,8 +213,9 @@ func getKey(s LimitedFileStore, passphraseRetriever PassphraseRetriever, name st
 // method only returns the IDs that aren't symlinks
 func listKeys(s LimitedFileStore) []string {
 	var keyIDList []string
+
 	for _, f := range s.ListFiles(false) {
-		keyID := strings.TrimSpace(strings.TrimSuffix(filepath.Base(f), filepath.Ext(f)))
+		keyID := strings.TrimSpace(strings.TrimSuffix(f, filepath.Ext(f)))
 		keyID = keyID[:strings.LastIndex(keyID,"_")]
 		keyIDList = append(keyIDList, keyID)
 	}
@@ -235,5 +224,10 @@ func listKeys(s LimitedFileStore) []string {
 
 // RemoveKey removes the key from the keyfilestore
 func removeKey(s LimitedFileStore, name string) error {
-	return s.Remove(name)
+	keyAlias, err := getKeyAlias(s, name)
+	if err != nil {
+		return err
+	}
+
+	return s.Remove(name + "_" + keyAlias)
 }

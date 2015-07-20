@@ -277,7 +277,6 @@ func getNotaryPassphraseRetriever() (trustmanager.PassphraseRetriever) {
 	targetsSnapshotsPass := ""
 
 	return func(keyID string, alias string, createNew bool, numAttempts int) (string, bool, error) {
-		return "yellowness", false, nil
 		fmt.Printf("userEnteredTargetsSnapshotsPass: %s\n", userEnteredTargetsSnapshotsPass)
 		fmt.Printf("targetsSnapshotsPass: %s\n", targetsSnapshotsPass)
 		fmt.Printf("keyID: %s\n", keyID)
@@ -329,7 +328,7 @@ func getNotaryPassphraseRetriever() (trustmanager.PassphraseRetriever) {
 			return "", false, errors.New("Passphrase too short")
 		}
 
-		fmt.Printf("Repeat passphrase for new %s key with id %s:: ", alias, keyID)
+		fmt.Printf("Repeat passphrase for new %s key with id %s: ", alias, keyID)
 		confirmation, err := stdin.ReadBytes('\n')
 		fmt.Println()
 		if err != nil {
