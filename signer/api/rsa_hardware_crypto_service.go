@@ -130,7 +130,6 @@ func (s *RSAHardwareCryptoService) Sign(keyIDs []string, payload []byte) ([]data
 		var sig []byte
 		var err error
 		for i := 0; i < 3; i++ {
-			//TODO(mccauley): move this to RSA OAEP
 			s.context.SignInit(s.session, []*pkcs11.Mechanism{pkcs11.NewMechanism(pkcs11.CKM_SHA256_RSA_PKCS, nil)}, priv)
 
 			sig, err = s.context.Sign(s.session, payload)
@@ -139,7 +138,6 @@ func (s *RSAHardwareCryptoService) Sign(keyIDs []string, payload []byte) ([]data
 				continue
 			}
 
-			// (diogo): XXX: Remove this before shipping
 			digest := sha256.Sum256(payload)
 			pub, err := x509.ParsePKIXPublicKey(privateKey.Public())
 			if err != nil {
@@ -161,7 +159,6 @@ func (s *RSAHardwareCryptoService) Sign(keyIDs []string, payload []byte) ([]data
 			break
 		}
 
-		// (diogo): XXX: END Area of removal
 		if sig == nil {
 			return nil, errors.New("Failed to create signature")
 		}

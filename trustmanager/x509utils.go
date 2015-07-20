@@ -316,8 +316,6 @@ func RSAToPrivateKey(rsaPrivKey *rsa.PrivateKey) (data.PrivateKey, error) {
 
 // GenerateECDSAKey generates an ECDSA private key and returns a TUF PrivateKey
 func GenerateECDSAKey(random io.Reader) (data.PrivateKey, error) {
-	// TODO(diogo): For now hardcode P256. There were timming attacks on the other
-	// curves, but I can't seem to find the issue.
 	ecdsaPrivKey, err := ecdsa.GenerateKey(elliptic.P256(), random)
 	if err != nil {
 		return nil, err
@@ -467,7 +465,6 @@ func NewCertificate(gun string) (*x509.Certificate, error) {
 		return nil, fmt.Errorf("failed to generate new certificate: %v", err)
 	}
 
-	// TODO(diogo): Currently hard coding organization to be the gun. Revisit.
 	return &x509.Certificate{
 		SerialNumber: serialNumber,
 		Subject: pkix.Name{
