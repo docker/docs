@@ -174,7 +174,6 @@ func TestAddGetKeyMemStore(t *testing.T) {
 		t.Fatalf("key contents differs after add/get")
 	}
 }
-
 func TestGetDecryptedWithTamperedCipherText(t *testing.T) {
 	testExt := "key"
 	testAlias := "root"
@@ -261,8 +260,40 @@ func TestGetDecryptedWithInvalidPassphrase(t *testing.T) {
 
 }
 
+func TestGetDecryptedWithConsistentlyInvalidPassphrase(t *testing.T) {
+
+	// Make a passphraseRetriever that always returns a different passphrase in order to test
+	// decryption failure
+	a := "aaaaaaaaaaaaa"
+	var consistentlyInvalidPassphraseRetriever = func(keyID string, alias string, createNew bool, numAttempts int) (string, bool, error) {
+		a = a + a
+		return a, false, nil
+	}
+
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	if err != nil {
+		t.Fatalf("failed to create a temporary directory: %v", err)
+	}
+	defer os.RemoveAll(tempBaseDir)
+
+	// Test with KeyFileStore
+	fileStore, err := NewKeyFileStore(tempBaseDir, consistentlyInvalidPassphraseRetriever)
+	if err != nil {
+		t.Fatalf("failed to create new key filestore: %v", err)
+	}
+
+	testGetDecryptedWithInvalidPassphrase(t, fileStore)
+
+	// Test with KeyMemoryStore
+	memStore := NewKeyMemoryStore(consistentlyInvalidPassphraseRetriever)
+	if err != nil {
+		t.Fatalf("failed to create new key memorystore: %v", err)
+	}
+	testGetDecryptedWithInvalidPassphrase(t, memStore)
+}
+
 func testGetDecryptedWithInvalidPassphrase(t *testing.T, store KeyStore) {
-	testName := "docker.com/notary/root"
 	testAlias := "root"
 
 	// Generate a new random RSA Key
@@ -271,14 +302,14 @@ func testGetDecryptedWithInvalidPassphrase(t *testing.T, store KeyStore) {
 		t.Fatalf("could not generate private key: %v", err)
 	}
 
-	// Call the AddEncryptedKey function
+	// Call the AddKey function
 	err = store.AddKey(privKey.ID(), testAlias, privKey)
 	if err != nil {
 		t.Fatalf("failed to add file to store: %v", err)
 	}
 
 	// Try to decrypt the file with an invalid passphrase
-	_, err = store.GetKey(testName)
+	_, err = store.GetKey(privKey.ID())
 	if err == nil {
 		t.Fatalf("expected error while decrypting the content due to invalid passphrase")
 	}

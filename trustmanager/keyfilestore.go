@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	keyExtension   = "key"
+	keyExtension = "key"
 )
 
 // KeyStore is a generic interface for private key storage
@@ -182,8 +182,7 @@ func getKey(s LimitedFileStore, passphraseRetriever PassphraseRetriever, name st
 	privKey, err := ParsePEMPrivateKey(keyBytes, "")
 	if err != nil {
 		// We need to decrypt the key, lets get a passphrase
-		attempts := 0
-		for {
+		for attempts := 0; ; attempts++ {
 			passphrase, giveup, err := passphraseRetriever(name, string(keyAlias), false, attempts)
 			// Check if the passphrase retriever got an error or if it is telling us to give up
 			if giveup || err != nil {
@@ -199,7 +198,6 @@ func getKey(s LimitedFileStore, passphraseRetriever PassphraseRetriever, name st
 				// We managed to parse the PrivateKey. We've succeeded!
 				break
 			}
-			attempts++
 		}
 	}
 	return privKey, nil

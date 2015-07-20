@@ -22,7 +22,6 @@ import (
 	"github.com/miekg/pkcs11"
 
 	pb "github.com/docker/notary/proto"
-	"fmt"
 )
 
 const (
