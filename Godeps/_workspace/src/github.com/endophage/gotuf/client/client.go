@@ -174,25 +174,7 @@ func (c *Client) downloadRoot() error {
 		logrus.Debug("using cached root")
 		s = old
 	}
-	// this will confirm that the root has been signed by the old root role
-	// as c.keysDB contains the root keys we bootstrapped with.
-	// Still need to determine if there has been a root key update and
-	// confirm signature with new root key
-	err = signed.Verify(s, role, version, c.keysDB)
-	if err != nil {
-		logrus.Debug("root did not verify with existing keys")
-		return err
-	}
-
-	// This will cause keyDB to get updated, overwriting any keyIDs associated
-	// with the roles in root.json
-	c.local.SetRoot(s)
-	// verify again now that the old keys have been replaced with the new keys.
-	// TODO(endophage): be more intelligent and only re-verify if we detect
-	//                  there has been a change in root keys
-	err = signed.Verify(s, role, version, c.keysDB)
-	if err != nil {
-		logrus.Debug("root did not verify with new keys")
+	if err := c.verifyRoot(role, s, version); err != nil {
 		return err
 	}
 	if download {
@@ -202,6 +184,39 @@ func (c *Client) downloadRoot() error {
 			logrus.Errorf("Failed to write root to local cache: %s", err.Error())
 		}
 	}
+	return nil
+}
+
+func (c Client) verifyRoot(role string, s *data.Signed, minVersion int) error {
+	// this will confirm that the root has been signed by the old root role
+	// as c.keysDB contains the root keys we bootstrapped with.
+	// Still need to determine if there has been a root key update and
+	// confirm signature with new root key
+	logrus.Debug("verifying root with existing keys")
+	err := signed.Verify(s, role, minVersion, c.keysDB)
+	if err != nil {
+		logrus.Debug("root did not verify with existing keys")
+		return err
+	}
+
+	// This will cause keyDB to get updated, overwriting any keyIDs associated
+	// with the roles in root.json
+	logrus.Debug("updating known root roles and keys")
+	err = c.local.SetRoot(s)
+	if err != nil {
+		logrus.Error(err.Error())
+		return err
+	}
+	// verify again now that the old keys have been replaced with the new keys.
+	// TODO(endophage): be more intelligent and only re-verify if we detect
+	//                  there has been a change in root keys
+	logrus.Debug("verifying root with updated keys")
+	err = signed.Verify(s, role, minVersion, c.keysDB)
+	if err != nil {
+		logrus.Debug("root did not verify with new keys")
+		return err
+	}
+	logrus.Debug("successfully verified root")
 	return nil
 }
 
@@ -228,9 +243,13 @@ func (c *Client) downloadTimestamp() error {
 	}
 	// unlike root, targets and snapshot, always try and download timestamps
 	// from remote, only using the cache one if we couldn't reach remote.
+	logrus.Debug("Downloading timestamp")
 	raw, err := c.remote.GetMeta(role, maxSize)
 	var s *data.Signed
 	if err != nil || len(raw) == 0 {
+		if err, ok := err.(*store.ErrMetaNotFound); ok {
+			return err
+		}
 		s = old
 	} else {
 		download = true
@@ -244,6 +263,7 @@ func (c *Client) downloadTimestamp() error {
 	if err != nil {
 		return err
 	}
+	logrus.Debug("successfully verified timestamp")
 	if download {
 		c.cache.SetMeta(role, raw)
 	}
@@ -314,6 +334,7 @@ func (c *Client) downloadSnapshot() error {
 	if err != nil {
 		return err
 	}
+	logrus.Debug("successfully verified snapshot")
 	c.local.SetSnapshot(s)
 	if download {
 		err = c.cache.SetMeta(role, raw)
@@ -349,24 +370,24 @@ func (c *Client) downloadTargets(role string) error {
 	return nil
 }
 
-func (c Client) GetTargetsFile(roleName string, keyIDs []string, snapshotMeta data.Files, consistent bool, threshold int) (*data.Signed, error) {
+func (c Client) GetTargetsFile(role string, keyIDs []string, snapshotMeta data.Files, consistent bool, threshold int) (*data.Signed, error) {
 	// require role exists in snapshots
-	roleMeta, ok := snapshotMeta[roleName]
+	roleMeta, ok := snapshotMeta[role]
 	if !ok {
 		return nil, fmt.Errorf("Snapshot does not contain target role")
 	}
-	expectedSha256, ok := snapshotMeta[roleName].Hashes["sha256"]
+	expectedSha256, ok := snapshotMeta[role].Hashes["sha256"]
 	if !ok {
-		return nil, fmt.Errorf("Sha256 is currently the only hash supported by this client. No Sha256 found for targets role %s", roleName)
+		return nil, fmt.Errorf("Sha256 is currently the only hash supported by this client. No Sha256 found for targets role %s", role)
 	}
 
 	// try to get meta file from content addressed cache
 	var download bool
 	old := &data.Signed{}
 	version := 0
-	raw, err := c.cache.GetMeta(roleName, roleMeta.Length)
+	raw, err := c.cache.GetMeta(role, roleMeta.Length)
 	if err != nil || raw == nil {
-		logrus.Debugf("Couldn't not find cached %s, must download", roleName)
+		logrus.Debugf("Couldn't not find cached %s, must download", role)
 		download = true
 	} else {
 		// file may have been tampered with on disk. Always check the hash!
@@ -390,11 +411,11 @@ func (c Client) GetTargetsFile(roleName string, keyIDs []string, snapshotMeta da
 
 	var s *data.Signed
 	if download {
-		rolePath, err := c.RoleTargetsPath(roleName, hex.EncodeToString(expectedSha256), consistent)
+		rolePath, err := c.RoleTargetsPath(role, hex.EncodeToString(expectedSha256), consistent)
 		if err != nil {
 			return nil, err
 		}
-		raw, err = c.remote.GetMeta(rolePath, snapshotMeta[roleName].Length)
+		raw, err = c.remote.GetMeta(rolePath, snapshotMeta[role].Length)
 		if err != nil {
 			return nil, err
 		}
@@ -405,17 +426,18 @@ func (c Client) GetTargetsFile(roleName string, keyIDs []string, snapshotMeta da
 			return nil, err
 		}
 	} else {
-		logrus.Debug("using cached ", roleName)
+		logrus.Debug("using cached ", role)
 		s = old
 	}
 
-	err = signed.Verify(s, roleName, version, c.keysDB)
+	err = signed.Verify(s, role, version, c.keysDB)
 	if err != nil {
 		return nil, err
 	}
+	logrus.Debugf("successfully verified %s", role)
 	if download {
 		// if we error when setting meta, we should continue.
-		err = c.cache.SetMeta(roleName, raw)
+		err = c.cache.SetMeta(role, raw)
 		if err != nil {
 			logrus.Errorf("Failed to write snapshot to local cache: %s", err.Error())
 		}
@@ -425,19 +447,19 @@ func (c Client) GetTargetsFile(roleName string, keyIDs []string, snapshotMeta da
 
 // RoleTargetsPath generates the appropriate filename for the targets file,
 // based on whether the repo is marked as consistent.
-func (c Client) RoleTargetsPath(roleName string, hashSha256 string, consistent bool) (string, error) {
+func (c Client) RoleTargetsPath(role string, hashSha256 string, consistent bool) (string, error) {
 	if consistent {
-		dir := filepath.Dir(roleName)
-		if strings.Contains(roleName, "/") {
-			lastSlashIdx := strings.LastIndex(roleName, "/")
-			roleName = roleName[lastSlashIdx+1:]
+		dir := filepath.Dir(role)
+		if strings.Contains(role, "/") {
+			lastSlashIdx := strings.LastIndex(role, "/")
+			role = role[lastSlashIdx+1:]
 		}
-		roleName = path.Join(
+		role = path.Join(
 			dir,
-			fmt.Sprintf("%s.%s.json", hashSha256, roleName),
+			fmt.Sprintf("%s.%s.json", hashSha256, role),
 		)
 	}
-	return roleName, nil
+	return role, nil
 }
 
 // TargetMeta ensures the repo is up to date, downloading the minimum

@@ -70,3 +70,11 @@ func FileExists(path string) bool {
 	_, err := os.Stat(path)
 	return os.IsNotExist(err)
 }
+
+type NoopCloser struct {
+	io.Reader
+}
+
+func (nc *NoopCloser) Close() error {
+	return nil
+}

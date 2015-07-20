@@ -2,12 +2,15 @@ package store
 
 import (
 	"bytes"
+	"fmt"
+	"io"
 
 	"github.com/endophage/gotuf/data"
 	"github.com/endophage/gotuf/errors"
+	"github.com/endophage/gotuf/utils"
 )
 
-func NewMemoryStore(meta map[string][]byte, files map[string][]byte) LocalStore {
+func NewMemoryStore(meta map[string][]byte, files map[string][]byte) *memoryStore {
 	if meta == nil {
 		meta = make(map[string][]byte)
 	}
@@ -43,8 +46,8 @@ func (m *memoryStore) SetMultiMeta(metas map[string][]byte) error {
 	return nil
 }
 
-func (m *memoryStore) AddBlob(path string, meta data.FileMeta) {
-
+func (m *memoryStore) GetTarget(path string) (io.ReadCloser, error) {
+	return &utils.NoopCloser{Reader: bytes.NewReader(m.files[path])}, nil
 }
 
 func (m *memoryStore) WalkStagedTargets(paths []string, targetsFn targetsWalkFunc) error {
@@ -81,18 +84,6 @@ func (m *memoryStore) Commit(map[string][]byte, bool, map[string]data.Hashes) er
 	return nil
 }
 
-func (m *memoryStore) GetKeys(role string) ([]data.PrivateKey, error) {
-	return m.keys[role], nil
-}
-
-func (m *memoryStore) SaveKey(role string, key data.PrivateKey) error {
-	if _, ok := m.keys[role]; !ok {
-		m.keys[role] = make([]data.PrivateKey, 0)
-	}
-	m.keys[role] = append(m.keys[role], key)
-	return nil
-}
-
-func (m *memoryStore) Clean() error {
-	return nil
+func (m *memoryStore) GetKey(role string) ([]byte, error) {
+	return nil, fmt.Errorf("GetKey is not implemented for the memoryStore")
 }
