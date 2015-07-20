@@ -67,7 +67,6 @@ func (trust *NotarySigner) Create(role string, algorithm data.KeyAlgorithm) (dat
 	if err != nil {
 		return nil, err
 	}
-	//TODO(mccauley): Update API to return algorithm and/or take it as a param
 	public := data.NewPublicKey(data.KeyAlgorithm(publicKey.KeyInfo.Algorithm.Algorithm), publicKey.PublicKey)
 	return public, nil
 }

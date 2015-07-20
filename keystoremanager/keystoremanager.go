@@ -143,7 +143,6 @@ func (km *KeyStoreManager) AddTrustedCACert(cert *x509.Certificate) {
 }
 
 // GenRootKey generates a new root key protected by a given passphrase
-// TODO(diogo): show not create keys manually, should use a cryptoservice instead
 func (km *KeyStoreManager) GenRootKey(algorithm, passphrase string) (string, error) {
 	var err error
 	var privKey data.PrivateKey

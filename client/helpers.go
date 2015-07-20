@@ -51,8 +51,6 @@ func applyTargetsChange(repo *tuf.TufRepo, c changelist.Change) error {
 		err = repo.RemoveTargets("targets", c.Path())
 	}
 	if err != nil {
-		// TODO(endophage): print out rem entries as files that couldn't
-		//                  be added.
 		return err
 	}
 	return nil

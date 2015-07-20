@@ -47,14 +47,12 @@ func (cl FileChangelist) List() []Change {
 		}
 		raw, err := ioutil.ReadFile(path.Join(cl.dir, f.Name()))
 		if err != nil {
-			// TODO(david): How should we handle this?
 			logrus.Warn(err.Error())
 			continue
 		}
 		c := &TufChange{}
 		err = json.Unmarshal(raw, c)
 		if err != nil {
-			// TODO(david): How should we handle this?
 			logrus.Warn(err.Error())
 			continue
 		}
