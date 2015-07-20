@@ -150,7 +150,7 @@ func GetTimestampHandler(ctx context.Context, w http.ResponseWriter, r *http.Req
 		}
 	}
 
-	logrus.Debug("Writing data")
+	logrus.Debugf("[Notary Server] 200 GET timestamp: %s", gun)
 	w.Write(out)
 	return nil
 }
@@ -161,11 +161,13 @@ func GetTimestampKeyHandler(ctx context.Context, w http.ResponseWriter, r *http.
 	s := ctx.Value("metaStore")
 	store, ok := s.(storage.MetaStore)
 	if !ok {
+		logrus.Debugf("[Notary Server] 500 GET storage not configured")
 		return errors.ErrNoStorage.WithDetail(nil)
 	}
 	c := ctx.Value("cryptoService")
 	crypto, ok := c.(signed.CryptoService)
 	if !ok {
+		logrus.Debugf("[Notary Server] 500 GET crypto service not configured")
 		return errors.ErrNoCryptoService.WithDetail(nil)
 	}
 
@@ -174,13 +176,16 @@ func GetTimestampKeyHandler(ctx context.Context, w http.ResponseWriter, r *http.
 
 	key, err := timestamp.GetOrCreateTimestampKey(gun, store, crypto, data.ED25519Key)
 	if err != nil {
+		logrus.Debugf("[Notary Server] 500 GET timestamp key: %s", gun)
 		return errors.ErrUnknown.WithDetail(err)
 	}
 
 	out, err := json.Marshal(key)
 	if err != nil {
+		logrus.Debugf("[Notary Server] 500 GET timestamp key: %s", gun)
 		return errors.ErrUnknown.WithDetail(err)
 	}
+	logrus.Debugf("[Notary Server] 200 GET timestamp key: %s", gun)
 	w.Write(out)
 	return nil
 }
