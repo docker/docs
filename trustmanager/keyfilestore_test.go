@@ -261,12 +261,11 @@ func TestGetDecryptedWithInvalidPassphrase(t *testing.T) {
 }
 
 func TestGetDecryptedWithConsistentlyInvalidPassphrase(t *testing.T) {
-
 	// Make a passphraseRetriever that always returns a different passphrase in order to test
 	// decryption failure
 	a := "aaaaaaaaaaaaa"
 	var consistentlyInvalidPassphraseRetriever = func(keyID string, alias string, createNew bool, numAttempts int) (string, bool, error) {
-		a = a + a
+		a = a + "a"
 		return a, false, nil
 	}
 
