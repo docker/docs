@@ -36,7 +36,10 @@ const signedRSARootTemplate = `{"signed":{"_type":"Root","consistent_snapshot":f
 // We test this with both an RSA and ECDSA root key
 func TestValidateRoot(t *testing.T) {
 	logrus.SetLevel(logrus.DebugLevel)
-	validateRootSuccessfully(t, data.RSAKey)
+	validateRootSuccessfully(t, data.ECDSAKey)
+	if !testing.Short() {
+		validateRootSuccessfully(t, data.RSAKey)
+	}
 }
 
 func validateRootSuccessfully(t *testing.T, rootType data.KeyAlgorithm) {
