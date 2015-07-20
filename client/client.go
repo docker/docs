@@ -26,6 +26,16 @@ import (
 
 const maxSize = 5 << 20
 
+func init() {
+	data.SetDefaultExpiryTimes(
+		map[string]int{
+			"root":     3650,
+			"targets":  1095,
+			"snapshot": 1095,
+		},
+	)
+}
+
 // ErrRepoNotInitialized is returned when trying to can publish on an uninitialized
 // notary repository
 type ErrRepoNotInitialized struct{}
