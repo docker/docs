@@ -9,8 +9,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-var passphraseRetriever = func(string, string, bool, int) (string, bool, error) { return "passphrase", false, nil }
-
 func TestUnlockedSigner(t *testing.T) {
 	privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
 	assert.NoError(t, err, "could not generate key")

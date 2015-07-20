@@ -6,7 +6,7 @@ notaryserver:
    - notarysigner
   ports:
    - "8080"
-   - "4443:4443"
+   - "4443"
   environment:
     SERVICE_NAME: notary
 notarysigner:

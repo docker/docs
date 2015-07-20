@@ -11,7 +11,6 @@ import (
 
 const (
 	keyExtension   = "key"
-	aliasExtension = "alias"
 )
 
 // KeyStore is a generic interface for private key storage
@@ -134,7 +133,7 @@ func addKey(s LimitedFileStore, passphraseRetriever PassphraseRetriever, name, a
 			return errors.New("obtaining passphrase failed")
 		}
 		if attempts > 10 {
-			return errors.New("sanity check on number of passphrase attempts exceeded")
+			return errors.New("maximum number of passphrase attempts exceeded")
 		}
 		break
 	}
@@ -191,7 +190,7 @@ func getKey(s LimitedFileStore, passphraseRetriever PassphraseRetriever, name st
 				return nil, errors.New("obtaining passphrase failed")
 			}
 			if attempts > 10 {
-				return nil, errors.New("sanity check on number of passphrase attempts exceeded")
+				return nil, errors.New("maximum number of passphrase attempts exceeded")
 			}
 
 			// Try to convert PEM encoded bytes back to a PrivateKey using the passphrase

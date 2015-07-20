@@ -86,9 +86,8 @@ func TestImportExportZip(t *testing.T) {
 	privKeyList := repo.KeyStoreManager.NonRootKeyStore().ListKeys()
 	for _, privKeyName := range privKeyList {
 		alias, err := repo.KeyStoreManager.NonRootKeyStore().GetKeyAlias(privKeyName)
-		if err != nil {
-			t.Fatalf("privKey %s has no alias", privKeyName)
-		}
+		assert.NoError(t, err, "privKey %s has no alias", privKeyName)
+
 		relKeyPath := filepath.Join("private", "tuf_keys", privKeyName+"_"+alias+".key")
 		passphraseByFile[relKeyPath] = exportPassphrase
 	}
@@ -158,9 +157,7 @@ func TestImportExportZip(t *testing.T) {
 	// in the repo's private key store.
 	for _, privKeyName := range privKeyList {
 		alias, err := repo.KeyStoreManager.NonRootKeyStore().GetKeyAlias(privKeyName)
-		if err != nil {
-			t.Fatalf("privKey %s has no alias", privKeyName)
-		}
+		assert.NoError(t, err, "privKey %s has no alias", privKeyName)
 
 		relKeyPath := filepath.Join("private", "tuf_keys", privKeyName+"_"+alias+".key")
 		privKeyFileName := filepath.Join(tempBaseDir2, relKeyPath)

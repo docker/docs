@@ -11,7 +11,6 @@ import (
 	"path/filepath"
 	"strings"
 
-	"fmt"
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary/trustmanager"
 )
@@ -169,11 +168,9 @@ func (km *KeyStoreManager) ExportAllKeys(dest io.Writer, newPassphraseRetriever 
 
 	zipWriter := zip.NewWriter(dest)
 
-	fmt.Println("moving keys to archive: root")
 	if err := addKeysToArchive(zipWriter, tempRootKeyStore, privRootKeysSubdir); err != nil {
 		return err
 	}
-	fmt.Println("moving keys to archive: nonroot")
 	if err := addKeysToArchive(zipWriter, tempNonRootKeyStore, privNonRootKeysSubdir); err != nil {
 
 		return err

@@ -20,7 +20,7 @@ import (
 )
 
 // FIXME: This should not be hardcoded
-const hardcodedBaseURL = "http://notary-server:4443"
+const hardcodedBaseURL = "https://notary-server:4443"
 
 var retriever trustmanager.PassphraseRetriever
 
@@ -207,7 +207,7 @@ func tufPublish(cmd *cobra.Command, args []string) {
 		fatalf(err.Error())
 	}
 
-	err = repo.Publish(retriever)
+	err = repo.Publish()
 	if err != nil {
 		fatalf(err.Error())
 	}

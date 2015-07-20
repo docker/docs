@@ -172,6 +172,7 @@ func (f *SimpleFileStore) list(path string, symlinks bool) []string {
 		matched, _ := filepath.Match("*"+f.fileExt, fi.Name())
 
 		if matched {
+			// Find the relative path for this file relative to the base path.
 			fp, err = filepath.Rel(path, fp)
 			if err != nil {
 				return err

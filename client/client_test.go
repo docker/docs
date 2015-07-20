@@ -563,7 +563,7 @@ func testPublish(t *testing.T, rootType data.KeyAlgorithm) {
 	changelistDir.Close()
 
 	// Now test Publish
-	err = repo.Publish(passphraseRetriever)
+	err = repo.Publish()
 	assert.NoError(t, err)
 
 	changelistDir, err = os.Open(changelistDirPath)

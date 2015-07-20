@@ -83,7 +83,9 @@ func NewTarget(targetName string, targetPath string) (*Target, error) {
 // NewNotaryRepository is a helper method that returns a new notary repository.
 // It takes the base directory under where all the trust files will be stored
 // (usually ~/.docker/trust/).
-func NewNotaryRepository(baseDir, gun, baseURL string, rt http.RoundTripper, passphraseRetriever trustmanager.PassphraseRetriever) (*NotaryRepository, error) {
+func NewNotaryRepository(baseDir, gun, baseURL string, rt http.RoundTripper,
+	passphraseRetriever trustmanager.PassphraseRetriever) (*NotaryRepository, error) {
+
 	keyStoreManager, err := keystoremanager.NewKeyStoreManager(baseDir, passphraseRetriever)
 	if err != nil {
 		return nil, err
@@ -298,7 +300,7 @@ func (r *NotaryRepository) GetTargetByName(name string) (*Target, error) {
 
 // Publish pushes the local changes in signed material to the remote notary-server
 // Conceptually it performs an operation similar to a `git rebase`
-func (r *NotaryRepository) Publish(getPass trustmanager.PassphraseRetriever) error {
+func (r *NotaryRepository) Publish() error {
 	var updateRoot bool
 	var root *data.Signed
 	// attempt to initialize the repo from the remote store
