@@ -29,13 +29,15 @@ type KeyStore interface {
 // KeyFileStore persists and manages private keys on disk
 type KeyFileStore struct {
 	SimpleFileStore
-	PassphraseRetriever passphrase.Retriever
+	PassphraseRetriever
+	cachedKeys map[string]data.PrivateKey
 }
 
 // KeyMemoryStore manages private keys in memory
 type KeyMemoryStore struct {
 	MemoryFileStore
-	PassphraseRetriever passphrase.Retriever
+	PassphraseRetriever
+	cachedKeys map[string]data.PrivateKey
 }
 
 // NewKeyFileStore returns a new KeyFileStore creating a private directory to
@@ -45,18 +47,19 @@ func NewKeyFileStore(baseDir string, passphraseRetriever passphrase.Retriever) (
 	if err != nil {
 		return nil, err
 	}
+	cachedKeys := make(map[string]data.PrivateKey)
 
-	return &KeyFileStore{*fileStore, passphraseRetriever}, nil
+	return &KeyFileStore{*fileStore, passphraseRetriever, cachedKeys}, nil
 }
 
 // AddKey stores the contents of a PEM-encoded private key as a PEM block
 func (s *KeyFileStore) AddKey(name, alias string, privKey data.PrivateKey) error {
-	return addKey(s, s.PassphraseRetriever, name, alias, privKey)
+	return addKey(s, s.PassphraseRetriever, s.cachedKeys, name, alias, privKey)
 }
 
 // GetKey returns the PrivateKey given a KeyID
 func (s *KeyFileStore) GetKey(name string) (data.PrivateKey, error) {
-	return getKey(s, s.PassphraseRetriever, name)
+	return getKey(s, s.PassphraseRetriever, s.cachedKeys, name)
 }
 
 // GetKeyAlias returns the PrivateKey's alias given a KeyID
@@ -79,18 +82,19 @@ func (s *KeyFileStore) RemoveKey(name string) error {
 // NewKeyMemoryStore returns a new KeyMemoryStore which holds keys in memory
 func NewKeyMemoryStore(passphraseRetriever passphrase.Retriever) *KeyMemoryStore {
 	memStore := NewMemoryFileStore()
+	cachedKeys := make(map[string]data.PrivateKey)
 
-	return &KeyMemoryStore{*memStore, passphraseRetriever}
+	return &KeyMemoryStore{*memStore, passphraseRetriever, cachedKeys}
 }
 
 // AddKey stores the contents of a PEM-encoded private key as a PEM block
 func (s *KeyMemoryStore) AddKey(name, alias string, privKey data.PrivateKey) error {
-	return addKey(s, s.PassphraseRetriever, name, alias, privKey)
+	return addKey(s, s.PassphraseRetriever, s.cachedKeys, name, alias, privKey)
 }
 
 // GetKey returns the PrivateKey given a KeyID
 func (s *KeyMemoryStore) GetKey(name string) (data.PrivateKey, error) {
-	return getKey(s, s.PassphraseRetriever, name)
+	return getKey(s, s.PassphraseRetriever, s.cachedKeys, name)
 }
 
 // GetKeyAlias returns the PrivateKey's alias given a KeyID
@@ -110,7 +114,7 @@ func (s *KeyMemoryStore) RemoveKey(name string) error {
 	return removeKey(s, name)
 }
 
-func addKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, name, alias string, privKey data.PrivateKey) error {
+func addKey(s LimitedFileStore, passphraseRetriever PassphraseRetriever, cachedKeys map[string]data.PrivateKey, name, alias string, privKey data.PrivateKey) error {
 	pemPrivKey, err := KeyToPEM(privKey)
 	if err != nil {
 		return err
@@ -141,6 +145,7 @@ func addKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, name, 
 		}
 	}
 
+	cachedKeys[name] = privKey
 	return s.Add(name+"_"+alias, pemPrivKey)
 }
 
@@ -162,7 +167,11 @@ func getKeyAlias(s LimitedFileStore, keyID string) (string, error) {
 }
 
 // GetKey returns the PrivateKey given a KeyID
-func getKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, name string) (data.PrivateKey, error) {
+func getKey(s LimitedFileStore, passphraseRetriever PassphraseRetriever, cachedKeys map[string]data.PrivateKey, name string) (data.PrivateKey, error) {
+	cachedKey, ok := cachedKeys[name]
+	if ok {
+		return cachedKey, nil
+	}
 	keyAlias, err := getKeyAlias(s, name)
 	if err != nil {
 		return nil, err
@@ -195,6 +204,7 @@ func getKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, name s
 			}
 		}
 	}
+	cachedKeys[name] = privKey
 	return privKey, nil
 }
 

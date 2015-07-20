@@ -9,6 +9,7 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
+	"github.com/docker/notary/Godeps/_workspace/src/github.com/stretchr/testify/assert"
 )
 
 var passphraseRetriever = func(keyID string, alias string, createNew bool, numAttempts int) (string, bool, error) {
@@ -363,4 +364,80 @@ func TestRemoveKey(t *testing.T) {
 	if err == nil {
 		t.Fatalf("file should not exist %s", expectedFilePath)
 	}
+}
+
+func TestKeysAreCached(t *testing.T) {
+	testName := "docker.com/notary/root"
+	testAlias := "alias"
+
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	if err != nil {
+		t.Fatalf("failed to create a temporary directory: %v", err)
+	}
+	defer os.RemoveAll(tempBaseDir)
+
+
+	var countingPassphraseRetriever PassphraseRetriever
+
+	numTimesCalled := 0
+	countingPassphraseRetriever = func(keyId, alias string, createNew bool, attempts int) (passphrase string, giveup bool, err error) {
+		numTimesCalled++
+		return "password", false, nil
+	}
+
+	// Create our store
+	store, err := NewKeyFileStore(tempBaseDir, countingPassphraseRetriever)
+	if err != nil {
+		t.Fatalf("failed to create new key filestore: %v", err)
+	}
+
+	privKey, err := GenerateRSAKey(rand.Reader, 512)
+	if err != nil {
+		t.Fatalf("could not generate private key: %v", err)
+	}
+
+	// Call the AddKey function
+	err = store.AddKey(testName, testAlias, privKey)
+	if err != nil {
+		t.Fatalf("failed to add file to store: %v", err)
+	}
+
+	assert.Equal(t, 1, numTimesCalled, "numTimesCalled should have been 1")
+
+	// Call the AddKey function
+	privKey2, err := store.GetKey(testName)
+	if err != nil {
+		t.Fatalf("failed to add file to store: %v", err)
+	}
+
+	assert.Equal(t, privKey.Public(), privKey2.Public(), "cachedPrivKey should be the same as the added privKey")
+	assert.Equal(t, privKey.Private(), privKey2.Private(), "cachedPrivKey should be the same as the added privKey")
+	assert.Equal(t, 1, numTimesCalled, "numTimesCalled should be 1 -- no additional call to passphraseRetriever")
+
+
+	// Create a new store
+	store2, err := NewKeyFileStore(tempBaseDir, countingPassphraseRetriever)
+	if err != nil {
+		t.Fatalf("failed to create new key filestore: %v", err)
+	}
+
+	// Call the AddKey function
+	privKey3, err := store2.GetKey(testName)
+	if err != nil {
+		t.Fatalf("failed to add file to store: %v", err)
+	}
+
+	assert.Equal(t, privKey2.Private(), privKey3.Private(), "privkey from store1 should be the same as privkey from store2")
+	assert.Equal(t, privKey2.Public(), privKey3.Public(), "privkey from store1 should be the same as privkey from store2")
+	assert.Equal(t, 2, numTimesCalled, "numTimesCalled should be 2 -- one additional call to passphraseRetriever")
+
+	// Call the GetKey function a bunch of times
+	for i := 0; i < 10; i++ {
+		_, err := store2.GetKey(testName)
+		if err != nil {
+			t.Fatalf("failed to add file to store: %v", err)
+		}
+	}
+	assert.Equal(t, 2, numTimesCalled, "numTimesCalled should be 2 -- no additional call to passphraseRetriever")
 }
