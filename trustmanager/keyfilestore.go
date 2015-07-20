@@ -6,6 +6,8 @@ import (
 
 	"errors"
 	"fmt"
+
+	"github.com/docker/notary/pkg/passphrase"
 	"github.com/endophage/gotuf/data"
 )
 
@@ -24,27 +26,21 @@ type KeyStore interface {
 	RemoveKey(name string) error
 }
 
-// PassphraseRetriever is a callback function that should retrieve a passphrase
-// for a given named key. If it should be treated as new passphrase (e.g. with
-// confirmation), createNew will be true. Attempts is passed in so that implementers
-// decide how many chances to give to a human, for example.
-type PassphraseRetriever func(keyId, alias string, createNew bool, attempts int) (passphrase string, giveup bool, err error)
-
 // KeyFileStore persists and manages private keys on disk
 type KeyFileStore struct {
 	SimpleFileStore
-	PassphraseRetriever
+	PassphraseRetriever passphrase.Retriever
 }
 
 // KeyMemoryStore manages private keys in memory
 type KeyMemoryStore struct {
 	MemoryFileStore
-	PassphraseRetriever
+	PassphraseRetriever passphrase.Retriever
 }
 
 // NewKeyFileStore returns a new KeyFileStore creating a private directory to
 // hold the keys.
-func NewKeyFileStore(baseDir string, passphraseRetriever PassphraseRetriever) (*KeyFileStore, error) {
+func NewKeyFileStore(baseDir string, passphraseRetriever passphrase.Retriever) (*KeyFileStore, error) {
 	fileStore, err := NewPrivateSimpleFileStore(baseDir, keyExtension)
 	if err != nil {
 		return nil, err
@@ -81,7 +77,7 @@ func (s *KeyFileStore) RemoveKey(name string) error {
 }
 
 // NewKeyMemoryStore returns a new KeyMemoryStore which holds keys in memory
-func NewKeyMemoryStore(passphraseRetriever PassphraseRetriever) *KeyMemoryStore {
+func NewKeyMemoryStore(passphraseRetriever passphrase.Retriever) *KeyMemoryStore {
 	memStore := NewMemoryFileStore()
 
 	return &KeyMemoryStore{*memStore, passphraseRetriever}
@@ -114,7 +110,7 @@ func (s *KeyMemoryStore) RemoveKey(name string) error {
 	return removeKey(s, name)
 }
 
-func addKey(s LimitedFileStore, passphraseRetriever PassphraseRetriever, name, alias string, privKey data.PrivateKey) error {
+func addKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, name, alias string, privKey data.PrivateKey) error {
 	pemPrivKey, err := KeyToPEM(privKey)
 	if err != nil {
 		return err
@@ -166,7 +162,7 @@ func getKeyAlias(s LimitedFileStore, keyID string) (string, error) {
 }
 
 // GetKey returns the PrivateKey given a KeyID
-func getKey(s LimitedFileStore, passphraseRetriever PassphraseRetriever, name string) (data.PrivateKey, error) {
+func getKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, name string) (data.PrivateKey, error) {
 	keyAlias, err := getKeyAlias(s, name)
 	if err != nil {
 		return nil, err

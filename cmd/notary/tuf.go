@@ -1,31 +1,27 @@
 package main
 
 import (
-	"bufio"
 	"crypto/sha256"
 	"crypto/tls"
-	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 	"os"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/docker/docker/pkg/term"
 	notaryclient "github.com/docker/notary/client"
-	"github.com/docker/notary/trustmanager"
+	"github.com/docker/notary/pkg/passphrase"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"strings"
 )
 
 // FIXME: This should not be hardcoded
 const hardcodedBaseURL = "https://notary-server:4443"
 
-var retriever trustmanager.PassphraseRetriever
+var retriever passphrase.Retriever
 
 func init() {
-	retriever = getNotaryPassphraseRetriever()
+	retriever = passphrase.PromptRetriever()
 }
 
 var remoteTrustServer string
@@ -270,93 +266,6 @@ func verify(cmd *cobra.Command, args []string) {
 		_, _ = os.Stdout.Write(payload)
 	}
 	return
-}
-
-func getNotaryPassphraseRetriever() trustmanager.PassphraseRetriever {
-	userEnteredTargetsSnapshotsPass := false
-	targetsSnapshotsPass := ""
-	userEnteredRootsPass := false
-	rootsPass := ""
-
-	return func(keyID string, alias string, createNew bool, numAttempts int) (string, bool, error) {
-
-		// First, check if we have a password cached for this alias.
-		if numAttempts == 0 {
-			if userEnteredTargetsSnapshotsPass && (alias == "snapshot" || alias == "targets") {
-				return targetsSnapshotsPass, false, nil
-			}
-			if userEnteredRootsPass && (alias == "root") {
-				return rootsPass, false, nil
-			}
-		}
-
-		if numAttempts > 3 && !createNew {
-			return "", true, errors.New("Too many attempts")
-		}
-
-		state, err := term.SaveState(0)
-		if err != nil {
-			return "", false, err
-		}
-		term.DisableEcho(0, state)
-		defer term.RestoreTerminal(0, state)
-
-		stdin := bufio.NewReader(os.Stdin)
-
-		if createNew {
-			fmt.Printf("Enter passphrase for new %s key with id %s: ", alias, keyID)
-		} else {
-			fmt.Printf("Enter key passphrase for %s key with id %s: ", alias, keyID)
-		}
-
-		passphrase, err := stdin.ReadBytes('\n')
-		fmt.Println()
-		if err != nil {
-			return "", false, err
-		}
-
-		retPass := strings.TrimSpace(string(passphrase))
-
-		if !createNew {
-			if alias == "snapshot" || alias == "targets" {
-				userEnteredTargetsSnapshotsPass = true
-				targetsSnapshotsPass = retPass
-			}
-			if alias == "root" {
-				userEnteredRootsPass = true
-				rootsPass = retPass
-			}
-			return retPass, false, nil
-		}
-
-		if len(retPass) < 8 {
-			fmt.Println("Please use a password manager to generate and store a good random passphrase.")
-			return "", false, errors.New("Passphrase too short")
-		}
-
-		fmt.Printf("Repeat passphrase for new %s key with id %s: ", alias, keyID)
-		confirmation, err := stdin.ReadBytes('\n')
-		fmt.Println()
-		if err != nil {
-			return "", false, err
-		}
-		confirmationStr := strings.TrimSpace(string(confirmation))
-
-		if retPass != confirmationStr {
-			return "", false, errors.New("The entered passphrases do not match")
-		}
-
-		if alias == "snapshot" || alias == "targets" {
-			userEnteredTargetsSnapshotsPass = true
-			targetsSnapshotsPass = retPass
-		}
-		if alias == "root" {
-			userEnteredRootsPass = true
-			rootsPass = retPass
-		}
-
-		return retPass, false, nil
-	}
 }
 
 func getInsecureTransport() *http.Transport {

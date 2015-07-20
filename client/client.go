@@ -14,6 +14,7 @@ import (
 	"github.com/docker/notary/client/changelist"
 	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/keystoremanager"
+	"github.com/docker/notary/pkg/passphrase"
 	"github.com/docker/notary/trustmanager"
 	"github.com/endophage/gotuf"
 	tufclient "github.com/endophage/gotuf/client"
@@ -84,7 +85,7 @@ func NewTarget(targetName string, targetPath string) (*Target, error) {
 // It takes the base directory under where all the trust files will be stored
 // (usually ~/.docker/trust/).
 func NewNotaryRepository(baseDir, gun, baseURL string, rt http.RoundTripper,
-	passphraseRetriever trustmanager.PassphraseRetriever) (*NotaryRepository, error) {
+	passphraseRetriever passphrase.Retriever) (*NotaryRepository, error) {
 
 	keyStoreManager, err := keystoremanager.NewKeyStoreManager(baseDir, passphraseRetriever)
 	if err != nil {
