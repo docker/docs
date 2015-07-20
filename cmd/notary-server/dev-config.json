@@ -11,5 +11,9 @@
 	},
 	"logging": {
 		"level": 5
+	},
+	"storage": {
+		"backend": "mysql",
+		"db_url": "root:@tcp(localhost:3306)/dockercondemo"
 	}
 }
