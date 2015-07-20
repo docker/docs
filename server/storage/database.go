@@ -147,6 +147,7 @@ func (db *MySQLStorage) Delete(gun string) error {
 
 // GetTimestampKey returns the timestamps Public Key data
 func (db *MySQLStorage) GetTimestampKey(gun string) (algorithm data.KeyAlgorithm, public []byte, err error) {
+	logrus.Debug("retrieving timestamp key for ", gun)
 	stmt := "SELECT `cipher`, `public` FROM `timestamp_keys` WHERE `gun`=?;"
 	row := db.QueryRow(stmt, gun)
 
@@ -164,6 +165,7 @@ func (db *MySQLStorage) GetTimestampKey(gun string) (algorithm data.KeyAlgorithm
 // SetTimestampKey attempts to write a TimeStamp key and returns an error if it already exists
 func (db *MySQLStorage) SetTimestampKey(gun string, algorithm data.KeyAlgorithm, public []byte) error {
 	stmt := "INSERT INTO `timestamp_keys` (`gun`, `cipher`, `public`) VALUES (?,?,?);"
+	logrus.Debug("Inserting timestamp key for ", gun)
 	_, err := db.Exec(stmt, gun, string(algorithm), public)
 	if err != nil {
 		if err, ok := err.(*mysql.MySQLError); ok && err.Number == 1022 {

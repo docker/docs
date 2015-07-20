@@ -142,10 +142,12 @@ func GetTimestampHandler(ctx context.Context, w http.ResponseWriter, r *http.Req
 
 	out, err := timestamp.GetOrCreateTimestamp(gun, store, cryptoService)
 	if err != nil {
-		if _, ok := err.(*storage.ErrNoKey); ok {
+		switch err.(type) {
+		case *storage.ErrNoKey, *storage.ErrNotFound:
 			return errors.ErrMetadataNotFound.WithDetail(nil)
+		default:
+			return errors.ErrUnknown.WithDetail(err)
 		}
-		return errors.ErrUnknown.WithDetail(err)
 	}
 
 	logrus.Debug("Writing data")

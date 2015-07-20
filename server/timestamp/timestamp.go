@@ -29,6 +29,7 @@ func GetOrCreateTimestampKey(gun string, store storage.MetaStore, crypto signed.
 		if err != nil {
 			return nil, err
 		}
+		logrus.Debug("Creating new timestamp key for ", gun, ". With algo: ", key.Algorithm())
 		err = store.SetTimestampKey(gun, key.Algorithm(), key.Public())
 		if err == nil {
 			return key, nil
@@ -57,11 +58,10 @@ func GetOrCreateTimestamp(gun string, store storage.MetaStore, cryptoService sig
 	d, err := store.GetCurrent(gun, "timestamp")
 	if err != nil {
 		if _, ok := err.(*storage.ErrNotFound); !ok {
-			// If we received an ErrNotFound, we're going to
-			// generate the first timestamp, any other error
-			// should be returned here
+			logrus.Error("error retrieving timestamp: ", err.Error())
 			return nil, err
 		}
+		logrus.Debug("No timestamp found, will proceed to create first timestamp")
 	}
 	ts := &data.SignedTimestamp{}
 	if d != nil {
