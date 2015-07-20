@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"path/filepath"
+	"strings"
 	"time"
 
 	"github.com/Sirupsen/logrus"
@@ -263,9 +264,11 @@ func (tr *TufRepo) SetRoot(s *data.Signed) error {
 		return err
 	}
 	for _, key := range r.Signed.Keys {
+		logrus.Debug("Adding key ", key.ID())
 		tr.keysDB.AddKey(key)
 	}
 	for roleName, role := range r.Signed.Roles {
+		logrus.Debugf("Adding role %s with keys %s", roleName, strings.Join(role.KeyIDs, ","))
 		baseRole, err := data.NewRole(
 			roleName,
 			role.Threshold,

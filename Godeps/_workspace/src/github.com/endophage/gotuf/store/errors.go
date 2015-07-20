@@ -1,13 +1,7 @@
 package store
 
-import (
-	"fmt"
-)
-
-type ErrMetaNotFound struct {
-	role string
-}
+type ErrMetaNotFound struct{}
 
 func (err ErrMetaNotFound) Error() string {
-	return fmt.Sprintf("no metadata for %s", err.role)
+	return "no trust data available"
 }
