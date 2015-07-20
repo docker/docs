@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 	"testing"
 
+	"github.com/docker/notary/pkg/passphrase"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -295,7 +296,7 @@ func TestKeysAreCached(t *testing.T) {
 	assert.NoError(t, err, "failed to create a temporary directory")
 	defer os.RemoveAll(tempBaseDir)
 
-	var countingPassphraseRetriever PassphraseRetriever
+	var countingPassphraseRetriever passphrase.Retriever
 
 	numTimesCalled := 0
 	countingPassphraseRetriever = func(keyId, alias string, createNew bool, attempts int) (passphrase string, giveup bool, err error) {

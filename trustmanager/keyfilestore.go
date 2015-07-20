@@ -41,7 +41,7 @@ type PassphraseRetriever func(keyId, alias string, createNew bool, attempts int)
 type KeyFileStore struct {
 	sync.Mutex
 	SimpleFileStore
-	PassphraseRetriever
+	passphrase.Retriever
 	cachedKeys map[string]*cachedKey
 }
 
@@ -49,7 +49,7 @@ type KeyFileStore struct {
 type KeyMemoryStore struct {
 	sync.Mutex
 	MemoryFileStore
-	PassphraseRetriever
+	passphrase.Retriever
 	cachedKeys map[string]*cachedKey
 }
 
@@ -63,22 +63,22 @@ func NewKeyFileStore(baseDir string, passphraseRetriever passphrase.Retriever) (
 	cachedKeys := make(map[string]*cachedKey)
 
 	return &KeyFileStore{SimpleFileStore: *fileStore,
-		PassphraseRetriever: passphraseRetriever,
-		cachedKeys:          cachedKeys}, nil
+		Retriever:  passphraseRetriever,
+		cachedKeys: cachedKeys}, nil
 }
 
 // AddKey stores the contents of a PEM-encoded private key as a PEM block
 func (s *KeyFileStore) AddKey(name, alias string, privKey data.PrivateKey) error {
 	s.Lock()
 	defer s.Unlock()
-	return addKey(s, s.PassphraseRetriever, s.cachedKeys, name, alias, privKey)
+	return addKey(s, s.Retriever, s.cachedKeys, name, alias, privKey)
 }
 
 // GetKey returns the PrivateKey given a KeyID
 func (s *KeyFileStore) GetKey(name string) (data.PrivateKey, string, error) {
 	s.Lock()
 	defer s.Unlock()
-	return getKey(s, s.PassphraseRetriever, s.cachedKeys, name)
+	return getKey(s, s.Retriever, s.cachedKeys, name)
 }
 
 // ListKeys returns a list of unique PublicKeys present on the KeyFileStore.
@@ -101,22 +101,22 @@ func NewKeyMemoryStore(passphraseRetriever passphrase.Retriever) *KeyMemoryStore
 	cachedKeys := make(map[string]*cachedKey)
 
 	return &KeyMemoryStore{MemoryFileStore: *memStore,
-		PassphraseRetriever: passphraseRetriever,
-		cachedKeys:          cachedKeys}
+		Retriever:  passphraseRetriever,
+		cachedKeys: cachedKeys}
 }
 
 // AddKey stores the contents of a PEM-encoded private key as a PEM block
 func (s *KeyMemoryStore) AddKey(name, alias string, privKey data.PrivateKey) error {
 	s.Lock()
 	defer s.Unlock()
-	return addKey(s, s.PassphraseRetriever, s.cachedKeys, name, alias, privKey)
+	return addKey(s, s.Retriever, s.cachedKeys, name, alias, privKey)
 }
 
 // GetKey returns the PrivateKey given a KeyID
 func (s *KeyMemoryStore) GetKey(name string) (data.PrivateKey, string, error) {
 	s.Lock()
 	defer s.Unlock()
-	return getKey(s, s.PassphraseRetriever, s.cachedKeys, name)
+	return getKey(s, s.Retriever, s.cachedKeys, name)
 }
 
 // ListKeys returns a list of unique PublicKeys present on the KeyFileStore.
@@ -133,7 +133,7 @@ func (s *KeyMemoryStore) RemoveKey(name string) error {
 	return removeKey(s, s.cachedKeys, name)
 }
 
-func addKey(s LimitedFileStore, passphraseRetriever PassphraseRetriever, cachedKeys map[string]*cachedKey, name, alias string, privKey data.PrivateKey) error {
+func addKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, cachedKeys map[string]*cachedKey, name, alias string, privKey data.PrivateKey) error {
 	pemPrivKey, err := KeyToPEM(privKey)
 	if err != nil {
 		return err
@@ -186,7 +186,7 @@ func getKeyAlias(s LimitedFileStore, keyID string) (string, error) {
 }
 
 // GetKey returns the PrivateKey given a KeyID
-func getKey(s LimitedFileStore, passphraseRetriever PassphraseRetriever, cachedKeys map[string]*cachedKey, name string) (data.PrivateKey, string, error) {
+func getKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, cachedKeys map[string]*cachedKey, name string) (data.PrivateKey, string, error) {
 	cachedKeyEntry, ok := cachedKeys[name]
 	if ok {
 		return cachedKeyEntry.key, cachedKeyEntry.alias, nil
