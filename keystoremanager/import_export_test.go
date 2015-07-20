@@ -37,10 +37,13 @@ func createTestServer(t *testing.T) (*httptest.Server, *http.ServeMux) {
 	return ts, mux
 }
 
+var oldPassphrase = "oldPassphrase"
+var exportPassphrase = "exportPassphrase"
+var oldPassphraseRetriever = func(string, string, bool, int) (string, bool, error) { return oldPassphrase, false, nil }
+var newPassphraseRetriever = func(string, string, bool, int) (string, bool, error) { return exportPassphrase, false, nil }
+
 func TestImportExportZip(t *testing.T) {
 	gun := "docker.com/notary"
-	oldPassphrase := "oldPassphrase"
-	exportPassphrase := "exportPassphrase"
 
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
@@ -51,13 +54,13 @@ func TestImportExportZip(t *testing.T) {
 	ts, _ := createTestServer(t)
 	defer ts.Close()
 
-	repo, err := client.NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport)
+	repo, err := client.NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport, oldPassphraseRetriever)
 	assert.NoError(t, err, "error creating repo: %s", err)
 
-	rootKeyID, err := repo.KeyStoreManager.GenRootKey(data.ECDSAKey.String(), oldPassphrase)
+	rootKeyID, err := repo.KeyStoreManager.GenRootKey(data.ECDSAKey.String())
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID, oldPassphrase)
+	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID)
 	assert.NoError(t, err, "error retrieving root key: %s", err)
 
 	err = repo.Initialize(rootCryptoService)
@@ -67,7 +70,7 @@ func TestImportExportZip(t *testing.T) {
 	tempZipFilePath := tempZipFile.Name()
 	defer os.Remove(tempZipFilePath)
 
-	err = repo.KeyStoreManager.ExportAllKeys(tempZipFile, exportPassphrase)
+	err = repo.KeyStoreManager.ExportAllKeys(tempZipFile, newPassphraseRetriever)
 	tempZipFile.Close()
 	assert.NoError(t, err)
 
@@ -79,17 +82,20 @@ func TestImportExportZip(t *testing.T) {
 	passphraseByFile := make(map[string]string)
 
 	// Add non-root keys to the map. These should use the new passphrase
-	// because they were formerly unencrypted.
-	privKeyList := repo.KeyStoreManager.NonRootKeyStore().ListFiles(false)
+	// because the passwords were chosen by the newPassphraseRetriever.
+	privKeyList := repo.KeyStoreManager.NonRootKeyStore().ListKeys()
 	for _, privKeyName := range privKeyList {
-		relName := strings.TrimPrefix(privKeyName, tempBaseDir+string(filepath.Separator))
-		passphraseByFile[relName] = exportPassphrase
+		alias, err := repo.KeyStoreManager.NonRootKeyStore().GetKeyAlias(privKeyName)
+		assert.NoError(t, err, "privKey %s has no alias", privKeyName)
+
+		relKeyPath := filepath.Join("private", "tuf_keys", privKeyName+"_"+alias+".key")
+		passphraseByFile[relKeyPath] = exportPassphrase
 	}
 
-	// Add root key to the map. This will use the old passphrase because it
-	// won't be reencrypted.
-	relRootKey := filepath.Join("private", "root_keys", rootCryptoService.ID()+".key")
-	passphraseByFile[relRootKey] = oldPassphrase
+	// Add root key to the map. This will use the export passphrase because it
+	// will be reencrypted.
+	relRootKey := filepath.Join("private", "root_keys", rootCryptoService.ID()+"_root.key")
+	passphraseByFile[relRootKey] = exportPassphrase
 
 	// Iterate through the files in the archive, checking that the files
 	// exist and are encrypted with the expected passphrase.
@@ -126,13 +132,13 @@ func TestImportExportZip(t *testing.T) {
 
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
-	repo2, err := client.NewNotaryRepository(tempBaseDir2, gun, ts.URL, http.DefaultTransport)
+	repo2, err := client.NewNotaryRepository(tempBaseDir2, gun, ts.URL, http.DefaultTransport, newPassphraseRetriever)
 	assert.NoError(t, err, "error creating repo: %s", err)
 
-	rootKeyID2, err := repo2.KeyStoreManager.GenRootKey(data.ECDSAKey.String(), "oldPassphrase")
+	rootKeyID2, err := repo2.KeyStoreManager.GenRootKey(data.ECDSAKey.String())
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootCryptoService2, err := repo2.KeyStoreManager.GetRootCryptoService(rootKeyID2, "oldPassphrase")
+	rootCryptoService2, err := repo2.KeyStoreManager.GetRootCryptoService(rootKeyID2)
 	assert.NoError(t, err, "error retrieving root key: %s", err)
 
 	err = repo2.Initialize(rootCryptoService2)
@@ -142,44 +148,33 @@ func TestImportExportZip(t *testing.T) {
 	zipReader, err = zip.OpenReader(tempZipFilePath)
 	assert.NoError(t, err, "could not open zip file")
 
-	// First try with an incorrect passphrase
-	err = repo2.KeyStoreManager.ImportKeysZip(zipReader.Reader, "wrongpassphrase")
-	// Don't use EqualError here because occasionally decrypting with the
-	// wrong passphrase returns a parse error
-	assert.Error(t, err)
-	zipReader.Close()
-
-	// Reopen the zip file for importing
-	zipReader, err = zip.OpenReader(tempZipFilePath)
-	assert.NoError(t, err, "could not open zip file")
-
 	// Now try with a valid passphrase. This time it should succeed.
-	err = repo2.KeyStoreManager.ImportKeysZip(zipReader.Reader, exportPassphrase)
+	err = repo2.KeyStoreManager.ImportKeysZip(zipReader.Reader)
 	assert.NoError(t, err)
 	zipReader.Close()
-
-	// Look for repo's keys in repo2
 
 	// Look for keys in private. The filenames should match the key IDs
 	// in the repo's private key store.
 	for _, privKeyName := range privKeyList {
-		privKeyRel := strings.TrimPrefix(privKeyName, tempBaseDir)
-		_, err := os.Stat(filepath.Join(tempBaseDir2, privKeyRel))
+		alias, err := repo.KeyStoreManager.NonRootKeyStore().GetKeyAlias(privKeyName)
+		assert.NoError(t, err, "privKey %s has no alias", privKeyName)
+
+		relKeyPath := filepath.Join("private", "tuf_keys", privKeyName+"_"+alias+".key")
+		privKeyFileName := filepath.Join(tempBaseDir2, relKeyPath)
+		_, err = os.Stat(privKeyFileName)
 		assert.NoError(t, err, "missing private key: %s", privKeyName)
 	}
 
 	// Look for keys in root_keys
 	// There should be a file named after the key ID of the root key we
 	// passed in.
-	rootKeyFilename := rootCryptoService.ID() + ".key"
+	rootKeyFilename := rootCryptoService.ID() + "_root.key"
 	_, err = os.Stat(filepath.Join(tempBaseDir2, "private", "root_keys", rootKeyFilename))
 	assert.NoError(t, err, "missing root key")
 }
 
 func TestImportExportGUN(t *testing.T) {
 	gun := "docker.com/notary"
-	oldPassphrase := "oldPassphrase"
-	exportPassphrase := "exportPassphrase"
 
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
@@ -190,13 +185,13 @@ func TestImportExportGUN(t *testing.T) {
 	ts, _ := createTestServer(t)
 	defer ts.Close()
 
-	repo, err := client.NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport)
+	repo, err := client.NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport, oldPassphraseRetriever)
 	assert.NoError(t, err, "error creating repo: %s", err)
 
-	rootKeyID, err := repo.KeyStoreManager.GenRootKey(data.ECDSAKey.String(), oldPassphrase)
+	rootKeyID, err := repo.KeyStoreManager.GenRootKey(data.ECDSAKey.String())
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID, oldPassphrase)
+	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID)
 	assert.NoError(t, err, "error retrieving root key: %s", err)
 
 	err = repo.Initialize(rootCryptoService)
@@ -206,11 +201,11 @@ func TestImportExportGUN(t *testing.T) {
 	tempZipFilePath := tempZipFile.Name()
 	defer os.Remove(tempZipFilePath)
 
-	err = repo.KeyStoreManager.ExportKeysByGUN(tempZipFile, gun, exportPassphrase)
+	err = repo.KeyStoreManager.ExportKeysByGUN(tempZipFile, gun, newPassphraseRetriever)
 	assert.NoError(t, err)
 
 	// With an invalid GUN, this should return an error
-	err = repo.KeyStoreManager.ExportKeysByGUN(tempZipFile, "does.not.exist/in/repository", exportPassphrase)
+	err = repo.KeyStoreManager.ExportKeysByGUN(tempZipFile, "does.not.exist/in/repository", newPassphraseRetriever)
 	assert.EqualError(t, err, keystoremanager.ErrNoKeysFoundForGUN.Error())
 
 	tempZipFile.Close()
@@ -224,15 +219,21 @@ func TestImportExportGUN(t *testing.T) {
 
 	// Add keys non-root keys to the map. These should use the new passphrase
 	// because they were formerly unencrypted.
-	privKeyList := repo.KeyStoreManager.NonRootKeyStore().ListFiles(false)
+	privKeyList := repo.KeyStoreManager.NonRootKeyStore().ListKeys()
 	for _, privKeyName := range privKeyList {
-		relName := strings.TrimPrefix(privKeyName, tempBaseDir+string(filepath.Separator))
-		passphraseByFile[relName] = exportPassphrase
+		alias, err := repo.KeyStoreManager.NonRootKeyStore().GetKeyAlias(privKeyName)
+		if err != nil {
+			t.Fatalf("privKey %s has no alias", privKeyName)
+		}
+		relKeyPath := filepath.Join("private", "tuf_keys", privKeyName+"_"+alias+".key")
+
+		passphraseByFile[relKeyPath] = exportPassphrase
 	}
 
 	// Iterate through the files in the archive, checking that the files
 	// exist and are encrypted with the expected passphrase.
 	for _, f := range zipReader.File {
+
 		expectedPassphrase, present := passphraseByFile[f.Name]
 		if !present {
 			t.Fatalf("unexpected file %s in zip file", f.Name)
@@ -265,13 +266,13 @@ func TestImportExportGUN(t *testing.T) {
 
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
-	repo2, err := client.NewNotaryRepository(tempBaseDir2, gun, ts.URL, http.DefaultTransport)
+	repo2, err := client.NewNotaryRepository(tempBaseDir2, gun, ts.URL, http.DefaultTransport, oldPassphraseRetriever)
 	assert.NoError(t, err, "error creating repo: %s", err)
 
-	rootKeyID2, err := repo2.KeyStoreManager.GenRootKey(data.ECDSAKey.String(), "oldPassphrase")
+	rootKeyID2, err := repo2.KeyStoreManager.GenRootKey(data.ECDSAKey.String())
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootCryptoService2, err := repo2.KeyStoreManager.GetRootCryptoService(rootKeyID2, "oldPassphrase")
+	rootCryptoService2, err := repo2.KeyStoreManager.GetRootCryptoService(rootKeyID2)
 	assert.NoError(t, err, "error retrieving root key: %s", err)
 
 	err = repo2.Initialize(rootCryptoService2)
@@ -281,36 +282,26 @@ func TestImportExportGUN(t *testing.T) {
 	zipReader, err = zip.OpenReader(tempZipFilePath)
 	assert.NoError(t, err, "could not open zip file")
 
-	// First try with an incorrect passphrase
-	err = repo2.KeyStoreManager.ImportKeysZip(zipReader.Reader, "wrongpassphrase")
-	// Don't use EqualError here because occasionally decrypting with the
-	// wrong passphrase returns a parse error
-	assert.Error(t, err)
-	zipReader.Close()
-
-	// Reopen the zip file for importing
-	zipReader, err = zip.OpenReader(tempZipFilePath)
-	assert.NoError(t, err, "could not open zip file")
-
 	// Now try with a valid passphrase. This time it should succeed.
-	err = repo2.KeyStoreManager.ImportKeysZip(zipReader.Reader, exportPassphrase)
+	err = repo2.KeyStoreManager.ImportKeysZip(zipReader.Reader)
 	assert.NoError(t, err)
 	zipReader.Close()
-
-	// Look for repo's non-root keys in repo2
 
 	// Look for keys in private. The filenames should match the key IDs
 	// in the repo's private key store.
 	for _, privKeyName := range privKeyList {
-		privKeyRel := strings.TrimPrefix(privKeyName, tempBaseDir)
-		_, err := os.Stat(filepath.Join(tempBaseDir2, privKeyRel))
-		assert.NoError(t, err, "missing private key: %s", privKeyName)
+		alias, err := repo.KeyStoreManager.NonRootKeyStore().GetKeyAlias(privKeyName)
+		if err != nil {
+			t.Fatalf("privKey %s has no alias", privKeyName)
+		}
+		relKeyPath := filepath.Join("private", "tuf_keys", privKeyName+"_"+alias+".key")
+		privKeyFileName := filepath.Join(tempBaseDir2, relKeyPath)
+		_, err = os.Stat(privKeyFileName)
 	}
 }
 
 func TestImportExportRootKey(t *testing.T) {
 	gun := "docker.com/notary"
-	oldPassphrase := "oldPassphrase"
 
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
@@ -321,13 +312,13 @@ func TestImportExportRootKey(t *testing.T) {
 	ts, _ := createTestServer(t)
 	defer ts.Close()
 
-	repo, err := client.NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport)
+	repo, err := client.NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport, oldPassphraseRetriever)
 	assert.NoError(t, err, "error creating repo: %s", err)
 
-	rootKeyID, err := repo.KeyStoreManager.GenRootKey(data.ECDSAKey.String(), oldPassphrase)
+	rootKeyID, err := repo.KeyStoreManager.GenRootKey(data.ECDSAKey.String())
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID, oldPassphrase)
+	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID)
 	assert.NoError(t, err, "error retrieving root key: %s", err)
 
 	err = repo.Initialize(rootCryptoService)
@@ -347,13 +338,13 @@ func TestImportExportRootKey(t *testing.T) {
 
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
-	repo2, err := client.NewNotaryRepository(tempBaseDir2, gun, ts.URL, http.DefaultTransport)
+	repo2, err := client.NewNotaryRepository(tempBaseDir2, gun, ts.URL, http.DefaultTransport, oldPassphraseRetriever)
 	assert.NoError(t, err, "error creating repo: %s", err)
 
-	rootKeyID2, err := repo2.KeyStoreManager.GenRootKey(data.ECDSAKey.String(), oldPassphrase)
+	rootKeyID2, err := repo2.KeyStoreManager.GenRootKey(data.ECDSAKey.String())
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootCryptoService2, err := repo2.KeyStoreManager.GetRootCryptoService(rootKeyID2, oldPassphrase)
+	rootCryptoService2, err := repo2.KeyStoreManager.GetRootCryptoService(rootKeyID2)
 	assert.NoError(t, err, "error retrieving root key: %s", err)
 
 	err = repo2.Initialize(rootCryptoService2)
@@ -370,7 +361,7 @@ func TestImportExportRootKey(t *testing.T) {
 	// Look for repo's root key in repo2
 	// There should be a file named after the key ID of the root key we
 	// imported.
-	rootKeyFilename := rootKeyID + ".key"
+	rootKeyFilename := rootKeyID + "_root.key"
 	_, err = os.Stat(filepath.Join(tempBaseDir2, "private", "root_keys", rootKeyFilename))
 	assert.NoError(t, err, "missing root key")
 

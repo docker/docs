@@ -2,7 +2,6 @@ package main
 
 import (
 	"bufio"
-	"bytes"
 	"crypto/sha256"
 	"crypto/tls"
 	"errors"
@@ -14,12 +13,20 @@ import (
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/docker/pkg/term"
 	notaryclient "github.com/docker/notary/client"
+	"github.com/docker/notary/trustmanager"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	"strings"
 )
 
 // FIXME: This should not be hardcoded
 const hardcodedBaseURL = "https://notary-server:4443"
+
+var retriever trustmanager.PassphraseRetriever
+
+func init() {
+	retriever = getNotaryPassphraseRetriever()
+}
 
 var remoteTrustServer string
 
@@ -82,7 +89,8 @@ func tufAdd(cmd *cobra.Command, args []string) {
 	targetName := args[1]
 	targetPath := args[2]
 
-	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL, getInsecureTransport())
+	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL,
+		getInsecureTransport(), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -106,35 +114,26 @@ func tufInit(cmd *cobra.Command, args []string) {
 
 	gun := args[0]
 
-	nRepo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL, getInsecureTransport())
+	nRepo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL,
+		getInsecureTransport(), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
 
 	keysList := nRepo.KeyStoreManager.RootKeyStore().ListKeys()
-	var passphrase string
 	var rootKeyID string
 	if len(keysList) < 1 {
 		fmt.Println("No root keys found. Generating a new root key...")
-		passphrase, err = passphraseRetriever()
-		if err != nil {
-			fatalf(err.Error())
-		}
-		rootKeyID, err = nRepo.KeyStoreManager.GenRootKey("ECDSA", passphrase)
+		rootKeyID, err = nRepo.KeyStoreManager.GenRootKey("ECDSA")
 		if err != nil {
 			fatalf(err.Error())
 		}
 	} else {
 		rootKeyID = keysList[0]
 		fmt.Println("Root key found.")
-		fmt.Printf("Enter passphrase for: %s (%d)\n", rootKeyID, len(rootKeyID))
-		passphrase, err = passphraseRetriever()
-		if err != nil {
-			fatalf(err.Error())
-		}
 	}
 
-	rootCryptoService, err := nRepo.KeyStoreManager.GetRootCryptoService(rootKeyID, passphrase)
+	rootCryptoService, err := nRepo.KeyStoreManager.GetRootCryptoService(rootKeyID)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -151,8 +150,8 @@ func tufList(cmd *cobra.Command, args []string) {
 		fatalf("must specify a GUN")
 	}
 	gun := args[0]
-
-	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL, getInsecureTransport())
+	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL,
+		getInsecureTransport(), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -177,7 +176,8 @@ func tufLookup(cmd *cobra.Command, args []string) {
 	gun := args[0]
 	targetName := args[1]
 
-	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL, getInsecureTransport())
+	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL,
+		getInsecureTransport(), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -201,12 +201,13 @@ func tufPublish(cmd *cobra.Command, args []string) {
 
 	fmt.Println("Pushing changes to ", gun, ".")
 
-	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL, getInsecureTransport())
+	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL,
+		getInsecureTransport(), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
 
-	err = repo.Publish(passphraseRetriever)
+	err = repo.Publish()
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -246,7 +247,8 @@ func verify(cmd *cobra.Command, args []string) {
 	//TODO (diogo): This code is copy/pasted from lookup.
 	gun := args[0]
 	targetName := args[1]
-	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL, getInsecureTransport())
+	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL,
+		getInsecureTransport(), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -270,58 +272,91 @@ func verify(cmd *cobra.Command, args []string) {
 	return
 }
 
-func passphraseRetriever() (string, error) {
-	fmt.Println("Please provide a passphrase for this root key: ")
-	var passphrase string
-	_, err := fmt.Scanln(&passphrase)
-	if err != nil {
-		return "", err
-	}
-	if len(passphrase) < 8 {
-		fmt.Println("Please use a password manager to generate and store a good random passphrase.")
-		return "", errors.New("Passphrase too short")
-	}
-	return passphrase, nil
-}
+func getNotaryPassphraseRetriever() trustmanager.PassphraseRetriever {
+	userEnteredTargetsSnapshotsPass := false
+	targetsSnapshotsPass := ""
+	userEnteredRootsPass := false
+	rootsPass := ""
 
-func getPassphrase(confirm bool) ([]byte, error) {
-	if pass := os.Getenv("NOTARY_ROOT_PASSPHRASE"); pass != "" {
-		return []byte(pass), nil
-	}
+	return func(keyID string, alias string, createNew bool, numAttempts int) (string, bool, error) {
 
-	state, err := term.SaveState(0)
-	if err != nil {
-		return nil, err
-	}
-	term.DisableEcho(0, state)
-	defer term.RestoreTerminal(0, state)
+		// First, check if we have a password cached for this alias.
+		if numAttempts == 0 {
+			if userEnteredTargetsSnapshotsPass && (alias == "snapshot" || alias == "targets") {
+				return targetsSnapshotsPass, false, nil
+			}
+			if userEnteredRootsPass && (alias == "root") {
+				return rootsPass, false, nil
+			}
+		}
 
-	stdin := bufio.NewReader(os.Stdin)
+		if numAttempts > 3 && !createNew {
+			return "", true, errors.New("Too many attempts")
+		}
 
-	fmt.Printf("Enter root key passphrase: ")
-	passphrase, err := stdin.ReadBytes('\n')
-	fmt.Println()
-	if err != nil {
-		return nil, err
-	}
-	passphrase = passphrase[0 : len(passphrase)-1]
+		state, err := term.SaveState(0)
+		if err != nil {
+			return "", false, err
+		}
+		term.DisableEcho(0, state)
+		defer term.RestoreTerminal(0, state)
 
-	if !confirm {
-		return passphrase, nil
-	}
+		stdin := bufio.NewReader(os.Stdin)
 
-	fmt.Printf("Repeat root key passphrase: ")
-	confirmation, err := stdin.ReadBytes('\n')
-	fmt.Println()
-	if err != nil {
-		return nil, err
-	}
-	confirmation = confirmation[0 : len(confirmation)-1]
+		if createNew {
+			fmt.Printf("Enter passphrase for new %s key with id %s: ", alias, keyID)
+		} else {
+			fmt.Printf("Enter key passphrase for %s key with id %s: ", alias, keyID)
+		}
 
-	if !bytes.Equal(passphrase, confirmation) {
-		return nil, errors.New("The entered passphrases do not match")
+		passphrase, err := stdin.ReadBytes('\n')
+		fmt.Println()
+		if err != nil {
+			return "", false, err
+		}
+
+		retPass := strings.TrimSpace(string(passphrase))
+
+		if !createNew {
+			if alias == "snapshot" || alias == "targets" {
+				userEnteredTargetsSnapshotsPass = true
+				targetsSnapshotsPass = retPass
+			}
+			if alias == "root" {
+				userEnteredRootsPass = true
+				rootsPass = retPass
+			}
+			return retPass, false, nil
+		}
+
+		if len(retPass) < 8 {
+			fmt.Println("Please use a password manager to generate and store a good random passphrase.")
+			return "", false, errors.New("Passphrase too short")
+		}
+
+		fmt.Printf("Repeat passphrase for new %s key with id %s: ", alias, keyID)
+		confirmation, err := stdin.ReadBytes('\n')
+		fmt.Println()
+		if err != nil {
+			return "", false, err
+		}
+		confirmationStr := strings.TrimSpace(string(confirmation))
+
+		if retPass != confirmationStr {
+			return "", false, errors.New("The entered passphrases do not match")
+		}
+
+		if alias == "snapshot" || alias == "targets" {
+			userEnteredTargetsSnapshotsPass = true
+			targetsSnapshotsPass = retPass
+		}
+		if alias == "root" {
+			userEnteredRootsPass = true
+			rootsPass = retPass
+		}
+
+		return retPass, false, nil
 	}
-	return passphrase, nil
 }
 
 func getInsecureTransport() *http.Transport {

@@ -29,8 +29,6 @@ const maxSize = 5 << 20
 // notary repository
 type ErrRepoNotInitialized struct{}
 
-type passwordRetriever func() (string, error)
-
 // ErrRepoNotInitialized is returned when trying to can publish on an uninitialized
 // notary repository
 func (err *ErrRepoNotInitialized) Error() string {
@@ -85,13 +83,15 @@ func NewTarget(targetName string, targetPath string) (*Target, error) {
 // NewNotaryRepository is a helper method that returns a new notary repository.
 // It takes the base directory under where all the trust files will be stored
 // (usually ~/.docker/trust/).
-func NewNotaryRepository(baseDir, gun, baseURL string, rt http.RoundTripper) (*NotaryRepository, error) {
-	keyStoreManager, err := keystoremanager.NewKeyStoreManager(baseDir)
+func NewNotaryRepository(baseDir, gun, baseURL string, rt http.RoundTripper,
+	passphraseRetriever trustmanager.PassphraseRetriever) (*NotaryRepository, error) {
+
+	keyStoreManager, err := keystoremanager.NewKeyStoreManager(baseDir, passphraseRetriever)
 	if err != nil {
 		return nil, err
 	}
 
-	cryptoService := cryptoservice.NewCryptoService(gun, keyStoreManager.NonRootKeyStore(), "")
+	cryptoService := cryptoservice.NewCryptoService(gun, keyStoreManager.NonRootKeyStore())
 
 	nRepo := &NotaryRepository{
 		gun:             gun,
@@ -138,7 +138,7 @@ func (r *NotaryRepository) Initialize(uCryptoService *cryptoservice.UnlockedCryp
 	// is associated with. This is used to be able to retrieve the root private key
 	// associated with a particular certificate
 	logrus.Debugf("Linking %s to %s.", rootKey.ID(), uCryptoService.ID())
-	err = r.KeyStoreManager.RootKeyStore().Link(uCryptoService.ID(), rootKey.ID())
+	err = r.KeyStoreManager.RootKeyStore().Link(uCryptoService.ID()+"_root", rootKey.ID()+"_root")
 	if err != nil {
 		return err
 	}
@@ -300,7 +300,7 @@ func (r *NotaryRepository) GetTargetByName(name string) (*Target, error) {
 
 // Publish pushes the local changes in signed material to the remote notary-server
 // Conceptually it performs an operation similar to a `git rebase`
-func (r *NotaryRepository) Publish(getPass passwordRetriever) error {
+func (r *NotaryRepository) Publish() error {
 	var updateRoot bool
 	var root *data.Signed
 	// attempt to initialize the repo from the remote store
@@ -356,12 +356,11 @@ func (r *NotaryRepository) Publish(getPass passwordRetriever) error {
 
 	// check if our root file is nearing expiry. Resign if it is.
 	if nearExpiry(r.tufRepo.Root) || r.tufRepo.Root.Dirty {
-		passphrase, err := getPass()
 		if err != nil {
 			return err
 		}
 		rootKeyID := r.tufRepo.Root.Signed.Roles["root"].KeyIDs[0]
-		rootCryptoService, err := r.KeyStoreManager.GetRootCryptoService(rootKeyID, passphrase)
+		rootCryptoService, err := r.KeyStoreManager.GetRootCryptoService(rootKeyID)
 		if err != nil {
 			return err
 		}

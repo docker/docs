@@ -60,16 +60,16 @@ func (err ErrRootRotationFail) Error() string {
 
 // NewKeyStoreManager returns an initialized KeyStoreManager, or an error
 // if it fails to create the KeyFileStores or load certificates
-func NewKeyStoreManager(baseDir string) (*KeyStoreManager, error) {
+func NewKeyStoreManager(baseDir string, passphraseRetriever trustmanager.PassphraseRetriever) (*KeyStoreManager, error) {
 	nonRootKeysPath := filepath.Join(baseDir, privDir, nonRootKeysSubdir)
-	nonRootKeyStore, err := trustmanager.NewKeyFileStore(nonRootKeysPath)
+	nonRootKeyStore, err := trustmanager.NewKeyFileStore(nonRootKeysPath, passphraseRetriever)
 	if err != nil {
 		return nil, err
 	}
 
 	// Load the keystore that will hold all of our encrypted Root Private Keys
 	rootKeysPath := filepath.Join(baseDir, privDir, rootKeysSubdir)
-	rootKeyStore, err := trustmanager.NewKeyFileStore(rootKeysPath)
+	rootKeyStore, err := trustmanager.NewKeyFileStore(rootKeysPath, passphraseRetriever)
 	if err != nil {
 		return nil, err
 	}
@@ -142,8 +142,8 @@ func (km *KeyStoreManager) AddTrustedCACert(cert *x509.Certificate) {
 	km.trustedCAStore.AddCert(cert)
 }
 
-// GenRootKey generates a new root key protected by a given passphrase
-func (km *KeyStoreManager) GenRootKey(algorithm, passphrase string) (string, error) {
+// GenRootKey generates a new root key
+func (km *KeyStoreManager) GenRootKey(algorithm string) (string, error) {
 	var err error
 	var privKey data.PrivateKey
 
@@ -164,19 +164,20 @@ func (km *KeyStoreManager) GenRootKey(algorithm, passphrase string) (string, err
 	}
 
 	// Changing the root
-	km.rootKeyStore.AddEncryptedKey(privKey.ID(), privKey, passphrase)
+	km.rootKeyStore.AddKey(privKey.ID(), "root", privKey)
 
 	return privKey.ID(), nil
 }
 
-// GetRootCryptoService retreives a root key and a cryptoservice to use with it
-func (km *KeyStoreManager) GetRootCryptoService(rootKeyID, passphrase string) (*cryptoservice.UnlockedCryptoService, error) {
-	privKey, err := km.rootKeyStore.GetDecryptedKey(rootKeyID, passphrase)
+// GetRootCryptoService retrieves a root key and a cryptoservice to use with it
+// TODO(mccauley): remove this as its no longer needed once we have key caching in the keystores
+func (km *KeyStoreManager) GetRootCryptoService(rootKeyID string) (*cryptoservice.UnlockedCryptoService, error) {
+	privKey, err := km.rootKeyStore.GetKey(rootKeyID)
 	if err != nil {
 		return nil, fmt.Errorf("could not get decrypted root key with keyID: %s, %v", rootKeyID, err)
 	}
 
-	cryptoService := cryptoservice.NewCryptoService("", km.rootKeyStore, passphrase)
+	cryptoService := cryptoservice.NewCryptoService("", km.rootKeyStore)
 
 	return cryptoservice.NewUnlockedCryptoService(privKey, cryptoService), nil
 }

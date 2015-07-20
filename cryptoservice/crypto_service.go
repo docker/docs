@@ -23,14 +23,13 @@ const (
 // CryptoService implements Sign and Create, holding a specific GUN and keystore to
 // operate on
 type CryptoService struct {
-	gun        string
-	passphrase string
-	keyStore   trustmanager.KeyStore
+	gun      string
+	keyStore trustmanager.KeyStore
 }
 
 // NewCryptoService returns an instance of CryptoService
-func NewCryptoService(gun string, keyStore trustmanager.KeyStore, passphrase string) *CryptoService {
-	return &CryptoService{gun: gun, keyStore: keyStore, passphrase: passphrase}
+func NewCryptoService(gun string, keyStore trustmanager.KeyStore) *CryptoService {
+	return &CryptoService{gun: gun, keyStore: keyStore}
 }
 
 // Create is used to generate keys for targets, snapshots and timestamps
@@ -59,8 +58,8 @@ func (ccs *CryptoService) Create(role string, algorithm data.KeyAlgorithm) (data
 	}
 	logrus.Debugf("generated new %s key for role: %s and keyID: %s", algorithm, role, privKey.ID())
 
-	// Store the private key into our keystore with the name being: /GUN/ID.key
-	err = ccs.keyStore.AddKey(filepath.Join(ccs.gun, privKey.ID()), privKey)
+	// Store the private key into our keystore with the name being: /GUN/ID.key with an alias of role
+	err = ccs.keyStore.AddKey(filepath.Join(ccs.gun, privKey.ID()), role, privKey)
 	if err != nil {
 		return nil, fmt.Errorf("failed to add key to filestore: %v", err)
 	}
@@ -78,7 +77,7 @@ func (ccs *CryptoService) GetKey(keyID string) data.PublicKey {
 
 // RemoveKey deletes a key by ID
 func (ccs *CryptoService) RemoveKey(keyID string) error {
-	return ccs.keyStore.Remove(keyID)
+	return ccs.keyStore.RemoveKey(keyID)
 }
 
 // Sign returns the signatures for the payload with a set of keyIDs. It ignores
@@ -93,14 +92,9 @@ func (ccs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signatur
 		var privKey data.PrivateKey
 		var err error
 
-		// Read PrivateKey from file and decrypt it if there is a passphrase.
-		if ccs.passphrase != "" {
-			privKey, err = ccs.keyStore.GetDecryptedKey(keyName, ccs.passphrase)
-		} else {
-			privKey, err = ccs.keyStore.GetKey(keyName)
-		}
+		privKey, err = ccs.keyStore.GetKey(keyName)
 		if err != nil {
-			// Note that GetDecryptedKey always fails on InitRepo.
+			// Note that GetKey always fails on InitRepo.
 			// InitRepo gets a signer that doesn't have access to
 			// the root keys. Continuing here is safe because we
 			// end up not returning any signatures.

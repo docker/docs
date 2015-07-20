@@ -13,13 +13,12 @@ func TestUnlockedSigner(t *testing.T) {
 	privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
 	assert.NoError(t, err, "could not generate key")
 
-	keyStore := trustmanager.NewKeyMemoryStore()
+	keyStore := trustmanager.NewKeyMemoryStore(passphraseRetriever)
 
-	passphrase := "passphrase"
-	err = keyStore.AddEncryptedKey(privKey.ID(), privKey, passphrase)
+	err = keyStore.AddKey(privKey.ID(), "root", privKey)
 	assert.NoError(t, err, "could not add key to store")
 
-	cryptoService := NewCryptoService("", keyStore, passphrase)
+	cryptoService := NewCryptoService("", keyStore)
 	uCryptoService := NewUnlockedCryptoService(privKey, cryptoService)
 
 	// Check ID method

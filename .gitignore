@@ -4,3 +4,5 @@ bin
 cross
 .cover
 *.swp
+.idea
+*.iml

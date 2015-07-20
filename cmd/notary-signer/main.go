@@ -41,6 +41,12 @@ func init() {
 	flag.BoolVar(&debug, "debug", false, "show the version and exit")
 }
 
+func passphraseRetriever(keyName, alias string, createNew bool, attempts int) (passphrase string, giveup bool, err error) {
+
+	//TODO(mccauley) Read from config once we have locked keys in notary-signer
+	return "", false, nil
+}
+
 func main() {
 	flag.Usage = usage
 	flag.Parse()
@@ -83,8 +89,8 @@ func main() {
 		cryptoServices[data.RSAKey] = api.NewRSAHardwareCryptoService(ctx, session)
 	}
 
-	keyStore := trustmanager.NewKeyMemoryStore()
-	cryptoService := cryptoservice.NewCryptoService("", keyStore, "")
+	keyStore := trustmanager.NewKeyMemoryStore(passphraseRetriever)
+	cryptoService := cryptoservice.NewCryptoService("", keyStore)
 
 	cryptoServices[data.ED25519Key] = cryptoService
 	cryptoServices[data.ECDSAKey] = cryptoService

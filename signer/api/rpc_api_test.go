@@ -24,11 +24,13 @@ var (
 	sClient    pb.SignerClient
 	grpcServer *grpc.Server
 	void       *pb.Void
+	pr         trustmanager.PassphraseRetriever
 )
 
 func init() {
-	keyStore := trustmanager.NewKeyMemoryStore()
-	cryptoService := cryptoservice.NewCryptoService("", keyStore, "")
+	pr = func(string, string, bool, int) (string, bool, error) { return "passphrase", false, nil }
+	keyStore := trustmanager.NewKeyMemoryStore(pr)
+	cryptoService := cryptoservice.NewCryptoService("", keyStore)
 	cryptoServices := signer.CryptoServiceIndex{data.ED25519Key: cryptoService, data.RSAKey: cryptoService, data.ECDSAKey: cryptoService}
 	void = &pb.Void{}
 	//server setup

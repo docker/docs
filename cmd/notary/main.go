@@ -86,11 +86,11 @@ func init() {
 		fatalf("could not create Certificate X509FileStore: %v", err)
 	}
 
-	privKeyStore, err = trustmanager.NewKeyFileStore(finalPrivDir)
+	privKeyStore, err = trustmanager.NewKeyFileStore(finalPrivDir,
+		func(string, string, bool, int) (string, bool, error) { return "", false, nil })
 	if err != nil {
 		fatalf("could not create KeyFileStore: %v", err)
 	}
-
 }
 
 func main() {

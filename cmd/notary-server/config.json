@@ -3,11 +3,10 @@
 		"addr": ":4443"
 	},
 	"trust_service": {
-		"type": "remote",
-		"hostname": "notarysigner",
-		"port": "7899",
-		"tls_ca_file": "./fixtures/root-ca.crt"
-	},
+	  "type": "remote",
+	  "hostname": "notarysigner",
+	  "port": "7899",
+	  "tls_ca_file": "./fixtures/root-ca.crt"			},
 	"logging": {
 		"level": 5
 	},

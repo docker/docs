@@ -4,6 +4,8 @@ import (
 	"path/filepath"
 	"strings"
 
+	"errors"
+	"fmt"
 	"github.com/endophage/gotuf/data"
 )
 
@@ -15,53 +17,55 @@ const (
 type KeyStore interface {
 	LimitedFileStore
 
-	AddKey(name string, privKey data.PrivateKey) error
+	AddKey(name, alias string, privKey data.PrivateKey) error
 	GetKey(name string) (data.PrivateKey, error)
-	AddEncryptedKey(name string, privKey data.PrivateKey, passphrase string) error
-	GetDecryptedKey(name string, passphrase string) (data.PrivateKey, error)
+	GetKeyAlias(name string) (string, error)
 	ListKeys() []string
+	RemoveKey(name string) error
 }
+
+// PassphraseRetriever is a callback function that should retrieve a passphrase
+// for a given named key. If it should be treated as new passphrase (e.g. with
+// confirmation), createNew will be true. Attempts is passed in so that implementers
+// decide how many chances to give to a human, for example.
+type PassphraseRetriever func(keyId, alias string, createNew bool, attempts int) (passphrase string, giveup bool, err error)
 
 // KeyFileStore persists and manages private keys on disk
 type KeyFileStore struct {
 	SimpleFileStore
+	PassphraseRetriever
 }
 
 // KeyMemoryStore manages private keys in memory
 type KeyMemoryStore struct {
 	MemoryFileStore
+	PassphraseRetriever
 }
 
 // NewKeyFileStore returns a new KeyFileStore creating a private directory to
 // hold the keys.
-func NewKeyFileStore(baseDir string) (*KeyFileStore, error) {
+func NewKeyFileStore(baseDir string, passphraseRetriever PassphraseRetriever) (*KeyFileStore, error) {
 	fileStore, err := NewPrivateSimpleFileStore(baseDir, keyExtension)
 	if err != nil {
 		return nil, err
 	}
 
-	return &KeyFileStore{*fileStore}, nil
+	return &KeyFileStore{*fileStore, passphraseRetriever}, nil
 }
 
 // AddKey stores the contents of a PEM-encoded private key as a PEM block
-func (s *KeyFileStore) AddKey(name string, privKey data.PrivateKey) error {
-	return addKey(s, name, privKey)
+func (s *KeyFileStore) AddKey(name, alias string, privKey data.PrivateKey) error {
+	return addKey(s, s.PassphraseRetriever, name, alias, privKey)
 }
 
 // GetKey returns the PrivateKey given a KeyID
 func (s *KeyFileStore) GetKey(name string) (data.PrivateKey, error) {
-	return getKey(s, name)
+	return getKey(s, s.PassphraseRetriever, name)
 }
 
-// AddEncryptedKey stores the contents of a PEM-encoded private key as an encrypted PEM block
-func (s *KeyFileStore) AddEncryptedKey(name string, privKey data.PrivateKey, passphrase string) error {
-	return addEncryptedKey(s, name, privKey, passphrase)
-}
-
-// GetDecryptedKey decrypts and returns the PEM Encoded private key given a flename
-// and a passphrase
-func (s *KeyFileStore) GetDecryptedKey(name string, passphrase string) (data.PrivateKey, error) {
-	return getDecryptedKey(s, name, passphrase)
+// GetKeyAlias returns the PrivateKey's alias given a KeyID
+func (s *KeyFileStore) GetKeyAlias(name string) (string, error) {
+	return getKeyAlias(s, name)
 }
 
 // ListKeys returns a list of unique PublicKeys present on the KeyFileStore.
@@ -71,32 +75,31 @@ func (s *KeyFileStore) ListKeys() []string {
 	return listKeys(s)
 }
 
+// RemoveKey removes the key from the keyfilestore
+func (s *KeyFileStore) RemoveKey(name string) error {
+	return removeKey(s, name)
+}
+
 // NewKeyMemoryStore returns a new KeyMemoryStore which holds keys in memory
-func NewKeyMemoryStore() *KeyMemoryStore {
+func NewKeyMemoryStore(passphraseRetriever PassphraseRetriever) *KeyMemoryStore {
 	memStore := NewMemoryFileStore()
 
-	return &KeyMemoryStore{*memStore}
+	return &KeyMemoryStore{*memStore, passphraseRetriever}
 }
 
 // AddKey stores the contents of a PEM-encoded private key as a PEM block
-func (s *KeyMemoryStore) AddKey(name string, privKey data.PrivateKey) error {
-	return addKey(s, name, privKey)
+func (s *KeyMemoryStore) AddKey(name, alias string, privKey data.PrivateKey) error {
+	return addKey(s, s.PassphraseRetriever, name, alias, privKey)
 }
 
 // GetKey returns the PrivateKey given a KeyID
 func (s *KeyMemoryStore) GetKey(name string) (data.PrivateKey, error) {
-	return getKey(s, name)
+	return getKey(s, s.PassphraseRetriever, name)
 }
 
-// AddEncryptedKey stores the contents of a PEM-encoded private key as an encrypted PEM block
-func (s *KeyMemoryStore) AddEncryptedKey(name string, privKey data.PrivateKey, passphrase string) error {
-	return addEncryptedKey(s, name, privKey, passphrase)
-}
-
-// GetDecryptedKey decrypts and returns the PEM Encoded private key given a flename
-// and a passphrase
-func (s *KeyMemoryStore) GetDecryptedKey(name string, passphrase string) (data.PrivateKey, error) {
-	return getDecryptedKey(s, name, passphrase)
+// GetKeyAlias returns the PrivateKey's alias given a KeyID
+func (s *KeyMemoryStore) GetKeyAlias(name string) (string, error) {
+	return getKeyAlias(s, name)
 }
 
 // ListKeys returns a list of unique PublicKeys present on the KeyFileStore.
@@ -106,64 +109,119 @@ func (s *KeyMemoryStore) ListKeys() []string {
 	return listKeys(s)
 }
 
-func addKey(s LimitedFileStore, name string, privKey data.PrivateKey) error {
+// RemoveKey removes the key from the keystore
+func (s *KeyMemoryStore) RemoveKey(name string) error {
+	return removeKey(s, name)
+}
+
+func addKey(s LimitedFileStore, passphraseRetriever PassphraseRetriever, name, alias string, privKey data.PrivateKey) error {
 	pemPrivKey, err := KeyToPEM(privKey)
 	if err != nil {
 		return err
 	}
 
-	return s.Add(name, pemPrivKey)
+	attempts := 0
+	passphrase := ""
+	giveup := false
+	for {
+		passphrase, giveup, err = passphraseRetriever(name, alias, true, attempts)
+		if err != nil {
+			attempts++
+			continue
+		}
+		if giveup {
+			return errors.New("obtaining passphrase failed")
+		}
+		if attempts > 10 {
+			return errors.New("maximum number of passphrase attempts exceeded")
+		}
+		break
+	}
+
+	if passphrase != "" {
+		pemPrivKey, err = EncryptPrivateKey(privKey, passphrase)
+		if err != nil {
+			return err
+		}
+	}
+
+	return s.Add(name+"_"+alias, pemPrivKey)
 }
 
-func getKey(s LimitedFileStore, name string) (data.PrivateKey, error) {
-	keyBytes, err := s.Get(name)
+func getKeyAlias(s LimitedFileStore, keyID string) (string, error) {
+	files := s.ListFiles(true)
+	name := strings.TrimSpace(strings.TrimSuffix(filepath.Base(keyID), filepath.Ext(keyID)))
+
+	for _, file := range files {
+		filename := filepath.Base(file)
+
+		if strings.HasPrefix(filename, name) {
+			aliasPlusDotKey := strings.TrimPrefix(filename, name+"_")
+			retVal := strings.TrimSuffix(aliasPlusDotKey, "."+keyExtension)
+			return retVal, nil
+		}
+	}
+
+	return "", fmt.Errorf("keyId %s has no alias", name)
+}
+
+// GetKey returns the PrivateKey given a KeyID
+func getKey(s LimitedFileStore, passphraseRetriever PassphraseRetriever, name string) (data.PrivateKey, error) {
+	keyAlias, err := getKeyAlias(s, name)
 	if err != nil {
 		return nil, err
 	}
 
-	// Convert PEM encoded bytes back to a PrivateKey
+	keyBytes, err := s.Get(name + "_" + keyAlias)
+	if err != nil {
+		return nil, err
+	}
+
+	// See if the key is encrypted. If its encrypted we'll fail to parse the private key
 	privKey, err := ParsePEMPrivateKey(keyBytes, "")
 	if err != nil {
-		return nil, err
-	}
+		// We need to decrypt the key, lets get a passphrase
+		for attempts := 0; ; attempts++ {
+			passphrase, giveup, err := passphraseRetriever(name, string(keyAlias), false, attempts)
+			// Check if the passphrase retriever got an error or if it is telling us to give up
+			if giveup || err != nil {
+				return nil, errors.New("obtaining passphrase failed")
+			}
+			if attempts > 10 {
+				return nil, errors.New("maximum number of passphrase attempts exceeded")
+			}
 
+			// Try to convert PEM encoded bytes back to a PrivateKey using the passphrase
+			privKey, err = ParsePEMPrivateKey(keyBytes, passphrase)
+			if err == nil {
+				// We managed to parse the PrivateKey. We've succeeded!
+				break
+			}
+		}
+	}
 	return privKey, nil
 }
 
-func addEncryptedKey(s LimitedFileStore, name string, privKey data.PrivateKey, passphrase string) error {
-	encryptedPrivKey, err := EncryptPrivateKey(privKey, passphrase)
-	if err != nil {
-		return err
-	}
-
-	return s.Add(name, encryptedPrivKey)
-}
-
-func getDecryptedKey(s LimitedFileStore, name string, passphrase string) (data.PrivateKey, error) {
-	keyBytes, err := s.Get(name)
-	if err != nil {
-		return nil, err
-	}
-
-	// Gets an unencrypted PrivateKey.
-	privKey, err := ParsePEMPrivateKey(keyBytes, passphrase)
-	if err != nil {
-		return nil, err
-	}
-
-	return privKey, nil
-}
-
+// ListKeys returns a list of unique PublicKeys present on the KeyFileStore.
+// There might be symlinks associating Certificate IDs to Public Keys, so this
+// method only returns the IDs that aren't symlinks
 func listKeys(s LimitedFileStore) []string {
 	var keyIDList []string
+
 	for _, f := range s.ListFiles(false) {
-		keyID := strings.TrimSpace(strings.TrimSuffix(filepath.Base(f), filepath.Ext(f)))
+		keyID := strings.TrimSpace(strings.TrimSuffix(f, filepath.Ext(f)))
+		keyID = keyID[:strings.LastIndex(keyID, "_")]
 		keyIDList = append(keyIDList, keyID)
 	}
 	return keyIDList
 }
 
 // RemoveKey removes the key from the keyfilestore
-func (s *KeyFileStore) RemoveKey(name string) error {
-	return s.Remove(name)
+func removeKey(s LimitedFileStore, name string) error {
+	keyAlias, err := getKeyAlias(s, name)
+	if err != nil {
+		return err
+	}
+
+	return s.Remove(name + "_" + keyAlias)
 }
