@@ -1,14 +1,15 @@
 package trustmanager
 
 import (
-	"bytes"
 	"crypto/rand"
 	"errors"
 	"io/ioutil"
 	"os"
 	"path/filepath"
-	"strings"
 	"testing"
+
+	"github.com/docker/notary/pkg/passphrase"
+	"github.com/stretchr/testify/assert"
 )
 
 var passphraseRetriever = func(keyID string, alias string, createNew bool, numAttempts int) (string, bool, error) {
@@ -26,9 +27,7 @@ func TestAddKey(t *testing.T) {
 
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	if err != nil {
-		t.Fatalf("failed to create a temporary directory: %v", err)
-	}
+	assert.NoError(t, err, "failed to create a temporary directory")
 	defer os.RemoveAll(tempBaseDir)
 
 	// Since we're generating this manually we need to add the extension '.'
@@ -36,30 +35,19 @@ func TestAddKey(t *testing.T) {
 
 	// Create our store
 	store, err := NewKeyFileStore(tempBaseDir, passphraseRetriever)
-	if err != nil {
-		t.Fatalf("failed to create new key filestore: %v", err)
-	}
+	assert.NoError(t, err, "failed to create new key filestore")
 
-	privKey, err := GenerateRSAKey(rand.Reader, 512)
-	if err != nil {
-		t.Fatalf("could not generate private key: %v", err)
-	}
+	privKey, err := GenerateECDSAKey(rand.Reader)
+	assert.NoError(t, err, "could not generate private key")
 
 	// Call the AddKey function
 	err = store.AddKey(testName, "root", privKey)
-	if err != nil {
-		t.Fatalf("failed to add file to store: %v", err)
-	}
+	assert.NoError(t, err, "failed to add key to store")
 
 	// Check to see if file exists
 	b, err := ioutil.ReadFile(expectedFilePath)
-	if err != nil {
-		t.Fatalf("expected file not found: %v", err)
-	}
-
-	if !strings.Contains(string(b), "-----BEGIN RSA PRIVATE KEY-----") {
-		t.Fatalf("expected private key content in the file: %s", expectedFilePath)
-	}
+	assert.NoError(t, err, "expected file not found")
+	assert.Contains(t, string(b), "-----BEGIN EC PRIVATE KEY-----")
 }
 
 func TestGet(t *testing.T) {
@@ -100,39 +88,27 @@ EMl3eFOJXjIch/wIesRSN+2dGOsl7neercjMh1i9RvpCwHDx/E0=
 
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	if err != nil {
-		t.Fatalf("failed to create a temporary directory: %v", err)
-	}
+	assert.NoError(t, err, "failed to create a temporary directory")
 	defer os.RemoveAll(tempBaseDir)
 
 	// Since we're generating this manually we need to add the extension '.'
 	filePath := filepath.Join(tempBaseDir, testName+"_"+testAlias+"."+testExt)
 
 	os.MkdirAll(filepath.Dir(filePath), perms)
-	if err = ioutil.WriteFile(filePath, testData, perms); err != nil {
-		t.Fatalf("Failed to write test file: %v", err)
-	}
+	err = ioutil.WriteFile(filePath, testData, perms)
+	assert.NoError(t, err, "failed to write test file")
 
 	// Create our store
 	store, err := NewKeyFileStore(tempBaseDir, emptyPassphraseRetriever)
-	if err != nil {
-		t.Fatalf("failed to create new key filestore: %v", err)
-	}
+	assert.NoError(t, err, "failed to create new key filestore")
 
 	// Call the GetKey function
-	privKey, err := store.GetKey(testName)
-	if err != nil {
-		t.Fatalf("failed to get file from store: %v", err)
-	}
+	privKey, _, err := store.GetKey(testName)
+	assert.NoError(t, err, "failed to get key from store")
 
 	pemPrivKey, err := KeyToPEM(privKey)
-	if err != nil {
-		t.Fatalf("failed to convert key to PEM: %v", err)
-	}
-
-	if !bytes.Equal(testData, pemPrivKey) {
-		t.Fatalf("unexpected content in the file: %s", filePath)
-	}
+	assert.NoError(t, err, "failed to convert key to PEM")
+	assert.Equal(t, testData, pemPrivKey)
 }
 
 func TestAddGetKeyMemStore(t *testing.T) {
@@ -142,37 +118,20 @@ func TestAddGetKeyMemStore(t *testing.T) {
 	// Create our store
 	store := NewKeyMemoryStore(passphraseRetriever)
 
-	privKey, err := GenerateRSAKey(rand.Reader, 512)
-	if err != nil {
-		t.Fatalf("could not generate private key: %v", err)
-	}
+	privKey, err := GenerateECDSAKey(rand.Reader)
+	assert.NoError(t, err, "could not generate private key")
 
 	// Call the AddKey function
 	err = store.AddKey(testName, testAlias, privKey)
-	if err != nil {
-		t.Fatalf("failed to add file to store: %v", err)
-	}
+	assert.NoError(t, err, "failed to add key to store")
 
 	// Check to see if file exists
-	retrievedKey, err := store.GetKey(testName)
-	if err != nil {
-		t.Fatalf("failed to get key from store: %v", err)
-	}
+	retrievedKey, retrievedAlias, err := store.GetKey(testName)
+	assert.NoError(t, err, "failed to get key from store")
 
-	// Check to see if alias exists
-	retrievedAlias, err := store.GetKeyAlias(testName)
-	if err != nil {
-		t.Fatalf("failed to get key from store: %v", err)
-	}
-
-	if retrievedAlias != testAlias {
-		t.Fatalf("retrievedAlias differs getAlias")
-	}
-
-	if !bytes.Equal(retrievedKey.Public(), privKey.Public()) ||
-		!bytes.Equal(retrievedKey.Private(), privKey.Private()) {
-		t.Fatalf("key contents differs after add/get")
-	}
+	assert.Equal(t, retrievedAlias, testAlias)
+	assert.Equal(t, retrievedKey.Public(), privKey.Public())
+	assert.Equal(t, retrievedKey.Private(), privKey.Private())
 }
 func TestGetDecryptedWithTamperedCipherText(t *testing.T) {
 	testExt := "key"
@@ -180,46 +139,38 @@ func TestGetDecryptedWithTamperedCipherText(t *testing.T) {
 
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	if err != nil {
-		t.Fatalf("failed to create a temporary directory: %v", err)
-	}
+	assert.NoError(t, err, "failed to create a temporary directory")
 	defer os.RemoveAll(tempBaseDir)
 
 	// Create our FileStore
 	store, err := NewKeyFileStore(tempBaseDir, passphraseRetriever)
-	if err != nil {
-		t.Fatalf("failed to create new key filestore: %v", err)
-	}
+	assert.NoError(t, err, "failed to create new key filestore")
 
 	// Generate a new Private Key
-	privKey, err := GenerateRSAKey(rand.Reader, 512)
-	if err != nil {
-		t.Fatalf("could not generate private key: %v", err)
-	}
+	privKey, err := GenerateECDSAKey(rand.Reader)
+	assert.NoError(t, err, "could not generate private key")
 
 	// Call the AddEncryptedKey function
 	err = store.AddKey(privKey.ID(), testAlias, privKey)
-	if err != nil {
-		t.Fatalf("failed to add file to store: %v", err)
-	}
+	assert.NoError(t, err, "failed to add key to store")
 
 	// Since we're generating this manually we need to add the extension '.'
 	expectedFilePath := filepath.Join(tempBaseDir, privKey.ID()+"_"+testAlias+"."+testExt)
 
 	// Get file description, open file
 	fp, err := os.OpenFile(expectedFilePath, os.O_WRONLY, 0600)
-	if err != nil {
-		t.Fatalf("expected file not found: %v", err)
-	}
+	assert.NoError(t, err, "expected file not found")
 
 	// Tamper the file
 	fp.WriteAt([]byte("a"), int64(1))
 
+	// Recreate the KeyFileStore to avoid caching
+	store, err = NewKeyFileStore(tempBaseDir, passphraseRetriever)
+	assert.NoError(t, err, "failed to create new key filestore")
+
 	// Try to decrypt the file
-	_, err = store.GetKey(privKey.ID())
-	if err == nil {
-		t.Fatalf("expected error while decrypting the content due to invalid cipher text")
-	}
+	_, _, err = store.GetKey(privKey.ID())
+	assert.Error(t, err, "expected error while decrypting the content due to invalid cipher text")
 }
 
 func TestGetDecryptedWithInvalidPassphrase(t *testing.T) {
@@ -238,26 +189,20 @@ func TestGetDecryptedWithInvalidPassphrase(t *testing.T) {
 
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	if err != nil {
-		t.Fatalf("failed to create a temporary directory: %v", err)
-	}
+	assert.NoError(t, err, "failed to create a temporary directory")
 	defer os.RemoveAll(tempBaseDir)
 
 	// Test with KeyFileStore
 	fileStore, err := NewKeyFileStore(tempBaseDir, invalidPassphraseRetriever)
-	if err != nil {
-		t.Fatalf("failed to create new key filestore: %v", err)
-	}
+	assert.NoError(t, err, "failed to create new key filestore")
 
-	testGetDecryptedWithInvalidPassphrase(t, fileStore)
+	newFileStore, err := NewKeyFileStore(tempBaseDir, invalidPassphraseRetriever)
+	assert.NoError(t, err, "failed to create new key filestore")
 
-	// Test with KeyMemoryStore
-	memStore := NewKeyMemoryStore(invalidPassphraseRetriever)
-	if err != nil {
-		t.Fatalf("failed to create new key memorystore: %v", err)
-	}
-	testGetDecryptedWithInvalidPassphrase(t, memStore)
+	testGetDecryptedWithInvalidPassphrase(t, fileStore, newFileStore)
 
+	// Can't test with KeyMemoryStore because we cache the decrypted version of
+	// the key forever
 }
 
 func TestGetDecryptedWithConsistentlyInvalidPassphrase(t *testing.T) {
@@ -271,47 +216,38 @@ func TestGetDecryptedWithConsistentlyInvalidPassphrase(t *testing.T) {
 
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	if err != nil {
-		t.Fatalf("failed to create a temporary directory: %v", err)
-	}
+	assert.NoError(t, err, "failed to create a temporary directory")
 	defer os.RemoveAll(tempBaseDir)
 
 	// Test with KeyFileStore
 	fileStore, err := NewKeyFileStore(tempBaseDir, consistentlyInvalidPassphraseRetriever)
-	if err != nil {
-		t.Fatalf("failed to create new key filestore: %v", err)
-	}
+	assert.NoError(t, err, "failed to create new key filestore")
 
-	testGetDecryptedWithInvalidPassphrase(t, fileStore)
+	newFileStore, err := NewKeyFileStore(tempBaseDir, consistentlyInvalidPassphraseRetriever)
+	assert.NoError(t, err, "failed to create new key filestore")
 
-	// Test with KeyMemoryStore
-	memStore := NewKeyMemoryStore(consistentlyInvalidPassphraseRetriever)
-	if err != nil {
-		t.Fatalf("failed to create new key memorystore: %v", err)
-	}
-	testGetDecryptedWithInvalidPassphrase(t, memStore)
+	testGetDecryptedWithInvalidPassphrase(t, fileStore, newFileStore)
+
+	// Can't test with KeyMemoryStore because we cache the decrypted version of
+	// the key forever
 }
 
-func testGetDecryptedWithInvalidPassphrase(t *testing.T, store KeyStore) {
+// testGetDecryptedWithInvalidPassphrase takes two keystores so it can add to
+// one and get from the other (to work around caching)
+func testGetDecryptedWithInvalidPassphrase(t *testing.T, store KeyStore, newStore KeyStore) {
 	testAlias := "root"
 
 	// Generate a new random RSA Key
-	privKey, err := GenerateRSAKey(rand.Reader, 512)
-	if err != nil {
-		t.Fatalf("could not generate private key: %v", err)
-	}
+	privKey, err := GenerateECDSAKey(rand.Reader)
+	assert.NoError(t, err, "could not generate private key")
 
 	// Call the AddKey function
 	err = store.AddKey(privKey.ID(), testAlias, privKey)
-	if err != nil {
-		t.Fatalf("failed to add file to store: %v", err)
-	}
+	assert.NoError(t, err, "failed to add key to store")
 
 	// Try to decrypt the file with an invalid passphrase
-	_, err = store.GetKey(privKey.ID())
-	if err == nil {
-		t.Fatalf("expected error while decrypting the content due to invalid passphrase")
-	}
+	_, _, err = newStore.GetKey(privKey.ID())
+	assert.Error(t, err, "expected error while decrypting the content due to invalid passphrase")
 }
 
 func TestRemoveKey(t *testing.T) {
@@ -321,9 +257,7 @@ func TestRemoveKey(t *testing.T) {
 
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	if err != nil {
-		t.Fatalf("failed to create a temporary directory: %v", err)
-	}
+	assert.NoError(t, err, "failed to create a temporary directory")
 	defer os.RemoveAll(tempBaseDir)
 
 	// Since we're generating this manually we need to add the extension '.'
@@ -331,36 +265,82 @@ func TestRemoveKey(t *testing.T) {
 
 	// Create our store
 	store, err := NewKeyFileStore(tempBaseDir, passphraseRetriever)
-	if err != nil {
-		t.Fatalf("failed to create new key filestore: %v", err)
-	}
+	assert.NoError(t, err, "failed to create new key filestore")
 
-	privKey, err := GenerateRSAKey(rand.Reader, 512)
-	if err != nil {
-		t.Fatalf("could not generate private key: %v", err)
-	}
+	privKey, err := GenerateECDSAKey(rand.Reader)
+	assert.NoError(t, err, "could not generate private key")
 
 	// Call the AddKey function
 	err = store.AddKey(testName, testAlias, privKey)
-	if err != nil {
-		t.Fatalf("failed to add file to store: %v", err)
-	}
+	assert.NoError(t, err, "failed to add key to store")
 
 	// Check to see if file exists
 	_, err = ioutil.ReadFile(expectedFilePath)
-	if err != nil {
-		t.Fatalf("expected file not found: %v", err)
-	}
+	assert.NoError(t, err, "expected file not found")
 
 	// Call remove key
 	err = store.RemoveKey(testName)
-	if err != nil {
-		t.Fatalf("unable to remove key: %v", err)
-	}
+	assert.NoError(t, err, "unable to remove key")
 
 	// Check to see if file still exists
 	_, err = ioutil.ReadFile(expectedFilePath)
-	if err == nil {
-		t.Fatalf("file should not exist %s", expectedFilePath)
+	assert.Error(t, err, "file should not exist")
+}
+
+func TestKeysAreCached(t *testing.T) {
+	testName := "docker.com/notary/root"
+	testAlias := "alias"
+
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	assert.NoError(t, err, "failed to create a temporary directory")
+	defer os.RemoveAll(tempBaseDir)
+
+	var countingPassphraseRetriever passphrase.Retriever
+
+	numTimesCalled := 0
+	countingPassphraseRetriever = func(keyId, alias string, createNew bool, attempts int) (passphrase string, giveup bool, err error) {
+		numTimesCalled++
+		return "password", false, nil
 	}
+
+	// Create our store
+	store, err := NewKeyFileStore(tempBaseDir, countingPassphraseRetriever)
+	assert.NoError(t, err, "failed to create new key filestore")
+
+	privKey, err := GenerateECDSAKey(rand.Reader)
+	assert.NoError(t, err, "could not generate private key")
+
+	// Call the AddKey function
+	err = store.AddKey(testName, testAlias, privKey)
+	assert.NoError(t, err, "failed to add key to store")
+
+	assert.Equal(t, 1, numTimesCalled, "numTimesCalled should have been 1")
+
+	// Call the AddKey function
+	privKey2, _, err := store.GetKey(testName)
+	assert.NoError(t, err, "failed to add key to store")
+
+	assert.Equal(t, privKey.Public(), privKey2.Public(), "cachedPrivKey should be the same as the added privKey")
+	assert.Equal(t, privKey.Private(), privKey2.Private(), "cachedPrivKey should be the same as the added privKey")
+	assert.Equal(t, 1, numTimesCalled, "numTimesCalled should be 1 -- no additional call to passphraseRetriever")
+
+	// Create a new store
+	store2, err := NewKeyFileStore(tempBaseDir, countingPassphraseRetriever)
+	assert.NoError(t, err, "failed to create new key filestore")
+
+	// Call the GetKey function
+	privKey3, _, err := store2.GetKey(testName)
+	assert.NoError(t, err, "failed to get key from store")
+
+	assert.Equal(t, privKey2.Private(), privKey3.Private(), "privkey from store1 should be the same as privkey from store2")
+	assert.Equal(t, privKey2.Public(), privKey3.Public(), "privkey from store1 should be the same as privkey from store2")
+	assert.Equal(t, 2, numTimesCalled, "numTimesCalled should be 2 -- one additional call to passphraseRetriever")
+
+	// Call the GetKey function a bunch of times
+	for i := 0; i < 10; i++ {
+		_, _, err := store2.GetKey(testName)
+		assert.NoError(t, err, "failed to get key from store")
+	}
+	assert.Equal(t, 2, numTimesCalled, "numTimesCalled should be 2 -- no additional call to passphraseRetriever")
 }

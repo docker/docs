@@ -85,7 +85,7 @@ func TestImportExportZip(t *testing.T) {
 	// because the passwords were chosen by the newPassphraseRetriever.
 	privKeyList := repo.KeyStoreManager.NonRootKeyStore().ListKeys()
 	for _, privKeyName := range privKeyList {
-		alias, err := repo.KeyStoreManager.NonRootKeyStore().GetKeyAlias(privKeyName)
+		_, alias, err := repo.KeyStoreManager.NonRootKeyStore().GetKey(privKeyName)
 		assert.NoError(t, err, "privKey %s has no alias", privKeyName)
 
 		relKeyPath := filepath.Join("private", "tuf_keys", privKeyName+"_"+alias+".key")
@@ -156,7 +156,7 @@ func TestImportExportZip(t *testing.T) {
 	// Look for keys in private. The filenames should match the key IDs
 	// in the repo's private key store.
 	for _, privKeyName := range privKeyList {
-		alias, err := repo.KeyStoreManager.NonRootKeyStore().GetKeyAlias(privKeyName)
+		_, alias, err := repo.KeyStoreManager.NonRootKeyStore().GetKey(privKeyName)
 		assert.NoError(t, err, "privKey %s has no alias", privKeyName)
 
 		relKeyPath := filepath.Join("private", "tuf_keys", privKeyName+"_"+alias+".key")
@@ -221,7 +221,7 @@ func TestImportExportGUN(t *testing.T) {
 	// because they were formerly unencrypted.
 	privKeyList := repo.KeyStoreManager.NonRootKeyStore().ListKeys()
 	for _, privKeyName := range privKeyList {
-		alias, err := repo.KeyStoreManager.NonRootKeyStore().GetKeyAlias(privKeyName)
+		_, alias, err := repo.KeyStoreManager.NonRootKeyStore().GetKey(privKeyName)
 		if err != nil {
 			t.Fatalf("privKey %s has no alias", privKeyName)
 		}
@@ -290,7 +290,7 @@ func TestImportExportGUN(t *testing.T) {
 	// Look for keys in private. The filenames should match the key IDs
 	// in the repo's private key store.
 	for _, privKeyName := range privKeyList {
-		alias, err := repo.KeyStoreManager.NonRootKeyStore().GetKeyAlias(privKeyName)
+		_, alias, err := repo.KeyStoreManager.NonRootKeyStore().GetKey(privKeyName)
 		if err != nil {
 			t.Fatalf("privKey %s has no alias", privKeyName)
 		}
