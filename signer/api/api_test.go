@@ -29,7 +29,7 @@ var (
 	createKeyBaseURL    string
 	keyInfoBaseURL      string
 	signBaseURL         string
-	passphraseRetriever = func (string, string, bool, int) (string, bool, error) { return "passphrase", false, nil}
+	passphraseRetriever = func(string, string, bool, int) (string, bool, error) { return "passphrase", false, nil }
 )
 
 func SetupHSMEnv(t *testing.T) (*pkcs11.Ctx, pkcs11.SessionHandle) {

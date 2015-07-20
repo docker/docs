@@ -36,10 +36,11 @@ func createTestServer(t *testing.T) (*httptest.Server, *http.ServeMux) {
 
 	return ts, mux
 }
+
 var oldPassphrase = "oldPassphrase"
 var exportPassphrase = "exportPassphrase"
-var oldPassphraseRetriever = func (string, string, bool, int) (string, bool, error) { return oldPassphrase, false, nil}
-var newPassphraseRetriever = func (string, string, bool, int) (string, bool, error) { return exportPassphrase, false, nil}
+var oldPassphraseRetriever = func(string, string, bool, int) (string, bool, error) { return oldPassphrase, false, nil }
+var newPassphraseRetriever = func(string, string, bool, int) (string, bool, error) { return exportPassphrase, false, nil }
 
 func TestImportExportZip(t *testing.T) {
 	gun := "docker.com/notary"

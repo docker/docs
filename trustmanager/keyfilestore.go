@@ -4,13 +4,13 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/endophage/gotuf/data"
 	"errors"
 	"fmt"
+	"github.com/endophage/gotuf/data"
 )
 
 const (
-	keyExtension = "key"
+	keyExtension   = "key"
 	aliasExtension = "alias"
 )
 
@@ -103,7 +103,6 @@ func (s *KeyMemoryStore) GetKeyAlias(name string) (string, error) {
 	return getKeyAlias(s, name)
 }
 
-
 // ListKeys returns a list of unique PublicKeys present on the KeyFileStore.
 // There might be symlinks associating Certificate IDs to Public Keys, so this
 // method only returns the IDs that aren't symlinks
@@ -115,7 +114,6 @@ func (s *KeyMemoryStore) ListKeys() []string {
 func (s *KeyMemoryStore) RemoveKey(name string) error {
 	return removeKey(s, name)
 }
-
 
 func addKey(s LimitedFileStore, passphraseRetriever PassphraseRetriever, name, alias string, privKey data.PrivateKey) error {
 	pemPrivKey, err := KeyToPEM(privKey)
@@ -148,7 +146,7 @@ func addKey(s LimitedFileStore, passphraseRetriever PassphraseRetriever, name, a
 		}
 	}
 
-	return s.Add(name + "_" + alias, pemPrivKey)
+	return s.Add(name+"_"+alias, pemPrivKey)
 }
 
 func getKeyAlias(s LimitedFileStore, keyID string) (string, error) {
@@ -160,8 +158,8 @@ func getKeyAlias(s LimitedFileStore, keyID string) (string, error) {
 		filename := file[lastPathSeparator+1:]
 
 		if strings.HasPrefix(filename, name) {
-			aliasPlusDotKey := strings.TrimPrefix(filename, name + "_")
-			retVal := strings.TrimSuffix(aliasPlusDotKey, "." + keyExtension)
+			aliasPlusDotKey := strings.TrimPrefix(filename, name+"_")
+			retVal := strings.TrimSuffix(aliasPlusDotKey, "."+keyExtension)
 			return retVal, nil
 		}
 	}
@@ -216,7 +214,7 @@ func listKeys(s LimitedFileStore) []string {
 
 	for _, f := range s.ListFiles(false) {
 		keyID := strings.TrimSpace(strings.TrimSuffix(f, filepath.Ext(f)))
-		keyID = keyID[:strings.LastIndex(keyID,"_")]
+		keyID = keyID[:strings.LastIndex(keyID, "_")]
 		keyIDList = append(keyIDList, keyID)
 	}
 	return keyIDList

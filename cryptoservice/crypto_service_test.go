@@ -17,8 +17,7 @@ func TestCryptoService(t *testing.T) {
 	}
 }
 
-var passphraseretriever = func (string, string, bool, int) (string, bool, error) { return "", false, nil}
-
+var passphraseretriever = func(string, string, bool, int) (string, bool, error) { return "", false, nil }
 
 func testCryptoService(t *testing.T, keyAlgo data.KeyAlgorithm, verifier signed.Verifier) {
 	content := []byte("this is a secret")

@@ -23,8 +23,8 @@ const (
 // CryptoService implements Sign and Create, holding a specific GUN and keystore to
 // operate on
 type CryptoService struct {
-	gun        string
-	keyStore   trustmanager.KeyStore
+	gun      string
+	keyStore trustmanager.KeyStore
 }
 
 // NewCryptoService returns an instance of CryptoService

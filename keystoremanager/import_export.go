@@ -11,9 +11,9 @@ import (
 	"path/filepath"
 	"strings"
 
+	"fmt"
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary/trustmanager"
-	"fmt"
 )
 
 var (
@@ -37,7 +37,7 @@ var (
 // ExportRootKey exports the specified root key to an io.Writer in PEM format.
 // The key's existing encryption is preserved.
 func (km *KeyStoreManager) ExportRootKey(dest io.Writer, keyID string) error {
-	pemBytes, err := km.rootKeyStore.Get(keyID+"_root")
+	pemBytes, err := km.rootKeyStore.Get(keyID + "_root")
 	if err != nil {
 		return err
 	}
@@ -292,7 +292,6 @@ func (km *KeyStoreManager) ExportKeysByGUN(dest io.Writer, gun string, passphras
 	defer os.RemoveAll(tempBaseDir)
 
 	privNonRootKeysSubdir := filepath.Join(privDir, nonRootKeysSubdir)
-
 
 	// Create temporary keystore to use as a staging area
 	tempNonRootKeysPath := filepath.Join(tempBaseDir, privNonRootKeysSubdir)

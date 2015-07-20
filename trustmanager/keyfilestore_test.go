@@ -3,15 +3,15 @@ package trustmanager
 import (
 	"bytes"
 	"crypto/rand"
+	"errors"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
 	"testing"
-	"errors"
 )
 
-var passphraseRetriever = func (keyID string, alias string, createNew bool, numAttempts int) (string, bool, error) {
+var passphraseRetriever = func(keyID string, alias string, createNew bool, numAttempts int) (string, bool, error) {
 	if numAttempts > 5 {
 		giveup := true
 		return "", giveup, errors.New("passPhraseRetriever failed after too many requests")
@@ -46,7 +46,7 @@ func TestAddKey(t *testing.T) {
 	}
 
 	// Call the AddKey function
-	err = store.AddKey(testName, "root",  privKey)
+	err = store.AddKey(testName, "root", privKey)
 	if err != nil {
 		t.Fatalf("failed to add file to store: %v", err)
 	}
@@ -96,8 +96,7 @@ EMl3eFOJXjIch/wIesRSN+2dGOsl7neercjMh1i9RvpCwHDx/E0=
 	testAlias := "root"
 	perms := os.FileMode(0755)
 
-	emptyPassphraseRetriever := func (string, string, bool, int) (string, bool, error) { return "", false, nil}
-
+	emptyPassphraseRetriever := func(string, string, bool, int) (string, bool, error) { return "", false, nil }
 
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
@@ -226,11 +225,10 @@ func TestGetDecryptedWithTamperedCipherText(t *testing.T) {
 
 func TestGetDecryptedWithInvalidPassphrase(t *testing.T) {
 
-
 	// Make a passphraseRetriever that always returns a different passphrase in order to test
 	// decryption failure
 	a := "a"
-	var invalidPassphraseRetriever = func (keyId string, alias string, createNew bool, numAttempts int) (string, bool, error) {
+	var invalidPassphraseRetriever = func(keyId string, alias string, createNew bool, numAttempts int) (string, bool, error) {
 		if numAttempts > 5 {
 			giveup := true
 			return "", giveup, nil

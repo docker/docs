@@ -14,9 +14,9 @@ import (
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/docker/pkg/term"
 	notaryclient "github.com/docker/notary/client"
+	"github.com/docker/notary/trustmanager"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"github.com/docker/notary/trustmanager"
 )
 
 // FIXME: This should not be hardcoded
@@ -272,23 +272,17 @@ func verify(cmd *cobra.Command, args []string) {
 	return
 }
 
-func getNotaryPassphraseRetriever() (trustmanager.PassphraseRetriever) {
+func getNotaryPassphraseRetriever() trustmanager.PassphraseRetriever {
 	userEnteredTargetsSnapshotsPass := false
 	targetsSnapshotsPass := ""
 
 	return func(keyID string, alias string, createNew bool, numAttempts int) (string, bool, error) {
-		fmt.Printf("userEnteredTargetsSnapshotsPass: %s\n", userEnteredTargetsSnapshotsPass)
-		fmt.Printf("targetsSnapshotsPass: %s\n", targetsSnapshotsPass)
-		fmt.Printf("keyID: %s\n", keyID)
-		fmt.Printf("alias: %s\n", alias)
-		fmt.Printf("numAttempts: %s\n", numAttempts)
-
 		if numAttempts == 0 && userEnteredTargetsSnapshotsPass && (alias == "snapshot" || alias == "targets") {
 			fmt.Println("return cached value")
 
-			return targetsSnapshotsPass, false, nil;
+			return targetsSnapshotsPass, false, nil
 		}
-		if (numAttempts > 3 && !createNew) {
+		if numAttempts > 3 && !createNew {
 			return "", true, errors.New("Too many attempts")
 		}
 
@@ -303,7 +297,7 @@ func getNotaryPassphraseRetriever() (trustmanager.PassphraseRetriever) {
 
 		if createNew {
 			fmt.Printf("Enter passphrase for new %s key with id %s: ", alias, keyID)
-		}else {
+		} else {
 			fmt.Printf("Enter key passphrase for %s key with id %s: ", alias, keyID)
 		}
 
@@ -320,7 +314,7 @@ func getNotaryPassphraseRetriever() (trustmanager.PassphraseRetriever) {
 				userEnteredTargetsSnapshotsPass = true
 				targetsSnapshotsPass = retPass
 			}
-			return string(passphrase), false, nil;
+			return string(passphrase), false, nil
 		}
 
 		if len(passphrase) < 8 {
