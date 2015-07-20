@@ -6,7 +6,9 @@ import (
 	"github.com/docker/distribution/registry/api/errcode"
 )
 
-const errGroup = "notary.v1"
+// The notary API is on version 1, but URLs start with /v2/ to be consistent
+// with the registry API
+const errGroup = "notary.api.v1"
 
 var (
 	// ErrNoStorage lint comment
@@ -71,13 +73,6 @@ var (
 		Message:        "The server does not have a signing service configured.",
 		Description:    "No signing service has been configured for the server and it has been asked to perform an operation that requires either signing, or key generation.",
 		HTTPStatusCode: http.StatusInternalServerError,
-	})
-	// ErrUnauthorized lint comment
-	ErrUnauthorized = errcode.Register(errGroup, errcode.ErrorDescriptor{
-		Value:          "UNAUTHORIZED",
-		Message:        "You are not authorized for this request.",
-		Description:    "The user was not authorized for the request.",
-		HTTPStatusCode: http.StatusUnauthorized,
 	})
 	// ErrUnknown is the generic internal server error
 	ErrUnknown = errcode.ErrorCodeUnknown

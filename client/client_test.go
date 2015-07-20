@@ -11,6 +11,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/docker/distribution/registry/api/v2"
 	"github.com/docker/notary/client/changelist"
 	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/server/handlers"
@@ -468,12 +469,12 @@ func testPublish(t *testing.T, rootType data.KeyAlgorithm) {
 		cryptoservice.NewCryptoService("", trustmanager.NewKeyMemoryStore(passphraseRetriever)))
 
 	r := mux.NewRouter()
-	r.Methods("POST").Path("/v2/{imageName:.*}/_trust/tuf/").Handler(hand(handlers.AtomicUpdateHandler, "push", "pull"))
-	r.Methods("GET").Path("/v2/{imageName:.*}/_trust/tuf/{tufRole:(root|targets|snapshot)}.json").Handler(hand(handlers.GetHandler, "pull"))
-	r.Methods("GET").Path("/v2/{imageName:.*}/_trust/tuf/timestamp.json").Handler(hand(handlers.GetTimestampHandler, "pull"))
-	r.Methods("GET").Path("/v2/{imageName:.*}/_trust/tuf/timestamp.key").Handler(hand(handlers.GetTimestampKeyHandler, "push", "pull"))
-	//r.Methods("POST").Path("/v2/{imageName:.*}/_trust/tuf/{tufRole:(root|targets|timestamp|snapshot)}.json").Handler(hand(handlers.UpdateHandler, "push", "pull"))
-	r.Methods("DELETE").Path("/v2/{imageName:.*}/_trust/tuf/").Handler(hand(handlers.DeleteHandler, "push", "pull"))
+	r.Methods("POST").Path("/v2/{imageName:" + v2.RepositoryNameRegexp.String() + "}/_trust/tuf/").Handler(hand(handlers.AtomicUpdateHandler, "push", "pull"))
+	r.Methods("GET").Path("/v2/{imageName:" + v2.RepositoryNameRegexp.String() + "}/_trust/tuf/{tufRole:(root|targets|snapshot)}.json").Handler(hand(handlers.GetHandler, "pull"))
+	r.Methods("GET").Path("/v2/{imageName:" + v2.RepositoryNameRegexp.String() + "}/_trust/tuf/timestamp.json").Handler(hand(handlers.GetTimestampHandler, "pull"))
+	r.Methods("GET").Path("/v2/{imageName:" + v2.RepositoryNameRegexp.String() + "}/_trust/tuf/timestamp.key").Handler(hand(handlers.GetTimestampKeyHandler, "push", "pull"))
+	//r.Methods("POST").Path("/v2/{imageName:" + server.RepositoryNameRegexp + "}/_trust/tuf/{tufRole:(root|targets|timestamp|snapshot)}.json").Handler(hand(handlers.UpdateHandler, "push", "pull"))
+	r.Methods("DELETE").Path("/v2/{imageName:" + v2.RepositoryNameRegexp.String() + "}/_trust/tuf/").Handler(hand(handlers.DeleteHandler, "push", "pull"))
 
 	ts := httptest.NewServer(r)
 
