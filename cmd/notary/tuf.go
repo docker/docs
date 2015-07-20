@@ -275,13 +275,21 @@ func verify(cmd *cobra.Command, args []string) {
 func getNotaryPassphraseRetriever() trustmanager.PassphraseRetriever {
 	userEnteredTargetsSnapshotsPass := false
 	targetsSnapshotsPass := ""
+	userEnteredRootsPass := false
+	rootsPass := ""
 
 	return func(keyID string, alias string, createNew bool, numAttempts int) (string, bool, error) {
-		if numAttempts == 0 && userEnteredTargetsSnapshotsPass && (alias == "snapshot" || alias == "targets") {
-			fmt.Println("return cached value")
 
-			return targetsSnapshotsPass, false, nil
+		// First, check if we have a password cached for this alias.
+		if numAttempts == 0 {
+			if userEnteredTargetsSnapshotsPass && (alias == "snapshot" || alias == "targets") {
+				return targetsSnapshotsPass, false, nil
+			}
+			if userEnteredRootsPass && (alias == "root") {
+				return rootsPass, false, nil
+			}
 		}
+
 		if numAttempts > 3 && !createNew {
 			return "", true, errors.New("Too many attempts")
 		}
@@ -314,6 +322,10 @@ func getNotaryPassphraseRetriever() trustmanager.PassphraseRetriever {
 				userEnteredTargetsSnapshotsPass = true
 				targetsSnapshotsPass = retPass
 			}
+			if alias == "root" {
+				userEnteredRootsPass = true
+				rootsPass = retPass
+			}
 			return string(passphrase), false, nil
 		}
 
@@ -335,9 +347,13 @@ func getNotaryPassphraseRetriever() trustmanager.PassphraseRetriever {
 		}
 		retPass := string(passphrase)
 
-		if alias == "snapshots" || alias == "targets" {
+		if alias == "snapshot" || alias == "targets" {
 			userEnteredTargetsSnapshotsPass = true
 			targetsSnapshotsPass = retPass
+		}
+		if alias == "root" {
+			userEnteredRootsPass = true
+			rootsPass = retPass
 		}
 
 		return retPass, false, nil
