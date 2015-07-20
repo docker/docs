@@ -4,12 +4,12 @@ import (
 	"bytes"
 	"crypto/rand"
 	"errors"
+	"github.com/docker/notary/Godeps/_workspace/src/github.com/stretchr/testify/assert"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
 	"testing"
-	"github.com/docker/notary/Godeps/_workspace/src/github.com/stretchr/testify/assert"
 )
 
 var passphraseRetriever = func(keyID string, alias string, createNew bool, numAttempts int) (string, bool, error) {
@@ -121,7 +121,7 @@ EMl3eFOJXjIch/wIesRSN+2dGOsl7neercjMh1i9RvpCwHDx/E0=
 	}
 
 	// Call the GetKey function
-	privKey, err := store.GetKey(testName)
+	privKey, _, err := store.GetKey(testName)
 	if err != nil {
 		t.Fatalf("failed to get file from store: %v", err)
 	}
@@ -155,13 +155,7 @@ func TestAddGetKeyMemStore(t *testing.T) {
 	}
 
 	// Check to see if file exists
-	retrievedKey, err := store.GetKey(testName)
-	if err != nil {
-		t.Fatalf("failed to get key from store: %v", err)
-	}
-
-	// Check to see if alias exists
-	retrievedAlias, err := store.GetKeyAlias(testName)
+	retrievedKey, retrievedAlias, err := store.GetKey(testName)
 	if err != nil {
 		t.Fatalf("failed to get key from store: %v", err)
 	}
@@ -216,8 +210,11 @@ func TestGetDecryptedWithTamperedCipherText(t *testing.T) {
 	// Tamper the file
 	fp.WriteAt([]byte("a"), int64(1))
 
+	// Recreate the KeyFileStore to avoid caching
+	store, err = NewKeyFileStore(tempBaseDir, passphraseRetriever)
+
 	// Try to decrypt the file
-	_, err = store.GetKey(privKey.ID())
+	_, _, err = store.GetKey(privKey.ID())
 	if err == nil {
 		t.Fatalf("expected error while decrypting the content due to invalid cipher text")
 	}
@@ -250,15 +247,15 @@ func TestGetDecryptedWithInvalidPassphrase(t *testing.T) {
 		t.Fatalf("failed to create new key filestore: %v", err)
 	}
 
-	testGetDecryptedWithInvalidPassphrase(t, fileStore)
-
-	// Test with KeyMemoryStore
-	memStore := NewKeyMemoryStore(invalidPassphraseRetriever)
+	newFileStore, err := NewKeyFileStore(tempBaseDir, invalidPassphraseRetriever)
 	if err != nil {
-		t.Fatalf("failed to create new key memorystore: %v", err)
+		t.Fatalf("failed to create new key filestore: %v", err)
 	}
-	testGetDecryptedWithInvalidPassphrase(t, memStore)
 
+	testGetDecryptedWithInvalidPassphrase(t, fileStore, newFileStore)
+
+	// Can't test with KeyMemoryStore because we cache the decrypted version of
+	// the key forever
 }
 
 func TestGetDecryptedWithConsistentlyInvalidPassphrase(t *testing.T) {
@@ -283,17 +280,20 @@ func TestGetDecryptedWithConsistentlyInvalidPassphrase(t *testing.T) {
 		t.Fatalf("failed to create new key filestore: %v", err)
 	}
 
-	testGetDecryptedWithInvalidPassphrase(t, fileStore)
-
-	// Test with KeyMemoryStore
-	memStore := NewKeyMemoryStore(consistentlyInvalidPassphraseRetriever)
+	newFileStore, err := NewKeyFileStore(tempBaseDir, consistentlyInvalidPassphraseRetriever)
 	if err != nil {
-		t.Fatalf("failed to create new key memorystore: %v", err)
+		t.Fatalf("failed to create new key filestore: %v", err)
 	}
-	testGetDecryptedWithInvalidPassphrase(t, memStore)
+
+	testGetDecryptedWithInvalidPassphrase(t, fileStore, newFileStore)
+
+	// Can't test with KeyMemoryStore because we cache the decrypted version of
+	// the key forever
 }
 
-func testGetDecryptedWithInvalidPassphrase(t *testing.T, store KeyStore) {
+// testGetDecryptedWithInvalidPassphrase takes two keystores so it can add to
+// one and get from the other (to work around caching)
+func testGetDecryptedWithInvalidPassphrase(t *testing.T, store KeyStore, newStore KeyStore) {
 	testAlias := "root"
 
 	// Generate a new random RSA Key
@@ -309,7 +309,7 @@ func testGetDecryptedWithInvalidPassphrase(t *testing.T, store KeyStore) {
 	}
 
 	// Try to decrypt the file with an invalid passphrase
-	_, err = store.GetKey(privKey.ID())
+	_, _, err = newStore.GetKey(privKey.ID())
 	if err == nil {
 		t.Fatalf("expected error while decrypting the content due to invalid passphrase")
 	}
@@ -377,7 +377,6 @@ func TestKeysAreCached(t *testing.T) {
 	}
 	defer os.RemoveAll(tempBaseDir)
 
-
 	var countingPassphraseRetriever PassphraseRetriever
 
 	numTimesCalled := 0
@@ -406,7 +405,7 @@ func TestKeysAreCached(t *testing.T) {
 	assert.Equal(t, 1, numTimesCalled, "numTimesCalled should have been 1")
 
 	// Call the AddKey function
-	privKey2, err := store.GetKey(testName)
+	privKey2, _, err := store.GetKey(testName)
 	if err != nil {
 		t.Fatalf("failed to add file to store: %v", err)
 	}
@@ -415,7 +414,6 @@ func TestKeysAreCached(t *testing.T) {
 	assert.Equal(t, privKey.Private(), privKey2.Private(), "cachedPrivKey should be the same as the added privKey")
 	assert.Equal(t, 1, numTimesCalled, "numTimesCalled should be 1 -- no additional call to passphraseRetriever")
 
-
 	// Create a new store
 	store2, err := NewKeyFileStore(tempBaseDir, countingPassphraseRetriever)
 	if err != nil {
@@ -423,7 +421,7 @@ func TestKeysAreCached(t *testing.T) {
 	}
 
 	// Call the AddKey function
-	privKey3, err := store2.GetKey(testName)
+	privKey3, _, err := store2.GetKey(testName)
 	if err != nil {
 		t.Fatalf("failed to add file to store: %v", err)
 	}
@@ -434,7 +432,7 @@ func TestKeysAreCached(t *testing.T) {
 
 	// Call the GetKey function a bunch of times
 	for i := 0; i < 10; i++ {
-		_, err := store2.GetKey(testName)
+		_, _, err := store2.GetKey(testName)
 		if err != nil {
 			t.Fatalf("failed to add file to store: %v", err)
 		}

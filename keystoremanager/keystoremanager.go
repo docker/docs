@@ -173,7 +173,7 @@ func (km *KeyStoreManager) GenRootKey(algorithm string) (string, error) {
 // GetRootCryptoService retrieves a root key and a cryptoservice to use with it
 // TODO(mccauley): remove this as its no longer needed once we have key caching in the keystores
 func (km *KeyStoreManager) GetRootCryptoService(rootKeyID string) (*cryptoservice.UnlockedCryptoService, error) {
-	privKey, err := km.rootKeyStore.GetKey(rootKeyID)
+	privKey, _, err := km.rootKeyStore.GetKey(rootKeyID)
 	if err != nil {
 		return nil, fmt.Errorf("could not get decrypted root key with keyID: %s, %v", rootKeyID, err)
 	}

@@ -68,7 +68,7 @@ func (ccs *CryptoService) Create(role string, algorithm data.KeyAlgorithm) (data
 
 // GetKey returns a key by ID
 func (ccs *CryptoService) GetKey(keyID string) data.PublicKey {
-	key, err := ccs.keyStore.GetKey(keyID)
+	key, _, err := ccs.keyStore.GetKey(keyID)
 	if err != nil {
 		return nil
 	}
@@ -92,7 +92,7 @@ func (ccs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signatur
 		var privKey data.PrivateKey
 		var err error
 
-		privKey, err = ccs.keyStore.GetKey(keyName)
+		privKey, _, err = ccs.keyStore.GetKey(keyName)
 		if err != nil {
 			// Note that GetKey always fails on InitRepo.
 			// InitRepo gets a signer that doesn't have access to

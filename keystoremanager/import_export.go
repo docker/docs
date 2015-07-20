@@ -81,12 +81,7 @@ func (km *KeyStoreManager) ImportRootKey(source io.Reader, keyID string) error {
 func moveKeys(oldKeyStore, newKeyStore *trustmanager.KeyFileStore) error {
 	// List all files but no symlinks
 	for _, f := range oldKeyStore.ListKeys() {
-		pemBytes, err := oldKeyStore.GetKey(f)
-		if err != nil {
-			return err
-		}
-
-		alias, err := oldKeyStore.GetKeyAlias(f)
+		pemBytes, alias, err := oldKeyStore.GetKey(f)
 		if err != nil {
 			return err
 		}
@@ -259,12 +254,7 @@ func moveKeysByGUN(oldKeyStore, newKeyStore *trustmanager.KeyFileStore, gun stri
 			continue
 		}
 
-		privKey, err := oldKeyStore.GetKey(relKeyPath)
-		if err != nil {
-			return err
-		}
-
-		alias, err := oldKeyStore.GetKeyAlias(relKeyPath)
+		privKey, alias, err := oldKeyStore.GetKey(relKeyPath)
 		if err != nil {
 			return err
 		}
