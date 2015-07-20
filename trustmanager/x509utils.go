@@ -456,7 +456,8 @@ func CertsToKeys(certs []*x509.Certificate) map[string]data.PublicKey {
 // NewCertificate returns an X509 Certificate following a template, given a GUN.
 func NewCertificate(gun string) (*x509.Certificate, error) {
 	notBefore := time.Now()
-	notAfter := notBefore.Add(time.Hour * 24 * 365 * 2)
+	// Certificates will expire in 10 years
+	notAfter := notBefore.Add(time.Hour * 24 * 365 * 10)
 
 	serialNumberLimit := new(big.Int).Lsh(big.NewInt(1), 128)
 
