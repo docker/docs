@@ -153,8 +153,7 @@ func getKeyAlias(s LimitedFileStore, keyID string) (string, error) {
 	name := strings.TrimSpace(strings.TrimSuffix(filepath.Base(keyID), filepath.Ext(keyID)))
 
 	for _, file := range files {
-		lastPathSeparator := strings.LastIndexAny(file, "/\\")
-		filename := file[lastPathSeparator+1:]
+		filename := filepath.Base(file)
 
 		if strings.HasPrefix(filename, name) {
 			aliasPlusDotKey := strings.TrimPrefix(filename, name+"_")

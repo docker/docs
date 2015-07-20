@@ -2,7 +2,6 @@ package main
 
 import (
 	"bufio"
-	"bytes"
 	"crypto/sha256"
 	"crypto/tls"
 	"errors"
@@ -17,6 +16,7 @@ import (
 	"github.com/docker/notary/trustmanager"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	"strings"
 )
 
 // FIXME: This should not be hardcoded
@@ -314,10 +314,10 @@ func getNotaryPassphraseRetriever() trustmanager.PassphraseRetriever {
 		if err != nil {
 			return "", false, err
 		}
-		passphrase = passphrase[0 : len(passphrase)-1]
+
+		retPass := strings.TrimSpace(string(passphrase))
 
 		if !createNew {
-			retPass := string(passphrase)
 			if alias == "snapshot" || alias == "targets" {
 				userEnteredTargetsSnapshotsPass = true
 				targetsSnapshotsPass = retPass
@@ -326,10 +326,10 @@ func getNotaryPassphraseRetriever() trustmanager.PassphraseRetriever {
 				userEnteredRootsPass = true
 				rootsPass = retPass
 			}
-			return string(passphrase), false, nil
+			return retPass, false, nil
 		}
 
-		if len(passphrase) < 8 {
+		if len(retPass) < 8 {
 			fmt.Println("Please use a password manager to generate and store a good random passphrase.")
 			return "", false, errors.New("Passphrase too short")
 		}
@@ -340,12 +340,11 @@ func getNotaryPassphraseRetriever() trustmanager.PassphraseRetriever {
 		if err != nil {
 			return "", false, err
 		}
-		confirmation = confirmation[0 : len(confirmation)-1]
+		confirmationStr := strings.TrimSpace(string(confirmation))
 
-		if !bytes.Equal(passphrase, confirmation) {
+		if retPass != confirmationStr {
 			return "", false, errors.New("The entered passphrases do not match")
 		}
-		retPass := string(passphrase)
 
 		if alias == "snapshot" || alias == "targets" {
 			userEnteredTargetsSnapshotsPass = true

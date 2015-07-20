@@ -24,10 +24,6 @@ var (
 	// unencrypted
 	ErrRootKeyNotEncrypted = errors.New("only encrypted root keys may be imported")
 
-	// ErrNonRootKeyEncrypted is returned if a non-root key is found to
-	// be encrypted while exporting
-	ErrNonRootKeyEncrypted = errors.New("found encrypted non-root key")
-
 	// ErrNoKeysFoundForGUN is returned if no keys are found for the
 	// specified GUN during export
 	ErrNoKeysFoundForGUN = errors.New("no keys found for specified GUN")
