@@ -7,6 +7,7 @@ import (
 	"testing"
 
 	"github.com/docker/notary/cryptoservice"
+	"github.com/docker/notary/pkg/passphrase"
 	"github.com/docker/notary/signer"
 	"github.com/docker/notary/signer/api"
 	"github.com/docker/notary/trustmanager"
@@ -24,7 +25,7 @@ var (
 	sClient    pb.SignerClient
 	grpcServer *grpc.Server
 	void       *pb.Void
-	pr         trustmanager.PassphraseRetriever
+	pr         passphrase.Retriever
 )
 
 func init() {

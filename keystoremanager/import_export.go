@@ -12,6 +12,7 @@ import (
 	"strings"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/docker/notary/pkg/passphrase"
 	"github.com/docker/notary/trustmanager"
 )
 
@@ -135,7 +136,7 @@ func addKeysToArchive(zipWriter *zip.Writer, newKeyStore *trustmanager.KeyFileSt
 
 // ExportAllKeys exports all keys to an io.Writer in zip format.
 // newPassphraseRetriever will be used to obtain passphrases to use to encrypt the existing keys.
-func (km *KeyStoreManager) ExportAllKeys(dest io.Writer, newPassphraseRetriever trustmanager.PassphraseRetriever) error {
+func (km *KeyStoreManager) ExportAllKeys(dest io.Writer, newPassphraseRetriever passphrase.Retriever) error {
 	tempBaseDir, err := ioutil.TempDir("", "notary-key-export-")
 	defer os.RemoveAll(tempBaseDir)
 
@@ -280,7 +281,7 @@ func moveKeysByGUN(oldKeyStore, newKeyStore *trustmanager.KeyFileStore, gun stri
 // ExportKeysByGUN exports all keys associated with a specified GUN to an
 // io.Writer in zip format. passphraseRetriever is used to select new passphrases to use to
 // encrypt the keys.
-func (km *KeyStoreManager) ExportKeysByGUN(dest io.Writer, gun string, passphraseRetriever trustmanager.PassphraseRetriever) error {
+func (km *KeyStoreManager) ExportKeysByGUN(dest io.Writer, gun string, passphraseRetriever passphrase.Retriever) error {
 	tempBaseDir, err := ioutil.TempDir("", "notary-key-export-")
 	defer os.RemoveAll(tempBaseDir)
 

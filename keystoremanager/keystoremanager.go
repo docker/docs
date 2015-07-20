@@ -11,6 +11,7 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary/cryptoservice"
+	"github.com/docker/notary/pkg/passphrase"
 	"github.com/docker/notary/trustmanager"
 	"github.com/endophage/gotuf/data"
 	"github.com/endophage/gotuf/signed"
@@ -60,7 +61,7 @@ func (err ErrRootRotationFail) Error() string {
 
 // NewKeyStoreManager returns an initialized KeyStoreManager, or an error
 // if it fails to create the KeyFileStores or load certificates
-func NewKeyStoreManager(baseDir string, passphraseRetriever trustmanager.PassphraseRetriever) (*KeyStoreManager, error) {
+func NewKeyStoreManager(baseDir string, passphraseRetriever passphrase.Retriever) (*KeyStoreManager, error) {
 	nonRootKeysPath := filepath.Join(baseDir, privDir, nonRootKeysSubdir)
 	nonRootKeyStore, err := trustmanager.NewKeyFileStore(nonRootKeysPath, passphraseRetriever)
 	if err != nil {
