@@ -6,6 +6,8 @@ import (
 	"io/ioutil"
 	"os"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestNewX509FileStore(t *testing.T) {
@@ -59,17 +61,24 @@ func TestAddCertX509FileStore(t *testing.T) {
 
 func TestAddCertFromFileX509FileStore(t *testing.T) {
 	tempDir, err := ioutil.TempDir("", "cert-test")
-	if err != nil {
-		t.Fatal(err)
-	}
-	store, _ := NewX509FileStore(tempDir)
+	assert.NoError(t, err, "failed to create temporary directory")
+
+	store, err := NewX509FileStore(tempDir)
+	assert.NoError(t, err, "failed to load x509 filestore")
+
 	err = store.AddCertFromFile("../fixtures/root-ca.crt")
-	if err != nil {
-		t.Fatalf("failed to load certificate from file: %v", err)
-	}
-	numCerts := len(store.GetCertificates())
-	if numCerts != 1 {
-		t.Fatalf("unexpected number of certificates in store: %d", numCerts)
+	assert.NoError(t, err, "failed to add certificate from file")
+	assert.Len(t, store.GetCertificates(), 1)
+
+	// Now load the x509 filestore with the same path and expect the same result
+	newStore, err := NewX509FileStore(tempDir)
+	assert.NoError(t, err, "failed to load x509 filestore")
+	assert.Len(t, newStore.GetCertificates(), 1)
+
+	// Test that adding the same certificate returns an error
+	err = newStore.AddCert(newStore.GetCertificates()[0])
+	if assert.Error(t, err, "expected error when adding certificate twice") {
+		assert.Equal(t, err, &ErrCertExists{})
 	}
 }
 

@@ -40,6 +40,17 @@ func (err ErrCertExists) Error() string {
 	return fmt.Sprintf("certificate already in the store")
 }
 
+// ErrBadCertificateStore is returned when there is an internal inconsistency
+// in our x509 store
+type ErrBadCertificateStore struct {
+}
+
+// ErrBadCertificateStore is returned when there is an internal inconsistency
+// in our x509 store
+func (err ErrBadCertificateStore) Error() string {
+	return fmt.Sprintf("inconsistent certificate store")
+}
+
 // X509Store is the interface for all X509Stores
 type X509Store interface {
 	AddCert(cert *x509.Certificate) error
