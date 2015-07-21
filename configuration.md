@@ -153,7 +153,7 @@ Continue by following the steps corresponding to your chosen OS.
     docker start/running, process 29291
 ```
 
-#### RHEL
+#### RHEL/Centos
 
 ```
     $ export DOMAIN_NAME=dtr.yourdomain.com
@@ -224,9 +224,9 @@ DOCKER_OPTS="--insecure-registry dtr.yourdomain.com"
 
 Then restart the Docker daemon with `sudo service docker restart`.
 
-#### RHEL
+#### RHEL/Centos
 
-On RHEL, you customize the Docker daemon configuration with the
+On RHEL/Centos, you customize the Docker daemon configuration with the
 `/etc/sysconfig/docker` file.
 
 Open or create the `/etc/sysconfig/docker` file, and add the
