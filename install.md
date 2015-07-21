@@ -42,13 +42,12 @@ The Licenses page will display your currently available licenses. Click the clou
 
 You can also download the commercially supported Docker Engine packages from this page by clicking the download buttons at upper right (see below for details).
 
-
 ## Prerequisites
 
-DTR 1.1 requires the following:
+DTR 1.2.0 requires the following:
 
-* Commercially supported Docker Engine 1.6.1 or later running on an
-Ubuntu 14.04 LTS, RHEL 7.1 or RHEL 7.0 host. (See below for instructions on how
+* Commercially supported Docker Engine 1.6.2-cs5 or later running on an
+Ubuntu 14.04 LTS, RHEL 7.1, RHEL 7.0, or CentOS 7.1 host. (See below for instructions on how
 to install the commercially supported Docker Engine.)
 
 > **Note:** In order to remain in compliance with your DTR support agreement,
@@ -70,7 +69,7 @@ that obtained an Enterprise license).
 ## Installing the commercially supported Docker Engine
 
 Since DTR is installed using Docker, the commercially supported Docker Engine
-**must be** installed first. This is done with an RPM or DEB package, which you access using a script you download from your 
+**must be** installed first. This is done with an RPM or DEB package, which you access using a script downloaded from your 
 [Docker Hub Licenses page](https://hub-beta.docker.com/account/licenses/).
 
 ### Download the commercially supported Docker Engine installation script
@@ -110,6 +109,10 @@ $ exit
 ```
 
 > **Note**: you may need to reboot your server to update its RHEL kernel.
+
+### CentOS 7.1 installation
+
+Installing CentOS 7.1 is done with the exact same procedure used for RHEL, immediately above. CentOS 7.0 is not supported.
 
 ### Ubuntu 14.04 LTS installation
 
