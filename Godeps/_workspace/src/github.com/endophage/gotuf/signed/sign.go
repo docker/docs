@@ -1,10 +1,11 @@
 package signed
 
 import (
+	"fmt"
 	"github.com/Sirupsen/logrus"
 	"github.com/endophage/gotuf/data"
 	"github.com/endophage/gotuf/errors"
-	"fmt"
+	"strings"
 )
 
 // Sign takes a data.Signed and a key, calculated and adds the signature
@@ -19,7 +20,7 @@ func Sign(service CryptoService, s *data.Signed, keys ...data.PublicKey) error {
 		keyIDMemb[key.ID()] = struct{}{}
 		keyIDs = append(keyIDs, key.ID())
 	}
-	logrus.Debugf("Generated list of signing IDs: %v", keyIDs)
+	logrus.Debugf("Generated list of signing IDs: %s", strings.Join(keyIDs, ", "))
 	for _, sig := range s.Signatures {
 		if _, ok := keyIDMemb[sig.KeyID]; ok {
 			continue
@@ -32,7 +33,7 @@ func Sign(service CryptoService, s *data.Signed, keys ...data.PublicKey) error {
 	}
 	if len(newSigs) < 1 {
 		return errors.ErrInsufficientSignatures{
-			Name: fmt.Sprint("Cryptoservice failed to produce any signatures for keys %v", keyIDs),
+			Name: fmt.Sprint("Cryptoservice failed to produce any signatures for keys with IDs: %s", strings.Join(keyIDs, ", ")),
 			Err:  nil,
 		}
 	}
