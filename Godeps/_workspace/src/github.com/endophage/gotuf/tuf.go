@@ -225,15 +225,15 @@ func (tr *TufRepo) InitTargets() error {
 }
 
 func (tr *TufRepo) InitSnapshot() error {
-	signedRoot, err := tr.SignRoot(data.DefaultExpires("root"), nil)
+	root, err := tr.Root.ToSigned()
 	if err != nil {
 		return err
 	}
-	signedTargets, err := tr.SignTargets("targets", data.DefaultExpires("targets"), nil)
+	targets, err := tr.Targets[data.ValidRoles["targets"]].ToSigned()
 	if err != nil {
 		return err
 	}
-	snapshot, err := data.NewSnapshot(signedRoot, signedTargets)
+	snapshot, err := data.NewSnapshot(root, targets)
 	if err != nil {
 		return err
 	}
@@ -242,11 +242,11 @@ func (tr *TufRepo) InitSnapshot() error {
 }
 
 func (tr *TufRepo) InitTimestamp() error {
-	signedSnapshot, err := tr.SignSnapshot(data.DefaultExpires("snapshot"), nil)
+	snap, err := tr.Snapshot.ToSigned()
 	if err != nil {
 		return err
 	}
-	timestamp, err := data.NewTimestamp(signedSnapshot)
+	timestamp, err := data.NewTimestamp(snap)
 	if err != nil {
 		return err
 	}

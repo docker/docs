@@ -15,6 +15,31 @@ const (
 	testKeyID2  = "26f2f5c0fbfa98823bf1ad39d5f3b32575895793baf80f1df675597d5b95dba8"
 )
 
+type FailingCryptoService struct {
+	testKey data.PublicKey
+}
+
+func (mts *FailingCryptoService) Sign(keyIDs []string, _ []byte) ([]data.Signature, error) {
+	sigs := make([]data.Signature, 0, len(keyIDs))
+	return sigs, nil
+}
+
+func (mts *FailingCryptoService) Create(_ string, _ data.KeyAlgorithm) (data.PublicKey, error) {
+	return mts.testKey, nil
+}
+
+func (mts *FailingCryptoService) GetKey(keyID string) data.PublicKey {
+	if keyID == "testID" {
+		return mts.testKey
+	}
+	return nil
+}
+
+func (mts *FailingCryptoService) RemoveKey(keyID string) error {
+	return nil
+}
+
+
 type MockCryptoService struct {
 	testKey data.PublicKey
 }
@@ -112,6 +137,22 @@ func TestMultiSign(t *testing.T) {
 		}
 	}
 
+}
+
+func TestSignReturnsNoSigs(t *testing.T) {
+	failingCryptoService := &FailingCryptoService{}
+	testData := data.Signed{}
+
+	testKey, _ := pem.Decode([]byte(testKeyPEM1))
+	key := data.NewPublicKey(data.RSAKey, testKey.Bytes)
+	err := Sign(failingCryptoService, &testData, key)
+
+	if err == nil {
+		t.Fatalf("Expected failure due to no signature being returned by the crypto service")
+	}
+	if len(testData.Signatures) != 0 {
+		t.Fatalf("Incorrect number of signatures, expected 0: %d", len(testData.Signatures))
+	}
 }
 
 func TestCreate(t *testing.T) {

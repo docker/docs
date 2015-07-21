@@ -66,6 +66,10 @@ func validateRootSuccessfully(t *testing.T, rootType data.KeyAlgorithm) {
 	err = repo.Initialize(rootCryptoService)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
+	// tests need to manually boostrap timestamp as client doesn't generate it
+	err = repo.tufRepo.InitTimestamp()
+	assert.NoError(t, err, "error creating repository: %s", err)
+
 	// Initialize is supposed to have created new certificate for this repository
 	// Lets check for it and store it for later use
 	allCerts := repo.KeyStoreManager.TrustedCertificateStore().GetCertificates()

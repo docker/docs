@@ -219,6 +219,10 @@ func testAddListTarget(t *testing.T, rootType data.KeyAlgorithm) {
 	err = repo.Initialize(rootCryptoService)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
+	// tests need to manually boostrap timestamp as client doesn't generate it
+	err = repo.tufRepo.InitTimestamp()
+	assert.NoError(t, err, "error creating repository: %s", err)
+
 	// Add fixtures/intermediate-ca.crt as a target. There's no particular reason
 	// for using this file except that it happens to be available as
 	// a fixture.
