@@ -18,6 +18,12 @@ import (
 // decide how many chances to give to a human, for example.
 type Retriever func(keyName, alias string, createNew bool, attempts int) (passphrase string, giveup bool, err error)
 
+const (
+	tufRootAlias = "root"
+	tufTargetsAlias = "targets"
+	tufSnapshotAlias = "snapshot"
+)
+
 // PromptRetriever returns a new Retriever which will provide a terminal prompt
 // to retrieve a passphrase. The passphrase will be cached such that subsequent
 // prompts will produce the same passphrase.
@@ -28,10 +34,9 @@ func PromptRetriever() Retriever {
 	rootsPass := ""
 
 	return func(keyName string, alias string, createNew bool, numAttempts int) (string, bool, error) {
-
 		// First, check if we have a password cached for this alias.
 		if numAttempts == 0 {
-			if userEnteredTargetsSnapshotsPass && (alias == "snapshot" || alias == "targets") {
+			if userEnteredTargetsSnapshotsPass && (alias == tufSnapshotAlias || alias == tufTargetsAlias) {
 				return targetsSnapshotsPass, false, nil
 			}
 			if userEnteredRootsPass && (alias == "root") {
@@ -67,11 +72,11 @@ func PromptRetriever() Retriever {
 		retPass := strings.TrimSpace(string(passphrase))
 
 		if !createNew {
-			if alias == "snapshot" || alias == "targets" {
+			if alias == tufSnapshotAlias || alias == tufTargetsAlias {
 				userEnteredTargetsSnapshotsPass = true
 				targetsSnapshotsPass = retPass
 			}
-			if alias == "root" {
+			if alias == tufRootAlias {
 				userEnteredRootsPass = true
 				rootsPass = retPass
 			}
@@ -95,11 +100,11 @@ func PromptRetriever() Retriever {
 			return "", false, errors.New("The entered passphrases do not match")
 		}
 
-		if alias == "snapshot" || alias == "targets" {
+		if alias == tufSnapshotAlias || alias == tufTargetsAlias {
 			userEnteredTargetsSnapshotsPass = true
 			targetsSnapshotsPass = retPass
 		}
-		if alias == "root" {
+		if alias == tufRootAlias {
 			userEnteredRootsPass = true
 			rootsPass = retPass
 		}
