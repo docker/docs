@@ -44,7 +44,10 @@ func newX509FileStore(directory string, validate func(*x509.Certificate) bool) (
 		fileStore:      fileStore,
 	}
 
-	loadCertsFromDir(s)
+	err = loadCertsFromDir(s)
+	if err != nil {
+		return nil, err
+	}
 
 	return s, nil
 }
@@ -227,7 +230,7 @@ func (s *X509FileStore) GetCertificatesByCN(cn string) ([]*x509.Certificate, err
 			if err != nil {
 				// This error should never happen. This would mean that we have
 				// an inconsistent X509FileStore
-				return nil, err
+				return nil, &ErrBadCertificateStore{}
 			}
 			certs = append(certs, cert)
 		}

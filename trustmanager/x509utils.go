@@ -15,6 +15,7 @@ import (
 	"math/big"
 	"net/http"
 	"net/url"
+	"path/filepath"
 	"time"
 
 	"github.com/Sirupsen/logrus"
@@ -118,11 +119,26 @@ func fingerprintCert(cert *x509.Certificate) (CertID, error) {
 }
 
 // loadCertsFromDir receives a store AddCertFromFile for each certificate found
-func loadCertsFromDir(s *X509FileStore) {
+func loadCertsFromDir(s *X509FileStore) error {
 	certFiles := s.fileStore.ListFiles(true)
-	for _, c := range certFiles {
-		s.AddCertFromFile(c)
+	for _, f := range certFiles {
+		// ListFiles returns relative paths
+		fullPath := filepath.Join(s.fileStore.BaseDir(), f)
+		err := s.AddCertFromFile(fullPath)
+		if err != nil {
+			if _, ok := err.(*ErrCertValidation); ok {
+				logrus.Debugf("ignoring certificate, did not pass validation: %s", f)
+				continue
+			}
+			if _, ok := err.(*ErrCertExists); ok {
+				logrus.Debugf("ignoring certificate, already exists in the store: %s", f)
+				continue
+			}
+
+			return err
+		}
 	}
+	return nil
 }
 
 // LoadCertFromFile loads the first certificate from the file provided. The

@@ -239,12 +239,14 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, gun string) error {
 	// If we have certificates that match this specific GUN, let's make sure to
 	// use them first to validate that this new root is valid.
 	if len(certsForCN) != 0 {
-		logrus.Debugf("found %d valid certificates for %s", len(certsForCN), gun)
+		logrus.Debugf("found %d valid root certificates for %s", len(certsForCN), gun)
 		err = signed.VerifyRoot(root, 0, trustmanager.CertsToKeys(certsForCN))
 		if err != nil {
 			logrus.Debugf("failed to verify TUF data for: %s, %v", gun, err)
 			return &ErrValidationFail{Reason: "failed to validate integrity of roots"}
 		}
+	} else {
+		logrus.Debugf("found no currently valid root certificates for %s", gun)
 	}
 
 	// Validate the integrity of the new root (does it have valid signatures)
@@ -266,13 +268,11 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, gun string) error {
 		if err != nil {
 			// If the error is already exists we don't fail the rotation
 			if _, ok := err.(*trustmanager.ErrCertExists); ok {
+				logrus.Debugf("ignoring certificate addition to: %s", gun)
 				continue
 			}
 			logrus.Debugf("error adding new trusted certificate for: %s, %v", gun, err)
 		}
-		// Getting the CertID for debug only, don't care about the error
-		certID, _ := trustmanager.FingerprintCert(cert)
-		logrus.Debugf("adding trust certificate with certID %s for %s", certID, gun)
 	}
 
 	// Now we delete old certificates that aren't present in the new root
@@ -322,9 +322,11 @@ func validRootLeafCerts(root *data.SignedRoot, gun string) ([]*x509.Certificate,
 	}
 
 	if len(validLeafCerts) < 1 {
+		logrus.Debugf("didn't find any valid leaf certificates for %s", gun)
 		return nil, errors.New("no valid leaf certificates found in any of the root keys")
 	}
 
+	logrus.Debugf("found %d valid leaf certificates for %s", len(validLeafCerts), gun)
 	return validLeafCerts, nil
 }
 
