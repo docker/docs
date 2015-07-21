@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 
+	"crypto/subtle"
 	"github.com/Sirupsen/logrus"
 	notaryclient "github.com/docker/notary/client"
 	"github.com/docker/notary/pkg/passphrase"
@@ -257,9 +258,10 @@ func verify(cmd *cobra.Command, args []string) {
 	}
 
 	// Create hasher and hash data
-	stdinHash := fmt.Sprintf("sha256:%x", sha256.Sum256(payload))
-	serverHash := fmt.Sprintf("sha256:%s", target.Hashes["sha256"])
-	if stdinHash != serverHash {
+	stdinHash := sha256.Sum256(payload)
+	serverHash := target.Hashes["sha256"]
+
+	if subtle.ConstantTimeCompare(stdinHash[:], serverHash) == 0 {
 		logrus.Error("notary: data not present in the trusted collection.")
 		os.Exit(1)
 	} else {
