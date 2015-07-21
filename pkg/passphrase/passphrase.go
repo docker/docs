@@ -19,9 +19,13 @@ import (
 type Retriever func(keyName, alias string, createNew bool, attempts int) (passphrase string, giveup bool, err error)
 
 const (
-	tufRootAlias = "root"
-	tufTargetsAlias = "targets"
-	tufSnapshotAlias = "snapshot"
+	tufRootAlias                = "root"
+	tufTargetsAlias             = "targets"
+	tufSnapshotAlias            = "snapshot"
+	tufRootKeyGenerationWarning = `You are about to create a new root signing key passphrase. This passphrase will be used to protect
+the most sensitive key in your signing system. Please choose a long, complex passphrase and be careful
+to keep it secure and backed up. It is highly recommended that you use a password manager to both generate it
+and keep it safe. There will be no way to recover this key.`
 )
 
 // PromptRetriever returns a new Retriever which will provide a terminal prompt
@@ -34,6 +38,18 @@ func PromptRetriever() Retriever {
 	rootsPass := ""
 
 	return func(keyName string, alias string, createNew bool, numAttempts int) (string, bool, error) {
+		if alias == tufRootAlias && createNew && numAttempts == 0 {
+			fmt.Println(tufRootKeyGenerationWarning)
+		}
+		if numAttempts > 0 {
+			if createNew {
+				fmt.Println("Passphrases do not match. Please retry.")
+
+			} else {
+				fmt.Println("Passphrase incorrect. Please retry.")
+			}
+		}
+
 		// First, check if we have a password cached for this alias.
 		if numAttempts == 0 {
 			if userEnteredTargetsSnapshotsPass && (alias == tufSnapshotAlias || alias == tufTargetsAlias) {
