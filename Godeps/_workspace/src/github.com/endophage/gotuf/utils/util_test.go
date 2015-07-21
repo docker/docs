@@ -5,17 +5,10 @@ import (
 	"testing"
 
 	"github.com/endophage/gotuf/data"
-	. "gopkg.in/check.v1"
+	"github.com/stretchr/testify/assert"
 )
 
-// Hook up gocheck into the "go test" runner.
-func Test(t *testing.T) { TestingT(t) }
-
-type UtilSuite struct{}
-
-var _ = Suite(&UtilSuite{})
-
-func (UtilSuite) TestFileMetaEqual(c *C) {
+func TestFileMetaEqual(t *testing.T) {
 	type test struct {
 		name string
 		b    data.FileMeta
@@ -26,7 +19,7 @@ func (UtilSuite) TestFileMetaEqual(c *C) {
 		m := data.FileMeta{Length: length, Hashes: make(map[string][]byte, len(hashes))}
 		for typ, hash := range hashes {
 			v, err := hex.DecodeString(hash)
-			c.Assert(err, IsNil)
+			assert.NoError(t, err, "hash not in hex")
 			m.Hashes[typ] = v
 		}
 		return m
@@ -57,12 +50,12 @@ func (UtilSuite) TestFileMetaEqual(c *C) {
 			err:  func(t test) error { return ErrNoCommonHash{t.b.Hashes, t.a.Hashes} },
 		},
 	}
-	for _, t := range tests {
-		c.Assert(FileMetaEqual(t.a, t.b), DeepEquals, t.err(t), Commentf("name = %s", t.name))
+	for _, run := range tests {
+		assert.Equal(t, FileMetaEqual(run.a, run.b), run.err(run), "Files not equivalent")
 	}
 }
 
-func (UtilSuite) TestNormalizeTarget(c *C) {
+func TestNormalizeTarget(t *testing.T) {
 	for before, after := range map[string]string{
 		"":                    "/",
 		"foo.txt":             "/foo.txt",
@@ -71,14 +64,14 @@ func (UtilSuite) TestNormalizeTarget(c *C) {
 		"/with/./a/dot":       "/with/a/dot",
 		"/with/double/../dot": "/with/dot",
 	} {
-		c.Assert(NormalizeTarget(before), Equals, after)
+		assert.Equal(t, NormalizeTarget(before), after, "Path normalization did not output expected.")
 	}
 }
 
-func (UtilSuite) TestHashedPaths(c *C) {
+func TestHashedPaths(t *testing.T) {
 	hexBytes := func(s string) []byte {
 		v, err := hex.DecodeString(s)
-		c.Assert(err, IsNil)
+		assert.NoError(t, err, "String was not hex")
 		return v
 	}
 	hashes := data.Hashes{
@@ -87,11 +80,11 @@ func (UtilSuite) TestHashedPaths(c *C) {
 	}
 	paths := HashedPaths("foo/bar.txt", hashes)
 	// cannot use DeepEquals as the returned order is non-deterministic
-	c.Assert(paths, HasLen, 2)
+	assert.Len(t, paths, 2, "Expected 2 paths")
 	expected := map[string]struct{}{"foo/abc123.bar.txt": {}, "foo/def456.bar.txt": {}}
 	for _, path := range paths {
 		if _, ok := expected[path]; !ok {
-			c.Fatalf("unexpected path: %s", path)
+			t.Fatalf("unexpected path: %s", path)
 		}
 		delete(expected, path)
 	}

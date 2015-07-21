@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"crypto"
 	"crypto/ecdsa"
+	"crypto/elliptic"
 	"crypto/rand"
 	"crypto/rsa"
 	"crypto/sha256"
@@ -270,6 +271,40 @@ func TestECDSAVerifier(t *testing.T) {
 	ecdsaVerifier := ECDSAVerifier{}
 	err = ecdsaVerifier.Verify(&testECDSAKey, signedData, message)
 	assert.NoError(t, err, "expecting success but got error while verifying data using ECDSA")
+}
+
+func TestECDSAVerifierOtherCurves(t *testing.T) {
+	curves := []elliptic.Curve{elliptic.P224(), elliptic.P256(), elliptic.P384(), elliptic.P521()}
+
+	for _, curve := range curves {
+		ecdsaPrivKey, err := ecdsa.GenerateKey(curve, rand.Reader)
+
+		// Get a DER-encoded representation of the PublicKey
+		ecdsaPubBytes, err := x509.MarshalPKIXPublicKey(&ecdsaPrivKey.PublicKey)
+		assert.NoError(t, err, "failed to marshal public key")
+
+		// Get a DER-encoded representation of the PrivateKey
+		ecdsaPrivKeyBytes, err := x509.MarshalECPrivateKey(ecdsaPrivKey)
+		assert.NoError(t, err, "failed to marshal private key")
+
+		testECDSAKey := data.NewPrivateKey(data.ECDSAKey, ecdsaPubBytes, ecdsaPrivKeyBytes)
+
+		// Sign some data using ECDSA
+		message := []byte("test data for signing")
+		hashed := sha256.Sum256(message)
+		signedData, err := ecdsaSign(testECDSAKey, hashed[:])
+		assert.NoError(t, err)
+
+		// Create and call Verify on the verifier
+		ecdsaVerifier := ECDSAVerifier{}
+		err = ecdsaVerifier.Verify(testECDSAKey, signedData, message)
+		assert.NoError(t, err, "expecting success but got error while verifying data using ECDSA")
+
+		// Make sure an invalid signature fails verification
+		signedData[0]++
+		err = ecdsaVerifier.Verify(testECDSAKey, signedData, message)
+		assert.Error(t, err, "expecting error but got success while verifying data using ECDSA")
+	}
 }
 
 func TestECDSAx509Verifier(t *testing.T) {

@@ -4,21 +4,14 @@ import (
 	"testing"
 	"time"
 
+	"github.com/stretchr/testify/assert"
 	cjson "github.com/tent/canonical-json-go"
-	. "gopkg.in/check.v1"
 
 	"github.com/endophage/gotuf/data"
 	"github.com/endophage/gotuf/keys"
 )
 
-// Hook up gocheck into the "go test" runner.
-func Test(t *testing.T) { TestingT(t) }
-
-type VerifySuite struct{}
-
-var _ = Suite(&VerifySuite{})
-
-func (VerifySuite) Test(c *C) {
+func Test(t *testing.T) {
 	cryptoService := NewEd25519()
 	type test struct {
 		name  string
@@ -141,68 +134,68 @@ func (VerifySuite) Test(c *C) {
 			err:  ErrExpired{expiredTime.Format("2006-01-02 15:04:05 MST")},
 		},
 	}
-	for _, t := range tests {
-		if t.role == "" {
-			t.role = "root"
+	for _, run := range tests {
+		if run.role == "" {
+			run.role = "root"
 		}
-		if t.ver == 0 {
-			t.ver = minVer
+		if run.ver == 0 {
+			run.ver = minVer
 		}
-		if t.exp == nil {
+		if run.exp == nil {
 			expires := time.Now().Add(time.Hour)
-			t.exp = &expires
+			run.exp = &expires
 		}
-		if t.typ == "" {
-			t.typ = data.TUFTypes[t.role]
+		if run.typ == "" {
+			run.typ = data.TUFTypes[run.role]
 		}
-		if t.keys == nil && t.s == nil {
+		if run.keys == nil && run.s == nil {
 			k, _ := cryptoService.Create("root", data.ED25519Key)
-			meta := &signedMeta{Type: t.typ, Version: t.ver, Expires: t.exp.Format("2006-01-02 15:04:05 MST")}
+			meta := &signedMeta{Type: run.typ, Version: run.ver, Expires: run.exp.Format("2006-01-02 15:04:05 MST")}
 
 			b, err := cjson.Marshal(meta)
-			c.Assert(err, IsNil)
+			assert.NoError(t, err)
 			s := &data.Signed{Signed: b}
 			Sign(cryptoService, s, k)
-			t.s = s
-			t.keys = []data.PublicKey{k}
+			run.s = s
+			run.keys = []data.PublicKey{k}
 		}
-		if t.roles == nil {
-			t.roles = map[string]*data.Role{
+		if run.roles == nil {
+			run.roles = map[string]*data.Role{
 				"root": &data.Role{
 					RootRole: data.RootRole{
-						KeyIDs:    []string{t.keys[0].ID()},
+						KeyIDs:    []string{run.keys[0].ID()},
 						Threshold: 1,
 					},
 					Name: "root",
 				},
 			}
 		}
-		if t.mut != nil {
-			t.mut(&t)
+		if run.mut != nil {
+			run.mut(&run)
 		}
 
 		db := keys.NewDB()
-		for _, k := range t.keys {
+		for _, k := range run.keys {
 			db.AddKey(k)
 		}
-		for _, r := range t.roles {
+		for _, r := range run.roles {
 			err := db.AddRole(r)
-			c.Assert(err, IsNil)
+			assert.NoError(t, err)
 		}
 
-		err := Verify(t.s, t.role, minVer, db)
-		if e, ok := t.err.(ErrExpired); ok {
-			assertErrExpired(c, err, e)
+		err := Verify(run.s, run.role, minVer, db)
+		if e, ok := run.err.(ErrExpired); ok {
+			assertErrExpired(t, err, e)
 		} else {
-			c.Assert(err, DeepEquals, t.err, Commentf("name = %s", t.name))
+			assert.Equal(t, run.err, err)
 		}
 	}
 }
 
-func assertErrExpired(c *C, err error, expected ErrExpired) {
+func assertErrExpired(t *testing.T, err error, expected ErrExpired) {
 	actual, ok := err.(ErrExpired)
 	if !ok {
-		c.Fatalf("expected err to have type ErrExpired, got %T", err)
+		t.Fatalf("expected err to have type ErrExpired, got %T", err)
 	}
-	c.Assert(actual.Expired, Equals, expected.Expired)
+	assert.Equal(t, actual.Expired, expected.Expired)
 }

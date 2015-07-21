@@ -19,6 +19,7 @@ import (
 	"github.com/endophage/gotuf"
 	tufclient "github.com/endophage/gotuf/client"
 	"github.com/endophage/gotuf/data"
+	tuferrors "github.com/endophage/gotuf/errors"
 	"github.com/endophage/gotuf/keys"
 	"github.com/endophage/gotuf/signed"
 	"github.com/endophage/gotuf/store"
@@ -207,7 +208,21 @@ func (r *NotaryRepository) Initialize(uCryptoService *cryptoservice.UnlockedCryp
 
 	r.tufRepo = tuf.NewTufRepo(kdb, r.cryptoService)
 
-	if err := r.tufRepo.InitRepo(false); err != nil {
+	err = r.tufRepo.InitRoot(false)
+	if err != nil {
+		logrus.Debug("Error on InitRoot: ", err.Error())
+		if _, ok := err.(tuferrors.ErrInsufficientSignatures); !ok {
+			return err
+		}
+	}
+	err = r.tufRepo.InitTargets()
+	if err != nil {
+		logrus.Debug("Error on InitTargets: ", err.Error())
+		return err
+	}
+	err = r.tufRepo.InitSnapshot()
+	if err != nil {
+		logrus.Debug("Error on InitSnapshot: ", err.Error())
 		return err
 	}
 
