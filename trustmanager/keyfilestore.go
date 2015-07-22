@@ -220,7 +220,7 @@ func getKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, cached
 			passphrase, giveup, err := passphraseRetriever(name, string(keyAlias), false, attempts)
 			// Check if the passphrase retriever got an error or if it is telling us to give up
 			if giveup || err != nil {
-				return nil, "", errors.New("obtaining passphrase failed")
+				return nil, "", ErrPasswordInvalid{}
 			}
 			if attempts > 10 {
 				return nil, "", errors.New("maximum number of passphrase attempts exceeded")
