@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.8.0
+## 1.8.0 (Unreleased)
 
 **Initial release of the Docker Toolbox**
 
