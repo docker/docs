@@ -23,7 +23,7 @@ type ErrPasswordInvalid struct{}
 // ErrPasswordInvalid is returned when signing fails. It could also mean the signing
 // key file was corrupted, but we have no way to distinguish.
 func (err ErrPasswordInvalid) Error() string {
-	return "Password Invalid, operation has failed."
+	return "password invalid, operation has failed."
 }
 
 // KeyStore is a generic interface for private key storage
@@ -159,7 +159,7 @@ func addKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, cached
 			continue
 		}
 		if giveup {
-			return errors.New("obtaining passphrase failed")
+			return ErrPasswordInvalid{}
 		}
 		if attempts > 10 {
 			return errors.New("maximum number of passphrase attempts exceeded")
