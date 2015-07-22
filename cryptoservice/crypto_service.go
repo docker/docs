@@ -94,11 +94,7 @@ func (ccs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signatur
 
 		privKey, _, err = ccs.keyStore.GetKey(keyName)
 		if err != nil {
-			// Note that GetKey always fails on InitRepo.
-			// InitRepo gets a signer that doesn't have access to
-			// the root keys. Continuing here is safe because we
-			// end up not returning any signatures.
-			logrus.Debugf("ignoring error attempting to retrieve key ID: %s, %v", keyid, err)
+			logrus.Debugf("error attempting to retrieve key ID: %s, %v", keyid, err)
 			return nil, err
 		}
 
