@@ -14,6 +14,24 @@ import (
 	"github.com/Sirupsen/logrus"
 )
 
+type ErrServerUnavailable struct{}
+
+func (err ErrServerUnavailable) Error() string {
+	return "Unable to reach trust server at this time."
+}
+
+type ErrShortRead struct{}
+
+func (err ErrShortRead) Error() string {
+	return "Trust server returned incompelete response."
+}
+
+type ErrMaliciousServer struct{}
+
+func (err ErrMaliciousServer) Error() string {
+	return "Trust server returned a bad response."
+}
+
 // HTTPStore manages pulling and pushing metadata from and to a remote
 // service over HTTP. It assumes the URL structure of the remote service
 // maps identically to the structure of the TUF repo:
@@ -67,12 +85,18 @@ func (s HTTPStore) GetMeta(name string, size int64) ([]byte, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if resp.ContentLength > size {
+		return nil, ErrMaliciousServer{}
+	}
 	logrus.Debugf("%d when retrieving metadata for %s", resp.StatusCode, name)
 	if resp.StatusCode == http.StatusNotFound {
-		return nil, &ErrMetaNotFound{}
+		return nil, ErrMetaNotFound{}
 	}
-	b := io.LimitReader(resp.Body, int64(size))
+	b := io.LimitReader(resp.Body, size)
 	body, err := ioutil.ReadAll(b)
+	if resp.ContentLength > 0 && int64(len(body)) < resp.ContentLength {
+		return nil, ErrShortRead{}
+	}
 
 	if err != nil {
 		return nil, err

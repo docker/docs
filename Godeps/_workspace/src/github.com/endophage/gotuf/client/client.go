@@ -239,6 +239,8 @@ func (c *Client) downloadTimestamp() error {
 			if err == nil {
 				version = ts.Signed.Version
 			}
+		} else {
+			old = nil
 		}
 	}
 	// unlike root, targets and snapshot, always try and download timestamps
@@ -247,7 +249,15 @@ func (c *Client) downloadTimestamp() error {
 	raw, err := c.remote.GetMeta(role, maxSize)
 	var s *data.Signed
 	if err != nil || len(raw) == 0 {
-		if err, ok := err.(*store.ErrMetaNotFound); ok {
+		if err, ok := err.(store.ErrMetaNotFound); ok {
+			return err
+		}
+		if old == nil {
+			if err == nil {
+				// couldn't retrieve data from server and don't have valid
+				// data in cache.
+				return store.ErrMetaNotFound{}
+			}
 			return err
 		}
 		s = old

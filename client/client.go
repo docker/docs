@@ -308,7 +308,7 @@ func (r *NotaryRepository) Publish() error {
 	// attempt to initialize the repo from the remote store
 	c, err := r.bootstrapClient()
 	if err != nil {
-		if _, ok := err.(*store.ErrMetaNotFound); ok {
+		if _, ok := err.(store.ErrMetaNotFound); ok {
 			// if the remote store return a 404 (translated into ErrMetaNotFound),
 			// the repo hasn't been initialized yet. Attempt to load it from disk.
 			err := r.bootstrapRepo()
@@ -506,7 +506,7 @@ func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
 	// if remote store couldn't be setup, or we failed to get a root from it
 	// load the root from cache (offline operation)
 	if err != nil {
-		if err, ok := err.(*store.ErrMetaNotFound); ok {
+		if err, ok := err.(store.ErrMetaNotFound); ok {
 			// if the error was MetaNotFound then we successfully contacted
 			// the store and it doesn't know about the repo.
 			return nil, err
@@ -514,7 +514,7 @@ func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
 		rootJSON, err = r.fileStore.GetMeta("root", maxSize)
 		if err != nil {
 			// if cache didn't return a root, we cannot proceed
-			return nil, &store.ErrMetaNotFound{}
+			return nil, store.ErrMetaNotFound{}
 		}
 	}
 	root := &data.Signed{}
