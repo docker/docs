@@ -99,7 +99,7 @@ func (ccs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signatur
 			// the root keys. Continuing here is safe because we
 			// end up not returning any signatures.
 			logrus.Debugf("ignoring error attempting to retrieve key ID: %s, %v", keyid, err)
-			continue
+			return nil, err
 		}
 
 		algorithm := privKey.Algorithm()
@@ -120,7 +120,7 @@ func (ccs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signatur
 		}
 		if err != nil {
 			logrus.Debugf("ignoring error attempting to %s sign with keyID: %s, %v", algorithm, keyid, err)
-			continue
+			return nil, err
 		}
 
 		logrus.Debugf("appending %s signature with Key ID: %s", algorithm, keyid)
