@@ -16,6 +16,16 @@ const (
 	keyExtension = "key"
 )
 
+// ErrPasswordInvalid is returned when signing fails. It could also mean the signing
+// key file was corrupted, but we have no way to distinguish.
+type ErrPasswordInvalid struct{}
+
+// ErrPasswordInvalid is returned when signing fails. It could also mean the signing
+// key file was corrupted, but we have no way to distinguish.
+func (err ErrPasswordInvalid) Error() string {
+	return "Password Invalid, operation has failed."
+}
+
 // KeyStore is a generic interface for private key storage
 type KeyStore interface {
 	LimitedFileStore
@@ -201,6 +211,7 @@ func getKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, cached
 		return nil, "", err
 	}
 
+	var retErr error
 	// See if the key is encrypted. If its encrypted we'll fail to parse the private key
 	privKey, err := ParsePEMPrivateKey(keyBytes, "")
 	if err != nil {
@@ -217,11 +228,17 @@ func getKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, cached
 
 			// Try to convert PEM encoded bytes back to a PrivateKey using the passphrase
 			privKey, err = ParsePEMPrivateKey(keyBytes, passphrase)
-			if err == nil {
+			if err != nil {
+				retErr = ErrPasswordInvalid{}
+			} else {
 				// We managed to parse the PrivateKey. We've succeeded!
+				retErr = nil
 				break
 			}
 		}
+	}
+	if retErr != nil {
+		return nil, "", retErr
 	}
 	cachedKeys[name] = &cachedKey{alias: keyAlias, key: privKey}
 	return privKey, keyAlias, nil
