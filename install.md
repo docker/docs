@@ -84,7 +84,7 @@ downloaded, follow the steps below appropriate for your chosen OS.
 
 ![Docker Hub Docker engine install dropdown](../assets/docker-hub-org-enterprise-license.png)
 
-### RHEL 7.0/7.1 installation
+### CentOS 7.1 & RHEL 7.0/7.1 installation
 
 First, copy the downloaded Bash setup script to your RHEL host. Next, run the
 following to install commercially supported Docker Engine and its dependencies,
@@ -110,9 +110,7 @@ $ exit
 
 > **Note**: you may need to reboot your server to update its RHEL kernel.
 
-### CentOS 7.1 installation
-
-Installing CentOS 7.1 is done with the exact same procedure used for RHEL, immediately above. CentOS 7.0 is not supported.
+> **Note**: CentOS 7.0 is not supported.
 
 ### Ubuntu 14.04 LTS installation
 
@@ -140,9 +138,9 @@ $ exit
 
 > **Note**: you may need to reboot your server to update its LTS kernel.
 
-## Upgrading the Commercially Supported Docker Engine
+## Upgrading the commercially supported Docker Engine
 
-CS Docker Engine 1.6.1 contains fixes to security vulnerabilities,
+CS Docker Engine 1.6.2cs6 contains fixes issues in 1.6.1,
   and customers should upgrade to it immediately.
 
 > **Note**: If you have CS Docker Engine 1.6.0 installed, it must be upgraded;
@@ -152,7 +150,7 @@ CS Docker Engine 1.6.1 contains fixes to security vulnerabilities,
 The CS Docker Engine installation script set up the RHEL/Ubuntu package repositories,
 so upgrading the Engine only requires you to run the update commands on your server.
 
-### RHEL 7.0/7.1 upgrade
+### CentOS 7.1 & RHEL 7.0/7.1 upgrade
 
 The following commands will stop the running DTR, upgrade CS Docker Engine,
 and then start DTR again:
