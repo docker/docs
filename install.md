@@ -310,7 +310,7 @@ warning is no longer present.
 Securing DTR is **required**. You will not be able to push or pull from DTR until you secure it.
 
 There are several options and methods for securing DTR. For more information,
-see the [configuration documentation](configuration.md#security)
+see the [configuration documentation]({{< relref "configuration.md#security" >}})
 
 ### Using DTR to push and pull images
 
@@ -326,7 +326,7 @@ interface or the DTR registry. You can restrict access using an in-DTR
 configured set of users (and passwords), or you can configure DTR to use LDAP-
 based authentication.
 
-See [DTR Authentication settings](configuration.md#authentication) for more
+See [DTR Authentication settings]({{< relref "configuration.md#authentication" >}}) for more
 details.
 
 ## Upgrading Docker Trusted Registry

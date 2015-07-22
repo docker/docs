@@ -69,7 +69,7 @@ you will need to do one of the following:
 
 * [Install a registry certificate on all of your client Docker daemons](#installing-registry-certificates-on-client-docker-daemons),
 
-* Set your [client Docker daemons to run with an unconfirmed connection to the registry](#if-you-cant-install-the-certificates).
+* Set your [client Docker daemons to run with an unconfirmed connection to the registry](#if-you-can-t-install-the-certificates).
 
 ### Generating SSL certificates
 
@@ -285,7 +285,7 @@ to the DTR web admin tool and to the DTR Registry.
 The current authentication methods are `None`, `Managed` and `LDAP`.
 
 > **Note**: if you have issues logging into the DTR admin web interface after changing the authentication
-> settings, you may need to use the [emergency access to the DTR admin web interface](adminguide.md#emergency-access-to-dtr).
+> settings, you may need to use the [emergency access to the DTR admin web interface]({{< relref "adminguide.md#emergency-access-to-dtr" >}}).
 
 ### No authentication
 
