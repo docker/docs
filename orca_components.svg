@@ -16,7 +16,7 @@
    version="1.1"
    inkscape:version="0.91 r13725"
    sodipodi:docname="orca_components.svg"
-   inkscape:export-filename="/home/daniel/orca_components.png"
+   inkscape:export-filename="/home/daniel/code/docker/orca/docs/orca_components.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -168,6 +168,36 @@
          style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
          transform="scale(0.6,0.6)" />
     </marker>
+    <marker
+       inkscape:stockid="SemiCircleIn"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="SemiCircleIn-69-65-6"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path8311-8-10-4"
+         d="m -0.37450702,-0.04569258 c 0,2.75999998 2.24000002,4.99999998 5.00000002,4.99999998 l 0,-10 c -2.76,0 -5.00000002,2.24 -5.00000002,5.00000002 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="scale(0.6,0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="SemiCircleIn"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="SemiCircleIn-69-3-3"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path8311-8-5-5"
+         d="m -0.37450702,-0.04569258 c 0,2.75999998 2.24000002,4.99999998 5.00000002,4.99999998 l 0,-10 c -2.76,0 -5.00000002,2.24 -5.00000002,5.00000002 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="scale(0.6,0.6)" />
+    </marker>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -195,7 +225,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -254,7 +284,7 @@
          style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#SemiCircleIn)" />
     </g>
     <g
-       transform="translate(224.28572,2.6721514)"
+       transform="translate(224.28572,0.6721514)"
        id="g8785-9">
       <rect
          ry="5.3747001"
@@ -288,7 +318,7 @@
          inkscape:connector-curvature="0"
          inkscape:connector-type="polyline"
          id="path8127-9"
-         d="m 260.39435,645.21935 1.03422,99.28571"
+         d="m 260.37904,645.21935 1.04953,99.28571"
          style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#SemiCircleIn-6)" />
     </g>
     <g
@@ -368,7 +398,7 @@
          style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#SemiCircleIn-69)" />
     </g>
     <g
-       transform="translate(338.57143,135.71429)"
+       transform="translate(338.57143,133.71429)"
        id="g9664-7">
       <rect
          ry="5.3747001"
@@ -402,7 +432,7 @@
          inkscape:connector-curvature="0"
          inkscape:connector-type="polyline"
          id="path8127-7-7"
-         d="m 93.251486,512.8915 1.034224,99.28571"
+         d="m 93.23618,512.8915 1.04953,99.28571"
          style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#SemiCircleIn-69-3)" />
     </g>
     <g
@@ -431,6 +461,188 @@
            sodipodi:role="line">Engine 1</tspan></text>
     </g>
     <g
+       id="g7494">
+      <rect
+         ry="5.3747001"
+         y="569.32007"
+         x="82.85714"
+         height="75.714287"
+         width="47.142857"
+         id="rect8119-2-1"
+         style="opacity:1;fill:#809cff;fill-opacity:1;fill-rule:evenodd;stroke:#0c32b1;stroke-width:2;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <text
+         transform="matrix(0,-1,1,0,0,0)"
+         sodipodi:linespacing="125%"
+         id="text8121-4-9"
+         y="101.19175"
+         x="-607.90594"
+         style="font-style:normal;font-weight:normal;font-size:12px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           id="tspan9011-6"
+           style="font-size:15px;text-align:center;text-anchor:middle"
+           y="101.19175"
+           x="-607.90594"
+           sodipodi:role="line">Orca</tspan><tspan
+           style="font-size:15px;text-align:center;text-anchor:middle"
+           y="119.94175"
+           x="-607.90594"
+           sodipodi:role="line"
+           id="tspan9885">Server</tspan></text>
+      <path
+         sodipodi:nodetypes="cc"
+         inkscape:connection-start="#rect8119-2-1"
+         inkscape:connector-curvature="0"
+         inkscape:connector-type="polyline"
+         id="path8127-7-6"
+         d="m 106.82291,645.03436 1.03423,99.28571"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#SemiCircleIn-69-65)" />
+    </g>
+    <g
+       transform="translate(-150.57143,128)"
+       id="g9942">
+      <rect
+         ry="5.3747001"
+         y="440.93365"
+         x="182.14285"
+         height="75.714287"
+         width="47.142857"
+         id="rect8119-2-1-3"
+         style="opacity:1;fill:#809cff;fill-opacity:1;fill-rule:evenodd;stroke:#0c32b1;stroke-width:2;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <text
+         transform="matrix(0,-1,1,0,0,0)"
+         sodipodi:linespacing="125%"
+         id="text8121-4-9-3"
+         y="200.47746"
+         x="-479.51953"
+         style="font-style:normal;font-weight:normal;font-size:12px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           id="tspan9011-6-2"
+           style="font-size:15px;text-align:center;text-anchor:middle"
+           y="200.47746"
+           x="-479.51953"
+           sodipodi:role="line">Orca</tspan><tspan
+           style="font-size:15px;text-align:center;text-anchor:middle"
+           y="219.22746"
+           x="-479.51953"
+           sodipodi:role="line"
+           id="tspan9885-8">DB</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:12px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="12.142857"
+       y="733.07648"
+       id="text9948"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan9950"
+         x="12.142857"
+         y="733.07648">Externally</tspan><tspan
+         sodipodi:role="line"
+         x="12.142857"
+         y="748.07648"
+         id="tspan9952">Visible</tspan><tspan
+         sodipodi:role="line"
+         x="12.142857"
+         y="763.07648"
+         id="tspan9954">Ports</tspan></text>
+    <g
+       id="g7501">
+      <g
+         transform="translate(102,0)"
+         id="g7418">
+        <rect
+           style="opacity:1;fill:#809cff;fill-opacity:1;fill-rule:evenodd;stroke:#0c32b1;stroke-width:2;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="rect8119-2-1-3-6"
+           width="47.142857"
+           height="75.714287"
+           x="31.428574"
+           y="568.93365"
+           ry="5.3747001" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:12px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           x="-607.51953"
+           y="60.592041"
+           id="text8121-4-9-3-7"
+           sodipodi:linespacing="125%"
+           transform="matrix(0,-1,1,0,0,0)"><tspan
+             id="tspan9885-8-7"
+             sodipodi:role="line"
+             x="-607.51953"
+             y="60.592041"
+             style="font-size:15px;text-align:center;text-anchor:middle">Consul</tspan></text>
+      </g>
+      <path
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         inkscape:connector-type="polyline"
+         id="path8127-7-6-6"
+         d="m 157.42084,643.82528 1.03423,99.28571"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#SemiCircleIn-69-65-6)" />
+    </g>
+    <g
+       id="g7485">
+      <rect
+         ry="5.3577666"
+         y="649.6131"
+         x="32.965164"
+         height="68.355377"
+         width="253.35539"
+         id="rect8068"
+         style="opacity:0.8;fill:#80d8ff;fill-opacity:1;fill-rule:evenodd;stroke:#0c73b1;stroke-width:2.21604013;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text8070"
+         y="690.68774"
+         x="159.25223"
+         style="font-style:normal;font-weight:normal;font-size:12px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           style="font-size:25px;text-align:center;text-anchor:middle"
+           y="690.68774"
+           x="159.25223"
+           id="tspan8072"
+           sodipodi:role="line">Engine 0</tspan></text>
+    </g>
+    <g
+       transform="translate(672.85714,134.28572)"
+       id="g9664-7-1">
+      <rect
+         ry="5.3747001"
+         y="437.17722"
+         x="69.285713"
+         height="75.714287"
+         width="47.142857"
+         id="rect8119-2-2-1"
+         style="opacity:1;fill:#80ffa9;fill-opacity:1;fill-rule:evenodd;stroke:#0cb134;stroke-width:2;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <text
+         transform="matrix(0,-1,1,0,0,0)"
+         sodipodi:linespacing="125%"
+         id="text8121-4-3-6"
+         y="87.620323"
+         x="-475.76309"
+         style="font-style:normal;font-weight:normal;font-size:12px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           id="tspan8125-58-4-1"
+           style="font-size:15px;text-align:center;text-anchor:middle"
+           y="87.620323"
+           x="-475.76309"
+           sodipodi:role="line">Swarm</tspan><tspan
+           id="tspan9011-1-9"
+           style="font-size:15px;text-align:center;text-anchor:middle"
+           y="106.37032"
+           x="-475.76309"
+           sodipodi:role="line">Manager</tspan></text>
+      <path
+         sodipodi:nodetypes="cc"
+         inkscape:connection-start="#rect8119-2-2-1"
+         inkscape:connector-curvature="0"
+         inkscape:connector-type="polyline"
+         id="path8127-7-7-2"
+         d="m 93.251486,512.8915 1.034224,99.28571"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#SemiCircleIn-69-3-3)" />
+    </g>
+    <g
        id="g8074-4"
        transform="translate(535,36.428571)"
        style="opacity:0.8">
@@ -455,121 +667,5 @@
            id="tspan8072-8"
            sodipodi:role="line">Engine N</tspan></text>
     </g>
-    <g
-       id="g9664-1"
-       transform="translate(-17.857143,-42.857142)">
-      <g
-         id="g9923"
-         transform="translate(31.428571,175)">
-        <rect
-           style="opacity:1;fill:#809cff;fill-opacity:1;fill-rule:evenodd;stroke:#0c32b1;stroke-width:2;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-           id="rect8119-2-1"
-           width="47.142857"
-           height="75.714287"
-           x="69.285713"
-           y="437.17722"
-           ry="5.3747001" />
-        <text
-           xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:12px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           x="-475.76309"
-           y="87.620323"
-           id="text8121-4-9"
-           sodipodi:linespacing="125%"
-           transform="matrix(0,-1,1,0,0,0)"><tspan
-             sodipodi:role="line"
-             x="-475.76309"
-             y="87.620323"
-             style="font-size:15px;text-align:center;text-anchor:middle"
-             id="tspan9011-6">Orca</tspan><tspan
-             id="tspan9885"
-             sodipodi:role="line"
-             x="-475.76309"
-             y="106.37032"
-             style="font-size:15px;text-align:center;text-anchor:middle">Server</tspan></text>
-        <path
-           style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#SemiCircleIn-69-65)"
-           d="m 93.251486,512.8915 1.034224,99.28571"
-           id="path8127-7-6"
-           inkscape:connector-type="polyline"
-           inkscape:connector-curvature="0"
-           inkscape:connection-start="#rect8119-2-1"
-           sodipodi:nodetypes="cc" />
-      </g>
-      <g
-         id="g9942"
-         transform="translate(-30.714286,170.85714)">
-        <rect
-           style="opacity:1;fill:#809cff;fill-opacity:1;fill-rule:evenodd;stroke:#0c32b1;stroke-width:2;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-           id="rect8119-2-1-3"
-           width="47.142857"
-           height="75.714287"
-           x="182.14285"
-           y="440.93365"
-           ry="5.3747001" />
-        <text
-           xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:12px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           x="-479.51953"
-           y="200.47746"
-           id="text8121-4-9-3"
-           sodipodi:linespacing="125%"
-           transform="matrix(0,-1,1,0,0,0)"><tspan
-             sodipodi:role="line"
-             x="-479.51953"
-             y="200.47746"
-             style="font-size:15px;text-align:center;text-anchor:middle"
-             id="tspan9011-6-2">Orca</tspan><tspan
-             id="tspan9885-8"
-             sodipodi:role="line"
-             x="-479.51953"
-             y="219.22746"
-             style="font-size:15px;text-align:center;text-anchor:middle">DB</tspan></text>
-      </g>
-    </g>
-    <g
-       id="g8074"
-       transform="translate(-20.714286,36.428571)"
-       style="opacity:0.8">
-      <rect
-         ry="5.3747001"
-         y="613.07648"
-         x="101.42857"
-         height="68.571419"
-         width="205.71429"
-         id="rect8068"
-         style="opacity:1;fill:#80d8ff;fill-opacity:1;fill-rule:evenodd;stroke:#0c73b1;stroke-width:2;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-      <text
-         sodipodi:linespacing="125%"
-         id="text8070"
-         y="654.25916"
-         x="203.7242"
-         style="font-style:normal;font-weight:normal;font-size:12px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         xml:space="preserve"><tspan
-           style="font-size:25px;text-align:center;text-anchor:middle"
-           y="654.25916"
-           x="203.7242"
-           id="tspan8072"
-           sodipodi:role="line">Engine 0</tspan></text>
-    </g>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:12px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="12.142857"
-       y="733.07648"
-       id="text9948"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan9950"
-         x="12.142857"
-         y="733.07648">Externally</tspan><tspan
-         sodipodi:role="line"
-         x="12.142857"
-         y="748.07648"
-         id="tspan9952">Visible</tspan><tspan
-         sodipodi:role="line"
-         x="12.142857"
-         y="763.07648"
-         id="tspan9954">Ports</tspan></text>
   </g>
 </svg>
