@@ -243,7 +243,7 @@ func (km *KeyStoreManager) ValidateRoot(root *data.Signed, gun string) error {
 		err = signed.VerifyRoot(root, 0, trustmanager.CertsToKeys(certsForCN))
 		if err != nil {
 			logrus.Debugf("failed to verify TUF data for: %s, %v", gun, err)
-			return &ErrValidationFail{Reason: "failed to validate integrity of roots"}
+			return &ErrValidationFail{Reason: "failed to validate data with current trusted certificates"}
 		}
 	} else {
 		logrus.Debugf("found no currently valid root certificates for %s", gun)
