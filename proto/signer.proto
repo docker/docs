@@ -46,7 +46,8 @@ message PublicKey {
 // Signature specifies a KeyInfo that was used for signing and signed content
 message Signature {
   KeyInfo keyInfo = 1;
-  bytes content = 2;
+  Algorithm algorithm = 2;
+  bytes content = 3;
 }
 
 // SignatureRequests specifies a KeyInfo, and content to be signed

@@ -113,7 +113,8 @@ func (s *SignerServer) Sign(ctx context.Context, sr *pb.SignatureRequest) (*pb.S
 			KeyID:     &pb.KeyID{ID: tufKey.ID()},
 			Algorithm: &pb.Algorithm{Algorithm: tufKey.Algorithm().String()},
 		},
-		Content: signatures[0].Signature,
+		Algorithm: &pb.Algorithm{Algorithm: signatures[0].Method.String()},
+		Content:   signatures[0].Signature,
 	}
 
 	return signature, nil

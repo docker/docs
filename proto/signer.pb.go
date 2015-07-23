@@ -94,8 +94,9 @@ func (m *PublicKey) GetKeyInfo() *KeyInfo {
 
 // Signature specifies a KeyInfo that was used for signing and signed content
 type Signature struct {
-	KeyInfo *KeyInfo `protobuf:"bytes,1,opt,name=keyInfo" json:"keyInfo,omitempty"`
-	Content []byte   `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
+	KeyInfo   *KeyInfo   `protobuf:"bytes,1,opt,name=keyInfo" json:"keyInfo,omitempty"`
+	Algorithm *Algorithm `protobuf:"bytes,2,opt,name=algorithm" json:"algorithm,omitempty"`
+	Content   []byte     `protobuf:"bytes,3,opt,name=content,proto3" json:"content,omitempty"`
 }
 
 func (m *Signature) Reset()         { *m = Signature{} }
@@ -105,6 +106,13 @@ func (*Signature) ProtoMessage()    {}
 func (m *Signature) GetKeyInfo() *KeyInfo {
 	if m != nil {
 		return m.KeyInfo
+	}
+	return nil
+}
+
+func (m *Signature) GetAlgorithm() *Algorithm {
+	if m != nil {
+		return m.Algorithm
 	}
 	return nil
 }

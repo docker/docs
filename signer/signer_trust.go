@@ -54,7 +54,7 @@ func (trust *NotarySigner) Sign(keyIDs []string, toSign []byte) ([]data.Signatur
 		}
 		signatures = append(signatures, data.Signature{
 			KeyID:     sig.KeyInfo.KeyID.ID,
-			Method:    data.SigAlgorithm(sig.KeyInfo.Algorithm.Algorithm),
+			Method:    data.SigAlgorithm(sig.Algorithm.Algorithm),
 			Signature: sig.Content,
 		})
 	}

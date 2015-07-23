@@ -365,7 +365,7 @@ func GenerateED25519Key(random io.Reader) (data.PrivateKey, error) {
 		return nil, err
 	}
 
-	logrus.Debugf("generated EDDSA key with keyID: %s", tufPrivKey.ID())
+	logrus.Debugf("generated ED25519 key with keyID: %s", tufPrivKey.ID())
 
 	return tufPrivKey, nil
 }
