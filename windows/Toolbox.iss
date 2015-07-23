@@ -108,8 +108,8 @@ Source: "{#virtualBoxMsi}"; DestDir: "{app}\installers\virtualbox"; DestName: "v
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
-Name: "{group}\Docker CLI"; WorkingDir: "{app}"; Filename: "{app}\start.sh"; IconFilename: "{app}/docker-cli.ico"; Components: "Docker"
-Name: "{commondesktop}\Docker CLI"; WorkingDir: "{app}"; Filename: "{app}\start.sh"; IconFilename: "{app}/docker-cli.ico"; Tasks: desktopicon; Components: "Docker"
+Name: "{group}\Docker Quickstart Terminal"; WorkingDir: "{app}"; Filename: "{app}\start.sh"; IconFilename: "{app}/docker-cli.ico"; Components: "Docker"
+Name: "{commondesktop}\Docker Quickstart Terminal"; WorkingDir: "{app}"; Filename: "{app}\start.sh"; IconFilename: "{app}/docker-cli.ico"; Tasks: desktopicon; Components: "Docker"
 
 [UninstallRun]
 Filename: "{app}\delete.sh"
@@ -186,7 +186,7 @@ begin
 		'{#MyAppName} installation completed.' + \
 		#13#10 + \
 		#13#10 + \
-		'Run using the `Docker CLI` icon on your desktop or in [Program Files] - then start a test container with:' + \
+		'Run using the `Docker Quickstart Terminal` icon on your desktop or in [Program Files] - then start a test container with:' + \
 		#13#10 + \
 		'         `docker run hello-world`' + \
 		#13#10 + \

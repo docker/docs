@@ -133,17 +133,17 @@ RUN cd /mpkg/boot2dockeriso.pkg && \
 	cd .. && \
 	rm -rf ./rootfs
 
-# dockercliapp.pkg
-RUN cd /mpkg/dockercliapp.pkg && \
+# dockerquickstartterminalapp.pkg
+RUN cd /mpkg/dockerquickstartterminalapp.pkg && \
 	mkdir ./rootfs && \
 	cd ./rootfs && \
-	mv /mpkg/Docker\ CLI.app . && \
+	mv /mpkg/Docker\ Quickstart\ Terminal.app . && \
 	find . | cpio -o --format odc | gzip -c > ../Payload && \
 	mkbom . ../Bom && \
 	sed -i \
-		-e "s/%DOCKERCLIAPP_NUMBER_OF_FILES%/`find . | wc -l`/g" \
-		-e "s/%DOCKERCLIAPP_INSTALL_KBYTES%/`du -sk | cut -f1`/g" \
-		-e "s/%DOCKERCLIAPP_VERSION%/$INSTALLER_VERSION/g" \
+		-e "s/%DOCKERQUICKSTARTTERMINALAPP_NUMBER_OF_FILES%/`find . | wc -l`/g" \
+		-e "s/%DOCKERQUICKSTARTTERMINALAPP_INSTALL_KBYTES%/`du -sk | cut -f1`/g" \
+		-e "s/%DOCKERQUICKSTARTTERMINALAPP_VERSION%/$INSTALLER_VERSION/g" \
 		../PackageInfo /mpkg/Distribution && \
 	cd .. && \
 	rm -rf ./rootfs
