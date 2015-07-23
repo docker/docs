@@ -51,7 +51,7 @@ func (c *Client) Update() error {
 	err := c.update()
 	if err != nil {
 		switch err.(type) {
-		case *tuf.ErrSigVerifyFail, *tuf.ErrMetaExpired, *tuf.ErrLocalRootExpired:
+		case tuf.ErrSigVerifyFail, signed.ErrExpired, tuf.ErrLocalRootExpired:
 			logrus.Debug("retryable error occurred. Root will be downloaded and another update attempted")
 			if err := c.downloadRoot(); err != nil {
 				logrus.Errorf("client Update (Root):", err)
@@ -85,7 +85,7 @@ func (c *Client) update() error {
 		// In this instance the root has not expired base on time, but is
 		// expired based on the snapshot dictating a new root has been produced.
 		logrus.Info(err.Error())
-		return &tuf.ErrLocalRootExpired{}
+		return tuf.ErrLocalRootExpired{}
 	}
 	// will always need top level targets at a minimum
 	err = c.downloadTargets("targets")

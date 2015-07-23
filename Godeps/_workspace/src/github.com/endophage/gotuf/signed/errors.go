@@ -5,11 +5,12 @@ import (
 )
 
 type ErrExpired struct {
+	Role    string
 	Expired string
 }
 
 func (e ErrExpired) Error() string {
-	return fmt.Sprintf("expired at %s", e.Expired)
+	return fmt.Sprintf("%s expired at %v", e.Role, e.Expired)
 }
 
 type ErrLowVersion struct {
