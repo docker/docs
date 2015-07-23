@@ -164,6 +164,12 @@ Continue by following the steps corresponding to your chosen OS.
 
 #### Boot2Docker 1.6.0
 
+You'll need to make some persistent changes using `bootsync.sh` in your
+Boot2Docker VM (as documented in [local customization](https://github.com/boot2docker/boot2docker/blob/master/doc/FAQ.md#local-customisation-with-persistent-partition)). To do this:
+
+1. `boot2docker ssh` to enter the VM
+2. `vi /var/lib/boot2docker/bootsync.sh` (create it if it doesn't exist, or edit it if it does)
+
 Install the CA cert (or the auto-generated cert) by adding the following to
 your `/var/lib/boot2docker/bootsync.sh`:
 
