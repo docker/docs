@@ -10,6 +10,7 @@ import (
 	"strings"
 
 	"github.com/docker/docker/pkg/term"
+	"path/filepath"
 )
 
 // Retriever is a callback function that should retrieve a passphrase
@@ -19,13 +20,15 @@ import (
 type Retriever func(keyName, alias string, createNew bool, attempts int) (passphrase string, giveup bool, err error)
 
 const (
+	idBytesToDisplay            = 5
 	tufRootAlias                = "root"
 	tufTargetsAlias             = "targets"
 	tufSnapshotAlias            = "snapshot"
 	tufRootKeyGenerationWarning = `You are about to create a new root signing key passphrase. This passphrase will be used to protect
 the most sensitive key in your signing system. Please choose a long, complex passphrase and be careful
-to keep it secure and backed up. It is highly recommended that you use a password manager to both generate it
-and keep it safe. There will be no way to recover this key.`
+to keep the password and the key file itself secure and backed up. It is highly recommended that you use
+a password manager to generate the passphrase and keep it safe. There will be no way to recover this key.
+You can find the key in your config directiory.`
 )
 
 // PromptRetriever returns a new Retriever which will provide a terminal prompt
@@ -72,6 +75,12 @@ func PromptRetriever() Retriever {
 		defer term.RestoreTerminal(0, state)
 
 		stdin := bufio.NewReader(os.Stdin)
+
+		indexOfLastSeparator := strings.LastIndex(keyName, string(filepath.Separator))
+
+		if len(keyName) > indexOfLastSeparator+idBytesToDisplay+1 {
+			keyName = keyName[:indexOfLastSeparator+idBytesToDisplay+1]
+		}
 
 		if createNew {
 			fmt.Printf("Enter passphrase for new %s key with id %s: ", alias, keyName)
