@@ -123,7 +123,7 @@
      {
          try {
              vboxplist = system.files.plistAtPath('/Applications/VirtualBox.app/Contents/Info.plist');
-             if (!vboxplist || !vboxplist.CFBundleVersion || system.compareVersions(vboxplist.CFBundleVersion, '%VBOX_VERSION') === -1) {
+             if (!vboxplist || !vboxplist.CFBundleVersion || system.compareVersions(vboxplist.CFBundleVersion, '%VBOX_VERSION%') === -1) {
                  return true;
              }
 
@@ -132,7 +132,7 @@
      }
     /* js:pkmk:end */
     </script>
-    <choice id="choiceVBox" title="choiceVBox_title" description="choiceVBox_msg" start_selected="vboxNeedsUpgrade()" start_enabled="vboxNeedsUpgrade()" start_visible="vboxNeedsUpgrade()">
+    <choice id="choiceVBox" title="choiceVBox_title" description="choiceVBox_msg" start_selected="vboxNeedsUpgrade()" start_enabled="vboxNeedsUpgrade()" start_visible="true">
         <pkg-ref id="org.virtualbox.pkg.vboxkexts" auth="Root" version="%VBOX_VERSION%" installKBytes="935">#VBoxKEXTs.pkg</pkg-ref>
         <pkg-ref id="org.virtualbox.pkg.virtualbox" auth="Root" version="%VBOX_VERSION%" installKBytes="247220">#VirtualBox.pkg</pkg-ref>
         <pkg-ref id="org.virtualbox.pkg.virtualboxcli" auth="Root" version="%VBOX_VERSION%" installKBytes="4">#VirtualBoxCLI.pkg</pkg-ref>
