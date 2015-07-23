@@ -113,7 +113,11 @@ func (s *RSAHardwareCryptoService) RemoveKey(keyID string) error {
 
 // GetKey returns the public components of a particular key
 func (s *RSAHardwareCryptoService) GetKey(keyID string) data.PublicKey {
-	return s.keys[keyID]
+	key, ok := s.keys[keyID]
+	if !ok {
+		return nil
+	}
+	return key
 }
 
 // Sign returns a signature for a given signature request
