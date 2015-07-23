@@ -11,6 +11,7 @@ import (
 
 	"github.com/docker/notary/trustmanager"
 	"github.com/endophage/gotuf/data"
+	"github.com/endophage/gotuf/signed"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -208,4 +209,280 @@ func TestValidateRoot(t *testing.T) {
 	if assert.Error(t, err, "An error was expected") {
 		assert.Equal(t, err, &ErrValidationFail{Reason: "failed to validate integrity of roots"})
 	}
+}
+
+// TestValidateSuccessfulRootRotation runs through a full root certificate rotation
+// We test this with both an RSA and ECDSA root certificate
+func TestValidateSuccessfulRootRotation(t *testing.T) {
+	testValidateSuccessfulRootRotation(t, data.ECDSAKey, data.ECDSAx509Key)
+	if !testing.Short() {
+		testValidateSuccessfulRootRotation(t, data.RSAKey, data.RSAx509Key)
+	}
+}
+
+func testValidateSuccessfulRootRotation(t *testing.T, keyAlg data.KeyAlgorithm, rootKeyType data.KeyAlgorithm) {
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	defer os.RemoveAll(tempBaseDir)
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+
+	// The gun to test
+	gun := "docker.com/notary"
+
+	// Create a FileStoreManager
+	keyStoreManager, err := NewKeyStoreManager(tempBaseDir, passphraseRetriever)
+	assert.NoError(t, err)
+
+	origRootKeyID, err := keyStoreManager.GenRootKey(keyAlg.String())
+	assert.NoError(t, err)
+
+	replRootKeyID, err := keyStoreManager.GenRootKey(keyAlg.String())
+	assert.NoError(t, err)
+
+	origUnlockedCryptoService, err := keyStoreManager.GetRootCryptoService(origRootKeyID)
+	assert.NoError(t, err)
+
+	replUnlockedCryptoService, err := keyStoreManager.GetRootCryptoService(replRootKeyID)
+	assert.NoError(t, err)
+
+	// Generating the certificate automatically adds it to the trusted store
+	origRootCert, err := origUnlockedCryptoService.GenerateCertificate(gun)
+	assert.NoError(t, err)
+
+	// Add the old root cert part of trustedCertificates
+	keyStoreManager.AddTrustedCert(origRootCert)
+	assert.NoError(t, err)
+
+	// Generate a certificate for our replacement root key
+	replRootCert, err := replUnlockedCryptoService.GenerateCertificate(gun)
+	assert.NoError(t, err)
+	// We need the PEM representation of the replacement key to put it into the TUF data
+	origRootPEMCert := trustmanager.CertToPEM(origRootCert)
+	replRootPEMCert := trustmanager.CertToPEM(replRootCert)
+
+	// Tuf key with PEM-encoded x509 certificate
+	origRootKey := data.NewPublicKey(rootKeyType, origRootPEMCert)
+	replRootKey := data.NewPublicKey(rootKeyType, replRootPEMCert)
+
+	// Link both certificates to the original public keys
+	err = keyStoreManager.RootKeyStore().Link(origRootKeyID+"_root", origRootKey.ID()+"_root")
+	assert.NoError(t, err)
+
+	err = keyStoreManager.RootKeyStore().Link(replRootKeyID+"_root", replRootKey.ID()+"_root")
+	assert.NoError(t, err)
+
+	rootRole, err := data.NewRole("root", 1, []string{replRootKey.ID()}, nil, nil)
+	assert.NoError(t, err)
+
+	testRoot, err := data.NewRoot(
+		map[string]data.PublicKey{replRootKey.ID(): replRootKey},
+		map[string]*data.RootRole{"root": &rootRole.RootRole},
+		false,
+	)
+	assert.NoError(t, err, "Failed to create new root")
+
+	signedTestRoot, err := testRoot.ToSigned()
+	assert.NoError(t, err)
+
+	err = signed.Sign(replUnlockedCryptoService.CryptoService, signedTestRoot, replRootKey)
+	assert.NoError(t, err)
+
+	err = signed.Sign(origUnlockedCryptoService.CryptoService, signedTestRoot, origRootKey)
+	assert.NoError(t, err)
+
+	//
+	// This call to ValidateRoot will succeed since we are usign a valid PEM
+	// encoded certificate, and have no other certificates for this CN
+	//
+	err = keyStoreManager.ValidateRoot(signedTestRoot, gun)
+	assert.NoError(t, err)
+
+	// Finally, validate the the only trusted certificate that exists is the new one
+	certs := keyStoreManager.trustedCertificateStore.GetCertificates()
+	assert.Len(t, certs, 1)
+	assert.Equal(t, certs[0], replRootCert)
+}
+
+// TestValidateRootRotationMissingOrigSig runs through a full root certificate rotation
+// where we are missing the original root key signature. Verification should fail.
+// We test this with both an RSA and ECDSA root certificate
+func TestValidateRootRotationMissingOrigSig(t *testing.T) {
+	testValidateRootRotationMissingOrigSig(t, data.ECDSAKey, data.ECDSAx509Key)
+	if !testing.Short() {
+		testValidateRootRotationMissingOrigSig(t, data.RSAKey, data.RSAx509Key)
+	}
+}
+
+func testValidateRootRotationMissingOrigSig(t *testing.T, keyAlg data.KeyAlgorithm, rootKeyType data.KeyAlgorithm) {
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	defer os.RemoveAll(tempBaseDir)
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+
+	// The gun to test
+	gun := "docker.com/notary"
+
+	// Create a FileStoreManager
+	keyStoreManager, err := NewKeyStoreManager(tempBaseDir, passphraseRetriever)
+	assert.NoError(t, err)
+
+	origRootKeyID, err := keyStoreManager.GenRootKey(keyAlg.String())
+	assert.NoError(t, err)
+
+	replRootKeyID, err := keyStoreManager.GenRootKey(keyAlg.String())
+	assert.NoError(t, err)
+
+	origUnlockedCryptoService, err := keyStoreManager.GetRootCryptoService(origRootKeyID)
+	assert.NoError(t, err)
+
+	replUnlockedCryptoService, err := keyStoreManager.GetRootCryptoService(replRootKeyID)
+	assert.NoError(t, err)
+
+	// Generating the certificate automatically adds it to the trusted store
+	origRootCert, err := origUnlockedCryptoService.GenerateCertificate(gun)
+	assert.NoError(t, err)
+
+	// Add the old root cert part of trustedCertificates
+	keyStoreManager.AddTrustedCert(origRootCert)
+	assert.NoError(t, err)
+
+	// Generate a certificate for our replacement root key
+	replRootCert, err := replUnlockedCryptoService.GenerateCertificate(gun)
+	assert.NoError(t, err)
+	// We need the PEM representation of the replacement key to put it into the TUF data
+	origRootPEMCert := trustmanager.CertToPEM(origRootCert)
+	replRootPEMCert := trustmanager.CertToPEM(replRootCert)
+
+	// Tuf key with PEM-encoded x509 certificate
+	origRootKey := data.NewPublicKey(rootKeyType, origRootPEMCert)
+	replRootKey := data.NewPublicKey(rootKeyType, replRootPEMCert)
+
+	// Link both certificates to the original public keys
+	err = keyStoreManager.RootKeyStore().Link(origRootKeyID+"_root", origRootKey.ID()+"_root")
+	assert.NoError(t, err)
+
+	err = keyStoreManager.RootKeyStore().Link(replRootKeyID+"_root", replRootKey.ID()+"_root")
+	assert.NoError(t, err)
+
+	rootRole, err := data.NewRole("root", 1, []string{replRootKey.ID()}, nil, nil)
+	assert.NoError(t, err)
+
+	testRoot, err := data.NewRoot(
+		map[string]data.PublicKey{replRootKey.ID(): replRootKey},
+		map[string]*data.RootRole{"root": &rootRole.RootRole},
+		false,
+	)
+	assert.NoError(t, err, "Failed to create new root")
+
+	signedTestRoot, err := testRoot.ToSigned()
+	assert.NoError(t, err)
+
+	// We only sign with the new key, and not with the original one.
+	err = signed.Sign(replUnlockedCryptoService.CryptoService, signedTestRoot, replRootKey)
+	assert.NoError(t, err)
+
+	//
+	// This call to ValidateRoot will succeed since we are usign a valid PEM
+	// encoded certificate, and have no other certificates for this CN
+	//
+	err = keyStoreManager.ValidateRoot(signedTestRoot, gun)
+	assert.Error(t, err, "insuficient signatures on root")
+
+	// Finally, validate the the only trusted certificate that exists is still
+	// the old one
+	certs := keyStoreManager.trustedCertificateStore.GetCertificates()
+	assert.Len(t, certs, 1)
+	assert.Equal(t, certs[0], origRootCert)
+}
+
+// TestValidateRootRotationMissingNewSig runs through a full root certificate rotation
+// where we are missing the new root key signature. Verification should fail.
+// We test this with both an RSA and ECDSA root certificate
+func TestValidateRootRotationMissingNewSig(t *testing.T) {
+	testValidateRootRotationMissingNewSig(t, data.ECDSAKey, data.ECDSAx509Key)
+	if !testing.Short() {
+		testValidateRootRotationMissingNewSig(t, data.RSAKey, data.RSAx509Key)
+	}
+}
+
+func testValidateRootRotationMissingNewSig(t *testing.T, keyAlg data.KeyAlgorithm, rootKeyType data.KeyAlgorithm) {
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	defer os.RemoveAll(tempBaseDir)
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+
+	// The gun to test
+	gun := "docker.com/notary"
+
+	// Create a FileStoreManager
+	keyStoreManager, err := NewKeyStoreManager(tempBaseDir, passphraseRetriever)
+	assert.NoError(t, err)
+
+	origRootKeyID, err := keyStoreManager.GenRootKey(keyAlg.String())
+	assert.NoError(t, err)
+
+	replRootKeyID, err := keyStoreManager.GenRootKey(keyAlg.String())
+	assert.NoError(t, err)
+
+	origUnlockedCryptoService, err := keyStoreManager.GetRootCryptoService(origRootKeyID)
+	assert.NoError(t, err)
+
+	replUnlockedCryptoService, err := keyStoreManager.GetRootCryptoService(replRootKeyID)
+	assert.NoError(t, err)
+
+	// Generating the certificate automatically adds it to the trusted store
+	origRootCert, err := origUnlockedCryptoService.GenerateCertificate(gun)
+	assert.NoError(t, err)
+
+	// Add the old root cert part of trustedCertificates
+	keyStoreManager.AddTrustedCert(origRootCert)
+	assert.NoError(t, err)
+
+	// Generate a certificate for our replacement root key
+	replRootCert, err := replUnlockedCryptoService.GenerateCertificate(gun)
+	assert.NoError(t, err)
+	// We need the PEM representation of the replacement key to put it into the TUF data
+	origRootPEMCert := trustmanager.CertToPEM(origRootCert)
+	replRootPEMCert := trustmanager.CertToPEM(replRootCert)
+
+	// Tuf key with PEM-encoded x509 certificate
+	origRootKey := data.NewPublicKey(rootKeyType, origRootPEMCert)
+	replRootKey := data.NewPublicKey(rootKeyType, replRootPEMCert)
+
+	// Link both certificates to the original public keys
+	err = keyStoreManager.RootKeyStore().Link(origRootKeyID+"_root", origRootKey.ID()+"_root")
+	assert.NoError(t, err)
+
+	err = keyStoreManager.RootKeyStore().Link(replRootKeyID+"_root", replRootKey.ID()+"_root")
+	assert.NoError(t, err)
+
+	rootRole, err := data.NewRole("root", 1, []string{replRootKey.ID()}, nil, nil)
+	assert.NoError(t, err)
+
+	testRoot, err := data.NewRoot(
+		map[string]data.PublicKey{replRootKey.ID(): replRootKey},
+		map[string]*data.RootRole{"root": &rootRole.RootRole},
+		false,
+	)
+	assert.NoError(t, err, "Failed to create new root")
+
+	signedTestRoot, err := testRoot.ToSigned()
+	assert.NoError(t, err)
+
+	// We only sign with the old key, and not with the new one
+	err = signed.Sign(replUnlockedCryptoService.CryptoService, signedTestRoot, origRootKey)
+	assert.NoError(t, err)
+
+	//
+	// This call to ValidateRoot will succeed since we are usign a valid PEM
+	// encoded certificate, and have no other certificates for this CN
+	//
+	err = keyStoreManager.ValidateRoot(signedTestRoot, gun)
+	assert.Error(t, err, "insuficient signatures on root")
+
+	// Finally, validate the the only trusted certificate that exists is still
+	// the old one
+	certs := keyStoreManager.trustedCertificateStore.GetCertificates()
+	assert.Len(t, certs, 1)
+	assert.Equal(t, certs[0], origRootCert)
 }
