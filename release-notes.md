@@ -10,7 +10,7 @@ weight=100
 
 
 
-# Docker Trusted Registry: Release Notes
+# Release Notes: Docker Trusted Registry & Commercially Supported Docker Engine
 
 ## Prior Versions
 
@@ -23,7 +23,7 @@ These notes refer to the current and immediately prior releases of Docker Truste
 
 This release adds CentOS support and addresses a few bugs and issues in DTR 1.1.0:
 
-* Fixed an issue where for certain configurations of DTR, proxy configuration settings and variables were not being passed to all DTR containers and thus were not being respected.
+* Fixes an issue where for certain configurations of DTR, proxy configuration settings and variables were not being passed to all DTR containers and thus were not being respected.
 * Documentation links in the UI now point to correct docs.
 * Generated support info bundles have been scrubbed to remove highly sensitive data.
 * Certifies support for CentOS 7.1.
@@ -48,7 +48,7 @@ The following notable issues have been remediated:
 * Fixed an issue that caused DTR logins to fail if some LDAP servers were unreachable.
 * Fixed a resource leak in DTR storage.
 
-### Upgrade Warning
+### DTR 1.0 Upgrade Warning
 
 Customers who are currently using DHE 1.0 **must** follow the [upgrading instructions](https://forums.docker.com/t/upgrading-docker-hub-enterprise-to-docker-trusted-registry/1925) in our support Knowledge Base. These instructions will show you how to modify existing authentication data and storage volume settings to move to DTR. Note that automatic upgrading has been disabled for DHE users because of these issues.
 

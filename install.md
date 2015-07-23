@@ -34,9 +34,13 @@ In order to run DTR, you will need to get a license, either by purchasing
 DTR or acquiring a trial license. The license will be associated with your free
 Docker Hub account or Docker Hub organization (so if you don't have an account,
 you'll need to set one up, which can be done at the same time as your license
-request). To get your license, visit the [Docker Subscription page](https://hub-beta.docker.com/enterprise/) and select the edition you would like acquire. After completing a brief registration process, follow the steps to acquire a license.
+request). To get your license, visit the [Docker Subscription page](https://hub-beta.docker.com/enterprise/) and select the edition you would like acquire. After completing a brief registration process, follow the steps to
+acquire a license.
 
-Once you've acquired your license, you can view or download it by logging in to Docker Hub, going to your account settings (gear icon at upper right), and then selecting ["Licenses"](https://hub-beta.docker.com/account/licenses/) from the top nav bar. 
+Once you've acquired your license, you can view or download it by logging in to
+Docker Hub, going to your account settings (gear icon at upper right), and then
+selecting ["Licenses"](https://hub-beta.docker.com/account/licenses/) from the
+top nav bar. 
 
 The Licenses page will display your currently available licenses. Click the cloud icon to download your desired license. You may need to disable any pop-up blocker installed on your browser in order to complete the download.
 
@@ -44,15 +48,21 @@ You can also download the commercially supported Docker Engine packages from thi
 
 ## Prerequisites
 
+DTR runs on the following platforms:
+
+* Ubuntu 14.04 LTS
+* RHEL 7.0 and 7.1
+* CentOS 7.1
+
 DTR 1.2.0 requires the following:
 
-* Commercially supported Docker Engine 1.6.2-cs5 or later running on an
-Ubuntu 14.04 LTS, RHEL 7.1, RHEL 7.0, or CentOS 7.1 host. (See below for instructions on how
-to install the commercially supported Docker Engine.)
+* Commercially supported Docker Engine, preferably 1.6.2-cs5 or later, running
+on a supported host. (See below for instructions on how to install the
+commercially supported Docker Engine.)
 
 > **Note:** In order to remain in compliance with your DTR support agreement,
 > you **must** use the current version of commercially supported Docker Engine.
-> Running the regular, open source version of Engine is **not** supported.
+> Running the open source version of Engine is **not** supported.
 
 * Your Docker daemon needs to be listening to the Unix socket (the default) so
 that it can be bind-mounted into the DTR management containers, allowing
