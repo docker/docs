@@ -87,7 +87,7 @@ func tufAdd(cmd *cobra.Command, args []string) {
 	targetPath := args[2]
 
 	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL,
-		getInsecureTransport(), retriever)
+		getTransport(), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -112,7 +112,7 @@ func tufInit(cmd *cobra.Command, args []string) {
 	gun := args[0]
 
 	nRepo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL,
-		getInsecureTransport(), retriever)
+		getTransport(), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -148,7 +148,7 @@ func tufList(cmd *cobra.Command, args []string) {
 	}
 	gun := args[0]
 	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL,
-		getInsecureTransport(), retriever)
+		getTransport(), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -174,7 +174,7 @@ func tufLookup(cmd *cobra.Command, args []string) {
 	targetName := args[1]
 
 	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL,
-		getInsecureTransport(), retriever)
+		getTransport(), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -199,7 +199,7 @@ func tufPublish(cmd *cobra.Command, args []string) {
 	fmt.Println("Pushing changes to ", gun, ".")
 
 	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL,
-		getInsecureTransport(), retriever)
+		getTransport(), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -245,7 +245,7 @@ func verify(cmd *cobra.Command, args []string) {
 	gun := args[0]
 	targetName := args[1]
 	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL,
-		getInsecureTransport(), retriever)
+		getTransport(), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -270,10 +270,13 @@ func verify(cmd *cobra.Command, args []string) {
 	return
 }
 
-func getInsecureTransport() *http.Transport {
-	return &http.Transport{
-		TLSClientConfig: &tls.Config{
-			InsecureSkipVerify: true,
-		},
+func getTransport() *http.Transport {
+	if viper.GetBool("skipTLSVerify") {
+		return &http.Transport{
+			TLSClientConfig: &tls.Config{
+				InsecureSkipVerify: true,
+			},
+		}
 	}
+	return &http.Transport{}
 }
