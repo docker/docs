@@ -33,9 +33,9 @@ Formerly known as Docker Hub Enterprise (DHE).
 
 For customers running Docker Engine on [supported versions of RedHat Enterprise
 Linux](https://www.docker.com/enterprise/support/) with [SELinux
-enabled](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/
-6/html/Security-Enhanced_Linux/sect-Security-Enhanced_Linux-Working_with_SELinux
--Enabling_and_Disabling_SELinux.html), the `docker build` and `docker run`
+enabled](
+https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/SELinux_Users_and_Administrators_Guide/sect-Security-Enhanced_Linux-Working_with_SELinux-Enabling_and_Disabling_SELinux.html
+), the `docker build` and `docker run`
 commands will not have DNS host name resolution and bind-mounted volumes may
 not be accessible.
 As a result, customers with SELinux will be unable to use hostname-based network
