@@ -108,8 +108,8 @@ Source: "{#virtualBoxMsi}"; DestDir: "{app}\installers\virtualbox"; DestName: "v
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
-Name: "{group}\Docker Quickstart Terminal"; WorkingDir: "{app}"; Filename: "{app}\start.sh"; IconFilename: "{app}/docker-cli.ico"; Components: "Docker"
-Name: "{commondesktop}\Docker Quickstart Terminal"; WorkingDir: "{app}"; Filename: "{app}\start.sh"; IconFilename: "{app}/docker-cli.ico"; Tasks: desktopicon; Components: "Docker"
+Name: "{group}\Docker Quickstart Terminal"; WorkingDir: "{app}"; Filename: "{app}\start.sh"; IconFilename: "{app}/docker-quickstart-terminal.ico"; Components: "Docker"
+Name: "{commondesktop}\Docker Quickstart Terminal"; WorkingDir: "{app}"; Filename: "{app}\start.sh"; IconFilename: "{app}/docker-quickstart-terminal.ico"; Tasks: desktopicon; Components: "Docker"
 
 [UninstallRun]
 Filename: "{app}\delete.sh"
