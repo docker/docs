@@ -3,7 +3,7 @@
 set -e
 
 ISO=$HOME/.docker/machine/cache/boot2docker.iso
-VM=dev
+VM=docker-vm
 DOCKER_MACHINE=./docker-machine.exe
 
 BLUE='\033[1;34m'
@@ -46,7 +46,7 @@ cat << EOF
               \____\_______/
 
 EOF
-echo -e "${BLUE}docker${NC} is configured to use the ${GREEN}dev${NC} machine with IP ${GREEN}$($DOCKER_MACHINE ip $VM)${NC}"
+echo -e "${BLUE}docker${NC} is configured to use the ${GREEN}$VM${NC} machine with IP ${GREEN}$($DOCKER_MACHINE ip $VM)${NC}"
 echo "For help getting started, check out the docs at https://docs.docker.com"
 echo
 cd
