@@ -48,7 +48,7 @@ The following notable issues have been remediated:
 * Fixed an issue that caused DTR logins to fail if some LDAP servers were unreachable.
 * Fixed a resource leak in DTR storage.
 
-### DTR 1.0 Upgrade Warning
+### DHE 1.0 Upgrade Warning
 
 Customers who are currently using DHE 1.0 **must** follow the [upgrading instructions](https://forums.docker.com/t/upgrading-docker-hub-enterprise-to-docker-trusted-registry/1925) in our support Knowledge Base. These instructions will show you how to modify existing authentication data and storage volume settings to move to DTR. Note that automatic upgrading has been disabled for DHE users because of these issues.
 
