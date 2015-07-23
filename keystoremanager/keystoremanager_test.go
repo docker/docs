@@ -132,7 +132,7 @@ func TestValidateRoot(t *testing.T) {
 	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
 
 	//
-	// This call to ValidateRoot will succeed since we are usign a valid PEM
+	// This call to ValidateRoot will succeed since we are using a valid PEM
 	// encoded certificate, and have no other certificates for this CN
 	//
 	err = keyStoreManager.ValidateRoot(&testSignedRoot, "docker.com/notary")
@@ -193,7 +193,7 @@ func TestValidateRoot(t *testing.T) {
 
 	//
 	// This call to ValidateRoot will suceed in getting to the TUF validation, since
-	// we are usign a valid PEM encoded certificate chain of intermediate + leaf cert
+	// we are using a valid PEM encoded certificate chain of intermediate + leaf cert
 	// that are signed by a trusted root authority and the leaf cert has a correct CN.
 	// It will, however, fail to validate, because it has an invalid TUF signature
 	//
@@ -291,13 +291,13 @@ func testValidateSuccessfulRootRotation(t *testing.T, keyAlg data.KeyAlgorithm, 
 	assert.NoError(t, err)
 
 	//
-	// This call to ValidateRoot will succeed since we are usign a valid PEM
+	// This call to ValidateRoot will succeed since we are using a valid PEM
 	// encoded certificate, and have no other certificates for this CN
 	//
 	err = keyStoreManager.ValidateRoot(signedTestRoot, gun)
 	assert.NoError(t, err)
 
-	// Finally, validate the the only trusted certificate that exists is the new one
+	// Finally, validate the only trusted certificate that exists is the new one
 	certs := keyStoreManager.trustedCertificateStore.GetCertificates()
 	assert.Len(t, certs, 1)
 	assert.Equal(t, certs[0], replRootCert)
@@ -382,13 +382,13 @@ func testValidateRootRotationMissingOrigSig(t *testing.T, keyAlg data.KeyAlgorit
 	assert.NoError(t, err)
 
 	//
-	// This call to ValidateRoot will succeed since we are usign a valid PEM
+	// This call to ValidateRoot will succeed since we are using a valid PEM
 	// encoded certificate, and have no other certificates for this CN
 	//
 	err = keyStoreManager.ValidateRoot(signedTestRoot, gun)
 	assert.Error(t, err, "insuficient signatures on root")
 
-	// Finally, validate the the only trusted certificate that exists is still
+	// Finally, validate the only trusted certificate that exists is still
 	// the old one
 	certs := keyStoreManager.trustedCertificateStore.GetCertificates()
 	assert.Len(t, certs, 1)
@@ -474,13 +474,13 @@ func testValidateRootRotationMissingNewSig(t *testing.T, keyAlg data.KeyAlgorith
 	assert.NoError(t, err)
 
 	//
-	// This call to ValidateRoot will succeed since we are usign a valid PEM
+	// This call to ValidateRoot will succeed since we are using a valid PEM
 	// encoded certificate, and have no other certificates for this CN
 	//
 	err = keyStoreManager.ValidateRoot(signedTestRoot, gun)
 	assert.Error(t, err, "insuficient signatures on root")
 
-	// Finally, validate the the only trusted certificate that exists is still
+	// Finally, validate the only trusted certificate that exists is still
 	// the old one
 	certs := keyStoreManager.trustedCertificateStore.GetCertificates()
 	assert.Len(t, certs, 1)
