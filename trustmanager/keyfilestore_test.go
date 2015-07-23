@@ -199,7 +199,7 @@ func TestGetDecryptedWithInvalidPassphrase(t *testing.T) {
 	newFileStore, err := NewKeyFileStore(tempBaseDir, invalidPassphraseRetriever)
 	assert.NoError(t, err, "failed to create new key filestore")
 
-	testGetDecryptedWithInvalidPassphrase(t, fileStore, newFileStore)
+	testGetDecryptedWithInvalidPassphrase(t, fileStore, newFileStore, ErrPasswordInvalid{})
 
 	// Can't test with KeyMemoryStore because we cache the decrypted version of
 	// the key forever
@@ -226,7 +226,7 @@ func TestGetDecryptedWithConsistentlyInvalidPassphrase(t *testing.T) {
 	newFileStore, err := NewKeyFileStore(tempBaseDir, consistentlyInvalidPassphraseRetriever)
 	assert.NoError(t, err, "failed to create new key filestore")
 
-	testGetDecryptedWithInvalidPassphrase(t, fileStore, newFileStore)
+	testGetDecryptedWithInvalidPassphrase(t, fileStore, newFileStore, ErrAttemptsExceeded{})
 
 	// Can't test with KeyMemoryStore because we cache the decrypted version of
 	// the key forever
@@ -234,7 +234,7 @@ func TestGetDecryptedWithConsistentlyInvalidPassphrase(t *testing.T) {
 
 // testGetDecryptedWithInvalidPassphrase takes two keystores so it can add to
 // one and get from the other (to work around caching)
-func testGetDecryptedWithInvalidPassphrase(t *testing.T, store KeyStore, newStore KeyStore) {
+func testGetDecryptedWithInvalidPassphrase(t *testing.T, store KeyStore, newStore KeyStore, expectedFailureType interface{}) {
 	testAlias := "root"
 
 	// Generate a new random RSA Key
@@ -248,6 +248,7 @@ func testGetDecryptedWithInvalidPassphrase(t *testing.T, store KeyStore, newStor
 	// Try to decrypt the file with an invalid passphrase
 	_, _, err = newStore.GetKey(privKey.ID())
 	assert.Error(t, err, "expected error while decrypting the content due to invalid passphrase")
+	assert.IsType(t, err, expectedFailureType)
 }
 
 func TestRemoveKey(t *testing.T) {
