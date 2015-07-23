@@ -51,7 +51,7 @@ func (c *Client) Update() error {
 	err := c.update()
 	if err != nil {
 		switch err.(type) {
-		case tuf.ErrSigVerifyFail, signed.ErrExpired, tuf.ErrLocalRootExpired:
+		case signed.ErrRoleThreshold, signed.ErrExpired, tuf.ErrLocalRootExpired:
 			logrus.Debug("retryable error occurred. Root will be downloaded and another update attempted")
 			if err := c.downloadRoot(); err != nil {
 				logrus.Errorf("client Update (Root):", err)
