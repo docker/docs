@@ -86,7 +86,7 @@ func verifyMeta(s *data.Signed, role string, minVersion int) error {
 	}
 	if IsExpired(sm.Expires) {
 		logrus.Errorf("Metadata for %s expired", role)
-		return ErrExpired{sm.Expires}
+		return ErrExpired{Role: role, Expired: sm.Expires}
 	}
 	if sm.Version < minVersion {
 		return ErrLowVersion{sm.Version, minVersion}

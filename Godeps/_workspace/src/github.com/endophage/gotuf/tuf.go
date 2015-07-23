@@ -41,7 +41,7 @@ type ErrNotLoaded struct {
 	role string
 }
 
-func (err *ErrNotLoaded) Error() string {
+func (err ErrNotLoaded) Error() string {
 	return fmt.Sprintf("%s role has not been loaded", err.role)
 }
 
@@ -73,7 +73,7 @@ func NewTufRepo(keysDB *keys.KeyDB, cryptoService signed.CryptoService) *TufRepo
 // AddBaseKeys is used to add keys to the role in root.json
 func (tr *TufRepo) AddBaseKeys(role string, keys ...*data.TUFKey) error {
 	if tr.Root == nil {
-		return &ErrNotLoaded{role: "root"}
+		return ErrNotLoaded{role: "root"}
 	}
 	for _, k := range keys {
 		// Store only the public portion
@@ -91,7 +91,7 @@ func (tr *TufRepo) AddBaseKeys(role string, keys ...*data.TUFKey) error {
 // RemoveKeys is used to remove keys from the roles in root.json
 func (tr *TufRepo) RemoveBaseKeys(role string, keyIDs ...string) error {
 	if tr.Root == nil {
-		return &ErrNotLoaded{role: "root"}
+		return ErrNotLoaded{role: "root"}
 	}
 	keep := make([]string, 0)
 	toDelete := make(map[string]struct{})

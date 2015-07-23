@@ -47,6 +47,11 @@ func (err *ErrRepoNotInitialized) Error() string {
 	return "Repository has not been initialized"
 }
 
+// ErrExpired is returned when the metadata for a role has expired
+type ErrExpired struct {
+	signed.ErrExpired
+}
+
 const (
 	tufDir = "tuf"
 )
@@ -262,6 +267,9 @@ func (r *NotaryRepository) ListTargets() ([]*Target, error) {
 
 	err = c.Update()
 	if err != nil {
+		if err, ok := err.(signed.ErrExpired); ok {
+			return nil, ErrExpired{err}
+		}
 		return nil, err
 	}
 
@@ -283,6 +291,9 @@ func (r *NotaryRepository) GetTargetByName(name string) (*Target, error) {
 
 	err = c.Update()
 	if err != nil {
+		if err, ok := err.(signed.ErrExpired); ok {
+			return nil, ErrExpired{err}
+		}
 		return nil, err
 	}
 
@@ -335,6 +346,9 @@ func (r *NotaryRepository) Publish() error {
 		// applying the changelist.
 		err = c.Update()
 		if err != nil {
+			if err, ok := err.(signed.ErrExpired); ok {
+				return ErrExpired{err}
+			}
 			return err
 		}
 	}

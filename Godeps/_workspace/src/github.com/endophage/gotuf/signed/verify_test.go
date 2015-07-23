@@ -129,9 +129,10 @@ func Test(t *testing.T) {
 			err:  ErrLowVersion{minVer - 1, minVer},
 		},
 		{
+			role: "root",
 			name: "expired",
 			exp:  &expiredTime,
-			err:  ErrExpired{expiredTime.Format("2006-01-02 15:04:05 MST")},
+			err:  ErrExpired{"root", expiredTime.Format("2006-01-02 15:04:05 MST")},
 		},
 	}
 	for _, run := range tests {
