@@ -102,8 +102,8 @@ func GetHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) err
 		logrus.Errorf("[Notary Server] 404 GET repository: %s, role: %s", gun, tufRole)
 		return errors.ErrMetadataNotFound.WithDetail(nil)
 	}
-	logrus.Debug("Writing data")
 	w.Write(out)
+
 	return nil
 }
 
