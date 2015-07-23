@@ -5,7 +5,6 @@ import (
 	"strings"
 	"sync"
 
-	"errors"
 	"fmt"
 
 	"github.com/docker/notary/pkg/passphrase"
@@ -16,6 +15,14 @@ const (
 	keyExtension = "key"
 )
 
+// ErrAttemptsExceeded is returned when too many attempts have been made to decrypt a key
+type ErrAttemptsExceeded struct{}
+
+// ErrAttemptsExceeded is returned when too many attempts have been made to decrypt a key
+func (err ErrAttemptsExceeded) Error() string {
+	return "maximum number of passphrase attempts exceeded"
+}
+
 // ErrPasswordInvalid is returned when signing fails. It could also mean the signing
 // key file was corrupted, but we have no way to distinguish.
 type ErrPasswordInvalid struct{}
@@ -24,6 +31,16 @@ type ErrPasswordInvalid struct{}
 // key file was corrupted, but we have no way to distinguish.
 func (err ErrPasswordInvalid) Error() string {
 	return "password invalid, operation has failed."
+}
+
+// ErrKeyNotFound is returned when the keystore fails to retrieve a specific key.
+type ErrKeyNotFound struct {
+	KeyID string
+}
+
+// ErrKeyNotFound is returned when the keystore fails to retrieve a specific key.
+func (err ErrKeyNotFound) Error() string {
+	return fmt.Sprintf("signing key not found: %s", err.KeyID)
 }
 
 // KeyStore is a generic interface for private key storage
@@ -159,10 +176,10 @@ func addKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, cached
 			continue
 		}
 		if giveup {
-			return ErrPasswordInvalid{}
+			return ErrAttemptsExceeded{}
 		}
 		if attempts > 10 {
-			return errors.New("maximum number of passphrase attempts exceeded")
+			return ErrAttemptsExceeded{}
 		}
 		break
 	}
@@ -192,7 +209,7 @@ func getKeyAlias(s LimitedFileStore, keyID string) (string, error) {
 		}
 	}
 
-	return "", fmt.Errorf("keyId %s has no alias", name)
+	return "", &ErrKeyNotFound{KeyID: keyID}
 }
 
 // GetKey returns the PrivateKey given a KeyID
@@ -223,7 +240,7 @@ func getKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, cached
 				return nil, "", ErrPasswordInvalid{}
 			}
 			if attempts > 10 {
-				return nil, "", errors.New("maximum number of passphrase attempts exceeded")
+				return nil, "", ErrAttemptsExceeded{}
 			}
 
 			// Try to convert PEM encoded bytes back to a PrivateKey using the passphrase
