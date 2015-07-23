@@ -323,7 +323,7 @@ func (r *NotaryRepository) Publish() error {
 				// Repo hasn't been initialized, It must be initialized before
 				// it can be published. Return an error and let caller determine
 				// what it wants to do.
-				logrus.Error(err.Error())
+				logrus.Debug(err.Error())
 				logrus.Debug("Repository not initialized during Publish")
 				return &ErrRepoNotInitialized{}
 			}
