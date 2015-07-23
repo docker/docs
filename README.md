@@ -9,6 +9,17 @@ Docker on Mac OS X and Windows, including:
 - Kitematic (Beta)
 - VirtualBox
 
+
+|                        | Mac    | Windows     | Linux (Help Wanted) |
+|------------------------|--------|-------------|---------------------|
+| Docker Client / Engine | Client | Client      | Engine              |
+| Docker Machine         | Yes    | Yes         | Yes                 |
+| Docker Compose         | Yes    | Coming Soon | Yes                 |
+| Docker Kitematic       | Yes    | Yes         | Coming Soon         |
+| VirtualBox 5.0         | Yes    | Yes         | No                  |
+
+
+
 ## Installation and documentation
 
 Full documentation [is available
