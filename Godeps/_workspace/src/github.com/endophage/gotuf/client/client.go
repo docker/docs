@@ -20,7 +20,7 @@ import (
 	"github.com/endophage/gotuf/utils"
 )
 
-const maxSize = 5 << 20
+const maxSize int64 = 5 << 20
 
 type Client struct {
 	local  *tuf.TufRepo
@@ -120,16 +120,27 @@ func (c Client) checkRoot() error {
 // downloadRoot is responsible for downloading the root.json
 func (c *Client) downloadRoot() error {
 	role := data.RoleName("root")
-	size := c.local.Snapshot.Signed.Meta[role].Length
-	expectedSha256 := c.local.Snapshot.Signed.Meta[role].Hashes["sha256"]
+	size := maxSize
+	var expectedSha256 []byte = nil
+	if c.local.Snapshot != nil {
+		size = c.local.Snapshot.Signed.Meta[role].Length
+		expectedSha256 = c.local.Snapshot.Signed.Meta[role].Hashes["sha256"]
+	}
 
 	// if we're bootstrapping we may not have a cached root, an
 	// error will result in the "previous root version" being
 	// interpreted as 0.
 	var download bool
+	var err error
+	var cachedRoot []byte = nil
 	old := &data.Signed{}
-	cachedRoot, err := c.cache.GetMeta(role, maxSize)
 	version := 0
+
+	if expectedSha256 != nil {
+		// can only trust cache if we have an expected sha256 to trust
+		cachedRoot, err = c.cache.GetMeta(role, size)
+	}
+
 	if cachedRoot == nil || err != nil {
 		logrus.Debug("didn't find a cached root, must download")
 		download = true
@@ -162,7 +173,9 @@ func (c *Client) downloadRoot() error {
 			return err
 		}
 		hash := sha256.Sum256(raw)
-		if !bytes.Equal(hash[:], expectedSha256) {
+		if expectedSha256 != nil && !bytes.Equal(hash[:], expectedSha256) {
+			// if we don't have an expected sha256, we're going to trust the root
+			// based purely on signature and expiry time validation
 			return fmt.Errorf("Remote root sha256 did not match snapshot root sha256: %#x vs. %#x", hash, []byte(expectedSha256))
 		}
 		s = &data.Signed{}
