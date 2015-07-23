@@ -52,7 +52,7 @@ func Test(t *testing.T) {
 		{
 			name: "key missing from role",
 			mut:  func(t *test) { t.roles["root"].KeyIDs = nil },
-			err:  ErrRoleThreshold,
+			err:  ErrRoleThreshold{},
 		},
 		//	{
 		//		name: "invalid signature",
@@ -62,7 +62,7 @@ func Test(t *testing.T) {
 		{
 			name: "not enough signatures",
 			mut:  func(t *test) { t.roles["root"].Threshold = 2 },
-			err:  ErrRoleThreshold,
+			err:  ErrRoleThreshold{},
 		},
 		{
 			name: "exactly enough signatures",
@@ -82,7 +82,7 @@ func Test(t *testing.T) {
 				t.roles["root"].Threshold = 2
 				t.s.Signatures = append(t.s.Signatures, t.s.Signatures[0])
 			},
-			err: ErrRoleThreshold,
+			err: ErrRoleThreshold{},
 		},
 		{
 			name: "unknown key",
@@ -98,7 +98,7 @@ func Test(t *testing.T) {
 				Sign(cryptoService, t.s, k)
 				t.roles["root"].Threshold = 2
 			},
-			err: ErrRoleThreshold,
+			err: ErrRoleThreshold{},
 		},
 		{
 			name: "unknown keys in db",
@@ -116,7 +116,7 @@ func Test(t *testing.T) {
 				t.keys = append(t.keys, k)
 				t.roles["root"].Threshold = 2
 			},
-			err: ErrRoleThreshold,
+			err: ErrRoleThreshold{},
 		},
 		{
 			name: "wrong type",

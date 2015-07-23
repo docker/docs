@@ -13,13 +13,12 @@ import (
 )
 
 var (
-	ErrMissingKey    = errors.New("tuf: missing key")
-	ErrNoSignatures  = errors.New("tuf: data has no signatures")
-	ErrInvalid       = errors.New("tuf: signature verification failed")
-	ErrWrongMethod   = errors.New("tuf: invalid signature type")
-	ErrUnknownRole   = errors.New("tuf: unknown role")
-	ErrRoleThreshold = errors.New("tuf: valid signatures did not meet threshold")
-	ErrWrongType     = errors.New("tuf: meta file has wrong type")
+	ErrMissingKey   = errors.New("tuf: missing key")
+	ErrNoSignatures = errors.New("tuf: data has no signatures")
+	ErrInvalid      = errors.New("tuf: signature verification failed")
+	ErrWrongMethod  = errors.New("tuf: invalid signature type")
+	ErrUnknownRole  = errors.New("tuf: unknown role")
+	ErrWrongType    = errors.New("tuf: meta file has wrong type")
 )
 
 type signedMeta struct {
@@ -66,7 +65,7 @@ func VerifyRoot(s *data.Signed, minVersion int, keys map[string]data.PublicKey) 
 		// threshold of 1 so return on first success
 		return verifyMeta(s, "root", minVersion)
 	}
-	return ErrRoleThreshold
+	return ErrRoleThreshold{}
 }
 
 func Verify(s *data.Signed, role string, minVersion int, db *keys.KeyDB) error {
@@ -117,7 +116,7 @@ func VerifySignatures(s *data.Signed, role string, db *keys.KeyDB) error {
 	}
 
 	if roleData.Threshold < 1 {
-		return ErrRoleThreshold
+		return ErrRoleThreshold{}
 	}
 	logrus.Debugf("%s role has key IDs: %s", role, strings.Join(roleData.KeyIDs, ","))
 
@@ -158,7 +157,7 @@ func VerifySignatures(s *data.Signed, role string, db *keys.KeyDB) error {
 
 	}
 	if len(valid) < roleData.Threshold {
-		return ErrRoleThreshold
+		return ErrRoleThreshold{}
 	}
 
 	return nil

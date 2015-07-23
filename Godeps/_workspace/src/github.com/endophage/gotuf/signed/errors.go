@@ -21,3 +21,9 @@ type ErrLowVersion struct {
 func (e ErrLowVersion) Error() string {
 	return fmt.Sprintf("version %d is lower than current version %d", e.Actual, e.Current)
 }
+
+type ErrRoleThreshold struct{}
+
+func (e ErrRoleThreshold) Error() string {
+	return "valid signatures did not meet threshold"
+}
