@@ -135,6 +135,8 @@ RUN cd /mpkg/boot2dockeriso.pkg && \
 
 # dockerquickstartterminalapp.pkg
 RUN cd /mpkg/dockerquickstartterminalapp.pkg && \
+  cd Scripts && find . | cpio -o --format odc | gzip -c > ../Scripts.bin && cd .. && \
+  rm -r Scripts && mv Scripts.bin Scripts && \
 	mkdir ./rootfs && \
 	cd ./rootfs && \
 	mv /mpkg/Docker\ Quickstart\ Terminal.app . && \
