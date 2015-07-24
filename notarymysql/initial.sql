@@ -16,3 +16,19 @@ CREATE TABLE `timestamp_keys` (
 	`public` blob NOT NULL,
 	PRIMARY KEY (`gun`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `private_keys`;
+CREATE TABLE `private_keys` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`created_at` datetime NOT NULL,
+	`updated_at` datetime NOT NULL,
+	`deleted_at` datetime NOT NULL,
+	`key_id`  varchar(255) NOT NULL,
+	`encryption`  varchar(255) NOT NULL,
+	`algorithm`  varchar(50) NOT NULL,
+	`public`  blob NOT NULL,
+	`private`  longblob NOT NULL,
+	PRIMARY KEY (`id`),
+	UNIQUE (`key_id`),
+	UNIQUE (`key_id`,`encryption`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

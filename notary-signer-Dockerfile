@@ -29,4 +29,4 @@ RUN go install github.com/docker/notary/cmd/notary-signer
 
 EXPOSE 4443
 
-ENTRYPOINT notary-signer -cert /go/src/github.com/docker/notary/fixtures/notary-signer.crt -key /go/src/github.com/docker/notary/fixtures/notary-signer.key -debug -pkcs11 $LIBDIR/libsofthsm2.so -pin 1234
+ENTRYPOINT notary-signer -dburl "dockercondemo:dockercondemo@tcp(notarymysql:3306)/dockercondemo" -cert /go/src/github.com/docker/notary/fixtures/notary-signer.crt -key /go/src/github.com/docker/notary/fixtures/notary-signer.key -debug -pkcs11 $LIBDIR/libsofthsm2.so -pin 1234

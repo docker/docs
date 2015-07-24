@@ -3,6 +3,7 @@ package main
 import (
 	"crypto/rand"
 	"crypto/tls"
+	"database/sql"
 	_ "expvar"
 	"flag"
 	"log"
@@ -19,6 +20,7 @@ import (
 	"github.com/docker/notary/signer/api"
 	"github.com/docker/notary/trustmanager"
 	"github.com/endophage/gotuf/data"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/miekg/pkcs11"
 
 	pb "github.com/docker/notary/proto"
@@ -28,14 +30,16 @@ const (
 	_Addr      = ":4444"
 	_RpcAddr   = ":7899"
 	_DebugAddr = "localhost:8080"
+	_DBType    = "mysql"
 )
 
 var debug bool
-var certFile, keyFile, pkcs11Lib, pin string
+var certFile, keyFile, pkcs11Lib, pin, dbURL string
 
 func init() {
 	flag.StringVar(&certFile, "cert", "", "Intermediate certificates")
 	flag.StringVar(&keyFile, "key", "", "Private key file")
+	flag.StringVar(&dbURL, "dburl", "", "URL of the database")
 	flag.StringVar(&pkcs11Lib, "pkcs11", "", "enables HSM mode and uses the provided pkcs11 library path")
 	flag.StringVar(&pin, "pin", "", "the PIN to use for the HSM")
 	flag.BoolVar(&debug, "debug", false, "show the version and exit")
@@ -89,7 +93,15 @@ func main() {
 		cryptoServices[data.RSAKey] = api.NewRSAHardwareCryptoService(ctx, session)
 	}
 
-	keyStore := trustmanager.NewKeyMemoryStore(passphraseRetriever)
+	dbSQL, err := sql.Open(_DBType, dbURL)
+	if err != nil {
+		log.Fatalf("failed to open the database: %s, %v", dbURL, err)
+	}
+
+	keyStore, err := trustmanager.NewKeyDBStore(passphraseRetriever, _DBType, dbSQL)
+	if err != nil {
+		log.Fatalf("failed to create a new keydbstore: %v", err)
+	}
 	cryptoService := cryptoservice.NewCryptoService("", keyStore)
 
 	cryptoServices[data.ED25519Key] = cryptoService
