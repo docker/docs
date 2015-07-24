@@ -23,7 +23,7 @@ type KeyDBStore struct {
 // GormPrivateKey represents a PrivateKey in the database
 type GormPrivateKey struct {
 	gorm.Model
-	keyID      string `gorm:"not null;unique_index"`
+	KeyID      string `gorm:"not null;unique_index"`
 	Encryption string `gorm:"type:varchar(50);not null"`
 	Algorithm  string `gorm:"not null"`
 	Public     []byte `gorm:"not null"`
@@ -72,7 +72,7 @@ func (s *KeyDBStore) AddKey(name, alias string, privKey data.PrivateKey) error {
 	encryptedPrivKeyStr := encryptedKey.FullSerialize()
 
 	gormPrivKey := GormPrivateKey{
-		keyID:      privKey.ID(),
+		KeyID:      privKey.ID(),
 		Encryption: string(gojose.PBES2_HS512_A256KW),
 		Algorithm:  privKey.Algorithm().String(),
 		Public:     privKey.Public(),
@@ -105,7 +105,7 @@ func (s *KeyDBStore) GetKey(name string) (data.PrivateKey, string, error) {
 
 	// Retrieve the GORM private key from the database
 	dbPrivateKey := GormPrivateKey{}
-	if s.db.Where(&GormPrivateKey{keyID: name}).First(&dbPrivateKey).RecordNotFound() {
+	if s.db.Where(&GormPrivateKey{KeyID: name}).First(&dbPrivateKey).RecordNotFound() {
 		return nil, "", ErrKeyNotFound{}
 	}
 
@@ -142,7 +142,7 @@ func (s *KeyDBStore) RemoveKey(name string) error {
 
 	// Retrieve the GORM private key from the database
 	dbPrivateKey := GormPrivateKey{}
-	if s.db.Where(&GormPrivateKey{keyID: name}).First(&dbPrivateKey).RecordNotFound() {
+	if s.db.Where(&GormPrivateKey{KeyID: name}).First(&dbPrivateKey).RecordNotFound() {
 		return ErrKeyNotFound{}
 	}
 

@@ -2,10 +2,13 @@ package main
 
 import (
 	"crypto/rand"
+	"crypto/sha256"
 	"crypto/tls"
 	"database/sql"
+	"errors"
 	_ "expvar"
 	"flag"
+	"io/ioutil"
 	"log"
 	"net"
 	"net/http"
@@ -46,9 +49,15 @@ func init() {
 }
 
 func passphraseRetriever(keyName, alias string, createNew bool, attempts int) (passphrase string, giveup bool, err error) {
+	privKeyContent, err := ioutil.ReadFile(keyFile)
+	if err != nil {
+		return "", false, errors.New("error while reading the TLS private key")
+	}
 
-	//TODO(mccauley) Read from config once we have locked keys in notary-signer
-	return "", false, nil
+	privKeyHash := sha256.Sum256(privKeyContent)
+	passphrase = string(privKeyHash[:])
+
+	return passphrase, false, nil
 }
 
 func main() {

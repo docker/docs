@@ -22,7 +22,7 @@ CREATE TABLE `private_keys` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
 	`created_at` datetime NOT NULL,
 	`updated_at` datetime NOT NULL,
-	`deleted_at` datetime NOT NULL,
+	`deleted_at` datetime DEFAULT NULL,
 	`key_id`  varchar(255) NOT NULL,
 	`encryption`  varchar(255) NOT NULL,
 	`algorithm`  varchar(50) NOT NULL,

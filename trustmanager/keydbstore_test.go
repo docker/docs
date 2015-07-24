@@ -3,7 +3,6 @@ package trustmanager
 import (
 	"crypto/rand"
 	"database/sql"
-	"fmt"
 	"io/ioutil"
 	"os"
 	"testing"
@@ -36,7 +35,6 @@ func TestCreateRead(t *testing.T) {
 
 	// Test writing new key in database/cache
 	err = dbStore.AddKey("", "", testKey)
-	fmt.Println(err)
 	assert.NoError(t, err)
 
 	// Test retrieval of key from DB
@@ -54,6 +52,36 @@ func TestCreateRead(t *testing.T) {
 	retrKey, _, err = dbStore.GetKey(testKey.ID())
 	assert.NoError(t, err)
 	assert.Equal(t, retrKey, testKey)
+}
+
+func TestDoubleCreate(t *testing.T) {
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	defer os.RemoveAll(tempBaseDir)
+
+	testKey, err := GenerateECDSAKey(rand.Reader)
+	assert.NoError(t, err)
+
+	anotherTestKey, err := GenerateECDSAKey(rand.Reader)
+	assert.NoError(t, err)
+
+	// We are using SQLite for the tests
+	db, err := sql.Open("sqlite3", tempBaseDir+"test_db")
+	assert.NoError(t, err)
+
+	// Create a new KeyDB store
+	dbStore, err := NewKeyDBStore(retriever, "sqlite3", db)
+	assert.NoError(t, err)
+
+	// Ensure that the private_key table exists
+	dbStore.db.CreateTable(&GormPrivateKey{})
+
+	// Test writing new key in database/cache
+	err = dbStore.AddKey("", "", testKey)
+	assert.NoError(t, err)
+
+	// Test writing new key succeeds
+	err = dbStore.AddKey("", "", anotherTestKey)
+	assert.NoError(t, err)
 }
 
 func TestCreateDelete(t *testing.T) {
@@ -76,7 +104,6 @@ func TestCreateDelete(t *testing.T) {
 
 	// Test writing new key in database/cache
 	err = dbStore.AddKey("", "", testKey)
-	fmt.Println(err)
 	assert.NoError(t, err)
 
 	// Test deleting the key from the db
