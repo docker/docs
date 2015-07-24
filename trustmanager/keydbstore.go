@@ -23,11 +23,11 @@ type KeyDBStore struct {
 // GormPrivateKey represents a PrivateKey in the database
 type GormPrivateKey struct {
 	gorm.Model
-	KeyID      string `gorm:"not null;unique_index"`
-	Encryption string `gorm:"type:varchar(50);not null"`
-	Algorithm  string `gorm:"not null"`
-	Public     []byte `gorm:"not null"`
-	Private    string `gorm:"not null"`
+	KeyID      string `sql:"not null;unique"`
+	Encryption string `sql:"not null"`
+	Algorithm  string `sql:"not null"`
+	Public     []byte `sql:"not null"`
+	Private    string `sql:"not null"`
 }
 
 // TableName sets a specific table name for our GormPrivateKey

@@ -79,6 +79,10 @@ func TestDoubleCreate(t *testing.T) {
 	err = dbStore.AddKey("", "", testKey)
 	assert.NoError(t, err)
 
+	// Test writing the same key in the database. Should fail.
+	err = dbStore.AddKey("", "", testKey)
+	assert.Error(t, err, "failed to add private key to database:")
+
 	// Test writing new key succeeds
 	err = dbStore.AddKey("", "", anotherTestKey)
 	assert.NoError(t, err)
