@@ -18,3 +18,8 @@ Docker on Mac OS X and Windows, including:
 Full documentation [is available
 here](https://docs.docker.com/installation/mac/).
 
+## License 
+
+Docker Toolbox code is licensed under the Apache License, Version 2.0. See [LICENSE](https://github.com/docker/toolbox/blob/master/LICENSE)for the full license text. 
+
+Docker Toolbox Logo © Docker, Inc. 2015.  All rights reserved; not licensed for third party use.
