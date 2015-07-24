@@ -6,6 +6,7 @@ import (
 	"github.com/Sirupsen/logrus"
 	"github.com/endophage/gotuf/data"
 	"github.com/go-sql-driver/mysql"
+	"github.com/jinzhu/gorm"
 )
 
 // MySQLStorage implements a versioned store using a relational database.
@@ -27,12 +28,14 @@ import (
 // ) DEFAULT CHARSET=utf8;
 type MySQLStorage struct {
 	sql.DB
+	gdb *gorm.DB
 }
 
 // NewMySQLStorage is a convenience method to create a MySQLStorage
 func NewMySQLStorage(db *sql.DB) *MySQLStorage {
 	return &MySQLStorage{
-		DB: *db,
+		DB:  *db,
+		gdb: gorm.Open("mysql", db.DB),
 	}
 }
 
@@ -174,4 +177,31 @@ func (db *MySQLStorage) SetTimestampKey(gun string, algorithm data.KeyAlgorithm,
 		return err
 	}
 	return nil
+}
+
+func (db *MySQLStorage) GetPrivateKey(keyID string) (algorithm data.KeyAlgorithm, encryption string, public, private []byte, err error) {
+	privateKey := PrivateKey{}
+	if db.gdb.Where("keyId = ?", keyID).First(&privateKey).RecordNotFound() {
+		return "", nil, nil, ErrNoKey{}
+	}
+	return privateKey.Algorithm, privateKey.Encryption, privateKey.Public, privateKey.Private, nil
+}
+
+func (db *MySQLStorage) SetPrivateKey(keyID string, algorithm data.KeyAlgorithm, encryption string, public, private []byte) error {
+	privateKey := PrivateKey{
+		KeyID:      keyID,
+		Encryption: encryption,
+		Algorithm:  algorithm.String(),
+		Public:     public,
+		Private:    private,
+	}
+}
+
+type PrivateKey struct {
+	gorm.Model
+	keyID      string `gorm:"not null;unique_index"`
+	Encryption string `gorm:"type:varchar(50);not null"`
+	Algorithm  string `gorm:"not null"`
+	Public     []byte `gorm:"not null"`
+	Private    []byte `gorm:"not null"`
 }

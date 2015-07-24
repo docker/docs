@@ -11,3 +11,8 @@ type MetaStore interface {
 	GetTimestampKey(gun string) (algorithm data.KeyAlgorithm, public []byte, err error)
 	SetTimestampKey(gun string, algorithm data.KeyAlgorithm, public []byte) error
 }
+
+type PrivateKeyStore interface {
+	GetPrivateKey(keyID string) (algorithm data.KeyAlgorithm, public []byte, private []byte, err error)
+	SetPrivateKey(keyID string, algorithm data.KeyAlgorithm, public, private []byte) error
+}
