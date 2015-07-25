@@ -176,7 +176,7 @@ func GetTimestampKeyHandler(ctx context.Context, w http.ResponseWriter, r *http.
 
 	key, err := timestamp.GetOrCreateTimestampKey(gun, store, crypto, data.ED25519Key)
 	if err != nil {
-		logrus.Debugf("[Notary Server] 500 GET timestamp key: %s", gun)
+		logrus.Debugf("[Notary Server] 500 GET timestamp key for %s: %v", gun, err)
 		return errors.ErrUnknown.WithDetail(err)
 	}
 
