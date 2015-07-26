@@ -6,28 +6,36 @@ import (
 	"sync"
 
 	"github.com/docker/notary/pkg/passphrase"
+	jose "github.com/dvsekhvalnov/jose2go"
 	"github.com/endophage/gotuf/data"
 	"github.com/jinzhu/gorm"
-	gojose "github.com/square/go-jose"
+)
+
+// Constants
+const (
+	EncryptionAlg = jose.A256GCM
+	KeywrapAlg    = jose.PBES2_HS256_A128KW
 )
 
 // KeyDBStore persists and manages private keys on a SQL database
 type KeyDBStore struct {
 	sync.Mutex
-	db         gorm.DB
-	passphrase string
-	encrypter  gojose.Encrypter
-	cachedKeys map[string]data.PrivateKey
+	db               gorm.DB
+	defaultPassAlias string
+	retriever        passphrase.Retriever
+	cachedKeys       map[string]data.PrivateKey
 }
 
 // GormPrivateKey represents a PrivateKey in the database
 type GormPrivateKey struct {
 	gorm.Model
-	KeyID      string `sql:"not null;unique"`
-	Encryption string `sql:"not null"`
-	Algorithm  string `sql:"not null"`
-	Public     []byte `sql:"not null"`
-	Private    string `sql:"not null"`
+	KeyID           string `sql:"not null;unique;index:key_id_idx"`
+	EncryptionAlg   string `sql:"not null"`
+	KeywrapAlg      string `sql:"not null"`
+	Algorithm       string `sql:"not null"`
+	PassphraseAlias string `sql:"not null"`
+	Public          string `sql:"not null"`
+	Private         string `sql:"not null"`
 }
 
 // TableName sets a specific table name for our GormPrivateKey
@@ -36,47 +44,40 @@ func (g GormPrivateKey) TableName() string {
 }
 
 // NewKeyDBStore returns a new KeyDBStore backed by a SQL database
-func NewKeyDBStore(passphraseRetriever passphrase.Retriever, dbType string, dbSQL *sql.DB) (*KeyDBStore, error) {
+func NewKeyDBStore(passphraseRetriever passphrase.Retriever, defaultPassAlias, dbType string, dbSQL *sql.DB) (*KeyDBStore, error) {
 	cachedKeys := make(map[string]data.PrivateKey)
-
-	// Retreive the passphrase that will be used to encrypt the keys
-	passphrase, _, err := passphraseRetriever("", "", false, 0)
-	if err != nil {
-		return nil, err
-	}
-
-	// Setup our encrypted object
-	encrypter, err := gojose.NewEncrypter(gojose.A256GCMKW, gojose.A256GCM, []byte(passphrase))
-	if err != nil {
-		return nil, err
-	}
 
 	// Open a connection to our database
 	db, _ := gorm.Open(dbType, dbSQL)
 
 	return &KeyDBStore{db: db,
-		passphrase: passphrase,
-		encrypter:  encrypter,
-		cachedKeys: cachedKeys}, nil
+		defaultPassAlias: defaultPassAlias,
+		retriever:        passphraseRetriever,
+		cachedKeys:       cachedKeys}, nil
 }
 
 // AddKey stores the contents of a private key. Both name and alias are ignored,
 // we always use Key IDs as name, and don't support aliases
 func (s *KeyDBStore) AddKey(name, alias string, privKey data.PrivateKey) error {
-	encryptedKey, err := s.encrypter.Encrypt(privKey.Private())
+
+	passphrase, _, err := s.retriever(privKey.ID(), s.defaultPassAlias, false, 1)
 	if err != nil {
 		return err
 	}
 
-	// Encrypt the private key material
-	encryptedPrivKeyStr := encryptedKey.FullSerialize()
+	encryptedKey, err := jose.Encrypt(string(privKey.Private()), KeywrapAlg, EncryptionAlg, passphrase)
+	if err != nil {
+		return err
+	}
 
 	gormPrivKey := GormPrivateKey{
-		KeyID:      privKey.ID(),
-		Encryption: string(gojose.PBES2_HS512_A256KW),
-		Algorithm:  privKey.Algorithm().String(),
-		Public:     privKey.Public(),
-		Private:    encryptedPrivKeyStr}
+		KeyID:           privKey.ID(),
+		EncryptionAlg:   EncryptionAlg,
+		KeywrapAlg:      KeywrapAlg,
+		PassphraseAlias: s.defaultPassAlias,
+		Algorithm:       privKey.Algorithm().String(),
+		Public:          string(privKey.Public()),
+		Private:         encryptedKey}
 
 	// Add encrypted private key to the database
 	s.db.Create(&gormPrivKey)
@@ -109,18 +110,20 @@ func (s *KeyDBStore) GetKey(name string) (data.PrivateKey, string, error) {
 		return nil, "", ErrKeyNotFound{}
 	}
 
-	// Decrypt private bytes from the gorm key
-	encryptedPrivKeyJWE, err := gojose.ParseEncrypted(dbPrivateKey.Private)
+	// Get the passphrase to use for this key
+	passphrase, _, err := s.retriever(dbPrivateKey.KeyID, dbPrivateKey.PassphraseAlias, false, 1)
 	if err != nil {
 		return nil, "", err
 	}
-	decryptedPrivKeyBytes, err := encryptedPrivKeyJWE.Decrypt([]byte(s.passphrase))
+
+	// Decrypt private bytes from the gorm key
+	decryptedPrivKey, _, err := jose.Decode(dbPrivateKey.Private, passphrase)
 	if err != nil {
 		return nil, "", err
 	}
 
 	// Create a new PrivateKey with unencrypted bytes
-	privKey := data.NewPrivateKey(data.KeyAlgorithm(dbPrivateKey.Algorithm), dbPrivateKey.Public, decryptedPrivKeyBytes)
+	privKey := data.NewPrivateKey(data.KeyAlgorithm(dbPrivateKey.Algorithm), []byte(dbPrivateKey.Public), []byte(decryptedPrivKey))
 
 	// Add the key to cache
 	s.cachedKeys[privKey.ID()] = privKey
@@ -148,6 +151,53 @@ func (s *KeyDBStore) RemoveKey(name string) error {
 
 	// Delete the key from the database
 	s.db.Delete(&dbPrivateKey)
+
+	return nil
+}
+
+// RotateKeyPassphrase rotates the key-encryption-key
+func (s *KeyDBStore) RotateKeyPassphrase(name, newPassphraseAlias string) error {
+	// Retrieve the GORM private key from the database
+	dbPrivateKey := GormPrivateKey{}
+	if s.db.Where(&GormPrivateKey{KeyID: name}).First(&dbPrivateKey).RecordNotFound() {
+		return ErrKeyNotFound{}
+	}
+
+	// Get the current passphrase to use for this key
+	passphrase, _, err := s.retriever(dbPrivateKey.KeyID, dbPrivateKey.PassphraseAlias, false, 1)
+	if err != nil {
+		return err
+	}
+
+	fmt.Println("Got old passphrase: ", passphrase)
+
+	// Decrypt private bytes from the gorm key
+	decryptedPrivKey, _, err := jose.Decode(dbPrivateKey.Private, passphrase)
+	if err != nil {
+		return err
+	}
+
+	// Get the new passphrase to use for this key
+	newPassphrase, _, err := s.retriever(dbPrivateKey.KeyID, newPassphraseAlias, false, 1)
+	if err != nil {
+		return err
+	}
+
+	fmt.Println("new passphrase: ", newPassphrase)
+
+	// Re-encrypt the private bytes with the new passphrase
+	newEncryptedKey, err := jose.Encrypt(decryptedPrivKey, KeywrapAlg, EncryptionAlg, newPassphrase)
+	if err != nil {
+		return err
+	}
+	fmt.Println("encrypted key: ", newEncryptedKey)
+
+	// Update the database object
+	dbPrivateKey.Private = newEncryptedKey
+	dbPrivateKey.PassphraseAlias = newPassphraseAlias
+	s.db.Save(dbPrivateKey)
+
+	fmt.Printf("DB Private key: %v", dbPrivateKey)
 
 	return nil
 }

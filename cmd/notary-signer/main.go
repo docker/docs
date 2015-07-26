@@ -107,7 +107,7 @@ func main() {
 		log.Fatalf("failed to open the database: %s, %v", dbURL, err)
 	}
 
-	keyStore, err := trustmanager.NewKeyDBStore(passphraseRetriever, _DBType, dbSQL)
+	keyStore, err := trustmanager.NewKeyDBStore(passphraseRetriever, "", _DBType, dbSQL)
 	if err != nil {
 		log.Fatalf("failed to create a new keydbstore: %v", err)
 	}
