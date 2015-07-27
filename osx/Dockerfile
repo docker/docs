@@ -26,21 +26,22 @@ RUN curl -fsSL -o /vbox.dmg http://download.virtualbox.org/virtualbox/$VBOX_VERS
 
 # Download the Docker parts
 
-ENV DOCKER_VERSION 1.7.1
-RUN curl -fsSL -o /docker.tgz https://get.docker.com/builds/Darwin/x86_64/docker-$DOCKER_VERSION.tgz
+ENV DOCKER_VERSION 1.8.0-rc1
+RUN curl -fsSL -o /docker https://test.docker.com/builds/Darwin/x86_64/docker-$DOCKER_VERSION
 
-ENV DOCKER_MACHINE_VERSION 0.3.1-rc1
+ENV DOCKER_MACHINE_VERSION 0.4.0-rc1
 RUN curl -fsSL -o /docker-machine https://github.com/docker/machine/releases/download/v$DOCKER_MACHINE_VERSION/docker-machine_darwin-amd64
 RUN chmod +x /docker-machine
 
-ENV DOCKER_COMPOSE_VERSION 1.3.1
+ENV DOCKER_COMPOSE_VERSION 1.4.0rc2
 RUN curl -fsSL -o /docker-compose https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-Darwin-x86_64
 RUN chmod +x /docker-compose
 
 ENV BOOT2DOCKER_ISO_VERSION $DOCKER_VERSION
-RUN curl -fsSL -o /boot2docker.iso https://github.com/boot2docker/boot2docker/releases/download/v${BOOT2DOCKER_ISO_VERSION}/boot2docker.iso
+# RUN curl -fsSL -o /boot2docker.iso https://github.com/boot2docker/boot2docker/releases/download/v${BOOT2DOCKER_ISO_VERSION}/boot2docker.iso
+RUN curl -fsSL -o /boot2docker-virtualbox.iso https://s3.amazonaws.com/docker-mcn/public/b2d-next/boot2docker-virtualbox.iso
 
-ENV KITEMATIC_VERSION 0.7.5
+ENV KITEMATIC_VERSION 0.8.0-rc1
 RUN curl -fsSL -o /kitematic.zip https://github.com/kitematic/kitematic/releases/download/v$KITEMATIC_VERSION/Kitematic-$KITEMATIC_VERSION-Mac.zip
 
 ENV INSTALLER_VERSION $DOCKER_VERSION
@@ -72,7 +73,8 @@ RUN cd /mpkg/vbox && \
 RUN cd /mpkg/docker.pkg && \
 	mkdir rootfs && \
 	cd rootfs && \
-	tar xvzf /docker.tgz && \
+  mkdir -p usr/local/bin && \
+  mv /docker usr/local/bin/ && \
   ls -al /usr/local/bin/ && \
 	find . | cpio -o --format odc | gzip -c > ../Payload && \
 	mkbom . ../Bom && \
@@ -120,9 +122,11 @@ RUN cd /mpkg/dockercompose.pkg && \
 
 # boot2dockeriso.pkg
 RUN cd /mpkg/boot2dockeriso.pkg && \
+  cd Scripts && find . | cpio -o --format odc | gzip -c > ../Scripts.bin && cd .. && \
+  rm -r Scripts && mv Scripts.bin Scripts && \
 	mkdir ./rootfs && \
 	cd ./rootfs && \
-	cp /boot2docker.iso . && \
+	cp /boot2docker-virtualbox.iso . && \
 	find . | cpio -o --format odc | gzip -c > ../Payload && \
 	mkbom . ../Bom && \
 	sed -i \
