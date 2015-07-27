@@ -19,8 +19,7 @@ done
 exit 0
 
 echo "Removing Applications..."
-rm -rf /Applications/Kitematic\ \(Beta\).app
-rm -rf /Applications/Docker\ Quickstart\ Terminal.app
+rm -rf /Applications/Docker
 
 echo "Removing docker binaries..."
 rm -f /usr/local/bin/docker
