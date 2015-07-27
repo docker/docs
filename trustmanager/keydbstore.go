@@ -186,14 +186,11 @@ func (s *KeyDBStore) RotateKeyPassphrase(name, newPassphraseAlias string) error 
 	if err != nil {
 		return err
 	}
-	fmt.Println("encrypted key: ", newEncryptedKey)
 
 	// Update the database object
 	dbPrivateKey.Private = newEncryptedKey
 	dbPrivateKey.PassphraseAlias = newPassphraseAlias
 	s.db.Save(dbPrivateKey)
-
-	fmt.Printf("DB Private key: %v", dbPrivateKey)
 
 	return nil
 }
