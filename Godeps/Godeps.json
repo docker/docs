@@ -62,6 +62,10 @@
 			"Rev": "fa567046d9b14f6aa788882a950d69651d230b21"
 		},
 		{
+			"ImportPath": "github.com/dvsekhvalnov/jose2go",
+			"Rev": "5307afb3bb6169b0f68cdf519a5964c843344441"
+		},
+		{
 			"ImportPath": "github.com/endophage/gotuf",
 			"Rev": "5f508200b262dc8f56362523f621417853192812"
 		},
@@ -141,10 +145,6 @@
 		{
 			"ImportPath": "github.com/spf13/viper",
 			"Rev": "be5ff3e4840cf692388bde7a057595a474ef379e"
-		},
-		{
-			"ImportPath": "github.com/square/go-jose",
-			"Rev": "3ea6cc42d49ecac21c46f2270a3a6abc8994970d"
 		},
 		{
 			"ImportPath": "github.com/stretchr/testify/assert",

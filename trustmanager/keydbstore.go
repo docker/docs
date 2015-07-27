@@ -169,8 +169,6 @@ func (s *KeyDBStore) RotateKeyPassphrase(name, newPassphraseAlias string) error 
 		return err
 	}
 
-	fmt.Println("Got old passphrase: ", passphrase)
-
 	// Decrypt private bytes from the gorm key
 	decryptedPrivKey, _, err := jose.Decode(dbPrivateKey.Private, passphrase)
 	if err != nil {
@@ -182,8 +180,6 @@ func (s *KeyDBStore) RotateKeyPassphrase(name, newPassphraseAlias string) error 
 	if err != nil {
 		return err
 	}
-
-	fmt.Println("new passphrase: ", newPassphrase)
 
 	// Re-encrypt the private bytes with the new passphrase
 	newEncryptedKey, err := jose.Encrypt(decryptedPrivKey, KeywrapAlg, EncryptionAlg, newPassphrase)
