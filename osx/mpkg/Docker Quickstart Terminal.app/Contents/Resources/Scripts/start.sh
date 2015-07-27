@@ -1,6 +1,5 @@
 #!/bin/bash
 
-ISO=$HOME/.docker/machine/cache/boot2docker.iso
 VM=docker-vm
 DOCKER_MACHINE=/usr/local/bin/docker-machine
 
@@ -12,12 +11,6 @@ unset DYLD_LIBRARY_PATH
 unset LD_LIBRARY_PATH
 
 clear
-
-mkdir -p ~/.docker/machine/cache
-if [ ! -f $ISO ]; then
-  cp /usr/local/share/boot2docker/boot2docker.iso $ISO
-fi
-
 
 machine=$($DOCKER_MACHINE ls -q | grep "^$VM$") || :
 if [ -z $machine ]; then
