@@ -5,6 +5,7 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/distribution/registry/api/errcode"
+	"github.com/docker/distribution/registry/api/v2"
 	"github.com/docker/distribution/registry/auth"
 	"github.com/endophage/gotuf/signed"
 	"github.com/gorilla/mux"
@@ -60,7 +61,7 @@ func (root *rootHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 				w.WriteHeader(http.StatusUnauthorized)
 				return
 			}
-			http.Error(w, err.Error(), http.StatusUnauthorized)
+			errcode.ServeJSON(w, v2.ErrorCodeUnauthorized)
 			return
 		}
 	}
