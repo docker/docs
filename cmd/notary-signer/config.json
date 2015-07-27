@@ -1,0 +1,18 @@
+{
+	"server": {
+		"http_addr": ":4444",
+		"grpc_addr": ":7899",
+		"cert_file": "./fixtures/notary-signer.crt",
+		"key_file": "./fixtures/notary-signer.key"
+	},
+	"crypto": {
+		"pkcslib": "/usr/local/lib/softhsm/libsofthsm2.so"
+	},
+	"logging": {
+		"level": 5
+	},
+	"storage": {
+		"backend": "mysql",
+		"db_url": "dockercondemo:dockercondemo@tcp(notarymysql:3306)/dockercondemo"
+	}
+}

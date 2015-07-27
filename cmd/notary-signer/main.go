@@ -11,6 +11,7 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"path/filepath"
 	"strings"
 
 	"google.golang.org/grpc"
@@ -25,36 +26,41 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/miekg/pkcs11"
 
+	"github.com/Sirupsen/logrus"
 	pb "github.com/docker/notary/proto"
+	"github.com/spf13/viper"
 )
 
 const (
-	_Addr            = ":4444"
-	_RpcAddr         = ":7899"
 	_DebugAddr       = "localhost:8080"
 	_DBType          = "mysql"
 	_EnvPrefix       = "NOTARY_SIGNER"
-	_DefaultAliasEnv = _EnvPrefix + "_DEFAULT_ALIAS"
+	_DefaultAliasEnv = "DEFAULT_ALIAS"
+	_PINCode         = "PIN"
 )
 
 var debug bool
-var certFile, keyFile, pkcs11Lib, pin, dbURL string
+var configFile string
 
 func init() {
-	flag.StringVar(&certFile, "cert", "", "Intermediate certificates")
-	flag.StringVar(&keyFile, "key", "", "Private key file")
-	flag.StringVar(&dbURL, "dburl", "", "URL of the database")
-	flag.StringVar(&pkcs11Lib, "pkcs11", "", "enables HSM mode and uses the provided pkcs11 library path")
-	flag.StringVar(&pin, "pin", "", "the PIN to use for the HSM")
+	// set default log level to Error
+	viper.SetDefault("logging", map[string]interface{}{"level": 2})
+
+	viper.SetEnvPrefix(_EnvPrefix)
+	viper.BindEnv(_DefaultAliasEnv)
+	viper.BindEnv(_PINCode)
+
+	// Setup flags
+	flag.StringVar(&configFile, "config", "", "Path to configuration file")
 	flag.BoolVar(&debug, "debug", false, "show the version and exit")
 }
 
 func passphraseRetriever(keyName, alias string, createNew bool, attempts int) (passphrase string, giveup bool, err error) {
-	envVar := _EnvPrefix + "_" + strings.ToUpper(alias)
-	passphrase = os.Getenv(envVar)
+	viper.BindEnv(alias)
+	passphrase = viper.GetString(strings.ToUpper(alias))
 
 	if passphrase == "" {
-		return "", false, errors.New("expected env variable to not be empty: " + envVar)
+		return "", false, errors.New("expected env variable to not be empty: " + alias)
 	}
 
 	return passphrase, false, nil
@@ -68,6 +74,24 @@ func main() {
 		go debugServer(_DebugAddr)
 	}
 
+	filename := filepath.Base(configFile)
+	ext := filepath.Ext(configFile)
+	configPath := filepath.Dir(configFile)
+
+	viper.SetConfigType(strings.TrimPrefix(ext, "."))
+	viper.SetConfigName(strings.TrimSuffix(filename, ext))
+	viper.AddConfigPath(configPath)
+	err := viper.ReadInConfig()
+	if err != nil {
+		logrus.Error("Viper Error: ", err.Error())
+		logrus.Error("Could not read config at ", configFile)
+		os.Exit(1)
+	}
+
+	logrus.SetLevel(logrus.Level(viper.GetInt("logging.level")))
+
+	certFile := viper.GetString("server.cert_file")
+	keyFile := viper.GetString("server.key_file")
 	if certFile == "" || keyFile == "" {
 		usage()
 		log.Fatalf("Certificate and key are mandatory")
@@ -90,24 +114,34 @@ func main() {
 
 	cryptoServices := make(signer.CryptoServiceIndex)
 
+	pin := viper.GetString(_PINCode)
+	pkcs11Lib := viper.GetString("crypto.pkcs11lib")
 	if pkcs11Lib != "" {
 		if pin == "" {
 			log.Fatalf("Using PIN is mandatory with pkcs11")
 		}
 
-		ctx, session := SetupHSMEnv(pkcs11Lib)
+		ctx, session := SetupHSMEnv(pkcs11Lib, pin)
 
 		defer cleanup(ctx, session)
 
 		cryptoServices[data.RSAKey] = api.NewRSAHardwareCryptoService(ctx, session)
 	}
 
-	dbSQL, err := sql.Open(_DBType, dbURL)
+	dbType := strings.ToLower(viper.GetString("storage.backend"))
+	dbURL := viper.GetString("storage.db_url")
+	if dbType != _DBType || dbURL == "" {
+		usage()
+		log.Fatalf("Currently only a MySQL database backend is supported.")
+	}
+	dbSQL, err := sql.Open(dbType, dbURL)
 	if err != nil {
 		log.Fatalf("failed to open the database: %s, %v", dbURL, err)
 	}
 
-	keyStore, err := trustmanager.NewKeyDBStore(passphraseRetriever, _DefaultAliasEnv, _DBType, dbSQL)
+	defaultAlias := viper.GetString(_DefaultAliasEnv)
+	logrus.Debug("Default Alias: ", defaultAlias)
+	keyStore, err := trustmanager.NewKeyDBStore(passphraseRetriever, defaultAlias, dbType, dbSQL)
 	if err != nil {
 		log.Fatalf("failed to create a new keydbstore: %v", err)
 	}
@@ -124,7 +158,8 @@ func main() {
 	pb.RegisterKeyManagementServer(grpcServer, kms)
 	pb.RegisterSignerServer(grpcServer, ss)
 
-	lis, err := net.Listen("tcp", _RpcAddr)
+	rpcAddr := viper.GetString("server.grpc_addr")
+	lis, err := net.Listen("tcp", rpcAddr)
 	if err != nil {
 		log.Fatalf("failed to listen %v", err)
 	}
@@ -134,16 +169,20 @@ func main() {
 	}
 	go grpcServer.Serve(creds.NewListener(lis))
 
+	httpAddr := viper.GetString("server.http_addr")
+	if httpAddr == "" {
+		log.Fatalf("Server address is required")
+	}
 	//HTTP server setup
 	server := http.Server{
-		Addr:      _Addr,
+		Addr:      httpAddr,
 		Handler:   api.Handlers(cryptoServices),
 		TLSConfig: tlsConfig,
 	}
 
 	if debug {
-		log.Println("[Notary-signer RPC Server] : Listening on", _RpcAddr)
-		log.Println("[Notary-signer Server] : Listening on", _Addr)
+		log.Println("[Notary-signer RPC Server] : Listening on", rpcAddr)
+		log.Println("[Notary-signer Server] : Listening on", httpAddr)
 	}
 
 	err = server.ListenAndServeTLS(certFile, keyFile)
@@ -168,7 +207,7 @@ func debugServer(addr string) {
 }
 
 // SetupHSMEnv is a method that depends on the existences
-func SetupHSMEnv(libraryPath string) (*pkcs11.Ctx, pkcs11.SessionHandle) {
+func SetupHSMEnv(libraryPath, pin string) (*pkcs11.Ctx, pkcs11.SessionHandle) {
 	p := pkcs11.New(libraryPath)
 
 	if p == nil {
@@ -195,7 +234,6 @@ func SetupHSMEnv(libraryPath string) (*pkcs11.Ctx, pkcs11.SessionHandle) {
 		log.Fatalf("Failed to Start Session with HSM %s", err)
 	}
 
-	// (diogo): Configure PIN from config file
 	if err = p.Login(session, pkcs11.CKU_USER, pin); err != nil {
 		log.Fatalf("User PIN %s\n", err.Error())
 	}
