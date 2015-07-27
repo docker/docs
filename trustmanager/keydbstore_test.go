@@ -13,15 +13,15 @@ import (
 )
 
 var retriever = func(string, string, bool, int) (string, bool, error) {
-	return "passphrase-1", false, nil
+	return "passphrase_1", false, nil
 }
 
 var anotherRetriever = func(keyName, alias string, createNew bool, attempts int) (string, bool, error) {
 	switch alias {
-	case "alias-1":
-		return "passphrase-1", false, nil
-	case "alias-2":
-		return "passphrase-2", false, nil
+	case "alias_1":
+		return "passphrase_1", false, nil
+	case "alias_2":
+		return "passphrase_2", false, nil
 	}
 	return "", false, errors.New("password alias no found")
 }
@@ -142,7 +142,7 @@ func TestKeyRotation(t *testing.T) {
 	assert.NoError(t, err)
 
 	// Create a new KeyDB store
-	dbStore, err := NewKeyDBStore(anotherRetriever, "alias-1", "sqlite3", db)
+	dbStore, err := NewKeyDBStore(anotherRetriever, "alias_1", "sqlite3", db)
 	assert.NoError(t, err)
 
 	// Ensure that the private_key table exists
@@ -153,10 +153,10 @@ func TestKeyRotation(t *testing.T) {
 	assert.NoError(t, err)
 
 	// Try rotating the key to alias-2
-	err = dbStore.RotateKeyPassphrase(testKey.ID(), "alias-2")
+	err = dbStore.RotateKeyPassphrase(testKey.ID(), "alias_2")
 	assert.NoError(t, err)
 
 	// Try rotating the key to alias-3
-	err = dbStore.RotateKeyPassphrase(testKey.ID(), "alias-3")
+	err = dbStore.RotateKeyPassphrase(testKey.ID(), "alias_3")
 	assert.Error(t, err, "password alias no found")
 }

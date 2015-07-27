@@ -2,17 +2,16 @@ package main
 
 import (
 	"crypto/rand"
-	"crypto/sha256"
 	"crypto/tls"
 	"database/sql"
 	"errors"
 	_ "expvar"
 	"flag"
-	"io/ioutil"
 	"log"
 	"net"
 	"net/http"
 	"os"
+	"strings"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
@@ -30,10 +29,12 @@ import (
 )
 
 const (
-	_Addr      = ":4444"
-	_RpcAddr   = ":7899"
-	_DebugAddr = "localhost:8080"
-	_DBType    = "mysql"
+	_Addr            = ":4444"
+	_RpcAddr         = ":7899"
+	_DebugAddr       = "localhost:8080"
+	_DBType          = "mysql"
+	_EnvPrefix       = "NOTARY_SIGNER"
+	_DefaultAliasEnv = _EnvPrefix + "_DEFAULT_ALIAS"
 )
 
 var debug bool
@@ -49,13 +50,12 @@ func init() {
 }
 
 func passphraseRetriever(keyName, alias string, createNew bool, attempts int) (passphrase string, giveup bool, err error) {
-	privKeyContent, err := ioutil.ReadFile(keyFile)
-	if err != nil {
-		return "", false, errors.New("error while reading the TLS private key")
-	}
+	envVar := _EnvPrefix + "_" + strings.ToUpper(alias)
+	passphrase = os.Getenv(envVar)
 
-	privKeyHash := sha256.Sum256(privKeyContent)
-	passphrase = string(privKeyHash[:])
+	if passphrase == "" {
+		return "", false, errors.New("expected env variable to not be empty: " + envVar)
+	}
 
 	return passphrase, false, nil
 }
@@ -107,7 +107,7 @@ func main() {
 		log.Fatalf("failed to open the database: %s, %v", dbURL, err)
 	}
 
-	keyStore, err := trustmanager.NewKeyDBStore(passphraseRetriever, "", _DBType, dbSQL)
+	keyStore, err := trustmanager.NewKeyDBStore(passphraseRetriever, _DefaultAliasEnv, _DBType, dbSQL)
 	if err != nil {
 		log.Fatalf("failed to create a new keydbstore: %v", err)
 	}
