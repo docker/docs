@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 ISO=$HOME/.docker/machine/cache/boot2docker.iso
 VM=docker-vm
 DOCKER_MACHINE=/usr/local/bin/docker-machine
