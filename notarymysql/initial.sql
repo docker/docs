@@ -32,5 +32,5 @@ CREATE TABLE `private_keys` (
 	`private`  blob NOT NULL,
 	PRIMARY KEY (`id`),
 	UNIQUE (`key_id`),
-	UNIQUE (`key_id`,`encryption`)
+	UNIQUE (`key_id`,`algorithm`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
