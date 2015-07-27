@@ -33,12 +33,22 @@
 			"Rev": "fed58bd2d3c096055c0e69c2fb86c9a4965d1b8b"
 		},
 		{
+			"ImportPath": "github.com/docker/distribution/digest",
+			"Comment": "v2.0.0-353-gfed58bd",
+			"Rev": "fed58bd2d3c096055c0e69c2fb86c9a4965d1b8b"
+		},
+		{
 			"ImportPath": "github.com/docker/distribution/health",
 			"Comment": "v2.0.0-353-gfed58bd",
 			"Rev": "fed58bd2d3c096055c0e69c2fb86c9a4965d1b8b"
 		},
 		{
 			"ImportPath": "github.com/docker/distribution/registry/api/errcode",
+			"Comment": "v2.0.0-353-gfed58bd",
+			"Rev": "fed58bd2d3c096055c0e69c2fb86c9a4965d1b8b"
+		},
+		{
+			"ImportPath": "github.com/docker/distribution/registry/api/v2",
 			"Comment": "v2.0.0-353-gfed58bd",
 			"Rev": "fed58bd2d3c096055c0e69c2fb86c9a4965d1b8b"
 		},
@@ -53,7 +63,17 @@
 			"Rev": "fed58bd2d3c096055c0e69c2fb86c9a4965d1b8b"
 		},
 		{
+			"ImportPath": "github.com/docker/docker/pkg/tarsum",
+			"Comment": "v1.4.1-775-g70fbd45",
+			"Rev": "70fbd45a5c88f6f39a07b04f81a07721bf5f3eed"
+		},
+		{
 			"ImportPath": "github.com/docker/docker/pkg/term",
+			"Comment": "v1.4.1-775-g70fbd45",
+			"Rev": "70fbd45a5c88f6f39a07b04f81a07721bf5f3eed"
+		},
+		{
+			"ImportPath": "github.com/docker/docker/vendor/src/code.google.com/p/go/src/pkg/archive/tar",
 			"Comment": "v1.4.1-775-g70fbd45",
 			"Rev": "70fbd45a5c88f6f39a07b04f81a07721bf5f3eed"
 		},
