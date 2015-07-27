@@ -32,11 +32,13 @@ func (s *KeyManagementServer) CreateKey(ctx context.Context, algorithm *pb.Algor
 	service := s.CryptoServices[keyAlgo]
 
 	if service == nil {
+		log.Println("[Notary-signer CreateKey] : unsupported algorithm: ", algorithm.Algorithm)
 		return nil, fmt.Errorf("algorithm %s not supported for create key", algorithm.Algorithm)
 	}
 
 	tufKey, err := service.Create("", keyAlgo)
 	if err != nil {
+		log.Println("[Notary-signer CreateKey] : failed to create key", err)
 		return nil, grpc.Errorf(codes.Internal, "Key creation failed")
 	}
 	log.Println("[Notary-signer CreateKey] : Created KeyID ", tufKey.ID())

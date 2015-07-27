@@ -38,12 +38,12 @@
 			"Rev": "fed58bd2d3c096055c0e69c2fb86c9a4965d1b8b"
 		},
 		{
-			"ImportPath": "github.com/docker/distribution/registry/auth",
+			"ImportPath": "github.com/docker/distribution/registry/api/errcode",
 			"Comment": "v2.0.0-353-gfed58bd",
 			"Rev": "fed58bd2d3c096055c0e69c2fb86c9a4965d1b8b"
 		},
 		{
-			"ImportPath": "github.com/docker/distribution/registry/api/errcode",
+			"ImportPath": "github.com/docker/distribution/registry/auth",
 			"Comment": "v2.0.0-353-gfed58bd",
 			"Rev": "fed58bd2d3c096055c0e69c2fb86c9a4965d1b8b"
 		},
@@ -62,8 +62,12 @@
 			"Rev": "fa567046d9b14f6aa788882a950d69651d230b21"
 		},
 		{
+			"ImportPath": "github.com/dvsekhvalnov/jose2go",
+			"Rev": "5307afb3bb6169b0f68cdf519a5964c843344441"
+		},
+		{
 			"ImportPath": "github.com/endophage/gotuf",
-			"Rev": "374908abc8af7e953a2813c5c2b3944ab625ca68"
+			"Rev": "5f508200b262dc8f56362523f621417853192812"
 		},
 		{
 			"ImportPath": "github.com/go-sql-driver/mysql",
@@ -87,6 +91,10 @@
 			"Rev": "76626ae9c91c4f2a10f34cad8ce83ea42c93bb75"
 		},
 		{
+			"ImportPath": "github.com/jinzhu/gorm",
+			"Rev": "82d726bbfd8cefbe2dcdc7f7f0484551c0d40433"
+		},
+		{
 			"ImportPath": "github.com/kr/pretty",
 			"Comment": "go.weekly.2011-12-22-18-gbc9499c",
 			"Rev": "bc9499caa0f45ee5edb2f0209fbd61fbf3d9018f"
@@ -96,9 +104,19 @@
 			"Rev": "6807e777504f54ad073ecef66747de158294b639"
 		},
 		{
+			"ImportPath": "github.com/lib/pq/hstore",
+			"Comment": "go1.0-cutoff-58-g0dad96c",
+			"Rev": "0dad96c0b94f8dee039aa40467f767467392a0af"
+		},
+		{
 			"ImportPath": "github.com/magiconair/properties",
 			"Comment": "v1.5.3",
 			"Rev": "624009598839a9432bd97bb75552389422357723"
+		},
+		{
+			"ImportPath": "github.com/mattn/go-sqlite3",
+			"Comment": "v1.0.0",
+			"Rev": "b4142c444a8941d0d92b0b7103a24df9cd815e42"
 		},
 		{
 			"ImportPath": "github.com/miekg/pkcs11",
@@ -129,16 +147,7 @@
 			"Rev": "be5ff3e4840cf692388bde7a057595a474ef379e"
 		},
 		{
-			"ImportPath": "github.com/stretchr/objx",
-			"Rev": "cbeaeb16a013161a98496fad62933b1d21786672"
-		},
-		{
 			"ImportPath": "github.com/stretchr/testify/assert",
-			"Comment": "v1.0-17-g089c718",
-			"Rev": "089c7181b8c728499929ff09b62d3fdd8df8adff"
-		},
-		{
-			"ImportPath": "github.com/stretchr/testify/mock",
 			"Comment": "v1.0-17-g089c718",
 			"Rev": "089c7181b8c728499929ff09b62d3fdd8df8adff"
 		},

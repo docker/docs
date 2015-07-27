@@ -5,64 +5,9 @@ import (
 	"strings"
 	"sync"
 
-	"fmt"
-
 	"github.com/docker/notary/pkg/passphrase"
 	"github.com/endophage/gotuf/data"
 )
-
-const (
-	keyExtension = "key"
-)
-
-// ErrAttemptsExceeded is returned when too many attempts have been made to decrypt a key
-type ErrAttemptsExceeded struct{}
-
-// ErrAttemptsExceeded is returned when too many attempts have been made to decrypt a key
-func (err ErrAttemptsExceeded) Error() string {
-	return "maximum number of passphrase attempts exceeded"
-}
-
-// ErrPasswordInvalid is returned when signing fails. It could also mean the signing
-// key file was corrupted, but we have no way to distinguish.
-type ErrPasswordInvalid struct{}
-
-// ErrPasswordInvalid is returned when signing fails. It could also mean the signing
-// key file was corrupted, but we have no way to distinguish.
-func (err ErrPasswordInvalid) Error() string {
-	return "password invalid, operation has failed."
-}
-
-// ErrKeyNotFound is returned when the keystore fails to retrieve a specific key.
-type ErrKeyNotFound struct {
-	KeyID string
-}
-
-// ErrKeyNotFound is returned when the keystore fails to retrieve a specific key.
-func (err ErrKeyNotFound) Error() string {
-	return fmt.Sprintf("signing key not found: %s", err.KeyID)
-}
-
-// KeyStore is a generic interface for private key storage
-type KeyStore interface {
-	LimitedFileStore
-
-	AddKey(name, alias string, privKey data.PrivateKey) error
-	GetKey(name string) (data.PrivateKey, string, error)
-	ListKeys() []string
-	RemoveKey(name string) error
-}
-
-type cachedKey struct {
-	alias string
-	key   data.PrivateKey
-}
-
-// PassphraseRetriever is a callback function that should retrieve a passphrase
-// for a given named key. If it should be treated as new passphrase (e.g. with
-// confirmation), createNew will be true. Attempts is passed in so that implementers
-// decide how many chances to give to a human, for example.
-type PassphraseRetriever func(keyId, alias string, createNew bool, attempts int) (passphrase string, giveup bool, err error)
 
 // KeyFileStore persists and manages private keys on disk
 type KeyFileStore struct {
