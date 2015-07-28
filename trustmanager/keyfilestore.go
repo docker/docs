@@ -112,10 +112,10 @@ func addKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, cached
 	}
 
 	attempts := 0
-	passphrase := ""
+	chosenPassphrase := ""
 	giveup := false
 	for {
-		passphrase, giveup, err = passphraseRetriever(name, alias, true, attempts)
+		chosenPassphrase, giveup, err = passphraseRetriever(name, alias, true, attempts)
 		if err != nil {
 			attempts++
 			continue
@@ -129,8 +129,8 @@ func addKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, cached
 		break
 	}
 
-	if passphrase != "" {
-		pemPrivKey, err = EncryptPrivateKey(privKey, passphrase)
+	if chosenPassphrase != "" {
+		pemPrivKey, err = EncryptPrivateKey(privKey, chosenPassphrase)
 		if err != nil {
 			return err
 		}
