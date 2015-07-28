@@ -175,15 +175,6 @@ func testInitRepo(t *testing.T, rootType data.KeyAlgorithm) {
 	}
 }
 
-type tufChange struct {
-	// Abbreviated because Go doesn't permit a field and method of the same name
-	Actn       int    `json:"action"`
-	Role       string `json:"role"`
-	ChangeType string `json:"type"`
-	ChangePath string `json:"path"`
-	Data       []byte `json:"data"`
-}
-
 // TestAddListTarget adds a target to the repo and confirms that the changelist
 // is updated correctly. Then it calls ListTargets and checks the return value.
 // Using ListTargets involves serving signed metadata files over the test's
@@ -248,11 +239,11 @@ func testAddListTarget(t *testing.T, rootType data.KeyAlgorithm) {
 	raw, err := ioutil.ReadFile(filepath.Join(changelistDirPath, clName))
 	assert.NoError(t, err, "could not read changelist file %s", clName)
 
-	c := &tufChange{}
+	c := &changelist.TufChange{}
 	err = json.Unmarshal(raw, c)
 	assert.NoError(t, err, "could not unmarshal changelist file %s", clName)
 
-	assert.EqualValues(t, 0, c.Actn)
+	assert.EqualValues(t, changelist.ActionCreate, c.Actn)
 	assert.Equal(t, "targets", c.Role)
 	assert.Equal(t, "target", c.ChangeType)
 	assert.Equal(t, "latest", c.ChangePath)
@@ -282,11 +273,11 @@ func testAddListTarget(t *testing.T, rootType data.KeyAlgorithm) {
 			raw, err := ioutil.ReadFile(filepath.Join(changelistDirPath, clName2))
 			assert.NoError(t, err, "could not read changelist file %s", clName2)
 
-			c := &tufChange{}
+			c := &changelist.TufChange{}
 			err = json.Unmarshal(raw, c)
 			assert.NoError(t, err, "could not unmarshal changelist file %s", clName2)
 
-			assert.EqualValues(t, 0, c.Actn)
+			assert.EqualValues(t, changelist.ActionCreate, c.Actn)
 			assert.Equal(t, "targets", c.Role)
 			assert.Equal(t, "target", c.ChangeType)
 			assert.Equal(t, "current", c.ChangePath)
@@ -514,11 +505,11 @@ func testPublish(t *testing.T, rootType data.KeyAlgorithm) {
 	raw, err := ioutil.ReadFile(filepath.Join(changelistDirPath, clName))
 	assert.NoError(t, err, "could not read changelist file %s", clName)
 
-	c := &tufChange{}
+	c := &changelist.TufChange{}
 	err = json.Unmarshal(raw, c)
 	assert.NoError(t, err, "could not unmarshal changelist file %s", clName)
 
-	assert.EqualValues(t, 0, c.Actn)
+	assert.EqualValues(t, changelist.ActionCreate, c.Actn)
 	assert.Equal(t, "targets", c.Role)
 	assert.Equal(t, "target", c.ChangeType)
 	assert.Equal(t, "latest", c.ChangePath)
@@ -548,11 +539,11 @@ func testPublish(t *testing.T, rootType data.KeyAlgorithm) {
 			raw, err := ioutil.ReadFile(filepath.Join(changelistDirPath, clName2))
 			assert.NoError(t, err, "could not read changelist file %s", clName2)
 
-			c := &tufChange{}
+			c := &changelist.TufChange{}
 			err = json.Unmarshal(raw, c)
 			assert.NoError(t, err, "could not unmarshal changelist file %s", clName2)
 
-			assert.EqualValues(t, 0, c.Actn)
+			assert.EqualValues(t, changelist.ActionCreate, c.Actn)
 			assert.Equal(t, "targets", c.Role)
 			assert.Equal(t, "target", c.ChangeType)
 			assert.Equal(t, "current", c.ChangePath)
