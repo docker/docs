@@ -6,7 +6,8 @@ RUN apt-get update && apt-get install -y \
 	&& rm -rf /var/lib/apt/lists/*
 
 RUN go get golang.org/x/tools/cmd/vet \
-	&& go get golang.org/x/tools/cmd/cover
+	&& go get golang.org/x/tools/cmd/cover \
+	&& go get github.com/tools/godep
 
 COPY . /go/src/github.com/docker/notary
 
