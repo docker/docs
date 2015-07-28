@@ -90,7 +90,7 @@ func tufAdd(cmd *cobra.Command, args []string) {
 	if err != nil {
 		fatalf(err.Error())
 	}
-	fmt.Println("Successfully added targets")
+	fmt.Printf("Addition of %s to %s staged for next publish.\n", targetName, gun)
 }
 
 func tufInit(cmd *cobra.Command, args []string) {
@@ -209,7 +209,7 @@ func tufRemove(cmd *cobra.Command, args []string) {
 	targetName := args[1]
 	parseConfig()
 
-	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, remoteTrustServer,
+	repo, err := notaryclient.NewNotaryRepository(trustDir, gun, remoteTrustServer,
 		getTransport(), retriever)
 	if err != nil {
 		fatalf(err.Error())
@@ -218,6 +218,8 @@ func tufRemove(cmd *cobra.Command, args []string) {
 	if err != nil {
 		fatalf(err.Error())
 	}
+
+	fmt.Printf("Removal of %s from %s staged for next publish.\n", targetName, gun)
 }
 
 func verify(cmd *cobra.Command, args []string) {
