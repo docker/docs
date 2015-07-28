@@ -18,31 +18,38 @@ import (
 )
 
 func init() {
-	cmdKeys.AddCommand(cmdKeysRemoveRootKey)
-	cmdKeys.AddCommand(cmdKeysGenerateRootKey)
+	cmdKey.AddCommand(cmdKeyList)
+	cmdKey.AddCommand(cmdKeyRemoveRootKey)
+	cmdKey.AddCommand(cmdKeyGenerateRootKey)
 
-	cmdKeysExport.Flags().StringVarP(&keysExportGUN, "gun", "g", "", "Globally unique name to export keys for. A new password will be set for all the keys. Output format is a zip archive.")
-	cmdKeys.AddCommand(cmdKeysExport)
-	cmdKeys.AddCommand(cmdKeysExportRoot)
-	cmdKeys.AddCommand(cmdKeysImport)
-	cmdKeys.AddCommand(cmdKeysImportRoot)
+	cmdKeyExport.Flags().StringVarP(&keysExportGUN, "gun", "g", "", "Globally unique name to export keys for. A new password will be set for all the keys. Output format is a zip archive.")
+	cmdKey.AddCommand(cmdKeyExport)
+	cmdKey.AddCommand(cmdKeyExportRoot)
+	cmdKey.AddCommand(cmdKeyImport)
+	cmdKey.AddCommand(cmdKeyImportRoot)
 }
 
-var cmdKeys = &cobra.Command{
-	Use:   "keys",
+var cmdKey = &cobra.Command{
+	Use:   "key",
 	Short: "Operates on keys.",
 	Long:  "operations on private keys.",
+}
+
+var cmdKeyList = &cobra.Command{
+	Use:   "list",
+	Short: "Lists keys.",
+	Long:  "lists keys known to notary.",
 	Run:   keysList,
 }
 
-var cmdKeysRemoveRootKey = &cobra.Command{
+var cmdKeyRemoveRootKey = &cobra.Command{
 	Use:   "remove [ keyID ]",
 	Short: "Removes the root key with the given keyID.",
 	Long:  "remove the root key with the given keyID from the local host.",
 	Run:   keysRemoveRootKey,
 }
 
-var cmdKeysGenerateRootKey = &cobra.Command{
+var cmdKeyGenerateRootKey = &cobra.Command{
 	Use:   "generate [ algorithm ]",
 	Short: "Generates a new root key with a given algorithm.",
 	Long:  "generates a new root key with a given algorithm.",
@@ -51,28 +58,28 @@ var cmdKeysGenerateRootKey = &cobra.Command{
 
 var keysExportGUN string
 
-var cmdKeysExport = &cobra.Command{
+var cmdKeyExport = &cobra.Command{
 	Use:   "export [ filename ]",
 	Short: "Exports keys to a ZIP file.",
 	Long:  "exports a collection of keys. The keys are reencrypted with a new passphrase. The output is a ZIP file.",
 	Run:   keysExport,
 }
 
-var cmdKeysExportRoot = &cobra.Command{
+var cmdKeyExportRoot = &cobra.Command{
 	Use:   "export-root [ keyID ] [ filename ]",
 	Short: "Exports given root key to a file.",
 	Long:  "exports a root key, without reencrypting. The output is a PEM file.",
 	Run:   keysExportRoot,
 }
 
-var cmdKeysImport = &cobra.Command{
+var cmdKeyImport = &cobra.Command{
 	Use:   "import [ filename ]",
 	Short: "Imports keys from a ZIP file.",
 	Long:  "imports one or more keys from a ZIP file.",
 	Run:   keysImport,
 }
 
-var cmdKeysImportRoot = &cobra.Command{
+var cmdKeyImportRoot = &cobra.Command{
 	Use:   "import-root [ keyID ] [ filename ]",
 	Short: "Imports root key.",
 	Long:  "imports a root key from a PEM file.",
