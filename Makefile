@@ -77,6 +77,7 @@ cover:
 	@echo "mode: $(COVERMODE)" > "$(COVERPROFILE)"
 	@grep -h -v "^mode:" "$(COVERDIR)"/*.cover >> "$(COVERPROFILE)"
 	@go tool cover -func="$(COVERPROFILE)"
+	@go tool cover -html="$(COVERPROFILE)"
 
 clean-protos:
 	@rm proto/*.pb.go
