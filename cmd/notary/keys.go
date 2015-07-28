@@ -54,9 +54,9 @@ func keysRemoveRootKey(cmd *cobra.Command, args []string) {
 	}
 	parseConfig()
 
-	keyStoreManager, err := keystoremanager.NewKeyStoreManager(TrustDir, retriever)
+	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, retriever)
 	if err != nil {
-		fatalf("failed to create a new truststore manager with directory: %s", TrustDir)
+		fatalf("failed to create a new truststore manager with directory: %s", trustDir)
 	}
 
 	// List all the keys about to be removed
@@ -85,9 +85,9 @@ func keysList(cmd *cobra.Command, args []string) {
 
 	parseConfig()
 
-	keyStoreManager, err := keystoremanager.NewKeyStoreManager(TrustDir, retriever)
+	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, retriever)
 	if err != nil {
-		fatalf("failed to create a new truststore manager with directory: %s", TrustDir)
+		fatalf("failed to create a new truststore manager with directory: %s", trustDir)
 	}
 
 	fmt.Println("")
@@ -128,9 +128,9 @@ func keysGenerateRootKey(cmd *cobra.Command, args []string) {
 
 	parseConfig()
 
-	keyStoreManager, err := keystoremanager.NewKeyStoreManager(TrustDir, retriever)
+	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, retriever)
 	if err != nil {
-		fatalf("failed to create a new truststore manager with directory: %s", TrustDir)
+		fatalf("failed to create a new truststore manager with directory: %s", trustDir)
 	}
 
 	keyID, err := keyStoreManager.GenRootKey(algorithm)

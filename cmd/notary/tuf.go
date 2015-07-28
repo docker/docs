@@ -77,7 +77,7 @@ func tufAdd(cmd *cobra.Command, args []string) {
 
 	parseConfig()
 
-	nRepo, err := notaryclient.NewNotaryRepository(TrustDir, gun, RemoteTrustServer, getTransport(), retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, remoteTrustServer, getTransport(), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -102,7 +102,7 @@ func tufInit(cmd *cobra.Command, args []string) {
 	gun := args[0]
 	parseConfig()
 
-	nRepo, err := notaryclient.NewNotaryRepository(TrustDir, gun, RemoteTrustServer, getTransport(), retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, remoteTrustServer, getTransport(), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -139,7 +139,7 @@ func tufList(cmd *cobra.Command, args []string) {
 	gun := args[0]
 	parseConfig()
 
-	nRepo, err := notaryclient.NewNotaryRepository(TrustDir, gun, RemoteTrustServer, getTransport(), retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, remoteTrustServer, getTransport(), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -165,7 +165,7 @@ func tufLookup(cmd *cobra.Command, args []string) {
 	targetName := args[1]
 	parseConfig()
 
-	nRepo, err := notaryclient.NewNotaryRepository(TrustDir, gun, RemoteTrustServer, getTransport(), retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, remoteTrustServer, getTransport(), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -189,7 +189,7 @@ func tufPublish(cmd *cobra.Command, args []string) {
 
 	fmt.Println("Pushing changes to ", gun, ".")
 
-	nRepo, err := notaryclient.NewNotaryRepository(TrustDir, gun, RemoteTrustServer, getTransport(), retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, remoteTrustServer, getTransport(), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -235,7 +235,7 @@ func verify(cmd *cobra.Command, args []string) {
 
 	gun := args[0]
 	targetName := args[1]
-	nRepo, err := notaryclient.NewNotaryRepository(TrustDir, gun, RemoteTrustServer, getTransport(), retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, remoteTrustServer, getTransport(), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
