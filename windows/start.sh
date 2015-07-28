@@ -2,19 +2,12 @@
 
 set -e
 
-ISO=$HOME/.docker/machine/cache/boot2docker.iso
 VM=docker-vm
 DOCKER_MACHINE=./docker-machine.exe
 
 BLUE='\033[1;34m'
 GREEN='\033[0;32m'
 NC='\033[0m'
-
-mkdir -p ~/.docker/machine/cache
-if [ ! -f $ISO ]; then
-	mkdir -p "$(dirname "$ISO")"
-	cp ./boot2docker.iso "$ISO"
-fi
 
 machine=$($DOCKER_MACHINE ls -q | grep "^$VM$") || :
 if [ -z $machine ]; then

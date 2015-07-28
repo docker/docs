@@ -2,12 +2,12 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Docker Toolbox"
-#define MyAppVersion "1.7.0"
+#define MyAppVersion "1.8.0-rc1"
 #define MyAppPublisher "Docker Inc"
 #define MyAppURL "https://docker.com"
 #define MyAppContact "https://docs.docker.com"
 
-#define b2dIso ".\bundle\Boot2Docker\boot2docker.iso"
+#define b2dIso ".\bundle\Boot2Docker\boot2docker-virtualbox.iso"
 
 #define dockerCli ".\bundle\docker\docker.exe"
 #define dockerMachineCli ".\bundle\docker\docker-machine.exe"
@@ -70,6 +70,9 @@ Name: "full"; Description: "Full installation"
 Name: "upgrade"; Description: "Upgrade Docker Toolbox only"
 Name: "custom"; Description: "Custom installation"; Flags: iscustom
 
+[Run]
+Filename: "{win}\explorer.exe"; Parameters: "{userprograms}\Docker Inc\"
+
 [Tasks]
 Name: desktopicon; Description: "{cm:CreateDesktopIcon}"
 Name: modifypath; Description: "Add docker.exe & docker-machine.exe to &PATH"
@@ -82,11 +85,11 @@ Name: "VirtualBox"; Description: "VirtualBox"; Types: full
 Name: "MSYS"; Description: "MSYS-git UNIX tools"; Types: full
 
 [Files]
-Source: ".\docker-cli.ico"; DestDir: "{app}"; Flags: ignoreversion
+Source: ".\docker-quickstart-terminal.ico"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Docker
 Source: "{#dockerCli}"; DestDir: "{app}"; Flags: ignoreversion; Components: "Docker"
-Source: ".\start.sh"; DestDir: "{app}"; Flags: ignoreversion; Components: "Docker"
+Source: ".\start.sh"; DestDir: "{app}"; Flags: ignoreversion; Components: "Docker";
 Source: ".\delete.sh"; DestDir: "{app}"; Flags: ignoreversion; Components: "Docker"
 
 ; DockerMachine
@@ -96,7 +99,7 @@ Source: "{#dockerMachineCli}"; DestDir: "{app}"; Flags: ignoreversion; Component
 Source: "{#kitematicSetup}"; DestDir: "{app}\installers\kitematic"; Flags: ignoreversion; AfterInstall: RunInstallKitematic(); Components: "Kitematic"
 
 ; Boot2Docker
-Source: "{#b2dIso}"; DestDir: "{app}"; Flags: ignoreversion; Components: "DockerMachine"
+Source: "{#b2dIso}"; DestDir: "{app}"; Flags: ignoreversion; Components: "DockerMachine"; AfterInstall: CopyBoot2DockerISO();
 
 ; msys-Git
 Source: "{#msysGit}"; DestDir: "{app}\installers\msys-git"; DestName: "msys-git.exe"; AfterInstall: RunInstallMSYS();  Components: "MSYS"
@@ -108,7 +111,7 @@ Source: "{#virtualBoxMsi}"; DestDir: "{app}\installers\virtualbox"; DestName: "v
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
-Name: "{group}\Docker Quickstart Terminal"; WorkingDir: "{app}"; Filename: "{app}\start.sh"; IconFilename: "{app}/docker-quickstart-terminal.ico"; Components: "Docker"
+Name: "{userprograms}\Docker Inc\Docker Quickstart Terminal"; WorkingDir: "{app}"; Filename: "{app}\start.sh"; IconFilename: "{app}/docker-quickstart-terminal.ico"; Components: "Docker"
 Name: "{commondesktop}\Docker Quickstart Terminal"; WorkingDir: "{app}"; Filename: "{app}\start.sh"; IconFilename: "{app}/docker-quickstart-terminal.ico"; Tasks: desktopicon; Components: "Docker"
 
 [UninstallRun]
@@ -268,6 +271,17 @@ begin
 		MsgBox('kitematic install failure', mbInformation, MB_OK);
 	end;
 	//restart := True;
+end;
+
+procedure CopyBoot2DockerISO();
+var
+  ResultCode: Integer;
+begin
+  WizardForm.FilenameLabel.Caption := 'copying boot2docker-virtualbox.iso'
+  if not ForceDirectories(ExpandConstant('{userdocs}\..\.docker\machine\cache')) then
+      MsgBox('Failed to create docker machine cache dir', mbError, MB_OK);
+  if not FileCopy(ExpandConstant('{app}\boot2docker-virtualbox.iso'), ExpandConstant('{userdocs}\..\.docker\machine\cache\boot2docker-virtualbox.iso'), false) then
+      MsgBox('File moving failed!', mbError, MB_OK);
 end;
 
 const
