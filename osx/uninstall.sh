@@ -16,8 +16,6 @@ while true; do
   esac
 done
 
-exit 0
-
 echo "Removing Applications..."
 rm -rf /Applications/Docker
 
