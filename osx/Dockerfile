@@ -28,7 +28,7 @@ RUN curl -fsSL -o /vbox.dmg http://download.virtualbox.org/virtualbox/$VBOX_VERS
 
 ENV DOCKER_VERSION 1.8.0-rc1
 RUN curl -fsSL -o /docker https://test.docker.com/builds/Darwin/x86_64/docker-$DOCKER_VERSION
-RUN chmod +X /docker
+RUN chmod +x /docker
 
 ENV DOCKER_MACHINE_VERSION 0.4.0-rc1
 RUN curl -fsSL -o /docker-machine https://github.com/docker/machine/releases/download/v$DOCKER_MACHINE_VERSION/docker-machine_darwin-amd64
