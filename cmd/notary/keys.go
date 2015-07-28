@@ -60,7 +60,7 @@ func keysRemoveRootKey(cmd *cobra.Command, args []string) {
 	}
 
 	// List all the keys about to be removed
-	fmt.Printf("Are you sure you want to remove the following key? (yes/no)\n%s\n", keyID)
+	fmt.Printf("Are you sure you want to remove the following key?\n%s\n (yes/no)\n", keyID)
 
 	// Ask for confirmation before removing keys
 	confirmed := askConfirm()
