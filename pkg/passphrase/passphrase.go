@@ -26,11 +26,26 @@ const (
 	tufRootAlias                = "root"
 	tufTargetsAlias             = "targets"
 	tufSnapshotAlias            = "snapshot"
-	tufRootKeyGenerationWarning = `You are about to create a new root signing key passphrase. This passphrase will be used to protect
-the most sensitive key in your signing system. Please choose a long, complex passphrase and be careful
-to keep the password and the key file itself secure and backed up. It is highly recommended that you use
-a password manager to generate the passphrase and keep it safe. There will be no way to recover this key.
-You can find the key in your config directory.`
+	tufRootKeyGenerationWarning = `You are about to create a new root signing key passphrase. This passphrase
+will be used to protect the most sensitive key in your signing system. Please
+choose a long, complex passphrase and be careful to keep the password and the
+key file itself secure and backed up. It is highly recommended that you use a
+password manager to generate the passphrase and keep it safe. There will be no
+way to recover this key. You can find the key in your config directory.`
+)
+
+var (
+	// ErrTooShort is returned if the passphrase entered for a new key is
+	// below the minimum length
+	ErrTooShort = errors.New("Passphrase too short")
+
+	// ErrDontMatch is returned if the two entered passphrases don't match.
+	// new key is below the minimum length
+	ErrDontMatch = errors.New("The entered passphrases do not match")
+
+	// ErrTooManyAttempts is returned if the maximum number of passphrase
+	// entry attempts is reached.
+	ErrTooManyAttempts = errors.New("Too many attempts")
 )
 
 // PromptRetriever returns a new Retriever which will provide a prompt on stdin
@@ -54,10 +69,7 @@ func PromptRetrieverWithInOut(in io.Reader, out io.Writer) Retriever {
 			fmt.Fprintln(out, tufRootKeyGenerationWarning)
 		}
 		if numAttempts > 0 {
-			if createNew {
-				fmt.Fprintln(out, "Passphrases do not match. Please retry.")
-
-			} else {
+			if !createNew {
 				fmt.Fprintln(out, "Passphrase incorrect. Please retry.")
 			}
 		}
@@ -73,7 +85,7 @@ func PromptRetrieverWithInOut(in io.Reader, out io.Writer) Retriever {
 		}
 
 		if numAttempts > 3 && !createNew {
-			return "", true, errors.New("Too many attempts")
+			return "", true, ErrTooManyAttempts
 		}
 
 		state, err := term.SaveState(0)
@@ -119,7 +131,7 @@ func PromptRetrieverWithInOut(in io.Reader, out io.Writer) Retriever {
 
 		if len(retPass) < 8 {
 			fmt.Fprintln(out, "Please use a password manager to generate and store a good random passphrase.")
-			return "", false, errors.New("Passphrase too short")
+			return "", false, ErrTooShort
 		}
 
 		fmt.Fprintf(out, "Repeat passphrase for new %s key with id %s: ", alias, keyName)
@@ -131,7 +143,8 @@ func PromptRetrieverWithInOut(in io.Reader, out io.Writer) Retriever {
 		confirmationStr := strings.TrimSpace(string(confirmation))
 
 		if retPass != confirmationStr {
-			return "", false, errors.New("The entered passphrases do not match")
+			fmt.Fprintln(out, "Passphrases do not match. Please retry.")
+			return "", false, ErrDontMatch
 		}
 
 		if alias == tufSnapshotAlias || alias == tufTargetsAlias {
