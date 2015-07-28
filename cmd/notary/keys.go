@@ -4,104 +4,63 @@ import (
 	"crypto/x509"
 	"fmt"
 	"math"
-	"net/url"
 	"os"
 	"path/filepath"
 	"strings"
 	"time"
 
+	"github.com/docker/notary/keystoremanager"
 	"github.com/docker/notary/trustmanager"
 
 	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
 )
 
-var subjectKeyID string
+func init() {
+	cmdKeys.AddCommand(cmdKeysRemoveRootKey)
+	cmdKeys.AddCommand(cmdKeysGenerateRootKey)
+}
 
 var cmdKeys = &cobra.Command{
 	Use:   "keys",
-	Short: "Operates on keys.",
-	Long:  "operations on signature keys and trusted certificate authorities.",
+	Short: "Operates on root keys.",
+	Long:  "operations on private root keys.",
 	Run:   keysList,
 }
 
-func init() {
-	cmdKeys.AddCommand(cmdKeysTrust)
-	cmdKeys.AddCommand(cmdKeysRemove)
-	cmdKeys.AddCommand(cmdKeysGenerate)
+var cmdKeysRemoveRootKey = &cobra.Command{
+	Use:   "remove [ keyID ]",
+	Short: "Removes the root key with the given keyID.",
+	Long:  "remove the root key with the given keyID from the local host.",
+	Run:   keysRemoveRootKey,
 }
 
-var cmdKeysRemove = &cobra.Command{
-	Use:   "remove [ Subject Key ID ]",
-	Short: "Removes trust from a specific certificate authority or certificate.",
-	Long:  "remove trust from a specific certificate authority.",
-	Run:   keysRemove,
+var cmdKeysGenerateRootKey = &cobra.Command{
+	Use:   "generate [ algorithm ]",
+	Short: "Generates a new root key with a given algorithm.",
+	Long:  "generates a new root key with a given algorithm.",
+	Run:   keysGenerateRootKey,
 }
 
-var cmdKeysTrust = &cobra.Command{
-	Use:   "trust [ certificate ]",
-	Short: "Trusts a new certificate.",
-	Long:  "adds a the certificate to the trusted certificate authority list.",
-	Run:   keysTrust,
-}
-
-var cmdKeysGenerate = &cobra.Command{
-	Use:   "generate [ GUN ]",
-	Short: "Generates a new key for a specific GUN.",
-	Long:  "generates a new key for a specific Global Unique Name.",
-	Run:   keysGenerate,
-}
-
-// keysRemove deletes Certificates based on hash and Private Keys
-// based on GUNs.
-func keysRemove(cmd *cobra.Command, args []string) {
+// keysRemoveRootKey deletes a root private key based on ID
+func keysRemoveRootKey(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
 		cmd.Usage()
-		fatalf("must specify a SHA256 SubjectKeyID of the certificate")
+		fatalf("must specify the key ID of the root key to remove")
 	}
 
-	//TODO (diogo): Validate Global Unique Name. We probably want to reject 1 char GUNs.
-	gunOrID := args[0]
-
-	// Try to retrieve the ID from the CA store.
-	cert, err := caStore.GetCertificateByCertID(gunOrID)
-	if err == nil {
-		fmt.Printf("Removing: ")
-		printCert(cert)
-
-		// If the ID is found, remove it.
-		err = caStore.RemoveCert(cert)
-		if err != nil {
-			fatalf("failed to remove certificate from KeyStore")
-		}
-		return
+	keyID := args[0]
+	if len(keyID) != 64 {
+		fatalf("please enter a valid root key ID")
 	}
+	parseConfig()
 
-	// Try to retrieve the ID from the Certificate store.
-	cert, err = certificateStore.GetCertificateByCertID(gunOrID)
-	if err == nil {
-		fmt.Printf("Removing: ")
-		printCert(cert)
-
-		// If the ID is found, remove it.
-		err = certificateStore.RemoveCert(cert)
-		if err != nil {
-			fatalf("failed to remove certificate from KeyStore")
-		}
-		return
-	}
-
-	// We didn't find a certificate with this ID, let's try to see if we can find keys.
-	keyList := privKeyStore.ListDir(gunOrID, true)
-	if len(keyList) < 1 {
-		fatalf("no Private Keys found under Global Unique Name: %s", gunOrID)
+	keyStoreManager, err := keystoremanager.NewKeyStoreManager(TrustDir, retriever)
+	if err != nil {
+		fatalf("failed to create a new truststore manager with directory: %s", TrustDir)
 	}
 
 	// List all the keys about to be removed
-	fmt.Println("Are you sure you want to remove the following keys? (yes/no)", gunOrID)
-	for _, k := range keyList {
-		printKey(k)
-	}
+	fmt.Printf("Are you sure you want to remove the following key? (yes/no)\n%s\n", keyID)
 
 	// Ask for confirmation before removing keys
 	confirmed := askConfirm()
@@ -110,60 +69,12 @@ func keysRemove(cmd *cobra.Command, args []string) {
 	}
 
 	// Remove all the keys under the Global Unique Name
-	err = privKeyStore.RemoveDir(gunOrID)
+	err = keyStoreManager.RootKeyStore().RemoveKey(keyID)
 	if err != nil {
-		fatalf("failed to remove all Private keys under Global Unique Name: %s", gunOrID)
-	}
-	fmt.Printf("Removing all Private keys from: %s \n", gunOrID)
-}
-
-//TODO (diogo): Ask the use if she wants to trust the GUN in the cert
-func keysTrust(cmd *cobra.Command, args []string) {
-	if len(args) < 1 {
-		cmd.Usage()
-		fatalf("please provide a URL or filename to a certificate")
+		fatalf("failed to remove root key with key ID: %s", keyID)
 	}
 
-	certLocationStr := args[0]
-	var cert *x509.Certificate
-
-	// Verify if argument is a valid URL
-	url, err := url.Parse(certLocationStr)
-	if err == nil && url.Scheme != "" {
-		cert, err = trustmanager.GetCertFromURL(certLocationStr)
-		if err != nil {
-			fatalf("error retrieving certificate from url (%s): %v", certLocationStr, err)
-		}
-	} else if _, err := os.Stat(certLocationStr); err == nil {
-		// Try to load the certificate from the file
-		cert, err = trustmanager.LoadCertFromFile(certLocationStr)
-		if err != nil {
-			fatalf("error adding certificate from file: %v", err)
-		}
-	} else {
-		fatalf("please provide a file location or URL for CA certificate.")
-	}
-
-	// Ask for confirmation before adding certificate into repository
-	fmt.Printf("Are you sure you want to add trust for: %s? (yes/no)\n", cert.Subject.CommonName)
-	confirmed := askConfirm()
-	if !confirmed {
-		fatalf("aborting action.")
-	}
-
-	err = nil
-	if cert.IsCA {
-		err = caStore.AddCert(cert)
-	} else {
-		err = certificateStore.AddCert(cert)
-	}
-	if err != nil {
-		fatalf("error adding certificate from file: %v", err)
-	}
-
-	fmt.Printf("Adding: ")
-	printCert(cert)
-
+	fmt.Printf("Root key %s removed\n", keyID)
 }
 
 func keysList(cmd *cobra.Command, args []string) {
@@ -172,46 +83,62 @@ func keysList(cmd *cobra.Command, args []string) {
 		os.Exit(1)
 	}
 
-	fmt.Println("# Trusted CAs:")
-	trustedCAs := caStore.GetCertificates()
-	for _, c := range trustedCAs {
-		printCert(c)
+	parseConfig()
+
+	keyStoreManager, err := keystoremanager.NewKeyStoreManager(TrustDir, retriever)
+	if err != nil {
+		fatalf("failed to create a new truststore manager with directory: %s", TrustDir)
 	}
 
 	fmt.Println("")
 	fmt.Println("# Trusted Certificates:")
-	trustedCerts := certificateStore.GetCertificates()
+	trustedCerts := keyStoreManager.TrustedCertificateStore().GetCertificates()
 	for _, c := range trustedCerts {
 		printCert(c)
 	}
 
 	fmt.Println("")
+	fmt.Println("# Root keys: ")
+	for _, k := range keyStoreManager.RootKeyStore().ListKeys() {
+		fmt.Println(k)
+	}
+
+	fmt.Println("")
 	fmt.Println("# Signing keys: ")
-	for _, k := range privKeyStore.ListFiles(true) {
+	for _, k := range keyStoreManager.NonRootKeyStore().ListKeys() {
 		printKey(k)
 	}
 }
 
-func keysGenerate(cmd *cobra.Command, args []string) {
+func keysGenerateRootKey(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
 		cmd.Usage()
-		fatalf("must specify a GUN")
+		fatalf("must specify an Algorithm (RSA, ECDSA)")
 	}
 
-	//TODO (diogo): Validate GUNs. Don't allow '/' or '\' for now.
-	gun := args[0]
-	if gun[0:1] == "/" || gun[0:1] == "\\" {
-		fatalf("invalid Global Unique Name: %s", gun)
+	algorithm := args[0]
+	allowedCiphers := map[string]bool{
+		"rsa":   true,
+		"ecdsa": true,
 	}
 
-	// _, cert, err := generateKeyAndCert(gun)
-	// if err != nil {
-	// 	fatalf("could not generate key: %v", err)
-	// }
+	if !allowedCiphers[strings.ToLower(algorithm)] {
+		fatalf("algorithm not allowed, possible values are: RSA, ECDSA")
+	}
 
-	// certificateStore.AddCert(cert)
-	// fingerprint := trustmanager.FingerprintCert(cert)
-	// fmt.Println("Generated new keypair with ID: ", fingerprint)
+	parseConfig()
+
+	keyStoreManager, err := keystoremanager.NewKeyStoreManager(TrustDir, retriever)
+	if err != nil {
+		fatalf("failed to create a new truststore manager with directory: %s", TrustDir)
+	}
+
+	keyID, err := keyStoreManager.GenRootKey(algorithm)
+	if err != nil {
+		fatalf("failed to create a new root key: %v", err)
+	}
+
+	fmt.Printf("Generated new %s key with keyID: %s\n", algorithm, keyID)
 }
 
 func printCert(cert *x509.Certificate) {
@@ -225,11 +152,8 @@ func printCert(cert *x509.Certificate) {
 }
 
 func printKey(keyPath string) {
-	keyPath = strings.TrimSuffix(keyPath, filepath.Ext(keyPath))
-	keyPath = strings.TrimPrefix(keyPath, viper.GetString("privDir"))
-
 	keyID := filepath.Base(keyPath)
-	gun := filepath.Dir(keyPath)[1:]
+	gun := filepath.Dir(keyPath)
 	fmt.Printf("%s %s\n", gun, keyID)
 }
 

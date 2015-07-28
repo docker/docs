@@ -9,23 +9,12 @@ import (
 	"os"
 
 	"crypto/subtle"
+
 	"github.com/Sirupsen/logrus"
 	notaryclient "github.com/docker/notary/client"
-	"github.com/docker/notary/pkg/passphrase"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
-
-// FIXME: This should not be hardcoded
-const hardcodedBaseURL = "http://notary-server:4443"
-
-var retriever passphrase.Retriever
-
-func init() {
-	retriever = passphrase.PromptRetriever()
-}
-
-var remoteTrustServer string
 
 var cmdTufList = &cobra.Command{
 	Use:   "list [ GUN ]",
@@ -86,8 +75,9 @@ func tufAdd(cmd *cobra.Command, args []string) {
 	targetName := args[1]
 	targetPath := args[2]
 
-	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL,
-		getTransport(), retriever)
+	parseConfig()
+
+	nRepo, err := notaryclient.NewNotaryRepository(TrustDir, gun, RemoteTrustServer, getTransport(), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -96,7 +86,7 @@ func tufAdd(cmd *cobra.Command, args []string) {
 	if err != nil {
 		fatalf(err.Error())
 	}
-	err = repo.AddTarget(target)
+	err = nRepo.AddTarget(target)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -110,9 +100,9 @@ func tufInit(cmd *cobra.Command, args []string) {
 	}
 
 	gun := args[0]
+	parseConfig()
 
-	nRepo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL,
-		getTransport(), retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(TrustDir, gun, RemoteTrustServer, getTransport(), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -147,14 +137,15 @@ func tufList(cmd *cobra.Command, args []string) {
 		fatalf("must specify a GUN")
 	}
 	gun := args[0]
-	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL,
-		getTransport(), retriever)
+	parseConfig()
+
+	nRepo, err := notaryclient.NewNotaryRepository(TrustDir, gun, RemoteTrustServer, getTransport(), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
 
 	// Retreive the remote list of signed targets
-	targetList, err := repo.ListTargets()
+	targetList, err := nRepo.ListTargets()
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -172,15 +163,14 @@ func tufLookup(cmd *cobra.Command, args []string) {
 	}
 	gun := args[0]
 	targetName := args[1]
+	parseConfig()
 
-	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL,
-		getTransport(), retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(TrustDir, gun, RemoteTrustServer, getTransport(), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
 
-	// TODO(diogo): Parse Targets and print them
-	target, err := repo.GetTargetByName(targetName)
+	target, err := nRepo.GetTargetByName(targetName)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -195,16 +185,16 @@ func tufPublish(cmd *cobra.Command, args []string) {
 	}
 
 	gun := args[0]
+	parseConfig()
 
 	fmt.Println("Pushing changes to ", gun, ".")
 
-	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL,
-		getTransport(), retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(TrustDir, gun, RemoteTrustServer, getTransport(), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
 
-	err = repo.Publish()
+	err = nRepo.Publish()
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -217,8 +207,9 @@ func tufRemove(cmd *cobra.Command, args []string) {
 	}
 	gun := args[0]
 	targetName := args[1]
+	parseConfig()
 
-	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL,
+	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, remoteTrustServer,
 		getTransport(), retriever)
 	if err != nil {
 		fatalf(err.Error())
@@ -234,25 +225,22 @@ func verify(cmd *cobra.Command, args []string) {
 		cmd.Usage()
 		fatalf("must specify a GUN and target")
 	}
+	parseConfig()
 
 	// Reads all of the data on STDIN
-	//TODO (diogo): Change this to do a streaming hash
 	payload, err := ioutil.ReadAll(os.Stdin)
 	if err != nil {
 		fatalf("error reading content from STDIN: %v", err)
 	}
 
-	//TODO (diogo): This code is copy/pasted from lookup.
 	gun := args[0]
 	targetName := args[1]
-	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL,
-		getTransport(), retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(TrustDir, gun, RemoteTrustServer, getTransport(), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
 
-	// TODO(diogo): Parse Targets and print them
-	target, err := repo.GetTargetByName(targetName)
+	target, err := nRepo.GetTargetByName(targetName)
 	if err != nil {
 		logrus.Error("notary: data not present in the trusted collection.")
 		os.Exit(-11)
