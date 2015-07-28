@@ -11,6 +11,7 @@ import (
 	"github.com/spf13/viper"
 
 	"github.com/docker/notary/pkg/passphrase"
+	"github.com/docker/notary/version"
 )
 
 const configFileName string = "config"
@@ -80,7 +81,7 @@ func main() {
 		Short: "Print the version number of notary",
 		Long:  `print the version number of notary`,
 		Run: func(cmd *cobra.Command, args []string) {
-			fmt.Println("notary v0.1.0-rc1")
+			fmt.Printf("notary\n Version:    %s\n Git commit: %s\n", version.NotaryVersion, version.GitCommit)
 		},
 	}
 
