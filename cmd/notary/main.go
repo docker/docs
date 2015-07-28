@@ -90,8 +90,8 @@ func main() {
 	notaryCmd.PersistentFlags().StringVarP(&trustDir, "trustdir", "d", "", "directory where the trust data is persisted to")
 	notaryCmd.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "verbose output")
 
-	NotaryCmd.AddCommand(cmdKey)
-	NotaryCmd.AddCommand(cmdTufInit)
+	notaryCmd.AddCommand(cmdKey)
+	notaryCmd.AddCommand(cmdTufInit)
 	cmdTufInit.Flags().StringVarP(&remoteTrustServer, "server", "s", defaultServerURL, "Remote trust server location")
 	notaryCmd.AddCommand(cmdTufList)
 	cmdTufList.Flags().BoolVarP(&rawOutput, "raw", "", false, "Instructs notary list to output a nonpretty printed version of the targets list. Useful if you need to parse the list.")
