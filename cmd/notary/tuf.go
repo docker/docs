@@ -17,7 +17,7 @@ import (
 )
 
 // FIXME: This should not be hardcoded
-const hardcodedBaseURL = "https://notary-server:4443"
+const hardcodedBaseURL = "http://notary-server:4443"
 
 var retriever passphrase.Retriever
 
@@ -218,14 +218,15 @@ func tufRemove(cmd *cobra.Command, args []string) {
 	gun := args[0]
 	targetName := args[1]
 
-	//c := changelist.NewTufChange(changelist.ActionDelete, "targets", "target", targetName, nil)
-	//err := cl.Add(c)
-	//if err != nil {
-	//	fatalf(err.Error())
-	//}
-
-	// TODO(diogo): Implement RemoveTargets in libnotary
-	fmt.Println("Removing target ", targetName, " from ", gun)
+	repo, err := notaryclient.NewNotaryRepository(viper.GetString("baseTrustDir"), gun, hardcodedBaseURL,
+		getTransport(), retriever)
+	if err != nil {
+		fatalf(err.Error())
+	}
+	err = repo.RemoveTarget(targetName)
+	if err != nil {
+		fatalf(err.Error())
+	}
 }
 
 func verify(cmd *cobra.Command, args []string) {
