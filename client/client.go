@@ -258,6 +258,8 @@ func (r *NotaryRepository) AddTarget(target *Target) error {
 	return cl.Close()
 }
 
+// RemoveTarget creates a new changelist entry to remove a target from the repository
+// when the changelist gets applied at publish time
 func (r *NotaryRepository) RemoveTarget(targetName string) error {
 	cl, err := changelist.NewFileChangelist(filepath.Join(r.tufRepoPath, "changelist"))
 	if err != nil {

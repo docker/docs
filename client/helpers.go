@@ -53,10 +53,10 @@ func applyTargetsChange(repo *tuf.TufRepo, c changelist.Change) error {
 			return err
 		}
 		files := data.Files{c.Path(): *meta}
-		_, err = repo.AddTargets("targets", files)
+		_, err = repo.AddTargets(c.Scope(), files)
 	case changelist.ActionDelete:
 		logrus.Debug("changelist remove: ", c.Path())
-		err = repo.RemoveTargets("targets", c.Path())
+		err = repo.RemoveTargets(c.Scope(), c.Path())
 	default:
 		logrus.Debug("action not yet supported: ", c.Action())
 	}

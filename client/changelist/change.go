@@ -1,9 +1,9 @@
 package changelist
 
+// Scopes for TufChanges are simply the TUF roles.
+// Unfortunately because of targets delegations, we can only
+// cover the base roles.
 const (
-	// Scopes for TufChanges are simply the TUF roles.
-	// Unfortunately because of targets delegations, we can only
-	// cover the base roles.
 	ScopeRoot      = "root"
 	ScopeTargets   = "targets"
 	ScopeSnapshot  = "snapshot"
