@@ -11,6 +11,7 @@ import (
 	"github.com/spf13/viper"
 
 	"github.com/docker/notary/pkg/passphrase"
+	"github.com/docker/notary/version"
 )
 
 const configFileName string = "config"
@@ -69,31 +70,42 @@ func parseConfig() {
 }
 
 func main() {
-	var NotaryCmd = &cobra.Command{
+	var notaryCmd = &cobra.Command{
 		Use:   "notary",
 		Short: "notary allows the creation of trusted collections.",
 		Long:  "notary allows the creation and management of collections of signed targets, allowing the signing and validation of arbitrary content.",
 	}
 
-	NotaryCmd.PersistentFlags().StringVarP(&trustDir, "trustdir", "d", "", "directory where the trust data is persisted to")
-	NotaryCmd.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "verbose output")
+	var versionCmd = &cobra.Command{
+		Use:   "version",
+		Short: "Print the version number of notary",
+		Long:  `print the version number of notary`,
+		Run: func(cmd *cobra.Command, args []string) {
+			fmt.Printf("notary\n Version:    %s\n Git commit: %s\n", version.NotaryVersion, version.GitCommit)
+		},
+	}
 
-	NotaryCmd.AddCommand(cmdKey)
-	NotaryCmd.AddCommand(cmdTufInit)
+	notaryCmd.AddCommand(versionCmd)
+
+	notaryCmd.PersistentFlags().StringVarP(&trustDir, "trustdir", "d", "", "directory where the trust data is persisted to")
+	notaryCmd.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "verbose output")
+
+	notaryCmd.AddCommand(cmdKey)
+	notaryCmd.AddCommand(cmdTufInit)
 	cmdTufInit.Flags().StringVarP(&remoteTrustServer, "server", "s", defaultServerURL, "Remote trust server location")
-	NotaryCmd.AddCommand(cmdTufList)
+	notaryCmd.AddCommand(cmdTufList)
 	cmdTufList.Flags().BoolVarP(&rawOutput, "raw", "", false, "Instructs notary list to output a nonpretty printed version of the targets list. Useful if you need to parse the list.")
 	cmdTufList.Flags().StringVarP(&remoteTrustServer, "server", "s", defaultServerURL, "Remote trust server location")
-	NotaryCmd.AddCommand(cmdTufAdd)
-	NotaryCmd.AddCommand(cmdTufRemove)
-	NotaryCmd.AddCommand(cmdTufPublish)
+	notaryCmd.AddCommand(cmdTufAdd)
+	notaryCmd.AddCommand(cmdTufRemove)
+	notaryCmd.AddCommand(cmdTufPublish)
 	cmdTufPublish.Flags().StringVarP(&remoteTrustServer, "server", "s", defaultServerURL, "Remote trust server location")
-	NotaryCmd.AddCommand(cmdTufLookup)
+	notaryCmd.AddCommand(cmdTufLookup)
 	cmdTufLookup.Flags().BoolVarP(&rawOutput, "raw", "", false, "Instructs notary lookup to output a nonpretty printed version of the targets list. Useful if you need to parse the list.")
 	cmdTufLookup.Flags().StringVarP(&remoteTrustServer, "server", "s", defaultServerURL, "Remote trust server location")
-	NotaryCmd.AddCommand(cmdVerify)
+	notaryCmd.AddCommand(cmdVerify)
 
-	NotaryCmd.Execute()
+	notaryCmd.Execute()
 }
 
 func fatalf(format string, args ...interface{}) {
