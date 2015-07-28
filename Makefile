@@ -10,11 +10,11 @@ GITUNTRACKEDCHANGES := $(shell git status --porcelain --untracked-files=no)
 ifneq ($(GITUNTRACKEDCHANGES),)
 	GITCOMMIT := $(GITCOMMIT)-dirty
 endif
-CTIMEVAR=-X $(NOTARY_PKG)/version/version.GitCommit '$(GITCOMMIT)' -X $(NOTARY_PKG)/version/version.NotaryVersion '$(VERSION)'
+CTIMEVAR=-X $(NOTARY_PKG)/version.GitCommit '$(GITCOMMIT)' -X $(NOTARY_PKG)/version.NotaryVersion '$(VERSION)'
 GO_LDFLAGS=-ldflags "-w $(CTIMEVAR)"
 GO_LDFLAGS_STATIC=-ldflags "-w $(CTIMEVAR) -extldflags -static"
 GOOSES = darwin freebsd linux
-GOARCHS = amd64 386
+GOARCHS = amd64
 
 # go cover test variables
 COVERDIR=.cover
@@ -35,15 +35,15 @@ AUTHORS: .git/HEAD
 version/version.go:
 	./version/version.sh > $@
 
-${PREFIX}/bin/notary-server: version/version.go $(shell find . -type f -name '*.go')
+${PREFIX}/bin/notary-server: VERSION $(shell find . -type f -name '*.go')
 	@echo "+ $@"
 	@godep go build -o $@ ${GO_LDFLAGS} ./cmd/notary-server
 
-${PREFIX}/bin/notary: version/version.go $(shell find . -type f -name '*.go')
+${PREFIX}/bin/notary: VERSION $(shell find . -type f -name '*.go')
 	@echo "+ $@"
 	@godep go build -o $@ ${GO_LDFLAGS} ./cmd/notary
 
-${PREFIX}/bin/notary-signer: version/version.go $(shell find . -type f -name '*.go')
+${PREFIX}/bin/notary-signer: VERSION $(shell find . -type f -name '*.go')
 	@echo "+ $@"
 	@godep go build -o $@ ${GO_LDFLAGS} ./cmd/notary-signer
 
