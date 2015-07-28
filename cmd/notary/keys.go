@@ -22,9 +22,10 @@ func init() {
 	cmdKey.AddCommand(cmdKeyRemoveRootKey)
 	cmdKey.AddCommand(cmdKeyGenerateRootKey)
 
-	cmdKeyExport.Flags().StringVarP(&keysExportGUN, "gun", "g", "", "Globally unique name to export keys for. A new password will be set for all the keys. Output format is a zip archive.")
+	cmdKeyExport.Flags().StringVarP(&keysExportGUN, "gun", "g", "", "Globally unique name to export keys for.")
 	cmdKey.AddCommand(cmdKeyExport)
 	cmdKey.AddCommand(cmdKeyExportRoot)
+	cmdKeyExportRoot.Flags().BoolVarP(&keysExportRootChangePassphrase, "change-passphrase", "c", false, "set a new passphrase for the key being exported")
 	cmdKey.AddCommand(cmdKeyImport)
 	cmdKey.AddCommand(cmdKeyImportRoot)
 }
@@ -64,6 +65,8 @@ var cmdKeyExport = &cobra.Command{
 	Long:  "exports a collection of keys. The keys are reencrypted with a new passphrase. The output is a ZIP file.",
 	Run:   keysExport,
 }
+
+var keysExportRootChangePassphrase bool
 
 var cmdKeyExportRoot = &cobra.Command{
 	Use:   "export-root [ keyID ] [ filename ]",
@@ -249,7 +252,14 @@ func keysExportRoot(cmd *cobra.Command, args []string) {
 	if err != nil {
 		fatalf("error creating output file: %v", err)
 	}
-	err = keyStoreManager.ExportRootKey(exportFile, keyID)
+	if keysExportRootChangePassphrase {
+		// Must use a different passphrase retriever to avoid caching the
+		// unlocking passphrase and reusing that.
+		exportRetriever := passphrase.PromptRetriever()
+		err = keyStoreManager.ExportRootKeyReencrypt(exportFile, keyID, exportRetriever)
+	} else {
+		err = keyStoreManager.ExportRootKey(exportFile, keyID)
+	}
 	exportFile.Close()
 	if err != nil {
 		fatalf("error exporting root key: %v", err)
