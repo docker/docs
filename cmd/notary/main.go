@@ -78,7 +78,7 @@ func main() {
 	NotaryCmd.PersistentFlags().StringVarP(&trustDir, "trustdir", "d", "", "directory where the trust data is persisted to")
 	NotaryCmd.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "verbose output")
 
-	NotaryCmd.AddCommand(cmdKeys)
+	NotaryCmd.AddCommand(cmdKey)
 	NotaryCmd.AddCommand(cmdTufInit)
 	cmdTufInit.Flags().StringVarP(&remoteTrustServer, "server", "s", defaultServerURL, "Remote trust server location")
 	NotaryCmd.AddCommand(cmdTufList)

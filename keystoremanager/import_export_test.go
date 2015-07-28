@@ -350,7 +350,6 @@ func TestImportExportRootKey(t *testing.T) {
 	err = repo2.Initialize(rootCryptoService2)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
-	// Check the contents of the zip file
 	keyReader, err := os.Open(tempKeyFilePath)
 	assert.NoError(t, err, "could not open key file")
 
@@ -380,4 +379,81 @@ func TestImportExportRootKey(t *testing.T) {
 	// Try to import garbage and make sure it doesn't succeed
 	err = repo2.KeyStoreManager.ImportRootKey(strings.NewReader("this is not PEM"), rootKeyID)
 	assert.EqualError(t, err, keystoremanager.ErrNoValidPrivateKey.Error())
+
+	// Should be able to unlock the root key with the old password
+	key, alias, err := repo2.KeyStoreManager.RootKeyStore().GetKey(rootKeyID)
+	assert.NoError(t, err, "could not unlock root key")
+	assert.Equal(t, "root", alias)
+	assert.Equal(t, rootKeyID, key.ID())
+}
+
+func TestImportExportRootKeyReencrypt(t *testing.T) {
+	gun := "docker.com/notary"
+
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	defer os.RemoveAll(tempBaseDir)
+
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+
+	ts, _ := createTestServer(t)
+	defer ts.Close()
+
+	repo, err := client.NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport, oldPassphraseRetriever)
+	assert.NoError(t, err, "error creating repo: %s", err)
+
+	rootKeyID, err := repo.KeyStoreManager.GenRootKey(data.ECDSAKey.String())
+	assert.NoError(t, err, "error generating root key: %s", err)
+
+	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID)
+	assert.NoError(t, err, "error retrieving root key: %s", err)
+
+	err = repo.Initialize(rootCryptoService)
+	assert.NoError(t, err, "error creating repository: %s", err)
+
+	tempKeyFile, err := ioutil.TempFile("", "notary-test-export-")
+	tempKeyFilePath := tempKeyFile.Name()
+	defer os.Remove(tempKeyFilePath)
+
+	err = repo.KeyStoreManager.ExportRootKeyReencrypt(tempKeyFile, rootKeyID, newPassphraseRetriever)
+	assert.NoError(t, err)
+	tempKeyFile.Close()
+
+	// Create new repo to test import
+	tempBaseDir2, err := ioutil.TempDir("", "notary-test-")
+	defer os.RemoveAll(tempBaseDir2)
+
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+
+	repo2, err := client.NewNotaryRepository(tempBaseDir2, gun, ts.URL, http.DefaultTransport, newPassphraseRetriever)
+	assert.NoError(t, err, "error creating repo: %s", err)
+
+	rootKeyID2, err := repo2.KeyStoreManager.GenRootKey(data.ECDSAKey.String())
+	assert.NoError(t, err, "error generating root key: %s", err)
+
+	rootCryptoService2, err := repo2.KeyStoreManager.GetRootCryptoService(rootKeyID2)
+	assert.NoError(t, err, "error retrieving root key: %s", err)
+
+	err = repo2.Initialize(rootCryptoService2)
+	assert.NoError(t, err, "error creating repository: %s", err)
+
+	keyReader, err := os.Open(tempKeyFilePath)
+	assert.NoError(t, err, "could not open key file")
+
+	err = repo2.KeyStoreManager.ImportRootKey(keyReader, rootKeyID)
+	assert.NoError(t, err)
+	keyReader.Close()
+
+	// Look for repo's root key in repo2
+	// There should be a file named after the key ID of the root key we
+	// imported.
+	rootKeyFilename := rootKeyID + "_root.key"
+	_, err = os.Stat(filepath.Join(tempBaseDir2, "private", "root_keys", rootKeyFilename))
+	assert.NoError(t, err, "missing root key")
+
+	// Should be able to unlock the root key with the new password
+	key, alias, err := repo2.KeyStoreManager.RootKeyStore().GetKey(rootKeyID)
+	assert.NoError(t, err, "could not unlock root key")
+	assert.Equal(t, "root", alias)
+	assert.Equal(t, rootKeyID, key.ID())
 }
