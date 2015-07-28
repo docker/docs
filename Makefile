@@ -1,10 +1,19 @@
 # Set an output prefix, which is the local directory if not specified
 PREFIX?=$(shell pwd)
 
-# Used to populate version variable in main package.
-GO_LDFLAGS=-ldflags "-w -X `go list ./version`.Version `git describe --match 'v[0-9]*' --dirty='.m' --always`"
-GO_LDFLAGS_STATIC=-ldflags "-w -extldflags -static -X `go list ./version`.Version `git describe --match 'v[0-9]*' --dirty='.m' --always`"
-GOOSES = darwin freebsd linux windows
+# Populate version variables
+# Add to compile time flags
+NOTARY_PKG := github.com/docker/notary
+VERSION := $(shell cat VERSION)
+GITCOMMIT := $(shell git rev-parse --short HEAD)
+GITUNTRACKEDCHANGES := $(shell git status --porcelain --untracked-files=no)
+ifneq ($(GITUNTRACKEDCHANGES),)
+	GITCOMMIT := $(GITCOMMIT)-dirty
+endif
+CTIMEVAR=-X $(NOTARY_PKG)/version/version.GitCommit '$(GITCOMMIT)' -X $(NOTARY_PKG)/version/version.NotaryVersion '$(VERSION)'
+GO_LDFLAGS=-ldflags "-w $(CTIMEVAR)"
+GO_LDFLAGS_STATIC=-ldflags "-w $(CTIMEVAR) -extldflags -static"
+GOOSES = darwin freebsd linux
 GOARCHS = amd64 386
 
 # go cover test variables
