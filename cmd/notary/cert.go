@@ -45,7 +45,8 @@ var cmdCertRemove = &cobra.Command{
 // certRemove deletes a certificate given a cert ID or a gun
 func certRemove(cmd *cobra.Command, args []string) {
 	// If the user hasn't provided -g with a gun, or a cert ID, show usage
-	if len(args) < 1 && certRemoveGUN == "" {
+	// If the user provided -g and a cert ID, also show usage
+	if (len(args) < 1 && certRemoveGUN == "") || (len(args) > 0 && certRemoveGUN != "") {
 		cmd.Usage()
 		fatalf("must specify the cert ID or the GUN of the certificates to remove")
 	}
@@ -82,14 +83,14 @@ func certRemove(cmd *cobra.Command, args []string) {
 	}
 
 	// List all the keys about to be removed
-	fmt.Println("Are you sure you want to remove the following certificates?")
+	fmt.Printf("The following certificates will be removed:\n\n")
 	for _, cert := range certsToRemove {
 		// This error can't occur because we're getting certs off of an
 		// x509 store that indexes by ID.
 		certID, _ := trustmanager.FingerprintCert(cert)
 		fmt.Printf("%s - %s\n", cert.Subject.CommonName, certID)
 	}
-	fmt.Println("(yes/no)")
+	fmt.Println("\nAre you sure you want to remove these certificates? (yes/no)")
 
 	// Ask for confirmation before removing certificates
 	confirmed := askConfirm()

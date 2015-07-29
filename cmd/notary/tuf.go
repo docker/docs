@@ -122,7 +122,7 @@ func tufInit(cmd *cobra.Command, args []string) {
 			rootKeyID = keyID
 		}
 
-		fmt.Printf("Root key found, using: %s", rootKeyID)
+		fmt.Printf("Root key found, using: %s\n", rootKeyID)
 	}
 
 	rootCryptoService, err := nRepo.KeyStoreManager.GetRootCryptoService(rootKeyID)
