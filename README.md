@@ -23,7 +23,7 @@ here](https://docs.docker.com/installation/mac/).
 
 ## Frequently Asked Questions
 
-*Do I have to install VirtualBox?*
+**Do I have to install VirtualBox?**
 
 No, you can deselect VirtualBox during installation. It is bundled in case you want to have a working environment for free. 
 
