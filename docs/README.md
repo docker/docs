@@ -35,10 +35,6 @@ If you want to add a new file or change the location of the document in the menu
 
 5. Open the available server in your browser.
 
-    The documentation server has the complete menu but only the Docker Notary
-    documentation resolves.  You can't access the other project docs from this
-    localized build.
-
 ## Tips on Hugo metadata and menu positioning
 
 The top of each Docker Notary documentation file contains TOML metadata. The metadata is commented out to prevent it from appearing in GitHub.
