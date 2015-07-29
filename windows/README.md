@@ -16,3 +16,8 @@ used in this all-in-one installer too.
 
 See `MAINTENANCE.md` for instructions on how to update, bundle and compile the
 Docker Toolbox Windows Installer.
+
+## License
+Docker Toolbox code is licensed under the Apache License, Version 2.0. See [LICENSE](https://github.com/docker/toolbox/blob/master/LICENSE) for the full license text. 
+
+Docker Toolbox Logo and all other related Docker artwork © Docker, Inc. 2015.  All rights reserved; not licensed for third party use.
