@@ -1,6 +1,6 @@
-# windows-installer
+# Docker Toolbox for Windows
 
-Installation [instructions](https://docs.docker.com/installation/windows/) available on the Docker documentation site.
+Installation [instructions](http://docs.docker.com/windows/started/) available on the Docker documentation site.
 
 ## What is included:
 
