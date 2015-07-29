@@ -13,7 +13,7 @@ Docker on Mac OS X and Windows, including:
 | Docker Compose         | Yes    | Coming Soon | Yes                 |
 | Docker Kitematic       | Yes    | Yes         | Coming Soon         |
 | VirtualBox 5.0         | Yes    | Yes         | No                  |
-
+| Delivery Format        | .pkg   | .exe        | script* (cURL)      |
 
 
 ## Installation and documentation
