@@ -1,4 +1,4 @@
-# Preparing development environment
+# Building the Windows Toolbox
 
 1. Install Inno Setup 5 non-unicode: http://www.jrsoftware.org/isdl.php (`isetup-5.x.x-unicode.exe`).
 
