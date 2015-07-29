@@ -1,0 +1,222 @@
+#Installing Docker Trusted Registry in Amazon Web Services (AWS)
+
+This Quick Start Guide gives you a hands-on look at how to install and use the Docker Trusted Registry (DTR) in an Amazon Web Services Virtual Private Cloud (AWS-VPC) environment.  Specifically, this guide demonstrates the process of installing DTR via an Amazon Machine Image (AMI), performing basic configuration, and then accessing images on the DTR server from within your AWS VPC.
+
+This guide will walk you through the following steps:
+1. Launch the DTR EC2 Host in AWS
+2. Configure the AWS components
+3. Connect to the DTR EC2 Host
+4. Manage DTR via the web administration interface
+5. Complete a Docker image workflow (push and pull images)
+
+You should be able to complete this guide in about thirty minutes.
+
+NOTE: Docker Trusted Registry is  formerly known as Docker Hub Enterprise (DHE). Some older links and documentation may still refer to it by this name.
+
+NOTE: This guide will refer to two major components of a DTR implementation in AWS:
+
+The "DTR EC2 Host". This is the Linux VM running in AWS that hosts the containers necessary for running a DTR Registry Service.
+
+The "DTR Registry Service". This is the private Docker Registry service that runs on the DTR EC2 Host.
+NOTE: Amazon may occasionally change the appearance of the AWS web interface. This can result in the AWS web interface differing from this guide. However, the overall process will remain essentially the same.
+
+## Prerequisites
+
+To follow along with this guide you will need the following: 
+*The Docker Hub user-name and password used to obtain the Docker Subscription licenses
+*A DTR license key. Either a purchased license or a trial license will work
+*A commercially supported Docker Engine running within AWS
+*An AWS account with the ability to launch EC2 instances
+*The ability to modify Security Groups and Network ACLs in your AWS VPC
+*Familiarity with how to manage resources in an AWS VPC. 
+
+## Launching the DTR EC2 Host in AWS
+
+First, retrieve a copy of the DTR AMI from the AWS Marketplace. To do this, launch a new EC2 instance from your “EC2 Dashboard” by clicking the blue “Launch Instance” button.
+
+Choose “AWS Marketplace” from the resulting screen, and type "Docker Trusted Registry" into the “Search AWS Marketplace Products” search bar.
+
+Note: Currently, the DTR AMI is only available for Ubuntu 14.04 LTS.
+
+Select the DTR AMI you wish to retrieve, and then select the instance type based on your requirements. Then choose the option “Next: Configure Instance Details”. 
+
+At this point you must configure the DTR EC2 Host according to the requirements of your particular environment. When doing so, you should consider the following:
+
+If you want your DTR EC2 Host to be accessible from the internet, you will need to assign it an Elastic IP, or a Public IP.
+You may wish to Tag the DTR instance with meaningful name.
+
+Management of the DTR EC2 Host is performed via SSH, whereas management of the DTR Registry Service is performed via HTTPS. When launching the AMI for the first time, the wizard will prompt you to create a new “Security Group” with rules that allow SSH, HTTP and HTTPS already populated.
+
+NOTE: Make sure that you are launching your DTR EC2 Host in the correct Region, VPC, and subnet.
+
+Once you are happy with your DTR EC2 Host details, click “Launch”.
+
+At this point you will be prompted to associate the DTR EC2 Host with a key pair. If you already have a key pair you would like to use, select it from the drop-down list of available key pairs and check the "Acknowledge" check-box. This will enable the “Launch Instances” button. If you do not have an existing key pair, choose “Create a new key pair” from the first drop-down list, give the key pair a meaningful name, and click the “Download Key Pair” button. This will enable the “Launch Instances” button.
+
+NOTE: When creating a new key pair, clicking the “Download Key Pair” button initiates a one-time operation that creates the key pair. So make sure you keep the downloaded key pair in a safe place as you will not be able to download it again.
+Click the “Launch Instances” button.
+
+Your DTR EC2 Host will now launch, and you can view its status on the “Instances” page of your “EC2 Dashboard”. It may take a minute or two for your DTR EC2 Host to reach the running state.
+
+## Configuring AWS Components
+
+Now that you have a DTR EC2 Host up and running, you'll customize it to integrate with your infrastructure.
+
+The first thing you need to do is configure your AWS VPC to allow SSH and HTTP/HTTPS traffic to your DTR EC2 Host.
+
+### Allowing SSH and HTTP/HTTPS access to your DTR instance
+
+There are two places that SSH and HTTP/HTTPS traffic need to be enabled:
+ + All Security Groups associated with your DTR EC2 Host
+ + The Network ACL associated with the subnet in which your DTR EC2 Host is running
+
+### Security Group configuration
+
+NOTE: If you configured the Security Group associated with your DTR EC2 Host to allow SSH and HTTP/HTTPS traffic when creating the instance, you can skip ahead to the next section and configure the Network ACL.
+
+All Security Groups associated with your DTR instance will need to allow SSH and HTTP/HTTPS traffic.
+To ensure this, select your DTR EC2 Host in your “EC2 dashboard” and click “view rules” from the “Description” tab as shown below. Three rules – allowing TCP ports 22, 80, and 443 – need to be present.
+
+NOTE: Any rule with a Source of "0.0.0.0/0" will allow any host from any network to connect over that protocol. This works but is not secure. For improved security, you should specify the IP address, or the network, that your management hosts are on.
+
+### Network ACL configuration
+
+The Network ACL associated with the subnet where your DTR EC2 Host is running needs to allow inbound SSH and HTTP/HTTPS traffic.
+
+To ensure this, go to your “VPC Dashboard” and select the subnet that your DTR EC2 Host is running in from the list of subnets available. Then select the “Network ACL” tab. Three rules (allowing TCP ports 22, 80, and 443) need to be present in the “Inbound” section. These rules must appear above the default “DENY” rule.
+
+NOTE: An ALLOW rule allowing “All Traffic” on “ALL” protocols, on “ALL” ports will allow the necessary SSH and HTTP/HTTPS traffic. However, it is more secure to create specific rules that allow specific traffic types.
+
+NOTE: If you have not given your subnets meaningful names, you may need to obtain the “Subnet ID” in which your DTR EC2 Host is running. You’ll find it on the “Instance” pane of the your “EC2 Dashboard”. From here you can select your DTR EC2 Host and obtain its Subnet ID from the “Description” tab. Make a note of the Subnet ID and use it to locate the correct Subnet ID from the “VPC Dashboard”.
+
+You must also make sure that appropriate outbound rules exist in the Network ACL. It is common for outbound Network ACL rules to allow all traffic. However, if your network security policy does not allow this, you will need to create rules that conform to your network security policy.
+
+## Connecting to the DTR EC2 Host
+
+Now that you have configured Security Group and Network ACL rules, it is possible to connect to the DTR EC2 Host over SSH using the key pair associated with the instance, and the “ec2-user” username. However, the DTR AMI does not require any manual configuration in order to work for this quick start guide. Therefore, configuring the DTR EC2 Host is out of the scope of this document. 
+
+When connecting to the DTR EC2 Host, you will need its DNS name or IP address. This information can be obtained from the “Description” tab of your DTR EC2 Host in your “EC2 Dashboard”. EC2 instances can have the following IP addresses:
+ + Private IP (accessible only from within your AWS VPC, as well as from networks connected to your VPC)
+ + Public IP (accessible from the internet, but will change when the DTR EC2 Host is rebooted)
+ + Elastic IP (accessible from the internet and will not change when the DTR EC2 Host is rebooted)
+
+If you want to manage your DTR instance from within your AWS VPC, choose the Private DNS or Private IP address.
+
+If you want to manage your DTR instance over the internet, choose its Public DNS, Elastic IP, or Public IP address.
+
+## Managing the DTR Registry Service via the Administration web interface
+
+You can now manage the DTR Registry Service via its Administration web interface over HTTPS.
+
+To connect to your DTR Registry Service's Administration web interface, open a web browser and connect to the DNS name or IP address of your DTR EC2 Host.
+
+NOTE: By default, traffic to port 80 and 443 of your DTR EC2 Host is automatically redirected to the DTR Registry Service Administration web interface.
+
+NOTE: Be sure to connect using the correct DNS name or IP address. E.g., if connecting from within AWS use the Private DNS or Private IP. If connecting from over the internet use the Public DNS, Public IP, or Elastic IP.
+
+NOTE: Connecting to the DTR Registry Service Administration web interface using the default self-signed certificate will result in a browser warning. This is expected behavior..
+
+Most DTR management tasks, including updating DTR, can be performed from the DTR Administration web interface.
+
+Two initial tasks must be completed:
+ + Configure the Domain Name of your DTR server
+ + License your DTR server
+
+To configure the Domain Name, click “Settings” > “HTTP”, and enter the DNS name in the text box titled “Domain Name”. You will want to use the AWS Private DNS name in order to use the DTR Registry Service to push and pull Docker images from within AWS.
+
+After configuring the Domain Name, restart DTR by clicking the “Save and Restart DTR Server” button.
+
+NOTE: Changing the Domain Name property of your DTR server will generate a new self-signed certificate that is used by the DTR Administration web interface and the DTR server. Therefore, you will receive another certificate warning the first time you connect to the DTR Administration web interface after changing its Domain Name. This is expected behavior.
+To license your DTR Registry Service, click “Settings” > “License” and click “Upload License”. Your license will normally be available for download from your Docker Hub account under “Settings” > “Enterprise Licenses”. 
+
+Once your license is uploaded, restart DTR by clicking the “Save and Restart DTR Server” button.  This completes the basic configuration of DTR. You are now ready to use it as an image Registry.
+
+## Docker Image Workflow
+
+This section will walk you through the process of pushing and pulling images to your DTR server from another EC2 instance within your AWS VPC, a peer VPC, or remote location connected via VPN. As such, this guide will use the Private DNS name of the DTR EC2 Host when tagging and pushing the image.
+
+To complete this section you will need two EC2 instances:
+ + The DTR EC2 Host you have already built and configured
+ + A Docker client EC2 instance running commercially supported versions of Docker Engine https://www.docker.com/compatibility-maintenance. with at least one image stored locally. 
+
+NOTE: The instructions in this section of the guide will assume the Docker client has a local Docker image called "jenkins", and that the DTR Registry Service has the following DNS name "ip-10-0-0-117.us-west-2.compute.internal". Your image name and DNS name for your DTR Registry Service will be different so you will need to replace these values with the appropriate values for your environment.
+
+NOTE: Push and pull traffic to a DTR Registry Service is encrypted using SSL certificates. By default, DTR installs with a self-signed certificate which you will need to either: configure your Docker hosts to trust, or configure your Docker hosts to ignore with the--insecure-registry flag. Alternatively, you can generate and use your own SSL certificates. Pushing an image to DTR Registry Service
+
+From the command line of the Docker client, run the following command:
+
+```
+docker images
+    REPOSITORY  TAG     IMAGE ID        CREATED     VIRTUAL SIZE
+    jenkins     latest  4704aa632ce7    12 days ago 887.1 MB
+````
+
+NOTE: Depending on your configuration, you may need to prefix your docker commands with sudo.
+
+You will now tag the local jenkins image to associate it with a repo in your newly built DTR server. To do this type the following command:
+`docker tag jenkins ip-10-0-0-117.us-west-2.compute.internal/ci-infrastructure/jnkns-img`
+
+This will tag a version of the local Jenkins image so that it can be stored in the "ip-10-0-0-117.us-2.compute.internal" 
+
+Registry in a repository called "ci-infrastructure" with the name "jnkns-img".
+
+Run the docker images command again to verify the tag operation succeeded. If it did, you will see an additional tagged image associated with the repository used in the previous docker tag command.
+
+```
+docker images
+REPOSITORY                                                             TAG             	IMAGE ID        	CREATED         	VIRTUAL SIZE
+jenkins                                                                latest              4704aa632ce7    	2 days ago      	887.1 MB
+ip-10-0-0-117.us-west-2.compute.internal/ci-infrastructure/jnkns-img   latest          	4704aa632ce7    	2 days ago      	887.1 MB
+Now that the image is tagged, it can be pushed to DTR with the following command:
+docker push ip-10-0-0-117.us-west-2.compute.internal/ci-infrastructure/jnkns-img
+The push refers to a repository [ip-10-0-0-117.us-west-2.compute.internal/ci-infrastructure/jnkns-img] (len: 1)
+4704aa632ce7: Image already exists
+77f96086063d: Image successfully pushed
+841f40a9f341: Image successfully pushed
+8768f04b3a96: Image successfully pushed
+fcd8dccdd336: Image successfully pushed
+0087c04f8fb6: Image successfully pushed
+5cb564bdbf98: Image successfully pushed
+<output truncated>
+Digest: sha256:1bf8c96ca484290178064e448ea69a55caa52f53ea7e279ff66f5c66625aff43
+```
+
+From the “System Health" page of the DTR Administration web interface, you can view stats from your DTR Registry Service, including network throughput. The image below shows spikes in network throughput (related to the image_storage_1 image store) while the image was being pushed.
+
+Your tagged image is now stored in the DTR Registry.
+
+### Pulling an image from your DTR Registry Service
+
+Now that your image is stored in your DTR Registry, you can pull that image from any supported Docker host that has access to the Registry.
+
+From a Docker Host that has access to the DTR server, run the following command to pull the image locally:
+
+```
+docker pull  ip-10-0-0-117.us-west-2.compute.internal/ci-infrastructure/jnkns-img
+latest: Pulling from ip-10-0-0-117.us-west-2.compute.internal/ci-infrastructure/jnkns-img
+64e5325c0d9d: Extracting [=======>   ] 7.864 MB/51.36 MB
+bf84c1d84a8f: Download complete
+87de57de6955: Download complete
+6a974bea7c0d: Download complete
+06c293acac6e: Download complete
+b8a058108e9e: Download complete
+9aa09af53eee: Download complete
+a0513c939a75: Download complete
+f509350ab0be: Download complete
+b0b7b9978dda: Download complete
+6a0b67c37920: Downloading [===============>   ] 63.41 MB/199.1 MB
+1f80eb0f8128: Download complete
+1d1aa175e120: Download complete
+<output truncated>
+Digest: sha256:1bf8c96ca484290178064e448ea69a55caa52f53ea7e279ff66f5c66625aff43
+Status: Downloaded newer image for ip-10-0-0-117.us-west-2.compute.internal/ci-infrastructure/jnkns-img:latest
+```
+
+Run a docker images command to verify that the image has been successfully pulled and stored locally:
+
+```
+docker images
+REPOSITORY                                                             TAG 	IMAGE ID 	CREATED     VIRTUAL SIZE
+ip-10-0-0-117.us-west-2.compute.internal/ci-infrastructure/jnkns-img   latest  4704aa632ce7 2 days ago  887.1 MB
+```
+
