@@ -64,7 +64,12 @@ func main() {
 		logrus.Error("Could not read config at ", configFile)
 		os.Exit(1)
 	}
-	logrus.SetLevel(logrus.Level(viper.GetInt("logging.level")))
+	lvl, err := logrus.ParseLevel(viper.GetString("logging.level"))
+	if err != nil {
+		lvl = logrus.ErrorLevel
+		logrus.Error("Could not parse log level from config. Defaulting to ErrorLevel")
+	}
+	logrus.SetLevel(lvl)
 
 	sigHup := make(chan os.Signal)
 	sigTerm := make(chan os.Signal)
