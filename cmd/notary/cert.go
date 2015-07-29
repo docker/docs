@@ -17,6 +17,7 @@ func init() {
 	cmdCert.AddCommand(cmdCertList)
 
 	cmdCertRemove.Flags().StringVarP(&certRemoveGUN, "gun", "g", "", "Globally unique name to delete certificates for")
+	cmdCertRemove.Flags().BoolVarP(&certRemoveYes, "yes", "y", false, "Answer yes to the removal question (no confirmation)")
 	cmdCert.AddCommand(cmdCertRemove)
 }
 
@@ -34,6 +35,7 @@ var cmdCertList = &cobra.Command{
 }
 
 var certRemoveGUN string
+var certRemoveYes bool
 
 var cmdCertRemove = &cobra.Command{
 	Use:   "remove [ certID ]",
@@ -92,10 +94,12 @@ func certRemove(cmd *cobra.Command, args []string) {
 	}
 	fmt.Println("\nAre you sure you want to remove these certificates? (yes/no)")
 
-	// Ask for confirmation before removing certificates
-	confirmed := askConfirm()
-	if !confirmed {
-		fatalf("aborting action.")
+	// Ask for confirmation before removing certificates, unless -y is provided
+	if !certRemoveYes {
+		confirmed := askConfirm()
+		if !confirmed {
+			fatalf("aborting action.")
+		}
 	}
 
 	// Remove all the certs

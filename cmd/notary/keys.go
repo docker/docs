@@ -20,6 +20,7 @@ func init() {
 	cmdKey.AddCommand(cmdKeyRemoveKey)
 	cmdKeyRemoveKey.Flags().StringVarP(&keyRemoveGUN, "gun", "g", "", "Globally unique name to remove keys for")
 	cmdKeyRemoveKey.Flags().BoolVarP(&keyRemoveRoot, "root", "r", false, "Remove root keys")
+	cmdKeyRemoveKey.Flags().BoolVarP(&keyRemoveYes, "yes", "y", false, "Answer yes to the removal question (no confirmation)")
 	cmdKey.AddCommand(cmdKeyGenerateRootKey)
 
 	cmdKeyExport.Flags().StringVarP(&keysExportGUN, "gun", "g", "", "Globally unique name to export keys for")
@@ -45,6 +46,7 @@ var cmdKeyList = &cobra.Command{
 
 var keyRemoveGUN string
 var keyRemoveRoot bool
+var keyRemoveYes bool
 
 var cmdKeyRemoveKey = &cobra.Command{
 	Use:   "remove [ keyID ]",
@@ -117,10 +119,12 @@ func keysRemoveKey(cmd *cobra.Command, args []string) {
 	fmt.Println("Are you sure you want to remove the following key?")
 	fmt.Printf("%s\n(yes/no)\n", keyID)
 
-	// Ask for confirmation before removing the key
-	confirmed := askConfirm()
-	if !confirmed {
-		fatalf("aborting action.")
+	// Ask for confirmation before removing the key, unless -y is passed
+	if !keyRemoveYes {
+		confirmed := askConfirm()
+		if !confirmed {
+			fatalf("aborting action.")
+		}
 	}
 
 	// Choose the correct filestore to remove the key from
