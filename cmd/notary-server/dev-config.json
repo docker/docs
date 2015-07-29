@@ -10,7 +10,7 @@
 		"port": ""
 	},
 	"logging": {
-		"level": 5
+		"level": "debug"
 	},
 	"storage": {
 		"backend": "mysql",

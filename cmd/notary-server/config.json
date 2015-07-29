@@ -8,7 +8,7 @@
 	  "port": "7899",
 	  "tls_ca_file": "./fixtures/root-ca.crt"			},
 	"logging": {
-		"level": 5
+		"level": "debug"
 	},
 	"storage": {
 		"backend": "mysql",
