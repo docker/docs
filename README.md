@@ -1,4 +1,4 @@
-Docker Toolbox
+![logo](https://cloud.githubusercontent.com/assets/251292/8971196/4df4098a-3603-11e5-8827-c83a10890678.png)Docker Toolbox
 ==================================
 
 [![docker toolbox logo](https://cloud.githubusercontent.com/assets/251292/8895808/5596f50e-339b-11e5-92bd-a596d48a5531.png)](https://www.docker.com/toolbox)
