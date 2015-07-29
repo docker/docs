@@ -1,14 +1,6 @@
-# windows-installer
+# Docker Toolbox for Windows
 
-Installation [instructions](https://docs.docker.com/installation/windows/) available on the Docker documentation site.
-
-## What is included:
-
-- [msys-git](http://msysgit.github.io/) for tools like `OpenSSH` and `BASH`
-- [VirtualBox](https://www.virtualbox.org)
-- [Boot2Docker-cli management tool](https://github.com/boot2docker/boot2docker-cli)
-- [Boot2Docker ISO](https://github.com/boot2docker/boot2docker)
-- [Docker Client for Windows](https://github.com/docker/docker)
+Installation [instructions](http://docs.docker.com/windows/started/) available on the Docker documentation site.
 
 ## Why Inno Setup?
 
@@ -17,10 +9,12 @@ because that is what the [msysGit](http://git-scm.com/) installer is built with.
 
 (It also happens that I've used Inno Setup before, so I can make something faster.)
 
-Making a simple Wix for the Boot2Docker-cli should be simple, and this can then be
-used in this all-in-one installer too.
-
 ## Maintenance
 
 See `MAINTENANCE.md` for instructions on how to update, bundle and compile the
-Boot2Docker Windows Installer.
+Docker Toolbox Windows Installer.
+
+## License
+Docker Toolbox code is licensed under the Apache License, Version 2.0. See [LICENSE](https://github.com/docker/toolbox/blob/master/LICENSE) for the full license text.
+
+Docker Toolbox Logo and all other related Docker artwork © Docker, Inc. 2015.  All rights reserved; not licensed for third party use.
