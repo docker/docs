@@ -113,7 +113,7 @@ func (km *KeyStoreManager) ImportRootKey(source io.Reader, keyID string) error {
 
 func moveKeys(oldKeyStore, newKeyStore *trustmanager.KeyFileStore) error {
 	// List all files but no symlinks
-	for _, f := range oldKeyStore.ListKeys() {
+	for f := range oldKeyStore.ListKeys() {
 		privateKey, alias, err := oldKeyStore.GetKey(f)
 		if err != nil {
 			return err
@@ -280,7 +280,7 @@ func (km *KeyStoreManager) ImportKeysZip(zipReader zip.Reader) error {
 
 func moveKeysByGUN(oldKeyStore, newKeyStore *trustmanager.KeyFileStore, gun string) error {
 	// List all files but no symlinks
-	for _, relKeyPath := range oldKeyStore.ListKeys() {
+	for relKeyPath := range oldKeyStore.ListKeys() {
 
 		// Skip keys that aren't associated with this GUN
 		if !strings.HasPrefix(relKeyPath, filepath.FromSlash(gun)) {

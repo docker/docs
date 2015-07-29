@@ -42,7 +42,7 @@ const (
 type KeyStore interface {
 	AddKey(name, alias string, privKey data.PrivateKey) error
 	GetKey(name string) (data.PrivateKey, string, error)
-	ListKeys() []string
+	ListKeys() map[string]string
 	RemoveKey(name string) error
 }
 

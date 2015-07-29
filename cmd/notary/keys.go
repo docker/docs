@@ -2,13 +2,11 @@ package main
 
 import (
 	"archive/zip"
-	"crypto/x509"
 	"fmt"
-	"math"
 	"os"
 	"path/filepath"
+	"sort"
 	"strings"
-	"time"
 
 	"github.com/docker/notary/keystoremanager"
 	"github.com/docker/notary/pkg/passphrase"
@@ -19,10 +17,12 @@ import (
 
 func init() {
 	cmdKey.AddCommand(cmdKeyList)
-	cmdKey.AddCommand(cmdKeyRemoveRootKey)
+	cmdKey.AddCommand(cmdKeyRemoveKey)
+	cmdKeyRemoveKey.Flags().StringVarP(&keyRemoveGUN, "gun", "g", "", "Globally unique name to remove keys for")
+	cmdKeyRemoveKey.Flags().BoolVarP(&keyRemoveRoot, "root", "r", false, "Remove root keys")
 	cmdKey.AddCommand(cmdKeyGenerateRootKey)
 
-	cmdKeyExport.Flags().StringVarP(&keysExportGUN, "gun", "g", "", "Globally unique name to export keys for.")
+	cmdKeyExport.Flags().StringVarP(&keysExportGUN, "gun", "g", "", "Globally unique name to export keys for")
 	cmdKey.AddCommand(cmdKeyExport)
 	cmdKey.AddCommand(cmdKeyExportRoot)
 	cmdKeyExportRoot.Flags().BoolVarP(&keysExportRootChangePassphrase, "change-passphrase", "c", false, "set a new passphrase for the key being exported")
@@ -33,7 +33,7 @@ func init() {
 var cmdKey = &cobra.Command{
 	Use:   "key",
 	Short: "Operates on keys.",
-	Long:  "operations on private keys.",
+	Long:  `operations on private keys.`,
 }
 
 var cmdKeyList = &cobra.Command{
@@ -43,11 +43,14 @@ var cmdKeyList = &cobra.Command{
 	Run:   keysList,
 }
 
-var cmdKeyRemoveRootKey = &cobra.Command{
+var keyRemoveGUN string
+var keyRemoveRoot bool
+
+var cmdKeyRemoveKey = &cobra.Command{
 	Use:   "remove [ keyID ]",
-	Short: "Removes the root key with the given keyID.",
-	Long:  "remove the root key with the given keyID from the local host.",
-	Run:   keysRemoveRootKey,
+	Short: "Removes the key with the given keyID.",
+	Long:  "remove the key with the given keyID from the local host.",
+	Run:   keysRemoveKey,
 }
 
 var cmdKeyGenerateRootKey = &cobra.Command{
@@ -89,17 +92,13 @@ var cmdKeyImportRoot = &cobra.Command{
 	Run:   keysImportRoot,
 }
 
-// keysRemoveRootKey deletes a root private key based on ID
-func keysRemoveRootKey(cmd *cobra.Command, args []string) {
+// keysRemoveKey deletes a private key based on ID
+func keysRemoveKey(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
 		cmd.Usage()
-		fatalf("must specify the key ID of the root key to remove")
+		fatalf("must specify the key ID of the key to remove")
 	}
 
-	keyID := args[0]
-	if len(keyID) != 64 {
-		fatalf("please enter a valid root key ID")
-	}
 	parseConfig()
 
 	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, retriever)
@@ -107,22 +106,53 @@ func keysRemoveRootKey(cmd *cobra.Command, args []string) {
 		fatalf("failed to create a new truststore manager with directory: %s", trustDir)
 	}
 
-	// List all the keys about to be removed
-	fmt.Printf("Are you sure you want to remove the following key?\n%s\n (yes/no)\n", keyID)
+	keyID := args[0]
 
-	// Ask for confirmation before removing keys
+	// This is an invalid ID
+	if len(keyID) != idSize {
+		fatalf("invalid key ID provided: %s", keyID)
+	}
+
+	// List the key about to be removed
+	fmt.Println("Are you sure you want to remove the following key?")
+	fmt.Printf("%s\n(yes/no)\n", keyID)
+
+	// Ask for confirmation before removing the key
 	confirmed := askConfirm()
 	if !confirmed {
 		fatalf("aborting action.")
 	}
 
-	// Remove all the keys under the Global Unique Name
-	err = keyStoreManager.RootKeyStore().RemoveKey(keyID)
-	if err != nil {
-		fatalf("failed to remove root key with key ID: %s", keyID)
+	// Choose the correct filestore to remove the key from
+	var keyStoreToRemove *trustmanager.KeyFileStore
+	var keyMap map[string]string
+	if keyRemoveRoot {
+		keyStoreToRemove = keyStoreManager.RootKeyStore()
+		keyMap = keyStoreManager.RootKeyStore().ListKeys()
+	} else {
+		keyStoreToRemove = keyStoreManager.NonRootKeyStore()
+		keyMap = keyStoreManager.NonRootKeyStore().ListKeys()
 	}
 
-	fmt.Printf("Root key %s removed\n", keyID)
+	// Attempt to find the full GUN to the key in the map
+	// This is irrelevant for removing root keys, but does no harm
+	var keyWithGUN string
+	for k := range keyMap {
+		if filepath.Base(k) == keyID {
+			keyWithGUN = k
+		}
+	}
+
+	// If empty, we didn't find any matches
+	if keyWithGUN == "" {
+		fatalf("key with key ID: %s not found\n", keyID)
+	}
+
+	// Attempt to remove the key
+	err = keyStoreToRemove.RemoveKey(keyWithGUN)
+	if err != nil {
+		fatalf("failed to remove key with key ID: %s, %v", keyID, err)
+	}
 }
 
 func keysList(cmd *cobra.Command, args []string) {
@@ -139,22 +169,28 @@ func keysList(cmd *cobra.Command, args []string) {
 	}
 
 	fmt.Println("")
-	fmt.Println("# Trusted Certificates:")
-	trustedCerts := keyStoreManager.TrustedCertificateStore().GetCertificates()
-	for _, c := range trustedCerts {
-		printCert(c)
-	}
-
-	fmt.Println("")
 	fmt.Println("# Root keys: ")
-	for _, k := range keyStoreManager.RootKeyStore().ListKeys() {
+	for k := range keyStoreManager.RootKeyStore().ListKeys() {
 		fmt.Println(k)
 	}
 
 	fmt.Println("")
 	fmt.Println("# Signing keys: ")
-	for _, k := range keyStoreManager.NonRootKeyStore().ListKeys() {
-		printKey(k)
+
+	// Get a map of all the keys/roles
+	keysMap := keyStoreManager.NonRootKeyStore().ListKeys()
+
+	// Get a list of all the keys
+	var sortedKeys []string
+	for k := range keysMap {
+		sortedKeys = append(sortedKeys, k)
+	}
+	// Sort the list of all the keys
+	sort.Strings(sortedKeys)
+
+	// Print a sorted list of the key/role
+	for _, k := range sortedKeys {
+		printKey(k, keysMap[k])
 	}
 }
 
@@ -237,7 +273,7 @@ func keysExportRoot(cmd *cobra.Command, args []string) {
 	keyID := args[0]
 	exportFilename := args[1]
 
-	if len(keyID) != 64 {
+	if len(keyID) != idSize {
 		fatalf("please specify a valid root key ID")
 	}
 
@@ -306,7 +342,7 @@ func keysImportRoot(cmd *cobra.Command, args []string) {
 	keyID := args[0]
 	importFilename := args[1]
 
-	if len(keyID) != 64 {
+	if len(keyID) != idSize {
 		fatalf("please specify a valid root key ID")
 	}
 
@@ -330,30 +366,8 @@ func keysImportRoot(cmd *cobra.Command, args []string) {
 	}
 }
 
-func printCert(cert *x509.Certificate) {
-	timeDifference := cert.NotAfter.Sub(time.Now())
-	certID, err := trustmanager.FingerprintCert(cert)
-	if err != nil {
-		fatalf("could not fingerprint certificate: %v", err)
-	}
-
-	fmt.Printf("%s %s (expires in: %v days)\n", cert.Subject.CommonName, certID, math.Floor(timeDifference.Hours()/24))
-}
-
-func printKey(keyPath string) {
+func printKey(keyPath, alias string) {
 	keyID := filepath.Base(keyPath)
 	gun := filepath.Dir(keyPath)
-	fmt.Printf("%s %s\n", gun, keyID)
-}
-
-func askConfirm() bool {
-	var res string
-	_, err := fmt.Scanln(&res)
-	if err != nil {
-		return false
-	}
-	if strings.EqualFold(res, "y") || strings.EqualFold(res, "yes") {
-		return true
-	}
-	return false
+	fmt.Printf("%s - %s - %s\n", gun, alias, keyID)
 }

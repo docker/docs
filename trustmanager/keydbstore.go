@@ -132,7 +132,7 @@ func (s *KeyDBStore) GetKey(name string) (data.PrivateKey, string, error) {
 }
 
 // ListKeys always returns nil. This method is here to satisfy the KeyStore interface
-func (s *KeyDBStore) ListKeys() []string {
+func (s *KeyDBStore) ListKeys() map[string]string {
 	return nil
 }
 

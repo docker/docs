@@ -83,8 +83,8 @@ func TestImportExportZip(t *testing.T) {
 
 	// Add non-root keys to the map. These should use the new passphrase
 	// because the passwords were chosen by the newPassphraseRetriever.
-	privKeyList := repo.KeyStoreManager.NonRootKeyStore().ListKeys()
-	for _, privKeyName := range privKeyList {
+	privKeyMap := repo.KeyStoreManager.NonRootKeyStore().ListKeys()
+	for privKeyName := range privKeyMap {
 		_, alias, err := repo.KeyStoreManager.NonRootKeyStore().GetKey(privKeyName)
 		assert.NoError(t, err, "privKey %s has no alias", privKeyName)
 
@@ -155,7 +155,7 @@ func TestImportExportZip(t *testing.T) {
 
 	// Look for keys in private. The filenames should match the key IDs
 	// in the repo's private key store.
-	for _, privKeyName := range privKeyList {
+	for privKeyName := range privKeyMap {
 		_, alias, err := repo.KeyStoreManager.NonRootKeyStore().GetKey(privKeyName)
 		assert.NoError(t, err, "privKey %s has no alias", privKeyName)
 
@@ -219,8 +219,8 @@ func TestImportExportGUN(t *testing.T) {
 
 	// Add keys non-root keys to the map. These should use the new passphrase
 	// because they were formerly unencrypted.
-	privKeyList := repo.KeyStoreManager.NonRootKeyStore().ListKeys()
-	for _, privKeyName := range privKeyList {
+	privKeyMap := repo.KeyStoreManager.NonRootKeyStore().ListKeys()
+	for privKeyName := range privKeyMap {
 		_, alias, err := repo.KeyStoreManager.NonRootKeyStore().GetKey(privKeyName)
 		if err != nil {
 			t.Fatalf("privKey %s has no alias", privKeyName)
@@ -289,7 +289,7 @@ func TestImportExportGUN(t *testing.T) {
 
 	// Look for keys in private. The filenames should match the key IDs
 	// in the repo's private key store.
-	for _, privKeyName := range privKeyList {
+	for privKeyName := range privKeyMap {
 		_, alias, err := repo.KeyStoreManager.NonRootKeyStore().GetKey(privKeyName)
 		if err != nil {
 			t.Fatalf("privKey %s has no alias", privKeyName)

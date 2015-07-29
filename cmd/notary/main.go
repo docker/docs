@@ -5,6 +5,7 @@ import (
 	"os"
 	"os/user"
 	"path/filepath"
+	"strings"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/spf13/cobra"
@@ -17,6 +18,7 @@ import (
 const configFileName string = "config"
 const defaultTrustDir string = ".notary/"
 const defaultServerURL = "https://notary-server:4443"
+const idSize = 64
 
 var rawOutput bool
 var trustDir string
@@ -91,6 +93,7 @@ func main() {
 	notaryCmd.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "verbose output")
 
 	notaryCmd.AddCommand(cmdKey)
+	notaryCmd.AddCommand(cmdCert)
 	notaryCmd.AddCommand(cmdTufInit)
 	cmdTufInit.Flags().StringVarP(&remoteTrustServer, "server", "s", defaultServerURL, "Remote trust server location")
 	notaryCmd.AddCommand(cmdTufList)
@@ -111,4 +114,16 @@ func main() {
 func fatalf(format string, args ...interface{}) {
 	fmt.Printf("* fatal: "+format+"\n", args...)
 	os.Exit(1)
+}
+
+func askConfirm() bool {
+	var res string
+	_, err := fmt.Scanln(&res)
+	if err != nil {
+		return false
+	}
+	if strings.EqualFold(res, "y") || strings.EqualFold(res, "yes") {
+		return true
+	}
+	return false
 }
