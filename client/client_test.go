@@ -456,6 +456,12 @@ func testPublish(t *testing.T, rootType data.KeyAlgorithm) {
 
 	// Set up server
 	ctx := context.WithValue(context.Background(), "metaStore", storage.NewMemStorage())
+
+	// Do not pass one of the const KeyAlgorithms here as the value! Passing a
+	// string is in itself good test that we are handling it correctly as we will
+	// be receiving a string from the configuration.
+	ctx = context.WithValue(ctx, "keyAlgorithm", "ecdsa")
+
 	hand := utils.RootHandlerFactory(nil, ctx,
 		cryptoservice.NewCryptoService("", trustmanager.NewKeyMemoryStore(passphraseRetriever)))
 

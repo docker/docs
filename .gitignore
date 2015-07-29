@@ -1,4 +1,6 @@
 /cmd/notary-server/notary-server
+/cmd/notary-server/local.config.json
+/cmd/notary-signer/local.config.json
 cover
 bin
 cross
