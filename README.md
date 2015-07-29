@@ -6,7 +6,7 @@ Docker Toolbox ![logo](https://cloud.githubusercontent.com/assets/251292/8971250
 The Docker Toolbox installs everything you need to get started with
 Docker on Mac OS X and Windows, including:
 
-|                        | Mac    | Windows     | Linux on Desktop (Help Wanted) |
+|                        | Mac    | Windows     | Desktop Linux  (Help Wanted)   |
 |------------------------|--------|-------------|--------------------------------|
 | Docker Client / Engine | Client | Client      | Engine                         |
 | Docker Machine         | Yes    | Yes         | Yes                            |
