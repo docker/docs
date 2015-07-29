@@ -21,6 +21,13 @@ Docker on Mac OS X and Windows, including:
 Full documentation [is available
 here](https://docs.docker.com/installation/mac/).
 
+## Frequently Asked Questions
+
+- Do I have to install VirtualBox? 
+
+No, you can deselect VirtualBox during installation. It is bundled in case you want to have a working environment for free. 
+
+- 
 ## License 
 
 Docker Toolbox code is licensed under the Apache License, Version 2.0. See [LICENSE](https://github.com/docker/toolbox/blob/master/LICENSE) for the full license text. 
