@@ -107,17 +107,22 @@ func tufInit(cmd *cobra.Command, args []string) {
 		fatalf(err.Error())
 	}
 
-	keysList := nRepo.KeyStoreManager.RootKeyStore().ListKeys()
+	keysMap := nRepo.KeyStoreManager.RootKeyStore().ListKeys()
+
 	var rootKeyID string
-	if len(keysList) < 1 {
+	if len(keysMap) < 1 {
 		fmt.Println("No root keys found. Generating a new root key...")
 		rootKeyID, err = nRepo.KeyStoreManager.GenRootKey("ECDSA")
 		if err != nil {
 			fatalf(err.Error())
 		}
 	} else {
-		rootKeyID = keysList[0]
-		fmt.Println("Root key found.")
+		// TODO(diogo): ask which root key to use
+		for keyID := range keysMap {
+			rootKeyID = keyID
+		}
+
+		fmt.Printf("Root key found, using: %s", rootKeyID)
 	}
 
 	rootCryptoService, err := nRepo.KeyStoreManager.GetRootCryptoService(rootKeyID)
