@@ -2,14 +2,6 @@
 
 Installation [instructions](http://docs.docker.com/windows/started/) available on the Docker documentation site.
 
-## What is included:
-
-- [msys-git](http://msysgit.github.io/) for tools like `OpenSSH` and `BASH`
-- [VirtualBox](https://www.virtualbox.org)
-- [Boot2Docker-cli management tool](https://github.com/boot2docker/boot2docker-cli)
-- [Boot2Docker ISO](https://github.com/boot2docker/boot2docker)
-- [Docker Client for Windows](https://github.com/docker/docker)
-
 ## Why Inno Setup?
 
 I've chosen to make a simple installer using [Inno Setup](http://www.jrsoftware.org/)
@@ -23,4 +15,4 @@ used in this all-in-one installer too.
 ## Maintenance
 
 See `MAINTENANCE.md` for instructions on how to update, bundle and compile the
-Boot2Docker Windows Installer.
+Docker Toolbox Windows Installer.
