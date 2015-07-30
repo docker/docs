@@ -204,9 +204,6 @@ func (s HTTPStore) GetKey(role string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	if resp.StatusCode != 200 {
-		return nil, ErrKeyNotAvailable{}
-	}
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {

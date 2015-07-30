@@ -132,7 +132,7 @@ func Test(t *testing.T) {
 			role: "root",
 			name: "expired",
 			exp:  &expiredTime,
-			err:  ErrExpired{"root", expiredTime.Format("2006-01-02 15:04:05 MST")},
+			err:  ErrExpired{"root", expiredTime.Format("Mon Jan 2 15:04:05 MST 2006")},
 		},
 	}
 	for _, run := range tests {
@@ -151,7 +151,7 @@ func Test(t *testing.T) {
 		}
 		if run.keys == nil && run.s == nil {
 			k, _ := cryptoService.Create("root", data.ED25519Key)
-			meta := &signedMeta{Type: run.typ, Version: run.ver, Expires: run.exp.Format("2006-01-02 15:04:05 MST")}
+			meta := &signedMeta{Type: run.typ, Version: run.ver, Expires: *run.exp}
 
 			b, err := cjson.Marshal(meta)
 			assert.NoError(t, err)

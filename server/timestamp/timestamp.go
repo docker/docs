@@ -3,7 +3,6 @@ package timestamp
 import (
 	"bytes"
 	"encoding/json"
-	"time"
 
 	"github.com/endophage/gotuf/data"
 	"github.com/endophage/gotuf/signed"
@@ -93,7 +92,7 @@ func GetOrCreateTimestamp(gun string, store storage.MetaStore, cryptoService sig
 
 // timestampExpired compares the current time to the expiry time of the timestamp
 func timestampExpired(ts *data.SignedTimestamp) bool {
-	return time.Now().After(ts.Signed.Expires)
+	return signed.IsExpired(ts.Signed.Expires)
 }
 
 func snapshotExpired(ts *data.SignedTimestamp, snapshot []byte) bool {
