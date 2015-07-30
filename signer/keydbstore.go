@@ -1,4 +1,4 @@
-package trustmanager
+package signer
 
 import (
 	"database/sql"
@@ -6,6 +6,7 @@ import (
 	"sync"
 
 	"github.com/docker/notary/pkg/passphrase"
+	"github.com/docker/notary/trustmanager"
 	jose "github.com/dvsekhvalnov/jose2go"
 	"github.com/endophage/gotuf/data"
 	"github.com/jinzhu/gorm"
@@ -107,7 +108,7 @@ func (s *KeyDBStore) GetKey(name string) (data.PrivateKey, string, error) {
 	// Retrieve the GORM private key from the database
 	dbPrivateKey := GormPrivateKey{}
 	if s.db.Where(&GormPrivateKey{KeyID: name}).First(&dbPrivateKey).RecordNotFound() {
-		return nil, "", ErrKeyNotFound{}
+		return nil, "", trustmanager.ErrKeyNotFound{}
 	}
 
 	// Get the passphrase to use for this key
@@ -146,7 +147,7 @@ func (s *KeyDBStore) RemoveKey(name string) error {
 	// Retrieve the GORM private key from the database
 	dbPrivateKey := GormPrivateKey{}
 	if s.db.Where(&GormPrivateKey{KeyID: name}).First(&dbPrivateKey).RecordNotFound() {
-		return ErrKeyNotFound{}
+		return trustmanager.ErrKeyNotFound{}
 	}
 
 	// Delete the key from the database
@@ -160,7 +161,7 @@ func (s *KeyDBStore) RotateKeyPassphrase(name, newPassphraseAlias string) error 
 	// Retrieve the GORM private key from the database
 	dbPrivateKey := GormPrivateKey{}
 	if s.db.Where(&GormPrivateKey{KeyID: name}).First(&dbPrivateKey).RecordNotFound() {
-		return ErrKeyNotFound{}
+		return trustmanager.ErrKeyNotFound{}
 	}
 
 	// Get the current passphrase to use for this key

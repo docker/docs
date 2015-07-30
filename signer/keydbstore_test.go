@@ -1,4 +1,4 @@
-package trustmanager
+package signer
 
 import (
 	"crypto/rand"
@@ -8,6 +8,7 @@ import (
 	"os"
 	"testing"
 
+	"github.com/docker/notary/trustmanager"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/stretchr/testify/assert"
 )
@@ -30,7 +31,7 @@ func TestCreateRead(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)
 
-	testKey, err := GenerateECDSAKey(rand.Reader)
+	testKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
 	assert.NoError(t, err)
 
 	// We are using SQLite for the tests
@@ -69,10 +70,10 @@ func TestDoubleCreate(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)
 
-	testKey, err := GenerateECDSAKey(rand.Reader)
+	testKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
 	assert.NoError(t, err)
 
-	anotherTestKey, err := GenerateECDSAKey(rand.Reader)
+	anotherTestKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
 	assert.NoError(t, err)
 
 	// We are using SQLite for the tests
@@ -103,7 +104,7 @@ func TestCreateDelete(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)
 
-	testKey, err := GenerateECDSAKey(rand.Reader)
+	testKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
 	assert.NoError(t, err)
 
 	// We are using SQLite for the tests
@@ -134,7 +135,7 @@ func TestKeyRotation(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)
 
-	testKey, err := GenerateECDSAKey(rand.Reader)
+	testKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
 	assert.NoError(t, err)
 
 	// We are using SQLite for the tests
