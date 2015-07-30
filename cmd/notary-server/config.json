@@ -15,10 +15,5 @@
 	"storage": {
 		"backend": "mysql",
 		"db_url": "dockercondemo:dockercondemo@tcp(notarymysql:3306)/dockercondemo"
-	},
-	"reporting": {
-		"bugsnag": "enable",
-		"bugsnag_api_key": "",
-		"bugsnag_release_stage": "development"
 	}
 }
