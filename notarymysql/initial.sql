@@ -20,9 +20,9 @@ CREATE TABLE `timestamp_keys` (
 DROP TABLE IF EXISTS `private_keys`;
 CREATE TABLE `private_keys` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
-	`created_at` timestamp DEFAULT NULL,
-	`updated_at` timestamp DEFAULT NULL,
-	`deleted_at` timestamp DEFAULT NULL,
+	`created_at` timestamp NULL,
+	`updated_at` timestamp NULL,
+	`deleted_at` timestamp NULL,
 	`key_id`  varchar(255) NOT NULL,
 	`encryption_alg`  varchar(255) NOT NULL,
 	`keywrap_alg`  varchar(255) NOT NULL,
