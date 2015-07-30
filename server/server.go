@@ -70,9 +70,7 @@ func Run(ctx context.Context, addr, tlsCertFile, tlsKeyFile string, trust signed
 	}
 
 	var ac auth.AccessController
-	if authMethod == "" {
-		ac = nil
-	} else {
+	if authMethod == "token" {
 		authOptions, ok := authOpts.(map[string]interface{})
 		if !ok {
 			return fmt.Errorf("auth.options must be a map[string]interface{}")

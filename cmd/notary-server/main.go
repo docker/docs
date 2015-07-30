@@ -8,18 +8,18 @@ import (
 	"net/http"
 	_ "net/http/pprof"
 	"os"
-	"os/signal"
 	"path/filepath"
 	"strings"
-	"syscall"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/bugsnag/bugsnag-go"
 	_ "github.com/docker/distribution/registry/auth/htpasswd"
 	_ "github.com/docker/distribution/registry/auth/token"
 	"github.com/endophage/gotuf/signed"
 	_ "github.com/go-sql-driver/mysql"
 	"golang.org/x/net/context"
 
+	bugsnag_hook "github.com/Sirupsen/logrus/hooks/bugsnag"
 	"github.com/docker/notary/server"
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/signer"
@@ -71,11 +71,28 @@ func main() {
 	}
 	logrus.SetLevel(lvl)
 
-	sigHup := make(chan os.Signal)
-	sigTerm := make(chan os.Signal)
-
-	signal.Notify(sigHup, syscall.SIGHUP)
-	signal.Notify(sigTerm, syscall.SIGTERM)
+	// set up bugsnag and attach to logrus
+	bugs := viper.GetString("reporting.bugsnag")
+	if bugs != "" {
+		apiKey := viper.GetString("reporting.bugsnag_api_key")
+		releaseStage := viper.GetString("reporting.bugsnag_release_stage")
+		bugsnag.Configure(bugsnag.Configuration{
+			APIKey:       apiKey,
+			ReleaseStage: releaseStage,
+		})
+		hook, err := bugsnag_hook.NewBugsnagHook()
+		if err != nil {
+			logrus.Error("Could not attach bugsnag to logrus: ", err.Error())
+		} else {
+			logrus.AddHook(hook)
+		}
+	}
+	keyAlgo := viper.GetString("trust_service.key_algorithm")
+	if keyAlgo == "" {
+		logrus.Fatal("no key algorithm configured.")
+		os.Exit(1)
+	}
+	ctx = context.WithValue(ctx, "keyAlgorithm", keyAlgo)
 
 	var trust signed.CryptoService
 	if viper.GetString("trust_service.type") == "remote" {
