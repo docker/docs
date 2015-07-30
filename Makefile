@@ -4,13 +4,13 @@ PREFIX?=$(shell pwd)
 # Populate version variables
 # Add to compile time flags
 NOTARY_PKG := github.com/docker/notary
-VERSION := $(shell cat VERSION)
+VERSION := $(shell cat NOTARY_VERSION)
 GITCOMMIT := $(shell git rev-parse --short HEAD)
 GITUNTRACKEDCHANGES := $(shell git status --porcelain --untracked-files=no)
 ifneq ($(GITUNTRACKEDCHANGES),)
 	GITCOMMIT := $(GITCOMMIT)-dirty
 endif
-CTIMEVAR=-X $(NOTARY_PKG)/version.GitCommit '$(GITCOMMIT)' -X $(NOTARY_PKG)/version.NotaryVersion '$(VERSION)'
+CTIMEVAR=-X $(NOTARY_PKG)/version.GitCommit '$(GITCOMMIT)' -X $(NOTARY_PKG)/version.NotaryVersion '$(NOTARY_VERSION)'
 GO_LDFLAGS=-ldflags "-w $(CTIMEVAR)"
 GO_LDFLAGS_STATIC=-ldflags "-w $(CTIMEVAR) -extldflags -static"
 GOOSES = darwin freebsd linux
@@ -35,15 +35,15 @@ AUTHORS: .git/HEAD
 version/version.go:
 	./version/version.sh > $@
 
-${PREFIX}/bin/notary-server: VERSION $(shell find . -type f -name '*.go')
+${PREFIX}/bin/notary-server: NOTARY_VERSION $(shell find . -type f -name '*.go')
 	@echo "+ $@"
 	@godep go build -o $@ ${GO_LDFLAGS} ./cmd/notary-server
 
-${PREFIX}/bin/notary: VERSION $(shell find . -type f -name '*.go')
+${PREFIX}/bin/notary: NOTARY_VERSION $(shell find . -type f -name '*.go')
 	@echo "+ $@"
 	@godep go build -o $@ ${GO_LDFLAGS} ./cmd/notary
 
-${PREFIX}/bin/notary-signer: VERSION $(shell find . -type f -name '*.go')
+${PREFIX}/bin/notary-signer: NOTARY_VERSION $(shell find . -type f -name '*.go')
 	@echo "+ $@"
 	@godep go build -o $@ ${GO_LDFLAGS} ./cmd/notary-signer
 
