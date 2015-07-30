@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"crypto/sha256"
 	"crypto/tls"
 	"fmt"
@@ -9,6 +10,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"strings"
 	"time"
 
 	"crypto/subtle"
@@ -16,6 +18,7 @@ import (
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/distribution/registry/client/auth"
 	"github.com/docker/distribution/registry/client/transport"
+	"github.com/docker/docker/pkg/term"
 	notaryclient "github.com/docker/notary/client"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -82,7 +85,7 @@ func tufAdd(cmd *cobra.Command, args []string) {
 
 	parseConfig()
 
-	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, remoteTrustServer, getTransport(gun), retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, remoteTrustServer, getTransport(gun, true), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -107,7 +110,7 @@ func tufInit(cmd *cobra.Command, args []string) {
 	gun := args[0]
 	parseConfig()
 
-	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, remoteTrustServer, getTransport(gun), retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, remoteTrustServer, getTransport(gun, false), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -149,7 +152,7 @@ func tufList(cmd *cobra.Command, args []string) {
 	gun := args[0]
 	parseConfig()
 
-	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, remoteTrustServer, getTransport(gun), retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, remoteTrustServer, getTransport(gun, true), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -175,7 +178,7 @@ func tufLookup(cmd *cobra.Command, args []string) {
 	targetName := args[1]
 	parseConfig()
 
-	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, remoteTrustServer, getTransport(gun), retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, remoteTrustServer, getTransport(gun, true), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -199,7 +202,7 @@ func tufPublish(cmd *cobra.Command, args []string) {
 
 	fmt.Println("Pushing changes to ", gun, ".")
 
-	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, remoteTrustServer, getTransport(gun), retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, remoteTrustServer, getTransport(gun, false), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -220,7 +223,7 @@ func tufRemove(cmd *cobra.Command, args []string) {
 	parseConfig()
 
 	repo, err := notaryclient.NewNotaryRepository(trustDir, gun, remoteTrustServer,
-		getTransport(gun), retriever)
+		getTransport(gun, false), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -247,7 +250,7 @@ func verify(cmd *cobra.Command, args []string) {
 
 	gun := args[0]
 	targetName := args[1]
-	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, remoteTrustServer, getTransport(gun), retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, remoteTrustServer, getTransport(gun, true), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -272,14 +275,47 @@ func verify(cmd *cobra.Command, args []string) {
 }
 
 type passwordStore struct {
+	anonymous bool
 }
 
 func (ps passwordStore) Basic(u *url.URL) (string, string) {
-	// TODO(dmcgowan): Prompt user and cache
-	return "", ""
+	if ps.anonymous {
+		return "", ""
+	}
+
+	stdin := bufio.NewReader(os.Stdin)
+	fmt.Fprintf(os.Stdout, "Enter username: ")
+
+	userIn, err := stdin.ReadBytes('\n')
+	if err != nil {
+		logrus.Errorf("error processing username input: %s", err)
+		return "", ""
+	}
+
+	username := strings.TrimSpace(string(userIn))
+
+	state, err := term.SaveState(0)
+	if err != nil {
+		logrus.Errorf("error saving terminal state, cannot retrieve password: %s", err)
+		return "", ""
+	}
+	term.DisableEcho(0, state)
+	defer term.RestoreTerminal(0, state)
+
+	fmt.Fprintf(os.Stdout, "Enter password: ")
+
+	userIn, err = stdin.ReadBytes('\n')
+	fmt.Fprintln(os.Stdout)
+	if err != nil {
+		logrus.Errorf("error processing password input: %s", err)
+		return "", ""
+	}
+	password := strings.TrimSpace(string(userIn))
+
+	return username, password
 }
 
-func getTransport(gun string) http.RoundTripper {
+func getTransport(gun string, readOnly bool) http.RoundTripper {
 	tlsConfig := &tls.Config{
 		InsecureSkipVerify: viper.GetBool("skipTLSVerify"),
 	}
@@ -318,7 +354,7 @@ func getTransport(gun string) http.RoundTripper {
 		fatalf(err.Error())
 	}
 
-	ps := passwordStore{}
+	ps := passwordStore{anonymous: readOnly}
 	tokenHandler := auth.NewTokenHandler(authTransport, ps, gun, "push", "pull")
 	basicHandler := auth.NewBasicHandler(ps)
 	modifier := transport.RequestModifier(auth.NewAuthorizer(challengeManager, tokenHandler, basicHandler))
