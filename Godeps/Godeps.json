@@ -28,6 +28,19 @@
 			"Rev": "97124afb234048ae0c91b8883c59fcd890bf8145"
 		},
 		{
+			"ImportPath": "github.com/bugsnag/bugsnag-go",
+			"Comment": "v1.0.4-2-g13fd6b8",
+			"Rev": "13fd6b8acda029830ef9904df6b63be0a83369d0"
+		},
+		{
+			"ImportPath": "github.com/bugsnag/osext",
+			"Rev": "0dd3f918b21bec95ace9dc86c7e70266cfc5c702"
+		},
+		{
+			"ImportPath": "github.com/bugsnag/panicwrap",
+			"Rev": "e5f9854865b9778a45169fc249e99e338d4d6f27"
+		},
+		{
 			"ImportPath": "github.com/docker/distribution/context",
 			"Comment": "v2.0.0-353-gfed58bd",
 			"Rev": "fed58bd2d3c096055c0e69c2fb86c9a4965d1b8b"
