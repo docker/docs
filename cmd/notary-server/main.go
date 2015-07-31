@@ -23,6 +23,7 @@ import (
 	"github.com/docker/notary/server"
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/signer"
+	"github.com/docker/notary/version"
 	"github.com/spf13/viper"
 )
 
@@ -48,6 +49,9 @@ func main() {
 	if debug {
 		go debugServer(DebugAddress)
 	}
+
+	// when the server starts print the version for debugging and issue logs later
+	logrus.Infof("Version: %s, Git commit: %s", version.NotaryVersion, version.GitCommit)
 
 	ctx := context.Background()
 
