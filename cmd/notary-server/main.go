@@ -58,6 +58,12 @@ func main() {
 	viper.SetConfigType(strings.TrimPrefix(ext, "."))
 	viper.SetConfigName(strings.TrimSuffix(filename, ext))
 	viper.AddConfigPath(configPath)
+
+	// Automatically accept configuration options from the environment
+	viper.SetEnvPrefix("NOTARY_SERVER")
+	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
+	viper.AutomaticEnv()
+
 	err := viper.ReadInConfig()
 	if err != nil {
 		logrus.Error("Viper Error: ", err.Error())

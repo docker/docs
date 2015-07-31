@@ -31,11 +31,11 @@ import (
 )
 
 const (
-	_DebugAddr       = "localhost:8080"
-	_DBType          = "mysql"
-	_EnvPrefix       = "NOTARY_SIGNER"
-	_DefaultAliasEnv = "DEFAULT_ALIAS"
-	_PINCode         = "PIN"
+	debugAddr       = "localhost:8080"
+	dbType          = "mysql"
+	envPrefix       = "NOTARY_SIGNER"
+	defaultAliasEnv = "DEFAULT_ALIAS"
+	pinCode         = "PIN"
 )
 
 var debug bool
@@ -45,9 +45,9 @@ func init() {
 	// set default log level to Error
 	viper.SetDefault("logging", map[string]interface{}{"level": 2})
 
-	viper.SetEnvPrefix(_EnvPrefix)
-	viper.BindEnv(_DefaultAliasEnv)
-	viper.BindEnv(_PINCode)
+	viper.SetEnvPrefix(envPrefix)
+	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
+	viper.AutomaticEnv()
 
 	// Setup flags
 	flag.StringVar(&configFile, "config", "", "Path to configuration file")
@@ -55,7 +55,6 @@ func init() {
 }
 
 func passphraseRetriever(keyName, alias string, createNew bool, attempts int) (passphrase string, giveup bool, err error) {
-	viper.BindEnv(alias)
 	passphrase = viper.GetString(strings.ToUpper(alias))
 
 	if passphrase == "" {
@@ -69,8 +68,8 @@ func main() {
 	flag.Usage = usage
 	flag.Parse()
 
-	if _DebugAddr != "" {
-		go debugServer(_DebugAddr)
+	if debug {
+		go debugServer(debugAddr)
 	}
 
 	filename := filepath.Base(configFile)
@@ -113,7 +112,7 @@ func main() {
 
 	cryptoServices := make(signer.CryptoServiceIndex)
 
-	pin := viper.GetString(_PINCode)
+	pin := viper.GetString(pinCode)
 	pkcs11Lib := viper.GetString("crypto.pkcs11lib")
 	if pkcs11Lib != "" {
 		if pin == "" {
@@ -127,20 +126,20 @@ func main() {
 		cryptoServices[data.RSAKey] = api.NewRSAHardwareCryptoService(ctx, session)
 	}
 
-	dbType := strings.ToLower(viper.GetString("storage.backend"))
+	configDBType := strings.ToLower(viper.GetString("storage.backend"))
 	dbURL := viper.GetString("storage.db_url")
-	if dbType != _DBType || dbURL == "" {
+	if configDBType != dbType || dbURL == "" {
 		usage()
 		log.Fatalf("Currently only a MySQL database backend is supported.")
 	}
-	dbSQL, err := sql.Open(dbType, dbURL)
+	dbSQL, err := sql.Open(configDBType, dbURL)
 	if err != nil {
 		log.Fatalf("failed to open the database: %s, %v", dbURL, err)
 	}
 
-	defaultAlias := viper.GetString(_DefaultAliasEnv)
+	defaultAlias := viper.GetString(defaultAliasEnv)
 	logrus.Debug("Default Alias: ", defaultAlias)
-	keyStore, err := signer.NewKeyDBStore(passphraseRetriever, defaultAlias, dbType, dbSQL)
+	keyStore, err := signer.NewKeyDBStore(passphraseRetriever, defaultAlias, configDBType, dbSQL)
 	if err != nil {
 		log.Fatalf("failed to create a new keydbstore: %v", err)
 	}
