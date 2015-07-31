@@ -21,7 +21,6 @@ import (
 	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/signer"
 	"github.com/docker/notary/signer/api"
-	"github.com/docker/notary/trustmanager"
 	"github.com/endophage/gotuf/data"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/miekg/pkcs11"
@@ -141,7 +140,7 @@ func main() {
 
 	defaultAlias := viper.GetString(_DefaultAliasEnv)
 	logrus.Debug("Default Alias: ", defaultAlias)
-	keyStore, err := trustmanager.NewKeyDBStore(passphraseRetriever, defaultAlias, dbType, dbSQL)
+	keyStore, err := signer.NewKeyDBStore(passphraseRetriever, defaultAlias, dbType, dbSQL)
 	if err != nil {
 		log.Fatalf("failed to create a new keydbstore: %v", err)
 	}
