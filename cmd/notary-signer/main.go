@@ -21,6 +21,7 @@ import (
 	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/signer"
 	"github.com/docker/notary/signer/api"
+	"github.com/docker/notary/version"
 	"github.com/endophage/gotuf/data"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/miekg/pkcs11"
@@ -71,6 +72,9 @@ func main() {
 	if debug {
 		go debugServer(debugAddr)
 	}
+
+	// when the signer starts print the version for debugging and issue logs later
+	logrus.Infof("Version: %s, Git commit: %s", version.NotaryVersion, version.GitCommit)
 
 	filename := filepath.Base(configFile)
 	ext := filepath.Ext(configFile)
