@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/Sirupsen/logrus"
+	ctxu "github.com/docker/distribution/context"
 	"github.com/docker/distribution/registry/api/errcode"
 	"github.com/docker/distribution/registry/api/v2"
 	"github.com/docker/distribution/registry/auth"
@@ -47,11 +48,15 @@ func RootHandlerFactory(auth auth.AccessController, ctx context.Context, trust s
 // ServeHTTP serves an HTTP request and implements the http.Handler interface.
 func (root *rootHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	ctx := context.WithValue(root.context, "repo", vars["imageName"])
-
+	ctx := ctxu.WithRequest(root.context, r)
+	ctx, w = ctxu.WithResponseWriter(ctx, w)
+	ctx = ctxu.WithLogger(ctx, ctxu.GetRequestLogger(ctx))
+	ctx = context.WithValue(ctx, "repo", vars["imageName"])
 	ctx = context.WithValue(ctx, "cryptoService", root.trust)
 
-	ctx = context.WithValue(ctx, "http.request", r)
+	defer func() {
+		ctxu.GetResponseLogger(ctx).Info("response completed")
+	}()
 
 	if root.auth != nil {
 		var err error
@@ -67,29 +72,12 @@ func (root *rootHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	if err := root.handler(ctx, w, r); err != nil {
-		if err, ok := err.(errcode.Error); ok {
-			logrus.Errorf(
-				"[Notary Server] %d %s %s",
-				err.Code.Descriptor().HTTPStatusCode,
-				r.Method,
-				r.URL.Path,
-			)
-		} else {
-			logrus.Errorf(
-				"[Notary Server] 5XX %s %s %s",
-				r.Method,
-				r.URL.Path,
-				err.Error(),
-			)
-		}
 		e := errcode.ServeJSON(w, err)
 		if e != nil {
 			logrus.Error(e)
 		}
 		return
 	}
-	logrus.Infof("[Notary Server] 200 %s %s", r.Method, r.URL.Path)
-	return
 }
 
 func buildAccessRecords(repo string, actions ...string) []auth.Access {

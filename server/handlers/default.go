@@ -7,12 +7,12 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/Sirupsen/logrus"
 	"github.com/endophage/gotuf/data"
 	"github.com/endophage/gotuf/signed"
 	"github.com/gorilla/mux"
 	"golang.org/x/net/context"
 
+	ctxu "github.com/docker/distribution/context"
 	"github.com/docker/notary/errors"
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/server/timestamp"
@@ -90,19 +90,23 @@ func GetHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) err
 	vars := mux.Vars(r)
 	gun := vars["imageName"]
 	tufRole := vars["tufRole"]
+
+	logger := ctxu.GetLoggerWithFields(ctx, map[string]interface{}{"gun": gun, "tufRole": tufRole})
+
 	out, err := store.GetCurrent(gun, tufRole)
 	if err != nil {
 		if _, ok := err.(*storage.ErrNotFound); ok {
 			return errors.ErrMetadataNotFound.WithDetail(nil)
 		}
-		logrus.Errorf("[Notary Server] 500 GET repository: %s, role: %s", gun, tufRole)
+		logger.Error("500 GET")
 		return errors.ErrUnknown.WithDetail(err)
 	}
 	if out == nil {
-		logrus.Errorf("[Notary Server] 404 GET repository: %s, role: %s", gun, tufRole)
+		logger.Error("404 GET")
 		return errors.ErrMetadataNotFound.WithDetail(nil)
 	}
 	w.Write(out)
+	logger.Debug("200 GET")
 
 	return nil
 }
@@ -116,9 +120,10 @@ func DeleteHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) 
 	}
 	vars := mux.Vars(r)
 	gun := vars["imageName"]
+	logger := ctxu.GetLoggerWithField(ctx, gun, "gun")
 	err := store.Delete(gun)
 	if err != nil {
-		logrus.Errorf("[Notary Server] 500 DELETE repository: %s", gun)
+		logger.Error("500 DELETE repository")
 		return errors.ErrUnknown.WithDetail(err)
 	}
 	return nil
@@ -139,18 +144,21 @@ func GetTimestampHandler(ctx context.Context, w http.ResponseWriter, r *http.Req
 
 	vars := mux.Vars(r)
 	gun := vars["imageName"]
+	logger := ctxu.GetLoggerWithField(ctx, gun, "gun")
 
 	out, err := timestamp.GetOrCreateTimestamp(gun, store, cryptoService)
 	if err != nil {
 		switch err.(type) {
 		case *storage.ErrNoKey, *storage.ErrNotFound:
+			logger.Error("404 GET timestamp")
 			return errors.ErrMetadataNotFound.WithDetail(nil)
 		default:
+			logger.Error("500 GET timestamp")
 			return errors.ErrUnknown.WithDetail(err)
 		}
 	}
 
-	logrus.Debugf("[Notary Server] 200 GET timestamp: %s", gun)
+	logger.Debug("200 GET timestamp")
 	w.Write(out)
 	return nil
 }
@@ -158,41 +166,43 @@ func GetTimestampHandler(ctx context.Context, w http.ResponseWriter, r *http.Req
 // GetTimestampKeyHandler returns a timestamp public key, creating a new key-pair
 // it if it doesn't yet exist
 func GetTimestampKeyHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
+	vars := mux.Vars(r)
+	gun := vars["imageName"]
+
+	logger := ctxu.GetLoggerWithField(ctx, gun, "gun")
+
 	s := ctx.Value("metaStore")
 	store, ok := s.(storage.MetaStore)
 	if !ok {
-		logrus.Debug("[Notary Server] 500 GET storage not configured")
+		logger.Error("500 GET storage not configured")
 		return errors.ErrNoStorage.WithDetail(nil)
 	}
 	c := ctx.Value("cryptoService")
 	crypto, ok := c.(signed.CryptoService)
 	if !ok {
-		logrus.Debug("[Notary Server] 500 GET crypto service not configured")
+		logger.Error("500 GET crypto service not configured")
 		return errors.ErrNoCryptoService.WithDetail(nil)
 	}
 	algo := ctx.Value("keyAlgorithm")
 	keyAlgo, ok := algo.(string)
 	if !ok {
-		logrus.Debug("[Notary Server] 500 GET key algorithm not configured")
+		logger.Error("500 GET key algorithm not configured")
 		return errors.ErrNoKeyAlgorithm.WithDetail(nil)
 	}
 	keyAlgorithm := data.KeyAlgorithm(keyAlgo)
 
-	vars := mux.Vars(r)
-	gun := vars["imageName"]
-
 	key, err := timestamp.GetOrCreateTimestampKey(gun, store, crypto, keyAlgorithm)
 	if err != nil {
-		logrus.Debugf("[Notary Server] 500 GET timestamp key for %s: %v", gun, err)
+		logger.Error("500 GET timestamp key: %v", err)
 		return errors.ErrUnknown.WithDetail(err)
 	}
 
 	out, err := json.Marshal(key)
 	if err != nil {
-		logrus.Debugf("[Notary Server] 500 GET timestamp key: %s", gun)
+		logger.Error("500 GET timestamp key")
 		return errors.ErrUnknown.WithDetail(err)
 	}
-	logrus.Debugf("[Notary Server] 200 GET timestamp key: %s", gun)
+	logger.Debug("200 GET timestamp key")
 	w.Write(out)
 	return nil
 }

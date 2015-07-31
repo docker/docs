@@ -63,7 +63,7 @@ func Run(ctx context.Context, addr, tlsCertFile, tlsKeyFile string, trust signed
 			Rand:         rand.Reader,
 		}
 
-		logrus.Info("[Notary Server] Enabling TLS.")
+		logrus.Info("Enabling TLS")
 		lsnr = tls.NewListener(lsnr, tlsConfig)
 	} else if tlsCertFile != "" || tlsKeyFile != "" {
 		return fmt.Errorf("Partial TLS configuration found. Either include both a cert and key file in the configuration, or include neither to disable TLS.")
@@ -95,7 +95,7 @@ func Run(ctx context.Context, addr, tlsCertFile, tlsKeyFile string, trust signed
 		Handler: r,
 	}
 
-	logrus.Info("[Notary Server] : Starting on ", addr)
+	logrus.Info("Starting on ", addr)
 
 	err = svr.Serve(lsnr)
 

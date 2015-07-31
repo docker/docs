@@ -179,13 +179,13 @@ func main() {
 	}
 
 	if debug {
-		log.Println("[Notary-signer RPC Server] : Listening on", rpcAddr)
-		log.Println("[Notary-signer Server] : Listening on", httpAddr)
+		log.Println("RPC server listening on", rpcAddr)
+		log.Println("HTTP server listening on", httpAddr)
 	}
 
 	err = server.ListenAndServeTLS(certFile, keyFile)
 	if err != nil {
-		log.Fatalf("[Notary-signer Server] : Failed to start %s", err)
+		log.Fatal("HTTP server failed to start:", err)
 	}
 }
 
@@ -198,9 +198,9 @@ func usage() {
 // endpoints. The addr should not be exposed externally. For most of these to
 // work, tls cannot be enabled on the endpoint, so it is generally separate.
 func debugServer(addr string) {
-	log.Println("[Notary-signer Debug Server] server listening on", addr)
+	log.Println("Debug server listening on", addr)
 	if err := http.ListenAndServe(addr, nil); err != nil {
-		log.Fatalf("[Notary-signer Debug Server] error listening on debug interface: %v", err)
+		log.Fatalf("error listening on debug interface: %v", err)
 	}
 }
 
