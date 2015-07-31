@@ -5,14 +5,18 @@ RUN apt-get update && apt-get install -y \
     --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
-COPY . /go/src/github.com/docker/notary
-
-ENV GOPATH /go/src/github.com/docker/notary/Godeps/_workspace:$GOPATH
-
-RUN go install github.com/docker/notary/cmd/notary-server
-
 EXPOSE 4443
 
-WORKDIR /go/src/github.com/docker/notary
+ENV NOTARYPKG github.com/docker/notary
+ENV GOPATH /go/src/${NOTARYPKG}/Godeps/_workspace:$GOPATH
 
-CMD [ "notary-server", "-config", "cmd/notary-server/config.json" ]
+COPY . /go/src/github.com/docker/notary
+
+WORKDIR /go/src/${NOTARYPKG}
+
+RUN go install \
+    -ldflags "-w -X ${NOTARYPKG}/version.GitCommit `git rev-parse --short HEAD` -X ${NOTARYPKG}/version.NotaryVersion `cat NOTARY_VERSION`" \
+    ${NOTARYPKG}/cmd/notary-server
+
+ENTRYPOINT [ "notary-server" ]
+CMD [ "-config", "cmd/notary-server/config.json" ]
