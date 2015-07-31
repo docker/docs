@@ -38,14 +38,16 @@ func applyChangelist(repo *tuf.TufRepo, cl changelist.Changelist) error {
 		}
 		switch c.Scope() {
 		case changelist.ScopeTargets:
-			err := applyTargetsChange(repo, c)
-			if err != nil {
-				return err
-			}
+			err = applyTargetsChange(repo, c)
+		case changelist.ScopeRoot:
+			err = applyRootChange(repo, c)
 		default:
 			logrus.Debug("scope not supported: ", c.Scope())
 		}
 		index++
+		if err != nil {
+			return err
+		}
 	}
 	logrus.Debugf("applied %d change(s)", index)
 	return nil
@@ -71,6 +73,62 @@ func applyTargetsChange(repo *tuf.TufRepo, c changelist.Change) error {
 	}
 	if err != nil {
 		return err
+	}
+	return nil
+}
+
+func applyRootChange(repo *tuf.TufRepo, c changelist.Change) error {
+	var err error
+	switch c.Type() {
+	case changelist.TypeRootRole:
+		err = applyRootRoleChange(repo, c)
+	default:
+		logrus.Debug("type of root change not yet supported: ", c.Type())
+	}
+	return err // might be nil
+}
+
+func applyRootRoleChange(repo *tufRepo, c changelist.Change) error {
+	switch c.Action() {
+	case changelist.ActionCreate:
+		// replaces all keys for a role
+		d := &changelist.TufRootData{}
+		err := json.Unmarshal(c.Data, d)
+		if err != nil {
+			return err
+		}
+		err = repo.ReplaceBaseKeys(d.RoleName, d.Keys...)
+		if err != nil {
+			return err
+		}
+	case changelist.ActionUpdate:
+		// adds a key to a role
+		d := &changelist.TufRootData{}
+		err := json.Unmarshal(c.Data, d)
+		if err != nil {
+			return err
+		}
+		err = repo.AddBaseKeys(d.RoleName, d.Keys...)
+		if err != nil {
+			return err
+		}
+	case changelist.ActionDelete:
+		// removes a key from a role
+		d := &changelist.TufRootData{}
+		err := json.Unmarshal(c.Data, d)
+		if err != nil {
+			return err
+		}
+		ids := make([]string, 0, len(d.Keys))
+		for _, k := range d.Keys {
+			append(ids, k.ID())
+		}
+		err = repo.RemoveBaseKeys(d.RoleName, ids...)
+		if err != nil {
+			return err
+		}
+	default:
+		logrus.Debug("action not yet supported for root: ", c.Action())
 	}
 	return nil
 }
