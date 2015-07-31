@@ -77,18 +77,13 @@
 		},
 		{
 			"ImportPath": "github.com/docker/docker/pkg/tarsum",
-			"Comment": "v1.4.1-775-g70fbd45",
-			"Rev": "70fbd45a5c88f6f39a07b04f81a07721bf5f3eed"
+			"Comment": "v1.7.1",
+			"Rev": "786b29d4db80a6175e72b47a794ee044918ba734"
 		},
 		{
 			"ImportPath": "github.com/docker/docker/pkg/term",
-			"Comment": "v1.4.1-775-g70fbd45",
-			"Rev": "70fbd45a5c88f6f39a07b04f81a07721bf5f3eed"
-		},
-		{
-			"ImportPath": "github.com/docker/docker/vendor/src/code.google.com/p/go/src/pkg/archive/tar",
-			"Comment": "v1.4.1-775-g70fbd45",
-			"Rev": "70fbd45a5c88f6f39a07b04f81a07721bf5f3eed"
+			"Comment": "v1.7.1",
+			"Rev": "786b29d4db80a6175e72b47a794ee044918ba734"
 		},
 		{
 			"ImportPath": "github.com/docker/libtrust",
@@ -100,7 +95,7 @@
 		},
 		{
 			"ImportPath": "github.com/endophage/gotuf",
-			"Rev": "8898f45c7eff3f623777957c2541ff8088a06fe9"
+			"Rev": "89ceb27829b9353dfee5ccccf7a3a9bb77008b05"
 		},
 		{
 			"ImportPath": "github.com/go-sql-driver/mysql",

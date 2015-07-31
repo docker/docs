@@ -94,6 +94,15 @@ func TestRSAPSSVerifierWithInvalidKeyType(t *testing.T) {
 	assert.Error(t, err, "invalid key type for RSAPSS verifier: rsa-invalid")
 }
 
+func TestRSAPSSVerifierWithInvalidKeyLength(t *testing.T) {
+	key, err := rsa.GenerateKey(rand.Reader, 512)
+	assert.NoError(t, err)
+
+	err = verifyPSS(key.Public(), nil, nil)
+	assert.Error(t, err)
+	assert.IsType(t, ErrInvalidKeyLength{}, err)
+}
+
 func TestRSAPSSVerifierWithInvalidKey(t *testing.T) {
 	var testRSAKey data.TUFKey
 	var jsonKey bytes.Buffer
@@ -391,6 +400,22 @@ func TestECDSAVerifierWithInvalidSignature(t *testing.T) {
 	err = ecdsaVerifier.Verify(&testECDSAKey, signedData, message)
 	assert.Error(t, err, "signature verification failed")
 
+}
+
+func TestED25519VerifierInvalidKeyType(t *testing.T) {
+	key := data.NewPublicKey("bad_type", nil)
+	v := Ed25519Verifier{}
+	err := v.Verify(key, nil, nil)
+	assert.Error(t, err)
+	assert.IsType(t, ErrInvalidKeyType{}, err)
+}
+
+func TestRSAPyCryptoVerifierInvalidKeyType(t *testing.T) {
+	key := data.NewPublicKey("bad_type", nil)
+	v := RSAPyCryptoVerifier{}
+	err := v.Verify(key, nil, nil)
+	assert.Error(t, err)
+	assert.IsType(t, ErrInvalidKeyType{}, err)
 }
 
 func rsaPSSSign(privKey data.PrivateKey, hash crypto.Hash, hashed []byte) ([]byte, error) {
