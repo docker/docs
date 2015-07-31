@@ -46,13 +46,6 @@ var (
 	// ErrTooManyAttempts is returned if the maximum number of passphrase
 	// entry attempts is reached.
 	ErrTooManyAttempts = errors.New("Too many attempts")
-
-	defaultAliasMap = map[string]string{
-		"root":       "root",
-		"targets":    "targets",
-		"snapshot":   "snapshot",
-		"timestamps": "timestamps",
-	}
 )
 
 // PromptRetriever returns a new Retriever which will provide a prompt on stdin
@@ -72,9 +65,6 @@ func PromptRetrieverWithInOut(in io.Reader, out io.Writer, aliasMap map[string]s
 	targetsSnapshotsPass := ""
 	userEnteredRootsPass := false
 	rootsPass := ""
-	if aliasMap == nil {
-		aliasMap = defaultAliasMap
-	}
 
 	return func(keyName string, alias string, createNew bool, numAttempts int) (string, bool, error) {
 		if alias == tufRootAlias && createNew && numAttempts == 0 {
@@ -84,6 +74,15 @@ func PromptRetrieverWithInOut(in io.Reader, out io.Writer, aliasMap map[string]s
 			if !createNew {
 				fmt.Fprintln(out, "Passphrase incorrect. Please retry.")
 			}
+		}
+
+		// Figure out if we should display a different string for this alias
+		displayAlias := alias
+		if aliasMap != nil {
+			if val, ok := aliasMap[alias]; ok {
+				displayAlias = val
+			}
+
 		}
 
 		// First, check if we have a password cached for this alias.
@@ -125,9 +124,9 @@ func PromptRetrieverWithInOut(in io.Reader, out io.Writer, aliasMap map[string]s
 		}
 
 		if createNew {
-			fmt.Fprintf(out, "Enter passphrase for new %s key with id %s: ", aliasMap[alias], keyName)
+			fmt.Fprintf(out, "Enter passphrase for new %s key with id %s: ", displayAlias, keyName)
 		} else {
-			fmt.Fprintf(out, "Enter key passphrase for %s key with id %s: ", aliasMap[alias], keyName)
+			fmt.Fprintf(out, "Enter key passphrase for %s key with id %s: ", displayAlias, keyName)
 		}
 
 		passphrase, err := stdin.ReadBytes('\n')
@@ -155,7 +154,7 @@ func PromptRetrieverWithInOut(in io.Reader, out io.Writer, aliasMap map[string]s
 			return "", false, ErrTooShort
 		}
 
-		fmt.Fprintf(out, "Repeat passphrase for new %s key with id %s: ", aliasMap[alias], keyName)
+		fmt.Fprintf(out, "Repeat passphrase for new %s key with id %s: ", displayAlias, keyName)
 		confirmation, err := stdin.ReadBytes('\n')
 		fmt.Fprintln(out)
 		if err != nil {
