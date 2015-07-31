@@ -15,6 +15,7 @@ GO_LDFLAGS=-ldflags "-w $(CTIMEVAR)"
 GO_LDFLAGS_STATIC=-ldflags "-w $(CTIMEVAR) -extldflags -static"
 GOOSES = darwin freebsd linux
 GOARCHS = amd64
+NOTARYDIR := /go/src/github.com/docker/notary
 
 # go cover test variables
 COVERDIR=.cover
@@ -22,7 +23,7 @@ COVERPROFILE=$(COVERDIR)/cover.out
 COVERMODE=count
 PKGS = $(shell go list ./... | tr '\n' ' ')
 
-.PHONY: clean all fmt vet lint build test binaries cross cover
+.PHONY: clean all fmt vet lint build test binaries cross cover docker-images
 .DELETE_ON_ERROR: cover
 .DEFAULT: default
 
@@ -97,11 +98,27 @@ binaries: ${PREFIX}/bin/notary-server ${PREFIX}/bin/notary ${PREFIX}/bin/notary-
 
 define template
 mkdir -p ${PREFIX}/cross/$(1)/$(2);
-GOOS=$(1) GOARCH=$(2) go build -o ${PREFIX}/cross/$(1)/$(2)/notary -a -tags "static_build netgo" -installsuffix netgo ${GO_LDFLAGS_STATIC} ./cmd/notary;
+GOOS=$(1) GOARCH=$(2) CGO_ENABLED=0 go build -o ${PREFIX}/cross/$(1)/$(2)/notary -a -tags "static_build netgo" -installsuffix netgo ${GO_LDFLAGS_STATIC} ./cmd/notary;
 endef
 
 cross:
 	$(foreach GOARCH,$(GOARCHS),$(foreach GOOS,$(GOOSES),$(call template,$(GOOS),$(GOARCH))))
+
+
+notary-dockerfile:
+	@docker build --rm --force-rm -t notary .
+
+server-dockerfile:
+	@docker build --rm --force-rm -f notary-server-Dockerfile -t notary-server .
+
+signer-dockerfile:
+	@docker build --rm --force-rm -f notary-signer-Dockerfile -t notary-signer .
+
+docker-images: notary-dockerfile server-dockerfile signer-dockerfile
+
+shell: notary-dockerfile
+	docker run --rm -it -v $(CURDIR)/cross:$(NOTARYDIR)/cross -v $(CURDIR)/bin:$(NOTARYDIR)/bin notary bash
+
 
 clean:
 	@echo "+ $@"
