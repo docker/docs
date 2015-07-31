@@ -80,7 +80,7 @@ func verifyMeta(s *data.Signed, role string, minVersion int) error {
 	if err := json.Unmarshal(s.Signed, sm); err != nil {
 		return err
 	}
-	if !data.ValidTUFType(sm.Type) {
+	if !data.ValidTUFType(sm.Type, role) {
 		return ErrWrongType
 	}
 	if IsExpired(sm.Expires) {

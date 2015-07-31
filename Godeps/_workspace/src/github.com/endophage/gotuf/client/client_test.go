@@ -1,7 +1,10 @@
 package client
 
 import (
+	"crypto/sha256"
+	"encoding/json"
 	"testing"
+	"time"
 
 	"github.com/Sirupsen/logrus"
 	tuf "github.com/endophage/gotuf"
@@ -187,4 +190,44 @@ func TestRotationOldSigMissing(t *testing.T) {
 	err = client.verifyRoot("root", signedRoot, 0)
 	assert.Error(t, err, "Should have errored on verify as replacement signature was missing.")
 
+}
+
+func TestCheckRootExpired(t *testing.T) {
+	repo := tuf.NewTufRepo(nil, nil)
+	storage := store.NewMemoryStore(nil, nil)
+	client := NewClient(repo, storage, nil, storage)
+
+	root := &data.SignedRoot{}
+	root.Signed.Expires = time.Now().AddDate(-1, 0, 0)
+
+	signedRoot, err := root.ToSigned()
+	assert.NoError(t, err)
+	rootJSON, err := json.Marshal(signedRoot)
+	assert.NoError(t, err)
+
+	rootHash := sha256.Sum256(rootJSON)
+
+	testSnap := &data.SignedSnapshot{
+		Signed: data.Snapshot{
+			Meta: map[string]data.FileMeta{
+				"root": {
+					Length: int64(len(rootJSON)),
+					Hashes: map[string][]byte{
+						"sha256": rootHash[:],
+					},
+				},
+			},
+		},
+	}
+	signedSnap, err := testSnap.ToSigned()
+	assert.NoError(t, err)
+
+	repo.SetRoot(signedRoot)
+	repo.SetSnapshot(signedSnap)
+
+	storage.SetMeta("root", rootJSON)
+
+	err = client.checkRoot()
+	assert.Error(t, err)
+	assert.IsType(t, tuf.ErrLocalRootExpired{}, err)
 }

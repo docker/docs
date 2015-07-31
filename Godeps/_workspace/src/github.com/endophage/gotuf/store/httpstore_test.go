@@ -1,7 +1,6 @@
 package store
 
 import (
-	"bytes"
 	"encoding/base64"
 	"encoding/hex"
 	"encoding/json"
@@ -89,7 +88,7 @@ func TestSetMultiMeta(t *testing.T) {
 		if err != nil {
 			t.Fatal(err)
 		}
-		var updates map[string][]byte
+		updates := make(map[string][]byte)
 		for {
 			part, err := reader.NextPart()
 			if err == io.EOF {
@@ -101,12 +100,13 @@ func TestSetMultiMeta(t *testing.T) {
 				t.Fatal(err)
 			}
 		}
-		if d, ok := updates["root"]; !ok || !bytes.Equal(d, []byte("root data")) {
-			t.Fatal("Did not find root in updates")
-		}
-		if d, ok := updates["targets"]; !ok || bytes.Equal(d, []byte("targets data")) {
-			t.Fatal("Did not find root in updates")
-		}
+		rd, rok := updates["root"]
+		assert.True(t, rok)
+		assert.Equal(t, rd, metas["root"])
+
+		td, tok := updates["targets"]
+		assert.True(t, tok)
+		assert.Equal(t, td, metas["targets"])
 
 	}
 	server := httptest.NewServer(http.HandlerFunc(handler))
