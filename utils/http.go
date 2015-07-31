@@ -7,6 +7,7 @@ import (
 	"github.com/docker/distribution/registry/api/errcode"
 	"github.com/docker/distribution/registry/api/v2"
 	"github.com/docker/distribution/registry/auth"
+	"github.com/docker/notary/errors"
 	"github.com/endophage/gotuf/signed"
 	"github.com/gorilla/mux"
 	"golang.org/x/net/context"
@@ -66,13 +67,28 @@ func (root *rootHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	if err := root.handler(ctx, w, r); err != nil {
-		logrus.Error("[Notary Server] ", err.Error())
+		if err, ok := err.(errcode.Error); ok {
+			logrus.Errorf(
+				"[Notary Server] %d %s %s",
+				err.Code.Descriptor().HTTPStatusCode,
+				r.Method,
+				r.URL.Path,
+			)
+		} else {
+			logrus.Errorf(
+				"[Notary Server] 5XX %s %s %s",
+				r.Method,
+				r.URL.Path,
+				err.Error(),
+			)
+		}
 		e := errcode.ServeJSON(w, err)
 		if e != nil {
 			logrus.Error(e)
 		}
 		return
 	}
+	logrus.Infof("[Notary Server] 200 %s %s", r.Method, r.URL.Path)
 	return
 }
 
@@ -88,4 +104,10 @@ func buildAccessRecords(repo string, actions ...string) []auth.Access {
 		})
 	}
 	return requiredAccess
+}
+
+// NotFoundHandler is used as a generic catch all handler to return the ErrMetadataNotFound
+// 404 response
+func NotFoundHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
+	return errors.ErrMetadataNotFound.WithDetail(nil)
 }

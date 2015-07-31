@@ -8,7 +8,6 @@ import (
 	"net/http"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/docker/distribution/registry/api/v2"
 	"github.com/docker/distribution/registry/auth"
 	"github.com/endophage/gotuf/data"
 	"github.com/endophage/gotuf/signed"
@@ -85,12 +84,12 @@ func Run(ctx context.Context, addr, tlsCertFile, tlsKeyFile string, trust signed
 
 	r := mux.NewRouter()
 	r.Methods("GET").Path("/v2/").Handler(hand(handlers.MainHandler))
-	r.Methods("POST").Path("/v2/{imageName:" + v2.RepositoryNameRegexp.String() + "}/_trust/tuf/").Handler(hand(handlers.AtomicUpdateHandler, "push", "pull"))
-	r.Methods("GET").Path("/v2/{imageName:" + v2.RepositoryNameRegexp.String() + "}/_trust/tuf/{tufRole:(root|targets|snapshot)}.json").Handler(hand(handlers.GetHandler, "pull"))
-	r.Methods("GET").Path("/v2/{imageName:" + v2.RepositoryNameRegexp.String() + "}/_trust/tuf/timestamp.json").Handler(hand(handlers.GetTimestampHandler, "pull"))
-	r.Methods("GET").Path("/v2/{imageName:" + v2.RepositoryNameRegexp.String() + "}/_trust/tuf/timestamp.key").Handler(hand(handlers.GetTimestampKeyHandler, "push", "pull"))
-	r.Methods("DELETE").Path("/v2/{imageName:" + v2.RepositoryNameRegexp.String() + "}/_trust/tuf/").Handler(hand(handlers.DeleteHandler, "push", "pull"))
-
+	r.Methods("POST").Path("/v2/{imageName:.*}/_trust/tuf/").Handler(hand(handlers.AtomicUpdateHandler, "push", "pull"))
+	r.Methods("GET").Path("/v2/{imageName:.*}/_trust/tuf/{tufRole:(root|targets|snapshot)}.json").Handler(hand(handlers.GetHandler, "pull"))
+	r.Methods("GET").Path("/v2/{imageName:.*}/_trust/tuf/timestamp.json").Handler(hand(handlers.GetTimestampHandler, "pull"))
+	r.Methods("GET").Path("/v2/{imageName:.*}/_trust/tuf/timestamp.key").Handler(hand(handlers.GetTimestampKeyHandler, "push", "pull"))
+	r.Methods("DELETE").Path("/v2/{imageName:.*}/_trust/tuf/").Handler(hand(handlers.DeleteHandler, "push", "pull"))
+	r.Methods("GET", "POST", "PUT", "HEAD", "DELETE").Path("/{other:.*}").Handler(hand(utils.NotFoundHandler))
 	svr := http.Server{
 		Addr:    addr,
 		Handler: r,
