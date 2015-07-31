@@ -22,7 +22,7 @@ import (
 type Retriever func(keyName, alias string, createNew bool, attempts int) (passphrase string, giveup bool, err error)
 
 const (
-	idBytesToDisplay            = 5
+	idBytesToDisplay            = 7
 	tufRootAlias                = "root"
 	tufTargetsAlias             = "targets"
 	tufSnapshotAlias            = "snapshot"
@@ -46,23 +46,35 @@ var (
 	// ErrTooManyAttempts is returned if the maximum number of passphrase
 	// entry attempts is reached.
 	ErrTooManyAttempts = errors.New("Too many attempts")
+
+	defaultAliasMap = map[string]string{
+		"root":       "root",
+		"targets":    "targets",
+		"snapshot":   "snapshot",
+		"timestamps": "timestamps",
+	}
 )
 
 // PromptRetriever returns a new Retriever which will provide a prompt on stdin
 // and stdout to retrieve a passphrase. The passphrase will be cached such that
 // subsequent prompts will produce the same passphrase.
 func PromptRetriever() Retriever {
-	return PromptRetrieverWithInOut(os.Stdin, os.Stdout)
+	return PromptRetrieverWithInOut(os.Stdin, os.Stdout, nil)
 }
 
 // PromptRetrieverWithInOut returns a new Retriever which will provide a
 // prompt using the given in and out readers. The passphrase will be cached
 // such that subsequent prompts will produce the same passphrase.
-func PromptRetrieverWithInOut(in io.Reader, out io.Writer) Retriever {
+// aliasMap can be used to specify display names for TUF key aliases. If aliasMap
+// is nil, a sensible default will be used.
+func PromptRetrieverWithInOut(in io.Reader, out io.Writer, aliasMap map[string]string) Retriever {
 	userEnteredTargetsSnapshotsPass := false
 	targetsSnapshotsPass := ""
 	userEnteredRootsPass := false
 	rootsPass := ""
+	if aliasMap == nil {
+		aliasMap = defaultAliasMap
+	}
 
 	return func(keyName string, alias string, createNew bool, numAttempts int) (string, bool, error) {
 		if alias == tufRootAlias && createNew && numAttempts == 0 {
@@ -98,15 +110,24 @@ func PromptRetrieverWithInOut(in io.Reader, out io.Writer) Retriever {
 		stdin := bufio.NewReader(in)
 
 		indexOfLastSeparator := strings.LastIndex(keyName, string(filepath.Separator))
+		if indexOfLastSeparator == -1 {
+			indexOfLastSeparator = 0
+		}
 
-		if len(keyName) > indexOfLastSeparator+idBytesToDisplay+1 {
-			keyName = keyName[:indexOfLastSeparator+idBytesToDisplay+1]
+		if len(keyName) > indexOfLastSeparator+idBytesToDisplay {
+			if indexOfLastSeparator > 0 {
+				keyNamePrefix := keyName[:indexOfLastSeparator]
+				keyNameID := keyName[indexOfLastSeparator+1 : indexOfLastSeparator+idBytesToDisplay+1]
+				keyName = keyNamePrefix + " (" + keyNameID + ")"
+			} else {
+				keyName = keyName[indexOfLastSeparator : indexOfLastSeparator+idBytesToDisplay]
+			}
 		}
 
 		if createNew {
-			fmt.Fprintf(out, "Enter passphrase for new %s key with id %s: ", alias, keyName)
+			fmt.Fprintf(out, "Enter passphrase for new %s key with id %s: ", aliasMap[alias], keyName)
 		} else {
-			fmt.Fprintf(out, "Enter key passphrase for %s key with id %s: ", alias, keyName)
+			fmt.Fprintf(out, "Enter key passphrase for %s key with id %s: ", aliasMap[alias], keyName)
 		}
 
 		passphrase, err := stdin.ReadBytes('\n')
@@ -134,7 +155,7 @@ func PromptRetrieverWithInOut(in io.Reader, out io.Writer) Retriever {
 			return "", false, ErrTooShort
 		}
 
-		fmt.Fprintf(out, "Repeat passphrase for new %s key with id %s: ", alias, keyName)
+		fmt.Fprintf(out, "Repeat passphrase for new %s key with id %s: ", aliasMap[alias], keyName)
 		confirmation, err := stdin.ReadBytes('\n')
 		fmt.Fprintln(out)
 		if err != nil {
