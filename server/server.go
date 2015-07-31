@@ -42,13 +42,11 @@ func Run(ctx context.Context, addr, tlsCertFile, tlsKeyFile string, trust signed
 		return err
 	}
 
-	keypair, err := tls.LoadX509KeyPair(tlsCertFile, tlsKeyFile)
-	if err != nil {
-		// must be able to run without certs. In prod, users may
-		// want load balancer to terminate TLS
-		logrus.Errorf("[Notary Server] Error loading TLS keys %s", err)
-	} else {
-
+	if tlsCertFile != "" && tlsKeyFile != "" {
+		keypair, err := tls.LoadX509KeyPair(tlsCertFile, tlsKeyFile)
+		if err != nil {
+			return err
+		}
 		tlsConfig := &tls.Config{
 			MinVersion:               tls.VersionTLS12,
 			PreferServerCipherSuites: true,
@@ -66,7 +64,10 @@ func Run(ctx context.Context, addr, tlsCertFile, tlsKeyFile string, trust signed
 			Rand:         rand.Reader,
 		}
 
+		logrus.Info("[Notary Server] Enabling TLS.")
 		lsnr = tls.NewListener(lsnr, tlsConfig)
+	} else if tlsCertFile != "" || tlsKeyFile != "" {
+		return fmt.Errorf("Partial TLS configuration found. Either include both a cert and key file in the configuration, or include neither to disable TLS.")
 	}
 
 	var ac auth.AccessController

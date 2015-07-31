@@ -108,7 +108,7 @@ func main() {
 	}
 
 	if viper.GetString("storage.backend") == "mysql" {
-		logrus.Debug("Using mysql backend")
+		logrus.Info("[Notary Server] Using mysql backend")
 		dbURL := viper.GetString("storage.db_url")
 		db, err := sql.Open("mysql", dbURL)
 		if err != nil {
