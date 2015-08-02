@@ -38,34 +38,35 @@ governed properly working in concert with the Docker Governance Advisory Board
 
 
 
-# Members of the 2014 DGAB
+# Members of the 2015 DGAB
 
-The DGAB is made up of 15 individual who represent the ecosystem, contributors
+The DGAB is made up of 16 individual who represent the ecosystem, contributors
 and community of the Docker Project.
 
 ## Docker 
 
-* Solomon Hykes
-* Victor Vieux
 * Michael Crosby
+* Steve Francia
+* Stephen Day
+* Arnaud Poterie
 
-## Contributor
+## Individual Contributors
 
 * Andrew Tianon Page
-* Brandon Phillips
-* Jonathan Rudenberg
-* David Calavera
+* Aleksa Sarai
+* Harald Albers
+* Darren Shepherd
 
-## Corporate
+## Corporate Contributors
 
-* Eric Brewer (Google)
-* Dave Ing (IBM)
-* Van Lindberg (Rackspace)
+* Jeff Borek (IBM)
 * Dan Walsh (RedHat)
+* Ahmet Alp Balkan (Microsoft)
+* Rohit Jnagal (Google)
 
 ## User
 
 * Nicola Paolucci (Atlassian)
-* Rohan Singh (Spotify)
+* Burke Libbey (Shopify)
 * Meghdoot Bhattacharya (PayPal)
-* Borja Burgos (Tutum)
+* Tapabrata Pal (Capital One)

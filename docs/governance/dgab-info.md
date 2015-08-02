@@ -8,12 +8,12 @@ parent="smn_governance"
 +++
 <![end-metadata]-->
 
-# Docker Governance Advisory Board: June 2014 Version
+# Docker Governance Advisory Board: June 2015 Version
 
 An initial version of this proposal was posted for comments on April 30th,
 2014. This version reflects all comments received prior to announcing the
-initial members/nominees for the board on June 10th. A subsequent version will
-be released following the first meeting of the board.
+initial members/nominees for the board on June 10th. This document was
+updated to reflect the new membership for 2015.
 
 ## 1.0 Background
 
@@ -69,10 +69,11 @@ The DGAB is expected to provide input and formal recommendations regarding the f
 
 ### 4.1 General
 
-The DGAB will have 15 members
+The DGAB will have 16 members
 
-* The Docker Chief Maintainer and architect: Solomon Hykes
-* 2 seats for the top core maintainers
+* The Docker Chief Maintainer: Michael Crosby
+* The Docker Chief Operator: Steve Francia
+* 2 seats for the top core maintainers (Docker)
 * Up to 12 additional seats: 4 corporate seats, 4 individual or small business seats, 4 “user” seats
 
 * No fee or sponsorship is required for membership
