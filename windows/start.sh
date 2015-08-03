@@ -18,7 +18,7 @@ else
 fi
 
 echo "Starting machine $VM..."
-$DOCKER_MACHINE start dev
+$DOCKER_MACHINE start $VM
 
 echo "Setting environment variables for machine $VM..."
 ./docker-machine.exe env $VM | sed  's,\\,\\\\,g' # eval swallows single backslashes in windows style path
