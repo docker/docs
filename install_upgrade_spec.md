@@ -3,17 +3,13 @@
 ![Components](orca_components.png)
 
 
+## Known gaps
+
+* Swarm must talk to consul with TLS enabled - https://github.com/docker/swarm/issues/404 - slated for 1.9
+
 ## Open Questions
 
-* Can Swarm talk to consul with TLS enabled?
-* ~~Can we use a single root CA and intermediate CA certs for orca/swarm?~~ - Yes!
-* ~~Should the bootstrapper container contain the other images within?~~ - no, too bloated
-* ~~Should we link all our containers, or wire them up based on the punched through IP/ports?~~ - It's not ready yet
-* ~~DB Clustering/HA?~~ - Not for v1
-* ~~What KV store (swarm discovery backend) should we use?~~ - Use single node consul for v1
-* ~~How far away is core orca from supporting multiple swarms?~~ not for v1
-* ~~Does it make sense to append the Orca CA certificates to the local system's trusted certs?~~ Give fingerprint instead
-
+* Can we get admin user certs signed by the swarm CA to work?  If not, admins will have to deal with dual certs for swarm+orca access.
 
 ## Assumptions
 
@@ -21,19 +17,18 @@
 * We wont use data volume containers, but instead host volume mounts
 * Our goal is to get as close to a full end-to-end deployment as possible (from bare-metal up to orca)
     * Advanced customers may be able to cherry-pick, but that's not the focus in v1
+    * We'll deploy an internal consul instance for swarm (not HA)
     * Bare-metal ISO based installer not (yet) covered in this document
 * Swarm requires a common single CA "on both sides" (incoming client communication and outgoing engine communication)
 * Swarm Managers must have visibility to all the engines (or proxies) and be secured with TLS.  All Engines/Proxies must trust the CA who signed the swarm cert
 * Swarm manager and docker proxy may fold into one component, but this shouldn't fundamentally change the flow
-* We'll "own" an internal root CA with intermediaries for orca/swarm to provide access control
-    * Admin users certs will be signed by the root so they have swarm access, regular users by the orca intermediate so they do not have swarm access
+* We'll "own" two internal root CAs for orca/swarm to provide access control
     * Set up so that certs can be replaced post v1
     * We'll store the certs in a host volume mount
     * The volume could be swapped out for a keywhiz volume mount in the future (unclear if we can write to it though...)
     * Laying the groundwork of a central CA for our managed swarm will enable keywhiz for secret management post v1
 * Installation logic should be idempotent, and not clobber any pertinent state unless the user asks us to
 
-![Certs](certs.png)
 
 
 ## User Entrypoint
@@ -100,9 +95,8 @@ docker run --rm -t \
 7. Stop any existing orca containers already running on the host
 8. (conditional) clobber existing state if requested
 9. Generate Root CA and certs if not present in host volume path: /etc/docker/ssl/orca
-    * root Orca CA cert
-    * Intermediat Orca CA cert
-    * Intermediat Swarm CA cert
+    * Orca CA cert
+    * Swarm CA cert
 10. Generate cert for proxy/swarm manager signed by Swarm CA
 11. Deploy proxy with random exposed port
 12. Verify we can see the proxy we just deployed using the engines external IP
