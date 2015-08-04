@@ -1,4 +1,4 @@
-Docker Toolbox ![logo](https://cloud.githubusercontent.com/assets/251292/8971250/9a27e862-3603-11e5-849b-c35f95e1a753.png) 
+Docker Toolbox ![logo](https://cloud.githubusercontent.com/assets/251292/8971250/9a27e862-3603-11e5-849b-c35f95e1a753.png)
 ==================================
 
 [![docker toolbox logo](https://cloud.githubusercontent.com/assets/251292/8895808/5596f50e-339b-11e5-92bd-a596d48a5531.png)](https://www.docker.com/toolbox)
@@ -25,10 +25,12 @@ here](https://docs.docker.com/installation/mac/).
 
 **Do I have to install VirtualBox?**
 
-No, you can deselect VirtualBox during installation. It is bundled in case you want to have a working environment for free. 
+No, you can deselect VirtualBox during installation. It is bundled in case you want to have a working environment for free.
 
-## License 
+## License
 
-Docker Toolbox code is licensed under the Apache License, Version 2.0. See [LICENSE](https://github.com/docker/toolbox/blob/master/LICENSE) for the full license text. 
+Docker Toolbox code is licensed under the Apache License, Version 2.0. See [LICENSE](https://github.com/docker/toolbox/blob/master/LICENSE) for the full license text.
 
 Docker Toolbox Logo and all other related Docker artwork © Docker, Inc. 2015.  All rights reserved; not licensed for third party use.
+
+No modifications have been made to the Oracle VirtualBox source code. Oracle VirtualBox is licensed under GPL 2.0 license. See [ORACLE VIRTUALBOX LICENSE](https://github.com/docker/toolbox/blob/master/ORACLE_VIRTUALBOX_LICENSE) for the full license text.
