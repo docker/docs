@@ -2,12 +2,12 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Docker Toolbox"
-#define MyAppVersion "1.8.0-rc1"
-#define MyAppPublisher "Docker Inc"
+#define MyAppVersion "1.8.0-rc4"
+#define MyAppPublisher "Docker"
 #define MyAppURL "https://docker.com"
 #define MyAppContact "https://docs.docker.com"
 
-#define b2dIso ".\bundle\Boot2Docker\boot2docker-virtualbox.iso"
+#define b2dIsoPath ".\bundle\Boot2Docker\boot2docker.iso"
 
 #define dockerCli ".\bundle\docker\docker.exe"
 #define dockerMachineCli ".\bundle\docker\docker-machine.exe"
@@ -37,12 +37,13 @@ AppUpdatesURL={#MyAppURL}
 ArchitecturesAllowed=x64
 ArchitecturesInstallIn64BitMode=x64
 DefaultDirName={pf}\{#MyAppName}
-DefaultGroupName=Docker Inc
+DefaultGroupName=Docker
+DisableProgramGroupPage=yes
 ; lets not be annoying
 ;InfoBeforeFile=.\LICENSE
 ;DisableFinishedPage
 ;InfoAfterFile=
-OutputBaseFilename=DockerToolbox
+OutputBaseFilename=DockerToolbox-{#MyAppVersion}
 Compression=lzma
 SolidCompression=yes
 WizardImageFile=windows-installer-side.bmp
@@ -71,7 +72,7 @@ Name: "upgrade"; Description: "Upgrade Docker Toolbox only"
 Name: "custom"; Description: "Custom installation"; Flags: iscustom
 
 [Run]
-Filename: "{win}\explorer.exe"; Parameters: "{userprograms}\Docker Inc\"
+Filename: "{win}\explorer.exe"; Parameters: "{userprograms}\Docker\"
 
 [Tasks]
 Name: desktopicon; Description: "{cm:CreateDesktopIcon}"
@@ -99,7 +100,7 @@ Source: "{#dockerMachineCli}"; DestDir: "{app}"; Flags: ignoreversion; Component
 Source: "{#kitematicSetup}"; DestDir: "{app}\installers\kitematic"; Flags: ignoreversion; AfterInstall: RunInstallKitematic(); Components: "Kitematic"
 
 ; Boot2Docker
-Source: "{#b2dIso}"; DestDir: "{app}"; Flags: ignoreversion; Components: "DockerMachine"; AfterInstall: CopyBoot2DockerISO();
+Source: "{#b2dIsoPath}"; DestDir: "{app}"; Flags: ignoreversion; Components: "DockerMachine"; AfterInstall: CopyBoot2DockerISO();
 
 ; msys-Git
 Source: "{#msysGit}"; DestDir: "{app}\installers\msys-git"; DestName: "msys-git.exe"; AfterInstall: RunInstallMSYS();  Components: "MSYS"
@@ -111,7 +112,7 @@ Source: "{#virtualBoxMsi}"; DestDir: "{app}\installers\virtualbox"; DestName: "v
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
-Name: "{userprograms}\Docker Inc\Docker Quickstart Terminal"; WorkingDir: "{app}"; Filename: "{app}\start.sh"; IconFilename: "{app}/docker-quickstart-terminal.ico"; Components: "Docker"
+Name: "{userprograms}\Docker\Docker Quickstart Terminal"; WorkingDir: "{app}"; Filename: "{app}\start.sh"; IconFilename: "{app}/docker-quickstart-terminal.ico"; Components: "Docker"
 Name: "{commondesktop}\Docker Quickstart Terminal"; WorkingDir: "{app}"; Filename: "{app}\start.sh"; IconFilename: "{app}/docker-quickstart-terminal.ico"; Tasks: desktopicon; Components: "Docker"
 
 [UninstallRun]
@@ -277,10 +278,10 @@ procedure CopyBoot2DockerISO();
 var
   ResultCode: Integer;
 begin
-  WizardForm.FilenameLabel.Caption := 'copying boot2docker-virtualbox.iso'
+  WizardForm.FilenameLabel.Caption := 'copying boot2docker iso'
   if not ForceDirectories(ExpandConstant('{userdocs}\..\.docker\machine\cache')) then
       MsgBox('Failed to create docker machine cache dir', mbError, MB_OK);
-  if not FileCopy(ExpandConstant('{app}\boot2docker-virtualbox.iso'), ExpandConstant('{userdocs}\..\.docker\machine\cache\boot2docker-virtualbox.iso'), false) then
+  if not FileCopy(ExpandConstant('{app}\boot2docker.iso'), ExpandConstant('{userdocs}\..\.docker\machine\cache\boot2docker.iso'), false) then
       MsgBox('File moving failed!', mbError, MB_OK);
 end;
 
