@@ -1,5 +1,9 @@
 package changelist
 
+import (
+	"github.com/endophage/gotuf/data"
+)
+
 // Scopes for TufChanges are simply the TUF roles.
 // Unfortunately because of targets delegations, we can only
 // cover the base roles.
@@ -32,8 +36,8 @@ type TufChange struct {
 }
 
 type TufRootData struct {
-	Keys     []*data.TUFKey
-	RoleName string
+	Keys     []data.PublicKey `json:"keys"`
+	RoleName string           `json:"role"`
 }
 
 // NewTufChange initializes a tufChange object

@@ -96,6 +96,7 @@ func main() {
 
 	notaryCmd.AddCommand(cmdKey)
 	notaryCmd.AddCommand(cmdCert)
+	notaryCmd.AddCommand(cmdMeta)
 	notaryCmd.AddCommand(cmdTufInit)
 	cmdTufInit.Flags().StringVarP(&remoteTrustServer, "server", "s", serverURL, "Remote trust server location")
 	notaryCmd.AddCommand(cmdTufList)

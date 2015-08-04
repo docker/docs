@@ -7,7 +7,7 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary/client/changelist"
-	"github.com/endophage/gotuf"
+	tuf "github.com/endophage/gotuf"
 	"github.com/endophage/gotuf/data"
 	"github.com/endophage/gotuf/keys"
 	"github.com/endophage/gotuf/store"
@@ -88,12 +88,12 @@ func applyRootChange(repo *tuf.TufRepo, c changelist.Change) error {
 	return err // might be nil
 }
 
-func applyRootRoleChange(repo *tufRepo, c changelist.Change) error {
+func applyRootRoleChange(repo *tuf.TufRepo, c changelist.Change) error {
 	switch c.Action() {
 	case changelist.ActionCreate:
 		// replaces all keys for a role
 		d := &changelist.TufRootData{}
-		err := json.Unmarshal(c.Data, d)
+		err := json.Unmarshal(c.Content(), d)
 		if err != nil {
 			return err
 		}
@@ -104,7 +104,7 @@ func applyRootRoleChange(repo *tufRepo, c changelist.Change) error {
 	case changelist.ActionUpdate:
 		// adds a key to a role
 		d := &changelist.TufRootData{}
-		err := json.Unmarshal(c.Data, d)
+		err := json.Unmarshal(c.Content(), d)
 		if err != nil {
 			return err
 		}
@@ -115,13 +115,13 @@ func applyRootRoleChange(repo *tufRepo, c changelist.Change) error {
 	case changelist.ActionDelete:
 		// removes a key from a role
 		d := &changelist.TufRootData{}
-		err := json.Unmarshal(c.Data, d)
+		err := json.Unmarshal(c.Content(), d)
 		if err != nil {
 			return err
 		}
 		ids := make([]string, 0, len(d.Keys))
 		for _, k := range d.Keys {
-			append(ids, k.ID())
+			ids = append(ids, k.ID())
 		}
 		err = repo.RemoveBaseKeys(d.RoleName, ids...)
 		if err != nil {

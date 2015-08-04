@@ -245,6 +245,7 @@ func (r *NotaryRepository) AddTarget(target *Target) error {
 	if err != nil {
 		return err
 	}
+	defer cl.Close()
 	logrus.Debugf("Adding target \"%s\" with sha256 \"%x\" and size %d bytes.\n", target.Name, target.Hashes["sha256"], target.Length)
 
 	meta := data.FileMeta{Length: target.Length, Hashes: target.Hashes}
@@ -258,7 +259,7 @@ func (r *NotaryRepository) AddTarget(target *Target) error {
 	if err != nil {
 		return err
 	}
-	return cl.Close()
+	return nil
 }
 
 // RemoveTarget creates a new changelist entry to remove a target from the repository
@@ -603,4 +604,59 @@ func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
 		kdb,
 		r.fileStore,
 	), nil
+}
+
+// AddKeys adds the specified keyIDs to the role. These changes are
+// staged in a changelist until publish is called.
+func (r *NotaryRepository) AddKeys(role string, keyIDs ...string) error {
+	return r.rootKeyChange(role, changelist.ActionUpdate, keyIDs...)
+}
+
+// RemoveKeys removes the specified keyIDs from the role. These changes
+// are staged in a changelist until publish is called.
+func (r *NotaryRepository) RemoveKeys(role string, keyIDs ...string) error {
+	return r.rootKeyChange(role, changelist.ActionDelete, keyIDs...)
+}
+
+// ReplaceKey removes all existing keys associated with role and adds
+// the keys specified by keyIDs to the role. These changes are staged
+// in a changelist until publish is called.
+func (r *NotaryRepository) ReplaceKeys(role string, keyIDs ...string) error {
+	return r.rootKeyChange(role, changelist.ActionCreate, keyIDs...)
+}
+
+func (r *NotaryRepository) rootKeyChange(role, action string, keyIDs ...string) error {
+	cl, err := changelist.NewFileChangelist(filepath.Join(r.tufRepoPath, "changelist"))
+	if err != nil {
+		return err
+	}
+	defer cl.Close()
+
+	keys := make([]data.PublicKey, 0, len(keyIDs))
+	for _, kID := range keyIDs {
+		logrus.Debug(kID)
+		// get PUBLIC key and append it to keys
+	}
+
+	meta := changelist.TufRootData{
+		RoleName: role,
+		Keys:     keys,
+	}
+	metaJSON, err := json.Marshal(meta)
+	if err != nil {
+		return err
+	}
+
+	c := changelist.NewTufChange(
+		action,
+		changelist.ScopeRoot,
+		changelist.TypeRootRole,
+		role,
+		metaJSON,
+	)
+	err = cl.Add(c)
+	if err != nil {
+		return err
+	}
+	return nil
 }
