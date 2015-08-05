@@ -11,6 +11,8 @@ kitematic=0.8.0-rc4
 vbox=5.0.0
 vboxRev=101573
 msysGit=1.9.5-preview20150319
+installer=1.8.0-rc5
+mixpanel=c306ae65c33d7d09fe3e546f36493a6e
 
 boot2dockerIsoSrc=tianon
 dockerBucket=test.docker.com
@@ -19,6 +21,16 @@ set -x
 rm -rf bundle
 mkdir bundle
 cd bundle
+
+echo "{\"event\":\"Installer Started\",\"properties\":{\"token\":\"$mixpanel\",\"version\":\"$installer\",\"os\":\"win32\"}}" > out.txt
+certutil -encode out.txt started-cert.txt
+cat started-cert.txt | sed '/^-----/ d' | tr -d '\n' > started.txt
+rm started-cert.txt
+
+echo "{\"event\":\"Installer Finished\",\"properties\":{\"token\":\"$mixpanel\",\"version\":\"$installer\",\"os\":\"win32\"}}" > out.txt
+certutil -encode out.txt finished-cert.txt
+cat finished-cert.txt | sed '/^-----/ d' | tr -d '\n' > finished.txt
+rm finished-cert.txt
 
 (
 	mkdir -p docker

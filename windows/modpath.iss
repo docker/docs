@@ -163,17 +163,6 @@ begin
 	until Length(Text)=0;
 end;
 
-
-procedure CurStepChanged(CurStep: TSetupStep);
-var
-	taskname:	String;
-begin
-	taskname := ModPathName;
-	if CurStep = ssPostInstall then
-		if IsTaskSelected(taskname) then
-			ModPath();
-end;
-
 procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
 var
 	aSelectedTasks:	TArrayOfString;
