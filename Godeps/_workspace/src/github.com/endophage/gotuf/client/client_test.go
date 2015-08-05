@@ -219,11 +219,8 @@ func TestCheckRootExpired(t *testing.T) {
 			},
 		},
 	}
-	signedSnap, err := testSnap.ToSigned()
-	assert.NoError(t, err)
-
-	repo.SetRoot(signedRoot)
-	repo.SetSnapshot(signedSnap)
+	repo.SetRoot(root)
+	repo.SetSnapshot(testSnap)
 
 	storage.SetMeta("root", rootJSON)
 

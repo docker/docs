@@ -58,7 +58,7 @@ func AtomicUpdateHandler(ctx context.Context, w http.ResponseWriter, r *http.Req
 		} else if !data.ValidRole(role) {
 			return errors.ErrInvalidRole.WithDetail(role)
 		}
-		meta := &data.SignedTargets{}
+		meta := &data.SignedMeta{}
 		var input []byte
 		inBuf := bytes.NewBuffer(input)
 		dec := json.NewDecoder(io.TeeReader(part, inBuf))
@@ -72,6 +72,9 @@ func AtomicUpdateHandler(ctx context.Context, w http.ResponseWriter, r *http.Req
 			Version: version,
 			Data:    inBuf.Bytes(),
 		})
+	}
+	if err = validateUpdate(gun, updates, store); err != nil {
+		return errors.ErrMalformedUpload.WithDetail(err)
 	}
 	err = store.UpdateMany(gun, updates)
 	if err != nil {
