@@ -7,7 +7,7 @@ set -e
 boot2dockerIso=1.8.0-rc2
 docker=1.8.0-rc2
 dockerMachine=0.4.0-rc2
-kitematic=0.8.0-rc3
+kitematic=0.8.0-rc4
 vbox=5.0.0
 vboxRev=101573
 msysGit=1.9.5-preview20150319
