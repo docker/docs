@@ -21,7 +21,7 @@ Docker on Mac OS X and Windows, including:
 Documentation for Mac [is available
 here](https://docs.docker.com/mac/started/).
 
-Documentation for Windows [is available] here](https://docs.docker.com/windows/started/).
+Documentation for Windows [is available here](https://docs.docker.com/windows/started/).
 
 Toolbox is currently unavailable for Linux; To get started with Docker on Linux, please follow the Linux [Getting Started Guide](https://docs.docker.com/linux/started/).
 
