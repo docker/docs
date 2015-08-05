@@ -41,11 +41,13 @@ RUN chmod +x /docker-compose
 ENV BOOT2DOCKER_ISO_VERSION $DOCKER_VERSION
 RUN curl -fsSL -o /boot2docker.iso https://github.com/tianon/boot2docker-legacy/releases/download/v1.8.0-rc2/boot2docker.iso
 
-ENV KITEMATIC_VERSION 0.8.0-rc3
+ENV KITEMATIC_VERSION 0.8.0-rc4
 RUN curl -fsSL -o /kitematic.zip https://github.com/kitematic/kitematic/releases/download/v$KITEMATIC_VERSION/Kitematic-$KITEMATIC_VERSION-Mac.zip
 
 # ENV INSTALLER_VERSION $DOCKER_VERSION
-ENV INSTALLER_VERSION 1.8.0-rc4
+ENV INSTALLER_VERSION 1.8.0-rc5
+
+ENV MIXPANEL_TOKEN c306ae65c33d7d09fe3e546f36493a6e
 
 # Start building package
 
@@ -123,6 +125,10 @@ RUN cd /mpkg/dockercompose.pkg && \
 
 # boot2dockeriso.pkg
 RUN cd /mpkg/boot2dockeriso.pkg && \
+  export EVENT_DATA=$(echo "{\"event\":\"Installer Finished\",\"properties\":{\"token\":\"$MIXPANEL_TOKEN\",\"version\":\"$INSTALLER_VERSION\",\"os\":\"darwin\"}}" | base64 | tr -d '\n') && \
+	sed -i \
+		-e "s/%EVENT_DATA%/$EVENT_DATA/g" \
+		./Scripts/postinstall && \
   cd Scripts && find . | cpio -o --format odc | gzip -c > ../Scripts.bin && cd .. && \
   rm -r Scripts && mv Scripts.bin Scripts && \
 	mkdir ./rootfs && \
@@ -178,8 +184,9 @@ RUN sed -i \
 RUN sed -i \
 		-e "s/%INSTALLER_VERSION%/$INSTALLER_VERSION/g" \
 		mpkg/Resources/en.lproj/Installed.html
-RUN sed -i \
-		-e "s/%INSTALLER_VERSION%/$INSTALLER_VERSION/g" \
+RUN export EVENT_DATA=$(echo "{\"event\":\"Installer Started\",\"properties\":{\"token\":\"$MIXPANEL_TOKEN\",\"version\":\"$INSTALLER_VERSION\",\"os\":\"darwin\"}}" | base64 | tr -d '\n') && \
+    sed -i \
+		-e "s/%EVENT_DATA%/$EVENT_DATA/g" \
 		/mpkg/Distribution && \
 		sed -i \
 		-e "s/%VBOX_VERSION%/$VBOX_VERSION/g" \
