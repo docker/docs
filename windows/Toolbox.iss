@@ -72,7 +72,7 @@ Name: "upgrade"; Description: "Upgrade Docker Toolbox only"
 Name: "custom"; Description: "Custom installation"; Flags: iscustom
 
 [Run]
-Filename: "{win}\explorer.exe"; Parameters: "{userprograms}\Docker\"
+Filename: "{win}\explorer.exe"; Parameters: "{userprograms}\Docker\"; Flags: postinstall
 
 [Tasks]
 Name: desktopicon; Description: "{cm:CreateDesktopIcon}"
