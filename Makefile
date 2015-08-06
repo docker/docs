@@ -4,7 +4,7 @@ PREFIX?=$(shell pwd)
 # Populate version variables
 # Add to compile time flags
 NOTARY_PKG := github.com/docker/notary
-VERSION := $(shell cat NOTARY_VERSION)
+NOTARY_VERSION := $(shell cat NOTARY_VERSION)
 GITCOMMIT := $(shell git rev-parse --short HEAD)
 GITUNTRACKEDCHANGES := $(shell git status --porcelain --untracked-files=no)
 ifneq ($(GITUNTRACKEDCHANGES),)
