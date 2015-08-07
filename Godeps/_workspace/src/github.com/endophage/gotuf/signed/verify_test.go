@@ -151,7 +151,7 @@ func Test(t *testing.T) {
 		}
 		if run.keys == nil && run.s == nil {
 			k, _ := cryptoService.Create("root", data.ED25519Key)
-			meta := &signedMeta{Type: run.typ, Version: run.ver, Expires: *run.exp}
+			meta := &data.SignedCommon{Type: run.typ, Version: run.ver, Expires: *run.exp}
 
 			b, err := cjson.Marshal(meta)
 			assert.NoError(t, err)

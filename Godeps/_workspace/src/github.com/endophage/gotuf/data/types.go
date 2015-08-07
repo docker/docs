@@ -85,6 +85,17 @@ type Signed struct {
 	Signatures []Signature     `json:"signatures"`
 }
 
+type SignedCommon struct {
+	Type    string    `json:"_type"`
+	Expires time.Time `json:"expires"`
+	Version int       `json:"version"`
+}
+
+type SignedMeta struct {
+	Signed     SignedCommon `json:"signed"`
+	Signatures []Signature  `json:"signatures"`
+}
+
 type Signature struct {
 	KeyID     string       `json:"keyid"`
 	Method    SigAlgorithm `json:"method"`

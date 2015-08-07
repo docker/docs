@@ -21,12 +21,6 @@ var (
 	ErrWrongType    = errors.New("tuf: meta file has wrong type")
 )
 
-type signedMeta struct {
-	Type    string    `json:"_type"`
-	Expires time.Time `json:"expires"`
-	Version int       `json:"version"`
-}
-
 // VerifyRoot checks if a given root file is valid against a known set of keys.
 // Threshold is always assumed to be 1
 func VerifyRoot(s *data.Signed, minVersion int, keys map[string]data.PublicKey) error {
@@ -76,7 +70,7 @@ func Verify(s *data.Signed, role string, minVersion int, db *keys.KeyDB) error {
 }
 
 func verifyMeta(s *data.Signed, role string, minVersion int) error {
-	sm := &signedMeta{}
+	sm := &data.SignedCommon{}
 	if err := json.Unmarshal(s.Signed, sm); err != nil {
 		return err
 	}
