@@ -31,16 +31,13 @@ This guide refers to two major components of a DTR implementation in AWS:
 
 You should be able to complete this guide in about thirty minutes.
 
-> **Note**: Docker Trusted Registry is formerly known as Docker Hub Enterprise
-> (DHE). Some older links and documentation may still refer to it by this name.
-
 > **Note**: Amazon may occasionally change the appearance of the AWS web
-> interface. This can result in the AWS web interface differing from this guide.
-> However, the overall process will remain essentially the same.
+> interface. This mean the AWS web interface may differ from this guide, but the
+> overall process remains the same.
 
 ## Prerequisites
 
-Completing this guide requires the following:
+To complete this guide, you'll need:
 
 * The Docker Hub user-name and password used to obtain the Docker Subscription licenses
 * A DTR license key. Either a purchased license or a trial license will work
