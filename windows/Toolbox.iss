@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Docker Toolbox"
-#define MyAppVersion "1.8.0-rc4"
+#define MyAppVersion "1.8.0-rc5"
 #define MyAppPublisher "Docker"
 #define MyAppURL "https://docker.com"
 #define MyAppContact "https://docs.docker.com"
@@ -18,6 +18,16 @@
 
 #define virtualBoxCommon ".\bundle\VirtualBox\common.cab"
 #define virtualBoxMsi ".\bundle\VirtualBox\VirtualBox_amd64.msi"
+
+#define EventStartedFile FileOpen(".\bundle\started.txt")
+#define EventStartedData = FileRead(EventStartedFile)
+#expr FileClose(EventStartedFile)
+#undef EventStartedFile
+
+#define EventFinishedFile FileOpen(".\bundle\finished.txt")
+#define EventFinishedData = FileRead(EventFinishedFile)
+#expr FileClose(EventFinishedFile)
+#undef EventFinishedFile  
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -181,6 +191,21 @@ begin
 	DockerInstallDocs.OnClick := @DocLinkClick;
 end;
 
+function InitializeSetup(): boolean;
+var
+  ResultCode: integer;
+  WinHttpReq: Variant;
+begin
+
+  WinHttpReq := CreateOleObject('WinHttp.WinHttpRequest.5.1');
+  WinHttpReq.Open('POST', 'https://api.mixpanel.com/track/?data={#EventStartedData}', false);
+  WinHttpReq.SetRequestHeader('Content-Type', 'application/json');
+  WinHttpReq.Send('');
+  // Proceed Setup
+  Result := True;
+
+end;
+
 procedure CurPageChanged(CurPageID: Integer);
 begin
 	DockerInstallDocs.Visible := True;
@@ -295,3 +320,20 @@ begin
 	Result[0] := ExpandConstant('{app}');
 end;
 #include "modpath.iss"
+
+procedure CurStepChanged(CurStep: TSetupStep);
+var
+	taskname:	String;
+  WinHttpReq: Variant;
+begin
+	taskname := ModPathName;
+	if CurStep = ssPostInstall then
+  begin
+    WinHttpReq := CreateOleObject('WinHttp.WinHttpRequest.5.1');
+    WinHttpReq.Open('POST', 'https://api.mixpanel.com/track/?data={#EventFinishedData}', false);
+    WinHttpReq.SetRequestHeader('Content-Type', 'application/json');
+    WinHttpReq.Send('');
+    if IsTaskSelected(taskname) then
+			ModPath();
+  end
+end;
