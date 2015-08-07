@@ -110,7 +110,7 @@
 		},
 		{
 			"ImportPath": "github.com/endophage/gotuf",
-			"Rev": "4c04df9067a595ead06309f38021ea445acc1d1c"
+			"Rev": "9bcdad0308e34a49f38448b8ad436ad8860825ce"
 		},
 		{
 			"ImportPath": "github.com/go-sql-driver/mysql",
@@ -136,6 +136,10 @@
 		{
 			"ImportPath": "github.com/inconshreveable/mousetrap",
 			"Rev": "76626ae9c91c4f2a10f34cad8ce83ea42c93bb75"
+		},
+		{
+			"ImportPath": "github.com/jfrazelle/go/canonical/json",
+			"Rev": "6e461eb70cb4187b41a84e9a567d7137bdbe0f16"
 		},
 		{
 			"ImportPath": "github.com/jinzhu/gorm",
@@ -197,10 +201,6 @@
 			"ImportPath": "github.com/stretchr/testify/assert",
 			"Comment": "v1.0-17-g089c718",
 			"Rev": "089c7181b8c728499929ff09b62d3fdd8df8adff"
-		},
-		{
-			"ImportPath": "github.com/tent/canonical-json-go",
-			"Rev": "96e4ba3a7613a1216cbd1badca4efe382adea337"
 		},
 		{
 			"ImportPath": "golang.org/x/crypto/bcrypt",

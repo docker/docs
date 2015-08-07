@@ -3,9 +3,8 @@ package data
 import (
 	"crypto/sha256"
 	"encoding/hex"
-	"encoding/json"
 
-	cjson "github.com/tent/canonical-json-go"
+	"github.com/jfrazelle/go/canonical/json"
 )
 
 type SignedTargets struct {
@@ -85,7 +84,7 @@ func (t *SignedTargets) AddDelegation(role *Role, keys []*PublicKey) error {
 }
 
 func (t SignedTargets) ToSigned() (*Signed, error) {
-	s, err := cjson.Marshal(t.Signed)
+	s, err := json.MarshalCanonical(t.Signed)
 	if err != nil {
 		return nil, err
 	}

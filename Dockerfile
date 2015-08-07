@@ -2,6 +2,7 @@ FROM golang:1.4.2-cross
 
 RUN apt-get update && apt-get install -y \
 	libltdl-dev \
+	libsqlite3-dev \
 	--no-install-recommends \
 	&& rm -rf /var/lib/apt/lists/*
 

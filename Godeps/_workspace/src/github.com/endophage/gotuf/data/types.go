@@ -3,7 +3,6 @@ package data
 import (
 	"crypto/sha256"
 	"crypto/sha512"
-	"encoding/json"
 	"fmt"
 	"hash"
 	"io"
@@ -12,6 +11,7 @@ import (
 	"time"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/jfrazelle/go/canonical/json"
 )
 
 type KeyAlgorithm string

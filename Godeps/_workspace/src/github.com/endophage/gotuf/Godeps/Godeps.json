@@ -20,31 +20,17 @@
 			"Rev": "d2b94fd789ea21d12fac1a4443dd3a3f79cda72c"
 		},
 		{
-			"ImportPath": "github.com/codegangsta/cli",
-			"Comment": "1.2.0-66-g6086d79",
-			"Rev": "6086d7927ec35315964d9fea46df6c04e6d697c1"
+			"ImportPath": "github.com/google/gofuzz",
+			"Rev": "bbcb9da2d746f8bdbd6a936686a0a6067ada0ec5"
 		},
 		{
-			"ImportPath": "github.com/docker/docker/pkg/term",
-			"Comment": "v1.4.1-775-g70fbd45",
-			"Rev": "70fbd45a5c88f6f39a07b04f81a07721bf5f3eed"
+			"ImportPath": "github.com/jfrazelle/go/canonical/json",
+			"Rev": "6e461eb70cb4187b41a84e9a567d7137bdbe0f16"
 		},
 		{
-			"ImportPath": "github.com/dustin/go-humanize",
-			"Rev": "145fabdb1ab757076a70a886d092a3af27f66f4c"
-		},
-		{
-			"ImportPath": "github.com/flynn/go-docopt",
-			"Comment": "0.6.1-rc2-26-gf6dd2eb",
-			"Rev": "f6dd2ebbb31e9721c860cf1faf5c944aa73e3844"
-		},
-		{
-			"ImportPath": "github.com/miekg/pkcs11",
-			"Rev": "88c9f842544e629ec046105d7fb50d5daafae737"
-		},
-		{
-			"ImportPath": "github.com/tent/canonical-json-go",
-			"Rev": "96e4ba3a7613a1216cbd1badca4efe382adea337"
+			"ImportPath": "github.com/stretchr/testify/assert",
+			"Comment": "v1.0-40-g7c2b1e5",
+			"Rev": "7c2b1e5640dcf2631213ca962d892bffa1e08860"
 		},
 		{
 			"ImportPath": "golang.org/x/crypto/nacl/secretbox",
