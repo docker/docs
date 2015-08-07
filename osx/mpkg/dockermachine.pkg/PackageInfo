@@ -7,4 +7,7 @@
     <atomic-update-bundle/>
     <strict-identifier/>
     <relocate/>
+    <scripts>
+      <postinstall file="./postinstall"/>
+    </scripts>
 </pkg-info>

@@ -91,6 +91,8 @@ RUN cd /mpkg/docker.pkg && \
 
 # dockermachine.pkg
 RUN cd /mpkg/dockermachine.pkg && \
+  cd Scripts && find . | cpio -o --format odc | gzip -c > ../Scripts.bin && cd .. && \
+  rm -r Scripts && mv Scripts.bin Scripts && \
 	mkdir rootfs && \
 	cd rootfs && \
   mkdir -p usr/local/bin && \

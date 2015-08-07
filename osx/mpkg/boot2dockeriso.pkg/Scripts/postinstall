@@ -7,4 +7,3 @@ chown -R $USER:staff ~/.docker
 
 curl -H "Content-Type: application/json" -X POST "https://api.mixpanel.com/track/?data=%EVENT_DATA%"
 
-# TODO: run migration

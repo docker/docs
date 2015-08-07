@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VM=docker-vm
+VM=default
 DOCKER_MACHINE=/usr/local/bin/docker-machine
 
 BLUE='\033[0;34m'
