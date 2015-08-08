@@ -26,7 +26,7 @@ RUN curl -fsSL -o /vbox.dmg http://download.virtualbox.org/virtualbox/$VBOX_VERS
 
 # Download the Docker parts
 
-ENV DOCKER_VERSION 1.8.0-rc2
+ENV DOCKER_VERSION 1.8.0-rc3
 RUN curl -fsSL -o /docker https://test.docker.com/builds/Darwin/x86_64/docker-$DOCKER_VERSION
 RUN chmod +x /docker
 
@@ -41,7 +41,7 @@ RUN chmod +x /docker-compose
 ENV BOOT2DOCKER_ISO_VERSION $DOCKER_VERSION
 RUN curl -fsSL -o /boot2docker.iso https://github.com/tianon/boot2docker-legacy/releases/download/v1.8.0-rc2/boot2docker.iso
 
-ENV KITEMATIC_VERSION 0.8.0-rc4
+ENV KITEMATIC_VERSION 0.8.0-rc5
 RUN curl -fsSL -o /kitematic.zip https://github.com/kitematic/kitematic/releases/download/v$KITEMATIC_VERSION/Kitematic-$KITEMATIC_VERSION-Mac.zip
 
 # ENV INSTALLER_VERSION $DOCKER_VERSION
@@ -91,8 +91,6 @@ RUN cd /mpkg/docker.pkg && \
 
 # dockermachine.pkg
 RUN cd /mpkg/dockermachine.pkg && \
-  cd Scripts && find . | cpio -o --format odc | gzip -c > ../Scripts.bin && cd .. && \
-  rm -r Scripts && mv Scripts.bin Scripts && \
 	mkdir rootfs && \
 	cd rootfs && \
   mkdir -p usr/local/bin && \
@@ -148,8 +146,6 @@ RUN cd /mpkg/boot2dockeriso.pkg && \
 
 # dockerquickstartterminalapp.pkg
 RUN cd /mpkg/dockerquickstartterminalapp.pkg && \
-  cd Scripts && find . | cpio -o --format odc | gzip -c > ../Scripts.bin && cd .. && \
-  rm -r Scripts && mv Scripts.bin Scripts && \
 	mkdir ./rootfs && \
 	cd ./rootfs && \
 	mv /mpkg/Docker\ Quickstart\ Terminal.app . && \
