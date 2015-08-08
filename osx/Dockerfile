@@ -39,7 +39,7 @@ RUN curl -fsSL -o /docker-compose https://github.com/docker/compose/releases/dow
 RUN chmod +x /docker-compose
 
 ENV BOOT2DOCKER_ISO_VERSION $DOCKER_VERSION
-RUN curl -fsSL -o /boot2docker.iso https://github.com/tianon/boot2docker-legacy/releases/download/v1.8.0-rc2/boot2docker.iso
+RUN curl -fsSL -o /boot2docker.iso https://github.com/tianon/boot2docker-legacy/releases/download/v$DOCKER_VERSION/boot2docker.iso
 
 ENV KITEMATIC_VERSION 0.8.0-rc5
 RUN curl -fsSL -o /kitematic.zip https://github.com/kitematic/kitematic/releases/download/v$KITEMATIC_VERSION/Kitematic-$KITEMATIC_VERSION-Mac.zip
