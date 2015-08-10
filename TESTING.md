@@ -1,7 +1,10 @@
 Docker Toolbox Testing
 ======================
 
-Testing is mostly manual for now. Below you'll find a checklist of cases that have been covered by each release:
+Testing is mostly manual for now. Below you'll find a checklist of cases that have been covered by each release.
+
+Things to try:
+- Old version of VirtualBox running with old version of Boot2Docker
 
 ## Toolbox 1.8.0 RC7
 
