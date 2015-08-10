@@ -22,7 +22,7 @@ Testing is mostly manual for now. Below you'll find a checklist of cases that ha
 
 ### Windows 10
 
-Currently unsupported by Toolbox as VirtualBox 5 does not yet support Windows 10.
+- Currently unsupported by Toolbox as VirtualBox 5 does not yet support Windows 10.
 
 ### Windows 8
 
