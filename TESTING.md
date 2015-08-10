@@ -3,7 +3,7 @@ Docker Toolbox Testing
 
 Testing is mostly manual for now. Below you'll find a checklist of cases that have been covered by each release:
 
-## Toolbox 1.8.0
+## Toolbox 1.8.0 RC7
 
 ### Mac OS X 10.11
 
