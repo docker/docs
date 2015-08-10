@@ -258,8 +258,8 @@ func keysExport(cmd *cobra.Command, args []string) {
 	exportFile.Close()
 
 	if err != nil {
-		fatalf("error exporting keys: %v", err)
 		os.Remove(exportFilename)
+		fatalf("error exporting keys: %v", err)
 	}
 }
 
@@ -298,8 +298,8 @@ func keysExportRoot(cmd *cobra.Command, args []string) {
 	}
 	exportFile.Close()
 	if err != nil {
-		fatalf("error exporting root key: %v", err)
 		os.Remove(exportFilename)
+		fatalf("error exporting root key: %v", err)
 	}
 }
 
