@@ -2,7 +2,7 @@
 
 set -e
 
-VM=docker-vm
+VM=default
 DOCKER_MACHINE=./docker-machine.exe
 
 BLUE='\033[1;34m'

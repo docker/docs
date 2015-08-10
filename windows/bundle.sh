@@ -4,10 +4,9 @@ set -e
 # Script to grab binaries that are going to be bundled with windows installer.
 # Note to maintainers: Update versions used below with newer releases
 
-boot2dockerIso=1.8.0-rc2
-docker=1.8.0-rc2
+docker=1.8.0-rc3
 dockerMachine=0.4.0-rc2
-kitematic=0.8.0-rc4
+kitematic=0.8.0-rc5
 vbox=5.0.0
 vboxRev=101573
 msysGit=1.9.5-preview20150319
@@ -42,16 +41,17 @@ rm finished-cert.txt
 
 (
 	mkdir -p kitematic
+	curl -fsSL -o kitematic.zip "https://github.com/kitematic/kitematic/releases/download/v${kitematic}/Kitematic-${kitematic}-Windows-Alpha.zip"
 	cd kitematic
-
-	curl -fsSL -o kitematic-setup.exe "https://github.com/kitematic/kitematic/releases/download/v${kitematic}/KitematicSetup-${kitematic}-Windows-Alpha.exe"
+	unzip ../kitematic.zip
+	rm ../kitematic.zip
 )
 
 (
 	mkdir -p Boot2Docker
 	cd Boot2Docker
 
-	curl -fsSL -o boot2docker.iso "https://github.com/${boot2dockerIsoSrc}/boot2docker/releases/download/v${boot2dockerIso}/boot2docker.iso"
+	curl -fsSL -o boot2docker.iso "https://github.com/${boot2dockerIsoSrc}/boot2docker/releases/download/v${docker}/boot2docker.iso"
 )
 
 (

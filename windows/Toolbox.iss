@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Docker Toolbox"
-#define MyAppVersion "1.8.0-rc5"
+#define MyAppVersion "1.8.0-rc7"
 #define MyAppPublisher "Docker"
 #define MyAppURL "https://docker.com"
 #define MyAppContact "https://docs.docker.com"
@@ -12,7 +12,7 @@
 #define dockerCli ".\bundle\docker\docker.exe"
 #define dockerMachineCli ".\bundle\docker\docker-machine.exe"
 
-#define kitematicSetup ".\bundle\kitematic\kitematic-setup.exe"
+#define kitematic ".\bundle\kitematic"
 
 #define msysGit ".\bundle\msysGit\Git.exe"
 
@@ -105,9 +105,11 @@ Source: ".\delete.sh"; DestDir: "{app}"; Flags: ignoreversion; Components: "Dock
 
 ; DockerMachine
 Source: "{#dockerMachineCli}"; DestDir: "{app}"; Flags: ignoreversion; Components: "DockerMachine"
+Source: ".\migrate.sh"; DestDir: "{app}"; Flags: ignoreversion; Components: "DockerMachine"
+Source: ".\migrate.bat"; DestDir: "{app}"; Flags: ignoreversion; Components: "DockerMachine"
 
 ; Kitematic
-Source: "{#kitematicSetup}"; DestDir: "{app}\installers\kitematic"; Flags: ignoreversion; AfterInstall: RunInstallKitematic(); Components: "Kitematic"
+Source: "{#kitematic}\*"; DestDir: "{app}\kitematic"; Flags: ignoreversion recursesubdirs; Components: "Kitematic"; 
 
 ; Boot2Docker
 Source: "{#b2dIsoPath}"; DestDir: "{app}"; Flags: ignoreversion; Components: "DockerMachine"; AfterInstall: CopyBoot2DockerISO();
@@ -122,12 +124,16 @@ Source: "{#virtualBoxMsi}"; DestDir: "{app}\installers\virtualbox"; DestName: "v
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
+Name: "{userprograms}\Docker\Kitematic (Alpha)"; WorkingDir: "{app}"; Filename: "{app}\kitematic\Kitematic.exe"; Components: "Kitematic"
+Name: "{commondesktop}\Kitematic (Alpha)"; WorkingDir: "{app}"; Filename: "{app}\kitematic\Kitematic.exe"; Tasks: desktopicon; Components: "Kitematic"
 Name: "{userprograms}\Docker\Docker Quickstart Terminal"; WorkingDir: "{app}"; Filename: "{app}\start.sh"; IconFilename: "{app}/docker-quickstart-terminal.ico"; Components: "Docker"
 Name: "{commondesktop}\Docker Quickstart Terminal"; WorkingDir: "{app}"; Filename: "{app}\start.sh"; IconFilename: "{app}/docker-quickstart-terminal.ico"; Tasks: desktopicon; Components: "Docker"
 
 [UninstallRun]
 Filename: "{app}\delete.sh"
-Filename: "{localappdata}\Kitematic\Update.exe"; Parameters: "--uninstall"; Flags: skipifdoesntexist
+
+[UninstallDelete]
+Type: filesandordirs; Name: "{localappdata}\..\Roaming\Kitematic"
 
 [Code]
 var
@@ -196,7 +202,6 @@ var
   ResultCode: integer;
   WinHttpReq: Variant;
 begin
-
   WinHttpReq := CreateOleObject('WinHttp.WinHttpRequest.5.1');
   WinHttpReq.Open('POST', 'https://api.mixpanel.com/track/?data={#EventStartedData}', false);
   WinHttpReq.SetRequestHeader('Content-Type', 'application/json');
@@ -282,23 +287,6 @@ begin
 	end;
 end;
 
-procedure RunInstallKitematic();
-var
-	ResultCode: Integer;
-begin
-	WizardForm.FilenameLabel.Caption := 'installing Kitematic'
-	if Exec(ExpandConstant('{app}\installers\kitematic\kitematic-setup.exe'), '--silent', '', SW_HIDE, ewWaitUntilTerminated, ResultCode) then
-	begin
-		// handle success if necessary; ResultCode contains the exit code
-		//MsgBox('virtualbox install OK', mbInformation, MB_OK);
-	end
-	else begin
-		// handle failure if necessary; ResultCode contains the error code
-		MsgBox('kitematic install failure', mbInformation, MB_OK);
-	end;
-	//restart := True;
-end;
-
 procedure CopyBoot2DockerISO();
 var
   ResultCode: Integer;
@@ -308,6 +296,34 @@ begin
       MsgBox('Failed to create docker machine cache dir', mbError, MB_OK);
   if not FileCopy(ExpandConstant('{app}\boot2docker.iso'), ExpandConstant('{userdocs}\..\.docker\machine\cache\boot2docker.iso'), false) then
       MsgBox('File moving failed!', mbError, MB_OK);
+end;
+
+procedure MigrateVM();
+var
+  ResultCode: Integer;
+begin
+  ExecAsOriginalUser('C:\Program Files\Oracle\VirtualBox\VBoxManage.exe', 'showvminfo default', '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
+  if ResultCode <> 1 then
+    exit;
+
+  ExecAsOriginalUser('C:\Program Files\Oracle\VirtualBox\VBoxManage.exe', 'showvminfo boot2docker-vm', '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
+  if ResultCode = 0 then
+  begin                            
+    if MsgBox('Migrate your existing Boot2Docker VM to work with the Docker Toolbox? Your existing Boot2Docker VM will not be affected. This should take about a minute.', mbConfirmation, MB_YESNO) = IDYES then
+    begin
+      WizardForm.StatusLabel.Caption := 'Migrating Boot2Docker VM...'
+      WizardForm.FilenameLabel.Caption := 'This will take a minute...'
+      if ExecAsOriginalUser(ExpandConstant('{app}\migrate.bat'), ExpandConstant('> {localappdata}\Temp\toolbox-migration-logs.txt'), '', SW_HIDE, ewWaitUntilTerminated, ResultCode) then
+      begin
+        MsgBox('Succcessfully migrated Boot2Docker VM to a Docker Machine VM named "default"', mbInformation, MB_OK);
+      end
+      else begin
+        MsgBox('Migration of Boot2Docker VM failed. Please file an issue with the migration logs at https://github.com/docker/machine/issues/new.', mbInformation, MB_OK);
+        Exec(ExpandConstant('{win}\notepad.exe'), ExpandConstant('{localappdata}\Temp\toolbox-migration-logs.txt'), '', SW_SHOW, ewNoWait, ResultCode)
+      end
+       
+    end;
+  end
 end;
 
 const
@@ -329,6 +345,8 @@ begin
 	taskname := ModPathName;
 	if CurStep = ssPostInstall then
   begin
+    if IsComponentSelected('DockerMachine') then
+      MigrateVM();
     WinHttpReq := CreateOleObject('WinHttp.WinHttpRequest.5.1');
     WinHttpReq.Open('POST', 'https://api.mixpanel.com/track/?data={#EventFinishedData}', false);
     WinHttpReq.SetRequestHeader('Content-Type', 'application/json');
