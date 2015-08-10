@@ -59,7 +59,7 @@ SolidCompression=yes
 WizardImageFile=windows-installer-side.bmp
 WizardSmallImageFile=windows-installer-logo.bmp
 WizardImageStretch=no
-WizardImageBackColor=$325461
+WizardImageBackColor=$22B8EB
 
 ; in the installer itself:
 
