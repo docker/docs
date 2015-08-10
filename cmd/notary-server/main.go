@@ -106,23 +106,23 @@ func main() {
 
 	var trust signed.CryptoService
 	if viper.GetString("trust_service.type") == "remote" {
-		logrus.Info("[Notary Server] : Using remote signing service")
+		logrus.Info("Using remote signing service")
 		trust = signer.NewNotarySigner(
 			viper.GetString("trust_service.hostname"),
 			viper.GetString("trust_service.port"),
 			viper.GetString("trust_service.tls_ca_file"),
 		)
 	} else {
-		logrus.Info("[Notary Server] : Using local signing service")
+		logrus.Info("Using local signing service")
 		trust = signed.NewEd25519()
 	}
 
 	if viper.GetString("storage.backend") == "mysql" {
-		logrus.Info("[Notary Server] Using mysql backend")
+		logrus.Info("Using mysql backend")
 		dbURL := viper.GetString("storage.db_url")
 		db, err := sql.Open("mysql", dbURL)
 		if err != nil {
-			logrus.Fatal("[Notary Server] Error starting DB driver: ", err.Error())
+			logrus.Fatal("Error starting DB driver: ", err.Error())
 			return // not strictly needed but let's be explicit
 		}
 		ctx = context.WithValue(ctx, "metaStore", storage.NewMySQLStorage(db))
@@ -130,7 +130,7 @@ func main() {
 		logrus.Debug("Using memory backend")
 		ctx = context.WithValue(ctx, "metaStore", storage.NewMemStorage())
 	}
-	logrus.Info("[Notary Server] Starting Server")
+	logrus.Info("Starting Server")
 	err = server.Run(
 		ctx,
 		viper.GetString("server.addr"),
@@ -141,7 +141,7 @@ func main() {
 		viper.Get("auth.options"),
 	)
 
-	logrus.Error("[Notary Server]", err.Error())
+	logrus.Error(err.Error())
 	return
 }
 
@@ -154,8 +154,8 @@ func usage() {
 // endpoints. The addr should not be exposed externally. For most of these to
 // work, tls cannot be enabled on the endpoint, so it is generally separate.
 func debugServer(addr string) {
-	logrus.Info("[Notary Debug Server] server listening on", addr)
+	logrus.Info("Debug server listening on", addr)
 	if err := http.ListenAndServe(addr, nil); err != nil {
-		logrus.Fatal("[Notary Debug Server] error listening on debug interface: ", err)
+		logrus.Fatal("error listening on debug interface: ", err)
 	}
 }
