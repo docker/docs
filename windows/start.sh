@@ -2,6 +2,8 @@
 
 set -e
 
+trap '[ "$?" -eq 0 ] || read -p "Looks like something went wrong... Press any key to continue..."' EXIT
+
 VM=default
 DOCKER_MACHINE=./docker-machine.exe
 
