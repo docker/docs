@@ -40,9 +40,13 @@ Things to try:
 
 Clean install: 
 1. Open VirtualBox (if installed), and remove all the VMs by choosing Delete all files. 
+
 2. Open Control Panel -> Program and Features -> Uninstall Virtualbox 
+
 3. Uninstall Docker Toolbox (if installed) 
+
 4. Open "File Explorer" -> C:\Users\YOUR_USERNAME\ and delete .docker folder 
+ 
 5. Run toolbox installer again
 
 ### Windows 7
