@@ -26,26 +26,26 @@ RUN curl -fsSL -o /vbox.dmg http://download.virtualbox.org/virtualbox/$VBOX_VERS
 
 # Download the Docker parts
 
-ENV DOCKER_VERSION 1.8.0-rc3
+ENV DOCKER_VERSION 1.8.0
 RUN curl -fsSL -o /docker https://test.docker.com/builds/Darwin/x86_64/docker-$DOCKER_VERSION
 RUN chmod +x /docker
 
-ENV DOCKER_MACHINE_VERSION 0.4.0-rc2
+ENV DOCKER_MACHINE_VERSION 0.4.0
 RUN curl -fsSL -o /docker-machine https://github.com/docker/machine/releases/download/v$DOCKER_MACHINE_VERSION/docker-machine_darwin-amd64
 RUN chmod +x /docker-machine
 
-ENV DOCKER_COMPOSE_VERSION 1.4.0rc3
+ENV DOCKER_COMPOSE_VERSION 1.4.0
 RUN curl -fsSL -o /docker-compose https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-Darwin-x86_64
 RUN chmod +x /docker-compose
 
 ENV BOOT2DOCKER_ISO_VERSION $DOCKER_VERSION
-RUN curl -fsSL -o /boot2docker.iso https://github.com/tianon/boot2docker-legacy/releases/download/v$DOCKER_VERSION/boot2docker.iso
+RUN curl -fsSL -o /boot2docker.iso https://github.com/boot2docker/boot2docker/releases/download/v$DOCKER_VERSION/boot2docker.iso
 
 ENV KITEMATIC_VERSION 0.8.0-rc5
 RUN curl -fsSL -o /kitematic.zip https://github.com/kitematic/kitematic/releases/download/v$KITEMATIC_VERSION/Kitematic-$KITEMATIC_VERSION-Mac.zip
 
 # ENV INSTALLER_VERSION $DOCKER_VERSION
-ENV INSTALLER_VERSION 1.8.0-rc8
+ENV INSTALLER_VERSION 1.8.0
 
 ENV MIXPANEL_TOKEN c306ae65c33d7d09fe3e546f36493a6e
 
