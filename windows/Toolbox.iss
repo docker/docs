@@ -59,12 +59,12 @@ SolidCompression=yes
 WizardImageFile=windows-installer-side.bmp
 WizardSmallImageFile=windows-installer-logo.bmp
 WizardImageStretch=no
-WizardImageBackColor=$22B8EB
+WizardImageBackColor=$22EBB8
 
 ; in the installer itself:
 
 ; in the "Add/Remove" list:
-UninstallDisplayIcon={app}\toolbox.ico
+UninstallDisplayIcon={app}\unins000.exe
 
 SignTool=ksign /d $q{#MyAppName}$q /du $q{#MyAppURL}$q $f
 
@@ -202,10 +202,13 @@ var
   ResultCode: integer;
   WinHttpReq: Variant;
 begin
-  WinHttpReq := CreateOleObject('WinHttp.WinHttpRequest.5.1');
-  WinHttpReq.Open('POST', 'https://api.mixpanel.com/track/?data={#EventStartedData}', false);
-  WinHttpReq.SetRequestHeader('Content-Type', 'application/json');
-  WinHttpReq.Send('');
+  try
+    WinHttpReq := CreateOleObject('WinHttp.WinHttpRequest.5.1');
+    WinHttpReq.Open('POST', 'https://api.mixpanel.com/track/?data={#EventStartedData}', false);
+    WinHttpReq.SetRequestHeader('Content-Type', 'application/json');
+    WinHttpReq.Send('');
+  except
+  end;
   // Proceed Setup
   Result := True;
 
@@ -347,10 +350,15 @@ begin
   begin
     if IsComponentSelected('DockerMachine') then
       MigrateVM();
-    WinHttpReq := CreateOleObject('WinHttp.WinHttpRequest.5.1');
-    WinHttpReq.Open('POST', 'https://api.mixpanel.com/track/?data={#EventFinishedData}', false);
-    WinHttpReq.SetRequestHeader('Content-Type', 'application/json');
-    WinHttpReq.Send('');
+
+    try
+      WinHttpReq := CreateOleObject('WinHttp.WinHttpRequest.5.1');
+      WinHttpReq.Open('POST', 'https://api.mixpanel.com/track/?data={#EventFinishedData}', false);
+      WinHttpReq.SetRequestHeader('Content-Type', 'application/json');
+      WinHttpReq.Send('');
+    except
+    end;
+
     if IsTaskSelected(taskname) then
 			ModPath();
   end
