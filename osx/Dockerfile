@@ -45,7 +45,7 @@ ENV KITEMATIC_VERSION 0.8.0-rc5
 RUN curl -fsSL -o /kitematic.zip https://github.com/kitematic/kitematic/releases/download/v$KITEMATIC_VERSION/Kitematic-$KITEMATIC_VERSION-Mac.zip
 
 # ENV INSTALLER_VERSION $DOCKER_VERSION
-ENV INSTALLER_VERSION 1.8.0-rc7
+ENV INSTALLER_VERSION 1.8.0-rc8
 
 ENV MIXPANEL_TOKEN c306ae65c33d7d09fe3e546f36493a6e
 

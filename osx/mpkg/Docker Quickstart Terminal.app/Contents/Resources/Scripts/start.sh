@@ -12,10 +12,14 @@ unset LD_LIBRARY_PATH
 
 clear
 
-machine=$($DOCKER_MACHINE ls -q | grep "^$VM$") || :
-if [ -z $machine ]; then
+/usr/local/bin/VBoxManage showvminfo $VM &> /dev/null
+VM_EXISTS_CODE=$?
+
+if [ $VM_EXISTS_CODE -ne 0 ]; then
   echo "Creating Machine $VM..."
-   $DOCKER_MACHINE create -d virtualbox --virtualbox-memory 2048 $VM
+  $DOCKER_MACHINE rm -f $VM &> /dev/null
+  rm -rf ~/.docker/machine/machines/$VM
+  $DOCKER_MACHINE create -d virtualbox --virtualbox-memory 2048 $VM
 else
   echo "Machine $VM already exists."
 fi
