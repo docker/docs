@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -o pipefail
+
 # Place boot2docker ISO in cache
 mkdir -p ~/.docker/machine/cache
 cp /usr/local/share/boot2docker/boot2docker.iso ~/.docker/machine/cache/boot2docker.iso
@@ -27,7 +29,7 @@ if [ $BOOT2DOCKER_VM_EXISTS_CODE -eq 0 ] && [ $VM_EXISTS_CODE -ne 0 ]; then
   osascript -e 'tell app "System Events" to display dialog "Migrate your existing Boot2Docker VM to work with the Docker Toolbox?\n \nYour existing Boot2Docker VM will not be affected. This should take about a minute." buttons {"Do not Migrate", "Migrate"} default button 2 cancel button 1 with icon 2 with title "Migrate Boot2Docker VM?"'
   if [ $? -eq 0 ]; then
     rm -rf ~/.docker/machine/machines/default
-    sudo -u $USER PATH=/Applications/VirtualBox.app/Contents/MacOS/:$PATH bash -c "/usr/local/bin/docker-machine -D create -d virtualbox --virtualbox-import-boot2docker-vm $BOOT2DOCKER_VM $VM" 2>&1 | sed -e '/BEGIN/,/END/d' > /tmp/toolbox-migration-logs.txt
+    sudo -u $USER PATH=/Applications/VirtualBox.app/Contents/MacOS/:$PATH /usr/local/bin/docker-machine -D create -d virtualbox --virtualbox-import-boot2docker-vm $BOOT2DOCKER_VM $VM 2>&1 | sed -e '/BEGIN/,/END/d' > /tmp/toolbox-migration-logs.txt
     if [ $? -eq 0 ]; then
       osascript -e 'tell app "System Events" to display dialog "Boot2Docker VM migrated successfully to a Docker Machine VM named \"default\"" buttons {"Ok"} default button 1'
     else
