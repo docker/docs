@@ -323,6 +323,7 @@ begin
   begin
     WizardForm.StatusLabel.Caption := 'Migrating Boot2Docker VM...'
     WizardForm.FilenameLabel.Caption := 'This will take a minute...'
+    ExecAsOriginalUser(ExpandConstant('{app}\docker-machine.exe'), ExpandConstant('rm -f default > nul 2>&1'), '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
     DelTree(ExpandConstant('{userdocs}\..\.docker\machine\machines\default'), True, True, True);
     ExecAsOriginalUser(ExpandConstant('{app}\migrate.bat'), ExpandConstant('> {localappdata}\Temp\toolbox-migration-logs.txt 2>&1'), '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
     if ResultCode = 0 then
