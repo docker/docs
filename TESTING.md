@@ -12,25 +12,29 @@ Things to try:
 
 - [ ] Install + Quick Start
 - [ ] Install + Migrating Boot2Docker
+- [ ] Install + Start Kitematic 
 
 ### Mac OS X 10.10
 
 - [ ] Install + Quick Start
 - [ ] Install + Migrating Boot2Docker
+- [ ] Install + Start Kitematic 
 
 ### Mac OS X 10.9
 
 - [ ] Install + Quick Start
 - [ ] Install + Migrating Boot2Docker
+- [ ] Install + Start Kitematic 
 
 ### Windows 10
 
 - Currently unsupported by Toolbox as VirtualBox 5 does not yet support Windows 10.
 
-### Windows 8
+### Windows 8 (8.1) 
 
 - [ ] Install + Quick Start
 - [ ] Install + Migrating Boot2Docker
+- [ ] Install + Start Kitematic 
 
 ### Windows 7
 
