@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Docker Toolbox"
-#define MyAppVersion "1.8.0-rc7"
+#define MyAppVersion "1.8.0-rc8"
 #define MyAppPublisher "Docker"
 #define MyAppURL "https://docker.com"
 #define MyAppContact "https://docs.docker.com"
@@ -33,7 +33,7 @@
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{05BD04E9-4AB5-46AC-891E-60EA8FD57D56}
+AppId={{FC4417F0-D7F3-48DB-BCE1-F5ED5BAFFD91}
 AppCopyright={#MyAppPublisher}
 AppContact={#MyAppContact}
 AppComments={#MyAppURL}
@@ -301,33 +301,43 @@ begin
       MsgBox('File moving failed!', mbError, MB_OK);
 end;
 
-procedure MigrateVM();
+function MigrateVM() : Boolean;
 var
   ResultCode: Integer;
 begin
   ExecAsOriginalUser('C:\Program Files\Oracle\VirtualBox\VBoxManage.exe', 'showvminfo default', '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
   if ResultCode <> 1 then
-    exit;
+  begin
+    Result := true
+    exit
+  end;
 
   ExecAsOriginalUser('C:\Program Files\Oracle\VirtualBox\VBoxManage.exe', 'showvminfo boot2docker-vm', '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
-  if ResultCode = 0 then
-  begin                            
-    if MsgBox('Migrate your existing Boot2Docker VM to work with the Docker Toolbox? Your existing Boot2Docker VM will not be affected. This should take about a minute.', mbConfirmation, MB_YESNO) = IDYES then
+  if ResultCode <> 0 then
+  begin
+    Result := true
+    exit
+  end;
+                              
+  if MsgBox('Migrate your existing Boot2Docker VM to work with the Docker Toolbox? Your existing Boot2Docker VM will not be affected. This should take about a minute.', mbConfirmation, MB_YESNO) = IDYES then
+  begin
+    WizardForm.StatusLabel.Caption := 'Migrating Boot2Docker VM...'
+    WizardForm.FilenameLabel.Caption := 'This will take a minute...'
+    DelTree(ExpandConstant('{userdocs}\..\.docker\machine\machines\default'), True, True, True);
+    ExecAsOriginalUser(ExpandConstant('{app}\migrate.bat'), ExpandConstant('> {localappdata}\Temp\toolbox-migration-logs.txt 2>&1'), '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
+    if ResultCode = 0 then
     begin
-      WizardForm.StatusLabel.Caption := 'Migrating Boot2Docker VM...'
-      WizardForm.FilenameLabel.Caption := 'This will take a minute...'
-      if ExecAsOriginalUser(ExpandConstant('{app}\migrate.bat'), ExpandConstant('> {localappdata}\Temp\toolbox-migration-logs.txt'), '', SW_HIDE, ewWaitUntilTerminated, ResultCode) then
-      begin
-        MsgBox('Succcessfully migrated Boot2Docker VM to a Docker Machine VM named "default"', mbInformation, MB_OK);
-      end
-      else begin
-        MsgBox('Migration of Boot2Docker VM failed. Please file an issue with the migration logs at https://github.com/docker/machine/issues/new.', mbInformation, MB_OK);
-        Exec(ExpandConstant('{win}\notepad.exe'), ExpandConstant('{localappdata}\Temp\toolbox-migration-logs.txt'), '', SW_SHOW, ewNoWait, ResultCode)
-      end
-       
+      MsgBox('Succcessfully migrated Boot2Docker VM to a Docker Machine VM named "default"', mbInformation, MB_OK);
+    end
+    else begin
+      MsgBox('Migration of Boot2Docker VM failed. Please file an issue with the migration logs at https://github.com/docker/machine/issues/new.', mbCriticalError, MB_OK);
+      Exec(ExpandConstant('{win}\notepad.exe'), ExpandConstant('{localappdata}\Temp\toolbox-migration-logs.txt'), '', SW_SHOW, ewNoWait, ResultCode)
+      Result := false
+      exit;
     end;
-  end
-end;
+  end;
+  Result := true
+end;   
 
 const
 	ModPathName = 'modifypath';
@@ -344,22 +354,28 @@ procedure CurStepChanged(CurStep: TSetupStep);
 var
 	taskname:	String;
   WinHttpReq: Variant;
+  migrationSuccess: Boolean;
 begin
 	taskname := ModPathName;
+
 	if CurStep = ssPostInstall then
   begin
-    if IsComponentSelected('DockerMachine') then
-      MigrateVM();
-
-    try
-      WinHttpReq := CreateOleObject('WinHttp.WinHttpRequest.5.1');
-      WinHttpReq.Open('POST', 'https://api.mixpanel.com/track/?data={#EventFinishedData}', false);
-      WinHttpReq.SetRequestHeader('Content-Type', 'application/json');
-      WinHttpReq.Send('');
-    except
-    end;
-
     if IsTaskSelected(taskname) then
 			ModPath();
+
+    migrationSuccess:= true
+    if IsComponentSelected('DockerMachine') then
+      migrationSuccess := MigrateVM();
+
+    if migrationSuccess then
+    begin
+      try
+        WinHttpReq := CreateOleObject('WinHttp.WinHttpRequest.5.1');
+        WinHttpReq.Open('POST', 'https://api.mixpanel.com/track/?data={#EventFinishedData}', false);
+        WinHttpReq.SetRequestHeader('Content-Type', 'application/json');
+        WinHttpReq.Send('');
+      except
+      end;
+    end;
   end
 end;

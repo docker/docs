@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 trap '[ "$?" -eq 0 ] || read -p "Looks like something went wrong... Press any key to continue..."' EXIT
 
 VM=default
@@ -11,9 +9,14 @@ BLUE='\033[1;34m'
 GREEN='\033[0;32m'
 NC='\033[0m'
 
-machine=$($DOCKER_MACHINE ls -q | grep "^$VM$") || :
-if [ -z $machine ]; then
+/c/Program\ Files/Oracle/VirtualBox/VBoxManage.exe showvminfo $VM &> /dev/null
+VM_EXISTS_CODE=$?
+
+set -e
+
+if [ $VM_EXISTS_CODE -ne 0 ]; then
   echo "Creating Machine $VM..."
+  rm -rf ~/.docker/machine/machines/$VM
   $DOCKER_MACHINE create -d virtualbox --virtualbox-memory 2048 $VM
 else
   echo "Machine $VM already exists."
