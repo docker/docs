@@ -305,7 +305,7 @@ function MigrateVM() : Boolean;
 var
   ResultCode: Integer;
 begin
-  if not FileExists('C:\Program Files\Oracle\VirtualBox\VBoxManage.exe') or not FileExists(ExpandConstant('{app}\docker-machine.exe')) then
+  if not IsComponentSelected('DockerMachine') or not FileExists('C:\Program Files\Oracle\VirtualBox\VBoxManage.exe') or not FileExists(ExpandConstant('{app}\docker-machine.exe')) then
   begin
     Result := true
     exit
