@@ -114,7 +114,7 @@
        {
            test = system.version['ProductVersion'];
            system.log("OS version detected: " + test);
-           result = (system.compareVersions(test, '10.6') >= 0);
+           result = (system.compareVersions(test, '10.9') >= 0);
        } catch (e) { system.log(e); result = false; }
 
        if (!result)
@@ -131,7 +131,7 @@
            line checking for running VMs instead. */
            if (vboxNeedsUpgrade()) {
                system.log(vboxplist.CFBundleVersion);
-               rcScript = system.run('/bin/sh', '-c', '/bin/ps -e | /usr/bin/grep -E "VirtualBox.*startvm|VBoxNetDHCP|VBoxNetNAT|VBoxHeadless|VBoxSVC" | /usr/bin/grep -qv grep');
+               rcScript = system.run('/bin/sh', '-c', '/bin/ps -e | /usr/bin/grep -E "VirtualBox|VirtualBox.*startvm|VBoxNetDHCP|VBoxNetNAT|VBoxHeadless|VBoxSVC" | /usr/bin/grep -qv grep');
                result = (rcScript != 0);
                system.log("system.run /bin/sh .. returned: " + rcScript + " result=" + result);
            }
