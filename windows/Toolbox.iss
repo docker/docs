@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Docker Toolbox"
-#define MyAppVersion "1.8.0"
+#define MyAppVersion "1.8.0b"
 #define MyAppPublisher "Docker"
 #define MyAppURL "https://docker.com"
 #define MyAppContact "https://docs.docker.com"
@@ -305,6 +305,12 @@ function MigrateVM() : Boolean;
 var
   ResultCode: Integer;
 begin
+  if not FileExists('C:\Program Files\Oracle\VirtualBox\VBoxManage.exe') or not FileExists(ExpandConstant('{app}\docker-machine.exe')) then
+  begin
+    Result := true
+    exit
+  end;
+
   ExecAsOriginalUser('C:\Program Files\Oracle\VirtualBox\VBoxManage.exe', 'showvminfo default', '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
   if ResultCode <> 1 then
   begin
@@ -364,9 +370,7 @@ begin
     if IsTaskSelected(taskname) then
 			ModPath();
 
-    migrationSuccess:= true
-    if IsComponentSelected('DockerMachine') then
-      migrationSuccess := MigrateVM();
+    migrationSuccess:= MigrateVM();
 
     if migrationSuccess then
     begin
