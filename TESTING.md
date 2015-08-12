@@ -10,21 +10,21 @@ Things to try:
 
 ### Mac OS X 10.11
 
-- [ ] Install + Quick Start
-- [ ] Install + Migrating Boot2Docker
-- [ ] Install + Start Kitematic 
+- [x] Install + Quick Start
+- [x] Install + Migrating Boot2Docker
+- [x] Install + Start Kitematic 
 
 ### Mac OS X 10.10
 
-- [ ] Install + Quick Start
-- [ ] Install + Migrating Boot2Docker
-- [ ] Install + Start Kitematic 
+- [x] Install + Quick Start
+- [x] Install + Migrating Boot2Docker
+- [x] Install + Start Kitematic 
 
 ### Mac OS X 10.9
 
-- [ ] Install + Quick Start
-- [ ] Install + Migrating Boot2Docker
-- [ ] Install + Start Kitematic 
+- [x] Install + Quick Start
+- [x] Install + Migrating Boot2Docker
+- [x] Install + Start Kitematic 
 
 ### Windows 10
 
