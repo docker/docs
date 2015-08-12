@@ -4,17 +4,17 @@ set -e
 # Script to grab binaries that are going to be bundled with windows installer.
 # Note to maintainers: Update versions used below with newer releases
 
-docker=1.8.0-rc3
-dockerMachine=0.4.0-rc2
-kitematic=0.8.0-rc5
+docker=1.8.0
+dockerMachine=0.4.0
+kitematic=0.8.0
 vbox=5.0.0
 vboxRev=101573
 msysGit=1.9.5-preview20150319
-installer=1.8.0-rc8
+installer=1.8.0
 mixpanel=c306ae65c33d7d09fe3e546f36493a6e
 
-boot2dockerIsoSrc=tianon
-dockerBucket=test.docker.com
+boot2dockerIsoSrc=boot2docker
+dockerBucket=get.docker.com
 
 set -x
 rm -rf bundle
