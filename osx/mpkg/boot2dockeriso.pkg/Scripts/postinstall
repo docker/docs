@@ -12,39 +12,44 @@ chown -R $USER:admin /usr/local/bin/docker
 chown -R $USER:admin /usr/local/bin/docker-machine
 chown -R $USER:admin /usr/local/bin/docker-compose
 
-# Migrate Boot2Docker VM
+# Migrate Boot2Docker VM if VirtualBox is installed
 BOOT2DOCKER_VM=boot2docker-vm
 VM=default
 
-sudo -u $USER /usr/local/bin/VBoxManage showvminfo $BOOT2DOCKER_VM &> /dev/null
-BOOT2DOCKER_VM_EXISTS_CODE=$?
+VBOXMANAGE=/Applications/VirtualBox.app/Contents/MacOS/VBoxManage
 
-sudo -u $USER /usr/local/bin/VBoxManage showvminfo $VM &> /dev/null
-VM_EXISTS_CODE=$?
+if [ -f $VBOXMANAGE ] && [ -f /usr/local/bin/docker-machine ]; then
+  sudo -u $USER $VBOXMANAGE showvminfo $BOOT2DOCKER_VM &> /dev/null
+  BOOT2DOCKER_VM_EXISTS_CODE=$?
 
-# Exit if there's no boot2docker vm, or the destination VM already exists
-if [ $BOOT2DOCKER_VM_EXISTS_CODE -eq 0 ] && [ $VM_EXISTS_CODE -ne 0 ]; then
-  # Prompt the user to migrate
-  osascript -e 'tell app "System Events" to display dialog "Migrate your existing Boot2Docker VM to work with the Docker Toolbox?\n \nYour existing Boot2Docker VM will not be affected. This should take about a minute." buttons {"Do not Migrate", "Migrate"} default button 2 cancel button 1 with icon 2 with title "Migrate Boot2Docker VM?"'
-  if [ $? -eq 0 ]; then
+  sudo -u $USER $VBOXMANAGE showvminfo $VM &> /dev/null
+  VM_EXISTS_CODE=$?
 
-    # Clear out any existing VM data in case the user deleted the VM manually via VirtualBox
-    /usr/local/bin/docker-machine rm -f $VM &> /dev/null
-    rm -rf ~/.docker/machine/machines/$VM
-
-    # Run migration, opening logs if it fails
-    sudo -u $USER PATH=/Applications/VirtualBox.app/Contents/MacOS/:$PATH /usr/local/bin/docker-machine -D create -d virtualbox --virtualbox-import-boot2docker-vm $BOOT2DOCKER_VM $VM 2>&1 | sed -e '/BEGIN/,/END/d' > /tmp/toolbox-migration-logs.txt
+  # Exit if there's no boot2docker vm, or the destination VM already exists
+  if [ $BOOT2DOCKER_VM_EXISTS_CODE -eq 0 ] && [ $VM_EXISTS_CODE -ne 0 ]; then
+    # Prompt the user to migrate
+    osascript -e 'tell app "System Events" to display dialog "Migrate your existing Boot2Docker VM to work with the Docker Toolbox?\n \nYour existing Boot2Docker VM will not be affected. This should take about a minute." buttons {"Do not Migrate", "Migrate"} default button 2 cancel button 1 with icon 2 with title "Migrate Boot2Docker VM?"'
     if [ $? -eq 0 ]; then
-      osascript -e 'tell app "System Events" to display dialog "Boot2Docker VM migrated successfully to a Docker Machine VM named \"default\"" buttons {"Ok"} default button 1'
-    else
-      osascript -e 'tell app "System Events" to display dialog "Could not migrate the Boot2Docker VM. Please file an issue with the migration logs at https://github.com/docker/machine/issues/new." buttons {"Cancel", "View Migration Logs"} default button 2 cancel button 1 with icon 0  with title "Migration Failed"'
+
+      # Clear out any existing VM data in case the user deleted the VM manually via VirtualBox
+      /usr/local/bin/docker-machine rm -f $VM &> /dev/null
+      rm -rf ~/.docker/machine/machines/$VM
+
+      # Run migration, opening logs if it fails
+      sudo -u $USER PATH=/Applications/VirtualBox.app/Contents/MacOS/:$PATH /usr/local/bin/docker-machine -D create -d virtualbox --virtualbox-import-boot2docker-vm $BOOT2DOCKER_VM $VM 2>&1 | sed -e '/BEGIN/,/END/d' > /tmp/toolbox-migration-logs.txt
       if [ $? -eq 0 ]; then
-        open -a TextEdit /tmp/toolbox-migration-logs.txt
+        osascript -e 'tell app "System Events" to display dialog "Boot2Docker VM migrated successfully to a Docker Machine VM named \"default\"" buttons {"Ok"} default button 1'
+      else
+        osascript -e 'tell app "System Events" to display dialog "Could not migrate the Boot2Docker VM. Please file an issue with the migration logs at https://github.com/docker/machine/issues/new." buttons {"Cancel", "View Migration Logs"} default button 2 cancel button 1 with icon 0  with title "Migration Failed"'
+        if [ $? -eq 0 ]; then
+          open -a TextEdit /tmp/toolbox-migration-logs.txt
+        fi
+        exit 1
       fi
-      exit 1
     fi
   fi
 fi
+
 
 # Open Applications dir if it exists and is not empty
 if [ -d /Applications/Docker ] && [ "$(ls -A /Applications/Docker)" ]; then

@@ -2,6 +2,7 @@
 
 VM=default
 DOCKER_MACHINE=/usr/local/bin/docker-machine
+VBOXMANAGE=/Applications/VirtualBox.app/Contents/MacOS/VBoxManage
 
 BLUE='\033[0;34m'
 GREEN='\033[0;32m'
@@ -12,7 +13,12 @@ unset LD_LIBRARY_PATH
 
 clear
 
-/usr/local/bin/VBoxManage showvminfo $VM &> /dev/null
+if [ ! -f $DOCKER_MACHINE ] || [ ! -f $VBOXMANAGE ]; then
+  echo "Either VirtualBox or Docker Machine are not installed. Please re-run the Toolbox Installer and try again."
+  exit 1
+fi
+
+$VBOXMANAGE showvminfo $VM &> /dev/null
 VM_EXISTS_CODE=$?
 
 if [ $VM_EXISTS_CODE -ne 0 ]; then
