@@ -4,12 +4,18 @@ trap '[ "$?" -eq 0 ] || read -p "Looks like something went wrong... Press any ke
 
 VM=default
 DOCKER_MACHINE=./docker-machine.exe
+VBOXMANAGE=/c/Program\ Files/Oracle/VirtualBox/VBoxManage.exe
 
 BLUE='\033[1;34m'
 GREEN='\033[0;32m'
 NC='\033[0m'
 
-/c/Program\ Files/Oracle/VirtualBox/VBoxManage.exe showvminfo $VM &> /dev/null
+if [ ! -f $DOCKER_MACHINE ] || [ ! -f $VBOXMANAGE ]; then
+  echo "Either VirtualBox or Docker Machine are not installed. Please re-run the Toolbox Installer and try again."
+  exit 1
+fi
+
+$VBOXMANAGE showvminfo $VM &> /dev/null
 VM_EXISTS_CODE=$?
 
 set -e
