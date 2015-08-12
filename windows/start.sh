@@ -20,22 +20,20 @@ VM_EXISTS_CODE=$?
 
 set -e
 
-if [ $VM_EXISTS_CODE -ne 0 ]; then
+if [ $VM_EXISTS_CODE -eq 1 ]; then
   echo "Creating Machine $VM..."
   $DOCKER_MACHINE rm -f $VM &> /dev/null || :
   rm -rf ~/.docker/machine/machines/$VM
   $DOCKER_MACHINE create -d virtualbox --virtualbox-memory 2048 $VM
 else
-  echo "Machine $VM already exists."
+  echo "Machine $VM already exists in VirtualBox."
 fi
 
 echo "Starting machine $VM..."
 $DOCKER_MACHINE start $VM
 
 echo "Setting environment variables for machine $VM..."
-./docker-machine.exe env $VM | sed  's,\\,\\\\,g' # eval swallows single backslashes in windows style path
-
-eval "$($DOCKER_MACHINE env $VM 2>/dev/null | sed  's,\\,\\\\,g')"
+eval "$($DOCKER_MACHINE env $VM)"
 
 clear
 cat << EOF
