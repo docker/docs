@@ -21,13 +21,13 @@ fi
 $VBOXMANAGE showvminfo $VM &> /dev/null
 VM_EXISTS_CODE=$?
 
-if [ $VM_EXISTS_CODE -ne 0 ]; then
+if [ $VM_EXISTS_CODE -eq 1 ]; then
   echo "Creating Machine $VM..."
   $DOCKER_MACHINE rm -f $VM &> /dev/null
   rm -rf ~/.docker/machine/machines/$VM
-  $DOCKER_MACHINE create -d virtualbox --virtualbox-memory 2048 $VM
+  $DOCKER_MACHINE -D create -d virtualbox --virtualbox-memory 2048 $VM
 else
-  echo "Machine $VM already exists."
+  echo "Machine $VM already exists in VirtualBox."
 fi
 
 echo "Starting machine $VM..."

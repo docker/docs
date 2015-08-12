@@ -32,7 +32,7 @@ echo "Starting machine $VM..."
 $DOCKER_MACHINE start $VM
 
 echo "Setting environment variables for machine $VM..."
-eval "$($DOCKER_MACHINE env $VM 2>/dev/null)"
+eval "$($DOCKER_MACHINE env $VM)"
 
 clear
 cat << EOF
