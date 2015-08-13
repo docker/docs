@@ -18,7 +18,11 @@ VM=default
 
 VBOXMANAGE=/Applications/VirtualBox.app/Contents/MacOS/VBoxManage
 
-if [ -f $VBOXMANAGE ] && [ -f /usr/local/bin/docker-machine ]; then
+# Make sure this version of boot2docker can migrate
+/usr/local/bin/docker-machine create --help | grep virtualbox-import-boot2docker-vm
+DOCKER_MACHINE_MIGRATION_CHECK=$?
+
+if [ -f $VBOXMANAGE ] && [ -f /usr/local/bin/docker-machine ] && [ $DOCKER_MACHINE_MIGRATION_CHECK -eq 0 ]; then
   sudo -u $USER $VBOXMANAGE showvminfo $BOOT2DOCKER_VM &> /dev/null
   BOOT2DOCKER_VM_EXISTS_CODE=$?
 
