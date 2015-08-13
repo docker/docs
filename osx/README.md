@@ -4,4 +4,4 @@ Installation [instructions](https://docs.docker.com/mac/started/) available on t
 
 ##How to build
 
-Running `make` will produce a `Docker.pkg` installer.
+Running `make` will produce a `DockerToolbox.pkg` installer.
