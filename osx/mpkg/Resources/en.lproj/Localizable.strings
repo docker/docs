@@ -28,4 +28,4 @@
 'UNSUPPORTED_HW_MACHINE_MSG' = "The installer has detected an unsupported architecture. VirtualBox only runs on the x86 and amd64 architectures.";
 
 'UNSUPPORTED_OS_TLE' = "Unsupported OS version detected!";
-'UNSUPPORTED_OS_MSG' = "The installer has detected an unsupported operation system. VirtualBox requires Mac OS X 10.6 or later.";
+'UNSUPPORTED_OS_MSG' = "The installer has detected an unsupported operation system. Please upgrade to Mac OS X 10.8 or later.";
