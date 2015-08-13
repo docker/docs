@@ -26,7 +26,7 @@ RUN curl -fsSL -o /vbox.dmg http://download.virtualbox.org/virtualbox/$VBOX_VERS
 
 # Download the Docker parts
 
-ENV DOCKER_VERSION 1.8.1
+ENV DOCKER_VERSION 1.8.1a
 RUN curl -fsSL -o /docker https://get.docker.com/builds/Darwin/x86_64/docker-$DOCKER_VERSION
 RUN chmod +x /docker
 
