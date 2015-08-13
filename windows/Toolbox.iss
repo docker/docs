@@ -201,7 +201,16 @@ function InitializeSetup(): boolean;
 var
   ResultCode: integer;
   WinHttpReq: Variant;
+  Version: TWindowsVersion;
 begin
+  GetWindowsVersionEx(Version);
+  if (Version.Major = 10) then
+  begin
+    SuppressibleMsgBox('Windows 10 is not currently supported by the Docker Toolbox, due to an incompatibility with VirtualBox. There is a Windows 10 test build available at github.com/docker/toolbox/releases', mbCriticalError, MB_OK, IDOK);
+    Result := False;
+    Exit;
+  end;
+
   try
     WinHttpReq := CreateOleObject('WinHttp.WinHttpRequest.5.1');
     WinHttpReq.Open('POST', 'https://api.mixpanel.com/track/?data={#EventStartedData}', false);
