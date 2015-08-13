@@ -84,8 +84,9 @@ func tufAdd(cmd *cobra.Command, args []string) {
 	targetPath := args[2]
 
 	parseConfig()
-
-	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, remoteTrustServer, getTransport(gun, true), retriever)
+	// no online operations are performed by add so the transport argument
+	// should be nil
+	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, remoteTrustServer, nil, retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -222,8 +223,9 @@ func tufRemove(cmd *cobra.Command, args []string) {
 	targetName := args[1]
 	parseConfig()
 
-	repo, err := notaryclient.NewNotaryRepository(trustDir, gun, remoteTrustServer,
-		getTransport(gun, false), retriever)
+	// no online operation are performed by remove so the transport argument
+	// should be nil.
+	repo, err := notaryclient.NewNotaryRepository(trustDir, gun, remoteTrustServer, nil, retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -316,8 +318,11 @@ func (ps passwordStore) Basic(u *url.URL) (string, string) {
 }
 
 func getTransport(gun string, readOnly bool) http.RoundTripper {
+	// skipTLSVerify is false by default so verification will
+	// be performed.
 	tlsConfig := &tls.Config{
 		InsecureSkipVerify: viper.GetBool("skipTLSVerify"),
+		MinVersion:         tls.VersionTLS10,
 	}
 
 	base := &http.Transport{
@@ -332,14 +337,26 @@ func getTransport(gun string, readOnly bool) http.RoundTripper {
 		DisableKeepAlives:   true,
 	}
 
+	return tokenAuth(base, gun, readOnly)
+}
+
+func tokenAuth(baseTransport *http.Transport, gun string, readOnly bool) http.RoundTripper {
 	// TODO(dmcgowan): add notary specific headers
-	authTransport := transport.NewTransport(base)
+	authTransport := transport.NewTransport(baseTransport)
 	pingClient := &http.Client{
 		Transport: authTransport,
 		Timeout:   5 * time.Second,
 	}
-	endpointStr := "https://notary.docker.io/v2/"
-	req, err := http.NewRequest("GET", endpointStr, nil)
+	endpoint, err := url.Parse(remoteTrustServer)
+	if err != nil {
+		fatalf("could not parse remote trust server url (%s): %s", remoteTrustServer, err.Error())
+	}
+	subPath, err := url.Parse("v2/")
+	if err != nil {
+		fatalf("failed to parse v2 subpath. This error should not have been reached. Please report it as an issue at https://github.com/docker/notary/issues: %s", err.Error())
+	}
+	endpoint = endpoint.ResolveReference(subPath)
+	req, err := http.NewRequest("GET", endpoint.String(), nil)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -358,5 +375,5 @@ func getTransport(gun string, readOnly bool) http.RoundTripper {
 	tokenHandler := auth.NewTokenHandler(authTransport, ps, gun, "push", "pull")
 	basicHandler := auth.NewBasicHandler(ps)
 	modifier := transport.RequestModifier(auth.NewAuthorizer(challengeManager, tokenHandler, basicHandler))
-	return transport.NewTransport(base, modifier)
+	return transport.NewTransport(baseTransport, modifier)
 }
