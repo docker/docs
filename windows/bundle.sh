@@ -10,7 +10,7 @@ kitematic=0.8.2
 vbox=5.0.0
 vboxRev=101573
 msysGit=1.9.5-preview20150319
-installer=1.8.1
+installer=1.8.1a
 mixpanel=c306ae65c33d7d09fe3e546f36493a6e
 
 boot2dockerIsoSrc=boot2docker
