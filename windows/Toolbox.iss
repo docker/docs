@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Docker Toolbox"
-#define MyAppVersion "1.8.0b"
+#define MyAppVersion "1.8.1"
 #define MyAppPublisher "Docker"
 #define MyAppURL "https://docker.com"
 #define MyAppContact "https://docs.docker.com"
@@ -308,6 +308,7 @@ begin
   if not IsComponentSelected('DockerMachine') or not FileExists('C:\Program Files\Oracle\VirtualBox\VBoxManage.exe') or not FileExists(ExpandConstant('{app}\docker-machine.exe')) then
   begin
     Result := true
+
     exit
   end;
 
