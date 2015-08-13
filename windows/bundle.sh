@@ -6,7 +6,7 @@ set -e
 
 docker=1.8.1
 dockerMachine=0.4.0
-kitematic=0.8.1
+kitematic=0.8.2
 vbox=5.0.0
 vboxRev=101573
 msysGit=1.9.5-preview20150319
