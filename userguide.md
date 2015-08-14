@@ -62,7 +62,7 @@ You push an image up to a DTR repository by using the
 You can add a `tag` to your image so that you can more easily identify it
 amongst other variants and so that it refers to your DTR server.
 
-    `$ docker tag hello-world:latest dtr.yourdomain.com/yourusername/hello-mine:latest`
+    $ docker tag hello-world:latest dtr.yourdomain.com/yourusername/hello-mine:latest
 
 The command labels a `hello-world:latest` image using a new tag in the
 `[REGISTRYHOST/][USERNAME/]NAME[:TAG]` format.  The `REGISTRYHOST` in this
@@ -71,7 +71,7 @@ case is your DTR server, `dtr.yourdomain.com`, and the `USERNAME` is
 
 Once an image is tagged, you can push it to DTR with:
 
-    `$ docker push dtr.yourdomain.com/demouser/hello-mine:latest`
+    $ docker push dtr.yourdomain.com/yourusername/hello-mine:latest
     
 > **Note**: If the Docker daemon on which you are running `docker push` doesn't
 > have the right certificates set up, you will get an error similar to:

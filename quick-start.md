@@ -233,8 +233,7 @@ Now that you’ve created the custom image, it can be pushed to DTR using the
     492ed3875e3e: Image successfully pushed
     fc0ab3008d40: Image successfully pushed
 
-You can view the traffic throughput while the custom image is being pushed from
-the `System Health` tab in DTR:
+You can view the traffic throughput from the custom image being pushed on the DTR Dashboard:
 
 ![DTR console push throughput](../assets/console-push.png)
 
@@ -257,8 +256,7 @@ command from any Docker Host that has access to your DTR instance:
     dtr.yourdomain.com/ci-infrastructure/jnkns-img:latest: The image you are pulling has been verified. Important: image verification is a tech preview feature and should not be relied on to provide security.
     Status: Downloaded newer image for dtr.yourdomain.com/ci-infrastructure/jnkns-img:latest
 
-You can view the traffic throughput while the custom image is being pulled from
-the `System Health` tab in DTR:
+You can view the traffic throughput from the custom image being pulled on the DTR Dashboard:
 
 ![DTR console pull throughput](../assets/console-pull.png)
 

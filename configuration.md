@@ -17,27 +17,29 @@ weight=10
 This page will help you properly configure Docker Trusted Registry (DTR) so it can
 run in your environment.
 
-Start with DTR loaded in your browser and click  the "Settings" tab to view
-configuration options. You'll see options for configuring:
+Start with DTR loaded in your browser and click  "Settings" in the global nav
+bar at the top of the page to view configuration options. You'll see menus
+organizing the options for configuring:
 
-* Domains and ports
+* General Settings (ports, proxies, etc.)
 * Security settings
 * Storage settings
-* Authentication settings
 * Your DTR license
+* Authentication settings
 
-## Domains and Ports
+
+## General Settings
 
 ![Domain and Ports page</admin/settings#http>](../assets/admin-settings-http.png)
 
 * *Domain Name*: **required** defaults to an empty string, the fully qualified domain name assigned to the DTR host.
-* *Load Balancer HTTP Port*: defaults to 80, used as the entry point for the image storage service. To see load balancer status, you can query
+* *HTTP Port*: defaults to 80, used as the entry point for the image storage service. To see load balancer status, you can query
 http://&lt;dtr-host&gt;/load_balancer_status.
-* *Load Balancer HTTPS Port*: defaults to 443, used as the secure entry point
-for the image storage service.
-* *HTTP_PROXY*: defaults to an empty string, proxy server for HTTP requests.
-* *HTTPS_PROXY*: defaults to an empty string, proxy server for HTTPS requests.
-* *NO_PROXY*: defaults to an empty string, proxy bypass for HTTP and HTTPS requests.
+* *HTTPS Port*: defaults to 443, used as the secure entry point for the image storage service.
+* *HTTP proxy*: defaults to an empty string, proxy server for HTTP requests.
+* *HTTPS proxy*: defaults to an empty string, proxy server for HTTPS requests.
+* *No proxy*: defaults to an empty string, proxy bypass for HTTP and HTTPS requests.
+* *Upgrade checking*: enables or disables automatic checking for DTR software updates.
 
 
 > **Note**: If you need DTR to re-generate a self-signed certificate at some
@@ -52,7 +54,7 @@ for the image storage service.
 
 * *SSL Certificate*: Used to enter the hash (string) from the SSL Certificate.
 This cert must be accompanied by its private key, entered below.
-* *Private Key*: The hash from the private key associated with the provided
+* *SSL Private Key*: The hash from the private key associated with the provided
 SSL Certificate (as a standard x509 key pair).
 
 In order to run, DTR requires encrypted communications via HTTPS/SSL between (a) the DTR registry and your Docker Engine(s), and (b) between your web browser and the DTR admin server. There are a few options for setting this up:
@@ -270,7 +272,10 @@ API](http://docs.docker.com/registry/storagedrivers/#storage-driver-api).
 
 ![Storage settings page</admin/settings#storage>](../assets/admin-settings-storage.png)
 
-* *Yaml configuration file*: This file (`/usr/local/etc/dtr/storage.yml`) is
+After you select the image storage method you would like to use from the drop-down menu near the top of the page, the UI will change to reflect the configuration settings appropriate to the selected method.
+
+### Yaml configuration file
+This file (`/usr/local/etc/dtr/storage.yml`) is
 used to configure the image storage services. The editable text of the file is
 displayed in the dialog box. The schema of this file is identical to that used
 by the [Registry 2.0](http://docs.docker.com/registry/configuration/).
@@ -285,7 +290,7 @@ by the [Registry 2.0](http://docs.docker.com/registry/configuration/).
 
 ## Authentication
 
-The "Authentication" settings tab lets DTR administrators control access
+The "Authentication" settings lets DTR administrators control access
 to the DTR web admin tool and to the DTR Registry.
 
 The current authentication methods are `None`, `Managed` and `LDAP`.
@@ -300,8 +305,7 @@ site. This is not recommended for any use other than testing.
 
 ### Managed authentication
 
-With `Managed` authentication, the DTR admin can control users' access by setting
-username/password pairs.
+With `Managed` authentication, the DTR admin can control users' access by setting username/password pairs.
 These users must then be given "admin", "read-write" or "read-only" roles.
 The "read-only" role can only pull images from the registry, "read-write" can
 push and pull images, and the "admin" role can push and pull and also access
@@ -309,13 +313,13 @@ the web administration UI and metrics dashboard.
 
 ![Managed authentication settings page</admin/settings#auth>](../assets/admin-settings-authentication-basic.png)
 
-* A button to add one user, or to upload a CSV file containing username,
+* Choose the appropriate button to add one user, or to upload a CSV file containing username,
   password pairs, and selection boxes for "admin", "read-write", and "read-only" roles.
 
 ### LDAP authentication
 
 Using LDAP authentication allows you to integrate your DTR registry into your
-organization's existing user and authentication database.
+organization's existing LDAP user and authentication database.
 
 You can configure the "userFilter" to select the set of users that are candidates
 for each of the "admin", "read-write", and "read-only" roles. Unlike "Managed"
@@ -355,13 +359,16 @@ confirm which setting you need.
 
 ![LDAP authentication settings page</admin/settings#auth>](../assets/admin-settings-authentication-ldap.png)
 
-* *Use StartTLS*: defaults to unchecked, check to enable StartTLS
+#### LDAP Configuration options
+
 * *LDAP Server URL*: **required** defaults to null, LDAP server URL (e.g., - ldap://example.com)
+* *Use StartTLS*: defaults to unchecked, check to enable StartTLS
 * *User Base DN*: **required** defaults to null, user base DN in the form (e.g., - dc=example,dc=com)
 * *User Login Attribute*: **required** defaults to null, user login attribute (e.g., - uid or sAMAccountName)
 * *Search User DN*: **required** defaults to null, search user DN (e.g., - domain\username)
+* *LDAP Sync Interval*: **required** defaults to 1h0m0s, sets the interval for DTR to sync with the LDAP db.
 * *Search User Password*: **required** defaults to null, search user password
-* *User Search filters*: allowing you to configure LDAP queries to limit the users that have the roles:
+* *User Search filters*: allows you to configure LDAP queries to limit the users that have the roles:
 * * *User Filter*: This filter is used to select the objects to use as candidates for the role filters
 * * *Admin Role Filter*: Combined with the "User Filter" to specify users with the
     "Admin" role - permitted to access the DTR web UI
@@ -375,6 +382,10 @@ confirm which setting you need.
 > "admin" filter is left empty, all users will get admin privileges, if the
 > "read-write" filter is empty, all users can push/pull any image, etc. (This
 > behavior will be corrected in future versions.)
+
+#### Confirm Configuration
+
+You can test your LDAP configuration before saving it by entering a test username and password and then clicking "Try Login". If the login succeeds, your configuration is working. 
 
 ## Next Steps
 
