@@ -16,15 +16,15 @@ This guide covers tasks and functions an administrator of Docker Trusted Registr
 (DTR) will need to know about, such as reporting, logging, system management,
 performance metrics, etc.
 For tasks DTR users need to accomplish, such as using DTR to push and pull
-images, please visit the [User's Guide]({{< relref "userguide.md" >}}).
+images, please look at the [User's Guide]({{< relref "userguide.md" >}}).
 
 ## Reporting
 
-### System Health
+### Dashboard
 
-![System Health page</admin/metrics/>](../assets/admin-metrics.png)
+![DTR Dashboard</admin/metrics/>](../assets/admin-metrics.png)
 
-The "System Health" tab displays "hardware" resource utilization and network traffic metrics for the DTR host as well as for each of its contained services. The CPU and RAM usage meters at the top indicate overall resource usage for the host, while detailed time-series charts are provided below for each service.
+The "DTR Dashboard displays "hardware" resource utilization and network traffic metrics for the DTR host as well as for each of its contained services. The CPU and RAM usage meters at the top indicate overall resource usage for the host, while detailed time-series charts are provided below for each container providing a DTR service.
 
 In addition, if your registry is using a filesystem storage driver, you will see a usage meter indicating used and available space on the storage volume. Third-party storage back-ends are not supported, so if you are using one, this meter will not be displayed.
 
@@ -39,7 +39,7 @@ service. See below for a
 
 ![System Logs page</admin/logs/>](../assets/admin-logs.png)
 
-Click the "Logs" tab to view all logs related to your DTR instance. You will see
+Click "Logs" in the global nav bar at the top of page to view the logs from your DTR's containers. You will see
 log sections on this page for each service in your DTR instance. Older or newer
 logs can be loaded by scrolling up or down. See below for a
 [detailed explanation of the available services](#services).

@@ -54,7 +54,7 @@ DTR runs on the following platforms:
 * RHEL 7.0 and 7.1
 * CentOS 7.1
 
-DTR 1.2.0 requires the following:
+DTR 1.3.0 requires the following:
 
 * Commercially supported Docker Engine, preferably 1.6.2-cs5 or later, running
 on a supported host. (See below for instructions on how to install the
@@ -275,10 +275,10 @@ temporarily.
 
 ### Setting the DTR Domain Name
 
-The DTR Administrator site will also warn that the "Domain Name" is not set. Go
-to the "Settings" tab, and set the "Domain Name" to the full host-name of your
-DTR server.
-Hitting the "Save and Restart DTR Server" button will generate a new certificate, which will be used
+The DTR Administrator site will also warn that the "Domain Name" is not set.
+Select "Settings" from the global nav bar at the top of the page, and then set
+the "Domain Name" to the full host-name of your DTR server.
+Clicking the "Save and Restart DTR Server" button will generate a new certificate, which will be used
 by both the DTR Administrator web interface and the DTR Registry server.
 
 After the server restarts, you will again need to allow the connection to the untrusted DTR web admin site.
@@ -301,17 +301,18 @@ upload it to your DTR web admin server. Follow these steps:
    obtain the license file you'd like to use.
    ![Download DTR license](../assets/docker-hub-org-enterprise-license.png)
 
-3. Next, go to your DTR instance in your browser and click on the Settings tab
-   and then the "License" tab. Click on the "Upload license file" button, which
-   will open a standard file browser. Locate and select the license file you
-   downloaded in step 2, above. Approve the selection to close the dialog.
+3. Next, go to your DTR instance in your browser, click on "Settings" in the
+   global nav bar and then click "License" in the Settings nav bar. Click the
+   "Choose File" button, which will open a standard file browser. Locate and
+   select the license file you downloaded in step 2, above. Approve the
+   selection to close the dialog.
    ![http settings page</admin/settings#license>](../assets/admin-settings-license.png)
 
-4. Click the "Save and Restart DTR" button, which will quit DTR and then restart it, registering
-   the new license.
+4. Click the "Save and restart" button, which will quit DTR and then restart
+   it, applying the new license.
 
-5. Verify the acceptance of the license by confirming that the "unlicensed copy"
-warning is no longer present.
+5. Verify the acceptance of the license by confirming that the "Unlicensed copy"
+   warning is no longer present.
 
 ### Securing DTR
 
@@ -340,17 +341,14 @@ details.
 ## Upgrading Docker Trusted Registry
 
 DTR has been designed to allow on-the-fly software upgrades. Start by
-clicking on the "System Health" tab. In the upper, right-hand side of the
-dashboard, below the navigation bar, you'll see the currently installed version
-(e.g., `Current Version: 0.1.12345`).
+loading the DTR Dashboard in your browser and clicking "Settings" in the global nav bar. Then click "Updates" in the Settings nav bar. You'll see the currently installed version and a message telling you that the version is either current or that there is an update available.
 
-If your DTR instance is the latest available, you will also see the message:
-"System Up to Date."
 
-If there is an upgrade available, you will see the message "System Update
-Available!" alongside a button labeled "Update to Version X.XX". To upgrade, DTR
-will pull new DTR container images from the Docker Hub. If you have not already
-connected to Docker Hub, DTR will prompt you to log in.
+If there is an update available, you will see the message "System Update
+Available" and a button labeled "Update to Version X.XX". Click the button to
+start the update process. To update, DTR will pull new DTR container images from
+the Docker Hub. If you have not already connected to Docker Hub, DTR will prompt
+you to log in.
 
 The upgrade process requires a small amount of downtime to complete. To complete
 the upgrade, DTR will:
