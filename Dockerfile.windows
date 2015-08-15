@@ -1,0 +1,54 @@
+FROM debian:jessie
+
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN dpkg --add-architecture i386
+RUN sed -i "s/main/main contrib non-free/" etc/apt/sources.list
+RUN apt-get update && apt-get install -yq wine curl unrar unzip
+
+# innosetup
+RUN mkdir innosetup && \
+    cd innosetup && \
+    curl -fsSL -o innounp043.rar "https://downloads.sourceforge.net/project/innounp/innounp/innounp%200.43/innounp043.rar?r=&ts=1439566551&use_mirror=skylineservers" && \
+    unrar e innounp043.rar
+
+RUN cd innosetup && \
+    curl -fsSL -o is-unicode.exe http://www.jrsoftware.org/download.php/is-unicode.exe && \
+    wine "./innounp.exe" -e "is-unicode.exe"
+
+# installer components
+ENV INSTALLER_VERSION 1.8.1a
+ENV DOCKER_VERSION 1.8.1
+ENV DOCKER_MACHINE_VERSION 0.4.0
+ENV BOOT2DOCKER_ISO_VERSION $DOCKER_VERSION
+ENV KITEMATIC_VERSION 0.8.2
+ENV VIRTUALBOX_VERSION 5.0.0
+ENV VIRTUALBOX_REVISION 101573
+ENV MSYSGIT_VERSION 1.9.5-preview20150319
+
+RUN mkdir /bundle
+WORKDIR /bundle
+RUN curl -fsSL -o docker.exe "https://get.docker.com/builds/Windows/x86_64/docker-$DOCKER_VERSION.exe"
+RUN curl -fsSL -o docker-machine.exe "https://github.com/docker/machine/releases/download/v$DOCKER_MACHINE_VERSION/docker-machine_windows-amd64.exe"
+RUN curl -fsSL -o boot2docker.iso https://github.com/boot2docker/boot2docker/releases/download/v$BOOT2DOCKER_ISO_VERSION/boot2docker.iso
+RUN curl -fsSL -o kitematic.zip "https://github.com/kitematic/kitematic/releases/download/v$KITEMATIC_VERSION/Kitematic-$KITEMATIC_VERSION-Windows-Alpha.zip" && \
+    mkdir kitematic && \
+    cd kitematic && \
+    unzip ../kitematic.zip && \
+    rm ../kitematic.zip
+RUN curl -fsSL -o Git.exe "https://github.com/msysgit/msysgit/releases/download/Git-$MSYSGIT_VERSION/Git-$MSYSGIT_VERSION.exe"
+RUN curl -fsSL -o virtualbox.exe "http://download.virtualbox.org/virtualbox/$VIRTUALBOX_VERSION/VirtualBox-$VIRTUALBOX_VERSION-$VIRTUALBOX_REVISION-Win.exe"
+RUN wine virtualbox.exe -extract -silent -path . && \
+	  rm virtualbox.exe && \
+	  rm *x86.msi && \
+	  mv *_amd64.msi VirtualBox_amd64.msi
+
+RUN echo "{\"event\":\"Installer Finished\",\"properties\":{\"token\":\"$MIXPANEL_TOKEN\",\"version\":\"$INSTALLER_VERSION\",\"os\":\"darwin\"}}" | base64 | tr -d '\n' > started.txt
+RUN echo "{\"event\":\"Installer Finished\",\"properties\":{\"token\":\"$MIXPANEL_TOKEN\",\"version\":\"$INSTALLER_VERSION\",\"os\":\"darwin\"}}" | base64 | tr -d '\n' > finished.txt
+
+# Add installer resources
+COPY windows /installer
+
+WORKDIR /installer
+RUN rm -rf /tmp/.wine-0/
+RUN wine ../innosetup/ISCC.exe Toolbox.iss /DMyAppVersion=$INSTALLER_VERSION

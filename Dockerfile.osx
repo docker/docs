@@ -50,7 +50,7 @@ ENV MIXPANEL_TOKEN c306ae65c33d7d09fe3e546f36493a6e
 
 # Start building package
 
-COPY mpkg /mpkg
+COPY osx/mpkg /mpkg
 
 #  Extract the VirtualBox .pkg
 RUN mkdir -p /mpkg/vbox && \
