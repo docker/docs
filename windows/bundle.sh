@@ -5,12 +5,12 @@ set -e
 # Note to maintainers: Update versions used below with newer releases
 
 docker=1.8.1
-dockerMachine=0.4.0
-kitematic=0.8.2
-vbox=5.0.0
-vboxRev=101573
+dockerMachine=0.4.1
+kitematic=0.8.3
+vbox=5.0.2
+vboxRev=102096
 msysGit=1.9.5-preview20150319
-installer=1.8.1a
+installer=1.8.1b
 mixpanel=c306ae65c33d7d09fe3e546f36493a6e
 
 boot2dockerIsoSrc=boot2docker
