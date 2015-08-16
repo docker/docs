@@ -18,8 +18,8 @@ RUN curl -fsSL https://github.com/mackyle/xar/archive/xar-1.6.1.tar.gz | tar xvz
 	./autogen.sh && ./configure && \
 	make && make install
 
-ENV VBOX_VERSION 5.0.0
-ENV VBOX_REV 101573
+ENV VBOX_VERSION 5.0.2
+ENV VBOX_REV 102096
 
 RUN curl -fsSL -o /vbox.dmg http://download.virtualbox.org/virtualbox/$VBOX_VERSION/VirtualBox-$VBOX_VERSION-$VBOX_REV-OSX.dmg \
 	&& echo "$(curl -fsSL 'http://download.virtualbox.org/virtualbox/'"$VBOX_VERSION"'/SHA256SUMS' | awk '$2 ~ /-OSX.dmg$/ { print $1 }') */vbox.dmg" | sha256sum -c -
@@ -30,7 +30,7 @@ ENV DOCKER_VERSION 1.8.1
 RUN curl -fsSL -o /docker https://get.docker.com/builds/Darwin/x86_64/docker-$DOCKER_VERSION
 RUN chmod +x /docker
 
-ENV DOCKER_MACHINE_VERSION 0.4.0
+ENV DOCKER_MACHINE_VERSION 0.4.1
 RUN curl -fsSL -o /docker-machine https://github.com/docker/machine/releases/download/v$DOCKER_MACHINE_VERSION/docker-machine_darwin-amd64
 RUN chmod +x /docker-machine
 
@@ -41,10 +41,10 @@ RUN chmod +x /docker-compose
 ENV BOOT2DOCKER_ISO_VERSION $DOCKER_VERSION
 RUN curl -fsSL -o /boot2docker.iso https://github.com/boot2docker/boot2docker/releases/download/v$DOCKER_VERSION/boot2docker.iso
 
-ENV KITEMATIC_VERSION 0.8.2
+ENV KITEMATIC_VERSION 0.8.3
 RUN curl -fsSL -o /kitematic.zip https://github.com/kitematic/kitematic/releases/download/v$KITEMATIC_VERSION/Kitematic-$KITEMATIC_VERSION-Mac.zip
 
-ENV INSTALLER_VERSION 1.8.1a
+ENV INSTALLER_VERSION 1.8.1b
 
 ENV MIXPANEL_TOKEN c306ae65c33d7d09fe3e546f36493a6e
 
