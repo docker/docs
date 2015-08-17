@@ -4,7 +4,7 @@ description = "DTR 1.3 API Design document"
 draft = true
 keywords = ["API, Docker, index, REST, documentation, Docker Trusted Registry, registry"]
 [menu.main]
-parent = "smn_remoteapi"
+parent = "smn_dtrapi"
 +++
 
 # Docker Trusted Registry 1.3

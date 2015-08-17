@@ -4,7 +4,7 @@ description = "Docker Trusted Registry 1.3 User-Owned Repository Acces"
 keywords = ["API, Docker, index, REST, documentation, Docker Trusted Registry, registry"]
 weight = 66
 [menu.main]
-parent = "smn_remoteapi"
+parent = "smn_dtrapi"
 +++
 
 # Docker Trusted Registry 1.3 User-Owned Repository Access
