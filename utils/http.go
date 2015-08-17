@@ -59,9 +59,10 @@ func (root *rootHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}()
 
 	if root.auth != nil {
-		var err error
 		access := buildAccessRecords(vars["imageName"], root.actions...)
-		if ctx, err = root.auth.Authorized(ctx, access...); err != nil {
+		var authCtx context.Context
+		var err error
+		if authCtx, err = root.auth.Authorized(ctx, access...); err != nil {
 			if err, ok := err.(auth.Challenge); ok {
 				err.ServeHTTP(w, r)
 				w.WriteHeader(http.StatusUnauthorized)
@@ -70,6 +71,7 @@ func (root *rootHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			errcode.ServeJSON(w, v2.ErrorCodeUnauthorized)
 			return
 		}
+		ctx = authCtx
 	}
 	if err := root.handler(ctx, w, r); err != nil {
 		e := errcode.ServeJSON(w, err)
