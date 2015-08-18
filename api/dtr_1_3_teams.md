@@ -9,6 +9,134 @@ parent = "smn_dtrapi"
 
 # Docker Trusted Registry 1.3 Teams
 
+DTR Teams, like on the Docker Hub, only exist within an Organization.
+
+## List Teams in an Organization
+
+`GET /api/v0/accounts/{name}/teams`
+
+Example Response:
+
+```json
+{
+  "teams": [
+    {
+      "id": 4,
+      "orgID": 4,
+      "type": "managed",
+      "name": "owners",
+      "description": ""
+    },
+    {
+      "id": 5,
+      "orgID": 4,
+      "type": "managed",
+      "name": "testers",
+      "description": "i have altered the description, pray that i do not alter it any further"
+    }
+  ]
+}
+```
+
+**Authorization**
+
+Client must be authenticated as a member of the organization.
+
+**Status Codes**
+
+- *403* the client is not authorized.
+- *404* the Organization has no teams.
+- *200* success.
+
+## View Details of a Team
+
+`GET /api/v0/accounts/{name}/teams/{teamname}`
+
+Example Response:
+
+```json
+{
+  "id": 5,
+  "orgID": 4,
+  "type": "managed",
+  "name": "testers",
+  "description": "i have altered the description, pray that i do not alter it any further"
+}
+```
+
+**Authorization**
+
+Client must be authenticated as a member of the organization.
+
+**Status Codes**
+
+- *403* the client is not authorized.
+- *404* no such team exists.
+- *200* success.
+
+## List a Team's Members
+
+`GET /api/v0/accounts/{name}/teams/{teamname}/members`
+
+Example Response:
+
+```json
+{
+  "members": [
+    {
+      "id": 8,
+      "type": "user",
+      "name": "midei",
+      "isActive": true
+    },
+    {
+      "id": 10,
+      "type": "user",
+      "name": "rajat",
+      "isActive": true
+    },
+    {
+      "id": 12,
+      "type": "user",
+      "name": "banjot",
+      "isActive": true
+    },
+    {
+      "id": 15,
+      "type": "user",
+      "name": "jon",
+      "isActive": true
+    }
+  ]
+}
+```
+
+**Authorization**
+
+Client must be authenticated as a system admin, a member of the "owners" team
+in the organization, or a member of the team in question.
+
+**Status Codes**
+
+- *403* the client is not authorized.
+- *404* no such team exists.
+- *200* success.
+
+## Check if a User is a Member of a Team
+
+`GET /api/v0/accounts/{name}/teams/{teamname}/members/{member}`
+
+**Authorization**
+
+Client must be authenticated as a user which has visibility into the team
+(i.e., a member of the team or an owner of the organization).
+
+**Status Codes**
+
+- *403* the client is not authorized.
+- *404* no such teams exists or user is not a member.
+- *204* success (user is a member).
+
 ## Create a Team in an Organization
 
 `POST /api/v0/accounts/{name}/teams`
@@ -95,130 +223,6 @@ team in the organization.
 - *400* invalid updated detail values.
 - *200* success.
 
-## List Teams in an Organization
-
-`GET /api/v0/accounts/{name}/teams`
-
-Example Response:
-
-```json
-{
-  "teams": [
-    {
-      "id": 4,
-      "orgID": 4,
-      "type": "managed",
-      "name": "owners",
-      "description": ""
-    },
-    {
-      "id": 5,
-      "orgID": 4,
-      "type": "managed",
-      "name": "testers",
-      "description": "i have altered the description, pray that i do not alter it any further"
-    }
-  ]
-}
-```
-
-**Authorization**
-
-Client must be authenticated as a member of the organization.
-
-**Status Codes**
-
-- *403* the client is not authorized.
-- *200* success.
-
-## View Details of a Team
-
-`GET /api/v0/accounts/{name}/Teams/{teamname}`
-
-Example Response:
-
-```json
-{
-  "id": 5,
-  "orgID": 4,
-  "type": "managed",
-  "name": "testers",
-  "description": "i have altered the description, pray that i do not alter it any further"
-}
-```
-
-**Authorization**
-
-Client must be authenticated as a member of the organization.
-
-**Status Codes**
-
-- *403* the client is not authorized.
-- *404* no such team exists.
-- *200* success.
-
-## List a Team's Members
-
-`GET /api/v0/accounts/{name}/teams/{teamname}/members`
-
-Example Response:
-
-```json
-{
-  "members": [
-    {
-      "id": 8,
-      "type": "user",
-      "name": "midei",
-      "isActive": true
-    },
-    {
-      "id": 10,
-      "type": "user",
-      "name": "rajat",
-      "isActive": true
-    },
-    {
-      "id": 12,
-      "type": "user",
-      "name": "banjot",
-      "isActive": true
-    },
-    {
-      "id": 15,
-      "type": "user",
-      "name": "jon",
-      "isActive": true
-    }
-  ]
-}
-```
-
-**Authorization**
-
-Client must be authenticated as a system admin, a member of the "owners" team
-in the organization, or a member of the team in question.
-
-**Status Codes**
-
-- *403* the client is not authorized.
-- *404* no such team exists.
-- *200* success.
-
-## Check if a User is a Member of a Team
-
-`GET /api/v0/accounts/{name}/teams/{teamname}/members/{member}`
-
-**Authorization**
-
-Client must be authenticated as a user which has visibility into the team
-(i.e., a member of the team or an owner of the organization).
-
-**Status Codes**
-
-- *403* the client is not authorized.
-- *404* no such teams exists or user is not a member.
-- *204* success (user is a member).
 
 ## Add a User to a Team (if not LDAP synced).
 

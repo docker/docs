@@ -31,6 +31,10 @@ to any repository that is owned by another user account.
 
 `GET /api/v0/repositories/{namespace}/{reponame}/userAccess`
 
+```curl
+curl -v --user josh:password --insecure -X GET https://dtr.domain.com/api/v0/repositories/josh/public-app/userAccess
+```
+
 Example Response:
 
 ```json
@@ -82,6 +86,10 @@ repository.
 ## Set a User's Access to a User-Owned Repository
 
 `PUT /api/v0/repositories/{namespace}/{reponame}/userAccess/{grantee}`
+
+```curl
+curl -v --user josh:password --insecure -X PUT --header "Content-type: application/json" --data '{"accessLevel":"read-write"}' https://192.168.18.129/api/v0/repositories/alice/public-app/userAccess/brian
+```
 
 Example Request:
 
@@ -143,4 +151,4 @@ repository.
 - *404* the repository is not visible to the client.
 - *400* the repository is not owned by a user.
 - *403* the client is not authorized.
-- *200* success.
+- *204* (no content) success.

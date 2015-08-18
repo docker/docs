@@ -1,5 +1,5 @@
 +++
-title = "DTR accounts API"
+title = "DTR Accounts API"
 description = "Docker Trusted Registry 1.3 User and Organization Accounts"
 keywords = ["API, Docker, index, REST, documentation, Docker Trusted Registry, registry"]
 weight = 61
@@ -9,13 +9,153 @@ parent = "smn_dtrapi"
 
 # Docker Trusted Registry 1.3 User and Organization Accounts
 
+## List Accounts
+
+`GET /api/v0/accounts`
+
+```bash
+$ curl --user alice:password https://dtr.domain.com/api/v0/accounts
+```
+
+Example Response:
+
+```json
+{
+  "accounts": [
+    {
+      "id": 1,
+      "type": "user",
+      "name": "admin",
+      "isActive": true
+    },
+    {
+      "id": 2,
+      "type": "user",
+      "name": "jlhawn",
+      "isActive": true
+    },
+    {
+      "id": 3,
+      "type": "user",
+      "name": "alice",
+      "isActive": true
+    },
+    {
+      "id": 4,
+      "type": "organization",
+      "name": "engineering",
+    }
+  ]
+}
+```
+
+**Authorization**
+
+Client must be authenticated as any user in the system.
+
+**Status Codes**
+
+- *401* the client is not authenticated.
+- *200* success.
+
+## Account Details
+
+`GET /api/v0/accounts/{name}`
+
+```bash
+$ curl --user alice:password https://dtr.domain.com/api/v0/accounts/alice
+```
+
+Example Request:
+
+```http
+GET /api/v0/accounts/alice HTTP/1.1
+```
+
+Response:
+
+```json
+{
+  "id": 3,
+  "type": "user",
+  "name": "alice",
+  "isActive": true
+}
+```
+
+**Authorization**
+
+Client must be authenticated as any user in the system.
+
+**Status Codes**
+
+- *404* no such account exists.
+- *401* the client is not authenticated.
+- *200* success.
+
+## List Organizations for a User
+
+`GET /api/v0/accounts/{name}/organizations`
+
+
+```bash
+$ curl --user alice:password https://dtr.domain.com/api/v0/accounts/alice/organizations
+```
+
+Example Request:
+
+```http
+GET /api/v0/accounts/alice/organizations HTTP/1.1
+```
+
+Example Response:
+
+```json
+{
+  "organizations": [
+    {
+      "id": 4,
+      "type": "organization",
+      "name": "engineering",
+    }
+  ]
+}
+```
+
+**Authorization**
+
+Client must be authenticated as a system 'admin' user or the user in question.
+
+**Status Codes**
+
+- *404* no such account.
+- *401* client must be authenticated.
+- *403* client must be an admin or target user.
+- *200* success.
+
 ## Create an Account
 
 `POST /api/v0/accounts`
 
+```bash
+$ curl --user alice:password -X POST --data '{"type": "user","name": "alice","password": "watchThinkFruitNeighbor"}' --header "Content-Type: application/json" https://dtr.domain.com/api/v0/accounts
+```
+
+User and Organization names must conform to the namespace rules - lowercase
+letters, numbers, or after the first character, `-` and `_`.
+
+
 ### Create a Managed User Account
 
-DTR auth settings must be in "managed" mode.
+There is no user reqtriction on creating a managed user account, however managed
+user accounts start out inactive and the user cannot authenticate until an admin
+explicitly activates the user account using the activate user API endpoint.
+
+This allows the creation of DTR managed namespace reservations by an external
+service, which can then activate the account when its been verified by the external
+service.
+
+DTR auth settings must be in "Managed" mode.
 
 Example Request:
 
@@ -43,13 +183,11 @@ Response:
 
 **Authorization**
 
-Anyone may create a managed user account, however managed user accounts start
-out inactive and the user cannot authenticate until an admin explicitly
-activates the user account using the activate user API endpoint.
+Anyone - no authorization required.
 
 **Status Codes**
 
-- *400* invalid input.
+- *400* invalid input, or `account already exists`
 - *200* success.
 
 ### Create a User Account from LDAP
@@ -98,7 +236,7 @@ the client provides a valid ldap login and password.
 
 ### Create an Organization Account
 
-DTR auth settings must be in "managed" or "ldap" mode.
+DTR auth settings must be in "Managed" or "ldap" mode.
 
 Example Request:
 
@@ -134,85 +272,13 @@ Client must be authenticated as a global 'admin' user.
 - *403* client must be an admin.
 - *200* success.
 
-## List Accounts
-
-`GET /api/v0/accounts`
-
-Example Response:
-
-```json
-{
-  "accounts": [
-    {
-      "id": 1,
-      "type": "user",
-      "name": "admin",
-      "isActive": true
-    },
-    {
-      "id": 2,
-      "type": "user",
-      "name": "jlhawn",
-      "isActive": true
-    },
-    {
-      "id": 3,
-      "type": "user",
-      "name": "alice",
-      "isActive": true
-    },
-    {
-      "id": 4,
-      "type": "organization",
-      "name": "engineering",
-    }
-  ]
-}
-```
-
-**Authorization**
-
-Client must be authenticated as any user in the system.
-
-**Status Codes**
-
-- *401* the client is not authenticated.
-- *200* success.
-
-## Account Details
-
-`GET /api/v0/accounts/{name}`
-
-Example Request:
-
-```http
-GET /api/v0/accounts/alice HTTP/1.1
-```
-
-Response:
-
-```json
-{
-  "id": 3,
-  "type": "user",
-  "name": "alice",
-  "isActive": true
-}
-```
-
-**Authorization**
-
-Client must be authenticated as any user in the system.
-
-**Status Codes**
-
-- *404* no such account exists.
-- *401* the client is not authenticated.
-- *200* success.
-
-## Remove an Account
+## Remove an User or Organization Account
 
 `DELETE /api/v0/accounts/{name}`
+
+```bash
+curl -v --user admin:password -X DELETE https://dtr.domain.com/api/v0/accounts/engineering
+```
 
 Example Request:
 
@@ -228,11 +294,17 @@ Client must be authenticated as a system 'admin' user.
 
 - *401* client must be authenticated.
 - *403* client must be an admin.
-- *204* success.
+- *204* (`No Content`) success.
 
 ## Change a Managed User's Password
 
 `POST /api/v0/accounts/{name}/changePassword`
+
+```curl
+curl -v --user admin:password -X POST --data '{"newPassword":"qwerty!@"}' --insecure --header "Content-type: application/json" https://dtr.domain.com/api/v0/accounts/alice/changePassword
+```
+
+Passwords set using this API need to be 8 characters or longer.
 
 Example Request:
 
@@ -264,13 +336,18 @@ which case the `oldPassword` field may be omitted from the request body.
 
 **Status Codes**
 
-- *400* invalid input.
+- *400* invalid input. (can be `password too short`)
 - *401* client must be authenticated.
+- *404* no such account. 
 - *200* success.
 
 ## Activate a Managed User
 
 `PUT /api/v0/accounts/{name}/activate`
+
+```curl
+curl -v --user admin:password -X PUT --insecure https://dtr.domain.com/api/v0/accounts/alice/activate
+```
 
 Example Request:
 
@@ -304,6 +381,10 @@ Client must be authenticated as a system 'admin' user.
 
 `PUT /api/v0/accounts/{name}/deactivate`
 
+```curl
+curl -v --user admin:password -X PUT --insecure https://dtr.domain.com/api/v0/accounts/alice/deactivate
+```
+
 Example Request:
 
 ```http
@@ -317,7 +398,7 @@ Examlpe Response:
   "id": 5,
   "type": "user",
   "name": "alice",
-  "isActive": true
+  "isActive": false
 }
 ```
 
@@ -332,37 +413,5 @@ Client must be authenticated as a system 'admin' user.
 - *403* client must be an admin.
 - *200* success.
 
-## List Organizations for a User
 
-`GET /api/v0/accounts/{name}/organizations`
-
-Example Request:
-
-```http
-GET /api/v0/accounts/alice/organizations HTTP/1.1
-```
-
-Example Response:
-
-```json
-{
-  "organizations": [
-    {
-      "id": 4,
-      "type": "organization",
-      "name": "engineering",
-    }
-  ]
-}
-```
-
-**Authorization**
-
-Client must be authenticated as a system 'admin' user or the user in question.
-
-**Status Codes**
-
-- *404* no such account.
-- *401* client must be authenticated.
-- *403* client must be an admin or target user.
-- *200* success.
+<!--- TODO - how do I list / change the global roles assignments? --->

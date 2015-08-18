@@ -20,7 +20,7 @@ The Accounts & Repos API lets you integrate Docker Trusted Registry (DTR) with y
 
 The API is designed so that minimal data migration is required, only schema migration. There is no UI accompanying this API.
 
-## Design overview
+## Overview
 
 This API defines two types of accounts that can own repositories: Users and Organizations. Account-owned (i.e., non-global) repos define a namespace similar to that of the Docker Hub, with two component names in the form `namespace/reponame`. 
 
@@ -77,7 +77,7 @@ other organization’s team to a team within the owning organization.
 
 - Collaborators on user-owned repositories can be given more granularity of
   access. Docker Hub Registry offers only read-write access. Docker Trusted
-  Registry plans to offer read-only, read-write, and admin access per
+  Registry offers read-only, read-write, and admin access for each
   user-owned repository.
 
 - Teams can be granted access to all repositories in an organization's
@@ -95,9 +95,35 @@ other organization’s team to a team within the owning organization.
   
 ### Authentication
 
-Clients may authenticate API requests by providing either Basic Auth
+Clients authenticate API requests by providing Basic Auth
 credentials (i.e., username and password) in an "Authorization" header for each
 request.
+
+```bash
+$ curl --user readuser:password https://dtr.domain.com/api/v0/accounts
+{
+  "accounts": [
+    {
+      "id": 1,
+      "type": "user",
+      "name": "admin",
+    },
+    {
+      "id": 2,
+      "type": "user",
+      "name": "readuser",
+    },
+    {
+      "id": 3,
+      "type": "user",
+      "name": "user",
+    }
+  ]
+}
+```
+
+> **Note**: If you are using the automatically generated self-signed ssl certificate
+> then you'll need to add `--insecure` to the curl examples.
 
 ### API Documentation
 

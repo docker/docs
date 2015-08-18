@@ -1,5 +1,5 @@
 +++
-title = "DTR APIs"
+title = "Docker Trusted Registry"
 description = "Docker Trusted Registry APIs"
 keywords = ["API, Docker, index, REST, documentation, Docker Trusted Registry, registry"]
 weight = 2
@@ -15,7 +15,7 @@ organizational structure by providing fine-grained, role-based access control fo
 
 The following documents detail the API:
 
-- [DTR Accounts & Repos API: Intro & Overview]({{< relref "index.md" >}})
+- [DTR Accounts & Repos API: Intro & Overview](/docker-trusted-registry/api/)
 - [Accounts API Doc]({{< relref "dtr_1_3_accounts.md" >}})
 - [Teams API Doc]({{< relref "dtr_1_3_teams.md" >}})
 - [Repositories API Doc]({{< relref "dtr_1_3_repositories.md" >}})
