@@ -40,28 +40,25 @@ repository to a team of users in an organization. If a repository requires this 
 
 ### Organization accounts
 
-System administrators can also create an Organization account, with it’s own
-namespace of repositories. Organization accounts will have one or more teams
-which can be managed by anyone in the initial ‘owners’ team. Teams can either
-be created with a managed whitelist of users known to the system or with an
-LDAP group search filter which will be periodically synced.
+System administrators can also create an Organization account, with its own
+namespace of repositories. Organization accounts are comprised of one or more teams which can be managed by anyone in an initial ‘owners’ team which is created by default. Teams can be created  with either a managed whitelist of users known to the system or with an LDAP group search filter which is periodically synced automatically.
 
 Any member of an organization’s owners team can create new repositories under
-the organization’s namespace and even create and edit other teams. Each team
+the organization’s namespace and can also create and edit other teams. Each team
 can be given read-only or read-write access to all repositories in the
 organization’s namespace and/or be granted separate levels of access on a
-per-repository basis. Permissions are additive, so there is no way to override
+per-repository basis. However, permissions are additive, so you cannot override
 a team level permission to prevent access to a specific repository.
 
 Teams within an organization can also be granted read-only, read-write, or
 admin level access to all repositories in the organizations namespace. This
-allows a team to pull, push, and/or manage repositories for an organization
+allows a team to pull, push, and manage repositories for an organization,
 but *not* manage the teams themselves.
 
 Organization-owned repositories can only be given access to the teams within
 that organization, i.e., you cannot grant access to an organization-owned
-repository to an individual user account or to a team in another organization.
-If this level of control is needed on a repository then consider adding those
+repository to an individual user account or team in another organization.
+If this level of control is needed on a repository, you can add those
 individual users to a team within the owning organization or add users in the
 other organization’s team to a team within the owning organization.
 
@@ -69,35 +66,34 @@ other organization’s team to a team within the owning organization.
 
 - Repositories must be explicitly created using the API. A `docker push` will
   not create a repository if it does not exist. This prevents a typo from
-  creating an unwanted repository in DTR. This policy
-  will be globally enforced in DTR 1.3.
+  creating an unwanted repository in DTR. This policy will be globally enforced
+  in DTR 1.3.
 
 - Organizations can only be created by system admins. This should prevent the
   proliferation of unwanted organization accounts.
 
-- Collaborators on user-owned repositories can be given more granularity of
-  access. Docker Hub Registry offers only read-write access. Docker Trusted
-  Registry offers read-only, read-write, and admin access for each
-  user-owned repository.
+- Collaborators on user-owned repositories can be given more granular
+  access than on Docker Hub. Docker Hub Registry offers only read-write access.
+  Docker Trusted Registry offers read-only, read-write, and admin access for
+  each user-owned repository.
 
 - Teams can be granted access to all repositories in an organization's
   namespace. Docker Hub Registry offers team access control on a
-  per-repository level only, and only an organization's 'owners' team can
-  manage access and create new repositories. Docker Trusted Registry plans to
-  also offer the ability to grant a team access to (and/or the ability to
-  manage) all repositories under a namespace.
+  per-repository level only, and only an organization's 'owners team can
+  manage access and create new repositories. Further, in the future, Docker
+  Trusted Registry will offer the ability to grant a team access and/or
+  management privileges to all repositories under a namespace.
 
-- Teams within an organization will be visible to all members of the
-  organization. In Docker Hub Registry, users are 'blind' to teams that they
-  themselves are not a member of. In Docker Trusted Registry, teams will be
+- Teams within an organization are visible to all members of the
+  organization. In Docker Hub Registry, users are 'invisible' to teams to which
+  they do not belong. In Docker Trusted Registry, teams will be
   visible to the members of the organization, but will not be able to see a
   teams's members unless they are also a member of that team.
   
 ### Authentication
 
-Clients authenticate API requests by providing Basic Auth
-credentials (i.e., username and password) in an "Authorization" header for each
-request.
+Clients authenticate API requests by providing Basic Auth credentials (i.e.,
+username and password) via an "Authorization" header for each request.
 
 ```bash
 $ curl --user readuser:password https://dtr.domain.com/api/v0/accounts
@@ -122,7 +118,8 @@ $ curl --user readuser:password https://dtr.domain.com/api/v0/accounts
 }
 ```
 
-> **Note**: If you are using the automatically generated self-signed ssl certificate
+> **Note**: If you are using DTR's automatically generated, self-signed SSL
+> certificate
 > then you'll need to add `--insecure` to the curl examples.
 
 ### API Documentation
