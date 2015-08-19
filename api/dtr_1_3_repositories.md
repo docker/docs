@@ -13,7 +13,7 @@ parent = "smn_dtrapi"
 
 `GET /api/v0/repositories/{namespace}`
 
-```curl
+```bash
 $ curl -v --user admin:password --insecure -X GET https://dtr.domain.com/api/v0/repositories/engineering
 ```
 
@@ -58,7 +58,7 @@ filtered to only those repositories that are visible to the client.
 
 `GET /api/v0/repositories/{namespace}/{reponame}`
 
-```curl
+```bash
 $ curl -v --user admin:password --insecure -X GET https://dtr.domain.com/api/v0/repositories/engineering/public-app
 ```
 
@@ -89,7 +89,7 @@ Client must be authenticated as a user which has visibility to the repository.
 
 `POST /api/v0/repositories/{namespace}`
 
-```curl
+```bash
 $ curl -v --user admin:password --insecure -X POST --data '{"name":"my-app"}' --header "Content-type: application/json" https://dtr.domain.com/api/v0/repositories/engineering
 ```
 
@@ -139,7 +139,7 @@ level access to the organization's namespace of repositories).
 
 `PATCH /api/v0/repositories/{namespace}/{reponame}`
 
-```curl
+```bash
 $ curl -v --user admin:password --insecure -X PATCH --data '{"shortDescription":"slightly out of date"}' --header "Content-type: application
 /json" https://192.168.18.129/api/v0/repositories/engineering/public-app
 ```

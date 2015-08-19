@@ -40,6 +40,10 @@ by that organization.
 
 `GET /api/v0/repositoryNamespaces/{namespace}/teamAccess`
 
+```bash
+$ curl -v --user admin:password --insecure -X GET https://dtr.domain.com/api/v0/repositoriesNamespaces/engineering/teamAccess
+```
+
 Example Response:
 
 ```json
@@ -83,11 +87,16 @@ namespace.
 
 - *400* the namespace is not owned by an organization.
 - *403* the client is not authorized.
+- *404* 
 - *200* success.
 
 ## Get a Team's Granted Access to an Organization-Owned Namespace of Repositories
 
 `GET /api/v0/repositoryNamespaces/{namespace}/teamAccess/{teamname}`
+
+```bash
+$ curl -v --user admin:password --insecure -X GET https://dtr.domain.com/api/v0/repositoryNamespaces/engineering/teamAccess/lead
+```
 
 Example Response:
 
@@ -124,6 +133,10 @@ is a member of the team in question.
 ## Set a Team's Access to an Organization-Owned Namespace of Repositories
 
 `PUT /api/v0/repositoryNamespaces/{namespace}/teamAccess/{teamname}`
+
+```bash
+curl -v --user admin:password --insecure -X PUT --header "Content-type: application/json" --data '{"accessLevel":"admin"}' https://dtr.domain.com/api/v0/repositoryNamespaces/engineering/teamAccess/lead
+```
 
 Example Request:
 
@@ -172,6 +185,10 @@ namespace.
 
 `DELETE /api/v0/repositoryNamespaces/{namespace}/teamAccess/{teamname}`
 
+```bash
+$ curl -v --user admin:password --insecure -X DELETE https://dtr.domain.com/api/v0/repositoryNamespaces/engineering/teamAccess/lead
+```
+
 **Authorization**
 
 Client must be authenticated as a user which has 'admin' level access to the
@@ -179,7 +196,7 @@ namespace.
 
 **Status Codes**
 
-- *400* the repository is not owned by an organiztion.
+- *400* the repository is not owned by an organization.
 - *400* the team does not belong to the owning organization.
 - *403* the client is not authorized.
 - *200* success.

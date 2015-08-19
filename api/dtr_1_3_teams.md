@@ -15,6 +15,10 @@ DTR Teams, like on the Docker Hub, only exist within an Organization.
 
 `GET /api/v0/accounts/{name}/teams`
 
+```bash
+$ curl --insecure -v --user admin:password https://dtr.domain.com/api/v0/accounts/engineering/teams
+```
+
 Example Response:
 
 ```json
@@ -52,6 +56,10 @@ Client must be authenticated as a member of the organization.
 
 `GET /api/v0/accounts/{name}/teams/{teamname}`
 
+```bash
+$ curl --insecure -v --user admin:password https://dtr.domain.com/api/v0/accounts/engineering/teams/qa
+```
+
 Example Response:
 
 ```json
@@ -77,6 +85,10 @@ Client must be authenticated as a member of the organization.
 ## List a Team's Members
 
 `GET /api/v0/accounts/{name}/teams/{teamname}/members`
+
+```bash
+$ curl --insecure -v --user admin:password https://dtr.domain.com/api/v0/accounts/engineering/teams/qa/members
+```
 
 Example Response:
 
@@ -126,6 +138,10 @@ in the organization, or a member of the team in question.
 
 `GET /api/v0/accounts/{name}/teams/{teamname}/members/{member}`
 
+```bash
+$ curl --insecure -v --user admin:password -X GET https://dtr.domain.com/api/v0/accounts/engineering/teams/qa/members/test
+```
+
 **Authorization**
 
 Client must be authenticated as a user which has visibility into the team
@@ -140,6 +156,10 @@ Client must be authenticated as a user which has visibility into the team
 ## Create a Team in an Organization
 
 `POST /api/v0/accounts/{name}/teams`
+
+```bash
+$ curl --insecure -v --user admin:password -X POST --data '{"name": "qa", "type": "managed"}' --header "Content-type: application/json" https://dtr.domain.com/api/v0/accounts/engineering/teams
+```
 
 Example Request:
 
@@ -185,6 +205,10 @@ team in the organization.
 
 `PATCH /api/v0/accounts/{name}/teams/{teamname}`
 
+```bash
+$ curl --insecure -v --user admin:password -X PATCH --data '{"description":"add one"}' --header "Content-type: application/json" https://dtr.domain.com/api/v0/accounts/engineering/teams/qa
+```
+
 Example Request:
 
 ```http
@@ -228,6 +252,10 @@ team in the organization.
 
 `PUT /api/v0/accounts/{name}/teams/{teamname}/members/{member}`
 
+```bash
+$ curl --insecure -v --user admin:password -X PUT https://dtr.domain.com/api/v0/accounts/engineering/teams/qa/members/alice
+```
+
 **Authorization**
 
 Client must be authenticated as a system admin or a member of the "owners"
@@ -236,13 +264,17 @@ team in the organization.
 **Status Codes**
 
 - *403* the client is not authorized.
-- *404* no such team exists.
+- *404* no such team or user.
 - *200* success.
 
 ## Remove a User from a Team (if not LDAP synced).
 
 `DELETE /api/v0/accounts/{name}/teams/{teamname}/members/{member}`
 
+```bash
+$ curl --insecure -v --user admin:password -X DELETE https://dtr.domain.com/api/v0/accounts/engineering/teams/qa/members/alice
+```
+
 **Authorization**
 
 Client must be authenticated as a system admin or a member of the "owners"
@@ -252,11 +284,15 @@ team in the organization.
 
 - *403* the client is not authorized.
 - *404* no such team exists.
-- *200* success.
+- *204* success.
 
 ## Remove a Team.
 
 `DELETE /api/v0/accounts/{name}/teams/{teamname}`
+
+```bash
+$ curl --insecure -v --user admin:password -X DELETE https://dtr.domain.com/api/v0/accounts/engineering/teams/qa
+```
 
 **Authorization**
 

@@ -300,7 +300,7 @@ Client must be authenticated as a system 'admin' user.
 
 `POST /api/v0/accounts/{name}/changePassword`
 
-```curl
+```bash
 curl -v --user admin:password -X POST --data '{"newPassword":"qwerty!@"}' --insecure --header "Content-type: application/json" https://dtr.domain.com/api/v0/accounts/alice/changePassword
 ```
 
@@ -345,7 +345,7 @@ which case the `oldPassword` field may be omitted from the request body.
 
 `PUT /api/v0/accounts/{name}/activate`
 
-```curl
+```bash
 curl -v --user admin:password -X PUT --insecure https://dtr.domain.com/api/v0/accounts/alice/activate
 ```
 
@@ -381,7 +381,7 @@ Client must be authenticated as a system 'admin' user.
 
 `PUT /api/v0/accounts/{name}/deactivate`
 
-```curl
+```bash
 curl -v --user admin:password -X PUT --insecure https://dtr.domain.com/api/v0/accounts/alice/deactivate
 ```
 

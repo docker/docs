@@ -31,6 +31,10 @@ or `admin` level access to any repository that is owned by that organization.
 
 `GET /api/v0/repositories/{namespace}/{reponame}/teamAccess`
 
+```bash
+$ curl -v --user admin:password --insecure -X GET https://dtr.domain.com/api/v0/repositories/engineering/public-app/teamAccess
+```
+
 Example Response:
 
 ```json
@@ -84,6 +88,10 @@ repository.
 ## List Repository Access Grants for a Team
 
 `GET /api/v0/accounts/{name}/teams/{teamname}/repositoryAccess`
+
+```bash
+$ curl -v --user admin:password --insecure -X GET https://dtr.domain.com/api/v0/accounts/engineering/teams/dev/repositoryAccess
+```
 
 Example Response:
 
@@ -142,6 +150,10 @@ in or be a member of that team.
 
 `PUT /api/v0/repositories/{namespace}/{reponame}/teamAccess/{teamname}`
 
+```bash
+$ curl -v --user admin:password --insecure -X PUT --header "Content-type: application/json" --data '{"accessLevel":"read-write"}' https://dtr.domain.com/api/v0/repositories/engineering/public-app/teamAccess/dev
+```
+
 Example Request:
 
 ```http
@@ -193,6 +205,10 @@ repository.
 ## Revoke a Team's Access to an Organization-Owned Repository
 
 `DELETE /api/v0/repositories/{namespace}/{reponame}/teamAccess/{teamname}`
+
+```bash
+$ curl -v --user admin:password --insecure -X DELETE https://dtr.domain.com/api/v0/repositories/engineering/public-app/teamAccess/dev
+```
 
 **Authorization**
 

@@ -31,8 +31,8 @@ to any repository that is owned by another user account.
 
 `GET /api/v0/repositories/{namespace}/{reponame}/userAccess`
 
-```curl
-curl -v --user josh:password --insecure -X GET https://dtr.domain.com/api/v0/repositories/josh/public-app/userAccess
+```bash
+curl -v --user josh:password --insecure https://dtr.domain.com/api/v0/repositories/josh/public-app/userAccess
 ```
 
 Example Response:
@@ -87,8 +87,8 @@ repository.
 
 `PUT /api/v0/repositories/{namespace}/{reponame}/userAccess/{grantee}`
 
-```curl
-curl -v --user josh:password --insecure -X PUT --header "Content-type: application/json" --data '{"accessLevel":"read-write"}' https://192.168.18.129/api/v0/repositories/alice/public-app/userAccess/brian
+```bash
+curl -v --user josh:password --insecure -X PUT --header "Content-type: application/json" --data '{"accessLevel":"read-write"}' https://dtr.domain.com/api/v0/repositories/alice/public-app/userAccess/brian
 ```
 
 Example Request:
@@ -140,6 +140,10 @@ repository.
 ## Revoke a User's Access to a User-Owned Repository
 
 `DELETE /api/v0/repositories/{namespace}/{reponame}/userAccess/{grantee}`
+
+```bash
+$ curl -v --user josh:password --insecure -X DELETE https://dtr.domain.com/api/v0/repositories/josh/public-app/userAccess/user
+```
 
 **Authorization**
 
