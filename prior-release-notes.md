@@ -14,7 +14,29 @@ weight=101
 
 ## Docker Trusted Registry (DTR)
 
-Formerly known as Docker Hub Enterprise (DHE).
+### DTR 1.1.0
+(23 June 2015)
+
+This release of DTR (formerly DHE) adds major integration with the AWS and Azure marketplaces, giving customers a smoother installation path. DTR 1.1 also adds finer-grained permissions and improvements and additions to the UI and logging. Bugs in LDAP/AD integration have also been remediated, improving the stability and usability of DTR. See below for specifics.
+
+#### New Features
+
+* New, more granular, [roles for users]({{< relref "configuration.md#authentication" >}}). DTR users can now be assigned different levels of access (admin, r/w, r/o) to the repositories. **Important:** Existing DTR users should make sure to see the note [below](#dhe-1-0-upgrade-warning) regarding migrating users before upgrading.
+* A new storage status indicator for storage space. The dashboard now shows used and available storage space for supported storage drivers.
+* A new [diagnostics tool]({{< relref "adminguide.md#client-docker-daemon-diagnostics" >}}) gathers and bundles DTR logs, system information, container information, and other configuration settings for use by Docker support or as a backup.
+* Performance and reliability improvements to the S3 storage backend.
+* DTR images are now available on the Amazon AWS and Microsoft Azure marketplaces.
+
+#### Fixes
+
+The following notable issues have been remediated:
+
+* Fixed an issue that caused DTR logins to fail if some LDAP servers were unreachable.
+* Fixed a resource leak in DTR storage.
+
+#### DHE 1.0 Upgrade Warning
+
+Customers who are currently using DHE 1.0 **must** follow the [upgrading instructions](https://forums.docker.com/t/upgrading-docker-hub-enterprise-to-docker-trusted-registry/1925) in our support Knowledge Base. These instructions will show you how to modify existing authentication data and storage volume settings to move to DTR. Note that automatic upgrading has been disabled for DHE users because of these issues.
 
 ### DTR 1.0.1
 (11 May 2015)
