@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <installer-gui-script minSpecVersion="1">
     <title>docker_title</title>
-    <options customize="allow" allow-external-scripts="yes" rootVolumeOnly="true" hostArchitectures="i386"/>
-    <domains enable_localSystem="true"/>
+    <options customize="allow" allow-external-scripts="yes" rootVolumeOnly="true" hostArchitectures="x86_64"/>
     <background file="toolbox.png" alignment="bottomleft" scaling="none"/>
     <welcome file="Welcome.html" mime-type="text/html"/>
-    <conclusion file="Installed.html" mime-type="text/html"/>
     <choices-outline>
         <line choice="choiceDockerCLI"/>
         <line choice="choiceDockerMachineCLI"/>
@@ -15,7 +13,7 @@
         <line choice="choiceVBox"/>
         <line choice="choiceBoot2DockerISO"/>
     </choices-outline>
-    <choice id="choiceDockerCLI" title="choiceDockerCLI_title" description="choiceDockerCLI_msg" start_selected="true" start_enabled="true" start_visible="true">
+    <choice id="choiceDockerCLI" title="choiceDockerCLI_title" description="choiceDockerCLI_msg" start_selected="true" start_visible="true">
         <pkg-ref id="io.docker.pkg.docker"/>
     </choice>
     <choice id="choiceDockerComposeCLI" title="choiceDockerComposeCLI_title" description="choiceDockerComposeCLI_msg" start_selected="true" start_enabled="true" start_visible="true">
@@ -36,7 +34,7 @@
     <pkg-ref id="io.docker.pkg.kitematicapp">
         <bundle-version/>
     </pkg-ref>
-    <choice id="choiceVBox" title="choiceVBox_title" description="choiceVBox_msg" start_selected="vboxNeedsUpgrade()" start_enabled="vboxNeedsUpgrade()" start_visible="true">
+    <choice id="choiceVBox" title="choiceVBox_title" description="choiceVBox_msg" start_selected="vboxNeedsUpgrade()" start_enabled="vboxNeedsUpgrade()" start_visible="vboxNeedsUpgrade()">
         <pkg-ref id="org.virtualbox.pkg.vboxkexts" auth="Root" version="%VBOX_VERSION%" installKBytes="935">#VBoxKEXTs.pkg</pkg-ref>
         <pkg-ref id="org.virtualbox.pkg.virtualbox" auth="Root" version="%VBOX_VERSION%" installKBytes="247220">#VirtualBox.pkg</pkg-ref>
         <pkg-ref id="org.virtualbox.pkg.virtualboxcli" auth="Root" version="%VBOX_VERSION%" installKBytes="4">#VirtualBoxCLI.pkg</pkg-ref>
@@ -82,6 +80,7 @@
     <pkg-ref id="io.docker.pkg.dockermachine">
         <bundle-version/>
     </pkg-ref>
+
     <product id="io.docker.mpkg.docker" version="%INSTALLER_VERSION%"/>
 
     <!-- Manually imported VBox Stuff -->
@@ -91,10 +90,6 @@
     /* js:pkmk:start */
     function checkPrerequisite()
     {
-       try {
-          system.run('/bin/bash', '-c', 'curl -H "Content-Type: application/json" -X POST https://api.mixpanel.com/track/?data=%EVENT_DATA%');
-       } catch (e) { system.log(e); }
-
        try
        {
            test = system.sysctl('hw.machine');

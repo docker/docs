@@ -1,4 +1,4 @@
-FROM debian:wheezy
+FROM debian:jessie
 
 RUN apt-get update && apt-get -y install \
 		autoconf build-essential curl \
@@ -44,13 +44,9 @@ RUN curl -fsSL -o /boot2docker.iso https://github.com/boot2docker/boot2docker/re
 ENV KITEMATIC_VERSION 0.8.3
 RUN curl -fsSL -o /kitematic.zip https://github.com/kitematic/kitematic/releases/download/v$KITEMATIC_VERSION/Kitematic-$KITEMATIC_VERSION-Mac.zip
 
-ENV INSTALLER_VERSION 1.8.1b
+ENV INSTALLER_VERSION 1.8.1c
 
 ENV MIXPANEL_TOKEN c306ae65c33d7d09fe3e546f36493a6e
-
-# Start building package
-
-COPY mpkg /mpkg
 
 #  Extract the VirtualBox .pkg
 RUN mkdir -p /mpkg/vbox && \
@@ -71,7 +67,11 @@ RUN cd /mpkg/vbox && \
 	mv *.pkg .. && \
 	rm -rf vbox
 
+# Add components
+COPY mpkg/Distribution /mpkg/Distribution
+
 # docker.pkg
+COPY mpkg/docker.pkg /mpkg/docker.pkg
 RUN cd /mpkg/docker.pkg && \
 	mkdir rootfs && \
 	cd rootfs && \
@@ -88,7 +88,26 @@ RUN cd /mpkg/docker.pkg && \
 	cd .. && \
 	rm -rf ./rootfs
 
+# kitematicapp.pkg
+COPY mpkg/kitematicapp.pkg /mpkg/kitematicapp.pkg
+RUN cd /mpkg/kitematicapp.pkg && \
+	mkdir ./rootfs && \
+	cd ./rootfs && \
+  7z x /kitematic.zip && \
+  rm -rf ./__MACOSX && \
+  ls -al . && \
+	find . | cpio -o --format odc | gzip -c > ../Payload && \
+	mkbom . ../Bom && \
+	sed -i \
+		-e "s/%KITEMATICAPP_NUMBER_OF_FILES%/`find . | wc -l`/g" \
+		-e "s/%KITEMATICAPP_INSTALL_KBYTES%/`du -sk | cut -f1`/g" \
+		-e "s/%KITEMATICAPP_VERSION%/$KITEMATIC_VERSION/g" \
+		../PackageInfo /mpkg/Distribution && \
+	cd .. && \
+	rm -rf ./rootfs
+
 # dockermachine.pkg
+COPY mpkg/dockermachine.pkg /mpkg/dockermachine.pkg
 RUN cd /mpkg/dockermachine.pkg && \
 	mkdir rootfs && \
 	cd rootfs && \
@@ -106,6 +125,7 @@ RUN cd /mpkg/dockermachine.pkg && \
 	rm -rf ./rootfs
 
 # dockercompose.pkg
+COPY mpkg/dockercompose.pkg /mpkg/dockercompose.pkg
 RUN cd /mpkg/dockercompose.pkg && \
 	mkdir rootfs && \
 	cd rootfs && \
@@ -123,11 +143,8 @@ RUN cd /mpkg/dockercompose.pkg && \
 	rm -rf ./rootfs
 
 # boot2dockeriso.pkg
+COPY mpkg/boot2dockeriso.pkg /mpkg/boot2dockeriso.pkg
 RUN cd /mpkg/boot2dockeriso.pkg && \
-  export EVENT_DATA=$(echo "{\"event\":\"Installer Finished\",\"properties\":{\"token\":\"$MIXPANEL_TOKEN\",\"version\":\"$INSTALLER_VERSION\",\"os\":\"darwin\"}}" | base64 | tr -d '\n') && \
-	sed -i \
-		-e "s/%EVENT_DATA%/$EVENT_DATA/g" \
-		./Scripts/postinstall && \
   cd Scripts && find . | cpio -o --format odc | gzip -c > ../Scripts.bin && cd .. && \
   rm -r Scripts && mv Scripts.bin Scripts && \
 	mkdir ./rootfs && \
@@ -144,10 +161,12 @@ RUN cd /mpkg/boot2dockeriso.pkg && \
 	rm -rf ./rootfs
 
 # dockerquickstartterminalapp.pkg
+COPY mpkg/dockerquickstartterminalapp.pkg /mpkg/dockerquickstartterminalapp.pkg
+COPY mpkg/quickstart.app /mpkg/quickstart.app
 RUN cd /mpkg/dockerquickstartterminalapp.pkg && \
 	mkdir ./rootfs && \
 	cd ./rootfs && \
-	mv /mpkg/Docker\ Quickstart\ Terminal.app . && \
+	mv /mpkg/quickstart.app ./Docker\ Quickstart\ Terminal.app && \
 	find . | cpio -o --format odc | gzip -c > ../Payload && \
 	mkbom . ../Bom && \
 	sed -i \
@@ -158,22 +177,13 @@ RUN cd /mpkg/dockerquickstartterminalapp.pkg && \
 	cd .. && \
 	rm -rf ./rootfs
 
-# kitematicapp.pkg
-RUN cd /mpkg/kitematicapp.pkg && \
-	mkdir ./rootfs && \
-	cd ./rootfs && \
-  7z x /kitematic.zip && \
-  rm -rf ./__MACOSX && \
-  ls -al . && \
-	find . | cpio -o --format odc | gzip -c > ../Payload && \
-	mkbom . ../Bom && \
-	sed -i \
-		-e "s/%KITEMATICAPP_NUMBER_OF_FILES%/`find . | wc -l`/g" \
-		-e "s/%KITEMATICAPP_INSTALL_KBYTES%/`du -sk | cut -f1`/g" \
-		-e "s/%KITEMATICAPP_VERSION%/$KITEMATIC_VERSION/g" \
-		../PackageInfo /mpkg/Distribution && \
-	cd .. && \
-	rm -rf ./rootfs
+COPY mpkg/Resources /mpkg/Resources
+COPY mpkg/Plugins /mpkg/Plugins
+
+RUN sed -i \
+    -e "s/%MIXPANEL_TOKEN%/$MIXPANEL_TOKEN/g" \
+    -e "s/%INSTALLER_VERSION%/$INSTALLER_VERSION/g" \
+    mpkg/Plugins/*.bundle/Contents/Info.plist
 
 RUN sed -i \
 		-e "s/%INSTALLER_VERSION%/$INSTALLER_VERSION/g" \
@@ -181,11 +191,7 @@ RUN sed -i \
 RUN sed -i \
 		-e "s/%INSTALLER_VERSION%/$INSTALLER_VERSION/g" \
 		mpkg/Resources/en.lproj/Installed.html
-RUN export EVENT_DATA=$(echo "{\"event\":\"Installer Started\",\"properties\":{\"token\":\"$MIXPANEL_TOKEN\",\"version\":\"$INSTALLER_VERSION\",\"os\":\"darwin\"}}" | base64 | tr -d '\n') && \
-    sed -i \
-		-e "s/%EVENT_DATA%/$EVENT_DATA/g" \
-		/mpkg/Distribution && \
-		sed -i \
+RUN sed -i \
 		-e "s/%VBOX_VERSION%/$VBOX_VERSION/g" \
 		/mpkg/Distribution && \
 		sed -i \

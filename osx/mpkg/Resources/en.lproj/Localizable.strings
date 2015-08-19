@@ -12,8 +12,8 @@
 'choiceBoot2DockerISO_title' = 'Boot2Docker ISO %BOOT2DOCKER_ISO_VERSION%';
 'choiceBoot2DockerISO_msg' = 'Installs the boot2docker.iso into /usr/local/share/';
 
-'choiceDockerQuickstartTerminalAPP_title' = 'Docker Quickstart Terminal app';
-'choiceDockerQuickstartTerminalAPP_msg' = 'Installs the Docker Quickstart Terminal app into /Applications/';
+'choiceDockerQuickstartTerminalAPP_title' = 'Docker Quickstart Terminal';
+'choiceDockerQuickstartTerminalAPP_msg' = 'Installs the Docker Quickstart Terminal application into /Applications/';
 
 'choiceKitematicAPP_title' = 'Kitematic %KITEMATICAPP_VERSION%';
 'choiceKitematicAPP_msg' = 'Installs Kitematic into /Applications/';
