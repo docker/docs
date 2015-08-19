@@ -35,7 +35,7 @@ This release of DTR (formerly DHE) adds major integration with the AWS and Azure
 
 #### New Features
 
-* New, more granular, [roles for users]({{< relref "configuration.md#authentication" >}}). DTR users can now be assigned different levels of access (admin, r/w, r/o) to the repositories. **Important:** Existing DTR users should make sure to see the note [below](#upgrade-warning) regarding migrating users before upgrading.
+* New, more granular, [roles for users]({{< relref "configuration.md#authentication" >}}). DTR users can now be assigned different levels of access (admin, r/w, r/o) to the repositories. **Important:** Existing DTR users should make sure to see the note [below](#dhe-1-0-upgrade-warning) regarding migrating users before upgrading.
 * A new storage status indicator for storage space. The dashboard now shows used and available storage space for supported storage drivers.
 * A new [diagnostics tool]({{< relref "adminguide.md#client-docker-daemon-diagnostics" >}}) gathers and bundles DTR logs, system information, container information, and other configuration settings for use by Docker support or as a backup.
 * Performance and reliability improvements to the S3 storage backend.
