@@ -264,17 +264,28 @@ Then restart the Docker daemon with `sudo /etc/init.d/docker restart`.
 ## Image Storage Configuration
 
 DTR image storage can be configured to use the local filesystem, or a cloud service
-such as S3 or Azure. See the [Registry 2.0
-configuration](http://docs.docker.com/registry/configuration/)
-documentation for the options specific to each driver.
+such as S3 or Azure.
+
+See the [Registry 2.0 configuration](http://docs.docker.com/registry/configuration/)
+documentation for the full options specific to each driver.
 Storage drivers can be added or customized via the [Docker Registry storage driver
 API](http://docs.docker.com/registry/storagedrivers/#storage-driver-api).
 
 ![Storage settings page</admin/settings#storage>](../assets/admin-settings-storage.png)
 
-After you select the image storage method you would like to use from the drop-down menu near the top of the page, the UI will change to reflect the configuration settings appropriate to the selected method.
+After you select the image storage method you would like to use from the drop-down menu
+near the top of the page, the UI will change to reflect the configuration settings
+appropriate to the selected method.
+
+You can either use the storage specific input boxes to configure the most common settngs
+for local filesystem, s3 or azure storage backends,
+or use the full Yaml configuration file upload to have more detailed control.
+
+You can view the current `storage.yaml` file on your DTR Docker host in the `/usr/local/etc/dtr/`
+directory.
 
 ### Yaml configuration file
+
 This file (`/usr/local/etc/dtr/storage.yml`) is
 used to configure the image storage services. The editable text of the file is
 displayed in the dialog box. The schema of this file is identical to that used
@@ -370,8 +381,8 @@ confirm which setting you need.
 * *User Base DN*: **required** defaults to null, user base DN in the form (e.g., - dc=example,dc=com)
 * *User Login Attribute*: **required** defaults to null, user login attribute (e.g., - uid or sAMAccountName)
 * *Search User DN*: **required** defaults to null, search user DN (e.g., - domain\username)
-* *LDAP Sync Interval*: **required** defaults to 1h0m0s, sets the interval for DTR to sync with the LDAP db.
 * *Search User Password*: **required** defaults to null, search user password
+* *LDAP Sync Interval*: **required** defaults to 1h0m0s, sets the interval for DTR to sync with the LDAP db.
 * *User Search filters*: allows you to configure LDAP queries to limit the users that have the roles:
 * * *User Filter*: This filter is used to select the objects to use as candidates for the role filters
 * * *Admin Role Filter*: Combined with the "User Filter" to specify users with the
@@ -387,7 +398,7 @@ confirm which setting you need.
 > "read-write" filter is empty, all users can push/pull any image, etc. (This
 > behavior will be corrected in future versions.)
 
-#### Confirm Configuration
+#### Confirm Login with above Configuration
 
 You can test your LDAP configuration before saving it by entering a test username and password and then clicking "Try Login". If the login succeeds, your configuration is working. 
 
