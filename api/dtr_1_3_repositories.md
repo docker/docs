@@ -203,4 +203,4 @@ level access to the organization's repository).
 **Status Codes**
 
 - *403* the client is not authorized.
-- *204* success.
+- *204* (`No Content`) success - or repository does not exist.

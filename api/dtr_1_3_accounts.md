@@ -294,7 +294,7 @@ Client must be authenticated as a system 'admin' user.
 
 - *401* client must be authenticated.
 - *403* client must be an admin.
-- *204* (`No Content`) success.
+- *204* (`No Content`) success - or account does not exist.
 
 ## Change a Managed User's Password
 
