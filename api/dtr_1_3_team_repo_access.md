@@ -219,6 +219,5 @@ repository.
 
 - *404* the repository is not visible to the client.
 - *400* the repository is not owned by an organiztion.
-- *400* the team does not belong to the owning organization.
 - *403* the client is not authorized.
-- *200* success.
+- *204* (`No Content`) success - or team is not in the access list or there is no such team in the organization.

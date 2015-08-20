@@ -155,4 +155,4 @@ repository.
 - *404* the repository is not visible to the client.
 - *400* the repository is not owned by a user.
 - *403* the client is not authorized.
-- *204* (no content) success.
+- *204* (`No Content`) success - or user is not in the access list.

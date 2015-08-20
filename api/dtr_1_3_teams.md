@@ -284,7 +284,7 @@ team in the organization.
 
 - *403* the client is not authorized.
 - *404* no such team exists.
-- *204* success.
+- *204* (`No Content`) success - or user is not in the team.
 
 ## Remove a Team.
 
@@ -302,4 +302,4 @@ team in the organization.
 **Status Codes**
 
 - *403* the client is not authorized.
-- *204* success.
+- *204* (`No Content`) success - or team does not exist.

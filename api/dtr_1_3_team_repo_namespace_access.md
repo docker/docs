@@ -197,6 +197,5 @@ namespace.
 **Status Codes**
 
 - *400* the repository is not owned by an organization.
-- *400* the team does not belong to the owning organization.
 - *403* the client is not authorized.
-- *200* success.
+- *204* (`No Content`) success - or team does not exist in the access list or there is no such team in the organization.
