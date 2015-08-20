@@ -10,7 +10,7 @@ parent = "smn_dtrapi"
 # Docker Trusted Registry 1.3 Organization-Owned Repository Namespace Access
 
 Teams within an organization account can be granted `read-only`, `read-write`,
-or `admin` level access to the entire namespace of repositories that are owned
+or `admin` level access to the entire namespace of repositories owned
 by that organization.
 
 **`read-only`**
@@ -80,7 +80,7 @@ Example Response:
 
 **Authorization**
 
-Client must be authenticated as a user which has 'admin' level access to the
+Client must be authenticated as a user who has 'admin' level access to the
 namespace.
 
 **Status Codes**
@@ -120,7 +120,7 @@ Example Response:
 
 **Authorization**
 
-Client must be authenticated as a user which has 'admin' level access to the
+Client must be authenticated as a user who has 'admin' level access to the
 namespace, is a system admin, member of the organization's "owners" team, or
 is a member of the team in question.
 
@@ -171,7 +171,7 @@ Example Response:
 
 **Authorization**
 
-Client must be authenticated as a user which has 'admin' level access to the
+Client must be authenticated as a user who has 'admin' level access to the
 namespace.
 
 **Status Codes**
@@ -191,7 +191,7 @@ $ curl -v --user admin:password --insecure -X DELETE https://dtr.domain.com/api/
 
 **Authorization**
 
-Client must be authenticated as a user which has 'admin' level access to the
+Client must be authenticated as a user who has 'admin' level access to the
 namespace.
 
 **Status Codes**

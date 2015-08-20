@@ -124,7 +124,7 @@ Example Response:
 
 **Authorization**
 
-Client must be authenticated as a system 'admin' user or the user in question.
+Client must be authenticated as a system 'admin' user or as the user in question.
 
 **Status Codes**
 
@@ -147,13 +147,12 @@ letters, numbers, or after the first character, `-` and `_`.
 
 ### Create a Managed User Account
 
-There is no user reqtriction on creating a managed user account, however managed
+There is no user restriction on creating a managed user account, however managed
 user accounts start out inactive and the user cannot authenticate until an admin
-explicitly activates the user account using the activate user API endpoint.
+explicitly activates the account using the activate user API endpoint.
 
 This allows the creation of DTR managed namespace reservations by an external
-service, which can then activate the account when its been verified by the external
-service.
+service, which can then activate the account when it's been verified by the external service.
 
 DTR auth settings must be in "Managed" mode.
 
@@ -208,7 +207,7 @@ Content-Type: application/json
 }
 ```
 
-The `name` field is the requested username to use in DTR while `ldapLogin`
+The `name` field is the requested username to use in DTR, while `ldapLogin`
 should be the user's LDAP user login attribute. These need only differ if the
 user prefers or if the user's LDAP login name is not compatible with valid DTR
 usernames.
@@ -227,7 +226,7 @@ Response:
 **Authorization**
 
 Anyone may create an LDAP user account, however, the account is only created if
-the client provides a valid ldap login and password.
+the client provides a valid LDAP login and password.
 
 **Status Codes**
 
@@ -304,7 +303,7 @@ Client must be authenticated as a system 'admin' user.
 curl -v --user admin:password -X POST --data '{"newPassword":"qwerty!@"}' --insecure --header "Content-type: application/json" https://dtr.domain.com/api/v0/accounts/alice/changePassword
 ```
 
-Passwords set using this API need to be 8 characters or longer.
+Passwords set using this API need to be eight characters or longer.
 
 Example Request:
 
@@ -332,7 +331,7 @@ Response:
 **Authorization**
 
 Client must be authenticated as the user in question or as an admin user (in
-which case the `oldPassword` field may be omitted from the request body.
+which case the `oldPassword` field may be omitted from the request body).
 
 **Status Codes**
 

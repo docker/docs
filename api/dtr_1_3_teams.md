@@ -9,7 +9,7 @@ parent = "smn_dtrapi"
 
 # Docker Trusted Registry 1.3 Teams
 
-DTR Teams, like on the Docker Hub, only exist within an Organization.
+As with Docker HUb, DTR teams of users can only exist within an Organization.
 
 ## List Teams in an Organization
 
@@ -44,7 +44,7 @@ Example Response:
 
 **Authorization**
 
-Client must be authenticated as a member of the organization.
+Client must be authenticated as a member of the organization containing the team(s).
 
 **Status Codes**
 
@@ -68,13 +68,13 @@ Example Response:
   "orgID": 4,
   "type": "managed",
   "name": "testers",
-  "description": "i have altered the description, pray that i do not alter it any further"
+  "description": "I have altered the description, pray that I do not alter it any further"
 }
 ```
 
 **Authorization**
 
-Client must be authenticated as a member of the organization.
+Client must be authenticated as a member of the organization containing the team(s).
 
 **Status Codes**
 
@@ -144,7 +144,7 @@ $ curl --insecure -v --user admin:password -X GET https://dtr.domain.com/api/v0/
 
 **Authorization**
 
-Client must be authenticated as a user which has visibility into the team
+Client must be authenticated as a user who has visibility into the team
 (i.e., a member of the team or an owner of the organization).
 
 **Status Codes**

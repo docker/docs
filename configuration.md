@@ -332,23 +332,26 @@ the web administration UI and metrics dashboard.
 Using LDAP authentication allows you to integrate your DTR registry into your
 organization's existing LDAP user and authentication database.
 
-To improve the performance of DTR registry ACL's, User and Group membership
-are synced into DTR's database on a configurable *LDAP Sync Interval*.
-This cache does not include user passwords, but once a user's identity has been
-confirmed, that session's token will persist.
+To improve the performance of DTR's Access Control Lists, User and Group
+membership data is synced into DTR's database at a configurable *LDAP Sync
+Interval*. User passwords are not transferred during syncing; DTR will defer to the LDAP server to validate username/password pairs.
+
+> **Note**: LDAP syncing does not create new user accounts or teams in DTR. It
+> will only manage existing teams that have been specified to sync with LDAP.
 
 You can configure the "userFilter" to select the set of users that are candidates
 for each of the "admin", "read-write", and "read-only" roles. Unlike "Managed"
-authentication, the "admin" role is separate to the registry access roles, so
-LDAP users in the "admin" role won't have access to DTR images unless they also
-are given the "read-write" or "read-only" role.
+authentication, the "admin" role is separate from the registry access roles, so
+LDAP users in the "admin" role won't have access to DTR images unless they are
+also given the "read-write" or "read-only" role.
 
-As connecting to LDAP involves existing infrastructure external to DTR and Docker, you will need to
-gather the details required to configure DTR for your organization's particular LDAP
-implementation.
+Because connecting to LDAP involves existing infrastructure external to DTR and
+Docker, you will need to gather the details required to configure DTR for your
+organization's particular LDAP implementation.
 
-You can test that you have the necessary LDAP server information by connecting to
-the LDAP server from inside a Docker container running on the same server as your DTR:
+You can test that you have the correct LDAP server information by connecting to
+the LDAP server from inside a Docker container running on the same server as
+your DTR:
 
 > **Note**: if the LDAP server is configured to use *StartTLS*, then you need to
 > add `-Z` to the `ldapsearch` command examples below.
@@ -398,9 +401,9 @@ confirm which setting you need.
 > "read-write" filter is empty, all users can push/pull any image, etc. (This
 > behavior will be corrected in future versions.)
 
-#### Confirm Login with above Configuration
+#### Confirm login with current configuration
 
-You can test your LDAP configuration before saving it by entering a test username and password and then clicking "Try Login". If the login succeeds, your configuration is working. 
+You can test your current LDAP configuration before saving it by entering a test username and password and then clicking "Try Login". If the login succeeds, your configuration is working. 
 
 ## Next Steps
 

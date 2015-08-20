@@ -10,7 +10,7 @@ parent = "smn_dtrapi"
 # Docker Trusted Registry 1.3 User-Owned Repository Access
 
 User accounts can be granted `read-only`, `read-write`, or `admin` level access
-to any repository that is owned by another user account.
+to any repository owned by another user account.
 
 **`read-only`**
 

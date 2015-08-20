@@ -36,7 +36,7 @@ Example Response:
       "namespace": "don",
       "name": "private-app",
       "shortDescription": "A Closed-Source Retro Turboencabulator",
-      "longDescription": "The original machine had a base plate of pre-famulated amulite surmounted by a malleable logarithmic casing in such a way that the two spurving bearings were in a direct line with the panametric fam. The latter consisted simply of six hydrocoptic marzlevanes, so fitted to the ambifacient lunar waneshaft that side fumbling was effectively prevented.\nThe main winding was of the normal lotus-o-delta type placed in panendermic semi-boloid slots of the stator, every seventh conductor being connected by a non-reversible termie pipe to the differential girdle spring on the \"up\" end of the grammies.\nThe turbo-encabulator has now reached a high level of development, and it’s being successfully used in the operation of novertrunnions. Moreover, whenever a forescent skor motion is required, it may also be employed in conjunction with a drawn reciprocation dingle arm, to reduce soinasoidal repleneration.\nIt's not cheap, but I'm sure the government will buy it. [unfurls 50,000,000 price tag]",
+      "longDescription": "The original machine had a base plate of pre-famulated amulite surmounted by a malleable logarithmic casing in such a way that the two spurving bearings were in a direct line with the panametric fam. The latter consisted simply of six hydrocoptic marzlevanes, so fitted to the ambifacient lunar waneshaft that side fumbling was effectively prevented.\nThe main winding was of the normal lotus-o-delta type placed in panendermic semi-boloid slots of the stator, every seventh conductor being connected by a non-reversible termie pipe to the differential girdle spring on the \"up\" end of the grammies.\nThe turbo-encabulator has now reached a high level of development, and it’s being successfully used in the operation of novertrunnions.",
       "visibility": "private",
       "status": "ok"
     }
@@ -47,7 +47,7 @@ Example Response:
 **Authorization**
 
 Client must be authenticated as any active user in the system. Results will be
-filtered to only those repositories that are visible to the client.
+filtered to only those repositories visible to the client.
 
 **Status Codes**
 
@@ -78,7 +78,7 @@ Example Response:
 
 **Authorization**
 
-Client must be authenticated as a user which has visibility to the repository.
+Client must be authenticated as a user who has visibility to the repository.
 
 **Status Codes**
 
@@ -125,9 +125,8 @@ Example Response:
 
 **Authorization**
 
-Client must be authenticated as a user which has `admin` access to the
-repository namespace (i.e., an owning user or member of a team with 'admin'
-level access to the organization's namespace of repositories).
+Client must be authenticated as a user who has `admin` access to the
+repository namespace (i.e., user owns the repo or is a member of a team with 'admin' level access to the organization's namespace of repositories).
 
 **Status Codes**
 
@@ -144,7 +143,7 @@ $ curl -v --user admin:password --insecure -X PATCH --data '{"shortDescription":
 /json" https://192.168.18.129/api/v0/repositories/engineering/public-app
 ```
 
-Any fields that are not preset in the body of this request will retain their existing value.
+Any fields not preset in the body of this request will retain their existing value.
 You cannot rename a repository using this API - the "name" field is ignored.
 
 Example Request:
@@ -176,9 +175,8 @@ Example Response:
 
 **Authorization**
 
-Client must be authenticated as a user which has `admin` access to the
-repository (i.e., an owning user or member of a team with 'admin'
-level access to the organization's repository).
+Client must be authenticated as a user who has `admin` access to the
+repository (i.e., user owns the repo or is a member of a team with 'admin' level access to the organization's repository).
 
 **Status Codes**
 
@@ -196,9 +194,8 @@ curl -v --user admin:password -X DELETE https://dtr.domain.com/api/v0/repositori
 
 **Authorization**
 
-Client must be authenticated as a user which has `admin` access to the
-repository (i.e., an owning user or member of a team with 'admin'
-level access to the organization's repository).
+Client must be authenticated as a user who has `admin` access to the
+repository (i.e., user owns the repo or is a member of a team with 'admin' level access to the organization's repository).
 
 **Status Codes**
 
