@@ -321,12 +321,16 @@ the web administration UI and metrics dashboard.
 Using LDAP authentication allows you to integrate your DTR registry into your
 organization's existing LDAP user and authentication database.
 
+To improve the performance of DTR registry ACL's, User and Group membership
+are synced into DTR's database on a configurable *LDAP Sync Interval*.
+This cache does not include user passwords, but once a user's identity has been
+confirmed, that session's token will persist.
+
 You can configure the "userFilter" to select the set of users that are candidates
 for each of the "admin", "read-write", and "read-only" roles. Unlike "Managed"
 authentication, the "admin" role is separate to the registry access roles, so
 LDAP users in the "admin" role won't have access to DTR images unless they also
 are given the "read-write" or "read-only" role.
-
 
 As connecting to LDAP involves existing infrastructure external to DTR and Docker, you will need to
 gather the details required to configure DTR for your organization's particular LDAP
@@ -350,7 +354,7 @@ docker run --rm -it svendowideit/ldapsearch -h <LDAP Server hostname> -b <User B
 ```
 
 The result of these queries should be a (very) long list - if you get an authentication error,
-then the details you have are not sufficient.
+then the details you have are not sufficient - contact your organization's LDAP team.
 
 The *User Login Attribute* key setting must match the field used in the LDAP server
 for the user's login-name. On OpenLDAP, it's generally `uid`, and on Microsoft Active Directory
