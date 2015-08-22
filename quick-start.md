@@ -11,7 +11,7 @@ weight=1
 
 
 
-# Docker Trusted Registry Quick Start: Basic User Workflow
+# Docker Trusted Registry Quick Start Guide: Basic User Workflow
 
 ## Overview
 
@@ -64,19 +64,19 @@ command to pull the public Jenkins image.
     $ docker pull jenkins
 
 > **Note:** This guide assumes you can run Docker commands from a machine where
-> you are a member of the `docker` group, or have root privileges. Otherwise, you may
-> need to add `sudo` to the example commands below.
+> you are a member of the `docker` group or have root privileges. Otherwise, you
+> may need to add `sudo` to the example commands below.
 
 Docker will start the process of pulling the image from the Hub. Once it has completed, the Jenkins image should be visible in the output of a [`docker images`](https://docs.docker.com/reference/commandline/images) command, which lists your available images:
 
     $ docker images
     REPOSITORY  TAG     IMAGE ID      CREATED      VIRTUAL SIZE
-    jenkins     latest  1a7cc22b0ee9  6 days ago   662 MB
+    jenkins     latest  1a7cc22b0ee9  2 weeks ago  888 MB
 
 > **Note:** Because the `pull` command did not specify any tags, it will pull
 > the latest version of the public Jenkins image. If your enterprise environment
 > requires you to use a specific version, add the tag for the version you need
-> (e.g., `jenkins:1.565`).
+> (e.g., `jenkins:1.609.2`).
 
 ## Customizing the Jenkins image
 
@@ -96,13 +96,13 @@ You'll do this by using a `Dockerfile` and the `docker build` command.
 In order to add the new plugin and configure HTTPS access to the custom Jenkins
 image, you need to:
 
-1. Create text file that defines the new plugin
+1. Create a text file that defines the new plugin
 2. Create copies of the private key and certificate
 
 All of the above files need to be in the same directory as the Dockerfile you
 will create in the next step.
 
-1. Create a build directory called `build`, and change to that new directory:
+1. Create a build directory called `build`, and change to that new directory: 
 
     $ mkdir build && cd build
 
@@ -143,7 +143,7 @@ following contents:
      #Configure HTTP off and HTTPS on, using port 1973
     ENV JENKINS_OPTS --httpPort=-1 --httpsPort=1973 --httpsCertificate=/var/lib/jenkins/cert --httpsPrivateKey=/var/lib/jenkins/pk
 
-The first `COPY` instruction in the above will copy the `plugin` file created
+The first `COPY` instruction in the above will copy the `plugins` file created
 earlier into the `/usr/share/jenkins` directory within the custom image you are
 defining with the `Dockerfile`.
 
@@ -188,17 +188,17 @@ customization.
 Please note the use of the `-t` flag in the `docker build` command above. The
 `-t` flag lets you  tag an image so it can be pushed to a custom repository. In
 the example above, the new image is tagged so it can be pushed to the
-`ci-infrastructure` Repository within the `dtr.yourdomain.com` registry (your
+`ci-infrastructure` repository within the `dtr.yourdomain.com` registry (your
 local DTR instance). This will be important when you need to `push` the
 customized image to DTR later.
 
 A `docker images` command will now show the custom image alongside the Jenkins
 image pulled earlier:
 
-    $ sudo docker images
+    $ docker images
     REPOSITORY   TAG    IMAGE ID    CREATED    VIRTUAL SIZE
-    dtr.yourdomain.com/ci-infrastructure/jnkns-img    latest    fc0ab3008d40    2 minutes ago    674.5 MB
-    jenkins    latest    1a7cc22b0ee9    6 days ago    662 MB
+    dtr.yourdomain.com/ci-infrastructure/jnkns-img    latest    fc0ab3008d40    2 minutes ago    888.1 MB
+    jenkins    latest    1a7cc22b0ee9    2 weeks ago    888 MB
 
 ## Pushing to Docker Trusted Registry
 
@@ -233,7 +233,8 @@ Now that you’ve created the custom image, it can be pushed to DTR using the
     492ed3875e3e: Image successfully pushed
     fc0ab3008d40: Image successfully pushed
 
-You can view the traffic throughput from the custom image being pushed on the DTR Dashboard:
+You can view the traffic throughput from the custom image being pushed, by selecting `Network` from the `Load Balancer` tile on the DTR Dashboard:
+![](http://i.imgur.com/8KlHj9u.png)
 
 ![DTR console push throughput](../assets/console-push.png)
 
@@ -256,16 +257,14 @@ command from any Docker Host that has access to your DTR instance:
     dtr.yourdomain.com/ci-infrastructure/jnkns-img:latest: The image you are pulling has been verified. Important: image verification is a tech preview feature and should not be relied on to provide security.
     Status: Downloaded newer image for dtr.yourdomain.com/ci-infrastructure/jnkns-img:latest
 
-You can view the traffic throughput from the custom image being pulled on the DTR Dashboard:
-
-![DTR console pull throughput](../assets/console-pull.png)
+You can view the traffic throughput from the custom image being pulled on the DTR Dashboard.
 
 Now that the `jnkns-img` image has been pulled locally from DTR, you can view it
 in the output of the `docker images` command:
 
      $ docker images
     REPOSITORY     TAG    IMAGE ID    CREATED    VIRTUAL SIZE
-    dtr.yourdomain.com/ci-infrastructure/jnkns-img    latest  fc0ab3008d40    8 minutes ago    674.5 MB
+    dtr.yourdomain.com/ci-infrastructure/jnkns-img    latest  fc0ab3008d40    2 minutes ago    888.1 MB
 
 ## Launching a custom Jenkins container
 
