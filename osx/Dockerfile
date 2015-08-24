@@ -184,10 +184,12 @@ RUN sed -i \
     -e "s/%MIXPANEL_TOKEN%/$MIXPANEL_TOKEN/g" \
     -e "s/%INSTALLER_VERSION%/$INSTALLER_VERSION/g" \
     mpkg/Plugins/*.bundle/Contents/Info.plist
-
 RUN sed -i \
 		-e "s/%INSTALLER_VERSION%/$INSTALLER_VERSION/g" \
-		mpkg/Resources/en.lproj/Welcome.html
+		mpkg/Plugins/*.bundle/Contents/Resources/*.html
+RUN sed -i \
+		-e "s/%INSTALLER_VERSION%/$INSTALLER_VERSION/g" \
+		mpkg/Resources/en.lproj/welcome.rtfd/TXT.rtf
 RUN sed -i \
 		-e "s/%INSTALLER_VERSION%/$INSTALLER_VERSION/g" \
 		mpkg/Resources/en.lproj/Installed.html

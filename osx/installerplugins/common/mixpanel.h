@@ -19,16 +19,31 @@
 
 @implementation Mixpanel
 
-+ (void) trackEvent:(NSString *)name forPane:(InstallerPane*)pane {
-    NSString *uuid = [[[pane section] sharedDictionary] objectForKey:@"uuid"];
++ (NSString *) trackingUUID {
+    NSString *cachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *cacheDirPath = [NSString pathWithComponents:[NSArray arrayWithObjects:cachePath, @"io.docker.pkg.toolbox", nil]];
+    NSString *cacheFilePath = [NSString pathWithComponents:[NSArray arrayWithObjects:cacheDirPath, @"id", nil]];
     
-    // Do not track if UUID is not provided
-    if (!uuid) {
+    NSString *uuid = [NSString stringWithContentsOfFile:cacheFilePath encoding:NSUTF8StringEncoding error:nil];
+    if (!uuid || ![uuid length]) {
+        uuid = [[NSUUID UUID] UUIDString];
+    }
+    
+    [[NSFileManager defaultManager] createDirectoryAtPath:cacheDirPath withIntermediateDirectories:YES attributes:nil error:nil];
+    [uuid writeToFile:cacheFilePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+    
+    return uuid;
+}
+
++ (void) trackEvent:(NSString *)name forPane:(InstallerPane*)pane {
+    BOOL trackingDisabled = [[[[pane section] sharedDictionary] objectForKey:@"disableTracking"] boolValue];
+    NSString *uuid = [self trackingUUID];
+    
+    if (!uuid || trackingDisabled) {
         return;
     }
 
     NSBundle* bundle = [[pane section] bundle];
-    NSLog(@"%@", bundle);
     NSString* token = [bundle objectForInfoDictionaryKey:@"Mixpanel Token"];
     NSString* installerVersion = [bundle objectForInfoDictionaryKey:@"Installer Version"];
     NSString* payload = [NSString stringWithFormat:@"{\"event\": \"%@\", \"properties\": {\"token\": \"%@\", \"distinct_id\": \"%@\", \"os\": \"darwin\", \"version\": \"%@\"}}", name, token, uuid, installerVersion];

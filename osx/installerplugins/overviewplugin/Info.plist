@@ -21,16 +21,12 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>InstallerSectionTitle</key>
-	<string>Improve Toolbox</string>
+	<string>Overview</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2015 Docker Inc. All rights reserved.</string>
 	<key>NSMainNibFile</key>
-	<string>improvetoolboxplugin</string>
+	<string>overviewplugin</string>
 	<key>NSPrincipalClass</key>
 	<string>InstallerSection</string>
-	<key>Installer Version</key>
-	<string>%INSTALLER_VERSION%</string>
-	<key>Mixpanel Token</key>
-	<string>%MIXPANEL_TOKEN%</string>
 </dict>
 </plist>

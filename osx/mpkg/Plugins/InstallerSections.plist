@@ -5,7 +5,7 @@
 	<key>SectionOrder</key>
 	<array>
     <string>Introduction</string>
-		<string>improvetoolboxplugin.bundle</string>
+		<string>overviewplugin.bundle</string>
 		<string>Target</string>
 		<string>PackageSelection</string>
 		<string>Install</string>

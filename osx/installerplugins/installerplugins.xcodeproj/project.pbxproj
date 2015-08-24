@@ -7,11 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1B4C912F1B85000B00A06068 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1B4C912D1B85000B00A06068 /* InfoPlist.strings */; };
-		1B4C91321B85000B00A06068 /* improvetoolboxpluginPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4C91311B85000B00A06068 /* improvetoolboxpluginPane.m */; };
-		1B4C91351B85000B00A06068 /* improvetoolboxplugin.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B4C91331B85000B00A06068 /* improvetoolboxplugin.xib */; };
-		1B4C91381B85000B00A06068 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1B4C91361B85000B00A06068 /* Localizable.strings */; };
-		1B4C913A1B85000B00A06068 /* InstallerSections.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1B4C91391B85000B00A06068 /* InstallerSections.plist */; };
 		1B4C91481B8500A700A06068 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1B4C91461B8500A700A06068 /* InfoPlist.strings */; };
 		1B4C914B1B8500A700A06068 /* managevmpluginPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4C914A1B8500A700A06068 /* managevmpluginPane.m */; };
 		1B4C914E1B8500A700A06068 /* managevmplugin.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B4C914C1B8500A700A06068 /* managevmplugin.xib */; };
@@ -27,17 +22,15 @@
 		1B4C91C41B85198100A06068 /* InstallerSections.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1B4C91C31B85198100A06068 /* InstallerSections.plist */; };
 		1B8417E91B85261F00B1FA4D /* kitematic.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B8417E71B85261F00B1FA4D /* kitematic.png */; };
 		1B8417EA1B85261F00B1FA4D /* quickstart.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B8417E81B85261F00B1FA4D /* quickstart.png */; };
+		1BF102C11B8BDEDA00FCB650 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1BF102BF1B8BDEDA00FCB650 /* InfoPlist.strings */; };
+		1BF102C41B8BDEDA00FCB650 /* overviewpluginPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BF102C31B8BDEDA00FCB650 /* overviewpluginPane.m */; };
+		1BF102C71B8BDEDA00FCB650 /* overviewplugin.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BF102C51B8BDEDA00FCB650 /* overviewplugin.xib */; };
+		1BF102CA1B8BDEDA00FCB650 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1BF102C81B8BDEDA00FCB650 /* Localizable.strings */; };
+		1BF102CC1B8BDEDA00FCB650 /* InstallerSections.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1BF102CB1B8BDEDA00FCB650 /* InstallerSections.plist */; };
+		1BF102D11B8BDF4D00FCB650 /* overview.html in Resources */ = {isa = PBXBuildFile; fileRef = 1BF102D01B8BDF4D00FCB650 /* overview.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1B4C91291B85000B00A06068 /* improvetoolboxplugin.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = improvetoolboxplugin.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		1B4C912C1B85000B00A06068 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1B4C912E1B85000B00A06068 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		1B4C91301B85000B00A06068 /* improvetoolboxpluginPane.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = improvetoolboxpluginPane.h; sourceTree = "<group>"; };
-		1B4C91311B85000B00A06068 /* improvetoolboxpluginPane.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = improvetoolboxpluginPane.m; sourceTree = "<group>"; };
-		1B4C91341B85000B00A06068 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/improvetoolboxplugin.xib; sourceTree = "<group>"; };
-		1B4C91371B85000B00A06068 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		1B4C91391B85000B00A06068 /* InstallerSections.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = InstallerSections.plist; sourceTree = "<group>"; };
 		1B4C91421B8500A700A06068 /* managevmplugin.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = managevmplugin.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B4C91451B8500A700A06068 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1B4C91471B8500A700A06068 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -60,16 +53,19 @@
 		1B4C91C31B85198100A06068 /* InstallerSections.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = InstallerSections.plist; sourceTree = "<group>"; };
 		1B8417E71B85261F00B1FA4D /* kitematic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kitematic.png; sourceTree = "<group>"; };
 		1B8417E81B85261F00B1FA4D /* quickstart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = quickstart.png; sourceTree = "<group>"; };
+		1BF1029E1B8B940500FCB650 /* informationplugin.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = informationplugin.bundle; path = /Users/jmorgan/workspace/toolbox/osx/installerplugins/../mpkg/Plugins/informationplugin.bundle; sourceTree = "<absolute>"; };
+		1BF102BB1B8BDEDA00FCB650 /* overviewplugin.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = overviewplugin.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BF102BE1B8BDEDA00FCB650 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1BF102C01B8BDEDA00FCB650 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1BF102C21B8BDEDA00FCB650 /* overviewpluginPane.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = overviewpluginPane.h; sourceTree = "<group>"; };
+		1BF102C31B8BDEDA00FCB650 /* overviewpluginPane.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = overviewpluginPane.m; sourceTree = "<group>"; };
+		1BF102C61B8BDEDA00FCB650 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/overviewplugin.xib; sourceTree = "<group>"; };
+		1BF102C91B8BDEDA00FCB650 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1BF102CB1B8BDEDA00FCB650 /* InstallerSections.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = InstallerSections.plist; sourceTree = "<group>"; };
+		1BF102D01B8BDF4D00FCB650 /* overview.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = overview.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		1B4C91261B85000B00A06068 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1B4C913F1B8500A700A06068 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -84,42 +80,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1BF1029B1B8B940500FCB650 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1BF102B81B8BDEDA00FCB650 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		1B4C90691B84FDEB00A06068 = {
 			isa = PBXGroup;
 			children = (
-				1B4C91291B85000B00A06068 /* improvetoolboxplugin.bundle */,
+				1BF102BB1B8BDEDA00FCB650 /* overviewplugin.bundle */,
 				1B4C91421B8500A700A06068 /* managevmplugin.bundle */,
 				1B4C91B31B85198100A06068 /* quickstartplugin.bundle */,
-				1B4C912A1B85000B00A06068 /* improvetoolboxplugin */,
+				1BF102BC1B8BDEDA00FCB650 /* overviewplugin */,
 				1B4C91431B8500A700A06068 /* managevmplugin */,
 				1B4C91B41B85198100A06068 /* quickstartplugin */,
 				1B4C915D1B85021200A06068 /* common */,
 			);
-			sourceTree = "<group>";
-		};
-		1B4C912A1B85000B00A06068 /* improvetoolboxplugin */ = {
-			isa = PBXGroup;
-			children = (
-				1B4C91301B85000B00A06068 /* improvetoolboxpluginPane.h */,
-				1B4C91311B85000B00A06068 /* improvetoolboxpluginPane.m */,
-				1B4C91331B85000B00A06068 /* improvetoolboxplugin.xib */,
-				1B4C91361B85000B00A06068 /* Localizable.strings */,
-				1B4C91391B85000B00A06068 /* InstallerSections.plist */,
-				1B4C912B1B85000B00A06068 /* Supporting Files */,
-			);
-			path = improvetoolboxplugin;
-			sourceTree = "<group>";
-		};
-		1B4C912B1B85000B00A06068 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				1B4C912C1B85000B00A06068 /* Info.plist */,
-				1B4C912D1B85000B00A06068 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		1B4C91431B8500A700A06068 /* managevmplugin */ = {
@@ -179,26 +167,32 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		1BF102BC1B8BDEDA00FCB650 /* overviewplugin */ = {
+			isa = PBXGroup;
+			children = (
+				1BF102C21B8BDEDA00FCB650 /* overviewpluginPane.h */,
+				1BF102C31B8BDEDA00FCB650 /* overviewpluginPane.m */,
+				1BF102C51B8BDEDA00FCB650 /* overviewplugin.xib */,
+				1BF102C81B8BDEDA00FCB650 /* Localizable.strings */,
+				1BF102CB1B8BDEDA00FCB650 /* InstallerSections.plist */,
+				1BF102D01B8BDF4D00FCB650 /* overview.html */,
+				1BF102BD1B8BDEDA00FCB650 /* Supporting Files */,
+			);
+			path = overviewplugin;
+			sourceTree = "<group>";
+		};
+		1BF102BD1B8BDEDA00FCB650 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1BF102BE1B8BDEDA00FCB650 /* Info.plist */,
+				1BF102BF1B8BDEDA00FCB650 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1B4C91281B85000B00A06068 /* improvetoolboxplugin */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1B4C913B1B85000B00A06068 /* Build configuration list for PBXNativeTarget "improvetoolboxplugin" */;
-			buildPhases = (
-				1B4C91251B85000B00A06068 /* Sources */,
-				1B4C91261B85000B00A06068 /* Frameworks */,
-				1B4C91271B85000B00A06068 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = improvetoolboxplugin;
-			productName = improvetoolboxplugin;
-			productReference = 1B4C91291B85000B00A06068 /* improvetoolboxplugin.bundle */;
-			productType = "com.apple.product-type.bundle";
-		};
 		1B4C91411B8500A700A06068 /* managevmplugin */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1B4C91541B8500A700A06068 /* Build configuration list for PBXNativeTarget "managevmplugin" */;
@@ -233,6 +227,40 @@
 			productReference = 1B4C91B31B85198100A06068 /* quickstartplugin.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
+		1BF1029D1B8B940500FCB650 /* informationplugin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1BF102B21B8B940500FCB650 /* Build configuration list for PBXNativeTarget "informationplugin" */;
+			buildPhases = (
+				1BF1029A1B8B940500FCB650 /* Sources */,
+				1BF1029B1B8B940500FCB650 /* Frameworks */,
+				1BF1029C1B8B940500FCB650 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = informationplugin;
+			productName = informationplugin;
+			productReference = 1BF1029E1B8B940500FCB650 /* informationplugin.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		1BF102BA1B8BDEDA00FCB650 /* overviewplugin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1BF102CD1B8BDEDA00FCB650 /* Build configuration list for PBXNativeTarget "overviewplugin" */;
+			buildPhases = (
+				1BF102B71B8BDEDA00FCB650 /* Sources */,
+				1BF102B81B8BDEDA00FCB650 /* Frameworks */,
+				1BF102B91B8BDEDA00FCB650 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = overviewplugin;
+			productName = overviewplugin;
+			productReference = 1BF102BB1B8BDEDA00FCB650 /* overviewplugin.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -242,13 +270,16 @@
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = "Docker Inc";
 				TargetAttributes = {
-					1B4C91281B85000B00A06068 = {
-						CreatedOnToolsVersion = 6.4;
-					};
 					1B4C91411B8500A700A06068 = {
 						CreatedOnToolsVersion = 6.4;
 					};
 					1B4C91B21B85198100A06068 = {
+						CreatedOnToolsVersion = 6.4;
+					};
+					1BF1029D1B8B940500FCB650 = {
+						CreatedOnToolsVersion = 6.4;
+					};
+					1BF102BA1B8BDEDA00FCB650 = {
 						CreatedOnToolsVersion = 6.4;
 					};
 				};
@@ -266,25 +297,15 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1B4C91281B85000B00A06068 /* improvetoolboxplugin */,
 				1B4C91411B8500A700A06068 /* managevmplugin */,
 				1B4C91B21B85198100A06068 /* quickstartplugin */,
+				1BF1029D1B8B940500FCB650 /* informationplugin */,
+				1BF102BA1B8BDEDA00FCB650 /* overviewplugin */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		1B4C91271B85000B00A06068 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1B4C912F1B85000B00A06068 /* InfoPlist.strings in Resources */,
-				1B4C91381B85000B00A06068 /* Localizable.strings in Resources */,
-				1B4C91351B85000B00A06068 /* improvetoolboxplugin.xib in Resources */,
-				1B4C913A1B85000B00A06068 /* InstallerSections.plist in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1B4C91401B8500A700A06068 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -312,17 +333,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-/* End PBXResourcesBuildPhase section */
-
-/* Begin PBXSourcesBuildPhase section */
-		1B4C91251B85000B00A06068 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
+		1BF1029C1B8B940500FCB650 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B4C91321B85000B00A06068 /* improvetoolboxpluginPane.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1BF102B91B8BDEDA00FCB650 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BF102C11B8BDEDA00FCB650 /* InfoPlist.strings in Resources */,
+				1BF102CA1B8BDEDA00FCB650 /* Localizable.strings in Resources */,
+				1BF102C71B8BDEDA00FCB650 /* overviewplugin.xib in Resources */,
+				1BF102CC1B8BDEDA00FCB650 /* InstallerSections.plist in Resources */,
+				1BF102D11B8BDF4D00FCB650 /* overview.html in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
 		1B4C913E1B8500A700A06068 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -339,33 +371,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1BF1029A1B8B940500FCB650 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1BF102B71B8BDEDA00FCB650 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BF102C41B8BDEDA00FCB650 /* overviewpluginPane.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		1B4C912D1B85000B00A06068 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1B4C912E1B85000B00A06068 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		1B4C91331B85000B00A06068 /* improvetoolboxplugin.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1B4C91341B85000B00A06068 /* Base */,
-			);
-			name = improvetoolboxplugin.xib;
-			sourceTree = "<group>";
-		};
-		1B4C91361B85000B00A06068 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1B4C91371B85000B00A06068 /* en */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
 		1B4C91461B8500A700A06068 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -410,6 +433,30 @@
 			isa = PBXVariantGroup;
 			children = (
 				1B4C91C11B85198100A06068 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		1BF102BF1B8BDEDA00FCB650 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1BF102C01B8BDEDA00FCB650 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		1BF102C51B8BDEDA00FCB650 /* overviewplugin.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1BF102C61B8BDEDA00FCB650 /* Base */,
+			);
+			name = overviewplugin.xib;
+			sourceTree = "<group>";
+		};
+		1BF102C81B8BDEDA00FCB650 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1BF102C91B8BDEDA00FCB650 /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -495,32 +542,6 @@
 			};
 			name = Release;
 		};
-		1B4C913C1B85000B00A06068 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = improvetoolboxplugin/Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Debug;
-		};
-		1B4C913D1B85000B00A06068 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = improvetoolboxplugin/Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Release;
-		};
 		1B4C91551B8500A700A06068 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -557,7 +578,7 @@
 				);
 				INFOPLIST_FILE = quickstartplugin/Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -570,7 +591,65 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				INFOPLIST_FILE = quickstartplugin/Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		1BF102B01B8B940500FCB650 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = informationplugin/Info.plist;
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		1BF102B11B8B940500FCB650 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = informationplugin/Info.plist;
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		1BF102CE1B8BDEDA00FCB650 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = overviewplugin/Info.plist;
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		1BF102CF1B8BDEDA00FCB650 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = overviewplugin/Info.plist;
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -584,15 +663,6 @@
 			buildConfigurations = (
 				1B4C90851B84FDEB00A06068 /* Debug */,
 				1B4C90861B84FDEB00A06068 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1B4C913B1B85000B00A06068 /* Build configuration list for PBXNativeTarget "improvetoolboxplugin" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1B4C913C1B85000B00A06068 /* Debug */,
-				1B4C913D1B85000B00A06068 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -614,6 +684,23 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		1BF102B21B8B940500FCB650 /* Build configuration list for PBXNativeTarget "informationplugin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1BF102B01B8B940500FCB650 /* Debug */,
+				1BF102B11B8B940500FCB650 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1BF102CD1B8BDEDA00FCB650 /* Build configuration list for PBXNativeTarget "overviewplugin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1BF102CE1B8BDEDA00FCB650 /* Debug */,
+				1BF102CF1B8BDEDA00FCB650 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

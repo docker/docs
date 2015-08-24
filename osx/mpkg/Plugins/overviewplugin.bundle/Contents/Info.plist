@@ -3,53 +3,45 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>15A244d</string>
+	<string>15A263e</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
-	<string>improvetoolboxplugin</string>
+	<string>overviewplugin</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.docker.improvetoolboxplugin</string>
+	<string>com.docker.overviewplugin</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>improvetoolboxplugin</string>
+	<string>overviewplugin</string>
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>CFBundleSupportedPlatforms</key>
-	<array>
-		<string>MacOSX</string>
-	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
-	<string>7A165t</string>
+	<string>6E35b</string>
 	<key>DTPlatformVersion</key>
 	<string>GM</string>
 	<key>DTSDKBuild</key>
-	<string>15A226f</string>
+	<string>14D125</string>
 	<key>DTSDKName</key>
-	<string>macosx10.11</string>
+	<string>macosx10.10</string>
 	<key>DTXcode</key>
-	<string>0700</string>
+	<string>0640</string>
 	<key>DTXcodeBuild</key>
-	<string>7A165t</string>
-	<key>Installer Version</key>
-	<string>%INSTALLER_VERSION%</string>
+	<string>6E35b</string>
 	<key>InstallerSectionTitle</key>
-	<string>Improve Toolbox</string>
-	<key>Mixpanel Token</key>
-	<string>%MIXPANEL_TOKEN%</string>
+	<string>Overview</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2015 Docker Inc. All rights reserved.</string>
 	<key>NSMainNibFile</key>
-	<string>improvetoolboxplugin</string>
+	<string>overviewplugin</string>
 	<key>NSPrincipalClass</key>
 	<string>InstallerSection</string>
 </dict>

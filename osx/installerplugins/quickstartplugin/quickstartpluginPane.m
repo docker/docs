@@ -39,7 +39,7 @@
 
 - (void) willExitPane:(InstallerSectionDirection)dir {
     if (dir == InstallerDirectionForward) {
-        [Mixpanel trackEvent:@"Continued from Quickstart Pane" forPane:self];
+        [Mixpanel trackEvent:@"Installer Finished" forPane:self];
     }
 }
 

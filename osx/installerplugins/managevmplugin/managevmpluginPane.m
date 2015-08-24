@@ -26,14 +26,27 @@ NSString *dockerMachinePath = @"/usr/local/bin/docker-machine";
 }
 
 - (BOOL) canMigrateBoot2DockerVM {
+    // VirtualBox and Docker Machine exist
     if (![[NSFileManager defaultManager] fileExistsAtPath:vBoxManagePath] || ![[NSFileManager defaultManager] fileExistsAtPath:dockerMachinePath]) {
+        return NO;
+    }
+    
+    // Boot2Docker certs exist
+    if (![[NSFileManager defaultManager] fileExistsAtPath:@"~/.boot2docker/certs/boot2docker-vm/ca.pem"] ||
+        ![[NSFileManager defaultManager] fileExistsAtPath:@"~/.boot2docker/certs/boot2docker-vm/cert.pem"] ||
+        ![[NSFileManager defaultManager] fileExistsAtPath:@"~/.boot2docker/certs/boot2docker-vm/key.pem"]) {
+        return NO;
+    }
+    
+    // Boot2Docker ssh keys exist
+    if (![[NSFileManager defaultManager] fileExistsAtPath:@"~/.ssh/id_boot2docker"] ||
+        ![[NSFileManager defaultManager] fileExistsAtPath:@"~/.ssh/id_boot2docker.pub"]) {
         return NO;
     }
     
     if (![self vmExists:@"boot2docker-vm"] || [self vmExists:@"default"]) {
         return NO;
     }
-    
     return YES;
 }
 
@@ -153,6 +166,7 @@ NSString *dockerMachinePath = @"/usr/local/bin/docker-machine";
     
     if (self.migrateCheckbox.enabled && self.migrateCheckbox.state == NSOnState) {
         [Mixpanel trackEvent:@"Boot2Docker Migration Started" forPane:self];
+
         self.nextEnabled = false;
         self.migrationProgress.hidden = NO;
         [self.migrationProgress startAnimation:self];
@@ -161,8 +175,7 @@ NSString *dockerMachinePath = @"/usr/local/bin/docker-machine";
         self.migrateCheckbox.enabled = NO;
         self.migrationStatusLabel.stringValue = @"Migrating...";
         self.migrationLogsScrollView.hidden = NO;
-        [[self.migrationLogsTextView textStorage] setFont:[NSFont fontWithName:@"Menlo" size:12]];
-        
+
         [self migrateBoot2DockerVM];
         return NO;
     } else if (self.migrateCheckbox.state == NSOffState) {
