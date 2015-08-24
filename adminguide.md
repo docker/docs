@@ -87,7 +87,7 @@ If you are hosting DTR on an EC2 host launched from the AWS Marketplace AMI, not
 
 DTR runs several Docker services which are essential to its reliability and
 usability. The following services are included; you can see their details by
-running queries on the [System Health](#system-health) and [Logs](#logs) pages:
+viewing the [DTR Dashboard](#dashboard) and [Logs](#logs) pages:
 
 * `admin_server`: Used for displaying system health, performing upgrades,
 configuring settings, and viewing logs.
