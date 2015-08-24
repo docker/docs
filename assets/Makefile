@@ -1,6 +1,6 @@
 
 SIZE="1280px"
-HOST=t400s.home.org.au
+HOST=dtr.domain.com
 HOSTIP:=10.10.10.151
 HOSTURL=https://$(HOST)
 IMAGE=svendowideit/screenshot
@@ -10,6 +10,7 @@ RUN=$(RUNOPTS) $(IMAGE)
 
 all:
 	# Needs to be run with no authentication
+	$(RUN) $(HOSTURL)/admin/ admin-metrics.png $(SIZE)
 	$(RUN) $(HOSTURL)/admin/logs/ admin-logs.png $(SIZE)
 	$(RUN) $(HOSTURL)/admin/settings/auth/ admin-settings-authentication.png $(SIZE)
 	$(RUN) $(HOSTURL)/admin/settings/general admin-settings.png $(SIZE)
