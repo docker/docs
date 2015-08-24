@@ -2,14 +2,15 @@
 
 ![Components](orca_components.png)
 
+Not shown in the diagram is the orca-bootstrap container, which is
+only used during **install**, **upgrade**, **join**, and **uninstall**
+operartions.  The remainder of this document describes the business
+logic that resides largely within this bootstrapper.
+
 
 ## Known gaps
 
 * Swarm must talk to consul with TLS enabled - https://github.com/docker/swarm/issues/404 - slated for 1.9
-
-## Open Questions
-
-* Can we get admin user certs signed by the swarm CA to work?  If not, admins will have to deal with dual certs for swarm+orca access.
 
 ## Assumptions
 
@@ -30,6 +31,17 @@
 * Installation logic should be idempotent, and not clobber any pertinent state unless the user asks us to
 
 
+## Images
+
+The following images are used in developer mode.  In general, the names will morph to docker/orca-xxx at GA.
+
+* progrium/consul
+* dockerorca/orca-proxy
+* dockerorca/orca
+* dockerorca/rethinkdb
+* swarm
+* dockerorca/orca-cfssl
+
 
 ## User Entrypoint
 
@@ -46,6 +58,15 @@ curl https://get.docker.com/orca | bash
 * The bootstrap container uses a two-phase model to abstract away the version specific details of volume mounts or other flags required by the system.
     * During implementation, if this becomes unwieldy, we'll just have the script launch "phase 2" automatically
 
+## Common Flags
+
+Where possible, common flags will be used across subcommands for consistency.  The following list represents the initial set we expect to implement for v1
+
+* **--debug**  Enable more verbose output, typically useful for developers, or support if something fails unexpectedly
+* **--help** Display usage information for the command
+* **--jsonlog** Change the log format to be machine parseable (expected to be useful for our (future) GUI installer)
+* **--interactive** Run the bootstrap code in interactive mode, prompting for required information, or confirmation on dangerous operations.
+
 
 ## Deploy Orca
 
@@ -54,11 +75,13 @@ Description:  Deploy orca+swarm onto a single "local" engine.  Once deployed, ad
 
 Use-case specific flags:
 
-* --version "label": Specify an exact version to pull, default is "latest"
+* --image-version: Specify an exact version to pull, default is "latest"
 * --fresh-install: destroy any existing state and orca containers on this node and deploy fresh.  Default is to leave any state if detected, and if existing containers are detected, to redeploy them.
-* --image-dir "path": Location of local images to load (typically used by ISO installer)
-* --help: Basic usage information
-* --phase2: If set, indicate we're in phase 2 and all necessary mounts are performed (undocumented in help output)
+* --san: Specify additional alternate names for the certificate.  Useful if the docker host doesn't have a FQDN
+* --host-address: Specify the visible IP/hostname for this engine.  Useful for NAT or other network topologies where the docker engine doesn't know what the actual external IP is for the system.
+* --swarm-port: Allows the user to specify an alternate swarm port.  By default, we try to claim the standard/well-known docker TLS port
+* --preserve-certs: Allow re-use of existing certs on the host.
+* --external-orca-ca: Allow the user to "bring your own" CA for Orca (swarm's CA is still internal for v1)
 
 Steps:
 
@@ -88,7 +111,7 @@ docker run --rm -t \
     -v $DB_PATH_TBD:... \
     -v $CONSUL_DATA_TBD:...
     -v ...any other paths... \
-    docker/orca-bootstrap --phase2 $PHASE1_FLAGS
+    docker/orca-bootstrap $PHASE1_FLAGS
 ```
 6. Check for images on the engine, pull if missing
     * If this fails, inform user to "docker login" using their hub credentials and try again
@@ -130,8 +153,12 @@ Description:  Used to add a single "local" engine to an existing orca swarm.
 
 Use-case specific flags:
 
-* --join "url": Specify the orca to join
-* --swarm "label": Pick a specific swarm (defaul is "swarm0")  -- Probably post v1
+* --url: Specify the orca to join
+* --fingerprint: Specify the TLS fingerprint of the orca to join (or use interactive to avoid cut-and-paste error)
+* --image-version: Specify an exact version to pull, default is "latest"
+* --fresh-install: destroy any existing state and orca containers on this node and deploy fresh.  Default is to leave any state if detected, and if existing containers are detected, to redeploy them.
+* --san: Specify additional alternate names for the certificate.  Useful if the docker host doesn't have a FQDN
+* --host-address: Specify the visible IP/hostname for this engine.  Useful for NAT or other network topologies where the docker engine doesn't know what the actual external IP is for the system.
 
 
 Steps:
@@ -168,7 +195,7 @@ docker run --rm -t \
     -e ORCA_ADMIN_PASSWORD \
     -v /var/run/docker.sock:/var/run/docker.sock \
     -v /etc/docker/ssl/orca:/etc/docker/ssl/orca \
-    docker/orca-bootstrap --phase2 $PHASE1_FLAGS
+    docker/orca-bootstrap $PHASE1_FLAGS
 ```
 9. Generate new key pair and generate CSR for swarm/proxy
 10. Call Orca API using admin credentials, request to add host, passing CSR
