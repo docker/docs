@@ -25,7 +25,7 @@ This release addresses a few bugs and issues in DTR 1.2.0 and introduces some ne
 
 * A completely new user-interface for the Admin application brings DTR in line with other Docker products and provides greater ease-of-use.
 
-* A new Accounts & Repos API provides new fine-grained role-based access control down to the per-repo level. See the [API's documentation]({{< relref "api/index.md" >}}) for more information.
+* A new Accounts & Repos API provides new fine-grained role-based access control down to the per-repo level. See the [API's documentation](/docker-trusted-registry/api/) for more information.
 
 * Improvements to the handling of configuration changes so that fewer restarts are required.
 
