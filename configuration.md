@@ -292,15 +292,34 @@ or use the full Yaml configuration file upload to have more detailed control.
 You can view the current `storage.yaml` file on your DTR Docker host in the `/usr/local/etc/dtr/`
 directory.
 
+### Filesystem settings
+
+The [filesystem storage backend](/registry/configuration/#filesystem)
+has only one setting - the "Storage directory", the root directory in which all
+registry files are stored.
+
+### S3 settings
+
+The [S3 storage backend](/registry/configuration/#s3) page allows you to set the
+"AWS region", "Bucket name", "Access Key", and "Secret Key".
+
+### Azure settings
+
+The [Azure storage backend](/registry/configuration/#azure) page allows you to set
+the "Account name", "Account key", "Container", and "Realm".
+
 ### Yaml configuration file
 
-This file (`/usr/local/etc/dtr/storage.yml`) is
-used to configure the image storage services. The editable text of the file is
-displayed in the dialog box. The schema of this file is identical to that used
+If the Quick setup options above are not sufficient to configure your Registry
+options, you can upload a YAML file.
+
+The schema of this file is identical to that used
 by the [Registry 2.0](http://docs.docker.com/registry/configuration/).
-* If you are using the file system driver to provide local image storage, you will need to specify a root directory which will get mounted as a sub-path of
-`/var/local/dtr/image-storage`. The default value of this root directory is
-`/local`, so the full path to it is `/var/local/dtr/image-storage/local`.
+
+* If you are using the file system driver to provide local image storage, you
+  will need to specify a root directory which will get mounted as a sub-path of
+  `/var/local/dtr/image-storage`. The default value of this root directory is
+  `/local`, so the full path to it is `/var/local/dtr/image-storage/local`.
 
 
 ## Authentication
