@@ -321,15 +321,22 @@ site. This is not recommended for any use other than testing.
 ### Managed authentication
 
 With `Managed` authentication, the DTR admin can control users' access by setting username/password pairs.
-These users must then be given "admin", "read-write" or "read-only" roles.
-The "read-only" role can only pull images from the registry, "read-write" can
-push and pull images, and the "admin" role can push and pull and also access
+These users can then be given Global "admin", "read-write" or "read-only" roles, or be assigned
+[Organization, Team or User repository roles using the API](/docker-trusted-registry/api/).
+
+The "read-only" role can pull all images from the registry, "read-write" can
+push and pull all images, and the "admin" role can push and pull and also access
 the web administration UI and metrics dashboard.
+
+When you create users that will be assigned roles via the API, you do not need
+to select one of the roles on the DTR web admin UI.
 
 ![Managed authentication settings page</admin/settings#auth>](../assets/admin-settings-authentication-basic.png)
 
 * Choose the appropriate button to add one user, or to upload a CSV file containing username,
   password pairs, and selection boxes for "admin", "read-write", and "read-only" roles.
+* You can also create, or allow others to create the username, password pair using the
+ [Account API](/docker-trusted-registry/api/dtr_1_3_accounts/#create-an-account)
 
 ### LDAP authentication
 
@@ -342,12 +349,17 @@ Interval*. User passwords are not transferred during syncing; DTR will defer to 
 
 > **Note**: LDAP syncing does not create new user accounts or teams in DTR. It
 > will only manage existing teams that have been specified to sync with LDAP.
+> You can use the [DTR APIs](/docker-trusted-registry/api/)
+> to create new users and teams from your LDAP server.
 
 You can configure the "userFilter" to select the set of users that are candidates
-for each of the "admin", "read-write", and "read-only" roles. Unlike "Managed"
+for each of the "admin", global "read-write", and global "read-only" roles. Unlike "Managed"
 authentication, the "admin" role is separate from the registry access roles, so
 LDAP users in the "admin" role won't have access to DTR images unless they are
 also given the "read-write" or "read-only" role.
+
+Alternativly, you can assign
+[Organization, Team or User repository roles using the API](/docker-trusted-registry/api/).
 
 Because connecting to LDAP involves existing infrastructure external to DTR and
 Docker, you will need to gather the details required to configure DTR for your
