@@ -27,6 +27,14 @@ organizing the options for configuring:
 * Your DTR license
 * Authentication settings
 
+> **Note:**
+> Saving changes you've made to settings may restart various services, as follows:
+> * General settings: full DTR restart
+> * License change: full DTR restart
+> * SSL change: Nginx reload
+> * Storage config: only registries restart
+> * Authentication config: no restart
+
 
 ## General Settings
 
@@ -294,10 +302,6 @@ by the [Registry 2.0](http://docs.docker.com/registry/configuration/).
 `/var/local/dtr/image-storage`. The default value of this root directory is
 `/local`, so the full path to it is `/var/local/dtr/image-storage/local`.
 
-> **Note:**
-> Saving changes you've made to settings will restart the Docker Trusted Registry
-> instance. The restart may cause a brief interruption for users of the image
-> storage system.
 
 ## Authentication
 
