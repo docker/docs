@@ -42,7 +42,7 @@ When the DTR web admin tool is used to assign users global "read-only",
 "read-write", or managed "admin" roles, they will have that access level to all
 repositories. You can access and modify these roles with the API, using the
 `_global` organization. However, you must have admin access in order to view and
-edit the `_global` organization
+edit the `_global` organization.
 
 
 ### Organization accounts
@@ -99,7 +99,7 @@ other organization’s team to a team within the owning organization.
   
 ### Authentication
 
-Clients authenticate API requests by providing Basic Auth credentials (i.e.,
+Clients authenticate API requests by providing Basic Auth credentials (
 username and password) via an "Authorization" header for each request.
 
 ```bash
