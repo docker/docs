@@ -286,7 +286,7 @@ near the top of the page, the UI will change to reflect the configuration settin
 appropriate to the selected method.
 
 You can either use the storage specific input boxes to configure the most common settngs
-for local filesystem, s3 or azure storage backends,
+for local filesystem, S3 or azure storage backends,
 or use the full Yaml configuration file upload to have more detailed control.
 
 You can view the current `storage.yaml` file on your DTR Docker host in the `/usr/local/etc/dtr/`
