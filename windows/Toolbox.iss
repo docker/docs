@@ -2,39 +2,42 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Docker Toolbox"
+<<<<<<< HEAD
 #define MyAppVersion "1.8.1b"
+=======
+>>>>>>> docker-build
 #define MyAppPublisher "Docker"
 #define MyAppURL "https://docker.com"
 #define MyAppContact "https://docs.docker.com"
 
-#define b2dIsoPath ".\bundle\Boot2Docker\boot2docker.iso"
+#define b2dIsoPath "..\bundle\boot2docker.iso"
 
-#define dockerCli ".\bundle\docker\docker.exe"
-#define dockerMachineCli ".\bundle\docker\docker-machine.exe"
+#define dockerCli "..\bundle\docker.exe"
+#define dockerMachineCli "..\bundle\docker-machine.exe"
 
-#define kitematic ".\bundle\kitematic"
+#define kitematic "..\bundle\kitematic"
 
-#define msysGit ".\bundle\msysGit\Git.exe"
+#define msysGit "..\bundle\Git.exe"
 
-#define virtualBoxCommon ".\bundle\VirtualBox\common.cab"
-#define virtualBoxMsi ".\bundle\VirtualBox\VirtualBox_amd64.msi"
+#define virtualBoxCommon "..\bundle\common.cab"
+#define virtualBoxMsi "..\bundle\VirtualBox_amd64.msi"
 
-#define EventStartedFile FileOpen(".\bundle\started.txt")
+#define EventStartedFile FileOpen("..\bundle\started.txt")
 #define EventStartedData = FileRead(EventStartedFile)
 #expr FileClose(EventStartedFile)
 #undef EventStartedFile
 
-#define EventFinishedFile FileOpen(".\bundle\finished.txt")
+#define EventFinishedFile FileOpen("..\bundle\finished.txt")
 #define EventFinishedData = FileRead(EventFinishedFile)
 #expr FileClose(EventFinishedFile)
-#undef EventFinishedFile  
+#undef EventFinishedFile
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{FC4417F0-D7F3-48DB-BCE1-F5ED5BAFFD91}
 AppCopyright={#MyAppPublisher}
+AppId={{FC4417F0-D7F3-48DB-BCE1-F5ED5BAFFD91}
 AppContact={#MyAppContact}
 AppComments={#MyAppURL}
 AppName={#MyAppName}
@@ -53,7 +56,7 @@ DisableProgramGroupPage=yes
 ;InfoBeforeFile=.\LICENSE
 ;DisableFinishedPage
 ;InfoAfterFile=
-OutputBaseFilename=DockerToolbox-{#MyAppVersion}
+OutputBaseFilename=DockerToolbox
 Compression=lzma
 SolidCompression=yes
 WizardImageFile=windows-installer-side.bmp
@@ -66,7 +69,7 @@ WizardImageBackColor=$22EBB8
 ; in the "Add/Remove" list:
 UninstallDisplayIcon={app}\unins000.exe
 
-SignTool=ksign /d $q{#MyAppName}$q /du $q{#MyAppURL}$q $f
+; SignTool=ksign /d $q{#MyAppName}$q /du $q{#MyAppURL}$q $f
 
 SetupIconFile=toolbox.ico
 

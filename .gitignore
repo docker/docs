@@ -19,3 +19,6 @@ build/
 xcuserdata
 profile
 *.moved-aside
+
+# output
+dist
