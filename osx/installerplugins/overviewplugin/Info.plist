@@ -28,5 +28,9 @@
 	<string>overviewplugin</string>
 	<key>NSPrincipalClass</key>
 	<string>InstallerSection</string>
+	<key>Installer Version</key>
+	<string>%INSTALLER_VERSION%</string>
+	<key>Mixpanel Token</key>
+	<string>%MIXPANEL_TOKEN%</string>
 </dict>
 </plist>

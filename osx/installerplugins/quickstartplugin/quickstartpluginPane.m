@@ -16,6 +16,8 @@
 }
 
 - (void) willEnterPane:(InstallerSectionDirection)dir {
+    self.previousEnabled = NO;
+    
     BOOL kitematicInstalled = [[NSFileManager defaultManager] fileExistsAtPath:@"/Applications/Docker/Kitematic (Beta).app"];
     BOOL quickstartInstalled = [[NSFileManager defaultManager] fileExistsAtPath:@"/Applications/Docker/Docker Quickstart Terminal.app"];
     

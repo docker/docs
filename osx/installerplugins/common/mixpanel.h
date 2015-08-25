@@ -19,7 +19,7 @@
 
 @implementation Mixpanel
 
-+ (NSString *) trackingUUID {
++ (NSString *) uuid {
     NSString *cachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *cacheDirPath = [NSString pathWithComponents:[NSArray arrayWithObjects:cachePath, @"io.docker.pkg.toolbox", nil]];
     NSString *cacheFilePath = [NSString pathWithComponents:[NSArray arrayWithObjects:cacheDirPath, @"id", nil]];
@@ -37,7 +37,7 @@
 
 + (void) trackEvent:(NSString *)name forPane:(InstallerPane*)pane {
     BOOL trackingDisabled = [[[[pane section] sharedDictionary] objectForKey:@"disableTracking"] boolValue];
-    NSString *uuid = [self trackingUUID];
+    NSString *uuid = [self uuid];
     
     if (!uuid || trackingDisabled) {
         return;
