@@ -38,9 +38,12 @@ User owned repositories can only be accessed by the owner and other
 individual user accounts, i.e., you cannot grant access to a user-owned
 repository to a team of users in an organization. If a repository requires this level of control, consider moving it within an organization namespace.
 
-Users that have been given the Global "read-only", "read-write", or Managed "admin"
-roles using the DTR web admin tool will have that access to all repositories. These
-roles can be accessed or modified using the API using the `_global` organization.
+When the DTR web admin tool is used to assign users global "read-only",
+"read-write", or managed "admin" roles, they will have that access level to all
+repositories. You can access and modify these roles with the API, using the
+`_global` organization. However, you must have admin access in order to view and
+edit the `_global` organization
+
 
 ### Organization accounts
 
