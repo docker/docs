@@ -239,7 +239,7 @@ and other proprietary information before sending it.
 `$ sudo bash -c "$(docker run docker/trusted-registry diagnostics)" > diagnostics.zip`
 
 > **Warning:** These diagnostics files may contain secrets that you need to remove
-> before passing on - such as raw container log files, azure storage credentials, or passwords that may be
+> before passing on - such as raw container log files, Azure storage credentials, or passwords that may be
 > sent to non-DTR containers using the `docker run -e PASSWORD=asdf` environment variable
 > options.
 
@@ -264,7 +264,7 @@ Export the DTR configuration files for backup or diagnostics use.
 `$ sudo bash -c "$(docker run docker/trusted-registry export-settings)" > export-settings.tar.gz`
 
 > **Warning:** These diagnostics files may contain secrets that you need to remove
-> before passing on - such as azure storage credentials.
+> before passing on - such as Azure storage credentials.
 
 Stream to STDOUT a gzipped tar file containing the DTR configuration files from `/usr/local/etc/dtr/`:
 
@@ -282,7 +282,7 @@ To debug client Docker daemon communication issues with DTR, we also provide
 a diagnostics tool to be run on the client Docker daemon.
 
 > **Warning:** These diagnostics files may contain secrets that you need to remove
-> before passing on - such as raw container log files, azure storage credentials, or passwords that may be
+> before passing on - such as raw container log files, Azure storage credentials, or passwords that may be
 > sent to non-DTR containers using the `docker run -e PASSWORD=asdf` environment variable
 > options.
 
