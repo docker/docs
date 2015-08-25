@@ -35,18 +35,25 @@
     return uuid;
 }
 
-+ (void) trackEvent:(NSString *)name forPane:(InstallerPane*)pane {
++ (void) trackEvent:(NSString *)name forPane:(InstallerPane*)pane withProperties:(NSDictionary *)properties {
     BOOL trackingDisabled = [[[[pane section] sharedDictionary] objectForKey:@"disableTracking"] boolValue];
     NSString *uuid = [self uuid];
     
     if (!uuid || trackingDisabled) {
         return;
     }
+    
+    NSString *props = @"";
+    for (NSString *key in properties) {
+        props = [props stringByAppendingFormat:@",\"%@\": \"%@\"", key, [properties objectForKey:key]];
+    }
 
     NSBundle* bundle = [[pane section] bundle];
     NSString* token = [bundle objectForInfoDictionaryKey:@"Mixpanel Token"];
     NSString* installerVersion = [bundle objectForInfoDictionaryKey:@"Installer Version"];
-    NSString* payload = [NSString stringWithFormat:@"{\"event\": \"%@\", \"properties\": {\"token\": \"%@\", \"distinct_id\": \"%@\", \"os\": \"darwin\", \"version\": \"%@\"}}", name, token, uuid, installerVersion];
+    NSString* payload = [NSString stringWithFormat:@"{\"event\": \"%@\", \"properties\": {\"token\": \"%@\", \"distinct_id\": \"%@\", \"os\": \"darwin\", \"version\": \"%@\" %@}}", name, token, uuid, installerVersion, props];
+    
+    NSLog(@"%@", payload);
     
     NSData * data = [payload dataUsingEncoding:NSUTF8StringEncoding];
     NSString* base64Encoded = [data base64EncodedStringWithOptions:0];
@@ -54,6 +61,11 @@
     
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {}];
+
+}
+
++ (void) trackEvent:(NSString *)name forPane:(InstallerPane*)pane {
+    [self trackEvent:name forPane:pane withProperties:nil];
 }
 
 @end

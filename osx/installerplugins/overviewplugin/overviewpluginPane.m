@@ -9,7 +9,17 @@
 #import "overviewpluginPane.h"
 #import "mixpanel.h"
 
+@interface overviewpluginPane()
+@property BOOL firstTime;
+@end
+
 @implementation overviewpluginPane
+
+- (id) init {
+    self.firstTime = YES;
+    self = [super init];
+    return self;
+}
 
 - (NSString *)title {
     return [[NSBundle bundleForClass:[self class]] localizedStringForKey:@"PaneTitle" value:nil table:nil];
@@ -21,8 +31,10 @@
     [formattedHTML addAttribute:NSFontAttributeName value:[NSFont systemFontOfSize:13.0f] range:NSMakeRange(0, formattedHTML.length)];
 
     [[self.textView textStorage] setAttributedString:formattedHTML];
-    
-    [Mixpanel trackEvent:@"Installer Started" forPane:self];
+    if (self.firstTime) {
+        [Mixpanel trackEvent:@"Installer Started" forPane:self];
+        self.firstTime = YES;
+    }
 }
 
 - (void) willExitPane:(InstallerSectionDirection)dir {

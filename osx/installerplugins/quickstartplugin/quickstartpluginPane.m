@@ -41,12 +41,12 @@
 
 - (void) willExitPane:(InstallerSectionDirection)dir {
     if (dir == InstallerDirectionForward) {
-        [Mixpanel trackEvent:@"Installer Finished" forPane:self];
+        [Mixpanel trackEvent:@"Installer Finished" forPane:self withProperties:[[NSDictionary alloc] initWithObjectsAndKeys:@"Continue Button", @"action", nil]];
     }
 }
 
 - (IBAction)quickstartTerminalClicked:(id)sender {
-    [Mixpanel trackEvent:@"Opened Docker Quickstart Terminal" forPane:self];
+    [Mixpanel trackEvent:@"Installer Finished" forPane:self withProperties:[[NSDictionary alloc] initWithObjectsAndKeys:@"Quickstart Terminal", @"action", nil]];
     NSTask *task = [[NSTask alloc] init];
     task.launchPath = @"/usr/bin/open";
     task.arguments = @[@"/Applications/Docker/Docker Quickstart Terminal.app"];
@@ -54,7 +54,7 @@
 }
 
 - (IBAction)kitematicClicked:(id)sender {
-    [Mixpanel trackEvent:@"Opened Kitematic" forPane:self];
+    [Mixpanel trackEvent:@"Installer Finished" forPane:self withProperties:[[NSDictionary alloc] initWithObjectsAndKeys:@"Kitematic", @"action", nil]];
     [[NSWorkspace sharedWorkspace] launchApplication:@"Kitematic (Beta)"];
 }
 
