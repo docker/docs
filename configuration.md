@@ -38,7 +38,7 @@ organizing the options for configuring:
 
 ## General Settings
 
-![Domain and Ports page</admin/settings#http>](../assets/admin-settings-http.png)
+![Domain and Ports page</admin/settings#http>](../assets/admin-settings.png)
 
 * *Domain Name*: **required** defaults to an empty string, the fully qualified domain name assigned to the DTR host.
 * *HTTP Port*: defaults to 80, used as the entry point for the image storage service. To see load balancer status, you can query

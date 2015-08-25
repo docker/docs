@@ -1,11 +1,11 @@
 
 SIZE="1280px"
 HOST=dtr.domain.com
-HOSTIP:=10.10.10.151
+HOSTIP:=192.168.18.131
 HOSTURL=https://$(HOST)
 IMAGE=svendowideit/screenshot
 #IMAGE=screenshot
-RUNOPTS=docker run --rm -v $(CURDIR):/srv --add-host $(HOST):10.10.10.151 
+RUNOPTS=docker run --rm -v $(CURDIR):/srv --add-host $(HOST):$(HOSTIP)
 RUN=$(RUNOPTS) $(IMAGE)
 
 all:
