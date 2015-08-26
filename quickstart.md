@@ -36,6 +36,48 @@ Important notes for first time users:
     * Take a look at the env.sh within the zip file for instructions (should be familiar if you've used machine)
 
 
+## User Supplied Certificates
+
+Orca uses two separate root CAs for access control - one for Swarm,
+and one for the Orca server itself.  The motivation for the dual root
+certificates is to differentiate Docker remote API access to Orca
+vs. Swarm.  Orca implements ACL and audit logging on a per-users basis
+which are not offered in Swarm or the engines.  Swarm and the engine
+proxies trust only the Swarm Root CA, while the Orca server trusts both
+Root CAs.  Admins can access Orca, Swarm and the engines while normal
+users are only granted access to Orca.
+
+In Orca v1.0 we support user provided externally signed certificates
+for the Orca server.  This cert is used by the main management web UI
+(visible to your browser when you connect) as well as the Docker remote
+API (visible to the Docker CLI and friends.)  The Swarm Root CA is
+always manged by Orca itself in this release.  This external Orca Root
+CA model supports customers managing their own CA, or purchasing certs
+from a commercial CA.  When operating in this mode, Orca can not generate
+regular user certificates, as those must be managed and signed externally,
+however admin account certs can be generated as they are signed by the
+internal Swarm Root CA.  Normal user accounts should be signed by the
+same external Root CA (or a trusted intermediary), and the public keys
+manually added through the UI.
+
+To install Orca with an external Root CA, place the following files on the
+engine host where you will install Orca **before** running the install:
+
+* /var/lib/docker/orca\_ssl/orca\_ca.pem - Your Root CA Certificate chain (including any intermediaries)
+* /var/lib/docker/orca\_ssl/orca\_controller.pem - Your signed Orca server cert
+* /var/lib/docker/orca\_ssl/orca\_controller\_key.pem - Your Orca server private key
+
+After setting up these files on the host, you can install with the "--external-orca-ca" flag.
+
+```bash
+docker run --rm -it \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    --name orca-bootstrap \
+    dockerorca/orca-bootstrap \
+    install --swarm-port 3376 -i --external-orca-ca
+```
+
+
 # Adding Nodes to the Cluster
 To add capacity to your cluster, run the following on the engine you want to add (**not** the engine where you installed Orca above)
 ```bash
