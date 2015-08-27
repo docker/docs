@@ -61,3 +61,6 @@ docs-build:
 #	echo "$(AWS_S3_BUCKET)" > AWS_S3_BUCKET
 #	echo "$(GITCOMMIT)" > GITCOMMIT
 	docker build -t "$(DOCKER_DOCS_IMAGE)" .
+
+images:
+	$(MAKE) -C assets

@@ -295,8 +295,9 @@ directory.
 ### Filesystem settings
 
 The [filesystem storage backend](/registry/configuration/#filesystem)
-has only one setting - the "Storage directory", the root directory in which all
-registry files are stored.
+has only one setting - the "Storage directory", the subdirectory of `/var/local/dtr/image-storage`
+in which all registry files are stored.
+The default value of `/local` means the files are stored in `/var/local/dtr/image-storage/local`.
 
 ### S3 settings
 
