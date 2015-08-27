@@ -283,9 +283,7 @@ by both the DTR Administrator web interface and the DTR Registry server.
 
 After the server restarts, you will again need to allow the connection to the untrusted DTR web admin site.
 
-![http settings page</admin/settings#http>](../assets/admin-settings-http-unlicensed.png)
-
-Lastly, you will see a warning notifying you that this instance of DTR is
+Lastly, you will see a red warning notifying you that this instance of DTR is
 unlicensed. You'll correct this in the next step.
 
 ### Add your license
