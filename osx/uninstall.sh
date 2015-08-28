@@ -8,7 +8,7 @@ if [ "${USER}" != "root" ]; then
 fi
 
 while true; do
-  read -p "Remove all VMs? (Y/N): " yn
+  read -p "Remove all Docker Machine VMs? (Y/N): " yn
   case $yn in
     [Yy]* ) docker-machine rm -f $(docker-machine ls -q); break;;
     [Nn]* ) break;;
