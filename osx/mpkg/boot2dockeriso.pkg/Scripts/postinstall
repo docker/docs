@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -o pipefail
-
 CONSOLE_USER=$(ps aux | grep console | grep -v grep | cut -d' ' -f1)
 
 # Place boot2docker ISO in cache
