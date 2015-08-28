@@ -122,6 +122,23 @@ begin
     SaveStringToFile(filepath, AnsiString(Result), False);
 end;
 
+function WindowsVersionString(): String;
+var
+	ResultCode: Integer;
+	lines : TArrayOfString;
+begin
+	if not Exec(ExpandConstant('{cmd}'), ExpandConstant('/c wmic os get caption | more +1 > C:\windows-version.txt'), '', SW_HIDE, ewWaitUntilTerminated, ResultCode) then begin
+		Result := 'N/A';
+		exit;
+	end;
+
+	if LoadStringsFromFile(ExpandConstant('C:\windows-version.txt'), lines) then begin
+		Result := lines[0];
+	end else begin
+		Result := 'N/A'
+	end;
+end;
+
 procedure TrackEvent(name: String);
 var
   payload: String;
@@ -130,7 +147,7 @@ begin
   if TrackingDisabled or WizardSilent() then
     exit;
   try
-    payload := Encode64(Format(ExpandConstant('{{"event": "%s", "properties": {{"token": "{#MixpanelToken}", "distinct_id": "%s", "os": "win32", "version": "{#MyAppVersion}"}}'), [name, uuid()]));
+    payload := Encode64(Format(ExpandConstant('{{"event": "%s", "properties": {{"token": "{#MixpanelToken}", "distinct_id": "%s", "os": "win32", "os version": "%s", "version": "{#MyAppVersion}"}}'), [name, uuid(), WindowsVersionString()]));
     WinHttpReq := CreateOleObject('WinHttp.WinHttpRequest.5.1');
     WinHttpReq.Open('POST', 'https://api.mixpanel.com/track/?data=' + payload, false);
     WinHttpReq.SetRequestHeader('Content-Type', 'application/json');
@@ -210,7 +227,7 @@ begin
   TrackingCheckBox.Left := WizardForm.WelcomeLabel2.Left;
   TrackingCheckBox.Width := WizardForm.WelcomeLabel2.Width;
   TrackingCheckBox.Height := 40;
-  TrackingCheckBox.Caption := 'Send one-time anonymous metrics to improve this installer.';
+  TrackingCheckBox.Caption := 'Send one-time anonymous data to improve this installer.';
   TrackingCheckBox.Checked := True;
   TrackingCheckBox.Parent := WelcomePage.Surface;
   TrackingCheckBox.OnClick := @TrackingCheckboxClicked;
@@ -326,7 +343,7 @@ begin
     end
     else begin
       TrackEvent('Boot2Docker Migration Failed');
-      MsgBox('Migration of Boot2Docker VM failed. Please file an issue with the migration logs at https://github.com/docker/machine/issues/new.', mbCriticalError, MB_OK);
+      MsgBox('Migration of Boot2Docker VM failed. Please file an issue with the migration logs at https://github.com/docker/toolbox/issues/new.', mbCriticalError, MB_OK);
       Exec(ExpandConstant('{win}\notepad.exe'), ExpandConstant('{localappdata}\Temp\toolbox-migration-logs.txt'), '', SW_SHOW, ewNoWait, ResultCode)
       Result := false
       exit;
@@ -362,4 +379,3 @@ begin
       MigrateVM();
   end
 end;
-
