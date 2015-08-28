@@ -37,14 +37,14 @@ var cmdAddKey = &cobra.Command{
 	Use:   "add [ GUN ] <role>",
 	Short: "Add key to role.",
 	Long:  "Adds a key to the given role.",
-	Run:   metaReplaceKey,
+	Run:   metaAddKey,
 }
 
 var cmdRemoveKey = &cobra.Command{
 	Use:   "remove [ GUN ] <role>",
 	Short: "Remove a key role.",
 	Long:  "Removes a key from the given role.",
-	Run:   metaReplaceKey,
+	Run:   metaRemoveKey,
 }
 
 func metaRoleDisplay(cmd *cobra.Command, args []string) {
@@ -63,6 +63,7 @@ func metaRoleDisplay(cmd *cobra.Command, args []string) {
 	}
 }
 
+// metaReplaceKey rotates the key for the given GUN and role.
 func metaReplaceKey(cmd *cobra.Command, args []string) {
 	if len(args) < 2 {
 		cmd.Usage()
@@ -70,10 +71,17 @@ func metaReplaceKey(cmd *cobra.Command, args []string) {
 	}
 
 	gun := args[0]
+	role := args[1]
 	parseConfig()
 
-	_, err := notaryclient.NewNotaryRepository(trustDir, gun, remoteTrustServer, getTransport(), retriever)
+	r, err := notaryclient.NewNotaryRepository(trustDir, gun, remoteTrustServer, getTransport(), retriever)
 	if err != nil {
+		fatalf(err.Error())
+	}
+	// args[2:] should be a list of paths to public key files.
+	// they will be imported into the TUF repo for the given
+	// role, replaceing any existing keys.
+	if err := r.ReplaceKeys(role, args[2:]...); err != nil {
 		fatalf(err.Error())
 	}
 }

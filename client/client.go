@@ -621,22 +621,28 @@ func (r *NotaryRepository) RemoveKeys(role string, keyIDs ...string) error {
 // ReplaceKey removes all existing keys associated with role and adds
 // the keys specified by keyIDs to the role. These changes are staged
 // in a changelist until publish is called.
-func (r *NotaryRepository) ReplaceKeys(role string, keyIDs ...string) error {
-	return r.rootKeyChange(role, changelist.ActionCreate, keyIDs...)
+func (r *NotaryRepository) ReplaceKeys(role string) error {
+	if role == "root" {
+		// need to create an entirely new root key and certificate
+		var key data.PublicKey = nil
+		return r.rootKeyChange(role, changelist.ActionCreate, key)
+	} else if role == "targets" || role == "snapshot" {
+		// This is currently hardcoding the targets and snapshots keys to ECDSA
+		// Targets and snapshot keys are always generated locally.
+		key, err := r.cryptoService.Create(role, data.ECDSAKey)
+		if err != nil {
+			return err
+		}
+		return r.rootKeyChange(role, changelist.ActionCreate, key)
+	}
 }
 
-func (r *NotaryRepository) rootKeyChange(role, action string, keyIDs ...string) error {
+func (r *NotaryRepository) rootKeyChange(role, action string, keys ...data.PublicKey) error {
 	cl, err := changelist.NewFileChangelist(filepath.Join(r.tufRepoPath, "changelist"))
 	if err != nil {
 		return err
 	}
 	defer cl.Close()
-
-	keys := make([]data.PublicKey, 0, len(keyIDs))
-	for _, kID := range keyIDs {
-		logrus.Debug(kID)
-		// get PUBLIC key and append it to keys
-	}
 
 	meta := changelist.TufRootData{
 		RoleName: role,
