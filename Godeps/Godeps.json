@@ -76,6 +76,16 @@
 			"Rev": "fed58bd2d3c096055c0e69c2fb86c9a4965d1b8b"
 		},
 		{
+			"ImportPath": "github.com/docker/distribution/registry/client/auth",
+			"Comment": "v2.0.0-353-gfed58bd",
+			"Rev": "fed58bd2d3c096055c0e69c2fb86c9a4965d1b8b"
+		},
+		{
+			"ImportPath": "github.com/docker/distribution/registry/client/transport",
+			"Comment": "v2.0.0-353-gfed58bd",
+			"Rev": "fed58bd2d3c096055c0e69c2fb86c9a4965d1b8b"
+		},
+		{
 			"ImportPath": "github.com/docker/distribution/uuid",
 			"Comment": "v2.0.0-353-gfed58bd",
 			"Rev": "fed58bd2d3c096055c0e69c2fb86c9a4965d1b8b"
