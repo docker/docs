@@ -1,8 +1,3 @@
-# Toolbox output
-DockerToolbox*.pkg
-windows/Output/**
-windows/bundle/**
-
 # XCode projects
 .DS_Store
 build/
