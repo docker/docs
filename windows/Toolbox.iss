@@ -196,20 +196,17 @@ end;
 procedure TrackingCheckBoxClicked(Sender: TObject);
 begin
   if TrackingCheckBox.Checked then begin
-      TrackEvent('Enabled Tracking');
-      TrackingDisabled := False;
+		TrackingDisabled := False;
+    TrackEvent('Enabled Tracking');
   end else begin
-      TrackEvent('Disabled Tracking');
-      TrackingDisabled := True;
+    TrackEvent('Disabled Tracking');
+    TrackingDisabled := True;
   end;
 end;
 
 procedure InitializeWizard;
 var
-  LabelFolder: TLabel;
   WelcomePage: TWizardPage;
-  InstallHelpCheckBox: TNewCheckBox;
-  FolderToInstall: TNewEdit;
 begin
 	DockerInstallDocs := TLabel.Create(WizardForm);
 	DockerInstallDocs.Parent := WizardForm;
@@ -257,8 +254,6 @@ begin
 end;
 
 function InitializeSetup(): boolean;
-var
-  ResultCode: integer;
 begin
   TrackEvent('Installer Started');
   Result := True;
@@ -368,8 +363,6 @@ end;
 #include "modpath.iss"
 
 procedure CurStepChanged(CurStep: TSetupStep);
-var
-  migrationSuccess: Boolean;
 begin
 	if CurStep = ssPostInstall then
   begin
