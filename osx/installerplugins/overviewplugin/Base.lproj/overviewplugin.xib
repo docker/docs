@@ -31,15 +31,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView horizontalCompressionResistancePriority="250" editable="NO" importsGraphics="NO" verticallyResizable="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="cgA-DY-Gw8">
-                                <rect key="frame" x="0.0" y="0.0" width="223" height="100"/>
+                                <rect key="frame" x="0.0" y="0.0" width="223" height="283"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <size key="minSize" width="378" height="283"/>
-                                <size key="maxSize" width="463" height="283"/>
+                                <size key="maxSize" width="463" height="433"/>
                                 <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                 <size key="minSize" width="378" height="283"/>
-                                <size key="maxSize" width="463" height="283"/>
+                                <size key="maxSize" width="463" height="433"/>
                             </textView>
                         </subviews>
                         <animations/>
@@ -60,7 +60,7 @@
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h63-BP-4UP">
                     <rect key="frame" x="18" y="11" width="382" height="24"/>
                     <animations/>
-                    <buttonCell key="cell" type="check" title="Send one-time anonymous metrics to improve this installer." bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Jjb-SP-XI0">
+                    <buttonCell key="cell" type="check" title="Send one-time anonymous data to improve this installer." bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Jjb-SP-XI0">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>

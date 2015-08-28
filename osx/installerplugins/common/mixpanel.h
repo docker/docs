@@ -49,13 +49,13 @@
     for (NSString *key in properties) {
         props = [props stringByAppendingFormat:@",\"%@\": \"%@\"", key, [properties objectForKey:key]];
     }
+    
+    NSString *osVersion = [@"Mac OS X " stringByAppendingString:[[[[NSProcessInfo processInfo] operatingSystemVersionString] componentsSeparatedByString:@" "] objectAtIndex:1]];
 
     NSBundle* bundle = [[pane section] bundle];
     NSString* token = [bundle objectForInfoDictionaryKey:@"Mixpanel Token"];
     NSString* installerVersion = [bundle objectForInfoDictionaryKey:@"Installer Version"];
-    NSString* payload = [NSString stringWithFormat:@"{\"event\": \"%@\", \"properties\": {\"token\": \"%@\", \"distinct_id\": \"%@\", \"os\": \"darwin\", \"version\": \"%@\" %@}}", name, token, uuid, installerVersion, props];
-    
-    NSLog(@"%@", payload);
+    NSString* payload = [NSString stringWithFormat:@"{\"event\": \"%@\", \"properties\": {\"token\": \"%@\", \"distinct_id\": \"%@\", \"os\": \"darwin\", \"os version\":\"%@\", \"version\": \"%@\" %@}}", name, token, uuid, osVersion, installerVersion, props];
     
     NSData * data = [payload dataUsingEncoding:NSUTF8StringEncoding];
     NSString* base64Encoded = [data base64EncodedStringWithOptions:0];
