@@ -33,7 +33,7 @@
     [[self.textView textStorage] setAttributedString:formattedHTML];
     if (self.firstTime) {
         [Mixpanel trackEvent:@"Installer Started" forPane:self];
-        self.firstTime = YES;
+        self.firstTime = NO;
     }
 }
 
@@ -41,15 +41,18 @@
     if (dir != InstallerDirectionForward) {
         return;
     }
-    
-    if (self.checkbox.state != NSOnState) {
+
+    [Mixpanel trackEvent:@"Continued from Overview" forPane:self];
+}
+
+- (IBAction)checkboxChanged:(id)sender {
+    if ([(NSButton*)sender state] == NSOnState) {
+        [Mixpanel trackEvent:@"Enabled Tracking" forPane:self];
+        [[[self section] sharedDictionary] removeObjectForKey:@"disableTracking"];
+    } else {
         [Mixpanel trackEvent:@"Disabled Tracking" forPane:self];
         [[[self section] sharedDictionary] setObject:[NSNumber numberWithBool:YES] forKey:@"disableTracking"];
-        return;
     }
-    
-    [[[self section] sharedDictionary] removeObjectForKey:@"disableTracking"];
-    [Mixpanel trackEvent:@"Enabled Tracking" forPane:self];
 }
 
 @end

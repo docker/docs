@@ -9,6 +9,7 @@
 #import <InstallerPlugins/InstallerPlugins.h>
 
 @interface overviewpluginPane : InstallerPane
+- (IBAction)checkboxChanged:(id)sender;
 @property (unsafe_unretained) IBOutlet NSTextView *textView;
 @property (weak) IBOutlet NSButton *checkbox;
 @end

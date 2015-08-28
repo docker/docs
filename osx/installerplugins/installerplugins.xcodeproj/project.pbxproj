@@ -51,9 +51,9 @@
 		1B4C91BE1B85198100A06068 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/quickstartplugin.xib; sourceTree = "<group>"; };
 		1B4C91C11B85198100A06068 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1B4C91C31B85198100A06068 /* InstallerSections.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = InstallerSections.plist; sourceTree = "<group>"; };
+		1B763C8B1B8F7F2A00981AA8 /* informationplugin.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = informationplugin.bundle; path = /Users/jmorgan/workspace/toolbox/osx/installerplugins/build/Debug/informationplugin.bundle; sourceTree = "<absolute>"; };
 		1B8417E71B85261F00B1FA4D /* kitematic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kitematic.png; sourceTree = "<group>"; };
 		1B8417E81B85261F00B1FA4D /* quickstart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = quickstart.png; sourceTree = "<group>"; };
-		1BF1029E1B8B940500FCB650 /* informationplugin.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = informationplugin.bundle; path = /Users/jmorgan/workspace/toolbox/osx/installerplugins/../mpkg/Plugins/informationplugin.bundle; sourceTree = "<absolute>"; };
 		1BF102BB1B8BDEDA00FCB650 /* overviewplugin.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = overviewplugin.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BF102BE1B8BDEDA00FCB650 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BF102C01B8BDEDA00FCB650 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -241,7 +241,7 @@
 			);
 			name = informationplugin;
 			productName = informationplugin;
-			productReference = 1BF1029E1B8B940500FCB650 /* informationplugin.bundle */;
+			productReference = 1B763C8B1B8F7F2A00981AA8 /* informationplugin.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		1BF102BA1B8BDEDA00FCB650 /* overviewplugin */ = {
@@ -701,6 +701,7 @@
 				1BF102CF1B8BDEDA00FCB650 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

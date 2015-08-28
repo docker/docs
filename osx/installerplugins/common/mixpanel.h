@@ -20,29 +20,31 @@
 @implementation Mixpanel
 
 + (NSString *) uuid {
-    NSString *cachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *cacheDirPath = [NSString pathWithComponents:[NSArray arrayWithObjects:cachePath, @"io.docker.pkg.toolbox", nil]];
-    NSString *cacheFilePath = [NSString pathWithComponents:[NSArray arrayWithObjects:cacheDirPath, @"id", nil]];
+    NSString *appPath = [NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *appDirPath = [NSString pathWithComponents:[NSArray arrayWithObjects:appPath, @"DockerToolbox", nil]];
+    NSString *appFilePath = [NSString pathWithComponents:[NSArray arrayWithObjects:appDirPath, @"id", nil]];
     
-    NSString *uuid = [NSString stringWithContentsOfFile:cacheFilePath encoding:NSUTF8StringEncoding error:nil];
+    NSString *uuid = [NSString stringWithContentsOfFile:appFilePath encoding:NSUTF8StringEncoding error:nil];
     if (!uuid || ![uuid length]) {
         uuid = [[NSUUID UUID] UUIDString];
+        [[NSFileManager defaultManager] createDirectoryAtPath:appDirPath withIntermediateDirectories:YES attributes:nil error:nil];
+        [uuid writeToFile:appFilePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
     }
-    
-    [[NSFileManager defaultManager] createDirectoryAtPath:cacheDirPath withIntermediateDirectories:YES attributes:nil error:nil];
-    [uuid writeToFile:cacheFilePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
     
     return uuid;
 }
 
 + (void) trackEvent:(NSString *)name forPane:(InstallerPane*)pane withProperties:(NSDictionary *)properties {
     BOOL trackingDisabled = [[[[pane section] sharedDictionary] objectForKey:@"disableTracking"] boolValue];
-    NSString *uuid = [self uuid];
-    
-    if (!uuid || trackingDisabled) {
+    if (trackingDisabled) {
         return;
     }
     
+    NSString *uuid = [self uuid];
+    if (!uuid) {
+        return;
+    }
+
     NSString *props = @"";
     for (NSString *key in properties) {
         props = [props stringByAppendingFormat:@",\"%@\": \"%@\"", key, [properties objectForKey:key]];

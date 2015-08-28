@@ -13,10 +13,10 @@
 'choiceBoot2DockerISO_msg' = 'Installs the boot2docker.iso into /usr/local/share/';
 
 'choiceDockerQuickstartTerminalAPP_title' = 'Docker Quickstart Terminal';
-'choiceDockerQuickstartTerminalAPP_msg' = 'Installs the Docker Quickstart Terminal application into /Applications/';
+'choiceDockerQuickstartTerminalAPP_msg' = 'Installs the Docker Quickstart Terminal application into /Applications/Docker/';
 
 'choiceKitematicAPP_title' = 'Kitematic %KITEMATICAPP_VERSION%';
-'choiceKitematicAPP_msg' = 'Installs Kitematic into /Applications/';
+'choiceKitematicAPP_msg' = 'Installs Kitematic into /Applications/Docker/';
 
 'choiceVBox_title' = 'Oracle VM VirtualBox %VBOX_VERSION%';
 'choiceVBox_msg' = 'Installs or Upgrades the Oracle VM VirtualBox application into /Applications if it is not already installed.';

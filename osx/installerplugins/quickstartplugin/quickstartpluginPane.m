@@ -15,9 +15,11 @@
 	return [[NSBundle bundleForClass:[self class]] localizedStringForKey:@"PaneTitle" value:nil table:nil];
 }
 
-- (void) willEnterPane:(InstallerSectionDirection)dir {
+- (void) didEnterPane:(InstallerSectionDirection)dir {
     self.previousEnabled = NO;
-    
+}
+
+- (void) willEnterPane:(InstallerSectionDirection)dir {
     BOOL kitematicInstalled = [[NSFileManager defaultManager] fileExistsAtPath:@"/Applications/Docker/Kitematic (Beta).app"];
     BOOL quickstartInstalled = [[NSFileManager defaultManager] fileExistsAtPath:@"/Applications/Docker/Docker Quickstart Terminal.app"];
     

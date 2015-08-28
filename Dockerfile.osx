@@ -18,8 +18,8 @@ RUN curl -fsSL https://github.com/mackyle/xar/archive/xar-1.6.1.tar.gz | tar xvz
 	./autogen.sh && ./configure && \
 	make && make install
 
-ENV VBOX_VERSION 5.0.2
-ENV VBOX_REV 102096
+ENV VBOX_VERSION 5.0.0
+ENV VBOX_REV 101573
 
 RUN curl -fsSL -o /vbox.dmg http://download.virtualbox.org/virtualbox/$VBOX_VERSION/VirtualBox-$VBOX_VERSION-$VBOX_REV-OSX.dmg \
 	&& echo "$(curl -fsSL 'http://download.virtualbox.org/virtualbox/'"$VBOX_VERSION"'/SHA256SUMS' | awk '$2 ~ /-OSX.dmg$/ { print $1 }') */vbox.dmg" | sha256sum -c -
@@ -68,10 +68,10 @@ RUN cd /mpkg/vbox && \
 	rm -rf vbox
 
 # Add components
-COPY mpkg/Distribution /mpkg/Distribution
+COPY osx/mpkg/Distribution /mpkg/Distribution
 
 # docker.pkg
-COPY mpkg/docker.pkg /mpkg/docker.pkg
+COPY osx/mpkg/docker.pkg /mpkg/docker.pkg
 RUN cd /mpkg/docker.pkg && \
 	mkdir rootfs && \
 	cd rootfs && \
@@ -89,7 +89,7 @@ RUN cd /mpkg/docker.pkg && \
 	rm -rf ./rootfs
 
 # kitematicapp.pkg
-COPY mpkg/kitematicapp.pkg /mpkg/kitematicapp.pkg
+COPY osx/mpkg/kitematicapp.pkg /mpkg/kitematicapp.pkg
 RUN cd /mpkg/kitematicapp.pkg && \
 	mkdir ./rootfs && \
 	cd ./rootfs && \
@@ -107,7 +107,7 @@ RUN cd /mpkg/kitematicapp.pkg && \
 	rm -rf ./rootfs
 
 # dockermachine.pkg
-COPY mpkg/dockermachine.pkg /mpkg/dockermachine.pkg
+COPY osx/mpkg/dockermachine.pkg /mpkg/dockermachine.pkg
 RUN cd /mpkg/dockermachine.pkg && \
 	mkdir rootfs && \
 	cd rootfs && \
@@ -125,7 +125,7 @@ RUN cd /mpkg/dockermachine.pkg && \
 	rm -rf ./rootfs
 
 # dockercompose.pkg
-COPY mpkg/dockercompose.pkg /mpkg/dockercompose.pkg
+COPY osx/mpkg/dockercompose.pkg /mpkg/dockercompose.pkg
 RUN cd /mpkg/dockercompose.pkg && \
 	mkdir rootfs && \
 	cd rootfs && \
@@ -143,7 +143,7 @@ RUN cd /mpkg/dockercompose.pkg && \
 	rm -rf ./rootfs
 
 # boot2dockeriso.pkg
-COPY mpkg/boot2dockeriso.pkg /mpkg/boot2dockeriso.pkg
+COPY osx/mpkg/boot2dockeriso.pkg /mpkg/boot2dockeriso.pkg
 RUN cd /mpkg/boot2dockeriso.pkg && \
   cd Scripts && find . | cpio -o --format odc | gzip -c > ../Scripts.bin && cd .. && \
   rm -r Scripts && mv Scripts.bin Scripts && \
@@ -161,8 +161,8 @@ RUN cd /mpkg/boot2dockeriso.pkg && \
 	rm -rf ./rootfs
 
 # dockerquickstartterminalapp.pkg
-COPY mpkg/dockerquickstartterminalapp.pkg /mpkg/dockerquickstartterminalapp.pkg
-COPY mpkg/quickstart.app /mpkg/quickstart.app
+COPY osx/mpkg/dockerquickstartterminalapp.pkg /mpkg/dockerquickstartterminalapp.pkg
+COPY osx/mpkg/quickstart.app /mpkg/quickstart.app
 RUN cd /mpkg/dockerquickstartterminalapp.pkg && \
 	mkdir ./rootfs && \
 	cd ./rootfs && \
@@ -177,8 +177,8 @@ RUN cd /mpkg/dockerquickstartterminalapp.pkg && \
 	cd .. && \
 	rm -rf ./rootfs
 
-COPY mpkg/Resources /mpkg/Resources
-COPY mpkg/Plugins /mpkg/Plugins
+COPY osx/mpkg/Resources /mpkg/Resources
+COPY osx/mpkg/Plugins /mpkg/Plugins
 
 RUN sed -i \
     -e "s/%MIXPANEL_TOKEN%/$MIXPANEL_TOKEN/g" \

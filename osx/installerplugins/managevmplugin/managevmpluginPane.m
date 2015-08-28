@@ -32,15 +32,15 @@ NSString *dockerMachinePath = @"/usr/local/bin/docker-machine";
     }
     
     // Boot2Docker certs exist
-    if (![[NSFileManager defaultManager] fileExistsAtPath:@"~/.boot2docker/certs/boot2docker-vm/ca.pem"] ||
-        ![[NSFileManager defaultManager] fileExistsAtPath:@"~/.boot2docker/certs/boot2docker-vm/cert.pem"] ||
-        ![[NSFileManager defaultManager] fileExistsAtPath:@"~/.boot2docker/certs/boot2docker-vm/key.pem"]) {
+    if (![[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"%@/.boot2docker/certs/boot2docker-vm/ca.pem", NSHomeDirectory()]] ||
+        ![[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"%@/.boot2docker/certs/boot2docker-vm/cert.pem", NSHomeDirectory()]] ||
+        ![[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"%@/.boot2docker/certs/boot2docker-vm/key.pem", NSHomeDirectory()]]) {
         return NO;
     }
     
     // Boot2Docker ssh keys exist
-    if (![[NSFileManager defaultManager] fileExistsAtPath:@"~/.ssh/id_boot2docker"] ||
-        ![[NSFileManager defaultManager] fileExistsAtPath:@"~/.ssh/id_boot2docker.pub"]) {
+    if (![[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"%@/.ssh/id_boot2docker", NSHomeDirectory()]] ||
+        ![[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"%@/.ssh/id_boot2docker.pub", NSHomeDirectory()]]) {
         return NO;
     }
     
@@ -59,7 +59,7 @@ NSString *dockerMachinePath = @"/usr/local/bin/docker-machine";
     [removeVMTask waitUntilExit];
     
     // Remove the VM dir in case there's anything left over
-    NSTask* removeDirTask = [NSTask launchedTaskWithLaunchPath:@"/bin/rm" arguments:[NSArray arrayWithObjects:@"-rf", @"~/.docker/machine/machines/default", nil]];
+    NSTask* removeDirTask = [NSTask launchedTaskWithLaunchPath:@"/bin/rm" arguments:[NSArray arrayWithObjects:@"-rf", [NSString stringWithFormat:@"%@/.docker/machine/machines/default", NSHomeDirectory()], nil]];
     [removeDirTask waitUntilExit];
     
     // Do the migration
@@ -179,7 +179,7 @@ NSString *dockerMachinePath = @"/usr/local/bin/docker-machine";
         [self migrateBoot2DockerVM];
         return NO;
     } else if (self.migrateCheckbox.state == NSOffState) {
-        [Mixpanel trackEvent:@"Skipped Boot2Docker Migration" forPane:self];
+        [Mixpanel trackEvent:@"Boot2Docker Migration Skipped" forPane:self];
     }
     return YES;
 }
