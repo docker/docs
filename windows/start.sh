@@ -4,17 +4,18 @@ trap '[ "$?" -eq 0 ] || read -p "Looks like something went wrong... Press any ke
 
 VM=default
 DOCKER_MACHINE=./docker-machine.exe
+VBOXMANAGE=/$(reg query HKEY_LOCAL_MACHINE\\SOFTWARE\\Oracle\\VirtualBox //v InstallDir | grep InstallDir | awk '{print substr($0, index($0,$3))}' | sed 's/\\/\//g' | sed 's/://')VBoxManage.exe
 
 BLUE='\033[1;34m'
 GREEN='\033[0;32m'
 NC='\033[0m'
 
-if [ ! -f $DOCKER_MACHINE ] || [ ! -f /c/Program\ Files/Oracle/VirtualBox/VBoxManage.exe ]; then
+if [ ! -f $DOCKER_MACHINE ] || [ ! -f "${VBOXMANAGE}" ]; then
   echo "Either VirtualBox or Docker Machine are not installed. Please re-run the Toolbox Installer and try again."
   exit 1
 fi
 
-/c/Program\ Files/Oracle/VirtualBox/VBoxManage.exe showvminfo $VM &> /dev/null
+"${VBOXMANAGE}" showvminfo $VM &> /dev/null
 VM_EXISTS_CODE=$?
 
 set -e
@@ -32,7 +33,7 @@ echo "Starting machine $VM..."
 $DOCKER_MACHINE start $VM
 
 echo "Setting environment variables for machine $VM..."
-eval "$($DOCKER_MACHINE env $VM)"
+eval "$($DOCKER_MACHINE env --shell=bash $VM)"
 
 clear
 cat << EOF

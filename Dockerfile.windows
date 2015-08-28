@@ -17,14 +17,15 @@ RUN cd innosetup && \
     wine "./innounp.exe" -e "is-unicode.exe"
 
 # installer components
-ENV INSTALLER_VERSION 1.8.1a
+ENV INSTALLER_VERSION 1.8.1c
 ENV DOCKER_VERSION 1.8.1
 ENV DOCKER_MACHINE_VERSION 0.4.0
 ENV BOOT2DOCKER_ISO_VERSION $DOCKER_VERSION
 ENV KITEMATIC_VERSION 0.8.2
 ENV VIRTUALBOX_VERSION 5.0.0
 ENV VIRTUALBOX_REVISION 101573
-ENV MSYSGIT_VERSION 1.9.5-preview20150319
+ENV GIT_VERSION 2.5.0
+ENV MIXPANEL_TOKEN c306ae65c33d7d09fe3e546f36493a6e
 
 RUN mkdir /bundle
 WORKDIR /bundle
@@ -36,7 +37,7 @@ RUN curl -fsSL -o kitematic.zip "https://github.com/kitematic/kitematic/releases
     cd kitematic && \
     unzip ../kitematic.zip && \
     rm ../kitematic.zip
-RUN curl -fsSL -o Git.exe "https://github.com/msysgit/msysgit/releases/download/Git-$MSYSGIT_VERSION/Git-$MSYSGIT_VERSION.exe"
+RUN curl -fsSL -o Git.exe "https://github.com/git-for-windows/git/releases/download/v$GIT_VERSION.windows.1/Git-$GIT_VERSION-64-bit.exe"
 RUN curl -fsSL -o virtualbox.exe "http://download.virtualbox.org/virtualbox/$VIRTUALBOX_VERSION/VirtualBox-$VIRTUALBOX_VERSION-$VIRTUALBOX_REVISION-Win.exe"
 RUN wine virtualbox.exe -extract -silent -path . && \
 	  rm virtualbox.exe && \
@@ -51,4 +52,4 @@ COPY windows /installer
 
 WORKDIR /installer
 RUN rm -rf /tmp/.wine-0/
-RUN wine ../innosetup/ISCC.exe Toolbox.iss /DMyAppVersion=$INSTALLER_VERSION
+RUN wine ../innosetup/ISCC.exe Toolbox.iss /DMyAppVersion=$INSTALLER_VERSION /DMixpanelToken=$MIXPANEL_TOKEN

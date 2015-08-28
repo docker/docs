@@ -22,3 +22,6 @@ profile
 
 # output
 dist
+
+# release
+.sign
