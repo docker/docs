@@ -31,15 +31,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView horizontalCompressionResistancePriority="250" editable="NO" importsGraphics="NO" verticallyResizable="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="cgA-DY-Gw8">
-                                <rect key="frame" x="0.0" y="0.0" width="223" height="283"/>
+                                <rect key="frame" x="0.0" y="0.0" width="223" height="100"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <size key="minSize" width="378" height="100"/>
-                                <size key="maxSize" width="463" height="100"/>
+                                <size key="minSize" width="378" height="190"/>
+                                <size key="maxSize" width="463" height="190"/>
                                 <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                <size key="minSize" width="378" height="100"/>
-                                <size key="maxSize" width="463" height="100"/>
+                                <size key="minSize" width="378" height="190"/>
+                                <size key="maxSize" width="463" height="190"/>
                             </textView>
                         </subviews>
                         <animations/>

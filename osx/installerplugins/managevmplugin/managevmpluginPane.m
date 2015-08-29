@@ -20,7 +20,7 @@ NSString *vBoxManagePath = @"/Applications/VirtualBox.app/Contents/MacOS/VBoxMan
 NSString *dockerMachinePath = @"/usr/local/bin/docker-machine";
 
 - (BOOL) vmExists:(NSString*)name {
-    NSTask* task = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/sudo" arguments:[NSArray arrayWithObjects:@"-u", NSUserName(), vBoxManagePath, @"showvminfo", name, nil]];
+    NSTask* task = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/sudo" arguments:[NSArray arrayWithObjects:@"-i", @"-u", NSUserName(), vBoxManagePath, @"showvminfo", name, nil]];
     [task waitUntilExit];
     return [task terminationStatus] != 1;
 }
@@ -55,7 +55,7 @@ NSString *dockerMachinePath = @"/usr/local/bin/docker-machine";
     self.migrating = YES;
     
     // Remove existing vm if it exists (obviously user must have deleted the
-    NSTask* removeVMTask = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/sudo" arguments:[NSArray arrayWithObjects:@"-u", NSUserName(), dockerMachinePath, @"rm", @"-f", @"default", nil]];
+    NSTask* removeVMTask = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/sudo" arguments:[NSArray arrayWithObjects:@"-i", @"-u", NSUserName(), dockerMachinePath, @"rm", @"-f", @"default", nil]];
     [removeVMTask waitUntilExit];
     
     // Remove the VM dir in case there's anything left over
@@ -65,16 +65,15 @@ NSString *dockerMachinePath = @"/usr/local/bin/docker-machine";
     // Do the migration
     NSTask* migrateTask = [[NSTask alloc] init];
     migrateTask.launchPath = @"/usr/bin/sudo";
-    migrateTask.arguments = [NSArray arrayWithObjects:@"-u", NSUserName(), dockerMachinePath, @"-D", @"create", @"-d", @"virtualbox", @"--virtualbox-import-boot2docker-vm", @"boot2docker-vm", @"default", nil];
+    migrateTask.arguments = [NSArray arrayWithObjects:@"-i", @"-u", NSUserName(), dockerMachinePath, @"-D", @"create", @"-d", @"virtualbox", @"--virtualbox-memory", @"2048", @"--virtualbox-import-boot2docker-vm", @"boot2docker-vm", @"default", nil];
     
     // Remove certificates, ssh keys from logs
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"BEGIN.*END" options:NSRegularExpressionDotMatchesLineSeparators error:NULL];
     NSFont *font = [NSFont fontWithName:@"Menlo" size:10.0];
     NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:font forKey:NSFontAttributeName];
-    
     NSMutableData* fullData = [[NSMutableData alloc] init];
-    migrateTask.standardOutput = [NSPipe pipe];
-    [[migrateTask.standardOutput fileHandleForReading] setReadabilityHandler:^(NSFileHandle *file) {
+    
+    void (^appendOutput)(NSFileHandle*) = ^(NSFileHandle *file) {
         NSData *data = [file availableData];
         [fullData appendData:data];
         NSMutableString *str = [[NSMutableString alloc] initWithData:fullData encoding:NSUTF8StringEncoding];
@@ -84,7 +83,13 @@ NSString *dockerMachinePath = @"/usr/local/bin/docker-machine";
             [self.migrationLogsTextView.textStorage setAttributedString:[[NSAttributedString alloc] initWithString:str attributes:attrsDictionary]];
             [self.migrationLogsTextView scrollRangeToVisible:NSMakeRange([[self.migrationLogsTextView string] length], 0)];
         });
-    }];
+    };
+
+    migrateTask.standardOutput = [NSPipe pipe];
+    migrateTask.standardError = [NSPipe pipe];
+    
+    [[migrateTask.standardOutput fileHandleForReading] setReadabilityHandler:appendOutput];
+    [[migrateTask.standardError fileHandleForReading] setReadabilityHandler:appendOutput];
     
     migrateTask.terminationHandler = ^(NSTask* task) {
         dispatch_async(dispatch_get_main_queue(), ^{
