@@ -28,8 +28,7 @@ DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName=Docker
 DisableProgramGroupPage=yes
 OutputBaseFilename=DockerToolbox
-; DO NOT COMMIT THIS
-Compression=none
+Compression=lzma
 SolidCompression=yes
 WizardImageFile=windows-installer-side.bmp
 WizardSmallImageFile=windows-installer-logo.bmp
