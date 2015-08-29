@@ -24,8 +24,8 @@
             <rect key="frame" x="0.0" y="0.0" width="418" height="330"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
-                <scrollView fixedFrame="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="0.0" verticalPageScroll="0.0" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e5n-p7-Zro">
-                    <rect key="frame" x="20" y="46" width="378" height="283"/>
+                <scrollView fixedFrame="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="0.0" verticalPageScroll="0.0" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e5n-p7-Zro">
+                    <rect key="frame" x="20" y="120" width="378" height="190"/>
                     <clipView key="contentView" misplaced="YES" id="GuL-k4-Axf">
                         <rect key="frame" x="1" y="1" width="223" height="133"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -35,11 +35,11 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <size key="minSize" width="378" height="283"/>
-                                <size key="maxSize" width="463" height="433"/>
+                                <size key="minSize" width="378" height="100"/>
+                                <size key="maxSize" width="463" height="100"/>
                                 <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                <size key="minSize" width="378" height="283"/>
-                                <size key="maxSize" width="463" height="433"/>
+                                <size key="minSize" width="378" height="100"/>
+                                <size key="maxSize" width="463" height="100"/>
                             </textView>
                         </subviews>
                         <animations/>
@@ -51,7 +51,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
                     </scroller>
-                    <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="gzS-9C-bOX">
+                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="gzS-9C-bOX">
                         <rect key="frame" x="224" y="1" width="15" height="133"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>

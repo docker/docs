@@ -35,8 +35,17 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h81-Lr-9M8">
+                    <rect key="frame" x="18" y="29" width="382" height="34"/>
+                    <animations/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="You can find these later in the Docker directory under Applications." id="Svq-5c-kHJ">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ijs-dB-4JA">
-                    <rect key="frame" x="254" y="175" width="104" height="104"/>
+                    <rect key="frame" x="255" y="157" width="104" height="104"/>
                     <animations/>
                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSInfo" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="N0R-Mh-4ck">
                         <behavior key="behavior" lightByContents="YES"/>
@@ -47,7 +56,7 @@
                     </connections>
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O4m-wW-5Fw">
-                    <rect key="frame" x="59" y="121" width="118" height="39"/>
+                    <rect key="frame" x="60" y="103" width="118" height="39"/>
                     <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="oVp-lY-Mah">
                         <font key="font" metaFont="system"/>
@@ -58,7 +67,7 @@ Terminal</string>
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jKy-qa-eNn">
-                    <rect key="frame" x="253" y="143" width="107" height="17"/>
+                    <rect key="frame" x="254" y="125" width="107" height="17"/>
                     <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Kitematic (Beta)" id="fs6-3u-0I6">
                         <font key="font" metaFont="system"/>
@@ -66,17 +75,8 @@ Terminal</string>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h81-Lr-9M8">
-                    <rect key="frame" x="18" y="51" width="382" height="34"/>
-                    <animations/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="You can find these later in the Docker directory under Applications." id="Svq-5c-kHJ">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BmR-gU-wJa">
-                    <rect key="frame" x="237" y="104" width="139" height="39"/>
+                    <rect key="frame" x="238" y="86" width="139" height="39"/>
                     <animations/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Visual Management for Docker" id="38E-OE-8oK">
                         <font key="font" metaFont="system"/>
@@ -85,7 +85,7 @@ Terminal</string>
                     </textFieldCell>
                 </textField>
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DYu-eG-6Cr">
-                    <rect key="frame" x="66" y="175" width="104" height="104"/>
+                    <rect key="frame" x="67" y="157" width="104" height="104"/>
                     <animations/>
                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSInfo" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="2CN-xC-hdg">
                         <behavior key="behavior" lightByContents="YES"/>
