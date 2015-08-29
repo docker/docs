@@ -148,7 +148,7 @@
      {
          try {
              vboxplist = system.files.plistAtPath('/Applications/VirtualBox.app/Contents/Info.plist');
-             if (!vboxplist || !vboxplist.CFBundleVersion || vboxplist.CFBundleVersion === '5.0.2' || system.compareVersions(vboxplist.CFBundleVersion, '%VBOX_VERSION%') === -1) {
+             if (!vboxplist || !vboxplist.CFBundleVersion || (vboxplist.CFBundleVersion === '5.0.2' && system.version.ProductVersion !== '10.11') || system.compareVersions(vboxplist.CFBundleVersion, '%VBOX_VERSION%') === -1) {
                  return true;
              }
 
