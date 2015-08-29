@@ -58,8 +58,8 @@ Name: modifypath; Description: "Add docker.exe & docker-machine.exe to &PATH"
 Name: "Docker"; Description: "Docker Client for Windows" ; Types: full upgrade
 Name: "DockerMachine"; Description: "Docker Machine for Windows" ; Types: full upgrade
 Name: "Kitematic"; Description: "Kitematic for Windows (Alpha)" ; Types: full upgrade
-Name: "VirtualBox"; Description: "VirtualBox"; Types: full
-Name: "Git"; Description: "Git for Windows"; Types: full
+Name: "VirtualBox"; Description: "VirtualBox"; Types: full; Flags: disablenouninstallwarning
+Name: "Git"; Description: "Git for Windows"; Types: full; Flags: disablenouninstallwarning
 
 [Files]
 Source: ".\docker-quickstart-terminal.ico"; DestDir: "{app}"; Flags: ignoreversion
@@ -90,9 +90,6 @@ Type: filesandordirs; Name: "{localappdata}\..\Roaming\Kitematic"
 [Code]
 #include "base64.iss"
 #include "guid.iss"
-
-const
-	UninstallKey = 'Software\Microsoft\Windows\CurrentVersion\Uninstall\{#SetupSetting("AppId")}_is1';
 
 var
 	restart: boolean;
@@ -156,17 +153,6 @@ begin
   end;
 end;
 
-function IsUpgrade: Boolean;
-var
-	Value: string;
-begin
-	Result := (
-		RegQueryStringValue(HKLM, UninstallKey, 'UninstallString', Value)
-		or
-		RegQueryStringValue(HKCU, UninstallKey, 'UninstallString', Value)
-	) and (Value <> '');
-end;
-
 function NeedRestart(): Boolean;
 begin
 	Result := restart;
@@ -174,6 +160,7 @@ end;
 
 function NeedToInstallVirtualBox(): Boolean;
 begin
+	// TODO: Also compare versions
 	Result := (
 		(GetEnv('VBOX_INSTALL_PATH') = '')
 		and
@@ -183,7 +170,8 @@ end;
 
 function NeedToInstallGit(): Boolean;
 begin
-	Result := not RegKeyExists(HKEY_LOCAL_MACHINE, 'SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Git_is1');
+	// TODO: Find a better way to see if Git is installed
+	Result := not DirExists('C:\Program Files\Git') or not FileExists('C:\Program Files\Git\git-bash.exe')
 end;
 
 procedure DocLinkClick(Sender: TObject);
@@ -250,7 +238,9 @@ begin
 		#13#10 + \
 		#13#10 + \
 		'For further information, please see the {#MyAppName} installation documentation link.'
-	;
+
+		Wizardform.ComponentsList.Checked[3] := NeedToInstallVirtualBox();
+		Wizardform.ComponentsList.Checked[4] := NeedToInstallGit();
 end;
 
 function InitializeSetup(): boolean;
@@ -293,8 +283,6 @@ begin
 end;
 
 procedure CopyBoot2DockerISO();
-var
-  ResultCode: Integer;
 begin
   WizardForm.FilenameLabel.Caption := 'copying boot2docker iso'
   if not ForceDirectories(ExpandConstant('{userdocs}\..\.docker\machine\cache')) then
@@ -307,7 +295,7 @@ function MigrateVM() : Boolean;
 var
   ResultCode: Integer;
 begin
-  if not FileExists('C:\Program Files\Git\bin\sh.exe') or not FileExists('C:\Program Files\Oracle\VirtualBox\VBoxManage.exe') or not FileExists(ExpandConstant('{app}\docker-machine.exe')) then begin
+  if NeedToInstallGit() or NeedToInstallVirtualBox() or not FileExists(ExpandConstant('{app}\docker-machine.exe')) then begin
     Result := true
     exit
   end;
