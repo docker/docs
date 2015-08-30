@@ -47,7 +47,7 @@ Name: "upgrade"; Description: "Upgrade Docker Toolbox only"
 Name: "custom"; Description: "Custom installation"; Flags: iscustom
 
 [Run]
-Filename: "{win}\explorer.exe"; Parameters: "{userprograms}\Docker\"; Flags: postinstall; Description: "Show Shortcuts in File Explorer"
+Filename: "{win}\explorer.exe"; Parameters: "{userprograms}\Docker\"; Flags: postinstall; Description: "View Shortcuts in File Explorer"
 
 [Tasks]
 Name: desktopicon; Description: "{cm:CreateDesktopIcon}"
@@ -350,12 +350,17 @@ end;
 #include "modpath.iss"
 
 procedure CurStepChanged(CurStep: TSetupStep);
+var
+	Success: Boolean;
 begin
+	Success := True;
 	if CurStep = ssPostInstall then
   begin
     if IsTaskSelected(ModPathName) then
 			ModPath();
     if not WizardSilent() then
-      MigrateVM();
-  end
+      Success := MigrateVM();
+		if Success then
+			trackEvent('Installer Finished');
+  end;
 end;
