@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="15A244d" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="15A263e" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
@@ -17,6 +17,7 @@
                 <outlet property="arrowImage" destination="dMU-aX-9b9" id="ASN-Jn-gwO"/>
                 <outlet property="boot2dockerImage" destination="dPT-t6-boJ" id="l7a-8P-CZa"/>
                 <outlet property="contentView" destination="wZl-Zt-3Ul" id="pOK-JC-MAY"/>
+                <outlet property="issueButton" destination="a96-1q-EBq" id="xHH-VV-7rh"/>
                 <outlet property="migrateCheckbox" destination="1jI-qj-TPj" id="Jez-nP-voL"/>
                 <outlet property="migrateExtraLabel" destination="KQO-mX-hcI" id="Rg7-4S-ty5"/>
                 <outlet property="migrationLogsScrollView" destination="UwA-bh-SQw" id="Zw0-AU-QPA"/>
@@ -69,7 +70,7 @@
                     <animations/>
                 </progressIndicator>
                 <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PYI-QA-XWa">
-                    <rect key="frame" x="18" y="137" width="382" height="35"/>
+                    <rect key="frame" x="18" y="166" width="382" height="28"/>
                     <animations/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Migration Status" id="D4J-ip-bu8">
                         <font key="font" metaFont="system"/>
@@ -78,12 +79,12 @@
                     </textFieldCell>
                 </textField>
                 <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rc2-Ev-HMB">
-                    <rect key="frame" x="149" y="186" width="120" height="120"/>
+                    <rect key="frame" x="149" y="200" width="120" height="120"/>
                     <animations/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NSCaution" id="emX-FX-G94"/>
                 </imageView>
                 <scrollView hidden="YES" fixedFrame="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UwA-bh-SQw">
-                    <rect key="frame" x="0.0" y="-1" width="418" height="123"/>
+                    <rect key="frame" x="0.0" y="-1" width="418" height="126"/>
                     <clipView key="contentView" misplaced="YES" id="g1K-p4-gs1">
                         <rect key="frame" x="1" y="1" width="223" height="133"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -93,10 +94,10 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <size key="minSize" width="416" height="121"/>
+                                <size key="minSize" width="416" height="124"/>
                                 <size key="maxSize" width="463" height="10000000"/>
                                 <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                <size key="minSize" width="416" height="121"/>
+                                <size key="minSize" width="416" height="124"/>
                                 <size key="maxSize" width="463" height="10000000"/>
                             </textView>
                         </subviews>
@@ -104,17 +105,28 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </clipView>
                     <animations/>
-                    <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="jKW-gn-JLe">
+                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="jKW-gn-JLe">
                         <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
                     </scroller>
-                    <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Pv6-xu-8lS">
+                    <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Pv6-xu-8lS">
                         <rect key="frame" x="224" y="1" width="15" height="133"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
                     </scroller>
                 </scrollView>
+                <button hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a96-1q-EBq">
+                    <rect key="frame" x="124" y="126" width="170" height="39"/>
+                    <animations/>
+                    <buttonCell key="cell" type="push" title="Submit GitHub Issue" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="bna-Yz-WXL">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="issueButtonClicked:" target="Qsn-FY-4qK" id="N6K-SY-Nde"/>
+                    </connections>
+                </button>
             </subviews>
             <animations/>
         </customView>

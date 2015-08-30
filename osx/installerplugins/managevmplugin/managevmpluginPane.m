@@ -111,6 +111,8 @@ NSString *dockerMachinePath = @"/usr/local/bin/docker-machine";
                 self.nextEnabled = YES;
                 [self gotoNextPane];
             } else {
+                self.migrationLogsScrollView.hidden = NO;
+                self.issueButton.hidden = NO;
                 [Mixpanel trackEvent:@"Boot2Docker Migration Failed" forPane:self];
                 self.migrationStatusLabel.hidden = NO;
                 self.migrationStatusLabel.stringValue = @"VM Migration failed. Please see the logs below.";
@@ -179,7 +181,6 @@ NSString *dockerMachinePath = @"/usr/local/bin/docker-machine";
         self.arrowImage.hidden = YES;
         self.migrateCheckbox.enabled = NO;
         self.migrationStatusLabel.stringValue = @"Migrating...";
-        self.migrationLogsScrollView.hidden = NO;
 
         [self migrateBoot2DockerVM];
         return NO;
@@ -190,4 +191,8 @@ NSString *dockerMachinePath = @"/usr/local/bin/docker-machine";
 }
 
 
+- (IBAction)issueButtonClicked:(id)sender {
+    NSURL *url = [[NSURL alloc] initWithString: @"https://github.com/docker/toolbox/issues"];
+    [[NSWorkspace sharedWorkspace] openURL:url];
+}
 @end
