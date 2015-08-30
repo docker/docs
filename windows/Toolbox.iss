@@ -313,6 +313,7 @@ begin
 
   if MsgBox('Migrate your existing Boot2Docker VM to work with the Docker Toolbox? Your existing Boot2Docker VM will not be affected. This should take about a minute.', mbConfirmation, MB_YESNO) = IDYES then
   begin
+		TrackEvent('Boot2Docker Migration Started');
     WizardForm.StatusLabel.Caption := 'Migrating Boot2Docker VM...'
     WizardForm.FilenameLabel.Caption := 'This will take a minute...'
     ExecAsOriginalUser(ExpandConstant('{app}\docker-machine.exe'), ExpandConstant('rm -f default > nul 2>&1'), '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
