@@ -1,7 +1,7 @@
 Docker Toolbox
 ==================================
 
-[![docker toolbox logo](https://cloud.githubusercontent.com/assets/3325447/9101412/6754c6a6-3b9b-11e5-8cc4-215358caee06.png)](https://www.docker.com/toolbox)
+[![docker toolbox logo](https://cloud.githubusercontent.com/assets/251292/9585188/2f31d668-4fca-11e5-86c9-826d18cf45fd.png)](https://www.docker.com/toolbox)
 
 The Docker Toolbox installs everything you need to get started with
 Docker on Mac OS X and Windows, including:
