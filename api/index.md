@@ -12,7 +12,7 @@ parent = "smn_dtrapi"
 
 The Accounts & Repos API lets you integrate Docker Trusted Registry (DTR) with your enterprise's organizational structure by providing fine-grained, role-based access control for your repositories. Specifically, this API provides:
 
-* An API for account management, including creating an account, listing existing accounts, creating a team within an organization, listing teamns in an organization, getting a specific team, listing members of a team, adding and removing members from a team (if using a managed whitelist), or editing LDAP syncing configuration.
+* An API for account management, including creating an account, listing existing accounts, creating a team within an organization, listing teams in an organization, getting a specific team, listing members of a team, adding and removing members from a team (if using a managed whitelist), or editing LDAP syncing configuration.
 
 * Methods for syncing members of a team in DTR with an LDAP group filter configured by an admin.
 
