@@ -24,22 +24,43 @@
             <rect key="frame" x="0.0" y="0.0" width="418" height="330"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
+                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h63-BP-4UP">
+                    <rect key="frame" x="18" y="118" width="407" height="24"/>
+                    <animations/>
+                    <buttonCell key="cell" type="check" title="Send one-time, anonymous diagnostics during install." bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Jjb-SP-XI0">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="checkboxChanged:" target="Qsn-FY-4qK" id="mbj-pc-e04"/>
+                    </connections>
+                </button>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xi8-N0-Reb">
+                    <rect key="frame" x="18" y="63" width="382" height="51"/>
+                    <animations/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="N5z-io-cf5">
+                        <font key="font" metaFont="system"/>
+                        <string key="title">This data helps us detect problems and improve the installation experience. We only use it for aggregate statistics and will never share it with third parties.</string>
+                        <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
                 <scrollView fixedFrame="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="0.0" verticalPageScroll="0.0" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e5n-p7-Zro">
-                    <rect key="frame" x="20" y="120" width="378" height="190"/>
+                    <rect key="frame" x="14" y="149" width="390" height="170"/>
                     <clipView key="contentView" misplaced="YES" id="GuL-k4-Axf">
                         <rect key="frame" x="1" y="1" width="223" height="133"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView horizontalCompressionResistancePriority="250" editable="NO" importsGraphics="NO" verticallyResizable="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="cgA-DY-Gw8">
-                                <rect key="frame" x="0.0" y="0.0" width="223" height="100"/>
+                                <rect key="frame" x="0.0" y="0.0" width="223" height="190"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <size key="minSize" width="378" height="190"/>
-                                <size key="maxSize" width="463" height="190"/>
+                                <size key="minSize" width="390" height="170"/>
+                                <size key="maxSize" width="463" height="170"/>
                                 <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                <size key="minSize" width="378" height="190"/>
-                                <size key="maxSize" width="463" height="190"/>
+                                <size key="minSize" width="390" height="170"/>
+                                <size key="maxSize" width="463" height="170"/>
                             </textView>
                         </subviews>
                         <animations/>
@@ -57,17 +78,6 @@
                         <animations/>
                     </scroller>
                 </scrollView>
-                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h63-BP-4UP">
-                    <rect key="frame" x="18" y="11" width="382" height="24"/>
-                    <animations/>
-                    <buttonCell key="cell" type="check" title="Send one-time anonymous data to improve this installer." bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Jjb-SP-XI0">
-                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="checkboxChanged:" target="Qsn-FY-4qK" id="mbj-pc-e04"/>
-                    </connections>
-                </button>
             </subviews>
             <animations/>
             <point key="canvasLocation" x="737" y="529"/>
