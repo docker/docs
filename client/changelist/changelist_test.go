@@ -29,3 +29,38 @@ func TestMemChangelist(t *testing.T) {
 	cs = cl.List()
 	assert.Equal(t, 0, len(cs), "List should be empty")
 }
+
+func TestMemChangeIterator(t *testing.T) {
+	cl := memChangelist{}
+	it, err := cl.NewIterator()
+	assert.Nil(t, err, "Non-nil error from NewIterator")
+	assert.False(t, it.HasNext(), "HasNext returns false for empty ChangeList")
+
+	c1 := NewTufChange(ActionCreate, "t1", "target1", "test/targ1", []byte{1})
+	cl.Add(c1)
+
+	c2 := NewTufChange(ActionUpdate, "t2", "target2", "test/targ2", []byte{2})
+	cl.Add(c2)
+
+	c3 := NewTufChange(ActionUpdate, "t3", "target3", "test/targ3", []byte{3})
+	cl.Add(c3)
+
+	cs := cl.List()
+	index := 0
+	it, _ = cl.NewIterator()
+	for it.HasNext() {
+		c, err := it.Next()
+		assert.Nil(t, err, "Next err should be false")
+		assert.Equal(t, c.Action(), cs[index].Action(), "Action mismatch")
+		assert.Equal(t, c.Scope(), cs[index].Scope(), "Scope mismatch")
+		assert.Equal(t, c.Type(), cs[index].Type(), "Type mismatch")
+		assert.Equal(t, c.Path(), cs[index].Path(), "Path mismatch")
+		assert.Equal(t, c.Content(), cs[index].Content(), "Content mismatch")
+		index++
+	}
+	assert.Equal(t, index, len(cs), "Iterator produced all data in ChangeList")
+	_, err = it.Next()
+	assert.NotNil(t, err, "Next errors gracefully when exhausted")
+	var iterError IteratorBoundsError
+	assert.IsType(t, iterError, err, "IteratorBoundsError type")
+}
