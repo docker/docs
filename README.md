@@ -25,6 +25,35 @@ Documentation for Windows [is available here](https://docs.docker.com/windows/st
 
 Toolbox is currently unavailable for Linux; To get started with Docker on Linux, please follow the Linux [Getting Started Guide](https://docs.docker.com/linux/started/).
 
+## Building the Docker Toolbox
+
+Toolbox installers are built using Docker, so you'll need a Docker host set up. For example, using [Docker Machine](https://github.com/docker/machine):
+
+```
+$ docker-machine create -d virtualbox toolbox
+$ eval "$(docker-machine env toolbox)"
+```
+
+Then, to build the Toolbox for both platforms:
+
+```
+make
+```
+
+Build for a specific platform:
+
+```
+make osx
+```
+
+or
+
+```
+make windows
+```
+
+The resulting installers will be in the `dist` directory.
+
 ## Frequently Asked Questions
 
 **Do I have to install VirtualBox?**
