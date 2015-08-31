@@ -28,7 +28,7 @@ DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName=Docker
 DisableProgramGroupPage=yes
 OutputBaseFilename=DockerToolbox
-Compression=lzma
+Compression=none
 SolidCompression=yes
 WizardImageFile=windows-installer-side.bmp
 WizardSmallImageFile=windows-installer-logo.bmp
@@ -194,6 +194,7 @@ end;
 procedure InitializeWizard;
 var
   WelcomePage: TWizardPage;
+	TrackingLabel: TLabel;
 begin
 	DockerInstallDocs := TLabel.Create(WizardForm);
 	DockerInstallDocs.Parent := WizardForm;
@@ -204,19 +205,34 @@ begin
 	DockerInstallDocs.Font.Style := [fsUnderline];
 	DockerInstallDocs.Caption := '{#MyAppName} installation documentation';
 	DockerInstallDocs.OnClick := @DocLinkClick;
+	DockerInstallDocs.Visible := True;
 
   WelcomePage := PageFromID(wpWelcome)
-  TrackingCheckBox := TNewCheckBox.Create(WelcomePage);
+
+	WizardForm.WelcomeLabel2.AutoSize := True;
+
+  TrackingCheckBox := TNewCheckBox.Create(WizardForm);
   TrackingCheckBox.Top := 168;
   TrackingCheckBox.Left := WizardForm.WelcomeLabel2.Left;
   TrackingCheckBox.Width := WizardForm.WelcomeLabel2.Width;
   TrackingCheckBox.Height := 40;
-  TrackingCheckBox.Caption := 'Send one-time anonymous data to improve this installer.';
+  TrackingCheckBox.Caption := 'Send one-time, anonymous diagonstics during install.';
   TrackingCheckBox.Checked := True;
   TrackingCheckBox.Parent := WelcomePage.Surface;
   TrackingCheckBox.OnClick := @TrackingCheckboxClicked;
 
-	DockerInstallDocs.Visible := True;
+	TrackingLabel := TLabel.Create(WizardForm);
+	TrackingLabel.Parent := WelcomePage.Surface;
+	TrackingLabel.Font := WizardForm.WelcomeLabel2.Font;
+	TrackingLabel.Font.Color := clGray;
+  TrackingLabel.Caption := 'This data helps us detect problems and improve the installation experience. We only use it for aggregate statistics and will never share it with third parties.';
+	TrackingLabel.WordWrap := True;
+	TrackingLabel.Visible := True;
+	TrackingLabel.Left := WizardForm.WelcomeLabel2.Left;
+	TrackingLabel.Width := WizardForm.WelcomeLabel2.Width;
+	TrackingLabel.Top := 200;
+	TrackingLabel.Height := 100;
+
 	WizardForm.FinishedLabel.AutoSize := True;
 	WizardForm.FinishedLabel.Caption :=
 		'{#MyAppName} installation completed.' + \
