@@ -47,7 +47,7 @@ Name: "upgrade"; Description: "Upgrade Docker Toolbox only"
 Name: "custom"; Description: "Custom installation"; Flags: iscustom
 
 [Run]
-Filename: "{win}\explorer.exe"; Parameters: "{userprograms}\Docker\"; Flags: postinstall; Description: "View Shortcuts in File Explorer"
+Filename: "{win}\explorer.exe"; Parameters: "{userprograms}\Docker\"; Flags: postinstall skipifsilent; Description: "View Shortcuts in File Explorer"
 
 [Tasks]
 Name: desktopicon; Description: "{cm:CreateDesktopIcon}"
@@ -238,7 +238,8 @@ begin
 		#13#10 + \
 		'For further information, please see the {#MyAppName} installation documentation link.'
 
-		Wizardform.ComponentsList.Checked[3] := NeedToInstallVirtualBox();
+		// Don't do this until we can compare versions
+		// Wizardform.ComponentsList.Checked[3] := NeedToInstallVirtualBox();
 		Wizardform.ComponentsList.Checked[4] := NeedToInstallGit();
 end;
 
@@ -329,6 +330,7 @@ begin
       MsgBox('Migration of Boot2Docker VM failed. Please file an issue with the migration logs at https://github.com/docker/toolbox/issues/new.', mbCriticalError, MB_OK);
       Exec(ExpandConstant('{win}\notepad.exe'), ExpandConstant('{localappdata}\Temp\toolbox-migration-logs.txt'), '', SW_SHOW, ewNoWait, ResultCode)
       Result := false
+			WizardForm.Close;
       exit;
     end;
   end
