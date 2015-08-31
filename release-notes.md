@@ -18,6 +18,15 @@ These notes refer to the current and immediately prior releases of Docker Truste
 
 ## Docker Trusted Registry (DTR)
 
+### DTR 1.3.1
+(31 August 2015)
+
+This release corrects the following issues in DTR 1.3.0
+
+* The dashboard page was calculating incorrect stats.
+* LDAP group sync failed to handle paginated results for extremely large groups.
+* The repo delete endpoint returned incorrect error codes under certain conditions.
+
 ### DTR 1.3.0
 (26 August 2015)
 
