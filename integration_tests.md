@@ -32,3 +32,12 @@ go test -p ${PARALLEL_COUNT} ./integration/...
 
 While developing tests, you might want to use the "-v" flag to go test
 to see all the log output immediately instead of only after a failure.
+You can also set PRESERVE\_TEST\_MACHINE in your environment to a
+non-empty value to prevent the virtual machines from being deleted after
+the test run so you can inspect the aftermath.
+
+
+The tests can hammer on your disks pretty hard.  If you're testing
+locally, you might see slightly less impact on your system by running
+the tests under ionice, although the brunt of the I/O load is still in
+the VMs.
