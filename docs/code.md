@@ -224,7 +224,8 @@ back to where you started.
 
  	Make sure your message includes your signature.
 
-8. Push any changes to your fork on GitHub.
+8. Push any changes to your fork on GitHub, using the `-f` option to
+force the previous change to be overwritten.
 
-        $ git push origin my-keen-feature
+        $ git push -f origin my-keen-feature
 
