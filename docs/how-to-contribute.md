@@ -50,11 +50,7 @@ You might also want to check for open issues in our other Docker repositories:
 			<td class="tg-031e"><a href="https://github.com/docker-library/official-images/issues">docker-library/official-images</a></td>
 			<td class="tg-031e">This repository contains the images for our official repository.</td>
        </tr>
-        <tr>
-			<td class="tg-031e"><a href="https://github.com/docker/distribution/issues">docker/distribution</a></td>
-			<td class="tg-031e">Registry implementation for storing and distributing docker images. Provides a secure tool chain for distributing content.</td>
-		</tr>  
-		<tr>
+	   <tr>
 			<td class="tg-031e"><a href="https://github.com/docker/swarm/issues">docker/swarm</a></td>
 			<td class="tg-031e">Native clustering for Docker; manage several Docker hosts as a single, virtual host.</td>
 		</tr>
