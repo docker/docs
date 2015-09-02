@@ -25,8 +25,7 @@ export MACHINE_CREATE_FLAGS="--kvm-memory 2048 --kvm-disk-size 5000"
 export MACHINE_DRIVER=kvm
 PARALLEL_COUNT=$(grep "^processor" /proc/cpuinfo | wc -l)
 
-cd controller
-go test -p ${PARALLEL_COUNT} ./integration/...
+go test -p ${PARALLEL_COUNT} ./controller/integration/...
 ```
 
 
@@ -41,3 +40,34 @@ The tests can hammer on your disks pretty hard.  If you're testing
 locally, you might see slightly less impact on your system by running
 the tests under ionice, although the brunt of the I/O load is still in
 the VMs.
+
+## AWS Example
+
+Hint: If you're using your own AWS setup, make sure the Docker Machine
+security group allows port 443 from anywhere, otherwise the tests will
+fail to access Orca.  Also make sure that all ports are allowed from the
+internal network for join to work.  Our common service account already
+has this set up.
+
+Normal reserved instances take ~3 minutes to spin up.  You may be able to
+run the tests within the default 10 minute timeout, but it's pushing it.
+If you use spot instances, they take ~6 minutes to spin up, so you
+definitely need more than 10 minutes on the go test timeout.
+
+```bash
+
+### Set the AWS environment variables from lastpass here...
+
+export MACHINE_CREATE_FLAGS="--amazonec2-request-spot-instance --amazonec2-spot-price 0.05 --amazonec2-instance-type m1.small --amazonec2-ami ami-e91605d9"
+export MACHINE_DRIVER=amazonec2
+
+# Run the test on your local box
+go test -timeout 30m ./controller/integration/...
+
+# ...Or run the test in the container
+./script/test -timeout 30m -p 2
+```
+
+Depending on the size of your system (or VM), you might experiment
+with different parallel values to see what works the fastest without
+causing failures.  By default the parallel count is the number of CPUs.
