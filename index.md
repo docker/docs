@@ -8,8 +8,6 @@ keywords = ["docker, documentation, about, technology, understanding, enterprise
 parent="smn_dhe"
 +++
 
-
-
 # Welcome to Docker Trusted Registry
 
 Docker Trusted Registry (DTR) lets you run and manage your own Docker image
@@ -60,7 +58,9 @@ responsible for running and maintaining DTR.
 DTR and get it working.
 * [**Configuration**]({{< relref "configuration.md" >}}) Go here to find out details about
 setting up and configuring DTR for your particular environment.
-* [**Support**](/docker-trusted-registry/install/) Go here for information on getting support for
-DTR.
+* [**Support**](/docker-trusted-registry/install/) Go here for information on getting support for DTR.
+* [**The DTR product page**](https://www.docker.com/docker-trusted-registry).
+* [**DTR Use Cases page**](https://www.docker.com/products/use-cases) showing an example CI/CD pipeline.
+* [**DTR and Docker tutorials and webinars**](https://www.docker.com/products/resources).
 
 Note: DTR requires that you use the commercially supported Docker Engine.
