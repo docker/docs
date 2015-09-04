@@ -25,8 +25,12 @@ export MACHINE_CREATE_FLAGS="--kvm-memory 2048 --kvm-disk-size 5000"
 export MACHINE_DRIVER=kvm
 PARALLEL_COUNT=$(grep "^processor" /proc/cpuinfo | wc -l)
 
-go test -p ${PARALLEL_COUNT} ./controller/integration/...
+make TEST_TIMEOUT=30m TEST_PARALLEL=2 integration
 ```
+
+Hint: Most local machine drivers (kvm, vbox, etc.) wont work within a
+container, so if you use one of those, you'll have to run the tests from
+the dev box.
 
 
 While developing tests, you might want to use the "-v" flag to go test
@@ -61,11 +65,11 @@ definitely need more than 10 minutes on the go test timeout.
 export MACHINE_CREATE_FLAGS="--amazonec2-request-spot-instance --amazonec2-spot-price 0.05 --amazonec2-instance-type m1.small --amazonec2-ami ami-e91605d9"
 export MACHINE_DRIVER=amazonec2
 
-# Run the test on your local box
-go test -timeout 30m ./controller/integration/...
+# without local volume mounts, requires full build each iteration
+./script/run make TEST_TIMEOUT=30m TEST_PARALLEL=2 all image integration
 
-# ...Or run the test in the container
-./script/test -timeout 30m -p 2
+# with local volume mounts (faster incremental startup)
+./script/run_inc make TEST_TIMEOUT=30m TEST_PARALLEL=2 integration
 ```
 
 Depending on the size of your system (or VM), you might experiment
