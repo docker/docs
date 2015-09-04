@@ -1,7 +1,6 @@
 package signed
 
 import (
-	"encoding/json"
 	"errors"
 	"strings"
 	"time"
@@ -9,7 +8,7 @@ import (
 	"github.com/Sirupsen/logrus"
 	"github.com/endophage/gotuf/data"
 	"github.com/endophage/gotuf/keys"
-	"github.com/tent/canonical-json-go"
+	"github.com/jfrazelle/go/canonical/json"
 )
 
 var (
@@ -32,7 +31,7 @@ func VerifyRoot(s *data.Signed, minVersion int, keys map[string]data.PublicKey) 
 	if err := json.Unmarshal(s.Signed, &decoded); err != nil {
 		return err
 	}
-	msg, err := cjson.Marshal(decoded)
+	msg, err := json.MarshalCanonical(decoded)
 	if err != nil {
 		return err
 	}
@@ -111,7 +110,7 @@ func VerifySignatures(s *data.Signed, role string, db *keys.KeyDB) error {
 	if err := json.Unmarshal(s.Signed, &decoded); err != nil {
 		return err
 	}
-	msg, err := cjson.Marshal(decoded)
+	msg, err := json.MarshalCanonical(decoded)
 	if err != nil {
 		return err
 	}

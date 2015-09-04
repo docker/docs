@@ -2,11 +2,10 @@ package timestamp
 
 import (
 	"bytes"
-	"encoding/json"
 
 	"github.com/endophage/gotuf/data"
 	"github.com/endophage/gotuf/signed"
-	cjson "github.com/tent/canonical-json-go"
+	"github.com/jfrazelle/go/canonical/json"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary/server/storage"
@@ -132,7 +131,7 @@ func CreateTimestamp(gun string, prev *data.SignedTimestamp, snapshot []byte, st
 	if prev != nil {
 		ts.Signed.Version = prev.Signed.Version + 1
 	}
-	sgndTs, err := cjson.Marshal(ts.Signed)
+	sgndTs, err := json.MarshalCanonical(ts.Signed)
 	if err != nil {
 		return nil, 0, err
 	}

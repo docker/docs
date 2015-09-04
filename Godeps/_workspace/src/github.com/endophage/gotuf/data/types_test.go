@@ -3,9 +3,9 @@ package data
 import (
 	"bytes"
 	"encoding/hex"
-	"encoding/json"
 	"testing"
 
+	"github.com/jfrazelle/go/canonical/json"
 	"github.com/stretchr/testify/assert"
 )
 

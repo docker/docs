@@ -3,7 +3,6 @@ package store
 import (
 	"encoding/base64"
 	"encoding/hex"
-	"encoding/json"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -12,10 +11,10 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/tent/canonical-json-go"
 
 	"github.com/endophage/gotuf/data"
 	"github.com/endophage/gotuf/signed"
+	"github.com/jfrazelle/go/canonical/json"
 )
 
 const testRoot = `{"signed":{"_type":"Root","consistent_snapshot":false,"expires":"2025-07-17T16:19:21.101698314-07:00","keys":{"1ca15c7f4b2b0c6efce202a545e7267152da28ab7c91590b3b60bdb4da723aad":{"keytype":"ecdsa","keyval":{"private":null,"public":"MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEb0720c99Cj6ZmuDlznEZ52NA6YpeY9Sj45z51XvPnG63Bi2RSBezMJlPzbSfP39mXKXqOJyT+z9BZhi3FVWczg=="}},"b1d6813b55442ecbfb1f4b40eb1fcdb4290e53434cfc9ba2da24c26c9143873b":{"keytype":"ecdsa-x509","keyval":{"private":null,"public":"LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJVekNCKzZBREFnRUNBaEFCWDNKLzkzaW8zbHcrZUsvNFhvSHhNQW9HQ0NxR1NNNDlCQU1DTUJFeER6QU4KQmdOVkJBTVRCbVY0Y0dseVpUQWVGdzB4TlRBM01qQXlNekU1TVRkYUZ3MHlOVEEzTVRjeU16RTVNVGRhTUJFeApEekFOQmdOVkJBTVRCbVY0Y0dseVpUQlpNQk1HQnlxR1NNNDlBZ0VHQ0NxR1NNNDlBd0VIQTBJQUJFTDhOTFhQCitreUJZYzhYY0FTMXB2S2l5MXRQUDlCZHJ1dEdrWlR3Z0dEYTM1THMzSUFXaWlrUmlPbGRuWmxVVEE5cG5JekoKOFlRQThhTjQ1TDQvUlplak5UQXpNQTRHQTFVZER3RUIvd1FFQXdJQW9EQVRCZ05WSFNVRUREQUtCZ2dyQmdFRgpCUWNEQXpBTUJnTlZIUk1CQWY4RUFqQUFNQW9HQ0NxR1NNNDlCQU1DQTBjQU1FUUNJRVJ1ZUVURG5xMlRqRFBmClhGRStqUFJqMEtqdXdEOG9HSmtoVGpMUDAycjhBaUI5cUNyL2ZqSXpJZ1NQcTJVSXZqR0hlYmZOYXh1QlpZZUUKYW8xNjd6dHNYZz09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K"}},"fbddae7f25a6c23ca735b017206a849d4c89304a4d8de4dcc4b3d6f3eb22ce3b":{"keytype":"ecdsa","keyval":{"private":null,"public":"MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE/xS5fBHK2HKmlGcvAr06vwPITvmxWP4P3CMDCgY25iSaIiM21OiXA1/Uvo3Pa3xh5G3cwCtDvi+4FpflW2iB/w=="}},"fd75751f010c3442e23b3e3e99a1442a112f2f21038603cb8609d8b17c9e912a":{"keytype":"ed25519","keyval":{"private":null,"public":"rc+glN01m+q8jmX8SolGsjTfk6NMhUQTWyj10hjmne0="}}},"roles":{"root":{"keyids":["b1d6813b55442ecbfb1f4b40eb1fcdb4290e53434cfc9ba2da24c26c9143873b"],"threshold":1},"snapshot":{"keyids":["1ca15c7f4b2b0c6efce202a545e7267152da28ab7c91590b3b60bdb4da723aad"],"threshold":1},"targets":{"keyids":["fbddae7f25a6c23ca735b017206a849d4c89304a4d8de4dcc4b3d6f3eb22ce3b"],"threshold":1},"timestamp":{"keyids":["fd75751f010c3442e23b3e3e99a1442a112f2f21038603cb8609d8b17c9e912a"],"threshold":1}},"version":2},"signatures":[{"keyid":"b1d6813b55442ecbfb1f4b40eb1fcdb4290e53434cfc9ba2da24c26c9143873b","method":"ecdsa","sig":"A2lNVwxHBnD9ViFtRre8r5oG6VvcvJnC6gdvvxv/Jyag40q/fNMjllCqyHrb+6z8XDZcrTTDsFU1R3/e+92d1A=="}]}`
@@ -65,7 +64,7 @@ func TestHTTPStoreGetMeta(t *testing.T) {
 	if err := json.Unmarshal(p.Signed, &decoded); err != nil {
 		t.Fatal(err)
 	}
-	msg, err := cjson.Marshal(decoded)
+	msg, err := json.MarshalCanonical(decoded)
 	if err != nil {
 		t.Fatal(err)
 	}

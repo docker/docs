@@ -5,10 +5,10 @@ import (
 	"time"
 
 	"github.com/stretchr/testify/assert"
-	cjson "github.com/tent/canonical-json-go"
 
 	"github.com/endophage/gotuf/data"
 	"github.com/endophage/gotuf/keys"
+	"github.com/jfrazelle/go/canonical/json"
 )
 
 func Test(t *testing.T) {
@@ -153,7 +153,7 @@ func Test(t *testing.T) {
 			k, _ := cryptoService.Create("root", data.ED25519Key)
 			meta := &data.SignedCommon{Type: run.typ, Version: run.ver, Expires: *run.exp}
 
-			b, err := cjson.Marshal(meta)
+			b, err := json.MarshalCanonical(meta)
 			assert.NoError(t, err)
 			s := &data.Signed{Signed: b}
 			Sign(cryptoService, s, k)
