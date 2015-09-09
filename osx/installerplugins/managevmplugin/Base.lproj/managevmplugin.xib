@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="15A263e" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="15A279b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
@@ -53,7 +53,7 @@
                     </textFieldCell>
                 </textField>
                 <button hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1jI-qj-TPj">
-                    <rect key="frame" x="19" y="100" width="381" height="18"/>
+                    <rect key="frame" x="19" y="100" width="391" height="18"/>
                     <animations/>
                     <buttonCell key="cell" type="check" title="Migrate your Boot2Docker VM to work with Docker Toolbox" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="mC0-7J-fb2">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -117,7 +117,7 @@
                     </scroller>
                 </scrollView>
                 <button hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a96-1q-EBq">
-                    <rect key="frame" x="124" y="126" width="170" height="39"/>
+                    <rect key="frame" x="124" y="126" width="170" height="32"/>
                     <animations/>
                     <buttonCell key="cell" type="push" title="Submit GitHub Issue" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="bna-Yz-WXL">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>

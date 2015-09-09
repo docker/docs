@@ -17,13 +17,13 @@ RUN cd innosetup && \
     wine "./innounp.exe" -e "is-unicode.exe"
 
 # installer components
-ENV INSTALLER_VERSION 1.8.1c
+ENV INSTALLER_VERSION 1.8.1d
 ENV DOCKER_VERSION 1.8.1
 ENV DOCKER_MACHINE_VERSION 0.4.0
 ENV BOOT2DOCKER_ISO_VERSION $DOCKER_VERSION
 ENV KITEMATIC_VERSION 0.8.2
-ENV VIRTUALBOX_VERSION 5.0.2
-ENV VIRTUALBOX_REVISION 102096
+ENV VIRTUALBOX_VERSION 5.0.4
+ENV VIRTUALBOX_REVISION 102546
 ENV GIT_VERSION 2.5.0
 ENV MIXPANEL_TOKEN c306ae65c33d7d09fe3e546f36493a6e
 
@@ -43,9 +43,6 @@ RUN wine virtualbox.exe -extract -silent -path . && \
 	  rm virtualbox.exe && \
 	  rm *x86.msi && \
 	  mv *_amd64.msi VirtualBox_amd64.msi
-
-RUN echo "{\"event\":\"Installer Finished\",\"properties\":{\"token\":\"$MIXPANEL_TOKEN\",\"version\":\"$INSTALLER_VERSION\",\"os\":\"darwin\"}}" | base64 | tr -d '\n' > started.txt
-RUN echo "{\"event\":\"Installer Finished\",\"properties\":{\"token\":\"$MIXPANEL_TOKEN\",\"version\":\"$INSTALLER_VERSION\",\"os\":\"darwin\"}}" | base64 | tr -d '\n' > finished.txt
 
 # Add installer resources
 COPY windows /installer
