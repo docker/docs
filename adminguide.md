@@ -322,4 +322,4 @@ If you need to stop and/or start DTR (for upgrading, troubleshooting, etc.), use
 
 ## Next Steps
 
-For information on installing DTR, take a look at the [Installation instructions]({{< relref "install.md" >}}).
+For information on installing DTR, take a look at the [Installation instructions]({{< relref "docker-trusted-registry/install.md" >}}).
