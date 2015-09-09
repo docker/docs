@@ -43,7 +43,6 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Types]
 Name: "full"; Description: "Full installation"
-Name: "upgrade"; Description: "Upgrade Docker Toolbox only"
 Name: "custom"; Description: "Custom installation"; Flags: iscustom
 
 [Run]
@@ -54,11 +53,11 @@ Name: desktopicon; Description: "{cm:CreateDesktopIcon}"
 Name: modifypath; Description: "Add docker.exe & docker-machine.exe to &PATH"
 
 [Components]
-Name: "Docker"; Description: "Docker Client for Windows" ; Types: full upgrade
-Name: "DockerMachine"; Description: "Docker Machine for Windows" ; Types: full upgrade
-Name: "Kitematic"; Description: "Kitematic for Windows (Alpha)" ; Types: full upgrade
-Name: "VirtualBox"; Description: "VirtualBox"; Types: full; Flags: disablenouninstallwarning
-Name: "Git"; Description: "Git for Windows"; Types: full; Flags: disablenouninstallwarning
+Name: "Docker"; Description: "Docker Client for Windows" ; Types: full custom; Flags: fixed
+Name: "DockerMachine"; Description: "Docker Machine for Windows" ; Types: full custom; Flags: fixed
+Name: "VirtualBox"; Description: "VirtualBox"; Types: full custom; Flags: disablenouninstallwarning
+Name: "Kitematic"; Description: "Kitematic for Windows (Alpha)" ; Types: full custom
+Name: "Git"; Description: "Git for Windows"; Types: full custom; Flags: disablenouninstallwarning
 
 [Files]
 Source: ".\docker-quickstart-terminal.ico"; DestDir: "{app}"; Flags: ignoreversion
@@ -255,8 +254,10 @@ begin
 		'For further information, please see the {#MyAppName} installation documentation link.'
 
 		// Don't do this until we can compare versions
-		// Wizardform.ComponentsList.Checked[3] := NeedToInstallVirtualBox();
+		// Wizardform.ComponentsList.Checked[2] := NeedToInstallVirtualBox();
+		Wizardform.ComponentsList.ItemEnabled[2] := not NeedToInstallVirtualBox();
 		Wizardform.ComponentsList.Checked[4] := NeedToInstallGit();
+		Wizardform.ComponentsList.ItemEnabled[4] := not NeedToInstallGit();
 end;
 
 function InitializeSetup(): boolean;

@@ -13,7 +13,7 @@
         <line choice="choiceVBox"/>
         <line choice="choiceBoot2DockerISO"/>
     </choices-outline>
-    <choice id="choiceDockerCLI" title="choiceDockerCLI_title" description="choiceDockerCLI_msg" start_selected="true" start_visible="true">
+    <choice id="choiceDockerCLI" title="choiceDockerCLI_title" description="choiceDockerCLI_msg" start_enabled="false" start_selected="true" start_visible="true">
         <pkg-ref id="io.docker.pkg.docker"/>
     </choice>
     <choice id="choiceDockerComposeCLI" title="choiceDockerComposeCLI_title" description="choiceDockerComposeCLI_msg" start_selected="true" start_enabled="true" start_visible="true">
@@ -73,7 +73,7 @@
     <pkg-ref id="io.docker.pkg.kitematicapp">
         <bundle-version/>
     </pkg-ref>
-    <choice id="choiceDockerMachineCLI" title="choiceDockerMachineCLI_title" description="choiceDockerMachineCLI_msg" start_selected="true" start_enabled="true" start_visible="true">
+    <choice id="choiceDockerMachineCLI" title="choiceDockerMachineCLI_title" description="choiceDockerMachineCLI_msg" start_enabled="false" start_selected="true" start_visible="true">
         <pkg-ref id="io.docker.pkg.dockermachine"/>
     </choice>
     <pkg-ref id="io.docker.pkg.dockermachine" auth="Root" version="%DOCKERMACHINE_VERSION%" installKBytes="%DOCKERMACHINE_INSTALL_KBYTES%">#dockermachine.pkg</pkg-ref>
@@ -148,7 +148,7 @@
      {
          try {
              vboxplist = system.files.plistAtPath('/Applications/VirtualBox.app/Contents/Info.plist');
-             if (!vboxplist || !vboxplist.CFBundleVersion || (vboxplist.CFBundleVersion === '5.0.2' && system.version.ProductVersion !== '10.11') || system.compareVersions(vboxplist.CFBundleVersion, '%VBOX_VERSION%') === -1) {
+             if (!vboxplist || !vboxplist.CFBundleVersion || system.compareVersions(vboxplist.CFBundleVersion, '%VBOX_VERSION%') === -1) {
                  return true;
              }
 
