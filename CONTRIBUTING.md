@@ -12,3 +12,17 @@ Thanks for taking the time to improve the Docker Toolbox!
 ## License
 
 By contributing your code, you agree to license your contribution under the [Apache license](https://github.com/docker/toolbox/blob/master/LICENSE/LICENSE).
+
+## Diff scpt files
+
+.gitattributes
+```
+*.scpt diff=scpt
+```
+
+.git/config
+```
+[diff "scpt"]
+    textconv = osadecompile
+    binary = true
+```
