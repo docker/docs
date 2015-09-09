@@ -1,5 +1,5 @@
 +++
-title = "DTR Org Namespace API"
+title = "Docker Trusted Registry Org Namespace API"
 description = "Docker Trusted Registry 1.3 Organization owned Namespace API"
 keywords = ["API, Docker, index, REST, documentation, Docker Trusted Registry, registry"]
 weight = 69
@@ -87,7 +87,7 @@ namespace.
 
 - *400* the namespace is not owned by an organization.
 - *403* the client is not authorized.
-- *404* 
+- *404*
 - *200* success.
 
 ## Get a Team's Granted Access to an Organization-Owned Namespace of Repositories

@@ -13,18 +13,18 @@ weight=3
 # Docker Trusted Registry Administrator's Guide
 
 This guide covers tasks and functions an administrator of Docker Trusted Registry
-(DTR) will need to know about, such as reporting, logging, system management,
+ will need to know about, such as reporting, logging, system management,
 performance metrics, etc.
-For tasks DTR users need to accomplish, such as using DTR to push and pull
+For tasks Docker Trusted Registry users need to accomplish, such as pushing and pulling
 images, please look at the [User's Guide]({{< relref "userguide.md" >}}).
 
 ## Reporting
 
 ### Dashboard
 
-![DTR Dashboard</admin/metrics/>](../assets/admin-metrics.png)
+![Docker Trusted Registry Dashboard</admin/metrics/>](../assets/admin-metrics.png)
 
-The "DTR Dashboard displays "hardware" resource utilization and network traffic metrics for the DTR host as well as for each of its contained services. The CPU and RAM usage meters at the top indicate overall resource usage for the host, while detailed time-series charts are provided below for each container providing a DTR service.
+The "Docker Trusted Registry Dashboard displays "hardware" resource utilization and network traffic metrics for the Docker Trusted Registry host as well as for each of its contained services. The CPU and RAM usage meters at the top indicate overall resource usage for the host, while detailed time-series charts are provided below for each container providing a Docker Trusted Registry service.
 
 In addition, if your registry is using a filesystem storage driver, you will see a usage meter indicating used and available space on the storage volume. Third-party storage back-ends are not supported, so if you are using one, this meter will not be displayed.
 
@@ -39,12 +39,12 @@ service. See below for a
 
 ![System Logs page</admin/logs/>](../assets/admin-logs.png)
 
-Click "Logs" in the global nav bar at the top of page to view the logs from your DTR's containers. You will see
-log sections on this page for each service in your DTR instance. Older or newer
+Click "Logs" in the global nav bar at the top of page to view the logs from your Docker Trusted Registry's containers. You will see
+log sections on this page for each service in your Docker Trusted Registry instance. Older or newer
 logs can be loaded by scrolling up or down. See below for a
 [detailed explanation of the available services](#services).
 
-DTR's log files can be found on the host in `/usr/local/etc/dtr/logs/`. The
+Docker Trusted Registry's log files can be found on the host in `/usr/local/etc/dtr/logs/`. The
 files are limited to a maximum size of 64mb. They are rotated every two weeks,
 when the aggregator sends logs to the collection server, or they are rotated if
 a logfile would exceed 64mb without rotation. Log files are named `<component
@@ -53,7 +53,7 @@ provides (`manager`, `admin-server`, etc.).
 
 ### Usage statistics and crash reports
 
-During normal use, DTR generates usage statistics and crash reports. This
+During normal use, Docker Trusted Registry generates usage statistics and crash reports. This
 information is collected by Docker, Inc. to help us prioritize features, fix
 bugs, and improve our products. Specifically, Docker, Inc. collects the
 following information:
@@ -61,10 +61,10 @@ following information:
 * Error logs
 * Crash logs
 
-## Emergency access to DTR
+## Emergency access to Docker Trusted Registry
 
-If your authenticated or public access to the DTR web interface has stopped
-working, but your DTR admin container is still running, you can add an
+If your authenticated or public access to the Docker Trusted Registry web interface has stopped
+working, but your Docker Trusted Registry admin container is still running, you can add an
 [ambassador container](https://docs.docker.com/articles/ambassador_pattern_linking/)
 to get temporary unsecure access to it by running:
 
@@ -74,20 +74,20 @@ to get temporary unsecure access to it by running:
 > or have root privileges. Otherwise, you may need to add `sudo` to the example
 > command above.
 
-This will give you access on port `9999` on your DTR server - `http://<dtr-host-ip>:9999/admin/`.
+This will give you access on port `9999` on your Docker Trusted Registry server - `http://<dtr-host-ip>:9999/admin/`.
 
 ### SSH Access to host
 
-As an extra measure of safety, make sure you have SSH access to the DTR host before you start using DTR. 
+As an extra measure of safety, make sure you have SSH access to the Docker Trusted Registry host before you start using Docker Trusted Registry.
 
-If you are hosting DTR on an EC2 host launched from the AWS Marketplace AMI, note that the user is `ec2-user`:
+If you are hosting Docker Trusted Registry on an EC2 host launched from the AWS Marketplace AMI, note that the user is `ec2-user`:
 `/path/to/private_key/id_rsa ec2-user@<dtr-dns-entry>`.
 
 ## Services
 
-DTR runs several Docker services which are essential to its reliability and
+Docker Trusted Registry runs several Docker services which are essential to its reliability and
 usability. The following services are included; you can see their details by
-viewing the [DTR Dashboard](#dashboard) and [Logs](#logs) pages:
+viewing the [Docker Trusted Registry Dashboard](#dashboard) and [Logs](#logs) pages:
 
 * `admin_server`: Used for displaying system health, performing upgrades,
 configuring settings, and viewing logs.
@@ -98,13 +98,13 @@ other services. Handles log persistence and rotation on disk.
 * `image_storage_X`: Stores Docker images using the [Docker Registry HTTP API V2](http://docs.docker.com/registry/spec/api/). Typically,
 multiple image storage services are used in order to provide greater uptime and
 faster, more efficient resource utilization.
-* `postgres`: A database service used to host authentication (LDAP) data and other datasets as needed by DTR.
+* `postgres`: A database service used to host authentication (LDAP) data and other datasets as needed by Docker Trusted Registry.
 
-## DTR system management
+## Docker Trusted Registry system management
 
-The `docker/trusted-registry` image is used to control the DTR system. This
+The `docker/trusted-registry` image is used to control the Docker Trusted Registry system. This
 image uses the Docker socket to orchestrate the multiple services that comprise
-DTR.
+Docker Trusted Registry.
 
      $ sudo bash -c "$(sudo docker run docker/trusted-registry [COMMAND])"
 
@@ -116,23 +116,23 @@ Supported commands are: `install`, `start`, `stop`, `restart`, `pull`, `info`,
 
 ### `install`
 
-Install DTR.
+Install Docker Trusted Registry.
 
 ### `start`
 
-Start DTR containers that are not running.
+Start Docker Trusted Registry containers that are not running.
 
 ### `stop`
 
-Stop DTR containers that are running.
+Stop Docker Trusted Registry containers that are running.
 
 ### `restart`
 
-Stop and then start the DTR containers.
+Stop and then start the Docker Trusted Registry containers.
 
 ### `status`
 
-Display the current running status of only the DTR containers.
+Display the current running status of only the Docker Trusted Registry containers.
 
 ```
 $ sudo bash -c "$(docker run docker/trusted-registry status)"
@@ -162,7 +162,7 @@ docker_trusted_registry_auth_server
 ### `info`
 
 Display the version and info for the Docker daemon, and version and image ID's
-of DTR.
+of Docker Trusted Registry.
 
 
 ```
@@ -240,10 +240,10 @@ and other proprietary information before sending it.
 
 > **Warning:** These diagnostics files may contain secrets that you need to remove
 > before passing on - such as raw container log files, Azure storage credentials, or passwords that may be
-> sent to non-DTR containers using the `docker run -e PASSWORD=asdf` environment variable
+> sent to non-Docker Trusted Registry containers using the `docker run -e PASSWORD=asdf` environment variable
 > options.
 
-Stream to STDOUT a zip file containing CSDE and DTR configuration, state, and log
+Stream to STDOUT a zip file containing CSDE and Docker Trusted Registry configuration, state, and log
 files to help the Docker Enterprise support team:
 
 - your Docker host's `ca-certificates.crt`
@@ -251,22 +251,22 @@ files to help the Docker Enterprise support team:
   information and log files.
 - `dockerEngine/`: the Docker daemon's `info` and `version` output
 - `dockerState/`: the Docker daemon's container states, image states, daemon log file, and daemon configuration file
-- `dtrlogs/`: the DTR container log files
-- `manager/`: the DTR `/usr/local/etc/dtr` DTR configuration directory and DTR manager `info` output. See the [export settings section](#export-settings) for more details.
+- `dtrlogs/`: the Docker Trusted Registry container log files
+- `manager/`: the Docker Trusted Registry `/usr/local/etc/dtr` configuration directory and manager `info` output. See the [export settings section](#export-settings) for more details.
 - `sysinfo/`: Host information
 - `errors.txt`: errors and warnings encountered while running diagnostics
 
 
 ### `export-settings`
 
-Export the DTR configuration files for backup or diagnostics use.
+Export the Docker Trusted Registry configuration files for backup or diagnostics use.
 
 `$ sudo bash -c "$(docker run docker/trusted-registry export-settings)" > export-settings.tar.gz`
 
 > **Warning:** These diagnostics files may contain secrets that you need to remove
 > before passing on - such as Azure storage credentials.
 
-Stream to STDOUT a gzipped tar file containing the DTR configuration files from `/usr/local/etc/dtr/`:
+Stream to STDOUT a gzipped tar file containing the Docker Trusted Registry configuration files from `/usr/local/etc/dtr/`:
 
 - `garant.yml`
 - `generatedConfigs/nginx.conf`
@@ -278,25 +278,24 @@ Stream to STDOUT a gzipped tar file containing the DTR configuration files from 
 
 ## Client Docker Daemon diagnostics
 
-To debug client Docker daemon communication issues with DTR, we also provide
+To debug client Docker daemon communication issues with Docker Trusted Registry, we also provide
 a diagnostics tool to be run on the client Docker daemon.
 
 > **Warning:** These diagnostics files may contain secrets that you need to remove
 > before passing on - such as raw container log files, Azure storage credentials, or passwords that may be
-> sent to non-DTR containers using the `docker run -e PASSWORD=asdf` environment variable
+> sent to non-Docker Trusted Registry containers using the `docker run -e PASSWORD=asdf` environment variable
 > options.
 
 You can download and run this tool using the following command:
 
 > **Note:** If you supply an administrator username and password, then the
 > `diagnostics` tool will also download some logs and configuration data
-> from the remote DTR server.
+> from the remote Docker Trusted Registry server.
 
 ```
 $ wget https://dhe.mycompany.com/admin/bin/diagnostics && chmod +x diagnostics
 $ sudo ./diagnostics dhe.mycompany.com > enduserDiagnostics.zip
-DTR administrator username (provide empty string if there is no admin server authentication): 
-DTR administrator password (provide empty string if there is no admin server authentication): 
+DTR administrator password (provide empty string if there is no admin server authentication):
 WARN  [1.1.0-alpha-001472_g8a9ddb4] Encountered errors running diagnostics errors=[Failed to copy DTR Adminserver's exported settings into ZIP output: "Failed to read next tar header: \"archive/tar: invalid tar header\"" Failed to copy logs from DTR Adminserver into ZIP output: "Failed to read next tar header: \"archive/tar: invalid tar header\"" error running "sestatus": "exit status 127" error running "dmidecode": "exit status 127"]
 ```
 
@@ -307,19 +306,19 @@ The zip file will contain the following information:
   information and log files.
 - `dockerEngine/`: the local Docker daemon's `info` and `version` output
 - `dockerState/`: the local Docker daemon's container states, image states, log file, and daemon configuration file
-- `dtr/`: Remote DTR services information. This directory will only be populated if the user enters a DTR "admin" username and password.
-- - `dtr/logs/`: the remote DTR container log files. This directory will only be populated if the user enters a DTR "admin" username and password.
-- - `dtr/exportedSettings/`: the DTR manager container's log files and a backup of the `/usr/local/etc/dtr` DTR configuration directory. See the [export settings section](#export-settings) for more details.
+- `dtr/`: Remote Docker Trusted Registry services information. This directory will only be populated if the user enters a Docker Trusted Registry "admin" username and password.
+- - `dtr/logs/`: the remote Docker Trusted Registry container log files. This directory will only be populated if the user enters a Docker Trusted Registry "admin" username and password.
+- - `dtr/exportedSettings/`: the Docker Trusted Registry manager container's log files and a backup of the `/usr/local/etc/dtr` Docker Trusted Registry configuration directory. See the [export settings section](#export-settings) for more details.
 - `sysinfo/`: local Host information
 - `errors.txt`: errors and warnings encountered while running diagnostics
 
-### Starting and stopping DTR
+### Starting and stopping Docker Trusted Registry
 
-If you need to stop and/or start DTR (for upgrading, troubleshooting, etc.), use the following commands:
+If you need to stop and/or start Docker Trusted Registry (for upgrading, troubleshooting, etc.), use the following commands:
 
 `sudo bash -c "$(docker run docker/trusted-registry stop)"`
 `sudo bash -c "$(docker run docker/trusted-registry start)"`
 
 ## Next Steps
 
-For information on installing DTR, take a look at the [Installation instructions]({{< relref "docker-trusted-registry/install.md" >}}).
+For information on installing Docker Trusted Registry, take a look at the [Installation instructions]({{< relref "docker-trusted-registry/install.md" >}}).

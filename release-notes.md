@@ -14,25 +14,25 @@ weight=100
 
 ## Prior Versions
 
-These notes refer to the current and immediately prior releases of Docker Trusted Registry (DTR) and the commercially supported Docker Engine. For notes on older versions of these, see the [prior release notes archive]({{< relref "prior-release-notes.md" >}}).
+These notes refer to the current and immediately prior releases of Docker Trusted Registry  and the commercially supported Docker Engine. For notes on older versions of these, see the [prior release notes archive]({{< relref "prior-release-notes.md" >}}).
 
-## Docker Trusted Registry (DTR)
+## Docker Trusted Registry
 
-### DTR 1.3.1
+### Docker Trusted Registry 1.3.1
 (31 August 2015)
 
-This release corrects the following issues in DTR 1.3.0
+This release corrects the following issues in Docker Trusted Registry 1.3.0
 
 * The dashboard page was calculating incorrect stats.
 * LDAP group sync failed to handle paginated results for extremely large groups.
 * The repo delete endpoint returned incorrect error codes under certain conditions.
 
-### DTR 1.3.0
+### Docker Trusted Registry 1.3.0
 (26 August 2015)
 
-This release addresses a few bugs and issues in DTR 1.2.0 and introduces some new features and functionality, including:
+This release addresses a few bugs and issues in Docker Trusted Registry 1.2.0 and introduces some new features and functionality, including:
 
-* A completely new user-interface for the Admin application brings DTR in line with other Docker products and provides greater ease-of-use.
+* A completely new user-interface for the Admin application brings Docker Trusted Registry in line with other Docker products and provides greater ease-of-use.
 
 * A new Accounts & Repos API provides new fine-grained role-based access control down to the per-repo level. See the [API's documentation](/docker-trusted-registry/api/) for more information.
 
@@ -40,12 +40,12 @@ This release addresses a few bugs and issues in DTR 1.2.0 and introduces some ne
 
 * Multiple security improvements and bug fixes.
 
-### DTR 1.2.0
+### Docker Trusted Registry 1.2.0
 (23 July 2015)
 
-This release adds CentOS support and addresses a few bugs and issues in DTR 1.1.0:
+This release adds CentOS support and addresses a few bugs and issues in Docker Trusted Registry 1.1.0:
 
-* Fixes an issue where for certain configurations of DTR, proxy configuration settings and variables were not being passed to all DTR containers and thus were not being respected.
+* Fixes an issue where for certain configurations of Docker Trusted Registry, proxy configuration settings and variables were not being passed to all Docker Trusted Registry containers and thus were not being respected.
 * Documentation links in the UI now point to correct docs.
 * Generated support info bundles have been scrubbed to remove highly sensitive data.
 * Certifies support for CentOS 7.1.
@@ -144,8 +144,8 @@ This parameter cannot be passed to the `docker build` command.
 
 #### **Upgrade notes**
 
-When upgrading, make sure you stop DTR first, perform the Engine upgrade, and
-then restart DTR.
+When upgrading, make sure you stop Docker Trusted Registry first, perform the Engine upgrade, and
+then restart Docker Trusted Registry.
 
 If you are running with SELinux enabled, previous Docker Engine releases allowed
 you to bind-mount additional volumes or files inside the container as follows:

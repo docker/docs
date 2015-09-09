@@ -16,16 +16,16 @@ weight=1
 ## Overview
 
 This Quick Start Guide will give you a hands-on look at the basics of using
-Docker Trusted Registry (DTR), Docker’s on-premise image storage application.
-This guide will walk you through using DTR to complete a typical, and critical,
+Docker Trusted Registry, Docker's on-premise image storage application.
+This guide will walk you through using Docker Trusted Registry to complete a typical, and critical,
 part of building a development pipeline: setting up a Jenkins instance. Once you
-complete the task, you should have a good idea of how DTR works and how it might
+complete the task, you should have a good idea of how Docker Trusted Registry works and how it might
 be useful to you.
 
 Specifically, this guide demonstrates the process of retrieving the
 [official Docker image for Jenkins](https://registry.hub.docker.com/_/jenkins/),
 customizing it to suit your needs, and then hosting it on your private instance
-of DTR located inside your enterprise’s firewalled environment. Your developers
+of Docker Trusted Registry located inside your enterprise’s firewalled environment. Your developers
 will then be able to retrieve the custom Jenkins image in order to use it to
 build CI/CD infrastructure for their projects, no matter the platform they're
 working from, be it a laptop, a VM, or a cloud provider.
@@ -34,18 +34,17 @@ The guide will walk you through the following steps:
 
 1. Pulling the official Jenkins image from the public Docker Hub
 2. Customizing the Jenkins image to suit your needs
-3. Pushing the customized image to DTR
-4. Pulling the customized image from DTR
+3. Pushing the customized image to Docker Trusted Registry
+4. Pulling the customized image from Docker Trusted Registry
 4. Launching a container from the custom image
 5. Using the new Jenkins container
 
 You should be able to complete this guide in about thirty minutes.
 
-> **Note:** This guide assumes you have installed a working instance of DTR
+> **Note:** This guide assumes you have installed a working instance of Docker Trusted Registry
 > reachable at dtr.yourdomain.com. If you need help installing and configuring
-> DTR, please consult the
+> Docker Trusted Registry, please consult the
 [installation instructions]({{< relref "docker-trusted-registry/install.md" >}}).
-
 
 ## Pulling the official Jenkins image
 
@@ -102,7 +101,7 @@ image, you need to:
 All of the above files need to be in the same directory as the Dockerfile you
 will create in the next step.
 
-1. Create a build directory called `build`, and change to that new directory: 
+1. Create a build directory called `build`, and change to that new directory:
 
     $ mkdir build && cd build
 
@@ -120,7 +119,7 @@ line:
 > access to existing keys. If you don't have access, or can't generate keys
 > yourself, feel free to skip the steps involving them and HTTPS config. The
 > guide will still walk you through building a custom Jenkins image and pushing
-> and pulling that image using DTR.
+> and pulling that image using Docker Trusted Registry.
 
 ### Creating a Dockerfile
 
@@ -189,8 +188,8 @@ Please note the use of the `-t` flag in the `docker build` command above. The
 `-t` flag lets you  tag an image so it can be pushed to a custom repository. In
 the example above, the new image is tagged so it can be pushed to the
 `ci-infrastructure` repository within the `dtr.yourdomain.com` registry (your
-local DTR instance). This will be important when you need to `push` the
-customized image to DTR later.
+local Docker Trusted Registry instance). This will be important when you need to `push` the
+customized image to Docker Trusted Registry later.
 
 A `docker images` command will now show the custom image alongside the Jenkins
 image pulled earlier:
@@ -202,7 +201,7 @@ image pulled earlier:
 
 ## Pushing to Docker Trusted Registry
 
-> **Note**: If your DTR instance has authentication enabled, you will need to
+> **Note**: If your Docker Trusted Registry instance has authentication enabled, you will need to
 > use your command line to `docker login <dtr-hostname>` (e.g., `docker login
 > dtr.yourdomain.com`).
 >
@@ -222,7 +221,7 @@ image pulled earlier:
 >     ?scope=repository%3Ahello-world%3Apull%2Cpush&service=dtr.yourdomain.com
 >     request failed with status: 401 Unauthorized
 
-Now that you’ve created the custom image, it can be pushed to DTR using the
+Now that you’ve created the custom image, it can be pushed to Docker Trusted Registry using the
 [`docker push` command](https://docs.docker.com/reference/commandline/push):
 
     $ docker push dtr.yourdomain.com/ci-infrastructure/jnkns-img
@@ -233,18 +232,18 @@ Now that you’ve created the custom image, it can be pushed to DTR using the
     492ed3875e3e: Image successfully pushed
     fc0ab3008d40: Image successfully pushed
 
-You can view the traffic throughput from the custom image being pushed, by selecting `Network` from the `Load Balancer` tile on the DTR Dashboard:
+You can view the traffic throughput from the custom image being pushed, by selecting `Network` from the `Load Balancer` tile on the Docker Trusted Registry Dashboard:
 ![](http://i.imgur.com/8KlHj9u.png)
 
-![DTR console push throughput](../assets/console-push.png)
+![Docker Trusted Registry console push throughput](../assets/console-push.png)
 
 Once the image is successfully pushed, it can be downloaded, or pulled, by any
-Docker host that has access to DTR.
+Docker host that has access to Docker Trusted Registry.
 
 ## Pulling from Docker Trusted Registry
-To pull the `jnkns-img` image from DTR, run the
+To pull the `jnkns-img` image from Docker Trusted Registry, run the
 [`docker pull`](https://docs.docker.com/reference/commandline/pull)
-command from any Docker Host that has access to your DTR instance:
+command from any Docker Host that has access to your Docker Trusted Registry instance:
 
     $ docker pull dtr.yourdomain.com/ci-infrastructure/jnkns-img
     latest: Pulling from dtr.yourdomain.com/ci-infrastructure/jnkns-img
@@ -257,9 +256,9 @@ command from any Docker Host that has access to your DTR instance:
     dtr.yourdomain.com/ci-infrastructure/jnkns-img:latest: The image you are pulling has been verified. Important: image verification is a tech preview feature and should not be relied on to provide security.
     Status: Downloaded newer image for dtr.yourdomain.com/ci-infrastructure/jnkns-img:latest
 
-You can view the traffic throughput from the custom image being pulled on the DTR Dashboard.
+You can view the traffic throughput from the custom image being pulled on the Docker Trusted Registry Dashboard.
 
-Now that the `jnkns-img` image has been pulled locally from DTR, you can view it
+Now that the `jnkns-img` image has been pulled locally from Docker Trusted Registry, you can view it
 in the output of the `docker images` command:
 
      $ docker images
@@ -268,7 +267,7 @@ in the output of the `docker images` command:
 
 ## Launching a custom Jenkins container
 
-Now that you’ve successfully pulled the customized Jenkins image from DTR, you
+Now that you’ve successfully pulled the customized Jenkins image from Docker Trusted Registry, you
 can create a container from it with the
 [`docker run` command](https://docs.docker.com/reference/commandline/run):
 
@@ -326,10 +325,10 @@ showing that Jenkins is not available on its default port 8080 over HTTP.
 This demonstration shows your Jenkins image has been configured correctly for
 HTTPS access, your new plugin was added and is ready for use, and HTTP access
 has been disabled. At this point, any member of your team can use `docker pull`
-to access the image from your DTR instance, allowing them to access a
+to access the image from your Docker Trusted Registry instance, allowing them to access a
 configured, secured Jenkins instance that can run on any infrastructure.
 
 ## Next Steps
 
-For more information on using DTR, take a look at the
+For more information on using Docker Trusted Registry, take a look at the
 [User's Guide]({{< relref "userguide.md" >}}).

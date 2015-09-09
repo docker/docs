@@ -1,6 +1,6 @@
 +++
-title = "DTR Accounts & Repos API: Intro & Overview"
-description = "Overview of the structure and design of the DTR Accounts & Repos API"
+title = "Docker Trusted Registry Accounts & Repos API: Intro & Overview"
+description = "Overview of the structure and design of the Docker Trusted Registry Accounts & Repos API"
 keywords = ["API, Docker, index, REST, documentation, Docker Trusted Registry, registry"]
 [menu.main]
 parent = "smn_dtrapi"
@@ -10,11 +10,11 @@ parent = "smn_dtrapi"
 
 ## Introduction
 
-The Accounts & Repos API lets you integrate Docker Trusted Registry (DTR) with your enterprise's organizational structure by providing fine-grained, role-based access control for your repositories. Specifically, this API provides:
+The Accounts & Repos API lets you integrate Docker Trusted Registry  with your enterprise's organizational structure by providing fine-grained, role-based access control for your repositories. Specifically, this API provides:
 
 * An API for account management, including creating an account, listing existing accounts, creating a team within an organization, listing teams in an organization, getting a specific team, listing members of a team, adding and removing members from a team (if using a managed whitelist), or editing LDAP syncing configuration.
 
-* Methods for syncing members of a team in DTR with an LDAP group filter configured by an admin.
+* Methods for syncing members of a team in Docker Trusted Registry with an LDAP group filter configured by an admin.
 
 * An API for repository management and access control, including creating a repository, listing repositories for an account, adding collaborators to a repository, setting namespace-level access for teams, etc.
 
@@ -22,7 +22,7 @@ The API is designed so that minimal data migration is required, only schema migr
 
 ## Overview
 
-This API defines two types of accounts that can own repositories: Users and Organizations. Account-owned (i.e., non-global) repos define a namespace similar to that of the Docker Hub, with two component names in the form `namespace/reponame`. 
+This API defines two types of accounts that can own repositories: Users and Organizations. Account-owned (i.e., non-global) repos define a namespace similar to that of the Docker Hub, with two component names in the form `namespace/reponame`.
 
 Repositories can be either public or private. Public repositories can be
 read by any account in the system, but can only be written to by accounts granted explicit write access. Private repositories cannot be discovered by
@@ -31,14 +31,14 @@ repository.
 
 ### User accounts
 
-DTR users can create a repository under their own namespace and can control which other users have read-only, read-write, or admin access to any
+Docker Trusted Registry users can create a repository under their own namespace and can control which other users have read-only, read-write, or admin access to any
 of their repositories.
 
 User owned repositories can only be accessed by the owner and other
 individual user accounts, i.e., you cannot grant access to a user-owned
 repository to a team of users in an organization. If a repository requires this level of control, consider moving it within an organization namespace.
 
-When the DTR web admin tool is used to assign users global "read-only",
+When the Docker Trusted Registry web admin tool is used to assign users global "read-only",
 "read-write", or managed "admin" roles, they will have that access level to all
 repositories. You can access and modify these roles with the API, using the
 `_global` organization. However, you must have admin access in order to view and
@@ -73,8 +73,8 @@ other organization’s team to a team within the owning organization.
 
 - Repositories must be explicitly created using the API. A `docker push` will
   not create a repository if it does not exist. This prevents a typo from
-  creating an unwanted repository in DTR. This policy will be globally enforced
-  in DTR 1.3.
+  creating an unwanted repository in Docker Trusted Registry. This policy will be globally enforced
+  in Docker Trusted Registry 1.3.
 
 - Organizations can only be created by system admins. This should prevent the
   proliferation of unwanted organization accounts.
@@ -96,7 +96,7 @@ other organization’s team to a team within the owning organization.
   they do not belong. In Docker Trusted Registry, teams will be
   visible to the members of the organization, but will not be able to see a
   teams's members unless they are also a member of that team.
-  
+
 ### Authentication
 
 Clients authenticate API requests by providing Basic Auth credentials (
@@ -125,7 +125,7 @@ $ curl --user readuser:password https://dtr.domain.com/api/v0/accounts
 }
 ```
 
-> **Note**: If you are using DTR's automatically generated, self-signed SSL
+> **Note**: If you are using Docker Trusted Registry's automatically generated, self-signed SSL
 > certificate
 > then you'll need to add `--insecure` to the curl examples.
 

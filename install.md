@@ -13,25 +13,25 @@ weight=4
 # Install Docker Trusted Registry
 
 This document describes the process of obtaining, installing, and securing
-Docker Trusted Registry (DTR). DTR is installed from Docker containers. Once
+Docker Trusted Registry . Docker Trusted Registry is installed from Docker containers. Once
 installed, you will need to select a method of securing it. This doc will
 explain the options you have for security and help you find the resources needed
 to configure it according to your chosen method. More configuration details can
-be found in the [DTR Configuration page]({{< relref "configuration.md" >}}).
+be found in the [Docker Trusted Registry Configuration page]({{< relref "configuration.md" >}}).
 
 Specifically, installation requires completion of these steps, in order:
 
-1. Acquire a license by purchasing DTR or signing up for a trial license.
+1. Acquire a license by purchasing Docker Trusted Registry or signing up for a trial license.
 2. Install the commercially supported Docker Engine.
-3. Install DTR
-4. Add your license to your DTR instance
+3. Install Docker Trusted Registry
+4. Add your license to your Docker Trusted Registry instance
 
-To get your copy of DTR, including a free trial, visit the [Docker Subscription page](https://hub-beta.docker.com/enterprise/).
+To get your copy of Docker Trusted Registry, including a free trial, visit the [Docker Subscription page](https://hub-beta.docker.com/enterprise/).
 
 ## Licensing
 
-In order to run DTR, you will need to get a license, either by purchasing
-DTR or acquiring a trial license. The license will be associated with your free
+In order to run Docker Trusted Registry, you will need to get a license, either by purchasing
+Docker Trusted Registry or acquiring a trial license. The license will be associated with your free
 Docker Hub account or Docker Hub organization (so if you don't have an account,
 you'll need to set one up, which can be done at the same time as your license
 request). To get your license, visit the [Docker Subscription page](https://hub-beta.docker.com/enterprise/) and select the edition you would like acquire. After completing a brief registration process, follow the steps to
@@ -40,7 +40,7 @@ acquire a license.
 Once you've acquired your license, you can view or download it by logging in to
 Docker Hub, going to your account settings (gear icon at upper right), and then
 selecting ["Licenses"](https://hub-beta.docker.com/account/licenses/) from the
-top nav bar. 
+top nav bar.
 
 The Licenses page will display your currently available licenses. Click the cloud icon to download your desired license. You may need to disable any pop-up blocker installed on your browser in order to complete the download.
 
@@ -48,38 +48,38 @@ You can also download the commercially supported Docker Engine packages from thi
 
 ## Prerequisites
 
-DTR runs on the following platforms:
+Docker Trusted Registry runs on the following platforms:
 
 * Ubuntu 14.04 LTS
 * RHEL 7.0 and 7.1
 * CentOS 7.1
 
-DTR 1.3.0 requires the following:
+Docker Trusted Registry 1.3.0 requires the following:
 
 * Commercially supported Docker Engine, preferably 1.6.2-cs5 or later, running
 on a supported host. (See below for instructions on how to install the
 commercially supported Docker Engine.)
 
-> **Note:** In order to remain in compliance with your DTR support agreement,
+> **Note:** In order to remain in compliance with your Docker Trusted Registry support agreement,
 > you **must** use the current version of commercially supported Docker Engine.
 > Running the open source version of Engine is **not** supported.
 
 * Your Docker daemon needs to be listening to the Unix socket (the default) so
-that it can be bind-mounted into the DTR management containers, allowing
-DTR to manage itself and its updates. For this reason, your DTR host will also
+that it can be bind-mounted into the Docker Trusted Registry management containers, allowing
+Docker Trusted Registry to manage itself and its updates. For this reason, your Docker Trusted Registry host will also
 need internet connectivity so it can access the updates.
 
-* Your host also needs to have TCP ports `80` and `443` available for the DTR
+* Your host also needs to have TCP ports `80` and `443` available for the Docker Trusted Registry
 container port mapping.
 
 * You will also need the Docker Hub user-name and password used when obtaining
-the DTR license (or the user-name of an administrator of the Hub organization
+the Docker Trusted Registry license (or the user-name of an administrator of the Hub organization
 that obtained an Enterprise license).
 
 ## Installing the commercially supported Docker Engine
 
-Since DTR is installed using Docker, the commercially supported Docker Engine
-**must be** installed first. This is done with an RPM or DEB package, which you access using a script downloaded from your 
+Since Docker Trusted Registry is installed using Docker, the commercially supported Docker Engine
+**must be** installed first. This is done with an RPM or DEB package, which you access using a script downloaded from your
 [Docker Hub Licenses page](https://hub-beta.docker.com/account/licenses/).
 
 ### Download the commercially supported Docker Engine installation script
@@ -154,7 +154,7 @@ CS Docker Engine 1.6.2cs6 contains fixes issues in 1.6.1,
   and customers should upgrade to it immediately.
 
 > **Note**: If you have CS Docker Engine 1.6.0 installed, it must be upgraded;
-  however, due to compatibility issues, [DTR must be upgraded](#upgrading-docker-trusted-registry)
+  however, due to compatibility issues, [Docker Trusted Registry must be upgraded](#upgrading-docker-trusted-registry)
   first.
 
 The CS Docker Engine installation script set up the RHEL/Ubuntu package repositories,
@@ -162,8 +162,8 @@ so upgrading the Engine only requires you to run the update commands on your ser
 
 ### CentOS 7.1 & RHEL 7.0/7.1 upgrade
 
-The following commands will stop the running DTR, upgrade CS Docker Engine,
-and then start DTR again:
+The following commands will stop the running Docker Trusted Registry, upgrade CS Docker Engine,
+and then start Docker Trusted Registry again:
 
 ```
     $ sudo bash -c "$(sudo docker run docker/trusted-registry stop)"
@@ -174,8 +174,8 @@ and then start DTR again:
 
 ### Ubuntu 14.04 LTS upgrade
 
-The following commands will stop the running DTR, upgrade CS Docker Engine,
-and then start DTR again:
+The following commands will stop the running Docker Trusted Registry, upgrade CS Docker Engine,
+and then start Docker Trusted Registry again:
 
 ```
     $ sudo bash -c "$(sudo docker run docker/trusted-registry stop)"
@@ -185,13 +185,13 @@ and then start DTR again:
 
 ## Installing Docker Trusted Registry
 
-Once the commercially supported Docker Engine is installed, you can install DTR
-itself. DTR is a self-installing application built and distributed using Docker
+Once the commercially supported Docker Engine is installed, you can install Docker Trusted Registry
+itself. Docker Trusted Registry is a self-installing application built and distributed using Docker
 and the [Docker Hub](https://hub-beta.docker.com/). It is able to restart
 and reconfigure itself using the Docker socket that is bind-mounted to its
 container.
 
-Start installing DTR by running the "docker/trusted-registry" container:
+Start installing Docker Trusted Registry by running the "docker/trusted-registry" container:
 
 ```
 	$ sudo bash -c "$(sudo docker run docker/trusted-registry install)"
@@ -201,7 +201,7 @@ Start installing DTR by running the "docker/trusted-registry" container:
 > ensure that the Bash script is run with full access to the Docker host.
 
 The command will execute a shell script that creates the needed
-directories and then runs Docker to pull DTR's images and run its containers.
+directories and then runs Docker to pull Docker Trusted Registry's images and run its containers.
 
 Depending on your internet connection, this process may take several minutes to
 complete.
@@ -257,102 +257,102 @@ Creating container docker_trusted_registry_log_aggregator with docker daemon uni
 Starting container docker_trusted_registry_log_aggregator with docker daemon unix:///var/run/docker.sock
 $ docker ps
 CONTAINER ID        IMAGE                                          COMMAND                CREATED             STATUS              PORTS                                      NAMES
-963ec2a4b047        docker/trusted-registry-nginx:1.1.0            "nginxWatcher"         5 minutes ago       Up 5 minutes        0.0.0.0:80->80/tcp, 0.0.0.0:443->443/tcp   docker_trusted_registry_load_balancer     
-7eade5529049        docker/trusted-registry-distribution:v2.0.1    "registry /config/st   5 minutes ago       Up 5 minutes        5000/tcp                                   docker_trusted_registry_image_storage_0   
-b968a8a986f9        docker/trusted-registry-distribution:v2.0.1    "registry /config/st   5 minutes ago       Up 5 minutes        5000/tcp                                   docker_trusted_registry_image_storage_1   
-390d9d68a33a        docker/trusted-registry-admin-server:1.1.0     "server"               5 minutes ago       Up 5 minutes        80/tcp                                     docker_trusted_registry_admin_server      
-3f8a53dc5f35        docker/trusted-registry-log-aggregator:1.1.0   "log-aggregator"       5 minutes ago       Up 5 minutes                                                   docker_trusted_registry_log_aggregator    
-44083421fa16        docker/trusted-registry-garant:1.1.0           "garant /config/gara   5 minutes ago       Up 5 minutes                                                   docker_trusted_registry_auth_server       
-c4102adf73dc        postgres:9.4.1                                 "/docker-entrypoint.   5 minutes ago       Up 5 minutes        5432/tcp                                   docker_trusted_registry_postgres      
+963ec2a4b047        docker/trusted-registry-nginx:1.1.0            "nginxWatcher"         5 minutes ago       Up 5 minutes        0.0.0.0:80->80/tcp, 0.0.0.0:443->443/tcp   docker_trusted_registry_load_balancer
+7eade5529049        docker/trusted-registry-distribution:v2.0.1    "registry /config/st   5 minutes ago       Up 5 minutes        5000/tcp                                   docker_trusted_registry_image_storage_0
+b968a8a986f9        docker/trusted-registry-distribution:v2.0.1    "registry /config/st   5 minutes ago       Up 5 minutes        5000/tcp                                   docker_trusted_registry_image_storage_1
+390d9d68a33a        docker/trusted-registry-admin-server:1.1.0     "server"               5 minutes ago       Up 5 minutes        80/tcp                                     docker_trusted_registry_admin_server
+3f8a53dc5f35        docker/trusted-registry-log-aggregator:1.1.0   "log-aggregator"       5 minutes ago       Up 5 minutes                                                   docker_trusted_registry_log_aggregator
+44083421fa16        docker/trusted-registry-garant:1.1.0           "garant /config/gara   5 minutes ago       Up 5 minutes                                                   docker_trusted_registry_auth_server
+c4102adf73dc        postgres:9.4.1                                 "/docker-entrypoint.   5 minutes ago       Up 5 minutes        5432/tcp                                   docker_trusted_registry_postgres
 ```
 
-Once this process completes, you should be able to manage and configure your DTR
+Once this process completes, you should be able to manage and configure your Docker Trusted Registry
 instance by pointing your browser to `https://<host-ip>/`.
 
 Your browser will warn you that this is an unsafe site, with a self-signed,
 untrusted certificate. This is normal and expected; allow this connection
 temporarily.
 
-### Setting the DTR Domain Name
+### Setting the Docker Trusted Registry Domain Name
 
-The DTR Administrator site will also warn that the "Domain Name" is not set.
+The Docker Trusted Registry Administrator site will also warn that the "Domain Name" is not set.
 Select "Settings" from the global nav bar at the top of the page, and then set
-the "Domain Name" to the full host-name of your DTR server.
-Clicking the "Save and Restart DTR Server" button will generate a new certificate, which will be used
-by both the DTR Administrator web interface and the DTR Registry server.
+the "Domain Name" to the full host-name of your Docker Trusted Registry server.
+Clicking the "Save and Restart Docker Trusted Registry Server" button will generate a new certificate, which will be used
+by both the Docker Trusted Registry Administrator web interface and the Docker Trusted Registry server.
 
-After the server restarts, you will again need to allow the connection to the untrusted DTR web admin site.
+After the server restarts, you will again need to allow the connection to the untrusted Docker Trusted Registry web admin site.
 
-Lastly, you will see a red warning notifying you that this instance of DTR is
+Lastly, you will see a red warning notifying you that this instance of Docker Trusted Registry is
 unlicensed. You'll correct this in the next step.
 
 ### Add your license
 
-The DTR registry services will not start until you add your license.
+The Docker Trusted Registry services will not start until you add your license.
 To do that, you'll first download your license from the Docker Hub and then
-upload it to your DTR web admin server. Follow these steps:
+upload it to your Docker Trusted Registry web admin server. Follow these steps:
 
 1. If needed, log back into the [Docker Hub](https://hub.docker.com)
    using the user-name you used when obtaining your license. Go to "Settings"   (gear icon, top right) to get to your account settings, and then click on "Licenses" in the top nav bar.
 
 2. You'll see a list of available licenses. Click on the download button to
    obtain the license file you'd like to use.
-   ![Download DTR license](../assets/docker-hub-org-enterprise-license.png)
+   ![Download Docker Trusted Registry license](../assets/docker-hub-org-enterprise-license.png)
 
-3. Next, go to your DTR instance in your browser, click on "Settings" in the
+3. Next, go to your Docker Trusted Registry instance in your browser, click on "Settings" in the
    global nav bar and then click "License" in the Settings nav bar. Click the
    "Choose File" button, which will open a standard file browser. Locate and
    select the license file you downloaded in step 2, above. Approve the
    selection to close the dialog.
    ![http settings page</admin/settings#license>](../assets/admin-settings-license.png)
 
-4. Click the "Save and restart" button, which will quit DTR and then restart
+4. Click the "Save and restart" button, which will quit Docker Trusted Registry and then restart
    it, applying the new license.
 
 5. Verify the acceptance of the license by confirming that the "Unlicensed copy"
    warning is no longer present.
 
-### Securing DTR
+### Securing Docker Trusted Registry
 
-Securing DTR is **required**. You will not be able to push or pull from DTR until you secure it.
+Securing Docker Trusted Registry is **required**. You will not be able to push or pull from Docker Trusted Registry until you secure it.
 
-There are several options and methods for securing DTR. For more information,
+There are several options and methods for securing Docker Trusted Registry. For more information,
 see the [configuration documentation]({{< relref "configuration.md#security" >}})
 
-### Using DTR to push and pull images
+### Using Docker Trusted Registry to push and pull images
 
-Now that you have DTR configured with a "Domain Name" and have your client
+Now that you have Docker Trusted Registry configured with a "Domain Name" and have your client
 Docker daemons configured with the required security settings, you can test your
 setup by following the instructions for
-[Using DTR to Push and pull images]({{< relref "userguide.md" >}}).
+[Using Docker Trusted Registry to Push and pull images]({{< relref "userguide.md" >}}).
 
-### DTR web interface and registry authentication
+### Docker Trusted Registry web interface and registry authentication
 
-By default, there is no authentication set on either the DTR web admin
-interface or the DTR registry. You can restrict access using an in-DTR
-configured set of users (and passwords), or you can configure DTR to use LDAP-
+By default, there is no authentication set on either the Docker Trusted Registry web admin
+interface or the Docker Trusted Registry. You can restrict access using an in-Docker Trusted Registry
+configured set of users (and passwords), or you can configure Docker Trusted Registry to use LDAP-
 based authentication.
 
-See [DTR Authentication settings]({{< relref "configuration.md#authentication" >}}) for more
+See [Docker Trusted Registry Authentication settings]({{< relref "configuration.md#authentication" >}}) for more
 details.
 
 ## Upgrading Docker Trusted Registry
 
-DTR has been designed to allow on-the-fly software upgrades. Start by
-loading the DTR Dashboard in your browser and clicking "Settings" in the global nav bar. Then click "Updates" in the Settings nav bar. You'll see the currently installed version and a message telling you that the version is either current or that there is an update available.
+Docker Trusted Registry has been designed to allow on-the-fly software upgrades. Start by
+loading the Docker Trusted Registry Dashboard in your browser and clicking "Settings" in the global nav bar. Then click "Updates" in the Settings nav bar. You'll see the currently installed version and a message telling you that the version is either current or that there is an update available.
 
 
 If there is an update available, you will see the message "System Update
 Available" and a button labeled "Update to Version X.XX". Click the button to
-start the update process. To update, DTR will pull new DTR container images from
-the Docker Hub. If you have not already connected to Docker Hub, DTR will prompt
+start the update process. To update, Docker Trusted Registry will pull new Docker Trusted Registry container images from
+the Docker Hub. If you have not already connected to Docker Hub, Docker Trusted Registry will prompt
 you to log in.
 
 The upgrade process requires a small amount of downtime to complete. To complete
-the upgrade, DTR will:
+the upgrade, Docker Trusted Registry will:
 
 * Connect to the Docker Hub to pull new container images with the new version of
-DTR.
+Docker Trusted Registry.
 * Deploy those containers
 * Shut down the old containers
 * Resolve any necessary links/urls.
@@ -362,12 +362,12 @@ should complete within a few minutes.
 
 You should now [upgrade CS Docker Engine](#upgrading-the-commercially-supported-docker-engine) if needed.
 
-> **Note**: If Docker engine is upgraded first (DTR 1.1 on CS Docker Engine 1.6.1),
-> DTR can still be upgraded from the command line by running:
+> **Note**: If Docker engine is upgraded first (Docker Trusted Registry 1.1 on CS Docker Engine 1.6.1),
+> Docker Trusted Registry can still be upgraded from the command line by running:
 >
 > `sudo bash -c "$(sudo docker run docker/trusted-registry:1.1.0 upgrade 1.1.1)"`
 
 ## Next Steps
 
-For information on configuring DTR for your environment, take a look at the
+For information on configuring Docker Trusted Registry for your environment, take a look at the
 [Configuration instructions]({{< relref "configuration.md" >}}).

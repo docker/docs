@@ -1,5 +1,5 @@
 +++
-title = "DTR User and Org API"
+title = "Docker Trusted Registry User and Org API"
 description = "Docker Trusted Registry 1.3 User and Organization Accounts API"
 keywords = ["API, Docker, index, REST, documentation, Docker Trusted Registry, registry"]
 weight = 62
@@ -9,7 +9,7 @@ parent = "smn_dtrapi"
 
 # Docker Trusted Registry 1.3 Teams
 
-As with Docker HUb, DTR teams of users can only exist within an Organization.
+As with Docker HUb, Docker Trusted Registry teams of users can only exist within an Organization.
 
 ## List Teams in an Organization
 

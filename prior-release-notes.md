@@ -12,38 +12,38 @@ weight=101
 
 # Release Notes
 
-## Docker Trusted Registry (DTR)
+## Docker Trusted Registry
 
-### DTR 1.1.0
+### Docker Trusted Registry 1.1.0
 (23 June 2015)
 
-This release of DTR (formerly DHE) adds major integration with the AWS and Azure marketplaces, giving customers a smoother installation path. DTR 1.1 also adds finer-grained permissions and improvements and additions to the UI and logging. Bugs in LDAP/AD integration have also been remediated, improving the stability and usability of DTR. See below for specifics.
+This release of Docker Trusted Registry (formerly DHE) adds major integration with the AWS and Azure marketplaces, giving customers a smoother installation path. Docker Trusted Registry 1.1 also adds finer-grained permissions and improvements and additions to the UI and logging. Bugs in LDAP/AD integration have also been remediated, improving the stability and usability of Docker Trusted Registry. See below for specifics.
 
 #### New Features
 
-* New, more granular, [roles for users]({{< relref "configuration.md#authentication" >}}). DTR users can now be assigned different levels of access (admin, r/w, r/o) to the repositories. **Important:** Existing DTR users should make sure to see the note [below](#dhe-1-0-upgrade-warning) regarding migrating users before upgrading.
+* New, more granular, [roles for users]({{< relref "configuration.md#authentication" >}}). Docker Trusted Registry users can now be assigned different levels of access (admin, r/w, r/o) to the repositories. **Important:** Existing Docker Trusted Registry users should make sure to see the note [below](#dhe-1-0-upgrade-warning) regarding migrating users before upgrading.
 * A new storage status indicator for storage space. The dashboard now shows used and available storage space for supported storage drivers.
-* A new [diagnostics tool]({{< relref "adminguide.md#client-docker-daemon-diagnostics" >}}) gathers and bundles DTR logs, system information, container information, and other configuration settings for use by Docker support or as a backup.
+* A new [diagnostics tool]({{< relref "adminguide.md#client-docker-daemon-diagnostics" >}}) gathers and bundles Docker Trusted Registry logs, system information, container information, and other configuration settings for use by Docker support or as a backup.
 * Performance and reliability improvements to the S3 storage backend.
-* DTR images are now available on the Amazon AWS and Microsoft Azure marketplaces.
+* Docker Trusted Registry images are now available on the Amazon AWS and Microsoft Azure marketplaces.
 
 #### Fixes
 
 The following notable issues have been remediated:
 
-* Fixed an issue that caused DTR logins to fail if some LDAP servers were unreachable.
-* Fixed a resource leak in DTR storage.
+* Fixed an issue that caused Docker Trusted Registry logins to fail if some LDAP servers were unreachable.
+* Fixed a resource leak in Docker Trusted Registry storage.
 
 #### DHE 1.0 Upgrade Warning
 
-Customers who are currently using DHE 1.0 **must** follow the [upgrading instructions](https://forums.docker.com/t/upgrading-docker-hub-enterprise-to-docker-trusted-registry/1925) in our support Knowledge Base. These instructions will show you how to modify existing authentication data and storage volume settings to move to DTR. Note that automatic upgrading has been disabled for DHE users because of these issues.
+Customers who are currently using DHE 1.0 **must** follow the [upgrading instructions](https://forums.docker.com/t/upgrading-docker-hub-enterprise-to-docker-trusted-registry/1925) in our support Knowledge Base. These instructions will show you how to modify existing authentication data and storage volume settings to move to Docker Trusted Registry. Note that automatic upgrading has been disabled for DHE users because of these issues.
 
-### DTR 1.0.1
+### Docker Trusted Registry 1.0.1
 (11 May 2015)
 
 - Addresses compatibility issue with 1.6.1 CS Docker Engine
 
-### DTR 1.0.0
+### Docker Trusted Registry 1.0.0
 (23 Apr 2015)
 
 - First release
@@ -139,8 +139,8 @@ This parameter cannot be passed to the `docker build` command.
 
 #### **Upgrade notes**
 
-When upgrading, make sure you stop DTR first, perform the Engine upgrade, and
-then restart DTR.
+When upgrading, make sure you stop Docker Trusted Registry first, perform the Engine upgrade, and
+then restart Docker Trusted Registry.
 
 If you are running with SELinux enabled, previous Docker Engine releases allowed
 you to bind-mount additional volumes or files inside the container as follows:

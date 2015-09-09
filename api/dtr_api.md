@@ -9,13 +9,13 @@ parent = "mn_reference"
 
 # Docker Trusted Registry APIs
 
-The DTR Accounts & Reps APIs allow you to integrate Docker Trusted Registry (DTR) with your enterprise's
+The Docker Trusted Registry Accounts & Reps APIs allow you to integrate Docker Trusted Registry  with your enterprise's
 organizational structure by providing fine-grained, role-based access control for your repositories.
 
 
 The following documents detail the API:
 
-- [DTR Accounts & Repos API: Intro & Overview](/docker-trusted-registry/api/)
+- [Docker Trusted Registry Accounts & Repos API: Intro & Overview](/docker-trusted-registry/api/)
 - [Accounts API Doc]({{< relref "dtr_1_3_accounts.md" >}})
 - [Teams API Doc]({{< relref "dtr_1_3_teams.md" >}})
 - [Repositories API Doc]({{< relref "dtr_1_3_repositories.md" >}})

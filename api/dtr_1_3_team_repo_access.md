@@ -1,5 +1,5 @@
 +++
-title = "DTR Org Repository API"
+title = "Docker Trusted Registry Org Repository API"
 description = "Docker Trusted Registry 1.3 Organization owned Repository API"
 keywords = ["API, Docker, index, REST, documentation, Docker Trusted Registry, registry"]
 weight = 68

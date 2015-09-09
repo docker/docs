@@ -1,5 +1,5 @@
 +++
-title = "DTR Accounts API"
+title = "Docker Trusted Registry Accounts API"
 description = "Docker Trusted Registry 1.3 User and Organization Accounts"
 keywords = ["API, Docker, index, REST, documentation, Docker Trusted Registry, registry"]
 weight = 61
@@ -151,10 +151,10 @@ There is no user restriction on creating a managed user account, however managed
 user accounts start out inactive and the user cannot authenticate until an admin
 explicitly activates the account using the activate user API endpoint.
 
-This allows the creation of DTR managed namespace reservations by an external
+This allows the creation of Docker Trusted Registry managed namespace reservations by an external
 service, which can then activate the account when it's been verified by the external service.
 
-DTR auth settings must be in "Managed" mode.
+Docker Trusted Registry auth settings must be in "Managed" mode.
 
 Example Request:
 
@@ -191,7 +191,7 @@ Anyone - no authorization required.
 
 ### Create a User Account from LDAP
 
-DTR auth settings must be in "ldap" mode.
+Docker Trusted Registry auth settings must be in "ldap" mode.
 
 Example Request:
 
@@ -207,9 +207,9 @@ Content-Type: application/json
 }
 ```
 
-The `name` field is the requested username to use in DTR, while `ldapLogin`
+The `name` field is the requested username to use in Docker Trusted Registry, while `ldapLogin`
 should be the user's LDAP user login attribute. These need only differ if the
-user prefers or if the user's LDAP login name is not compatible with valid DTR
+user prefers or if the user's LDAP login name is not compatible with valid Docker Trusted Registry
 usernames.
 
 Response:
@@ -235,7 +235,7 @@ the client provides a valid LDAP login and password.
 
 ### Create an Organization Account
 
-DTR auth settings must be in "Managed" or "ldap" mode.
+Docker Trusted Registry auth settings must be in "Managed" or "ldap" mode.
 
 Example Request:
 
@@ -337,7 +337,7 @@ which case the `oldPassword` field may be omitted from the request body).
 
 - *400* invalid input. (can be `password too short`)
 - *401* client must be authenticated.
-- *404* no such account. 
+- *404* no such account.
 - *200* success.
 
 ## Activate a Managed User

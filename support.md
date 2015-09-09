@@ -14,8 +14,8 @@ weight=99
 
 ## How to get support
 
-Purchasing a DTR License or Commercial Support subscription means your questions
-and issues about DTR will receive prioritized support.
+Purchasing a Docker Trusted Registry License or Commercial Support subscription means your questions
+and issues about Docker Trusted Registry will receive prioritized support.
 You can file a ticket through [email](mailto:support@docker.com) from your
 company email address, or visit our [support site](https://support.docker.com).
 In either case, you'll need to verify your email address, and then you can

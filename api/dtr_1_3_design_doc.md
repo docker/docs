@@ -1,6 +1,6 @@
 +++
-title = "DTR API Design document"
-description = "DTR 1.3 API Design document"
+title = "Docker Trusted Registry API Design document"
+description = "Docker Trusted Registry 1.3 API Design document"
 draft = true
 keywords = ["API, Docker, index, REST, documentation, Docker Trusted Registry, registry"]
 [menu.main]
@@ -46,7 +46,7 @@ No UI. This release will be API only.
 ### Design
 
 There are two types of accounts: Users and Organizations. We will be creating a
-sense of account-owned namespaces in DTR much like in Docker Hub Registry.
+sense of account-owned namespaces in Docker Trusted Registry much like in Docker Hub Registry.
 Account-owned (non-global) repositories will have two-component names of the
 form `namespace/reponame`.
 
@@ -96,7 +96,7 @@ other organization’s team to a team within the owning organization.
 - Repositories must be explicitly created using the API. A `docker push` will
   not create a repository if it does not exist. This prevents a typo from
   creating an unwanted repository in Docker Trusted Registry. This policy
-  will be globally enforced in DTR 1.3.
+  will be globally enforced in Docker Trusted Registry 1.3.
 
 - Organizations can only be created by system admins. This should prevent the
   proliferation of unwanted organization accounts.
