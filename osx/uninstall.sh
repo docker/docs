@@ -24,8 +24,7 @@ rm -f /usr/local/bin/docker
 rm -f /usr/local/bin/docker-machine
 rm -f /usr/local/bin/docker-compose
 
-echo "Removing boot2docker.iso and socket files..."
-rm -rf ~/.docker
+echo "Removing boot2docker.iso"
 rm -rf /usr/local/share/boot2docker
 
 echo "All Done!"
