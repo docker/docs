@@ -3,11 +3,11 @@ package main
 import (
 	"fmt"
 	"os"
-	"os/user"
 	"path/filepath"
 	"strings"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/mitchellh/go-homedir"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
@@ -37,14 +37,11 @@ func parseConfig() {
 	}
 
 	if trustDir == "" {
-		// Retrieve current user to get home directory
-		usr, err := user.Current()
-		if err != nil {
-			fatalf("cannot get current user: %v", err)
-		}
-
 		// Get home directory for current user
-		homeDir := usr.HomeDir
+		homeDir, err := homedir.Dir()
+		if err != nil {
+			fatalf("cannot get current user home directory: %v", err)
+		}
 		if homeDir == "" {
 			fatalf("cannot get current user home directory")
 		}
