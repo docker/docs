@@ -1,9 +1,5 @@
 # Docker Toolbox Roadmap
 
-## Features 
+## Features
 
 * Linux support (help wanted) 
-
-## Documentation Work
-
-* Contributing guidelines 
