@@ -1,7 +1,7 @@
 'docker_title' = 'Docker Toolbox';
 
 'choiceDockerCLI_title' = 'Docker Client %DOCKER_VERSION%';
-'choiceDockerCLI_msg' = 'Installs the Docker client for Mac OS X into /usr/local/bin/';
+'choiceDockerCLI_msg' = 'Installs the Docker Client for Mac OS X into /usr/local/bin/';
 
 'choiceDockerMachineCLI_title' = 'Docker Machine %DOCKERMACHINE_VERSION%';
 'choiceDockerMachineCLI_msg' = 'Installs the Docker Machine binary into /usr/local/bin/';
@@ -15,7 +15,7 @@
 'choiceDockerQuickstartTerminalAPP_title' = 'Docker Quickstart Terminal';
 'choiceDockerQuickstartTerminalAPP_msg' = 'Installs the Docker Quickstart Terminal application into /Applications/Docker/';
 
-'choiceKitematicAPP_title' = 'Kitematic %KITEMATICAPP_VERSION%';
+'choiceKitematicAPP_title' = 'Docker Kitematic %KITEMATICAPP_VERSION%';
 'choiceKitematicAPP_msg' = 'Installs Kitematic into /Applications/Docker/';
 
 'choiceVBox_title' = 'Oracle VM VirtualBox %VBOX_VERSION%';
