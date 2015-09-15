@@ -18,6 +18,24 @@ These notes refer to the current and immediately prior releases of Docker Truste
 
 ## Docker Trusted Registry
 
+### Docker Trusted Registry 1.3.3
+(18 September 2015)
+
+This release corrects the following issues in Docker Trusted Registry 1.3.2
+
+* Fixed an issue related to LDAP integration for users of Oracle Virtual Directory.
+* Corrected an issue where Docker Trusted Registry would not accept a given certificate if the configured domain was only in the Subject Alternative Names (SANs) field and not in the Common Name (CN) field of the certificate.
+
+### Docker Trusted Registry 1.3.2
+(16 September 2015)
+
+This release addresses the following change in Docker Trusted Registry 1.3.2 and is only available to customers who purchased DTR through Amazon Web Services (AWS) Marketplace.
+
+* Docker Trusted Registry (DTR) now supports Amazon Web
+Services (AWS) Integrated Billing. Previously, AWS users were required to
+separately purchase a DTR license from Docker. AWS users can try DTR
+out-of-the-box.
+
 ### Docker Trusted Registry 1.3.1
 (31 August 2015)
 
