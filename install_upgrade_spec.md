@@ -15,7 +15,7 @@ logic that resides largely within this bootstrapper.
 ## Assumptions
 
 * Orca will not be HA in v1
-* We wont use data volume containers, but instead host volume mounts
+* We will use named volumes for persistence
 * Our goal is to get as close to a full end-to-end deployment as possible (from bare-metal up to orca)
     * Advanced customers may be able to cherry-pick, but that's not the focus in v1
     * We'll deploy an internal consul instance for swarm (not HA)
@@ -25,7 +25,7 @@ logic that resides largely within this bootstrapper.
 * Swarm manager and docker proxy may fold into one component, but this shouldn't fundamentally change the flow
 * We'll "own" two internal root CAs for orca/swarm to provide access control
     * Set up so that certs can be replaced post v1
-    * We'll store the certs in a host volume mount
+    * We'll store the certs in a named volume
     * The volume could be swapped out for a keywhiz volume mount in the future (unclear if we can write to it though...)
     * Laying the groundwork of a central CA for our managed swarm will enable keywhiz for secret management post v1
 * Installation logic should be idempotent, and not clobber any pertinent state unless the user asks us to
@@ -117,7 +117,7 @@ docker run --rm -t \
     * If this fails, inform user to "docker login" using their hub credentials and try again
 7. Stop any existing orca containers already running on the host
 8. (conditional) clobber existing state if requested
-9. Generate Root CA and certs if not present in host volume path: /etc/docker/ssl/orca
+9. Generate Root CA and certs if not present in named volume:
     * Orca CA cert
     * Swarm CA cert
 10. Generate cert for proxy/swarm manager signed by Swarm CA
@@ -137,7 +137,7 @@ docker run --rm -t \
     * Bind to port 2376 so this becomes the "default" way to talk to this node
 15. Verify we can see the swarm manager we just deployed
     * if not warn user firewall settings may need to be opened for port XXX (moot in baremetal case)
-16. Deploy DB with host volume mount for data directory
+16. Deploy DB with named volume data directory
 17. Deploy Orca server
     * Linked to DB, pointed at consul external port
     * Bind 80/443, use random ports if unavailable

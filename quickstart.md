@@ -36,6 +36,22 @@ Important notes for first time users:
     * Take a look at the env.sh within the zip file for instructions (should be familiar if you've used machine)
 
 
+## Data Persistence
+
+Orca uses named volumes for persistence of user data.  By default,
+the bootstrapper will create these using the default volume driver and
+flags if they are not detected.  If you use a custom volume driver, you
+can pre-create volumes prior to installing Orca.
+
+* **orca-root-ca** - The certificate and key for the Orca Root CA
+* **orca-swarm-root-ca** - The certificate and key for the Swarm Root CA
+* **orca-server-certs** - The server certificates for the Orca web server
+* **orca-swarm-node-certs** - The swarm certificates for the current node (repeated on every node in the cluster)
+* **orca-config** - Orca server configuration settings (ID, locations of key services)
+* **orca-db** - Orca server data (local accounts, etc.)
+* **orca-kv** - KV store persistence
+
+
 ## User Supplied Certificates
 
 Orca uses two separate root CAs for access control - one for Swarm,
@@ -60,14 +76,19 @@ internal Swarm Root CA.  Normal user accounts should be signed by the
 same external Root CA (or a trusted intermediary), and the public keys
 manually added through the UI.
 
-To install Orca with an external Root CA, place the following files on the
-engine host where you will install Orca **before** running the install:
+To install Orca with an external Root CA, create a named volume called **orca-server-certs**
+on the engine host where you will install Orca **before** running the install, and ensure the following
+files are present in the top-level directory of this volume:
 
-* /var/lib/docker/orca\_ssl/orca\_ca.pem - Your Root CA Certificate chain (including any intermediaries)
-* /var/lib/docker/orca\_ssl/orca\_controller.pem - Your signed Orca server cert
-* /var/lib/docker/orca\_ssl/orca\_controller\_key.pem - Your Orca server private key
+* **ca.pem** - Your Root CA Certificate chain (including any intermediaries)
+* **cert.pem** - Your signed Orca server cert
+* **key.pem** - Your Orca server private key
 
 After setting up these files on the host, you can install with the "--external-orca-ca" flag.
+
+If you are creating your own storage volumes (for example, to take
+advantage of a 3rd party storage driver) you can omit the **orca-root-ca**
+volume as it will not be used when using an external Orca Root CA.
 
 ```bash
 docker run --rm -it \

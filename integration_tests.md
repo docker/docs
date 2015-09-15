@@ -39,6 +39,11 @@ You can also set PRESERVE\_TEST\_MACHINE in your environment to a
 non-empty value to prevent the virtual machines from being deleted after
 the test run so you can inspect the aftermath.
 
+By default, the tests will copy the non-official images (orca itself,
+the bootstrapper, etc.) and pull the official images (swarm, etc.) If you
+instead want it to copy (not pull) all the images, set COPY\_ALL\_IMAGES
+to a non-empty value.
+
 
 The tests can hammer on your disks pretty hard.  If you're testing
 locally, you might see slightly less impact on your system by running
