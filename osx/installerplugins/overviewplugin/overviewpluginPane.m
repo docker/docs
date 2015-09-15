@@ -41,8 +41,12 @@
     if (dir != InstallerDirectionForward) {
         return;
     }
-
-    [Mixpanel trackEvent:@"Continued from Overview" forPane:self];
+    
+    [[[self section] sharedDictionary] removeObjectForKey:@"disableTracking"];
+    
+    NSString *enabled = self.checkbox.state == NSOnState ? @"No" : @"Yes";
+    [Mixpanel trackEvent:@"Continued from Overview" forPane:self withProperties:[[NSDictionary alloc] initWithObjectsAndKeys:@"enabled", @"Tracking Enabled", nil]];
+    
 }
 
 - (IBAction)checkboxChanged:(id)sender {

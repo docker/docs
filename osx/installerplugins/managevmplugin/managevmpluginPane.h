@@ -20,8 +20,8 @@
 @property (weak) IBOutlet NSTextField *migrationStatusLabel;
 @property (unsafe_unretained) IBOutlet NSTextView *migrationLogsTextView;
 @property (weak) IBOutlet NSScrollView *migrationLogsScrollView;
-@property (weak) IBOutlet NSButton *issueButton;
+@property (weak) IBOutlet NSButton *submitButton;
 
-- (IBAction)issueButtonClicked:(id)sender;
+- (IBAction)submitButtonClicked:(id)sender;
 
 @end

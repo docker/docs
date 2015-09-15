@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="15A279b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="15A282b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
@@ -14,10 +14,7 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Qsn-FY-4qK" customClass="managevmpluginPane">
             <connections>
-                <outlet property="arrowImage" destination="dMU-aX-9b9" id="ASN-Jn-gwO"/>
-                <outlet property="boot2dockerImage" destination="dPT-t6-boJ" id="l7a-8P-CZa"/>
                 <outlet property="contentView" destination="wZl-Zt-3Ul" id="pOK-JC-MAY"/>
-                <outlet property="issueButton" destination="a96-1q-EBq" id="xHH-VV-7rh"/>
                 <outlet property="migrateCheckbox" destination="1jI-qj-TPj" id="Jez-nP-voL"/>
                 <outlet property="migrateExtraLabel" destination="KQO-mX-hcI" id="Rg7-4S-ty5"/>
                 <outlet property="migrationLogsScrollView" destination="UwA-bh-SQw" id="Zw0-AU-QPA"/>
@@ -26,6 +23,7 @@
                 <outlet property="migrationStatusImage" destination="rc2-Ev-HMB" id="wbY-mD-33x"/>
                 <outlet property="migrationStatusLabel" destination="PYI-QA-XWa" id="0I6-Jo-SZi"/>
                 <outlet property="parentSection" destination="-2" id="FB7-UV-e8k"/>
+                <outlet property="submitButton" destination="a96-1q-EBq" id="Wy4-rp-zAa"/>
                 <outlet property="toolboxImage" destination="FO2-AK-Ue7" id="5iF-Bg-BdV"/>
             </connections>
         </customObject>
@@ -33,16 +31,6 @@
             <rect key="frame" x="0.0" y="0.0" width="418" height="330"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
-                <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dPT-t6-boJ">
-                    <rect key="frame" x="46" y="181" width="96" height="96"/>
-                    <animations/>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="fjp-1z-VlF"/>
-                </imageView>
-                <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dMU-aX-9b9">
-                    <rect key="frame" x="190" y="210" width="38" height="38"/>
-                    <animations/>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NSFollowLinkFreestandingTemplate" id="7IH-3T-Kug"/>
-                </imageView>
                 <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KQO-mX-hcI">
                     <rect key="frame" x="38" y="45" width="362" height="43"/>
                     <animations/>
@@ -60,15 +48,6 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                 </button>
-                <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FO2-AK-Ue7">
-                    <rect key="frame" x="269" y="181" width="96" height="96"/>
-                    <animations/>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="KTv-gW-FBX"/>
-                </imageView>
-                <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" maxValue="100" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="uCY-2T-BB0">
-                    <rect key="frame" x="193" y="213" width="32" height="32"/>
-                    <animations/>
-                </progressIndicator>
                 <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PYI-QA-XWa">
                     <rect key="frame" x="18" y="166" width="382" height="28"/>
                     <animations/>
@@ -119,20 +98,28 @@
                 <button hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a96-1q-EBq">
                     <rect key="frame" x="124" y="126" width="170" height="32"/>
                     <animations/>
-                    <buttonCell key="cell" type="push" title="Submit GitHub Issue" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="bna-Yz-WXL">
+                    <buttonCell key="cell" type="push" title="Submit Error Report" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="bna-Yz-WXL">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="issueButtonClicked:" target="Qsn-FY-4qK" id="N6K-SY-Nde"/>
+                        <action selector="submitButtonClicked:" target="Qsn-FY-4qK" id="b4l-JE-Ssw"/>
                     </connections>
                 </button>
+                <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FO2-AK-Ue7">
+                    <rect key="frame" x="161" y="202" width="96" height="96"/>
+                    <animations/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="KTv-gW-FBX"/>
+                </imageView>
+                <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" maxValue="100" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="uCY-2T-BB0">
+                    <rect key="frame" x="193" y="133" width="32" height="32"/>
+                    <animations/>
+                </progressIndicator>
             </subviews>
             <animations/>
         </customView>
     </objects>
     <resources>
         <image name="NSCaution" width="32" height="32"/>
-        <image name="NSFollowLinkFreestandingTemplate" width="14" height="14"/>
     </resources>
 </document>

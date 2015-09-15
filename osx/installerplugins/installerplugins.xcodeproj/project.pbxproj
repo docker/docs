@@ -53,7 +53,8 @@
 		1B4C91C31B85198100A06068 /* InstallerSections.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = InstallerSections.plist; sourceTree = "<group>"; };
 		1B8417E71B85261F00B1FA4D /* kitematic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kitematic.png; sourceTree = "<group>"; };
 		1B8417E81B85261F00B1FA4D /* quickstart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = quickstart.png; sourceTree = "<group>"; };
-		1B97EA281B9F674A00DBE255 /* informationplugin.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = informationplugin.bundle; path = /Users/jmorgan/workspace/toolbox/osx/installerplugins/build/Debug/informationplugin.bundle; sourceTree = "<absolute>"; };
+		1BB3EBCC1BA74ABA00C2A3CF /* utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = utils.h; path = common/utils.h; sourceTree = "<group>"; };
+		1BB3EBCD1BA74AD300C2A3CF /* bugsnag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bugsnag.h; path = common/bugsnag.h; sourceTree = "<group>"; };
 		1BF102BB1B8BDEDA00FCB650 /* overviewplugin.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = overviewplugin.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BF102BE1B8BDEDA00FCB650 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BF102C01B8BDEDA00FCB650 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -74,13 +75,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		1B4C91B01B85198100A06068 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1BF1029B1B8B940500FCB650 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -138,7 +132,9 @@
 		1B4C915D1B85021200A06068 /* common */ = {
 			isa = PBXGroup;
 			children = (
+				1BB3EBCD1BA74AD300C2A3CF /* bugsnag.h */,
 				1B4C915E1B85023200A06068 /* mixpanel.h */,
+				1BB3EBCC1BA74ABA00C2A3CF /* utils.h */,
 			);
 			name = common;
 			sourceTree = "<group>";
@@ -227,23 +223,6 @@
 			productReference = 1B4C91B31B85198100A06068 /* quickstartplugin.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
-		1BF1029D1B8B940500FCB650 /* informationplugin */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1BF102B21B8B940500FCB650 /* Build configuration list for PBXNativeTarget "informationplugin" */;
-			buildPhases = (
-				1BF1029A1B8B940500FCB650 /* Sources */,
-				1BF1029B1B8B940500FCB650 /* Frameworks */,
-				1BF1029C1B8B940500FCB650 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = informationplugin;
-			productName = informationplugin;
-			productReference = 1B97EA281B9F674A00DBE255 /* informationplugin.bundle */;
-			productType = "com.apple.product-type.bundle";
-		};
 		1BF102BA1B8BDEDA00FCB650 /* overviewplugin */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1BF102CD1B8BDEDA00FCB650 /* Build configuration list for PBXNativeTarget "overviewplugin" */;
@@ -276,9 +255,6 @@
 					1B4C91B21B85198100A06068 = {
 						CreatedOnToolsVersion = 6.4;
 					};
-					1BF1029D1B8B940500FCB650 = {
-						CreatedOnToolsVersion = 6.4;
-					};
 					1BF102BA1B8BDEDA00FCB650 = {
 						CreatedOnToolsVersion = 6.4;
 					};
@@ -299,7 +275,6 @@
 			targets = (
 				1B4C91411B8500A700A06068 /* managevmplugin */,
 				1B4C91B21B85198100A06068 /* quickstartplugin */,
-				1BF1029D1B8B940500FCB650 /* informationplugin */,
 				1BF102BA1B8BDEDA00FCB650 /* overviewplugin */,
 			);
 		};
@@ -333,13 +308,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1BF1029C1B8B940500FCB650 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1BF102B91B8BDEDA00FCB650 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -368,13 +336,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B4C91BC1B85198100A06068 /* quickstartpluginPane.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1BF1029A1B8B940500FCB650 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -546,6 +507,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -561,6 +523,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = managevmplugin/Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -590,35 +553,6 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				INFOPLIST_FILE = quickstartplugin/Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Release;
-		};
-		1BF102B01B8B940500FCB650 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = informationplugin/Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Debug;
-		};
-		1BF102B11B8B940500FCB650 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				INFOPLIST_FILE = informationplugin/Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -681,15 +615,6 @@
 			buildConfigurations = (
 				1B4C91C61B85198100A06068 /* Debug */,
 				1B4C91C71B85198100A06068 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1BF102B21B8B940500FCB650 /* Build configuration list for PBXNativeTarget "informationplugin" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1BF102B01B8B940500FCB650 /* Debug */,
-				1BF102B11B8B940500FCB650 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

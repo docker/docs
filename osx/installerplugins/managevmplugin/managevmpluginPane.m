@@ -10,8 +10,8 @@
 #import "mixpanel.h"
 
 @interface managevmpluginPane()
-@property BOOL migrating;
-@property BOOL successfullyMigrated;
+@property BOOL locked;
+@property BOOL successful;
 @end
 
 @implementation managevmpluginPane
@@ -23,6 +23,31 @@ NSString *dockerMachinePath = @"/usr/local/bin/docker-machine";
     NSTask* task = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/sudo" arguments:[NSArray arrayWithObjects:@"-i", @"-u", NSUserName(), vBoxManagePath, @"showvminfo", name, nil]];
     [task waitUntilExit];
     return [task terminationStatus] != 1;
+}
+
+- (NSString *) boot2dockerISOVersionForVM:(NSString*)name {
+    NSTask* task = [[NSTask alloc] init];
+    task.arguments =  [NSArray arrayWithObjects:[NSString stringWithFormat:@"%@/.docker/machine/machines/%@/boot2docker.iso", NSHomeDirectory(), name], nil];
+    task.launchPath = @"/usr/bin/file";
+
+    NSPipe * out = [NSPipe pipe];
+    [task setStandardOutput:out];
+    [task launch];
+    [task waitUntilExit];
+    
+    if (task.terminationStatus != 0) {
+        return nil;
+    }
+
+    NSFileHandle * read = [out fileHandleForReading];
+    NSData * dataRead = [read readDataToEndOfFile];
+    NSString * stringRead = [[NSString alloc] initWithData:dataRead encoding:NSUTF8StringEncoding];
+    
+    NSCharacterSet *delimiters = [NSCharacterSet characterSetWithCharactersInString:@"v'"];
+    NSArray *splitString = [stringRead componentsSeparatedByCharactersInSet:delimiters];
+    
+    NSString *version = [[splitString objectAtIndex:2] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    return version;
 }
 
 - (BOOL) canMigrateBoot2DockerVM {
@@ -50,9 +75,27 @@ NSString *dockerMachinePath = @"/usr/local/bin/docker-machine";
     return YES;
 }
 
-- (void) migrateBoot2DockerVM {
+- (BOOL) canUpgradeBoot2DockerVM {
+    // VirtualBox and Docker Machine exist
+    if (![[NSFileManager defaultManager] fileExistsAtPath:vBoxManagePath] || ![[NSFileManager defaultManager] fileExistsAtPath:dockerMachinePath]) {
+        return NO;
+    }
     
-    self.migrating = YES;
+    // docker-machine path and VirtualBox VM exist
+    if (![self vmExists:@"default"] ||
+        ![[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"%@/.docker/machine/machines/default", NSHomeDirectory()]] ||
+        ![[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"%@/.docker/machine/machines/default/boot2docker.iso", NSHomeDirectory()]]) {
+        return NO;
+    }
+    
+    NSString *incomingVersion = [[[self section] bundle] objectForInfoDictionaryKey:@"Installer Version"];
+    NSString *existingVersion = [self boot2dockerISOVersionForVM:@"default"];
+    
+    return [existingVersion compare:incomingVersion options:NSNumericSearch] != NSOrderedAscending;
+}
+
+- (void) migrateBoot2DockerVM {
+    self.locked = YES;
     
     // Remove existing vm if it exists (obviously user must have deleted the
     NSTask* removeVMTask = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/sudo" arguments:[NSArray arrayWithObjects:@"-i", @"-u", NSUserName(), dockerMachinePath, @"rm", @"-f", @"default", nil]];
@@ -67,6 +110,70 @@ NSString *dockerMachinePath = @"/usr/local/bin/docker-machine";
     migrateTask.launchPath = @"/usr/bin/sudo";
     migrateTask.arguments = [NSArray arrayWithObjects:@"-i", @"-u", NSUserName(), dockerMachinePath, @"-D", @"create", @"-d", @"virtualbox", @"--virtualbox-memory", @"2048", @"--virtualbox-import-boot2docker-vm", @"boot2docker-vm", @"default", nil];
     
+    
+    [self runTask:migrateTask onFinish:^void (int status) {
+        self.nextEnabled = YES;
+        self.boot2dockerImage.hidden = YES;
+        self.toolboxImage.hidden = YES;
+        [self.migrationProgress stopAnimation:self];
+        self.migrationProgress.hidden = YES;
+        
+        self.migrationStatusLabel.hidden = NO;
+        self.migrationStatusImage.hidden = NO;
+        
+        if (status == 0) {
+            self.successful = YES;
+            self.migrationStatusLabel.stringValue = @"Your Boot2Docker VM was successfully migrated to a Docker Machine VM named \"default\".";
+            self.migrationStatusImage.image = [[NSImage alloc]initWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"toolboxcheck" ofType:@"png"]];
+            [Mixpanel trackEvent:@"Boot2Docker Migration Succeeded" forPane:self];
+            [self gotoNextPane];
+        } else {
+            self.migrationLogsScrollView.hidden = NO;
+            self.submitButton.hidden = NO;
+            [Mixpanel trackEvent:@"Boot2Docker Migration Failed" forPane:self];
+            self.migrationStatusLabel.hidden = NO;
+            self.migrationStatusLabel.stringValue = @"Creating the VM failed. Following the install, try creating a vm manually via docker-machine.";
+        }
+ 
+    }];
+}
+
+- (void) upgradeBoot2DockerVM {
+    self.locked = YES;
+    
+    // Do the migration
+    NSTask* task = [[NSTask alloc] init];
+    task.launchPath = @"/usr/bin/sudo";
+    task.arguments = [NSArray arrayWithObjects:@"-i", @"-u", NSUserName(), dockerMachinePath, @"-D", @"upgrade", @"default", nil];
+    
+    [self runTask:task onFinish:^void (int status) {
+        self.nextEnabled = YES;
+        self.boot2dockerImage.hidden = YES;
+        self.toolboxImage.hidden = YES;
+        [self.migrationProgress stopAnimation:self];
+        self.migrationProgress.hidden = YES;
+        
+        self.migrationStatusLabel.hidden = NO;
+        self.migrationStatusImage.hidden = NO;
+        
+        if (status == 0) {
+            self.successful = YES;
+            self.migrationStatusLabel.stringValue = @"Your Boot2Docker VM was successfully migrated to a Docker Machine VM named \"default\".";
+            self.migrationStatusImage.image = [[NSImage alloc]initWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"toolboxcheck" ofType:@"png"]];
+            [Mixpanel trackEvent:@"Boot2Docker Migration Succeeded" forPane:self];
+            [self gotoNextPane];
+        } else {
+            self.migrationLogsScrollView.hidden = NO;
+            self.submitButton.hidden = NO;
+            [Mixpanel trackEvent:@"Boot2Docker Migration Failed" forPane:self];
+            self.migrationStatusLabel.hidden = NO;
+            self.migrationStatusLabel.stringValue = @"Creating the VM failed. Following the install, try creating a vm manually via docker-machine.";
+        }
+        
+    }];
+}
+
+- (void) runTask:(NSTask *)task onFinish:(void (^)(int))finish {
     // Remove certificates, ssh keys from logs
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"BEGIN.*END" options:NSRegularExpressionDotMatchesLineSeparators error:NULL];
     NSFont *font = [NSFont fontWithName:@"Menlo" size:10.0];
@@ -84,48 +191,25 @@ NSString *dockerMachinePath = @"/usr/local/bin/docker-machine";
             [self.migrationLogsTextView scrollRangeToVisible:NSMakeRange([[self.migrationLogsTextView string] length], 0)];
         });
     };
-
-    migrateTask.standardOutput = [NSPipe pipe];
-    migrateTask.standardError = [NSPipe pipe];
     
-    [[migrateTask.standardOutput fileHandleForReading] setReadabilityHandler:appendOutput];
-    [[migrateTask.standardError fileHandleForReading] setReadabilityHandler:appendOutput];
+    task.standardOutput = [NSPipe pipe];
+    task.standardError = [NSPipe pipe];
     
-    migrateTask.terminationHandler = ^(NSTask* task) {
+    [[task.standardOutput fileHandleForReading] setReadabilityHandler:appendOutput];
+    [[task.standardError fileHandleForReading] setReadabilityHandler:appendOutput];
+    
+    task.terminationHandler = ^(NSTask* task) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [task.standardOutput fileHandleForReading].readabilityHandler = nil;
-            
-            self.boot2dockerImage.hidden = YES;
-            self.toolboxImage.hidden = YES;
-            [self.migrationProgress stopAnimation:self];
-            self.migrationProgress.hidden = YES;
-            
-            self.migrationStatusLabel.hidden = NO;
-            self.migrationStatusImage.hidden = NO;
-            
-            if (task.terminationStatus == 0) {
-                self.successfullyMigrated = YES;
-                self.migrationStatusLabel.stringValue = @"Your Boot2Docker VM was successfully migrated to a Docker Machine VM named \"default\".";
-                self.migrationStatusImage.image = [[NSImage alloc]initWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"toolboxcheck" ofType:@"png"]];
-                [Mixpanel trackEvent:@"Boot2Docker Migration Succeeded" forPane:self];
-                self.nextEnabled = YES;
-                [self gotoNextPane];
-            } else {
-                self.migrationLogsScrollView.hidden = NO;
-                self.issueButton.hidden = NO;
-                [Mixpanel trackEvent:@"Boot2Docker Migration Failed" forPane:self];
-                self.migrationStatusLabel.hidden = NO;
-                self.migrationStatusLabel.stringValue = @"VM Migration failed. Please see the logs below.";
-            }
+            finish(task.terminationStatus);
         });
     };
     
-    [migrateTask launch];
+    [task launch];
 }
 
 - (id) init {
-    self.migrating = NO;
-    self.successfullyMigrated = NO;
+    self.successful = NO;
     self = [super init];
     return self;
 }
@@ -136,19 +220,14 @@ NSString *dockerMachinePath = @"/usr/local/bin/docker-machine";
 
 - (void) didEnterPane:(InstallerSectionDirection)dir {
     [Mixpanel trackEvent:@"Installing Files Succeeded" forPane:self];
-    if (self.successfullyMigrated) {
-        self.nextEnabled = YES;
-        return;
-    }
-    
-    if (self.migrating) {
-        self.nextEnabled = NO;
-        return;
-    }
-    
+    self.previousEnabled = NO;
+
     [self.migrationProgress startAnimation:self];
-    
-    if ([self canMigrateBoot2DockerVM]) {
+
+    if ([self canUpgradeBoot2DockerVM]) {
+        self.migrateCheckbox.stringValue = @"Upgrade your Docker Toolbox VM";
+        self.migrateExtraLabel.stringValue = @"Your existing Docker Toolbox VM will not be affected. This should take about a minute.";
+    } else if ([self canMigrateBoot2DockerVM]) {
         NSImage *image = [[NSImage alloc] initWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"boot2docker" ofType:@"png"]];
         self.boot2dockerImage.image = image;
         self.boot2dockerImage.hidden = NO;
@@ -190,9 +269,24 @@ NSString *dockerMachinePath = @"/usr/local/bin/docker-machine";
     return YES;
 }
 
-
-- (IBAction)issueButtonClicked:(id)sender {
-    NSURL *url = [[NSURL alloc] initWithString: @"https://github.com/docker/toolbox/issues"];
-    [[NSWorkspace sharedWorkspace] openURL:url];
+- (IBAction)submitButtonClicked:(id)sender {
+    
+    // Machine logs from UI
+    NSString *machineLogs = [self.migrationLogsTextView string];
+    
+    // VirtualBox logs from file
+    NSString *virtualboxLogs;
+    
+    // Docker daemon logs via SSH
+    NSString *daemonLogs;
+    
+    // Include diagnostic information:
+    // - virtualbox version
+    // - Mac OS X version
+    // - Docker Toolbox Version
+    // - VBoxManage showvminfo output?
+    
+    // Submit all info to bugsnag
 }
+
 @end
