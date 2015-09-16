@@ -57,13 +57,17 @@
     NSString* installerVersion = [bundle objectForInfoDictionaryKey:@"Installer Version"];
     NSString* payload = [NSString stringWithFormat:@"{\"event\": \"%@\", \"properties\": {\"token\": \"%@\", \"distinct_id\": \"%@\", \"os\": \"darwin\", \"os version\":\"%@\", \"version\": \"%@\" %@}}", name, token, uuid, osVersion, installerVersion, props];
     
-    NSData * data = [payload dataUsingEncoding:NSUTF8StringEncoding];
-    NSString* base64Encoded = [data base64EncodedStringWithOptions:0];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString: [NSString stringWithFormat:@"https://api.mixpanel.com/track/?data=%@", base64Encoded]]];
-    
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {}];
-
+    @try {
+        NSData * data = [payload dataUsingEncoding:NSUTF8StringEncoding];
+        NSString* base64Encoded = [data base64EncodedStringWithOptions:0];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString: [NSString stringWithFormat:@"https://api.mixpanel.com/track/?data=%@", base64Encoded]]];
+        
+        NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+        [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {}];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@", @"Failed to send data.");
+    }
 }
 
 + (void) trackEvent:(NSString *)name forPane:(InstallerPane*)pane {
