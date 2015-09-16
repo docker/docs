@@ -1,14 +1,14 @@
 #!/bin/bash
 
-CONSOLE_USER=$(ps aux | grep console | grep -v grep | cut -d' ' -f1)
+CONSOLE_USER=$(stat -f '%Su' /dev/console)
+CONSOLE_USER_HOME=$(su $CONSOLE_USER -c 'echo $HOME')
 
 # Place boot2docker ISO in cache
-mkdir -p ~/.docker/machine/cache
-cp /usr/local/share/boot2docker/boot2docker.iso ~/.docker/machine/cache/boot2docker.iso
-chown -R $CONSOLE_USER:staff ~/.docker
+mkdir -p $CONSOLE_USER_HOME/.docker/machine/cache
+cp /usr/local/share/boot2docker/boot2docker.iso $CONSOLE_USER_HOME/.docker/machine/cache/boot2docker.iso
+chown -R $CONSOLE_USER:staff $CONSOLE_USER_HOME/.docker
 
 # Fix permissions on binaries
-chown -R $CONSOLE_USER:admin /usr/local/bin/docker
-chown -R $CONSOLE_USER:admin /usr/local/bin/docker-machine
-chown -R $CONSOLE_USER:admin /usr/local/bin/docker-compose
-
+chown -R $CONSOLE_USER:admin /usr/local/bin/docker || true
+chown -R $CONSOLE_USER:admin /usr/local/bin/docker-machine || true
+chown -R $CONSOLE_USER:admin /usr/local/bin/docker-compose || true
