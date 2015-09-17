@@ -11,21 +11,17 @@ weight=2
 
 # Code of conduct
 
-The Docker project has not currently adopted a Code of Conduct though there is work being done in this regard.
-
-There is an official [DockerCon code of conduct](http://www.dockercon.com/code-of-conduct).
-
-Without a formal Code of Conduct being adopted by the project, it is
-anticipated that participants and contributors follow the generic [contributor
-covenant](http://contributor-covenant.org) until a formal code of conduct is
-adopted.
+The Docker project has not currently adopted a Code of Conduct though there is
+work being done in this regard. Without a formal Code of Conduct being adopted
+by the project, it is anticipated that participants and contributors follow the
+generic [contributor covenant](http://contributor-covenant.org) until a formal
+code of conduct is adopted.
 
 # Contributor Covenant
 
-As contributors and maintainers of this project, we pledge to respect all
-people who contribute through reporting issues, posting feature requests,
-updating documentation, submitting pull requests or patches, and other
-activities.
+As contributors and maintainers of this project, we pledge to respect all people
+who contribute through reporting issues, posting feature requests, updating
+documentation, submitting pull requests or patches, and other activities.
 
 We are committed to making participation in this project a harassment-free
 experience for everyone, regardless of level of experience, gender, gender
@@ -48,5 +44,3 @@ maintainers.
 This Code of Conduct is adapted from the [Contributor
 Covenant](http:contributor-covenant.org), version 1.0.0, available at
 [http://contributor-covenant.org/version/1/0/0/](http://contributor-covenant.org/version/1/0/0/)
-
-
