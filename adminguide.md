@@ -24,7 +24,7 @@ images, please look at the [User's Guide]({{< relref "userguide.md" >}}).
 
 ![Docker Trusted Registry Dashboard</admin/metrics/>](../assets/admin-metrics.png)
 
-The "Docker Trusted Registry Dashboard displays "hardware" resource utilization and network traffic metrics for the Docker Trusted Registry host as well as for each of its contained services. The CPU and RAM usage meters at the top indicate overall resource usage for the host, while detailed time-series charts are provided below for each container providing a Docker Trusted Registry service.
+The Docker Trusted Registry Dashboard displays "hardware" resource utilization and network traffic metrics for the Docker Trusted Registry host as well as for each of its contained services. The CPU and RAM usage meters at the top indicate overall resource usage for the host, while detailed time-series charts are provided below for each container providing a Docker Trusted Registry service.
 
 In addition, if your registry is using a filesystem storage driver, you will see a usage meter indicating used and available space on the storage volume. Third-party storage back-ends are not supported, so if you are using one, this meter will not be displayed.
 
