@@ -13,9 +13,9 @@ weight=4
 # Install Docker Trusted Registry
 
 This document describes the process of obtaining, installing, and securing
-Docker Trusted Registry . Docker Trusted Registry is installed from Docker containers. Once
-installed, you will need to select a method of securing it. This doc will
-explain the options you have for security and help you find the resources needed
+Docker Trusted Registry. Docker Trusted Registry is installed from Docker containers. Once
+installed, you will need to select a method of securing it. This section
+explains your options for security and helps you find the resources needed
 to configure it according to your chosen method. More configuration details can
 be found in the [Docker Trusted Registry Configuration page]({{< relref "configuration.md" >}}).
 
@@ -23,8 +23,8 @@ Specifically, installation requires completion of these steps, in order:
 
 1. Acquire a license by purchasing Docker Trusted Registry or signing up for a trial license.
 2. Install the commercially supported Docker Engine.
-3. Install Docker Trusted Registry
-4. Add your license to your Docker Trusted Registry instance
+3. Install Docker Trusted Registry.
+4. Add your license to your Docker Trusted Registry instance.
 
 To get your copy of Docker Trusted Registry, including a free trial, visit the [Docker Subscription page](https://hub-beta.docker.com/enterprise/).
 
