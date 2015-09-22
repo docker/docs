@@ -1,7 +1,7 @@
 
 +++
 title = "AWS Installation"
-description = "Instructions for installing Docker Trusted Registry in Amazon Web Services"
+description = "Instructions for installing Docker Trusted Registry in Amazon Web Services (Bring Your own license)"
 keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry, AWS, Amazon"]
 [menu.main]
 parent="smn_dhe"
@@ -10,14 +10,16 @@ weight=5
 
 
 
-# Installing Docker Trusted Registry in Amazon Web Services (AWS)
+# Installing Docker Trusted Registry in Amazon Web Services (Bring your own license)
 
 
-This Quick Start Guide gives you a hands-on look at how to install and use the Docker Trusted Registry  in an Amazon Web Services Virtual Private Cloud (AWS-VPC) environment. Specifically, this guide demonstrates the process of installing Docker Trusted Registry via an Amazon Machine Image (AMI), performing basic configuration, and then accessing images on the Docker Trusted Registry server from within your AWS VPC.
+This Quick Start Guide gives you a hands-on look at how to install and use the Docker Trusted Registry AMI in an Amazon Web Services Virtual Private Cloud (AWS-VPC) environment. This AMI is a "bring your own license" or "BYOL" model which requires you to obtain the license keys from Docker to proceeed with installation and configuration.  Specifically, this guide demonstrates the process of installing Docker Trusted Registry via an Amazon Machine Image (AMI), performing basic configuration, and then accessing images on the Docker Trusted Registry server from within your AWS VPC.
+
+Learn more about Docker Subscription for AWS https://www.docker.com/aws
 
 This guide walks you through the following steps:
 
-1. Launch the Docker Trusted Registry EC2 Host in AWS
+1. Launch the Docker Trusted Registry (BYOL) EC2 Host in AWS https://aws.amazon.com/marketplace/pp/B014VG1PEI/ref=sp_mpg_product_title?ie=UTF8&sr=0-3 
 2. Configure the AWS components
 3. Connect to the Docker Trusted Registry EC2 Host
 4. Manage Docker Trusted Registry via the web administration interface
