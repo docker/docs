@@ -69,6 +69,11 @@ func parseConfig() {
 }
 
 func main() {
+	serverURL := os.Getenv("NOTARY_SERVER_URL")
+	if serverURL == "" {
+		serverURL = defaultServerURL
+	}
+
 	var notaryCmd = &cobra.Command{
 		Use:   "notary",
 		Short: "notary allows the creation of trusted collections.",
@@ -92,18 +97,19 @@ func main() {
 	notaryCmd.AddCommand(cmdKey)
 	notaryCmd.AddCommand(cmdCert)
 	notaryCmd.AddCommand(cmdTufInit)
-	cmdTufInit.Flags().StringVarP(&remoteTrustServer, "server", "s", defaultServerURL, "Remote trust server location")
+	cmdTufInit.Flags().StringVarP(&remoteTrustServer, "server", "s", serverURL, "Remote trust server location")
 	notaryCmd.AddCommand(cmdTufList)
 	cmdTufList.Flags().BoolVarP(&rawOutput, "raw", "", false, "Instructs notary list to output a nonpretty printed version of the targets list. Useful if you need to parse the list.")
-	cmdTufList.Flags().StringVarP(&remoteTrustServer, "server", "s", defaultServerURL, "Remote trust server location")
+	cmdTufList.Flags().StringVarP(&remoteTrustServer, "server", "s", serverURL, "Remote trust server location")
 	notaryCmd.AddCommand(cmdTufAdd)
 	notaryCmd.AddCommand(cmdTufRemove)
 	notaryCmd.AddCommand(cmdTufPublish)
-	cmdTufPublish.Flags().StringVarP(&remoteTrustServer, "server", "s", defaultServerURL, "Remote trust server location")
+	cmdTufPublish.Flags().StringVarP(&remoteTrustServer, "server", "s", serverURL, "Remote trust server location")
 	notaryCmd.AddCommand(cmdTufLookup)
 	cmdTufLookup.Flags().BoolVarP(&rawOutput, "raw", "", false, "Instructs notary lookup to output a nonpretty printed version of the targets list. Useful if you need to parse the list.")
-	cmdTufLookup.Flags().StringVarP(&remoteTrustServer, "server", "s", defaultServerURL, "Remote trust server location")
+	cmdTufLookup.Flags().StringVarP(&remoteTrustServer, "server", "s", serverURL, "Remote trust server location")
 	notaryCmd.AddCommand(cmdVerify)
+	cmdVerify.Flags().StringVarP(&remoteTrustServer, "server", "s", serverURL, "Remote trust server location")
 
 	notaryCmd.Execute()
 }

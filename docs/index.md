@@ -13,3 +13,4 @@ weight=4
 # List of Notary Documentation
 
 * [Overview of Docker Notary](overview)
+* [Notary CLI](cli)
