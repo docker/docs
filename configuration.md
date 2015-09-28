@@ -5,9 +5,8 @@ description = "Configuration instructions for Docker Trusted Registry"
 keywords = ["docker, documentation, about, technology, understanding, enterprise, hub,  registry"]
 [menu.main]
 parent="smn_dhe"
-weight=10
+weight=5
 +++
-
 
 
 # Configuring Docker Trusted Registry
@@ -443,4 +442,3 @@ You can test your current LDAP configuration before saving it by entering a test
 
 For information on getting support for Docker Trusted Registry, take a look at the
 [Support information]({{< relref "support.md" >}}).
-

@@ -1,21 +1,30 @@
++++
+title = "Install Trusted Registry for AWS AMI (BDS)"
+description = "Install Docker Trusted Registry for AWS (Business Day Support)"
+keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry, AWS, Amazon, AMI"]
+[menu.main]
+parent="smn_dhe_install"
++++
 
-# Install Docker Trusted Registry for AWS (Business Day Support)
+# Install Trusted Registry for AWS AMI (BDS)
 
 This article walks you through the process of launching the *Docker Trusted Registry for AWS (Business Day Support)* AMI as an EC2 instance in the Amazon Web Services (AWS) cloud.
 
-This AMI launches an instance of Docker Trusted Registry (DTR). The remainder of this document refers to the running instance of this AMI as a “Trusted Registry”. This AMI requires the use of Docker Engine for AWS (Business Day Support). 
+This AMI launches an instance of Docker Trusted Registry (Trusted Registry). The remainder of this document refers to the running instance of this AMI as a “Trusted Registry”. This AMI requires the use of Docker Engine for AWS (Business Day Support).
 
-To learn more about *Docker Trusted Registry for AWS* visit our [AWS Documentation](https://www.docker.com/aws).
+If you have not already done so, make sure you have read the [installation overview](index.md) for Trusted Registry.
 
 ## Prerequisites
 
 You can locate, install, and launch the AMI from the Amazon AWS Marketplace or with the AWS EC2 Console by selecting the AMI from the "Launch Instance" dialog. Both the AWS Marketplace and the AWS EC2 Console require that you have an AWS account to launch the AMI.
 
-If your account is supplied through your company, your company's administrator must have given you permissions to launch EC2 instances. If you receive a permissions error when following these instructions, contact your AWS administrator for help.
+If your account is supplied through your company, your company's administrator must give you permissions to launch EC2 instances. If you receive a permissions error when following these instructions, contact your AWS administrator for help.
+
+You will need to create a Key Pair, which is associated to your selected region. Refer to [AWS Documentation](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html) to learn how to do this.
 
 # Install procedure
 
-These instructions show you how to locate, install, and launch a Trusted Registry (DTR) from Amazon's AWS Marketplace. The AWS Marketplace allows you to do a "1-Click Launch" or "Manual Launch".
+These instructions show you how to locate, install, and launch a Trusted Registry from Amazon's AWS Marketplace. The AWS Marketplace allows you to do a "1-Click Launch" or "Manual Launch".
 
 The *Manual Launch* allows you to launch using the AWS EC2 Console. It allows for fine control of EC2 instance settings such as:
 
@@ -45,29 +54,29 @@ The *1-Click Launch* is quicker, provides default values for most settings, and 
 
     When your login succeeds, the browser displays the "Launch on EC2" page.
 
-6. Make sure that the "1-Click Launch" tab is selected.
+6. Ensure that the "1-Click Launch" tab is selected.
 
 ## Deploy the 1-Click Launch
 
-You can deploy a Trusted Registry to a private or public subnet. A private subnet provides added security but also prevents your Trusted Registry instance from being directly addressable on the internet. If you choose to deploy to a private subnet, you may need to access your Trusted Registry via a Bastion host or a management instance within your VPC.
+You can deploy a Trusted Registry to a private or public subnet. A private subnet provides added security but also prevents your Trusted Registry instance from being directly addressable on the internet. If you choose to deploy to a private subnet, you may need to access your Trusted Registry through a Bastion host or a management instance within your VPC.
 
-These instructions launch an EC2 instance into a public subnet with a public IP so that gaining access to it in the "Connecting to the Docker Trusted Registry Administration web interface" section is simplified. 
+These instructions launch an EC2 instance into a public subnet with a public IP so that gaining access to it in the "Connecting to the Docker Trusted Registry Administration web interface" section is simplified.
 
-> **Note:** Deploying a Trusted Registry instance to an AWS Public Subnet will automatically assign it a Public IP and Public DNS. Do not forget that AWS Public IPs and Public DNS names change when an EC2 Instance is rebooted. If you want your Trusted Registry EC2 Instance to be directly accessible over the internet you should assign it an Elastic IP.
+> **Note:** Deploying a Trusted Registry instance to an AWS Public Subnet will automatically assign it a Public IP and Public DNS. Remember that AWS Public IPs and Public DNS names change when an EC2 Instance is rebooted. If you want your Trusted Registry EC2 Instance to be directly accessible over the internet, you should assign it an Elastic IP.
 
 
 The following steps walk you through the 1-Click Launch settings:
 
 1. From the "Software Pricing" box, select a "Subscription Term" and an "Applicable Instance Type."
 
-    These two options contribute to the overall cost of running your choice of EC2 instance. The combination of  these two fees make up the running costs of your EC2 instance, and are shown in the "Cost Estimator" box. Make sure you understand these costs before launching your instance.
+      These two options contribute to the overall cost of running your choice of EC2 instance. The combination of these two fees make up the running costs of your EC2 instance, and are shown in the "Cost Estimator" box. Make sure you understand these costs before launching your instance.
 
 
 2. Select the version you want to deploy from the list of available versions.
 
-3. Select the Region you want to deploy to from the "Region" dropdown.
+3. Select the Region you want to deploy to from the "Region" dropdown menu. Remember you must have the appropriate permissions for the selected region.
 
-4. Select the VPC and Subnet you want to deploy to from the "VPC" and "Subnet" dropdowns.
+4. Select the VPC and Subnet you want to deploy to from the "VPC" and "Subnet" dropdown menus.
 
 5. From the Security Group box, select "Create new based on seller settings".
 
@@ -77,15 +86,17 @@ The following steps walk you through the 1-Click Launch settings:
 
 6. Select an existing or add a new key pair using the "Key Pair" box.
 
-    If you choose to use an existing key pair, be sure to choose one that you have access to, as this cannot be changed after the instance is launched.
+    If you choose to use an existing key pair, be sure to choose one that you have access to, as this cannot be changed after the instance is launched. If you do not have a key pair, then you need to create one which is associated to your region.
 
 7. Review your choices and check the values in the Cost Estimator.
 
     Changing your selected Region and VPC settings can cause your selected EC2 instance type to reset to the default value of "m3.2xlarge".
 
-8. If you are happy with your configuration and estimated charges, click "Launch with 1-Click".  
+8. If you are satisfied with your configuration and estimated charges, click "Launch with 1-Click".  
 
 9. Go to the <a href="https://console.aws.amazon.com/ec2/v2/home">EC2 Dashboard</a> to view your instance.
+
+      If your instance has no name, it may be hard to find depending on the instance list. Use the Key Name and/or Launch Time columns to help you find your instance. Once found, you can select your instance and name it.
 
 
 ## Connect to the Docker Trusted Registry Administration web interface
@@ -133,11 +144,19 @@ When you first login to the DTR Administration web interface you are prompted to
 
 After the DTR server restarts, return to the DTR Administration web interface. The browser displays another certificate related browser warning. Changing the Domain Name property of your DTR server generates a new self-signed certificate. Again, this is expected behavior and you can bypass the warning.
 
-Log into the Trusted Registry and change the default password for the "admin" account from the "Auth" tab on the "Settings" page in the DTR Administration web interface. 
+Log into the Trusted Registry and change the default password for the "admin" account from the "Auth" tab on the "Settings" page in the DTR Administration web interface.
 
 Your Docker Trusted Registry server is now ready for use.
 
-## Next Steps
+## Next steps
 
 For more information on using DTR, go to the
 [User's Guide](https://docs.docker.com/docker-trusted-registry/userguide/).
+
+## See also
+
+* To configure for your environment, see
+[Configuration instructions]({{< relref "configuration.md" >}}).
+* To use Docker Trusted Registry, see [the User guide]({{< relref "userguide.md" >}}).
+* To make administrative changes, see [the Admin guide]({{< relref "adminguide.md" >}}).
+* To see previous changes, see [the release notes]({{< relref "release-notes.md" >}}).

@@ -5,17 +5,16 @@ description = "Brief tutorial on the basics of Docker Trusted Registry user work
 keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry, image,  repository"]
 [menu.main]
 parent="smn_dhe"
-weight=1
+weight=2
 +++
 
 
 
-
-# Docker Trusted Registry Quick Start Guide: Basic User Workflow
+# Docker Trusted Registry Quick Start guide: Basic User Workflow
 
 ## Overview
 
-This Quick Start Guide will give you a hands-on look at the basics of using
+This Quick Start Guide gives you a hands-on look at the basics of using
 Docker Trusted Registry, Docker's on-premise image storage application.
 This guide will walk you through using Docker Trusted Registry to complete a typical, and critical,
 part of building a development pipeline: setting up a Jenkins instance. Once you
@@ -30,7 +29,7 @@ will then be able to retrieve the custom Jenkins image in order to use it to
 build CI/CD infrastructure for their projects, no matter the platform they're
 working from, be it a laptop, a VM, or a cloud provider.
 
-The guide will walk you through the following steps:
+You will perform the following steps:
 
 1. Pulling the official Jenkins image from the public Docker Hub
 2. Customizing the Jenkins image to suit your needs

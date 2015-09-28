@@ -1,4 +1,13 @@
-# Install Docker Engine for AWS (Business Day Support)
+
++++
+title = "Install Docker Engine for AWS AMI (BDS)"
+description = "Install Docker Engine for AWS AMI (BDS)"
+keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry, AWS, AMI, Amazon"]
+[menu.main]
+parent="smn_dhe_install"
++++
+
+# Install Docker Engine for AWS AMI (BDS)
 
 This article walks you through the following steps to launch the *Docker Engine for AWS (Business Day Support)* AMI as an EC2 instance in the Amazon Web Services (AWS) cloud:
 
@@ -12,7 +21,9 @@ This article walks you through the following steps to launch the *Docker Engine 
 The *Docker Engine for AWS (Business Day Support)* AMI launches an instance of the commercially supported Docker Engine. Upgrading the Docker Engine to a non commercially supported version is not supported. This AMI requires the use of Docker Trusted Registry for AWS (Business Day Support) to maintain a supported configuration.
 
 To learn more about *Docker Engine for AWS* visit our [AWS Documentation](https://www.docker.com/aws).
- 
+
+You can refer to the [overview]({{< relref "index.md" >}}) to see additional information on the general install process.
+
 ## Prerequisites
 
 You can locate, install, and launch the AMI from the Amazon AWS Marketplace, or with the AWS EC2 Console by selecting the AMI from the "Launch Instance" dialog. Both the AWS Marketplace and the AWS EC2 Console require that you have an AWS account to launch the AMI.
@@ -60,7 +71,7 @@ The *1-Click Launch* is quicker, provides default values for most settings, and 
 
 You can deploy the Docker Engine AMI to an Instance in a private or public subnet. A private subnet provides added security but also prevents your Docker Engine instance from being directly addressable on the internet. If you choose to deploy to a private subnet, you may need to access your Docker Engine instance via a Bastion host or a management instance within your VPC.
 
-These instructions launch an EC2 instance into a public subnet with a public IP, so that gaining access to it in the "Connect to the Docker Engine" section is simplified. 
+These instructions launch an EC2 instance into a public subnet with a public IP, so that gaining access to it in the "Connect to the Docker Engine" section is simplified.
 
 The following steps walk you through the 1-Click Launch settings:
 
@@ -108,7 +119,7 @@ To connect to the command line of your Docker Engine EC2 Instance:
 4. Right-click your Docker Engine EC2 Instance and choose "Connect".
 
 5. Copy and paste the "Example:" command into a terminal window.
-    
+
 6. Change the username from "root" to "ec2-user".
 
     After changing the username from "root" to "ec2-user", the command should look like the following:
@@ -121,14 +132,14 @@ To connect to the command line of your Docker Engine EC2 Instance:
 
     Connecting to the Docker Engine EC2 Instance will gnerate and authentication warning. This is expected behavior and you can continue.
 
-    If you're connecting from a Windows machine, you'll need to have an SSH client isntalled and in your PATH variable. 
+    If you're connecting from a Windows machine, you'll need to have an SSH client isntalled and in your PATH variable.
 
-For more information about connecting to your Docker Engine EC2 Instance over SSH, right-click your EC2 Instance and choose "Connect". 
+For more information about connecting to your Docker Engine EC2 Instance over SSH, right-click your EC2 Instance and choose "Connect".
 
 
 ## Confirm the Docker Engine is ready to use
 
-The Docker daemon is configured to automatically start with your Docker Engine EC2 Instance. 
+The Docker daemon is configured to automatically start with your Docker Engine EC2 Instance.
 
 Run the [`docker version`](https://docs.docker.com/reference/commandline/version) command from the command line of your Docker Engine EC2 Instance:
 
@@ -143,13 +154,13 @@ Run the [`docker version`](https://docs.docker.com/reference/commandline/version
         Go version (server): go1.4.2
         Git commit (server): 9c454bd
         OS/Arch (server): linux/amd64
-    
+
 If you get a "FATA[0000]" error for the server portion of the output, make sure you are using `sudo` at the beginning of the command. If you are using `sudo` and still get the error, check the status of the Docker service with the `sudo service docker status` command, and try restarting the service with the `sudo service docker restart` command.
 
 
 ## Configuring the Docker Engine to use Docker Trusted Registry
 
-This section of the guide walks you through the steps to configure *Docker Engine for AWS* to use *Docker Trusted Registry for AWS* as its image registry. 
+This section of the guide walks you through the steps to configure *Docker Engine for AWS* to use *Docker Trusted Registry for AWS* as its image registry.
 
 This guide assumes you have a working version of *Docker Trusted Registry for AWS* running in your AWS VPC at "ec2-52-24-229-123.us-west-2.compute.amazonaws.com". You will need to substitute this value with the correct value for your environment for the remainder of this guide.
 
@@ -211,7 +222,7 @@ This guide assumes your Docker Trusted Registry is reachable at "ec2-52-24-229-1
 
     This will tag the local busybox image (0f864637f229) so that it can be pushed to the "devops" repository in your Docker Trusted Registry at "ec2-52-24-229-123.us-west-2.compute.amazonaws.com". Don't forget to substitute the image ID (0f864637f229) and the domain anme of the Docker Trusted Registry with the appropriate values for your environment.
 
-4. Log in to the Docker Trusted Registry with the [`docker login`](https://docs.docker.com/reference/commandline/login) command: 
+4. Log in to the Docker Trusted Registry with the [`docker login`](https://docs.docker.com/reference/commandline/login) command:
 
     `$ sudo docker login ec2-52-24-229-123.us-west-2.compute.amazonaws.com`
 
@@ -236,7 +247,7 @@ This guide assumes your Docker Trusted Registry is reachable at "ec2-52-24-229-1
 
         $ sudo docker images
         REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
-        
+
 8. Pull a copy of the busybox image from your Docker Trusted Registry:
 
         $ sudo docker pull ec2-52-24-229-123.us-west-2.compute.amazonaws.com/devops/busybox:0.1
@@ -259,3 +270,11 @@ You have now successfully deployed the *Docker Engine for AWS (Business Day Supp
 ## Next Steps
 
 For more information on using Docker Enginer in AWS, visit our [AWS Documentation](https://www.docker.com/aws).
+
+## See also
+
+* To configure for your environment, see
+[Configuration instructions]({{< relref "configuration.md" >}}).
+* To use Docker Trusted Registry, see [the User guide]({{< relref "userguide.md" >}}).
+* To make administrative changes, see [the Admin guide]({{< relref "adminguide.md" >}}).
+* To see previous changes, see [the release notes]({{< relref "release-notes.md" >}}).

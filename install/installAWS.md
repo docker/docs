@@ -1,35 +1,40 @@
 
 +++
-title = "AWS Installation"
-description = "Instructions for installing Docker Trusted Registry in Amazon Web Services (Bring Your own license)"
-keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry, AWS, Amazon"]
+draft="true"
+title = "Install AWS"
+description = "Install Trusted Registry in Amazon Web Services (BYOL)"
+keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry, AWS, AMI, Amazon"]
 [menu.main]
-parent="smn_dhe"
-weight=5
+parent="smn_dhe_install"
 +++
 
 
+# Install Docker Trusted Registry in Amazon Web Services (Bring your own license)
 
-# Installing Docker Trusted Registry in Amazon Web Services (Bring your own license)
+Use this Quick Start guide to install and use the Docker Trusted Registry AMI in an Amazon Web Services Virtual Private Cloud (AWS-VPC) environment.
+The benefit to this is that you don't need to host on your servers or get and install the appropriate operating system. If you have not already done so, make sure you have first read the [installation
+overview](index.md) for Trusted Registry.  
+
+This AMI is a "bring your own license" or "BYOL" model. This means you need to
+obtain the license keys from Docker to install and configure. Specifically, this
+guide demonstrates the process of installing Docker Trusted Registry through an
+Amazon Machine Image (AMI), performing basic configuration, and then accessing
+images on the Docker Trusted Registry server from within your AWS VPC.
 
 
-This Quick Start Guide gives you a hands-on look at how to install and use the Docker Trusted Registry AMI in an Amazon Web Services Virtual Private Cloud (AWS-VPC) environment. This AMI is a "bring your own license" or "BYOL" model which requires you to obtain the license keys from Docker to proceeed with installation and configuration.  Specifically, this guide demonstrates the process of installing Docker Trusted Registry via an Amazon Machine Image (AMI), performing basic configuration, and then accessing images on the Docker Trusted Registry server from within your AWS VPC.
+In this guide, you will perform the following:
 
-Learn more about Docker Subscription for AWS https://www.docker.com/aws
-
-This guide walks you through the following steps:
-
-1. Launch the Docker Trusted Registry (BYOL) EC2 Host in AWS https://aws.amazon.com/marketplace/pp/B014VG1PEI/ref=sp_mpg_product_title?ie=UTF8&sr=0-3 
-2. Configure the AWS components
-3. Connect to the Docker Trusted Registry EC2 Host
-4. Manage Docker Trusted Registry via the web administration interface
-5. Complete a Docker image workflow (push and pull images)
+1. Launch the Docker Trusted Registry (BYOL) EC2 Host in AWS https://aws.amazon.com/marketplace/pp/B014VG1PEI/ref=sp_mpg_product_title?ie=UTF8&sr=0-3.
+2. Configure the AWS components.
+3. Connect to the Docker Trusted Registry EC2 Host.
+4. Manage Docker Trusted Registry via the web administration interface.
+5. Complete a Docker image workflow (push and pull images).
 
 This guide refers to two major components of a Docker Trusted Registry implementation in AWS:
 
-1. The "Docker Trusted Registry EC2 Host". This is the Linux VM running in AWS that hosts the containers required to run Docker Trusted Registry Service.
+* The "Docker Trusted Registry EC2 Host". This is the Linux VM running in AWS that hosts the containers required to run Docker Trusted Registry Service.
 
-2. The "Docker Trusted Registry Service". This is the private Docker Registry service that runs on the Docker Trusted Registry EC2 Host.
+* The "Docker Trusted Registry Service". This is the private Docker Registry service that runs on the Docker Trusted Registry EC2 Host.
 
 You should be able to complete this guide in about thirty minutes.
 
@@ -39,13 +44,13 @@ You should be able to complete this guide in about thirty minutes.
 
 ## Prerequisites
 
-To complete this guide, you'll need:
+To perform the install, you'll need:
 
-* The Docker Hub user-name and password used to obtain the Docker Subscription licenses
-* A Docker Trusted Registry license key. Either a purchased license or a trial license will work
-* A commercially supported Docker Engine running within AWS
-* An AWS account with the ability to launch EC2 instances
-* The ability to modify Security Groups and Network ACLs in your AWS VPC
+* The Docker Hub user-name and password used to obtain the Docker Subscription licenses.
+* A Docker Trusted Registry license key. Either a purchased license or a trial license works.
+* A commercially supported Docker Engine running within AWS.
+* An AWS account with the ability to launch EC2 instances.
+* The ability to modify Security Groups and Network ACLs in your AWS VPC.
 * Familiarity with how to manage resources in an AWS VPC.
 
 ## Launching the Docker Trusted Registry EC2 Host in AWS
@@ -58,27 +63,27 @@ Choose “AWS Marketplace” from the resulting screen, and type "Docker Trusted
 
 Select the Docker Trusted Registry AMI you wish to retrieve, and then select the instance-type based on your requirements. Then choose the option “Next: Configure Instance Details”.
 
-At this point you must configure the Docker Trusted Registry EC2 Host according to the requirements of your particular environment. When doing so, consider the following:
+At this point, you must configure the Docker Trusted Registry EC2 Host according to the requirements of your particular environment. When doing so, consider:
 
 * If you want your Docker Trusted Registry EC2 Host to be accessible from the internet, you will need to assign it an Elastic IP or a Public IP.
-* You may also wish to Tag the Docker Trusted Registry instance with meaningful name.
+* You may also want to Tag the Docker Trusted Registry instance with a meaningful name.
 
 The Docker Trusted Registry EC2 Host is managed over SSH, whereas the Docker Trusted Registry Service is managed over HTTPS. When launching the AMI for the first time, the wizard will prompt you to create a new “Security Group” with rules that allow SSH, HTTP, and HTTPS already created.
 
 > **Note**: Make sure that you are launching your Docker Trusted Registry EC2 Host in the correct
 > Region, VPC, and subnet.
 
-Once you are satisfied with your Docker Trusted Registry EC2 Host's configuration details, click “Launch”.
+When satisfied with your Docker Trusted Registry EC2 Host's configuration details, click Launch.
 
-You will now be prompted to associate the Docker Trusted Registry EC2 Host with a key pair. If you already have a key pair you would like to use, select it from the drop-down list of available key pairs and check the "Acknowledge" check-box. This will enable the “Launch Instances” button.
+You will now be prompted to associate the Docker Trusted Registry EC2 Host with a key pair. If you already have a key pair you would like to use, select it from the drop-down list of available key pairs and check the "Acknowledge" check-box. This will enable the Launch Instances button.
 
-If you do not have an existing key pair, choose “Create a new key pair” from the first drop-down list, give the key pair a meaningful name, and click the “Download Key Pair” button. This will enable the “Launch Instances” button.
+If you do not have an existing key pair, choose Create a new key pair from the first drop-down list, give the key pair a meaningful name, and click the Download Key Pair button. This enables the Launch Instances button.
 
-When creating a new key pair, clicking the “Download Key Pair” button initiates a one-time operation that creates the key pair. So make sure you keep the downloaded key pair in a safe place as you will not be able to download it again.
+When creating a new key pair, clicking the “Download Key Pair” button initiates a one-time operation that creates the key pair. Ensure you keep the downloaded key pair in a safe place as you will not be able to download it again.
 
-Next, click the “Launch Instances” button.
+Next, click the Launch Instances button.
 
-Your Docker Trusted Registry EC2 Host will launch; you can view its status on the “Instances” page of your “EC2 Dashboard”. It may take a minute or two for your Docker Trusted Registry EC2 Host to reach the running state.
+Your Docker Trusted Registry EC2 Host starts. You can view its status on the “Instances” page of your “EC2 Dashboard”. It may take a minute or two for your Docker Trusted Registry EC2 Host to reach the running state.
 
 ## Configuring AWS Components
 
@@ -90,8 +95,8 @@ Start by configuring your AWS VPC to allow SSH and HTTP/HTTPS traffic to your Do
 
 There are two places where you need to enable SSH and HTTP/HTTPS traffic:
 
-1. All Security Groups associated with your Docker Trusted Registry EC2 Host
-2. The Network ACL associated with the subnet in which your Docker Trusted Registry EC2 Host is running
+* All Security Groups associated with your Docker Trusted Registry EC2 Host
+* The Network ACL associated with the subnet in which your Docker Trusted Registry EC2 Host is running
 
 #### Security Group configuration
 
@@ -138,7 +143,7 @@ You can now manage the Docker Trusted Registry Service via its Administration we
 
 > **Note**: Connecting to the Docker Trusted Registry Service Administration web interface using the default, self-signed certificate will result in a browser warning. This is expected behavior, you can ignore the warning.
 
-Be sure to connect using the correct DNS name or IP address. E.g., if connecting from within AWS, use the Private DNS or Private IP. If connecting from over the internet, use the Public DNS, Public IP, or Elastic IP.
+Ensure to connect using the correct DNS name or IP address. For example, if connecting from within AWS, use the Private DNS or Private IP. If connecting from over the internet, use the Public DNS, Public IP, or Elastic IP.
 
 > **Note**: By default, traffic to port 80 and 443 of your Docker Trusted Registry EC2 Host is
 > automatically redirected to the Docker Trusted Registry Service Administration web
@@ -159,7 +164,7 @@ After configuring the Domain Name, restart Docker Trusted Registry by clicking t
 > warning the first time you connect to the Docker Trusted Registry Administration web interface
 > after changing its Domain Name. This is expected behavior, you can ignore the > warning.
 
-To license your Docker Trusted Registry Service, click “Settings” > “License” and then click “Upload License”. Your license will normally be available for download from your Docker Hub account under “Settings” > “Enterprise Licenses”.
+To apply the license to your Docker Trusted Registry Service, click “Settings” > “License” and then click “Upload License”. Your license will normally be available for download from your Docker Hub account under “Settings” > “Enterprise Licenses”.
 
 Once your license is uploaded, restart Docker Trusted Registry by clicking the “Save and Restart Docker Trusted Registry Server” button. This completes the basic configuration of Docker Trusted Registry. You can now start using it as an image Registry.
 
@@ -265,4 +270,3 @@ docker images
 REPOSITORY                                                           TAG        IMAGE ID        CREATED       VIRTUAL SIZE
 ip-10-0-0-117.us-west-2.compute.internal/ci-infrastructure/jnkns-img         latest        4704aa632ce7         2 days ago          887.1 MB
 ```
-

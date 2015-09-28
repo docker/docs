@@ -5,7 +5,7 @@ description = "Documentation describing basic use of Docker Trusted Registry"
 keywords = ["docker, documentation, about, technology, hub,  enterprise"]
 [menu.main]
 parent="smn_dhe"
-weight=2
+weight=3
 +++
 
 

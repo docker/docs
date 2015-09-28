@@ -5,16 +5,15 @@ description = "Documentation describing administration of Docker Trusted Registr
 keywords = ["docker, documentation, about, technology, hub, registry, enterprise"]
 [menu.main]
 parent="smn_dhe"
-weight=3
+weight=4
 +++
 
 
 
 # Docker Trusted Registry Administrator's Guide
 
-This guide covers tasks and functions an administrator of Docker Trusted Registry
- will need to know about, such as reporting, logging, system management,
-performance metrics, etc.
+This guide explains the tasks and functions an administrator of Docker Trusted Registry needs to understand such as reporting, logging, system management,
+performance metrics, optimizing the Trusted Registry file size, and deleting containers.
 For tasks Docker Trusted Registry users need to accomplish, such as pushing and pulling
 images, please look at the [User's Guide]({{< relref "userguide.md" >}}).
 
@@ -319,6 +318,10 @@ If you need to stop and/or start Docker Trusted Registry (for upgrading, trouble
 `sudo bash -c "$(docker run docker/trusted-registry stop)"`
 `sudo bash -c "$(docker run docker/trusted-registry start)"`
 
-## Next Steps
+## See also
 
-For information on installing Docker Trusted Registry, take a look at the [Installation instructions]({{< relref "docker-trusted-registry/install.md" >}}).
+* To configure for your environment, see the
+[Configuration instructions]({{< relref "configuration.md" >}}).
+* To use Docker Trusted Registry, see the [User guide]({{< relref "userguide.md" >}}).
+* To upgrade, see the [Upgrade guide]({{< relref "upgrade.md" >}}).
+* To see previous changes, see the [release notes]({{< relref "release-notes.md" >}}).

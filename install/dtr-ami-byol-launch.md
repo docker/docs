@@ -1,26 +1,38 @@
++++
+title = "Install Docker Subscription for AWS (BYOL))"
+description = "Install Docker Subscription for AWS (BYOL)"
+keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry, AWS, Amazon, AMI"]
+[menu.main]
+parent="smn_dhe_install"
+weight=-1
++++
+
 # Install Docker Subscription for AWS (BYOL)
 
-This article walks you through the process of launching the *Docker Subscription for AWS (BYOL)* AMI as an EC2 instance in the Amazon Web Services (AWS) cloud. 
+This article walks you through the process of launching the *Docker Subscription
+for AWS (BYOL)* AMI as an EC2 instance in the Amazon Web Services (AWS) cloud.
+The Trusted Registry installation includes a single instance of the commercially
+supported Docker Engine.
 
-The Docker Subscription for AWS (BYOL) AMI launches an instance of Docker Trusted Registry. The remainder of this document refers to the running instance of this AMI as a “Trusted Registry”. 
+You can install additional instances of the commercially supported Docker Engine
+either on premise or through AWS. For more inforamtion, see the [installation
+overview](index.md) for Trusted Registry.
 
-> **Note:** Docker Trusted Registry is intended to be used in conjunction with the commercially supported Docker Engine. The commercially supported Docker Engine is available on AWS via the [*Docker Engine for AWS (Business Day Support AMI*)](https://aws.amazon.com/marketplace/pp/B014VG1R4Q/ref=srh_res_product_title?ie=UTF8&sr=0-5&qid=1442928397927.).
-
-To learn more about *Docker Subscription for AWS* visit our [AWS Documentation](https://www.docker.com/aws).
+The remainder of this document refers to the running instance of this AMI as a “Trusted Registry”.
 
 ## Prerequisites
 
-You will need the following to complete this guide:
+You need the following to complete this guide:
 
-1. An AWS account with permissions to launch EC2 Instances.
-2. A valid Docker Subscription license.
+* An AWS account with permissions to launch EC2 Instances.
+* A valid Docker subscription license.
 
 Contact your AWS administrator if your AWS account is provided by your company and you do not have permissions to launch EC2 Instances.
 
 If you do not have a valid Docker Subscription license the following options are available:
 
 - Use the *Docker Trusted Registry for AWS (Business Day Support)* AMI and the *Docker Engine for AWS (Business Day Support)* AMI, both of which include the cost of a Docker Subscription.
-- Register for a [Free 30 Day Trial](https://hub.docker.com/enterprise/trial/). 
+- Register for a [Free 30 Day Trial](https://hub.docker.com/enterprise/trial/).
 - [Contact Docker](https://www.docker.com/contact) to obtain a quote for a Docker Subscription.
 
 # Install procedure
@@ -101,7 +113,7 @@ The following steps walk you through the 1-Click Launch settings:
 ## Connect to the Docker Trusted Registry Administration web interface
 
 You administer your Trusted Registry server via the Administration web
-interface (hereafter referred to as *DTR Administration web interface*). 
+interface (hereafter referred to as *DTR Administration web interface*).
 
 You can configure your own custom DNS names for your EC2 instance
 using CNAME records and so forth. Or, you can use the default DNS names provided by
@@ -143,9 +155,9 @@ interface:
 
 When you first login to the DTR Administration web interface you are prompted to complete two configuration items:
 
-1.  Configure the "Domain name" on the "General" tab of the "Settings" page. 
+1.  Configure the "Domain name" on the "General" tab of the "Settings" page.
 
-    This should be a fully qualified domain name that you have configured for your Trusted Registry service. 
+    This should be a fully qualified domain name that you have configured for your Trusted Registry service.
 
     Enter your desired domain name and click the "Save and restart" button at the bottom of the page.
 
@@ -160,10 +172,10 @@ When you first login to the DTR Administration web interface you are prompted to
     ![](../assets/dtr-license-download.png)
 
     From the Docker Trusted Registry Administration web interface, select "Settings" and then "License". Under the "Apply a new license" heading select "Choose File". Select your downloaded license file and click "Save and restart".
-    
+
 > **Note:** Restarting your Trusted Registry from the DTR Administration web interface, or as part of the above procedures, does not restart the EC2 instance. Therefore, the Public IP and Public DNS of the EC2 instance does not change.
 
-Log into the DTR Administration web interface and change the default password for the "admin" account from the "Auth" tab on the "Settings" page. 
+Log into the DTR Administration web interface and change the default password for the "admin" account from the "Auth" tab on the "Settings" page.
 
 Your Docker Trusted Registry server is now ready for use.
 
