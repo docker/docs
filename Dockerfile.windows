@@ -17,7 +17,7 @@ RUN cd innosetup && \
     wine "./innounp.exe" -e "is-unicode.exe"
 
 # installer components
-ENV INSTALLER_VERSION 1.8.2b
+ENV INSTALLER_VERSION 1.8.2c
 ENV DOCKER_VERSION 1.8.2
 ENV DOCKER_MACHINE_VERSION 0.4.1
 ENV BOOT2DOCKER_ISO_VERSION $DOCKER_VERSION
