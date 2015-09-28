@@ -54,4 +54,11 @@ echo -e "${BLUE}docker${NC} is configured to use the ${GREEN}$VM${NC} machine wi
 echo "For help getting started, check out the docs at https://docs.docker.com"
 echo
 
-eval $($DOCKER_MACHINE env $VM)
+eval $($DOCKER_MACHINE env $VM --shell=bash)
+
+USER_SHELL=$(dscl /Search -read /Users/$USER UserShell | awk '{print $2}')
+if [ "$USER_SHELL" = "/bin/bash" ] || [ "$USER_SHELL" = "/bin/zsh" ] || [ "$USER_SHELL" = "/bin/sh" ]; then
+  $USER_SHELL --login
+else
+  $USER_SHELL
+fi

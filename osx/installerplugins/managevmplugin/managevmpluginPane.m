@@ -158,16 +158,16 @@ NSString *dockerMachinePath = @"/usr/local/bin/docker-machine";
         
         if (status == 0) {
             self.successful = YES;
-            self.migrationStatusLabel.stringValue = @"Your Boot2Docker VM was successfully migrated to a Docker Machine VM named \"default\".";
+            self.migrationStatusLabel.stringValue = @"Your VirtualBox Docker VM named \"default\" was successfully upgraded.";
             self.migrationStatusImage.image = [[NSImage alloc]initWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"toolboxcheck" ofType:@"png"]];
-            [Mixpanel trackEvent:@"Boot2Docker Migration Succeeded" forPane:self];
+            [Mixpanel trackEvent:@"VM Upgrade Succeeded" forPane:self];
             [self gotoNextPane];
         } else {
             self.migrationLogsScrollView.hidden = NO;
             self.submitButton.hidden = NO;
-            [Mixpanel trackEvent:@"Boot2Docker Migration Failed" forPane:self];
+            [Mixpanel trackEvent:@"VM Upgrade Failed" forPane:self];
             self.migrationStatusLabel.hidden = NO;
-            self.migrationStatusLabel.stringValue = @"Creating the VM failed. Following the install, try creating a vm manually via docker-machine.";
+            self.migrationStatusLabel.stringValue = @"Upgrading your VirtualBox Docker VM Failed. Try upgrading again manually via the docker-machine command.";
         }
         
     }];

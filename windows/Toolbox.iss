@@ -215,7 +215,7 @@ begin
   TrackingCheckBox.Left := WizardForm.WelcomeLabel2.Left;
   TrackingCheckBox.Width := WizardForm.WelcomeLabel2.Width;
   TrackingCheckBox.Height := 40;
-  TrackingCheckBox.Caption := 'Send one-time, anonymous diagonstics during install.';
+  TrackingCheckBox.Caption := 'Send one-time, anonymous diagnostics during install.';
   TrackingCheckBox.Checked := True;
   TrackingCheckBox.Parent := WelcomePage.Surface;
   TrackingCheckBox.OnClick := @TrackingCheckboxClicked;
