@@ -117,6 +117,11 @@ docker run --rm -it \
 As with install, you can use "join --help" for more information.
 
 
+# Cross-host Networking
+
+See [networking.md](networking.md) for more details on the steps required
+to enable cross-host networking
+
 # Uninstalling
 The installer can also uninstall the Orca software on either the primary
 Orca node, as well as the secondary Orca nodes.  Run the following directly
