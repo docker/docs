@@ -43,14 +43,6 @@ Prerequisites:
 - Requirements from the [Compiling Notary Server](#compiling-notary) section
 - [docker and docker-compose](http://docs.docker.com/compose/install/)
 - [Notary server configuration](#configure-notary-server)
-- If using the sample notary server configuration provided, with the development certificate and key, either:
-    - add `fixtures/root-ca.crt` to your trusted root certificates
-    - disable TLS verification by adding the following option notary configuration file in `~/.notary/config.json`:
-
-            "skipTLSVerify": true
-
-    Otherwise, you will see TLS errors or X509 errors upon initializing the
-    notary collection.
 
 As setup, lets build notary and then start up a local notary-server.
 
@@ -172,4 +164,11 @@ The pem and key provided in fixtures are purely for local development and
 testing. For production, you must create your own keypair and certificate,
 either via the CA of your choice, or a self signed certificate.
 
-A quick-start config is provided at `cmd/notary-server/dev-config.json`.  To use this file, please update `notary-server-Dockerfile` to point to it instead of `cmd/notary/config.json`.
+If using the pem and key provided in fixtures, either:
+    - add `fixtures/root-ca.crt` to your trusted root certificates
+    - disable TLS verification by adding the following option notary configuration file in `~/.notary/config.json`:
+
+            "skipTLSVerify": true
+
+Otherwise, you will see TLS errors or X509 errors upon initializing the
+notary collection.
