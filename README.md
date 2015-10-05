@@ -45,6 +45,8 @@ docker-compose build
 docker-compose up -d
 ```
 
+Note: To use the local notary server append `-s http://localhost:4443` to all of the commands below.
+
 First, lets initiate a notary collection called `example.com/scripts`
 
 ```sh
