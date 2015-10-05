@@ -35,10 +35,24 @@ notary is based on [The Update Framework](http://theupdateframework.com/), a sec
 
 notary is a tool for publishing and managing trusted collections of content. Publishers can digitally sign collections and consumers can verify integrity and origin of content. This ability is built on a straightforward key management and signing interface to create signed collections and configure trusted publishers.
 
-## Quick start using Notary
+## Using Notary
 Lets try using notary.
 
-As setup, lets build notary (see the [Compiling Notary](#compiling-notary)  section for more details) and then start up a local notary-server (see the [Notary Server](#notary-server) and [Configure Notary Server](#configure-notary-server) sections for more details)).
+Prerequisites:
+
+- Requirements from the [Compiling Notary Server](#compiling-notary) section
+- [docker and docker-compose](http://docs.docker.com/compose/install/)
+- [Notary server configuration](#configure-notary-server)
+- If using the sample notary server configuration provided, with the development certificate and key, either:
+    - add `fixtures/root-ca.crt` to your trusted root certificates
+    - disable TLS verification by adding the following option notary configuration file in `~/.notary/config.json`:
+
+            "skipTLSVerify": true
+
+    Otherwise, you will see TLS errors or X509 errors upon initializing the
+    notary collection.
+
+As setup, lets build notary and then start up a local notary-server.
 
 ```sh
 make binaries
@@ -104,9 +118,10 @@ by running `boot2docker ip`, with kitematic, `echo $DOCKER_HOST` should
 show the IP of the VM). If you are using the default Linux setup,
 you need to add `127.0.0.1 notary` to your hosts file.
 
-## Compiling Notary
+## Compiling Notary Server
 
-Requirements:
+Prerequisites:
+
 - Go >= 1.3
 - [godep](https://github.com/tools/godep) installed
 - libtool development headers installed
@@ -156,3 +171,5 @@ The configuration file must be a json file with the following format:
 The pem and key provided in fixtures are purely for local development and
 testing. For production, you must create your own keypair and certificate,
 either via the CA of your choice, or a self signed certificate.
+
+A quick-start config is provided at `cmd/notary-server/dev-config.json`.  To use this file, please update `notary-server-Dockerfile` to point to it instead of `cmd/notary/config.json`.
