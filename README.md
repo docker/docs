@@ -35,10 +35,11 @@ notary is based on [The Update Framework](http://theupdateframework.com/), a sec
 
 notary is a tool for publishing and managing trusted collections of content. Publishers can digitally sign collections and consumers can verify integrity and origin of content. This ability is built on a straightforward key management and signing interface to create signed collections and configure trusted publishers.
 
-## Using Notary
+## Quick start using Notary
 Lets try using notary.
 
-As setup, lets build notary and then start up a local notary-server.
+As setup, lets build notary (see the [Compiling Notary](#compiling-notary)  section for more details) and then start up a local notary-server (see the [Notary Server](#notary-server) and [Configure Notary Server](#configure-notary-server) sections for more details)).
+
 ```sh
 make binaries
 docker-compose build
@@ -103,12 +104,26 @@ by running `boot2docker ip`, with kitematic, `echo $DOCKER_HOST` should
 show the IP of the VM). If you are using the default Linux setup,
 you need to add `127.0.0.1 notary` to your hosts file.
 
-## Compiling Notary Server
+## Compiling Notary
+
+Requirements:
+- Go >= 1.3
+- [godep](https://github.com/tools/godep) installed
+- libtool development headers installed
+
+Install dependencies by running `godep restore`.
 
 From the root of this git repository, run `make binaries`. This will
-compile the notary and notary-server applications and place them in
-a `bin` directory at the root of the git repository (the `bin` directory
-is ignored by the .gitignore file).
+compile the `notary`, `notary-server`, and `notary-signer` applications and
+place them in a `bin` directory at the root of the git repository (the `bin`
+directory is ignored by the .gitignore file).
+
+`notary-signer` depends upon `pkcs11`, which requires that libtool headers be installed (`libtool-dev` on Ubuntu, `libtool-ltdl-devel` on CentOS/RedHat). If you are using Mac OS, you can `brew install libtool`, and run `make binaries` with the following environment variables (assuming a standard installation of Homebrew):
+
+```sh
+export CPATH=/usr/local/include:${CPATH}
+export LIBRARY_PATH=/usr/local/lib:${LIBRARY_PATH}
+```
 
 ## Running Notary Server
 
