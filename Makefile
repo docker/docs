@@ -2,11 +2,9 @@ DOCKER_OSX_IMAGE := osx-installer
 DOCKER_WINDOWS_IMAGE := windows-installer
 DOCKER_OSX_CONTAINER := build-osx-installer
 DOCKER_WINDOWS_CONTAINER := build-windows-installer
+SIGNING_SERVER := $(signing_server)
 
 default: osx windows
-	@true
-
-sign: sign-osx sign-windows
 	@true
 
 osx: clean-osx
@@ -22,12 +20,6 @@ windows: clean-windows
 	mkdir -p dist
 	docker cp "$(DOCKER_WINDOWS_CONTAINER)":/installer/Output/DockerToolbox.exe dist/
 	docker rm "$(DOCKER_WINDOWS_CONTAINER)" 2>/dev/null || true
-
-sign-osx: osx
-	./.sign/sign_mac
-
-sign-windows: windows
-	echo "TODO"
 
 clean-osx:
 	rm -f DockerToolbox-*.pkg
