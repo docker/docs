@@ -31,4 +31,32 @@ fi
 
 echo "Starting machine $VM..."
 $DOCKER_MACHINE start $VM
-$DOCKER_MACHINE ssh $VM
+
+echo "Setting environment variables for machine $VM..."
+eval "$($DOCKER_MACHINE env --shell=bash $VM)"
+
+clear
+cat << EOF
+
+
+                        ##         .
+                  ## ## ##        ==
+               ## ## ## ## ##    ===
+           /"""""""""""""""""\___/ ===
+      ~~~ {~~ ~~~~ ~~~ ~~~~ ~~~ ~ /  ===- ~~~
+           \______ o           __/
+             \    \         __/
+              \____\_______/
+
+EOF
+echo -e "${BLUE}docker${NC} is configured to use the ${GREEN}$VM${NC} machine with IP ${GREEN}$($DOCKER_MACHINE ip $VM)${NC}"
+echo "For help getting started, check out the docs at https://docs.docker.com"
+echo
+cd
+
+docker () {
+  winpty docker $@
+}
+export -f docker
+
+exec "$BASH" --login -i
