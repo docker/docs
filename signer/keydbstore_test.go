@@ -27,6 +27,7 @@ var anotherRetriever = func(keyName, alias string, createNew bool, attempts int)
 	return "", false, errors.New("password alias no found")
 }
 
+
 func TestCreateRead(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)
@@ -160,4 +161,37 @@ func TestKeyRotation(t *testing.T) {
 	// Try rotating the key to alias-3
 	err = dbStore.RotateKeyPassphrase(testKey.ID(), "alias_3")
 	assert.Error(t, err, "password alias no found")
+}
+
+
+func TestDBHealthCheck(t *testing.T) {
+    tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+    defer os.RemoveAll(tempBaseDir)
+
+    // We are using SQLite for the tests
+    db, err := sql.Open("sqlite3", tempBaseDir+"test_db")
+    assert.NoError(t, err)
+
+    // Create a new KeyDB store
+    dbStore, err := NewKeyDBStore(retriever, "", "sqlite3", db)
+    assert.NoError(t, err)
+
+    // No key table, health check fails
+    err = dbStore.HealthCheck()
+    assert.Error(t, err, "Cannot access table:")
+
+    // Ensure that the private_key table exists
+    dbStore.db.CreateTable(&GormPrivateKey{})
+
+    // Heath check success because the table exists
+    err = dbStore.HealthCheck()
+    assert.NoError(t, err)
+
+    // Close the connection
+    err = dbStore.db.Close()
+    assert.NoError(t, err)
+
+    // Heath check fail because the connection is closed
+    err = dbStore.HealthCheck()
+    assert.Error(t, err, "Cannot access table:")
 }

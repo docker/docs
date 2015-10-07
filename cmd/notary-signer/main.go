@@ -13,11 +13,12 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+    "time"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 
-	_ "github.com/docker/distribution/health"
+	"github.com/docker/distribution/health"
 	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/signer"
 	"github.com/docker/notary/signer/api"
@@ -147,6 +148,10 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to create a new keydbstore: %v", err)
 	}
+
+    health.RegisterPeriodicFunc(
+        "DB connectable and valid", keyStore.HealthCheck, time.Second * 60)
+
 	cryptoService := cryptoservice.NewCryptoService("", keyStore)
 
 	cryptoServices[data.ED25519Key] = cryptoService
