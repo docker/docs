@@ -38,7 +38,14 @@ notary is a tool for publishing and managing trusted collections of content. Pub
 ## Using Notary
 Lets try using notary.
 
+Prerequisites:
+
+- Requirements from the [Compiling Notary Server](#compiling-notary) section
+- [docker and docker-compose](http://docs.docker.com/compose/install/)
+- [Notary server configuration](#configure-notary-server)
+
 As setup, lets build notary and then start up a local notary-server.
+
 ```sh
 make binaries
 docker-compose build
@@ -105,10 +112,25 @@ you need to add `127.0.0.1 notary` to your hosts file.
 
 ## Compiling Notary Server
 
+Prerequisites:
+
+- Go >= 1.3
+- [godep](https://github.com/tools/godep) installed
+- libtool development headers installed
+
+Install dependencies by running `godep restore`.
+
 From the root of this git repository, run `make binaries`. This will
-compile the notary and notary-server applications and place them in
-a `bin` directory at the root of the git repository (the `bin` directory
-is ignored by the .gitignore file).
+compile the `notary`, `notary-server`, and `notary-signer` applications and
+place them in a `bin` directory at the root of the git repository (the `bin`
+directory is ignored by the .gitignore file).
+
+`notary-signer` depends upon `pkcs11`, which requires that libtool headers be installed (`libtool-dev` on Ubuntu, `libtool-ltdl-devel` on CentOS/RedHat). If you are using Mac OS, you can `brew install libtool`, and run `make binaries` with the following environment variables (assuming a standard installation of Homebrew):
+
+```sh
+export CPATH=/usr/local/include:${CPATH}
+export LIBRARY_PATH=/usr/local/lib:${LIBRARY_PATH}
+```
 
 ## Running Notary Server
 
@@ -141,3 +163,12 @@ The configuration file must be a json file with the following format:
 The pem and key provided in fixtures are purely for local development and
 testing. For production, you must create your own keypair and certificate,
 either via the CA of your choice, or a self signed certificate.
+
+If using the pem and key provided in fixtures, either:
+    - add `fixtures/root-ca.crt` to your trusted root certificates
+    - disable TLS verification by adding the following option notary configuration file in `~/.notary/config.json`:
+
+            "skipTLSVerify": true
+
+Otherwise, you will see TLS errors or X509 errors upon initializing the
+notary collection.

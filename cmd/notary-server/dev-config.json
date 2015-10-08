@@ -15,6 +15,6 @@
 	},
 	"storage": {
 		"backend": "mysql",
-		"db_url": "root:@tcp(localhost:3306)/dockercondemo"
+		"db_url": "dockercondemo:dockercondemo@tcp(localhost:3306)/dockercondemo"
 	}
 }
