@@ -150,7 +150,7 @@ func main() {
 	}
 
 	health.RegisterPeriodicFunc(
-		"DB connectable and valid", keyStore.HealthCheck, time.Second*60)
+		"DB operational", keyStore.HealthCheck, time.Second*60)
 
 	cryptoService := cryptoservice.NewCryptoService("", keyStore)
 

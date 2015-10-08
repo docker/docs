@@ -110,9 +110,6 @@ func (s *KeyManagementServer) GetKeyInfo(ctx context.Context, keyID *pb.KeyID) (
 
 //CheckHealth returns the HealthStatus with the service
 func (s *KeyManagementServer) CheckHealth(ctx context.Context, v *pb.Void) (*pb.HealthStatus, error) {
-	logger := ctxu.GetLogger(ctx)
-	logger.Debug("CheckHealth: Returning HealthStatus for KeyManagementServer")
-
 	return &pb.HealthStatus{
 		Status: s.HealthChecker(),
 	}, nil
@@ -151,9 +148,6 @@ func (s *SignerServer) Sign(ctx context.Context, sr *pb.SignatureRequest) (*pb.S
 
 //CheckHealth returns the HealthStatus with the service
 func (s *SignerServer) CheckHealth(ctx context.Context, v *pb.Void) (*pb.HealthStatus, error) {
-	logger := ctxu.GetLogger(ctx)
-	logger.Debug("CheckHealth: Returning HealthStatus for SignerServer")
-
 	return &pb.HealthStatus{
 		Status: s.HealthChecker(),
 	}, nil
