@@ -161,10 +161,6 @@ func main() {
 	kms := &api.KeyManagementServer{CryptoServices: cryptoServices}
 	ss := &api.SignerServer{CryptoServices: cryptoServices}
 
-	grpcServer := grpc.NewServer()
-	pb.RegisterKeyManagementServer(grpcServer, kms)
-	pb.RegisterSignerServer(grpcServer, ss)
-
 	rpcAddr := viper.GetString("server.grpc_addr")
 	lis, err := net.Listen("tcp", rpcAddr)
 	if err != nil {
@@ -174,7 +170,13 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to generate credentials %v", err)
 	}
-	go grpcServer.Serve(creds.NewListener(lis))
+	opts := []grpc.ServerOption{grpc.Creds(creds)}
+	grpcServer := grpc.NewServer(opts...)
+
+	pb.RegisterKeyManagementServer(grpcServer, kms)
+	pb.RegisterSignerServer(grpcServer, ss)
+
+	go grpcServer.Serve(lis)
 
 	httpAddr := viper.GetString("server.http_addr")
 	if httpAddr == "" {
