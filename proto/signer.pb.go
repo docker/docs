@@ -16,10 +16,13 @@ It has these top-level messages:
 	Signature
 	SignatureRequest
 	Void
+	HealthStatus
 */
 package proto
 
 import proto1 "github.com/golang/protobuf/proto"
+import fmt "fmt"
+import math "math"
 
 import (
 	context "golang.org/x/net/context"
@@ -27,11 +30,9 @@ import (
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
-var _ context.Context
-var _ grpc.ClientConn
-
-// Reference imports to suppress errors if they are not otherwise used.
 var _ = proto1.Marshal
+var _ = fmt.Errorf
+var _ = math.Inf
 
 // KeyInfo holds a KeyID that is used to reference the key and it's algorithm
 type KeyInfo struct {
@@ -59,7 +60,7 @@ func (m *KeyInfo) GetAlgorithm() *Algorithm {
 
 // KeyID holds an ID that is used to reference the key
 type KeyID struct {
-	ID string `protobuf:"bytes,1,opt" json:"ID,omitempty"`
+	ID string `protobuf:"bytes,1,opt,name=ID" json:"ID,omitempty"`
 }
 
 func (m *KeyID) Reset()         { *m = KeyID{} }
@@ -142,6 +143,26 @@ func (m *Void) Reset()         { *m = Void{} }
 func (m *Void) String() string { return proto1.CompactTextString(m) }
 func (*Void) ProtoMessage()    {}
 
+// A mapping of health check name to the check result message
+type HealthStatus struct {
+	Status map[string]string `protobuf:"bytes,1,rep,name=status" json:"status,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+}
+
+func (m *HealthStatus) Reset()         { *m = HealthStatus{} }
+func (m *HealthStatus) String() string { return proto1.CompactTextString(m) }
+func (*HealthStatus) ProtoMessage()    {}
+
+func (m *HealthStatus) GetStatus() map[string]string {
+	if m != nil {
+		return m.Status
+	}
+	return nil
+}
+
+// Reference imports to suppress errors if they are not otherwise used.
+var _ context.Context
+var _ grpc.ClientConn
+
 // Client API for KeyManagement service
 
 type KeyManagementClient interface {
@@ -151,6 +172,8 @@ type KeyManagementClient interface {
 	DeleteKey(ctx context.Context, in *KeyID, opts ...grpc.CallOption) (*Void, error)
 	// GetKeyInfo returns the PublicKey associated with a KeyID
 	GetKeyInfo(ctx context.Context, in *KeyID, opts ...grpc.CallOption) (*PublicKey, error)
+	// CheckHealth returns the HealthStatus with the service
+	CheckHealth(ctx context.Context, in *Void, opts ...grpc.CallOption) (*HealthStatus, error)
 }
 
 type keyManagementClient struct {
@@ -188,6 +211,15 @@ func (c *keyManagementClient) GetKeyInfo(ctx context.Context, in *KeyID, opts ..
 	return out, nil
 }
 
+func (c *keyManagementClient) CheckHealth(ctx context.Context, in *Void, opts ...grpc.CallOption) (*HealthStatus, error) {
+	out := new(HealthStatus)
+	err := grpc.Invoke(ctx, "/proto.KeyManagement/CheckHealth", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for KeyManagement service
 
 type KeyManagementServer interface {
@@ -197,15 +229,17 @@ type KeyManagementServer interface {
 	DeleteKey(context.Context, *KeyID) (*Void, error)
 	// GetKeyInfo returns the PublicKey associated with a KeyID
 	GetKeyInfo(context.Context, *KeyID) (*PublicKey, error)
+	// CheckHealth returns the HealthStatus with the service
+	CheckHealth(context.Context, *Void) (*HealthStatus, error)
 }
 
 func RegisterKeyManagementServer(s *grpc.Server, srv KeyManagementServer) {
 	s.RegisterService(&_KeyManagement_serviceDesc, srv)
 }
 
-func _KeyManagement_CreateKey_Handler(srv interface{}, ctx context.Context, codec grpc.Codec, buf []byte) (interface{}, error) {
+func _KeyManagement_CreateKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error) (interface{}, error) {
 	in := new(Algorithm)
-	if err := codec.Unmarshal(buf, in); err != nil {
+	if err := dec(in); err != nil {
 		return nil, err
 	}
 	out, err := srv.(KeyManagementServer).CreateKey(ctx, in)
@@ -215,9 +249,9 @@ func _KeyManagement_CreateKey_Handler(srv interface{}, ctx context.Context, code
 	return out, nil
 }
 
-func _KeyManagement_DeleteKey_Handler(srv interface{}, ctx context.Context, codec grpc.Codec, buf []byte) (interface{}, error) {
+func _KeyManagement_DeleteKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error) (interface{}, error) {
 	in := new(KeyID)
-	if err := codec.Unmarshal(buf, in); err != nil {
+	if err := dec(in); err != nil {
 		return nil, err
 	}
 	out, err := srv.(KeyManagementServer).DeleteKey(ctx, in)
@@ -227,12 +261,24 @@ func _KeyManagement_DeleteKey_Handler(srv interface{}, ctx context.Context, code
 	return out, nil
 }
 
-func _KeyManagement_GetKeyInfo_Handler(srv interface{}, ctx context.Context, codec grpc.Codec, buf []byte) (interface{}, error) {
+func _KeyManagement_GetKeyInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error) (interface{}, error) {
 	in := new(KeyID)
-	if err := codec.Unmarshal(buf, in); err != nil {
+	if err := dec(in); err != nil {
 		return nil, err
 	}
 	out, err := srv.(KeyManagementServer).GetKeyInfo(ctx, in)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func _KeyManagement_CheckHealth_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error) (interface{}, error) {
+	in := new(Void)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	out, err := srv.(KeyManagementServer).CheckHealth(ctx, in)
 	if err != nil {
 		return nil, err
 	}
@@ -255,6 +301,10 @@ var _KeyManagement_serviceDesc = grpc.ServiceDesc{
 			MethodName: "GetKeyInfo",
 			Handler:    _KeyManagement_GetKeyInfo_Handler,
 		},
+		{
+			MethodName: "CheckHealth",
+			Handler:    _KeyManagement_CheckHealth_Handler,
+		},
 	},
 	Streams: []grpc.StreamDesc{},
 }
@@ -264,6 +314,8 @@ var _KeyManagement_serviceDesc = grpc.ServiceDesc{
 type SignerClient interface {
 	// Sign calculates a cryptographic signature using the Key associated with a KeyID and returns the signature
 	Sign(ctx context.Context, in *SignatureRequest, opts ...grpc.CallOption) (*Signature, error)
+	// CheckHealth returns the HealthStatus with the service
+	CheckHealth(ctx context.Context, in *Void, opts ...grpc.CallOption) (*HealthStatus, error)
 }
 
 type signerClient struct {
@@ -283,23 +335,46 @@ func (c *signerClient) Sign(ctx context.Context, in *SignatureRequest, opts ...g
 	return out, nil
 }
 
+func (c *signerClient) CheckHealth(ctx context.Context, in *Void, opts ...grpc.CallOption) (*HealthStatus, error) {
+	out := new(HealthStatus)
+	err := grpc.Invoke(ctx, "/proto.Signer/CheckHealth", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Signer service
 
 type SignerServer interface {
 	// Sign calculates a cryptographic signature using the Key associated with a KeyID and returns the signature
 	Sign(context.Context, *SignatureRequest) (*Signature, error)
+	// CheckHealth returns the HealthStatus with the service
+	CheckHealth(context.Context, *Void) (*HealthStatus, error)
 }
 
 func RegisterSignerServer(s *grpc.Server, srv SignerServer) {
 	s.RegisterService(&_Signer_serviceDesc, srv)
 }
 
-func _Signer_Sign_Handler(srv interface{}, ctx context.Context, codec grpc.Codec, buf []byte) (interface{}, error) {
+func _Signer_Sign_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error) (interface{}, error) {
 	in := new(SignatureRequest)
-	if err := codec.Unmarshal(buf, in); err != nil {
+	if err := dec(in); err != nil {
 		return nil, err
 	}
 	out, err := srv.(SignerServer).Sign(ctx, in)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func _Signer_CheckHealth_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error) (interface{}, error) {
+	in := new(Void)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	out, err := srv.(SignerServer).CheckHealth(ctx, in)
 	if err != nil {
 		return nil, err
 	}
@@ -313,6 +388,10 @@ var _Signer_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Sign",
 			Handler:    _Signer_Sign_Handler,
+		},
+		{
+			MethodName: "CheckHealth",
+			Handler:    _Signer_CheckHealth_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{},

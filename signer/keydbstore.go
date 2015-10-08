@@ -195,3 +195,17 @@ func (s *KeyDBStore) RotateKeyPassphrase(name, newPassphraseAlias string) error 
 
 	return nil
 }
+
+// HealthCheck verifies that DB exists and is query-able
+func (s *KeyDBStore) HealthCheck() error {
+	dbPrivateKey := GormPrivateKey{}
+	tableOk := s.db.HasTable(&dbPrivateKey)
+	switch {
+	case s.db.Error != nil:
+		return s.db.Error
+	case !tableOk:
+		return fmt.Errorf(
+			"Cannot access table: %s", dbPrivateKey.TableName())
+	}
+	return nil
+}

@@ -13,12 +13,18 @@ service KeyManagement {
 
   // GetKeyInfo returns the PublicKey associated with a KeyID
   rpc GetKeyInfo(KeyID) returns (PublicKey) {}
+
+  // CheckHealth returns the HealthStatus with the service
+  rpc CheckHealth(Void) returns (HealthStatus) {}
 }
 
 // Signer Interface
 service Signer {
   // Sign calculates a cryptographic signature using the Key associated with a KeyID and returns the signature
   rpc Sign(SignatureRequest) returns (Signature) {}
+
+  // CheckHealth returns the HealthStatus with the service
+  rpc CheckHealth(Void) returns (HealthStatus) {}
 }
 
 // KeyInfo holds a KeyID that is used to reference the key and it's algorithm
@@ -58,4 +64,9 @@ message SignatureRequest {
 
 // Void represents an empty message type
 message Void {
+}
+
+// A mapping of health check name to the check result message
+message HealthStatus {
+  map<string, string> status = 1;
 }

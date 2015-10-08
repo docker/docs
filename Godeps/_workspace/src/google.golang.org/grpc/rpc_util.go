@@ -217,6 +217,18 @@ func Code(err error) codes.Code {
 	return codes.Unknown
 }
 
+// ErrorDesc returns the error description of err if it was produced by the rpc system.
+// Otherwise, it returns err.Error() or empty string when err is nil.
+func ErrorDesc(err error) string {
+	if err == nil {
+		return ""
+	}
+	if e, ok := err.(rpcError); ok {
+		return e.desc
+	}
+	return err.Error()
+}
+
 // Errorf returns an error containing an error code and a description;
 // Errorf returns nil if c is OK.
 func Errorf(c codes.Code, format string, a ...interface{}) error {
@@ -277,28 +289,29 @@ func convertCode(err error) codes.Code {
 const (
 	// how long to wait after the first failure before retrying
 	baseDelay = 1.0 * time.Second
-	// upper bound on backoff delay
-	maxDelay      = 120 * time.Second
-	backoffFactor = 2.0 // backoff increases by this factor on each retry
-	backoffRange  = 0.4 // backoff is randomized downwards by this factor
+	// upper bound of backoff delay
+	maxDelay = 120 * time.Second
+	// backoff increases by this factor on each retry
+	backoffFactor = 1.6
+	// backoff is randomized downwards by this factor
+	backoffJitter = 0.2
 )
 
-// backoff returns a value in [0, maxDelay] that increases exponentially with
-// retries, starting from baseDelay.
-func backoff(retries int) time.Duration {
+func backoff(retries int) (t time.Duration) {
+	if retries == 0 {
+		return baseDelay
+	}
 	backoff, max := float64(baseDelay), float64(maxDelay)
 	for backoff < max && retries > 0 {
-		backoff = backoff * backoffFactor
+		backoff *= backoffFactor
 		retries--
 	}
 	if backoff > max {
 		backoff = max
 	}
-
 	// Randomize backoff delays so that if a cluster of requests start at
-	// the same time, they won't operate in lockstep.  We just subtract up
-	// to 40% so that we obey maxDelay.
-	backoff -= backoff * backoffRange * rand.Float64()
+	// the same time, they won't operate in lockstep.
+	backoff *= 1 + backoffJitter*(rand.Float64()*2-1)
 	if backoff < 0 {
 		return 0
 	}

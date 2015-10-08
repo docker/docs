@@ -13,11 +13,12 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 
-	_ "github.com/docker/distribution/health"
+	"github.com/docker/distribution/health"
 	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/signer"
 	"github.com/docker/notary/signer/api"
@@ -147,6 +148,10 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to create a new keydbstore: %v", err)
 	}
+
+	health.RegisterPeriodicFunc(
+		"DB operational", keyStore.HealthCheck, time.Second*60)
+
 	cryptoService := cryptoservice.NewCryptoService("", keyStore)
 
 	cryptoServices[data.ED25519Key] = cryptoService
@@ -155,10 +160,6 @@ func main() {
 	//RPC server setup
 	kms := &api.KeyManagementServer{CryptoServices: cryptoServices}
 	ss := &api.SignerServer{CryptoServices: cryptoServices}
-
-	grpcServer := grpc.NewServer()
-	pb.RegisterKeyManagementServer(grpcServer, kms)
-	pb.RegisterSignerServer(grpcServer, ss)
 
 	rpcAddr := viper.GetString("server.grpc_addr")
 	lis, err := net.Listen("tcp", rpcAddr)
@@ -169,7 +170,13 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to generate credentials %v", err)
 	}
-	go grpcServer.Serve(creds.NewListener(lis))
+	opts := []grpc.ServerOption{grpc.Creds(creds)}
+	grpcServer := grpc.NewServer(opts...)
+
+	pb.RegisterKeyManagementServer(grpcServer, kms)
+	pb.RegisterSignerServer(grpcServer, ss)
+
+	go grpcServer.Serve(lis)
 
 	httpAddr := viper.GetString("server.http_addr")
 	if httpAddr == "" {

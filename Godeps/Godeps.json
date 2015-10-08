@@ -1,6 +1,6 @@
 {
 	"ImportPath": "github.com/docker/notary",
-	"GoVersion": "go1.4.2",
+	"GoVersion": "go1.5.1",
 	"Packages": [
 		"./..."
 	],
@@ -27,10 +27,6 @@
 		{
 			"ImportPath": "github.com/agl/ed25519",
 			"Rev": "d2b94fd789ea21d12fac1a4443dd3a3f79cda72c"
-		},
-		{
-			"ImportPath": "github.com/bradfitz/http2",
-			"Rev": "97124afb234048ae0c91b8883c59fcd890bf8145"
 		},
 		{
 			"ImportPath": "github.com/bugsnag/bugsnag-go",
@@ -119,7 +115,7 @@
 		},
 		{
 			"ImportPath": "github.com/golang/protobuf/proto",
-			"Rev": "655cdfa588ea190e901bc5590e65d5621688847c"
+			"Rev": "3d2510a4dd961caffa2ae781669c628d82db700a"
 		},
 		{
 			"ImportPath": "github.com/google/gofuzz",
@@ -216,23 +212,23 @@
 		},
 		{
 			"ImportPath": "golang.org/x/net/context",
-			"Rev": "1dfe7915deaf3f80b962c163b918868d8a6d8974"
+			"Rev": "47990a1ba55743e6ef1affd3a14e5bac8553615d"
 		},
 		{
-			"ImportPath": "golang.org/x/oauth2",
-			"Rev": "ce5ea7da934b76b1066c527632359e2b8f65db97"
+			"ImportPath": "golang.org/x/net/http2",
+			"Rev": "47990a1ba55743e6ef1affd3a14e5bac8553615d"
 		},
 		{
-			"ImportPath": "google.golang.org/cloud/compute/metadata",
-			"Rev": "f20d6dcccb44ed49de45ae3703312cb46e627db1"
+			"ImportPath": "golang.org/x/net/internal/timeseries",
+			"Rev": "47990a1ba55743e6ef1affd3a14e5bac8553615d"
 		},
 		{
-			"ImportPath": "google.golang.org/cloud/internal",
-			"Rev": "f20d6dcccb44ed49de45ae3703312cb46e627db1"
+			"ImportPath": "golang.org/x/net/trace",
+			"Rev": "47990a1ba55743e6ef1affd3a14e5bac8553615d"
 		},
 		{
 			"ImportPath": "google.golang.org/grpc",
-			"Rev": "97f42dd262e97f4632986eddbc74c19fa022ea08"
+			"Rev": "3e7b7e58f491074e9577050058fb95d2351a60b0"
 		},
 		{
 			"ImportPath": "gopkg.in/yaml.v2",
