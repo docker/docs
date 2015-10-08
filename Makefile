@@ -2,7 +2,6 @@ DOCKER_OSX_IMAGE := osx-installer
 DOCKER_WINDOWS_IMAGE := windows-installer
 DOCKER_OSX_CONTAINER := build-osx-installer
 DOCKER_WINDOWS_CONTAINER := build-windows-installer
-SIGNING_SERVER := $(signing_server)
 
 default: osx windows
 	@true
