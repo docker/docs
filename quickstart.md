@@ -11,6 +11,11 @@ running quickly, so lets dive right in!
 * You'll need at leasts one docker engine (local or remote should work)
     * If you want to build a multi-node deployment, **all** the nodes must be able to see eachother, so make sure if you're using remote engines, they're all on the same remote network.
 * Orca installs its own Swarm, so don't set up Swarm first, just install Orca directly on your engine(s)
+* Ports - If you have firewalls configured, please make sure each node can access the following ports on the other nodes in the cluster.
+    * Orca Server: 443
+    * Swarm Manager: 2376 (user configurable) - Protected via mutual TLS
+    * Engine Proxy: 12376 - Protected via mutual TLS
+    * KV Store: 12379, 12380 - Will be protected by mutual TLS soon
 
 
 # Initial Installation
