@@ -26,10 +26,10 @@ var (
 	grpcServer *grpc.Server
 	void       *pb.Void
 	pr         passphrase.Retriever
-    health=    map[string]string {
-        "db": "ok",
-        "other": "not ok",
-    }
+	health     = map[string]string{
+		"db":    "ok",
+		"other": "not ok",
+	}
 )
 
 func init() {
@@ -38,9 +38,16 @@ func init() {
 	cryptoService := cryptoservice.NewCryptoService("", keyStore)
 	cryptoServices := signer.CryptoServiceIndex{data.ED25519Key: cryptoService, data.RSAKey: cryptoService, data.ECDSAKey: cryptoService}
 	void = &pb.Void{}
+
+	fakeHealth := func() map[string]string {
+		return health
+	}
+
 	//server setup
-	kms := &api.KeyManagementServer{CryptoServices: cryptoServices}
-	ss := &api.SignerServer{CryptoServices: cryptoServices}
+	kms := &api.KeyManagementServer{CryptoServices: cryptoServices,
+		HealthChecker: fakeHealth}
+	ss := &api.SignerServer{CryptoServices: cryptoServices,
+		HealthChecker: fakeHealth}
 	grpcServer = grpc.NewServer()
 	pb.RegisterKeyManagementServer(grpcServer, kms)
 	pb.RegisterSignerServer(grpcServer, ss)
@@ -52,17 +59,13 @@ func init() {
 	go grpcServer.Serve(lis)
 
 	//client setup
-	conn, err := grpc.Dial("127.0.0.1:7899")
+	conn, err := grpc.Dial("127.0.0.1:7899", grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("fail to dial: %v", err)
 	}
 
-    fakeHealth := func() map[string]string {
-        return health
-    }
-
-	kmClient = pb.NewKeyManagementClient(conn, fakeHealth)
-	sClient = pb.NewSignerClient(conn, fakeHealth)
+	kmClient = pb.NewKeyManagementClient(conn)
+	sClient = pb.NewSignerClient(conn)
 }
 
 func TestDeleteKeyHandlerReturnsNotFoundWithNonexistentKey(t *testing.T) {
@@ -148,4 +151,14 @@ func TestSignReturnsNotFoundOnNonexistKeys(t *testing.T) {
 	assert.NotNil(t, err)
 	assert.Equal(t, grpc.Code(err), codes.NotFound)
 	assert.Nil(t, ret)
+}
+
+func TestHealthChecksForServices(t *testing.T) {
+	sHealthStatus, err := sClient.CheckHealth(context.Background(), void)
+	assert.Nil(t, err)
+	assert.Equal(t, health, sHealthStatus.Status)
+
+	kmHealthStatus, err := kmClient.CheckHealth(context.Background(), void)
+	assert.Nil(t, err)
+	assert.Equal(t, health, kmHealthStatus.Status)
 }

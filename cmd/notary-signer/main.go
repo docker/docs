@@ -13,7 +13,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-    "time"
+	"time"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
@@ -149,8 +149,8 @@ func main() {
 		log.Fatalf("failed to create a new keydbstore: %v", err)
 	}
 
-    health.RegisterPeriodicFunc(
-        "DB connectable and valid", keyStore.HealthCheck, time.Second * 60)
+	health.RegisterPeriodicFunc(
+		"DB connectable and valid", keyStore.HealthCheck, time.Second*60)
 
 	cryptoService := cryptoservice.NewCryptoService("", keyStore)
 
