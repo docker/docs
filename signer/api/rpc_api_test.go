@@ -26,6 +26,10 @@ var (
 	grpcServer *grpc.Server
 	void       *pb.Void
 	pr         passphrase.Retriever
+    health=    map[string]string {
+        "db": "ok",
+        "other": "not ok",
+    }
 )
 
 func init() {
@@ -52,8 +56,13 @@ func init() {
 	if err != nil {
 		log.Fatalf("fail to dial: %v", err)
 	}
-	kmClient = pb.NewKeyManagementClient(conn)
-	sClient = pb.NewSignerClient(conn)
+
+    fakeHealth := func() map[string]string {
+        return health
+    }
+
+	kmClient = pb.NewKeyManagementClient(conn, fakeHealth)
+	sClient = pb.NewSignerClient(conn, fakeHealth)
 }
 
 func TestDeleteKeyHandlerReturnsNotFoundWithNonexistentKey(t *testing.T) {

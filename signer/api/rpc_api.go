@@ -18,11 +18,13 @@ import (
 //KeyManagementServer implements the KeyManagementServer grpc interface
 type KeyManagementServer struct {
 	CryptoServices signer.CryptoServiceIndex
+    HealthChecker func() map[string]string
 }
 
 //SignerServer implements the SignerServer grpc interface
 type SignerServer struct {
 	CryptoServices signer.CryptoServiceIndex
+    HealthChecker func() map[string]string
 }
 
 //CreateKey returns a PublicKey created using KeyManagementServer's SigningService
@@ -106,6 +108,15 @@ func (s *KeyManagementServer) GetKeyInfo(ctx context.Context, keyID *pb.KeyID) (
 	}, nil
 }
 
+//CheckHealth returns the HealthStatus with the service
+func (s *KeyManagementServer) CheckHealth(ctx context.Context) (*pb.HealthStatus, error) {
+
+    logger.Debug("CheckHealth: Returning HealthStatus for KeyManagementServer")
+    return &pb.HealthStatus{
+        Status: s.HealthChecker(),
+    }, nil
+}
+
 //Sign signs a message and returns the signature using a private key associate with the KeyID from the SignatureRequest
 func (s *SignerServer) Sign(ctx context.Context, sr *pb.SignatureRequest) (*pb.Signature, error) {
 	tufKey, service, err := FindKeyByID(s.CryptoServices, sr.KeyID)
@@ -135,4 +146,13 @@ func (s *SignerServer) Sign(ctx context.Context, sr *pb.SignatureRequest) (*pb.S
 	}
 
 	return signature, nil
+}
+
+//CheckHealth returns the HealthStatus with the service
+func (s *SignerServer) CheckHealth(ctx context.Context) (*pb.HealthStatus, error) {
+
+    logger.Debug("CheckHealth: Returning HealthStatus for SignerServer")
+    return &pb.HealthStatus{
+        Status: s.HealthChecker(),
+    }, nil
 }
