@@ -43,14 +43,29 @@ import (
 	"fmt"
 	"io"
 	"net"
+	"strings"
 	"sync"
 	"time"
 
 	"golang.org/x/net/context"
+	"golang.org/x/net/trace"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/metadata"
 )
+
+// MethodFamily returns the trace family for the given method.
+// It turns "/pkg.Service/GetFoo" into "pkg.Service".
+func MethodFamily(m string) string {
+	m = strings.TrimPrefix(m, "/") // remove leading slash
+	if i := strings.Index(m, "/"); i >= 0 {
+		m = m[:i] // remove everything from second slash
+	}
+	if i := strings.LastIndex(m, "."); i >= 0 {
+		m = m[i+1:] // cut down to last dotted component
+	}
+	return m
+}
 
 // recvMsg represents the received msg from the transport. All transport
 // protocol specific info has been removed.
@@ -169,10 +184,9 @@ type Stream struct {
 	ctx    context.Context
 	cancel context.CancelFunc
 	// method records the associated RPC method of the stream.
-	method string
-	buf    *recvBuffer
-	dec    io.Reader
-
+	method    string
+	buf       *recvBuffer
+	dec       io.Reader
 	fc        *inFlow
 	recvQuota uint32
 	// The accumulated inbound quota pending for window update.
@@ -199,6 +213,8 @@ type Stream struct {
 	// the status received from the server.
 	statusCode codes.Code
 	statusDesc string
+	// tracing information
+	tr trace.Trace
 }
 
 // Header acquires the key-value pairs of header metadata once it
@@ -231,6 +247,11 @@ func (s *Stream) ServerTransport() ServerTransport {
 // Context returns the context of the stream.
 func (s *Stream) Context() context.Context {
 	return s.ctx
+}
+
+// Trace returns the trace.Trace of the stream.
+func (s *Stream) Trace() trace.Trace {
+	return s.tr
 }
 
 // Method returns the method for the stream.
@@ -309,15 +330,20 @@ const (
 
 // NewServerTransport creates a ServerTransport with conn or non-nil error
 // if it fails.
-func NewServerTransport(protocol string, conn net.Conn, maxStreams uint32) (ServerTransport, error) {
-	return newHTTP2Server(conn, maxStreams)
+func NewServerTransport(protocol string, conn net.Conn, maxStreams uint32, authInfo credentials.AuthInfo, tracing bool) (ServerTransport, error) {
+	return newHTTP2Server(conn, maxStreams, authInfo, tracing)
 }
 
 // ConnectOptions covers all relevant options for dialing a server.
 type ConnectOptions struct {
-	Dialer      func(string, time.Duration) (net.Conn, error)
+	// UserAgent is the application user agent.
+	UserAgent string
+	// Dialer specifies how to dial a network address.
+	Dialer func(string, time.Duration) (net.Conn, error)
+	// AuthOptions stores the credentials required to setup a client connection and/or issue RPCs.
 	AuthOptions []credentials.Credentials
-	Timeout     time.Duration
+	// Timeout specifies the timeout for dialing a client connection.
+	Timeout time.Duration
 }
 
 // NewClientTransport establishes the transport with the required ConnectOptions
@@ -386,6 +412,8 @@ type ServerTransport interface {
 	// should not be accessed any more. All the pending streams and their
 	// handlers will be terminated asynchronously.
 	Close() error
+	// RemoteAddr returns the remote network address.
+	RemoteAddr() net.Addr
 }
 
 // StreamErrorf creates an StreamError with the specified error code and description.

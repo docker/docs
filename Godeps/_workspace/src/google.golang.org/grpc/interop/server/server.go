@@ -37,7 +37,6 @@ import (
 	"flag"
 	"fmt"
 	"io"
-	"log"
 	"net"
 	"strconv"
 	"time"
@@ -46,6 +45,7 @@ import (
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/grpclog"
 	testpb "google.golang.org/grpc/interop/grpc_testing"
 )
 
@@ -156,7 +156,7 @@ func (s *testServer) FullDuplexCall(stream testpb.TestService_FullDuplexCallServ
 }
 
 func (s *testServer) HalfDuplexCall(stream testpb.TestService_HalfDuplexCallServer) error {
-	msgBuf := make([]*testpb.StreamingOutputCallRequest, 0)
+	var msgBuf []*testpb.StreamingOutputCallRequest
 	for {
 		in, err := stream.Recv()
 		if err == io.EOF {
@@ -193,17 +193,17 @@ func main() {
 	p := strconv.Itoa(*port)
 	lis, err := net.Listen("tcp", ":"+p)
 	if err != nil {
-		log.Fatalf("failed to listen: %v", err)
+		grpclog.Fatalf("failed to listen: %v", err)
 	}
-	server := grpc.NewServer()
-	testpb.RegisterTestServiceServer(server, &testServer{})
+	var opts []grpc.ServerOption
 	if *useTLS {
 		creds, err := credentials.NewServerTLSFromFile(*certFile, *keyFile)
 		if err != nil {
-			log.Fatalf("Failed to generate credentials %v", err)
+			grpclog.Fatalf("Failed to generate credentials %v", err)
 		}
-		server.Serve(creds.NewListener(lis))
-	} else {
-		server.Serve(lis)
+		opts = []grpc.ServerOption{grpc.Creds(creds)}
 	}
+	server := grpc.NewServer(opts...)
+	testpb.RegisterTestServiceServer(server, &testServer{})
+	server.Serve(lis)
 }

@@ -38,31 +38,29 @@ package benchmark
 
 import (
 	"io"
-	"log"
 	"math"
 	"net"
-	"time"
 
-	"github.com/golang/protobuf/proto"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
-	testpb "google.golang.org/grpc/interop/grpc_testing"
+	testpb "google.golang.org/grpc/benchmark/grpc_testing"
+	"google.golang.org/grpc/grpclog"
 )
 
 func newPayload(t testpb.PayloadType, size int) *testpb.Payload {
 	if size < 0 {
-		log.Fatalf("Requested a response with invalid length %d", size)
+		grpclog.Fatalf("Requested a response with invalid length %d", size)
 	}
 	body := make([]byte, size)
 	switch t {
 	case testpb.PayloadType_COMPRESSABLE:
 	case testpb.PayloadType_UNCOMPRESSABLE:
-		log.Fatalf("PayloadType UNCOMPRESSABLE is not supported")
+		grpclog.Fatalf("PayloadType UNCOMPRESSABLE is not supported")
 	default:
-		log.Fatalf("Unsupported payload type: %d", t)
+		grpclog.Fatalf("Unsupported payload type: %d", t)
 	}
 	return &testpb.Payload{
-		Type: t.Enum(),
+		Type: t,
 		Body: body,
 	}
 }
@@ -70,49 +68,13 @@ func newPayload(t testpb.PayloadType, size int) *testpb.Payload {
 type testServer struct {
 }
 
-func (s *testServer) EmptyCall(ctx context.Context, in *testpb.Empty) (*testpb.Empty, error) {
-	return new(testpb.Empty), nil
-}
-
 func (s *testServer) UnaryCall(ctx context.Context, in *testpb.SimpleRequest) (*testpb.SimpleResponse, error) {
 	return &testpb.SimpleResponse{
-		Payload: newPayload(in.GetResponseType(), int(in.GetResponseSize())),
+		Payload: newPayload(in.ResponseType, int(in.ResponseSize)),
 	}, nil
 }
 
-func (s *testServer) StreamingOutputCall(args *testpb.StreamingOutputCallRequest, stream testpb.TestService_StreamingOutputCallServer) error {
-	cs := args.GetResponseParameters()
-	for _, c := range cs {
-		if us := c.GetIntervalUs(); us > 0 {
-			time.Sleep(time.Duration(us) * time.Microsecond)
-		}
-		if err := stream.Send(&testpb.StreamingOutputCallResponse{
-			Payload: newPayload(args.GetResponseType(), int(c.GetSize())),
-		}); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-
-func (s *testServer) StreamingInputCall(stream testpb.TestService_StreamingInputCallServer) error {
-	var sum int
-	for {
-		in, err := stream.Recv()
-		if err == io.EOF {
-			return stream.SendAndClose(&testpb.StreamingInputCallResponse{
-				AggregatedPayloadSize: proto.Int32(int32(sum)),
-			})
-		}
-		if err != nil {
-			return err
-		}
-		p := in.GetPayload().GetBody()
-		sum += len(p)
-	}
-}
-
-func (s *testServer) FullDuplexCall(stream testpb.TestService_FullDuplexCallServer) error {
+func (s *testServer) StreamingCall(stream testpb.TestService_StreamingCallServer) error {
 	for {
 		in, err := stream.Recv()
 		if err == io.EOF {
@@ -122,55 +84,21 @@ func (s *testServer) FullDuplexCall(stream testpb.TestService_FullDuplexCallServ
 		if err != nil {
 			return err
 		}
-		cs := in.GetResponseParameters()
-		for _, c := range cs {
-			if us := c.GetIntervalUs(); us > 0 {
-				time.Sleep(time.Duration(us) * time.Microsecond)
-			}
-			if err := stream.Send(&testpb.StreamingOutputCallResponse{
-				Payload: newPayload(in.GetResponseType(), int(c.GetSize())),
-			}); err != nil {
-				return err
-			}
-		}
-	}
-}
-
-func (s *testServer) HalfDuplexCall(stream testpb.TestService_HalfDuplexCallServer) error {
-	msgBuf := make([]*testpb.StreamingOutputCallRequest, 0)
-	for {
-		in, err := stream.Recv()
-		if err == io.EOF {
-			// read done.
-			break
-		}
-		if err != nil {
+		if err := stream.Send(&testpb.SimpleResponse{
+			Payload: newPayload(in.ResponseType, int(in.ResponseSize)),
+		}); err != nil {
 			return err
 		}
-		msgBuf = append(msgBuf, in)
 	}
-	for _, m := range msgBuf {
-		cs := m.GetResponseParameters()
-		for _, c := range cs {
-			if us := c.GetIntervalUs(); us > 0 {
-				time.Sleep(time.Duration(us) * time.Microsecond)
-			}
-			if err := stream.Send(&testpb.StreamingOutputCallResponse{
-				Payload: newPayload(m.GetResponseType(), int(c.GetSize())),
-			}); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
 }
 
-// StartServer starts a gRPC server serving a benchmark service. It returns its
-// listen address and a function to stop the server.
-func StartServer() (string, func()) {
-	lis, err := net.Listen("tcp", ":0")
+// StartServer starts a gRPC server serving a benchmark service on the given
+// address, which may be something like "localhost:0". It returns its listen
+// address and a function to stop the server.
+func StartServer(addr string) (string, func()) {
+	lis, err := net.Listen("tcp", addr)
 	if err != nil {
-		log.Fatalf("Failed to listen: %v", err)
+		grpclog.Fatalf("Failed to listen: %v", err)
 	}
 	s := grpc.NewServer(grpc.MaxConcurrentStreams(math.MaxUint32))
 	testpb.RegisterTestServiceServer(s, &testServer{})
@@ -184,20 +112,36 @@ func StartServer() (string, func()) {
 func DoUnaryCall(tc testpb.TestServiceClient, reqSize, respSize int) {
 	pl := newPayload(testpb.PayloadType_COMPRESSABLE, reqSize)
 	req := &testpb.SimpleRequest{
-		ResponseType: testpb.PayloadType_COMPRESSABLE.Enum(),
-		ResponseSize: proto.Int32(int32(respSize)),
+		ResponseType: pl.Type,
+		ResponseSize: int32(respSize),
 		Payload:      pl,
 	}
 	if _, err := tc.UnaryCall(context.Background(), req); err != nil {
-		log.Fatal("/TestService/UnaryCall RPC failed: ", err)
+		grpclog.Fatal("/TestService/UnaryCall RPC failed: ", err)
+	}
+}
+
+// DoStreamingRoundTrip performs a round trip for a single streaming rpc.
+func DoStreamingRoundTrip(tc testpb.TestServiceClient, stream testpb.TestService_StreamingCallClient, reqSize, respSize int) {
+	pl := newPayload(testpb.PayloadType_COMPRESSABLE, reqSize)
+	req := &testpb.SimpleRequest{
+		ResponseType: pl.Type,
+		ResponseSize: int32(respSize),
+		Payload:      pl,
+	}
+	if err := stream.Send(req); err != nil {
+		grpclog.Fatalf("StreamingCall(_).Send: %v", err)
+	}
+	if _, err := stream.Recv(); err != nil {
+		grpclog.Fatalf("StreamingCall(_).Recv: %v", err)
 	}
 }
 
 // NewClientConn creates a gRPC client connection to addr.
 func NewClientConn(addr string) *grpc.ClientConn {
-	conn, err := grpc.Dial(addr)
+	conn, err := grpc.Dial(addr, grpc.WithInsecure())
 	if err != nil {
-		log.Fatalf("NewClientConn(%q) failed to create a ClientConn %v", addr, err)
+		grpclog.Fatalf("NewClientConn(%q) failed to create a ClientConn %v", addr, err)
 	}
 	return conn
 }
