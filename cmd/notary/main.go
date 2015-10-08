@@ -27,7 +27,7 @@ var verbose bool
 var retriever passphrase.Retriever
 
 func init() {
-	retriever = passphrase.PromptRetriever()
+	retriever = getPassphraseRetriever()
 }
 
 func parseConfig() {
@@ -129,4 +129,20 @@ func askConfirm() bool {
 		return true
 	}
 	return false
+}
+
+func getPassphraseRetriever() passphrase.Retriever {
+	baseRetriever := passphrase.PromptRetriever()
+	env := map[string]string{
+		"root":     os.Getenv("NOTARY_ROOT_PASSPHRASE"),
+		"targets":  os.Getenv("NOTARY_TARGET_PASSPHRASE"),
+		"snapshot": os.Getenv("NOTARY_SNAPSHOT_PASSPHRASE"),
+	}
+
+	return func(keyName string, alias string, createNew bool, numAttempts int) (string, bool, error) {
+		if v := env[alias]; v != "" {
+			return v, numAttempts > 1, nil
+		}
+		return baseRetriever(keyName, alias, createNew, numAttempts)
+	}
 }
