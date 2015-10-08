@@ -6,7 +6,7 @@ running quickly, so lets dive right in!
 
 # Prerequisites
 
-* You'll need access to the dockerorca images on hub - if the link below gives an error, ask someone on the **#orca** slack channel to give you access.
+* You'll need access to the dockerorca images on hub - if the link below gives an error, ask someone on the **#tuca** slack channel to give you access.
     * [https://hub.docker.com/r/dockerorca/orca-bootstrap/](https://hub.docker.com/r/dockerorca/orca-bootstrap/)
 * You'll need at leasts one docker engine (local or remote should work)
     * If you want to build a multi-node deployment, **all** the nodes must be able to see eachother, so make sure if you're using remote engines, they're all on the same remote network.
