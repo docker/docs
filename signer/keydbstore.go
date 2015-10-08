@@ -196,7 +196,7 @@ func (s *KeyDBStore) RotateKeyPassphrase(name, newPassphraseAlias string) error 
 	return nil
 }
 
-// DB should exist and be query-able
+// HealthCheck verifies that DB exists and is query-able
 func (s *KeyDBStore) HealthCheck() error {
 	dbPrivateKey := GormPrivateKey{}
 	tableOk := s.db.HasTable(&dbPrivateKey)
