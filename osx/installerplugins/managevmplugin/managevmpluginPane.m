@@ -269,24 +269,4 @@ NSString *dockerMachinePath = @"/usr/local/bin/docker-machine";
     return YES;
 }
 
-- (IBAction)submitButtonClicked:(id)sender {
-    
-    // Machine logs from UI
-    NSString *machineLogs = [self.migrationLogsTextView string];
-    
-    // VirtualBox logs from file
-    NSString *virtualboxLogs;
-    
-    // Docker daemon logs via SSH
-    NSString *daemonLogs;
-    
-    // Include diagnostic information:
-    // - virtualbox version
-    // - Mac OS X version
-    // - Docker Toolbox Version
-    // - VBoxManage showvminfo output?
-    
-    // Submit all info to bugsnag
-}
-
 @end

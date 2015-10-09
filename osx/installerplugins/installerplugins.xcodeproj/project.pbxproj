@@ -53,8 +53,6 @@
 		1B4C91C31B85198100A06068 /* InstallerSections.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = InstallerSections.plist; sourceTree = "<group>"; };
 		1B8417E71B85261F00B1FA4D /* kitematic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kitematic.png; sourceTree = "<group>"; };
 		1B8417E81B85261F00B1FA4D /* quickstart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = quickstart.png; sourceTree = "<group>"; };
-		1BB3EBCC1BA74ABA00C2A3CF /* utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = utils.h; path = common/utils.h; sourceTree = "<group>"; };
-		1BB3EBCD1BA74AD300C2A3CF /* bugsnag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bugsnag.h; path = common/bugsnag.h; sourceTree = "<group>"; };
 		1BF102BB1B8BDEDA00FCB650 /* overviewplugin.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = overviewplugin.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BF102BE1B8BDEDA00FCB650 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BF102C01B8BDEDA00FCB650 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -132,9 +130,7 @@
 		1B4C915D1B85021200A06068 /* common */ = {
 			isa = PBXGroup;
 			children = (
-				1BB3EBCD1BA74AD300C2A3CF /* bugsnag.h */,
 				1B4C915E1B85023200A06068 /* mixpanel.h */,
-				1BB3EBCC1BA74ABA00C2A3CF /* utils.h */,
 			);
 			name = common;
 			sourceTree = "<group>";

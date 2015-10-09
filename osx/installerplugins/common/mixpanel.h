@@ -10,7 +10,6 @@
 #define installerplugins_mixpanel_h
 
 #import <InstallerPlugins/InstallerPlugins.h>
-#import "utils.h"
 
 @interface Mixpanel : NSObject
 
@@ -20,13 +19,28 @@
 
 @implementation Mixpanel
 
++ (NSString *) uuid {
+    NSString *appPath = [NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *appDirPath = [NSString pathWithComponents:[NSArray arrayWithObjects:appPath, @"DockerToolbox", nil]];
+    NSString *appFilePath = [NSString pathWithComponents:[NSArray arrayWithObjects:appDirPath, @"id", nil]];
+    
+    NSString *uuid = [NSString stringWithContentsOfFile:appFilePath encoding:NSUTF8StringEncoding error:nil];
+    if (!uuid || ![uuid length]) {
+        uuid = [[NSUUID UUID] UUIDString];
+        [[NSFileManager defaultManager] createDirectoryAtPath:appDirPath withIntermediateDirectories:YES attributes:nil error:nil];
+        [uuid writeToFile:appFilePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+    }
+    
+    return uuid;
+}
+
 + (void) trackEvent:(NSString *)name forPane:(InstallerPane*)pane withProperties:(NSDictionary *)properties {
     BOOL trackingDisabled = [[[[pane section] sharedDictionary] objectForKey:@"disableTracking"] boolValue];
     if (trackingDisabled) {
         return;
     }
-
-    NSString *uuid = [Utils uuid];
+    
+    NSString *uuid = [self uuid];
     if (!uuid) {
         return;
     }
@@ -35,18 +49,19 @@
     for (NSString *key in properties) {
         props = [props stringByAppendingFormat:@",\"%@\": \"%@\"", key, [properties objectForKey:key]];
     }
-
+    
     NSString *osVersion = [@"Mac OS X " stringByAppendingString:[[[[NSProcessInfo processInfo] operatingSystemVersionString] componentsSeparatedByString:@" "] objectAtIndex:1]];
 
     NSBundle* bundle = [[pane section] bundle];
     NSString* token = [bundle objectForInfoDictionaryKey:@"Mixpanel Token"];
     NSString* installerVersion = [bundle objectForInfoDictionaryKey:@"Installer Version"];
     NSString* payload = [NSString stringWithFormat:@"{\"event\": \"%@\", \"properties\": {\"token\": \"%@\", \"distinct_id\": \"%@\", \"os\": \"darwin\", \"os version\":\"%@\", \"version\": \"%@\" %@}}", name, token, uuid, osVersion, installerVersion, props];
-
+    
     @try {
         NSData * data = [payload dataUsingEncoding:NSUTF8StringEncoding];
         NSString* base64Encoded = [data base64EncodedStringWithOptions:0];
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString: [NSString stringWithFormat:@"https://api.mixpanel.com/track/?data=%@", base64Encoded]]];
+        
         NSOperationQueue *queue = [[NSOperationQueue alloc] init];
         [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {}];
     }
