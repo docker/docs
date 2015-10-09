@@ -10,7 +10,7 @@ GITUNTRACKEDCHANGES := $(shell git status --porcelain --untracked-files=no)
 ifneq ($(GITUNTRACKEDCHANGES),)
 	GITCOMMIT := $(GITCOMMIT)-dirty
 endif
-CTIMEVAR=-X $(NOTARY_PKG)/version.GitCommit '$(GITCOMMIT)' -X $(NOTARY_PKG)/version.NotaryVersion '$(NOTARY_VERSION)'
+CTIMEVAR=-X $(NOTARY_PKG)/version.GitCommit='$(GITCOMMIT)' -X $(NOTARY_PKG)/version.NotaryVersion='$(NOTARY_VERSION)'
 GO_LDFLAGS=-ldflags "-w $(CTIMEVAR)"
 GO_LDFLAGS_STATIC=-ldflags "-w $(CTIMEVAR) -extldflags -static"
 GOOSES = darwin freebsd linux
