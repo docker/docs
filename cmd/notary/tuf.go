@@ -66,6 +66,13 @@ var cmdTufPublish = &cobra.Command{
 	Run:   tufPublish,
 }
 
+var cmdTufStatus = &cobra.Command{
+	Use:   "status [ GUN ]",
+	Short: "displays status of unpublished changes to the local trusted collection.",
+	Long:  "displays status of unpublished changes to the local trusted collection identified by the Globally Unique Name.",
+	Run:   tufStatus,
+}
+
 var cmdVerify = &cobra.Command{
 	Use:   "verify [ GUN ] <target>",
 	Short: "verifies if the content is included in the trusted collection",
@@ -190,6 +197,38 @@ func tufLookup(cmd *cobra.Command, args []string) {
 	}
 
 	fmt.Println(target.Name, fmt.Sprintf("sha256:%x", target.Hashes["sha256"]), target.Length)
+}
+
+func tufStatus(cmd *cobra.Command, args []string) {
+	if len(args) < 1 {
+		cmd.Usage()
+		fatalf("Must specify a GUN")
+	}
+
+	gun := args[0]
+	parseConfig()
+
+	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, remoteTrustServer, nil, retriever)
+	if err != nil {
+		fatalf(err.Error())
+	}
+
+	cl, err := nRepo.GetChangelist()
+	if err != nil {
+		fatalf(err.Error())
+	}
+
+	if len(cl.List()) == 0 {
+		fmt.Printf("No unpublished changes for %s\n", gun)
+		return
+	}
+
+	fmt.Printf("Unpublished changes for %s:\n\n", gun)
+	fmt.Printf("%-10s%-10s%-12s%s\n", "action", "scope", "type", "path")
+	fmt.Println("----------------------------------------------------")
+	for _, ch := range cl.List() {
+		fmt.Printf("%-10s%-10s%-12s%s\n", ch.Action(), ch.Scope(), ch.Type(), ch.Path())
+	}
 }
 
 func tufPublish(cmd *cobra.Command, args []string) {

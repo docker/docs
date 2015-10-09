@@ -564,6 +564,30 @@ func testPublish(t *testing.T, rootType data.KeyAlgorithm) {
 
 	changelistDir.Close()
 
+	// Test loading changelist
+	changes := make(map[string]changelist.Change)
+	cl, err := repo.GetChangelist()
+	assert.NoError(t, err, "could not get changelist for repo")
+
+	assert.Len(t, cl.List(), 2, "Wrong number of changes returned from changelist")
+	for _, ch := range cl.List() {
+		changes[ch.Path()] = ch
+	}
+
+	currentChange := changes["current"]
+	assert.NotNil(t, currentChange, "Expected changelist to contain a change for path 'current'")
+	assert.EqualValues(t, changelist.ActionCreate, currentChange.Action())
+	assert.Equal(t, "targets", currentChange.Scope())
+	assert.Equal(t, "target", currentChange.Type())
+	assert.Equal(t, "current", currentChange.Path())
+
+	latestChange := changes["latest"]
+	assert.NotNil(t, latestChange, "Expected changelist to contain a change for path 'latest'")
+	assert.EqualValues(t, changelist.ActionCreate, latestChange.Action())
+	assert.Equal(t, "targets", latestChange.Scope())
+	assert.Equal(t, "target", latestChange.Type())
+	assert.Equal(t, "latest", latestChange.Path())
+
 	// Now test Publish
 	err = repo.Publish()
 	assert.NoError(t, err)

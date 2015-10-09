@@ -326,6 +326,17 @@ func (r *NotaryRepository) GetTargetByName(name string) (*Target, error) {
 	return &Target{Name: name, Hashes: meta.Hashes, Length: meta.Length}, nil
 }
 
+// GetChangelist returns the list of the repository's unpublished changes
+func (r *NotaryRepository) GetChangelist() (changelist.Changelist, error) {
+	changelistDir := filepath.Join(r.tufRepoPath, "changelist")
+	cl, err := changelist.NewFileChangelist(changelistDir)
+	if err != nil {
+		logrus.Debug("Error initializing changelist")
+		return nil, err
+	}
+	return cl, nil
+}
+
 // Publish pushes the local changes in signed material to the remote notary-server
 // Conceptually it performs an operation similar to a `git rebase`
 func (r *NotaryRepository) Publish() error {
@@ -371,11 +382,8 @@ func (r *NotaryRepository) Publish() error {
 			return err
 		}
 	}
-	// load the changelist for this repo
-	changelistDir := filepath.Join(r.tufRepoPath, "changelist")
-	cl, err := changelist.NewFileChangelist(changelistDir)
+	cl, err := r.GetChangelist()
 	if err != nil {
-		logrus.Debug("Error initializing changelist")
 		return err
 	}
 	// apply the changelist to the repo
@@ -445,7 +453,7 @@ func (r *NotaryRepository) Publish() error {
 		// This is not a critical problem when only a single host is pushing
 		// but will cause weird behaviour if changelist cleanup is failing
 		// and there are multiple hosts writing to the repo.
-		logrus.Warn("Unable to clear changelist. You may want to manually delete the folder ", changelistDir)
+		logrus.Warn("Unable to clear changelist. You may want to manually delete the folder ", filepath.Join(r.tufRepoPath, "changelist"))
 	}
 	return nil
 }
