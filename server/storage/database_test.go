@@ -98,7 +98,7 @@ func TestMySQLUpdateCurrentNew(t *testing.T) {
 
 	// There should just be one row
 	var rows []GormTUFFile
-	query := gormDB.Model(&GormTUFFile{}).Find(&rows)
+	query := gormDB.Find(&rows)
 	assert.NoError(t, query.Error)
 
 	expected := SampleTUF(0)
@@ -123,7 +123,7 @@ func TestMySQLUpdateCurrentNewVersion(t *testing.T) {
 
 	// There should just be one row
 	var rows []GormTUFFile
-	query = gormDB.Model(&GormTUFFile{}).Find(&rows)
+	query = gormDB.Find(&rows)
 	assert.NoError(t, query.Error)
 
 	oldVersion.ID = 1
@@ -151,7 +151,7 @@ func TestMySQLUpdateCurrentOldVersionError(t *testing.T) {
 
 	// There should just be one row
 	var rows []GormTUFFile
-	query = gormDB.Model(&GormTUFFile{}).Find(&rows)
+	query = gormDB.Find(&rows)
 	assert.NoError(t, query.Error)
 
 	newVersion.ID = 1
@@ -160,35 +160,64 @@ func TestMySQLUpdateCurrentOldVersionError(t *testing.T) {
 	dbStore.DB.Close()
 }
 
+// TestMySQLUpdateMany asserts that inserting multiple updates succeeds if the
+// updates do not conflict with each.
 func TestMySQLUpdateMany(t *testing.T) {
 	gormDB, dbStore := SetUpSQLite(t)
 
-	update1 := SampleUpdate(0)
-	update2 := MetaUpdate{
-		Role:    "targets",
-		Version: 1,
-		Data:    []byte("2"),
-	}
-
-	expected := []GormTUFFile{
-		GormTUFFile{ID: 1, Gun: "testGUN", Role: "root", Version: 0,
-			Data: []byte("1")},
-		GormTUFFile{ID: 2, Gun: "testGUN", Role: "targets", Version: 1,
-			Data: []byte("2")},
-	}
-
-	err := dbStore.UpdateMany("testGUN", []MetaUpdate{update1, update2})
+	err := dbStore.UpdateMany("testGUN", []MetaUpdate{
+		SampleUpdate(0),
+		{
+			Role:    "targets",
+			Version: 1,
+			Data:    []byte("2"),
+		},
+		SampleUpdate(2),
+	})
 	assert.NoError(t, err, "UpdateMany errored unexpectedly: %v", err)
 
+	gorm1 := SampleTUF(0)
+	gorm1.ID = 1
+	gorm2 := GormTUFFile{ID: 2, Gun: "testGUN", Role: "targets", Version: 1,
+		Data: []byte("2")}
+	gorm3 := SampleTUF(2)
+	gorm3.ID = 3
+	expected := []GormTUFFile{gorm1, gorm2, gorm3}
+
 	var rows []GormTUFFile
-	query := gormDB.Model(&GormTUFFile{}).Find(&rows)
+	query := gormDB.Find(&rows)
 	assert.NoError(t, query.Error)
-	assert.Equal(t, 2, len(rows))
 	assert.Equal(t, expected, rows)
 
 	dbStore.DB.Close()
 }
 
+// TestMySQLUpdateManyVersionOrder asserts that inserting updates with
+// non-monotonic versions still succeeds.
+func TestMySQLUpdateManyVersionOrder(t *testing.T) {
+	gormDB, dbStore := SetUpSQLite(t)
+
+	err := dbStore.UpdateMany(
+		"testGUN", []MetaUpdate{SampleUpdate(2), SampleUpdate(0)})
+	assert.NoError(t, err)
+
+	// the whole transaction should have rolled back, so there should be
+	// no entries.
+	gorm1 := SampleTUF(2)
+	gorm1.ID = 1
+	gorm2 := SampleTUF(0)
+	gorm2.ID = 2
+
+	var rows []GormTUFFile
+	query := gormDB.Find(&rows)
+	assert.NoError(t, query.Error)
+	assert.Equal(t, []GormTUFFile{gorm1, gorm2}, rows)
+
+	dbStore.DB.Close()
+}
+
+// TestMySQLUpdateManyDuplicateRollback asserts that inserting duplicate
+// updates fails.
 func TestMySQLUpdateManyDuplicateRollback(t *testing.T) {
 	gormDB, dbStore := SetUpSQLite(t)
 
@@ -290,12 +319,13 @@ func TestMySQLSetTimestampKeyExists(t *testing.T) {
 	var rows []GormTimestampKey
 	query := gormDB.Model(&GormTimestampKey{}).Find(&rows)
 	assert.NoError(t, query.Error)
-	assert.Equal(t, 1, len(rows))
 	assert.Equal(
 		t,
-		GormTimestampKey{Gun: "testGUN", Cipher: "testCipher",
-			Public: []byte("1")},
-		rows[0])
+		[]GormTimestampKey{
+			{Gun: "testGUN", Cipher: "testCipher",
+				Public: []byte("1")},
+		},
+		rows)
 
 	dbStore.DB.Close()
 }
