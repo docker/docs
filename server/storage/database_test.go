@@ -31,26 +31,26 @@ func SampleUpdate(version int) MetaUpdate {
 }
 
 // SetUpSQLite creates a sqlite database for testing
-func SetUpSQLite(dbDir string, t *testing.T) (*gorm.DB, *MySQLStorage) {
-	db, err := gorm.Open("sqlite3", dbDir+"test_db")
+func SetUpSQLite(dbDir string, t *testing.T) (*gorm.DB, *SQLStorage) {
+	dbStore, err := NewSQLStorage("sqlite3", dbDir+"test_db")
 	assert.NoError(t, err)
 
 	// Create the DB tables
-	err = CreateTUFTable(db)
+	err = CreateTUFTable(dbStore.DB)
 	assert.NoError(t, err)
 
-	err = CreateTimestampTable(db)
+	err = CreateTimestampTable(dbStore.DB)
 	assert.NoError(t, err)
 
 	// verify that the tables are empty
 	var count int
 	for _, model := range [2]interface{}{&TUFFile{}, &TimestampKey{}} {
-		query := db.Model(model).Count(&count)
+		query := dbStore.DB.Model(model).Count(&count)
 		assert.NoError(t, query.Error)
 		assert.Equal(t, 0, count)
 	}
 
-	return &db, NewMySQLStorage(db.DB())
+	return &dbStore.DB, dbStore
 }
 
 // TestMySQLUpdateCurrent asserts that UpdateCurrent will add a new TUF file
@@ -202,10 +202,10 @@ func TestMySQLUpdateManyDuplicateRollback(t *testing.T) {
 
 	update := SampleUpdate(0)
 	err = dbStore.UpdateMany("testGUN", []MetaUpdate{update, update})
-	assert.Error(t, err, "There should be an error updating twice.")
-	// sqlite3 error and mysql error aren't compatible
-	// assert.IsType(t, &ErrOldVersion{}, err,
-	//               "UpdateMany returned wrong error type")
+	assert.Error(
+		t, err, "There should be an error updating the same data twice.")
+	assert.IsType(t, &ErrOldVersion{}, err,
+		"UpdateMany returned wrong error type")
 
 	// the whole transaction should have rolled back, so there should be
 	// no entries.
@@ -294,10 +294,8 @@ func TestMySQLSetTimestampKeyExists(t *testing.T) {
 
 	err = dbStore.SetTimestampKey("testGUN", "testCipher", []byte("1"))
 	assert.Error(t, err)
-	// sqlite3 error and mysql error aren't compatible
-
-	// assert.IsType(t, &ErrTimestampKeyExists{}, err,
-	//               "Expected ErrTimestampKeyExists from SetTimestampKey")
+	assert.IsType(t, &ErrTimestampKeyExists{}, err,
+		"Expected ErrTimestampKeyExists from SetTimestampKey")
 
 	var rows []TimestampKey
 	query := gormDB.Select("ID, Gun, Cipher, Public").Find(&rows)

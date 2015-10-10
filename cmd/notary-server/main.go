@@ -1,7 +1,6 @@
 package main
 
 import (
-	"database/sql"
 	_ "expvar"
 	"flag"
 	"fmt"
@@ -120,12 +119,12 @@ func main() {
 	if viper.GetString("storage.backend") == "mysql" {
 		logrus.Info("Using mysql backend")
 		dbURL := viper.GetString("storage.db_url")
-		db, err := sql.Open("mysql", dbURL)
+		store, err := storage.NewSQLStorage("mysql", dbURL)
 		if err != nil {
 			logrus.Fatal("Error starting DB driver: ", err.Error())
 			return // not strictly needed but let's be explicit
 		}
-		ctx = context.WithValue(ctx, "metaStore", storage.NewMySQLStorage(db))
+		ctx = context.WithValue(ctx, "metaStore", store)
 	} else {
 		logrus.Debug("Using memory backend")
 		ctx = context.WithValue(ctx, "metaStore", storage.NewMemStorage())
