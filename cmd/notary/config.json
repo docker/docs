@@ -1,0 +1,7 @@
+{
+	"remote_server": {
+		"addr": "localhost:4443",
+		"root_ca": "./fixtures/root-ca.crt"
+	}
+}
+

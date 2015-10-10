@@ -7,24 +7,30 @@ import (
 	"strings"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/mitchellh/go-homedir"
-	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
-
 	"github.com/docker/notary/pkg/passphrase"
 	"github.com/docker/notary/version"
+	homedir "github.com/mitchellh/go-homedir"
+	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
-const configFileName string = "config"
-const defaultTrustDir string = ".notary/"
-const defaultServerURL = "https://notary-server:4443"
-const idSize = 64
+const (
+	configDir        = ".notary/"
+	defaultServerURL = "https://notary-server:4443"
+	idSize           = 64
+)
 
-var rawOutput bool
-var trustDir string
-var remoteTrustServer string
-var verbose bool
-var retriever passphrase.Retriever
+var (
+	rawOutput         bool
+	verbose           bool
+	trustDir          string
+	configFile        string
+	remoteTrustServer string
+	configPath        string
+	configFileName    = "config"
+	configFileExt     = "json"
+	retriever         passphrase.Retriever
+)
 
 func init() {
 	retriever = getPassphraseRetriever()
@@ -45,17 +51,27 @@ func parseConfig() {
 		if homeDir == "" {
 			fatalf("cannot get current user home directory")
 		}
-		trustDir = filepath.Join(homeDir, filepath.Dir(defaultTrustDir))
+		trustDir = filepath.Join(homeDir, filepath.Dir(configDir))
 
 		logrus.Debugf("no trust directory provided, using default: %s", trustDir)
 	} else {
 		logrus.Debugf("trust directory provided: %s", trustDir)
 	}
 
-	// Setup the configuration details
+	// If there was a commandline configFile set, we parse that.
+	// If there wasn't we attempt to find it on the default location ~/.notary/config
+	if configFile != "" {
+		configFileExt = strings.TrimPrefix(filepath.Ext(configFile), ".")
+		configFileName = strings.TrimSuffix(filepath.Base(configFile), filepath.Ext(configFile))
+		configPath = filepath.Dir(configFile)
+	} else {
+		configPath = trustDir
+	}
+
+	// Setup the configuration details into viper
 	viper.SetConfigName(configFileName)
-	viper.AddConfigPath(trustDir)
-	viper.SetConfigType("json")
+	viper.SetConfigType(configFileExt)
+	viper.AddConfigPath(configPath)
 
 	// Find and read the config file
 	err := viper.ReadInConfig()
@@ -69,11 +85,6 @@ func parseConfig() {
 }
 
 func main() {
-	serverURL := os.Getenv("NOTARY_SERVER_URL")
-	if serverURL == "" {
-		serverURL = defaultServerURL
-	}
-
 	var notaryCmd = &cobra.Command{
 		Use:   "notary",
 		Short: "notary allows the creation of trusted collections.",
@@ -92,25 +103,26 @@ func main() {
 	notaryCmd.AddCommand(versionCmd)
 
 	notaryCmd.PersistentFlags().StringVarP(&trustDir, "trustdir", "d", "", "directory where the trust data is persisted to")
+	notaryCmd.PersistentFlags().StringVarP(&configFile, "configFile", "c", "", "path to the configuration file to use")
 	notaryCmd.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "verbose output")
 
 	notaryCmd.AddCommand(cmdKey)
 	notaryCmd.AddCommand(cmdCert)
 	notaryCmd.AddCommand(cmdTufInit)
-	cmdTufInit.Flags().StringVarP(&remoteTrustServer, "server", "s", serverURL, "Remote trust server location")
+	cmdTufInit.Flags().StringVarP(&remoteTrustServer, "server", "s", "", "Remote trust server location")
 	notaryCmd.AddCommand(cmdTufList)
 	cmdTufList.Flags().BoolVarP(&rawOutput, "raw", "", false, "Instructs notary list to output a nonpretty printed version of the targets list. Useful if you need to parse the list.")
-	cmdTufList.Flags().StringVarP(&remoteTrustServer, "server", "s", serverURL, "Remote trust server location")
+	cmdTufList.Flags().StringVarP(&remoteTrustServer, "server", "s", "", "Remote trust server location")
 	notaryCmd.AddCommand(cmdTufAdd)
 	notaryCmd.AddCommand(cmdTufRemove)
 	notaryCmd.AddCommand(cmdTufStatus)
 	notaryCmd.AddCommand(cmdTufPublish)
-	cmdTufPublish.Flags().StringVarP(&remoteTrustServer, "server", "s", serverURL, "Remote trust server location")
+	cmdTufPublish.Flags().StringVarP(&remoteTrustServer, "server", "s", "", "Remote trust server location")
 	notaryCmd.AddCommand(cmdTufLookup)
 	cmdTufLookup.Flags().BoolVarP(&rawOutput, "raw", "", false, "Instructs notary lookup to output a nonpretty printed version of the targets list. Useful if you need to parse the list.")
-	cmdTufLookup.Flags().StringVarP(&remoteTrustServer, "server", "s", serverURL, "Remote trust server location")
+	cmdTufLookup.Flags().StringVarP(&remoteTrustServer, "server", "s", "", "Remote trust server location")
 	notaryCmd.AddCommand(cmdVerify)
-	cmdVerify.Flags().StringVarP(&remoteTrustServer, "server", "s", serverURL, "Remote trust server location")
+	cmdVerify.Flags().StringVarP(&remoteTrustServer, "server", "s", "", "Remote trust server location")
 
 	notaryCmd.Execute()
 }
