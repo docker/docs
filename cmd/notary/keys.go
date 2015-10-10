@@ -29,6 +29,7 @@ func init() {
 	cmdKeyExportRoot.Flags().BoolVarP(&keysExportRootChangePassphrase, "change-passphrase", "c", false, "set a new passphrase for the key being exported")
 	cmdKey.AddCommand(cmdKeyImport)
 	cmdKey.AddCommand(cmdKeyImportRoot)
+	cmdMeta.AddCommand(cmdRotateKey)
 }
 
 var cmdKey = &cobra.Command{
@@ -42,6 +43,13 @@ var cmdKeyList = &cobra.Command{
 	Short: "Lists keys.",
 	Long:  "lists keys known to notary.",
 	Run:   keysList,
+}
+
+var cmdRotateKey = &cobra.Command{
+	Use:   "rotate [ GUN ] <role>",
+	Short: "Rotate all keys for role.",
+	Long:  "Removes all old keys for the given role and generates 1 new key.",
+	Run:   keysRotate,
 }
 
 var keyRemoveGUN string
@@ -374,4 +382,8 @@ func printKey(keyPath, alias string) {
 	keyID := filepath.Base(keyPath)
 	gun := filepath.Dir(keyPath)
 	fmt.Printf("%s - %s - %s\n", gun, alias, keyID)
+}
+
+func keysRotate(cmd *cobra.Command, args []string) {
+
 }

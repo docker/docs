@@ -606,18 +606,6 @@ func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
 	), nil
 }
 
-// AddKeys adds the specified keyIDs to the role. These changes are
-// staged in a changelist until publish is called.
-func (r *NotaryRepository) AddKeys(role string, keyIDs ...string) error {
-	return r.rootKeyChange(role, changelist.ActionUpdate, keyIDs...)
-}
-
-// RemoveKeys removes the specified keyIDs from the role. These changes
-// are staged in a changelist until publish is called.
-func (r *NotaryRepository) RemoveKeys(role string, keyIDs ...string) error {
-	return r.rootKeyChange(role, changelist.ActionDelete, keyIDs...)
-}
-
 // ReplaceKey removes all existing keys associated with role and adds
 // the keys specified by keyIDs to the role. These changes are staged
 // in a changelist until publish is called.
@@ -633,11 +621,11 @@ func (r *NotaryRepository) ReplaceKeys(role string) error {
 		if err != nil {
 			return err
 		}
-		return r.rootKeyChange(role, changelist.ActionCreate, key)
+		return r.rootFileKeyChange(role, changelist.ActionCreate, key)
 	}
 }
 
-func (r *NotaryRepository) rootKeyChange(role, action string, keys ...data.PublicKey) error {
+func (r *NotaryRepository) rootFileKeyChange(role, action string, keys ...data.PublicKey) error {
 	cl, err := changelist.NewFileChangelist(filepath.Join(r.tufRepoPath, "changelist"))
 	if err != nil {
 		return err
