@@ -8,6 +8,7 @@ import (
 	"sort"
 	"strings"
 
+	notaryclient "github.com/docker/notary/client"
 	"github.com/docker/notary/keystoremanager"
 	"github.com/docker/notary/pkg/passphrase"
 	"github.com/docker/notary/trustmanager"
@@ -29,7 +30,7 @@ func init() {
 	cmdKeyExportRoot.Flags().BoolVarP(&keysExportRootChangePassphrase, "change-passphrase", "c", false, "set a new passphrase for the key being exported")
 	cmdKey.AddCommand(cmdKeyImport)
 	cmdKey.AddCommand(cmdKeyImportRoot)
-	cmdMeta.AddCommand(cmdRotateKey)
+	cmdKey.AddCommand(cmdRotateKey)
 }
 
 var cmdKey = &cobra.Command{
@@ -46,7 +47,7 @@ var cmdKeyList = &cobra.Command{
 }
 
 var cmdRotateKey = &cobra.Command{
-	Use:   "rotate [ GUN ] <role>",
+	Use:   "rotate [ GUN ]",
 	Short: "Rotate all keys for role.",
 	Long:  "Removes all old keys for the given role and generates 1 new key.",
 	Run:   keysRotate,
@@ -385,5 +386,18 @@ func printKey(keyPath, alias string) {
 }
 
 func keysRotate(cmd *cobra.Command, args []string) {
+	if len(args) < 1 {
+		cmd.Usage()
+		fatalf("must specify a GUN and target")
+	}
+	parseConfig()
 
+	gun := args[0]
+	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, remoteTrustServer, nil, retriever)
+	if err != nil {
+		fatalf(err.Error())
+	}
+	if err := nRepo.RotateKeys(); err != nil {
+		fatalf(err.Error())
+	}
 }

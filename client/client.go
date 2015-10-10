@@ -609,32 +609,35 @@ func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
 // ReplaceKey removes all existing keys associated with role and adds
 // the keys specified by keyIDs to the role. These changes are staged
 // in a changelist until publish is called.
-func (r *NotaryRepository) ReplaceKeys(role string) error {
-	if role == "root" {
-		// need to create an entirely new root key and certificate
-		var key data.PublicKey = nil
-		return r.rootKeyChange(role, changelist.ActionCreate, key)
-	} else if role == "targets" || role == "snapshot" {
-		// This is currently hardcoding the targets and snapshots keys to ECDSA
-		// Targets and snapshot keys are always generated locally.
+func (r *NotaryRepository) RotateKeys() error {
+	for _, role := range []string{"targets", "snapshot"} {
 		key, err := r.cryptoService.Create(role, data.ECDSAKey)
 		if err != nil {
 			return err
 		}
-		return r.rootFileKeyChange(role, changelist.ActionCreate, key)
+		err = r.rootFileKeyChange(role, changelist.ActionCreate, key)
+		if err != nil {
+			return err
+		}
 	}
+	return nil
 }
 
-func (r *NotaryRepository) rootFileKeyChange(role, action string, keys ...data.PublicKey) error {
+func (r *NotaryRepository) rootFileKeyChange(role, action string, key data.PublicKey) error {
 	cl, err := changelist.NewFileChangelist(filepath.Join(r.tufRepoPath, "changelist"))
 	if err != nil {
 		return err
 	}
 	defer cl.Close()
 
+	k, ok := key.(*data.TUFKey)
+	if !ok {
+		return errors.New("Invalid key type found during rotation.")
+	}
+
 	meta := changelist.TufRootData{
 		RoleName: role,
-		Keys:     keys,
+		Keys:     []data.TUFKey{*k},
 	}
 	metaJSON, err := json.Marshal(meta)
 	if err != nil {

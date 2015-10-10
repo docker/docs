@@ -88,6 +88,7 @@ type Role struct {
 	Name             string   `json:"name"`
 	Paths            []string `json:"paths,omitempty"`
 	PathHashPrefixes []string `json:"path_hash_prefixes,omitempty"`
+	Email            string   `json:"email,omitempty"`
 }
 
 func NewRole(name string, threshold int, keyIDs, paths, pathHashPrefixes []string) (*Role, error) {

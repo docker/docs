@@ -97,33 +97,11 @@ func applyRootRoleChange(repo *tuf.TufRepo, c changelist.Change) error {
 		if err != nil {
 			return err
 		}
-		err = repo.ReplaceBaseKeys(d.RoleName, d.Keys...)
-		if err != nil {
-			return err
+		k := []data.PublicKey{}
+		for _, key := range d.Keys {
+			k = append(k, data.NewPublicKey(key.Algorithm(), key.Public()))
 		}
-	case changelist.ActionUpdate:
-		// adds a key to a role
-		d := &changelist.TufRootData{}
-		err := json.Unmarshal(c.Content(), d)
-		if err != nil {
-			return err
-		}
-		err = repo.AddBaseKeys(d.RoleName, d.Keys...)
-		if err != nil {
-			return err
-		}
-	case changelist.ActionDelete:
-		// removes a key from a role
-		d := &changelist.TufRootData{}
-		err := json.Unmarshal(c.Content(), d)
-		if err != nil {
-			return err
-		}
-		ids := make([]string, 0, len(d.Keys))
-		for _, k := range d.Keys {
-			ids = append(ids, k.ID())
-		}
-		err = repo.RemoveBaseKeys(d.RoleName, ids...)
+		err = repo.ReplaceBaseKeys(d.RoleName, k...)
 		if err != nil {
 			return err
 		}

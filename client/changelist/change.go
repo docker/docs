@@ -36,8 +36,8 @@ type TufChange struct {
 }
 
 type TufRootData struct {
-	Keys     []data.PublicKey `json:"keys"`
-	RoleName string           `json:"role"`
+	Keys     []data.TUFKey `json:"keys"`
+	RoleName string        `json:"role"`
 }
 
 // NewTufChange initializes a tufChange object
