@@ -606,7 +606,7 @@ func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
 	), nil
 }
 
-// ReplaceKey removes all existing keys associated with role and adds
+// RotateKeys removes all existing keys associated with role and adds
 // the keys specified by keyIDs to the role. These changes are staged
 // in a changelist until publish is called.
 func (r *NotaryRepository) RotateKeys() error {

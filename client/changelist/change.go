@@ -35,6 +35,8 @@ type TufChange struct {
 	Data       []byte `json:"data"`
 }
 
+// TufRootData represents a modification of the keys associated
+// with a role that appears in the root.json
 type TufRootData struct {
 	Keys     []data.TUFKey `json:"keys"`
 	RoleName string        `json:"role"`
