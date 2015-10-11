@@ -70,6 +70,25 @@ This release adds CentOS support and addresses a few bugs and issues in Docker T
 
 ## Commercially Supported Docker Engine
 
+### CS Docker Engine 1.6.2-cs7
+(12 October 2015)
+
+As part of our ongoing security efforts, a vulnerability was discovered that
+affects the way content is stored and retrieved within the Docker Engine and CS
+Docker Engine. Today we are releasing a security update that fixes this
+issue in both Docker Engine 1.8.3 and CS Docker Engine 1.6.2-cs7. The <a
+href="https://github.com/docker/docker/blob/master/CHANGELOG.md#161-2015-10-12"
+target="_blank">change log for Docker Engine 1.8.3</a> has a complete list of
+all the changes incorporated into both the open source and commercially
+supported releases.
+
+We recommend that users upgrade to CS Docker Engine 1.6.2-cs7.
+If you are unable to upgrade to CS Docker Engine 1.6.2-cs7  right away, remember to only pull content from trusted sources.
+
+To keep up to date on all the latest Docker Security news, make sure you check
+out our [Security page](http://www.docker.com/docker-security), subscribe to our
+mailing list, or find us in #docker-security.
+
 ### CS Docker Engine 1.6.2-cs6
 (23 July 2015)
 
