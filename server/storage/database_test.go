@@ -260,10 +260,6 @@ func TestMySQLGetCurrent(t *testing.T) {
 func TestMySQLDelete(t *testing.T) {
 	gormDB, dbStore := SetUpSQLite(t)
 
-	// Not testing deleting from an empty table, because that's not an error
-	// in SQLite3
-
-	// use UpdateCurrent to create one and test GetCurrent
 	tuf := SampleTUF(0)
 	query := gormDB.Create(&tuf)
 	assert.NoError(t, query.Error, "Creating a row in an empty DB failed.")
