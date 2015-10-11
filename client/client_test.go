@@ -633,3 +633,95 @@ func testPublish(t *testing.T, rootType data.KeyAlgorithm) {
 	assert.NoError(t, err)
 	assert.Equal(t, currentTarget, newCurrentTarget, "current target does not match")
 }
+
+func TestRotate(t *testing.T) {
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	defer os.RemoveAll(tempBaseDir)
+
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+
+	gun := "docker.com/notary"
+
+	// Set up server
+	ctx := context.WithValue(context.Background(), "metaStore", storage.NewMemStorage())
+
+	// Do not pass one of the const KeyAlgorithms here as the value! Passing a
+	// string is in itself good test that we are handling it correctly as we will
+	// be receiving a string from the configuration.
+	ctx = context.WithValue(ctx, "keyAlgorithm", "ecdsa")
+
+	hand := utils.RootHandlerFactory(nil, ctx,
+		cryptoservice.NewCryptoService("", trustmanager.NewKeyMemoryStore(passphraseRetriever)))
+
+	r := mux.NewRouter()
+	r.Methods("POST").Path("/v2/{imageName:" + v2.RepositoryNameRegexp.String() + "}/_trust/tuf/").Handler(hand(handlers.AtomicUpdateHandler, "push", "pull"))
+	r.Methods("GET").Path("/v2/{imageName:" + v2.RepositoryNameRegexp.String() + "}/_trust/tuf/{tufRole:(root|targets|snapshot)}.json").Handler(hand(handlers.GetHandler, "pull"))
+	r.Methods("GET").Path("/v2/{imageName:" + v2.RepositoryNameRegexp.String() + "}/_trust/tuf/timestamp.json").Handler(hand(handlers.GetTimestampHandler, "pull"))
+	r.Methods("GET").Path("/v2/{imageName:" + v2.RepositoryNameRegexp.String() + "}/_trust/tuf/timestamp.key").Handler(hand(handlers.GetTimestampKeyHandler, "push", "pull"))
+	//r.Methods("POST").Path("/v2/{imageName:" + server.RepositoryNameRegexp + "}/_trust/tuf/{tufRole:(root|targets|timestamp|snapshot)}.json").Handler(hand(handlers.UpdateHandler, "push", "pull"))
+	r.Methods("DELETE").Path("/v2/{imageName:" + v2.RepositoryNameRegexp.String() + "}/_trust/tuf/").Handler(hand(handlers.DeleteHandler, "push", "pull"))
+
+	ts := httptest.NewServer(r)
+
+	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport, passphraseRetriever)
+	assert.NoError(t, err, "error creating repository: %s", err)
+
+	rootKeyID, err := repo.KeyStoreManager.GenRootKey(data.ECDSAKey.String())
+	assert.NoError(t, err, "error generating root key: %s", err)
+
+	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID)
+	assert.NoError(t, err, "error retreiving root key: %s", err)
+
+	err = repo.Initialize(rootCryptoService)
+	assert.NoError(t, err, "error creating repository: %s", err)
+
+	// Add fixtures/intermediate-ca.crt as a target. There's no particular reason
+	// for using this file except that it happens to be available as
+	// a fixture.
+	// Adding a target will allow us to confirm the repository is still valid after
+	// rotating the keys.
+	latestTarget, err := NewTarget("latest", "../fixtures/intermediate-ca.crt")
+	assert.NoError(t, err, "error creating target")
+	err = repo.AddTarget(latestTarget)
+	assert.NoError(t, err, "error adding target")
+
+	// Publish
+	err = repo.Publish()
+	assert.NoError(t, err)
+
+	// Get root.json and capture targets + snapshot key IDs
+	repo.GetTargetByName("latest") // force a pull
+	targetsKeyIDs := repo.tufRepo.Root.Signed.Roles["targets"].KeyIDs
+	snapshotKeyIDs := repo.tufRepo.Root.Signed.Roles["snapshot"].KeyIDs
+	assert.Len(t, targetsKeyIDs, 1)
+	assert.Len(t, snapshotKeyIDs, 1)
+
+	// Do rotation
+	repo.RotateKeys()
+
+	// Publish
+	err = repo.Publish()
+	assert.NoError(t, err)
+
+	// Get root.json. Check targets + snapshot keys have changed
+	// and that they match those found in the changelist.
+	_, err = repo.GetTargetByName("latest") // force a pull
+	assert.NoError(t, err)
+	newTargetsKeyIDs := repo.tufRepo.Root.Signed.Roles["targets"].KeyIDs
+	newSnapshotKeyIDs := repo.tufRepo.Root.Signed.Roles["snapshot"].KeyIDs
+	assert.Len(t, newTargetsKeyIDs, 1)
+	assert.Len(t, newSnapshotKeyIDs, 1)
+	assert.NotEqual(t, targetsKeyIDs[0], newTargetsKeyIDs[0])
+	assert.NotEqual(t, snapshotKeyIDs[0], newSnapshotKeyIDs[0])
+
+	// Confirm changelist dir empty after publishing changes
+	// Look for the changelist file
+	changelistDirPath := filepath.Join(tempBaseDir, "tuf", filepath.FromSlash(gun), "changelist")
+	changelistDir, err := os.Open(changelistDirPath)
+	assert.NoError(t, err, "could not open changelist directory")
+	fileInfos, err := changelistDir.Readdir(0)
+	assert.NoError(t, err, "could not read changelist directory")
+	// Should only be one file in the directory
+	assert.Len(t, fileInfos, 0, "wrong number of changelist files found")
+}

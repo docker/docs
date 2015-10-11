@@ -245,6 +245,7 @@ func (r *NotaryRepository) AddTarget(target *Target) error {
 	if err != nil {
 		return err
 	}
+	defer cl.Close()
 	logrus.Debugf("Adding target \"%s\" with sha256 \"%x\" and size %d bytes.\n", target.Name, target.Hashes["sha256"], target.Length)
 
 	meta := data.FileMeta{Length: target.Length, Hashes: target.Hashes}
@@ -258,7 +259,7 @@ func (r *NotaryRepository) AddTarget(target *Target) error {
 	if err != nil {
 		return err
 	}
-	return cl.Close()
+	return nil
 }
 
 // RemoveTarget creates a new changelist entry to remove a target from the repository
@@ -603,4 +604,56 @@ func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
 		kdb,
 		r.fileStore,
 	), nil
+}
+
+// RotateKeys removes all existing keys associated with role and adds
+// the keys specified by keyIDs to the role. These changes are staged
+// in a changelist until publish is called.
+func (r *NotaryRepository) RotateKeys() error {
+	for _, role := range []string{"targets", "snapshot"} {
+		key, err := r.cryptoService.Create(role, data.ECDSAKey)
+		if err != nil {
+			return err
+		}
+		err = r.rootFileKeyChange(role, changelist.ActionCreate, key)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func (r *NotaryRepository) rootFileKeyChange(role, action string, key data.PublicKey) error {
+	cl, err := changelist.NewFileChangelist(filepath.Join(r.tufRepoPath, "changelist"))
+	if err != nil {
+		return err
+	}
+	defer cl.Close()
+
+	k, ok := key.(*data.TUFKey)
+	if !ok {
+		return errors.New("Invalid key type found during rotation.")
+	}
+
+	meta := changelist.TufRootData{
+		RoleName: role,
+		Keys:     []data.TUFKey{*k},
+	}
+	metaJSON, err := json.Marshal(meta)
+	if err != nil {
+		return err
+	}
+
+	c := changelist.NewTufChange(
+		action,
+		changelist.ScopeRoot,
+		changelist.TypeRootRole,
+		role,
+		metaJSON,
+	)
+	err = cl.Add(c)
+	if err != nil {
+		return err
+	}
+	return nil
 }
