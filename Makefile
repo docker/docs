@@ -6,6 +6,9 @@ DOCKER_WINDOWS_CONTAINER := build-windows-installer
 default: osx windows
 	@true
 
+clean: clean-osx clean-windows
+	@true
+
 osx: clean-osx
 	docker build -t $(DOCKER_OSX_IMAGE) -f Dockerfile.osx .
 	docker run --name "$(DOCKER_OSX_CONTAINER)" "$(DOCKER_OSX_IMAGE)"

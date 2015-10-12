@@ -42,21 +42,15 @@
         return;
     }
     
-    [[[self section] sharedDictionary] removeObjectForKey:@"disableTracking"];
+    BOOL enabled = self.checkbox.state == NSOnState;
+    [Mixpanel trackEvent:@"Continued from Overview" forPane:self withProperties:[[NSDictionary alloc] initWithObjectsAndKeys:enabled ? @"Yes" : @"No", @"Tracking Enabled", nil]];
     
-    NSString *enabled = self.checkbox.state == NSOnState ? @"No" : @"Yes";
-    [Mixpanel trackEvent:@"Continued from Overview" forPane:self withProperties:[[NSDictionary alloc] initWithObjectsAndKeys:@"enabled", @"Tracking Enabled", nil]];
-    
-}
-
-- (IBAction)checkboxChanged:(id)sender {
-    if ([(NSButton*)sender state] == NSOnState) {
-        [Mixpanel trackEvent:@"Enabled Tracking" forPane:self];
-        [[[self section] sharedDictionary] removeObjectForKey:@"disableTracking"];
-    } else {
-        [Mixpanel trackEvent:@"Disabled Tracking" forPane:self];
+    if (!enabled) {
         [[[self section] sharedDictionary] setObject:[NSNumber numberWithBool:YES] forKey:@"disableTracking"];
+    } else {
+        [[[self section] sharedDictionary] removeObjectForKey:@"disableTracking"];
     }
+    
 }
 
 @end

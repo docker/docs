@@ -20,9 +20,9 @@
                 <outlet property="migrationLogsScrollView" destination="UwA-bh-SQw" id="Zw0-AU-QPA"/>
                 <outlet property="migrationLogsTextView" destination="ehz-gh-aXR" id="VW6-Zi-v52"/>
                 <outlet property="migrationProgress" destination="uCY-2T-BB0" id="B4L-67-y5K"/>
-                <outlet property="migrationStatusImage" destination="rc2-Ev-HMB" id="wbY-mD-33x"/>
                 <outlet property="migrationStatusLabel" destination="PYI-QA-XWa" id="0I6-Jo-SZi"/>
                 <outlet property="parentSection" destination="-2" id="FB7-UV-e8k"/>
+                <outlet property="statusImage" destination="FO2-AK-Ue7" id="rYH-29-NhC"/>
                 <outlet property="submitButton" destination="a96-1q-EBq" id="Wy4-rp-zAa"/>
                 <outlet property="toolboxImage" destination="FO2-AK-Ue7" id="5iF-Bg-BdV"/>
             </connections>
@@ -57,11 +57,6 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rc2-Ev-HMB">
-                    <rect key="frame" x="149" y="200" width="120" height="120"/>
-                    <animations/>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NSCaution" id="emX-FX-G94"/>
-                </imageView>
                 <scrollView hidden="YES" fixedFrame="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UwA-bh-SQw">
                     <rect key="frame" x="0.0" y="-1" width="418" height="126"/>
                     <clipView key="contentView" ambiguous="YES" id="g1K-p4-gs1">
@@ -119,7 +114,4 @@
             <animations/>
         </customView>
     </objects>
-    <resources>
-        <image name="NSCaution" width="32" height="32"/>
-    </resources>
 </document>
