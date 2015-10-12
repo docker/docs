@@ -308,27 +308,79 @@ begin
       MsgBox('File moving failed!', mbError, MB_OK);
 end;
 
+function CanMigrateVM(): Boolean;
+var
+	ResultCode: Integer;
+begin
+	if NeedToInstallGit() or NeedToInstallVirtualBox() or not FileExists(ExpandConstant('{app}\docker-machine.exe')) then begin
+		Result := false
+		exit
+	end;
+
+	ExecAsOriginalUser('C:\Program Files\Oracle\VirtualBox\VBoxManage.exe', 'showvminfo default', '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
+	if ResultCode <> 1 then begin
+		Result := false
+		exit
+	end;
+
+	ExecAsOriginalUser('C:\Program Files\Oracle\VirtualBox\VBoxManage.exe', 'showvminfo boot2docker-vm', '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
+	if ResultCode <> 0 then begin
+		Result := false
+		exit
+	end;
+	Result := true
+end;
+
+function CanUpgradeVM(): Boolean;
+var
+	ResultCode: Integer;
+begin
+	if NeedToInstallGit() or NeedToInstallVirtualBox() or not FileExists(ExpandConstant('{app}\docker-machine.exe')) then begin
+		Result := false
+		exit
+	end;
+
+	ExecAsOriginalUser('C:\Program Files\Oracle\VirtualBox\VBoxManage.exe', 'showvminfo default', '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
+	if ResultCode <> 0 then begin
+		Result := false
+		exit
+	end;
+
+	if not DirExists(ExpandConstant('{userdocs}\..\.docker\machine\default')) then begin
+		Result := false
+		exit
+	end;
+
+	// TODO: Check versions in machine
+	Result := true
+end;
+
+function UpgradeVM() : Boolean;
+var
+	ResultCode: Integer;
+begin
+	TrackEvent('VM Upgrade Started');
+	ExecAsOriginalUser(ExpandConstant('{app}\docker-machine.exe'), ExpandConstant('upgrade default > {localappdata}\Temp\toolbox-upgrade-logs.txt 2>&1'), '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
+	if ResultCode = 0 then
+	begin
+		TrackEvent('VM Upgrade Succeeded');
+		MsgBox('Succcessfully migrated Boot2Docker VM to a Docker Machine VM named "default"', mbInformation, MB_OK);
+	end
+	else begin
+		TrackEvent('VM Upgrade Failed');
+		MsgBox('VM Upgrade VM failed. Please file an issue with the migration logs at https://github.com/docker/toolbox/issues/new.', mbCriticalError, MB_OK);
+		Exec(ExpandConstant('{win}\notepad.exe'), ExpandConstant('{localappdata}\Temp\toolbox-upgrade-logs.txt'), '', SW_SHOW, ewNoWait, ResultCode)
+		Result := false
+		WizardForm.Close;
+		exit;
+	end;
+	Result := true
+end;
+
 function MigrateVM() : Boolean;
 var
   ResultCode: Integer;
 begin
-  if NeedToInstallGit() or NeedToInstallVirtualBox() or not FileExists(ExpandConstant('{app}\docker-machine.exe')) then begin
-    Result := true
-    exit
-  end;
-
-  ExecAsOriginalUser('C:\Program Files\Oracle\VirtualBox\VBoxManage.exe', 'showvminfo default', '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
-  if ResultCode <> 1 then begin
-    Result := true
-    exit
-  end;
-
-  ExecAsOriginalUser('C:\Program Files\Oracle\VirtualBox\VBoxManage.exe', 'showvminfo boot2docker-vm', '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
-  if ResultCode <> 0 then begin
-    Result := true
-    exit
-  end;
-
   if MsgBox('Migrate your existing Boot2Docker VM to work with the Docker Toolbox? Your existing Boot2Docker VM will not be affected. This should take about a minute.', mbConfirmation, MB_YESNO) = IDYES then
   begin
 		TrackEvent('Boot2Docker Migration Started');
@@ -379,7 +431,12 @@ begin
     if IsTaskSelected(ModPathName) then
 			ModPath();
     if not WizardSilent() then
-      Success := MigrateVM();
+		begin
+		if CanUpgradeVM() then
+			Success := UpgradeVM();
+		else if CanMigrateVM() then
+			Success := MigrateVM();
+		end;
 		if Success then
 			trackEvent('Installer Finished');
   end;
