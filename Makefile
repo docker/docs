@@ -6,9 +6,6 @@ DOCKER_WINDOWS_CONTAINER := build-windows-installer
 default: osx windows
 	@true
 
-sign: sign-osx sign-windows
-	@true
-
 osx: clean-osx
 	docker build -t $(DOCKER_OSX_IMAGE) -f Dockerfile.osx .
 	docker run --name "$(DOCKER_OSX_CONTAINER)" "$(DOCKER_OSX_IMAGE)"
@@ -22,12 +19,6 @@ windows: clean-windows
 	mkdir -p dist
 	docker cp "$(DOCKER_WINDOWS_CONTAINER)":/installer/Output/DockerToolbox.exe dist/
 	docker rm "$(DOCKER_WINDOWS_CONTAINER)" 2>/dev/null || true
-
-sign-osx: osx
-	./.sign/sign_mac
-
-sign-windows: windows
-	echo "TODO"
 
 clean-osx:
 	rm -f DockerToolbox-*.pkg
