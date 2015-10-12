@@ -48,19 +48,6 @@ ${PREFIX}/bin/notary-signer: NOTARY_VERSION $(shell find . -type f -name '*.go')
 	@echo "+ $@"
 	@godep go build -o $@ ${GO_LDFLAGS} ./cmd/notary-signer
 
-
-${GOPATH}/bin/notary-server: NOTARY_VERSION $(shell find . -type f -name '*.go')
-	@echo "+ $@"
-	@godep go install ${GO_LDFLAGS} ./cmd/notary-server
-
-${GOPATH}/bin/notary: NOTARY_VERSION $(shell find . -type f -name '*.go')
-	@echo "+ $@"
-	@godep go install ${GO_LDFLAGS} ./cmd/notary
-
-${GOPATH}/bin/notary-signer: NOTARY_VERSION $(shell find . -type f -name '*.go')
-	@echo "+ $@"
-	@godep go install ${GO_LDFLAGS} ./cmd/notary-signer
-
 vet:
 	@echo "+ $@"
 	@test -z "$$(go tool vet -printf=false . 2>&1 | grep -v Godeps/_workspace/src/ | tee /dev/stderr)"
@@ -76,9 +63,6 @@ lint:
 build:
 	@echo "+ $@"
 	@go build -v ${GO_LDFLAGS} ./...
-
-install: ${GOPATH}/bin/notary-server ${GOPATH}/bin/notary ${GOPATH}/bin/notary-signer
-	@echo "+ $@"
 
 test:
 	@echo "+ $@"
