@@ -11,6 +11,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"path/filepath"
 	"strings"
 	"time"
 
@@ -363,9 +364,9 @@ func getTransport(gun string, readOnly bool) http.RoundTripper {
 	rootPool := x509.NewCertPool()
 	rootCAFile := viper.GetString("remote_server.root_ca")
 	if rootCAFile != "" {
-		rootCert, err := trustmanager.LoadCertFromFile(viper.GetString("remote_server.root_ca"))
+		rootCert, err := trustmanager.LoadCertFromFile(filepath.Join(configPath, rootCAFile))
 		if err != nil {
-			rootPool = nil
+			fatalf("could not load root ca file. %s", err.Error())
 		}
 		rootPool.AddCert(rootCert)
 	}
@@ -400,9 +401,13 @@ func tokenAuth(baseTransport *http.Transport, gun string, readOnly bool) http.Ro
 		Transport: authTransport,
 		Timeout:   5 * time.Second,
 	}
-	endpoint, err := url.Parse(getRemoteTrustServer())
+	trustServerURL := getRemoteTrustServer()
+	endpoint, err := url.Parse(trustServerURL)
 	if err != nil {
-		fatalf("could not parse remote trust server url (%s): %s", getRemoteTrustServer(), err.Error())
+		fatalf("could not parse remote trust server url (%s): %s", trustServerURL, err.Error())
+	}
+	if endpoint.Scheme == "" {
+		fatalf("trust server url has to be in the form of http(s)://URL:PORT. Got: %s", trustServerURL)
 	}
 	subPath, err := url.Parse("v2/")
 	if err != nil {
@@ -433,7 +438,7 @@ func tokenAuth(baseTransport *http.Transport, gun string, readOnly bool) http.Ro
 
 func getRemoteTrustServer() string {
 	if remoteTrustServer == "" {
-		configRemote := viper.GetString("remote_server.addr")
+		configRemote := viper.GetString("remote_server.url")
 		if configRemote != "" {
 			remoteTrustServer = configRemote
 		} else {

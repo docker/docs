@@ -1,6 +1,8 @@
 {
 	"server": {
-		"addr": ":4443"
+		"addr": ":4443",
+		"tls_key_file": "./fixtures/notary-server.key",
+		"tls_cert_file": "./fixtures/notary-server.crt"
 	},
 	"trust_service": {
 	  "type": "remote",
