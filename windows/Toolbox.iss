@@ -232,27 +232,6 @@ begin
 	TrackingLabel.Top := 200;
 	TrackingLabel.Height := 100;
 
-	WizardForm.FinishedLabel.AutoSize := True;
-	WizardForm.FinishedLabel.Caption :=
-		'{#MyAppName} installation completed.' + \
-		#13#10 + \
-		#13#10 + \
-		'Run using the `Docker Quickstart Terminal` icon on your desktop or in [Program Files] - then start a test container with:' + \
-		#13#10 + \
-		'         `docker run hello-world`' + \
-		#13#10 + \
-		#13#10 + \
-		// TODO: it seems making hyperlinks is hard :/
-		//'To save and share container images, automate workflows, and more sign-up for a free <a href="http://hub.docker.com/?utm_source=b2d&utm_medium=installer&utm_term=summary&utm_content=windows&utm_campaign=product">Docker Hub account</a>.' + \
-		#13#10 + \
-		#13#10 +
-		'You can upgrade your existing Docker Machine dev VM without data loss by running:' + \
-		#13#10 + \
-		'         `docker-machine upgrade dev`' + \
-		#13#10 + \
-		#13#10 + \
-		'For further information, please see the {#MyAppName} installation documentation link.'
-
 		// Don't do this until we can compare versions
 		// Wizardform.ComponentsList.Checked[2] := NeedToInstallVirtualBox();
 		Wizardform.ComponentsList.ItemEnabled[2] := not NeedToInstallVirtualBox();
@@ -368,6 +347,20 @@ begin
 	Result[0] := ExpandConstant('{app}');
 end;
 #include "modpath.iss"
+
+procedure CurPageChanged(CurPageID: Integer);
+begin
+	if (CurPageID = wpFinished) then
+	begin
+      WizardForm.FinishedLabel.AutoSize := True;
+			WizardForm.FinishedLabel.Font.Style := [fsBold];
+			WizardForm.FinishedLabel.Caption :=
+				'Upgrade your default Docker VM using the command:' + \
+				#13#10 + \
+				#13#10 + \
+				'         `docker-machine upgrade default`';
+  end;
+end;
 
 procedure CurStepChanged(CurStep: TSetupStep);
 var
