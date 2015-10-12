@@ -4,7 +4,12 @@ trap '[ "$?" -eq 0 ] || read -p "Looks like something went wrong... Press any ke
 
 VM=default
 DOCKER_MACHINE=./docker-machine.exe
-VBOXMANAGE=/$(reg query HKEY_LOCAL_MACHINE\\SOFTWARE\\Oracle\\VirtualBox //v InstallDir | grep InstallDir | awk '{print substr($0, index($0,$3))}' | sed 's/\\/\//g' | sed 's/://')VBoxManage.exe
+
+if [ ! -z "$VBOX_MSI_INSTALL_PATH" ]; then
+  VBOXMANAGE=${VBOX_MSI_INSTALL_PATH}VBoxManage.exe
+else
+  VBOXMANAGE=${VBOX_INSTALL_PATH}VBoxManage.exe
+fi
 
 BLUE='\033[1;34m'
 GREEN='\033[0;32m'
