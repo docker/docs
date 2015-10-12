@@ -8,6 +8,7 @@ RUN apt-get update \
 
 ADD start /start
 ADD initial.sql /initial.sql
+ADD migrate.sql /migrate.sql
 RUN chmod 755 /start
 
 EXPOSE 3306
