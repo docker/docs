@@ -7,8 +7,8 @@ type TUFFile struct {
 	gorm.Model
 	Gun     string `sql:"type:varchar(255);not null"`
 	Role    string `sql:"type:varchar(255);not null"`
-	Version int
-	Data    []byte `sql:"type:longblob"`
+	Version int    `sql:"not null"`
+	Data    []byte `sql:"type:longblob;not null"`
 }
 
 // TableName sets a specific table name for TUFFile
@@ -19,8 +19,8 @@ func (g TUFFile) TableName() string {
 // TimestampKey represents a single timestamp key in the database
 type TimestampKey struct {
 	gorm.Model
-	Gun    string `sql:"type:varchar(255);unique"`
-	Cipher string `sql:"type:varchar(30)"`
+	Gun    string `sql:"type:varchar(255);unique;not null"`
+	Cipher string `sql:"type:varchar(30);not null"`
 	Public []byte `sql:"type:blob;not null"`
 }
 
@@ -31,7 +31,8 @@ func (g TimestampKey) TableName() string {
 
 // CreateTUFTable creates the DB table for TUFFile
 func CreateTUFTable(db gorm.DB) error {
-	query := db.CreateTable(&TUFFile{})
+	// TODO: gorm
+	query := db.Set("gorm:table_options", "ENGINE=InnoDB DEFAULT CHARSET=utf8").CreateTable(&TUFFile{})
 	if query.Error != nil {
 		return query.Error
 	}
@@ -45,7 +46,7 @@ func CreateTUFTable(db gorm.DB) error {
 
 // CreateTimestampTable creates the DB table for TUFFile
 func CreateTimestampTable(db gorm.DB) error {
-	query := db.CreateTable(&TimestampKey{})
+	query := db.Set("gorm:table_options", "ENGINE=InnoDB DEFAULT CHARSET=utf8").CreateTable(&TimestampKey{})
 	if query.Error != nil {
 		return query.Error
 	}
