@@ -73,7 +73,7 @@ This release adds CentOS support and addresses a few bugs and issues in Docker T
 ### CS Docker Engine 1.6.2-cs7
 (12 October 2015)
 
-As part of our ongoing security efforts, a vulnerability was discovered that
+As part of our ongoing security efforts, <a href="http://blog.docker.com/2015/10/security-release-docker-1-8-3-1-6-2-cs7" target="_blank">a vulnerability was discovered</a> that
 affects the way content is stored and retrieved within the Docker Engine and CS
 Docker Engine. Today we are releasing a security update that fixes this
 issue in both Docker Engine 1.8.3 and CS Docker Engine 1.6.2-cs7. The <a
