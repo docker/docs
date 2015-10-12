@@ -1,4 +1,4 @@
-FROM diogomonica/golang-softhsm2
+FROM dockersecurity/golang-softhsm2
 MAINTAINER Diogo Monica "diogo@docker.com"
 
 # CHANGE-ME: Default values for SoftHSM2 PIN and SOPIN, used to initialize the first token
