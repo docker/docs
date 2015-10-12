@@ -53,7 +53,6 @@ can pre-create volumes prior to installing Orca.
 * **orca-server-certs** - The server certificates for the Orca web server
 * **orca-swarm-node-certs** - The swarm certificates for the current node (repeated on every node in the cluster)
 * **orca-config** - Orca server configuration settings (ID, locations of key services)
-* **orca-db** - Orca server data (local accounts, etc.)
 * **orca-kv** - KV store persistence
 
 
