@@ -53,11 +53,11 @@ func (db *SQLStorage) UpdateMany(gun string, updates []MetaUpdate) error {
 	}
 
 	rollback := func(err error) error {
-		query := tx.Rollback()
-		if query.Error != nil {
+		if rxErr := tx.Rollback().Error; rxErr != nil {
 			logrus.Error("Failed on Tx rollback with error: ", err.Error())
+			return rxErr
 		}
-		return query.Error
+		return err
 	}
 
 	var (
@@ -88,7 +88,7 @@ func (db *SQLStorage) UpdateMany(gun string, updates []MetaUpdate) error {
 		}
 		// it's previously been added, which means it's a duplicate entry
 		// in the same transaction
-		if added[row.ID] {
+		if _, ok := added[row.ID]; ok {
 			return rollback(&ErrOldVersion{})
 		}
 		added[row.ID] = true
