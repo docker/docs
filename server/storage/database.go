@@ -55,9 +55,9 @@ func (db *SQLStorage) UpdateMany(gun string, updates []MetaUpdate) error {
 	rollback := func(err error) error {
 		query := tx.Rollback()
 		if query.Error != nil {
-			logrus.Panic("Failed on Tx rollback with error: ", err.Error())
+			logrus.Error("Failed on Tx rollback with error: ", err.Error())
 		}
-		return err
+		return query.Error
 	}
 
 	var (
