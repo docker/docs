@@ -50,7 +50,7 @@ docker-compose build
 docker-compose up -d
 ```
 
-Note: To use the local notary server append `-s http://localhost:4443` to all of the commands below.
+Note: In order to have notary use the local notary server and development root CA we can load the local development configuration by appending `-c cmd/notary/config.json` to every command. If you would rather not have to use `-c` on every command, copy `cmd/notary/config.json and cmd/notary/root-ca.crt` to `~/.notary`.
 
 First, lets initiate a notary collection called `example.com/scripts`
 
@@ -95,7 +95,7 @@ expand this to other storage options.
 ## Setup for Development
 
 The notary repository comes with Dockerfiles and a docker-compose file
-to faciliate development. Simply run the following commands to start
+to facilitate development. Simply run the following commands to start
 a notary server with a temporary MySQL database in containers:
 
 ```
@@ -109,6 +109,16 @@ the IP address of your VM (for boot2docker, this can be determined
 by running `boot2docker ip`, with kitematic, `echo $DOCKER_HOST` should
 show the IP of the VM). If you are using the default Linux setup,
 you need to add `127.0.0.1 notary` to your hosts file.
+
+## Successfully connecting over TLS
+
+By default notary-server runs with TLS with certificates signed by a local
+CA. In order to be able to successfully connect to it using
+either `curl` or `openssl`, you will have to use the root CA file in `fixtures/root-ca.crt`.
+
+OpenSSL example:
+
+`openssl s_client -connect localhost:4443 -CAfile fixtures/root-ca.crt`
 
 ## Compiling Notary Server
 
@@ -166,9 +176,17 @@ either via the CA of your choice, or a self signed certificate.
 
 If using the pem and key provided in fixtures, either:
     - add `fixtures/root-ca.crt` to your trusted root certificates
+    - use the default configuration for notary client that loads the CA root for you by using the flag `-c ./cmd/notary/config.json`
     - disable TLS verification by adding the following option notary configuration file in `~/.notary/config.json`:
 
             "skipTLSVerify": true
 
 Otherwise, you will see TLS errors or X509 errors upon initializing the
-notary collection.
+notary collection:
+
+```
+$ notary list diogomonica.com/openvpn
+* fatal: Get https://notary-server:4443/v2/: x509: certificate signed by unknown authority
+$ notary list diogomonica.com/openvpn -c cmd/notary/config.json
+latest b1df2ad7cbc19f06f08b69b4bcd817649b509f3e5420cdd2245a85144288e26d 4056
+```
