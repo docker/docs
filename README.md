@@ -42,8 +42,7 @@ Prerequisites:
 - [docker and docker-compose](http://docs.docker.com/compose/install/)
 - [Notary server configuration](#configure-notary-server)
 
-As setup, lets build notary and then start up a local notary-server (don't forget
-to add `127.0.0.1 notary-server` to your `/etc/hosts`).
+As setup, lets build notary and then start up a local notary-server (don't forget to add `127.0.0.1 notary-server` to your `/etc/hosts`, or if using docker-machine, add `$(docker-machine ip) notary-server`).
 
 ```sh
 make binaries
