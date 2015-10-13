@@ -1,6 +1,8 @@
 package storage
 
 import (
+	"fmt"
+
 	"github.com/Sirupsen/logrus"
 	"github.com/endophage/gotuf/data"
 	"github.com/jinzhu/gorm"
@@ -142,4 +144,22 @@ func (db *SQLStorage) SetTimestampKey(gun string, algorithm data.KeyAlgorithm, p
 	}
 
 	return db.FirstOrCreate(&TimestampKey{}, &entry).Error
+}
+
+// CheckHealth asserts that both required tables are present
+func (db *SQLStorage) CheckHealth() error {
+	interfaces := []interface{}{&TUFFile{}, &TimestampKey{}}
+	names := []string{TUFFile{}.TableName(), TimestampKey{}.TableName()}
+
+	for i, model := range interfaces {
+		tableOk := db.HasTable(model)
+		if db.Error != nil {
+			return db.Error
+		}
+		if !tableOk {
+			return fmt.Errorf(
+				"Cannot access table: %s", names[i])
+		}
+	}
+	return nil
 }
