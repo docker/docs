@@ -4,12 +4,14 @@ import (
 	"bufio"
 	"crypto/sha256"
 	"crypto/tls"
+	"crypto/x509"
 	"fmt"
 	"io/ioutil"
 	"net"
 	"net/http"
 	"net/url"
 	"os"
+	"path/filepath"
 	"strings"
 	"time"
 
@@ -20,6 +22,7 @@ import (
 	"github.com/docker/distribution/registry/client/transport"
 	"github.com/docker/docker/pkg/term"
 	notaryclient "github.com/docker/notary/client"
+	"github.com/docker/notary/trustmanager"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -93,7 +96,7 @@ func tufAdd(cmd *cobra.Command, args []string) {
 	parseConfig()
 	// no online operations are performed by add so the transport argument
 	// should be nil
-	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, remoteTrustServer, nil, retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, getRemoteTrustServer(), nil, retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -118,7 +121,7 @@ func tufInit(cmd *cobra.Command, args []string) {
 	gun := args[0]
 	parseConfig()
 
-	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, remoteTrustServer, getTransport(gun, false), retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, getRemoteTrustServer(), getTransport(gun, false), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -160,7 +163,7 @@ func tufList(cmd *cobra.Command, args []string) {
 	gun := args[0]
 	parseConfig()
 
-	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, remoteTrustServer, getTransport(gun, true), retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, getRemoteTrustServer(), getTransport(gun, true), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -186,7 +189,7 @@ func tufLookup(cmd *cobra.Command, args []string) {
 	targetName := args[1]
 	parseConfig()
 
-	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, remoteTrustServer, getTransport(gun, true), retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, getRemoteTrustServer(), getTransport(gun, true), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -208,7 +211,7 @@ func tufStatus(cmd *cobra.Command, args []string) {
 	gun := args[0]
 	parseConfig()
 
-	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, remoteTrustServer, nil, retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, getRemoteTrustServer(), nil, retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -242,7 +245,7 @@ func tufPublish(cmd *cobra.Command, args []string) {
 
 	fmt.Println("Pushing changes to ", gun, ".")
 
-	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, remoteTrustServer, getTransport(gun, false), retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, getRemoteTrustServer(), getTransport(gun, false), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -264,7 +267,7 @@ func tufRemove(cmd *cobra.Command, args []string) {
 
 	// no online operation are performed by remove so the transport argument
 	// should be nil.
-	repo, err := notaryclient.NewNotaryRepository(trustDir, gun, remoteTrustServer, nil, retriever)
+	repo, err := notaryclient.NewNotaryRepository(trustDir, gun, getRemoteTrustServer(), nil, retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -291,7 +294,7 @@ func verify(cmd *cobra.Command, args []string) {
 
 	gun := args[0]
 	targetName := args[1]
-	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, remoteTrustServer, getTransport(gun, true), retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, getRemoteTrustServer(), getTransport(gun, true), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -357,11 +360,28 @@ func (ps passwordStore) Basic(u *url.URL) (string, string) {
 }
 
 func getTransport(gun string, readOnly bool) http.RoundTripper {
+	// Attempt to get a root CA from the config file. Nil is the host defaults.
+	rootPool := x509.NewCertPool()
+	rootCAFile := viper.GetString("remote_server.root_ca")
+	if rootCAFile != "" {
+		// If we haven't been given an Absolute path, we assume it's relative
+		// from the configuration directory (~/.notary by default)
+		if !filepath.IsAbs(rootCAFile) {
+			rootCAFile = filepath.Join(configPath, rootCAFile)
+		}
+		rootCert, err := trustmanager.LoadCertFromFile(rootCAFile)
+		if err != nil {
+			fatalf("could not load root ca file. %s", err.Error())
+		}
+		rootPool.AddCert(rootCert)
+	}
+
 	// skipTLSVerify is false by default so verification will
 	// be performed.
 	tlsConfig := &tls.Config{
-		InsecureSkipVerify: viper.GetBool("skipTLSVerify"),
+		InsecureSkipVerify: viper.GetBool("remote_server.skipTLSVerify"),
 		MinVersion:         tls.VersionTLS10,
+		RootCAs:            rootPool,
 	}
 
 	base := &http.Transport{
@@ -386,9 +406,13 @@ func tokenAuth(baseTransport *http.Transport, gun string, readOnly bool) http.Ro
 		Transport: authTransport,
 		Timeout:   5 * time.Second,
 	}
-	endpoint, err := url.Parse(remoteTrustServer)
+	trustServerURL := getRemoteTrustServer()
+	endpoint, err := url.Parse(trustServerURL)
 	if err != nil {
-		fatalf("could not parse remote trust server url (%s): %s", remoteTrustServer, err.Error())
+		fatalf("could not parse remote trust server url (%s): %s", trustServerURL, err.Error())
+	}
+	if endpoint.Scheme == "" {
+		fatalf("trust server url has to be in the form of http(s)://URL:PORT. Got: %s", trustServerURL)
 	}
 	subPath, err := url.Parse("v2/")
 	if err != nil {
@@ -415,4 +439,16 @@ func tokenAuth(baseTransport *http.Transport, gun string, readOnly bool) http.Ro
 	basicHandler := auth.NewBasicHandler(ps)
 	modifier := transport.RequestModifier(auth.NewAuthorizer(challengeManager, tokenHandler, basicHandler))
 	return transport.NewTransport(baseTransport, modifier)
+}
+
+func getRemoteTrustServer() string {
+	if remoteTrustServer == "" {
+		configRemote := viper.GetString("remote_server.url")
+		if configRemote != "" {
+			remoteTrustServer = configRemote
+		} else {
+			remoteTrustServer = defaultServerURL
+		}
+	}
+	return remoteTrustServer
 }
