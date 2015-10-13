@@ -45,15 +45,15 @@ test:
     - gvm use stable && go version
 
   # FMT
-    - gvm use stable && test -z "$(gofmt -s -l . | grep -v .pb. | grep -v Godeps/_workspace/src/ | tee /dev/stderr)":
+    - gvm use stable && make fmt:
         pwd: $BASE_STABLE
 
   # VET
-    - gvm use stable && test -z "$(go tool vet -printf=false . 2>&1 | grep -v Godeps/_workspace/src/ | tee /dev/stderr)":
+    - gvm use stable && make vet:
         pwd: $BASE_STABLE
 
   # LINT
-    - gvm use stable && test -z "$(golint ./... | grep -v .pb. | grep -v Godeps/_workspace/src/ | tee /dev/stderr)":
+    - gvm use stable && make lint:
         pwd: $BASE_STABLE
 
   override:
