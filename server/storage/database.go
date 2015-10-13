@@ -7,23 +7,7 @@ import (
 )
 
 // SQLStorage implements a versioned store using a relational database.
-// The database table must look like:
-// CREATE TABLE `tuf_files` (
-//   `id` INT AUTO_INCREMENT,
-//   `gun` VARCHAR(255) NOT NULL
-//   `role` VARCHAR(255) NOT NULL
-//   `version` INT
-//   `data` LONGBLOB
-//   PRIMARY KEY (`id`)
-//   UNIQUE INDEX (`gun`, `role`, `version`)
-// ) DEFAULT CHARSET=utf8;
-//
-// CREATE TABLE `timestamp_keys` (
-//   `gun` VARCHAR(255),
-//   `cipher` VARCHAR(30),
-//   `public` BLOB NOT NULL,
-//    PRIMARY KEY (`gun`)
-// ) DEFAULT CHARSET=utf8;
+// See server/storage/models.go
 type SQLStorage struct {
 	gorm.DB
 }
