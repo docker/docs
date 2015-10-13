@@ -11,7 +11,7 @@ machine:
   environment:
   # Convenient shortcuts to "common" locations
     CHECKOUT: /home/ubuntu/$CIRCLE_PROJECT_REPONAME
-    BASE_DIR: src/github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
+    BASE_DIR: src/github.com/docker/notary
   # Trick circle brainflat "no absolute path" behavior
     BASE_STABLE: ../../../$HOME/.gvm/pkgsets/stable/global/$BASE_DIR
   # Workaround Circle parsing dumb bugs and/or YAML wonkyness
