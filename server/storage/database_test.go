@@ -55,9 +55,9 @@ func SetUpSQLite(dbDir string, t *testing.T, createTable bool) (*gorm.DB, *SQLSt
 	return &dbStore.DB, dbStore
 }
 
-// TestMySQLUpdateCurrent asserts that UpdateCurrent will add a new TUF file
+// TestSQLUpdateCurrent asserts that UpdateCurrent will add a new TUF file
 // if no previous version existed.
-func TestMySQLUpdateCurrentNew(t *testing.T) {
+func TestSQLUpdateCurrentNew(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	gormDB, dbStore := SetUpSQLite(tempBaseDir, t, true)
 	defer os.RemoveAll(tempBaseDir)
@@ -76,9 +76,9 @@ func TestMySQLUpdateCurrentNew(t *testing.T) {
 	assert.Equal(t, []TUFFile{expected}, rows)
 }
 
-// TestMySQLUpdateCurrentNewVersion asserts that UpdateCurrent will add a
+// TestSQLUpdateCurrentNewVersion asserts that UpdateCurrent will add a
 // new (higher) version of an existing TUF file
-func TestMySQLUpdateCurrentNewVersion(t *testing.T) {
+func TestSQLUpdateCurrentNewVersion(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	gormDB, dbStore := SetUpSQLite(tempBaseDir, t, true)
 	defer os.RemoveAll(tempBaseDir)
@@ -104,9 +104,9 @@ func TestMySQLUpdateCurrentNewVersion(t *testing.T) {
 	assert.Equal(t, []TUFFile{oldVersion, expected}, rows)
 }
 
-// TestMySQLUpdateCurrentOldVersionError asserts that an error is raised if
+// TestSQLUpdateCurrentOldVersionError asserts that an error is raised if
 // trying to update to an older version of a TUF file.
-func TestMySQLUpdateCurrentOldVersionError(t *testing.T) {
+func TestSQLUpdateCurrentOldVersionError(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	gormDB, dbStore := SetUpSQLite(tempBaseDir, t, true)
 	defer os.RemoveAll(tempBaseDir)
@@ -134,9 +134,9 @@ func TestMySQLUpdateCurrentOldVersionError(t *testing.T) {
 	dbStore.DB.Close()
 }
 
-// TestMySQLUpdateMany asserts that inserting multiple updates succeeds if the
+// TestSQLUpdateMany asserts that inserting multiple updates succeeds if the
 // updates do not conflict with each.
-func TestMySQLUpdateMany(t *testing.T) {
+func TestSQLUpdateMany(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	gormDB, dbStore := SetUpSQLite(tempBaseDir, t, true)
 	defer os.RemoveAll(tempBaseDir)
@@ -169,9 +169,9 @@ func TestMySQLUpdateMany(t *testing.T) {
 	dbStore.DB.Close()
 }
 
-// TestMySQLUpdateManyVersionOrder asserts that inserting updates with
+// TestSQLUpdateManyVersionOrder asserts that inserting updates with
 // non-monotonic versions still succeeds.
-func TestMySQLUpdateManyVersionOrder(t *testing.T) {
+func TestSQLUpdateManyVersionOrder(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	gormDB, dbStore := SetUpSQLite(tempBaseDir, t, true)
 	defer os.RemoveAll(tempBaseDir)
@@ -195,9 +195,9 @@ func TestMySQLUpdateManyVersionOrder(t *testing.T) {
 	dbStore.DB.Close()
 }
 
-// TestMySQLUpdateManyDuplicateRollback asserts that inserting duplicate
+// TestSQLUpdateManyDuplicateRollback asserts that inserting duplicate
 // updates fails.
-func TestMySQLUpdateManyDuplicateRollback(t *testing.T) {
+func TestSQLUpdateManyDuplicateRollback(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	gormDB, dbStore := SetUpSQLite(tempBaseDir, t, true)
 	defer os.RemoveAll(tempBaseDir)
@@ -219,7 +219,7 @@ func TestMySQLUpdateManyDuplicateRollback(t *testing.T) {
 	dbStore.DB.Close()
 }
 
-func TestMySQLGetCurrent(t *testing.T) {
+func TestSQLGetCurrent(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	gormDB, dbStore := SetUpSQLite(tempBaseDir, t, true)
 	defer os.RemoveAll(tempBaseDir)
@@ -240,7 +240,7 @@ func TestMySQLGetCurrent(t *testing.T) {
 	dbStore.DB.Close()
 }
 
-func TestMySQLDelete(t *testing.T) {
+func TestSQLDelete(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	gormDB, dbStore := SetUpSQLite(tempBaseDir, t, true)
 	defer os.RemoveAll(tempBaseDir)
@@ -261,7 +261,7 @@ func TestMySQLDelete(t *testing.T) {
 	dbStore.DB.Close()
 }
 
-func TestMySQLGetTimestampKeyNoKey(t *testing.T) {
+func TestSQLGetTimestampKeyNoKey(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	gormDB, dbStore := SetUpSQLite(tempBaseDir, t, true)
 	defer os.RemoveAll(tempBaseDir)
@@ -286,7 +286,7 @@ func TestMySQLGetTimestampKeyNoKey(t *testing.T) {
 	assert.Equal(t, []byte("1"), public, "Returned pubkey was incorrect")
 }
 
-func TestMySQLSetTimestampKeyExists(t *testing.T) {
+func TestSQLSetTimestampKeyExists(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	gormDB, dbStore := SetUpSQLite(tempBaseDir, t, true)
 	defer os.RemoveAll(tempBaseDir)
