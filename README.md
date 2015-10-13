@@ -42,7 +42,8 @@ Prerequisites:
 - [docker and docker-compose](http://docs.docker.com/compose/install/)
 - [Notary server configuration](#configure-notary-server)
 
-As setup, lets build notary and then start up a local notary-server.
+As setup, lets build notary and then start up a local notary-server (don't forget
+to add `127.0.0.1 notary-server` to your `/etc/hosts`).
 
 ```sh
 make binaries
@@ -51,6 +52,7 @@ docker-compose up -d
 ```
 
 Note: In order to have notary use the local notary server and development root CA we can load the local development configuration by appending `-c cmd/notary/config.json` to every command. If you would rather not have to use `-c` on every command, copy `cmd/notary/config.json and cmd/notary/root-ca.crt` to `~/.notary`.
+
 
 First, lets initiate a notary collection called `example.com/scripts`
 
@@ -118,7 +120,7 @@ either `curl` or `openssl`, you will have to use the root CA file in `fixtures/r
 
 OpenSSL example:
 
-`openssl s_client -connect localhost:4443 -CAfile fixtures/root-ca.crt`
+`openssl s_client -connect notary-server:4443 -CAfile fixtures/root-ca.crt`
 
 ## Compiling Notary Server
 
