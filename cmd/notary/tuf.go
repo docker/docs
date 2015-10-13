@@ -364,7 +364,12 @@ func getTransport(gun string, readOnly bool) http.RoundTripper {
 	rootPool := x509.NewCertPool()
 	rootCAFile := viper.GetString("remote_server.root_ca")
 	if rootCAFile != "" {
-		rootCert, err := trustmanager.LoadCertFromFile(filepath.Join(configPath, rootCAFile))
+		// If we haven't been given an Absolute path, we assume it's relative
+		// from the configuration directory (~/.notary by default)
+		if !filepath.IsAbs(rootCAFile) {
+			rootCAFile = filepath.Join(configPath, rootCAFile)
+		}
+		rootCert, err := trustmanager.LoadCertFromFile(rootCAFile)
 		if err != nil {
 			fatalf("could not load root ca file. %s", err.Error())
 		}
