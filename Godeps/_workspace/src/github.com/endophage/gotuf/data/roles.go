@@ -24,7 +24,7 @@ var ValidRoles = map[string]string{
 
 func SetValidRoles(rs map[string]string) {
 	// iterate ValidRoles
-	for k, _ := range ValidRoles {
+	for k := range ValidRoles {
 		if v, ok := rs[k]; ok {
 			ValidRoles[k] = v
 		}

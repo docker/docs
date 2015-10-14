@@ -1,23 +1,13 @@
 {
 	"ImportPath": "github.com/docker/notary",
-	"GoVersion": "go1.5.1",
+	"GoVersion": "go1.4.2",
 	"Packages": [
 		"./..."
 	],
 	"Deps": [
 		{
-			"ImportPath": "code.google.com/p/gosqlite/sqlite3",
-			"Comment": "null-16",
-			"Rev": "74691fb6f83716190870cde1b658538dd4b18eb0"
-		},
-		{
 			"ImportPath": "github.com/BurntSushi/toml",
 			"Rev": "bd2bdf7f18f849530ef7a1c29a4290217cab32a1"
-		},
-		{
-			"ImportPath": "github.com/DATA-DOG/go-sqlmock",
-			"Comment": "0.1.0-8-ged4836e",
-			"Rev": "ed4836e31d3e9e77420e442ed9b864df55370ee0"
 		},
 		{
 			"ImportPath": "github.com/Sirupsen/logrus",
@@ -106,7 +96,7 @@
 		},
 		{
 			"ImportPath": "github.com/endophage/gotuf",
-			"Rev": "338013a6720b3dfe4e4e9d1368109ea314c936d3"
+			"Rev": "a8824e6565a316076fc738eaaccda6528c448a38"
 		},
 		{
 			"ImportPath": "github.com/go-sql-driver/mysql",
