@@ -141,7 +141,7 @@ func (tr *TufRepo) RemoveBaseKeys(role string, keyIDs ...string) error {
 	}
 
 	// remove keys no longer in use by any roles
-	for k, _ := range toDelete {
+	for k := range toDelete {
 		delete(tr.Root.Signed.Keys, k)
 	}
 	tr.Root.Dirty = true

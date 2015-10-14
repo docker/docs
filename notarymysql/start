@@ -105,6 +105,7 @@ if [ -n "${DB_USER}" -o -n "${DB_NAME}" ]; then
         fi
         # Create our Database:
 		mysql -uroot $db < ./initial.sql
+        mysql -uroot $db < ./migrate.sql
       done
   fi
   /usr/bin/mysqladmin --defaults-file=/etc/mysql/debian.cnf shutdown

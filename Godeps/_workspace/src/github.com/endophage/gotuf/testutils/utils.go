@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"os"
 
-	_ "code.google.com/p/gosqlite/sqlite3"
 	"github.com/endophage/gotuf/data"
+	_ "github.com/mattn/go-sqlite3"
 )
 
 var counter int = 1

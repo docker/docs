@@ -6,11 +6,6 @@
 	],
 	"Deps": [
 		{
-			"ImportPath": "code.google.com/p/gosqlite/sqlite3",
-			"Comment": "null-16",
-			"Rev": "74691fb6f83716190870cde1b658538dd4b18eb0"
-		},
-		{
 			"ImportPath": "github.com/Sirupsen/logrus",
 			"Comment": "v0.7.3",
 			"Rev": "55eb11d21d2a31a3cc93838241d04800f52e823d"
@@ -26,6 +21,11 @@
 		{
 			"ImportPath": "github.com/jfrazelle/go/canonical/json",
 			"Rev": "6e461eb70cb4187b41a84e9a567d7137bdbe0f16"
+		},
+		{
+			"ImportPath": "github.com/mattn/go-sqlite3",
+			"Comment": "v1.0.0",
+			"Rev": "b4142c444a8941d0d92b0b7103a24df9cd815e42"
 		},
 		{
 			"ImportPath": "github.com/stretchr/testify/assert",
