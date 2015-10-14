@@ -1,6 +1,7 @@
 package signer
 
 import (
+	"errors"
 	"net"
 
 	"github.com/Sirupsen/logrus"
@@ -84,4 +85,28 @@ func (trust *NotarySigner) GetKey(keyid string) data.PublicKey {
 		return nil
 	}
 	return data.NewPublicKey(data.KeyAlgorithm(publicKey.KeyInfo.Algorithm.Algorithm), publicKey.PublicKey)
+}
+
+// KMHealth returns the health of the KeyManagement RPC service.
+func (trust *NotarySigner) KMHealth() error {
+	status, err := trust.kmClient.CheckHealth(context.Background(), &pb.Void{})
+	if err != nil {
+		return err
+	}
+	if len(status.Status) > 0 {
+		return errors.New("KeyManagement not healthy")
+	}
+	return nil
+}
+
+// SHealth returns the health of the Signer RPC service.
+func (trust *NotarySigner) SHealth() error {
+	status, err := trust.sClient.CheckHealth(context.Background(), &pb.Void{})
+	if err != nil {
+		return err
+	}
+	if len(status.Status) > 0 {
+		return errors.New("Signer not healthy")
+	}
+	return nil
 }
