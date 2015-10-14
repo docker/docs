@@ -158,8 +158,10 @@ func main() {
 	cryptoServices[data.ECDSAKey] = cryptoService
 
 	//RPC server setup
-	kms := &api.KeyManagementServer{CryptoServices: cryptoServices}
-	ss := &api.SignerServer{CryptoServices: cryptoServices}
+	kms := &api.KeyManagementServer{CryptoServices: cryptoServices,
+		HealthChecker: health.CheckStatus}
+	ss := &api.SignerServer{CryptoServices: cryptoServices,
+		HealthChecker: health.CheckStatus}
 
 	rpcAddr := viper.GetString("server.grpc_addr")
 	lis, err := net.Listen("tcp", rpcAddr)
