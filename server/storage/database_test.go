@@ -31,27 +31,24 @@ func SampleUpdate(version int) MetaUpdate {
 }
 
 // SetUpSQLite creates a sqlite database for testing
-func SetUpSQLite(t *testing.T, dbDir string, createTable bool) (*gorm.DB, *SQLStorage) {
+func SetUpSQLite(t *testing.T, dbDir string) (*gorm.DB, *SQLStorage) {
 	dbStore, err := NewSQLStorage("sqlite3", dbDir+"test_db")
 	assert.NoError(t, err)
 
-	if createTable {
-		// Create the DB tables
-		err = CreateTUFTable(dbStore.DB)
-		assert.NoError(t, err)
+	// Create the DB tables
+	err = CreateTUFTable(dbStore.DB)
+	assert.NoError(t, err)
 
-		err = CreateTimestampTable(dbStore.DB)
-		assert.NoError(t, err)
+	err = CreateTimestampTable(dbStore.DB)
+	assert.NoError(t, err)
 
-		// verify that the tables are empty
-		var count int
-		for _, model := range [2]interface{}{&TUFFile{}, &TimestampKey{}} {
-			query := dbStore.DB.Model(model).Count(&count)
-			assert.NoError(t, query.Error)
-			assert.Equal(t, 0, count)
-		}
+	// verify that the tables are empty
+	var count int
+	for _, model := range [2]interface{}{&TUFFile{}, &TimestampKey{}} {
+		query := dbStore.DB.Model(model).Count(&count)
+		assert.NoError(t, query.Error)
+		assert.Equal(t, 0, count)
 	}
-
 	return &dbStore.DB, dbStore
 }
 
@@ -59,7 +56,7 @@ func SetUpSQLite(t *testing.T, dbDir string, createTable bool) (*gorm.DB, *SQLSt
 // if no previous version existed.
 func TestSQLUpdateCurrentNew(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	gormDB, dbStore := SetUpSQLite(t, tempBaseDir, true)
+	gormDB, dbStore := SetUpSQLite(t, tempBaseDir)
 	defer os.RemoveAll(tempBaseDir)
 
 	// Adding a new TUF file should succeed
@@ -80,7 +77,7 @@ func TestSQLUpdateCurrentNew(t *testing.T) {
 // new (higher) version of an existing TUF file
 func TestSQLUpdateCurrentNewVersion(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	gormDB, dbStore := SetUpSQLite(t, tempBaseDir, true)
+	gormDB, dbStore := SetUpSQLite(t, tempBaseDir)
 	defer os.RemoveAll(tempBaseDir)
 
 	// insert row
@@ -108,7 +105,7 @@ func TestSQLUpdateCurrentNewVersion(t *testing.T) {
 // trying to update to an older version of a TUF file.
 func TestSQLUpdateCurrentOldVersionError(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	gormDB, dbStore := SetUpSQLite(t, tempBaseDir, true)
+	gormDB, dbStore := SetUpSQLite(t, tempBaseDir)
 	defer os.RemoveAll(tempBaseDir)
 
 	// insert row
@@ -138,7 +135,7 @@ func TestSQLUpdateCurrentOldVersionError(t *testing.T) {
 // updates do not conflict with each.
 func TestSQLUpdateMany(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	gormDB, dbStore := SetUpSQLite(t, tempBaseDir, true)
+	gormDB, dbStore := SetUpSQLite(t, tempBaseDir)
 	defer os.RemoveAll(tempBaseDir)
 
 	err = dbStore.UpdateMany("testGUN", []MetaUpdate{
@@ -173,7 +170,7 @@ func TestSQLUpdateMany(t *testing.T) {
 // non-monotonic versions still succeeds.
 func TestSQLUpdateManyVersionOrder(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	gormDB, dbStore := SetUpSQLite(t, tempBaseDir, true)
+	gormDB, dbStore := SetUpSQLite(t, tempBaseDir)
 	defer os.RemoveAll(tempBaseDir)
 
 	err = dbStore.UpdateMany(
@@ -199,7 +196,7 @@ func TestSQLUpdateManyVersionOrder(t *testing.T) {
 // updates fails.
 func TestSQLUpdateManyDuplicateRollback(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	gormDB, dbStore := SetUpSQLite(t, tempBaseDir, true)
+	gormDB, dbStore := SetUpSQLite(t, tempBaseDir)
 	defer os.RemoveAll(tempBaseDir)
 
 	update := SampleUpdate(0)
@@ -221,7 +218,7 @@ func TestSQLUpdateManyDuplicateRollback(t *testing.T) {
 
 func TestSQLGetCurrent(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	gormDB, dbStore := SetUpSQLite(t, tempBaseDir, true)
+	gormDB, dbStore := SetUpSQLite(t, tempBaseDir)
 	defer os.RemoveAll(tempBaseDir)
 
 	byt, err := dbStore.GetCurrent("testGUN", "root")
@@ -242,7 +239,7 @@ func TestSQLGetCurrent(t *testing.T) {
 
 func TestSQLDelete(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	gormDB, dbStore := SetUpSQLite(t, tempBaseDir, true)
+	gormDB, dbStore := SetUpSQLite(t, tempBaseDir)
 	defer os.RemoveAll(tempBaseDir)
 
 	tuf := SampleTUF(0)
@@ -263,7 +260,7 @@ func TestSQLDelete(t *testing.T) {
 
 func TestSQLGetTimestampKeyNoKey(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	gormDB, dbStore := SetUpSQLite(t, tempBaseDir, true)
+	gormDB, dbStore := SetUpSQLite(t, tempBaseDir)
 	defer os.RemoveAll(tempBaseDir)
 
 	cipher, public, err := dbStore.GetTimestampKey("testGUN")
@@ -288,7 +285,7 @@ func TestSQLGetTimestampKeyNoKey(t *testing.T) {
 
 func TestSQLSetTimestampKeyExists(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	gormDB, dbStore := SetUpSQLite(t, tempBaseDir, true)
+	gormDB, dbStore := SetUpSQLite(t, tempBaseDir)
 	defer os.RemoveAll(tempBaseDir)
 
 	err = dbStore.SetTimestampKey("testGUN", "testCipher", []byte("1"))
@@ -316,8 +313,11 @@ func TestSQLSetTimestampKeyExists(t *testing.T) {
 // both the tables are missing.
 func TestDBCheckHealthTableMissing(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	_, dbStore := SetUpSQLite(t, tempBaseDir, false)
+	_, dbStore := SetUpSQLite(t, tempBaseDir)
 	defer os.RemoveAll(tempBaseDir)
+
+	dbStore.DropTable(&TUFFile{})
+	dbStore.DropTable(&TimestampKey{})
 
 	// No tables, health check fails
 	err = dbStore.CheckHealth()
@@ -338,7 +338,7 @@ func TestDBCheckHealthTableMissing(t *testing.T) {
 // health check fails.
 func TestDBCheckHealthDBConnectionFail(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	_, dbStore := SetUpSQLite(t, tempBaseDir, true)
+	_, dbStore := SetUpSQLite(t, tempBaseDir)
 	defer os.RemoveAll(tempBaseDir)
 
 	err = dbStore.Close()
@@ -352,7 +352,7 @@ func TestDBCheckHealthDBConnectionFail(t *testing.T) {
 // tables exist, the health check succeeds.
 func TestDBCheckHealthSucceeds(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	_, dbStore := SetUpSQLite(t, tempBaseDir, true)
+	_, dbStore := SetUpSQLite(t, tempBaseDir)
 	defer os.RemoveAll(tempBaseDir)
 
 	err = dbStore.CheckHealth()
