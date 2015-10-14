@@ -170,13 +170,11 @@ func (db *SQLStorage) SetTimestampKey(gun string, algorithm data.KeyAlgorithm, p
 		db.FirstOrCreate(&TimestampKey{}, &entry).Error)
 }
 
-type gormModel interface {
-	TableName() string
-}
-
 // CheckHealth asserts that both required tables are present
 func (db *SQLStorage) CheckHealth() error {
-	interfaces := []gormModel{&TUFFile{}, &TimestampKey{}}
+	interfaces := []interface {
+		TableName() string
+	}{&TUFFile{}, &TimestampKey{}}
 
 	for _, model := range interfaces {
 		tableOk := db.HasTable(model)
