@@ -5,7 +5,9 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	"github.com/endophage/gotuf/data"
+	"github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
+	"github.com/mattn/go-sqlite3"
 )
 
 // SQLStorage implements a versioned store using a relational database.
@@ -25,6 +27,27 @@ func NewSQLStorage(dialect string, args ...interface{}) (*SQLStorage, error) {
 	}, nil
 }
 
+// translateOldVersionError captures DB errors, and attempts to translate
+// duplicate entry - currently only supports MySQL and Sqlite3
+func translateOldVersionError(err error) error {
+	switch err := err.(type) {
+	case *mysql.MySQLError:
+		// https://dev.mysql.com/doc/refman/5.5/en/error-messages-server.html
+		// 1022 = Can't write; duplicate key in table '%s'
+		// 1062 = Duplicate entry '%s' for key %d
+		if err.Number == 1022 || err.Number == 1062 {
+			return &ErrOldVersion{}
+		}
+	case *sqlite3.Error:
+		// https://godoc.org/github.com/mattn/go-sqlite3#pkg-variables
+		if err.Code == sqlite3.ErrConstraint &&
+			err.ExtendedCode == sqlite3.ErrConstraintUnique {
+			return &ErrOldVersion{}
+		}
+	}
+	return err
+}
+
 // UpdateCurrent updates a single TUF.
 func (db *SQLStorage) UpdateCurrent(gun string, update MetaUpdate) error {
 	// ensure we're not inserting an immediately old version - can't use the
@@ -37,12 +60,12 @@ func (db *SQLStorage) UpdateCurrent(gun string, update MetaUpdate) error {
 		return &ErrOldVersion{}
 	}
 
-	return db.Create(&TUFFile{
+	return translateOldVersionError(db.Create(&TUFFile{
 		Gun:     gun,
 		Role:    update.Role,
 		Version: update.Version,
 		Data:    update.Data,
-	}).Error
+	}).Error)
 }
 
 // UpdateMany atomically updates many TUF records in a single transaction
@@ -54,7 +77,7 @@ func (db *SQLStorage) UpdateMany(gun string, updates []MetaUpdate) error {
 
 	rollback := func(err error) error {
 		if rxErr := tx.Rollback().Error; rxErr != nil {
-			logrus.Error("Failed on Tx rollback with error: ", err.Error())
+			logrus.Error("Failed on Tx rollback with error: ", rxErr.Error())
 			return rxErr
 		}
 		return err
@@ -84,7 +107,7 @@ func (db *SQLStorage) UpdateMany(gun string, updates []MetaUpdate) error {
 		}).Attrs("data", update.Data).FirstOrCreate(&row)
 
 		if query.Error != nil {
-			return rollback(query.Error)
+			return rollback(translateOldVersionError(query.Error))
 		}
 		// it's previously been added, which means it's a duplicate entry
 		// in the same transaction
@@ -143,7 +166,8 @@ func (db *SQLStorage) SetTimestampKey(gun string, algorithm data.KeyAlgorithm, p
 		return &ErrTimestampKeyExists{gun: gun}
 	}
 
-	return db.FirstOrCreate(&TimestampKey{}, &entry).Error
+	return translateOldVersionError(
+		db.FirstOrCreate(&TimestampKey{}, &entry).Error)
 }
 
 // CheckHealth asserts that both required tables are present
