@@ -9,9 +9,11 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/bugsnag/bugsnag-go"
+	"github.com/docker/distribution/health"
 	_ "github.com/docker/distribution/registry/auth/htpasswd"
 	_ "github.com/docker/distribution/registry/auth/token"
 	"github.com/endophage/gotuf/signed"
@@ -111,6 +113,12 @@ func main() {
 			viper.GetString("trust_service.port"),
 			viper.GetString("trust_service.tls_ca_file"),
 		)
+		health.RegisterPeriodicFunc(
+			"Key Manager Healthy", trust.(*signer.NotarySigner).KMHealth,
+			time.Second*60)
+		health.RegisterPeriodicFunc(
+			"Signer Healthy", trust.(*signer.NotarySigner).SHealth,
+			time.Second*60)
 	} else {
 		logrus.Info("Using local signing service")
 		trust = signed.NewEd25519()
@@ -124,6 +132,8 @@ func main() {
 			logrus.Fatal("Error starting DB driver: ", err.Error())
 			return // not strictly needed but let's be explicit
 		}
+		health.RegisterPeriodicFunc(
+			"DB Operation", store.CheckHealth, time.Second*60)
 		ctx = context.WithValue(ctx, "metaStore", store)
 	} else {
 		logrus.Debug("Using memory backend")
