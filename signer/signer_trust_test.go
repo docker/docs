@@ -23,7 +23,7 @@ func (c StubKeyManagementClient) CheckHealth(x context.Context,
 	if err != nil {
 		return nil, err
 	}
-	return &pb.HealthStatus{status}, nil
+	return &pb.HealthStatus{Status: status}, nil
 }
 
 type StubSignerClient struct {
@@ -37,7 +37,7 @@ func (c StubSignerClient) CheckHealth(x context.Context, v *pb.Void,
 	if err != nil {
 		return nil, err
 	}
-	return &pb.HealthStatus{status}, nil
+	return &pb.HealthStatus{Status: status}, nil
 }
 
 type StubGRPCConnection struct {
