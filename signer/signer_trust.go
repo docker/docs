@@ -125,17 +125,13 @@ func (trust *NotarySigner) checkServiceHealth(
 	// We still want to time out getting health, because the connection could
 	// have disconnected sometime between when we checked the connection and
 	// when we try to make an RPC call.
-	channel := make(chan error)
-	done := make(chan struct{})
+	channel := make(chan error, 1)
 	go func() {
 		status, err := check(context.Background(), &pb.Void{})
 		if len(status.Status) > 0 {
 			err = fmt.Errorf("%s not healthy", serviceName)
 		}
-		select {
-		case <-done:
-		case channel <- err:
-		}
+		channel <- err
 	}()
 	var returnErr error
 	select {
@@ -144,7 +140,5 @@ func (trust *NotarySigner) checkServiceHealth(
 	case <-time.After(time.Second * time.Duration(timeout)):
 		returnErr = fmt.Errorf("Timed out connecting to %s after %s", serviceName, timeout)
 	}
-	close(done)
-	close(channel)
 	return returnErr
 }
