@@ -17,7 +17,8 @@ type StubKeyManagementClient struct {
 	healthCheck func() (map[string]string, error)
 }
 
-func (c StubKeyManagementClient) CheckHealth(x context.Context, v *pb.Void, o ...grpc.CallOption) (*pb.HealthStatus, error) {
+func (c StubKeyManagementClient) CheckHealth(x context.Context,
+	v *pb.Void, o ...grpc.CallOption) (*pb.HealthStatus, error) {
 	status, err := c.healthCheck()
 	if err != nil {
 		return nil, err
@@ -30,7 +31,8 @@ type StubSignerClient struct {
 	healthCheck func() (map[string]string, error)
 }
 
-func (c StubSignerClient) CheckHealth(x context.Context, v *pb.Void, o ...grpc.CallOption) (*pb.HealthStatus, error) {
+func (c StubSignerClient) CheckHealth(x context.Context, v *pb.Void,
+	o ...grpc.CallOption) (*pb.HealthStatus, error) {
 	status, err := c.healthCheck()
 	if err != nil {
 		return nil, err

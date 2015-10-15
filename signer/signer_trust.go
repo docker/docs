@@ -14,6 +14,8 @@ import (
 	"google.golang.org/grpc/credentials"
 )
 
+// The only thing needed from grpc.ClientConn - specifying an interface
+// so that the connection can be stubbed out in tests.
 type checkableConnectionState interface {
 	State() grpc.ConnectivityState
 }
