@@ -100,21 +100,21 @@ func (trust *NotarySigner) GetKey(keyid string) data.PublicKey {
 // to the trust server, and both the key management and signer services are
 // healthy
 func (trust *NotarySigner) CheckHealth(timeout int) error {
-	if e := trust.checkServiceHealth("Key manager", trust.kmClient,
-		timeout); e != nil {
+	if e := trust.checkServiceHealth(
+		"Key manager", trust.kmClient.CheckHealth, timeout); e != nil {
 		return e
 	}
-	return trust.checkServiceHealth("Signer", trust.sClient, timeout)
+	return trust.checkServiceHealth(
+		"Signer", trust.sClient.CheckHealth, timeout)
 }
+
+type rpcHealthCheck func(
+	context.Context, *pb.Void, ...grpc.CallOption) (*pb.HealthStatus, error)
 
 // Generalized function that can check the health of both the signer client
 // and the key management client.
 func (trust *NotarySigner) checkServiceHealth(
-	serviceName string,
-	client interface {
-		CheckHealth(context.Context, *pb.Void, ...grpc.CallOption) (*pb.HealthStatus, error)
-	},
-	timeout int) error {
+	serviceName string, check rpcHealthCheck, timeout int) error {
 
 	// Do not bother starting goroutine if the connection is broken.
 	if trust.clientConn.State() != grpc.Idle &&
@@ -127,7 +127,7 @@ func (trust *NotarySigner) checkServiceHealth(
 	// when we try to make an RPC call.
 	channel := make(chan error)
 	go func() {
-		status, err := client.CheckHealth(context.Background(), &pb.Void{})
+		status, err := check(context.Background(), &pb.Void{})
 		// if this function gets timed out, it might panic when writing to a
 		// closed channel
 		defer func() { recover() }()
