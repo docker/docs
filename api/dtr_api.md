@@ -16,9 +16,9 @@ organizational structure by providing fine-grained, role-based access control fo
 The following documents detail the API:
 
 - [Docker Trusted Registry Accounts & Repos API: Intro & Overview](/docker-trusted-registry/api/)
-- [Accounts API Doc]({{< relref "dtr_1_3_accounts.md" >}})
-- [Teams API Doc]({{< relref "dtr_1_3_teams.md" >}})
-- [Repositories API Doc]({{< relref "dtr_1_3_repositories.md" >}})
-- [User-Owned Repository Access API Doc]({{< relref "dtr_1_3_user_repo_access.md" >}})
-- [Organization-Owned Repository Access API Doc]({{< relref "dtr_1_3_team_repo_access.md" >}})
-- [Organization-Owned Repository Namespace Access API Doc]({{< relref "dtr_1_3_team_repo_namespace_access.md" >}})
+- [Accounts API Doc](dtr_1_3_accounts.md)
+- [Teams API Doc](dtr_1_3_teams.md)
+- [Repositories API Doc](dtr_1_3_repositories.md)
+- [User-Owned Repository Access API Doc](dtr_1_3_user_repo_access.md)
+- [Organization-Owned Repository Access API Doc](dtr_1_3_team_repo_access.md)
+- [Organization-Owned Repository Namespace Access API Doc](dtr_1_3_team_repo_namespace_access.md)

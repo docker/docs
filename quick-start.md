@@ -43,7 +43,7 @@ You should be able to complete this guide in about thirty minutes.
 > **Note:** This guide assumes you have installed a working instance of Docker Trusted Registry
 > reachable at dtr.yourdomain.com. If you need help installing and configuring
 > Docker Trusted Registry, please consult the
-[installation instructions]({{< relref "docker-trusted-registry/install.md" >}}).
+[installation instructions](install.md).
 
 ## Pulling the official Jenkins image
 
@@ -234,7 +234,7 @@ Now that you’ve created the custom image, it can be pushed to Docker Trusted R
 You can view the traffic throughput from the custom image being pushed, by selecting `Network` from the `Load Balancer` tile on the Docker Trusted Registry Dashboard:
 ![](http://i.imgur.com/8KlHj9u.png)
 
-![Docker Trusted Registry console push throughput](../assets/console-push.png)
+![Docker Trusted Registry console push throughput](assets/console-push.png)
 
 Once the image is successfully pushed, it can be downloaded, or pulled, by any
 Docker host that has access to Docker Trusted Registry.
@@ -309,13 +309,13 @@ The previous `docker run` command mapped port `1973` on the container to port
 > not trusted. You may wish to add the certificate to the trusted store in order
 > to prevent further warnings in the future.
 
-![Jenkins landing page](../assets/jenkins-ui.png)
+![Jenkins landing page](assets/jenkins-ui.png)
 
 From within the Jenkins Web UI, navigate to `Manage Jenkins` (on the left-hand
 pane) > `Manage Plugins` > `Installed`. The  `Role-based Authorization Strategy`
 plugin should be present with the `Uninstall` button available to the right.
 
-![Jenkins plugin manager](../assets/jenkins-plugins.png)
+![Jenkins plugin manager](assets/jenkins-plugins.png)
 
 In another browser session, try to access Jenkins via the default HTTP port 8080
  `http://<docker-host>:8080`. This should result in a "connection timeout",
@@ -330,4 +330,4 @@ configured, secured Jenkins instance that can run on any infrastructure.
 ## Next Steps
 
 For more information on using Docker Trusted Registry, take a look at the
-[User's Guide]({{< relref "userguide.md" >}}).
+[User's Guide](userguide.md).

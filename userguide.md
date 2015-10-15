@@ -16,7 +16,7 @@ weight=3
 This guide covers tasks and functions a user of Docker Trusted Registry  will
 need to know about, such as pushing or pulling images, etc. For tasks Docker Trusted Registry
 administrators need to accomplish, such as configuring or monitoring Docker Trusted Registry, please
-visit the [Administrator's Guide]({{< relref "adminguide.md" >}}).
+visit the [Administrator's Guide](adminguide.md).
 
 ## Overview
 
@@ -32,7 +32,7 @@ push` command to add an image to a Docker Trusted Registry repository. To learn 
 images, see
 [User Guide: Working with Docker Images](https://docs.docker.com/userguide/dockerimages/). For a step-by-step
 example of the entire process, see the
-[Quick Start: Basic Workflow Guide]({{< relref "quick-start.md" >}}).
+[Quick Start: Basic Workflow Guide](quick-start.md).
 
 > **Note**: If your Docker Trusted Registry instance has authentication enabled, you will need to
 >use your command line to `docker login <dtr-hostname>` (e.g., `docker login
@@ -122,7 +122,7 @@ your Docker Trusted Registry by adding it to the command:
 ## Next Steps
 
 For information on administering Docker Trusted Registry, take a look at the
-[Administrator's Guide]({{< relref "adminguide.md" >}}).
+[Administrator's Guide](adminguide.md).
 
 
 <!--TODO:

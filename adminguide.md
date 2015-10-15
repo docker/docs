@@ -15,13 +15,13 @@ weight=4
 This guide explains the tasks and functions an administrator of Docker Trusted Registry needs to understand such as reporting, logging, system management,
 performance metrics, optimizing the Trusted Registry file size, and deleting containers.
 For tasks Docker Trusted Registry users need to accomplish, such as pushing and pulling
-images, please look at the [User's Guide]({{< relref "userguide.md" >}}).
+images, please look at the [User's Guide](userguide.md).
 
 ## Reporting
 
 ### Dashboard
 
-![Docker Trusted Registry Dashboard</admin/metrics/>](../assets/admin-metrics.png)
+![Docker Trusted Registry Dashboard</admin/metrics/>](assets/admin-metrics.png)
 
 The Docker Trusted Registry Dashboard displays "hardware" resource utilization and network traffic metrics for the Docker Trusted Registry host as well as for each of its contained services. The CPU and RAM usage meters at the top indicate overall resource usage for the host, while detailed time-series charts are provided below for each container providing a Docker Trusted Registry service.
 
@@ -36,7 +36,7 @@ service. See below for a
 
 ### Logs
 
-![System Logs page</admin/logs/>](../assets/admin-logs.png)
+![System Logs page</admin/logs/>](assets/admin-logs.png)
 
 Click "Logs" in the global nav bar at the top of page to view the logs from your Docker Trusted Registry's containers. You will see
 log sections on this page for each service in your Docker Trusted Registry instance. Older or newer
@@ -321,7 +321,7 @@ If you need to stop and/or start Docker Trusted Registry (for upgrading, trouble
 ## See also
 
 * To configure for your environment, see the
-[Configuration instructions]({{< relref "configuration.md" >}}).
-* To use Docker Trusted Registry, see the [User guide]({{< relref "userguide.md" >}}).
-* To upgrade, see the [Upgrade guide]({{< relref "upgrade.md" >}}).
-* To see previous changes, see the [release notes]({{< relref "release-notes.md" >}}).
+[Configuration instructions](configuration.md).
+* To use Docker Trusted Registry, see the [User guide](userguide.md).
+* To upgrade, see the [Upgrade guide](upgrade.md).
+* To see previous changes, see the [release notes](release-notes.md).

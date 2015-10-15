@@ -37,7 +37,7 @@ organizing the options for configuring:
 
 ## General Settings
 
-![Domain and Ports page</admin/settings#http>](../assets/admin-settings.png)
+![Domain and Ports page</admin/settings#http>](assets/admin-settings.png)
 
 * *Domain Name*: **required** defaults to an empty string, the fully qualified domain name assigned to the Docker Trusted Registry host.
 * *HTTP Port*: defaults to 80, used as the entry point for the image storage service. To see load balancer status, you can query
@@ -57,7 +57,7 @@ http://&lt;dtr-host&gt;/load_balancer_status.
 
 ## Security
 
-![Security settings page</admin/settings#security>](../assets/admin-settings-security.png)
+![Security settings page</admin/settings#security>](assets/admin-settings-security.png)
 
 * *SSL Certificate*: Used to enter the hash (string) from the SSL Certificate.
 This cert must be accompanied by its private key, entered below.
@@ -278,7 +278,7 @@ documentation for the full options specific to each driver.
 Storage drivers can be added or customized via the [Docker Registry storage driver
 API](http://docs.docker.com/registry/storagedrivers/#storage-driver-api).
 
-![Storage settings page</admin/settings#storage>](../assets/admin-settings-storage.png)
+![Storage settings page</admin/settings#storage>](assets/admin-settings-storage.png)
 
 After you select the image storage method you would like to use from the drop-down menu
 near the top of the page, the UI will change to reflect the configuration settings
@@ -330,7 +330,7 @@ to the Docker Trusted Registry web admin tool and to the Docker Trusted Registry
 The current authentication methods are `None`, `Managed` and `LDAP`.
 
 > **Note**: if you have issues logging into the Docker Trusted Registry admin web interface after changing the authentication
-> settings, you may need to use the [emergency access to the Docker Trusted Registry admin web interface]({{< relref "adminguide.md#emergency-access-to-dtr" >}}).
+> settings, you may need to use the [emergency access to the Docker Trusted Registry admin web interface](adminguide.md#emergency-access-to-dtr).
 
 ### No authentication
 
@@ -348,7 +348,7 @@ the web administration UI and metrics dashboard.
 When you create users and assign their roles via the API, you do not need
 to assign those users roles using the Docker Trusted Registry admin web UI.
 
-![Managed authentication settings page</admin/settings#auth>](../assets/admin-settings-authentication-basic.png)
+![Managed authentication settings page</admin/settings#auth>](assets/admin-settings-authentication-basic.png)
 
 * Choose the appropriate button to add one user, or to upload a CSV file containing username,
   password pairs, and selection boxes for "admin", "read-write", and "read-only" roles.
@@ -408,7 +408,7 @@ for the user's login-name. On OpenLDAP, it's generally `uid`, and on Microsoft A
 servers, it's `sAMAccountName`. The `ldapsearch` output above should allow you to
 confirm which setting you need.
 
-![LDAP authentication settings page</admin/settings#auth>](../assets/admin-settings-authentication-ldap.png)
+![LDAP authentication settings page</admin/settings#auth>](assets/admin-settings-authentication-ldap.png)
 
 #### LDAP Configuration options
 
@@ -441,4 +441,4 @@ You can test your current LDAP configuration before saving it by entering a test
 ## Next Steps
 
 For information on getting support for Docker Trusted Registry, take a look at the
-[Support information]({{< relref "support.md" >}}).
+[Support information](support.md).

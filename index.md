@@ -47,16 +47,16 @@ To get your copy of Docker Trusted Registry, including a free trial, visit [the 
 The following documentation for Docker Trusted Registry is available:
 
 * **Overview** This page.
-* [**Quick Start: Basic User Workflow**]({{< relref "quick-start.md" >}}) Go here to learn the
+* [**Quick Start: Basic User Workflow**](quick-start.md) Go here to learn the
 fundamentals of how Docker Trusted Registry works and how you can set up a simple, but useful
 workflow.
-* [**User Guide**]({{< relref "userguide.md" >}}) Go here to learn about using Docker Trusted Registry from day to
+* [**User Guide**](userguide.md) Go here to learn about using Docker Trusted Registry from day to
 day.
-* [**Administrator Guide**]({{< relref "adminguide.md" >}}) Go here if you are an administrator
+* [**Administrator Guide**](adminguide.md) Go here if you are an administrator
 responsible for running and maintaining Docker Trusted Registry.
 * [**Installation**](/docker-trusted-registry/install/) Go here for the steps you'll need to install
 Docker Trusted Registry and get it working.
-* [**Configuration**]({{< relref "configuration.md" >}}) Go here to find out details about
+* [**Configuration**](configuration.md) Go here to find out details about
 setting up and configuring Docker Trusted Registry for your particular environment.
 * [**Support**](/docker-trusted-registry/install/) Go here for information on getting support for Docker Trusted Registry.
 * [**The Docker Trusted Registry product page**](https://www.docker.com/docker-trusted-registry).

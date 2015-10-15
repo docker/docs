@@ -80,7 +80,7 @@ The following steps walk you through the 1-Click Launch settings:
 
 5. From the Security Group box, select "Create new based on seller settings".
 
-    ![](../assets/aws-dtr-sg-rules.png)
+    ![](assets/aws-dtr-sg-rules.png)
 
     This option has security implications. It allows incoming connections to the listed ports from any host or IP address. You should lock this down in line with your existing AWS security policies.
 
@@ -136,7 +136,7 @@ interface:
 
     You'll find the Instance ID on the "Description" tab on the EC2 Dashboard as shown in the image below:
 
-    ![](../assets/aws-instance-id.png)
+    ![](assets/aws-instance-id.png)
 
 ## Configure the Docker Trusted Registry Service
 

@@ -14,7 +14,7 @@ weight=100
 
 ## Prior Versions
 
-These notes refer to the current and immediately prior releases of Docker Trusted Registry  and the commercially supported Docker Engine. For notes on older versions of these, see the [prior release notes archive]({{< relref "prior-release-notes.md" >}}).
+These notes refer to the current and immediately prior releases of Docker Trusted Registry  and the commercially supported Docker Engine. For notes on older versions of these, see the [prior release notes archive](prior-release-notes.md).
 
 ## Docker Trusted Registry
 

@@ -87,7 +87,7 @@ The following steps walk you through the 1-Click Launch settings:
 
 5. From the Security Group box, select "Create new based on seller settings".
 
-    ![](../assets/aws-engine-sg-rules.png)
+    ![](assets/aws-engine-sg-rules.png)
 
     This option has security implications. It allows incoming connections to the listed ports from any host or IP address. You should lock this down in line with your existing AWS security policies.
 

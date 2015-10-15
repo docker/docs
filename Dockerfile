@@ -1,4 +1,4 @@
-FROM docs/base:latest
+FROM docs/base:hugo-github-linking
 MAINTAINER Mary Anthony <mary@docker.com> (@moxiegirl)
 
 RUN svn checkout https://github.com/docker/tutorials/trunk/docs/mac /docs/content/mac \
