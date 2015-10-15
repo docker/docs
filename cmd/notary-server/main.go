@@ -115,10 +115,19 @@ func main() {
 		)
 		health.RegisterPeriodicFunc(
 			"Trust operational",
+			// If the trust service fails, the server is degraded but not
+			// exactly unheatlthy, so always return healthy and just log an
+			// error.
 			func() error {
-				return trust.(*signer.NotarySigner).CheckHealth(60)
+				logrus.Info("Getting health")
+				err := trust.(*signer.NotarySigner).CheckHealth(5)
+				logrus.Info("Got health")
+				if err != nil {
+					logrus.Error("Trust not fully operational: ", err.Error())
+				}
+				return nil
 			},
-			time.Second*60)
+			time.Second*5)
 	} else {
 		logrus.Info("Using local signing service")
 		trust = signed.NewEd25519()
