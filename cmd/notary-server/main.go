@@ -114,10 +114,10 @@ func main() {
 			viper.GetString("trust_service.tls_ca_file"),
 		)
 		health.RegisterPeriodicFunc(
-			"Key manager operational", trust.(*signer.NotarySigner).KMHealth,
-			time.Second*60)
-		health.RegisterPeriodicFunc(
-			"Signer operational", trust.(*signer.NotarySigner).SHealth,
+			"Trust operational",
+			func() error {
+				return trust.(*signer.NotarySigner).CheckHealth(60)
+			},
 			time.Second*60)
 	} else {
 		logrus.Info("Using local signing service")

@@ -3,6 +3,7 @@ package signer
 import (
 	"errors"
 	"testing"
+	"time"
 
 	"google.golang.org/grpc"
 
@@ -13,110 +14,116 @@ import (
 
 type StubKeyManagementClient struct {
 	pb.KeyManagementClient
-	status map[string]string
-	err    error
+	healthCheck func() (map[string]string, error)
 }
 
 func (c StubKeyManagementClient) CheckHealth(x context.Context, v *pb.Void, o ...grpc.CallOption) (*pb.HealthStatus, error) {
-	if c.err != nil {
-		return nil, c.err
+	status, err := c.healthCheck()
+	if err != nil {
+		return nil, err
 	}
-	return &pb.HealthStatus{c.status}, nil
+	return &pb.HealthStatus{status}, nil
 }
 
 type StubSignerClient struct {
 	pb.SignerClient
-	status map[string]string
-	err    error
+	healthCheck func() (map[string]string, error)
 }
 
 func (c StubSignerClient) CheckHealth(x context.Context, v *pb.Void, o ...grpc.CallOption) (*pb.HealthStatus, error) {
-	if c.err != nil {
-		return nil, c.err
+	status, err := c.healthCheck()
+	if err != nil {
+		return nil, err
 	}
-	return &pb.HealthStatus{c.status}, nil
+	return &pb.HealthStatus{status}, nil
 }
 
-// KMHealth only succeeds if the KeyManagement service is healthy.
-func TestKMHealthFailure(t *testing.T) {
-	errs := []error{errors.New("Connection failure!"), nil}
-	status := map[string]string{"db": "bad"}
-
-	for _, err := range errs {
-		signer := NotarySigner{
-			StubKeyManagementClient{
-				pb.NewKeyManagementClient(nil),
-				status,
-				err,
-			},
-			StubSignerClient{
-				pb.NewSignerClient(nil),
-				make(map[string]string),
-				nil,
-			},
-		}
-		err := signer.KMHealth()
-		assert.Error(t, err)
-	}
+type StubGRPCConnection struct {
+	fakeConnStatus grpc.ConnectivityState
 }
 
-// SHealth only succeeds if the Signer service is healthy.
-func TestSignerHealthFailure(t *testing.T) {
-	errs := []error{errors.New("Connection failure!"), nil}
-	status := map[string]string{"db": "bad"}
-
-	for _, err := range errs {
-		signer := NotarySigner{
-			StubKeyManagementClient{
-				pb.NewKeyManagementClient(nil),
-				make(map[string]string),
-				nil,
-			},
-			StubSignerClient{
-				pb.NewSignerClient(nil),
-				status,
-				err,
-			},
-		}
-		err := signer.SHealth()
-		assert.Error(t, err)
-	}
+func (c StubGRPCConnection) State() grpc.ConnectivityState {
+	return c.fakeConnStatus
 }
 
-// SHealth succeeds if the signer service is healthy, regardless of the
-// key management service.
-func TestSignerHealthGood(t *testing.T) {
-	signer := NotarySigner{
+type healthSideEffect func() (map[string]string, error)
+
+func healthOk() (map[string]string, error) {
+	return make(map[string]string), nil
+}
+
+func healthBad() (map[string]string, error) {
+	return map[string]string{"health": "not good"}, nil
+}
+
+func healthError() (map[string]string, error) {
+	return nil, errors.New("Something's wrong")
+}
+
+func healthTimeout() (map[string]string, error) {
+	time.Sleep(time.Second * 10)
+	return healthOk()
+}
+
+func makeSigner(kmFunc healthSideEffect, sFunc healthSideEffect, conn StubGRPCConnection) NotarySigner {
+	return NotarySigner{
 		StubKeyManagementClient{
 			pb.NewKeyManagementClient(nil),
-			nil,
-			errors.New("Connection failure!"),
+			kmFunc,
 		},
 		StubSignerClient{
 			pb.NewSignerClient(nil),
-			make(map[string]string),
-			nil,
+			sFunc,
 		},
+		conn,
 	}
-	err := signer.SHealth()
-	assert.NoError(t, err)
 }
 
-// KMHealth succeeds if the key management service is healthy, regardless of
-// the signer service.
-func TestKMHealthGood(t *testing.T) {
-	signer := NotarySigner{
-		StubKeyManagementClient{
-			pb.NewKeyManagementClient(nil),
-			make(map[string]string),
-			nil,
-		},
-		StubSignerClient{
-			pb.NewSignerClient(nil),
-			nil,
-			errors.New("Connection failure!"),
-		},
-	}
-	err := signer.KMHealth()
-	assert.NoError(t, err)
+// CheckHealth does not succeed if the KM server is unhealthy
+func TestHealthCheckKMUnhealthy(t *testing.T) {
+	signer := makeSigner(healthBad, healthOk, StubGRPCConnection{})
+	assert.Error(t, signer.CheckHealth(1))
+}
+
+// CheckHealth does not succeed if the health check to the KM server errors
+func TestHealthCheckKMError(t *testing.T) {
+	signer := makeSigner(healthBad, healthOk, StubGRPCConnection{})
+	assert.Error(t, signer.CheckHealth(1))
+}
+
+// CheckHealth does not succeed if the health check to the KM server times out
+func TestHealthCheckKMTimeout(t *testing.T) {
+	signer := makeSigner(healthTimeout, healthOk, StubGRPCConnection{})
+	assert.Error(t, signer.CheckHealth(1))
+}
+
+// CheckHealth does not succeed if the signer is unhealthy
+func TestHealthCheckSignerUnhealthy(t *testing.T) {
+	signer := makeSigner(healthOk, healthBad, StubGRPCConnection{})
+	assert.Error(t, signer.CheckHealth(1))
+}
+
+// CheckHealth does not succeed if the health check to the signer errors
+func TestHealthCheckSignerError(t *testing.T) {
+	signer := makeSigner(healthOk, healthBad, StubGRPCConnection{})
+	assert.Error(t, signer.CheckHealth(1))
+}
+
+// CheckHealth does not succeed if the health check to the signer times out
+func TestHealthCheckSignerTimeout(t *testing.T) {
+	signer := makeSigner(healthOk, healthTimeout, StubGRPCConnection{})
+	assert.Error(t, signer.CheckHealth(1))
+}
+
+// CheckHealth succeeds if both services are healthy and reachable
+func TestHealthCheckBothHealthy(t *testing.T) {
+	signer := makeSigner(healthOk, healthOk, StubGRPCConnection{})
+	assert.NoError(t, signer.CheckHealth(1))
+}
+
+// CheckHealth fails immediately if not connected to the server.
+func TestHealthCheckConnectionDied(t *testing.T) {
+	signer := makeSigner(healthTimeout, healthTimeout,
+		StubGRPCConnection{grpc.Connecting})
+	assert.Error(t, signer.CheckHealth(30))
 }
