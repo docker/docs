@@ -14,6 +14,9 @@ import (
 	"golang.org/x/net/context"
 )
 
+type rpcHealthCheck func(
+	context.Context, *pb.Void, ...grpc.CallOption) (*pb.HealthStatus, error)
+
 type StubKeyManagementClient struct {
 	pb.KeyManagementClient
 	healthCheck rpcHealthCheck
@@ -21,16 +24,6 @@ type StubKeyManagementClient struct {
 
 func (c StubKeyManagementClient) CheckHealth(x context.Context,
 	v *pb.Void, o ...grpc.CallOption) (*pb.HealthStatus, error) {
-	return c.healthCheck(x, v, o...)
-}
-
-type StubSignerClient struct {
-	pb.SignerClient
-	healthCheck rpcHealthCheck
-}
-
-func (c StubSignerClient) CheckHealth(x context.Context, v *pb.Void,
-	o ...grpc.CallOption) (*pb.HealthStatus, error) {
 	return c.healthCheck(x, v, o...)
 }
 
@@ -51,86 +44,55 @@ func stubHealthFunction(t *testing.T, status map[string]string, err error) rpcHe
 	}
 }
 
-func healthOk(t *testing.T) rpcHealthCheck {
-	return stubHealthFunction(t, make(map[string]string), nil)
-}
-
-func healthBad(t *testing.T) rpcHealthCheck {
-	return stubHealthFunction(t, map[string]string{"health": "not good"}, nil)
-}
-
-func healthError(t *testing.T) rpcHealthCheck {
-	return stubHealthFunction(t, nil, errors.New("Something's wrong"))
-}
-
-func healthTimeout(t *testing.T) rpcHealthCheck {
-	return stubHealthFunction(
-		t, nil, grpc.Errorf(codes.DeadlineExceeded, ""))
-}
-
-func makeSigner(kmFunc rpcHealthCheck, sFunc rpcHealthCheck, conn StubGRPCConnection) NotarySigner {
+func makeSigner(kmFunc rpcHealthCheck, conn StubGRPCConnection) NotarySigner {
 	return NotarySigner{
 		StubKeyManagementClient{
 			pb.NewKeyManagementClient(nil),
 			kmFunc,
 		},
-		StubSignerClient{
-			pb.NewSignerClient(nil),
-			sFunc,
-		},
+		pb.NewSignerClient(nil),
 		conn,
 	}
 }
 
 // CheckHealth does not succeed if the KM server is unhealthy
 func TestHealthCheckKMUnhealthy(t *testing.T) {
-	signer := makeSigner(healthBad(t), healthOk(t), StubGRPCConnection{})
+	signer := makeSigner(
+		stubHealthFunction(t, map[string]string{"health": "not good"}, nil),
+		StubGRPCConnection{})
 	assert.Error(t, signer.CheckHealth(1*time.Second))
 }
 
 // CheckHealth does not succeed if the health check to the KM server errors
 func TestHealthCheckKMError(t *testing.T) {
-	signer := makeSigner(healthBad(t), healthOk(t), StubGRPCConnection{})
+	signer := makeSigner(
+		stubHealthFunction(t, nil, errors.New("Something's wrong")),
+		StubGRPCConnection{})
 	assert.Error(t, signer.CheckHealth(1*time.Second))
 }
 
 // CheckHealth does not succeed if the health check to the KM server times out
 func TestHealthCheckKMTimeout(t *testing.T) {
-	signer := makeSigner(healthTimeout(t), healthOk(t), StubGRPCConnection{})
+	signer := makeSigner(
+		stubHealthFunction(t, nil, grpc.Errorf(codes.DeadlineExceeded, "")),
+		StubGRPCConnection{})
 	err := signer.CheckHealth(1 * time.Second)
 	assert.Error(t, err)
 	assert.True(t, strings.Contains(err.Error(), "Timed out"))
 }
 
-// CheckHealth does not succeed if the signer is unhealthy
-func TestHealthCheckSignerUnhealthy(t *testing.T) {
-	signer := makeSigner(healthOk(t), healthBad(t), StubGRPCConnection{})
-	assert.Error(t, signer.CheckHealth(1*time.Second))
-}
-
-// CheckHealth does not succeed if the health check to the signer errors
-func TestHealthCheckSignerError(t *testing.T) {
-	signer := makeSigner(healthOk(t), healthBad(t), StubGRPCConnection{})
-	assert.Error(t, signer.CheckHealth(1))
-}
-
-// CheckHealth does not succeed if the health check to the signer times out
-func TestHealthCheckSignerTimeout(t *testing.T) {
-	signer := makeSigner(healthOk(t), healthTimeout(t), StubGRPCConnection{})
-	err := signer.CheckHealth(1 * time.Second)
-	assert.Error(t, err)
-	assert.True(t, strings.Contains(err.Error(), "Timed out"))
-}
-
-// CheckHealth succeeds if both services are healthy and reachable
-func TestHealthCheckBothHealthy(t *testing.T) {
-	signer := makeSigner(healthOk(t), healthOk(t), StubGRPCConnection{})
+// CheckHealth succeeds if KM is healthy and reachable.
+func TestHealthCheckKMHealthy(t *testing.T) {
+	signer := makeSigner(
+		stubHealthFunction(t, make(map[string]string), nil),
+		StubGRPCConnection{})
 	assert.NoError(t, signer.CheckHealth(1*time.Second))
 }
 
 // CheckHealth fails immediately if not connected to the server.
 func TestHealthCheckConnectionDied(t *testing.T) {
-	signer := makeSigner(healthOk(t), healthOk(t),
+	signer := makeSigner(
+		stubHealthFunction(t, make(map[string]string), nil),
 		StubGRPCConnection{grpc.Connecting})
 	assert.Error(t, signer.CheckHealth(1*time.Second))
 }

@@ -96,25 +96,9 @@ func (trust *NotarySigner) GetKey(keyid string) data.PublicKey {
 	return data.NewPublicKey(data.KeyAlgorithm(publicKey.KeyInfo.Algorithm.Algorithm), publicKey.PublicKey)
 }
 
-// CheckHealth returns true if trust is healthy - that is if it can connect
-// to the trust server, and both the key management and signer services are
-// healthy
+// CheckHealth checks the health of one of the clients, since both clients run
+// from the same GRPC server.
 func (trust *NotarySigner) CheckHealth(timeout time.Duration) error {
-	if e := trust.checkServiceHealth(
-		"Key Manager", trust.kmClient.CheckHealth, timeout); e != nil {
-		return e
-	}
-	return trust.checkServiceHealth(
-		"Signer", trust.sClient.CheckHealth, timeout)
-}
-
-type rpcHealthCheck func(
-	context.Context, *pb.Void, ...grpc.CallOption) (*pb.HealthStatus, error)
-
-// Generalized function that can check the health of both the signer client
-// and the key management client.
-func (trust *NotarySigner) checkServiceHealth(
-	serviceName string, check rpcHealthCheck, timeout time.Duration) error {
 
 	// Do not bother starting checking at all if the connection is broken.
 	if trust.clientConn.State() != grpc.Idle &&
@@ -123,13 +107,13 @@ func (trust *NotarySigner) checkServiceHealth(
 	}
 
 	ctx, cancel := context.WithTimeout(context.Background(), timeout)
-	status, err := check(ctx, &pb.Void{})
+	status, err := trust.kmClient.CheckHealth(ctx, &pb.Void{})
 	defer cancel()
 	if err == nil && len(status.Status) > 0 {
-		return fmt.Errorf("%s not healthy", serviceName)
+		return fmt.Errorf("Trust is not healthy")
 	} else if err != nil && grpc.Code(err) == codes.DeadlineExceeded {
-		return fmt.Errorf("Timed out reaching %s after %s.", serviceName,
-			timeout)
+		return fmt.Errorf(
+			"Timed out reaching trust service after %s.", timeout)
 	}
 	return err
 }
