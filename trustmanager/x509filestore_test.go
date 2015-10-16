@@ -124,6 +124,21 @@ func TestAddCertFromFileX509FileStore(t *testing.T) {
 	}
 }
 
+// TestNewX509FileStoreEmpty verifies the behavior of the Empty function
+func TestNewX509FileStoreEmpty(t *testing.T) {
+	tempDir, err := ioutil.TempDir("", "cert-test")
+	assert.NoError(t, err)
+	defer os.RemoveAll(tempDir)
+
+	store, err := NewX509FileStore(tempDir)
+	assert.NoError(t, err, "failed to create a new X509FileStore: %v", store)
+	assert.True(t, store.Empty())
+
+	err = store.AddCertFromFile("../fixtures/root-ca.crt")
+	assert.NoError(t, err, "failed to add certificate from file")
+	assert.False(t, store.Empty())
+}
+
 func TestAddCertFromPEMX509FileStore(t *testing.T) {
 	b, err := ioutil.ReadFile("../fixtures/root-ca.crt")
 	if err != nil {

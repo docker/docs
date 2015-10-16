@@ -3,7 +3,8 @@ package utils
 import (
 	"crypto/rand"
 	"crypto/tls"
-	"crypto/x509"
+	"fmt"
+	"os"
 
 	"github.com/docker/notary/trustmanager"
 )
@@ -12,7 +13,7 @@ import (
 // and optionally client authentication.  Note that a tls configuration is
 // constructed that either requires and verifies client authentication or
 // doesn't deal with client certs at all. Nothing in the middle.
-func ConfigureServerTLS(serverCert string, serverKey string, clientAuth bool, caCert string) (*tls.Config, error) {
+func ConfigureServerTLS(serverCert string, serverKey string, clientAuth bool, caCertDir string) (*tls.Config, error) {
 	keypair, err := tls.LoadX509KeyPair(serverCert, serverKey)
 	if err != nil {
 		return nil, err
@@ -37,14 +38,24 @@ func ConfigureServerTLS(serverCert string, serverKey string, clientAuth bool, ca
 
 	if clientAuth {
 		tlsConfig.ClientAuth = tls.RequireAndVerifyClientCert
-		if caCert != "" {
-			cert, err := trustmanager.LoadCertFromFile(caCert)
+		if caCertDir != "" {
+			// Check to see if the given directory exists
+			fi, err := os.Stat(caCertDir)
 			if err != nil {
 				return nil, err
 			}
-			caPool := x509.NewCertPool()
-			caPool.AddCert(cert)
-			tlsConfig.ClientCAs = caPool
+			if !fi.IsDir() {
+				return nil, fmt.Errorf("No such directory: %s", caCertDir)
+			}
+
+			certStore, err := trustmanager.NewX509FileStore(caCertDir)
+			if err != nil {
+				return nil, err
+			}
+			if certStore.Empty() {
+				return nil, fmt.Errorf("No certificates in %s", caCertDir)
+			}
+			tlsConfig.ClientCAs = certStore.GetCertificatePool()
 		}
 	}
 
