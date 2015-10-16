@@ -108,11 +108,12 @@ func main() {
 	var trust signed.CryptoService
 	if viper.GetString("trust_service.type") == "remote" {
 		logrus.Info("Using remote signing service")
-		trust = signer.NewNotarySigner(
+		notarySigner := signer.NewNotarySigner(
 			viper.GetString("trust_service.hostname"),
 			viper.GetString("trust_service.port"),
 			viper.GetString("trust_service.tls_ca_file"),
 		)
+		trust = notarySigner
 		minute := 1 * time.Minute
 		health.RegisterPeriodicFunc(
 			"Trust operational",
@@ -120,7 +121,7 @@ func main() {
 			// exactly unheatlthy, so always return healthy and just log an
 			// error.
 			func() error {
-				err := trust.(*signer.NotarySigner).CheckHealth(minute)
+				err := notarySigner.CheckHealth(minute)
 				if err != nil {
 					logrus.Error("Trust not fully operational: ", err.Error())
 				}

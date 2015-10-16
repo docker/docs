@@ -1,7 +1,6 @@
 package signer
 
 import (
-	"errors"
 	"fmt"
 	"net"
 	"time"
@@ -120,7 +119,7 @@ func (trust *NotarySigner) checkServiceHealth(
 	// Do not bother starting checking at all if the connection is broken.
 	if trust.clientConn.State() != grpc.Idle &&
 		trust.clientConn.State() != grpc.Ready {
-		return errors.New("Not currently connected to trust server.")
+		return fmt.Errorf("Not currently connected to trust server.")
 	}
 
 	ctx, cancel := context.WithTimeout(context.Background(), timeout)
