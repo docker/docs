@@ -113,21 +113,20 @@ func main() {
 			viper.GetString("trust_service.port"),
 			viper.GetString("trust_service.tls_ca_file"),
 		)
+		minute := 1 * time.Minute
 		health.RegisterPeriodicFunc(
 			"Trust operational",
 			// If the trust service fails, the server is degraded but not
 			// exactly unheatlthy, so always return healthy and just log an
 			// error.
 			func() error {
-				logrus.Info("Getting health")
-				err := trust.(*signer.NotarySigner).CheckHealth(5)
-				logrus.Info("Got health")
+				err := trust.(*signer.NotarySigner).CheckHealth(minute)
 				if err != nil {
 					logrus.Error("Trust not fully operational: ", err.Error())
 				}
 				return nil
 			},
-			time.Second*5)
+			minute)
 	} else {
 		logrus.Info("Using local signing service")
 		trust = signed.NewEd25519()

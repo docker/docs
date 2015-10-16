@@ -11,6 +11,7 @@ import (
 	"github.com/endophage/gotuf/data"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 )
 
@@ -99,9 +100,9 @@ func (trust *NotarySigner) GetKey(keyid string) data.PublicKey {
 // CheckHealth returns true if trust is healthy - that is if it can connect
 // to the trust server, and both the key management and signer services are
 // healthy
-func (trust *NotarySigner) CheckHealth(timeout int) error {
+func (trust *NotarySigner) CheckHealth(timeout time.Duration) error {
 	if e := trust.checkServiceHealth(
-		"Key manager", trust.kmClient.CheckHealth, timeout); e != nil {
+		"Key Manager", trust.kmClient.CheckHealth, timeout); e != nil {
 		return e
 	}
 	return trust.checkServiceHealth(
@@ -114,31 +115,22 @@ type rpcHealthCheck func(
 // Generalized function that can check the health of both the signer client
 // and the key management client.
 func (trust *NotarySigner) checkServiceHealth(
-	serviceName string, check rpcHealthCheck, timeout int) error {
+	serviceName string, check rpcHealthCheck, timeout time.Duration) error {
 
-	// Do not bother starting goroutine if the connection is broken.
+	// Do not bother starting checking at all if the connection is broken.
 	if trust.clientConn.State() != grpc.Idle &&
 		trust.clientConn.State() != grpc.Ready {
 		return errors.New("Not currently connected to trust server.")
 	}
 
-	// We still want to time out getting health, because the connection could
-	// have disconnected sometime between when we checked the connection and
-	// when we try to make an RPC call.
-	channel := make(chan error, 1)
-	go func() {
-		status, err := check(context.Background(), &pb.Void{})
-		if len(status.Status) > 0 {
-			err = fmt.Errorf("%s not healthy", serviceName)
-		}
-		channel <- err
-	}()
-	var returnErr error
-	select {
-	case err := <-channel:
-		returnErr = err
-	case <-time.After(time.Second * time.Duration(timeout)):
-		returnErr = fmt.Errorf("Timed out connecting to %s after %s", serviceName, timeout)
+	ctx, cancel := context.WithTimeout(context.Background(), timeout)
+	status, err := check(ctx, &pb.Void{})
+	defer cancel()
+	if err == nil && len(status.Status) > 0 {
+		return fmt.Errorf("%s not healthy", serviceName)
+	} else if err != nil && grpc.Code(err) == codes.DeadlineExceeded {
+		return fmt.Errorf("Timed out reaching %s after %s.", serviceName,
+			timeout)
 	}
-	return returnErr
+	return err
 }
