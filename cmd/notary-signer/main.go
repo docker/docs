@@ -26,10 +26,10 @@ import (
 	"github.com/endophage/gotuf/data"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/miekg/pkcs11"
+	"github.com/spf13/viper"
 
 	"github.com/Sirupsen/logrus"
 	pb "github.com/docker/notary/proto"
-	"github.com/spf13/viper"
 )
 
 const (
@@ -40,16 +40,19 @@ const (
 	pinCode         = "PIN"
 )
 
-var debug bool
-var configFile string
+var (
+	debug      bool
+	configFile string
+	mainViper  = viper.New()
+)
 
 func init() {
 	// set default log level to Error
-	viper.SetDefault("logging", map[string]interface{}{"level": 2})
+	mainViper.SetDefault("logging", map[string]interface{}{"level": 2})
 
-	viper.SetEnvPrefix(envPrefix)
-	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
-	viper.AutomaticEnv()
+	mainViper.SetEnvPrefix(envPrefix)
+	mainViper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
+	mainViper.AutomaticEnv()
 
 	// Setup flags
 	flag.StringVar(&configFile, "config", "", "Path to configuration file")
@@ -57,7 +60,7 @@ func init() {
 }
 
 func passphraseRetriever(keyName, alias string, createNew bool, attempts int) (passphrase string, giveup bool, err error) {
-	passphrase = viper.GetString(strings.ToUpper(alias))
+	passphrase = mainViper.GetString(strings.ToUpper(alias))
 
 	if passphrase == "" {
 		return "", false, errors.New("expected env variable to not be empty: " + alias)
@@ -81,20 +84,20 @@ func main() {
 	ext := filepath.Ext(configFile)
 	configPath := filepath.Dir(configFile)
 
-	viper.SetConfigType(strings.TrimPrefix(ext, "."))
-	viper.SetConfigName(strings.TrimSuffix(filename, ext))
-	viper.AddConfigPath(configPath)
-	err := viper.ReadInConfig()
+	mainViper.SetConfigType(strings.TrimPrefix(ext, "."))
+	mainViper.SetConfigName(strings.TrimSuffix(filename, ext))
+	mainViper.AddConfigPath(configPath)
+	err := mainViper.ReadInConfig()
 	if err != nil {
 		logrus.Error("Viper Error: ", err.Error())
 		logrus.Error("Could not read config at ", configFile)
 		os.Exit(1)
 	}
 
-	logrus.SetLevel(logrus.Level(viper.GetInt("logging.level")))
+	logrus.SetLevel(logrus.Level(mainViper.GetInt("logging.level")))
 
-	certFile := viper.GetString("server.cert_file")
-	keyFile := viper.GetString("server.key_file")
+	certFile := mainViper.GetString("server.cert_file")
+	keyFile := mainViper.GetString("server.key_file")
 	if certFile == "" || keyFile == "" {
 		usage()
 		log.Fatalf("Certificate and key are mandatory")
@@ -117,8 +120,8 @@ func main() {
 
 	cryptoServices := make(signer.CryptoServiceIndex)
 
-	pin := viper.GetString(pinCode)
-	pkcs11Lib := viper.GetString("crypto.pkcs11lib")
+	pin := mainViper.GetString(pinCode)
+	pkcs11Lib := mainViper.GetString("crypto.pkcs11lib")
 	if pkcs11Lib != "" {
 		if pin == "" {
 			log.Fatalf("Using PIN is mandatory with pkcs11")
@@ -131,8 +134,8 @@ func main() {
 		cryptoServices[data.RSAKey] = api.NewRSAHardwareCryptoService(ctx, session)
 	}
 
-	configDBType := strings.ToLower(viper.GetString("storage.backend"))
-	dbURL := viper.GetString("storage.db_url")
+	configDBType := strings.ToLower(mainViper.GetString("storage.backend"))
+	dbURL := mainViper.GetString("storage.db_url")
 	if configDBType != dbType || dbURL == "" {
 		usage()
 		log.Fatalf("Currently only a MySQL database backend is supported.")
@@ -142,7 +145,7 @@ func main() {
 		log.Fatalf("failed to open the database: %s, %v", dbURL, err)
 	}
 
-	defaultAlias := viper.GetString(defaultAliasEnv)
+	defaultAlias := mainViper.GetString(defaultAliasEnv)
 	logrus.Debug("Default Alias: ", defaultAlias)
 	keyStore, err := signer.NewKeyDBStore(passphraseRetriever, defaultAlias, configDBType, dbSQL)
 	if err != nil {
@@ -163,7 +166,7 @@ func main() {
 	ss := &api.SignerServer{CryptoServices: cryptoServices,
 		HealthChecker: health.CheckStatus}
 
-	rpcAddr := viper.GetString("server.grpc_addr")
+	rpcAddr := mainViper.GetString("server.grpc_addr")
 	lis, err := net.Listen("tcp", rpcAddr)
 	if err != nil {
 		log.Fatalf("failed to listen %v", err)
@@ -180,7 +183,7 @@ func main() {
 
 	go grpcServer.Serve(lis)
 
-	httpAddr := viper.GetString("server.http_addr")
+	httpAddr := mainViper.GetString("server.http_addr")
 	if httpAddr == "" {
 		log.Fatalf("Server address is required")
 	}
