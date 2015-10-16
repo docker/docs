@@ -1,7 +1,6 @@
 package server
 
 import (
-	"crypto/rand"
 	"crypto/tls"
 	"fmt"
 	"net"
@@ -42,27 +41,11 @@ func Run(ctx context.Context, addr, tlsCertFile, tlsKeyFile string, trust signed
 	}
 
 	if tlsCertFile != "" && tlsKeyFile != "" {
-		keypair, err := tls.LoadX509KeyPair(tlsCertFile, tlsKeyFile)
+		tlsConfig, err := utils.ConfigureServerTLS(
+			tlsCertFile, tlsKeyFile, false, "")
 		if err != nil {
 			return err
 		}
-		tlsConfig := &tls.Config{
-			MinVersion:               tls.VersionTLS12,
-			PreferServerCipherSuites: true,
-			CipherSuites: []uint16{
-				tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
-				tls.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
-				tls.TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,
-				tls.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,
-				tls.TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,
-				tls.TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,
-				tls.TLS_RSA_WITH_AES_128_CBC_SHA,
-				tls.TLS_RSA_WITH_AES_256_CBC_SHA,
-			},
-			Certificates: []tls.Certificate{keypair},
-			Rand:         rand.Reader,
-		}
-
 		logrus.Info("Enabling TLS")
 		lsnr = tls.NewListener(lsnr, tlsConfig)
 	} else if tlsCertFile != "" || tlsKeyFile != "" {
