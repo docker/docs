@@ -5,12 +5,13 @@ These instructions explain how to install Orca. An Orca installation consists of
 - [Plan your installation](#plan-your-installation)
 - [Step 1: Verify you have the prerequisites](#step-1-verify-you-have-the-prerequisites)
 - [Step 2: Configure your network for Orca](#step-2-configure-your-network-for-orca)
-- [Step 2: Install Docker Engine v1.9](#step-2-install-docker-engine-v19)
-- [Step 3: (optional) Create user-named volumes](#step-3-optional-create-user-named-volumes)
-- [Step 4: Install the Orca server](#step-4-install-the-orca-server)
-- [Step 5: Set up certs for the Docker CLI](#step-5-set-up-certs-for-the-docker-cli)
-- [Step 6: Add a Node to the Orca cluster](#step-6-add-a-node-to-the-orca-cluster)
-- [Uninstalling](#uninstalling)
+- [Step 3: Install Docker Engine v1.9](#step-3-install-docker-engine-v19)
+- [Step 4: (optional) Create user-named volumes](#step-4-optional-create-user-named-volumes)
+- [Step 5: Install the Orca server](#step-5-install-the-orca-server)
+- [Step 6: Set up certs for the Docker CLI](#step-6-set-up-certs-for-the-docker-cli)
+- [Step 7: Add a Node to the Orca cluster](#step-7-add-a-node-to-the-orca-cluster)
+- [Uninstall](#uninstall)
+- [Block Mixpanel analytics](#block-mixpanel-analytics)
 - [Installing with your own certificates](#installing-with-your-own-certificates)
 - [Where to go next](#where-to-go-next)
 
@@ -34,6 +35,8 @@ This install documentation describes the default installation and the
 customization steps.  Customize steps are identified with the keyword
 (optional). Make sure you skip these steps when doing the default installation
 in your sandbox.
+
+The Orca BETA program makes use of Mixpanel to collect analytics. This feature collects data on your usage of Orca and returns it to Docker. The information is entirely anonymous and does not identify your Company or users. Currently, you cannot turn the collection off but you can block the outgoing messaging. Later in this documentation [XXX](#XXX) explains how.
 
 ## Step 1: Verify you have the prerequisites
 
@@ -63,7 +66,7 @@ The communication between the server, nodes, and key value store is all protecte
 
 Finally, you can specify a different port for the Swarm manager if you need to. These instructions assume you are using the default `2376` port.
 
-## Step 2: Install Docker Engine v1.9
+## Step 3: Install Docker Engine v1.9
 
 The BETA program requires that you install the 1.9.0-rc1 version of Docker Engine. Follow the instructions for your particular operating system and ensure you are pointing at the proper repo.
 
@@ -91,7 +94,6 @@ instructions](http://docs.docker.com/installation/ubuntulinux/) to refer to this
 repo to install:
 
 ```
-# Ubuntu Trusty
 deb https://apt.dockerproject.org/repo ubuntu-trusty testing
 ```
 
@@ -111,7 +113,7 @@ gpgkey=https://yum.dockerproject.org/gpg
 EOF
 ```
 
-## Step 3: (optional) Create user-named volumes
+## Step 4: (optional) Create user-named volumes
 
 Orca uses named volumes for persistence of user data.  By default, the
 `orca-bootstrap` installer creates for you. It uses the default volume driver and flags. The first time you install, we recommend you skip this step and try it later, on another install. Later, try an install where your try the option to use custom volume driver and create your own volumes.
@@ -128,7 +130,7 @@ If you choose this option, create your volumes prior to installing Orca. The vol
 | `orca-kv`               | Key value store persistence.                                                         |
 
 
-## Step 4: Install the Orca server
+## Step 5: Install the Orca server
 
 In this step you install the Orca server. The server includes a running Swarm manager and node as well. To review the installation options before you install, use the following command:
 
@@ -183,7 +185,7 @@ When you have the information you'll be prompted for, do the following to instal
     ![](dashboard.png)
 
 
-## Step 5: Set up certs for the Docker CLI
+## Step 6: Set up certs for the Docker CLI
 
 The first thing you probably want to do is download a client bundle.  The bundle contains the certificates user needs to run the `docker` clients against the Orca server and nodes.
 
@@ -231,7 +233,7 @@ The first thing you probably want to do is download a client bundle.  The bundle
         swarm_master=tcp://10.0.0.32:3376
 
 
-## Step 6: Add a Node to the Orca cluster
+## Step 7: Add a Node to the Orca cluster
 
 In this step you install an Orca nodes using the `orca-bootstrap join` subcommand. Repeat the instal for each node you want to add. To review join options before installing the node use the following:
 
@@ -282,7 +284,7 @@ When you have the information you'll be prompted for, do the following to instal
       ![](nodes.png)
 
 
-# Uninstalling
+## Uninstall
 
 The installer can also uninstall Orca from the server and the nodes. To see the uninstall options before you uninstall, use the following:
 
@@ -303,6 +305,18 @@ To uninstall, do the following:
           uninstall
 
 3. Repeat the uninstall on each node making sure to save the server till last.
+
+## Block Mixpanel analytics
+
+To block the outflow of Mixplanel analytic data to Docker, do the following:
+
+1. Log into the system running the Orca server.
+
+2. Add a rule to drop the forward to port 80.
+
+        $ iptables -I FORWARD -p tcp --dport 80 -j DROP
+
+Reboots unset this iptables chain, so it is a good idea to add this command to the server's startup script.
 
 ## Installing with your own certificates
 
@@ -328,7 +342,7 @@ through the UI.
 
 The first time you install, we recommend you skip user-supplied certs and use the default certificates instead. Later, do a second install and try the option to use your own certs.
 
-## Configure user-supplied Certificates
+### Configure user-supplied Certificates
 
 To install Orca with your own external root CA, you create a named volume called
 **orca-server-certs** on the same system where you plan to install the Orca
