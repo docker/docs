@@ -1,20 +1,29 @@
 package signer
 
 import (
+	"fmt"
 	"net"
+	"time"
 
 	"github.com/Sirupsen/logrus"
 	pb "github.com/docker/notary/proto"
 	"github.com/endophage/gotuf/data"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 )
 
+// The only thing needed from grpc.ClientConn is it's state.
+type checkableConnectionState interface {
+	State() grpc.ConnectivityState
+}
+
 // NotarySigner implements a RPC based Trust service that calls the Notary-signer Service
 type NotarySigner struct {
-	kmClient pb.KeyManagementClient
-	sClient  pb.SignerClient
+	kmClient   pb.KeyManagementClient
+	sClient    pb.SignerClient
+	clientConn checkableConnectionState
 }
 
 // NewNotarySigner is a convinience method that returns NotarySigner
@@ -34,8 +43,9 @@ func NewNotarySigner(hostname string, port string, tlscafile string) *NotarySign
 	kmClient := pb.NewKeyManagementClient(conn)
 	sClient := pb.NewSignerClient(conn)
 	return &NotarySigner{
-		kmClient: kmClient,
-		sClient:  sClient,
+		kmClient:   kmClient,
+		sClient:    sClient,
+		clientConn: conn,
 	}
 }
 
@@ -84,4 +94,26 @@ func (trust *NotarySigner) GetKey(keyid string) data.PublicKey {
 		return nil
 	}
 	return data.NewPublicKey(data.KeyAlgorithm(publicKey.KeyInfo.Algorithm.Algorithm), publicKey.PublicKey)
+}
+
+// CheckHealth checks the health of one of the clients, since both clients run
+// from the same GRPC server.
+func (trust *NotarySigner) CheckHealth(timeout time.Duration) error {
+
+	// Do not bother starting checking at all if the connection is broken.
+	if trust.clientConn.State() != grpc.Idle &&
+		trust.clientConn.State() != grpc.Ready {
+		return fmt.Errorf("Not currently connected to trust server.")
+	}
+
+	ctx, cancel := context.WithTimeout(context.Background(), timeout)
+	status, err := trust.kmClient.CheckHealth(ctx, &pb.Void{})
+	defer cancel()
+	if err == nil && len(status.Status) > 0 {
+		return fmt.Errorf("Trust is not healthy")
+	} else if err != nil && grpc.Code(err) == codes.DeadlineExceeded {
+		return fmt.Errorf(
+			"Timed out reaching trust service after %s.", timeout)
+	}
+	return err
 }

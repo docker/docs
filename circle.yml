@@ -6,7 +6,7 @@ machine:
 
   post:
   # Install many go versions
-    - gvm install go1.4.2 -B --name=stable
+    - gvm install go1.5.1 -B --name=stable
 
   environment:
   # Convenient shortcuts to "common" locations

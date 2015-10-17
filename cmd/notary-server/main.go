@@ -9,9 +9,11 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/bugsnag/bugsnag-go"
+	"github.com/docker/distribution/health"
 	_ "github.com/docker/distribution/registry/auth/htpasswd"
 	_ "github.com/docker/distribution/registry/auth/token"
 	"github.com/endophage/gotuf/signed"
@@ -106,11 +108,26 @@ func main() {
 	var trust signed.CryptoService
 	if viper.GetString("trust_service.type") == "remote" {
 		logrus.Info("Using remote signing service")
-		trust = signer.NewNotarySigner(
+		notarySigner := signer.NewNotarySigner(
 			viper.GetString("trust_service.hostname"),
 			viper.GetString("trust_service.port"),
 			viper.GetString("trust_service.tls_ca_file"),
 		)
+		trust = notarySigner
+		minute := 1 * time.Minute
+		health.RegisterPeriodicFunc(
+			"Trust operational",
+			// If the trust service fails, the server is degraded but not
+			// exactly unheatlthy, so always return healthy and just log an
+			// error.
+			func() error {
+				err := notarySigner.CheckHealth(minute)
+				if err != nil {
+					logrus.Error("Trust not fully operational: ", err.Error())
+				}
+				return nil
+			},
+			minute)
 	} else {
 		logrus.Info("Using local signing service")
 		trust = signed.NewEd25519()
@@ -124,6 +141,8 @@ func main() {
 			logrus.Fatal("Error starting DB driver: ", err.Error())
 			return // not strictly needed but let's be explicit
 		}
+		health.RegisterPeriodicFunc(
+			"DB operational", store.CheckHealth, time.Second*60)
 		ctx = context.WithValue(ctx, "metaStore", store)
 	} else {
 		logrus.Debug("Using memory backend")
