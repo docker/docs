@@ -35,8 +35,8 @@ func makeTempCertDir(t *testing.T) string {
 	return tempDir
 }
 
-// TestTLSConfigFailsIfUnableToLoadCerts fails if unable to load either of the
-// server files or the client cert info
+// If the cert files and directory are provided but are invalid, an error is
+// returned.
 func TestConfigServerTLSFailsIfUnableToLoadCerts(t *testing.T) {
 	tempDir := makeTempCertDir(t)
 
@@ -50,9 +50,8 @@ func TestConfigServerTLSFailsIfUnableToLoadCerts(t *testing.T) {
 	}
 }
 
-// TestConfigServerTLSServerCertsOnly returns a valid tls config with the
-// provided server certificate, and since clientAuth was false, no client auth
-// or CAs configured.
+// If server cert and key are provided, and client auth is disabled, then
+// a valid tls.Config is returned with ClientAuth set to NoClientCert
 func TestConfigServerTLSServerCertsOnly(t *testing.T) {
 	keypair, err := tls.LoadX509KeyPair(ServerCert, ServerKey)
 	assert.NoError(t, err)
@@ -65,10 +64,10 @@ func TestConfigServerTLSServerCertsOnly(t *testing.T) {
 	assert.Nil(t, tlsConfig.ClientCAs)
 }
 
-// TestConfigServerTLSNoCACertsIfNoClientAuth returns a valid tls config with
-// the provided server certificate, and since clientAuth was false, no client
-// auth or CAs configured even though a client CA cert was provided.
-func TestConfigServerTLSNoCACertsIfNoClientAuth(t *testing.T) {
+// If server cert and key are provided, and client cert directory is provided,
+// a valid tls.Config is returned with the clientCAs set to the certs in that
+// directory.
+func TestConfigServerTLSWithCACerts(t *testing.T) {
 	tempDir := makeTempCertDir(t)
 	keypair, err := tls.LoadX509KeyPair(ServerCert, ServerKey)
 	assert.NoError(t, err)
@@ -78,12 +77,13 @@ func TestConfigServerTLSNoCACertsIfNoClientAuth(t *testing.T) {
 	assert.Equal(t, []tls.Certificate{keypair}, tlsConfig.Certificates)
 	assert.True(t, tlsConfig.PreferServerCipherSuites)
 	assert.Equal(t, tls.NoClientCert, tlsConfig.ClientAuth)
-	assert.Nil(t, tlsConfig.ClientCAs)
+	assert.Len(t, tlsConfig.ClientCAs.Subjects(), 1)
 }
 
-// TestTLSConfigClientAuthEnabledNoCACerts returns a valid tls config with the
-// provided server certificate client auth enabled, but no CAs configured.
-func TestTLSConfigClientAuthEnabledNoCACerts(t *testing.T) {
+// If server cert and key are provided, and client auth is disabled, then
+// a valid tls.Config is returned with ClientAuth set to
+// RequireAndVerifyClientCert
+func TestConfigServerTLSClientAuthEnabled(t *testing.T) {
 	keypair, err := tls.LoadX509KeyPair(ServerCert, ServerKey)
 	assert.NoError(t, err)
 
@@ -95,17 +95,54 @@ func TestTLSConfigClientAuthEnabledNoCACerts(t *testing.T) {
 	assert.Nil(t, tlsConfig.ClientCAs)
 }
 
-// TestTLSConfigClientAuthEnabledWithCACert returns a valid tls config with the
-// provided server certificate, client auth enabled, and a client CA.
-func TestTLSConfigClientAuthEnabledWithCACert(t *testing.T) {
-	tempDir := makeTempCertDir(t)
+// The skipVerify boolean gets set on the tls.Config's InsecureSkipBoolean
+func TestConfigClientTLSNoVerify(t *testing.T) {
+	for _, skip := range []bool{true, false} {
+		tlsConfig, err := ConfigureClientTLS("", skip, "", "")
+		assert.NoError(t, err)
+		assert.Nil(t, tlsConfig.Certificates)
+		assert.Equal(t, skip, tlsConfig.InsecureSkipVerify)
+		assert.Nil(t, tlsConfig.RootCAs)
+	}
+}
+
+// The RootCA is set if it is provided and valid
+func TestConfigClientTLSValidRootCA(t *testing.T) {
+	tlsConfig, err := ConfigureClientTLS(RootCA, false, "", "")
+	assert.NoError(t, err)
+	assert.Nil(t, tlsConfig.Certificates)
+	assert.Equal(t, false, tlsConfig.InsecureSkipVerify)
+	assert.Len(t, tlsConfig.RootCAs.Subjects(), 1)
+}
+
+// An error is returned if a root CA is provided but not valid
+func TestConfigClientTLSInValidRootCA(t *testing.T) {
+	tlsConfig, err := ConfigureClientTLS("not-a-file.crt", false, "", "")
+	assert.Error(t, err)
+	assert.Nil(t, tlsConfig)
+}
+
+// An error is returned if either the client cert or the key are provided
+// but invalid.
+func TestConfigClientTLSClientCertOrKeyInvalid(t *testing.T) {
+	for i := 0; i < 2; i++ {
+		files := []string{ServerCert, ServerKey}
+		files[i] = "not-a-file.crt"
+		tlsConfig, err := ConfigureClientTLS("", false, files[0], files[1])
+		assert.Error(t, err)
+		assert.Nil(t, tlsConfig)
+	}
+}
+
+// The certificate is set if the client cert and client key are provided and
+// valid.
+func TestConfigClientTLSValidClientCertAndKey(t *testing.T) {
 	keypair, err := tls.LoadX509KeyPair(ServerCert, ServerKey)
 	assert.NoError(t, err)
 
-	tlsConfig, err := ConfigureServerTLS(ServerCert, ServerKey, true, tempDir)
+	tlsConfig, err := ConfigureClientTLS("", false, ServerCert, ServerKey)
 	assert.NoError(t, err)
 	assert.Equal(t, []tls.Certificate{keypair}, tlsConfig.Certificates)
-	assert.True(t, tlsConfig.PreferServerCipherSuites)
-	assert.Equal(t, tls.RequireAndVerifyClientCert, tlsConfig.ClientAuth)
-	assert.Equal(t, 1, len(tlsConfig.ClientCAs.Subjects()))
+	assert.Equal(t, false, tlsConfig.InsecureSkipVerify)
+	assert.Nil(t, tlsConfig.RootCAs)
 }

@@ -3,6 +3,7 @@ package utils
 import (
 	"crypto/rand"
 	"crypto/tls"
+	"crypto/x509"
 	"fmt"
 	"os"
 
@@ -38,25 +39,56 @@ func ConfigureServerTLS(serverCert string, serverKey string, clientAuth bool, ca
 
 	if clientAuth {
 		tlsConfig.ClientAuth = tls.RequireAndVerifyClientCert
-		if caCertDir != "" {
-			// Check to see if the given directory exists
-			fi, err := os.Stat(caCertDir)
-			if err != nil {
-				return nil, err
-			}
-			if !fi.IsDir() {
-				return nil, fmt.Errorf("No such directory: %s", caCertDir)
-			}
+	}
 
-			certStore, err := trustmanager.NewX509FileStore(caCertDir)
-			if err != nil {
-				return nil, err
-			}
-			if certStore.Empty() {
-				return nil, fmt.Errorf("No certificates in %s", caCertDir)
-			}
-			tlsConfig.ClientCAs = certStore.GetCertificatePool()
+	if caCertDir != "" {
+		// Check to see if the given directory exists
+		fi, err := os.Stat(caCertDir)
+		if err != nil {
+			return nil, err
 		}
+		if !fi.IsDir() {
+			return nil, fmt.Errorf("No such directory: %s", caCertDir)
+		}
+
+		certStore, err := trustmanager.NewX509FileStore(caCertDir)
+		if err != nil {
+			return nil, err
+		}
+		if certStore.Empty() {
+			return nil, fmt.Errorf("No certificates in %s", caCertDir)
+		}
+		tlsConfig.ClientCAs = certStore.GetCertificatePool()
+	}
+
+	return tlsConfig, nil
+}
+
+// ConfigureClientTLS generates a tls configuration for clients using the
+// provided.
+func ConfigureClientTLS(rootCA string, skipVerify bool, clientCert string, clientKey string) (*tls.Config, error) {
+	tlsConfig := &tls.Config{
+		InsecureSkipVerify: skipVerify,
+		MinVersion:         tls.VersionTLS12,
+	}
+
+	if rootCA != "" {
+		rootCert, err := trustmanager.LoadCertFromFile(rootCA)
+		if err != nil {
+			return nil, fmt.Errorf(
+				"Could not load root ca file. %s", err.Error())
+		}
+		rootPool := x509.NewCertPool()
+		rootPool.AddCert(rootCert)
+		tlsConfig.RootCAs = rootPool
+	}
+
+	if clientCert != "" && clientKey != "" {
+		keypair, err := tls.LoadX509KeyPair(clientCert, clientKey)
+		if err != nil {
+			return nil, err
+		}
+		tlsConfig.Certificates = []tls.Certificate{keypair}
 	}
 
 	return tlsConfig, nil
