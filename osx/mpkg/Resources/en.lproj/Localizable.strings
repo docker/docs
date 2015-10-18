@@ -4,7 +4,7 @@
 'choiceDockerCLI_msg' = 'Installs the Docker Client for Mac OS X into /usr/local/bin/';
 
 'choiceDockerMachineCLI_title' = 'Docker Machine %DOCKERMACHINE_VERSION%';
-'choiceDockerMachineCLI_msg' = 'Installs the Docker Machine binary into /usr/local/bin/';
+'choiceDockerMachineCLI_msg' = 'Installs the Docker Machine binaries into /usr/local/bin/';
 
 'choiceDockerComposeCLI_title' = 'Docker Compose %DOCKERCOMPOSE_VERSION%';
 'choiceDockerComposeCLI_msg' = 'Installs the Docker Compose binary into /usr/local/bin/';

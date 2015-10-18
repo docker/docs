@@ -10,5 +10,5 @@ chown -R $CONSOLE_USER:staff $CONSOLE_USER_HOME/.docker
 
 # Fix permissions on binaries
 chown -R $CONSOLE_USER:admin /usr/local/bin/docker || true
-chown -R $CONSOLE_USER:admin /usr/local/bin/docker-machine || true
+chown -R $CONSOLE_USER:admin /usr/local/bin/docker-machine* || true
 chown -R $CONSOLE_USER:admin /usr/local/bin/docker-compose || true
