@@ -14,7 +14,7 @@ import (
 // and optionally client authentication.  Note that a tls configuration is
 // constructed that either requires and verifies client authentication or
 // doesn't deal with client certs at all. Nothing in the middle.
-func ConfigureServerTLS(serverCert string, serverKey string, clientAuth bool, caCertDir string) (*tls.Config, error) {
+func ConfigureServerTLS(serverCert, serverKey string, clientAuth bool, caCertDir string) (*tls.Config, error) {
 	keypair, err := tls.LoadX509KeyPair(serverCert, serverKey)
 	if err != nil {
 		return nil, err
@@ -66,10 +66,11 @@ func ConfigureServerTLS(serverCert string, serverKey string, clientAuth bool, ca
 
 // ConfigureClientTLS generates a tls configuration for clients using the
 // provided.
-func ConfigureClientTLS(rootCA string, skipVerify bool, clientCert string, clientKey string) (*tls.Config, error) {
+func ConfigureClientTLS(rootCA, serverName string, skipVerify bool, clientCert, clientKey string) (*tls.Config, error) {
 	tlsConfig := &tls.Config{
 		InsecureSkipVerify: skipVerify,
 		MinVersion:         tls.VersionTLS12,
+		ServerName:         serverName,
 	}
 
 	if rootCA != "" {
