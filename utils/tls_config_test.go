@@ -64,6 +64,17 @@ func TestConfigServerTLSServerCertsOnly(t *testing.T) {
 	assert.Nil(t, tlsConfig.ClientCAs)
 }
 
+// If a valid client cert directory is provided, but it contains no client
+// certs, an error is returned.
+func TestConfigServerTLSWithEmptyCACertDir(t *testing.T) {
+	tempDir, err := ioutil.TempDir("/tmp", "cert-test")
+	assert.NoError(t, err, "couldn't open temp directory")
+
+	tlsConfig, err := ConfigureServerTLS(ServerCert, ServerKey, false, tempDir)
+	assert.Nil(t, tlsConfig)
+	assert.Error(t, err)
+}
+
 // If server cert and key are provided, and client cert directory is provided,
 // a valid tls.Config is returned with the clientCAs set to the certs in that
 // directory.
