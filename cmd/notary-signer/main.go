@@ -1,10 +1,12 @@
 package main
 
 import (
+	"crypto/tls"
 	"database/sql"
 	"errors"
 	_ "expvar"
 	"flag"
+	"fmt"
 	"log"
 	"net"
 	"net/http"
@@ -68,6 +70,30 @@ func passphraseRetriever(keyName, alias string, createNew bool, attempts int) (p
 	return passphrase, false, nil
 }
 
+// parses and sets up the TLS for the signer http + grpc server
+func signerTLS(configuration *viper.Viper, printUsage bool) (*tls.Config, error) {
+	certFile := configuration.GetString("server.cert_file")
+	keyFile := configuration.GetString("server.key_file")
+	if certFile == "" || keyFile == "" {
+		if printUsage {
+			usage()
+		}
+		return nil, fmt.Errorf("Certificate and key are mandatory")
+	}
+
+	clientCAFile := configuration.GetString("server.client_ca_file")
+	tlsConfig, err := utils.ConfigureServerTLS(&utils.ServerTLSOpts{
+		ServerCertFile:    certFile,
+		ServerKeyFile:     keyFile,
+		RequireClientAuth: clientCAFile != "",
+		ClientCAFile:      clientCAFile,
+	})
+	if err != nil {
+		return nil, fmt.Errorf("Unable to set up TLS: %s", err.Error())
+	}
+	return tlsConfig, nil
+}
+
 func main() {
 	flag.Usage = usage
 	flag.Parse()
@@ -95,19 +121,9 @@ func main() {
 
 	logrus.SetLevel(logrus.Level(mainViper.GetInt("logging.level")))
 
-	certFile := mainViper.GetString("server.cert_file")
-	keyFile := mainViper.GetString("server.key_file")
-	if certFile == "" || keyFile == "" {
-		usage()
-		log.Fatalf("Certificate and key are mandatory")
-	}
-
-	tlsConfig, err := utils.ConfigureServerTLS(&utils.ServerTLSOpts{
-		ServerCertFile: certFile,
-		ServerKeyFile:  keyFile,
-	})
+	tlsConfig, err := signerTLS(mainViper, true)
 	if err != nil {
-		logrus.Fatalf("Unable to set up TLS: %s", err.Error())
+		logrus.Fatalf(err.Error())
 	}
 
 	cryptoServices := make(signer.CryptoServiceIndex)
@@ -163,10 +179,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to listen %v", err)
 	}
-	creds, err := credentials.NewServerTLSFromFile(certFile, keyFile)
-	if err != nil {
-		log.Fatalf("failed to generate credentials %v", err)
-	}
+	creds := credentials.NewTLS(tlsConfig)
 	opts := []grpc.ServerOption{grpc.Creds(creds)}
 	grpcServer := grpc.NewServer(opts...)
 
@@ -191,7 +204,7 @@ func main() {
 		log.Println("HTTP server listening on", httpAddr)
 	}
 
-	err = server.ListenAndServeTLS(certFile, keyFile)
+	err = server.ListenAndServe()
 	if err != nil {
 		log.Fatal("HTTP server failed to start:", err)
 	}
