@@ -10,6 +10,22 @@ import (
 	"github.com/docker/notary/trustmanager"
 )
 
+// Client TLS cipher suites (dropping CBC ciphers for client preferred suite set)
+var clientCipherSuites = []uint16{
+	tls.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
+	tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
+}
+
+// Server TLS cipher suites
+var serverCipherSuites = append(clientCipherSuites, []uint16{
+	tls.TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,
+	tls.TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,
+	tls.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,
+	tls.TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,
+	tls.TLS_RSA_WITH_AES_256_CBC_SHA,
+	tls.TLS_RSA_WITH_AES_128_CBC_SHA,
+}...)
+
 // ConfigureServerTLS specifies a set of ciphersuites, the server cert and key,
 // and optionally client authentication.  Note that a tls configuration is
 // constructed that either requires and verifies client authentication or
@@ -23,18 +39,9 @@ func ConfigureServerTLS(serverCert, serverKey string, clientAuth bool, caCertDir
 	tlsConfig := &tls.Config{
 		MinVersion:               tls.VersionTLS12,
 		PreferServerCipherSuites: true,
-		CipherSuites: []uint16{
-			tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
-			tls.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
-			tls.TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,
-			tls.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,
-			tls.TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,
-			tls.TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,
-			tls.TLS_RSA_WITH_AES_128_CBC_SHA,
-			tls.TLS_RSA_WITH_AES_256_CBC_SHA,
-		},
-		Certificates: []tls.Certificate{keypair},
-		Rand:         rand.Reader,
+		CipherSuites:             serverCipherSuites,
+		Certificates:             []tls.Certificate{keypair},
+		Rand:                     rand.Reader,
 	}
 
 	if clientAuth {
@@ -65,11 +72,12 @@ func ConfigureServerTLS(serverCert, serverKey string, clientAuth bool, caCertDir
 }
 
 // ConfigureClientTLS generates a tls configuration for clients using the
-// provided.
+// provided parameters.
 func ConfigureClientTLS(rootCA, serverName string, skipVerify bool, clientCert, clientKey string) (*tls.Config, error) {
 	tlsConfig := &tls.Config{
 		InsecureSkipVerify: skipVerify,
 		MinVersion:         tls.VersionTLS12,
+		CipherSuites:       clientCipherSuites,
 		ServerName:         serverName,
 	}
 
