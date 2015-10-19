@@ -17,7 +17,7 @@ import (
 
 // RSAHardwareCryptoService is an implementation of SigningService
 type RSAHardwareCryptoService struct {
-	keys    map[string]*keys.HSMRSAKey
+	keys    map[string]*keys.HSMKey
 	context *pkcs11.Ctx
 	session pkcs11.SessionHandle
 }
@@ -68,7 +68,7 @@ func (s *RSAHardwareCryptoService) Create(role, algo string) (data.PublicKey, er
 		pkcs11.NewAttribute(pkcs11.CKA_MODULUS, nil),
 	}
 
-	// Retrieve the public-key material to be able to create a new HSMRSAKey
+	// Retrieve the public-key material to be able to create a new HSMKey
 	attr, err := s.context.GetAttributeValue(s.session, pub, template)
 	if err != nil {
 		return nil, errors.New("Failed to get Attribute value.")
@@ -97,7 +97,7 @@ func (s *RSAHardwareCryptoService) Create(role, algo string) (data.PublicKey, er
 	}
 
 	// (diogo): Ideally I would like to return base64 PEM encoded public keys to the client
-	k := keys.NewHSMRSAKey(pubBytes, priv)
+	k := keys.NewHSMKey(pubBytes, priv)
 
 	keyID := k.ID()
 
@@ -190,7 +190,7 @@ func (s *RSAHardwareCryptoService) Sign(keyIDs []string, payload []byte) ([]data
 // NewRSAHardwareCryptoService returns an instance of RSAHardwareCryptoService
 func NewRSAHardwareCryptoService(ctx *pkcs11.Ctx, session pkcs11.SessionHandle) *RSAHardwareCryptoService {
 	return &RSAHardwareCryptoService{
-		keys:    make(map[string]*keys.HSMRSAKey),
+		keys:    make(map[string]*keys.HSMKey),
 		context: ctx,
 		session: session,
 	}

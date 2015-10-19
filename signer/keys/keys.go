@@ -16,48 +16,49 @@ var (
 	ErrFailedKeyGeneration = errors.New("notary-signer: failed to generate new key")
 )
 
-// HSMRSAKey represents the information for an HSMRSAKey with ObjectHandle for private portion
-type HSMRSAKey struct {
-	id      string
-	public  []byte
-	private pkcs11.ObjectHandle
+// HSMKey represents the information for an HSMKey with ObjectHandle for private portion
+type HSMKey struct {
+	id        string
+	algorithm data.KeyAlgorithm
+	public    []byte
+	private   pkcs11.ObjectHandle
 }
 
-// NewHSMRSAKey returns a HSMRSAKey
-func NewHSMRSAKey(public []byte, private pkcs11.ObjectHandle) *HSMRSAKey {
-	return &HSMRSAKey{
+// NewHSMKey returns a HSMKey
+func NewHSMKey(public []byte, private pkcs11.ObjectHandle) *HSMKey {
+	return &HSMKey{
 		public:  public,
 		private: private,
 	}
 }
 
 // Algorithm implements a method of the data.Key interface
-func (rsa *HSMRSAKey) Algorithm() string {
-	return data.RSAKey
+func (k *HSMKey) Algorithm() data.KeyAlgorithm {
+	return k.algorithm
 }
 
 // ID implements a method of the data.Key interface
-func (rsa *HSMRSAKey) ID() string {
-	if rsa.id == "" {
-		pubK := data.NewPublicKey(rsa.Algorithm(), rsa.Public())
-		rsa.id = pubK.ID()
+func (k *HSMKey) ID() string {
+	if k.id == "" {
+		pubK := data.NewPublicKey(k.algorithm, k.public)
+		k.id = pubK.ID()
 	}
-	return rsa.id
+	return k.id
 }
 
 // Public implements a method of the data.Key interface
-func (rsa *HSMRSAKey) Public() []byte {
-	return rsa.public
+func (k *HSMKey) Public() []byte {
+	return k.public
 }
 
 // Private implements a method of the data.PrivateKey interface
-func (rsa *HSMRSAKey) Private() []byte {
+func (k *HSMKey) Private() []byte {
 	// Not possible to return private key bytes from a hardware device
 	return nil
 }
 
-// PKCS11ObjectHandle returns the PKCS11 object handle stored in the HSMRSAKey
+// PKCS11ObjectHandle returns the PKCS11 object handle stored in the HSMKey
 // structure
-func (rsa *HSMRSAKey) PKCS11ObjectHandle() pkcs11.ObjectHandle {
-	return rsa.private
+func (k *HSMKey) PKCS11ObjectHandle() pkcs11.ObjectHandle {
+	return k.private
 }
