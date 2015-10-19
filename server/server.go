@@ -29,7 +29,7 @@ func init() {
 // Run sets up and starts a TLS server that can be cancelled using the
 // given configuration. The context it is passed is the context it should
 // use directly for the TLS server, and generate children off for requests
-func Run(ctx context.Context, addr, tlsCertFile, tlsKeyFile string, trust signed.CryptoService, authMethod string, authOpts interface{}) error {
+func Run(ctx context.Context, addr string, tlsConfig *tls.Config, trust signed.CryptoService, authMethod string, authOpts interface{}) error {
 
 	tcpAddr, err := net.ResolveTCPAddr("tcp", addr)
 	if err != nil {
@@ -41,18 +41,9 @@ func Run(ctx context.Context, addr, tlsCertFile, tlsKeyFile string, trust signed
 		return err
 	}
 
-	if tlsCertFile != "" && tlsKeyFile != "" {
-		tlsConfig, err := utils.ConfigureServerTLS(&utils.ServerTLSOpts{
-			ServerCertFile: tlsCertFile,
-			ServerKeyFile:  tlsKeyFile,
-		})
-		if err != nil {
-			return err
-		}
+	if tlsConfig != nil {
 		logrus.Info("Enabling TLS")
 		lsnr = tls.NewListener(lsnr, tlsConfig)
-	} else if tlsCertFile != "" || tlsKeyFile != "" {
-		return fmt.Errorf("Partial TLS configuration found. Either include both a cert and key file in the configuration, or include neither to disable TLS.")
 	}
 
 	var ac auth.AccessController

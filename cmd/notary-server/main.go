@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crypto/tls"
 	_ "expvar"
 	"flag"
 	"fmt"
@@ -24,6 +25,7 @@ import (
 	"github.com/docker/notary/server"
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/signer"
+	"github.com/docker/notary/utils"
 	"github.com/docker/notary/version"
 	"github.com/spf13/viper"
 )
@@ -44,6 +46,28 @@ func init() {
 	// Setup flags
 	flag.StringVar(&configFile, "config", "", "Path to configuration file")
 	flag.BoolVar(&debug, "debug", false, "Enable the debugging server on localhost:8080")
+}
+
+// optionally sets up TLS for the server - if no TLS configuration is
+// specified, TLS is not enabled.
+func serverTLS(configuration *viper.Viper) (*tls.Config, error) {
+	tlsCertFile := configuration.GetString("server.tls_cert_file")
+	tlsKeyFile := configuration.GetString("server.tls_key_file")
+
+	if tlsCertFile == "" && tlsKeyFile == "" {
+		return nil, nil
+	} else if tlsCertFile == "" || tlsKeyFile == "" {
+		return nil, fmt.Errorf("Partial TLS configuration found. Either include both a cert and key file in the configuration, or include neither to disable TLS.")
+	}
+
+	tlsConfig, err := utils.ConfigureServerTLS(&utils.ServerTLSOpts{
+		ServerCertFile: tlsCertFile,
+		ServerKeyFile:  tlsKeyFile,
+	})
+	if err != nil {
+		return nil, fmt.Errorf("Unable to set up TLS: %s", err.Error())
+	}
+	return tlsConfig, nil
 }
 
 func main() {
@@ -151,12 +175,17 @@ func main() {
 		logrus.Debug("Using memory backend")
 		ctx = context.WithValue(ctx, "metaStore", storage.NewMemStorage())
 	}
+
+	tlsConfig, err := serverTLS(mainViper)
+	if err != nil {
+		logrus.Fatal(err.Error())
+	}
+
 	logrus.Info("Starting Server")
 	err = server.Run(
 		ctx,
 		mainViper.GetString("server.addr"),
-		mainViper.GetString("server.tls_cert_file"),
-		mainViper.GetString("server.tls_key_file"),
+		tlsConfig,
 		trust,
 		mainViper.GetString("auth.type"),
 		mainViper.Get("auth.options"),
