@@ -70,6 +70,30 @@ func serverTLS(configuration *viper.Viper) (*tls.Config, error) {
 	return tlsConfig, nil
 }
 
+// sets up TLS for the GRPC connection to notary-signer
+func grpcTLS(configuration *viper.Viper) (*tls.Config, error) {
+	rootCA := configuration.GetString("trust_service.tls_ca_file")
+	serverName := configuration.GetString("trust_service.hostname")
+	clientCert := configuration.GetString("trust_service.tls_client_cert")
+	clientKey := configuration.GetString("trust_service.tls_client_key")
+
+	if (clientCert == "" && clientKey != "") || (clientCert != "" && clientKey == "") {
+		return nil, fmt.Errorf("Partial TLS configuration found. Either include both a client cert and client key file in the configuration, or include neither.")
+	}
+
+	tlsConfig, err := utils.ConfigureClientTLS(&utils.ClientTLSOpts{
+		RootCAFile:     rootCA,
+		ServerName:     serverName,
+		ClientCertFile: clientCert,
+		ClientKeyFile:  clientKey,
+	})
+	if err != nil {
+		return nil, fmt.Errorf(
+			"Unable to configure TLS to the trust service: %s", err.Error())
+	}
+	return tlsConfig, nil
+}
+
 func main() {
 	flag.Usage = usage
 	flag.Parse()
@@ -135,10 +159,14 @@ func main() {
 	var trust signed.CryptoService
 	if mainViper.GetString("trust_service.type") == "remote" {
 		logrus.Info("Using remote signing service")
+		clientTLS, err := grpcTLS(mainViper)
+		if err != nil {
+			logrus.Fatal(err.Error())
+		}
 		notarySigner := signer.NewNotarySigner(
 			mainViper.GetString("trust_service.hostname"),
 			mainViper.GetString("trust_service.port"),
-			mainViper.GetString("trust_service.tls_ca_file"),
+			clientTLS,
 		)
 		trust = notarySigner
 		minute := 1 * time.Minute

@@ -41,7 +41,7 @@ func TestSignerTLSMissingCertAndOrKey(t *testing.T) {
 	}
 }
 
-// The rest of the functionality of singerTLS depends upon
+// The rest of the functionality of signerTLS depends upon
 // utils.ConfigureServerTLS, so this test just asserts that if successful,
 // the correct tls.Config is returned based on all the configuration parameters
 func TestSignerTLSSuccess(t *testing.T) {
@@ -57,7 +57,7 @@ func TestSignerTLSSuccess(t *testing.T) {
 	assert.NotNil(t, tlsConfig.ClientCAs)
 }
 
-// The rest of the functionality of singerTLS depends upon
+// The rest of the functionality of signerTLS depends upon
 // utils.ConfigureServerTLS, so this test just asserts that if it fails,
 // the error is propogated.
 func TestSignerTLSFailure(t *testing.T) {

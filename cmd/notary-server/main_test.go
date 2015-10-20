@@ -32,6 +32,7 @@ func TestServerTLSMissingCertAndKey(t *testing.T) {
 	assert.Nil(t, tlsConfig)
 }
 
+// Cert and Key either both have to be empty or both have to be provided.
 func TestServerTLSMissingCertAndOrKey(t *testing.T) {
 	configs := []string{
 		fmt.Sprintf(`{"tls_cert_file": "%s"}`, Cert),
@@ -63,7 +64,7 @@ func TestServerTLSSuccess(t *testing.T) {
 	assert.Equal(t, []tls.Certificate{keypair}, tlsConfig.Certificates)
 }
 
-// The rest of the functionality of singerTLS depends upon
+// The rest of the functionality of serverTLS depends upon
 // utils.ConfigureServerTLS, so this test just asserts that if it fails,
 // the error is propogated.
 func TestServerTLSFailure(t *testing.T) {
@@ -74,4 +75,70 @@ func TestServerTLSFailure(t *testing.T) {
 	assert.Error(t, err)
 	assert.Nil(t, tlsConfig)
 	assert.True(t, strings.Contains(err.Error(), "Unable to set up TLS"))
+}
+
+// Client cert and Key either both have to be empty or both have to be
+// provided.
+func TestGrpcTLSMissingCertOrKey(t *testing.T) {
+	configs := []string{
+		fmt.Sprintf(`"tls_client_cert": "%s"`, Cert),
+		fmt.Sprintf(`"tls_client_key": "%s"`, Key),
+	}
+	for _, trustConfig := range configs {
+		jsonConfig := fmt.Sprintf(
+			`{"trust_service": {"hostname": "notary-signer", %s}}`,
+			trustConfig)
+		config := configure([]byte(jsonConfig))
+		tlsConfig, err := grpcTLS(config)
+		assert.Error(t, err)
+		assert.Nil(t, tlsConfig)
+		assert.True(t,
+			strings.Contains(err.Error(), "Partial TLS configuration found."))
+	}
+}
+
+// If no TLS configuration is provided for the host server, a tls config with
+// the provided serverName is still returned.
+func TestGrpcTLSNoConfig(t *testing.T) {
+	tlsConfig, err := grpcTLS(
+		configure([]byte(`{"trust_service": {"hostname": "notary-signer"}}`)))
+	assert.NoError(t, err)
+	assert.Equal(t, "notary-signer", tlsConfig.ServerName)
+	assert.Nil(t, tlsConfig.RootCAs)
+	assert.Nil(t, tlsConfig.Certificates)
+}
+
+// The rest of the functionality of grpcTLS depends upon
+// utils.ConfigureClientTLS, so this test just asserts that if successful,
+// the correct tls.Config is returned based on all the configuration parameters
+func TestGrpcTLSSuccess(t *testing.T) {
+	keypair, err := tls.LoadX509KeyPair(Cert, Key)
+	assert.NoError(t, err, "Unable to load cert and key for testing")
+
+	config := fmt.Sprintf(
+		`{"trust_service": {
+            "hostname": "notary-server",
+            "tls_client_cert": "%s",
+            "tls_client_key": "%s"}}`,
+		Cert, Key)
+	tlsConfig, err := grpcTLS(configure([]byte(config)))
+	assert.NoError(t, err)
+	assert.Equal(t, []tls.Certificate{keypair}, tlsConfig.Certificates)
+}
+
+// The rest of the functionality of grpcTLS depends upon
+// utils.ConfigureServerTLS, so this test just asserts that if it fails,
+// the error is propogated.
+func TestGrpcTLSFailure(t *testing.T) {
+	config := fmt.Sprintf(
+		`{"trust_service": {
+            "hostname": "notary-server",
+            "tls_client_cert": "no-exist",
+            "tls_client_key": "%s"}}`,
+		Key)
+	tlsConfig, err := grpcTLS(configure([]byte(config)))
+	assert.Error(t, err)
+	assert.Nil(t, tlsConfig)
+	assert.True(t, strings.Contains(err.Error(),
+		"Unable to configure TLS to the trust service"))
 }
