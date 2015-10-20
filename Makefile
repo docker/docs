@@ -15,6 +15,7 @@ GO_LDFLAGS=-ldflags "-w $(CTIMEVAR)"
 GO_LDFLAGS_STATIC=-ldflags "-w $(CTIMEVAR) -extldflags -static"
 GOOSES = darwin freebsd linux
 GOARCHS = amd64
+GO_EXC = go
 NOTARYDIR := /go/src/github.com/docker/notary
 
 # go cover test variables
@@ -64,13 +65,14 @@ build:
 	@echo "+ $@"
 	@go build -v ${GO_LDFLAGS} ./...
 
+test: OPTS =
 test:
-	@echo "+ $@"
-	@go test -test.short ./...
+	@echo "+ $@ OPTS=${OPTS}"
+	go test $(addprefix -,${OPTS}) -test.short ./...
 
 test-full: vet lint
 	@echo "+ $@"
-	@go test -v ./...
+	go test -v ./...
 
 protos:
 	@protoc --go_out=plugins=grpc:. proto/*.proto
@@ -78,23 +80,40 @@ protos:
 
 
 define gocover
-go test -covermode="$(COVERMODE)" -coverprofile="$(COVERDIR)/$(subst /,-,$(1)).cover" "$(1)";
+$(GO_EXC) test $(addprefix -,${OPTS}) -covermode="$(COVERMODE)" -coverprofile="$(COVERDIR)/$(subst /,-,$(1)).cover" "$(1)";
 endef
 
-cover:
+gen-cover:
+	@rm -rf "$(COVERDIR)"
 	@mkdir -p "$(COVERDIR)"
 	$(foreach PKG,$(PKGS),$(call gocover,$(PKG)))
 	@echo "mode: $(COVERMODE)" > "$(COVERPROFILE)"
+
+cover: gen-cover
 	@grep -h -v "^mode:" "$(COVERDIR)"/*.cover >> "$(COVERPROFILE)"
 	@go tool cover -func="$(COVERPROFILE)"
 	@go tool cover -html="$(COVERPROFILE)"
+
+
+define formatcov
+	echo '<<<<<< EOF' | cat $(1) - >> coverage.txt;
+endef
+
+ci: OPTS = race test.short
+	GO_EXC = godep go
+ci: gen-cover
+
+aggregate-cover:
+	@rm -f coverage.out
+	@echo "" > coverage.txt
+	$(foreach COVFILE, $(shell find $(COVERDIR) -type f -name *.cover),$(call formatcov,$(COVFILE)))
+
 
 clean-protos:
 	@rm proto/*.pb.go
 
 binaries: ${PREFIX}/bin/notary-server ${PREFIX}/bin/notary ${PREFIX}/bin/notary-signer
 	@echo "+ $@"
-
 
 define template
 mkdir -p ${PREFIX}/cross/$(1)/$(2);
