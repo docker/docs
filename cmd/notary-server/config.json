@@ -8,8 +8,10 @@
 	  "type": "remote",
 	  "hostname": "notarysigner",
 	  "port": "7899",
-	  "tls_ca_file": "./fixtures/root-ca.crt",			
-	  "key_algorithm": "ecdsa"
+	  "tls_ca_file": "./fixtures/root-ca.crt",
+	  "key_algorithm": "ecdsa",
+	  "tls_client_cert": "./fixtures/notary-server.crt",
+	  "tls_client_key": "./fixtures/notary-server.key"
 	},
 	"logging": {
 		"level": "debug"
