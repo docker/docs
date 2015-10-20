@@ -31,12 +31,15 @@ import (
 // DebugAddress is the debug server address to listen on
 const DebugAddress = "localhost:8080"
 
-var debug bool
-var configFile string
+var (
+	debug      bool
+	configFile string
+	mainViper  = viper.New()
+)
 
 func init() {
 	// set default log level to Error
-	viper.SetDefault("logging", map[string]interface{}{"level": 2})
+	mainViper.SetDefault("logging", map[string]interface{}{"level": 2})
 
 	// Setup flags
 	flag.StringVar(&configFile, "config", "", "Path to configuration file")
@@ -60,22 +63,22 @@ func main() {
 	ext := filepath.Ext(configFile)
 	configPath := filepath.Dir(configFile)
 
-	viper.SetConfigType(strings.TrimPrefix(ext, "."))
-	viper.SetConfigName(strings.TrimSuffix(filename, ext))
-	viper.AddConfigPath(configPath)
+	mainViper.SetConfigType(strings.TrimPrefix(ext, "."))
+	mainViper.SetConfigName(strings.TrimSuffix(filename, ext))
+	mainViper.AddConfigPath(configPath)
 
 	// Automatically accept configuration options from the environment
-	viper.SetEnvPrefix("NOTARY_SERVER")
-	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
-	viper.AutomaticEnv()
+	mainViper.SetEnvPrefix("NOTARY_SERVER")
+	mainViper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
+	mainViper.AutomaticEnv()
 
-	err := viper.ReadInConfig()
+	err := mainViper.ReadInConfig()
 	if err != nil {
 		logrus.Error("Viper Error: ", err.Error())
 		logrus.Error("Could not read config at ", configFile)
 		os.Exit(1)
 	}
-	lvl, err := logrus.ParseLevel(viper.GetString("logging.level"))
+	lvl, err := logrus.ParseLevel(mainViper.GetString("logging.level"))
 	if err != nil {
 		lvl = logrus.ErrorLevel
 		logrus.Error("Could not parse log level from config. Defaulting to ErrorLevel")
@@ -83,10 +86,10 @@ func main() {
 	logrus.SetLevel(lvl)
 
 	// set up bugsnag and attach to logrus
-	bugs := viper.GetString("reporting.bugsnag")
+	bugs := mainViper.GetString("reporting.bugsnag")
 	if bugs != "" {
-		apiKey := viper.GetString("reporting.bugsnag_api_key")
-		releaseStage := viper.GetString("reporting.bugsnag_release_stage")
+		apiKey := mainViper.GetString("reporting.bugsnag_api_key")
+		releaseStage := mainViper.GetString("reporting.bugsnag_release_stage")
 		bugsnag.Configure(bugsnag.Configuration{
 			APIKey:       apiKey,
 			ReleaseStage: releaseStage,
@@ -98,7 +101,7 @@ func main() {
 			logrus.AddHook(hook)
 		}
 	}
-	keyAlgo := viper.GetString("trust_service.key_algorithm")
+	keyAlgo := mainViper.GetString("trust_service.key_algorithm")
 	if keyAlgo == "" {
 		logrus.Fatal("no key algorithm configured.")
 		os.Exit(1)
@@ -106,12 +109,12 @@ func main() {
 	ctx = context.WithValue(ctx, "keyAlgorithm", keyAlgo)
 
 	var trust signed.CryptoService
-	if viper.GetString("trust_service.type") == "remote" {
+	if mainViper.GetString("trust_service.type") == "remote" {
 		logrus.Info("Using remote signing service")
 		notarySigner := signer.NewNotarySigner(
-			viper.GetString("trust_service.hostname"),
-			viper.GetString("trust_service.port"),
-			viper.GetString("trust_service.tls_ca_file"),
+			mainViper.GetString("trust_service.hostname"),
+			mainViper.GetString("trust_service.port"),
+			mainViper.GetString("trust_service.tls_ca_file"),
 		)
 		trust = notarySigner
 		minute := 1 * time.Minute
@@ -133,9 +136,9 @@ func main() {
 		trust = signed.NewEd25519()
 	}
 
-	if viper.GetString("storage.backend") == "mysql" {
+	if mainViper.GetString("storage.backend") == "mysql" {
 		logrus.Info("Using mysql backend")
-		dbURL := viper.GetString("storage.db_url")
+		dbURL := mainViper.GetString("storage.db_url")
 		store, err := storage.NewSQLStorage("mysql", dbURL)
 		if err != nil {
 			logrus.Fatal("Error starting DB driver: ", err.Error())
@@ -151,12 +154,12 @@ func main() {
 	logrus.Info("Starting Server")
 	err = server.Run(
 		ctx,
-		viper.GetString("server.addr"),
-		viper.GetString("server.tls_cert_file"),
-		viper.GetString("server.tls_key_file"),
+		mainViper.GetString("server.addr"),
+		mainViper.GetString("server.tls_cert_file"),
+		mainViper.GetString("server.tls_key_file"),
 		trust,
-		viper.GetString("auth.type"),
-		viper.Get("auth.options"),
+		mainViper.GetString("auth.type"),
+		mainViper.Get("auth.options"),
 	)
 
 	logrus.Error(err.Error())

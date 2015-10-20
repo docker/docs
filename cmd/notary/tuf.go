@@ -24,7 +24,6 @@ import (
 	notaryclient "github.com/docker/notary/client"
 	"github.com/docker/notary/trustmanager"
 	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
 )
 
 var cmdTufList = &cobra.Command{
@@ -362,7 +361,7 @@ func (ps passwordStore) Basic(u *url.URL) (string, string) {
 func getTransport(gun string, readOnly bool) http.RoundTripper {
 	// Attempt to get a root CA from the config file. Nil is the host defaults.
 	rootPool := x509.NewCertPool()
-	rootCAFile := viper.GetString("remote_server.root_ca")
+	rootCAFile := mainViper.GetString("remote_server.root_ca")
 	if rootCAFile != "" {
 		// If we haven't been given an Absolute path, we assume it's relative
 		// from the configuration directory (~/.notary by default)
@@ -379,7 +378,7 @@ func getTransport(gun string, readOnly bool) http.RoundTripper {
 	// skipTLSVerify is false by default so verification will
 	// be performed.
 	tlsConfig := &tls.Config{
-		InsecureSkipVerify: viper.GetBool("remote_server.skipTLSVerify"),
+		InsecureSkipVerify: mainViper.GetBool("remote_server.skipTLSVerify"),
 		MinVersion:         tls.VersionTLS10,
 		RootCAs:            rootPool,
 	}
@@ -443,7 +442,7 @@ func tokenAuth(baseTransport *http.Transport, gun string, readOnly bool) http.Ro
 
 func getRemoteTrustServer() string {
 	if remoteTrustServer == "" {
-		configRemote := viper.GetString("remote_server.url")
+		configRemote := mainViper.GetString("remote_server.url")
 		if configRemote != "" {
 			remoteTrustServer = configRemote
 		} else {

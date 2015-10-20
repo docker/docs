@@ -30,6 +30,7 @@ var (
 	configFileName    = "config"
 	configFileExt     = "json"
 	retriever         passphrase.Retriever
+	mainViper         = viper.New()
 )
 
 func init() {
@@ -69,12 +70,12 @@ func parseConfig() {
 	}
 
 	// Setup the configuration details into viper
-	viper.SetConfigName(configFileName)
-	viper.SetConfigType(configFileExt)
-	viper.AddConfigPath(configPath)
+	mainViper.SetConfigName(configFileName)
+	mainViper.SetConfigType(configFileExt)
+	mainViper.AddConfigPath(configPath)
 
 	// Find and read the config file
-	err := viper.ReadInConfig()
+	err := mainViper.ReadInConfig()
 	if err != nil {
 		logrus.Debugf("configuration file not found, using defaults")
 		// Ignore if the configuration file doesn't exist, we can use the defaults
