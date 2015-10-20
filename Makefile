@@ -87,9 +87,9 @@ gen-cover:
 	@rm -rf "$(COVERDIR)"
 	@mkdir -p "$(COVERDIR)"
 	$(foreach PKG,$(PKGS),$(call gocover,$(PKG)))
-	@echo "mode: $(COVERMODE)" > "$(COVERPROFILE)"
 
 cover: gen-cover
+	@echo "mode: $(COVERMODE)" > "$(COVERPROFILE)"
 	@grep -h -v "^mode:" "$(COVERDIR)"/*.cover >> "$(COVERPROFILE)"
 	@go tool cover -func="$(COVERPROFILE)"
 	@go tool cover -html="$(COVERPROFILE)"
@@ -100,7 +100,6 @@ define formatcov
 endef
 
 ci: OPTS = race test.short
-	GO_EXC = godep go
 ci: gen-cover
 
 aggregate-cover:

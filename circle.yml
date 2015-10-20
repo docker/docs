@@ -38,7 +38,7 @@ dependencies:
   # For the stable go version, additionally install linting tools
     - >
       gvm use stable &&
-      go get github.com/axw/gocov/gocov github.com/mattn/goveralls github.com/golang/lint/golint
+      go get github.com/axw/gocov/gocov github.com/golang/lint/golint
 test:
   pre:
   # Output the go versions we are going to test
@@ -58,18 +58,14 @@ test:
 
   override:
   # Test stable, and report
-  # Preset the goverall report file
-    - echo "$CIRCLE_PAIN" > ~/goverage.report
-    - gvm use stable; go list ./... | xargs -L 1 -I{} rm -f $GOPATH/src/{}/coverage.out:
-        pwd: $BASE_STABLE
-
-    - gvm use stable; go list ./... | xargs -L 1 -I{} godep go test -race -test.short -coverprofile=$GOPATH/src/{}/coverage.out {}:
+    - gvm use stable && make ci:
         timeout: 600
         pwd: $BASE_STABLE
 
-  # post:
-  # Aggregate and report to coveralls
-  #   - gvm use stable; go list ./... | xargs -L 1 -I{} cat "$GOPATH/src/{}/coverage.out" | grep -v "$CIRCLE_PAIN" >> ~/goverage.report:
-  #       pwd: $BASE_STABLE
-  #   - gvm use stable; goveralls -service circleci -coverprofile=/home/ubuntu/goverage.report -repotoken $COVERALLS_TOKEN:
-  #       pwd: $BASE_STABLE
+  post:
+  # Aggregate and report to codecov.io
+    - make aggregate-cover:
+        pwd: $BASE_STABLE
+
+    - bash <(curl -s https://codecov.io/bash):
+        pwd: $BASE_STABLE
