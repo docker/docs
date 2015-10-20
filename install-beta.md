@@ -113,6 +113,9 @@ gpgkey=https://yum.dockerproject.org/gpg
 EOF
 ```
 
+###
+
+
 ## Step 4: (optional) Create user-named volumes
 
 Orca uses named volumes for persistence of user data.  By default, the
@@ -165,7 +168,7 @@ When you have the information you'll be prompted for, do the following to instal
           -v /var/run/docker.sock:/var/run/docker.sock \
           --name orca-bootstrap \
           dockerorca/orca-bootstrap \
-          install --swarm-port 3376 -i
+          install -i
 
     The installer pulls several images and prompts you for the installation values it needs. When it completes, the installer prompts you to login into the Orca GUI.
 
@@ -230,7 +233,7 @@ The first thing you probably want to do is download a client bundle.  The bundle
         Name: ip-10-0-0-32
         ID: 3JU4:QIXQ:ZFUK:QDOU:7KS7:WTM4:DSDD:NO7W:KP3G:OUVU:YPZS:6LX7
         Labels:
-        swarm_master=tcp://10.0.0.32:3376
+        swarm_master=tcp://10.0.0.32:2376
 
 
 ## Step 7: Add a Node to the Orca cluster
@@ -378,7 +381,7 @@ server.
         docker run --rm -it \
           -v /var/run/docker.sock:/var/run/docker.sock \
           ...snip...
-          install --swarm-port 3376 -i --external-orca-ca
+          install -i --external-orca-ca
 
 
 ## Where to go next
