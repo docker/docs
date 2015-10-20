@@ -96,6 +96,9 @@ NSString *dockerMachinePath = @"/usr/local/bin/docker-machine";
     NSString *incomingVersion = [self boot2dockerISOVersionAtPath:[NSString stringWithFormat:@"%@/.docker/machine/cache/boot2docker.iso", NSHomeDirectory()]];
     NSString *existingVersion = [self boot2dockerISOVersionAtPath:[NSString stringWithFormat:@"%@/.docker/machine/machines/default/boot2docker.iso", NSHomeDirectory()]];
     
+    NSLog(@"%@", incomingVersion);
+    NSLog(@"%@", existingVersion);
+    
     return [incomingVersion compare:existingVersion options:NSNumericSearch] != NSOrderedAscending;
 }
 
@@ -148,8 +151,8 @@ NSString *dockerMachinePath = @"/usr/local/bin/docker-machine";
     // Do the migration
     NSTask* task = [[NSTask alloc] init];
     task.launchPath = @"/usr/bin/sudo";
-    task.arguments = [NSArray arrayWithObjects:@"-i", @"-u", NSUserName(), dockerMachinePath, @"-D", @"upgrade", @"default", nil];
-    
+    task.arguments = [NSArray arrayWithObjects:@"-i", @"-u", NSUserName(), [NSString stringWithFormat:@"%@ stop default && cp %@/.docker/machine/cache/boot2docker.iso %@/.docker/machine/machines/default/boot2docker.iso", dockerMachinePath, NSHomeDirectory(),  NSHomeDirectory()], nil];
+
     [self runTask:task onFinish:^void (int status) {
         self.nextEnabled = YES;
         self.statusImage.hidden = YES;
@@ -283,6 +286,11 @@ NSString *dockerMachinePath = @"/usr/local/bin/docker-machine";
     }
 
     return YES;
+}
+
+- (IBAction)submitButtonClicked:(id)sender {
+    NSURL *url = [[NSURL alloc] initWithString: @"https://github.com/docker/toolbox/issues"];
+    [[NSWorkspace sharedWorkspace] openURL:url];
 }
 
 @end
