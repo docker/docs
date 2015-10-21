@@ -27,7 +27,7 @@
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h63-BP-4UP">
                     <rect key="frame" x="18" y="118" width="407" height="24"/>
                     <animations/>
-                    <buttonCell key="cell" type="check" title="Help Docker improve user experience." bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Jjb-SP-XI0">
+                    <buttonCell key="cell" type="check" title="Help Docker improve Toolbox." bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Jjb-SP-XI0">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
