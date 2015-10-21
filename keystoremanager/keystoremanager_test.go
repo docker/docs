@@ -264,13 +264,6 @@ func testValidateSuccessfulRootRotation(t *testing.T, keyAlg data.KeyAlgorithm, 
 	origRootKey := data.NewPublicKey(rootKeyType, origRootPEMCert)
 	replRootKey := data.NewPublicKey(rootKeyType, replRootPEMCert)
 
-	// Link both certificates to the original public keys
-	err = keyStoreManager.RootKeyStore().Link(origRootKeyID+"_root", origRootKey.ID()+"_root")
-	assert.NoError(t, err)
-
-	err = keyStoreManager.RootKeyStore().Link(replRootKeyID+"_root", replRootKey.ID()+"_root")
-	assert.NoError(t, err)
-
 	rootRole, err := data.NewRole("root", 1, []string{replRootKey.ID()}, nil, nil)
 	assert.NoError(t, err)
 
@@ -350,19 +343,10 @@ func testValidateRootRotationMissingOrigSig(t *testing.T, keyAlg data.KeyAlgorit
 	replRootCert, err := replUnlockedCryptoService.GenerateCertificate(gun)
 	assert.NoError(t, err)
 	// We need the PEM representation of the replacement key to put it into the TUF data
-	origRootPEMCert := trustmanager.CertToPEM(origRootCert)
 	replRootPEMCert := trustmanager.CertToPEM(replRootCert)
 
 	// Tuf key with PEM-encoded x509 certificate
-	origRootKey := data.NewPublicKey(rootKeyType, origRootPEMCert)
 	replRootKey := data.NewPublicKey(rootKeyType, replRootPEMCert)
-
-	// Link both certificates to the original public keys
-	err = keyStoreManager.RootKeyStore().Link(origRootKeyID+"_root", origRootKey.ID()+"_root")
-	assert.NoError(t, err)
-
-	err = keyStoreManager.RootKeyStore().Link(replRootKeyID+"_root", replRootKey.ID()+"_root")
-	assert.NoError(t, err)
 
 	rootRole, err := data.NewRole("root", 1, []string{replRootKey.ID()}, nil, nil)
 	assert.NoError(t, err)
@@ -448,13 +432,6 @@ func testValidateRootRotationMissingNewSig(t *testing.T, keyAlg data.KeyAlgorith
 	// Tuf key with PEM-encoded x509 certificate
 	origRootKey := data.NewPublicKey(rootKeyType, origRootPEMCert)
 	replRootKey := data.NewPublicKey(rootKeyType, replRootPEMCert)
-
-	// Link both certificates to the original public keys
-	err = keyStoreManager.RootKeyStore().Link(origRootKeyID+"_root", origRootKey.ID()+"_root")
-	assert.NoError(t, err)
-
-	err = keyStoreManager.RootKeyStore().Link(replRootKeyID+"_root", replRootKey.ID()+"_root")
-	assert.NoError(t, err)
 
 	rootRole, err := data.NewRole("root", 1, []string{replRootKey.ID()}, nil, nil)
 	assert.NoError(t, err)
