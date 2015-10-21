@@ -1,4 +1,4 @@
-package signer
+package keydbstore
 
 import (
 	"crypto/rand"
