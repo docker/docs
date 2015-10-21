@@ -35,7 +35,7 @@ Docker Trusted Registry is perfect for:
 
 Docker Trusted Registry is built on [version 2 of the Docker registry](https://github.com/docker/distribution).
 
-To get your copy of Docker Trusted Registry, including a free trial, visit [the Docker Subscription page](https://hub-beta.docker.com/enterprise/). For more information on acquiring Docker Trusted Registry, see the [install page](/docker-trusted-registry/install/).
+To get your copy of Docker Trusted Registry, including a free trial, visit [the Docker Subscription page](https://hub.docker.com/enterprise/). For more information on acquiring Docker Trusted Registry, see the [install page](/docker-trusted-registry/install/).
 
 >   **Important**: Docker Trusted Registry must be used with the current version of the commercially
 >   supported Docker Engine. You must install this version of Docker before

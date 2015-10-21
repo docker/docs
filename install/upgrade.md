@@ -77,6 +77,6 @@ and then start the Trusted Registry again:
 * To configure for your environment, see the
 [configuration instructions]({{< relref "configuration.md" >}}).
 * To use Docker Trusted Registry, see [the User guide]({{< relref "userguide.md" >}}).
-* See [installing the CS engine]({{< relref "csengineinstall.md" >}}).
+* See [installing the CS engine](install-csengine.md).
 * To make administrative changes, see [the Admin guide]({{< relref "adminguide.md" >}}).
 * To see previous changes, see [the release notes]({{< relref "release-notes.md" >}}).

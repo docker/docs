@@ -1,5 +1,5 @@
 +++
-title = "Trusted Registry Installation Overview"
+title = "Trusted Registry installation overview"
 description = "Trusted Registry Installation Overview"
 keywords = ["docker, documentation, about, technology, install, enterprise, hub, CS engine, Docker Trusted Registry"]
 [menu.main]
@@ -8,58 +8,59 @@ identifier="smn_dhe_install"
 +++
 
 # Trusted Registry Installation Overview
-Docker Trusted Registry is an enterprise grade on-premise registry bundled with commercially supported Docker Engines (CS Engine). This provides a base for you to build your Docker workflows.
+
+Docker Trusted Registry is an enterprise-grade on-premise registry bundled with commercially supported Docker Engines (CS Engine). Use Docker Trusted Registry to manage your images, and the commercially supported Docker Engine to create, test, and share your application images. Together, these two Docker products can optimize your continuous integration (CI) and/or software deployment workflows.
 
 Depending on your business requirements, there are two paths available for you to install Docker Trusted Registry (Trusted Registry). This document describes those options and prerequisites in order for you to make a decision that is best suited to your needs and provides the install directions for your selected path.
 
-## Install Options
+## Install options
 
-You can install Trusted Registry on premise or through any cloud provider. Installation through a cloud provider's marketplace is only supported on AWS and Microsoft Azure.
+You can install Trusted Registry on premise or through a cloud provider. Currently, Docker supports installation on any cloud provider.
 
 ## Get a license
 
-Docker requires that you obtain a license to use the Trusted Registry. The installation path you choose affects the licensing methods available to you.
+Docker requires that you obtain a license to use the Trusted Registry. The installation path you choose (on premise or in the cloud) can affect the licensing methods available to you (bring your own license or cloud marketplace).
 
-All installation paths support a license which you buy outright from Docker and
+All installation paths  support a license which you buy outright from Docker and
 apply during the installation process. If you would like, you can get a free
 trial license that is good for 30 days. To get a free trial or buy a
-license go to the [Subscription page](https://hub-beta.docker.com/enterprise/)
+license go to the [Subscription page](https://hub.docker.com/enterprise/)
 on Docker Hub.
 
-If you are installing on AWS, you can use a license you bought direct using the Docker's Bring Your Own License (BYOL) AMI. You can also choose to pay by subscription installing with the AWS Business Day Support AMI. Under this model, your license is part of your Amazon Web Services (AWS) Business Support subscription.
+If you are installing on Microsoft Azure, you have the option of installing using the Virtual Hard Disk (VHD) in the Azure Marketplace. You should use a license you bought direct from Docker in this installation.
 
-Buying a license is the only licensing option available with Microsoft Azure.
+If you are installing on AWS, you have the option of installing using Amazon Machine Images (AMI). You can use a license you bought direct using the Docker's Bring Your Own License (BYOL) AMI. You can also choose to pay-as-you-go by installing with the AWS Business Day Support (BDS) AMI. Under the BDS model, your license is part of your Amazon Web Services (AWS) Business Support subscription.
 
 ## Plan your install
 
-The following steps are the general order of how you would obtain and install Docker Trusted Registry. You need to:
+This section summarizes the process of installing Docker Trusted Registry.
 
-1. Get a license (either paid or trial) or managed through the pay as you go option.
-2. If installing on premise, install the commercially supported Engine for your production environment.
-3. Install Docker Trusted Registry on top of the commercially supported Engine.
-4. Apply the license (unless it is a part of your AWS subscription) and finish the install process.
-5. Configure your environment.
-6. Test your installation.
-7. (Optional) Install the CS Engine on another machine or configure existing CS engines. Again, you will have to configure and test.
+**(Option 1) Install on physical infrastructure or a cloud provider**
+  * Obtain a trial or paid license.
+  * Install the commercially supported Docker Engine.
+  * Install the Trusted Registry.
 
-You will want to configure a new CS Engine or existing Docker Engines to the Trusted Registry. Remember, your support is based on your type of license which is limited to the Trusted Registry and CS engines.
+**(Option 2) Install using AWS AMI**
+  * Decide if you are going to bring your own license or use a subscription.
+  * Depending on your choice:
+    * Obtain a trial or paid license and install the bring your own license (BYOL) AMI.
+    * Install the pay-as-you-go business day subscription (BDS) AMI.
 
-Docker Trusted Registry requires that you use the latest version of the commercially supported Docker Engine. This means that when you upgrade, you will also be upgrading to the latest CS Engine. The instructions are the same, whether you plan to install for development or enterprise purposes. The difference between them is how extensive you choose to configure your environment.
+**After installing either option**
 
-## Next steps
+* Start the DTR admin console.
+* If you have a license and not a subscription, install the license.
+* Configure your DTR installation.
+* Install additional CS engines on other systems.
 
-Now that you have planned for your install, see the following documents:
+Remember, your support is based on your type of license. Each license has a single Trusted Registry and one or more CS engines. Your support for CS Engine installations is limited to the number of engines identified by your license.
 
-* Get your [license]({{< relref "license.md" >}}).
-* Download the [commercially supported Docker Engine]({{< relref "csengineinstall.md" >}}).
-* Install by [bringing your own license (BYOL)]({{< relref "installAWS.md" >}}).
-* Install through the [pay as you go option]({{< relref "ami-launch.md" >}}).
-* Install [manually]({{< relref "install.md" >}}).
+Docker Trusted Registry requires that you use the latest version of the commercially supported Docker Engine. This means that when you upgrade Trusted Registry, you must also upgrade to the latest CS Engine.
 
-## See also
+## Where to go next
 
-* To configure for your environment, see the
-[configuration instructions]({{< relref "configuration.md" >}}).
-* To use Docker Trusted Registry, see the [User guide]({{< relref "userguide.md" >}}).
-* To make administrative changes, see the [Admin guide]({{< relref "adminguide.md" >}}).
-* To see previous changes, see the [release notes]({{< relref "release-notes.md" >}}).
+* If you are installing on physical infrastructure or a cloud provider, first install the [commercially supported Docker Engine](install-csengine.md) and then go on to install [Trusted Registry](install-dtry.md).
+
+* If you are installing on AWS and would like to use a pre-built AMI and a license you purchased, see [bringing your own license (BYOL)](dtr-ami-byol-launch.md).
+
+* If you are installing on AWS and would like to use the subscription license, see the [pay as you go BDS installation](dtr-ami-bds-launch.md).

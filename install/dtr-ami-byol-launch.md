@@ -15,7 +15,7 @@ The Trusted Registry installation includes a single instance of the commercially
 supported Docker Engine.
 
 You can install additional instances of the commercially supported Docker Engine
-either on premise or through AWS. For more inforamtion, see the [installation
+either on premise or through AWS. For more information, see the [installation
 overview](index.md) for Trusted Registry.
 
 The remainder of this document refers to the running instance of this AMI as a “Trusted Registry”.
@@ -93,7 +93,7 @@ The following steps walk you through the 1-Click Launch settings:
 
 4. From the Security Group box, select "Create new based on seller settings".
 
-    ![](assets/aws-dtr-sg-rules.png)
+    ![](images/aws-dtr-sg-rules.png)
 
     This option has security implications. It allows incoming connections to the listed ports from any host or IP address. You should lock this down in line with your existing AWS security policies..
 
@@ -149,7 +149,7 @@ interface:
 
     You'll find the Instance ID on the "Description" tab on the EC2 Dashboard as shown in the image below:
 
-    ![](assets/aws-instance-id.png)
+    ![](images/aws-instance-id.png)
 
 ## Configure the Docker Trusted Registry Service
 
@@ -169,7 +169,7 @@ When you first login to the DTR Administration web interface you are prompted to
 
     Your Docker Trusted Registry license file is available from Docker Hub. To download it, login to Docker Hub and click your username in the top right corner. Choose "Settings" and select the "Licenses" tab. Click the download button beneath your license.
 
-    ![](assets/dtr-license-download.png)
+    ![](images/dtr-license-download.png)
 
     From the Docker Trusted Registry Administration web interface, select "Settings" and then "License". Under the "Apply a new license" heading select "Choose File". Select your downloaded license file and click "Save and restart".
 
