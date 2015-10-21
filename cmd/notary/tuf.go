@@ -20,6 +20,7 @@ import (
 	"github.com/docker/distribution/registry/client/transport"
 	"github.com/docker/docker/pkg/term"
 	notaryclient "github.com/docker/notary/client"
+	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/utils"
 	"github.com/spf13/cobra"
 )
@@ -123,26 +124,20 @@ func tufInit(cmd *cobra.Command, args []string) {
 		fatalf(err.Error())
 	}
 
-	keysMap := make(map[string]string)
-	for k, role := range nRepo.KeyStoreManager.KeyStore.ListKeys() {
-		if role == "root" {
-			keysMap[k] = role
-		}
-	}
+	rootKeyList := nRepo.CryptoService.ListKeys(data.CanonicalRootRole)
 
 	var rootKeyID string
-	if len(keysMap) < 1 {
+	if len(rootKeyList) < 1 {
 		fmt.Println("No root keys found. Generating a new root key...")
-		rootKeyID, err = nRepo.KeyStoreManager.GenRootKey("ECDSA")
+		rootPublicKey, err := nRepo.CryptoService.Create(data.CanonicalRootRole, data.ECDSAKey)
+		rootKeyID = rootPublicKey.ID()
 		if err != nil {
 			fatalf(err.Error())
 		}
 	} else {
-		// TODO(diogo): ask which root key to use
-		for keyID := range keysMap {
-			rootKeyID = keyID
-		}
-
+		// Choses the first root key available, which is initialization specific
+		// but should return the HW one first.
+		rootKeyID = rootKeyList[0]
 		fmt.Printf("Root key found, using: %s\n", rootKeyID)
 	}
 

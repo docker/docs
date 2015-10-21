@@ -115,6 +115,7 @@ func (ccs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signatur
 		// key).  If that fails, then we don't have the key.
 		privKey, _, err := ccs.GetPrivateKey(keyName)
 		if err != nil {
+			logrus.Debugf("error attempting to retrieve private key: %s, %v", keyid, err)
 			keyName = filepath.Join(ccs.gun, keyid)
 			privKey, _, err = ccs.GetPrivateKey(keyName)
 			if err != nil {
@@ -123,16 +124,7 @@ func (ccs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signatur
 			}
 		}
 
-		var sigAlgorithm data.SigAlgorithm
-
-		switch privKey.(type) {
-		case *data.RSAPrivateKey:
-			sigAlgorithm = data.RSAPSSSignature
-		case *data.ECDSAPrivateKey:
-			sigAlgorithm = data.ECDSASignature
-		case *data.ED25519PrivateKey:
-			sigAlgorithm = data.EDDSASignature
-		}
+		sigAlgo := privKey.SignatureAlgorithm()
 		sig, err := privKey.Sign(rand.Reader, payload, nil)
 		if err != nil {
 			logrus.Debugf("ignoring error attempting to %s sign with keyID: %s, %v", privKey.Algorithm(), keyid, err)
@@ -144,7 +136,7 @@ func (ccs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signatur
 		// Append signatures to result array
 		signatures = append(signatures, data.Signature{
 			KeyID:     keyid,
-			Method:    sigAlgorithm,
+			Method:    sigAlgo,
 			Signature: sig[:],
 		})
 	}
