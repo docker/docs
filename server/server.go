@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/docker/distribution/health"
 	"github.com/docker/distribution/registry/auth"
 	"github.com/endophage/gotuf/data"
 	"github.com/endophage/gotuf/signed"
@@ -74,6 +75,11 @@ func Run(ctx context.Context, addr, tlsCertFile, tlsKeyFile string, trust signed
 	r.Methods("GET").Path("/v2/{imageName:.*}/_trust/tuf/timestamp.json").Handler(hand(handlers.GetTimestampHandler, "pull"))
 	r.Methods("GET").Path("/v2/{imageName:.*}/_trust/tuf/timestamp.key").Handler(hand(handlers.GetTimestampKeyHandler, "push", "pull"))
 	r.Methods("DELETE").Path("/v2/{imageName:.*}/_trust/tuf/").Handler(hand(handlers.DeleteHandler, "push", "pull"))
+	r.Methods("GET").Path("/_notary_server/health").Handler(hand(
+		func(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
+			health.StatusHandler(w, r)
+			return nil
+		}))
 	r.Methods("GET", "POST", "PUT", "HEAD", "DELETE").Path("/{other:.*}").Handler(hand(utils.NotFoundHandler))
 	svr := http.Server{
 		Addr:    addr,
