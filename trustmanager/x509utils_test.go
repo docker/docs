@@ -1,6 +1,8 @@
 package trustmanager
 
 import (
+	"crypto/ecdsa"
+	"crypto/elliptic"
 	"crypto/rand"
 	"crypto/x509"
 	"io/ioutil"
@@ -147,7 +149,8 @@ func TestKeyOperations(t *testing.T) {
 
 }
 
-// X509PublickeyID returns the public key ID of a cert rather than the cert ID
+// X509PublickeyID returns the public key ID of a RSA X509 key rather than the
+// cert ID
 func TestRSAX509PublickeyID(t *testing.T) {
 	fileBytes, err := ioutil.ReadFile("../fixtures/notary-server.key")
 	assert.NoError(t, err)
@@ -164,15 +167,37 @@ func TestRSAX509PublickeyID(t *testing.T) {
 
 	sameWayTufID := data.NewPublicKey(data.RSAKey, rsaKeyBytes).ID()
 
-	actualTufKeyMap := CertsToKeys([]*x509.Certificate{cert})
-	assert.Len(t, actualTufKeyMap, 1)
-	var actualTufKey data.PublicKey
-	for _, v := range actualTufKeyMap {
-		actualTufKey = v
-	}
-
+	actualTufKey := CertToKey(cert)
 	actualTufID, err := X509PublickeyID(actualTufKey)
 
 	assert.Equal(t, sameWayTufID, actualTufID)
 	assert.Equal(t, expectedTufID, actualTufID)
+}
+
+// X509PublickeyID returns the public key ID of an ECDSA X509 key rather than
+// the cert ID
+func TestECDSAX509PublickeyID(t *testing.T) {
+	template, err := NewCertificate("something")
+	assert.NoError(t, err)
+	template.SignatureAlgorithm = x509.ECDSAWithSHA256
+	template.PublicKeyAlgorithm = x509.ECDSA
+
+	privKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
+	assert.NoError(t, err)
+
+	tufPrivKey, err := ECDSAToPrivateKey(privKey)
+	assert.NoError(t, err)
+
+	derBytes, err := x509.CreateCertificate(
+		rand.Reader, template, template, &privKey.PublicKey, privKey)
+	assert.NoError(t, err)
+
+	cert, err := x509.ParseCertificate(derBytes)
+	assert.NoError(t, err)
+
+	tufKey := CertToKey(cert)
+	tufID, err := X509PublickeyID(tufKey)
+	assert.NoError(t, err)
+
+	assert.Equal(t, tufPrivKey.ID(), tufID)
 }
