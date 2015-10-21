@@ -8,13 +8,13 @@ identifier="smn_dhe_install"
 +++
 
 # Trusted Registry Installation Overview
-Install Docker Trusted Registry to manage your images, and the commercially supported Docker Engine to build, deploy, and run your application containers. Use both Docker Trusted Registry and the commercially supported Engine (CS Engine) to optimize your workflows of either continuous integration (CI) and testing in your development environment or efficiently creating deployment cycles. Using it, your organization can quickly and efficiently create, test, and share images.
+Docker Trusted Registry is an enterprise grade on-premise registry bundled with commercially supported Docker Engines (CS Engine). This provides a base for you to build your Docker workflows.
 
 Depending on your business requirements, there are two paths available for you to install Docker Trusted Registry (Trusted Registry). This document describes those options and prerequisites in order for you to make a decision that is best suited to your needs and provides the install directions for your selected path.
 
 ## Install Options
 
-You can install Trusted Registry on premise or through a cloud provider. Currently, Docker supports installation on two cloud provicers, AWS and Microsoft Azure Cloud. 
+You can install Trusted Registry on premise or through any cloud provider. Installation through a cloud provider's marketplace is only supported on AWS and Microsoft Azure.
 
 ## Get a license
 
@@ -36,7 +36,7 @@ The following steps are the general order of how you would obtain and install Do
 
 1. Get a license (either paid or trial) or managed through the pay as you go option.
 2. If installing on premise, install the commercially supported Engine for your production environment.
-3. Install Docker Trusted Registry.
+3. Install Docker Trusted Registry on top of the commercially supported Engine.
 4. Apply the license (unless it is a part of your AWS subscription) and finish the install process.
 5. Configure your environment.
 6. Test your installation.
