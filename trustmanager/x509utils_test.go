@@ -3,10 +3,12 @@ package trustmanager
 import (
 	"crypto/rand"
 	"crypto/x509"
+	"io/ioutil"
 	"strings"
 	"testing"
 	"time"
 
+	"github.com/endophage/gotuf/data"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -143,4 +145,34 @@ func TestKeyOperations(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Equal(t, rsaKey.Private(), decryptedRSAKey.Private())
 
+}
+
+// X509PublickeyID returns the public key ID of a cert rather than the cert ID
+func TestRSAX509PublickeyID(t *testing.T) {
+	fileBytes, err := ioutil.ReadFile("../fixtures/notary-server.key")
+	assert.NoError(t, err)
+
+	privKey, err := ParsePEMPrivateKey(fileBytes, "")
+	assert.NoError(t, err)
+	expectedTufID := privKey.ID()
+
+	cert, err := LoadCertFromFile("../fixtures/notary-server.crt")
+	assert.NoError(t, err)
+
+	rsaKeyBytes, err := x509.MarshalPKIXPublicKey(cert.PublicKey)
+	assert.NoError(t, err)
+
+	sameWayTufID := data.NewPublicKey(data.RSAKey, rsaKeyBytes).ID()
+
+	actualTufKeyMap := CertsToKeys([]*x509.Certificate{cert})
+	assert.Len(t, actualTufKeyMap, 1)
+	var actualTufKey data.PublicKey
+	for _, v := range actualTufKeyMap {
+		actualTufKey = v
+	}
+
+	actualTufID, err := X509PublickeyID(actualTufKey)
+
+	assert.Equal(t, sameWayTufID, actualTufID)
+	assert.Equal(t, expectedTufID, actualTufID)
 }

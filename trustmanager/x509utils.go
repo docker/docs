@@ -495,3 +495,26 @@ func NewCertificate(gun string) (*x509.Certificate, error) {
 		BasicConstraintsValid: true,
 	}, nil
 }
+
+// X509PublickeyID returns a public key ID as a string, given a
+// data.PublicKey that contains an X509 Certificate
+func X509PublickeyID(certPubKey data.PublicKey) (string, error) {
+	cert, err := LoadCertFromPEM(certPubKey.Public())
+	if err != nil {
+		return "", err
+	}
+	var finalAlgorithm data.KeyAlgorithm
+
+	switch certPubKey.Algorithm() {
+	case data.ECDSAx509Key:
+		finalAlgorithm = data.ECDSAKey
+	case data.RSAx509Key:
+		finalAlgorithm = data.RSAKey
+	}
+
+	pubKeyBytes, err := x509.MarshalPKIXPublicKey(cert.PublicKey)
+	if err != nil {
+		return "", err
+	}
+	return data.NewPublicKey(finalAlgorithm, pubKeyBytes).ID(), nil
+}
