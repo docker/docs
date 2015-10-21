@@ -73,9 +73,9 @@ func ConfigureServerTLS(serverCert, serverKey string, clientAuth bool, caCertDir
 
 // ConfigureClientTLS generates a tls configuration for clients using the
 // provided parameters.
-func ConfigureClientTLS(rootCA, serverName string, skipVerify bool, clientCert, clientKey string) (*tls.Config, error) {
+func ConfigureClientTLS(rootCA, serverName string, insecureSkipVerify bool, clientCert, clientKey string) (*tls.Config, error) {
 	tlsConfig := &tls.Config{
-		InsecureSkipVerify: skipVerify,
+		InsecureSkipVerify: insecureSkipVerify,
 		MinVersion:         tls.VersionTLS12,
 		CipherSuites:       clientCipherSuites,
 		ServerName:         serverName,

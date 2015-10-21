@@ -367,9 +367,12 @@ func getTransport(gun string, readOnly bool) http.RoundTripper {
 		}
 	}
 
+	insecureSkipVerify := false
+	if mainViper.IsSet("remote_server.skipTLSVerify") {
+		insecureSkipVerify = mainViper.GetBool("remote_server.skipTLSVerify")
+	}
 	tlsConfig, err := utils.ConfigureClientTLS(
-		rootCAFile, "", mainViper.GetBool("remote_server.skipTLSVerify"),
-		"", "")
+		rootCAFile, "", insecureSkipVerify, "", "")
 	if err != nil {
 		logrus.Fatal("Unable to configure TLS: ", err.Error())
 	}
