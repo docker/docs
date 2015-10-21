@@ -18,8 +18,8 @@ RUN curl -fsSL https://github.com/mackyle/xar/archive/xar-1.6.1.tar.gz | tar xvz
 	./autogen.sh && ./configure && \
 	make && make install
 
-ENV VBOX_VERSION 5.0.6
-ENV VBOX_REV 103037
+ENV VBOX_VERSION 5.0.8
+ENV VBOX_REV 103449
 
 RUN curl -fsSL -o /vbox.dmg http://download.virtualbox.org/virtualbox/$VBOX_VERSION/VirtualBox-$VBOX_VERSION-$VBOX_REV-OSX.dmg \
 	&& echo "$(curl -fsSL 'http://download.virtualbox.org/virtualbox/'"$VBOX_VERSION"'/SHA256SUMS' | awk '$2 ~ /-OSX.dmg$/ { print $1 }') */vbox.dmg" | sha256sum -c -

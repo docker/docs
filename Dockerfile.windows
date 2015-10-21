@@ -17,21 +17,28 @@ RUN cd innosetup && \
     wine "./innounp.exe" -e "is-unicode.exe"
 
 # installer components
-ENV INSTALLER_VERSION 1.8.3
-ENV DOCKER_VERSION 1.8.3
-ENV DOCKER_MACHINE_VERSION 0.4.1
+ENV INSTALLER_VERSION 1.9.0-rc1
+ENV DOCKER_VERSION 1.9.0-rc1
+ENV DOCKER_MACHINE_VERSION 0.5.0-rc2
 ENV BOOT2DOCKER_ISO_VERSION $DOCKER_VERSION
-ENV KITEMATIC_VERSION 0.8.7
-ENV VIRTUALBOX_VERSION 5.0.6
-ENV VIRTUALBOX_REVISION 103037
+ENV KITEMATIC_VERSION 0.9.0
+ENV VIRTUALBOX_VERSION 5.0.8
+ENV VIRTUALBOX_REVISION 103449
 ENV GIT_VERSION 2.5.0
 ENV MIXPANEL_TOKEN c306ae65c33d7d09fe3e546f36493a6e
 
 RUN mkdir /bundle
 WORKDIR /bundle
-RUN curl -fsSL -o docker.exe "https://get.docker.com/builds/Windows/x86_64/docker-$DOCKER_VERSION.exe"
-RUN curl -fsSL -o docker-machine.exe "https://github.com/docker/machine/releases/download/v$DOCKER_MACHINE_VERSION/docker-machine_windows-amd64.exe"
-RUN curl -fsSL -o boot2docker.iso https://github.com/boot2docker/boot2docker/releases/download/v$BOOT2DOCKER_ISO_VERSION/boot2docker.iso
+# RUN curl -fsSL -o docker.exe "https://get.docker.com/builds/Windows/x86_64/docker-$DOCKER_VERSION.exe"
+RUN curl -fsSL -o docker.exe "https://test.docker.com/builds/Windows/x86_64/docker-$DOCKER_VERSION.exe"
+
+RUN curl -fsSL -o docker-machine.zip "https://github.com/docker/machine/releases/download/v$DOCKER_MACHINE_VERSION/docker-machine_windows-amd64.zip" && \
+  unzip docker-machine.zip && \
+  rm docker-machine.zip
+
+# RUN curl -fsSL -o boot2docker.iso https://github.com/boot2docker/boot2docker/releases/download/v$BOOT2DOCKER_ISO_VERSION/boot2docker.iso
+RUN curl -fsSL -o boot2docker.iso https://github.com/tianon/boot2docker-legacy/releases/download/v$BOOT2DOCKER_ISO_VERSION/boot2docker.iso
+
 RUN curl -fsSL -o kitematic.zip "https://github.com/kitematic/kitematic/releases/download/v$KITEMATIC_VERSION/Kitematic-$KITEMATIC_VERSION-Windows-Alpha.zip" && \
     mkdir kitematic && \
     cd kitematic && \
