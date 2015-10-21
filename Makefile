@@ -80,7 +80,7 @@ protos:
 
 
 define gocover
-$(GO_EXC) test $(addprefix -,${OPTS}) -covermode="$(COVERMODE)" -coverprofile="$(COVERDIR)/$(subst /,-,$(1)).cover" "$(1)";
+$(GO_EXC) test $(addprefix -,${OPTS}) -covermode="$(COVERMODE)" -coverprofile="$(COVERDIR)/$(subst /,-,$(1)).cover" "$(1)" || exit 1;
 endef
 
 gen-cover:
@@ -88,6 +88,7 @@ gen-cover:
 	@mkdir -p "$(COVERDIR)"
 	$(foreach PKG,$(PKGS),$(call gocover,$(PKG)))
 
+cover: GO_EXC = go
 cover: gen-cover
 	@echo "mode: $(COVERMODE)" > "$(COVERPROFILE)"
 	@grep -h -v "^mode:" "$(COVERDIR)"/*.cover >> "$(COVERPROFILE)"
@@ -100,6 +101,7 @@ define formatcov
 endef
 
 ci: OPTS = race test.short
+    GO_EXC = godep go
 ci: gen-cover
 
 aggregate-cover:
