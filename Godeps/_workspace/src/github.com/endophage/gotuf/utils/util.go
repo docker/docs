@@ -8,6 +8,7 @@ import (
 	gopath "path"
 	"path/filepath"
 
+	"github.com/docker/notary/trustmanager"
 	"github.com/endophage/gotuf/data"
 )
 
@@ -93,4 +94,16 @@ func HashedPaths(path string, hashes data.Hashes) []string {
 		paths = append(paths, hashedPath)
 	}
 	return paths
+}
+
+// CanonicalKeyID returns the ID of the public bytes version of a TUF key.
+// On regular RSA/ECDSA TUF keys, this is just the key ID.  On X509 RSA/ECDSA
+// TUF keys, this is the key ID of the public key part of the key.
+func CanonicalKeyID(k data.PublicKey) (string, error) {
+	switch k.Algorithm() {
+	case data.ECDSAx509Key, data.RSAx509Key:
+		return trustmanager.X509PublicKeyID(k)
+	default:
+		return k.ID(), nil
+	}
 }

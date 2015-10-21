@@ -1,12 +1,23 @@
 package signed
 
+// The Sign function is a choke point for all code paths that do signing.
+// We use this fact to do key ID translation. There are 2 types of key ID:
+//   - Scoped: the key ID based purely on the data that appears in the TUF
+//             files. This may be wrapped by a certificate that scopes the
+//             key to be used in a specific context.
+//   - Canonical: the key ID based purely on the public key bytes. This is
+//             used by keystores to easily identify keys that may be reused
+//             in many scoped locations.
+// Currently these types only differ in the context of Root Keys in Notary
+// for which the root key is wrapped using an x509 certificate.
+
 import (
 	"fmt"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/docker/notary/trustmanager"
 	"github.com/endophage/gotuf/data"
 	"github.com/endophage/gotuf/errors"
+	"github.com/endophage/gotuf/utils"
 )
 
 type idPair struct {
@@ -27,7 +38,7 @@ func Sign(service CryptoService, s *data.Signed, keys ...data.PublicKey) error {
 	)
 
 	for _, key := range keys {
-		keyID, err := canonicalKeyID(key)
+		keyID, err := utils.CanonicalKeyID(key)
 		if err != nil {
 			continue
 		}
@@ -38,8 +49,10 @@ func Sign(service CryptoService, s *data.Signed, keys ...data.PublicKey) error {
 		})
 	}
 
-	// we need to ask the signer to sign with the canonical key ID, but
-	// we need to translate back to the scoped key ID before giving the
+	// we need to ask the signer to sign with the canonical key ID
+	// (ID of the TUF key's public key bytes only), but
+	// we need to translate back to the scoped key ID (the hash of the TUF key
+	// with the full PEM bytes) before giving the
 	// signature back to TUF.
 	for _, pair := range keyIDs {
 		newSigs, err := service.Sign([]string{pair.canonicalKeyID}, s.Signed)
@@ -68,13 +81,4 @@ func Sign(service CryptoService, s *data.Signed, keys ...data.PublicKey) error {
 	}
 	s.Signatures = signatures
 	return nil
-}
-
-func canonicalKeyID(k data.PublicKey) (string, error) {
-	switch k.Algorithm() {
-	case data.ECDSAx509Key, data.RSAx509Key:
-		return trustmanager.X509PublicKeyID(k)
-	default:
-		return k.ID(), nil
-	}
 }
