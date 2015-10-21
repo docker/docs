@@ -215,7 +215,7 @@ begin
   TrackingCheckBox.Left := WizardForm.WelcomeLabel2.Left;
   TrackingCheckBox.Width := WizardForm.WelcomeLabel2.Width;
   TrackingCheckBox.Height := 40;
-  TrackingCheckBox.Caption := 'Send one-time, anonymous diagnostics during install.';
+  TrackingCheckBox.Caption := 'Help Docker improve Toolbox.';
   TrackingCheckBox.Checked := True;
   TrackingCheckBox.Parent := WelcomePage.Surface;
   TrackingCheckBox.OnClick := @TrackingCheckboxClicked;
@@ -224,7 +224,7 @@ begin
 	TrackingLabel.Parent := WelcomePage.Surface;
 	TrackingLabel.Font := WizardForm.WelcomeLabel2.Font;
 	TrackingLabel.Font.Color := clGray;
-  TrackingLabel.Caption := 'This data helps us detect problems and improve the installation experience. We only use it for aggregate statistics and will never share it with third parties.';
+  TrackingLabel.Caption := 'This collects annoymous data to help us detect installation problems and improve the overall experience. We only use it to aggregate statistics and will never share it with third parties.';
 	TrackingLabel.WordWrap := True;
 	TrackingLabel.Visible := True;
 	TrackingLabel.Left := WizardForm.WelcomeLabel2.Left;
