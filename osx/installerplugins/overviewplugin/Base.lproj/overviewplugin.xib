@@ -27,7 +27,7 @@
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h63-BP-4UP">
                     <rect key="frame" x="18" y="118" width="407" height="24"/>
                     <animations/>
-                    <buttonCell key="cell" type="check" title="Send one-time, anonymous diagnostics during install." bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Jjb-SP-XI0">
+                    <buttonCell key="cell" type="check" title="Help Docker improve user experience." bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Jjb-SP-XI0">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -40,7 +40,7 @@
                     <animations/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="N5z-io-cf5">
                         <font key="font" metaFont="system"/>
-                        <string key="title">This data helps us detect problems and improve the installation experience. We only use it for aggregate statistics and will never share it with third parties.</string>
+                        <string key="title">This collects annoymous data to help us detect installation problems and improve the overall experience. We only use it to aggregate statistics and will never share it with third parties.</string>
                         <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
