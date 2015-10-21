@@ -168,7 +168,7 @@ func TestRSAX509PublickeyID(t *testing.T) {
 	sameWayTufID := data.NewPublicKey(data.RSAKey, rsaKeyBytes).ID()
 
 	actualTufKey := CertToKey(cert)
-	actualTufID, err := X509PublickeyID(actualTufKey)
+	actualTufID, err := X509PublicKeyID(actualTufKey)
 
 	assert.Equal(t, sameWayTufID, actualTufID)
 	assert.Equal(t, expectedTufID, actualTufID)
@@ -196,7 +196,7 @@ func TestECDSAX509PublickeyID(t *testing.T) {
 	assert.NoError(t, err)
 
 	tufKey := CertToKey(cert)
-	tufID, err := X509PublickeyID(tufKey)
+	tufID, err := X509PublicKeyID(tufKey)
 	assert.NoError(t, err)
 
 	assert.Equal(t, tufPrivKey.ID(), tufID)

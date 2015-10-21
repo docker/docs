@@ -500,9 +500,9 @@ func NewCertificate(gun string) (*x509.Certificate, error) {
 	}, nil
 }
 
-// X509PublickeyID returns a public key ID as a string, given a
+// X509PublicKeyID returns a public key ID as a string, given a
 // data.PublicKey that contains an X509 Certificate
-func X509PublickeyID(certPubKey data.PublicKey) (string, error) {
+func X509PublicKeyID(certPubKey data.PublicKey) (string, error) {
 	cert, err := LoadCertFromPEM(certPubKey.Public())
 	if err != nil {
 		return "", err
