@@ -7,12 +7,14 @@ import (
 	"github.com/jfrazelle/go/canonical/json"
 )
 
+// SignedTimestamp is a fully unpacked timestamp.json
 type SignedTimestamp struct {
 	Signatures []Signature
 	Signed     Timestamp
 	Dirty      bool
 }
 
+// Timestamp is the Signed component of a timestamp.json
 type Timestamp struct {
 	Type    string    `json:"_type"`
 	Version int       `json:"version"`
@@ -20,6 +22,7 @@ type Timestamp struct {
 	Meta    Files     `json:"meta"`
 }
 
+// NewTimestamp initializes a timestamp with an existing snapshot
 func NewTimestamp(snapshot *Signed) (*SignedTimestamp, error) {
 	snapshotJSON, err := json.Marshal(snapshot)
 	if err != nil {
@@ -42,6 +45,8 @@ func NewTimestamp(snapshot *Signed) (*SignedTimestamp, error) {
 	}, nil
 }
 
+// ToSigned partially serializes a SignedTimestamp such that it can
+// be signed
 func (ts SignedTimestamp) ToSigned() (*Signed, error) {
 	s, err := json.MarshalCanonical(ts.Signed)
 	if err != nil {
@@ -60,6 +65,8 @@ func (ts SignedTimestamp) ToSigned() (*Signed, error) {
 	}, nil
 }
 
+// TimestampFromSigned parsed a Signed object into a fully unpacked
+// SignedTimestamp
 func TimestampFromSigned(s *Signed) (*SignedTimestamp, error) {
 	ts := Timestamp{}
 	err := json.Unmarshal(s.Signed, &ts)

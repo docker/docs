@@ -69,7 +69,7 @@ type NotaryRepository struct {
 	tufRepoPath     string
 	fileStore       store.MetadataStore
 	cryptoService   signed.CryptoService
-	tufRepo         *tuf.TufRepo
+	tufRepo         *tuf.Repo
 	roundTrip       http.RoundTripper
 	KeyStoreManager *keystoremanager.KeyStoreManager
 }
@@ -214,7 +214,7 @@ func (r *NotaryRepository) Initialize(uCryptoService *cryptoservice.UnlockedCryp
 		return err
 	}
 
-	r.tufRepo = tuf.NewTufRepo(kdb, r.cryptoService)
+	r.tufRepo = tuf.NewRepo(kdb, r.cryptoService)
 
 	err = r.tufRepo.InitRoot(false)
 	if err != nil {
@@ -461,7 +461,7 @@ func (r *NotaryRepository) Publish() error {
 
 func (r *NotaryRepository) bootstrapRepo() error {
 	kdb := keys.NewDB()
-	tufRepo := tuf.NewTufRepo(kdb, r.cryptoService)
+	tufRepo := tuf.NewRepo(kdb, r.cryptoService)
 
 	logrus.Debugf("Loading trusted collection.")
 	rootJSON, err := r.fileStore.GetMeta("root", 0)
@@ -587,7 +587,7 @@ func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
 	}
 
 	kdb := keys.NewDB()
-	r.tufRepo = tuf.NewTufRepo(kdb, r.cryptoService)
+	r.tufRepo = tuf.NewRepo(kdb, r.cryptoService)
 
 	signedRoot, err := data.RootFromSigned(root)
 	if err != nil {

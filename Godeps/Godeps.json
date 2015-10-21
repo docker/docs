@@ -96,7 +96,7 @@
 		},
 		{
 			"ImportPath": "github.com/endophage/gotuf",
-			"Rev": "876c31a61bc4aa0dae09bb8ef3946dc26dd04924"
+			"Rev": "0e290bf7c881a94ac51c11e8753f521012f890bf"
 		},
 		{
 			"ImportPath": "github.com/go-sql-driver/mysql",

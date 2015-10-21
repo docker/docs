@@ -11,6 +11,7 @@ import (
 	"github.com/jfrazelle/go/canonical/json"
 )
 
+// Various basic signing errors
 var (
 	ErrMissingKey   = errors.New("tuf: missing key")
 	ErrNoSignatures = errors.New("tuf: data has no signatures")
@@ -61,6 +62,8 @@ func VerifyRoot(s *data.Signed, minVersion int, keys map[string]data.PublicKey) 
 	return ErrRoleThreshold{}
 }
 
+// Verify checks the signatures and metadata (expiry, version) for the signed role
+// data
 func Verify(s *data.Signed, role string, minVersion int, db *keys.KeyDB) error {
 	if err := VerifySignatures(s, role, db); err != nil {
 		return err
@@ -87,10 +90,12 @@ func verifyMeta(s *data.Signed, role string, minVersion int) error {
 	return nil
 }
 
-var IsExpired = func(t time.Time) bool {
+// IsExpired checks if the given time passed before the present time
+func IsExpired(t time.Time) bool {
 	return t.Before(time.Now())
 }
 
+// VerifySignatures checks the we have sufficient valid signatures for the given role
 func VerifySignatures(s *data.Signed, role string, db *keys.KeyDB) error {
 	if len(s.Signatures) == 0 {
 		return ErrNoSignatures
@@ -149,6 +154,7 @@ func VerifySignatures(s *data.Signed, role string, db *keys.KeyDB) error {
 	return nil
 }
 
+// Unmarshal unmarshals and verifys the raw bytes for a given role's metadata
 func Unmarshal(b []byte, v interface{}, role string, minVersion int, db *keys.KeyDB) error {
 	s := &data.Signed{}
 	if err := json.Unmarshal(b, s); err != nil {
@@ -160,6 +166,8 @@ func Unmarshal(b []byte, v interface{}, role string, minVersion int, db *keys.Ke
 	return json.Unmarshal(s.Signed, v)
 }
 
+// UnmarshalTrusted unmarshals and verifies signatures only, not metadata, for a
+// given role's metadata
 func UnmarshalTrusted(b []byte, v interface{}, role string, db *keys.KeyDB) error {
 	s := &data.Signed{}
 	if err := json.Unmarshal(b, s); err != nil {

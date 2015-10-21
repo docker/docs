@@ -6,12 +6,14 @@ import (
 	"github.com/jfrazelle/go/canonical/json"
 )
 
+// SignedRoot is a fully unpacked root.json
 type SignedRoot struct {
 	Signatures []Signature
 	Signed     Root
 	Dirty      bool
 }
 
+// Root is the Signed component of a root.json
 type Root struct {
 	Type    string    `json:"_type"`
 	Version int       `json:"version"`
@@ -23,6 +25,7 @@ type Root struct {
 	ConsistentSnapshot bool                 `json:"consistent_snapshot"`
 }
 
+// NewRoot initializes a new SignedRoot with a set of keys, roles, and the consistent flag
 func NewRoot(keys map[string]PublicKey, roles map[string]*RootRole, consistent bool) (*SignedRoot, error) {
 	signedRoot := &SignedRoot{
 		Signatures: make([]Signature, 0),
@@ -56,6 +59,7 @@ func NewRoot(keys map[string]PublicKey, roles map[string]*RootRole, consistent b
 	return signedRoot, nil
 }
 
+// ToSigned partially serializes a SignedRoot for further signing
 func (r SignedRoot) ToSigned() (*Signed, error) {
 	s, err := json.MarshalCanonical(r.Signed)
 	if err != nil {
@@ -74,6 +78,7 @@ func (r SignedRoot) ToSigned() (*Signed, error) {
 	}, nil
 }
 
+// RootFromSigned fully unpacks a Signed object into a SignedRoot
 func RootFromSigned(s *Signed) (*SignedRoot, error) {
 	r := Root{}
 	err := json.Unmarshal(s.Signed, &r)

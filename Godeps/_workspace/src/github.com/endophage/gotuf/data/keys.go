@@ -8,22 +8,27 @@ import (
 	"github.com/jfrazelle/go/canonical/json"
 )
 
+// Key is the minimal interface for a public key. It is declared
+// independently of PublicKey for composability.
 type Key interface {
 	ID() string
 	Algorithm() KeyAlgorithm
 	Public() []byte
 }
 
+// PublicKey is the necessary interface for public keys
 type PublicKey interface {
 	Key
 }
 
+// PrivateKey adds the ability to access the private key
 type PrivateKey interface {
 	Key
 
 	Private() []byte
 }
 
+// KeyPair holds the public and private key bytes
 type KeyPair struct {
 	Public  []byte `json:"public"`
 	Private []byte `json:"private"`
@@ -35,11 +40,13 @@ type KeyPair struct {
 // JSON would be different). This structure should normally be accessed through
 // the PublicKey or PrivateKey interfaces.
 type TUFKey struct {
-	id    string       `json:"-"`
+	id    string
 	Type  KeyAlgorithm `json:"keytype"`
 	Value KeyPair      `json:"keyval"`
 }
 
+// NewPrivateKey instantiates a new TUFKey with the private key component
+// populated
 func NewPrivateKey(algorithm KeyAlgorithm, public, private []byte) *TUFKey {
 	return &TUFKey{
 		Type: algorithm,
@@ -50,10 +57,12 @@ func NewPrivateKey(algorithm KeyAlgorithm, public, private []byte) *TUFKey {
 	}
 }
 
+// Algorithm returns the algorithm of the key
 func (k TUFKey) Algorithm() KeyAlgorithm {
 	return k.Type
 }
 
+// ID efficiently generates if necessary, and caches the ID of the key
 func (k *TUFKey) ID() string {
 	if k.id == "" {
 		pubK := NewPublicKey(k.Algorithm(), k.Public())
@@ -67,14 +76,18 @@ func (k *TUFKey) ID() string {
 	return k.id
 }
 
+// Public returns the public bytes
 func (k TUFKey) Public() []byte {
 	return k.Value.Public
 }
 
+// Private returns the private bytes
 func (k TUFKey) Private() []byte {
 	return k.Value.Private
 }
 
+// NewPublicKey instantiates a new TUFKey where the private bytes are
+// guaranteed to be nil
 func NewPublicKey(algorithm KeyAlgorithm, public []byte) PublicKey {
 	return &TUFKey{
 		Type: algorithm,
@@ -85,6 +98,8 @@ func NewPublicKey(algorithm KeyAlgorithm, public []byte) PublicKey {
 	}
 }
 
+// PublicKeyFromPrivate returns a new TUFKey based on a private key, with
+// the private key bytes guaranteed to be nil.
 func PublicKeyFromPrivate(pk PrivateKey) PublicKey {
 	return &TUFKey{
 		Type: pk.Algorithm(),

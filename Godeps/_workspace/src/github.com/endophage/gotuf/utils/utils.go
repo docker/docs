@@ -15,6 +15,7 @@ import (
 	"github.com/endophage/gotuf/data"
 )
 
+// Download does a simple download from a URL
 func Download(url url.URL) (*http.Response, error) {
 	tr := &http.Transport{
 		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
@@ -23,6 +24,7 @@ func Download(url url.URL) (*http.Response, error) {
 	return client.Get(url.String())
 }
 
+// Upload does a simple JSON upload to a URL
 func Upload(url string, body io.Reader) (*http.Response, error) {
 	tr := &http.Transport{
 		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
@@ -31,6 +33,8 @@ func Upload(url string, body io.Reader) (*http.Response, error) {
 	return client.Post(url, "application/json", body)
 }
 
+// ValidateTarget ensures that the data read from reader matches
+// the known metadata
 func ValidateTarget(r io.Reader, m *data.FileMeta) error {
 	h := sha256.New()
 	length, err := io.Copy(h, r)
@@ -38,7 +42,7 @@ func ValidateTarget(r io.Reader, m *data.FileMeta) error {
 		return err
 	}
 	if length != m.Length {
-		return fmt.Errorf("Size of downloaded target did not match targets entry.\nExpected: %s\nReceived: %s\n", m.Length, length)
+		return fmt.Errorf("Size of downloaded target did not match targets entry.\nExpected: %d\nReceived: %d\n", m.Length, length)
 	}
 	hashDigest := h.Sum(nil)
 	if bytes.Compare(m.Hashes["sha256"], hashDigest[:]) != 0 {
@@ -47,6 +51,7 @@ func ValidateTarget(r io.Reader, m *data.FileMeta) error {
 	return nil
 }
 
+// StrSliceContains checks if the given string appears in the slice
 func StrSliceContains(ss []string, s string) bool {
 	for _, v := range ss {
 		if v == s {
@@ -56,6 +61,8 @@ func StrSliceContains(ss []string, s string) bool {
 	return false
 }
 
+// StrSliceContainsI checks if the given string appears in the slice
+// in a case insensitive manner
 func StrSliceContainsI(ss []string, s string) bool {
 	s = strings.ToLower(s)
 	for _, v := range ss {
@@ -67,19 +74,26 @@ func StrSliceContainsI(ss []string, s string) bool {
 	return false
 }
 
+// FileExists returns true if a file (or dir) exists at the given path,
+// false otherwise
 func FileExists(path string) bool {
 	_, err := os.Stat(path)
 	return os.IsNotExist(err)
 }
 
+// NoopCloser is a simple Reader wrapper that does nothing when Close is
+// called
 type NoopCloser struct {
 	io.Reader
 }
 
+// Close does nothing for a NoopCloser
 func (nc *NoopCloser) Close() error {
 	return nil
 }
 
+// DoHash returns the digest of d using the hashing algorithm named
+// in alg
 func DoHash(alg string, d []byte) []byte {
 	switch alg {
 	case "sha256":

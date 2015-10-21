@@ -14,27 +14,33 @@ import (
 	"github.com/jfrazelle/go/canonical/json"
 )
 
+// KeyAlgorithm for types of keys
 type KeyAlgorithm string
 
 func (k KeyAlgorithm) String() string {
 	return string(k)
 }
 
+// SigAlgorithm for types of signatures
 type SigAlgorithm string
 
 func (k SigAlgorithm) String() string {
 	return string(k)
 }
 
-const (
-	defaultHashAlgorithm = "sha256"
+const defaultHashAlgorithm = "sha256"
 
+// Signature types
+const (
 	EDDSASignature       SigAlgorithm = "eddsa"
 	RSAPSSSignature      SigAlgorithm = "rsapss"
 	RSAPKCS1v15Signature SigAlgorithm = "rsapkcs1v15"
 	ECDSASignature       SigAlgorithm = "ecdsa"
 	PyCryptoSignature    SigAlgorithm = "pycrypto-pkcs#1 pss"
+)
 
+// Key types
+const (
 	ED25519Key   KeyAlgorithm = "ed25519"
 	RSAKey       KeyAlgorithm = "rsa"
 	RSAx509Key   KeyAlgorithm = "rsa-x509"
@@ -42,6 +48,7 @@ const (
 	ECDSAx509Key KeyAlgorithm = "ecdsa-x509"
 )
 
+// TUFTypes is the set of metadata types
 var TUFTypes = map[string]string{
 	CanonicalRootRole:      "Root",
 	CanonicalTargetsRole:   "Targets",
@@ -57,6 +64,7 @@ func SetTUFTypes(ts map[string]string) {
 	}
 }
 
+// ValidTUFType checks if the given type is valid for the role
 func ValidTUFType(typ, role string) bool {
 	if ValidRole(role) {
 		// All targets delegation roles must have
@@ -80,38 +88,54 @@ func ValidTUFType(typ, role string) bool {
 	return false
 }
 
+// Signed is the high level, partially deserialized metadata object
+// used to verify signatures before fully unpacking, or to add signatures
+// before fully packing
 type Signed struct {
 	Signed     json.RawMessage `json:"signed"`
 	Signatures []Signature     `json:"signatures"`
 }
 
+// SignedCommon contains the fields common to the Signed component of all
+// TUF metadata files
 type SignedCommon struct {
 	Type    string    `json:"_type"`
 	Expires time.Time `json:"expires"`
 	Version int       `json:"version"`
 }
 
+// SignedMeta is used in server validation where we only need signatures
+// and common fields
 type SignedMeta struct {
 	Signed     SignedCommon `json:"signed"`
 	Signatures []Signature  `json:"signatures"`
 }
 
+// Signature is a signature on a piece of metadata
 type Signature struct {
 	KeyID     string       `json:"keyid"`
 	Method    SigAlgorithm `json:"method"`
 	Signature []byte       `json:"sig"`
 }
 
+// Files is the map of paths to file meta container in targets and delegations
+// metadata files
 type Files map[string]FileMeta
 
+// Hashes is the map of hash type to digest created for each metadata
+// and target file
 type Hashes map[string][]byte
 
+// FileMeta contains the size and hashes for a metadata or target file. Custom
+// data can be optionally added.
 type FileMeta struct {
 	Length int64           `json:"length"`
 	Hashes Hashes          `json:"hashes"`
 	Custom json.RawMessage `json:"custom,omitempty"`
 }
 
+// NewFileMeta generates a FileMeta object from the reader, using the
+// hash algorithms provided
 func NewFileMeta(r io.Reader, hashAlgorithms ...string) (FileMeta, error) {
 	if len(hashAlgorithms) == 0 {
 		hashAlgorithms = []string{defaultHashAlgorithm}
@@ -141,11 +165,13 @@ func NewFileMeta(r io.Reader, hashAlgorithms ...string) (FileMeta, error) {
 	return m, nil
 }
 
+// Delegations holds a tier of targets delegations
 type Delegations struct {
 	Keys  map[string]PublicKey `json:"keys"`
 	Roles []*Role              `json:"roles"`
 }
 
+// NewDelegations initializes an empty Delegations object
 func NewDelegations() *Delegations {
 	return &Delegations{
 		Keys:  make(map[string]PublicKey),
@@ -172,6 +198,7 @@ func SetDefaultExpiryTimes(times map[string]int) {
 	}
 }
 
+// DefaultExpires gets the default expiry time for the given role
 func DefaultExpires(role string) time.Time {
 	var t time.Time
 	if t, ok := defaultExpiryTimes[role]; ok {
@@ -182,6 +209,7 @@ func DefaultExpires(role string) time.Time {
 
 type unmarshalledSignature Signature
 
+// UnmarshalJSON does a custom unmarshalling of the signature JSON
 func (s *Signature) UnmarshalJSON(data []byte) error {
 	uSignature := unmarshalledSignature{}
 	err := json.Unmarshal(data, &uSignature)

@@ -1,6 +1,6 @@
 {
 	"ImportPath": "github.com/endophage/gotuf",
-	"GoVersion": "go1.4.2",
+	"GoVersion": "go1.5.1",
 	"Packages": [
 		"./..."
 	],
@@ -13,6 +13,21 @@
 		{
 			"ImportPath": "github.com/agl/ed25519",
 			"Rev": "d2b94fd789ea21d12fac1a4443dd3a3f79cda72c"
+		},
+		{
+			"ImportPath": "github.com/docker/docker/pkg/term",
+			"Comment": "v1.7.1",
+			"Rev": "786b29d4db80a6175e72b47a794ee044918ba734"
+		},
+		{
+			"ImportPath": "github.com/docker/notary/pkg/passphrase",
+			"Comment": "docker-v1.8.0-rc1-229-ge646033",
+			"Rev": "e6460330bdbef7d9a7a9a3dc51df2be83861c1b0"
+		},
+		{
+			"ImportPath": "github.com/docker/notary/trustmanager",
+			"Comment": "docker-v1.8.0-rc1-229-ge646033",
+			"Rev": "e6460330bdbef7d9a7a9a3dc51df2be83861c1b0"
 		},
 		{
 			"ImportPath": "github.com/google/gofuzz",

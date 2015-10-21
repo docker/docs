@@ -8,12 +8,14 @@ import (
 	"github.com/jfrazelle/go/canonical/json"
 )
 
+// SignedSnapshot is a fully unpacked snapshot.json
 type SignedSnapshot struct {
 	Signatures []Signature
 	Signed     Snapshot
 	Dirty      bool
 }
 
+// Snapshot is the Signed component of a snapshot.json
 type Snapshot struct {
 	Type    string    `json:"_type"`
 	Version int       `json:"version"`
@@ -21,6 +23,8 @@ type Snapshot struct {
 	Meta    Files     `json:"meta"`
 }
 
+// NewSnapshot initilizes a SignedSnapshot with a given top level root
+// and targets objects
 func NewSnapshot(root *Signed, targets *Signed) (*SignedSnapshot, error) {
 	logrus.Debug("generating new snapshot...")
 	targetsJSON, err := json.Marshal(targets)
@@ -59,6 +63,7 @@ func (sp *SignedSnapshot) hashForRole(role string) []byte {
 	return sp.Signed.Meta[role].Hashes["sha256"]
 }
 
+// ToSigned partially serializes a SignedSnapshot for further signing
 func (sp SignedSnapshot) ToSigned() (*Signed, error) {
 	s, err := json.MarshalCanonical(sp.Signed)
 	if err != nil {
@@ -77,11 +82,13 @@ func (sp SignedSnapshot) ToSigned() (*Signed, error) {
 	}, nil
 }
 
+// AddMeta updates a role in the snapshot with new meta
 func (sp *SignedSnapshot) AddMeta(role string, meta FileMeta) {
 	sp.Signed.Meta[role] = meta
 	sp.Dirty = true
 }
 
+// SnapshotFromSigned fully unpacks a Signed object into a SignedSnapshot
 func SnapshotFromSigned(s *Signed) (*SignedSnapshot, error) {
 	sp := Snapshot{}
 	err := json.Unmarshal(s.Signed, &sp)

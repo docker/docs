@@ -15,6 +15,10 @@ const (
 	CanonicalTimestampRole = "timestamp"
 )
 
+// ValidRoles holds an overrideable mapping of canonical role names
+// to any custom roles names a user wants to make use of. This allows
+// us to be internally consistent while using different roles in the
+// public TUF files.
 var ValidRoles = map[string]string{
 	CanonicalRootRole:      CanonicalRootRole,
 	CanonicalTargetsRole:   CanonicalTargetsRole,
@@ -22,6 +26,7 @@ var ValidRoles = map[string]string{
 	CanonicalTimestampRole: CanonicalTimestampRole,
 }
 
+// SetValidRoles is a utility function to override some or all of the roles
 func SetValidRoles(rs map[string]string) {
 	// iterate ValidRoles
 	for k := range ValidRoles {
@@ -31,13 +36,17 @@ func SetValidRoles(rs map[string]string) {
 	}
 }
 
-func RoleName(role string) string {
-	if r, ok := ValidRoles[role]; ok {
+// RoleName returns the (possibly overridden) role name for the provided
+// canonical role name
+func RoleName(canonicalRole string) string {
+	if r, ok := ValidRoles[canonicalRole]; ok {
 		return r
 	}
-	return role
+	return canonicalRole
 }
 
+// CanonicalRole does a reverse lookup to get the canonical role name
+// from the (possibly overridden) role name
 func CanonicalRole(role string) string {
 	name := strings.ToLower(role)
 	if _, ok := ValidRoles[name]; ok {
@@ -79,10 +88,13 @@ func ValidRole(name string) bool {
 	return false
 }
 
+// RootRole is a cut down role as it appears in the root.json
 type RootRole struct {
 	KeyIDs    []string `json:"keyids"`
 	Threshold int      `json:"threshold"`
 }
+
+// Role is a more verbose role as they appear in targets delegations
 type Role struct {
 	RootRole
 	Name             string   `json:"name"`
@@ -91,6 +103,7 @@ type Role struct {
 	Email            string   `json:"email,omitempty"`
 }
 
+// NewRole creates a new Role object from the given parameters
 func NewRole(name string, threshold int, keyIDs, paths, pathHashPrefixes []string) (*Role, error) {
 	if len(paths) > 0 && len(pathHashPrefixes) > 0 {
 		return nil, errors.ErrInvalidRole{}
@@ -113,10 +126,13 @@ func NewRole(name string, threshold int, keyIDs, paths, pathHashPrefixes []strin
 
 }
 
+// IsValid checks if the role has defined both paths and path hash prefixes,
+// having both is invalid
 func (r Role) IsValid() bool {
 	return !(len(r.Paths) > 0 && len(r.PathHashPrefixes) > 0)
 }
 
+// ValidKey checks if the given id is a recognized signing key for the role
 func (r Role) ValidKey(id string) bool {
 	for _, key := range r.KeyIDs {
 		if key == id {
@@ -126,6 +142,7 @@ func (r Role) ValidKey(id string) bool {
 	return false
 }
 
+// CheckPaths checks if a given path is valid for the role
 func (r Role) CheckPaths(path string) bool {
 	for _, p := range r.Paths {
 		if strings.HasPrefix(path, p) {
@@ -135,6 +152,7 @@ func (r Role) CheckPaths(path string) bool {
 	return false
 }
 
+// CheckPrefixes checks if a given hash matches the prefixes for the role
 func (r Role) CheckPrefixes(hash string) bool {
 	for _, p := range r.PathHashPrefixes {
 		if strings.HasPrefix(hash, p) {
@@ -144,6 +162,7 @@ func (r Role) CheckPrefixes(hash string) bool {
 	return false
 }
 
+// IsDelegation checks if the role is a delegation or a root role
 func (r Role) IsDelegation() bool {
 	targetsBase := fmt.Sprintf("%s/", ValidRoles[CanonicalTargetsRole])
 	return strings.HasPrefix(r.Name, targetsBase)

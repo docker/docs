@@ -1,4 +1,4 @@
-// tuf defines the core TUF logic around manipulating a repo.
+// Package tuf defines the core TUF logic around manipulating a repo.
 package tuf
 
 import (
@@ -19,24 +19,29 @@ import (
 	"github.com/endophage/gotuf/utils"
 )
 
+// ErrSigVerifyFail - signature verification failed
 type ErrSigVerifyFail struct{}
 
 func (e ErrSigVerifyFail) Error() string {
 	return "Error: Signature verification failed"
 }
 
+// ErrMetaExpired - metadata file has expired
 type ErrMetaExpired struct{}
 
 func (e ErrMetaExpired) Error() string {
 	return "Error: Metadata has expired"
 }
 
+// ErrLocalRootExpired - the local root file is out of date
 type ErrLocalRootExpired struct{}
 
 func (e ErrLocalRootExpired) Error() string {
 	return "Error: Local Root Has Expired"
 }
 
+// ErrNotLoaded - attempted to access data that has not been loaded into
+// the repo
 type ErrNotLoaded struct {
 	role string
 }
@@ -45,12 +50,12 @@ func (err ErrNotLoaded) Error() string {
 	return fmt.Sprintf("%s role has not been loaded", err.role)
 }
 
-// TufRepo is an in memory representation of the TUF Repo.
+// Repo is an in memory representation of the TUF Repo.
 // It operates at the data.Signed level, accepting and producing
-// data.Signed objects. Users of a TufRepo are responsible for
+// data.Signed objects. Users of a Repo are responsible for
 // fetching raw JSON and using the Set* functions to populate
-// the TufRepo instance.
-type TufRepo struct {
+// the Repo instance.
+type Repo struct {
 	Root          *data.SignedRoot
 	Targets       map[string]*data.SignedTargets
 	Snapshot      *data.SignedSnapshot
@@ -59,10 +64,10 @@ type TufRepo struct {
 	cryptoService signed.CryptoService
 }
 
-// NewTufRepo initializes a TufRepo instance with a keysDB and a signer.
-// If the TufRepo will only be used for reading, the signer should be nil.
-func NewTufRepo(keysDB *keys.KeyDB, cryptoService signed.CryptoService) *TufRepo {
-	repo := &TufRepo{
+// NewRepo initializes a Repo instance with a keysDB and a signer.
+// If the Repo will only be used for reading, the signer should be nil.
+func NewRepo(keysDB *keys.KeyDB, cryptoService signed.CryptoService) *Repo {
+	repo := &Repo{
 		Targets:       make(map[string]*data.SignedTargets),
 		keysDB:        keysDB,
 		cryptoService: cryptoService,
@@ -71,7 +76,7 @@ func NewTufRepo(keysDB *keys.KeyDB, cryptoService signed.CryptoService) *TufRepo
 }
 
 // AddBaseKeys is used to add keys to the role in root.json
-func (tr *TufRepo) AddBaseKeys(role string, keys ...data.PublicKey) error {
+func (tr *Repo) AddBaseKeys(role string, keys ...data.PublicKey) error {
 	if tr.Root == nil {
 		return ErrNotLoaded{role: "root"}
 	}
@@ -101,7 +106,7 @@ func (tr *TufRepo) AddBaseKeys(role string, keys ...data.PublicKey) error {
 }
 
 // ReplaceBaseKeys is used to replace all keys for the given role with the new keys
-func (tr *TufRepo) ReplaceBaseKeys(role string, keys ...data.PublicKey) error {
+func (tr *Repo) ReplaceBaseKeys(role string, keys ...data.PublicKey) error {
 	r := tr.keysDB.GetRole(role)
 	err := tr.RemoveBaseKeys(role, r.KeyIDs...)
 	if err != nil {
@@ -111,11 +116,11 @@ func (tr *TufRepo) ReplaceBaseKeys(role string, keys ...data.PublicKey) error {
 }
 
 // RemoveBaseKeys is used to remove keys from the roles in root.json
-func (tr *TufRepo) RemoveBaseKeys(role string, keyIDs ...string) error {
+func (tr *Repo) RemoveBaseKeys(role string, keyIDs ...string) error {
 	if tr.Root == nil {
 		return ErrNotLoaded{role: "root"}
 	}
-	keep := make([]string, 0)
+	var keep []string
 	toDelete := make(map[string]struct{})
 	// remove keys from specified role
 	for _, k := range keyIDs {
@@ -157,7 +162,7 @@ func (tr *TufRepo) RemoveBaseKeys(role string, keyIDs ...string) error {
 // An empty before string indicates to add the role to the end of the
 // delegation list.
 // A new, empty, targets file will be created for the new role.
-func (tr *TufRepo) UpdateDelegations(role *data.Role, keys []data.Key, before string) error {
+func (tr *Repo) UpdateDelegations(role *data.Role, keys []data.Key, before string) error {
 	if !role.IsDelegation() || !role.IsValid() {
 		return errors.ErrInvalidRole{}
 	}
@@ -201,7 +206,7 @@ func (tr *TufRepo) UpdateDelegations(role *data.Role, keys []data.Key, before st
 // data.ValidTypes to determine what the role names and filename should be. It
 // also relies on the keysDB having already been populated with the keys and
 // roles.
-func (tr *TufRepo) InitRepo(consistent bool) error {
+func (tr *Repo) InitRepo(consistent bool) error {
 	if err := tr.InitRoot(consistent); err != nil {
 		return err
 	}
@@ -214,7 +219,9 @@ func (tr *TufRepo) InitRepo(consistent bool) error {
 	return tr.InitTimestamp()
 }
 
-func (tr *TufRepo) InitRoot(consistent bool) error {
+// InitRoot initializes an empty root file with the 4 core roles based
+// on the current content of th ekey db
+func (tr *Repo) InitRoot(consistent bool) error {
 	rootRoles := make(map[string]*data.RootRole)
 	rootKeys := make(map[string]data.PublicKey)
 	for _, r := range data.ValidRoles {
@@ -240,13 +247,15 @@ func (tr *TufRepo) InitRoot(consistent bool) error {
 	return nil
 }
 
-func (tr *TufRepo) InitTargets() error {
+// InitTargets initializes an empty targets
+func (tr *Repo) InitTargets() error {
 	targets := data.NewTargets()
 	tr.Targets[data.ValidRoles["targets"]] = targets
 	return nil
 }
 
-func (tr *TufRepo) InitSnapshot() error {
+// InitSnapshot initializes a snapshot based on the current root and targets
+func (tr *Repo) InitSnapshot() error {
 	root, err := tr.Root.ToSigned()
 	if err != nil {
 		return err
@@ -263,7 +272,8 @@ func (tr *TufRepo) InitSnapshot() error {
 	return nil
 }
 
-func (tr *TufRepo) InitTimestamp() error {
+// InitTimestamp initializes a timestamp based on the current snapshot
+func (tr *Repo) InitTimestamp() error {
 	snap, err := tr.Snapshot.ToSigned()
 	if err != nil {
 		return err
@@ -278,9 +288,9 @@ func (tr *TufRepo) InitTimestamp() error {
 }
 
 // SetRoot parses the Signed object into a SignedRoot object, sets
-// the keys and roles in the KeyDB, and sets the TufRepo.Root field
+// the keys and roles in the KeyDB, and sets the Repo.Root field
 // to the SignedRoot object.
-func (tr *TufRepo) SetRoot(s *data.SignedRoot) error {
+func (tr *Repo) SetRoot(s *data.SignedRoot) error {
 	for _, key := range s.Signed.Keys {
 		logrus.Debug("Adding key ", key.ID())
 		tr.keysDB.AddKey(key)
@@ -307,23 +317,23 @@ func (tr *TufRepo) SetRoot(s *data.SignedRoot) error {
 }
 
 // SetTimestamp parses the Signed object into a SignedTimestamp object
-// and sets the TufRepo.Timestamp field.
-func (tr *TufRepo) SetTimestamp(s *data.SignedTimestamp) error {
+// and sets the Repo.Timestamp field.
+func (tr *Repo) SetTimestamp(s *data.SignedTimestamp) error {
 	tr.Timestamp = s
 	return nil
 }
 
 // SetSnapshot parses the Signed object into a SignedSnapshots object
-// and sets the TufRepo.Snapshot field.
-func (tr *TufRepo) SetSnapshot(s *data.SignedSnapshot) error {
+// and sets the Repo.Snapshot field.
+func (tr *Repo) SetSnapshot(s *data.SignedSnapshot) error {
 	tr.Snapshot = s
 	return nil
 }
 
 // SetTargets parses the Signed object into a SignedTargets object,
 // reads the delegated roles and keys into the KeyDB, and sets the
-// SignedTargets object agaist the role in the TufRepo.Targets map.
-func (tr *TufRepo) SetTargets(role string, s *data.SignedTargets) error {
+// SignedTargets object agaist the role in the Repo.Targets map.
+func (tr *Repo) SetTargets(role string, s *data.SignedTargets) error {
 	for _, k := range s.Signed.Delegations.Keys {
 		tr.keysDB.AddKey(k)
 	}
@@ -337,7 +347,7 @@ func (tr *TufRepo) SetTargets(role string, s *data.SignedTargets) error {
 // TargetMeta returns the FileMeta entry for the given path in the
 // targets file associated with the given role. This may be nil if
 // the target isn't found in the targets file.
-func (tr TufRepo) TargetMeta(role, path string) *data.FileMeta {
+func (tr Repo) TargetMeta(role, path string) *data.FileMeta {
 	if t, ok := tr.Targets[role]; ok {
 		if m, ok := t.Signed.Targets[path]; ok {
 			return &m
@@ -348,12 +358,12 @@ func (tr TufRepo) TargetMeta(role, path string) *data.FileMeta {
 
 // TargetDelegations returns a slice of Roles that are valid publishers
 // for the target path provided.
-func (tr TufRepo) TargetDelegations(role, path, pathHex string) []*data.Role {
+func (tr Repo) TargetDelegations(role, path, pathHex string) []*data.Role {
 	if pathHex == "" {
 		pathDigest := sha256.Sum256([]byte(path))
 		pathHex = hex.EncodeToString(pathDigest[:])
 	}
-	roles := make([]*data.Role, 0)
+	var roles []*data.Role
 	if t, ok := tr.Targets[role]; ok {
 		for _, r := range t.Signed.Delegations.Roles {
 			if r.CheckPrefixes(pathHex) || r.CheckPaths(path) {
@@ -370,7 +380,7 @@ func (tr TufRepo) TargetDelegations(role, path, pathHex string) []*data.Role {
 // runs out of locations to search.
 // N.B. Multiple entries may exist in different delegated roles
 //      for the same target. Only the first one encountered is returned.
-func (tr TufRepo) FindTarget(path string) *data.FileMeta {
+func (tr Repo) FindTarget(path string) *data.FileMeta {
 	pathDigest := sha256.Sum256([]byte(path))
 	pathHex := hex.EncodeToString(pathDigest[:])
 
@@ -395,10 +405,10 @@ func (tr TufRepo) FindTarget(path string) *data.FileMeta {
 // AddTargets will attempt to add the given targets specifically to
 // the directed role. If the user does not have the signing keys for the role
 // the function will return an error and the full slice of targets.
-func (tr *TufRepo) AddTargets(role string, targets data.Files) (data.Files, error) {
+func (tr *Repo) AddTargets(role string, targets data.Files) (data.Files, error) {
 	t, ok := tr.Targets[role]
 	if !ok {
-		return targets, errors.ErrInvalidRole{role}
+		return targets, errors.ErrInvalidRole{Role: role}
 	}
 	invalid := make(data.Files)
 	for path, target := range targets {
@@ -418,10 +428,11 @@ func (tr *TufRepo) AddTargets(role string, targets data.Files) (data.Files, erro
 	return nil, nil
 }
 
-func (tr *TufRepo) RemoveTargets(role string, targets ...string) error {
+// RemoveTargets removes the given target (paths) from the given target role (delegation)
+func (tr *Repo) RemoveTargets(role string, targets ...string) error {
 	t, ok := tr.Targets[role]
 	if !ok {
-		return errors.ErrInvalidRole{role}
+		return errors.ErrInvalidRole{Role: role}
 	}
 
 	for _, path := range targets {
@@ -431,7 +442,8 @@ func (tr *TufRepo) RemoveTargets(role string, targets ...string) error {
 	return nil
 }
 
-func (tr *TufRepo) UpdateSnapshot(role string, s *data.Signed) error {
+// UpdateSnapshot updates the FileMeta for the given role based on the Signed object
+func (tr *Repo) UpdateSnapshot(role string, s *data.Signed) error {
 	jsonData, err := json.Marshal(s)
 	if err != nil {
 		return err
@@ -445,7 +457,8 @@ func (tr *TufRepo) UpdateSnapshot(role string, s *data.Signed) error {
 	return nil
 }
 
-func (tr *TufRepo) UpdateTimestamp(s *data.Signed) error {
+// UpdateTimestamp updates the snapshot meta in the timestamp based on the Signed object
+func (tr *Repo) UpdateTimestamp(s *data.Signed) error {
 	jsonData, err := json.Marshal(s)
 	if err != nil {
 		return err
@@ -459,7 +472,8 @@ func (tr *TufRepo) UpdateTimestamp(s *data.Signed) error {
 	return nil
 }
 
-func (tr *TufRepo) SignRoot(expires time.Time, cryptoService signed.CryptoService) (*data.Signed, error) {
+// SignRoot signs the root
+func (tr *Repo) SignRoot(expires time.Time, cryptoService signed.CryptoService) (*data.Signed, error) {
 	logrus.Debug("signing root...")
 	tr.Root.Signed.Expires = expires
 	tr.Root.Signed.Version++
@@ -476,7 +490,8 @@ func (tr *TufRepo) SignRoot(expires time.Time, cryptoService signed.CryptoServic
 	return signed, nil
 }
 
-func (tr *TufRepo) SignTargets(role string, expires time.Time, cryptoService signed.CryptoService) (*data.Signed, error) {
+// SignTargets signs the targets file for the given top level or delegated targets role
+func (tr *Repo) SignTargets(role string, expires time.Time, cryptoService signed.CryptoService) (*data.Signed, error) {
 	logrus.Debugf("sign targets called for role %s", role)
 	tr.Targets[role].Signed.Expires = expires
 	tr.Targets[role].Signed.Version++
@@ -495,7 +510,8 @@ func (tr *TufRepo) SignTargets(role string, expires time.Time, cryptoService sig
 	return signed, nil
 }
 
-func (tr *TufRepo) SignSnapshot(expires time.Time, cryptoService signed.CryptoService) (*data.Signed, error) {
+// SignSnapshot updates the snapshot based on the current targets and root then signs it
+func (tr *Repo) SignSnapshot(expires time.Time, cryptoService signed.CryptoService) (*data.Signed, error) {
 	logrus.Debug("signing snapshot...")
 	signedRoot, err := tr.Root.ToSigned()
 	if err != nil {
@@ -531,7 +547,8 @@ func (tr *TufRepo) SignSnapshot(expires time.Time, cryptoService signed.CryptoSe
 	return signed, nil
 }
 
-func (tr *TufRepo) SignTimestamp(expires time.Time, cryptoService signed.CryptoService) (*data.Signed, error) {
+// SignTimestamp updates the timestamp based on the current snapshot then signs it
+func (tr *Repo) SignTimestamp(expires time.Time, cryptoService signed.CryptoService) (*data.Signed, error) {
 	logrus.Debug("SignTimestamp")
 	signedSnapshot, err := tr.Snapshot.ToSigned()
 	if err != nil {
@@ -557,7 +574,7 @@ func (tr *TufRepo) SignTimestamp(expires time.Time, cryptoService signed.CryptoS
 	return signed, nil
 }
 
-func (tr TufRepo) sign(signedData *data.Signed, role data.Role, cryptoService signed.CryptoService) (*data.Signed, error) {
+func (tr Repo) sign(signedData *data.Signed, role data.Role, cryptoService signed.CryptoService) (*data.Signed, error) {
 	ks := make([]data.PublicKey, 0, len(role.KeyIDs))
 	for _, kid := range role.KeyIDs {
 		k := tr.keysDB.GetKey(kid)

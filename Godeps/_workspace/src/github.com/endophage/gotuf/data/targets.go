@@ -7,18 +7,22 @@ import (
 	"github.com/jfrazelle/go/canonical/json"
 )
 
+// SignedTargets is a fully unpacked targets.json, or target delegation
+// json file
 type SignedTargets struct {
 	Signatures []Signature
 	Signed     Targets
 	Dirty      bool
 }
 
+// Targets is the Signed components of a targets.json or delegation json file
 type Targets struct {
 	SignedCommon
 	Targets     Files       `json:"targets"`
 	Delegations Delegations `json:"delegations,omitempty"`
 }
 
+// NewTargets intiializes a new empty SignedTargets object
 func NewTargets() *SignedTargets {
 	return &SignedTargets{
 		Signatures: make([]Signature, 0),
@@ -53,7 +57,7 @@ func (t SignedTargets) GetMeta(path string) *FileMeta {
 // to the role slice on Delegations per TUF spec proposal on using
 // order to determine priority.
 func (t SignedTargets) GetDelegations(path string) []*Role {
-	roles := make([]*Role, 0)
+	var roles []*Role
 	pathHashBytes := sha256.Sum256([]byte(path))
 	pathHash := hex.EncodeToString(pathHashBytes[:])
 	for _, r := range t.Signed.Delegations.Roles {
@@ -74,15 +78,20 @@ func (t SignedTargets) GetDelegations(path string) []*Role {
 	return roles
 }
 
+// AddTarget adds or updates the meta for the given path
 func (t *SignedTargets) AddTarget(path string, meta FileMeta) {
 	t.Signed.Targets[path] = meta
 	t.Dirty = true
 }
 
+// AddDelegation will add a new delegated role with the given keys,
+// ensuring the keys either already exist, or are added to the map
+// of delegation keys
 func (t *SignedTargets) AddDelegation(role *Role, keys []*PublicKey) error {
 	return nil
 }
 
+// ToSigned partially serializes a SignedTargets for further signing
 func (t SignedTargets) ToSigned() (*Signed, error) {
 	s, err := json.MarshalCanonical(t.Signed)
 	if err != nil {
@@ -101,6 +110,7 @@ func (t SignedTargets) ToSigned() (*Signed, error) {
 	}, nil
 }
 
+// TargetsFromSigned fully unpacks a Signed object into a SignedTargets
 func TargetsFromSigned(s *Signed) (*SignedTargets, error) {
 	t := Targets{}
 	err := json.Unmarshal(s.Signed, &t)

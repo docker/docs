@@ -50,8 +50,10 @@ func RegisterVerifier(algorithm data.SigAlgorithm, v Verifier) {
 	Verifiers[algorithm] = v
 }
 
+// Ed25519Verifier used to verify Ed25519 signatures
 type Ed25519Verifier struct{}
 
+// Verify checks that an ed25519 signature is valid
 func (v Ed25519Verifier) Verify(key data.PublicKey, sig []byte, msg []byte) error {
 	if key.Algorithm() != data.ED25519Key {
 		return ErrInvalidKeyType{}
@@ -156,9 +158,10 @@ func (v RSAPSSVerifier) Verify(key data.PublicKey, sig []byte, msg []byte) error
 	return verifyPSS(pubKey, digest[:], sig)
 }
 
-// RSAPKCS1v15SVerifier checks RSA PKCS1v15 signatures
+// RSAPKCS1v15Verifier checks RSA PKCS1v15 signatures
 type RSAPKCS1v15Verifier struct{}
 
+// Verify does the actual verification
 func (v RSAPKCS1v15Verifier) Verify(key data.PublicKey, sig []byte, msg []byte) error {
 	// will return err if keytype is not a recognized RSA type
 	pubKey, err := getRSAPubKey(key)
@@ -190,7 +193,7 @@ func (v RSAPKCS1v15Verifier) Verify(key data.PublicKey, sig []byte, msg []byte) 
 	return nil
 }
 
-// RSAPSSVerifier checks RSASSA-PSS signatures
+// RSAPyCryptoVerifier checks RSASSA-PSS signatures
 type RSAPyCryptoVerifier struct{}
 
 // Verify does the actual check.

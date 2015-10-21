@@ -16,10 +16,10 @@ import (
 
 // EmptyRepo creates an in memory key database, crypto service
 // and initializes a repo with no targets or delegations.
-func EmptyRepo() (*keys.KeyDB, *tuf.TufRepo, signed.CryptoService) {
+func EmptyRepo() (*keys.KeyDB, *tuf.Repo, signed.CryptoService) {
 	c := signed.NewEd25519()
 	kdb := keys.NewDB()
-	r := tuf.NewTufRepo(kdb, c)
+	r := tuf.NewRepo(kdb, c)
 
 	for _, role := range []string{"root", "targets", "snapshot", "timestamp"} {
 		key, _ := c.Create(role, data.ED25519Key)
@@ -32,7 +32,8 @@ func EmptyRepo() (*keys.KeyDB, *tuf.TufRepo, signed.CryptoService) {
 	return kdb, r, c
 }
 
-func AddTarget(role string, r *tuf.TufRepo) (name string, meta data.FileMeta, content []byte, err error) {
+// AddTarget generates a fake target and adds it to a repo.
+func AddTarget(role string, r *tuf.Repo) (name string, meta data.FileMeta, content []byte, err error) {
 	randness := fuzz.Continue{}
 	content = RandomByteSlice(1024)
 	name = randness.RandString()
@@ -48,6 +49,7 @@ func AddTarget(role string, r *tuf.TufRepo) (name string, meta data.FileMeta, co
 	return
 }
 
+// RandomByteSlice generates some random data to be used for testing only
 func RandomByteSlice(maxSize int) []byte {
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
 	contentSize := r.Intn(maxSize)
@@ -58,7 +60,8 @@ func RandomByteSlice(maxSize int) []byte {
 	return content
 }
 
-func Sign(repo *tuf.TufRepo) (root, targets, snapshot, timestamp *data.Signed, err error) {
+// Sign signs all top level roles in a repo in the appropriate order
+func Sign(repo *tuf.Repo) (root, targets, snapshot, timestamp *data.Signed, err error) {
 	root, err = repo.SignRoot(data.DefaultExpires("root"), nil)
 	if err != nil {
 		return nil, nil, nil, nil, err
@@ -78,6 +81,7 @@ func Sign(repo *tuf.TufRepo) (root, targets, snapshot, timestamp *data.Signed, e
 	return
 }
 
+// Serialize takes the Signed objects for the 4 top level roles and serializes them all to JSON
 func Serialize(sRoot, sTargets, sSnapshot, sTimestamp *data.Signed) (root, targets, snapshot, timestamp []byte, err error) {
 	root, err = json.Marshal(sRoot)
 	if err != nil {

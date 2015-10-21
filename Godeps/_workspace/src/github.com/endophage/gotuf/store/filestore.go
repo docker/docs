@@ -8,7 +8,8 @@ import (
 	"path/filepath"
 )
 
-func NewFilesystemStore(baseDir, metaSubDir, metaExtension, targetsSubDir string) (*filesystemStore, error) {
+// NewFilesystemStore creates a new store in a directory tree
+func NewFilesystemStore(baseDir, metaSubDir, metaExtension, targetsSubDir string) (*FilesystemStore, error) {
 	metaDir := path.Join(baseDir, metaSubDir)
 	targetsDir := path.Join(baseDir, targetsSubDir)
 
@@ -22,7 +23,7 @@ func NewFilesystemStore(baseDir, metaSubDir, metaExtension, targetsSubDir string
 		return nil, err
 	}
 
-	return &filesystemStore{
+	return &FilesystemStore{
 		baseDir:       baseDir,
 		metaDir:       metaDir,
 		metaExtension: metaExtension,
@@ -30,14 +31,16 @@ func NewFilesystemStore(baseDir, metaSubDir, metaExtension, targetsSubDir string
 	}, nil
 }
 
-type filesystemStore struct {
+// FilesystemStore is a store in a locally accessible directory
+type FilesystemStore struct {
 	baseDir       string
 	metaDir       string
 	metaExtension string
 	targetsDir    string
 }
 
-func (f *filesystemStore) GetMeta(name string, size int64) ([]byte, error) {
+// GetMeta returns the meta for the given name (a role)
+func (f *FilesystemStore) GetMeta(name string, size int64) ([]byte, error) {
 	fileName := fmt.Sprintf("%s.%s", name, f.metaExtension)
 	path := filepath.Join(f.metaDir, fileName)
 	meta, err := ioutil.ReadFile(path)
@@ -47,7 +50,8 @@ func (f *filesystemStore) GetMeta(name string, size int64) ([]byte, error) {
 	return meta, nil
 }
 
-func (f *filesystemStore) SetMultiMeta(metas map[string][]byte) error {
+// SetMultiMeta sets the metadata for multiple roles in one operation
+func (f *FilesystemStore) SetMultiMeta(metas map[string][]byte) error {
 	for role, blob := range metas {
 		err := f.SetMeta(role, blob)
 		if err != nil {
@@ -57,7 +61,8 @@ func (f *filesystemStore) SetMultiMeta(metas map[string][]byte) error {
 	return nil
 }
 
-func (f *filesystemStore) SetMeta(name string, meta []byte) error {
+// SetMeta sets the meta for a single role
+func (f *FilesystemStore) SetMeta(name string, meta []byte) error {
 	fileName := fmt.Sprintf("%s.%s", name, f.metaExtension)
 	path := filepath.Join(f.metaDir, fileName)
 	if err := ioutil.WriteFile(path, meta, 0600); err != nil {

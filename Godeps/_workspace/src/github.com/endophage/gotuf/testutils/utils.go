@@ -6,11 +6,13 @@ import (
 	"os"
 
 	"github.com/endophage/gotuf/data"
+	// need to initialize sqlite for tests
 	_ "github.com/mattn/go-sqlite3"
 )
 
-var counter int = 1
+var counter = 1
 
+// SampleMeta returns a static, fake (and invalid) FileMeta object
 func SampleMeta() data.FileMeta {
 	meta := data.FileMeta{
 		Length: 1,
@@ -22,6 +24,7 @@ func SampleMeta() data.FileMeta {
 	return meta
 }
 
+// GetSqliteDB creates and initializes a sqlite db
 func GetSqliteDB() *sql.DB {
 	os.Mkdir("/tmp/sqlite", 0755)
 	conn, err := sql.Open("sqlite3", fmt.Sprintf("/tmp/sqlite/file%d.db", counter))
@@ -40,6 +43,7 @@ func GetSqliteDB() *sql.DB {
 	return conn
 }
 
+// FlushDB deletes a sqliteDB
 func FlushDB(db *sql.DB) {
 	tx, _ := db.Begin()
 	tx.Exec("DELETE FROM `filemeta`")

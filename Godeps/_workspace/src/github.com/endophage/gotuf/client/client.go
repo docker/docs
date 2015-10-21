@@ -22,14 +22,16 @@ import (
 
 const maxSize int64 = 5 << 20
 
+// Client is a usability wrapper around a raw TUF repo
 type Client struct {
-	local  *tuf.TufRepo
+	local  *tuf.Repo
 	remote store.RemoteStore
 	keysDB *keys.KeyDB
 	cache  store.MetadataStore
 }
 
-func NewClient(local *tuf.TufRepo, remote store.RemoteStore, keysDB *keys.KeyDB, cache store.MetadataStore) *Client {
+// NewClient initialized a Client with the given repo, remote source of content, key database, and cache
+func NewClient(local *tuf.Repo, remote store.RemoteStore, keysDB *keys.KeyDB, cache store.MetadataStore) *Client {
 	return &Client{
 		local:  local,
 		remote: remote,
@@ -38,6 +40,7 @@ func NewClient(local *tuf.TufRepo, remote store.RemoteStore, keysDB *keys.KeyDB,
 	}
 }
 
+// Update performs an update to the TUF repo as defined by the TUF spec
 func (c *Client) Update() error {
 	// 1. Get timestamp
 	//   a. If timestamp error (verification, expired, etc...) download new root and return to 1.
@@ -52,7 +55,7 @@ func (c *Client) Update() error {
 	if err != nil {
 		logrus.Debug("Error occurred. Root will be downloaded and another update attempted")
 		if err := c.downloadRoot(); err != nil {
-			logrus.Errorf("client Update (Root):", err)
+			logrus.Error("client Update (Root):", err)
 			return err
 		}
 		// If we error again, we now have the latest root and just want to fail
@@ -129,7 +132,7 @@ func (c Client) checkRoot() error {
 func (c *Client) downloadRoot() error {
 	role := data.RoleName("root")
 	size := maxSize
-	var expectedSha256 []byte = nil
+	var expectedSha256 []byte
 	if c.local.Snapshot != nil {
 		size = c.local.Snapshot.Signed.Meta[role].Length
 		expectedSha256 = c.local.Snapshot.Signed.Meta[role].Hashes["sha256"]
@@ -140,7 +143,7 @@ func (c *Client) downloadRoot() error {
 	// interpreted as 0.
 	var download bool
 	var err error
-	var cachedRoot []byte = nil
+	var cachedRoot []byte
 	old := &data.Signed{}
 	version := 0
 
@@ -261,8 +264,7 @@ func (c *Client) downloadTimestamp() error {
 	}
 	// unlike root, targets and snapshot, always try and download timestamps
 	// from remote, only using the cache one if we couldn't reach remote.
-	raw, err := c.remote.GetMeta(role, maxSize)
-	var s *data.Signed
+	raw, s, err := c.downloadSigned(role, maxSize, nil)
 	if err != nil || len(raw) == 0 {
 		if err, ok := err.(store.ErrMetaNotFound); ok {
 			return err
@@ -279,11 +281,6 @@ func (c *Client) downloadTimestamp() error {
 		s = old
 	} else {
 		download = true
-		s = &data.Signed{}
-		err = json.Unmarshal(raw, s)
-		if err != nil {
-			return err
-		}
 	}
 	err = signed.Verify(s, role, version, c.keysDB)
 	if err != nil {
@@ -305,10 +302,13 @@ func (c *Client) downloadTimestamp() error {
 func (c *Client) downloadSnapshot() error {
 	logrus.Debug("downloadSnapshot")
 	role := data.RoleName("snapshot")
+	if c.local.Timestamp == nil {
+		return ErrMissingMeta{role: "snapshot"}
+	}
 	size := c.local.Timestamp.Signed.Meta[role].Length
 	expectedSha256, ok := c.local.Timestamp.Signed.Meta[role].Hashes["sha256"]
 	if !ok {
-		return fmt.Errorf("Sha256 is currently the only hash supported by this client. No Sha256 found for snapshot")
+		return ErrMissingMeta{role: "snapshot"}
 	}
 
 	var download bool
@@ -373,6 +373,9 @@ func (c *Client) downloadSnapshot() error {
 // including delegates roles.
 func (c *Client) downloadTargets(role string) error {
 	role = data.RoleName(role) // this will really only do something for base targets role
+	if c.local.Snapshot == nil {
+		return ErrMissingMeta{role: role}
+	}
 	snap := c.local.Snapshot.Signed
 	root := c.local.Root.Signed
 	r := c.keysDB.GetRole(role)
@@ -380,7 +383,7 @@ func (c *Client) downloadTargets(role string) error {
 		return fmt.Errorf("Invalid role: %s", role)
 	}
 	keyIDs := r.KeyIDs
-	s, err := c.GetTargetsFile(role, keyIDs, snap.Meta, root.ConsistentSnapshot, r.Threshold)
+	s, err := c.getTargetsFile(role, keyIDs, snap.Meta, root.ConsistentSnapshot, r.Threshold)
 	if err != nil {
 		logrus.Error("Error getting targets file:", err)
 		return err
@@ -398,13 +401,12 @@ func (c *Client) downloadTargets(role string) error {
 }
 
 func (c *Client) downloadSigned(role string, size int64, expectedSha256 []byte) ([]byte, *data.Signed, error) {
-	logrus.Debugf("downloading new %s", role)
 	raw, err := c.remote.GetMeta(role, size)
 	if err != nil {
 		return nil, nil, err
 	}
 	genHash := sha256.Sum256(raw)
-	if !bytes.Equal(genHash[:], expectedSha256) {
+	if expectedSha256 != nil && !bytes.Equal(genHash[:], expectedSha256) {
 		return nil, nil, ErrChecksumMismatch{role: role}
 	}
 	s := &data.Signed{}
@@ -415,15 +417,15 @@ func (c *Client) downloadSigned(role string, size int64, expectedSha256 []byte) 
 	return raw, s, nil
 }
 
-func (c Client) GetTargetsFile(role string, keyIDs []string, snapshotMeta data.Files, consistent bool, threshold int) (*data.Signed, error) {
+func (c Client) getTargetsFile(role string, keyIDs []string, snapshotMeta data.Files, consistent bool, threshold int) (*data.Signed, error) {
 	// require role exists in snapshots
 	roleMeta, ok := snapshotMeta[role]
 	if !ok {
-		return nil, fmt.Errorf("Snapshot does not contain target role")
+		return nil, ErrMissingMeta{role: role}
 	}
 	expectedSha256, ok := snapshotMeta[role].Hashes["sha256"]
 	if !ok {
-		return nil, fmt.Errorf("Sha256 is currently the only hash supported by this client. No Sha256 found for targets role %s", role)
+		return nil, ErrMissingMeta{role: role}
 	}
 
 	// try to get meta file from content addressed cache
@@ -539,6 +541,7 @@ func (c Client) TargetMeta(path string) (*data.FileMeta, error) {
 	return meta, nil
 }
 
+// DownloadTarget downloads the target to dst from the remote
 func (c Client) DownloadTarget(dst io.Writer, path string, meta *data.FileMeta) error {
 	reader, err := c.remote.GetTarget(path)
 	if err != nil {

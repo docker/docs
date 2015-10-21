@@ -67,7 +67,7 @@ func (err ErrBadSnapshot) Error() string {
 // are semantically correct and the signatures are correct
 func validateUpdate(gun string, updates []storage.MetaUpdate, store storage.MetaStore) error {
 	kdb := keys.NewDB()
-	repo := tuf.NewTufRepo(kdb, nil)
+	repo := tuf.NewRepo(kdb, nil)
 	rootRole := data.RoleName(data.CanonicalRootRole)
 	targetsRole := data.RoleName(data.CanonicalTargetsRole)
 	snapshotRole := data.RoleName(data.CanonicalSnapshotRole)

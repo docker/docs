@@ -14,6 +14,8 @@ import (
 	"github.com/Sirupsen/logrus"
 )
 
+// ErrServerUnavailable indicates an error from the server. code allows us to
+// populate the http error we received
 type ErrServerUnavailable struct {
 	code int
 }
@@ -22,12 +24,9 @@ func (err ErrServerUnavailable) Error() string {
 	return fmt.Sprintf("Unable to reach trust server at this time: %d.", err.code)
 }
 
-type ErrShortRead struct{}
-
-func (err ErrShortRead) Error() string {
-	return "Trust server returned incompelete response."
-}
-
+// ErrMaliciousServer indicates the server returned a response that is highly suspected
+// of being malicious. i.e. it attempted to send us more data than the known size of a
+// particular role metadata.
 type ErrMaliciousServer struct{}
 
 func (err ErrMaliciousServer) Error() string {
@@ -52,7 +51,8 @@ type HTTPStore struct {
 	roundTrip     http.RoundTripper
 }
 
-func NewHTTPStore(baseURL, metaPrefix, metaExtension, targetsPrefix, keyExtension string, roundTrip http.RoundTripper) (*HTTPStore, error) {
+// NewHTTPStore initializes a new store against a URL and a number of configuration options
+func NewHTTPStore(baseURL, metaPrefix, metaExtension, targetsPrefix, keyExtension string, roundTrip http.RoundTripper) (RemoteStore, error) {
 	base, err := url.Parse(baseURL)
 	if err != nil {
 		return nil, err
@@ -99,16 +99,13 @@ func (s HTTPStore) GetMeta(name string, size int64) ([]byte, error) {
 	logrus.Debugf("%d when retrieving metadata for %s", resp.StatusCode, name)
 	b := io.LimitReader(resp.Body, size)
 	body, err := ioutil.ReadAll(b)
-	if resp.ContentLength > 0 && int64(len(body)) < resp.ContentLength {
-		return nil, ErrShortRead{}
-	}
-
 	if err != nil {
 		return nil, err
 	}
 	return body, nil
 }
 
+// SetMeta uploads a piece of TUF metadata to the server
 func (s HTTPStore) SetMeta(name string, blob []byte) error {
 	url, err := s.buildMetaURL("")
 	if err != nil {
@@ -131,6 +128,9 @@ func (s HTTPStore) SetMeta(name string, blob []byte) error {
 	return nil
 }
 
+// SetMultiMeta does a single batch upload of multiple pieces of TUF metadata.
+// This should be preferred for updating a remote server as it enable the server
+// to remain consistent, either accepting or rejecting the complete update.
 func (s HTTPStore) SetMultiMeta(metas map[string][]byte) error {
 	url, err := s.buildMetaURL("")
 	if err != nil {
@@ -220,6 +220,7 @@ func (s HTTPStore) GetTarget(path string) (io.ReadCloser, error) {
 	return resp.Body, nil
 }
 
+// GetKey retrieves a public key from the remote server
 func (s HTTPStore) GetKey(role string) ([]byte, error) {
 	url, err := s.buildKeyURL(role)
 	if err != nil {

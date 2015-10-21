@@ -18,7 +18,7 @@ func TestApplyTargetsChange(t *testing.T) {
 	assert.NoError(t, err)
 	kdb.AddRole(role)
 
-	repo := tuf.NewTufRepo(kdb, nil)
+	repo := tuf.NewRepo(kdb, nil)
 	err = repo.InitTargets()
 	assert.NoError(t, err)
 	hash := sha256.Sum256([]byte{})
@@ -61,7 +61,7 @@ func TestApplyChangelist(t *testing.T) {
 	assert.NoError(t, err)
 	kdb.AddRole(role)
 
-	repo := tuf.NewTufRepo(kdb, nil)
+	repo := tuf.NewRepo(kdb, nil)
 	err = repo.InitTargets()
 	assert.NoError(t, err)
 	hash := sha256.Sum256([]byte{})
@@ -109,7 +109,7 @@ func TestApplyChangelistMulti(t *testing.T) {
 	assert.NoError(t, err)
 	kdb.AddRole(role)
 
-	repo := tuf.NewTufRepo(kdb, nil)
+	repo := tuf.NewRepo(kdb, nil)
 	err = repo.InitTargets()
 	assert.NoError(t, err)
 	hash := sha256.Sum256([]byte{})
