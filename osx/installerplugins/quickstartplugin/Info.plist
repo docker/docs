@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.docker.$(PRODUCT_NAME:rfc1034identifier)</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -20,17 +20,17 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>Installer Version</key>
+	<string>%INSTALLER_VERSION%</string>
 	<key>InstallerSectionTitle</key>
 	<string>quickstartplugin</string>
+	<key>Mixpanel Token</key>
+	<string>%MIXPANEL_TOKEN%</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2015 Docker Inc. All rights reserved.</string>
 	<key>NSMainNibFile</key>
 	<string>quickstartplugin</string>
 	<key>NSPrincipalClass</key>
 	<string>InstallerSection</string>
-	<key>Installer Version</key>
-	<string>%INSTALLER_VERSION%</string>
-	<key>Mixpanel Token</key>
-	<string>%MIXPANEL_TOKEN%</string>
 </dict>
 </plist>

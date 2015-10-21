@@ -4,7 +4,6 @@
     <options customize="allow" allow-external-scripts="yes" rootVolumeOnly="true" hostArchitectures="x86_64"/>
     <background file="toolbox.png" alignment="bottomleft" scaling="none"/>
     <welcome file="welcome.rtfd" mime-type="text/rtfd"/>
-    <conclusion file="Installed.html" mime-type="text/html"/>
     <choices-outline>
         <line choice="choiceDockerCLI"/>
         <line choice="choiceDockerMachineCLI"/>

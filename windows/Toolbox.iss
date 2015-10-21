@@ -5,7 +5,7 @@
 
 #define b2dIsoPath "..\bundle\boot2docker.iso"
 #define dockerCli "..\bundle\docker.exe"
-#define dockerMachineCli "..\bundle\docker-machine.exe"
+#define dockerMachineCli "..\bundle\docker-machine*.exe"
 #define kitematic "..\bundle\kitematic"
 #define git "..\bundle\Git.exe"
 #define virtualBoxCommon "..\bundle\common.cab"
@@ -28,7 +28,8 @@ DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName=Docker
 DisableProgramGroupPage=yes
 OutputBaseFilename=DockerToolbox
-Compression=lzma
+// Compression=lzma
+Compression=none
 SolidCompression=yes
 WizardImageFile=windows-installer-side.bmp
 WizardSmallImageFile=windows-installer-logo.bmp
@@ -51,6 +52,7 @@ Filename: "{win}\explorer.exe"; Parameters: "{userprograms}\Docker\"; Flags: pos
 [Tasks]
 Name: desktopicon; Description: "{cm:CreateDesktopIcon}"
 Name: modifypath; Description: "Add docker.exe & docker-machine.exe to &PATH"
+Name: upgradevm; Description: "Upgrade or Migrate Boot2Docker VM to latest version of Docker if it exists."
 
 [Components]
 Name: "Docker"; Description: "Docker Client for Windows" ; Types: full custom; Flags: fixed
@@ -166,6 +168,14 @@ begin
 	);
 end;
 
+function VBoxPath(): String;
+begin
+	if GetEnv('VBOX_INSTALL_PATH') <> '' then
+		Result := GetEnv('VBOX_INSTALL_PATH')
+	else
+		Result := GetEnv('VBOX_MSI_INSTALL_PATH')
+end;
+
 function NeedToInstallGit(): Boolean;
 begin
 	// TODO: Find a better way to see if Git is installed
@@ -233,7 +243,7 @@ begin
 	TrackingLabel.Height := 100;
 
 		// Don't do this until we can compare versions
-		// Wizardform.ComponentsList.Checked[2] := NeedToInstallVirtualBox();
+		Wizardform.ComponentsList.Checked[2] := NeedToInstallVirtualBox();
 		Wizardform.ComponentsList.ItemEnabled[2] := not NeedToInstallVirtualBox();
 		Wizardform.ComponentsList.Checked[4] := NeedToInstallGit();
 		Wizardform.ComponentsList.ItemEnabled[4] := not NeedToInstallGit();
@@ -287,26 +297,71 @@ begin
       MsgBox('File moving failed!', mbError, MB_OK);
 end;
 
+function CanUpgradeVM(): Boolean;
+var
+	ResultCode: Integer;
+begin
+	if NeedToInstallVirtualBox() or not FileExists(ExpandConstant('{app}\docker-machine.exe')) then begin
+		Result := false
+		exit
+	end;
+
+	ExecAsOriginalUser(VBoxPath() + 'VBoxManage.exe', 'showvminfo default', '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
+	if ResultCode <> 0 then begin
+		Result := false
+		exit
+	end;
+
+	if not DirExists(ExpandConstant('{userdocs}\..\.docker\machine\machines\default')) then begin
+		Result := false
+		exit
+	end;
+
+	Result := true
+end;
+
+function UpgradeVM() : Boolean;
+var
+	ResultCode: Integer;
+begin
+	TrackEvent('VM Upgrade Started');
+	WizardForm.StatusLabel.Caption := 'Upgrading Docker Toolbox VM...'
+	ExecAsOriginalUser(ExpandConstant('{app}\docker-machine.exe'), 'stop default', '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
+	if ResultCode = 0 then
+	begin
+		FileCopy(ExpandConstant('{userdocs}\..\.docker\machine\cache\boot2docker.iso'), ExpandConstant('{userdocs}\..\.docker\machine\machines\default\boot2docker.iso'), false)
+		TrackEvent('VM Upgrade Succeeded');
+	end
+	else begin
+		TrackEvent('VM Upgrade Failed');
+		MsgBox('VM Upgrade Failed because the VirtualBox VM could not be stopped.', mbCriticalError, MB_OK);
+		Result := false
+		WizardForm.Close;
+		exit;
+	end;
+	Result := true
+end;
+
 function MigrateVM() : Boolean;
 var
   ResultCode: Integer;
 begin
-  if NeedToInstallGit() or NeedToInstallVirtualBox() or not FileExists(ExpandConstant('{app}\docker-machine.exe')) then begin
-    Result := true
-    exit
-  end;
+	if NeedToInstallGit() or NeedToInstallVirtualBox() or not FileExists(ExpandConstant('{app}\docker-machine.exe')) then begin
+		Result := true
+		exit
+	end;
 
-  ExecAsOriginalUser('C:\Program Files\Oracle\VirtualBox\VBoxManage.exe', 'showvminfo default', '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
-  if ResultCode <> 1 then begin
-    Result := true
-    exit
-  end;
+	ExecAsOriginalUser(VBoxPath() + 'VBoxManage.exe', 'showvminfo default', '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
+	if ResultCode <> 1 then begin
+		Result := true
+		exit
+	end;
 
-  ExecAsOriginalUser('C:\Program Files\Oracle\VirtualBox\VBoxManage.exe', 'showvminfo boot2docker-vm', '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
-  if ResultCode <> 0 then begin
-    Result := true
-    exit
-  end;
+	ExecAsOriginalUser(VBoxPath() + 'VBoxManage.exe', 'showvminfo boot2docker-vm', '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
+	if ResultCode <> 0 then begin
+		Result := true
+		exit
+	end;
 
   if MsgBox('Migrate your existing Boot2Docker VM to work with the Docker Toolbox? Your existing Boot2Docker VM will not be affected. This should take about a minute.', mbConfirmation, MB_YESNO) = IDYES then
   begin
@@ -348,20 +403,6 @@ begin
 end;
 #include "modpath.iss"
 
-procedure CurPageChanged(CurPageID: Integer);
-begin
-	if (CurPageID = wpFinished) then
-	begin
-      WizardForm.FinishedLabel.AutoSize := True;
-			WizardForm.FinishedLabel.Font.Style := [fsBold];
-			WizardForm.FinishedLabel.Caption :=
-				'Upgrade your default Docker VM using the command:' + \
-				#13#10 + \
-				#13#10 + \
-				'         `docker-machine upgrade default`';
-  end;
-end;
-
 procedure CurStepChanged(CurStep: TSetupStep);
 var
 	Success: Boolean;
@@ -372,7 +413,18 @@ begin
     if IsTaskSelected(ModPathName) then
 			ModPath();
     if not WizardSilent() then
-      Success := MigrateVM();
+		begin
+			if IsTaskSelected('upgradevm') then
+			begin
+				if CanUpgradeVM() then begin
+					Success := UpgradeVM();
+				end
+				else begin
+					Success := MigrateVM();
+				end;
+			end;
+		end;
+
 		if Success then
 			trackEvent('Installer Finished');
   end;
