@@ -86,6 +86,9 @@ Filename: "{app}\delete.sh"
 [UninstallDelete]
 Type: filesandordirs; Name: "{localappdata}\..\Roaming\Kitematic"
 
+[Registry]
+Root: HKCU; Subkey: "Environment"; ValueType:string; ValueName:"DOCKER_TOOLBOX_INSTALL_PATH"; ValueData:"{app}" ; Flags: preservestringtype ;
+
 [Code]
 #include "base64.iss"
 #include "guid.iss"
@@ -242,7 +245,7 @@ begin
 	TrackingLabel.Height := 100;
 
 		// Don't do this until we can compare versions
-		Wizardform.ComponentsList.Checked[2] := NeedToInstallVirtualBox();
+		// Wizardform.ComponentsList.Checked[2] := NeedToInstallVirtualBox();
 		Wizardform.ComponentsList.ItemEnabled[2] := not NeedToInstallVirtualBox();
 		Wizardform.ComponentsList.Checked[4] := NeedToInstallGit();
 		Wizardform.ComponentsList.ItemEnabled[4] := not NeedToInstallGit();
