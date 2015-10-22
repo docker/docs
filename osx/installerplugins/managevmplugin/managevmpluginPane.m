@@ -96,10 +96,7 @@ NSString *dockerMachinePath = @"/usr/local/bin/docker-machine";
     NSString *incomingVersion = [self boot2dockerISOVersionAtPath:[NSString stringWithFormat:@"%@/.docker/machine/cache/boot2docker.iso", NSHomeDirectory()]];
     NSString *existingVersion = [self boot2dockerISOVersionAtPath:[NSString stringWithFormat:@"%@/.docker/machine/machines/default/boot2docker.iso", NSHomeDirectory()]];
     
-    NSLog(@"%@", incomingVersion);
-    NSLog(@"%@", existingVersion);
-    
-    return [incomingVersion compare:existingVersion options:NSNumericSearch] != NSOrderedAscending;
+    return incomingVersion != existingVersion && [incomingVersion compare:existingVersion options:NSNumericSearch] != NSOrderedAscending;
 }
 
 - (void) migrateBoot2DockerVM {

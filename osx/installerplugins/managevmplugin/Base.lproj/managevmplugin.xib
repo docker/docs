@@ -48,30 +48,21 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                 </button>
-                <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PYI-QA-XWa">
-                    <rect key="frame" x="18" y="166" width="382" height="28"/>
-                    <animations/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Migration Status" id="D4J-ip-bu8">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
                 <scrollView hidden="YES" fixedFrame="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UwA-bh-SQw">
                     <rect key="frame" x="0.0" y="-1" width="418" height="126"/>
                     <clipView key="contentView" ambiguous="YES" id="g1K-p4-gs1">
-                        <rect key="frame" x="1" y="1" width="416" height="124"/>
+                        <rect key="frame" x="1" y="1" width="401" height="124"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView ambiguous="YES" editable="NO" importsGraphics="NO" richText="NO" findStyle="panel" continuousSpellChecking="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="ehz-gh-aXR">
-                                <rect key="frame" x="0.0" y="0.0" width="416" height="124"/>
+                                <rect key="frame" x="0.0" y="0.0" width="401" height="124"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <size key="minSize" width="416" height="124"/>
+                                <size key="minSize" width="401" height="124"/>
                                 <size key="maxSize" width="463" height="10000000"/>
                                 <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                <size key="minSize" width="416" height="124"/>
+                                <size key="minSize" width="401" height="124"/>
                                 <size key="maxSize" width="463" height="10000000"/>
                             </textView>
                         </subviews>
@@ -85,7 +76,7 @@
                         <animations/>
                     </scroller>
                     <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="Pv6-xu-8lS">
-                        <rect key="frame" x="401" y="1" width="16" height="124"/>
+                        <rect key="frame" x="402" y="1" width="15" height="124"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
                     </scroller>
@@ -110,6 +101,15 @@
                     <rect key="frame" x="193" y="133" width="32" height="32"/>
                     <animations/>
                 </progressIndicator>
+                <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PYI-QA-XWa">
+                    <rect key="frame" x="18" y="156" width="382" height="40"/>
+                    <animations/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Migration Status" id="D4J-ip-bu8">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
             <animations/>
         </customView>
