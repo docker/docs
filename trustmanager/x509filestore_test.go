@@ -27,39 +27,36 @@ func TestNewX509FileStore(t *testing.T) {
 // not overwrite any of the.
 func TestNewX509FileStoreLoadsExistingCerts(t *testing.T) {
 	tempDir, err := ioutil.TempDir("", "cert-test")
-	assert.NoError(t, err, "couldn't open temp directory")
+	assert.NoError(t, err)
 	defer os.RemoveAll(tempDir)
 
 	certBytes, err := ioutil.ReadFile("../fixtures/root-ca.crt")
-	assert.NoError(t, err, "couldn't read fixtures/root-ca.crt")
+	assert.NoError(t, err)
 	out, err := os.Create(filepath.Join(tempDir, "root-ca.crt"))
-	assert.NoError(t, err, "couldn't create a file in the temp dir")
+	assert.NoError(t, err)
 
 	// to distinguish it from the canonical format
 	distinguishingBytes := []byte{'\n', '\n', '\n', '\n', '\n', '\n'}
 	nBytes, err := out.Write(distinguishingBytes)
-	assert.NoError(t, err, "could not write newlines to the temporary file")
-	assert.Equal(t, len(distinguishingBytes), nBytes,
-		"didn't write all bytes to temporary file")
+	assert.NoError(t, err)
+	assert.Len(t, distinguishingBytes, nBytes)
 
 	nBytes, err = out.Write(certBytes)
-	assert.NoError(t, err, "could not write cert to the temporary file")
-	assert.Equal(t, len(certBytes), nBytes,
-		"didn't write all bytes to temporary file")
+	assert.NoError(t, err)
+	assert.Len(t, certBytes, nBytes)
 
 	err = out.Close()
-	assert.NoError(t, err, "could not close temporary file")
+	assert.NoError(t, err)
 
 	store, err := NewX509FileStore(tempDir)
-	assert.NoError(t, err, "failed to create a new X509FileStore")
+	assert.NoError(t, err)
 
 	expectedCert, err := LoadCertFromFile("../fixtures/root-ca.crt")
-	assert.NoError(t, err, "could not load root-ca.crt")
-	assert.Equal(t, store.GetCertificates(), []*x509.Certificate{expectedCert},
-		"did not load certificate already in the directory")
+	assert.NoError(t, err)
+	assert.Equal(t, []*x509.Certificate{expectedCert}, store.GetCertificates())
 
 	outBytes, err := ioutil.ReadFile(filepath.Join(tempDir, "root-ca.crt"))
-	assert.NoError(t, err, "couldn't read temporary file")
+	assert.NoError(t, err)
 	assert.Equal(t, distinguishingBytes, outBytes[:6], "original file overwritten")
 	assert.Equal(t, certBytes, outBytes[6:], "original file overwritten")
 }
@@ -131,11 +128,11 @@ func TestNewX509FileStoreEmpty(t *testing.T) {
 	defer os.RemoveAll(tempDir)
 
 	store, err := NewX509FileStore(tempDir)
-	assert.NoError(t, err, "failed to create a new X509FileStore: %v", store)
+	assert.NoError(t, err)
 	assert.True(t, store.Empty())
 
 	err = store.AddCertFromFile("../fixtures/root-ca.crt")
-	assert.NoError(t, err, "failed to add certificate from file")
+	assert.NoError(t, err)
 	assert.False(t, store.Empty())
 }
 

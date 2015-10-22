@@ -26,12 +26,22 @@ var serverCipherSuites = append(clientCipherSuites, []uint16{
 	tls.TLS_RSA_WITH_AES_128_CBC_SHA,
 }...)
 
+// ServerTLSOpts generates a tls configuration for servers using the
+// provided parameters.
+type ServerTLSOpts struct {
+	ServerCertFile    string
+	ServerKeyFile     string
+	RequireClientAuth bool
+	ClientCADirectory string
+}
+
 // ConfigureServerTLS specifies a set of ciphersuites, the server cert and key,
 // and optionally client authentication.  Note that a tls configuration is
 // constructed that either requires and verifies client authentication or
 // doesn't deal with client certs at all. Nothing in the middle.
-func ConfigureServerTLS(serverCert, serverKey string, clientAuth bool, caCertDir string) (*tls.Config, error) {
-	keypair, err := tls.LoadX509KeyPair(serverCert, serverKey)
+func ConfigureServerTLS(opts *ServerTLSOpts) (*tls.Config, error) {
+	keypair, err := tls.LoadX509KeyPair(
+		opts.ServerCertFile, opts.ServerKeyFile)
 	if err != nil {
 		return nil, err
 	}
@@ -44,26 +54,26 @@ func ConfigureServerTLS(serverCert, serverKey string, clientAuth bool, caCertDir
 		Rand:                     rand.Reader,
 	}
 
-	if clientAuth {
+	if opts.RequireClientAuth {
 		tlsConfig.ClientAuth = tls.RequireAndVerifyClientCert
 	}
 
-	if caCertDir != "" {
+	if opts.ClientCADirectory != "" {
 		// Check to see if the given directory exists
-		fi, err := os.Stat(caCertDir)
+		fi, err := os.Stat(opts.ClientCADirectory)
 		if err != nil {
 			return nil, err
 		}
 		if !fi.IsDir() {
-			return nil, fmt.Errorf("No such directory: %s", caCertDir)
+			return nil, fmt.Errorf("No such directory: %s", opts.ClientCADirectory)
 		}
 
-		certStore, err := trustmanager.NewX509FileStore(caCertDir)
+		certStore, err := trustmanager.NewX509FileStore(opts.ClientCADirectory)
 		if err != nil {
 			return nil, err
 		}
 		if certStore.Empty() {
-			return nil, fmt.Errorf("No certificates in %s", caCertDir)
+			return nil, fmt.Errorf("No certificates in %s", opts.ClientCADirectory)
 		}
 		tlsConfig.ClientCAs = certStore.GetCertificatePool()
 	}
@@ -71,18 +81,28 @@ func ConfigureServerTLS(serverCert, serverKey string, clientAuth bool, caCertDir
 	return tlsConfig, nil
 }
 
+// ClientTLSOpts is a struct that contains options to pass to
+// ConfigureClientTLS
+type ClientTLSOpts struct {
+	RootCAFile         string
+	ServerName         string
+	InsecureSkipVerify bool
+	ClientCertFile     string
+	ClientKeyFile      string
+}
+
 // ConfigureClientTLS generates a tls configuration for clients using the
 // provided parameters.
-func ConfigureClientTLS(rootCA, serverName string, insecureSkipVerify bool, clientCert, clientKey string) (*tls.Config, error) {
+func ConfigureClientTLS(opts *ClientTLSOpts) (*tls.Config, error) {
 	tlsConfig := &tls.Config{
-		InsecureSkipVerify: insecureSkipVerify,
+		InsecureSkipVerify: opts.InsecureSkipVerify,
 		MinVersion:         tls.VersionTLS12,
 		CipherSuites:       clientCipherSuites,
-		ServerName:         serverName,
+		ServerName:         opts.ServerName,
 	}
 
-	if rootCA != "" {
-		rootCert, err := trustmanager.LoadCertFromFile(rootCA)
+	if opts.RootCAFile != "" {
+		rootCert, err := trustmanager.LoadCertFromFile(opts.RootCAFile)
 		if err != nil {
 			return nil, fmt.Errorf(
 				"Could not load root ca file. %s", err.Error())
@@ -92,8 +112,9 @@ func ConfigureClientTLS(rootCA, serverName string, insecureSkipVerify bool, clie
 		tlsConfig.RootCAs = rootPool
 	}
 
-	if clientCert != "" && clientKey != "" {
-		keypair, err := tls.LoadX509KeyPair(clientCert, clientKey)
+	if opts.ClientCertFile != "" || opts.ClientKeyFile != "" {
+		keypair, err := tls.LoadX509KeyPair(
+			opts.ClientCertFile, opts.ClientKeyFile)
 		if err != nil {
 			return nil, err
 		}

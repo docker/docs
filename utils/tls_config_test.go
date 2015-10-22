@@ -44,7 +44,12 @@ func TestConfigServerTLSFailsIfUnableToLoadCerts(t *testing.T) {
 		files := []string{ServerCert, ServerKey, tempDir}
 		files[i] = "not-real-file"
 
-		result, err := ConfigureServerTLS(files[0], files[1], true, files[2])
+		result, err := ConfigureServerTLS(&ServerTLSOpts{
+			ServerCertFile:    files[0],
+			ServerKeyFile:     files[1],
+			RequireClientAuth: true,
+			ClientCADirectory: files[2],
+		})
 		assert.Nil(t, result)
 		assert.Error(t, err)
 	}
@@ -56,7 +61,10 @@ func TestConfigServerTLSServerCertsOnly(t *testing.T) {
 	keypair, err := tls.LoadX509KeyPair(ServerCert, ServerKey)
 	assert.NoError(t, err)
 
-	tlsConfig, err := ConfigureServerTLS(ServerCert, ServerKey, false, "")
+	tlsConfig, err := ConfigureServerTLS(&ServerTLSOpts{
+		ServerCertFile: ServerCert,
+		ServerKeyFile:  ServerKey,
+	})
 	assert.NoError(t, err)
 	assert.Equal(t, []tls.Certificate{keypair}, tlsConfig.Certificates)
 	assert.True(t, tlsConfig.PreferServerCipherSuites)
@@ -70,7 +78,11 @@ func TestConfigServerTLSWithEmptyCACertDir(t *testing.T) {
 	tempDir, err := ioutil.TempDir("/tmp", "cert-test")
 	assert.NoError(t, err, "couldn't open temp directory")
 
-	tlsConfig, err := ConfigureServerTLS(ServerCert, ServerKey, false, tempDir)
+	tlsConfig, err := ConfigureServerTLS(&ServerTLSOpts{
+		ServerCertFile:    ServerCert,
+		ServerKeyFile:     ServerKey,
+		ClientCADirectory: tempDir,
+	})
 	assert.Nil(t, tlsConfig)
 	assert.Error(t, err)
 }
@@ -83,7 +95,11 @@ func TestConfigServerTLSWithCACerts(t *testing.T) {
 	keypair, err := tls.LoadX509KeyPair(ServerCert, ServerKey)
 	assert.NoError(t, err)
 
-	tlsConfig, err := ConfigureServerTLS(ServerCert, ServerKey, false, tempDir)
+	tlsConfig, err := ConfigureServerTLS(&ServerTLSOpts{
+		ServerCertFile:    ServerCert,
+		ServerKeyFile:     ServerKey,
+		ClientCADirectory: tempDir,
+	})
 	assert.NoError(t, err)
 	assert.Equal(t, []tls.Certificate{keypair}, tlsConfig.Certificates)
 	assert.True(t, tlsConfig.PreferServerCipherSuites)
@@ -98,7 +114,11 @@ func TestConfigServerTLSClientAuthEnabled(t *testing.T) {
 	keypair, err := tls.LoadX509KeyPair(ServerCert, ServerKey)
 	assert.NoError(t, err)
 
-	tlsConfig, err := ConfigureServerTLS(ServerCert, ServerKey, true, "")
+	tlsConfig, err := ConfigureServerTLS(&ServerTLSOpts{
+		ServerCertFile:    ServerCert,
+		ServerKeyFile:     ServerKey,
+		RequireClientAuth: true,
+	})
 	assert.NoError(t, err)
 	assert.Equal(t, []tls.Certificate{keypair}, tlsConfig.Certificates)
 	assert.True(t, tlsConfig.PreferServerCipherSuites)
@@ -109,7 +129,8 @@ func TestConfigServerTLSClientAuthEnabled(t *testing.T) {
 // The skipVerify boolean gets set on the tls.Config's InsecureSkipBoolean
 func TestConfigClientTLSNoVerify(t *testing.T) {
 	for _, skip := range []bool{true, false} {
-		tlsConfig, err := ConfigureClientTLS("", "", skip, "", "")
+		tlsConfig, err := ConfigureClientTLS(
+			&ClientTLSOpts{InsecureSkipVerify: skip})
 		assert.NoError(t, err)
 		assert.Nil(t, tlsConfig.Certificates)
 		assert.Equal(t, skip, tlsConfig.InsecureSkipVerify)
@@ -121,7 +142,7 @@ func TestConfigClientTLSNoVerify(t *testing.T) {
 // The skipVerify boolean gets set on the tls.Config's InsecureSkipBoolean
 func TestConfigClientServerName(t *testing.T) {
 	for _, name := range []string{"", "myname"} {
-		tlsConfig, err := ConfigureClientTLS("", name, false, "", "")
+		tlsConfig, err := ConfigureClientTLS(&ClientTLSOpts{ServerName: name})
 		assert.NoError(t, err)
 		assert.Nil(t, tlsConfig.Certificates)
 		assert.Equal(t, false, tlsConfig.InsecureSkipVerify)
@@ -132,7 +153,7 @@ func TestConfigClientServerName(t *testing.T) {
 
 // The RootCA is set if it is provided and valid
 func TestConfigClientTLSValidRootCA(t *testing.T) {
-	tlsConfig, err := ConfigureClientTLS(RootCA, "", false, "", "")
+	tlsConfig, err := ConfigureClientTLS(&ClientTLSOpts{RootCAFile: RootCA})
 	assert.NoError(t, err)
 	assert.Nil(t, tlsConfig.Certificates)
 	assert.Equal(t, false, tlsConfig.InsecureSkipVerify)
@@ -141,21 +162,25 @@ func TestConfigClientTLSValidRootCA(t *testing.T) {
 }
 
 // An error is returned if a root CA is provided but not valid
-func TestConfigClientTLSInValidRootCA(t *testing.T) {
-	tlsConfig, err := ConfigureClientTLS("not-a-file.crt", "", false, "", "")
+func TestConfigClientTLSInvalidRootCA(t *testing.T) {
+	tlsConfig, err := ConfigureClientTLS(
+		&ClientTLSOpts{RootCAFile: "not-a-file"})
 	assert.Error(t, err)
 	assert.Nil(t, tlsConfig)
 }
 
 // An error is returned if either the client cert or the key are provided
-// but invalid.
+// but invalid or blank.
 func TestConfigClientTLSClientCertOrKeyInvalid(t *testing.T) {
 	for i := 0; i < 2; i++ {
-		files := []string{ServerCert, ServerKey}
-		files[i] = "not-a-file.crt"
-		tlsConfig, err := ConfigureClientTLS("", "", false, files[0], files[1])
-		assert.Error(t, err)
-		assert.Nil(t, tlsConfig)
+		for _, invalid := range []string{"not-a-file", ""} {
+			files := []string{ServerCert, ServerKey}
+			files[i] = invalid
+			tlsConfig, err := ConfigureClientTLS(&ClientTLSOpts{
+				ClientCertFile: files[0], ClientKeyFile: files[1]})
+			assert.Error(t, err)
+			assert.Nil(t, tlsConfig)
+		}
 	}
 }
 
@@ -165,7 +190,8 @@ func TestConfigClientTLSValidClientCertAndKey(t *testing.T) {
 	keypair, err := tls.LoadX509KeyPair(ServerCert, ServerKey)
 	assert.NoError(t, err)
 
-	tlsConfig, err := ConfigureClientTLS("", "", false, ServerCert, ServerKey)
+	tlsConfig, err := ConfigureClientTLS(&ClientTLSOpts{
+		ClientCertFile: ServerCert, ClientKeyFile: ServerKey})
 	assert.NoError(t, err)
 	assert.Equal(t, []tls.Certificate{keypair}, tlsConfig.Certificates)
 	assert.Equal(t, false, tlsConfig.InsecureSkipVerify)

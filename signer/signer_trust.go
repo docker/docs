@@ -31,8 +31,10 @@ type NotarySigner struct {
 func NewNotarySigner(hostname string, port string, tlscafile string) *NotarySigner {
 	var opts []grpc.DialOption
 	netAddr := net.JoinHostPort(hostname, port)
-	tlsConfig, err := utils.ConfigureClientTLS(
-		tlscafile, hostname, false, "", "")
+	tlsConfig, err := utils.ConfigureClientTLS(&utils.ClientTLSOpts{
+		RootCAFile: tlscafile,
+		ServerName: hostname,
+	})
 	if err != nil {
 		logrus.Fatal("Unable to set up TLS: ", err)
 	}

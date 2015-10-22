@@ -41,8 +41,10 @@ func Run(ctx context.Context, addr, tlsCertFile, tlsKeyFile string, trust signed
 	}
 
 	if tlsCertFile != "" && tlsKeyFile != "" {
-		tlsConfig, err := utils.ConfigureServerTLS(
-			tlsCertFile, tlsKeyFile, false, "")
+		tlsConfig, err := utils.ConfigureServerTLS(&utils.ServerTLSOpts{
+			ServerCertFile: tlsCertFile,
+			ServerKeyFile:  tlsKeyFile,
+		})
 		if err != nil {
 			return err
 		}

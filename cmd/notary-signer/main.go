@@ -102,7 +102,10 @@ func main() {
 		log.Fatalf("Certificate and key are mandatory")
 	}
 
-	tlsConfig, err := utils.ConfigureServerTLS(certFile, keyFile, false, "")
+	tlsConfig, err := utils.ConfigureServerTLS(&utils.ServerTLSOpts{
+		ServerCertFile: certFile,
+		ServerKeyFile:  keyFile,
+	})
 	if err != nil {
 		logrus.Fatalf("Unable to set up TLS: %s", err.Error())
 	}
