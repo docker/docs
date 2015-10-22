@@ -1,45 +1,59 @@
-
 +++
 title = "User guide"
 description = "Documentation describing basic use of Docker Trusted Registry"
-keywords = ["docker, documentation, about, technology, hub,  enterprise"]
+keywords = ["docker, documentation, about, technology, hub, push, pull, user interface, account management, enterprise"]
 [menu.main]
 parent="smn_dhe"
 weight=3
 +++
 
 
-
-
 # Docker Trusted Registry User's Guide
 
-This guide covers tasks and functions a user of Docker Trusted Registry  will
-need to know about, such as pushing or pulling images, etc. For tasks Docker Trusted Registry
-administrators need to accomplish, such as configuring or monitoring Docker Trusted Registry, please
-visit the [Administrator's Guide](adminguide.md).
+This guide explains tasks and functions that a Docker Trusted Registry
+user can do, such as pushing or pulling images, or viewing organizations. For tasks Docker Trusted Registry
+administrators need to accomplish, such as configuring or monitoring Docker Trusted Registry,
+go to the [Administrator's Guide]({{< relref "adminguide.md" >}}).
 
-## Overview
+Task you can do:
 
-The primary use case for Docker Trusted Registry users is to push and pull images to and from the
-Docker Trusted Registry image storage service. For example, you might pull an Official Image for
-Ubuntu from the Docker Hub, customize it with configuration settings for your
-infrastructure and then push it to your Docker Trusted Registry image storage for other developers
-to pull and use for their development environments.
+* View organizations, repositories, and team members through the Trusted Registry user interface.
+* Tag an image so that it can later be removed from the Trusted Registry repository. See the [documentation]({{< relref "soft-garbage.md" >}}) for deleting an image.
+* Push tags
+* Pull tags
+* Search the API documentation on the Trusted Registry user interface including using the reindex and search APIs.
 
-Pushing and pulling images with Docker Trusted Registry works very much like any other Docker
-registry: you use the `docker pull` command to retrieve images and the `docker
-push` command to add an image to a Docker Trusted Registry repository. To learn more about Docker
-images, see
-[User Guide: Working with Docker Images](https://docs.docker.com/userguide/dockerimages/). For a step-by-step
+## View repos, teams, and members in the user interface
+
+Depending on your permissions, you can use the Trusted Registry user interface to do the following:
+
+* View the organizations and teams that you belong to.
+* View the repositories within each organization that you belong to.
+
+For specifics on this feature, see the [account management]({{< relref "accounts.md" >}}) documentation.
+
+## Push and pull overview
+
+One of your main activities you do in the Trusted Registry, is to push and pull
+images to and from the Trusted Registry image storage service. For example, you
+might pull an official image for Ubuntu from the Docker Hub, customize it with
+configuration settings for your infrastructure, and then push it to your Docker
+Trusted Registry image storage for other developers to pull and use for their
+development environments.
+
+Pushing and pulling images with Trusted Registry works similarly like any other
+Docker registry. You use the `docker pull` command to retrieve images and the
+`docker push` command to add an image. To learn more about Docker images, see
+[User Guide: Working with Docker Images](https://docs.docker.com/engine/userguide/dockerimages/). For a step-by-step
 example of the entire process, see the
 [Quick Start: Basic Workflow Guide](quick-start.md).
 
 > **Note**: If your Docker Trusted Registry instance has authentication enabled, you will need to
->use your command line to `docker login <dtr-hostname>` (e.g., `docker login
+>use your command line to `docker login <dtr-hostname>` (for example `docker login
 > dtr.yourdomain.com`).
 >
-> Failures due to unauthenticated `docker push` and `docker pull` commands will
-> look like :
+> Failures due to unauthenticated `docker push` and `docker pull` commands
+> look like:
 >
 >     $ docker pull dtr.yourdomain.com/hello-world
 >     Pulling repository dtr.yourdomain.com/hello-world
@@ -54,13 +68,13 @@ example of the entire process, see the
 >     repository%3Ahello-world%3Apull%2Cpush&service=dtr.yourdomain.com
 >     request failed with status: 401 Unauthorized
 
-## Pushing Images
+## Push images
 
 You push an image up to a Docker Trusted Registry repository by using the
 [`docker push` command](https://docs.docker.com/reference/commandline/push).
 
 You can add a `tag` to your image so that you can more easily identify it
-amongst other variants and so that it refers to your Docker Trusted Registry server.
+among other variants and so that it refers to your Docker Trusted Registry server.
 
     $ docker tag hello-world:latest dtr.yourdomain.com/yourusername/hello-mine:latest
 
@@ -74,7 +88,7 @@ Once an image is tagged, you can push it to Docker Trusted Registry with:
     $ docker push dtr.yourdomain.com/yourusername/hello-mine:latest
 
 > **Note**: If the Docker daemon on which you are running `docker push` doesn't
-> have the right certificates set up, you will get an error similar to:
+> have the right certificates set up, you get an error similar to:
 >
 >     $ docker push dtr.yourdomain.com/demouser/hello-world
 >     FATA[0000] Error response from daemon: v1 ping attempt failed with error:
@@ -86,14 +100,15 @@ Once an image is tagged, you can push it to Docker Trusted Registry with:
 >     simply place the CA certificate at
 >     /etc/docker/certs.d/dtr.yourdomain.com/ca.crt
 
-## Pulling images
+## Pull images
 
 You can retrieve an image with the
 [`docker pull` command](https://docs.docker.com/reference/commandline/run),
 or you can retrieve an image and run Docker to build the container with the
 [`docker run`command](https://docs.docker.com/reference/commandline/run).
 
-To retrieve an image from Docker Trusted Registry and then run Docker to build the container, add
+To retrieve an image from the Trusted Registry and then run Docker to build the
+container, add
 the needed info to `docker run`:
 
         $ docker run dtr.yourdomain.com/yourusername/hello-mine
@@ -104,10 +119,10 @@ the needed info to `docker run`:
         Digest: sha256:45f0de377f861694517a1440c74aa32eecc3295ea803261d62f950b1b757bed1
         Status: Downloaded newer image for dtr.yourdomain.com/demouser/hello-mine:latest
 
-Note that if you don't specify a version, by default the `latest` version of an
-image will be pulled.
+If you don't specify a version, by default the `latest` version of an
+image is pulled.
 
-If you run `docker images` after this you'll see a `hello-mine` image.
+If you run `docker images` after this, then you see a `hello-mine` image.
 
         $ docker images
         REPOSITORY                           TAG     IMAGE ID      CREATED       VIRTUAL SIZE
@@ -119,10 +134,10 @@ your Docker Trusted Registry by adding it to the command:
      $ docker pull dtr.yourdomain.com/yourusername/hello-mine
 
 
-## Next Steps
+## Next steps
 
-For information on administering Docker Trusted Registry, take a look at the
-[Administrator's Guide](adminguide.md).
+For information on administering the Trusted Registry, see the
+[administrator's tasks ](adminguide.md) documentation.
 
 
 <!--TODO:
@@ -131,4 +146,4 @@ For information on administering Docker Trusted Registry, take a look at the
 * but that multiple tags in one repo are pushed if you don't specify the `:tag` (ie, `imagename` does not always mean `imagename:latest`)
 * show what happens for non-latest, and when there are more than one tag in a repo
 * explain the fully-qualified repo/image name
-* explain how to remove an image from Docker Trusted Registry -->
+ -->
