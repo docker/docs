@@ -63,9 +63,6 @@ test:
         pwd: $BASE_STABLE
 
   post:
-  # Aggregate and report to codecov.io
-    - make aggregate-cover:
-        pwd: $BASE_STABLE
-
+  # Report to codecov.io
     - bash <(curl -s https://codecov.io/bash):
         pwd: $BASE_STABLE

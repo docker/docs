@@ -87,28 +87,19 @@ gen-cover:
 	@rm -rf "$(COVERDIR)"
 	@mkdir -p "$(COVERDIR)"
 	$(foreach PKG,$(PKGS),$(call gocover,$(PKG)))
+	@echo "mode: $(COVERMODE)" > "$(COVERPROFILE)"
+	@grep -h -v "^mode:" "$(COVERDIR)"/*.cover >> "$(COVERPROFILE)"
 
 cover: GO_EXC = go
 cover: gen-cover
-	@echo "mode: $(COVERMODE)" > "$(COVERPROFILE)"
-	@grep -h -v "^mode:" "$(COVERDIR)"/*.cover >> "$(COVERPROFILE)"
 	@go tool cover -func="$(COVERPROFILE)"
 	@go tool cover -html="$(COVERPROFILE)"
 
 
-define formatcov
-	echo '<<<<<< EOF' | cat $(1) - >> coverage.txt;
-endef
-
 ci: OPTS = race test.short
     GO_EXC = godep go
+    COVERPROFILE = coverage.out
 ci: gen-cover
-
-aggregate-cover:
-	@rm -f coverage.out
-	@echo "" > coverage.txt
-	$(foreach COVFILE, $(shell find $(COVERDIR) -type f -name *.cover),$(call formatcov,$(COVFILE)))
-
 
 clean-protos:
 	@rm proto/*.pb.go
