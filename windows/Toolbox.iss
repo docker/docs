@@ -329,7 +329,7 @@ begin
 	TrackEvent('VM Upgrade Started');
 	WizardForm.StatusLabel.Caption := 'Upgrading Docker Toolbox VM...'
 	ExecAsOriginalUser(ExpandConstant('{app}\docker-machine.exe'), 'stop default', '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
-	if ResultCode = 0 then
+	if (ResultCode = 0) or (ResultCode = 1) then
 	begin
 		FileCopy(ExpandConstant('{userdocs}\..\.docker\machine\cache\boot2docker.iso'), ExpandConstant('{userdocs}\..\.docker\machine\machines\default\boot2docker.iso'), false)
 		TrackEvent('VM Upgrade Succeeded');
