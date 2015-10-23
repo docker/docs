@@ -36,7 +36,7 @@ customization steps.  Customize steps are identified with the keyword
 (optional). Make sure you skip these steps when doing the default installation
 in your sandbox.
 
-The Orca BETA program makes use of Mixpanel to collect analytics. This feature collects data on your usage of Orca and returns it to Docker. The information is entirely anonymous and does not identify your Company or users. Currently, you cannot turn the collection off but you can block the outgoing messaging. Later in this documentation [XXX](#XXX) explains how.
+The Orca BETA program makes use of Mixpanel to collect analytics. This feature collects data on your usage of Orca and returns it to Docker. The information is entirely anonymous and does not identify your Company or users. Currently, you cannot turn the collection off but you can block the outgoing messaging. Later in this documentation [Block Mixpanel analytics](#block-mixpanel-analytics) explains how.
 
 ## Step 1: Verify you have the prerequisites
 
