@@ -5,9 +5,7 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"fmt"
-	"os"
-
-	"github.com/docker/notary/trustmanager"
+	"io/ioutil"
 )
 
 // Client TLS cipher suites (dropping CBC ciphers for client preferred suite set)
@@ -26,13 +24,30 @@ var serverCipherSuites = append(clientCipherSuites, []uint16{
 	tls.TLS_RSA_WITH_AES_128_CBC_SHA,
 }...)
 
+func poolFromFile(filename string) (*x509.CertPool, error) {
+	pemBytes, err := ioutil.ReadFile(filename)
+	if err != nil {
+		return nil, err
+	}
+	pool := x509.NewCertPool()
+	if ok := pool.AppendCertsFromPEM(pemBytes); !ok {
+		return nil, fmt.Errorf(
+			"Unable to parse certificates from %s", filename)
+	}
+	if len(pool.Subjects()) == 0 {
+		return nil, fmt.Errorf(
+			"No certificates parsed from %s", filename)
+	}
+	return pool, nil
+}
+
 // ServerTLSOpts generates a tls configuration for servers using the
 // provided parameters.
 type ServerTLSOpts struct {
 	ServerCertFile    string
 	ServerKeyFile     string
 	RequireClientAuth bool
-	ClientCADirectory string
+	ClientCAFile      string
 }
 
 // ConfigureServerTLS specifies a set of ciphersuites, the server cert and key,
@@ -58,24 +73,12 @@ func ConfigureServerTLS(opts *ServerTLSOpts) (*tls.Config, error) {
 		tlsConfig.ClientAuth = tls.RequireAndVerifyClientCert
 	}
 
-	if opts.ClientCADirectory != "" {
-		// Check to see if the given directory exists
-		fi, err := os.Stat(opts.ClientCADirectory)
+	if opts.ClientCAFile != "" {
+		pool, err := poolFromFile(opts.ClientCAFile)
 		if err != nil {
 			return nil, err
 		}
-		if !fi.IsDir() {
-			return nil, fmt.Errorf("No such directory: %s", opts.ClientCADirectory)
-		}
-
-		certStore, err := trustmanager.NewX509FileStore(opts.ClientCADirectory)
-		if err != nil {
-			return nil, err
-		}
-		if certStore.Empty() {
-			return nil, fmt.Errorf("No certificates in %s", opts.ClientCADirectory)
-		}
-		tlsConfig.ClientCAs = certStore.GetCertificatePool()
+		tlsConfig.ClientCAs = pool
 	}
 
 	return tlsConfig, nil
@@ -102,14 +105,11 @@ func ConfigureClientTLS(opts *ClientTLSOpts) (*tls.Config, error) {
 	}
 
 	if opts.RootCAFile != "" {
-		rootCert, err := trustmanager.LoadCertFromFile(opts.RootCAFile)
+		pool, err := poolFromFile(opts.RootCAFile)
 		if err != nil {
-			return nil, fmt.Errorf(
-				"Could not load root ca file. %s", err.Error())
+			return nil, err
 		}
-		rootPool := x509.NewCertPool()
-		rootPool.AddCert(rootCert)
-		tlsConfig.RootCAs = rootPool
+		tlsConfig.RootCAs = pool
 	}
 
 	if opts.ClientCertFile != "" || opts.ClientKeyFile != "" {
