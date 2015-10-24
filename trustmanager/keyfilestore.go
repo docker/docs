@@ -54,8 +54,6 @@ func (s *KeyFileStore) GetKey(name string) (data.PrivateKey, string, error) {
 }
 
 // ListKeys returns a list of unique PublicKeys present on the KeyFileStore.
-// There might be symlinks associating Certificate IDs to Public Keys, so this
-// method only returns the IDs that aren't symlinks
 func (s *KeyFileStore) ListKeys() map[string]string {
 	return listKeys(s)
 }
@@ -92,8 +90,6 @@ func (s *KeyMemoryStore) GetKey(name string) (data.PrivateKey, string, error) {
 }
 
 // ListKeys returns a list of unique PublicKeys present on the KeyFileStore.
-// There might be symlinks associating Certificate IDs to Public Keys, so this
-// method only returns the IDs that aren't symlinks
 func (s *KeyMemoryStore) ListKeys() map[string]string {
 	return listKeys(s)
 }
@@ -141,7 +137,7 @@ func addKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, cached
 }
 
 func getKeyAlias(s LimitedFileStore, keyID string) (string, error) {
-	files := s.ListFiles(true)
+	files := s.ListFiles()
 	name := strings.TrimSpace(strings.TrimSuffix(filepath.Base(keyID), filepath.Ext(keyID)))
 
 	for _, file := range files {
@@ -208,12 +204,10 @@ func getKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, cached
 
 // ListKeys returns a map of unique PublicKeys present on the KeyFileStore and
 // their corresponding aliases.
-// There might be symlinks associating Certificate IDs to Public Keys, so this
-// method only returns the IDs that aren't symlinks
 func listKeys(s LimitedFileStore) map[string]string {
 	keyIDMap := make(map[string]string)
 
-	for _, f := range s.ListFiles(false) {
+	for _, f := range s.ListFiles() {
 		keyIDFull := strings.TrimSpace(strings.TrimSuffix(f, filepath.Ext(f)))
 		keyID := keyIDFull[:strings.LastIndex(keyIDFull, "_")]
 		keyAlias := keyIDFull[strings.LastIndex(keyIDFull, "_")+1:]

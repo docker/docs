@@ -94,7 +94,7 @@ func testInitRepo(t *testing.T, rootType data.KeyAlgorithm) {
 
 	// Look for keys in private. The filenames should match the key IDs
 	// in the private key store.
-	privKeyList := repo.KeyStoreManager.NonRootKeyStore().ListFiles(true)
+	privKeyList := repo.KeyStoreManager.NonRootKeyStore().ListFiles()
 	for _, privKeyName := range privKeyList {
 		privKeyFileName := filepath.Join(repo.KeyStoreManager.NonRootKeyStore().BaseDir(), privKeyName)
 		_, err := os.Stat(privKeyFileName)

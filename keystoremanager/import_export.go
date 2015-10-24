@@ -131,7 +131,7 @@ func moveKeys(oldKeyStore, newKeyStore *trustmanager.KeyFileStore) error {
 }
 
 func addKeysToArchive(zipWriter *zip.Writer, newKeyStore *trustmanager.KeyFileStore, subDir string) error {
-	for _, relKeyPath := range newKeyStore.ListFiles(true) {
+	for _, relKeyPath := range newKeyStore.ListFiles() {
 		fullKeyPath := filepath.Join(newKeyStore.BaseDir(), relKeyPath)
 
 		fi, err := os.Lstat(fullKeyPath)
