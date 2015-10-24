@@ -67,8 +67,8 @@ build:
 
 test: OPTS =
 test:
-	@echo "+ $@ OPTS=${OPTS}"
-	go test $(addprefix -,${OPTS}) -test.short ./...
+	@echo "+ $@ ${OPTS}"
+	go test ${OPTS} ./...
 
 test-full: vet lint
 	@echo "+ $@"
@@ -80,7 +80,7 @@ protos:
 
 
 define gocover
-$(GO_EXC) test $(addprefix -,${OPTS}) -covermode="$(COVERMODE)" -coverprofile="$(COVERDIR)/$(subst /,-,$(1)).cover" "$(1)" || exit 1;
+$(GO_EXC) test ${OPTS} -covermode="$(COVERMODE)" -coverprofile="$(COVERDIR)/$(subst /,-,$(1)).cover" "$(1)" || exit 1;
 endef
 
 gen-cover:
@@ -90,14 +90,13 @@ gen-cover:
 	@echo "mode: $(COVERMODE)" > "$(COVERPROFILE)"
 	@grep -h -v "^mode:" "$(COVERDIR)"/*.cover >> "$(COVERPROFILE)"
 
-cover: GO_EXC = godep go
-       OPTS = race
+cover: GO_EXC = go
 cover: gen-cover
 	@go tool cover -func="$(COVERPROFILE)"
 	@go tool cover -html="$(COVERPROFILE)"
 
 
-ci: OPTS = race
+ci: OPTS = -race
     GO_EXC = godep go
     COVERPROFILE = coverage.out
 ci: gen-cover
