@@ -67,8 +67,8 @@ build:
 
 test: OPTS =
 test:
-	@echo "+ $@ ${OPTS}"
-	go test ${OPTS} ./...
+	@echo "+ $@ $(OPTS)"
+	go test $(OPTS) ./...
 
 test-full: vet lint
 	@echo "+ $@"
@@ -78,28 +78,34 @@ protos:
 	@protoc --go_out=plugins=grpc:. proto/*.proto
 
 
+# This allows coverage for a package to come from tests in different package.
+# Requires that the following:
+# go get github.com/wadey/gocovmerge; go install github.com/wadey/gocovmerge
+#
+# be run first
 
 define gocover
-$(GO_EXC) test ${OPTS} -covermode="$(COVERMODE)" -coverprofile="$(COVERDIR)/$(subst /,-,$(1)).cover" "$(1)" || exit 1;
+$(GO_EXC) test $(OPTS) -covermode="$(COVERMODE)" -coverprofile="$(COVERDIR)/$(subst /,-,$(1)).cover" "$(1)" || exit 1;
 endef
 
 gen-cover:
 	@rm -rf "$(COVERDIR)"
 	@mkdir -p "$(COVERDIR)"
 	$(foreach PKG,$(PKGS),$(call gocover,$(PKG)))
-	@echo "mode: $(COVERMODE)" > "$(COVERPROFILE)"
-	@grep -h -v "^mode:" "$(COVERDIR)"/*.cover >> "$(COVERPROFILE)"
 
-cover: GO_EXC = go
+cover: GO_EXC := go
+       OPTS = -coverpkg "$(shell ./coverpkg.sh $(1) $(NOTARY_PKG))"
 cover: gen-cover
+	@gocovmerge $(shell ls -1 $(COVERDIR)/* | tr "\n" " ") > $(COVERPROFILE)
 	@go tool cover -func="$(COVERPROFILE)"
 	@go tool cover -html="$(COVERPROFILE)"
 
-
-ci: OPTS = -race
-    GO_EXC = godep go
-    COVERPROFILE = coverage.out
+# Codecov knows how to merge multiple coverage files
+ci: OPTS = -race -coverpkg "$(shell ./coverpkg.sh $(1) $(NOTARY_PKG))"
+    GO_EXC := godep go
 ci: gen-cover
+	@gocovmerge $(shell ls -1 $(COVERDIR)/* | tr "\n" " ") > $(COVERPROFILE)
+	@go tool cover -func="$(COVERPROFILE)"
 
 clean-protos:
 	@rm proto/*.pb.go

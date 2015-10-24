@@ -38,7 +38,8 @@ dependencies:
   # For the stable go version, additionally install linting tools
     - >
       gvm use stable &&
-      go get github.com/axw/gocov/gocov github.com/golang/lint/golint
+      go get github.com/golang/lint/golint github.com/wadey/gocovmerge &&
+      go install github.com/wadey/gocovmerge
 test:
   pre:
   # Output the go versions we are going to test
@@ -64,5 +65,5 @@ test:
 
   post:
   # Report to codecov.io
-    - bash <(curl -s https://codecov.io/bash):
-        pwd: $BASE_STABLE
+    # - bash <(curl -s https://codecov.io/bash):
+    #     pwd: $BASE_STABLE
