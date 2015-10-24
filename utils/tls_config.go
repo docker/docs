@@ -54,6 +54,10 @@ type ServerTLSOpts struct {
 // and optionally client authentication.  Note that a tls configuration is
 // constructed that either requires and verifies client authentication or
 // doesn't deal with client certs at all. Nothing in the middle.
+//
+// Also note that if the client CA file contains invalid data, behavior is not
+// guaranteed.  Currently (as of Go 1.5.1) only the valid certificates up to
+// the bad data will be parsed and added the client CA pool.
 func ConfigureServerTLS(opts *ServerTLSOpts) (*tls.Config, error) {
 	keypair, err := tls.LoadX509KeyPair(
 		opts.ServerCertFile, opts.ServerKeyFile)
@@ -96,6 +100,10 @@ type ClientTLSOpts struct {
 
 // ConfigureClientTLS generates a tls configuration for clients using the
 // provided parameters.
+///
+// Note that if the root CA file contains invalid data, behavior is not
+// guaranteed.  Currently (as of Go 1.5.1) only the valid certificates up to
+// the bad data will be parsed and added the root CA pool.
 func ConfigureClientTLS(opts *ClientTLSOpts) (*tls.Config, error) {
 	tlsConfig := &tls.Config{
 		InsecureSkipVerify: opts.InsecureSkipVerify,

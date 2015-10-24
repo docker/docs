@@ -23,7 +23,7 @@ const (
 )
 
 // generates a multiple-certificate file with both RSA and ECDSA certs and
-// some garbage, returns filename.
+// returns the filename so that cleanup can be deferred.
 func generateMultiCert(t *testing.T) string {
 	tempFile, err := ioutil.TempFile("/tmp", "cert-test")
 	defer tempFile.Close()
@@ -48,16 +48,7 @@ func generateMultiCert(t *testing.T) string {
 		nBytes, err := tempFile.Write(pemBytes)
 		assert.NoError(t, err)
 		assert.Equal(t, nBytes, len(pemBytes))
-
-		assert.NoError(t, err)
 	}
-
-	_, err = tempFile.WriteString(`\n
-    -----BEGIN CERTIFICATE-----
-    This is some garbage that isnt a cert
-    -----END CERTIFICATE-----
-    `)
-
 	return tempFile.Name()
 }
 
@@ -133,11 +124,9 @@ func TestConfigServerTLSWithOneCACert(t *testing.T) {
 }
 
 // If server cert and key are provided, and client cert file is provided with
-// multiple certs (and garbage), a valid tls.Config is returned with the
-// clientCAs set to the valid cert and the garbage is ignored (but only
-// because the garbage is at the end - actually CertPool.AppendCertsFromPEM
-// aborts as soon as it finds an invalid cert)
-func TestConfigServerTLSWithMultipleCACertsAndGarbage(t *testing.T) {
+// multiple certs, a valid tls.Config is returned with the clientCAs set to
+// the valid cert.
+func TestConfigServerTLSWithMultipleCACerts(t *testing.T) {
 	tempFilename := generateMultiCert(t)
 	defer os.RemoveAll(tempFilename)
 
@@ -210,10 +199,9 @@ func TestConfigClientTLSRootCAFileWithOneCert(t *testing.T) {
 	assert.Len(t, tlsConfig.RootCAs.Subjects(), 1)
 }
 
-// If the root CA file provided has multiple CA certs and garbage, only the
-// valid certs are read (but only because the garbage is at the end - actually
-// CertPool.AppendCertsFromPEM aborts as soon as it finds an invalid cert)
-func TestConfigClientTLSRootCAFileMultipleCertsAndGarbage(t *testing.T) {
+// If the root CA file provided has multiple CA certs, only the valid certs
+// are read.
+func TestConfigClientTLSRootCAFileMultipleCerts(t *testing.T) {
 	tempFilename := generateMultiCert(t)
 	defer os.RemoveAll(tempFilename)
 
