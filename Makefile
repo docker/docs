@@ -90,13 +90,14 @@ gen-cover:
 	@echo "mode: $(COVERMODE)" > "$(COVERPROFILE)"
 	@grep -h -v "^mode:" "$(COVERDIR)"/*.cover >> "$(COVERPROFILE)"
 
-cover: GO_EXC = go
+cover: GO_EXC = godep go
+       OPTS = race
 cover: gen-cover
 	@go tool cover -func="$(COVERPROFILE)"
 	@go tool cover -html="$(COVERPROFILE)"
 
 
-ci: OPTS = race test.short
+ci: OPTS = race
     GO_EXC = godep go
     COVERPROFILE = coverage.out
 ci: gen-cover
