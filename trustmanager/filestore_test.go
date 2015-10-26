@@ -154,12 +154,6 @@ func TestListFiles(t *testing.T) {
 		if err != nil {
 			t.Fatalf("failed to generate random file: %v", err)
 		}
-
-		// Create symlinks for all the files
-		err = os.Symlink(expectedFilename, filepath.Join(tempBaseDir, expectedFilename+".link."+testExt))
-		if err != nil {
-			t.Fatalf("failed to create symlink: %v", err)
-		}
 	}
 
 	// Create our SimpleFileStore
@@ -169,16 +163,10 @@ func TestListFiles(t *testing.T) {
 		perms:   perms,
 	}
 
-	// Call the List function. Expect 10 real files when not listing symlinks
-	files := store.ListFiles(false)
+	// Call the List function. Expect 10 files
+	files := store.ListFiles()
 	if len(files) != 10 {
 		t.Fatalf("expected 10 files in listing, got: %d", len(files))
-	}
-
-	// Call the List function. Expect 20 total files when listing symlinks
-	files = store.ListFiles(true)
-	if len(files) != 20 {
-		t.Fatalf("expected 20 files in listing, got: %d", len(files))
 	}
 }
 
@@ -214,62 +202,17 @@ func TestListDir(t *testing.T) {
 	}
 
 	// Call the ListDir function
-	files := store.ListDir("docker.com/", true)
+	files := store.ListDir("docker.com/")
 	if len(files) != 10 {
 		t.Fatalf("expected 10 files in listing, got: %d", len(files))
 	}
-	files = store.ListDir("docker.com/notary", true)
+	files = store.ListDir("docker.com/notary")
 	if len(files) != 10 {
 		t.Fatalf("expected 10 files in listing, got: %d", len(files))
 	}
-	files = store.ListDir("fakedocker.com/", true)
+	files = store.ListDir("fakedocker.com/")
 	if len(files) != 0 {
 		t.Fatalf("expected 0 files in listing, got: %d", len(files))
-	}
-}
-
-func TestLink(t *testing.T) {
-	testName := "docker.com/notary/certificate"
-	testSymlink := "docker.com/notary/certificate-symlink"
-	testExt := "crt"
-	perms := os.FileMode(0755)
-
-	// Temporary directory where test files will be created
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	if err != nil {
-		t.Fatalf("failed to create a temporary directory: %v", err)
-	}
-	defer os.RemoveAll(tempBaseDir)
-
-	// Since we're generating this manually we need to add the extension '.'
-	expectedFilePath := filepath.Join(tempBaseDir, testName+"."+testExt)
-	expectedSymlinkPath := filepath.Join(tempBaseDir, testSymlink+"."+testExt)
-
-	_, err = generateRandomFile(expectedFilePath, perms)
-	if err != nil {
-		t.Fatalf("failed to generate random file: %v", err)
-	}
-
-	// Create our SimpleFileStore
-	store := &SimpleFileStore{
-		baseDir: tempBaseDir,
-		fileExt: testExt,
-		perms:   perms,
-	}
-
-	// Call the Link function
-	err = store.Link("certificate", testSymlink)
-	if err != nil {
-		t.Fatalf("failed to create symlink: %v", err)
-	}
-
-	// Check to see if the symlink exists
-	actualSymlinkDest, err := os.Readlink(expectedSymlinkPath)
-	if err != nil {
-		t.Fatalf("expected to find symlink at path: %s", expectedSymlinkPath)
-	}
-	if actualSymlinkDest != "certificate."+testExt {
-		t.Fatalf("symlink has wrong destination: %s", actualSymlinkDest)
 	}
 }
 

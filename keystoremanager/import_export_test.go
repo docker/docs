@@ -100,10 +100,6 @@ func TestImportExportZip(t *testing.T) {
 	// Iterate through the files in the archive, checking that the files
 	// exist and are encrypted with the expected passphrase.
 	for _, f := range zipReader.File {
-		if keystoremanager.IsZipSymlink(f) {
-			continue
-		}
-
 		expectedPassphrase, present := passphraseByFile[f.Name]
 		if !present {
 			t.Fatalf("unexpected file %s in zip file", f.Name)
@@ -175,35 +171,6 @@ func TestImportExportZip(t *testing.T) {
 	rootKeyFilename := rootCryptoService.ID() + "_root.key"
 	_, err = os.Stat(filepath.Join(tempBaseDir2, "private", "root_keys", rootKeyFilename))
 	assert.NoError(t, err, "missing root key")
-
-	// Look for symlinks in the new repo matching symlinks in the old repo
-	numSymlinks := 0
-
-	oldRootKeyStore := repo.KeyStoreManager.RootKeyStore()
-	newRootKeyStore := repo2.KeyStoreManager.RootKeyStore()
-
-	for _, relKeyPath := range oldRootKeyStore.ListFiles(true) {
-		fullKeyPath := filepath.Join(oldRootKeyStore.BaseDir(), relKeyPath)
-
-		fi, err := os.Lstat(fullKeyPath)
-		assert.NoError(t, err, "lstat failed")
-
-		if (fi.Mode() & os.ModeSymlink) != 0 {
-			numSymlinks++
-
-			oldTarget, err := os.Readlink(fullKeyPath)
-			assert.NoError(t, err, "readlink failed on old repo")
-
-			newTarget, err := os.Readlink(filepath.Join(newRootKeyStore.BaseDir(), relKeyPath))
-			assert.NoError(t, err, "symlink not found in new repo")
-
-			assert.Equal(t, oldTarget, newTarget, "symlink targets do not match")
-		}
-	}
-
-	if numSymlinks == 0 {
-		t.Fatal("no symlinks found in original repo")
-	}
 }
 
 func TestImportExportGUN(t *testing.T) {

@@ -120,7 +120,7 @@ func fingerprintCert(cert *x509.Certificate) (CertID, error) {
 
 // loadCertsFromDir receives a store AddCertFromFile for each certificate found
 func loadCertsFromDir(s *X509FileStore) error {
-	certFiles := s.fileStore.ListFiles(true)
+	certFiles := s.fileStore.ListFiles()
 	for _, f := range certFiles {
 		// ListFiles returns relative paths
 		fullPath := filepath.Join(s.fileStore.BaseDir(), f)

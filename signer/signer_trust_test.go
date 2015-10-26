@@ -40,7 +40,7 @@ func stubHealthFunction(t *testing.T, status map[string]string, err error) rpcHe
 		_, withDeadline := ctx.Deadline()
 		assert.True(t, withDeadline)
 
-		return &pb.HealthStatus{status}, err
+		return &pb.HealthStatus{Status: status}, err
 	}
 }
 
