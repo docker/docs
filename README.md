@@ -20,29 +20,29 @@ received content.
 
 ## Goals
 
-notary is based on [The Update Framework](http://theupdateframework.com/), a secure general design for the problem of software distribution and updates. By using TUF, notary achieves a number of key advantages:
+Notary is based on [The Update Framework](http://theupdateframework.com/), a secure general design for the problem of software distribution and updates. By using TUF, notary achieves a number of key advantages:
 
 * **Survivable Key Compromise**: Content publishers must manage keys in order to sign their content. Signing keys may be compromised or lost so systems must be designed in order to be flexible and recoverable in the case of key compromise. TUF's notion of key roles is utilized to separate responsibilities across a hierarchy of keys such that loss of any particular key (except the root role) by itself is not fatal to the security of the system.
 * **Freshness Guarantees**: Replay attacks are a common problem in designing secure systems, where previously valid payloads are replayed to trick another system. The same problem exists in the software update systems, where old signed can be presented as the most recent. notary makes use of timestamping on publishing so that consumers can know that they are receiving the most up to date content. This is particularly important when dealing with software update where old vulnerable versions could be used to attack users.
 * **Configurable Trust Thresholds**: Oftentimes there are a large number of publishers that are allowed to publish a particular piece of content. For example, open source projects where there are a number of core maintainers. Trust thresholds can be used so that content consumers require a configurable number of signatures on a piece of content in order to trust it. Using thresholds increases security so that loss of individual signing keys doesn't allow publishing of malicious content.
 * **Signing Delegation**: To allow for flexible publishing of trusted collections, a content publisher can delegate part of their collection to another signer. This delegation is represented as signed metadata so that a consumer of the content can verify both the content and the delegation.
-* **Use of Existing Distribution**: notary's trust guarantees are not tied at all to particular distribution channels from which content is delivered. Therefore, trust can be added to any existing content delivery mechanism.
+* **Use of Existing Distribution**: Notary's trust guarantees are not tied at all to particular distribution channels from which content is delivered. Therefore, trust can be added to any existing content delivery mechanism.
 * **Untrusted Mirrors and Transport**: All of the notary metadata can be mirrored and distributed via arbitrary channels.
 
 # Notary CLI
 
-notary is a tool for publishing and managing trusted collections of content. Publishers can digitally sign collections and consumers can verify integrity and origin of content. This ability is built on a straightforward key management and signing interface to create signed collections and configure trusted publishers.
+Notary is a tool for publishing and managing trusted collections of content. Publishers can digitally sign collections and consumers can verify integrity and origin of content. This ability is built on a straightforward key management and signing interface to create signed collections and configure trusted publishers.
 
 ## Using Notary
 Lets try using notary.
 
 Prerequisites:
 
-- Requirements from the [Compiling Notary Server](#compiling-notary) section
+- Requirements from the [Compiling Notary Server](#compiling-notary-server) section
 - [docker and docker-compose](http://docs.docker.com/compose/install/)
-- [Notary server configuration](#configure-notary-server)
+- [Notary server configuration](#configuring-notary-server)
 
-As setup, lets build notary and then start up a local notary-server (don't forget to add `127.0.0.1 notary-server` to your `/etc/hosts`, or if using docker-machine, add `$(docker-machine ip) notary-server`).
+As setup, let's build notary and then start up a local notary-server (don't forget to add `127.0.0.1 notary-server` to your `/etc/hosts`, or if using docker-machine, add `$(docker-machine ip) notary-server`).
 
 ```sh
 make binaries
@@ -53,7 +53,7 @@ docker-compose up -d
 Note: In order to have notary use the local notary server and development root CA we can load the local development configuration by appending `-c cmd/notary/config.json` to every command. If you would rather not have to use `-c` on every command, copy `cmd/notary/config.json and cmd/notary/root-ca.crt` to `~/.notary`.
 
 
-First, lets initiate a notary collection called `example.com/scripts`
+First, let's initiate a notary collection called `example.com/scripts`
 
 ```sh
 notary init example.com/scripts
