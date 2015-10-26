@@ -3,8 +3,6 @@ package main
 import (
 	"bufio"
 	"crypto/sha256"
-	"crypto/tls"
-	"crypto/x509"
 	"fmt"
 	"io/ioutil"
 	"net"
@@ -22,7 +20,7 @@ import (
 	"github.com/docker/distribution/registry/client/transport"
 	"github.com/docker/docker/pkg/term"
 	notaryclient "github.com/docker/notary/client"
-	"github.com/docker/notary/trustmanager"
+	"github.com/docker/notary/utils"
 	"github.com/spf13/cobra"
 )
 
@@ -360,7 +358,6 @@ func (ps passwordStore) Basic(u *url.URL) (string, string) {
 
 func getTransport(gun string, readOnly bool) http.RoundTripper {
 	// Attempt to get a root CA from the config file. Nil is the host defaults.
-	rootPool := x509.NewCertPool()
 	rootCAFile := mainViper.GetString("remote_server.root_ca")
 	if rootCAFile != "" {
 		// If we haven't been given an Absolute path, we assume it's relative
@@ -368,19 +365,18 @@ func getTransport(gun string, readOnly bool) http.RoundTripper {
 		if !filepath.IsAbs(rootCAFile) {
 			rootCAFile = filepath.Join(configPath, rootCAFile)
 		}
-		rootCert, err := trustmanager.LoadCertFromFile(rootCAFile)
-		if err != nil {
-			fatalf("could not load root ca file. %s", err.Error())
-		}
-		rootPool.AddCert(rootCert)
 	}
 
-	// skipTLSVerify is false by default so verification will
-	// be performed.
-	tlsConfig := &tls.Config{
-		InsecureSkipVerify: mainViper.GetBool("remote_server.skipTLSVerify"),
-		MinVersion:         tls.VersionTLS10,
-		RootCAs:            rootPool,
+	insecureSkipVerify := false
+	if mainViper.IsSet("remote_server.skipTLSVerify") {
+		insecureSkipVerify = mainViper.GetBool("remote_server.skipTLSVerify")
+	}
+	tlsConfig, err := utils.ConfigureClientTLS(&utils.ClientTLSOpts{
+		RootCAFile:         rootCAFile,
+		InsecureSkipVerify: insecureSkipVerify,
+	})
+	if err != nil {
+		logrus.Fatal("Unable to configure TLS: ", err.Error())
 	}
 
 	base := &http.Transport{

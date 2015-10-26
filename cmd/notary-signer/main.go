@@ -1,8 +1,6 @@
 package main
 
 import (
-	"crypto/rand"
-	"crypto/tls"
 	"database/sql"
 	"errors"
 	_ "expvar"
@@ -22,6 +20,7 @@ import (
 	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/signer"
 	"github.com/docker/notary/signer/api"
+	"github.com/docker/notary/utils"
 	"github.com/docker/notary/version"
 	"github.com/endophage/gotuf/data"
 	_ "github.com/go-sql-driver/mysql"
@@ -103,20 +102,13 @@ func main() {
 		log.Fatalf("Certificate and key are mandatory")
 	}
 
-	tlsConfig := &tls.Config{
-		MinVersion:               tls.VersionTLS12,
-		PreferServerCipherSuites: true,
-		CipherSuites: []uint16{
-			tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
-			tls.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
-			tls.TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,
-			tls.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,
-			tls.TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,
-			tls.TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,
-			tls.TLS_RSA_WITH_AES_128_CBC_SHA,
-			tls.TLS_RSA_WITH_AES_256_CBC_SHA},
+	tlsConfig, err := utils.ConfigureServerTLS(&utils.ServerTLSOpts{
+		ServerCertFile: certFile,
+		ServerKeyFile:  keyFile,
+	})
+	if err != nil {
+		logrus.Fatalf("Unable to set up TLS: %s", err.Error())
 	}
-	tlsConfig.Rand = rand.Reader
 
 	cryptoServices := make(signer.CryptoServiceIndex)
 

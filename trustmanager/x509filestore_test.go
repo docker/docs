@@ -5,6 +5,7 @@ import (
 	"encoding/pem"
 	"io/ioutil"
 	"os"
+	"path/filepath"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -20,6 +21,44 @@ func TestNewX509FileStore(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to create a new X509FileStore: %v", store)
 	}
+}
+
+// NewX509FileStore loads any existing certs from the directory, and does
+// not overwrite any of the.
+func TestNewX509FileStoreLoadsExistingCerts(t *testing.T) {
+	tempDir, err := ioutil.TempDir("", "cert-test")
+	assert.NoError(t, err)
+	defer os.RemoveAll(tempDir)
+
+	certBytes, err := ioutil.ReadFile("../fixtures/root-ca.crt")
+	assert.NoError(t, err)
+	out, err := os.Create(filepath.Join(tempDir, "root-ca.crt"))
+	assert.NoError(t, err)
+
+	// to distinguish it from the canonical format
+	distinguishingBytes := []byte{'\n', '\n', '\n', '\n', '\n', '\n'}
+	nBytes, err := out.Write(distinguishingBytes)
+	assert.NoError(t, err)
+	assert.Len(t, distinguishingBytes, nBytes)
+
+	nBytes, err = out.Write(certBytes)
+	assert.NoError(t, err)
+	assert.Len(t, certBytes, nBytes)
+
+	err = out.Close()
+	assert.NoError(t, err)
+
+	store, err := NewX509FileStore(tempDir)
+	assert.NoError(t, err)
+
+	expectedCert, err := LoadCertFromFile("../fixtures/root-ca.crt")
+	assert.NoError(t, err)
+	assert.Equal(t, []*x509.Certificate{expectedCert}, store.GetCertificates())
+
+	outBytes, err := ioutil.ReadFile(filepath.Join(tempDir, "root-ca.crt"))
+	assert.NoError(t, err)
+	assert.Equal(t, distinguishingBytes, outBytes[:6], "original file overwritten")
+	assert.Equal(t, certBytes, outBytes[6:], "original file overwritten")
 }
 
 func TestAddCertX509FileStore(t *testing.T) {
@@ -80,6 +119,21 @@ func TestAddCertFromFileX509FileStore(t *testing.T) {
 	if assert.Error(t, err, "expected error when adding certificate twice") {
 		assert.Equal(t, err, &ErrCertExists{})
 	}
+}
+
+// TestNewX509FileStoreEmpty verifies the behavior of the Empty function
+func TestNewX509FileStoreEmpty(t *testing.T) {
+	tempDir, err := ioutil.TempDir("", "cert-test")
+	assert.NoError(t, err)
+	defer os.RemoveAll(tempDir)
+
+	store, err := NewX509FileStore(tempDir)
+	assert.NoError(t, err)
+	assert.True(t, store.Empty())
+
+	err = store.AddCertFromFile("../fixtures/root-ca.crt")
+	assert.NoError(t, err)
+	assert.False(t, store.Empty())
 }
 
 func TestAddCertFromPEMX509FileStore(t *testing.T) {
