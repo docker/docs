@@ -25,9 +25,9 @@ To start, navigate to the Trusted Registry user interface (UI) > Settings to vie
 * Garbage collection
 * Updates
 
- **Note**:
- Saving changes you've made to settings may restart various services, as follows:
-
+>**Note**:
+>Saving changes you've made to settings may restart various services, as follows:
+>
  * General settings: full Docker Trusted Registry restart
  * License change: full Docker Trusted Registry restart
  * SSL change: Nginx reload
@@ -38,17 +38,16 @@ To start, navigate to the Trusted Registry user interface (UI) > Settings to vie
 
 ![Domain and Ports page</admin/settings#http>](assets/admin-settings.png)
 
-
 Each setting on this page is explained in the Docker Trusted Registry UI.
 
-* Domain Name*: **required** defaults to an empty string, the fully qualified domain name assigned to the Docker Trusted Registry host.
-* HTTP Port*: defaults to 80, used as the entry point for the image storage service. To see load balancer status, you can query
+* *Domain Name*: **required** defaults to an empty string, the fully qualified domain name assigned to the Docker Trusted Registry host.
+* *HTTP Port*: defaults to 80, used as the entry point for the image storage service. To see load balancer status, you can query
 http://&lt;dtr-host&gt;/load_balancer_status.
-* HTTPS Port*: defaults to 443, used as the secure entry point for the image storage service.
-* HTTP proxy*: defaults to an empty string, proxy server for HTTP requests.
-* HTTPS proxy*: defaults to an empty string, proxy server for HTTPS requests.
-* No proxy*: defaults to an empty string, proxy bypass for HTTP and HTTPS requests.
-* Upgrade checking*: enables or disables automatic checking for Docker Trusted Registry software updates.
+* *HTTPS Port*: defaults to 443, used as the secure entry point for the image storage service.
+* *HTTP proxy*: defaults to an empty string, proxy server for HTTP requests.
+* *HTTPS proxy*: defaults to an empty string, proxy server for HTTPS requests.
+* *No proxy*: defaults to an empty string, proxy bypass for HTTP and HTTPS requests.
+* *Upgrade checking*: enables or disables automatic checking for Docker Trusted Registry software updates.
 
 > **Note**: If you need Docker Trusted Registry to re-generate a self-signed certificate at some
 > point, you can change the domain name. Whenever the domain name does not match the current certificate,
@@ -363,10 +362,10 @@ If the previous Quick setup options are not sufficient to configure your
 Registry options, you can upload a YAML file. The schema of this file is
 identical to that used by the [Registry](http://docs.docker.com/registry/configuration/).
 
-* If you are using the file system driver to provide local image storage, you
-  will need to specify a root directory which will get mounted as a sub-path of
-  `/var/local/dtr/image-storage`. The default value of this root directory is
-  `/local`, so the full path to it is `/var/local/dtr/image-storage/local`.
+If you are using the file system driver to provide local image storage, you
+will need to specify a root directory which will get mounted as a sub-path of
+`/var/local/dtr/image-storage`. The default value of this root directory is
+`/local`, so the full path to it is `/var/local/dtr/image-storage/local`.
 
 ## Authentication
 
@@ -408,23 +407,12 @@ organization's existing LDAP user and authentication database.
 To improve the performance of Docker Trusted Registry's Access Control Lists,
 User and Group membership data is synced into Docker Trusted Registry's database
 at a configurable *LDAP Sync Interval*. User passwords are not transferred
-during syncing.  The Trusted Registry defers to the LDAP server to validate
+during syncing. The Trusted Registry defers to the LDAP server to validate
 username/password pairs.
 
-> **Note**: LDAP syncing does not create new user accounts or teams in Docker Trusted Registry. It
-> will only manage existing teams that have been specified to sync with LDAP.
-> Use the [Docker Trusted Registry APIs](/docker-trusted-registry/api/) to create new users and
-> teams from your LDAP server.
+> **Note**: LDAP syncing creates new users that that do not already exist in  the Trusted Registry. Any existing users that are not found by the LDAP sync are marked as inactive.
 
-You can configure the "userFilter" to select the set of users that are
-candidates for each of the "admin", global "read-write", and global "read-only"
-roles. Unlike "Managed" authentication, the "admin" role is separate from the
-registry access roles, so LDAP users in the "admin" role won't have access to
-Docker Trusted Registry images unless they are also given the "read-write" or
-"read-only" role.
-
-Alternativly, you can assign
-[Organization, Team or User repository roles using the API](/docker-trusted-registry/api/).
+You can also sync team membership with the LDAP group. This is performed after you have finished configuring your settings.
 
 Because connecting to LDAP involves existing infrastructure external to Docker Trusted Registry and Docker, you need to gather the details required to configure Docker Trusted Registry for your organization's particular LDAP implementation.
 
@@ -459,6 +447,7 @@ output should allow you to confirm which setting you need.
 
 #### LDAP Configuration options
 
+* *Admin Password*: **required** use this password to login as the user `admin` in case Docker Trusted Registry is unable to authenticate you using your LDAP server. This account may be used to login to the Trusted Registry and correct identity and authentication settings.
 * *LDAP Server URL*: **required** defaults to null, LDAP server URL (e.g., - ldap://example.com)
 * *Use StartTLS*: defaults to unchecked, check to enable StartTLS
 * *User Base DN*: **required** defaults to null, user base DN in the form (e.g., - dc=example,dc=com)
@@ -466,20 +455,13 @@ output should allow you to confirm which setting you need.
 * *Search User DN*: **required** defaults to null, search user DN (e.g., - domain\username)
 * *Search User Password*: **required** defaults to null, search user password
 * *LDAP Sync Interval*: **required** defaults to 1h0m0s, sets the interval for Docker Trusted Registry to sync with the LDAP db.
-* *User Search filters*: allows you to configure LDAP queries to limit the users that have the roles:
-* * *User Filter*: This filter is used to select the objects to use as candidates for the role filters
-* * *Admin Role Filter*: Combined with the "User Filter" to specify users with the
-    "Admin" role - permitted to access the Docker Trusted Registry web UI
-* * *Read-Write Role Filter*: Combined with the "User Filter" to specify users permitted to
-    push images to, and pull images from Docker Trusted Registry
-* * *Read-Only Role Filter*: Combined with the "User Filter" to specify users permitted to
-    pull images from Docker Trusted Registry
-
-> **Note**: While the "role" filters are optional, remember that if they are
-> left empty, all users will get those full privileges. In other words, if the
-> "admin" filter is left empty, all users will get admin privileges, if the
-> "read-write" filter is empty, all users can push/pull any image, and so forth.
-> (This behavior may change in future versions.)
+* *User Search Filter*: Users on your LDAP server are synced to Docker Trusted Registry's local database using this search filter. Objects in LDAP that match
+this filter and have a valid "User Login Attribute" are created as a local user
+with the "User Login Attribute" as their username. Only these users are able to
+login to the Trusted Registry.
+* *Admin LDAP DN*: **required** This field is used to identify the group object on your LDAP server which is synced to the system administrators list.
+* *Admin Group Member Attribute*: **required** This value matches the name of the attribute on this group object which corresponds to the Distinguished Name
+of the group member objects.
 
 #### Confirm login with current configuration
 
