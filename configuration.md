@@ -13,14 +13,14 @@ weight=5
 
 ## Overview
 
-This page will help you properly configure Docker Trusted Registry  so it can
+Use this documentation to  configure Docker Trusted Registry  so it can
 run in your environment.
 
-Start with Docker Trusted Registry loaded in your browser and click  "Settings" in the global nav
-bar at the top of the page to view configuration options. You'll see menus
+Start with Docker Trusted Registry loaded in your browser and select  "Settings" in the global nav
+bar at the top of the page to view configuration options. You see menus
 organizing the options for configuring:
 
-* General Settings (ports, proxies, etc.)
+* General Settings (for example, ports and proxies)
 * Security settings
 * Storage settings
 * Your Docker Trusted Registry license
@@ -273,9 +273,11 @@ Then restart the Docker daemon with `sudo /etc/init.d/docker restart`.
 Docker Trusted Registry image storage can be configured to use the local filesystem, or a cloud service
 such as S3 or Azure.
 
-See the [Registry 2.0 configuration](http://docs.docker.com/registry/configuration/)
+To set up storage settings, navigate to the Trusted Registry dashboard > Settings > Storage.
+
+See the [Registry configuration](http://docs.docker.com/registry/configuration/)
 documentation for the full options specific to each driver.
-Storage drivers can be added or customized via the [Docker Registry storage driver
+Storage drivers can be added or customized through the [Docker Registry storage driver
 API](http://docs.docker.com/registry/storagedrivers/#storage-driver-api).
 
 ![Storage settings page</admin/settings#storage>](assets/admin-settings-storage.png)
@@ -285,7 +287,7 @@ near the top of the page, the UI will change to reflect the configuration settin
 appropriate to the selected method.
 
 You can either use the storage specific input boxes to configure the most common settngs
-for local filesystem, S3 or Azure storage backends,
+for local filesystem, S3, Azure, or openstack Swift storage backends,
 or use the full Yaml configuration file upload to have more detailed control.
 
 You can view the current `storage.yaml` file on your Docker Trusted Registry Docker host in the `/usr/local/etc/dtr/`
@@ -308,13 +310,18 @@ The [S3 storage backend](/registry/configuration/#s3) page allows you to set the
 The [Azure storage backend](/registry/configuration/#azure) page allows you to set
 the "Account name", "Account key", "Container", and "Realm".
 
+### Openstack Swift settings
+
+View the [openstack Swift settings](/registry/configuration/#openstack-swift) documentation so that you can set up your storage settings:
+authurl, username, password, container, tenant, tenantid, domain, domainid, insecureskipverify, region, chunksize, and prefix.
+
 ### Yaml configuration file
 
 If the Quick setup options above are not sufficient to configure your Registry
 options, you can upload a YAML file.
 
 The schema of this file is identical to that used
-by the [Registry 2.0](http://docs.docker.com/registry/configuration/).
+by the [Registry](http://docs.docker.com/registry/configuration/).
 
 * If you are using the file system driver to provide local image storage, you
   will need to specify a root directory which will get mounted as a sub-path of
@@ -324,7 +331,7 @@ by the [Registry 2.0](http://docs.docker.com/registry/configuration/).
 
 ## Authentication
 
-The "Authentication" settings lets Docker Trusted Registry administrators control access
+Use the  "Authentication" settings to control access
 to the Docker Trusted Registry web admin tool and to the Docker Trusted Registry.
 
 The current authentication methods are `None`, `Managed` and `LDAP`.
@@ -379,7 +386,7 @@ Alternativly, you can assign
 [Organization, Team or User repository roles using the API](/docker-trusted-registry/api/).
 
 Because connecting to LDAP involves existing infrastructure external to Docker Trusted Registry and
-Docker, you will need to gather the details required to configure Docker Trusted Registry for your
+Docker, you need to gather the details required to configure Docker Trusted Registry for your
 organization's particular LDAP implementation.
 
 You can test that you have the correct LDAP server information by connecting to
