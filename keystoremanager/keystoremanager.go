@@ -26,11 +26,9 @@ type KeyStoreManager struct {
 }
 
 const (
-	trustDir          = "trusted_certificates"
-	privDir           = "private"
-	rootKeysSubdir    = "root_keys"
-	nonRootKeysSubdir = "tuf_keys"
-	rsaRootKeySize    = 4096 // Used for new root keys
+	trustDir       = "trusted_certificates"
+	privDir        = "private"
+	rsaRootKeySize = 4096 // Used for new root keys
 )
 
 // ErrValidationFail is returned when there is no valid trusted certificates
