@@ -18,7 +18,7 @@ import (
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/utils"
-	"github.com/endophage/gotuf/data"
+	"github.com/docker/notary/tuf/data"
 	"github.com/gorilla/mux"
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/net/context"

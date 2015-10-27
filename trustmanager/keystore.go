@@ -3,7 +3,7 @@ package trustmanager
 import (
 	"fmt"
 
-	"github.com/endophage/gotuf/data"
+	"github.com/docker/notary/tuf/data"
 )
 
 // ErrAttemptsExceeded is returned when too many attempts have been made to decrypt a key

@@ -2,8 +2,8 @@ package signer
 
 import (
 	pb "github.com/docker/notary/proto"
-	"github.com/endophage/gotuf/data"
-	"github.com/endophage/gotuf/signed"
+	"github.com/docker/notary/tuf/data"
+	"github.com/docker/notary/tuf/signed"
 )
 
 // SigningService is the interface to implement a key management and signing service

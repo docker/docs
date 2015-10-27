@@ -16,7 +16,7 @@ import (
 	"github.com/docker/distribution/health"
 	_ "github.com/docker/distribution/registry/auth/htpasswd"
 	_ "github.com/docker/distribution/registry/auth/token"
-	"github.com/endophage/gotuf/signed"
+	"github.com/docker/notary/tuf/signed"
 	_ "github.com/go-sql-driver/mysql"
 	"golang.org/x/net/context"
 

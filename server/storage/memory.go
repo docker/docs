@@ -5,7 +5,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/endophage/gotuf/data"
+	"github.com/docker/notary/tuf/data"
 )
 
 type key struct {

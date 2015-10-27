@@ -7,10 +7,10 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary/client/changelist"
-	tuf "github.com/endophage/gotuf"
-	"github.com/endophage/gotuf/data"
-	"github.com/endophage/gotuf/keys"
-	"github.com/endophage/gotuf/store"
+	tuf "github.com/docker/notary/tuf"
+	"github.com/docker/notary/tuf/data"
+	"github.com/docker/notary/tuf/keys"
+	"github.com/docker/notary/tuf/store"
 )
 
 // Use this to initialize remote HTTPStores from the config settings

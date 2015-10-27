@@ -20,7 +20,7 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	"github.com/agl/ed25519"
-	"github.com/endophage/gotuf/data"
+	"github.com/docker/notary/tuf/data"
 )
 
 // GetCertFromURL tries to get a X509 certificate given a HTTPS URL

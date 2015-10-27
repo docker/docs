@@ -6,14 +6,14 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/endophage/gotuf"
-	"github.com/endophage/gotuf/data"
+	"github.com/docker/notary/tuf"
+	"github.com/docker/notary/tuf/data"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary/server/storage"
-	"github.com/endophage/gotuf/keys"
-	"github.com/endophage/gotuf/signed"
-	"github.com/endophage/gotuf/utils"
+	"github.com/docker/notary/tuf/keys"
+	"github.com/docker/notary/tuf/signed"
+	"github.com/docker/notary/tuf/utils"
 )
 
 // ErrValidation represents a general validation error

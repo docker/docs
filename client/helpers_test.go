@@ -6,9 +6,9 @@ import (
 	"testing"
 
 	"github.com/docker/notary/client/changelist"
-	tuf "github.com/endophage/gotuf"
-	"github.com/endophage/gotuf/data"
-	"github.com/endophage/gotuf/keys"
+	tuf "github.com/docker/notary/tuf"
+	"github.com/docker/notary/tuf/data"
+	"github.com/docker/notary/tuf/keys"
 	"github.com/stretchr/testify/assert"
 )
 

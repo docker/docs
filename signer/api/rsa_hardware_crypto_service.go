@@ -11,7 +11,7 @@ import (
 	"math/big"
 
 	"github.com/docker/notary/signer/keys"
-	"github.com/endophage/gotuf/data"
+	"github.com/docker/notary/tuf/data"
 	"github.com/miekg/pkcs11"
 )
 

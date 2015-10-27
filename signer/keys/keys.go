@@ -3,7 +3,7 @@ package keys
 import (
 	"errors"
 
-	"github.com/endophage/gotuf/data"
+	"github.com/docker/notary/tuf/data"
 	"github.com/miekg/pkcs11"
 )
 

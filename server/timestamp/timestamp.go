@@ -3,8 +3,8 @@ package timestamp
 import (
 	"bytes"
 
-	"github.com/endophage/gotuf/data"
-	"github.com/endophage/gotuf/signed"
+	"github.com/docker/notary/tuf/data"
+	"github.com/docker/notary/tuf/signed"
 	"github.com/jfrazelle/go/canonical/json"
 
 	"github.com/Sirupsen/logrus"

@@ -3,7 +3,7 @@ package storage
 import (
 	"testing"
 
-	"github.com/endophage/gotuf/data"
+	"github.com/docker/notary/tuf/data"
 	"github.com/stretchr/testify/assert"
 )
 

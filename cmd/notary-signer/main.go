@@ -22,7 +22,7 @@ import (
 	"github.com/docker/notary/signer/api"
 	"github.com/docker/notary/utils"
 	"github.com/docker/notary/version"
-	"github.com/endophage/gotuf/data"
+	"github.com/docker/notary/tuf/data"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/miekg/pkcs11"
 	"github.com/spf13/viper"

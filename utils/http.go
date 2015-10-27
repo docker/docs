@@ -9,7 +9,7 @@ import (
 	"github.com/docker/distribution/registry/api/v2"
 	"github.com/docker/distribution/registry/auth"
 	"github.com/docker/notary/errors"
-	"github.com/endophage/gotuf/signed"
+	"github.com/docker/notary/tuf/signed"
 	"github.com/gorilla/mux"
 	"golang.org/x/net/context"
 )

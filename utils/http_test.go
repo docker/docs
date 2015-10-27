@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/endophage/gotuf/signed"
+	"github.com/docker/notary/tuf/signed"
 	"golang.org/x/net/context"
 
 	"github.com/docker/notary/errors"

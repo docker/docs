@@ -1,7 +1,7 @@
 package changelist
 
 import (
-	"github.com/endophage/gotuf/data"
+	"github.com/docker/notary/tuf/data"
 )
 
 // Scopes for TufChanges are simply the TUF roles.

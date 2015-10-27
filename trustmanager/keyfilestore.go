@@ -6,7 +6,7 @@ import (
 	"sync"
 
 	"github.com/docker/notary/pkg/passphrase"
-	"github.com/endophage/gotuf/data"
+	"github.com/docker/notary/tuf/data"
 )
 
 // KeyFileStore persists and manages private keys on disk
