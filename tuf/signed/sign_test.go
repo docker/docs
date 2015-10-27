@@ -154,7 +154,7 @@ func TestMultiSign(t *testing.T) {
 		t.Fatalf("Incorrect number of signatures: %d", len(testData.Signatures))
 	}
 
-	keyIDs := map[string]struct{}{testKeyID1: struct{}{}, testKeyID2: struct{}{}}
+	keyIDs := map[string]struct{}{testKeyID1: {}, testKeyID2: {}}
 	for _, sig := range testData.Signatures {
 		if _, ok := keyIDs[sig.KeyID]; !ok {
 			t.Fatalf("Got a signature we didn't expect: %s", sig.KeyID)

@@ -7,8 +7,8 @@ import (
 
 	"github.com/docker/notary/pkg/passphrase"
 	"github.com/docker/notary/trustmanager"
-	jose "github.com/dvsekhvalnov/jose2go"
 	"github.com/docker/notary/tuf/data"
+	jose "github.com/dvsekhvalnov/jose2go"
 	"github.com/jinzhu/gorm"
 )
 

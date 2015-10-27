@@ -7,8 +7,8 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	pb "github.com/docker/notary/proto"
-	"github.com/docker/notary/utils"
 	"github.com/docker/notary/tuf/data"
+	"github.com/docker/notary/utils"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"

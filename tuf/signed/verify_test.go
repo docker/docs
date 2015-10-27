@@ -162,7 +162,7 @@ func Test(t *testing.T) {
 		}
 		if run.roles == nil {
 			run.roles = map[string]*data.Role{
-				"root": &data.Role{
+				"root": {
 					RootRole: data.RootRole{
 						KeyIDs:    []string{run.keys[0].ID()},
 						Threshold: 1,
