@@ -196,7 +196,7 @@ func GetTimestampKeyHandler(ctx context.Context, w http.ResponseWriter, r *http.
 
 	key, err := timestamp.GetOrCreateTimestampKey(gun, store, crypto, keyAlgorithm)
 	if err != nil {
-		logger.Error("500 GET timestamp key: %v", err)
+		logger.Errorf("500 GET timestamp key: %v", err)
 		return errors.ErrUnknown.WithDetail(err)
 	}
 
