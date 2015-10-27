@@ -204,9 +204,9 @@ func main() {
 		log.Println("HTTP server listening on", httpAddr)
 	}
 
-	err = server.ListenAndServe()
+	err = server.ListenAndServeTLS("", "")
 	if err != nil {
-		log.Fatal("HTTP server failed to start:", err)
+		log.Fatal("HTTPS server failed to start:", err)
 	}
 }
 
