@@ -11,7 +11,6 @@ import (
 	notaryclient "github.com/docker/notary/client"
 	"github.com/docker/notary/keystoremanager"
 	"github.com/docker/notary/pkg/passphrase"
-	"github.com/docker/notary/trustmanager"
 
 	"github.com/spf13/cobra"
 )
@@ -137,15 +136,7 @@ func keysRemoveKey(cmd *cobra.Command, args []string) {
 	}
 
 	// Choose the correct filestore to remove the key from
-	var keyStoreToRemove *trustmanager.KeyFileStore
-	var keyMap map[string]string
-	if keyRemoveRoot {
-		keyStoreToRemove = keyStoreManager.RootKeyStore()
-		keyMap = keyStoreManager.RootKeyStore().ListKeys()
-	} else {
-		keyStoreToRemove = keyStoreManager.NonRootKeyStore()
-		keyMap = keyStoreManager.NonRootKeyStore().ListKeys()
-	}
+	keyMap := keyStoreManager.KeyStore.ListKeys()
 
 	// Attempt to find the full GUN to the key in the map
 	// This is irrelevant for removing root keys, but does no harm
@@ -162,7 +153,7 @@ func keysRemoveKey(cmd *cobra.Command, args []string) {
 	}
 
 	// Attempt to remove the key
-	err = keyStoreToRemove.RemoveKey(keyWithGUN)
+	err = keyStoreManager.KeyStore.RemoveKey(keyWithGUN)
 	if err != nil {
 		fatalf("failed to remove key with key ID: %s, %v", keyID, err)
 	}
@@ -181,17 +172,19 @@ func keysList(cmd *cobra.Command, args []string) {
 		fatalf("failed to create a new truststore manager with directory: %s", trustDir)
 	}
 
+	// Get a map of all the keys/roles
+	keysMap := keyStoreManager.KeyStore.ListKeys()
+
 	fmt.Println("")
 	fmt.Println("# Root keys: ")
-	for k := range keyStoreManager.RootKeyStore().ListKeys() {
-		fmt.Println(k)
+	for k, v := range keysMap {
+		if v == "root" {
+			fmt.Println(k)
+		}
 	}
 
 	fmt.Println("")
 	fmt.Println("# Signing keys: ")
-
-	// Get a map of all the keys/roles
-	keysMap := keyStoreManager.NonRootKeyStore().ListKeys()
 
 	// Get a list of all the keys
 	var sortedKeys []string
@@ -203,7 +196,9 @@ func keysList(cmd *cobra.Command, args []string) {
 
 	// Print a sorted list of the key/role
 	for _, k := range sortedKeys {
-		printKey(k, keysMap[k])
+		if keysMap[k] != "root" {
+			printKey(k, keysMap[k])
+		}
 	}
 }
 

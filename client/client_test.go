@@ -94,9 +94,9 @@ func testInitRepo(t *testing.T, rootType data.KeyAlgorithm) {
 
 	// Look for keys in private. The filenames should match the key IDs
 	// in the private key store.
-	privKeyList := repo.KeyStoreManager.NonRootKeyStore().ListFiles()
+	privKeyList := repo.KeyStoreManager.KeyStore.ListFiles()
 	for _, privKeyName := range privKeyList {
-		privKeyFileName := filepath.Join(repo.KeyStoreManager.NonRootKeyStore().BaseDir(), privKeyName)
+		privKeyFileName := filepath.Join(repo.KeyStoreManager.KeyStore.BaseDir(), privKeyName)
 		_, err := os.Stat(privKeyFileName)
 		assert.NoError(t, err, "missing private key: %s", privKeyName)
 	}
@@ -301,7 +301,7 @@ func testAddListTarget(t *testing.T, rootType data.KeyAlgorithm) {
 	var tempKey data.TUFKey
 	json.Unmarshal([]byte(timestampECDSAKeyJSON), &tempKey)
 
-	repo.KeyStoreManager.NonRootKeyStore().AddKey(filepath.Join(filepath.FromSlash(gun), tempKey.ID()), "nonroot", &tempKey)
+	repo.KeyStoreManager.KeyStore.AddKey(filepath.Join(filepath.FromSlash(gun), tempKey.ID()), "nonroot", &tempKey)
 
 	// Because ListTargets will clear this
 	savedTUFRepo := repo.tufRepo

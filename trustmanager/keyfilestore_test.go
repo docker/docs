@@ -31,7 +31,7 @@ func TestAddKey(t *testing.T) {
 	defer os.RemoveAll(tempBaseDir)
 
 	// Since we're generating this manually we need to add the extension '.'
-	expectedFilePath := filepath.Join(tempBaseDir, testName+"_"+testAlias+"."+testExt)
+	expectedFilePath := filepath.Join(tempBaseDir, rootKeysSubdir, testName+"_"+testAlias+"."+testExt)
 
 	// Create our store
 	store, err := NewKeyFileStore(tempBaseDir, passphraseRetriever)
@@ -92,7 +92,7 @@ EMl3eFOJXjIch/wIesRSN+2dGOsl7neercjMh1i9RvpCwHDx/E0=
 	defer os.RemoveAll(tempBaseDir)
 
 	// Since we're generating this manually we need to add the extension '.'
-	filePath := filepath.Join(tempBaseDir, testName+"_"+testAlias+"."+testExt)
+	filePath := filepath.Join(tempBaseDir, rootKeysSubdir, testName+"_"+testAlias+"."+testExt)
 
 	os.MkdirAll(filepath.Dir(filePath), perms)
 	err = ioutil.WriteFile(filePath, testData, perms)
@@ -155,7 +155,7 @@ func TestGetDecryptedWithTamperedCipherText(t *testing.T) {
 	assert.NoError(t, err, "failed to add key to store")
 
 	// Since we're generating this manually we need to add the extension '.'
-	expectedFilePath := filepath.Join(tempBaseDir, privKey.ID()+"_"+testAlias+"."+testExt)
+	expectedFilePath := filepath.Join(tempBaseDir, rootKeysSubdir, privKey.ID()+"_"+testAlias+"."+testExt)
 
 	// Get file description, open file
 	fp, err := os.OpenFile(expectedFilePath, os.O_WRONLY, 0600)
@@ -262,7 +262,7 @@ func TestRemoveKey(t *testing.T) {
 	defer os.RemoveAll(tempBaseDir)
 
 	// Since we're generating this manually we need to add the extension '.'
-	expectedFilePath := filepath.Join(tempBaseDir, testName+"_"+testAlias+"."+testExt)
+	expectedFilePath := filepath.Join(tempBaseDir, nonRootKeysSubdir, testName+"_"+testAlias+"."+testExt)
 
 	// Create our store
 	store, err := NewKeyFileStore(tempBaseDir, passphraseRetriever)

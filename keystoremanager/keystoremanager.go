@@ -20,9 +20,7 @@ import (
 // KeyStoreManager is an abstraction around the root and non-root key stores,
 // and related CA stores
 type KeyStoreManager struct {
-	rootKeyStore    *trustmanager.KeyFileStore
-	nonRootKeyStore *trustmanager.KeyFileStore
-
+	KeyStore                *trustmanager.KeyFileStore
 	trustedCAStore          trustmanager.X509Store
 	trustedCertificateStore trustmanager.X509Store
 }
@@ -62,15 +60,8 @@ func (err ErrRootRotationFail) Error() string {
 // NewKeyStoreManager returns an initialized KeyStoreManager, or an error
 // if it fails to create the KeyFileStores or load certificates
 func NewKeyStoreManager(baseDir string, passphraseRetriever passphrase.Retriever) (*KeyStoreManager, error) {
-	nonRootKeysPath := filepath.Join(baseDir, privDir, nonRootKeysSubdir)
-	nonRootKeyStore, err := trustmanager.NewKeyFileStore(nonRootKeysPath, passphraseRetriever)
-	if err != nil {
-		return nil, err
-	}
-
-	// Load the keystore that will hold all of our encrypted Root Private Keys
-	rootKeysPath := filepath.Join(baseDir, privDir, rootKeysSubdir)
-	rootKeyStore, err := trustmanager.NewKeyFileStore(rootKeysPath, passphraseRetriever)
+	keysPath := filepath.Join(baseDir, privDir)
+	keyStore, err := trustmanager.NewKeyFileStore(keysPath, passphraseRetriever)
 	if err != nil {
 		return nil, err
 	}
@@ -102,23 +93,10 @@ func NewKeyStoreManager(baseDir string, passphraseRetriever passphrase.Retriever
 	}
 
 	return &KeyStoreManager{
-		rootKeyStore:            rootKeyStore,
-		nonRootKeyStore:         nonRootKeyStore,
+		KeyStore:                keyStore,
 		trustedCAStore:          trustedCAStore,
 		trustedCertificateStore: trustedCertificateStore,
 	}, nil
-}
-
-// RootKeyStore returns the root key store being managed by this
-// KeyStoreManager
-func (km *KeyStoreManager) RootKeyStore() *trustmanager.KeyFileStore {
-	return km.rootKeyStore
-}
-
-// NonRootKeyStore returns the non-root key store being managed by this
-// KeyStoreManager
-func (km *KeyStoreManager) NonRootKeyStore() *trustmanager.KeyFileStore {
-	return km.nonRootKeyStore
 }
 
 // TrustedCertificateStore returns the trusted certificate store being managed
@@ -165,7 +143,7 @@ func (km *KeyStoreManager) GenRootKey(algorithm string) (string, error) {
 	}
 
 	// Changing the root
-	km.rootKeyStore.AddKey(privKey.ID(), "root", privKey)
+	km.KeyStore.AddKey(privKey.ID(), "root", privKey)
 
 	return privKey.ID(), nil
 }
@@ -173,12 +151,12 @@ func (km *KeyStoreManager) GenRootKey(algorithm string) (string, error) {
 // GetRootCryptoService retrieves a root key and a cryptoservice to use with it
 // TODO(mccauley): remove this as its no longer needed once we have key caching in the keystores
 func (km *KeyStoreManager) GetRootCryptoService(rootKeyID string) (*cryptoservice.UnlockedCryptoService, error) {
-	privKey, _, err := km.rootKeyStore.GetKey(rootKeyID)
+	privKey, _, err := km.KeyStore.GetKey(rootKeyID)
 	if err != nil {
 		return nil, fmt.Errorf("could not get decrypted root key with keyID: %s, %v", rootKeyID, err)
 	}
 
-	cryptoService := cryptoservice.NewCryptoService("", km.rootKeyStore)
+	cryptoService := cryptoservice.NewCryptoService("", km.KeyStore)
 
 	return cryptoservice.NewUnlockedCryptoService(privKey, cryptoService), nil
 }

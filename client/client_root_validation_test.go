@@ -66,7 +66,7 @@ func validateRootSuccessfully(t *testing.T, rootType data.KeyAlgorithm) {
 	var tempKey data.TUFKey
 	json.Unmarshal([]byte(timestampECDSAKeyJSON), &tempKey)
 
-	repo.KeyStoreManager.NonRootKeyStore().AddKey(filepath.Join(filepath.FromSlash(gun), tempKey.ID()), "root", &tempKey)
+	repo.KeyStoreManager.KeyStore.AddKey(filepath.Join(filepath.FromSlash(gun), tempKey.ID()), "root", &tempKey)
 
 	// Because ListTargets will clear this
 	savedTUFRepo := repo.tufRepo

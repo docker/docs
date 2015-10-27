@@ -9,6 +9,11 @@ import (
 	"github.com/endophage/gotuf/data"
 )
 
+const (
+	rootKeysSubdir    = "root_keys"
+	nonRootKeysSubdir = "tuf_keys"
+)
+
 // KeyFileStore persists and manages private keys on disk
 type KeyFileStore struct {
 	sync.Mutex
@@ -133,11 +138,12 @@ func addKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, cached
 	}
 
 	cachedKeys[name] = &cachedKey{alias: alias, key: privKey}
-	return s.Add(name+"_"+alias, pemPrivKey)
+	return s.Add(filepath.Join(getSubdir(alias), name+"_"+alias), pemPrivKey)
 }
 
 func getKeyAlias(s LimitedFileStore, keyID string) (string, error) {
 	files := s.ListFiles()
+
 	name := strings.TrimSpace(strings.TrimSuffix(filepath.Base(keyID), filepath.Ext(keyID)))
 
 	for _, file := range files {
@@ -164,7 +170,9 @@ func getKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, cached
 		return nil, "", err
 	}
 
-	keyBytes, err := s.Get(name + "_" + keyAlias)
+	filename := name + "_" + keyAlias
+	var keyBytes []byte
+	keyBytes, err = s.Get(filepath.Join(getSubdir(keyAlias), filename))
 	if err != nil {
 		return nil, "", err
 	}
@@ -208,6 +216,11 @@ func listKeys(s LimitedFileStore) map[string]string {
 	keyIDMap := make(map[string]string)
 
 	for _, f := range s.ListFiles() {
+		if f[:len(rootKeysSubdir)] == rootKeysSubdir {
+			f = strings.TrimPrefix(f, rootKeysSubdir+"/")
+		} else {
+			f = strings.TrimPrefix(f, nonRootKeysSubdir+"/")
+		}
 		keyIDFull := strings.TrimSpace(strings.TrimSuffix(f, filepath.Ext(f)))
 		keyID := keyIDFull[:strings.LastIndex(keyIDFull, "_")]
 		keyAlias := keyIDFull[strings.LastIndex(keyIDFull, "_")+1:]
@@ -225,5 +238,18 @@ func removeKey(s LimitedFileStore, cachedKeys map[string]*cachedKey, name string
 
 	delete(cachedKeys, name)
 
-	return s.Remove(name + "_" + keyAlias)
+	// being in a subdirectory is for backwards compatibliity
+	filename := name + "_" + keyAlias
+	err = s.Remove(filepath.Join(getSubdir(keyAlias), filename))
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func getSubdir(alias string) string {
+	if alias == "root" {
+		return rootKeysSubdir
+	}
+	return nonRootKeysSubdir
 }
