@@ -9,15 +9,18 @@ import (
 	"testing"
 
 	"github.com/docker/notary/pkg/passphrase"
+	"github.com/endophage/gotuf/data"
 	"github.com/stretchr/testify/assert"
 )
+
+const cannedPassphrase = "passphrase"
 
 var passphraseRetriever = func(keyID string, alias string, createNew bool, numAttempts int) (string, bool, error) {
 	if numAttempts > 5 {
 		giveup := true
 		return "", giveup, errors.New("passPhraseRetriever failed after too many requests")
 	}
-	return "passphrase", false, nil
+	return cannedPassphrase, false, nil
 }
 
 func TestAddKey(t *testing.T) {
@@ -344,4 +347,126 @@ func TestKeysAreCached(t *testing.T) {
 		assert.NoError(t, err, "failed to get key from store")
 	}
 	assert.Equal(t, 2, numTimesCalled, "numTimesCalled should be 2 -- no additional call to passphraseRetriever")
+}
+
+// Exporting a key is successful (it is a valid key)
+func TestKeyFileStoreExportSuccess(t *testing.T) {
+	// Generate a new Private Key
+	privKey, err := GenerateECDSAKey(rand.Reader)
+	assert.NoError(t, err)
+
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	assert.NoError(t, err)
+	defer os.RemoveAll(tempBaseDir)
+
+	// Create our FileStore and add the key
+	store, err := NewKeyFileStore(tempBaseDir, passphraseRetriever)
+	assert.NoError(t, err)
+	err = store.AddKey(privKey.ID(), "root", privKey)
+	assert.NoError(t, err)
+
+	assertExportKeySuccess(t, store, privKey)
+}
+
+// Exporting a key that doesn't exist fails (it is a valid key)
+func TestKeyFileStoreExportNonExistantFailure(t *testing.T) {
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	assert.NoError(t, err)
+	defer os.RemoveAll(tempBaseDir)
+
+	// Create empty FileStore
+	store, err := NewKeyFileStore(tempBaseDir, passphraseRetriever)
+	assert.NoError(t, err)
+
+	_, err = store.ExportKey("12345")
+	assert.Error(t, err)
+}
+
+// Exporting a key is successful (it is a valid key)
+func TestKeyMemoryStoreExportSuccess(t *testing.T) {
+	// Generate a new Private Key
+	privKey, err := GenerateECDSAKey(rand.Reader)
+	assert.NoError(t, err)
+
+	// Create our MemoryStore and add key to it
+	store := NewKeyMemoryStore(passphraseRetriever)
+	assert.NoError(t, err)
+	err = store.AddKey(privKey.ID(), "root", privKey)
+	assert.NoError(t, err)
+
+	assertExportKeySuccess(t, store, privKey)
+}
+
+// Exporting a key that doesn't exist fails (it is a valid key)
+func TestKeyMemoryStoreExportNonExistantFailure(t *testing.T) {
+	store := NewKeyMemoryStore(passphraseRetriever)
+	_, err := store.ExportKey("12345")
+	assert.Error(t, err)
+}
+
+// Importing a key is successful
+func TestKeyFileStoreImportSuccess(t *testing.T) {
+	// Generate a new Private Key
+	privKey, err := GenerateECDSAKey(rand.Reader)
+	assert.NoError(t, err)
+
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	assert.NoError(t, err)
+	defer os.RemoveAll(tempBaseDir)
+
+	// Create our FileStore
+	store, err := NewKeyFileStore(tempBaseDir, passphraseRetriever)
+	assert.NoError(t, err)
+
+	assertImportKeySuccess(t, store, privKey)
+}
+
+// Importing a key is successful
+func TestKeyMemoryStoreImportSuccess(t *testing.T) {
+	// Generate a new Private Key
+	privKey, err := GenerateECDSAKey(rand.Reader)
+	assert.NoError(t, err)
+
+	// Create our MemoryStore
+	store := NewKeyMemoryStore(passphraseRetriever)
+	assert.NoError(t, err)
+
+	assertImportKeySuccess(t, store, privKey)
+}
+
+// Given a keystore and expected key that is in the store, export the key
+// and assert that the exported key is the same and encrypted with the right
+// password.
+func assertExportKeySuccess(
+	t *testing.T, s KeyStore, expectedKey data.PrivateKey) {
+
+	pemBytes, err := s.ExportKey(expectedKey.ID())
+	assert.NoError(t, err)
+
+	reparsedKey, err := ParsePEMPrivateKey(pemBytes, cannedPassphrase)
+	assert.NoError(t, err)
+	assert.Equal(t, expectedKey.Private(), reparsedKey.Private())
+	assert.Equal(t, expectedKey.Public(), reparsedKey.Public())
+}
+
+// Given a keystore and expected key, generate an encrypted PEM of the key
+// and assert that the then imported key is the same and encrypted with the
+// right password.
+func assertImportKeySuccess(
+	t *testing.T, s KeyStore, expectedKey data.PrivateKey) {
+
+	pemBytes, err := EncryptPrivateKey(expectedKey, cannedPassphrase)
+	assert.NoError(t, err)
+
+	err = s.ImportKey(pemBytes, "root")
+	assert.NoError(t, err)
+
+	reimportedKey, reimportedAlias, err := s.GetKey(expectedKey.ID())
+	assert.NoError(t, err)
+	assert.Equal(t, "root", reimportedAlias)
+	assert.Equal(t, expectedKey.Private(), reimportedKey.Private())
+	assert.Equal(t, expectedKey.Public(), reimportedKey.Public())
 }

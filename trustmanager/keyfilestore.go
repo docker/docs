@@ -70,6 +70,22 @@ func (s *KeyFileStore) RemoveKey(name string) error {
 	return removeKey(s, s.cachedKeys, name)
 }
 
+// ExportKey exportes the encrypted bytes from the keystore and writes it to
+// dest.
+func (s *KeyFileStore) ExportKey(name string) ([]byte, error) {
+	keyBytes, _, err := getRawKey(s, name)
+	if err != nil {
+		return nil, err
+	}
+	return keyBytes, nil
+}
+
+// ImportKey imports the private key in the encrypted bytes into the keystore
+// with the given key ID and alias.
+func (s *KeyFileStore) ImportKey(pemBytes []byte, alias string) error {
+	return importKey(s, s.Retriever, s.cachedKeys, alias, pemBytes)
+}
+
 // NewKeyMemoryStore returns a new KeyMemoryStore which holds keys in memory
 func NewKeyMemoryStore(passphraseRetriever passphrase.Retriever) *KeyMemoryStore {
 	memStore := NewMemoryFileStore()
@@ -106,19 +122,33 @@ func (s *KeyMemoryStore) RemoveKey(name string) error {
 	return removeKey(s, s.cachedKeys, name)
 }
 
-func addKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, cachedKeys map[string]*cachedKey, name, alias string, privKey data.PrivateKey) error {
-	pemPrivKey, err := KeyToPEM(privKey)
+// ExportKey exportes the encrypted bytes from the keystore and writes it to
+// dest.
+func (s *KeyMemoryStore) ExportKey(name string) ([]byte, error) {
+	keyBytes, _, err := getRawKey(s, name)
 	if err != nil {
-		return err
+		return nil, err
 	}
+	return keyBytes, nil
+}
 
-	attempts := 0
-	chosenPassphrase := ""
-	giveup := false
-	for {
+// ImportKey imports the private key in the encrypted bytes into the keystore
+// with the given key ID and alias.
+func (s *KeyMemoryStore) ImportKey(pemBytes []byte, alias string) error {
+	return importKey(s, s.Retriever, s.cachedKeys, alias, pemBytes)
+}
+
+func addKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, cachedKeys map[string]*cachedKey, name, alias string, privKey data.PrivateKey) error {
+
+	var (
+		chosenPassphrase string
+		giveup           bool
+		err              error
+	)
+
+	for attempts := 0; ; attempts++ {
 		chosenPassphrase, giveup, err = passphraseRetriever(name, alias, true, attempts)
 		if err != nil {
-			attempts++
 			continue
 		}
 		if giveup {
@@ -130,15 +160,7 @@ func addKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, cached
 		break
 	}
 
-	if chosenPassphrase != "" {
-		pemPrivKey, err = EncryptPrivateKey(privKey, chosenPassphrase)
-		if err != nil {
-			return err
-		}
-	}
-
-	cachedKeys[name] = &cachedKey{alias: alias, key: privKey}
-	return s.Add(filepath.Join(getSubdir(alias), name+"_"+alias), pemPrivKey)
+	return encryptAndAddKey(s, chosenPassphrase, cachedKeys, name, alias, privKey)
 }
 
 func getKeyAlias(s LimitedFileStore, keyID string) (string, error) {
@@ -165,14 +187,8 @@ func getKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, cached
 	if ok {
 		return cachedKeyEntry.key, cachedKeyEntry.alias, nil
 	}
-	keyAlias, err := getKeyAlias(s, name)
-	if err != nil {
-		return nil, "", err
-	}
 
-	filename := name + "_" + keyAlias
-	var keyBytes []byte
-	keyBytes, err = s.Get(filepath.Join(getSubdir(keyAlias), filename))
+	keyBytes, keyAlias, err := getRawKey(s, name)
 	if err != nil {
 		return nil, "", err
 	}
@@ -181,27 +197,7 @@ func getKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, cached
 	// See if the key is encrypted. If its encrypted we'll fail to parse the private key
 	privKey, err := ParsePEMPrivateKey(keyBytes, "")
 	if err != nil {
-		// We need to decrypt the key, lets get a passphrase
-		for attempts := 0; ; attempts++ {
-			passphrase, giveup, err := passphraseRetriever(name, string(keyAlias), false, attempts)
-			// Check if the passphrase retriever got an error or if it is telling us to give up
-			if giveup || err != nil {
-				return nil, "", ErrPasswordInvalid{}
-			}
-			if attempts > 10 {
-				return nil, "", ErrAttemptsExceeded{}
-			}
-
-			// Try to convert PEM encoded bytes back to a PrivateKey using the passphrase
-			privKey, err = ParsePEMPrivateKey(keyBytes, passphrase)
-			if err != nil {
-				retErr = ErrPasswordInvalid{}
-			} else {
-				// We managed to parse the PrivateKey. We've succeeded!
-				retErr = nil
-				break
-			}
-		}
+		privKey, _, retErr = getPasswdDecryptBytes(s, passphraseRetriever, keyBytes, name, string(keyAlias))
 	}
 	if retErr != nil {
 		return nil, "", retErr
@@ -247,9 +243,98 @@ func removeKey(s LimitedFileStore, cachedKeys map[string]*cachedKey, name string
 	return nil
 }
 
+// Assumes 2 subdirectories, 1 containing root keys and 1 containing tuf keys
 func getSubdir(alias string) string {
 	if alias == "root" {
 		return rootKeysSubdir
 	}
 	return nonRootKeysSubdir
+}
+
+// Given a key ID, gets the bytes and alias belonging to that key if the key
+// exists
+func getRawKey(s LimitedFileStore, name string) ([]byte, string, error) {
+	keyAlias, err := getKeyAlias(s, name)
+	if err != nil {
+		return nil, "", err
+	}
+
+	filename := name + "_" + keyAlias
+	var keyBytes []byte
+	keyBytes, err = s.Get(filepath.Join(getSubdir(keyAlias), filename))
+	if err != nil {
+		return nil, "", err
+	}
+	return keyBytes, keyAlias, nil
+}
+
+// Get the password to decript the given pem bytes.  Return the password,
+// because it is useful for importing
+func getPasswdDecryptBytes(s LimitedFileStore, passphraseRetriever passphrase.Retriever, pemBytes []byte, name, alias string) (data.PrivateKey, string, error) {
+	var (
+		passwd  string
+		retErr  error
+		privKey data.PrivateKey
+	)
+	for attempts := 0; ; attempts++ {
+		var (
+			giveup bool
+			err    error
+		)
+		passwd, giveup, err = passphraseRetriever(name, alias, false, attempts)
+		// Check if the passphrase retriever got an error or if it is telling us to give up
+		if giveup || err != nil {
+			return nil, "", ErrPasswordInvalid{}
+		}
+		if attempts > 10 {
+			return nil, "", ErrAttemptsExceeded{}
+		}
+
+		// Try to convert PEM encoded bytes back to a PrivateKey using the passphrase
+		privKey, err = ParsePEMPrivateKey(pemBytes, passwd)
+		if err != nil {
+			retErr = ErrPasswordInvalid{}
+		} else {
+			// We managed to parse the PrivateKey. We've succeeded!
+			retErr = nil
+			break
+		}
+	}
+	if retErr != nil {
+		return nil, "", retErr
+	}
+	return privKey, passwd, nil
+}
+
+func encryptAndAddKey(s LimitedFileStore, passwd string, cachedKeys map[string]*cachedKey, name, alias string, privKey data.PrivateKey) error {
+
+	var (
+		pemPrivKey []byte
+		err        error
+	)
+
+	if passwd != "" {
+		pemPrivKey, err = EncryptPrivateKey(privKey, passwd)
+	} else {
+		pemPrivKey, err = KeyToPEM(privKey)
+	}
+
+	if err != nil {
+		return err
+	}
+
+	cachedKeys[name] = &cachedKey{alias: alias, key: privKey}
+	return s.Add(filepath.Join(getSubdir(alias), name+"_"+alias), pemPrivKey)
+}
+
+func importKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, cachedKeys map[string]*cachedKey, alias string, pemBytes []byte) error {
+
+	privKey, passphrase, err := getPasswdDecryptBytes(s, passphraseRetriever, pemBytes, "imported", alias)
+
+	if err != nil {
+		return err
+	}
+
+	return encryptAndAddKey(
+		s, passphrase, cachedKeys, privKey.ID(), alias, privKey)
 }

@@ -83,11 +83,14 @@ func TestImportExportZip(t *testing.T) {
 
 	// Add non-root keys to the map. These should use the new passphrase
 	// because the passwords were chosen by the newPassphraseRetriever.
-	privKeyMap := repo.KeyStoreManager.NonRootKeyStore().ListKeys()
+	privKeyMap := repo.KeyStoreManager.KeyStore.ListKeys()
 	for privKeyName := range privKeyMap {
-		_, alias, err := repo.KeyStoreManager.NonRootKeyStore().GetKey(privKeyName)
+		_, alias, err := repo.KeyStoreManager.KeyStore.GetKey(privKeyName)
 		assert.NoError(t, err, "privKey %s has no alias", privKeyName)
 
+		if alias == "root" {
+			continue
+		}
 		relKeyPath := filepath.Join("private", "tuf_keys", privKeyName+"_"+alias+".key")
 		passphraseByFile[relKeyPath] = exportPassphrase
 	}
@@ -156,9 +159,12 @@ func TestImportExportZip(t *testing.T) {
 	// Look for keys in private. The filenames should match the key IDs
 	// in the repo's private key store.
 	for privKeyName := range privKeyMap {
-		_, alias, err := repo.KeyStoreManager.NonRootKeyStore().GetKey(privKeyName)
+		_, alias, err := repo.KeyStoreManager.KeyStore.GetKey(privKeyName)
 		assert.NoError(t, err, "privKey %s has no alias", privKeyName)
 
+		if alias == "root" {
+			continue
+		}
 		relKeyPath := filepath.Join("private", "tuf_keys", privKeyName+"_"+alias+".key")
 		privKeyFileName := filepath.Join(tempBaseDir2, relKeyPath)
 		_, err = os.Stat(privKeyFileName)
@@ -219,11 +225,14 @@ func TestImportExportGUN(t *testing.T) {
 
 	// Add keys non-root keys to the map. These should use the new passphrase
 	// because they were formerly unencrypted.
-	privKeyMap := repo.KeyStoreManager.NonRootKeyStore().ListKeys()
+	privKeyMap := repo.KeyStoreManager.KeyStore.ListKeys()
 	for privKeyName := range privKeyMap {
-		_, alias, err := repo.KeyStoreManager.NonRootKeyStore().GetKey(privKeyName)
+		_, alias, err := repo.KeyStoreManager.KeyStore.GetKey(privKeyName)
 		if err != nil {
 			t.Fatalf("privKey %s has no alias", privKeyName)
+		}
+		if alias == "root" {
+			continue
 		}
 		relKeyPath := filepath.Join("private", "tuf_keys", privKeyName+"_"+alias+".key")
 
@@ -290,9 +299,12 @@ func TestImportExportGUN(t *testing.T) {
 	// Look for keys in private. The filenames should match the key IDs
 	// in the repo's private key store.
 	for privKeyName := range privKeyMap {
-		_, alias, err := repo.KeyStoreManager.NonRootKeyStore().GetKey(privKeyName)
+		_, alias, err := repo.KeyStoreManager.KeyStore.GetKey(privKeyName)
 		if err != nil {
 			t.Fatalf("privKey %s has no alias", privKeyName)
+		}
+		if alias == "root" {
+			continue
 		}
 		relKeyPath := filepath.Join("private", "tuf_keys", privKeyName+"_"+alias+".key")
 		privKeyFileName := filepath.Join(tempBaseDir2, relKeyPath)
@@ -381,7 +393,7 @@ func TestImportExportRootKey(t *testing.T) {
 	assert.EqualError(t, err, keystoremanager.ErrNoValidPrivateKey.Error())
 
 	// Should be able to unlock the root key with the old password
-	key, alias, err := repo2.KeyStoreManager.RootKeyStore().GetKey(rootKeyID)
+	key, alias, err := repo2.KeyStoreManager.KeyStore.GetKey(rootKeyID)
 	assert.NoError(t, err, "could not unlock root key")
 	assert.Equal(t, "root", alias)
 	assert.Equal(t, rootKeyID, key.ID())
@@ -452,7 +464,7 @@ func TestImportExportRootKeyReencrypt(t *testing.T) {
 	assert.NoError(t, err, "missing root key")
 
 	// Should be able to unlock the root key with the new password
-	key, alias, err := repo2.KeyStoreManager.RootKeyStore().GetKey(rootKeyID)
+	key, alias, err := repo2.KeyStoreManager.KeyStore.GetKey(rootKeyID)
 	assert.NoError(t, err, "could not unlock root key")
 	assert.Equal(t, "root", alias)
 	assert.Equal(t, rootKeyID, key.ID())
