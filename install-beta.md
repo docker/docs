@@ -61,6 +61,8 @@ Orca includes Docker Swarm as part of its installation. So, you don't need to in
 | `2376`           | Swarm manager   |
 | `12376`          | Engine proxy    |
 | `12379`, `12380` | Key Value store |
+| `12381`          | Swarm CA service|
+| `12382`          | Orca CA service |
 
 The communication between the server, nodes, and key value store is all protected by mutual TLS. The Orca installation of Swarm provides TLS for you automatically.
 
@@ -129,6 +131,8 @@ If you choose this option, create your volumes prior to installing Orca. The vol
 | `orca-swarm-root-ca`    | The certificate and key for the Swarm root CA.                                       |
 | `orca-server-certs`     | The server certificates for the Orca web server.                                     |
 | `orca-swarm-node-certs` | The Swarm certificates for the current node (repeated on every node in the cluster). |
+| `orca-swarm-kv-certs`   | The Swarm KV client certificates for the current node (repeated on every node in the cluster). |
+| `orca-swarm-controller-certs` | The Orca Controller Swarm client certificates for the current node. |
 | `orca-config`           | Orca server configuration settings (ID, locations of key services).                  |
 | `orca-kv`               | Key value store persistence.                                                         |
 

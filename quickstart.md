@@ -15,7 +15,8 @@ running quickly, so lets dive right in!
     * Orca Server: 443
     * Swarm Manager: 2376 (user configurable) - Protected via mutual TLS
     * Engine Proxy: 12376 - Protected via mutual TLS
-    * KV Store: 12379, 12380 - Will be protected by mutual TLS soon
+    * KV Store: 12379, 12380 - Protected by mutual TLS
+    * CAs: 12381, 12382 - Protected by mutual TLS
 
 
 # Initial Installation
@@ -52,6 +53,8 @@ can pre-create volumes prior to installing Orca.
 * **orca-swarm-root-ca** - The certificate and key for the Swarm Root CA
 * **orca-server-certs** - The server certificates for the Orca web server
 * **orca-swarm-node-certs** - The swarm certificates for the current node (repeated on every node in the cluster)
+* **orca-swarm-kv-certs**   The Swarm KV client certificates for the current node (repeated on every node in the cluster)
+* **orca-swarm-controller-certs**  The Orca Controller Swarm client certificates for the current node
 * **orca-config** - Orca server configuration settings (ID, locations of key services)
 * **orca-kv** - KV store persistence
 
