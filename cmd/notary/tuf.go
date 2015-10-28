@@ -123,7 +123,7 @@ func tufInit(cmd *cobra.Command, args []string) {
 		fatalf(err.Error())
 	}
 
-	var keysMap map[string]string
+	keysMap := make(map[string]string)
 	for k, role := range nRepo.KeyStoreManager.KeyStore.ListKeys() {
 		if role == "root" {
 			keysMap[k] = role
