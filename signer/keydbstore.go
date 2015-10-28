@@ -2,6 +2,7 @@ package signer
 
 import (
 	"database/sql"
+	"errors"
 	"fmt"
 	"sync"
 
@@ -194,6 +195,16 @@ func (s *KeyDBStore) RotateKeyPassphrase(name, newPassphraseAlias string) error 
 	s.db.Save(dbPrivateKey)
 
 	return nil
+}
+
+// ExportKey is currently unimplemented and will always return an error
+func (s *KeyDBStore) ExportKey(name string) ([]byte, error) {
+	return nil, errors.New("Exporting from a KeyDBStore is not supported.")
+}
+
+// ImportKey is currently unimplemented and will always return an error
+func (s *KeyDBStore) ImportKey(pemBytes []byte, alias string) error {
+	return errors.New("Importing into a KeyDBStore is not supported")
 }
 
 // HealthCheck verifies that DB exists and is query-able

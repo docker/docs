@@ -44,6 +44,8 @@ type KeyStore interface {
 	GetKey(name string) (data.PrivateKey, string, error)
 	ListKeys() map[string]string
 	RemoveKey(name string) error
+	ExportKey(name string) ([]byte, error)
+	ImportKey(pemBytes []byte, alias string) error
 }
 
 type cachedKey struct {

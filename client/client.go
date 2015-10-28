@@ -109,7 +109,7 @@ func NewNotaryRepository(baseDir, gun, baseURL string, rt http.RoundTripper,
 		return nil, err
 	}
 
-	cryptoService := cryptoservice.NewCryptoService(gun, keyStoreManager.NonRootKeyStore())
+	cryptoService := cryptoservice.NewCryptoService(gun, keyStoreManager.KeyStore)
 
 	nRepo := &NotaryRepository{
 		gun:             gun,
