@@ -9,7 +9,7 @@ import (
 	"testing"
 
 	"github.com/docker/notary/pkg/passphrase"
-	"github.com/endophage/gotuf/data"
+	"github.com/docker/notary/tuf/data"
 	"github.com/stretchr/testify/assert"
 )
 
