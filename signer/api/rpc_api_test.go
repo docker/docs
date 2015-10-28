@@ -79,7 +79,7 @@ func TestDeleteKeyHandlerReturnsNotFoundWithNonexistentKey(t *testing.T) {
 }
 
 func TestCreateKeyHandlerCreatesKey(t *testing.T) {
-	publicKey, err := kmClient.CreateKey(context.Background(), &pb.Algorithm{Algorithm: data.ED25519Key.String()})
+	publicKey, err := kmClient.CreateKey(context.Background(), &pb.Algorithm{Algorithm: data.ED25519Key})
 	assert.NotNil(t, publicKey)
 	assert.NotEmpty(t, publicKey.PublicKey)
 	assert.NotEmpty(t, publicKey.KeyInfo)
@@ -88,14 +88,14 @@ func TestCreateKeyHandlerCreatesKey(t *testing.T) {
 }
 
 func TestDeleteKeyHandlerDeletesCreatedKey(t *testing.T) {
-	publicKey, err := kmClient.CreateKey(context.Background(), &pb.Algorithm{Algorithm: data.ED25519Key.String()})
+	publicKey, err := kmClient.CreateKey(context.Background(), &pb.Algorithm{Algorithm: data.ED25519Key})
 	ret, err := kmClient.DeleteKey(context.Background(), publicKey.KeyInfo.KeyID)
 	assert.Nil(t, err)
 	assert.Equal(t, ret, void)
 }
 
 func TestKeyInfoReturnsCreatedKeys(t *testing.T) {
-	publicKey, err := kmClient.CreateKey(context.Background(), &pb.Algorithm{Algorithm: data.ED25519Key.String()})
+	publicKey, err := kmClient.CreateKey(context.Background(), &pb.Algorithm{Algorithm: data.ED25519Key})
 	fmt.Println("Pubkey ID: " + publicKey.GetKeyInfo().KeyID.ID)
 	returnedPublicKey, err := kmClient.GetKeyInfo(context.Background(), publicKey.KeyInfo.KeyID)
 	fmt.Println("returnedPublicKey ID: " + returnedPublicKey.GetKeyInfo().KeyID.ID)
@@ -106,9 +106,9 @@ func TestKeyInfoReturnsCreatedKeys(t *testing.T) {
 }
 
 func TestCreateKeyCreatesNewKeys(t *testing.T) {
-	publicKey1, err := kmClient.CreateKey(context.Background(), &pb.Algorithm{Algorithm: data.ED25519Key.String()})
+	publicKey1, err := kmClient.CreateKey(context.Background(), &pb.Algorithm{Algorithm: data.ED25519Key})
 	assert.Nil(t, err)
-	publicKey2, err := kmClient.CreateKey(context.Background(), &pb.Algorithm{Algorithm: data.ED25519Key.String()})
+	publicKey2, err := kmClient.CreateKey(context.Background(), &pb.Algorithm{Algorithm: data.ED25519Key})
 	assert.Nil(t, err)
 	assert.NotEqual(t, publicKey1, publicKey2)
 	assert.NotEqual(t, publicKey1.KeyInfo, publicKey2.KeyInfo)
@@ -128,7 +128,7 @@ func TestGetKeyInfoReturnsNotFoundOnNonexistKeys(t *testing.T) {
 func TestCreatedKeysCanBeUsedToSign(t *testing.T) {
 	message := []byte{0, 0, 0, 0}
 
-	publicKey, err := kmClient.CreateKey(context.Background(), &pb.Algorithm{Algorithm: data.ED25519Key.String()})
+	publicKey, err := kmClient.CreateKey(context.Background(), &pb.Algorithm{Algorithm: data.ED25519Key})
 	assert.Nil(t, err)
 	assert.NotNil(t, publicKey)
 

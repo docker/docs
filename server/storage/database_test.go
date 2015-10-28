@@ -5,7 +5,6 @@ import (
 	"os"
 	"testing"
 
-	"github.com/docker/notary/tuf/data"
 	"github.com/jinzhu/gorm"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/stretchr/testify/assert"
@@ -264,7 +263,7 @@ func TestSQLGetTimestampKeyNoKey(t *testing.T) {
 	defer os.RemoveAll(tempBaseDir)
 
 	cipher, public, err := dbStore.GetTimestampKey("testGUN")
-	assert.Equal(t, data.KeyAlgorithm(""), cipher)
+	assert.Equal(t, "", cipher)
 	assert.Nil(t, public)
 	assert.IsType(t, &ErrNoKey{}, err,
 		"Expected ErrNoKey from GetTimestampKey")
@@ -278,7 +277,7 @@ func TestSQLGetTimestampKeyNoKey(t *testing.T) {
 		t, query.Error, "Inserting timestamp into empty DB should succeed")
 
 	cipher, public, err = dbStore.GetTimestampKey("testGUN")
-	assert.Equal(t, data.KeyAlgorithm("testCipher"), cipher,
+	assert.Equal(t, "testCipher", cipher,
 		"Returned cipher was incorrect")
 	assert.Equal(t, []byte("1"), public, "Returned pubkey was incorrect")
 }

@@ -32,7 +32,7 @@ func NewHSMRSAKey(public []byte, private pkcs11.ObjectHandle) *HSMRSAKey {
 }
 
 // Algorithm implements a method of the data.Key interface
-func (rsa *HSMRSAKey) Algorithm() data.KeyAlgorithm {
+func (rsa *HSMRSAKey) Algorithm() string {
 	return data.RSAKey
 }
 

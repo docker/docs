@@ -33,7 +33,7 @@ func NewCryptoService(gun string, keyStore trustmanager.KeyStore) *CryptoService
 }
 
 // Create is used to generate keys for targets, snapshots and timestamps
-func (ccs *CryptoService) Create(role string, algorithm data.KeyAlgorithm) (data.PublicKey, error) {
+func (ccs *CryptoService) Create(role string, algorithm string) (data.PublicKey, error) {
 	var privKey data.PrivateKey
 	var err error
 

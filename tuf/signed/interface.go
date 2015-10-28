@@ -20,7 +20,7 @@ type KeyService interface {
 	// the private key into the appropriate signing service.
 	// The role isn't currently used for anything, but it's here to support
 	// future features
-	Create(role string, algorithm data.KeyAlgorithm) (data.PublicKey, error)
+	Create(role string, algorithm string) (data.PublicKey, error)
 
 	// GetKey retrieves the public key if present, otherwise it returns nil
 	GetKey(keyID string) data.PublicKey

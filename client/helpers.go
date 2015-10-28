@@ -97,11 +97,7 @@ func applyRootRoleChange(repo *tuf.Repo, c changelist.Change) error {
 		if err != nil {
 			return err
 		}
-		k := []data.PublicKey{}
-		for _, key := range d.Keys {
-			k = append(k, data.NewPublicKey(key.Algorithm(), key.Public()))
-		}
-		err = repo.ReplaceBaseKeys(d.RoleName, k...)
+		err = repo.ReplaceBaseKeys(d.RoleName, d.Keys...)
 		if err != nil {
 			return err
 		}

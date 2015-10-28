@@ -127,7 +127,7 @@ func (km *KeyStoreManager) GenRootKey(algorithm string) (string, error) {
 	// We don't want external API callers to rely on internal TUF data types, so
 	// the API here should continue to receive a string algorithm, and ensure
 	// that it is downcased
-	switch data.KeyAlgorithm(strings.ToLower(algorithm)) {
+	switch strings.ToLower(algorithm) {
 	case data.RSAKey:
 		privKey, err = trustmanager.GenerateRSAKey(rand.Reader, rsaRootKeySize)
 	case data.ECDSAKey:

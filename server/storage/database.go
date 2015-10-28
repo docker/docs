@@ -4,7 +4,6 @@ import (
 	"fmt"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/docker/notary/tuf/data"
 	"github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
 	"github.com/mattn/go-sqlite3"
@@ -138,7 +137,7 @@ func (db *SQLStorage) Delete(gun string) error {
 }
 
 // GetTimestampKey returns the timestamps Public Key data
-func (db *SQLStorage) GetTimestampKey(gun string) (algorithm data.KeyAlgorithm, public []byte, err error) {
+func (db *SQLStorage) GetTimestampKey(gun string) (algorithm string, public []byte, err error) {
 	logrus.Debug("retrieving timestamp key for ", gun)
 
 	var row TimestampKey
@@ -150,11 +149,11 @@ func (db *SQLStorage) GetTimestampKey(gun string) (algorithm data.KeyAlgorithm, 
 		return "", nil, query.Error
 	}
 
-	return data.KeyAlgorithm(row.Cipher), row.Public, nil
+	return row.Cipher, row.Public, nil
 }
 
 // SetTimestampKey attempts to write a TimeStamp key and returns an error if it already exists
-func (db *SQLStorage) SetTimestampKey(gun string, algorithm data.KeyAlgorithm, public []byte) error {
+func (db *SQLStorage) SetTimestampKey(gun string, algorithm string, public []byte) error {
 
 	entry := TimestampKey{
 		Gun:    gun,

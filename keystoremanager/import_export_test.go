@@ -57,7 +57,7 @@ func TestImportExportZip(t *testing.T) {
 	repo, err := client.NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport, oldPassphraseRetriever)
 	assert.NoError(t, err, "error creating repo: %s", err)
 
-	rootKeyID, err := repo.KeyStoreManager.GenRootKey(data.ECDSAKey.String())
+	rootKeyID, err := repo.KeyStoreManager.GenRootKey(data.ECDSAKey)
 	assert.NoError(t, err, "error generating root key: %s", err)
 
 	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID)
@@ -138,7 +138,7 @@ func TestImportExportZip(t *testing.T) {
 	repo2, err := client.NewNotaryRepository(tempBaseDir2, gun, ts.URL, http.DefaultTransport, newPassphraseRetriever)
 	assert.NoError(t, err, "error creating repo: %s", err)
 
-	rootKeyID2, err := repo2.KeyStoreManager.GenRootKey(data.ECDSAKey.String())
+	rootKeyID2, err := repo2.KeyStoreManager.GenRootKey(data.ECDSAKey)
 	assert.NoError(t, err, "error generating root key: %s", err)
 
 	rootCryptoService2, err := repo2.KeyStoreManager.GetRootCryptoService(rootKeyID2)
@@ -194,7 +194,7 @@ func TestImportExportGUN(t *testing.T) {
 	repo, err := client.NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport, oldPassphraseRetriever)
 	assert.NoError(t, err, "error creating repo: %s", err)
 
-	rootKeyID, err := repo.KeyStoreManager.GenRootKey(data.ECDSAKey.String())
+	rootKeyID, err := repo.KeyStoreManager.GenRootKey(data.ECDSAKey)
 	assert.NoError(t, err, "error generating root key: %s", err)
 
 	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID)
@@ -278,7 +278,7 @@ func TestImportExportGUN(t *testing.T) {
 	repo2, err := client.NewNotaryRepository(tempBaseDir2, gun, ts.URL, http.DefaultTransport, oldPassphraseRetriever)
 	assert.NoError(t, err, "error creating repo: %s", err)
 
-	rootKeyID2, err := repo2.KeyStoreManager.GenRootKey(data.ECDSAKey.String())
+	rootKeyID2, err := repo2.KeyStoreManager.GenRootKey(data.ECDSAKey)
 	assert.NoError(t, err, "error generating root key: %s", err)
 
 	rootCryptoService2, err := repo2.KeyStoreManager.GetRootCryptoService(rootKeyID2)
@@ -327,7 +327,7 @@ func TestImportExportRootKey(t *testing.T) {
 	repo, err := client.NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport, oldPassphraseRetriever)
 	assert.NoError(t, err, "error creating repo: %s", err)
 
-	rootKeyID, err := repo.KeyStoreManager.GenRootKey(data.ECDSAKey.String())
+	rootKeyID, err := repo.KeyStoreManager.GenRootKey(data.ECDSAKey)
 	assert.NoError(t, err, "error generating root key: %s", err)
 
 	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID)
@@ -353,7 +353,7 @@ func TestImportExportRootKey(t *testing.T) {
 	repo2, err := client.NewNotaryRepository(tempBaseDir2, gun, ts.URL, http.DefaultTransport, oldPassphraseRetriever)
 	assert.NoError(t, err, "error creating repo: %s", err)
 
-	rootKeyID2, err := repo2.KeyStoreManager.GenRootKey(data.ECDSAKey.String())
+	rootKeyID2, err := repo2.KeyStoreManager.GenRootKey(data.ECDSAKey)
 	assert.NoError(t, err, "error generating root key: %s", err)
 
 	rootCryptoService2, err := repo2.KeyStoreManager.GetRootCryptoService(rootKeyID2)
@@ -414,7 +414,7 @@ func TestImportExportRootKeyReencrypt(t *testing.T) {
 	repo, err := client.NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport, oldPassphraseRetriever)
 	assert.NoError(t, err, "error creating repo: %s", err)
 
-	rootKeyID, err := repo.KeyStoreManager.GenRootKey(data.ECDSAKey.String())
+	rootKeyID, err := repo.KeyStoreManager.GenRootKey(data.ECDSAKey)
 	assert.NoError(t, err, "error generating root key: %s", err)
 
 	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID)
@@ -440,7 +440,7 @@ func TestImportExportRootKeyReencrypt(t *testing.T) {
 	repo2, err := client.NewNotaryRepository(tempBaseDir2, gun, ts.URL, http.DefaultTransport, newPassphraseRetriever)
 	assert.NoError(t, err, "error creating repo: %s", err)
 
-	rootKeyID2, err := repo2.KeyStoreManager.GenRootKey(data.ECDSAKey.String())
+	rootKeyID2, err := repo2.KeyStoreManager.GenRootKey(data.ECDSAKey)
 	assert.NoError(t, err, "error generating root key: %s", err)
 
 	rootCryptoService2, err := repo2.KeyStoreManager.GetRootCryptoService(rootKeyID2)

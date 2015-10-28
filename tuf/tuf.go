@@ -83,11 +83,10 @@ func (tr *Repo) AddBaseKeys(role string, keys ...data.PublicKey) error {
 	ids := []string{}
 	for _, k := range keys {
 		// Store only the public portion
-		pubKey := data.NewPrivateKey(k.Algorithm(), k.Public(), nil)
-		tr.Root.Signed.Keys[pubKey.ID()] = pubKey
+		tr.Root.Signed.Keys[k.ID()] = k
 		tr.keysDB.AddKey(k)
-		tr.Root.Signed.Roles[role].KeyIDs = append(tr.Root.Signed.Roles[role].KeyIDs, pubKey.ID())
-		ids = append(ids, pubKey.ID())
+		tr.Root.Signed.Roles[role].KeyIDs = append(tr.Root.Signed.Roles[role].KeyIDs, k.ID())
+		ids = append(ids, k.ID())
 	}
 	r, err := data.NewRole(
 		role,
@@ -162,7 +161,7 @@ func (tr *Repo) RemoveBaseKeys(role string, keyIDs ...string) error {
 // An empty before string indicates to add the role to the end of the
 // delegation list.
 // A new, empty, targets file will be created for the new role.
-func (tr *Repo) UpdateDelegations(role *data.Role, keys []data.Key, before string) error {
+func (tr *Repo) UpdateDelegations(role *data.Role, keys []data.PublicKey, before string) error {
 	if !role.IsDelegation() || !role.IsValid() {
 		return errors.ErrInvalidRole{}
 	}
@@ -172,12 +171,11 @@ func (tr *Repo) UpdateDelegations(role *data.Role, keys []data.Key, before strin
 		return errors.ErrInvalidRole{}
 	}
 	for _, k := range keys {
-		key := data.NewPublicKey(k.Algorithm(), k.Public())
-		if !utils.StrSliceContains(role.KeyIDs, key.ID()) {
-			role.KeyIDs = append(role.KeyIDs, key.ID())
+		if !utils.StrSliceContains(role.KeyIDs, k.ID()) {
+			role.KeyIDs = append(role.KeyIDs, k.ID())
 		}
-		p.Signed.Delegations.Keys[key.ID()] = key
-		tr.keysDB.AddKey(key)
+		p.Signed.Delegations.Keys[k.ID()] = k
+		tr.keysDB.AddKey(k)
 	}
 
 	i := -1
@@ -234,9 +232,7 @@ func (tr *Repo) InitRoot(consistent bool) error {
 			// don't need to check if GetKey returns nil, Key presence was
 			// checked by KeyDB when role was added.
 			key := tr.keysDB.GetKey(kid)
-			// Create new key object to doubly ensure private key is excluded
-			k := data.NewPublicKey(key.Algorithm(), key.Public())
-			rootKeys[kid] = k
+			rootKeys[kid] = key
 		}
 	}
 	root, err := data.NewRoot(rootKeys, rootRoles, consistent)

@@ -4,12 +4,10 @@ import (
 	"fmt"
 	"strings"
 	"sync"
-
-	"github.com/docker/notary/tuf/data"
 )
 
 type key struct {
-	algorithm data.KeyAlgorithm
+	algorithm string
 	public    []byte
 }
 
@@ -83,7 +81,7 @@ func (st *MemStorage) Delete(gun string) error {
 }
 
 // GetTimestampKey returns the public key material of the timestamp key of a given gun
-func (st *MemStorage) GetTimestampKey(gun string) (algorithm data.KeyAlgorithm, public []byte, err error) {
+func (st *MemStorage) GetTimestampKey(gun string) (algorithm string, public []byte, err error) {
 	// no need for lock. It's ok to return nil if an update
 	// wasn't observed
 	k, ok := st.tsKeys[gun]
@@ -95,7 +93,7 @@ func (st *MemStorage) GetTimestampKey(gun string) (algorithm data.KeyAlgorithm, 
 }
 
 // SetTimestampKey sets a Timestamp key under a gun
-func (st *MemStorage) SetTimestampKey(gun string, algorithm data.KeyAlgorithm, public []byte) error {
+func (st *MemStorage) SetTimestampKey(gun string, algorithm string, public []byte) error {
 	k := &key{algorithm: algorithm, public: public}
 	st.lock.Lock()
 	defer st.lock.Unlock()

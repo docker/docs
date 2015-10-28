@@ -14,7 +14,7 @@ import (
 // or ErrInvalidKeyID if the key is not found in any of the signing services.
 // It also returns the CryptoService associated with the key, so the caller
 // can perform operations with the key (such as signing).
-func FindKeyByID(cryptoServices signer.CryptoServiceIndex, keyID *pb.KeyID) (data.Key, signed.CryptoService, error) {
+func FindKeyByID(cryptoServices signer.CryptoServiceIndex, keyID *pb.KeyID) (data.PublicKey, signed.CryptoService, error) {
 	for _, service := range cryptoServices {
 		key := service.GetKey(keyID.ID)
 		if key != nil {

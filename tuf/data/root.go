@@ -15,12 +15,10 @@ type SignedRoot struct {
 
 // Root is the Signed component of a root.json
 type Root struct {
-	Type    string    `json:"_type"`
-	Version int       `json:"version"`
-	Expires time.Time `json:"expires"`
-	// These keys are public keys. We use TUFKey instead of PublicKey to
-	// support direct JSON unmarshaling.
-	Keys               map[string]*TUFKey   `json:"keys"`
+	Type               string               `json:"_type"`
+	Version            int                  `json:"version"`
+	Expires            time.Time            `json:"expires"`
+	Keys               Keys                 `json:"keys"`
 	Roles              map[string]*RootRole `json:"roles"`
 	ConsistentSnapshot bool                 `json:"consistent_snapshot"`
 }
@@ -33,27 +31,11 @@ func NewRoot(keys map[string]PublicKey, roles map[string]*RootRole, consistent b
 			Type:               TUFTypes["root"],
 			Version:            0,
 			Expires:            DefaultExpires("root"),
-			Keys:               make(map[string]*TUFKey),
+			Keys:               keys,
 			Roles:              roles,
 			ConsistentSnapshot: consistent,
 		},
 		Dirty: true,
-	}
-
-	// Convert PublicKeys to TUFKey structures
-	// The Signed.Keys map needs to have *TUFKey values, since this
-	// structure gets directly unmarshalled from JSON, and it's not
-	// possible to unmarshal into an interface type. But this function
-	// takes a map with PublicKey values to avoid exposing this ugliness.
-	// The loop below converts to the TUFKey type.
-	for k, v := range keys {
-		signedRoot.Signed.Keys[k] = &TUFKey{
-			Type: v.Algorithm(),
-			Value: KeyPair{
-				Public:  v.Public(),
-				Private: nil,
-			},
-		}
 	}
 
 	return signedRoot, nil

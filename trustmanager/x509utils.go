@@ -102,18 +102,15 @@ func fingerprintCert(cert *x509.Certificate) (CertID, error) {
 	block := pem.Block{Type: "CERTIFICATE", Bytes: cert.Raw}
 	pemdata := pem.EncodeToMemory(&block)
 
-	var keyType data.KeyAlgorithm
+	var tufKey data.PublicKey
 	switch cert.PublicKeyAlgorithm {
 	case x509.RSA:
-		keyType = data.RSAx509Key
+		tufKey = data.NewRSAx509PublicKey(pemdata)
 	case x509.ECDSA:
-		keyType = data.ECDSAx509Key
+		tufKey = data.NewECDSAx509PublicKey(pemdata)
 	default:
 		return "", fmt.Errorf("got Unknown key type while fingerprinting certificate")
 	}
-
-	// Create new TUF Key so we can compute the TUF-compliant CertID
-	tufKey := data.NewPublicKey(keyType, pemdata)
 
 	return CertID(tufKey.ID()), nil
 }
@@ -327,7 +324,8 @@ func RSAToPrivateKey(rsaPrivKey *rsa.PrivateKey) (data.PrivateKey, error) {
 	// Get a DER-encoded representation of the PrivateKey
 	rsaPrivBytes := x509.MarshalPKCS1PrivateKey(rsaPrivKey)
 
-	return data.NewPrivateKey(data.RSAKey, rsaPubBytes, rsaPrivBytes), nil
+	pubKey := data.NewRSAPublicKey(rsaPubBytes)
+	return data.NewRSAPrivateKey(*pubKey, rsaPrivBytes), nil
 }
 
 // GenerateECDSAKey generates an ECDSA Private key and returns a TUF PrivateKey
@@ -384,7 +382,8 @@ func ECDSAToPrivateKey(ecdsaPrivKey *ecdsa.PrivateKey) (data.PrivateKey, error) 
 		return nil, fmt.Errorf("failed to marshal private key: %v", err)
 	}
 
-	return data.NewPrivateKey(data.ECDSAKey, ecdsaPubBytes, ecdsaPrivKeyBytes), nil
+	pubKey := data.NewECDSAPublicKey(ecdsaPubBytes)
+	return data.NewECDSAPrivateKey(*pubKey, ecdsaPrivKeyBytes), nil
 }
 
 // ED25519ToPrivateKey converts a serialized ED25519 key to a TUF
@@ -394,36 +393,37 @@ func ED25519ToPrivateKey(privKeyBytes []byte) (data.PrivateKey, error) {
 		return nil, errors.New("malformed ed25519 private key")
 	}
 
-	return data.NewPrivateKey(data.ED25519Key, privKeyBytes[:ed25519.PublicKeySize], privKeyBytes), nil
+	pubKey := data.NewED25519PublicKey(privKeyBytes[:ed25519.PublicKeySize])
+	return data.NewED25519PrivateKey(*pubKey, privKeyBytes), nil
 }
 
-func blockType(algorithm data.KeyAlgorithm) (string, error) {
-	switch algorithm {
-	case data.RSAKey:
+func blockType(k data.PrivateKey) (string, error) {
+	switch k.(type) {
+	case *data.RSAPrivateKey:
 		return "RSA PRIVATE KEY", nil
-	case data.ECDSAKey:
+	case *data.ECDSAPrivateKey:
 		return "EC PRIVATE KEY", nil
-	case data.ED25519Key:
+	case *data.ED25519PrivateKey:
 		return "ED25519 PRIVATE KEY", nil
 	default:
-		return "", fmt.Errorf("algorithm %s not supported", algorithm)
+		return "", fmt.Errorf("algorithm %s not supported", k.Algorithm())
 	}
 }
 
 // KeyToPEM returns a PEM encoded key from a Private Key
 func KeyToPEM(privKey data.PrivateKey) ([]byte, error) {
-	blockType, err := blockType(privKey.Algorithm())
+	bt, err := blockType(privKey)
 	if err != nil {
 		return nil, err
 	}
 
-	return pem.EncodeToMemory(&pem.Block{Type: blockType, Bytes: privKey.Private()}), nil
+	return pem.EncodeToMemory(&pem.Block{Type: bt, Bytes: privKey.Private()}), nil
 }
 
 // EncryptPrivateKey returns an encrypted PEM key given a Privatekey
 // and a passphrase
 func EncryptPrivateKey(key data.PrivateKey, passphrase string) ([]byte, error) {
-	blockType, err := blockType(key.Algorithm())
+	bt, err := blockType(key)
 	if err != nil {
 		return nil, err
 	}
@@ -432,7 +432,7 @@ func EncryptPrivateKey(key data.PrivateKey, passphrase string) ([]byte, error) {
 	cipherType := x509.PEMCipherAES256
 
 	encryptedPEMBlock, err := x509.EncryptPEMBlock(rand.Reader,
-		blockType,
+		bt,
 		key.Private(),
 		password,
 		cipherType)
@@ -449,17 +449,15 @@ func CertToKey(cert *x509.Certificate) data.PublicKey {
 	block := pem.Block{Type: "CERTIFICATE", Bytes: cert.Raw}
 	pemdata := pem.EncodeToMemory(&block)
 
-	var keyType data.KeyAlgorithm
 	switch cert.PublicKeyAlgorithm {
 	case x509.RSA:
-		keyType = data.RSAx509Key
+		return data.NewRSAx509PublicKey(pemdata)
 	case x509.ECDSA:
-		keyType = data.ECDSAx509Key
+		return data.NewECDSAx509PublicKey(pemdata)
 	default:
-		logrus.Debugf("unknown certificate type found, ignoring")
+		logrus.Debugf("Unknown key type parsed from certificate: %v", cert.PublicKeyAlgorithm)
+		return nil
 	}
-
-	return data.NewPublicKey(keyType, pemdata)
 }
 
 // CertsToKeys transforms each of the input certificates into it's corresponding
@@ -507,18 +505,18 @@ func X509PublicKeyID(certPubKey data.PublicKey) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	var finalAlgorithm data.KeyAlgorithm
-
-	switch certPubKey.Algorithm() {
-	case data.ECDSAx509Key:
-		finalAlgorithm = data.ECDSAKey
-	case data.RSAx509Key:
-		finalAlgorithm = data.RSAKey
-	}
-
 	pubKeyBytes, err := x509.MarshalPKIXPublicKey(cert.PublicKey)
 	if err != nil {
 		return "", err
 	}
-	return data.NewPublicKey(finalAlgorithm, pubKeyBytes).ID(), nil
+
+	var key data.PublicKey
+	switch certPubKey.Algorithm() {
+	case data.ECDSAx509Key:
+		key = data.NewECDSAPublicKey(pubKeyBytes)
+	case data.RSAx509Key:
+		key = data.NewRSAPublicKey(pubKeyBytes)
+	}
+
+	return key.ID(), nil
 }

@@ -1,7 +1,5 @@
 package storage
 
-import "github.com/docker/notary/tuf/data"
-
 // MetaStore holds the methods that are used for a Metadata Store
 type MetaStore interface {
 	// UpdateCurrent adds new metadata version for the given GUN if and only
@@ -26,9 +24,9 @@ type MetaStore interface {
 
 	// GetTimestampKey returns the algorithm and public key for the given GUN.
 	// If the GUN doesn't exist, returns an error.
-	GetTimestampKey(gun string) (algorithm data.KeyAlgorithm, public []byte, err error)
+	GetTimestampKey(gun string) (algorithm string, public []byte, err error)
 
 	// SetTimeStampKey sets the algorithm and public key for the given GUN if
 	// it doesn't already exist.  Otherwise an error is returned.
-	SetTimestampKey(gun string, algorithm data.KeyAlgorithm, public []byte) error
+	SetTimestampKey(gun string, algorithm string, public []byte) error
 }
