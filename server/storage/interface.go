@@ -1,6 +1,6 @@
 package storage
 
-import "github.com/endophage/gotuf/data"
+import "github.com/docker/notary/tuf/data"
 
 // MetaStore holds the methods that are used for a Metadata Store
 type MetaStore interface {

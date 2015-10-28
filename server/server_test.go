@@ -6,7 +6,7 @@ import (
 	"testing"
 
 	_ "github.com/docker/distribution/registry/auth/silly"
-	"github.com/endophage/gotuf/signed"
+	"github.com/docker/notary/tuf/signed"
 	"golang.org/x/net/context"
 )
 

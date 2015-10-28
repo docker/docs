@@ -16,14 +16,14 @@ import (
 	"github.com/docker/notary/keystoremanager"
 	"github.com/docker/notary/pkg/passphrase"
 	"github.com/docker/notary/trustmanager"
-	"github.com/endophage/gotuf"
-	tufclient "github.com/endophage/gotuf/client"
-	"github.com/endophage/gotuf/data"
-	tuferrors "github.com/endophage/gotuf/errors"
-	"github.com/endophage/gotuf/keys"
-	"github.com/endophage/gotuf/signed"
-	"github.com/endophage/gotuf/store"
-	tufutils "github.com/endophage/gotuf/utils"
+	"github.com/docker/notary/tuf"
+	tufclient "github.com/docker/notary/tuf/client"
+	"github.com/docker/notary/tuf/data"
+	tuferrors "github.com/docker/notary/tuf/errors"
+	"github.com/docker/notary/tuf/keys"
+	"github.com/docker/notary/tuf/signed"
+	"github.com/docker/notary/tuf/store"
+	tufutils "github.com/docker/notary/tuf/utils"
 )
 
 const maxSize = 5 << 20

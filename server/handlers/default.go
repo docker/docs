@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/endophage/gotuf/data"
-	"github.com/endophage/gotuf/signed"
+	"github.com/docker/notary/tuf/data"
+	"github.com/docker/notary/tuf/signed"
 	"github.com/gorilla/mux"
 	"golang.org/x/net/context"
 
@@ -196,7 +196,7 @@ func GetTimestampKeyHandler(ctx context.Context, w http.ResponseWriter, r *http.
 
 	key, err := timestamp.GetOrCreateTimestampKey(gun, store, crypto, keyAlgorithm)
 	if err != nil {
-		logger.Error("500 GET timestamp key: %v", err)
+		logger.Errorf("500 GET timestamp key: %v", err)
 		return errors.ErrUnknown.WithDetail(err)
 	}
 

@@ -5,7 +5,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/endophage/gotuf/data"
+	"github.com/docker/notary/tuf/data"
 	"github.com/jinzhu/gorm"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/stretchr/testify/assert"

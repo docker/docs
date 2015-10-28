@@ -9,8 +9,8 @@ import (
 	"fmt"
 
 	"github.com/docker/notary/trustmanager"
-	"github.com/endophage/gotuf/data"
-	"github.com/endophage/gotuf/signed"
+	"github.com/docker/notary/tuf/data"
+	"github.com/docker/notary/tuf/signed"
 )
 
 // UnlockedCryptoService encapsulates a private key and a cryptoservice that

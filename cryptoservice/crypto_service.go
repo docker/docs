@@ -13,7 +13,7 @@ import (
 	"github.com/Sirupsen/logrus"
 	"github.com/agl/ed25519"
 	"github.com/docker/notary/trustmanager"
-	"github.com/endophage/gotuf/data"
+	"github.com/docker/notary/tuf/data"
 )
 
 const (

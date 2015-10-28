@@ -5,8 +5,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/endophage/gotuf/data"
-	"github.com/endophage/gotuf/signed"
+	"github.com/docker/notary/tuf/data"
+	"github.com/docker/notary/tuf/signed"
 	"github.com/stretchr/testify/assert"
 
 	"github.com/docker/notary/server/storage"

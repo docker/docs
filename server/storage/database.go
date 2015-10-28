@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/endophage/gotuf/data"
+	"github.com/docker/notary/tuf/data"
 	"github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
 	"github.com/mattn/go-sqlite3"

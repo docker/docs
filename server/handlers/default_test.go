@@ -7,7 +7,7 @@ import (
 
 	"golang.org/x/net/context"
 
-	"github.com/endophage/gotuf/signed"
+	"github.com/docker/notary/tuf/signed"
 
 	"github.com/docker/notary/utils"
 )

@@ -95,10 +95,6 @@
 			"Rev": "5307afb3bb6169b0f68cdf519a5964c843344441"
 		},
 		{
-			"ImportPath": "github.com/endophage/gotuf",
-			"Rev": "e1345f72687ad0443c25b3c58d4502c717c4936a"
-		},
-		{
 			"ImportPath": "github.com/go-sql-driver/mysql",
 			"Comment": "v1.2-97-g0cc29e9",
 			"Rev": "0cc29e9fe8e25c2c58cf47bcab566e029bbaa88b"
@@ -198,6 +194,26 @@
 		},
 		{
 			"ImportPath": "golang.org/x/crypto/blowfish",
+			"Rev": "bfc286917c5fcb7420d7e3092b50bbfd31b38a98"
+		},
+		{
+			"ImportPath": "golang.org/x/crypto/nacl/secretbox",
+			"Rev": "bfc286917c5fcb7420d7e3092b50bbfd31b38a98"
+		},
+		{
+			"ImportPath": "golang.org/x/crypto/pbkdf2",
+			"Rev": "bfc286917c5fcb7420d7e3092b50bbfd31b38a98"
+		},
+		{
+			"ImportPath": "golang.org/x/crypto/poly1305",
+			"Rev": "bfc286917c5fcb7420d7e3092b50bbfd31b38a98"
+		},
+		{
+			"ImportPath": "golang.org/x/crypto/salsa20/salsa",
+			"Rev": "bfc286917c5fcb7420d7e3092b50bbfd31b38a98"
+		},
+		{
+			"ImportPath": "golang.org/x/crypto/scrypt",
 			"Rev": "bfc286917c5fcb7420d7e3092b50bbfd31b38a98"
 		},
 		{

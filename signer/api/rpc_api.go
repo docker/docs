@@ -6,7 +6,7 @@ import (
 	ctxu "github.com/docker/distribution/context"
 	"github.com/docker/notary/signer"
 	"github.com/docker/notary/signer/keys"
-	"github.com/endophage/gotuf/data"
+	"github.com/docker/notary/tuf/data"
 	"golang.org/x/net/context"
 
 	"google.golang.org/grpc"

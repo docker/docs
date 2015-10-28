@@ -5,8 +5,8 @@ import (
 	"testing"
 
 	"github.com/docker/notary/trustmanager"
-	"github.com/endophage/gotuf/data"
-	"github.com/endophage/gotuf/signed"
+	"github.com/docker/notary/tuf/data"
+	"github.com/docker/notary/tuf/signed"
 )
 
 func TestCryptoService(t *testing.T) {

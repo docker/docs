@@ -15,7 +15,7 @@ import (
 	"github.com/docker/notary/client"
 	"github.com/docker/notary/keystoremanager"
 	"github.com/docker/notary/trustmanager"
-	"github.com/endophage/gotuf/data"
+	"github.com/docker/notary/tuf/data"
 	"github.com/stretchr/testify/assert"
 )
 
