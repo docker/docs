@@ -1,6 +1,7 @@
 package signer
 
 import (
+	"crypto/tls"
 	"fmt"
 	"net"
 	"time"
@@ -8,7 +9,6 @@ import (
 	"github.com/Sirupsen/logrus"
 	pb "github.com/docker/notary/proto"
 	"github.com/docker/notary/tuf/data"
-	"github.com/docker/notary/utils"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
@@ -28,16 +28,9 @@ type NotarySigner struct {
 }
 
 // NewNotarySigner is a convinience method that returns NotarySigner
-func NewNotarySigner(hostname string, port string, tlscafile string) *NotarySigner {
+func NewNotarySigner(hostname string, port string, tlsConfig *tls.Config) *NotarySigner {
 	var opts []grpc.DialOption
 	netAddr := net.JoinHostPort(hostname, port)
-	tlsConfig, err := utils.ConfigureClientTLS(&utils.ClientTLSOpts{
-		RootCAFile: tlscafile,
-		ServerName: hostname,
-	})
-	if err != nil {
-		logrus.Fatal("Unable to set up TLS: ", err)
-	}
 	creds := credentials.NewTLS(tlsConfig)
 	opts = append(opts, grpc.WithTransportCredentials(creds))
 	conn, err := grpc.Dial(netAddr, opts...)
