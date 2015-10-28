@@ -15,6 +15,7 @@ GO_LDFLAGS=-ldflags "-w $(CTIMEVAR)"
 GO_LDFLAGS_STATIC=-ldflags "-w $(CTIMEVAR) -extldflags -static"
 GOOSES = darwin freebsd linux
 GOARCHS = amd64
+GO_EXC = go
 NOTARYDIR := /go/src/github.com/docker/notary
 
 # go cover test variables
@@ -64,37 +65,53 @@ build:
 	@echo "+ $@"
 	@go build -v ${GO_LDFLAGS} ./...
 
+test: OPTS =
 test:
-	@echo "+ $@"
-	@go test -test.short ./...
+	@echo "+ $@ $(OPTS)"
+	go test $(OPTS) ./...
 
 test-full: vet lint
 	@echo "+ $@"
-	@go test -v ./...
+	go test -v ./...
 
 protos:
 	@protoc --go_out=plugins=grpc:. proto/*.proto
 
 
+# This allows coverage for a package to come from tests in different package.
+# Requires that the following:
+# go get github.com/wadey/gocovmerge; go install github.com/wadey/gocovmerge
+#
+# be run first
 
 define gocover
-go test -covermode="$(COVERMODE)" -coverprofile="$(COVERDIR)/$(subst /,-,$(1)).cover" "$(1)";
+$(GO_EXC) test $(OPTS) -covermode="$(COVERMODE)" -coverprofile="$(COVERDIR)/$(subst /,-,$(1)).cover" "$(1)" || exit 1;
 endef
 
-cover:
+gen-cover:
+	@rm -rf "$(COVERDIR)"
 	@mkdir -p "$(COVERDIR)"
 	$(foreach PKG,$(PKGS),$(call gocover,$(PKG)))
-	@echo "mode: $(COVERMODE)" > "$(COVERPROFILE)"
-	@grep -h -v "^mode:" "$(COVERDIR)"/*.cover >> "$(COVERPROFILE)"
+
+cover: GO_EXC := go
+       OPTS = -coverpkg "$(shell ./coverpkg.sh $(1) $(NOTARY_PKG))"
+cover: gen-cover
+	@gocovmerge $(shell ls -1 $(COVERDIR)/* | tr "\n" " ") > $(COVERPROFILE)
 	@go tool cover -func="$(COVERPROFILE)"
 	@go tool cover -html="$(COVERPROFILE)"
+
+# Codecov knows how to merge multiple coverage files
+ci: OPTS = -race -coverpkg "$(shell ./coverpkg.sh $(1) $(NOTARY_PKG))"
+    GO_EXC := godep go
+ci: gen-cover
+	@gocovmerge $(shell ls -1 $(COVERDIR)/* | tr "\n" " ") > $(COVERPROFILE)
+	@go tool cover -func="$(COVERPROFILE)"
 
 clean-protos:
 	@rm proto/*.pb.go
 
 binaries: ${PREFIX}/bin/notary-server ${PREFIX}/bin/notary ${PREFIX}/bin/notary-signer
 	@echo "+ $@"
-
 
 define template
 mkdir -p ${PREFIX}/cross/$(1)/$(2);
