@@ -624,9 +624,11 @@ func (r *NotaryRepository) rootFileKeyChange(role, action string, key data.Publi
 	}
 	defer cl.Close()
 
+	kl := make(data.KeyList, 0, 1)
+	kl = append(kl, key)
 	meta := changelist.TufRootData{
 		RoleName: role,
-		Keys:     data.KeyList{key},
+		Keys:     kl,
 	}
 	metaJSON, err := json.Marshal(meta)
 	if err != nil {

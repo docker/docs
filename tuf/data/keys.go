@@ -28,8 +28,12 @@ type KeyPair struct {
 	Private []byte `json:"private"`
 }
 
+// Keys represents a map of key ID to PublicKey object. It's necessary
+// to allow us to unmarshal into an interface via the json.Unmarshaller
+// interface
 type Keys map[string]PublicKey
 
+// UnmarshalJSON implements the json.Unmarshaller interface
 func (ks *Keys) UnmarshalJSON(data []byte) error {
 	parsed := make(map[string]tufKey)
 	err := json.Unmarshal(data, &parsed)
@@ -44,8 +48,10 @@ func (ks *Keys) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
+// KeyList represents a list of keys
 type KeyList []PublicKey
 
+// UnmarshalJSON implements the json.Unmarshaller interface
 func (ks *KeyList) UnmarshalJSON(data []byte) error {
 	parsed := make([]tufKey, 0, 1)
 	err := json.Unmarshal(data, &parsed)
@@ -122,6 +128,8 @@ func typedPrivateKey(tk tufKey) PrivateKey {
 	}
 }
 
+// NewPublicKey creates a new, correctly typed PublicKey, using the
+// UnknownPublicKey catchall for unsupported ciphers
 func NewPublicKey(alg string, public []byte) PublicKey {
 	tk := tufKey{
 		Type: alg,
@@ -132,6 +140,8 @@ func NewPublicKey(alg string, public []byte) PublicKey {
 	return typedPublicKey(tk)
 }
 
+// NewPrivateKey creates a new, correctly typed PrivateKey, using the
+// UnknownPrivateKey catchall for unsupported ciphers
 func NewPrivateKey(pubKey PublicKey, private []byte) PrivateKey {
 	tk := tufKey{
 		Type: pubKey.Algorithm(),
@@ -143,6 +153,7 @@ func NewPrivateKey(pubKey PublicKey, private []byte) PrivateKey {
 	return typedPrivateKey(tk)
 }
 
+// UnmarshalPublicKey is used to parse individual public keys in JSON
 func UnmarshalPublicKey(data []byte) (PublicKey, error) {
 	var parsed tufKey
 	err := json.Unmarshal(data, &parsed)
@@ -152,6 +163,7 @@ func UnmarshalPublicKey(data []byte) (PublicKey, error) {
 	return typedPublicKey(parsed), nil
 }
 
+// UnmarshalPrivateKey is used to parse individual private keys in JSON
 func UnmarshalPrivateKey(data []byte) (PrivateKey, error) {
 	var parsed tufKey
 	err := json.Unmarshal(data, &parsed)
@@ -204,30 +216,42 @@ func (k tufKey) Public() []byte {
 
 // Public key types
 
+// ECDSAPublicKey represents an ECDSA key using a raw serialization
+// of the public key
 type ECDSAPublicKey struct {
 	tufKey
 }
 
+// ECDSAx509PublicKey represents an ECDSA key using an x509 cert
+// as the serialized format of the public key
 type ECDSAx509PublicKey struct {
 	tufKey
 }
 
+// RSAPublicKey represents an RSA key using a raw serialization
+// of the public key
 type RSAPublicKey struct {
 	tufKey
 }
 
+// RSAx509PublicKey represents an RSA key using an x509 cert
+// as the serialized format of the public key
 type RSAx509PublicKey struct {
 	tufKey
 }
 
+// ED25519PublicKey represents an ED25519 key using a raw serialization
+// of the public key
 type ED25519PublicKey struct {
 	tufKey
 }
 
+// UnknownPublicKey is a catchall for key types that are not supported
 type UnknownPublicKey struct {
 	tufKey
 }
 
+// NewECDSAPublicKey initializes a new public key with the ECDSAKey type
 func NewECDSAPublicKey(public []byte) *ECDSAPublicKey {
 	return &ECDSAPublicKey{
 		tufKey: tufKey{
@@ -240,6 +264,7 @@ func NewECDSAPublicKey(public []byte) *ECDSAPublicKey {
 	}
 }
 
+// NewECDSAx509PublicKey initializes a new public key with the ECDSAx509Key type
 func NewECDSAx509PublicKey(public []byte) *ECDSAx509PublicKey {
 	return &ECDSAx509PublicKey{
 		tufKey: tufKey{
@@ -252,6 +277,7 @@ func NewECDSAx509PublicKey(public []byte) *ECDSAx509PublicKey {
 	}
 }
 
+// NewRSAPublicKey initializes a new public key with the RSA type
 func NewRSAPublicKey(public []byte) *RSAPublicKey {
 	return &RSAPublicKey{
 		tufKey: tufKey{
@@ -264,6 +290,7 @@ func NewRSAPublicKey(public []byte) *RSAPublicKey {
 	}
 }
 
+// NewRSAx509PublicKey initializes a new public key with the RSAx509Key type
 func NewRSAx509PublicKey(public []byte) *RSAx509PublicKey {
 	return &RSAx509PublicKey{
 		tufKey: tufKey{
@@ -276,6 +303,7 @@ func NewRSAx509PublicKey(public []byte) *RSAx509PublicKey {
 	}
 }
 
+// NewED25519PublicKey initializes a new public key with the ED25519Key type
 func NewED25519PublicKey(public []byte) *ED25519PublicKey {
 	return &ED25519PublicKey{
 		tufKey: tufKey{
@@ -290,37 +318,45 @@ func NewED25519PublicKey(public []byte) *ED25519PublicKey {
 
 // Private key types
 
-// ECDSAPrivateKey
+// ECDSAPrivateKey represents a private ECDSA key
 type ECDSAPrivateKey struct {
 	ECDSAPublicKey
-	private []byte `json:"-"`
+	private []byte
 }
 
+// ECDSAx509PrivateKey represents a private ECDSA key where the public
+// component is serialized into an x509 cert
 type ECDSAx509PrivateKey struct {
 	ECDSAx509PublicKey
-	private []byte `json:"-"`
+	private []byte
 }
 
+// RSAPrivateKey represents a private RSA key
 type RSAPrivateKey struct {
 	RSAPublicKey
-	private []byte `json:"-"`
+	private []byte
 }
 
+// RSAx509PrivateKey represents a private RSA key where the public
+// component is serialized into an x509 cert
 type RSAx509PrivateKey struct {
 	RSAx509PublicKey
-	private []byte `json:"-"`
+	private []byte
 }
 
+// ED25519PrivateKey represents a private ED25519 key
 type ED25519PrivateKey struct {
 	ED25519PublicKey
-	private []byte `json:"-"`
+	private []byte
 }
 
+// UnknownPrivateKey is a catchall for unsupported key types
 type UnknownPrivateKey struct {
 	tufKey
-	private []byte `json:"-"`
+	private []byte
 }
 
+// NewECDSAPrivateKey initializes a new ECDSA private key
 func NewECDSAPrivateKey(public ECDSAPublicKey, private []byte) *ECDSAPrivateKey {
 	return &ECDSAPrivateKey{
 		ECDSAPublicKey: public,
@@ -328,6 +364,7 @@ func NewECDSAPrivateKey(public ECDSAPublicKey, private []byte) *ECDSAPrivateKey 
 	}
 }
 
+// NewECDSAx509PrivateKey initializes a new ECDSA private key
 func NewECDSAx509PrivateKey(public ECDSAx509PublicKey, private []byte) *ECDSAx509PrivateKey {
 	return &ECDSAx509PrivateKey{
 		ECDSAx509PublicKey: public,
@@ -335,6 +372,7 @@ func NewECDSAx509PrivateKey(public ECDSAx509PublicKey, private []byte) *ECDSAx50
 	}
 }
 
+// NewRSAPrivateKey initialized a new RSA private key
 func NewRSAPrivateKey(public RSAPublicKey, private []byte) *RSAPrivateKey {
 	return &RSAPrivateKey{
 		RSAPublicKey: public,
@@ -342,6 +380,7 @@ func NewRSAPrivateKey(public RSAPublicKey, private []byte) *RSAPrivateKey {
 	}
 }
 
+// NewRSAx509PrivateKey initialized a new RSA private key
 func NewRSAx509PrivateKey(public RSAx509PublicKey, private []byte) *RSAx509PrivateKey {
 	return &RSAx509PrivateKey{
 		RSAx509PublicKey: public,
@@ -349,6 +388,7 @@ func NewRSAx509PrivateKey(public RSAx509PublicKey, private []byte) *RSAx509Priva
 	}
 }
 
+// NewED25519PrivateKey initialized a new ED25519 private key
 func NewED25519PrivateKey(public ED25519PublicKey, private []byte) *ED25519PrivateKey {
 	return &ED25519PrivateKey{
 		ED25519PublicKey: public,
@@ -356,26 +396,32 @@ func NewED25519PrivateKey(public ED25519PublicKey, private []byte) *ED25519Priva
 	}
 }
 
+// Private return the serialized private bytes of the key
 func (k ECDSAPrivateKey) Private() []byte {
 	return k.private
 }
 
+// Private return the serialized private bytes of the key
 func (k ECDSAx509PrivateKey) Private() []byte {
 	return k.private
 }
 
+// Private return the serialized private bytes of the key
 func (k RSAPrivateKey) Private() []byte {
 	return k.private
 }
 
+// Private return the serialized private bytes of the key
 func (k RSAx509PrivateKey) Private() []byte {
 	return k.private
 }
 
+// Private return the serialized private bytes of the key
 func (k ED25519PrivateKey) Private() []byte {
 	return k.private
 }
 
+// Private return the serialized private bytes of the key
 func (k UnknownPrivateKey) Private() []byte {
 	return k.private
 }
@@ -391,5 +437,3 @@ func PublicKeyFromPrivate(pk PrivateKey) PublicKey {
 		},
 	})
 }
-
-type ed25519PrivateKey []byte
