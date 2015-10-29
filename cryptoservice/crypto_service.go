@@ -92,6 +92,9 @@ func (ccs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signatur
 			keyName = keyid
 		)
 
+		// Try to get the key first without a GUN (in which case it's a root
+		// key).  If that fails, try to get the key with the GUN (non-root
+		// key).  If that fails, then we don't have the key.
 		privKey, _, err = ccs.keyStore.GetKey(keyName)
 		if err != nil {
 			keyName := filepath.Join(ccs.gun, keyid)
