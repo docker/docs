@@ -39,41 +39,44 @@ organizing the options for configuring:
 
 ![Domain and Ports page</admin/settings#http>](assets/admin-settings.png)
 
-Each setting on this page is explained in the DTR UI.
+Each setting on this page is explained in the Docker Trusted Registry UI.
 
-> **Note**: If you need DTR to re-generate a self-signed certificate at some
+> **Note**: If you need Docker Trusted Registry to re-generate a self-signed certificate at some
 > point, you can change the domain name. Whenever the domain name does not match the current certificate,
 > a new self-signed certificate will be generated for the new domain. This also works with IP addresses.
 
 ### Notary configuration
 
-DTR can be configured to read the status of tags from an existing notary server. To set this up, first
-deploy a Notary server by following the tutorial at [Deploying Notary](/security/trust/deploying_notary/).
+> *Note:* Docker Trusted Registry's integration of Notary is an experimental feature. To use it, you need to provide your own Notary server.
+
+If you enable Notary integration you will be able to see which tags have been signed through Trusted Registry's web interface.
+To deploy a Notary server by follow the instructions at [Deploying Notary](/security/trust/deploying_notary/). Then configure the following options:
 
 * *Notary Server*: This is the domain name or IP address where you deployed the Notary server.
 
-If you set up a Notary Server on the same machine as DTR you can use the IP address of the docker0 interface
+If you choose to deploy a Notary server on the same machine as Docker Trusted Registry you can use the IP address of the docker0 interface
 to connect to it without having to use the machine's external IP. This address is usually 172.17.42.1.
-Otherwise use its domain name or a IP address that DTR can use to access it.
+Read more about [Docker Networking](/articles/networking/#summary) if you want to deploy Notary this way.
+Otherwise use the Notary machine's domain name or a IP address in this field.
 
-After saving this setting, DTR will attempt to connect to Notary and it will allow you to save the settings only
-if the connection succeeds. DTR configures itself as a reverse proxy to the Notary server to make using Notary
-with DTR easier.
+When you save the settings Docker Trusted Registry will try to connect to Notary to confirm that the address is correct.
+It configures itself as a reverse proxy to the Notary server to make it easier for clients to automatically use the correct
+Notary server.
 
-* *Notary Verify TLS*: This is off by default and you should verify that your connection to Notary works with this off
-before trying to enable it. If Notary's certificate is signed by a public Certificate Authority you can simply turn this
+* *Notary Verify TLS*: This is off by default and you should verify that your connection to Notary works with this turned off
+before trying to enable it. If Notary's certificate is signed by a public Certificate Authority you can turn this
 on and it should work given that the domain name (or IP) matches the one in the certificate.
 
 * *Notary TLS Root CA*: If you don't use a publicly signed certificate but still want to have a secure connection between
-DTR and Notary, put the root Certificate Authority's certificate here. You can also use a self signed certificate here.
+Docker Trusted Registry and Notary, put the root Certificate Authority's certificate here. You can also use a self signed certificate here.
 
-Once DTR is configured to work with Notary, you should be able to see which tags are signed in Notary when you visit
+Once Docker Trusted Registry is configured to work with Notary, you should be able to see which tags are signed in Notary when you visit
 a repository's page through the web interface.
 
-To configure your docker client to be able to push signed images to DTR refer to the CLI Reference's
+To configure your docker client to be able to push signed images to Docker Trusted Registry refer to the CLI Reference's
 [Environment Variables Section](/engine/reference/commandline/cli/#environment-variables)
-and [Notary Section](/engine/reference/commandline/cli/#notary). You have to set the `DOCKER_CONTENT_TRUST` variable
-and configure your system to trust DTR's TLS certificate if it doesn't already. DTR proxies requests to Notary, so
+and [Notary Section](/engine/reference/commandline/cli/#Notary). You have to set the `DOCKER_CONTENT_TRUST` variable
+and configure your system to trust Docker Trusted Registry's TLS certificate if it doesn't already. Docker Trusted Registry proxies requests to Notary, so
 you don't need to explicitly trust Notary's certificate from the docker client.
 
 ## Security
