@@ -19,6 +19,10 @@
 			"Rev": "d2b94fd789ea21d12fac1a4443dd3a3f79cda72c"
 		},
 		{
+			"ImportPath": "github.com/beorn7/perks/quantile",
+			"Rev": "b965b613227fddccbfffe13eae360ed3fa822f8d"
+		},
+		{
 			"ImportPath": "github.com/bugsnag/bugsnag-go",
 			"Comment": "v1.0.4-2-g13fd6b8",
 			"Rev": "13fd6b8acda029830ef9904df6b63be0a83369d0"
@@ -152,6 +156,10 @@
 			"Rev": "b4142c444a8941d0d92b0b7103a24df9cd815e42"
 		},
 		{
+			"ImportPath": "github.com/matttproud/golang_protobuf_extensions/pbutil",
+			"Rev": "d0c3fe89de86839aecf2e0579c40ba3bb336a453"
+		},
+		{
 			"ImportPath": "github.com/miekg/pkcs11",
 			"Rev": "88c9f842544e629ec046105d7fb50d5daafae737"
 		},
@@ -162,6 +170,32 @@
 		{
 			"ImportPath": "github.com/mitchellh/mapstructure",
 			"Rev": "2caf8efc93669b6c43e0441cdc6aed17546c96f3"
+		},
+		{
+			"ImportPath": "github.com/prometheus/client_golang/prometheus",
+			"Comment": "0.7.0-53-g449ccef",
+			"Rev": "449ccefff16c8e2b7229f6be1921ba22f62461fe"
+		},
+		{
+			"ImportPath": "github.com/prometheus/client_model/go",
+			"Comment": "model-0.0.2-12-gfa8ad6f",
+			"Rev": "fa8ad6fec33561be4280a8f0514318c79d7f6cb6"
+		},
+		{
+			"ImportPath": "github.com/prometheus/common/expfmt",
+			"Rev": "4fdc91a58c9d3696b982e8a680f4997403132d44"
+		},
+		{
+			"ImportPath": "github.com/prometheus/common/internal/bitbucket.org/ww/goautoneg",
+			"Rev": "4fdc91a58c9d3696b982e8a680f4997403132d44"
+		},
+		{
+			"ImportPath": "github.com/prometheus/common/model",
+			"Rev": "4fdc91a58c9d3696b982e8a680f4997403132d44"
+		},
+		{
+			"ImportPath": "github.com/prometheus/procfs",
+			"Rev": "b1afdc266f54247f5dc725544f5d351a8661f502"
 		},
 		{
 			"ImportPath": "github.com/spf13/cast",
