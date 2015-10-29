@@ -2,6 +2,15 @@ machine:
   services:
     - docker
 
+dependencies:
+  cache_directories:
+    - "~/docker"
+
+  override:
+    - if [[ -e ~/docker/osx-installer.tar ]]; then docker load -i ~/docker/osx-installer.tar; fi
+    - if [[ -e ~/docker/windows-installer.tar ]]; then docker load -i ~/docker/windows-installer.tar; fi
+
 test:
   override:
     - make
+    - - mkdir -p ~/docker; docker save osx-installer > ~/docker/osx-installer.tar; docker save windows-installer > ~/docker/windows-installer.tar
