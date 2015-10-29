@@ -389,18 +389,18 @@ func (r *NotaryRepository) Publish() error {
 		if err != nil {
 			return err
 		}
-		root, err = r.tufRepo.SignRoot(data.DefaultExpires("root"), r.cryptoService)
+		root, err = r.tufRepo.SignRoot(data.DefaultExpires("root"))
 		if err != nil {
 			return err
 		}
 		updateRoot = true
 	}
 	// we will always resign targets and snapshots
-	targets, err := r.tufRepo.SignTargets("targets", data.DefaultExpires("targets"), nil)
+	targets, err := r.tufRepo.SignTargets("targets", data.DefaultExpires("targets"))
 	if err != nil {
 		return err
 	}
-	snapshot, err := r.tufRepo.SignSnapshot(data.DefaultExpires("snapshot"), nil)
+	snapshot, err := r.tufRepo.SignSnapshot(data.DefaultExpires("snapshot"))
 	if err != nil {
 		return err
 	}
@@ -491,8 +491,7 @@ func (r *NotaryRepository) bootstrapRepo() error {
 func (r *NotaryRepository) saveMetadata() error {
 	logrus.Debugf("Saving changes to Trusted Collection.")
 
-	signedRoot, err := r.tufRepo.SignRoot(
-		data.DefaultExpires("root"), r.cryptoService)
+	signedRoot, err := r.tufRepo.SignRoot(data.DefaultExpires("root"))
 	if err != nil {
 		return err
 	}
@@ -503,7 +502,7 @@ func (r *NotaryRepository) saveMetadata() error {
 
 	targetsToSave := make(map[string][]byte)
 	for t := range r.tufRepo.Targets {
-		signedTargets, err := r.tufRepo.SignTargets(t, data.DefaultExpires("targets"), nil)
+		signedTargets, err := r.tufRepo.SignTargets(t, data.DefaultExpires("targets"))
 		if err != nil {
 			return err
 		}
@@ -514,7 +513,7 @@ func (r *NotaryRepository) saveMetadata() error {
 		targetsToSave[t] = targetsJSON
 	}
 
-	signedSnapshot, err := r.tufRepo.SignSnapshot(data.DefaultExpires("snapshot"), nil)
+	signedSnapshot, err := r.tufRepo.SignSnapshot(data.DefaultExpires("snapshot"))
 	if err != nil {
 		return err
 	}

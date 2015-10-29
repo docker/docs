@@ -316,7 +316,7 @@ func TestDownloadTargetsHappy(t *testing.T) {
 	remoteStorage := store.NewMemoryStore(nil, nil)
 	client := NewClient(repo, remoteStorage, kdb, localStorage)
 
-	signedOrig, err := repo.SignTargets("targets", data.DefaultExpires("targets"), nil)
+	signedOrig, err := repo.SignTargets("targets", data.DefaultExpires("targets"))
 	assert.NoError(t, err)
 	orig, err := json.Marshal(signedOrig)
 	assert.NoError(t, err)
@@ -324,7 +324,7 @@ func TestDownloadTargetsHappy(t *testing.T) {
 	assert.NoError(t, err)
 
 	// call repo.SignSnapshot to update the targets role in the snapshot
-	repo.SignSnapshot(data.DefaultExpires("snapshot"), nil)
+	repo.SignSnapshot(data.DefaultExpires("snapshot"))
 
 	err = client.downloadTargets("targets")
 	assert.NoError(t, err)
@@ -337,7 +337,7 @@ func TestDownloadTargetChecksumMismatch(t *testing.T) {
 	client := NewClient(repo, remoteStorage, kdb, localStorage)
 
 	// create and "upload" sample targets
-	signedOrig, err := repo.SignTargets("targets", data.DefaultExpires("targets"), nil)
+	signedOrig, err := repo.SignTargets("targets", data.DefaultExpires("targets"))
 	assert.NoError(t, err)
 	orig, err := json.Marshal(signedOrig)
 	assert.NoError(t, err)
@@ -377,7 +377,7 @@ func TestDownloadTargetsNoChecksum(t *testing.T) {
 	client := NewClient(repo, remoteStorage, kdb, localStorage)
 
 	// create and "upload" sample targets
-	signedOrig, err := repo.SignTargets("targets", data.DefaultExpires("targets"), nil)
+	signedOrig, err := repo.SignTargets("targets", data.DefaultExpires("targets"))
 	assert.NoError(t, err)
 	orig, err := json.Marshal(signedOrig)
 	assert.NoError(t, err)
@@ -399,7 +399,7 @@ func TestDownloadTargetsNoSnapshot(t *testing.T) {
 	client := NewClient(repo, remoteStorage, kdb, localStorage)
 
 	// create and "upload" sample targets
-	signedOrig, err := repo.SignTargets("targets", data.DefaultExpires("targets"), nil)
+	signedOrig, err := repo.SignTargets("targets", data.DefaultExpires("targets"))
 	assert.NoError(t, err)
 	orig, err := json.Marshal(signedOrig)
 	assert.NoError(t, err)
@@ -419,7 +419,7 @@ func TestBootstrapDownloadRootHappy(t *testing.T) {
 	client := NewClient(repo, remoteStorage, kdb, localStorage)
 
 	// create and "upload" sample root
-	signedOrig, err := repo.SignRoot(data.DefaultExpires("root"), nil)
+	signedOrig, err := repo.SignRoot(data.DefaultExpires("root"))
 	assert.NoError(t, err)
 	orig, err := json.Marshal(signedOrig)
 	assert.NoError(t, err)
@@ -440,7 +440,7 @@ func TestUpdateDownloadRootHappy(t *testing.T) {
 	client := NewClient(repo, remoteStorage, kdb, localStorage)
 
 	// create and "upload" sample root, snapshot, and timestamp
-	signedOrig, err := repo.SignRoot(data.DefaultExpires("root"), nil)
+	signedOrig, err := repo.SignRoot(data.DefaultExpires("root"))
 	assert.NoError(t, err)
 	orig, err := json.Marshal(signedOrig)
 	assert.NoError(t, err)
@@ -448,7 +448,7 @@ func TestUpdateDownloadRootHappy(t *testing.T) {
 	assert.NoError(t, err)
 
 	// sign snapshot to make root meta in snapshot get updated
-	signedOrig, err = repo.SignSnapshot(data.DefaultExpires("snapshot"), nil)
+	signedOrig, err = repo.SignSnapshot(data.DefaultExpires("snapshot"))
 
 	err = client.downloadRoot()
 	assert.NoError(t, err)
@@ -461,11 +461,11 @@ func TestUpdateDownloadRootBadChecksum(t *testing.T) {
 	client := NewClient(repo, remoteStorage, kdb, localStorage)
 
 	// sign snapshot to make sure we have a checksum for root
-	_, err := repo.SignSnapshot(data.DefaultExpires("snapshot"), nil)
+	_, err := repo.SignSnapshot(data.DefaultExpires("snapshot"))
 	assert.NoError(t, err)
 
 	// create and "upload" sample root, snapshot, and timestamp
-	signedOrig, err := repo.SignRoot(data.DefaultExpires("root"), nil)
+	signedOrig, err := repo.SignRoot(data.DefaultExpires("root"))
 	assert.NoError(t, err)
 	orig, err := json.Marshal(signedOrig)
 	assert.NoError(t, err)
@@ -485,7 +485,7 @@ func TestDownloadTimestampHappy(t *testing.T) {
 	client := NewClient(repo, remoteStorage, kdb, localStorage)
 
 	// create and "upload" sample timestamp
-	signedOrig, err := repo.SignTimestamp(data.DefaultExpires("timestamp"), nil)
+	signedOrig, err := repo.SignTimestamp(data.DefaultExpires("timestamp"))
 	assert.NoError(t, err)
 	orig, err := json.Marshal(signedOrig)
 	assert.NoError(t, err)
@@ -503,14 +503,14 @@ func TestDownloadSnapshotHappy(t *testing.T) {
 	client := NewClient(repo, remoteStorage, kdb, localStorage)
 
 	// create and "upload" sample snapshot and timestamp
-	signedOrig, err := repo.SignSnapshot(data.DefaultExpires("snapshot"), nil)
+	signedOrig, err := repo.SignSnapshot(data.DefaultExpires("snapshot"))
 	assert.NoError(t, err)
 	orig, err := json.Marshal(signedOrig)
 	assert.NoError(t, err)
 	err = remoteStorage.SetMeta("snapshot", orig)
 	assert.NoError(t, err)
 
-	signedOrig, err = repo.SignTimestamp(data.DefaultExpires("timestamp"), nil)
+	signedOrig, err = repo.SignTimestamp(data.DefaultExpires("timestamp"))
 	assert.NoError(t, err)
 	orig, err = json.Marshal(signedOrig)
 	assert.NoError(t, err)
@@ -530,7 +530,7 @@ func TestDownloadSnapshotNoTimestamp(t *testing.T) {
 	client := NewClient(repo, remoteStorage, kdb, localStorage)
 
 	// create and "upload" sample snapshot and timestamp
-	signedOrig, err := repo.SignSnapshot(data.DefaultExpires("snapshot"), nil)
+	signedOrig, err := repo.SignSnapshot(data.DefaultExpires("snapshot"))
 	assert.NoError(t, err)
 	orig, err := json.Marshal(signedOrig)
 	assert.NoError(t, err)
@@ -550,7 +550,7 @@ func TestDownloadSnapshotNoChecksum(t *testing.T) {
 	client := NewClient(repo, remoteStorage, kdb, localStorage)
 
 	// create and "upload" sample snapshot and timestamp
-	signedOrig, err := repo.SignSnapshot(data.DefaultExpires("snapshot"), nil)
+	signedOrig, err := repo.SignSnapshot(data.DefaultExpires("snapshot"))
 	assert.NoError(t, err)
 	orig, err := json.Marshal(signedOrig)
 	assert.NoError(t, err)
@@ -570,11 +570,11 @@ func TestDownloadSnapshotBadChecksum(t *testing.T) {
 	client := NewClient(repo, remoteStorage, kdb, localStorage)
 
 	// sign timestamp to ensure it has a checksum for snapshot
-	_, err := repo.SignTimestamp(data.DefaultExpires("timestamp"), nil)
+	_, err := repo.SignTimestamp(data.DefaultExpires("timestamp"))
 	assert.NoError(t, err)
 
 	// create and "upload" sample snapshot and timestamp
-	signedOrig, err := repo.SignSnapshot(data.DefaultExpires("snapshot"), nil)
+	signedOrig, err := repo.SignSnapshot(data.DefaultExpires("snapshot"))
 	assert.NoError(t, err)
 	orig, err := json.Marshal(signedOrig)
 	assert.NoError(t, err)

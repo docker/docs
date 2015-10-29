@@ -469,7 +469,7 @@ func (tr *Repo) UpdateTimestamp(s *data.Signed) error {
 }
 
 // SignRoot signs the root
-func (tr *Repo) SignRoot(expires time.Time, cryptoService signed.CryptoService) (*data.Signed, error) {
+func (tr *Repo) SignRoot(expires time.Time) (*data.Signed, error) {
 	logrus.Debug("signing root...")
 	tr.Root.Signed.Expires = expires
 	tr.Root.Signed.Version++
@@ -478,7 +478,7 @@ func (tr *Repo) SignRoot(expires time.Time, cryptoService signed.CryptoService) 
 	if err != nil {
 		return nil, err
 	}
-	signed, err = tr.sign(signed, *root, cryptoService)
+	signed, err = tr.sign(signed, *root)
 	if err != nil {
 		return nil, err
 	}
@@ -487,7 +487,7 @@ func (tr *Repo) SignRoot(expires time.Time, cryptoService signed.CryptoService) 
 }
 
 // SignTargets signs the targets file for the given top level or delegated targets role
-func (tr *Repo) SignTargets(role string, expires time.Time, cryptoService signed.CryptoService) (*data.Signed, error) {
+func (tr *Repo) SignTargets(role string, expires time.Time) (*data.Signed, error) {
 	logrus.Debugf("sign targets called for role %s", role)
 	tr.Targets[role].Signed.Expires = expires
 	tr.Targets[role].Signed.Version++
@@ -497,7 +497,7 @@ func (tr *Repo) SignTargets(role string, expires time.Time, cryptoService signed
 		return nil, err
 	}
 	targets := tr.keysDB.GetRole(role)
-	signed, err = tr.sign(signed, *targets, cryptoService)
+	signed, err = tr.sign(signed, *targets)
 	if err != nil {
 		logrus.Debug("errored signing ", role)
 		return nil, err
@@ -507,7 +507,7 @@ func (tr *Repo) SignTargets(role string, expires time.Time, cryptoService signed
 }
 
 // SignSnapshot updates the snapshot based on the current targets and root then signs it
-func (tr *Repo) SignSnapshot(expires time.Time, cryptoService signed.CryptoService) (*data.Signed, error) {
+func (tr *Repo) SignSnapshot(expires time.Time) (*data.Signed, error) {
 	logrus.Debug("signing snapshot...")
 	signedRoot, err := tr.Root.ToSigned()
 	if err != nil {
@@ -535,7 +535,7 @@ func (tr *Repo) SignSnapshot(expires time.Time, cryptoService signed.CryptoServi
 		return nil, err
 	}
 	snapshot := tr.keysDB.GetRole(data.ValidRoles["snapshot"])
-	signed, err = tr.sign(signed, *snapshot, cryptoService)
+	signed, err = tr.sign(signed, *snapshot)
 	if err != nil {
 		return nil, err
 	}
@@ -544,7 +544,7 @@ func (tr *Repo) SignSnapshot(expires time.Time, cryptoService signed.CryptoServi
 }
 
 // SignTimestamp updates the timestamp based on the current snapshot then signs it
-func (tr *Repo) SignTimestamp(expires time.Time, cryptoService signed.CryptoService) (*data.Signed, error) {
+func (tr *Repo) SignTimestamp(expires time.Time) (*data.Signed, error) {
 	logrus.Debug("SignTimestamp")
 	signedSnapshot, err := tr.Snapshot.ToSigned()
 	if err != nil {
@@ -561,7 +561,7 @@ func (tr *Repo) SignTimestamp(expires time.Time, cryptoService signed.CryptoServ
 		return nil, err
 	}
 	timestamp := tr.keysDB.GetRole(data.ValidRoles["timestamp"])
-	signed, err = tr.sign(signed, *timestamp, cryptoService)
+	signed, err = tr.sign(signed, *timestamp)
 	if err != nil {
 		return nil, err
 	}
@@ -570,7 +570,7 @@ func (tr *Repo) SignTimestamp(expires time.Time, cryptoService signed.CryptoServ
 	return signed, nil
 }
 
-func (tr Repo) sign(signedData *data.Signed, role data.Role, cryptoService signed.CryptoService) (*data.Signed, error) {
+func (tr Repo) sign(signedData *data.Signed, role data.Role) (*data.Signed, error) {
 	ks := make([]data.PublicKey, 0, len(role.KeyIDs))
 	for _, kid := range role.KeyIDs {
 		k := tr.keysDB.GetKey(kid)
@@ -582,10 +582,7 @@ func (tr Repo) sign(signedData *data.Signed, role data.Role, cryptoService signe
 	if len(ks) < 1 {
 		return nil, keys.ErrInvalidKey
 	}
-	if cryptoService == nil {
-		cryptoService = tr.cryptoService
-	}
-	err := signed.Sign(cryptoService, signedData, ks...)
+	err := signed.Sign(tr.cryptoService, signedData, ks...)
 	if err != nil {
 		return nil, err
 	}

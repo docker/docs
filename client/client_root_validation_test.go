@@ -71,13 +71,13 @@ func validateRootSuccessfully(t *testing.T, rootType string) {
 	rootJSONFile := filepath.Join(tempBaseDir, "tuf", filepath.FromSlash(gun), "metadata", "root.json")
 	rootFileBytes, err := ioutil.ReadFile(rootJSONFile)
 
-	signedTargets, err := savedTUFRepo.SignTargets("targets", data.DefaultExpires("targets"), nil)
+	signedTargets, err := savedTUFRepo.SignTargets("targets", data.DefaultExpires("targets"))
 	assert.NoError(t, err)
 
-	signedSnapshot, err := savedTUFRepo.SignSnapshot(data.DefaultExpires("snapshot"), nil)
+	signedSnapshot, err := savedTUFRepo.SignSnapshot(data.DefaultExpires("snapshot"))
 	assert.NoError(t, err)
 
-	signedTimestamp, err := savedTUFRepo.SignTimestamp(data.DefaultExpires("timestamp"), nil)
+	signedTimestamp, err := savedTUFRepo.SignTimestamp(data.DefaultExpires("timestamp"))
 	assert.NoError(t, err)
 
 	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/root.json", func(w http.ResponseWriter, r *http.Request) {

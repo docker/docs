@@ -241,7 +241,7 @@ func TestValidateRootRotation(t *testing.T) {
 	repo.Root.Signed.Roles["root"] = &rootRole.RootRole
 	repo.Root.Signed.Keys[rootKey.ID()] = rootKey
 
-	r, err = repo.SignRoot(data.DefaultExpires(data.CanonicalRootRole), nil)
+	r, err = repo.SignRoot(data.DefaultExpires(data.CanonicalRootRole))
 	assert.NoError(t, err)
 	err = signed.Sign(crypto, r, rootKey, oldRootKey)
 	assert.NoError(t, err)
@@ -250,7 +250,7 @@ func TestValidateRootRotation(t *testing.T) {
 	assert.NoError(t, err)
 	repo.SetRoot(rt)
 
-	sn, err = repo.SignSnapshot(data.DefaultExpires(data.CanonicalSnapshotRole), nil)
+	sn, err = repo.SignSnapshot(data.DefaultExpires(data.CanonicalSnapshotRole))
 	assert.NoError(t, err)
 	root, targets, snapshot, timestamp, err = testutils.Serialize(r, tg, sn, ts)
 	assert.NoError(t, err)
