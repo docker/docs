@@ -10,7 +10,6 @@ import (
 	"time"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/pkg/passphrase"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
@@ -144,19 +143,6 @@ func (km *KeyStoreManager) GenRootKey(algorithm string) (string, error) {
 	km.KeyStore.AddKey(privKey.ID(), "root", privKey)
 
 	return privKey.ID(), nil
-}
-
-// GetRootCryptoService retrieves a root key and a cryptoservice to use with it
-// TODO(mccauley): remove this as its no longer needed once we have key caching in the keystores
-func (km *KeyStoreManager) GetRootCryptoService(rootKeyID string) (*cryptoservice.UnlockedCryptoService, error) {
-	privKey, _, err := km.KeyStore.GetKey(rootKeyID)
-	if err != nil {
-		return nil, fmt.Errorf("could not get decrypted root key with keyID: %s, %v", rootKeyID, err)
-	}
-
-	cryptoService := cryptoservice.NewCryptoService("", km.KeyStore)
-
-	return cryptoservice.NewUnlockedCryptoService(privKey, cryptoService), nil
 }
 
 /*
