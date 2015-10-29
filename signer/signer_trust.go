@@ -2,6 +2,7 @@ package signer
 
 import (
 	"crypto/tls"
+	"errors"
 	"fmt"
 	"net"
 	"time"
@@ -92,6 +93,11 @@ func (trust *NotarySigner) GetKey(keyid string) data.PublicKey {
 		return nil
 	}
 	return data.NewPublicKey(publicKey.KeyInfo.Algorithm.Algorithm, publicKey.PublicKey)
+}
+
+// GetPrivateKey errors in all cases
+func (trust *NotarySigner) GetPrivateKey(keyid string) (data.PrivateKey, string, error) {
+	return nil, "", errors.New("Private key access not permitted.")
 }
 
 // CheckHealth checks the health of one of the clients, since both clients run

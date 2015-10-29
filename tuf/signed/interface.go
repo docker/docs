@@ -25,6 +25,10 @@ type KeyService interface {
 	// GetKey retrieves the public key if present, otherwise it returns nil
 	GetKey(keyID string) data.PublicKey
 
+	// GetPrivateKey retrieves the private key and role if present, otherwise
+	// it returns nil
+	GetPrivateKey(keyID string) (data.PrivateKey, string, error)
+
 	// RemoveKey deletes the specified key
 	RemoveKey(keyID string) error
 }

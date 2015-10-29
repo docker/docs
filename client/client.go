@@ -137,7 +137,7 @@ func NewNotaryRepository(baseDir, gun, baseURL string, rt http.RoundTripper,
 // Initialize creates a new repository by using rootKey as the root Key for the
 // TUF repository.
 func (r *NotaryRepository) Initialize(rootKeyID string) error {
-	privKey, _, err := r.cryptoService.GetKey(rootKeyID)
+	privKey, _, err := r.cryptoService.GetPrivateKey(rootKeyID)
 	if err != nil {
 		return err
 	}

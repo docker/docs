@@ -66,6 +66,11 @@ func (ccs *CryptoService) Create(role, algorithm string) (data.PublicKey, error)
 	return data.PublicKeyFromPrivate(privKey), nil
 }
 
+// GetPrivateKey returns a private key by ID
+func (ccs *CryptoService) GetPrivateKey(keyID string) (data.PrivateKey, string, error) {
+	return ccs.keyStore.GetKey(keyID)
+}
+
 // GetKey returns a key by ID
 func (ccs *CryptoService) GetKey(keyID string) data.PublicKey {
 	key, _, err := ccs.keyStore.GetKey(keyID)

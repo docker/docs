@@ -5,6 +5,7 @@ import (
 	"crypto/rsa"
 	"crypto/x509"
 	"encoding/pem"
+	"errors"
 	"testing"
 
 	"github.com/docker/notary/trustmanager"
@@ -40,6 +41,10 @@ func (mts *FailingCryptoService) GetKey(keyID string) data.PublicKey {
 	return nil
 }
 
+func (mts *FailingCryptoService) GetPrivateKey(keyID string) (data.PrivateKey, string, error) {
+	return nil, "", errors.New("Not implemented")
+}
+
 func (mts *FailingCryptoService) RemoveKey(keyID string) error {
 	return nil
 }
@@ -65,6 +70,10 @@ func (mts *MockCryptoService) GetKey(keyID string) data.PublicKey {
 		return mts.testKey
 	}
 	return nil
+}
+
+func (mts *MockCryptoService) GetPrivateKey(keyID string) (data.PrivateKey, string, error) {
+	return nil, "", errors.New("Not implemented")
 }
 
 func (mts *MockCryptoService) RemoveKey(keyID string) error {
