@@ -328,14 +328,13 @@ func TestECDSAVerifierOtherCurves(t *testing.T) {
 }
 
 func TestECDSAx509Verifier(t *testing.T) {
-	var testECDSAKey data.PrivateKey
 	var jsonKey bytes.Buffer
 
 	// Execute our template
 	templ, _ := template.New("KeyTemplate").Parse(baseECDSAx509Key)
 	templ.Execute(&jsonKey, KeyTemplate{KeyType: data.ECDSAx509Key})
 
-	testECDSAKey, err := data.UnmarshalPrivateKey(jsonKey.Bytes())
+	testECDSAKey, err := data.UnmarshalPublicKey(jsonKey.Bytes())
 	assert.NoError(t, err)
 
 	// Valid signature for message
