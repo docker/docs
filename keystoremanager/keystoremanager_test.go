@@ -220,7 +220,7 @@ func TestValidateSuccessfulRootRotation(t *testing.T) {
 	}
 }
 
-func testValidateSuccessfulRootRotation(t *testing.T, keyAlg string, rootKeyType string) {
+func testValidateSuccessfulRootRotation(t *testing.T, keyAlg, rootKeyType string) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)
@@ -306,7 +306,7 @@ func TestValidateRootRotationMissingOrigSig(t *testing.T) {
 	}
 }
 
-func testValidateRootRotationMissingOrigSig(t *testing.T, keyAlg string, rootKeyType string) {
+func testValidateRootRotationMissingOrigSig(t *testing.T, keyAlg, rootKeyType string) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)
@@ -389,7 +389,7 @@ func TestValidateRootRotationMissingNewSig(t *testing.T) {
 	}
 }
 
-func testValidateRootRotationMissingNewSig(t *testing.T, keyAlg string, rootKeyType string) {
+func testValidateRootRotationMissingNewSig(t *testing.T, keyAlg, rootKeyType string) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)

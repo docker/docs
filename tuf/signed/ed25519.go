@@ -50,7 +50,7 @@ func (e *Ed25519) Sign(keyIDs []string, toSign []byte) ([]data.Signature, error)
 }
 
 // Create generates a new key and returns the public part
-func (e *Ed25519) Create(role string, algorithm string) (data.PublicKey, error) {
+func (e *Ed25519) Create(role, algorithm string) (data.PublicKey, error) {
 	if algorithm != data.ED25519Key {
 		return nil, errors.New("only ED25519 supported by this cryptoservice")
 	}
