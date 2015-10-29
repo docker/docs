@@ -23,7 +23,7 @@ type RSAHardwareCryptoService struct {
 }
 
 // Create creates a key and returns its public components
-func (s *RSAHardwareCryptoService) Create(role string, algo data.KeyAlgorithm) (data.PublicKey, error) {
+func (s *RSAHardwareCryptoService) Create(role, algo string) (data.PublicKey, error) {
 	// For now generate random labels for keys
 	// (diogo): add link between keyID and label in database so we can support multiple keys
 	randomLabel := make([]byte, 32)

@@ -53,7 +53,7 @@ func TestInitRepo(t *testing.T) {
 	}
 }
 
-func testInitRepo(t *testing.T, rootType data.KeyAlgorithm) {
+func testInitRepo(t *testing.T, rootType string) {
 	gun := "docker.com/notary"
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
@@ -67,7 +67,7 @@ func testInitRepo(t *testing.T, rootType data.KeyAlgorithm) {
 	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport, passphraseRetriever)
 	assert.NoError(t, err, "error creating repo: %s", err)
 
-	rootKeyID, err := repo.KeyStoreManager.GenRootKey(rootType.String())
+	rootKeyID, err := repo.KeyStoreManager.GenRootKey(rootType)
 	assert.NoError(t, err, "error generating root key: %s", err)
 
 	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID)
@@ -180,7 +180,7 @@ func TestAddListTarget(t *testing.T) {
 	}
 }
 
-func testAddListTarget(t *testing.T, rootType data.KeyAlgorithm) {
+func testAddListTarget(t *testing.T, rootType string) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)
@@ -195,7 +195,7 @@ func testAddListTarget(t *testing.T, rootType data.KeyAlgorithm) {
 	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport, passphraseRetriever)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
-	rootKeyID, err := repo.KeyStoreManager.GenRootKey(rootType.String())
+	rootKeyID, err := repo.KeyStoreManager.GenRootKey(rootType)
 	assert.NoError(t, err, "error generating root key: %s", err)
 
 	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID)
@@ -298,10 +298,10 @@ func testAddListTarget(t *testing.T, rootType data.KeyAlgorithm) {
 	err = applyChangelist(repo.tufRepo, cl)
 	assert.NoError(t, err, "could not apply changelist")
 
-	var tempKey data.TUFKey
-	json.Unmarshal([]byte(timestampECDSAKeyJSON), &tempKey)
+	tempKey, err := data.UnmarshalPrivateKey([]byte(timestampECDSAKeyJSON))
+	assert.NoError(t, err)
 
-	repo.KeyStoreManager.KeyStore.AddKey(filepath.Join(filepath.FromSlash(gun), tempKey.ID()), "nonroot", &tempKey)
+	repo.KeyStoreManager.KeyStore.AddKey(filepath.Join(filepath.FromSlash(gun), tempKey.ID()), "nonroot", tempKey)
 
 	// Because ListTargets will clear this
 	savedTUFRepo := repo.tufRepo
@@ -373,7 +373,7 @@ func TestValidateRootKey(t *testing.T) {
 	}
 }
 
-func testValidateRootKey(t *testing.T, rootType data.KeyAlgorithm) {
+func testValidateRootKey(t *testing.T, rootType string) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)
@@ -388,7 +388,7 @@ func testValidateRootKey(t *testing.T, rootType data.KeyAlgorithm) {
 	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport, passphraseRetriever)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
-	rootKeyID, err := repo.KeyStoreManager.GenRootKey(rootType.String())
+	rootKeyID, err := repo.KeyStoreManager.GenRootKey(rootType)
 	assert.NoError(t, err, "error generating root key: %s", err)
 
 	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID)
@@ -438,7 +438,7 @@ func TestPublish(t *testing.T) {
 	}
 }
 
-func testPublish(t *testing.T, rootType data.KeyAlgorithm) {
+func testPublish(t *testing.T, rootType string) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)
@@ -471,7 +471,7 @@ func testPublish(t *testing.T, rootType data.KeyAlgorithm) {
 	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport, passphraseRetriever)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
-	rootKeyID, err := repo.KeyStoreManager.GenRootKey(rootType.String())
+	rootKeyID, err := repo.KeyStoreManager.GenRootKey(rootType)
 	assert.NoError(t, err, "error generating root key: %s", err)
 
 	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID)
@@ -660,7 +660,7 @@ func TestRotate(t *testing.T) {
 	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport, passphraseRetriever)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
-	rootKeyID, err := repo.KeyStoreManager.GenRootKey(data.ECDSAKey.String())
+	rootKeyID, err := repo.KeyStoreManager.GenRootKey(data.ECDSAKey)
 	assert.NoError(t, err, "error generating root key: %s", err)
 
 	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID)

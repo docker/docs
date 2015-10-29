@@ -28,7 +28,7 @@ func TestValidateRoot(t *testing.T) {
 	}
 }
 
-func validateRootSuccessfully(t *testing.T, rootType data.KeyAlgorithm) {
+func validateRootSuccessfully(t *testing.T, rootType string) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)
@@ -43,7 +43,7 @@ func validateRootSuccessfully(t *testing.T, rootType data.KeyAlgorithm) {
 	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport, passphraseRetriever)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
-	rootKeyID, err := repo.KeyStoreManager.GenRootKey(rootType.String())
+	rootKeyID, err := repo.KeyStoreManager.GenRootKey(rootType)
 	assert.NoError(t, err, "error generating root key: %s", err)
 
 	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID)
@@ -63,10 +63,10 @@ func validateRootSuccessfully(t *testing.T, rootType data.KeyAlgorithm) {
 
 	// Now test ListTargets. In preparation, we need to expose some signed
 	// metadata files on the internal HTTP server.
-	var tempKey data.TUFKey
-	json.Unmarshal([]byte(timestampECDSAKeyJSON), &tempKey)
+	tempKey, err := data.UnmarshalPrivateKey([]byte(timestampECDSAKeyJSON))
+	assert.NoError(t, err)
 
-	repo.KeyStoreManager.KeyStore.AddKey(filepath.Join(filepath.FromSlash(gun), tempKey.ID()), "root", &tempKey)
+	repo.KeyStoreManager.KeyStore.AddKey(filepath.Join(filepath.FromSlash(gun), tempKey.ID()), "root", tempKey)
 
 	// Because ListTargets will clear this
 	savedTUFRepo := repo.tufRepo

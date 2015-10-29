@@ -220,7 +220,7 @@ func TestValidateSuccessfulRootRotation(t *testing.T) {
 	}
 }
 
-func testValidateSuccessfulRootRotation(t *testing.T, keyAlg data.KeyAlgorithm, rootKeyType data.KeyAlgorithm) {
+func testValidateSuccessfulRootRotation(t *testing.T, keyAlg, rootKeyType string) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)
@@ -233,10 +233,10 @@ func testValidateSuccessfulRootRotation(t *testing.T, keyAlg data.KeyAlgorithm, 
 	keyStoreManager, err := NewKeyStoreManager(tempBaseDir, passphraseRetriever)
 	assert.NoError(t, err)
 
-	origRootKeyID, err := keyStoreManager.GenRootKey(keyAlg.String())
+	origRootKeyID, err := keyStoreManager.GenRootKey(keyAlg)
 	assert.NoError(t, err)
 
-	replRootKeyID, err := keyStoreManager.GenRootKey(keyAlg.String())
+	replRootKeyID, err := keyStoreManager.GenRootKey(keyAlg)
 	assert.NoError(t, err)
 
 	origUnlockedCryptoService, err := keyStoreManager.GetRootCryptoService(origRootKeyID)
@@ -306,7 +306,7 @@ func TestValidateRootRotationMissingOrigSig(t *testing.T) {
 	}
 }
 
-func testValidateRootRotationMissingOrigSig(t *testing.T, keyAlg data.KeyAlgorithm, rootKeyType data.KeyAlgorithm) {
+func testValidateRootRotationMissingOrigSig(t *testing.T, keyAlg, rootKeyType string) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)
@@ -319,10 +319,10 @@ func testValidateRootRotationMissingOrigSig(t *testing.T, keyAlg data.KeyAlgorit
 	keyStoreManager, err := NewKeyStoreManager(tempBaseDir, passphraseRetriever)
 	assert.NoError(t, err)
 
-	origRootKeyID, err := keyStoreManager.GenRootKey(keyAlg.String())
+	origRootKeyID, err := keyStoreManager.GenRootKey(keyAlg)
 	assert.NoError(t, err)
 
-	replRootKeyID, err := keyStoreManager.GenRootKey(keyAlg.String())
+	replRootKeyID, err := keyStoreManager.GenRootKey(keyAlg)
 	assert.NoError(t, err)
 
 	origUnlockedCryptoService, err := keyStoreManager.GetRootCryptoService(origRootKeyID)
@@ -389,7 +389,7 @@ func TestValidateRootRotationMissingNewSig(t *testing.T) {
 	}
 }
 
-func testValidateRootRotationMissingNewSig(t *testing.T, keyAlg data.KeyAlgorithm, rootKeyType data.KeyAlgorithm) {
+func testValidateRootRotationMissingNewSig(t *testing.T, keyAlg, rootKeyType string) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)
@@ -402,10 +402,10 @@ func testValidateRootRotationMissingNewSig(t *testing.T, keyAlg data.KeyAlgorith
 	keyStoreManager, err := NewKeyStoreManager(tempBaseDir, passphraseRetriever)
 	assert.NoError(t, err)
 
-	origRootKeyID, err := keyStoreManager.GenRootKey(keyAlg.String())
+	origRootKeyID, err := keyStoreManager.GenRootKey(keyAlg)
 	assert.NoError(t, err)
 
-	replRootKeyID, err := keyStoreManager.GenRootKey(keyAlg.String())
+	replRootKeyID, err := keyStoreManager.GenRootKey(keyAlg)
 	assert.NoError(t, err)
 
 	origUnlockedCryptoService, err := keyStoreManager.GetRootCryptoService(origRootKeyID)

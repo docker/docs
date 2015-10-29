@@ -192,7 +192,7 @@ func GetTimestampKeyHandler(ctx context.Context, w http.ResponseWriter, r *http.
 		logger.Error("500 GET key algorithm not configured")
 		return errors.ErrNoKeyAlgorithm.WithDetail(nil)
 	}
-	keyAlgorithm := data.KeyAlgorithm(keyAlgo)
+	keyAlgorithm := keyAlgo
 
 	key, err := timestamp.GetOrCreateTimestampKey(gun, store, crypto, keyAlgorithm)
 	if err != nil {

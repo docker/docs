@@ -142,7 +142,7 @@ func TestUpdateDelegations(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	err = repo.UpdateDelegations(role, []data.Key{testKey}, "")
+	err = repo.UpdateDelegations(role, data.KeyList{testKey}, "")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -156,7 +156,7 @@ func TestUpdateDelegations(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	err = repo.UpdateDelegations(roleDeep, []data.Key{testDeepKey}, "")
+	err = repo.UpdateDelegations(roleDeep, data.KeyList{testDeepKey}, "")
 	if err != nil {
 		t.Fatal(err)
 	}

@@ -29,7 +29,7 @@ func (mts *FailingCryptoService) Sign(keyIDs []string, _ []byte) ([]data.Signatu
 	return sigs, nil
 }
 
-func (mts *FailingCryptoService) Create(_ string, _ data.KeyAlgorithm) (data.PublicKey, error) {
+func (mts *FailingCryptoService) Create(_, _ string) (data.PublicKey, error) {
 	return mts.testKey, nil
 }
 
@@ -56,7 +56,7 @@ func (mts *MockCryptoService) Sign(keyIDs []string, _ []byte) ([]data.Signature,
 	return sigs, nil
 }
 
-func (mts *MockCryptoService) Create(_ string, _ data.KeyAlgorithm) (data.PublicKey, error) {
+func (mts *MockCryptoService) Create(_ string, _ string) (data.PublicKey, error) {
 	return mts.testKey, nil
 }
 

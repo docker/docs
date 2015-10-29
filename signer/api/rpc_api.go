@@ -6,7 +6,6 @@ import (
 	ctxu "github.com/docker/distribution/context"
 	"github.com/docker/notary/signer"
 	"github.com/docker/notary/signer/keys"
-	"github.com/docker/notary/tuf/data"
 	"golang.org/x/net/context"
 
 	"google.golang.org/grpc"
@@ -29,7 +28,7 @@ type SignerServer struct {
 
 //CreateKey returns a PublicKey created using KeyManagementServer's SigningService
 func (s *KeyManagementServer) CreateKey(ctx context.Context, algorithm *pb.Algorithm) (*pb.PublicKey, error) {
-	keyAlgo := data.KeyAlgorithm(algorithm.Algorithm)
+	keyAlgo := algorithm.Algorithm
 
 	service := s.CryptoServices[keyAlgo]
 
@@ -49,7 +48,7 @@ func (s *KeyManagementServer) CreateKey(ctx context.Context, algorithm *pb.Algor
 	return &pb.PublicKey{
 		KeyInfo: &pb.KeyInfo{
 			KeyID:     &pb.KeyID{ID: tufKey.ID()},
-			Algorithm: &pb.Algorithm{Algorithm: tufKey.Algorithm().String()},
+			Algorithm: &pb.Algorithm{Algorithm: tufKey.Algorithm()},
 		},
 		PublicKey: tufKey.Public(),
 	}, nil
@@ -102,7 +101,7 @@ func (s *KeyManagementServer) GetKeyInfo(ctx context.Context, keyID *pb.KeyID) (
 	return &pb.PublicKey{
 		KeyInfo: &pb.KeyInfo{
 			KeyID:     &pb.KeyID{ID: tufKey.ID()},
-			Algorithm: &pb.Algorithm{Algorithm: tufKey.Algorithm().String()},
+			Algorithm: &pb.Algorithm{Algorithm: tufKey.Algorithm()},
 		},
 		PublicKey: tufKey.Public(),
 	}, nil
@@ -137,7 +136,7 @@ func (s *SignerServer) Sign(ctx context.Context, sr *pb.SignatureRequest) (*pb.S
 	signature := &pb.Signature{
 		KeyInfo: &pb.KeyInfo{
 			KeyID:     &pb.KeyID{ID: tufKey.ID()},
-			Algorithm: &pb.Algorithm{Algorithm: tufKey.Algorithm().String()},
+			Algorithm: &pb.Algorithm{Algorithm: tufKey.Algorithm()},
 		},
 		Algorithm: &pb.Algorithm{Algorithm: signatures[0].Method.String()},
 		Content:   signatures[0].Signature,

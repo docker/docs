@@ -19,7 +19,7 @@ func TestCryptoService(t *testing.T) {
 
 var passphraseRetriever = func(string, string, bool, int) (string, bool, error) { return "", false, nil }
 
-func testCryptoService(t *testing.T, keyAlgo data.KeyAlgorithm, verifier signed.Verifier) {
+func testCryptoService(t *testing.T, keyAlgo string, verifier signed.Verifier) {
 	content := []byte("this is a secret")
 
 	keyStore := trustmanager.NewKeyMemoryStore(passphraseRetriever)

@@ -6,7 +6,6 @@ import (
 
 	"github.com/docker/notary/signer"
 	"github.com/docker/notary/signer/keys"
-	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/gorilla/mux"
 
@@ -34,7 +33,7 @@ func getCryptoService(w http.ResponseWriter, algorithm string, cryptoServices si
 		return nil
 	}
 
-	service := cryptoServices[data.KeyAlgorithm(algorithm)]
+	service := cryptoServices[algorithm]
 
 	if service == nil {
 		http.Error(w, "algorithm "+algorithm+" not supported", http.StatusBadRequest)
@@ -67,7 +66,7 @@ func KeyInfo(cryptoServices signer.CryptoServiceIndex) http.Handler {
 		key := &pb.PublicKey{
 			KeyInfo: &pb.KeyInfo{
 				KeyID:     &pb.KeyID{ID: tufKey.ID()},
-				Algorithm: &pb.Algorithm{Algorithm: tufKey.Algorithm().String()},
+				Algorithm: &pb.Algorithm{Algorithm: tufKey.Algorithm()},
 			},
 			PublicKey: tufKey.Public(),
 		}
@@ -86,7 +85,7 @@ func CreateKey(cryptoServices signer.CryptoServiceIndex) http.Handler {
 			return
 		}
 
-		tufKey, err := cryptoService.Create("", data.KeyAlgorithm(vars["Algorithm"]))
+		tufKey, err := cryptoService.Create("", vars["Algorithm"])
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			w.Write([]byte(err.Error()))
@@ -95,7 +94,7 @@ func CreateKey(cryptoServices signer.CryptoServiceIndex) http.Handler {
 		key := &pb.PublicKey{
 			KeyInfo: &pb.KeyInfo{
 				KeyID:     &pb.KeyID{ID: tufKey.ID()},
-				Algorithm: &pb.Algorithm{Algorithm: tufKey.Algorithm().String()},
+				Algorithm: &pb.Algorithm{Algorithm: tufKey.Algorithm()},
 			},
 			PublicKey: tufKey.Public(),
 		}
@@ -188,7 +187,7 @@ func Sign(cryptoServices signer.CryptoServiceIndex) http.Handler {
 		signature := &pb.Signature{
 			KeyInfo: &pb.KeyInfo{
 				KeyID:     &pb.KeyID{ID: tufKey.ID()},
-				Algorithm: &pb.Algorithm{Algorithm: tufKey.Algorithm().String()},
+				Algorithm: &pb.Algorithm{Algorithm: tufKey.Algorithm()},
 			},
 			Content: signatures[0].Signature,
 		}

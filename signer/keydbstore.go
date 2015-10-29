@@ -77,7 +77,7 @@ func (s *KeyDBStore) AddKey(name, alias string, privKey data.PrivateKey) error {
 		EncryptionAlg:   EncryptionAlg,
 		KeywrapAlg:      KeywrapAlg,
 		PassphraseAlias: s.defaultPassAlias,
-		Algorithm:       privKey.Algorithm().String(),
+		Algorithm:       privKey.Algorithm(),
 		Public:          string(privKey.Public()),
 		Private:         encryptedKey}
 
@@ -124,8 +124,9 @@ func (s *KeyDBStore) GetKey(name string) (data.PrivateKey, string, error) {
 		return nil, "", err
 	}
 
+	pubKey := data.NewPublicKey(dbPrivateKey.Algorithm, []byte(dbPrivateKey.Public))
 	// Create a new PrivateKey with unencrypted bytes
-	privKey := data.NewPrivateKey(data.KeyAlgorithm(dbPrivateKey.Algorithm), []byte(dbPrivateKey.Public), []byte(decryptedPrivKey))
+	privKey := data.NewPrivateKey(pubKey, []byte(decryptedPrivKey))
 
 	// Add the key to cache
 	s.cachedKeys[privKey.ID()] = privKey

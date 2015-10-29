@@ -14,13 +14,6 @@ import (
 	"github.com/jfrazelle/go/canonical/json"
 )
 
-// KeyAlgorithm for types of keys
-type KeyAlgorithm string
-
-func (k KeyAlgorithm) String() string {
-	return string(k)
-}
-
 // SigAlgorithm for types of signatures
 type SigAlgorithm string
 
@@ -41,11 +34,11 @@ const (
 
 // Key types
 const (
-	ED25519Key   KeyAlgorithm = "ed25519"
-	RSAKey       KeyAlgorithm = "rsa"
-	RSAx509Key   KeyAlgorithm = "rsa-x509"
-	ECDSAKey     KeyAlgorithm = "ecdsa"
-	ECDSAx509Key KeyAlgorithm = "ecdsa-x509"
+	ED25519Key   = "ed25519"
+	RSAKey       = "rsa"
+	RSAx509Key   = "rsa-x509"
+	ECDSAKey     = "ecdsa"
+	ECDSAx509Key = "ecdsa-x509"
 )
 
 // TUFTypes is the set of metadata types
@@ -167,8 +160,8 @@ func NewFileMeta(r io.Reader, hashAlgorithms ...string) (FileMeta, error) {
 
 // Delegations holds a tier of targets delegations
 type Delegations struct {
-	Keys  map[string]PublicKey `json:"keys"`
-	Roles []*Role              `json:"roles"`
+	Keys  Keys    `json:"keys"`
+	Roles []*Role `json:"roles"`
 }
 
 // NewDelegations initializes an empty Delegations object

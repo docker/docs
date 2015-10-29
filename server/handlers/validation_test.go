@@ -239,7 +239,7 @@ func TestValidateRootRotation(t *testing.T) {
 	delete(repo.Root.Signed.Keys, oldRootRole.KeyIDs[0])
 
 	repo.Root.Signed.Roles["root"] = &rootRole.RootRole
-	repo.Root.Signed.Keys[rootKey.ID()] = data.NewPrivateKey(rootKey.Algorithm(), rootKey.Public(), nil)
+	repo.Root.Signed.Keys[rootKey.ID()] = rootKey
 
 	r, err = repo.SignRoot(data.DefaultExpires(data.CanonicalRootRole), nil)
 	assert.NoError(t, err)
