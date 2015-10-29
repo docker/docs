@@ -86,16 +86,20 @@ func (ccs *CryptoService) RemoveKey(keyID string) error {
 func (ccs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signature, error) {
 	signatures := make([]data.Signature, 0, len(keyIDs))
 	for _, keyid := range keyIDs {
-		// ccs.gun will be empty if this is the root key
-		keyName := filepath.Join(ccs.gun, keyid)
-
-		var privKey data.PrivateKey
-		var err error
+		var (
+			privKey data.PrivateKey
+			err     error
+			keyName = keyid
+		)
 
 		privKey, _, err = ccs.keyStore.GetKey(keyName)
 		if err != nil {
-			logrus.Debugf("error attempting to retrieve key ID: %s, %v", keyid, err)
-			return nil, err
+			keyName := filepath.Join(ccs.gun, keyid)
+			privKey, _, err = ccs.keyStore.GetKey(keyName)
+			if err != nil {
+				logrus.Debugf("error attempting to retrieve key ID: %s, %v", keyid, err)
+				return nil, err
+			}
 		}
 
 		algorithm := privKey.Algorithm()

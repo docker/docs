@@ -46,10 +46,7 @@ func validateRootSuccessfully(t *testing.T, rootType string) {
 	rootKeyID, err := repo.KeyStoreManager.GenRootKey(rootType)
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID)
-	assert.NoError(t, err, "error retrieving root key: %s", err)
-
-	err = repo.Initialize(rootCryptoService)
+	err = repo.Initialize(rootKeyID)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
 	// tests need to manually boostrap timestamp as client doesn't generate it
