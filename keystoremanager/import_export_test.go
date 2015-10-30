@@ -60,7 +60,6 @@ func TestImportExportZip(t *testing.T) {
 	rootKeyID, err := repo.KeyStoreManager.GenRootKey(data.ECDSAKey)
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	fmt.Println(rootKeyID)
 	err = repo.Initialize(rootKeyID)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
