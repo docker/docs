@@ -68,7 +68,7 @@ type NotaryRepository struct {
 	baseURL         string
 	tufRepoPath     string
 	fileStore       store.MetadataStore
-	cryptoService   signed.CryptoService
+	CryptoService   signed.CryptoService
 	tufRepo         *tuf.Repo
 	roundTrip       http.RoundTripper
 	KeyStoreManager *keystoremanager.KeyStoreManager
@@ -115,7 +115,7 @@ func NewNotaryRepository(baseDir, gun, baseURL string, rt http.RoundTripper,
 		baseDir:         baseDir,
 		baseURL:         baseURL,
 		tufRepoPath:     filepath.Join(baseDir, tufDir, filepath.FromSlash(gun)),
-		cryptoService:   cryptoService,
+		CryptoService:   cryptoService,
 		roundTrip:       rt,
 		KeyStoreManager: keyStoreManager,
 	}
@@ -137,7 +137,7 @@ func NewNotaryRepository(baseDir, gun, baseURL string, rt http.RoundTripper,
 // Initialize creates a new repository by using rootKey as the root Key for the
 // TUF repository.
 func (r *NotaryRepository) Initialize(rootKeyID string) error {
-	privKey, _, err := r.cryptoService.GetPrivateKey(rootKeyID)
+	privKey, _, err := r.CryptoService.GetPrivateKey(rootKeyID)
 	if err != nil {
 		return err
 	}
@@ -183,11 +183,11 @@ func (r *NotaryRepository) Initialize(rootKeyID string) error {
 
 	// This is currently hardcoding the targets and snapshots keys to ECDSA
 	// Targets and snapshot keys are always generated locally.
-	targetsKey, err := r.cryptoService.Create("targets", data.ECDSAKey)
+	targetsKey, err := r.CryptoService.Create("targets", data.ECDSAKey)
 	if err != nil {
 		return err
 	}
-	snapshotKey, err := r.cryptoService.Create("snapshot", data.ECDSAKey)
+	snapshotKey, err := r.CryptoService.Create("snapshot", data.ECDSAKey)
 	if err != nil {
 		return err
 	}
@@ -204,7 +204,7 @@ func (r *NotaryRepository) Initialize(rootKeyID string) error {
 		return err
 	}
 
-	r.tufRepo = tuf.NewRepo(kdb, r.cryptoService)
+	r.tufRepo = tuf.NewRepo(kdb, r.CryptoService)
 
 	err = r.tufRepo.InitRoot(false)
 	if err != nil {
@@ -446,7 +446,7 @@ func (r *NotaryRepository) Publish() error {
 
 func (r *NotaryRepository) bootstrapRepo() error {
 	kdb := keys.NewDB()
-	tufRepo := tuf.NewRepo(kdb, r.cryptoService)
+	tufRepo := tuf.NewRepo(kdb, r.CryptoService)
 
 	logrus.Debugf("Loading trusted collection.")
 	rootJSON, err := r.fileStore.GetMeta("root", 0)
@@ -573,7 +573,7 @@ func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
 	}
 
 	kdb := keys.NewDB()
-	r.tufRepo = tuf.NewRepo(kdb, r.cryptoService)
+	r.tufRepo = tuf.NewRepo(kdb, r.CryptoService)
 
 	signedRoot, err := data.RootFromSigned(root)
 	if err != nil {
@@ -597,7 +597,7 @@ func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
 // in a changelist until publish is called.
 func (r *NotaryRepository) RotateKeys() error {
 	for _, role := range []string{"targets", "snapshot"} {
-		key, err := r.cryptoService.Create(role, data.ECDSAKey)
+		key, err := r.CryptoService.Create(role, data.ECDSAKey)
 		if err != nil {
 			return err
 		}
