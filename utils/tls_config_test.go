@@ -31,7 +31,7 @@ func generateMultiCert(t *testing.T) string {
 
 	rsaKey, err := rsa.GenerateKey(rand.Reader, 2048)
 	assert.NoError(t, err)
-	ecKey, err := ecdsa.GenerateKey(elliptic.P224(), rand.Reader)
+	ecKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
 	assert.NoError(t, err)
 	template, err := trustmanager.NewCertificate("gun")
 	assert.NoError(t, err)
