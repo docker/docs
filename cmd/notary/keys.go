@@ -26,7 +26,7 @@ func init() {
 	cmdKeyExport.Flags().StringVarP(&keysExportGUN, "gun", "g", "", "Globally unique name to export keys for")
 	cmdKey.AddCommand(cmdKeyExport)
 	cmdKey.AddCommand(cmdKeyExportRoot)
-	cmdKeyExportRoot.Flags().BoolVarP(&keysExportRootChangePassphrase, "change-passphrase", "c", false, "set a new passphrase for the key being exported")
+	cmdKeyExportRoot.Flags().BoolVarP(&keysExportRootChangePassphrase, "change-passphrase", "p", false, "set a new passphrase for the key being exported")
 	cmdKey.AddCommand(cmdKeyImport)
 	cmdKey.AddCommand(cmdKeyImportRoot)
 	cmdKey.AddCommand(cmdRotateKey)
