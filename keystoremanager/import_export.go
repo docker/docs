@@ -101,10 +101,9 @@ func checkRootKeyIsEncrypted(pemBytes []byte) error {
 }
 
 // ImportRootKey imports a root in PEM format key from an io.Reader
-// The key's existing encryption is preserved. The keyID parameter is
-// necessary because otherwise we'd need the passphrase to decrypt the key
-// in order to compute the ID.
-func (km *KeyStoreManager) ImportRootKey(source io.Reader, keyID string) error {
+// It prompts for the key's passphrase to verify the data and to determine
+// the key ID.
+func (km *KeyStoreManager) ImportRootKey(source io.Reader) error {
 	pemBytes, err := ioutil.ReadAll(source)
 	if err != nil {
 		return err
