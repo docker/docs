@@ -60,7 +60,11 @@ func (e *Ed25519) Create(role, algorithm string) (data.PublicKey, error) {
 		return nil, err
 	}
 	public := data.NewED25519PublicKey(pub[:])
-	private := data.NewED25519PrivateKey(*public, priv[:])
+	private, err := data.NewED25519PrivateKey(*public, priv[:])
+	if err != nil {
+		return nil, err
+	}
+
 	e.addKey(private)
 	return public, nil
 }
