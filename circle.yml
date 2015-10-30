@@ -2,12 +2,15 @@ machine:
   services:
     - docker
 
+general:
+    artifacts:
+      - "dist"
+
 dependencies:
   cache_directories:
     - "~/docker"
 
   override:
-    - mkdir -p ~/docker
     - if [[ -e ~/docker/osx-installer.tar ]]; then docker load -i ~/docker/osx-installer.tar; fi
     - if [[ -e ~/docker/windows-installer.tar ]]; then docker load -i ~/docker/windows-installer.tar; fi
 
