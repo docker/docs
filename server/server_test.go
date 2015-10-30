@@ -2,11 +2,14 @@ package server
 
 import (
 	"net"
+	"net/http"
+	"net/http/httptest"
 	"strings"
 	"testing"
 
 	_ "github.com/docker/distribution/registry/auth/silly"
 	"github.com/docker/notary/tuf/signed"
+	"github.com/stretchr/testify/assert"
 	"golang.org/x/net/context"
 )
 
@@ -42,4 +45,14 @@ func TestRunReservedPort(t *testing.T) {
 	if !strings.Contains(err.Error(), "bind: permission denied") {
 		t.Fatalf("Received unexpected err: %s", err.Error())
 	}
+}
+
+func TestMetricsEndpoint(t *testing.T) {
+	handler := RootHandler(nil, context.Background(), signed.NewEd25519())
+	ts := httptest.NewServer(handler)
+	defer ts.Close()
+
+	res, err := http.Get(ts.URL + "/_notary_server/metrics")
+	assert.NoError(t, err)
+	assert.Equal(t, http.StatusOK, res.StatusCode)
 }
