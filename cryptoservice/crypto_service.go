@@ -1,17 +1,11 @@
 package cryptoservice
 
 import (
-	"crypto"
-	"crypto/ecdsa"
 	"crypto/rand"
-	"crypto/rsa"
-	"crypto/sha256"
-	"crypto/x509"
 	"fmt"
 	"path/filepath"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/agl/ed25519"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
 )
@@ -91,18 +85,14 @@ func (ccs *CryptoService) RemoveKey(keyID string) error {
 func (ccs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signature, error) {
 	signatures := make([]data.Signature, 0, len(keyIDs))
 	for _, keyid := range keyIDs {
-		var (
-			privKey data.PrivateKey
-			err     error
-			keyName = keyid
-		)
+		keyName := keyid
 
 		// Try to get the key first without a GUN (in which case it's a root
 		// key).  If that fails, try to get the key with the GUN (non-root
 		// key).  If that fails, then we don't have the key.
-		privKey, _, err = ccs.keyStore.GetKey(keyName)
+		privKey, _, err := ccs.keyStore.GetKey(keyName)
 		if err != nil {
-			keyName := filepath.Join(ccs.gun, keyid)
+			keyName = filepath.Join(ccs.gun, keyid)
 			privKey, _, err = ccs.keyStore.GetKey(keyName)
 			if err != nil {
 				logrus.Debugf("error attempting to retrieve key ID: %s, %v", keyid, err)
@@ -110,28 +100,23 @@ func (ccs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signatur
 			}
 		}
 
-		algorithm := privKey.Algorithm()
 		var sigAlgorithm data.SigAlgorithm
-		var sig []byte
 
-		switch algorithm {
-		case data.RSAKey:
-			sig, err = rsaSign(privKey, payload)
+		switch privKey.(type) {
+		case *data.RSAPrivateKey:
 			sigAlgorithm = data.RSAPSSSignature
-		case data.ECDSAKey:
-			sig, err = ecdsaSign(privKey, payload)
+		case *data.ECDSAPrivateKey:
 			sigAlgorithm = data.ECDSASignature
-		case data.ED25519Key:
-			// ED25519 does not operate on a SHA256 hash
-			sig, err = ed25519Sign(privKey, payload)
+		case *data.ED25519PrivateKey:
 			sigAlgorithm = data.EDDSASignature
 		}
+		sig, err := privKey.Sign(rand.Reader, payload, nil)
 		if err != nil {
-			logrus.Debugf("ignoring error attempting to %s sign with keyID: %s, %v", algorithm, keyid, err)
+			logrus.Debugf("ignoring error attempting to %s sign with keyID: %s, %v", privKey.Algorithm(), keyid, err)
 			return nil, err
 		}
 
-		logrus.Debugf("appending %s signature with Key ID: %s", algorithm, keyid)
+		logrus.Debugf("appending %s signature with Key ID: %s", privKey.Algorithm(), keyid)
 
 		// Append signatures to result array
 		signatures = append(signatures, data.Signature{
@@ -142,70 +127,4 @@ func (ccs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signatur
 	}
 
 	return signatures, nil
-}
-
-func rsaSign(privKey data.PrivateKey, message []byte) ([]byte, error) {
-	if privKey.Algorithm() != data.RSAKey {
-		return nil, fmt.Errorf("private key type not supported: %s", privKey.Algorithm())
-	}
-
-	hashed := sha256.Sum256(message)
-
-	// Create an rsa.PrivateKey out of the private key bytes
-	rsaPrivKey, err := x509.ParsePKCS1PrivateKey(privKey.Private())
-	if err != nil {
-		return nil, err
-	}
-
-	// Use the RSA key to RSASSA-PSS sign the data
-	sig, err := rsa.SignPSS(rand.Reader, rsaPrivKey, crypto.SHA256, hashed[:], &rsa.PSSOptions{SaltLength: rsa.PSSSaltLengthEqualsHash})
-	if err != nil {
-		return nil, err
-	}
-
-	return sig, nil
-}
-
-func ecdsaSign(privKey data.PrivateKey, message []byte) ([]byte, error) {
-	if privKey.Algorithm() != data.ECDSAKey {
-		return nil, fmt.Errorf("private key type not supported: %s", privKey.Algorithm())
-	}
-
-	hashed := sha256.Sum256(message)
-
-	// Create an ecdsa.PrivateKey out of the private key bytes
-	ecdsaPrivKey, err := x509.ParseECPrivateKey(privKey.Private())
-	if err != nil {
-		return nil, err
-	}
-
-	// Use the ECDSA key to sign the data
-	r, s, err := ecdsa.Sign(rand.Reader, ecdsaPrivKey, hashed[:])
-	if err != nil {
-		return nil, err
-	}
-
-	rBytes, sBytes := r.Bytes(), s.Bytes()
-	octetLength := (ecdsaPrivKey.Params().BitSize + 7) >> 3
-
-	// MUST include leading zeros in the output
-	rBuf := make([]byte, octetLength-len(rBytes), octetLength)
-	sBuf := make([]byte, octetLength-len(sBytes), octetLength)
-
-	rBuf = append(rBuf, rBytes...)
-	sBuf = append(sBuf, sBytes...)
-
-	return append(rBuf, sBuf...), nil
-}
-
-func ed25519Sign(privKey data.PrivateKey, message []byte) ([]byte, error) {
-	if privKey.Algorithm() != data.ED25519Key {
-		return nil, fmt.Errorf("private key type not supported: %s", privKey.Algorithm())
-	}
-
-	priv := [ed25519.PrivateKeySize]byte{}
-	copy(priv[:], privKey.Private()[ed25519.PublicKeySize:])
-	sig := ed25519.Sign(&priv, message)
-
-	return sig[:], nil
 }

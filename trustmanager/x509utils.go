@@ -325,7 +325,7 @@ func RSAToPrivateKey(rsaPrivKey *rsa.PrivateKey) (data.PrivateKey, error) {
 	rsaPrivBytes := x509.MarshalPKCS1PrivateKey(rsaPrivKey)
 
 	pubKey := data.NewRSAPublicKey(rsaPubBytes)
-	return data.NewRSAPrivateKey(*pubKey, rsaPrivBytes), nil
+	return data.NewRSAPrivateKey(pubKey, rsaPrivBytes)
 }
 
 // GenerateECDSAKey generates an ECDSA Private key and returns a TUF PrivateKey
@@ -383,7 +383,7 @@ func ECDSAToPrivateKey(ecdsaPrivKey *ecdsa.PrivateKey) (data.PrivateKey, error) 
 	}
 
 	pubKey := data.NewECDSAPublicKey(ecdsaPubBytes)
-	return data.NewECDSAPrivateKey(*pubKey, ecdsaPrivKeyBytes), nil
+	return data.NewECDSAPrivateKey(pubKey, ecdsaPrivKeyBytes)
 }
 
 // ED25519ToPrivateKey converts a serialized ED25519 key to a TUF
@@ -394,7 +394,7 @@ func ED25519ToPrivateKey(privKeyBytes []byte) (data.PrivateKey, error) {
 	}
 
 	pubKey := data.NewED25519PublicKey(privKeyBytes[:ed25519.PublicKeySize])
-	return data.NewED25519PrivateKey(*pubKey, privKeyBytes), nil
+	return data.NewED25519PrivateKey(*pubKey, privKeyBytes)
 }
 
 func blockType(k data.PrivateKey) (string, error) {

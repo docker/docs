@@ -35,7 +35,7 @@ func testCryptoService(t *testing.T, keyAlgo string, verifier signed.Verifier) {
 	assert.Len(t, signatures, 1, "wrong number of signatures")
 
 	err = verifier.Verify(tufKey, signatures[0].Signature, content)
-	assert.NoError(t, err, "verification failed")
+	assert.NoError(t, err, "verification failed for %s key type", keyAlgo)
 
 	// Test GetKey
 	retrievedKey := cryptoService.GetKey(tufKey.ID())

@@ -307,7 +307,8 @@ func TestECDSAVerifierOtherCurves(t *testing.T) {
 		assert.NoError(t, err, "failed to marshal private key")
 
 		testECDSAPubKey := data.NewECDSAPublicKey(ecdsaPubBytes)
-		testECDSAKey := data.NewECDSAPrivateKey(*testECDSAPubKey, ecdsaPrivKeyBytes)
+		testECDSAKey, err := data.NewECDSAPrivateKey(testECDSAPubKey, ecdsaPrivKeyBytes)
+		assert.NoError(t, err, "failed to read private key")
 
 		// Sign some data using ECDSA
 		message := []byte("test data for signing")

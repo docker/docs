@@ -126,7 +126,10 @@ func (s *KeyDBStore) GetKey(name string) (data.PrivateKey, string, error) {
 
 	pubKey := data.NewPublicKey(dbPrivateKey.Algorithm, []byte(dbPrivateKey.Public))
 	// Create a new PrivateKey with unencrypted bytes
-	privKey := data.NewPrivateKey(pubKey, []byte(decryptedPrivKey))
+	privKey, err := data.NewPrivateKey(pubKey, []byte(decryptedPrivKey))
+	if err != nil {
+		return nil, "", err
+	}
 
 	// Add the key to cache
 	s.cachedKeys[privKey.ID()] = privKey

@@ -3,6 +3,7 @@ package data
 import (
 	"crypto"
 	"crypto/ecdsa"
+	"crypto/rsa"
 	"crypto/sha256"
 	"crypto/x509"
 	"encoding/asn1"
@@ -28,6 +29,7 @@ type PrivateKey interface {
 	PublicKey
 	Sign(rand io.Reader, msg []byte, opts crypto.SignerOpts) (signature []byte, err error)
 	Private() []byte
+	CryptoSigner() crypto.Signer
 }
 
 // KeyPair holds the public and private key bytes
@@ -90,34 +92,34 @@ func typedPublicKey(tk tufKey) PublicKey {
 	return &UnknownPublicKey{tufKey: tk}
 }
 
-func typedPrivateKey(tk tufKey) PrivateKey {
+func typedPrivateKey(tk tufKey) (PrivateKey, error) {
 	private := tk.Value.Private
 	tk.Value.Private = nil
 	switch tk.Algorithm() {
 	case ECDSAKey:
 		return NewECDSAPrivateKey(
-			ECDSAPublicKey{
+			&ECDSAPublicKey{
 				tufKey: tk,
 			},
 			private,
 		)
 	case ECDSAx509Key:
-		return NewECDSAx509PrivateKey(
-			ECDSAx509PublicKey{
+		return NewECDSAPrivateKey(
+			&ECDSAx509PublicKey{
 				tufKey: tk,
 			},
 			private,
 		)
 	case RSAKey:
 		return NewRSAPrivateKey(
-			RSAPublicKey{
+			&RSAPublicKey{
 				tufKey: tk,
 			},
 			private,
 		)
 	case RSAx509Key:
-		return NewRSAx509PrivateKey(
-			RSAx509PublicKey{
+		return NewRSAPrivateKey(
+			&RSAx509PublicKey{
 				tufKey: tk,
 			},
 			private,
@@ -133,7 +135,7 @@ func typedPrivateKey(tk tufKey) PrivateKey {
 	return &UnknownPrivateKey{
 		tufKey:     tk,
 		privateKey: privateKey{private: private},
-	}
+	}, nil
 }
 
 // NewPublicKey creates a new, correctly typed PublicKey, using the
@@ -150,7 +152,7 @@ func NewPublicKey(alg string, public []byte) PublicKey {
 
 // NewPrivateKey creates a new, correctly typed PrivateKey, using the
 // UnknownPrivateKey catchall for unsupported ciphers
-func NewPrivateKey(pubKey PublicKey, private []byte) PrivateKey {
+func NewPrivateKey(pubKey PublicKey, private []byte) (PrivateKey, error) {
 	tk := tufKey{
 		Type: pubKey.Algorithm(),
 		Value: KeyPair{
@@ -178,7 +180,7 @@ func UnmarshalPrivateKey(data []byte) (PrivateKey, error) {
 	if err != nil {
 		return nil, err
 	}
-	return typedPrivateKey(parsed), nil
+	return typedPrivateKey(parsed)
 }
 
 // tufKey is the structure used for both public and private keys in TUF.
@@ -329,34 +331,22 @@ type privateKey struct {
 	private []byte
 }
 
-// ECDSAPrivateKey represents a private ECDSA key
-type ECDSAPrivateKey struct {
-	ECDSAPublicKey
-	privateKey
-	Signer crypto.Signer
+type signer struct {
+	signer crypto.Signer
 }
 
-// ECDSAx509PrivateKey represents a private ECDSA key where the public
-// component is serialized into an x509 cert
-type ECDSAx509PrivateKey struct {
-	ECDSAx509PublicKey
+// ECDSAPrivateKey represents a private ECDSA key
+type ECDSAPrivateKey struct {
+	PublicKey
 	privateKey
-	Signer crypto.Signer
+	signer
 }
 
 // RSAPrivateKey represents a private RSA key
 type RSAPrivateKey struct {
-	RSAPublicKey
+	PublicKey
 	privateKey
-	Signer crypto.Signer
-}
-
-// RSAx509PrivateKey represents a private RSA key where the public
-// component is serialized into an x509 cert
-type RSAx509PrivateKey struct {
-	RSAx509PublicKey
-	privateKey
-	Signer crypto.Signer
+	signer
 }
 
 // ED25519PrivateKey represents a private ED25519 key
@@ -372,68 +362,68 @@ type UnknownPrivateKey struct {
 }
 
 // NewECDSAPrivateKey initializes a new ECDSA private key
-func NewECDSAPrivateKey(public ECDSAPublicKey, private []byte) *ECDSAPrivateKey {
+func NewECDSAPrivateKey(public PublicKey, private []byte) (*ECDSAPrivateKey, error) {
+	switch public.(type) {
+	case *ECDSAPublicKey, *ECDSAx509PublicKey:
+	default:
+		return nil, errors.New("Invalid public key type provided to NewECDSAPrivateKey")
+	}
 	ecdsaPrivKey, err := x509.ParseECPrivateKey(private)
 	if err != nil {
-		return nil
+		return nil, err
 	}
 	return &ECDSAPrivateKey{
-		ECDSAPublicKey: public,
-		privateKey:     privateKey{private: private},
-		Signer:         ecdsaPrivKey,
-	}
-}
-
-// NewECDSAx509PrivateKey initializes a new ECDSA private key
-func NewECDSAx509PrivateKey(public ECDSAx509PublicKey, private []byte) *ECDSAx509PrivateKey {
-	ecdsaPrivKey, err := x509.ParseECPrivateKey(private)
-	if err != nil {
-		return nil
-	}
-	return &ECDSAx509PrivateKey{
-		ECDSAx509PublicKey: public,
-		privateKey:         privateKey{private: private},
-		Signer:             ecdsaPrivKey,
-	}
+		PublicKey:  public,
+		privateKey: privateKey{private: private},
+		signer:     signer{signer: ecdsaPrivKey},
+	}, nil
 }
 
 // NewRSAPrivateKey initialized a new RSA private key
-func NewRSAPrivateKey(public RSAPublicKey, private []byte) *RSAPrivateKey {
+func NewRSAPrivateKey(public PublicKey, private []byte) (*RSAPrivateKey, error) {
+	switch public.(type) {
+	case *RSAPublicKey, *RSAx509PublicKey:
+	default:
+		return nil, errors.New("Invalid public key type provided to NewRSAPrivateKey")
+	}
 	rsaPrivKey, err := x509.ParsePKCS1PrivateKey(private)
 	if err != nil {
-		return nil
+		return nil, err
 	}
 	return &RSAPrivateKey{
-		RSAPublicKey: public,
-		privateKey:   privateKey{private: private},
-		Signer:       rsaPrivKey,
-	}
-}
-
-// NewRSAx509PrivateKey initialized a new RSA private key
-func NewRSAx509PrivateKey(public RSAx509PublicKey, private []byte) *RSAx509PrivateKey {
-	rsaPrivKey, err := x509.ParsePKCS1PrivateKey(private)
-	if err != nil {
-		return nil
-	}
-	return &RSAx509PrivateKey{
-		RSAx509PublicKey: public,
-		privateKey:       privateKey{private: private},
-		Signer:           rsaPrivKey,
-	}
+		PublicKey:  public,
+		privateKey: privateKey{private: private},
+		signer:     signer{signer: rsaPrivKey},
+	}, nil
 }
 
 // NewED25519PrivateKey initialized a new ED25519 private key
-func NewED25519PrivateKey(public ED25519PublicKey, private []byte) *ED25519PrivateKey {
+func NewED25519PrivateKey(public ED25519PublicKey, private []byte) (*ED25519PrivateKey, error) {
 	return &ED25519PrivateKey{
 		ED25519PublicKey: public,
 		privateKey:       privateKey{private: private},
-	}
+	}, nil
 }
 
 // Private return the serialized private bytes of the key
 func (k privateKey) Private() []byte {
 	return k.private
+}
+
+// CryptoSigner returns the underlying crypto.Signer for use cases where we need the default
+// signature or public key functionality (like when we generate certificates)
+func (s signer) CryptoSigner() crypto.Signer {
+	return s.signer
+}
+
+// CryptoSigner returns the ED25519PrivateKey which already implements crypto.Signer
+func (k ED25519PrivateKey) CryptoSigner() crypto.Signer {
+	return nil
+}
+
+// CryptoSigner returns the UnknownPrivateKey which already implements crypto.Signer
+func (k UnknownPrivateKey) CryptoSigner() crypto.Signer {
+	return nil
 }
 
 type ecdsaSig struct {
@@ -443,17 +433,21 @@ type ecdsaSig struct {
 
 // Sign creates an ecdsa signature
 func (k ECDSAPrivateKey) Sign(rand io.Reader, msg []byte, opts crypto.SignerOpts) (signature []byte, err error) {
-	ecdsaPrivKey, ok := k.Signer.(*ecdsa.PrivateKey)
+	ecdsaPrivKey, ok := k.CryptoSigner().(*ecdsa.PrivateKey)
 	if !ok {
 		return nil, errors.New("Signer was based on the wrong key type")
 	}
 	hashed := sha256.Sum256(msg)
-	sigASN1, err := k.Signer.Sign(rand, hashed[:], opts)
+	sigASN1, err := ecdsaPrivKey.Sign(rand, hashed[:], opts)
 	if err != nil {
 		return nil, err
 	}
+
 	sig := ecdsaSig{}
 	_, err = asn1.Unmarshal(sigASN1, &sig)
+	if err != nil {
+		return nil, err
+	}
 	rBytes, sBytes := sig.R.Bytes(), sig.S.Bytes()
 	octetLength := (ecdsaPrivKey.Params().BitSize + 7) >> 3
 
@@ -463,53 +457,25 @@ func (k ECDSAPrivateKey) Sign(rand io.Reader, msg []byte, opts crypto.SignerOpts
 
 	rBuf = append(rBuf, rBytes...)
 	sBuf = append(sBuf, sBytes...)
-
-	return append(rBuf, sBuf...), nil
-}
-
-// Sign creates an ecdsa signature
-func (k ECDSAx509PrivateKey) Sign(rand io.Reader, msg []byte, opts crypto.SignerOpts) (signature []byte, err error) {
-	ecdsaPrivKey, ok := k.Signer.(*ecdsa.PrivateKey)
-	if !ok {
-		return nil, errors.New("Signer was based on the wrong key type")
-	}
-	hashed := sha256.Sum256(msg)
-	sigASN1, err := k.Signer.Sign(rand, hashed[:], opts)
-	if err != nil {
-		return nil, err
-	}
-	sig := ecdsaSig{}
-	_, err = asn1.Unmarshal(sigASN1, &sig)
-	rBytes, sBytes := sig.R.Bytes(), sig.S.Bytes()
-	octetLength := (ecdsaPrivKey.Params().BitSize + 7) >> 3
-
-	// MUST include leading zeros in the output
-	rBuf := make([]byte, octetLength-len(rBytes), octetLength)
-	sBuf := make([]byte, octetLength-len(sBytes), octetLength)
-
-	rBuf = append(rBuf, rBytes...)
-	sBuf = append(sBuf, sBytes...)
-
 	return append(rBuf, sBuf...), nil
 }
 
 // Sign creates an rsa signature
 func (k RSAPrivateKey) Sign(rand io.Reader, msg []byte, opts crypto.SignerOpts) (signature []byte, err error) {
 	hashed := sha256.Sum256(msg)
-	return k.Signer.Sign(rand, hashed[:], opts)
-}
-
-// Sign creates an rsa signature
-func (k RSAx509PrivateKey) Sign(rand io.Reader, msg []byte, opts crypto.SignerOpts) (signature []byte, err error) {
-	hashed := sha256.Sum256(msg)
-	return k.Signer.Sign(rand, hashed[:], opts)
-
+	if opts == nil {
+		opts = &rsa.PSSOptions{
+			SaltLength: rsa.PSSSaltLengthEqualsHash,
+			Hash:       crypto.SHA256,
+		}
+	}
+	return k.CryptoSigner().Sign(rand, hashed[:], opts)
 }
 
 // Sign creates an ed25519 signature
 func (k ED25519PrivateKey) Sign(rand io.Reader, msg []byte, opts crypto.SignerOpts) (signature []byte, err error) {
 	priv := [ed25519.PrivateKeySize]byte{}
-	copy(priv[:], k.private)
+	copy(priv[:], k.private[ed25519.PublicKeySize:])
 	return ed25519.Sign(&priv, msg)[:], nil
 }
 
