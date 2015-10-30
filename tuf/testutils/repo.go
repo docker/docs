@@ -62,19 +62,19 @@ func RandomByteSlice(maxSize int) []byte {
 
 // Sign signs all top level roles in a repo in the appropriate order
 func Sign(repo *tuf.Repo) (root, targets, snapshot, timestamp *data.Signed, err error) {
-	root, err = repo.SignRoot(data.DefaultExpires("root"), nil)
+	root, err = repo.SignRoot(data.DefaultExpires("root"))
 	if err != nil {
 		return nil, nil, nil, nil, err
 	}
-	targets, err = repo.SignTargets("targets", data.DefaultExpires("targets"), nil)
+	targets, err = repo.SignTargets("targets", data.DefaultExpires("targets"))
 	if err != nil {
 		return nil, nil, nil, nil, err
 	}
-	snapshot, err = repo.SignSnapshot(data.DefaultExpires("snapshot"), nil)
+	snapshot, err = repo.SignSnapshot(data.DefaultExpires("snapshot"))
 	if err != nil {
 		return nil, nil, nil, nil, err
 	}
-	timestamp, err = repo.SignTimestamp(data.DefaultExpires("timestamp"), nil)
+	timestamp, err = repo.SignTimestamp(data.DefaultExpires("timestamp"))
 	if err != nil {
 		return nil, nil, nil, nil, err
 	}

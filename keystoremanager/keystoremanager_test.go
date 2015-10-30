@@ -9,6 +9,7 @@ import (
 	"testing"
 	"text/template"
 
+	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
@@ -220,42 +221,46 @@ func TestValidateSuccessfulRootRotation(t *testing.T) {
 	}
 }
 
-func testValidateSuccessfulRootRotation(t *testing.T, keyAlg, rootKeyType string) {
-	// Temporary directory where test files will be created
+// Generates a KeyStoreManager in a temporary directory and returns the
+// manager and certificates for two keys which have been added to the keystore.
+// Also returns the temporary directory so it can be cleaned up.
+func filestoreWithTwoCerts(t *testing.T, gun, keyAlg string) (
+	string, *KeyStoreManager, []*x509.Certificate) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	defer os.RemoveAll(tempBaseDir)
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-
-	// The gun to test
-	gun := "docker.com/notary"
 
 	// Create a FileStoreManager
 	keyStoreManager, err := NewKeyStoreManager(tempBaseDir, passphraseRetriever)
 	assert.NoError(t, err)
 
-	origRootKeyID, err := keyStoreManager.GenRootKey(keyAlg)
-	assert.NoError(t, err)
+	certs := make([]*x509.Certificate, 2)
+	for i := 0; i < 2; i++ {
+		keyID, err := keyStoreManager.GenRootKey(keyAlg)
+		assert.NoError(t, err)
 
-	replRootKeyID, err := keyStoreManager.GenRootKey(keyAlg)
-	assert.NoError(t, err)
+		key, _, err := keyStoreManager.KeyStore.GetKey(keyID)
+		assert.NoError(t, err)
 
-	origUnlockedCryptoService, err := keyStoreManager.GetRootCryptoService(origRootKeyID)
-	assert.NoError(t, err)
+		cert, err := cryptoservice.GenerateCertificate(key, gun)
+		assert.NoError(t, err)
 
-	replUnlockedCryptoService, err := keyStoreManager.GetRootCryptoService(replRootKeyID)
-	assert.NoError(t, err)
+		certs[i] = cert
+	}
+	return tempBaseDir, keyStoreManager, certs
+}
 
-	// Generating the certificate automatically adds it to the trusted store
-	origRootCert, err := origUnlockedCryptoService.GenerateCertificate(gun)
-	assert.NoError(t, err)
+func testValidateSuccessfulRootRotation(t *testing.T, keyAlg, rootKeyType string) {
+	// The gun to test
+	gun := "docker.com/notary"
+
+	tempBaseDir, keyStoreManager, certs := filestoreWithTwoCerts(t, gun, keyAlg)
+	defer os.RemoveAll(tempBaseDir)
+	origRootCert := certs[0]
+	replRootCert := certs[1]
 
 	// Add the old root cert part of trustedCertificates
 	keyStoreManager.AddTrustedCert(origRootCert)
-	assert.NoError(t, err)
 
-	// Generate a certificate for our replacement root key
-	replRootCert, err := replUnlockedCryptoService.GenerateCertificate(gun)
-	assert.NoError(t, err)
 	// We need the PEM representation of the replacement key to put it into the TUF data
 	origRootPEMCert := trustmanager.CertToPEM(origRootCert)
 	replRootPEMCert := trustmanager.CertToPEM(replRootCert)
@@ -277,10 +282,12 @@ func testValidateSuccessfulRootRotation(t *testing.T, keyAlg, rootKeyType string
 	signedTestRoot, err := testRoot.ToSigned()
 	assert.NoError(t, err)
 
-	err = signed.Sign(replUnlockedCryptoService.CryptoService, signedTestRoot, replRootKey)
+	cs := cryptoservice.NewCryptoService(gun, keyStoreManager.KeyStore)
+
+	err = signed.Sign(cs, signedTestRoot, replRootKey)
 	assert.NoError(t, err)
 
-	err = signed.Sign(origUnlockedCryptoService.CryptoService, signedTestRoot, origRootKey)
+	err = signed.Sign(cs, signedTestRoot, origRootKey)
 	assert.NoError(t, err)
 
 	//
@@ -291,7 +298,7 @@ func testValidateSuccessfulRootRotation(t *testing.T, keyAlg, rootKeyType string
 	assert.NoError(t, err)
 
 	// Finally, validate the only trusted certificate that exists is the new one
-	certs := keyStoreManager.trustedCertificateStore.GetCertificates()
+	certs = keyStoreManager.trustedCertificateStore.GetCertificates()
 	assert.Len(t, certs, 1)
 	assert.Equal(t, certs[0], replRootCert)
 }
@@ -307,41 +314,16 @@ func TestValidateRootRotationMissingOrigSig(t *testing.T) {
 }
 
 func testValidateRootRotationMissingOrigSig(t *testing.T, keyAlg, rootKeyType string) {
-	// Temporary directory where test files will be created
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	defer os.RemoveAll(tempBaseDir)
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-
-	// The gun to test
 	gun := "docker.com/notary"
 
-	// Create a FileStoreManager
-	keyStoreManager, err := NewKeyStoreManager(tempBaseDir, passphraseRetriever)
-	assert.NoError(t, err)
-
-	origRootKeyID, err := keyStoreManager.GenRootKey(keyAlg)
-	assert.NoError(t, err)
-
-	replRootKeyID, err := keyStoreManager.GenRootKey(keyAlg)
-	assert.NoError(t, err)
-
-	origUnlockedCryptoService, err := keyStoreManager.GetRootCryptoService(origRootKeyID)
-	assert.NoError(t, err)
-
-	replUnlockedCryptoService, err := keyStoreManager.GetRootCryptoService(replRootKeyID)
-	assert.NoError(t, err)
-
-	// Generating the certificate automatically adds it to the trusted store
-	origRootCert, err := origUnlockedCryptoService.GenerateCertificate(gun)
-	assert.NoError(t, err)
+	tempBaseDir, keyStoreManager, certs := filestoreWithTwoCerts(t, gun, keyAlg)
+	defer os.RemoveAll(tempBaseDir)
+	origRootCert := certs[0]
+	replRootCert := certs[1]
 
 	// Add the old root cert part of trustedCertificates
 	keyStoreManager.AddTrustedCert(origRootCert)
-	assert.NoError(t, err)
 
-	// Generate a certificate for our replacement root key
-	replRootCert, err := replUnlockedCryptoService.GenerateCertificate(gun)
-	assert.NoError(t, err)
 	// We need the PEM representation of the replacement key to put it into the TUF data
 	replRootPEMCert := trustmanager.CertToPEM(replRootCert)
 
@@ -362,7 +344,9 @@ func testValidateRootRotationMissingOrigSig(t *testing.T, keyAlg, rootKeyType st
 	assert.NoError(t, err)
 
 	// We only sign with the new key, and not with the original one.
-	err = signed.Sign(replUnlockedCryptoService.CryptoService, signedTestRoot, replRootKey)
+	err = signed.Sign(
+		cryptoservice.NewCryptoService(gun, keyStoreManager.KeyStore),
+		signedTestRoot, replRootKey)
 	assert.NoError(t, err)
 
 	//
@@ -374,7 +358,7 @@ func testValidateRootRotationMissingOrigSig(t *testing.T, keyAlg, rootKeyType st
 
 	// Finally, validate the only trusted certificate that exists is still
 	// the old one
-	certs := keyStoreManager.trustedCertificateStore.GetCertificates()
+	certs = keyStoreManager.trustedCertificateStore.GetCertificates()
 	assert.Len(t, certs, 1)
 	assert.Equal(t, certs[0], origRootCert)
 }
@@ -390,41 +374,16 @@ func TestValidateRootRotationMissingNewSig(t *testing.T) {
 }
 
 func testValidateRootRotationMissingNewSig(t *testing.T, keyAlg, rootKeyType string) {
-	// Temporary directory where test files will be created
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	defer os.RemoveAll(tempBaseDir)
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-
-	// The gun to test
 	gun := "docker.com/notary"
 
-	// Create a FileStoreManager
-	keyStoreManager, err := NewKeyStoreManager(tempBaseDir, passphraseRetriever)
-	assert.NoError(t, err)
-
-	origRootKeyID, err := keyStoreManager.GenRootKey(keyAlg)
-	assert.NoError(t, err)
-
-	replRootKeyID, err := keyStoreManager.GenRootKey(keyAlg)
-	assert.NoError(t, err)
-
-	origUnlockedCryptoService, err := keyStoreManager.GetRootCryptoService(origRootKeyID)
-	assert.NoError(t, err)
-
-	replUnlockedCryptoService, err := keyStoreManager.GetRootCryptoService(replRootKeyID)
-	assert.NoError(t, err)
-
-	// Generating the certificate automatically adds it to the trusted store
-	origRootCert, err := origUnlockedCryptoService.GenerateCertificate(gun)
-	assert.NoError(t, err)
+	tempBaseDir, keyStoreManager, certs := filestoreWithTwoCerts(t, gun, keyAlg)
+	defer os.RemoveAll(tempBaseDir)
+	origRootCert := certs[0]
+	replRootCert := certs[1]
 
 	// Add the old root cert part of trustedCertificates
 	keyStoreManager.AddTrustedCert(origRootCert)
-	assert.NoError(t, err)
 
-	// Generate a certificate for our replacement root key
-	replRootCert, err := replUnlockedCryptoService.GenerateCertificate(gun)
-	assert.NoError(t, err)
 	// We need the PEM representation of the replacement key to put it into the TUF data
 	origRootPEMCert := trustmanager.CertToPEM(origRootCert)
 	replRootPEMCert := trustmanager.CertToPEM(replRootCert)
@@ -447,7 +406,9 @@ func testValidateRootRotationMissingNewSig(t *testing.T, keyAlg, rootKeyType str
 	assert.NoError(t, err)
 
 	// We only sign with the old key, and not with the new one
-	err = signed.Sign(replUnlockedCryptoService.CryptoService, signedTestRoot, origRootKey)
+	err = signed.Sign(
+		cryptoservice.NewCryptoService(gun, keyStoreManager.KeyStore),
+		signedTestRoot, origRootKey)
 	assert.NoError(t, err)
 
 	//
@@ -459,7 +420,7 @@ func testValidateRootRotationMissingNewSig(t *testing.T, keyAlg, rootKeyType str
 
 	// Finally, validate the only trusted certificate that exists is still
 	// the old one
-	certs := keyStoreManager.trustedCertificateStore.GetCertificates()
+	certs = keyStoreManager.trustedCertificateStore.GetCertificates()
 	assert.Len(t, certs, 1)
 	assert.Equal(t, certs[0], origRootCert)
 }

@@ -46,10 +46,7 @@ func validateRootSuccessfully(t *testing.T, rootType string) {
 	rootKeyID, err := repo.KeyStoreManager.GenRootKey(rootType)
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID)
-	assert.NoError(t, err, "error retrieving root key: %s", err)
-
-	err = repo.Initialize(rootCryptoService)
+	err = repo.Initialize(rootKeyID)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
 	// tests need to manually boostrap timestamp as client doesn't generate it
@@ -74,13 +71,13 @@ func validateRootSuccessfully(t *testing.T, rootType string) {
 	rootJSONFile := filepath.Join(tempBaseDir, "tuf", filepath.FromSlash(gun), "metadata", "root.json")
 	rootFileBytes, err := ioutil.ReadFile(rootJSONFile)
 
-	signedTargets, err := savedTUFRepo.SignTargets("targets", data.DefaultExpires("targets"), nil)
+	signedTargets, err := savedTUFRepo.SignTargets("targets", data.DefaultExpires("targets"))
 	assert.NoError(t, err)
 
-	signedSnapshot, err := savedTUFRepo.SignSnapshot(data.DefaultExpires("snapshot"), nil)
+	signedSnapshot, err := savedTUFRepo.SignSnapshot(data.DefaultExpires("snapshot"))
 	assert.NoError(t, err)
 
-	signedTimestamp, err := savedTUFRepo.SignTimestamp(data.DefaultExpires("timestamp"), nil)
+	signedTimestamp, err := savedTUFRepo.SignTimestamp(data.DefaultExpires("timestamp"))
 	assert.NoError(t, err)
 
 	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/root.json", func(w http.ResponseWriter, r *http.Request) {

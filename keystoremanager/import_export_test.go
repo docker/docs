@@ -60,10 +60,8 @@ func TestImportExportZip(t *testing.T) {
 	rootKeyID, err := repo.KeyStoreManager.GenRootKey(data.ECDSAKey)
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID)
-	assert.NoError(t, err, "error retrieving root key: %s", err)
-
-	err = repo.Initialize(rootCryptoService)
+	fmt.Println(rootKeyID)
+	err = repo.Initialize(rootKeyID)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
 	tempZipFile, err := ioutil.TempFile("", "notary-test-export-")
@@ -97,7 +95,7 @@ func TestImportExportZip(t *testing.T) {
 
 	// Add root key to the map. This will use the export passphrase because it
 	// will be reencrypted.
-	relRootKey := filepath.Join("private", "root_keys", rootCryptoService.ID()+"_root.key")
+	relRootKey := filepath.Join("private", "root_keys", rootKeyID+"_root.key")
 	passphraseByFile[relRootKey] = exportPassphrase
 
 	// Iterate through the files in the archive, checking that the files
@@ -141,10 +139,7 @@ func TestImportExportZip(t *testing.T) {
 	rootKeyID2, err := repo2.KeyStoreManager.GenRootKey(data.ECDSAKey)
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootCryptoService2, err := repo2.KeyStoreManager.GetRootCryptoService(rootKeyID2)
-	assert.NoError(t, err, "error retrieving root key: %s", err)
-
-	err = repo2.Initialize(rootCryptoService2)
+	err = repo2.Initialize(rootKeyID2)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
 	// Reopen the zip file for importing
@@ -174,7 +169,7 @@ func TestImportExportZip(t *testing.T) {
 	// Look for keys in root_keys
 	// There should be a file named after the key ID of the root key we
 	// passed in.
-	rootKeyFilename := rootCryptoService.ID() + "_root.key"
+	rootKeyFilename := rootKeyID + "_root.key"
 	_, err = os.Stat(filepath.Join(tempBaseDir2, "private", "root_keys", rootKeyFilename))
 	assert.NoError(t, err, "missing root key")
 }
@@ -197,10 +192,7 @@ func TestImportExportGUN(t *testing.T) {
 	rootKeyID, err := repo.KeyStoreManager.GenRootKey(data.ECDSAKey)
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID)
-	assert.NoError(t, err, "error retrieving root key: %s", err)
-
-	err = repo.Initialize(rootCryptoService)
+	err = repo.Initialize(rootKeyID)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
 	tempZipFile, err := ioutil.TempFile("", "notary-test-export-")
@@ -281,10 +273,7 @@ func TestImportExportGUN(t *testing.T) {
 	rootKeyID2, err := repo2.KeyStoreManager.GenRootKey(data.ECDSAKey)
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootCryptoService2, err := repo2.KeyStoreManager.GetRootCryptoService(rootKeyID2)
-	assert.NoError(t, err, "error retrieving root key: %s", err)
-
-	err = repo2.Initialize(rootCryptoService2)
+	err = repo2.Initialize(rootKeyID2)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
 	// Reopen the zip file for importing
@@ -330,10 +319,7 @@ func TestImportExportRootKey(t *testing.T) {
 	rootKeyID, err := repo.KeyStoreManager.GenRootKey(data.ECDSAKey)
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID)
-	assert.NoError(t, err, "error retrieving root key: %s", err)
-
-	err = repo.Initialize(rootCryptoService)
+	err = repo.Initialize(rootKeyID)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
 	tempKeyFile, err := ioutil.TempFile("", "notary-test-export-")
@@ -356,10 +342,7 @@ func TestImportExportRootKey(t *testing.T) {
 	rootKeyID2, err := repo2.KeyStoreManager.GenRootKey(data.ECDSAKey)
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootCryptoService2, err := repo2.KeyStoreManager.GetRootCryptoService(rootKeyID2)
-	assert.NoError(t, err, "error retrieving root key: %s", err)
-
-	err = repo2.Initialize(rootCryptoService2)
+	err = repo2.Initialize(rootKeyID2)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
 	keyReader, err := os.Open(tempKeyFilePath)
@@ -417,10 +400,7 @@ func TestImportExportRootKeyReencrypt(t *testing.T) {
 	rootKeyID, err := repo.KeyStoreManager.GenRootKey(data.ECDSAKey)
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID)
-	assert.NoError(t, err, "error retrieving root key: %s", err)
-
-	err = repo.Initialize(rootCryptoService)
+	err = repo.Initialize(rootKeyID)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
 	tempKeyFile, err := ioutil.TempFile("", "notary-test-export-")
@@ -443,10 +423,7 @@ func TestImportExportRootKeyReencrypt(t *testing.T) {
 	rootKeyID2, err := repo2.KeyStoreManager.GenRootKey(data.ECDSAKey)
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootCryptoService2, err := repo2.KeyStoreManager.GetRootCryptoService(rootKeyID2)
-	assert.NoError(t, err, "error retrieving root key: %s", err)
-
-	err = repo2.Initialize(rootCryptoService2)
+	err = repo2.Initialize(rootKeyID2)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
 	keyReader, err := os.Open(tempKeyFilePath)

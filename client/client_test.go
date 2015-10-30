@@ -70,10 +70,7 @@ func testInitRepo(t *testing.T, rootType string) {
 	rootKeyID, err := repo.KeyStoreManager.GenRootKey(rootType)
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID)
-	assert.NoError(t, err, "error retrieving root key: %s", err)
-
-	err = repo.Initialize(rootCryptoService)
+	err = repo.Initialize(rootKeyID)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
 	// Inspect contents of the temporary directory
@@ -104,7 +101,7 @@ func testInitRepo(t *testing.T, rootType string) {
 	// Look for keys in root_keys
 	// There should be a file named after the key ID of the root key we
 	// passed in.
-	rootKeyFilename := rootCryptoService.ID() + "_root.key"
+	rootKeyFilename := rootKeyID + "_root.key"
 	_, err = os.Stat(filepath.Join(tempBaseDir, "private", "root_keys", rootKeyFilename))
 	assert.NoError(t, err, "missing root key")
 
@@ -198,10 +195,7 @@ func testAddListTarget(t *testing.T, rootType string) {
 	rootKeyID, err := repo.KeyStoreManager.GenRootKey(rootType)
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID)
-	assert.NoError(t, err, "error retreiving root key: %s", err)
-
-	err = repo.Initialize(rootCryptoService)
+	err = repo.Initialize(rootKeyID)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
 	// tests need to manually boostrap timestamp as client doesn't generate it
@@ -309,13 +303,13 @@ func testAddListTarget(t *testing.T, rootType string) {
 	rootJSONFile := filepath.Join(tempBaseDir, "tuf", filepath.FromSlash(gun), "metadata", "root.json")
 	rootFileBytes, err := ioutil.ReadFile(rootJSONFile)
 
-	signedTargets, err := savedTUFRepo.SignTargets("targets", data.DefaultExpires("targets"), nil)
+	signedTargets, err := savedTUFRepo.SignTargets("targets", data.DefaultExpires("targets"))
 	assert.NoError(t, err)
 
-	signedSnapshot, err := savedTUFRepo.SignSnapshot(data.DefaultExpires("snapshot"), nil)
+	signedSnapshot, err := savedTUFRepo.SignSnapshot(data.DefaultExpires("snapshot"))
 	assert.NoError(t, err)
 
-	signedTimestamp, err := savedTUFRepo.SignTimestamp(data.DefaultExpires("timestamp"), nil)
+	signedTimestamp, err := savedTUFRepo.SignTimestamp(data.DefaultExpires("timestamp"))
 	assert.NoError(t, err)
 
 	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/root.json", func(w http.ResponseWriter, r *http.Request) {
@@ -391,10 +385,7 @@ func testValidateRootKey(t *testing.T, rootType string) {
 	rootKeyID, err := repo.KeyStoreManager.GenRootKey(rootType)
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID)
-	assert.NoError(t, err, "error retreiving root key: %s", err)
-
-	err = repo.Initialize(rootCryptoService)
+	err = repo.Initialize(rootKeyID)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
 	rootJSONFile := filepath.Join(tempBaseDir, "tuf", filepath.FromSlash(gun), "metadata", "root.json")
@@ -474,10 +465,7 @@ func testPublish(t *testing.T, rootType string) {
 	rootKeyID, err := repo.KeyStoreManager.GenRootKey(rootType)
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID)
-	assert.NoError(t, err, "error retreiving root key: %s", err)
-
-	err = repo.Initialize(rootCryptoService)
+	err = repo.Initialize(rootKeyID)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
 	// Add fixtures/intermediate-ca.crt as a target. There's no particular reason
@@ -663,10 +651,7 @@ func TestRotate(t *testing.T) {
 	rootKeyID, err := repo.KeyStoreManager.GenRootKey(data.ECDSAKey)
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	rootCryptoService, err := repo.KeyStoreManager.GetRootCryptoService(rootKeyID)
-	assert.NoError(t, err, "error retreiving root key: %s", err)
-
-	err = repo.Initialize(rootCryptoService)
+	err = repo.Initialize(rootKeyID)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
 	// Add fixtures/intermediate-ca.crt as a target. There's no particular reason

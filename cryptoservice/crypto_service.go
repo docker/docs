@@ -66,6 +66,11 @@ func (ccs *CryptoService) Create(role, algorithm string) (data.PublicKey, error)
 	return data.PublicKeyFromPrivate(privKey), nil
 }
 
+// GetPrivateKey returns a private key by ID
+func (ccs *CryptoService) GetPrivateKey(keyID string) (data.PrivateKey, string, error) {
+	return ccs.keyStore.GetKey(keyID)
+}
+
 // GetKey returns a key by ID
 func (ccs *CryptoService) GetKey(keyID string) data.PublicKey {
 	key, _, err := ccs.keyStore.GetKey(keyID)
@@ -86,16 +91,23 @@ func (ccs *CryptoService) RemoveKey(keyID string) error {
 func (ccs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signature, error) {
 	signatures := make([]data.Signature, 0, len(keyIDs))
 	for _, keyid := range keyIDs {
-		// ccs.gun will be empty if this is the root key
-		keyName := filepath.Join(ccs.gun, keyid)
+		var (
+			privKey data.PrivateKey
+			err     error
+			keyName = keyid
+		)
 
-		var privKey data.PrivateKey
-		var err error
-
+		// Try to get the key first without a GUN (in which case it's a root
+		// key).  If that fails, try to get the key with the GUN (non-root
+		// key).  If that fails, then we don't have the key.
 		privKey, _, err = ccs.keyStore.GetKey(keyName)
 		if err != nil {
-			logrus.Debugf("error attempting to retrieve key ID: %s, %v", keyid, err)
-			return nil, err
+			keyName := filepath.Join(ccs.gun, keyid)
+			privKey, _, err = ccs.keyStore.GetKey(keyName)
+			if err != nil {
+				logrus.Debugf("error attempting to retrieve key ID: %s, %v", keyid, err)
+				return nil, err
+			}
 		}
 
 		algorithm := privKey.Algorithm()

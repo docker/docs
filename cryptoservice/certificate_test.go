@@ -18,19 +18,9 @@ func TestUnlockedSigner(t *testing.T) {
 	err = keyStore.AddKey(privKey.ID(), "root", privKey)
 	assert.NoError(t, err, "could not add key to store")
 
-	cryptoService := NewCryptoService("", keyStore)
-	uCryptoService := NewUnlockedCryptoService(privKey, cryptoService)
-
-	// Check ID method
-	assert.Equal(t, privKey.ID(), uCryptoService.ID())
-
-	// Check Public method
-	assert.Equal(t, privKey.Public(), uCryptoService.PublicKey().Public())
-	assert.Equal(t, privKey.ID(), uCryptoService.PublicKey().ID())
-
 	// Check GenerateCertificate method
 	gun := "docker.com/notary"
-	cert, err := uCryptoService.GenerateCertificate(gun)
+	cert, err := GenerateCertificate(privKey, gun)
 	assert.NoError(t, err, "could not generate certificate")
 
 	// Check public key

@@ -81,3 +81,8 @@ func (e *Ed25519) PublicKeys(keyIDs ...string) (map[string]data.PublicKey, error
 func (e *Ed25519) GetKey(keyID string) data.PublicKey {
 	return data.PublicKeyFromPrivate(e.keys[keyID])
 }
+
+// GetPrivateKey returns a single private key based on the ID
+func (e *Ed25519) GetPrivateKey(keyID string) (data.PrivateKey, string, error) {
+	return e.keys[keyID], "", nil
+}

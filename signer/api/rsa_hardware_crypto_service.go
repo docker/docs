@@ -120,6 +120,11 @@ func (s *RSAHardwareCryptoService) GetKey(keyID string) data.PublicKey {
 	return key
 }
 
+// GetPrivateKey is not implemented
+func (s *RSAHardwareCryptoService) GetPrivateKey(keyID string) (data.PrivateKey, string, error) {
+	return nil, "", errors.New("Not yet implemented")
+}
+
 // Sign returns a signature for a given signature request
 func (s *RSAHardwareCryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signature, error) {
 	signatures := make([]data.Signature, 0, len(keyIDs))
