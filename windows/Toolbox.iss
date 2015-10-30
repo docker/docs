@@ -368,32 +368,25 @@ begin
 		exit
 	end;
 
-  if MsgBox('Migrate your existing Boot2Docker VM to work with the Docker Toolbox? Your existing Boot2Docker VM will not be affected. This should take about a minute.', mbConfirmation, MB_YESNO) = IDYES then
-  begin
-		TrackEvent('Boot2Docker Migration Started');
-    WizardForm.StatusLabel.Caption := 'Migrating Boot2Docker VM...'
-    WizardForm.FilenameLabel.Caption := 'This will take a minute...'
-    ExecAsOriginalUser(ExpandConstant('{app}\docker-machine.exe'), ExpandConstant('rm -f default > nul 2>&1'), '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
-    DelTree(ExpandConstant('{userdocs}\..\.docker\machine\machines\default'), True, True, True);
-    ExecAsOriginalUser(ExpandConstant('{app}\migrate.bat'), ExpandConstant('> {localappdata}\Temp\toolbox-migration-logs.txt 2>&1'), '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
-    if ResultCode = 0 then
-    begin
-      TrackEvent('Boot2Docker Migration Succeeded');
-      MsgBox('Succcessfully migrated Boot2Docker VM to a Docker Machine VM named "default"', mbInformation, MB_OK);
-    end
-    else begin
-      TrackEvent('Boot2Docker Migration Failed');
-      MsgBox('Migration of Boot2Docker VM failed. Please file an issue with the migration logs at https://github.com/docker/toolbox/issues/new.', mbCriticalError, MB_OK);
-      Exec(ExpandConstant('{win}\notepad.exe'), ExpandConstant('{localappdata}\Temp\toolbox-migration-logs.txt'), '', SW_SHOW, ewNoWait, ResultCode)
-      Result := false
-			WizardForm.Close;
-      exit;
-    end;
-  end
-  else
-  begin
-    TrackEvent('Boot2Docker Migration Skipped');
-  end;
+	TrackEvent('Boot2Docker Migration Started');
+	WizardForm.StatusLabel.Caption := 'Migrating Boot2Docker VM...'
+	WizardForm.FilenameLabel.Caption := 'This will take a minute...'
+	ExecAsOriginalUser(ExpandConstant('{app}\docker-machine.exe'), ExpandConstant('rm -f default > nul 2>&1'), '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
+	DelTree(ExpandConstant('{userdocs}\..\.docker\machine\machines\default'), True, True, True);
+	ExecAsOriginalUser(ExpandConstant('{app}\migrate.bat'), ExpandConstant('> {localappdata}\Temp\toolbox-migration-logs.txt 2>&1'), '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
+	if ResultCode = 0 then
+	begin
+		TrackEvent('Boot2Docker Migration Succeeded');
+		MsgBox('Succcessfully migrated Boot2Docker VM to a Docker Machine VM named "default"', mbInformation, MB_OK);
+	end
+	else begin
+		TrackEvent('Boot2Docker Migration Failed');
+		MsgBox('Migration of Boot2Docker VM failed. Please file an issue with the migration logs at https://github.com/docker/toolbox/issues/new.', mbCriticalError, MB_OK);
+		Exec(ExpandConstant('{win}\notepad.exe'), ExpandConstant('{localappdata}\Temp\toolbox-migration-logs.txt'), '', SW_SHOW, ewNoWait, ResultCode)
+		Result := false
+		WizardForm.Close;
+		exit;
+	end;
   Result := true
 end;
 
