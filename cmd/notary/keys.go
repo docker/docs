@@ -96,7 +96,7 @@ var cmdKeyImport = &cobra.Command{
 }
 
 var cmdKeyImportRoot = &cobra.Command{
-	Use:   "import-root [ keyID ] [ filename ]",
+	Use:   "import-root [ filename ]",
 	Short: "Imports root key.",
 	Long:  "imports a root key from a PEM file.",
 	Run:   keysImportRoot,
@@ -342,17 +342,12 @@ func keysImport(cmd *cobra.Command, args []string) {
 
 // keysImportRoot imports a root key from a PEM file
 func keysImportRoot(cmd *cobra.Command, args []string) {
-	if len(args) < 2 {
+	if len(args) != 1 {
 		cmd.Usage()
-		fatalf("must specify key ID and input filename for import")
+		fatalf("must specify input filename for import")
 	}
 
-	keyID := args[0]
-	importFilename := args[1]
-
-	if len(keyID) != idSize {
-		fatalf("please specify a valid root key ID")
-	}
+	importFilename := args[0]
 
 	parseConfig()
 
@@ -367,7 +362,7 @@ func keysImportRoot(cmd *cobra.Command, args []string) {
 	}
 	defer importFile.Close()
 
-	err = keyStoreManager.ImportRootKey(importFile, keyID)
+	err = keyStoreManager.ImportRootKey(importFile)
 
 	if err != nil {
 		fatalf("error importing root key: %v", err)
