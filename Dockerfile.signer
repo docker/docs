@@ -9,8 +9,7 @@ ENV NOTARY_SIGNER_DEFAULT_ALIAS="timestamp_1"
 ENV NOTARY_SIGNER_TIMESTAMP_1="testpassword"
 
 # Install openSC and dependencies
-RUN apt-get update && \
-    apt-get install -y \
+RUN apt-get update && apt-get install -y \
     libltdl-dev \
     libpcsclite-dev \
     opensc \
