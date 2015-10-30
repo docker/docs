@@ -34,6 +34,10 @@ func (mts *FailingCryptoService) Create(_, _ string) (data.PublicKey, error) {
 	return mts.testKey, nil
 }
 
+func (mts *FailingCryptoService) ListKeys(role string) []string {
+	return []string{mts.testKey.ID()}
+}
+
 func (mts *FailingCryptoService) GetKey(keyID string) data.PublicKey {
 	if keyID == "testID" {
 		return mts.testKey
@@ -72,6 +76,10 @@ func (mts *MockCryptoService) GetKey(keyID string) data.PublicKey {
 	return nil
 }
 
+func (mts *MockCryptoService) ListKeys(role string) []string {
+	return []string{mts.testKey.ID()}
+}
+
 func (mts *MockCryptoService) GetPrivateKey(keyID string) (data.PrivateKey, string, error) {
 	return nil, "", errors.New("Not implemented")
 }
@@ -101,6 +109,10 @@ func (mts *StrictMockCryptoService) GetKey(keyID string) data.PublicKey {
 		return mts.testKey
 	}
 	return nil
+}
+
+func (mts *StrictMockCryptoService) ListKeys(role string) []string {
+	return []string{mts.testKey.ID()}
 }
 
 // Test signing and ensure the expected signature is added

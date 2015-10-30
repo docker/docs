@@ -31,6 +31,9 @@ type KeyService interface {
 
 	// RemoveKey deletes the specified key
 	RemoveKey(keyID string) error
+
+	// ListKeys returns a map of IDs to role
+	ListKeys(role string) []string
 }
 
 // CryptoService defines a unified Signing and Key Service as this

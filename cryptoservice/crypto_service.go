@@ -17,13 +17,13 @@ const (
 // CryptoService implements Sign and Create, holding a specific GUN and keystore to
 // operate on
 type CryptoService struct {
-	gun      string
-	keyStore trustmanager.KeyStore
+	gun       string
+	keyStores []trustmanager.KeyStore
 }
 
 // NewCryptoService returns an instance of CryptoService
-func NewCryptoService(gun string, keyStore trustmanager.KeyStore) *CryptoService {
-	return &CryptoService{gun: gun, keyStore: keyStore}
+func NewCryptoService(gun string, keyStores ...trustmanager.KeyStore) *CryptoService {
+	return &CryptoService{gun: gun, keyStores: keyStores}
 }
 
 // Create is used to generate keys for targets, snapshots and timestamps
@@ -53,30 +53,53 @@ func (ccs *CryptoService) Create(role, algorithm string) (data.PublicKey, error)
 	logrus.Debugf("generated new %s key for role: %s and keyID: %s", algorithm, role, privKey.ID())
 
 	// Store the private key into our keystore with the name being: /GUN/ID.key with an alias of role
-	err = ccs.keyStore.AddKey(filepath.Join(ccs.gun, privKey.ID()), role, privKey)
+	for _, ks := range ccs.keyStores {
+		err = ks.AddKey(filepath.Join(ccs.gun, privKey.ID()), role, privKey)
+		if err == nil {
+			return data.PublicKeyFromPrivate(privKey), nil
+		}
+	}
 	if err != nil {
 		return nil, fmt.Errorf("failed to add key to filestore: %v", err)
 	}
-	return data.PublicKeyFromPrivate(privKey), nil
+	return nil, fmt.Errorf("keystores would not accept new private keys for unknown reasons")
+
 }
 
 // GetPrivateKey returns a private key by ID
-func (ccs *CryptoService) GetPrivateKey(keyID string) (data.PrivateKey, string, error) {
-	return ccs.keyStore.GetKey(keyID)
+func (ccs *CryptoService) GetPrivateKey(keyID string) (k data.PrivateKey, id string, err error) {
+	for _, ks := range ccs.keyStores {
+		k, id, err = ks.GetKey(keyID)
+		if k == nil || err != nil {
+			continue
+		}
+		return
+	}
+	return // returns whatever the final values were
 }
 
 // GetKey returns a key by ID
 func (ccs *CryptoService) GetKey(keyID string) data.PublicKey {
-	key, _, err := ccs.keyStore.GetKey(keyID)
-	if err != nil {
-		return nil
+	for _, ks := range ccs.keyStores {
+		k, _, err := ks.GetKey(keyID)
+		if k == nil || err != nil {
+			continue
+		}
+		return data.PublicKeyFromPrivate(k)
+
 	}
-	return data.PublicKeyFromPrivate(key)
+	return nil // returns whatever the final values were
 }
 
 // RemoveKey deletes a key by ID
-func (ccs *CryptoService) RemoveKey(keyID string) error {
-	return ccs.keyStore.RemoveKey(keyID)
+func (ccs *CryptoService) RemoveKey(keyID string) (err error) {
+	for _, ks := range ccs.keyStores {
+		e := ks.RemoveKey(keyID)
+		if e != nil {
+			err = e
+		}
+	}
+	return // returns last error if any
 }
 
 // Sign returns the signatures for the payload with a set of keyIDs. It ignores
@@ -90,10 +113,10 @@ func (ccs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signatur
 		// Try to get the key first without a GUN (in which case it's a root
 		// key).  If that fails, try to get the key with the GUN (non-root
 		// key).  If that fails, then we don't have the key.
-		privKey, _, err := ccs.keyStore.GetKey(keyName)
+		privKey, _, err := ccs.GetPrivateKey(keyName)
 		if err != nil {
 			keyName = filepath.Join(ccs.gun, keyid)
-			privKey, _, err = ccs.keyStore.GetKey(keyName)
+			privKey, _, err = ccs.GetPrivateKey(keyName)
 			if err != nil {
 				logrus.Debugf("error attempting to retrieve key ID: %s, %v", keyid, err)
 				return nil, err
@@ -127,4 +150,17 @@ func (ccs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signatur
 	}
 
 	return signatures, nil
+}
+
+// ListKeys returns a list of key IDs valid for the given role
+func (ccs *CryptoService) ListKeys(role string) []string {
+	var res []string
+	for _, ks := range ccs.keyStores {
+		for k, r := range ks.ListKeys() {
+			if r == role {
+				res = append(res, k)
+			}
+		}
+	}
+	return res
 }

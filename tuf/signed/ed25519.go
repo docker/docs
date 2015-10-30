@@ -32,6 +32,15 @@ func (e *Ed25519) RemoveKey(keyID string) error {
 	return nil
 }
 
+// ListKeys returns the list of keys IDs for the role
+func (e *Ed25519) ListKeys(role string) []string {
+	keyIDs := make([]string, 0, len(e.keys))
+	for id := range e.keys {
+		keyIDs = append(keyIDs, id)
+	}
+	return keyIDs
+}
+
 // Sign generates an Ed25519 signature over the data
 func (e *Ed25519) Sign(keyIDs []string, toSign []byte) ([]data.Signature, error) {
 	signatures := make([]data.Signature, 0, len(keyIDs))
