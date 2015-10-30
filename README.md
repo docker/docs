@@ -176,9 +176,9 @@ testing. For production, you must create your own keypair and certificate,
 either via the CA of your choice, or a self signed certificate.
 
 If using the pem and key provided in fixtures, either:
-    - add `fixtures/root-ca.crt` to your trusted root certificates
-    - use the default configuration for notary client that loads the CA root for you by using the flag `-c ./cmd/notary/config.json`
-    - disable TLS verification by adding the following option notary configuration file in `~/.notary/config.json`:
+- Add `fixtures/root-ca.crt` to your trusted root certificates
+- Use the default configuration for notary client that loads the CA root for you by using the flag `-c ./cmd/notary/config.json`
+- Disable TLS verification by adding the following option notary configuration file in `~/.notary/config.json`:
 
             "skipTLSVerify": true
 
