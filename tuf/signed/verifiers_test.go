@@ -307,7 +307,8 @@ func TestECDSAVerifierOtherCurves(t *testing.T) {
 		assert.NoError(t, err, "failed to marshal private key")
 
 		testECDSAPubKey := data.NewECDSAPublicKey(ecdsaPubBytes)
-		testECDSAKey := data.NewECDSAPrivateKey(*testECDSAPubKey, ecdsaPrivKeyBytes)
+		testECDSAKey, err := data.NewECDSAPrivateKey(testECDSAPubKey, ecdsaPrivKeyBytes)
+		assert.NoError(t, err, "failed to read private key")
 
 		// Sign some data using ECDSA
 		message := []byte("test data for signing")
@@ -328,14 +329,13 @@ func TestECDSAVerifierOtherCurves(t *testing.T) {
 }
 
 func TestECDSAx509Verifier(t *testing.T) {
-	var testECDSAKey data.PrivateKey
 	var jsonKey bytes.Buffer
 
 	// Execute our template
 	templ, _ := template.New("KeyTemplate").Parse(baseECDSAx509Key)
 	templ.Execute(&jsonKey, KeyTemplate{KeyType: data.ECDSAx509Key})
 
-	testECDSAKey, err := data.UnmarshalPrivateKey(jsonKey.Bytes())
+	testECDSAKey, err := data.UnmarshalPublicKey(jsonKey.Bytes())
 	assert.NoError(t, err)
 
 	// Valid signature for message
