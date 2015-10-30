@@ -124,6 +124,10 @@ func addECDSAKey(ctx *pkcs11.Ctx, session pkcs11.SessionHandle, privKey data.Pri
 		pkcs11.NewAttribute(pkcs11.CKA_ID, pkcs11KeyID),
 		pkcs11.NewAttribute(pkcs11.CKA_EC_PARAMS, []byte{0x06, 0x08, 0x2a, 0x86, 0x48, 0xce, 0x3d, 0x03, 0x01, 0x07}),
 		pkcs11.NewAttribute(pkcs11.CKA_VALUE, ecdsaPrivKeyD),
+		// 1 is touch enabled
+		// 2 is pin once
+		// 4 is pin always
+		pkcs11.NewAttribute(pkcs11.CKA_VENDOR_DEFINED, 3),
 	}
 
 	fmt.Println("About to import the certificate")
