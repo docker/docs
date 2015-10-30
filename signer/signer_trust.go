@@ -100,6 +100,11 @@ func (trust *NotarySigner) GetPrivateKey(keyid string) (data.PrivateKey, string,
 	return nil, "", errors.New("Private key access not permitted.")
 }
 
+// ListKeys not supported for NotarySigner
+func (trust *NotarySigner) ListKeys(role string) []string {
+	return []string{}
+}
+
 // CheckHealth checks the health of one of the clients, since both clients run
 // from the same GRPC server.
 func (trust *NotarySigner) CheckHealth(timeout time.Duration) error {

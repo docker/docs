@@ -22,6 +22,11 @@ type RSAHardwareCryptoService struct {
 	session pkcs11.SessionHandle
 }
 
+// ListKeys not implemented yet
+func (s *RSAHardwareCryptoService) ListKeys(role string) []string {
+	return []string{}
+}
+
 // Create creates a key and returns its public components
 func (s *RSAHardwareCryptoService) Create(role, algo string) (data.PublicKey, error) {
 	// For now generate random labels for keys
