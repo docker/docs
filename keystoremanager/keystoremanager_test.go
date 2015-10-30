@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"os"
+	"path/filepath"
 	"testing"
 	"text/template"
 
@@ -121,8 +122,12 @@ func TestValidateRoot(t *testing.T) {
 	defer os.RemoveAll(tempBaseDir)
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
+	keysPath := filepath.Join(tempBaseDir, PrivDir)
+	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, passphraseRetriever)
+	assert.NoError(t, err)
+
 	// Create a FileStoreManager
-	keyStoreManager, err := NewKeyStoreManager(tempBaseDir, passphraseRetriever)
+	keyStoreManager, err := NewKeyStoreManager(tempBaseDir, fileKeyStore)
 	assert.NoError(t, err)
 
 	// Execute our template
@@ -229,8 +234,12 @@ func filestoreWithTwoCerts(t *testing.T, gun, keyAlg string) (
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
+	keysPath := filepath.Join(tempBaseDir, PrivDir)
+	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, passphraseRetriever)
+	assert.NoError(t, err)
+
 	// Create a FileStoreManager
-	keyStoreManager, err := NewKeyStoreManager(tempBaseDir, passphraseRetriever)
+	keyStoreManager, err := NewKeyStoreManager(tempBaseDir, fileKeyStore)
 	assert.NoError(t, err)
 
 	certs := make([]*x509.Certificate, 2)

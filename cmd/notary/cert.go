@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"math"
 	"os"
+	"path/filepath"
 	"time"
 
 	"github.com/docker/notary/keystoremanager"
@@ -55,7 +56,12 @@ func certRemove(cmd *cobra.Command, args []string) {
 
 	parseConfig()
 
-	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, retriever)
+	keysPath := filepath.Join(trustDir, keystoremanager.PrivDir)
+	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
+	if err != nil {
+		fatalf("failed to create private key store in directory: %s", keysPath)
+	}
+	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, fileKeyStore)
 	if err != nil {
 		fatalf("failed to create a new truststore manager with directory: %s", trustDir)
 	}
@@ -119,7 +125,12 @@ func certList(cmd *cobra.Command, args []string) {
 
 	parseConfig()
 
-	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, retriever)
+	keysPath := filepath.Join(trustDir, keystoremanager.PrivDir)
+	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
+	if err != nil {
+		fatalf("failed to create private key store in directory: %s", keysPath)
+	}
+	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, fileKeyStore)
 	if err != nil {
 		fatalf("failed to create a new truststore manager with directory: %s", trustDir)
 	}

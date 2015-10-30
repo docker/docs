@@ -10,7 +10,6 @@ import (
 	"time"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/docker/notary/pkg/passphrase"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
@@ -26,7 +25,7 @@ type KeyStoreManager struct {
 
 const (
 	trustDir       = "trusted_certificates"
-	privDir        = "private"
+	PrivDir        = "private"
 	rsaRootKeySize = 4096 // Used for new root keys
 )
 
@@ -56,13 +55,7 @@ func (err ErrRootRotationFail) Error() string {
 
 // NewKeyStoreManager returns an initialized KeyStoreManager, or an error
 // if it fails to create the KeyFileStores or load certificates
-func NewKeyStoreManager(baseDir string, passphraseRetriever passphrase.Retriever) (*KeyStoreManager, error) {
-	keysPath := filepath.Join(baseDir, privDir)
-	keyStore, err := trustmanager.NewKeyFileStore(keysPath, passphraseRetriever)
-	if err != nil {
-		return nil, err
-	}
-
+func NewKeyStoreManager(baseDir string, keyStore *trustmanager.KeyFileStore) (*KeyStoreManager, error) {
 	trustPath := filepath.Join(baseDir, trustDir)
 
 	// Load all CAs that aren't expired and don't use SHA1

@@ -60,7 +60,7 @@ func (km *KeyStoreManager) ExportRootKeyReencrypt(dest io.Writer, keyID string, 
 	tempBaseDir, err := ioutil.TempDir("", "notary-key-export-")
 	defer os.RemoveAll(tempBaseDir)
 
-	tempKeysPath := filepath.Join(tempBaseDir, privDir)
+	tempKeysPath := filepath.Join(tempBaseDir, PrivDir)
 	tempKeyStore, err := trustmanager.NewKeyFileStore(tempKeysPath, newPassphraseRetriever)
 	if err != nil {
 		return err
@@ -178,7 +178,7 @@ func (km *KeyStoreManager) ExportAllKeys(dest io.Writer, newPassphraseRetriever 
 	defer os.RemoveAll(tempBaseDir)
 
 	// Create temporary keystore to use as a staging area
-	tempKeysPath := filepath.Join(tempBaseDir, privDir)
+	tempKeysPath := filepath.Join(tempBaseDir, PrivDir)
 	tempKeyStore, err := trustmanager.NewKeyFileStore(tempKeysPath, newPassphraseRetriever)
 	if err != nil {
 		return err
@@ -190,7 +190,7 @@ func (km *KeyStoreManager) ExportAllKeys(dest io.Writer, newPassphraseRetriever 
 
 	zipWriter := zip.NewWriter(dest)
 
-	if err := addKeysToArchive(zipWriter, tempKeyStore, privDir); err != nil {
+	if err := addKeysToArchive(zipWriter, tempKeyStore, PrivDir); err != nil {
 		return err
 	}
 
@@ -224,14 +224,14 @@ func (km *KeyStoreManager) ImportKeysZip(zipReader zip.Reader) error {
 
 		// Note that using / as a separator is okay here - the zip
 		// package guarantees that the separator will be /
-		if strings.HasPrefix(fNameTrimmed, privDir) {
+		if strings.HasPrefix(fNameTrimmed, PrivDir) {
 			if fNameTrimmed[len(fNameTrimmed)-5:] == "_root" {
 				if err = checkRootKeyIsEncrypted(fileBytes); err != nil {
 					rc.Close()
 					return err
 				}
 			}
-			keyName := strings.TrimPrefix(fNameTrimmed, privDir)
+			keyName := strings.TrimPrefix(fNameTrimmed, PrivDir)
 			newKeys[keyName] = fileBytes
 		} else {
 			// This path inside the zip archive doesn't look like a
@@ -283,7 +283,7 @@ func (km *KeyStoreManager) ExportKeysByGUN(dest io.Writer, gun string, passphras
 	defer os.RemoveAll(tempBaseDir)
 
 	// Create temporary keystore to use as a staging area
-	tempKeysPath := filepath.Join(tempBaseDir, privDir)
+	tempKeysPath := filepath.Join(tempBaseDir, PrivDir)
 	tempKeyStore, err := trustmanager.NewKeyFileStore(tempKeysPath, passphraseRetriever)
 	if err != nil {
 		return err
@@ -299,7 +299,7 @@ func (km *KeyStoreManager) ExportKeysByGUN(dest io.Writer, gun string, passphras
 		return ErrNoKeysFoundForGUN
 	}
 
-	if err := addKeysToArchive(zipWriter, tempKeyStore, privDir); err != nil {
+	if err := addKeysToArchive(zipWriter, tempKeyStore, PrivDir); err != nil {
 		return err
 	}
 
