@@ -6,6 +6,7 @@
 #define b2dIsoPath "..\bundle\boot2docker.iso"
 #define dockerCli "..\bundle\docker.exe"
 #define dockerMachineCli "..\bundle\docker-machine*.exe"
+#define dockerComposeCli "..\bundle\docker-compose.exe"
 #define kitematic "..\bundle\kitematic"
 #define git "..\bundle\Git.exe"
 #define virtualBoxCommon "..\bundle\common.cab"
@@ -56,6 +57,7 @@ Name: upgradevm; Description: "Upgrade or Migrate Boot2Docker VM to latest versi
 [Components]
 Name: "Docker"; Description: "Docker Client for Windows" ; Types: full custom; Flags: fixed
 Name: "DockerMachine"; Description: "Docker Machine for Windows" ; Types: full custom; Flags: fixed
+Name: "DockerCompose"; Description: "Docker Compose for Windows" ; Types: full custom
 Name: "VirtualBox"; Description: "VirtualBox"; Types: full custom; Flags: disablenouninstallwarning
 Name: "Kitematic"; Description: "Kitematic for Windows (Alpha)" ; Types: full custom
 Name: "Git"; Description: "Git for Windows"; Types: full custom; Flags: disablenouninstallwarning
@@ -66,6 +68,7 @@ Source: "{#dockerCli}"; DestDir: "{app}"; Flags: ignoreversion; Components: "Doc
 Source: ".\start.sh"; DestDir: "{app}"; Flags: ignoreversion; Components: "Docker"
 Source: ".\delete.sh"; DestDir: "{app}"; Flags: ignoreversion; Components: "Docker"
 Source: "{#dockerMachineCli}"; DestDir: "{app}"; Flags: ignoreversion; Components: "DockerMachine"
+Source: "{#dockerComposeCli}"; DestDir: "{app}"; Flags: ignoreversion; Components: "DockerCompose"
 Source: ".\migrate.sh"; DestDir: "{app}"; Flags: ignoreversion; Components: "DockerMachine"
 Source: ".\migrate.bat"; DestDir: "{app}"; Flags: ignoreversion; Components: "DockerMachine"
 Source: "{#kitematic}\*"; DestDir: "{app}\kitematic"; Flags: ignoreversion recursesubdirs; Components: "Kitematic"
