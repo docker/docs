@@ -148,7 +148,7 @@ NSString *dockerMachinePath = @"/usr/local/bin/docker-machine";
     // Do the migration
     NSTask* task = [[NSTask alloc] init];
     task.launchPath = @"/usr/bin/sudo";
-    task.arguments = [NSArray arrayWithObjects:@"-i", @"-u", NSUserName(), [NSString stringWithFormat:@"%@ -D stop default && cp %@/.docker/machine/cache/boot2docker.iso %@/.docker/machine/machines/default/boot2docker.iso", dockerMachinePath, NSHomeDirectory(),  NSHomeDirectory()], nil];
+    task.arguments = [NSArray arrayWithObjects:@"-i", @"-u", NSUserName(), [NSString stringWithFormat:@"%@ -D stop default || true && cp %@/.docker/machine/cache/boot2docker.iso %@/.docker/machine/machines/default/boot2docker.iso", dockerMachinePath, NSHomeDirectory(),  NSHomeDirectory()], nil];
 
     [self runTask:task onFinish:^void (int status) {
         self.nextEnabled = YES;
