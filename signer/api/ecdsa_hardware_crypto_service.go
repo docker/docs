@@ -15,13 +15,17 @@ import (
 	"math/big"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/docker/notary/pkg/passphrase"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
 	"github.com/miekg/pkcs11"
 )
 
-const pkcs11Lib = "/usr/local/lib/libykcs11.so"
-const USER_PIN = "123456"
+const (
+	pkcs11Lib   = "/usr/local/lib/libykcs11.so"
+	USER_PIN    = "123456"
+	SO_USER_PIN = "010203040506070801020304050607080102030405060708"
+)
 
 // Hardcoded yubikey PKCS11 ID
 var YUBIKEY_ROOT_KEY_ID = []byte{2}
@@ -29,14 +33,18 @@ var YUBIKEY_ROOT_KEY_ID = []byte{2}
 // YubiPrivateKey represents a private key inside of a yubikey
 type YubiPrivateKey struct {
 	data.ECDSAPublicKey
+	passRetriever passphrase.Retriever
 }
 
 type YubikeySigner struct {
 	YubiPrivateKey
 }
 
-func NewYubiPrivateKey(pubKey data.ECDSAPublicKey) *YubiPrivateKey {
-	return &YubiPrivateKey{ECDSAPublicKey: pubKey}
+func NewYubiPrivateKey(pubKey data.ECDSAPublicKey, passRetriever passphrase.Retriever) *YubiPrivateKey {
+	return &YubiPrivateKey{
+		ECDSAPublicKey: pubKey,
+		passRetriever:  passRetriever,
+	}
 }
 
 func (ys *YubikeySigner) Public() crypto.PublicKey {
@@ -72,7 +80,7 @@ func (y *YubiPrivateKey) Sign(rand io.Reader, msg []byte, opts crypto.SignerOpts
 	}
 	defer cleanup(ctx, session)
 
-	sig, err := sign(ctx, session, YUBIKEY_ROOT_KEY_ID, msg)
+	sig, err := sign(ctx, session, YUBIKEY_ROOT_KEY_ID, y.passRetriever, msg)
 	if err != nil {
 		return nil, fmt.Errorf("failed to sign using Yubikey: %v", err)
 	}
@@ -81,11 +89,11 @@ func (y *YubiPrivateKey) Sign(rand io.Reader, msg []byte, opts crypto.SignerOpts
 }
 
 // addECDSAKey adds a key to the yubikey
-func addECDSAKey(ctx *pkcs11.Ctx, session pkcs11.SessionHandle, privKey data.PrivateKey, pkcs11KeyID []byte) error {
+func addECDSAKey(ctx *pkcs11.Ctx, session pkcs11.SessionHandle, privKey data.PrivateKey, pkcs11KeyID []byte, passRetriever passphrase.Retriever) error {
 	logrus.Debugf("Got into add key with key: %s\n", privKey.ID())
 
 	// TODO(diogo): Figure out CKU_SO with yubikey
-	err := ctx.Login(session, pkcs11.CKU_SO, "010203040506070801020304050607080102030405060708")
+	err := login(ctx, session, passRetriever, pkcs11.CKU_SO, SO_USER_PIN)
 	if err != nil {
 		return err
 	}
@@ -206,8 +214,8 @@ func getECDSAKey(ctx *pkcs11.Ctx, session pkcs11.SessionHandle, pkcs11KeyID []by
 }
 
 // Sign returns a signature for a given signature request
-func sign(ctx *pkcs11.Ctx, session pkcs11.SessionHandle, pkcs11KeyID, payload []byte) ([]byte, error) {
-	err := ctx.Login(session, pkcs11.CKU_USER, USER_PIN)
+func sign(ctx *pkcs11.Ctx, session pkcs11.SessionHandle, pkcs11KeyID []byte, passRetriever passphrase.Retriever, payload []byte) ([]byte, error) {
+	err := login(ctx, session, passRetriever, pkcs11.CKU_USER, USER_PIN)
 	if err != nil {
 		return nil, fmt.Errorf("error logging in: %v", err)
 	}
@@ -253,10 +261,12 @@ func sign(ctx *pkcs11.Ctx, session pkcs11.SessionHandle, pkcs11KeyID, payload []
 	return sig[:], nil
 }
 
-type YubiKeyStore struct{}
+type YubiKeyStore struct {
+	passRetriever passphrase.Retriever
+}
 
-func NewYubiKeyStore() *YubiKeyStore {
-	return &YubiKeyStore{}
+func NewYubiKeyStore(passphraseRetriever passphrase.Retriever) *YubiKeyStore {
+	return &YubiKeyStore{passRetriever: passphraseRetriever}
 }
 
 func (s *YubiKeyStore) ListKeys() map[string]string {
@@ -285,7 +295,7 @@ func (s *YubiKeyStore) AddKey(keyID, alias string, privKey data.PrivateKey) erro
 	}
 	defer cleanup(ctx, session)
 
-	return addECDSAKey(ctx, session, privKey, YUBIKEY_ROOT_KEY_ID)
+	return addECDSAKey(ctx, session, privKey, YUBIKEY_ROOT_KEY_ID, s.passRetriever)
 }
 
 func (s *YubiKeyStore) GetKey(keyID string) (data.PrivateKey, string, error) {
@@ -303,7 +313,7 @@ func (s *YubiKeyStore) GetKey(keyID string) (data.PrivateKey, string, error) {
 	if pubKey.ID() != keyID {
 		return nil, "", fmt.Errorf("expected root key: %s, but found: %s\n", keyID, pubKey.ID())
 	}
-	privKey := NewYubiPrivateKey(*pubKey)
+	privKey := NewYubiPrivateKey(*pubKey, s.passRetriever)
 	if privKey == nil {
 		return nil, "", errors.New("could not initialize new YubiPrivateKey")
 	}
@@ -366,4 +376,41 @@ func SetupHSMEnv(libraryPath string) (*pkcs11.Ctx, pkcs11.SessionHandle, error) 
 	}
 
 	return p, session, nil
+}
+
+func login(ctx *pkcs11.Ctx, session pkcs11.SessionHandle, passRetriever passphrase.Retriever, userFlag uint, defaultPassw string) error {
+	// try default password
+	err := ctx.Login(session, userFlag, defaultPassw)
+	if err == nil {
+		return nil
+	}
+
+	// default failed, ask user for password
+	for attempts := 0; ; attempts++ {
+		var (
+			giveup bool
+			err    error
+			user   string
+		)
+		if userFlag == pkcs11.CKU_SO {
+			user = "SO Pin"
+		} else {
+			user = "Pin"
+		}
+		passwd, giveup, err := passRetriever(user, "yubikey", false, attempts)
+		// Check if the passphrase retriever got an error or if it is telling us to give up
+		if giveup || err != nil {
+			return trustmanager.ErrPasswordInvalid{}
+		}
+		if attempts > 2 {
+			return trustmanager.ErrAttemptsExceeded{}
+		}
+
+		// Try to convert PEM encoded bytes back to a PrivateKey using the passphrase
+		err = ctx.Login(session, userFlag, passwd)
+		if err == nil {
+			return nil
+		}
+	}
+	return nil
 }

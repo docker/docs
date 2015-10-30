@@ -11,6 +11,7 @@ import (
 	notaryclient "github.com/docker/notary/client"
 	"github.com/docker/notary/keystoremanager"
 	"github.com/docker/notary/pkg/passphrase"
+	"github.com/docker/notary/trustmanager"
 
 	"github.com/spf13/cobra"
 )
@@ -111,7 +112,12 @@ func keysRemoveKey(cmd *cobra.Command, args []string) {
 
 	parseConfig()
 
-	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, retriever)
+	keysPath := filepath.Join(trustDir, keystoremanager.PrivDir)
+	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
+	if err != nil {
+		fatalf("failed to create private key store in directory: %s", keysPath)
+	}
+	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, fileKeyStore)
 	if err != nil {
 		fatalf("failed to create a new truststore manager with directory: %s", trustDir)
 	}
@@ -167,7 +173,12 @@ func keysList(cmd *cobra.Command, args []string) {
 
 	parseConfig()
 
-	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, retriever)
+	keysPath := filepath.Join(trustDir, keystoremanager.PrivDir)
+	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
+	if err != nil {
+		fatalf("failed to create private key store in directory: %s", keysPath)
+	}
+	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, fileKeyStore)
 	if err != nil {
 		fatalf("failed to create a new truststore manager with directory: %s", trustDir)
 	}
@@ -220,7 +231,12 @@ func keysGenerateRootKey(cmd *cobra.Command, args []string) {
 
 	parseConfig()
 
-	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, retriever)
+	keysPath := filepath.Join(trustDir, keystoremanager.PrivDir)
+	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
+	if err != nil {
+		fatalf("failed to create private key store in directory: %s", keysPath)
+	}
+	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, fileKeyStore)
 	if err != nil {
 		fatalf("failed to create a new truststore manager with directory: %s", trustDir)
 	}
@@ -244,7 +260,12 @@ func keysExport(cmd *cobra.Command, args []string) {
 
 	parseConfig()
 
-	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, retriever)
+	keysPath := filepath.Join(trustDir, keystoremanager.PrivDir)
+	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
+	if err != nil {
+		fatalf("failed to create private key store in directory: %s", keysPath)
+	}
+	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, fileKeyStore)
 	if err != nil {
 		fatalf("failed to create a new truststore manager with directory: %s", trustDir)
 	}
@@ -287,7 +308,12 @@ func keysExportRoot(cmd *cobra.Command, args []string) {
 
 	parseConfig()
 
-	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, retriever)
+	keysPath := filepath.Join(trustDir, keystoremanager.PrivDir)
+	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
+	if err != nil {
+		fatalf("failed to create private key store in directory: %s", keysPath)
+	}
+	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, fileKeyStore)
 	if err != nil {
 		fatalf("failed to create a new truststore manager with directory: %s", trustDir)
 	}
@@ -322,7 +348,12 @@ func keysImport(cmd *cobra.Command, args []string) {
 
 	parseConfig()
 
-	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, retriever)
+	keysPath := filepath.Join(trustDir, keystoremanager.PrivDir)
+	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
+	if err != nil {
+		fatalf("failed to create private key store in directory: %s", keysPath)
+	}
+	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, fileKeyStore)
 	if err != nil {
 		fatalf("failed to create a new truststore manager with directory: %s", trustDir)
 	}
@@ -351,7 +382,12 @@ func keysImportRoot(cmd *cobra.Command, args []string) {
 
 	parseConfig()
 
-	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, retriever)
+	keysPath := filepath.Join(trustDir, keystoremanager.PrivDir)
+	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
+	if err != nil {
+		fatalf("failed to create private key store in directory: %s", keysPath)
+	}
+	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, fileKeyStore)
 	if err != nil {
 		fatalf("failed to create a new truststore manager with directory: %s", trustDir)
 	}
