@@ -1,4 +1,5 @@
 // +build pkcs11
+
 package api
 
 import (
