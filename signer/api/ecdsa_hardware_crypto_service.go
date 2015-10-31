@@ -99,7 +99,6 @@ func addECDSAKey(ctx *pkcs11.Ctx, session pkcs11.SessionHandle, privKey data.Pri
 	}
 	defer ctx.Logout(session)
 
-	fmt.Println("Parsing EC private key")
 	// Create an ecdsa.PrivateKey out of the private key bytes
 	ecdsaPrivKey, err := x509.ParseECPrivateKey(privKey.Private())
 	if err != nil {
@@ -118,7 +117,6 @@ func addECDSAKey(ctx *pkcs11.Ctx, session pkcs11.SessionHandle, privKey data.Pri
 	if err != nil {
 		return fmt.Errorf("failed to create the certificate: %v", err)
 	}
-	fmt.Println("Got a certificate!")
 
 	certTemplate := []*pkcs11.Attribute{
 		pkcs11.NewAttribute(pkcs11.CKA_CLASS, pkcs11.CKO_CERTIFICATE),
@@ -138,14 +136,11 @@ func addECDSAKey(ctx *pkcs11.Ctx, session pkcs11.SessionHandle, privKey data.Pri
 		pkcs11.NewAttribute(pkcs11.CKA_VENDOR_DEFINED, 3),
 	}
 
-	fmt.Println("About to import the certificate")
-
 	_, err = ctx.CreateObject(session, certTemplate)
 	if err != nil {
 		return fmt.Errorf("error importing: %v", err)
 	}
 
-	fmt.Println("About to import the private key")
 	_, err = ctx.CreateObject(session, privateKeyTemplate)
 	if err != nil {
 		return fmt.Errorf("error importing: %v", err)
@@ -340,7 +335,6 @@ func (s *YubiKeyStore) ImportKey(pemBytes []byte, keyID string) error {
 }
 
 func cleanup(ctx *pkcs11.Ctx, session pkcs11.SessionHandle) {
-	fmt.Println("Tearing down yubikey session")
 	ctx.CloseSession(session)
 	ctx.Finalize()
 	ctx.Destroy()
@@ -348,7 +342,6 @@ func cleanup(ctx *pkcs11.Ctx, session pkcs11.SessionHandle) {
 
 // SetupHSMEnv is a method that depends on the existences
 func SetupHSMEnv(libraryPath string) (*pkcs11.Ctx, pkcs11.SessionHandle, error) {
-	fmt.Println("Setting up Yubikey")
 	p := pkcs11.New(libraryPath)
 
 	if p == nil {
