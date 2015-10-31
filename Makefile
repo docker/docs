@@ -8,16 +8,24 @@ NOTARY_VERSION := $(shell cat NOTARY_VERSION)
 GITCOMMIT := $(shell git rev-parse --short HEAD)
 GITUNTRACKEDCHANGES := $(shell git status --porcelain --untracked-files=no)
 ifneq ($(GITUNTRACKEDCHANGES),)
-	GITCOMMIT := $(GITCOMMIT)-dirty
+GITCOMMIT := $(GITCOMMIT)-dirty
 endif
 CTIMEVAR=-X $(NOTARY_PKG)/version.GitCommit='$(GITCOMMIT)' -X $(NOTARY_PKG)/version.NotaryVersion='$(NOTARY_VERSION)'
 GO_LDFLAGS=-ldflags "-w $(CTIMEVAR)"
 GO_LDFLAGS_STATIC=-ldflags "-w $(CTIMEVAR) -extldflags -static"
 GOOSES = darwin freebsd linux
 GOARCHS = amd64
-NOTARY_BUILDFLAGS="pkcs11"
+NOTARY_BUILDTAGS="pkcs11"
 GO_EXC = go
 NOTARYDIR := /go/src/github.com/docker/notary
+
+# check to be sure pkcs11 lib is always imported with a build tag
+GO_LIST_PKCS11 := $(shell go list -e -f '{{join .Deps "\n"}}' ./... | xargs go list -e -f '{{if not .Standard}}{{.ImportPath}}{{end}}' | grep -q pkcs11)
+ifeq ($(GO_LIST_PKCS11),)
+$(info pkcs11 import was not found anywhere without a build tag, yay)
+else
+$(error You are importing pkcs11 somewhere and not using a build tag)
+endif
 
 # go cover test variables
 COVERDIR=.cover
@@ -27,7 +35,7 @@ PKGS = $(shell go list ./... | tr '\n' ' ')
 
 GO_VERSION = $(shell go version | awk '{print $$3}')
 
-.PHONY: clean all fmt vet lint build test binaries cross cover docker-images
+.PHONY: clean all fmt vet lint build test binaries cross cover docker-images notary-dockerfile
 .DELETE_ON_ERROR: cover
 .DEFAULT: default
 
@@ -50,15 +58,15 @@ version/version.go:
 
 ${PREFIX}/bin/notary-server: NOTARY_VERSION $(shell find . -type f -name '*.go')
 	@echo "+ $@"
-	@godep go build -tags ${NOTARY_BUILDFLAGS} -o $@ ${GO_LDFLAGS} ./cmd/notary-server
+	@godep go build -tags ${NOTARY_BUILDTAGS} -o $@ ${GO_LDFLAGS} ./cmd/notary-server
 
 ${PREFIX}/bin/notary: NOTARY_VERSION $(shell find . -type f -name '*.go')
 	@echo "+ $@"
-	@godep go build -tags ${NOTARY_BUILDFLAGS} -o $@ ${GO_LDFLAGS} ./cmd/notary
+	@godep go build -tags ${NOTARY_BUILDTAGS} -o $@ ${GO_LDFLAGS} ./cmd/notary
 
 ${PREFIX}/bin/notary-signer: NOTARY_VERSION $(shell find . -type f -name '*.go')
 	@echo "+ $@"
-	@godep go build -tags ${NOTARY_BUILDFLAGS} -o $@ ${GO_LDFLAGS} ./cmd/notary-signer
+	@godep go build -tags ${NOTARY_BUILDTAGS} -o $@ ${GO_LDFLAGS} ./cmd/notary-signer
 
 vet: go_version
 	@echo "+ $@"
@@ -74,20 +82,19 @@ lint:
 
 build: go_version
 	@echo "+ $@"
-	@go build -tags ${NOTARY_BUILDFLAGS} -v ${GO_LDFLAGS} ./...
+	@go build -tags ${NOTARY_BUILDTAGS} -v ${GO_LDFLAGS} ./...
 
 test: OPTS =
 test: go_version
 	@echo "+ $@ $(OPTS)"
-	go test -tags ${NOTARY_BUILDFLAGS} $(OPTS) ./...
+	go test -tags ${NOTARY_BUILDTAGS} $(OPTS) ./...
 
 test-full: vet lint
 	@echo "+ $@"
-	go test -tags ${NOTARY_BUILDFLAGS} -v ./...
+	go test -tags ${NOTARY_BUILDTAGS} -v ./...
 
 protos:
 	@protoc --go_out=plugins=grpc:. proto/*.proto
-
 
 # This allows coverage for a package to come from tests in different package.
 # Requires that the following:
@@ -112,7 +119,7 @@ cover: gen-cover
 	@go tool cover -html="$(COVERPROFILE)"
 
 # Codecov knows how to merge multiple coverage files
-ci: OPTS = -race -coverpkg "$(shell ./coverpkg.sh $(1) $(NOTARY_PKG))"
+ci: OPTS = -tags ${NOTARY_BUILDTAGS} -race -coverpkg "$(shell ./coverpkg.sh $(1) $(NOTARY_PKG))"
     GO_EXC := godep go
 ci: gen-cover
 	@gocovmerge $(shell ls -1 $(COVERDIR)/* | tr "\n" " ") > $(COVERPROFILE)
