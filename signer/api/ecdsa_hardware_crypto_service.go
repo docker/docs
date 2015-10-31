@@ -22,7 +22,6 @@ import (
 )
 
 const (
-	pkcs11Lib   = "/usr/local/lib/libykcs11.so"
 	USER_PIN    = "123456"
 	SO_USER_PIN = "010203040506070801020304050607080102030405060708"
 )
