@@ -3,12 +3,14 @@
 package client
 
 import (
+	"fmt"
 	"net/http"
 	"path/filepath"
 
 	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/keystoremanager"
 	"github.com/docker/notary/pkg/passphrase"
+	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/store"
 )
 
@@ -16,9 +18,14 @@ import (
 // It takes the base directory under where all the trust files will be stored
 // (usually ~/.docker/trust/).
 func NewNotaryRepository(baseDir, gun, baseURL string, rt http.RoundTripper,
-	passphraseRetriever passphrase.Retriever) (*NotaryRepository, error) {
+	retriever passphrase.Retriever) (*NotaryRepository, error) {
+	keysPath := filepath.Join(baseDir, keystoremanager.PrivDir)
+	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create private key store in directory: %s", keysPath)
+	}
 
-	keyStoreManager, err := keystoremanager.NewKeyStoreManager(baseDir, passphraseRetriever)
+	keyStoreManager, err := keystoremanager.NewKeyStoreManager(baseDir, fileKeyStore)
 	if err != nil {
 		return nil, err
 	}
