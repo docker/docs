@@ -4,7 +4,7 @@ title = "Docker Governance Advisory Board"
 description = "Docker Governance Advisory Board"
 keywords = ["governance, board, members, explained"]
 [menu.main]
-parent="smn_governance"
+parent="smn_govern"
 +++
 <![end-metadata]-->
 

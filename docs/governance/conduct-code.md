@@ -4,7 +4,7 @@ title = "Code of conduct"
 description = "Explains Docker's code of conduct"
 keywords = ["Docker, conduct, code"]
 [menu.main]
-parent="smn_governance"
+parent="smn_govern"
 weight=2
 +++
 <![end-metadata]-->
