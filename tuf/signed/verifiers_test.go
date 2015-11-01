@@ -293,7 +293,7 @@ func TestECDSAVerifier(t *testing.T) {
 }
 
 func TestECDSAVerifierOtherCurves(t *testing.T) {
-	curves := []elliptic.Curve{elliptic.P224(), elliptic.P256(), elliptic.P384(), elliptic.P521()}
+	curves := []elliptic.Curve{elliptic.P256(), elliptic.P384(), elliptic.P521()}
 
 	for _, curve := range curves {
 		ecdsaPrivKey, err := ecdsa.GenerateKey(curve, rand.Reader)
