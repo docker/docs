@@ -32,7 +32,7 @@ WORKDIR /go/src/${NOTARYPKG}
 
 # Install notary-signer
 RUN go install \
-    -ldflags "-w -X ${NOTARYPKG}/version.GitCommit `git rev-parse --short HEAD` -X ${NOTARYPKG}/version.NotaryVersion `cat NOTARY_VERSION`" \
+    -ldflags "-w -X ${NOTARYPKG}/version.GitCommit=`git rev-parse --short HEAD` -X ${NOTARYPKG}/version.NotaryVersion=`cat NOTARY_VERSION`" \
     ${NOTARYPKG}/cmd/notary-signer
 
 

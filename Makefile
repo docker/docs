@@ -24,9 +24,19 @@ COVERPROFILE=$(COVERDIR)/cover.out
 COVERMODE=count
 PKGS = $(shell go list ./... | tr '\n' ' ')
 
+GO_VERSION = $(shell go version | awk '{print $$3}')
+
 .PHONY: clean all fmt vet lint build test binaries cross cover docker-images
 .DELETE_ON_ERROR: cover
 .DEFAULT: default
+
+go_version:
+ifneq ("$(GO_VERSION)", "go1.5.1")
+	$(error Requires go version 1.5.1 - found $(GO_VERSION))
+else
+	@echo
+endif
+
 
 all: AUTHORS clean fmt vet fmt lint build test binaries
 
@@ -49,7 +59,7 @@ ${PREFIX}/bin/notary-signer: NOTARY_VERSION $(shell find . -type f -name '*.go')
 	@echo "+ $@"
 	@godep go build -o $@ ${GO_LDFLAGS} ./cmd/notary-signer
 
-vet:
+vet: go_version
 	@echo "+ $@"
 	@test -z "$$(go tool vet -printf=false . 2>&1 | grep -v Godeps/_workspace/src/ | tee /dev/stderr)"
 
@@ -61,12 +71,12 @@ lint:
 	@echo "+ $@"
 	@test -z "$$(golint ./... | grep -v .pb. | grep -v Godeps/_workspace/src/ | tee /dev/stderr)"
 
-build:
+build: go_version
 	@echo "+ $@"
 	@go build -v ${GO_LDFLAGS} ./...
 
 test: OPTS =
-test:
+test: go_version
 	@echo "+ $@ $(OPTS)"
 	go test $(OPTS) ./...
 
@@ -88,7 +98,7 @@ define gocover
 $(GO_EXC) test $(OPTS) -covermode="$(COVERMODE)" -coverprofile="$(COVERDIR)/$(subst /,-,$(1)).cover" "$(1)" || exit 1;
 endef
 
-gen-cover:
+gen-cover: go_version
 	@rm -rf "$(COVERDIR)"
 	@mkdir -p "$(COVERDIR)"
 	$(foreach PKG,$(PKGS),$(call gocover,$(PKG)))
@@ -110,7 +120,7 @@ ci: gen-cover
 clean-protos:
 	@rm proto/*.pb.go
 
-binaries: ${PREFIX}/bin/notary-server ${PREFIX}/bin/notary ${PREFIX}/bin/notary-signer
+binaries: go_version ${PREFIX}/bin/notary-server ${PREFIX}/bin/notary ${PREFIX}/bin/notary-signer
 	@echo "+ $@"
 
 define template
@@ -118,7 +128,7 @@ mkdir -p ${PREFIX}/cross/$(1)/$(2);
 GOOS=$(1) GOARCH=$(2) CGO_ENABLED=0 go build -o ${PREFIX}/cross/$(1)/$(2)/notary -a -tags "static_build netgo" -installsuffix netgo ${GO_LDFLAGS_STATIC} ./cmd/notary;
 endef
 
-cross:
+cross: go_version
 	$(foreach GOARCH,$(GOARCHS),$(foreach GOOS,$(GOOSES),$(call template,$(GOOS),$(GOARCH))))
 
 
