@@ -38,7 +38,7 @@ Lets try using notary.
 
 Prerequisites:
 
-- Requirements from the [Compiling Notary Server](#compiling-notary-server) section
+- Requirements from the [Compiling Notary Server](#compiling-notary-server) section (such as go 1.5.1)
 - [docker and docker-compose](http://docs.docker.com/compose/install/)
 - [Notary server configuration](#configuring-notary-server)
 
@@ -125,7 +125,7 @@ OpenSSL example:
 
 Prerequisites:
 
-- Go >= 1.3
+- Go = 1.5.1
 - [godep](https://github.com/tools/godep) installed
 - libtool development headers installed
 
