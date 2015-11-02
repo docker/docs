@@ -1,13 +1,13 @@
-<!--* [metadata]>
+<!--[metadata]>
 +++
 title = "Contribution workflow"
 description = "Describes Docker's communication channels"
-keywords = * ["IRC, Google group, Twitter, blog,  Stackoverflow"]
-* [menu.main]
+keywords = ["IRC, Google group, Twitter, blog,  Stackoverflow"]
+[menu.main]
 identifier = "smn_workflow"
 parent="mn_oss_contrib"
 +++
-<!* [end-metadata]-->
+<![end-metadata]-->
 
 # Contribution workflow
 
