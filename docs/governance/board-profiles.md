@@ -4,7 +4,7 @@ title = "Board member profiles"
 description = "Board member profiles"
 keywords = ["governance, board, members, profiles"]
 [menu.main]
-parent="smn_governance"
+parent="smn_govern"
 weight=1
 +++
 <![end-metadata]-->

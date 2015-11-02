@@ -4,8 +4,7 @@ title = "Support the community"
 description = "Support the community"
 keywords = ["support, community, users, irc"]
 [menu.main]
-parent="mn_opensource"
-weight=5
+parent="smn_ways"
 +++
 <![end-metadata]-->
 
@@ -41,16 +40,14 @@ open user questions</a> on the Docker project.
 
 ## Docker contributors
 
-Docker contributors are people like you contributing to Docker open source. 
+Docker contributors are people like you contributing to Docker open source.
 Contributors may need help with IRC, Go programming, Markdown, or with other
 aspects of contributing. To help Docker contributors:
 
 * the <a href="https://gitter.im/docker/docker" target="_blank">Docker Gitter IM
-</a> room 
+</a> room
 * the <a href="https://groups.google.com/forum/#!forum/docker-dev"
-target="_blank">docker-dev</a>  Google group 
+target="_blank">docker-dev</a>  Google group
 * the <a href="https://dev.dockerproject.com"
 target="_blank">dev.dockerproject.com</a> on Discourse
 * the `#docker-dev` channel on Freenode IRC
-
-

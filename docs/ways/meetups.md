@@ -4,8 +4,7 @@ title = "Organize a Docker Meetup"
 description = "Organize a Docker Meetup"
 keywords = ["Docker, meetup, hosting, organizing"]
 [menu.main]
-parent="mn_opensource"
-weight=7
+parent="smn_ways"
 +++
 <![end-metadata]-->
 

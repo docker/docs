@@ -4,8 +4,7 @@ title = "Organize our issues"
 description = "Organize our issues"
 keywords = ["governance, board, members, profiles"]
 [menu.main]
-parent="mn_opensource"
-weight=6
+parent="smn_ways"
 +++
 <![end-metadata]-->
 
@@ -26,7 +25,7 @@ or experience in software product management or project management.
 Docker users and contributors create new issues if they want to:
 
 * report a problem they had with Docker software
-* request a new feature 
+* request a new feature
 * ask a question
 
 # How do I triage?
@@ -68,7 +67,7 @@ notification go to your GitHub or email inbox. Some of repositories you can watc
 
 See <a href="https://github.com/docker" target="_blank">the complete list of
 Docker repositories</a> on GitHub.
-	
+
 3. Choose an issue from the <a
 href="https://github.com/docker/docker/issues?q=is%3Aopen+is%3Aissue+-label%
 3Akind%2Fproposal+-label%3Akind%2Fenhancement+-label%3Akind%2Fbug+-label%3Akind%
@@ -78,17 +77,16 @@ href="https://github.com/docker/docker/issues?q=is%3Aopen+is%3Aissue+-label%
 
 4. Follow the <a
 href="https://github.com/docker/docker/blob/master/project/ISSUE-TRIAGE.md"
-target="_blank">the triage process</a> to triage the issue. 
+target="_blank">the triage process</a> to triage the issue.
 
 The triage process asks you to add both a `kind/` and a `exp/` label to each
 issue. Because you are not a Docker maintainer, you add these through comments.
-Simply add a `+label` keyword to an issue comment: 
+Simply add a `+label` keyword to an issue comment:
 
 ![Example](../images/triage-label.png)
 
 For example, the `+exp/beginner` and `+kind/writing` labels would triage an issue as
 beginner writing task. For descriptions of valid labels, see the <a
-href="https://github.com/docker/docker/blob/master/project/ISSUE-TRIAGE.md">the triage process</a> 
+href="https://github.com/docker/docker/blob/master/project/ISSUE-TRIAGE.md">the triage process</a>
 
 5. Triage another issue.
-
