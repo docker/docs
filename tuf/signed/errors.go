@@ -4,6 +4,17 @@ import (
 	"fmt"
 )
 
+// ErrInsufficientSignatures - do not have enough signatures on a piece of
+// metadata
+type ErrInsufficientSignatures struct {
+	Name string
+	Err  error
+}
+
+func (e ErrInsufficientSignatures) Error() string {
+	return fmt.Sprintf("tuf: insufficient signatures for %s: %s", e.Name, e.Err)
+}
+
 // ErrExpired indicates a piece of metadata has expired
 type ErrExpired struct {
 	Role    string
