@@ -34,8 +34,11 @@ else
   echo "Machine $VM already exists in VirtualBox."
 fi
 
-echo "Starting machine $VM..."
-$DOCKER_MACHINE start $VM
+VM_STATUS=$($DOCKER_MACHINE status $VM)
+if [ "$VM_STATUS" != "Running" ]; then
+  echo "Starting machine $VM..."
+  $DOCKER_MACHINE start $VM
+fi
 
 echo "Setting environment variables for machine $VM..."
 eval "$($DOCKER_MACHINE env --shell=bash $VM)"
