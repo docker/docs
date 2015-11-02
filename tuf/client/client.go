@@ -405,9 +405,11 @@ func (c *Client) downloadSigned(role string, size int64, expectedSha256 []byte) 
 	if err != nil {
 		return nil, nil, err
 	}
-	genHash := sha256.Sum256(raw)
-	if expectedSha256 != nil && !bytes.Equal(genHash[:], expectedSha256) {
-		return nil, nil, ErrChecksumMismatch{role: role}
+	if expectedSha256 != nil {
+		genHash := sha256.Sum256(raw)
+		if !bytes.Equal(genHash[:], expectedSha256) {
+			return nil, nil, ErrChecksumMismatch{role: role}
+		}
 	}
 	s := &data.Signed{}
 	err = json.Unmarshal(raw, s)
