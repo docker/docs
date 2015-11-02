@@ -18,7 +18,6 @@ import (
 	"github.com/docker/notary/tuf"
 	tufclient "github.com/docker/notary/tuf/client"
 	"github.com/docker/notary/tuf/data"
-	tuferrors "github.com/docker/notary/tuf/errors"
 	"github.com/docker/notary/tuf/keys"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/store"
@@ -174,7 +173,7 @@ func (r *NotaryRepository) Initialize(rootKeyID string) error {
 	if err != nil {
 		logrus.Debug("Error on InitRoot: ", err.Error())
 		switch err.(type) {
-		case tuferrors.ErrInsufficientSignatures, trustmanager.ErrPasswordInvalid:
+		case signed.ErrInsufficientSignatures, trustmanager.ErrPasswordInvalid:
 		default:
 			return err
 		}
