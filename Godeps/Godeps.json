@@ -125,7 +125,8 @@
 		},
 		{
 			"ImportPath": "github.com/jfrazelle/go/canonical/json",
-			"Rev": "6e461eb70cb4187b41a84e9a567d7137bdbe0f16"
+			"Comment": "v1.5.1-1-1-gbaf439e",
+			"Rev": "baf439e6c161bd2106346fc8022b74ac2444e311"
 		},
 		{
 			"ImportPath": "github.com/jinzhu/gorm",
