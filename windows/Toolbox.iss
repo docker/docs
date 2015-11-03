@@ -1,7 +1,7 @@
 #define MyAppName "Docker Toolbox"
 #define MyAppPublisher "Docker"
 #define MyAppURL "https://docker.com"
-#define MyAppContact "https://docs.docker.com"
+#define MyAppContact "https://docker.com"
 
 #define b2dIsoPath "..\bundle\boot2docker.iso"
 #define dockerCli "..\bundle\docker.exe"
@@ -33,8 +33,8 @@ Compression=lzma
 SolidCompression=yes
 WizardImageFile=windows-installer-side.bmp
 WizardSmallImageFile=windows-installer-logo.bmp
-WizardImageStretch=no
-WizardImageBackColor=$22EBB8
+WizardImageStretch=yes
+WizardImageBackColor=$EBB822
 UninstallDisplayIcon={app}\unins000.exe
 SetupIconFile=toolbox.ico
 ChangesEnvironment=true
@@ -51,8 +51,8 @@ Filename: "{win}\explorer.exe"; Parameters: "{userprograms}\Docker\"; Flags: pos
 
 [Tasks]
 Name: desktopicon; Description: "{cm:CreateDesktopIcon}"
-Name: modifypath; Description: "Add docker.exe & docker-machine.exe to &PATH"
-Name: upgradevm; Description: "Upgrade or Migrate Boot2Docker VM to latest version of Docker if it exists."
+Name: modifypath; Description: "Add docker.exe && docker-machine.exe to &PATH"
+Name: upgradevm; Description: "Upgrade or Migrate Boot2Docker VM"
 
 [Components]
 Name: "Docker"; Description: "Docker Client for Windows" ; Types: full custom; Flags: fixed
@@ -99,7 +99,6 @@ Root: HKCU; Subkey: "Environment"; ValueType:string; ValueName:"DOCKER_TOOLBOX_I
 var
 	restart: boolean;
   TrackingDisabled: Boolean;
-	DockerInstallDocs: TLabel;
   TrackingCheckBox: TNewCheckBox;
 
 function uuid(): String;
@@ -187,13 +186,6 @@ begin
 	Result := not DirExists('C:\Program Files\Git') or not FileExists('C:\Program Files\Git\git-bash.exe')
 end;
 
-procedure DocLinkClick(Sender: TObject);
-var
-	ErrorCode: Integer;
-begin
-	ShellExec('', 'https://docs.docker.com/installation/windows/', '', '', SW_SHOW, ewNoWait, ErrorCode);
-end;
-
 procedure TrackingCheckBoxClicked(Sender: TObject);
 begin
   if TrackingCheckBox.Checked then begin
@@ -210,23 +202,13 @@ var
   WelcomePage: TWizardPage;
 	TrackingLabel: TLabel;
 begin
-	DockerInstallDocs := TLabel.Create(WizardForm);
-	DockerInstallDocs.Parent := WizardForm;
-	DockerInstallDocs.Left := 8;
-	DockerInstallDocs.Top := WizardForm.ClientHeight - DockerInstallDocs.ClientHeight - 8;
-	DockerInstallDocs.Cursor := crHand;
-	DockerInstallDocs.Font.Color := clBlue;
-	DockerInstallDocs.Font.Style := [fsUnderline];
-	DockerInstallDocs.Caption := '{#MyAppName} installation documentation';
-	DockerInstallDocs.OnClick := @DocLinkClick;
-	DockerInstallDocs.Visible := True;
 
   WelcomePage := PageFromID(wpWelcome)
 
 	WizardForm.WelcomeLabel2.AutoSize := True;
 
   TrackingCheckBox := TNewCheckBox.Create(WizardForm);
-  TrackingCheckBox.Top := 168;
+  TrackingCheckBox.Top := WizardForm.WelcomeLabel2.Top + WizardForm.WelcomeLabel2.Height + 10;
   TrackingCheckBox.Left := WizardForm.WelcomeLabel2.Left;
   TrackingCheckBox.Width := WizardForm.WelcomeLabel2.Width;
   TrackingCheckBox.Height := 40;
@@ -244,14 +226,14 @@ begin
 	TrackingLabel.Visible := True;
 	TrackingLabel.Left := WizardForm.WelcomeLabel2.Left;
 	TrackingLabel.Width := WizardForm.WelcomeLabel2.Width;
-	TrackingLabel.Top := 200;
-	TrackingLabel.Height := 100;
+	TrackingLabel.Top := TrackingCheckBox.Top + TrackingCheckBox.Height + 20;
+	TrackingLabel.Height := 300;
 
 		// Don't do this until we can compare versions
-		// Wizardform.ComponentsList.Checked[2] := NeedToInstallVirtualBox();
-		Wizardform.ComponentsList.ItemEnabled[2] := not NeedToInstallVirtualBox();
-		Wizardform.ComponentsList.Checked[4] := NeedToInstallGit();
-		Wizardform.ComponentsList.ItemEnabled[4] := not NeedToInstallGit();
+		// Wizardform.ComponentsList.Checked[3] := NeedToInstallVirtualBox();
+		Wizardform.ComponentsList.ItemEnabled[3] := not NeedToInstallVirtualBox();
+		Wizardform.ComponentsList.Checked[5] := NeedToInstallGit();
+		Wizardform.ComponentsList.ItemEnabled[5] := not NeedToInstallGit();
 end;
 
 function InitializeSetup(): boolean;
