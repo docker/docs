@@ -387,7 +387,7 @@ func login(ctx *pkcs11.Ctx, session pkcs11.SessionHandle, passRetriever passphra
 		if userFlag == pkcs11.CKU_SO {
 			user = "SO Pin"
 		} else {
-			user = "Pin"
+			user = "User Pin"
 		}
 		passwd, giveup, err := passRetriever(user, "yubikey", false, attempts)
 		// Check if the passphrase retriever got an error or if it is telling us to give up
