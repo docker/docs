@@ -39,21 +39,45 @@ organizing the options for configuring:
 
 ![Domain and Ports page</admin/settings#http>](assets/admin-settings.png)
 
-* *Domain Name*: **required** defaults to an empty string, the fully qualified domain name assigned to the Docker Trusted Registry host.
-* *HTTP Port*: defaults to 80, used as the entry point for the image storage service. To see load balancer status, you can query
-http://&lt;dtr-host&gt;/load_balancer_status.
-* *HTTPS Port*: defaults to 443, used as the secure entry point for the image storage service.
-* *HTTP proxy*: defaults to an empty string, proxy server for HTTP requests.
-* *HTTPS proxy*: defaults to an empty string, proxy server for HTTPS requests.
-* *No proxy*: defaults to an empty string, proxy bypass for HTTP and HTTPS requests.
-* *Upgrade checking*: enables or disables automatic checking for Docker Trusted Registry software updates.
-
+Each setting on this page is explained in the Docker Trusted Registry UI.
 
 > **Note**: If you need Docker Trusted Registry to re-generate a self-signed certificate at some
-> point, you'll need to first delete `/usr/local/etc/dtr/ssl/server.pem`, and
-> then restart the Docker Trusted Registry containers, either by changing and saving the "Domain Name",
-> or using `bash -c "$(docker run docker/trusted-registry restart)"`.
+> point, you can change the domain name. Whenever the domain name does not match the current certificate,
+> a new self-signed certificate will be generated for the new domain. This also works with IP addresses.
 
+### Notary configuration
+
+> *Note:* Docker Trusted Registry's integration of Notary is an experimental feature. To use it, you need to provide your own Notary server.
+
+If you enable Notary integration you will be able to see which tags have been signed through Trusted Registry's web interface.
+To deploy a Notary server by follow the instructions at [Deploying Notary](/security/trust/deploying_notary/). Then configure the following options:
+
+* *Notary Server*: This is the domain name or IP address where you deployed the Notary server.
+
+If you choose to deploy a Notary server on the same machine as Docker Trusted Registry you can use the IP address of the docker0 interface
+to connect to it without having to use the machine's external IP. This address is usually 172.17.42.1.
+Read more about [Docker Networking](/articles/networking/#summary) if you want to deploy Notary this way.
+Otherwise use the Notary machine's domain name or a IP address in this field.
+
+When you save the settings Docker Trusted Registry will try to connect to Notary to confirm that the address is correct.
+It configures itself as a reverse proxy to the Notary server to make it easier for clients to automatically use the correct
+Notary server.
+
+* *Notary Verify TLS*: This is off by default and you should verify that your connection to Notary works with this turned off
+before trying to enable it. If Notary's certificate is signed by a public Certificate Authority you can turn this
+on and it should work given that the domain name (or IP) matches the one in the certificate.
+
+* *Notary TLS Root CA*: If you don't use a publicly signed certificate but still want to have a secure connection between
+Docker Trusted Registry and Notary, put the root Certificate Authority's certificate here. You can also use a self signed certificate here.
+
+Once Docker Trusted Registry is configured to work with Notary, you should be able to see which tags are signed in Notary when you visit
+a repository's page through the web interface.
+
+To configure your docker client to be able to push signed images to Docker Trusted Registry refer to the CLI Reference's
+[Environment Variables Section](/engine/reference/commandline/cli/#environment-variables)
+and [Notary Section](/engine/reference/commandline/cli/#Notary). You have to set the `DOCKER_CONTENT_TRUST` variable
+and configure your system to trust Docker Trusted Registry's TLS certificate if it doesn't already. Docker Trusted Registry proxies requests to Notary, so
+you don't need to explicitly trust Notary's certificate from the docker client.
 
 ## Security
 
