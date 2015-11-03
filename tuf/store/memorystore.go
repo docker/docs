@@ -6,7 +6,6 @@ import (
 	"io"
 
 	"github.com/docker/notary/tuf/data"
-	"github.com/docker/notary/tuf/errors"
 	"github.com/docker/notary/tuf/utils"
 )
 
@@ -76,7 +75,7 @@ func (m *memoryStore) WalkStagedTargets(paths []string, targetsFn targetsWalkFun
 	for _, path := range paths {
 		dat, ok := m.files[path]
 		if !ok {
-			return errors.ErrFileNotFound{Path: path}
+			return ErrMetaNotFound{}
 		}
 		meta, err := data.NewFileMeta(bytes.NewReader(dat), "sha256")
 		if err != nil {

@@ -3,8 +3,6 @@ package data
 import (
 	"fmt"
 	"strings"
-
-	"github.com/docker/notary/tuf/errors"
 )
 
 // Canonical base role names
@@ -24,6 +22,17 @@ var ValidRoles = map[string]string{
 	CanonicalTargetsRole:   CanonicalTargetsRole,
 	CanonicalSnapshotRole:  CanonicalSnapshotRole,
 	CanonicalTimestampRole: CanonicalTimestampRole,
+}
+
+// ErrInvalidRole represents an error regarding a role. Typically
+// something like a role for which sone of the public keys were
+// not found in the TUF repo.
+type ErrInvalidRole struct {
+	Role string
+}
+
+func (e ErrInvalidRole) Error() string {
+	return fmt.Sprintf("tuf: invalid role %s", e.Role)
 }
 
 // SetValidRoles is a utility function to override some or all of the roles
@@ -106,13 +115,13 @@ type Role struct {
 // NewRole creates a new Role object from the given parameters
 func NewRole(name string, threshold int, keyIDs, paths, pathHashPrefixes []string) (*Role, error) {
 	if len(paths) > 0 && len(pathHashPrefixes) > 0 {
-		return nil, errors.ErrInvalidRole{}
+		return nil, ErrInvalidRole{Role: name}
 	}
 	if threshold < 1 {
-		return nil, errors.ErrInvalidRole{}
+		return nil, ErrInvalidRole{Role: name}
 	}
 	if !ValidRole(name) {
-		return nil, errors.ErrInvalidRole{}
+		return nil, ErrInvalidRole{Role: name}
 	}
 	return &Role{
 		RootRole: RootRole{

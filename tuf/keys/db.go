@@ -12,7 +12,6 @@ var (
 	ErrExists           = errors.New("tuf: key already in db")
 	ErrWrongID          = errors.New("tuf: key id mismatch")
 	ErrInvalidKey       = errors.New("tuf: invalid key")
-	ErrInvalidRole      = errors.New("tuf: invalid role")
 	ErrInvalidKeyID     = errors.New("tuf: invalid key id")
 	ErrInvalidThreshold = errors.New("tuf: invalid role threshold")
 )
@@ -42,7 +41,7 @@ func (db *KeyDB) AddKey(k data.PublicKey) {
 // role must have already been added.
 func (db *KeyDB) AddRole(r *data.Role) error {
 	if !data.ValidRole(r.Name) {
-		return ErrInvalidRole
+		return data.ErrInvalidRole{Role: r.Name}
 	}
 	if r.Threshold < 1 {
 		return ErrInvalidThreshold

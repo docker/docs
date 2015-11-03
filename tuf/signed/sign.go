@@ -16,7 +16,6 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary/tuf/data"
-	"github.com/docker/notary/tuf/errors"
 	"github.com/docker/notary/tuf/utils"
 )
 
@@ -68,7 +67,7 @@ func Sign(service CryptoService, s *data.Signed, keys ...data.PublicKey) error {
 		}
 	}
 	if len(signatures) < 1 {
-		return errors.ErrInsufficientSignatures{
+		return ErrInsufficientSignatures{
 			Name: fmt.Sprintf("Cryptoservice failed to produce any signatures for keys with IDs: %v", keyIDs),
 			Err:  nil,
 		}
