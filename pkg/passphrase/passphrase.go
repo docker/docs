@@ -125,8 +125,10 @@ func PromptRetrieverWithInOut(in io.Reader, out io.Writer, aliasMap map[string]s
 
 		if createNew {
 			fmt.Fprintf(out, "Enter passphrase for new %s key with id %s: ", displayAlias, keyName)
+		} else if displayAlias == "yubikey" {
+			fmt.Fprintf(out, "Enter the %s for the attached Yubikey: ", keyName)
 		} else {
-			fmt.Fprintf(out, "Enter key passphrase for %s key with id %s: ", displayAlias, keyName)
+			fmt.Fprintf(out, "Enter passphrase for %s key with id %s: ", displayAlias, keyName)
 		}
 
 		passphrase, err := stdin.ReadBytes('\n')
