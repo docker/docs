@@ -52,7 +52,7 @@ Filename: "{win}\explorer.exe"; Parameters: "{userprograms}\Docker\"; Flags: pos
 [Tasks]
 Name: desktopicon; Description: "{cm:CreateDesktopIcon}"
 Name: modifypath; Description: "Add docker.exe && docker-machine.exe to &PATH"
-Name: upgradevm; Description: "Upgrade or Migrate Boot2Docker VM"
+Name: upgradevm; Description: "Upgrade Boot2Docker VM"
 
 [Components]
 Name: "Docker"; Description: "Docker Client for Windows" ; Types: full custom; Flags: fixed
@@ -398,10 +398,10 @@ begin
 			begin
 				if CanUpgradeVM() then begin
 					Success := UpgradeVM();
-				end
-				else begin
-					Success := MigrateVM();
 				end;
+				// else begin
+				//	Success := MigrateVM();
+				// end;
 			end;
 		end;
 

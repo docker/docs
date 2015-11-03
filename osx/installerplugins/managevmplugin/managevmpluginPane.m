@@ -236,9 +236,9 @@ NSString *dockerMachinePath = @"/usr/local/bin/docker-machine";
         self.migrateExtraLabel.stringValue = @"Your existing Docker Toolbox VM will not be affected. This should take about a minute.";
         self.statusImage.image = toolboxImage;
         self.upgrading = YES;
-    } else if ([self canMigrateBoot2DockerVM]) {
+    } /*else if ([self canMigrateBoot2DockerVM]) {
         self.statusImage.image = boot2dockerImage;
-    } else {
+    }*/ else {
         [self gotoNextPane];
     }
     
