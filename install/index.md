@@ -9,17 +9,17 @@ identifier="smn_dhe_install"
 
 # Trusted Registry Installation Overview
 
-Docker Trusted Registry is an enterprise-grade on-premise registry bundled with commercially supported Docker Engines (CS Engine). Use Docker Trusted Registry to manage your images, and the commercially supported Docker Engine to create, test, and share your application images. Together, these two Docker products can optimize your continuous integration (CI) and/or software deployment workflows.
+Docker Trusted Registry is an enterprise-grade on-premises registry bundled with commercially supported Docker Engines (CS Engine). Use Docker Trusted Registry to manage your images, and the commercially supported Docker Engine to create, test, and share your application images. Together, these two Docker products can optimize your continuous integration (CI) and/or software deployment workflows.
 
 Depending on your business requirements, there are two paths available for you to install Docker Trusted Registry (Trusted Registry). This document describes those options and prerequisites in order for you to make a decision that is best suited to your needs and provides the install directions for your selected path.
 
 ## Install options
 
-You can install Trusted Registry on premise or through a cloud provider. Currently, Docker supports installation on any cloud provider.
+You can install Trusted Registry on premises or through a cloud provider. Currently, Docker supports installation on any cloud provider.
 
 ## Get a license
 
-Docker requires that you obtain a license to use the Trusted Registry. The installation path you choose (on premise or in the cloud) can affect the licensing methods available to you (bring your own license or cloud marketplace).
+Docker requires that you obtain a license to use the Trusted Registry. The installation path you choose (on premises or in the cloud) can affect the licensing methods available to you (bring your own license or cloud marketplace).
 
 All installation paths  support a license which you buy outright from Docker and
 apply during the installation process. If you would like, you can get a free

@@ -15,7 +15,7 @@ The Trusted Registry installation includes a single instance of the commercially
 supported Docker Engine.
 
 You can install additional instances of the commercially supported Docker Engine
-either on premise or through AWS. For more information, see the [installation
+either on premises or through AWS. For more information, see the [installation
 overview](index.md) for Trusted Registry.
 
 The remainder of this document refers to the running instance of this AMI as a “Trusted Registry”.

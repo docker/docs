@@ -15,7 +15,7 @@ weight=2
 ## Overview
 
 This Quick Start Guide gives you a hands-on look at the basics of using
-Docker Trusted Registry, Docker's on-premise image storage application.
+Docker Trusted Registry, Docker's on-premises image storage application.
 This guide will walk you through using Docker Trusted Registry to complete a typical, and critical,
 part of building a development pipeline: setting up a Jenkins instance. Once you
 complete the task, you should have a good idea of how Docker Trusted Registry works and how it might
