@@ -255,6 +255,47 @@ func sign(ctx *pkcs11.Ctx, session pkcs11.SessionHandle, pkcs11KeyID []byte, pas
 	return sig[:], nil
 }
 
+func removeKey(ctx *pkcs11.Ctx, session pkcs11.SessionHandle, pkcs11KeyID []byte, passRetriever passphrase.Retriever, keyID string) error {
+	err := login(ctx, session, passRetriever, pkcs11.CKU_SO, SO_USER_PIN)
+	if err != nil {
+		return err
+	}
+	defer ctx.Logout(session)
+
+	template := []*pkcs11.Attribute{
+		pkcs11.NewAttribute(pkcs11.CKA_TOKEN, true),
+		pkcs11.NewAttribute(pkcs11.CKA_ID, pkcs11KeyID),
+		//pkcs11.NewAttribute(pkcs11.CKA_CLASS, pkcs11.CKO_PRIVATE_KEY),
+		pkcs11.NewAttribute(pkcs11.CKA_CLASS, pkcs11.CKO_CERTIFICATE),
+	}
+
+	if err := ctx.FindObjectsInit(session, template); err != nil {
+		logrus.Printf("Failed to init: %s\n", err.Error())
+		return err
+	}
+	obj, b, err := ctx.FindObjects(session, 1)
+	if err != nil {
+		logrus.Printf("Failed to find: %s %v\n", err.Error(), b)
+		return err
+	}
+	if err := ctx.FindObjectsFinal(session); err != nil {
+		logrus.Printf("Failed to finalize: %s\n", err.Error())
+		return err
+	}
+	if len(obj) != 1 {
+		logrus.Printf("should have found one object")
+		return err
+	}
+
+	// Delete the certificate
+	err = ctx.DestroyObject(session, obj[0])
+	if err != nil {
+		logrus.Printf("Failed to delete cert")
+		return err
+	}
+	return nil
+}
+
 type YubiKeyStore struct {
 	passRetriever passphrase.Retriever
 }
@@ -316,9 +357,12 @@ func (s *YubiKeyStore) GetKey(keyID string) (data.PrivateKey, string, error) {
 }
 
 func (s *YubiKeyStore) RemoveKey(keyID string) error {
-	// TODO(diogo): actually implement this
-	logrus.Debugf("Attempting to remove: %s key inside of YubiKeyStore", keyID)
-	return nil
+	ctx, session, err := SetupHSMEnv(pkcs11Lib)
+	if err != nil {
+		return nil
+	}
+	defer cleanup(ctx, session)
+	return removeKey(ctx, session, YUBIKEY_ROOT_KEY_ID, s.passRetriever, keyID)
 }
 
 func (s *YubiKeyStore) ExportKey(keyID string) ([]byte, error) {
