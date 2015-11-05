@@ -49,7 +49,7 @@ func (e *Ed25519) ListKeys(role string) []string {
 	return keyIDs
 }
 
-// ListKeys returns the list of keys IDs for the role
+// ListAllKeys returns the map of keys IDs to role
 func (e *Ed25519) ListAllKeys() map[string]string {
 	keys := make(map[string]string)
 	for id, edKey := range e.keys {
