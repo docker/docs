@@ -12,6 +12,7 @@ import (
 	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/keystoremanager"
 	"github.com/docker/notary/passphrase"
+	"github.com/docker/notary/signer/api"
 	"github.com/docker/notary/trustmanager"
 
 	"github.com/docker/notary/tuf/data"
@@ -119,7 +120,8 @@ func keysRemoveKey(cmd *cobra.Command, args []string) {
 	if err != nil {
 		fatalf("failed to create private key store in directory: %s", keysPath)
 	}
-	cs := cryptoservice.NewCryptoService("", fileKeyStore)
+	yubiStore := api.NewYubiKeyStore(retriever)
+	cs := cryptoservice.NewCryptoService("", yubiStore, fileKeyStore)
 
 	keyID := args[0]
 
@@ -160,7 +162,8 @@ func keysList(cmd *cobra.Command, args []string) {
 	if err != nil {
 		fatalf("failed to create private key store in directory: %s", keysPath)
 	}
-	cs := cryptoservice.NewCryptoService("", fileKeyStore)
+	yubiStore := api.NewYubiKeyStore(retriever)
+	cs := cryptoservice.NewCryptoService("", yubiStore, fileKeyStore)
 
 	// Get a map of all the keys/roles
 	keysMap := cs.ListAllKeys()
@@ -354,7 +357,8 @@ func keysImportRoot(cmd *cobra.Command, args []string) {
 	if err != nil {
 		fatalf("failed to create private key store in directory: %s", keysPath)
 	}
-	cs := cryptoservice.NewCryptoService("", fileKeyStore)
+	yubiStore := api.NewYubiKeyStore(retriever)
+	cs := cryptoservice.NewCryptoService("", yubiStore, fileKeyStore)
 
 	importFile, err := os.Open(importFilename)
 	if err != nil {
