@@ -1,4 +1,4 @@
-package keystoremanager
+package cryptoservice
 
 import (
 	"archive/zip"
@@ -11,7 +11,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/docker/notary/pkg/passphrase"
+	"github.com/docker/notary/keystoremanager"
+	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/trustmanager"
 )
 
@@ -33,11 +34,22 @@ var (
 
 // ExportRootKey exports the specified root key to an io.Writer in PEM format.
 // The key's existing encryption is preserved.
-func (km *KeyStoreManager) ExportRootKey(dest io.Writer, keyID string) error {
-	pemBytes, err := km.KeyStore.ExportKey(keyID)
+func (cs *CryptoService) ExportRootKey(dest io.Writer, keyID string) error {
+	var (
+		pemBytes []byte
+		err      error
+	)
+
+	for _, ks := range cs.keyStores {
+		pemBytes, err = ks.ExportKey(keyID)
+		if err != nil {
+			continue
+		}
+	}
 	if err != nil {
 		return err
 	}
+
 	nBytes, err := dest.Write(pemBytes)
 	if err != nil {
 		return err
@@ -50,8 +62,8 @@ func (km *KeyStoreManager) ExportRootKey(dest io.Writer, keyID string) error {
 
 // ExportRootKeyReencrypt exports the specified root key to an io.Writer in
 // PEM format. The key is reencrypted with a new passphrase.
-func (km *KeyStoreManager) ExportRootKeyReencrypt(dest io.Writer, keyID string, newPassphraseRetriever passphrase.Retriever) error {
-	privateKey, alias, err := km.KeyStore.GetKey(keyID)
+func (cs *CryptoService) ExportRootKeyReencrypt(dest io.Writer, keyID string, newPassphraseRetriever passphrase.Retriever) error {
+	privateKey, role, err := cs.GetPrivateKey(keyID)
 	if err != nil {
 		return err
 	}
@@ -60,13 +72,13 @@ func (km *KeyStoreManager) ExportRootKeyReencrypt(dest io.Writer, keyID string, 
 	tempBaseDir, err := ioutil.TempDir("", "notary-key-export-")
 	defer os.RemoveAll(tempBaseDir)
 
-	tempKeysPath := filepath.Join(tempBaseDir, PrivDir)
+	tempKeysPath := filepath.Join(tempBaseDir, keystoremanager.PrivDir)
 	tempKeyStore, err := trustmanager.NewKeyFileStore(tempKeysPath, newPassphraseRetriever)
 	if err != nil {
 		return err
 	}
 
-	err = tempKeyStore.AddKey(keyID, alias, privateKey)
+	err = tempKeyStore.AddKey(keyID, role, privateKey)
 	if err != nil {
 		return err
 	}
@@ -85,25 +97,10 @@ func (km *KeyStoreManager) ExportRootKeyReencrypt(dest io.Writer, keyID string, 
 	return nil
 }
 
-// checkRootKeyIsEncrypted makes sure the root key is encrypted. We have
-// internal assumptions that depend on this.
-func checkRootKeyIsEncrypted(pemBytes []byte) error {
-	block, _ := pem.Decode(pemBytes)
-	if block == nil {
-		return ErrNoValidPrivateKey
-	}
-
-	if !x509.IsEncryptedPEMBlock(block) {
-		return ErrRootKeyNotEncrypted
-	}
-
-	return nil
-}
-
 // ImportRootKey imports a root in PEM format key from an io.Reader
 // It prompts for the key's passphrase to verify the data and to determine
 // the key ID.
-func (km *KeyStoreManager) ImportRootKey(source io.Reader) error {
+func (cs *CryptoService) ImportRootKey(source io.Reader) error {
 	pemBytes, err := ioutil.ReadAll(source)
 	if err != nil {
 		return err
@@ -113,14 +110,158 @@ func (km *KeyStoreManager) ImportRootKey(source io.Reader) error {
 		return err
 	}
 
-	if err = km.KeyStore.ImportKey(pemBytes, "root"); err != nil {
-		return err
+	for _, ks := range cs.keyStores {
+		// don't redeclare err, we want the value carried out of the loop
+		if err = ks.ImportKey(pemBytes, "root"); err != nil {
+			continue
+		}
 	}
 
 	return err
 }
 
-func moveKeys(oldKeyStore, newKeyStore *trustmanager.KeyFileStore) error {
+// ExportAllKeys exports all keys to an io.Writer in zip format.
+// newPassphraseRetriever will be used to obtain passphrases to use to encrypt the existing keys.
+func (cs *CryptoService) ExportAllKeys(dest io.Writer, newPassphraseRetriever passphrase.Retriever) error {
+	tempBaseDir, err := ioutil.TempDir("", "notary-key-export-")
+	defer os.RemoveAll(tempBaseDir)
+
+	// Create temporary keystore to use as a staging area
+	tempKeysPath := filepath.Join(tempBaseDir, keystoremanager.PrivDir)
+	tempKeyStore, err := trustmanager.NewKeyFileStore(tempKeysPath, newPassphraseRetriever)
+	if err != nil {
+		return err
+	}
+
+	for _, ks := range cs.keyStores {
+		if err := moveKeys(ks, tempKeyStore); err != nil {
+			return err
+		}
+	}
+
+	zipWriter := zip.NewWriter(dest)
+
+	if err := addKeysToArchive(zipWriter, tempKeyStore, keystoremanager.PrivDir); err != nil {
+		return err
+	}
+
+	zipWriter.Close()
+
+	return nil
+}
+
+// ImportKeysZip imports keys from a zip file provided as an zip.Reader. The
+// keys in the root_keys directory are left encrypted, but the other keys are
+// decrypted with the specified passphrase.
+func (cs *CryptoService) ImportKeysZip(zipReader zip.Reader) error {
+	// Temporarily store the keys in maps, so we can bail early if there's
+	// an error (for example, wrong passphrase), without leaving the key
+	// store in an inconsistent state
+	newKeys := make(map[string][]byte)
+
+	// Iterate through the files in the archive. Don't add the keys
+	for _, f := range zipReader.File {
+		fNameTrimmed := strings.TrimSuffix(f.Name, filepath.Ext(f.Name))
+
+		rc, err := f.Open()
+		if err != nil {
+			return err
+		}
+		defer rc.Close()
+
+		fileBytes, err := ioutil.ReadAll(rc)
+		if err != nil {
+			return nil
+		}
+
+		// Note that using / as a separator is okay here - the zip
+		// package guarantees that the separator will be /
+		if strings.HasPrefix(fNameTrimmed, keystoremanager.PrivDir) {
+			if fNameTrimmed[len(fNameTrimmed)-5:] == "_root" {
+				if err = checkRootKeyIsEncrypted(fileBytes); err != nil {
+					return err
+				}
+			}
+			keyName := strings.TrimPrefix(fNameTrimmed, keystoremanager.PrivDir)
+			newKeys[keyName] = fileBytes
+		} else {
+			// This path inside the zip archive doesn't look like a
+			// root key, non-root key, or alias. To avoid adding a file
+			// to the filestore that we won't be able to use, skip
+			// this file in the import.
+			continue
+		}
+	}
+
+	for keyName, pemBytes := range newKeys {
+		parts := strings.Split(keyName, "_")
+		for _, ks := range cs.keyStores {
+			if err := ks.ImportKey(pemBytes, parts[1]); err != nil {
+				return err
+			}
+		}
+	}
+
+	return nil
+}
+
+// ExportKeysByGUN exports all keys associated with a specified GUN to an
+// io.Writer in zip format. passphraseRetriever is used to select new passphrases to use to
+// encrypt the keys.
+func (cs *CryptoService) ExportKeysByGUN(dest io.Writer, gun string, passphraseRetriever passphrase.Retriever) error {
+	tempBaseDir, err := ioutil.TempDir("", "notary-key-export-")
+	defer os.RemoveAll(tempBaseDir)
+
+	// Create temporary keystore to use as a staging area
+	tempKeysPath := filepath.Join(tempBaseDir, keystoremanager.PrivDir)
+	tempKeyStore, err := trustmanager.NewKeyFileStore(tempKeysPath, passphraseRetriever)
+	if err != nil {
+		return err
+	}
+
+	for _, ks := range cs.keyStores {
+		if err := moveKeysByGUN(ks, tempKeyStore, gun); err != nil {
+			return err
+		}
+	}
+
+	zipWriter := zip.NewWriter(dest)
+
+	if len(tempKeyStore.ListKeys()) == 0 {
+		return ErrNoKeysFoundForGUN
+	}
+
+	if err := addKeysToArchive(zipWriter, tempKeyStore, keystoremanager.PrivDir); err != nil {
+		return err
+	}
+
+	zipWriter.Close()
+
+	return nil
+}
+
+func moveKeysByGUN(oldKeyStore, newKeyStore trustmanager.KeyStore, gun string) error {
+	for relKeyPath := range oldKeyStore.ListKeys() {
+		// Skip keys that aren't associated with this GUN
+		if !strings.HasPrefix(relKeyPath, filepath.FromSlash(gun)) {
+			continue
+		}
+
+		privKey, alias, err := oldKeyStore.GetKey(relKeyPath)
+		if err != nil {
+			return err
+		}
+
+		err = newKeyStore.AddKey(relKeyPath, alias, privKey)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func moveKeys(oldKeyStore, newKeyStore trustmanager.KeyStore) error {
 	for f := range oldKeyStore.ListKeys() {
 		privateKey, alias, err := oldKeyStore.GetKey(f)
 		if err != nil {
@@ -171,139 +312,17 @@ func addKeysToArchive(zipWriter *zip.Writer, newKeyStore *trustmanager.KeyFileSt
 	return nil
 }
 
-// ExportAllKeys exports all keys to an io.Writer in zip format.
-// newPassphraseRetriever will be used to obtain passphrases to use to encrypt the existing keys.
-func (km *KeyStoreManager) ExportAllKeys(dest io.Writer, newPassphraseRetriever passphrase.Retriever) error {
-	tempBaseDir, err := ioutil.TempDir("", "notary-key-export-")
-	defer os.RemoveAll(tempBaseDir)
-
-	// Create temporary keystore to use as a staging area
-	tempKeysPath := filepath.Join(tempBaseDir, PrivDir)
-	tempKeyStore, err := trustmanager.NewKeyFileStore(tempKeysPath, newPassphraseRetriever)
-	if err != nil {
-		return err
+// checkRootKeyIsEncrypted makes sure the root key is encrypted. We have
+// internal assumptions that depend on this.
+func checkRootKeyIsEncrypted(pemBytes []byte) error {
+	block, _ := pem.Decode(pemBytes)
+	if block == nil {
+		return ErrNoValidPrivateKey
 	}
 
-	if err := moveKeys(km.KeyStore, tempKeyStore); err != nil {
-		return err
+	if !x509.IsEncryptedPEMBlock(block) {
+		return ErrRootKeyNotEncrypted
 	}
-
-	zipWriter := zip.NewWriter(dest)
-
-	if err := addKeysToArchive(zipWriter, tempKeyStore, PrivDir); err != nil {
-		return err
-	}
-
-	zipWriter.Close()
-
-	return nil
-}
-
-// ImportKeysZip imports keys from a zip file provided as an zip.Reader. The
-// keys in the root_keys directory are left encrypted, but the other keys are
-// decrypted with the specified passphrase.
-func (km *KeyStoreManager) ImportKeysZip(zipReader zip.Reader) error {
-	// Temporarily store the keys in maps, so we can bail early if there's
-	// an error (for example, wrong passphrase), without leaving the key
-	// store in an inconsistent state
-	newKeys := make(map[string][]byte)
-
-	// Iterate through the files in the archive. Don't add the keys
-	for _, f := range zipReader.File {
-		fNameTrimmed := strings.TrimSuffix(f.Name, filepath.Ext(f.Name))
-
-		rc, err := f.Open()
-		if err != nil {
-			return err
-		}
-
-		fileBytes, err := ioutil.ReadAll(rc)
-		if err != nil {
-			return nil
-		}
-
-		// Note that using / as a separator is okay here - the zip
-		// package guarantees that the separator will be /
-		if strings.HasPrefix(fNameTrimmed, PrivDir) {
-			if fNameTrimmed[len(fNameTrimmed)-5:] == "_root" {
-				if err = checkRootKeyIsEncrypted(fileBytes); err != nil {
-					rc.Close()
-					return err
-				}
-			}
-			keyName := strings.TrimPrefix(fNameTrimmed, PrivDir)
-			newKeys[keyName] = fileBytes
-		} else {
-			// This path inside the zip archive doesn't look like a
-			// root key, non-root key, or alias. To avoid adding a file
-			// to the filestore that we won't be able to use, skip
-			// this file in the import.
-			rc.Close()
-			continue
-		}
-
-		rc.Close()
-	}
-
-	for keyName, pemBytes := range newKeys {
-		if err := km.KeyStore.Add(keyName, pemBytes); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
-func moveKeysByGUN(oldKeyStore, newKeyStore *trustmanager.KeyFileStore, gun string) error {
-	for relKeyPath := range oldKeyStore.ListKeys() {
-		// Skip keys that aren't associated with this GUN
-		if !strings.HasPrefix(relKeyPath, filepath.FromSlash(gun)) {
-			continue
-		}
-
-		privKey, alias, err := oldKeyStore.GetKey(relKeyPath)
-		if err != nil {
-			return err
-		}
-
-		err = newKeyStore.AddKey(relKeyPath, alias, privKey)
-		if err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ExportKeysByGUN exports all keys associated with a specified GUN to an
-// io.Writer in zip format. passphraseRetriever is used to select new passphrases to use to
-// encrypt the keys.
-func (km *KeyStoreManager) ExportKeysByGUN(dest io.Writer, gun string, passphraseRetriever passphrase.Retriever) error {
-	tempBaseDir, err := ioutil.TempDir("", "notary-key-export-")
-	defer os.RemoveAll(tempBaseDir)
-
-	// Create temporary keystore to use as a staging area
-	tempKeysPath := filepath.Join(tempBaseDir, PrivDir)
-	tempKeyStore, err := trustmanager.NewKeyFileStore(tempKeysPath, passphraseRetriever)
-	if err != nil {
-		return err
-	}
-
-	if err := moveKeysByGUN(km.KeyStore, tempKeyStore, gun); err != nil {
-		return err
-	}
-
-	zipWriter := zip.NewWriter(dest)
-
-	if len(tempKeyStore.ListKeys()) == 0 {
-		return ErrNoKeysFoundForGUN
-	}
-
-	if err := addKeysToArchive(zipWriter, tempKeyStore, PrivDir); err != nil {
-		return err
-	}
-
-	zipWriter.Close()
 
 	return nil
 }

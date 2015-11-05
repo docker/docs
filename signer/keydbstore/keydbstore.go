@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/docker/notary/pkg/passphrase"
+	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
 	jose "github.com/dvsekhvalnov/jose2go"

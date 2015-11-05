@@ -9,10 +9,12 @@ import (
 	"strings"
 
 	notaryclient "github.com/docker/notary/client"
+	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/keystoremanager"
-	"github.com/docker/notary/pkg/passphrase"
+	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/trustmanager"
 
+	"github.com/docker/notary/tuf/data"
 	"github.com/spf13/cobra"
 )
 
@@ -117,10 +119,7 @@ func keysRemoveKey(cmd *cobra.Command, args []string) {
 	if err != nil {
 		fatalf("failed to create private key store in directory: %s", keysPath)
 	}
-	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, fileKeyStore)
-	if err != nil {
-		fatalf("failed to create a new truststore manager with directory: %s", trustDir)
-	}
+	cs := cryptoservice.NewCryptoService("", fileKeyStore)
 
 	keyID := args[0]
 
@@ -141,25 +140,8 @@ func keysRemoveKey(cmd *cobra.Command, args []string) {
 		}
 	}
 
-	// Choose the correct filestore to remove the key from
-	keyMap := keyStoreManager.KeyStore.ListKeys()
-
-	// Attempt to find the full GUN to the key in the map
-	// This is irrelevant for removing root keys, but does no harm
-	var keyWithGUN string
-	for k := range keyMap {
-		if filepath.Base(k) == keyID {
-			keyWithGUN = k
-		}
-	}
-
-	// If empty, we didn't find any matches
-	if keyWithGUN == "" {
-		fatalf("key with key ID: %s not found\n", keyID)
-	}
-
 	// Attempt to remove the key
-	err = keyStoreManager.KeyStore.RemoveKey(keyWithGUN)
+	err = cs.RemoveKey(keyID)
 	if err != nil {
 		fatalf("failed to remove key with key ID: %s, %v", keyID, err)
 	}
@@ -178,13 +160,10 @@ func keysList(cmd *cobra.Command, args []string) {
 	if err != nil {
 		fatalf("failed to create private key store in directory: %s", keysPath)
 	}
-	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, fileKeyStore)
-	if err != nil {
-		fatalf("failed to create a new truststore manager with directory: %s", trustDir)
-	}
+	cs := cryptoservice.NewCryptoService("", fileKeyStore)
 
 	// Get a map of all the keys/roles
-	keysMap := keyStoreManager.KeyStore.ListKeys()
+	keysMap := cs.ListAllKeys()
 
 	fmt.Println("")
 	fmt.Println("# Root keys: ")
@@ -236,17 +215,14 @@ func keysGenerateRootKey(cmd *cobra.Command, args []string) {
 	if err != nil {
 		fatalf("failed to create private key store in directory: %s", keysPath)
 	}
-	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, fileKeyStore)
-	if err != nil {
-		fatalf("failed to create a new truststore manager with directory: %s", trustDir)
-	}
+	cs := cryptoservice.NewCryptoService("", fileKeyStore)
 
-	keyID, err := keyStoreManager.GenRootKey(algorithm)
+	pubKey, err := cs.Create(data.CanonicalRootRole, algorithm)
 	if err != nil {
 		fatalf("failed to create a new root key: %v", err)
 	}
 
-	fmt.Printf("Generated new %s key with keyID: %s\n", algorithm, keyID)
+	fmt.Printf("Generated new %s key with keyID: %s\n", algorithm, pubKey.ID())
 }
 
 // keysExport exports a collection of keys to a ZIP file
@@ -265,10 +241,7 @@ func keysExport(cmd *cobra.Command, args []string) {
 	if err != nil {
 		fatalf("failed to create private key store in directory: %s", keysPath)
 	}
-	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, fileKeyStore)
-	if err != nil {
-		fatalf("failed to create a new truststore manager with directory: %s", trustDir)
-	}
+	cs := cryptoservice.NewCryptoService("", fileKeyStore)
 
 	exportFile, err := os.Create(exportFilename)
 	if err != nil {
@@ -279,9 +252,9 @@ func keysExport(cmd *cobra.Command, args []string) {
 	// unlocking passphrase and reusing that.
 	exportRetriever := passphrase.PromptRetriever()
 	if keysExportGUN != "" {
-		err = keyStoreManager.ExportKeysByGUN(exportFile, keysExportGUN, exportRetriever)
+		err = cs.ExportKeysByGUN(exportFile, keysExportGUN, exportRetriever)
 	} else {
-		err = keyStoreManager.ExportAllKeys(exportFile, exportRetriever)
+		err = cs.ExportAllKeys(exportFile, exportRetriever)
 	}
 
 	exportFile.Close()
@@ -313,10 +286,7 @@ func keysExportRoot(cmd *cobra.Command, args []string) {
 	if err != nil {
 		fatalf("failed to create private key store in directory: %s", keysPath)
 	}
-	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, fileKeyStore)
-	if err != nil {
-		fatalf("failed to create a new truststore manager with directory: %s", trustDir)
-	}
+	cs := cryptoservice.NewCryptoService("", fileKeyStore)
 
 	exportFile, err := os.Create(exportFilename)
 	if err != nil {
@@ -326,9 +296,9 @@ func keysExportRoot(cmd *cobra.Command, args []string) {
 		// Must use a different passphrase retriever to avoid caching the
 		// unlocking passphrase and reusing that.
 		exportRetriever := passphrase.PromptRetriever()
-		err = keyStoreManager.ExportRootKeyReencrypt(exportFile, keyID, exportRetriever)
+		err = cs.ExportRootKeyReencrypt(exportFile, keyID, exportRetriever)
 	} else {
-		err = keyStoreManager.ExportRootKey(exportFile, keyID)
+		err = cs.ExportRootKey(exportFile, keyID)
 	}
 	exportFile.Close()
 	if err != nil {
@@ -353,10 +323,7 @@ func keysImport(cmd *cobra.Command, args []string) {
 	if err != nil {
 		fatalf("failed to create private key store in directory: %s", keysPath)
 	}
-	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, fileKeyStore)
-	if err != nil {
-		fatalf("failed to create a new truststore manager with directory: %s", trustDir)
-	}
+	cs := cryptoservice.NewCryptoService("", fileKeyStore)
 
 	zipReader, err := zip.OpenReader(importFilename)
 	if err != nil {
@@ -364,7 +331,7 @@ func keysImport(cmd *cobra.Command, args []string) {
 	}
 	defer zipReader.Close()
 
-	err = keyStoreManager.ImportKeysZip(zipReader.Reader)
+	err = cs.ImportKeysZip(zipReader.Reader)
 
 	if err != nil {
 		fatalf("error importing keys: %v", err)
@@ -387,10 +354,7 @@ func keysImportRoot(cmd *cobra.Command, args []string) {
 	if err != nil {
 		fatalf("failed to create private key store in directory: %s", keysPath)
 	}
-	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, fileKeyStore)
-	if err != nil {
-		fatalf("failed to create a new truststore manager with directory: %s", trustDir)
-	}
+	cs := cryptoservice.NewCryptoService("", fileKeyStore)
 
 	importFile, err := os.Open(importFilename)
 	if err != nil {
@@ -398,7 +362,7 @@ func keysImportRoot(cmd *cobra.Command, args []string) {
 	}
 	defer importFile.Close()
 
-	err = keyStoreManager.ImportRootKey(importFile)
+	err = cs.ImportRootKey(importFile)
 
 	if err != nil {
 		fatalf("error importing root key: %v", err)

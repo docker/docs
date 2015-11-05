@@ -9,7 +9,7 @@ import (
 
 	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/keystoremanager"
-	"github.com/docker/notary/pkg/passphrase"
+	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/store"
 )
