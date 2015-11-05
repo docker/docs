@@ -39,16 +39,18 @@ type yubiSlot struct {
 type YubiPrivateKey struct {
 	data.ECDSAPublicKey
 	passRetriever passphrase.Retriever
+	slot          []byte
 }
 
 type YubikeySigner struct {
 	YubiPrivateKey
 }
 
-func NewYubiPrivateKey(pubKey data.ECDSAPublicKey, passRetriever passphrase.Retriever) *YubiPrivateKey {
+func NewYubiPrivateKey(slot []byte, pubKey data.ECDSAPublicKey, passRetriever passphrase.Retriever) *YubiPrivateKey {
 	return &YubiPrivateKey{
 		ECDSAPublicKey: pubKey,
 		passRetriever:  passRetriever,
+		slot:           slot,
 	}
 }
 
@@ -85,7 +87,7 @@ func (y *YubiPrivateKey) Sign(rand io.Reader, msg []byte, opts crypto.SignerOpts
 	}
 	defer cleanup(ctx, session)
 
-	sig, err := sign(ctx, session, YUBIKEY_ROOT_KEY_ID, y.passRetriever, msg)
+	sig, err := sign(ctx, session, y.slot, y.passRetriever, msg)
 	if err != nil {
 		return nil, fmt.Errorf("failed to sign using Yubikey: %v", err)
 	}
@@ -94,7 +96,7 @@ func (y *YubiPrivateKey) Sign(rand io.Reader, msg []byte, opts crypto.SignerOpts
 }
 
 // addECDSAKey adds a key to the yubikey
-func addECDSAKey(ctx *pkcs11.Ctx, session pkcs11.SessionHandle, privKey data.PrivateKey, pkcs11KeyID []byte, passRetriever passphrase.Retriever) error {
+func addECDSAKey(ctx *pkcs11.Ctx, session pkcs11.SessionHandle, privKey data.PrivateKey, pkcs11KeyID []byte, passRetriever passphrase.Retriever, role string) error {
 	logrus.Debugf("Got into add key with key: %s\n", privKey.ID())
 
 	// TODO(diogo): Figure out CKU_SO with yubikey
@@ -113,7 +115,7 @@ func addECDSAKey(ctx *pkcs11.Ctx, session pkcs11.SessionHandle, privKey data.Pri
 	ecdsaPrivKeyD := ecdsaPrivKey.D.Bytes()
 	logrus.Debugf("Getting D bytes: %v\n", ecdsaPrivKeyD)
 
-	template, err := trustmanager.NewCertificate(data.CanonicalRootRole)
+	template, err := trustmanager.NewCertificate(role)
 	if err != nil {
 		return fmt.Errorf("failed to create the certificate template: %v", err)
 	}
@@ -395,16 +397,80 @@ func listKeys(ctx *pkcs11.Ctx, session pkcs11.SessionHandle) (keys map[string]yu
 	return
 }
 
+func getNextEmptySlot(ctx *pkcs11.Ctx, session pkcs11.SessionHandle) ([]byte, error) {
+	findTemplate := []*pkcs11.Attribute{
+		pkcs11.NewAttribute(pkcs11.CKA_TOKEN, true),
+	}
+	attrTemplate := []*pkcs11.Attribute{
+		pkcs11.NewAttribute(pkcs11.CKA_ID, []byte{0}),
+	}
+
+	if err := ctx.FindObjectsInit(session, findTemplate); err != nil {
+		logrus.Debugf("Failed to init: %s\n", err.Error())
+		return nil, err
+	}
+	objs, b, err := ctx.FindObjects(session, numSlots)
+	for err == nil {
+		var o []pkcs11.ObjectHandle
+		o, b, err = ctx.FindObjects(session, numSlots)
+		if err != nil {
+			continue
+		}
+		if len(o) == 0 {
+			break
+		}
+		objs = append(objs, o...)
+	}
+	taken := make([]bool, numSlots)
+	if err != nil {
+		logrus.Debugf("Failed to find: %s %v\n", err.Error(), b)
+		return nil, err
+	}
+	for _, obj := range objs {
+		// Retrieve the public-key material to be able to create a new HSMRSAKey
+		attr, err := ctx.GetAttributeValue(session, obj, attrTemplate)
+		if err != nil {
+			logrus.Debugf("Failed to get Attribute for: %v\n", obj)
+			continue
+		}
+
+		// Iterate through all the attributes of this key and saves CKA_PUBLIC_EXPONENT and CKA_MODULUS. Removes ordering specific issues.
+		for _, a := range attr {
+			if a.Type == pkcs11.CKA_ID {
+				if len(a.Value) < 1 {
+					continue
+				}
+				// max 50 slots so a single byte will always represent
+				// all possible slots positions
+				slotNum := int(a.Value[0])
+				if slotNum >= len(taken) {
+					// defensive
+					continue
+				}
+				taken[slotNum] = true
+			}
+		}
+	}
+	for i := 0; i < numSlots; i++ {
+		if !taken[i] {
+			return []byte{byte(i)}, nil
+		}
+	}
+	return nil, errors.New("Yubikey has no available slots.")
+}
+
 type YubiKeyStore struct {
 	passRetriever passphrase.Retriever
 	keys          map[string]yubiSlot
 }
 
 func NewYubiKeyStore(passphraseRetriever passphrase.Retriever) *YubiKeyStore {
-	return &YubiKeyStore{
+	s := &YubiKeyStore{
 		passRetriever: passphraseRetriever,
 		keys:          make(map[string]yubiSlot),
 	}
+	s.ListKeys() // populate keys field
+	return s
 }
 
 func (s *YubiKeyStore) ListKeys() map[string]string {
@@ -424,10 +490,10 @@ func (s *YubiKeyStore) ListKeys() map[string]string {
 	return buildKeyMap(keys)
 }
 
-func (s *YubiKeyStore) AddKey(keyID, alias string, privKey data.PrivateKey) error {
+func (s *YubiKeyStore) AddKey(keyID, role string, privKey data.PrivateKey) error {
 	// We only allow adding root keys for now
-	if alias != data.CanonicalRootRole {
-		return fmt.Errorf("yubikey only supports storing root keys, got %s for key: %s\n", alias, keyID)
+	if role != data.CanonicalRootRole {
+		return fmt.Errorf("yubikey only supports storing root keys, got %s for key: %s\n", role, keyID)
 	}
 
 	ctx, session, err := SetupHSMEnv(pkcs11Lib)
@@ -436,8 +502,18 @@ func (s *YubiKeyStore) AddKey(keyID, alias string, privKey data.PrivateKey) erro
 	}
 	defer cleanup(ctx, session)
 
-	//return addECDSAKey(ctx, session, privKey, YUBIKEY_ROOT_KEY_ID, s.passRetriever)
-	return addECDSAKey(ctx, session, privKey, []byte{3}, s.passRetriever)
+	if k, ok := s.keys[keyID]; ok {
+		if k.role == role {
+
+		}
+	}
+
+	slot, err := getNextEmptySlot(ctx, session)
+	if err != nil {
+		return err
+	}
+	logrus.Debugf("Using yubikey slot %v", slot)
+	return addECDSAKey(ctx, session, privKey, slot, s.passRetriever, role)
 }
 
 func (s *YubiKeyStore) GetKey(keyID string) (data.PrivateKey, string, error) {
@@ -447,7 +523,12 @@ func (s *YubiKeyStore) GetKey(keyID string) (data.PrivateKey, string, error) {
 	}
 	defer cleanup(ctx, session)
 
-	pubKey, alias, err := getECDSAKey(ctx, session, YUBIKEY_ROOT_KEY_ID)
+	key, ok := s.keys[keyID]
+	if !ok {
+		return nil, "", errors.New("no matching keys found inside of yubikey")
+	}
+
+	pubKey, alias, err := getECDSAKey(ctx, session, key.slotID)
 	if err != nil {
 		return nil, "", err
 	}
@@ -455,7 +536,7 @@ func (s *YubiKeyStore) GetKey(keyID string) (data.PrivateKey, string, error) {
 	if pubKey.ID() != keyID {
 		return nil, "", fmt.Errorf("expected root key: %s, but found: %s\n", keyID, pubKey.ID())
 	}
-	privKey := NewYubiPrivateKey(*pubKey, s.passRetriever)
+	privKey := NewYubiPrivateKey(key.slotID, *pubKey, s.passRetriever)
 	if privKey == nil {
 		return nil, "", errors.New("could not initialize new YubiPrivateKey")
 	}
@@ -469,7 +550,11 @@ func (s *YubiKeyStore) RemoveKey(keyID string) error {
 		return nil
 	}
 	defer cleanup(ctx, session)
-	return removeKey(ctx, session, YUBIKEY_ROOT_KEY_ID, s.passRetriever, keyID)
+	key, ok := s.keys[keyID]
+	if !ok {
+		return errors.New("Key not present in yubikey")
+	}
+	return removeKey(ctx, session, key.slotID, s.passRetriever, keyID)
 }
 
 func (s *YubiKeyStore) ExportKey(keyID string) ([]byte, error) {

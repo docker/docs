@@ -164,7 +164,7 @@ func (cs *CryptoService) ListKeys(role string) []string {
 	return res
 }
 
-// ListKeys returns a list of key IDs valid for the given role
+// ListAllKeys returns a map of key IDs to role
 func (cs *CryptoService) ListAllKeys() map[string]string {
 	res := make(map[string]string)
 	for _, ks := range cs.keyStores {

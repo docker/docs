@@ -268,8 +268,8 @@ func getRawKey(s LimitedFileStore, name string) ([]byte, string, error) {
 	return keyBytes, keyAlias, nil
 }
 
-// Get the password to decript the given pem bytes.  Return the password,
-// because it is useful for importing
+// GetPasswdDecryptBytes gets the password to decript the given pem bytes.
+// Returns the password and private key
 func GetPasswdDecryptBytes(passphraseRetriever passphrase.Retriever, pemBytes []byte, name, alias string) (data.PrivateKey, string, error) {
 	var (
 		passwd  string
