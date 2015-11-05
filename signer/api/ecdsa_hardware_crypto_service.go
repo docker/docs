@@ -366,15 +366,17 @@ func (s *YubiKeyStore) RemoveKey(keyID string) error {
 }
 
 func (s *YubiKeyStore) ExportKey(keyID string) ([]byte, error) {
-	// TODO(diogo): actually implement this
 	logrus.Debugf("Attempting to export: %s key inside of YubiKeyStore", keyID)
-	return nil, nil
+	return nil, errors.New("Keys cannot be exported from a Yubikey.")
 }
 
 func (s *YubiKeyStore) ImportKey(pemBytes []byte, keyID string) error {
-	// TODO(diogo): actually implement this
 	logrus.Debugf("Attempting to import: %s key inside of YubiKeyStore", keyID)
-	return nil
+	privKey, _, err := trustmanager.GetPasswdDecryptBytes(s.passRetriever, pemBytes, "imported", "root")
+	if err != nil {
+		return err
+	}
+	return s.AddKey(privKey.ID(), "root", privKey)
 }
 
 func cleanup(ctx *pkcs11.Ctx, session pkcs11.SessionHandle) {
