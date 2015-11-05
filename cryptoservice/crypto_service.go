@@ -27,7 +27,7 @@ func NewCryptoService(gun string, keyStores ...trustmanager.KeyStore) *CryptoSer
 }
 
 // Create is used to generate keys for targets, snapshots and timestamps
-func (ccs *CryptoService) Create(role, algorithm string) (data.PublicKey, error) {
+func (cs *CryptoService) Create(role, algorithm string) (data.PublicKey, error) {
 	var privKey data.PrivateKey
 	var err error
 
@@ -119,7 +119,7 @@ func (ccs *CryptoService) RemoveKey(keyID string) (err error) {
 // Sign returns the signatures for the payload with a set of keyIDs. It ignores
 // errors to sign and expects the called to validate if the number of returned
 // signatures is adequate.
-func (ccs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signature, error) {
+func (cs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signature, error) {
 	signatures := make([]data.Signature, 0, len(keyIDs))
 	for _, keyid := range keyIDs {
 		keyName := keyid
@@ -152,13 +152,24 @@ func (ccs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signatur
 }
 
 // ListKeys returns a list of key IDs valid for the given role
-func (ccs *CryptoService) ListKeys(role string) []string {
+func (cs *CryptoService) ListKeys(role string) []string {
 	var res []string
-	for _, ks := range ccs.keyStores {
+	for _, ks := range cs.keyStores {
 		for k, r := range ks.ListKeys() {
 			if r == role {
 				res = append(res, k)
 			}
+		}
+	}
+	return res
+}
+
+// ListKeys returns a list of key IDs valid for the given role
+func (cs *CryptoService) ListAllKeys() map[string]string {
+	res := make(map[string]string)
+	for _, ks := range cs.keyStores {
+		for k, r := range ks.ListKeys() {
+			res[k] = r // keys are content addressed so don't care about overwrites
 		}
 	}
 	return res

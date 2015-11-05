@@ -105,6 +105,11 @@ func (trust *NotarySigner) ListKeys(role string) []string {
 	return []string{}
 }
 
+// ListAllKeys not supported for NotarySigner
+func (trust *NotarySigner) ListAllKeys() map[string]string {
+	return map[string]string{}
+}
+
 // CheckHealth checks the health of one of the clients, since both clients run
 // from the same GRPC server.
 func (trust *NotarySigner) CheckHealth(timeout time.Duration) error {

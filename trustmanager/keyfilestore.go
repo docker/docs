@@ -5,7 +5,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/docker/notary/pkg/passphrase"
+	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/tuf/data"
 )
 
