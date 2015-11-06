@@ -68,14 +68,14 @@ target="_blank">docker/docker repository</a>.
 
         $ cd repos
 
-5. Clone the fork to your local host into a repository called `docker-fork`.
+8. Clone the fork to your local host into a repository called `docker-fork`.
 
         $ git clone https://github.com/moxiegirl/docker.git docker-fork
 
     Naming your local repo `docker-fork` should help make these instructions
     easier to follow; experienced coders don't typically change the name.
 
-6. Change directory into your new `docker-fork` directory.
+9. Change directory into your new `docker-fork` directory.
 
         $ cd docker-fork
 
@@ -92,8 +92,9 @@ You indicate your agreement by signing your `git` commits like this:
 
 To create a signature, you configure your username and email address in Git.
 You can set these globally or locally on just your `docker-fork` repository.
-You must sign with your real name. We don't accept anonymous contributions or
-contributions through pseudonyms.
+You must sign with your real name. You can sign your git commit automatically
+with `git commit -s`. Docker does not accept anonymous contributions or contributions
+through pseudonyms.
 
 As you change code in your fork, you'll want to keep it in sync with the changes
 others make in the `docker/docker` repository. To make syncing easier, you'll
@@ -118,7 +119,7 @@ To configure your username, email, and add a remote:
 
         $ git remote add upstream https://github.com/docker/docker.git
 
-7. Check the result in your `git` configuration.
+5. Check the result in your `git` configuration.
 
         $ git config --local -l
         core.repositoryformatversion=0
