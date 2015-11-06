@@ -33,7 +33,7 @@
                     </buttonCell>
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xi8-N0-Reb">
-                    <rect key="frame" x="18" y="63" width="382" height="51"/>
+                    <rect key="frame" x="18" y="46" width="382" height="68"/>
                     <animations/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="N5z-io-cf5">
                         <font key="font" metaFont="system"/>

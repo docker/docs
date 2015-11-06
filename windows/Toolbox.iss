@@ -218,7 +218,7 @@ begin
 	TrackingLabel.Left := WizardForm.WelcomeLabel2.Left;
 	TrackingLabel.Width := WizardForm.WelcomeLabel2.Width;
 	TrackingLabel.Top := TrackingCheckBox.Top + TrackingCheckBox.Height + 5;
-	TrackingLabel.Height := 50;
+	TrackingLabel.Height := 100;
 
 		// Don't do this until we can compare versions
 		// Wizardform.ComponentsList.Checked[3] := NeedToInstallVirtualBox();
