@@ -30,6 +30,7 @@ var (
 	configFileName    = "config"
 	configFileExt     = "json"
 	retriever         passphrase.Retriever
+	getRetriever      = getPassphraseRetriever
 	mainViper         = viper.New()
 )
 
@@ -85,13 +86,7 @@ func parseConfig() {
 	}
 }
 
-func main() {
-	var notaryCmd = &cobra.Command{
-		Use:   "notary",
-		Short: "notary allows the creation of trusted collections.",
-		Long:  "notary allows the creation and management of collections of signed targets, allowing the signing and validation of arbitrary content.",
-	}
-
+func setupCommand(notaryCmd *cobra.Command) {
 	var versionCmd = &cobra.Command{
 		Use:   "version",
 		Short: "Print the version number of notary",
@@ -124,7 +119,15 @@ func main() {
 	cmdTufLookup.Flags().StringVarP(&remoteTrustServer, "server", "s", "", "Remote trust server location")
 	notaryCmd.AddCommand(cmdVerify)
 	cmdVerify.Flags().StringVarP(&remoteTrustServer, "server", "s", "", "Remote trust server location")
+}
 
+func main() {
+	var notaryCmd = &cobra.Command{
+		Use:   "notary",
+		Short: "notary allows the creation of trusted collections.",
+		Long:  "notary allows the creation and management of collections of signed targets, allowing the signing and validation of arbitrary content.",
+	}
+	setupCommand(notaryCmd)
 	notaryCmd.Execute()
 }
 
