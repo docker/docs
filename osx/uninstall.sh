@@ -12,7 +12,7 @@ while true; do
   case $yn in
     [Yy]* ) docker-machine rm -f $(docker-machine ls -q); break;;
     [Nn]* ) break;;
-    * ) echo "Please answer yes or no.";;
+    * ) echo "Please answer yes or no."; exit 1;;
   esac
 done
 
