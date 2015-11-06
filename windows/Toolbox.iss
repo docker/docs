@@ -69,8 +69,6 @@ Source: ".\start.sh"; DestDir: "{app}"; Flags: ignoreversion; Components: "Docke
 Source: ".\delete.sh"; DestDir: "{app}"; Flags: ignoreversion; Components: "Docker"
 Source: "{#dockerMachineCli}"; DestDir: "{app}"; Flags: ignoreversion; Components: "DockerMachine"
 Source: "{#dockerComposeCli}"; DestDir: "{app}"; Flags: ignoreversion; Components: "DockerCompose"
-Source: ".\migrate.sh"; DestDir: "{app}"; Flags: ignoreversion; Components: "DockerMachine"
-Source: ".\migrate.bat"; DestDir: "{app}"; Flags: ignoreversion; Components: "DockerMachine"
 Source: "{#kitematic}\*"; DestDir: "{app}\kitematic"; Flags: ignoreversion recursesubdirs; Components: "Kitematic"
 Source: "{#b2dIsoPath}"; DestDir: "{app}"; Flags: ignoreversion; Components: "DockerMachine"; AfterInstall: CopyBoot2DockerISO()
 Source: "{#git}"; DestDir: "{app}\installers\git"; DestName: "git.exe"; AfterInstall: RunInstallGit();  Components: "Git"
@@ -98,7 +96,7 @@ Root: HKCU; Subkey: "Environment"; ValueType:string; ValueName:"DOCKER_TOOLBOX_I
 
 var
 	restart: boolean;
-  TrackingDisabled: Boolean;
+	TrackingDisabled: Boolean;
   TrackingCheckBox: TNewCheckBox;
 
 function uuid(): String;
@@ -140,15 +138,20 @@ begin
 	end;
 end;
 
-procedure TrackEvent(name: String);
+procedure TrackEventWithProperties(name: String; properties: String);
 var
   payload: String;
   WinHttpReq: Variant;
+	tracking: String;
 begin
   if TrackingDisabled or WizardSilent() then
     exit;
+
+	if Length(properties) > 0 then
+		properties := ', ' + properties;
+
   try
-    payload := Encode64(Format(ExpandConstant('{{"event": "%s", "properties": {{"token": "{#MixpanelToken}", "distinct_id": "%s", "os": "win32", "os version": "%s", "version": "{#MyAppVersion}"}}'), [name, uuid(), WindowsVersionString()]));
+    payload := Encode64(Format(ExpandConstant('{{"event": "%s", "properties": {{"token": "{#MixpanelToken}", "distinct_id": "%s", "os": "win32", "os version": "%s", "version": "{#MyAppVersion}" %s}}'), [name, uuid(), WindowsVersionString(), properties]));
     WinHttpReq := CreateOleObject('WinHttp.WinHttpRequest.5.1');
     WinHttpReq.Open('POST', 'https://api.mixpanel.com/track/?data=' + payload, false);
     WinHttpReq.SetRequestHeader('Content-Type', 'application/json');
@@ -157,9 +160,9 @@ begin
   end;
 end;
 
-function NeedRestart(): Boolean;
+procedure TrackEvent(name: String);
 begin
-	Result := restart;
+	TrackEventWithProperties(name, '');
 end;
 
 function NeedToInstallVirtualBox(): Boolean;
@@ -186,17 +189,6 @@ begin
 	Result := not DirExists('C:\Program Files\Git') or not FileExists('C:\Program Files\Git\git-bash.exe')
 end;
 
-procedure TrackingCheckBoxClicked(Sender: TObject);
-begin
-  if TrackingCheckBox.Checked then begin
-		TrackingDisabled := False;
-    TrackEvent('Enabled Tracking');
-  end else begin
-    TrackEvent('Disabled Tracking');
-    TrackingDisabled := True;
-  end;
-end;
-
 procedure InitializeWizard;
 var
   WelcomePage: TWizardPage;
@@ -211,11 +203,10 @@ begin
   TrackingCheckBox.Top := WizardForm.WelcomeLabel2.Top + WizardForm.WelcomeLabel2.Height + 10;
   TrackingCheckBox.Left := WizardForm.WelcomeLabel2.Left;
   TrackingCheckBox.Width := WizardForm.WelcomeLabel2.Width;
-  TrackingCheckBox.Height := 40;
+  TrackingCheckBox.Height := 28;
   TrackingCheckBox.Caption := 'Help Docker improve Toolbox.';
   TrackingCheckBox.Checked := True;
   TrackingCheckBox.Parent := WelcomePage.Surface;
-  TrackingCheckBox.OnClick := @TrackingCheckboxClicked;
 
 	TrackingLabel := TLabel.Create(WizardForm);
 	TrackingLabel.Parent := WelcomePage.Surface;
@@ -226,8 +217,8 @@ begin
 	TrackingLabel.Visible := True;
 	TrackingLabel.Left := WizardForm.WelcomeLabel2.Left;
 	TrackingLabel.Width := WizardForm.WelcomeLabel2.Width;
-	TrackingLabel.Top := TrackingCheckBox.Top + TrackingCheckBox.Height + 20;
-	TrackingLabel.Height := 300;
+	TrackingLabel.Top := TrackingCheckBox.Top + TrackingCheckBox.Height + 5;
+	TrackingLabel.Height := 50;
 
 		// Don't do this until we can compare versions
 		// Wizardform.ComponentsList.Checked[3] := NeedToInstallVirtualBox();
@@ -245,7 +236,13 @@ end;
 function NextButtonClick(CurPageID: Integer): Boolean;
 begin
   if CurPageID = wpWelcome then begin
-      TrackEvent('Continued from Overview');
+			if TrackingCheckBox.Checked then begin
+				TrackEventWithProperties('Continued from Overview', '"Tracking Enabled": "Yes"');
+				TrackingDisabled := False;
+			end else begin
+				TrackEventWithProperties('Continued from Overview', '"Tracking Enabled": "No"');
+				TrackingDisabled := True;
+			end;
   end;
   Result := True
 end;
@@ -329,49 +326,6 @@ begin
 	Result := true
 end;
 
-function MigrateVM() : Boolean;
-var
-  ResultCode: Integer;
-begin
-	if NeedToInstallGit() or NeedToInstallVirtualBox() or not FileExists(ExpandConstant('{app}\docker-machine.exe')) then begin
-		Result := true
-		exit
-	end;
-
-	ExecAsOriginalUser(VBoxPath() + 'VBoxManage.exe', 'showvminfo default', '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
-	if ResultCode <> 1 then begin
-		Result := true
-		exit
-	end;
-
-	ExecAsOriginalUser(VBoxPath() + 'VBoxManage.exe', 'showvminfo boot2docker-vm', '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
-	if ResultCode <> 0 then begin
-		Result := true
-		exit
-	end;
-
-	TrackEvent('Boot2Docker Migration Started');
-	WizardForm.StatusLabel.Caption := 'Migrating Boot2Docker VM...'
-	WizardForm.FilenameLabel.Caption := 'This will take a minute...'
-	ExecAsOriginalUser(ExpandConstant('{app}\docker-machine.exe'), ExpandConstant('rm -f default > nul 2>&1'), '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
-	DelTree(ExpandConstant('{userdocs}\..\.docker\machine\machines\default'), True, True, True);
-	ExecAsOriginalUser(ExpandConstant('{app}\migrate.bat'), ExpandConstant('> {localappdata}\Temp\toolbox-migration-logs.txt 2>&1'), '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
-	if ResultCode = 0 then
-	begin
-		TrackEvent('Boot2Docker Migration Succeeded');
-		MsgBox('Succcessfully migrated Boot2Docker VM to a Docker Machine VM named "default"', mbInformation, MB_OK);
-	end
-	else begin
-		TrackEvent('Boot2Docker Migration Failed');
-		MsgBox('Migration of Boot2Docker VM failed. Please file an issue with the migration logs at https://github.com/docker/toolbox/issues/new.', mbCriticalError, MB_OK);
-		Exec(ExpandConstant('{win}\notepad.exe'), ExpandConstant('{localappdata}\Temp\toolbox-migration-logs.txt'), '', SW_SHOW, ewNoWait, ResultCode)
-		Result := false
-		WizardForm.Close;
-		exit;
-	end;
-  Result := true
-end;
-
 const
 	ModPathName = 'modifypath';
 	ModPathType = 'user';
@@ -390,6 +344,7 @@ begin
 	Success := True;
 	if CurStep = ssPostInstall then
   begin
+		trackEvent('Installing Files Succeeded');
     if IsTaskSelected(ModPathName) then
 			ModPath();
     if not WizardSilent() then
@@ -399,9 +354,6 @@ begin
 				if CanUpgradeVM() then begin
 					Success := UpgradeVM();
 				end;
-				// else begin
-				//	Success := MigrateVM();
-				// end;
 			end;
 		end;
 

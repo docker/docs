@@ -26,7 +26,7 @@ RUN curl -fsSL -o /vbox.dmg http://download.virtualbox.org/virtualbox/$VBOX_VERS
 
 # Download the Docker parts
 
-ENV INSTALLER_VERSION 1.9.0
+ENV INSTALLER_VERSION 1.9.0a
 ENV DOCKER_VERSION 1.9.0
 # RUN curl -fsSL -o /docker https://test.docker.com/builds/Darwin/x86_64/docker-$DOCKER_VERSION
 RUN curl -fsSL -o docker https://get.docker.com/builds/Darwin/x86_64/docker-$DOCKER_VERSION
@@ -192,9 +192,6 @@ RUN sed -i \
 RUN sed -i \
 		-e "s/%INSTALLER_VERSION%/$INSTALLER_VERSION/g" \
 		mpkg/Resources/en.lproj/welcome.rtfd/TXT.rtf
-RUN sed -i \
-		-e "s/%INSTALLER_VERSION%/$INSTALLER_VERSION/g" \
-		mpkg/Resources/en.lproj/Installed.html
 RUN sed -i \
 		-e "s/%VBOX_VERSION%/$VBOX_VERSION/g" \
 		/mpkg/Distribution && \
