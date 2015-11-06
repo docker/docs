@@ -329,12 +329,17 @@ func encryptAndAddKey(s LimitedFileStore, passwd string, cachedKeys map[string]*
 
 func importKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, cachedKeys map[string]*cachedKey, alias string, pemBytes []byte) error {
 
+	if alias != data.CanonicalRootRole {
+		return s.Add(alias, pemBytes)
+	}
+
 	privKey, passphrase, err := GetPasswdDecryptBytes(passphraseRetriever, pemBytes, "imported", alias)
 
 	if err != nil {
 		return err
 	}
 
-	return encryptAndAddKey(
-		s, passphrase, cachedKeys, privKey.ID(), alias, privKey)
+	var name string
+	name = privKey.ID()
+	return encryptAndAddKey(s, passphrase, cachedKeys, name, alias, privKey)
 }
