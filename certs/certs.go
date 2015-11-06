@@ -71,14 +71,14 @@ func ValidateRoot(certStore trustmanager.X509Store, root *data.Signed, gun strin
 	}
 
 	// Retrieve all the leaf certificates in root for which the CN matches the GUN
-	allValidCerts, err := validRootLeafCerts(signedRoot, gun)
+	certsFromRoot, err := validRootLeafCerts(signedRoot, gun)
 	if err != nil {
 		logrus.Debugf("error retrieving valid leaf certificates for: %s, %v", gun, err)
 		return &ErrValidationFail{Reason: "unable to retrieve valid leaf certificates"}
 	}
 
 	// Retrieve all the trusted certificates that match this gun
-	certsForCN, err := certStore.GetCertificatesByCN(gun)
+	trustedCerts, err := certStore.GetCertificatesByCN(gun)
 	if err != nil {
 		// If the error that we get back is different than ErrNoCertificatesFound
 		// we couldn't check if there are any certificates with this CN already
@@ -91,9 +91,9 @@ func ValidateRoot(certStore trustmanager.X509Store, root *data.Signed, gun strin
 
 	// If we have certificates that match this specific GUN, let's make sure to
 	// use them first to validate that this new root is valid.
-	if len(certsForCN) != 0 {
-		logrus.Debugf("found %d valid root certificates for %s", len(certsForCN), gun)
-		err = signed.VerifyRoot(root, 0, trustmanager.CertsToKeys(certsForCN))
+	if len(trustedCerts) != 0 {
+		logrus.Debugf("found %d valid root certificates for %s", len(trustedCerts), gun)
+		err = signed.VerifyRoot(root, 0, trustmanager.CertsToKeys(trustedCerts))
 		if err != nil {
 			logrus.Debugf("failed to verify TUF data for: %s, %v", gun, err)
 			return &ErrValidationFail{Reason: "failed to validate data with current trusted certificates"}
@@ -103,7 +103,7 @@ func ValidateRoot(certStore trustmanager.X509Store, root *data.Signed, gun strin
 	}
 
 	// Validate the integrity of the new root (does it have valid signatures)
-	err = signed.VerifyRoot(root, 0, trustmanager.CertsToKeys(allValidCerts))
+	err = signed.VerifyRoot(root, 0, trustmanager.CertsToKeys(certsFromRoot))
 	if err != nil {
 		logrus.Debugf("failed to verify TUF data for: %s, %v", gun, err)
 		return &ErrValidationFail{Reason: "failed to validate integrity of roots"}
@@ -116,7 +116,7 @@ func ValidateRoot(certStore trustmanager.X509Store, root *data.Signed, gun strin
 
 	// Do root certificate rotation: we trust only the certs present in the new root
 	// First we add all the new certificates (even if they already exist)
-	for _, cert := range allValidCerts {
+	for _, cert := range certsFromRoot {
 		err := certStore.AddCert(cert)
 		if err != nil {
 			// If the error is already exists we don't fail the rotation
@@ -129,7 +129,7 @@ func ValidateRoot(certStore trustmanager.X509Store, root *data.Signed, gun strin
 	}
 
 	// Now we delete old certificates that aren't present in the new root
-	for certID, cert := range certsToRemove(certsForCN, allValidCerts) {
+	for certID, cert := range certsToRemove(trustedCerts, certsFromRoot) {
 		logrus.Debugf("removing certificate with certID: %s", certID)
 		err = certStore.RemoveCert(cert)
 		if err != nil {
