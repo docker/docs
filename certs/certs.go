@@ -142,8 +142,9 @@ func ValidateRoot(certStore trustmanager.X509Store, root *data.Signed, gun strin
 	return nil
 }
 
-// validRootLeafCerts returns a list of non-exipired, non-sha1 certificates whose
-// Common-Names match the provided GUN
+// validRootLeafCerts returns a list of non-expired, non-sha1 certificates
+// found in root whoose Common-Names match the provided GUN. Note that this
+// "validity" alone does not imply any measure of trust.
 func validRootLeafCerts(root *data.SignedRoot, gun string) ([]*x509.Certificate, error) {
 	// Get a list of all of the leaf certificates present in root
 	allLeafCerts, _ := parseAllCerts(root)
