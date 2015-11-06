@@ -1,19 +1,49 @@
-# Cobra
+![cobra logo](https://cloud.githubusercontent.com/assets/173412/10886352/ad566232-814f-11e5-9cd0-aa101788c117.png)
 
-A Commander for modern go CLI interactions
+Cobra is both a library for creating powerful modern CLI applications as well as a program to generate applications and command files. 
+
+Many of the most widely used Go projects are built using Cobra including:
+
+* [Kubernetes](http://kubernetes.io/)
+* [Hugo](http://gohugo.io)
+* [Rocket](https://github.com/coreos/rkt)
+* [Docker (distribution)](https://github.com/docker/distribution) 
+* [OpenShift](https://www.openshift.com/)
+* [Delve](https://github.com/derekparker/delve)
+* [GopherJS](http://www.gopherjs.org/)
+* [CockroachDB](http://www.cockroachlabs.com/)
+* [Bleve](http://www.blevesearch.com/)
+* [ProjectAtomic (enterprise)](http://www.projectatomic.io/)
+* [Parse (CLI)](https://parse.com/)
+
 
 [![Build Status](https://travis-ci.org/spf13/cobra.svg)](https://travis-ci.org/spf13/cobra)
 
+![cobra](https://cloud.githubusercontent.com/assets/173412/10911369/84832a8e-8212-11e5-9f82-cc96660a4794.gif)
+
 ## Overview
 
-Cobra is a commander providing a simple interface to create powerful modern CLI
-interfaces similar to git & go tools. In addition to providing an interface, Cobra
-simultaneously provides a controller to organize your application code.
+Cobra is a library providing a simple interface to create powerful modern CLI
+interfaces similar to git & go tools.
 
-Inspired by go, go-Commander, gh and subcommand, Cobra improves on these by
-providing **fully posix compliant flags** (including short & long versions),
-**nesting commands**, and the ability to **define your own help and usage** for any or
-all commands.
+Cobra is also an application that will generate your application scaffolding to rapidly
+develop a Cobra based application.
+
+Cobra provides:
+* Easy sub-command based CLIs: `app server`, `app fetch`, etc.
+* Fully posix compliant flags (including short & long versions)
+* Nested sub commands
+* Global, local and cascading flags
+* Easy generation of applications & commands with `cobra create appname` & `cobra add cmdname`
+* Intelligent suggestions (`app srver`.. did you mean `app server`)
+* Automatic help generation for commands and flags
+* Automatic detailed help for `app help [command]`
+* Automatic help flag recognition of `-h`, `--help`, etc.
+* Automatically generated bash autocomplete for your application
+* Automatically generated man pages for your application
+* Command aliases so you can change things without breaking them
+* The flexibilty to define your own help, usage, etc
+* Optional tight integration with [viper](http://github.com/spf13/viper) for 12 factor apps
 
 Cobra has an exceptionally clean interface and simple design without needless
 constructors or initialization methods.
@@ -350,13 +380,13 @@ Like help the function and template are over ridable through public methods.
 
 ## PreRun or PostRun Hooks
 
-It is possible to run functions before or after the main `Run` function of your command. The `PersistentPreRun` and `PreRun` functions will be executed before `Run`. `PersistendPostRun` and `PostRun` will be executed after `Run`.  The `Persistent*Run` functions will be inherrited by children if they do not declare their own.  These function are run in the following order:
+It is possible to run functions before or after the main `Run` function of your command. The `PersistentPreRun` and `PreRun` functions will be executed before `Run`. `PersistentPostRun` and `PostRun` will be executed after `Run`.  The `Persistent*Run` functions will be inherrited by children if they do not declare their own.  These function are run in the following order:
 
 - `PersistentPreRun`
 - `PreRun`
 - `Run`
 - `PostRun`
-- `PersistenPostRun`
+- `PersistentPostRun`
 
 And example of two commands which use all of these features is below.  When the subcommand in executed it will run the root command's `PersistentPreRun` but not the root command's `PersistentPostRun`
 
@@ -418,9 +448,49 @@ func main() {
 }
 ```
 
+## Suggestions when "unknown command" happens
+
+Cobra will print automatic suggestions when "unknown command" errors happen. This allows Cobra to behavior similarly to the `git` command when a typo happens. For example:
+
+```
+$ hugo srever
+unknown command "srever" for "hugo"
+
+Did you mean this?
+  server
+
+Run 'hugo --help' for usage.
+```
+
+Suggestions are automatic based on every subcommand registered and use an implementation of Levenshtein distance. Every registered command that matches a minimum distance of 2 (ignoring case) will be displayed as a suggestion.
+
+If you need to disable suggestions or tweak the string distance in your command, use:
+
+    command.DisableSuggestions = true
+
+or 
+
+    command.SuggestionsMinimumDistance = 1
+
+You can also explicitly set names for which a given command will be suggested using the `SuggestFor` attribute. This allows suggestions for strings that are not close in terms of string distance, but makes sense in your set of commands and for some which you don't want aliases. Example:
+
+```
+$ hugo delete
+unknown command "delete" for "hugo"
+
+Did you mean this?
+  remove
+
+Run 'hugo --help' for usage.
+```
+
 ## Generating markdown formatted documentation for your command
 
 Cobra can generate a markdown formatted document based on the subcommands, flags, etc. A simple example of how to do this for your command can be found in [Markdown Docs](md_docs.md)
+
+## Generating man pages for your command
+
+Cobra can generate a man page based on the subcommands, flags, etc. A simple example of how to do this for your command can be found in [Man Docs](man_docs.md)
 
 ## Generating bash completions for your command
 
