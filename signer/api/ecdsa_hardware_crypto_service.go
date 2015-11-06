@@ -504,7 +504,8 @@ func (s *YubiKeyStore) AddKey(keyID, role string, privKey data.PrivateKey) error
 
 	if k, ok := s.keys[keyID]; ok {
 		if k.role == role {
-
+			// already have the key and it's associated with the correct role
+			return nil
 		}
 	}
 

@@ -57,10 +57,10 @@ func (cs *CryptoService) Create(role, algorithm string) (data.PublicKey, error) 
 	if role == data.CanonicalRootRole {
 		keyPath = privKey.ID()
 	} else {
-		keyPath = filepath.Join(ccs.gun, privKey.ID())
+		keyPath = filepath.Join(cs.gun, privKey.ID())
 	}
 
-	for _, ks := range ccs.keyStores {
+	for _, ks := range cs.keyStores {
 		err = ks.AddKey(keyPath, role, privKey)
 		if err == nil {
 			return data.PublicKeyFromPrivate(privKey), nil
@@ -77,11 +77,11 @@ func (cs *CryptoService) Create(role, algorithm string) (data.PublicKey, error) 
 // without a GUN (in which case it's a root key).  If that fails, try to get
 // the key with the GUN (non-root key).
 // If that fails, then we don't have the key.
-func (ccs *CryptoService) GetPrivateKey(keyID string) (k data.PrivateKey, id string, err error) {
-	keyPaths := []string{keyID, filepath.Join(ccs.gun, keyID)}
-	for _, ks := range ccs.keyStores {
+func (cs *CryptoService) GetPrivateKey(keyID string) (k data.PrivateKey, role string, err error) {
+	keyPaths := []string{keyID, filepath.Join(cs.gun, keyID)}
+	for _, ks := range cs.keyStores {
 		for _, keyPath := range keyPaths {
-			k, id, err = ks.GetKey(keyPath)
+			k, role, err = ks.GetKey(keyPath)
 			if err != nil {
 				continue
 			}
@@ -92,8 +92,8 @@ func (ccs *CryptoService) GetPrivateKey(keyID string) (k data.PrivateKey, id str
 }
 
 // GetKey returns a key by ID
-func (ccs *CryptoService) GetKey(keyID string) data.PublicKey {
-	privKey, _, err := ccs.GetPrivateKey(keyID)
+func (cs *CryptoService) GetKey(keyID string) data.PublicKey {
+	privKey, _, err := cs.GetPrivateKey(keyID)
 	if err != nil {
 		return nil
 	}
@@ -101,9 +101,9 @@ func (ccs *CryptoService) GetKey(keyID string) data.PublicKey {
 }
 
 // RemoveKey deletes a key by ID
-func (ccs *CryptoService) RemoveKey(keyID string) (err error) {
-	keyPaths := []string{keyID, filepath.Join(ccs.gun, keyID)}
-	for _, ks := range ccs.keyStores {
+func (cs *CryptoService) RemoveKey(keyID string) (err error) {
+	keyPaths := []string{keyID, filepath.Join(cs.gun, keyID)}
+	for _, ks := range cs.keyStores {
 		for _, keyPath := range keyPaths {
 			_, _, err = ks.GetKey(keyPath)
 			if err != nil {
@@ -124,7 +124,7 @@ func (cs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signature
 	for _, keyid := range keyIDs {
 		keyName := keyid
 
-		privKey, _, err := ccs.GetPrivateKey(keyName)
+		privKey, _, err := cs.GetPrivateKey(keyName)
 		if err != nil {
 			logrus.Debugf("error attempting to retrieve private key: %s, %v", keyid, err)
 			continue

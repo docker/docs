@@ -24,9 +24,7 @@ type KeyStoreManager struct {
 }
 
 const (
-	trustDir = "trusted_certificates"
-	// PrivDir is the name of the private directory
-	PrivDir        = "private"
+	trustDir       = "trusted_certificates"
 	rsaRootKeySize = 4096 // Used for new root keys
 )
 
