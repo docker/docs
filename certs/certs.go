@@ -129,7 +129,12 @@ func ValidateRoot(certStore trustmanager.X509Store, root *data.Signed, gun strin
 	}
 
 	// Now we delete old certificates that aren't present in the new root
-	for certID, cert := range certsToRemove(trustedCerts, certsFromRoot) {
+	oldCertsToRemove, err := certsToRemove(trustedCerts, certsFromRoot)
+	if err != nil {
+		logrus.Debugf("inconsistency when removing old certificates: %v", err)
+		return err
+	}
+	for certID, cert := range oldCertsToRemove {
 		logrus.Debugf("removing certificate with certID: %s", certID)
 		err = certStore.RemoveCert(cert)
 		if err != nil {
@@ -246,12 +251,14 @@ func parseAllCerts(signedRoot *data.SignedRoot) (map[string]*x509.Certificate, m
 
 // certsToRemove returns all the certifificates from oldCerts that aren't present
 // in newCerts
-func certsToRemove(oldCerts, newCerts []*x509.Certificate) map[string]*x509.Certificate {
+func certsToRemove(oldCerts, newCerts []*x509.Certificate) (map[string]*x509.Certificate, error) {
 	certsToRemove := make(map[string]*x509.Certificate)
 
-	// If no newCerts were provided
+	// We don't want to "rotate" certificates to an empty set, nor keep old certificates if the
+	// new root does not trust them.  newCerts should come from validRootLeafCerts, which refuses
+	// to return an empty set, so this should never happen - fail just to be sure.
 	if len(newCerts) == 0 {
-		return certsToRemove
+		return nil, &ErrRootRotationFail{Reason: "internal error, got no certificates to rotate to"}
 	}
 
 	// Populate a map with all the IDs from newCert
@@ -277,5 +284,5 @@ func certsToRemove(oldCerts, newCerts []*x509.Certificate) map[string]*x509.Cert
 		}
 	}
 
-	return certsToRemove
+	return certsToRemove, nil
 }
