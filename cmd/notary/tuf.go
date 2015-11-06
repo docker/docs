@@ -107,7 +107,7 @@ func tufAdd(cmd *cobra.Command, args []string) {
 	if err != nil {
 		fatalf(err.Error())
 	}
-	fmt.Printf("Addition of %s to %s staged for next publish.\n", targetName, gun)
+	cmd.Printf("Addition of %s to %s staged for next publish.\n", targetName, gun)
 }
 
 func tufInit(cmd *cobra.Command, args []string) {
@@ -128,7 +128,7 @@ func tufInit(cmd *cobra.Command, args []string) {
 
 	var rootKeyID string
 	if len(rootKeyList) < 1 {
-		fmt.Println("No root keys found. Generating a new root key...")
+		cmd.Println("No root keys found. Generating a new root key...")
 		rootPublicKey, err := nRepo.CryptoService.Create(data.CanonicalRootRole, data.ECDSAKey)
 		rootKeyID = rootPublicKey.ID()
 		if err != nil {
@@ -138,7 +138,7 @@ func tufInit(cmd *cobra.Command, args []string) {
 		// Choses the first root key available, which is initialization specific
 		// but should return the HW one first.
 		rootKeyID = rootKeyList[0]
-		fmt.Printf("Root key found, using: %s\n", rootKeyID)
+		cmd.Printf("Root key found, using: %s\n", rootKeyID)
 	}
 
 	err = nRepo.Initialize(rootKeyID)
@@ -168,7 +168,7 @@ func tufList(cmd *cobra.Command, args []string) {
 
 	// Print all the available targets
 	for _, t := range targetList {
-		fmt.Printf("%s %x %d\n", t.Name, t.Hashes["sha256"], t.Length)
+		cmd.Printf("%s %x %d\n", t.Name, t.Hashes["sha256"], t.Length)
 	}
 }
 
@@ -191,7 +191,7 @@ func tufLookup(cmd *cobra.Command, args []string) {
 		fatalf(err.Error())
 	}
 
-	fmt.Println(target.Name, fmt.Sprintf("sha256:%x", target.Hashes["sha256"]), target.Length)
+	cmd.Println(target.Name, fmt.Sprintf("sha256:%x", target.Hashes["sha256"]), target.Length)
 }
 
 func tufStatus(cmd *cobra.Command, args []string) {
@@ -214,15 +214,15 @@ func tufStatus(cmd *cobra.Command, args []string) {
 	}
 
 	if len(cl.List()) == 0 {
-		fmt.Printf("No unpublished changes for %s\n", gun)
+		cmd.Printf("No unpublished changes for %s\n", gun)
 		return
 	}
 
-	fmt.Printf("Unpublished changes for %s:\n\n", gun)
-	fmt.Printf("%-10s%-10s%-12s%s\n", "action", "scope", "type", "path")
-	fmt.Println("----------------------------------------------------")
+	cmd.Printf("Unpublished changes for %s:\n\n", gun)
+	cmd.Printf("%-10s%-10s%-12s%s\n", "action", "scope", "type", "path")
+	cmd.Println("----------------------------------------------------")
 	for _, ch := range cl.List() {
-		fmt.Printf("%-10s%-10s%-12s%s\n", ch.Action(), ch.Scope(), ch.Type(), ch.Path())
+		cmd.Printf("%-10s%-10s%-12s%s\n", ch.Action(), ch.Scope(), ch.Type(), ch.Path())
 	}
 }
 
@@ -235,7 +235,7 @@ func tufPublish(cmd *cobra.Command, args []string) {
 	gun := args[0]
 	parseConfig()
 
-	fmt.Println("Pushing changes to ", gun, ".")
+	cmd.Println("Pushing changes to", gun)
 
 	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, getRemoteTrustServer(), getTransport(gun, false), retriever)
 	if err != nil {
@@ -268,7 +268,7 @@ func tufRemove(cmd *cobra.Command, args []string) {
 		fatalf(err.Error())
 	}
 
-	fmt.Printf("Removal of %s from %s staged for next publish.\n", targetName, gun)
+	cmd.Printf("Removal of %s from %s staged for next publish.\n", targetName, gun)
 }
 
 func verify(cmd *cobra.Command, args []string) {
