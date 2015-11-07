@@ -119,6 +119,7 @@ func (e *Ed25519) GetPrivateKey(keyID string) (data.PrivateKey, string, error) {
 	return e.keys[keyID].privKey, "", nil
 }
 
+// ImportRootKey adds an Ed25519 key to the store as a root key
 func (e *Ed25519) ImportRootKey(r io.Reader) error {
 	raw, err := ioutil.ReadAll(r)
 	if err != nil {
