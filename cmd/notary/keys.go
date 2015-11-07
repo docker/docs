@@ -227,11 +227,19 @@ func keysGenerateRootKey(cmd *cobra.Command, args []string) {
 	parseConfig()
 
 	keysPath := filepath.Join(trustDir, notary.PrivDir)
+	backupPath := filepath.Join(trustDir, notary.BackupDir)
 	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
 	if err != nil {
 		fatalf("failed to create private key store in directory: %s", keysPath)
 	}
-	cs := cryptoservice.NewCryptoService("", fileKeyStore)
+	yubiStore, err := api.NewYubiKeyStore(backupPath, retriever)
+	var cs signed.CryptoService
+	if err != nil {
+		cmd.Printf("No Yubikey detected, importing to local filesystem.")
+		cs = cryptoservice.NewCryptoService("", fileKeyStore)
+	} else {
+		cs = cryptoservice.NewCryptoService("", yubiStore, fileKeyStore)
+	}
 
 	pubKey, err := cs.Create(data.CanonicalRootRole, algorithm)
 	if err != nil {
