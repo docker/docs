@@ -137,6 +137,18 @@ func keysRemoveKey(cmd *cobra.Command, args []string) {
 		fatalf("invalid key ID provided: %s", keyID)
 	}
 
+	keyMap := cs.ListAllKeys()
+	var key string
+	for k := range keyMap {
+		if filepath.Base(k) == keyID {
+			key = k
+		}
+	}
+
+	if key == "" {
+		fatalf("key with key ID: %s not found\n", keyID)
+	}
+
 	// List the key about to be removed
 	fmt.Println("Are you sure you want to remove the following key?")
 	fmt.Printf("%s\n(yes/no)\n", keyID)
@@ -150,7 +162,7 @@ func keysRemoveKey(cmd *cobra.Command, args []string) {
 	}
 
 	// Attempt to remove the key
-	err = cs.RemoveKey(keyID)
+	err = cs.RemoveKey(key)
 	if err != nil {
 		fatalf("failed to remove key with key ID: %s, %v", keyID, err)
 	}
