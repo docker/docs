@@ -514,7 +514,14 @@ func (s *YubiKeyStore) AddKey(keyID, role string, privKey data.PrivateKey) error
 		return err
 	}
 	logrus.Debugf("Using yubikey slot %v", slot)
-	return addECDSAKey(ctx, session, privKey, slot, s.passRetriever, role)
+	err = addECDSAKey(ctx, session, privKey, slot, s.passRetriever, role)
+	if err == nil {
+		s.keys[privKey.ID()] = yubiSlot{
+			role:   role,
+			slotID: slot,
+		}
+	}
+	return err
 }
 
 func (s *YubiKeyStore) GetKey(keyID string) (data.PrivateKey, string, error) {
