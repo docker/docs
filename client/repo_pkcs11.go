@@ -13,6 +13,7 @@ import (
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/signer/api"
 	"github.com/docker/notary/trustmanager"
+	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/store"
 )
 
@@ -23,14 +24,20 @@ func NewNotaryRepository(baseDir, gun, baseURL string, rt http.RoundTripper,
 	retriever passphrase.Retriever) (*NotaryRepository, error) {
 
 	keysPath := filepath.Join(baseDir, notary.PrivDir)
+	backupPath := filepath.Join(baseDir, notary.BackupDir)
 	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create private key store in directory: %s", keysPath)
 	}
 
 	keyStoreManager, err := keystoremanager.NewKeyStoreManager(baseDir, fileKeyStore)
-	yubiKeyStore := api.NewYubiKeyStore(retriever)
-	cryptoService := cryptoservice.NewCryptoService(gun, yubiKeyStore, keyStoreManager.KeyStore)
+	yubiKeyStore, _ := api.NewYubiKeyStore(backupPath, retriever)
+	var cryptoService signed.CryptoService
+	if yubiKeyStore == nil {
+		cryptoService = cryptoservice.NewCryptoService(gun, keyStoreManager.KeyStore)
+	} else {
+		cryptoService = cryptoservice.NewCryptoService(gun, yubiKeyStore, keyStoreManager.KeyStore)
+	}
 
 	nRepo := &NotaryRepository{
 		gun:             gun,

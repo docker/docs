@@ -16,6 +16,7 @@ import (
 	"github.com/docker/notary/trustmanager"
 
 	"github.com/docker/notary/tuf/data"
+	"github.com/docker/notary/tuf/signed"
 	"github.com/spf13/cobra"
 )
 
@@ -116,12 +117,18 @@ func keysRemoveKey(cmd *cobra.Command, args []string) {
 	parseConfig()
 
 	keysPath := filepath.Join(trustDir, notary.PrivDir)
+	backupPath := filepath.Join(trustDir, notary.BackupDir)
 	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
 	if err != nil {
 		fatalf("failed to create private key store in directory: %s", keysPath)
 	}
-	yubiStore := api.NewYubiKeyStore(retriever)
-	cs := cryptoservice.NewCryptoService("", yubiStore, fileKeyStore)
+	yubiStore, _ := api.NewYubiKeyStore(backupPath, retriever)
+	var cs signed.CryptoService
+	if yubiStore == nil {
+		cs = cryptoservice.NewCryptoService("", fileKeyStore)
+	} else {
+		cs = cryptoservice.NewCryptoService("", yubiStore, fileKeyStore)
+	}
 
 	keyID := args[0]
 
@@ -158,12 +165,18 @@ func keysList(cmd *cobra.Command, args []string) {
 	parseConfig()
 
 	keysPath := filepath.Join(trustDir, notary.PrivDir)
+	backupPath := filepath.Join(trustDir, notary.BackupDir)
 	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
 	if err != nil {
 		fatalf("failed to create private key store in directory: %s", keysPath)
 	}
-	yubiStore := api.NewYubiKeyStore(retriever)
-	cs := cryptoservice.NewCryptoService("", yubiStore, fileKeyStore)
+	yubiStore, _ := api.NewYubiKeyStore(backupPath, retriever)
+	var cs signed.CryptoService
+	if yubiStore == nil {
+		cs = cryptoservice.NewCryptoService("", fileKeyStore)
+	} else {
+		cs = cryptoservice.NewCryptoService("", yubiStore, fileKeyStore)
+	}
 
 	// Get a map of all the keys/roles
 	keysMap := cs.ListAllKeys()
@@ -353,12 +366,19 @@ func keysImportRoot(cmd *cobra.Command, args []string) {
 	parseConfig()
 
 	keysPath := filepath.Join(trustDir, notary.PrivDir)
+	backupPath := filepath.Join(trustDir, notary.BackupDir)
 	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
 	if err != nil {
 		fatalf("failed to create private key store in directory: %s", keysPath)
 	}
-	yubiStore := api.NewYubiKeyStore(retriever)
-	cs := cryptoservice.NewCryptoService("", yubiStore, fileKeyStore)
+	yubiStore, err := api.NewYubiKeyStore(backupPath, retriever)
+	var cs signed.CryptoService
+	if err != nil {
+		cmd.Printf("No Yubikey detected, importing to local filesystem.")
+		cs = cryptoservice.NewCryptoService("", fileKeyStore)
+	} else {
+		cs = cryptoservice.NewCryptoService("", yubiStore, fileKeyStore)
+	}
 
 	importFile, err := os.Open(importFilename)
 	if err != nil {
