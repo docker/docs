@@ -24,7 +24,7 @@ import (
 const (
 	USER_PIN    = "123456"
 	SO_USER_PIN = "010203040506070801020304050607080102030405060708"
-	numSlots    = 50 // number of slots in the yubikey
+	numSlots    = 4 // number of slots in the yubikey
 )
 
 // Hardcoded yubikey PKCS11 ID
@@ -421,27 +421,27 @@ func getNextEmptySlot(ctx *pkcs11.Ctx, session pkcs11.SessionHandle) ([]byte, er
 		}
 		objs = append(objs, o...)
 	}
-	taken := make([]bool, numSlots)
+	taken := make(map[int]bool)
 	if err != nil {
 		logrus.Debugf("Failed to find: %s %v\n", err.Error(), b)
 		return nil, err
 	}
 	for _, obj := range objs {
-		// Retrieve the public-key material to be able to create a new HSMRSAKey
+		// Retrieve the slot ID
 		attr, err := ctx.GetAttributeValue(session, obj, attrTemplate)
 		if err != nil {
 			logrus.Debugf("Failed to get Attribute for: %v\n", obj)
 			continue
 		}
 
-		// Iterate through all the attributes of this key and saves CKA_PUBLIC_EXPONENT and CKA_MODULUS. Removes ordering specific issues.
+		// Iterate through attributes. If an ID attr was found, mark it as taken
 		for _, a := range attr {
 			if a.Type == pkcs11.CKA_ID {
 				if len(a.Value) < 1 {
 					continue
 				}
-				// max 50 slots so a single byte will always represent
-				// all possible slots positions
+				// a byte will always be capable of representing all slot IDs
+				// for the Yubikeys
 				slotNum := int(a.Value[0])
 				if slotNum >= len(taken) {
 					// defensive
