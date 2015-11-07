@@ -3,6 +3,7 @@ package trustmanager
 import (
 	"errors"
 	"fmt"
+	"github.com/docker/notary"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -11,8 +12,8 @@ import (
 )
 
 const (
-	visible os.FileMode = 0755
-	private os.FileMode = 0700
+	visible = notary.PubCertPerms
+	private = notary.PrivKeyPerms
 )
 
 var (

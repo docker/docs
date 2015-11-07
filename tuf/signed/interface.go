@@ -2,6 +2,7 @@ package signed
 
 import (
 	"github.com/docker/notary/tuf/data"
+	"io"
 )
 
 // SigningService defines the necessary functions to determine
@@ -37,6 +38,10 @@ type KeyService interface {
 
 	// ListAllKeys returns a map of all available signing key IDs to role
 	ListAllKeys() map[string]string
+
+	// ImportRootKey imports a root key to the highest priority keystore associated with
+	// the cryptoservice
+	ImportRootKey(source io.Reader) error
 }
 
 // CryptoService defines a unified Signing and Key Service as this

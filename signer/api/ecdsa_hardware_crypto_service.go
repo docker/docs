@@ -12,9 +12,13 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"math/big"
+	"os"
+	"path"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/docker/notary"
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
@@ -29,6 +33,14 @@ const (
 
 // Hardcoded yubikey PKCS11 ID
 var YUBIKEY_ROOT_KEY_ID = []byte{2}
+
+type ErrBackupFailed struct {
+	path string
+}
+
+func (err ErrBackupFailed) Error() string {
+	return fmt.Sprintf("Failed to backup private key to: %s", err.path)
+}
 
 type yubiSlot struct {
 	role   string
@@ -96,7 +108,7 @@ func (y *YubiPrivateKey) Sign(rand io.Reader, msg []byte, opts crypto.SignerOpts
 }
 
 // addECDSAKey adds a key to the yubikey
-func addECDSAKey(ctx *pkcs11.Ctx, session pkcs11.SessionHandle, privKey data.PrivateKey, pkcs11KeyID []byte, passRetriever passphrase.Retriever, role string) error {
+func addECDSAKey(ctx *pkcs11.Ctx, session pkcs11.SessionHandle, privKey data.PrivateKey, pkcs11KeyID []byte, passRetriever passphrase.Retriever, role, backupPath string) error {
 	logrus.Debugf("Got into add key with key: %s\n", privKey.ID())
 
 	// TODO(diogo): Figure out CKU_SO with yubikey
@@ -151,6 +163,16 @@ func addECDSAKey(ctx *pkcs11.Ctx, session pkcs11.SessionHandle, privKey data.Pri
 	_, err = ctx.CreateObject(session, privateKeyTemplate)
 	if err != nil {
 		return fmt.Errorf("error importing: %v", err)
+	}
+
+	backupTo := path.Join(backupPath, role, privKey.ID())
+	err = ioutil.WriteFile(
+		backupTo,
+		privKey.Private(),
+		notary.PrivKeyPerms,
+	)
+	if err != nil {
+		return ErrBackupFailed{path: backupTo}
 	}
 
 	return nil
@@ -462,15 +484,21 @@ func getNextEmptySlot(ctx *pkcs11.Ctx, session pkcs11.SessionHandle) ([]byte, er
 type YubiKeyStore struct {
 	passRetriever passphrase.Retriever
 	keys          map[string]yubiSlot
+	backupPath    string
 }
 
-func NewYubiKeyStore(passphraseRetriever passphrase.Retriever) *YubiKeyStore {
+func NewYubiKeyStore(backupPath string, passphraseRetriever passphrase.Retriever) (*YubiKeyStore, error) {
+	err := os.MkdirAll(backupPath, notary.PrivKeyPerms)
+	if err != nil {
+		return nil, err
+	}
 	s := &YubiKeyStore{
 		passRetriever: passphraseRetriever,
 		keys:          make(map[string]yubiSlot),
+		backupPath:    backupPath,
 	}
 	s.ListKeys() // populate keys field
-	return s
+	return s, err
 }
 
 func (s *YubiKeyStore) ListKeys() map[string]string {
@@ -514,7 +542,7 @@ func (s *YubiKeyStore) AddKey(keyID, role string, privKey data.PrivateKey) error
 		return err
 	}
 	logrus.Debugf("Using yubikey slot %v", slot)
-	err = addECDSAKey(ctx, session, privKey, slot, s.passRetriever, role)
+	err = addECDSAKey(ctx, session, privKey, slot, s.passRetriever, role, s.backupPath)
 	if err == nil {
 		s.keys[privKey.ID()] = yubiSlot{
 			role:   role,

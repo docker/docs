@@ -6,6 +6,7 @@ import (
 	"crypto/x509"
 	"encoding/pem"
 	"errors"
+	"io"
 	"testing"
 
 	"github.com/docker/notary/trustmanager"
@@ -62,6 +63,10 @@ func (mts *FailingCryptoService) RemoveKey(keyID string) error {
 	return nil
 }
 
+func (mts *FailingCryptoService) ImportRootKey(r io.Reader) error {
+	return nil
+}
+
 type MockCryptoService struct {
 	testKey data.PublicKey
 }
@@ -106,6 +111,10 @@ func (mts *MockCryptoService) RemoveKey(keyID string) error {
 	return nil
 }
 
+func (mts *MockCryptoService) ImportRootKey(r io.Reader) error {
+	return nil
+}
+
 var _ CryptoService = &MockCryptoService{}
 
 type StrictMockCryptoService struct {
@@ -140,6 +149,10 @@ func (mts *StrictMockCryptoService) ListAllKeys() map[string]string {
 		mts.testKey.ID(): "snapshot",
 		mts.testKey.ID(): "timestamp",
 	}
+}
+
+func (mts *StrictMockCryptoService) ImportRootKey(r io.Reader) error {
+	return nil
 }
 
 // Test signing and ensure the expected signature is added

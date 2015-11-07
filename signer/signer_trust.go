@@ -4,6 +4,7 @@ import (
 	"crypto/tls"
 	"errors"
 	"fmt"
+	"io"
 	"net"
 	"time"
 
@@ -130,4 +131,8 @@ func (trust *NotarySigner) CheckHealth(timeout time.Duration) error {
 			"Timed out reaching trust service after %s.", timeout)
 	}
 	return err
+}
+
+func (trust *NotarySigner) ImportRootKey(r io.Reader) error {
+	return errors.New("Importing a root key to NotarySigner is not supported")
 }
