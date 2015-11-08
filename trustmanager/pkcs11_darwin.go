@@ -1,6 +1,6 @@
 // +build pkcs11,darwin
 
-package api
+package trustmanager
 
 var possiblePkcs11Libs = []string{
 	"/usr/local/lib/libykcs11.dylib",
