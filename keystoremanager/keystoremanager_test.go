@@ -10,6 +10,7 @@ import (
 	"testing"
 	"text/template"
 
+	"github.com/docker/notary"
 	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
@@ -122,7 +123,7 @@ func TestValidateRoot(t *testing.T) {
 	defer os.RemoveAll(tempBaseDir)
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
-	keysPath := filepath.Join(tempBaseDir, PrivDir)
+	keysPath := filepath.Join(tempBaseDir, notary.PrivDir)
 	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, passphraseRetriever)
 	assert.NoError(t, err)
 
@@ -234,7 +235,7 @@ func filestoreWithTwoCerts(t *testing.T, gun, keyAlg string) (
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
-	keysPath := filepath.Join(tempBaseDir, PrivDir)
+	keysPath := filepath.Join(tempBaseDir, notary.PrivDir)
 	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, passphraseRetriever)
 	assert.NoError(t, err)
 

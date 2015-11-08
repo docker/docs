@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/docker/notary/pkg/passphrase"
+	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/tuf/data"
 	"github.com/stretchr/testify/assert"
 )

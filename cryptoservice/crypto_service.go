@@ -27,7 +27,7 @@ func NewCryptoService(gun string, keyStores ...trustmanager.KeyStore) *CryptoSer
 }
 
 // Create is used to generate keys for targets, snapshots and timestamps
-func (ccs *CryptoService) Create(role, algorithm string) (data.PublicKey, error) {
+func (cs *CryptoService) Create(role, algorithm string) (data.PublicKey, error) {
 	var privKey data.PrivateKey
 	var err error
 
@@ -57,10 +57,10 @@ func (ccs *CryptoService) Create(role, algorithm string) (data.PublicKey, error)
 	if role == data.CanonicalRootRole {
 		keyPath = privKey.ID()
 	} else {
-		keyPath = filepath.Join(ccs.gun, privKey.ID())
+		keyPath = filepath.Join(cs.gun, privKey.ID())
 	}
 
-	for _, ks := range ccs.keyStores {
+	for _, ks := range cs.keyStores {
 		err = ks.AddKey(keyPath, role, privKey)
 		if err == nil {
 			return data.PublicKeyFromPrivate(privKey), nil
@@ -77,11 +77,11 @@ func (ccs *CryptoService) Create(role, algorithm string) (data.PublicKey, error)
 // without a GUN (in which case it's a root key).  If that fails, try to get
 // the key with the GUN (non-root key).
 // If that fails, then we don't have the key.
-func (ccs *CryptoService) GetPrivateKey(keyID string) (k data.PrivateKey, id string, err error) {
-	keyPaths := []string{keyID, filepath.Join(ccs.gun, keyID)}
-	for _, ks := range ccs.keyStores {
+func (cs *CryptoService) GetPrivateKey(keyID string) (k data.PrivateKey, role string, err error) {
+	keyPaths := []string{keyID, filepath.Join(cs.gun, keyID)}
+	for _, ks := range cs.keyStores {
 		for _, keyPath := range keyPaths {
-			k, id, err = ks.GetKey(keyPath)
+			k, role, err = ks.GetKey(keyPath)
 			if err != nil {
 				continue
 			}
@@ -92,8 +92,8 @@ func (ccs *CryptoService) GetPrivateKey(keyID string) (k data.PrivateKey, id str
 }
 
 // GetKey returns a key by ID
-func (ccs *CryptoService) GetKey(keyID string) data.PublicKey {
-	privKey, _, err := ccs.GetPrivateKey(keyID)
+func (cs *CryptoService) GetKey(keyID string) data.PublicKey {
+	privKey, _, err := cs.GetPrivateKey(keyID)
 	if err != nil {
 		return nil
 	}
@@ -101,16 +101,11 @@ func (ccs *CryptoService) GetKey(keyID string) data.PublicKey {
 }
 
 // RemoveKey deletes a key by ID
-func (ccs *CryptoService) RemoveKey(keyID string) (err error) {
-	keyPaths := []string{keyID, filepath.Join(ccs.gun, keyID)}
-	for _, ks := range ccs.keyStores {
+func (cs *CryptoService) RemoveKey(keyID string) (err error) {
+	keyPaths := []string{keyID, filepath.Join(cs.gun, keyID)}
+	for _, ks := range cs.keyStores {
 		for _, keyPath := range keyPaths {
-			_, _, err = ks.GetKey(keyPath)
-			if err != nil {
-				continue
-			}
-			err = ks.RemoveKey(keyPath)
-			return
+			ks.RemoveKey(keyPath)
 		}
 	}
 	return // returns whatever the final values were
@@ -119,12 +114,12 @@ func (ccs *CryptoService) RemoveKey(keyID string) (err error) {
 // Sign returns the signatures for the payload with a set of keyIDs. It ignores
 // errors to sign and expects the called to validate if the number of returned
 // signatures is adequate.
-func (ccs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signature, error) {
+func (cs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signature, error) {
 	signatures := make([]data.Signature, 0, len(keyIDs))
 	for _, keyid := range keyIDs {
 		keyName := keyid
 
-		privKey, _, err := ccs.GetPrivateKey(keyName)
+		privKey, _, err := cs.GetPrivateKey(keyName)
 		if err != nil {
 			logrus.Debugf("error attempting to retrieve private key: %s, %v", keyid, err)
 			continue
@@ -152,13 +147,24 @@ func (ccs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signatur
 }
 
 // ListKeys returns a list of key IDs valid for the given role
-func (ccs *CryptoService) ListKeys(role string) []string {
+func (cs *CryptoService) ListKeys(role string) []string {
 	var res []string
-	for _, ks := range ccs.keyStores {
+	for _, ks := range cs.keyStores {
 		for k, r := range ks.ListKeys() {
 			if r == role {
 				res = append(res, k)
 			}
+		}
+	}
+	return res
+}
+
+// ListAllKeys returns a map of key IDs to role
+func (cs *CryptoService) ListAllKeys() map[string]string {
+	res := make(map[string]string)
+	for _, ks := range cs.keyStores {
+		for k, r := range ks.ListKeys() {
+			res[k] = r // keys are content addressed so don't care about overwrites
 		}
 	}
 	return res

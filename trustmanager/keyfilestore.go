@@ -5,7 +5,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/docker/notary/pkg/passphrase"
+	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/tuf/data"
 )
 
@@ -197,7 +197,7 @@ func getKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, cached
 	// See if the key is encrypted. If its encrypted we'll fail to parse the private key
 	privKey, err := ParsePEMPrivateKey(keyBytes, "")
 	if err != nil {
-		privKey, _, retErr = getPasswdDecryptBytes(s, passphraseRetriever, keyBytes, name, string(keyAlias))
+		privKey, _, retErr = GetPasswdDecryptBytes(passphraseRetriever, keyBytes, name, string(keyAlias))
 	}
 	if retErr != nil {
 		return nil, "", retErr
@@ -268,9 +268,9 @@ func getRawKey(s LimitedFileStore, name string) ([]byte, string, error) {
 	return keyBytes, keyAlias, nil
 }
 
-// Get the password to decript the given pem bytes.  Return the password,
-// because it is useful for importing
-func getPasswdDecryptBytes(s LimitedFileStore, passphraseRetriever passphrase.Retriever, pemBytes []byte, name, alias string) (data.PrivateKey, string, error) {
+// GetPasswdDecryptBytes gets the password to decript the given pem bytes.
+// Returns the password and private key
+func GetPasswdDecryptBytes(passphraseRetriever passphrase.Retriever, pemBytes []byte, name, alias string) (data.PrivateKey, string, error) {
 	var (
 		passwd  string
 		retErr  error
@@ -329,12 +329,17 @@ func encryptAndAddKey(s LimitedFileStore, passwd string, cachedKeys map[string]*
 
 func importKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, cachedKeys map[string]*cachedKey, alias string, pemBytes []byte) error {
 
-	privKey, passphrase, err := getPasswdDecryptBytes(s, passphraseRetriever, pemBytes, "imported", alias)
+	if alias != data.CanonicalRootRole {
+		return s.Add(alias, pemBytes)
+	}
+
+	privKey, passphrase, err := GetPasswdDecryptBytes(passphraseRetriever, pemBytes, "imported", alias)
 
 	if err != nil {
 		return err
 	}
 
-	return encryptAndAddKey(
-		s, passphrase, cachedKeys, privKey.ID(), alias, privKey)
+	var name string
+	name = privKey.ID()
+	return encryptAndAddKey(s, passphrase, cachedKeys, name, alias, privKey)
 }

@@ -131,20 +131,6 @@ func main() {
 
 	cryptoServices := make(signer.CryptoServiceIndex)
 
-	pin := mainViper.GetString(pinCode)
-	pkcs11Lib := mainViper.GetString("crypto.pkcs11lib")
-	if pkcs11Lib != "" {
-		if pin == "" {
-			log.Fatalf("Using PIN is mandatory with pkcs11")
-		}
-
-		ctx, session := SetupHSMEnv(pkcs11Lib, pin)
-
-		defer cleanup(ctx, session)
-
-		cryptoServices[data.RSAKey] = api.NewRSAHardwareCryptoService(ctx, session)
-	}
-
 	configDBType := strings.ToLower(mainViper.GetString("storage.backend"))
 	dbURL := mainViper.GetString("storage.db_url")
 	if configDBType != dbType || dbURL == "" {

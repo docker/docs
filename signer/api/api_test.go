@@ -15,6 +15,7 @@ import (
 	"github.com/docker/notary/signer/api"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
+	"github.com/docker/notary/tuf/signed"
 	"github.com/stretchr/testify/assert"
 
 	pb "github.com/docker/notary/proto"
@@ -131,7 +132,7 @@ func TestHSMCreateKeyHandler(t *testing.T) {
 	defer ctx.CloseSession(session)
 	defer ctx.Logout(session)
 
-	cryptoService := api.NewRSAHardwareCryptoService(ctx, session)
+	cryptoService := signed.NewEd25519()
 	setup(signer.CryptoServiceIndex{data.RSAKey: cryptoService})
 
 	createKeyURL := fmt.Sprintf("%s/%s", createKeyBaseURL, data.RSAKey)
@@ -182,7 +183,7 @@ func TestHSMSignHandler(t *testing.T) {
 	defer ctx.CloseSession(session)
 	defer ctx.Logout(session)
 
-	cryptoService := api.NewRSAHardwareCryptoService(ctx, session)
+	cryptoService := signed.NewEd25519()
 	setup(signer.CryptoServiceIndex{data.RSAKey: cryptoService})
 
 	tufKey, _ := cryptoService.Create("", data.RSAKey)
