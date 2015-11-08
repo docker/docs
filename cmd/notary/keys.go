@@ -22,10 +22,6 @@ import (
 
 func init() {
 	cmdKey.AddCommand(cmdKeyList)
-	cmdKey.AddCommand(cmdKeyRemoveKey)
-	cmdKeyRemoveKey.Flags().StringVarP(&keyRemoveGUN, "gun", "g", "", "Globally unique name to remove keys for")
-	cmdKeyRemoveKey.Flags().BoolVarP(&keyRemoveRoot, "root", "r", false, "Remove root keys")
-	cmdKeyRemoveKey.Flags().BoolVarP(&keyRemoveYes, "yes", "y", false, "Answer yes to the removal question (no confirmation)")
 	cmdKey.AddCommand(cmdKeyGenerateRootKey)
 
 	cmdKeyExport.Flags().StringVarP(&keysExportGUN, "gun", "g", "", "Globally unique name to export keys for")
@@ -55,17 +51,6 @@ var cmdRotateKey = &cobra.Command{
 	Short: "Rotate all keys for role.",
 	Long:  "Removes all old keys for the given role and generates 1 new key.",
 	Run:   keysRotate,
-}
-
-var keyRemoveGUN string
-var keyRemoveRoot bool
-var keyRemoveYes bool
-
-var cmdKeyRemoveKey = &cobra.Command{
-	Use:   "remove [ keyID ]",
-	Short: "Removes the key with the given keyID.",
-	Long:  "remove the key with the given keyID from the local host.",
-	Run:   keysRemoveKey,
 }
 
 var cmdKeyGenerateRootKey = &cobra.Command{
@@ -107,67 +92,6 @@ var cmdKeyImportRoot = &cobra.Command{
 	Run:   keysImportRoot,
 }
 
-// keysRemoveKey deletes a private key based on ID
-func keysRemoveKey(cmd *cobra.Command, args []string) {
-	if len(args) < 1 {
-		cmd.Usage()
-		fatalf("must specify the key ID of the key to remove")
-	}
-
-	parseConfig()
-
-	keysPath := filepath.Join(trustDir, notary.PrivDir)
-	backupPath := filepath.Join(trustDir, notary.BackupDir)
-	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
-	if err != nil {
-		fatalf("failed to create private key store in directory: %s", keysPath)
-	}
-	yubiStore, _ := api.NewYubiKeyStore(backupPath, retriever)
-	var cs signed.CryptoService
-	if yubiStore == nil {
-		cs = cryptoservice.NewCryptoService("", fileKeyStore)
-	} else {
-		cs = cryptoservice.NewCryptoService("", yubiStore, fileKeyStore)
-	}
-
-	keyID := args[0]
-
-	// This is an invalid ID
-	if len(keyID) != idSize {
-		fatalf("invalid key ID provided: %s", keyID)
-	}
-
-	keyMap := cs.ListAllKeys()
-	var key string
-	for k := range keyMap {
-		if filepath.Base(k) == keyID {
-			key = k
-		}
-	}
-
-	if key == "" {
-		fatalf("key with key ID: %s not found\n", keyID)
-	}
-
-	// List the key about to be removed
-	fmt.Println("Are you sure you want to remove the following key?")
-	fmt.Printf("%s\n(yes/no)\n", keyID)
-
-	// Ask for confirmation before removing the key, unless -y is passed
-	if !keyRemoveYes {
-		confirmed := askConfirm()
-		if !confirmed {
-			fatalf("aborting action.")
-		}
-	}
-
-	// Attempt to remove the key
-	err = cs.RemoveKey(key)
-	if err != nil {
-		fatalf("failed to remove key with key ID: %s, %v", keyID, err)
-	}
-}
-
 func keysList(cmd *cobra.Command, args []string) {
 	if len(args) > 0 {
 		cmd.Usage()
@@ -177,12 +101,11 @@ func keysList(cmd *cobra.Command, args []string) {
 	parseConfig()
 
 	keysPath := filepath.Join(trustDir, notary.PrivDir)
-	backupPath := filepath.Join(trustDir, notary.BackupDir)
 	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
 	if err != nil {
 		fatalf("failed to create private key store in directory: %s", keysPath)
 	}
-	yubiStore, _ := api.NewYubiKeyStore(backupPath, retriever)
+	yubiStore, _ := api.NewYubiKeyStore(fileKeyStore, retriever)
 	var cs signed.CryptoService
 	if yubiStore == nil {
 		cs = cryptoservice.NewCryptoService("", fileKeyStore)
@@ -239,12 +162,11 @@ func keysGenerateRootKey(cmd *cobra.Command, args []string) {
 	parseConfig()
 
 	keysPath := filepath.Join(trustDir, notary.PrivDir)
-	backupPath := filepath.Join(trustDir, notary.BackupDir)
 	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
 	if err != nil {
 		fatalf("failed to create private key store in directory: %s", keysPath)
 	}
-	yubiStore, err := api.NewYubiKeyStore(backupPath, retriever)
+	yubiStore, err := api.NewYubiKeyStore(fileKeyStore, retriever)
 	var cs signed.CryptoService
 	if err != nil {
 		cmd.Printf("No Yubikey detected, importing to local filesystem.")
@@ -386,12 +308,11 @@ func keysImportRoot(cmd *cobra.Command, args []string) {
 	parseConfig()
 
 	keysPath := filepath.Join(trustDir, notary.PrivDir)
-	backupPath := filepath.Join(trustDir, notary.BackupDir)
 	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
 	if err != nil {
 		fatalf("failed to create private key store in directory: %s", keysPath)
 	}
-	yubiStore, err := api.NewYubiKeyStore(backupPath, retriever)
+	yubiStore, err := api.NewYubiKeyStore(fileKeyStore, retriever)
 	var cs signed.CryptoService
 	if err != nil {
 		cmd.Printf("No Yubikey detected, importing to local filesystem.")
