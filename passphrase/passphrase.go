@@ -113,22 +113,23 @@ func PromptRetrieverWithInOut(in io.Reader, out io.Writer, aliasMap map[string]s
 			indexOfLastSeparator = 0
 		}
 
+		var shortName string
 		if len(keyName) > indexOfLastSeparator+idBytesToDisplay {
 			if indexOfLastSeparator > 0 {
 				keyNamePrefix := keyName[:indexOfLastSeparator]
 				keyNameID := keyName[indexOfLastSeparator+1 : indexOfLastSeparator+idBytesToDisplay+1]
-				keyName = keyNamePrefix + " (" + keyNameID + ")"
+				shortName = keyNamePrefix + " (" + keyNameID + ")"
 			} else {
-				keyName = keyName[indexOfLastSeparator : indexOfLastSeparator+idBytesToDisplay]
+				shortName = keyName[indexOfLastSeparator : indexOfLastSeparator+idBytesToDisplay]
 			}
 		}
 
 		if createNew {
-			fmt.Fprintf(out, "Enter passphrase for new %s key with id %s: ", displayAlias, keyName)
+			fmt.Fprintf(out, "Enter passphrase for new %s key with id %s: ", displayAlias, shortName)
 		} else if displayAlias == "yubikey" {
 			fmt.Fprintf(out, "Enter the %s for the attached Yubikey: ", keyName)
 		} else {
-			fmt.Fprintf(out, "Enter passphrase for %s key with id %s: ", displayAlias, keyName)
+			fmt.Fprintf(out, "Enter passphrase for %s key with id %s: ", displayAlias, shortName)
 		}
 
 		passphrase, err := stdin.ReadBytes('\n')

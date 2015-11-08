@@ -6,6 +6,7 @@ import (
 	"crypto/x509"
 	"encoding/pem"
 	"errors"
+	"io"
 	"testing"
 
 	"github.com/docker/notary/trustmanager"
@@ -38,6 +39,15 @@ func (mts *FailingCryptoService) ListKeys(role string) []string {
 	return []string{mts.testKey.ID()}
 }
 
+func (mts *FailingCryptoService) ListAllKeys() map[string]string {
+	return map[string]string{
+		mts.testKey.ID(): "root",
+		mts.testKey.ID(): "targets",
+		mts.testKey.ID(): "snapshot",
+		mts.testKey.ID(): "timestamp",
+	}
+}
+
 func (mts *FailingCryptoService) GetKey(keyID string) data.PublicKey {
 	if keyID == "testID" {
 		return mts.testKey
@@ -50,6 +60,10 @@ func (mts *FailingCryptoService) GetPrivateKey(keyID string) (data.PrivateKey, s
 }
 
 func (mts *FailingCryptoService) RemoveKey(keyID string) error {
+	return nil
+}
+
+func (mts *FailingCryptoService) ImportRootKey(r io.Reader) error {
 	return nil
 }
 
@@ -80,11 +94,24 @@ func (mts *MockCryptoService) ListKeys(role string) []string {
 	return []string{mts.testKey.ID()}
 }
 
+func (mts *MockCryptoService) ListAllKeys() map[string]string {
+	return map[string]string{
+		mts.testKey.ID(): "root",
+		mts.testKey.ID(): "targets",
+		mts.testKey.ID(): "snapshot",
+		mts.testKey.ID(): "timestamp",
+	}
+}
+
 func (mts *MockCryptoService) GetPrivateKey(keyID string) (data.PrivateKey, string, error) {
 	return nil, "", errors.New("Not implemented")
 }
 
 func (mts *MockCryptoService) RemoveKey(keyID string) error {
+	return nil
+}
+
+func (mts *MockCryptoService) ImportRootKey(r io.Reader) error {
 	return nil
 }
 
@@ -113,6 +140,19 @@ func (mts *StrictMockCryptoService) GetKey(keyID string) data.PublicKey {
 
 func (mts *StrictMockCryptoService) ListKeys(role string) []string {
 	return []string{mts.testKey.ID()}
+}
+
+func (mts *StrictMockCryptoService) ListAllKeys() map[string]string {
+	return map[string]string{
+		mts.testKey.ID(): "root",
+		mts.testKey.ID(): "targets",
+		mts.testKey.ID(): "snapshot",
+		mts.testKey.ID(): "timestamp",
+	}
+}
+
+func (mts *StrictMockCryptoService) ImportRootKey(r io.Reader) error {
+	return nil
 }
 
 // Test signing and ensure the expected signature is added

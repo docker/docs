@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/docker/notary/pkg/passphrase"
+	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/version"
 	homedir "github.com/mitchellh/go-homedir"
 	"github.com/spf13/cobra"

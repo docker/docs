@@ -8,20 +8,20 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/docker/notary"
 	notaryclient "github.com/docker/notary/client"
-	"github.com/docker/notary/keystoremanager"
-	"github.com/docker/notary/pkg/passphrase"
+	"github.com/docker/notary/cryptoservice"
+	"github.com/docker/notary/passphrase"
+	"github.com/docker/notary/signer/api"
 	"github.com/docker/notary/trustmanager"
 
+	"github.com/docker/notary/tuf/data"
+	"github.com/docker/notary/tuf/signed"
 	"github.com/spf13/cobra"
 )
 
 func init() {
 	cmdKey.AddCommand(cmdKeyList)
-	cmdKey.AddCommand(cmdKeyRemoveKey)
-	cmdKeyRemoveKey.Flags().StringVarP(&keyRemoveGUN, "gun", "g", "", "Globally unique name to remove keys for")
-	cmdKeyRemoveKey.Flags().BoolVarP(&keyRemoveRoot, "root", "r", false, "Remove root keys")
-	cmdKeyRemoveKey.Flags().BoolVarP(&keyRemoveYes, "yes", "y", false, "Answer yes to the removal question (no confirmation)")
 	cmdKey.AddCommand(cmdKeyGenerateRootKey)
 
 	cmdKeyExport.Flags().StringVarP(&keysExportGUN, "gun", "g", "", "Globally unique name to export keys for")
@@ -51,17 +51,6 @@ var cmdRotateKey = &cobra.Command{
 	Short: "Rotate all keys for role.",
 	Long:  "Removes all old keys for the given role and generates 1 new key.",
 	Run:   keysRotate,
-}
-
-var keyRemoveGUN string
-var keyRemoveRoot bool
-var keyRemoveYes bool
-
-var cmdKeyRemoveKey = &cobra.Command{
-	Use:   "remove [ keyID ]",
-	Short: "Removes the key with the given keyID.",
-	Long:  "remove the key with the given keyID from the local host.",
-	Run:   keysRemoveKey,
 }
 
 var cmdKeyGenerateRootKey = &cobra.Command{
@@ -103,68 +92,6 @@ var cmdKeyImportRoot = &cobra.Command{
 	Run:   keysImportRoot,
 }
 
-// keysRemoveKey deletes a private key based on ID
-func keysRemoveKey(cmd *cobra.Command, args []string) {
-	if len(args) < 1 {
-		cmd.Usage()
-		fatalf("must specify the key ID of the key to remove")
-	}
-
-	parseConfig()
-
-	keysPath := filepath.Join(trustDir, keystoremanager.PrivDir)
-	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
-	if err != nil {
-		fatalf("failed to create private key store in directory: %s", keysPath)
-	}
-	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, fileKeyStore)
-	if err != nil {
-		fatalf("failed to create a new truststore manager with directory: %s", trustDir)
-	}
-
-	keyID := args[0]
-
-	// This is an invalid ID
-	if len(keyID) != idSize {
-		fatalf("invalid key ID provided: %s", keyID)
-	}
-
-	// List the key about to be removed
-	fmt.Println("Are you sure you want to remove the following key?")
-	fmt.Printf("%s\n(yes/no)\n", keyID)
-
-	// Ask for confirmation before removing the key, unless -y is passed
-	if !keyRemoveYes {
-		confirmed := askConfirm()
-		if !confirmed {
-			fatalf("aborting action.")
-		}
-	}
-
-	// Choose the correct filestore to remove the key from
-	keyMap := keyStoreManager.KeyStore.ListKeys()
-
-	// Attempt to find the full GUN to the key in the map
-	// This is irrelevant for removing root keys, but does no harm
-	var keyWithGUN string
-	for k := range keyMap {
-		if filepath.Base(k) == keyID {
-			keyWithGUN = k
-		}
-	}
-
-	// If empty, we didn't find any matches
-	if keyWithGUN == "" {
-		fatalf("key with key ID: %s not found\n", keyID)
-	}
-
-	// Attempt to remove the key
-	err = keyStoreManager.KeyStore.RemoveKey(keyWithGUN)
-	if err != nil {
-		fatalf("failed to remove key with key ID: %s, %v", keyID, err)
-	}
-}
-
 func keysList(cmd *cobra.Command, args []string) {
 	if len(args) > 0 {
 		cmd.Usage()
@@ -173,18 +100,21 @@ func keysList(cmd *cobra.Command, args []string) {
 
 	parseConfig()
 
-	keysPath := filepath.Join(trustDir, keystoremanager.PrivDir)
+	keysPath := filepath.Join(trustDir, notary.PrivDir)
 	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
 	if err != nil {
 		fatalf("failed to create private key store in directory: %s", keysPath)
 	}
-	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, fileKeyStore)
-	if err != nil {
-		fatalf("failed to create a new truststore manager with directory: %s", trustDir)
+	yubiStore, _ := api.NewYubiKeyStore(fileKeyStore, retriever)
+	var cs signed.CryptoService
+	if yubiStore == nil {
+		cs = cryptoservice.NewCryptoService("", fileKeyStore)
+	} else {
+		cs = cryptoservice.NewCryptoService("", yubiStore, fileKeyStore)
 	}
 
 	// Get a map of all the keys/roles
-	keysMap := keyStoreManager.KeyStore.ListKeys()
+	keysMap := cs.ListAllKeys()
 
 	fmt.Println("")
 	fmt.Println("# Root keys: ")
@@ -231,22 +161,26 @@ func keysGenerateRootKey(cmd *cobra.Command, args []string) {
 
 	parseConfig()
 
-	keysPath := filepath.Join(trustDir, keystoremanager.PrivDir)
+	keysPath := filepath.Join(trustDir, notary.PrivDir)
 	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
 	if err != nil {
 		fatalf("failed to create private key store in directory: %s", keysPath)
 	}
-	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, fileKeyStore)
+	yubiStore, err := api.NewYubiKeyStore(fileKeyStore, retriever)
+	var cs signed.CryptoService
 	if err != nil {
-		fatalf("failed to create a new truststore manager with directory: %s", trustDir)
+		cmd.Printf("No Yubikey detected, importing to local filesystem.")
+		cs = cryptoservice.NewCryptoService("", fileKeyStore)
+	} else {
+		cs = cryptoservice.NewCryptoService("", yubiStore, fileKeyStore)
 	}
 
-	keyID, err := keyStoreManager.GenRootKey(algorithm)
+	pubKey, err := cs.Create(data.CanonicalRootRole, algorithm)
 	if err != nil {
 		fatalf("failed to create a new root key: %v", err)
 	}
 
-	fmt.Printf("Generated new %s key with keyID: %s\n", algorithm, keyID)
+	fmt.Printf("Generated new %s root key with keyID: %s\n", algorithm, pubKey.ID())
 }
 
 // keysExport exports a collection of keys to a ZIP file
@@ -260,15 +194,12 @@ func keysExport(cmd *cobra.Command, args []string) {
 
 	parseConfig()
 
-	keysPath := filepath.Join(trustDir, keystoremanager.PrivDir)
+	keysPath := filepath.Join(trustDir, notary.PrivDir)
 	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
 	if err != nil {
 		fatalf("failed to create private key store in directory: %s", keysPath)
 	}
-	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, fileKeyStore)
-	if err != nil {
-		fatalf("failed to create a new truststore manager with directory: %s", trustDir)
-	}
+	cs := cryptoservice.NewCryptoService("", fileKeyStore)
 
 	exportFile, err := os.Create(exportFilename)
 	if err != nil {
@@ -279,9 +210,9 @@ func keysExport(cmd *cobra.Command, args []string) {
 	// unlocking passphrase and reusing that.
 	exportRetriever := passphrase.PromptRetriever()
 	if keysExportGUN != "" {
-		err = keyStoreManager.ExportKeysByGUN(exportFile, keysExportGUN, exportRetriever)
+		err = cs.ExportKeysByGUN(exportFile, keysExportGUN, exportRetriever)
 	} else {
-		err = keyStoreManager.ExportAllKeys(exportFile, exportRetriever)
+		err = cs.ExportAllKeys(exportFile, exportRetriever)
 	}
 
 	exportFile.Close()
@@ -308,15 +239,12 @@ func keysExportRoot(cmd *cobra.Command, args []string) {
 
 	parseConfig()
 
-	keysPath := filepath.Join(trustDir, keystoremanager.PrivDir)
+	keysPath := filepath.Join(trustDir, notary.PrivDir)
 	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
 	if err != nil {
 		fatalf("failed to create private key store in directory: %s", keysPath)
 	}
-	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, fileKeyStore)
-	if err != nil {
-		fatalf("failed to create a new truststore manager with directory: %s", trustDir)
-	}
+	cs := cryptoservice.NewCryptoService("", fileKeyStore)
 
 	exportFile, err := os.Create(exportFilename)
 	if err != nil {
@@ -326,9 +254,9 @@ func keysExportRoot(cmd *cobra.Command, args []string) {
 		// Must use a different passphrase retriever to avoid caching the
 		// unlocking passphrase and reusing that.
 		exportRetriever := passphrase.PromptRetriever()
-		err = keyStoreManager.ExportRootKeyReencrypt(exportFile, keyID, exportRetriever)
+		err = cs.ExportRootKeyReencrypt(exportFile, keyID, exportRetriever)
 	} else {
-		err = keyStoreManager.ExportRootKey(exportFile, keyID)
+		err = cs.ExportRootKey(exportFile, keyID)
 	}
 	exportFile.Close()
 	if err != nil {
@@ -348,15 +276,12 @@ func keysImport(cmd *cobra.Command, args []string) {
 
 	parseConfig()
 
-	keysPath := filepath.Join(trustDir, keystoremanager.PrivDir)
+	keysPath := filepath.Join(trustDir, notary.PrivDir)
 	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
 	if err != nil {
 		fatalf("failed to create private key store in directory: %s", keysPath)
 	}
-	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, fileKeyStore)
-	if err != nil {
-		fatalf("failed to create a new truststore manager with directory: %s", trustDir)
-	}
+	cs := cryptoservice.NewCryptoService("", fileKeyStore)
 
 	zipReader, err := zip.OpenReader(importFilename)
 	if err != nil {
@@ -364,7 +289,7 @@ func keysImport(cmd *cobra.Command, args []string) {
 	}
 	defer zipReader.Close()
 
-	err = keyStoreManager.ImportKeysZip(zipReader.Reader)
+	err = cs.ImportKeysZip(zipReader.Reader)
 
 	if err != nil {
 		fatalf("error importing keys: %v", err)
@@ -382,14 +307,18 @@ func keysImportRoot(cmd *cobra.Command, args []string) {
 
 	parseConfig()
 
-	keysPath := filepath.Join(trustDir, keystoremanager.PrivDir)
+	keysPath := filepath.Join(trustDir, notary.PrivDir)
 	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
 	if err != nil {
 		fatalf("failed to create private key store in directory: %s", keysPath)
 	}
-	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, fileKeyStore)
+	yubiStore, err := api.NewYubiKeyStore(fileKeyStore, retriever)
+	var cs signed.CryptoService
 	if err != nil {
-		fatalf("failed to create a new truststore manager with directory: %s", trustDir)
+		cmd.Printf("No Yubikey detected, importing to local filesystem.")
+		cs = cryptoservice.NewCryptoService("", fileKeyStore)
+	} else {
+		cs = cryptoservice.NewCryptoService("", yubiStore, fileKeyStore)
 	}
 
 	importFile, err := os.Open(importFilename)
@@ -398,7 +327,7 @@ func keysImportRoot(cmd *cobra.Command, args []string) {
 	}
 	defer importFile.Close()
 
-	err = keyStoreManager.ImportRootKey(importFile)
+	err = cs.ImportRootKey(importFile)
 
 	if err != nil {
 		fatalf("error importing root key: %v", err)
