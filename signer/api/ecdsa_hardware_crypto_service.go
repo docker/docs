@@ -243,6 +243,7 @@ func sign(ctx *pkcs11.Ctx, session pkcs11.SessionHandle, pkcs11KeyID []byte, pas
 	// Get the SHA256 of the payload
 	digest := sha256.Sum256(payload)
 
+	fmt.Println("Please touch the attached Yubikey to perform signing.")
 	sig, err = ctx.Sign(session, digest[:])
 	if err != nil {
 		logrus.Debugf("Error while signing: %s", err)
