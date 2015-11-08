@@ -21,7 +21,6 @@ const (
 )
 
 var (
-	rawOutput         bool
 	verbose           bool
 	trustDir          string
 	configFile        string
@@ -48,10 +47,10 @@ func parseConfig() {
 		// Get home directory for current user
 		homeDir, err := homedir.Dir()
 		if err != nil {
-			fatalf("cannot get current user home directory: %v", err)
+			fatalf("Cannot get current user home directory: %v", err)
 		}
 		if homeDir == "" {
-			fatalf("cannot get current user home directory")
+			fatalf("Cannot get current user home directory")
 		}
 		trustDir = filepath.Join(homeDir, filepath.Dir(configDir))
 
@@ -81,7 +80,7 @@ func parseConfig() {
 		logrus.Debugf("configuration file not found, using defaults")
 		// Ignore if the configuration file doesn't exist, we can use the defaults
 		if !os.IsNotExist(err) {
-			fatalf("fatal error config file: %v", err)
+			fatalf("Fatal error config file: %v", err)
 		}
 	}
 }
@@ -98,34 +97,28 @@ func setupCommand(notaryCmd *cobra.Command) {
 
 	notaryCmd.AddCommand(versionCmd)
 
-	notaryCmd.PersistentFlags().StringVarP(&trustDir, "trustdir", "d", "", "directory where the trust data is persisted to")
-	notaryCmd.PersistentFlags().StringVarP(&configFile, "configFile", "c", "", "path to the configuration file to use")
-	notaryCmd.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "verbose output")
+	notaryCmd.PersistentFlags().StringVarP(&trustDir, "trustdir", "d", "", "Directory where the trust data is persisted to")
+	notaryCmd.PersistentFlags().StringVarP(&configFile, "configFile", "c", "", "Path to the configuration file to use")
+	notaryCmd.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "Verbose output")
+	notaryCmd.PersistentFlags().StringVarP(&remoteTrustServer, "server", "s", "", "Remote trust server location")
 
 	notaryCmd.AddCommand(cmdKey)
 	notaryCmd.AddCommand(cmdCert)
 	notaryCmd.AddCommand(cmdTufInit)
-	cmdTufInit.Flags().StringVarP(&remoteTrustServer, "server", "s", "", "Remote trust server location")
 	notaryCmd.AddCommand(cmdTufList)
-	cmdTufList.Flags().BoolVarP(&rawOutput, "raw", "", false, "Instructs notary list to output a nonpretty printed version of the targets list. Useful if you need to parse the list.")
-	cmdTufList.Flags().StringVarP(&remoteTrustServer, "server", "s", "", "Remote trust server location")
 	notaryCmd.AddCommand(cmdTufAdd)
 	notaryCmd.AddCommand(cmdTufRemove)
 	notaryCmd.AddCommand(cmdTufStatus)
 	notaryCmd.AddCommand(cmdTufPublish)
-	cmdTufPublish.Flags().StringVarP(&remoteTrustServer, "server", "s", "", "Remote trust server location")
 	notaryCmd.AddCommand(cmdTufLookup)
-	cmdTufLookup.Flags().BoolVarP(&rawOutput, "raw", "", false, "Instructs notary lookup to output a nonpretty printed version of the targets list. Useful if you need to parse the list.")
-	cmdTufLookup.Flags().StringVarP(&remoteTrustServer, "server", "s", "", "Remote trust server location")
 	notaryCmd.AddCommand(cmdVerify)
-	cmdVerify.Flags().StringVarP(&remoteTrustServer, "server", "s", "", "Remote trust server location")
 }
 
 func main() {
 	var notaryCmd = &cobra.Command{
 		Use:   "notary",
-		Short: "notary allows the creation of trusted collections.",
-		Long:  "notary allows the creation and management of collections of signed targets, allowing the signing and validation of arbitrary content.",
+		Short: "Notary allows the creation of trusted collections.",
+		Long:  "Notary allows the creation and management of collections of signed targets, allowing the signing and validation of arbitrary content.",
 	}
 	setupCommand(notaryCmd)
 	notaryCmd.Execute()
