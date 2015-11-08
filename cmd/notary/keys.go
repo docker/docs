@@ -7,14 +7,9 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/docker/notary"
 	notaryclient "github.com/docker/notary/client"
-	"github.com/docker/notary/cryptoservice"
-	"github.com/docker/notary/signer/api"
-	"github.com/docker/notary/trustmanager"
 
 	"github.com/docker/notary/tuf/data"
-	"github.com/docker/notary/tuf/signed"
 	"github.com/spf13/cobra"
 )
 
@@ -98,18 +93,7 @@ func keysList(cmd *cobra.Command, args []string) {
 
 	parseConfig()
 
-	keysPath := filepath.Join(trustDir, notary.PrivDir)
-	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
-	if err != nil {
-		fatalf("Failed to create private key store in directory: %s", keysPath)
-	}
-	yubiStore, _ := api.NewYubiKeyStore(fileKeyStore, retriever)
-	var cs signed.CryptoService
-	if yubiStore == nil {
-		cs = cryptoservice.NewCryptoService("", fileKeyStore)
-	} else {
-		cs = cryptoservice.NewCryptoService("", yubiStore, fileKeyStore)
-	}
+	cs := getCryptoService(cmd, trustDir, retriever, true)
 
 	// Get a map of all the keys/roles
 	keysMap := cs.ListAllKeys()
@@ -159,19 +143,7 @@ func keysGenerateRootKey(cmd *cobra.Command, args []string) {
 
 	parseConfig()
 
-	keysPath := filepath.Join(trustDir, notary.PrivDir)
-	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
-	if err != nil {
-		fatalf("Failed to create private key store in directory: %s", keysPath)
-	}
-	yubiStore, err := api.NewYubiKeyStore(fileKeyStore, retriever)
-	var cs signed.CryptoService
-	if err != nil {
-		cmd.Printf("No Yubikey detected, importing to local filesystem.")
-		cs = cryptoservice.NewCryptoService("", fileKeyStore)
-	} else {
-		cs = cryptoservice.NewCryptoService("", yubiStore, fileKeyStore)
-	}
+	cs := getCryptoService(cmd, trustDir, retriever, true)
 
 	pubKey, err := cs.Create(data.CanonicalRootRole, algorithm)
 	if err != nil {
@@ -192,12 +164,7 @@ func keysExport(cmd *cobra.Command, args []string) {
 
 	parseConfig()
 
-	keysPath := filepath.Join(trustDir, notary.PrivDir)
-	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
-	if err != nil {
-		fatalf("Failed to create private key store in directory: %s", keysPath)
-	}
-	cs := cryptoservice.NewCryptoService("", fileKeyStore)
+	cs := getCryptoService(cmd, trustDir, retriever, false)
 
 	exportFile, err := os.Create(exportFilename)
 	if err != nil {
@@ -237,12 +204,7 @@ func keysExportRoot(cmd *cobra.Command, args []string) {
 
 	parseConfig()
 
-	keysPath := filepath.Join(trustDir, notary.PrivDir)
-	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
-	if err != nil {
-		fatalf("Failed to create private key store in directory: %s", keysPath)
-	}
-	cs := cryptoservice.NewCryptoService("", fileKeyStore)
+	cs := getCryptoService(cmd, trustDir, retriever, false)
 
 	exportFile, err := os.Create(exportFilename)
 	if err != nil {
@@ -274,12 +236,7 @@ func keysImport(cmd *cobra.Command, args []string) {
 
 	parseConfig()
 
-	keysPath := filepath.Join(trustDir, notary.PrivDir)
-	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
-	if err != nil {
-		fatalf("Failed to create private key store in directory: %s", keysPath)
-	}
-	cs := cryptoservice.NewCryptoService("", fileKeyStore)
+	cs := getCryptoService(cmd, trustDir, retriever, false)
 
 	zipReader, err := zip.OpenReader(importFilename)
 	if err != nil {
@@ -305,19 +262,7 @@ func keysImportRoot(cmd *cobra.Command, args []string) {
 
 	parseConfig()
 
-	keysPath := filepath.Join(trustDir, notary.PrivDir)
-	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
-	if err != nil {
-		fatalf("Failed to create private key store in directory: %s", keysPath)
-	}
-	yubiStore, err := api.NewYubiKeyStore(fileKeyStore, retriever)
-	var cs signed.CryptoService
-	if err != nil {
-		cmd.Printf("No Yubikey detected, importing to local filesystem.")
-		cs = cryptoservice.NewCryptoService("", fileKeyStore)
-	} else {
-		cs = cryptoservice.NewCryptoService("", yubiStore, fileKeyStore)
-	}
+	cs := getCryptoService(cmd, trustDir, retriever, true)
 
 	importFile, err := os.Open(importFilename)
 	if err != nil {

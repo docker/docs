@@ -15,7 +15,6 @@ import (
 	"github.com/docker/notary/signer/api"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
-	"github.com/docker/notary/tuf/signed"
 	"github.com/stretchr/testify/assert"
 
 	pb "github.com/docker/notary/proto"
@@ -125,34 +124,6 @@ func TestKeyInfoHandlerReturns404WithNonexistentKey(t *testing.T) {
 	assert.Equal(t, 404, res.StatusCode)
 }
 
-func TestHSMCreateKeyHandler(t *testing.T) {
-	ctx, session := SetupHSMEnv(t)
-	defer ctx.Destroy()
-	defer ctx.Finalize()
-	defer ctx.CloseSession(session)
-	defer ctx.Logout(session)
-
-	cryptoService := signed.NewEd25519()
-	setup(signer.CryptoServiceIndex{data.RSAKey: cryptoService})
-
-	createKeyURL := fmt.Sprintf("%s/%s", createKeyBaseURL, data.RSAKey)
-
-	request, err := http.NewRequest("POST", createKeyURL, nil)
-	assert.Nil(t, err)
-
-	res, err := http.DefaultClient.Do(request)
-	assert.Nil(t, err)
-
-	jsonBlob, err := ioutil.ReadAll(res.Body)
-	assert.Nil(t, err)
-
-	var keyInfo *pb.PublicKey
-	err = json.Unmarshal(jsonBlob, &keyInfo)
-	assert.Nil(t, err)
-
-	assert.Equal(t, 200, res.StatusCode)
-}
-
 func TestSoftwareCreateKeyHandler(t *testing.T) {
 	keyStore := trustmanager.NewKeyMemoryStore(passphraseRetriever)
 	cryptoService := cryptoservice.NewCryptoService("", keyStore)
@@ -174,41 +145,6 @@ func TestSoftwareCreateKeyHandler(t *testing.T) {
 	var keyInfo *pb.PublicKey
 	err = json.Unmarshal(jsonBlob, &keyInfo)
 	assert.Nil(t, err)
-}
-
-func TestHSMSignHandler(t *testing.T) {
-	ctx, session := SetupHSMEnv(t)
-	defer ctx.Destroy()
-	defer ctx.Finalize()
-	defer ctx.CloseSession(session)
-	defer ctx.Logout(session)
-
-	cryptoService := signed.NewEd25519()
-	setup(signer.CryptoServiceIndex{data.RSAKey: cryptoService})
-
-	tufKey, _ := cryptoService.Create("", data.RSAKey)
-
-	sigRequest := &pb.SignatureRequest{KeyID: &pb.KeyID{ID: tufKey.ID()}, Content: make([]byte, 10)}
-	requestJson, _ := json.Marshal(sigRequest)
-
-	reader = strings.NewReader(string(requestJson))
-
-	request, err := http.NewRequest("POST", signBaseURL, reader)
-
-	assert.Nil(t, err)
-
-	res, err := http.DefaultClient.Do(request)
-	assert.Nil(t, err)
-
-	jsonBlob, err := ioutil.ReadAll(res.Body)
-	assert.Nil(t, err)
-
-	var sig *pb.Signature
-	err = json.Unmarshal(jsonBlob, &sig)
-	assert.Nil(t, err)
-
-	assert.Equal(t, tufKey.ID, sig.KeyInfo.KeyID.ID)
-	assert.Equal(t, 200, res.StatusCode)
 }
 
 func TestSoftwareSignHandler(t *testing.T) {
