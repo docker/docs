@@ -548,6 +548,7 @@ func (s *YubiKeyStore) AddKey(keyID, role string, privKey data.PrivateKey) error
 			role:   role,
 			slotID: slot,
 		}
+		return nil
 	}
 	return err
 }
