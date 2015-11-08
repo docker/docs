@@ -165,7 +165,7 @@ func addECDSAKey(ctx *pkcs11.Ctx, session pkcs11.SessionHandle, privKey data.Pri
 		return fmt.Errorf("error importing: %v", err)
 	}
 
-	backupTo := path.Join(backupPath, role, privKey.ID())
+	backupTo := path.Join(backupPath, privKey.ID())
 	err = ioutil.WriteFile(
 		backupTo,
 		privKey.Private(),
