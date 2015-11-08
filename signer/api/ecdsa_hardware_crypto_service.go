@@ -25,7 +25,28 @@ const (
 	USER_PIN    = "123456"
 	SO_USER_PIN = "010203040506070801020304050607080102030405060708"
 	numSlots    = 4 // number of slots in the yubikey
+
+	KeymodeNone      = 0
+	KeymodeTouch     = 1 // touch enabled
+	KeymodePinOnce   = 2 // require pin entry once
+	KeymodePinAlways = 4 // require pin entry all the time
 )
+
+// what key mode to use when generating keys
+var yubikeyKeymode = KeymodeTouch | KeymodePinOnce
+
+// SetYubikeyKeyMode - sets the mode when generating yubikey keys.
+// This is to be used for testing.  It does nothing if not building with tag
+// pkcs11.
+func SetYubikeyKeyMode(keyMode int) error {
+	// technically 7 (1 | 2 | 4) is valid, but KeymodePinOnce +
+	// KeymdoePinAlways don't really make sense together
+	if keyMode < 0 || keyMode > 5 {
+		return errors.New("Invalid key mode")
+	}
+	yubikeyKeymode = keyMode
+	return nil
+}
 
 // Hardcoded yubikey PKCS11 ID
 var YUBIKEY_ROOT_KEY_ID = []byte{2}
@@ -153,10 +174,7 @@ func addECDSAKey(
 		pkcs11.NewAttribute(pkcs11.CKA_ID, pkcs11KeyID),
 		pkcs11.NewAttribute(pkcs11.CKA_EC_PARAMS, []byte{0x06, 0x08, 0x2a, 0x86, 0x48, 0xce, 0x3d, 0x03, 0x01, 0x07}),
 		pkcs11.NewAttribute(pkcs11.CKA_VALUE, ecdsaPrivKeyD),
-		// 1 is touch enabled
-		// 2 is pin once
-		// 4 is pin always
-		pkcs11.NewAttribute(pkcs11.CKA_VENDOR_DEFINED, 3),
+		pkcs11.NewAttribute(pkcs11.CKA_VENDOR_DEFINED, yubikeyKeymode),
 	}
 
 	_, err = ctx.CreateObject(session, certTemplate)
@@ -639,6 +657,16 @@ func SetupHSMEnv(libraryPath string) (*pkcs11.Ctx, pkcs11.SessionHandle, error) 
 	}
 
 	return p, session, nil
+}
+
+// YubikeyEnabled returns true if a Yubikey can be accessed
+func YubikeyAccessible() bool {
+	ctx, session, err := SetupHSMEnv(pkcs11Lib)
+	if err != nil {
+		return false
+	}
+	defer cleanup(ctx, session)
+	return true
 }
 
 func login(ctx *pkcs11.Ctx, session pkcs11.SessionHandle, passRetriever passphrase.Retriever, userFlag uint, defaultPassw string) error {

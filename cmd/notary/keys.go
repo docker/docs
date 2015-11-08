@@ -2,7 +2,6 @@ package main
 
 import (
 	"archive/zip"
-	"fmt"
 	"os"
 	"path/filepath"
 	"sort"
@@ -11,7 +10,6 @@ import (
 	"github.com/docker/notary"
 	notaryclient "github.com/docker/notary/client"
 	"github.com/docker/notary/cryptoservice"
-	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/signer/api"
 	"github.com/docker/notary/trustmanager"
 
@@ -116,16 +114,16 @@ func keysList(cmd *cobra.Command, args []string) {
 	// Get a map of all the keys/roles
 	keysMap := cs.ListAllKeys()
 
-	fmt.Println("")
-	fmt.Println("# Root keys: ")
+	cmd.Println("")
+	cmd.Println("# Root keys: ")
 	for k, v := range keysMap {
 		if v == "root" {
-			fmt.Println(k)
+			cmd.Println(k)
 		}
 	}
 
-	fmt.Println("")
-	fmt.Println("# Signing keys: ")
+	cmd.Println("")
+	cmd.Println("# Signing keys: ")
 
 	// Get a list of all the keys
 	var sortedKeys []string
@@ -138,7 +136,7 @@ func keysList(cmd *cobra.Command, args []string) {
 	// Print a sorted list of the key/role
 	for _, k := range sortedKeys {
 		if keysMap[k] != "root" {
-			printKey(k, keysMap[k])
+			printKey(cmd, k, keysMap[k])
 		}
 	}
 }
@@ -180,7 +178,7 @@ func keysGenerateRootKey(cmd *cobra.Command, args []string) {
 		fatalf("failed to create a new root key: %v", err)
 	}
 
-	fmt.Printf("Generated new %s root key with keyID: %s\n", algorithm, pubKey.ID())
+	cmd.Printf("Generated new %s root key with keyID: %s\n", algorithm, pubKey.ID())
 }
 
 // keysExport exports a collection of keys to a ZIP file
@@ -208,7 +206,7 @@ func keysExport(cmd *cobra.Command, args []string) {
 
 	// Must use a different passphrase retriever to avoid caching the
 	// unlocking passphrase and reusing that.
-	exportRetriever := passphrase.PromptRetriever()
+	exportRetriever := getRetriever()
 	if keysExportGUN != "" {
 		err = cs.ExportKeysByGUN(exportFile, keysExportGUN, exportRetriever)
 	} else {
@@ -253,7 +251,7 @@ func keysExportRoot(cmd *cobra.Command, args []string) {
 	if keysExportRootChangePassphrase {
 		// Must use a different passphrase retriever to avoid caching the
 		// unlocking passphrase and reusing that.
-		exportRetriever := passphrase.PromptRetriever()
+		exportRetriever := getRetriever()
 		err = cs.ExportRootKeyReencrypt(exportFile, keyID, exportRetriever)
 	} else {
 		err = cs.ExportRootKey(exportFile, keyID)
@@ -334,10 +332,10 @@ func keysImportRoot(cmd *cobra.Command, args []string) {
 	}
 }
 
-func printKey(keyPath, alias string) {
+func printKey(cmd *cobra.Command, keyPath, alias string) {
 	keyID := filepath.Base(keyPath)
 	gun := filepath.Dir(keyPath)
-	fmt.Printf("%s - %s - %s\n", gun, alias, keyID)
+	cmd.Printf("%s - %s - %s\n", gun, alias, keyID)
 }
 
 func keysRotate(cmd *cobra.Command, args []string) {

@@ -146,6 +146,12 @@ func (tr *Repo) RemoveBaseKeys(role string, keyIDs ...string) error {
 	// remove keys no longer in use by any roles
 	for k := range toDelete {
 		delete(tr.Root.Signed.Keys, k)
+		// remove the signing key from the cryptoservice if it
+		// isn't a root key. Root keys must be kept for rotation
+		// signing
+		if role != data.CanonicalRootRole {
+			tr.cryptoService.RemoveKey(k)
+		}
 	}
 	tr.Root.Dirty = true
 	return nil
