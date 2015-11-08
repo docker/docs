@@ -110,7 +110,6 @@ func (cs *CryptoService) RemoveKey(keyID string) (err error) {
 				continue
 			}
 			err = ks.RemoveKey(keyPath)
-			return
 		}
 	}
 	return // returns whatever the final values were
