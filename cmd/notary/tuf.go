@@ -27,64 +27,64 @@ import (
 
 var cmdTufList = &cobra.Command{
 	Use:   "list [ GUN ]",
-	Short: "Lists targets for a trusted collection.",
-	Long:  "Lists all targets for a trusted collection identified by the Globally Unique Name.",
+	Short: "Lists targets for a remote trusted collection.",
+	Long:  "Lists all targets for a remote trusted collection identified by the Globally Unique Name. This is an online operation.",
 	Run:   tufList,
 }
 
 var cmdTufAdd = &cobra.Command{
 	Use:   "add [ GUN ] <target> <file>",
-	Short: "adds the file as a target to the trusted collection.",
-	Long:  "adds the file as a target to the local trusted collection identified by the Globally Unique Name.",
+	Short: "Adds the file as a target to the trusted collection.",
+	Long:  "Adds the file as a target to the local trusted collection identified by the Globally Unique Name. This is an offline operation.  Please then use `publish` to push the changes to the remote trusted collection.",
 	Run:   tufAdd,
 }
 
 var cmdTufRemove = &cobra.Command{
 	Use:   "remove [ GUN ] <target>",
 	Short: "Removes a target from a trusted collection.",
-	Long:  "removes a target from the local trusted collection identified by the Globally Unique Name.",
+	Long:  "Removes a target from the local trusted collection identified by the Globally Unique Name. This is an offline operation.  Please then use `publish` to push the changes to the remote trusted collection.",
 	Run:   tufRemove,
 }
 
 var cmdTufInit = &cobra.Command{
 	Use:   "init [ GUN ]",
-	Short: "initializes a local trusted collection.",
-	Long:  "initializes a local trusted collection identified by the Globally Unique Name.",
+	Short: "Initializes a local trusted collection.",
+	Long:  "Initializes a local trusted collection identified by the Globally Unique Name. This is an online operation.",
 	Run:   tufInit,
 }
 
 var cmdTufLookup = &cobra.Command{
 	Use:   "lookup [ GUN ] <target>",
-	Short: "Looks up a specific target in a trusted collection.",
-	Long:  "looks up a specific target in a trusted collection identified by the Globally Unique Name.",
+	Short: "Looks up a specific target in a remote trusted collection.",
+	Long:  "Looks up a specific target in a remote trusted collection identified by the Globally Unique Name.",
 	Run:   tufLookup,
 }
 
 var cmdTufPublish = &cobra.Command{
 	Use:   "publish [ GUN ]",
-	Short: "publishes the local trusted collection.",
-	Long:  "publishes the local trusted collection identified by the Globally Unique Name, sending the local changes to a remote trusted server.",
+	Short: "Publishes the local trusted collection.",
+	Long:  "Publishes the local trusted collection identified by the Globally Unique Name, sending the local changes to a remote trusted server.",
 	Run:   tufPublish,
 }
 
 var cmdTufStatus = &cobra.Command{
 	Use:   "status [ GUN ]",
-	Short: "displays status of unpublished changes to the local trusted collection.",
-	Long:  "displays status of unpublished changes to the local trusted collection identified by the Globally Unique Name.",
+	Short: "Displays status of unpublished changes to the local trusted collection.",
+	Long:  "Displays status of unpublished changes to the local trusted collection identified by the Globally Unique Name.",
 	Run:   tufStatus,
 }
 
 var cmdVerify = &cobra.Command{
 	Use:   "verify [ GUN ] <target>",
-	Short: "verifies if the content is included in the trusted collection",
-	Long:  "verifies if the data passed in STDIN is included in the trusted collection identified by the Global Unique Name.",
+	Short: "Verifies if the content is included in the remote trusted collection",
+	Long:  "Verifies if the data passed in STDIN is included in the remote trusted collection identified by the Global Unique Name.",
 	Run:   verify,
 }
 
 func tufAdd(cmd *cobra.Command, args []string) {
 	if len(args) < 3 {
 		cmd.Usage()
-		fatalf("must specify a GUN, target, and path to target data")
+		fatalf("Must specify a GUN, target, and path to target data")
 	}
 
 	gun := args[0]
@@ -107,7 +107,9 @@ func tufAdd(cmd *cobra.Command, args []string) {
 	if err != nil {
 		fatalf(err.Error())
 	}
-	cmd.Printf("Addition of %s to %s staged for next publish.\n", targetName, gun)
+	cmd.Printf(
+		"Addition of target \"%s\" to repository \"%s\" staged for next publish.\n",
+		targetName, gun)
 }
 
 func tufInit(cmd *cobra.Command, args []string) {
@@ -150,7 +152,7 @@ func tufInit(cmd *cobra.Command, args []string) {
 func tufList(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
 		cmd.Usage()
-		fatalf("must specify a GUN")
+		fatalf("Must specify a GUN")
 	}
 	gun := args[0]
 	parseConfig()
@@ -175,7 +177,7 @@ func tufList(cmd *cobra.Command, args []string) {
 func tufLookup(cmd *cobra.Command, args []string) {
 	if len(args) < 2 {
 		cmd.Usage()
-		fatalf("must specify a GUN and target")
+		fatalf("Must specify a GUN and target")
 	}
 	gun := args[0]
 	targetName := args[1]
@@ -251,7 +253,7 @@ func tufPublish(cmd *cobra.Command, args []string) {
 func tufRemove(cmd *cobra.Command, args []string) {
 	if len(args) < 2 {
 		cmd.Usage()
-		fatalf("must specify a GUN and target")
+		fatalf("Must specify a GUN and target")
 	}
 	gun := args[0]
 	targetName := args[1]
@@ -274,14 +276,14 @@ func tufRemove(cmd *cobra.Command, args []string) {
 func verify(cmd *cobra.Command, args []string) {
 	if len(args) < 2 {
 		cmd.Usage()
-		fatalf("must specify a GUN and target")
+		fatalf("Must specify a GUN and target")
 	}
 	parseConfig()
 
 	// Reads all of the data on STDIN
 	payload, err := ioutil.ReadAll(os.Stdin)
 	if err != nil {
-		fatalf("error reading content from STDIN: %v", err)
+		fatalf("Error reading content from STDIN: %v", err)
 	}
 
 	gun := args[0]
@@ -399,14 +401,14 @@ func tokenAuth(baseTransport *http.Transport, gun string, readOnly bool) http.Ro
 	trustServerURL := getRemoteTrustServer()
 	endpoint, err := url.Parse(trustServerURL)
 	if err != nil {
-		fatalf("could not parse remote trust server url (%s): %s", trustServerURL, err.Error())
+		fatalf("Could not parse remote trust server url (%s): %s", trustServerURL, err.Error())
 	}
 	if endpoint.Scheme == "" {
-		fatalf("trust server url has to be in the form of http(s)://URL:PORT. Got: %s", trustServerURL)
+		fatalf("Trust server url has to be in the form of http(s)://URL:PORT. Got: %s", trustServerURL)
 	}
 	subPath, err := url.Parse("v2/")
 	if err != nil {
-		fatalf("failed to parse v2 subpath. This error should not have been reached. Please report it as an issue at https://github.com/docker/notary/issues: %s", err.Error())
+		fatalf("Failed to parse v2 subpath. This error should not have been reached. Please report it as an issue at https://github.com/docker/notary/issues: %s", err.Error())
 	}
 	endpoint = endpoint.ResolveReference(subPath)
 	req, err := http.NewRequest("GET", endpoint.String(), nil)

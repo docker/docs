@@ -22,10 +22,10 @@ func init() {
 	cmdKey.AddCommand(cmdKeyList)
 	cmdKey.AddCommand(cmdKeyGenerateRootKey)
 
-	cmdKeyExport.Flags().StringVarP(&keysExportGUN, "gun", "g", "", "Globally unique name to export keys for")
+	cmdKeyExport.Flags().StringVarP(&keysExportGUN, "gun", "g", "", "Globally Unique Name to export keys for")
 	cmdKey.AddCommand(cmdKeyExport)
 	cmdKey.AddCommand(cmdKeyExportRoot)
-	cmdKeyExportRoot.Flags().BoolVarP(&keysExportRootChangePassphrase, "change-passphrase", "p", false, "set a new passphrase for the key being exported")
+	cmdKeyExportRoot.Flags().BoolVarP(&keysExportRootChangePassphrase, "change-passphrase", "p", false, "Set a new passphrase for the key being exported")
 	cmdKey.AddCommand(cmdKeyImport)
 	cmdKey.AddCommand(cmdKeyImportRoot)
 	cmdKey.AddCommand(cmdRotateKey)
@@ -34,27 +34,27 @@ func init() {
 var cmdKey = &cobra.Command{
 	Use:   "key",
 	Short: "Operates on keys.",
-	Long:  `operations on private keys.`,
+	Long:  `Operations on private keys.`,
 }
 
 var cmdKeyList = &cobra.Command{
 	Use:   "list",
 	Short: "Lists keys.",
-	Long:  "lists keys known to notary.",
+	Long:  "Lists all keys known to notary.",
 	Run:   keysList,
 }
 
 var cmdRotateKey = &cobra.Command{
 	Use:   "rotate [ GUN ]",
-	Short: "Rotate all keys for role.",
-	Long:  "Removes all old keys for the given role and generates 1 new key.",
+	Short: "Rotate all the signing (non-root) keys for the given Globally Unique Name.",
+	Long:  "Removes all old signing (non-root) keys for the given Globally Unique Name, and generates new ones.  This only makes local changes - please use then `notary publish` to push the key rotation changes to the remote server.",
 	Run:   keysRotate,
 }
 
 var cmdKeyGenerateRootKey = &cobra.Command{
 	Use:   "generate [ algorithm ]",
 	Short: "Generates a new root key with a given algorithm.",
-	Long:  "generates a new root key with a given algorithm.",
+	Long:  "Generates a new root key with a given algorithm. If a hardware smartcard is available, the key will be stored both on hardware and on disk.  Please make sure to back up the key that is written to disk, and to then take the on-disk key offline.",
 	Run:   keysGenerateRootKey,
 }
 
@@ -63,7 +63,7 @@ var keysExportGUN string
 var cmdKeyExport = &cobra.Command{
 	Use:   "export [ filename ]",
 	Short: "Exports keys to a ZIP file.",
-	Long:  "exports a collection of keys. The keys are reencrypted with a new passphrase. The output is a ZIP file.",
+	Long:  "Exports a collection of keys. The keys are reencrypted with a new passphrase. The output is a ZIP file.  If the --gun option is passed, only signing keys and no root keys will be exported.  Does not work on keys that are only in hardware (smartcards).",
 	Run:   keysExport,
 }
 
@@ -72,21 +72,21 @@ var keysExportRootChangePassphrase bool
 var cmdKeyExportRoot = &cobra.Command{
 	Use:   "export-root [ keyID ] [ filename ]",
 	Short: "Exports given root key to a file.",
-	Long:  "exports a root key, without reencrypting. The output is a PEM file.",
+	Long:  "Exports a root key, without reencrypting. The output is a PEM file. Does not work on keys that are only in hardware (smartcards).",
 	Run:   keysExportRoot,
 }
 
 var cmdKeyImport = &cobra.Command{
 	Use:   "import [ filename ]",
 	Short: "Imports keys from a ZIP file.",
-	Long:  "imports one or more keys from a ZIP file.",
+	Long:  "Imports one or more keys from a ZIP file. If a hardware smartcard is available, the root key will be imported into the smartcard but not to disk.",
 	Run:   keysImport,
 }
 
 var cmdKeyImportRoot = &cobra.Command{
 	Use:   "import-root [ filename ]",
 	Short: "Imports root key.",
-	Long:  "imports a root key from a PEM file.",
+	Long:  "Imports a root key from a PEM file. If a hardware smartcard is available, the root key will be imported into the smartcard but not to disk.",
 	Run:   keysImportRoot,
 }
 
@@ -101,7 +101,7 @@ func keysList(cmd *cobra.Command, args []string) {
 	keysPath := filepath.Join(trustDir, notary.PrivDir)
 	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
 	if err != nil {
-		fatalf("failed to create private key store in directory: %s", keysPath)
+		fatalf("Failed to create private key store in directory: %s", keysPath)
 	}
 	yubiStore, _ := api.NewYubiKeyStore(fileKeyStore, retriever)
 	var cs signed.CryptoService
@@ -144,7 +144,7 @@ func keysList(cmd *cobra.Command, args []string) {
 func keysGenerateRootKey(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
 		cmd.Usage()
-		fatalf("must specify an Algorithm (RSA, ECDSA)")
+		fatalf("Must specify an Algorithm (RSA, ECDSA)")
 	}
 
 	algorithm := args[0]
@@ -154,7 +154,7 @@ func keysGenerateRootKey(cmd *cobra.Command, args []string) {
 	}
 
 	if !allowedCiphers[strings.ToLower(algorithm)] {
-		fatalf("algorithm not allowed, possible values are: RSA, ECDSA")
+		fatalf("Algorithm not allowed, possible values are: RSA, ECDSA")
 	}
 
 	parseConfig()
@@ -162,7 +162,7 @@ func keysGenerateRootKey(cmd *cobra.Command, args []string) {
 	keysPath := filepath.Join(trustDir, notary.PrivDir)
 	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
 	if err != nil {
-		fatalf("failed to create private key store in directory: %s", keysPath)
+		fatalf("Failed to create private key store in directory: %s", keysPath)
 	}
 	yubiStore, err := api.NewYubiKeyStore(fileKeyStore, retriever)
 	var cs signed.CryptoService
@@ -175,7 +175,7 @@ func keysGenerateRootKey(cmd *cobra.Command, args []string) {
 
 	pubKey, err := cs.Create(data.CanonicalRootRole, algorithm)
 	if err != nil {
-		fatalf("failed to create a new root key: %v", err)
+		fatalf("Failed to create a new root key: %v", err)
 	}
 
 	cmd.Printf("Generated new %s root key with keyID: %s\n", algorithm, pubKey.ID())
@@ -185,7 +185,7 @@ func keysGenerateRootKey(cmd *cobra.Command, args []string) {
 func keysExport(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
 		cmd.Usage()
-		fatalf("must specify output filename for export")
+		fatalf("Must specify output filename for export")
 	}
 
 	exportFilename := args[0]
@@ -195,13 +195,13 @@ func keysExport(cmd *cobra.Command, args []string) {
 	keysPath := filepath.Join(trustDir, notary.PrivDir)
 	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
 	if err != nil {
-		fatalf("failed to create private key store in directory: %s", keysPath)
+		fatalf("Failed to create private key store in directory: %s", keysPath)
 	}
 	cs := cryptoservice.NewCryptoService("", fileKeyStore)
 
 	exportFile, err := os.Create(exportFilename)
 	if err != nil {
-		fatalf("error creating output file: %v", err)
+		fatalf("Error creating output file: %v", err)
 	}
 
 	// Must use a different passphrase retriever to avoid caching the
@@ -217,7 +217,7 @@ func keysExport(cmd *cobra.Command, args []string) {
 
 	if err != nil {
 		os.Remove(exportFilename)
-		fatalf("error exporting keys: %v", err)
+		fatalf("Error exporting keys: %v", err)
 	}
 }
 
@@ -225,14 +225,14 @@ func keysExport(cmd *cobra.Command, args []string) {
 func keysExportRoot(cmd *cobra.Command, args []string) {
 	if len(args) < 2 {
 		cmd.Usage()
-		fatalf("must specify key ID and output filename for export")
+		fatalf("Must specify key ID and output filename for export")
 	}
 
 	keyID := args[0]
 	exportFilename := args[1]
 
 	if len(keyID) != idSize {
-		fatalf("please specify a valid root key ID")
+		fatalf("Please specify a valid root key ID")
 	}
 
 	parseConfig()
@@ -240,13 +240,13 @@ func keysExportRoot(cmd *cobra.Command, args []string) {
 	keysPath := filepath.Join(trustDir, notary.PrivDir)
 	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
 	if err != nil {
-		fatalf("failed to create private key store in directory: %s", keysPath)
+		fatalf("Failed to create private key store in directory: %s", keysPath)
 	}
 	cs := cryptoservice.NewCryptoService("", fileKeyStore)
 
 	exportFile, err := os.Create(exportFilename)
 	if err != nil {
-		fatalf("error creating output file: %v", err)
+		fatalf("Error creating output file: %v", err)
 	}
 	if keysExportRootChangePassphrase {
 		// Must use a different passphrase retriever to avoid caching the
@@ -259,7 +259,7 @@ func keysExportRoot(cmd *cobra.Command, args []string) {
 	exportFile.Close()
 	if err != nil {
 		os.Remove(exportFilename)
-		fatalf("error exporting root key: %v", err)
+		fatalf("Error exporting root key: %v", err)
 	}
 }
 
@@ -267,7 +267,7 @@ func keysExportRoot(cmd *cobra.Command, args []string) {
 func keysImport(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
 		cmd.Usage()
-		fatalf("must specify input filename for import")
+		fatalf("Must specify input filename for import")
 	}
 
 	importFilename := args[0]
@@ -277,20 +277,20 @@ func keysImport(cmd *cobra.Command, args []string) {
 	keysPath := filepath.Join(trustDir, notary.PrivDir)
 	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
 	if err != nil {
-		fatalf("failed to create private key store in directory: %s", keysPath)
+		fatalf("Failed to create private key store in directory: %s", keysPath)
 	}
 	cs := cryptoservice.NewCryptoService("", fileKeyStore)
 
 	zipReader, err := zip.OpenReader(importFilename)
 	if err != nil {
-		fatalf("opening file for import: %v", err)
+		fatalf("Opening file for import: %v", err)
 	}
 	defer zipReader.Close()
 
 	err = cs.ImportKeysZip(zipReader.Reader)
 
 	if err != nil {
-		fatalf("error importing keys: %v", err)
+		fatalf("Error importing keys: %v", err)
 	}
 }
 
@@ -298,7 +298,7 @@ func keysImport(cmd *cobra.Command, args []string) {
 func keysImportRoot(cmd *cobra.Command, args []string) {
 	if len(args) != 1 {
 		cmd.Usage()
-		fatalf("must specify input filename for import")
+		fatalf("Must specify input filename for import")
 	}
 
 	importFilename := args[0]
@@ -308,7 +308,7 @@ func keysImportRoot(cmd *cobra.Command, args []string) {
 	keysPath := filepath.Join(trustDir, notary.PrivDir)
 	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
 	if err != nil {
-		fatalf("failed to create private key store in directory: %s", keysPath)
+		fatalf("Failed to create private key store in directory: %s", keysPath)
 	}
 	yubiStore, err := api.NewYubiKeyStore(fileKeyStore, retriever)
 	var cs signed.CryptoService
@@ -321,14 +321,14 @@ func keysImportRoot(cmd *cobra.Command, args []string) {
 
 	importFile, err := os.Open(importFilename)
 	if err != nil {
-		fatalf("opening file for import: %v", err)
+		fatalf("Opening file for import: %v", err)
 	}
 	defer importFile.Close()
 
 	err = cs.ImportRootKey(importFile)
 
 	if err != nil {
-		fatalf("error importing root key: %v", err)
+		fatalf("Error importing root key: %v", err)
 	}
 }
 
@@ -341,7 +341,7 @@ func printKey(cmd *cobra.Command, keyPath, alias string) {
 func keysRotate(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
 		cmd.Usage()
-		fatalf("must specify a GUN and target")
+		fatalf("Must specify a GUN and target")
 	}
 	parseConfig()
 
