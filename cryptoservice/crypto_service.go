@@ -105,11 +105,7 @@ func (cs *CryptoService) RemoveKey(keyID string) (err error) {
 	keyPaths := []string{keyID, filepath.Join(cs.gun, keyID)}
 	for _, ks := range cs.keyStores {
 		for _, keyPath := range keyPaths {
-			_, _, err = ks.GetKey(keyPath)
-			if err != nil {
-				continue
-			}
-			err = ks.RemoveKey(keyPath)
+			ks.RemoveKey(keyPath)
 		}
 	}
 	return // returns whatever the final values were
