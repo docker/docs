@@ -24,14 +24,13 @@ func NewNotaryRepository(baseDir, gun, baseURL string, rt http.RoundTripper,
 	retriever passphrase.Retriever) (*NotaryRepository, error) {
 
 	keysPath := filepath.Join(baseDir, notary.PrivDir)
-	backupPath := filepath.Join(baseDir, notary.BackupDir)
 	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create private key store in directory: %s", keysPath)
 	}
 
 	keyStoreManager, err := keystoremanager.NewKeyStoreManager(baseDir, fileKeyStore)
-	yubiKeyStore, _ := api.NewYubiKeyStore(backupPath, retriever)
+	yubiKeyStore, _ := api.NewYubiKeyStore(fileKeyStore, retriever)
 	var cryptoService signed.CryptoService
 	if yubiKeyStore == nil {
 		cryptoService = cryptoservice.NewCryptoService(gun, keyStoreManager.KeyStore)
