@@ -21,7 +21,6 @@ const (
 )
 
 var (
-	rawOutput         bool
 	verbose           bool
 	trustDir          string
 	configFile        string
@@ -107,13 +106,11 @@ func setupCommand(notaryCmd *cobra.Command) {
 	notaryCmd.AddCommand(cmdCert)
 	notaryCmd.AddCommand(cmdTufInit)
 	notaryCmd.AddCommand(cmdTufList)
-	cmdTufList.Flags().BoolVarP(&rawOutput, "raw", "", false, "Instructs notary list to output a nonpretty printed version of the targets list. Useful if you need to parse the list.")
 	notaryCmd.AddCommand(cmdTufAdd)
 	notaryCmd.AddCommand(cmdTufRemove)
 	notaryCmd.AddCommand(cmdTufStatus)
 	notaryCmd.AddCommand(cmdTufPublish)
 	notaryCmd.AddCommand(cmdTufLookup)
-	cmdTufLookup.Flags().BoolVarP(&rawOutput, "raw", "", false, "Instructs notary lookup to output a nonpretty printed version of the targets list. Useful if you need to parse the list.")
 	notaryCmd.AddCommand(cmdVerify)
 }
 
