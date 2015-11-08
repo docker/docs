@@ -118,18 +118,18 @@ func PromptRetrieverWithInOut(in io.Reader, out io.Writer, aliasMap map[string]s
 			if indexOfLastSeparator > 0 {
 				keyNamePrefix := keyName[:indexOfLastSeparator]
 				keyNameID := keyName[indexOfLastSeparator+1 : indexOfLastSeparator+idBytesToDisplay+1]
-				shortName = keyNamePrefix + " (" + keyNameID + ")"
+				shortName = keyNameID + " (" + keyNamePrefix + ")"
 			} else {
 				shortName = keyName[indexOfLastSeparator : indexOfLastSeparator+idBytesToDisplay]
 			}
 		}
 
 		if createNew {
-			fmt.Fprintf(out, "Enter passphrase for new %s key with id %s: ", displayAlias, shortName)
+			fmt.Fprintf(out, "Enter passphrase for new %s key with ID %s: ", displayAlias, shortName)
 		} else if displayAlias == "yubikey" {
 			fmt.Fprintf(out, "Enter the %s for the attached Yubikey: ", keyName)
 		} else {
-			fmt.Fprintf(out, "Enter passphrase for %s key with id %s: ", displayAlias, shortName)
+			fmt.Fprintf(out, "Enter passphrase for %s key with ID %s: ", displayAlias, shortName)
 		}
 
 		passphrase, err := stdin.ReadBytes('\n')
@@ -157,7 +157,7 @@ func PromptRetrieverWithInOut(in io.Reader, out io.Writer, aliasMap map[string]s
 			return "", false, ErrTooShort
 		}
 
-		fmt.Fprintf(out, "Repeat passphrase for new %s key with id %s: ", displayAlias, keyName)
+		fmt.Fprintf(out, "Repeat passphrase for new %s key with ID %s: ", displayAlias, shortName)
 		confirmation, err := stdin.ReadBytes('\n')
 		fmt.Fprintln(out)
 		if err != nil {
