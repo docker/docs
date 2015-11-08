@@ -1,6 +1,6 @@
 // +build pkcs11
 
-package api
+package trustmanager
 
 import (
 	"crypto"
@@ -17,7 +17,6 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary/passphrase"
-	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
 	"github.com/miekg/pkcs11"
 )
@@ -145,7 +144,7 @@ func addECDSAKey(
 	pkcs11KeyID []byte,
 	passRetriever passphrase.Retriever,
 	role string,
-	backupStore trustmanager.KeyStore,
+	backupStore KeyStore,
 ) error {
 	logrus.Debugf("Got into add key with key: %s\n", privKey.ID())
 
@@ -165,7 +164,7 @@ func addECDSAKey(
 	ecdsaPrivKeyD := ecdsaPrivKey.D.Bytes()
 	logrus.Debugf("Getting D bytes: %v\n", ecdsaPrivKeyD)
 
-	template, err := trustmanager.NewCertificate(role)
+	template, err := NewCertificate(role)
 	if err != nil {
 		return fmt.Errorf("failed to create the certificate template: %v", err)
 	}
@@ -316,7 +315,7 @@ func sign(ctx *pkcs11.Ctx, session pkcs11.SessionHandle, pkcs11KeyID []byte, pas
 	return sig[:], nil
 }
 
-func removeKey(ctx *pkcs11.Ctx, session pkcs11.SessionHandle, pkcs11KeyID []byte, passRetriever passphrase.Retriever, keyID string) error {
+func yubiRemoveKey(ctx *pkcs11.Ctx, session pkcs11.SessionHandle, pkcs11KeyID []byte, passRetriever passphrase.Retriever, keyID string) error {
 	err := login(ctx, session, passRetriever, pkcs11.CKU_SO, SO_USER_PIN)
 	if err != nil {
 		return err
@@ -357,7 +356,7 @@ func removeKey(ctx *pkcs11.Ctx, session pkcs11.SessionHandle, pkcs11KeyID []byte
 	return nil
 }
 
-func listKeys(ctx *pkcs11.Ctx, session pkcs11.SessionHandle) (keys map[string]yubiSlot, err error) {
+func yubiListKeys(ctx *pkcs11.Ctx, session pkcs11.SessionHandle) (keys map[string]yubiSlot, err error) {
 	keys = make(map[string]yubiSlot)
 	findTemplate := []*pkcs11.Attribute{
 		pkcs11.NewAttribute(pkcs11.CKA_TOKEN, true),
@@ -512,13 +511,18 @@ func getNextEmptySlot(ctx *pkcs11.Ctx, session pkcs11.SessionHandle) ([]byte, er
 	return nil, errors.New("Yubikey has no available slots.")
 }
 
+// YubiKeyStore is a KeyStore for private keys inside a Yubikey
 type YubiKeyStore struct {
 	passRetriever passphrase.Retriever
 	keys          map[string]yubiSlot
-	backupStore   trustmanager.KeyStore
+	backupStore   KeyStore
 }
 
-func NewYubiKeyStore(backupStore trustmanager.KeyStore, passphraseRetriever passphrase.Retriever) (*YubiKeyStore, error) {
+// NewYubiKeyStore returns a YubiKeyStore, given a backup key store to write any
+// generated keys to (usually a KeyFileStore)
+func NewYubiKeyStore(backupStore KeyStore, passphraseRetriever passphrase.Retriever) (
+	*YubiKeyStore, error) {
+
 	s := &YubiKeyStore{
 		passRetriever: passphraseRetriever,
 		keys:          make(map[string]yubiSlot),
@@ -537,7 +541,7 @@ func (s *YubiKeyStore) ListKeys() map[string]string {
 		return nil
 	}
 	defer cleanup(ctx, session)
-	keys, err := listKeys(ctx, session)
+	keys, err := yubiListKeys(ctx, session)
 	if err != nil {
 		return nil
 	}
@@ -545,6 +549,7 @@ func (s *YubiKeyStore) ListKeys() map[string]string {
 	return buildKeyMap(keys)
 }
 
+// AddKey puts a key inside the Yubikey, as well as writing it to the backup store
 func (s *YubiKeyStore) AddKey(keyID, role string, privKey data.PrivateKey) error {
 	// We only allow adding root keys for now
 	if role != data.CanonicalRootRole {
@@ -580,6 +585,8 @@ func (s *YubiKeyStore) AddKey(keyID, role string, privKey data.PrivateKey) error
 	return err
 }
 
+// GetKey retrieves a key from the Yubikey only (it does not look inside the
+// backup store)
 func (s *YubiKeyStore) GetKey(keyID string) (data.PrivateKey, string, error) {
 	ctx, session, err := SetupHSMEnv(pkcs11Lib)
 	if err != nil {
@@ -608,6 +615,8 @@ func (s *YubiKeyStore) GetKey(keyID string) (data.PrivateKey, string, error) {
 	return privKey, alias, err
 }
 
+// RemoveKey deletes a key from the Yubikey only (it does not remove it from the
+// backup store)
 func (s *YubiKeyStore) RemoveKey(keyID string) error {
 	ctx, session, err := SetupHSMEnv(pkcs11Lib)
 	if err != nil {
@@ -618,7 +627,7 @@ func (s *YubiKeyStore) RemoveKey(keyID string) error {
 	if !ok {
 		return errors.New("Key not present in yubikey")
 	}
-	return removeKey(ctx, session, key.slotID, s.passRetriever, keyID)
+	return yubiRemoveKey(ctx, session, key.slotID, s.passRetriever, keyID)
 }
 
 func (s *YubiKeyStore) ExportKey(keyID string) ([]byte, error) {
@@ -628,7 +637,7 @@ func (s *YubiKeyStore) ExportKey(keyID string) ([]byte, error) {
 
 func (s *YubiKeyStore) ImportKey(pemBytes []byte, keyID string) error {
 	logrus.Debugf("Attempting to import: %s key inside of YubiKeyStore", keyID)
-	privKey, _, err := trustmanager.GetPasswdDecryptBytes(s.passRetriever, pemBytes, "imported", "root")
+	privKey, _, err := GetPasswdDecryptBytes(s.passRetriever, pemBytes, "imported", "root")
 	if err != nil {
 		return err
 	}
@@ -675,7 +684,7 @@ func SetupHSMEnv(libraryPath string) (*pkcs11.Ctx, pkcs11.SessionHandle, error) 
 	return p, session, nil
 }
 
-// YubikeyEnabled returns true if a Yubikey can be accessed
+// YubikeyAccessible returns true if a Yubikey can be accessed
 func YubikeyAccessible() bool {
 	if pkcs11Lib == "" {
 		return false
@@ -710,10 +719,10 @@ func login(ctx *pkcs11.Ctx, session pkcs11.SessionHandle, passRetriever passphra
 		passwd, giveup, err := passRetriever(user, "yubikey", false, attempts)
 		// Check if the passphrase retriever got an error or if it is telling us to give up
 		if giveup || err != nil {
-			return trustmanager.ErrPasswordInvalid{}
+			return ErrPasswordInvalid{}
 		}
 		if attempts > 2 {
-			return trustmanager.ErrAttemptsExceeded{}
+			return ErrAttemptsExceeded{}
 		}
 
 		// Try to convert PEM encoded bytes back to a PrivateKey using the passphrase

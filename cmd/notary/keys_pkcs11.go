@@ -8,7 +8,6 @@ import (
 	"github.com/docker/notary"
 	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/passphrase"
-	"github.com/docker/notary/signer/api"
 	"github.com/docker/notary/trustmanager"
 	"github.com/spf13/cobra"
 )
@@ -27,7 +26,7 @@ func getCryptoService(cmd *cobra.Command, directory string,
 	ks := []trustmanager.KeyStore{fileKeyStore}
 
 	if withHardware {
-		yubiStore, err := api.NewYubiKeyStore(fileKeyStore, ret)
+		yubiStore, err := trustmanager.NewYubiKeyStore(fileKeyStore, ret)
 		if err != nil {
 			cmd.Println("No YubiKey detected - using local filesystem only.")
 		} else {
