@@ -13,6 +13,7 @@ import (
 	"fmt"
 	"io"
 	"math/big"
+	"os"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary/passphrase"
@@ -48,8 +49,20 @@ func SetYubikeyKeyMode(keyMode int) error {
 	return nil
 }
 
-// Hardcoded yubikey PKCS11 ID
-var YUBIKEY_ROOT_KEY_ID = []byte{2}
+var pkcs11Lib string
+
+func init() {
+	for _, loc := range possiblePkcs11Libs {
+		_, err := os.Stat(loc)
+		if err == nil {
+			p := pkcs11.New(loc)
+			if p != nil {
+				pkcs11Lib = loc
+				return
+			}
+		}
+	}
+}
 
 type ErrBackupFailed struct {
 	err string
@@ -630,6 +643,9 @@ func cleanup(ctx *pkcs11.Ctx, session pkcs11.SessionHandle) {
 
 // SetupHSMEnv is a method that depends on the existences
 func SetupHSMEnv(libraryPath string) (*pkcs11.Ctx, pkcs11.SessionHandle, error) {
+	if libraryPath == "" {
+		return nil, 0, errors.New("No library found.")
+	}
 	p := pkcs11.New(libraryPath)
 
 	if p == nil {
@@ -661,6 +677,9 @@ func SetupHSMEnv(libraryPath string) (*pkcs11.Ctx, pkcs11.SessionHandle, error) 
 
 // YubikeyEnabled returns true if a Yubikey can be accessed
 func YubikeyAccessible() bool {
+	if pkcs11Lib == "" {
+		return false
+	}
 	ctx, session, err := SetupHSMEnv(pkcs11Lib)
 	if err != nil {
 		return false
