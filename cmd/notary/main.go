@@ -101,24 +101,20 @@ func setupCommand(notaryCmd *cobra.Command) {
 	notaryCmd.PersistentFlags().StringVarP(&trustDir, "trustdir", "d", "", "directory where the trust data is persisted to")
 	notaryCmd.PersistentFlags().StringVarP(&configFile, "configFile", "c", "", "path to the configuration file to use")
 	notaryCmd.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "verbose output")
+	notaryCmd.PersistentFlags().StringVarP(&remoteTrustServer, "server", "s", "", "Remote trust server location")
 
 	notaryCmd.AddCommand(cmdKey)
 	notaryCmd.AddCommand(cmdCert)
 	notaryCmd.AddCommand(cmdTufInit)
-	cmdTufInit.Flags().StringVarP(&remoteTrustServer, "server", "s", "", "Remote trust server location")
 	notaryCmd.AddCommand(cmdTufList)
 	cmdTufList.Flags().BoolVarP(&rawOutput, "raw", "", false, "Instructs notary list to output a nonpretty printed version of the targets list. Useful if you need to parse the list.")
-	cmdTufList.Flags().StringVarP(&remoteTrustServer, "server", "s", "", "Remote trust server location")
 	notaryCmd.AddCommand(cmdTufAdd)
 	notaryCmd.AddCommand(cmdTufRemove)
 	notaryCmd.AddCommand(cmdTufStatus)
 	notaryCmd.AddCommand(cmdTufPublish)
-	cmdTufPublish.Flags().StringVarP(&remoteTrustServer, "server", "s", "", "Remote trust server location")
 	notaryCmd.AddCommand(cmdTufLookup)
 	cmdTufLookup.Flags().BoolVarP(&rawOutput, "raw", "", false, "Instructs notary lookup to output a nonpretty printed version of the targets list. Useful if you need to parse the list.")
-	cmdTufLookup.Flags().StringVarP(&remoteTrustServer, "server", "s", "", "Remote trust server location")
 	notaryCmd.AddCommand(cmdVerify)
-	cmdVerify.Flags().StringVarP(&remoteTrustServer, "server", "s", "", "Remote trust server location")
 }
 
 func main() {
