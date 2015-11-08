@@ -11,7 +11,6 @@ import (
 	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/keystoremanager"
 	"github.com/docker/notary/passphrase"
-	"github.com/docker/notary/signer/api"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/store"
@@ -30,7 +29,7 @@ func NewNotaryRepository(baseDir, gun, baseURL string, rt http.RoundTripper,
 	}
 
 	keyStoreManager, err := keystoremanager.NewKeyStoreManager(baseDir, fileKeyStore)
-	yubiKeyStore, _ := api.NewYubiKeyStore(fileKeyStore, retriever)
+	yubiKeyStore, _ := trustmanager.NewYubiKeyStore(fileKeyStore, retriever)
 	var cryptoService signed.CryptoService
 	if yubiKeyStore == nil {
 		cryptoService = cryptoservice.NewCryptoService(gun, keyStoreManager.KeyStore)

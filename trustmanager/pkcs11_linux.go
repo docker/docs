@@ -1,6 +1,6 @@
 // +build pkcs11,linux
 
-package api
+package trustmanager
 
 var possiblePkcs11Libs = []string{
 	"/usr/lib/libykcs11.so",
