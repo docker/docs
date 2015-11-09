@@ -114,6 +114,60 @@ EMl3eFOJXjIch/wIesRSN+2dGOsl7neercjMh1i9RvpCwHDx/E0=
 	assert.Equal(t, testData, pemPrivKey)
 }
 
+func TestListKeys(t *testing.T) {
+	testName := "docker.com/notary/root"
+	perms := os.FileMode(0755)
+
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	assert.NoError(t, err, "failed to create a temporary directory")
+	defer os.RemoveAll(tempBaseDir)
+
+	// Create our store
+	store, err := NewKeyFileStore(tempBaseDir, passphraseRetriever)
+	assert.NoError(t, err, "failed to create new key filestore")
+
+	privKey, err := GenerateECDSAKey(rand.Reader)
+	assert.NoError(t, err, "could not generate private key")
+
+	// Call the AddKey function
+	err = store.AddKey(testName, "root", privKey)
+	assert.NoError(t, err, "failed to add key to store")
+
+	// Check to see if the keystore lists this key
+	keyMap := store.ListKeys()
+
+	// Expect to see exactly one key in the map
+	assert.Len(t, keyMap, 1)
+	// Expect to see privKeyID inside of the map
+	role, ok := keyMap[testName]
+	assert.True(t, ok)
+	assert.Equal(t, role, "root")
+
+	// Call the AddKey function for the second key
+	err = store.AddKey(testName+"2", "targets", privKey)
+	assert.NoError(t, err, "failed to add key to store")
+
+	// Check to see if the keystore lists this key
+	keyMap = store.ListKeys()
+
+	// Expect to see exactly two keys in the map
+	assert.Len(t, keyMap, 2)
+	// Expect to see privKeyID2 inside of the map
+	role, ok = keyMap[testName+"2"]
+	assert.True(t, ok)
+	assert.Equal(t, role, "targets")
+
+	// Write an invalid filename to the directory
+	filePath := filepath.Join(tempBaseDir, rootKeysSubdir, "fakekeyname.key")
+	err = ioutil.WriteFile(filePath, []byte("data"), perms)
+	assert.NoError(t, err, "failed to write test file")
+
+	// Check to see if the keystore still lists two keys
+	keyMap = store.ListKeys()
+	assert.Len(t, keyMap, 2)
+}
+
 func TestAddGetKeyMemStore(t *testing.T) {
 	testName := "docker.com/notary/root"
 	testAlias := "root"
@@ -136,6 +190,7 @@ func TestAddGetKeyMemStore(t *testing.T) {
 	assert.Equal(t, retrievedKey.Public(), privKey.Public())
 	assert.Equal(t, retrievedKey.Private(), privKey.Private())
 }
+
 func TestGetDecryptedWithTamperedCipherText(t *testing.T) {
 	testExt := "key"
 	testAlias := "root"
