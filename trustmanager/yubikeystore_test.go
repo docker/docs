@@ -25,6 +25,14 @@ func clearAllKeys(t *testing.T) {
 	}
 }
 
+func testAddKey(t *testing.T, store *YubiKeyStore) (data.PrivateKey, error) {
+	privKey, err := GenerateECDSAKey(rand.Reader)
+	assert.NoError(t, err)
+
+	err = store.AddKey(privKey.ID(), data.CanonicalRootRole, privKey)
+	return privKey, err
+}
+
 func TestAddKeyToNextEmptyYubikeySlot(t *testing.T) {
 	if !YubikeyAccessible() {
 		t.Skip("Must have Yubikey access.")
@@ -43,15 +51,14 @@ func TestAddKeyToNextEmptyYubikeySlot(t *testing.T) {
 
 	// create the maximum number of keys
 	for i := 0; i < numSlots; i++ {
-		privKey, err := GenerateECDSAKey(rand.Reader)
+		privKey, err := testAddKey(t, store)
 		assert.NoError(t, err)
-
-		err = store.AddKey(privKey.ID(), data.CanonicalRootRole, privKey)
-		assert.NoError(t, err)
-
 		keys = append(keys, privKey.ID())
 	}
 
+	// create a new store, to make sure we're not just using the keys cache
+	store, err = NewYubiKeyStore(NewKeyMemoryStore(ret), ret)
+	assert.NoError(t, err)
 	listedKeys := store.ListKeys()
 	assert.Len(t, listedKeys, numSlots)
 	for _, k := range keys {
@@ -60,6 +67,14 @@ func TestAddKeyToNextEmptyYubikeySlot(t *testing.T) {
 		assert.Equal(t, data.CanonicalRootRole, r)
 	}
 
-	// numSlots is not actually the max - some keys might have more, so do not
-	// test that adding more keys will fail.
+	// add another key - should fail because there are no more slots
+	_, err = testAddKey(t, store)
+	assert.Error(t, err)
+
+	// delete one of the middle keys, and assert we can still create a new key
+	err = store.RemoveKey(keys[numSlots/2])
+	assert.NoError(t, err)
+
+	_, err = testAddKey(t, store)
+	assert.NoError(t, err)
 }
