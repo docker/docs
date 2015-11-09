@@ -212,14 +212,28 @@ func listKeys(s LimitedFileStore) map[string]string {
 	keyIDMap := make(map[string]string)
 
 	for _, f := range s.ListFiles() {
+		// Remove the prefix of the directory from the filename
 		if f[:len(rootKeysSubdir)] == rootKeysSubdir {
 			f = strings.TrimPrefix(f, rootKeysSubdir+"/")
 		} else {
 			f = strings.TrimPrefix(f, nonRootKeysSubdir+"/")
 		}
+
+		// Remove the extension from the full filename
+		// abcde_root.key becomes abcde_root
 		keyIDFull := strings.TrimSpace(strings.TrimSuffix(f, filepath.Ext(f)))
-		keyID := keyIDFull[:strings.LastIndex(keyIDFull, "_")]
-		keyAlias := keyIDFull[strings.LastIndex(keyIDFull, "_")+1:]
+
+		// If the key does not have a _, it is malformed
+		underscoreIndex := strings.LastIndex(keyIDFull, "_")
+		if underscoreIndex == -1 {
+			continue
+		}
+
+		// The keyID is the first part of the keyname
+		// The KeyAlias is the second part of the keyname
+		// in a key named abcde_root, abcde is the keyID and root is the KeyAlias
+		keyID := keyIDFull[:underscoreIndex]
+		keyAlias := keyIDFull[underscoreIndex+1:]
 		keyIDMap[keyID] = keyAlias
 	}
 	return keyIDMap
