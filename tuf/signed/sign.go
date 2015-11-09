@@ -68,8 +68,9 @@ func Sign(service CryptoService, s *data.Signed, keys ...data.PublicKey) error {
 	}
 	if len(signatures) < 1 {
 		return ErrInsufficientSignatures{
-			Name: fmt.Sprintf("Cryptoservice failed to produce any signatures for keys with IDs: %v", keyIDs),
-			Err:  nil,
+			Name: fmt.Sprintf(
+				"Cryptoservice failed to produce any signatures for keys with IDs: %v",
+				keyIDs),
 		}
 	}
 	for _, sig := range s.Signatures {

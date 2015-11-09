@@ -8,11 +8,10 @@ import (
 // metadata
 type ErrInsufficientSignatures struct {
 	Name string
-	Err  error
 }
 
 func (e ErrInsufficientSignatures) Error() string {
-	return fmt.Sprintf("tuf: insufficient signatures for %s: %s", e.Name, e.Err)
+	return fmt.Sprintf("tuf: insufficient signatures: %s", e.Name)
 }
 
 // ErrExpired indicates a piece of metadata has expired
