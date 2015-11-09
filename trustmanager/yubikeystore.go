@@ -199,9 +199,11 @@ func addECDSAKey(
 		return fmt.Errorf("error importing: %v", err)
 	}
 
-	err = backupStore.AddKey(privKey.ID(), role, privKey)
-	if err != nil {
-		return ErrBackupFailed{err: err.Error()}
+	if backupStore != nil {
+		err = backupStore.AddKey(privKey.ID(), role, privKey)
+		if err != nil {
+			return ErrBackupFailed{err: err.Error()}
+		}
 	}
 
 	return nil
@@ -553,6 +555,11 @@ func (s *YubiKeyStore) ListKeys() map[string]string {
 
 // AddKey puts a key inside the Yubikey, as well as writing it to the backup store
 func (s *YubiKeyStore) AddKey(keyID, role string, privKey data.PrivateKey) error {
+	return s.addKey(keyID, role, privKey, true)
+}
+
+func (s *YubiKeyStore) addKey(
+	keyID, role string, privKey data.PrivateKey, backup bool) error {
 	// We only allow adding root keys for now
 	if role != data.CanonicalRootRole {
 		return fmt.Errorf("yubikey only supports storing root keys, got %s for key: %s\n", role, keyID)
@@ -576,7 +583,14 @@ func (s *YubiKeyStore) AddKey(keyID, role string, privKey data.PrivateKey) error
 		return err
 	}
 	logrus.Debugf("Using yubikey slot %v", slot)
-	err = addECDSAKey(ctx, session, privKey, slot, s.passRetriever, role, s.backupStore)
+
+	backupStore := s.backupStore
+	if !backup {
+		backupStore = nil
+	}
+
+	err = addECDSAKey(
+		ctx, session, privKey, slot, s.passRetriever, role, backupStore)
 	if err == nil {
 		s.keys[privKey.ID()] = yubiSlot{
 			role:   role,
@@ -636,18 +650,21 @@ func (s *YubiKeyStore) RemoveKey(keyID string) error {
 	return err
 }
 
+// ExportKey doesn't work, because you can't export data from a Yubikey
 func (s *YubiKeyStore) ExportKey(keyID string) ([]byte, error) {
 	logrus.Debugf("Attempting to export: %s key inside of YubiKeyStore", keyID)
 	return nil, errors.New("Keys cannot be exported from a Yubikey.")
 }
 
+// ImportKey imports a root key into a Yubikey
 func (s *YubiKeyStore) ImportKey(pemBytes []byte, keyID string) error {
 	logrus.Debugf("Attempting to import: %s key inside of YubiKeyStore", keyID)
-	privKey, _, err := GetPasswdDecryptBytes(s.passRetriever, pemBytes, "imported", "root")
+	privKey, _, err := GetPasswdDecryptBytes(
+		s.passRetriever, pemBytes, "", "imported root")
 	if err != nil {
 		return err
 	}
-	return s.AddKey(privKey.ID(), "root", privKey)
+	return s.addKey(privKey.ID(), "root", privKey, false)
 }
 
 func cleanup(ctx *pkcs11.Ctx, session pkcs11.SessionHandle) {

@@ -347,7 +347,8 @@ func importKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, cac
 		return s.Add(alias, pemBytes)
 	}
 
-	privKey, passphrase, err := GetPasswdDecryptBytes(passphraseRetriever, pemBytes, "imported", alias)
+	privKey, passphrase, err := GetPasswdDecryptBytes(
+		passphraseRetriever, pemBytes, "", "imported "+alias)
 
 	if err != nil {
 		return err
