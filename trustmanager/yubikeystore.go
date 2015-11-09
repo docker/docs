@@ -30,6 +30,9 @@ const (
 	KeymodeTouch     = 1 // touch enabled
 	KeymodePinOnce   = 2 // require pin entry once
 	KeymodePinAlways = 4 // require pin entry all the time
+
+	// the key size, when importing a key into yubikey, MUST be 32 bytes
+	ecdsaPrivateKeySize = 32
 )
 
 // what key mode to use when generating keys
@@ -136,6 +139,18 @@ func (y *YubiPrivateKey) Sign(rand io.Reader, msg []byte, opts crypto.SignerOpts
 	return sig, nil
 }
 
+// If a byte array is less than the number of bytes specified by
+// ecdsaPrivateKeySize, left-zero-pad the byte array until
+// it is the required size.
+func ensurePrivateKeySize(payload []byte) []byte {
+	final := payload
+	if len(payload) < ecdsaPrivateKeySize {
+		final = make([]byte, ecdsaPrivateKeySize)
+		copy(final[ecdsaPrivateKeySize-len(payload):], payload)
+	}
+	return final
+}
+
 // addECDSAKey adds a key to the yubikey
 func addECDSAKey(
 	ctx *pkcs11.Ctx,
@@ -161,7 +176,7 @@ func addECDSAKey(
 		return err
 	}
 
-	ecdsaPrivKeyD := ecdsaPrivKey.D.Bytes()
+	ecdsaPrivKeyD := ensurePrivateKeySize(ecdsaPrivKey.D.Bytes())
 	logrus.Debugf("Getting D bytes: %v\n", ecdsaPrivKeyD)
 
 	template, err := NewCertificate(role)
