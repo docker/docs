@@ -627,7 +627,11 @@ func (s *YubiKeyStore) RemoveKey(keyID string) error {
 	if !ok {
 		return errors.New("Key not present in yubikey")
 	}
-	return yubiRemoveKey(ctx, session, key.slotID, s.passRetriever, keyID)
+	err = yubiRemoveKey(ctx, session, key.slotID, s.passRetriever, keyID)
+	if err == nil {
+		delete(s.keys, keyID)
+	}
+	return err
 }
 
 func (s *YubiKeyStore) ExportKey(keyID string) ([]byte, error) {

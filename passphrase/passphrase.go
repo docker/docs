@@ -182,3 +182,11 @@ func PromptRetrieverWithInOut(in io.Reader, out io.Writer, aliasMap map[string]s
 		return retPass, false, nil
 	}
 }
+
+// ConstantRetriever returns a new Retriever which will return a constant string
+// as a passphrase.
+func ConstantRetriever(constantPassphrase string) Retriever {
+	return func(k, a string, c bool, n int) (string, bool, error) {
+		return constantPassphrase, false, nil
+	}
+}
