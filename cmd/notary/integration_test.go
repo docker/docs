@@ -118,6 +118,11 @@ func TestClientTufInteraction(t *testing.T) {
 	assert.NoError(t, err)
 	assert.True(t, strings.Contains(string(output), target))
 
+	// lookup target and repo - see target
+	output, err = runCommand(t, tempDir, "-s", server.URL, "lookup", "gun", target)
+	assert.NoError(t, err)
+	assert.True(t, strings.Contains(string(output), target))
+
 	// verify repo - empty file
 	output, err = runCommand(t, tempDir, "verify", "gun", target)
 	assert.NoError(t, err)
