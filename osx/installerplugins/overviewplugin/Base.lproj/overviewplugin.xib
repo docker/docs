@@ -37,7 +37,7 @@
                     <animations/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="N5z-io-cf5">
                         <font key="font" metaFont="system"/>
-                        <string key="title">This collects annoymous data to help us detect installation problems and improve the overall experience. We only use it to aggregate statistics and will never share it with third parties.</string>
+                        <string key="title">This collects anonymous data to help us detect installation problems and improve the overall experience. We only use it to aggregate statistics and will never share it with third parties.</string>
                         <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
