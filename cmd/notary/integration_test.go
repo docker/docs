@@ -178,17 +178,18 @@ func GetKeys(t *testing.T, tempDir string) ([]string, []string) {
 
 // List keys, parses the output, and asserts something about the number of root
 // keys and number of signing keys, as well as returning them.
-func assertNumKeys(t *testing.T, tempDir string, numRoot, numSigning int) (
-	[]string, []string) {
+func assertNumKeys(t *testing.T, tempDir string, numRoot, numSigning int,
+	rootOnDisk bool) ([]string, []string) {
 
 	root, signing := GetKeys(t, tempDir)
 	assert.Len(t, root, numRoot)
 	assert.Len(t, signing, numSigning)
 	for _, rootKeyID := range root {
-		// it should always be present on disk
 		_, err := os.Stat(filepath.Join(
 			tempDir, "private", "root_keys", rootKeyID+"_root.key"))
-		assert.NoError(t, err)
+		// os.IsExist checks to see if the error is because a file already
+		// exist, and hence doesn't actually the right funciton to use here
+		assert.Equal(t, rootOnDisk, !os.IsNotExist(err))
 
 		// this function is declared is in the build-tagged setup files
 		verifyRootKeyOnHardware(t, rootKeyID)
@@ -241,17 +242,17 @@ func TestClientKeyGenerationRotation(t *testing.T) {
 	// -- tests --
 
 	// starts out with no keys
-	assertNumKeys(t, tempDir, 0, 0)
+	assertNumKeys(t, tempDir, 0, 0, true)
 
 	// generate root key produces a single root key and no other keys
 	_, err = runCommand(t, tempDir, "key", "generate", "ecdsa")
 	assert.NoError(t, err)
-	assertNumKeys(t, tempDir, 1, 0)
+	assertNumKeys(t, tempDir, 1, 0, true)
 
 	// initialize a repo, should have signing keys and no new root key
 	_, err = runCommand(t, tempDir, "-s", server.URL, "init", "gun")
 	assert.NoError(t, err)
-	origRoot, origSign := assertNumKeys(t, tempDir, 1, 2)
+	origRoot, origSign := assertNumKeys(t, tempDir, 1, 2, true)
 
 	// publish using the original keys
 	assertSuccessfullyPublish(t, tempDir, server.URL, "gun", target, tempfiles[0])
@@ -259,7 +260,7 @@ func TestClientKeyGenerationRotation(t *testing.T) {
 	// rotate the signing keys
 	_, err = runCommand(t, tempDir, "key", "rotate", "gun")
 	assert.NoError(t, err)
-	root, sign := assertNumKeys(t, tempDir, 1, 4)
+	root, sign := assertNumKeys(t, tempDir, 1, 4, true)
 	assert.Equal(t, origRoot[0], root[0])
 	// there should be the new keys and the old keys
 	for _, origKey := range origSign {
@@ -275,7 +276,7 @@ func TestClientKeyGenerationRotation(t *testing.T) {
 	// publish the key rotation
 	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
 	assert.NoError(t, err)
-	root, sign = assertNumKeys(t, tempDir, 1, 2)
+	root, sign = assertNumKeys(t, tempDir, 1, 2, true)
 	assert.Equal(t, origRoot[0], root[0])
 	// just do a cursory rotation check that the keys aren't equal anymore
 	for _, origKey := range origSign {
@@ -332,7 +333,7 @@ func TestClientKeyImportExportRootAndSigning(t *testing.T) {
 		assertSuccessfullyPublish(
 			t, dirs[0], server.URL, gun, target, tempfiles[0])
 	}
-	assertNumKeys(t, dirs[0], 1, 4)
+	assertNumKeys(t, dirs[0], 1, 4, true)
 
 	// -- tests --
 	zipfile := tempfiles[0] + ".zip"
@@ -344,7 +345,7 @@ func TestClientKeyImportExportRootAndSigning(t *testing.T) {
 
 	_, err = runCommand(t, dirs[1], "key", "import", zipfile)
 	assert.NoError(t, err)
-	assertNumKeys(t, dirs[1], 1, 4) // all keys should be there
+	assertNumKeys(t, dirs[1], 1, 4, true) // all keys should be there
 
 	// can list and publish to both repos using imported keys
 	for _, gun := range []string{"gun1", "gun2"} {
@@ -365,16 +366,12 @@ func TestClientKeyImportExportRootAndSigning(t *testing.T) {
 
 	// this function is declared is in the build-tagged setup files
 	if rootOnHardware() {
-		// hardware root is still present, but two signing keys moved - we
-		// can't call assertNumKeys, because in this case it will ONLY be on
-		// hardware and not on disk
-		root, signing := GetKeys(t, dirs[2])
-		assert.Len(t, root, 1)
-		verifyRootKeyOnHardware(t, root[0])
-		assert.Len(t, signing, 2)
+		// hardware root is still present, and the key will ONLY be on hardware
+		// and not on disk
+		assertNumKeys(t, dirs[2], 1, 2, false)
 	} else {
 		// only 2 signing keys should be there, and no root key
-		assertNumKeys(t, dirs[2], 0, 2)
+		assertNumKeys(t, dirs[2], 0, 2, true)
 	}
 }
 
@@ -388,7 +385,7 @@ func exportRoot(t *testing.T, exportTo string) string {
 	// generate root key produces a single root key and no other keys
 	_, err = runCommand(t, tempDir, "key", "generate", "ecdsa")
 	assert.NoError(t, err)
-	oldRoot, _ := assertNumKeys(t, tempDir, 1, 0)
+	oldRoot, _ := assertNumKeys(t, tempDir, 1, 0, true)
 
 	// export does not require a password
 	oldRetriever := retriever
@@ -451,13 +448,16 @@ func TestClientKeyImportExportRootOnly(t *testing.T) {
 	// import the key
 	_, err = runCommand(t, tempDir, "key", "import-root", tempFile.Name())
 	assert.NoError(t, err)
-	newRoot, _ := assertNumKeys(t, tempDir, 1, 0)
+
+	// if there is hardware available, root will only be on hardware, and not
+	// on disk
+	newRoot, _ := assertNumKeys(t, tempDir, 1, 0, !rootOnHardware())
 	assert.Equal(t, rootKeyID, newRoot[0])
 
 	// Just to make sure, init a repo and publish
 	_, err = runCommand(t, tempDir, "-s", server.URL, "init", "gun")
 	assert.NoError(t, err)
-	assertNumKeys(t, tempDir, 1, 2)
+	assertNumKeys(t, tempDir, 1, 2, !rootOnHardware())
 	assertSuccessfullyPublish(
 		t, tempDir, server.URL, "gun", target, tempFile.Name())
 }

@@ -78,3 +78,42 @@ func TestAddKeyToNextEmptyYubikeySlot(t *testing.T) {
 	_, err = testAddKey(t, store)
 	assert.NoError(t, err)
 }
+
+// ImportKey imports a key as root without adding it to the backup store
+func TestImportKey(t *testing.T) {
+	if !YubikeyAccessible() {
+		t.Skip("Must have Yubikey access.")
+	}
+	clearAllKeys(t)
+
+	ret := passphrase.ConstantRetriever("passphrase")
+	backup := NewKeyMemoryStore(ret)
+	store, err := NewYubiKeyStore(backup, ret)
+	assert.NoError(t, err)
+	SetYubikeyKeyMode(KeymodeNone)
+	defer func() {
+		SetYubikeyKeyMode(KeymodeTouch | KeymodePinOnce)
+	}()
+
+	// generate key and import it
+	privKey, err := GenerateECDSAKey(rand.Reader)
+	assert.NoError(t, err)
+
+	pemBytes, err := EncryptPrivateKey(privKey, "passphrase")
+	assert.NoError(t, err)
+
+	err = store.ImportKey(pemBytes, privKey.ID())
+	assert.NoError(t, err)
+
+	// key is not in backup store
+	_, _, err = backup.GetKey(privKey.ID())
+	assert.Error(t, err)
+
+	// ensure key is in Yubikey -  create a new store, to make sure we're not
+	// just using the keys cache
+	store, err = NewYubiKeyStore(NewKeyMemoryStore(ret), ret)
+	gottenKey, role, err := store.GetKey(privKey.ID())
+	assert.NoError(t, err)
+	assert.Equal(t, data.CanonicalRootRole, role)
+	assert.Equal(t, privKey.Public(), gottenKey.Public())
+}

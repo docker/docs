@@ -112,8 +112,8 @@ func (cs *CryptoService) ImportRootKey(source io.Reader) error {
 
 	for _, ks := range cs.keyStores {
 		// don't redeclare err, we want the value carried out of the loop
-		if err = ks.ImportKey(pemBytes, "root"); err != nil {
-			continue
+		if err = ks.ImportKey(pemBytes, "root"); err == nil {
+			return nil //bail on the first keystore we import to
 		}
 	}
 
