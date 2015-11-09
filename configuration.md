@@ -311,7 +311,7 @@ near the top of the page, the UI will change to reflect the configuration settin
 appropriate to the selected method.
 
 You can either use the storage specific input boxes to configure the most common settngs
-for local filesystem, S3, Azure, or openstack Swift storage backends,
+for local filesystem, S3, or Azure storage backends,
 or use the full Yaml configuration file upload to have more detailed control.
 
 You can view the current `storage.yaml` file on your Docker Trusted Registry Docker host in the `/usr/local/etc/dtr/`
@@ -333,11 +333,6 @@ The [S3 storage backend](/registry/configuration/#s3) page allows you to set the
 
 The [Azure storage backend](/registry/configuration/#azure) page allows you to set
 the "Account name", "Account key", "Container", and "Realm".
-
-### Openstack Swift settings
-
-View the [openstack Swift settings](/registry/configuration/#openstack-swift) documentation so that you can set up your storage settings:
-authurl, username, password, container, tenant, tenantid, domain, domainid, insecureskipverify, region, chunksize, and prefix.
 
 ### Yaml configuration file
 
