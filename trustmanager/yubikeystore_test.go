@@ -4,6 +4,7 @@ package trustmanager
 
 import (
 	"crypto/rand"
+	"reflect"
 	"testing"
 
 	"github.com/docker/notary/passphrase"
@@ -23,6 +24,32 @@ func clearAllKeys(t *testing.T) {
 		err := store.RemoveKey(k)
 		assert.NoError(t, err)
 	}
+}
+
+func TestEnsurePrivateKeySizePassesThroughRightSizeArrays(t *testing.T) {
+	fullByteArray := make([]byte, ecdsaPrivateKeySize)
+	for i := range fullByteArray {
+		fullByteArray[i] = byte(1)
+	}
+
+	result := ensurePrivateKeySize(fullByteArray)
+	assert.True(t, reflect.DeepEqual(fullByteArray, result))
+}
+
+// The pad32Byte helper function left zero-pads byte arrays that are less than
+// ecdsaPrivateKeySize bytes
+func TestEnsurePrivateKeySizePadsLessThanRequiredSizeArrays(t *testing.T) {
+	shortByteArray := make([]byte, ecdsaPrivateKeySize/2)
+	for i := range shortByteArray {
+		shortByteArray[i] = byte(1)
+	}
+
+	expected := append(
+		make([]byte, ecdsaPrivateKeySize-ecdsaPrivateKeySize/2),
+		shortByteArray...)
+
+	result := ensurePrivateKeySize(shortByteArray)
+	assert.True(t, reflect.DeepEqual(expected, result))
 }
 
 func testAddKey(t *testing.T, store *YubiKeyStore) (data.PrivateKey, error) {
