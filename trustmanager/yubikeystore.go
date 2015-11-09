@@ -462,6 +462,8 @@ func getNextEmptySlot(ctx *pkcs11.Ctx, session pkcs11.SessionHandle) ([]byte, er
 		return nil, err
 	}
 	objs, b, err := ctx.FindObjects(session, numSlots)
+	// if there are more objects than `numSlots`, get all of them until
+	// there are no more to get
 	for err == nil {
 		var o []pkcs11.ObjectHandle
 		o, b, err = ctx.FindObjects(session, numSlots)
@@ -495,7 +497,7 @@ func getNextEmptySlot(ctx *pkcs11.Ctx, session pkcs11.SessionHandle) ([]byte, er
 				// a byte will always be capable of representing all slot IDs
 				// for the Yubikeys
 				slotNum := int(a.Value[0])
-				if slotNum >= len(taken) {
+				if slotNum >= numSlots {
 					// defensive
 					continue
 				}
