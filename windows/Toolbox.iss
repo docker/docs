@@ -212,7 +212,7 @@ begin
 	TrackingLabel.Parent := WelcomePage.Surface;
 	TrackingLabel.Font := WizardForm.WelcomeLabel2.Font;
 	TrackingLabel.Font.Color := clGray;
-  TrackingLabel.Caption := 'This collects annoymous data to help us detect installation problems and improve the overall experience. We only use it to aggregate statistics and will never share it with third parties.';
+  TrackingLabel.Caption := 'This collects anonymous data to help us detect installation problems and improve the overall experience. We only use it to aggregate statistics and will never share it with third parties.';
 	TrackingLabel.WordWrap := True;
 	TrackingLabel.Visible := True;
 	TrackingLabel.Left := WizardForm.WelcomeLabel2.Left;
