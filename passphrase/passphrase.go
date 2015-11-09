@@ -124,12 +124,17 @@ func PromptRetrieverWithInOut(in io.Reader, out io.Writer, aliasMap map[string]s
 			}
 		}
 
+		withID := fmt.Sprintf(" with ID %s", shortName)
+		if shortName == "" {
+			withID = ""
+		}
+
 		if createNew {
-			fmt.Fprintf(out, "Enter passphrase for new %s key with ID %s: ", displayAlias, shortName)
+			fmt.Fprintf(out, "Enter passphrase for new %s key%s: ", displayAlias, withID)
 		} else if displayAlias == "yubikey" {
 			fmt.Fprintf(out, "Enter the %s for the attached Yubikey: ", keyName)
 		} else {
-			fmt.Fprintf(out, "Enter passphrase for %s key with ID %s: ", displayAlias, shortName)
+			fmt.Fprintf(out, "Enter passphrase for %s key%s: ", displayAlias, withID)
 		}
 
 		passphrase, err := stdin.ReadBytes('\n')
@@ -157,7 +162,7 @@ func PromptRetrieverWithInOut(in io.Reader, out io.Writer, aliasMap map[string]s
 			return "", false, ErrTooShort
 		}
 
-		fmt.Fprintf(out, "Repeat passphrase for new %s key with ID %s: ", displayAlias, shortName)
+		fmt.Fprintf(out, "Repeat passphrase for new %s key%s: ", displayAlias, withID)
 		confirmation, err := stdin.ReadBytes('\n')
 		fmt.Fprintln(out)
 		if err != nil {
