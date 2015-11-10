@@ -339,9 +339,7 @@ func getKeyStores(cmd *cobra.Command, directory string,
 
 	if withHardware {
 		yubiStore, err := getYubiKeyStore(fileKeyStore, ret)
-		if err != nil {
-			cmd.Println("No YubiKey detected - using local filesystem only.")
-		} else {
+		if err == nil && yubiStore != nil {
 			// Note that the order is important, since we want to prioritize
 			// the yubikey store
 			ks = []trustmanager.KeyStore{yubiStore, fileKeyStore}
