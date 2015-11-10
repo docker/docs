@@ -510,6 +510,27 @@ func TestClientCertInteraction(t *testing.T) {
 	assertNumCerts(t, tempDir, 0)
 }
 
+// Tests default root key generation
+func TestDefaultRootKeyGeneration(t *testing.T) {
+	// -- setup --
+	cleanup := setUp(t)
+	defer cleanup()
+
+	tempDir, err := ioutil.TempDir("/tmp", "repo")
+	assert.NoError(t, err)
+	defer os.RemoveAll(tempDir)
+
+	// -- tests --
+
+	// starts out with no keys
+	assertNumKeys(t, tempDir, 0, 0, true)
+
+	// generate root key with no algorithm produces a single ECDSA root key and no other keys
+	_, err = runCommand(t, tempDir, "key", "generate")
+	assert.NoError(t, err)
+	assertNumKeys(t, tempDir, 1, 0, true)
+}
+
 func TestMain(m *testing.M) {
 	if testing.Short() {
 		// skip
