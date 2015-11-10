@@ -44,7 +44,7 @@ func Sign(service CryptoService, s *data.Signed, keys ...data.PublicKey) error {
 		privKeys[key.ID()] = k
 	}
 
-	// Check to ensure we have at least on signing key
+	// Check to ensure we have at least one signing key
 	if len(privKeys) == 0 {
 		return ErrNoKeys{keyIDs: ids}
 	}
@@ -68,7 +68,7 @@ func Sign(service CryptoService, s *data.Signed, keys ...data.PublicKey) error {
 	if len(signatures) < 1 {
 		return ErrInsufficientSignatures{
 			Name: fmt.Sprintf(
-				"Cryptoservice failed to produce any signatures for keys with IDs: %v",
+				"cryptoservice failed to produce any signatures for keys with IDs: %v",
 				ids),
 		}
 	}

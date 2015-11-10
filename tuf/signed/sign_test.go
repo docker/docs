@@ -4,7 +4,6 @@ import (
 	"crypto/rand"
 	"crypto/x509"
 	"encoding/pem"
-	"errors"
 	"io"
 	"testing"
 
@@ -55,7 +54,7 @@ func (mts *FailingCryptoService) GetPrivateKey(keyID string) (data.PrivateKey, s
 	if mts.testKey != nil {
 		return mts.testKey, "testRole", nil
 	}
-	return nil, "", errors.New("Key not found " + keyID)
+	return nil, "", trustmanager.ErrKeyNotFound{KeyID: keyID}
 }
 
 func (mts *FailingCryptoService) RemoveKey(keyID string) error {
