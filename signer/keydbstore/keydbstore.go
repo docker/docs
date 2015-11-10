@@ -58,6 +58,11 @@ func NewKeyDBStore(passphraseRetriever passphrase.Retriever, defaultPassAlias, d
 		cachedKeys:       cachedKeys}, nil
 }
 
+// Name returns a user friendly name for the storage location
+func (s KeyDBStore) Name() string {
+	return "database"
+}
+
 // AddKey stores the contents of a private key. Both name and alias are ignored,
 // we always use Key IDs as name, and don't support aliases
 func (s *KeyDBStore) AddKey(name, alias string, privKey data.PrivateKey) error {

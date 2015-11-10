@@ -7,7 +7,11 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/docker/notary"
 	notaryclient "github.com/docker/notary/client"
+	"github.com/docker/notary/cryptoservice"
+	"github.com/docker/notary/passphrase"
+	"github.com/docker/notary/trustmanager"
 
 	"github.com/docker/notary/tuf/data"
 	"github.com/spf13/cobra"
@@ -93,16 +97,20 @@ func keysList(cmd *cobra.Command, args []string) {
 
 	parseConfig()
 
-	cs := getCryptoService(cmd, trustDir, retriever, true)
+	stores := getKeyStores(cmd, trustDir, retriever, true)
 
-	// Get a map of all the keys/roles
-	keysMap := cs.ListAllKeys()
+	keys := make(map[trustmanager.KeyStore]map[string]string)
+	for _, store := range stores {
+		keys[store] = store.ListKeys()
+	}
 
 	cmd.Println("")
 	cmd.Println("# Root keys: ")
-	for k, v := range keysMap {
-		if v == "root" {
-			cmd.Println(k)
+	for store, keysMap := range keys {
+		for k, v := range keysMap {
+			if v == "root" {
+				cmd.Println(k, " - ", store.Name())
+			}
 		}
 	}
 
@@ -110,17 +118,20 @@ func keysList(cmd *cobra.Command, args []string) {
 	cmd.Println("# Signing keys: ")
 
 	// Get a list of all the keys
-	var sortedKeys []string
-	for k := range keysMap {
-		sortedKeys = append(sortedKeys, k)
-	}
-	// Sort the list of all the keys
-	sort.Strings(sortedKeys)
+	for store, keysMap := range keys {
+		var sortedKeys []string
+		for k := range keysMap {
+			sortedKeys = append(sortedKeys, k)
+		}
 
-	// Print a sorted list of the key/role
-	for _, k := range sortedKeys {
-		if keysMap[k] != "root" {
-			printKey(cmd, k, keysMap[k])
+		// Sort the list of all the keys
+		sort.Strings(sortedKeys)
+
+		// Print a sorted list of the key/role
+		for _, k := range sortedKeys {
+			if keysMap[k] != "root" {
+				printKey(cmd, k, keysMap[k], store.Name())
+			}
 		}
 	}
 }
@@ -143,7 +154,10 @@ func keysGenerateRootKey(cmd *cobra.Command, args []string) {
 
 	parseConfig()
 
-	cs := getCryptoService(cmd, trustDir, retriever, true)
+	cs := cryptoservice.NewCryptoService(
+		"",
+		getKeyStores(cmd, trustDir, retriever, true)...,
+	)
 
 	pubKey, err := cs.Create(data.CanonicalRootRole, algorithm)
 	if err != nil {
@@ -164,7 +178,10 @@ func keysExport(cmd *cobra.Command, args []string) {
 
 	parseConfig()
 
-	cs := getCryptoService(cmd, trustDir, retriever, false)
+	cs := cryptoservice.NewCryptoService(
+		"",
+		getKeyStores(cmd, trustDir, retriever, true)...,
+	)
 
 	exportFile, err := os.Create(exportFilename)
 	if err != nil {
@@ -204,7 +221,10 @@ func keysExportRoot(cmd *cobra.Command, args []string) {
 
 	parseConfig()
 
-	cs := getCryptoService(cmd, trustDir, retriever, false)
+	cs := cryptoservice.NewCryptoService(
+		"",
+		getKeyStores(cmd, trustDir, retriever, true)...,
+	)
 
 	exportFile, err := os.Create(exportFilename)
 	if err != nil {
@@ -236,7 +256,10 @@ func keysImport(cmd *cobra.Command, args []string) {
 
 	parseConfig()
 
-	cs := getCryptoService(cmd, trustDir, retriever, false)
+	cs := cryptoservice.NewCryptoService(
+		"",
+		getKeyStores(cmd, trustDir, retriever, true)...,
+	)
 
 	zipReader, err := zip.OpenReader(importFilename)
 	if err != nil {
@@ -262,7 +285,10 @@ func keysImportRoot(cmd *cobra.Command, args []string) {
 
 	parseConfig()
 
-	cs := getCryptoService(cmd, trustDir, retriever, true)
+	cs := cryptoservice.NewCryptoService(
+		"",
+		getKeyStores(cmd, trustDir, retriever, true)...,
+	)
 
 	importFile, err := os.Open(importFilename)
 	if err != nil {
@@ -277,10 +303,10 @@ func keysImportRoot(cmd *cobra.Command, args []string) {
 	}
 }
 
-func printKey(cmd *cobra.Command, keyPath, alias string) {
+func printKey(cmd *cobra.Command, keyPath, alias, loc string) {
 	keyID := filepath.Base(keyPath)
 	gun := filepath.Dir(keyPath)
-	cmd.Printf("%s - %s - %s\n", gun, alias, keyID)
+	cmd.Printf("%s - %s - %s - %s\n", gun, alias, keyID, loc)
 }
 
 func keysRotate(cmd *cobra.Command, args []string) {
@@ -298,4 +324,29 @@ func keysRotate(cmd *cobra.Command, args []string) {
 	if err := nRepo.RotateKeys(); err != nil {
 		fatalf(err.Error())
 	}
+}
+
+func getKeyStores(cmd *cobra.Command, directory string,
+	ret passphrase.Retriever, withHardware bool) []trustmanager.KeyStore {
+
+	keysPath := filepath.Join(directory, notary.PrivDir)
+	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, ret)
+	if err != nil {
+		fatalf("Failed to create private key store in directory: %s", keysPath)
+	}
+
+	ks := []trustmanager.KeyStore{fileKeyStore}
+
+	if withHardware {
+		yubiStore, err := getYubiKeyStore(fileKeyStore, ret)
+		if err != nil {
+			cmd.Println("No YubiKey detected - using local filesystem only.")
+		} else {
+			// Note that the order is important, since we want to prioritize
+			// the yubikey store
+			ks = []trustmanager.KeyStore{yubiStore, fileKeyStore}
+		}
+	}
+
+	return ks
 }
