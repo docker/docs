@@ -36,7 +36,10 @@ const (
 )
 
 // what key mode to use when generating keys
-var yubikeyKeymode = KeymodeTouch | KeymodePinOnce
+var (
+	yubikeyKeymode = KeymodeTouch | KeymodePinOnce
+	slotIDs        = []int{2, 1, 3, 0}
+)
 
 // SetYubikeyKeyMode - sets the mode when generating yubikey keys.
 // This is to be used for testing.  It does nothing if not building with tag
@@ -522,7 +525,7 @@ func getNextEmptySlot(ctx *pkcs11.Ctx, session pkcs11.SessionHandle) ([]byte, er
 			}
 		}
 	}
-	for i := 0; i < numSlots; i++ {
+	for _, i := range slotIDs {
 		if !taken[i] {
 			return []byte{byte(i)}, nil
 		}
