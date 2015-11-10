@@ -59,7 +59,7 @@ func NewKeyDBStore(passphraseRetriever passphrase.Retriever, defaultPassAlias, d
 }
 
 // Name returns a user friendly name for the storage location
-func (s KeyDBStore) Name() string {
+func (s *KeyDBStore) Name() string {
 	return "database"
 }
 

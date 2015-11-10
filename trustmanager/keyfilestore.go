@@ -47,7 +47,7 @@ func NewKeyFileStore(baseDir string, passphraseRetriever passphrase.Retriever) (
 
 // Name returns a user friendly name for the location this store
 // keeps its data
-func (s KeyFileStore) Name() string {
+func (s *KeyFileStore) Name() string {
 	return fmt.Sprintf("file (%s)", s.SimpleFileStore.BaseDir())
 }
 
@@ -105,7 +105,7 @@ func NewKeyMemoryStore(passphraseRetriever passphrase.Retriever) *KeyMemoryStore
 
 // Name returns a user friendly name for the location this store
 // keeps its data
-func (s KeyMemoryStore) Name() string {
+func (s *KeyMemoryStore) Name() string {
 	return "memory"
 }
 
