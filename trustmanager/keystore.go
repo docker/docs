@@ -46,6 +46,7 @@ type KeyStore interface {
 	RemoveKey(name string) error
 	ExportKey(name string) ([]byte, error)
 	ImportKey(pemBytes []byte, alias string) error
+	Name() string
 }
 
 type cachedKey struct {

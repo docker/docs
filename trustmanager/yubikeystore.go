@@ -580,6 +580,12 @@ func NewYubiKeyStore(backupStore KeyStore, passphraseRetriever passphrase.Retrie
 	return s, nil
 }
 
+// Name returns a user friendly name for the location this store
+// keeps its data
+func (s YubiKeyStore) Name() string {
+	return "yubikey"
+}
+
 func (s *YubiKeyStore) ListKeys() map[string]string {
 	if len(s.keys) > 0 {
 		return buildKeyMap(s.keys)
