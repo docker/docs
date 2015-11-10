@@ -116,12 +116,10 @@ func (cs *CryptoService) RemoveKey(keyID string) (err error) {
 // signatures is adequate.
 func (cs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signature, error) {
 	signatures := make([]data.Signature, 0, len(keyIDs))
-	for _, keyid := range keyIDs {
-		keyName := keyid
-
-		privKey, _, err := cs.GetPrivateKey(keyName)
+	for _, keyID := range keyIDs {
+		privKey, _, err := cs.GetPrivateKey(keyID)
 		if err != nil {
-			logrus.Debugf("error attempting to retrieve private key: %s, %v", keyid, err)
+			logrus.Debugf("error attempting to retrieve private key: %s, %v", keyID, err)
 			continue
 		}
 
@@ -129,15 +127,15 @@ func (cs *CryptoService) Sign(keyIDs []string, payload []byte) ([]data.Signature
 		sig, err := privKey.Sign(rand.Reader, payload, nil)
 		if err != nil {
 			logrus.Debugf("ignoring error attempting to %s sign with keyID: %s, %v",
-				privKey.Algorithm(), keyid, err)
+				privKey.Algorithm(), keyID, err)
 			continue
 		}
 
-		logrus.Debugf("appending %s signature with Key ID: %s", privKey.Algorithm(), keyid)
+		logrus.Debugf("appending %s signature with Key ID: %s", privKey.Algorithm(), keyID)
 
 		// Append signatures to result array
 		signatures = append(signatures, data.Signature{
-			KeyID:     keyid,
+			KeyID:     keyID,
 			Method:    sigAlgo,
 			Signature: sig[:],
 		})
