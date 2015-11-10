@@ -38,6 +38,7 @@ VM_STATUS=$($DOCKER_MACHINE status $VM)
 if [ "$VM_STATUS" != "Running" ]; then
   echo "Starting machine $VM..."
   $DOCKER_MACHINE start $VM
+  yes | $DOCKER_MACHINE regenerate-certs $VM
 fi
 
 echo "Setting environment variables for machine $VM..."
@@ -59,7 +60,6 @@ cat << EOF
 EOF
 echo -e "${BLUE}docker${NC} is configured to use the ${GREEN}$VM${NC} machine with IP ${GREEN}$($DOCKER_MACHINE ip $VM)${NC}"
 echo "For help getting started, check out the docs at https://docs.docker.com"
-echo "NOTE: When using interactive commands, prepend winpty. Examples: 'winpty docker run -it ...', 'winpty docker exec -it ...'."
 echo
 cd
 
