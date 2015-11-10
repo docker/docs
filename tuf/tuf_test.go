@@ -8,7 +8,11 @@ import (
 	"path"
 	"path/filepath"
 	"testing"
+	"time"
 
+	"github.com/docker/notary/cryptoservice"
+	"github.com/docker/notary/passphrase"
+	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/stretchr/testify/require"
@@ -19,6 +23,10 @@ var testGUN = "gun"
 func initRepo(t *testing.T, cryptoService signed.CryptoService) *Repo {
 	rootKey, err := cryptoService.Create("root", testGUN, data.ED25519Key)
 	require.NoError(t, err)
+	return initRepoWithRoot(t, cryptoService, rootKey)
+}
+
+func initRepoWithRoot(t *testing.T, cryptoService signed.CryptoService, rootKey data.PublicKey) *Repo {
 	targetsKey, err := cryptoService.Create("targets", testGUN, data.ED25519Key)
 	require.NoError(t, err)
 	snapshotKey, err := cryptoService.Create("snapshot", testGUN, data.ED25519Key)
@@ -1041,4 +1049,132 @@ func TestGetDelegationRoleKeyMissing(t *testing.T) {
 	_, err := repo.GetDelegationRole("targets/missing_key")
 	require.Error(t, err)
 	require.IsType(t, data.ErrInvalidRole{}, err)
+}
+
+func verifySignatureList(t *testing.T, signed *data.Signed, expectedKeys ...data.PublicKey) {
+	require.Equal(t, len(expectedKeys), len(signed.Signatures))
+	usedKeys := make(map[string]struct{}, len(signed.Signatures))
+	for _, sig := range signed.Signatures {
+		usedKeys[sig.KeyID] = struct{}{}
+	}
+	for _, key := range expectedKeys {
+		_, ok := usedKeys[key.ID()]
+		require.True(t, ok)
+	}
+}
+
+func verifyRootSignatureAgainstKey(t *testing.T, signedRoot *data.Signed, key data.PublicKey) error {
+	roleWithKeys := data.BaseRole{Name: data.CanonicalRootRole, Keys: data.Keys{key.ID(): key}, Threshold: 1}
+	return signed.VerifySignatures(signedRoot, roleWithKeys)
+}
+
+func TestSignRootOldKeyExists(t *testing.T) {
+	gun := "docker/test-sign-root"
+	referenceTime := time.Now()
+
+	cs := cryptoservice.NewCryptoService(trustmanager.NewKeyMemoryStore(
+		passphrase.ConstantRetriever("password")))
+
+	rootPublicKey, err := cs.Create(data.CanonicalRootRole, gun, data.ECDSAKey)
+	require.NoError(t, err)
+	rootPrivateKey, _, err := cs.GetPrivateKey(rootPublicKey.ID())
+	require.NoError(t, err)
+	oldRootCert, err := cryptoservice.GenerateCertificate(rootPrivateKey, gun, referenceTime.AddDate(-9, 0, 0),
+		referenceTime.AddDate(1, 0, 0))
+	require.NoError(t, err)
+	oldRootCertKey := trustmanager.CertToKey(oldRootCert)
+
+	repo := initRepoWithRoot(t, cs, oldRootCertKey)
+
+	// Create a first signature, using the old key.
+	signedRoot, err := repo.SignRoot(data.DefaultExpires(data.CanonicalRootRole))
+	require.NoError(t, err)
+	verifySignatureList(t, signedRoot, oldRootCertKey)
+	err = verifyRootSignatureAgainstKey(t, signedRoot, oldRootCertKey)
+	require.NoError(t, err)
+
+	// Create a new certificate
+	newRootCert, err := cryptoservice.GenerateCertificate(rootPrivateKey, gun, referenceTime, referenceTime.AddDate(10, 0, 0))
+	require.NoError(t, err)
+	newRootCertKey := trustmanager.CertToKey(newRootCert)
+	require.NotEqual(t, oldRootCertKey.ID(), newRootCertKey.ID())
+
+	// Only trust the new certificate
+	err = repo.ReplaceBaseKeys(data.CanonicalRootRole, newRootCertKey)
+	require.NoError(t, err)
+	updatedRootRole, err := repo.GetBaseRole(data.CanonicalRootRole)
+	require.NoError(t, err)
+	updatedRootKeyIDs := updatedRootRole.ListKeyIDs()
+	require.Equal(t, 1, len(updatedRootKeyIDs))
+	require.Equal(t, newRootCertKey.ID(), updatedRootKeyIDs[0])
+
+	// Create a second signature
+	signedRoot, err = repo.SignRoot(data.DefaultExpires(data.CanonicalRootRole))
+	require.NoError(t, err)
+	verifySignatureList(t, signedRoot, oldRootCertKey, newRootCertKey)
+
+	// Verify that the signature can be verified when trusting the old certificate
+	err = verifyRootSignatureAgainstKey(t, signedRoot, oldRootCertKey)
+	require.NoError(t, err)
+	// Verify that the signature can be verified when trusting the new certificate
+	err = verifyRootSignatureAgainstKey(t, signedRoot, newRootCertKey)
+	require.NoError(t, err)
+}
+
+func TestSignRootOldKeyMissing(t *testing.T) {
+	gun := "docker/test-sign-root"
+	referenceTime := time.Now()
+
+	cs := cryptoservice.NewCryptoService(trustmanager.NewKeyMemoryStore(
+		passphrase.ConstantRetriever("password")))
+
+	rootPublicKey, err := cs.Create(data.CanonicalRootRole, gun, data.ECDSAKey)
+	require.NoError(t, err)
+	rootPrivateKey, _, err := cs.GetPrivateKey(rootPublicKey.ID())
+	require.NoError(t, err)
+	oldRootCert, err := cryptoservice.GenerateCertificate(rootPrivateKey, gun, referenceTime.AddDate(-9, 0, 0),
+		referenceTime.AddDate(1, 0, 0))
+	require.NoError(t, err)
+	oldRootCertKey := trustmanager.CertToKey(oldRootCert)
+
+	repo := initRepoWithRoot(t, cs, oldRootCertKey)
+
+	// Create a first signature, using the old key.
+	signedRoot, err := repo.SignRoot(data.DefaultExpires(data.CanonicalRootRole))
+	require.NoError(t, err)
+	verifySignatureList(t, signedRoot, oldRootCertKey)
+	err = verifyRootSignatureAgainstKey(t, signedRoot, oldRootCertKey)
+	require.NoError(t, err)
+
+	// Create a new certificate
+	newRootCert, err := cryptoservice.GenerateCertificate(rootPrivateKey, gun, referenceTime, referenceTime.AddDate(10, 0, 0))
+	require.NoError(t, err)
+	newRootCertKey := trustmanager.CertToKey(newRootCert)
+	require.NotEqual(t, oldRootCertKey.ID(), newRootCertKey.ID())
+
+	// Only trust the new certificate
+	err = repo.ReplaceBaseKeys(data.CanonicalRootRole, newRootCertKey)
+	require.NoError(t, err)
+	updatedRootRole, err := repo.GetBaseRole(data.CanonicalRootRole)
+	require.NoError(t, err)
+	updatedRootKeyIDs := updatedRootRole.ListKeyIDs()
+	require.Equal(t, 1, len(updatedRootKeyIDs))
+	require.Equal(t, newRootCertKey.ID(), updatedRootKeyIDs[0])
+
+	// Now forget all about the old certificate: drop it from the Root carried keys, and set up a new key DB
+	delete(repo.Root.Signed.Keys, oldRootCertKey.ID())
+	repo2 := NewRepo(cs)
+	err = repo2.SetRoot(repo.Root)
+	require.NoError(t, err)
+
+	// Create a second signature
+	signedRoot, err = repo2.SignRoot(data.DefaultExpires(data.CanonicalRootRole))
+	require.NoError(t, err)
+	verifySignatureList(t, signedRoot, newRootCertKey) // Without oldRootCertKey
+
+	// Verify that the signature can be verified when trusting the new certificate
+	err = verifyRootSignatureAgainstKey(t, signedRoot, newRootCertKey)
+	require.NoError(t, err)
+	err = verifyRootSignatureAgainstKey(t, signedRoot, oldRootCertKey)
+	require.Error(t, err)
 }

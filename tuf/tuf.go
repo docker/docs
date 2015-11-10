@@ -151,13 +151,16 @@ func (tr *Repo) RemoveBaseKeys(role string, keyIDs ...string) error {
 		}
 	}
 
-	// remove keys no longer in use by any roles
-	for k := range toDelete {
-		delete(tr.Root.Signed.Keys, k)
-		// remove the signing key from the cryptoservice if it
-		// isn't a root key. Root keys must be kept for rotation
-		// signing
-		if role != data.CanonicalRootRole {
+	// Remove keys no longer in use by any roles, except for root keys.
+	// Root private keys must be kept in tr.cryptoService to be able to sign
+	// for rotation, and root certificates must be kept in tr.Root.SignedKeys
+	// because we are not necessarily storing them elsewhere (tuf.Repo does not
+	// depend on certs.Manager, that is an upper layer), and without storing
+	// the certificates in their x509 form we are not able to do the
+	// util.CanonicalKeyID conversion.
+	if role != data.CanonicalRootRole {
+		for k := range toDelete {
+			delete(tr.Root.Signed.Keys, k)
 			tr.cryptoService.RemoveKey(k)
 		}
 	}
@@ -786,9 +789,18 @@ func (tr *Repo) UpdateTimestamp(s *data.Signed) error {
 	return nil
 }
 
-// SignRoot signs the root
+// SignRoot signs the root, using all keys from the "root" role (i.e. currently trusted)
+// as well as available keys used to sign the previous version, if the public part is
+// carried in tr.Root.Keys and the private key is available (i.e. probably previously
+// trusted keys, to allow rollover).
 func (tr *Repo) SignRoot(expires time.Time) (*data.Signed, error) {
 	logrus.Debug("signing root...")
+
+	oldKeyIDs := make([]string, 0, len(tr.Root.Signatures))
+	for _, oldSig := range tr.Root.Signatures {
+		oldKeyIDs = append(oldKeyIDs, oldSig.KeyID)
+	}
+
 	tr.Root.Signed.Expires = expires
 	tr.Root.Signed.Version++
 	root, err := tr.GetBaseRole(data.CanonicalRootRole)
@@ -799,7 +811,7 @@ func (tr *Repo) SignRoot(expires time.Time) (*data.Signed, error) {
 	if err != nil {
 		return nil, err
 	}
-	signed, err = tr.sign(signed, root)
+	signed, err = tr.sign(signed, root, oldKeyIDs)
 	if err != nil {
 		return nil, err
 	}
@@ -838,7 +850,7 @@ func (tr *Repo) SignTargets(role string, expires time.Time) (*data.Signed, error
 		return nil, err
 	}
 
-	signed, err = tr.sign(signed, targets)
+	signed, err = tr.sign(signed, targets, nil)
 	if err != nil {
 		logrus.Debug("errored signing ", role)
 		return nil, err
@@ -880,7 +892,7 @@ func (tr *Repo) SignSnapshot(expires time.Time) (*data.Signed, error) {
 	if err != nil {
 		return nil, err
 	}
-	signed, err = tr.sign(signed, snapshot)
+	signed, err = tr.sign(signed, snapshot, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -909,7 +921,7 @@ func (tr *Repo) SignTimestamp(expires time.Time) (*data.Signed, error) {
 	if err != nil {
 		return nil, err
 	}
-	signed, err = tr.sign(signed, timestamp)
+	signed, err = tr.sign(signed, timestamp, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -918,8 +930,16 @@ func (tr *Repo) SignTimestamp(expires time.Time) (*data.Signed, error) {
 	return signed, nil
 }
 
-func (tr Repo) sign(signedData *data.Signed, role data.BaseRole) (*data.Signed, error) {
-	if err := signed.Sign(tr.cryptoService, signedData, role.ListKeys(), role.Threshold, nil); err != nil {
+func (tr Repo) sign(signedData *data.Signed, role data.BaseRole, optionalKeyIDs []string) (*data.Signed, error) {
+	optionalKeys := make([]data.PublicKey, 0, len(optionalKeyIDs))
+	for _, kid := range optionalKeyIDs {
+		k, ok := tr.Root.Signed.Keys[kid]
+		if !ok {
+			continue
+		}
+		optionalKeys = append(optionalKeys, k)
+	}
+	if err := signed.Sign(tr.cryptoService, signedData, role.ListKeys(), role.Threshold, optionalKeys); err != nil {
 		return nil, err
 	}
 	return signedData, nil
