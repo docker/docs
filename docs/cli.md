@@ -5,7 +5,6 @@ description = "Description of the Notary CLI"
 keywords = ["docker, notary, trust, image, signing, repository, cli"]
 [menu.main]
 parent="mn_notary"
-weight=4
 +++
 <![end-metadata]-->
 
