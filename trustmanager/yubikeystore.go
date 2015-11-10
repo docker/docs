@@ -343,8 +343,10 @@ func sign(ctx *pkcs11.Ctx, session pkcs11.SessionHandle, pkcs11KeyID []byte, pas
 	// Get the SHA256 of the payload
 	digest := sha256.Sum256(payload)
 
-	touchToSignUI()
-	defer touchDoneCallback()
+	if (yubikeyKeymode & KeymodeTouch) > 0 {
+		touchToSignUI()
+		defer touchDoneCallback()
+	}
 	sig, err = ctx.Sign(session, digest[:])
 	if err != nil {
 		logrus.Debugf("Error while signing: %s", err)
