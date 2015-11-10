@@ -20,11 +20,11 @@ import (
 	"github.com/docker/notary/tuf/utils"
 )
 
-// Sign takes a data.Signed and a key, calculated and adds the signature
+// Sign takes a data.Signed and keys, calculates and adds the signature
 // to the data.Signed
 // N.B. All public keys for a role should be passed so that this function
 //      can correctly clean up signatures that are no longer valid.
-func Sign(service CryptoService, s *data.Signed, keys ...data.PublicKey) error {
+func Sign(service CryptoService, s *data.Signed, keys []data.PublicKey) error {
 	logrus.Debugf("sign called with %d keys", len(keys))
 	signatures := make([]data.Signature, 0, len(s.Signatures)+1)
 	signingKeyIDs := make(map[string]struct{})

@@ -101,7 +101,7 @@ func TestBasicSign(t *testing.T) {
 		Signed: &json.RawMessage{},
 	}
 
-	err = Sign(cs, &testData, key)
+	err = Sign(cs, &testData, []data.PublicKey{key})
 	require.NoError(t, err)
 
 	if len(testData.Signatures) != 1 {
@@ -123,8 +123,8 @@ func TestReSign(t *testing.T) {
 		Signed: &json.RawMessage{},
 	}
 
-	Sign(cs, &testData, key)
-	Sign(cs, &testData, key)
+	Sign(cs, &testData, []data.PublicKey{key})
+	Sign(cs, &testData, []data.PublicKey{key})
 
 	if len(testData.Signatures) != 1 {
 		t.Fatalf("Incorrect number of signatures: %d", len(testData.Signatures))
@@ -146,7 +146,7 @@ func TestMultiSign(t *testing.T) {
 	key1, err := cs.Create(data.CanonicalRootRole, "", data.ED25519Key)
 	require.NoError(t, err)
 
-	Sign(cs, &testData, key1)
+	Sign(cs, &testData, []data.PublicKey{key1})
 
 	// reinitializing cs means it won't know about key1. We want
 	// to attempt to sign passing both key1 and key2, while expecting
@@ -159,8 +159,7 @@ func TestMultiSign(t *testing.T) {
 	Sign(
 		cs,
 		&testData,
-		key1,
-		key2,
+		[]data.PublicKey{key1, key2},
 	)
 
 	if len(testData.Signatures) != 2 {
@@ -186,7 +185,7 @@ func TestSignReturnsNoSigs(t *testing.T) {
 
 	testKey, _ := pem.Decode([]byte(testKeyPEM1))
 	key := data.NewPublicKey(data.RSAKey, testKey.Bytes)
-	err := Sign(failingCryptoService, &testData, key)
+	err := Sign(failingCryptoService, &testData, []data.PublicKey{key})
 
 	if err == nil {
 		t.Fatalf("Expected failure due to no signature being returned by the crypto service")
@@ -214,7 +213,7 @@ func TestSignWithX509(t *testing.T) {
 	testData := data.Signed{
 		Signed: &json.RawMessage{},
 	}
-	err = Sign(mockCryptoService, &testData, tufRSAx509Key)
+	err = Sign(mockCryptoService, &testData, []data.PublicKey{tufRSAx509Key})
 	require.NoError(t, err)
 
 	require.Len(t, testData.Signatures, 1)
@@ -230,7 +229,7 @@ func TestSignRemovesValidSigByInvalidKey(t *testing.T) {
 	key1, err := cs.Create(data.CanonicalRootRole, "", data.ED25519Key)
 	require.NoError(t, err)
 
-	Sign(cs, &testData, key1)
+	Sign(cs, &testData, []data.PublicKey{key1})
 	require.Len(t, testData.Signatures, 1)
 	require.Equal(t, key1.ID(), testData.Signatures[0].KeyID)
 
@@ -239,11 +238,7 @@ func TestSignRemovesValidSigByInvalidKey(t *testing.T) {
 
 	// should remove key1 sig even though it's valid. It no longer appears
 	// in the list of signing keys for the role
-	Sign(
-		cs,
-		&testData,
-		key2,
-	)
+	Sign(cs, &testData, []data.PublicKey{key2})
 
 	require.Len(t, testData.Signatures, 1)
 	require.Equal(t, key2.ID(), testData.Signatures[0].KeyID)
@@ -258,7 +253,7 @@ func TestSignRemovesInvalidSig(t *testing.T) {
 	key1, err := cs.Create(data.CanonicalRootRole, "", data.ED25519Key)
 	require.NoError(t, err)
 
-	Sign(cs, &testData, key1)
+	Sign(cs, &testData, []data.PublicKey{key1})
 	require.Len(t, testData.Signatures, 1)
 	require.Equal(t, key1.ID(), testData.Signatures[0].KeyID)
 
@@ -271,12 +266,7 @@ func TestSignRemovesInvalidSig(t *testing.T) {
 	raw := json.RawMessage([]byte{0xff})
 	testData.Signed = &raw
 	// should remove key1 sig because it's out of date
-	Sign(
-		cs,
-		&testData,
-		key1,
-		key2,
-	)
+	Sign(cs, &testData, []data.PublicKey{key1, key2})
 
 	require.Len(t, testData.Signatures, 1)
 	require.Equal(t, key2.ID(), testData.Signatures[0].KeyID)
