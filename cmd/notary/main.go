@@ -145,7 +145,7 @@ func getPassphraseRetriever() passphrase.Retriever {
 	baseRetriever := passphrase.PromptRetriever()
 	env := map[string]string{
 		"root":     os.Getenv("NOTARY_ROOT_PASSPHRASE"),
-		"targets":  os.Getenv("NOTARY_TARGET_PASSPHRASE"),
+		"targets":  os.Getenv("NOTARY_TARGETS_PASSPHRASE"),
 		"snapshot": os.Getenv("NOTARY_SNAPSHOT_PASSPHRASE"),
 	}
 
