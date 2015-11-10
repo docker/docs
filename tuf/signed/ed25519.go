@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 
 	"github.com/agl/ed25519"
+	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
 )
 
@@ -83,18 +84,13 @@ func (e *Ed25519) Create(role, algorithm string) (data.PublicKey, error) {
 		return nil, errors.New("only ED25519 supported by this cryptoservice")
 	}
 
-	pub, priv, err := ed25519.GenerateKey(rand.Reader)
-	if err != nil {
-		return nil, err
-	}
-	public := data.NewED25519PublicKey(pub[:])
-	private, err := data.NewED25519PrivateKey(*public, priv[:])
+	private, err := trustmanager.GenerateED25519Key(rand.Reader)
 	if err != nil {
 		return nil, err
 	}
 
 	e.addKey(role, private)
-	return public, nil
+	return data.PublicKeyFromPrivate(private), nil
 }
 
 // PublicKeys returns a map of public keys for the ids provided, when those IDs are found
@@ -116,7 +112,10 @@ func (e *Ed25519) GetKey(keyID string) data.PublicKey {
 
 // GetPrivateKey returns a single private key based on the ID
 func (e *Ed25519) GetPrivateKey(keyID string) (data.PrivateKey, string, error) {
-	return e.keys[keyID].privKey, "", nil
+	if k, ok := e.keys[keyID]; ok {
+		return k.privKey, k.role, nil
+	}
+	return nil, "", errors.New("Key not found " + keyID)
 }
 
 // ImportRootKey adds an Ed25519 key to the store as a root key

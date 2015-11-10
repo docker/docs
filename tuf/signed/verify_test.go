@@ -1,15 +1,159 @@
 package signed
 
 import (
+	"errors"
 	"testing"
 	"time"
 
+	"github.com/jfrazelle/go/canonical/json"
 	"github.com/stretchr/testify/assert"
 
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/keys"
-	"github.com/jfrazelle/go/canonical/json"
 )
+
+func TestRoleNoKeys(t *testing.T) {
+	cs := NewEd25519()
+	k, err := cs.Create("root", data.ED25519Key)
+	assert.NoError(t, err)
+	r, err := data.NewRole(
+		"root",
+		1,
+		[]string{},
+		nil,
+		nil,
+	)
+	assert.NoError(t, err)
+	db := keys.NewDB()
+	assert.NoError(t, err)
+	err = db.AddRole(r)
+	assert.NoError(t, err)
+	meta := &data.SignedCommon{Type: "Root", Version: 1, Expires: data.DefaultExpires("root")}
+
+	b, err := json.MarshalCanonical(meta)
+	assert.NoError(t, err)
+	s := &data.Signed{Signed: b}
+	Sign(cs, s, k)
+	err = Verify(s, "root", 1, db)
+	assert.IsType(t, ErrRoleThreshold{}, err)
+}
+
+func TestNotEnoughSigs(t *testing.T) {
+	cs := NewEd25519()
+	k, err := cs.Create("root", data.ED25519Key)
+	assert.NoError(t, err)
+	r, err := data.NewRole(
+		"root",
+		2,
+		[]string{k.ID()},
+		nil,
+		nil,
+	)
+	assert.NoError(t, err)
+	db := keys.NewDB()
+	assert.NoError(t, err)
+	db.AddKey(k)
+	err = db.AddRole(r)
+	assert.NoError(t, err)
+	meta := &data.SignedCommon{Type: "Root", Version: 1, Expires: data.DefaultExpires("root")}
+
+	b, err := json.MarshalCanonical(meta)
+	assert.NoError(t, err)
+	s := &data.Signed{Signed: b}
+	Sign(cs, s, k)
+	err = Verify(s, "root", 1, db)
+	assert.IsType(t, ErrRoleThreshold{}, err)
+}
+
+func TestMoreThanEnoughSigs(t *testing.T) {
+	cs := NewEd25519()
+	k1, err := cs.Create("root", data.ED25519Key)
+	assert.NoError(t, err)
+	k2, err := cs.Create("root", data.ED25519Key)
+	assert.NoError(t, err)
+	r, err := data.NewRole(
+		"root",
+		1,
+		[]string{k1.ID(), k2.ID()},
+		nil,
+		nil,
+	)
+	assert.NoError(t, err)
+	db := keys.NewDB()
+	assert.NoError(t, err)
+	db.AddKey(k1)
+	db.AddKey(k2)
+	err = db.AddRole(r)
+	assert.NoError(t, err)
+	meta := &data.SignedCommon{Type: "Root", Version: 1, Expires: data.DefaultExpires("root")}
+
+	b, err := json.MarshalCanonical(meta)
+	assert.NoError(t, err)
+	s := &data.Signed{Signed: b}
+	Sign(cs, s, k1, k2)
+	assert.Equal(t, 2, len(s.Signatures))
+	err = Verify(s, "root", 1, db)
+	assert.NoError(t, err)
+}
+
+func TestDuplicateSigs(t *testing.T) {
+	cs := NewEd25519()
+	k, err := cs.Create("root", data.ED25519Key)
+	assert.NoError(t, err)
+	r, err := data.NewRole(
+		"root",
+		2,
+		[]string{k.ID()},
+		nil,
+		nil,
+	)
+	assert.NoError(t, err)
+	db := keys.NewDB()
+	assert.NoError(t, err)
+	db.AddKey(k)
+	err = db.AddRole(r)
+	assert.NoError(t, err)
+	meta := &data.SignedCommon{Type: "Root", Version: 1, Expires: data.DefaultExpires("root")}
+
+	b, err := json.MarshalCanonical(meta)
+	assert.NoError(t, err)
+	s := &data.Signed{Signed: b}
+	Sign(cs, s, k)
+	s.Signatures = append(s.Signatures, s.Signatures[0])
+	err = Verify(s, "root", 1, db)
+	assert.IsType(t, ErrRoleThreshold{}, err)
+}
+
+func TestUnknownKeyBelowThreshold(t *testing.T) {
+	cs := NewEd25519()
+	k, err := cs.Create("root", data.ED25519Key)
+	assert.NoError(t, err)
+	unknown, err := cs.Create("root", data.ED25519Key)
+	assert.NoError(t, err)
+	r, err := data.NewRole(
+		"root",
+		2,
+		[]string{k.ID()},
+		nil,
+		nil,
+	)
+	assert.NoError(t, err)
+	db := keys.NewDB()
+	assert.NoError(t, err)
+	db.AddKey(k)
+	db.AddKey(unknown)
+	err = db.AddRole(r)
+	assert.NoError(t, err)
+	meta := &data.SignedCommon{Type: "Root", Version: 1, Expires: data.DefaultExpires("root")}
+
+	b, err := json.MarshalCanonical(meta)
+	assert.NoError(t, err)
+	s := &data.Signed{Signed: b}
+	Sign(cs, s, k, unknown)
+	s.Signatures = append(s.Signatures)
+	err = Verify(s, "root", 1, db)
+	assert.IsType(t, ErrRoleThreshold{}, err)
+}
 
 func Test(t *testing.T) {
 	cryptoService := NewEd25519()
@@ -37,86 +181,10 @@ func Test(t *testing.T) {
 		{
 			name: "unknown role",
 			role: "foo",
-			err:  ErrUnknownRole,
-		},
-		//{
-		//	name: "wrong signature method",
-		//	mut:  func(t *test) { t.s.Signatures[0].Method = "foo" },
-		//	err:  ErrWrongMethod,
-		//},
-		//	{
-		//		name: "signature wrong length",
-		//		mut:  func(t *test) { t.s.Signatures[0].Signature = []byte{0} },
-		//		err:  ErrInvalid,
-		//	},
-		{
-			name: "key missing from role",
-			mut:  func(t *test) { t.roles["root"].KeyIDs = nil },
-			err:  ErrRoleThreshold{},
-		},
-		//	{
-		//		name: "invalid signature",
-		//		mut:  func(t *test) { t.s.Signatures[0].Signature = make([]byte, ed25519.SignatureSize) },
-		//		err:  ErrInvalid,
-		//	},
-		{
-			name: "not enough signatures",
-			mut:  func(t *test) { t.roles["root"].Threshold = 2 },
-			err:  ErrRoleThreshold{},
+			err:  errors.New("tuf: meta file has wrong type"),
 		},
 		{
 			name: "exactly enough signatures",
-		},
-		{
-			name: "more than enough signatures",
-			mut: func(t *test) {
-				k, _ := cryptoService.Create("root", data.ED25519Key)
-				Sign(cryptoService, t.s, k)
-				t.keys = append(t.keys, k)
-				t.roles["root"].KeyIDs = append(t.roles["root"].KeyIDs, k.ID())
-			},
-		},
-		{
-			name: "duplicate key id",
-			mut: func(t *test) {
-				t.roles["root"].Threshold = 2
-				t.s.Signatures = append(t.s.Signatures, t.s.Signatures[0])
-			},
-			err: ErrRoleThreshold{},
-		},
-		{
-			name: "unknown key",
-			mut: func(t *test) {
-				k, _ := cryptoService.Create("root", data.ED25519Key)
-				Sign(cryptoService, t.s, k)
-			},
-		},
-		{
-			name: "unknown key below threshold",
-			mut: func(t *test) {
-				k, _ := cryptoService.Create("root", data.ED25519Key)
-				Sign(cryptoService, t.s, k)
-				t.roles["root"].Threshold = 2
-			},
-			err: ErrRoleThreshold{},
-		},
-		{
-			name: "unknown keys in db",
-			mut: func(t *test) {
-				k, _ := cryptoService.Create("root", data.ED25519Key)
-				Sign(cryptoService, t.s, k)
-				t.keys = append(t.keys, k)
-			},
-		},
-		{
-			name: "unknown keys in db below threshold",
-			mut: func(t *test) {
-				k, _ := cryptoService.Create("root", data.ED25519Key)
-				Sign(cryptoService, t.s, k)
-				t.keys = append(t.keys, k)
-				t.roles["root"].Threshold = 2
-			},
-			err: ErrRoleThreshold{},
 		},
 		{
 			name: "wrong type",
@@ -136,6 +204,7 @@ func Test(t *testing.T) {
 		},
 	}
 	for _, run := range tests {
+		db := keys.NewDB()
 		if run.role == "" {
 			run.role = "root"
 		}
@@ -151,6 +220,16 @@ func Test(t *testing.T) {
 		}
 		if run.keys == nil && run.s == nil {
 			k, _ := cryptoService.Create("root", data.ED25519Key)
+			db.AddKey(k)
+			r, err := data.NewRole(
+				"root",
+				1,
+				[]string{k.ID()},
+				nil,
+				nil,
+			)
+			assert.NoError(t, err)
+			db.AddRole(r)
 			meta := &data.SignedCommon{Type: run.typ, Version: run.ver, Expires: *run.exp}
 
 			b, err := json.MarshalCanonical(meta)
@@ -158,30 +237,9 @@ func Test(t *testing.T) {
 			s := &data.Signed{Signed: b}
 			Sign(cryptoService, s, k)
 			run.s = s
-			run.keys = []data.PublicKey{k}
-		}
-		if run.roles == nil {
-			run.roles = map[string]*data.Role{
-				"root": {
-					RootRole: data.RootRole{
-						KeyIDs:    []string{run.keys[0].ID()},
-						Threshold: 1,
-					},
-					Name: "root",
-				},
-			}
 		}
 		if run.mut != nil {
 			run.mut(&run)
-		}
-
-		db := keys.NewDB()
-		for _, k := range run.keys {
-			db.AddKey(k)
-		}
-		for _, r := range run.roles {
-			err := db.AddRole(r)
-			assert.NoError(t, err)
 		}
 
 		err := Verify(run.s, run.role, minVer, db)
