@@ -36,7 +36,12 @@ const (
 )
 
 // what key mode to use when generating keys
-var yubikeyKeymode = KeymodeTouch | KeymodePinOnce
+var (
+	yubikeyKeymode = KeymodeTouch | KeymodePinOnce
+	// order in which to prefer token locations on the yubikey.
+	// corresponds to: 9c, 9e, 9d, 9a
+	slotIDs = []int{2, 1, 3, 0}
+)
 
 // SetYubikeyKeyMode - sets the mode when generating yubikey keys.
 // This is to be used for testing.  It does nothing if not building with tag
@@ -522,9 +527,11 @@ func getNextEmptySlot(ctx *pkcs11.Ctx, session pkcs11.SessionHandle) ([]byte, er
 			}
 		}
 	}
-	for i := 0; i < numSlots; i++ {
-		if !taken[i] {
-			return []byte{byte(i)}, nil
+	// iterate the token locations in our preferred order and use the first
+	// available one. Otherwise exit the loop and return an error.
+	for _, loc := range slotIDs {
+		if !taken[loc] {
+			return []byte{byte(loc)}, nil
 		}
 	}
 	return nil, errors.New("Yubikey has no available slots.")
