@@ -115,7 +115,7 @@ func (e *Ed25519) GetPrivateKey(keyID string) (data.PrivateKey, string, error) {
 	if k, ok := e.keys[keyID]; ok {
 		return k.privKey, k.role, nil
 	}
-	return nil, "", errors.New("Key not found " + keyID)
+	return nil, "", trustmanager.ErrKeyNotFound{KeyID: keyID}
 }
 
 // ImportRootKey adds an Ed25519 key to the store as a root key
