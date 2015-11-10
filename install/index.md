@@ -59,7 +59,7 @@ Docker Trusted Registry requires that you use the latest version of the commerci
 
 ## Where to go next
 
-* If you are installing on physical infrastructure or a cloud provider, first install the [commercially supported Docker Engine](install-csengine.md) and then go on to install [Trusted Registry](install-dtry.md).
+* If you are installing on physical infrastructure or a cloud provider, first install the [commercially supported Docker Engine](install-csengine.md) and then go on to install [Trusted Registry](install-dtr.md).
 
 * If you are installing on AWS and would like to use a pre-built AMI and a license you purchased, see [bringing your own license (BYOL)](dtr-ami-byol-launch.md).
 

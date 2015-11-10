@@ -33,4 +33,4 @@ When installing Docker Trusted Registry, you must first obtain your license, the
 **Note** The Licenses page is where you download the CS engine script by selecting the operating system it needs to run on.
 
 ## See also
-* For information on how to download the CS engine, see [Installing the CS engine](install-csengine.md).
+* For information on how to download the CS engine, see [Installing the CS engine](install/install-csengine.md).

@@ -38,7 +38,7 @@ Enterprise license. If you already installed CS Engine, you should already have 
 
 Also, you must have a license for Docker Trusted Registry. This license allows
 you to run both Docker Trusted Registry and CS Engine. Before installing,
-[purchase a license or sign up for a free, 30 day trial license]((https://hub.docker.com/enterprise/)).
+[purchase a license or sign up for a free, 30 day trial license](https://hub.docker.com/enterprise/).
 
 
 ## Install Docker Trusted Registry

@@ -368,5 +368,5 @@ If you need to stop and/or start the Trusted Registry (for example, upgrading, o
 * To configure for your environment, see the
 [Configuration instructions](configuration.md).
 * To use Docker Trusted Registry, see the [User guide](userguide.md).
-* To upgrade, see the [Upgrade guide](upgrade.md).
+* To upgrade, see the [Upgrade guide](install/upgrade.md).
 * To see previous changes, see the [release notes](release-notes.md).

@@ -43,7 +43,7 @@ You should be able to complete this guide in about thirty minutes.
 > **Note:** This guide assumes you have installed a working instance of Docker Trusted Registry
 > reachable at dtr.yourdomain.com. If you need help installing and configuring
 > Docker Trusted Registry, please consult the
-[installation instructions](install.md).
+[installation instructions](install/index.md).
 
 ## Pulling the official Jenkins image
 
