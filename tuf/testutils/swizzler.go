@@ -72,7 +72,7 @@ func serializeMetadata(cs signed.CryptoService, s *data.Signed, role string,
 		return nil, ErrNoKeyForRole{role}
 	}
 
-	if err := signed.Sign(cs, s, pubKeys...); err != nil {
+	if err := signed.Sign(cs, s, pubKeys); err != nil {
 		if _, ok := err.(signed.ErrNoKeys); ok {
 			return nil, ErrNoKeyForRole{Role: role}
 		}

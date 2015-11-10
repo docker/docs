@@ -23,7 +23,7 @@ func TestRoleNoKeys(t *testing.T) {
 	b, err := json.MarshalCanonical(meta)
 	require.NoError(t, err)
 	s := &data.Signed{Signed: (*json.RawMessage)(&b)}
-	Sign(cs, s, k)
+	Sign(cs, s, []data.PublicKey{k})
 	err = Verify(s, roleWithKeys, 1)
 	require.IsType(t, ErrRoleThreshold{}, err)
 }
@@ -40,7 +40,7 @@ func TestNotEnoughSigs(t *testing.T) {
 	b, err := json.MarshalCanonical(meta)
 	require.NoError(t, err)
 	s := &data.Signed{Signed: (*json.RawMessage)(&b)}
-	Sign(cs, s, k)
+	Sign(cs, s, []data.PublicKey{k})
 	err = Verify(s, roleWithKeys, 1)
 	require.IsType(t, ErrRoleThreshold{}, err)
 }
@@ -58,7 +58,7 @@ func TestMoreThanEnoughSigs(t *testing.T) {
 	b, err := json.MarshalCanonical(meta)
 	require.NoError(t, err)
 	s := &data.Signed{Signed: (*json.RawMessage)(&b)}
-	Sign(cs, s, k1, k2)
+	Sign(cs, s, []data.PublicKey{k1, k2})
 	require.Equal(t, 2, len(s.Signatures))
 	err = Verify(s, roleWithKeys, 1)
 	require.NoError(t, err)
@@ -75,7 +75,7 @@ func TestValidSigWithIncorrectKeyID(t *testing.T) {
 	b, err := json.MarshalCanonical(meta)
 	require.NoError(t, err)
 	s := &data.Signed{Signed: (*json.RawMessage)(&b)}
-	Sign(cs, s, k1)
+	Sign(cs, s, []data.PublicKey{k1})
 	require.Equal(t, 1, len(s.Signatures))
 	s.Signatures[0].KeyID = "invalidIDA"
 	err = Verify(s, roleWithKeys, 1)
@@ -94,7 +94,7 @@ func TestDuplicateSigs(t *testing.T) {
 	b, err := json.MarshalCanonical(meta)
 	require.NoError(t, err)
 	s := &data.Signed{Signed: (*json.RawMessage)(&b)}
-	Sign(cs, s, k)
+	Sign(cs, s, []data.PublicKey{k})
 	s.Signatures = append(s.Signatures, s.Signatures[0])
 	err = Verify(s, roleWithKeys, 1)
 	require.IsType(t, ErrRoleThreshold{}, err)
@@ -113,7 +113,7 @@ func TestUnknownKeyBelowThreshold(t *testing.T) {
 	b, err := json.MarshalCanonical(meta)
 	require.NoError(t, err)
 	s := &data.Signed{Signed: (*json.RawMessage)(&b)}
-	Sign(cs, s, k, unknown)
+	Sign(cs, s, []data.PublicKey{k, unknown})
 	s.Signatures = append(s.Signatures)
 	err = Verify(s, roleWithKeys, 1)
 	require.IsType(t, ErrRoleThreshold{}, err)
@@ -188,7 +188,7 @@ func Test(t *testing.T) {
 			b, err := json.MarshalCanonical(meta)
 			require.NoError(t, err)
 			s := &data.Signed{Signed: (*json.RawMessage)(&b)}
-			Sign(cryptoService, s, k)
+			Sign(cryptoService, s, []data.PublicKey{k})
 			run.s = s
 		}
 		if run.mut != nil {

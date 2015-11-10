@@ -387,7 +387,7 @@ func TestValidateRootRotation(t *testing.T) {
 
 	r, err = repo.SignRoot(data.DefaultExpires(data.CanonicalRootRole))
 	require.NoError(t, err)
-	err = signed.Sign(crypto, r, rootKey, oldRootKey)
+	err = signed.Sign(crypto, r, []data.PublicKey{rootKey, oldRootKey})
 	require.NoError(t, err)
 
 	rt, err := data.RootFromSigned(r)
@@ -430,7 +430,7 @@ func TestRootRotationNotSignedWithOldKeys(t *testing.T) {
 
 	r, err = repo.SignRoot(data.DefaultExpires(data.CanonicalRootRole))
 	require.NoError(t, err)
-	err = signed.Sign(crypto, r, rootKey)
+	err = signed.Sign(crypto, r, []data.PublicKey{rootKey})
 	require.NoError(t, err)
 
 	rt, err := data.RootFromSigned(r)
