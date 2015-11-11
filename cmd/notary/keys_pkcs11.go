@@ -8,9 +8,5 @@ import (
 )
 
 func getYubiKeyStore(fileKeyStore trustmanager.KeyStore, ret passphrase.Retriever) (trustmanager.KeyStore, error) {
-	yubiStore, err := trustmanager.NewYubiKeyStore(fileKeyStore, ret)
-	if err != nil {
-		return nil, err
-	}
-	return yubiStore, nil
+	return trustmanager.NewYubiKeyStore(fileKeyStore, ret)
 }

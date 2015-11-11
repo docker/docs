@@ -3,6 +3,8 @@
 package main
 
 import (
+	"errors"
+
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/trustmanager"
 )
