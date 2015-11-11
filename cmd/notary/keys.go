@@ -137,6 +137,8 @@ func keysList(cmd *cobra.Command, args []string) {
 }
 
 func keysGenerateRootKey(cmd *cobra.Command, args []string) {
+	// We require one or no arguments (since we have a default value), but if the
+	// user passes in more than one argument, we error out.
 	if len(args) > 1 {
 		cmd.Usage()
 		fatalf("Please provide only one Algorithm as an argument to generate (rsa, ecdsa)")

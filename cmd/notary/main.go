@@ -82,13 +82,13 @@ func parseConfig() {
 	}
 
 	// At this point we either have the default value or the one set by the config.
-	// Either way, the command-line flag has precedence and overwrives the value
+	// Either way, the command-line flag has precedence and overwrites the value
 	if trustDir != "" {
 		mainViper.Set("trust_dir", trustDir)
 	}
 
 	// Expands all the possible ~/ that have been given, either through -d or config
-	// If there is no error, user it, if not, attempt to use whatever the user gave us
+	// If there is no error, use it, if not, attempt to use whatever the user gave us
 	expandedTrustDir, err := homedir.Expand(mainViper.GetString("trust_dir"))
 	if err == nil {
 		mainViper.Set("trust_dir", expandedTrustDir)
