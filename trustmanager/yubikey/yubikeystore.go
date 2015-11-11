@@ -162,10 +162,10 @@ func (y YubiPrivateKey) SignatureAlgorithm() data.SigAlgorithm {
 
 func (y *YubiPrivateKey) Sign(rand io.Reader, msg []byte, opts crypto.SignerOpts) ([]byte, error) {
 	ctx, session, err := SetupHSMEnv(pkcs11Lib, y.libLoader)
+	defer cleanup(ctx, session)
 	if err != nil {
 		return nil, err
 	}
-	defer cleanup(ctx, session)
 
 	v := signed.Verifiers[data.ECDSASignature]
 	for i := 0; i < sigAttempts; i++ {
@@ -294,7 +294,7 @@ func getECDSAKey(ctx IPKCS11Ctx, session pkcs11.SessionHandle, pkcs11KeyID []byt
 		return nil, "", errors.New("no matching keys found inside of yubikey")
 	}
 
-	// Retrieve the public-key material to be able to create a new HSMRSAKey
+	// Retrieve the public-key material to be able to create a new ECSAKey
 	attr, err := ctx.GetAttributeValue(session, obj[0], attrTemplate)
 	if err != nil {
 		logrus.Debugf("Failed to get Attribute for: %v", obj[0])
@@ -464,7 +464,7 @@ func yubiListKeys(ctx IPKCS11Ctx, session pkcs11.SessionHandle) (keys map[string
 			cert *x509.Certificate
 			slot []byte
 		)
-		// Retrieve the public-key material to be able to create a new HSMRSAKey
+		// Retrieve the public-key material to be able to create a new ECDSA
 		attr, err := ctx.GetAttributeValue(session, obj, attrTemplate)
 		if err != nil {
 			logrus.Debugf("Failed to get Attribute for: %v", obj)
@@ -612,11 +612,11 @@ func (s *YubiKeyStore) ListKeys() map[string]string {
 		return buildKeyMap(s.keys)
 	}
 	ctx, session, err := SetupHSMEnv(pkcs11Lib, s.libLoader)
+	defer cleanup(ctx, session)
 	if err != nil {
 		logrus.Debugf("Failed to initialize PKCS11 environment: %s", err.Error())
 		return nil
 	}
-	defer cleanup(ctx, session)
 	keys, err := yubiListKeys(ctx, session)
 	if err != nil {
 		logrus.Debugf("Failed to list key from the yubikey: %s", err.Error())
@@ -640,11 +640,11 @@ func (s *YubiKeyStore) addKey(
 	}
 
 	ctx, session, err := SetupHSMEnv(pkcs11Lib, s.libLoader)
+	defer cleanup(ctx, session)
 	if err != nil {
 		logrus.Debugf("Failed to initialize PKCS11 environment: %s", err.Error())
 		return err
 	}
-	defer cleanup(ctx, session)
 
 	if k, ok := s.keys[keyID]; ok {
 		if k.role == role {
@@ -683,11 +683,11 @@ func (s *YubiKeyStore) addKey(
 // backup store)
 func (s *YubiKeyStore) GetKey(keyID string) (data.PrivateKey, string, error) {
 	ctx, session, err := SetupHSMEnv(pkcs11Lib, s.libLoader)
+	defer cleanup(ctx, session)
 	if err != nil {
 		logrus.Debugf("Failed to initialize PKCS11 environment: %s", err.Error())
 		return nil, "", err
 	}
-	defer cleanup(ctx, session)
 
 	key, ok := s.keys[keyID]
 	if !ok {
@@ -715,11 +715,11 @@ func (s *YubiKeyStore) GetKey(keyID string) (data.PrivateKey, string, error) {
 // backup store)
 func (s *YubiKeyStore) RemoveKey(keyID string) error {
 	ctx, session, err := SetupHSMEnv(pkcs11Lib, s.libLoader)
+	defer cleanup(ctx, session)
 	if err != nil {
 		logrus.Debugf("Failed to initialize PKCS11 environment: %s", err.Error())
 		return nil
 	}
-	defer cleanup(ctx, session)
 	key, ok := s.keys[keyID]
 	if !ok {
 		return errors.New("Key not present in yubikey")
@@ -756,9 +756,17 @@ func (s *YubiKeyStore) ImportKey(pemBytes []byte, keyPath string) error {
 }
 
 func cleanup(ctx IPKCS11Ctx, session pkcs11.SessionHandle) {
-	ctx.CloseSession(session)
-	ctx.Finalize()
-	ctx.Destroy()
+	if ctx != nil {
+		err := ctx.CloseSession(session)
+		if err != nil {
+			logrus.Debugf("Error closing session: %s", err.Error())
+		}
+		err = ctx.Finalize()
+		if err != nil {
+			logrus.Debugf("Error finalizing: %s", err.Error())
+		}
+		ctx.Destroy()
+	}
 }
 
 // SetupHSMEnv is a method that depends on the existences
@@ -775,15 +783,18 @@ func SetupHSMEnv(libraryPath string, libLoader pkcs11LibLoader) (
 	}
 
 	if err := p.Initialize(); err != nil {
+		defer cleanup(p, 0)
 		return nil, 0, fmt.Errorf("Initialize error %s", err.Error())
 	}
 
 	slots, err := p.GetSlotList(true)
 	if err != nil {
+		defer cleanup(p, 0)
 		return nil, 0, fmt.Errorf("Failed to list HSM slots %s", err)
 	}
 	// Check to see if we got any slots from the HSM.
 	if len(slots) < 1 {
+		defer cleanup(p, 0)
 		return nil, 0, fmt.Errorf("No HSM Slots found")
 	}
 
@@ -791,6 +802,7 @@ func SetupHSMEnv(libraryPath string, libLoader pkcs11LibLoader) (
 	// CKF_RW_SESSION: TRUE if the session is read/write; FALSE if the session is read-only
 	session, err := p.OpenSession(slots[0], pkcs11.CKF_SERIAL_SESSION|pkcs11.CKF_RW_SESSION)
 	if err != nil {
+		defer cleanup(p, 0)
 		return nil, 0, fmt.Errorf("Failed to Start Session with HSM %s", err)
 	}
 
@@ -803,10 +815,10 @@ func YubikeyAccessible() bool {
 		return false
 	}
 	ctx, session, err := SetupHSMEnv(pkcs11Lib, defaultLoader)
+	defer cleanup(ctx, session)
 	if err != nil {
 		return false
 	}
-	defer cleanup(ctx, session)
 	return true
 }
 
