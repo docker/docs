@@ -580,6 +580,12 @@ func NewYubiKeyStore(backupStore KeyStore, passphraseRetriever passphrase.Retrie
 	return s, nil
 }
 
+// Name returns a user friendly name for the location this store
+// keeps its data
+func (s YubiKeyStore) Name() string {
+	return "yubikey"
+}
+
 func (s *YubiKeyStore) ListKeys() map[string]string {
 	if len(s.keys) > 0 {
 		return buildKeyMap(s.keys)
@@ -701,12 +707,15 @@ func (s *YubiKeyStore) ExportKey(keyID string) ([]byte, error) {
 }
 
 // ImportKey imports a root key into a Yubikey
-func (s *YubiKeyStore) ImportKey(pemBytes []byte, keyID string) error {
-	logrus.Debugf("Attempting to import: %s key inside of YubiKeyStore", keyID)
+func (s *YubiKeyStore) ImportKey(pemBytes []byte, keyPath string) error {
+	logrus.Debugf("Attempting to import: %s key inside of YubiKeyStore", keyPath)
 	privKey, _, err := GetPasswdDecryptBytes(
 		s.passRetriever, pemBytes, "", "imported root")
 	if err != nil {
 		return err
+	}
+	if keyPath != data.CanonicalRootRole {
+		return fmt.Errorf("yubikey only supports storing root keys")
 	}
 	return s.addKey(privKey.ID(), "root", privKey, false)
 }

@@ -1,6 +1,7 @@
 package trustmanager
 
 import (
+	"fmt"
 	"path/filepath"
 	"strings"
 	"sync"
@@ -42,6 +43,12 @@ func NewKeyFileStore(baseDir string, passphraseRetriever passphrase.Retriever) (
 	return &KeyFileStore{SimpleFileStore: *fileStore,
 		Retriever:  passphraseRetriever,
 		cachedKeys: cachedKeys}, nil
+}
+
+// Name returns a user friendly name for the location this store
+// keeps its data
+func (s *KeyFileStore) Name() string {
+	return fmt.Sprintf("file (%s)", s.SimpleFileStore.BaseDir())
 }
 
 // AddKey stores the contents of a PEM-encoded private key as a PEM block
@@ -94,6 +101,12 @@ func NewKeyMemoryStore(passphraseRetriever passphrase.Retriever) *KeyMemoryStore
 	return &KeyMemoryStore{MemoryFileStore: *memStore,
 		Retriever:  passphraseRetriever,
 		cachedKeys: cachedKeys}
+}
+
+// Name returns a user friendly name for the location this store
+// keeps its data
+func (s *KeyMemoryStore) Name() string {
+	return "memory"
 }
 
 // AddKey stores the contents of a PEM-encoded private key as a PEM block
