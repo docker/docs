@@ -185,9 +185,8 @@ func addECDSAKey(
 	role string,
 	backupStore KeyStore,
 ) error {
-	logrus.Debugf("Got into add key with key: %s\n", privKey.ID())
+	logrus.Debugf("Attempting to add key to yubikey with ID: %s", privKey.ID())
 
-	// TODO(diogo): Figure out CKU_SO with yubikey
 	err := login(ctx, session, passRetriever, pkcs11.CKU_SO, SO_USER_PIN)
 	if err != nil {
 		return err
@@ -201,7 +200,6 @@ func addECDSAKey(
 	}
 
 	ecdsaPrivKeyD := ensurePrivateKeySize(ecdsaPrivKey.D.Bytes())
-	logrus.Debugf("Getting D bytes: %v\n", ecdsaPrivKeyD)
 
 	template, err := NewCertificate(role)
 	if err != nil {
@@ -262,16 +260,16 @@ func getECDSAKey(ctx *pkcs11.Ctx, session pkcs11.SessionHandle, pkcs11KeyID []by
 	}
 
 	if err := ctx.FindObjectsInit(session, findTemplate); err != nil {
-		logrus.Debugf("Failed to init: %s\n", err.Error())
+		logrus.Debugf("Failed to init: %s", err.Error())
 		return nil, "", err
 	}
-	obj, b, err := ctx.FindObjects(session, 1)
+	obj, _, err := ctx.FindObjects(session, 1)
 	if err != nil {
-		logrus.Debugf("Failed to find: %s %v\n", err.Error(), b)
+		logrus.Debugf("Failed to find objects: %v", err)
 		return nil, "", err
 	}
 	if err := ctx.FindObjectsFinal(session); err != nil {
-		logrus.Debugf("Failed to finalize: %s\n", err.Error())
+		logrus.Debugf("Failed to finalize: %s", err.Error())
 		return nil, "", err
 	}
 	if len(obj) != 1 {
@@ -282,7 +280,7 @@ func getECDSAKey(ctx *pkcs11.Ctx, session pkcs11.SessionHandle, pkcs11KeyID []by
 	// Retrieve the public-key material to be able to create a new HSMRSAKey
 	attr, err := ctx.GetAttributeValue(session, obj[0], attrTemplate)
 	if err != nil {
-		logrus.Debugf("Failed to get Attribute for: %v\n", obj[0])
+		logrus.Debugf("Failed to get Attribute for: %v", obj[0])
 		return nil, "", err
 	}
 
@@ -302,8 +300,6 @@ func getECDSAKey(ctx *pkcs11.Ctx, session pkcs11.SessionHandle, pkcs11KeyID []by
 		return nil, "", err
 	}
 
-	// TODO(diogo): Actually get the right alias from the certificate instead of
-	// alwars returning data.CanonicalRootRole
 	return data.NewECDSAPublicKey(pubBytes), data.CanonicalRootRole, nil
 }
 
@@ -324,13 +320,16 @@ func sign(ctx *pkcs11.Ctx, session pkcs11.SessionHandle, pkcs11KeyID []byte, pas
 	}
 
 	if err := ctx.FindObjectsInit(session, privateKeyTemplate); err != nil {
+		logrus.Debugf("Failed to init find objects: %s", err.Error())
 		return nil, err
 	}
 	obj, _, err := ctx.FindObjects(session, 1)
 	if err != nil {
+		logrus.Debugf("Failed to find objects: %v", err)
 		return nil, err
 	}
 	if err = ctx.FindObjectsFinal(session); err != nil {
+		logrus.Debugf("Failed to finalize find objects: %s", err.Error())
 		return nil, err
 	}
 	if len(obj) != 1 {
@@ -374,27 +373,27 @@ func yubiRemoveKey(ctx *pkcs11.Ctx, session pkcs11.SessionHandle, pkcs11KeyID []
 	}
 
 	if err := ctx.FindObjectsInit(session, template); err != nil {
-		logrus.Printf("Failed to init: %s\n", err.Error())
+		logrus.Debugf("Failed to init find objects: %s", err.Error())
 		return err
 	}
 	obj, b, err := ctx.FindObjects(session, 1)
 	if err != nil {
-		logrus.Printf("Failed to find: %s %v\n", err.Error(), b)
+		logrus.Debugf("Failed to find objects: %s %v", err.Error(), b)
 		return err
 	}
 	if err := ctx.FindObjectsFinal(session); err != nil {
-		logrus.Printf("Failed to finalize: %s\n", err.Error())
+		logrus.Debugf("Failed to finalize find objects: %s", err.Error())
 		return err
 	}
 	if len(obj) != 1 {
-		logrus.Printf("should have found one object")
+		logrus.Debugf("should have found exactly one object")
 		return err
 	}
 
 	// Delete the certificate
 	err = ctx.DestroyObject(session, obj[0])
 	if err != nil {
-		logrus.Printf("Failed to delete cert")
+		logrus.Debugf("Failed to delete cert")
 		return err
 	}
 	return nil
@@ -414,7 +413,7 @@ func yubiListKeys(ctx *pkcs11.Ctx, session pkcs11.SessionHandle) (keys map[strin
 	}
 
 	if err = ctx.FindObjectsInit(session, findTemplate); err != nil {
-		logrus.Debugf("Failed to init: %s\n", err.Error())
+		logrus.Debugf("Failed to init: %s", err.Error())
 		return
 	}
 	objs, b, err := ctx.FindObjects(session, numSlots)
@@ -430,13 +429,13 @@ func yubiListKeys(ctx *pkcs11.Ctx, session pkcs11.SessionHandle) (keys map[strin
 		objs = append(objs, o...)
 	}
 	if err != nil {
-		logrus.Debugf("Failed to find: %s %v\n", err.Error(), b)
+		logrus.Debugf("Failed to find: %s %v", err.Error(), b)
 		if len(objs) == 0 {
 			return nil, err
 		}
 	}
 	if err = ctx.FindObjectsFinal(session); err != nil {
-		logrus.Debugf("Failed to finalize: %s\n", err.Error())
+		logrus.Debugf("Failed to finalize: %s", err.Error())
 		return
 	}
 	if len(objs) == 0 {
@@ -451,7 +450,7 @@ func yubiListKeys(ctx *pkcs11.Ctx, session pkcs11.SessionHandle) (keys map[strin
 		// Retrieve the public-key material to be able to create a new HSMRSAKey
 		attr, err := ctx.GetAttributeValue(session, obj, attrTemplate)
 		if err != nil {
-			logrus.Debugf("Failed to get Attribute for: %v\n", obj)
+			logrus.Debugf("Failed to get Attribute for: %v", obj)
 			continue
 		}
 
@@ -502,7 +501,7 @@ func getNextEmptySlot(ctx *pkcs11.Ctx, session pkcs11.SessionHandle) ([]byte, er
 	}
 
 	if err := ctx.FindObjectsInit(session, findTemplate); err != nil {
-		logrus.Debugf("Failed to init: %s\n", err.Error())
+		logrus.Debugf("Failed to init: %s", err.Error())
 		return nil, err
 	}
 	objs, b, err := ctx.FindObjects(session, numSlots)
@@ -521,14 +520,13 @@ func getNextEmptySlot(ctx *pkcs11.Ctx, session pkcs11.SessionHandle) ([]byte, er
 	}
 	taken := make(map[int]bool)
 	if err != nil {
-		logrus.Debugf("Failed to find: %s %v\n", err.Error(), b)
+		logrus.Debugf("Failed to find: %s %v", err.Error(), b)
 		return nil, err
 	}
 	for _, obj := range objs {
 		// Retrieve the slot ID
 		attr, err := ctx.GetAttributeValue(session, obj, attrTemplate)
 		if err != nil {
-			logrus.Debugf("Failed to get Attribute for: %v\n", obj)
 			continue
 		}
 
@@ -592,14 +590,17 @@ func (s *YubiKeyStore) ListKeys() map[string]string {
 	}
 	ctx, session, err := SetupHSMEnv(pkcs11Lib)
 	if err != nil {
+		logrus.Debugf("Failed to initialize PKCS11 environment: %s", err.Error())
 		return nil
 	}
 	defer cleanup(ctx, session)
 	keys, err := yubiListKeys(ctx, session)
 	if err != nil {
+		logrus.Debugf("Failed to list key from the yubikey: %s", err.Error())
 		return nil
 	}
 	s.keys = keys
+
 	return buildKeyMap(keys)
 }
 
@@ -612,11 +613,12 @@ func (s *YubiKeyStore) addKey(
 	keyID, role string, privKey data.PrivateKey, backup bool) error {
 	// We only allow adding root keys for now
 	if role != data.CanonicalRootRole {
-		return fmt.Errorf("yubikey only supports storing root keys, got %s for key: %s\n", role, keyID)
+		return fmt.Errorf("yubikey only supports storing root keys, got %s for key: %s", role, keyID)
 	}
 
 	ctx, session, err := SetupHSMEnv(pkcs11Lib)
 	if err != nil {
+		logrus.Debugf("Failed to initialize PKCS11 environment: %s", err.Error())
 		return err
 	}
 	defer cleanup(ctx, session)
@@ -630,9 +632,10 @@ func (s *YubiKeyStore) addKey(
 
 	slot, err := getNextEmptySlot(ctx, session)
 	if err != nil {
+		logrus.Debugf("Failed to get an empty yubikey slot: %s", err.Error())
 		return err
 	}
-	logrus.Debugf("Using yubikey slot %v", slot)
+	logrus.Debugf("Attempting to store key using yubikey slot %v", slot)
 
 	backupStore := s.backupStore
 	if !backup {
@@ -648,6 +651,8 @@ func (s *YubiKeyStore) addKey(
 		}
 		return nil
 	}
+	logrus.Debugf("Failed to add key to yubikey: %v", err)
+
 	return err
 }
 
@@ -656,6 +661,7 @@ func (s *YubiKeyStore) addKey(
 func (s *YubiKeyStore) GetKey(keyID string) (data.PrivateKey, string, error) {
 	ctx, session, err := SetupHSMEnv(pkcs11Lib)
 	if err != nil {
+		logrus.Debugf("Failed to initialize PKCS11 environment: %s", err.Error())
 		return nil, "", err
 	}
 	defer cleanup(ctx, session)
@@ -667,11 +673,12 @@ func (s *YubiKeyStore) GetKey(keyID string) (data.PrivateKey, string, error) {
 
 	pubKey, alias, err := getECDSAKey(ctx, session, key.slotID)
 	if err != nil {
+		logrus.Debugf("Failed to get key from slot %s: %s", key.slotID, err.Error())
 		return nil, "", err
 	}
 	// Check to see if we're returning the intended keyID
 	if pubKey.ID() != keyID {
-		return nil, "", fmt.Errorf("expected root key: %s, but found: %s\n", keyID, pubKey.ID())
+		return nil, "", fmt.Errorf("expected root key: %s, but found: %s", keyID, pubKey.ID())
 	}
 	privKey := NewYubiPrivateKey(key.slotID, *pubKey, s.passRetriever)
 	if privKey == nil {
@@ -686,6 +693,7 @@ func (s *YubiKeyStore) GetKey(keyID string) (data.PrivateKey, string, error) {
 func (s *YubiKeyStore) RemoveKey(keyID string) error {
 	ctx, session, err := SetupHSMEnv(pkcs11Lib)
 	if err != nil {
+		logrus.Debugf("Failed to initialize PKCS11 environment: %s", err.Error())
 		return nil
 	}
 	defer cleanup(ctx, session)
@@ -696,7 +704,10 @@ func (s *YubiKeyStore) RemoveKey(keyID string) error {
 	err = yubiRemoveKey(ctx, session, key.slotID, s.passRetriever, keyID)
 	if err == nil {
 		delete(s.keys, keyID)
+	} else {
+		logrus.Debugf("Failed to remove from the yubikey KeyID %s: %v", keyID, err)
 	}
+
 	return err
 }
 
@@ -712,6 +723,7 @@ func (s *YubiKeyStore) ImportKey(pemBytes []byte, keyPath string) error {
 	privKey, _, err := GetPasswdDecryptBytes(
 		s.passRetriever, pemBytes, "", "imported root")
 	if err != nil {
+		logrus.Debugf("Failed to get and retrieve a key from: %s", keyPath)
 		return err
 	}
 	if keyPath != data.CanonicalRootRole {
@@ -738,7 +750,7 @@ func SetupHSMEnv(libraryPath string) (*pkcs11.Ctx, pkcs11.SessionHandle, error) 
 	}
 
 	if err := p.Initialize(); err != nil {
-		return nil, 0, fmt.Errorf("Initialize error %s\n", err.Error())
+		return nil, 0, fmt.Errorf("Initialize error %s", err.Error())
 	}
 
 	slots, err := p.GetSlotList(true)
