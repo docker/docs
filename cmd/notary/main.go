@@ -43,21 +43,17 @@ func parseConfig() {
 		logrus.SetOutput(os.Stderr)
 	}
 
-	if trustDir == "" {
-		// Get home directory for current user
-		homeDir, err := homedir.Dir()
-		if err != nil {
-			fatalf("Cannot get current user home directory: %v", err)
-		}
-		if homeDir == "" {
-			fatalf("Cannot get current user home directory")
-		}
-		trustDir = filepath.Join(homeDir, filepath.Dir(configDir))
-
-		logrus.Debugf("no trust directory provided, using default: %s", trustDir)
-	} else {
-		logrus.Debugf("trust directory provided: %s", trustDir)
+	// Get home directory for current user
+	homeDir, err := homedir.Dir()
+	if err != nil {
+		fatalf("Cannot get current user home directory: %v", err)
 	}
+	if homeDir == "" {
+		fatalf("Cannot get current user home directory")
+	}
+
+	// By default our trust directory (where keys are stored) is in ~/.notary/
+	mainViper.SetDefault("trust_dir", filepath.Join(homeDir, filepath.Dir(configDir)))
 
 	// If there was a commandline configFile set, we parse that.
 	// If there wasn't we attempt to find it on the default location ~/.notary/config
@@ -66,7 +62,7 @@ func parseConfig() {
 		configFileName = strings.TrimSuffix(filepath.Base(configFile), filepath.Ext(configFile))
 		configPath = filepath.Dir(configFile)
 	} else {
-		configPath = trustDir
+		configPath = filepath.Join(homeDir, filepath.Dir(configDir))
 	}
 
 	// Setup the configuration details into viper
@@ -75,14 +71,29 @@ func parseConfig() {
 	mainViper.AddConfigPath(configPath)
 
 	// Find and read the config file
-	err := mainViper.ReadInConfig()
+	err = mainViper.ReadInConfig()
 	if err != nil {
-		logrus.Debugf("configuration file not found, using defaults")
-		// Ignore if the configuration file doesn't exist, we can use the defaults
-		if !os.IsNotExist(err) {
-			fatalf("Fatal error config file: %v", err)
+		logrus.Debugf("Configuration file not found, using defaults")
+		// If we were passed in a configFile via -c, bail if it doesn't exist,
+		// otherwise ignore it: we can use the defaults
+		if configFile != "" || !os.IsNotExist(err) {
+			fatalf("error opening config file %v", err)
 		}
 	}
+
+	// At this point we either have the default value or the one set by the config.
+	// Either way, the command-line flag has precedence and overwrites the value
+	if trustDir != "" {
+		mainViper.Set("trust_dir", trustDir)
+	}
+
+	// Expands all the possible ~/ that have been given, either through -d or config
+	// If there is no error, use it, if not, attempt to use whatever the user gave us
+	expandedTrustDir, err := homedir.Expand(mainViper.GetString("trust_dir"))
+	if err == nil {
+		mainViper.Set("trust_dir", expandedTrustDir)
+	}
+	logrus.Debugf("Using the following trust directory: %s", mainViper.GetString("trust_dir"))
 }
 
 func setupCommand(notaryCmd *cobra.Command) {
@@ -97,7 +108,7 @@ func setupCommand(notaryCmd *cobra.Command) {
 
 	notaryCmd.AddCommand(versionCmd)
 
-	notaryCmd.PersistentFlags().StringVarP(&trustDir, "trustdir", "d", "", "Directory where the trust data is persisted to")
+	notaryCmd.PersistentFlags().StringVarP(&trustDir, "trustDir", "d", "", "Directory where the trust data is persisted to")
 	notaryCmd.PersistentFlags().StringVarP(&configFile, "configFile", "c", "", "Path to the configuration file to use")
 	notaryCmd.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "Verbose output")
 	notaryCmd.PersistentFlags().StringVarP(&remoteTrustServer, "server", "s", "", "Remote trust server location")
