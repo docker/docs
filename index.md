@@ -6,6 +6,7 @@ description = "Docker Trusted Registry"
 keywords = ["docker, documentation, about, technology, understanding, enterprise, hub,  registry"]
 [menu.main]
 parent="smn_dhe"
+weight=-99
 +++
 
 # Welcome to Docker Trusted Registry
