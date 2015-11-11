@@ -25,23 +25,31 @@ import (
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/net/context"
 )
 
-var cmd = &cobra.Command{}
 var testPassphrase = "passphrase"
 
 // run a command and return the output as a string
 func runCommand(t *testing.T, tempDir string, args ...string) (string, error) {
-	b := new(bytes.Buffer)
-	cmd.SetArgs(append([]string{"-c", "/tmp/ignore.json", "-d", tempDir}, args...))
-	cmd.SetOutput(b)
-	t.Logf("Running `notary %s`", strings.Join(args, " "))
+	// Using a new viper and Command so we don't have state between command invocations
+	mainViper = viper.New()
+	cmd := &cobra.Command{}
+	setupCommand(cmd)
 
+	b := new(bytes.Buffer)
+
+	// Create an empty config file so we don't load the default on ~/.notary/config.json
+	configFile := filepath.Join(tempDir, "config.json")
+
+	cmd.SetArgs(append([]string{"-c", configFile, "-d", tempDir}, args...))
+	cmd.SetOutput(b)
 	retErr := cmd.Execute()
 	output, err := ioutil.ReadAll(b)
 	assert.NoError(t, err)
+
 	return string(output), retErr
 }
 
@@ -71,8 +79,7 @@ func TestClientTufInteraction(t *testing.T) {
 	cleanup := setUp(t)
 	defer cleanup()
 
-	tempDir, err := ioutil.TempDir("/tmp", "repo")
-	assert.NoError(t, err)
+	tempDir := tempDirWithConfig(t, "{}")
 	defer os.RemoveAll(tempDir)
 
 	server := setupServer()
@@ -122,7 +129,7 @@ func TestClientTufInteraction(t *testing.T) {
 	assert.True(t, strings.Contains(string(output), target))
 
 	// verify repo - empty file
-	output, err = runCommand(t, tempDir, "verify", "gun", target)
+	output, err = runCommand(t, tempDir, "-s", server.URL, "verify", "gun", target)
 	assert.NoError(t, err)
 
 	// remove target
@@ -224,8 +231,7 @@ func TestClientKeyGenerationRotation(t *testing.T) {
 	cleanup := setUp(t)
 	defer cleanup()
 
-	tempDir, err := ioutil.TempDir("/tmp", "repo")
-	assert.NoError(t, err)
+	tempDir := tempDirWithConfig(t, "{}")
 	defer os.RemoveAll(tempDir)
 
 	tempfiles := make([]string, 2)
@@ -248,7 +254,7 @@ func TestClientKeyGenerationRotation(t *testing.T) {
 	assertNumKeys(t, tempDir, 0, 0, true)
 
 	// generate root key produces a single root key and no other keys
-	_, err = runCommand(t, tempDir, "key", "generate", data.ECDSAKey)
+	_, err := runCommand(t, tempDir, "key", "generate", data.ECDSAKey)
 	assert.NoError(t, err)
 	assertNumKeys(t, tempDir, 1, 0, true)
 
@@ -305,8 +311,7 @@ func TestClientKeyImportExportRootAndSigning(t *testing.T) {
 
 	dirs := make([]string, 3)
 	for i := 0; i < 3; i++ {
-		tempDir, err := ioutil.TempDir("/tmp", "repo")
-		assert.NoError(t, err)
+		tempDir := tempDirWithConfig(t, "{}")
 		defer os.RemoveAll(tempDir)
 		dirs[i] = tempDir
 	}
@@ -381,12 +386,11 @@ func TestClientKeyImportExportRootAndSigning(t *testing.T) {
 // Generate a root key and export the root key only.  Return the key ID
 // exported.
 func exportRoot(t *testing.T, exportTo string) string {
-	tempDir, err := ioutil.TempDir("/tmp", "repo")
-	assert.NoError(t, err)
+	tempDir := tempDirWithConfig(t, "{}")
 	defer os.RemoveAll(tempDir)
 
 	// generate root key produces a single root key and no other keys
-	_, err = runCommand(t, tempDir, "key", "generate", data.ECDSAKey)
+	_, err := runCommand(t, tempDir, "key", "generate", data.ECDSAKey)
 	assert.NoError(t, err)
 	oldRoot, _ := assertNumKeys(t, tempDir, 1, 0, true)
 
@@ -410,8 +414,7 @@ func TestClientKeyImportExportRootOnly(t *testing.T) {
 	cleanup := setUp(t)
 	defer cleanup()
 
-	tempDir, err := ioutil.TempDir("/tmp", "repo")
-	assert.NoError(t, err)
+	tempDir := tempDirWithConfig(t, "{}")
 	defer os.RemoveAll(tempDir)
 
 	server := setupServer()
@@ -481,15 +484,14 @@ func TestClientCertInteraction(t *testing.T) {
 	cleanup := setUp(t)
 	defer cleanup()
 
-	tempDir, err := ioutil.TempDir("/tmp", "repo")
-	assert.NoError(t, err)
+	tempDir := tempDirWithConfig(t, "{}")
 	defer os.RemoveAll(tempDir)
 
 	server := setupServer()
 	defer server.Close()
 
 	// -- tests --
-	_, err = runCommand(t, tempDir, "-s", server.URL, "init", "gun1")
+	_, err := runCommand(t, tempDir, "-s", server.URL, "init", "gun1")
 	assert.NoError(t, err)
 	_, err = runCommand(t, tempDir, "-s", server.URL, "init", "gun2")
 	assert.NoError(t, err)
@@ -516,8 +518,7 @@ func TestDefaultRootKeyGeneration(t *testing.T) {
 	cleanup := setUp(t)
 	defer cleanup()
 
-	tempDir, err := ioutil.TempDir("/tmp", "repo")
-	assert.NoError(t, err)
+	tempDir := tempDirWithConfig(t, "{}")
 	defer os.RemoveAll(tempDir)
 
 	// -- tests --
@@ -526,9 +527,17 @@ func TestDefaultRootKeyGeneration(t *testing.T) {
 	assertNumKeys(t, tempDir, 0, 0, true)
 
 	// generate root key with no algorithm produces a single ECDSA root key and no other keys
-	_, err = runCommand(t, tempDir, "key", "generate")
+	_, err := runCommand(t, tempDir, "key", "generate")
 	assert.NoError(t, err)
 	assertNumKeys(t, tempDir, 1, 0, true)
+}
+
+func tempDirWithConfig(t *testing.T, config string) string {
+	tempDir, err := ioutil.TempDir("/tmp", "repo")
+	assert.NoError(t, err)
+	err = ioutil.WriteFile(filepath.Join(tempDir, "config.json"), []byte(config), 0644)
+	assert.NoError(t, err)
+	return tempDir
 }
 
 func TestMain(m *testing.M) {
@@ -536,6 +545,5 @@ func TestMain(m *testing.M) {
 		// skip
 		os.Exit(0)
 	}
-	setupCommand(cmd)
 	os.Exit(m.Run())
 }

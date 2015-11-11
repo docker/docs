@@ -55,7 +55,7 @@ func certRemove(cmd *cobra.Command, args []string) {
 	}
 	parseConfig()
 
-	trustDir := mainViper.GetString("trustDir")
+	trustDir := mainViper.GetString("trust_dir")
 	keysPath := filepath.Join(trustDir, notary.PrivDir)
 	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
 	if err != nil {
@@ -124,7 +124,7 @@ func certList(cmd *cobra.Command, args []string) {
 	}
 	parseConfig()
 
-	trustDir := mainViper.GetString("trustDir")
+	trustDir := mainViper.GetString("trust_dir")
 	keysPath := filepath.Join(trustDir, notary.PrivDir)
 	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
 	if err != nil {
