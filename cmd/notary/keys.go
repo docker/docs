@@ -97,7 +97,7 @@ func keysList(cmd *cobra.Command, args []string) {
 
 	parseConfig()
 
-	stores := getKeyStores(cmd, mainViper.GetString("trustDir"), retriever, true)
+	stores := getKeyStores(cmd, mainViper.GetString("trust_dir"), retriever, true)
 
 	keys := make(map[trustmanager.KeyStore]map[string]string)
 	for _, store := range stores {
@@ -137,6 +137,11 @@ func keysList(cmd *cobra.Command, args []string) {
 }
 
 func keysGenerateRootKey(cmd *cobra.Command, args []string) {
+	if len(args) > 1 {
+		cmd.Usage()
+		fatalf("Please provide only one Algorithm as an argument to generate (rsa, ecdsa)")
+	}
+
 	parseConfig()
 
 	// If no param is given to generate, generates an ecdsa key by default
@@ -160,7 +165,7 @@ func keysGenerateRootKey(cmd *cobra.Command, args []string) {
 
 	cs := cryptoservice.NewCryptoService(
 		"",
-		getKeyStores(cmd, mainViper.GetString("trustDir"), retriever, true)...,
+		getKeyStores(cmd, mainViper.GetString("trust_dir"), retriever, true)...,
 	)
 
 	pubKey, err := cs.Create(data.CanonicalRootRole, algorithm)
@@ -183,7 +188,7 @@ func keysExport(cmd *cobra.Command, args []string) {
 
 	cs := cryptoservice.NewCryptoService(
 		"",
-		getKeyStores(cmd, mainViper.GetString("trustDir"), retriever, true)...,
+		getKeyStores(cmd, mainViper.GetString("trust_dir"), retriever, true)...,
 	)
 
 	exportFile, err := os.Create(exportFilename)
@@ -228,7 +233,7 @@ func keysExportRoot(cmd *cobra.Command, args []string) {
 
 	cs := cryptoservice.NewCryptoService(
 		"",
-		getKeyStores(cmd, mainViper.GetString("trustDir"), retriever, true)...,
+		getKeyStores(cmd, mainViper.GetString("trust_dir"), retriever, true)...,
 	)
 
 	exportFile, err := os.Create(exportFilename)
@@ -263,7 +268,7 @@ func keysImport(cmd *cobra.Command, args []string) {
 
 	cs := cryptoservice.NewCryptoService(
 		"",
-		getKeyStores(cmd, mainViper.GetString("trustDir"), retriever, true)...,
+		getKeyStores(cmd, mainViper.GetString("trust_dir"), retriever, true)...,
 	)
 
 	zipReader, err := zip.OpenReader(importFilename)
@@ -290,7 +295,7 @@ func keysImportRoot(cmd *cobra.Command, args []string) {
 
 	cs := cryptoservice.NewCryptoService(
 		"",
-		getKeyStores(cmd, mainViper.GetString("trustDir"), retriever, true)...,
+		getKeyStores(cmd, mainViper.GetString("trust_dir"), retriever, true)...,
 	)
 
 	importFilename := args[0]
@@ -322,7 +327,7 @@ func keysRotate(cmd *cobra.Command, args []string) {
 	parseConfig()
 
 	gun := args[0]
-	nRepo, err := notaryclient.NewNotaryRepository(mainViper.GetString("trustDir"), gun, remoteTrustServer, nil, retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(mainViper.GetString("trust_dir"), gun, remoteTrustServer, nil, retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}

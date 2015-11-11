@@ -53,7 +53,7 @@ func parseConfig() {
 	}
 
 	// By default our trust directory (where keys are stored) is in ~/.notary/
-	mainViper.SetDefault("trustDir", filepath.Join(homeDir, filepath.Dir(configDir)))
+	mainViper.SetDefault("trust_dir", filepath.Join(homeDir, filepath.Dir(configDir)))
 
 	// If there was a commandline configFile set, we parse that.
 	// If there wasn't we attempt to find it on the default location ~/.notary/config
@@ -73,26 +73,27 @@ func parseConfig() {
 	// Find and read the config file
 	err = mainViper.ReadInConfig()
 	if err != nil {
-		logrus.Debugf("configuration file not found, using defaults")
-		// Ignore if the configuration file doesn't exist, we can use the defaults
-		if !os.IsNotExist(err) {
-			fatalf("Fatal error config file: %v", err)
+		logrus.Debugf("Configuration file not found, using defaults")
+		// If we were passed in a configFile via -c, bail if it doesn't exist,
+		// otherwise ignore it: we can use the defaults
+		if configFile != "" || !os.IsNotExist(err) {
+			fatalf("error opening config file %v", err)
 		}
 	}
 
 	// At this point we either have the default value or the one set by the config.
 	// Either way, the command-line flag has precedence and overwrives the value
 	if trustDir != "" {
-		mainViper.Set("trustDir", trustDir)
+		mainViper.Set("trust_dir", trustDir)
 	}
 
 	// Expands all the possible ~/ that have been given, either through -d or config
 	// If there is no error, user it, if not, attempt to use whatever the user gave us
-	expandedTrustDir, err := homedir.Expand(mainViper.GetString("trustDir"))
+	expandedTrustDir, err := homedir.Expand(mainViper.GetString("trust_dir"))
 	if err == nil {
-		mainViper.Set("trustDir", expandedTrustDir)
+		mainViper.Set("trust_dir", expandedTrustDir)
 	}
-	logrus.Debugf("using the following trust directory: %s", mainViper.GetString("trustDir"))
+	logrus.Debugf("Using the following trust directory: %s", mainViper.GetString("trust_dir"))
 }
 
 func setupCommand(notaryCmd *cobra.Command) {
