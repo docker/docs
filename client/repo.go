@@ -20,8 +20,7 @@ import (
 // (usually ~/.docker/trust/).
 func NewNotaryRepository(baseDir, gun, baseURL string, rt http.RoundTripper,
 	retriever passphrase.Retriever) (*NotaryRepository, error) {
-	keysPath := filepath.Join(baseDir, notary.PrivDir)
-	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
+	fileKeyStore, err := trustmanager.NewKeyFileStore(baseDir, retriever)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create private key store in directory: %s", keysPath)
 	}
