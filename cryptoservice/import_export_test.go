@@ -48,7 +48,7 @@ func TestImportExportZip(t *testing.T) {
 	defer os.RemoveAll(tempBaseDir)
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
-	fileStore, err := trustmanager.NewKeyFileStore(filepath.Join(tempBaseDir, "private"), newPassphraseRetriever)
+	fileStore, err := trustmanager.NewKeyFileStore(tempBaseDir, newPassphraseRetriever)
 	cs := NewCryptoService(gun, fileStore)
 	pubKey, err := cs.Create(data.CanonicalRootRole, data.ECDSAKey)
 	assert.NoError(t, err)
@@ -80,13 +80,13 @@ func TestImportExportZip(t *testing.T) {
 		if alias == "root" {
 			continue
 		}
-		relKeyPath := filepath.Join("private", "tuf_keys", privKeyName+"_"+alias+".key")
+		relKeyPath := filepath.Join("tuf_keys", privKeyName+"_"+alias+".key")
 		passphraseByFile[relKeyPath] = exportPassphrase
 	}
 
 	// Add root key to the map. This will use the export passphrase because it
 	// will be reencrypted.
-	relRootKey := filepath.Join("private", "root_keys", rootKeyID+"_root.key")
+	relRootKey := filepath.Join("root_keys", rootKeyID+"_root.key")
 	passphraseByFile[relRootKey] = exportPassphrase
 
 	// Iterate through the files in the archive, checking that the files
@@ -123,7 +123,7 @@ func TestImportExportZip(t *testing.T) {
 	defer os.RemoveAll(tempBaseDir2)
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
-	fileStore2, err := trustmanager.NewKeyFileStore(filepath.Join(tempBaseDir2, "private"), newPassphraseRetriever)
+	fileStore2, err := trustmanager.NewKeyFileStore(tempBaseDir2, newPassphraseRetriever)
 	assert.NoError(t, err)
 	cs2 := NewCryptoService(gun, fileStore2)
 
@@ -145,8 +145,8 @@ func TestImportExportZip(t *testing.T) {
 		if alias == "root" {
 			continue
 		}
-		relKeyPath := filepath.Join("private", "tuf_keys", privKeyName+"_"+alias+".key")
-		privKeyFileName := filepath.Join(tempBaseDir2, relKeyPath)
+		relKeyPath := filepath.Join("tuf_keys", privKeyName+"_"+alias+".key")
+		privKeyFileName := filepath.Join(tempBaseDir2, "private", relKeyPath)
 		_, err = os.Stat(privKeyFileName)
 		assert.NoError(t, err, "missing private key for role %s: %s", alias, privKeyName)
 	}
@@ -167,7 +167,7 @@ func TestImportExportGUN(t *testing.T) {
 	defer os.RemoveAll(tempBaseDir)
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
-	fileStore, err := trustmanager.NewKeyFileStore(filepath.Join(tempBaseDir, "private"), newPassphraseRetriever)
+	fileStore, err := trustmanager.NewKeyFileStore(tempBaseDir, newPassphraseRetriever)
 	cs := NewCryptoService(gun, fileStore)
 	_, err = cs.Create(data.CanonicalRootRole, data.ECDSAKey)
 	_, err = cs.Create(data.CanonicalTargetsRole, data.ECDSAKey)
@@ -205,7 +205,7 @@ func TestImportExportGUN(t *testing.T) {
 		if alias == "root" {
 			continue
 		}
-		relKeyPath := filepath.Join("private", "tuf_keys", privKeyName+"_"+alias+".key")
+		relKeyPath := filepath.Join("tuf_keys", privKeyName+"_"+alias+".key")
 
 		passphraseByFile[relKeyPath] = exportPassphrase
 	}
@@ -245,7 +245,7 @@ func TestImportExportGUN(t *testing.T) {
 	defer os.RemoveAll(tempBaseDir2)
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
-	fileStore2, err := trustmanager.NewKeyFileStore(filepath.Join(tempBaseDir2, "private"), newPassphraseRetriever)
+	fileStore2, err := trustmanager.NewKeyFileStore(tempBaseDir2, newPassphraseRetriever)
 	cs2 := NewCryptoService(gun, fileStore2)
 
 	// Reopen the zip file for importing
@@ -270,8 +270,8 @@ func TestImportExportGUN(t *testing.T) {
 		if alias == "root" {
 			continue
 		}
-		relKeyPath := filepath.Join("private", "tuf_keys", privKeyName+"_"+alias+".key")
-		privKeyFileName := filepath.Join(tempBaseDir2, relKeyPath)
+		relKeyPath := filepath.Join("tuf_keys", privKeyName+"_"+alias+".key")
+		privKeyFileName := filepath.Join(tempBaseDir2, "private", relKeyPath)
 		_, err = os.Stat(privKeyFileName)
 		assert.NoError(t, err)
 	}
@@ -285,7 +285,7 @@ func TestImportExportRootKey(t *testing.T) {
 	defer os.RemoveAll(tempBaseDir)
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
-	fileStore, err := trustmanager.NewKeyFileStore(filepath.Join(tempBaseDir, "private"), oldPassphraseRetriever)
+	fileStore, err := trustmanager.NewKeyFileStore(tempBaseDir, oldPassphraseRetriever)
 	cs := NewCryptoService(gun, fileStore)
 	pubKey, err := cs.Create(data.CanonicalRootRole, data.ECDSAKey)
 	assert.NoError(t, err)
@@ -305,7 +305,7 @@ func TestImportExportRootKey(t *testing.T) {
 	defer os.RemoveAll(tempBaseDir2)
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
-	fileStore2, err := trustmanager.NewKeyFileStore(filepath.Join(tempBaseDir2, "private"), oldPassphraseRetriever)
+	fileStore2, err := trustmanager.NewKeyFileStore(tempBaseDir2, oldPassphraseRetriever)
 	cs2 := NewCryptoService(gun, fileStore2)
 
 	keyReader, err := os.Open(tempKeyFilePath)
@@ -353,7 +353,7 @@ func TestImportExportRootKeyReencrypt(t *testing.T) {
 	defer os.RemoveAll(tempBaseDir)
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
-	fileStore, err := trustmanager.NewKeyFileStore(filepath.Join(tempBaseDir, "private"), oldPassphraseRetriever)
+	fileStore, err := trustmanager.NewKeyFileStore(tempBaseDir, oldPassphraseRetriever)
 	cs := NewCryptoService(gun, fileStore)
 	pubKey, err := cs.Create(data.CanonicalRootRole, data.ECDSAKey)
 	assert.NoError(t, err)
@@ -373,7 +373,7 @@ func TestImportExportRootKeyReencrypt(t *testing.T) {
 	defer os.RemoveAll(tempBaseDir2)
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
-	fileStore2, err := trustmanager.NewKeyFileStore(filepath.Join(tempBaseDir2, "private"), newPassphraseRetriever)
+	fileStore2, err := trustmanager.NewKeyFileStore(tempBaseDir2, newPassphraseRetriever)
 	cs2 := NewCryptoService(gun, fileStore2)
 
 	keyReader, err := os.Open(tempKeyFilePath)

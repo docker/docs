@@ -13,6 +13,7 @@ import (
 const (
 	rootKeysSubdir    = "root_keys"
 	nonRootKeysSubdir = "tuf_keys"
+	privDir           = "private"
 )
 
 // KeyFileStore persists and manages private keys on disk
@@ -34,6 +35,7 @@ type KeyMemoryStore struct {
 // NewKeyFileStore returns a new KeyFileStore creating a private directory to
 // hold the keys.
 func NewKeyFileStore(baseDir string, passphraseRetriever passphrase.Retriever) (*KeyFileStore, error) {
+	baseDir = filepath.Join(baseDir, privDir)
 	fileStore, err := NewPrivateSimpleFileStore(baseDir, keyExtension)
 	if err != nil {
 		return nil, err

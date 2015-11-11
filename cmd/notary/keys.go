@@ -7,7 +7,6 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/docker/notary"
 	notaryclient "github.com/docker/notary/client"
 	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/passphrase"
@@ -341,10 +340,9 @@ func keysRotate(cmd *cobra.Command, args []string) {
 func getKeyStores(cmd *cobra.Command, directory string,
 	ret passphrase.Retriever, withHardware bool) []trustmanager.KeyStore {
 
-	keysPath := filepath.Join(directory, notary.PrivDir)
-	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, ret)
+	fileKeyStore, err := trustmanager.NewKeyFileStore(directory, ret)
 	if err != nil {
-		fatalf("Failed to create private key store in directory: %s", keysPath)
+		fatalf("Failed to create private key store in directory: %s", directory)
 	}
 
 	ks := []trustmanager.KeyStore{fileKeyStore}

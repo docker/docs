@@ -11,7 +11,6 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/docker/notary"
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/trustmanager"
 )
@@ -72,8 +71,7 @@ func (cs *CryptoService) ExportRootKeyReencrypt(dest io.Writer, keyID string, ne
 	tempBaseDir, err := ioutil.TempDir("", "notary-key-export-")
 	defer os.RemoveAll(tempBaseDir)
 
-	tempKeysPath := filepath.Join(tempBaseDir, notary.PrivDir)
-	tempKeyStore, err := trustmanager.NewKeyFileStore(tempKeysPath, newPassphraseRetriever)
+	tempKeyStore, err := trustmanager.NewKeyFileStore(tempBaseDir, newPassphraseRetriever)
 	if err != nil {
 		return err
 	}
@@ -127,8 +125,7 @@ func (cs *CryptoService) ExportAllKeys(dest io.Writer, newPassphraseRetriever pa
 	defer os.RemoveAll(tempBaseDir)
 
 	// Create temporary keystore to use as a staging area
-	tempKeysPath := filepath.Join(tempBaseDir, notary.PrivDir)
-	tempKeyStore, err := trustmanager.NewKeyFileStore(tempKeysPath, newPassphraseRetriever)
+	tempKeyStore, err := trustmanager.NewKeyFileStore(tempBaseDir, newPassphraseRetriever)
 	if err != nil {
 		return err
 	}
@@ -141,7 +138,7 @@ func (cs *CryptoService) ExportAllKeys(dest io.Writer, newPassphraseRetriever pa
 
 	zipWriter := zip.NewWriter(dest)
 
-	if err := addKeysToArchive(zipWriter, tempKeyStore, notary.PrivDir); err != nil {
+	if err := addKeysToArchive(zipWriter, tempKeyStore); err != nil {
 		return err
 	}
 
@@ -176,21 +173,12 @@ func (cs *CryptoService) ImportKeysZip(zipReader zip.Reader) error {
 
 		// Note that using / as a separator is okay here - the zip
 		// package guarantees that the separator will be /
-		if strings.HasPrefix(fNameTrimmed, notary.PrivDir) {
-			if fNameTrimmed[len(fNameTrimmed)-5:] == "_root" {
-				if err = checkRootKeyIsEncrypted(fileBytes); err != nil {
-					return err
-				}
+		if fNameTrimmed[len(fNameTrimmed)-5:] == "_root" {
+			if err = checkRootKeyIsEncrypted(fileBytes); err != nil {
+				return err
 			}
-			keyName := strings.TrimPrefix(fNameTrimmed, notary.PrivDir)
-			newKeys[keyName] = fileBytes
-		} else {
-			// This path inside the zip archive doesn't look like a
-			// root key, non-root key, or alias. To avoid adding a file
-			// to the filestore that we won't be able to use, skip
-			// this file in the import.
-			continue
 		}
+		newKeys[fNameTrimmed] = fileBytes
 	}
 
 	for keyName, pemBytes := range newKeys {
@@ -224,8 +212,7 @@ func (cs *CryptoService) ExportKeysByGUN(dest io.Writer, gun string, passphraseR
 	defer os.RemoveAll(tempBaseDir)
 
 	// Create temporary keystore to use as a staging area
-	tempKeysPath := filepath.Join(tempBaseDir, notary.PrivDir)
-	tempKeyStore, err := trustmanager.NewKeyFileStore(tempKeysPath, passphraseRetriever)
+	tempKeyStore, err := trustmanager.NewKeyFileStore(tempBaseDir, passphraseRetriever)
 	if err != nil {
 		return err
 	}
@@ -242,7 +229,7 @@ func (cs *CryptoService) ExportKeysByGUN(dest io.Writer, gun string, passphraseR
 		return ErrNoKeysFoundForGUN
 	}
 
-	if err := addKeysToArchive(zipWriter, tempKeyStore, notary.PrivDir); err != nil {
+	if err := addKeysToArchive(zipWriter, tempKeyStore); err != nil {
 		return err
 	}
 
@@ -289,7 +276,7 @@ func moveKeys(oldKeyStore, newKeyStore trustmanager.KeyStore) error {
 	return nil
 }
 
-func addKeysToArchive(zipWriter *zip.Writer, newKeyStore *trustmanager.KeyFileStore, subDir string) error {
+func addKeysToArchive(zipWriter *zip.Writer, newKeyStore *trustmanager.KeyFileStore) error {
 	for _, relKeyPath := range newKeyStore.ListFiles() {
 		fullKeyPath := filepath.Join(newKeyStore.BaseDir(), relKeyPath)
 
@@ -303,7 +290,7 @@ func addKeysToArchive(zipWriter *zip.Writer, newKeyStore *trustmanager.KeyFileSt
 			return err
 		}
 
-		infoHeader.Name = filepath.Join(subDir, relKeyPath)
+		infoHeader.Name = relKeyPath
 
 		zipFileEntryWriter, err := zipWriter.CreateHeader(infoHeader)
 		if err != nil {
