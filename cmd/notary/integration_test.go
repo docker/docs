@@ -23,6 +23,7 @@ import (
 	"github.com/docker/notary/server"
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/trustmanager"
+	"github.com/docker/notary/tuf/data"
 	"github.com/spf13/cobra"
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/net/context"
@@ -50,10 +51,7 @@ func setupServer() *httptest.Server {
 	ctx := context.WithValue(
 		context.Background(), "metaStore", storage.NewMemStorage())
 
-	// Do not pass one of the const KeyAlgorithms here as the value! Passing a
-	// string is in itself good test that we are handling it correctly as we
-	// will be receiving a string from the configuration.
-	ctx = context.WithValue(ctx, "keyAlgorithm", "ecdsa")
+	ctx = context.WithValue(ctx, "keyAlgorithm", data.ECDSAKey)
 
 	// Eat the logs instead of spewing them out
 	var b bytes.Buffer
@@ -181,19 +179,24 @@ func GetKeys(t *testing.T, tempDir string) ([]string, []string) {
 func assertNumKeys(t *testing.T, tempDir string, numRoot, numSigning int,
 	rootOnDisk bool) ([]string, []string) {
 
+	uniqueKeys := make(map[string]struct{})
 	root, signing := GetKeys(t, tempDir)
-	assert.Len(t, root, numRoot)
 	assert.Len(t, signing, numSigning)
-	for _, rootKeyID := range root {
+	for i, rootKeyLine := range root {
+		keyID := strings.Split(rootKeyLine, "-")[0]
+		keyID = strings.TrimSpace(keyID)
+		root[i] = keyID
+		uniqueKeys[keyID] = struct{}{}
 		_, err := os.Stat(filepath.Join(
-			tempDir, "private", "root_keys", rootKeyID+"_root.key"))
+			tempDir, "private", "root_keys", keyID+"_root.key"))
 		// os.IsExist checks to see if the error is because a file already
 		// exist, and hence doesn't actually the right funciton to use here
 		assert.Equal(t, rootOnDisk, !os.IsNotExist(err))
 
 		// this function is declared is in the build-tagged setup files
-		verifyRootKeyOnHardware(t, rootKeyID)
+		verifyRootKeyOnHardware(t, keyID)
 	}
+	assert.Len(t, uniqueKeys, numRoot)
 	return root, signing
 }
 
@@ -245,7 +248,7 @@ func TestClientKeyGenerationRotation(t *testing.T) {
 	assertNumKeys(t, tempDir, 0, 0, true)
 
 	// generate root key produces a single root key and no other keys
-	_, err = runCommand(t, tempDir, "key", "generate", "ecdsa")
+	_, err = runCommand(t, tempDir, "key", "generate", data.ECDSAKey)
 	assert.NoError(t, err)
 	assertNumKeys(t, tempDir, 1, 0, true)
 
@@ -345,7 +348,7 @@ func TestClientKeyImportExportRootAndSigning(t *testing.T) {
 
 	_, err = runCommand(t, dirs[1], "key", "import", zipfile)
 	assert.NoError(t, err)
-	assertNumKeys(t, dirs[1], 1, 4, true) // all keys should be there
+	assertNumKeys(t, dirs[1], 1, 4, !rootOnHardware()) // all keys should be there
 
 	// can list and publish to both repos using imported keys
 	for _, gun := range []string{"gun1", "gun2"} {
@@ -383,7 +386,7 @@ func exportRoot(t *testing.T, exportTo string) string {
 	defer os.RemoveAll(tempDir)
 
 	// generate root key produces a single root key and no other keys
-	_, err = runCommand(t, tempDir, "key", "generate", "ecdsa")
+	_, err = runCommand(t, tempDir, "key", "generate", data.ECDSAKey)
 	assert.NoError(t, err)
 	oldRoot, _ := assertNumKeys(t, tempDir, 1, 0, true)
 
@@ -505,7 +508,6 @@ func TestClientCertInteraction(t *testing.T) {
 	_, err = runCommand(t, tempDir, "cert", "remove", certID, "-y", "-g", "")
 	assert.NoError(t, err)
 	assertNumCerts(t, tempDir, 0)
-
 }
 
 func TestMain(m *testing.M) {

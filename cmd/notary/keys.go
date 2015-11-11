@@ -109,7 +109,7 @@ func keysList(cmd *cobra.Command, args []string) {
 	for store, keysMap := range keys {
 		for k, v := range keysMap {
 			if v == "root" {
-				cmd.Println(k, " - ", store.Name())
+				cmd.Println(k, "-", store.Name())
 			}
 		}
 	}
