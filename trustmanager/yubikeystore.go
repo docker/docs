@@ -56,6 +56,25 @@ func SetYubikeyKeyMode(keyMode int) error {
 	return nil
 }
 
+// SetTouchToSignUI - allows configurable UX for notifying a user that they
+// need to touch the yubikey to sign. The callback may be used to provide a
+// mechanism for updating a GUI (such as removing a modal) after the touch
+// has been made
+func SetTouchToSignUI(notifier func(), callback func()) {
+	touchToSignUI = notifier
+	if callback != nil {
+		touchDoneCallback = callback
+	}
+}
+
+var touchToSignUI = func() {
+	fmt.Println("Please touch the attached Yubikey to perform signing.")
+}
+
+var touchDoneCallback = func() {
+	// noop
+}
+
 var pkcs11Lib string
 
 func init() {
@@ -324,7 +343,10 @@ func sign(ctx *pkcs11.Ctx, session pkcs11.SessionHandle, pkcs11KeyID []byte, pas
 	// Get the SHA256 of the payload
 	digest := sha256.Sum256(payload)
 
-	fmt.Println("Please touch the attached Yubikey to perform signing.")
+	if (yubikeyKeymode & KeymodeTouch) > 0 {
+		touchToSignUI()
+		defer touchDoneCallback()
+	}
 	sig, err = ctx.Sign(session, digest[:])
 	if err != nil {
 		logrus.Debugf("Error while signing: %s", err)
