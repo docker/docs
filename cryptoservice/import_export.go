@@ -197,10 +197,19 @@ func (cs *CryptoService) ImportKeysZip(zipReader zip.Reader) error {
 		if keyName[len(keyName)-5:] == "_root" {
 			keyName = "root"
 		}
+		// try to import the key to all key stores. As long as one of them
+		// succeeds, consider it a success
+		var tmpErr error
 		for _, ks := range cs.keyStores {
 			if err := ks.ImportKey(pemBytes, keyName); err != nil {
-				return err
+				tmpErr = err
+			} else {
+				tmpErr = nil
+				break
 			}
+		}
+		if tmpErr != nil {
+			return tmpErr
 		}
 	}
 

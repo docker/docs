@@ -129,7 +129,7 @@ func TestImportKey(t *testing.T) {
 	pemBytes, err := EncryptPrivateKey(privKey, "passphrase")
 	assert.NoError(t, err)
 
-	err = store.ImportKey(pemBytes, privKey.ID())
+	err = store.ImportKey(pemBytes, "root")
 	assert.NoError(t, err)
 
 	// key is not in backup store
