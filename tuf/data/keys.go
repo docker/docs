@@ -30,6 +30,7 @@ type PrivateKey interface {
 	Sign(rand io.Reader, msg []byte, opts crypto.SignerOpts) (signature []byte, err error)
 	Private() []byte
 	CryptoSigner() crypto.Signer
+	SignatureAlgorithm() SigAlgorithm
 }
 
 // KeyPair holds the public and private key bytes
@@ -483,6 +484,26 @@ func (k ED25519PrivateKey) Sign(rand io.Reader, msg []byte, opts crypto.SignerOp
 // know how to sign with this key type.
 func (k UnknownPrivateKey) Sign(rand io.Reader, msg []byte, opts crypto.SignerOpts) (signature []byte, err error) {
 	return nil, errors.New("Unknown key type, cannot sign.")
+}
+
+// SignatureAlgorithm returns the SigAlgorithm for a ECDSAPrivateKey
+func (k ECDSAPrivateKey) SignatureAlgorithm() SigAlgorithm {
+	return ECDSASignature
+}
+
+// SignatureAlgorithm returns the SigAlgorithm for a RSAPrivateKey
+func (k RSAPrivateKey) SignatureAlgorithm() SigAlgorithm {
+	return RSAPSSSignature
+}
+
+// SignatureAlgorithm returns the SigAlgorithm for a ED25519PrivateKey
+func (k ED25519PrivateKey) SignatureAlgorithm() SigAlgorithm {
+	return EDDSASignature
+}
+
+// SignatureAlgorithm returns the SigAlgorithm for an UnknownPrivateKey
+func (k UnknownPrivateKey) SignatureAlgorithm() SigAlgorithm {
+	return ""
 }
 
 // PublicKeyFromPrivate returns a new tufKey based on a private key, with

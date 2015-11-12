@@ -15,6 +15,7 @@ COPY . /go/src/github.com/docker/notary
 WORKDIR /go/src/${NOTARYPKG}
 
 RUN go install \
+    -tags pkcs11 \
     -ldflags "-w -X ${NOTARYPKG}/version.GitCommit=`git rev-parse --short HEAD` -X ${NOTARYPKG}/version.NotaryVersion=`cat NOTARY_VERSION`" \
     ${NOTARYPKG}/cmd/notary-server
 

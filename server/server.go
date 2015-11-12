@@ -105,11 +105,8 @@ func RootHandler(ac auth.AccessController, ctx context.Context, trust signed.Cry
 		prometheus.InstrumentHandlerWithOpts(
 			prometheusOpts("DeleteTuf"),
 			hand(handlers.DeleteHandler, "push", "pull")))
-	r.Methods("GET").Path("/_notary_server/health").Handler(hand(
-		func(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
-			health.StatusHandler(w, r)
-			return nil
-		}))
+
+	r.Methods("GET").Path("/_notary_server/health").HandlerFunc(health.StatusHandler)
 	r.Methods("GET").Path("/_notary_server/metrics").Handler(prometheus.Handler())
 	r.Methods("GET", "POST", "PUT", "HEAD", "DELETE").Path("/{other:.*}").Handler(hand(utils.NotFoundHandler))
 

@@ -65,10 +65,10 @@ func VerifyRoot(s *data.Signed, minVersion int, keys map[string]data.PublicKey) 
 // Verify checks the signatures and metadata (expiry, version) for the signed role
 // data
 func Verify(s *data.Signed, role string, minVersion int, db *keys.KeyDB) error {
-	if err := VerifySignatures(s, role, db); err != nil {
+	if err := verifyMeta(s, role, minVersion); err != nil {
 		return err
 	}
-	return verifyMeta(s, role, minVersion)
+	return VerifySignatures(s, role, db)
 }
 
 func verifyMeta(s *data.Signed, role string, minVersion int) error {

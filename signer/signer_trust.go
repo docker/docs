@@ -4,6 +4,7 @@ import (
 	"crypto/tls"
 	"errors"
 	"fmt"
+	"io"
 	"net"
 	"time"
 
@@ -105,6 +106,11 @@ func (trust *NotarySigner) ListKeys(role string) []string {
 	return []string{}
 }
 
+// ListAllKeys not supported for NotarySigner
+func (trust *NotarySigner) ListAllKeys() map[string]string {
+	return map[string]string{}
+}
+
 // CheckHealth checks the health of one of the clients, since both clients run
 // from the same GRPC server.
 func (trust *NotarySigner) CheckHealth(timeout time.Duration) error {
@@ -125,4 +131,10 @@ func (trust *NotarySigner) CheckHealth(timeout time.Duration) error {
 			"Timed out reaching trust service after %s.", timeout)
 	}
 	return err
+}
+
+// ImportRootKey satisfies the CryptoService interface. It should not be implemented
+// for a NotarySigner.
+func (trust *NotarySigner) ImportRootKey(r io.Reader) error {
+	return errors.New("Importing a root key to NotarySigner is not supported")
 }

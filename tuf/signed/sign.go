@@ -12,69 +12,70 @@ package signed
 // for which the root key is wrapped using an x509 certificate.
 
 import (
+	"crypto/rand"
 	"fmt"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary/tuf/data"
-	"github.com/docker/notary/tuf/errors"
 	"github.com/docker/notary/tuf/utils"
 )
-
-type idPair struct {
-	scopedKeyID    string
-	canonicalKeyID string
-}
 
 // Sign takes a data.Signed and a key, calculated and adds the signature
 // to the data.Signed
 func Sign(service CryptoService, s *data.Signed, keys ...data.PublicKey) error {
 	logrus.Debugf("sign called with %d keys", len(keys))
 	signatures := make([]data.Signature, 0, len(s.Signatures)+1)
-	keyIDMemb := make(map[string]struct{})
-	keyIDs := make(
-		[]idPair,
-		0,
-		len(keys),
-	)
+	signingKeyIDs := make(map[string]struct{})
+	ids := make([]string, 0, len(keys))
 
+	privKeys := make(map[string]data.PrivateKey)
+
+	// Get all the private key objects related to the public keys
 	for _, key := range keys {
-		keyID, err := utils.CanonicalKeyID(key)
+		canonicalID, err := utils.CanonicalKeyID(key)
+		ids = append(ids, canonicalID)
 		if err != nil {
 			continue
 		}
-		keyIDMemb[key.ID()] = struct{}{}
-		keyIDs = append(keyIDs, idPair{
-			scopedKeyID:    key.ID(),
-			canonicalKeyID: keyID,
+		k, _, err := service.GetPrivateKey(canonicalID)
+		if err != nil {
+			continue
+		}
+		privKeys[key.ID()] = k
+	}
+
+	// Check to ensure we have at least one signing key
+	if len(privKeys) == 0 {
+		return ErrNoKeys{keyIDs: ids}
+	}
+
+	// Do signing and generate list of signatures
+	for keyID, pk := range privKeys {
+		sig, err := pk.Sign(rand.Reader, s.Signed, nil)
+		if err != nil {
+			logrus.Debugf("Failed to sign with key: %s. Reason: %v", keyID, err)
+			continue
+		}
+		signingKeyIDs[keyID] = struct{}{}
+		signatures = append(signatures, data.Signature{
+			KeyID:     keyID,
+			Method:    pk.SignatureAlgorithm(),
+			Signature: sig[:],
 		})
 	}
 
-	// we need to ask the signer to sign with the canonical key ID
-	// (ID of the TUF key's public key bytes only), but
-	// we need to translate back to the scoped key ID (the hash of the TUF key
-	// with the full PEM bytes) before giving the
-	// signature back to TUF.
-	for _, pair := range keyIDs {
-		newSigs, err := service.Sign([]string{pair.canonicalKeyID}, s.Signed)
-		if err != nil {
-			return err
-		}
-		// we only asked to sign with 1 key ID, so there will either be 1
-		// or zero signatures
-		if len(newSigs) == 1 {
-			newSig := newSigs[0]
-			newSig.KeyID = pair.scopedKeyID
-			signatures = append(signatures, newSig)
-		}
-	}
+	// Check we produced at least on signature
 	if len(signatures) < 1 {
-		return errors.ErrInsufficientSignatures{
-			Name: fmt.Sprintf("Cryptoservice failed to produce any signatures for keys with IDs: %v", keyIDs),
-			Err:  nil,
+		return ErrInsufficientSignatures{
+			Name: fmt.Sprintf(
+				"cryptoservice failed to produce any signatures for keys with IDs: %v",
+				ids),
 		}
 	}
+
 	for _, sig := range s.Signatures {
-		if _, ok := keyIDMemb[sig.KeyID]; ok {
+		if _, ok := signingKeyIDs[sig.KeyID]; ok {
+			// key is in the set of key IDs for which a signature has been created
 			continue
 		}
 		signatures = append(signatures, sig)

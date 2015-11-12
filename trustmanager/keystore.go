@@ -40,12 +40,15 @@ const (
 
 // KeyStore is a generic interface for private key storage
 type KeyStore interface {
+	// Add Key adds a key to the KeyStore, and if the key already exists,
+	// succeeds.  Otherwise, returns an error if it cannot add.
 	AddKey(name, alias string, privKey data.PrivateKey) error
 	GetKey(name string) (data.PrivateKey, string, error)
 	ListKeys() map[string]string
 	RemoveKey(name string) error
 	ExportKey(name string) ([]byte, error)
 	ImportKey(pemBytes []byte, alias string) error
+	Name() string
 }
 
 type cachedKey struct {
