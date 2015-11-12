@@ -200,7 +200,6 @@ func addECDSAKey(
 	pkcs11KeyID []byte,
 	passRetriever passphrase.Retriever,
 	role string,
-	backupStore trustmanager.KeyStore,
 ) error {
 	logrus.Debugf("Attempting to add key to yubikey with ID: %s", privKey.ID())
 
@@ -251,13 +250,6 @@ func addECDSAKey(
 	_, err = ctx.CreateObject(session, privateKeyTemplate)
 	if err != nil {
 		return fmt.Errorf("error importing: %v", err)
-	}
-
-	if backupStore != nil {
-		err = backupStore.AddKey(privKey.ID(), role, privKey)
-		if err != nil {
-			return ErrBackupFailed{err: err.Error()}
-		}
 	}
 
 	return nil
@@ -639,54 +631,64 @@ func (s *YubiKeyStore) ListKeys() map[string]string {
 
 // AddKey puts a key inside the Yubikey, as well as writing it to the backup store
 func (s *YubiKeyStore) AddKey(keyID, role string, privKey data.PrivateKey) error {
-	return s.addKey(keyID, role, privKey, true)
+	added, err := s.addKey(keyID, role, privKey)
+	if err != nil {
+		return err
+	}
+	if added {
+		err = s.backupStore.AddKey(privKey.ID(), role, privKey)
+		if err != nil {
+			defer s.RemoveKey(keyID)
+			return ErrBackupFailed{err: err.Error()}
+		}
+	}
+	return nil
 }
 
-func (s *YubiKeyStore) addKey(
-	keyID, role string, privKey data.PrivateKey, backup bool) error {
+// Only add if we haven't seen the key already.  Return whether the key was
+// added.
+func (s *YubiKeyStore) addKey(keyID, role string, privKey data.PrivateKey) (
+	bool, error) {
+
 	// We only allow adding root keys for now
 	if role != data.CanonicalRootRole {
-		return fmt.Errorf("yubikey only supports storing root keys, got %s for key: %s", role, keyID)
+		return false, fmt.Errorf(
+			"yubikey only supports storing root keys, got %s for key: %s", role, keyID)
 	}
 
 	ctx, session, err := SetupHSMEnv(pkcs11Lib, s.libLoader)
 	if err != nil {
 		logrus.Debugf("Failed to initialize PKCS11 environment: %s", err.Error())
-		return err
+		return false, err
 	}
 	defer cleanup(ctx, session)
 
 	if k, ok := s.keys[keyID]; ok {
 		if k.role == role {
 			// already have the key and it's associated with the correct role
-			return nil
+			return false, nil
 		}
 	}
 
 	slot, err := getNextEmptySlot(ctx, session)
 	if err != nil {
 		logrus.Debugf("Failed to get an empty yubikey slot: %s", err.Error())
-		return err
+		return false, err
 	}
 	logrus.Debugf("Attempting to store key using yubikey slot %v", slot)
 
-	backupStore := s.backupStore
-	if !backup {
-		backupStore = nil
-	}
-
 	err = addECDSAKey(
-		ctx, session, privKey, slot, s.passRetriever, role, backupStore)
+		ctx, session, privKey, slot, s.passRetriever, role)
 	if err == nil {
 		s.keys[privKey.ID()] = yubiSlot{
 			role:   role,
 			slotID: slot,
 		}
-		return nil
+		return true, nil
 	}
 	logrus.Debugf("Failed to add key to yubikey: %v", err)
 
-	return err
+	return false, err
 }
 
 // GetKey retrieves a key from the Yubikey only (it does not look inside the
@@ -763,7 +765,8 @@ func (s *YubiKeyStore) ImportKey(pemBytes []byte, keyPath string) error {
 	if keyPath != data.CanonicalRootRole {
 		return fmt.Errorf("yubikey only supports storing root keys")
 	}
-	return s.addKey(privKey.ID(), "root", privKey, false)
+	_, err = s.addKey(privKey.ID(), "root", privKey)
+	return err
 }
 
 func cleanup(ctx IPKCS11Ctx, session pkcs11.SessionHandle) {

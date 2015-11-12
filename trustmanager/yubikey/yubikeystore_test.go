@@ -4,6 +4,7 @@ package yubikey
 
 import (
 	"crypto/rand"
+	"errors"
 	"fmt"
 	"reflect"
 	"testing"
@@ -207,6 +208,76 @@ func TestYubiAddKeyCanAddToMiddleSlot(t *testing.T) {
 			assert.False(t, ok)
 		}
 	}
+}
+
+type nonworkingBackup struct {
+	trustmanager.KeyMemoryStore
+}
+
+// AddKey stores the contents of a PEM-encoded private key as a PEM block
+func (s *nonworkingBackup) AddKey(name, alias string, privKey data.PrivateKey) error {
+	return errors.New("Nope!")
+}
+
+// If, when adding a key to the Yubikey, we can't back up the key, it should
+// be removed from the Yubikey too because otherwise there is no way for
+// the user to later get a backup of the key.
+func TestYubiAddKeyRollsBackIfCannotBackup(t *testing.T) {
+	if !YubikeyAccessible() {
+		t.Skip("Must have Yubikey access.")
+	}
+	clearAllKeys(t)
+
+	SetYubikeyKeyMode(KeymodeNone)
+	defer func() {
+		SetYubikeyKeyMode(KeymodeTouch | KeymodePinOnce)
+	}()
+
+	backup := &nonworkingBackup{
+		KeyMemoryStore: *trustmanager.NewKeyMemoryStore(ret),
+	}
+	store, err := NewYubiKeyStore(backup, ret)
+	assert.NoError(t, err)
+
+	_, err = testAddKey(t, store)
+	assert.Error(t, err)
+	assert.IsType(t, ErrBackupFailed{}, err)
+
+	// there should be no keys on the yubikey
+	assert.Len(t, cleanListKeys(t), 0)
+}
+
+// If, when adding a key to the Yubikey, and it already exists, we succeed
+// without adding it to the backup store.
+func TestYubiAddDuplicateKeySucceedsButDoesNotBackup(t *testing.T) {
+	if !YubikeyAccessible() {
+		t.Skip("Must have Yubikey access.")
+	}
+	clearAllKeys(t)
+
+	SetYubikeyKeyMode(KeymodeNone)
+	defer func() {
+		SetYubikeyKeyMode(KeymodeTouch | KeymodePinOnce)
+	}()
+
+	origStore, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
+	assert.NoError(t, err)
+
+	key, err := testAddKey(t, origStore)
+	assert.NoError(t, err)
+
+	backup := trustmanager.NewKeyMemoryStore(ret)
+	cleanStore, err := NewYubiKeyStore(backup, ret)
+	assert.NoError(t, err)
+	assert.Len(t, cleanStore.ListKeys(), 1)
+
+	err = cleanStore.AddKey(key.ID(), "root", key)
+	assert.NoError(t, err)
+
+	// there should be just 1 key on the yubikey
+	assert.Len(t, cleanListKeys(t), 1)
+	// nothing was added to the backup
+	assert.Len(t, backup.ListKeys(), 0)
 }
 
 // RemoveKey removes a key from the yubikey, but not from the backup store.
@@ -790,6 +861,95 @@ func TestYubiSignCleansUpOnError(t *testing.T) {
 		[]string{"Logout"}, false)
 }
 
+// If Sign gives us an invalid signature, we retry until successful up to
+// a maximum of 5 times.
+func TestYubiRetrySignUntilSuccess(t *testing.T) {
+	if !YubikeyAccessible() {
+		t.Skip("Must have Yubikey access.")
+	}
+	clearAllKeys(t)
+
+	SetYubikeyKeyMode(KeymodeNone)
+	defer func() {
+		SetYubikeyKeyMode(KeymodeTouch | KeymodePinOnce)
+	}()
+
+	store, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
+	assert.NoError(t, err)
+
+	key, err := testAddKey(t, store)
+	assert.NoError(t, err)
+
+	message := []byte("Hello there")
+	goodSig, err := key.Sign(rand.Reader, message, nil)
+	assert.NoError(t, err)
+
+	privKey, _, err := store.GetKey(key.ID())
+	assert.NoError(t, err)
+
+	yubiPrivateKey, ok := privKey.(*YubiPrivateKey)
+	assert.True(t, ok)
+
+	badSigner := &SignInvalidSigCtx{
+		Ctx:     *pkcs11.New(pkcs11Lib),
+		goodSig: goodSig,
+		failNum: 2,
+	}
+
+	yubiPrivateKey.setLibLoader(func(string) IPKCS11Ctx { return badSigner })
+
+	sig, err := yubiPrivateKey.Sign(rand.Reader, message, nil)
+	assert.NoError(t, err)
+	// because the SignInvalidSigCtx returns the good signature, we can just
+	// deep equal instead of verifying
+	assert.True(t, reflect.DeepEqual(goodSig, sig))
+	assert.Equal(t, 3, badSigner.signCalls)
+}
+
+// If Sign gives us an invalid signature, we retry until up to a maximum of 5
+// times, and if it's still invalid, fail.
+func TestYubiRetrySignUntilFail(t *testing.T) {
+	if !YubikeyAccessible() {
+		t.Skip("Must have Yubikey access.")
+	}
+	clearAllKeys(t)
+
+	SetYubikeyKeyMode(KeymodeNone)
+	defer func() {
+		SetYubikeyKeyMode(KeymodeTouch | KeymodePinOnce)
+	}()
+
+	store, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
+	assert.NoError(t, err)
+
+	key, err := testAddKey(t, store)
+	assert.NoError(t, err)
+
+	message := []byte("Hello there")
+	goodSig, err := key.Sign(rand.Reader, message, nil)
+	assert.NoError(t, err)
+
+	privKey, _, err := store.GetKey(key.ID())
+	assert.NoError(t, err)
+
+	yubiPrivateKey, ok := privKey.(*YubiPrivateKey)
+	assert.True(t, ok)
+
+	badSigner := &SignInvalidSigCtx{
+		Ctx:     *pkcs11.New(pkcs11Lib),
+		goodSig: goodSig,
+		failNum: sigAttempts + 1,
+	}
+
+	yubiPrivateKey.setLibLoader(func(string) IPKCS11Ctx { return badSigner })
+
+	_, err = yubiPrivateKey.Sign(rand.Reader, message, nil)
+	assert.Error(t, err)
+	// because the SignInvalidSigCtx returns the good signature, we can just
+	// deep equal instead of verifying
+	assert.Equal(t, sigAttempts, badSigner.signCalls)
+}
+
 // -----  Stubbed pkcs11 for testing error conditions ------
 // This is just a passthrough to the underlying pkcs11 library, with optional
 // error injection.  This is to ensure that if errors occur during the process
@@ -965,4 +1125,28 @@ func (s *StubCtx) Sign(sh pkcs11.SessionHandle, message []byte) ([]byte, error) 
 		return nil, err
 	}
 	return sig, sigErr
+}
+
+// a different stub Ctx object in which Sign returns an invalid signature some
+// number of times
+type SignInvalidSigCtx struct {
+	pkcs11.Ctx
+
+	// Signature verification is to mitigate against hardware failure while
+	// signing - which might occur during testing. So to prevent spurious
+	// errors, return a real known good signature in the success case.
+	goodSig []byte
+
+	failNum   int // number of calls to fail before succeeding
+	signCalls int // number of calls to Sign so far
+}
+
+func (s *SignInvalidSigCtx) Sign(sh pkcs11.SessionHandle, message []byte) ([]byte, error) {
+	s.signCalls++
+	s.Ctx.Sign(sh, message) // clear out the SignInit
+
+	if s.signCalls > s.failNum {
+		return s.goodSig, nil
+	}
+	return []byte("12345"), nil
 }
