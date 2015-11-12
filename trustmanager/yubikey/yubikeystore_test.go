@@ -1,6 +1,6 @@
 // +build pkcs11
 
-package trustmanager
+package yubikey
 
 import (
 	"crypto/rand"
@@ -8,6 +8,7 @@ import (
 	"testing"
 
 	"github.com/docker/notary/passphrase"
+	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
 	"github.com/stretchr/testify/assert"
 )
@@ -17,7 +18,7 @@ func clearAllKeys(t *testing.T) {
 	// removing and then adding with the same YubiKeyStore causes
 	// non-deterministic failures at least on Mac OS
 	ret := passphrase.ConstantRetriever("passphrase")
-	store, err := NewYubiKeyStore(NewKeyMemoryStore(ret), ret)
+	store, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
 	assert.NoError(t, err)
 
 	for k := range store.ListKeys() {
@@ -53,7 +54,7 @@ func TestEnsurePrivateKeySizePadsLessThanRequiredSizeArrays(t *testing.T) {
 }
 
 func testAddKey(t *testing.T, store *YubiKeyStore) (data.PrivateKey, error) {
-	privKey, err := GenerateECDSAKey(rand.Reader)
+	privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
 	assert.NoError(t, err)
 
 	err = store.AddKey(privKey.ID(), data.CanonicalRootRole, privKey)
@@ -67,7 +68,7 @@ func TestAddKeyToNextEmptyYubikeySlot(t *testing.T) {
 	clearAllKeys(t)
 
 	ret := passphrase.ConstantRetriever("passphrase")
-	store, err := NewYubiKeyStore(NewKeyMemoryStore(ret), ret)
+	store, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
 	assert.NoError(t, err)
 	SetYubikeyKeyMode(KeymodeNone)
 	defer func() {
@@ -84,7 +85,7 @@ func TestAddKeyToNextEmptyYubikeySlot(t *testing.T) {
 	}
 
 	// create a new store, to make sure we're not just using the keys cache
-	store, err = NewYubiKeyStore(NewKeyMemoryStore(ret), ret)
+	store, err = NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
 	assert.NoError(t, err)
 	listedKeys := store.ListKeys()
 	assert.Len(t, listedKeys, numSlots)
@@ -114,7 +115,7 @@ func TestImportKey(t *testing.T) {
 	clearAllKeys(t)
 
 	ret := passphrase.ConstantRetriever("passphrase")
-	backup := NewKeyMemoryStore(ret)
+	backup := trustmanager.NewKeyMemoryStore(ret)
 	store, err := NewYubiKeyStore(backup, ret)
 	assert.NoError(t, err)
 	SetYubikeyKeyMode(KeymodeNone)
@@ -123,10 +124,10 @@ func TestImportKey(t *testing.T) {
 	}()
 
 	// generate key and import it
-	privKey, err := GenerateECDSAKey(rand.Reader)
+	privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
 	assert.NoError(t, err)
 
-	pemBytes, err := EncryptPrivateKey(privKey, "passphrase")
+	pemBytes, err := trustmanager.EncryptPrivateKey(privKey, "passphrase")
 	assert.NoError(t, err)
 
 	err = store.ImportKey(pemBytes, "root")
@@ -138,7 +139,7 @@ func TestImportKey(t *testing.T) {
 
 	// ensure key is in Yubikey -  create a new store, to make sure we're not
 	// just using the keys cache
-	store, err = NewYubiKeyStore(NewKeyMemoryStore(ret), ret)
+	store, err = NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
 	gottenKey, role, err := store.GetKey(privKey.ID())
 	assert.NoError(t, err)
 	assert.Equal(t, data.CanonicalRootRole, role)
