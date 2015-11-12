@@ -790,6 +790,95 @@ func TestYubiSignCleansUpOnError(t *testing.T) {
 		[]string{"Logout"}, false)
 }
 
+// If Sign gives us an invalid signature, we retry until successful up to
+// a maximum of 5 times.
+func TestYubiRetrySignUntilSuccess(t *testing.T) {
+	if !YubikeyAccessible() {
+		t.Skip("Must have Yubikey access.")
+	}
+	clearAllKeys(t)
+
+	SetYubikeyKeyMode(KeymodeNone)
+	defer func() {
+		SetYubikeyKeyMode(KeymodeTouch | KeymodePinOnce)
+	}()
+
+	store, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
+	assert.NoError(t, err)
+
+	key, err := testAddKey(t, store)
+	assert.NoError(t, err)
+
+	message := []byte("Hello there")
+	goodSig, err := key.Sign(rand.Reader, message, nil)
+	assert.NoError(t, err)
+
+	privKey, _, err := store.GetKey(key.ID())
+	assert.NoError(t, err)
+
+	yubiPrivateKey, ok := privKey.(*YubiPrivateKey)
+	assert.True(t, ok)
+
+	badSigner := &SignInvalidSigCtx{
+		Ctx:     *pkcs11.New(pkcs11Lib),
+		goodSig: goodSig,
+		failNum: 2,
+	}
+
+	yubiPrivateKey.setLibLoader(func(string) IPKCS11Ctx { return badSigner })
+
+	sig, err := yubiPrivateKey.Sign(rand.Reader, message, nil)
+	assert.NoError(t, err)
+	// because the SignInvalidSigCtx returns the good signature, we can just
+	// deep equal instead of verifying
+	assert.True(t, reflect.DeepEqual(goodSig, sig))
+	assert.Equal(t, 3, badSigner.signCalls)
+}
+
+// If Sign gives us an invalid signature, we retry until up to a maximum of 5
+// times, and if it's still invalid, fail.
+func TestYubiRetrySign5TimesAndFail(t *testing.T) {
+	if !YubikeyAccessible() {
+		t.Skip("Must have Yubikey access.")
+	}
+	clearAllKeys(t)
+
+	SetYubikeyKeyMode(KeymodeNone)
+	defer func() {
+		SetYubikeyKeyMode(KeymodeTouch | KeymodePinOnce)
+	}()
+
+	store, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
+	assert.NoError(t, err)
+
+	key, err := testAddKey(t, store)
+	assert.NoError(t, err)
+
+	message := []byte("Hello there")
+	goodSig, err := key.Sign(rand.Reader, message, nil)
+	assert.NoError(t, err)
+
+	privKey, _, err := store.GetKey(key.ID())
+	assert.NoError(t, err)
+
+	yubiPrivateKey, ok := privKey.(*YubiPrivateKey)
+	assert.True(t, ok)
+
+	badSigner := &SignInvalidSigCtx{
+		Ctx:     *pkcs11.New(pkcs11Lib),
+		goodSig: goodSig,
+		failNum: 5,
+	}
+
+	yubiPrivateKey.setLibLoader(func(string) IPKCS11Ctx { return badSigner })
+
+	_, err = yubiPrivateKey.Sign(rand.Reader, message, nil)
+	assert.Error(t, err)
+	// because the SignInvalidSigCtx returns the good signature, we can just
+	// deep equal instead of verifying
+	assert.Equal(t, 5, badSigner.signCalls)
+}
+
 // -----  Stubbed pkcs11 for testing error conditions ------
 // This is just a passthrough to the underlying pkcs11 library, with optional
 // error injection.  This is to ensure that if errors occur during the process
@@ -965,4 +1054,28 @@ func (s *StubCtx) Sign(sh pkcs11.SessionHandle, message []byte) ([]byte, error) 
 		return nil, err
 	}
 	return sig, sigErr
+}
+
+// a different stub Ctx object in which Sign returns an invalid signature some
+// number of times
+type SignInvalidSigCtx struct {
+	pkcs11.Ctx
+
+	// Signature verification is to mitigate against hardware failure while
+	// signing - which might occur during testing. So to prevent spurious
+	// errors, return a real known good signature in the success case.
+	goodSig []byte
+
+	failNum   int // number of calls to fail before succeeding
+	signCalls int // number of calls to Sign so far
+}
+
+func (s *SignInvalidSigCtx) Sign(sh pkcs11.SessionHandle, message []byte) ([]byte, error) {
+	s.signCalls++
+	s.Ctx.Sign(sh, message) // clear out the SignInit
+
+	if s.signCalls > s.failNum {
+		return s.goodSig, nil
+	}
+	return []byte("12345"), nil
 }
