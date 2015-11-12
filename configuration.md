@@ -58,13 +58,13 @@ http://&lt;dtr-host&gt;/load_balancer_status.
 > *Note:* Docker Trusted Registry's integration of Notary is an experimental feature. To use it, you need to provide your own Notary server.
 
 If you enable Notary integration you will be able to see which tags have been signed through Trusted Registry's web interface.
-To deploy a Notary server by follow the instructions at [Deploying Notary](/security/trust/deploying_notary/). Then configure the following options:
+To deploy a Notary server by follow the instructions at [Deploying Notary](/engine/security/trust/deploying_notary/). Then configure the following options:
 
 * *Notary Server*: This is the domain name or IP address where you deployed the Notary server.
 
 If you choose to deploy a Notary server on the same machine as Docker Trusted Registry you can use the IP address of the docker0 interface
 to connect to it without having to use the machine's external IP. This address is usually 172.17.42.1.
-Read more about [Docker Networking](/articles/networking/#summary) if you want to deploy Notary this way.
+Read more about [Docker Networking](/engine/userguide/networking) if you want to deploy Notary this way.
 Otherwise use the Notary machine's domain name or a IP address in this field.
 
 When you save the settings Docker Trusted Registry will try to connect to Notary to confirm that the address is correct.
