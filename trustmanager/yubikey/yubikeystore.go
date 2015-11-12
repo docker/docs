@@ -162,10 +162,10 @@ func (y YubiPrivateKey) SignatureAlgorithm() data.SigAlgorithm {
 
 func (y *YubiPrivateKey) Sign(rand io.Reader, msg []byte, opts crypto.SignerOpts) ([]byte, error) {
 	ctx, session, err := SetupHSMEnv(pkcs11Lib, y.libLoader)
-	defer cleanup(ctx, session)
 	if err != nil {
 		return nil, err
 	}
+	defer cleanup(ctx, session)
 
 	v := signed.Verifiers[data.ECDSASignature]
 	for i := 0; i < sigAttempts; i++ {
@@ -621,11 +621,12 @@ func (s *YubiKeyStore) ListKeys() map[string]string {
 		return buildKeyMap(s.keys)
 	}
 	ctx, session, err := SetupHSMEnv(pkcs11Lib, s.libLoader)
-	defer cleanup(ctx, session)
 	if err != nil {
 		logrus.Debugf("Failed to initialize PKCS11 environment: %s", err.Error())
 		return nil
 	}
+	defer cleanup(ctx, session)
+
 	keys, err := yubiListKeys(ctx, session)
 	if err != nil {
 		logrus.Debugf("Failed to list key from the yubikey: %s", err.Error())
@@ -649,11 +650,11 @@ func (s *YubiKeyStore) addKey(
 	}
 
 	ctx, session, err := SetupHSMEnv(pkcs11Lib, s.libLoader)
-	defer cleanup(ctx, session)
 	if err != nil {
 		logrus.Debugf("Failed to initialize PKCS11 environment: %s", err.Error())
 		return err
 	}
+	defer cleanup(ctx, session)
 
 	if k, ok := s.keys[keyID]; ok {
 		if k.role == role {
@@ -692,11 +693,11 @@ func (s *YubiKeyStore) addKey(
 // backup store)
 func (s *YubiKeyStore) GetKey(keyID string) (data.PrivateKey, string, error) {
 	ctx, session, err := SetupHSMEnv(pkcs11Lib, s.libLoader)
-	defer cleanup(ctx, session)
 	if err != nil {
 		logrus.Debugf("Failed to initialize PKCS11 environment: %s", err.Error())
 		return nil, "", err
 	}
+	defer cleanup(ctx, session)
 
 	key, ok := s.keys[keyID]
 	if !ok {
@@ -724,11 +725,12 @@ func (s *YubiKeyStore) GetKey(keyID string) (data.PrivateKey, string, error) {
 // backup store)
 func (s *YubiKeyStore) RemoveKey(keyID string) error {
 	ctx, session, err := SetupHSMEnv(pkcs11Lib, s.libLoader)
-	defer cleanup(ctx, session)
 	if err != nil {
 		logrus.Debugf("Failed to initialize PKCS11 environment: %s", err.Error())
 		return nil
 	}
+	defer cleanup(ctx, session)
+
 	key, ok := s.keys[keyID]
 	if !ok {
 		return errors.New("Key not present in yubikey")
@@ -765,17 +767,15 @@ func (s *YubiKeyStore) ImportKey(pemBytes []byte, keyPath string) error {
 }
 
 func cleanup(ctx IPKCS11Ctx, session pkcs11.SessionHandle) {
-	if ctx != nil {
-		err := ctx.CloseSession(session)
-		if err != nil {
-			logrus.Debugf("Error closing session: %s", err.Error())
-		}
-		err = ctx.Finalize()
-		if err != nil {
-			logrus.Debugf("Error finalizing: %s", err.Error())
-		}
-		ctx.Destroy()
+	err := ctx.CloseSession(session)
+	if err != nil {
+		logrus.Debugf("Error closing session: %s", err.Error())
 	}
+	err = ctx.Finalize()
+	if err != nil {
+		logrus.Debugf("Error finalizing: %s", err.Error())
+	}
+	ctx.Destroy()
 }
 
 // SetupHSMEnv is a method that depends on the existences
@@ -824,10 +824,10 @@ func YubikeyAccessible() bool {
 		return false
 	}
 	ctx, session, err := SetupHSMEnv(pkcs11Lib, defaultLoader)
-	defer cleanup(ctx, session)
 	if err != nil {
 		return false
 	}
+	defer cleanup(ctx, session)
 	return true
 }
 
