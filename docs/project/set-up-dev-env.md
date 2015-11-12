@@ -22,7 +22,7 @@ You use the `docker` repository and its `Dockerfile` to create a Docker image,
 run a Docker container, and develop code in the container. Docker itself builds,
 tests, and releases new Docker versions using this container.
 
-If you followed the procedures that <a href="/engine/project/set-up-git" target="_blank">
+If you followed the procedures that <a href="/opensource/project/set-up-git/" target="_blank">
 set up Git for contributing</a>, you should have a fork of the `docker/docker`
 repository. You also created a branch called `dry-run-test`. In this section,
 you continue working with your fork on this branch.
@@ -105,7 +105,7 @@ environment.
         $ cd ~/repos/docker-fork
 
 	If you are following along with this guide, you created a `dry-run-test`
-	branch when you <a href="/engine/project/set-up-git" target="_blank"> set up Git for
+	branch when you <a href="/opensource/project/set-up-git/" target="_blank"> set up Git for
 	contributing</a>.
 
 4. Ensure you are on your `dry-run-test` branch.
