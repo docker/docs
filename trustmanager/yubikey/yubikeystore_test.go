@@ -4,6 +4,7 @@ package yubikey
 
 import (
 	"crypto/rand"
+	"errors"
 	"fmt"
 	"reflect"
 	"testing"
@@ -207,6 +208,43 @@ func TestYubiAddKeyCanAddToMiddleSlot(t *testing.T) {
 			assert.False(t, ok)
 		}
 	}
+}
+
+type nonworkingBackup struct {
+	trustmanager.KeyMemoryStore
+}
+
+// AddKey stores the contents of a PEM-encoded private key as a PEM block
+func (s *nonworkingBackup) AddKey(name, alias string, privKey data.PrivateKey) error {
+	return errors.New("Nope!")
+}
+
+// If, when adding a key to the Yubikey, we can't back up the key, it should
+// be removed from the Yubikey too because otherwise there is no way for
+// the user to later get a backup of the key.
+func TestYubiAddKeyRollsBackIfCannotBackup(t *testing.T) {
+	if !YubikeyAccessible() {
+		t.Skip("Must have Yubikey access.")
+	}
+	clearAllKeys(t)
+
+	SetYubikeyKeyMode(KeymodeNone)
+	defer func() {
+		SetYubikeyKeyMode(KeymodeTouch | KeymodePinOnce)
+	}()
+
+	backup := &nonworkingBackup{
+		KeyMemoryStore: *trustmanager.NewKeyMemoryStore(ret),
+	}
+	store, err := NewYubiKeyStore(backup, ret)
+	assert.NoError(t, err)
+
+	_, err = testAddKey(t, store)
+	assert.Error(t, err)
+	assert.IsType(t, ErrBackupFailed{}, err)
+
+	// there should be no keys on the yubikey
+	assert.Len(t, cleanListKeys(t), 0)
 }
 
 // RemoveKey removes a key from the yubikey, but not from the backup store.
