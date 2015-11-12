@@ -10,7 +10,7 @@ weight=100
 
 # Release Notes: Docker Trusted Registry & Commercially Supported Docker Engine
 
-This document describes the latest changes, additions, and fixes.
+This document describes the latest changes, additions, known issues, and fixes for both the Docker Trusted Registry and the commercially supported Docker engine.
 
 ## Prior Versions
 
@@ -21,6 +21,13 @@ older versions of these, see the [prior release notes archive](prior-release-not
 
 ## Docker Trusted Registry 1.4
 (12 November 2015)
+
+Release notes for the Trusted Registry contain the following sections:
+
+* New features
+* Fixed with this release
+* Other corrected issues
+* Known issues
 
 ### New features
 This release introduces the following new features. For additional information
@@ -77,12 +84,16 @@ Group Member Attribute" should be set to the name of the attribute on this group
 object which corresponds to the Distinguished Name of the group member objects.
 This setting deprecates the old "Admin Search Filter" field.
 
-#### Other Issues/Fixes
+#### Other corrected issues
 
 * Corrected an issue where you could switch from none to managed authentication
 without creating an administrator.
 
 * Added a "rootdirectory" parameter to the S3 storage option.
+
+#### Known issues
+
+Organization owners are unable to delete a repository from the UI. You can still delete a repository through the API and a system administrator can still delete a repository from the UI.
 
 ### Docker Trusted Registry 1.3.3
 (18 September 2015) (amended: 2 November 2015)

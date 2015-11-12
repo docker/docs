@@ -44,16 +44,22 @@ kernel.
 
     `$ sudo yum install -y yum-utils`
 
-4. Install the CS Engine with the following command:
+4. Add the repository:
+
+    ```
+    $ sudo yum-config-manager --add-repo https://packages.docker.com/1.9/yum/repo/main/centos/7
+    ```
+
+5. Install the CS Engine with the following command:
 
         $ sudo yum install docker-engine
 
-5. Enable the Docker daemon as a service and then start it.
+6. Enable the Docker daemon as a service and then start it.
 
         $ sudo systemctl enable docker.service
         $ sudo systemctl start docker.service
 
-6. Verify the installation was successful by running a simple container.
+7. Verify the installation was successful by running a simple container.
 
         $ sudo docker run hello-world
         Unable to find image 'hello-world:latest' locally
@@ -78,11 +84,11 @@ kernel.
         To try something more ambitious, you can run an Ubuntu container with:
          $ docker run -it ubuntu bash
 
-7. Optionally, add non-sudo access to the Docker socket by adding your user to the `docker` group.
+8. Optionally, add non-sudo access to the Docker socket by adding your user to the `docker` group.
 
         $ sudo usermod -a -G docker $USER
 
-8. Log out and log back in to have your new permissions take effect.
+9. Log out and log back in to have your new permissions take effect.
 
 
 ## Install on Ubuntu 14.04 LTS
@@ -103,11 +109,7 @@ kernel.
 
         You may need to reboot your server after updating the LTS kernel.
 
-5. Install the engine with the following command:
-
-      `$ sudo apt-get update && sudo apt-get install docker-engine`
-
-6. Add the repository for the new version:
+5. Add the repository for the new version:
 
     `$ echo "deb https://packages.docker.com/1.9/apt/repo ubuntu-trusty main" | sudo tee /etc/apt/sources.list.d/docker.list`
 
@@ -121,17 +123,15 @@ kernel.
         * ubuntu-vivid (Ubuntu 15.04)
         * ubuntu-wily (Ubuntu 15.10)
 
-      `$ echo "deb https://packages.docker.com/1.9/apt/repo ubuntu-trusty main" | sudo tee /etc/apt/sources.list.d/docker.list`
-
-7. Run the following to install commercially supported Docker Engine and its dependencies:
+6. Run the following to install commercially supported Docker Engine and its dependencies:
 
     `$ sudo apt-get update && sudo apt-get install docker-engine`
 
-8. Confirm the Docker daemon is running with `sudo service docker start`.
+7. Confirm the Docker daemon is running with `sudo service docker start`.
 
         $ sudo service docker start
 
-9. Optionally, add non-sudo access to the Docker socket by adding your user to the `docker` group.
+8. Optionally, add non-sudo access to the Docker socket by adding your user to the `docker` group.
 
         $ sudo usermod -a -G docker $USER
 

@@ -20,9 +20,7 @@ using the Trusted Registry user interface (UI) to view, manage, or assign
 permissions regarding repositories, organizations, and teams, go to the
 [Account management](accounts.md) documentation.
 
-## Reporting
-
-### Dashboard tab
+## Reporting Dashboard
 
 ![Docker Trusted Registry Dashboard</admin/metrics/>](assets/admin-metrics.png)
 
@@ -52,7 +50,9 @@ sub-catagorized into the following sub-headings:
 * **Security**, SSL certificates and SSL private key
 * **Storage**, where you can set an optional storage back-end
 * **License**, where you apply your license
+* **Garbage collection**, set up cron job
 * **Auth**, authentication method settings: managed or LDAP
+
 * **Updates**, where you upgrade your registry
 
 Refer to the [configuration documentation](configuration.md) for details.

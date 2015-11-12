@@ -47,7 +47,8 @@ To get your copy of Docker Trusted Registry, including a free trial, visit [the 
 
 The following documentation for Docker Trusted Registry is available:
 
-* **Overview** This page.
+* **Overview**, this page.
+* [**Release Notes**](release-notes.md) See the latest additions, fixes, and known issues.
 * [**Quick Start: Basic User Workflow**](quick-start.md) Go here to learn the
 fundamentals of how Docker Trusted Registry works and how you can set up a simple, but useful
 workflow.
