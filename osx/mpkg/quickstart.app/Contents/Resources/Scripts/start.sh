@@ -34,6 +34,7 @@ VM_STATUS=$($DOCKER_MACHINE status $VM)
 if [ "$VM_STATUS" != "Running" ]; then
   echo "Starting machine $VM..."
   $DOCKER_MACHINE start $VM
+  yes | $DOCKER_MACHINE regenerate-certs $VM
 fi
 
 echo "Setting environment variables for machine $VM..."

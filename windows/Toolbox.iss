@@ -78,8 +78,8 @@ Source: "{#virtualBoxMsi}"; DestDir: "{app}\installers\virtualbox"; DestName: "v
 [Icons]
 Name: "{userprograms}\Docker\Kitematic (Alpha)"; WorkingDir: "{app}"; Filename: "{app}\kitematic\Kitematic.exe"; Components: "Kitematic"
 Name: "{commondesktop}\Kitematic (Alpha)"; WorkingDir: "{app}"; Filename: "{app}\kitematic\Kitematic.exe"; Tasks: desktopicon; Components: "Kitematic"
-Name: "{userprograms}\Docker\Docker Quickstart Terminal"; WorkingDir: "{app}"; Filename: "{pf64}\Git\git-bash.exe"; Parameters: """{app}\start.sh"""; IconFilename: "{app}/docker-quickstart-terminal.ico"; Components: "Docker"
-Name: "{commondesktop}\Docker Quickstart Terminal"; WorkingDir: "{app}"; Filename: "{pf64}\Git\git-bash.exe"; Parameters: """{app}\start.sh"""; IconFilename: "{app}/docker-quickstart-terminal.ico"; Tasks: desktopicon; Components: "Docker"
+Name: "{userprograms}\Docker\Docker Quickstart Terminal"; WorkingDir: "{app}"; Filename: "{pf64}\Git\bin\bash.exe"; Parameters: "--login -i ""{app}\start.sh"""; IconFilename: "{app}/docker-quickstart-terminal.ico"; Components: "Docker"
+Name: "{commondesktop}\Docker Quickstart Terminal"; WorkingDir: "{app}"; Filename: "{pf64}\Git\bin\bash.exe"; Parameters: "--login -i ""{app}\start.sh"""; IconFilename: "{app}/docker-quickstart-terminal.ico"; Tasks: desktopicon; Components: "Docker"
 
 [UninstallRun]
 Filename: "{app}\delete.sh"
@@ -212,13 +212,13 @@ begin
 	TrackingLabel.Parent := WelcomePage.Surface;
 	TrackingLabel.Font := WizardForm.WelcomeLabel2.Font;
 	TrackingLabel.Font.Color := clGray;
-  TrackingLabel.Caption := 'This collects annoymous data to help us detect installation problems and improve the overall experience. We only use it to aggregate statistics and will never share it with third parties.';
+  TrackingLabel.Caption := 'This collects anonymous data to help us detect installation problems and improve the overall experience. We only use it to aggregate statistics and will never share it with third parties.';
 	TrackingLabel.WordWrap := True;
 	TrackingLabel.Visible := True;
 	TrackingLabel.Left := WizardForm.WelcomeLabel2.Left;
 	TrackingLabel.Width := WizardForm.WelcomeLabel2.Width;
 	TrackingLabel.Top := TrackingCheckBox.Top + TrackingCheckBox.Height + 5;
-	TrackingLabel.Height := 50;
+	TrackingLabel.Height := 100;
 
 		// Don't do this until we can compare versions
 		// Wizardform.ComponentsList.Checked[3] := NeedToInstallVirtualBox();

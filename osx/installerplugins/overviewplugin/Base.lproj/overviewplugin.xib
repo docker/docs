@@ -33,11 +33,11 @@
                     </buttonCell>
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xi8-N0-Reb">
-                    <rect key="frame" x="18" y="63" width="382" height="51"/>
+                    <rect key="frame" x="18" y="46" width="382" height="68"/>
                     <animations/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="N5z-io-cf5">
                         <font key="font" metaFont="system"/>
-                        <string key="title">This collects annoymous data to help us detect installation problems and improve the overall experience. We only use it to aggregate statistics and will never share it with third parties.</string>
+                        <string key="title">This collects anonymous data to help us detect installation problems and improve the overall experience. We only use it to aggregate statistics and will never share it with third parties.</string>
                         <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
