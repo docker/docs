@@ -2,7 +2,6 @@ package main
 
 import (
 	"crypto/x509"
-	"fmt"
 	"math"
 	"os"
 	"time"
@@ -24,13 +23,13 @@ func init() {
 var cmdCert = &cobra.Command{
 	Use:   "cert",
 	Short: "Operates on certificates.",
-	Long:  `operations on certificates.`,
+	Long:  `Operations on certificates.`,
 }
 
 var cmdCertList = &cobra.Command{
 	Use:   "list",
 	Short: "Lists certificates.",
-	Long:  "lists root certificates known to notary.",
+	Long:  "Lists root certificates known to notary.",
 	Run:   certList,
 }
 
@@ -40,7 +39,7 @@ var certRemoveYes bool
 var cmdCertRemove = &cobra.Command{
 	Use:   "remove [ certID ]",
 	Short: "Removes the certificate with the given cert ID.",
-	Long:  "remove the certificate with the given cert ID from the local host.",
+	Long:  "Remove the certificate with the given cert ID from the local host.",
 	Run:   certRemove,
 }
 
@@ -50,14 +49,18 @@ func certRemove(cmd *cobra.Command, args []string) {
 	// If the user provided -g and a cert ID, also show usage
 	if (len(args) < 1 && certRemoveGUN == "") || (len(args) > 0 && certRemoveGUN != "") {
 		cmd.Usage()
-		fatalf("must specify the cert ID or the GUN of the certificates to remove")
+		fatalf("Must specify the cert ID or the GUN of the certificates to remove")
 	}
-
 	parseConfig()
 
-	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, retriever)
+	trustDir := mainViper.GetString("trust_dir")
+	fileKeyStore, err := trustmanager.NewKeyFileStore(trustDir, retriever)
 	if err != nil {
-		fatalf("failed to create a new truststore manager with directory: %s", trustDir)
+		fatalf("Failed to create private key store in directory: %s", trustDir)
+	}
+	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, fileKeyStore)
+	if err != nil {
+		fatalf("Failed to create a new truststore manager with directory: %s", trustDir)
 	}
 
 	var certsToRemove []*x509.Certificate
@@ -67,12 +70,12 @@ func certRemove(cmd *cobra.Command, args []string) {
 		certID := args[0]
 		// This is an invalid ID
 		if len(certID) != idSize {
-			fatalf("invalid certificate ID provided: %s", certID)
+			fatalf("Invalid certificate ID provided: %s", certID)
 		}
 		// Attempt to find this certificates
 		cert, err := keyStoreManager.TrustedCertificateStore().GetCertificateByCertID(certID)
 		if err != nil {
-			fatalf("unable to retrieve certificate with cert ID: %s", certID)
+			fatalf("Unable to retrieve certificate with cert ID: %s", certID)
 		}
 		certsToRemove = append(certsToRemove, cert)
 	} else {
@@ -85,20 +88,20 @@ func certRemove(cmd *cobra.Command, args []string) {
 	}
 
 	// List all the keys about to be removed
-	fmt.Printf("The following certificates will be removed:\n\n")
+	cmd.Printf("The following certificates will be removed:\n\n")
 	for _, cert := range certsToRemove {
 		// This error can't occur because we're getting certs off of an
 		// x509 store that indexes by ID.
 		certID, _ := trustmanager.FingerprintCert(cert)
-		fmt.Printf("%s - %s\n", cert.Subject.CommonName, certID)
+		cmd.Printf("%s - %s\n", cert.Subject.CommonName, certID)
 	}
-	fmt.Println("\nAre you sure you want to remove these certificates? (yes/no)")
+	cmd.Println("\nAre you sure you want to remove these certificates? (yes/no)")
 
 	// Ask for confirmation before removing certificates, unless -y is provided
 	if !certRemoveYes {
 		confirmed := askConfirm()
 		if !confirmed {
-			fatalf("aborting action.")
+			fatalf("Aborting action.")
 		}
 	}
 
@@ -106,7 +109,7 @@ func certRemove(cmd *cobra.Command, args []string) {
 	for _, cert := range certsToRemove {
 		err = keyStoreManager.TrustedCertificateStore().RemoveCert(cert)
 		if err != nil {
-			fatalf("failed to remove root certificate for %s", cert.Subject.CommonName)
+			fatalf("Failed to remove root certificate for %s", cert.Subject.CommonName)
 		}
 	}
 }
@@ -116,28 +119,32 @@ func certList(cmd *cobra.Command, args []string) {
 		cmd.Usage()
 		os.Exit(1)
 	}
-
 	parseConfig()
 
-	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, retriever)
+	trustDir := mainViper.GetString("trust_dir")
+	fileKeyStore, err := trustmanager.NewKeyFileStore(trustDir, retriever)
 	if err != nil {
-		fatalf("failed to create a new truststore manager with directory: %s", trustDir)
+		fatalf("Failed to create private key store in directory: %s", trustDir)
+	}
+	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, fileKeyStore)
+	if err != nil {
+		fatalf("Failed to create a new truststore manager with directory: %s", trustDir)
 	}
 
-	fmt.Println("")
-	fmt.Println("# Trusted Certificates:")
+	cmd.Println("")
+	cmd.Println("# Trusted Certificates:")
 	trustedCerts := keyStoreManager.TrustedCertificateStore().GetCertificates()
 	for _, c := range trustedCerts {
-		printCert(c)
+		printCert(cmd, c)
 	}
 }
 
-func printCert(cert *x509.Certificate) {
+func printCert(cmd *cobra.Command, cert *x509.Certificate) {
 	timeDifference := cert.NotAfter.Sub(time.Now())
 	certID, err := trustmanager.FingerprintCert(cert)
 	if err != nil {
-		fatalf("could not fingerprint certificate: %v", err)
+		fatalf("Could not fingerprint certificate: %v", err)
 	}
 
-	fmt.Printf("%s %s (expires in: %v days)\n", cert.Subject.CommonName, certID, math.Floor(timeDifference.Hours()/24))
+	cmd.Printf("%s %s (expires in: %v days)\n", cert.Subject.CommonName, certID, math.Floor(timeDifference.Hours()/24))
 }

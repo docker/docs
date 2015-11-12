@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestUnlockedSigner(t *testing.T) {
+func TestGenerateCertificate(t *testing.T) {
 	privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
 	assert.NoError(t, err, "could not generate key")
 

@@ -1,6 +1,7 @@
 package client
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -11,15 +12,14 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/docker/distribution/registry/api/v2"
+	"github.com/Sirupsen/logrus"
+	ctxu "github.com/docker/distribution/context"
 	"github.com/docker/notary/client/changelist"
 	"github.com/docker/notary/cryptoservice"
-	"github.com/docker/notary/server/handlers"
+	"github.com/docker/notary/server"
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
-	"github.com/docker/notary/utils"
-	"github.com/gorilla/mux"
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/net/context"
 )
@@ -28,7 +28,7 @@ const timestampKeyJSON = `{"keytype":"rsa","keyval":{"public":"MIIBIjANBgkqhkiG9
 const timestampECDSAKeyJSON = `
 {"keytype":"ecdsa","keyval":{"public":"MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEgl3rzMPMEKhS1k/AX16MM4PdidpjJr+z4pj0Td+30QnpbOIARgpyR1PiFztU8BZlqG3cUazvFclr2q/xHvfrqw==","private":"MHcCAQEEIDqtcdzU7H3AbIPSQaxHl9+xYECt7NpK7B1+6ep5cv9CoAoGCCqGSM49AwEHoUQDQgAEgl3rzMPMEKhS1k/AX16MM4PdidpjJr+z4pj0Td+30QnpbOIARgpyR1PiFztU8BZlqG3cUazvFclr2q/xHvfrqw=="}}`
 
-func createTestServer(t *testing.T) (*httptest.Server, *http.ServeMux) {
+func simpleTestServer(t *testing.T) (*httptest.Server, *http.ServeMux) {
 	mux := http.NewServeMux()
 	// TUF will request /v2/docker.com/notary/_trust/tuf/timestamp.key
 	// Return a canned timestamp.key
@@ -41,6 +41,41 @@ func createTestServer(t *testing.T) (*httptest.Server, *http.ServeMux) {
 	ts := httptest.NewServer(mux)
 
 	return ts, mux
+}
+
+func fullTestServer(t *testing.T) *httptest.Server {
+	// Set up server
+	ctx := context.WithValue(
+		context.Background(), "metaStore", storage.NewMemStorage())
+
+	// Do not pass one of the const KeyAlgorithms here as the value! Passing a
+	// string is in itself good test that we are handling it correctly as we
+	// will be receiving a string from the configuration.
+	ctx = context.WithValue(ctx, "keyAlgorithm", "ecdsa")
+
+	// Eat the logs instead of spewing them out
+	var b bytes.Buffer
+	l := logrus.New()
+	l.Out = &b
+	ctx = ctxu.WithLogger(ctx, logrus.NewEntry(l))
+
+	cryptoService := cryptoservice.NewCryptoService(
+		"", trustmanager.NewKeyMemoryStore(passphraseRetriever))
+	return httptest.NewServer(server.RootHandler(nil, ctx, cryptoService))
+}
+
+func initializeRepo(t *testing.T, rootType, tempBaseDir, gun, url string) (*NotaryRepository, string) {
+	repo, err := NewNotaryRepository(
+		tempBaseDir, gun, url, http.DefaultTransport, passphraseRetriever)
+	assert.NoError(t, err, "error creating repo: %s", err)
+
+	rootKeyID, err := repo.KeyStoreManager.GenRootKey(rootType)
+	assert.NoError(t, err, "error generating root key: %s", err)
+
+	err = repo.Initialize(rootKeyID)
+	assert.NoError(t, err, "error creating repository: %s", err)
+
+	return repo, rootKeyID
 }
 
 // TestInitRepo runs through the process of initializing a repository and makes
@@ -61,17 +96,10 @@ func testInitRepo(t *testing.T, rootType string) {
 
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
-	ts, _ := createTestServer(t)
+	ts, _ := simpleTestServer(t)
 	defer ts.Close()
 
-	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport, passphraseRetriever)
-	assert.NoError(t, err, "error creating repo: %s", err)
-
-	rootKeyID, err := repo.KeyStoreManager.GenRootKey(rootType)
-	assert.NoError(t, err, "error generating root key: %s", err)
-
-	err = repo.Initialize(rootKeyID)
-	assert.NoError(t, err, "error creating repository: %s", err)
+	repo, rootKeyID := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL)
 
 	// Inspect contents of the temporary directory
 	expectedDirs := []string{
@@ -165,19 +193,32 @@ func testInitRepo(t *testing.T, rootType string) {
 	}
 }
 
-// TestAddListTarget adds a target to the repo and confirms that the changelist
-// is updated correctly. Then it calls ListTargets and checks the return value.
-// Using ListTargets involves serving signed metadata files over the test's
-// internal HTTP server.
+// TestAddTarget adds a target to the repo and confirms that the changelist
+// is updated correctly.
 // We test this with both an RSA and ECDSA root key
-func TestAddListTarget(t *testing.T) {
-	testAddListTarget(t, data.ECDSAKey)
+func TestAddTarget(t *testing.T) {
+	testAddTarget(t, data.ECDSAKey)
 	if !testing.Short() {
-		testAddListTarget(t, data.RSAKey)
+		testAddTarget(t, data.RSAKey)
 	}
 }
 
-func testAddListTarget(t *testing.T, rootType string) {
+func addTarget(t *testing.T, repo *NotaryRepository, targetName, targetFile string) *Target {
+	target, err := NewTarget(targetName, targetFile)
+	assert.NoError(t, err, "error creating target")
+	err = repo.AddTarget(target)
+	assert.NoError(t, err, "error adding target")
+	return target
+}
+
+// calls GetChangelist and gets the actual changes out
+func getChanges(t *testing.T, repo *NotaryRepository) []changelist.Change {
+	changeList, err := repo.GetChangelist()
+	assert.NoError(t, err)
+	return changeList.List()
+}
+
+func testAddTarget(t *testing.T, rootType string) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)
@@ -186,151 +227,172 @@ func testAddListTarget(t *testing.T, rootType string) {
 
 	gun := "docker.com/notary"
 
-	ts, mux := createTestServer(t)
+	ts, _ := simpleTestServer(t)
 	defer ts.Close()
 
-	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport, passphraseRetriever)
-	assert.NoError(t, err, "error creating repository: %s", err)
+	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL)
 
-	rootKeyID, err := repo.KeyStoreManager.GenRootKey(rootType)
-	assert.NoError(t, err, "error generating root key: %s", err)
-
-	err = repo.Initialize(rootKeyID)
+	// tests need to manually boostrap timestamp as client doesn't generate it
+	err = repo.tufRepo.InitTimestamp()
 	assert.NoError(t, err, "error creating repository: %s", err)
+	assert.Len(t, getChanges(t, repo), 0, "should start with zero changes")
+
+	// Add fixtures/intermediate-ca.crt as a target. There's no particular
+	// reason for using this file except that it happens to be available as
+	// a fixture.
+	addTarget(t, repo, "latest", "../fixtures/intermediate-ca.crt")
+	changes := getChanges(t, repo)
+	assert.Len(t, changes, 1, "wrong number of changes files found")
+
+	for _, c := range changes { // there is only one
+		assert.EqualValues(t, changelist.ActionCreate, c.Action())
+		assert.Equal(t, "targets", c.Scope())
+		assert.Equal(t, "target", c.Type())
+		assert.Equal(t, "latest", c.Path())
+		assert.NotEmpty(t, c.Content())
+	}
+
+	// Create a second target
+	addTarget(t, repo, "current", "../fixtures/intermediate-ca.crt")
+	changes = getChanges(t, repo)
+	assert.Len(t, changes, 2, "wrong number of changelist files found")
+
+	newFileFound := false
+	for _, c := range changes {
+		if c.Path() != "latest" {
+			assert.EqualValues(t, changelist.ActionCreate, c.Action())
+			assert.Equal(t, "targets", c.Scope())
+			assert.Equal(t, "target", c.Type())
+			assert.Equal(t, "current", c.Path())
+			assert.NotEmpty(t, c.Content())
+
+			newFileFound = true
+		}
+	}
+	assert.True(t, newFileFound, "second changelist file not found")
+}
+
+// TestListTarget fakes serving signed metadata files over the test's
+// internal HTTP server to ensure that ListTargets returns the correct number
+// of listed targets.
+// We test this with both an RSA and ECDSA root key
+func TestListTarget(t *testing.T) {
+	testListEmptyTargets(t, data.ECDSAKey)
+	testListTarget(t, data.ECDSAKey)
+	if !testing.Short() {
+		testListEmptyTargets(t, data.RSAKey)
+		testListTarget(t, data.RSAKey)
+	}
+}
+
+func testListEmptyTargets(t *testing.T, rootType string) {
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	defer os.RemoveAll(tempBaseDir)
+
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+
+	gun := "docker.com/notary"
+
+	ts := fullTestServer(t)
+	defer ts.Close()
+
+	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL)
 
 	// tests need to manually boostrap timestamp as client doesn't generate it
 	err = repo.tufRepo.InitTimestamp()
 	assert.NoError(t, err, "error creating repository: %s", err)
 
-	// Add fixtures/intermediate-ca.crt as a target. There's no particular reason
-	// for using this file except that it happens to be available as
-	// a fixture.
-	latestTarget, err := NewTarget("latest", "../fixtures/intermediate-ca.crt")
-	assert.NoError(t, err, "error creating target")
-	err = repo.AddTarget(latestTarget)
-	assert.NoError(t, err, "error adding target")
+	_, err = repo.ListTargets()
+	assert.Error(t, err) // no trust data
+}
 
-	// Look for the changelist file
-	changelistDirPath := filepath.Join(tempBaseDir, "tuf", filepath.FromSlash(gun), "changelist")
+// reads data from the repository in order to fake data being served via
+// the ServeMux.
+func fakeServerData(t *testing.T, repo *NotaryRepository, mux *http.ServeMux) {
+	tempKey, err := data.UnmarshalPrivateKey([]byte(timestampECDSAKeyJSON))
+	assert.NoError(t, err)
 
-	changelistDir, err := os.Open(changelistDirPath)
-	assert.NoError(t, err, "could not open changelist directory")
+	savedTUFRepo := repo.tufRepo // in case this is overwritten
 
-	fileInfos, err := changelistDir.Readdir(0)
-	assert.NoError(t, err, "could not read changelist directory")
+	repo.KeyStoreManager.KeyStore.AddKey(
+		filepath.Join(filepath.FromSlash(repo.gun), tempKey.ID()),
+		"nonroot", tempKey)
 
-	// Should only be one file in the directory
-	assert.Len(t, fileInfos, 1, "wrong number of changelist files found")
+	rootJSONFile := filepath.Join(repo.baseDir, "tuf",
+		filepath.FromSlash(repo.gun), "metadata", "root.json")
+	rootFileBytes, err := ioutil.ReadFile(rootJSONFile)
 
-	clName := fileInfos[0].Name()
-	raw, err := ioutil.ReadFile(filepath.Join(changelistDirPath, clName))
-	assert.NoError(t, err, "could not read changelist file %s", clName)
+	signedTargets, err := savedTUFRepo.SignTargets(
+		"targets", data.DefaultExpires("targets"))
+	assert.NoError(t, err)
 
-	c := &changelist.TufChange{}
-	err = json.Unmarshal(raw, c)
-	assert.NoError(t, err, "could not unmarshal changelist file %s", clName)
+	signedSnapshot, err := savedTUFRepo.SignSnapshot(
+		data.DefaultExpires("snapshot"))
+	assert.NoError(t, err)
 
-	assert.EqualValues(t, changelist.ActionCreate, c.Actn)
-	assert.Equal(t, "targets", c.Role)
-	assert.Equal(t, "target", c.ChangeType)
-	assert.Equal(t, "latest", c.ChangePath)
-	assert.NotEmpty(t, c.Data)
+	signedTimestamp, err := savedTUFRepo.SignTimestamp(
+		data.DefaultExpires("timestamp"))
+	assert.NoError(t, err)
 
-	changelistDir.Close()
+	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/root.json",
+		func(w http.ResponseWriter, r *http.Request) {
+			assert.NoError(t, err)
+			fmt.Fprint(w, string(rootFileBytes))
+		})
 
-	// Create a second target
-	currentTarget, err := NewTarget("current", "../fixtures/intermediate-ca.crt")
-	assert.NoError(t, err, "error creating target")
-	err = repo.AddTarget(currentTarget)
-	assert.NoError(t, err, "error adding target")
+	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/timestamp.json",
+		func(w http.ResponseWriter, r *http.Request) {
+			timestampJSON, _ := json.Marshal(signedTimestamp)
+			fmt.Fprint(w, string(timestampJSON))
+		})
 
-	changelistDir, err = os.Open(changelistDirPath)
-	assert.NoError(t, err, "could not open changelist directory")
+	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/snapshot.json",
+		func(w http.ResponseWriter, r *http.Request) {
+			snapshotJSON, _ := json.Marshal(signedSnapshot)
+			fmt.Fprint(w, string(snapshotJSON))
+		})
 
-	// There should now be a second file in the directory
-	fileInfos, err = changelistDir.Readdir(0)
-	assert.NoError(t, err, "could not read changelist directory")
+	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/targets.json",
+		func(w http.ResponseWriter, r *http.Request) {
+			targetsJSON, _ := json.Marshal(signedTargets)
+			fmt.Fprint(w, string(targetsJSON))
+		})
+}
 
-	assert.Len(t, fileInfos, 2, "wrong number of changelist files found")
+func testListTarget(t *testing.T, rootType string) {
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	defer os.RemoveAll(tempBaseDir)
 
-	newFileFound := false
-	for _, fileInfo := range fileInfos {
-		if fileInfo.Name() != clName {
-			clName2 := fileInfo.Name()
-			raw, err := ioutil.ReadFile(filepath.Join(changelistDirPath, clName2))
-			assert.NoError(t, err, "could not read changelist file %s", clName2)
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
-			c := &changelist.TufChange{}
-			err = json.Unmarshal(raw, c)
-			assert.NoError(t, err, "could not unmarshal changelist file %s", clName2)
+	gun := "docker.com/notary"
 
-			assert.EqualValues(t, changelist.ActionCreate, c.Actn)
-			assert.Equal(t, "targets", c.Role)
-			assert.Equal(t, "target", c.ChangeType)
-			assert.Equal(t, "current", c.ChangePath)
-			assert.NotEmpty(t, c.Data)
+	ts, mux := simpleTestServer(t)
+	defer ts.Close()
 
-			newFileFound = true
-			break
-		}
-	}
+	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL)
 
-	assert.True(t, newFileFound, "second changelist file not found")
+	// tests need to manually boostrap timestamp as client doesn't generate it
+	err = repo.tufRepo.InitTimestamp()
+	assert.NoError(t, err, "error creating repository: %s", err)
 
-	changelistDir.Close()
-
-	// Now test ListTargets. In preparation, we need to expose some signed
-	// metadata files on the internal HTTP server.
+	latestTarget := addTarget(t, repo, "latest", "../fixtures/intermediate-ca.crt")
+	currentTarget := addTarget(t, repo, "current", "../fixtures/intermediate-ca.crt")
 
 	// Apply the changelist. Normally, this would be done by Publish
 
 	// load the changelist for this repo
-	cl, err := changelist.NewFileChangelist(filepath.Join(tempBaseDir, "tuf", filepath.FromSlash(gun), "changelist"))
+	cl, err := changelist.NewFileChangelist(
+		filepath.Join(tempBaseDir, "tuf", filepath.FromSlash(gun), "changelist"))
 	assert.NoError(t, err, "could not open changelist")
 
 	// apply the changelist to the repo
 	err = applyChangelist(repo.tufRepo, cl)
 	assert.NoError(t, err, "could not apply changelist")
 
-	tempKey, err := data.UnmarshalPrivateKey([]byte(timestampECDSAKeyJSON))
-	assert.NoError(t, err)
-
-	repo.KeyStoreManager.KeyStore.AddKey(filepath.Join(filepath.FromSlash(gun), tempKey.ID()), "nonroot", tempKey)
-
-	// Because ListTargets will clear this
-	savedTUFRepo := repo.tufRepo
-
-	rootJSONFile := filepath.Join(tempBaseDir, "tuf", filepath.FromSlash(gun), "metadata", "root.json")
-	rootFileBytes, err := ioutil.ReadFile(rootJSONFile)
-
-	signedTargets, err := savedTUFRepo.SignTargets("targets", data.DefaultExpires("targets"))
-	assert.NoError(t, err)
-
-	signedSnapshot, err := savedTUFRepo.SignSnapshot(data.DefaultExpires("snapshot"))
-	assert.NoError(t, err)
-
-	signedTimestamp, err := savedTUFRepo.SignTimestamp(data.DefaultExpires("timestamp"))
-	assert.NoError(t, err)
-
-	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/root.json", func(w http.ResponseWriter, r *http.Request) {
-		assert.NoError(t, err)
-		fmt.Fprint(w, string(rootFileBytes))
-	})
-
-	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/timestamp.json", func(w http.ResponseWriter, r *http.Request) {
-		timestampJSON, _ := json.Marshal(signedTimestamp)
-		fmt.Fprint(w, string(timestampJSON))
-	})
-
-	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/snapshot.json", func(w http.ResponseWriter, r *http.Request) {
-		snapshotJSON, _ := json.Marshal(signedSnapshot)
-		fmt.Fprint(w, string(snapshotJSON))
-	})
-
-	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/targets.json", func(w http.ResponseWriter, r *http.Request) {
-		targetsJSON, _ := json.Marshal(signedTargets)
-		fmt.Fprint(w, string(targetsJSON))
-	})
+	fakeServerData(t, repo, mux)
 
 	targets, err := repo.ListTargets()
 	assert.NoError(t, err)
@@ -376,17 +438,10 @@ func testValidateRootKey(t *testing.T, rootType string) {
 
 	gun := "docker.com/notary"
 
-	ts, _ := createTestServer(t)
+	ts, _ := simpleTestServer(t)
 	defer ts.Close()
 
-	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport, passphraseRetriever)
-	assert.NoError(t, err, "error creating repository: %s", err)
-
-	rootKeyID, err := repo.KeyStoreManager.GenRootKey(rootType)
-	assert.NoError(t, err, "error generating root key: %s", err)
-
-	err = repo.Initialize(rootKeyID)
-	assert.NoError(t, err, "error creating repository: %s", err)
+	initializeRepo(t, rootType, tempBaseDir, gun, ts.URL)
 
 	rootJSONFile := filepath.Join(tempBaseDir, "tuf", filepath.FromSlash(gun), "metadata", "root.json")
 
@@ -419,6 +474,57 @@ func testValidateRootKey(t *testing.T, rootType string) {
 	}
 }
 
+// TestGetChangelist ensures that the changelist returned matches the changes
+// added.
+// We test this with both an RSA and ECDSA root key
+func TestGetChangelist(t *testing.T) {
+	testGetChangelist(t, data.ECDSAKey)
+	if !testing.Short() {
+		testGetChangelist(t, data.RSAKey)
+	}
+}
+
+func testGetChangelist(t *testing.T, rootType string) {
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	defer os.RemoveAll(tempBaseDir)
+
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+
+	gun := "docker.com/notary"
+	ts, _ := simpleTestServer(t)
+
+	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL)
+	assert.Len(t, getChanges(t, repo), 0, "No changes should be in changelist yet")
+
+	// Create 2 targets
+	addTarget(t, repo, "latest", "../fixtures/intermediate-ca.crt")
+	addTarget(t, repo, "current", "../fixtures/intermediate-ca.crt")
+
+	// Test loading changelist
+	chgs := getChanges(t, repo)
+	assert.Len(t, chgs, 2, "Wrong number of changes returned from changelist")
+
+	changes := make(map[string]changelist.Change)
+	for _, ch := range chgs {
+		changes[ch.Path()] = ch
+	}
+
+	currentChange := changes["current"]
+	assert.NotNil(t, currentChange, "Expected changelist to contain a change for path 'current'")
+	assert.EqualValues(t, changelist.ActionCreate, currentChange.Action())
+	assert.Equal(t, "targets", currentChange.Scope())
+	assert.Equal(t, "target", currentChange.Type())
+	assert.Equal(t, "current", currentChange.Path())
+
+	latestChange := changes["latest"]
+	assert.NotNil(t, latestChange, "Expected changelist to contain a change for path 'latest'")
+	assert.EqualValues(t, changelist.ActionCreate, latestChange.Action())
+	assert.Equal(t, "targets", latestChange.Scope())
+	assert.Equal(t, "target", latestChange.Type())
+	assert.Equal(t, "latest", latestChange.Path())
+}
+
 // TestPublish creates a repo, instantiates a notary server, and publishes
 // the repo to the server.
 // We test this with both an RSA and ECDSA root key
@@ -437,148 +543,19 @@ func testPublish(t *testing.T, rootType string) {
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	gun := "docker.com/notary"
+	ts := fullTestServer(t)
 
-	// Set up server
-	ctx := context.WithValue(context.Background(), "metaStore", storage.NewMemStorage())
+	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL)
 
-	// Do not pass one of the const KeyAlgorithms here as the value! Passing a
-	// string is in itself good test that we are handling it correctly as we will
-	// be receiving a string from the configuration.
-	ctx = context.WithValue(ctx, "keyAlgorithm", "ecdsa")
-
-	hand := utils.RootHandlerFactory(nil, ctx,
-		cryptoservice.NewCryptoService("", trustmanager.NewKeyMemoryStore(passphraseRetriever)))
-
-	r := mux.NewRouter()
-	r.Methods("POST").Path("/v2/{imageName:" + v2.RepositoryNameRegexp.String() + "}/_trust/tuf/").Handler(hand(handlers.AtomicUpdateHandler, "push", "pull"))
-	r.Methods("GET").Path("/v2/{imageName:" + v2.RepositoryNameRegexp.String() + "}/_trust/tuf/{tufRole:(root|targets|snapshot)}.json").Handler(hand(handlers.GetHandler, "pull"))
-	r.Methods("GET").Path("/v2/{imageName:" + v2.RepositoryNameRegexp.String() + "}/_trust/tuf/timestamp.json").Handler(hand(handlers.GetTimestampHandler, "pull"))
-	r.Methods("GET").Path("/v2/{imageName:" + v2.RepositoryNameRegexp.String() + "}/_trust/tuf/timestamp.key").Handler(hand(handlers.GetTimestampKeyHandler, "push", "pull"))
-	//r.Methods("POST").Path("/v2/{imageName:" + server.RepositoryNameRegexp + "}/_trust/tuf/{tufRole:(root|targets|timestamp|snapshot)}.json").Handler(hand(handlers.UpdateHandler, "push", "pull"))
-	r.Methods("DELETE").Path("/v2/{imageName:" + v2.RepositoryNameRegexp.String() + "}/_trust/tuf/").Handler(hand(handlers.DeleteHandler, "push", "pull"))
-
-	ts := httptest.NewServer(r)
-
-	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport, passphraseRetriever)
-	assert.NoError(t, err, "error creating repository: %s", err)
-
-	rootKeyID, err := repo.KeyStoreManager.GenRootKey(rootType)
-	assert.NoError(t, err, "error generating root key: %s", err)
-
-	err = repo.Initialize(rootKeyID)
-	assert.NoError(t, err, "error creating repository: %s", err)
-
-	// Add fixtures/intermediate-ca.crt as a target. There's no particular reason
-	// for using this file except that it happens to be available as
-	// a fixture.
-	latestTarget, err := NewTarget("latest", "../fixtures/intermediate-ca.crt")
-	assert.NoError(t, err, "error creating target")
-	err = repo.AddTarget(latestTarget)
-	assert.NoError(t, err, "error adding target")
-
-	// Look for the changelist file
-	changelistDirPath := filepath.Join(tempBaseDir, "tuf", filepath.FromSlash(gun), "changelist")
-
-	changelistDir, err := os.Open(changelistDirPath)
-	assert.NoError(t, err, "could not open changelist directory")
-
-	fileInfos, err := changelistDir.Readdir(0)
-	assert.NoError(t, err, "could not read changelist directory")
-
-	// Should only be one file in the directory
-	assert.Len(t, fileInfos, 1, "wrong number of changelist files found")
-
-	clName := fileInfos[0].Name()
-	raw, err := ioutil.ReadFile(filepath.Join(changelistDirPath, clName))
-	assert.NoError(t, err, "could not read changelist file %s", clName)
-
-	c := &changelist.TufChange{}
-	err = json.Unmarshal(raw, c)
-	assert.NoError(t, err, "could not unmarshal changelist file %s", clName)
-
-	assert.EqualValues(t, changelist.ActionCreate, c.Actn)
-	assert.Equal(t, "targets", c.Role)
-	assert.Equal(t, "target", c.ChangeType)
-	assert.Equal(t, "latest", c.ChangePath)
-	assert.NotEmpty(t, c.Data)
-
-	changelistDir.Close()
-
-	// Create a second target
-	currentTarget, err := NewTarget("current", "../fixtures/intermediate-ca.crt")
-	assert.NoError(t, err, "error creating target")
-	err = repo.AddTarget(currentTarget)
-	assert.NoError(t, err, "error adding target")
-
-	changelistDir, err = os.Open(changelistDirPath)
-	assert.NoError(t, err, "could not open changelist directory")
-
-	// There should now be a second file in the directory
-	fileInfos, err = changelistDir.Readdir(0)
-	assert.NoError(t, err, "could not read changelist directory")
-
-	assert.Len(t, fileInfos, 2, "wrong number of changelist files found")
-
-	newFileFound := false
-	for _, fileInfo := range fileInfos {
-		if fileInfo.Name() != clName {
-			clName2 := fileInfo.Name()
-			raw, err := ioutil.ReadFile(filepath.Join(changelistDirPath, clName2))
-			assert.NoError(t, err, "could not read changelist file %s", clName2)
-
-			c := &changelist.TufChange{}
-			err = json.Unmarshal(raw, c)
-			assert.NoError(t, err, "could not unmarshal changelist file %s", clName2)
-
-			assert.EqualValues(t, changelist.ActionCreate, c.Actn)
-			assert.Equal(t, "targets", c.Role)
-			assert.Equal(t, "target", c.ChangeType)
-			assert.Equal(t, "current", c.ChangePath)
-			assert.NotEmpty(t, c.Data)
-
-			newFileFound = true
-			break
-		}
-	}
-
-	assert.True(t, newFileFound, "second changelist file not found")
-
-	changelistDir.Close()
-
-	// Test loading changelist
-	changes := make(map[string]changelist.Change)
-	cl, err := repo.GetChangelist()
-	assert.NoError(t, err, "could not get changelist for repo")
-
-	assert.Len(t, cl.List(), 2, "Wrong number of changes returned from changelist")
-	for _, ch := range cl.List() {
-		changes[ch.Path()] = ch
-	}
-
-	currentChange := changes["current"]
-	assert.NotNil(t, currentChange, "Expected changelist to contain a change for path 'current'")
-	assert.EqualValues(t, changelist.ActionCreate, currentChange.Action())
-	assert.Equal(t, "targets", currentChange.Scope())
-	assert.Equal(t, "target", currentChange.Type())
-	assert.Equal(t, "current", currentChange.Path())
-
-	latestChange := changes["latest"]
-	assert.NotNil(t, latestChange, "Expected changelist to contain a change for path 'latest'")
-	assert.EqualValues(t, changelist.ActionCreate, latestChange.Action())
-	assert.Equal(t, "targets", latestChange.Scope())
-	assert.Equal(t, "target", latestChange.Type())
-	assert.Equal(t, "latest", latestChange.Path())
+	// Create 2 targets
+	latestTarget := addTarget(t, repo, "latest", "../fixtures/intermediate-ca.crt")
+	currentTarget := addTarget(t, repo, "current", "../fixtures/intermediate-ca.crt")
+	assert.Len(t, getChanges(t, repo), 2, "wrong number of changelist files found")
 
 	// Now test Publish
 	err = repo.Publish()
 	assert.NoError(t, err)
-
-	changelistDir, err = os.Open(changelistDirPath)
-	assert.NoError(t, err, "could not open changelist directory")
-	fileInfos, err = changelistDir.Readdir(0)
-	assert.NoError(t, err, "could not read changelist directory")
-	// Should only be one file in the directory
-	assert.Len(t, fileInfos, 0, "wrong number of changelist files found")
+	assert.Len(t, getChanges(t, repo), 0, "wrong number of changelist files found")
 
 	// Create a new repo and pull from the server
 	tempBaseDir2, err := ioutil.TempDir("", "notary-test-")
@@ -624,45 +601,13 @@ func TestRotate(t *testing.T) {
 
 	gun := "docker.com/notary"
 
-	// Set up server
-	ctx := context.WithValue(context.Background(), "metaStore", storage.NewMemStorage())
+	ts := fullTestServer(t)
 
-	// Do not pass one of the const KeyAlgorithms here as the value! Passing a
-	// string is in itself good test that we are handling it correctly as we will
-	// be receiving a string from the configuration.
-	ctx = context.WithValue(ctx, "keyAlgorithm", "ecdsa")
+	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL)
 
-	hand := utils.RootHandlerFactory(nil, ctx,
-		cryptoservice.NewCryptoService("", trustmanager.NewKeyMemoryStore(passphraseRetriever)))
-
-	r := mux.NewRouter()
-	r.Methods("POST").Path("/v2/{imageName:" + v2.RepositoryNameRegexp.String() + "}/_trust/tuf/").Handler(hand(handlers.AtomicUpdateHandler, "push", "pull"))
-	r.Methods("GET").Path("/v2/{imageName:" + v2.RepositoryNameRegexp.String() + "}/_trust/tuf/{tufRole:(root|targets|snapshot)}.json").Handler(hand(handlers.GetHandler, "pull"))
-	r.Methods("GET").Path("/v2/{imageName:" + v2.RepositoryNameRegexp.String() + "}/_trust/tuf/timestamp.json").Handler(hand(handlers.GetTimestampHandler, "pull"))
-	r.Methods("GET").Path("/v2/{imageName:" + v2.RepositoryNameRegexp.String() + "}/_trust/tuf/timestamp.key").Handler(hand(handlers.GetTimestampKeyHandler, "push", "pull"))
-	//r.Methods("POST").Path("/v2/{imageName:" + server.RepositoryNameRegexp + "}/_trust/tuf/{tufRole:(root|targets|timestamp|snapshot)}.json").Handler(hand(handlers.UpdateHandler, "push", "pull"))
-	r.Methods("DELETE").Path("/v2/{imageName:" + v2.RepositoryNameRegexp.String() + "}/_trust/tuf/").Handler(hand(handlers.DeleteHandler, "push", "pull"))
-
-	ts := httptest.NewServer(r)
-
-	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport, passphraseRetriever)
-	assert.NoError(t, err, "error creating repository: %s", err)
-
-	rootKeyID, err := repo.KeyStoreManager.GenRootKey(data.ECDSAKey)
-	assert.NoError(t, err, "error generating root key: %s", err)
-
-	err = repo.Initialize(rootKeyID)
-	assert.NoError(t, err, "error creating repository: %s", err)
-
-	// Add fixtures/intermediate-ca.crt as a target. There's no particular reason
-	// for using this file except that it happens to be available as
-	// a fixture.
 	// Adding a target will allow us to confirm the repository is still valid after
 	// rotating the keys.
-	latestTarget, err := NewTarget("latest", "../fixtures/intermediate-ca.crt")
-	assert.NoError(t, err, "error creating target")
-	err = repo.AddTarget(latestTarget)
-	assert.NoError(t, err, "error adding target")
+	addTarget(t, repo, "latest", "../fixtures/intermediate-ca.crt")
 
 	// Publish
 	err = repo.Publish()
@@ -694,12 +639,6 @@ func TestRotate(t *testing.T) {
 	assert.NotEqual(t, snapshotKeyIDs[0], newSnapshotKeyIDs[0])
 
 	// Confirm changelist dir empty after publishing changes
-	// Look for the changelist file
-	changelistDirPath := filepath.Join(tempBaseDir, "tuf", filepath.FromSlash(gun), "changelist")
-	changelistDir, err := os.Open(changelistDirPath)
-	assert.NoError(t, err, "could not open changelist directory")
-	fileInfos, err := changelistDir.Readdir(0)
-	assert.NoError(t, err, "could not read changelist directory")
-	// Should only be one file in the directory
-	assert.Len(t, fileInfos, 0, "wrong number of changelist files found")
+	changes := getChanges(t, repo)
+	assert.Len(t, changes, 0, "wrong number of changelist files found")
 }

@@ -1,3 +1,5 @@
+// +build pkcs11
+
 package main
 
 import (
@@ -22,6 +24,7 @@ import (
 	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/signer"
 	"github.com/docker/notary/signer/api"
+	"github.com/docker/notary/signer/keydbstore"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/utils"
 	"github.com/docker/notary/version"
@@ -128,20 +131,6 @@ func main() {
 
 	cryptoServices := make(signer.CryptoServiceIndex)
 
-	pin := mainViper.GetString(pinCode)
-	pkcs11Lib := mainViper.GetString("crypto.pkcs11lib")
-	if pkcs11Lib != "" {
-		if pin == "" {
-			log.Fatalf("Using PIN is mandatory with pkcs11")
-		}
-
-		ctx, session := SetupHSMEnv(pkcs11Lib, pin)
-
-		defer cleanup(ctx, session)
-
-		cryptoServices[data.RSAKey] = api.NewRSAHardwareCryptoService(ctx, session)
-	}
-
 	configDBType := strings.ToLower(mainViper.GetString("storage.backend"))
 	dbURL := mainViper.GetString("storage.db_url")
 	if configDBType != dbType || dbURL == "" {
@@ -155,7 +144,7 @@ func main() {
 
 	defaultAlias := mainViper.GetString(defaultAliasEnv)
 	logrus.Debug("Default Alias: ", defaultAlias)
-	keyStore, err := signer.NewKeyDBStore(passphraseRetriever, defaultAlias, configDBType, dbSQL)
+	keyStore, err := keydbstore.NewKeyDBStore(passphraseRetriever, defaultAlias, configDBType, dbSQL)
 	if err != nil {
 		log.Fatalf("failed to create a new keydbstore: %v", err)
 	}

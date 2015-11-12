@@ -13,7 +13,6 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary/tuf/data"
-	"github.com/docker/notary/tuf/errors"
 	"github.com/docker/notary/tuf/keys"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/utils"
@@ -147,6 +146,12 @@ func (tr *Repo) RemoveBaseKeys(role string, keyIDs ...string) error {
 	// remove keys no longer in use by any roles
 	for k := range toDelete {
 		delete(tr.Root.Signed.Keys, k)
+		// remove the signing key from the cryptoservice if it
+		// isn't a root key. Root keys must be kept for rotation
+		// signing
+		if role != data.CanonicalRootRole {
+			tr.cryptoService.RemoveKey(k)
+		}
 	}
 	tr.Root.Dirty = true
 	return nil
@@ -163,12 +168,12 @@ func (tr *Repo) RemoveBaseKeys(role string, keyIDs ...string) error {
 // A new, empty, targets file will be created for the new role.
 func (tr *Repo) UpdateDelegations(role *data.Role, keys []data.PublicKey, before string) error {
 	if !role.IsDelegation() || !role.IsValid() {
-		return errors.ErrInvalidRole{}
+		return data.ErrInvalidRole{Role: role.Name}
 	}
 	parent := filepath.Dir(role.Name)
 	p, ok := tr.Targets[parent]
 	if !ok {
-		return errors.ErrInvalidRole{}
+		return data.ErrInvalidRole{Role: role.Name}
 	}
 	for _, k := range keys {
 		if !utils.StrSliceContains(role.KeyIDs, k.ID()) {
@@ -225,7 +230,7 @@ func (tr *Repo) InitRoot(consistent bool) error {
 	for _, r := range data.ValidRoles {
 		role := tr.keysDB.GetRole(r)
 		if role == nil {
-			return errors.ErrInvalidRole{}
+			return data.ErrInvalidRole{Role: data.CanonicalRootRole}
 		}
 		rootRoles[r] = &role.RootRole
 		for _, kid := range role.KeyIDs {
@@ -404,7 +409,7 @@ func (tr Repo) FindTarget(path string) *data.FileMeta {
 func (tr *Repo) AddTargets(role string, targets data.Files) (data.Files, error) {
 	t, ok := tr.Targets[role]
 	if !ok {
-		return targets, errors.ErrInvalidRole{Role: role}
+		return targets, data.ErrInvalidRole{Role: role}
 	}
 	invalid := make(data.Files)
 	for path, target := range targets {
@@ -428,7 +433,7 @@ func (tr *Repo) AddTargets(role string, targets data.Files) (data.Files, error) 
 func (tr *Repo) RemoveTargets(role string, targets ...string) error {
 	t, ok := tr.Targets[role]
 	if !ok {
-		return errors.ErrInvalidRole{Role: role}
+		return data.ErrInvalidRole{Role: role}
 	}
 
 	for _, path := range targets {

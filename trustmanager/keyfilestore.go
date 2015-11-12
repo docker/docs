@@ -1,17 +1,19 @@
 package trustmanager
 
 import (
+	"fmt"
 	"path/filepath"
 	"strings"
 	"sync"
 
-	"github.com/docker/notary/pkg/passphrase"
+	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/tuf/data"
 )
 
 const (
 	rootKeysSubdir    = "root_keys"
 	nonRootKeysSubdir = "tuf_keys"
+	privDir           = "private"
 )
 
 // KeyFileStore persists and manages private keys on disk
@@ -33,6 +35,7 @@ type KeyMemoryStore struct {
 // NewKeyFileStore returns a new KeyFileStore creating a private directory to
 // hold the keys.
 func NewKeyFileStore(baseDir string, passphraseRetriever passphrase.Retriever) (*KeyFileStore, error) {
+	baseDir = filepath.Join(baseDir, privDir)
 	fileStore, err := NewPrivateSimpleFileStore(baseDir, keyExtension)
 	if err != nil {
 		return nil, err
@@ -42,6 +45,12 @@ func NewKeyFileStore(baseDir string, passphraseRetriever passphrase.Retriever) (
 	return &KeyFileStore{SimpleFileStore: *fileStore,
 		Retriever:  passphraseRetriever,
 		cachedKeys: cachedKeys}, nil
+}
+
+// Name returns a user friendly name for the location this store
+// keeps its data
+func (s *KeyFileStore) Name() string {
+	return fmt.Sprintf("file (%s)", s.SimpleFileStore.BaseDir())
 }
 
 // AddKey stores the contents of a PEM-encoded private key as a PEM block
@@ -94,6 +103,12 @@ func NewKeyMemoryStore(passphraseRetriever passphrase.Retriever) *KeyMemoryStore
 	return &KeyMemoryStore{MemoryFileStore: *memStore,
 		Retriever:  passphraseRetriever,
 		cachedKeys: cachedKeys}
+}
+
+// Name returns a user friendly name for the location this store
+// keeps its data
+func (s *KeyMemoryStore) Name() string {
+	return "memory"
 }
 
 // AddKey stores the contents of a PEM-encoded private key as a PEM block
@@ -197,7 +212,7 @@ func getKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, cached
 	// See if the key is encrypted. If its encrypted we'll fail to parse the private key
 	privKey, err := ParsePEMPrivateKey(keyBytes, "")
 	if err != nil {
-		privKey, _, retErr = getPasswdDecryptBytes(s, passphraseRetriever, keyBytes, name, string(keyAlias))
+		privKey, _, retErr = GetPasswdDecryptBytes(passphraseRetriever, keyBytes, name, string(keyAlias))
 	}
 	if retErr != nil {
 		return nil, "", retErr
@@ -212,14 +227,28 @@ func listKeys(s LimitedFileStore) map[string]string {
 	keyIDMap := make(map[string]string)
 
 	for _, f := range s.ListFiles() {
+		// Remove the prefix of the directory from the filename
 		if f[:len(rootKeysSubdir)] == rootKeysSubdir {
 			f = strings.TrimPrefix(f, rootKeysSubdir+"/")
 		} else {
 			f = strings.TrimPrefix(f, nonRootKeysSubdir+"/")
 		}
+
+		// Remove the extension from the full filename
+		// abcde_root.key becomes abcde_root
 		keyIDFull := strings.TrimSpace(strings.TrimSuffix(f, filepath.Ext(f)))
-		keyID := keyIDFull[:strings.LastIndex(keyIDFull, "_")]
-		keyAlias := keyIDFull[strings.LastIndex(keyIDFull, "_")+1:]
+
+		// If the key does not have a _, it is malformed
+		underscoreIndex := strings.LastIndex(keyIDFull, "_")
+		if underscoreIndex == -1 {
+			continue
+		}
+
+		// The keyID is the first part of the keyname
+		// The KeyAlias is the second part of the keyname
+		// in a key named abcde_root, abcde is the keyID and root is the KeyAlias
+		keyID := keyIDFull[:underscoreIndex]
+		keyAlias := keyIDFull[underscoreIndex+1:]
 		keyIDMap[keyID] = keyAlias
 	}
 	return keyIDMap
@@ -268,9 +297,9 @@ func getRawKey(s LimitedFileStore, name string) ([]byte, string, error) {
 	return keyBytes, keyAlias, nil
 }
 
-// Get the password to decript the given pem bytes.  Return the password,
-// because it is useful for importing
-func getPasswdDecryptBytes(s LimitedFileStore, passphraseRetriever passphrase.Retriever, pemBytes []byte, name, alias string) (data.PrivateKey, string, error) {
+// GetPasswdDecryptBytes gets the password to decript the given pem bytes.
+// Returns the password and private key
+func GetPasswdDecryptBytes(passphraseRetriever passphrase.Retriever, pemBytes []byte, name, alias string) (data.PrivateKey, string, error) {
 	var (
 		passwd  string
 		retErr  error
@@ -329,12 +358,18 @@ func encryptAndAddKey(s LimitedFileStore, passwd string, cachedKeys map[string]*
 
 func importKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, cachedKeys map[string]*cachedKey, alias string, pemBytes []byte) error {
 
-	privKey, passphrase, err := getPasswdDecryptBytes(s, passphraseRetriever, pemBytes, "imported", alias)
+	if alias != data.CanonicalRootRole {
+		return s.Add(alias, pemBytes)
+	}
+
+	privKey, passphrase, err := GetPasswdDecryptBytes(
+		passphraseRetriever, pemBytes, "", "imported "+alias)
 
 	if err != nil {
 		return err
 	}
 
-	return encryptAndAddKey(
-		s, passphrase, cachedKeys, privKey.ID(), alias, privKey)
+	var name string
+	name = privKey.ID()
+	return encryptAndAddKey(s, passphrase, cachedKeys, name, alias, privKey)
 }

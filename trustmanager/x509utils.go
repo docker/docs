@@ -398,12 +398,12 @@ func ED25519ToPrivateKey(privKeyBytes []byte) (data.PrivateKey, error) {
 }
 
 func blockType(k data.PrivateKey) (string, error) {
-	switch k.(type) {
-	case *data.RSAPrivateKey:
+	switch k.Algorithm() {
+	case data.RSAKey, data.RSAx509Key:
 		return "RSA PRIVATE KEY", nil
-	case *data.ECDSAPrivateKey:
+	case data.ECDSAKey, data.ECDSAx509Key:
 		return "EC PRIVATE KEY", nil
-	case *data.ED25519PrivateKey:
+	case data.ED25519Key:
 		return "ED25519 PRIVATE KEY", nil
 	default:
 		return "", fmt.Errorf("algorithm %s not supported", k.Algorithm())

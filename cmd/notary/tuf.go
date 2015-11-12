@@ -20,80 +20,81 @@ import (
 	"github.com/docker/distribution/registry/client/transport"
 	"github.com/docker/docker/pkg/term"
 	notaryclient "github.com/docker/notary/client"
+	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/utils"
 	"github.com/spf13/cobra"
 )
 
 var cmdTufList = &cobra.Command{
 	Use:   "list [ GUN ]",
-	Short: "Lists targets for a trusted collection.",
-	Long:  "Lists all targets for a trusted collection identified by the Globally Unique Name.",
+	Short: "Lists targets for a remote trusted collection.",
+	Long:  "Lists all targets for a remote trusted collection identified by the Globally Unique Name. This is an online operation.",
 	Run:   tufList,
 }
 
 var cmdTufAdd = &cobra.Command{
 	Use:   "add [ GUN ] <target> <file>",
-	Short: "adds the file as a target to the trusted collection.",
-	Long:  "adds the file as a target to the local trusted collection identified by the Globally Unique Name.",
+	Short: "Adds the file as a target to the trusted collection.",
+	Long:  "Adds the file as a target to the local trusted collection identified by the Globally Unique Name. This is an offline operation.  Please then use `publish` to push the changes to the remote trusted collection.",
 	Run:   tufAdd,
 }
 
 var cmdTufRemove = &cobra.Command{
 	Use:   "remove [ GUN ] <target>",
 	Short: "Removes a target from a trusted collection.",
-	Long:  "removes a target from the local trusted collection identified by the Globally Unique Name.",
+	Long:  "Removes a target from the local trusted collection identified by the Globally Unique Name. This is an offline operation.  Please then use `publish` to push the changes to the remote trusted collection.",
 	Run:   tufRemove,
 }
 
 var cmdTufInit = &cobra.Command{
 	Use:   "init [ GUN ]",
-	Short: "initializes a local trusted collection.",
-	Long:  "initializes a local trusted collection identified by the Globally Unique Name.",
+	Short: "Initializes a local trusted collection.",
+	Long:  "Initializes a local trusted collection identified by the Globally Unique Name. This is an online operation.",
 	Run:   tufInit,
 }
 
 var cmdTufLookup = &cobra.Command{
 	Use:   "lookup [ GUN ] <target>",
-	Short: "Looks up a specific target in a trusted collection.",
-	Long:  "looks up a specific target in a trusted collection identified by the Globally Unique Name.",
+	Short: "Looks up a specific target in a remote trusted collection.",
+	Long:  "Looks up a specific target in a remote trusted collection identified by the Globally Unique Name.",
 	Run:   tufLookup,
 }
 
 var cmdTufPublish = &cobra.Command{
 	Use:   "publish [ GUN ]",
-	Short: "publishes the local trusted collection.",
-	Long:  "publishes the local trusted collection identified by the Globally Unique Name, sending the local changes to a remote trusted server.",
+	Short: "Publishes the local trusted collection.",
+	Long:  "Publishes the local trusted collection identified by the Globally Unique Name, sending the local changes to a remote trusted server.",
 	Run:   tufPublish,
 }
 
 var cmdTufStatus = &cobra.Command{
 	Use:   "status [ GUN ]",
-	Short: "displays status of unpublished changes to the local trusted collection.",
-	Long:  "displays status of unpublished changes to the local trusted collection identified by the Globally Unique Name.",
+	Short: "Displays status of unpublished changes to the local trusted collection.",
+	Long:  "Displays status of unpublished changes to the local trusted collection identified by the Globally Unique Name.",
 	Run:   tufStatus,
 }
 
 var cmdVerify = &cobra.Command{
 	Use:   "verify [ GUN ] <target>",
-	Short: "verifies if the content is included in the trusted collection",
-	Long:  "verifies if the data passed in STDIN is included in the trusted collection identified by the Global Unique Name.",
+	Short: "Verifies if the content is included in the remote trusted collection",
+	Long:  "Verifies if the data passed in STDIN is included in the remote trusted collection identified by the Global Unique Name.",
 	Run:   verify,
 }
 
 func tufAdd(cmd *cobra.Command, args []string) {
 	if len(args) < 3 {
 		cmd.Usage()
-		fatalf("must specify a GUN, target, and path to target data")
+		fatalf("Must specify a GUN, target, and path to target data")
 	}
+	parseConfig()
 
 	gun := args[0]
 	targetName := args[1]
 	targetPath := args[2]
 
-	parseConfig()
 	// no online operations are performed by add so the transport argument
 	// should be nil
-	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, getRemoteTrustServer(), nil, retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(mainViper.GetString("trust_dir"), gun, getRemoteTrustServer(), nil, retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -106,7 +107,9 @@ func tufAdd(cmd *cobra.Command, args []string) {
 	if err != nil {
 		fatalf(err.Error())
 	}
-	fmt.Printf("Addition of %s to %s staged for next publish.\n", targetName, gun)
+	cmd.Printf(
+		"Addition of target \"%s\" to repository \"%s\" staged for next publish.\n",
+		targetName, gun)
 }
 
 func tufInit(cmd *cobra.Command, args []string) {
@@ -115,35 +118,29 @@ func tufInit(cmd *cobra.Command, args []string) {
 		fatalf("Must specify a GUN")
 	}
 
-	gun := args[0]
 	parseConfig()
+	gun := args[0]
 
-	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, getRemoteTrustServer(), getTransport(gun, false), retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(mainViper.GetString("trust_dir"), gun, getRemoteTrustServer(), getTransport(gun, false), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
 
-	keysMap := make(map[string]string)
-	for k, role := range nRepo.KeyStoreManager.KeyStore.ListKeys() {
-		if role == "root" {
-			keysMap[k] = role
-		}
-	}
+	rootKeyList := nRepo.CryptoService.ListKeys(data.CanonicalRootRole)
 
 	var rootKeyID string
-	if len(keysMap) < 1 {
-		fmt.Println("No root keys found. Generating a new root key...")
-		rootKeyID, err = nRepo.KeyStoreManager.GenRootKey("ECDSA")
+	if len(rootKeyList) < 1 {
+		cmd.Println("No root keys found. Generating a new root key...")
+		rootPublicKey, err := nRepo.CryptoService.Create(data.CanonicalRootRole, data.ECDSAKey)
+		rootKeyID = rootPublicKey.ID()
 		if err != nil {
 			fatalf(err.Error())
 		}
 	} else {
-		// TODO(diogo): ask which root key to use
-		for keyID := range keysMap {
-			rootKeyID = keyID
-		}
-
-		fmt.Printf("Root key found, using: %s\n", rootKeyID)
+		// Choses the first root key available, which is initialization specific
+		// but should return the HW one first.
+		rootKeyID = rootKeyList[0]
+		cmd.Printf("Root key found, using: %s\n", rootKeyID)
 	}
 
 	err = nRepo.Initialize(rootKeyID)
@@ -155,12 +152,12 @@ func tufInit(cmd *cobra.Command, args []string) {
 func tufList(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
 		cmd.Usage()
-		fatalf("must specify a GUN")
+		fatalf("Must specify a GUN")
 	}
-	gun := args[0]
 	parseConfig()
+	gun := args[0]
 
-	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, getRemoteTrustServer(), getTransport(gun, true), retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(mainViper.GetString("trust_dir"), gun, getRemoteTrustServer(), getTransport(gun, true), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -173,20 +170,21 @@ func tufList(cmd *cobra.Command, args []string) {
 
 	// Print all the available targets
 	for _, t := range targetList {
-		fmt.Printf("%s %x %d\n", t.Name, t.Hashes["sha256"], t.Length)
+		cmd.Printf("%s %x %d\n", t.Name, t.Hashes["sha256"], t.Length)
 	}
 }
 
 func tufLookup(cmd *cobra.Command, args []string) {
 	if len(args) < 2 {
 		cmd.Usage()
-		fatalf("must specify a GUN and target")
+		fatalf("Must specify a GUN and target")
 	}
-	gun := args[0]
-	targetName := args[1]
 	parseConfig()
 
-	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, getRemoteTrustServer(), getTransport(gun, true), retriever)
+	gun := args[0]
+	targetName := args[1]
+
+	nRepo, err := notaryclient.NewNotaryRepository(mainViper.GetString("trust_dir"), gun, getRemoteTrustServer(), getTransport(gun, true), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -196,7 +194,7 @@ func tufLookup(cmd *cobra.Command, args []string) {
 		fatalf(err.Error())
 	}
 
-	fmt.Println(target.Name, fmt.Sprintf("sha256:%x", target.Hashes["sha256"]), target.Length)
+	cmd.Println(target.Name, fmt.Sprintf("sha256:%x", target.Hashes["sha256"]), target.Length)
 }
 
 func tufStatus(cmd *cobra.Command, args []string) {
@@ -205,10 +203,10 @@ func tufStatus(cmd *cobra.Command, args []string) {
 		fatalf("Must specify a GUN")
 	}
 
-	gun := args[0]
 	parseConfig()
+	gun := args[0]
 
-	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, getRemoteTrustServer(), nil, retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(mainViper.GetString("trust_dir"), gun, getRemoteTrustServer(), nil, retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -219,15 +217,15 @@ func tufStatus(cmd *cobra.Command, args []string) {
 	}
 
 	if len(cl.List()) == 0 {
-		fmt.Printf("No unpublished changes for %s\n", gun)
+		cmd.Printf("No unpublished changes for %s\n", gun)
 		return
 	}
 
-	fmt.Printf("Unpublished changes for %s:\n\n", gun)
-	fmt.Printf("%-10s%-10s%-12s%s\n", "action", "scope", "type", "path")
-	fmt.Println("----------------------------------------------------")
+	cmd.Printf("Unpublished changes for %s:\n\n", gun)
+	cmd.Printf("%-10s%-10s%-12s%s\n", "action", "scope", "type", "path")
+	cmd.Println("----------------------------------------------------")
 	for _, ch := range cl.List() {
-		fmt.Printf("%-10s%-10s%-12s%s\n", ch.Action(), ch.Scope(), ch.Type(), ch.Path())
+		cmd.Printf("%-10s%-10s%-12s%s\n", ch.Action(), ch.Scope(), ch.Type(), ch.Path())
 	}
 }
 
@@ -237,12 +235,12 @@ func tufPublish(cmd *cobra.Command, args []string) {
 		fatalf("Must specify a GUN")
 	}
 
-	gun := args[0]
 	parseConfig()
+	gun := args[0]
 
-	fmt.Println("Pushing changes to ", gun, ".")
+	cmd.Println("Pushing changes to", gun)
 
-	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, getRemoteTrustServer(), getTransport(gun, false), retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(mainViper.GetString("trust_dir"), gun, getRemoteTrustServer(), getTransport(gun, false), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -256,15 +254,16 @@ func tufPublish(cmd *cobra.Command, args []string) {
 func tufRemove(cmd *cobra.Command, args []string) {
 	if len(args) < 2 {
 		cmd.Usage()
-		fatalf("must specify a GUN and target")
+		fatalf("Must specify a GUN and target")
 	}
+	parseConfig()
+
 	gun := args[0]
 	targetName := args[1]
-	parseConfig()
 
 	// no online operation are performed by remove so the transport argument
 	// should be nil.
-	repo, err := notaryclient.NewNotaryRepository(trustDir, gun, getRemoteTrustServer(), nil, retriever)
+	repo, err := notaryclient.NewNotaryRepository(mainViper.GetString("trust_dir"), gun, getRemoteTrustServer(), nil, retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -273,25 +272,26 @@ func tufRemove(cmd *cobra.Command, args []string) {
 		fatalf(err.Error())
 	}
 
-	fmt.Printf("Removal of %s from %s staged for next publish.\n", targetName, gun)
+	cmd.Printf("Removal of %s from %s staged for next publish.\n", targetName, gun)
 }
 
 func verify(cmd *cobra.Command, args []string) {
 	if len(args) < 2 {
 		cmd.Usage()
-		fatalf("must specify a GUN and target")
+		fatalf("Must specify a GUN and target")
 	}
+
 	parseConfig()
 
 	// Reads all of the data on STDIN
 	payload, err := ioutil.ReadAll(os.Stdin)
 	if err != nil {
-		fatalf("error reading content from STDIN: %v", err)
+		fatalf("Error reading content from STDIN: %v", err)
 	}
 
 	gun := args[0]
 	targetName := args[1]
-	nRepo, err := notaryclient.NewNotaryRepository(trustDir, gun, getRemoteTrustServer(), getTransport(gun, true), retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(mainViper.GetString("trust_dir"), gun, getRemoteTrustServer(), getTransport(gun, true), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -404,14 +404,14 @@ func tokenAuth(baseTransport *http.Transport, gun string, readOnly bool) http.Ro
 	trustServerURL := getRemoteTrustServer()
 	endpoint, err := url.Parse(trustServerURL)
 	if err != nil {
-		fatalf("could not parse remote trust server url (%s): %s", trustServerURL, err.Error())
+		fatalf("Could not parse remote trust server url (%s): %s", trustServerURL, err.Error())
 	}
 	if endpoint.Scheme == "" {
-		fatalf("trust server url has to be in the form of http(s)://URL:PORT. Got: %s", trustServerURL)
+		fatalf("Trust server url has to be in the form of http(s)://URL:PORT. Got: %s", trustServerURL)
 	}
 	subPath, err := url.Parse("v2/")
 	if err != nil {
-		fatalf("failed to parse v2 subpath. This error should not have been reached. Please report it as an issue at https://github.com/docker/notary/issues: %s", err.Error())
+		fatalf("Failed to parse v2 subpath. This error should not have been reached. Please report it as an issue at https://github.com/docker/notary/issues: %s", err.Error())
 	}
 	endpoint = endpoint.ResolveReference(subPath)
 	req, err := http.NewRequest("GET", endpoint.String(), nil)
