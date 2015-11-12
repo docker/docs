@@ -7,7 +7,6 @@ import (
 	"net/http"
 	"path/filepath"
 
-	"github.com/docker/notary"
 	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/keystoremanager"
 	"github.com/docker/notary/passphrase"
@@ -22,7 +21,7 @@ func NewNotaryRepository(baseDir, gun, baseURL string, rt http.RoundTripper,
 	retriever passphrase.Retriever) (*NotaryRepository, error) {
 	fileKeyStore, err := trustmanager.NewKeyFileStore(baseDir, retriever)
 	if err != nil {
-		return nil, fmt.Errorf("failed to create private key store in directory: %s", keysPath)
+		return nil, fmt.Errorf("failed to create private key store in directory: %s", baseDir)
 	}
 
 	keyStoreManager, err := keystoremanager.NewKeyStoreManager(baseDir, fileKeyStore)
