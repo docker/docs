@@ -4,10 +4,8 @@ import (
 	"crypto/x509"
 	"math"
 	"os"
-	"path/filepath"
 	"time"
 
-	"github.com/docker/notary"
 	"github.com/docker/notary/keystoremanager"
 	"github.com/docker/notary/trustmanager"
 
@@ -56,10 +54,9 @@ func certRemove(cmd *cobra.Command, args []string) {
 	parseConfig()
 
 	trustDir := mainViper.GetString("trust_dir")
-	keysPath := filepath.Join(trustDir, notary.PrivDir)
-	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
+	fileKeyStore, err := trustmanager.NewKeyFileStore(trustDir, retriever)
 	if err != nil {
-		fatalf("Failed to create private key store in directory: %s", keysPath)
+		fatalf("Failed to create private key store in directory: %s", trustDir)
 	}
 	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, fileKeyStore)
 	if err != nil {
@@ -125,10 +122,9 @@ func certList(cmd *cobra.Command, args []string) {
 	parseConfig()
 
 	trustDir := mainViper.GetString("trust_dir")
-	keysPath := filepath.Join(trustDir, notary.PrivDir)
-	fileKeyStore, err := trustmanager.NewKeyFileStore(keysPath, retriever)
+	fileKeyStore, err := trustmanager.NewKeyFileStore(trustDir, retriever)
 	if err != nil {
-		fatalf("Failed to create private key store in directory: %s", keysPath)
+		fatalf("Failed to create private key store in directory: %s", trustDir)
 	}
 	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, fileKeyStore)
 	if err != nil {
