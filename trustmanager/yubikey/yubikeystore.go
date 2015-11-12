@@ -200,7 +200,6 @@ func addECDSAKey(
 	pkcs11KeyID []byte,
 	passRetriever passphrase.Retriever,
 	role string,
-	backupStore trustmanager.KeyStore,
 ) error {
 	logrus.Debugf("Attempting to add key to yubikey with ID: %s", privKey.ID())
 
@@ -251,13 +250,6 @@ func addECDSAKey(
 	_, err = ctx.CreateObject(session, privateKeyTemplate)
 	if err != nil {
 		return fmt.Errorf("error importing: %v", err)
-	}
-
-	if backupStore != nil {
-		err = backupStore.AddKey(privKey.ID(), role, privKey)
-		if err != nil {
-			return ErrBackupFailed{err: err.Error()}
-		}
 	}
 
 	return nil
@@ -639,11 +631,19 @@ func (s *YubiKeyStore) ListKeys() map[string]string {
 
 // AddKey puts a key inside the Yubikey, as well as writing it to the backup store
 func (s *YubiKeyStore) AddKey(keyID, role string, privKey data.PrivateKey) error {
-	return s.addKey(keyID, role, privKey, true)
+	err := s.addKey(keyID, role, privKey)
+	if err != nil {
+		return err
+	}
+	err = s.backupStore.AddKey(privKey.ID(), role, privKey)
+	if err != nil {
+		defer s.RemoveKey(keyID)
+		return ErrBackupFailed{err: err.Error()}
+	}
+	return nil
 }
 
-func (s *YubiKeyStore) addKey(
-	keyID, role string, privKey data.PrivateKey, backup bool) error {
+func (s *YubiKeyStore) addKey(keyID, role string, privKey data.PrivateKey) error {
 	// We only allow adding root keys for now
 	if role != data.CanonicalRootRole {
 		return fmt.Errorf("yubikey only supports storing root keys, got %s for key: %s", role, keyID)
@@ -670,13 +670,8 @@ func (s *YubiKeyStore) addKey(
 	}
 	logrus.Debugf("Attempting to store key using yubikey slot %v", slot)
 
-	backupStore := s.backupStore
-	if !backup {
-		backupStore = nil
-	}
-
 	err = addECDSAKey(
-		ctx, session, privKey, slot, s.passRetriever, role, backupStore)
+		ctx, session, privKey, slot, s.passRetriever, role)
 	if err == nil {
 		s.keys[privKey.ID()] = yubiSlot{
 			role:   role,
@@ -763,7 +758,7 @@ func (s *YubiKeyStore) ImportKey(pemBytes []byte, keyPath string) error {
 	if keyPath != data.CanonicalRootRole {
 		return fmt.Errorf("yubikey only supports storing root keys")
 	}
-	return s.addKey(privKey.ID(), "root", privKey, false)
+	return s.addKey(privKey.ID(), "root", privKey)
 }
 
 func cleanup(ctx IPKCS11Ctx, session pkcs11.SessionHandle) {
