@@ -247,6 +247,39 @@ func TestYubiAddKeyRollsBackIfCannotBackup(t *testing.T) {
 	assert.Len(t, cleanListKeys(t), 0)
 }
 
+// If, when adding a key to the Yubikey, and it already exists, we succeed
+// without adding it to the backup store.
+func TestYubiAddDuplicateKeySucceedsButDoesNotBackup(t *testing.T) {
+	if !YubikeyAccessible() {
+		t.Skip("Must have Yubikey access.")
+	}
+	clearAllKeys(t)
+
+	SetYubikeyKeyMode(KeymodeNone)
+	defer func() {
+		SetYubikeyKeyMode(KeymodeTouch | KeymodePinOnce)
+	}()
+
+	origStore, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
+	assert.NoError(t, err)
+
+	key, err := testAddKey(t, origStore)
+	assert.NoError(t, err)
+
+	backup := trustmanager.NewKeyMemoryStore(ret)
+	cleanStore, err := NewYubiKeyStore(backup, ret)
+	assert.NoError(t, err)
+	assert.Len(t, cleanStore.ListKeys(), 1)
+
+	err = cleanStore.AddKey(key.ID(), "root", key)
+	assert.NoError(t, err)
+
+	// there should be just 1 key on the yubikey
+	assert.Len(t, cleanListKeys(t), 1)
+	// nothing was added to the backup
+	assert.Len(t, backup.ListKeys(), 0)
+}
+
 // RemoveKey removes a key from the yubikey, but not from the backup store.
 func TestYubiRemoveKey(t *testing.T) {
 	if !YubikeyAccessible() {
@@ -875,7 +908,7 @@ func TestYubiRetrySignUntilSuccess(t *testing.T) {
 
 // If Sign gives us an invalid signature, we retry until up to a maximum of 5
 // times, and if it's still invalid, fail.
-func TestYubiRetrySign5TimesAndFail(t *testing.T) {
+func TestYubiRetrySignUntilFail(t *testing.T) {
 	if !YubikeyAccessible() {
 		t.Skip("Must have Yubikey access.")
 	}
@@ -905,7 +938,7 @@ func TestYubiRetrySign5TimesAndFail(t *testing.T) {
 	badSigner := &SignInvalidSigCtx{
 		Ctx:     *pkcs11.New(pkcs11Lib),
 		goodSig: goodSig,
-		failNum: 5,
+		failNum: sigAttempts + 1,
 	}
 
 	yubiPrivateKey.setLibLoader(func(string) IPKCS11Ctx { return badSigner })
@@ -914,7 +947,7 @@ func TestYubiRetrySign5TimesAndFail(t *testing.T) {
 	assert.Error(t, err)
 	// because the SignInvalidSigCtx returns the good signature, we can just
 	// deep equal instead of verifying
-	assert.Equal(t, 5, badSigner.signCalls)
+	assert.Equal(t, sigAttempts, badSigner.signCalls)
 }
 
 // -----  Stubbed pkcs11 for testing error conditions ------
