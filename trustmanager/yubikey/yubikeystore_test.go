@@ -532,6 +532,7 @@ func TestYubiAddKeyCleansUpOnError(t *testing.T) {
 			setupErrors,
 			"FindObjectsInit",
 			"FindObjects",
+			"FindObjectsFinal",
 			"CreateObject",
 		), true)
 
@@ -629,6 +630,7 @@ func TestYubiImportKeyCleansUpOnError(t *testing.T) {
 			setupErrors,
 			"FindObjectsInit",
 			"FindObjects",
+			"FindObjectsFinal",
 			"CreateObject",
 		), true)
 

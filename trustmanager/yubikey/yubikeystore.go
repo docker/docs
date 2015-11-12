@@ -545,6 +545,10 @@ func getNextEmptySlot(ctx IPKCS11Ctx, session pkcs11.SessionHandle) ([]byte, err
 		logrus.Debugf("Failed to find: %s %v", err.Error(), b)
 		return nil, err
 	}
+	if err = ctx.FindObjectsFinal(session); err != nil {
+		logrus.Debugf("Failed to finalize: %s\n", err.Error())
+		return nil, err
+	}
 	for _, obj := range objs {
 		// Retrieve the slot ID
 		attr, err := ctx.GetAttributeValue(session, obj, attrTemplate)
