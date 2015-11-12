@@ -12,8 +12,6 @@ weight=2
 
 # Docker Trusted Registry Quick Start guide: Basic User Workflow
 
-## Overview
-
 This Quick Start Guide gives you a hands-on look at the basics of using
 Docker Trusted Registry, Docker's on-premises image storage application.
 This guide will walk you through using Docker Trusted Registry to complete a typical, and critical,

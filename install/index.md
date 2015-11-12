@@ -1,5 +1,5 @@
 +++
-title = "Trusted Registry installation overview"
+title = "Installation"
 description = "Trusted Registry Installation Overview"
 keywords = ["docker, documentation, about, technology, install, enterprise, hub, CS engine, Docker Trusted Registry"]
 [menu.main]
@@ -7,7 +7,7 @@ parent="smn_dhe"
 identifier="smn_dhe_install"
 +++
 
-# Trusted Registry Installation Overview
+# Trusted Registry installation overview
 
 Docker Trusted Registry is an enterprise-grade on-premises registry bundled with commercially supported Docker Engines (CS Engine). Use Docker Trusted Registry to manage your images, and the commercially supported Docker Engine to create, test, and share your application images. Together, these two Docker products can optimize your continuous integration (CI) and/or software deployment workflows.
 
@@ -64,3 +64,5 @@ Docker Trusted Registry requires that you use the latest version of the commerci
 * If you are installing on AWS and would like to use a pre-built AMI and a license you purchased, see [bringing your own license (BYOL)](dtr-ami-byol-launch.md).
 
 * If you are installing on AWS and would like to use the subscription license, see the [pay as you go BDS installation](dtr-ami-bds-launch.md).
+
+* If you are installing on Microsoft Azure, see the [Install Trusted Registry on Microsoft Azure (BYOL)](dtr-vhd-azure.md).
