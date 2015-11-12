@@ -1,7 +1,9 @@
 package cryptoservice
 
 import (
+	"crypto/rand"
 	"fmt"
+	"path/filepath"
 	"runtime"
 	"testing"
 
@@ -49,6 +51,35 @@ func (c CryptoServiceTester) TestCreateAndGetKey(t *testing.T) {
 	assert.Equal(t, c.role, alias)
 }
 
+// If there are multiple keystores, ensure that a key is only added to one -
+// the first in the list of keyStores (which is in order of preference)
+func (c CryptoServiceTester) TestCreateAndGetWhenMultipleKeystores(t *testing.T) {
+	cryptoService := c.cryptoServiceFactory()
+	cryptoService.keyStores = append(cryptoService.keyStores,
+		trustmanager.NewKeyMemoryStore(passphraseRetriever))
+
+	// Test Create
+	tufKey, err := cryptoService.Create(c.role, c.keyAlgo)
+	assert.NoError(t, err, c.errorMsg("error creating key"))
+
+	// Only the first keystore should have the key
+	keyPath := tufKey.ID()
+	if c.role != data.CanonicalRootRole && cryptoService.gun != "" {
+		keyPath = filepath.Join(cryptoService.gun, keyPath)
+	}
+	_, _, err = cryptoService.keyStores[0].GetKey(keyPath)
+	assert.NoError(t, err, c.errorMsg(
+		"First keystore does not have the key %s", keyPath))
+	_, _, err = cryptoService.keyStores[1].GetKey(keyPath)
+	assert.Error(t, err, c.errorMsg(
+		"Second keystore has the key %s", keyPath))
+
+	// GetKey works across multiple keystores
+	retrievedKey := cryptoService.GetKey(tufKey.ID())
+	assert.NotNil(t, retrievedKey,
+		c.errorMsg("Could not find key ID %s", tufKey.ID()))
+}
+
 // asserts that getting key fails for a non-existent key
 func (c CryptoServiceTester) TestGetNonexistentKey(t *testing.T) {
 	cryptoService := c.cryptoServiceFactory()
@@ -81,6 +112,41 @@ func (c CryptoServiceTester) TestSignWithKey(t *testing.T) {
 		c.errorMsg("verification failed for %s key type", c.keyAlgo))
 }
 
+// asserts that signing, if there are no matching keys, produces no signatures
+func (c CryptoServiceTester) TestSignNoMatchingKeys(t *testing.T) {
+	cryptoService := c.cryptoServiceFactory()
+	content := []byte("this is a secret")
+
+	privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
+	assert.NoError(t, err, c.errorMsg("error creating key"))
+
+	// Test Sign with key that is not in the cryptoservice
+	signatures, err := cryptoService.Sign([]string{privKey.ID()}, content)
+	assert.NoError(t, err, c.errorMsg("signing failed"))
+	assert.Len(t, signatures, 0, c.errorMsg("wrong number of signatures"))
+}
+
+// If there are multiple keystores, even if all of them have the same key,
+// only one signature is returned.
+func (c CryptoServiceTester) TestSignWhenMultipleKeystores(t *testing.T) {
+	cryptoService := c.cryptoServiceFactory()
+	cryptoService.keyStores = append(cryptoService.keyStores,
+		trustmanager.NewKeyMemoryStore(passphraseRetriever))
+	content := []byte("this is a secret")
+
+	privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
+	assert.NoError(t, err, c.errorMsg("error creating key"))
+
+	for _, store := range cryptoService.keyStores {
+		err := store.AddKey(privKey.ID(), "root", privKey)
+		assert.NoError(t, err)
+	}
+
+	signatures, err := cryptoService.Sign([]string{privKey.ID()}, content)
+	assert.NoError(t, err, c.errorMsg("signing failed"))
+	assert.Len(t, signatures, 1, c.errorMsg("wrong number of signatures"))
+}
+
 // asserts that removing key that exists succeeds
 func (c CryptoServiceTester) TestRemoveCreatedKey(t *testing.T) {
 	cryptoService := c.cryptoServiceFactory()
@@ -94,6 +160,79 @@ func (c CryptoServiceTester) TestRemoveCreatedKey(t *testing.T) {
 	assert.NoError(t, err, c.errorMsg("could not remove key"))
 	retrievedKey := cryptoService.GetKey(tufKey.ID())
 	assert.Nil(t, retrievedKey, c.errorMsg("remove didn't work"))
+}
+
+// asserts that removing key will remove it from all keystores
+func (c CryptoServiceTester) TestRemoveFromMultipleKeystores(t *testing.T) {
+	cryptoService := c.cryptoServiceFactory()
+	cryptoService.keyStores = append(cryptoService.keyStores,
+		trustmanager.NewKeyMemoryStore(passphraseRetriever))
+
+	privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
+	assert.NoError(t, err, c.errorMsg("error creating key"))
+
+	for _, store := range cryptoService.keyStores {
+		err := store.AddKey(privKey.ID(), "root", privKey)
+		assert.NoError(t, err)
+	}
+
+	assert.NotNil(t, cryptoService.GetKey(privKey.ID()))
+
+	// Remove removes it from all key stores
+	err = cryptoService.RemoveKey(privKey.ID())
+	assert.NoError(t, err, c.errorMsg("could not remove key"))
+
+	for _, store := range cryptoService.keyStores {
+		_, _, err := store.GetKey(privKey.ID())
+		assert.Error(t, err)
+	}
+}
+
+// asserts that listing keys works with multiple keystores, and that the
+// same keys are deduplicated
+func (c CryptoServiceTester) TestListFromMultipleKeystores(t *testing.T) {
+	cryptoService := c.cryptoServiceFactory()
+	cryptoService.keyStores = append(cryptoService.keyStores,
+		trustmanager.NewKeyMemoryStore(passphraseRetriever))
+
+	expectedKeysIDs := make(map[string]bool) // just want to be able to index by key
+
+	for i := 0; i < 3; i++ {
+		privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
+		assert.NoError(t, err, c.errorMsg("error creating key"))
+		expectedKeysIDs[privKey.ID()] = true
+
+		// adds one different key to each keystore, and then one key to
+		// both keystores
+		for j, store := range cryptoService.keyStores {
+			if i == j || i == 2 {
+				store.AddKey(privKey.ID(), "root", privKey)
+			}
+		}
+	}
+	// sanity check - each should have 2
+	for _, store := range cryptoService.keyStores {
+		assert.Len(t, store.ListKeys(), 2, c.errorMsg("added keys wrong"))
+	}
+
+	keyList := cryptoService.ListKeys("root")
+	assert.Len(t, keyList, 4,
+		c.errorMsg(
+			"ListKeys should have 4 keys (not necesarily unique) but does not: %v", keyList))
+	for _, k := range keyList {
+		_, ok := expectedKeysIDs[k]
+		assert.True(t, ok, c.errorMsg("Unexpected key %s", k))
+	}
+
+	keyMap := cryptoService.ListAllKeys()
+	assert.Len(t, keyMap, 3,
+		c.errorMsg("ListAllKeys should have 3 unique keys but does not: %v", keyMap))
+
+	for k, role := range keyMap {
+		_, ok := expectedKeysIDs[k]
+		assert.True(t, ok)
+		assert.Equal(t, "root", role)
+	}
 }
 
 // Prints out an error message with information about the key algorithm,
@@ -112,7 +251,7 @@ func (c CryptoServiceTester) errorMsg(message string, args ...interface{}) strin
 }
 
 func testCryptoService(t *testing.T, gun string) {
-	getCryptoService := func() *CryptoService {
+	getTestingCryptoService := func() *CryptoService {
 		return NewCryptoService(
 			gun, trustmanager.NewKeyMemoryStore(passphraseRetriever))
 	}
@@ -126,14 +265,19 @@ func testCryptoService(t *testing.T, gun string) {
 	for _, role := range roles {
 		for algo := range algoToSigType {
 			cst := CryptoServiceTester{
-				cryptoServiceFactory: getCryptoService,
+				cryptoServiceFactory: getTestingCryptoService,
 				role:                 role,
 				keyAlgo:              algo,
 			}
 			cst.TestCreateAndGetKey(t)
+			cst.TestCreateAndGetWhenMultipleKeystores(t)
 			cst.TestGetNonexistentKey(t)
 			cst.TestSignWithKey(t)
+			cst.TestSignNoMatchingKeys(t)
+			cst.TestSignWhenMultipleKeystores(t)
 			cst.TestRemoveCreatedKey(t)
+			cst.TestRemoveFromMultipleKeystores(t)
+			cst.TestListFromMultipleKeystores(t)
 		}
 	}
 }
