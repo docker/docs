@@ -1,6 +1,6 @@
 // +build pkcs11,linux
 
-package trustmanager
+package yubikey
 
 var possiblePkcs11Libs = []string{
 	"/usr/lib/libykcs11.so",
