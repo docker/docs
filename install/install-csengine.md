@@ -9,55 +9,51 @@ parent="smn_dhe_install"
 
 # Manually Install the CS Docker Engine
 
-This document describes the process of obtaining and installing the Commercially
-Supported Docker Engine (CS Engine). Installing CS Engine is a prerequisite for
-installing the Docker Trusted Registry. You can use these instructions if you are installing CS Engine on physical or cloud infrastructure.
+This document describes the process of installing the Commercially Supported
+Docker Engine (CS Engine). Installing the CS Engine is a prerequisite for
+installing the Docker Trusted Registry. Use these instructions if you
+are installing the CS Engine on physical or cloud infrastructures.
 
-If your cloud provider is AWS, you have the option of installing CS Engine using an Amazon Machine Image (AMI) instead. For more information, read the [installation overview](index.md) to understand your options.
+Note that you first install the CS Engine before you install Docker Trusted
+Registry. If you are upgrading, you reverse that order and upgrade the Trusted
+Registry first. To upgrade, see the [upgrade documentation](upgrade.md). You will need to install the latest version of the CS Engine to run with the latest
+version of the Trusted Registry. You will also want to install the CS Engine on
+any clients, especially in your production environment.
 
-## Prerequisite
+If your cloud provider is AWS, you have the option of installing the CS Engine
+using an Amazon Machine Image (AMI). For more information, read the [installation overview](index.md) to understand your options.
 
-Installing CS Engine requires that you have a login to Docker Hub. If you have
-not already done so, go to Docker Hub and [sign up for an
-account](https://hub.docker.com).
+## Prerequisites
 
-Also, you must have a license for Docker Trusted Registry. This license allows
-you to run both Docker Trusted Registry and CS Engine. Before installing,
-[purchase a license or sign up for a free, 30 day trial license]((https://hub.docker.com/enterprise/)).
+You need a login to Docker Hub. If you have not already done so, go to Docker Hub and [sign up for an account](https://hub.docker.com). You do not need a license for the CS Engine, only for the Docker Trusted Registry.
 
+## CentOS 7.1 & RHEL 7.0/7.1 (YUM-based systems)
 
-## Install on CentOS 7.1 & RHEL 7.0/7.1
-
-This section explains how to install on CentOS 7.1 & RHEL 7.0/7.1. Only these versions are supported. CentOS 7.0 is not supported. On RHEL, depending on your current level of updates, you may need to reboot your server to update its RHEL kernel.
+This section explains how to install on CentOS 7.1 & RHEL 7.0/7.1. Only these
+versions are supported. CentOS 7.0 is not supported. On RHEL, depending on your
+current level of updates, you may need to reboot your server to update its RHEL
+kernel.
 
 1. Log into the system as a user with root or sudo permissions.
 
-2. Update your `yum` repositories.
+2. Add Docker's public key for CS packages:
 
-        $ sudo yum update && sudo yum upgrade
+    `$ sudo rpm --import "https://pgp.mit.edu/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e"`
 
-3. In a browser, log in to the [Docker Hub](https://hub.docker.com) with the account you used to obtain your license.
+3. Install yum-utils if necessary:
 
-4. Once you're logged in, go to your account's [Licenses](https://hub.docker.com/account/licenses/) page.
+    `$ sudo yum install -y yum-utils`
 
-5. In the "Download and Install CS Engine" locate the script appropriate to your system.
+4. Install the CS Engine with the following command:
 
-6. Copy the script, paste it into your terminal, and press Return.
+        $ sudo yum install docker-engine
 
-        $ curl -s
-        https://packagecloud.io/install/repositories/Docker/cs-public/script.rpm.sh |
-        sudo bash sudo yum install docker-engine-cs
-
-7. After the command completes, install the CS Engine with the following command:
-
-        $ sudo yum install docker-engine-cs
-
-8. Enable the Docker daemon as a service and then start it.
+5. Enable the Docker daemon as a service and then start it.
 
         $ sudo systemctl enable docker.service
         $ sudo systemctl start docker.service
 
-9. Verify the installation was successful by running a simple container.
+6. Verify the installation was successful by running a simple container.
 
         $ sudo docker run hello-world
         Unable to find image 'hello-world:latest' locally
@@ -82,54 +78,60 @@ This section explains how to install on CentOS 7.1 & RHEL 7.0/7.1. Only these ve
         To try something more ambitious, you can run an Ubuntu container with:
          $ docker run -it ubuntu bash
 
-        Share images, automate workflows, and more with a free Docker Hub account:
-         https://hub.docker.com
-
-        For more examples and ideas, visit:
-         https://docs.docker.com/userguide/
-
-10. Optionally, add non-sudo access to the Docker socket by adding your user to the `docker` group.
+7. Optionally, add non-sudo access to the Docker socket by adding your user to the `docker` group.
 
         $ sudo usermod -a -G docker $USER
 
-  Log out and log back in to have your new permissions take effect.
-
+8. Log out and log back in to have your new permissions take effect.
 
 
 ## Install on Ubuntu 14.04 LTS
 
 1. Log into the system as a user with root or sudo permissions.
 
-2. Update your `yum` repositories.
+2. Add Docker's public key for CS packages:
 
-        $ sudo apt-get update && sudo apt-get upgrade
+    `$ curl -s 'https://pgp.mit.edu/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e' | sudo apt-key add --import`
 
-3. Install additional virtual drivers not in the base image.
+3. Install the HTTPS helper for apt (your system may already have it):
+
+    `$ sudo apt-get update && sudo apt-get install apt-transport-https`
+
+4. Install additional virtual drivers not in the base image.
 
         $ sudo apt-get install -y linux-image-extra-virtual
 
-    You may need to reboot your server to after updating the LTS kernel.
+        You may need to reboot your server after updating the LTS kernel.
 
-4. In a browser, log in to the [Docker Hub](https://hub.docker.com) with the account you used to obtain your license.
+5. Install the engine with the following command:
 
-5. Once you're logged in, go to your account's [Licenses](https://hub.docker.com/account/licenses/) page.
+      `$ sudo apt-get update && sudo apt-get install docker-engine`
 
-6. In the "Download and Install CS Engine" locate the script appropriate to your system.
+6. Add the repository for the new version:
 
-7. Copy the script, paste it into your terminal, and press Return.
+    `$ echo "deb https://packages.docker.com/1.9/apt/repo ubuntu-trusty main" | sudo tee /etc/apt/sources.list.d/docker.list`
 
-        $ curl -s
-        https://packagecloud.io/install/repositories/Docker/cs-public/script.deb.sh | sudo bash sudo apt-get install docker-engine-cs
+        **Note**: modify the "ubuntu-trusty" string for your flavor of ubuntu or debian.
+        * debian-jessie (Debian 8)
+        * debian-stretch (future release)
+        * debian-wheezy (Debian 7)
+        * ubuntu-precise (Ubuntu 12.04)
+        * ubuntu-trusty (Ubuntu 14.04)
+        * ubuntu-utopic (Ubuntu 14.10)
+        * ubuntu-vivid (Ubuntu 15.04)
+        * ubuntu-wily (Ubuntu 15.10)
 
-8. Run the following to install commercially supported Docker Engine and its dependencies:
-​
-        $ sudo apt-get install docker-engine-cs
+      `$ echo "deb https://packages.docker.com/1.9/apt/repo ubuntu-trusty main" | sudo tee /etc/apt/sources.list.d/docker.list`
 
-9. Confirm the Docker daemon is running with `sudo service docker start`.
+7. Run the following to install commercially supported Docker Engine and its dependencies:
+
+    `$ sudo apt-get update && sudo apt-get install docker-engine`
+
+8. Confirm the Docker daemon is running with `sudo service docker start`.
 
         $ sudo service docker start
 
-10. Optionally, add non-sudo access to the Docker socket by adding your user to the `docker` group.
+9. Optionally, add non-sudo access to the Docker socket by adding your user to the `docker` group.
 
         $ sudo usermod -a -G docker $USER
 
@@ -137,4 +139,4 @@ This section explains how to install on CentOS 7.1 & RHEL 7.0/7.1. Only these ve
 
 
 ## Next step
-You are ready to install [Docker Trusted Registry](install-dtry.md).
+You are ready to install [Docker Trusted Registry](install-dtr.md).

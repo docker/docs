@@ -28,7 +28,7 @@ environment.
 
 Docker Trusted Registry is perfect for:
 
-* Providing a secure, on-premise development environment
+* Providing a secure, on-premises development environment
 * Creating a streamlined build pipeline
 * Building a consistent, high-performance test/QA environment
 * Managing image deployment
