@@ -28,7 +28,7 @@ Follow this workflow as you work:
 
     If you are changing code, review the <a href="../coding-style"
     target="_blank">coding style guide</a>. Changing documentation? Review the
-    <a href="../doc-style" target="_blank">documentation style guide</a>.
+    <a href="/opensource/doc-style/" target="_blank">documentation style guide</a>.
 
 2. Make changes in your feature branch.
 
@@ -39,7 +39,7 @@ Follow this workflow as you work:
 
     Make sure you don't change files in the `vendor` directory and its
     subdirectories; they contain third-party dependency code. Review <a
-    href="../set-up-dev-env" target="_blank">if you forgot the details of
+    href="/opensource/project/set-up-dev-env/" target="_blank">if you forgot the details of
     working with a container</a>.
 
 
@@ -48,7 +48,7 @@ Follow this workflow as you work:
     If you have followed along with the guide, you know the `make test` target
     runs the entire test suite and `make docs` builds the documentation. If you
     forgot the other test targets, see the documentation for <a
-    href="../test-and-docs" target="_blank">testing both code and
+    href="/opensource/project/test-and-docs/" target="_blank">testing both code and
     documentation</a>.  
 
 4. For code changes, add unit tests if appropriate.
@@ -187,7 +187,7 @@ You should pull and rebase frequently as you work.
 
         $ git commit -s
 
-    Make sure your message includes <a href="../set-up-git" target="_blank">your signature</a>.
+    Make sure your message includes <a href="/opensource/project/set-up-git/" target="_blank">your signature</a>.
 
 7. Force push any changes to your fork on GitHub.
 
