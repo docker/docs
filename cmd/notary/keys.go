@@ -189,7 +189,7 @@ func keysExport(cmd *cobra.Command, args []string) {
 
 	cs := cryptoservice.NewCryptoService(
 		"",
-		getKeyStores(cmd, mainViper.GetString("trust_dir"), retriever, true)...,
+		getKeyStores(cmd, mainViper.GetString("trust_dir"), retriever, false)...,
 	)
 
 	exportFile, err := os.Create(exportFilename)
@@ -234,7 +234,7 @@ func keysExportRoot(cmd *cobra.Command, args []string) {
 
 	cs := cryptoservice.NewCryptoService(
 		"",
-		getKeyStores(cmd, mainViper.GetString("trust_dir"), retriever, true)...,
+		getKeyStores(cmd, mainViper.GetString("trust_dir"), retriever, false)...,
 	)
 
 	exportFile, err := os.Create(exportFilename)
