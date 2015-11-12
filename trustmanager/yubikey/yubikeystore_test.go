@@ -792,6 +792,10 @@ func TestYubiSignCleansUpOnError(t *testing.T) {
 // error injection.  This is to ensure that if errors occur during the process
 // of interacting with the Yubikey, that everything gets cleaned up sanely.
 
+// Note that this does not actually replicate an actual PKCS11 failure, since
+// who knows what the pkcs11 function call may have done to the key before it
+// errored. This just tests that we handle an error ok.
+
 type errInjected struct {
 	methodName string
 }
@@ -950,9 +954,12 @@ func (s *StubCtx) SignInit(sh pkcs11.SessionHandle, m []*pkcs11.Mechanism,
 }
 
 func (s *StubCtx) Sign(sh pkcs11.SessionHandle, message []byte) ([]byte, error) {
+	// a call to Sign will clear SignInit whether or not it fails, so
+	// replicate that by calling Sign, then optionally returning an error.
+	sig, sigErr := s.ctx.Sign(sh, message)
 	err := s.checkErr("Sign")
 	if err != nil {
 		return nil, err
 	}
-	return s.ctx.Sign(sh, message)
+	return sig, sigErr
 }
