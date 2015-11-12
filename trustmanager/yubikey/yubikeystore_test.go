@@ -64,7 +64,7 @@ func testAddKey(t *testing.T, store trustmanager.KeyStore) (data.PrivateKey, err
 }
 
 func addMaxKeys(t *testing.T, store trustmanager.KeyStore) []string {
-	keys := make([]string, 0, numSlots)
+	var keys []string
 	// create the maximum number of keys
 	for i := 0; i < numSlots; i++ {
 		privKey, err := testAddKey(t, store)
@@ -378,6 +378,7 @@ func TestYubiExportKeyFails(t *testing.T) {
 
 	_, err = store.ExportKey(key.ID())
 	assert.Error(t, err)
+	assert.Equal(t, "Keys cannot be exported from a Yubikey.", err.Error())
 }
 
 // If there are keys in the backup store but no keys in the Yubikey,

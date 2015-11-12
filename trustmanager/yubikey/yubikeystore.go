@@ -771,7 +771,11 @@ func cleanup(ctx IPKCS11Ctx, session pkcs11.SessionHandle) {
 	if err != nil {
 		logrus.Debugf("Error closing session: %s", err.Error())
 	}
-	err = ctx.Finalize()
+	finalizeAndDestroy(ctx)
+}
+
+func finalizeAndDestroy(ctx IPKCS11Ctx) {
+	err := ctx.Finalize()
 	if err != nil {
 		logrus.Debugf("Error finalizing: %s", err.Error())
 	}
@@ -792,18 +796,18 @@ func SetupHSMEnv(libraryPath string, libLoader pkcs11LibLoader) (
 	}
 
 	if err := p.Initialize(); err != nil {
-		defer cleanup(p, 0)
+		defer finalizeAndDestroy(p)
 		return nil, 0, fmt.Errorf("Initialize error %s", err.Error())
 	}
 
 	slots, err := p.GetSlotList(true)
 	if err != nil {
-		defer cleanup(p, 0)
+		defer finalizeAndDestroy(p)
 		return nil, 0, fmt.Errorf("Failed to list HSM slots %s", err)
 	}
 	// Check to see if we got any slots from the HSM.
 	if len(slots) < 1 {
-		defer cleanup(p, 0)
+		defer finalizeAndDestroy(p)
 		return nil, 0, fmt.Errorf("No HSM Slots found")
 	}
 
@@ -811,7 +815,7 @@ func SetupHSMEnv(libraryPath string, libLoader pkcs11LibLoader) (
 	// CKF_RW_SESSION: TRUE if the session is read/write; FALSE if the session is read-only
 	session, err := p.OpenSession(slots[0], pkcs11.CKF_SERIAL_SESSION|pkcs11.CKF_RW_SESSION)
 	if err != nil {
-		defer cleanup(p, 0)
+		defer cleanup(p, session)
 		return nil, 0, fmt.Errorf("Failed to Start Session with HSM %s", err)
 	}
 
