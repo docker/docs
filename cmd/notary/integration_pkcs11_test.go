@@ -6,12 +6,12 @@ import (
 	"testing"
 
 	"github.com/docker/notary/passphrase"
-	"github.com/docker/notary/trustmanager"
+	"github.com/docker/notary/trustmanager/yubikey"
 	"github.com/docker/notary/tuf/data"
 	"github.com/stretchr/testify/assert"
 )
 
-var rootOnHardware = trustmanager.YubikeyAccessible
+var rootOnHardware = yubikey.YubikeyAccessible
 
 // Per-test set up that returns a cleanup function.  This set up:
 // - changes the passphrase retriever to always produce a constant passphrase
@@ -29,10 +29,10 @@ func setUp(t *testing.T) func() {
 
 	retriever = fake
 	getRetriever = func() passphrase.Retriever { return fake }
-	trustmanager.SetYubikeyKeyMode(trustmanager.KeymodeNone)
+	yubikey.SetYubikeyKeyMode(yubikey.KeymodeNone)
 
 	// //we're just removing keys here, so nil is fine
-	s, err := trustmanager.NewYubiKeyStore(nil, retriever)
+	s, err := yubikey.NewYubiKeyStore(nil, retriever)
 	assert.NoError(t, err)
 	for k := range s.ListKeys() {
 		err := s.RemoveKey(k)
@@ -42,7 +42,7 @@ func setUp(t *testing.T) func() {
 	return func() {
 		retriever = oldRetriever
 		getRetriever = getPassphraseRetriever
-		trustmanager.SetYubikeyKeyMode(trustmanager.KeymodeTouch | trustmanager.KeymodePinOnce)
+		yubikey.SetYubikeyKeyMode(yubikey.KeymodeTouch | yubikey.KeymodePinOnce)
 	}
 }
 
@@ -51,9 +51,9 @@ func setUp(t *testing.T) func() {
 // on disk
 func verifyRootKeyOnHardware(t *testing.T, rootKeyID string) {
 	// do not bother verifying if there is no yubikey available
-	if trustmanager.YubikeyAccessible() {
+	if yubikey.YubikeyAccessible() {
 		// //we're just getting keys here, so nil is fine
-		s, err := trustmanager.NewYubiKeyStore(nil, retriever)
+		s, err := yubikey.NewYubiKeyStore(nil, retriever)
 		assert.NoError(t, err)
 		privKey, role, err := s.GetKey(rootKeyID)
 		assert.NoError(t, err)

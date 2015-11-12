@@ -1,6 +1,6 @@
 // +build pkcs11
 
-package trustmanager
+package yubikey
 
 import (
 	"crypto"
@@ -17,7 +17,9 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary/passphrase"
+	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
+	"github.com/docker/notary/tuf/signed"
 	"github.com/miekg/pkcs11"
 )
 
@@ -33,6 +35,8 @@ const (
 
 	// the key size, when importing a key into yubikey, MUST be 32 bytes
 	ecdsaPrivateKeySize = 32
+
+	sigAttempts = 5
 )
 
 // what key mode to use when generating keys
@@ -155,12 +159,17 @@ func (y *YubiPrivateKey) Sign(rand io.Reader, msg []byte, opts crypto.SignerOpts
 	}
 	defer cleanup(ctx, session)
 
-	sig, err := sign(ctx, session, y.slot, y.passRetriever, msg)
-	if err != nil {
-		return nil, fmt.Errorf("failed to sign using Yubikey: %v", err)
+	v := signed.Verifiers[data.ECDSASignature]
+	for i := 0; i < sigAttempts; i++ {
+		sig, err := sign(ctx, session, y.slot, y.passRetriever, msg)
+		if err != nil {
+			return nil, fmt.Errorf("failed to sign using Yubikey: %v", err)
+		}
+		if err := v.Verify(&y.ECDSAPublicKey, sig, msg); err == nil {
+			return sig, nil
+		}
 	}
-
-	return sig, nil
+	return nil, errors.New("Failed to generate signature on Yubikey.")
 }
 
 // If a byte array is less than the number of bytes specified by
@@ -183,7 +192,7 @@ func addECDSAKey(
 	pkcs11KeyID []byte,
 	passRetriever passphrase.Retriever,
 	role string,
-	backupStore KeyStore,
+	backupStore trustmanager.KeyStore,
 ) error {
 	logrus.Debugf("Attempting to add key to yubikey with ID: %s", privKey.ID())
 
@@ -201,7 +210,7 @@ func addECDSAKey(
 
 	ecdsaPrivKeyD := ensurePrivateKeySize(ecdsaPrivKey.D.Bytes())
 
-	template, err := NewCertificate(role)
+	template, err := trustmanager.NewCertificate(role)
 	if err != nil {
 		return fmt.Errorf("failed to create the certificate template: %v", err)
 	}
@@ -561,12 +570,12 @@ func getNextEmptySlot(ctx *pkcs11.Ctx, session pkcs11.SessionHandle) ([]byte, er
 type YubiKeyStore struct {
 	passRetriever passphrase.Retriever
 	keys          map[string]yubiSlot
-	backupStore   KeyStore
+	backupStore   trustmanager.KeyStore
 }
 
 // NewYubiKeyStore returns a YubiKeyStore, given a backup key store to write any
 // generated keys to (usually a KeyFileStore)
-func NewYubiKeyStore(backupStore KeyStore, passphraseRetriever passphrase.Retriever) (
+func NewYubiKeyStore(backupStore trustmanager.KeyStore, passphraseRetriever passphrase.Retriever) (
 	*YubiKeyStore, error) {
 
 	s := &YubiKeyStore{
@@ -720,7 +729,7 @@ func (s *YubiKeyStore) ExportKey(keyID string) ([]byte, error) {
 // ImportKey imports a root key into a Yubikey
 func (s *YubiKeyStore) ImportKey(pemBytes []byte, keyPath string) error {
 	logrus.Debugf("Attempting to import: %s key inside of YubiKeyStore", keyPath)
-	privKey, _, err := GetPasswdDecryptBytes(
+	privKey, _, err := trustmanager.GetPasswdDecryptBytes(
 		s.passRetriever, pemBytes, "", "imported root")
 	if err != nil {
 		logrus.Debugf("Failed to get and retrieve a key from: %s", keyPath)
@@ -807,10 +816,10 @@ func login(ctx *pkcs11.Ctx, session pkcs11.SessionHandle, passRetriever passphra
 		passwd, giveup, err := passRetriever(user, "yubikey", false, attempts)
 		// Check if the passphrase retriever got an error or if it is telling us to give up
 		if giveup || err != nil {
-			return ErrPasswordInvalid{}
+			return trustmanager.ErrPasswordInvalid{}
 		}
 		if attempts > 2 {
-			return ErrAttemptsExceeded{}
+			return trustmanager.ErrAttemptsExceeded{}
 		}
 
 		// Try to convert PEM encoded bytes back to a PrivateKey using the passphrase
