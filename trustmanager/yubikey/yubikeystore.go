@@ -354,7 +354,11 @@ func sign(ctx IPKCS11Ctx, session pkcs11.SessionHandle, pkcs11KeyID []byte, pass
 	}
 
 	var sig []byte
-	ctx.SignInit(session, []*pkcs11.Mechanism{pkcs11.NewMechanism(pkcs11.CKM_ECDSA, nil)}, obj[0])
+	err = ctx.SignInit(
+		session, []*pkcs11.Mechanism{pkcs11.NewMechanism(pkcs11.CKM_ECDSA, nil)}, obj[0])
+	if err != nil {
+		return nil, err
+	}
 
 	// Get the SHA256 of the payload
 	digest := sha256.Sum256(payload)
@@ -363,6 +367,7 @@ func sign(ctx IPKCS11Ctx, session pkcs11.SessionHandle, pkcs11KeyID []byte, pass
 		touchToSignUI()
 		defer touchDoneCallback()
 	}
+	// a call to Sign, whether or not Sign fails, will clear the SignInit
 	sig, err = ctx.Sign(session, digest[:])
 	if err != nil {
 		logrus.Debugf("Error while signing: %s", err)
