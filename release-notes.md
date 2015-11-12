@@ -1,74 +1,145 @@
-
 +++
 title = "Release notes"
 description = "Release notes for Docker Trusted Registry"
-keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry,  release"]
+keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry, release notes"]
 [menu.main]
 parent="smn_dhe"
 weight=100
 +++
 
 
-
 # Release Notes: Docker Trusted Registry & Commercially Supported Docker Engine
+
+This document describes the latest changes, additions, and fixes.
 
 ## Prior Versions
 
-These notes refer to the current and immediately prior releases of Docker Trusted Registry  and the commercially supported Docker Engine. For notes on older versions of these, see the [prior release notes archive](prior-release-notes.md).
+These notes refer to the current and immediately prior releases of Docker
+Trusted Registry and the commercially supported Docker Engine. For notes on
+older versions of these, see the [prior release notes archive](prior-release-notes.md).
 
-## Docker Trusted Registry
+
+## Docker Trusted Registry 1.4
+(12 November 2015)
+
+### New features
+This release introduces the following new features. For additional information
+on these features, refer to the documentation or when appropriate, the API
+documentation.
+
+* Image deletion and garbage collection
+
+  * You can now delete an image in the registry's image index. This step of marking an unwanted image is called a soft delete. Refer to the [documentation](soft-garbage.md).
+
+  * Administrators can use the dashboard or API to configure a task to regularly reclaim the disk space taken up by deleted images. Refer to the [documentation](soft-garbage.md).
+
+* Repositories, Account Management, and interactive API UIs
+
+  * Set up, and manage user accounts, teams, organizations, and repositories from either APIs or through the Trusted Registry user interface. Refer to either the API documentation or the [documentation](accounts.md) for performing tasks in the UI.
+
+  * Search, browse, and discover images created by other users through either APIs or through the Trusted Registry user interface.
+
+  * Users, depending on their roles, can access account information through the Trusted Registry user interface. Refer to the [documentation](accounts.md) for details.
+
+  * View new API documentation through the Trusted Registry user interface. As before, you can also view it from the [documentation section](https://docs.docker.com/docker-trusted-registry/).
+
+* New APIs
+
+  * New APIs for accessing repositories, account management, indexing, searching, and reindexing.
+
+  * You can also view an API and using Swagger UI, click the "Try it out" button to perform the action. This might be useful if you need to reindex.
+
+* Different repository behavior. You must explicitly create (or have it performed for you if you don't have the  correct permissions) a repository before pushing to it. This behavior is different than how you would perform this in an unsecured free and open-source software (FOSS) registry.
+
+* New experimental feature. Docker Trusted Registry now integrates with Docker Content Trust using Notary. This is an experimental feature that is available with this release. See the [configuration documentation](configuration.md).
+
+### Fixed with this release
+This release corrects the following issues in Docker Trusted Registry 1.3.3
+
+#### LDAP Configuration
+
+* Performance for LDAP user authenticaiton has been significantly increased, reducing the number of required LDAP requests to only a single BIND request to authenticate a user.
+
+* The "Read-Write Search Filter" and "Read-Only Search Filter" fields have been deprecated. You can now create organization accounts and teams in the Trusted Registry to allow for more fine grained access control. Team member lists can be synced with a group in LDAP.
+
+* An "Admin Password" is now required. Use this password to login as the
+user admin in case the Trusted Registry is unable to authenticate you using
+your LDAP server. This account can be used to login to the Trusted Registry and correct identity and authentication settings.
+
+* Users on your LDAP server are now synced to the Trusted Registry's local
+database using your configured "User Search Filter". Objects in LDAP that match
+this filter and have a valid "User Login Attribute" are created as a local
+user with the "User Login Attribute" as their username. Only these users are
+able to login to Docker Trusted Registry.
+
+* The "Admin LDAP DN" must now be specified to identify the group object on your LDAP server. This should be synced to the system administrators list. The "Admin
+Group Member Attribute" should be set to the name of the attribute on this group
+object which corresponds to the Distinguished Name of the group member objects.
+This setting deprecates the old "Admin Search Filter" field.
+
+#### Other Issues/Fixes
+
+* Corrected an issue where you could switch from none to managed authentication
+without creating an administrator.
+
+* Added a "rootdirectory" parameter to the S3 storage option.
 
 ### Docker Trusted Registry 1.3.3
-(18 September 2015)
+(18 September 2015) (amended: 2 November 2015)
 
 This release corrects the following issues in Docker Trusted Registry 1.3.2
 
 * Fixed an issue related to LDAP integration for users of Oracle Virtual Directory.
+
 * Corrected an issue where Docker Trusted Registry would not accept a given certificate if the configured domain was only in the Subject Alternative Names (SANs) field and not in the Common Name (CN) field of the certificate.
 
-### Docker Trusted Registry 1.3.2
-(16 September 2015)
-
-This release addresses the following change in Docker Trusted Registry 1.3.2 and is only available to customers who purchased DTR through Amazon Web Services (AWS) Marketplace.
-
-* Docker Trusted Registry (DTR) now supports Amazon Web
-Services (AWS) Integrated Billing. Previously, AWS users were required to
-separately purchase a DTR license from Docker. AWS users can try DTR
-out-of-the-box.
-
-### Docker Trusted Registry 1.3.1
-(31 August 2015)
-
-This release corrects the following issues in Docker Trusted Registry 1.3.0
-
-* The dashboard page was calculating incorrect stats.
-* LDAP group sync failed to handle paginated results for extremely large groups.
-* The repo delete endpoint returned incorrect error codes under certain conditions.
-
-### Docker Trusted Registry 1.3.0
-(26 August 2015)
-
-This release addresses a few bugs and issues in Docker Trusted Registry 1.2.0 and introduces some new features and functionality, including:
-
-* A completely new user-interface for the Admin application brings Docker Trusted Registry in line with other Docker products and provides greater ease-of-use.
-
-* A new Accounts & Repos API provides new fine-grained role-based access control down to the per-repo level. See the [API's documentation](/docker-trusted-registry/api/) for more information.
-
-* Improvements to the handling of configuration changes so that fewer restarts are required.
-
-* Multiple security improvements and bug fixes.
-
-### Docker Trusted Registry 1.2.0
-(23 July 2015)
-
-This release adds CentOS support and addresses a few bugs and issues in Docker Trusted Registry 1.1.0:
-
-* Fixes an issue where for certain configurations of Docker Trusted Registry, proxy configuration settings and variables were not being passed to all Docker Trusted Registry containers and thus were not being respected.
-* Documentation links in the UI now point to correct docs.
-* Generated support info bundles have been scrubbed to remove highly sensitive data.
-* Certifies support for CentOS 7.1.
+* Docker discovered an issue in which the tokens used in authorization caused a
+break in certain deployments that utilized a load balancer in front of multiple
+Trusted Registry instances to achieve high availability. Docker regrets any
+inconvenience this may have caused you and is working on a future fix.
 
 ## Commercially Supported Docker Engine
+
+Commercially Supported (CS) Docker Engine is a packaged release that identifies
+a release of Docker Engine for which you can receive support from Docker or one
+of its partners. This release is functionally equivalent to the corresponding
+Docker Engine release that it references. However, a CS release also includes
+back-ported fixes (security-related and priority defects) from the open source.
+It incorporates defect fixes that you can use in environments where new features
+cannot be adopted as quickly for consistency and compatibility reasons.  
+
+### CS Docker Engine 1.9.0
+(12 November 2015)
+
+Highlighted Feature Summary:
+
+* Network Management and Plugins: Networks are now first class objects that can
+ be listed, created, deleted, inspected and connected to or disconnected from a
+ container. They can be manipulated outside of the container themselves and are
+ fully manageable on its own lifecycle. Network functionality can also be
+ extended using plugins.
+
+* Docker now provides support for the in-box Overlay (for cross-host networking)
+ and Bridge network plugins. You can find more information about how to manage
+ networks and using  network plugins in the documentation.
+
+* Volume Management and Plugins: Volumes also become discrete, manageable objects in Docker. Volumes can be listed, created, deleted, and inspected.
+Similar to networks, they have their own managed lifecycle outside of the
+container. Plugins allow others to write and extend the functionality of volumes
+or provide integration with other types of storage.
+
+* The in-box volume driver is included and supported. You can find more information about how to manage volumes  and using  volume plugins in the
+documentation.
+
+* Docker Content Trust: Content trust gives you the ability to both verify the integrity and the publisher of all the data received from a registry over any channel. Content Trust is currently only supported using Docker Hub notary servers.
+
+* Updated the release cadence of CS Docker Engine. Starting with this version, Docker supports **every** major release of Docker Engine from open
+source with three releases under support at one time. This means you’ll be able
+to take advantage of the latest and greatest features and you won’t have to wait
+for a supported release to take advantage of a specific feature.
+
+Refer to the detailed list of all changes since the release of CS Engine 1.6.
+https://github.com/docker/docker/releases.
 
 ### CS Docker Engine 1.6.2-cs7
 (12 October 2015)
