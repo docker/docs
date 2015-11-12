@@ -15,7 +15,7 @@ GO_LDFLAGS=-ldflags "-w $(CTIMEVAR)"
 GO_LDFLAGS_STATIC=-ldflags "-w $(CTIMEVAR) -extldflags -static"
 GOOSES = darwin freebsd linux
 GOARCHS = amd64
-NOTARY_BUILDTAGS="pkcs11"
+NOTARY_BUILDTAGS ?= "pkcs11"
 GO_EXC = go
 NOTARYDIR := /go/src/github.com/docker/notary
 
@@ -26,6 +26,9 @@ $(info pkcs11 import was not found anywhere without a build tag, yay)
 else
 $(error You are importing pkcs11 somewhere and not using a build tag)
 endif
+
+_empty :=
+_space := $(empty) $(empty)
 
 # go cover test variables
 COVERDIR=.cover
@@ -82,16 +85,16 @@ lint:
 
 build: go_version
 	@echo "+ $@"
-	@go build -tags ${NOTARY_BUILDTAGS} -v ${GO_LDFLAGS} ./...
+	@go build -tags "${NOTARY_BUILDTAGS}" -v ${GO_LDFLAGS} ./...
 
-test: OPTS =
+test: TESTOPTS =
 test: go_version
-	@echo "+ $@ $(OPTS)"
-	go test -tags ${NOTARY_BUILDTAGS} $(OPTS) ./...
+	@echo "+ $@ $(TESTOPTS)"
+	go test -tags "${NOTARY_BUILDTAGS}" $(TESTOPTS) ./...
 
 test-full: vet lint
 	@echo "+ $@"
-	go test -tags ${NOTARY_BUILDTAGS} -v ./...
+	go test -tags "${NOTARY_BUILDTAGS}" -v ./...
 
 protos:
 	@protoc --go_out=plugins=grpc:. proto/*.proto
@@ -103,25 +106,24 @@ protos:
 # be run first
 
 define gocover
-$(GO_EXC) test $(OPTS) -covermode="$(COVERMODE)" -coverprofile="$(COVERDIR)/$(subst /,-,$(1)).cover" "$(1)" || exit 1;
+$(GO_EXC) test $(OPTS) $(TESTOPTS) -covermode="$(COVERMODE)" -coverprofile="$(COVERDIR)/$(subst /,-,$(1)).$(subst $(_space),.,$(NOTARY_BUILDTAGS)).cover" "$(1)" || exit 1;
 endef
 
 gen-cover: go_version
-	@rm -rf "$(COVERDIR)"
 	@mkdir -p "$(COVERDIR)"
 	$(foreach PKG,$(PKGS),$(call gocover,$(PKG)))
 
 cover: GO_EXC := go
-       OPTS = -coverpkg "$(shell ./coverpkg.sh $(1) $(NOTARY_PKG))"
-cover: gen-cover
-	@gocovmerge $(shell ls -1 $(COVERDIR)/* | tr "\n" " ") > $(COVERPROFILE)
-	@go tool cover -func="$(COVERPROFILE)"
+       OPTS = -tags "${NOTARY_BUILDTAGS}" -coverpkg "$(shell ./coverpkg.sh $(1) $(NOTARY_PKG))"
+cover: gen-cover covmerge
 	@go tool cover -html="$(COVERPROFILE)"
 
 # Codecov knows how to merge multiple coverage files
-ci: OPTS = -tags ${NOTARY_BUILDTAGS} -race -coverpkg "$(shell ./coverpkg.sh $(1) $(NOTARY_PKG))"
+ci: OPTS = -tags "${NOTARY_BUILDTAGS}" -race -coverpkg "$(shell ./coverpkg.sh $(1) $(NOTARY_PKG))"
     GO_EXC := godep go
 ci: gen-cover
+
+covmerge:
 	@gocovmerge $(shell ls -1 $(COVERDIR)/* | tr "\n" " ") > $(COVERPROFILE)
 	@go tool cover -func="$(COVERPROFILE)"
 
@@ -157,4 +159,5 @@ shell: notary-dockerfile
 
 clean:
 	@echo "+ $@"
+	@rm -rf "$(COVERDIR)"
 	@rm -rf "${PREFIX}/bin/notary-server" "${PREFIX}/bin/notary" "${PREFIX}/bin/notary-signer"

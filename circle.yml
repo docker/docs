@@ -45,6 +45,10 @@ test:
   # Output the go versions we are going to test
     - gvm use stable && go version
 
+  # CLEAN
+    - gvm use stable && make clean:
+        pwd: $BASE_STABLE
+
   # FMT
     - gvm use stable && make fmt:
         pwd: $BASE_STABLE
@@ -59,11 +63,17 @@ test:
 
   override:
   # Test stable, and report
-    - gvm use stable && make ci:
+  # hacking this to be parallel
+    - case $CIRCLE_NODE_INDEX in 0) gvm use stable && NOTARY_BUILDTAGS=pkcs11 make ci ;; 1) gvm use stable && NOTARY_BUILDTAGS=none make ci ;; esac:
+        parallel: true
         timeout: 600
         pwd: $BASE_STABLE
 
   post:
+    - gvm use stable && make covmerge:
+        timeout: 600
+        pwd: $BASE_STABLE
+
   # Report to codecov.io
     # - bash <(curl -s https://codecov.io/bash):
     #     pwd: $BASE_STABLE
