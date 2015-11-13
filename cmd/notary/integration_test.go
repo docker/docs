@@ -172,6 +172,12 @@ func getUniqueKeys(t *testing.T, tempDir string) ([]string, []string) {
 	output, err := runCommand(t, tempDir, "key", "list")
 	assert.NoError(t, err)
 	lines := splitLines(output)
+	if len(lines) == 1 && lines[0] == "No signing keys found." {
+		return []string{}, []string{}
+	}
+	if len(lines) < 3 { // 2 lines of header, at least 1 line with keys
+		t.Logf("This output is not what is expected by the test:\n%s", output)
+	}
 
 	var (
 		rootMap    = make(map[string]bool)
