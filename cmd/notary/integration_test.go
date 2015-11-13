@@ -13,7 +13,6 @@ import (
 	"net/http/httptest"
 	"os"
 	"path/filepath"
-	"sort"
 	"strings"
 	"testing"
 
@@ -162,23 +161,50 @@ func splitLines(chunk string) []string {
 	return results
 }
 
-// List keys, parses the output, and returns the keys as an array of root key
-// IDs and an array of signing key IDs
-func GetKeys(t *testing.T, tempDir string) ([]string, []string) {
+// List keys, parses the output, and returns the unique key IDs as an array
+// of root key IDs and an array of signing key IDs.  Output expected looks like:
+//     ROLE      GUN          KEY ID                   LOCATION
+// ----------------------------------------------------------------
+//   root               8bd63a896398b558ac...   file (.../private)
+//   snapshot   repo    e9e9425cd9a85fc7a5...   file (.../private)
+//   targets    repo    f5b84e2d92708c5acb...   file (.../private)
+func getUniqueKeys(t *testing.T, tempDir string) ([]string, []string) {
 	output, err := runCommand(t, tempDir, "key", "list")
 	assert.NoError(t, err)
+	lines := splitLines(output)
 
-	parts := strings.Split(output, "# Signing keys:")
-	assert.Len(t, parts, 2)
-
-	fixed := make([][]string, 2)
-	for i, part := range parts {
-		fixed[i] = splitLines(
-			strings.TrimPrefix(strings.TrimSpace(part), "# Root keys:"))
-		sort.Strings(fixed[i])
+	var (
+		rootMap    = make(map[string]bool)
+		nonrootMap = make(map[string]bool)
+		root       []string
+		nonroot    []string
+	)
+	// first two lines are header
+	for _, line := range lines[2:] {
+		parts := strings.Fields(line)
+		var (
+			placeToGo map[string]bool
+			keyID     string
+		)
+		if strings.TrimSpace(parts[0]) == "root" {
+			// no gun, so there are only 3 fields
+			placeToGo, keyID = rootMap, parts[1]
+		} else {
+			// gun comes between role and key ID
+			placeToGo, keyID = nonrootMap, parts[2]
+		}
+		// keys are 32-chars long (32 byte shasum, hex-encoded)
+		assert.Len(t, keyID, 64)
+		placeToGo[keyID] = true
+	}
+	for k := range rootMap {
+		root = append(root, k)
+	}
+	for k := range nonrootMap {
+		nonroot = append(nonroot, k)
 	}
 
-	return fixed[0], fixed[1]
+	return root, nonroot
 }
 
 // List keys, parses the output, and asserts something about the number of root
@@ -186,24 +212,19 @@ func GetKeys(t *testing.T, tempDir string) ([]string, []string) {
 func assertNumKeys(t *testing.T, tempDir string, numRoot, numSigning int,
 	rootOnDisk bool) ([]string, []string) {
 
-	uniqueKeys := make(map[string]struct{})
-	root, signing := GetKeys(t, tempDir)
+	root, signing := getUniqueKeys(t, tempDir)
+	assert.Len(t, root, numRoot)
 	assert.Len(t, signing, numSigning)
-	for i, rootKeyLine := range root {
-		keyID := strings.Split(rootKeyLine, "-")[0]
-		keyID = strings.TrimSpace(keyID)
-		root[i] = keyID
-		uniqueKeys[keyID] = struct{}{}
+	for _, rootKeyID := range root {
 		_, err := os.Stat(filepath.Join(
-			tempDir, "private", "root_keys", keyID+"_root.key"))
+			tempDir, "private", "root_keys", rootKeyID+"_root.key"))
 		// os.IsExist checks to see if the error is because a file already
 		// exist, and hence doesn't actually the right funciton to use here
 		assert.Equal(t, rootOnDisk, !os.IsNotExist(err))
 
 		// this function is declared is in the build-tagged setup files
-		verifyRootKeyOnHardware(t, keyID)
+		verifyRootKeyOnHardware(t, rootKeyID)
 	}
-	assert.Len(t, uniqueKeys, numRoot)
 	return root, signing
 }
 
