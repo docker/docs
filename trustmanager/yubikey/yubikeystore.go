@@ -790,28 +790,31 @@ func SetupHSMEnv(libraryPath string, libLoader pkcs11LibLoader) (
 	IPKCS11Ctx, pkcs11.SessionHandle, error) {
 
 	if libraryPath == "" {
-		return nil, 0, errors.New("No library found.")
+		return nil, 0, fmt.Errorf("no library found.")
 	}
 	p := libLoader(libraryPath)
 
 	if p == nil {
-		return nil, 0, errors.New("Failed to init library")
+		return nil, 0, fmt.Errorf("failed to load library %s", libraryPath)
 	}
 
 	if err := p.Initialize(); err != nil {
 		defer finalizeAndDestroy(p)
-		return nil, 0, fmt.Errorf("Initialize error %s", err.Error())
+		return nil, 0, fmt.Errorf(
+			"found library %s, but initialize error %s", libraryPath, err.Error())
 	}
 
 	slots, err := p.GetSlotList(true)
 	if err != nil {
 		defer finalizeAndDestroy(p)
-		return nil, 0, fmt.Errorf("Failed to list HSM slots %s", err)
+		return nil, 0, fmt.Errorf(
+			"loaded library %s, but failed to list HSM slots %s", libraryPath, err)
 	}
 	// Check to see if we got any slots from the HSM.
 	if len(slots) < 1 {
 		defer finalizeAndDestroy(p)
-		return nil, 0, fmt.Errorf("No HSM Slots found")
+		return nil, 0, fmt.Errorf(
+			"loaded library %s, but no HSM slots found", libraryPath)
 	}
 
 	// CKF_SERIAL_SESSION: TRUE if cryptographic functions are performed in serial with the application; FALSE if the functions may be performed in parallel with the application.
@@ -819,9 +822,12 @@ func SetupHSMEnv(libraryPath string, libLoader pkcs11LibLoader) (
 	session, err := p.OpenSession(slots[0], pkcs11.CKF_SERIAL_SESSION|pkcs11.CKF_RW_SESSION)
 	if err != nil {
 		defer cleanup(p, session)
-		return nil, 0, fmt.Errorf("Failed to Start Session with HSM %s", err)
+		return nil, 0, fmt.Errorf(
+			"loaded library %s, but failed to start session with HSM %s",
+			libraryPath, err)
 	}
 
+	logrus.Debugf("Initialized PKCS11 library %s and started HSM session", libraryPath)
 	return p, session, nil
 }
 
