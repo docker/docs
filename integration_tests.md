@@ -48,6 +48,41 @@ over running the tests, `export MACHINE_LOCAL=1 && go test -v -p 1
 ./controller/integration/...`
 
 
+# Commmon usage patterns
+
+By default the tests use your local images, and copy them to the test
+machine.  This works well for developer mode, but if you're trying to test
+official builds, you'll need to set a few variables.
+
+* **Testing CI Builds**
+    ```
+export ORCA_ORG=dockerorcadev
+export PULL_IMAGES=1
+export REGISTRY_USERNAME=yourname
+read -s REGISTRY_PASSWORD
+export REGISTRY_PASSWORD
+export REGISTRY_EMAIL=youremail
+```
+
+* **Testing Latest Customer Builds**
+    ```
+export PULL_IMAGES=1
+export REGISTRY_USERNAME=yourname
+read -s REGISTRY_PASSWORD
+export REGISTRY_PASSWORD
+export REGISTRY_EMAIL=youremail
+```
+
+* **Testing specific Customer Builds**
+    ```
+export TAG=beta4
+export PULL_IMAGES=1
+export REGISTRY_USERNAME=yourname
+read -s REGISTRY_PASSWORD
+export REGISTRY_PASSWORD
+export REGISTRY_EMAIL=youremail
+```
+
 ## More details
 
 Testify suite's can't run in parallel within one package, so each
@@ -95,7 +130,7 @@ definitely need more than 10 minutes on the go test timeout.
 
 ### Set the AWS environment variables from lastpass here...
 
-export MACHINE_CREATE_FLAGS="--amazonec2-request-spot-instance --amazonec2-spot-price 0.05 --amazonec2-instance-type m1.small --amazonec2-ami ami-e91605d9 --engine-install-url https://test.docker.com"
+export MACHINE_CREATE_FLAGS="--amazonec2-request-spot-instance --amazonec2-spot-price 0.05 --amazonec2-instance-type m1.small --amazonec2-ami ami-ed8eb7dd --engine-install-url https://get.docker.com --amazonec2-ssh-user admin"
 export MACHINE_DRIVER=amazonec2
 ```
 
@@ -105,7 +140,7 @@ export MACHINE_DRIVER=amazonec2
 
 ### Set the AWS environment variables from lastpass here...
 
-export MACHINE_CREATE_FLAGS="--amazonec2-instance-type m1.small --amazonec2-ami ami-e91605d9 --engine-install-url https://test.docker.com"
+export MACHINE_CREATE_FLAGS="--amazonec2-instance-type m1.small --amazonec2-ami ami-ed8eb7dd --engine-install-url https://get.docker.com --amazonec2-ssh-user admin"
 export MACHINE_DRIVER=amazonec2
 ```
 
@@ -138,8 +173,8 @@ causing failures.  By default the parallel count is the number of CPUs.
 `PRESERVE_TEST_MACHINE` | Doesn't remove the test machine after the run.  Can be useful for troubleshooting test failures during test development
 `MACHINE_LOCAL` | Set to a non-empty string to make the tests run against the "local" docker engine (based on `DOCKER_HOST` and friends) This will disable all dual-node tests, and may lead to cascading failures.  You should make sure Orca isn't already installed on the local engine
 `TAG` | Specify which image tag to use for the orca images
-`PULL_ALL_IMAGES` | If set to non-zero, pull the images (if not present).  If not set, copy them from the local system
+`ORCA_ORG` | If set, use this org instead of the default 'dockerorca' (typically set to 'dockerorcadev' to test CI builds
+`PULL_IMAGES` | If set to non-empty, pull the images (if not present).  If not set, copy them from the local system
 `REGISTRY_USERNAME` | When pulling set this to a user that has permission to pull the official images
 `REGISTRY_PASSWORD` | When pulling set this to a user that has permission to pull the official images
 `REGISTRY_EMAIL` | When pulling set this to a user that has permission to pull the official images
-
