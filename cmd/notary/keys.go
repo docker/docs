@@ -2,6 +2,8 @@ package main
 
 import (
 	"archive/zip"
+	"fmt"
+	"io"
 	"os"
 	"path/filepath"
 	"sort"
@@ -13,6 +15,7 @@ import (
 	"github.com/docker/notary/trustmanager"
 
 	"github.com/docker/notary/tuf/data"
+	"github.com/olekukonko/tablewriter"
 	"github.com/spf13/cobra"
 )
 
@@ -88,6 +91,105 @@ var cmdKeyImportRoot = &cobra.Command{
 	Run:   keysImportRoot,
 }
 
+func truncateWithEllipsis(str string, maxWidth int, leftTruncate bool) string {
+	if len(str) <= maxWidth {
+		return str
+	}
+	if leftTruncate {
+		return fmt.Sprintf("...%s", str[len(str)-(maxWidth-3):])
+	}
+	return fmt.Sprintf("%s...", str[:maxWidth-3])
+}
+
+const (
+	maxGUNWidth = 25
+	maxLocWidth = 40
+)
+
+type keyInfo struct {
+	gun      string // assumption that this is "" if role is root
+	role     string
+	keyID    string
+	location string
+}
+
+// We want to sort by gun, then by role, then by keyID, then by location
+// In the case of a root role, then there is no GUN, and a root role comes
+// first.
+type keyInfoSorter []keyInfo
+
+func (k keyInfoSorter) Len() int      { return len(k) }
+func (k keyInfoSorter) Swap(i, j int) { k[i], k[j] = k[j], k[i] }
+func (k keyInfoSorter) Less(i, j int) bool {
+	// special-case role
+	if k[i].role != k[j].role {
+		if k[i].role == data.CanonicalRootRole {
+			return true
+		}
+		if k[j].role == data.CanonicalRootRole {
+			return false
+		}
+		// otherwise, neither of them are root, they're just different, so
+		// go with the traditional sort order.
+	}
+
+	// sort order is GUN, role, keyID, location.
+	orderedI := []string{k[i].gun, k[i].role, k[i].keyID, k[i].location}
+	orderedJ := []string{k[j].gun, k[j].role, k[j].keyID, k[j].location}
+
+	for x := 0; x < 4; x++ {
+		switch {
+		case orderedI[x] < orderedJ[x]:
+			return true
+		case orderedI[x] > orderedJ[x]:
+			return false
+		}
+		// continue on and evalulate the next item
+	}
+	// this shouldn't happen - that means two values are exactly equal
+	return false
+}
+
+// Given a list of KeyStores in order of listing preference, pretty-prints the
+// root keys and then the signing keys.
+func prettyPrintKeys(keyStores []trustmanager.KeyStore, writer io.Writer) {
+	var info []keyInfo
+
+	for _, store := range keyStores {
+		for keyPath, role := range store.ListKeys() {
+			gun := ""
+			if role != data.CanonicalRootRole {
+				gun = filepath.Dir(keyPath)
+			}
+			info = append(info, keyInfo{
+				role:     role,
+				location: store.Name(),
+				gun:      gun,
+				keyID:    filepath.Base(keyPath),
+			})
+		}
+	}
+	sort.Stable(keyInfoSorter(info))
+
+	table := tablewriter.NewWriter(writer)
+	table.SetHeader([]string{"ROLE", "GUN", "KEY ID", "LOCATION"})
+	table.SetBorder(false)
+	table.SetColumnSeparator(" ")
+	table.SetAlignment(tablewriter.ALIGN_LEFT)
+	table.SetCenterSeparator("-")
+	table.SetAutoWrapText(false)
+
+	for _, oneKeyInfo := range info {
+		table.Append([]string{
+			oneKeyInfo.role,
+			truncateWithEllipsis(oneKeyInfo.gun, maxGUNWidth, true),
+			oneKeyInfo.keyID,
+			truncateWithEllipsis(oneKeyInfo.location, maxLocWidth, true),
+		})
+	}
+	table.Render()
+}
+
 func keysList(cmd *cobra.Command, args []string) {
 	if len(args) > 0 {
 		cmd.Usage()
@@ -97,42 +199,9 @@ func keysList(cmd *cobra.Command, args []string) {
 	parseConfig()
 
 	stores := getKeyStores(cmd, mainViper.GetString("trust_dir"), retriever, true)
-
-	keys := make(map[trustmanager.KeyStore]map[string]string)
-	for _, store := range stores {
-		keys[store] = store.ListKeys()
-	}
-
 	cmd.Println("")
-	cmd.Println("# Root keys: ")
-	for store, keysMap := range keys {
-		for k, v := range keysMap {
-			if v == "root" {
-				cmd.Println(k, "-", store.Name())
-			}
-		}
-	}
-
+	prettyPrintKeys(stores, cmd.Out())
 	cmd.Println("")
-	cmd.Println("# Signing keys: ")
-
-	// Get a list of all the keys
-	for store, keysMap := range keys {
-		var sortedKeys []string
-		for k := range keysMap {
-			sortedKeys = append(sortedKeys, k)
-		}
-
-		// Sort the list of all the keys
-		sort.Strings(sortedKeys)
-
-		// Print a sorted list of the key/role
-		for _, k := range sortedKeys {
-			if keysMap[k] != "root" {
-				printKey(cmd, k, keysMap[k], store.Name())
-			}
-		}
-	}
 }
 
 func keysGenerateRootKey(cmd *cobra.Command, args []string) {
