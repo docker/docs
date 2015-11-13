@@ -69,13 +69,13 @@ func initializeRepo(t *testing.T, rootType, tempBaseDir, gun, url string) (*Nota
 		tempBaseDir, gun, url, http.DefaultTransport, passphraseRetriever)
 	assert.NoError(t, err, "error creating repo: %s", err)
 
-	rootKeyID, err := repo.KeyStoreManager.GenRootKey(rootType)
+	rootPubKey, err := repo.CryptoService.Create("root", rootType)
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	err = repo.Initialize(rootKeyID)
+	err = repo.Initialize(rootPubKey.ID())
 	assert.NoError(t, err, "error creating repository: %s", err)
 
-	return repo, rootKeyID
+	return repo, rootPubKey.ID()
 }
 
 // TestInitRepo runs through the process of initializing a repository and makes
@@ -119,9 +119,12 @@ func testInitRepo(t *testing.T, rootType string) {
 
 	// Look for keys in private. The filenames should match the key IDs
 	// in the private key store.
-	privKeyList := repo.KeyStoreManager.KeyStore.ListFiles()
+	keyFileStore, err := trustmanager.NewKeyFileStore(tempBaseDir, passphraseRetriever)
+	assert.NoError(t, err)
+
+	privKeyList := keyFileStore.ListFiles()
 	for _, privKeyName := range privKeyList {
-		privKeyFileName := filepath.Join(repo.KeyStoreManager.KeyStore.BaseDir(), privKeyName)
+		privKeyFileName := filepath.Join(keyFileStore.BaseDir(), privKeyName)
 		_, err := os.Stat(privKeyFileName)
 		assert.NoError(t, err, "missing private key: %s", privKeyName)
 	}
@@ -315,7 +318,9 @@ func fakeServerData(t *testing.T, repo *NotaryRepository, mux *http.ServeMux) {
 
 	savedTUFRepo := repo.tufRepo // in case this is overwritten
 
-	repo.KeyStoreManager.KeyStore.AddKey(
+	fileStore, err := trustmanager.NewKeyFileStore(repo.baseDir, passphraseRetriever)
+	assert.NoError(t, err)
+	fileStore.AddKey(
 		filepath.Join(filepath.FromSlash(repo.gun), tempKey.ID()),
 		"nonroot", tempKey)
 

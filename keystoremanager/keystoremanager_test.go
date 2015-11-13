@@ -121,11 +121,8 @@ func TestValidateRoot(t *testing.T) {
 	defer os.RemoveAll(tempBaseDir)
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
-	fileKeyStore, err := trustmanager.NewKeyFileStore(tempBaseDir, passphraseRetriever)
-	assert.NoError(t, err)
-
 	// Create a FileStoreManager
-	keyStoreManager, err := NewKeyStoreManager(tempBaseDir, fileKeyStore)
+	keyStoreManager, err := NewKeyStoreManager(tempBaseDir)
 	assert.NoError(t, err)
 
 	// Execute our template
@@ -135,17 +132,13 @@ func TestValidateRoot(t *testing.T) {
 	// Unmarshal our signedroot
 	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
 
-	//
 	// This call to ValidateRoot will succeed since we are using a valid PEM
 	// encoded certificate, and have no other certificates for this CN
-	//
 	err = keyStoreManager.ValidateRoot(&testSignedRoot, "docker.com/notary")
 	assert.NoError(t, err)
 
-	//
 	// This call to ValidateRoot will fail since we are passing in a dnsName that
 	// doesn't match the CN of the certificate.
-	//
 	err = keyStoreManager.ValidateRoot(&testSignedRoot, "diogomonica.com/notary")
 	if assert.Error(t, err, "An error was expected") {
 		assert.Equal(t, err, &ErrValidationFail{Reason: "unable to retrieve valid leaf certificates"})
@@ -228,23 +221,25 @@ func TestValidateSuccessfulRootRotation(t *testing.T) {
 // manager and certificates for two keys which have been added to the keystore.
 // Also returns the temporary directory so it can be cleaned up.
 func filestoreWithTwoCerts(t *testing.T, gun, keyAlg string) (
-	string, *KeyStoreManager, []*x509.Certificate) {
+	string, *KeyStoreManager, *cryptoservice.CryptoService, []*x509.Certificate) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	fileKeyStore, err := trustmanager.NewKeyFileStore(tempBaseDir, passphraseRetriever)
 	assert.NoError(t, err)
 
+	cryptoService := cryptoservice.NewCryptoService(gun, fileKeyStore)
+
 	// Create a FileStoreManager
-	keyStoreManager, err := NewKeyStoreManager(tempBaseDir, fileKeyStore)
+	keyStoreManager, err := NewKeyStoreManager(tempBaseDir)
 	assert.NoError(t, err)
 
 	certs := make([]*x509.Certificate, 2)
 	for i := 0; i < 2; i++ {
-		keyID, err := keyStoreManager.GenRootKey(keyAlg)
+		pubKey, err := cryptoService.Create("root", keyAlg)
 		assert.NoError(t, err)
 
-		key, _, err := keyStoreManager.KeyStore.GetKey(keyID)
+		key, _, err := fileKeyStore.GetKey(pubKey.ID())
 		assert.NoError(t, err)
 
 		cert, err := cryptoservice.GenerateCertificate(key, gun)
@@ -252,14 +247,14 @@ func filestoreWithTwoCerts(t *testing.T, gun, keyAlg string) (
 
 		certs[i] = cert
 	}
-	return tempBaseDir, keyStoreManager, certs
+	return tempBaseDir, keyStoreManager, cryptoService, certs
 }
 
 func testValidateSuccessfulRootRotation(t *testing.T, keyAlg, rootKeyType string) {
 	// The gun to test
 	gun := "docker.com/notary"
 
-	tempBaseDir, keyStoreManager, certs := filestoreWithTwoCerts(t, gun, keyAlg)
+	tempBaseDir, keyStoreManager, cs, certs := filestoreWithTwoCerts(t, gun, keyAlg)
 	defer os.RemoveAll(tempBaseDir)
 	origRootCert := certs[0]
 	replRootCert := certs[1]
@@ -287,8 +282,6 @@ func testValidateSuccessfulRootRotation(t *testing.T, keyAlg, rootKeyType string
 
 	signedTestRoot, err := testRoot.ToSigned()
 	assert.NoError(t, err)
-
-	cs := cryptoservice.NewCryptoService(gun, keyStoreManager.KeyStore)
 
 	err = signed.Sign(cs, signedTestRoot, replRootKey)
 	assert.NoError(t, err)
@@ -322,7 +315,8 @@ func TestValidateRootRotationMissingOrigSig(t *testing.T) {
 func testValidateRootRotationMissingOrigSig(t *testing.T, keyAlg, rootKeyType string) {
 	gun := "docker.com/notary"
 
-	tempBaseDir, keyStoreManager, certs := filestoreWithTwoCerts(t, gun, keyAlg)
+	tempBaseDir, keyStoreManager, cryptoService, certs := filestoreWithTwoCerts(
+		t, gun, keyAlg)
 	defer os.RemoveAll(tempBaseDir)
 	origRootCert := certs[0]
 	replRootCert := certs[1]
@@ -350,15 +344,11 @@ func testValidateRootRotationMissingOrigSig(t *testing.T, keyAlg, rootKeyType st
 	assert.NoError(t, err)
 
 	// We only sign with the new key, and not with the original one.
-	err = signed.Sign(
-		cryptoservice.NewCryptoService(gun, keyStoreManager.KeyStore),
-		signedTestRoot, replRootKey)
+	err = signed.Sign(cryptoService, signedTestRoot, replRootKey)
 	assert.NoError(t, err)
 
-	//
 	// This call to ValidateRoot will succeed since we are using a valid PEM
 	// encoded certificate, and have no other certificates for this CN
-	//
 	err = keyStoreManager.ValidateRoot(signedTestRoot, gun)
 	assert.Error(t, err, "insuficient signatures on root")
 
@@ -382,7 +372,8 @@ func TestValidateRootRotationMissingNewSig(t *testing.T) {
 func testValidateRootRotationMissingNewSig(t *testing.T, keyAlg, rootKeyType string) {
 	gun := "docker.com/notary"
 
-	tempBaseDir, keyStoreManager, certs := filestoreWithTwoCerts(t, gun, keyAlg)
+	tempBaseDir, keyStoreManager, cryptoService, certs := filestoreWithTwoCerts(
+		t, gun, keyAlg)
 	defer os.RemoveAll(tempBaseDir)
 	origRootCert := certs[0]
 	replRootCert := certs[1]
@@ -412,15 +403,11 @@ func testValidateRootRotationMissingNewSig(t *testing.T, keyAlg, rootKeyType str
 	assert.NoError(t, err)
 
 	// We only sign with the old key, and not with the new one
-	err = signed.Sign(
-		cryptoservice.NewCryptoService(gun, keyStoreManager.KeyStore),
-		signedTestRoot, origRootKey)
+	err = signed.Sign(cryptoService, signedTestRoot, origRootKey)
 	assert.NoError(t, err)
 
-	//
 	// This call to ValidateRoot will succeed since we are using a valid PEM
 	// encoded certificate, and have no other certificates for this CN
-	//
 	err = keyStoreManager.ValidateRoot(signedTestRoot, gun)
 	assert.Error(t, err, "insuficient signatures on root")
 
