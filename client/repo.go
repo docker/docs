@@ -24,12 +24,12 @@ func NewNotaryRepository(baseDir, gun, baseURL string, rt http.RoundTripper,
 		return nil, fmt.Errorf("failed to create private key store in directory: %s", baseDir)
 	}
 
-	keyStoreManager, err := keystoremanager.NewKeyStoreManager(baseDir, fileKeyStore)
+	keyStoreManager, err := keystoremanager.NewKeyStoreManager(baseDir)
 	if err != nil {
 		return nil, err
 	}
 
-	cryptoService := cryptoservice.NewCryptoService(gun, keyStoreManager.KeyStore)
+	cryptoService := cryptoservice.NewCryptoService(gun, fileKeyStore)
 
 	nRepo := &NotaryRepository{
 		gun:             gun,

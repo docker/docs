@@ -54,11 +54,7 @@ func certRemove(cmd *cobra.Command, args []string) {
 	parseConfig()
 
 	trustDir := mainViper.GetString("trust_dir")
-	fileKeyStore, err := trustmanager.NewKeyFileStore(trustDir, retriever)
-	if err != nil {
-		fatalf("Failed to create private key store in directory: %s", trustDir)
-	}
-	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, fileKeyStore)
+	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir)
 	if err != nil {
 		fatalf("Failed to create a new truststore manager with directory: %s", trustDir)
 	}
@@ -122,11 +118,7 @@ func certList(cmd *cobra.Command, args []string) {
 	parseConfig()
 
 	trustDir := mainViper.GetString("trust_dir")
-	fileKeyStore, err := trustmanager.NewKeyFileStore(trustDir, retriever)
-	if err != nil {
-		fatalf("Failed to create private key store in directory: %s", trustDir)
-	}
-	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir, fileKeyStore)
+	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir)
 	if err != nil {
 		fatalf("Failed to create a new truststore manager with directory: %s", trustDir)
 	}

@@ -1,12 +1,10 @@
 package keystoremanager
 
 import (
-	"crypto/rand"
 	"crypto/x509"
 	"errors"
 	"fmt"
 	"path/filepath"
-	"strings"
 	"time"
 
 	"github.com/Sirupsen/logrus"
@@ -18,7 +16,6 @@ import (
 // KeyStoreManager is an abstraction around the root and non-root key stores,
 // and related CA stores
 type KeyStoreManager struct {
-	KeyStore                *trustmanager.KeyFileStore
 	trustedCAStore          trustmanager.X509Store
 	trustedCertificateStore trustmanager.X509Store
 }
@@ -54,7 +51,7 @@ func (err ErrRootRotationFail) Error() string {
 
 // NewKeyStoreManager returns an initialized KeyStoreManager, or an error
 // if it fails to create the KeyFileStores or load certificates
-func NewKeyStoreManager(baseDir string, keyStore *trustmanager.KeyFileStore) (*KeyStoreManager, error) {
+func NewKeyStoreManager(baseDir string) (*KeyStoreManager, error) {
 	trustPath := filepath.Join(baseDir, trustDir)
 
 	// Load all CAs that aren't expired and don't use SHA1
@@ -82,7 +79,6 @@ func NewKeyStoreManager(baseDir string, keyStore *trustmanager.KeyFileStore) (*K
 	}
 
 	return &KeyStoreManager{
-		KeyStore:                keyStore,
 		trustedCAStore:          trustedCAStore,
 		trustedCertificateStore: trustedCertificateStore,
 	}, nil
@@ -108,33 +104,6 @@ func (km *KeyStoreManager) AddTrustedCert(cert *x509.Certificate) {
 // AddTrustedCACert adds a cert to the trusted CA certificate store
 func (km *KeyStoreManager) AddTrustedCACert(cert *x509.Certificate) {
 	km.trustedCAStore.AddCert(cert)
-}
-
-// GenRootKey generates a new root key
-func (km *KeyStoreManager) GenRootKey(algorithm string) (string, error) {
-	var err error
-	var privKey data.PrivateKey
-
-	// We don't want external API callers to rely on internal TUF data types, so
-	// the API here should continue to receive a string algorithm, and ensure
-	// that it is downcased
-	switch strings.ToLower(algorithm) {
-	case data.RSAKey:
-		privKey, err = trustmanager.GenerateRSAKey(rand.Reader, rsaRootKeySize)
-	case data.ECDSAKey:
-		privKey, err = trustmanager.GenerateECDSAKey(rand.Reader)
-	default:
-		return "", fmt.Errorf("only RSA or ECDSA keys are currently supported. Found: %s", algorithm)
-
-	}
-	if err != nil {
-		return "", fmt.Errorf("failed to generate private key: %v", err)
-	}
-
-	// Changing the root
-	km.KeyStore.AddKey(privKey.ID(), "root", privKey)
-
-	return privKey.ID(), nil
 }
 
 /*
