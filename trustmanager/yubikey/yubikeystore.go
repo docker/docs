@@ -483,6 +483,12 @@ func yubiListKeys(ctx IPKCS11Ctx, session pkcs11.SessionHandle) (keys map[string
 				}
 			}
 		}
+
+		// we found nothing
+		if cert == nil {
+			continue
+		}
+
 		var ecdsaPubKey *ecdsa.PublicKey
 		switch cert.PublicKeyAlgorithm {
 		case x509.ECDSA:
