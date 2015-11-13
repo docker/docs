@@ -61,7 +61,7 @@ func (l *otherMemoryStore) Name() string {
 
 // Given a list of key stores, the keys should be pretty-printed with their
 // roles, locations, IDs, and guns first in sorted order in the key store
-func TestPrettyPrintKeys(t *testing.T) {
+func TestPrettyPrintRootAndSigningKeys(t *testing.T) {
 	ret := passphrase.ConstantRetriever("pass")
 	keyStores := []trustmanager.KeyStore{
 		trustmanager.NewKeyMemoryStore(ret),
@@ -103,6 +103,12 @@ func TestPrettyPrintKeys(t *testing.T) {
 
 	lines := strings.Split(strings.TrimSpace(string(text)), "\n")
 	assert.Len(t, lines, len(expected)+2)
+
+	// starts with headers
+	assert.True(t, reflect.DeepEqual(strings.Fields(lines[0]),
+		[]string{"ROLE", "GUN", "KEY", "ID", "LOCATION"}))
+	assert.Equal(t, "----", lines[1][:4])
+
 	for i, line := range lines[2:] {
 		// we are purposely not putting spaces in test data so easier to split
 		splitted := strings.Fields(line)
@@ -110,4 +116,20 @@ func TestPrettyPrintKeys(t *testing.T) {
 			assert.Equal(t, expected[i][j], strings.TrimSpace(v))
 		}
 	}
+}
+
+// If there are no keys in any of the key stores, a message that there are no
+// signing keys should be displayed.
+func TestPrettyPrintZeroKeys(t *testing.T) {
+	ret := passphrase.ConstantRetriever("pass")
+	emptyKeyStore := trustmanager.NewKeyMemoryStore(ret)
+
+	var b bytes.Buffer
+	prettyPrintKeys([]trustmanager.KeyStore{emptyKeyStore}, &b)
+	text, err := ioutil.ReadAll(&b)
+	assert.NoError(t, err)
+
+	lines := strings.Split(strings.TrimSpace(string(text)), "\n")
+	assert.Len(t, lines, 1)
+	assert.Equal(t, "No signing keys found.", lines[0])
 }

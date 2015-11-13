@@ -169,6 +169,11 @@ func prettyPrintKeys(keyStores []trustmanager.KeyStore, writer io.Writer) {
 			})
 		}
 	}
+	if len(info) == 0 {
+		writer.Write([]byte("No signing keys found.\n"))
+		return
+	}
+
 	sort.Stable(keyInfoSorter(info))
 
 	table := tablewriter.NewWriter(writer)
