@@ -515,11 +515,15 @@ func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
 			// the store and it doesn't know about the repo.
 			return nil, err
 		}
-		rootJSON, err = r.fileStore.GetMeta("root", maxSize)
-		if err != nil {
-			// if cache didn't return a root, we cannot proceed
-			return nil, store.ErrMetaNotFound{}
+		result, cacheErr := r.fileStore.GetMeta("root", maxSize)
+		if cacheErr != nil {
+			// if cache didn't return a root, we cannot proceed - just return
+			// the original error.
+			return nil, err
 		}
+		rootJSON = result
+		logrus.Debugf(
+			"Using local cache instead of remote due to failure: %s", err.Error())
 	}
 	// can't just unmarshal into SignedRoot because validate root
 	// needs the root.Signed field to still be []byte for signature
