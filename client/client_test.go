@@ -20,6 +20,7 @@ import (
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
+	"github.com/docker/notary/tuf/store"
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/net/context"
 )
@@ -62,6 +63,15 @@ func fullTestServer(t *testing.T) *httptest.Server {
 	cryptoService := cryptoservice.NewCryptoService(
 		"", trustmanager.NewKeyMemoryStore(passphraseRetriever))
 	return httptest.NewServer(server.RootHandler(nil, ctx, cryptoService))
+}
+
+// server that returns some particular error code all the time
+func errorTestServer(t *testing.T, errorCode int) *httptest.Server {
+	handler := func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(errorCode)
+	}
+	server := httptest.NewServer(http.HandlerFunc(handler))
+	return server
 }
 
 func initializeRepo(t *testing.T, rootType, tempBaseDir, gun, url string) (*NotaryRepository, string) {
@@ -493,6 +503,7 @@ func testGetChangelist(t *testing.T, rootType string) {
 
 	gun := "docker.com/notary"
 	ts, _ := simpleTestServer(t)
+	defer ts.Close()
 
 	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL)
 	assert.Len(t, getChanges(t, repo), 0, "No changes should be in changelist yet")
@@ -544,7 +555,7 @@ func testPublish(t *testing.T, rootType string) {
 
 	gun := "docker.com/notary"
 	ts := fullTestServer(t)
-
+	defer ts.Close()
 	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL)
 
 	// Create 2 targets
@@ -602,6 +613,7 @@ func TestRotate(t *testing.T) {
 	gun := "docker.com/notary"
 
 	ts := fullTestServer(t)
+	defer ts.Close()
 
 	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL)
 
@@ -641,4 +653,30 @@ func TestRotate(t *testing.T) {
 	// Confirm changelist dir empty after publishing changes
 	changes := getChanges(t, repo)
 	assert.Len(t, changes, 0, "wrong number of changelist files found")
+}
+
+// If there is no local cache, notary operations return the remote error code
+func TestRemoteServerUnavailableNoLocalCache(t *testing.T) {
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+	defer os.RemoveAll(tempBaseDir)
+
+	ts := errorTestServer(t, 500)
+	defer ts.Close()
+
+	repo, err := NewNotaryRepository(tempBaseDir, "docker.com/notary",
+		ts.URL, http.DefaultTransport, passphraseRetriever)
+	assert.NoError(t, err, "error creating repo: %s", err)
+
+	_, err = repo.ListTargets()
+	assert.Error(t, err)
+	assert.IsType(t, store.ErrServerUnavailable{}, err)
+
+	_, err = repo.GetTargetByName("targetName")
+	assert.Error(t, err)
+	assert.IsType(t, store.ErrServerUnavailable{}, err)
+
+	err = repo.Publish()
+	assert.Error(t, err)
+	assert.IsType(t, store.ErrServerUnavailable{}, err)
 }
