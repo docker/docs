@@ -3,6 +3,7 @@ package store
 import (
 	"encoding/base64"
 	"encoding/hex"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -32,6 +33,7 @@ func TestHTTPStoreGetMeta(t *testing.T) {
 		w.Write([]byte(testRoot))
 	}
 	server := httptest.NewServer(http.HandlerFunc(handler))
+	defer server.Close()
 	store, err := NewHTTPStore(
 		server.URL,
 		"metadata",
@@ -150,5 +152,46 @@ func TestPyNaCled25519Compat(t *testing.T) {
 	err := signed.Verifiers[data.EDDSASignature].Verify(k, sigBytes, []byte(testStr))
 	if err != nil {
 		t.Fatal(err)
+	}
+}
+
+func testErrorCode(t *testing.T, errorCode int, errType error) {
+	handler := func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(errorCode)
+	}
+	server := httptest.NewServer(http.HandlerFunc(handler))
+	defer server.Close()
+
+	store, err := NewHTTPStore(
+		server.URL,
+		"metadata",
+		"txt",
+		"targets",
+		"key",
+		&http.Transport{},
+	)
+	assert.NoError(t, err)
+
+	_, err = store.GetMeta("root", 4801)
+	assert.Error(t, err)
+	assert.IsType(t, errType, err,
+		fmt.Sprintf("%d should translate to %v", errorCode, errType))
+}
+
+func TestErrMetadataNotFound(t *testing.T) {
+	testErrorCode(t, http.StatusNotFound, ErrMetaNotFound{})
+}
+
+func Test500Errors(t *testing.T) {
+	fiveHundreds := []int{
+		http.StatusInternalServerError,
+		http.StatusNotImplemented,
+		http.StatusBadGateway,
+		http.StatusServiceUnavailable,
+		http.StatusGatewayTimeout,
+		http.StatusHTTPVersionNotSupported,
+	}
+	for _, code := range fiveHundreds {
+		testErrorCode(t, code, ErrServerUnavailable{})
 	}
 }
