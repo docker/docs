@@ -178,6 +178,10 @@
 			"Rev": "2caf8efc93669b6c43e0441cdc6aed17546c96f3"
 		},
 		{
+			"ImportPath": "github.com/olekukonko/tablewriter",
+			"Rev": "a5eefc286b03d5560735698ef36c83728a6ae560"
+		},
+		{
 			"ImportPath": "github.com/prometheus/client_golang/prometheus",
 			"Comment": "0.7.0-53-g449ccef",
 			"Rev": "449ccefff16c8e2b7229f6be1921ba22f62461fe"
