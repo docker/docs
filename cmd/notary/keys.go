@@ -23,11 +23,11 @@ func init() {
 	cmdKey.AddCommand(cmdKeyList)
 	cmdKey.AddCommand(cmdKeyGenerateRootKey)
 
-	cmdKeyExport.Flags().StringVarP(&keysExportGUN, "gun", "g", "", "Globally Unique Name to export keys for")
-	cmdKey.AddCommand(cmdKeyExport)
+	cmdKeysBackup.Flags().StringVarP(&keysExportGUN, "gun", "g", "", "Globally Unique Name to export keys for")
+	cmdKey.AddCommand(cmdKeysBackup)
 	cmdKey.AddCommand(cmdKeyExportRoot)
 	cmdKeyExportRoot.Flags().BoolVarP(&keysExportRootChangePassphrase, "change-passphrase", "p", false, "Set a new passphrase for the key being exported")
-	cmdKey.AddCommand(cmdKeyImport)
+	cmdKey.AddCommand(cmdKeysRestore)
 	cmdKey.AddCommand(cmdKeyImportRoot)
 	cmdKey.AddCommand(cmdRotateKey)
 }
@@ -55,39 +55,39 @@ var cmdRotateKey = &cobra.Command{
 var cmdKeyGenerateRootKey = &cobra.Command{
 	Use:   "generate [ algorithm ]",
 	Short: "Generates a new root key with a given algorithm.",
-	Long:  "Generates a new root key with a given algorithm. If a hardware smartcard is available, the key will be stored both on hardware and on disk.  Please make sure to back up the key that is written to disk, and to then take the on-disk key offline.",
+	Long:  "Generates a new root key with a given algorithm. If hardware key storage (e.g. a Yubikey) is available, the key will be stored both on hardware and on disk (so that it can be backed up).  Please make sure to back up and then remove this on-key disk immediately afterwards.",
 	Run:   keysGenerateRootKey,
 }
 
 var keysExportGUN string
 
-var cmdKeyExport = &cobra.Command{
-	Use:   "export [ filename ]",
-	Short: "Exports keys to a ZIP file.",
-	Long:  "Exports a collection of keys. The keys are reencrypted with a new passphrase. The output is a ZIP file.  If the --gun option is passed, only signing keys and no root keys will be exported.  Does not work on keys that are only in hardware (smartcards).",
-	Run:   keysExport,
+var cmdKeysBackup = &cobra.Command{
+	Use:   "backup [ zipfilename ]",
+	Short: "Backs up all your on-disk keys to a ZIP file.",
+	Long:  "Backs up all of your accessible of keys. The keys are reencrypted with a new passphrase. The output is a ZIP file.  If the --gun option is passed, only signing keys and no root keys will be backed up.  Does not work on keys that are only in hardware (e.g. Yubikeys).",
+	Run:   keysBackup,
 }
 
 var keysExportRootChangePassphrase bool
 
 var cmdKeyExportRoot = &cobra.Command{
-	Use:   "export-root [ keyID ] [ filename ]",
-	Short: "Exports given root key to a file.",
-	Long:  "Exports a root key, without reencrypting. The output is a PEM file. Does not work on keys that are only in hardware (smartcards).",
+	Use:   "export [ keyID ] [ pemfilename ]",
+	Short: "Export a root key on disk to a PEM file.",
+	Long:  "Exports a single root key on disk, without reencrypting. The output is a PEM file. Does not work on keys that are only in hardware (e.g. Yubikeys).",
 	Run:   keysExportRoot,
 }
 
-var cmdKeyImport = &cobra.Command{
-	Use:   "import [ filename ]",
-	Short: "Imports keys from a ZIP file.",
-	Long:  "Imports one or more keys from a ZIP file. If a hardware smartcard is available, the root key will be imported into the smartcard but not to disk.",
-	Run:   keysImport,
+var cmdKeysRestore = &cobra.Command{
+	Use:   "restore [ zipfilename ]",
+	Short: "Restore multiple keys from a ZIP file.",
+	Long:  "Restores one or more keys from a ZIP file. If hardware key storage (e.g. a Yubikey) is available, root keys will be imported into the hardware, but not backed up to disk in the same location as the other, non-root keys.",
+	Run:   keysRestore,
 }
 
 var cmdKeyImportRoot = &cobra.Command{
-	Use:   "import-root [ filename ]",
-	Short: "Imports root key.",
-	Long:  "Imports a root key from a PEM file. If a hardware smartcard is available, the root key will be imported into the smartcard but not to disk.",
+	Use:   "import [ pemfilename ]",
+	Short: "Imports a root key from a PEM file.",
+	Long:  "Imports a single root key from a PEM file. If a hardware key storage (e.g. Yubikey) is available, the root key will be imported into the hardware but not backed up on disk again.",
 	Run:   keysImportRoot,
 }
 
@@ -251,8 +251,8 @@ func keysGenerateRootKey(cmd *cobra.Command, args []string) {
 	cmd.Printf("Generated new %s root key with keyID: %s\n", algorithm, pubKey.ID())
 }
 
-// keysExport exports a collection of keys to a ZIP file
-func keysExport(cmd *cobra.Command, args []string) {
+// keysBackup exports a collection of keys to a ZIP file
+func keysBackup(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
 		cmd.Usage()
 		fatalf("Must specify output filename for export")
@@ -330,8 +330,8 @@ func keysExportRoot(cmd *cobra.Command, args []string) {
 	}
 }
 
-// keysImport imports keys from a ZIP file
-func keysImport(cmd *cobra.Command, args []string) {
+// keysRestore imports keys from a ZIP file
+func keysRestore(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
 		cmd.Usage()
 		fatalf("Must specify input filename for import")
