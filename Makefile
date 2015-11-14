@@ -73,6 +73,11 @@ ${PREFIX}/bin/notary-signer: NOTARY_VERSION $(shell find . -type f -name '*.go')
 
 vet: go_version
 	@echo "+ $@"
+ifeq ($(shell uname -s), Darwin)
+	@test -z "$(shell find . -iname *test*.go | grep -v _test.go | grep -v Godeps | xargs echo "This file should end with '_test':"  | tee /dev/stderr)"
+else
+	@test -z "$(shell find . -iname *test*.go | grep -v _test.go | grep -v Godeps | xargs -r echo "This file should end with '_test':"  | tee /dev/stderr)"
+endif
 	@test -z "$$(go tool vet -printf=false . 2>&1 | grep -v Godeps/_workspace/src/ | tee /dev/stderr)"
 
 fmt:
