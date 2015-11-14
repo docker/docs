@@ -302,9 +302,9 @@ func TestClientKeyGenerationRotation(t *testing.T) {
 	assert.True(t, strings.Contains(string(output), target))
 }
 
-// Tests import/export root+signing keys - repo with imported keys should be
+// Tests backup/restore root+signing keys - repo with restored keys should be
 // able to publish successfully
-func TestClientKeyImportExportRootAndSigning(t *testing.T) {
+func TestClientKeyBackupAndRestore(t *testing.T) {
 	// -- setup --
 	cleanup := setUp(t)
 	defer cleanup()
@@ -347,15 +347,15 @@ func TestClientKeyImportExportRootAndSigning(t *testing.T) {
 	zipfile := tempfiles[0] + ".zip"
 	defer os.Remove(zipfile)
 
-	// export then import all keys
-	_, err = runCommand(t, dirs[0], "key", "export", zipfile)
+	// backup then restore all keys
+	_, err = runCommand(t, dirs[0], "key", "backup", zipfile)
 	assert.NoError(t, err)
 
-	_, err = runCommand(t, dirs[1], "key", "import", zipfile)
+	_, err = runCommand(t, dirs[1], "key", "restore", zipfile)
 	assert.NoError(t, err)
 	assertNumKeys(t, dirs[1], 1, 4, !rootOnHardware()) // all keys should be there
 
-	// can list and publish to both repos using imported keys
+	// can list and publish to both repos using restored keys
 	for _, gun := range []string{"gun1", "gun2"} {
 		output, err := runCommand(t, dirs[1], "-s", server.URL, "list", gun)
 		assert.NoError(t, err)
@@ -365,11 +365,11 @@ func TestClientKeyImportExportRootAndSigning(t *testing.T) {
 			t, dirs[1], server.URL, gun, target+"2", tempfiles[1])
 	}
 
-	// export then import keys for one gun
-	_, err = runCommand(t, dirs[0], "key", "export", zipfile, "-g", "gun1")
+	// backup and restore keys for one gun
+	_, err = runCommand(t, dirs[0], "key", "backup", zipfile, "-g", "gun1")
 	assert.NoError(t, err)
 
-	_, err = runCommand(t, dirs[2], "key", "import", zipfile)
+	_, err = runCommand(t, dirs[2], "key", "restore", zipfile)
 	assert.NoError(t, err)
 
 	// this function is declared is in the build-tagged setup files
@@ -402,7 +402,7 @@ func exportRoot(t *testing.T, exportTo string) string {
 	}()
 
 	_, err = runCommand(
-		t, tempDir, "key", "export-root", oldRoot[0], exportTo)
+		t, tempDir, "key", "export", oldRoot[0], exportTo)
 	assert.NoError(t, err)
 
 	return oldRoot[0]
@@ -452,7 +452,7 @@ func TestClientKeyImportExportRootOnly(t *testing.T) {
 	}
 
 	// import the key
-	_, err = runCommand(t, tempDir, "key", "import-root", tempFile.Name())
+	_, err = runCommand(t, tempDir, "key", "import", tempFile.Name())
 	assert.NoError(t, err)
 
 	// if there is hardware available, root will only be on hardware, and not
