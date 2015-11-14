@@ -22,7 +22,7 @@ speed things up.  Each suite will run in parallel, and use a unique
 machine.
 
 ```bash
-export MACHINE_CREATE_FLAGS="--kvm-memory 2048 --kvm-disk-size 5000"
+export MACHINE_CREATE_FLAGS="--kvm-memory 2048 --kvm-disk-size 5000 --kvm-cpu-count 2"
 export MACHINE_DRIVER=kvm
 PARALLEL_COUNT=3
 
@@ -178,3 +178,5 @@ causing failures.  By default the parallel count is the number of CPUs.
 `REGISTRY_USERNAME` | When pulling set this to a user that has permission to pull the official images
 `REGISTRY_PASSWORD` | When pulling set this to a user that has permission to pull the official images
 `REGISTRY_EMAIL` | When pulling set this to a user that has permission to pull the official images
+`STRESS_OBJECT_COUNT` | If set, tunes the number of objects created during stress tests
+
