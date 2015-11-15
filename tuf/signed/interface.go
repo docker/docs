@@ -5,14 +5,6 @@ import (
 	"io"
 )
 
-// SigningService defines the necessary functions to determine
-// if a user is able to sign with a key, and to perform signing.
-type SigningService interface {
-	// Sign takes a slice of keyIDs and a piece of data to sign
-	// and returns a slice of signatures and an error
-	Sign(keyIDs []string, data []byte) ([]data.Signature, error)
-}
-
 // KeyService provides management of keys locally. It will never
 // accept or provide private keys. Communication between the KeyService
 // and a SigningService happen behind the Create function.
@@ -47,7 +39,6 @@ type KeyService interface {
 // CryptoService defines a unified Signing and Key Service as this
 // will be most useful for most applications.
 type CryptoService interface {
-	SigningService
 	KeyService
 }
 
