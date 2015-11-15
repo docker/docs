@@ -461,7 +461,8 @@ func (t targetsSorter) Less(i, j int) bool {
 // root keys and then the signing keys.
 func prettyPrintTargets(ts []*notaryclient.Target, writer io.Writer) {
 	if len(ts) == 0 {
-		writer.Write([]byte("No targets present in this repository.\n"))
+		writer.Write([]byte("\nNo targets present in this repository.\n\n"))
+		return
 	}
 
 	sort.Stable(targetsSorter(ts))
