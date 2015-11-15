@@ -131,6 +131,7 @@ func main() {
 		Short: "Notary allows the creation of trusted collections.",
 		Long:  "Notary allows the creation and management of collections of signed targets, allowing the signing and validation of arbitrary content.",
 	}
+	notaryCmd.SetOutput(os.Stdout)
 	setupCommand(notaryCmd)
 	notaryCmd.Execute()
 }
