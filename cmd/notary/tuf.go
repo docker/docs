@@ -3,13 +3,16 @@ package main
 import (
 	"bufio"
 	"crypto/sha256"
+	"encoding/hex"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"net"
 	"net/http"
 	"net/url"
 	"os"
 	"path/filepath"
+	"sort"
 	"strings"
 	"time"
 
@@ -22,6 +25,7 @@ import (
 	notaryclient "github.com/docker/notary/client"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/utils"
+	"github.com/olekukonko/tablewriter"
 	"github.com/spf13/cobra"
 )
 
@@ -168,10 +172,7 @@ func tufList(cmd *cobra.Command, args []string) {
 		fatalf(err.Error())
 	}
 
-	// Print all the available targets
-	for _, t := range targetList {
-		cmd.Printf("%s %x %d\n", t.Name, t.Hashes["sha256"], t.Length)
-	}
+	prettyPrintTargets(targetList, cmd.Out())
 }
 
 func tufLookup(cmd *cobra.Command, args []string) {
@@ -446,4 +447,39 @@ func getRemoteTrustServer() string {
 		}
 	}
 	return remoteTrustServer
+}
+
+type targetsSorter []*notaryclient.Target
+
+func (t targetsSorter) Len() int      { return len(t) }
+func (t targetsSorter) Swap(i, j int) { t[i], t[j] = t[j], t[i] }
+func (t targetsSorter) Less(i, j int) bool {
+	return t[i].Name < t[j].Name
+}
+
+// Given a list of KeyStores in order of listing preference, pretty-prints the
+// root keys and then the signing keys.
+func prettyPrintTargets(ts []*notaryclient.Target, writer io.Writer) {
+	if len(ts) == 0 {
+		writer.Write([]byte("No targets present in this repository.\n"))
+	}
+
+	sort.Stable(targetsSorter(ts))
+
+	table := tablewriter.NewWriter(writer)
+	table.SetHeader([]string{"Name", "Digest", "Size (bytes)"})
+	table.SetBorder(false)
+	table.SetColumnSeparator(" ")
+	table.SetAlignment(tablewriter.ALIGN_LEFT)
+	table.SetCenterSeparator("-")
+	table.SetAutoWrapText(false)
+
+	for _, t := range ts {
+		table.Append([]string{
+			t.Name,
+			hex.EncodeToString(t.Hashes["sha256"]),
+			fmt.Sprintf("%d", t.Length),
+		})
+	}
+	table.Render()
 }
