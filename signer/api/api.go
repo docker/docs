@@ -1,6 +1,7 @@
 package api
 
 import (
+	"crypto/rand"
 	"encoding/json"
 	"net/http"
 
@@ -178,8 +179,15 @@ func Sign(cryptoServices signer.CryptoServiceIndex) http.Handler {
 			return
 		}
 
-		signatures, err := cryptoService.Sign([]string{sigRequest.KeyID.ID}, sigRequest.Content)
-		if err != nil || len(signatures) != 1 {
+		privKey, _, err := cryptoService.GetPrivateKey(tufKey.ID())
+		if err != nil {
+			// We got an unexpected error
+			w.WriteHeader(http.StatusInternalServerError)
+			w.Write([]byte(err.Error()))
+			return
+		}
+		sig, err := privKey.Sign(rand.Reader, sigRequest.Content, nil)
+		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			w.Write([]byte(err.Error()))
 			return
@@ -189,7 +197,8 @@ func Sign(cryptoServices signer.CryptoServiceIndex) http.Handler {
 				KeyID:     &pb.KeyID{ID: tufKey.ID()},
 				Algorithm: &pb.Algorithm{Algorithm: tufKey.Algorithm()},
 			},
-			Content: signatures[0].Signature,
+			Algorithm: &pb.Algorithm{Algorithm: privKey.SignatureAlgorithm().String()},
+			Content:   sig,
 		}
 
 		json.NewEncoder(w).Encode(signature)

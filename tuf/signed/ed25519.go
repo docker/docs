@@ -61,23 +61,6 @@ func (e *Ed25519) ListAllKeys() map[string]string {
 	return keys
 }
 
-// Sign generates an Ed25519 signature over the data
-func (e *Ed25519) Sign(keyIDs []string, toSign []byte) ([]data.Signature, error) {
-	signatures := make([]data.Signature, 0, len(keyIDs))
-	for _, keyID := range keyIDs {
-		priv := [ed25519.PrivateKeySize]byte{}
-		copy(priv[:], e.keys[keyID].privKey.Private())
-		sig := ed25519.Sign(&priv, toSign)
-		signatures = append(signatures, data.Signature{
-			KeyID:     keyID,
-			Method:    data.EDDSASignature,
-			Signature: sig[:],
-		})
-	}
-	return signatures, nil
-
-}
-
 // Create generates a new key and returns the public part
 func (e *Ed25519) Create(role, algorithm string) (data.PublicKey, error) {
 	if algorithm != data.ED25519Key {
