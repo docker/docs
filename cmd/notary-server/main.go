@@ -17,6 +17,7 @@ import (
 	"github.com/docker/distribution/health"
 	_ "github.com/docker/distribution/registry/auth/htpasswd"
 	_ "github.com/docker/distribution/registry/auth/token"
+	"github.com/docker/notary/signer/client"
 	"github.com/docker/notary/tuf/signed"
 	_ "github.com/go-sql-driver/mysql"
 	"golang.org/x/net/context"
@@ -24,7 +25,6 @@ import (
 	bugsnag_hook "github.com/Sirupsen/logrus/hooks/bugsnag"
 	"github.com/docker/notary/server"
 	"github.com/docker/notary/server/storage"
-	"github.com/docker/notary/signer"
 	"github.com/docker/notary/utils"
 	"github.com/docker/notary/version"
 	"github.com/spf13/viper"
@@ -163,7 +163,7 @@ func main() {
 		if err != nil {
 			logrus.Fatal(err.Error())
 		}
-		notarySigner := signer.NewNotarySigner(
+		notarySigner := client.NewNotarySigner(
 			mainViper.GetString("trust_service.hostname"),
 			mainViper.GetString("trust_service.port"),
 			clientTLS,
