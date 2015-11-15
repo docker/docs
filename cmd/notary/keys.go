@@ -2,11 +2,13 @@ package main
 
 import (
 	"archive/zip"
+	"bufio"
 	"fmt"
 	"io"
 	"os"
 	"path/filepath"
 	"sort"
+	"strconv"
 	"strings"
 
 	notaryclient "github.com/docker/notary/client"
@@ -30,6 +32,7 @@ func init() {
 	cmdKey.AddCommand(cmdKeysRestore)
 	cmdKey.AddCommand(cmdKeyImportRoot)
 	cmdKey.AddCommand(cmdRotateKey)
+	cmdKey.AddCommand(cmdKeyRemove)
 }
 
 var cmdKey = &cobra.Command{
@@ -89,6 +92,13 @@ var cmdKeyImportRoot = &cobra.Command{
 	Short: "Imports a root key from a PEM file.",
 	Long:  "Imports a single root key from a PEM file. If a hardware key storage (e.g. Yubikey) is available, the root key will be imported into the hardware but not backed up on disk again.",
 	Run:   keysImportRoot,
+}
+
+var cmdKeyRemove = &cobra.Command{
+	Use:   "remove [ keyID ]",
+	Short: "Removes the key with the given keyID.",
+	Long:  "Removes the key with the given keyID.  If the key is stored in more than one location, you will be asked which one to remove.",
+	Run:   keyRemove,
 }
 
 func truncateWithEllipsis(str string, maxWidth int, leftTruncate bool) string {
@@ -407,6 +417,101 @@ func keysRotate(cmd *cobra.Command, args []string) {
 		fatalf(err.Error())
 	}
 	if err := nRepo.RotateKeys(); err != nil {
+		fatalf(err.Error())
+	}
+}
+
+func removeKeyInteractively(keyStores []trustmanager.KeyStore, keyID string,
+	in io.Reader, out io.Writer) error {
+
+	var foundKeys [][]string
+	var storesByIndex []trustmanager.KeyStore
+
+	for _, store := range keyStores {
+		for keypath, role := range store.ListKeys() {
+			if filepath.Base(keypath) == keyID {
+				foundKeys = append(foundKeys,
+					[]string{keypath, role, store.Name()})
+				storesByIndex = append(storesByIndex, store)
+			}
+		}
+	}
+
+	if len(foundKeys) == 0 {
+		return fmt.Errorf("No key with ID %s found.", keyID)
+	}
+
+	readIn := bufio.NewReader(in)
+
+	if len(foundKeys) > 1 {
+		for {
+			// ask the user for which key to delete
+			fmt.Fprintf(out, "Found the following matching keys:\n")
+			for i, info := range foundKeys {
+				fmt.Fprintf(out, "\t%d. %s: %s (%s)\n", i+1, info[0], info[1], info[2])
+			}
+			fmt.Fprint(out, "Which would you like to delete?  Please enter a number:  ")
+			result, err := readIn.ReadBytes('\n')
+			if err != nil {
+				return err
+			}
+			index, err := strconv.Atoi(strings.TrimSpace(string(result)))
+
+			if err != nil || index > len(foundKeys) || index < 1 {
+				fmt.Fprintf(out, "\nInvalid choice: %s\n", string(result))
+				continue
+			}
+			foundKeys = [][]string{foundKeys[index-1]}
+			storesByIndex = []trustmanager.KeyStore{storesByIndex[index-1]}
+			fmt.Fprintln(out, "")
+			break
+		}
+	}
+	// Now the length must be 1 - ask for confirmation.
+	keyDescription := fmt.Sprintf("%s (role %s) from %s", foundKeys[0][0],
+		foundKeys[0][1], foundKeys[0][2])
+
+	fmt.Fprintf(out, "Are you sure you want to remove %s?  [Y/n]  ",
+		keyDescription)
+	result, err := readIn.ReadBytes('\n')
+	if err != nil {
+		return err
+	}
+	yesno := strings.ToLower(strings.TrimSpace(string(result)))
+
+	if !strings.HasPrefix("yes", yesno) && yesno != "" {
+		fmt.Fprintln(out, "\nAborting action.")
+		return nil
+	}
+
+	err = storesByIndex[0].RemoveKey(foundKeys[0][0])
+	if err != nil {
+		return err
+	}
+
+	fmt.Fprintf(out, "\nDeleted %s.\n", keyDescription)
+	return nil
+}
+
+// keyRemove deletes a private key based on ID
+func keyRemove(cmd *cobra.Command, args []string) {
+	if len(args) < 1 {
+		cmd.Usage()
+		fatalf("must specify the key ID of the key to remove")
+	}
+
+	parseConfig()
+	keyID := args[0]
+
+	// This is an invalid ID
+	if len(keyID) != idSize {
+		fatalf("invalid key ID provided: %s", keyID)
+	}
+	stores := getKeyStores(cmd, mainViper.GetString("trust_dir"), retriever, true)
+	cmd.Println("")
+	err := removeKeyInteractively(stores, keyID, os.Stdin, cmd.Out())
+	cmd.Println("")
+	if err != nil {
 		fatalf(err.Error())
 	}
 }
