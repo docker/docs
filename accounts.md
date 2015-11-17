@@ -7,12 +7,21 @@ parent="smn_dhe"
 weight=10
 +++
 
-# Account and repository management introduction
+# Account and repository management
 
-This document describes the various actions you can perform surrounding account
-and repository management through the Docker Trusted Registry (Trusted Registry)
-user interface (UI). What you see and do depends on your role and
-permissions which is outlined in this document. Use the UI to quickly see, and
+This section explains the relationship between users, organizations, teams, and
+repositories and gives examples of potential workflows you might use. It also
+describes the various actions you can perform surrounding account and repository
+management through the Docker Trusted Registry (Trusted Registry) user interface
+(UI).
+
+There are three scopes with which you can manage permissions:
+
+* organizations
+* teams
+* repositories
+
+What you see and do depends on your role and permissions. Use the UI to see, and
 with the correct permissions do the following:
 
 * manage repositories
@@ -20,57 +29,36 @@ with the correct permissions do the following:
 * create and view teams
 * assign members to teams
 
-**Example**: as a organization owner in the organization-owned repository
+>**Example**: as a organization owner in the organization-owned repository
 Animals repo, you might create multiple teams in your organization. You manage
 the teams access. You give Team Alpha permissions so they can modify,
 delete, and push tags. Team Beta can only view, browse, and pull tags.
 
-**Note**: You can perform many functions in the UI as you can from the
-command line or API. To see what you can do from a command line or API, refer to
-the API documentation accessed from the Trusted Registry UI.
-
-There are three scopes with which you can manage permissions:
-* Organizations
-* Teams
-* Repositories
-
-This document explains the relationship between users, organizations, teams,
-and repositories and gives examples of potential workflows you might use.
+You can perform many functions in the UI as you can from the command line
+interface (CLI) or API. To see what you can do from the CLI or API, refer to the
+API documentation accessed from the Trusted Registry UI.
 
 ## Accounts
 
 Docker defines two types of accounts: users and organizations.
 
-* Users are individuals. They are sometimes called members in the context of a team or organization.
+* Users are individuals, and can be called members in the context of a team or organization.
 * An organization is a group of members.
 
 Both accounts are defined by a namespace containing two component names in the
-form of account-name/repository-name. There is no limit to how many you can have of each type of account.
+form of account-name/repository-name. There is no limit to how many you can have
+of each type of account.
 
-## Repositories
-
-In the Trusted Registry, repositories can be either public or private. Anyone can  create them, but who sees and accesses them are determined by permissions as well.
-
-**Public**:
-
-* visible to all accounts in the system
-* can only be written to by accounts granted explicit write access
-
-**Private**:
-
-* cannot be discovered by any account unless having explicit read access to it
-* can be created by users and organizations
-
-## User accounts
+### User accounts
 
 A user (member):
-* Can belong to an organization
-* Be a part of a team that is a part of that organization.
-* Belong to more than one team, in more than one organization and have differing roles within those teams.
 
-**Example**:
-In team A, they can have admin permissions so they can help manage their group,
-while in team B, those users only have read permission.  
+* can belong to an organization.
+* be a part of a team that is a part of that organization.
+* belong to more than one team, in more than one organization, and have differing roles within those teams.
+
+So in team A, they can have admin permissions so they can help manage their
+group, while in team B, those users only have read permission.  
 
 User can also create repositories under their own name and share those
 repositories with other users. They confer permissions to other users on a
@@ -85,7 +73,7 @@ per-repository basis. The following table depicts the combination of users and p
 | teams: view public  repos, members      |     x     |     x     |      x     |      x      |      |
 | teams: set repo permissions             |     x     |     x     |            |             |      |
 
-## Organization accounts
+### Organization accounts
 
 System administrators can also create an organization account, with its own
 namespace of repositories. Comprised of one or more teams, they can be managed
@@ -101,17 +89,17 @@ organization.
 All organization members can see teams and their members. However, they are not
 visible to users outside that organization.
 
-## Teams
+### Teams
 
 Teams are configured in two ways:
 
-* As a list of users managed by an organization owner, or
-* Through LDAP system integration which can then be periodically synced
+* as a list of users managed by an organization owner, or
+* through LDAP system integration which can then be periodically synced
 
 The organization owner, other than the system administrator, is the only person
 who can create, modify, or delete those teams that belong to that organization.
 
-Teams, like users, can also be granted permissions to their repositories as seen in the  following table:
+Teams, like users, can also be granted permissions to their repositories as seen in the following table:
 
 | Repository access      | read | read-write | admin |
 |------------------------|:----:|:----------:|:-----:|
@@ -123,7 +111,40 @@ Teams, like users, can also be granted permissions to their repositories as seen
 | make public or private |      |            |   x   |
 | manage user access     |      |            |   x   |
 
-  **Note**: These permissions are additive. This means you cannot override a team level permission to prevent access to a specific repository. If a team has read-write access to the entire namespace of repositories, then granting that team 'read-only' access to a specific repository will not reduce their access to that repository, as the team will still have read-write access to that repository through its namespace access.
+These permissions are additive. This means you cannot override a team level
+permission to prevent access to a specific repository. If a team has read-write
+access to the entire namespace of repositories, then granting that team
+'read-only' access to a specific repository will not reduce their access to that
+repository, as the team will still have read-write access to that repository
+through its namespace access.
+
+## Repositories
+
+Any user can create and share public or private repositories. Users that are
+designated as org admins (or the Trusted Registry admin) can create and manage
+repositories that teams can belong to. One team might have read-write
+permissions, while another team could only have read-only permissions. A third
+team that is outside that organization (and repository) may not even be able to
+even see that repository. This is based on account permissions.
+
+A repository must first exist before users can push an image to it. If they
+tried to push an image without designating a repository through the CLI, they
+see the following error message:
+
+    % docker push my.dtr.host/user1/myimage
+    The push refers to a repository [my.dtr.host/user1/myimage] (len: 1)
+    1d073211c498: Image push failed
+    unauthorized: access to the requested resource is not authorized
+
+A public repository:
+
+* is visible to all accounts in the system
+* can only be written to by accounts granted explicit write access
+
+A private repository:
+
+* cannot be discovered by any account unless having explicit read access to it
+* can be created by users and organizations
 
 ### Working with repositories, organizations, and teams
 
@@ -131,10 +152,10 @@ From the Trusted Registry dashboard, click the Repositories submenu.
 
 From the Repository submenu, you can:
 
-* View, search, and filter the list of your repositories
-* Create either public or private repositories
-* Select a repository and edit it
-* Drill down to see details, teams that are associated with it, and settings.  
+* view, search, and filter the list of your repositories
+* create either public or private repositories
+* select a repository and edit it
+* drill down to see details, teams that are associated with it, and settings.  
 
 There are submenus which you can see additional information:
 
@@ -144,10 +165,10 @@ There are submenus which you can see additional information:
 
 From the Organizations submenu, you can:
 
-* Create a new organization
-* View, delete, or edit an existing organization
-* Add teams to it
-* View  and add members to the team
+* create a new organization
+* view, delete, or edit an existing organization
+* add teams to it
+* view  and add members to the team
 
 ## See also
 

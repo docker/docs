@@ -95,9 +95,18 @@ again.
 
     `$ sudo yum install docker-engine`
 
-6. Restart the Trusted Registry:  
+6. Enable the Docker daemon as a service and then start it.
 
-       `$ sudo bash -c "$(sudo docker run docker/trusted-registry start)"`
+    ```
+    $ sudo systemctl enable docker.service
+    $ sudo systemctl start docker.service
+    ```
+
+7. Restart the Trusted Registry:  
+
+    ```
+    $ sudo bash -c "$(sudo docker run docker/trusted-registry start)"
+    ```
 
 ### Ubuntu 14.04 LTS (APT-based systems)
 
@@ -117,7 +126,13 @@ again.
 
     `$ sudo apt-get update && sudo apt-get install apt-transport-https`
 
-4. Add the repository for the new version:
+4. Install additional virtual drivers not in the base image.
+
+        $ sudo apt-get install -y linux-image-extra-virtual
+
+      You may need to reboot your server after updating the LTS kernel.
+
+5. Add the repository for the new version:
 
     `$ echo "deb https://packages.docker.com/1.9/apt/repo ubuntu-trusty main" | sudo tee /etc/apt/sources.list.d/docker.list`
 
@@ -131,11 +146,11 @@ again.
         * ubuntu-vivid (Ubuntu 15.04)
         * ubuntu-wily (Ubuntu 15.10)
 
-5. Install the new package:
+6. Install the new package:
 
     `$ sudo apt-get update && sudo apt-get install docker-engine`
 
-6. Restart the Trusted Registry:  
+7. Restart the Trusted Registry:  
 
      `$ sudo bash -c "$(sudo docker run docker/trusted-registry start)"`
 

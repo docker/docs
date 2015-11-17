@@ -110,7 +110,7 @@ example command. >
 >
 
 This gives you access on port `9999` on your Trusted Registry server -
-`http://<dtr-host-ip>:9999/admin/`.
+`http://<dtr-host-ip>:9999`.
 
 ### SSH Access to host
 

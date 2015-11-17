@@ -107,7 +107,7 @@ kernel.
 
         $ sudo apt-get install -y linux-image-extra-virtual
 
-        You may need to reboot your server after updating the LTS kernel.
+      You may need to reboot your server after updating the LTS kernel.
 
 5. Add the repository for the new version:
 

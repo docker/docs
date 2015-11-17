@@ -18,6 +18,26 @@ These notes refer to the current and immediately prior releases of Docker
 Trusted Registry and the commercially supported Docker Engine. For notes on
 older versions of these, see the [prior release notes archive](prior-release-notes.md).
 
+# Docker Trusted Registry 1.4.1
+(24 November 2015)
+
+### Fixed with this release
+This release addresses the following issues in Docker Trusted Registry 1.4.0.
+
+* Trusted Registry administrators previously could not pull unlisted repositories in any authorization mode.
+
+* When using LDAP authentication, only users with lowercase letters, numbers, underscores, periods, and hyphens in their usernames in the LDAP server were
+synchronized to the Trusted Registry user database. The Trusted Registry now
+synchronizes users with usernames containing uppercase letters. If this affects
+your organization, perform a LDAP sync from the Trusted Registry UI. Navigate to
+Settings > Auth to perform the sync.
+
+* Fixed an issue where Trusted Registry administrators could not list all repositories in the registries. To list them, you must use the `catalog` API using a `bash` shell. The following example lists repositories in a Trusted Registry located at my.dtr.host where the user `admin` has password `password`.
+
+  ```
+  bash -c 'host=vagrant.host admin=admin password=password token=$(curl -u $admin:$password -k "https://$host/auth/token?service=$host&scope=registry:catalog:*" | python2 -c "import json,sys;obj=json.load(sys.stdin);print obj[\"token\"]") && curl -k -H "Authorization: Bearer $token" "https://$host/v2/_catalog"'
+  ```
+
 
 ## Docker Trusted Registry 1.4
 (12 November 2015)
@@ -44,45 +64,47 @@ documentation.
 
   * Set up, and manage user accounts, teams, organizations, and repositories from either APIs or through the Trusted Registry user interface. Refer to either the API documentation or the [documentation](accounts.md) for performing tasks in the UI.
 
-  * Search, browse, and discover images created by other users through either APIs or through the Trusted Registry user interface.
+  * Search, browse, and discover images created by other users through either APIs or through the Trusted Registry UI.
 
-  * Users, depending on their roles, can access account information through the Trusted Registry user interface. Refer to the [documentation](accounts.md) for details.
+  * Users, depending on their roles, can access account information through the Trusted Registry UI. Refer to the [documentation](accounts.md) for details.
 
-  * View new API documentation through the Trusted Registry user interface. As before, you can also view it from the [documentation section](https://docs.docker.com/docker-trusted-registry/).
+  * View new API documentation through the Trusted Registry UI. You can also view this [documentation](https://docs.docker.com/docker-trusted-registry/) from Docker, Inc. docs section.
 
 * New APIs
 
-  * New APIs for accessing repositories, account management, indexing, searching, and reindexing.
+  * There are new APIs for accessing repositories, account management, indexing, searching, and reindexing.
 
-  * You can also view an API and using Swagger UI, click the "Try it out" button to perform the action. This might be useful if you need to reindex.
+  * You can also view an API and using the Swagger UI, click the "Try it out button to perform the action. This might be useful, for example, if you need to reindex.
 
-* Different repository behavior. You must explicitly create (or have it performed for you if you don't have the  correct permissions) a repository before pushing to it. This behavior is different than how you would perform this in an unsecured free and open-source software (FOSS) registry.
+* Different repository behavior. A repository must first exist before you can push an image to it. This means you must explicitly create (or have it performed for you if you don't have the correct permissions) a repository. This behavior is different than how you would perform this in a free and open-source software registry.
 
 * New experimental feature. Docker Trusted Registry now integrates with Docker Content Trust using Notary. This is an experimental feature that is available with this release. See the [configuration documentation](configuration.md).
 
 ### Fixed with this release
-This release corrects the following issues in Docker Trusted Registry 1.3.3
+This release corrects the following issues in Docker Trusted Registry 1.3.3.
 
 #### LDAP Configuration
 
-* Performance for LDAP user authenticaiton has been significantly increased, reducing the number of required LDAP requests to only a single BIND request to authenticate a user.
+* Performance for LDAP user authentication has been significantly improved, reducing the number of required LDAP requests to only a single BIND request to authenticate a user.
 
-* The "Read-Write Search Filter" and "Read-Only Search Filter" fields have been deprecated. You can now create organization accounts and teams in the Trusted Registry to allow for more fine grained access control. Team member lists can be synced with a group in LDAP.
+* The "Read-Write Search Filter" and "Read-Only Search Filter" fields have been deprecated. You can create organization accounts and teams in the Trusted
+Registry to allow for more fine grained access control. Team member lists can be
+synced with a group in LDAP.
 
-* An "Admin Password" is now required. Use this password to login as the
+* An "Admin Password" is required. Use this password to log in as the
 user admin in case the Trusted Registry is unable to authenticate you using
-your LDAP server. This account can be used to login to the Trusted Registry and correct identity and authentication settings.
+your LDAP server. This account can be used to log in to the Trusted Registry and manage identity and authentication settings.
 
 * Users on your LDAP server are now synced to the Trusted Registry's local
 database using your configured "User Search Filter". Objects in LDAP that match
 this filter and have a valid "User Login Attribute" are created as a local
 user with the "User Login Attribute" as their username. Only these users are
-able to login to Docker Trusted Registry.
+able to log in to the Trusted Registry.
 
-* The "Admin LDAP DN" must now be specified to identify the group object on your LDAP server. This should be synced to the system administrators list. The "Admin
-Group Member Attribute" should be set to the name of the attribute on this group
-object which corresponds to the Distinguished Name of the group member objects.
-This setting deprecates the old "Admin Search Filter" field.
+* The "Admin LDAP DN" must be specified to identify the group object on your LDAP server. This should be synced to the system administrators list. The
+"Admin Group Member Attribute" should be set to the name of the attribute on
+this group object which corresponds to the Distinguished Name of the group
+member objects. This setting deprecates the old "Admin Search Filter" field.
 
 #### Other corrected issues
 
@@ -93,7 +115,41 @@ without creating an administrator.
 
 #### Known issues
 
-Organization owners are unable to delete a repository from the UI. You can still delete a repository through the API and a system administrator can still delete a repository from the UI.
+* Organization owners are unable to delete a repository from the UI. You can still delete a repository through the API and a system administrator can still
+delete a repository from the UI.
+
+* When using LDAP authentication, only users with valid usernames in the LDAP server are synchronized to the Trusted Registry user database. A valid username
+only contains lowercase letters, numbers, underscores, periods, hyphens, and
+begins and ends with an alphanumeric character.
+
+* After upgrading to the Trusted Registry 1.4.0, users will not be able to access images from the Trusted Registry if they were previously created without
+using namespaces. Docker recommends upgrading to version 1.4.1. After upgrading,
+for any repository that was previously pushed to the Trusted Registry, that is
+now inaccessible, a Trusted Registry administrator must make it accessible by
+the following steps:
+
+  1. If the repository name is not of the form "namespace/repository", then an  administrator must pull all of that repository's tags. For example, you might have an image called `devops_nginx`. The following example shows how you would pull it from a Trusted Registry instance located at my.dtr.host.
+
+        ```
+        sudo docker pull --all-tags my.dtr.host/devops_nginx
+        ```
+
+  2. Create a new repository. In the Trusted Registry dashboard, navigate to Repositories > New repository.
+
+  3. Select the account that you want to associate to that repository, and enter a repository name in that field and save. If you do not see the account name you wanted to use, then create a new organization or user first. For the example `devops_nginx`, you could use `devops` as the organization and `nginx` as the repository name.
+
+  4. Next, in a `bash` shell, retag all the tags of that repository as seen in the following example:
+
+        ```
+        for tag in `sudo docker images | grep my.dtr.host/devops_nginx | awk '{print $2}'`
+        do sudo docker tag my.dtr.host/devops_nginx:$tag my.dtr.host/devops/nginx:$tag
+        done
+
+        ```
+  5. Push the newly tagged version back to the Trusted Registry as seen in the following example:
+
+        `sudo docker push my.dtr.host/devops/nginx`
+
 
 ### Docker Trusted Registry 1.3.3
 (18 September 2015) (amended: 2 November 2015)
@@ -102,11 +158,11 @@ This release corrects the following issues in Docker Trusted Registry 1.3.2
 
 * Fixed an issue related to LDAP integration for users of Oracle Virtual Directory.
 
-* Corrected an issue where Docker Trusted Registry would not accept a given certificate if the configured domain was only in the Subject Alternative Names (SANs) field and not in the Common Name (CN) field of the certificate.
+* Corrected an issue where Docker Trusted Registry would not accept a given certificate if the configured domain was only in the Subject Alternative Names
+(SANs) field and not in the Common Name (CN) field of the certificate.
 
-* Docker discovered an issue in which the tokens used in authorization caused a
-break in certain deployments that utilized a load balancer in front of multiple
-Trusted Registry instances to achieve high availability. Docker regrets any
+* Docker, Inc. discovered an issue in which the tokens used in authorization caused a break in certain deployments that utilized a load balancer in front of
+multiple Trusted Registry instances to achieve high availability. We regret any
 inconvenience this may have caused you and is working on a future fix.
 
 ## Commercially Supported Docker Engine
@@ -114,27 +170,26 @@ inconvenience this may have caused you and is working on a future fix.
 Commercially Supported (CS) Docker Engine is a packaged release that identifies
 a release of Docker Engine for which you can receive support from Docker or one
 of its partners. This release is functionally equivalent to the corresponding
-Docker Engine release that it references. However, a CS release also includes
-back-ported fixes (security-related and priority defects) from the open source.
-It incorporates defect fixes that you can use in environments where new features
-cannot be adopted as quickly for consistency and compatibility reasons.  
+Docker Engine release that it references. However, a commercially supported
+release also includes back-ported fixes (security-related and priority defects)
+from the open source. It incorporates defect fixes that you can use in
+environments where new features cannot be adopted as quickly for consistency and
+compatibility reasons.  
 
-### CS Docker Engine 1.9.0
+### Commercially Supported Docker Engine 1.9.0
 (12 November 2015)
 
-Highlighted Feature Summary:
+Highlighted feature summary:
 
-* Network Management and Plugins: Networks are now first class objects that can
- be listed, created, deleted, inspected and connected to or disconnected from a
- container. They can be manipulated outside of the container themselves and are
- fully manageable on its own lifecycle. Network functionality can also be
- extended using plugins.
+* Network Management and Plugins. Networks are now first class objects that can be listed, created, deleted, inspected, and connected to or disconnected from a
+container. They can be manipulated outside of the container themselves and are
+fully manageable on its own lifecycle. You can also use plugins to extend
+network functionality.
 
-* Docker now provides support for the in-box Overlay (for cross-host networking)
- and Bridge network plugins. You can find more information about how to manage
- networks and using  network plugins in the documentation.
+* Docker, Inc. now provides support for the in-box Overlay (for cross-host networking) and Bridge network plugins. You can find more information about how
+to manage networks and using network plugins in the [documentation](https://docs.docker.com/engine/userguide/networking/dockernetworks/).
 
-* Volume Management and Plugins: Volumes also become discrete, manageable objects in Docker. Volumes can be listed, created, deleted, and inspected.
+* Volume Management and Plugins. Volumes also become discrete, manageable objects in Docker. Volumes can be listed, created, deleted, and inspected.
 Similar to networks, they have their own managed lifecycle outside of the
 container. Plugins allow others to write and extend the functionality of volumes
 or provide integration with other types of storage.
@@ -142,9 +197,9 @@ or provide integration with other types of storage.
 * The in-box volume driver is included and supported. You can find more information about how to manage volumes  and using  volume plugins in the
 documentation.
 
-* Docker Content Trust: Content trust gives you the ability to both verify the integrity and the publisher of all the data received from a registry over any channel. Content Trust is currently only supported using Docker Hub notary servers.
+* Docker Content Trust. Use Content Trust to both verify the integrity and the publisher of all the data received from a registry over any channel. Content Trust is currently only supported using Docker Hub notary servers.
 
-* Updated the release cadence of CS Docker Engine. Starting with this version, Docker supports **every** major release of Docker Engine from open
+* Updated the release cadence of the CS Docker engine. Starting with this version, Docker supports **every** major release of Docker engine from open
 source with three releases under support at one time. This means you’ll be able
 to take advantage of the latest and greatest features and you won’t have to wait
 for a supported release to take advantage of a specific feature.
