@@ -18,6 +18,7 @@ import (
 	_ "github.com/docker/distribution/registry/auth/token"
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/signer/client"
+	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
 	_ "github.com/go-sql-driver/mysql"
 	"golang.org/x/net/context"
@@ -95,6 +96,7 @@ func grpcTLS(configuration *viper.Viper) (*tls.Config, error) {
 	return tlsConfig, nil
 }
 
+// parses the configuration and returns a backing store for the TUF files
 func getStore(configuration *viper.Viper, allowedBackends []string) (
 	storage.MetaStore, error) {
 
@@ -115,6 +117,53 @@ func getStore(configuration *viper.Viper, allowedBackends []string) (
 	health.RegisterPeriodicFunc(
 		"DB operational", store.CheckHealth, time.Second*60)
 	return store, nil
+}
+
+// parses the configuration and determines which trust service and key algorithm
+// to return
+func getTrustService(configuration *viper.Viper,
+	signerFactory func(string, string, *tls.Config) *client.NotarySigner,
+	healthRegister func(string, func() error, time.Duration)) (
+	signed.CryptoService, string, error) {
+
+	if configuration.GetString("trust_service.type") != "remote" {
+		logrus.Info("Using local signing service")
+		return signed.NewEd25519(), data.ED25519Key, nil
+	}
+
+	keyAlgo := configuration.GetString("trust_service.key_algorithm")
+	if keyAlgo != data.ED25519Key && keyAlgo != data.ECDSAKey && keyAlgo != data.RSAKey {
+		return nil, "", fmt.Errorf("invalid key algorithm configured: %s", keyAlgo)
+	}
+
+	clientTLS, err := grpcTLS(configuration)
+	if err != nil {
+		return nil, "", err
+	}
+
+	logrus.Info("Using remote signing service")
+
+	notarySigner := signerFactory(
+		configuration.GetString("trust_service.hostname"),
+		configuration.GetString("trust_service.port"),
+		clientTLS,
+	)
+
+	minute := 1 * time.Minute
+	healthRegister(
+		"Trust operational",
+		// If the trust service fails, the server is degraded but not
+		// exactly unheatlthy, so always return healthy and just log an
+		// error.
+		func() error {
+			err := notarySigner.CheckHealth(minute)
+			if err != nil {
+				logrus.Error("Trust not fully operational: ", err.Error())
+			}
+			return nil
+		},
+		minute)
+	return notarySigner, keyAlgo, nil
 }
 
 func main() {
@@ -159,44 +208,12 @@ func main() {
 	}
 	utils.SetUpBugsnag(bugsnagConf)
 
-	keyAlgo := mainViper.GetString("trust_service.key_algorithm")
-	if keyAlgo == "" {
-		logrus.Fatal("no key algorithm configured.")
-		os.Exit(1)
+	trust, keyAlgo, err := getTrustService(mainViper,
+		client.NewNotarySigner, health.RegisterPeriodicFunc)
+	if err != nil {
+		logrus.Fatal(err.Error())
 	}
 	ctx = context.WithValue(ctx, "keyAlgorithm", keyAlgo)
-
-	var trust signed.CryptoService
-	if mainViper.GetString("trust_service.type") == "remote" {
-		logrus.Info("Using remote signing service")
-		clientTLS, err := grpcTLS(mainViper)
-		if err != nil {
-			logrus.Fatal(err.Error())
-		}
-		notarySigner := client.NewNotarySigner(
-			mainViper.GetString("trust_service.hostname"),
-			mainViper.GetString("trust_service.port"),
-			clientTLS,
-		)
-		trust = notarySigner
-		minute := 1 * time.Minute
-		health.RegisterPeriodicFunc(
-			"Trust operational",
-			// If the trust service fails, the server is degraded but not
-			// exactly unheatlthy, so always return healthy and just log an
-			// error.
-			func() error {
-				err := notarySigner.CheckHealth(minute)
-				if err != nil {
-					logrus.Error("Trust not fully operational: ", err.Error())
-				}
-				return nil
-			},
-			minute)
-	} else {
-		logrus.Info("Using local signing service")
-		trust = signed.NewEd25519()
-	}
 
 	store, err := getStore(mainViper, []string{utils.MySQLBackend, utils.MemoryBackend})
 	if err != nil {
