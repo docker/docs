@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"strings"
 
 	"github.com/docker/notary/tuf"
 	"github.com/docker/notary/tuf/data"
@@ -94,10 +95,11 @@ func validateUpdate(gun string, updates []storage.MetaUpdate, store storage.Meta
 	if rootUpdate, ok := roles[rootRole]; ok {
 		// if root is present, validate its integrity, possibly
 		// against a previous root
-		if root, err = validateRoot(gun, oldRootJSON, rootUpdate.Data); err != nil {
+		if root, err = validateRoot(gun, oldRootJSON, rootUpdate.Data, store); err != nil {
 			logrus.Error("ErrBadRoot: ", err.Error())
 			return ErrBadRoot{msg: err.Error()}
 		}
+
 		// setting root will update keys db
 		if err = repo.SetRoot(root); err != nil {
 			logrus.Error("ErrValidation: ", err.Error())
@@ -252,7 +254,9 @@ func hierarchyOK(roles map[string]storage.MetaUpdate) error {
 	return nil
 }
 
-func validateRoot(gun string, oldRoot, newRoot []byte) (*data.SignedRoot, error) {
+func validateRoot(gun string, oldRoot, newRoot []byte, store storage.MetaStore) (
+	*data.SignedRoot, error) {
+
 	var parsedOldRoot *data.SignedRoot
 	parsedNewRoot := &data.SignedRoot{}
 
@@ -271,23 +275,32 @@ func validateRoot(gun string, oldRoot, newRoot []byte) (*data.SignedRoot, error)
 	if err != nil {
 		return nil, err
 	}
-	if err := checkRoot(parsedOldRoot, parsedNewRoot); err != nil {
+
+	// Don't update if a timestamp key doesn't exist.
+	algo, keyBytes, err := store.GetTimestampKey(gun)
+	if err != nil || algo == "" || keyBytes == nil {
+		return nil, fmt.Errorf("no timestamp key for %s", gun)
+	}
+	timestampKey := data.NewPublicKey(algo, keyBytes)
+
+	if err := checkRoot(parsedOldRoot, parsedNewRoot, timestampKey); err != nil {
 		// TODO(david): how strict do we want to be here about old signatures
 		//              for rotations? Should the user have to provide a flag
 		//              which gets transmitted to force a root update without
 		//              correct old key signatures.
 		return nil, err
 	}
+
 	if !data.ValidTUFType(parsedNewRoot.Signed.Type, data.CanonicalRootRole) {
 		return nil, fmt.Errorf("root has wrong type")
 	}
 	return parsedNewRoot, nil
 }
 
-// checkRoot returns true if no rotation, or a valid
-// rotation has taken place, and the threshold number of signatures
-// are valid.
-func checkRoot(oldRoot, newRoot *data.SignedRoot) error {
+// checkRoot errors if an invalid valid rotation has taken place, if the
+// threshold number of signatures is invalid valid, if there are an invalid
+// number of roles and keys, or if the timestamp keys are invalid
+func checkRoot(oldRoot, newRoot *data.SignedRoot, timestampKey data.PublicKey) error {
 	rootRole := data.RoleName(data.CanonicalRootRole)
 	targetsRole := data.RoleName(data.CanonicalTargetsRole)
 	snapshotRole := data.RoleName(data.CanonicalSnapshotRole)
@@ -360,6 +373,9 @@ func checkRoot(oldRoot, newRoot *data.SignedRoot) error {
 	if err != nil {
 		return err
 	}
+
+	var timestampKeyIDs []string
+
 	// at a minimum, check the 4 required roles are present
 	for _, r := range []string{rootRole, targetsRole, snapshotRole, timestampRole} {
 		role, ok := root.Signed.Roles[r]
@@ -372,6 +388,20 @@ func checkRoot(oldRoot, newRoot *data.SignedRoot) error {
 		if len(role.KeyIDs) < role.Threshold {
 			return fmt.Errorf("%s role has insufficient number of keys", r)
 		}
+
+		if r == timestampRole {
+			timestampKeyIDs = role.KeyIDs
+		}
 	}
-	return nil
+
+	// ensure that at least one of the timestamp keys specified in the role
+	// actually exists
+
+	for _, keyID := range timestampKeyIDs {
+		if timestampKey.ID() == keyID {
+			return nil
+		}
+	}
+	return fmt.Errorf("none of the following timestamp keys exist: %s",
+		strings.Join(timestampKeyIDs, ", "))
 }
