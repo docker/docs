@@ -178,11 +178,11 @@ func testErrorCode(t *testing.T, errorCode int, errType error) {
 		fmt.Sprintf("%d should translate to %v", errorCode, errType))
 }
 
-func TestErrMetadataNotFound(t *testing.T) {
+func Test404Error(t *testing.T) {
 	testErrorCode(t, http.StatusNotFound, ErrMetaNotFound{})
 }
 
-func Test500Errors(t *testing.T) {
+func Test50XErrors(t *testing.T) {
 	fiveHundreds := []int{
 		http.StatusInternalServerError,
 		http.StatusNotImplemented,
@@ -194,4 +194,8 @@ func Test500Errors(t *testing.T) {
 	for _, code := range fiveHundreds {
 		testErrorCode(t, code, ErrServerUnavailable{})
 	}
+}
+
+func Test400Error(t *testing.T) {
+	testErrorCode(t, http.StatusBadRequest, ErrInvalidOperation{})
 }
