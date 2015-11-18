@@ -1,6 +1,6 @@
 <!--[metadata]>
 +++
-title = "Notary Configuration File"
+title = "Notary Serer Configuration File"
 description = "Specifies the configuration file for Notary Server"
 keywords = ["docker, notary, notary-server, configuration"]
 [menu.main]
@@ -87,15 +87,15 @@ Example:
 	<tr>
 		<td valign="top"><code>tls_key_file</code></td>
 		<td valign="top">no</td>
-		<td valign="top"> Specifies the private key to use for HTTPS.  Must be
+		<td valign="top">Specifies the private key to use for HTTPS.  Must be
 			provided together with <code>tls_cert_file</code>, or not at all.
 			If neither are provided, the server will use HTTP instead of HTTPS.</td>
 	</tr>
 	<tr>
 		<td valign="top"><code>tls_cert_file</code></td>
 		<td valign="top">no</td>
-		<td valign="top"> Specifies the certificate to use for HTTPS.  Must be
-			provided together with <code>tls_cert_key</code>, or not at all.
+		<td valign="top">Specifies the certificate to use for HTTPS.  Must be
+			provided together with <code>tls_key_file</code>, or not at all.
 			If neither are provided, the server will use HTTP instead of HTTPS.</td>
 	</tr>
 </table>
@@ -118,6 +118,9 @@ Example:
 	}
 }
 ```
+
+Note that this entire section is optional.  However, you would like
+authentication, then then the required parameters below are needed configure it.
 
 **Token authentication:**
 
@@ -166,6 +169,10 @@ Remote trust service example:
 	"tls_client_cert": "./fixtures/notary-server.crt"
 }
 ```
+
+Note that this entire section is optional.  However, you would like to use a
+separate trust service (recommended), then then the required parameters below
+are needed configure it.
 
 <table>
 	<tr>
@@ -233,6 +240,10 @@ Example:
 }
 ```
 
+Note that this entire section is optional.  However, you would like to
+specify a different log level, then then the required parameters below
+are needed configure it.
+
 <table>
 	<tr>
 		<th>Parameter</th>
@@ -261,6 +272,10 @@ DB storage example:
 	"db_url": "dockercondemo:dockercondemo@tcp(notarymysql:3306)/dockercondemo"
 }
 ```
+
+Note that this entire section is optional.  However, you would like to
+use a database backend (recommended), then then the required parameters below
+are needed configure it.
 
 <table>
 	<tr>
@@ -299,6 +314,10 @@ configuration.
 }
 ```
 
+Note that this entire section is optional.  However, you would like to
+use Bugsnag reporting, then then the required parameters below are needed
+configure it.
+
 <table>
 	<tr>
 		<th>Parameter</th>
@@ -307,19 +326,19 @@ configuration.
 	</tr>
 	<tr>
 		<td valign="top"><code>bugsnag</code></td>
-		<td valign="top">no</td>
+		<td valign="top">yes</td>
 		<td>Any string value. If this value is not set, no errors will be
 			reported to Bugsnag (all other parameters will be ignored)</td>
 	</tr>
 	<tr>
 		<td valign="top"><code>bugsnag_api_key</code></td>
-		<td valign="top">no</td>
+		<td valign="top">yes</td>
 		<td>The API key to use to report errors - if this value is not set,
 			no errors will be reported to Bugsnag.</td>
 	</tr>
 	<tr>
 		<td valign="top"><code>bugsnag_release_stage</code></td>
-		<td valign="top">no</td>
+		<td valign="top">yes</td>
 		<td>The current release stage, such as "production" (which is the
 			default), used to filter errors in the Bugsnag dashboard.</td>
 	</tr>
