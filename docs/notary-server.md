@@ -14,7 +14,7 @@ The notary server is a remote store for, and coordinates updates to, the signed
 metadata files for a repository (which are created by clients).  The server is
 also responsible for creating and keeping track of timestamp keys for each repo,
 and signing a timestamp file for each repo whenever a client sends updates,
-after verifying the root/target/snapshot signatures on the client update.
+after verifying the root, target, and snapshot signatures on the client update.
 
 ### Authentication
 
@@ -54,17 +54,66 @@ compromised can sign any number of other client certs.
 As an example, please see [this script](opensslGenCert.sh) to see how to
 generate client SSL certs with basic constraints using OpenSSL.
 
-### How to configure notary server
+### How to configure and run notary server
 
-A JSON configuration file needs to be passed as a parameter/flag when starting
-up Notary Server:
-
-```
-notary-server -config /path/to/configuration.json
-```
-
-Please see the [Notary Server configuration document](notary-server-config.md)
+A JSON configuration file is used to configure Notary Server.  Please see the
+[Notary Server configuration document](notary-server-config.md)
 for more details about the format of the configuration file.
+
+The parameters of the configuration file can also be overwritten using
+environment variables of the form `NOTARY_SERVER_var`, where `var` is the
+full path from the top level of the configuration file to the variable you want
+to override, in all caps.  A change in level is denoted with a `_`.
+
+For instance, one part of the configuration file might look like:
+
+```json
+"storage": {
+	"backend": "mysql",
+	"db_url": "dockercondemo:dockercondemo@tcp(notary-mysql)/dockercondemo"
+}
+```
+
+If you would like to specify a different `db_url`, the full path from the top
+of the configuration tree is `storage -> db_url`, so the environment variable
+to set would be `NOTARY_SERVER_STORAGE_DB_URL`.
+
+Note that you cannot override an intermediate level name.  Setting
+`NOTARY_SERVER_STORAGE=""` will not disable the MySQL storage.  Each leaf
+parameter value must be set indepedently.
+
+#### Running a Docker image
+
+Get the official Docker image, which comes with some sane defaults.  You can
+run it with your own signer service and mysql DB, or in the example below, with
+just a local signing service and memory store:
+
+```
+$ docker pull docker.io/docker/notary-server
+$ docker run -p "4443:4443" \
+	-e NOTARY_SERVER_TRUST_SERVICE_TYPE=local \
+	-e NOTARY_SERVER_STORAGE_BACKEND=""
+	-e NOTARY_SERVER_STORAGE_DB_URL=""
+	notary-server
+```
+
+Alternately, you can run with your own configuration file entirely.  The
+docker image loads the config file from `/opt/notary-server/config.json`, so
+you can mount your config file at `/opt/notary-server`:
+
+```
+$ docker run -p "4443:4443" -v /path/to/your/config/dir:/opt/notary-server
+```
+
+#### Running the binary
+A JSON configuration file needs to be passed as a parameter/flag when starting
+up the Notary Server binary.  Environment variables can also be set in addition
+to the configuration file, but the configuration file is required.
+
+```
+$ export NOTARY_SERVER_STORAGE_DB_URL=myuser:mypass@tcp(my-db)/dbname
+$ NOTARY_SERVER_LOGGING_LEVEL=info notary-server -config /path/to/config.json
+```
 
 ### What happens if the server is compromised
 
