@@ -22,7 +22,7 @@ The *Docker Engine for AWS (Business Day Support)* AMI launches an instance of t
 
 To learn more about *Docker Engine for AWS* visit our [AWS Documentation](https://www.docker.com/aws).
 
-You can refer to the [overview]({{< relref "index.md" >}}) to see additional information on the general install process.
+You can refer to the [overview](index.md) to see additional information on the general install process.
 
 ## Prerequisites
 
@@ -274,7 +274,7 @@ For more information on using Docker Enginer in AWS, visit our [AWS Documentatio
 ## See also
 
 * To configure for your environment, see
-[Configuration instructions]({{< relref "configuration.md" >}}).
-* To use Docker Trusted Registry, see [the User guide]({{< relref "userguide.md" >}}).
-* To make administrative changes, see [the Admin guide]({{< relref "adminguide.md" >}}).
-* To see previous changes, see [the release notes]({{< relref "release-notes.md" >}}).
+[Configuration instructions](../configuration.md).
+* To use Docker Trusted Registry, see [the User guide](../userguide.md).
+* To make administrative changes, see [the Admin guide](../adminguide.md).
+* To see previous changes, see [the release notes](../release-notes.md).

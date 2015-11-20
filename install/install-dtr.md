@@ -159,15 +159,14 @@ Securing Docker Trusted Registry is **required**. You will not be able to push
 or pull from Docker Trusted Registry until you secure it.
 
 There are several options and methods for securing Docker Trusted Registry. For
-more information, see the [configuration documentation]({{< relref
-"configuration.md#security" >}})
+more information, see the [configuration documentation](../configuration.md#security)
 
 ## Push and pull images
 
 Now that you have Docker Trusted Registry configured with a "Domain Name" and
 have your client Docker daemons configured with the required security settings,
 you can test your setup by following the instructions for [Using Docker Trusted
-Registry to Push and pull images]({{< relref "userguide.md" >}}).
+Registry to Push and pull images](../userguide.md).
 
 ## Docker Trusted Registry web interface and registry authentication
 
@@ -176,13 +175,12 @@ web admin interface or the Docker Trusted Registry. You can restrict access
 using an in-Docker Trusted Registry configured set of users (and passwords), or
 you can configure Docker Trusted Registry to use LDAP- based authentication.
 
-See [Docker Trusted Registry Authentication settings]({{< relref
-"configuration.md#authentication" >}}) for more details.
+See [Docker Trusted Registry Authentication settings](../configuration.md#authentication) for more details.
 
 ## See also
 
 * To configure for your environment, see the
-[configuration instructions]({{< relref "configuration.md" >}}).
-* To use Docker Trusted Registry, see [the User guide]({{< relref "userguide.md" >}}).
-* To make administrative changes, see [the Admin guide]({{< relref "adminguide.md" >}}).
-* To see previous changes, see [the release notes]({{< relref "release-notes.md" >}}).
+[configuration instructions](../configuration.md).
+* To use Docker Trusted Registry, see [the User guide](../userguide.md).
+* To make administrative changes, see [the Admin guide](../adminguide.md).
+* To see previous changes, see [the release notes](../release-notes.md).

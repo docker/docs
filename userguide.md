@@ -13,12 +13,12 @@ weight=3
 This guide explains tasks and functions that a Docker Trusted Registry
 user can do, such as pushing or pulling images, or viewing organizations. For tasks Docker Trusted Registry
 administrators need to accomplish, such as configuring or monitoring Docker Trusted Registry,
-go to the [Administrator's Guide]({{< relref "adminguide.md" >}}).
+go to the [Administrator's Guide](adminguide.md).
 
 Task you can do:
 
 * View organizations, repositories, and team members through the Trusted Registry user interface.
-* Tag an image so that it can later be removed from the Trusted Registry repository. See the [documentation]({{< relref "soft-garbage.md" >}}) for deleting an image.
+* Tag an image so that it can later be removed from the Trusted Registry repository. See the [documentation](soft-garbage.md) for deleting an image.
 * Push tags
 * Pull tags
 * Search the API documentation on the Trusted Registry user interface including using the reindex and search APIs.
@@ -30,7 +30,7 @@ Depending on your permissions, you can use the Trusted Registry user interface t
 * View the organizations and teams that you belong to.
 * View the repositories within each organization that you belong to.
 
-For specifics on this feature, see the [account management]({{< relref "accounts.md" >}}) documentation.
+For specifics on this feature, see the [account management](accounts.md) documentation.
 
 ## Push and pull overview
 

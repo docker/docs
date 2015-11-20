@@ -69,11 +69,11 @@ configuration to Trusted Registry, you can see which image tags were signed by
 viewing the appropriate repositories through Trusted Registry's web interface.  
 
 To deploy a Notary server follow the instructions at [Deploying
-Notary](/engine/security/trust/deploying_notary/). You can deploy a Notary
+Notary](/engine/security/trust/deploying_notary.md). You can deploy a Notary
 server on the same machine as Docker Trusted Registry. If you do this, you can
 connect to the Notary server directly using the IP address of the `docker0`
 interface. The interface's address is typically `172.17.42.1`. Read more about
-[Docker Networking](/engine/userguide/networking) to learn more about the
+[Docker Networking](/engine/userguide/networking/index.md) to learn more about the
 `docker0` interface. You can also connect using the machine's external IP
 address and port combination provided you expose the proper port.  
 
@@ -102,8 +102,8 @@ options:
 
     To configure your Docker client to be able to push signed images to Docker
     Trusted Registry refer to the CLI Reference's [Environment Variables
-    Section](/engine/reference/commandline/cli/#environment-variables) and
-    [Notary Section](/engine/reference/commandline/cli/#Notary).
+    Section](/engine/reference/commandline/cli.md#environment-variables) and
+    [Notary Section](/engine/reference/commandline/cli.md#Notary).
 
     This requires you to set the `DOCKER_CONTENT_TRUST` variable and configure
     your system to trust Docker Trusted Registry's TLS certificate if it doesn't
@@ -363,24 +363,24 @@ Docker host in the `/usr/local/etc/dtr/` directory.
 
 ### Filesystem settings
 
-The [filesystem storage backend](/registry/configuration/#filesystem)
+The [filesystem storage backend](/registry/configuration.md#filesystem)
 has only one setting - the "Storage directory", the subdirectory of `/var/local/dtr/image-storage`
 in which all registry files are stored.
 The default value of `/local` means the files are stored in `/var/local/dtr/image-storage/local`.
 
 ### S3 settings
 
-The [S3 storage backend](/registry/configuration/#s3) page allows you to set the
+The [S3 storage backend](/registry/configuration.md#s3) page allows you to set the
 "AWS region", "Bucket name", "Access Key", and "Secret Key".
 
 ### Azure settings
 
-Set the "Account name", "Account key", "Container", and "Realm" on the [Azure storage backend](/registry/configuration/#azure) page.
+Set the "Account name", "Account key", "Container", and "Realm" on the [Azure storage backend](/registry/configuration.md#azure) page.
 
 <!--  remove for 1.4. will most likely be in a later release.
 ### Openstack Swift settings
 
-View the [openstack Swift settings](/registry/configuration/#openstack-swift) documentation so that you can set up your storage settings:
+View the [openstack Swift settings](/registry/configuration.md#openstack-swift) documentation so that you can set up your storage settings:
 authurl, username, password, container, tenant, tenantid, domain, domainid, insecureskipverify, region, chunksize, and prefix.
 -- >
 
@@ -413,7 +413,7 @@ testing.
 
 ### Managed authentication
 
-With `Managed` authentication, the Docker Trusted Registry admin can control users' access by setting username/password pairs. The admin can then [use the API](/docker-trusted-registry/api/) to give these users global "admin", "read-write" or "read-only" privileges while assigning them Organization, Team or User repository access.
+With `Managed` authentication, the Docker Trusted Registry admin can control users' access by setting username/password pairs. The admin can then [use the API](http://docs.docker.com/apidocs/v1.3.3/) to give these users global "admin", "read-write" or "read-only" privileges while assigning them Organization, Team or User repository access.
 
 The "read-only" role can pull all images from the registry, "read-write" can
 push and pull all images, and the "admin" role can push and pull and also access
@@ -425,7 +425,7 @@ to assign those users roles using the Docker Trusted Registry admin UI.
 * Choose the appropriate button to add one user, or to upload a CSV file containing username, password pairs, and selection boxes for "admin",
 "read-write", and "read-only" roles.
 * You can also create, or allow others to create the username, password pair using the
- [Account API](/docker-trusted-registry/api/dtr_1_3_accounts/#create-an-account)
+ [Account API](http://docs.docker.com/apidocs/v1.3.3/#!/accounts/func1_0)
 
 ### LDAP authentication
 

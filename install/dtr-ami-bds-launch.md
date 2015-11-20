@@ -156,7 +156,7 @@ For more information on using DTR, go to the
 ## See also
 
 * To configure for your environment, see
-[Configuration instructions]({{< relref "configuration.md" >}}).
-* To use Docker Trusted Registry, see [the User guide]({{< relref "userguide.md" >}}).
-* To make administrative changes, see [the Admin guide]({{< relref "adminguide.md" >}}).
-* To see previous changes, see [the release notes]({{< relref "release-notes.md" >}}).
+[Configuration instructions](../configuration.md).
+* To use Docker Trusted Registry, see [the User guide](../userguide.md).
+* To make administrative changes, see [the Admin guide](../adminguide.md).
+* To see previous changes, see [the release notes](../release-notes.md).

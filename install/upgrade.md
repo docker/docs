@@ -173,8 +173,8 @@ This setting deprecates the old "Admin Search Filter" field.
 ## See also
 
 * To configure for your environment, see the
-[configuration instructions]({{< relref "configuration.md" >}}).
-* To use Docker Trusted Registry, see [the User guide]({{< relref "userguide.md" >}}).
+[configuration instructions](../configuration.md).
+* To use Docker Trusted Registry, see [the User guide](../userguide.md).
 * See [installing the CS engine](install-csengine.md).
-* To make administrative changes, see [the Admin guide]({{< relref "adminguide.md" >}}).
-* To see previous changes, see [the release notes]({{< relref "release-notes.md" >}}).
+* To make administrative changes, see [the Admin guide](../adminguide.md).
+* To see previous changes, see [the release notes](../release-notes.md).
