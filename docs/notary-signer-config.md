@@ -92,12 +92,16 @@ Example:
 	<tr>
 		<td valign="top"><code>key_file</code></td>
 		<td valign="top">yes</td>
-		<td valign="top"> Specifies the private key to use for HTTPS.</td>
+		<td valign="top"> Specifies the private key to use for HTTPS. The path
+			is relative to the current working directory where notary-signer
+			is run.</td>
 	</tr>
 	<tr>
 		<td valign="top"><code>cert_file</code></td>
 		<td valign="top">yes</td>
-		<td valign="top"> Specifies the certificate to use for HTTPS.</td>
+		<td valign="top"> Specifies the certificate to use for HTTPS. The path
+			is relative to the current working directory where notary-signer
+			is run.</td>
 	</tr>
 	<tr>
 		<td valign="top"><code>client_ca_file</code></td>
@@ -105,7 +109,9 @@ Example:
 		<td valign="top">The root cert (or just the public cert) to trust for
 			mutual authentication. If provided, a client certificate will be
 			required for any client certificates connecting to Notary Signer.
-			If not provided, mutual authentication will not be required.</td>
+			If not provided, mutual authentication will not be required. The
+			path is relative to the current working directory where
+			notary-signer is run.</td>
 	</tr>
 </table>
 
