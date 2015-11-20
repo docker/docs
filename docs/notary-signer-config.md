@@ -27,13 +27,6 @@ An example (full) server configuration file.
 	"storage": {
 		"backend": "mysql",
 		"db_url": "dockercondemo:dockercondemo@tcp(notarymysql:3306)/dockercondemo"
-	},
-	"reporting": {
-		"bugsnag": {
-			"api_key": "c9d60ae4c7e70c4b6c4ebd3e8056d2b8",
-			"release_stage": "staging",
-			"endpoint": "https://bugsnag.internal:49000/"
-		}
 	}
 }
 ```
@@ -77,7 +70,7 @@ Example:
 		<td valign="top"><code>grpc_addr</code></td>
 		<td valign="top">yes</td>
 		<td valign="top">The TCP address (IP and port) to listen for GRPC
-			traffic (which Notary Server uses) on.  Examples:
+			traffic.  Examples:
 			<ul>
 			<li><code>":7899"</code> means listen on port 7899 on all IPs (and
 				hence all interfaces, such as those listed when you run
@@ -92,26 +85,58 @@ Example:
 	<tr>
 		<td valign="top"><code>key_file</code></td>
 		<td valign="top">yes</td>
-		<td valign="top"> Specifies the private key to use for HTTPS. The path
-			is relative to the current working directory where notary-signer
-			is run.</td>
+		<td valign="top">The path to the private key to use for
+			HTTPS. The path is relative to the directory where
+			notary-signer is run.</td>
 	</tr>
 	<tr>
 		<td valign="top"><code>cert_file</code></td>
 		<td valign="top">yes</td>
-		<td valign="top"> Specifies the certificate to use for HTTPS. The path
-			is relative to the current working directory where notary-signer
-			is run.</td>
+		<td valign="top">The path to the certificate to use for
+			HTTPS. The path is relative to the directory where
+			notary-signer is run.</td>
 	</tr>
 	<tr>
 		<td valign="top"><code>client_ca_file</code></td>
 		<td valign="top">no</td>
-		<td valign="top">The root cert (or just the public cert) to trust for
-			mutual authentication. If provided, a client certificate will be
-			required for any client certificates connecting to Notary Signer.
-			If not provided, mutual authentication will not be required. The
-			path is relative to the current working directory where
+		<td valign="top">The root certificate to trust for
+			mutual authentication. If provided, any clients connecting to
+			Notary Signer will have to have a client certificate signed by
+			this root. If not provided, mutual authentication will not be
+			required. The path is relative to the directory where
 			notary-signer is run.</td>
+	</tr>
+</table>
+
+## `storage` section (required)
+
+We only support MySQL, currently, and it must be provided.
+
+Example:
+
+```json
+"storage": {
+	"backend": "mysql",
+	"db_url": "dockercondemo:dockercondemo@tcp(notarymysql:3306)/dockercondemo"
+}
+```
+
+<table>
+	<tr>
+		<th>Parameter</th>
+		<th>Required</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td valign="top"><code>backend</code></td>
+		<td valign="top">yes</td>
+		<td valign="top">Must be <code>"mysql"</code></td>
+	</tr>
+	<tr>
+		<td valign="top"><code>db_url</code></td>
+		<td valign="top">yes</td>
+		<td valign="top">The URL used to access the DB, which includes both the
+			endpoint the username/credentials</td>
 	</tr>
 </table>
 
@@ -143,88 +168,5 @@ Example:
 			<code>"debug"</code> (5), <code>"info"</code> (4),
 			<code>"warning"</code> (3), <code>"error"</code>(2),
 			<code>"fatal"</code> (1), or <code>"panic"</code>(0)</td>
-	</tr>
-</table>
-
-## `storage` section (optional)
-
-The storage section sets the storage options for the server.  If not provided,
-an in-memory store will be used.  Currently, the only DB supported is MySQL.
-
-DB storage example:
-
-```json
-"storage": {
-	"backend": "mysql",
-	"db_url": "dockercondemo:dockercondemo@tcp(notarymysql:3306)/dockercondemo"
-}
-```
-
-<table>
-	<tr>
-		<th>Parameter</th>
-		<th>Required</th>
-		<th>Description</th>
-	</tr>
-	<tr>
-		<td valign="top"><code>backend</code></td>
-		<td valign="top">yes</td>
-		<td valign="top">Must be <code>"mysql"</code>; all other values will
-			result in an in-memory store (and the rest of the parameters will
-			be ignored)</td>
-	</tr>
-	<tr>
-		<td valign="top"><code>db_url</code></td>
-		<td valign="top">yes</td>
-		<td valign="top">The URL used to access the DB, which includes both the
-			endpoint anusername/credentials</td>
-	</tr>
-</table>
-
-## `reporting` section (optional)
-
-The reporting section contains any configuration for reporting errors, etc. to
-services via [logrus hooks](https://github.com/Sirupsen/logrus).  Currently the
-only supported services is [Bugsnag](https://bugsnag.com).  (See
-[bugsnag-go](https://github.com/bugsnag/bugsnag-go/) for more information about
-configuration.
-
-```json
-"reporting": {
-	"bugsnag": {
-		"api_key": "c9d60ae4c7e70c4b6c4ebd3e8056d2b8",
-		"release_stage": "staging",
-		"endpoint": "https://bugsnag.internal:49000/"
-	}
-}
-```
-
-### `bugsnag` subsection (optional)
-
-This section specifies parameters for Bugsnag reporting.
-
-<table>
-	<tr>
-		<th>Parameter</th>
-		<th>Required</th>
-		<th>Description</th>
-	</tr>
-	<tr>
-		<td valign="top"><code>api_key</code></td>
-		<td valign="top">yes</td>
-		<td>The API key to use to report errors - if this value is not set,
-			no errors will be reported to Bugsnag.</td>
-	</tr>
-	<tr>
-		<td valign="top"><code>release_stage</code></td>
-		<td valign="top">no</td>
-		<td>The current release stage, such as "production" (which is the
-			default), used to filter errors in the Bugsnag dashboard.</td>
-	</tr>
-	<tr>
-		<td valign="top"><code>endpoint</code></td>
-		<td valign="top">no</td>
-		<td>The current release stage, such as "production" (which is the
-			default), used to filter errors in the Bugsnag dashboard.</td>
 	</tr>
 </table>
