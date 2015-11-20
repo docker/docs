@@ -2,15 +2,12 @@
 	"server": {
 		"http_addr": ":4444",
 		"grpc_addr": ":7899",
-		"cert_file": "./fixtures/notary-signer.crt",
-		"key_file": "./fixtures/notary-signer.key",
+		"tls_cert_file": "./fixtures/notary-signer.crt",
+		"tls_key_file": "./fixtures/notary-signer.key",
 		"client_ca_file": "./fixtures/notary-server.crt"
 	},
-	"crypto": {
-		"pkcslib": "/usr/local/lib/softhsm/libsofthsm2.so"
-	},
 	"logging": {
-		"level": 5
+		"level": "debug"
 	},
 	"storage": {
 		"backend": "mysql",

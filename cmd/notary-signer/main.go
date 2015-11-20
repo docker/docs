@@ -29,7 +29,7 @@ import (
 	"github.com/docker/notary/utils"
 	"github.com/docker/notary/version"
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/miekg/pkcs11"
+	_ "github.com/mattn/go-sqlite3"
 	"github.com/spf13/viper"
 
 	"github.com/Sirupsen/logrus"
@@ -38,10 +38,8 @@ import (
 
 const (
 	debugAddr       = "localhost:8080"
-	dbType          = "mysql"
 	envPrefix       = "NOTARY_SIGNER"
 	defaultAliasEnv = "DEFAULT_ALIAS"
-	pinCode         = "PIN"
 )
 
 var (
@@ -51,13 +49,7 @@ var (
 )
 
 func init() {
-	// set default log level to Error
-	mainViper.SetDefault("logging", map[string]interface{}{"level": 2})
-
-	mainViper.SetEnvPrefix(envPrefix)
-	mainViper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
-	mainViper.AutomaticEnv()
-
+	utils.SetupViper(mainViper, envPrefix)
 	// Setup flags
 	flag.StringVar(&configFile, "config", "", "Path to configuration file")
 	flag.BoolVar(&debug, "debug", false, "show the version and exit")
@@ -73,21 +65,113 @@ func passphraseRetriever(keyName, alias string, createNew bool, attempts int) (p
 	return passphrase, false, nil
 }
 
-// validates TLS configuration options and sets up the TLS for the signer
-// http + grpc server
-func signerTLS(tlsConfig *utils.ServerTLSOpts, printUsage bool) (*tls.Config, error) {
-	if tlsConfig.ServerCertFile == "" || tlsConfig.ServerKeyFile == "" {
-		if printUsage {
-			usage()
-		}
-		return nil, fmt.Errorf("Certificate and key are mandatory")
+// Reads the configuration file for storage setup, and sets up the cryptoservice
+// mapping
+func setUpCryptoservices(configuration *viper.Viper, allowedBackends []string) (
+	signer.CryptoServiceIndex, error) {
+
+	storeConfig, err := utils.ParseStorage(configuration, allowedBackends)
+	if err != nil {
+		return nil, err
 	}
 
-	tlsConfig, err := utils.ConfigureServerTLS(config)
-	if err != nil {
-		return nil, fmt.Errorf("Unable to set up TLS: %s", err.Error())
+	if storeConfig == nil {
+		return nil, fmt.Errorf("DB storage configuration is mandatory")
 	}
-	return tlsConfig, nil
+
+	dbSQL, err := sql.Open(storeConfig.Backend, storeConfig.Source)
+	if err != nil {
+		return nil, fmt.Errorf("failed to open the %s database: %s, %v",
+			storeConfig.Backend, storeConfig.Source, err)
+	}
+	logrus.Debugf("Using %s DB: %s", storeConfig.Backend, storeConfig.Source)
+
+	defaultAlias := configuration.GetString("storage.default_alias")
+	if defaultAlias == "" {
+		// backwards compatibility - support this environment variable
+		defaultAlias = configuration.GetString(defaultAliasEnv)
+	}
+
+	if defaultAlias == "" {
+		return nil, fmt.Errorf("must provide a default alias for the key DB")
+	}
+	logrus.Debug("Default Alias: ", defaultAlias)
+
+	keyStore, err := keydbstore.NewKeyDBStore(
+		passphraseRetriever, defaultAlias, storeConfig.Backend, dbSQL)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create a new keydbstore: %v", err)
+	}
+
+	health.RegisterPeriodicFunc(
+		"DB operational", keyStore.HealthCheck, time.Second*60)
+
+	cryptoService := cryptoservice.NewCryptoService("", keyStore)
+
+	cryptoServices := make(signer.CryptoServiceIndex)
+	cryptoServices[data.ED25519Key] = cryptoService
+	cryptoServices[data.ECDSAKey] = cryptoService
+
+	return cryptoServices, nil
+}
+
+// set up the GRPC server
+func setupGRPCServer(grpcAddr string, tlsConfig *tls.Config,
+	cryptoServices signer.CryptoServiceIndex) (*grpc.Server, net.Listener, error) {
+
+	//RPC server setup
+	kms := &api.KeyManagementServer{CryptoServices: cryptoServices,
+		HealthChecker: health.CheckStatus}
+	ss := &api.SignerServer{CryptoServices: cryptoServices,
+		HealthChecker: health.CheckStatus}
+
+	lis, err := net.Listen("tcp", grpcAddr)
+	if err != nil {
+		return nil, nil, fmt.Errorf("grpc server failed to listen on %s: %v",
+			grpcAddr, err)
+	}
+
+	creds := credentials.NewTLS(tlsConfig)
+	opts := []grpc.ServerOption{grpc.Creds(creds)}
+	grpcServer := grpc.NewServer(opts...)
+
+	pb.RegisterKeyManagementServer(grpcServer, kms)
+	pb.RegisterSignerServer(grpcServer, ss)
+
+	return grpcServer, lis, nil
+}
+
+func setupHTTPServer(httpAddr string, tlsConfig *tls.Config,
+	cryptoServices signer.CryptoServiceIndex) http.Server {
+
+	return http.Server{
+		Addr:      httpAddr,
+		Handler:   api.Handlers(cryptoServices),
+		TLSConfig: tlsConfig,
+	}
+}
+
+func getAddrAndTLSConfig(configuration *viper.Viper) (string, string, *tls.Config, error) {
+	tlsOpts, err := utils.ParseServerTLS(configuration, true)
+	if err != nil {
+		return "", "", nil, fmt.Errorf("unable to set up TLS: %s", err.Error())
+	}
+	tlsConfig, err := utils.ConfigureServerTLS(tlsOpts)
+	if err != nil {
+		return "", "", nil, fmt.Errorf("unable to set up TLS: %s", err.Error())
+	}
+
+	grpcAddr := configuration.GetString("server.grpc_addr")
+	if grpcAddr == "" {
+		return "", "", nil, fmt.Errorf("grpc listen address required for server")
+	}
+
+	httpAddr := configuration.GetString("server.http_addr")
+	if httpAddr == "" {
+		return "", "", nil, fmt.Errorf("http listen address required for server")
+	}
+
+	return httpAddr, grpcAddr, tlsConfig, nil
 }
 
 func main() {
@@ -108,8 +192,6 @@ func main() {
 	mainViper.SetConfigType(strings.TrimPrefix(ext, "."))
 	mainViper.SetConfigName(strings.TrimSuffix(filename, ext))
 	mainViper.AddConfigPath(configPath)
-	// set default log level to Error
-	mainViper.SetDefault("logging.level", "error")
 	err := mainViper.ReadInConfig()
 	if err != nil {
 		logrus.Error("Viper Error: ", err.Error())
@@ -117,87 +199,46 @@ func main() {
 		os.Exit(1)
 	}
 
-	var config util.ServerConfiguration
-	err = mainViper.Unmarshal(&config)
+	// default is error level
+	lvl, err := utils.ParseLogLevel(mainViper, logrus.ErrorLevel)
 	if err != nil {
-		logrus.Fatalf(err.Error())
+		logrus.Fatal(err.Error())
 	}
+	logrus.SetLevel(lvl)
 
-	if config.Logging.Level != nil {
-		fmt.Println("LOGGING level", config.Logging.Level)
-		logrus.SetLevel(config.Logging.Level.ToLogrus())
-	}
-
-	tlsConfig, err := signerTLS(mainViper, true)
+	// parse bugsnag config
+	bugsnagConf, err := utils.ParseBugsnag(mainViper)
 	if err != nil {
-		logrus.Fatalf(err.Error())
+		logrus.Fatal(err.Error())
 	}
+	utils.SetUpBugsnag(bugsnagConf)
 
-	cryptoServices := make(signer.CryptoServiceIndex)
-
-	emptyStorage := utils.Storage{}
-	if config.Storage == emptyStorage {
-		usage()
-		log.Fatalf("Must specify a MySQL backend.")
-	}
-
-	dbSQL, err := sql.Open(config.Storage.Backend, config.Storage.URL)
+	// parse server config
+	httpAddr, grpcAddr, tlsConfig, err := getAddrAndTLSConfig(mainViper)
 	if err != nil {
-		log.Fatalf("failed to open the database: %s, %v", config.Storage.URL, err)
+		logrus.Fatal(err.Error())
 	}
 
-	defaultAlias := mainViper.GetString(defaultAliasEnv)
-	logrus.Debug("Default Alias: ", defaultAlias)
-	keyStore, err := keydbstore.NewKeyDBStore(passphraseRetriever, defaultAlias, configDBType, dbSQL)
+	// setup the cryptoservices
+	cryptoServices, err := setUpCryptoservices(mainViper, []string{"mysql"})
 	if err != nil {
-		log.Fatalf("failed to create a new keydbstore: %v", err)
+		logrus.Fatal(err.Error())
 	}
 
-	health.RegisterPeriodicFunc(
-		"DB operational", keyStore.HealthCheck, time.Second*60)
-
-	cryptoService := cryptoservice.NewCryptoService("", keyStore)
-
-	cryptoServices[data.ED25519Key] = cryptoService
-	cryptoServices[data.ECDSAKey] = cryptoService
-
-	//RPC server setup
-	kms := &api.KeyManagementServer{CryptoServices: cryptoServices,
-		HealthChecker: health.CheckStatus}
-	ss := &api.SignerServer{CryptoServices: cryptoServices,
-		HealthChecker: health.CheckStatus}
-
-	rpcAddr := mainViper.GetString("server.grpc_addr")
-	lis, err := net.Listen("tcp", rpcAddr)
+	grpcServer, lis, err := setupGRPCServer(grpcAddr, tlsConfig, cryptoServices)
 	if err != nil {
-		log.Fatalf("failed to listen %v", err)
+		logrus.Fatal(err.Error())
 	}
-	creds := credentials.NewTLS(tlsConfig)
-	opts := []grpc.ServerOption{grpc.Creds(creds)}
-	grpcServer := grpc.NewServer(opts...)
 
-	pb.RegisterKeyManagementServer(grpcServer, kms)
-	pb.RegisterSignerServer(grpcServer, ss)
-
-	go grpcServer.Serve(lis)
-
-	httpAddr := mainViper.GetString("server.http_addr")
-	if httpAddr == "" {
-		log.Fatalf("Server address is required")
-	}
-	//HTTP server setup
-	server := http.Server{
-		Addr:      httpAddr,
-		Handler:   api.Handlers(cryptoServices),
-		TLSConfig: tlsConfig,
-	}
+	httpServer := setupHTTPServer(httpAddr, tlsConfig, cryptoServices)
 
 	if debug {
-		log.Println("RPC server listening on", rpcAddr)
+		log.Println("RPC server listening on", grpcAddr)
 		log.Println("HTTP server listening on", httpAddr)
 	}
 
-	err = server.ListenAndServeTLS("", "")
+	go grpcServer.Serve(lis)
+	err = httpServer.ListenAndServeTLS("", "")
 	if err != nil {
 		log.Fatal("HTTPS server failed to start:", err)
 	}
@@ -216,46 +257,4 @@ func debugServer(addr string) {
 	if err := http.ListenAndServe(addr, nil); err != nil {
 		log.Fatalf("error listening on debug interface: %v", err)
 	}
-}
-
-// SetupHSMEnv is a method that depends on the existences
-func SetupHSMEnv(libraryPath, pin string) (*pkcs11.Ctx, pkcs11.SessionHandle) {
-	p := pkcs11.New(libraryPath)
-
-	if p == nil {
-		log.Fatalf("Failed to init library")
-	}
-
-	if err := p.Initialize(); err != nil {
-		log.Fatalf("Initialize error %s\n", err.Error())
-	}
-
-	slots, err := p.GetSlotList(true)
-	if err != nil {
-		log.Fatalf("Failed to list HSM slots %s", err)
-	}
-	// Check to see if we got any slots from the HSM.
-	if len(slots) < 1 {
-		log.Fatalln("No HSM Slots found")
-	}
-
-	// CKF_SERIAL_SESSION: TRUE if cryptographic functions are performed in serial with the application; FALSE if the functions may be performed in parallel with the application.
-	// CKF_RW_SESSION: TRUE if the session is read/write; FALSE if the session is read-only
-	session, err := p.OpenSession(slots[0], pkcs11.CKF_SERIAL_SESSION|pkcs11.CKF_RW_SESSION)
-	if err != nil {
-		log.Fatalf("Failed to Start Session with HSM %s", err)
-	}
-
-	if err = p.Login(session, pkcs11.CKU_USER, pin); err != nil {
-		log.Fatalf("User PIN %s\n", err.Error())
-	}
-
-	return p, session
-}
-
-func cleanup(ctx *pkcs11.Ctx, session pkcs11.SessionHandle) {
-	ctx.Destroy()
-	ctx.Finalize()
-	ctx.CloseSession(session)
-	ctx.Logout(session)
 }
