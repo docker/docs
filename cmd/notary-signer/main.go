@@ -73,24 +73,17 @@ func passphraseRetriever(keyName, alias string, createNew bool, attempts int) (p
 	return passphrase, false, nil
 }
 
-// parses and sets up the TLS for the signer http + grpc server
-func signerTLS(configuration *viper.Viper, printUsage bool) (*tls.Config, error) {
-	certFile := configuration.GetString("server.cert_file")
-	keyFile := configuration.GetString("server.key_file")
-	if certFile == "" || keyFile == "" {
+// validates TLS configuration options and sets up the TLS for the signer
+// http + grpc server
+func signerTLS(tlsConfig *utils.ServerTLSOpts, printUsage bool) (*tls.Config, error) {
+	if tlsConfig.ServerCertFile == "" || tlsConfig.ServerKeyFile == "" {
 		if printUsage {
 			usage()
 		}
 		return nil, fmt.Errorf("Certificate and key are mandatory")
 	}
 
-	clientCAFile := configuration.GetString("server.client_ca_file")
-	tlsConfig, err := utils.ConfigureServerTLS(&utils.ServerTLSOpts{
-		ServerCertFile:    certFile,
-		ServerKeyFile:     keyFile,
-		RequireClientAuth: clientCAFile != "",
-		ClientCAFile:      clientCAFile,
-	})
+	tlsConfig, err := utils.ConfigureServerTLS(config)
 	if err != nil {
 		return nil, fmt.Errorf("Unable to set up TLS: %s", err.Error())
 	}
@@ -115,6 +108,8 @@ func main() {
 	mainViper.SetConfigType(strings.TrimPrefix(ext, "."))
 	mainViper.SetConfigName(strings.TrimSuffix(filename, ext))
 	mainViper.AddConfigPath(configPath)
+	// set default log level to Error
+	mainViper.SetDefault("logging.level", "error")
 	err := mainViper.ReadInConfig()
 	if err != nil {
 		logrus.Error("Viper Error: ", err.Error())
@@ -122,7 +117,16 @@ func main() {
 		os.Exit(1)
 	}
 
-	logrus.SetLevel(logrus.Level(mainViper.GetInt("logging.level")))
+	var config util.ServerConfiguration
+	err = mainViper.Unmarshal(&config)
+	if err != nil {
+		logrus.Fatalf(err.Error())
+	}
+
+	if config.Logging.Level != nil {
+		fmt.Println("LOGGING level", config.Logging.Level)
+		logrus.SetLevel(config.Logging.Level.ToLogrus())
+	}
 
 	tlsConfig, err := signerTLS(mainViper, true)
 	if err != nil {
@@ -131,15 +135,15 @@ func main() {
 
 	cryptoServices := make(signer.CryptoServiceIndex)
 
-	configDBType := strings.ToLower(mainViper.GetString("storage.backend"))
-	dbURL := mainViper.GetString("storage.db_url")
-	if configDBType != dbType || dbURL == "" {
+	emptyStorage := utils.Storage{}
+	if config.Storage == emptyStorage {
 		usage()
-		log.Fatalf("Currently only a MySQL database backend is supported.")
+		log.Fatalf("Must specify a MySQL backend.")
 	}
-	dbSQL, err := sql.Open(configDBType, dbURL)
+
+	dbSQL, err := sql.Open(config.Storage.Backend, config.Storage.URL)
 	if err != nil {
-		log.Fatalf("failed to open the database: %s, %v", dbURL, err)
+		log.Fatalf("failed to open the database: %s, %v", config.Storage.URL, err)
 	}
 
 	defaultAlias := mainViper.GetString(defaultAliasEnv)
