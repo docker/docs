@@ -89,14 +89,18 @@ Example:
 		<td valign="top">no</td>
 		<td valign="top">Specifies the private key to use for HTTPS.  Must be
 			provided together with <code>tls_cert_file</code>, or not at all.
-			If neither are provided, the server will use HTTP instead of HTTPS.</td>
+			If neither are provided, the server will use HTTP instead of HTTPS.
+			The path is relative to the current working directory where
+			notary-server is run.</td>
 	</tr>
 	<tr>
 		<td valign="top"><code>tls_cert_file</code></td>
 		<td valign="top">no</td>
 		<td valign="top">Specifies the certificate to use for HTTPS.  Must be
 			provided together with <code>tls_key_file</code>, or not at all.
-			If neither are provided, the server will use HTTP instead of HTTPS.</td>
+			If neither are provided, the server will use HTTP instead of HTTPS.
+			The path is relative to the current working directory where
+			notary-server is run.</td>
 	</tr>
 </table>
 
@@ -207,21 +211,25 @@ are needed configure it.
 		<td valign="top"><code>tls_ca_file</code></td>
 		<td valign="top">no</td>
 		<td valign="top">The root CA or TLS cert of the remote service, if it is
-			self-signed or otherwise not in the system's default trust roots</td>
+			self-signed or otherwise not in the system's default trust roots.
+			The path is relative to the current working directory where
+			notary-server is run.</td>
 	</tr>
 	<tr>
 		<td valign="top"><code>tls_client_key</code></td>
 		<td valign="top">no</td>
 		<td valign="top">The private key to use for TLS mutual authentication.
 			Must be provided together with <code>tls_client_cert</code> or not
-			at all.</td>
+			at all. The path is relative to the current working directory where
+			notary-server is run.</td>
 	</tr>
 	<tr>
 		<td valign="top"><code>tls_client_cert</code></td>
 		<td valign="top">optional</td>
 		<td valign="top">The certificate to use for TLS mutual authentication.
 			Must be provided together with <code>tls_client_key</code> or not
-			at all.</td>
+			at all. The path is relative to the current working directory where
+			notary-server is run.</td>
 	</tr>
 </table>
 
