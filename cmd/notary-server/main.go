@@ -13,18 +13,16 @@ import (
 	"time"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/bugsnag/bugsnag-go"
 	"github.com/docker/distribution/health"
 	_ "github.com/docker/distribution/registry/auth/htpasswd"
 	_ "github.com/docker/distribution/registry/auth/token"
+	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/signer/client"
 	"github.com/docker/notary/tuf/signed"
 	_ "github.com/go-sql-driver/mysql"
 	"golang.org/x/net/context"
 
-	bugsnag_hook "github.com/Sirupsen/logrus/hooks/bugsnag"
 	"github.com/docker/notary/server"
-	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/utils"
 	"github.com/docker/notary/version"
 	"github.com/spf13/viper"
@@ -36,38 +34,41 @@ const DebugAddress = "localhost:8080"
 var (
 	debug      bool
 	configFile string
+	envPrefix  = "NOTARY_SERVER"
 	mainViper  = viper.New()
 )
 
 func init() {
-	// set default log level to Error
-	mainViper.SetDefault("logging", map[string]interface{}{"level": 2})
-
+	utils.SetupViper(mainViper, envPrefix)
 	// Setup flags
 	flag.StringVar(&configFile, "config", "", "Path to configuration file")
 	flag.BoolVar(&debug, "debug", false, "Enable the debugging server on localhost:8080")
 }
 
-// optionally sets up TLS for the server - if no TLS configuration is
-// specified, TLS is not enabled.
-func serverTLS(configuration *viper.Viper) (*tls.Config, error) {
-	tlsCertFile := configuration.GetString("server.tls_cert_file")
-	tlsKeyFile := configuration.GetString("server.tls_key_file")
-
-	if tlsCertFile == "" && tlsKeyFile == "" {
-		return nil, nil
-	} else if tlsCertFile == "" || tlsKeyFile == "" {
-		return nil, fmt.Errorf("Partial TLS configuration found. Either include both a cert and key file in the configuration, or include neither to disable TLS.")
+// get the address for the HTTP server, and parses the optional TLS
+// configuration for the server - if no TLS configuration is specified,
+// TLS is not enabled.
+func getAddrAndTLSConfig(configuration *viper.Viper) (string, *tls.Config, error) {
+	httpAddr := configuration.GetString("server.http_addr")
+	if httpAddr == "" {
+		return "", nil, fmt.Errorf("http listen address required for server")
 	}
 
-	tlsConfig, err := utils.ConfigureServerTLS(&utils.ServerTLSOpts{
-		ServerCertFile: tlsCertFile,
-		ServerKeyFile:  tlsKeyFile,
-	})
+	tlsOpts, err := utils.ParseServerTLS(configuration, false)
 	if err != nil {
-		return nil, fmt.Errorf("Unable to set up TLS: %s", err.Error())
+		return "", nil, fmt.Errorf(err.Error())
 	}
-	return tlsConfig, nil
+	// do not support this yet since the client doesn't have client cert support
+	if tlsOpts != nil {
+		tlsOpts.ClientCAFile = ""
+		tlsConfig, err := utils.ConfigureServerTLS(tlsOpts)
+		if err != nil {
+			return "", nil, fmt.Errorf(
+				"unable to set up TLS for server: %s", err.Error())
+		}
+		return httpAddr, tlsConfig, nil
+	}
+	return httpAddr, nil, nil
 }
 
 // sets up TLS for the GRPC connection to notary-signer
@@ -94,6 +95,28 @@ func grpcTLS(configuration *viper.Viper) (*tls.Config, error) {
 	return tlsConfig, nil
 }
 
+func getStore(configuration *viper.Viper, allowedBackends []string) (
+	storage.MetaStore, error) {
+
+	storeConfig, err := utils.ParseStorage(configuration, allowedBackends)
+	if err != nil {
+		return nil, err
+	}
+	if storeConfig != nil {
+		logrus.Infof("Using %s backend", storeConfig.Backend)
+		store, err := storage.NewSQLStorage(storeConfig.Backend, storeConfig.Source)
+		if err != nil {
+			return nil, fmt.Errorf("Error starting DB driver: ", err.Error())
+		}
+		health.RegisterPeriodicFunc(
+			"DB operational", store.CheckHealth, time.Second*60)
+		return store, nil
+	}
+
+	logrus.Debug("Using memory backend")
+	return storage.NewMemStorage(), nil
+}
+
 func main() {
 	flag.Usage = usage
 	flag.Parse()
@@ -115,40 +138,27 @@ func main() {
 	mainViper.SetConfigName(strings.TrimSuffix(filename, ext))
 	mainViper.AddConfigPath(configPath)
 
-	// Automatically accept configuration options from the environment
-	mainViper.SetEnvPrefix("NOTARY_SERVER")
-	mainViper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
-	mainViper.AutomaticEnv()
-
 	err := mainViper.ReadInConfig()
 	if err != nil {
 		logrus.Error("Viper Error: ", err.Error())
 		logrus.Error("Could not read config at ", configFile)
 		os.Exit(1)
 	}
-	lvl, err := logrus.ParseLevel(mainViper.GetString("logging.level"))
+
+	// default is error level
+	lvl, err := utils.ParseLogLevel(mainViper, logrus.ErrorLevel)
 	if err != nil {
-		lvl = logrus.ErrorLevel
-		logrus.Error("Could not parse log level from config. Defaulting to ErrorLevel")
+		logrus.Fatal(err.Error())
 	}
 	logrus.SetLevel(lvl)
 
-	// set up bugsnag and attach to logrus
-	bugs := mainViper.GetString("reporting.bugsnag")
-	if bugs != "" {
-		apiKey := mainViper.GetString("reporting.bugsnag_api_key")
-		releaseStage := mainViper.GetString("reporting.bugsnag_release_stage")
-		bugsnag.Configure(bugsnag.Configuration{
-			APIKey:       apiKey,
-			ReleaseStage: releaseStage,
-		})
-		hook, err := bugsnag_hook.NewBugsnagHook()
-		if err != nil {
-			logrus.Error("Could not attach bugsnag to logrus: ", err.Error())
-		} else {
-			logrus.AddHook(hook)
-		}
+	// parse bugsnag config
+	bugsnagConf, err := utils.ParseBugsnag(mainViper)
+	if err != nil {
+		logrus.Fatal(err.Error())
 	}
+	utils.SetUpBugsnag(bugsnagConf)
+
 	keyAlgo := mainViper.GetString("trust_service.key_algorithm")
 	if keyAlgo == "" {
 		logrus.Fatal("no key algorithm configured.")
@@ -188,23 +198,13 @@ func main() {
 		trust = signed.NewEd25519()
 	}
 
-	if mainViper.GetString("storage.backend") == "mysql" {
-		logrus.Info("Using mysql backend")
-		dbURL := mainViper.GetString("storage.db_url")
-		store, err := storage.NewSQLStorage("mysql", dbURL)
-		if err != nil {
-			logrus.Fatal("Error starting DB driver: ", err.Error())
-			return // not strictly needed but let's be explicit
-		}
-		health.RegisterPeriodicFunc(
-			"DB operational", store.CheckHealth, time.Second*60)
-		ctx = context.WithValue(ctx, "metaStore", store)
-	} else {
-		logrus.Debug("Using memory backend")
-		ctx = context.WithValue(ctx, "metaStore", storage.NewMemStorage())
+	store, err := getStore(mainViper, []string{"mysql"})
+	if err != nil {
+		logrus.Fatal(err.Error())
 	}
+	ctx = context.WithValue(ctx, "metaStore", store)
 
-	tlsConfig, err := serverTLS(mainViper)
+	httpAddr, tlsConfig, err := getAddrAndTLSConfig(mainViper)
 	if err != nil {
 		logrus.Fatal(err.Error())
 	}
@@ -212,7 +212,7 @@ func main() {
 	logrus.Info("Starting Server")
 	err = server.Run(
 		ctx,
-		mainViper.GetString("server.addr"),
+		httpAddr,
 		tlsConfig,
 		trust,
 		mainViper.GetString("auth.type"),
