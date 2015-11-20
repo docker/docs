@@ -1,3 +1,9 @@
+<!--[metadata]>
++++
+draft = true
++++
+<![end-metadata]-->
+
 # Contributing to the Docker Notary documentation
 
 The documentation in this directory is part of the [https://docs.docker.com](https://docs.docker.com) website.  Docker uses [the Hugo static generator](http://gohugo.io/overview/introduction/) to convert project Markdown files to a static HTML site. 
