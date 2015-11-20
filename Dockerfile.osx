@@ -18,21 +18,21 @@ RUN curl -fsSL https://github.com/mackyle/xar/archive/xar-1.6.1.tar.gz | tar xvz
 	./autogen.sh && ./configure && \
 	make && make install
 
-ENV VBOX_VERSION 5.0.8
-ENV VBOX_REV 103449
+ENV VBOX_VERSION 5.0.10
+ENV VBOX_REV 104061
 
 RUN curl -fsSL -o /vbox.dmg http://download.virtualbox.org/virtualbox/$VBOX_VERSION/VirtualBox-$VBOX_VERSION-$VBOX_REV-OSX.dmg \
 	&& echo "$(curl -fsSL 'http://download.virtualbox.org/virtualbox/'"$VBOX_VERSION"'/SHA256SUMS' | awk '$2 ~ /-OSX.dmg$/ { print $1 }') */vbox.dmg" | sha256sum -c -
 
 # Download the Docker parts
 
-ENV INSTALLER_VERSION 1.9.0d
-ENV DOCKER_VERSION 1.9.0
+ENV INSTALLER_VERSION 1.9.1
+ENV DOCKER_VERSION 1.9.1
 # RUN curl -fsSL -o /docker https://test.docker.com/builds/Darwin/x86_64/docker-$DOCKER_VERSION
 RUN curl -fsSL -o docker https://get.docker.com/builds/Darwin/x86_64/docker-$DOCKER_VERSION
 RUN chmod +x /docker
 
-ENV DOCKER_MACHINE_VERSION 0.5.0
+ENV DOCKER_MACHINE_VERSION 0.5.1
 RUN curl -fsSL -o /docker-machine.zip https://github.com/docker/machine/releases/download/v$DOCKER_MACHINE_VERSION/docker-machine_darwin-amd64.zip
 RUN 7z x /docker-machine.zip && rm -f /docker-machine.zip
 RUN chmod +x /docker-machine*
