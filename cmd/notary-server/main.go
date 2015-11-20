@@ -73,10 +73,10 @@ func getAddrAndTLSConfig(configuration *viper.Viper) (string, *tls.Config, error
 
 // sets up TLS for the GRPC connection to notary-signer
 func grpcTLS(configuration *viper.Viper) (*tls.Config, error) {
-	rootCA := configuration.GetString("trust_service.tls_ca_file")
+	rootCA := utils.GetPathRelativeToConfig(configuration, "trust_service.tls_ca_file")
 	serverName := configuration.GetString("trust_service.hostname")
-	clientCert := configuration.GetString("trust_service.tls_client_cert")
-	clientKey := configuration.GetString("trust_service.tls_client_key")
+	clientCert := utils.GetPathRelativeToConfig(configuration, "trust_service.tls_client_cert")
+	clientKey := utils.GetPathRelativeToConfig(configuration, "trust_service.tls_client_key")
 
 	if (clientCert == "" && clientKey != "") || (clientCert != "" && clientKey == "") {
 		return nil, fmt.Errorf("Partial TLS configuration found. Either include both a client cert and client key file in the configuration, or include neither.")

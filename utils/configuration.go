@@ -4,6 +4,7 @@ package utils
 
 import (
 	"fmt"
+	"path/filepath"
 	"strings"
 
 	"github.com/Sirupsen/logrus"
@@ -18,16 +19,30 @@ type Storage struct {
 	Source  string
 }
 
+// GetPathRelativeToConfig gets a configuration key which is a path, and if
+// it is not empty or an absolute path, returns the absolute path relative
+// to the configuration file
+func GetPathRelativeToConfig(configuration *viper.Viper, key string) string {
+	configFile := configuration.ConfigFileUsed()
+	p := configuration.GetString(key)
+	if p == "" || filepath.IsAbs(p) {
+		return p
+	}
+	return filepath.Join(filepath.Dir(configFile), p)
+}
+
 // ParseServerTLS tries to parse out a valid ServerTLSOpts from a Viper:
 // - If TLS is required, both the cert and key must be provided
 // - If TLS is not requried, either both the cert and key must be provided or
 //	 neither must be provided
+// The files are relative to the config file used to populate the instance
+// of viper.
 func ParseServerTLS(configuration *viper.Viper, tlsRequired bool) (*ServerTLSOpts, error) {
 	//  unmarshalling into objects does not seem to pick up env vars
 	tlsOpts := ServerTLSOpts{
-		ServerCertFile: configuration.GetString("server.tls_cert_file"),
-		ServerKeyFile:  configuration.GetString("server.tls_key_file"),
-		ClientCAFile:   configuration.GetString("server.client_ca_file"),
+		ServerCertFile: GetPathRelativeToConfig(configuration, "server.tls_cert_file"),
+		ServerKeyFile:  GetPathRelativeToConfig(configuration, "server.tls_key_file"),
+		ClientCAFile:   GetPathRelativeToConfig(configuration, "server.client_ca_file"),
 	}
 
 	cert, key := tlsOpts.ServerCertFile, tlsOpts.ServerKeyFile

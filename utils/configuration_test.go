@@ -274,6 +274,27 @@ func TestParseTLSWithTLS(t *testing.T) {
 	assert.Equal(t, expected, *tlsOpts)
 }
 
+func TestParseTLSWithTLSRelativeToConfigFile(t *testing.T) {
+	config := configure(`{
+		"server": {
+			"tls_cert_file": "path/to/cert",
+			"tls_key_file": "/abspath/to/key",
+			"client_ca_file": ""
+		}
+	}`)
+	config.SetConfigFile("/opt/me.json")
+
+	expected := ServerTLSOpts{
+		ServerCertFile: "/opt/path/to/cert",
+		ServerKeyFile:  "/abspath/to/key",
+		ClientCAFile:   "",
+	}
+
+	tlsOpts, err := ParseServerTLS(config, false)
+	assert.NoError(t, err)
+	assert.Equal(t, expected, *tlsOpts)
+}
+
 func TestParseTLSWithEnvironmentVariables(t *testing.T) {
 	config := configure(`{
 		"server": {
