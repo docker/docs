@@ -12,31 +12,24 @@ import (
 	"github.com/spf13/viper"
 )
 
-// Server is a configuration about what addresses a server should listen on
-type Server struct {
-	*ServerTLSOpts
-	HTTPAddr string
-	GRPCAddr string
-}
-
 // Storage is a configuration about what storage backend a server should use
 type Storage struct {
-	Backend string `mapstructure:"backend"`
-	URL     string `mapstructure:"db_url"`
+	Backend string
+	Source  string
 }
 
-// ParseServer tries to parse out a valid Server from a Viper:
-// - Either or both of HTTP and GRPC address must be provided
+// ParseServerTLS tries to parse out a valid ServerTLSOpts from a Viper:
 // - If TLS is required, both the cert and key must be provided
 // - If TLS is not requried, either both the cert and key must be provided or
 //	 neither must be provided
-func ParseServer(configuration *viper.Viper, tlsRequired bool) (*Server, error) {
-	// mapstructure does not support unmarshalling into a pointer
-	var tlsOpts ServerTLSOpts
-	err := configuration.UnmarshalKey("server", &tlsOpts)
-	if err != nil {
-		return nil, err
+func ParseServerTLS(configuration *viper.Viper, tlsRequired bool) (*ServerTLSOpts, error) {
+	//  unmarshalling into objects does not seem to pick up env vars
+	tlsOpts := ServerTLSOpts{
+		ServerCertFile: configuration.GetString("server.tls_cert_file"),
+		ServerKeyFile:  configuration.GetString("server.tls_key_file"),
+		ClientCAFile:   configuration.GetString("server.client_ca_file"),
 	}
+
 	cert, key := tlsOpts.ServerCertFile, tlsOpts.ServerKeyFile
 	if tlsRequired {
 		if cert == "" || key == "" {
@@ -49,20 +42,11 @@ func ParseServer(configuration *viper.Viper, tlsRequired bool) (*Server, error) 
 		}
 	}
 
-	server := Server{
-		HTTPAddr:      configuration.GetString("server.http_addr"),
-		GRPCAddr:      configuration.GetString("server.grpc_addr"),
-		ServerTLSOpts: &tlsOpts,
-	}
 	if cert == "" && key == "" && tlsOpts.ClientCAFile == "" {
-		server.ServerTLSOpts = nil
+		return nil, nil
 	}
 
-	if server.HTTPAddr == "" && server.GRPCAddr == "" {
-		return nil, fmt.Errorf("server must have an HTTP and/or GRPC address")
-	}
-
-	return &server, nil
+	return &tlsOpts, nil
 }
 
 // ParseLogLevel tries to parse out a log level from a Viper.  If there is no
@@ -79,24 +63,28 @@ func ParseLogLevel(configuration *viper.Viper, defaultLevel logrus.Level) (
 
 // ParseStorage tries to parse out Storage from a Viper.  If backend and
 // URL are not provided, returns a nil pointer.
-func ParseStorage(configuration *viper.Viper) (*Storage, error) {
-	var store Storage
-	err := configuration.UnmarshalKey("storage", &store)
-	if err != nil {
-		return nil, err
+func ParseStorage(configuration *viper.Viper, allowedBackeneds []string) (*Storage, error) {
+	store := Storage{
+		Backend: configuration.GetString("storage.backend"),
+		Source:  configuration.GetString("storage.db_url"),
 	}
-	if store.Backend == "" && store.URL == "" {
+	if store.Backend == "" && store.Source == "" {
 		return nil, nil
 	}
+
+	if store.Source == "" {
+		return nil, fmt.Errorf("must provide a non-empty database source")
+	}
 	store.Backend = strings.ToLower(store.Backend)
-	if store.Backend != "mysql" {
-		return nil, fmt.Errorf(
-			"must specify one of these supported backends: mysql")
+	for _, backend := range allowedBackeneds {
+		if backend == store.Backend {
+			return &store, nil
+		}
+
 	}
-	if store.URL == "" {
-		return nil, fmt.Errorf("must provide a non-empty database URL")
-	}
-	return &store, nil
+	return nil, fmt.Errorf(
+		"must specify one of these supported backends: %s",
+		strings.Join(allowedBackeneds, ", "))
 }
 
 // ParseBugsnag tries to parse out a Bugsnag Configuration from a Viper.
@@ -118,7 +106,15 @@ func ParseBugsnag(configuration *viper.Viper) (*bugsnag.Configuration, error) {
 	return &bugconf, nil
 }
 
-// utilities for handling common configurations
+// utilities for setting up/acting on common configurations
+
+// SetupViper sets up an instance of viper to also look at environment
+// variables
+func SetupViper(configuration *viper.Viper, envPrefix string) {
+	configuration.SetEnvPrefix(envPrefix)
+	configuration.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
+	configuration.AutomaticEnv()
+}
 
 // SetUpBugsnag configures bugsnag and sets up a logrus hook
 func SetUpBugsnag(config *bugsnag.Configuration) error {

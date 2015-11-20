@@ -44,9 +44,9 @@ func poolFromFile(filename string) (*x509.CertPool, error) {
 // ServerTLSOpts generates a tls configuration for servers using the
 // provided parameters.
 type ServerTLSOpts struct {
-	ServerCertFile string `mapstructure:"tls_cert_file"`
-	ServerKeyFile  string `mapstructure:"tls_key_file"`
-	ClientCAFile   string `mapstructure:"client_ca_file"`
+	ServerCertFile string
+	ServerKeyFile  string
+	ClientCAFile   string
 }
 
 // ConfigureServerTLS specifies a set of ciphersuites, the server cert and key,
@@ -87,11 +87,11 @@ func ConfigureServerTLS(opts *ServerTLSOpts) (*tls.Config, error) {
 // ClientTLSOpts is a struct that contains options to pass to
 // ConfigureClientTLS
 type ClientTLSOpts struct {
-	RootCAFile         string `json:"tls_ca_file"`
-	ServerName         string `json:"hostname"`
-	InsecureSkipVerify bool   `json:"-"`
-	ClientCertFile     string `json:"tls_client_cert"`
-	ClientKeyFile      string `json:"tls_client_key"`
+	RootCAFile         string
+	ServerName         string
+	InsecureSkipVerify bool
+	ClientCertFile     string
+	ClientKeyFile      string
 }
 
 // ConfigureClientTLS generates a tls configuration for clients using the
