@@ -87,27 +87,27 @@ Example:
 	<tr>
 		<td valign="top"><code>tls_key_file</code></td>
 		<td valign="top">no</td>
-		<td valign="top">Specifies the private key to use for HTTPS.  Must be
-			provided together with <code>tls_cert_file</code>, or not at all.
-			If neither are provided, the server will use HTTP instead of HTTPS.
-			The path is relative to the current working directory where
+		<td valign="top">The path to the private key to use for
+			HTTPS.  Must be provided together with <code>tls_cert_file</code>,
+			or not at all. If neither are provided, the server will use HTTP
+			instead of HTTPS. The path is relative to the directory where
 			notary-server is run.</td>
 	</tr>
 	<tr>
 		<td valign="top"><code>tls_cert_file</code></td>
 		<td valign="top">no</td>
-		<td valign="top">Specifies the certificate to use for HTTPS.  Must be
-			provided together with <code>tls_key_file</code>, or not at all.
-			If neither are provided, the server will use HTTP instead of HTTPS.
-			The path is relative to the current working directory where
-			notary-server is run.</td>
+		<td valign="top">The path to the certificate to use for HTTPS.
+			Must be provided together with <code>tls_key_file</code>, or not
+			at all. If neither are provided, the server will use HTTP instead
+			of HTTPS. The path is relative to the directory where notary-server
+			is run.</td>
 	</tr>
 </table>
 
 ### `auth` subsection (optional)
 
 This sections specifies the authentication options for the server.
-Currently, the only authentication scheme supported is token authentication.
+Currently, we only support token authentication.
 
 Example:
 
@@ -123,8 +123,9 @@ Example:
 }
 ```
 
-Note that this entire section is optional.  However, you would like
-authentication, then then the required parameters below are needed configure it.
+Note that this entire section is optional.  However, if you would like
+authentication for your server, then you need the required parameters below to
+configure it.
 
 **Token authentication:**
 
@@ -154,11 +155,11 @@ authentication post login.)
 	</tr>
 </table>
 
-## `trust service` section (optional)
+## `trust service` section (optional but recommended)
 
-The trust service section must be included in order to specify a remote trust
-service.  If it is left out, a local in-memory ED25519 trust service will be
-used.
+This section is required to specify a remote trust service, such as
+[Notary Signer](notary-signer.md).  If it is left out or invalid, a local
+in-memory ED25519 trust service will be used instead.
 
 Remote trust service example:
 
@@ -174,9 +175,9 @@ Remote trust service example:
 }
 ```
 
-Note that this entire section is optional.  However, you would like to use a
-separate trust service (recommended), then then the required parameters below
-are needed configure it.
+Note that this entire section is optional.  However, if you would like to use a
+separate trust service (recommended), then you need the required parameters
+below to configure it.
 
 <table>
 	<tr>
@@ -187,8 +188,9 @@ are needed configure it.
 	<tr>
 		<td valign="top"><code>type</code></td>
 		<td valign="top">yes</td>
-		<td valign="top">Must be `"remote"`; all other values will result in a
-			local trust service (and the rest of the parameters will be ignored)</td>
+		<td valign="top">Must be <code>"remote"</code>; all other values
+			will result in a local trust service (and the rest of the
+			parameters will be ignored)</td>
 	</tr>
 	<tr>
 		<td valign="top"><code>hostname</code></td>
@@ -203,42 +205,41 @@ are needed configure it.
 	<tr>
 		<td valign="top"><code>key_algorithm</code></td>
 		<td valign="top">yes</td>
-		<td valign="top">The key algorithm/type that will be generated and
-			stored on the signing service.  Valid values are `ecdsa`, `rsa`,
-			and `ed25519`.</td>
+		<td valign="top">Algorithm to use to generate keys stored on the
+			signing service.  Valid values are <code>"ecdsa"</code>,
+			<code>"rsa"</code>, and <code>"ed25519"</code>.</td>
 	</tr>
 	<tr>
 		<td valign="top"><code>tls_ca_file</code></td>
 		<td valign="top">no</td>
-		<td valign="top">The root CA or TLS cert of the remote service, if it is
-			self-signed or otherwise not in the system's default trust roots.
-			The path is relative to the current working directory where
-			notary-server is run.</td>
+		<td valign="top">The path to the root CA that signed the TLS
+			certificate of the remote service. This parameter if said root
+			CA is not in the system's default trust roots. The path is
+			relative to the directory where notary-server is run.</td>
 	</tr>
 	<tr>
 		<td valign="top"><code>tls_client_key</code></td>
 		<td valign="top">no</td>
-		<td valign="top">The private key to use for TLS mutual authentication.
-			Must be provided together with <code>tls_client_cert</code> or not
-			at all. The path is relative to the current working directory where
-			notary-server is run.</td>
+		<td valign="top">The path to the private key to use for TLS mutual
+			authentication. This must be provided together with
+			<code>tls_client_cert</code> or not at all. The path is relative
+			to the directory where notary-server is run.</td>
 	</tr>
 	<tr>
 		<td valign="top"><code>tls_client_cert</code></td>
-		<td valign="top">optional</td>
-		<td valign="top">The certificate to use for TLS mutual authentication.
-			Must be provided together with <code>tls_client_key</code> or not
-			at all. The path is relative to the current working directory where
-			notary-server is run.</td>
+		<td valign="top">no</td>
+		<td valign="top">The path to the certificate to use for TLS mutual
+			authentication. This must be provided together with
+			<code>tls_client_key</code> or not at all. The path is relative
+			to the directory where notary-server is run.</td>
 	</tr>
 </table>
 
 
 ## `logging` section (optional)
 
-The logging section sets the log level of the server.  If not provided, or if
-any part of this section is invalid, the server defaults to an ERROR logging
-level.
+The logging section sets the log level of the server.  If it is not provided
+or invalid, the server defaults to an ERROR logging level.
 
 Example:
 
@@ -248,9 +249,9 @@ Example:
 }
 ```
 
-Note that this entire section is optional.  However, you would like to
-specify a different log level, then then the required parameters below
-are needed configure it.
+Note that this entire section is optional.  However, if you would like to
+specify a different log level, then you need the required parameters
+below to configure it.
 
 <table>
 	<tr>
@@ -267,10 +268,11 @@ are needed configure it.
 	</tr>
 </table>
 
-## `storage` section (optional)
+## `storage` section (optional but recommended)
 
-The storage section sets the storage options for the server.  If not provided,
-an in-memory store will be used.  Currently, the only DB supported is MySQL.
+The storage section specifies which storage backend the server should use to
+store TUF metadata.  Currently, we only support MySQL. If this
+section is not provided or invalid, an in-memory store will be used instead.
 
 DB storage example:
 
@@ -281,9 +283,9 @@ DB storage example:
 }
 ```
 
-Note that this entire section is optional.  However, you would like to
-use a database backend (recommended), then then the required parameters below
-are needed configure it.
+Note that this entire section is optional.  However, if you would like to
+use a database backend (recommended), then you need the required parameters
+below to configure it.
 
 <table>
 	<tr>
@@ -302,17 +304,18 @@ are needed configure it.
 		<td valign="top"><code>db_url</code></td>
 		<td valign="top">yes</td>
 		<td valign="top">The URL used to access the DB, which includes both the
-			endpoint anusername/credentials</td>
+			endpoint the username/credentials</td>
 	</tr>
 </table>
 
 ## `reporting` section (optional)
 
-The reporting section contains any configuration for reporting errors, etc. to
-services via [logrus hooks](https://github.com/Sirupsen/logrus).  Currently the
-only supported services is [Bugsnag](https://bugsnag.com).  (See
-[bugsnag-go](https://github.com/bugsnag/bugsnag-go/) for more information about
-configuration.
+The reporting section contains any configuration for useful for running the
+service, such as reporting errors. Currently, we only support reporting errors
+to [Bugsnag](https://bugsnag.com).
+
+See [bugsnag-go](https://github.com/bugsnag/bugsnag-go/) for more information
+about these configuration parameters.
 
 ```json
 "reporting": {
@@ -322,8 +325,8 @@ configuration.
 }
 ```
 
-Note that this entire section is optional.  However, you would like to
-use Bugsnag reporting, then then the required parameters below are needed
+Note that this entire section is optional.  However, if you would like to
+report errors to Bugsnag, then you need the required parameters below to
 configure it.
 
 <table>
@@ -341,13 +344,12 @@ configure it.
 	<tr>
 		<td valign="top"><code>bugsnag_api_key</code></td>
 		<td valign="top">yes</td>
-		<td>The API key to use to report errors - if this value is not set,
-			no errors will be reported to Bugsnag.</td>
+		<td>The API key to use to report errors.</td>
 	</tr>
 	<tr>
 		<td valign="top"><code>bugsnag_release_stage</code></td>
 		<td valign="top">yes</td>
-		<td>The current release stage, such as "production" (which is the
-			default), used to filter errors in the Bugsnag dashboard.</td>
+		<td>The current release stage, such as "production".  You can
+			use this value to filter errors in the Bugsnag dashboard.</td>
 	</tr>
 </table>
