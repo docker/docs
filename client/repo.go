@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"path/filepath"
 
+	"github.com/docker/notary/certs"
 	"github.com/docker/notary/cryptoservice"
-	"github.com/docker/notary/keystoremanager"
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/store"
@@ -24,7 +24,7 @@ func NewNotaryRepository(baseDir, gun, baseURL string, rt http.RoundTripper,
 		return nil, fmt.Errorf("failed to create private key store in directory: %s", baseDir)
 	}
 
-	keyStoreManager, err := keystoremanager.NewKeyStoreManager(baseDir)
+	certManager, err := certs.NewManager(baseDir)
 	if err != nil {
 		return nil, err
 	}
@@ -32,13 +32,13 @@ func NewNotaryRepository(baseDir, gun, baseURL string, rt http.RoundTripper,
 	cryptoService := cryptoservice.NewCryptoService(gun, fileKeyStore)
 
 	nRepo := &NotaryRepository{
-		gun:             gun,
-		baseDir:         baseDir,
-		baseURL:         baseURL,
-		tufRepoPath:     filepath.Join(baseDir, tufDir, filepath.FromSlash(gun)),
-		CryptoService:   cryptoService,
-		roundTrip:       rt,
-		KeyStoreManager: keyStoreManager,
+		gun:           gun,
+		baseDir:       baseDir,
+		baseURL:       baseURL,
+		tufRepoPath:   filepath.Join(baseDir, tufDir, filepath.FromSlash(gun)),
+		CryptoService: cryptoService,
+		roundTrip:     rt,
+		CertManager:   certManager,
 	}
 
 	fileStore, err := store.NewFilesystemStore(

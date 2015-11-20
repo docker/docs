@@ -146,7 +146,7 @@ func testInitRepo(t *testing.T, rootType string) {
 	_, err = os.Stat(filepath.Join(tempBaseDir, "private", "root_keys", rootKeyFilename))
 	assert.NoError(t, err, "missing root key")
 
-	certificates := repo.KeyStoreManager.TrustedCertificateStore().GetCertificates()
+	certificates := repo.CertManager.TrustedCertificateStore().GetCertificates()
 	assert.Len(t, certificates, 1, "unexpected number of certificates")
 
 	certID, err := trustmanager.FingerprintCert(certificates[0])
