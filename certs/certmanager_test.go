@@ -1,4 +1,4 @@
-package keystoremanager
+package certs
 
 import (
 	"bytes"
@@ -53,61 +53,61 @@ func TestCertsToRemove(t *testing.T) {
 	oldCerts := []*x509.Certificate{cert1}
 	newCerts := []*x509.Certificate{cert2}
 
-	certs := certsToRemove(oldCerts, newCerts)
-	assert.Len(t, certs, 1)
-	_, ok := certs[cert1KeyID]
+	certificates := certsToRemove(oldCerts, newCerts)
+	assert.Len(t, certificates, 1)
+	_, ok := certificates[cert1KeyID]
 	assert.True(t, ok)
 
 	// Call CertsToRemove with two old and one new
 	oldCerts = []*x509.Certificate{cert1, cert2}
 	newCerts = []*x509.Certificate{cert3}
 
-	certs = certsToRemove(oldCerts, newCerts)
-	assert.Len(t, certs, 2)
-	_, ok = certs[cert1KeyID]
+	certificates = certsToRemove(oldCerts, newCerts)
+	assert.Len(t, certificates, 2)
+	_, ok = certificates[cert1KeyID]
 	assert.True(t, ok)
-	_, ok = certs[cert2KeyID]
+	_, ok = certificates[cert2KeyID]
 	assert.True(t, ok)
-	_, ok = certs[cert3KeyID]
+	_, ok = certificates[cert3KeyID]
 	assert.False(t, ok)
 
 	// Call CertsToRemove with two new and one old
 	oldCerts = []*x509.Certificate{cert3}
 	newCerts = []*x509.Certificate{cert2, cert1}
 
-	certs = certsToRemove(oldCerts, newCerts)
-	assert.Len(t, certs, 1)
-	_, ok = certs[cert3KeyID]
+	certificates = certsToRemove(oldCerts, newCerts)
+	assert.Len(t, certificates, 1)
+	_, ok = certificates[cert3KeyID]
 	assert.True(t, ok)
-	_, ok = certs[cert1KeyID]
+	_, ok = certificates[cert1KeyID]
 	assert.False(t, ok)
-	_, ok = certs[cert2KeyID]
+	_, ok = certificates[cert2KeyID]
 	assert.False(t, ok)
 
-	// Call CertsToRemove with three old certs and no new
+	// Call CertsToRemove with three old certificates and no new
 	oldCerts = []*x509.Certificate{cert1, cert2, cert3}
 	newCerts = []*x509.Certificate{}
 
-	certs = certsToRemove(oldCerts, newCerts)
-	assert.Len(t, certs, 0)
-	_, ok = certs[cert1KeyID]
+	certificates = certsToRemove(oldCerts, newCerts)
+	assert.Len(t, certificates, 0)
+	_, ok = certificates[cert1KeyID]
 	assert.False(t, ok)
-	_, ok = certs[cert2KeyID]
+	_, ok = certificates[cert2KeyID]
 	assert.False(t, ok)
-	_, ok = certs[cert3KeyID]
+	_, ok = certificates[cert3KeyID]
 	assert.False(t, ok)
 
-	// Call CertsToRemove with three new certs and no old
+	// Call CertsToRemove with three new certificates and no old
 	oldCerts = []*x509.Certificate{}
 	newCerts = []*x509.Certificate{cert1, cert2, cert3}
 
-	certs = certsToRemove(oldCerts, newCerts)
-	assert.Len(t, certs, 0)
-	_, ok = certs[cert1KeyID]
+	certificates = certsToRemove(oldCerts, newCerts)
+	assert.Len(t, certificates, 0)
+	_, ok = certificates[cert1KeyID]
 	assert.False(t, ok)
-	_, ok = certs[cert2KeyID]
+	_, ok = certificates[cert2KeyID]
 	assert.False(t, ok)
-	_, ok = certs[cert3KeyID]
+	_, ok = certificates[cert3KeyID]
 	assert.False(t, ok)
 
 }
@@ -121,8 +121,8 @@ func TestValidateRoot(t *testing.T) {
 	defer os.RemoveAll(tempBaseDir)
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
-	// Create a FileStoreManager
-	keyStoreManager, err := NewKeyStoreManager(tempBaseDir)
+	// Create a Manager
+	certManager, err := NewManager(tempBaseDir)
 	assert.NoError(t, err)
 
 	// Execute our template
@@ -134,12 +134,12 @@ func TestValidateRoot(t *testing.T) {
 
 	// This call to ValidateRoot will succeed since we are using a valid PEM
 	// encoded certificate, and have no other certificates for this CN
-	err = keyStoreManager.ValidateRoot(&testSignedRoot, "docker.com/notary")
+	err = certManager.ValidateRoot(&testSignedRoot, "docker.com/notary")
 	assert.NoError(t, err)
 
 	// This call to ValidateRoot will fail since we are passing in a dnsName that
 	// doesn't match the CN of the certificate.
-	err = keyStoreManager.ValidateRoot(&testSignedRoot, "diogomonica.com/notary")
+	err = certManager.ValidateRoot(&testSignedRoot, "diogomonica.com/notary")
 	if assert.Error(t, err, "An error was expected") {
 		assert.Equal(t, err, &ErrValidationFail{Reason: "unable to retrieve valid leaf certificates"})
 	}
@@ -154,7 +154,7 @@ func TestValidateRoot(t *testing.T) {
 	// Unmarshal our signedroot
 	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
 
-	err = keyStoreManager.ValidateRoot(&testSignedRoot, "docker.com/notary")
+	err = certManager.ValidateRoot(&testSignedRoot, "docker.com/notary")
 	assert.Error(t, err, "illegal base64 data at input byte")
 
 	//
@@ -167,7 +167,7 @@ func TestValidateRoot(t *testing.T) {
 	// Unmarshal our signedroot
 	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
 
-	err = keyStoreManager.ValidateRoot(&testSignedRoot, "docker.com/notary")
+	err = certManager.ValidateRoot(&testSignedRoot, "docker.com/notary")
 	if assert.Error(t, err, "An error was expected") {
 		assert.Equal(t, err, &ErrValidationFail{Reason: "unable to retrieve valid leaf certificates"})
 	}
@@ -183,7 +183,7 @@ func TestValidateRoot(t *testing.T) {
 	// Unmarshal our signedroot
 	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
 
-	err = keyStoreManager.ValidateRoot(&testSignedRoot, "docker.com/notary")
+	err = certManager.ValidateRoot(&testSignedRoot, "docker.com/notary")
 	if assert.Error(t, err, "An error was expected") {
 		assert.Equal(t, err, &ErrValidationFail{Reason: "unable to retrieve valid leaf certificates"})
 	}
@@ -202,7 +202,7 @@ func TestValidateRoot(t *testing.T) {
 	// Unmarshal our signedroot
 	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
 
-	err = keyStoreManager.ValidateRoot(&testSignedRoot, "secure.example.com")
+	err = certManager.ValidateRoot(&testSignedRoot, "secure.example.com")
 	if assert.Error(t, err, "An error was expected") {
 		assert.Equal(t, err, &ErrValidationFail{Reason: "failed to validate integrity of roots"})
 	}
@@ -217,11 +217,11 @@ func TestValidateSuccessfulRootRotation(t *testing.T) {
 	}
 }
 
-// Generates a KeyStoreManager in a temporary directory and returns the
+// Generates a Manager in a temporary directory and returns the
 // manager and certificates for two keys which have been added to the keystore.
 // Also returns the temporary directory so it can be cleaned up.
 func filestoreWithTwoCerts(t *testing.T, gun, keyAlg string) (
-	string, *KeyStoreManager, *cryptoservice.CryptoService, []*x509.Certificate) {
+	string, *Manager, *cryptoservice.CryptoService, []*x509.Certificate) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
@@ -230,11 +230,11 @@ func filestoreWithTwoCerts(t *testing.T, gun, keyAlg string) (
 
 	cryptoService := cryptoservice.NewCryptoService(gun, fileKeyStore)
 
-	// Create a FileStoreManager
-	keyStoreManager, err := NewKeyStoreManager(tempBaseDir)
+	// Create a Manager
+	certManager, err := NewManager(tempBaseDir)
 	assert.NoError(t, err)
 
-	certs := make([]*x509.Certificate, 2)
+	certificates := make([]*x509.Certificate, 2)
 	for i := 0; i < 2; i++ {
 		pubKey, err := cryptoService.Create("root", keyAlg)
 		assert.NoError(t, err)
@@ -245,22 +245,22 @@ func filestoreWithTwoCerts(t *testing.T, gun, keyAlg string) (
 		cert, err := cryptoservice.GenerateCertificate(key, gun)
 		assert.NoError(t, err)
 
-		certs[i] = cert
+		certificates[i] = cert
 	}
-	return tempBaseDir, keyStoreManager, cryptoService, certs
+	return tempBaseDir, certManager, cryptoService, certificates
 }
 
 func testValidateSuccessfulRootRotation(t *testing.T, keyAlg, rootKeyType string) {
 	// The gun to test
 	gun := "docker.com/notary"
 
-	tempBaseDir, keyStoreManager, cs, certs := filestoreWithTwoCerts(t, gun, keyAlg)
+	tempBaseDir, certManager, cs, certificates := filestoreWithTwoCerts(t, gun, keyAlg)
 	defer os.RemoveAll(tempBaseDir)
-	origRootCert := certs[0]
-	replRootCert := certs[1]
+	origRootCert := certificates[0]
+	replRootCert := certificates[1]
 
 	// Add the old root cert part of trustedCertificates
-	keyStoreManager.AddTrustedCert(origRootCert)
+	certManager.AddTrustedCert(origRootCert)
 
 	// We need the PEM representation of the replacement key to put it into the TUF data
 	origRootPEMCert := trustmanager.CertToPEM(origRootCert)
@@ -289,17 +289,15 @@ func testValidateSuccessfulRootRotation(t *testing.T, keyAlg, rootKeyType string
 	err = signed.Sign(cs, signedTestRoot, origRootKey)
 	assert.NoError(t, err)
 
-	//
 	// This call to ValidateRoot will succeed since we are using a valid PEM
 	// encoded certificate, and have no other certificates for this CN
-	//
-	err = keyStoreManager.ValidateRoot(signedTestRoot, gun)
+	err = certManager.ValidateRoot(signedTestRoot, gun)
 	assert.NoError(t, err)
 
 	// Finally, validate the only trusted certificate that exists is the new one
-	certs = keyStoreManager.trustedCertificateStore.GetCertificates()
-	assert.Len(t, certs, 1)
-	assert.Equal(t, certs[0], replRootCert)
+	certificates = certManager.trustedCertificateStore.GetCertificates()
+	assert.Len(t, certificates, 1)
+	assert.Equal(t, certificates[0], replRootCert)
 }
 
 // TestValidateRootRotationMissingOrigSig runs through a full root certificate rotation
@@ -315,14 +313,14 @@ func TestValidateRootRotationMissingOrigSig(t *testing.T) {
 func testValidateRootRotationMissingOrigSig(t *testing.T, keyAlg, rootKeyType string) {
 	gun := "docker.com/notary"
 
-	tempBaseDir, keyStoreManager, cryptoService, certs := filestoreWithTwoCerts(
+	tempBaseDir, certManager, cryptoService, certificates := filestoreWithTwoCerts(
 		t, gun, keyAlg)
 	defer os.RemoveAll(tempBaseDir)
-	origRootCert := certs[0]
-	replRootCert := certs[1]
+	origRootCert := certificates[0]
+	replRootCert := certificates[1]
 
 	// Add the old root cert part of trustedCertificates
-	keyStoreManager.AddTrustedCert(origRootCert)
+	certManager.AddTrustedCert(origRootCert)
 
 	// We need the PEM representation of the replacement key to put it into the TUF data
 	replRootPEMCert := trustmanager.CertToPEM(replRootCert)
@@ -349,14 +347,14 @@ func testValidateRootRotationMissingOrigSig(t *testing.T, keyAlg, rootKeyType st
 
 	// This call to ValidateRoot will succeed since we are using a valid PEM
 	// encoded certificate, and have no other certificates for this CN
-	err = keyStoreManager.ValidateRoot(signedTestRoot, gun)
+	err = certManager.ValidateRoot(signedTestRoot, gun)
 	assert.Error(t, err, "insuficient signatures on root")
 
 	// Finally, validate the only trusted certificate that exists is still
 	// the old one
-	certs = keyStoreManager.trustedCertificateStore.GetCertificates()
-	assert.Len(t, certs, 1)
-	assert.Equal(t, certs[0], origRootCert)
+	certificates = certManager.trustedCertificateStore.GetCertificates()
+	assert.Len(t, certificates, 1)
+	assert.Equal(t, certificates[0], origRootCert)
 }
 
 // TestValidateRootRotationMissingNewSig runs through a full root certificate rotation
@@ -372,14 +370,14 @@ func TestValidateRootRotationMissingNewSig(t *testing.T) {
 func testValidateRootRotationMissingNewSig(t *testing.T, keyAlg, rootKeyType string) {
 	gun := "docker.com/notary"
 
-	tempBaseDir, keyStoreManager, cryptoService, certs := filestoreWithTwoCerts(
+	tempBaseDir, certManager, cryptoService, certificates := filestoreWithTwoCerts(
 		t, gun, keyAlg)
 	defer os.RemoveAll(tempBaseDir)
-	origRootCert := certs[0]
-	replRootCert := certs[1]
+	origRootCert := certificates[0]
+	replRootCert := certificates[1]
 
 	// Add the old root cert part of trustedCertificates
-	keyStoreManager.AddTrustedCert(origRootCert)
+	certManager.AddTrustedCert(origRootCert)
 
 	// We need the PEM representation of the replacement key to put it into the TUF data
 	origRootPEMCert := trustmanager.CertToPEM(origRootCert)
@@ -408,12 +406,12 @@ func testValidateRootRotationMissingNewSig(t *testing.T, keyAlg, rootKeyType str
 
 	// This call to ValidateRoot will succeed since we are using a valid PEM
 	// encoded certificate, and have no other certificates for this CN
-	err = keyStoreManager.ValidateRoot(signedTestRoot, gun)
+	err = certManager.ValidateRoot(signedTestRoot, gun)
 	assert.Error(t, err, "insuficient signatures on root")
 
 	// Finally, validate the only trusted certificate that exists is still
 	// the old one
-	certs = keyStoreManager.trustedCertificateStore.GetCertificates()
-	assert.Len(t, certs, 1)
-	assert.Equal(t, certs[0], origRootCert)
+	certificates = certManager.trustedCertificateStore.GetCertificates()
+	assert.Len(t, certificates, 1)
+	assert.Equal(t, certificates[0], origRootCert)
 }

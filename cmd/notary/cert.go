@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/docker/notary/keystoremanager"
+	"github.com/docker/notary/certs"
 	"github.com/docker/notary/trustmanager"
 
 	"github.com/spf13/cobra"
@@ -54,7 +54,7 @@ func certRemove(cmd *cobra.Command, args []string) {
 	parseConfig()
 
 	trustDir := mainViper.GetString("trust_dir")
-	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir)
+	certManager, err := certs.NewManager(trustDir)
 	if err != nil {
 		fatalf("Failed to create a new truststore manager with directory: %s", trustDir)
 	}
@@ -69,18 +69,19 @@ func certRemove(cmd *cobra.Command, args []string) {
 			fatalf("Invalid certificate ID provided: %s", certID)
 		}
 		// Attempt to find this certificates
-		cert, err := keyStoreManager.TrustedCertificateStore().GetCertificateByCertID(certID)
+		cert, err := certManager.TrustedCertificateStore().GetCertificateByCertID(certID)
 		if err != nil {
 			fatalf("Unable to retrieve certificate with cert ID: %s", certID)
 		}
 		certsToRemove = append(certsToRemove, cert)
 	} else {
 		// We got the -g flag, it's a GUN
-		certs, err := keyStoreManager.TrustedCertificateStore().GetCertificatesByCN(certRemoveGUN)
+		toRemove, err := certManager.TrustedCertificateStore().GetCertificatesByCN(
+			certRemoveGUN)
 		if err != nil {
 			fatalf("%v", err)
 		}
-		certsToRemove = append(certsToRemove, certs...)
+		certsToRemove = append(certsToRemove, toRemove...)
 	}
 
 	// List all the keys about to be removed
@@ -103,7 +104,7 @@ func certRemove(cmd *cobra.Command, args []string) {
 
 	// Remove all the certs
 	for _, cert := range certsToRemove {
-		err = keyStoreManager.TrustedCertificateStore().RemoveCert(cert)
+		err = certManager.TrustedCertificateStore().RemoveCert(cert)
 		if err != nil {
 			fatalf("Failed to remove root certificate for %s", cert.Subject.CommonName)
 		}
@@ -118,14 +119,14 @@ func certList(cmd *cobra.Command, args []string) {
 	parseConfig()
 
 	trustDir := mainViper.GetString("trust_dir")
-	keyStoreManager, err := keystoremanager.NewKeyStoreManager(trustDir)
+	certManager, err := certs.NewManager(trustDir)
 	if err != nil {
 		fatalf("Failed to create a new truststore manager with directory: %s", trustDir)
 	}
 
 	cmd.Println("")
 	cmd.Println("# Trusted Certificates:")
-	trustedCerts := keyStoreManager.TrustedCertificateStore().GetCertificates()
+	trustedCerts := certManager.TrustedCertificateStore().GetCertificates()
 	for _, c := range trustedCerts {
 		printCert(cmd, c)
 	}
