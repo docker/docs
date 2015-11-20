@@ -51,7 +51,7 @@ certificates for Notary Server to authenticate with Notary Signer, please make
 sure that the certificates **are not CAs**.  Otherwise any server that is
 compromised can sign any number of other client certs.
 
-As an example, please see [this script](opensslGenCert.sh) to see how to
+As an example, please see [this script](opensslCertGen.sh) to see how to
 generate client SSL certs with basic constraints using OpenSSL.
 
 ### How to configure and run notary server
@@ -102,7 +102,7 @@ docker image loads the config file from `/opt/notary-server/config.json`, so
 you can mount your config file at `/opt/notary-server`:
 
 ```
-$ docker run -p "4443:4443" -v /path/to/your/config/dir:/opt/notary-server
+$ docker run -p "4443:4443" -v /path/to/config/dir:/opt/notary-server notary-server
 ```
 
 #### Running the binary
