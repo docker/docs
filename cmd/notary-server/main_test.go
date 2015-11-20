@@ -121,18 +121,22 @@ func TestGrpcTLSNoConfig(t *testing.T) {
 
 // The rest of the functionality of grpcTLS depends upon
 // utils.ConfigureClientTLS, so this test just asserts that if successful,
-// the correct tls.Config is returned based on all the configuration parameters
+// the correct tls.Config is returned based on all the configuration parameters,
+// and that it gets the path relative to the config file
 func TestGrpcTLSSuccess(t *testing.T) {
 	keypair, err := tls.LoadX509KeyPair(Cert, Key)
 	assert.NoError(t, err, "Unable to load cert and key for testing")
 
-	config := fmt.Sprintf(
-		`{"trust_service": {
+	configJSON := `{
+		"trust_service": {
             "hostname": "notary-server",
-            "tls_client_cert": "%s",
-            "tls_client_key": "%s"}}`,
-		Cert, Key)
-	tlsConfig, err := grpcTLS(configure(config))
+            "tls_client_cert": "notary-server.crt",
+            "tls_client_key": "notary-server.key"
+        }
+    }`
+	config := configure(configJSON)
+	config.SetConfigFile("../../fixtures/config.json")
+	tlsConfig, err := grpcTLS(config)
 	assert.NoError(t, err)
 	assert.Equal(t, []tls.Certificate{keypair}, tlsConfig.Certificates)
 }
