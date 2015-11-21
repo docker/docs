@@ -8,17 +8,17 @@ import (
 // ErrInsufficientSignatures - can not create enough signatures on a piece of
 // metadata
 type ErrInsufficientSignatures struct {
-	FoundKeys  int
-	NeededKeys int
-	KeyIDs     []string
+	FoundKeys     int
+	NeededKeys    int
+	MissingKeyIDs []string
 }
 
 func (e ErrInsufficientSignatures) Error() string {
-	candidates := strings.Join(e.KeyIDs, ", ")
+	candidates := strings.Join(e.MissingKeyIDs, ", ")
 	if e.FoundKeys == 0 {
 		return fmt.Sprintf("signing keys not available, need %d keys out of: %s", e.NeededKeys, candidates)
 	}
-	return fmt.Sprintf("not enough signing keys: got %d of %d needed keys out of: %s",
+	return fmt.Sprintf("not enough signing keys: got %d of %d needed keys, other candidates: %s",
 		e.FoundKeys, e.NeededKeys, candidates)
 }
 

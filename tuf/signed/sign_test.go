@@ -1,8 +1,10 @@
 package signed
 
 import (
+	"crypto"
 	"crypto/rand"
 	"encoding/pem"
+	"io"
 	"testing"
 
 	"github.com/docker/go/canonical/json"
@@ -15,6 +17,22 @@ import (
 const (
 	testKeyPEM1 = "-----BEGIN PUBLIC KEY-----\nMIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAnKuXZeefa2LmgxaL5NsM\nzKOHNe+x/nL6ik+lDBCTV6OdcwAhHQS+PONGhrChIUVR6Vth3hUCrreLzPO73Oo5\nVSCuRJ53UronENl6lsa5mFKP8StYLvIDITNvkoT3j52BJIjyNUK9UKY9As2TNqDf\nBEPIRp28ev/NViwGOEkBu2UAbwCIdnDXm8JQErCZA0Ydm7PKGgjLbFsFGrVzqXHK\n6pdzJXlhr9yap3UpgQ/iO9JtoEYB2EXsnSrPc9JRjR30bNHHtnVql3fvinXrAEwq\n3xmN4p+R4VGzfdQN+8Kl/IPjqWB535twhFYEG/B7Ze8IwbygBjK3co/KnOPqMUrM\nBI8ztvPiogz+MvXb8WvarZ6TMTh8ifZI96r7zzqyzjR1hJulEy3IsMGvz8XS2J0X\n7sXoaqszEtXdq5ef5zKVxkiyIQZcbPgmpHLq4MgfdryuVVc/RPASoRIXG4lKaTJj\n1ANMFPxDQpHudCLxwCzjCb+sVa20HBRPTnzo8LSZkI6jAgMBAAE=\n-----END PUBLIC KEY-----"
 )
+
+type FailingPrivateKeyErr struct {
+}
+
+func (err FailingPrivateKeyErr) Error() string {
+	return "FailingPrivateKey.Sign failed"
+}
+
+// A data.PrivateKey which fails signing with a recognizable error.
+type FailingPrivateKey struct {
+	data.PrivateKey
+}
+
+func (fpk FailingPrivateKey) Sign(rand io.Reader, msg []byte, opts crypto.SignerOpts) (signature []byte, err error) {
+	return nil, FailingPrivateKeyErr{}
+}
 
 // A CryptoService which does not contain any keys.
 type FailingCryptoService struct {
@@ -336,4 +354,20 @@ func TestSignOptionalKeys(t *testing.T) {
 		// We know this will fail if !ok
 		require.IsType(t, ErrInsufficientSignatures{}, err)
 	}
+}
+
+func TestSignFailingKeys(t *testing.T) {
+	privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
+	require.NoError(t, err)
+	cs := &MockCryptoService{FailingPrivateKey{privKey}}
+
+	testData := data.Signed{Signed: &json.RawMessage{}}
+	err = Sign(cs, &testData, []data.PublicKey{privKey}, 1, nil)
+	require.Error(t, err)
+	require.IsType(t, FailingPrivateKeyErr{}, err)
+
+	testData = data.Signed{Signed: &json.RawMessage{}}
+	err = Sign(cs, &testData, []data.PublicKey{}, 0, []data.PublicKey{privKey})
+	require.Error(t, err)
+	require.IsType(t, FailingPrivateKeyErr{}, err)
 }
