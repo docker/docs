@@ -291,7 +291,7 @@ func testValidateSuccessfulRootRotation(t *testing.T, keyAlg, rootKeyType string
 	signedTestRoot, err := testRoot.ToSigned()
 	require.NoError(t, err)
 
-	err = signed.Sign(cs, signedTestRoot, []data.PublicKey{replRootKey, origRootKey}, 2)
+	err = signed.Sign(cs, signedTestRoot, []data.PublicKey{replRootKey, origRootKey}, 2, nil)
 	require.NoError(t, err)
 
 	// This call to ValidateRoot will succeed since we are using a valid PEM
@@ -352,7 +352,7 @@ func testValidateRootRotationMissingOrigSig(t *testing.T, keyAlg, rootKeyType st
 	require.NoError(t, err)
 
 	// We only sign with the new key, and not with the original one.
-	err = signed.Sign(cryptoService, signedTestRoot, []data.PublicKey{replRootKey}, 1)
+	err = signed.Sign(cryptoService, signedTestRoot, []data.PublicKey{replRootKey}, 1, nil)
 	require.NoError(t, err)
 
 	// This call to ValidateRoot will succeed since we are using a valid PEM
@@ -416,7 +416,7 @@ func testValidateRootRotationMissingNewSig(t *testing.T, keyAlg, rootKeyType str
 	require.NoError(t, err)
 
 	// We only sign with the old key, and not with the new one
-	err = signed.Sign(cryptoService, signedTestRoot, []data.PublicKey{origRootKey}, 1)
+	err = signed.Sign(cryptoService, signedTestRoot, []data.PublicKey{origRootKey}, 1, nil)
 	require.NoError(t, err)
 
 	// This call to ValidateRoot will succeed since we are using a valid PEM

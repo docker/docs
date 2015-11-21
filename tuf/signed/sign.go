@@ -19,21 +19,25 @@ import (
 	"github.com/docker/notary/tuf/utils"
 )
 
-// Sign takes a data.Signed and keys, calculates and adds at least minSignature
-// signatures to the data.Signed
+// Sign takes a data.Signed and keys, calculates and adds at least
+// minPrimarySignature signatures using primaryKeys and any possible
+// signatures using optionalKeys to the data.Signed
 // N.B. All public keys for a role should be passed so that this function
 //      can correctly clean up signatures that are no longer valid.
-func Sign(service CryptoService, s *data.Signed, keys []data.PublicKey, minSignatures int) error {
-	logrus.Debugf("sign called with %d/%d keys", minSignatures, len(keys))
+func Sign(service CryptoService, s *data.Signed, primaryKeys []data.PublicKey,
+	minSignatures int, optionalKeys []data.PublicKey) error {
+
+	logrus.Debugf("sign called with %d/%d required + %d optional keys",
+		minSignatures, len(primaryKeys), len(optionalKeys))
 	signatures := make([]data.Signature, 0, len(s.Signatures)+1)
 	signingKeyIDs := make(map[string]struct{})
 	tufIDs := make(map[string]data.PublicKey)
-	ids := make([]string, 0, len(keys))
+	ids := make([]string, 0, len(primaryKeys))
 
 	privKeys := make(map[string]data.PrivateKey)
 
 	// Get all the private key objects related to the public keys
-	for _, key := range keys {
+	for _, key := range primaryKeys {
 		canonicalID, err := utils.CanonicalKeyID(key)
 		ids = append(ids, canonicalID)
 		tufIDs[key.ID()] = key
@@ -51,6 +55,22 @@ func Sign(service CryptoService, s *data.Signed, keys []data.PublicKey, minSigna
 	if len(privKeys) < minSignatures {
 		return ErrInsufficientSignatures{FoundKeys: len(privKeys),
 			NeededKeys: minSignatures, KeyIDs: ids}
+	}
+
+	for _, key := range optionalKeys {
+		if _, ok := privKeys[key.ID()]; ok {
+			continue
+		}
+		tufIDs[key.ID()] = key
+		canonicalID, err := utils.CanonicalKeyID(key)
+		if err != nil {
+			return err
+		}
+		k, _, err := service.GetPrivateKey(canonicalID)
+		if err != nil {
+			continue
+		}
+		privKeys[key.ID()] = k
 	}
 
 	// Do signing and generate list of signatures
