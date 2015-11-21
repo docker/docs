@@ -15,6 +15,7 @@ import (
 	"crypto/rand"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/utils"
 )
@@ -32,21 +33,24 @@ func Sign(service CryptoService, s *data.Signed, primaryKeys []data.PublicKey,
 	signatures := make([]data.Signature, 0, len(s.Signatures)+1)
 	signingKeyIDs := make(map[string]struct{})
 	tufIDs := make(map[string]data.PublicKey)
-	ids := make([]string, 0, len(primaryKeys))
 
 	privKeys := make(map[string]data.PrivateKey)
 
 	// Get all the private key objects related to the public keys
+	missingKeyIDs := []string{}
 	for _, key := range primaryKeys {
 		canonicalID, err := utils.CanonicalKeyID(key)
-		ids = append(ids, canonicalID)
 		tufIDs[key.ID()] = key
 		if err != nil {
-			continue
+			return err
 		}
 		k, _, err := service.GetPrivateKey(canonicalID)
 		if err != nil {
-			continue
+			if _, ok := err.(trustmanager.ErrKeyNotFound); ok {
+				missingKeyIDs = append(missingKeyIDs, canonicalID)
+				continue
+			}
+			return err
 		}
 		privKeys[key.ID()] = k
 	}
@@ -54,7 +58,7 @@ func Sign(service CryptoService, s *data.Signed, primaryKeys []data.PublicKey,
 	// Check to ensure we have enough signing keys
 	if len(privKeys) < minSignatures {
 		return ErrInsufficientSignatures{FoundKeys: len(privKeys),
-			NeededKeys: minSignatures, KeyIDs: ids}
+			NeededKeys: minSignatures, MissingKeyIDs: missingKeyIDs}
 	}
 
 	for _, key := range optionalKeys {
@@ -78,7 +82,7 @@ func Sign(service CryptoService, s *data.Signed, primaryKeys []data.PublicKey,
 		sig, err := pk.Sign(rand.Reader, *s.Signed, nil)
 		if err != nil {
 			logrus.Debugf("Failed to sign with key: %s. Reason: %v", keyID, err)
-			continue
+			return err
 		}
 		signingKeyIDs[keyID] = struct{}{}
 		signatures = append(signatures, data.Signature{
@@ -86,12 +90,6 @@ func Sign(service CryptoService, s *data.Signed, primaryKeys []data.PublicKey,
 			Method:    pk.SignatureAlgorithm(),
 			Signature: sig[:],
 		})
-	}
-
-	// Check we produced enough signatures
-	if len(signatures) < minSignatures {
-		return ErrInsufficientSignatures{FoundKeys: len(signatures),
-			NeededKeys: minSignatures, KeyIDs: ids}
 	}
 
 	for _, sig := range s.Signatures {
