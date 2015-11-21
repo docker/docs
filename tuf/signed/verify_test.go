@@ -23,7 +23,7 @@ func TestRoleNoKeys(t *testing.T) {
 	b, err := json.MarshalCanonical(meta)
 	require.NoError(t, err)
 	s := &data.Signed{Signed: (*json.RawMessage)(&b)}
-	Sign(cs, s, []data.PublicKey{k}, 1)
+	Sign(cs, s, []data.PublicKey{k}, 1, nil)
 	err = Verify(s, roleWithKeys, 1)
 	require.IsType(t, ErrRoleThreshold{}, err)
 }
@@ -40,7 +40,7 @@ func TestNotEnoughSigs(t *testing.T) {
 	b, err := json.MarshalCanonical(meta)
 	require.NoError(t, err)
 	s := &data.Signed{Signed: (*json.RawMessage)(&b)}
-	Sign(cs, s, []data.PublicKey{k}, 1)
+	Sign(cs, s, []data.PublicKey{k}, 1, nil)
 	err = Verify(s, roleWithKeys, 1)
 	require.IsType(t, ErrRoleThreshold{}, err)
 }
@@ -58,7 +58,7 @@ func TestMoreThanEnoughSigs(t *testing.T) {
 	b, err := json.MarshalCanonical(meta)
 	require.NoError(t, err)
 	s := &data.Signed{Signed: (*json.RawMessage)(&b)}
-	Sign(cs, s, []data.PublicKey{k1, k2}, 2)
+	Sign(cs, s, []data.PublicKey{k1, k2}, 2, nil)
 	require.Equal(t, 2, len(s.Signatures))
 
 	err = Verify(s, roleWithKeys, 1)
@@ -95,7 +95,7 @@ func TestDuplicateSigs(t *testing.T) {
 	b, err := json.MarshalCanonical(meta)
 	require.NoError(t, err)
 	s := &data.Signed{Signed: (*json.RawMessage)(&b)}
-	Sign(cs, s, []data.PublicKey{k}, 1)
+	Sign(cs, s, []data.PublicKey{k}, 1, nil)
 	s.Signatures = append(s.Signatures, s.Signatures[0])
 	err = Verify(s, roleWithKeys, 1)
 	require.IsType(t, ErrRoleThreshold{}, err)
@@ -114,7 +114,7 @@ func TestUnknownKeyBelowThreshold(t *testing.T) {
 	b, err := json.MarshalCanonical(meta)
 	require.NoError(t, err)
 	s := &data.Signed{Signed: (*json.RawMessage)(&b)}
-	Sign(cs, s, []data.PublicKey{k, unknown}, 2)
+	Sign(cs, s, []data.PublicKey{k, unknown}, 2, nil)
 	s.Signatures = append(s.Signatures)
 	err = Verify(s, roleWithKeys, 1)
 	require.IsType(t, ErrRoleThreshold{}, err)
@@ -189,7 +189,7 @@ func Test(t *testing.T) {
 			b, err := json.MarshalCanonical(meta)
 			require.NoError(t, err)
 			s := &data.Signed{Signed: (*json.RawMessage)(&b)}
-			Sign(cryptoService, s, []data.PublicKey{k}, 1)
+			Sign(cryptoService, s, []data.PublicKey{k}, 1, nil)
 			run.s = s
 		}
 		if run.mut != nil {
