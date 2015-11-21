@@ -133,7 +133,6 @@ If you choose this option, create your volumes prior to installing Orca. The vol
 | `orca-swarm-node-certs` | The Swarm certificates for the current node (repeated on every node in the cluster). |
 | `orca-swarm-kv-certs`   | The Swarm KV client certificates for the current node (repeated on every node in the cluster). |
 | `orca-swarm-controller-certs` | The Orca Controller Swarm client certificates for the current node. |
-| `orca-config`           | Orca server configuration settings (ID, locations of key services).                  |
 | `orca-kv`               | Key value store persistence.                                                         |
 
 
