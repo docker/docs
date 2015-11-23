@@ -52,8 +52,8 @@ func TestNewCertificate(t *testing.T) {
 	cert, err := NewCertificate("docker.com/alpine", startTime, endTime)
 	assert.NoError(t, err)
 	assert.Equal(t, cert.Subject.CommonName, "docker.com/alpine")
-	assert.True(t, time.Now().Before(cert.NotAfter))
-	assert.True(t, time.Now().AddDate(10, 0, 1).After(cert.NotAfter))
+	assert.Equal(t, cert.NotBefore, startTime)
+	assert.Equal(t, cert.NotAfter, endTime)
 }
 
 func TestKeyOperations(t *testing.T) {
