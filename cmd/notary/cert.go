@@ -2,16 +2,10 @@ package main
 
 import (
 	"crypto/x509"
-	"fmt"
-	"io"
-	"math"
 	"os"
-	"sort"
-	"time"
 
 	"github.com/docker/notary/certs"
 	"github.com/docker/notary/trustmanager"
-	"github.com/olekukonko/tablewriter"
 
 	"github.com/spf13/cobra"
 )
@@ -133,67 +127,4 @@ func certList(cmd *cobra.Command, args []string) {
 	cmd.Println("")
 	prettyPrintCerts(trustedCerts, cmd.Out())
 	cmd.Println("")
-}
-
-func printCert(cmd *cobra.Command, cert *x509.Certificate) {
-	timeDifference := cert.NotAfter.Sub(time.Now())
-	certID, err := trustmanager.FingerprintCert(cert)
-	if err != nil {
-		fatalf("Could not fingerprint certificate: %v", err)
-	}
-
-	cmd.Printf("%s %s (expires in: %v days)\n", cert.Subject.CommonName, certID, math.Floor(timeDifference.Hours()/24))
-}
-
-// cert by repo name then expiry time.  Don't bother sorting by fingerprint.
-type certSorter []*x509.Certificate
-
-func (t certSorter) Len() int      { return len(t) }
-func (t certSorter) Swap(i, j int) { t[i], t[j] = t[j], t[i] }
-func (t certSorter) Less(i, j int) bool {
-	if t[i].Subject.CommonName < t[j].Subject.CommonName {
-		return true
-	} else if t[i].Subject.CommonName > t[j].Subject.CommonName {
-		return false
-	}
-
-	return t[i].NotAfter.Before(t[j].NotAfter)
-}
-
-// Given a list of Ceritifcates in order of listing preference, pretty-prints
-// the cert common name, fingerprint, and expiry
-func prettyPrintCerts(certs []*x509.Certificate, writer io.Writer) {
-	if len(certs) == 0 {
-		writer.Write([]byte("\nNo trusted root certificates present.\n\n"))
-		return
-	}
-
-	sort.Stable(certSorter(certs))
-
-	table := tablewriter.NewWriter(writer)
-	table.SetHeader([]string{
-		"GUN", "Fingerprint of Trusted Root Certificate", "Expires In"})
-	table.SetBorder(false)
-	table.SetColumnSeparator(" ")
-	table.SetAlignment(tablewriter.ALIGN_LEFT)
-	table.SetCenterSeparator("-")
-	table.SetAutoWrapText(false)
-
-	for _, c := range certs {
-		days := math.Floor(c.NotAfter.Sub(time.Now()).Hours() / 24)
-		expiryString := "< 1 day"
-		if days == 1 {
-			expiryString = "1 day"
-		} else if days > 1 {
-			expiryString = fmt.Sprintf("%d days", int(days))
-		}
-
-		certID, err := trustmanager.FingerprintCert(c)
-		if err != nil {
-			fatalf("Could not fingerprint certificate: %v", err)
-		}
-
-		table.Append([]string{c.Subject.CommonName, certID, expiryString})
-	}
-	table.Render()
 }
