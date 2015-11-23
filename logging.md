@@ -1,17 +1,18 @@
 # Remote logging configuration
 
-To setup remote logging in Orca you must edit the KV store directly.
+To setup remote logging in Orca you must edit the API directly.
 You'll need to run explicit curl commands described below.  This
-assumes you've already set up your environment per the [KV Store
-instructions](kv_store.md)
+assumes you've already set up your environment with a downloaded
+bundle.
 
 ## Display the current settings
 ```sh
+export ORCA_URL="https://$(echo $DOCKER_HOST | cut -f3 -d/ )"
 curl -s \
     --cert ${DOCKER_CERT_PATH}/cert.pem \
     --key ${DOCKER_CERT_PATH}/key.pem \
     --cacert ${DOCKER_CERT_PATH}/ca.pem \
-    ${KV_URL}/v2/keys/orca/v1/config/logging | jq "."
+    ${ORCA_URL}/api/config/logging | jq "."
 ```
 
 ## Setup remote logging
@@ -20,22 +21,21 @@ curl -s \
     --cert ${DOCKER_CERT_PATH}/cert.pem \
     --key ${DOCKER_CERT_PATH}/key.pem \
     --cacert ${DOCKER_CERT_PATH}/ca.pem \
-    -XPUT -d value='{"host":"mylogger:514","protocol":"tcp","level":"INFO"}' \
-    ${KV_URL}/v2/keys/orca/v1/config/logging | jq "."
+    -XPOST -d '{"host":"mylogger:514","protocol":"tcp","level":"INFO"}' \
+    ${ORCA_URL}/api/config/logging | jq "."
 ```
-
 
 ## Stopping remote logging
 
-If you're simply changing the target, use the "set" example above with a new host.  If you no longer want to send logging
-to any remote syslogger, use the following:
+If you set the host to an empty string, remote logging will be disabled.
 
 ```sh
 curl -s \
     --cert ${DOCKER_CERT_PATH}/cert.pem \
     --key ${DOCKER_CERT_PATH}/key.pem \
     --cacert ${DOCKER_CERT_PATH}/ca.pem \
-    -XDELETE ${KV_URL}/v2/keys/orca/v1/config/logging | jq "."
+    -XPOST -d '{"host":"","level":"DEBUG"}' \
+    ${ORCA_URL}/api/config/logging | jq "."
 ```
 
 # Setting up an ELK stack

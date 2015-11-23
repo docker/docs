@@ -22,7 +22,7 @@ speed things up.  Each suite will run in parallel, and use a unique
 machine.
 
 ```bash
-export MACHINE_CREATE_FLAGS="--kvm-memory 2048 --kvm-disk-size 5000 --kvm-cpu-count 2"
+export MACHINE_CREATE_FLAGS="--kvm-memory 2048 --kvm-disk-size 8000 --kvm-cpu-count 2"
 export MACHINE_DRIVER=kvm
 PARALLEL_COUNT=3
 
@@ -130,7 +130,7 @@ definitely need more than 10 minutes on the go test timeout.
 
 ### Set the AWS environment variables from lastpass here...
 
-export MACHINE_CREATE_FLAGS="--amazonec2-request-spot-instance --amazonec2-spot-price 0.05 --amazonec2-instance-type m1.small --amazonec2-ami ami-ed8eb7dd --engine-install-url https://get.docker.com --amazonec2-ssh-user admin"
+export MACHINE_CREATE_FLAGS="--amazonec2-request-spot-instance --amazonec2-spot-price 0.05 --amazonec2-instance-type m1.medium --amazonec2-ami ami-ed8eb7dd --engine-install-url https://get.docker.com --amazonec2-ssh-user admin"
 export MACHINE_DRIVER=amazonec2
 ```
 
@@ -140,7 +140,7 @@ export MACHINE_DRIVER=amazonec2
 
 ### Set the AWS environment variables from lastpass here...
 
-export MACHINE_CREATE_FLAGS="--amazonec2-instance-type m1.small --amazonec2-ami ami-ed8eb7dd --engine-install-url https://get.docker.com --amazonec2-ssh-user admin"
+export MACHINE_CREATE_FLAGS="--amazonec2-instance-type m1.medium --amazonec2-ami ami-ed8eb7dd --engine-install-url https://get.docker.com --amazonec2-ssh-user admin"
 export MACHINE_DRIVER=amazonec2
 ```
 
