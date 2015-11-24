@@ -126,9 +126,15 @@ func getTrustService(configuration *viper.Viper,
 	healthRegister func(string, func() error, time.Duration)) (
 	signed.CryptoService, string, error) {
 
-	if configuration.GetString("trust_service.type") != "remote" {
-		logrus.Info("Using local signing service")
+	switch configuration.GetString("trust_service.type") {
+	case "local":
+		logrus.Info("Using local signing service, which requires ED25519. " +
+			"Ignoring all other trust_service parameters, including keyAlgorithm")
 		return signed.NewEd25519(), data.ED25519Key, nil
+	case "remote":
+	default:
+		return nil, "", fmt.Errorf(
+			"must specify either a \"local\" or \"remote\" type for trust_service")
 	}
 
 	keyAlgo := configuration.GetString("trust_service.key_algorithm")

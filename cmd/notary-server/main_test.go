@@ -93,13 +93,11 @@ func TestGetAddrAndTLSConfigSkipClientTLS(t *testing.T) {
 	assert.Nil(t, tlsConf.ClientCAs)
 }
 
-// Various configurations that result in a local trust service being returned,
-// with an ED22519 algorithm no matter what was specified.  No health function
-// is configured.
-func TestGetLocalTrustService(t *testing.T) {
-	localConfigs := []string{
+// If neither "remote" nor "local" is passed for "trust_service.type", an
+// error is returned.
+func TestGetInvalidTrustService(t *testing.T) {
+	invalids := []string{
 		`{"trust_service": {"type": "bruhaha", "key_algorithm": "rsa"}}`,
-		`{"trust_service": {"type": "local", "key_algorithm": "rsa"}}`,
 		`{}`,
 	}
 	var registerCalled = 0
@@ -107,20 +105,40 @@ func TestGetLocalTrustService(t *testing.T) {
 		registerCalled++
 	}
 
-	for _, config := range localConfigs {
-		trust, algo, err := getTrustService(configure(config),
+	for _, config := range invalids {
+		_, _, err := getTrustService(configure(config),
 			client.NewNotarySigner, fakeRegister)
-		assert.NoError(t, err)
-		assert.IsType(t, &signed.Ed25519{}, trust)
-		assert.Equal(t, data.ED25519Key, algo)
+		assert.Error(t, err)
+		assert.Contains(t, err.Error(),
+			"must specify either a \"local\" or \"remote\" type for trust_service")
 	}
 	// no health function ever registered
 	assert.Equal(t, 0, registerCalled)
 }
 
-// Various configurations that result in a local trust service being returned,
-// with an ED22519 algorithm no matter what was specified.  No health function
-// is configured.
+// If a local trust service is specified, a local trust service will be used
+// with an ED22519 algorithm no matter what algorithm was specified.  No health
+// function is configured.
+func TestGetLocalTrustService(t *testing.T) {
+	localConfig := `{"trust_service": {"type": "local", "key_algorithm": "meh"}}`
+
+	var registerCalled = 0
+	var fakeRegister = func(_ string, _ func() error, _ time.Duration) {
+		registerCalled++
+	}
+
+	trust, algo, err := getTrustService(configure(localConfig),
+		client.NewNotarySigner, fakeRegister)
+	assert.NoError(t, err)
+	assert.IsType(t, &signed.Ed25519{}, trust)
+	assert.Equal(t, data.ED25519Key, algo)
+
+	// no health function ever registered
+	assert.Equal(t, 0, registerCalled)
+}
+
+// Invalid key algorithms result in an error if a remote trust service was
+// specified.
 func TestGetTrustServiceInvalidKeyAlgorithm(t *testing.T) {
 	configTemplate := `
 	{
