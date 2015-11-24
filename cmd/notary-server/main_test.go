@@ -10,6 +10,7 @@ import (
 	"testing"
 
 	"github.com/docker/notary/server/storage"
+	"github.com/docker/notary/utils"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 )
@@ -172,18 +173,19 @@ func TestGetStoreDBStore(t *testing.T) {
 	tmpFile.Close()
 	defer os.Remove(tmpFile.Name())
 
-	config := fmt.Sprintf(`{"storage": {"backend": "sqlite3", "db_url": "%s"}}`,
-		tmpFile.Name())
+	config := fmt.Sprintf(`{"storage": {"backend": "%s", "db_url": "%s"}}`,
+		utils.SqliteBackend, tmpFile.Name())
 
-	store, err := getStore(configure(config), []string{"sqlite3"})
+	store, err := getStore(configure(config), []string{utils.SqliteBackend})
 	assert.NoError(t, err)
 	_, ok := store.(*storage.SQLStorage)
 	assert.True(t, ok)
 }
 
 func TestGetMemoryStore(t *testing.T) {
-	config := fmt.Sprintf(`{"storage": {}}`)
-	store, err := getStore(configure(config), []string{"mysql"})
+	config := fmt.Sprintf(`{"storage": {"backend": "%s"}}`, utils.MemoryBackend)
+	store, err := getStore(configure(config),
+		[]string{utils.MySQLBackend, utils.MemoryBackend})
 	assert.NoError(t, err)
 	_, ok := store.(*storage.MemStorage)
 	assert.True(t, ok)

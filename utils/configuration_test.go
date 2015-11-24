@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"fmt"
 	"os"
-	"strings"
 	"testing"
 
 	"github.com/Sirupsen/logrus"
@@ -146,38 +145,54 @@ func TestParseBugsnagWithEnvironmentVariables(t *testing.T) {
 	assert.Equal(t, expected, *bugconf)
 }
 
-// If the storage parameters are invalid, an error is returned
-func TestParseInvalidStorage(t *testing.T) {
+// If the storage backend is invalid or not provided, an error is returned.
+func TestParseInvalidStorageBackend(t *testing.T) {
 	invalids := []string{
 		`{"storage": {"backend": "postgres", "db_url": "1234"}}`,
 		`{"storage": {"db_url": "12345"}}`,
-		`{"storage": {"backend": "mysql"}}`,
-		`{"storage": {"backend": "sqlite3", "db_url": ""}}`,
+		`{"storage": {}}`,
+		`{}`,
 	}
 	for _, configJSON := range invalids {
-		_, err := ParseStorage(configure(configJSON), []string{"mysql", "sqlite3"})
+		_, err := ParseStorage(configure(configJSON),
+			[]string{MySQLBackend, SqliteBackend})
 		assert.Error(t, err, fmt.Sprintf("'%s' should be an error", configJSON))
-		if strings.Contains(configJSON, "mysql") || strings.Contains(configJSON, "sqlite3") {
+		assert.Contains(t, err.Error(),
+			"must specify one of these supported backends: mysql, sqlite3")
+	}
+}
+
+// If there is no DB url for non-memory backends, an error is returned.
+func TestParseInvalidStorageNoDBSource(t *testing.T) {
+	invalids := []string{
+		`{"storage": {"backend": "%s"}}`,
+		`{"storage": {"backend": "%s", "db_url": ""}}`,
+	}
+	for _, backend := range []string{MySQLBackend, SqliteBackend} {
+		for _, configJSONFmt := range invalids {
+			configJSON := fmt.Sprintf(configJSONFmt, backend)
+			_, err := ParseStorage(configure(configJSON),
+				[]string{MySQLBackend, SqliteBackend})
+			assert.Error(t, err, fmt.Sprintf("'%s' should be an error", configJSON))
 			assert.Contains(t, err.Error(),
-				"must provide a non-empty database source")
-		} else {
-			assert.Contains(t, err.Error(),
-				"must specify one of these supported backends: mysql, sqlite3")
+				fmt.Sprintf("must provide a non-empty database source for %s", backend))
 		}
 	}
 }
 
-// If there is no storage, a nil pointer is returned
-func TestParseNoStorage(t *testing.T) {
-	empties := []string{`{}`, `{"storage": {}}`}
-	for _, configJSON := range empties {
-		store, err := ParseStorage(configure(configJSON), []string{"mysql"})
-		assert.NoError(t, err)
-		assert.Nil(t, store)
-	}
+// If a memory storage backend is specified, no DB URL is necessary for a
+// successful storage parse.
+func TestParseStorageMemoryStore(t *testing.T) {
+	config := configure(`{"storage": {"backend": "MEMORY"}}`)
+	expected := Storage{Backend: MemoryBackend}
+
+	store, err := ParseStorage(config, []string{MySQLBackend, MemoryBackend})
+	assert.NoError(t, err)
+	assert.Equal(t, expected, *store)
 }
 
-func TestParseStorage(t *testing.T) {
+// A supported backend with DB source will be successfully parsed.
+func TestParseStorageDBStore(t *testing.T) {
 	config := configure(`{
 		"storage": {
 			"backend": "MySQL",

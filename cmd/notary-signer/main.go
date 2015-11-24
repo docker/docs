@@ -22,9 +22,11 @@ import (
 
 	"github.com/docker/distribution/health"
 	"github.com/docker/notary/cryptoservice"
+	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/signer"
 	"github.com/docker/notary/signer/api"
 	"github.com/docker/notary/signer/keydbstore"
+	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/utils"
 	"github.com/docker/notary/version"
@@ -75,43 +77,43 @@ func setUpCryptoservices(configuration *viper.Viper, allowedBackends []string) (
 		return nil, err
 	}
 
-	if storeConfig == nil {
-		return nil, fmt.Errorf("DB storage configuration is mandatory")
-	}
+	var keyStore trustmanager.KeyStore
+	if storeConfig.Backend == utils.MemoryBackend {
+		keyStore = trustmanager.NewKeyMemoryStore(
+			passphrase.ConstantRetriever("memory-db-ignore"))
+	} else {
+		defaultAlias := configuration.GetString("storage.default_alias")
+		if defaultAlias == "" {
+			// backwards compatibility - support this environment variable
+			defaultAlias = configuration.GetString(defaultAliasEnv)
+		}
 
-	dbSQL, err := sql.Open(storeConfig.Backend, storeConfig.Source)
-	if err != nil {
-		return nil, fmt.Errorf("failed to open the %s database: %s, %v",
-			storeConfig.Backend, storeConfig.Source, err)
-	}
-	logrus.Debugf("Using %s DB: %s", storeConfig.Backend, storeConfig.Source)
+		if defaultAlias == "" {
+			return nil, fmt.Errorf("must provide a default alias for the key DB")
+		}
+		logrus.Debug("Default Alias: ", defaultAlias)
 
-	defaultAlias := configuration.GetString("storage.default_alias")
-	if defaultAlias == "" {
-		// backwards compatibility - support this environment variable
-		defaultAlias = configuration.GetString(defaultAliasEnv)
-	}
+		dbSQL, err := sql.Open(storeConfig.Backend, storeConfig.Source)
+		if err != nil {
+			return nil, fmt.Errorf("failed to open the %s database: %s, %v",
+				storeConfig.Backend, storeConfig.Source, err)
+		}
+		logrus.Debugf("Using %s DB: %s", storeConfig.Backend, storeConfig.Source)
 
-	if defaultAlias == "" {
-		return nil, fmt.Errorf("must provide a default alias for the key DB")
-	}
-	logrus.Debug("Default Alias: ", defaultAlias)
+		keyStore, err := keydbstore.NewKeyDBStore(
+			passphraseRetriever, defaultAlias, storeConfig.Backend, dbSQL)
+		if err != nil {
+			return nil, fmt.Errorf("failed to create a new keydbstore: %v", err)
+		}
 
-	keyStore, err := keydbstore.NewKeyDBStore(
-		passphraseRetriever, defaultAlias, storeConfig.Backend, dbSQL)
-	if err != nil {
-		return nil, fmt.Errorf("failed to create a new keydbstore: %v", err)
+		health.RegisterPeriodicFunc(
+			"DB operational", keyStore.HealthCheck, time.Second*60)
 	}
-
-	health.RegisterPeriodicFunc(
-		"DB operational", keyStore.HealthCheck, time.Second*60)
 
 	cryptoService := cryptoservice.NewCryptoService("", keyStore)
-
 	cryptoServices := make(signer.CryptoServiceIndex)
 	cryptoServices[data.ED25519Key] = cryptoService
 	cryptoServices[data.ECDSAKey] = cryptoService
-
 	return cryptoServices, nil
 }
 
@@ -220,7 +222,8 @@ func main() {
 	}
 
 	// setup the cryptoservices
-	cryptoServices, err := setUpCryptoservices(mainViper, []string{"mysql"})
+	cryptoServices, err := setUpCryptoservices(mainViper,
+		[]string{utils.MySQLBackend, utils.MemoryBackend})
 	if err != nil {
 		logrus.Fatal(err.Error())
 	}

@@ -13,6 +13,13 @@ import (
 	"github.com/spf13/viper"
 )
 
+// Specifies the list of recognized backends
+const (
+	MemoryBackend = "memory"
+	MySQLBackend  = "mysql"
+	SqliteBackend = "sqlite3"
+)
+
 // Storage is a configuration about what storage backend a server should use
 type Storage struct {
 	Backend string
@@ -77,29 +84,37 @@ func ParseLogLevel(configuration *viper.Viper, defaultLevel logrus.Level) (
 }
 
 // ParseStorage tries to parse out Storage from a Viper.  If backend and
-// URL are not provided, returns a nil pointer.
-func ParseStorage(configuration *viper.Viper, allowedBackeneds []string) (*Storage, error) {
+// URL are not provided, returns a nil pointer.  Storage is required (if
+// a backend is not provided, an error will be returned.)
+func ParseStorage(configuration *viper.Viper, allowedBackends []string) (*Storage, error) {
 	store := Storage{
 		Backend: configuration.GetString("storage.backend"),
 		Source:  configuration.GetString("storage.db_url"),
 	}
-	if store.Backend == "" && store.Source == "" {
-		return nil, nil
-	}
 
-	if store.Source == "" {
-		return nil, fmt.Errorf("must provide a non-empty database source")
-	}
+	supported := false
 	store.Backend = strings.ToLower(store.Backend)
-	for _, backend := range allowedBackeneds {
+	for _, backend := range allowedBackends {
 		if backend == store.Backend {
-			return &store, nil
+			supported = true
+			break
 		}
-
 	}
-	return nil, fmt.Errorf(
-		"must specify one of these supported backends: %s",
-		strings.Join(allowedBackeneds, ", "))
+
+	if !supported {
+		return nil, fmt.Errorf(
+			"must specify one of these supported backends: %s",
+			strings.Join(allowedBackends, ", "))
+	}
+
+	if store.Backend == MemoryBackend {
+		return &Storage{Backend: MemoryBackend}, nil
+	}
+	if store.Source == "" {
+		return nil, fmt.Errorf(
+			"must provide a non-empty database source for %s", store.Backend)
+	}
+	return &store, nil
 }
 
 // ParseBugsnag tries to parse out a Bugsnag Configuration from a Viper.
