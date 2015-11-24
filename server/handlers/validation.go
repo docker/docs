@@ -382,7 +382,11 @@ func checkRoot(oldRoot, newRoot *data.SignedRoot, timestampKey data.PublicKey) e
 		if !ok {
 			return fmt.Errorf("missing required %s role from root", r)
 		}
-		if role.Threshold < 1 {
+		// According to the TUF spec, any role may have more than one signing
+		// key and require a threshold signature.  However, notary-server
+		// creates the timestamp, and there is only ever one, so a threshold
+		// greater than one would just always fail validation
+		if (r == timestampRole && role.Threshold != 1) || role.Threshold < 1 {
 			return fmt.Errorf("%s role has invalid threshold", r)
 		}
 		if len(role.KeyIDs) < role.Threshold {
