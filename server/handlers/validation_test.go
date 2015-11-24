@@ -32,37 +32,49 @@ func copyTimestampKey(t *testing.T, fromKeyDB *keys.KeyDB,
 	assert.NoError(t, err)
 }
 
+// Returns a mapping of role name to `MetaUpdate` objects
+func getUpdates(r, tg, sn, ts *data.Signed) (
+	root, targets, snapshot, timestamp storage.MetaUpdate, err error) {
+
+	rs, tgs, sns, tss, err := testutils.Serialize(r, tg, sn, ts)
+	if err != nil {
+		return
+	}
+
+	root = storage.MetaUpdate{
+		Role:    data.CanonicalRootRole,
+		Version: 1,
+		Data:    rs,
+	}
+	targets = storage.MetaUpdate{
+		Role:    data.CanonicalTargetsRole,
+		Version: 1,
+		Data:    tgs,
+	}
+	snapshot = storage.MetaUpdate{
+		Role:    data.CanonicalSnapshotRole,
+		Version: 1,
+		Data:    sns,
+	}
+	timestamp = storage.MetaUpdate{
+		Role:    data.CanonicalTimestampRole,
+		Version: 1,
+		Data:    tss,
+	}
+	return
+}
+
 func TestValidateEmptyNew(t *testing.T) {
 	kdb, repo, _ := testutils.EmptyRepo()
 	store := storage.NewMemStorage()
 
 	r, tg, sn, ts, err := testutils.Sign(repo)
 	assert.NoError(t, err)
-	root, targets, snapshot, timestamp, err := testutils.Serialize(r, tg, sn, ts)
+	root, targets, snapshot, timestamp, err := getUpdates(r, tg, sn, ts)
 	assert.NoError(t, err)
 
-	updates := []storage.MetaUpdate{
-		{
-			Role:    "root",
-			Version: 1,
-			Data:    root,
-		},
-		{
-			Role:    "targets",
-			Version: 1,
-			Data:    targets,
-		},
-		{
-			Role:    "snapshot",
-			Version: 1,
-			Data:    snapshot,
-		},
-		{
-			Role:    "timestamp",
-			Version: 1,
-			Data:    timestamp,
-		},
-	}
+	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
+
 	copyTimestampKey(t, kdb, store, "testGUN")
 	err = validateUpdate("testGUN", updates, store)
 	assert.NoError(t, err)
@@ -74,35 +86,12 @@ func TestValidateNoNewRoot(t *testing.T) {
 
 	r, tg, sn, ts, err := testutils.Sign(repo)
 	assert.NoError(t, err)
-	root, targets, snapshot, timestamp, err := testutils.Serialize(r, tg, sn, ts)
+	root, targets, snapshot, timestamp, err := getUpdates(r, tg, sn, ts)
 	assert.NoError(t, err)
 
-	store.UpdateCurrent(
-		"testGUN",
-		storage.MetaUpdate{
-			Role:    "root",
-			Version: 1,
-			Data:    root,
-		},
-	)
+	store.UpdateCurrent("testGUN", root)
+	updates := []storage.MetaUpdate{targets, snapshot, timestamp}
 
-	updates := []storage.MetaUpdate{
-		{
-			Role:    "targets",
-			Version: 1,
-			Data:    targets,
-		},
-		{
-			Role:    "snapshot",
-			Version: 1,
-			Data:    snapshot,
-		},
-		{
-			Role:    "timestamp",
-			Version: 1,
-			Data:    timestamp,
-		},
-	}
 	copyTimestampKey(t, kdb, store, "testGUN")
 	err = validateUpdate("testGUN", updates, store)
 	assert.NoError(t, err)
@@ -114,35 +103,12 @@ func TestValidateNoNewTargets(t *testing.T) {
 
 	r, tg, sn, ts, err := testutils.Sign(repo)
 	assert.NoError(t, err)
-	root, targets, snapshot, timestamp, err := testutils.Serialize(r, tg, sn, ts)
+	root, targets, snapshot, timestamp, err := getUpdates(r, tg, sn, ts)
 	assert.NoError(t, err)
 
-	store.UpdateCurrent(
-		"testGUN",
-		storage.MetaUpdate{
-			Role:    "targets",
-			Version: 1,
-			Data:    targets,
-		},
-	)
+	store.UpdateCurrent("testGUN", targets)
+	updates := []storage.MetaUpdate{root, snapshot, timestamp}
 
-	updates := []storage.MetaUpdate{
-		{
-			Role:    "root",
-			Version: 1,
-			Data:    root,
-		},
-		{
-			Role:    "snapshot",
-			Version: 1,
-			Data:    snapshot,
-		},
-		{
-			Role:    "timestamp",
-			Version: 1,
-			Data:    timestamp,
-		},
-	}
 	copyTimestampKey(t, kdb, store, "testGUN")
 	err = validateUpdate("testGUN", updates, store)
 	assert.NoError(t, err)
@@ -154,33 +120,14 @@ func TestValidateOnlySnapshot(t *testing.T) {
 
 	r, tg, sn, ts, err := testutils.Sign(repo)
 	assert.NoError(t, err)
-	root, targets, snapshot, _, err := testutils.Serialize(r, tg, sn, ts)
+	root, targets, snapshot, _, err := getUpdates(r, tg, sn, ts)
 	assert.NoError(t, err)
 
-	store.UpdateCurrent(
-		"testGUN",
-		storage.MetaUpdate{
-			Role:    "root",
-			Version: 1,
-			Data:    root,
-		},
-	)
-	store.UpdateCurrent(
-		"testGUN",
-		storage.MetaUpdate{
-			Role:    "targets",
-			Version: 1,
-			Data:    targets,
-		},
-	)
+	store.UpdateCurrent("testGUN", root)
+	store.UpdateCurrent("testGUN", targets)
 
-	updates := []storage.MetaUpdate{
-		{
-			Role:    "snapshot",
-			Version: 1,
-			Data:    snapshot,
-		},
-	}
+	updates := []storage.MetaUpdate{snapshot}
+
 	copyTimestampKey(t, kdb, store, "testGUN")
 	err = validateUpdate("testGUN", updates, store)
 	assert.NoError(t, err)
@@ -192,40 +139,12 @@ func TestValidateOldRoot(t *testing.T) {
 
 	r, tg, sn, ts, err := testutils.Sign(repo)
 	assert.NoError(t, err)
-	root, targets, snapshot, timestamp, err := testutils.Serialize(r, tg, sn, ts)
+	root, targets, snapshot, timestamp, err := getUpdates(r, tg, sn, ts)
 	assert.NoError(t, err)
 
-	store.UpdateCurrent(
-		"testGUN",
-		storage.MetaUpdate{
-			Role:    "root",
-			Version: 1,
-			Data:    root,
-		},
-	)
+	store.UpdateCurrent("testGUN", root)
+	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
 
-	updates := []storage.MetaUpdate{
-		{
-			Role:    "root",
-			Version: 1,
-			Data:    root,
-		},
-		{
-			Role:    "targets",
-			Version: 1,
-			Data:    targets,
-		},
-		{
-			Role:    "snapshot",
-			Version: 1,
-			Data:    snapshot,
-		},
-		{
-			Role:    "timestamp",
-			Version: 1,
-			Data:    timestamp,
-		},
-	}
 	copyTimestampKey(t, kdb, store, "testGUN")
 	err = validateUpdate("testGUN", updates, store)
 	assert.NoError(t, err)
@@ -237,17 +156,10 @@ func TestValidateRootRotation(t *testing.T) {
 
 	r, tg, sn, ts, err := testutils.Sign(repo)
 	assert.NoError(t, err)
-	root, targets, snapshot, timestamp, err := testutils.Serialize(r, tg, sn, ts)
+	root, targets, snapshot, timestamp, err := getUpdates(r, tg, sn, ts)
 	assert.NoError(t, err)
 
-	store.UpdateCurrent(
-		"testGUN",
-		storage.MetaUpdate{
-			Role:    "root",
-			Version: 1,
-			Data:    root,
-		},
-	)
+	store.UpdateCurrent("testGUN", root)
 
 	oldRootRole := repo.Root.Signed.Roles["root"]
 	oldRootKey := repo.Root.Signed.Keys[oldRootRole.KeyIDs[0]]
@@ -273,31 +185,10 @@ func TestValidateRootRotation(t *testing.T) {
 
 	sn, err = repo.SignSnapshot(data.DefaultExpires(data.CanonicalSnapshotRole))
 	assert.NoError(t, err)
-	root, targets, snapshot, timestamp, err = testutils.Serialize(r, tg, sn, ts)
+	root, targets, snapshot, timestamp, err = getUpdates(r, tg, sn, ts)
 	assert.NoError(t, err)
 
-	updates := []storage.MetaUpdate{
-		{
-			Role:    "root",
-			Version: 1,
-			Data:    root,
-		},
-		{
-			Role:    "targets",
-			Version: 1,
-			Data:    targets,
-		},
-		{
-			Role:    "snapshot",
-			Version: 1,
-			Data:    snapshot,
-		},
-		{
-			Role:    "timestamp",
-			Version: 1,
-			Data:    timestamp,
-		},
-	}
+	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
 
 	copyTimestampKey(t, kdb, store, "testGUN")
 	err = validateUpdate("testGUN", updates, store)
@@ -310,26 +201,10 @@ func TestValidateNoRoot(t *testing.T) {
 
 	r, tg, sn, ts, err := testutils.Sign(repo)
 	assert.NoError(t, err)
-	_, targets, snapshot, timestamp, err := testutils.Serialize(r, tg, sn, ts)
+	_, targets, snapshot, timestamp, err := getUpdates(r, tg, sn, ts)
 	assert.NoError(t, err)
 
-	updates := []storage.MetaUpdate{
-		{
-			Role:    "targets",
-			Version: 1,
-			Data:    targets,
-		},
-		{
-			Role:    "snapshot",
-			Version: 1,
-			Data:    snapshot,
-		},
-		{
-			Role:    "timestamp",
-			Version: 1,
-			Data:    timestamp,
-		},
-	}
+	updates := []storage.MetaUpdate{targets, snapshot, timestamp}
 
 	copyTimestampKey(t, kdb, store, "testGUN")
 	err = validateUpdate("testGUN", updates, store)
@@ -343,21 +218,10 @@ func TestValidateSnapshotMissing(t *testing.T) {
 
 	r, tg, sn, ts, err := testutils.Sign(repo)
 	assert.NoError(t, err)
-	root, targets, _, _, err := testutils.Serialize(r, tg, sn, ts)
+	root, targets, _, _, err := getUpdates(r, tg, sn, ts)
 	assert.NoError(t, err)
 
-	updates := []storage.MetaUpdate{
-		{
-			Role:    "root",
-			Version: 1,
-			Data:    root,
-		},
-		{
-			Role:    "targets",
-			Version: 1,
-			Data:    targets,
-		},
-	}
+	updates := []storage.MetaUpdate{root, targets}
 
 	copyTimestampKey(t, kdb, store, "testGUN")
 	err = validateUpdate("testGUN", updates, store)
@@ -373,27 +237,11 @@ func TestValidateRootNoTimestampKey(t *testing.T) {
 
 	r, tg, sn, ts, err := testutils.Sign(oldRepo)
 	assert.NoError(t, err)
-	root, targets, snapshot, _, err := testutils.Serialize(r, tg, sn, ts)
+	root, targets, snapshot, _, err := getUpdates(r, tg, sn, ts)
 	assert.NoError(t, err)
 
 	store := storage.NewMemStorage()
-	updates := []storage.MetaUpdate{
-		{
-			Role:    "root",
-			Version: 1,
-			Data:    root,
-		},
-		{
-			Role:    "targets",
-			Version: 1,
-			Data:    targets,
-		},
-		{
-			Role:    "snapshot",
-			Version: 1,
-			Data:    snapshot,
-		},
-	}
+	updates := []storage.MetaUpdate{root, targets, snapshot}
 
 	// sanity check - no timestamp keys for the GUN
 	_, _, err = store.GetTimestampKey("testGUN")
@@ -420,27 +268,11 @@ func TestValidateRootInvalidTimestampKey(t *testing.T) {
 
 	r, tg, sn, ts, err := testutils.Sign(oldRepo)
 	assert.NoError(t, err)
-	root, targets, snapshot, _, err := testutils.Serialize(r, tg, sn, ts)
+	root, targets, snapshot, _, err := getUpdates(r, tg, sn, ts)
 	assert.NoError(t, err)
 
 	store := storage.NewMemStorage()
-	updates := []storage.MetaUpdate{
-		{
-			Role:    "root",
-			Version: 1,
-			Data:    root,
-		},
-		{
-			Role:    "targets",
-			Version: 1,
-			Data:    targets,
-		},
-		{
-			Role:    "snapshot",
-			Version: 1,
-			Data:    snapshot,
-		},
-	}
+	updates := []storage.MetaUpdate{root, targets, snapshot}
 
 	key, err := trustmanager.GenerateECDSAKey(rand.Reader)
 	assert.NoError(t, err)
@@ -450,6 +282,50 @@ func TestValidateRootInvalidTimestampKey(t *testing.T) {
 	err = validateUpdate("testGUN", updates, store)
 	assert.Error(t, err)
 	assert.IsType(t, ErrBadRoot{}, err)
+}
+
+// If the timestamp role has a threshold > 1, validation fails.
+func TestValidateRootInvalidTimestampThreshold(t *testing.T) {
+	kdb, oldRepo, _ := testutils.EmptyRepo()
+	tsRole, ok := oldRepo.Root.Signed.Roles[data.CanonicalTimestampRole]
+	assert.True(t, ok)
+	tsRole.Threshold = 2
+
+	r, tg, sn, ts, err := testutils.Sign(oldRepo)
+	assert.NoError(t, err)
+	root, targets, snapshot, _, err := getUpdates(r, tg, sn, ts)
+	assert.NoError(t, err)
+
+	store := storage.NewMemStorage()
+	updates := []storage.MetaUpdate{root, targets, snapshot}
+
+	copyTimestampKey(t, kdb, store, "testGUN")
+	err = validateUpdate("testGUN", updates, store)
+	assert.Error(t, err)
+	assert.Contains(t, err.Error(), "timestamp role has invalid threshold")
+}
+
+// If any role has a threshold < 1, validation fails
+func TestValidateRootInvalidZeroThreshold(t *testing.T) {
+	for role := range data.ValidRoles {
+		kdb, oldRepo, _ := testutils.EmptyRepo()
+		tsRole, ok := oldRepo.Root.Signed.Roles[role]
+		assert.True(t, ok)
+		tsRole.Threshold = 0
+
+		r, tg, sn, ts, err := testutils.Sign(oldRepo)
+		assert.NoError(t, err)
+		root, targets, snapshot, _, err := getUpdates(r, tg, sn, ts)
+		assert.NoError(t, err)
+
+		store := storage.NewMemStorage()
+		updates := []storage.MetaUpdate{root, targets, snapshot}
+
+		copyTimestampKey(t, kdb, store, "testGUN")
+		err = validateUpdate("testGUN", updates, store)
+		assert.Error(t, err)
+		assert.Contains(t, err.Error(), "role has invalid threshold")
+	}
 }
 
 // ### Role missing negative tests ###
@@ -463,31 +339,10 @@ func TestValidateRootRoleMissing(t *testing.T) {
 
 	r, tg, sn, ts, err := testutils.Sign(repo)
 	assert.NoError(t, err)
-	root, targets, snapshot, timestamp, err := testutils.Serialize(r, tg, sn, ts)
+	root, targets, snapshot, timestamp, err := getUpdates(r, tg, sn, ts)
 	assert.NoError(t, err)
 
-	updates := []storage.MetaUpdate{
-		{
-			Role:    "root",
-			Version: 1,
-			Data:    root,
-		},
-		{
-			Role:    "targets",
-			Version: 1,
-			Data:    targets,
-		},
-		{
-			Role:    "snapshot",
-			Version: 1,
-			Data:    snapshot,
-		},
-		{
-			Role:    "timestamp",
-			Version: 1,
-			Data:    timestamp,
-		},
-	}
+	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
 
 	copyTimestampKey(t, kdb, store, "testGUN")
 	err = validateUpdate("testGUN", updates, store)
@@ -503,31 +358,10 @@ func TestValidateTargetsRoleMissing(t *testing.T) {
 
 	r, tg, sn, ts, err := testutils.Sign(repo)
 	assert.NoError(t, err)
-	root, targets, snapshot, timestamp, err := testutils.Serialize(r, tg, sn, ts)
+	root, targets, snapshot, timestamp, err := getUpdates(r, tg, sn, ts)
 	assert.NoError(t, err)
 
-	updates := []storage.MetaUpdate{
-		{
-			Role:    "root",
-			Version: 1,
-			Data:    root,
-		},
-		{
-			Role:    "targets",
-			Version: 1,
-			Data:    targets,
-		},
-		{
-			Role:    "snapshot",
-			Version: 1,
-			Data:    snapshot,
-		},
-		{
-			Role:    "timestamp",
-			Version: 1,
-			Data:    timestamp,
-		},
-	}
+	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
 
 	copyTimestampKey(t, kdb, store, "testGUN")
 	err = validateUpdate("testGUN", updates, store)
@@ -543,31 +377,10 @@ func TestValidateSnapshotRoleMissing(t *testing.T) {
 
 	r, tg, sn, ts, err := testutils.Sign(repo)
 	assert.NoError(t, err)
-	root, targets, snapshot, timestamp, err := testutils.Serialize(r, tg, sn, ts)
+	root, targets, snapshot, timestamp, err := getUpdates(r, tg, sn, ts)
 	assert.NoError(t, err)
 
-	updates := []storage.MetaUpdate{
-		{
-			Role:    "root",
-			Version: 1,
-			Data:    root,
-		},
-		{
-			Role:    "targets",
-			Version: 1,
-			Data:    targets,
-		},
-		{
-			Role:    "snapshot",
-			Version: 1,
-			Data:    snapshot,
-		},
-		{
-			Role:    "timestamp",
-			Version: 1,
-			Data:    timestamp,
-		},
-	}
+	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
 
 	copyTimestampKey(t, kdb, store, "testGUN")
 	err = validateUpdate("testGUN", updates, store)
@@ -589,31 +402,10 @@ func TestValidateRootSigMissing(t *testing.T) {
 
 	r.Signatures = nil
 
-	root, targets, snapshot, timestamp, err := testutils.Serialize(r, tg, sn, ts)
+	root, targets, snapshot, timestamp, err := getUpdates(r, tg, sn, ts)
 	assert.NoError(t, err)
 
-	updates := []storage.MetaUpdate{
-		{
-			Role:    "root",
-			Version: 1,
-			Data:    root,
-		},
-		{
-			Role:    "targets",
-			Version: 1,
-			Data:    targets,
-		},
-		{
-			Role:    "snapshot",
-			Version: 1,
-			Data:    snapshot,
-		},
-		{
-			Role:    "timestamp",
-			Version: 1,
-			Data:    timestamp,
-		},
-	}
+	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
 
 	copyTimestampKey(t, kdb, store, "testGUN")
 	err = validateUpdate("testGUN", updates, store)
@@ -630,31 +422,10 @@ func TestValidateTargetsSigMissing(t *testing.T) {
 
 	tg.Signatures = nil
 
-	root, targets, snapshot, timestamp, err := testutils.Serialize(r, tg, sn, ts)
+	root, targets, snapshot, timestamp, err := getUpdates(r, tg, sn, ts)
 	assert.NoError(t, err)
 
-	updates := []storage.MetaUpdate{
-		{
-			Role:    "root",
-			Version: 1,
-			Data:    root,
-		},
-		{
-			Role:    "targets",
-			Version: 1,
-			Data:    targets,
-		},
-		{
-			Role:    "snapshot",
-			Version: 1,
-			Data:    snapshot,
-		},
-		{
-			Role:    "timestamp",
-			Version: 1,
-			Data:    timestamp,
-		},
-	}
+	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
 
 	copyTimestampKey(t, kdb, store, "testGUN")
 	err = validateUpdate("testGUN", updates, store)
@@ -671,31 +442,10 @@ func TestValidateSnapshotSigMissing(t *testing.T) {
 
 	sn.Signatures = nil
 
-	root, targets, snapshot, timestamp, err := testutils.Serialize(r, tg, sn, ts)
+	root, targets, snapshot, timestamp, err := getUpdates(r, tg, sn, ts)
 	assert.NoError(t, err)
 
-	updates := []storage.MetaUpdate{
-		{
-			Role:    "root",
-			Version: 1,
-			Data:    root,
-		},
-		{
-			Role:    "targets",
-			Version: 1,
-			Data:    targets,
-		},
-		{
-			Role:    "snapshot",
-			Version: 1,
-			Data:    snapshot,
-		},
-		{
-			Role:    "timestamp",
-			Version: 1,
-			Data:    timestamp,
-		},
-	}
+	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
 
 	copyTimestampKey(t, kdb, store, "testGUN")
 	err = validateUpdate("testGUN", updates, store)
@@ -712,34 +462,13 @@ func TestValidateRootCorrupt(t *testing.T) {
 
 	r, tg, sn, ts, err := testutils.Sign(repo)
 	assert.NoError(t, err)
-	root, targets, snapshot, timestamp, err := testutils.Serialize(r, tg, sn, ts)
+	root, targets, snapshot, timestamp, err := getUpdates(r, tg, sn, ts)
 	assert.NoError(t, err)
 
 	// flip all the bits in the first byte
-	root[0] = root[0] ^ 0xff
+	root.Data[0] = root.Data[0] ^ 0xff
 
-	updates := []storage.MetaUpdate{
-		{
-			Role:    "root",
-			Version: 1,
-			Data:    root,
-		},
-		{
-			Role:    "targets",
-			Version: 1,
-			Data:    targets,
-		},
-		{
-			Role:    "snapshot",
-			Version: 1,
-			Data:    snapshot,
-		},
-		{
-			Role:    "timestamp",
-			Version: 1,
-			Data:    timestamp,
-		},
-	}
+	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
 
 	copyTimestampKey(t, kdb, store, "testGUN")
 	err = validateUpdate("testGUN", updates, store)
@@ -753,34 +482,13 @@ func TestValidateTargetsCorrupt(t *testing.T) {
 
 	r, tg, sn, ts, err := testutils.Sign(repo)
 	assert.NoError(t, err)
-	root, targets, snapshot, timestamp, err := testutils.Serialize(r, tg, sn, ts)
+	root, targets, snapshot, timestamp, err := getUpdates(r, tg, sn, ts)
 	assert.NoError(t, err)
 
 	// flip all the bits in the first byte
-	targets[0] = targets[0] ^ 0xff
+	targets.Data[0] = targets.Data[0] ^ 0xff
 
-	updates := []storage.MetaUpdate{
-		{
-			Role:    "root",
-			Version: 1,
-			Data:    root,
-		},
-		{
-			Role:    "targets",
-			Version: 1,
-			Data:    targets,
-		},
-		{
-			Role:    "snapshot",
-			Version: 1,
-			Data:    snapshot,
-		},
-		{
-			Role:    "timestamp",
-			Version: 1,
-			Data:    timestamp,
-		},
-	}
+	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
 
 	copyTimestampKey(t, kdb, store, "testGUN")
 	err = validateUpdate("testGUN", updates, store)
@@ -794,34 +502,13 @@ func TestValidateSnapshotCorrupt(t *testing.T) {
 
 	r, tg, sn, ts, err := testutils.Sign(repo)
 	assert.NoError(t, err)
-	root, targets, snapshot, timestamp, err := testutils.Serialize(r, tg, sn, ts)
+	root, targets, snapshot, timestamp, err := getUpdates(r, tg, sn, ts)
 	assert.NoError(t, err)
 
 	// flip all the bits in the first byte
-	snapshot[0] = snapshot[0] ^ 0xff
+	snapshot.Data[0] = snapshot.Data[0] ^ 0xff
 
-	updates := []storage.MetaUpdate{
-		{
-			Role:    "root",
-			Version: 1,
-			Data:    root,
-		},
-		{
-			Role:    "targets",
-			Version: 1,
-			Data:    targets,
-		},
-		{
-			Role:    "snapshot",
-			Version: 1,
-			Data:    snapshot,
-		},
-		{
-			Role:    "timestamp",
-			Version: 1,
-			Data:    timestamp,
-		},
-	}
+	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
 
 	copyTimestampKey(t, kdb, store, "testGUN")
 	err = validateUpdate("testGUN", updates, store)
@@ -842,34 +529,13 @@ func TestValidateRootModifiedSize(t *testing.T) {
 	// add another copy of the signature so the hash is different
 	r.Signatures = append(r.Signatures, r.Signatures[0])
 
-	root, targets, snapshot, timestamp, err := testutils.Serialize(r, tg, sn, ts)
+	root, targets, snapshot, timestamp, err := getUpdates(r, tg, sn, ts)
 	assert.NoError(t, err)
 
 	// flip all the bits in the first byte
-	root[0] = root[0] ^ 0xff
+	root.Data[0] = root.Data[0] ^ 0xff
 
-	updates := []storage.MetaUpdate{
-		{
-			Role:    "root",
-			Version: 1,
-			Data:    root,
-		},
-		{
-			Role:    "targets",
-			Version: 1,
-			Data:    targets,
-		},
-		{
-			Role:    "snapshot",
-			Version: 1,
-			Data:    snapshot,
-		},
-		{
-			Role:    "timestamp",
-			Version: 1,
-			Data:    timestamp,
-		},
-	}
+	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
 
 	copyTimestampKey(t, kdb, store, "testGUN")
 	err = validateUpdate("testGUN", updates, store)
@@ -887,31 +553,10 @@ func TestValidateTargetsModifiedSize(t *testing.T) {
 	// add another copy of the signature so the hash is different
 	tg.Signatures = append(tg.Signatures, tg.Signatures[0])
 
-	root, targets, snapshot, timestamp, err := testutils.Serialize(r, tg, sn, ts)
+	root, targets, snapshot, timestamp, err := getUpdates(r, tg, sn, ts)
 	assert.NoError(t, err)
 
-	updates := []storage.MetaUpdate{
-		{
-			Role:    "root",
-			Version: 1,
-			Data:    root,
-		},
-		{
-			Role:    "targets",
-			Version: 1,
-			Data:    targets,
-		},
-		{
-			Role:    "snapshot",
-			Version: 1,
-			Data:    snapshot,
-		},
-		{
-			Role:    "timestamp",
-			Version: 1,
-			Data:    timestamp,
-		},
-	}
+	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
 
 	copyTimestampKey(t, kdb, store, "testGUN")
 	err = validateUpdate("testGUN", updates, store)
@@ -936,31 +581,10 @@ func TestValidateRootModifiedHash(t *testing.T) {
 	sn, err = snap.ToSigned()
 	assert.NoError(t, err)
 
-	root, targets, snapshot, timestamp, err := testutils.Serialize(r, tg, sn, ts)
+	root, targets, snapshot, timestamp, err := getUpdates(r, tg, sn, ts)
 	assert.NoError(t, err)
 
-	updates := []storage.MetaUpdate{
-		{
-			Role:    "root",
-			Version: 1,
-			Data:    root,
-		},
-		{
-			Role:    "targets",
-			Version: 1,
-			Data:    targets,
-		},
-		{
-			Role:    "snapshot",
-			Version: 1,
-			Data:    snapshot,
-		},
-		{
-			Role:    "timestamp",
-			Version: 1,
-			Data:    timestamp,
-		},
-	}
+	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
 
 	copyTimestampKey(t, kdb, store, "testGUN")
 	err = validateUpdate("testGUN", updates, store)
@@ -982,31 +606,10 @@ func TestValidateTargetsModifiedHash(t *testing.T) {
 	sn, err = snap.ToSigned()
 	assert.NoError(t, err)
 
-	root, targets, snapshot, timestamp, err := testutils.Serialize(r, tg, sn, ts)
+	root, targets, snapshot, timestamp, err := getUpdates(r, tg, sn, ts)
 	assert.NoError(t, err)
 
-	updates := []storage.MetaUpdate{
-		{
-			Role:    "root",
-			Version: 1,
-			Data:    root,
-		},
-		{
-			Role:    "targets",
-			Version: 1,
-			Data:    targets,
-		},
-		{
-			Role:    "snapshot",
-			Version: 1,
-			Data:    snapshot,
-		},
-		{
-			Role:    "timestamp",
-			Version: 1,
-			Data:    timestamp,
-		},
-	}
+	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
 
 	copyTimestampKey(t, kdb, store, "testGUN")
 	err = validateUpdate("testGUN", updates, store)
