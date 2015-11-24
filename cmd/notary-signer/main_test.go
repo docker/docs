@@ -12,6 +12,7 @@ import (
 
 	"github.com/docker/notary/signer"
 	"github.com/docker/notary/tuf/data"
+	"github.com/docker/notary/utils"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 )
@@ -30,6 +31,10 @@ func configure(jsonConfig string) *viper.Viper {
 	return config
 }
 
+// If the TLS configuration is invalid, an error is returned.  This doesn't test
+// all the cases of the TLS configuration being invalid, since it's just
+// calling configuration.ParseTLSConfig - this test just makes sure the
+// error is propogated.
 func TestGetAddrAndTLSConfigInvalidTLS(t *testing.T) {
 	invalids := []string{
 		`{"server": {"http_addr": ":1234", "grpc_addr": ":2345"}}`,
@@ -47,6 +52,7 @@ func TestGetAddrAndTLSConfigInvalidTLS(t *testing.T) {
 	}
 }
 
+// If a GRPC address is not provided, an error is returned.
 func TestGetAddrAndTLSConfigNoGRPCAddr(t *testing.T) {
 	_, _, _, err := getAddrAndTLSConfig(configure(fmt.Sprintf(`{
 		"server": {
@@ -59,6 +65,7 @@ func TestGetAddrAndTLSConfigNoGRPCAddr(t *testing.T) {
 	assert.Contains(t, err.Error(), "grpc listen address required for server")
 }
 
+// If an HTTP address is not provided, an error is returned.
 func TestGetAddrAndTLSConfigNoHTTPAddr(t *testing.T) {
 	_, _, _, err := getAddrAndTLSConfig(configure(fmt.Sprintf(`{
 		"server": {
@@ -71,6 +78,7 @@ func TestGetAddrAndTLSConfigNoHTTPAddr(t *testing.T) {
 	assert.Contains(t, err.Error(), "http listen address required for server")
 }
 
+// Success parsing a valid TLS config, HTTP address, and GRPC address.
 func TestGetAddrAndTLSConfigSuccess(t *testing.T) {
 	httpAddr, grpcAddr, tlsConf, err := getAddrAndTLSConfig(configure(fmt.Sprintf(`{
 		"server": {
@@ -86,7 +94,8 @@ func TestGetAddrAndTLSConfigSuccess(t *testing.T) {
 	assert.NotNil(t, tlsConf)
 }
 
-func TestSetupCryptoServicesNoDefaultAlias(t *testing.T) {
+// If a default alias is not provided to a DB backend, an error is returned.
+func TestSetupCryptoServicesDBStoreNoDefaultAlias(t *testing.T) {
 	tmpFile, err := ioutil.TempFile("/tmp", "sqlite3")
 	assert.NoError(t, err)
 	tmpFile.Close()
@@ -94,14 +103,18 @@ func TestSetupCryptoServicesNoDefaultAlias(t *testing.T) {
 
 	_, err = setUpCryptoservices(
 		configure(fmt.Sprintf(
-			`{"storage": {"backend": "sqlite3", "db_url": "%s"}}`,
-			tmpFile.Name())),
-		[]string{"sqlite3"})
+			`{"storage": {"backend": "%s", "db_url": "%s"}}`,
+			utils.SqliteBackend, tmpFile.Name())),
+		[]string{utils.SqliteBackend})
 	assert.Error(t, err)
 	assert.Contains(t, err.Error(), "must provide a default alias for the key DB")
 }
 
-func TestSetupCryptoServicesSuccess(t *testing.T) {
+// If a default alias *is* provided to a valid DB backend, a valid
+// CryptoService is returned.  (This depends on ParseStorage, which is tested
+// separately, so this doesn't test all the possible cases of storage
+// success/failure).
+func TestSetupCryptoServicesDBStoreSuccess(t *testing.T) {
 	tmpFile, err := ioutil.TempFile("/tmp", "sqlite3")
 	assert.NoError(t, err)
 	tmpFile.Close()
@@ -109,10 +122,29 @@ func TestSetupCryptoServicesSuccess(t *testing.T) {
 
 	cryptoServices, err := setUpCryptoservices(
 		configure(fmt.Sprintf(
-			`{"storage": {"backend": "sqlite3", "db_url": "%s"},
+			`{"storage": {"backend": "%s", "db_url": "%s"},
 			"default_alias": "timestamp"}`,
-			tmpFile.Name())),
-		[]string{"sqlite3"})
+			utils.SqliteBackend, tmpFile.Name())),
+		[]string{utils.SqliteBackend})
+	assert.NoError(t, err)
+	assert.Len(t, cryptoServices, 2)
+
+	edService, ok := cryptoServices[data.ED25519Key]
+	assert.True(t, ok)
+
+	ecService, ok := cryptoServices[data.ECDSAKey]
+	assert.True(t, ok)
+
+	assert.Equal(t, edService, ecService)
+}
+
+// If a memory backend is specified, then a default alias is not needed, and
+// a valid CryptoService is returned.
+func TestSetupCryptoServicesMemoryStore(t *testing.T) {
+	config := configure(fmt.Sprintf(`{"storage": {"backend": "%s"}}`,
+		utils.MemoryBackend))
+	cryptoServices, err := setUpCryptoservices(config,
+		[]string{utils.SqliteBackend, utils.MemoryBackend})
 	assert.NoError(t, err)
 	assert.Len(t, cryptoServices, 2)
 

@@ -102,19 +102,19 @@ func getStore(configuration *viper.Viper, allowedBackends []string) (
 	if err != nil {
 		return nil, err
 	}
-	if storeConfig != nil {
-		logrus.Infof("Using %s backend", storeConfig.Backend)
-		store, err := storage.NewSQLStorage(storeConfig.Backend, storeConfig.Source)
-		if err != nil {
-			return nil, fmt.Errorf("Error starting DB driver: ", err.Error())
-		}
-		health.RegisterPeriodicFunc(
-			"DB operational", store.CheckHealth, time.Second*60)
-		return store, nil
+	logrus.Infof("Using %s backend", storeConfig.Backend)
+
+	if storeConfig.Backend == utils.MemoryBackend {
+		return storage.NewMemStorage(), nil
 	}
 
-	logrus.Debug("Using memory backend")
-	return storage.NewMemStorage(), nil
+	store, err := storage.NewSQLStorage(storeConfig.Backend, storeConfig.Source)
+	if err != nil {
+		return nil, fmt.Errorf("Error starting DB driver: ", err.Error())
+	}
+	health.RegisterPeriodicFunc(
+		"DB operational", store.CheckHealth, time.Second*60)
+	return store, nil
 }
 
 func main() {
@@ -198,7 +198,7 @@ func main() {
 		trust = signed.NewEd25519()
 	}
 
-	store, err := getStore(mainViper, []string{"mysql"})
+	store, err := getStore(mainViper, []string{utils.MySQLBackend, utils.MemoryBackend})
 	if err != nil {
 		logrus.Fatal(err.Error())
 	}
