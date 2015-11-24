@@ -84,14 +84,16 @@ func NewHTTPStore(baseURL, metaPrefix, metaExtension, targetsPrefix, keyExtensio
 }
 
 func translateStatusToError(resp *http.Response) error {
-	if resp.StatusCode == http.StatusNotFound {
+	switch resp.StatusCode {
+	case http.StatusOK:
+		return nil
+	case http.StatusNotFound:
 		return ErrMetaNotFound{}
-	} else if resp.StatusCode == http.StatusBadRequest {
+	case http.StatusBadRequest:
 		return ErrInvalidOperation{}
-	} else if resp.StatusCode != http.StatusOK {
+	default:
 		return ErrServerUnavailable{code: resp.StatusCode}
 	}
-	return nil
 }
 
 // GetMeta downloads the named meta file with the given size. A short body
