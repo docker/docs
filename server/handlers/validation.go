@@ -297,8 +297,8 @@ func validateRoot(gun string, oldRoot, newRoot []byte, store storage.MetaStore) 
 	return parsedNewRoot, nil
 }
 
-// checkRoot errors if an invalid valid rotation has taken place, if the
-// threshold number of signatures is invalid valid, if there are an invalid
+// checkRoot errors if an invalid rotation has taken place, if the
+// threshold number of signatures is invalid, if there are an invalid
 // number of roles and keys, or if the timestamp keys are invalid
 func checkRoot(oldRoot, newRoot *data.SignedRoot, timestampKey data.PublicKey) error {
 	rootRole := data.RoleName(data.CanonicalRootRole)
