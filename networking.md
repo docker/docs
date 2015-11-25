@@ -1,7 +1,7 @@
 # Cross-Host Networking
 
-For the Orca beta, enabling cross-host networking requires a manual step.
-This document explains how to enable this feature after Orca has been
+For the UCP beta, enabling cross-host networking requires a manual step.
+This document explains how to enable this feature after UCP has been
 installed.
 
 
@@ -13,33 +13,33 @@ officially supported as of Docker 1.9 (it is no longer an
 feature).  However, in 1.9, enabling this feature requires modifying
 command line arguments for the Docker daemon.
 
-The Key/Value store used by Orca, Swarm, and libnetwork is protected
-by the Swarm TLS certificate chain managed by Orca.  This will prevent
+The Key/Value store used by UCP, Swarm, and libnetwork is protected
+by the Swarm TLS certificate chain managed by UCP.  This will prevent
 unathorized access to the clusters configuration, and requires all
-clients use a certificate signed by the Orca Swarm Root CA.  Admin users
+clients use a certificate signed by the UCP Swarm Root CA.  Admin users
 certificate bundles, and the internal systems are signed by this CA.
 
-During the install of Orca, TLS certificate files are placed on the
+During the install of UCP, TLS certificate files are placed on the
 host filesystem of each engine in `/var/lib/docker/discovery_certs/`
 to aid in the manual setup steps outlined below.
 
 
 ## Instructions
 
-### 0) Install Orca
+### 0) Install UCP
 
 Install your controller, and join additional nodes as desired.
 You can add additional nodes after enbabling cross-host networking,
 however the manual steps described below must be performed **after**
-the orca-bootstrap container has run `install` or `join` on the node.
+the bootstrap container has run `install` or `join` on the node.
 The steps below must be performed on **every** node in your cluster.
 
-### 1) Determine Orca IP
+### 1) Determine UCP IP
 
 Before configuring each engine, determine the public facing IP address
-(or hostname) of the primary orca system.  One example approach to
+(or hostname) of the primary ucp system.  One example approach to
 determine this address is by running the following on the host system
-where the Orca controller is running:
+where the UCP controller is running:
 
 ```bash
 ORCA_PUBLIC_IP=$(ip -o -4 route get 8.8.8.8 | cut -f8 -d' ')
@@ -62,7 +62,7 @@ for configuring the Docker daemon.  The following lists a few examples:
 
 ### 3) Add cluster flags to Docker Daemon
 
-For each docker engine in your Orca/Swarm cluster **including the system running orca-controller**, you will have to update the docker daemon command line flags.
+For each docker engine in your UCP/Swarm cluster **including the system running ucp-controller**, you will have to update the docker daemon command line flags.
 
 First determine the local engine's public IP:
 

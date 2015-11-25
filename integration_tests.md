@@ -1,6 +1,6 @@
-# Orca Integration Tests
+# Docker UCP Integration Tests
 
-The orca integration tests are built upon Docker Machine and the Go test
+The ucp integration tests are built upon Docker Machine and the Go test
 library github.com/stretchr/testify.
 
 The integration tests live in controller/integration/ and wont run by
@@ -114,7 +114,7 @@ the VMs.
 
 Hint: If you're using your own AWS setup, make sure the Docker Machine
 security group allows port 443 from anywhere, otherwise the tests will
-fail to access Orca.  Also make sure that all ports are allowed from the
+fail to access UCP.  Also make sure that all ports are allowed from the
 internal network for join to work.  Our common service account already
 has this set up.
 
@@ -171,8 +171,8 @@ causing failures.  By default the parallel count is the number of CPUs.
 `TEST_TIMEOUT` | Used by Makefile to set the go test `-timeout` value
 `TEST_PARALLEL` | Used by Makefile to set the go test `-parallel` value (default is # of CPUs)
 `PRESERVE_TEST_MACHINE` | Doesn't remove the test machine after the run.  Can be useful for troubleshooting test failures during test development
-`MACHINE_LOCAL` | Set to a non-empty string to make the tests run against the "local" docker engine (based on `DOCKER_HOST` and friends) This will disable all dual-node tests, and may lead to cascading failures.  You should make sure Orca isn't already installed on the local engine
-`TAG` | Specify which image tag to use for the orca images
+`MACHINE_LOCAL` | Set to a non-empty string to make the tests run against the "local" docker engine (based on `DOCKER_HOST` and friends) This will disable all dual-node tests, and may lead to cascading failures.  You should make sure UCP isn't already installed on the local engine
+`TAG` | Specify which image tag to use for the ucp images
 `ORCA_ORG` | If set, use this org instead of the default 'dockerorca' (typically set to 'dockerorcadev' to test CI builds
 `PULL_IMAGES` | If set to non-empty, pull the images (if not present).  If not set, copy them from the local system
 `REGISTRY_USERNAME` | When pulling set this to a user that has permission to pull the official images

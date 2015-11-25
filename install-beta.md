@@ -1,15 +1,15 @@
-# Docker Orca Quickstart Guide
+# Docker UCP Quickstart Guide
 
-These instructions explain how to install Orca. An Orca installation consists of an Orca server and one or more nodes. The same machine can serve as both the server and the node. These instructions show you how to install both a host and a node. It contains the following sections:
+These instructions explain how to install UCP. A UCP installation consists of an UCP server and one or more nodes. The same machine can serve as both the server and the node. These instructions show you how to install both a host and a node. It contains the following sections:
 
 - [Plan your installation](#plan-your-installation)
 - [Step 1: Verify you have the prerequisites](#step-1-verify-you-have-the-prerequisites)
-- [Step 2: Configure your network for Orca](#step-2-configure-your-network-for-orca)
+- [Step 2: Configure your network for UCP](#step-2-configure-your-network-for-ucp)
 - [Step 3: Install Docker Engine v1.9](#step-3-install-docker-engine-v19)
 - [Step 4: (optional) Create user-named volumes](#step-4-optional-create-user-named-volumes)
-- [Step 5: Install the Orca server](#step-5-install-the-orca-server)
+- [Step 5: Install the UCP server](#step-5-install-the-ucp-server)
 - [Step 6: Set up certs for the Docker CLI](#step-6-set-up-certs-for-the-docker-cli)
-- [Step 7: Add a Node to the Orca cluster](#step-7-add-a-node-to-the-orca-cluster)
+- [Step 7: Add a Node to the UCP cluster](#step-7-add-a-node-to-the-ucp-cluster)
 - [Uninstall](#uninstall)
 - [Block Mixpanel analytics](#block-mixpanel-analytics)
 - [Installing with your own certificates](#installing-with-your-own-certificates)
@@ -17,9 +17,9 @@ These instructions explain how to install Orca. An Orca installation consists of
 
 ## Plan your installation
 
-The Orca installation consists of running the `orca-bootstrap` image using the
+The UCP installation consists of running the `ucp` image using the
 Docker Engine CLI. The image launches an interactive script that automates the
-Orca setup using a default configurations for both data volumes and certificate
+UCP setup using a default configurations for both data volumes and certificate
 authority (CA).  
 
 The first time you install, you should install in a sandbox environment where
@@ -36,35 +36,35 @@ customization steps.  Customize steps are identified with the keyword
 (optional). Make sure you skip these steps when doing the default installation
 in your sandbox.
 
-The Orca BETA program makes use of Mixpanel to collect analytics. This feature collects data on your usage of Orca and returns it to Docker. The information is entirely anonymous and does not identify your Company or users. Currently, you cannot turn the collection off but you can block the outgoing messaging. Later in this documentation [Block Mixpanel analytics](#block-mixpanel-analytics) explains how.
+The UCP BETA program makes use of Mixpanel to collect analytics. This feature collects data on your usage of UCP and returns it to Docker. The information is entirely anonymous and does not identify your Company or users. Currently, you cannot turn the collection off but you can block the outgoing messaging. Later in this documentation [Block Mixpanel analytics](#block-mixpanel-analytics) explains how.
 
 ## Step 1: Verify you have the prerequisites
 
-You can install Orca on your network or on a cloud provider such AWS or Digital Ocean. To install, the server and the nodes can run any of these supported operating systems:
+You can install UCP on your network or on a cloud provider such AWS or Digital Ocean. To install, the server and the nodes can run any of these supported operating systems:
 
 * RHEL 7.0, 7.1
 * Ubuntu 14.04 LTS
 * CentOS 7.1
 
-Installing Docker Orca requires that you first install the testing Docker Engine v1.9 on both the server and the nodes. The Docker Engine can be local or remote. These instructions assume you are installing both Orca and Docker Engine locally.
+Installing Docker UCP requires that you first install the testing Docker Engine v1.9 on both the server and the nodes. The Docker Engine can be local or remote. These instructions assume you are installing both UCP and Docker Engine locally.
 
-Finally, installing Orca requires you to pull an image from the Docker Hub. If you don't already have a Docker Hub account, make sure you [create an account](https://hub.docker.com/). Once you have a Hub account, send an email to <mailto:support@docker.com> with your account name and request access to the Orca BETA image.
+Finally, installing UCP requires you to pull an image from the Docker Hub. If you don't already have a Docker Hub account, make sure you [create an account](https://hub.docker.com/). Once you have a Hub account, send an email to <mailto:support@docker.com> with your account name and request access to the UCP BETA image.
 
 
-## Step 2: Configure your network for Orca
+## Step 2: Configure your network for UCP
 
-Orca includes Docker Swarm as part of its installation. So, you don't need to install Docker Swarm. You do need to ensure that the Orca server and nodes can communicate across your network. Configure your network making sure to open the following ports:
+UCP includes Docker Swarm as part of its installation. So, you don't need to install Docker Swarm. You do need to ensure that the UCP server and nodes can communicate across your network. Configure your network making sure to open the following ports:
 
 | Port             | Description     |
 |------------------|-----------------|
-| `443`            | Orca server     |
+| `443`            | UCP server     |
 | `2376`           | Swarm manager   |
 | `12376`          | Engine proxy    |
 | `12379`, `12380` | Key Value store |
 | `12381`          | Swarm CA service|
-| `12382`          | Orca CA service |
+| `12382`          | UCP CA service |
 
-The communication between the server, nodes, and key value store is all protected by mutual TLS. The Orca installation of Swarm provides TLS for you automatically.
+The communication between the server, nodes, and key value store is all protected by mutual TLS. The UCP installation of Swarm provides TLS for you automatically.
 
 Finally, you can specify a different port for the Swarm manager if you need to. These instructions assume you are using the default `2376` port.
 
@@ -120,43 +120,43 @@ EOF
 
 ## Step 4: (optional) Create user-named volumes
 
-Orca uses named volumes for persistence of user data.  By default, the
-`orca-bootstrap` installer creates for you. It uses the default volume driver and flags. The first time you install, we recommend you skip this step and try it later, on another install. Later, try an install where your try the option to use custom volume driver and create your own volumes.
+UCP uses named volumes for persistence of user data.  By default, the
+`ucp` installer creates for you. It uses the default volume driver and flags. The first time you install, we recommend you skip this step and try it later, on another install. Later, try an install where your try the option to use custom volume driver and create your own volumes.
 
-If you choose this option, create your volumes prior to installing Orca. The volumes Oraca requires are:
+If you choose this option, create your volumes prior to installing UCP. The volumes Oraca requires are:
 
 | Volume name             | Data                                                                                 |
 |-------------------------|--------------------------------------------------------------------------------------|
-| `orca-root-ca`          | The certificate and key for the Orca root CA. Do not create this volume if you are using your own certificates.                                      |
-| `orca-swarm-root-ca`    | The certificate and key for the Swarm root CA.                                       |
-| `orca-server-certs`     | The server certificates for the Orca web server.                                     |
-| `orca-swarm-node-certs` | The Swarm certificates for the current node (repeated on every node in the cluster). |
-| `orca-swarm-kv-certs`   | The Swarm KV client certificates for the current node (repeated on every node in the cluster). |
-| `orca-swarm-controller-certs` | The Orca Controller Swarm client certificates for the current node. |
-| `orca-kv`               | Key value store persistence.                                                         |
+| `ucp-root-ca`          | The certificate and key for the UCP root CA. Do not create this volume if you are using your own certificates.                                      |
+| `ucp-swarm-root-ca`    | The certificate and key for the Swarm root CA.                                       |
+| `ucp-server-certs`     | The server certificates for the UCP web server.                                     |
+| `ucp-swarm-node-certs` | The Swarm certificates for the current node (repeated on every node in the cluster). |
+| `ucp-swarm-kv-certs`   | The Swarm KV client certificates for the current node (repeated on every node in the cluster). |
+| `ucp-swarm-controller-certs` | The UCP Controller Swarm client certificates for the current node. |
+| `ucp-kv`               | Key value store persistence.                                                         |
 
 
-## Step 5: Install the Orca server
+## Step 5: Install the UCP server
 
-In this step you install the Orca server. The server includes a running Swarm manager and node as well. To review the installation options before you install, use the following command:
+In this step you install the UCP server. The server includes a running Swarm manager and node as well. To review the installation options before you install, use the following command:
 
 ```bash
-docker run --rm -it dockerorca/orca-bootstrap install --help
+docker run --rm -it dockerorca/ucp install --help
 ```
 
 When you install, the script prompts you for the following information:
 
-* a password to use for the Orca `admin` account
+* a password to use for the UCP `admin` account
 * your Docker Hub username/password/email
-* an alias which is the actual external, publically-accessible IP address or name for the Orca server
+* an alias which is the actual external, publically-accessible IP address or name for the UCP server
 
 When you have the information you'll be prompted for, do the following to install:
 
-1. Log into the system where you mean to install the Orca server.
+1. Log into the system where you mean to install the UCP server.
 
 2. Use the CLI to log into Docker Hub .
 
-  Make sure you use the account which has permissions to the Orca images.
+  Make sure you use the account which has permissions to the UCP images.
 
         $ sudo docker login
         Username: moxiegirl
@@ -165,19 +165,19 @@ When you have the information you'll be prompted for, do the following to instal
         WARNING: login credentials saved in /home/ubuntu/.docker/config.json
         Login Succeeded
 
-3. Run the `orca-bootstrap` installer.
+3. Run the `ucp` installer.
 
         $ docker run --rm -it \
           -v /var/run/docker.sock:/var/run/docker.sock \
-          --name orca-bootstrap \
-          dockerorca/orca-bootstrap \
+          --name ucp \
+          dockerorca/ucp \
           install -i
 
-    The installer pulls several images and prompts you for the installation values it needs. When it completes, the installer prompts you to login into the Orca GUI.
+    The installer pulls several images and prompts you for the installation values it needs. When it completes, the installer prompts you to login into the UCP GUI.
 
-        INFO[0053] Login to Orca at https://10.0.0.32:443
+        INFO[0053] Login to UCP at https://10.0.0.32:443
 
-4. Enter the address into your browser to view the Orca login screen.
+4. Enter the address into your browser to view the UCP login screen.
 
   The login screen displays.
 
@@ -186,26 +186,26 @@ When you have the information you'll be prompted for, do the following to instal
 5. Enter `admin` for the username along with the password you provided to the installer.
 
   If you didn't enter an admin password, the default password is `orca`
- After you enter the correct credentials, the Orca dashboard displays.
+ After you enter the correct credentials, the UCP dashboard displays.
 
     ![](dashboard.png)
 
 
 ## Step 6: Set up certs for the Docker CLI
 
-The first thing you probably want to do is download a client bundle.  The bundle contains the certificates user needs to run the `docker` clients against the Orca server and nodes.
+The first thing you probably want to do is download a client bundle.  The bundle contains the certificates user needs to run the `docker` clients against the UCP server and nodes.
 
-1. If you haven't already done so, log into Orca.
+1. If you haven't already done so, log into UCP.
 
 2. Choose **ADMIN > Client bundle** from the menu.
 
-    The browser downloads the `orca-bundle.zip` file.
+    The browser downloads the `ucp-bundle.zip` file.
 
 3. Open the folder containing the download file.
 
 4. Unzip the file to reveal its contents.
 
-        orca-bundle
+        ucp-bundle
         ├── ca.pem
         ├── cert.pem
         ├── cert.pub
@@ -239,20 +239,20 @@ The first thing you probably want to do is download a client bundle.  The bundle
         swarm_master=tcp://10.0.0.32:2376
 
 
-## Step 7: Add a Node to the Orca cluster
+## Step 7: Add a Node to the UCP cluster
 
-In this step you install an Orca nodes using the `orca-bootstrap join` subcommand. Repeat the instal for each node you want to add. To review join options before installing the node use the following:
+In this step you install an UCP nodes using the `ucp join` subcommand. Repeat the instal for each node you want to add. To review join options before installing the node use the following:
 
 ```bash
-docker run --rm -it dockerorca/orca-bootstrap join --help
+docker run --rm -it dockerorca/ucp join --help
 ```
 
 The installer prompts you for the following information:
 
-* the URL of the Orca server
-* the username/password of an Orca administrator account
+* the URL of the UCP server
+* the username/password of an UCP administrator account
 * your Docker Hub username/password/email
-* an alias which is the actual external, publically-accessible IP address or name for the Orca node
+* an alias which is the actual external, publically-accessible IP address or name for the UCP node
 
 When you have the information you'll be prompted for, do the following to install:
 
@@ -269,21 +269,21 @@ When you have the information you'll be prompted for, do the following to instal
         WARNING: login credentials saved in /home/ubuntu/.docker/config.json
         Login Succeeded
 
-3. Run the `orca-bootstrap` installer.
+3. Run the `ucp` installer.
 
         $ docker run --rm -it \
             -v /var/run/docker.sock:/var/run/docker.sock \
-            --name orca-bootstrap \
-            dockerorca/orca-bootstrap \
+            --name ucp \
+            dockerorca/ucp \
             join -i
 
     The installer pulls several images and prompts you for the installation values it needs. When it completes, the installer notifies you that it is starting swarm.
 
-        INFO[0005] Verifying your system is compatible with Orca
-        INFO[0011] Sending add host request to Orca server      
+        INFO[0005] Verifying your system is compatible with UCP
+        INFO[0011] Sending add host request to UCP server      
         INFO[0011] Starting local swarm containers  
 
-4. Login into Orca with your browser and go to the **NODES** page.
+4. Login into UCP with your browser and go to the **NODES** page.
 
       The display should include your new node.
 
@@ -292,22 +292,22 @@ When you have the information you'll be prompted for, do the following to instal
 
 ## Uninstall
 
-The installer can also uninstall Orca from the server and the nodes. To see the uninstall options before you uninstall, use the following:
+The installer can also uninstall UCP from the server and the nodes. To see the uninstall options before you uninstall, use the following:
 
 ```bash
-docker run --rm -it dockerorca/orca-bootstrap uninstall --help
+docker run --rm -it dockerorca/ucp uninstall --help
 ```
 
 To uninstall, do the following:
 
-1. Log into the node you want to remove Orca from.
+1. Log into the node you want to remove UCP from.
 
 2. Enter the following command to uninstall:
 
         $ docker run --rm -it \
           -v /var/run/docker.sock:/var/run/docker.sock \
-          --name orca-bootstrap \
-          dockerorca/orca-bootstrap \
+          --name ucp \
+          dockerorca/ucp \
           uninstall
 
 3. Repeat the uninstall on each node making sure to save the server till last.
@@ -316,7 +316,7 @@ To uninstall, do the following:
 
 To block the outflow of Mixplanel analytic data to Docker, do the following:
 
-1. Log into the system running the Orca server.
+1. Log into the system running the UCP server.
 
 2. Add a rule to drop the forward to port 80.
 
@@ -326,20 +326,20 @@ Reboots unset this iptables chain, so it is a good idea to add this command to t
 
 ## Installing with your own certificates
 
-Orca uses two separate root CAs for access control - one for Swarm, and one for
-the Orca server itself.  The dual root certificates supply differentiation
-between the Docker remote API access to Orca vs. Swarm.  Unlike Docker Engine or
-Docker Swarm, Orca implements ACL and audit logging on a per-user basis.  Swarm
-and the Engine proxies trust only the Swarm Root CA, while the Orca server
-trusts both Root CAs.  Admins can access Orca, Swarm and the engines while
-normal users are only granted access to Orca.
+UCP uses two separate root CAs for access control - one for Swarm, and one for
+the UCP server itself.  The dual root certificates supply differentiation
+between the Docker remote API access to UCP vs. Swarm.  Unlike Docker Engine or
+Docker Swarm, UCP implements ACL and audit logging on a per-user basis.  Swarm
+and the Engine proxies trust only the Swarm Root CA, while the UCP server
+trusts both Root CAs.  Admins can access UCP, Swarm and the engines while
+normal users are only granted access to UCP.
 
-Orca v1.0 supports user provided externally signed certificates
-for the Orca server.  This cert is used by Orca's main management web UI
-and the Docker remote API. The remote API is visible to the Docker CLI. In this release, the Swarm Root CA is always managed by Orca.
+UCP v1.0 supports user provided externally signed certificates
+for the UCP server.  This cert is used by UCP's main management web UI
+and the Docker remote API. The remote API is visible to the Docker CLI. In this release, the Swarm Root CA is always managed by UCP.
 
-The external Orca Root CA model supports customers managing their own CA, or
-purchasing certs from a commercial CA.  When operating in this mode, Orca can
+The external UCP Root CA model supports customers managing their own CA, or
+purchasing certs from a commercial CA.  When operating in this mode, UCP can
 not generate regular user certificates, as those must be managed and signed
 externally, however admin account certs can be generated as they are signed by
 the internal Swarm Root CA.  Normal user accounts should be signed by the same
@@ -350,13 +350,13 @@ The first time you install, we recommend you skip user-supplied certs and use th
 
 ### Configure user-supplied Certificates
 
-To install Orca with your own external root CA, you create a named volume called
-**orca-server-certs** on the same system where you plan to install the Orca
+To install UCP with your own external root CA, you create a named volume called
+**ucp-server-certs** on the same system where you plan to install the UCP
 server.
 
-1. Log into the machine where you intend to install Orca.
+1. Log into the machine where you intend to install UCP.
 
-2. If you haven't already done so, create a named volume called **orca-server-certs**.
+2. If you haven't already done so, create a named volume called **ucp-server-certs**.
 
 3. Ensure the volume's top-level directory contains these files:
 
@@ -371,20 +371,20 @@ server.
   </tr>
   <tr>
     <td><code>cert.pem</code></td>
-    <td>Your signed Orca server cert.</td>
+    <td>Your signed UCP server cert.</td>
   </tr>
   <tr>
     <td><code>key.pem</code></td>
-    <td>Your Orca server private key.</td>
+    <td>Your UCP server private key.</td>
   </tr>
   </table>
 
-4. Follow "Step 5" above to install Orca but pass in an additional `--external-orca-ca` option to the installer, for example:
+4. Follow "Step 5" above to install UCP but pass in an additional `--external-ucp-ca` option to the installer, for example:
 
         docker run --rm -it \
           -v /var/run/docker.sock:/var/run/docker.sock \
           ...snip...
-          install -i --external-orca-ca
+          install -i --external-ucp-ca
 
 
 ## Where to go next
