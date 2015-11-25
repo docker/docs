@@ -1,6 +1,6 @@
-# Profiling Orca
+# Profiling UCP
 
-If you run the Orca server with the debug flag set, not only will you get more logging output, but we enable
+If you run the UCP server with the debug flag set, not only will you get more logging output, but we enable
 remote pprof access.
 
 Links:
@@ -14,9 +14,9 @@ Links:
 * If you're using TLS (e.g., with bootstrap install) you'll need to add the certs to the local system's trusted certs (unfortunately pprof doesn't have an "--insecure" flag)
     ```bash
 sudo bash -c "docker run --rm -it \
-        --name orca-bootstrap \
+        --name ucp \
         -v /var/run/docker.sock:/var/run/docker.sock \
-        dockerorca/orca-bootstrap \
+        dockerorca/ucp \
         dump-certs > /usr/local/share/ca-certificates/orca.crt"
 sudo update-ca-certificates
 ```

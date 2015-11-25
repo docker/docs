@@ -1,6 +1,6 @@
 # Key/Value Store
 
-In this release, Orca leverages the
+In this release, UCP leverages the
 [etcd](https://github.com/coreos/etcd/) KV store.
 
 Under normal circumstances, you should not have to access the KV store
@@ -9,7 +9,7 @@ you may be required by Docker support or your SE to change configuration
 values or data in the store.
 
 The following example demonstrates basic `curl` usage assuming you
-have set up your environment with the downloaded orca bundle.
+have set up your environment with the downloaded ucp bundle.
 
 The example below uses the [jq](https://stedolan.github.io/jq/) tool to
 pretty print the resulting json.  This can be omitted for raw json output.
@@ -26,7 +26,7 @@ curl -s \
 ```
 
 
-You can browse the Orca keys under `/v2/keys/orca/` and swarm under
+You can browse the UCP keys under `/v2/keys/ucp/` and swarm under
 `/v2/keys/swarm` as well as modify by `POST`ing updated values to
 workaround problems.  Further documentation for the etcd API is available
 at https://github.com/coreos/etcd/blob/master/Documentation/api.md
