@@ -1,11 +1,7 @@
 machine:
-  services:
-    - docker
+  xcode:
+    version: "7.0"
 
-general:
-    artifacts:
-      - "dist"
-
-test:
-  override:
-    - make
+dependencies:
+  cache_directories:
+    - "node_modules"
