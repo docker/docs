@@ -14,6 +14,6 @@
 	},
 	"storage": {
 		"backend": "mysql",
-		"db_url": "dockercondemo:dockercondemo@tcp(notarymysql:3306)/dockercondemo"
+		"db_url": "root@tcp(notarymysql:3306)/notary"
 	}
 }
