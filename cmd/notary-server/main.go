@@ -244,8 +244,8 @@ func usage() {
 // endpoints. The addr should not be exposed externally. For most of these to
 // work, tls cannot be enabled on the endpoint, so it is generally separate.
 func debugServer(addr string) {
-	logrus.Info("Debug server listening on", addr)
+	logrus.Infof("Debug server listening on %s", addr)
 	if err := http.ListenAndServe(addr, nil); err != nil {
-		logrus.Fatal("error listening on debug interface: ", err)
+		logrus.Fatalf("error listening on debug interface: %v", err)
 	}
 }
