@@ -78,7 +78,7 @@ The following provides greater detail on the process:
 
 3. Talk to the community about your idea.
 
-    We have lots of <a href="../get-help/" target="_blank">community forums</a>
+    We have lots of <a href="../../get-help/" target="_blank">community forums</a>
     where you can get feedback on your idea. Float your idea in a forum or two
     to get some commentary going on it.
 
