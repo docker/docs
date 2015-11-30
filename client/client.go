@@ -11,9 +11,9 @@ import (
 	"path/filepath"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/docker/notary/certs"
 	"github.com/docker/notary/client/changelist"
 	"github.com/docker/notary/cryptoservice"
-	"github.com/docker/notary/keystoremanager"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf"
 	tufclient "github.com/docker/notary/tuf/client"
@@ -63,15 +63,15 @@ var ErrRepositoryNotExist = errors.New("repository does not exist")
 // NotaryRepository stores all the information needed to operate on a notary
 // repository.
 type NotaryRepository struct {
-	baseDir         string
-	gun             string
-	baseURL         string
-	tufRepoPath     string
-	fileStore       store.MetadataStore
-	CryptoService   signed.CryptoService
-	tufRepo         *tuf.Repo
-	roundTrip       http.RoundTripper
-	KeyStoreManager *keystoremanager.KeyStoreManager
+	baseDir       string
+	gun           string
+	baseURL       string
+	tufRepoPath   string
+	fileStore     store.MetadataStore
+	CryptoService signed.CryptoService
+	tufRepo       *tuf.Repo
+	roundTrip     http.RoundTripper
+	CertManager   *certs.Manager
 }
 
 // Target represents a simplified version of the data TUF operates on, so external
@@ -110,7 +110,7 @@ func (r *NotaryRepository) Initialize(rootKeyID string) error {
 	if err != nil {
 		return err
 	}
-	r.KeyStoreManager.AddTrustedCert(rootCert)
+	r.CertManager.AddTrustedCert(rootCert)
 
 	// The root key gets stored in the TUF metadata X509 encoded, linking
 	// the tuf root.json to our X509 PKI.
@@ -534,7 +534,7 @@ func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
 		return nil, err
 	}
 
-	err = r.KeyStoreManager.ValidateRoot(root, r.gun)
+	err = r.CertManager.ValidateRoot(root, r.gun)
 	if err != nil {
 		return nil, err
 	}
