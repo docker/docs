@@ -33,6 +33,19 @@ func (err ErrMaliciousServer) Error() string {
 	return "Trust server returned a bad response."
 }
 
+// ErrInvalidOperation indicates that the server returned a 400 response and
+// propogate any body we received.
+type ErrInvalidOperation struct {
+	msg string
+}
+
+func (err ErrInvalidOperation) Error() string {
+	if err.msg != "" {
+		return fmt.Sprintf("Trust server rejected operation: %s", err.msg)
+	}
+	return "Trust server rejected operation."
+}
+
 // HTTPStore manages pulling and pushing metadata from and to a remote
 // service over HTTP. It assumes the URL structure of the remote service
 // maps identically to the structure of the TUF repo:
@@ -70,6 +83,19 @@ func NewHTTPStore(baseURL, metaPrefix, metaExtension, targetsPrefix, keyExtensio
 	}, nil
 }
 
+func translateStatusToError(resp *http.Response) error {
+	switch resp.StatusCode {
+	case http.StatusOK:
+		return nil
+	case http.StatusNotFound:
+		return ErrMetaNotFound{}
+	case http.StatusBadRequest:
+		return ErrInvalidOperation{}
+	default:
+		return ErrServerUnavailable{code: resp.StatusCode}
+	}
+}
+
 // GetMeta downloads the named meta file with the given size. A short body
 // is acceptable because in the case of timestamp.json, the size is a cap,
 // not an exact length.
@@ -87,11 +113,9 @@ func (s HTTPStore) GetMeta(name string, size int64) ([]byte, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
-	if resp.StatusCode == http.StatusNotFound {
-		return nil, ErrMetaNotFound{}
-	} else if resp.StatusCode != http.StatusOK {
+	if err := translateStatusToError(resp); err != nil {
 		logrus.Debugf("received HTTP status %d when requesting %s.", resp.StatusCode, name)
-		return nil, ErrServerUnavailable{code: resp.StatusCode}
+		return nil, err
 	}
 	if resp.ContentLength > size {
 		return nil, ErrMaliciousServer{}
@@ -120,12 +144,7 @@ func (s HTTPStore) SetMeta(name string, blob []byte) error {
 		return err
 	}
 	defer resp.Body.Close()
-	if resp.StatusCode == http.StatusNotFound {
-		return ErrMetaNotFound{}
-	} else if resp.StatusCode != http.StatusOK {
-		return ErrServerUnavailable{code: resp.StatusCode}
-	}
-	return nil
+	return translateStatusToError(resp)
 }
 
 // SetMultiMeta does a single batch upload of multiple pieces of TUF metadata.
@@ -159,12 +178,7 @@ func (s HTTPStore) SetMultiMeta(metas map[string][]byte) error {
 		return err
 	}
 	defer resp.Body.Close()
-	if resp.StatusCode == http.StatusNotFound {
-		return ErrMetaNotFound{}
-	} else if resp.StatusCode != http.StatusOK {
-		return ErrServerUnavailable{code: resp.StatusCode}
-	}
-	return nil
+	return translateStatusToError(resp)
 }
 
 func (s HTTPStore) buildMetaURL(name string) (*url.URL, error) {
@@ -212,10 +226,8 @@ func (s HTTPStore) GetTarget(path string) (io.ReadCloser, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
-	if resp.StatusCode == http.StatusNotFound {
-		return nil, ErrMetaNotFound{}
-	} else if resp.StatusCode != http.StatusOK {
-		return nil, ErrServerUnavailable{code: resp.StatusCode}
+	if err := translateStatusToError(resp); err != nil {
+		return nil, err
 	}
 	return resp.Body, nil
 }
@@ -235,10 +247,8 @@ func (s HTTPStore) GetKey(role string) ([]byte, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
-	if resp.StatusCode == http.StatusNotFound {
-		return nil, ErrMetaNotFound{}
-	} else if resp.StatusCode != http.StatusOK {
-		return nil, ErrServerUnavailable{code: resp.StatusCode}
+	if err := translateStatusToError(resp); err != nil {
+		return nil, err
 	}
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
