@@ -32,7 +32,7 @@ _space := $(empty) $(empty)
 
 # go cover test variables
 COVERDIR=.cover
-COVERPROFILE=$(COVERDIR)/cover.out
+COVERPROFILE?=$(COVERDIR)/cover.out
 COVERMODE=count
 PKGS = $(shell go list ./... | tr '\n' ' ')
 
