@@ -22,6 +22,7 @@ rm -rf /Applications/Docker
 echo "Removing docker binaries..."
 rm -f /usr/local/bin/docker
 rm -f /usr/local/bin/docker-machine
+rm -r /usr/local/bin/docker-machine-driver*
 rm -f /usr/local/bin/docker-compose
 
 echo "Removing boot2docker.iso"
