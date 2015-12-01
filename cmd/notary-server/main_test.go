@@ -8,8 +8,12 @@ import (
 	"os"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/docker/notary/server/storage"
+	"github.com/docker/notary/signer/client"
+	"github.com/docker/notary/tuf/data"
+	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/utils"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
@@ -89,74 +93,208 @@ func TestGetAddrAndTLSConfigSkipClientTLS(t *testing.T) {
 	assert.Nil(t, tlsConf.ClientCAs)
 }
 
+// If neither "remote" nor "local" is passed for "trust_service.type", an
+// error is returned.
+func TestGetInvalidTrustService(t *testing.T) {
+	invalids := []string{
+		`{"trust_service": {"type": "bruhaha", "key_algorithm": "rsa"}}`,
+		`{}`,
+	}
+	var registerCalled = 0
+	var fakeRegister = func(_ string, _ func() error, _ time.Duration) {
+		registerCalled++
+	}
+
+	for _, config := range invalids {
+		_, _, err := getTrustService(configure(config),
+			client.NewNotarySigner, fakeRegister)
+		assert.Error(t, err)
+		assert.Contains(t, err.Error(),
+			"must specify either a \"local\" or \"remote\" type for trust_service")
+	}
+	// no health function ever registered
+	assert.Equal(t, 0, registerCalled)
+}
+
+// If a local trust service is specified, a local trust service will be used
+// with an ED22519 algorithm no matter what algorithm was specified.  No health
+// function is configured.
+func TestGetLocalTrustService(t *testing.T) {
+	localConfig := `{"trust_service": {"type": "local", "key_algorithm": "meh"}}`
+
+	var registerCalled = 0
+	var fakeRegister = func(_ string, _ func() error, _ time.Duration) {
+		registerCalled++
+	}
+
+	trust, algo, err := getTrustService(configure(localConfig),
+		client.NewNotarySigner, fakeRegister)
+	assert.NoError(t, err)
+	assert.IsType(t, &signed.Ed25519{}, trust)
+	assert.Equal(t, data.ED25519Key, algo)
+
+	// no health function ever registered
+	assert.Equal(t, 0, registerCalled)
+}
+
+// Invalid key algorithms result in an error if a remote trust service was
+// specified.
+func TestGetTrustServiceInvalidKeyAlgorithm(t *testing.T) {
+	configTemplate := `
+	{
+		"trust_service": {
+			"type": "remote",
+			"hostname": "blah",
+			"port": "1234",
+			"key_algorithm": "%s"
+		}
+	}`
+	badKeyAlgos := []string{
+		fmt.Sprintf(configTemplate, ""),
+		fmt.Sprintf(configTemplate, data.ECDSAx509Key),
+		fmt.Sprintf(configTemplate, "random"),
+	}
+	var registerCalled = 0
+	var fakeRegister = func(_ string, _ func() error, _ time.Duration) {
+		registerCalled++
+	}
+
+	for _, config := range badKeyAlgos {
+		_, _, err := getTrustService(configure(config),
+			client.NewNotarySigner, fakeRegister)
+		assert.Error(t, err)
+		assert.Contains(t, err.Error(), "invalid key algorithm")
+	}
+	// no health function ever registered
+	assert.Equal(t, 0, registerCalled)
+}
+
+// template to be used for testing TLS parsing with the trust service
+var trustTLSConfigTemplate = `
+	{
+		"trust_service": {
+			"type": "remote",
+			"hostname": "notary-signer",
+			"port": "1234",
+			"key_algorithm": "ecdsa",
+			%s
+		}
+	}`
+
 // Client cert and Key either both have to be empty or both have to be
 // provided.
-func TestGrpcTLSMissingCertOrKey(t *testing.T) {
+func TestGetTrustServiceTLSMissingCertOrKey(t *testing.T) {
 	configs := []string{
 		fmt.Sprintf(`"tls_client_cert": "%s"`, Cert),
 		fmt.Sprintf(`"tls_client_key": "%s"`, Key),
 	}
-	for _, trustConfig := range configs {
-		jsonConfig := fmt.Sprintf(
-			`{"trust_service": {"hostname": "notary-signer", %s}}`,
-			trustConfig)
+	var registerCalled = 0
+	var fakeRegister = func(_ string, _ func() error, _ time.Duration) {
+		registerCalled++
+	}
+
+	for _, clientTLSConfig := range configs {
+		jsonConfig := fmt.Sprintf(trustTLSConfigTemplate, clientTLSConfig)
 		config := configure(jsonConfig)
-		tlsConfig, err := grpcTLS(config)
+		_, _, err := getTrustService(config, client.NewNotarySigner,
+			fakeRegister)
 		assert.Error(t, err)
-		assert.Nil(t, tlsConfig)
 		assert.True(t,
 			strings.Contains(err.Error(), "Partial TLS configuration found."))
 	}
+	// no health function ever registered
+	assert.Equal(t, 0, registerCalled)
 }
 
-// If no TLS configuration is provided for the host server, a tls config with
-// the provided serverName is still returned.
-func TestGrpcTLSNoConfig(t *testing.T) {
-	tlsConfig, err := grpcTLS(
-		configure(`{"trust_service": {"hostname": "notary-signer"}}`))
+// If no TLS configuration is provided for the host server, no TLS config will
+// be set for the trust service.
+func TestGetTrustServiceNoTLSConfig(t *testing.T) {
+	config := `{
+		"trust_service": {
+			"type": "remote",
+			"hostname": "notary-signer",
+			"port": "1234",
+			"key_algorithm": "ecdsa"
+		}
+	}`
+	var registerCalled = 0
+	var fakeRegister = func(_ string, _ func() error, _ time.Duration) {
+		registerCalled++
+	}
+
+	var tlsConfig *tls.Config
+	var fakeNewSigner = func(_, _ string, c *tls.Config) *client.NotarySigner {
+		tlsConfig = c
+		return &client.NotarySigner{}
+	}
+
+	trust, algo, err := getTrustService(configure(config),
+		fakeNewSigner, fakeRegister)
 	assert.NoError(t, err)
+	assert.IsType(t, &client.NotarySigner{}, trust)
+	assert.Equal(t, "ecdsa", algo)
 	assert.Equal(t, "notary-signer", tlsConfig.ServerName)
 	assert.Nil(t, tlsConfig.RootCAs)
 	assert.Nil(t, tlsConfig.Certificates)
+	// health function registered
+	assert.Equal(t, 1, registerCalled)
 }
 
-// The rest of the functionality of grpcTLS depends upon
+// The rest of the functionality of getTrustService depends upon
 // utils.ConfigureClientTLS, so this test just asserts that if successful,
-// the correct tls.Config is returned based on all the configuration parameters,
-// and that it gets the path relative to the config file
-func TestGrpcTLSSuccess(t *testing.T) {
+// the correct tls.Config is returned based on all the configuration parameters
+func TestGetTrustServiceTLSSuccess(t *testing.T) {
 	keypair, err := tls.LoadX509KeyPair(Cert, Key)
 	assert.NoError(t, err, "Unable to load cert and key for testing")
 
-	configJSON := `{
-		"trust_service": {
-            "hostname": "notary-server",
-            "tls_client_cert": "notary-server.crt",
-            "tls_client_key": "notary-server.key"
-        }
-    }`
-	config := configure(configJSON)
-	config.SetConfigFile("../../fixtures/config.json")
-	tlsConfig, err := grpcTLS(config)
+	tlspart := fmt.Sprintf(`"tls_client_cert": "%s", "tls_client_key": "%s"`,
+		Cert, Key)
+
+	var registerCalled = 0
+	var fakeRegister = func(_ string, _ func() error, _ time.Duration) {
+		registerCalled++
+	}
+
+	var tlsConfig *tls.Config
+	var fakeNewSigner = func(_, _ string, c *tls.Config) *client.NotarySigner {
+		tlsConfig = c
+		return &client.NotarySigner{}
+	}
+
+	trust, algo, err := getTrustService(
+		configure(fmt.Sprintf(trustTLSConfigTemplate, tlspart)),
+		fakeNewSigner, fakeRegister)
 	assert.NoError(t, err)
+	assert.IsType(t, &client.NotarySigner{}, trust)
+	assert.Equal(t, "ecdsa", algo)
+	assert.Equal(t, "notary-signer", tlsConfig.ServerName)
 	assert.Equal(t, []tls.Certificate{keypair}, tlsConfig.Certificates)
+	// health function registered
+	assert.Equal(t, 1, registerCalled)
 }
 
-// The rest of the functionality of grpcTLS depends upon
+// The rest of the functionality of getTrustService depends upon
 // utils.ConfigureServerTLS, so this test just asserts that if it fails,
-// the error is propogated.
-func TestGrpcTLSFailure(t *testing.T) {
-	config := fmt.Sprintf(
-		`{"trust_service": {
-            "hostname": "notary-server",
-            "tls_client_cert": "no-exist",
-            "tls_client_key": "%s"}}`,
+// the error is propagated.
+func TestGetTrustServiceTLSFailure(t *testing.T) {
+	tlspart := fmt.Sprintf(`"tls_client_cert": "none", "tls_client_key": "%s"`,
 		Key)
-	tlsConfig, err := grpcTLS(configure(config))
+
+	var registerCalled = 0
+	var fakeRegister = func(_ string, _ func() error, _ time.Duration) {
+		registerCalled++
+	}
+
+	_, _, err := getTrustService(
+		configure(fmt.Sprintf(trustTLSConfigTemplate, tlspart)),
+		client.NewNotarySigner, fakeRegister)
+
 	assert.Error(t, err)
-	assert.Nil(t, tlsConfig)
 	assert.True(t, strings.Contains(err.Error(),
 		"Unable to configure TLS to the trust service"))
+
+	// no health function ever registered
+	assert.Equal(t, 0, registerCalled)
 }
 
 // Just to ensure that errors are propogated
