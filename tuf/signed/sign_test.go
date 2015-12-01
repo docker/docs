@@ -154,7 +154,7 @@ func TestReSign(t *testing.T) {
 
 }
 
-// Should not remove signatures for valid keys that were not resigned with
+// Resigning drops all obsolete signatures
 func TestMultiSign(t *testing.T) {
 	cs := NewEd25519()
 	testData := data.Signed{
@@ -166,10 +166,7 @@ func TestMultiSign(t *testing.T) {
 
 	require.NoError(t, Sign(cs, &testData, []data.PublicKey{key1}, 1, nil))
 
-	// reinitializing cs means it won't know about key1. We want
-	// to attempt to sign passing both key1 and key2, while expecting
-	// that the signature for key1 is left intact and the signature
-	// for key2 is added
+	// reinitializing cs means it won't know about key1.
 	cs = NewEd25519()
 	key2, err := cs.Create(data.CanonicalRootRole, "", data.ED25519Key)
 	require.NoError(t, err)
