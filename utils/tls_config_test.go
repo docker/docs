@@ -60,10 +60,9 @@ func TestConfigServerTLSFailsIfUnableToLoadCerts(t *testing.T) {
 		files[i] = "not-real-file"
 
 		result, err := ConfigureServerTLS(&ServerTLSOpts{
-			ServerCertFile:    files[0],
-			ServerKeyFile:     files[1],
-			RequireClientAuth: true,
-			ClientCAFile:      files[2],
+			ServerCertFile: files[0],
+			ServerKeyFile:  files[1],
+			ClientCAFile:   files[2],
 		})
 		assert.Nil(t, result)
 		assert.Error(t, err)
@@ -106,7 +105,7 @@ func TestConfigServerTLSWithEmptyCACertFile(t *testing.T) {
 
 // If server cert and key are provided, and client cert file is provided with
 // one cert, a valid tls.Config is returned with the clientCAs set to that
-// cert.
+// cert.  ClientAuth is set to RequireAndVerifyClientCert.
 func TestConfigServerTLSWithOneCACert(t *testing.T) {
 	keypair, err := tls.LoadX509KeyPair(ServerCert, ServerKey)
 	assert.NoError(t, err)
@@ -119,13 +118,13 @@ func TestConfigServerTLSWithOneCACert(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Equal(t, []tls.Certificate{keypair}, tlsConfig.Certificates)
 	assert.True(t, tlsConfig.PreferServerCipherSuites)
-	assert.Equal(t, tls.NoClientCert, tlsConfig.ClientAuth)
+	assert.Equal(t, tls.RequireAndVerifyClientCert, tlsConfig.ClientAuth)
 	assert.Len(t, tlsConfig.ClientCAs.Subjects(), 1)
 }
 
 // If server cert and key are provided, and client cert file is provided with
 // multiple certs, a valid tls.Config is returned with the clientCAs set to
-// the valid cert.
+// the valid cert.  ClientAuth is set to RequireAndVerifyClientCert.
 func TestConfigServerTLSWithMultipleCACerts(t *testing.T) {
 	tempFilename := generateMultiCert(t)
 	defer os.RemoveAll(tempFilename)
@@ -141,27 +140,8 @@ func TestConfigServerTLSWithMultipleCACerts(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Equal(t, []tls.Certificate{keypair}, tlsConfig.Certificates)
 	assert.True(t, tlsConfig.PreferServerCipherSuites)
-	assert.Equal(t, tls.NoClientCert, tlsConfig.ClientAuth)
-	assert.Len(t, tlsConfig.ClientCAs.Subjects(), 2)
-}
-
-// If server cert and key are provided, and client auth is disabled, then
-// a valid tls.Config is returned with ClientAuth set to
-// RequireAndVerifyClientCert
-func TestConfigServerTLSClientAuthEnabled(t *testing.T) {
-	keypair, err := tls.LoadX509KeyPair(ServerCert, ServerKey)
-	assert.NoError(t, err)
-
-	tlsConfig, err := ConfigureServerTLS(&ServerTLSOpts{
-		ServerCertFile:    ServerCert,
-		ServerKeyFile:     ServerKey,
-		RequireClientAuth: true,
-	})
-	assert.NoError(t, err)
-	assert.Equal(t, []tls.Certificate{keypair}, tlsConfig.Certificates)
-	assert.True(t, tlsConfig.PreferServerCipherSuites)
 	assert.Equal(t, tls.RequireAndVerifyClientCert, tlsConfig.ClientAuth)
-	assert.Nil(t, tlsConfig.ClientCAs)
+	assert.Len(t, tlsConfig.ClientCAs.Subjects(), 2)
 }
 
 // The skipVerify boolean gets set on the tls.Config's InsecureSkipBoolean
