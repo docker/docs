@@ -2,9 +2,7 @@ package main
 
 import (
 	"crypto/x509"
-	"math"
 	"os"
-	"time"
 
 	"github.com/docker/notary/certs"
 	"github.com/docker/notary/trustmanager"
@@ -124,20 +122,9 @@ func certList(cmd *cobra.Command, args []string) {
 		fatalf("Failed to create a new truststore manager with directory: %s", trustDir)
 	}
 
-	cmd.Println("")
-	cmd.Println("# Trusted Certificates:")
 	trustedCerts := certManager.TrustedCertificateStore().GetCertificates()
-	for _, c := range trustedCerts {
-		printCert(cmd, c)
-	}
-}
 
-func printCert(cmd *cobra.Command, cert *x509.Certificate) {
-	timeDifference := cert.NotAfter.Sub(time.Now())
-	certID, err := trustmanager.FingerprintCert(cert)
-	if err != nil {
-		fatalf("Could not fingerprint certificate: %v", err)
-	}
-
-	cmd.Printf("%s %s (expires in: %v days)\n", cert.Subject.CommonName, certID, math.Floor(timeDifference.Hours()/24))
+	cmd.Println("")
+	prettyPrintCerts(trustedCerts, cmd.Out())
+	cmd.Println("")
 }
