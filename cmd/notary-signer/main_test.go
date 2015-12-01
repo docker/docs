@@ -11,8 +11,11 @@ import (
 	"testing"
 
 	"github.com/docker/notary/signer"
+	"github.com/docker/notary/signer/keydbstore"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/utils"
+	"github.com/jinzhu/gorm"
+	_ "github.com/mattn/go-sqlite3"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 )
@@ -120,6 +123,17 @@ func TestSetupCryptoServicesDBStoreSuccess(t *testing.T) {
 	tmpFile.Close()
 	defer os.Remove(tmpFile.Name())
 
+	// Ensure that the private_key table exists
+	db, err := gorm.Open("sqlite3", tmpFile.Name())
+	assert.NoError(t, err)
+	var (
+		gormKey = keydbstore.GormPrivateKey{}
+		count   int
+	)
+	db.CreateTable(&gormKey)
+	db.Model(&gormKey).Count(&count)
+	assert.Equal(t, 0, count)
+
 	cryptoServices, err := setUpCryptoservices(
 		configure(fmt.Sprintf(
 			`{"storage": {"backend": "%s", "db_url": "%s"},
@@ -136,6 +150,16 @@ func TestSetupCryptoServicesDBStoreSuccess(t *testing.T) {
 	assert.True(t, ok)
 
 	assert.Equal(t, edService, ecService)
+
+	// since the keystores are not exposed by CryptoService, try creating
+	// a key and seeing if it is in the sqlite DB.
+	os.Setenv("NOTARY_SIGNER_TIMESTAMP", "password")
+	defer os.Unsetenv("NOTARY_SIGNER_TIMESTAMP")
+
+	_, err = ecService.Create("timestamp", data.ECDSAKey)
+	assert.NoError(t, err)
+	db.Model(&gormKey).Count(&count)
+	assert.Equal(t, 1, count)
 }
 
 // If a memory backend is specified, then a default alias is not needed, and
@@ -155,6 +179,14 @@ func TestSetupCryptoServicesMemoryStore(t *testing.T) {
 	assert.True(t, ok)
 
 	assert.Equal(t, edService, ecService)
+
+	// since the keystores are not exposed by CryptoService, try creating
+	// and getting the key
+	pubKey, err := ecService.Create("", data.ECDSAKey)
+	assert.NoError(t, err)
+	privKey, _, err := ecService.GetPrivateKey(pubKey.ID())
+	assert.NoError(t, err)
+	assert.NotNil(t, privKey)
 }
 
 func TestSetupHTTPServer(t *testing.T) {
