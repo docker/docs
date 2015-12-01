@@ -176,6 +176,15 @@ from the open source. It incorporates defect fixes that you can use in
 environments where new features cannot be adopted as quickly for consistency and
 compatibility reasons.  
 
+### Commercially Supported Docker Engine 1.9.1-cs2
+(4 December 2015)
+
+Starting with this release, upgrading minor versions, for example, from 1.9.0 to 1.9.1, is faster and easier. See the [upgrade](install/upgrade.md) documentation for details.
+
+You can refer to the detailed list of all changes since the release of CS Engine
+1.9.0
+https://github.com/docker/docker/releases.
+
 ### Commercially Supported Docker Engine 1.9.0
 (12 November 2015)
 

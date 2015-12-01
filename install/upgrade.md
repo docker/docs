@@ -7,7 +7,7 @@ parent="smn_dhe_install"
 +++
 
 
-# Upgrade the Trusted Registry and the CS Engine
+# Upgrade the Trusted Registry and the CS engine
 
 This document describes the process and steps necessary to upgrade Docker
 Trusted Registry and the commercially supported engine (CS engine). When you
@@ -15,6 +15,9 @@ first install, the general order is to install the CS engine, then install the
 Trusted Registry. However, when you upgrade, you reverse that order.
 
   **Note**: Ensure when upgrading the Trusted Registry, that you also upgrade to the latest CS Engine.
+
+The CS engine has two procedures for upgrading, from versions 1.6.x to 1.9.0
+and from version 1.9.0 to 1.9.x which are described in this document.
 
 The following are overall steps, which are explained in detail in this document:
 
@@ -61,11 +64,17 @@ The upgrade process requires a small amount of downtime to complete.
 
 ## Upgrade to the latest version of the CS engine
 
-1. Stop the Trusted Registry prior to upgrading the CS engine.
+The following steps describe how to upgrade from prior versions to 1.9.0.
+
+>**Note**: The installation mechanism for versions prior to 1.9.0 are incompatible with 1.9.0. You must uninstall your earlier version before upgrading to a current version.
+
+First, stop the Trusted Registry prior to upgrading the CS engine.
 
     `$ sudo bash -c "$(sudo docker run docker/trusted-registry:1.4.0 stop)"`
 
 **WARNING**: If you stop the CS Engine, while the Trusted Registry is running, the Trusted Registry may not perform as expected and you must restart it.
+
+Next, following the instructions that are based on your operating system.
 
 ### CentOS 7.1 & RHEL 7.0/7.1 (YUM-based systems)
 
@@ -105,7 +114,7 @@ again.
 7. Restart the Trusted Registry:  
 
     ```
-    $ sudo bash -c "$(sudo docker run docker/trusted-registry start)"
+    $ sudo bash -c "$(sudo docker run docker/trusted-registry restart)"
     ```
 
 ### Ubuntu 14.04 LTS (APT-based systems)
@@ -124,11 +133,11 @@ again.
 
 3. Install the HTTPS helper for apt (your system may already have it):
 
-    `$ sudo apt-get update && sudo apt-get install apt-transport-https`
+      `$ sudo apt-get update && sudo apt-get install apt-transport-https`
 
 4. Install additional virtual drivers not in the base image.
 
-        $ sudo apt-get install -y linux-image-extra-virtual
+      `$ sudo apt-get install -y linux-image-extra-virtual`
 
       You may need to reboot your server after updating the LTS kernel.
 
@@ -152,12 +161,37 @@ again.
 
 7. Restart the Trusted Registry:  
 
-     `$ sudo bash -c "$(sudo docker run docker/trusted-registry start)"`
+     `$ sudo bash -c "$(sudo docker run docker/trusted-registry restart)"`
 
-## LDAP Configure options
+## Upgrade the CS engine from versions 1.9.0 and later
 
-With this release, there are several changes to the LDAP configuration options
-that affect authentication and global roles.
+Upgrading minor versions of the CS engine, can solve potential issues or may
+contain a needed feature. Docker has streamlined the upgrade path for upgrading
+the CS engine. The steps are as follows:
+
+### CentOS 7.1 & RHEL 7.0/7.1 (YUM-based systems)
+1. Update your `docker-engine` package:
+
+    `$ sudo yum upgrade docker-engine`
+
+2. Restart the Trusted Registry:  
+
+        `$ sudo bash -c "$(sudo docker run docker/trusted-registry restart)"`
+
+### Ubuntu 14.04 LTS (APT-based systems)
+
+1. Update your `docker-engine` package:
+
+    `$ sudo apt-get update && sudo apt-get upgrade docker-engine`
+
+2. Restart the Trusted Registry:  
+
+    `$ sudo bash -c "$(sudo docker run docker/trusted-registry restart)"`
+
+## Trusted Registry LDAP configure options
+
+With the current release, there are several changes to the LDAP configuration
+options that affect authentication and global roles.
 
 * Performance for LDAP user authentication has been significantly increased,
 reducing the number of required LDAP requests to only a single BIND request to
