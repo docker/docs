@@ -2,6 +2,10 @@ machine:
   xcode:
     version: "7.0"
 
-dependencies:
-  cache_directories:
-    - "node_modules"
+deployment:
+  release:
+    tag: /v.*/
+    owner: docker
+    commands:
+      - github-release upload --user docker --repo toolbox --tag $CIRCLE_TAG --file dist/DockerToolbox.exe --name DockerToolbox.exe
+      - github-release upload --user docker --repo toolbox --tag $CIRCLE_TAG --file dist/DockerToolbox.pkg --name DockerToolbox.pkg
