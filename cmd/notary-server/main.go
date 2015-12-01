@@ -119,12 +119,13 @@ func getStore(configuration *viper.Viper, allowedBackends []string) (
 	return store, nil
 }
 
+type signerFactory func(hostname, port string, tlsConfig *tls.Config) *client.NotarySigner
+type healthRegister func(name string, checkFunc func() error, duration time.Duration)
+
 // parses the configuration and determines which trust service and key algorithm
 // to return
-func getTrustService(configuration *viper.Viper,
-	signerFactory func(string, string, *tls.Config) *client.NotarySigner,
-	healthRegister func(string, func() error, time.Duration)) (
-	signed.CryptoService, string, error) {
+func getTrustService(configuration *viper.Viper, sFactory signerFactory,
+	hRegister healthRegister) (signed.CryptoService, string, error) {
 
 	switch configuration.GetString("trust_service.type") {
 	case "local":
@@ -149,14 +150,14 @@ func getTrustService(configuration *viper.Viper,
 
 	logrus.Info("Using remote signing service")
 
-	notarySigner := signerFactory(
+	notarySigner := sFactory(
 		configuration.GetString("trust_service.hostname"),
 		configuration.GetString("trust_service.port"),
 		clientTLS,
 	)
 
 	minute := 1 * time.Minute
-	healthRegister(
+	hRegister(
 		"Trust operational",
 		// If the trust service fails, the server is degraded but not
 		// exactly unheatlthy, so always return healthy and just log an
