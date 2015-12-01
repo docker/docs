@@ -127,13 +127,11 @@ func (c CryptoServiceTester) TestSignNoMatchingKeys(t *testing.T) {
 	assert.Error(t, err, c.errorMsg("Should not have found private key"))
 }
 
-// If there are multiple keystores, even if all of them have the same key,
-// only one signature is returned.
-func (c CryptoServiceTester) TestSignWhenMultipleKeystores(t *testing.T) {
+// Test GetPrivateKey succeeds when multiple keystores have the same key
+func (c CryptoServiceTester) TestGetPrivateKeyMultipleKeystores(t *testing.T) {
 	cryptoService := c.cryptoServiceFactory()
 	cryptoService.keyStores = append(cryptoService.keyStores,
 		trustmanager.NewKeyMemoryStore(passphraseRetriever))
-	content := []byte("this is a secret")
 
 	privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
 	assert.NoError(t, err, c.errorMsg("error creating key"))
@@ -143,12 +141,10 @@ func (c CryptoServiceTester) TestSignWhenMultipleKeystores(t *testing.T) {
 		assert.NoError(t, err)
 	}
 
-	privKey, role, err := cryptoService.GetPrivateKey(privKey.ID())
+	foundKey, role, err := cryptoService.GetPrivateKey(privKey.ID())
 	assert.NoError(t, err, c.errorMsg("failed to get private key"))
 	assert.Equal(t, c.role, role)
-
-	_, err = privKey.Sign(rand.Reader, content, nil)
-	assert.NoError(t, err, c.errorMsg("signing failed"))
+	assert.Equal(t, privKey.ID(), foundKey.ID())
 }
 
 // asserts that removing key that exists succeeds
@@ -278,7 +274,7 @@ func testCryptoService(t *testing.T, gun string) {
 			cst.TestGetNonexistentKey(t)
 			cst.TestSignWithKey(t)
 			cst.TestSignNoMatchingKeys(t)
-			cst.TestSignWhenMultipleKeystores(t)
+			cst.TestGetPrivateKeyMultipleKeystores(t)
 			cst.TestRemoveCreatedKey(t)
 			cst.TestRemoveFromMultipleKeystores(t)
 			cst.TestListFromMultipleKeystores(t)

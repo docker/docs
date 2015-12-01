@@ -36,8 +36,8 @@ type KeyService interface {
 	ImportRootKey(source io.Reader) error
 }
 
-// CryptoService defines a unified Signing and Key Service as this
-// will be most useful for most applications.
+// CryptoService is deprecated and all instances of its use should be
+// replaced with KeyService
 type CryptoService interface {
 	KeyService
 }
