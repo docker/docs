@@ -127,28 +127,6 @@ func NewNotarySigner(hostname string, port string, tlsConfig *tls.Config) *Notar
 	}
 }
 
-// Sign signs a byte string with a number of KeyIDs
-func (trust *NotarySigner) Sign(keyIDs []string, toSign []byte) ([]data.Signature, error) {
-	signatures := make([]data.Signature, 0, len(keyIDs))
-	for _, ID := range keyIDs {
-		keyID := pb.KeyID{ID: ID}
-		sr := &pb.SignatureRequest{
-			Content: toSign,
-			KeyID:   &keyID,
-		}
-		sig, err := trust.sClient.Sign(context.Background(), sr)
-		if err != nil {
-			return nil, err
-		}
-		signatures = append(signatures, data.Signature{
-			KeyID:     sig.KeyInfo.KeyID.ID,
-			Method:    data.SigAlgorithm(sig.Algorithm.Algorithm),
-			Signature: sig.Content,
-		})
-	}
-	return signatures, nil
-}
-
 // Create creates a remote key and returns the PublicKey associated with the remote private key
 func (trust *NotarySigner) Create(role, algorithm string) (data.PublicKey, error) {
 	publicKey, err := trust.kmClient.CreateKey(context.Background(), &pb.Algorithm{Algorithm: algorithm})

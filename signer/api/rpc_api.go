@@ -1,6 +1,7 @@
 package api
 
 import (
+	"crypto/rand"
 	"fmt"
 
 	ctxu "github.com/docker/distribution/context"
@@ -125,8 +126,13 @@ func (s *SignerServer) Sign(ctx context.Context, sr *pb.SignatureRequest) (*pb.S
 		return nil, grpc.Errorf(codes.NotFound, "key %s not found", sr.KeyID.ID)
 	}
 
-	signatures, err := service.Sign([]string{sr.KeyID.ID}, sr.Content)
-	if err != nil || len(signatures) != 1 {
+	privKey, _, err := service.GetPrivateKey(tufKey.ID())
+	if err != nil {
+		logger.Errorf("Sign: key %s not found", sr.KeyID.ID)
+		return nil, grpc.Errorf(codes.NotFound, "key %s not found", sr.KeyID.ID)
+	}
+	sig, err := privKey.Sign(rand.Reader, sr.Content, nil)
+	if err != nil {
 		logger.Errorf("Sign: signing failed for KeyID %s on hash %s", sr.KeyID.ID, sr.Content)
 		return nil, grpc.Errorf(codes.Internal, "Signing failed for KeyID %s on hash %s", sr.KeyID.ID, sr.Content)
 	}
@@ -138,8 +144,8 @@ func (s *SignerServer) Sign(ctx context.Context, sr *pb.SignatureRequest) (*pb.S
 			KeyID:     &pb.KeyID{ID: tufKey.ID()},
 			Algorithm: &pb.Algorithm{Algorithm: tufKey.Algorithm()},
 		},
-		Algorithm: &pb.Algorithm{Algorithm: signatures[0].Method.String()},
-		Content:   signatures[0].Signature,
+		Algorithm: &pb.Algorithm{Algorithm: privKey.SignatureAlgorithm().String()},
+		Content:   sig,
 	}
 
 	return signature, nil
