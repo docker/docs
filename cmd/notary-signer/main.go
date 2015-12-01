@@ -100,14 +100,15 @@ func setUpCryptoservices(configuration *viper.Viper, allowedBackends []string) (
 		}
 		logrus.Debugf("Using %s DB: %s", storeConfig.Backend, storeConfig.Source)
 
-		keyStore, err := keydbstore.NewKeyDBStore(
+		dbStore, err := keydbstore.NewKeyDBStore(
 			passphraseRetriever, defaultAlias, storeConfig.Backend, dbSQL)
 		if err != nil {
 			return nil, fmt.Errorf("failed to create a new keydbstore: %v", err)
 		}
 
 		health.RegisterPeriodicFunc(
-			"DB operational", keyStore.HealthCheck, time.Second*60)
+			"DB operational", dbStore.HealthCheck, time.Second*60)
+		keyStore = dbStore
 	}
 
 	cryptoService := cryptoservice.NewCryptoService("", keyStore)
