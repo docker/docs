@@ -498,11 +498,16 @@ func TestClientKeyImportExportRootOnly(t *testing.T) {
 func assertNumCerts(t *testing.T, tempDir string, expectedNum int) []string {
 	output, err := runCommand(t, tempDir, "cert", "list")
 	assert.NoError(t, err)
-	certs := splitLines(
-		strings.TrimPrefix(strings.TrimSpace(output), "# Trusted Certificates:"))
+	lines := splitLines(strings.TrimSpace(output))
 
-	assert.Len(t, certs, expectedNum)
-	return certs
+	if expectedNum == 0 {
+		assert.Len(t, lines, 1)
+		assert.Equal(t, "No trusted root certificates present.", lines[0])
+		return []string{}
+	}
+
+	assert.Len(t, lines, expectedNum+2)
+	return lines[2:]
 }
 
 // TestClientCertInteraction
@@ -530,7 +535,7 @@ func TestClientCertInteraction(t *testing.T) {
 	certs = assertNumCerts(t, tempDir, 1)
 
 	// remove a single cert
-	certID := strings.TrimSpace(strings.Split(certs[0], " ")[1])
+	certID := strings.Fields(certs[0])[1]
 	// passing an empty gun here because the string for the previous gun has
 	// has already been stored (a drawback of running these commands without)
 	// shelling out
