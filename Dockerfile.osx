@@ -26,13 +26,13 @@ RUN curl -fsSL -o /vbox.dmg http://download.virtualbox.org/virtualbox/$VBOX_VERS
 
 # Download the Docker parts
 
-ENV INSTALLER_VERSION 1.9.1a
+ENV INSTALLER_VERSION 1.9.1b
 ENV DOCKER_VERSION 1.9.1
 # RUN curl -fsSL -o /docker https://test.docker.com/builds/Darwin/x86_64/docker-$DOCKER_VERSION
 RUN curl -fsSL -o docker https://get.docker.com/builds/Darwin/x86_64/docker-$DOCKER_VERSION
 RUN chmod +x /docker
 
-ENV DOCKER_MACHINE_VERSION 0.5.1
+ENV DOCKER_MACHINE_VERSION 0.5.2
 RUN curl -fsSL -o /docker-machine.zip https://github.com/docker/machine/releases/download/v$DOCKER_MACHINE_VERSION/docker-machine_darwin-amd64.zip
 RUN 7z x /docker-machine.zip && rm -f /docker-machine.zip
 RUN chmod +x /docker-machine*
