@@ -44,10 +44,9 @@ func poolFromFile(filename string) (*x509.CertPool, error) {
 // ServerTLSOpts generates a tls configuration for servers using the
 // provided parameters.
 type ServerTLSOpts struct {
-	ServerCertFile    string
-	ServerKeyFile     string
-	RequireClientAuth bool
-	ClientCAFile      string
+	ServerCertFile string
+	ServerKeyFile  string
+	ClientCAFile   string
 }
 
 // ConfigureServerTLS specifies a set of ciphersuites, the server cert and key,
@@ -73,16 +72,13 @@ func ConfigureServerTLS(opts *ServerTLSOpts) (*tls.Config, error) {
 		Rand:                     rand.Reader,
 	}
 
-	if opts.RequireClientAuth {
-		tlsConfig.ClientAuth = tls.RequireAndVerifyClientCert
-	}
-
 	if opts.ClientCAFile != "" {
 		pool, err := poolFromFile(opts.ClientCAFile)
 		if err != nil {
 			return nil, err
 		}
 		tlsConfig.ClientCAs = pool
+		tlsConfig.ClientAuth = tls.RequireAndVerifyClientCert
 	}
 
 	return tlsConfig, nil
