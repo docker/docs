@@ -20,19 +20,14 @@ import (
 	"github.com/docker/notary/tuf/utils"
 )
 
-// Sign takes a data.Signed and keys, calculates and adds at least
+// Sign takes a data.Signed and replaces data.Signature with at least
 // minPrimarySignature signatures using primaryKeys and any possible
-// signatures using optionalKeys to the data.Signed
-// N.B. All public keys for a role should be passed so that this function
-//      can correctly clean up signatures that are no longer valid.
+// signatures using optionalKeys
 func Sign(service CryptoService, s *data.Signed, primaryKeys []data.PublicKey,
 	minSignatures int, optionalKeys []data.PublicKey) error {
 
 	logrus.Debugf("sign called with %d/%d required + %d optional keys",
 		minSignatures, len(primaryKeys), len(optionalKeys))
-	signatures := make([]data.Signature, 0, len(s.Signatures)+1)
-	signingKeyIDs := make(map[string]struct{})
-	tufIDs := make(map[string]data.PublicKey)
 
 	privKeys := make(map[string]data.PrivateKey)
 
@@ -40,7 +35,6 @@ func Sign(service CryptoService, s *data.Signed, primaryKeys []data.PublicKey,
 	missingKeyIDs := []string{}
 	for _, key := range primaryKeys {
 		canonicalID, err := utils.CanonicalKeyID(key)
-		tufIDs[key.ID()] = key
 		if err != nil {
 			return err
 		}
@@ -65,7 +59,6 @@ func Sign(service CryptoService, s *data.Signed, primaryKeys []data.PublicKey,
 		if _, ok := privKeys[key.ID()]; ok {
 			continue
 		}
-		tufIDs[key.ID()] = key
 		canonicalID, err := utils.CanonicalKeyID(key)
 		if err != nil {
 			return err
@@ -78,13 +71,13 @@ func Sign(service CryptoService, s *data.Signed, primaryKeys []data.PublicKey,
 	}
 
 	// Do signing and generate list of signatures
+	signatures := make([]data.Signature, 0, len(privKeys))
 	for keyID, pk := range privKeys {
 		sig, err := pk.Sign(rand.Reader, *s.Signed, nil)
 		if err != nil {
 			logrus.Debugf("Failed to sign with key: %s. Reason: %v", keyID, err)
 			return err
 		}
-		signingKeyIDs[keyID] = struct{}{}
 		signatures = append(signatures, data.Signature{
 			KeyID:     keyID,
 			Method:    pk.SignatureAlgorithm(),
@@ -92,27 +85,6 @@ func Sign(service CryptoService, s *data.Signed, primaryKeys []data.PublicKey,
 		})
 	}
 
-	for _, sig := range s.Signatures {
-		if _, ok := signingKeyIDs[sig.KeyID]; ok {
-			// key is in the set of key IDs for which a signature has been created
-			continue
-		}
-		var (
-			k  data.PublicKey
-			ok bool
-		)
-		if k, ok = tufIDs[sig.KeyID]; !ok {
-			// key is no longer a valid signing key
-			continue
-		}
-		if err := VerifySignature(*s.Signed, sig, k); err != nil {
-			// signature is no longer valid
-			continue
-		}
-		// keep any signatures that still represent valid keys and are
-		// themselves valid
-		signatures = append(signatures, sig)
-	}
 	s.Signatures = signatures
 	return nil
 }
