@@ -220,7 +220,7 @@ func addECDSAKey(
 
 	// Hard-coded policy: the generated certificate expires in 10 years.
 	startTime := time.Now()
-	template, err := trustmanager.NewCertificate(role, startTime, startTime.Add(time.Hour*24*365*10))
+	template, err := trustmanager.NewCertificate(role, startTime, startTime.AddDate(10, 0, 0))
 	if err != nil {
 		return fmt.Errorf("failed to create the certificate template: %v", err)
 	}
