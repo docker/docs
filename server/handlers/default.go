@@ -40,6 +40,12 @@ func AtomicUpdateHandler(ctx context.Context, w http.ResponseWriter, r *http.Req
 	if !ok {
 		return errors.ErrNoStorage.WithDetail(nil)
 	}
+	cryptoServiceVal := ctx.Value("cryptoService")
+	cryptoService, ok := cryptoServiceVal.(signed.CryptoService)
+	if !ok {
+		return errors.ErrNoCryptoService.WithDetail(nil)
+	}
+
 	vars := mux.Vars(r)
 	gun := vars["imageName"]
 	reader, err := r.MultipartReader()
@@ -73,7 +79,8 @@ func AtomicUpdateHandler(ctx context.Context, w http.ResponseWriter, r *http.Req
 			Data:    inBuf.Bytes(),
 		})
 	}
-	if err = validateUpdate(gun, updates, store); err != nil {
+	updates, err = validateUpdate(cryptoService, gun, updates, store)
+	if err != nil {
 		return errors.ErrMalformedUpload.WithDetail(err)
 	}
 	err = store.UpdateMany(gun, updates)
