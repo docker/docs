@@ -95,18 +95,22 @@ if [ -n "${DB_USER}" -o -n "${DB_NAME}" ]; then
 
   if [ -n "${DB_NAME}" ]; then
     for db in $(awk -F',' '{for (i = 1 ; i <= NF ; i++) print $i}' <<< "${DB_NAME}"); do
-      echo "Creating database \"$db\"..."
-      mysql --defaults-file=/etc/mysql/debian.cnf \
-        -e "CREATE DATABASE IF NOT EXISTS \`$db\` DEFAULT CHARACTER SET \`utf8\` COLLATE \`utf8_unicode_ci\`;"
-        if [ -n "${DB_USER}" ]; then
-          echo "Granting access to database \"$db\" for user \"${DB_USER}\"..."
-          mysql --defaults-file=/etc/mysql/debian.cnf \
-          -e "GRANT ALL PRIVILEGES ON \`$db\`.* TO '${DB_USER}' IDENTIFIED BY '${DB_PASS}';"
-        fi
-        # Create our Database:
-        mysql -uroot $db < ./initial.sql
-        mysql -uroot $db < ./migrate.sql
-      done
+      if mysql --defaults-file=/etc/mysql/debian.cnf -e "USE $db;" 2>/dev/null; then
+        echo "Database \"$db\" exists"
+      else
+        echo "Creating database \"$db\"..."
+        mysql --defaults-file=/etc/mysql/debian.cnf \
+          -e "CREATE DATABASE IF NOT EXISTS \`$db\` DEFAULT CHARACTER SET \`utf8\` COLLATE \`utf8_unicode_ci\`;"
+          if [ -n "${DB_USER}" ]; then
+            echo "Granting access to database \"$db\" for user \"${DB_USER}\"..."
+            mysql --defaults-file=/etc/mysql/debian.cnf \
+            -e "GRANT ALL PRIVILEGES ON \`$db\`.* TO '${DB_USER}' IDENTIFIED BY '${DB_PASS}';"
+          fi
+          # Create our Database:
+          mysql -uroot $db < ./initial.sql
+          mysql -uroot $db < ./migrate.sql
+      fi
+    done
   fi
   /usr/bin/mysqladmin --defaults-file=/etc/mysql/debian.cnf shutdown
 fi
