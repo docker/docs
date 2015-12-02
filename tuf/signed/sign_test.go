@@ -2,11 +2,11 @@ package signed
 
 import (
 	"crypto/rand"
-	"crypto/x509"
 	"encoding/pem"
 	"io"
 	"testing"
 
+	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
 	"github.com/stretchr/testify/assert"
@@ -254,15 +254,7 @@ func TestSignWithX509(t *testing.T) {
 	assert.NoError(t, err)
 
 	// make a RSA x509 key
-	template, err := trustmanager.NewCertificate("test")
-	assert.NoError(t, err)
-
-	signer := privKey.CryptoSigner()
-	derBytes, err := x509.CreateCertificate(
-		rand.Reader, template, template, signer.Public(), signer)
-	assert.NoError(t, err)
-
-	cert, err := x509.ParseCertificate(derBytes)
+	cert, err := cryptoservice.GenerateTestingCertificate(privKey.CryptoSigner(), "test")
 	assert.NoError(t, err)
 
 	tufRSAx509Key := trustmanager.CertToKey(cert)

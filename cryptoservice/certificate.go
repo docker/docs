@@ -1,6 +1,7 @@
 package cryptoservice
 
 import (
+	"crypto"
 	"crypto/rand"
 	"crypto/x509"
 	"fmt"
@@ -16,6 +17,15 @@ func GenerateCertificate(rootKey data.PrivateKey, gun string) (*x509.Certificate
 		return nil, fmt.Errorf("key type not supported for Certificate generation: %s\n", rootKey.Algorithm())
 	}
 
+	return generateCertificate(signer, gun)
+}
+
+// GenerateTestingCertificate generates an X509 Certificate from a template, given a GUN.
+func GenerateTestingCertificate(signer crypto.Signer, gun string) (*x509.Certificate, error) {
+	return generateCertificate(signer, gun)
+}
+
+func generateCertificate(signer crypto.Signer, gun string) (*x509.Certificate, error) {
 	template, err := trustmanager.NewCertificate(gun)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create the certificate template for: %s (%v)", gun, err)
