@@ -195,10 +195,9 @@ func main() {
 	mainViper.SetConfigType(strings.TrimPrefix(ext, "."))
 	mainViper.SetConfigName(strings.TrimSuffix(filename, ext))
 	mainViper.AddConfigPath(configPath)
-	err := mainViper.ReadInConfig()
-	if err != nil {
-		logrus.Error("Viper Error: ", err.Error())
-		logrus.Error("Could not read config at ", configFile)
+
+	if err := mainViper.ReadInConfig(); err != nil {
+		logrus.Errorf("Could not read config at :%s, viper error: %v", configFile, err)
 		os.Exit(1)
 	}
 
