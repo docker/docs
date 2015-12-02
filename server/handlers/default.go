@@ -96,6 +96,10 @@ func GetHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) err
 
 	logger := ctxu.GetLoggerWithFields(ctx, map[string]interface{}{"gun": gun, "tufRole": tufRole})
 
+	if data.CanonicalRole(tufRole) == data.CanonicalTimestampRole {
+		return getTimestamp(ctx, w, logger, store, gun)
+	}
+
 	out, err := store.GetCurrent(gun, tufRole)
 	if err != nil {
 		if _, ok := err.(*storage.ErrNotFound); ok {
@@ -132,22 +136,13 @@ func DeleteHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) 
 	return nil
 }
 
-// GetTimestampHandler returns a timestamp.json given a GUN
-func GetTimestampHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
-	s := ctx.Value("metaStore")
-	store, ok := s.(storage.MetaStore)
-	if !ok {
-		return errors.ErrNoStorage.WithDetail(nil)
-	}
+// getTimestampHandler returns a timestamp.json given a GUN
+func getTimestamp(ctx context.Context, w http.ResponseWriter, logger ctxu.Logger, store storage.MetaStore, gun string) error {
 	cryptoServiceVal := ctx.Value("cryptoService")
 	cryptoService, ok := cryptoServiceVal.(signed.CryptoService)
 	if !ok {
 		return errors.ErrNoCryptoService.WithDetail(nil)
 	}
-
-	vars := mux.Vars(r)
-	gun := vars["imageName"]
-	logger := ctxu.GetLoggerWithField(ctx, gun, "gun")
 
 	out, err := timestamp.GetOrCreateTimestamp(gun, store, cryptoService)
 	if err != nil {
