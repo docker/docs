@@ -47,7 +47,9 @@ func TestCertsToKeys(t *testing.T) {
 }
 
 func TestNewCertificate(t *testing.T) {
-	cert, err := NewCertificate("docker.com/alpine")
+	startTime := time.Now()
+	endTime := startTime.AddDate(10, 0, 0)
+	cert, err := NewCertificate("docker.com/alpine", startTime, endTime)
 	assert.NoError(t, err)
 	assert.Equal(t, cert.Subject.CommonName, "docker.com/alpine")
 	assert.True(t, time.Now().Before(cert.NotAfter))
@@ -177,7 +179,8 @@ func TestRSAX509PublickeyID(t *testing.T) {
 // X509PublickeyID returns the public key ID of an ECDSA X509 key rather than
 // the cert ID
 func TestECDSAX509PublickeyID(t *testing.T) {
-	template, err := NewCertificate("something")
+	startTime := time.Now()
+	template, err := NewCertificate("something", startTime, startTime.AddDate(10, 0, 0))
 	assert.NoError(t, err)
 	template.SignatureAlgorithm = x509.ECDSAWithSHA256
 	template.PublicKeyAlgorithm = x509.ECDSA
