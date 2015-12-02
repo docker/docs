@@ -23,9 +23,13 @@ var algoToSigType = map[string]data.SigAlgorithm{
 var passphraseRetriever = func(string, string, bool, int) (string, bool, error) { return "", false, nil }
 
 type CryptoServiceTester struct {
-	cryptoServiceFactory func() *CryptoService
-	role                 string
-	keyAlgo              string
+	role    string
+	keyAlgo string
+	gun     string
+}
+
+func (c CryptoServiceTester) cryptoServiceFactory() *CryptoService {
+	return NewCryptoService(c.gun, trustmanager.NewKeyMemoryStore(passphraseRetriever))
 }
 
 // asserts that created key exists
@@ -251,10 +255,6 @@ func (c CryptoServiceTester) errorMsg(message string, args ...interface{}) strin
 }
 
 func testCryptoService(t *testing.T, gun string) {
-	getTestingCryptoService := func() *CryptoService {
-		return NewCryptoService(
-			gun, trustmanager.NewKeyMemoryStore(passphraseRetriever))
-	}
 	roles := []string{
 		data.CanonicalRootRole,
 		data.CanonicalTargetsRole,
@@ -265,9 +265,9 @@ func testCryptoService(t *testing.T, gun string) {
 	for _, role := range roles {
 		for algo := range algoToSigType {
 			cst := CryptoServiceTester{
-				cryptoServiceFactory: getTestingCryptoService,
-				role:                 role,
-				keyAlgo:              algo,
+				role:    role,
+				keyAlgo: algo,
+				gun:     gun,
 			}
 			cst.TestCreateAndGetKey(t)
 			cst.TestCreateAndGetWhenMultipleKeystores(t)
