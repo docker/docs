@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"time"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary/certs"
@@ -142,7 +143,9 @@ func (r *NotaryRepository) Initialize(rootKeyID string) error {
 		return err
 	}
 
-	rootCert, err := cryptoservice.GenerateCertificate(privKey, r.gun)
+	// Hard-coded policy: the generated certificate expires in 10 years.
+	startTime := time.Now()
+	rootCert, err := cryptoservice.GenerateCertificate(privKey, r.gun, startTime, startTime.Add(time.Hour*24*365*10))
 
 	if err != nil {
 		return err
