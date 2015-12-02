@@ -145,7 +145,7 @@ func (r *NotaryRepository) Initialize(rootKeyID string) error {
 
 	// Hard-coded policy: the generated certificate expires in 10 years.
 	startTime := time.Now()
-	rootCert, err := cryptoservice.GenerateCertificate(privKey, r.gun, startTime, startTime.Add(time.Hour*24*365*10))
+	rootCert, err := cryptoservice.GenerateCertificate(privKey, r.gun, startTime, startTime.AddDate(10, 0, 0))
 
 	if err != nil {
 		return err
