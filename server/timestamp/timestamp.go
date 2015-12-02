@@ -16,14 +16,14 @@ import (
 // found. It attempts to handle the race condition that may occur if 2 servers try to
 // create the key at the same time by simply querying the store a second time if it
 // receives a conflict when writing.
-func GetOrCreateTimestampKey(gun string, store storage.MetaStore, crypto signed.CryptoService, fallBackAlgorithm string) (data.PublicKey, error) {
+func GetOrCreateTimestampKey(gun string, store storage.MetaStore, crypto signed.CryptoService, createAlgorithm string) (data.PublicKey, error) {
 	keyAlgorithm, public, err := store.GetKey(gun, data.CanonicalTimestampRole)
 	if err == nil {
 		return data.NewPublicKey(keyAlgorithm, public), nil
 	}
 
 	if _, ok := err.(*storage.ErrNoKey); ok {
-		key, err := crypto.Create("timestamp", fallBackAlgorithm)
+		key, err := crypto.Create("timestamp", createAlgorithm)
 		if err != nil {
 			return nil, err
 		}

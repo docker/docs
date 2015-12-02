@@ -7,68 +7,25 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/Sirupsen/logrus"
+
+	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/tuf"
 	"github.com/docker/notary/tuf/data"
-
-	"github.com/Sirupsen/logrus"
-	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/tuf/keys"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/utils"
 )
 
-// ErrValidation represents a general validation error
-type ErrValidation struct {
-	msg string
-}
-
-func (err ErrValidation) Error() string {
-	return fmt.Sprintf("An error occurred during validation: %s", err.msg)
-}
-
-// ErrBadHierarchy represents a missing snapshot at this current time.
-// When delegations are implemented it will also represent a missing
-// delegation parent
-type ErrBadHierarchy struct {
-	msg string
-}
-
-func (err ErrBadHierarchy) Error() string {
-	return fmt.Sprintf("Hierarchy of updates in incorrect: %s", err.msg)
-}
-
-// ErrBadRoot represents a failure validating the root
-type ErrBadRoot struct {
-	msg string
-}
-
-func (err ErrBadRoot) Error() string {
-	return fmt.Sprintf("The root being updated is invalid: %s", err.msg)
-}
-
-// ErrBadTargets represents a failure to validate a targets (incl delegations)
-type ErrBadTargets struct {
-	msg string
-}
-
-func (err ErrBadTargets) Error() string {
-	return fmt.Sprintf("The targets being updated is invalid: %s", err.msg)
-}
-
-// ErrBadSnapshot represents a failure to validate the snapshot
-type ErrBadSnapshot struct {
-	msg string
-}
-
-func (err ErrBadSnapshot) Error() string {
-	return fmt.Sprintf("The snapshot being updated is invalid: %s", err.msg)
-}
-
 // validateUpload checks that the updates being pushed
 // are semantically correct and the signatures are correct
-func validateUpdate(gun string, updates []storage.MetaUpdate, store storage.MetaStore) error {
+// A list of possibly modified updates are returned if all
+// validation was successful. This allows the snapshot to be
+// created and added if snapshotting has been delegated to the
+// server
+func validateUpdate(cs signed.CryptoService, gun string, updates []storage.MetaUpdate, store storage.MetaStore) ([]storage.MetaUpdate, error) {
 	kdb := keys.NewDB()
-	repo := tuf.NewRepo(kdb, nil)
+	repo := tuf.NewRepo(kdb, cs)
 	rootRole := data.RoleName(data.CanonicalRootRole)
 	targetsRole := data.RoleName(data.CanonicalTargetsRole)
 	snapshotRole := data.RoleName(data.CanonicalSnapshotRole)
@@ -78,11 +35,6 @@ func validateUpdate(gun string, updates []storage.MetaUpdate, store storage.Meta
 	for _, v := range updates {
 		roles[v.Role] = v
 	}
-	if err := hierarchyOK(roles); err != nil {
-		logrus.Error("ErrBadHierarchy: ", err.Error())
-		return ErrBadHierarchy{msg: err.Error()}
-	}
-	logrus.Debug("Successfully validated hierarchy")
 
 	var root *data.SignedRoot
 	oldRootJSON, err := store.GetCurrent(gun, rootRole)
@@ -90,33 +42,33 @@ func validateUpdate(gun string, updates []storage.MetaUpdate, store storage.Meta
 		// problem with storage. No expectation we can
 		// write if we can't read so bail.
 		logrus.Error("error reading previous root: ", err.Error())
-		return err
+		return nil, err
 	}
 	if rootUpdate, ok := roles[rootRole]; ok {
 		// if root is present, validate its integrity, possibly
 		// against a previous root
 		if root, err = validateRoot(gun, oldRootJSON, rootUpdate.Data, store); err != nil {
 			logrus.Error("ErrBadRoot: ", err.Error())
-			return ErrBadRoot{msg: err.Error()}
+			return nil, ErrBadRoot{msg: err.Error()}
 		}
 
 		// setting root will update keys db
 		if err = repo.SetRoot(root); err != nil {
 			logrus.Error("ErrValidation: ", err.Error())
-			return ErrValidation{msg: err.Error()}
+			return nil, ErrValidation{msg: err.Error()}
 		}
 		logrus.Debug("Successfully validated root")
 	} else {
 		if oldRootJSON == nil {
-			return ErrValidation{msg: "no pre-existing root and no root provided in update."}
+			return nil, ErrValidation{msg: "no pre-existing root and no root provided in update."}
 		}
 		parsedOldRoot := &data.SignedRoot{}
 		if err := json.Unmarshal(oldRootJSON, parsedOldRoot); err != nil {
-			return ErrValidation{msg: "pre-existing root is corrupted and no root provided in update."}
+			return nil, ErrValidation{msg: "pre-existing root is corrupted and no root provided in update."}
 		}
 		if err = repo.SetRoot(parsedOldRoot); err != nil {
 			logrus.Error("ErrValidation: ", err.Error())
-			return ErrValidation{msg: err.Error()}
+			return nil, ErrValidation{msg: err.Error()}
 		}
 	}
 
@@ -125,32 +77,148 @@ func validateUpdate(gun string, updates []storage.MetaUpdate, store storage.Meta
 	if _, ok := roles[targetsRole]; ok {
 		if t, err = validateTargets(targetsRole, roles, kdb); err != nil {
 			logrus.Error("ErrBadTargets: ", err.Error())
-			return ErrBadTargets{msg: err.Error()}
+			return nil, ErrBadTargets{msg: err.Error()}
 		}
 		repo.SetTargets(targetsRole, t)
 	}
 	logrus.Debug("Successfully validated targets")
 
-	var oldSnap *data.SignedSnapshot
-	oldSnapJSON, err := store.GetCurrent(gun, snapshotRole)
-	if _, ok := err.(*storage.ErrNotFound); err != nil && !ok {
-		// problem with storage. No expectation we can
-		// write if we can't read so bail.
-		logrus.Error("error reading previous snapshot: ", err.Error())
-		return err
-	} else if err == nil {
-		oldSnap = &data.SignedSnapshot{}
-		if err := json.Unmarshal(oldSnapJSON, oldSnap); err != nil {
-			oldSnap = nil
+	if _, ok := roles[snapshotRole]; ok {
+		var oldSnap *data.SignedSnapshot
+		oldSnapJSON, err := store.GetCurrent(gun, snapshotRole)
+		if _, ok := err.(*storage.ErrNotFound); err != nil && !ok {
+			// problem with storage. No expectation we can
+			// write if we can't read so bail.
+			logrus.Error("error reading previous snapshot: ", err.Error())
+			return nil, err
+		} else if err == nil {
+			oldSnap = &data.SignedSnapshot{}
+			if err := json.Unmarshal(oldSnapJSON, oldSnap); err != nil {
+				oldSnap = nil
+			}
 		}
+
+		if err := validateSnapshot(snapshotRole, oldSnap, roles[snapshotRole], roles, kdb); err != nil {
+			logrus.Error("ErrBadSnapshot: ", err.Error())
+			return nil, ErrBadSnapshot{msg: err.Error()}
+		}
+		logrus.Debug("Successfully validated snapshot")
+	} else {
+		// Check:
+		//	 - we have a snapshot key
+		//   - it matches a snapshot key signed into the root.json
+		// Then:
+		//   - generate a new snapshot
+		//   - add it to the updates
+		//
+		// TODO: Assumptions have been made about what is loaded into the repo.
+		//       we need to ensure at a minimum the root and targets are loaded
+		//       in.
+		err := prepRepo(gun, repo, store)
+		if err != nil {
+			return nil, err
+		}
+		update, err := generateSnapshot(gun, kdb, repo, store)
+		if err != nil {
+			return nil, err
+		}
+		updates = append(updates, *update)
+	}
+	return updates, nil
+}
+
+func prepRepo(gun string, repo *tuf.Repo, store storage.MetaStore) error {
+	if repo.Root == nil {
+		rootJSON, err := store.GetCurrent(gun, data.CanonicalRootRole)
+		if err != nil {
+			return fmt.Errorf("could not load repo for snapshot generation: %v", err)
+		}
+		root := &data.SignedRoot{}
+		err = json.Unmarshal(rootJSON, root)
+		if err != nil {
+			return fmt.Errorf("could not load repo for snapshot generation: %v", err)
+		}
+		repo.SetRoot(root)
+	}
+	if repo.Targets[data.CanonicalTargetsRole] == nil {
+		targetsJSON, err := store.GetCurrent(gun, data.CanonicalTargetsRole)
+		if err != nil {
+			return fmt.Errorf("could not load repo for snapshot generation: %v", err)
+		}
+		targets := &data.SignedTargets{}
+		err = json.Unmarshal(targetsJSON, targets)
+		if err != nil {
+			return fmt.Errorf("could not load repo for snapshot generation: %v", err)
+		}
+		repo.SetTargets(data.CanonicalTargetsRole, targets)
+	}
+	return nil
+}
+
+func generateSnapshot(gun string, kdb *keys.KeyDB, repo *tuf.Repo, store storage.MetaStore) (*storage.MetaUpdate, error) {
+	role := kdb.GetRole(data.RoleName(data.CanonicalSnapshotRole))
+	if role == nil {
+		return nil, ErrBadRoot{msg: "root did not include snapshot role"}
 	}
 
-	if err := validateSnapshot(snapshotRole, oldSnap, roles[snapshotRole], roles, kdb); err != nil {
-		logrus.Error("ErrBadSnapshot: ", err.Error())
-		return ErrBadSnapshot{msg: err.Error()}
+	algo, keyBytes, err := store.GetKey(gun, data.CanonicalSnapshotRole)
+	foundK := data.NewPublicKey(algo, keyBytes)
+
+	validKey := false
+	for _, id := range role.KeyIDs {
+		if id == foundK.ID() {
+			validKey = true
+			break
+		}
 	}
-	logrus.Debug("Successfully validated snapshot")
-	return nil
+	if !validKey {
+		return nil, ErrBadHierarchy{msg: "no snapshot was included in update and server does not hold current snapshot key for repository"}
+	}
+
+	currentJSON, err := store.GetCurrent(gun, data.CanonicalSnapshotRole)
+	if err != nil {
+		if _, ok := err.(*storage.ErrNotFound); !ok {
+			return nil, fmt.Errorf("could not retrieve previous snapshot: %v", err)
+		}
+	}
+	var sn *data.SignedSnapshot
+	if currentJSON != nil {
+		sn = new(data.SignedSnapshot)
+		err := json.Unmarshal(currentJSON, sn)
+		if err != nil {
+			return nil, fmt.Errorf("could not retrieve previous snapshot: %v", err)
+		}
+	} else {
+		root, err := repo.Root.ToSigned()
+		if err != nil {
+			return nil, fmt.Errorf("could not create snapshot: %v", err)
+		}
+		targets, err := repo.Targets[data.CanonicalTargetsRole].ToSigned()
+		if err != nil {
+			return nil, fmt.Errorf("could not create snapshot: %v", err)
+		}
+		sn, err = data.NewSnapshot(root, targets)
+		if err != nil {
+			return nil, fmt.Errorf("could not create snapshot: %v", err)
+		}
+	}
+	err = repo.SetSnapshot(sn)
+	if err != nil {
+		return nil, fmt.Errorf("could not create snapshot: %v", err)
+	}
+	sgnd, err := repo.SignSnapshot(data.DefaultExpires(data.CanonicalSnapshotRole))
+	if err != nil {
+		return nil, fmt.Errorf("could not sign snapshot: %v", err)
+	}
+	sgndJSON, err := json.Marshal(sgnd)
+	if err != nil {
+		return nil, fmt.Errorf("could not save snapshot: %v", err)
+	}
+	return &storage.MetaUpdate{
+		Role:    data.CanonicalSnapshotRole,
+		Version: repo.Snapshot.Signed.Version,
+		Data:    sgndJSON,
+	}, nil
 }
 
 func validateSnapshot(role string, oldSnap *data.SignedSnapshot, snapUpdate storage.MetaUpdate, roles map[string]storage.MetaUpdate, kdb *keys.KeyDB) error {
@@ -232,26 +300,6 @@ func validateTargets(role string, roles map[string]storage.MetaUpdate, kdb *keys
 		return nil, fmt.Errorf("%s has wrong type", role)
 	}
 	return t, nil
-}
-
-// check the snapshot is present. If it is, the hierarchy
-// of the update is OK. This seems like a simplistic check
-// but is completely sufficient for all possible use cases:
-// 1. the user is updating only the snapshot.
-// 2. the user is updating a targets (incl. delegations) or
-//    root metadata. This requires they also provide a new
-//    snapshot.
-// N.B. users should never be updating timestamps. The server
-//      always handles timestamping. If the user does send a
-//      timestamp, the server will replace it on next
-//      GET timestamp.jsonshould it detect the current
-//      snapshot has a different hash to the one in the timestamp.
-func hierarchyOK(roles map[string]storage.MetaUpdate) error {
-	snapshotRole := data.RoleName(data.CanonicalSnapshotRole)
-	if _, ok := roles[snapshotRole]; !ok {
-		return errors.New("snapshot missing from update")
-	}
-	return nil
 }
 
 func validateRoot(gun string, oldRoot, newRoot []byte, store storage.MetaStore) (
