@@ -209,11 +209,7 @@ func (r *NotaryRepository) Initialize(rootKeyID string) error {
 	err = r.tufRepo.InitRoot(false)
 	if err != nil {
 		logrus.Debug("Error on InitRoot: ", err.Error())
-		switch err.(type) {
-		case signed.ErrInsufficientSignatures, trustmanager.ErrPasswordInvalid:
-		default:
-			return err
-		}
+		return err
 	}
 	err = r.tufRepo.InitTargets()
 	if err != nil {
