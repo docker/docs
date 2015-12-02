@@ -26,7 +26,6 @@ func GenerateCertificate(rootKey data.PrivateKey, gun string) (*x509.Certificate
 		return nil, fmt.Errorf("failed to create the certificate for: %s (%v)", gun, err)
 	}
 
-	// Encode the new certificate into PEM
 	cert, err := x509.ParseCertificate(derBytes)
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse the certificate for key: %s (%v)", gun, err)
