@@ -48,6 +48,4 @@ aspects of contributing. To help Docker contributors:
 </a> room
 * the <a href="https://groups.google.com/forum/#!forum/docker-dev"
 target="_blank">docker-dev</a>  Google group
-* the <a href="https://dev.dockerproject.com"
-target="_blank">dev.dockerproject.com</a> on Discourse
 * the `#docker-dev` channel on Freenode IRC
