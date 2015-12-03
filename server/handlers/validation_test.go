@@ -27,7 +27,7 @@ func copyTimestampKey(t *testing.T, fromKeyDB *keys.KeyDB,
 	assert.NotNil(t, pubTimestampKey,
 		"Timestamp key specified by KeyDB role not in KeysDB")
 
-	err := toStore.SetTimestampKey(gun, pubTimestampKey.Algorithm(),
+	err := toStore.SetKey(gun, data.CanonicalTimestampRole, pubTimestampKey.Algorithm(),
 		pubTimestampKey.Public())
 	assert.NoError(t, err)
 }
@@ -244,7 +244,7 @@ func TestValidateRootNoTimestampKey(t *testing.T) {
 	updates := []storage.MetaUpdate{root, targets, snapshot}
 
 	// sanity check - no timestamp keys for the GUN
-	_, _, err = store.GetTimestampKey("testGUN")
+	_, _, err = store.GetKey("testGUN", data.CanonicalTimestampRole)
 	assert.Error(t, err)
 	assert.IsType(t, &storage.ErrNoKey{}, err)
 
@@ -255,7 +255,7 @@ func TestValidateRootNoTimestampKey(t *testing.T) {
 
 	// there should still be no timestamp keys - one should not have been
 	// created
-	_, _, err = store.GetTimestampKey("testGUN")
+	_, _, err = store.GetKey("testGUN", data.CanonicalTimestampRole)
 	assert.Error(t, err)
 }
 
@@ -276,7 +276,7 @@ func TestValidateRootInvalidTimestampKey(t *testing.T) {
 
 	key, err := trustmanager.GenerateECDSAKey(rand.Reader)
 	assert.NoError(t, err)
-	err = store.SetTimestampKey("testGUN", key.Algorithm(), key.Public())
+	err = store.SetKey("testGUN", data.CanonicalRootRole, key.Algorithm(), key.Public())
 	assert.NoError(t, err)
 
 	err = validateUpdate("testGUN", updates, store)

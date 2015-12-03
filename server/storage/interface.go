@@ -22,11 +22,11 @@ type MetaStore interface {
 	// error if no metadata exists for the given GUN.
 	Delete(gun string) error
 
-	// GetTimestampKey returns the algorithm and public key for the given GUN.
-	// If the GUN doesn't exist, returns an error.
-	GetTimestampKey(gun string) (algorithm string, public []byte, err error)
+	// GetKey returns the algorithm and public key for the given GUN and role.
+	// If the GUN+role don't exist, returns an error.
+	GetKey(gun, role string) (algorithm string, public []byte, err error)
 
-	// SetTimeStampKey sets the algorithm and public key for the given GUN if
+	// SetKey sets the algorithm and public key for the given GUN and role if
 	// it doesn't already exist.  Otherwise an error is returned.
-	SetTimestampKey(gun string, algorithm string, public []byte) error
+	SetKey(gun, role, algorithm string, public []byte) error
 }

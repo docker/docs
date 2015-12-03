@@ -21,14 +21,14 @@ type ver struct {
 type MemStorage struct {
 	lock    sync.Mutex
 	tufMeta map[string][]*ver
-	tsKeys  map[string]*key
+	keys    map[string]map[string]*key
 }
 
 // NewMemStorage instantiates a memStorage instance
 func NewMemStorage() *MemStorage {
 	return &MemStorage{
 		tufMeta: make(map[string][]*ver),
-		tsKeys:  make(map[string]*key),
+		keys:    make(map[string]map[string]*key),
 	}
 }
 
@@ -80,11 +80,15 @@ func (st *MemStorage) Delete(gun string) error {
 	return nil
 }
 
-// GetTimestampKey returns the public key material of the timestamp key of a given gun
-func (st *MemStorage) GetTimestampKey(gun string) (algorithm string, public []byte, err error) {
+// GetKey returns the public key material of the timestamp key of a given gun
+func (st *MemStorage) GetKey(gun, role string) (algorithm string, public []byte, err error) {
 	// no need for lock. It's ok to return nil if an update
 	// wasn't observed
-	k, ok := st.tsKeys[gun]
+	g, ok := st.keys[gun]
+	if !ok {
+		return "", nil, &ErrNoKey{gun: gun}
+	}
+	k, ok := g[role]
 	if !ok {
 		return "", nil, &ErrNoKey{gun: gun}
 	}
@@ -92,15 +96,23 @@ func (st *MemStorage) GetTimestampKey(gun string) (algorithm string, public []by
 	return k.algorithm, k.public, nil
 }
 
-// SetTimestampKey sets a Timestamp key under a gun
-func (st *MemStorage) SetTimestampKey(gun string, algorithm string, public []byte) error {
+// SetKey sets a key under a gun and role
+func (st *MemStorage) SetKey(gun, role, algorithm string, public []byte) error {
 	k := &key{algorithm: algorithm, public: public}
 	st.lock.Lock()
 	defer st.lock.Unlock()
-	if _, ok := st.tsKeys[gun]; ok {
-		return &ErrTimestampKeyExists{gun: gun}
+
+	// we hold the lock so nothing will be able to race to write a key
+	// between checking and setting
+	_, _, err := st.GetKey(gun, role)
+	if _, ok := err.(*ErrNoKey); !ok {
+		return &ErrKeyExists{gun: gun, role: role}
 	}
-	st.tsKeys[gun] = k
+	_, ok := st.keys[gun]
+	if !ok {
+		st.keys[gun] = make(map[string]*key)
+	}
+	st.keys[gun][role] = k
 	return nil
 }
 

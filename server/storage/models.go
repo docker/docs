@@ -16,16 +16,17 @@ func (g TUFFile) TableName() string {
 	return "tuf_files"
 }
 
-// TimestampKey represents a single timestamp key in the database
-type TimestampKey struct {
+// Key represents a single timestamp key in the database
+type Key struct {
 	gorm.Model
-	Gun    string `sql:"type:varchar(255);unique;not null"`
+	Gun    string `sql:"type:varchar(255);not null;unique_index:gun_role"`
+	Role   string `sql:"type:varchar(255);not null;unique_index:gun_role"`
 	Cipher string `sql:"type:varchar(30);not null"`
 	Public []byte `sql:"type:blob;not null"`
 }
 
 // TableName sets a specific table name for our TimestampKey
-func (g TimestampKey) TableName() string {
+func (g Key) TableName() string {
 	return "timestamp_keys"
 }
 
@@ -44,9 +45,14 @@ func CreateTUFTable(db gorm.DB) error {
 	return nil
 }
 
-// CreateTimestampTable creates the DB table for TUFFile
-func CreateTimestampTable(db gorm.DB) error {
-	query := db.Set("gorm:table_options", "ENGINE=InnoDB DEFAULT CHARSET=utf8").CreateTable(&TimestampKey{})
+// CreateKeyTable creates the DB table for TUFFile
+func CreateKeyTable(db gorm.DB) error {
+	query := db.Set("gorm:table_options", "ENGINE=InnoDB DEFAULT CHARSET=utf8").CreateTable(&Key{})
+	if query.Error != nil {
+		return query.Error
+	}
+	query = db.Model(&Key{}).AddUniqueIndex(
+		"idx_gun_role", "gun", "role")
 	if query.Error != nil {
 		return query.Error
 	}
