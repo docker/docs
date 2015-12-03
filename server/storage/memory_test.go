@@ -54,9 +54,39 @@ func TestGetTimestampKey(t *testing.T) {
 
 func TestSetKey(t *testing.T) {
 	s := NewMemStorage()
-	s.SetKey("gun", data.CanonicalTimestampRole, data.RSAKey, []byte("test"))
+	err := s.SetKey("gun", data.CanonicalTimestampRole, data.RSAKey, []byte("test"))
+	assert.NoError(t, err)
 
-	err := s.SetKey("gun", data.CanonicalTimestampRole, data.RSAKey, []byte("test2"))
+	k := s.keys["gun"][data.CanonicalTimestampRole]
+	assert.Equal(t, data.RSAKey, k.algorithm, "Expected algorithm to be rsa, received %s", k.algorithm)
+	assert.Equal(t, []byte("test"), k.public, "Public key did not match expected")
+
+}
+
+func TestSetKeyMultipleRoles(t *testing.T) {
+	s := NewMemStorage()
+	err := s.SetKey("gun", data.CanonicalTimestampRole, data.RSAKey, []byte("test"))
+	assert.NoError(t, err)
+
+	err = s.SetKey("gun", data.CanonicalSnapshotRole, data.RSAKey, []byte("test"))
+	assert.NoError(t, err)
+
+	k := s.keys["gun"][data.CanonicalTimestampRole]
+	assert.Equal(t, data.RSAKey, k.algorithm, "Expected algorithm to be rsa, received %s", k.algorithm)
+	assert.Equal(t, []byte("test"), k.public, "Public key did not match expected")
+
+	k = s.keys["gun"][data.CanonicalSnapshotRole]
+	assert.Equal(t, data.RSAKey, k.algorithm, "Expected algorithm to be rsa, received %s", k.algorithm)
+	assert.Equal(t, []byte("test"), k.public, "Public key did not match expected")
+}
+
+func TestSetKeySameRoleGun(t *testing.T) {
+	s := NewMemStorage()
+	err := s.SetKey("gun", data.CanonicalTimestampRole, data.RSAKey, []byte("test"))
+	assert.NoError(t, err)
+
+	// set diff algo and bytes so we can confirm data didn't get replaced
+	err = s.SetKey("gun", data.CanonicalTimestampRole, data.ECDSAKey, []byte("test2"))
 	assert.IsType(t, &ErrKeyExists{}, err, "Expected err to be ErrKeyExists")
 
 	k := s.keys["gun"][data.CanonicalTimestampRole]
