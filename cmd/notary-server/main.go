@@ -112,7 +112,7 @@ func getStore(configuration *viper.Viper, allowedBackends []string) (
 
 	store, err := storage.NewSQLStorage(storeConfig.Backend, storeConfig.Source)
 	if err != nil {
-		return nil, fmt.Errorf("Error starting DB driver: ", err.Error())
+		return nil, fmt.Errorf("Error starting DB driver: %s", err.Error())
 	}
 	health.RegisterPeriodicFunc(
 		"DB operational", store.CheckHealth, time.Second*60)

@@ -44,25 +44,22 @@ func TestDelete(t *testing.T) {
 func TestGetTimestampKey(t *testing.T) {
 	s := NewMemStorage()
 
-	//_, _, err := s.GetTimestampKey("gun")
-	//assert.IsType(t, &ErrNoKey{}, err, "Expected err to be ErrNoKey")
+	s.SetKey("gun", data.CanonicalTimestampRole, data.RSAKey, []byte("test"))
 
-	s.SetTimestampKey("gun", data.RSAKey, []byte("test"))
-
-	c, k, err := s.GetTimestampKey("gun")
+	c, k, err := s.GetKey("gun", data.CanonicalTimestampRole)
 	assert.Nil(t, err, "Expected error to be nil")
 	assert.Equal(t, data.RSAKey, c, "Expected algorithm rsa, received %s", c)
 	assert.Equal(t, []byte("test"), k, "Key data was wrong")
 }
 
-func TestSetTimestampKey(t *testing.T) {
+func TestSetKey(t *testing.T) {
 	s := NewMemStorage()
-	s.SetTimestampKey("gun", data.RSAKey, []byte("test"))
+	s.SetKey("gun", data.CanonicalTimestampRole, data.RSAKey, []byte("test"))
 
-	err := s.SetTimestampKey("gun", data.RSAKey, []byte("test2"))
+	err := s.SetKey("gun", data.CanonicalTimestampRole, data.RSAKey, []byte("test2"))
 	assert.IsType(t, &ErrTimestampKeyExists{}, err, "Expected err to be ErrTimestampKeyExists")
 
-	k := s.tsKeys["gun"]
+	k := s.keys["gun"][data.CanonicalTimestampRole]
 	assert.Equal(t, data.RSAKey, k.algorithm, "Expected algorithm to be rsa, received %s", k.algorithm)
 	assert.Equal(t, []byte("test"), k.public, "Public key did not match expected")
 
