@@ -39,12 +39,12 @@ func SetUpSQLite(t *testing.T, dbDir string) (*gorm.DB, *SQLStorage) {
 	err = CreateTUFTable(dbStore.DB)
 	assert.NoError(t, err)
 
-	err = CreateTimestampTable(dbStore.DB)
+	err = CreateKeyTable(dbStore.DB)
 	assert.NoError(t, err)
 
 	// verify that the tables are empty
 	var count int
-	for _, model := range [2]interface{}{&TUFFile{}, &TimestampKey{}} {
+	for _, model := range [2]interface{}{&TUFFile{}, &Key{}} {
 		query := dbStore.DB.Model(model).Count(&count)
 		assert.NoError(t, query.Error)
 		assert.Equal(t, 0, count)
@@ -269,7 +269,7 @@ func TestSQLGetKeyNoKey(t *testing.T) {
 	assert.IsType(t, &ErrNoKey{}, err,
 		"Expected ErrNoKey from GetKey")
 
-	query := gormDB.Create(&TimestampKey{
+	query := gormDB.Create(&Key{
 		Gun:    "testGUN",
 		Role:   data.CanonicalTimestampRole,
 		Cipher: "testCipher",
@@ -294,18 +294,18 @@ func TestSQLSetKeyExists(t *testing.T) {
 
 	err = dbStore.SetKey("testGUN", data.CanonicalTimestampRole, "testCipher", []byte("1"))
 	assert.Error(t, err)
-	assert.IsType(t, &ErrTimestampKeyExists{}, err,
-		"Expected ErrTimestampKeyExists from SetKey")
+	assert.IsType(t, &ErrKeyExists{}, err,
+		"Expected ErrKeyExists from SetKey")
 
-	var rows []TimestampKey
+	var rows []Key
 	query := gormDB.Select("ID, Gun, Cipher, Public").Find(&rows)
 	assert.NoError(t, query.Error)
 
-	expected := TimestampKey{Gun: "testGUN", Cipher: "testCipher",
+	expected := Key{Gun: "testGUN", Cipher: "testCipher",
 		Public: []byte("1")}
 	expected.Model = gorm.Model{ID: 1}
 
-	assert.Equal(t, []TimestampKey{expected}, rows)
+	assert.Equal(t, []Key{expected}, rows)
 
 	dbStore.DB.Close()
 }
@@ -318,7 +318,7 @@ func TestDBCheckHealthTableMissing(t *testing.T) {
 	defer os.RemoveAll(tempBaseDir)
 
 	dbStore.DropTable(&TUFFile{})
-	dbStore.DropTable(&TimestampKey{})
+	dbStore.DropTable(&Key{})
 
 	// No tables, health check fails
 	err = dbStore.CheckHealth()
@@ -330,7 +330,7 @@ func TestDBCheckHealthTableMissing(t *testing.T) {
 	assert.Error(t, err, "Cannot access table:")
 	dbStore.DropTable(&TUFFile{})
 
-	CreateTimestampTable(dbStore.DB)
+	CreateKeyTable(dbStore.DB)
 	err = dbStore.CheckHealth()
 	assert.Error(t, err, "Cannot access table:")
 }

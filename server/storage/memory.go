@@ -106,7 +106,7 @@ func (st *MemStorage) SetKey(gun, role, algorithm string, public []byte) error {
 	// between checking and setting
 	_, _, err := st.GetKey(gun, role)
 	if _, ok := err.(*ErrNoKey); !ok {
-		return &ErrTimestampKeyExists{gun: gun}
+		return &ErrKeyExists{gun: gun, role: role}
 	}
 	_, ok := st.keys[gun]
 	if !ok {

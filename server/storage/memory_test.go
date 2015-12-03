@@ -57,7 +57,7 @@ func TestSetKey(t *testing.T) {
 	s.SetKey("gun", data.CanonicalTimestampRole, data.RSAKey, []byte("test"))
 
 	err := s.SetKey("gun", data.CanonicalTimestampRole, data.RSAKey, []byte("test2"))
-	assert.IsType(t, &ErrTimestampKeyExists{}, err, "Expected err to be ErrTimestampKeyExists")
+	assert.IsType(t, &ErrKeyExists{}, err, "Expected err to be ErrKeyExists")
 
 	k := s.keys["gun"][data.CanonicalTimestampRole]
 	assert.Equal(t, data.RSAKey, k.algorithm, "Expected algorithm to be rsa, received %s", k.algorithm)

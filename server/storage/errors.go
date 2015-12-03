@@ -20,14 +20,15 @@ func (err ErrNotFound) Error() string {
 	return fmt.Sprintf("No record found")
 }
 
-// ErrTimestampKeyExists is returned when a timestamp key already exists
-type ErrTimestampKeyExists struct {
-	gun string
+// ErrKeyExists is returned when a key already exists
+type ErrKeyExists struct {
+	gun  string
+	role string
 }
 
-// ErrTimestampKeyExists is returned when a timestamp key already exists
-func (err ErrTimestampKeyExists) Error() string {
-	return fmt.Sprintf("Error, timestamp key already exists for %s", err.gun)
+// ErrKeyExists is returned when a key already exists
+func (err ErrKeyExists) Error() string {
+	return fmt.Sprintf("Error, timestamp key already exists for %s:%s", err.gun, err.role)
 }
 
 // ErrNoKey is returned when no timestamp key is found
