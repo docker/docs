@@ -59,7 +59,7 @@ docker run -d \
     --name logstash \
     --link elasticsearch:es \
     logstash \
-    sh -c "logstash -e 'input { syslog { } } output { stdout { } elasticsearch { hosts => [ \"es\" ] } }'"
+    sh -c "logstash -e 'input { syslog { } } output { stdout { } elasticsearch { hosts => [ \"es\" ] } } filter { json { source => \"message\" } }'"
 
 docker run -d \
     --name kibana \
@@ -68,6 +68,15 @@ docker run -d \
     kibana
 ```
 
-You can then browse to port 5601 on the system running kibana and browse log/event entries.
+You can then browse to port 5601 on the system running kibana and browse log/event entries.  You should specify the "time" field
+for indexing.
 
 Note: When deployed in production, you should secure kibana (not described in this doc)
+
+## Example Searches
+
+Here are a few examples demonstrating some ways to view the aggregated log data:
+
+* `type:"api" AND (tags:"post" OR tags:"put" OR tags:"delete")` -- Show all the modifications on the system
+* `username:"admin"` -- Show all access from a given user
+* `type:"auth fail"` -- Show all authentication failures on the system
