@@ -156,15 +156,16 @@ func (db *SQLStorage) GetKey(gun, role string) (algorithm string, public []byte,
 func (db *SQLStorage) SetKey(gun, role, algorithm string, public []byte) error {
 
 	entry := Key{
-		Gun:    gun,
-		Role:   role,
-		Cipher: string(algorithm),
-		Public: public,
+		Gun:  gun,
+		Role: role,
 	}
 
 	if !db.Where(&entry).First(&Key{}).RecordNotFound() {
 		return &ErrKeyExists{gun: gun, role: role}
 	}
+
+	entry.Cipher = algorithm
+	entry.Public = public
 
 	return translateOldVersionError(
 		db.FirstOrCreate(&Key{}, &entry).Error)

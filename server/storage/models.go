@@ -19,8 +19,8 @@ func (g TUFFile) TableName() string {
 // Key represents a single timestamp key in the database
 type Key struct {
 	gorm.Model
-	Gun    string `sql:"type:varchar(255);not null"`
-	Role   string `sql:"type:varchar(255);not null"`
+	Gun    string `sql:"type:varchar(255);not null;unique_index:gun_role"`
+	Role   string `sql:"type:varchar(255);not null;unique_index:gun_role"`
 	Cipher string `sql:"type:varchar(30);not null"`
 	Public []byte `sql:"type:blob;not null"`
 }
