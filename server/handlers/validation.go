@@ -277,7 +277,7 @@ func validateRoot(gun string, oldRoot, newRoot []byte, store storage.MetaStore) 
 	}
 
 	// Don't update if a timestamp key doesn't exist.
-	algo, keyBytes, err := store.GetTimestampKey(gun)
+	algo, keyBytes, err := store.GetKey(gun, data.CanonicalTimestampRole)
 	if err != nil || algo == "" || keyBytes == nil {
 		return nil, fmt.Errorf("no timestamp key for %s", gun)
 	}

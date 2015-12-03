@@ -136,12 +136,12 @@ func (db *SQLStorage) Delete(gun string) error {
 	return db.Where(&TUFFile{Gun: gun}).Delete(TUFFile{}).Error
 }
 
-// GetTimestampKey returns the timestamps Public Key data
-func (db *SQLStorage) GetTimestampKey(gun string) (algorithm string, public []byte, err error) {
-	logrus.Debug("retrieving timestamp key for ", gun)
+// GetKey returns the Public Key data for a gun+role
+func (db *SQLStorage) GetKey(gun, role string) (algorithm string, public []byte, err error) {
+	logrus.Debugf("retrieving timestamp key for %s:%s", gun, role)
 
 	var row TimestampKey
-	query := db.Select("cipher, public").Where(&TimestampKey{Gun: gun}).Find(&row)
+	query := db.Select("cipher, public").Where(&TimestampKey{Gun: gun, Role: role}).Find(&row)
 
 	if query.RecordNotFound() {
 		return "", nil, &ErrNoKey{gun: gun}
@@ -152,11 +152,12 @@ func (db *SQLStorage) GetTimestampKey(gun string) (algorithm string, public []by
 	return row.Cipher, row.Public, nil
 }
 
-// SetTimestampKey attempts to write a TimeStamp key and returns an error if it already exists
-func (db *SQLStorage) SetTimestampKey(gun string, algorithm string, public []byte) error {
+// SetKey attempts to write a key and returns an error if it already exists for the gun and role
+func (db *SQLStorage) SetKey(gun, role, algorithm string, public []byte) error {
 
 	entry := TimestampKey{
 		Gun:    gun,
+		Role:   role,
 		Cipher: string(algorithm),
 		Public: public,
 	}

@@ -5,6 +5,7 @@ import (
 	"os"
 	"testing"
 
+	"github.com/docker/notary/tuf/data"
 	"github.com/jinzhu/gorm"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/stretchr/testify/assert"
@@ -257,43 +258,44 @@ func TestSQLDelete(t *testing.T) {
 	dbStore.DB.Close()
 }
 
-func TestSQLGetTimestampKeyNoKey(t *testing.T) {
+func TestSQLGetKeyNoKey(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	gormDB, dbStore := SetUpSQLite(t, tempBaseDir)
 	defer os.RemoveAll(tempBaseDir)
 
-	cipher, public, err := dbStore.GetTimestampKey("testGUN")
+	cipher, public, err := dbStore.GetKey("testGUN", data.CanonicalTimestampRole)
 	assert.Equal(t, "", cipher)
 	assert.Nil(t, public)
 	assert.IsType(t, &ErrNoKey{}, err,
-		"Expected ErrNoKey from GetTimestampKey")
+		"Expected ErrNoKey from GetKey")
 
 	query := gormDB.Create(&TimestampKey{
 		Gun:    "testGUN",
+		Role:   data.CanonicalTimestampRole,
 		Cipher: "testCipher",
 		Public: []byte("1"),
 	})
 	assert.NoError(
 		t, query.Error, "Inserting timestamp into empty DB should succeed")
 
-	cipher, public, err = dbStore.GetTimestampKey("testGUN")
+	cipher, public, err = dbStore.GetKey("testGUN", data.CanonicalTimestampRole)
 	assert.Equal(t, "testCipher", cipher,
 		"Returned cipher was incorrect")
 	assert.Equal(t, []byte("1"), public, "Returned pubkey was incorrect")
 }
 
-func TestSQLSetTimestampKeyExists(t *testing.T) {
+func TestSQLSetKeyExists(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	gormDB, dbStore := SetUpSQLite(t, tempBaseDir)
 	defer os.RemoveAll(tempBaseDir)
 
-	err = dbStore.SetTimestampKey("testGUN", "testCipher", []byte("1"))
+	err = dbStore.SetKey("testGUN", data.CanonicalTimestampRole, "testCipher", []byte("1"))
 	assert.NoError(t, err, "Inserting timestamp into empty DB should succeed")
 
-	err = dbStore.SetTimestampKey("testGUN", "testCipher", []byte("1"))
+	err = dbStore.SetKey("testGUN", data.CanonicalTimestampRole, "testCipher", []byte("1"))
 	assert.Error(t, err)
 	assert.IsType(t, &ErrTimestampKeyExists{}, err,
-		"Expected ErrTimestampKeyExists from SetTimestampKey")
+		"Expected ErrTimestampKeyExists from SetKey")
 
 	var rows []TimestampKey
 	query := gormDB.Select("ID, Gun, Cipher, Public").Find(&rows)
