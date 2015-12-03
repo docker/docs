@@ -140,8 +140,8 @@ func (db *SQLStorage) Delete(gun string) error {
 func (db *SQLStorage) GetKey(gun, role string) (algorithm string, public []byte, err error) {
 	logrus.Debugf("retrieving timestamp key for %s:%s", gun, role)
 
-	var row TimestampKey
-	query := db.Select("cipher, public").Where(&TimestampKey{Gun: gun, Role: role}).Find(&row)
+	var row Key
+	query := db.Select("cipher, public").Where(&Key{Gun: gun, Role: role}).Find(&row)
 
 	if query.RecordNotFound() {
 		return "", nil, &ErrNoKey{gun: gun}
@@ -155,26 +155,26 @@ func (db *SQLStorage) GetKey(gun, role string) (algorithm string, public []byte,
 // SetKey attempts to write a key and returns an error if it already exists for the gun and role
 func (db *SQLStorage) SetKey(gun, role, algorithm string, public []byte) error {
 
-	entry := TimestampKey{
+	entry := Key{
 		Gun:    gun,
 		Role:   role,
 		Cipher: string(algorithm),
 		Public: public,
 	}
 
-	if !db.Where(&entry).First(&TimestampKey{}).RecordNotFound() {
-		return &ErrTimestampKeyExists{gun: gun}
+	if !db.Where(&entry).First(&Key{}).RecordNotFound() {
+		return &ErrKeyExists{gun: gun, role: role}
 	}
 
 	return translateOldVersionError(
-		db.FirstOrCreate(&TimestampKey{}, &entry).Error)
+		db.FirstOrCreate(&Key{}, &entry).Error)
 }
 
 // CheckHealth asserts that both required tables are present
 func (db *SQLStorage) CheckHealth() error {
 	interfaces := []interface {
 		TableName() string
-	}{&TUFFile{}, &TimestampKey{}}
+	}{&TUFFile{}, &Key{}}
 
 	for _, model := range interfaces {
 		tableOk := db.HasTable(model)

@@ -33,7 +33,7 @@ func GetOrCreateTimestampKey(gun string, store storage.MetaStore, crypto signed.
 			return key, nil
 		}
 
-		if _, ok := err.(*storage.ErrTimestampKeyExists); ok {
+		if _, ok := err.(*storage.ErrKeyExists); ok {
 			keyAlgorithm, public, err = store.GetKey(gun, data.CanonicalTimestampRole)
 			if err != nil {
 				return nil, err
