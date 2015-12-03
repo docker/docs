@@ -55,7 +55,7 @@ func TestGetTimestamp(t *testing.T) {
 	store.UpdateCurrent("gun", storage.MetaUpdate{Role: "snapshot", Version: 0, Data: snapJSON})
 	// create a key to be used by GetTimestamp
 	_, err := GetOrCreateTimestampKey("gun", store, crypto, data.ED25519Key)
-	assert.Nil(t, err, "GetTimestampKey errored")
+	assert.Nil(t, err, "GetKey errored")
 
 	_, err = GetOrCreateTimestamp("gun", store, crypto)
 	assert.Nil(t, err, "GetTimestamp errored")
@@ -72,7 +72,7 @@ func TestGetTimestampNewSnapshot(t *testing.T) {
 	store.UpdateCurrent("gun", storage.MetaUpdate{Role: "snapshot", Version: 0, Data: snapJSON})
 	// create a key to be used by GetTimestamp
 	_, err := GetOrCreateTimestampKey("gun", store, crypto, data.ED25519Key)
-	assert.Nil(t, err, "GetTimestampKey errored")
+	assert.Nil(t, err, "GetKey errored")
 
 	ts1, err := GetOrCreateTimestamp("gun", store, crypto)
 	assert.Nil(t, err, "GetTimestamp errored")

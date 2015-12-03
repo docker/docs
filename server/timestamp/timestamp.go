@@ -17,7 +17,7 @@ import (
 // create the key at the same time by simply querying the store a second time if it
 // receives a conflict when writing.
 func GetOrCreateTimestampKey(gun string, store storage.MetaStore, crypto signed.CryptoService, fallBackAlgorithm string) (data.PublicKey, error) {
-	keyAlgorithm, public, err := store.GetTimestampKey(gun)
+	keyAlgorithm, public, err := store.GetKey(gun, data.CanonicalTimestampRole)
 	if err == nil {
 		return data.NewPublicKey(keyAlgorithm, public), nil
 	}
@@ -28,13 +28,13 @@ func GetOrCreateTimestampKey(gun string, store storage.MetaStore, crypto signed.
 			return nil, err
 		}
 		logrus.Debug("Creating new timestamp key for ", gun, ". With algo: ", key.Algorithm())
-		err = store.SetTimestampKey(gun, key.Algorithm(), key.Public())
+		err = store.SetKey(gun, data.CanonicalTimestampRole, key.Algorithm(), key.Public())
 		if err == nil {
 			return key, nil
 		}
 
-		if _, ok := err.(*storage.ErrTimestampKeyExists); ok {
-			keyAlgorithm, public, err = store.GetTimestampKey(gun)
+		if _, ok := err.(*storage.ErrKeyExists); ok {
+			keyAlgorithm, public, err = store.GetKey(gun, data.CanonicalTimestampRole)
 			if err != nil {
 				return nil, err
 			}
@@ -111,7 +111,7 @@ func snapshotExpired(ts *data.SignedTimestamp, snapshot []byte) bool {
 // version number one higher than prev. The store is used to lookup the current
 // snapshot, this function does not save the newly generated timestamp.
 func CreateTimestamp(gun string, prev *data.SignedTimestamp, snapshot []byte, store storage.MetaStore, cryptoService signed.CryptoService) (*data.Signed, int, error) {
-	algorithm, public, err := store.GetTimestampKey(gun)
+	algorithm, public, err := store.GetKey(gun, data.CanonicalTimestampRole)
 	if err != nil {
 		// owner of gun must have generated a timestamp key otherwise
 		// we won't proceed with generating everything.

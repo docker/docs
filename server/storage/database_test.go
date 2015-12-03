@@ -5,6 +5,7 @@ import (
 	"os"
 	"testing"
 
+	"github.com/docker/notary/tuf/data"
 	"github.com/jinzhu/gorm"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/stretchr/testify/assert"
@@ -38,12 +39,12 @@ func SetUpSQLite(t *testing.T, dbDir string) (*gorm.DB, *SQLStorage) {
 	err = CreateTUFTable(dbStore.DB)
 	assert.NoError(t, err)
 
-	err = CreateTimestampTable(dbStore.DB)
+	err = CreateKeyTable(dbStore.DB)
 	assert.NoError(t, err)
 
 	// verify that the tables are empty
 	var count int
-	for _, model := range [2]interface{}{&TUFFile{}, &TimestampKey{}} {
+	for _, model := range [2]interface{}{&TUFFile{}, &Key{}} {
 		query := dbStore.DB.Model(model).Count(&count)
 		assert.NoError(t, query.Error)
 		assert.Equal(t, 0, count)
@@ -257,53 +258,126 @@ func TestSQLDelete(t *testing.T) {
 	dbStore.DB.Close()
 }
 
-func TestSQLGetTimestampKeyNoKey(t *testing.T) {
+func TestSQLGetKeyNoKey(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	gormDB, dbStore := SetUpSQLite(t, tempBaseDir)
 	defer os.RemoveAll(tempBaseDir)
 
-	cipher, public, err := dbStore.GetTimestampKey("testGUN")
+	cipher, public, err := dbStore.GetKey("testGUN", data.CanonicalTimestampRole)
 	assert.Equal(t, "", cipher)
 	assert.Nil(t, public)
 	assert.IsType(t, &ErrNoKey{}, err,
-		"Expected ErrNoKey from GetTimestampKey")
+		"Expected ErrNoKey from GetKey")
 
-	query := gormDB.Create(&TimestampKey{
+	query := gormDB.Create(&Key{
 		Gun:    "testGUN",
+		Role:   data.CanonicalTimestampRole,
 		Cipher: "testCipher",
 		Public: []byte("1"),
 	})
 	assert.NoError(
 		t, query.Error, "Inserting timestamp into empty DB should succeed")
 
-	cipher, public, err = dbStore.GetTimestampKey("testGUN")
+	cipher, public, err = dbStore.GetKey("testGUN", data.CanonicalTimestampRole)
 	assert.Equal(t, "testCipher", cipher,
 		"Returned cipher was incorrect")
 	assert.Equal(t, []byte("1"), public, "Returned pubkey was incorrect")
 }
 
-func TestSQLSetTimestampKeyExists(t *testing.T) {
+func TestSQLSetKeyExists(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	gormDB, dbStore := SetUpSQLite(t, tempBaseDir)
 	defer os.RemoveAll(tempBaseDir)
 
-	err = dbStore.SetTimestampKey("testGUN", "testCipher", []byte("1"))
+	err = dbStore.SetKey("testGUN", data.CanonicalTimestampRole, "testCipher", []byte("1"))
 	assert.NoError(t, err, "Inserting timestamp into empty DB should succeed")
 
-	err = dbStore.SetTimestampKey("testGUN", "testCipher", []byte("1"))
+	err = dbStore.SetKey("testGUN", data.CanonicalTimestampRole, "testCipher", []byte("1"))
 	assert.Error(t, err)
-	assert.IsType(t, &ErrTimestampKeyExists{}, err,
-		"Expected ErrTimestampKeyExists from SetTimestampKey")
+	assert.IsType(t, &ErrKeyExists{}, err,
+		"Expected ErrKeyExists from SetKey")
 
-	var rows []TimestampKey
+	var rows []Key
 	query := gormDB.Select("ID, Gun, Cipher, Public").Find(&rows)
 	assert.NoError(t, query.Error)
 
-	expected := TimestampKey{Gun: "testGUN", Cipher: "testCipher",
+	expected := Key{Gun: "testGUN", Cipher: "testCipher",
 		Public: []byte("1")}
 	expected.Model = gorm.Model{ID: 1}
 
-	assert.Equal(t, []TimestampKey{expected}, rows)
+	assert.Equal(t, []Key{expected}, rows)
+
+	dbStore.DB.Close()
+}
+
+func TestSQLSetKeyMultipleRoles(t *testing.T) {
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	gormDB, dbStore := SetUpSQLite(t, tempBaseDir)
+	defer os.RemoveAll(tempBaseDir)
+
+	err = dbStore.SetKey("testGUN", data.CanonicalTimestampRole, "testCipher", []byte("1"))
+	assert.NoError(t, err, "Inserting timestamp into empty DB should succeed")
+
+	err = dbStore.SetKey("testGUN", data.CanonicalSnapshotRole, "testCipher", []byte("1"))
+	assert.NoError(t, err, "Inserting snapshot key into DB with timestamp key should succeed")
+
+	var rows []Key
+	query := gormDB.Select("ID, Gun, Role, Cipher, Public").Find(&rows)
+	assert.NoError(t, query.Error)
+
+	expectedTS := Key{Gun: "testGUN", Role: "timestamp", Cipher: "testCipher",
+		Public: []byte("1")}
+	expectedTS.Model = gorm.Model{ID: 1}
+
+	expectedSN := Key{Gun: "testGUN", Role: "snapshot", Cipher: "testCipher",
+		Public: []byte("1")}
+	expectedSN.Model = gorm.Model{ID: 2}
+
+	assert.Equal(t, []Key{expectedTS, expectedSN}, rows)
+
+	dbStore.DB.Close()
+}
+
+func TestSQLSetKeyMultipleGuns(t *testing.T) {
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	gormDB, dbStore := SetUpSQLite(t, tempBaseDir)
+	defer os.RemoveAll(tempBaseDir)
+
+	err = dbStore.SetKey("testGUN", data.CanonicalTimestampRole, "testCipher", []byte("1"))
+	assert.NoError(t, err, "Inserting timestamp into empty DB should succeed")
+
+	err = dbStore.SetKey("testAnotherGUN", data.CanonicalTimestampRole, "testCipher", []byte("1"))
+	assert.NoError(t, err, "Inserting snapshot key into DB with timestamp key should succeed")
+
+	var rows []Key
+	query := gormDB.Select("ID, Gun, Role, Cipher, Public").Find(&rows)
+	assert.NoError(t, query.Error)
+
+	expected1 := Key{Gun: "testGUN", Role: "timestamp", Cipher: "testCipher",
+		Public: []byte("1")}
+	expected1.Model = gorm.Model{ID: 1}
+
+	expected2 := Key{Gun: "testAnotherGUN", Role: "timestamp", Cipher: "testCipher",
+		Public: []byte("1")}
+	expected2.Model = gorm.Model{ID: 2}
+
+	assert.Equal(t, []Key{expected1, expected2}, rows)
+
+	dbStore.DB.Close()
+}
+
+func TestSQLSetKeySameRoleGun(t *testing.T) {
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	_, dbStore := SetUpSQLite(t, tempBaseDir)
+	defer os.RemoveAll(tempBaseDir)
+
+	err = dbStore.SetKey("testGUN", data.CanonicalTimestampRole, "testCipher", []byte("1"))
+	assert.NoError(t, err, "Inserting timestamp into empty DB should succeed")
+
+	err = dbStore.SetKey("testGUN", data.CanonicalTimestampRole, "testCipher", []byte("2"))
+	assert.Error(t, err)
+	assert.IsType(t, &ErrKeyExists{}, err,
+		"Expected ErrKeyExists from SetKey")
 
 	dbStore.DB.Close()
 }
@@ -316,7 +390,7 @@ func TestDBCheckHealthTableMissing(t *testing.T) {
 	defer os.RemoveAll(tempBaseDir)
 
 	dbStore.DropTable(&TUFFile{})
-	dbStore.DropTable(&TimestampKey{})
+	dbStore.DropTable(&Key{})
 
 	// No tables, health check fails
 	err = dbStore.CheckHealth()
@@ -328,7 +402,7 @@ func TestDBCheckHealthTableMissing(t *testing.T) {
 	assert.Error(t, err, "Cannot access table:")
 	dbStore.DropTable(&TUFFile{})
 
-	CreateTimestampTable(dbStore.DB)
+	CreateKeyTable(dbStore.DB)
 	err = dbStore.CheckHealth()
 	assert.Error(t, err, "Cannot access table:")
 }
