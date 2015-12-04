@@ -376,7 +376,7 @@ func TestValidateSnapshotGenerateLoadRootTargets(t *testing.T) {
 	assert.NoError(t, err)
 }
 
-func TestPreRepoLoadRootTargets(t *testing.T) {
+func TestPrepRepoLoadRootTargets(t *testing.T) {
 	_, repo, _ := testutils.EmptyRepo()
 	store := storage.NewMemStorage()
 
@@ -397,7 +397,7 @@ func TestPreRepoLoadRootTargets(t *testing.T) {
 	assert.NotNil(t, toPrep.Targets[data.CanonicalTargetsRole])
 }
 
-func TestPreRepoLoadRootCorrupt(t *testing.T) {
+func TestPrepRepoLoadRootCorrupt(t *testing.T) {
 	_, repo, _ := testutils.EmptyRepo()
 	store := storage.NewMemStorage()
 
@@ -415,7 +415,7 @@ func TestPreRepoLoadRootCorrupt(t *testing.T) {
 	assert.Error(t, err)
 }
 
-func TestPreRepoLoadTargetsCorrupt(t *testing.T) {
+func TestPrepRepoLoadTargetsCorrupt(t *testing.T) {
 	_, repo, _ := testutils.EmptyRepo()
 	store := storage.NewMemStorage()
 
@@ -433,7 +433,7 @@ func TestPreRepoLoadTargetsCorrupt(t *testing.T) {
 	assert.Error(t, err)
 }
 
-func TestPreRepoLoadRootMissing(t *testing.T) {
+func TestPrepRepoLoadRootMissing(t *testing.T) {
 	store := storage.NewMemStorage()
 
 	toPrep := tuf.NewRepo(nil, nil)
