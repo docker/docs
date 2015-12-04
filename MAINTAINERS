@@ -231,6 +231,8 @@ or feedback about project operations.
         People = ["aanand", "bfirsh", "dnephin", "mnowster"]
     [Org.docker]
         People = ["calavera", "cpuguy83", "crosbymichael", "duglin", "erikh", "estesp", "icecrime", "jfrazelle", "lk4d4", "runcom", "tianon", "tibor", "unclejack", "vbatts", "vdemeester", "vieux", "vishh"]
+    [Org.dockercraft]
+        People = ["aduermael", "davetucker", "gdevillele"]
     [Org.libcompose]
         People = ["aanand", "aduermael", "dnephin", "ibuildthecloud", "gdevillele", "vdemeester"]
     [Org.libnetwork]
@@ -273,6 +275,10 @@ or feedback about project operations.
         Name = "Ying Li"
         Email = "ying.li@docker.com"
         GitHub = "cyli"
+    [People.davetucker]
+        Name = "Dave Tucker"
+        Email = "dave.tucker@docker.com"
+        GitHub = "dave-tucker"
     [People.dgageot]
         Name = "David Gageot"
         Email = "david.gageot@docker.com"
