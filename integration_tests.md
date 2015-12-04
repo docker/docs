@@ -126,6 +126,8 @@ definitely need more than 10 minutes on the go test timeout.
 
 ### Spot Environment Variables
 
+**WARNING** HA Join tests wont work on spot instances because they can't be stopped
+
 ```bash
 
 ### Set the AWS environment variables from lastpass here...
