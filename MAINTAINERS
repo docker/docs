@@ -233,6 +233,8 @@ or feedback about project operations.
         People = ["calavera", "cpuguy83", "crosbymichael", "duglin", "erikh", "estesp", "icecrime", "jfrazelle", "lk4d4", "runcom", "tianon", "tibor", "unclejack", "vbatts", "vdemeester", "vieux", "vishh"]
     [Org.libcompose]
         People = ["aanand", "aduermael", "dnephin", "ibuildthecloud", "gdevillele", "vdemeester"]
+    [Org.libnetwork]
+        People = ["aboch", "lk4d4", "icecrime", "mrjana", "mavenugo"]
     [Org.machine]
         People = ["dgageot", "ehazlett", "jeanlaurent", "nathanleclaire"]
     [Org.notary]
@@ -243,6 +245,10 @@ or feedback about project operations.
         Name = "Aanand Prasad"
         Email = "aanand@docker.com"
         GitHub = "aanand"
+    [People.aboch]
+        Name = "Alessandro Boch"
+        Email = "aboch@docker.com"
+        GitHub = "aboch"
     [People.aduermael]
         Name = "Adrien Duermael"
         Email = "adrien@docker.com"
@@ -328,9 +334,13 @@ or feedback about project operations.
         Email = "j@docker.com"
         GitHub = "jfrazelle"
     [People.lk4d4]
-        Name = "Alexander Morozov"
+        Name = "Alexandr Morozov"
         Email = "lk4d4@docker.com"
-        GitHub = "lk4d4"
+        GitHub = "LK4D4"
+    [People.mavenugo]
+        Name = "Madhu Venugopal"
+        Email = "madhu@docker.com"
+        GitHub = "mavenugo"
     [People.mnowster]
         Name = "Mazz Mosley"
         Email = "mazz@houseofmnowster.com"
@@ -339,6 +349,10 @@ or feedback about project operations.
         Name = "Mary Anthony"
         Email = "mary.anthony@docker.com"
         GitHub = "moxiegirl"
+    [People.mrjana]
+        Name = "Jana Radhakrishnan"
+        Email = "mrjana@docker.com"
+        GitHub = "mrjana"
     [People.nathanleclaire]
         Name = "Nathan LeClaire"
         Email = "nathan.leclaire@docker.com"
