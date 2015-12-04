@@ -2,6 +2,7 @@ package client
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -112,35 +113,56 @@ func nearExpiry(r *data.SignedRoot) bool {
 	return r.Signed.Expires.Before(plus6mo)
 }
 
-func initRoles(kdb *keys.KeyDB, rootKey, targetsKey, snapshotKey, timestampKey data.PublicKey) error {
-	rootRole, err := data.NewRole("root", 1, []string{rootKey.ID()}, nil, nil)
+// Fetches a public key from a remote store, given a gun and role
+func getRemoteKey(url, gun, role string, rt http.RoundTripper) (data.PublicKey, error) {
+
+	remote, err := getRemoteStore(url, gun, rt)
 	if err != nil {
-		return err
+		return nil, err
 	}
-	targetsRole, err := data.NewRole("targets", 1, []string{targetsKey.ID()}, nil, nil)
+	rawKey, err := remote.GetKey(role)
 	if err != nil {
-		return err
-	}
-	snapshotRole, err := data.NewRole("snapshot", 1, []string{snapshotKey.ID()}, nil, nil)
-	if err != nil {
-		return err
-	}
-	timestampRole, err := data.NewRole("timestamp", 1, []string{timestampKey.ID()}, nil, nil)
-	if err != nil {
-		return err
+		return nil, err
 	}
 
-	if err := kdb.AddRole(rootRole); err != nil {
+	key, err := data.UnmarshalPublicKey(rawKey)
+	if err != nil {
+		return nil, err
+	}
+
+	return key, nil
+}
+
+// add a key to a KeyDB, and create a role for the key and add it.
+func addKeyForRole(kdb *keys.KeyDB, role string, key data.PublicKey) error {
+	theRole, err := data.NewRole(role, 1, []string{key.ID()}, nil, nil)
+	if err != nil {
 		return err
 	}
-	if err := kdb.AddRole(targetsRole); err != nil {
-		return err
-	}
-	if err := kdb.AddRole(snapshotRole); err != nil {
-		return err
-	}
-	if err := kdb.AddRole(timestampRole); err != nil {
+	kdb.AddKey(key)
+	if err := kdb.AddRole(theRole); err != nil {
 		return err
 	}
 	return nil
+}
+
+// signs and serializes the metadata for a canonical role in a tuf repo to JSON
+func serializeCanonicalRole(tufRepo *tuf.Repo, role string) (out []byte, err error) {
+	var s *data.Signed
+	switch role {
+	case data.CanonicalRootRole:
+		s, err = tufRepo.SignRoot(data.DefaultExpires(role))
+	case data.CanonicalSnapshotRole:
+		s, err = tufRepo.SignSnapshot(data.DefaultExpires(role))
+	case data.CanonicalTargetsRole:
+		s, err = tufRepo.SignTargets(role, data.DefaultExpires(role))
+	default:
+		err = fmt.Errorf("%s not supported role to sign on the client", role)
+	}
+
+	if err != nil {
+		return
+	}
+
+	return json.Marshal(s)
 }

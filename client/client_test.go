@@ -88,7 +88,24 @@ func errorTestServer(t *testing.T, errorCode int) *httptest.Server {
 	return server
 }
 
-func initializeRepo(t *testing.T, rootType, tempBaseDir, gun, url string) (
+func initializeRepo(t *testing.T, rootType, tempBaseDir, gun, url string,
+	serverManagesSnapshot bool) (*NotaryRepository, string) {
+
+	serverManagedRoles := []string{}
+	if serverManagesSnapshot {
+		serverManagedRoles = []string{data.CanonicalSnapshotRole}
+	}
+
+	repo, rootPubKeyID := createRepoAndKey(t, rootType, tempBaseDir, gun, url)
+
+	err := repo.Initialize(rootPubKeyID, serverManagedRoles...)
+	assert.NoError(t, err, "error creating repository: %s", err)
+
+	return repo, rootPubKeyID
+}
+
+// Creates a new repository and adds a root key.  Returns the repo and key ID.
+func createRepoAndKey(t *testing.T, rootType, tempBaseDir, gun, url string) (
 	*NotaryRepository, string) {
 
 	repo, err := NewNotaryRepository(
@@ -98,26 +115,104 @@ func initializeRepo(t *testing.T, rootType, tempBaseDir, gun, url string) (
 	rootPubKey, err := repo.CryptoService.Create("root", rootType)
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	err = repo.Initialize(rootPubKey.ID())
-	assert.NoError(t, err, "error creating repository: %s", err)
-
 	return repo, rootPubKey.ID()
 }
 
-// TestInitRepo runs through the process of initializing a repository and makes
-// sure the repository looks correct on disk.
-// We test this with both an RSA and ECDSA root key
-func TestInitRepo(t *testing.T) {
-	testInitRepo(t, data.ECDSAKey)
+// Initializing a new repo while specifying that the server should manage the root
+// role will fail.
+func TestInitRepositoryManagedRolesIncludingRoot(t *testing.T) {
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("/tmp", "notary-test-")
+	assert.NoError(t, err, "failed to create a temporary directory")
+	defer os.RemoveAll(tempBaseDir)
+
+	repo, rootPubKeyID := createRepoAndKey(
+		t, data.ECDSAKey, tempBaseDir, "docker.com/notary", "http://localhost")
+	err = repo.Initialize(rootPubKeyID, data.CanonicalRootRole)
+	assert.Error(t, err)
+	assert.Contains(t, err.Error(),
+		"Notary does not support the server managing the root key")
+}
+
+// Initializing a new repo while specifying that the server should manage some
+// invalid role will fail.
+func TestInitRepositoryManagedRolesInvalidRole(t *testing.T) {
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("/tmp", "notary-test-")
+	assert.NoError(t, err, "failed to create a temporary directory")
+	defer os.RemoveAll(tempBaseDir)
+
+	repo, rootPubKeyID := createRepoAndKey(
+		t, data.ECDSAKey, tempBaseDir, "docker.com/notary", "http://localhost")
+	err = repo.Initialize(rootPubKeyID, "randomrole")
+	assert.Error(t, err)
+	assert.Contains(t, err.Error(),
+		"Notary does not support the server managing the randomrole key")
+}
+
+// Initializing a new repo while specifying that the server should manage the
+// targets role will fail.
+func TestInitRepositoryManagedRolesIncludingTargets(t *testing.T) {
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("/tmp", "notary-test-")
+	assert.NoError(t, err, "failed to create a temporary directory")
+	defer os.RemoveAll(tempBaseDir)
+
+	repo, rootPubKeyID := createRepoAndKey(
+		t, data.ECDSAKey, tempBaseDir, "docker.com/notary", "http://localhost")
+	err = repo.Initialize(rootPubKeyID, data.CanonicalTargetsRole)
+	assert.Error(t, err)
+	assert.Contains(t, err.Error(),
+		"Notary does not support the server managing the targets key")
+}
+
+// Initializing a new repo while specifying that the server should manage the
+// timestamp key is fine - that's what it already does, so no error.
+func TestInitRepositoryManagedRolesIncludingTimestamp(t *testing.T) {
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("/tmp", "notary-test-")
+	assert.NoError(t, err, "failed to create a temporary directory")
+	defer os.RemoveAll(tempBaseDir)
+
+	ts, _, _ := simpleTestServer(t)
+	defer ts.Close()
+
+	repo, rootPubKeyID := createRepoAndKey(
+		t, data.ECDSAKey, tempBaseDir, "docker.com/notary", ts.URL)
+	err = repo.Initialize(rootPubKeyID, data.CanonicalTimestampRole)
+	assert.NoError(t, err)
+}
+
+// passing timestamp + snapshot, or just snapshot, is tested in the next two
+// test cases.
+
+// TestInitRepoServerOnlyManagesTimestampKey runs through the process of
+// initializing a repository and makes sure the repository looks correct on disk.
+// We test this with both an RSA and ECDSA root key.
+// This test case covers the default case where the server only manages the
+// timestamp key.
+func TestInitRepoServerOnlyManagesTimestampKey(t *testing.T) {
+	testInitRepo(t, data.ECDSAKey, false)
 	if !testing.Short() {
-		testInitRepo(t, data.RSAKey)
+		testInitRepo(t, data.RSAKey, false)
+	}
+}
+
+// TestInitRepoServerManagesTimestampAndSnapshotKeys runs through the process of
+// initializing a repository and makes sure the repository looks correct on disk.
+// We test this with both an RSA and ECDSA root key.
+// This test case covers the server managing both the timestap and snapshot keys.
+func TestInitRepoServerManagesTimestampAndSnapshotKeys(t *testing.T) {
+	testInitRepo(t, data.ECDSAKey, true)
+	if !testing.Short() {
+		testInitRepo(t, data.RSAKey, true)
 	}
 }
 
 // This creates a new KeyFileStore in the repo's base directory and makes sure
 // the repo has the right number of keys
 func assertRepoHasExpectedKeys(t *testing.T, repo *NotaryRepository,
-	rootKeyID string) {
+	rootKeyID string, serverManagesSnapshot bool) {
 
 	// The repo should have a keyFileStore and have created keys using it,
 	// so create a new KeyFileStore, and check that the keys do exist and are
@@ -137,17 +232,27 @@ func assertRepoHasExpectedKeys(t *testing.T, repo *NotaryRepository,
 		roles[role] = true
 	}
 	// there is a root key and a targets key
-	for _, role := range data.ValidRoles {
-		if role != data.CanonicalTimestampRole {
-			_, ok := roles[role]
-			assert.True(t, ok, fmt.Sprintf("missing %s key", role))
-		}
+	alwaysThere := []string{data.CanonicalRootRole, data.CanonicalTargetsRole}
+	for _, role := range alwaysThere {
+		_, ok := roles[role]
+		assert.True(t, ok, "missing %s key", role)
+	}
+
+	// there may be a snapshots key, depending on whether the server is managing
+	// the snapshots key
+	_, ok := roles[data.CanonicalSnapshotRole]
+	if serverManagesSnapshot {
+		assert.False(t, ok,
+			"there should be no snapshot key because the server manages it")
+	} else {
+		assert.True(t, ok, "missing snapshot key")
 	}
 
 	// The server manages the timestamp key - there should not be a timestamp
 	// key
-	_, ok := roles[data.CanonicalTimestampRole]
-	assert.False(t, ok)
+	_, ok = roles[data.CanonicalTimestampRole]
+	assert.False(t, ok,
+		"there should be no timestamp key because the server manages it")
 }
 
 // This creates a new certificate manager in the repo's base directory and
@@ -169,7 +274,9 @@ func assertRepoHasExpectedCerts(t *testing.T, repo *NotaryRepository) {
 // Sanity check the TUF metadata files. Verify that they exist, the JSON is
 // well-formed, and the signatures exist. For the root.json file, also check
 // that the root, snapshot, and targets key IDs are present.
-func assertRepoHasExpectedMetadata(t *testing.T, repo *NotaryRepository) {
+func assertRepoHasExpectedMetadata(t *testing.T, repo *NotaryRepository,
+	serverManagesSnapshot bool) {
+
 	expectedTUFMetadataFiles := []string{
 		filepath.Join(tufDir, filepath.FromSlash(repo.gun), "metadata", "root.json"),
 		filepath.Join(tufDir, filepath.FromSlash(repo.gun), "metadata", "snapshot.json"),
@@ -178,7 +285,16 @@ func assertRepoHasExpectedMetadata(t *testing.T, repo *NotaryRepository) {
 	for _, filename := range expectedTUFMetadataFiles {
 		fullPath := filepath.Join(repo.baseDir, filename)
 		_, err := os.Stat(fullPath)
-		assert.NoError(t, err, "missing TUF metadata file: %s", filename)
+
+		// special case snapshot metadata - if the server manages the snapshot key
+		// there should be no snapshot metadata file.
+		if strings.HasSuffix(filename, "snapshot.json") && serverManagesSnapshot {
+			assert.Error(t, err,
+				"snapshot metadata should not exist, but does: %s", filename)
+			continue
+		} else {
+			assert.NoError(t, err, "missing TUF metadata file: %s", filename)
+		}
 
 		jsonBytes, err := ioutil.ReadFile(fullPath)
 		assert.NoError(t, err, "error reading TUF metadata file %s: %s", filename, err)
@@ -221,7 +337,7 @@ func assertRepoHasExpectedMetadata(t *testing.T, repo *NotaryRepository) {
 	}
 }
 
-func testInitRepo(t *testing.T, rootType string) {
+func testInitRepo(t *testing.T, rootType string, serverManagesSnapshot bool) {
 	gun := "docker.com/notary"
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
@@ -232,11 +348,12 @@ func testInitRepo(t *testing.T, rootType string) {
 	ts, _, _ := simpleTestServer(t)
 	defer ts.Close()
 
-	repo, rootKeyID := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL)
+	repo, rootKeyID := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL,
+		serverManagesSnapshot)
 
-	assertRepoHasExpectedKeys(t, repo, rootKeyID)
+	assertRepoHasExpectedKeys(t, repo, rootKeyID, serverManagesSnapshot)
 	assertRepoHasExpectedCerts(t, repo)
-	assertRepoHasExpectedMetadata(t, repo)
+	assertRepoHasExpectedMetadata(t, repo, serverManagesSnapshot)
 }
 
 // TestInitRepoAttemptsExceeded tests error handling when passphrase.Retriever
@@ -347,7 +464,7 @@ func testAddTarget(t *testing.T, rootType string) {
 	ts, _, _ := simpleTestServer(t)
 	defer ts.Close()
 
-	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL)
+	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL, false)
 
 	// tests need to manually boostrap timestamp as client doesn't generate it
 	err = repo.tufRepo.InitTimestamp()
@@ -414,7 +531,7 @@ func testListEmptyTargets(t *testing.T, rootType string) {
 	ts := fullTestServer(t)
 	defer ts.Close()
 
-	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL)
+	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL, false)
 
 	// tests need to manually boostrap timestamp as client doesn't generate it
 	err = repo.tufRepo.InitTimestamp()
@@ -499,7 +616,7 @@ func testListTarget(t *testing.T, rootType string) {
 	ts, mux, keys := simpleTestServer(t)
 	defer ts.Close()
 
-	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL)
+	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL, false)
 
 	// tests need to manually boostrap timestamp as client doesn't generate it
 	err = repo.tufRepo.InitTimestamp()
@@ -564,7 +681,7 @@ func testValidateRootKey(t *testing.T, rootType string) {
 	ts, _, _ := simpleTestServer(t)
 	defer ts.Close()
 
-	initializeRepo(t, rootType, tempBaseDir, gun, ts.URL)
+	initializeRepo(t, rootType, tempBaseDir, gun, ts.URL, false)
 
 	rootJSONFile := filepath.Join(tempBaseDir, "tuf", filepath.FromSlash(gun), "metadata", "root.json")
 
@@ -618,7 +735,7 @@ func testGetChangelist(t *testing.T, rootType string) {
 	ts, _, _ := simpleTestServer(t)
 	defer ts.Close()
 
-	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL)
+	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL, false)
 	assert.Len(t, getChanges(t, repo), 0, "No changes should be in changelist yet")
 
 	// Create 2 targets
@@ -669,7 +786,7 @@ func testPublish(t *testing.T, rootType string) {
 	gun := "docker.com/notary"
 	ts := fullTestServer(t)
 	defer ts.Close()
-	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL)
+	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL, false)
 
 	// Create 2 targets
 	latestTarget := addTarget(t, repo, "latest", "../fixtures/intermediate-ca.crt")
@@ -723,7 +840,7 @@ func TestRotate(t *testing.T) {
 	ts := fullTestServer(t)
 	defer ts.Close()
 
-	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL)
+	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
 
 	// Adding a target will allow us to confirm the repository is still valid after
 	// rotating the keys.
