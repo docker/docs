@@ -7,15 +7,17 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/docker/notary/tuf/data"
-	"github.com/docker/notary/tuf/signed"
+	ctxu "github.com/docker/distribution/context"
 	"github.com/gorilla/mux"
 	"golang.org/x/net/context"
 
-	ctxu "github.com/docker/distribution/context"
+	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary/errors"
+	"github.com/docker/notary/server/snapshot"
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/server/timestamp"
+	"github.com/docker/notary/tuf/data"
+	"github.com/docker/notary/tuf/signed"
 )
 
 // MainHandler is the default handler for the server
@@ -103,13 +105,17 @@ func GetHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) err
 
 	logger := ctxu.GetLoggerWithFields(ctx, map[string]interface{}{"gun": gun, "tufRole": tufRole})
 
-	if data.CanonicalRole(tufRole) == data.CanonicalTimestampRole {
+	switch data.CanonicalRole(tufRole) {
+	case data.CanonicalTimestampRole:
 		return getTimestamp(ctx, w, logger, store, gun)
+	case data.CanonicalSnapshotRole:
+		return getSnapshot(ctx, w, logger, store, gun)
 	}
 
 	out, err := store.GetCurrent(gun, tufRole)
 	if err != nil {
 		if _, ok := err.(*storage.ErrNotFound); ok {
+			logrus.Error(gun + ":" + tufRole)
 			return errors.ErrMetadataNotFound.WithDetail(nil)
 		}
 		logger.Error("500 GET")
@@ -164,6 +170,31 @@ func getTimestamp(ctx context.Context, w http.ResponseWriter, logger ctxu.Logger
 	}
 
 	logger.Debug("200 GET timestamp")
+	w.Write(out)
+	return nil
+}
+
+// getTimestampHandler returns a timestamp.json given a GUN
+func getSnapshot(ctx context.Context, w http.ResponseWriter, logger ctxu.Logger, store storage.MetaStore, gun string) error {
+	cryptoServiceVal := ctx.Value("cryptoService")
+	cryptoService, ok := cryptoServiceVal.(signed.CryptoService)
+	if !ok {
+		return errors.ErrNoCryptoService.WithDetail(nil)
+	}
+
+	out, err := snapshot.GetOrCreateSnapshot(gun, store, cryptoService)
+	if err != nil {
+		switch err.(type) {
+		case *storage.ErrNoKey, *storage.ErrNotFound:
+			logger.Error("404 GET snapshot")
+			return errors.ErrMetadataNotFound.WithDetail(nil)
+		default:
+			logger.Error("500 GET snapshot")
+			return errors.ErrUnknown.WithDetail(err)
+		}
+	}
+
+	logger.Debug("200 GET snapshot")
 	w.Write(out)
 	return nil
 }
