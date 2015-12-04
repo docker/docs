@@ -233,6 +233,8 @@ or feedback about project operations.
         People = ["calavera", "cpuguy83", "crosbymichael", "duglin", "erikh", "estesp", "icecrime", "jfrazelle", "lk4d4", "runcom", "tianon", "tibor", "unclejack", "vbatts", "vdemeester", "vieux", "vishh"]
     [Org.dockercraft]
         People = ["aduermael", "davetucker", "gdevillele"]
+    [Org.kitematic]
+        People = ["elesant", "frenchben", "jeffdm", "mchiang0610"]
     [Org.libcompose]
         People = ["aanand", "aduermael", "dnephin", "ibuildthecloud", "gdevillele", "vdemeester"]
     [Org.libnetwork]
@@ -303,6 +305,10 @@ or feedback about project operations.
         Name = "Evan Hazlett"
         Email = "ejhazlett@gmail.com"
         GitHub = "ehazlett"
+    [People.elesant]
+        Name = "Sean Li"
+        Email = "mail@shang.li"
+        GitHub = "elesant"
     [People.endophage]
         Name = "David Lawrence"
         Email = "david.lawrence@docker.com"
@@ -315,6 +321,10 @@ or feedback about project operations.
         Name = "Phil Estes"
         Email = "estesp@linux.vnet.ibm.com"
         GitHub = "estesp"
+    [People.frenchben]
+        Name = "Ben French"
+        Email = "me@frenchben.com"
+        GitHub = "FrenchBen"
     [People.gdevillele]
         Name = "Gaetan de Villele"
         Email = "gaetan@docker.com"
@@ -335,6 +345,10 @@ or feedback about project operations.
         Name = "Jean-Laurent de Morlhon"
         Email = "jeanlaurent@docker.com>"
         GitHub = "jeanlaurent"
+    [People.jeffdm]
+        Name = "Jeff Morgan"
+        Email = "jmorgan@docker.com"
+        GitHub = "jeffdm"
     [People.jfrazelle]
         Name = "Jessie Frazelle"
         Email = "j@docker.com"
@@ -347,6 +361,10 @@ or feedback about project operations.
         Name = "Madhu Venugopal"
         Email = "madhu@docker.com"
         GitHub = "mavenugo"
+    [People.mchiang0610]
+        Name = "Michael Chiang"
+        Email = "mchiang@docker.com"
+        GitHub = "mchiang0610"
     [People.mnowster]
         Name = "Mazz Mosley"
         Email = "mazz@houseofmnowster.com"
