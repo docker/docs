@@ -10,6 +10,7 @@ import (
 
 	"golang.org/x/net/context"
 
+	ctxu "github.com/docker/distribution/context"
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
@@ -18,6 +19,29 @@ import (
 	"github.com/docker/notary/utils"
 	"github.com/stretchr/testify/assert"
 )
+
+type handlerState struct {
+	// interface{} so we can test invalid values
+	store   interface{}
+	crypto  interface{}
+	keyAlgo interface{}
+}
+
+func defaultState() handlerState {
+	return handlerState{
+		store:   storage.NewMemStorage(),
+		crypto:  signed.NewEd25519(),
+		keyAlgo: data.ED25519Key,
+	}
+}
+
+func getContext(h handlerState) context.Context {
+	ctx := context.Background()
+	ctx = context.WithValue(ctx, "metaStore", h.store)
+	ctx = context.WithValue(ctx, "keyAlgorithm", h.keyAlgo)
+	ctx = context.WithValue(ctx, "cryptoService", h.crypto)
+	return ctxu.WithLogger(ctx, ctxu.GetRequestLogger(ctx))
+}
 
 func TestMainHandlerGet(t *testing.T) {
 	hand := utils.RootHandlerFactory(nil, context.Background(), &signed.Ed25519{})
@@ -43,6 +67,102 @@ func TestMainHandlerNotGet(t *testing.T) {
 	}
 	if res.StatusCode != http.StatusNotFound {
 		t.Fatalf("Expected 404, received %d", res.StatusCode)
+	}
+}
+
+// GetKeyHandler needs to have access to a metadata store and cryptoservice,
+// a key algorithm
+func TestGetKeyHandlerInvalidConfiguration(t *testing.T) {
+	noStore := defaultState()
+	noStore.store = nil
+
+	invalidStore := defaultState()
+	invalidStore.store = "not a store"
+
+	noCrypto := defaultState()
+	noCrypto.crypto = nil
+
+	invalidCrypto := defaultState()
+	invalidCrypto.crypto = "not a cryptoservice"
+
+	noKeyAlgo := defaultState()
+	noKeyAlgo.keyAlgo = ""
+
+	invalidKeyAlgo := defaultState()
+	invalidKeyAlgo.keyAlgo = 1
+
+	invalidStates := map[string][]handlerState{
+		"no storage":       {noStore, invalidStore},
+		"no cryptoservice": {noCrypto, invalidCrypto},
+		"no keyalgorithm":  {noKeyAlgo, invalidKeyAlgo},
+	}
+
+	vars := map[string]string{
+		"imageName": "gun",
+		"tufRole":   data.CanonicalTimestampRole,
+	}
+	req := &http.Request{Body: ioutil.NopCloser(bytes.NewBuffer(nil))}
+	for errString, states := range invalidStates {
+		for _, s := range states {
+			err := getKeyHandler(getContext(s), httptest.NewRecorder(), req, vars)
+			assert.Error(t, err)
+			assert.Contains(t, err.Error(), errString)
+		}
+	}
+}
+
+// GetKeyHandler needs to be set up such that an imageName and tufRole are both
+// provided and non-empty.
+func TestGetKeyHandlerNoRoleOrRepo(t *testing.T) {
+	state := defaultState()
+	req := &http.Request{Body: ioutil.NopCloser(bytes.NewBuffer(nil))}
+
+	for _, key := range []string{"imageName", "tufRole"} {
+		vars := map[string]string{
+			"imageName": "gun",
+			"tufRole":   data.CanonicalTimestampRole,
+		}
+
+		// not provided
+		delete(vars, key)
+		err := getKeyHandler(getContext(state), httptest.NewRecorder(), req, vars)
+		assert.Error(t, err)
+		assert.Contains(t, err.Error(), "unknown")
+
+		// empty
+		vars[key] = ""
+		err = getKeyHandler(getContext(state), httptest.NewRecorder(), req, vars)
+		assert.Error(t, err)
+		assert.Contains(t, err.Error(), "unknown")
+	}
+}
+
+// Getting a key for a non-supported role results in a 400.
+func TestGetKeyHandlerInvalidRole(t *testing.T) {
+	state := defaultState()
+	vars := map[string]string{
+		"imageName": "gun",
+		"tufRole":   data.CanonicalRootRole,
+	}
+	req := &http.Request{Body: ioutil.NopCloser(bytes.NewBuffer(nil))}
+
+	err := getKeyHandler(getContext(state), httptest.NewRecorder(), req, vars)
+	assert.Error(t, err)
+	assert.Contains(t, err.Error(), "invalid role")
+}
+
+// Getting the key for a valid role and gun succeeds
+func TestGetKeyHandlerCreatesOnce(t *testing.T) {
+	state := defaultState()
+	roles := []string{data.CanonicalTimestampRole, data.CanonicalSnapshotRole}
+	req := &http.Request{Body: ioutil.NopCloser(bytes.NewBuffer(nil))}
+
+	for _, role := range roles {
+		vars := map[string]string{"imageName": "gun", "tufRole": role}
+		recorder := httptest.NewRecorder()
+		err := getKeyHandler(getContext(state), recorder, req, vars)
+		assert.NoError(t, err)
+		assert.True(t, len(recorder.Body.String()) > 0)
 	}
 }
 
@@ -77,9 +197,7 @@ func TestGetHandlerTimestamp(t *testing.T) {
 	store := storage.NewMemStorage()
 	_, repo, crypto := testutils.EmptyRepo()
 
-	ctx := context.Background()
-	ctx = context.WithValue(ctx, "metaStore", store)
-	ctx = context.WithValue(ctx, "cryptoService", crypto)
+	ctx := getContext(handlerState{store: store, crypto: crypto})
 
 	sn, err := repo.SignSnapshot(data.DefaultExpires("snapshot"))
 	snJSON, err := json.Marshal(sn)
@@ -110,9 +228,7 @@ func TestGetHandlerSnapshot(t *testing.T) {
 	store := storage.NewMemStorage()
 	_, repo, crypto := testutils.EmptyRepo()
 
-	ctx := context.Background()
-	ctx = context.WithValue(ctx, "metaStore", store)
-	ctx = context.WithValue(ctx, "cryptoService", crypto)
+	ctx := getContext(handlerState{store: store, crypto: crypto})
 
 	sn, err := repo.SignSnapshot(data.DefaultExpires("snapshot"))
 	snJSON, err := json.Marshal(sn)
