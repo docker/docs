@@ -208,46 +208,70 @@ func getSnapshot(ctx context.Context, w http.ResponseWriter, logger ctxu.Logger,
 	return nil
 }
 
-// GetTimestampKeyHandler returns a timestamp public key, creating a new key-pair
+// GetKeyHandler returns a public key for the specified role, creating a new key-pair
 // it if it doesn't yet exist
-func GetTimestampKeyHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
+func GetKeyHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
+	defer r.Body.Close()
 	vars := mux.Vars(r)
-	gun := vars["imageName"]
+	return getKeyHandler(ctx, w, r, vars)
+}
+
+func getKeyHandler(ctx context.Context, w http.ResponseWriter, r *http.Request, vars map[string]string) error {
+	gun, ok := vars["imageName"]
+	if !ok || gun == "" {
+		return errors.ErrUnknown.WithDetail("no gun")
+	}
+	role, ok := vars["tufRole"]
+	if !ok || role == "" {
+		return errors.ErrUnknown.WithDetail("no role")
+	}
 
 	logger := ctxu.GetLoggerWithField(ctx, gun, "gun")
 
 	s := ctx.Value("metaStore")
 	store, ok := s.(storage.MetaStore)
-	if !ok {
+	if !ok || store == nil {
 		logger.Error("500 GET storage not configured")
 		return errors.ErrNoStorage.WithDetail(nil)
 	}
 	c := ctx.Value("cryptoService")
 	crypto, ok := c.(signed.CryptoService)
-	if !ok {
+	if !ok || crypto == nil {
 		logger.Error("500 GET crypto service not configured")
 		return errors.ErrNoCryptoService.WithDetail(nil)
 	}
 	algo := ctx.Value("keyAlgorithm")
 	keyAlgo, ok := algo.(string)
-	if !ok {
+	if !ok || keyAlgo == "" {
 		logger.Error("500 GET key algorithm not configured")
 		return errors.ErrNoKeyAlgorithm.WithDetail(nil)
 	}
 	keyAlgorithm := keyAlgo
 
-	key, err := timestamp.GetOrCreateTimestampKey(gun, store, crypto, keyAlgorithm)
+	var (
+		key data.PublicKey
+		err error
+	)
+	switch role {
+	case data.CanonicalTimestampRole:
+		key, err = timestamp.GetOrCreateTimestampKey(gun, store, crypto, keyAlgorithm)
+	case data.CanonicalSnapshotRole:
+		key, err = snapshot.GetOrCreateSnapshotKey(gun, store, crypto, keyAlgorithm)
+	default:
+		logger.Errorf("400 GET %s key: %v", role, err)
+		return errors.ErrInvalidRole.WithDetail(role)
+	}
 	if err != nil {
-		logger.Errorf("500 GET timestamp key: %v", err)
+		logger.Errorf("500 GET %s key: %v", role, err)
 		return errors.ErrUnknown.WithDetail(err)
 	}
 
 	out, err := json.Marshal(key)
 	if err != nil {
-		logger.Error("500 GET timestamp key")
+		logger.Errorf("500 GET %s key", role)
 		return errors.ErrUnknown.WithDetail(err)
 	}
-	logger.Debug("200 GET timestamp key")
+	logger.Debugf("200 GET %s key", role)
 	w.Write(out)
 	return nil
 }
