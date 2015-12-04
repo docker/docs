@@ -105,15 +105,11 @@ func validateUpdate(cs signed.CryptoService, gun string, updates []storage.MetaU
 		logrus.Debug("Successfully validated snapshot")
 	} else {
 		// Check:
-		//	 - we have a snapshot key
+		//   - we have a snapshot key
 		//   - it matches a snapshot key signed into the root.json
 		// Then:
 		//   - generate a new snapshot
 		//   - add it to the updates
-		//
-		// TODO: Assumptions have been made about what is loaded into the repo.
-		//       we need to ensure at a minimum the root and targets are loaded
-		//       in.
 		err := prepRepo(gun, repo, store)
 		if err != nil {
 			return nil, err
@@ -162,6 +158,9 @@ func generateSnapshot(gun string, kdb *keys.KeyDB, repo *tuf.Repo, store storage
 	}
 
 	algo, keyBytes, err := store.GetKey(gun, data.CanonicalSnapshotRole)
+	if role == nil {
+		return nil, ErrBadRoot{msg: "root did not include snapshot key"}
+	}
 	foundK := data.NewPublicKey(algo, keyBytes)
 
 	validKey := false
@@ -188,23 +187,15 @@ func generateSnapshot(gun string, kdb *keys.KeyDB, repo *tuf.Repo, store storage
 		if err != nil {
 			return nil, fmt.Errorf("could not retrieve previous snapshot: %v", err)
 		}
+		err = repo.SetSnapshot(sn)
+		if err != nil {
+			return nil, fmt.Errorf("could not load previous snapshot: %v", err)
+		}
 	} else {
-		root, err := repo.Root.ToSigned()
+		err := repo.InitSnapshot()
 		if err != nil {
-			return nil, fmt.Errorf("could not create snapshot: %v", err)
+			return nil, fmt.Errorf("could not initialize snapshot: %v", err)
 		}
-		targets, err := repo.Targets[data.CanonicalTargetsRole].ToSigned()
-		if err != nil {
-			return nil, fmt.Errorf("could not create snapshot: %v", err)
-		}
-		sn, err = data.NewSnapshot(root, targets)
-		if err != nil {
-			return nil, fmt.Errorf("could not create snapshot: %v", err)
-		}
-	}
-	err = repo.SetSnapshot(sn)
-	if err != nil {
-		return nil, fmt.Errorf("could not create snapshot: %v", err)
 	}
 	sgnd, err := repo.SignSnapshot(data.DefaultExpires(data.CanonicalSnapshotRole))
 	if err != nil {
