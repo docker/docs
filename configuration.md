@@ -377,12 +377,10 @@ The [S3 storage backend](/registry/configuration.md#s3) page allows you to set t
 
 Set the "Account name", "Account key", "Container", and "Realm" on the [Azure storage backend](/registry/configuration.md#azure) page.
 
-<!--  remove for 1.4. will most likely be in a later release.
 ### Openstack Swift settings
 
-View the [openstack Swift settings](/registry/configuration.md#openstack-swift) documentation so that you can set up your storage settings:
+View the [openstack Swift settings](/registry/configuration/#openstack-swift) documentation so that you can set up your storage settings:
 authurl, username, password, container, tenant, tenantid, domain, domainid, insecureskipverify, region, chunksize, and prefix.
--- >
 
 ### Yaml configuration file
 
