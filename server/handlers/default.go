@@ -37,6 +37,12 @@ func MainHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) er
 // backend is atomically updated with all the new records.
 func AtomicUpdateHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
 	defer r.Body.Close()
+	vars := mux.Vars(r)
+	return atomicUpdateHandler(ctx, w, r, vars)
+}
+
+func atomicUpdateHandler(ctx context.Context, w http.ResponseWriter, r *http.Request, vars map[string]string) error {
+	gun := vars["imageName"]
 	s := ctx.Value("metaStore")
 	store, ok := s.(storage.MetaStore)
 	if !ok {
@@ -48,8 +54,6 @@ func AtomicUpdateHandler(ctx context.Context, w http.ResponseWriter, r *http.Req
 		return errors.ErrNoCryptoService.WithDetail(nil)
 	}
 
-	vars := mux.Vars(r)
-	gun := vars["imageName"]
 	reader, err := r.MultipartReader()
 	if err != nil {
 		return errors.ErrMalformedUpload.WithDetail(nil)
@@ -94,14 +98,19 @@ func AtomicUpdateHandler(ctx context.Context, w http.ResponseWriter, r *http.Req
 
 // GetHandler returns the json for a specified role and GUN.
 func GetHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
+	defer r.Body.Close()
+	vars := mux.Vars(r)
+	return getHandler(ctx, w, r, vars)
+}
+
+func getHandler(ctx context.Context, w http.ResponseWriter, r *http.Request, vars map[string]string) error {
+	gun := vars["imageName"]
+	tufRole := vars["tufRole"]
 	s := ctx.Value("metaStore")
 	store, ok := s.(storage.MetaStore)
 	if !ok {
 		return errors.ErrNoStorage.WithDetail(nil)
 	}
-	vars := mux.Vars(r)
-	gun := vars["imageName"]
-	tufRole := vars["tufRole"]
 
 	logger := ctxu.GetLoggerWithFields(ctx, map[string]interface{}{"gun": gun, "tufRole": tufRole})
 
