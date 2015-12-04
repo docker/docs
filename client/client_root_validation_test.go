@@ -33,7 +33,7 @@ func validateRootSuccessfully(t *testing.T, rootType string) {
 
 	gun := "docker.com/notary"
 
-	ts, mux := simpleTestServer(t)
+	ts, mux, keys := simpleTestServer(t)
 	defer ts.Close()
 
 	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL)
@@ -47,7 +47,7 @@ func validateRootSuccessfully(t *testing.T, rootType string) {
 	allCerts := repo.CertManager.TrustedCertificateStore().GetCertificates()
 	assert.Len(t, allCerts, 1)
 
-	fakeServerData(t, repo, mux)
+	fakeServerData(t, repo, mux, keys)
 
 	//
 	// Test TOFUS logic. We remove all certs and expect a new one to be added after ListTargets
