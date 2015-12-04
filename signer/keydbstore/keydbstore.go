@@ -1,7 +1,6 @@
 package keydbstore
 
 import (
-	"database/sql"
 	"errors"
 	"fmt"
 	"sync"
@@ -46,13 +45,17 @@ func (g GormPrivateKey) TableName() string {
 }
 
 // NewKeyDBStore returns a new KeyDBStore backed by a SQL database
-func NewKeyDBStore(passphraseRetriever passphrase.Retriever, defaultPassAlias, dbType string, dbSQL *sql.DB) (*KeyDBStore, error) {
+func NewKeyDBStore(passphraseRetriever passphrase.Retriever, defaultPassAlias string,
+	dbDialect string, dbArgs ...interface{}) (*KeyDBStore, error) {
 	cachedKeys := make(map[string]data.PrivateKey)
 
-	// Open a connection to our database
-	db, _ := gorm.Open(dbType, dbSQL)
+	db, err := gorm.Open(dbDialect, dbArgs...)
+	if err != nil {
+		return nil, err
+	}
 
-	return &KeyDBStore{db: db,
+	return &KeyDBStore{
+		db:               db,
 		defaultPassAlias: defaultPassAlias,
 		retriever:        passphraseRetriever,
 		cachedKeys:       cachedKeys}, nil
@@ -88,7 +91,7 @@ func (s *KeyDBStore) AddKey(name, alias string, privKey data.PrivateKey) error {
 
 	// Add encrypted private key to the database
 	s.db.Create(&gormPrivKey)
-	// Value will be false if Create suceeds
+	// Value will be false if Create succeeds
 	failure := s.db.NewRecord(gormPrivKey)
 	if failure {
 		return fmt.Errorf("failed to add private key to database: %s", privKey.ID())
