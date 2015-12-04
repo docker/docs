@@ -4,7 +4,6 @@ package main
 
 import (
 	"crypto/tls"
-	"database/sql"
 	"errors"
 	_ "expvar"
 	"flag"
@@ -93,18 +92,12 @@ func setUpCryptoservices(configuration *viper.Viper, allowedBackends []string) (
 		}
 		logrus.Debug("Default Alias: ", defaultAlias)
 
-		dbSQL, err := sql.Open(storeConfig.Backend, storeConfig.Source)
-		if err != nil {
-			return nil, fmt.Errorf("failed to open the %s database: %s, %v",
-				storeConfig.Backend, storeConfig.Source, err)
-		}
-		logrus.Debugf("Using %s DB: %s", storeConfig.Backend, storeConfig.Source)
-
 		dbStore, err := keydbstore.NewKeyDBStore(
-			passphraseRetriever, defaultAlias, storeConfig.Backend, dbSQL)
+			passphraseRetriever, defaultAlias, storeConfig.Backend, storeConfig.Source)
 		if err != nil {
 			return nil, fmt.Errorf("failed to create a new keydbstore: %v", err)
 		}
+		logrus.Debugf("Using %s DB: %s", storeConfig.Backend, storeConfig.Source)
 
 		health.RegisterPeriodicFunc(
 			"DB operational", dbStore.HealthCheck, time.Second*60)
