@@ -243,6 +243,10 @@ or feedback about project operations.
         People = ["dgageot", "ehazlett", "jeanlaurent", "nathanleclaire"]
     [Org.notary]
         People = ["cyli", "diogomonica", "dmcgowan", "endophage", "nathanmccauley"]
+    [Org.spdystream]
+        People = ["dmcgowan"]
+    [Org.swarm]
+        People = ["abronan", "aluzzardi", "chanwit", "jimmyxian", "vieux"]
 
 [People]
     [People.aanand]
@@ -253,10 +257,18 @@ or feedback about project operations.
         Name = "Alessandro Boch"
         Email = "aboch@docker.com"
         GitHub = "aboch"
+    [People.abronan]
+        Name = "Alexandre Beslic"
+        Email = "abronan@docker.com"
+        GitHub = "abronan"
     [People.aduermael]
         Name = "Adrien Duermael"
         Email = "adrien@docker.com"
         GitHub = "aduermael"
+    [People.aluzzardi]
+        Name = "Andrea Luzzardi"
+        Email = "al@docker.com"
+        GitHub = "aluzzardi"
     [People.bfirsh]
         Name = "Ben Firshman"
         Email = "ben@firshman.co.uk"
@@ -265,6 +277,10 @@ or feedback about project operations.
         Name = "David Calavera"
         Email = "david.calavera@gmail.com"
         GitHub = "calavera"
+    [People.chanwit]
+        Name = "Chanwit Kaewkasi"
+        Email = "chanwit@gmail.com"
+        GitHub = "chanwit"
     [People.cpuguy83]
         Name = "Brian Goff"
         Email = "cpuguy83@gmail.com"
@@ -353,6 +369,10 @@ or feedback about project operations.
         Name = "Jessie Frazelle"
         Email = "j@docker.com"
         GitHub = "jfrazelle"
+    [People.jimmyxian]
+        Name = "Xian Chaobo"
+        Email = "xianchaobo@huawei.com"
+        GitHub = "jimmyxian"
     [People.lk4d4]
         Name = "Alexandr Morozov"
         Email = "lk4d4@docker.com"
