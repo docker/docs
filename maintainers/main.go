@@ -31,12 +31,15 @@ const (
 var (
 	org      = "docker"
 	projects = []string{
+		"boot2docker",
 		"compose",
 		"distribution",
 		"docker",
+		"docker-py",
 		"dockercraft",
 		"kitematic",
 		"libcompose",
+		"libkv",
 		"libnetwork",
 		"machine",
 		"notary",
