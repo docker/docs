@@ -40,6 +40,7 @@ var (
 		"libnetwork",
 		"machine",
 		"notary",
+		"spdystream",
 		"swarm",
 		"toolbox",
 	}
