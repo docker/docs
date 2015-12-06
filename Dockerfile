@@ -21,9 +21,9 @@ RUN buildDeps=' \
 	&& apk update \
 	&& apk add $buildDeps \
 	&& cd /go/src/github.com/docker/opensource \
-	&& go get -d -v github.com/docker/opensource/maintainers \
-	&& go generate ./maintainers \
-	&& go build -o /usr/bin/maintainers ./maintainers \
+	&& go get -d -v github.com/docker/opensource/maintainercollector \
+	&& go generate ./maintainercollector \
+	&& go build -o /usr/bin/maintainercollector ./maintainercollector \
 	&& apk del $buildDeps \
 	&& rm -rf /var/cache/apk/* \
 	&& rm -rf /go \
@@ -31,4 +31,4 @@ RUN buildDeps=' \
 
 WORKDIR /root/maintainers
 
-ENTRYPOINT [ "maintainers" ]
+ENTRYPOINT [ "maintainercollector" ]
