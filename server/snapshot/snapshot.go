@@ -96,8 +96,8 @@ func contentExpired(gun string, sn *data.SignedSnapshot, store storage.MetaStore
 		if err != nil {
 			return false
 		}
-		roleExpired, newHash := roleExpired(curr, meta)
-		if roleExpired {
+		roleExp, newHash := roleExpired(curr, meta)
+		if roleExp {
 			updatedMeta[role] = data.FileMeta{
 				Length: int64(len(curr)),
 				Hashes: data.Hashes{
@@ -105,7 +105,7 @@ func contentExpired(gun string, sn *data.SignedSnapshot, store storage.MetaStore
 				},
 			}
 		}
-		expired = expired || roleExpired
+		expired = expired || roleExp
 	}
 	if expired {
 		sn.Signed.Meta = updatedMeta
