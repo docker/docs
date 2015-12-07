@@ -1,5 +1,16 @@
 package storage
 
+// KeyStore provides a minimal interface for managing key persistence
+type KeyStore interface {
+	// GetKey returns the algorithm and public key for the given GUN and role.
+	// If the GUN+role don't exist, returns an error.
+	GetKey(gun, role string) (algorithm string, public []byte, err error)
+
+	// SetKey sets the algorithm and public key for the given GUN and role if
+	// it doesn't already exist.  Otherwise an error is returned.
+	SetKey(gun, role, algorithm string, public []byte) error
+}
+
 // MetaStore holds the methods that are used for a Metadata Store
 type MetaStore interface {
 	// UpdateCurrent adds new metadata version for the given GUN if and only
@@ -22,11 +33,5 @@ type MetaStore interface {
 	// error if no metadata exists for the given GUN.
 	Delete(gun string) error
 
-	// GetKey returns the algorithm and public key for the given GUN and role.
-	// If the GUN+role don't exist, returns an error.
-	GetKey(gun, role string) (algorithm string, public []byte, err error)
-
-	// SetKey sets the algorithm and public key for the given GUN and role if
-	// it doesn't already exist.  Otherwise an error is returned.
-	SetKey(gun, role, algorithm string, public []byte) error
+	KeyStore
 }
