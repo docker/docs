@@ -89,6 +89,10 @@ func (ks keyStore) SetKey(gun, role, algorithm string, public []byte) error {
 	return &storage.ErrKeyExists{}
 }
 
+// Tests the race condition where the server is being asked to generate a new key
+// by 2 parallel requests and the second insert to be executed by the DB fails
+// due to duplicate key (gun + role). It should then return the key added by the
+// first insert.
 func TestGetSnapshotKeyExistsOnSet(t *testing.T) {
 	crypto := signed.NewEd25519()
 	key, err := crypto.Create(data.CanonicalSnapshotRole, data.ED25519Key)
