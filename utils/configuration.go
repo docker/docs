@@ -159,3 +159,19 @@ func SetUpBugsnag(config *bugsnag.Configuration) error {
 	}
 	return nil
 }
+
+// ParseViper tries to parse out a Viper from a configuration file.
+func ParseViper(v *viper.Viper, configFile string) error {
+	filename := filepath.Base(configFile)
+	ext := filepath.Ext(configFile)
+	configPath := filepath.Dir(configFile)
+
+	v.SetConfigType(strings.TrimPrefix(ext, "."))
+	v.SetConfigName(strings.TrimSuffix(filename, ext))
+	v.AddConfigPath(configPath)
+
+	if err := v.ReadInConfig(); err != nil {
+		return fmt.Errorf("Could not read config at :%s, viper error: %v", configFile, err)
+	}
+	return nil
+}

@@ -12,7 +12,6 @@ import (
 	"net"
 	"net/http"
 	"os"
-	"path/filepath"
 	"strings"
 	"time"
 
@@ -181,17 +180,9 @@ func main() {
 	// when the signer starts print the version for debugging and issue logs later
 	logrus.Infof("Version: %s, Git commit: %s", version.NotaryVersion, version.GitCommit)
 
-	filename := filepath.Base(configFile)
-	ext := filepath.Ext(configFile)
-	configPath := filepath.Dir(configFile)
-
-	mainViper.SetConfigType(strings.TrimPrefix(ext, "."))
-	mainViper.SetConfigName(strings.TrimSuffix(filename, ext))
-	mainViper.AddConfigPath(configPath)
-
-	if err := mainViper.ReadInConfig(); err != nil {
-		logrus.Errorf("Could not read config at :%s, viper error: %v", configFile, err)
-		os.Exit(1)
+	// parse viper config
+	if err := utils.ParseViper(mainViper, configFile); err != nil {
+		logrus.Fatal(err.Error())
 	}
 
 	// default is error level
