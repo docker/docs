@@ -20,7 +20,10 @@ func TestTimestampExpired(t *testing.T) {
 		},
 	}
 	assert.True(t, timestampExpired(ts), "Timestamp should have expired")
-	ts = &data.SignedTimestamp{
+}
+
+func TestTimestampNotExpired(t *testing.T) {
+	ts := &data.SignedTimestamp{
 		Signatures: nil,
 		Signed: data.Timestamp{
 			Expires: time.Now().AddDate(1, 0, 0),
@@ -84,7 +87,7 @@ func TestGetTimestampNewSnapshot(t *testing.T) {
 	store.UpdateCurrent("gun", storage.MetaUpdate{Role: "snapshot", Version: 1, Data: snapJSON})
 
 	ts2, err := GetOrCreateTimestamp("gun", store, crypto)
-	assert.Nil(t, err, "GetTimestamp errored")
+	assert.NoError(t, err, "GetTimestamp errored")
 
 	assert.NotEqual(t, ts1, ts2, "Timestamp was not regenerated when snapshot changed")
 }
