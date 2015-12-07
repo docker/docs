@@ -2,18 +2,20 @@ package client
 
 import (
 	"bytes"
-	"encoding/json"
+	"crypto/rand"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"os"
 	"path/filepath"
+	"sort"
 	"strings"
 	"testing"
 
 	"github.com/Sirupsen/logrus"
 	ctxu "github.com/docker/distribution/context"
+	"github.com/docker/notary/certs"
 	"github.com/docker/notary/client/changelist"
 	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/server"
@@ -21,27 +23,38 @@ import (
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/store"
+	"github.com/jfrazelle/go/canonical/json"
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/net/context"
 )
 
-const timestampKeyJSON = `{"keytype":"rsa","keyval":{"public":"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyyvBtTg2xzYS+MTTIBqSpI4V78tt8Yzqi7Jki/Z6NqjiDvcnbgcTqNR2t6B2W5NjGdp/hSaT2jyHM+kdmEGaPxg/zIuHbL3NIp4e0qwovWiEgACPIaELdn8O/kt5swsSKl1KMvLCH1sM86qMibNMAZ/hXOwd90TcHXCgZ91wHEAmsdjDC3dB0TT+FBgOac8RM01Y196QrZoOaDMTWh0EQfw7YbXAElhFVDFxBzDdYWbcIHSIogXQmq0CP+zaL/1WgcZZIClt2M6WCaxxF1S34wNn45gCvVZiZQ/iKWHerSr/2dGQeGo+7ezMSutRzvJ+01fInD86RS/CEtBCFZ1VyQIDAQAB","private":"MIIEpAIBAAKCAQEAyyvBtTg2xzYS+MTTIBqSpI4V78tt8Yzqi7Jki/Z6NqjiDvcnbgcTqNR2t6B2W5NjGdp/hSaT2jyHM+kdmEGaPxg/zIuHbL3NIp4e0qwovWiEgACPIaELdn8O/kt5swsSKl1KMvLCH1sM86qMibNMAZ/hXOwd90TcHXCgZ91wHEAmsdjDC3dB0TT+FBgOac8RM01Y196QrZoOaDMTWh0EQfw7YbXAElhFVDFxBzDdYWbcIHSIogXQmq0CP+zaL/1WgcZZIClt2M6WCaxxF1S34wNn45gCvVZiZQ/iKWHerSr/2dGQeGo+7ezMSutRzvJ+01fInD86RS/CEtBCFZ1VyQIDAQABAoIBAHar8FFxrE1gAGTeUpOF8fG8LIQMRwO4U6eVY7V9GpWiv6gOJTHXYFxU/aL0Ty3eQRxwy9tyVRo8EJz5pRex+e6ws1M+jLOviYqW4VocxQ8dZYd+zBvQfWmRfah7XXJ/HPUx2I05zrmR7VbGX6Bu4g5w3KnyIO61gfyQNKF2bm2Q3yblfupx3URvX0bl180R/+QN2Aslr4zxULFE6b+qJqBydrztq+AAP3WmskRxGa6irFnKxkspJqUpQN1mFselj6iQrzAcwkRPoCw0RwCCMq1/OOYvQtgxTJcO4zDVlbw54PvnxPZtcCWw7fO8oZ2Fvo2SDo75CDOATOGaT4Y9iqECgYEAzWZSpFbN9ZHmvq1lJQg//jFAyjsXRNn/nSvyLQILXltz6EHatImnXo3v+SivG91tfzBI1GfDvGUGaJpvKHoomB+qmhd8KIQhO5MBdAKZMf9fZqZofOPTD9xRXECCwdi+XqHBmL+l1OWz+O9Bh+Qobs2as/hQVgHaoXhQpE0NkTcCgYEA/Tjf6JBGl1+WxQDoGZDJrXoejzG9OFW19RjMdmPrg3t4fnbDtqTpZtCzXxPTCSeMrvplKbqAqZglWyq227ksKw4p7O6YfyhdtvC58oJmivlLr6sFaTsER7mDcYce8sQpqm+XQ8IPbnOk0Z1l6g56euTwTnew49uy25M6U1xL0P8CgYEAxEXv2Kw+OVhHV5PX4BBHHj6we88FiDyMfwM8cvfOJ0datekf9X7ImZkmZEAVPJpWBMD+B0J0jzU2b4SLjfFVkzBHVOH2Ob0xCH2MWPAWtekin7OKizUlPbW5ZV8b0+Kq30DQ/4a7D3rEhK8UPqeuX1tHZox1MAqrgbq3zJj4yvcCgYEAktYPKPm4pYCdmgFrlZ+bA0iEPf7Wvbsd91F5BtHsOOM5PQQ7e0bnvWIaEXEad/2CG9lBHlBy2WVLjDEZthILpa/h6e11ao8KwNGY0iKBuebT17rxOVMqqTjPGt8CuD2994IcEgOPFTpkAdUmyvG4XlkxbB8F6St17NPUB5DGuhsCgYA//Lfytk0FflXEeRQ16LT1YXgV7pcR2jsha4+4O5pxSFw/kTsOfJaYHg8StmROoyFnyE3sg76dCgLn0LENRCe5BvDhJnp5bMpQldG3XwcAxH8FGFNY4LtV/2ZKnJhxcONkfmzQPOmTyedOzrKQ+bNURsqLukCypP7/by6afBY4dA=="}}`
-const timestampECDSAKeyJSON = `
-{"keytype":"ecdsa","keyval":{"public":"MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEgl3rzMPMEKhS1k/AX16MM4PdidpjJr+z4pj0Td+30QnpbOIARgpyR1PiFztU8BZlqG3cUazvFclr2q/xHvfrqw==","private":"MHcCAQEEIDqtcdzU7H3AbIPSQaxHl9+xYECt7NpK7B1+6ep5cv9CoAoGCCqGSM49AwEHoUQDQgAEgl3rzMPMEKhS1k/AX16MM4PdidpjJr+z4pj0Td+30QnpbOIARgpyR1PiFztU8BZlqG3cUazvFclr2q/xHvfrqw=="}}`
+func simpleTestServer(t *testing.T) (
+	*httptest.Server, *http.ServeMux, map[string]data.PrivateKey) {
 
-func simpleTestServer(t *testing.T) (*httptest.Server, *http.ServeMux) {
+	roles := []string{data.CanonicalTimestampRole, data.CanonicalSnapshotRole}
+	keys := make(map[string]data.PrivateKey)
 	mux := http.NewServeMux()
-	// TUF will request /v2/docker.com/notary/_trust/tuf/timestamp.key
-	// Return a canned timestamp.key
-	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/timestamp.key", func(w http.ResponseWriter, r *http.Request) {
-		// Also contains the private key, but for the purpose of this
-		// test, we don't care
-		fmt.Fprint(w, timestampECDSAKeyJSON)
-	})
+
+	for _, role := range roles {
+		key, err := trustmanager.GenerateECDSAKey(rand.Reader)
+		assert.NoError(t, err)
+
+		keys[role] = key
+		pubKey := data.PublicKeyFromPrivate(key)
+		jsonBytes, err := json.MarshalCanonical(&pubKey)
+		assert.NoError(t, err)
+		keyJSON := string(jsonBytes)
+
+		// TUF will request /v2/docker.com/notary/_trust/tuf/<role>.key
+		mux.HandleFunc(
+			fmt.Sprintf("/v2/docker.com/notary/_trust/tuf/%s.key", role),
+			func(w http.ResponseWriter, r *http.Request) {
+				fmt.Fprint(w, keyJSON)
+			})
+	}
 
 	ts := httptest.NewServer(mux)
-
-	return ts, mux
+	return ts, mux, keys
 }
 
 func fullTestServer(t *testing.T) *httptest.Server {
@@ -74,7 +87,9 @@ func errorTestServer(t *testing.T, errorCode int) *httptest.Server {
 	return server
 }
 
-func initializeRepo(t *testing.T, rootType, tempBaseDir, gun, url string) (*NotaryRepository, string) {
+func initializeRepo(t *testing.T, rootType, tempBaseDir, gun, url string) (
+	*NotaryRepository, string) {
+
 	repo, err := NewNotaryRepository(
 		tempBaseDir, gun, url, http.DefaultTransport, passphraseRetriever)
 	assert.NoError(t, err, "error creating repo: %s", err)
@@ -98,74 +113,69 @@ func TestInitRepo(t *testing.T) {
 	}
 }
 
-func testInitRepo(t *testing.T, rootType string) {
-	gun := "docker.com/notary"
-	// Temporary directory where test files will be created
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	defer os.RemoveAll(tempBaseDir)
+// This creates a new KeyFileStore in the repo's base directory and makes sure
+// the repo has the right number of keys
+func assertRepoHasExpectedKeys(t *testing.T, repo *NotaryRepository,
+	rootKeyID string) {
 
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-
-	ts, _ := simpleTestServer(t)
-	defer ts.Close()
-
-	repo, rootKeyID := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL)
-
-	// Inspect contents of the temporary directory
-	expectedDirs := []string{
-		"private",
-		filepath.Join("private", "tuf_keys", filepath.FromSlash(gun)),
-		filepath.Join("private", "root_keys"),
-		"trusted_certificates",
-		filepath.Join("trusted_certificates", filepath.FromSlash(gun)),
-		"tuf",
-		filepath.Join("tuf", filepath.FromSlash(gun), "metadata"),
-	}
-	for _, dir := range expectedDirs {
-		fi, err := os.Stat(filepath.Join(tempBaseDir, dir))
-		assert.NoError(t, err, "missing directory in base directory: %s", dir)
-		assert.True(t, fi.Mode().IsDir(), "%s is not a directory", dir)
-	}
-
-	// Look for keys in private. The filenames should match the key IDs
-	// in the private key store.
-	keyFileStore, err := trustmanager.NewKeyFileStore(tempBaseDir, passphraseRetriever)
+	// The repo should have a keyFileStore and have created keys using it,
+	// so create a new KeyFileStore, and check that the keys do exist and are
+	// valid
+	ks, err := trustmanager.NewKeyFileStore(repo.baseDir, passphraseRetriever)
 	assert.NoError(t, err)
 
-	privKeyList := keyFileStore.ListFiles()
-	for _, privKeyName := range privKeyList {
-		privKeyFileName := filepath.Join(keyFileStore.BaseDir(), privKeyName)
-		_, err := os.Stat(privKeyFileName)
-		assert.NoError(t, err, "missing private key: %s", privKeyName)
+	roles := make(map[string]bool)
+	for keyID, role := range ks.ListKeys() {
+		if role == data.CanonicalRootRole {
+			assert.Equal(t, rootKeyID, keyID, "Unexpected root key ID")
+		}
+		// just to ensure the content of the key files created are valid
+		_, r, err := ks.GetKey(keyID)
+		assert.NoError(t, err)
+		assert.Equal(t, role, r)
+		roles[role] = true
+	}
+	// there is a root key and a targets key
+	for _, role := range data.ValidRoles {
+		if role != data.CanonicalTimestampRole {
+			_, ok := roles[role]
+			assert.True(t, ok, fmt.Sprintf("missing %s key", role))
+		}
 	}
 
-	// Look for keys in root_keys
-	// There should be a file named after the key ID of the root key we
-	// passed in.
-	rootKeyFilename := rootKeyID + "_root.key"
-	_, err = os.Stat(filepath.Join(tempBaseDir, "private", "root_keys", rootKeyFilename))
-	assert.NoError(t, err, "missing root key")
+	// The server manages the timestamp key - there should not be a timestamp
+	// key
+	_, ok := roles[data.CanonicalTimestampRole]
+	assert.False(t, ok)
+}
 
-	certificates := repo.CertManager.TrustedCertificateStore().GetCertificates()
-	assert.Len(t, certificates, 1, "unexpected number of certificates")
+// This creates a new certificate manager in the repo's base directory and
+// makes sure the repo has the right certificates
+func assertRepoHasExpectedCerts(t *testing.T, repo *NotaryRepository) {
+	// The repo should have a certificate manager and have created certs using
+	// it, so create a new manager, and check that the certs do exist and
+	// are valid
+	certManager, err := certs.NewManager(repo.baseDir)
+	assert.NoError(t, err)
+	certificates := certManager.TrustedCertificateStore().GetCertificates()
+	assert.Len(t, certificates, 1, "unexpected number of trusted certificates")
 
 	certID, err := trustmanager.FingerprintCert(certificates[0])
-	assert.NoError(t, err, "unable to fingerprint the certificate")
+	assert.NoError(t, err, "unable to fingerprint the trusted certificate")
+	assert.NotEqual(t, certID, "")
+}
 
-	// There should be a trusted certificate
-	_, err = os.Stat(filepath.Join(tempBaseDir, "trusted_certificates", filepath.FromSlash(gun), certID+".crt"))
-	assert.NoError(t, err, "missing trusted certificate")
-
-	// Sanity check the TUF metadata files. Verify that they exist, the JSON is
-	// well-formed, and the signatures exist. For the root.json file, also check
-	// that the root, snapshot, and targets key IDs are present.
+// Sanity check the TUF metadata files. Verify that they exist, the JSON is
+// well-formed, and the signatures exist. For the root.json file, also check
+// that the root, snapshot, and targets key IDs are present.
+func assertRepoHasExpectedMetadata(t *testing.T, repo *NotaryRepository) {
 	expectedTUFMetadataFiles := []string{
-		filepath.Join("tuf", filepath.FromSlash(gun), "metadata", "root.json"),
-		filepath.Join("tuf", filepath.FromSlash(gun), "metadata", "snapshot.json"),
-		filepath.Join("tuf", filepath.FromSlash(gun), "metadata", "targets.json"),
+		filepath.Join(tufDir, filepath.FromSlash(repo.gun), "metadata", "root.json"),
+		filepath.Join(tufDir, filepath.FromSlash(repo.gun), "metadata", "snapshot.json"),
+		filepath.Join(tufDir, filepath.FromSlash(repo.gun), "metadata", "targets.json"),
 	}
 	for _, filename := range expectedTUFMetadataFiles {
-		fullPath := filepath.Join(tempBaseDir, filename)
+		fullPath := filepath.Join(repo.baseDir, filename)
 		_, err := os.Stat(fullPath)
 		assert.NoError(t, err, "missing TUF metadata file: %s", filename)
 
@@ -176,11 +186,15 @@ func testInitRepo(t *testing.T, rootType string) {
 		err = json.Unmarshal(jsonBytes, &decoded)
 		assert.NoError(t, err, "error parsing TUF metadata file %s: %s", filename, err)
 
-		assert.Len(t, decoded.Signatures, 1, "incorrect number of signatures in TUF metadata file %s", filename)
+		assert.Len(t, decoded.Signatures, 1,
+			"incorrect number of signatures in TUF metadata file %s", filename)
 
-		assert.NotEmpty(t, decoded.Signatures[0].KeyID, "empty key ID field in TUF metadata file %s", filename)
-		assert.NotEmpty(t, decoded.Signatures[0].Method, "empty method field in TUF metadata file %s", filename)
-		assert.NotEmpty(t, decoded.Signatures[0].Signature, "empty signature in TUF metadata file %s", filename)
+		assert.NotEmpty(t, decoded.Signatures[0].KeyID,
+			"empty key ID field in TUF metadata file %s", filename)
+		assert.NotEmpty(t, decoded.Signatures[0].Method,
+			"empty method field in TUF metadata file %s", filename)
+		assert.NotEmpty(t, decoded.Signatures[0].Signature,
+			"empty signature in TUF metadata file %s", filename)
 
 		// Special case for root.json: also check that the signed
 		// content for keys and roles
@@ -191,19 +205,37 @@ func testInitRepo(t *testing.T, rootType string) {
 
 			assert.Equal(t, "Root", decodedRoot.Type, "_type mismatch in root.json")
 
-			// Expect 4 keys in the Keys map: root, targets, snapshot, timestamp
-			assert.Len(t, decodedRoot.Keys, 4, "wrong number of keys in root.json")
+			// Expect 1 key for each valid role in the Keys map - one for
+			// each of root, targets, snapshot, timestamp
+			assert.Len(t, decodedRoot.Keys, len(data.ValidRoles),
+				"wrong number of keys in root.json")
+			assert.Len(t, decodedRoot.Roles, len(data.ValidRoles),
+				"wrong number of roles in root.json")
 
-			roleCount := 0
-			for role := range decodedRoot.Roles {
-				roleCount++
-				if role != "root" && role != "snapshot" && role != "targets" && role != "timestamp" {
-					t.Fatalf("unexpected role %s in root.json", role)
-				}
+			for role := range data.ValidRoles {
+				_, ok := decodedRoot.Roles[role]
+				assert.True(t, ok, "Missing role %s in root.json", role)
 			}
-			assert.Equal(t, 4, roleCount, "wrong number of roles (%d) in root.json", roleCount)
 		}
 	}
+}
+
+func testInitRepo(t *testing.T, rootType string) {
+	gun := "docker.com/notary"
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	defer os.RemoveAll(tempBaseDir)
+
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+
+	ts, _, _ := simpleTestServer(t)
+	defer ts.Close()
+
+	repo, rootKeyID := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL)
+
+	assertRepoHasExpectedKeys(t, repo, rootKeyID)
+	assertRepoHasExpectedCerts(t, repo)
+	assertRepoHasExpectedMetadata(t, repo)
 }
 
 // TestAddTarget adds a target to the repo and confirms that the changelist
@@ -240,7 +272,7 @@ func testAddTarget(t *testing.T, rootType string) {
 
 	gun := "docker.com/notary"
 
-	ts, _ := simpleTestServer(t)
+	ts, _, _ := simpleTestServer(t)
 	defer ts.Close()
 
 	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL)
@@ -322,17 +354,18 @@ func testListEmptyTargets(t *testing.T, rootType string) {
 
 // reads data from the repository in order to fake data being served via
 // the ServeMux.
-func fakeServerData(t *testing.T, repo *NotaryRepository, mux *http.ServeMux) {
-	tempKey, err := data.UnmarshalPrivateKey([]byte(timestampECDSAKeyJSON))
-	assert.NoError(t, err)
+func fakeServerData(t *testing.T, repo *NotaryRepository, mux *http.ServeMux,
+	keys map[string]data.PrivateKey) {
 
+	timestampKey, ok := keys[data.CanonicalTimestampRole]
+	assert.True(t, ok)
 	savedTUFRepo := repo.tufRepo // in case this is overwritten
 
 	fileStore, err := trustmanager.NewKeyFileStore(repo.baseDir, passphraseRetriever)
 	assert.NoError(t, err)
 	fileStore.AddKey(
-		filepath.Join(filepath.FromSlash(repo.gun), tempKey.ID()),
-		"nonroot", tempKey)
+		filepath.Join(filepath.FromSlash(repo.gun), timestampKey.ID()),
+		"nonroot", timestampKey)
 
 	rootJSONFile := filepath.Join(repo.baseDir, "tuf",
 		filepath.FromSlash(repo.gun), "metadata", "root.json")
@@ -375,6 +408,13 @@ func fakeServerData(t *testing.T, repo *NotaryRepository, mux *http.ServeMux) {
 		})
 }
 
+// We want to sort by name, so we can guarantee ordering.
+type targetSorter []*Target
+
+func (k targetSorter) Len() int           { return len(k) }
+func (k targetSorter) Swap(i, j int)      { k[i], k[j] = k[j], k[i] }
+func (k targetSorter) Less(i, j int) bool { return k[i].Name < k[j].Name }
+
 func testListTarget(t *testing.T, rootType string) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
@@ -384,7 +424,7 @@ func testListTarget(t *testing.T, rootType string) {
 
 	gun := "docker.com/notary"
 
-	ts, mux := simpleTestServer(t)
+	ts, mux, keys := simpleTestServer(t)
 	defer ts.Close()
 
 	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL)
@@ -407,7 +447,7 @@ func testListTarget(t *testing.T, rootType string) {
 	err = applyChangelist(repo.tufRepo, cl)
 	assert.NoError(t, err, "could not apply changelist")
 
-	fakeServerData(t, repo, mux)
+	fakeServerData(t, repo, mux, keys)
 
 	targets, err := repo.ListTargets()
 	assert.NoError(t, err)
@@ -415,15 +455,11 @@ func testListTarget(t *testing.T, rootType string) {
 	// Should be two targets
 	assert.Len(t, targets, 2, "unexpected number of targets returned by ListTargets")
 
-	if targets[0].Name == "latest" {
-		assert.Equal(t, latestTarget, targets[0], "latest target does not match")
-		assert.Equal(t, currentTarget, targets[1], "current target does not match")
-	} else if targets[0].Name == "current" {
-		assert.Equal(t, currentTarget, targets[0], "current target does not match")
-		assert.Equal(t, latestTarget, targets[1], "latest target does not match")
-	} else {
-		t.Fatalf("unexpected target name: %s", targets[0].Name)
-	}
+	sort.Stable(targetSorter(targets))
+
+	// current should be first
+	assert.Equal(t, currentTarget, targets[0], "current target does not match")
+	assert.Equal(t, latestTarget, targets[1], "latest target does not match")
 
 	// Also test GetTargetByName
 	newLatestTarget, err := repo.GetTargetByName("latest")
@@ -453,7 +489,7 @@ func testValidateRootKey(t *testing.T, rootType string) {
 
 	gun := "docker.com/notary"
 
-	ts, _ := simpleTestServer(t)
+	ts, _, _ := simpleTestServer(t)
 	defer ts.Close()
 
 	initializeRepo(t, rootType, tempBaseDir, gun, ts.URL)
@@ -507,7 +543,7 @@ func testGetChangelist(t *testing.T, rootType string) {
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	gun := "docker.com/notary"
-	ts, _ := simpleTestServer(t)
+	ts, _, _ := simpleTestServer(t)
 	defer ts.Close()
 
 	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL)
@@ -588,15 +624,10 @@ func testPublish(t *testing.T, rootType string) {
 	// Should be two targets
 	assert.Len(t, targets, 2, "unexpected number of targets returned by ListTargets")
 
-	if targets[0].Name == "latest" {
-		assert.Equal(t, latestTarget, targets[0], "latest target does not match")
-		assert.Equal(t, currentTarget, targets[1], "current target does not match")
-	} else if targets[0].Name == "current" {
-		assert.Equal(t, currentTarget, targets[0], "current target does not match")
-		assert.Equal(t, latestTarget, targets[1], "latest target does not match")
-	} else {
-		t.Fatalf("unexpected target name: %s", targets[0].Name)
-	}
+	sort.Stable(targetSorter(targets))
+
+	assert.Equal(t, currentTarget, targets[0], "current target does not match")
+	assert.Equal(t, latestTarget, targets[1], "latest target does not match")
 
 	// Also test GetTargetByName
 	newLatestTarget, err := repo2.GetTargetByName("latest")
