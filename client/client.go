@@ -74,6 +74,43 @@ type NotaryRepository struct {
 	CertManager   *certs.Manager
 }
 
+// repositoryFromKeystores is a helper function for NewNotaryRepository that
+// takes some basic NotaryRepository parameters as well as keystores (in order
+// of usage preference), and returns a NotaryRepository.
+func repositoryFromKeystores(baseDir, gun, baseURL string, rt http.RoundTripper,
+	keyStores []trustmanager.KeyStore) (*NotaryRepository, error) {
+
+	certManager, err := certs.NewManager(baseDir)
+	if err != nil {
+		return nil, err
+	}
+
+	cryptoService := cryptoservice.NewCryptoService(gun, keyStores...)
+
+	nRepo := &NotaryRepository{
+		gun:           gun,
+		baseDir:       baseDir,
+		baseURL:       baseURL,
+		tufRepoPath:   filepath.Join(baseDir, tufDir, filepath.FromSlash(gun)),
+		CryptoService: cryptoService,
+		roundTrip:     rt,
+		CertManager:   certManager,
+	}
+
+	fileStore, err := store.NewFilesystemStore(
+		nRepo.tufRepoPath,
+		"metadata",
+		"json",
+		"",
+	)
+	if err != nil {
+		return nil, err
+	}
+	nRepo.fileStore = fileStore
+
+	return nRepo, nil
+}
+
 // Target represents a simplified version of the data TUF operates on, so external
 // applications don't have to depend on tuf data types.
 type Target struct {
