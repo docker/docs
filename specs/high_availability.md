@@ -60,4 +60,3 @@ tolerate at least a single failure.
 **TODO** In the future this document should describe best practices for layout,
 target number of nodes, etc.  For now, that's an exercise for the reader
 based on etcd/raft documentation.
-
