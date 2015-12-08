@@ -10,7 +10,6 @@ import (
 	"os"
 	"path/filepath"
 	"sort"
-	"strings"
 	"testing"
 
 	"github.com/Sirupsen/logrus"
@@ -23,6 +22,7 @@ import (
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
+	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/store"
 	"github.com/jfrazelle/go/canonical/json"
 	"github.com/stretchr/testify/assert"
@@ -212,7 +212,7 @@ func TestInitRepoServerManagesTimestampAndSnapshotKeys(t *testing.T) {
 // This creates a new KeyFileStore in the repo's base directory and makes sure
 // the repo has the right number of keys
 func assertRepoHasExpectedKeys(t *testing.T, repo *NotaryRepository,
-	rootKeyID string, serverManagesSnapshot bool) {
+	rootKeyID string, expectedSnapshotKey bool) {
 
 	// The repo should have a keyFileStore and have created keys using it,
 	// so create a new KeyFileStore, and check that the keys do exist and are
@@ -241,11 +241,11 @@ func assertRepoHasExpectedKeys(t *testing.T, repo *NotaryRepository,
 	// there may be a snapshots key, depending on whether the server is managing
 	// the snapshots key
 	_, ok := roles[data.CanonicalSnapshotRole]
-	if serverManagesSnapshot {
+	if expectedSnapshotKey {
+		assert.True(t, ok, "missing snapshot key")
+	} else {
 		assert.False(t, ok,
 			"there should be no snapshot key because the server manages it")
-	} else {
-		assert.True(t, ok, "missing snapshot key")
 	}
 
 	// The server manages the timestamp key - there should not be a timestamp
@@ -271,68 +271,62 @@ func assertRepoHasExpectedCerts(t *testing.T, repo *NotaryRepository) {
 	assert.NotEqual(t, certID, "")
 }
 
-// Sanity check the TUF metadata files. Verify that they exist, the JSON is
-// well-formed, and the signatures exist. For the root.json file, also check
-// that the root, snapshot, and targets key IDs are present.
+// Sanity check the TUF metadata files. Verify that it exists for a particular
+// role, the JSON is well-formed, and the signatures exist.
+// For the root.json file, also check that the root, snapshot, and
+// targets key IDs are present.
 func assertRepoHasExpectedMetadata(t *testing.T, repo *NotaryRepository,
-	serverManagesSnapshot bool) {
+	role string, expected bool) {
 
-	expectedTUFMetadataFiles := []string{
-		filepath.Join(tufDir, filepath.FromSlash(repo.gun), "metadata", "root.json"),
-		filepath.Join(tufDir, filepath.FromSlash(repo.gun), "metadata", "snapshot.json"),
-		filepath.Join(tufDir, filepath.FromSlash(repo.gun), "metadata", "targets.json"),
+	filename := filepath.Join(tufDir, filepath.FromSlash(repo.gun),
+		"metadata", role+".json")
+	fullPath := filepath.Join(repo.baseDir, filename)
+	_, err := os.Stat(fullPath)
+
+	if expected {
+		assert.NoError(t, err, "missing TUF metadata file: %s", filename)
+	} else {
+		assert.Error(t, err,
+			"%s metadata should not exist, but does: %s", role, filename)
+		return
 	}
-	for _, filename := range expectedTUFMetadataFiles {
-		fullPath := filepath.Join(repo.baseDir, filename)
-		_, err := os.Stat(fullPath)
 
-		// special case snapshot metadata - if the server manages the snapshot key
-		// there should be no snapshot metadata file.
-		if strings.HasSuffix(filename, "snapshot.json") && serverManagesSnapshot {
-			assert.Error(t, err,
-				"snapshot metadata should not exist, but does: %s", filename)
-			continue
-		} else {
-			assert.NoError(t, err, "missing TUF metadata file: %s", filename)
-		}
+	jsonBytes, err := ioutil.ReadFile(fullPath)
+	assert.NoError(t, err, "error reading TUF metadata file %s: %s", filename, err)
 
-		jsonBytes, err := ioutil.ReadFile(fullPath)
-		assert.NoError(t, err, "error reading TUF metadata file %s: %s", filename, err)
+	var decoded data.Signed
+	err = json.Unmarshal(jsonBytes, &decoded)
+	assert.NoError(t, err, "error parsing TUF metadata file %s: %s", filename, err)
 
-		var decoded data.Signed
-		err = json.Unmarshal(jsonBytes, &decoded)
-		assert.NoError(t, err, "error parsing TUF metadata file %s: %s", filename, err)
+	assert.Len(t, decoded.Signatures, 1,
+		"incorrect number of signatures in TUF metadata file %s", filename)
 
-		assert.Len(t, decoded.Signatures, 1,
-			"incorrect number of signatures in TUF metadata file %s", filename)
+	assert.NotEmpty(t, decoded.Signatures[0].KeyID,
+		"empty key ID field in TUF metadata file %s", filename)
+	assert.NotEmpty(t, decoded.Signatures[0].Method,
+		"empty method field in TUF metadata file %s", filename)
+	assert.NotEmpty(t, decoded.Signatures[0].Signature,
+		"empty signature in TUF metadata file %s", filename)
 
-		assert.NotEmpty(t, decoded.Signatures[0].KeyID,
-			"empty key ID field in TUF metadata file %s", filename)
-		assert.NotEmpty(t, decoded.Signatures[0].Method,
-			"empty method field in TUF metadata file %s", filename)
-		assert.NotEmpty(t, decoded.Signatures[0].Signature,
-			"empty signature in TUF metadata file %s", filename)
+	// Special case for root.json: also check that the signed
+	// content for keys and roles
+	if role == data.CanonicalRootRole {
+		var decodedRoot data.Root
+		err := json.Unmarshal(decoded.Signed, &decodedRoot)
+		assert.NoError(t, err, "error parsing root.json signed section: %s", err)
 
-		// Special case for root.json: also check that the signed
-		// content for keys and roles
-		if strings.HasSuffix(filename, "root.json") {
-			var decodedRoot data.Root
-			err := json.Unmarshal(decoded.Signed, &decodedRoot)
-			assert.NoError(t, err, "error parsing root.json signed section: %s", err)
+		assert.Equal(t, "Root", decodedRoot.Type, "_type mismatch in root.json")
 
-			assert.Equal(t, "Root", decodedRoot.Type, "_type mismatch in root.json")
+		// Expect 1 key for each valid role in the Keys map - one for
+		// each of root, targets, snapshot, timestamp
+		assert.Len(t, decodedRoot.Keys, len(data.ValidRoles),
+			"wrong number of keys in root.json")
+		assert.Len(t, decodedRoot.Roles, len(data.ValidRoles),
+			"wrong number of roles in root.json")
 
-			// Expect 1 key for each valid role in the Keys map - one for
-			// each of root, targets, snapshot, timestamp
-			assert.Len(t, decodedRoot.Keys, len(data.ValidRoles),
-				"wrong number of keys in root.json")
-			assert.Len(t, decodedRoot.Roles, len(data.ValidRoles),
-				"wrong number of roles in root.json")
-
-			for role := range data.ValidRoles {
-				_, ok := decodedRoot.Roles[role]
-				assert.True(t, ok, "Missing role %s in root.json", role)
-			}
+		for role := range data.ValidRoles {
+			_, ok := decodedRoot.Roles[role]
+			assert.True(t, ok, "Missing role %s in root.json", role)
 		}
 	}
 }
@@ -351,9 +345,12 @@ func testInitRepo(t *testing.T, rootType string, serverManagesSnapshot bool) {
 	repo, rootKeyID := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL,
 		serverManagesSnapshot)
 
-	assertRepoHasExpectedKeys(t, repo, rootKeyID, serverManagesSnapshot)
+	assertRepoHasExpectedKeys(t, repo, rootKeyID, !serverManagesSnapshot)
 	assertRepoHasExpectedCerts(t, repo)
-	assertRepoHasExpectedMetadata(t, repo, serverManagesSnapshot)
+	assertRepoHasExpectedMetadata(t, repo, data.CanonicalRootRole, true)
+	assertRepoHasExpectedMetadata(t, repo, data.CanonicalTargetsRole, true)
+	assertRepoHasExpectedMetadata(t, repo, data.CanonicalSnapshotRole,
+		!serverManagesSnapshot)
 }
 
 // TestInitRepoAttemptsExceeded tests error handling when passphrase.Retriever
@@ -532,10 +529,6 @@ func testListEmptyTargets(t *testing.T, rootType string) {
 	defer ts.Close()
 
 	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL, false)
-
-	// tests need to manually boostrap timestamp as client doesn't generate it
-	err = repo.tufRepo.InitTimestamp()
-	assert.NoError(t, err, "error creating repository: %s", err)
 
 	_, err = repo.ListTargets()
 	assert.Error(t, err) // no trust data
@@ -766,19 +759,30 @@ func testGetChangelist(t *testing.T, rootType string) {
 	assert.Equal(t, "latest", latestChange.Path())
 }
 
-// TestPublish creates a repo, instantiates a notary server, and publishes
-// the repo to the server.
+// Create a repo, instantiate a notary server, and publish the repo to the
+// server, signing all the non-timestamp metadata.
 // We test this with both an RSA and ECDSA root key
-func TestPublish(t *testing.T) {
-	testPublish(t, data.ECDSAKey)
+func TestPublishClientHasSnapshotKey(t *testing.T) {
+	testPublish(t, data.ECDSAKey, false)
 	if !testing.Short() {
-		testPublish(t, data.RSAKey)
+		testPublish(t, data.RSAKey, false)
 	}
 }
 
-func testPublish(t *testing.T, rootType string) {
+// Create a repo, instantiate a notary server (designating the server as the
+// snapshot signer) , and publish the repo to the server, signing the root and
+// targets metadata only.  The server should sign just fine.
+// We test this with both an RSA and ECDSA root key
+func TestPublishAfterInitServerHasSnapshotKey(t *testing.T) {
+	testPublish(t, data.ECDSAKey, true)
+	if !testing.Short() {
+		testPublish(t, data.RSAKey, true)
+	}
+}
+
+func testPublish(t *testing.T, rootType string, serverManagesSnapshot bool) {
 	// Temporary directory where test files will be created
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	tempBaseDir, err := ioutil.TempDir("/tmp", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)
 
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
@@ -786,46 +790,172 @@ func testPublish(t *testing.T, rootType string) {
 	gun := "docker.com/notary"
 	ts := fullTestServer(t)
 	defer ts.Close()
-	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL, false)
 
+	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL,
+		serverManagesSnapshot)
+	assertPublishSucceeds(t, repo)
+}
+
+func assertPublishSucceeds(t *testing.T, repo1 *NotaryRepository) {
 	// Create 2 targets
-	latestTarget := addTarget(t, repo, "latest", "../fixtures/intermediate-ca.crt")
-	currentTarget := addTarget(t, repo, "current", "../fixtures/intermediate-ca.crt")
-	assert.Len(t, getChanges(t, repo), 2, "wrong number of changelist files found")
+	latestTarget := addTarget(t, repo1, "latest", "../fixtures/intermediate-ca.crt")
+	currentTarget := addTarget(t, repo1, "current", "../fixtures/intermediate-ca.crt")
+	assert.Len(t, getChanges(t, repo1), 2, "wrong number of changelist files found")
 
 	// Now test Publish
-	err = repo.Publish()
+	err := repo1.Publish()
 	assert.NoError(t, err)
-	assert.Len(t, getChanges(t, repo), 0, "wrong number of changelist files found")
+	assert.Len(t, getChanges(t, repo1), 0, "wrong number of changelist files found")
 
 	// Create a new repo and pull from the server
-	tempBaseDir2, err := ioutil.TempDir("", "notary-test-")
-	defer os.RemoveAll(tempBaseDir2)
+	tempBaseDir, err := ioutil.TempDir("/tmp", "notary-test-")
+	defer os.RemoveAll(tempBaseDir)
 
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
-	repo2, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport, passphraseRetriever)
+	repo2, err := NewNotaryRepository(tempBaseDir, repo1.gun, repo1.baseURL,
+		http.DefaultTransport, passphraseRetriever)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
-	targets, err := repo2.ListTargets()
-	assert.NoError(t, err)
-
 	// Should be two targets
-	assert.Len(t, targets, 2, "unexpected number of targets returned by ListTargets")
+	for _, repo := range []*NotaryRepository{repo1, repo2} {
+		targets, err := repo.ListTargets()
+		assert.NoError(t, err)
 
-	sort.Stable(targetSorter(targets))
+		assert.Len(t, targets, 2, "unexpected number of targets returned by ListTargets")
 
-	assert.Equal(t, currentTarget, targets[0], "current target does not match")
-	assert.Equal(t, latestTarget, targets[1], "latest target does not match")
+		sort.Stable(targetSorter(targets))
 
-	// Also test GetTargetByName
-	newLatestTarget, err := repo2.GetTargetByName("latest")
+		assert.Equal(t, currentTarget, targets[0], "current target does not match")
+		assert.Equal(t, latestTarget, targets[1], "latest target does not match")
+
+		// Also test GetTargetByName
+		newLatestTarget, err := repo.GetTargetByName("latest")
+		assert.NoError(t, err)
+		assert.Equal(t, latestTarget, newLatestTarget, "latest target does not match")
+
+		newCurrentTarget, err := repo.GetTargetByName("current")
+		assert.NoError(t, err)
+		assert.Equal(t, currentTarget, newCurrentTarget, "current target does not match")
+	}
+}
+
+// After pulling a repo from the server, so there is a snapshots metadata file,
+// push a different target to the server (the server is still the snapshot
+// signer).  The server should sign just fine.
+// We test this with both an RSA and ECDSA root key
+func TestPublishAfterPullServerHasSnapshotKey(t *testing.T) {
+	testPublishAfterPullServerHasSnapshotKey(t, data.ECDSAKey)
+	if !testing.Short() {
+		testPublishAfterPullServerHasSnapshotKey(t, data.RSAKey)
+	}
+}
+
+func testPublishAfterPullServerHasSnapshotKey(t *testing.T, rootType string) {
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("/tmp", "notary-test-")
+	defer os.RemoveAll(tempBaseDir)
+
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+
+	gun := "docker.com/notary"
+	ts := fullTestServer(t)
+	defer ts.Close()
+
+	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL, true)
+	// no timestamp metadata because that comes from the server
+	assertRepoHasExpectedMetadata(t, repo, data.CanonicalTimestampRole, false)
+	// no snapshot metadata because that comes from the server
+	assertRepoHasExpectedMetadata(t, repo, data.CanonicalSnapshotRole, false)
+
+	// Publish something
+	published := addTarget(t, repo, "v1", "../fixtures/intermediate-ca.crt")
+	err = repo.Publish()
 	assert.NoError(t, err)
-	assert.Equal(t, latestTarget, newLatestTarget, "latest target does not match")
+	// still no timestamp or snapshot metadata info
+	assertRepoHasExpectedMetadata(t, repo, data.CanonicalTimestampRole, false)
+	assertRepoHasExpectedMetadata(t, repo, data.CanonicalSnapshotRole, false)
 
-	newCurrentTarget, err := repo2.GetTargetByName("current")
+	// list, so that the snapshot metadata is pulled from server
+	targets, err := repo.ListTargets()
 	assert.NoError(t, err)
-	assert.Equal(t, currentTarget, newCurrentTarget, "current target does not match")
+	assert.Equal(t, []*Target{published}, targets)
+	// listing downloaded the timestamp and snapshot metadata info
+	assertRepoHasExpectedMetadata(t, repo, data.CanonicalTimestampRole, true)
+	assertRepoHasExpectedMetadata(t, repo, data.CanonicalSnapshotRole, true)
+
+	// Publish again should succeed
+	addTarget(t, repo, "v2", "../fixtures/intermediate-ca.crt")
+	err = repo.Publish()
+	assert.NoError(t, err)
+}
+
+// If neither the client nor the server has the snapshot key, signing will fail
+// with an ErrNoKeys error.
+// We test this with both an RSA and ECDSA root key
+func TestPublishNoOneHasSnapshotKey(t *testing.T) {
+	testPublishNoOneHasSnapshotKey(t, data.ECDSAKey)
+	if !testing.Short() {
+		testPublishNoOneHasSnapshotKey(t, data.RSAKey)
+	}
+}
+
+func testPublishNoOneHasSnapshotKey(t *testing.T, rootType string) {
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("/tmp", "notary-test-")
+	defer os.RemoveAll(tempBaseDir)
+
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+
+	gun := "docker.com/notary"
+	ts := fullTestServer(t)
+	defer ts.Close()
+
+	// create repo and delete the snapshot key and metadata
+	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL, false)
+	snapshotRole, ok := repo.tufRepo.Root.Signed.Roles[data.CanonicalSnapshotRole]
+	assert.True(t, ok)
+	for _, keyID := range snapshotRole.KeyIDs {
+		repo.CryptoService.RemoveKey(keyID)
+	}
+
+	// Publish something
+	addTarget(t, repo, "v1", "../fixtures/intermediate-ca.crt")
+	err = repo.Publish()
+	assert.Error(t, err)
+	assert.IsType(t, signed.ErrNoKeys{}, err)
+}
+
+// If the snapshot metadata is corrupt, whether the client or server has the
+// snapshot key, we can't publish.
+// We test this with both an RSA and ECDSA root key
+func TestPublishSnapshotCorrupt(t *testing.T) {
+	testPublishSnapshotCorrupt(t, data.ECDSAKey, true)
+	testPublishSnapshotCorrupt(t, data.ECDSAKey, false)
+	if !testing.Short() {
+		testPublishSnapshotCorrupt(t, data.RSAKey, true)
+		testPublishSnapshotCorrupt(t, data.RSAKey, false)
+	}
+}
+
+func testPublishSnapshotCorrupt(t *testing.T, rootType string, serverManagesSnapshot bool) {
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("/tmp", "notary-test-")
+	defer os.RemoveAll(tempBaseDir)
+
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+
+	gun := "docker.com/notary"
+	ts := fullTestServer(t)
+	defer ts.Close()
+
+	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL, serverManagesSnapshot)
+	// write a corrupt snapshots file
+	repo.fileStore.SetMeta(data.CanonicalSnapshotRole, []byte("this isn't JSON"))
+
+	addTarget(t, repo, "v1", "../fixtures/intermediate-ca.crt")
+	err = repo.Publish()
+	assert.Error(t, err)
 }
 
 func TestRotate(t *testing.T) {

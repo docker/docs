@@ -345,15 +345,12 @@ func (r *NotaryRepository) Publish() error {
 	if err != nil {
 		if _, ok := err.(store.ErrMetaNotFound); ok {
 			// if the remote store return a 404 (translated into ErrMetaNotFound),
-			// the repo hasn't been initialized yet. Attempt to load it from disk.
+			// there is no trust data for yet. Attempt to load it from disk.
 			err := r.bootstrapRepo()
 			if err != nil {
-				// Repo hasn't been initialized, It must be initialized before
-				// it can be published. Return an error and let caller determine
-				// what it wants to do.
-				logrus.Debug(err.Error())
-				logrus.Debug("Repository not initialized during Publish")
-				return &ErrRepoNotInitialized{}
+				// There are lots of reasons there might be an error, such as
+				// corrupt metadata.  We need better errors from bootstrapRepo.
+				return err
 			}
 			// We had local data but the server doesn't know about the repo yet,
 			// ensure we will push the initial root file
@@ -370,8 +367,8 @@ func (r *NotaryRepository) Publish() error {
 		}
 	} else {
 		// If we were successfully able to bootstrap the client (which only pulls
-		// root.json), update it the rest of the tuf metadata in preparation for
-		// applying the changelist.
+		// root.json), update it with the rest of the tuf metadata in
+		// preparation for applying the changelist.
 		err = c.Update()
 		if err != nil {
 			if err, ok := err.(signed.ErrExpired); ok {
@@ -391,25 +388,50 @@ func (r *NotaryRepository) Publish() error {
 		return err
 	}
 
+	// these are the tuf files we will need to update, serialized as JSON before
+	// we send anything to remote
+	update := make(map[string][]byte)
+
 	// check if our root file is nearing expiry. Resign if it is.
 	if nearExpiry(r.tufRepo.Root) || r.tufRepo.Root.Dirty {
-		if err != nil {
-			return err
-		}
 		root, err = r.tufRepo.SignRoot(data.DefaultExpires("root"))
-		if err != nil {
-			return err
-		}
 		updateRoot = true
 	}
-	// we will always resign targets and snapshots
-	targets, err := r.tufRepo.SignTargets("targets", data.DefaultExpires("targets"))
+
+	if updateRoot {
+		rootJSON, err := json.Marshal(root)
+		if err != nil {
+			return err
+		}
+		update[data.CanonicalRootRole] = rootJSON
+	}
+
+	// we will always resign targets, and snapshots if we have the snapshots key
+	targetsJSON, err := serializeCanonicalRole(r.tufRepo, data.CanonicalTargetsRole)
 	if err != nil {
 		return err
 	}
-	snapshot, err := r.tufRepo.SignSnapshot(data.DefaultExpires("snapshot"))
-	if err != nil {
-		return err
+	update[data.CanonicalTargetsRole] = targetsJSON
+
+	// do not update the snapshot role if we do not have the snapshot key or
+	// any snapshot data.  There might not be any snapshot data the repo was
+	// initialized with the snapshot signing role delegated to the server.
+	// The repo might have snapshot data, because it was requested from
+	// the server by listing, but not have the snapshot key, so signing will
+	// fail.
+	clientCantSignSnapshot := true
+	if r.tufRepo.Snapshot != nil {
+		snapshotJSON, err := serializeCanonicalRole(
+			r.tufRepo, data.CanonicalSnapshotRole)
+		if err == nil { // we have the key - snapshot signed, let's update it
+			update[data.CanonicalSnapshotRole] = snapshotJSON
+			clientCantSignSnapshot = false
+		} else if _, ok := err.(signed.ErrNoKeys); ok {
+			logrus.Debugf("Client does not have the key to sign snapshot. " +
+				"Assuming that server should sign the snapshot.")
+		} else {
+			return err
+		}
 	}
 
 	remote, err := getRemoteStore(r.baseURL, r.gun, r.roundTrip)
@@ -417,28 +439,16 @@ func (r *NotaryRepository) Publish() error {
 		return err
 	}
 
-	// ensure we can marshal all the json before sending anything to remote
-	targetsJSON, err := json.Marshal(targets)
-	if err != nil {
-		return err
-	}
-	snapshotJSON, err := json.Marshal(snapshot)
-	if err != nil {
-		return err
-	}
-	update := make(map[string][]byte)
-	// if we need to update the root, marshal it and push the update to remote
-	if updateRoot {
-		rootJSON, err := json.Marshal(root)
-		if err != nil {
-			return err
-		}
-		update["root"] = rootJSON
-	}
-	update["targets"] = targetsJSON
-	update["snapshot"] = snapshotJSON
 	err = remote.SetMultiMeta(update)
 	if err != nil {
+		// TODO: this isn't exactly right, since there could be lots of
+		// reasons a request 400'ed.  Need better error translation from HTTP
+		// status codes maybe back to the server errors?
+		if _, ok := err.(store.ErrInvalidOperation); ok && clientCantSignSnapshot {
+			return signed.ErrNoKeys{
+				KeyIDs: r.tufRepo.Root.Signed.Roles[data.CanonicalSnapshotRole].KeyIDs,
+			}
+		}
 		return err
 	}
 	err = cl.Clear("")
@@ -451,6 +461,11 @@ func (r *NotaryRepository) Publish() error {
 	return nil
 }
 
+// bootstrapRepo loads the repository from the local file system.  This attempts
+// to load metadata for all roles.  Since server snapshots are supported,
+// if the snapshot metadata fails to load, that's ok.
+// This can also be unified with some cache reading tools from tuf/client.
+// This assumes that bootstrapRepo is only used by Publish()
 func (r *NotaryRepository) bootstrapRepo() error {
 	kdb := keys.NewDB()
 	tufRepo := tuf.NewRepo(kdb, r.CryptoService)
@@ -479,16 +494,16 @@ func (r *NotaryRepository) bootstrapRepo() error {
 		return err
 	}
 	tufRepo.SetTargets("targets", targets)
+
 	snapshotJSON, err := r.fileStore.GetMeta("snapshot", 0)
-	if err != nil {
-		return err
+	if err == nil {
+		snapshot := &data.SignedSnapshot{}
+		err = json.Unmarshal(snapshotJSON, snapshot)
+		if err != nil {
+			return err
+		}
+		tufRepo.SetSnapshot(snapshot)
 	}
-	snapshot := &data.SignedSnapshot{}
-	err = json.Unmarshal(snapshotJSON, snapshot)
-	if err != nil {
-		return err
-	}
-	tufRepo.SetSnapshot(snapshot)
 
 	r.tufRepo = tufRepo
 
@@ -502,7 +517,7 @@ func (r *NotaryRepository) saveMetadata(ignoreSnapshot bool) error {
 	if err != nil {
 		return err
 	}
-	err = r.fileStore.SetMeta("root", rootJSON)
+	err = r.fileStore.SetMeta(data.CanonicalRootRole, rootJSON)
 	if err != nil {
 		return err
 	}
@@ -535,7 +550,7 @@ func (r *NotaryRepository) saveMetadata(ignoreSnapshot bool) error {
 		return err
 	}
 
-	return r.fileStore.SetMeta("snapshot", snapshotJSON)
+	return r.fileStore.SetMeta(data.CanonicalSnapshotRole, snapshotJSON)
 }
 
 func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
