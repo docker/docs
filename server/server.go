@@ -93,10 +93,11 @@ func RootHandler(ac auth.AccessController, ctx context.Context, trust signed.Cry
 		prometheus.InstrumentHandlerWithOpts(
 			prometheusOpts("GetRole"),
 			hand(handlers.GetHandler, "pull")))
-	r.Methods("GET").Path("/v2/{imageName:.*}/_trust/tuf/timestamp.key").Handler(
+	r.Methods("GET").Path(
+		"/v2/{imageName:.*}/_trust/tuf/{tufRole:(snapshot|timestamp)}.key").Handler(
 		prometheus.InstrumentHandlerWithOpts(
-			prometheusOpts("GetTimestampKey"),
-			hand(handlers.GetTimestampKeyHandler, "push", "pull")))
+			prometheusOpts("GetKey"),
+			hand(handlers.GetKeyHandler, "push", "pull")))
 	r.Methods("DELETE").Path("/v2/{imageName:.*}/_trust/tuf/").Handler(
 		prometheus.InstrumentHandlerWithOpts(
 			prometheusOpts("DeleteTuf"),
