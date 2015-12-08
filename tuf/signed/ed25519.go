@@ -46,8 +46,10 @@ func (e *Ed25519) RemoveKey(keyID string) error {
 // ListKeys returns the list of keys IDs for the role
 func (e *Ed25519) ListKeys(role string) []string {
 	keyIDs := make([]string, 0, len(e.keys))
-	for id := range e.keys {
-		keyIDs = append(keyIDs, id)
+	for id, edCryptoKey := range e.keys {
+		if edCryptoKey.role == role {
+			keyIDs = append(keyIDs, id)
+		}
 	}
 	return keyIDs
 }
