@@ -628,19 +628,34 @@ func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
 	), nil
 }
 
-// RotateKeys removes all existing keys associated with role and adds
-// the keys specified by keyIDs to the role. These changes are staged
-// in a changelist until publish is called.
-func (r *NotaryRepository) RotateKeys() error {
-	for _, role := range []string{"targets", "snapshot"} {
-		key, err := r.CryptoService.Create(role, data.ECDSAKey)
-		if err != nil {
-			return err
-		}
-		err = r.rootFileKeyChange(role, changelist.ActionCreate, key)
-		if err != nil {
-			return err
-		}
+// RotateKey removes all existing keys associated with the role, and either
+// creates and adds one new key or delegates managing the key to the server.
+// These changes are staged in a changelist until publish is called.
+func (r *NotaryRepository) RotateKey(role string, serverManagesKey bool) error {
+	if role == data.CanonicalRootRole || role == data.CanonicalTimestampRole {
+		return fmt.Errorf(
+			"notary does not currently support rotating the %s key", role)
+	}
+	if serverManagesKey && role == data.CanonicalTargetsRole {
+		return ErrInvalidRemoteRole{Role: data.CanonicalTargetsRole}
+	}
+
+	var (
+		pubKey data.PublicKey
+		err    error
+	)
+	if serverManagesKey {
+		pubKey, err = getRemoteKey(r.baseURL, r.gun, role, r.roundTrip)
+	} else {
+		pubKey, err = r.CryptoService.Create(role, data.ECDSAKey)
+	}
+	if err != nil {
+		return err
+	}
+
+	err = r.rootFileKeyChange(role, changelist.ActionCreate, pubKey)
+	if err != nil {
+		return err
 	}
 	return nil
 }
