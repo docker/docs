@@ -231,6 +231,8 @@ or feedback about project operations.
         People = ["ehazlett", "tianon"]
     [Org.compose]
         People = ["aanand", "bfirsh", "dnephin", "mnowster"]
+    [Org.distribution]
+        People = ["aaronlehmann", "dmcgowan", "dmp42", "richardscothern", "shykes", "stevvooe"]
     [Org.docker]
         People = ["calavera", "cpuguy83", "crosbymichael", "duglin", "erikh", "estesp", "icecrime", "jfrazelle", "lk4d4", "runcom", "tianon", "tibor", "unclejack", "vbatts", "vdemeester", "vieux", "vishh"]
     [Org.docker-bench-security]
@@ -265,6 +267,10 @@ or feedback about project operations.
         Name = "Aanand Prasad"
         Email = "aanand@docker.com"
         GitHub = "aanand"
+    [People.aaronlehmann]
+        Name = "Aaron Lehmann"
+        Email = "aaron.lehmann@docker.com"
+        GitHub = "aaronlehmann"
     [People.aboch]
         Name = "Alessandro Boch"
         Email = "aboch@docker.com"
@@ -321,6 +327,10 @@ or feedback about project operations.
         Name = "Derek McGowan"
         Email = "derek@docker.com"
         GitHub = "dmcgowan"
+    [People.dmp42]
+        Name = "Olivier Gambier"
+        Email = "olivier@docker.com"
+        GitHub = "dmp42"
     [People.dnephin]
         Name = "Daniel Nephin"
         Email = "dnephin@gmail.com"
@@ -429,6 +439,10 @@ or feedback about project operations.
         Name = "Nathan McCauley"
         Email = "nathan.mccauley@docker.com"
         GitHub = "nathanmccauley"
+    [People.richardscothern]
+        Name = "Richard Scothern"
+        Email = "richard.scothern@gmail.com"
+        GitHub = "richardscothern"
     [People.runcom]
         Name = "Antonio Murdaca"
         Email = "me@runcom.ninja"
@@ -441,6 +455,10 @@ or feedback about project operations.
         Name = "Solomon Hykes"
         Email = "solomon@docker.com"
         GitHub = "shykes"
+    [People.stevvooe]
+        Name = "Stephen Day"
+        Email = "stephen.day@docker.com"
+        GitHub = "stevvooe"
     [People.sven]
         Name = "Sven Dowideit"
         Email = "SvenDowideit@home.org.au"
