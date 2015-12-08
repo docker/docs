@@ -239,6 +239,8 @@ or feedback about project operations.
         People = ["elesant", "frenchben", "jeffdm", "mchiang0610"]
     [Org.libcompose]
         People = ["aanand", "aduermael", "dnephin", "ibuildthecloud", "gdevillele", "vdemeester"]
+    [Org.libkv]
+        People = ["abronan", "aluzzardi", "sanimej", "vieux"]
     [Org.libnetwork]
         People = ["aboch", "lk4d4", "icecrime", "mrjana", "mavenugo"]
     [Org.machine]
@@ -248,7 +250,7 @@ or feedback about project operations.
     [Org.spdystream]
         People = ["dmcgowan"]
     [Org.swarm]
-        People = ["abronan", "aluzzardi", "chanwit", "jimmyxian", "vieux"]
+        People = ["abronan", "aluzzardi", "chanwit", "jimmyxian", "mhbauer", "vieux"]
 
 [People]
     [People.aanand]
@@ -387,6 +389,10 @@ or feedback about project operations.
         Name = "Michael Chiang"
         Email = "mchiang@docker.com"
         GitHub = "mchiang0610"
+    [People.mhbauer]
+        Name = "Morgan Bauer"
+        Email = "mbauer@us.ibm.com"
+        GitHub = "mhbauer"
     [People.mnowster]
         Name = "Mazz Mosley"
         Email = "mazz@houseofmnowster.com"
@@ -411,6 +417,10 @@ or feedback about project operations.
         Name = "Antonio Murdaca"
         Email = "me@runcom.ninja"
         GitHub = "runcom"
+    [People.sanimej]
+        Name = "Santhosh Manohar"
+        Email = "santhosh@docker.com"
+        GitHub = "sanimej"
     [People.shykes]
         Name = "Solomon Hykes"
         Email = "solomon@docker.com"
