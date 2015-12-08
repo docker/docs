@@ -233,10 +233,16 @@ or feedback about project operations.
         People = ["aanand", "bfirsh", "dnephin", "mnowster"]
     [Org.docker]
         People = ["calavera", "cpuguy83", "crosbymichael", "duglin", "erikh", "estesp", "icecrime", "jfrazelle", "lk4d4", "runcom", "tianon", "tibor", "unclejack", "vbatts", "vdemeester", "vieux", "vishh"]
+    [Org.docker-bench-security]
+        People = ["diogomonica", "konstruktoid"]
     [Org.dockercraft]
         People = ["aduermael", "davetucker", "gdevillele"]
     [Org.kitematic]
         People = ["elesant", "frenchben", "jeffdm", "mchiang0610"]
+    [Org.leeroy]
+        People = ["calavera", "jfrazzelle"]
+    [Org.libchan]
+        People = ["dmcgowan", "shykes"]
     [Org.libcompose]
         People = ["aanand", "aduermael", "dnephin", "ibuildthecloud", "gdevillele", "vdemeester"]
     [Org.libkv]
@@ -245,6 +251,8 @@ or feedback about project operations.
         People = ["aboch", "lk4d4", "icecrime", "mrjana", "mavenugo"]
     [Org.machine]
         People = ["dgageot", "ehazlett", "jeanlaurent", "nathanleclaire"]
+    [Org.migrator]
+        People = ["mbentley"]
     [Org.notary]
         People = ["cyli", "diogomonica", "dmcgowan", "endophage", "nathanmccauley"]
     [Org.spdystream]
@@ -371,12 +379,16 @@ or feedback about project operations.
         GitHub = "jeffdm"
     [People.jfrazelle]
         Name = "Jessie Frazelle"
-        Email = "j@docker.com"
+        Email = "acidburn@docker.com"
         GitHub = "jfrazelle"
     [People.jimmyxian]
         Name = "Xian Chaobo"
         Email = "xianchaobo@huawei.com"
         GitHub = "jimmyxian"
+    [People.konstruktoid]
+        Name = "Thomas Sjögren"
+        Email = "thomas.sjogren@outlook.com"
+        GitHub = "konstruktoid"
     [People.lk4d4]
         Name = "Alexandr Morozov"
         Email = "lk4d4@docker.com"
@@ -385,6 +397,10 @@ or feedback about project operations.
         Name = "Madhu Venugopal"
         Email = "madhu@docker.com"
         GitHub = "mavenugo"
+    [People.mbentley]
+        Name = "Matt Bentley"
+        Email = "mbentley@mbentley.net"
+        GitHub = "mbentley"
     [People.mchiang0610]
         Name = "Michael Chiang"
         Email = "mchiang@docker.com"
