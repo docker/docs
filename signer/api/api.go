@@ -76,7 +76,8 @@ func KeyInfo(cryptoServices signer.CryptoServiceIndex) http.Handler {
 	})
 }
 
-// CreateKey returns a handler that generates a new
+// CreateKey returns a handler that generates a new key using the provided
+// algorithm. Only the public component of the key is returned.
 func CreateKey(cryptoServices signer.CryptoServiceIndex) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		vars := mux.Vars(r)
