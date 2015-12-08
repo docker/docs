@@ -1,0 +1,534 @@
+# Docker UCP Quickstart Guide
+
+These instructions explain how to install UCP. A UCP installation consists of an UCP controller and one or more nodes. The same machine can serve as both the controller and the node. These instructions show you how to install both a host and a node. It contains the following sections:
+
+- [Plan your installation](#plan-your-installation)
+- [Step 1: Verify you have the prerequisites](#step-1-verify-you-have-the-prerequisites)
+- [Step 2: Configure your network for UCP](#step-2-configure-your-network-for-ucp)
+- [Step 3: Install Docker CS Engine 1.9](#step-3-install-docker-cs-engine-19)
+- [Step 4: (optional) Create user-named volumes](#step-4-optional-create-user-named-volumes)
+- [Step 5: Install the UCP controller](#step-5-install-the-ucp-controller)
+- [Step 6: (optional) Add a replica to the UCP cluster](#step-6-optional-add-a-replica-to-the-ucp-cluster)
+- [Step 7: Add an Engine node to the UCP cluster](#step-7-add-an-engine-node-to-the-ucp-cluster)
+- [Step 8: Set up certs for the Docker CLI](#step-8-set-up-certs-for-the-docker-cli)
+- [Uninstall](#uninstall)
+- [Block Mixpanel analytics](#block-mixpanel-analytics)
+- [Installing with your own certificates](#installing-with-your-own-certificates)
+- [Where to go next](#where-to-go-next)
+
+## Plan your installation
+
+The UCP installation consists of running the `ucp bootstrapper` image using the
+Docker Engine CLI. The bootstrapper launches an interactive script that
+automates the UCP setup using a default configurations for both data volumes and
+certificate authority (CA).  
+
+The first time you install, you should install in a sandbox environment where
+you feel comfortable allowing the bootstrapper to use the defaults. After
+installing and using the system with the defaults, you can uninstall the sandbox
+and try a custom installation. In a custom installation you can:
+
+* use the high availability feature
+* customize the port used by the Swarm manager
+* create your own data volumes
+* use your own certs
+
+This install documentation describes the default installation and the
+customization steps.  Customize steps are identified with the keyword
+(optional). Make sure you skip these steps when doing the default installation
+in your sandbox.
+
+The UCP BETA program makes use of Mixpanel to collect analytics. This feature
+collects data on your usage of UCP and returns it to Docker. The information is
+entirely anonymous and does not identify your Company or users. Currently, you
+cannot turn the collection off but you can block the outgoing messaging. Later
+in this documentation [Block Mixpanel analytics](#block-mixpanel-analytics)
+explains how.
+
+#### About these installation instructions
+
+These installation instructions were written using the Ubuntu 14.0.3 operating system. This means that the file paths and commands used in the instructions are specific to Ubuntu 14.0.3. If you are installing on another operating system, the steps are the same but your commands and paths may differ.
+
+## Step 1: Verify you have the prerequisites
+
+You can install UCP on your network or on a cloud provider such AWS or Digital
+Ocean. To install, the controller and the nodes require a minimum of 1.50 GB of memory. You can run any of these supported operating systems:
+
+* RHEL 7.0, 7.1
+* Ubuntu 14.04 LTS
+* CentOS 7.1
+
+Your system must have a 3.16.0 kernel or higher. If you don't have the proper kernel installed, the UCP bootstrapper returns this error.
+
+```
+INFO[0000] Verifying your system is compatible with UCP
+FATA[0000] Your kernel version 3.13.0 is too old.  UCP requires at least version 3.16.0 for all features to work.  To proceed with an old kernel use the '--old-kernel' flag
+```
+
+The '--old-kernel' flag is non-operational for this release so there is no
+workaround.
+
+Installing Docker UCP requires that you first install the CS Docker Engine
+v1.9 on both the controller and the nodes. The Engine can be local or
+remote. These instructions assume you are installing both UCP and Engine
+locally.
+
+Finally, installing UCP requires you to pull an image from the Docker Hub. If
+you don't already have a Docker Hub account, make sure you [create an
+account](https://hub.docker.com/). Once you have a Hub account, [request access
+to the UCP BETA
+program](https://goto.docker.com/try-universal-control-plane.html).
+
+
+## Step 2: Configure your network for UCP
+
+UCP includes Docker Swarm as part of its installation. So, you don't need to
+install Docker Swarm. You do need to ensure that the UCP controller and nodes
+can communicate across your network. Configure your network making sure to open
+the following ports:
+
+| Port             | Description     |
+|------------------|-----------------|
+| `443`            | UCP controller     |
+| `2376`           | Swarm manager   |
+| `12376`          | Engine proxy    |
+| `12379`, `12380` | Key Value store |
+| `12381`          | Swarm CA service|
+| `12382`          | UCP CA service |
+
+All the communication among the controller, nodes, and key value store is
+protected by mutual TLS. The UCP installation of Swarm provides and configures
+TLS for you automatically.
+
+Finally, you can specify a different port for the Swarm manager if you need to.
+These instructions assume you are using the default `2376` port.
+
+## Step 3: Install Docker CS Engine 1.9
+
+The BETA program requires that you install the 1.9.0 version of Docker CS
+Engine. Follow the instructions for your particular operating system and ensure
+you are pointing at the proper repo.
+
+You install the Docker CS Engine on both the controller and each node.
+
+### RHEL 7.0, 7.1
+
+Use the detailed [Red Hat Linux installation
+instructions](http://docs.docker.com/installation/rhel/) and refer to this repo
+to install:
+
+```
+[dockerrepo]
+name=Docker Repository
+baseurl=https://yum.dockerproject.org/repo/testing/centos/7
+enabled=1
+gpgcheck=1
+gpgkey=https://yum.dockerproject.org/gpg
+EOF
+```
+
+### Ubuntu 14.04 LTS
+
+Use the [detailed Ubuntu installation
+instructions](http://docs.docker.com/installation/ubuntulinux/) to refer to this
+repo to install:
+
+```
+deb https://apt.dockerproject.org/repo ubuntu-trusty testing
+```
+
+### CentOS 7.1
+
+Use the [detailed CentOS installation
+instructions](http://docs.docker.com/installation/centos/) to refer to this
+repo to install:
+
+```
+[dockerrepo]
+name=Docker Repository
+baseurl=https://yum.dockerproject.org/repo/testing/centos/7
+enabled=1
+gpgcheck=1
+gpgkey=https://yum.dockerproject.org/gpg
+EOF
+```
+
+
+## Step 4: (optional) Create user-named volumes
+
+UCP uses named volumes for persistence of user data.  By default, the `ucp`
+bootstrapper creates for you. It uses the default volume driver and flags. The
+first time you install, you should skip this step and try it later. Later, try
+an install where your take the option to use custom volume driver and create
+your own volumes.
+
+If you choose this option, create your volumes prior to installing UCP. The volumes UCP requires are:
+
+| Volume name             | Data                                                                                 |
+|-------------------------|--------------------------------------------------------------------------------------|
+| `ucp-root-ca`          | The certificate and key for the UCP root CA. Do not create this volume if you are using your own certificates.                                      |
+| `ucp-swarm-root-ca`    | The certificate and key for the Swarm root CA.                                       |
+| `ucp-server-certs`     | The controller certificates for the UCP controllers web server.                                     |
+| `ucp-swarm-node-certs` | The Swarm certificates for the current node (repeated on every node in the cluster). |
+| `ucp-swarm-kv-certs`   | The Swarm KV client certificates for the current node (repeated on every node in the cluster). |
+| `ucp-swarm-controller-certs` | The UCP Controller Swarm client certificates for the current node. |
+| `ucp-kv`               | Key value store persistence.                                                         |
+
+## Step 5: Install the UCP controller
+
+In this step you install the UCP controller. The controller includes a running Swarm manager and node as well. To review the installation options before you install, use the following command:
+
+```bash
+docker run --rm -it dockerorca/ucp install --help
+```
+
+When you install, the script prompts you for the following information:
+
+* a password to use for the UCP `admin` account
+* your Docker Hub username/password/email
+* an alias which is the actual external, publically-accessible IP address or
+hostname for the UCP controller
+
+When you have the information you'll be prompted for, do the following to
+install:
+
+1. Log into the system where you mean to install the UCP controller.
+
+  If you are installing on a cloud provider such as AWS, make sure the instance has a public IP or hostname.
+
+  ![Open certs](images/ip_cloud_provider.png)
+
+2. Run the `ucp` bootstrapper.
+
+        $ docker run --rm -it \
+          -v /var/run/docker.sock:/var/run/docker.sock \
+          --name ucp \
+          dockerorca/ucp \
+          install -i
+
+  The bootstrapper pulls several images and prompts you for the installation values it needs. When it completes, the bootstrapper prompts you to login into the UCP GUI.
+
+        INFO[0053] Login to UCP at https://10.0.0.32:443
+
+3. Enter the address into your browser to view the UCP login screen.
+
+  Your browser may warn you about the connection. The warning appears because
+  the UCP certification was issued by a built-in certificate authority. Your
+  actions with the install actually created the certificate. If you are concerned, the certificate's fingerprint is displayed during install and you can compare it.  
+
+4. Use the Advanced link to proceed to UCP.
+
+  The login screen displays.
+
+  ![](images/login.png)
+
+5. Enter `admin` for the username along with the password you provided to the bootstrapper.
+
+  If you didn't enter an admin password, the default password is `orca`
+ After you enter the correct credentials, the UCP dashboard displays.
+
+    ![](images/dashboard.png)
+
+## Step 6: (optional) Add a replica to the UCP cluster
+
+In this optional step you configure one or more UCP _replicas_ using the
+bootstrapper's `ucp join` subcommand. When adding nodes to your cluster, you
+decide which nodes you to use as *replicas* and which nodes are simply
+additional Engines for extra capacity.
+
+A replica is node in your cluster that can act as an additional UCP controller.
+Should the primary controller fail, a replica can take over the controller role
+for the cluster.  If you are trying out the optional HA deployment:
+
+* Configure the controller and replicas before adding additional Engine nodes.
+* Configure a minimum of two replicas in addition to the controller.
+
+Repeat the install for each node you want to add. To review join options before installing the node use the following:
+
+```bash
+docker run --rm -it dockerorca/ucp join --help
+```
+
+The bootstrapper prompts you for the following information:
+
+* the URL of the UCP controller, for example `https://52.70.188.239`
+* the username/password of an UCP administrator account
+* your Docker Hub username/password/email
+* an alias which is the actual external, publically-accessible IP address or name for the UCP node
+
+When you have the information you'll be prompted for, do the following to install:
+
+1. Log into the host where you mean to install the node.
+
+2. Run the `ucp` bootstrapper.
+
+        $ docker run --rm -it \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            --name ucp \
+            dockerorca/ucp \
+            join --replica -i
+
+    The bootstrapper pulls several images and prompts you for the installation values it needs. When it completes, the bootstrapper notifies you that it is starting swarm.
+
+        INFO[0005] Verifying your system is compatible with UCP
+        INFO[0011] Sending add host request to UCP server      
+        INFO[0011] Starting local swarm containers  
+
+3. Repeat steps 1 thru 3 on the other replicas.
+
+4. Login into UCP with your browser and navigate to the **NODES** page.
+
+    Simply clicking on the nodes from the Dashboard takes you to the page. The page should display your new nodes.
+
+      ![](images/nodes.png)
+
+
+## Step 7: Add an Engine node to the UCP cluster
+
+In this step you install one or more UCP nodes using the `ucp join` subcommand. Repeat the install for each node you want to add. To review join options before installing the node use the following:
+
+```bash
+docker run --rm -it dockerorca/ucp join --help
+```
+
+The bootstrapper prompts you for the following information:
+
+* the URL of the UCP controller, for example `https://52.70.188.239`
+* the username/password of an UCP administrator account
+* your Docker Hub username/password/email
+* an alias which is the actual external, publically-accessible IP address or name for the UCP node
+
+When you have the information you'll be prompted for, do the following to install:
+
+1. Log into the system where you mean to install the node.
+
+2. Run the `ucp` bootstrapper.
+
+        $ docker run --rm -it \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            --name ucp \
+            dockerorca/ucp \
+            join -i
+
+    The bootstrapper pulls several images and prompts you for the installation values it needs. When it completes, the bootstrapper notifies you that it is starting swarm.
+
+        INFO[0005] Verifying your system is compatible with UCP
+        INFO[0011] Sending add host request to UCP server      
+        INFO[0011] Starting local swarm containers  
+
+3. Repeat steps 1 thru 2 on the other nodes.
+
+4. Login into UCP with your browser and navigate to the **NODES** page.
+
+    Simply clicking on the nodes from the Dashboard takes you to the page. The page should display your new nodes.
+
+      ![](images/nodes.png)
+
+## Step 8: Set up certs for the Docker CLI
+
+Once you install UCP on a machine, it is a good idea to download a client bundle.  The bundle contains the certificates a user needs to run the Docker Engine command line client (`docker`) against the UCP controller and nodes.
+
+You can download the bundle from the UCP interface or using `curl` command. The
+bundle is in a `.zip` package.  You need `zip` or similar to unzip the file. If you plan to use `curl` you also need JQuery. This is used to pass the `curl`
+command an authorization token. Of course, you need to have `curl` installed as well.
+
+### Download the bundle from the UCP interface
+
+1. If you haven't already done so, log into UCP.
+
+2. Choose **ADMIN > Profile** from the right-hand menu.
+
+    Any user can download their certificates. So, if you were logged in under a user name such as `davey` the path to download bundle is **davey > Profile**. Since you are logged ins as `ADMIN`, the path is `ADMIN`.
+
+3. Click **Create Client Bundle**.
+
+    The browser downloads the `ucp-bundle-admin.zip` file.
+
+### Download the bundle with curl
+
+1. Log into a machine with network access to the UCP controller.
+
+    You might log into the controller itself. You could also log into any arbitrary machine able to `ping` the controller.
+
+2. Install the prerequisite `curl`, `zip`, `jq` (JQuery) packages if you haven't already.
+
+  On Unbuntu, the installation looks like this:
+
+      $ sudo apt-get install zip curl jq
+      Reading package lists... Done
+      Building dependency tree       
+      Reading state information... Done
+      The following extra packages will be installed:
+        libcurl3
+      The following NEW packages will be installed:
+        jq zip
+      The following packages will be upgraded:
+        curl libcurl3
+      ----output snipped----
+
+  To curl the bundle, you must export your user security token from the UCP controller. You do this in the next step.
+
+3. Create an environment variable to hold your user security token.
+
+		AUTHTOKEN=$(curl -sk -d '{"username":"admin","password":"<password>"}' https://<ducp-0 IP>/auth/login | jq -r .auth_token)
+
+4. Curl the client bundle down to your node.
+
+		    $ curl -k -H "X-Access-Token:admin:$AUTHTOKEN" https://<ducp-0 IP>/api/clientbundle -o bundle.zip
+
+  The browser downloads a `bundle.zip` file.
+
+### Install the certificate bundle
+
+Once you download the bundle, you can install and use it.
+
+1. Make sure you have `zip` installed.
+
+        $ which zip
+        /usr/bin/zip
+
+  If you don't install it before continuing.
+
+2. Open the folder containing the bundle file.
+
+4. Unzip the file to reveal its contents.
+
+        ucp-bundle
+        ├── ca.pem
+        ├── cert.pem
+        ├── cert.pub
+        ├── env.sh
+        └── key.pem
+
+5.  Set up your environment by sourcing the `env.sh` file.
+
+        $ source env.sh
+
+6.  Use the `docker info` command to get the location of the Swarm managers and engines.
+
+        $ docker info
+				Containers: 10
+				Images: 55
+				Server Version: 1.9.1
+				Storage Driver: aufs
+				 Root Dir: /var/lib/docker/aufs
+				 Backing Filesystem: extfs
+				 Dirs: 75
+				 Dirperm1 Supported: true
+				Execution Driver: native-0.2
+				Logging Driver: json-file
+				Kernel Version: 3.16.0-55-generic
+				Operating System: Ubuntu 14.04.2 LTS
+ 				...snip output...
+
+## Uninstall
+
+The bootstrapper can also uninstall UCP from the controller and the nodes. To see the uninstall options before you uninstall, use the following:
+
+```bash
+docker run --rm -it dockerorca/ucp uninstall --help
+```
+
+To uninstall, do the following:
+
+1. Log into the node you want to remove UCP from.
+
+2. Enter the following command to uninstall:
+
+        $ docker run --rm -it \
+          -v /var/run/docker.sock:/var/run/docker.sock \
+          --name ucp \
+          dockerorca/ucp \
+          uninstall
+
+3. Repeat the uninstall on each node making sure to save the controller till last.
+
+## Block Mixpanel analytics
+
+To block the outflow of Mixplanel analytic data to Docker, do the following:
+
+1. Log into the system running the UCP controller.
+
+2. Add a rule to drop the forward to port 80.
+
+        $ iptables -I FORWARD -p tcp --dport 80 -j DROP
+
+Reboots unset this iptables chain, so it is a good idea to add this command to the controller's startup script.
+
+## Installing with your own certificates
+
+UCP uses two separate root CAs for access control - one for Swarm, and one for
+the UCP controller itself.  The dual root certificates supply differentiation
+between the Docker remote API access to UCP vs. Swarm.  Unlike Docker Engine or
+Docker Swarm, UCP implements ACL and audit logging on a per-user basis.  Swarm
+and the Engine proxies trust only the Swarm Root CA, while the UCP controller
+trusts both Root CAs.  Admins can access UCP, Swarm and the engines while
+normal users are only granted access to UCP.
+
+UCP v1.0 supports user provided externally signed certificates
+for the UCP controller.  This cert is used by UCP's main management web UI
+and the Docker remote API. The remote API is visible to the Docker CLI. In this release, the Swarm Root CA is always managed by UCP.
+
+The external UCP Root CA model supports customers managing their own CA, or
+purchasing certs from a commercial CA.  When operating in this mode, UCP can
+not generate regular user certificates, as those must be managed and signed
+externally, however admin account certs can be generated as they are signed by
+the internal Swarm Root CA.  Normal user accounts should be signed by the same
+external Root CA (or a trusted intermediary), and the public keys manually added
+through the UI.
+
+The first time you install, we recommend you skip user-supplied certs and use
+the default certificates instead. The default TLS certificate files are placed
+on the host filesystem of each Docker Engine in
+`/var/lib/docker/discovery_certs/`. Later, do a second install and try the
+option to use your own certs.
+
+
+### Configure user-supplied Certificates
+
+To install UCP with your own external root CA, you create a named volume called
+**ucp-server-certs** on the same system where you plan to install the UCP
+controller.
+
+1. Log into the machine where you intend to install UCP.
+
+2. If you haven't already done so, create a named volume called **ucp-server-certs**.
+
+3. Ensure the volume's top-level directory contains these files:
+
+  <table>
+  <tr>
+    <th>File</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><code>ca.pem</code></td>
+    <td>Your Root CA Certificate chain (including any intermediaries).</td>
+  </tr>
+  <tr>
+    <td><code>cert.pem</code></td>
+    <td>Your signed UCP controller cert.</td>
+  </tr>
+  <tr>
+    <td><code>key.pem</code></td>
+    <td>Your UCP controller private key.</td>
+  </tr>
+  </table>
+
+4. Follow "Step 5" above to install UCP but pass in an additional `--external-ucp-ca` option to the bootstrapper, for example:
+
+        docker run --rm -it \
+          -v /var/run/docker.sock:/var/run/docker.sock \
+          ...snip...
+          install -i --external-ucp-ca
+
+
+## Where to go next
+
+To learn more you can also investigate:
+
+* Read more [about the product](https://www.docker.com/universal-control-plane).
+* Visit the UCP forum to [ask questions and get answers](https://forums.docker.com/c/commercial-products/ucpbeta).
+* Try the [UCP hands-on lab](https://github.com/docker/ucp_lab).
+* [How to use the Docker Client](http://docs.docker.com/reference/commandline/cli/)
+* [An overview of Docker Swarm](http://docs.docker.com/swarm/)

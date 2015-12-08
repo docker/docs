@@ -1,9 +1,10 @@
 # Manually setting up a CA
 
-A few features of Orca require an external CA (cfssl or equivalent) to sign certs.
-By default in developer mode, these services aren't created (maybe we'll set them up
-someday, but there's some bootstrapping challenges...)  The following instructions
-explain how to set this up manually so you can do developer mode with CA support.
+A few features of UCP require an external CA (cfssl or equivalent) to sign
+certs. By default in developer mode, these services aren't created (maybe we'll
+set them up someday, but there's some bootstrapping challenges...)  The
+following instructions explain how to set this up manually so you can do
+developer mode with CA support.
 
 
 ```bash
@@ -152,7 +153,7 @@ sudo mv /etc/docker/ssl/orca/orca_server-key.pem /etc/docker/ssl/orca/orca_serve
 ```
 
 
-**Now you can run Orca**
+**Now you can run UCP**
 
 
 (proxy)

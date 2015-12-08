@@ -1,18 +1,18 @@
 # Remote logging configuration
 
-To setup remote logging in Orca you must edit the API directly.
+To setup remote logging in UCP you must edit the API directly.
 You'll need to run explicit curl commands described below.  This
 assumes you've already set up your environment with a downloaded
 bundle.
 
 ## Display the current settings
 ```sh
-export ORCA_URL="https://$(echo $DOCKER_HOST | cut -f3 -d/ )"
+export UCP_URL="https://$(echo $DOCKER_HOST | cut -f3 -d/ )"
 curl -s \
     --cert ${DOCKER_CERT_PATH}/cert.pem \
     --key ${DOCKER_CERT_PATH}/key.pem \
     --cacert ${DOCKER_CERT_PATH}/ca.pem \
-    ${ORCA_URL}/api/config/logging | jq "."
+    ${UCP_URL}/api/config/logging | jq "."
 ```
 
 ## Setup remote logging
@@ -22,7 +22,7 @@ curl -s \
     --key ${DOCKER_CERT_PATH}/key.pem \
     --cacert ${DOCKER_CERT_PATH}/ca.pem \
     -XPOST -d '{"host":"mylogger:514","protocol":"tcp","level":"INFO"}' \
-    ${ORCA_URL}/api/config/logging | jq "."
+    ${UCP_URL}/api/config/logging | jq "."
 ```
 
 ## Stopping remote logging
@@ -35,7 +35,7 @@ curl -s \
     --key ${DOCKER_CERT_PATH}/key.pem \
     --cacert ${DOCKER_CERT_PATH}/ca.pem \
     -XPOST -d '{"host":"","level":"DEBUG"}' \
-    ${ORCA_URL}/api/config/logging | jq "."
+    ${UCP_URL}/api/config/logging | jq "."
 ```
 
 # Setting up an ELK stack
@@ -43,7 +43,7 @@ curl -s \
 One popular logging stack is composed of Elasticsearch, Logstash and
 Kibana.  The following example demonstrates how to set up an example
 deployment which can be used for logging.  Once you have these containers
-running, configure Orca to send logs to the logstash container.
+running, configure UCP to send logs to the logstash container.
 
 
 ```sh
