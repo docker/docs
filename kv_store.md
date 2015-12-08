@@ -1,7 +1,7 @@
 # Key/Value Store
 
-In this release, UCP leverages the
-[etcd](https://github.com/coreos/etcd/) KV store.
+In this release, UCP leverages the [etcd](https://github.com/coreos/etcd/) KV
+store.
 
 Under normal circumstances, you should not have to access the KV store
 directly.  To mitigate unforeseen problems or change advanced settings,

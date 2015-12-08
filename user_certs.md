@@ -1,9 +1,9 @@
 # Generating User certificates by Hand
 
-This shouldn't be required once Orca can generate user certs, but might be useful in some instances...
+This shouldn't be required once UCP can generate user certs, but might be useful in some instances...
 
 
-All of these commands must be run against the engine where Orca is running
+All of these commands must be run against the engine where UCP is running
 E.g. Locally, or via a machine driver that mounts your home directory.
 If you can't mount home on the machine, then use docker-machine ssh
 ... to run these commands from within the host.
@@ -47,7 +47,7 @@ NAME=node0
 docker-machine ssh ${NAME} "cat orca_user.tgz" | tar zxvf -
 ```
 
-Now login to Orca, Click on "Security" and paste in the contents of the pub\_key.pem into the Public Key field
+Now login to UCP, Click on "Security" and paste in the contents of the pub\_key.pem into the Public Key field
 
 Then you should be able to run docker CLI commands with:
 
