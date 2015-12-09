@@ -172,7 +172,9 @@ func generateSnapshot(gun string, kdb *keys.KeyDB, repo *tuf.Repo, store storage
 		}
 	}
 	if !validKey {
-		return nil, validation.ErrBadHierarchy{Msg: "no snapshot was included in update and server does not hold current snapshot key for repository"}
+		return nil, validation.ErrBadHierarchy{
+			Missing: data.CanonicalSnapshotRole,
+			Msg:     "no snapshot was included in update and server does not hold current snapshot key for repository"}
 	}
 
 	currentJSON, err := store.GetCurrent(gun, data.CanonicalSnapshotRole)

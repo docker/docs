@@ -147,6 +147,30 @@ func (s HTTPStore) SetMeta(name string, blob []byte) error {
 	return translateStatusToError(resp)
 }
 
+// NewMultiPartMetaRequest builds a request with the provided metadata updates
+// in multipart form
+func NewMultiPartMetaRequest(url string, metas map[string][]byte) (*http.Request, error) {
+	body := &bytes.Buffer{}
+	writer := multipart.NewWriter(body)
+	for role, blob := range metas {
+		part, err := writer.CreateFormFile("files", role)
+		_, err = io.Copy(part, bytes.NewBuffer(blob))
+		if err != nil {
+			return nil, err
+		}
+	}
+	err := writer.Close()
+	if err != nil {
+		return nil, err
+	}
+	req, err := http.NewRequest("POST", url, body)
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Set("Content-Type", writer.FormDataContentType())
+	return req, nil
+}
+
 // SetMultiMeta does a single batch upload of multiple pieces of TUF metadata.
 // This should be preferred for updating a remote server as it enable the server
 // to remain consistent, either accepting or rejecting the complete update.
@@ -155,21 +179,7 @@ func (s HTTPStore) SetMultiMeta(metas map[string][]byte) error {
 	if err != nil {
 		return err
 	}
-	body := &bytes.Buffer{}
-	writer := multipart.NewWriter(body)
-	for role, blob := range metas {
-		part, err := writer.CreateFormFile("files", role)
-		_, err = io.Copy(part, bytes.NewBuffer(blob))
-		if err != nil {
-			return err
-		}
-	}
-	err = writer.Close()
-	if err != nil {
-		return err
-	}
-	req, err := http.NewRequest("POST", url.String(), body)
-	req.Header.Set("Content-Type", writer.FormDataContentType())
+	req, err := NewMultiPartMetaRequest(url.String(), metas)
 	if err != nil {
 		return err
 	}
