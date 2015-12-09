@@ -12,6 +12,7 @@ import (
 	"github.com/docker/notary/tuf/keys"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/testutils"
+	"github.com/docker/notary/tuf/validation"
 	"github.com/stretchr/testify/assert"
 
 	"github.com/docker/notary/server/storage"
@@ -211,7 +212,7 @@ func TestValidateNoRoot(t *testing.T) {
 	copyTimestampKey(t, kdb, store, "testGUN")
 	_, err = validateUpdate(cs, "testGUN", updates, store)
 	assert.Error(t, err)
-	assert.IsType(t, ErrValidation{}, err)
+	assert.IsType(t, validation.ErrValidation{}, err)
 }
 
 func TestValidateSnapshotMissing(t *testing.T) {
@@ -228,7 +229,7 @@ func TestValidateSnapshotMissing(t *testing.T) {
 	copyTimestampKey(t, kdb, store, "testGUN")
 	_, err = validateUpdate(cs, "testGUN", updates, store)
 	assert.Error(t, err)
-	assert.IsType(t, ErrBadHierarchy{}, err)
+	assert.IsType(t, validation.ErrBadHierarchy{}, err)
 }
 
 func TestValidateSnapshotGenerateNoPrev(t *testing.T) {
@@ -463,7 +464,7 @@ func TestValidateRootNoTimestampKey(t *testing.T) {
 	// do not copy the targets key to the storage, and try to update the root
 	_, err = validateUpdate(cs, "testGUN", updates, store)
 	assert.Error(t, err)
-	assert.IsType(t, ErrBadRoot{}, err)
+	assert.IsType(t, validation.ErrBadRoot{}, err)
 
 	// there should still be no timestamp keys - one should not have been
 	// created
@@ -493,7 +494,7 @@ func TestValidateRootInvalidTimestampKey(t *testing.T) {
 
 	_, err = validateUpdate(cs, "testGUN", updates, store)
 	assert.Error(t, err)
-	assert.IsType(t, ErrBadRoot{}, err)
+	assert.IsType(t, validation.ErrBadRoot{}, err)
 }
 
 // If the timestamp role has a threshold > 1, validation fails.
@@ -542,7 +543,7 @@ func TestValidateRootInvalidZeroThreshold(t *testing.T) {
 
 // ### Role missing negative tests ###
 // These tests remove a role from the Root file and
-// check for a ErrBadRoot
+// check for a validation.ErrBadRoot
 func TestValidateRootRoleMissing(t *testing.T) {
 	kdb, repo, cs := testutils.EmptyRepo()
 	store := storage.NewMemStorage()
@@ -559,7 +560,7 @@ func TestValidateRootRoleMissing(t *testing.T) {
 	copyTimestampKey(t, kdb, store, "testGUN")
 	_, err = validateUpdate(cs, "testGUN", updates, store)
 	assert.Error(t, err)
-	assert.IsType(t, ErrBadRoot{}, err)
+	assert.IsType(t, validation.ErrBadRoot{}, err)
 }
 
 func TestValidateTargetsRoleMissing(t *testing.T) {
@@ -578,7 +579,7 @@ func TestValidateTargetsRoleMissing(t *testing.T) {
 	copyTimestampKey(t, kdb, store, "testGUN")
 	_, err = validateUpdate(cs, "testGUN", updates, store)
 	assert.Error(t, err)
-	assert.IsType(t, ErrBadRoot{}, err)
+	assert.IsType(t, validation.ErrBadRoot{}, err)
 }
 
 func TestValidateSnapshotRoleMissing(t *testing.T) {
@@ -597,7 +598,7 @@ func TestValidateSnapshotRoleMissing(t *testing.T) {
 	copyTimestampKey(t, kdb, store, "testGUN")
 	_, err = validateUpdate(cs, "testGUN", updates, store)
 	assert.Error(t, err)
-	assert.IsType(t, ErrBadRoot{}, err)
+	assert.IsType(t, validation.ErrBadRoot{}, err)
 }
 
 // ### End role missing negative tests ###
@@ -622,7 +623,7 @@ func TestValidateRootSigMissing(t *testing.T) {
 	copyTimestampKey(t, kdb, store, "testGUN")
 	_, err = validateUpdate(cs, "testGUN", updates, store)
 	assert.Error(t, err)
-	assert.IsType(t, ErrBadRoot{}, err)
+	assert.IsType(t, validation.ErrBadRoot{}, err)
 }
 
 func TestValidateTargetsSigMissing(t *testing.T) {
@@ -642,7 +643,7 @@ func TestValidateTargetsSigMissing(t *testing.T) {
 	copyTimestampKey(t, kdb, store, "testGUN")
 	_, err = validateUpdate(cs, "testGUN", updates, store)
 	assert.Error(t, err)
-	assert.IsType(t, ErrBadTargets{}, err)
+	assert.IsType(t, validation.ErrBadTargets{}, err)
 }
 
 func TestValidateSnapshotSigMissing(t *testing.T) {
@@ -662,7 +663,7 @@ func TestValidateSnapshotSigMissing(t *testing.T) {
 	copyTimestampKey(t, kdb, store, "testGUN")
 	_, err = validateUpdate(cs, "testGUN", updates, store)
 	assert.Error(t, err)
-	assert.IsType(t, ErrBadSnapshot{}, err)
+	assert.IsType(t, validation.ErrBadSnapshot{}, err)
 }
 
 // ### End signature missing negative tests ###
@@ -685,7 +686,7 @@ func TestValidateRootCorrupt(t *testing.T) {
 	copyTimestampKey(t, kdb, store, "testGUN")
 	_, err = validateUpdate(cs, "testGUN", updates, store)
 	assert.Error(t, err)
-	assert.IsType(t, ErrBadRoot{}, err)
+	assert.IsType(t, validation.ErrBadRoot{}, err)
 }
 
 func TestValidateTargetsCorrupt(t *testing.T) {
@@ -705,7 +706,7 @@ func TestValidateTargetsCorrupt(t *testing.T) {
 	copyTimestampKey(t, kdb, store, "testGUN")
 	_, err = validateUpdate(cs, "testGUN", updates, store)
 	assert.Error(t, err)
-	assert.IsType(t, ErrBadTargets{}, err)
+	assert.IsType(t, validation.ErrBadTargets{}, err)
 }
 
 func TestValidateSnapshotCorrupt(t *testing.T) {
@@ -725,7 +726,7 @@ func TestValidateSnapshotCorrupt(t *testing.T) {
 	copyTimestampKey(t, kdb, store, "testGUN")
 	_, err = validateUpdate(cs, "testGUN", updates, store)
 	assert.Error(t, err)
-	assert.IsType(t, ErrBadSnapshot{}, err)
+	assert.IsType(t, validation.ErrBadSnapshot{}, err)
 }
 
 // ### End corrupted metadata negative tests ###
@@ -752,7 +753,7 @@ func TestValidateRootModifiedSize(t *testing.T) {
 	copyTimestampKey(t, kdb, store, "testGUN")
 	_, err = validateUpdate(cs, "testGUN", updates, store)
 	assert.Error(t, err)
-	assert.IsType(t, ErrBadRoot{}, err)
+	assert.IsType(t, validation.ErrBadRoot{}, err)
 }
 
 func TestValidateTargetsModifiedSize(t *testing.T) {
@@ -773,7 +774,7 @@ func TestValidateTargetsModifiedSize(t *testing.T) {
 	copyTimestampKey(t, kdb, store, "testGUN")
 	_, err = validateUpdate(cs, "testGUN", updates, store)
 	assert.Error(t, err)
-	assert.IsType(t, ErrBadSnapshot{}, err)
+	assert.IsType(t, validation.ErrBadSnapshot{}, err)
 }
 
 // ### End snapshot size mismatch negative tests ###
@@ -801,7 +802,7 @@ func TestValidateRootModifiedHash(t *testing.T) {
 	copyTimestampKey(t, kdb, store, "testGUN")
 	_, err = validateUpdate(cs, "testGUN", updates, store)
 	assert.Error(t, err)
-	assert.IsType(t, ErrBadSnapshot{}, err)
+	assert.IsType(t, validation.ErrBadSnapshot{}, err)
 }
 
 func TestValidateTargetsModifiedHash(t *testing.T) {
@@ -826,7 +827,7 @@ func TestValidateTargetsModifiedHash(t *testing.T) {
 	copyTimestampKey(t, kdb, store, "testGUN")
 	_, err = validateUpdate(cs, "testGUN", updates, store)
 	assert.Error(t, err)
-	assert.IsType(t, ErrBadSnapshot{}, err)
+	assert.IsType(t, validation.ErrBadSnapshot{}, err)
 }
 
 // ### End snapshot hash mismatch negative tests ###
