@@ -118,7 +118,6 @@ func setupCommand(notaryCmd *cobra.Command) {
 	cmdKeyGenerator := &keyCommander{
 		configGetter: parseConfig,
 		retriever:    retriever,
-		remoteServer: remoteTrustServer,
 	}
 
 	notaryCmd.AddCommand(cmdKeyGenerator.GetCommand())
