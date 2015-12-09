@@ -784,7 +784,6 @@ func testPublish(t *testing.T, rootType string, serverManagesSnapshot bool) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("/tmp", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)
-
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	gun := "docker.com/notary"
@@ -855,7 +854,6 @@ func testPublishAfterPullServerHasSnapshotKey(t *testing.T, rootType string) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("/tmp", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)
-
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	gun := "docker.com/notary"
@@ -904,7 +902,6 @@ func testPublishNoOneHasSnapshotKey(t *testing.T, rootType string) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("/tmp", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)
-
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	gun := "docker.com/notary"
@@ -932,17 +929,12 @@ func testPublishNoOneHasSnapshotKey(t *testing.T, rootType string) {
 func TestPublishSnapshotCorrupt(t *testing.T) {
 	testPublishSnapshotCorrupt(t, data.ECDSAKey, true)
 	testPublishSnapshotCorrupt(t, data.ECDSAKey, false)
-	if !testing.Short() {
-		testPublishSnapshotCorrupt(t, data.RSAKey, true)
-		testPublishSnapshotCorrupt(t, data.RSAKey, false)
-	}
 }
 
 func testPublishSnapshotCorrupt(t *testing.T, rootType string, serverManagesSnapshot bool) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("/tmp", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)
-
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	gun := "docker.com/notary"
@@ -956,6 +948,46 @@ func testPublishSnapshotCorrupt(t *testing.T, rootType string, serverManagesSnap
 	addTarget(t, repo, "v1", "../fixtures/intermediate-ca.crt")
 	err = repo.Publish()
 	assert.Error(t, err)
+}
+
+type cannotCreateKeys struct {
+	signed.CryptoService
+}
+
+func (cs cannotCreateKeys) Create(_, _ string) (data.PublicKey, error) {
+	return nil, fmt.Errorf("Oh no I cannot create keys")
+}
+
+// If there is an error creating the local keys, no call is made to get a
+// remote key.
+func TestPublishSnapshotLocalKeysCreatedFirst(t *testing.T) {
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("/tmp", "notary-test-")
+	defer os.RemoveAll(tempBaseDir)
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+	gun := "docker.com/notary"
+
+	requestMade := false
+	ts := httptest.NewServer(http.HandlerFunc(
+		func(http.ResponseWriter, *http.Request) { requestMade = true }))
+	defer ts.Close()
+
+	repo, err := NewNotaryRepository(
+		tempBaseDir, gun, ts.URL, http.DefaultTransport, passphraseRetriever)
+	assert.NoError(t, err, "error creating repo: %s", err)
+
+	cs := cryptoservice.NewCryptoService(gun,
+		trustmanager.NewKeyMemoryStore(passphraseRetriever))
+
+	rootPubKey, err := cs.Create(data.CanonicalRootRole, data.ECDSAKey)
+	assert.NoError(t, err, "error generating root key: %s", err)
+
+	repo.CryptoService = cannotCreateKeys{CryptoService: cs}
+
+	err = repo.Initialize(rootPubKey.ID(), data.CanonicalSnapshotRole)
+	assert.Error(t, err)
+	assert.Contains(t, err.Error(), "Oh no I cannot create keys")
+	assert.False(t, requestMade)
 }
 
 func TestRotate(t *testing.T) {
