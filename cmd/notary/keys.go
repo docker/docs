@@ -5,6 +5,7 @@ import (
 	"bufio"
 	"fmt"
 	"io"
+	"net/http"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -62,8 +63,8 @@ var cmdKeyListTemplate = usageTemplate{
 
 var cmdRotateKeyTemplate = usageTemplate{
 	Use:   "rotate [ GUN ]",
-	Short: "Rotate all the signing (non-root) keys for the given Globally Unique Name.",
-	Long:  "Removes all old signing (non-root) keys for the given Globally Unique Name, and generates new ones.  This only makes local changes - please use then `notary publish` to push the key rotation changes to the remote server.",
+	Short: "Rotate the signing (non-root) keys for the given Globally Unique Name.",
+	Long:  "Removes all the old signing (non-root) keys for the given Globally Unique Name, and generates new ones.  This only makes local changes - please use then `notary publish` to push the key rotation changes to the remote server.",
 }
 
 var cmdKeyGenerateRootKeyTemplate = usageTemplate{
@@ -106,11 +107,12 @@ type keyCommander struct {
 	// these need to be set
 	configGetter func() *viper.Viper
 	retriever    passphrase.Retriever
-	remoteServer string
 
 	// these are for command line parsing - no need to set
 	keysExportRootChangePassphrase bool
 	keysExportGUN                  string
+	rotateKeyRole                  string
+	rotateKeyServerManaged         bool
 }
 
 func (k *keyCommander) GetCommand() *cobra.Command {
@@ -120,7 +122,6 @@ func (k *keyCommander) GetCommand() *cobra.Command {
 	cmd.AddCommand(cmdKeysRestoreTemplate.ToCommand(k.keysRestore))
 	cmd.AddCommand(cmdKeyImportRootTemplate.ToCommand(k.keysImportRoot))
 	cmd.AddCommand(cmdKeyRemoveTemplate.ToCommand(k.keyRemove))
-	cmd.AddCommand(cmdRotateKeyTemplate.ToCommand(k.keysRotate))
 
 	cmdKeysBackup := cmdKeysBackupTemplate.ToCommand(k.keysBackup)
 	cmdKeysBackup.Flags().StringVarP(
@@ -132,6 +133,18 @@ func (k *keyCommander) GetCommand() *cobra.Command {
 		&k.keysExportRootChangePassphrase, "change-passphrase", "p", false,
 		"Set a new passphrase for the key being exported")
 	cmd.AddCommand(cmdKeyExportRoot)
+
+	cmdRotateKey := cmdRotateKeyTemplate.ToCommand(k.keysRotate)
+	cmdRotateKey.Flags().BoolVarP(&k.rotateKeyServerManaged, "server-managed", "r",
+		false, "Signing and key management will be handled by the remote server. "+
+			"(no key will be generated or stored locally) "+
+			"Can only be used in conjunction with --key-type.")
+	cmdRotateKey.Flags().StringVarP(&k.rotateKeyRole, "key-type", "t", "",
+		`Key type to rotate.  Supported values: "targets", "snapshots". `+
+			`If not provided, both targets and snapshot keys will be rotated, `+
+			`and the new keys will be locally generated and stored.`)
+	cmd.AddCommand(cmdRotateKey)
+
 	return cmd
 }
 
@@ -344,8 +357,7 @@ func (k *keyCommander) keysRotate(cmd *cobra.Command, args []string) error {
 	case data.CanonicalTargetsRole:
 		rolesToRotate = []string{data.CanonicalTargetsRole}
 	default:
-		cmd.Usage()
-		fatalf(`key rotation not supported for %s keys`, rotateKeyRole)
+		return fmt.Errorf("key rotation not supported for %s keys", k.rotateKeyRole)
 	}
 	if k.rotateKeyServerManaged && rotateKeyRole != data.CanonicalSnapshotRole {
 		return fmt.Errorf(
@@ -355,8 +367,15 @@ func (k *keyCommander) keysRotate(cmd *cobra.Command, args []string) error {
 	config := k.configGetter()
 
 	gun := args[0]
+	var rt http.RoundTripper
+	if k.rotateKeyServerManaged {
+		// this does not actually push the changes, just creates the keys, but
+		// it creates a key remotely so it needs a transport
+		rt = getTransport(config, gun, true)
+	}
 	nRepo, err := notaryclient.NewNotaryRepository(
-		config.GetString("trust_dir"), gun, k.remoteServer, nil, retriever)
+		config.GetString("trust_dir"), gun, getRemoteTrustServer(config),
+		rt, k.retriever)
 	if err != nil {
 		return err
 	}
