@@ -12,7 +12,7 @@ import (
 	"golang.org/x/net/context"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/docker/notary/errors"
+	"github.com/docker/notary/server/errors"
 	"github.com/docker/notary/server/snapshot"
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/server/timestamp"
@@ -274,4 +274,10 @@ func getKeyHandler(ctx context.Context, w http.ResponseWriter, r *http.Request, 
 	logger.Debugf("200 GET %s key", role)
 	w.Write(out)
 	return nil
+}
+
+// NotFoundHandler is used as a generic catch all handler to return the ErrMetadataNotFound
+// 404 response
+func NotFoundHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
+	return errors.ErrMetadataNotFound.WithDetail(nil)
 }
