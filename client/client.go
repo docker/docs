@@ -353,11 +353,9 @@ func (r *NotaryRepository) Publish() error {
 				return err
 			}
 			// We had local data but the server doesn't know about the repo yet,
-			// ensure we will push the initial root file
-			root, err = r.tufRepo.Root.ToSigned()
-			if err != nil {
-				return err
-			}
+			// ensure we will push the initial root file.  The root may not
+			// be marked as Dirty, since there may not be any changes that
+			// update it, so use a different boolean.
 			updateRoot = true
 		} else {
 			// The remote store returned an error other than 404. We're
@@ -393,12 +391,9 @@ func (r *NotaryRepository) Publish() error {
 	update := make(map[string][]byte)
 
 	// check if our root file is nearing expiry. Resign if it is.
-	if nearExpiry(r.tufRepo.Root) || r.tufRepo.Root.Dirty {
+	if nearExpiry(r.tufRepo.Root) || r.tufRepo.Root.Dirty || updateRoot {
 		root, err = r.tufRepo.SignRoot(data.DefaultExpires("root"))
-		updateRoot = true
-	}
 
-	if updateRoot {
 		rootJSON, err := json.Marshal(root)
 		if err != nil {
 			return err
