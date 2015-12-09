@@ -18,6 +18,7 @@ import (
 	"github.com/docker/notary/server/timestamp"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
+	"github.com/docker/notary/tuf/validation"
 )
 
 // MainHandler is the default handler for the server
@@ -87,11 +88,15 @@ func atomicUpdateHandler(ctx context.Context, w http.ResponseWriter, r *http.Req
 	}
 	updates, err = validateUpdate(cryptoService, gun, updates, store)
 	if err != nil {
-		return errors.ErrInvalidUpdate.WithDetail(err)
+		serializable, serializableError := validation.NewSerializableError(err)
+		if serializableError != nil {
+			return errors.ErrInvalidUpdate.WithDetail(nil)
+		}
+		return errors.ErrInvalidUpdate.WithDetail(serializable)
 	}
 	err = store.UpdateMany(gun, updates)
 	if err != nil {
-		return errors.ErrUpdating.WithDetail(err)
+		return errors.ErrUpdating.WithDetail(nil)
 	}
 	return nil
 }
