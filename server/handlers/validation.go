@@ -81,9 +81,21 @@ func validateUpdate(cs signed.CryptoService, gun string, updates []storage.MetaU
 			return nil, validation.ErrBadTargets{Msg: err.Error()}
 		}
 		repo.SetTargets(targetsRole, t)
+	} else {
+		targetsJSON, err := store.GetCurrent(gun, data.CanonicalTargetsRole)
+		if err != nil {
+			return nil, validation.ErrValidation{Msg: err.Error()}
+		}
+		targets := &data.SignedTargets{}
+		err = json.Unmarshal(targetsJSON, targets)
+		if err != nil {
+			return nil, validation.ErrValidation{Msg: err.Error()}
+		}
+		repo.SetTargets(data.CanonicalTargetsRole, targets)
 	}
 	logrus.Debug("Successfully validated targets")
 
+	// At this point, root and targets must have been loaded into the repo
 	if _, ok := roles[snapshotRole]; ok {
 		var oldSnap *data.SignedSnapshot
 		oldSnapJSON, err := store.GetCurrent(gun, snapshotRole)
@@ -111,10 +123,6 @@ func validateUpdate(cs signed.CryptoService, gun string, updates []storage.MetaU
 		// Then:
 		//   - generate a new snapshot
 		//   - add it to the updates
-		err := prepRepo(gun, repo, store)
-		if err != nil {
-			return nil, err
-		}
 		update, err := generateSnapshot(gun, kdb, repo, store)
 		if err != nil {
 			return nil, err
@@ -124,34 +132,6 @@ func validateUpdate(cs signed.CryptoService, gun string, updates []storage.MetaU
 	return updates, nil
 }
 
-func prepRepo(gun string, repo *tuf.Repo, store storage.MetaStore) error {
-	if repo.Root == nil {
-		rootJSON, err := store.GetCurrent(gun, data.CanonicalRootRole)
-		if err != nil {
-			return fmt.Errorf("could not load repo for snapshot generation: %v", err)
-		}
-		root := &data.SignedRoot{}
-		err = json.Unmarshal(rootJSON, root)
-		if err != nil {
-			return fmt.Errorf("could not load repo for snapshot generation: %v", err)
-		}
-		repo.SetRoot(root)
-	}
-	if repo.Targets[data.CanonicalTargetsRole] == nil {
-		targetsJSON, err := store.GetCurrent(gun, data.CanonicalTargetsRole)
-		if err != nil {
-			return fmt.Errorf("could not load repo for snapshot generation: %v", err)
-		}
-		targets := &data.SignedTargets{}
-		err = json.Unmarshal(targetsJSON, targets)
-		if err != nil {
-			return fmt.Errorf("could not load repo for snapshot generation: %v", err)
-		}
-		repo.SetTargets(data.CanonicalTargetsRole, targets)
-	}
-	return nil
-}
-
 func generateSnapshot(gun string, kdb *keys.KeyDB, repo *tuf.Repo, store storage.MetaStore) (*storage.MetaUpdate, error) {
 	role := kdb.GetRole(data.RoleName(data.CanonicalSnapshotRole))
 	if role == nil {
@@ -159,8 +139,8 @@ func generateSnapshot(gun string, kdb *keys.KeyDB, repo *tuf.Repo, store storage
 	}
 
 	algo, keyBytes, err := store.GetKey(gun, data.CanonicalSnapshotRole)
-	if role == nil {
-		return nil, validation.ErrBadRoot{Msg: "root did not include snapshot key"}
+	if err != nil {
+		return nil, validation.ErrBadHierarchy{Msg: "could not retrieve snapshot key. client must provide snapshot"}
 	}
 	foundK := data.NewPublicKey(algo, keyBytes)
 
@@ -180,7 +160,7 @@ func generateSnapshot(gun string, kdb *keys.KeyDB, repo *tuf.Repo, store storage
 	currentJSON, err := store.GetCurrent(gun, data.CanonicalSnapshotRole)
 	if err != nil {
 		if _, ok := err.(*storage.ErrNotFound); !ok {
-			return nil, fmt.Errorf("could not retrieve previous snapshot: %v", err)
+			return nil, validation.ErrValidation{Msg: err.Error()}
 		}
 	}
 	var sn *data.SignedSnapshot
@@ -188,25 +168,25 @@ func generateSnapshot(gun string, kdb *keys.KeyDB, repo *tuf.Repo, store storage
 		sn = new(data.SignedSnapshot)
 		err := json.Unmarshal(currentJSON, sn)
 		if err != nil {
-			return nil, fmt.Errorf("could not retrieve previous snapshot: %v", err)
+			return nil, validation.ErrValidation{Msg: err.Error()}
 		}
 		err = repo.SetSnapshot(sn)
 		if err != nil {
-			return nil, fmt.Errorf("could not load previous snapshot: %v", err)
+			return nil, validation.ErrValidation{Msg: err.Error()}
 		}
 	} else {
 		err := repo.InitSnapshot()
 		if err != nil {
-			return nil, fmt.Errorf("could not initialize snapshot: %v", err)
+			return nil, validation.ErrBadSnapshot{Msg: err.Error()}
 		}
 	}
 	sgnd, err := repo.SignSnapshot(data.DefaultExpires(data.CanonicalSnapshotRole))
 	if err != nil {
-		return nil, fmt.Errorf("could not sign snapshot: %v", err)
+		return nil, validation.ErrBadSnapshot{Msg: err.Error()}
 	}
 	sgndJSON, err := json.Marshal(sgnd)
 	if err != nil {
-		return nil, fmt.Errorf("could not save snapshot: %v", err)
+		return nil, validation.ErrBadSnapshot{Msg: err.Error()}
 	}
 	return &storage.MetaUpdate{
 		Role:    data.CanonicalSnapshotRole,
