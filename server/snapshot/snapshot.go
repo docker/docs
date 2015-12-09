@@ -58,7 +58,13 @@ func GetOrCreateSnapshot(gun string, store storage.MetaStore, cryptoService sign
 			logrus.Error("Failed to unmarshal existing snapshot")
 			return nil, err
 		}
-		if !snapshotExpired(sn) && !contentExpired(gun, sn, store) {
+
+		// want to ensure we always execute both of these such that if snapExp == true,
+		// we update the meta in preparation for resigning
+		snapExp := snapshotExpired(sn)
+		contExp := contentExpired(gun, sn, store)
+
+		if !snapExp && !contExp {
 			return d, nil
 		}
 	}
@@ -96,14 +102,11 @@ func contentExpired(gun string, sn *data.SignedSnapshot, store storage.MetaStore
 		if err != nil {
 			return false
 		}
-		roleExp, newHash := roleExpired(curr, meta)
+		roleExp, newMeta := roleExpired(curr, meta)
 		if roleExp {
-			updatedMeta[role] = data.FileMeta{
-				Length: int64(len(curr)),
-				Hashes: data.Hashes{
-					"sha256": newHash,
-				},
-			}
+			updatedMeta[role] = newMeta
+		} else {
+			updatedMeta[role] = meta
 		}
 		expired = expired || roleExp
 	}
@@ -115,16 +118,16 @@ func contentExpired(gun string, sn *data.SignedSnapshot, store storage.MetaStore
 
 // roleExpired checks if the content for a specific role differs from
 // the snapshot
-func roleExpired(roleData []byte, meta data.FileMeta) (bool, []byte) {
+func roleExpired(roleData []byte, meta data.FileMeta) (bool, data.FileMeta) {
 	currMeta, err := data.NewFileMeta(bytes.NewReader(roleData), "sha256")
 	if err != nil {
 		// if we can't generate FileMeta from the current roleData, we should
 		// continue to serve the old role if it isn't time expired
 		// because we won't be able to generate a new one.
-		return false, nil
+		return false, data.FileMeta{}
 	}
 	hash := currMeta.Hashes["sha256"]
-	return !bytes.Equal(hash, meta.Hashes["sha256"]), hash
+	return !bytes.Equal(hash, meta.Hashes["sha256"]), currMeta
 }
 
 // createSnapshot uses an existing snapshot to create a new one.
