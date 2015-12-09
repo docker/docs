@@ -43,8 +43,8 @@ GO_VERSION = $(shell go version | awk '{print $$3}')
 .DEFAULT: default
 
 go_version:
-ifneq ("$(GO_VERSION)", "go1.5.1")
-	$(error Requires go version 1.5.1 - found $(GO_VERSION))
+ifeq (,$(findstring go1.5.,$(GO_VERSION)))
+	$(error Requires go version 1.5.x - found $(GO_VERSION))
 else
 	@echo
 endif

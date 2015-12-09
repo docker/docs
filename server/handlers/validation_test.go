@@ -7,7 +7,6 @@ import (
 	"testing"
 
 	"github.com/docker/notary/trustmanager"
-	"github.com/docker/notary/tuf"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/keys"
 	"github.com/docker/notary/tuf/signed"
@@ -375,71 +374,6 @@ func TestValidateSnapshotGenerateLoadRootTargets(t *testing.T) {
 	copyTimestampKey(t, kdb, store, "testGUN")
 	updates, err = validateUpdate(cs, "testGUN", updates, store)
 	assert.NoError(t, err)
-}
-
-func TestPrepRepoLoadRootTargets(t *testing.T) {
-	_, repo, _ := testutils.EmptyRepo()
-	store := storage.NewMemStorage()
-
-	r, tg, sn, ts, err := testutils.Sign(repo)
-	assert.NoError(t, err)
-	root, targets, _, _, err := getUpdates(r, tg, sn, ts)
-	assert.NoError(t, err)
-
-	store.UpdateCurrent("testGUN", root)
-	store.UpdateCurrent("testGUN", targets)
-
-	toPrep := tuf.NewRepo(keys.NewDB(), nil)
-	assert.Nil(t, toPrep.Root)
-	assert.Nil(t, toPrep.Targets[data.CanonicalTargetsRole])
-	err = prepRepo("testGUN", toPrep, store)
-	assert.NoError(t, err)
-	assert.NotNil(t, toPrep.Root)
-	assert.NotNil(t, toPrep.Targets[data.CanonicalTargetsRole])
-}
-
-func TestPrepRepoLoadRootCorrupt(t *testing.T) {
-	_, repo, _ := testutils.EmptyRepo()
-	store := storage.NewMemStorage()
-
-	r, tg, sn, ts, err := testutils.Sign(repo)
-	assert.NoError(t, err)
-	root, targets, _, _, err := getUpdates(r, tg, sn, ts)
-	assert.NoError(t, err)
-
-	root.Data = root.Data[:1]
-	store.UpdateCurrent("testGUN", root)
-	store.UpdateCurrent("testGUN", targets)
-
-	toPrep := tuf.NewRepo(keys.NewDB(), nil)
-	err = prepRepo("testGUN", toPrep, store)
-	assert.Error(t, err)
-}
-
-func TestPrepRepoLoadTargetsCorrupt(t *testing.T) {
-	_, repo, _ := testutils.EmptyRepo()
-	store := storage.NewMemStorage()
-
-	r, tg, sn, ts, err := testutils.Sign(repo)
-	assert.NoError(t, err)
-	root, targets, _, _, err := getUpdates(r, tg, sn, ts)
-	assert.NoError(t, err)
-
-	targets.Data = targets.Data[:1]
-	store.UpdateCurrent("testGUN", root)
-	store.UpdateCurrent("testGUN", targets)
-
-	toPrep := tuf.NewRepo(keys.NewDB(), nil)
-	err = prepRepo("testGUN", toPrep, store)
-	assert.Error(t, err)
-}
-
-func TestPrepRepoLoadRootMissing(t *testing.T) {
-	store := storage.NewMemStorage()
-
-	toPrep := tuf.NewRepo(nil, nil)
-	err := prepRepo("testGUN", toPrep, store)
-	assert.Error(t, err)
 }
 
 // If there is no timestamp key in the store, validation fails.  This could
@@ -831,3 +765,22 @@ func TestValidateTargetsModifiedHash(t *testing.T) {
 }
 
 // ### End snapshot hash mismatch negative tests ###
+
+// ### generateSnapshot tests ###
+func TestGenerateSnapshotNoRole(t *testing.T) {
+	kdb := keys.NewDB()
+	_, err := generateSnapshot("gun", kdb, nil, nil)
+	assert.Error(t, err)
+	assert.IsType(t, validation.ErrBadRoot{}, err)
+}
+
+func TestGenerateSnapshotNoKey(t *testing.T) {
+	kdb, _, _ := testutils.EmptyRepo()
+	store := storage.NewMemStorage()
+
+	_, err := generateSnapshot("gun", kdb, nil, store)
+	assert.Error(t, err)
+	assert.IsType(t, validation.ErrBadHierarchy{}, err)
+}
+
+// ### End generateSnapshot tests ###
