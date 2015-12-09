@@ -87,7 +87,7 @@ func atomicUpdateHandler(ctx context.Context, w http.ResponseWriter, r *http.Req
 	}
 	updates, err = validateUpdate(cryptoService, gun, updates, store)
 	if err != nil {
-		return errors.ErrMalformedUpload.WithDetail(err)
+		return errors.ErrInvalidUpdate.WithDetail(err)
 	}
 	err = store.UpdateMany(gun, updates)
 	if err != nil {

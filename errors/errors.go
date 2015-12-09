@@ -50,6 +50,12 @@ var (
 		Description:    "The user requested metadata that is not known to the server.",
 		HTTPStatusCode: http.StatusNotFound,
 	})
+	ErrInvalidUpdate = errcode.Register(errGroup, errcode.ErrorDescriptor{
+		Value:          "INVALID_UPDATE",
+		Message:        "Update sent by the client is invalid.",
+		Description:    "The user-uploaded TUF data has been parsed but failed validation.",
+		HTTPStatusCode: http.StatusBadRequest,
+	})
 	ErrMalformedUpload = errcode.Register(errGroup, errcode.ErrorDescriptor{
 		Value:          "MALFORMED_UPLOAD",
 		Message:        "The body of your request is malformed.",
