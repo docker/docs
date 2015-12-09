@@ -8,8 +8,6 @@ import (
 	"net/http"
 	_ "net/http/pprof"
 	"os"
-	"path/filepath"
-	"strings"
 	"time"
 
 	"github.com/Sirupsen/logrus"
@@ -186,19 +184,9 @@ func main() {
 
 	ctx := context.Background()
 
-	filename := filepath.Base(configFile)
-	ext := filepath.Ext(configFile)
-	configPath := filepath.Dir(configFile)
-
-	mainViper.SetConfigType(strings.TrimPrefix(ext, "."))
-	mainViper.SetConfigName(strings.TrimSuffix(filename, ext))
-	mainViper.AddConfigPath(configPath)
-
-	err := mainViper.ReadInConfig()
-	if err != nil {
-		logrus.Error("Viper Error: ", err.Error())
-		logrus.Error("Could not read config at ", configFile)
-		os.Exit(1)
+	// parse viper config
+	if err := utils.ParseViper(mainViper, configFile); err != nil {
+		logrus.Fatal(err.Error())
 	}
 
 	// default is error level

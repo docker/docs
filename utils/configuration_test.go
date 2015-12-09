@@ -335,3 +335,28 @@ func TestParseTLSWithEnvironmentVariables(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Equal(t, expected, *tlsOpts)
 }
+
+func TestParseViperWithInvalidFile(t *testing.T) {
+	v := viper.New()
+	SetupViper(v, envPrefix)
+
+	err := ParseViper(v, "Chronicle_Of_Dark_Secrets.json")
+	assert.Error(t, err)
+	assert.Contains(t, err.Error(), "Could not read config")
+}
+
+func TestParseViperWithValidFile(t *testing.T) {
+	file, err := os.Create("/tmp/Chronicle_Of_Dark_Secrets.json")
+	assert.NoError(t, err)
+	defer os.Remove(file.Name())
+
+	file.WriteString(`{"logging": {"level": "debug"}}`)
+
+	v := viper.New()
+	SetupViper(v, envPrefix)
+
+	err = ParseViper(v, "/tmp/Chronicle_Of_Dark_Secrets.json")
+	assert.NoError(t, err)
+
+	assert.Equal(t, "debug", v.GetString("logging.level"))
+}
