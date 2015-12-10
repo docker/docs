@@ -132,7 +132,7 @@ To connect to the command line of your Docker Engine EC2 Instance:
 
     Connecting to the Docker Engine EC2 Instance will gnerate and authentication warning. This is expected behavior and you can continue.
 
-    If you're connecting from a Windows machine, you'll need to have an SSH client isntalled and in your PATH variable.
+    If you're connecting from a Windows machine, you'll need to have an SSH client installed and in your PATH variable.
 
 For more information about connecting to your Docker Engine EC2 Instance over SSH, right-click your EC2 Instance and choose "Connect".
 
@@ -267,9 +267,9 @@ This guide assumes your Docker Trusted Registry is reachable at "ec2-52-24-229-1
 
 You have now successfully deployed the *Docker Engine for AWS (Business Day Support)* AMI and configured it to work with *Docker Trusted Registry for AWS (Business Day Support)*.
 
-## Next Steps
+## Next step
 
-For more information on using Docker Enginer in AWS, visit our [AWS Documentation](https://www.docker.com/aws).
+For more information on using Docker Engineer in AWS, go to the [AWS Documentation](https://www.docker.com/aws).
 
 ## See also
 

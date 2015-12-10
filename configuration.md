@@ -24,9 +24,10 @@ To start, navigate to the Trusted Registry user interface (UI) > Settings to vie
 * Authentication settings
 * Garbage collection
 * Updates
+* Docker daemon (this is set from the Trusted Registry CLI and not the UI)
 
 >**Note**:
->Saving changes you've made to settings may restart various services, as follows:
+>Saving changes you've made to settings will restart various services, as follows:
 >
  * General settings: full Docker Trusted Registry restart
  * License change: full Docker Trusted Registry restart
@@ -379,8 +380,10 @@ Set the "Account name", "Account key", "Container", and "Realm" on the [Azure st
 
 ### Openstack Swift settings
 
-View the [openstack Swift settings](/registry/configuration.md#openstack-swift) documentation so that you can set up your storage settings:
-authurl, username, password, container, tenant, tenantid, domain, domainid, insecureskipverify, region, chunksize, and prefix.
+View the [openstack Swift settings](/registry/configuration.md#openstack-swift)
+documentation so that you can set up your storage settings: authurl, username,
+password, container, tenant, tenantid, domain, domainid, insecureskipverify,
+region, chunksize, and prefix.
 
 ### Yaml configuration file
 
@@ -395,8 +398,8 @@ will need to specify a root directory which will get mounted as a sub-path of
 
 ## Authentication
 
-Use the  "Authentication" settings to control access
-to the Docker Trusted Registry web admin tool and to the Docker Trusted Registry.
+Use the "Authentication" settings to control access to the Docker Trusted
+Registry web admin tool and to the Docker Trusted Registry.
 
 The current authentication methods are `None`, `Managed` and `LDAP`.
 
@@ -423,7 +426,7 @@ to assign those users roles using the Docker Trusted Registry admin UI.
 * Choose the appropriate button to add one user, or to upload a CSV file containing username, password pairs, and selection boxes for "admin",
 "read-write", and "read-only" roles.
 * You can also create, or allow others to create the username, password pair using the
- [Account API](http://docs.docker.com/apidocs/v1.3.3/#!/accounts/func1_0)
+ [Account API](http://docs.docker.com/apidocs/v1.3.3/#!/accounts/func1_0).
 
 ### LDAP authentication
 
@@ -478,9 +481,9 @@ output should allow you to confirm which setting you need.
 * *Use StartTLS*: defaults to unchecked, check to enable StartTLS
 * *User Base DN*: **required** defaults to null, user base DN in the form (e.g., - dc=example,dc=com)
 * *User Login Attribute*: **required** defaults to null, user login attribute (e.g., - uid or sAMAccountName)
-* *Search User DN*: **required** defaults to null, search user DN (e.g., - domain\username)
+* *Search User DN*: **required** defaults to null, search user DN (for example,   domain\username)
 * *Search User Password*: **required** defaults to null, search user password
-* *LDAP Sync Interval*: **required** defaults to 1h0m0s, sets the interval for Docker Trusted Registry to sync with the LDAP db.
+* *LDAP Sync Interval*: **required** defaults to 1h0m0s, sets the interval for Docker Trusted Registry to sync with the LDAP database.
 * *User Search Filter*: Users on your LDAP server are synced to Docker Trusted Registry's local database using this search filter. Objects in LDAP that match
 this filter and have a valid "User Login Attribute" are created as a local user
 with the "User Login Attribute" as their username. Only these users are able to
@@ -489,9 +492,19 @@ login to the Trusted Registry.
 * *Admin Group Member Attribute*: **required** This value matches the name of the attribute on this group object which corresponds to the Distinguished Name
 of the group member objects.
 
-#### Confirm login with current configuration
+##### Confirm login with current configuration
 
-You can test your current LDAP configuration before saving it by entering a test username and password and then clicking "Try Login". If the login succeeds, your configuration is working.
+You can test your current LDAP configuration before saving it by entering a test
+username and password and then clicking "Try Login". If the login succeeds, your
+configuration is working.
+
+## Docker daemon logs
+
+Both the Trusted Registry and the Docker daemon collect and store log messages. To limit duplication of the Docker daemon logs, add the following parameters in a Trusted Registry CLI to the Docker daemon and then restart the daemon.
+
+`docker daemon --log-opt max-size 100m max-file=1`
+
+To learn about Trusted Registry logs, view the [Logs tab](adminguide.md) in the admin guide documentation.
 
 ## Next Steps
 

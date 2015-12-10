@@ -18,7 +18,6 @@ network. If you have not already done so, make sure you have first read the
 Before installing, you may want to <a href="http://www.docker.com/microsoft" target="_blank">read more information about running Docker with Microsoft</a>.
 
 
-
 ## Prerequisites
 
 This installation requires that you "bring your own license" (BYOL).  This means
@@ -122,7 +121,8 @@ You should be able to complete the installation in under thirty minutes.
 
 # Set the Trusted Registry domain name
 
-At this point, the Docker Trusted Registry Administrator site should warn that the Domain Name is not set.
+At this point, the Docker Trusted Registry Administrator site should warn that
+the Domain Name is not set. While you can use the public IP address that the portal created, you may find it more convenient to create a fully qualified domain name (FQDN). Refer to the <a href="https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-create-fqdn-on-portal/" target="_blank">Microsoft Azure documentation</a>.
 
 1. Select Settings from the global nav bar at the top of the page.
 
@@ -200,8 +200,9 @@ See [Docker Trusted Registry Authentication settings](../configuration.md#authen
 
 ## See also
 
-* [Install the CS Engine](install-csengine.md)
-* To configure for your environment, see the[configuration instructions](../configuration.md).
-* To use Docker Trusted Registry, see the User guide[../userguide.md).
-* To make administrative changes, see [the Admin guide](../adminguide.md).
+* [Upgrade information](upgrade.md) to upgrade either the Docker Trusted Registry or the commercially supported engine.
+* [Install the CS Engine](install-csengine.md).
+* To configure for your environment, see the [configuration instructions](../configuration.md).
+* To use Docker Trusted Registry, see the [User guide](../userguide.md).
+* To make administrative changes, see the[Admin guide](../adminguide.md).
 * To see previous changes, see [the release notes](../release-notes.md).

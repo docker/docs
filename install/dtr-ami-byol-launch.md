@@ -85,7 +85,7 @@ The following steps walk you through the 1-Click Launch settings:
 
 2. Select the Region you want to deploy to from the "Region" dropdown.
 
-3. Select the EC2 Instance type
+3. Select the EC2 Instance type.
 
     Be sure to check the "Pricing Details" and "Cost Estimator" boxes when changing EC2 Instance types.
 
@@ -112,15 +112,15 @@ The following steps walk you through the 1-Click Launch settings:
 
 ## Connect to the Docker Trusted Registry Administration web interface
 
-You administer your Trusted Registry server via the Administration web
-interface (hereafter referred to as *DTR Administration web interface*).
+You administer your Trusted Registry server through the Administration web
+interface (hereafter referred to as *Trusted Registry Administration web interface*).
 
-You can configure your own custom DNS names for your EC2 instance
-using CNAME records and so forth. Or, you can use the default DNS names provided by
-AWS. These instructions use the default DNS name provided by AWS.
+You can configure your own custom DNS names for your EC2 instance using CNAME
+records and so forth. Or, you can use the default DNS names provided by AWS.
+These instructions use the default DNS name provided by AWS.
 
-The DTR Administration web interface is exposed on port 443 (HTTPS) of
-the EC2 instance. To connect to the DTR Administration web
+The Trusted Registry Administration web interface is exposed on port 443 (HTTPS)
+of the EC2 instance. To connect to the Trusted Registry Administration web
 interface:
 
 1. Log into the AWS Console.
@@ -137,23 +137,23 @@ interface:
 
 7. Copy the Public DNS or Public IP into your browser's address bar and press `return`.
 
-    > **Note:** Connecting to the DTR Administration web
+    > **Note:** Connecting to the Trusted Registry Administration web
     interface may result in a certificate related browser warning. This is
     expected behavior and you can bypass the warning.
 
-   The interface prompts you for the username and password.
+    The interface prompts you for the username and password.
 
 8. Enter "admin" for the username.
 
 9. For the password, use the EC2 Instance ID.
 
-    You'll find the Instance ID on the "Description" tab on the EC2 Dashboard as shown in the image below:
+    You'll find the Instance ID on the "Description" tab on the EC2 Dashboard as shown in the following image:
 
     ![](images/aws-instance-id.png)
 
 ## Configure the Docker Trusted Registry Service
 
-When you first login to the DTR Administration web interface you are prompted to complete two configuration items:
+When you first log into the Trusted Registry Administration web interface, you are prompted to complete two configuration items:
 
 1.  Configure the "Domain name" on the "General" tab of the "Settings" page.
 
@@ -161,9 +161,9 @@ When you first login to the DTR Administration web interface you are prompted to
 
     Enter your desired domain name and click the "Save and restart" button at the bottom of the page.
 
-    After the Trusted Registry server restarts, return to the DTR Administration web interface. The browser displays another certificate related browser warning. Changing the Domain Name property of your Trusted Registry server generates a new self-signed certificate. Again, this is expected behavior and you can bypass the warning.
+    After the Trusted Registry server restarts, return to the Trusted Registry Administration web interface. The browser displays another certificate related browser warning. Changing the Domain Name property of your Trusted Registry server generates a new self-signed certificate. Again, this is expected behavior and you can bypass the warning.
 
-    Log back in to the DTR Administration web interface.
+    Log back in to the Trusted Registry Administration web interface.
 
 2. License your copy of Docker Trusted Registry from the "License" tab of the "Settings" page.
 
@@ -173,13 +173,13 @@ When you first login to the DTR Administration web interface you are prompted to
 
     From the Docker Trusted Registry Administration web interface, select "Settings" and then "License". Under the "Apply a new license" heading select "Choose File". Select your downloaded license file and click "Save and restart".
 
-> **Note:** Restarting your Trusted Registry from the DTR Administration web interface, or as part of the above procedures, does not restart the EC2 instance. Therefore, the Public IP and Public DNS of the EC2 instance does not change.
+> **Note:** Restarting your Trusted Registry from the Trusted Registry Administration web interface, or as part of the above procedures, does not restart the EC2 instance. Therefore, the Public IP and Public DNS of the EC2 instance does not change.
 
-Log into the DTR Administration web interface and change the default password for the "admin" account from the "Auth" tab on the "Settings" page.
+Log into the Trusted Registry Administration web interface and change the default password for the "admin" account. Navigate to Settings > Auth.
 
 Your Docker Trusted Registry server is now ready for use.
 
 ## Next Steps
 
-For more information on using DTR, go to the
+For more information on using Trusted Registry, go to the
 [User's Guide](https://docs.docker.com/docker-trusted-registry/userguide/).

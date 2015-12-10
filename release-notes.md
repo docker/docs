@@ -18,6 +18,42 @@ These notes refer to the current and immediately prior releases of Docker
 Trusted Registry and the commercially supported Docker Engine. For notes on
 older versions of these, see the [prior release notes archive](prior-release-notes.md).
 
+# Docker Trusted Registry 1.4.2
+(18 December 2015)
+
+Release notes for the Trusted Registry contain the following sections:
+
+* New feature
+* Fixed or updated with this release
+
+### New feature
+This release introduces using Openstack Swift as a storage backend. Refer to the [configuration documentation](configuration.md) for details on the Swift driver.  
+
+### Fixed or updated with this release
+This release addresses the following issues in Docker Trusted Registry 1.4.1.
+
+* Updated the registry from version 2.2.0 to 2.2.1 to ensure that the backend storage Swift driver works correctly.
+
+* Added a link to the release notes from the Trusted Registry UI Updates page.
+
+* The Trusted Registry UI now displays a warning message if an administrator had not yet enabled authentication.
+
+* Corrected an issue where if Trusted Registry administrators were also in a
+read-only global team, then they would not see the Trusted Registry admin user
+interface.
+
+* Corrected an issue where uploading an image that took longer than five minutes resulted in an authentication failure.
+
+* Fixed several issues that caused the Trusted Registry log files to record excessive unnecessary information.
+
+* Fixed inconsistencies in the garbage collection cron job scheduling between the API and the Trusted Registry UI. This includes:
+
+    * Fixed an issue that if you ran the garbage collection process, the timestamp would not correctly display your last run.
+
+    * Improved the garbage collection cron format. Now a Trusted Registry admin can schedule cron jobs using additional fields such as `@yearly`, `@annually`, `@monthly`, `@weekly`, `@daily`, `@midnight`, and `@hourly`.
+
+    * Fixed an issue where if a Trusted Registry admin did not schedule a garbage collection process, then the Trusted Registry server would log an error.
+
 # Docker Trusted Registry 1.4.1
 (24 November 2015)
 
@@ -150,21 +186,6 @@ the following steps:
 
         `sudo docker push my.dtr.host/devops/nginx`
 
-
-### Docker Trusted Registry 1.3.3
-(18 September 2015) (amended: 2 November 2015)
-
-This release corrects the following issues in Docker Trusted Registry 1.3.2
-
-* Fixed an issue related to LDAP integration for users of Oracle Virtual Directory.
-
-* Corrected an issue where Docker Trusted Registry would not accept a given certificate if the configured domain was only in the Subject Alternative Names
-(SANs) field and not in the Common Name (CN) field of the certificate.
-
-* Docker, Inc. discovered an issue in which the tokens used in authorization caused a break in certain deployments that utilized a load balancer in front of
-multiple Trusted Registry instances to achieve high availability. We regret any
-inconvenience this may have caused you and is working on a future fix.
-
 ## Commercially Supported Docker Engine
 
 Commercially Supported (CS) Docker Engine is a packaged release that identifies
@@ -244,19 +265,18 @@ mailing list, or find us in #docker-security.
 (21 May 2015)
 
 For customers running Docker Engine on [supported versions of RedHat Enterprise
-Linux](https://www.docker.com/enterprise/support/) with [SELinux
-enabled](
-https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/SELinux_Users_and_Administrators_Guide/sect-Security-Enhanced_Linux-Working_with_SELinux-Enabling_and_Disabling_SELinux.html
-), the `docker build` and `docker run`
+Linux](https://www.docker.com/enterprise/support/) with SELinux
+enabled, the `docker build` and `docker run`
 commands will not have DNS host name resolution and bind-mounted volumes may
 not be accessible.
 As a result, customers with SELinux will be unable to use hostname-based network
 access in either `docker build` or `docker run`, nor will they be able to
 `docker run` containers
 that use `--volume` or `-v` bind-mounts (with an incorrect SELinux label) in
-their environment. By installing Docker Engine 1.6.2-cs5, customers can use Docker as intended on RHEL with SELinux enabled.
+their environment. By installing Docker Engine 1.6.2-cs5, customers can use
+Docker as intended on RHEL with SELinux enabled.
 
-For example, you see will failures like:
+For example, you see will failures such as:
 
 ```
 [root@dtr ~]# docker -v
