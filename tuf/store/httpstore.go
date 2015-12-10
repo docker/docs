@@ -46,7 +46,7 @@ func (err ErrMaliciousServer) Error() string {
 }
 
 // ErrInvalidOperation indicates that the server returned a 400 response and
-// propogate any body we received.
+// propagate any body we received.
 type ErrInvalidOperation struct {
 	msg string
 }
