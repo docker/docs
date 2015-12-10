@@ -27,7 +27,7 @@ An example (full) server configuration file.
 	"storage": {
 		"backend": "mysql",
 		"db_url": "user:pass@tcp(notarymysql:3306)/databasename?parseTime=true",
-		"default_alias": "password1"
+		"default_alias": "passwordalias1"
 	},
 	"reporting": {
 		"bugsnag": {
@@ -129,7 +129,7 @@ Example:
 "storage": {
 	"backend": "mysql",
 	"db_url": "user:pass@tcp(notarymysql:3306)/databasename?parseTime=true",
-	"default_alias": "password1"
+	"default_alias": "passwordalias1"
 }
 ```
 
@@ -160,17 +160,58 @@ Example:
 			password used to encrypt the private keys in the DB.  All new
 			private keys will be encrypted using this password, which
 			must also be provided as the environment variable
-			<code>NOTARY_SIGNER_&lt;default_alias_value&gt;</code>.</td>
+			<code>NOTARY_SIGNER_&lt;DEFAULT_ALIAS_VALUE&gt;</code>.</td>
 	</tr>
 </table>
 
-**Required environment variable:**
-<code>NOTARY_SIGNER_&lt;default_alias_value&gt;</code>
+#### Environment variables (required if using MySQL)
 
-**Optional environment variables:**
-<code>NOTARY_SIGNER_&lt;old_alias_value&gt;</code> for as many old alias values
-as needed.  This will ensure that older private keys, encrypted with older
-passwords, can be decrypted.
+Notary Signer
+[stores the private keys in encrypted form](notary-signer.md#signer-storage).
+The alias of the passphrase used to encrypt the keys is also stored.  In order
+to encrypt the keys for storage and decrypt the keys for signing, the
+passphrase must be passed in as an environment variable.
+
+For example, the configuration above specifies the default password alias to be
+`passwordalias1`.
+
+If this configuration is used, then you must:
+
+`export NOTARY_SIGNER_PASSWORDALIAS1=mypassword`
+
+so that that Notary Signer knows to encrypt all keys with the passphrase
+"mypassword", and to decrypt any private key stored with password alias
+"passwordalias1" with the passphrase "mypassword".
+
+Older passwords may also be provided as environment variables.  For instance,
+let's say that you wanted to change the password that is used to create new
+keys (rotating the passphrase and re-encrypting all the private keys is not
+supported yet).
+
+You could change the config to look like:
+
+```json
+"storage": {
+	"backend": "mysql",
+	"db_url": "user:pass@tcp(notarymysql:3306)/databasename?parseTime=true",
+	"default_alias": "passwordalias2"
+}
+```
+
+Then you can set:
+
+```
+export NOTARY_SIGNER_PASSWORDALIAS1=mypassword
+export NOTARY_SIGNER_PASSWORDALIAS2=mynewfancypassword
+```
+
+That way, all new keys will be encrypted and decrypted using the passphrase
+"mynewfancypassword", but old keys that were encrypted using the passphrase
+"mypassword" can still be decrypted.
+
+The environment variables for the older passwords are optional, but Notary
+Signer will not be able to decrypt older keys if they are not provided, and
+attempts to sign data using those keys will fail.
 
 ## `logging` section (optional)
 

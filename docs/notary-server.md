@@ -138,8 +138,9 @@ You just need to mount your configuration directory, and then pass the path to
 that configuration file as an argument to the `docker run` command:
 
 ```
-$ docker run -p "4443:4443" -v /path/to/config/dir/on/host:/path/in/container \
-	notary-server -config=/path/in/container/config.json
+$ docker run -p "4443:4443" \
+	-v /path/to/config/dir/on/host:/etc/docker/notary-server/ \
+	notary-server -config=/etc/docker/notary-server/config.json
 ```
 
 You can also pass the `-debug` flag to the container in addition to the
