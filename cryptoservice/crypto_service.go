@@ -82,10 +82,15 @@ func (cs *CryptoService) GetPrivateKey(keyID string) (k data.PrivateKey, role st
 	for _, ks := range cs.keyStores {
 		for _, keyPath := range keyPaths {
 			k, role, err = ks.GetKey(keyPath)
-			if err != nil {
+			if err == nil {
+				return
+			}
+			switch err.(type) {
+			case trustmanager.ErrPasswordInvalid, trustmanager.ErrAttemptsExceeded:
+				return
+			default:
 				continue
 			}
-			return
 		}
 	}
 	return // returns whatever the final values were
