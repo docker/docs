@@ -471,12 +471,8 @@ func CertsToKeys(certs []*x509.Certificate) map[string]data.PublicKey {
 	return keys
 }
 
-// NewCertificate returns an X509 Certificate following a template, given a GUN.
-func NewCertificate(gun string) (*x509.Certificate, error) {
-	notBefore := time.Now()
-	// Certificates will expire in 10 years
-	notAfter := notBefore.Add(time.Hour * 24 * 365 * 10)
-
+// NewCertificate returns an X509 Certificate following a template, given a GUN and validity interval.
+func NewCertificate(gun string, startTime, endTime time.Time) (*x509.Certificate, error) {
 	serialNumberLimit := new(big.Int).Lsh(big.NewInt(1), 128)
 
 	serialNumber, err := rand.Int(rand.Reader, serialNumberLimit)
@@ -489,8 +485,8 @@ func NewCertificate(gun string) (*x509.Certificate, error) {
 		Subject: pkix.Name{
 			CommonName: gun,
 		},
-		NotBefore: notBefore,
-		NotAfter:  notAfter,
+		NotBefore: startTime,
+		NotAfter:  endTime,
 
 		KeyUsage:              x509.KeyUsageKeyEncipherment | x509.KeyUsageDigitalSignature,
 		ExtKeyUsage:           []x509.ExtKeyUsage{x509.ExtKeyUsageCodeSigning},

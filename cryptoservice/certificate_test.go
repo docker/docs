@@ -4,6 +4,7 @@ import (
 	"crypto/rand"
 	"crypto/x509"
 	"testing"
+	"time"
 
 	"github.com/docker/notary/trustmanager"
 	"github.com/stretchr/testify/assert"
@@ -20,7 +21,8 @@ func TestGenerateCertificate(t *testing.T) {
 
 	// Check GenerateCertificate method
 	gun := "docker.com/notary"
-	cert, err := GenerateCertificate(privKey, gun)
+	startTime := time.Now()
+	cert, err := GenerateCertificate(privKey, gun, startTime, startTime.AddDate(10, 0, 0))
 	assert.NoError(t, err, "could not generate certificate")
 
 	// Check public key

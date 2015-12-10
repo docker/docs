@@ -14,6 +14,7 @@ import (
 	"io"
 	"math/big"
 	"os"
+	"time"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary/passphrase"
@@ -217,7 +218,9 @@ func addECDSAKey(
 
 	ecdsaPrivKeyD := ensurePrivateKeySize(ecdsaPrivKey.D.Bytes())
 
-	template, err := trustmanager.NewCertificate(role)
+	// Hard-coded policy: the generated certificate expires in 10 years.
+	startTime := time.Now()
+	template, err := trustmanager.NewCertificate(role, startTime, startTime.AddDate(10, 0, 0))
 	if err != nil {
 		return fmt.Errorf("failed to create the certificate template: %v", err)
 	}
