@@ -920,7 +920,7 @@ func testPublishNoOneHasSnapshotKey(t *testing.T, rootType string) {
 	addTarget(t, repo, "v1", "../fixtures/intermediate-ca.crt")
 	err = repo.Publish()
 	assert.Error(t, err)
-	assert.IsType(t, signed.ErrNoKeys{}, err)
+	assert.IsType(t, store.ErrInvalidOperation{}, err)
 }
 
 // If the snapshot metadata is corrupt, whether the client or server has the
