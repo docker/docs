@@ -1,3 +1,10 @@
++++
+title = "Set up container networking with UCP"
+description = "Docker Universal Control Plane"
+[menu.main]
+parent="mn_ucp"
++++
+
 # Set up container networking with UCP
 
 Beginning in release 1.9, the Docker Engine updated and expanded its networking

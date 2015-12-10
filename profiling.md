@@ -1,3 +1,10 @@
++++
+title = "Profiling UCP"
+description = "Docker Universal Control Plane"
+[menu.main]
+parent="mn_ucp"
++++
+
 # Profiling UCP
 
 If you run the UCP server with the debug flag set, not only will you get more logging output, but we enable
@@ -46,4 +53,3 @@ go tool pprof -nodefraction=0.00000001 ${ORCA}/debug/pprof/block
 
 peek swarm
 ```
-
