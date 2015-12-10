@@ -23,29 +23,27 @@ func TestNewSerializableErrorValidationError(t *testing.T) {
 	assert.Equal(t, vError, s.Error)
 }
 
-// We can unmarshal a marshalled SerializableError
+// We can unmarshal a marshalled SerializableError for all validation errors
 func TestUnmarshalSerialiableErrorSuccessfully(t *testing.T) {
-	origS, err := NewSerializableError(ErrBadHierarchy{Missing: "root", Msg: "badness"})
-	assert.NoError(t, err)
-
-	b, err := json.Marshal(origS)
-	assert.NoError(t, err)
-
-	jsonBytes := [][]byte{
-		b,
-		[]byte(`{"Name":"ErrBadHierarchy","Error":{"Missing":"root","Msg":"badness"}}`),
+	validationErrors := []error{
+		ErrValidation{"bad validation"},
+		ErrBadHierarchy{Missing: "root", Msg: "badness"},
+		ErrBadRoot{"bad root"},
+		ErrBadTargets{"bad targets"},
+		ErrBadSnapshot{"bad snapshot"},
 	}
 
-	for _, toUnmarshal := range jsonBytes {
-		var newS SerializableError
-		err = json.Unmarshal(toUnmarshal, &newS)
+	for _, validError := range validationErrors {
+		origS, err := NewSerializableError(validError)
+		assert.NoError(t, err)
+		jsonBytes, err := json.Marshal(origS)
 		assert.NoError(t, err)
 
-		assert.Equal(t, "ErrBadHierarchy", newS.Name)
-		e, ok := newS.Error.(ErrBadHierarchy)
-		assert.True(t, ok)
-		assert.Equal(t, "root", e.Missing)
-		assert.Equal(t, "badness", e.Msg)
+		var newS SerializableError
+		err = json.Unmarshal(jsonBytes, &newS)
+		assert.NoError(t, err)
+
+		assert.Equal(t, validError, newS.Error)
 	}
 }
 
