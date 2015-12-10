@@ -313,9 +313,9 @@ func TestGetHandlerNoStorage(t *testing.T) {
 }
 
 // a validation failure, such as a snapshots file being missing, will be
-// propogated as a detail in the error (which gets serialized as the body of the
+// propagated as a detail in the error (which gets serialized as the body of the
 // response)
-func TestAtomicUpdateValidationFailurePropogated(t *testing.T) {
+func TestAtomicUpdateValidationFailurePropagated(t *testing.T) {
 	metaStore := storage.NewMemStorage()
 	gun := "testGUN"
 	vars := map[string]string{"imageName": gun}
@@ -354,9 +354,9 @@ func (s failStore) GetCurrent(_, _ string) ([]byte, error) {
 	return nil, fmt.Errorf("oh no! storage has failed")
 }
 
-// a non-validation failure, such as the storage failing, will not be propogated
+// a non-validation failure, such as the storage failing, will not be propagated
 // as a detail in the error (which gets serialized as the body of the response)
-func TestAtomicUpdateNonValidationFailureNotPropogated(t *testing.T) {
+func TestAtomicUpdateNonValidationFailureNotPropagated(t *testing.T) {
 	metaStore := storage.NewMemStorage()
 	gun := "testGUN"
 	vars := map[string]string{"imageName": gun}

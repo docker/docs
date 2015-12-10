@@ -297,7 +297,7 @@ func TestGetTrustServiceTLSFailure(t *testing.T) {
 	assert.Equal(t, 0, registerCalled)
 }
 
-// Just to ensure that errors are propogated
+// Just to ensure that errors are propagated
 func TestGetStoreInvalid(t *testing.T) {
 	config := `{"storage": {"backend": "asdf", "db_url": "/tmp/1234"}}`
 
