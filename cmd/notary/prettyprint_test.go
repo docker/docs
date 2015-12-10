@@ -2,8 +2,6 @@ package main
 
 import (
 	"bytes"
-	"crypto/ecdsa"
-	"crypto/elliptic"
 	"crypto/rand"
 	"crypto/x509"
 	"encoding/hex"
@@ -16,6 +14,7 @@ import (
 	"time"
 
 	"github.com/docker/notary/client"
+	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
@@ -201,19 +200,12 @@ func TestPrettyPrintSortedTargets(t *testing.T) {
 // --- tests for pretty printing certs ---
 
 func generateCertificate(t *testing.T, gun string, expireInHours int64) *x509.Certificate {
-	template, err := trustmanager.NewCertificate(gun)
-	assert.NoError(t, err)
-	template.NotAfter = template.NotBefore.Add(
-		time.Hour * time.Duration(expireInHours))
-
-	ecdsaPrivKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
+	ecdsaPrivKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
 	assert.NoError(t, err)
 
-	certBytes, err := x509.CreateCertificate(rand.Reader, template, template,
-		ecdsaPrivKey.Public(), ecdsaPrivKey)
-	assert.NoError(t, err)
-
-	cert, err := x509.ParseCertificate(certBytes)
+	startTime := time.Now()
+	endTime := startTime.Add(time.Hour * time.Duration(expireInHours))
+	cert, err := cryptoservice.GenerateCertificate(ecdsaPrivKey, gun, startTime, endTime)
 	assert.NoError(t, err)
 	return cert
 }

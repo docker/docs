@@ -242,7 +242,7 @@ func filestoreWithTwoCerts(t *testing.T, gun, keyAlg string) (
 		key, _, err := fileKeyStore.GetKey(pubKey.ID())
 		assert.NoError(t, err)
 
-		cert, err := cryptoservice.GenerateCertificate(key, gun)
+		cert, err := cryptoservice.GenerateTestingCertificate(key.CryptoSigner(), gun)
 		assert.NoError(t, err)
 
 		certificates[i] = cert

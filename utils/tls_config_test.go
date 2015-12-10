@@ -7,11 +7,11 @@ import (
 	"crypto/rand"
 	"crypto/rsa"
 	"crypto/tls"
-	"crypto/x509"
 	"io/ioutil"
 	"os"
 	"testing"
 
+	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/trustmanager"
 	"github.com/stretchr/testify/assert"
 )
@@ -33,15 +33,9 @@ func generateMultiCert(t *testing.T) string {
 	assert.NoError(t, err)
 	ecKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
 	assert.NoError(t, err)
-	template, err := trustmanager.NewCertificate("gun")
-	assert.NoError(t, err)
 
 	for _, key := range []crypto.Signer{rsaKey, ecKey} {
-		derBytes, err := x509.CreateCertificate(
-			rand.Reader, template, template, key.Public(), key)
-		assert.NoError(t, err)
-
-		cert, err := x509.ParseCertificate(derBytes)
+		cert, err := cryptoservice.GenerateTestingCertificate(key, "gun")
 		assert.NoError(t, err)
 
 		pemBytes := trustmanager.CertToPEM(cert)
