@@ -1,3 +1,10 @@
++++
+title = "Set up high availability"
+description = "Docker Universal Control Plane"
+[menu.main]
+parent="mn_ucp"
++++
+
 # Set up high availability
 
 The UCP high availability (HA) feature allows you to replicate your UCP

@@ -1,3 +1,10 @@
++++
+title = "Docker UCP Quickstart Guide"
+description = "Docker Universal Control Plane"
+[menu.main]
+parent="mn_ucp"
++++
+
 # Docker UCP Quickstart Guide
 
 These instructions explain how to install UCP. A UCP installation consists of an UCP controller and one or more nodes. The same machine can serve as both the controller and the node. These instructions show you how to install both a host and a node. It contains the following sections:
