@@ -1,3 +1,10 @@
++++
+title = "Manually setting up a CA"
+description = "Docker Universal Control Plane"
+[menu.main]
+parent="mn_ucp"
++++
+
 # Manually setting up a CA
 
 A few features of UCP require an external CA (cfssl or equivalent) to sign
