@@ -379,7 +379,7 @@ Set the "Account name", "Account key", "Container", and "Realm" on the [Azure st
 
 ### Openstack Swift settings
 
-View the [openstack Swift settings](/registry/configuration/#openstack-swift) documentation so that you can set up your storage settings:
+View the [openstack Swift settings](/registry/configuration.md#openstack-swift) documentation so that you can set up your storage settings:
 authurl, username, password, container, tenant, tenantid, domain, domainid, insecureskipverify, region, chunksize, and prefix.
 
 ### Yaml configuration file
