@@ -421,13 +421,11 @@ func (r *NotaryRepository) Publish() error {
 	// The repo might have snapshot data, because it was requested from
 	// the server by listing, but not have the snapshot key, so signing will
 	// fail.
-	clientCantSignSnapshot := true
 	if r.tufRepo.Snapshot != nil {
 		snapshotJSON, err := serializeCanonicalRole(
 			r.tufRepo, data.CanonicalSnapshotRole)
 		if err == nil { // we have the key - snapshot signed, let's update it
 			update[data.CanonicalSnapshotRole] = snapshotJSON
-			clientCantSignSnapshot = false
 		} else if _, ok := err.(signed.ErrNoKeys); ok {
 			logrus.Debugf("Client does not have the key to sign snapshot. " +
 				"Assuming that server should sign the snapshot.")
@@ -443,14 +441,6 @@ func (r *NotaryRepository) Publish() error {
 
 	err = remote.SetMultiMeta(update)
 	if err != nil {
-		// TODO: this isn't exactly right, since there could be lots of
-		// reasons a request 400'ed.  Need better error translation from HTTP
-		// status codes maybe back to the server errors?
-		if _, ok := err.(store.ErrInvalidOperation); ok && clientCantSignSnapshot {
-			return signed.ErrNoKeys{
-				KeyIDs: r.tufRepo.Root.Signed.Roles[data.CanonicalSnapshotRole].KeyIDs,
-			}
-		}
 		return err
 	}
 	err = cl.Clear("")
