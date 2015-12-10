@@ -3,12 +3,15 @@ package cryptoservice
 import (
 	"crypto/rand"
 	"fmt"
+	"io/ioutil"
+	"os"
 	"path/filepath"
 	"runtime"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 
+	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
@@ -23,9 +26,13 @@ var algoToSigType = map[string]data.SigAlgorithm{
 var passphraseRetriever = func(string, string, bool, int) (string, bool, error) { return "", false, nil }
 
 type CryptoServiceTester struct {
-	cryptoServiceFactory func() *CryptoService
-	role                 string
-	keyAlgo              string
+	role    string
+	keyAlgo string
+	gun     string
+}
+
+func (c CryptoServiceTester) cryptoServiceFactory() *CryptoService {
+	return NewCryptoService(c.gun, trustmanager.NewKeyMemoryStore(passphraseRetriever))
 }
 
 // asserts that created key exists
@@ -88,7 +95,10 @@ func (c CryptoServiceTester) TestGetNonexistentKey(t *testing.T) {
 		c.errorMsg("non-nil result for bogus keyid"))
 
 	_, _, err := cryptoService.GetPrivateKey("boguskeyid")
-	assert.NotNil(t, err)
+	assert.Error(t, err)
+	// The underlying error has been correctly propagated.
+	_, ok := err.(*trustmanager.ErrKeyNotFound)
+	assert.True(t, ok)
 }
 
 // asserts that signing with a created key creates a valid signature
@@ -145,6 +155,61 @@ func (c CryptoServiceTester) TestGetPrivateKeyMultipleKeystores(t *testing.T) {
 	assert.NoError(t, err, c.errorMsg("failed to get private key"))
 	assert.Equal(t, c.role, role)
 	assert.Equal(t, privKey.ID(), foundKey.ID())
+}
+
+func giveUpPassphraseRetriever(_, _ string, _ bool, _ int) (string, bool, error) {
+	return "", true, nil
+}
+
+// Test that ErrPasswordInvalid is correctly propagated
+func (c CryptoServiceTester) TestGetPrivateKeyPasswordInvalid(t *testing.T) {
+	tempBaseDir, err := ioutil.TempDir("", "cs-test-")
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+	defer os.RemoveAll(tempBaseDir)
+
+	// Do not use c.cryptoServiceFactory(), we need a KeyFileStore.
+	retriever := passphrase.ConstantRetriever("password")
+	store, err := trustmanager.NewKeyFileStore(tempBaseDir, retriever)
+	assert.NoError(t, err)
+	cryptoService := NewCryptoService(c.gun, store)
+	pubKey, err := cryptoService.Create(c.role, c.keyAlgo)
+	assert.NoError(t, err, "error generating key: %s", err)
+
+	// cryptoService's FileKeyStore caches the unlocked private key, so to test
+	// private key unlocking we need a new instance.
+	store, err = trustmanager.NewKeyFileStore(tempBaseDir, giveUpPassphraseRetriever)
+	assert.NoError(t, err)
+	cryptoService = NewCryptoService(c.gun, store)
+
+	_, _, err = cryptoService.GetPrivateKey(pubKey.ID())
+	assert.EqualError(t, err, trustmanager.ErrPasswordInvalid{}.Error())
+}
+
+// Test that ErrAtttemptsExceeded is correctly propagated
+func (c CryptoServiceTester) TestGetPrivateKeyAttemptsExceeded(t *testing.T) {
+	tempBaseDir, err := ioutil.TempDir("", "cs-test-")
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+	defer os.RemoveAll(tempBaseDir)
+
+	// Do not use c.cryptoServiceFactory(), we need a KeyFileStore.
+	retriever := passphrase.ConstantRetriever("password")
+	store, err := trustmanager.NewKeyFileStore(tempBaseDir, retriever)
+	assert.NoError(t, err)
+	cryptoService := NewCryptoService(c.gun, store)
+	pubKey, err := cryptoService.Create(c.role, c.keyAlgo)
+	assert.NoError(t, err, "error generating key: %s", err)
+
+	// trustmanager.KeyFileStore and trustmanager.KeyMemoryStore both cache the unlocked
+	// private key, so to test private key unlocking we need a new instance using the
+	// same underlying storage; this also makes trustmanager.KeyMemoryStore (and
+	// c.cryptoServiceFactory()) unsuitable.
+	retriever = passphrase.ConstantRetriever("incorrect password")
+	store, err = trustmanager.NewKeyFileStore(tempBaseDir, retriever)
+	assert.NoError(t, err)
+	cryptoService = NewCryptoService(c.gun, store)
+
+	_, _, err = cryptoService.GetPrivateKey(pubKey.ID())
+	assert.EqualError(t, err, trustmanager.ErrAttemptsExceeded{}.Error())
 }
 
 // asserts that removing key that exists succeeds
@@ -251,10 +316,6 @@ func (c CryptoServiceTester) errorMsg(message string, args ...interface{}) strin
 }
 
 func testCryptoService(t *testing.T, gun string) {
-	getTestingCryptoService := func() *CryptoService {
-		return NewCryptoService(
-			gun, trustmanager.NewKeyMemoryStore(passphraseRetriever))
-	}
 	roles := []string{
 		data.CanonicalRootRole,
 		data.CanonicalTargetsRole,
@@ -265,9 +326,9 @@ func testCryptoService(t *testing.T, gun string) {
 	for _, role := range roles {
 		for algo := range algoToSigType {
 			cst := CryptoServiceTester{
-				cryptoServiceFactory: getTestingCryptoService,
-				role:                 role,
-				keyAlgo:              algo,
+				role:    role,
+				keyAlgo: algo,
+				gun:     gun,
 			}
 			cst.TestCreateAndGetKey(t)
 			cst.TestCreateAndGetWhenMultipleKeystores(t)
@@ -278,6 +339,8 @@ func testCryptoService(t *testing.T, gun string) {
 			cst.TestRemoveCreatedKey(t)
 			cst.TestRemoveFromMultipleKeystores(t)
 			cst.TestListFromMultipleKeystores(t)
+			cst.TestGetPrivateKeyPasswordInvalid(t)
+			cst.TestGetPrivateKeyAttemptsExceeded(t)
 		}
 	}
 }

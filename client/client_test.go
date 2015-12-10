@@ -18,6 +18,7 @@ import (
 	"github.com/docker/notary/certs"
 	"github.com/docker/notary/client/changelist"
 	"github.com/docker/notary/cryptoservice"
+	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/server"
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/trustmanager"
@@ -236,6 +237,77 @@ func testInitRepo(t *testing.T, rootType string) {
 	assertRepoHasExpectedKeys(t, repo, rootKeyID)
 	assertRepoHasExpectedCerts(t, repo)
 	assertRepoHasExpectedMetadata(t, repo)
+}
+
+// TestInitRepoAttemptsExceeded tests error handling when passphrase.Retriever
+// (or rather the user) insists on an incorrect password.
+func TestInitRepoAttemptsExceeded(t *testing.T) {
+	testInitRepoAttemptsExceeded(t, data.ECDSAKey)
+	if !testing.Short() {
+		testInitRepoAttemptsExceeded(t, data.RSAKey)
+	}
+}
+
+func testInitRepoAttemptsExceeded(t *testing.T, rootType string) {
+	gun := "docker.com/notary"
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+	defer os.RemoveAll(tempBaseDir)
+
+	ts, _, _ := simpleTestServer(t)
+	defer ts.Close()
+
+	retriever := passphrase.ConstantRetriever("password")
+	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport, retriever)
+	assert.NoError(t, err, "error creating repo: %s", err)
+	rootPubKey, err := repo.CryptoService.Create("root", rootType)
+	assert.NoError(t, err, "error generating root key: %s", err)
+
+	retriever = passphrase.ConstantRetriever("incorrect password")
+	// repo.CryptoService’s FileKeyStore caches the unlocked private key, so to test
+	// private key unlocking we need a new repo instance.
+	repo, err = NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport, retriever)
+	assert.NoError(t, err, "error creating repo: %s", err)
+	err = repo.Initialize(rootPubKey.ID())
+	assert.EqualError(t, err, trustmanager.ErrAttemptsExceeded{}.Error())
+}
+
+// TestInitRepoPasswordInvalid tests error handling when passphrase.Retriever
+// (or rather the user) fails to provide a correct password.
+func TestInitRepoPasswordInvalid(t *testing.T) {
+	testInitRepoPasswordInvalid(t, data.ECDSAKey)
+	if !testing.Short() {
+		testInitRepoPasswordInvalid(t, data.RSAKey)
+	}
+}
+
+func giveUpPassphraseRetriever(_, _ string, _ bool, _ int) (string, bool, error) {
+	return "", true, nil
+}
+
+func testInitRepoPasswordInvalid(t *testing.T, rootType string) {
+	gun := "docker.com/notary"
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+	defer os.RemoveAll(tempBaseDir)
+
+	ts, _, _ := simpleTestServer(t)
+	defer ts.Close()
+
+	retriever := passphrase.ConstantRetriever("password")
+	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport, retriever)
+	assert.NoError(t, err, "error creating repo: %s", err)
+	rootPubKey, err := repo.CryptoService.Create("root", rootType)
+	assert.NoError(t, err, "error generating root key: %s", err)
+
+	// repo.CryptoService’s FileKeyStore caches the unlocked private key, so to test
+	// private key unlocking we need a new repo instance.
+	repo, err = NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport, giveUpPassphraseRetriever)
+	assert.NoError(t, err, "error creating repo: %s", err)
+	err = repo.Initialize(rootPubKey.ID())
+	assert.EqualError(t, err, trustmanager.ErrPasswordInvalid{}.Error())
 }
 
 // TestAddTarget adds a target to the repo and confirms that the changelist
