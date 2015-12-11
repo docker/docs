@@ -45,6 +45,9 @@ func (f *FilesystemStore) GetMeta(name string, size int64) ([]byte, error) {
 	path := filepath.Join(f.metaDir, fileName)
 	meta, err := ioutil.ReadFile(path)
 	if err != nil {
+		if os.IsNotExist(err) {
+			err = ErrMetaNotFound{Role: name}
+		}
 		return nil, err
 	}
 	return meta, nil
