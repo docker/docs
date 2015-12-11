@@ -205,7 +205,7 @@ func Test400Error(t *testing.T) {
 // If it's a 400, translateStatusToError attempts to parse the body into
 // an error.  If successful (and a recognized error) that error is returned.
 func TestTranslateErrorsParse400Errors(t *testing.T) {
-	origErr := validation.ErrBadRoot{"bad"}
+	origErr := validation.ErrBadRoot{Msg: "bad"}
 
 	serialObj, err := validation.NewSerializableError(origErr)
 	assert.NoError(t, err)
