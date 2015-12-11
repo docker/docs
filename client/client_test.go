@@ -990,7 +990,43 @@ func TestPublishSnapshotLocalKeysCreatedFirst(t *testing.T) {
 	assert.False(t, requestMade)
 }
 
-func TestRotate(t *testing.T) {
+// Rotates the keys.  After the rotation, downloading the latest metadata
+// and assert that the keys have changed
+func assertRotationSuccessful(t *testing.T, repo *NotaryRepository) {
+	// capture targets + snapshot key IDs
+	targetsKeyIDs := repo.tufRepo.Root.Signed.Roles["targets"].KeyIDs
+	snapshotKeyIDs := repo.tufRepo.Root.Signed.Roles["snapshot"].KeyIDs
+	assert.Len(t, targetsKeyIDs, 1)
+	assert.Len(t, snapshotKeyIDs, 1)
+
+	// Do rotation
+	repo.RotateKeys()
+
+	// Publish
+	err := repo.Publish()
+	assert.NoError(t, err)
+
+	// Get root.json. Check targets + snapshot keys have changed
+	// and that they match those found in the changelist.
+	_, err = repo.GetTargetByName("latest") // force a pull
+	assert.NoError(t, err)
+	newTargetsKeyIDs := repo.tufRepo.Root.Signed.Roles["targets"].KeyIDs
+	newSnapshotKeyIDs := repo.tufRepo.Root.Signed.Roles["snapshot"].KeyIDs
+	assert.Len(t, newTargetsKeyIDs, 1)
+	assert.Len(t, newSnapshotKeyIDs, 1)
+	assert.NotEqual(t, targetsKeyIDs[0], newTargetsKeyIDs[0])
+	assert.NotEqual(t, snapshotKeyIDs[0], newSnapshotKeyIDs[0])
+
+	// Confirm changelist dir empty after publishing changes
+	changes := getChanges(t, repo)
+	assert.Len(t, changes, 0, "wrong number of changelist files found")
+}
+
+// Initialize a repo
+// Publish some content (so that the server has a root.json)
+// Rotate keys
+// Download the latest metadata and assert that the keys have changed.
+func TestRotateAfterPublish(t *testing.T) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)
@@ -1012,34 +1048,30 @@ func TestRotate(t *testing.T) {
 	err = repo.Publish()
 	assert.NoError(t, err)
 
-	// Get root.json and capture targets + snapshot key IDs
 	repo.GetTargetByName("latest") // force a pull
-	targetsKeyIDs := repo.tufRepo.Root.Signed.Roles["targets"].KeyIDs
-	snapshotKeyIDs := repo.tufRepo.Root.Signed.Roles["snapshot"].KeyIDs
-	assert.Len(t, targetsKeyIDs, 1)
-	assert.Len(t, snapshotKeyIDs, 1)
+	assertRotationSuccessful(t, repo)
+}
 
-	// Do rotation
-	repo.RotateKeys()
+// Initialize repo to have the server sign snapshots (remote snapshot key)
+// Without downloading a server-signed snapshot file, rotate keys so that
+//    snapshots are locally signed (local snapshot key)
+// Assert that we can publish.
+func TestPublishAfterChangedFromRemoteKeyToLocalKey(t *testing.T) {
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	defer os.RemoveAll(tempBaseDir)
 
-	// Publish
-	err = repo.Publish()
-	assert.NoError(t, err)
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
-	// Get root.json. Check targets + snapshot keys have changed
-	// and that they match those found in the changelist.
-	_, err = repo.GetTargetByName("latest") // force a pull
-	assert.NoError(t, err)
-	newTargetsKeyIDs := repo.tufRepo.Root.Signed.Roles["targets"].KeyIDs
-	newSnapshotKeyIDs := repo.tufRepo.Root.Signed.Roles["snapshot"].KeyIDs
-	assert.Len(t, newTargetsKeyIDs, 1)
-	assert.Len(t, newSnapshotKeyIDs, 1)
-	assert.NotEqual(t, targetsKeyIDs[0], newTargetsKeyIDs[0])
-	assert.NotEqual(t, snapshotKeyIDs[0], newSnapshotKeyIDs[0])
+	gun := "docker.com/notary"
+	ts := fullTestServer(t)
+	defer ts.Close()
 
-	// Confirm changelist dir empty after publishing changes
-	changes := getChanges(t, repo)
-	assert.Len(t, changes, 0, "wrong number of changelist files found")
+	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, true)
+	// Adding a target will allow us to confirm the repository is still valid
+	// after rotating the keys.
+	addTarget(t, repo, "latest", "../fixtures/intermediate-ca.crt")
+	assertRotationSuccessful(t, repo)
 }
 
 // If there is no local cache, notary operations return the remote error code

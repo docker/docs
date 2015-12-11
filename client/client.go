@@ -419,24 +419,30 @@ func (r *NotaryRepository) Publish() error {
 	}
 	updatedFiles[data.CanonicalTargetsRole] = targetsJSON
 
-	// do not update the snapshot role if we do not have the snapshot key or
-	// any snapshot data.  There might not be any snapshot data the repo was
-	// initialized with the snapshot signing role delegated to the server.
-	// The repo might have snapshot data, because it was requested from
-	// the server by listing, but not have the snapshot key, so signing will
-	// fail.
-	if r.tufRepo.Snapshot != nil {
-		snapshotJSON, err := serializeCanonicalRole(
-			r.tufRepo, data.CanonicalSnapshotRole)
-		if err == nil { // we have the key - snapshot signed, let's update it
-			updatedFiles[data.CanonicalSnapshotRole] = snapshotJSON
-		} else if _, ok := err.(signed.ErrNoKeys); ok {
-			logrus.Debugf("Client does not have the key to sign snapshot. " +
-				"Assuming that server should sign the snapshot.")
-		} else {
-			logrus.Debugf("Client was unable to sign the snapshot: %s", err.Error())
+	// if we initialized the repo while designating the server as the snapshot
+	// signer, then there won't be a snapshots file.  However, we might now
+	// have a local key (if there was a rotation), so initialize one.
+	if r.tufRepo.Snapshot == nil {
+		if err := r.tufRepo.InitSnapshot(); err != nil {
 			return err
 		}
+	}
+
+	snapshotJSON, err := serializeCanonicalRole(
+		r.tufRepo, data.CanonicalSnapshotRole)
+
+	if err == nil {
+		// Only update the snapshot if we've sucessfully signed it.
+		updatedFiles[data.CanonicalSnapshotRole] = snapshotJSON
+	} else if _, ok := err.(signed.ErrNoKeys); ok {
+		// If signing fails due to us not having the snapshot key, then
+		// assume the server is going to sign, and do not include any snapshot
+		// data.
+		logrus.Debugf("Client does not have the key to sign snapshot. " +
+			"Assuming that server should sign the snapshot.")
+	} else {
+		logrus.Debugf("Client was unable to sign the snapshot: %s", err.Error())
+		return err
 	}
 
 	remote, err := getRemoteStore(r.baseURL, r.gun, r.roundTrip)
