@@ -273,7 +273,13 @@ func (r *NotaryRepository) AddTarget(target *Target) error {
 		return err
 	}
 
-	c := changelist.NewTufChange(changelist.ActionCreate, changelist.ScopeTargets, "target", target.Name, metaJSON)
+	c := changelist.NewTufChange(
+		changelist.ActionCreate,
+		changelist.ScopeTargets,
+		changelist.TypeTargetsTarget,
+		target.Name,
+		metaJSON,
+	)
 	err = cl.Add(c)
 	if err != nil {
 		return err

@@ -55,6 +55,59 @@ func applyChangelist(repo *tuf.Repo, cl changelist.Changelist) error {
 }
 
 func applyTargetsChange(repo *tuf.Repo, c changelist.Change) error {
+	switch c.Type() {
+	case changelist.TypeTargetsTarget:
+		return changeTargetMeta(repo, c)
+	case changelist.TypeTargetsDelegation:
+		return changeTargetsDelegation(repo, c)
+	default:
+		return fmt.Errorf("only target meta and delegations changes supported")
+	}
+}
+
+func changeTargetsDelegation(repo *tuf.Repo, c changelist.Change) error {
+	switch c.Action() {
+	case changelist.ActionCreate, changelist.ActionUpdate:
+		td := changelist.TufDelegation{}
+		err := json.Unmarshal(c.Content(), &td)
+		if err != nil {
+			return err
+		}
+		r, err := repo.GetDelegation(c.Scope())
+		if err == nil {
+			// role exists, merge
+			if err := r.AddPaths(td.AddPaths); err != nil {
+				return err
+			}
+			if err := r.AddPathHashPrefixes(td.AddPathHashPrefixes); err != nil {
+				return err
+			}
+			r.RemoveKeys(td.RemoveKeys)
+			r.RemovePaths(td.RemovePaths)
+			r.RemovePathHashPrefixes(td.RemovePathHashPrefixes)
+			return repo.UpdateDelegations(r, td.AddKeys, "")
+		} else if _, ok := err.(data.ErrNoSuchRole); ok {
+			// role doesn't exist, create brand new
+			r, err = td.ToNewRole(c.Scope())
+			if err != nil {
+				return err
+			}
+			return repo.UpdateDelegations(r, td.AddKeys, "")
+		} else {
+			// any error other than ErrNoSuchRole indicates
+			// bad data
+			return fmt.Errorf("could not apply delegations change because: \"%v\"", err)
+		}
+	case changelist.ActionDelete:
+		r := data.Role{Name: c.Scope()}
+		return repo.DeleteDelegation(r)
+	default:
+		return fmt.Errorf("unsupported action against delegations: %s", c.Action())
+	}
+
+}
+
+func changeTargetMeta(repo *tuf.Repo, c changelist.Change) error {
 	var err error
 	switch c.Action() {
 	case changelist.ActionCreate:
@@ -72,10 +125,7 @@ func applyTargetsChange(repo *tuf.Repo, c changelist.Change) error {
 	default:
 		logrus.Debug("action not yet supported: ", c.Action())
 	}
-	if err != nil {
-		return err
-	}
-	return nil
+	return err
 }
 
 func applyRootChange(repo *tuf.Repo, c changelist.Change) error {

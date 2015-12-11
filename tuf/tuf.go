@@ -157,6 +157,25 @@ func (tr *Repo) RemoveBaseKeys(role string, keyIDs ...string) error {
 	return nil
 }
 
+// GetDelegation finds the role entry representing the provided
+// role name or ErrInvalidRole
+func (tr *Repo) GetDelegation(role string) (*data.Role, error) {
+	r := data.Role{Name: role}
+	if !r.IsDelegation() {
+		return nil, data.ErrInvalidRole{Role: role, Reason: "not a valid delegated role"}
+	}
+	parent := filepath.Dir(role)
+	p, ok := tr.Targets[parent]
+	if !ok {
+		return nil, data.ErrInvalidRole{Role: role, Reason: "parent role not found"}
+	}
+	foundAt := utils.FindRoleIndex(p.Signed.Delegations.Roles, role)
+	if foundAt < 0 {
+		return nil, data.ErrNoSuchRole{Role: role}
+	}
+	return p.Signed.Delegations.Roles[foundAt], nil
+}
+
 // UpdateDelegations updates the appropriate delegations, either adding
 // a new delegation or updating an existing one. If keys are
 // provided, the IDs will be added to the role (if they do not exist
@@ -165,15 +184,14 @@ func (tr *Repo) RemoveBaseKeys(role string, keyIDs ...string) error {
 // will be added in front of (i.e. higher priority) in the delegation list.
 // An empty before string indicates to add the role to the end of the
 // delegation list.
-// A new, empty, targets file will be created for the new role.
 func (tr *Repo) UpdateDelegations(role *data.Role, keys []data.PublicKey, before string) error {
 	if !role.IsDelegation() || !role.IsValid() {
-		return data.ErrInvalidRole{Role: role.Name}
+		return data.ErrInvalidRole{Role: role.Name, Reason: "not a valid delegated role"}
 	}
 	parent := filepath.Dir(role.Name)
 	p, ok := tr.Targets[parent]
 	if !ok {
-		return data.ErrInvalidRole{Role: role.Name}
+		return data.ErrInvalidRole{Role: role.Name, Reason: "parent role not found"}
 	}
 	for _, k := range keys {
 		if !utils.StrSliceContains(role.KeyIDs, k.ID()) {
@@ -187,14 +205,12 @@ func (tr *Repo) UpdateDelegations(role *data.Role, keys []data.PublicKey, before
 	// will never be able to create a valid targets file
 	// and should be considered invalid.
 	if len(role.KeyIDs) < role.Threshold {
-		return data.ErrInvalidRole{Role: role.Name}
+		return data.ErrInvalidRole{Role: role.Name, Reason: "insufficient keys to meet threshold"}
 	}
 
 	foundAt := utils.FindRoleIndex(p.Signed.Delegations.Roles, role.Name)
 
-	var oldRole *data.Role
 	if foundAt >= 0 {
-		oldRole = p.Signed.Delegations.Roles[foundAt]
 		p.Signed.Delegations.Roles[foundAt] = role
 	} else {
 		p.Signed.Delegations.Roles = append(p.Signed.Delegations.Roles, role)
@@ -207,30 +223,31 @@ func (tr *Repo) UpdateDelegations(role *data.Role, keys []data.PublicKey, before
 
 	tr.keysDB.AddRole(role)
 
-	if oldRole != nil {
-		utils.RemoveUnusedKeys(p, oldRole.KeyIDs)
-	}
+	utils.RemoveUnusedKeys(p)
 
 	return nil
 }
 
 // DeleteDelegation removes a delegated targets role from its parent
 // targets object. It also deletes the delegation from the snapshot.
-func (tr *Repo) DeleteDelegation(role *data.Role) error {
-	if !role.IsDelegation() || !role.IsValid() {
-		return data.ErrInvalidRole{Role: role.Name}
+// DeleteDelegation will only make use of the role Name field.
+func (tr *Repo) DeleteDelegation(role data.Role) error {
+	if !role.IsDelegation() {
+		return data.ErrInvalidRole{Role: role.Name, Reason: "not a valid delegated role"}
 	}
-	parent := filepath.Dir(role.Name)
+	// the role variable must not be used past this assignment for safety
+	name := role.Name
+
+	parent := filepath.Dir(name)
 	p, ok := tr.Targets[parent]
 	if !ok {
-		return data.ErrInvalidRole{Role: role.Name}
+		return data.ErrInvalidRole{Role: name, Reason: "parent role not found"}
 	}
 
-	foundAt := utils.FindRoleIndex(p.Signed.Delegations.Roles, role.Name)
+	foundAt := utils.FindRoleIndex(p.Signed.Delegations.Roles, name)
 
 	if foundAt >= 0 {
 		var roles []*data.Role
-		oldRole := p.Signed.Delegations.Roles[foundAt]
 		// slice out deleted role
 		roles = append(roles, p.Signed.Delegations.Roles[:foundAt]...)
 		if foundAt+1 < len(p.Signed.Delegations.Roles) {
@@ -238,13 +255,13 @@ func (tr *Repo) DeleteDelegation(role *data.Role) error {
 		}
 		p.Signed.Delegations.Roles = roles
 
-		utils.RemoveUnusedKeys(p, oldRole.KeyIDs)
+		utils.RemoveUnusedKeys(p)
 
 		p.Dirty = true
 
 		// delete delegated data from Targets map and Snapshot
-		delete(tr.Targets, role.Name)
-		tr.Snapshot.DeleteMeta(role.Name)
+		delete(tr.Targets, name)
+		tr.Snapshot.DeleteMeta(name)
 	} // if the role wasn't found, it's a good as deleted
 
 	return nil
@@ -275,7 +292,7 @@ func (tr *Repo) InitRoot(consistent bool) error {
 	for _, r := range data.ValidRoles {
 		role := tr.keysDB.GetRole(r)
 		if role == nil {
-			return data.ErrInvalidRole{Role: data.CanonicalRootRole}
+			return data.ErrInvalidRole{Role: data.CanonicalRootRole, Reason: "root role not initialized in key database"}
 		}
 		rootRoles[r] = &role.RootRole
 		for _, kid := range role.KeyIDs {
@@ -454,7 +471,7 @@ func (tr Repo) FindTarget(path string) *data.FileMeta {
 func (tr *Repo) AddTargets(role string, targets data.Files) (data.Files, error) {
 	t, ok := tr.Targets[role]
 	if !ok {
-		return targets, data.ErrInvalidRole{Role: role}
+		return targets, data.ErrInvalidRole{Role: role, Reason: "does not exist"}
 	}
 	invalid := make(data.Files)
 	for path, target := range targets {
@@ -478,7 +495,7 @@ func (tr *Repo) AddTargets(role string, targets data.Files) (data.Files, error) 
 func (tr *Repo) RemoveTargets(role string, targets ...string) error {
 	t, ok := tr.Targets[role]
 	if !ok {
-		return data.ErrInvalidRole{Role: role}
+		return data.ErrInvalidRole{Role: role, Reason: "does not exist"}
 	}
 
 	for _, path := range targets {

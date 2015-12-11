@@ -24,15 +24,28 @@ var ValidRoles = map[string]string{
 	CanonicalTimestampRole: CanonicalTimestampRole,
 }
 
+// ErrNoSuchRole indicates the roles doesn't exist
+type ErrNoSuchRole struct {
+	Role string
+}
+
+func (e ErrNoSuchRole) Error() string {
+	return fmt.Sprintf("role does not exist: %s", e.Role)
+}
+
 // ErrInvalidRole represents an error regarding a role. Typically
 // something like a role for which sone of the public keys were
 // not found in the TUF repo.
 type ErrInvalidRole struct {
-	Role string
+	Role   string
+	Reason string
 }
 
 func (e ErrInvalidRole) Error() string {
-	return fmt.Sprintf("tuf: invalid role %s", e.Role)
+	if e.Reason != "" {
+		return fmt.Sprintf("tuf: invalid role %s. %s", e.Role, e.Reason)
+	}
+	return fmt.Sprintf("tuf: invalid role %s.", e.Role)
 }
 
 // SetValidRoles is a utility function to override some or all of the roles
@@ -175,4 +188,75 @@ func (r Role) CheckPrefixes(hash string) bool {
 func (r Role) IsDelegation() bool {
 	targetsBase := fmt.Sprintf("%s/", ValidRoles[CanonicalTargetsRole])
 	return strings.HasPrefix(r.Name, targetsBase)
+}
+
+// AddKeys merges the ids into the current list of role key ids
+func (r *Role) AddKeys(ids []string) {
+	r.KeyIDs = mergeStrSlices(r.KeyIDs, ids)
+}
+
+// AddPaths merges the paths into the current list of role paths
+func (r *Role) AddPaths(paths []string) error {
+	if len(paths) == 0 {
+		return nil
+	}
+	if len(r.PathHashPrefixes) > 0 {
+		return ErrInvalidRole{Role: r.Name, Reason: "attempted to add paths to role that already has hash prefixes"}
+	}
+	r.Paths = mergeStrSlices(r.Paths, paths)
+	return nil
+}
+
+// AddPathHashPrefixes merges the prefixes into the list of role path hash prefixes
+func (r *Role) AddPathHashPrefixes(prefixes []string) error {
+	if len(prefixes) == 0 {
+		return nil
+	}
+	if len(r.Paths) > 0 {
+		return ErrInvalidRole{Role: r.Name, Reason: "attempted to add hash prefixes to role that already has paths"}
+	}
+	r.PathHashPrefixes = mergeStrSlices(r.PathHashPrefixes, prefixes)
+	return nil
+}
+
+// RemoveKeys removes the ids from the current list of key ids
+func (r *Role) RemoveKeys(ids []string) {
+	r.KeyIDs = subtractStrSlices(r.KeyIDs, ids)
+}
+
+// RemovePaths removes the paths from the current list of role paths
+func (r *Role) RemovePaths(paths []string) {
+	r.Paths = subtractStrSlices(r.Paths, paths)
+}
+
+// RemovePathHashPrefixes removes the prefixes from the current list of path hash prefixes
+func (r *Role) RemovePathHashPrefixes(prefixes []string) {
+	r.PathHashPrefixes = subtractStrSlices(r.PathHashPrefixes, prefixes)
+}
+
+func mergeStrSlices(orig, new []string) []string {
+	have := make(map[string]bool)
+	for _, e := range orig {
+		have[e] = true
+	}
+	for _, e := range new {
+		if !have[e] {
+			orig = append(orig, e)
+		}
+	}
+	return orig
+}
+
+func subtractStrSlices(orig, remove []string) []string {
+	kill := make(map[string]bool)
+	for _, e := range remove {
+		kill[e] = true
+	}
+	var keep []string
+	for _, e := range orig {
+		if !kill[e] {
+			keep = append(keep, e)
+		}
+	}
+	return keep
 }
