@@ -105,3 +105,51 @@ func DoHash(alg string, d []byte) []byte {
 	}
 	return nil
 }
+
+// UnusedDelegationKeys prunes a list of keys, returning those that are no
+// longer in use for a given targets file
+func UnusedDelegationKeys(t data.SignedTargets, ids []string) []string {
+	// we have no delegations, all the IDs are out of use
+	if len(t.Signed.Delegations.Roles) == 0 {
+		return ids
+	}
+
+	// compare ids to all still active key ids in all active roles
+	// with the targets file
+	found := make(map[string]bool)
+	for _, r := range t.Signed.Delegations.Roles {
+		for _, oldID := range ids {
+			if StrSliceContainsI(r.KeyIDs, oldID) {
+				found[oldID] = true
+			}
+		}
+	}
+	discard := make([]string, 0, len(ids)-len(found))
+	for _, id := range ids {
+		if _, ok := found[id]; !ok {
+			discard = append(discard, id)
+		}
+	}
+	return discard
+}
+
+// RemoveUnusedKeys determines which keys in the slice of IDs are no longer
+// used in the given targets file and removes them from the delegated keys
+// map
+func RemoveUnusedKeys(t *data.SignedTargets, ids []string) {
+	unusedIDs := UnusedDelegationKeys(*t, ids)
+	for _, id := range unusedIDs {
+		delete(t.Signed.Delegations.Keys, id)
+	}
+}
+
+// FindRoleIndex returns the index of the role named <name> or -1 if no
+// matching role is found.
+func FindRoleIndex(rs []*data.Role, name string) int {
+	for i, r := range rs {
+		if r.Name == name {
+			return i
+		}
+	}
+	return -1
+}
