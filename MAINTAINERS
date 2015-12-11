@@ -237,6 +237,8 @@ or feedback about project operations.
         People = ["calavera", "cpuguy83", "crosbymichael", "duglin", "erikh", "estesp", "icecrime", "jfrazelle", "lk4d4", "runcom", "tianon", "tibor", "unclejack", "vbatts", "vdemeester", "vieux", "vishh"]
     [Org.docker-bench-security]
         People = ["diogomonica", "konstruktoid"]
+    [Org.docker-py]
+        People = ["aanand", "dnephin", "mnowster", "mpetazzoni", "shin-"]
     [Org.dockercraft]
         People = ["aduermael", "davetucker", "gdevillele"]
     [Org.kitematic]
@@ -260,7 +262,9 @@ or feedback about project operations.
     [Org.spdystream]
         People = ["dmcgowan"]
     [Org.swarm]
-        People = ["abronan", "aluzzardi", "chanwit", "jimmyxian", "mhbauer", "vieux"]
+        People = ["abronan", "aluzzardi", "chanwit", "dongluochen", "jimmyxian", "mhbauer", "vieux"]
+    [Org.toolbox]
+        People = ["jeffdm", "lisean106", "mchiang0610"]
 
 [People]
     [People.aanand]
@@ -335,6 +339,10 @@ or feedback about project operations.
         Name = "Daniel Nephin"
         Email = "dnephin@gmail.com"
         GitHub = "dnephin"
+    [People.dongluochen]
+        Name = "Dongluo Chen"
+        Email = "dong@docker.com"
+        GitHub = "dongluochen"
     [People.duglin]
         Name = "Doug Davis"
         Email = "dug@us.ibm.com"
@@ -399,6 +407,10 @@ or feedback about project operations.
         Name = "Thomas Sjögren"
         Email = "thomas.sjogren@outlook.com"
         GitHub = "konstruktoid"
+    [People.lisean106]
+        Name = "Sean Li"
+        Email = "sean@docker.com"
+        GitHub = "lisean106"
     [People.lk4d4]
         Name = "Alexandr Morozov"
         Email = "lk4d4@docker.com"
@@ -427,6 +439,10 @@ or feedback about project operations.
         Name = "Mary Anthony"
         Email = "mary.anthony@docker.com"
         GitHub = "moxiegirl"
+    [People.mpetazzoni]
+        Name = "Maxime Petazzoni"
+        Email = "maxime.petazzoni@bulix.org"
+        GitHub = "mpetazzoni"
     [People.mrjana]
         Name = "Jana Radhakrishnan"
         Email = "mrjana@docker.com"
@@ -451,6 +467,10 @@ or feedback about project operations.
         Name = "Santhosh Manohar"
         Email = "santhosh@docker.com"
         GitHub = "sanimej"
+    [People.shin-]
+        Name = "Joffrey F"
+        Email = "joffrey@docker.com"
+        GitHub = "shin-"
     [People.shykes]
         Name = "Solomon Hykes"
         Email = "solomon@docker.com"
