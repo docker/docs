@@ -130,8 +130,10 @@ func TestInitRepositoryManagedRolesIncludingRoot(t *testing.T) {
 		t, data.ECDSAKey, tempBaseDir, "docker.com/notary", "http://localhost")
 	err = repo.Initialize(rootPubKeyID, data.CanonicalRootRole)
 	assert.Error(t, err)
-	assert.Contains(t, err.Error(),
-		"Notary does not support the server managing the root key")
+	assert.IsType(t, ErrInvalidRemoteKeyType{}, err)
+	// Just testing the error message here in this one case
+	assert.Equal(t, err.Error(),
+		"notary does not support the server managing the root key")
 }
 
 // Initializing a new repo while specifying that the server should manage some
@@ -146,8 +148,7 @@ func TestInitRepositoryManagedRolesInvalidRole(t *testing.T) {
 		t, data.ECDSAKey, tempBaseDir, "docker.com/notary", "http://localhost")
 	err = repo.Initialize(rootPubKeyID, "randomrole")
 	assert.Error(t, err)
-	assert.Contains(t, err.Error(),
-		"Notary does not support the server managing the randomrole key")
+	assert.IsType(t, ErrInvalidRemoteKeyType{}, err)
 }
 
 // Initializing a new repo while specifying that the server should manage the
@@ -162,8 +163,7 @@ func TestInitRepositoryManagedRolesIncludingTargets(t *testing.T) {
 		t, data.ECDSAKey, tempBaseDir, "docker.com/notary", "http://localhost")
 	err = repo.Initialize(rootPubKeyID, data.CanonicalTargetsRole)
 	assert.Error(t, err)
-	assert.Contains(t, err.Error(),
-		"Notary does not support the server managing the targets key")
+	assert.IsType(t, ErrInvalidRemoteKeyType{}, err)
 }
 
 // Initializing a new repo while specifying that the server should manage the
