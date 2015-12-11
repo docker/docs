@@ -107,7 +107,7 @@ type NotarySigner struct {
 	clientConn checkableConnectionState
 }
 
-// NewNotarySigner is a convinience method that returns NotarySigner
+// NewNotarySigner is a convenience method that returns NotarySigner
 func NewNotarySigner(hostname string, port string, tlsConfig *tls.Config) *NotarySigner {
 	var opts []grpc.DialOption
 	netAddr := net.JoinHostPort(hostname, port)

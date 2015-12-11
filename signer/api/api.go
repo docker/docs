@@ -34,14 +34,12 @@ func getCryptoService(w http.ResponseWriter, algorithm string, cryptoServices si
 		return nil
 	}
 
-	service := cryptoServices[algorithm]
-
-	if service == nil {
-		http.Error(w, "algorithm "+algorithm+" not supported", http.StatusBadRequest)
-		return nil
+	if service, ok := cryptoServices[algorithm]; ok {
+		return service
 	}
 
-	return service
+	http.Error(w, "algorithm "+algorithm+" not supported", http.StatusBadRequest)
+	return nil
 }
 
 // KeyInfo returns a Handler that given a specific Key ID param, returns the public key bits of that key
