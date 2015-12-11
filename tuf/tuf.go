@@ -183,24 +183,69 @@ func (tr *Repo) UpdateDelegations(role *data.Role, keys []data.PublicKey, before
 		tr.keysDB.AddKey(k)
 	}
 
-	i := -1
-	var r *data.Role
-	for i, r = range p.Signed.Delegations.Roles {
-		if r.Name == role.Name {
-			break
-		}
+	// if the role has fewer keys than the threshold, it
+	// will never be able to create a valid targets file
+	// and should be considered invalid.
+	if len(role.KeyIDs) < role.Threshold {
+		return data.ErrInvalidRole{Role: role.Name}
 	}
-	if i >= 0 {
-		p.Signed.Delegations.Roles[i] = role
+
+	foundAt := utils.FindRoleIndex(p.Signed.Delegations.Roles, role.Name)
+
+	var oldRole *data.Role
+	if foundAt >= 0 {
+		oldRole = p.Signed.Delegations.Roles[foundAt]
+		p.Signed.Delegations.Roles[foundAt] = role
 	} else {
 		p.Signed.Delegations.Roles = append(p.Signed.Delegations.Roles, role)
 	}
+	// We've made a change to parent. Set it to dirty
 	p.Dirty = true
 
 	roleTargets := data.NewTargets() // NewTargets always marked Dirty
 	tr.Targets[role.Name] = roleTargets
 
 	tr.keysDB.AddRole(role)
+
+	if oldRole != nil {
+		utils.RemoveUnusedKeys(p, oldRole.KeyIDs)
+	}
+
+	return nil
+}
+
+// DeleteDelegation removes a delegated targets role from its parent
+// targets object. It also deletes the delegation from the snapshot.
+func (tr *Repo) DeleteDelegation(role *data.Role) error {
+	if !role.IsDelegation() || !role.IsValid() {
+		return data.ErrInvalidRole{Role: role.Name}
+	}
+	parent := filepath.Dir(role.Name)
+	p, ok := tr.Targets[parent]
+	if !ok {
+		return data.ErrInvalidRole{Role: role.Name}
+	}
+
+	foundAt := utils.FindRoleIndex(p.Signed.Delegations.Roles, role.Name)
+
+	if foundAt >= 0 {
+		var roles []*data.Role
+		oldRole := p.Signed.Delegations.Roles[foundAt]
+		// slice out deleted role
+		roles = append(roles, p.Signed.Delegations.Roles[:foundAt]...)
+		if foundAt+1 < len(p.Signed.Delegations.Roles) {
+			roles = append(roles, p.Signed.Delegations.Roles[foundAt+1:]...)
+		}
+		p.Signed.Delegations.Roles = roles
+
+		utils.RemoveUnusedKeys(p, oldRole.KeyIDs)
+
+		p.Dirty = true
+
+		// delete delegated data from Targets map and Snapshot
+		delete(tr.Targets, role.Name)
+		tr.Snapshot.DeleteMeta(role.Name)
+	} // if the role wasn't found, it's a good as deleted
 
 	return nil
 }
@@ -532,6 +577,7 @@ func (tr *Repo) SignSnapshot(expires time.Time) (*data.Signed, error) {
 		if err != nil {
 			return nil, err
 		}
+		targets.Dirty = false
 	}
 	tr.Snapshot.Signed.Expires = expires
 	tr.Snapshot.Signed.Version++
