@@ -1,7 +1,18 @@
+// A Store that can fetch and set metadata on a remote server.
+// Some API constraints:
+// - Response bodies for error codes should be unmarshallable as:
+//   {"errors": [{..., "detail": <serialized validation error>}]}
+//   else validation error details, etc. will be unparsable.  The errors
+//   should have a github.com/docker/notary/tuf/validation/SerializableError
+//   in the Details field.
+//   If writing your own server, please have a look at
+//   github.com/docker/distribution/registry/api/errcode
+
 package store
 
 import (
 	"bytes"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
@@ -12,6 +23,7 @@ import (
 	"path"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/docker/notary/tuf/validation"
 )
 
 // ErrServerUnavailable indicates an error from the server. code allows us to
@@ -34,7 +46,7 @@ func (err ErrMaliciousServer) Error() string {
 }
 
 // ErrInvalidOperation indicates that the server returned a 400 response and
-// propogate any body we received.
+// propagate any body we received.
 type ErrInvalidOperation struct {
 	msg string
 }
@@ -83,6 +95,29 @@ func NewHTTPStore(baseURL, metaPrefix, metaExtension, targetsPrefix, keyExtensio
 	}, nil
 }
 
+func tryUnmarshalError(resp *http.Response, defaultError error) error {
+	bodyBytes, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return defaultError
+	}
+	var parsedErrors struct {
+		Errors []struct {
+			Detail validation.SerializableError `json:"detail"`
+		} `json:"errors"`
+	}
+	if err := json.Unmarshal(bodyBytes, &parsedErrors); err != nil {
+		return defaultError
+	}
+	if len(parsedErrors.Errors) != 1 {
+		return defaultError
+	}
+	err = parsedErrors.Errors[0].Detail.Error
+	if err == nil {
+		return defaultError
+	}
+	return err
+}
+
 func translateStatusToError(resp *http.Response) error {
 	switch resp.StatusCode {
 	case http.StatusOK:
@@ -90,7 +125,7 @@ func translateStatusToError(resp *http.Response) error {
 	case http.StatusNotFound:
 		return ErrMetaNotFound{}
 	case http.StatusBadRequest:
-		return ErrInvalidOperation{}
+		return tryUnmarshalError(resp, ErrInvalidOperation{})
 	default:
 		return ErrServerUnavailable{code: resp.StatusCode}
 	}
@@ -147,6 +182,30 @@ func (s HTTPStore) SetMeta(name string, blob []byte) error {
 	return translateStatusToError(resp)
 }
 
+// NewMultiPartMetaRequest builds a request with the provided metadata updates
+// in multipart form
+func NewMultiPartMetaRequest(url string, metas map[string][]byte) (*http.Request, error) {
+	body := &bytes.Buffer{}
+	writer := multipart.NewWriter(body)
+	for role, blob := range metas {
+		part, err := writer.CreateFormFile("files", role)
+		_, err = io.Copy(part, bytes.NewBuffer(blob))
+		if err != nil {
+			return nil, err
+		}
+	}
+	err := writer.Close()
+	if err != nil {
+		return nil, err
+	}
+	req, err := http.NewRequest("POST", url, body)
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Set("Content-Type", writer.FormDataContentType())
+	return req, nil
+}
+
 // SetMultiMeta does a single batch upload of multiple pieces of TUF metadata.
 // This should be preferred for updating a remote server as it enable the server
 // to remain consistent, either accepting or rejecting the complete update.
@@ -155,21 +214,7 @@ func (s HTTPStore) SetMultiMeta(metas map[string][]byte) error {
 	if err != nil {
 		return err
 	}
-	body := &bytes.Buffer{}
-	writer := multipart.NewWriter(body)
-	for role, blob := range metas {
-		part, err := writer.CreateFormFile("files", role)
-		_, err = io.Copy(part, bytes.NewBuffer(blob))
-		if err != nil {
-			return err
-		}
-	}
-	err = writer.Close()
-	if err != nil {
-		return err
-	}
-	req, err := http.NewRequest("POST", url.String(), body)
-	req.Header.Set("Content-Type", writer.FormDataContentType())
+	req, err := NewMultiPartMetaRequest(url.String(), metas)
 	if err != nil {
 		return err
 	}

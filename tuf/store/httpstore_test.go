@@ -1,6 +1,7 @@
 package store
 
 import (
+	"bytes"
 	"encoding/base64"
 	"encoding/hex"
 	"fmt"
@@ -15,6 +16,7 @@ import (
 
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
+	"github.com/docker/notary/tuf/validation"
 	"github.com/jfrazelle/go/canonical/json"
 )
 
@@ -198,4 +200,47 @@ func Test50XErrors(t *testing.T) {
 
 func Test400Error(t *testing.T) {
 	testErrorCode(t, http.StatusBadRequest, ErrInvalidOperation{})
+}
+
+// If it's a 400, translateStatusToError attempts to parse the body into
+// an error.  If successful (and a recognized error) that error is returned.
+func TestTranslateErrorsParse400Errors(t *testing.T) {
+	origErr := validation.ErrBadRoot{"bad"}
+
+	serialObj, err := validation.NewSerializableError(origErr)
+	assert.NoError(t, err)
+	serialization, err := json.Marshal(serialObj)
+	assert.NoError(t, err)
+	errorBody := bytes.NewBuffer([]byte(fmt.Sprintf(
+		`{"errors": [{"otherstuff": "what", "detail": %s}]}`,
+		string(serialization))))
+	errorResp := http.Response{
+		StatusCode: http.StatusBadRequest,
+		Body:       ioutil.NopCloser(errorBody),
+	}
+
+	finalError := translateStatusToError(&errorResp)
+	assert.Equal(t, origErr, finalError)
+}
+
+// If it's a 400, translateStatusToError attempts to parse the body into
+// an error.  If parsing fails, an InvalidOperation is returned instead.
+func TestTranslateErrorsWhenCannotParse400(t *testing.T) {
+	invalids := []string{
+		`{"errors": [{"otherstuff": "what", "detail": {"Name": "Muffin"}}]}`,
+		`{"errors": [{"otherstuff": "what", "detail": {}}]}`,
+		`{"errors": [{"otherstuff": "what"}]}`,
+		`{"errors": []}`,
+		`{}`,
+		"400",
+	}
+	for _, body := range invalids {
+		errorResp := http.Response{
+			StatusCode: http.StatusBadRequest,
+			Body:       ioutil.NopCloser(bytes.NewBuffer([]byte(body))),
+		}
+
+		err := translateStatusToError(&errorResp)
+		assert.IsType(t, ErrInvalidOperation{}, err)
+	}
 }

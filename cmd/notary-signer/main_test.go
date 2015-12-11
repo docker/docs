@@ -37,7 +37,7 @@ func configure(jsonConfig string) *viper.Viper {
 // If the TLS configuration is invalid, an error is returned.  This doesn't test
 // all the cases of the TLS configuration being invalid, since it's just
 // calling configuration.ParseTLSConfig - this test just makes sure the
-// error is propogated.
+// error is propagated.
 func TestGetAddrAndTLSConfigInvalidTLS(t *testing.T) {
 	invalids := []string{
 		`{"server": {"http_addr": ":1234", "grpc_addr": ":2345"}}`,

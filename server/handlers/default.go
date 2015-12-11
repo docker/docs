@@ -12,12 +12,13 @@ import (
 	"golang.org/x/net/context"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/docker/notary/errors"
+	"github.com/docker/notary/server/errors"
 	"github.com/docker/notary/server/snapshot"
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/server/timestamp"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
+	"github.com/docker/notary/tuf/validation"
 )
 
 // MainHandler is the default handler for the server
@@ -87,11 +88,15 @@ func atomicUpdateHandler(ctx context.Context, w http.ResponseWriter, r *http.Req
 	}
 	updates, err = validateUpdate(cryptoService, gun, updates, store)
 	if err != nil {
-		return errors.ErrMalformedUpload.WithDetail(err)
+		serializable, serializableError := validation.NewSerializableError(err)
+		if serializableError != nil {
+			return errors.ErrInvalidUpdate.WithDetail(nil)
+		}
+		return errors.ErrInvalidUpdate.WithDetail(serializable)
 	}
 	err = store.UpdateMany(gun, updates)
 	if err != nil {
-		return errors.ErrUpdating.WithDetail(err)
+		return errors.ErrUpdating.WithDetail(nil)
 	}
 	return nil
 }
@@ -274,4 +279,10 @@ func getKeyHandler(ctx context.Context, w http.ResponseWriter, r *http.Request, 
 	logger.Debugf("200 GET %s key", role)
 	w.Write(out)
 	return nil
+}
+
+// NotFoundHandler is used as a generic catch all handler to return the ErrMetadataNotFound
+// 404 response
+func NotFoundHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
+	return errors.ErrMetadataNotFound.WithDetail(nil)
 }
