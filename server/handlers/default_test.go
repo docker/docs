@@ -3,6 +3,7 @@ package handlers
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
@@ -11,9 +12,13 @@ import (
 	"golang.org/x/net/context"
 
 	ctxu "github.com/docker/distribution/context"
+	"github.com/docker/distribution/registry/api/errcode"
+	"github.com/docker/notary/server/errors"
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
+	"github.com/docker/notary/tuf/store"
+	"github.com/docker/notary/tuf/validation"
 
 	"github.com/docker/notary/tuf/testutils"
 	"github.com/docker/notary/utils"
@@ -167,16 +172,16 @@ func TestGetKeyHandlerCreatesOnce(t *testing.T) {
 }
 
 func TestGetHandlerRoot(t *testing.T) {
-	store := storage.NewMemStorage()
+	metaStore := storage.NewMemStorage()
 	_, repo, _ := testutils.EmptyRepo()
 
 	ctx := context.Background()
-	ctx = context.WithValue(ctx, "metaStore", store)
+	ctx = context.WithValue(ctx, "metaStore", metaStore)
 
 	root, err := repo.SignRoot(data.DefaultExpires("root"))
 	rootJSON, err := json.Marshal(root)
 	assert.NoError(t, err)
-	store.UpdateCurrent("gun", storage.MetaUpdate{Role: "root", Version: 1, Data: rootJSON})
+	metaStore.UpdateCurrent("gun", storage.MetaUpdate{Role: "root", Version: 1, Data: rootJSON})
 
 	req := &http.Request{
 		Body: ioutil.NopCloser(bytes.NewBuffer(nil)),
@@ -194,20 +199,22 @@ func TestGetHandlerRoot(t *testing.T) {
 }
 
 func TestGetHandlerTimestamp(t *testing.T) {
-	store := storage.NewMemStorage()
+	metaStore := storage.NewMemStorage()
 	_, repo, crypto := testutils.EmptyRepo()
 
-	ctx := getContext(handlerState{store: store, crypto: crypto})
+	ctx := getContext(handlerState{store: metaStore, crypto: crypto})
 
 	sn, err := repo.SignSnapshot(data.DefaultExpires("snapshot"))
 	snJSON, err := json.Marshal(sn)
 	assert.NoError(t, err)
-	store.UpdateCurrent("gun", storage.MetaUpdate{Role: "snapshot", Version: 1, Data: snJSON})
+	metaStore.UpdateCurrent(
+		"gun", storage.MetaUpdate{Role: "snapshot", Version: 1, Data: snJSON})
 
 	ts, err := repo.SignTimestamp(data.DefaultExpires("timestamp"))
 	tsJSON, err := json.Marshal(ts)
 	assert.NoError(t, err)
-	store.UpdateCurrent("gun", storage.MetaUpdate{Role: "timestamp", Version: 1, Data: tsJSON})
+	metaStore.UpdateCurrent(
+		"gun", storage.MetaUpdate{Role: "timestamp", Version: 1, Data: tsJSON})
 
 	req := &http.Request{
 		Body: ioutil.NopCloser(bytes.NewBuffer(nil)),
@@ -225,15 +232,16 @@ func TestGetHandlerTimestamp(t *testing.T) {
 }
 
 func TestGetHandlerSnapshot(t *testing.T) {
-	store := storage.NewMemStorage()
+	metaStore := storage.NewMemStorage()
 	_, repo, crypto := testutils.EmptyRepo()
 
-	ctx := getContext(handlerState{store: store, crypto: crypto})
+	ctx := getContext(handlerState{store: metaStore, crypto: crypto})
 
 	sn, err := repo.SignSnapshot(data.DefaultExpires("snapshot"))
 	snJSON, err := json.Marshal(sn)
 	assert.NoError(t, err)
-	store.UpdateCurrent("gun", storage.MetaUpdate{Role: "snapshot", Version: 1, Data: snJSON})
+	metaStore.UpdateCurrent(
+		"gun", storage.MetaUpdate{Role: "snapshot", Version: 1, Data: snJSON})
 
 	req := &http.Request{
 		Body: ioutil.NopCloser(bytes.NewBuffer(nil)),
@@ -251,10 +259,10 @@ func TestGetHandlerSnapshot(t *testing.T) {
 }
 
 func TestGetHandler404(t *testing.T) {
-	store := storage.NewMemStorage()
+	metaStore := storage.NewMemStorage()
 
 	ctx := context.Background()
-	ctx = context.WithValue(ctx, "metaStore", store)
+	ctx = context.WithValue(ctx, "metaStore", metaStore)
 
 	req := &http.Request{
 		Body: ioutil.NopCloser(bytes.NewBuffer(nil)),
@@ -272,11 +280,11 @@ func TestGetHandler404(t *testing.T) {
 }
 
 func TestGetHandlerNilData(t *testing.T) {
-	store := storage.NewMemStorage()
-	store.UpdateCurrent("gun", storage.MetaUpdate{Role: "root", Version: 1, Data: nil})
+	metaStore := storage.NewMemStorage()
+	metaStore.UpdateCurrent("gun", storage.MetaUpdate{Role: "root", Version: 1, Data: nil})
 
 	ctx := context.Background()
-	ctx = context.WithValue(ctx, "metaStore", store)
+	ctx = context.WithValue(ctx, "metaStore", metaStore)
 
 	req := &http.Request{
 		Body: ioutil.NopCloser(bytes.NewBuffer(nil)),
@@ -302,4 +310,78 @@ func TestGetHandlerNoStorage(t *testing.T) {
 
 	err := GetHandler(ctx, nil, req)
 	assert.Error(t, err)
+}
+
+// a validation failure, such as a snapshots file being missing, will be
+// propagated as a detail in the error (which gets serialized as the body of the
+// response)
+func TestAtomicUpdateValidationFailurePropagated(t *testing.T) {
+	metaStore := storage.NewMemStorage()
+	gun := "testGUN"
+	vars := map[string]string{"imageName": gun}
+
+	kdb, repo, cs := testutils.EmptyRepo()
+	copyTimestampKey(t, kdb, metaStore, gun)
+	state := handlerState{store: metaStore, crypto: cs}
+
+	r, tg, sn, ts, err := testutils.Sign(repo)
+	assert.NoError(t, err)
+	rs, tgs, _, _, err := testutils.Serialize(r, tg, sn, ts)
+	assert.NoError(t, err)
+
+	req, err := store.NewMultiPartMetaRequest("", map[string][]byte{
+		data.CanonicalRootRole:    rs,
+		data.CanonicalTargetsRole: tgs,
+	})
+
+	rw := httptest.NewRecorder()
+
+	err = atomicUpdateHandler(getContext(state), rw, req, vars)
+	assert.Error(t, err)
+	errorObj, ok := err.(errcode.Error)
+	assert.True(t, ok, "Expected an errcode.Error, got %v", err)
+	assert.Equal(t, errors.ErrInvalidUpdate, errorObj.Code)
+	serializable, ok := errorObj.Detail.(*validation.SerializableError)
+	assert.True(t, ok, "Expected a SerializableObject, got %v", errorObj.Detail)
+	assert.IsType(t, validation.ErrBadHierarchy{}, serializable.Error)
+}
+
+type failStore struct {
+	storage.MemStorage
+}
+
+func (s failStore) GetCurrent(_, _ string) ([]byte, error) {
+	return nil, fmt.Errorf("oh no! storage has failed")
+}
+
+// a non-validation failure, such as the storage failing, will not be propagated
+// as a detail in the error (which gets serialized as the body of the response)
+func TestAtomicUpdateNonValidationFailureNotPropagated(t *testing.T) {
+	metaStore := storage.NewMemStorage()
+	gun := "testGUN"
+	vars := map[string]string{"imageName": gun}
+
+	kdb, repo, cs := testutils.EmptyRepo()
+	copyTimestampKey(t, kdb, metaStore, gun)
+	state := handlerState{store: &failStore{*metaStore}, crypto: cs}
+
+	r, tg, sn, ts, err := testutils.Sign(repo)
+	assert.NoError(t, err)
+	rs, tgs, sns, _, err := testutils.Serialize(r, tg, sn, ts)
+	assert.NoError(t, err)
+
+	req, err := store.NewMultiPartMetaRequest("", map[string][]byte{
+		data.CanonicalRootRole:     rs,
+		data.CanonicalTargetsRole:  tgs,
+		data.CanonicalSnapshotRole: sns,
+	})
+
+	rw := httptest.NewRecorder()
+
+	err = atomicUpdateHandler(getContext(state), rw, req, vars)
+	assert.Error(t, err)
+	errorObj, ok := err.(errcode.Error)
+	assert.True(t, ok, "Expected an errcode.Error, got %v", err)
+	assert.Equal(t, errors.ErrInvalidUpdate, errorObj.Code)
+	assert.Nil(t, errorObj.Detail)
 }

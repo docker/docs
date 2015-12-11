@@ -7,10 +7,9 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/docker/distribution/registry/api/errcode"
 	"github.com/docker/notary/tuf/signed"
 	"golang.org/x/net/context"
-
-	"github.com/docker/notary/errors"
 )
 
 func MockContextHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
@@ -18,7 +17,7 @@ func MockContextHandler(ctx context.Context, w http.ResponseWriter, r *http.Requ
 }
 
 func MockBetterErrorHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
-	return errors.ErrUnknown.WithDetail("Test Error")
+	return errcode.ErrorCodeUnknown.WithDetail("Test Error")
 }
 
 func TestRootHandlerFactory(t *testing.T) {

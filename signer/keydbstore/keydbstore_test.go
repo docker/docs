@@ -64,8 +64,8 @@ func testGetSuccessFromCache(t *testing.T, dbStore *KeyDBStore,
 	testGetSuccess(t, dbStore, expectedKey)
 }
 
-// Creating a new KeyDBStore propogates any db opening error
-func TestNewKeyDBStorePropogatesDBError(t *testing.T) {
+// Creating a new KeyDBStore propagates any db opening error
+func TestNewKeyDBStorePropagatesDBError(t *testing.T) {
 	dbStore, err := NewKeyDBStore(retriever, "ignoredalias", "nodb", "somestring")
 	assert.Error(t, err)
 	assert.Nil(t, dbStore)

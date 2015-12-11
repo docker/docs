@@ -15,6 +15,7 @@ import (
 	"github.com/docker/notary/tuf/keys"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/utils"
+	"github.com/docker/notary/tuf/validation"
 )
 
 // validateUpload checks that the updates being pushed
@@ -49,26 +50,26 @@ func validateUpdate(cs signed.CryptoService, gun string, updates []storage.MetaU
 		// against a previous root
 		if root, err = validateRoot(gun, oldRootJSON, rootUpdate.Data, store); err != nil {
 			logrus.Error("ErrBadRoot: ", err.Error())
-			return nil, ErrBadRoot{msg: err.Error()}
+			return nil, validation.ErrBadRoot{Msg: err.Error()}
 		}
 
 		// setting root will update keys db
 		if err = repo.SetRoot(root); err != nil {
 			logrus.Error("ErrValidation: ", err.Error())
-			return nil, ErrValidation{msg: err.Error()}
+			return nil, validation.ErrValidation{Msg: err.Error()}
 		}
 		logrus.Debug("Successfully validated root")
 	} else {
 		if oldRootJSON == nil {
-			return nil, ErrValidation{msg: "no pre-existing root and no root provided in update."}
+			return nil, validation.ErrValidation{Msg: "no pre-existing root and no root provided in update."}
 		}
 		parsedOldRoot := &data.SignedRoot{}
 		if err := json.Unmarshal(oldRootJSON, parsedOldRoot); err != nil {
-			return nil, ErrValidation{msg: "pre-existing root is corrupted and no root provided in update."}
+			return nil, validation.ErrValidation{Msg: "pre-existing root is corrupted and no root provided in update."}
 		}
 		if err = repo.SetRoot(parsedOldRoot); err != nil {
 			logrus.Error("ErrValidation: ", err.Error())
-			return nil, ErrValidation{msg: err.Error()}
+			return nil, validation.ErrValidation{Msg: err.Error()}
 		}
 	}
 
@@ -77,7 +78,7 @@ func validateUpdate(cs signed.CryptoService, gun string, updates []storage.MetaU
 	if _, ok := roles[targetsRole]; ok {
 		if t, err = validateTargets(targetsRole, roles, kdb); err != nil {
 			logrus.Error("ErrBadTargets: ", err.Error())
-			return nil, ErrBadTargets{msg: err.Error()}
+			return nil, validation.ErrBadTargets{Msg: err.Error()}
 		}
 		repo.SetTargets(targetsRole, t)
 	}
@@ -100,7 +101,7 @@ func validateUpdate(cs signed.CryptoService, gun string, updates []storage.MetaU
 
 		if err := validateSnapshot(snapshotRole, oldSnap, roles[snapshotRole], roles, kdb); err != nil {
 			logrus.Error("ErrBadSnapshot: ", err.Error())
-			return nil, ErrBadSnapshot{msg: err.Error()}
+			return nil, validation.ErrBadSnapshot{Msg: err.Error()}
 		}
 		logrus.Debug("Successfully validated snapshot")
 	} else {
@@ -154,12 +155,12 @@ func prepRepo(gun string, repo *tuf.Repo, store storage.MetaStore) error {
 func generateSnapshot(gun string, kdb *keys.KeyDB, repo *tuf.Repo, store storage.MetaStore) (*storage.MetaUpdate, error) {
 	role := kdb.GetRole(data.RoleName(data.CanonicalSnapshotRole))
 	if role == nil {
-		return nil, ErrBadRoot{msg: "root did not include snapshot role"}
+		return nil, validation.ErrBadRoot{Msg: "root did not include snapshot role"}
 	}
 
 	algo, keyBytes, err := store.GetKey(gun, data.CanonicalSnapshotRole)
 	if role == nil {
-		return nil, ErrBadRoot{msg: "root did not include snapshot key"}
+		return nil, validation.ErrBadRoot{Msg: "root did not include snapshot key"}
 	}
 	foundK := data.NewPublicKey(algo, keyBytes)
 
@@ -171,7 +172,9 @@ func generateSnapshot(gun string, kdb *keys.KeyDB, repo *tuf.Repo, store storage
 		}
 	}
 	if !validKey {
-		return nil, ErrBadHierarchy{msg: "no snapshot was included in update and server does not hold current snapshot key for repository"}
+		return nil, validation.ErrBadHierarchy{
+			Missing: data.CanonicalSnapshotRole,
+			Msg:     "no snapshot was included in update and server does not hold current snapshot key for repository"}
 	}
 
 	currentJSON, err := store.GetCurrent(gun, data.CanonicalSnapshotRole)
