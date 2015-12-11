@@ -1,9 +1,11 @@
+
 +++
 title = "Set up container networking with UCP"
 description = "Docker Universal Control Plane"
 [menu.main]
 parent="mn_ucp"
 +++
+
 
 # Set up container networking with UCP
 
@@ -59,10 +61,10 @@ nodes.
 
 ### Prerequisites
 
-You must install UCP on your entire cluster (sever and nodes), before following
-these instructions.  Make sure you have run on the `install` and `join` on each
-node as appropriate. Then, enable mult-host networking on every node in your
-cluster using these instructions.
+You must install UCP on your entire cluster (controller and nodes), before
+following these instructions.  Make sure you have run on the `install` and
+`join` on each node as appropriate. Then, enable mult-host networking on every
+node in your cluster using the instructions in this page.
 
 UCP requires that all clients, including Docker Engine, use a Swarm TLS
 certificate chain signed by the UCP Swarm Root CA. You configured these
@@ -73,25 +75,36 @@ To continue with this procedure, you need to know the SAN values you used on
 each controller or node. Because you can pass a SAN either as an IP address or
 fully-qualified hostname, make sure you know how to find these.
 
-If you used a public IP address, log into the controller host and run these two
-commands on the controller:
+If you used public IP addresses, do the following:
 
-```bash
-$ IP_ADDRESS=$(ip -o -4 route get 8.8.8.8 | cut -f8 -d' ')
-$ echo ${IP_ADDRESS}
-```
+1. Log into a host in your UCP cluster (controller or one of your nodes).
 
-If your cluster is installed on a cloud provider, the public IP may not be the
-same as the IP address returned by this command. Confirm through your cloud
-provider's console or command line that this value is indeed the public IP. For
-example, the AWS console shows these values to you:
+2. Run these two commands to get the public IP:
 
-![Open certs](images/ip_cloud_provider.png)
+        $ IP_ADDRESS=$(ip -o -4 route get 8.8.8.8 | cut -f8 -d' ')
+        $ echo ${IP_ADDRESS}
 
-You can get also the SAN values of the controller by examining the certificate
-through your browser. This would include a fully qualified hostname you used for
-the controller. Each browser has a different way to view a website's certificate. To
-do this on Chrome:
+  If your cluster is installed on a cloud provider, the public IP may not be
+  the same as the IP address returned by this command. Confirm through your
+  cloud provider's console or command line that this value is indeed the
+  public IP. For example, the AWS console shows these values to you:
+
+  ![Open certs](images/ip_cloud_provider.png)
+
+3. Note the host's IP address.
+
+4. Repeat steps 1-3 on the remaining hosts in your cluster.
+
+If you used a fully-qualified domain service names for SANs, you use them again
+configure multi-host networking. If you don't recall the name you used for each
+node, then:
+
+* If your hosts are on a private network, ask your system administrator for their fully-qualified domain service names.
+* If your hosts are from a cloud provider, use the provider's console or other facility to get the name.
+
+An easy way to get the controller's SAN values is to examine its certificate
+through your browser. Each browser has a different way to view a website's
+certificate. To do this on Chrome:
 
 1. Open the browser to the UCP console.
 
@@ -107,8 +120,6 @@ do this on Chrome:
 
     ![SAN](images/browser_cert_san.png)
 
-If you are using a private network, and don't know the fully-qualified DNS for a node, you can ask your network administrator.
-
 
 ### Configure and restart the daemon
 
@@ -121,35 +132,35 @@ If you followed the prerequisites, you should have a list of the SAN values you 
 3. Determine the Docker daemon's startup configuration file.
 
     Each Linux distribution have different approaches for configuring daemon
-    startup (init) options. On Centos/RedHat systems that rely systemd,
-    the Docker daemon startup options are stored in the
-    `/lib/systemd/system/docker.service` file. Ubuntu 14.04 stores these in the `/etc/init/docker.conf` file.
+    startup (init) options. On Centos/RedHat systems that rely on systemd, the
+    Docker daemon startup options are stored in the
+    `/lib/systemd/system/docker.service` file. Ubuntu 14.04 stores these in the
+    `/etc/default/docker` file.
 
 4. Open the configuration file with your favorite editor.
 
   **Ubuntu**:
-        $ sudo vi /etc/init/docker.conf
+        $ sudo vi /etc/default/docker
 
   **Centos/Rehat**:
         $ sudo vi /lib/systemd/system/docker.service
 
 5. Uncomment the `DOCKER_OPTS` line and add the following options.
 
-        --cluster-advertise eth0:12376
-        --cluster-store etcd://CONTROLLER_PUBLIC_IP_OR_DOMAIN:12379
+        --cluster-advertise CURRENT_HOST_PUBLIC_IP_OR_DNS:12376
+        --cluster-store etcd://CONTROLLER_PUBLIC_IP_OR_DNS:12379
         --cluster-store-opt kv.cacertfile=/var/lib/docker/discovery_certs/ca.pem
         --cluster-store-opt kv.certfile=/var/lib/docker/discovery_certs/cert.pem
         --cluster-store-opt kv.keyfile=/var/lib/docker/discovery_certs/key.pem
 
-  Replace `CONTROLLER_PUBLIC_IP_OR_DOMAIN` with the IP address of the UCP
-  controller. Use `ifconfig` to ensure the host you are installing on is
-  accessible over `eth0`, on your host the systems with multiple ether
-  interfaces this value might differ. When you are done, the line should look
-  similar to the following:
+  Replace `CURRENT_HOST_PUBLIC_IP` with the IP of the host whose file you are
+  configuration. Replace `CONTROLLER_PUBLIC_IP_OR_DOMAIN` with the IP address of
+  the UCP controller. When you are done, the line should look similar to the
+  following:
 
-        DOCKER_OPTS="--dns 8.8.8.8 --dns 8.8.4.4 --cluster-advertise eth0:12376 --cluster-store etcd://52.70.188.239:12379 --cluster-store-opt kv.cacertfile=/var/lib/docker/discovery_certs/ca.pem --cluster-store-opt kv.certfile=/var/lib/docker/discovery_certs/cert.pem --cluster-store-opt kv.keyfile=/var/lib/docker/discovery_certs/key.pem"
+        DOCKER_OPTS="--dns 8.8.8.8 --dns 8.8.4.4 --cluster-advertise 52.70.180.235:12376 --cluster-store etcd://52.70.188.239:12379 --cluster-store-opt kv.cacertfile=/var/lib/docker/discovery_certs/ca.pem --cluster-store-opt kv.certfile=/var/lib/docker/discovery_certs/cert.pem --cluster-store-opt kv.keyfile=/var/lib/docker/discovery_certs/key.pem"
 
-6. Save and close the `/etc/init/docker.conf` file.
+6. Save and close the Docker configuration file file.
 
 6. Restart the Docker daemon.
 

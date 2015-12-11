@@ -1,3 +1,7 @@
++++
+draft = "true"
++++
+
 # UCP High Availability
 
 This document outlines how UCP high availability works, and general

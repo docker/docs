@@ -1,3 +1,7 @@
++++
+draft = "true"
++++
+
 # Docker UCP Integration Tests
 
 The ucp integration tests are built upon Docker Machine and the Go test
@@ -181,4 +185,3 @@ causing failures.  By default the parallel count is the number of CPUs.
 `REGISTRY_PASSWORD` | When pulling set this to a user that has permission to pull the official images
 `REGISTRY_EMAIL` | When pulling set this to a user that has permission to pull the official images
 `STRESS_OBJECT_COUNT` | If set, tunes the number of objects created during stress tests
-
