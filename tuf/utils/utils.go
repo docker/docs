@@ -108,25 +108,18 @@ func DoHash(alg string, d []byte) []byte {
 
 // UnusedDelegationKeys prunes a list of keys, returning those that are no
 // longer in use for a given targets file
-func UnusedDelegationKeys(t data.SignedTargets, ids []string) []string {
-	// we have no delegations, all the IDs are out of use
-	if len(t.Signed.Delegations.Roles) == 0 {
-		return ids
-	}
-
+func UnusedDelegationKeys(t data.SignedTargets) []string {
 	// compare ids to all still active key ids in all active roles
 	// with the targets file
 	found := make(map[string]bool)
 	for _, r := range t.Signed.Delegations.Roles {
-		for _, oldID := range ids {
-			if StrSliceContainsI(r.KeyIDs, oldID) {
-				found[oldID] = true
-			}
+		for _, id := range r.KeyIDs {
+			found[id] = true
 		}
 	}
-	discard := make([]string, 0, len(ids)-len(found))
-	for _, id := range ids {
-		if _, ok := found[id]; !ok {
+	var discard []string
+	for id := range t.Signed.Delegations.Keys {
+		if !found[id] {
 			discard = append(discard, id)
 		}
 	}
@@ -136,8 +129,8 @@ func UnusedDelegationKeys(t data.SignedTargets, ids []string) []string {
 // RemoveUnusedKeys determines which keys in the slice of IDs are no longer
 // used in the given targets file and removes them from the delegated keys
 // map
-func RemoveUnusedKeys(t *data.SignedTargets, ids []string) {
-	unusedIDs := UnusedDelegationKeys(*t, ids)
+func RemoveUnusedKeys(t *data.SignedTargets) {
+	unusedIDs := UnusedDelegationKeys(*t)
 	for _, id := range unusedIDs {
 		delete(t.Signed.Delegations.Keys, id)
 	}

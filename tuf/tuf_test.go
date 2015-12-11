@@ -354,7 +354,7 @@ func TestDeleteDelegations(t *testing.T) {
 	assert.Len(t, keyIDs, 1)
 	assert.Equal(t, testKey.ID(), keyIDs[0])
 
-	err = repo.DeleteDelegation(role)
+	err = repo.DeleteDelegation(*role)
 	assert.Len(t, r.Signed.Delegations.Roles, 0)
 	assert.Len(t, r.Signed.Delegations.Keys, 0)
 	assert.True(t, r.Dirty)
@@ -373,7 +373,7 @@ func TestDeleteDelegationsRoleNotExist(t *testing.T) {
 	role, err := data.NewRole("targets/test", 1, []string{}, []string{}, []string{})
 	assert.NoError(t, err)
 
-	err = repo.DeleteDelegation(role)
+	err = repo.DeleteDelegation(*role)
 	assert.NoError(t, err)
 	r := repo.Targets[data.CanonicalTargetsRole]
 	assert.Len(t, r.Signed.Delegations.Roles, 0)
@@ -391,7 +391,7 @@ func TestDeleteDelegationsInvalidRole(t *testing.T) {
 	invalidRole, err := data.NewRole("root", 1, []string{}, []string{}, []string{})
 	assert.NoError(t, err)
 
-	err = repo.DeleteDelegation(invalidRole)
+	err = repo.DeleteDelegation(*invalidRole)
 	assert.Error(t, err)
 	assert.IsType(t, data.ErrInvalidRole{}, err)
 
@@ -407,7 +407,7 @@ func TestDeleteDelegationsParentMissing(t *testing.T) {
 	testRole, err := data.NewRole("targets/test/deep", 1, []string{}, []string{}, []string{})
 	assert.NoError(t, err)
 
-	err = repo.DeleteDelegation(testRole)
+	err = repo.DeleteDelegation(*testRole)
 	assert.Error(t, err)
 	assert.IsType(t, data.ErrInvalidRole{}, err)
 
@@ -440,11 +440,21 @@ func TestDeleteDelegationsMidSliceRole(t *testing.T) {
 	err = repo.UpdateDelegations(role3, data.KeyList{testKey}, "")
 	assert.NoError(t, err)
 
-	err = repo.DeleteDelegation(role2)
+	err = repo.DeleteDelegation(*role2)
 	assert.NoError(t, err)
 
 	r := repo.Targets[data.CanonicalTargetsRole]
 	assert.Len(t, r.Signed.Delegations.Roles, 2)
 	assert.Len(t, r.Signed.Delegations.Keys, 1)
 	assert.True(t, r.Dirty)
+}
+
+func TestGetDelegationParentMissing(t *testing.T) {
+	ed25519 := signed.NewEd25519()
+	keyDB := keys.NewDB()
+	repo := initRepo(t, ed25519, keyDB)
+
+	_, err := repo.GetDelegation("targets/level1/level2")
+	assert.Error(t, err)
+	assert.IsType(t, data.ErrInvalidRole{}, err)
 }

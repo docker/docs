@@ -12,18 +12,18 @@ func TestUnusedDelegationKeys(t *testing.T) {
 	role, err := data.NewRole("targets/test", 1, []string{}, nil, nil)
 	assert.NoError(t, err)
 
-	discard := UnusedDelegationKeys(*targets, []string{"123"})
-	assert.Len(t, discard, 1)
+	discard := UnusedDelegationKeys(*targets)
+	assert.Len(t, discard, 0)
 
 	targets.Signed.Delegations.Roles = []*data.Role{role}
 	targets.Signed.Delegations.Keys["123"] = nil
 
-	discard = UnusedDelegationKeys(*targets, []string{"123"})
+	discard = UnusedDelegationKeys(*targets)
 	assert.Len(t, discard, 1)
 
 	role.KeyIDs = []string{"123"}
 
-	discard = UnusedDelegationKeys(*targets, []string{"123"})
+	discard = UnusedDelegationKeys(*targets)
 	assert.Len(t, discard, 0)
 }
 
@@ -35,14 +35,14 @@ func TestRemoveUnusedKeys(t *testing.T) {
 
 	targets.Signed.Delegations.Keys["123"] = nil
 
-	RemoveUnusedKeys(targets, []string{"123"})
+	RemoveUnusedKeys(targets)
 	assert.Len(t, targets.Signed.Delegations.Keys, 0)
 
 	// when role is present that uses key, it shouldn't get removed
 	targets.Signed.Delegations.Roles = []*data.Role{role}
 	targets.Signed.Delegations.Keys["123"] = nil
 
-	RemoveUnusedKeys(targets, []string{"123"})
+	RemoveUnusedKeys(targets)
 	assert.Len(t, targets.Signed.Delegations.Keys, 1)
 }
 
