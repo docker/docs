@@ -350,7 +350,7 @@ type failStore struct {
 	storage.MemStorage
 }
 
-func (s failStore) GetCurrent(_, _ string) ([]byte, error) {
+func (s *failStore) GetCurrent(_, _ string) ([]byte, error) {
 	return nil, fmt.Errorf("oh no! storage has failed")
 }
 
