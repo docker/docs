@@ -225,3 +225,26 @@ func TestSignHandlerReturns404WithNonexistentKey(t *testing.T) {
 
 	assert.Equal(t, 404, res.StatusCode)
 }
+
+func TestCreateKeyHandlerWithInvalidAlgorithm(t *testing.T) {
+	keyStore := trustmanager.NewKeyMemoryStore(passphraseRetriever)
+	cryptoService := cryptoservice.NewCryptoService("", keyStore)
+	setup(signer.CryptoServiceIndex{data.ED25519Key: cryptoService, data.RSAKey: cryptoService, data.ECDSAKey: cryptoService})
+
+	// The `rbtree-algorithm` is expected as not supported
+	createKeyURL := fmt.Sprintf("%s/%s", createKeyBaseURL, "rbtree-algorithm")
+
+	request, err := http.NewRequest("POST", createKeyURL, nil)
+	assert.Nil(t, err)
+
+	res, err := http.DefaultClient.Do(request)
+	assert.Nil(t, err)
+
+	assert.Equal(t, http.StatusBadRequest, res.StatusCode)
+
+	body, err := ioutil.ReadAll(res.Body)
+	assert.Nil(t, err)
+
+	// The body may contains some `\r\n`, so we use assert.Contains not assert.Equals
+	assert.Contains(t, string(body), "algorithm rbtree-algorithm not supported")
+}
