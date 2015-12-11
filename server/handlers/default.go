@@ -23,13 +23,13 @@ import (
 
 // MainHandler is the default handler for the server
 func MainHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
-	if r.Method == "GET" {
-		_, err := w.Write([]byte("{}"))
-		if err != nil {
-			return errors.ErrUnknown.WithDetail(err)
-		}
-	} else {
+	// For now it only supports `GET`
+	if r.Method != "GET" {
 		return errors.ErrGenericNotFound.WithDetail(nil)
+	}
+
+	if _, err := w.Write([]byte("{}")); err != nil {
+		return errors.ErrUnknown.WithDetail(err)
 	}
 	return nil
 }
