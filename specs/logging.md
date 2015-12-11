@@ -1,3 +1,7 @@
++++
+draft = "true"
++++
+
 # Remote logging configuration
 
 To setup remote logging in UCP you must edit the API directly.

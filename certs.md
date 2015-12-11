@@ -1,9 +1,11 @@
+
 +++
 title = "Manually setting up a CA"
 description = "Docker Universal Control Plane"
 [menu.main]
 parent="mn_ucp"
 +++
+
 
 # Manually setting up a CA
 

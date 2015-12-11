@@ -1,3 +1,7 @@
++++
+draft = "true"
++++
+
 # Generating User certificates by Hand
 
 This shouldn't be required once UCP can generate user certs, but might be useful in some instances...
