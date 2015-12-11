@@ -53,6 +53,17 @@ type ErrExpired struct {
 	signed.ErrExpired
 }
 
+// ErrInvalidRemoteKeyType is returned when the server is requested to manage
+// an unsupported key type
+type ErrInvalidRemoteKeyType struct {
+	Role string
+}
+
+func (e ErrInvalidRemoteKeyType) Error() string {
+	return fmt.Sprintf(
+		"notary does not support the server managing the %s key", e.Role)
+}
+
 const (
 	tufDir = "tuf"
 )
@@ -166,8 +177,7 @@ func (r *NotaryRepository) Initialize(rootKeyID string, serverManagedRoles ...st
 				remotelyManagedKeys, data.CanonicalSnapshotRole)
 			serverManagesSnapshot = true
 		default:
-			return fmt.Errorf(
-				"Notary does not support the server managing the %s key", role)
+			return ErrInvalidRemoteKeyType{Role: role}
 		}
 	}
 
