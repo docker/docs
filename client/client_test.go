@@ -3,6 +3,7 @@ package client
 import (
 	"bytes"
 	"crypto/rand"
+	regJson "encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -130,7 +131,7 @@ func TestInitRepositoryManagedRolesIncludingRoot(t *testing.T) {
 		t, data.ECDSAKey, tempBaseDir, "docker.com/notary", "http://localhost")
 	err = repo.Initialize(rootPubKeyID, data.CanonicalRootRole)
 	assert.Error(t, err)
-	assert.IsType(t, ErrInvalidRemoteKeyType{}, err)
+	assert.IsType(t, ErrInvalidRemoteRole{}, err)
 	// Just testing the error message here in this one case
 	assert.Equal(t, err.Error(),
 		"notary does not support the server managing the root key")
@@ -148,7 +149,7 @@ func TestInitRepositoryManagedRolesInvalidRole(t *testing.T) {
 		t, data.ECDSAKey, tempBaseDir, "docker.com/notary", "http://localhost")
 	err = repo.Initialize(rootPubKeyID, "randomrole")
 	assert.Error(t, err)
-	assert.IsType(t, ErrInvalidRemoteKeyType{}, err)
+	assert.IsType(t, ErrInvalidRemoteRole{}, err)
 }
 
 // Initializing a new repo while specifying that the server should manage the
@@ -163,7 +164,7 @@ func TestInitRepositoryManagedRolesIncludingTargets(t *testing.T) {
 		t, data.ECDSAKey, tempBaseDir, "docker.com/notary", "http://localhost")
 	err = repo.Initialize(rootPubKeyID, data.CanonicalTargetsRole)
 	assert.Error(t, err)
-	assert.IsType(t, ErrInvalidRemoteKeyType{}, err)
+	assert.IsType(t, ErrInvalidRemoteRole{}, err)
 }
 
 // Initializing a new repo while specifying that the server should manage the
@@ -927,11 +928,21 @@ func testPublishNoOneHasSnapshotKey(t *testing.T, rootType string) {
 // snapshot key, we can't publish.
 // We test this with both an RSA and ECDSA root key
 func TestPublishSnapshotCorrupt(t *testing.T) {
-	testPublishSnapshotCorrupt(t, data.ECDSAKey, true)
-	testPublishSnapshotCorrupt(t, data.ECDSAKey, false)
+	testPublishBadExistingSnapshot(t, data.ECDSAKey, true, true)
+	testPublishBadExistingSnapshot(t, data.ECDSAKey, false, true)
 }
 
-func testPublishSnapshotCorrupt(t *testing.T, rootType string, serverManagesSnapshot bool) {
+// If the snapshot metadata is unreadable, whether the client or server has the
+// snapshot key, we can't publish.
+// We test this with both an RSA and ECDSA root key
+func TestPublishSnapshotUnreadable(t *testing.T) {
+	testPublishBadExistingSnapshot(t, data.ECDSAKey, true, false)
+	testPublishBadExistingSnapshot(t, data.ECDSAKey, false, false)
+}
+
+func testPublishBadExistingSnapshot(t *testing.T, rootType string,
+	serverManagesSnapshot bool, readable bool) {
+
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("/tmp", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)
@@ -941,13 +952,31 @@ func testPublishSnapshotCorrupt(t *testing.T, rootType string, serverManagesSnap
 	ts := fullTestServer(t)
 	defer ts.Close()
 
-	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL, serverManagesSnapshot)
-	// write a corrupt snapshots file
-	repo.fileStore.SetMeta(data.CanonicalSnapshotRole, []byte("this isn't JSON"))
+	repo, _ := initializeRepo(
+		t, rootType, tempBaseDir, gun, ts.URL, serverManagesSnapshot)
 
 	addTarget(t, repo, "v1", "../fixtures/intermediate-ca.crt")
+
+	var expectedErrType interface{}
+	if readable {
+		// write a corrupt snapshots file
+		repo.fileStore.SetMeta(data.CanonicalSnapshotRole, []byte("this isn't JSON"))
+		expectedErrType = &regJson.SyntaxError{}
+	} else {
+		// create a directory instead of a file
+		path := fmt.Sprintf("%s.%s",
+			filepath.Join(tempBaseDir, tufDir, filepath.FromSlash(gun),
+				"metadata", data.CanonicalSnapshotRole), "json")
+		os.RemoveAll(path)
+		err := os.Mkdir(path, 0755)
+		defer os.RemoveAll(path)
+		assert.NoError(t, err)
+
+		expectedErrType = &os.PathError{}
+	}
 	err = repo.Publish()
 	assert.Error(t, err)
+	assert.IsType(t, expectedErrType, err)
 }
 
 type cannotCreateKeys struct {
