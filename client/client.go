@@ -653,11 +653,7 @@ func (r *NotaryRepository) RotateKey(role string, serverManagesKey bool) error {
 		return err
 	}
 
-	err = r.rootFileKeyChange(role, changelist.ActionCreate, pubKey)
-	if err != nil {
-		return err
-	}
-	return nil
+	return r.rootFileKeyChange(role, changelist.ActionCreate, pubKey)
 }
 
 func (r *NotaryRepository) rootFileKeyChange(role, action string, key data.PublicKey) error {
