@@ -1055,11 +1055,10 @@ func TestRotateKeyInvalidRole(t *testing.T) {
 func assertRotationSuccessful(t *testing.T, repo *NotaryRepository,
 	keysToRotate map[string]bool) {
 
-	oldKeyIDs := make(map[string]string)
+	oldKeyIDs := make(map[string][]string)
 	for role := range keysToRotate {
 		keyIDs := repo.tufRepo.Root.Signed.Roles[role].KeyIDs
-		assert.Len(t, keyIDs, 1)
-		oldKeyIDs[role] = keyIDs[0]
+		oldKeyIDs[role] = keyIDs
 	}
 
 	// Do rotation
@@ -1078,7 +1077,17 @@ func assertRotationSuccessful(t *testing.T, repo *NotaryRepository,
 	for role, isRemoteKey := range keysToRotate {
 		keyIDs := repo.tufRepo.Root.Signed.Roles[role].KeyIDs
 		assert.Len(t, keyIDs, 1)
-		assert.NotEqual(t, oldKeyIDs[role], keyIDs[0])
+
+		// the new key is not the same as any of the old keys, and the
+		// old keys have been removed not just from the TUF file, but
+		// from the cryptoservice
+		for _, oldKeyID := range oldKeyIDs[role] {
+			assert.NotEqual(t, oldKeyID, keyIDs[0])
+			_, _, err := repo.CryptoService.GetPrivateKey(oldKeyID)
+			assert.Error(t, err)
+		}
+
+		// the new key is present in the cryptoservice, or not present if remote
 		key, _, err := repo.CryptoService.GetPrivateKey(keyIDs[0])
 		if isRemoteKey {
 			assert.Error(t, err)
