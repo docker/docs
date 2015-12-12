@@ -20,6 +20,8 @@ notarysigner:
    - notarymysql
   command: -config=fixtures/signer-config.json
 notarymysql:
+  volumes:
+    - notarymysql:/var/lib/mysql
   build: ./notarymysql/
   ports:
     - "3306:3306"
