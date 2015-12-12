@@ -36,7 +36,7 @@ func validateRootSuccessfully(t *testing.T, rootType string) {
 	ts, mux, keys := simpleTestServer(t)
 	defer ts.Close()
 
-	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL)
+	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL, false)
 
 	// tests need to manually boostrap timestamp as client doesn't generate it
 	err = repo.tufRepo.InitTimestamp()
