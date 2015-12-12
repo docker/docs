@@ -1,9 +1,7 @@
-
 +++
-title = "Set up container networking with UCP"
+title = "Set up container networking"
 description = "Docker Universal Control Plane"
-[menu.main]
-parent="mn_ucp"
+[menu.ucp]
 +++
 
 
@@ -13,6 +11,11 @@ Beginning in release 1.9, the Docker Engine updated and expanded its networking
 subsystem. Along with host and bridge networks, you can now create custom
 networks that encompass multiple hosts running Docker Engine. This last feature
 is known as multi-host networking.
+
+- [Understand multi-host networking and UCP](#understand-multi-host-networking-and-ucp)
+- [Prerequisites](#prerequisites)
+- [Configure networking and restart the daemon](#configure-networking-and-restart-the-daemon)
+- [Troubleshoot the daemon configuration](#troubleshoot-the-daemon-configuration)
 
 #### About these installation instructions
 
@@ -39,7 +42,7 @@ Error response from daemon: failed to parse pool request for address space "Glob
 If you attempt the same operation from UCP's web administration, you receive
 the same error.
 
-![Network error](images/network_gui_error.png)
+![Network error](../images/network_gui_error.png)
 
 This error returns because the networking features rely on a key-value store. In
 a UCP environment, that key-value store is configured through UCP and protected
@@ -50,16 +53,13 @@ This page explains how to configure the Docker Engine daemon startup options.
 Once the daemon is configured and restarted, the `docker network` CLI and the
 resources they create will use the Swarm TLS certificate chain managed by UCP.
 
-
-## Enable multi-host networking
-
-You'll do this procedure on all your UCP controller and nodes. Once your
-configure and restart the Docker daemon, you'll have secure communication within
-your cluster as you create custom multi-host networks on the controller or
-nodes.
+You'll do this configuration on all Engine installations within your UCP
+deployment. Once you configure and restart the Engine daemon, you'll have secure
+communication within your cluster as you create custom multi-host networks on
+the controller or nodes.
 
 
-### Prerequisites
+## Prerequisites
 
 You must install UCP on your entire cluster (controller and nodes), before
 following these instructions.  Make sure you have run on the `install` and
@@ -75,27 +75,31 @@ To continue with this procedure, you need to know the SAN values you used on
 each controller or node. Because you can pass a SAN either as an IP address or
 fully-qualified hostname, make sure you know how to find these.
 
+### Get public IP addresses
+
 If you used public IP addresses, do the following:
 
 1. Log into a host in your UCP cluster (controller or one of your nodes).
 
 2. Run these two commands to get the public IP:
 
-        $ IP_ADDRESS=$(ip -o -4 route get 8.8.8.8 | cut -f8 -d' ')
-        $ echo ${IP_ADDRESS}
+          $ IP_ADDRESS=$(ip -o -4 route get 8.8.8.8 | cut -f8 -d' ')
+          $ echo ${IP_ADDRESS}
 
-  If your cluster is installed on a cloud provider, the public IP may not be
-  the same as the IP address returned by this command. Confirm through your
-  cloud provider's console or command line that this value is indeed the
-  public IP. For example, the AWS console shows these values to you:
+    If your cluster is installed on a cloud provider, the public IP may not be
+    the same as the IP address returned by this command. Confirm through your
+    cloud provider's console or command line that this value is indeed the
+    public IP. For example, the AWS console shows these values to you:
 
-  ![Open certs](images/ip_cloud_provider.png)
+    ![Open certs](../images/ip_cloud_provider.png)
 
 3. Note the host's IP address.
 
 4. Repeat steps 1-3 on the remaining hosts in your cluster.
 
-If you used a fully-qualified domain service names for SANs, you use them again
+### Get fully-qualified domain name
+
+If you used a fully-qualified domain name (DNS) for SANs, you use them again
 configure multi-host networking. If you don't recall the name you used for each
 node, then:
 
@@ -110,7 +114,7 @@ certificate. To do this on Chrome:
 
 2. In the address bar, click on the connection icon.
 
-    ![Open certs](images/browser_cert_open.png)
+    ![Open certs](../images/browser_cert_open.png)
 
     The browser opens displays the connection information. Depending on your Chrome version the dialog may be slightly different.
 
@@ -118,16 +122,16 @@ certificate. To do this on Chrome:
 
 4. Open the **Details** view and scroll down to the **Subject Alternative Name** section.
 
-    ![SAN](images/browser_cert_san.png)
+    ![SAN](../images/browser_cert_san.png)
 
 
-### Configure and restart the daemon
+## Configure networking and restart the daemon
 
 If you followed the prerequisites, you should have a list of the SAN values you used with the UCP boostrapper to `install` the controller and `join` each node. With these values in hand, do the following:
 
 1. Log into the host running the UCP controller.
 
-2. Leave UCP processes running.
+2. Leave the UCP processes running.
 
 3. Determine the Docker daemon's startup configuration file.
 
@@ -139,10 +143,12 @@ If you followed the prerequisites, you should have a list of the SAN values you 
 
 4. Open the configuration file with your favorite editor.
 
-  **Ubuntu**:
+    **Ubuntu**:
+
         $ sudo vi /etc/default/docker
 
-  **Centos/Rehat**:
+    **Centos/Redhat**:
+
         $ sudo vi /lib/systemd/system/docker.service
 
 5. Uncomment the `DOCKER_OPTS` line and add the following options.
@@ -153,10 +159,10 @@ If you followed the prerequisites, you should have a list of the SAN values you 
         --cluster-store-opt kv.certfile=/var/lib/docker/discovery_certs/cert.pem
         --cluster-store-opt kv.keyfile=/var/lib/docker/discovery_certs/key.pem
 
-  Replace `CURRENT_HOST_PUBLIC_IP` with the IP of the host whose file you are
-  configuration. Replace `CONTROLLER_PUBLIC_IP_OR_DOMAIN` with the IP address of
-  the UCP controller. When you are done, the line should look similar to the
-  following:
+    Replace `CURRENT_HOST_PUBLIC_IP` with the IP of the host whose file you are
+    configuration. Replace `CONTROLLER_PUBLIC_IP_OR_DOMAIN` with the IP address
+    of the UCP controller. When you are done, the line should look similar to
+    the following:
 
         DOCKER_OPTS="--dns 8.8.8.8 --dns 8.8.4.4 --cluster-advertise 52.70.180.235:12376 --cluster-store etcd://52.70.188.239:12379 --cluster-store-opt kv.cacertfile=/var/lib/docker/discovery_certs/ca.pem --cluster-store-opt kv.certfile=/var/lib/docker/discovery_certs/cert.pem --cluster-store-opt kv.keyfile=/var/lib/docker/discovery_certs/key.pem"
 
@@ -164,19 +170,23 @@ If you followed the prerequisites, you should have a list of the SAN values you 
 
 6. Restart the Docker daemon.
 
-  **Ubuntu**:
+    **Ubuntu**:
+
         $ sudo docker restart
 
-  **Centos/RedHat**:
+    **Centos/RedHat**:
+
         $ sudo systemdctl restart docker.service
 
 7. Review the Docker logs to check the restart.
 
-  **Ubuntu**:
+    **Ubuntu**:
+
         $ sudo tail -f /var/log/upstart/docker.log
 
-  **Centos/RedHat**:
-        $ sudo sudo journalctl -fu docker.service
+    **Centos/RedHat**:
+
+        $ sudo journalctl -fu docker.service
 
 8. Verify that you can create and delete a custom network.
 
@@ -187,7 +197,7 @@ If you followed the prerequisites, you should have a list of the SAN values you 
 9. Repeat steps 1-8 on the remaining nodes in your cluster.
 
 
-## Troubleshooting the daemon configuration
+## Troubleshoot the daemon configuration
 
 If you have trouble, try these troubleshooting measures:
 
@@ -200,6 +210,6 @@ key-store `etcd://CONTROLLER_PUBLIC_IP_OR_DOMAIN:12379` on the UCP controller.
 A ping requires that inbound ICMP requests are allowed on the controller.
 * Stop the daemon and start it manually from the command line.
 
-      sudo /usr/bin/docker daemon -D --cluster-advertise eth0:12376 --cluster-store etcd://CONTROLLER_PUBLIC_IP_OR_DOMAIN:12379 --cluster-store-opt kv.cacertfile=/var/lib/docker/discovery_certs/ca.pem --cluster-store-opt kv.certfile=/var/lib/docker/discovery_certs/cert.pem --cluster-store-opt kv.keyfile=/var/lib/docker/discovery_certs/key.pem
+        sudo /usr/bin/docker daemon -D --cluster-advertise eth0:12376 --cluster-store etcd://CONTROLLER_PUBLIC_IP_OR_DOMAIN:12379 --cluster-store-opt kv.cacertfile=/var/lib/docker/discovery_certs/ca.pem --cluster-store-opt kv.certfile=/var/lib/docker/discovery_certs/cert.pem --cluster-store-opt kv.keyfile=/var/lib/docker/discovery_certs/key.pem
 
 Remember, you'll need to restart the daemon each time you change the start options.

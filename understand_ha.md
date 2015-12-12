@@ -1,9 +1,7 @@
-
 +++
 title = "Set up high availability"
 description = "Docker Universal Control Plane"
-[menu.main]
-parent="mn_ucp"
+[menu.ucp]
 +++
 
 

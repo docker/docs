@@ -1,13 +1,12 @@
-
 +++
-title = "Overview"
+title = "Release Notes"
 description = "Docker Universal Control Plane"
-[menu.main]
-identifier="mn_ucp"
+[menu.ucp]
+weight="-99"
 +++
 
 
-# Release Notes
+# UCP Release Notes
 
 The latest release is 0.6.  Consult with your Docker sales engineer for the 
 release notes of earlier versions.

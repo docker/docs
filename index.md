@@ -1,21 +1,20 @@
-
 +++
-title = "Overview"
+title = "Docker Universal Control Plane"
 description = "Docker Universal Control Plane"
-[menu.main]
+[menu.ucp]
 identifier="mn_ucp"
+weight="-100"
 +++
 
 
-# Welcome to Docker Universal Control Plane BETA docs
+# Docker Universal Control Plane BETA docs
 
 The following are available:
 
-* [Release Notes](release_notes.md)
-* [Docker UCP Quickstart Guide](installation.md)  
-* [Set up container networking with UCP](networking.md)  
-* [Set up high availability](understand_ha.md)  
-* [Manually setting up a CA](certs.md)
-* [Key/Value Store Backends](kv_store.md )     
-* [Profiling UCP](profiling.md)
-* [UCP Support Dumps](support.md)
+* [Release Notes](release_notes)
+* [UCP Quickstart Guide](installation)  
+* [Key/Value Store Backends](kv_store )   
+* [Manually setting up a CA](certs)  
+* [Set up container networking with UCP](networking)  
+* [Set up high availability](understand_ha)  
+* [UCP Support Dumps](support)
