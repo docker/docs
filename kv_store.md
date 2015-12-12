@@ -1,9 +1,7 @@
-
 +++
 title = "Key/Value Store Backends"
 description = "Docker Universal Control Plane"
-[menu.main]
-parent="mn_ucp"
+[menu.ucp]
 +++
 
 
