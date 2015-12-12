@@ -1,9 +1,8 @@
-
 +++
 title = "UCP Support Dumps"
 description = "Docker Universal Control Plane"
-[menu.main]
-parent="mn_ucp"
+[menu.ucp]
+weight="2"
 +++
 
 
@@ -33,10 +32,13 @@ TOKEN=$(curl --insecure -s -X POST -d "{\"username\":\"admin\",\"password\":\"${
 curl --insecure -s -H "X-Access-Token:admin:${TOKEN}" -X POST "${UCP}/api/support" > dump.zip
 ```
 
-Hints:
-* The UCP server doesn't like extra slashes at the beginning, so if you set your UCP variable with a trailing slash, then you'll get a 301 (redirect)
-* The token often has special characters in it, so if the user cuts and pastes, they may run into problems with the shell interpreting things like $
-* If you want to avoid the --insecure, you'll have to install the UCP server's cert locally.  See below...
+> **Hints**:
+
+>* The UCP server doesn't like extra slashes at the beginning, so if you set your UCP variable with a trailing slash, then you'll get a 301 (redirect)
+
+>* The token often has special characters in it, so if the user cuts and pastes, they may run into problems with the shell interpreting things like $
+
+>* If you want to avoid the --insecure, you'll have to install the UCP server's cert locally.  See below...
 
 
 ## Trusting the UCP server
