@@ -224,7 +224,6 @@ begin
 		// Wizardform.ComponentsList.Checked[3] := NeedToInstallVirtualBox();
 		Wizardform.ComponentsList.ItemEnabled[3] := not NeedToInstallVirtualBox();
 		Wizardform.ComponentsList.Checked[5] := NeedToInstallGit();
-		Wizardform.ComponentsList.ItemEnabled[5] := not NeedToInstallGit();
 end;
 
 function InitializeSetup(): boolean;
