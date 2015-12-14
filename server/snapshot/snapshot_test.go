@@ -114,32 +114,6 @@ func TestGetSnapshotKeyExistsOnSet(t *testing.T) {
 	assert.NotNil(t, k2, "Key should not be nil")
 }
 
-func TestRoleExpired(t *testing.T) {
-	meta := data.FileMeta{
-		Hashes: data.Hashes{
-			"sha256": []byte{1},
-		},
-	}
-	newData := []byte{2}
-	res, _ := roleExpired(newData, meta)
-	assert.True(t, res)
-}
-
-func TestRoleNotExpired(t *testing.T) {
-	newData := []byte{2}
-	currMeta, err := data.NewFileMeta(bytes.NewReader(newData), "sha256")
-	assert.NoError(t, err)
-
-	meta := data.FileMeta{
-		Hashes: data.Hashes{
-			"sha256": currMeta.Hashes["sha256"],
-		},
-	}
-
-	res, _ := roleExpired(newData, meta)
-	assert.False(t, res)
-}
-
 func TestGetSnapshotNotExists(t *testing.T) {
 	store := storage.NewMemStorage()
 	crypto := signed.NewEd25519()
@@ -209,5 +183,26 @@ func TestGetSnapshotCurrCorrupt(t *testing.T) {
 
 	store.UpdateCurrent("gun", storage.MetaUpdate{Role: "snapshot", Version: 0, Data: snapJSON[1:]})
 	_, err = GetOrCreateSnapshot("gun", store, crypto)
+	assert.Error(t, err)
+}
+
+func TestCreateSnapshotNoKeyInStorage(t *testing.T) {
+	store := storage.NewMemStorage()
+	crypto := signed.NewEd25519()
+
+	_, _, err := createSnapshot("gun", nil, store, crypto)
+	assert.Error(t, err)
+}
+
+func TestCreateSnapshotNoKeyInCrypto(t *testing.T) {
+	store := storage.NewMemStorage()
+	crypto := signed.NewEd25519()
+
+	_, err := GetOrCreateSnapshotKey("gun", store, crypto, data.ED25519Key)
+
+	// reset crypto so the store has the key but crypto doesn't
+	crypto = signed.NewEd25519()
+
+	_, _, err = createSnapshot("gun", &data.SignedSnapshot{}, store, crypto)
 	assert.Error(t, err)
 }

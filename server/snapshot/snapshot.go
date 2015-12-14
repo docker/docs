@@ -1,8 +1,8 @@
 package snapshot
 
 import (
-	"bytes"
 	"encoding/json"
+
 	"github.com/Sirupsen/logrus"
 
 	"github.com/docker/notary/server/storage"
@@ -43,7 +43,8 @@ func GetOrCreateSnapshotKey(gun string, store storage.KeyStore, crypto signed.Cr
 }
 
 // GetOrCreateSnapshot either returns the exisiting latest snapshot, or uses
-// whatever the most recent snapshot is to generate a new one.
+// whatever the most recent snapshot is to create the next one, only updating
+// the expiry time and version.
 func GetOrCreateSnapshot(gun string, store storage.MetaStore, cryptoService signed.CryptoService) ([]byte, error) {
 
 	d, err := store.GetCurrent(gun, "snapshot")
@@ -58,7 +59,8 @@ func GetOrCreateSnapshot(gun string, store storage.MetaStore, cryptoService sign
 			logrus.Error("Failed to unmarshal existing snapshot")
 			return nil, err
 		}
-		if !snapshotExpired(sn) && !contentExpired(gun, sn, store) {
+
+		if !snapshotExpired(sn) {
 			return d, nil
 		}
 	}
@@ -85,57 +87,13 @@ func snapshotExpired(sn *data.SignedSnapshot) bool {
 	return signed.IsExpired(sn.Signed.Expires)
 }
 
-// contentExpired checks to see if any of the roles already in the snapshot
-// have been updated. It will update any roles that have changed as it goes
-// so that we don't have to run through all this again a second time.
-func contentExpired(gun string, sn *data.SignedSnapshot, store storage.MetaStore) bool {
-	expired := false
-	updatedMeta := make(data.Files)
-	for role, meta := range sn.Signed.Meta {
-		curr, err := store.GetCurrent(gun, role)
-		if err != nil {
-			return false
-		}
-		roleExp, newHash := roleExpired(curr, meta)
-		if roleExp {
-			updatedMeta[role] = data.FileMeta{
-				Length: int64(len(curr)),
-				Hashes: data.Hashes{
-					"sha256": newHash,
-				},
-			}
-		}
-		expired = expired || roleExp
-	}
-	if expired {
-		sn.Signed.Meta = updatedMeta
-	}
-	return expired
-}
-
-// roleExpired checks if the content for a specific role differs from
-// the snapshot
-func roleExpired(roleData []byte, meta data.FileMeta) (bool, []byte) {
-	currMeta, err := data.NewFileMeta(bytes.NewReader(roleData), "sha256")
-	if err != nil {
-		// if we can't generate FileMeta from the current roleData, we should
-		// continue to serve the old role if it isn't time expired
-		// because we won't be able to generate a new one.
-		return false, nil
-	}
-	hash := currMeta.Hashes["sha256"]
-	return !bytes.Equal(hash, meta.Hashes["sha256"]), hash
-}
-
 // createSnapshot uses an existing snapshot to create a new one.
 // Important things to be aware of:
 //   - It requires that a snapshot already exists. We create snapshots
 //     on upload so there should always be an existing snapshot if this
 //     gets called.
 //   - It doesn't update what roles are present in the snapshot, as those
-//     were validated during upload. We also updated the hashes of the
-//     already present roles as part of our checks on whether we could
-//     serve the previous version of the snapshot
+//     were validated during upload.
 func createSnapshot(gun string, sn *data.SignedSnapshot, store storage.MetaStore, cryptoService signed.CryptoService) (*data.Signed, int, error) {
 	algorithm, public, err := store.GetKey(gun, data.CanonicalSnapshotRole)
 	if err != nil {
