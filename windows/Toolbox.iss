@@ -238,9 +238,12 @@ begin
 			if TrackingCheckBox.Checked then begin
 				TrackEventWithProperties('Continued from Overview', '"Tracking Enabled": "Yes"');
 				TrackingDisabled := False;
+				DeleteFile(ExpandConstant('{userdocs}\..\.docker\machine\no-error-report'));
 			end else begin
 				TrackEventWithProperties('Continued from Overview', '"Tracking Enabled": "No"');
 				TrackingDisabled := True;
+				CreateDir(ExpandConstant('{userdocs}\..\.docker\machine'));
+				SaveStringToFile(ExpandConstant('{userdocs}\..\.docker\machine\no-error-report'), '', False);
 			end;
   end;
   Result := True
