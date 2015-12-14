@@ -44,11 +44,15 @@
     
     BOOL enabled = self.checkbox.state == NSOnState;
     [Mixpanel trackEvent:@"Continued from Overview" forPane:self withProperties:[[NSDictionary alloc] initWithObjectsAndKeys:enabled ? @"Yes" : @"No", @"Tracking Enabled", nil]];
-    
+    NSError *error = nil;
+
     if (!enabled) {
         [[[self section] sharedDictionary] setObject:[NSNumber numberWithBool:YES] forKey:@"disableTracking"];
+        [[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"%@/.docker/machine/no-error-report", NSHomeDirectory()] error:&error];
     } else {
         [[[self section] sharedDictionary] removeObjectForKey:@"disableTracking"];
+        [[NSFileManager defaultManager] createDirectoryAtPath:[NSString stringWithFormat:@"%@/.docker/machine", NSHomeDirectory()] withIntermediateDirectories:YES attributes:nil error:&error];
+        [[NSFileManager defaultManager] createFileAtPath:[NSString stringWithFormat:@"%@/.docker/machine/no-error-report", NSHomeDirectory()] contents:[@"" dataUsingEncoding:NSUTF8StringEncoding] attributes:nil];
     }
     
 }
