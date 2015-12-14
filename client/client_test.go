@@ -25,6 +25,7 @@ import (
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/store"
+	"github.com/docker/notary/tuf/validation"
 	"github.com/jfrazelle/go/canonical/json"
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/net/context"
@@ -921,7 +922,7 @@ func testPublishNoOneHasSnapshotKey(t *testing.T, rootType string) {
 	addTarget(t, repo, "v1", "../fixtures/intermediate-ca.crt")
 	err = repo.Publish()
 	assert.Error(t, err)
-	assert.IsType(t, store.ErrInvalidOperation{}, err)
+	assert.IsType(t, validation.ErrBadHierarchy{}, err)
 }
 
 // If the snapshot metadata is corrupt, whether the client or server has the
