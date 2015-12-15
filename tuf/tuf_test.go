@@ -143,7 +143,7 @@ func TestUpdateDelegations(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	err = repo.UpdateDelegations(role, data.KeyList{testKey}, "")
+	err = repo.UpdateDelegations(role, data.KeyList{testKey})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -164,7 +164,7 @@ func TestUpdateDelegations(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	err = repo.UpdateDelegations(roleDeep, data.KeyList{testDeepKey}, "")
+	err = repo.UpdateDelegations(roleDeep, data.KeyList{testDeepKey})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -188,7 +188,7 @@ func TestUpdateDelegationsParentMissing(t *testing.T) {
 	roleDeep, err := data.NewRole("targets/test/deep", 1, []string{testDeepKey.ID()}, []string{"test/deep"}, []string{})
 	assert.NoError(t, err)
 
-	err = repo.UpdateDelegations(roleDeep, data.KeyList{testDeepKey}, "")
+	err = repo.UpdateDelegations(roleDeep, data.KeyList{testDeepKey})
 	assert.Error(t, err)
 	assert.IsType(t, data.ErrInvalidRole{}, err)
 
@@ -209,7 +209,7 @@ func TestUpdateDelegationsInvalidRole(t *testing.T) {
 	invalidRole, err := data.NewRole("root", 1, []string{roleKey.ID()}, []string{}, []string{})
 	assert.NoError(t, err)
 
-	err = repo.UpdateDelegations(invalidRole, data.KeyList{roleKey}, "")
+	err = repo.UpdateDelegations(invalidRole, data.KeyList{roleKey})
 	assert.Error(t, err)
 	assert.IsType(t, data.ErrInvalidRole{}, err)
 
@@ -229,7 +229,7 @@ func TestUpdateDelegationsRoleMissingKey(t *testing.T) {
 	assert.NoError(t, err)
 
 	// key should get added to role as part of updating the delegation
-	err = repo.UpdateDelegations(role, data.KeyList{roleKey}, "")
+	err = repo.UpdateDelegations(role, data.KeyList{roleKey})
 	assert.NoError(t, err)
 
 	r := repo.Targets[data.CanonicalTargetsRole]
@@ -253,7 +253,7 @@ func TestUpdateDelegationsNotEnoughKeys(t *testing.T) {
 	assert.NoError(t, err)
 
 	// key should get added to role as part of updating the delegation
-	err = repo.UpdateDelegations(role, data.KeyList{roleKey}, "")
+	err = repo.UpdateDelegations(role, data.KeyList{roleKey})
 	assert.Error(t, err)
 	assert.IsType(t, data.ErrInvalidRole{}, err)
 }
@@ -268,7 +268,7 @@ func TestUpdateDelegationsReplaceRole(t *testing.T) {
 	role, err := data.NewRole("targets/test", 1, []string{testKey.ID()}, []string{"test"}, []string{})
 	assert.NoError(t, err)
 
-	err = repo.UpdateDelegations(role, data.KeyList{testKey}, "")
+	err = repo.UpdateDelegations(role, data.KeyList{testKey})
 	assert.NoError(t, err)
 
 	r := repo.Targets[data.CanonicalTargetsRole]
@@ -285,7 +285,7 @@ func TestUpdateDelegationsReplaceRole(t *testing.T) {
 	role2, err := data.NewRole("targets/test", 1, []string{testKey2.ID()}, []string{"test"}, []string{})
 	assert.NoError(t, err)
 
-	err = repo.UpdateDelegations(role2, data.KeyList{testKey2}, "")
+	err = repo.UpdateDelegations(role2, data.KeyList{testKey2})
 	assert.NoError(t, err)
 
 	r = repo.Targets["targets"]
@@ -307,7 +307,7 @@ func TestUpdateDelegationsAddKeyToRole(t *testing.T) {
 	role, err := data.NewRole("targets/test", 1, []string{testKey.ID()}, []string{"test"}, []string{})
 	assert.NoError(t, err)
 
-	err = repo.UpdateDelegations(role, data.KeyList{testKey}, "")
+	err = repo.UpdateDelegations(role, data.KeyList{testKey})
 	assert.NoError(t, err)
 
 	r := repo.Targets[data.CanonicalTargetsRole]
@@ -320,7 +320,7 @@ func TestUpdateDelegationsAddKeyToRole(t *testing.T) {
 	testKey2, err := ed25519.Create("targets/test", data.ED25519Key)
 	assert.NoError(t, err)
 
-	err = repo.UpdateDelegations(role, data.KeyList{testKey2}, "")
+	err = repo.UpdateDelegations(role, data.KeyList{testKey2})
 	assert.NoError(t, err)
 
 	r = repo.Targets["targets"]
@@ -344,7 +344,7 @@ func TestDeleteDelegations(t *testing.T) {
 	role, err := data.NewRole("targets/test", 1, []string{testKey.ID()}, []string{"test"}, []string{})
 	assert.NoError(t, err)
 
-	err = repo.UpdateDelegations(role, data.KeyList{testKey}, "")
+	err = repo.UpdateDelegations(role, data.KeyList{testKey})
 	assert.NoError(t, err)
 
 	r := repo.Targets[data.CanonicalTargetsRole]
@@ -425,19 +425,19 @@ func TestDeleteDelegationsMidSliceRole(t *testing.T) {
 	role, err := data.NewRole("targets/test", 1, []string{}, []string{}, []string{})
 	assert.NoError(t, err)
 
-	err = repo.UpdateDelegations(role, data.KeyList{testKey}, "")
+	err = repo.UpdateDelegations(role, data.KeyList{testKey})
 	assert.NoError(t, err)
 
 	role2, err := data.NewRole("targets/test2", 1, []string{}, []string{}, []string{})
 	assert.NoError(t, err)
 
-	err = repo.UpdateDelegations(role2, data.KeyList{testKey}, "")
+	err = repo.UpdateDelegations(role2, data.KeyList{testKey})
 	assert.NoError(t, err)
 
 	role3, err := data.NewRole("targets/test3", 1, []string{}, []string{}, []string{})
 	assert.NoError(t, err)
 
-	err = repo.UpdateDelegations(role3, data.KeyList{testKey}, "")
+	err = repo.UpdateDelegations(role3, data.KeyList{testKey})
 	assert.NoError(t, err)
 
 	err = repo.DeleteDelegation(*role2)

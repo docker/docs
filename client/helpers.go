@@ -67,37 +67,51 @@ func applyTargetsChange(repo *tuf.Repo, c changelist.Change) error {
 
 func changeTargetsDelegation(repo *tuf.Repo, c changelist.Change) error {
 	switch c.Action() {
-	case changelist.ActionCreate, changelist.ActionUpdate:
+	case changelist.ActionCreate:
 		td := changelist.TufDelegation{}
 		err := json.Unmarshal(c.Content(), &td)
 		if err != nil {
 			return err
 		}
 		r, err := repo.GetDelegation(c.Scope())
-		if err == nil {
-			// role exists, merge
-			if err := r.AddPaths(td.AddPaths); err != nil {
-				return err
-			}
-			if err := r.AddPathHashPrefixes(td.AddPathHashPrefixes); err != nil {
-				return err
-			}
-			r.RemoveKeys(td.RemoveKeys)
-			r.RemovePaths(td.RemovePaths)
-			r.RemovePathHashPrefixes(td.RemovePathHashPrefixes)
-			return repo.UpdateDelegations(r, td.AddKeys, "")
-		} else if _, ok := err.(data.ErrNoSuchRole); ok {
-			// role doesn't exist, create brand new
-			r, err = td.ToNewRole(c.Scope())
-			if err != nil {
-				return err
-			}
-			return repo.UpdateDelegations(r, td.AddKeys, "")
-		} else {
-			// any error other than ErrNoSuchRole indicates
-			// bad data
-			return fmt.Errorf("could not apply delegations change because: \"%v\"", err)
+		if _, ok := err.(data.ErrNoSuchRole); err != nil && !ok {
+			// error that wasn't ErrNoSuchRole
+			return err
 		}
+		if err == nil {
+			// role existed
+			return data.ErrInvalidRole{
+				Role:   c.Scope(),
+				Reason: "cannot create a role that already exists",
+			}
+		}
+		// role doesn't exist, create brand new
+		r, err = td.ToNewRole(c.Scope())
+		if err != nil {
+			return err
+		}
+		return repo.UpdateDelegations(r, td.AddKeys)
+	case changelist.ActionUpdate:
+		td := changelist.TufDelegation{}
+		err := json.Unmarshal(c.Content(), &td)
+		if err != nil {
+			return err
+		}
+		r, err := repo.GetDelegation(c.Scope())
+		if err != nil {
+			return err
+		}
+		// role exists, merge
+		if err := r.AddPaths(td.AddPaths); err != nil {
+			return err
+		}
+		if err := r.AddPathHashPrefixes(td.AddPathHashPrefixes); err != nil {
+			return err
+		}
+		r.RemoveKeys(td.RemoveKeys)
+		r.RemovePaths(td.RemovePaths)
+		r.RemovePathHashPrefixes(td.RemovePathHashPrefixes)
+		return repo.UpdateDelegations(r, td.AddKeys)
 	case changelist.ActionDelete:
 		r := data.Role{Name: c.Scope()}
 		return repo.DeleteDelegation(r)
