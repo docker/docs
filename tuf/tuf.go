@@ -180,11 +180,7 @@ func (tr *Repo) GetDelegation(role string) (*data.Role, error) {
 // a new delegation or updating an existing one. If keys are
 // provided, the IDs will be added to the role (if they do not exist
 // there already), and the keys will be added to the targets file.
-// The "before" argument specifies another role which this new role
-// will be added in front of (i.e. higher priority) in the delegation list.
-// An empty before string indicates to add the role to the end of the
-// delegation list.
-func (tr *Repo) UpdateDelegations(role *data.Role, keys []data.PublicKey, before string) error {
+func (tr *Repo) UpdateDelegations(role *data.Role, keys []data.PublicKey) error {
 	if !role.IsDelegation() || !role.IsValid() {
 		return data.ErrInvalidRole{Role: role.Name, Reason: "not a valid delegated role"}
 	}
@@ -275,7 +271,7 @@ func (tr *Repo) InitRepo(consistent bool) error {
 	if err := tr.InitRoot(consistent); err != nil {
 		return err
 	}
-	if err := tr.InitTargets(); err != nil {
+	if err := tr.InitTargets(data.CanonicalTargetsRole); err != nil {
 		return err
 	}
 	if err := tr.InitSnapshot(); err != nil {
@@ -311,9 +307,16 @@ func (tr *Repo) InitRoot(consistent bool) error {
 }
 
 // InitTargets initializes an empty targets
-func (tr *Repo) InitTargets() error {
+func (tr *Repo) InitTargets(role string) error {
+	r := data.Role{Name: role}
+	if !r.IsDelegation() && !(data.CanonicalRole(role) == data.CanonicalTargetsRole) {
+		return data.ErrInvalidRole{
+			Role:   role,
+			Reason: fmt.Sprintf("role is not a valid targets role name: %s", role),
+		}
+	}
 	targets := data.NewTargets()
-	tr.Targets[data.ValidRoles["targets"]] = targets
+	tr.Targets[data.RoleName(role)] = targets
 	return nil
 }
 

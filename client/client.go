@@ -244,7 +244,7 @@ func (r *NotaryRepository) Initialize(rootKeyID string, serverManagedRoles ...st
 		logrus.Debug("Error on InitRoot: ", err.Error())
 		return err
 	}
-	err = r.tufRepo.InitTargets()
+	err = r.tufRepo.InitTargets(data.CanonicalTargetsRole)
 	if err != nil {
 		logrus.Debug("Error on InitTargets: ", err.Error())
 		return err

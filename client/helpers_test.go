@@ -20,7 +20,7 @@ func TestApplyTargetsChange(t *testing.T) {
 	kdb.AddRole(role)
 
 	repo := tuf.NewRepo(kdb, nil)
-	err = repo.InitTargets()
+	err = repo.InitTargets(data.CanonicalTargetsRole)
 	assert.NoError(t, err)
 	hash := sha256.Sum256([]byte{})
 	f := &data.FileMeta{
@@ -63,7 +63,7 @@ func TestApplyChangelist(t *testing.T) {
 	kdb.AddRole(role)
 
 	repo := tuf.NewRepo(kdb, nil)
-	err = repo.InitTargets()
+	err = repo.InitTargets(data.CanonicalTargetsRole)
 	assert.NoError(t, err)
 	hash := sha256.Sum256([]byte{})
 	f := &data.FileMeta{
@@ -111,7 +111,7 @@ func TestApplyChangelistMulti(t *testing.T) {
 	kdb.AddRole(role)
 
 	repo := tuf.NewRepo(kdb, nil)
-	err = repo.InitTargets()
+	err = repo.InitTargets(data.CanonicalTargetsRole)
 	assert.NoError(t, err)
 	hash := sha256.Sum256([]byte{})
 	f := &data.FileMeta{
@@ -185,6 +185,7 @@ func TestApplyTargetsDelegationCreateDelete(t *testing.T) {
 	assert.True(t, ok)
 
 	role := tgts.Signed.Delegations.Roles[0]
+	assert.Len(t, role.KeyIDs, 1)
 	assert.Equal(t, newKey.ID(), role.KeyIDs[0])
 	assert.Equal(t, "targets/level1", role.Name)
 	assert.Equal(t, "level1", role.Paths[0])
@@ -260,11 +261,13 @@ func TestApplyTargetsDelegationCreate2SharedKey(t *testing.T) {
 	assert.Len(t, tgts.Signed.Delegations.Keys, 1)
 
 	role1 := tgts.Signed.Delegations.Roles[0]
+	assert.Len(t, role1.KeyIDs, 1)
 	assert.Equal(t, newKey.ID(), role1.KeyIDs[0])
 	assert.Equal(t, "targets/level1", role1.Name)
 	assert.Equal(t, "level1", role1.Paths[0])
 
 	role2 := tgts.Signed.Delegations.Roles[1]
+	assert.Len(t, role2.KeyIDs, 1)
 	assert.Equal(t, newKey.ID(), role2.KeyIDs[0])
 	assert.Equal(t, "targets/level2", role2.Name)
 	assert.Equal(t, "level2", role2.Paths[0])
@@ -367,6 +370,73 @@ func TestApplyTargetsDelegationCreateEdit(t *testing.T) {
 	assert.Equal(t, "level1", role.Paths[0])
 }
 
+func TestApplyTargetsDelegationEditNonExisting(t *testing.T) {
+	_, repo, cs := testutils.EmptyRepo()
+
+	newKey, err := cs.Create("targets/level1", data.ED25519Key)
+	assert.NoError(t, err)
+
+	// create delegation
+	kl := data.KeyList{newKey}
+	td := &changelist.TufDelegation{
+		NewThreshold: 1,
+		AddKeys:      kl,
+		AddPaths:     []string{"level1"},
+	}
+
+	tdJSON, err := json.Marshal(td)
+	assert.NoError(t, err)
+
+	ch := changelist.NewTufChange(
+		changelist.ActionUpdate,
+		"targets/level1",
+		changelist.TypeTargetsDelegation,
+		"",
+		tdJSON,
+	)
+
+	err = applyTargetsChange(repo, ch)
+	assert.Error(t, err)
+	assert.IsType(t, data.ErrNoSuchRole{}, err)
+}
+
+func TestApplyTargetsDelegationCreateAlreadyExisting(t *testing.T) {
+	_, repo, cs := testutils.EmptyRepo()
+
+	newKey, err := cs.Create("targets/level1", data.ED25519Key)
+	assert.NoError(t, err)
+
+	// create delegation
+	kl := data.KeyList{newKey}
+	td := &changelist.TufDelegation{
+		NewThreshold: 1,
+		AddKeys:      kl,
+		AddPaths:     []string{"level1"},
+	}
+
+	tdJSON, err := json.Marshal(td)
+	assert.NoError(t, err)
+
+	ch := changelist.NewTufChange(
+		changelist.ActionCreate,
+		"targets/level1",
+		changelist.TypeTargetsDelegation,
+		"",
+		tdJSON,
+	)
+
+	err = applyTargetsChange(repo, ch)
+	assert.NoError(t, err)
+	// we have sufficient checks elsewhere we don't need to confirm that
+	// creating fresh works here via more asserts.
+
+	// when attempting to create the same role again, assert we receive
+	// an ErrInvalidRole because an existing role can't be "created"
+	err = applyTargetsChange(repo, ch)
+	assert.Error(t, err)
+	assert.IsType(t, data.ErrInvalidRole{}, err)
+}
+
 func TestApplyTargetsDelegationInvalidRole(t *testing.T) {
 	_, repo, cs := testutils.EmptyRepo()
 
@@ -455,6 +525,9 @@ func TestApplyTargetsChangeInvalidType(t *testing.T) {
 	assert.Error(t, err)
 }
 
+// A delegated role MUST NOT have both Paths and PathHashPrefixes defined.
+// These next 2 tests check that attempting to edit an existing role to
+// create an invalid role errors in both possible combinations.
 func TestApplyTargetsDelegationConflictPathsPrefixes(t *testing.T) {
 	_, repo, cs := testutils.EmptyRepo()
 
@@ -575,4 +648,83 @@ func TestApplyTargetsDelegationCreateInvalid(t *testing.T) {
 
 	err = applyTargetsChange(repo, ch)
 	assert.Error(t, err)
+}
+
+func TestApplyTargetsDelegationCreate2Deep(t *testing.T) {
+	_, repo, cs := testutils.EmptyRepo()
+
+	newKey, err := cs.Create("targets/level1", data.ED25519Key)
+	assert.NoError(t, err)
+
+	// create delegation
+	kl := data.KeyList{newKey}
+	td := &changelist.TufDelegation{
+		NewThreshold: 1,
+		AddKeys:      kl,
+		AddPaths:     []string{"level1"},
+	}
+
+	tdJSON, err := json.Marshal(td)
+	assert.NoError(t, err)
+
+	ch := changelist.NewTufChange(
+		changelist.ActionCreate,
+		"targets/level1",
+		changelist.TypeTargetsDelegation,
+		"",
+		tdJSON,
+	)
+
+	err = applyTargetsChange(repo, ch)
+	assert.NoError(t, err)
+
+	tgts := repo.Targets[data.CanonicalTargetsRole]
+	assert.Len(t, tgts.Signed.Delegations.Roles, 1)
+	assert.Len(t, tgts.Signed.Delegations.Keys, 1)
+
+	_, ok := tgts.Signed.Delegations.Keys[newKey.ID()]
+	assert.True(t, ok)
+
+	role := tgts.Signed.Delegations.Roles[0]
+	assert.Len(t, role.KeyIDs, 1)
+	assert.Equal(t, newKey.ID(), role.KeyIDs[0])
+	assert.Equal(t, "targets/level1", role.Name)
+	assert.Equal(t, "level1", role.Paths[0])
+
+	// init delegations targets file. This would be done as part of a publish
+	// operation
+	repo.InitTargets("targets/level1")
+
+	td = &changelist.TufDelegation{
+		NewThreshold: 1,
+		AddKeys:      kl,
+		AddPaths:     []string{"level1/level2"},
+	}
+
+	tdJSON, err = json.Marshal(td)
+	assert.NoError(t, err)
+
+	ch = changelist.NewTufChange(
+		changelist.ActionCreate,
+		"targets/level1/level2",
+		changelist.TypeTargetsDelegation,
+		"",
+		tdJSON,
+	)
+
+	err = applyTargetsChange(repo, ch)
+	assert.NoError(t, err)
+
+	tgts = repo.Targets["targets/level1"]
+	assert.Len(t, tgts.Signed.Delegations.Roles, 1)
+	assert.Len(t, tgts.Signed.Delegations.Keys, 1)
+
+	_, ok = tgts.Signed.Delegations.Keys[newKey.ID()]
+	assert.True(t, ok)
+
+	role = tgts.Signed.Delegations.Roles[0]
+	assert.Len(t, role.KeyIDs, 1)
+	assert.Equal(t, newKey.ID(), role.KeyIDs[0])
+	assert.Equal(t, "targets/level1/level2", role.Name)
+	assert.Equal(t, "level1/level2", role.Paths[0])
 }
