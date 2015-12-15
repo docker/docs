@@ -36,7 +36,7 @@ func (s *Stack) Pop() (interface{}, error) {
 		*s = (*s)[:l-1]
 		return item, nil
 	}
-	return nil, ErrEmptyStack{action: "pop"}
+	return nil, ErrEmptyStack{action: "Pop"}
 }
 
 func (s *Stack) PopString() (string, error) {
@@ -49,7 +49,7 @@ func (s *Stack) PopString() (string, error) {
 		}
 		return "", ErrBadTypeCast{}
 	}
-	return "", ErrEmptyStack{action: "pop"}
+	return "", ErrEmptyStack{action: "PopString"}
 }
 
 func (s Stack) Empty() bool {
