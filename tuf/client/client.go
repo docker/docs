@@ -369,34 +369,47 @@ func (c *Client) downloadSnapshot() error {
 	return nil
 }
 
-// downloadTargets is responsible for downloading any targets file
-// including delegates roles.
+// downloadTargets downloads all targets and delegated targets for the repository.
+// It uses a pre-order tree traversal as it's necessary to download parents first
+// to obtain the keys to validate children.
 func (c *Client) downloadTargets(role string) error {
-	role = data.RoleName(role) // this will really only do something for base targets role
-	if c.local.Snapshot == nil {
-		return ErrMissingMeta{role: role}
-	}
-	snap := c.local.Snapshot.Signed
-	root := c.local.Root.Signed
-	r := c.keysDB.GetRole(role)
-	if r == nil {
-		return fmt.Errorf("Invalid role: %s", role)
-	}
-	keyIDs := r.KeyIDs
-	s, err := c.getTargetsFile(role, keyIDs, snap.Meta, root.ConsistentSnapshot, r.Threshold)
-	if err != nil {
-		logrus.Error("Error getting targets file:", err)
-		return err
-	}
-	t, err := data.TargetsFromSigned(s)
-	if err != nil {
-		return err
-	}
-	err = c.local.SetTargets(role, t)
-	if err != nil {
-		return err
-	}
+	stack := utils.NewStack()
+	stack.Push(role)
+	for !stack.Empty() {
+		role, err := stack.PopString()
+		if err != nil {
+			return err
+		}
+		role = data.RoleName(role) // this will really only do something for base targets role
+		if c.local.Snapshot == nil {
+			return ErrMissingMeta{role: role}
+		}
+		snap := c.local.Snapshot.Signed
+		root := c.local.Root.Signed
+		r := c.keysDB.GetRole(role)
+		if r == nil {
+			return fmt.Errorf("Invalid role: %s", role)
+		}
+		keyIDs := r.KeyIDs
+		s, err := c.getTargetsFile(role, keyIDs, snap.Meta, root.ConsistentSnapshot, r.Threshold)
+		if err != nil {
+			logrus.Error("Error getting targets file:", err)
+			return err
+		}
+		t, err := data.TargetsFromSigned(s)
+		if err != nil {
+			return err
+		}
+		err = c.local.SetTargets(role, t)
+		if err != nil {
+			return err
+		}
 
+		// push delegated roles contained in the targets file onto the stack
+		for _, r := range t.Signed.Delegations.Roles {
+			stack.Push(r.Name)
+		}
+	}
 	return nil
 }
 
