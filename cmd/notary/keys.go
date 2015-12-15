@@ -5,6 +5,7 @@ import (
 	"bufio"
 	"fmt"
 	"io"
+	"net/http"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -17,111 +18,160 @@ import (
 
 	"github.com/docker/notary/tuf/data"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
-func init() {
-	cmdKey.AddCommand(cmdKeyList)
-	cmdKey.AddCommand(cmdKeyGenerateRootKey)
-
-	cmdKeysBackup.Flags().StringVarP(&keysExportGUN, "gun", "g", "", "Globally Unique Name to export keys for")
-	cmdKey.AddCommand(cmdKeysBackup)
-	cmdKey.AddCommand(cmdKeyExportRoot)
-	cmdKeyExportRoot.Flags().BoolVarP(&keysExportRootChangePassphrase, "change-passphrase", "p", false, "Set a new passphrase for the key being exported")
-	cmdKey.AddCommand(cmdKeysRestore)
-	cmdKey.AddCommand(cmdKeyImportRoot)
-	cmdKey.AddCommand(cmdRotateKey)
-	cmdKey.AddCommand(cmdKeyRemove)
+type usageTemplate struct {
+	Use   string
+	Short string
+	Long  string
 }
 
-var cmdKey = &cobra.Command{
+type cobraRunE func(cmd *cobra.Command, args []string) error
+
+func (u usageTemplate) ToCommand(run cobraRunE) *cobra.Command {
+	c := cobra.Command{
+		Use:   u.Use,
+		Short: u.Short,
+		Long:  u.Long,
+	}
+	if run != nil {
+		// newer versions of cobra support a run function that returns an error,
+		// but in the meantime, this should help ease the transition
+		c.Run = func(cmd *cobra.Command, args []string) {
+			err := run(cmd, args)
+			if err != nil {
+				cmd.Usage()
+				fatalf(err.Error())
+			}
+		}
+	}
+	return &c
+}
+
+var cmdKeyTemplate = usageTemplate{
 	Use:   "key",
 	Short: "Operates on keys.",
 	Long:  `Operations on private keys.`,
 }
 
-var cmdKeyList = &cobra.Command{
+var cmdKeyListTemplate = usageTemplate{
 	Use:   "list",
 	Short: "Lists keys.",
 	Long:  "Lists all keys known to notary.",
-	Run:   keysList,
 }
 
-var cmdRotateKey = &cobra.Command{
+var cmdRotateKeyTemplate = usageTemplate{
 	Use:   "rotate [ GUN ]",
-	Short: "Rotate all the signing (non-root) keys for the given Globally Unique Name.",
-	Long:  "Removes all old signing (non-root) keys for the given Globally Unique Name, and generates new ones.  This only makes local changes - please use then `notary publish` to push the key rotation changes to the remote server.",
-	Run:   keysRotate,
+	Short: "Rotate the signing (non-root) keys for the given Globally Unique Name.",
+	Long:  "Removes all the old signing (non-root) keys for the given Globally Unique Name, and generates new ones.  This only makes local changes - please use then `notary publish` to push the key rotation changes to the remote server.",
 }
 
-var cmdKeyGenerateRootKey = &cobra.Command{
+var cmdKeyGenerateRootKeyTemplate = usageTemplate{
 	Use:   "generate [ algorithm ]",
 	Short: "Generates a new root key with a given algorithm.",
 	Long:  "Generates a new root key with a given algorithm. If hardware key storage (e.g. a Yubikey) is available, the key will be stored both on hardware and on disk (so that it can be backed up).  Please make sure to back up and then remove this on-key disk immediately afterwards.",
-	Run:   keysGenerateRootKey,
 }
 
-var keysExportGUN string
-
-var cmdKeysBackup = &cobra.Command{
+var cmdKeysBackupTemplate = usageTemplate{
 	Use:   "backup [ zipfilename ]",
 	Short: "Backs up all your on-disk keys to a ZIP file.",
 	Long:  "Backs up all of your accessible of keys. The keys are reencrypted with a new passphrase. The output is a ZIP file.  If the --gun option is passed, only signing keys and no root keys will be backed up.  Does not work on keys that are only in hardware (e.g. Yubikeys).",
-	Run:   keysBackup,
 }
 
-var keysExportRootChangePassphrase bool
-
-var cmdKeyExportRoot = &cobra.Command{
+var cmdKeyExportRootTemplate = usageTemplate{
 	Use:   "export [ keyID ] [ pemfilename ]",
 	Short: "Export a root key on disk to a PEM file.",
 	Long:  "Exports a single root key on disk, without reencrypting. The output is a PEM file. Does not work on keys that are only in hardware (e.g. Yubikeys).",
-	Run:   keysExportRoot,
 }
 
-var cmdKeysRestore = &cobra.Command{
+var cmdKeysRestoreTemplate = usageTemplate{
 	Use:   "restore [ zipfilename ]",
 	Short: "Restore multiple keys from a ZIP file.",
 	Long:  "Restores one or more keys from a ZIP file. If hardware key storage (e.g. a Yubikey) is available, root keys will be imported into the hardware, but not backed up to disk in the same location as the other, non-root keys.",
-	Run:   keysRestore,
 }
 
-var cmdKeyImportRoot = &cobra.Command{
+var cmdKeyImportRootTemplate = usageTemplate{
 	Use:   "import [ pemfilename ]",
 	Short: "Imports a root key from a PEM file.",
 	Long:  "Imports a single root key from a PEM file. If a hardware key storage (e.g. Yubikey) is available, the root key will be imported into the hardware but not backed up on disk again.",
-	Run:   keysImportRoot,
 }
 
-var cmdKeyRemove = &cobra.Command{
+var cmdKeyRemoveTemplate = usageTemplate{
 	Use:   "remove [ keyID ]",
 	Short: "Removes the key with the given keyID.",
 	Long:  "Removes the key with the given keyID.  If the key is stored in more than one location, you will be asked which one to remove.",
-	Run:   keyRemove,
 }
 
-func keysList(cmd *cobra.Command, args []string) {
+type keyCommander struct {
+	// these need to be set
+	configGetter func() *viper.Viper
+	retriever    passphrase.Retriever
+
+	// these are for command line parsing - no need to set
+	keysExportRootChangePassphrase bool
+	keysExportGUN                  string
+	rotateKeyRole                  string
+	rotateKeyServerManaged         bool
+}
+
+func (k *keyCommander) GetCommand() *cobra.Command {
+	cmd := cmdKeyTemplate.ToCommand(nil)
+	cmd.AddCommand(cmdKeyListTemplate.ToCommand(k.keysList))
+	cmd.AddCommand(cmdKeyGenerateRootKeyTemplate.ToCommand(k.keysGenerateRootKey))
+	cmd.AddCommand(cmdKeysRestoreTemplate.ToCommand(k.keysRestore))
+	cmd.AddCommand(cmdKeyImportRootTemplate.ToCommand(k.keysImportRoot))
+	cmd.AddCommand(cmdKeyRemoveTemplate.ToCommand(k.keyRemove))
+
+	cmdKeysBackup := cmdKeysBackupTemplate.ToCommand(k.keysBackup)
+	cmdKeysBackup.Flags().StringVarP(
+		&k.keysExportGUN, "gun", "g", "", "Globally Unique Name to export keys for")
+	cmd.AddCommand(cmdKeysBackup)
+
+	cmdKeyExportRoot := cmdKeyExportRootTemplate.ToCommand(k.keysExportRoot)
+	cmdKeyExportRoot.Flags().BoolVarP(
+		&k.keysExportRootChangePassphrase, "change-passphrase", "p", false,
+		"Set a new passphrase for the key being exported")
+	cmd.AddCommand(cmdKeyExportRoot)
+
+	cmdRotateKey := cmdRotateKeyTemplate.ToCommand(k.keysRotate)
+	cmdRotateKey.Flags().BoolVarP(&k.rotateKeyServerManaged, "server-managed", "r",
+		false, "Signing and key management will be handled by the remote server. "+
+			"(no key will be generated or stored locally) "+
+			"Can only be used in conjunction with --key-type.")
+	cmdRotateKey.Flags().StringVarP(&k.rotateKeyRole, "key-type", "t", "",
+		`Key type to rotate.  Supported values: "targets", "snapshot". `+
+			`If not provided, both targets and snapshot keys will be rotated, `+
+			`and the new keys will be locally generated and stored.`)
+	cmd.AddCommand(cmdRotateKey)
+
+	return cmd
+}
+
+func (k *keyCommander) keysList(cmd *cobra.Command, args []string) error {
 	if len(args) > 0 {
-		cmd.Usage()
-		os.Exit(1)
+		return fmt.Errorf("")
 	}
 
-	parseConfig()
+	config := k.configGetter()
+	ks, err := k.getKeyStores(config, true)
+	if err != nil {
+		return err
+	}
 
-	stores := getKeyStores(cmd, mainViper.GetString("trust_dir"), retriever, true)
 	cmd.Println("")
-	prettyPrintKeys(stores, cmd.Out())
+	prettyPrintKeys(ks, cmd.Out())
 	cmd.Println("")
+	return nil
 }
 
-func keysGenerateRootKey(cmd *cobra.Command, args []string) {
+func (k *keyCommander) keysGenerateRootKey(cmd *cobra.Command, args []string) error {
 	// We require one or no arguments (since we have a default value), but if the
 	// user passes in more than one argument, we error out.
 	if len(args) > 1 {
-		cmd.Usage()
-		fatalf("Please provide only one Algorithm as an argument to generate (rsa, ecdsa)")
+		return fmt.Errorf(
+			"Please provide only one Algorithm as an argument to generate (rsa, ecdsa)")
 	}
-
-	parseConfig()
 
 	// If no param is given to generate, generates an ecdsa key by default
 	algorithm := data.ECDSAKey
@@ -137,49 +187,50 @@ func keysGenerateRootKey(cmd *cobra.Command, args []string) {
 	}
 
 	if !allowedCiphers[strings.ToLower(algorithm)] {
-		fatalf("Algorithm not allowed, possible values are: RSA, ECDSA")
+		return fmt.Errorf("Algorithm not allowed, possible values are: RSA, ECDSA")
 	}
 
-	parseConfig()
-
-	cs := cryptoservice.NewCryptoService(
-		"",
-		getKeyStores(cmd, mainViper.GetString("trust_dir"), retriever, true)...,
-	)
+	config := k.configGetter()
+	ks, err := k.getKeyStores(config, true)
+	if err != nil {
+		return err
+	}
+	cs := cryptoservice.NewCryptoService("", ks...)
 
 	pubKey, err := cs.Create(data.CanonicalRootRole, algorithm)
 	if err != nil {
-		fatalf("Failed to create a new root key: %v", err)
+		return fmt.Errorf("Failed to create a new root key: %v", err)
 	}
 
 	cmd.Printf("Generated new %s root key with keyID: %s\n", algorithm, pubKey.ID())
+	return nil
 }
 
 // keysBackup exports a collection of keys to a ZIP file
-func keysBackup(cmd *cobra.Command, args []string) {
+func (k *keyCommander) keysBackup(cmd *cobra.Command, args []string) error {
 	if len(args) < 1 {
-		cmd.Usage()
-		fatalf("Must specify output filename for export")
+		return fmt.Errorf("Must specify output filename for export")
 	}
 
-	parseConfig()
+	config := k.configGetter()
+	ks, err := k.getKeyStores(config, false)
+	if err != nil {
+		return err
+	}
 	exportFilename := args[0]
 
-	cs := cryptoservice.NewCryptoService(
-		"",
-		getKeyStores(cmd, mainViper.GetString("trust_dir"), retriever, false)...,
-	)
+	cs := cryptoservice.NewCryptoService("", ks...)
 
 	exportFile, err := os.Create(exportFilename)
 	if err != nil {
-		fatalf("Error creating output file: %v", err)
+		return fmt.Errorf("Error creating output file: %v", err)
 	}
 
 	// Must use a different passphrase retriever to avoid caching the
 	// unlocking passphrase and reusing that.
 	exportRetriever := getRetriever()
-	if keysExportGUN != "" {
-		err = cs.ExportKeysByGUN(exportFile, keysExportGUN, exportRetriever)
+	if k.keysExportGUN != "" {
+		err = cs.ExportKeysByGUN(exportFile, k.keysExportGUN, exportRetriever)
 	} else {
 		err = cs.ExportAllKeys(exportFile, exportRetriever)
 	}
@@ -188,38 +239,36 @@ func keysBackup(cmd *cobra.Command, args []string) {
 
 	if err != nil {
 		os.Remove(exportFilename)
-		fatalf("Error exporting keys: %v", err)
+		return fmt.Errorf("Error exporting keys: %v", err)
 	}
+	return nil
 }
 
 // keysExportRoot exports a root key by ID to a PEM file
-func keysExportRoot(cmd *cobra.Command, args []string) {
+func (k *keyCommander) keysExportRoot(cmd *cobra.Command, args []string) error {
 	if len(args) < 2 {
-		cmd.Usage()
-		fatalf("Must specify key ID and output filename for export")
+		return fmt.Errorf("Must specify key ID and output filename for export")
 	}
-
-	parseConfig()
 
 	keyID := args[0]
 	exportFilename := args[1]
 
 	if len(keyID) != idSize {
-		fatalf("Please specify a valid root key ID")
+		return fmt.Errorf("Please specify a valid root key ID")
 	}
 
-	parseConfig()
-
-	cs := cryptoservice.NewCryptoService(
-		"",
-		getKeyStores(cmd, mainViper.GetString("trust_dir"), retriever, false)...,
-	)
+	config := k.configGetter()
+	ks, err := k.getKeyStores(config, true)
+	if err != nil {
+		return err
+	}
+	cs := cryptoservice.NewCryptoService("", ks...)
 
 	exportFile, err := os.Create(exportFilename)
 	if err != nil {
-		fatalf("Error creating output file: %v", err)
+		return fmt.Errorf("Error creating output file: %v", err)
 	}
-	if keysExportRootChangePassphrase {
+	if k.keysExportRootChangePassphrase {
 		// Must use a different passphrase retriever to avoid caching the
 		// unlocking passphrase and reusing that.
 		exportRetriever := getRetriever()
@@ -230,83 +279,112 @@ func keysExportRoot(cmd *cobra.Command, args []string) {
 	exportFile.Close()
 	if err != nil {
 		os.Remove(exportFilename)
-		fatalf("Error exporting root key: %v", err)
+		return fmt.Errorf("Error exporting root key: %v", err)
 	}
+	return nil
 }
 
 // keysRestore imports keys from a ZIP file
-func keysRestore(cmd *cobra.Command, args []string) {
+func (k *keyCommander) keysRestore(cmd *cobra.Command, args []string) error {
 	if len(args) < 1 {
-		cmd.Usage()
-		fatalf("Must specify input filename for import")
+		return fmt.Errorf("Must specify input filename for import")
 	}
 
 	importFilename := args[0]
 
-	parseConfig()
-
-	cs := cryptoservice.NewCryptoService(
-		"",
-		getKeyStores(cmd, mainViper.GetString("trust_dir"), retriever, true)...,
-	)
+	config := k.configGetter()
+	ks, err := k.getKeyStores(config, true)
+	if err != nil {
+		return err
+	}
+	cs := cryptoservice.NewCryptoService("", ks...)
 
 	zipReader, err := zip.OpenReader(importFilename)
 	if err != nil {
-		fatalf("Opening file for import: %v", err)
+		return fmt.Errorf("Opening file for import: %v", err)
 	}
 	defer zipReader.Close()
 
 	err = cs.ImportKeysZip(zipReader.Reader)
 
 	if err != nil {
-		fatalf("Error importing keys: %v", err)
+		return fmt.Errorf("Error importing keys: %v", err)
 	}
+	return nil
 }
 
 // keysImportRoot imports a root key from a PEM file
-func keysImportRoot(cmd *cobra.Command, args []string) {
+func (k *keyCommander) keysImportRoot(cmd *cobra.Command, args []string) error {
 	if len(args) != 1 {
-		cmd.Usage()
-		fatalf("Must specify input filename for import")
+		return fmt.Errorf("Must specify input filename for import")
 	}
 
-	parseConfig()
-
-	cs := cryptoservice.NewCryptoService(
-		"",
-		getKeyStores(cmd, mainViper.GetString("trust_dir"), retriever, true)...,
-	)
+	config := k.configGetter()
+	ks, err := k.getKeyStores(config, true)
+	if err != nil {
+		return err
+	}
+	cs := cryptoservice.NewCryptoService("", ks...)
 
 	importFilename := args[0]
 
 	importFile, err := os.Open(importFilename)
 	if err != nil {
-		fatalf("Opening file for import: %v", err)
+		return fmt.Errorf("Opening file for import: %v", err)
 	}
 	defer importFile.Close()
 
 	err = cs.ImportRootKey(importFile)
 
 	if err != nil {
-		fatalf("Error importing root key: %v", err)
+		return fmt.Errorf("Error importing root key: %v", err)
 	}
+	return nil
 }
 
-func keysRotate(cmd *cobra.Command, args []string) {
+func (k *keyCommander) keysRotate(cmd *cobra.Command, args []string) error {
 	if len(args) < 1 {
-		cmd.Usage()
-		fatalf("Must specify a GUN and target")
+		return fmt.Errorf("Must specify a GUN")
 	}
-	parseConfig()
+	rotateKeyRole := strings.ToLower(k.rotateKeyRole)
+
+	var rolesToRotate []string
+	switch rotateKeyRole {
+	case "":
+		rolesToRotate = []string{data.CanonicalSnapshotRole, data.CanonicalTargetsRole}
+	case data.CanonicalSnapshotRole:
+		rolesToRotate = []string{data.CanonicalSnapshotRole}
+	case data.CanonicalTargetsRole:
+		rolesToRotate = []string{data.CanonicalTargetsRole}
+	default:
+		return fmt.Errorf("key rotation not supported for %s keys", k.rotateKeyRole)
+	}
+	if k.rotateKeyServerManaged && rotateKeyRole != data.CanonicalSnapshotRole {
+		return fmt.Errorf(
+			"remote signing/key management is only supported for the snapshot key")
+	}
+
+	config := k.configGetter()
 
 	gun := args[0]
-	nRepo, err := notaryclient.NewNotaryRepository(mainViper.GetString("trust_dir"), gun, remoteTrustServer, nil, retriever)
+	var rt http.RoundTripper
+	if k.rotateKeyServerManaged {
+		// this does not actually push the changes, just creates the keys, but
+		// it creates a key remotely so it needs a transport
+		rt = getTransport(config, gun, true)
+	}
+	nRepo, err := notaryclient.NewNotaryRepository(
+		config.GetString("trust_dir"), gun, getRemoteTrustServer(config),
+		rt, k.retriever)
 	if err != nil {
-		fatalf(err.Error())
+		return err
 	}
-	if err := nRepo.RotateKeys(); err != nil {
-		fatalf(err.Error())
+	for _, role := range rolesToRotate {
+		if err := nRepo.RotateKey(role, k.rotateKeyServerManaged); err != nil {
+			return err
+		}
 	}
+	return nil
 }
 
 func removeKeyInteractively(keyStores []trustmanager.KeyStore, keyID string,
@@ -382,40 +460,43 @@ func removeKeyInteractively(keyStores []trustmanager.KeyStore, keyID string,
 }
 
 // keyRemove deletes a private key based on ID
-func keyRemove(cmd *cobra.Command, args []string) {
+func (k *keyCommander) keyRemove(cmd *cobra.Command, args []string) error {
 	if len(args) < 1 {
-		cmd.Usage()
-		fatalf("must specify the key ID of the key to remove")
+		return fmt.Errorf("must specify the key ID of the key to remove")
 	}
 
-	parseConfig()
+	config := k.configGetter()
+	ks, err := k.getKeyStores(config, true)
+	if err != nil {
+		return err
+	}
 	keyID := args[0]
 
 	// This is an invalid ID
 	if len(keyID) != idSize {
-		fatalf("invalid key ID provided: %s", keyID)
+		return fmt.Errorf("invalid key ID provided: %s", keyID)
 	}
-	stores := getKeyStores(cmd, mainViper.GetString("trust_dir"), retriever, true)
 	cmd.Println("")
-	err := removeKeyInteractively(stores, keyID, os.Stdin, cmd.Out())
+	err = removeKeyInteractively(ks, keyID, os.Stdin,
+		cmd.Out())
 	cmd.Println("")
-	if err != nil {
-		fatalf(err.Error())
-	}
+	return err
 }
 
-func getKeyStores(cmd *cobra.Command, directory string,
-	ret passphrase.Retriever, withHardware bool) []trustmanager.KeyStore {
+func (k *keyCommander) getKeyStores(
+	config *viper.Viper, withHardware bool) ([]trustmanager.KeyStore, error) {
 
-	fileKeyStore, err := trustmanager.NewKeyFileStore(directory, ret)
+	directory := config.GetString("trust_dir")
+	fileKeyStore, err := trustmanager.NewKeyFileStore(directory, k.retriever)
 	if err != nil {
-		fatalf("Failed to create private key store in directory: %s", directory)
+		return nil, fmt.Errorf(
+			"Failed to create private key store in directory: %s", directory)
 	}
 
 	ks := []trustmanager.KeyStore{fileKeyStore}
 
 	if withHardware {
-		yubiStore, err := getYubiKeyStore(fileKeyStore, ret)
+		yubiStore, err := getYubiKeyStore(fileKeyStore, k.retriever)
 		if err == nil && yubiStore != nil {
 			// Note that the order is important, since we want to prioritize
 			// the yubikey store
@@ -423,5 +504,5 @@ func getKeyStores(cmd *cobra.Command, directory string,
 		}
 	}
 
-	return ks
+	return ks, nil
 }

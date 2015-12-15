@@ -37,7 +37,7 @@ func init() {
 	retriever = getPassphraseRetriever()
 }
 
-func parseConfig() {
+func parseConfig() *viper.Viper {
 	if verbose {
 		logrus.SetLevel(logrus.DebugLevel)
 		logrus.SetOutput(os.Stderr)
@@ -94,6 +94,8 @@ func parseConfig() {
 		mainViper.Set("trust_dir", expandedTrustDir)
 	}
 	logrus.Debugf("Using the following trust directory: %s", mainViper.GetString("trust_dir"))
+
+	return mainViper
 }
 
 func setupCommand(notaryCmd *cobra.Command) {
@@ -113,7 +115,12 @@ func setupCommand(notaryCmd *cobra.Command) {
 	notaryCmd.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "Verbose output")
 	notaryCmd.PersistentFlags().StringVarP(&remoteTrustServer, "server", "s", "", "Remote trust server location")
 
-	notaryCmd.AddCommand(cmdKey)
+	cmdKeyGenerator := &keyCommander{
+		configGetter: parseConfig,
+		retriever:    retriever,
+	}
+
+	notaryCmd.AddCommand(cmdKeyGenerator.GetCommand())
 	notaryCmd.AddCommand(cmdCert)
 	notaryCmd.AddCommand(cmdTufInit)
 	notaryCmd.AddCommand(cmdTufList)

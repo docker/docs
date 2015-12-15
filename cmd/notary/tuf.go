@@ -23,6 +23,7 @@ import (
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/utils"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 var cmdTufList = &cobra.Command{
@@ -94,7 +95,7 @@ func tufAdd(cmd *cobra.Command, args []string) {
 
 	// no online operations are performed by add so the transport argument
 	// should be nil
-	nRepo, err := notaryclient.NewNotaryRepository(mainViper.GetString("trust_dir"), gun, getRemoteTrustServer(), nil, retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(mainViper.GetString("trust_dir"), gun, getRemoteTrustServer(mainViper), nil, retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -121,7 +122,7 @@ func tufInit(cmd *cobra.Command, args []string) {
 	parseConfig()
 	gun := args[0]
 
-	nRepo, err := notaryclient.NewNotaryRepository(mainViper.GetString("trust_dir"), gun, getRemoteTrustServer(), getTransport(gun, false), retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(mainViper.GetString("trust_dir"), gun, getRemoteTrustServer(mainViper), getTransport(mainViper, gun, false), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -157,7 +158,7 @@ func tufList(cmd *cobra.Command, args []string) {
 	parseConfig()
 	gun := args[0]
 
-	nRepo, err := notaryclient.NewNotaryRepository(mainViper.GetString("trust_dir"), gun, getRemoteTrustServer(), getTransport(gun, true), retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(mainViper.GetString("trust_dir"), gun, getRemoteTrustServer(mainViper), getTransport(mainViper, gun, true), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -181,7 +182,7 @@ func tufLookup(cmd *cobra.Command, args []string) {
 	gun := args[0]
 	targetName := args[1]
 
-	nRepo, err := notaryclient.NewNotaryRepository(mainViper.GetString("trust_dir"), gun, getRemoteTrustServer(), getTransport(gun, true), retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(mainViper.GetString("trust_dir"), gun, getRemoteTrustServer(mainViper), getTransport(mainViper, gun, true), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -203,7 +204,7 @@ func tufStatus(cmd *cobra.Command, args []string) {
 	parseConfig()
 	gun := args[0]
 
-	nRepo, err := notaryclient.NewNotaryRepository(mainViper.GetString("trust_dir"), gun, getRemoteTrustServer(), nil, retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(mainViper.GetString("trust_dir"), gun, getRemoteTrustServer(mainViper), nil, retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -237,7 +238,7 @@ func tufPublish(cmd *cobra.Command, args []string) {
 
 	cmd.Println("Pushing changes to", gun)
 
-	nRepo, err := notaryclient.NewNotaryRepository(mainViper.GetString("trust_dir"), gun, getRemoteTrustServer(), getTransport(gun, false), retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(mainViper.GetString("trust_dir"), gun, getRemoteTrustServer(mainViper), getTransport(mainViper, gun, false), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -260,7 +261,7 @@ func tufRemove(cmd *cobra.Command, args []string) {
 
 	// no online operation are performed by remove so the transport argument
 	// should be nil.
-	repo, err := notaryclient.NewNotaryRepository(mainViper.GetString("trust_dir"), gun, getRemoteTrustServer(), nil, retriever)
+	repo, err := notaryclient.NewNotaryRepository(mainViper.GetString("trust_dir"), gun, getRemoteTrustServer(mainViper), nil, retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -288,7 +289,7 @@ func verify(cmd *cobra.Command, args []string) {
 
 	gun := args[0]
 	targetName := args[1]
-	nRepo, err := notaryclient.NewNotaryRepository(mainViper.GetString("trust_dir"), gun, getRemoteTrustServer(), getTransport(gun, true), retriever)
+	nRepo, err := notaryclient.NewNotaryRepository(mainViper.GetString("trust_dir"), gun, getRemoteTrustServer(mainViper), getTransport(mainViper, gun, true), retriever)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -353,9 +354,9 @@ func (ps passwordStore) Basic(u *url.URL) (string, string) {
 	return username, password
 }
 
-func getTransport(gun string, readOnly bool) http.RoundTripper {
+func getTransport(config *viper.Viper, gun string, readOnly bool) http.RoundTripper {
 	// Attempt to get a root CA from the config file. Nil is the host defaults.
-	rootCAFile := mainViper.GetString("remote_server.root_ca")
+	rootCAFile := config.GetString("remote_server.root_ca")
 	if rootCAFile != "" {
 		// If we haven't been given an Absolute path, we assume it's relative
 		// from the configuration directory (~/.notary by default)
@@ -365,8 +366,8 @@ func getTransport(gun string, readOnly bool) http.RoundTripper {
 	}
 
 	insecureSkipVerify := false
-	if mainViper.IsSet("remote_server.skipTLSVerify") {
-		insecureSkipVerify = mainViper.GetBool("remote_server.skipTLSVerify")
+	if config.IsSet("remote_server.skipTLSVerify") {
+		insecureSkipVerify = config.GetBool("remote_server.skipTLSVerify")
 	}
 	tlsConfig, err := utils.ConfigureClientTLS(&utils.ClientTLSOpts{
 		RootCAFile:         rootCAFile,
@@ -387,18 +388,19 @@ func getTransport(gun string, readOnly bool) http.RoundTripper {
 		TLSClientConfig:     tlsConfig,
 		DisableKeepAlives:   true,
 	}
-
-	return tokenAuth(base, gun, readOnly)
+	return tokenAuth(config, base, gun, readOnly)
 }
 
-func tokenAuth(baseTransport *http.Transport, gun string, readOnly bool) http.RoundTripper {
+func tokenAuth(config *viper.Viper, baseTransport *http.Transport, gun string,
+	readOnly bool) http.RoundTripper {
+
 	// TODO(dmcgowan): add notary specific headers
 	authTransport := transport.NewTransport(baseTransport)
 	pingClient := &http.Client{
 		Transport: authTransport,
 		Timeout:   5 * time.Second,
 	}
-	trustServerURL := getRemoteTrustServer()
+	trustServerURL := getRemoteTrustServer(config)
 	endpoint, err := url.Parse(trustServerURL)
 	if err != nil {
 		fatalf("Could not parse remote trust server url (%s): %s", trustServerURL, err.Error())
@@ -433,9 +435,9 @@ func tokenAuth(baseTransport *http.Transport, gun string, readOnly bool) http.Ro
 	return transport.NewTransport(baseTransport, modifier)
 }
 
-func getRemoteTrustServer() string {
+func getRemoteTrustServer(config *viper.Viper) string {
 	if remoteTrustServer == "" {
-		configRemote := mainViper.GetString("remote_server.url")
+		configRemote := config.GetString("remote_server.url")
 		if configRemote != "" {
 			remoteTrustServer = configRemote
 		} else {
