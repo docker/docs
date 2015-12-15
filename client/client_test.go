@@ -1020,73 +1020,94 @@ func TestPublishSnapshotLocalKeysCreatedFirst(t *testing.T) {
 	assert.False(t, requestMade)
 }
 
+// Rotate invalid roles, or attempt to delegate target signing to the server
+func TestRotateKeyInvalidRole(t *testing.T) {
+	tempBaseDir, err := ioutil.TempDir("/tmp", "notary-test-")
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+	defer os.RemoveAll(tempBaseDir)
+
+	gun := "docker.com/notary"
+	ts, _, _ := simpleTestServer(t)
+	defer ts.Close()
+
+	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
+
+	// the equivalent of: (root, true), (root, false), (timestamp, true),
+	// (timestamp, false), (targets, true)
+	for role := range data.ValidRoles {
+		if role == data.CanonicalSnapshotRole {
+			continue
+		}
+		for _, serverManagesKey := range []bool{true, false} {
+			if role == data.CanonicalTargetsRole && !serverManagesKey {
+				continue
+			}
+			err = repo.RotateKey(role, serverManagesKey)
+			assert.Error(t, err,
+				"Rotating a %s key with server-managing the key as %v should fail",
+				role, serverManagesKey)
+		}
+	}
+}
+
 // Rotates the keys.  After the rotation, downloading the latest metadata
 // and assert that the keys have changed
-func assertRotationSuccessful(t *testing.T, repo *NotaryRepository) {
-	// capture targets + snapshot key IDs
-	targetsKeyIDs := repo.tufRepo.Root.Signed.Roles["targets"].KeyIDs
-	snapshotKeyIDs := repo.tufRepo.Root.Signed.Roles["snapshot"].KeyIDs
-	assert.Len(t, targetsKeyIDs, 1)
-	assert.Len(t, snapshotKeyIDs, 1)
+func assertRotationSuccessful(t *testing.T, repo *NotaryRepository,
+	keysToRotate map[string]bool) {
+
+	oldKeyIDs := make(map[string][]string)
+	for role := range keysToRotate {
+		keyIDs := repo.tufRepo.Root.Signed.Roles[role].KeyIDs
+		oldKeyIDs[role] = keyIDs
+	}
 
 	// Do rotation
-	repo.RotateKeys()
+	for role, serverManaged := range keysToRotate {
+		assert.NoError(t, repo.RotateKey(role, serverManaged))
+	}
 
 	// Publish
 	err := repo.Publish()
 	assert.NoError(t, err)
 
-	// Get root.json. Check targets + snapshot keys have changed
-	// and that they match those found in the changelist.
+	// Get root.json. Check keys have changed.
 	_, err = repo.GetTargetByName("latest") // force a pull
 	assert.NoError(t, err)
-	newTargetsKeyIDs := repo.tufRepo.Root.Signed.Roles["targets"].KeyIDs
-	newSnapshotKeyIDs := repo.tufRepo.Root.Signed.Roles["snapshot"].KeyIDs
-	assert.Len(t, newTargetsKeyIDs, 1)
-	assert.Len(t, newSnapshotKeyIDs, 1)
-	assert.NotEqual(t, targetsKeyIDs[0], newTargetsKeyIDs[0])
-	assert.NotEqual(t, snapshotKeyIDs[0], newSnapshotKeyIDs[0])
+
+	for role, isRemoteKey := range keysToRotate {
+		keyIDs := repo.tufRepo.Root.Signed.Roles[role].KeyIDs
+		assert.Len(t, keyIDs, 1)
+
+		// the new key is not the same as any of the old keys, and the
+		// old keys have been removed not just from the TUF file, but
+		// from the cryptoservice
+		for _, oldKeyID := range oldKeyIDs[role] {
+			assert.NotEqual(t, oldKeyID, keyIDs[0])
+			_, _, err := repo.CryptoService.GetPrivateKey(oldKeyID)
+			assert.Error(t, err)
+		}
+
+		// the new key is present in the cryptoservice, or not present if remote
+		key, _, err := repo.CryptoService.GetPrivateKey(keyIDs[0])
+		if isRemoteKey {
+			assert.Error(t, err)
+			assert.Nil(t, key)
+		} else {
+			assert.NoError(t, err)
+			assert.NotNil(t, key)
+		}
+	}
 
 	// Confirm changelist dir empty after publishing changes
 	changes := getChanges(t, repo)
 	assert.Len(t, changes, 0, "wrong number of changelist files found")
 }
 
-// Initialize a repo
-// Publish some content (so that the server has a root.json)
-// Rotate keys
-// Download the latest metadata and assert that the keys have changed.
-func TestRotateAfterPublish(t *testing.T) {
-	// Temporary directory where test files will be created
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	defer os.RemoveAll(tempBaseDir)
-
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-
-	gun := "docker.com/notary"
-
-	ts := fullTestServer(t)
-	defer ts.Close()
-
-	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
-
-	// Adding a target will allow us to confirm the repository is still valid after
-	// rotating the keys.
-	addTarget(t, repo, "latest", "../fixtures/intermediate-ca.crt")
-
-	// Publish
-	err = repo.Publish()
-	assert.NoError(t, err)
-
-	repo.GetTargetByName("latest") // force a pull
-	assertRotationSuccessful(t, repo)
-}
-
 // Initialize repo to have the server sign snapshots (remote snapshot key)
 // Without downloading a server-signed snapshot file, rotate keys so that
 //    snapshots are locally signed (local snapshot key)
 // Assert that we can publish.
-func TestPublishAfterChangedFromRemoteKeyToLocalKey(t *testing.T) {
+func TestRotateBeforePublishFromRemoteKeyToLocalKey(t *testing.T) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)
@@ -1101,12 +1122,74 @@ func TestPublishAfterChangedFromRemoteKeyToLocalKey(t *testing.T) {
 	// Adding a target will allow us to confirm the repository is still valid
 	// after rotating the keys.
 	addTarget(t, repo, "latest", "../fixtures/intermediate-ca.crt")
-	assertRotationSuccessful(t, repo)
+	assertRotationSuccessful(t, repo, map[string]bool{
+		data.CanonicalTargetsRole:  false,
+		data.CanonicalSnapshotRole: false})
+}
+
+// Initialize a repo, locally signed snapshots
+// Publish some content (so that the server has a root.json), and download root.json
+// Rotate keys
+// Download the latest metadata and assert that the keys have changed.
+func TestRotateKeyAfterPublishNoServerManagementChange(t *testing.T) {
+	// rotate a single target key
+	testRotateKeySuccess(t, false, map[string]bool{data.CanonicalTargetsRole: false})
+	testRotateKeySuccess(t, false, map[string]bool{data.CanonicalSnapshotRole: false})
+	// rotate two at once before publishing
+	testRotateKeySuccess(t, false, map[string]bool{
+		data.CanonicalSnapshotRole: false,
+		data.CanonicalTargetsRole:  false})
+}
+
+// Tests rotating keys when there's a change from locally managed keys to
+// remotely managed keys and vice versa
+// Before rotating, publish some content (so that the server has a root.json),
+// and download root.json
+func TestRotateKeyAfterPublishServerManagementChange(t *testing.T) {
+	// delegate snapshot key management to the server
+	testRotateKeySuccess(t, false, map[string]bool{
+		data.CanonicalSnapshotRole: true,
+		data.CanonicalTargetsRole:  false,
+	})
+	// reclaim snapshot key management from the server
+	testRotateKeySuccess(t, true, map[string]bool{
+		data.CanonicalSnapshotRole: false,
+		data.CanonicalTargetsRole:  false,
+	})
+}
+
+func testRotateKeySuccess(t *testing.T, serverManagesSnapshotInit bool,
+	keysToRotate map[string]bool) {
+
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	defer os.RemoveAll(tempBaseDir)
+
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+
+	gun := "docker.com/notary"
+	ts := fullTestServer(t)
+	defer ts.Close()
+
+	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL,
+		serverManagesSnapshotInit)
+
+	// Adding a target will allow us to confirm the repository is still valid after
+	// rotating the keys.
+	addTarget(t, repo, "latest", "../fixtures/intermediate-ca.crt")
+
+	// Publish
+	err = repo.Publish()
+	assert.NoError(t, err)
+
+	// Get root.json and capture targets + snapshot key IDs
+	repo.GetTargetByName("latest") // force a pull
+	assertRotationSuccessful(t, repo, keysToRotate)
 }
 
 // If there is no local cache, notary operations return the remote error code
 func TestRemoteServerUnavailableNoLocalCache(t *testing.T) {
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	tempBaseDir, err := ioutil.TempDir("/tmp", "notary-test-")
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 	defer os.RemoveAll(tempBaseDir)
 
