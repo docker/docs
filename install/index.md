@@ -36,11 +36,13 @@ If you are installing on AWS, you have the option of installing using Amazon Mac
 This section summarizes the process of installing Docker Trusted Registry.
 
 **(Option 1) Install on physical infrastructure or a cloud provider**
+
   * Obtain a trial or paid license.
   * Install the commercially supported Docker Engine.
   * Install the Trusted Registry.
 
 **(Option 2) Install using AWS AMI**
+
   * Decide if you are going to bring your own license or use a subscription.
   * Depending on your choice:
     * Obtain a trial or paid license and install the bring your own license (BYOL) AMI.

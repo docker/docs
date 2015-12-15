@@ -8,8 +8,6 @@ parent="smn_dhe"
 weight=2
 +++
 
-
-
 # Docker Trusted Registry Quick Start guide: Basic User Workflow
 
 This Quick Start Guide gives you a hands-on look at the basics of using
@@ -33,8 +31,8 @@ You will perform the following steps:
 2. Customizing the Jenkins image to suit your needs
 3. Pushing the customized image to Docker Trusted Registry
 4. Pulling the customized image from Docker Trusted Registry
-4. Launching a container from the custom image
-5. Using the new Jenkins container
+5. Launching a container from the custom image
+6. Using the new Jenkins container
 
 You should be able to complete this guide in about thirty minutes.
 
@@ -87,7 +85,7 @@ You'll do this by using a `Dockerfile` and the `docker build` command.
 > can modify and configure Jenkins. Feel free to add or substitute whatever
 > customization is necessary to run Jenkins in your environment.
 
-### Creating a `build` context
+### Creating a build context
 
 In order to add the new plugin and configure HTTPS access to the custom Jenkins
 image, you need to:
@@ -95,28 +93,28 @@ image, you need to:
 1. Create a text file that defines the new plugin
 2. Create copies of the private key and certificate
 
-All of the above files need to be in the same directory as the Dockerfile you
-will create in the next step.
+    All of the above files need to be in the same directory as the Dockerfile
+    you will create in the next step.
 
-1. Create a build directory called `build`, and change to that new directory:
+3. Create a build directory called `build`, and change to that new directory:
 
-    $ mkdir build && cd build
+        $ mkdir build && cd build
 
-In this directory, create a new file called `plugins` and add the following
-line:
+    In this directory, create a new file called `plugins` and add the following
+    line:
 
-    role-strategy:2.2.0
+        role-strategy:2.2.0
 
-(The plugin version used above was the latest version at the time of writing.)
+    (The plugin version used above was the latest version at the time of writing.)
 
-2. You will also need to make copies of the server's private key and certificate. Give the copies the following names - `https.key` and `https.pem`.
+4. You will also need to make copies of the server's private key and certificate. Give the copies the following names - `https.key` and `https.pem`.
 
-> **Note:** Because creating new keys varies widely by platform and
-> implementation, this guide won't cover key generation. We assume you have
-> access to existing keys. If you don't have access, or can't generate keys
-> yourself, feel free to skip the steps involving them and HTTPS config. The
-> guide will still walk you through building a custom Jenkins image and pushing
-> and pulling that image using Docker Trusted Registry.
+    > **Note:** Because creating new keys varies widely by platform and implementation, this
+    guide won't cover key generation. We assume you have access to existing keys. If
+    you don't have access, or can't generate keys yourself, feel free to skip the
+    steps involving them and HTTPS config. The guide will still walk you through
+    building a custom Jenkins image and pushing and pulling that image using Docker
+    Trusted Registry.
 
 ### Creating a Dockerfile
 
