@@ -32,7 +32,7 @@ generate client SSL certs with basic constraints using OpenSSL.
 ### Signer storage
 
 Notary Signer uses MySQL as a backend for storing the encrypted private keys
-that is responsible for.  The private keys[wrapped](
+that is responsible for.  The private keys [wrapped](
 https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-31#section-4.4)
 and [encrypted](
 https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-31#section-4.8)
