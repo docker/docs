@@ -34,7 +34,7 @@ else
   echo "Machine $VM already exists in VirtualBox."
 fi
 
-VM_STATUS=$($DOCKER_MACHINE status $VM)
+VM_STATUS=$($DOCKER_MACHINE status $VM 2>&1)
 if [ "$VM_STATUS" != "Running" ]; then
   echo "Starting machine $VM..."
   $DOCKER_MACHINE start $VM
