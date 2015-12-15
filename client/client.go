@@ -403,8 +403,9 @@ func (r *NotaryRepository) RemoveTarget(targetName string, roles ...string) erro
 	return addChange(cl, template, roles...)
 }
 
-// ListTargets lists all targets for the current repository
-func (r *NotaryRepository) ListTargets() ([]*Target, error) {
+// ListTargets lists all targets for the current repository. The list of
+// roles should be passed in order from lowest to highest priority
+func (r *NotaryRepository) ListTargets(roles ...string) ([]*Target, error) {
 	c, err := r.bootstrapClient()
 	if err != nil {
 		return nil, err
@@ -419,9 +420,16 @@ func (r *NotaryRepository) ListTargets() ([]*Target, error) {
 	}
 
 	var targetList []*Target
-	for name, meta := range r.tufRepo.Targets["targets"].Signed.Targets {
-		target := &Target{Name: name, Hashes: meta.Hashes, Length: meta.Length}
-		targetList = append(targetList, target)
+	for _, r := range roles {
+		tgts, ok := r.tufRepo.Targets[r]
+		if !ok {
+			// not every role has to exist
+			continue
+		}
+		for name, meta := range r.tufRepo.Targets[r].Signed.Targets {
+			target := &Target{Name: name, Hashes: meta.Hashes, Length: meta.Length}
+			targetList = append(targetList, target)
+		}
 	}
 
 	return targetList, nil
