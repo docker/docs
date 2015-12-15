@@ -518,8 +518,8 @@ func (c Client) RoleTargetsPath(role string, hashSha256 string, consistent bool)
 	return role, nil
 }
 
-// TargetMeta ensures the repo is up to date, downloading the minimum
-// necessary metadata files
+// TargetMeta ensures the repo is up to date. It assumes downloadTargets
+// has already downloaded all delegated roles
 func (c Client) TargetMeta(path string) (*data.FileMeta, error) {
 	c.Update()
 	var meta *data.FileMeta
@@ -534,14 +534,6 @@ func (c Client) TargetMeta(path string) (*data.FileMeta, error) {
 		// have to do these lines here because of order of execution in for statement
 		role = roles[0]
 		roles = roles[1:]
-
-		// Download the target role file if necessary
-		err := c.downloadTargets(role)
-		if err != nil {
-			// as long as we find a valid target somewhere we're happy.
-			// continue and search other delegated roles if any
-			continue
-		}
 
 		meta = c.local.TargetMeta(role, path)
 		if meta != nil {

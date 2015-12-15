@@ -14,8 +14,8 @@ func TestCreateStack(t *testing.T) {
 func TestPush(t *testing.T) {
 	s := NewStack()
 	s.Push("foo")
-	assert.Len(t, *s, 1)
-	assert.Equal(t, "foo", (*s)[0])
+	assert.Len(t, s.s, 1)
+	assert.Equal(t, "foo", s.s[0])
 }
 
 func TestPop(t *testing.T) {
@@ -23,7 +23,7 @@ func TestPop(t *testing.T) {
 	s.Push("foo")
 	i, err := s.Pop()
 	assert.NoError(t, err)
-	assert.Len(t, *s, 0)
+	assert.Len(t, s.s, 0)
 	assert.IsType(t, "", i)
 	assert.Equal(t, "foo", i)
 }
@@ -40,7 +40,7 @@ func TestPopString(t *testing.T) {
 	s.Push("foo")
 	i, err := s.PopString()
 	assert.NoError(t, err)
-	assert.Len(t, *s, 0)
+	assert.Len(t, s.s, 0)
 	assert.Equal(t, "foo", i)
 }
 
