@@ -5,7 +5,7 @@
 
 #define b2dIsoPath "..\bundle\boot2docker.iso"
 #define dockerCli "..\bundle\docker.exe"
-#define dockerMachineCli "..\bundle\docker-machine*.exe"
+#define dockerMachineCli "..\bundle\docker-machine.exe"
 #define dockerComposeCli "..\bundle\docker-compose.exe"
 #define kitematic "..\bundle\kitematic"
 #define git "..\bundle\Git.exe"

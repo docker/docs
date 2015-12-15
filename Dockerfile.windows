@@ -17,12 +17,12 @@ RUN cd innosetup && \
     wine "./innounp.exe" -e "is-unicode.exe"
 
 # installer components
-ENV INSTALLER_VERSION 1.9.1c
+ENV INSTALLER_VERSION 1.9.1d
 ENV DOCKER_VERSION 1.9.1
-ENV DOCKER_MACHINE_VERSION 0.5.2
+ENV DOCKER_MACHINE_VERSION 0.5.3
 ENV DOCKER_COMPOSE_VERSION 1.5.2
 ENV BOOT2DOCKER_ISO_VERSION $DOCKER_VERSION
-ENV KITEMATIC_VERSION 0.9.3
+ENV KITEMATIC_VERSION 0.9.4
 ENV VIRTUALBOX_VERSION 5.0.10
 ENV VIRTUALBOX_REVISION 104061
 ENV GIT_VERSION 2.5.0
@@ -33,9 +33,7 @@ WORKDIR /bundle
 RUN curl -fsSL -o docker.exe "https://get.docker.com/builds/Windows/x86_64/docker-$DOCKER_VERSION.exe"
 # RUN curl -fsSL -o docker.exe "https://test.docker.com/builds/Windows/x86_64/docker-$DOCKER_VERSION.exe"
 
-RUN curl -fsSL -o docker-machine.zip "https://github.com/docker/machine/releases/download/v$DOCKER_MACHINE_VERSION/docker-machine_windows-amd64.zip" && \
-  unzip docker-machine.zip && \
-  rm docker-machine.zip
+RUN curl -fsSL -o docker-machine.exe "https://github.com/docker/machine/releases/download/v$DOCKER_MACHINE_VERSION/docker-machine_windows-amd64.exe"
 
 RUN curl -fsSL -o docker-compose.exe "https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-Windows-x86_64.exe"
 
