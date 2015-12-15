@@ -140,7 +140,7 @@ func (k *keyCommander) GetCommand() *cobra.Command {
 			"(no key will be generated or stored locally) "+
 			"Can only be used in conjunction with --key-type.")
 	cmdRotateKey.Flags().StringVarP(&k.rotateKeyRole, "key-type", "t", "",
-		`Key type to rotate.  Supported values: "targets", "snapshots". `+
+		`Key type to rotate.  Supported values: "targets", "snapshot". `+
 			`If not provided, both targets and snapshot keys will be rotated, `+
 			`and the new keys will be locally generated and stored.`)
 	cmd.AddCommand(cmdRotateKey)
