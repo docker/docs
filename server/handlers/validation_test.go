@@ -349,7 +349,7 @@ func TestValidateSnapshotGenerateNoTargets(t *testing.T) {
 	assert.Error(t, err)
 }
 
-func TestValidateSnapshotGenerateLoadRootTargets(t *testing.T) {
+func TestValidateSnapshotGenerate(t *testing.T) {
 	kdb, repo, cs := testutils.EmptyRepo()
 	store := storage.NewMemStorage()
 	snapRole := kdb.GetRole(data.CanonicalSnapshotRole)
@@ -366,10 +366,9 @@ func TestValidateSnapshotGenerateLoadRootTargets(t *testing.T) {
 	root, targets, _, _, err := getUpdates(r, tg, sn, ts)
 	assert.NoError(t, err)
 
-	updates := []storage.MetaUpdate{}
+	updates := []storage.MetaUpdate{targets}
 
 	store.UpdateCurrent("testGUN", root)
-	store.UpdateCurrent("testGUN", targets)
 
 	copyTimestampKey(t, kdb, store, "testGUN")
 	updates, err = validateUpdate(cs, "testGUN", updates, store)
