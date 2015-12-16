@@ -728,3 +728,37 @@ func TestApplyTargetsDelegationCreate2Deep(t *testing.T) {
 	assert.Equal(t, "targets/level1/level2", role.Name)
 	assert.Equal(t, "level1/level2", role.Paths[0])
 }
+
+func TestApplyTargetsDelegationInvalidParent(t *testing.T) {
+	_, repo, cs := testutils.EmptyRepo()
+
+	// make sure a key exists for the previous level, so it's not a missing
+	// key error, but we don't care about this key
+	_, err := cs.Create("targets/level1", data.ED25519Key)
+	assert.NoError(t, err)
+
+	newKey, err := cs.Create("targets/level1/level2", data.ED25519Key)
+	assert.NoError(t, err)
+
+	// create delegation
+	kl := data.KeyList{newKey}
+	td := &changelist.TufDelegation{
+		NewThreshold: 1,
+		AddKeys:      kl,
+	}
+
+	tdJSON, err := json.Marshal(td)
+	assert.NoError(t, err)
+
+	ch := changelist.NewTufChange(
+		changelist.ActionCreate,
+		"targets/level1/level2",
+		changelist.TypeTargetsDelegation,
+		"",
+		tdJSON,
+	)
+
+	err = applyTargetsChange(repo, ch)
+	assert.Error(t, err)
+	assert.IsType(t, data.ErrInvalidRole{}, err)
+}
