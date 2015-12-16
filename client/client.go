@@ -404,7 +404,7 @@ func (r *NotaryRepository) RemoveTarget(targetName string, roles ...string) erro
 }
 
 // ListTargets lists all targets for the current repository. The list of
-// roles should be passed in order from lowest to highest priority
+// roles should be passed in order from lowest to highest priority.
 func (r *NotaryRepository) ListTargets(roles ...string) ([]*Target, error) {
 	c, err := r.bootstrapClient()
 	if err != nil {
@@ -419,7 +419,7 @@ func (r *NotaryRepository) ListTargets(roles ...string) ([]*Target, error) {
 		return nil, err
 	}
 
-	var targetList []*Target
+	targets := make(map[string]*Target)
 	for _, role := range roles {
 		tgts, ok := r.tufRepo.Targets[role]
 		if !ok {
@@ -428,8 +428,13 @@ func (r *NotaryRepository) ListTargets(roles ...string) ([]*Target, error) {
 		}
 		for name, meta := range tgts.Signed.Targets {
 			target := &Target{Name: name, Hashes: meta.Hashes, Length: meta.Length}
-			targetList = append(targetList, target)
+			targets[name] = target
 		}
+	}
+
+	var targetList []*Target
+	for _, v := range targets {
+		targetList = append(targetList, v)
 	}
 
 	return targetList, nil
