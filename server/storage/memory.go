@@ -63,7 +63,7 @@ func (st *MemStorage) GetCurrent(gun, role string) (data []byte, err error) {
 	defer st.lock.Unlock()
 	space, ok := st.tufMeta[id]
 	if !ok || len(space) == 0 {
-		return nil, &ErrNotFound{}
+		return nil, ErrNotFound{}
 	}
 	return space[len(space)-1].data, nil
 }

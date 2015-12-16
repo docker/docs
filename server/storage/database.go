@@ -124,7 +124,7 @@ func (db *SQLStorage) GetCurrent(gun, tufRole string) ([]byte, error) {
 	q := db.Select("data").Where(&TUFFile{Gun: gun, Role: tufRole}).Order("version desc").Limit(1).First(&row)
 
 	if q.RecordNotFound() {
-		return nil, &ErrNotFound{}
+		return nil, ErrNotFound{}
 	} else if q.Error != nil {
 		return nil, q.Error
 	}

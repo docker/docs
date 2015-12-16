@@ -45,7 +45,7 @@ func validateUpdate(cs signed.CryptoService, gun string, updates []storage.MetaU
 
 	var root *data.SignedRoot
 	oldRootJSON, err := store.GetCurrent(gun, rootRole)
-	if _, ok := err.(*storage.ErrNotFound); err != nil && !ok {
+	if _, ok := err.(storage.ErrNotFound); err != nil && !ok {
 		// problem with storage. No expectation we can
 		// write if we can't read so bail.
 		logrus.Error("error reading previous root: ", err.Error())
@@ -97,7 +97,7 @@ func validateUpdate(cs signed.CryptoService, gun string, updates []storage.MetaU
 	if _, ok := roles[snapshotRole]; ok {
 		var oldSnap *data.SignedSnapshot
 		oldSnapJSON, err := store.GetCurrent(gun, snapshotRole)
-		if _, ok := err.(*storage.ErrNotFound); err != nil && !ok {
+		if _, ok := err.(storage.ErrNotFound); err != nil && !ok {
 			// problem with storage. No expectation we can
 			// write if we can't read so bail.
 			logrus.Error("error reading previous snapshot: ", err.Error())
@@ -178,6 +178,9 @@ func loadAndValidateTargets(gun string, repo *tuf.Repo, roles map[string]storage
 
 func loadTargetsFromStore(gun, role string, repo *tuf.Repo, store storage.MetaStore) error {
 	tgtJSON, err := store.GetCurrent(gun, role)
+	if err != nil {
+		return err
+	}
 	t := &data.SignedTargets{}
 	err = json.Unmarshal(tgtJSON, t)
 	if err != nil {
@@ -213,7 +216,7 @@ func generateSnapshot(gun string, kdb *keys.KeyDB, repo *tuf.Repo, store storage
 
 	currentJSON, err := store.GetCurrent(gun, data.CanonicalSnapshotRole)
 	if err != nil {
-		if _, ok := err.(*storage.ErrNotFound); !ok {
+		if _, ok := err.(storage.ErrNotFound); !ok {
 			return nil, validation.ErrValidation{Msg: err.Error()}
 		}
 	}

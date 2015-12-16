@@ -128,7 +128,7 @@ func getHandler(ctx context.Context, w http.ResponseWriter, r *http.Request, var
 
 	out, err := store.GetCurrent(gun, tufRole)
 	if err != nil {
-		if _, ok := err.(*storage.ErrNotFound); ok {
+		if _, ok := err.(storage.ErrNotFound); ok {
 			logrus.Error(gun + ":" + tufRole)
 			return errors.ErrMetadataNotFound.WithDetail(nil)
 		}
@@ -174,7 +174,7 @@ func getTimestamp(ctx context.Context, w http.ResponseWriter, logger ctxu.Logger
 	out, err := timestamp.GetOrCreateTimestamp(gun, store, cryptoService)
 	if err != nil {
 		switch err.(type) {
-		case *storage.ErrNoKey, *storage.ErrNotFound:
+		case *storage.ErrNoKey, storage.ErrNotFound:
 			logger.Error("404 GET timestamp")
 			return errors.ErrMetadataNotFound.WithDetail(nil)
 		default:
@@ -199,7 +199,7 @@ func getSnapshot(ctx context.Context, w http.ResponseWriter, logger ctxu.Logger,
 	out, err := snapshot.GetOrCreateSnapshot(gun, store, cryptoService)
 	if err != nil {
 		switch err.(type) {
-		case *storage.ErrNoKey, *storage.ErrNotFound:
+		case *storage.ErrNoKey, storage.ErrNotFound:
 			logger.Error("404 GET snapshot")
 			return errors.ErrMetadataNotFound.WithDetail(nil)
 		default:
