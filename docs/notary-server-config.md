@@ -17,7 +17,7 @@ An example (full) server configuration file.
 	"server": {
 		"http_addr": ":4443",
 		"tls_key_file": "./fixtures/notary-server.key",
-		"tls_cert_file": "./fixtures/notary-server.crt",
+		"tls_cert_file": "./fixtures/notary-server.crt"
 	},
 	"trust_service": {
 		"type": "remote",
@@ -80,7 +80,7 @@ Example:
 				<code>ifconfig</code>)</li>
 			<li><code>"127.0.0.1:4443"</code> means listen on port 4443 on
 				localhost only.  That means that the server will not be
-				acessible except locally (via SSH tunnel, or just on a local
+				accessible except locally (via SSH tunnel, or just on a local
 				terminal)</li>
 			</ul>
 		</td>

@@ -71,7 +71,7 @@ Example:
 				<code>ifconfig</code>)</li>
 			<li><code>"127.0.0.1:4444"</code> means listen on port 4444 on
 				localhost only.  That means that the server will not be
-				acessible except locally (via SSH tunnel, or just on a local
+				accessible except locally (via SSH tunnel, or just on a local
 				terminal)</li>
 			</ul>
 		</td>
@@ -87,7 +87,7 @@ Example:
 				<code>ifconfig</code>)</li>
 			<li><code>"127.0.0.1:7899"</code> means listen on port 7899 on
 				localhost only.  That means that the server will not be
-				acessible except locally (via SSH tunnel, or just on a local
+				accessible except locally (via SSH tunnel, or just on a local
 				terminal)</li>
 			</ul>
 		</td>
