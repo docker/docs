@@ -330,6 +330,49 @@ func TestDownloadTargetsHappy(t *testing.T) {
 	assert.NoError(t, err)
 }
 
+func TestDownloadTargetsDeepHappy(t *testing.T) {
+	kdb, repo, cs := testutils.EmptyRepo()
+	localStorage := store.NewMemoryStore(nil, nil)
+	remoteStorage := store.NewMemoryStore(nil, nil)
+	client := NewClient(repo, remoteStorage, kdb, localStorage)
+
+	k, err := cs.Create("targets/level1", data.ED25519Key)
+	assert.NoError(t, err)
+	r, err := data.NewRole("targets/level1", 1, []string{k.ID()}, nil, nil)
+	assert.NoError(t, err)
+
+	repo.UpdateDelegations(r, []data.PublicKey{k})
+	repo.InitTargets("targets/level1")
+
+	signedOrig, err := repo.SignTargets("targets", data.DefaultExpires("targets"))
+	assert.NoError(t, err)
+	orig, err := json.Marshal(signedOrig)
+	assert.NoError(t, err)
+	err = remoteStorage.SetMeta("targets", orig)
+	assert.NoError(t, err)
+
+	signedOrig, err = repo.SignTargets("targets/level1", data.DefaultExpires("targets"))
+	assert.NoError(t, err)
+	orig, err = json.Marshal(signedOrig)
+	assert.NoError(t, err)
+	err = remoteStorage.SetMeta("targets/level1", orig)
+	assert.NoError(t, err)
+
+	// call repo.SignSnapshot to update the targets role in the snapshot
+	repo.SignSnapshot(data.DefaultExpires("snapshot"))
+
+	delete(repo.Targets, "targets")
+	delete(repo.Targets, "targets/level1")
+
+	err = client.downloadTargets("targets")
+	assert.NoError(t, err)
+
+	_, ok := repo.Targets["targets"]
+	assert.True(t, ok)
+	_, ok = repo.Targets["targets/level1"]
+	assert.True(t, ok)
+}
+
 func TestDownloadTargetChecksumMismatch(t *testing.T) {
 	kdb, repo, _ := testutils.EmptyRepo()
 	localStorage := store.NewMemoryStore(nil, nil)
