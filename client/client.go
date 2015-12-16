@@ -260,8 +260,8 @@ func (r *NotaryRepository) Initialize(rootKeyID string, serverManagedRoles ...st
 }
 
 // adds a TUF Change template to the given roles
-func addChange(cl *changelist.FileChangelist, c changelist.Change,
-	roles ...string) error {
+func addChange(cl *changelist.FileChangelist, c changelist.Change, roles ...string) error {
+
 	if len(roles) == 0 {
 		roles = []string{data.CanonicalTargetsRole}
 	}
@@ -270,11 +270,9 @@ func addChange(cl *changelist.FileChangelist, c changelist.Change,
 	for _, role := range roles {
 		role = strings.ToLower(role)
 
-		if !data.ValidRole(role) {
-			return data.ErrInvalidRole{Role: role}
-		}
-
-		if _, ok := data.ValidRoles[role]; ok && role != data.CanonicalTargetsRole {
+		// Ensure we can only add targets to the CanonicalTargetsRole,
+		// or a Delegation role (which is <CanonicalTargetsRole>/something else)
+		if role != data.CanonicalTargetsRole && !data.IsDelegation(role) {
 			return data.ErrInvalidRole{
 				Role:   role,
 				Reason: "cannot add targets to this role",
@@ -302,6 +300,7 @@ func addChange(cl *changelist.FileChangelist, c changelist.Change,
 // in the repository when the changelist gets appied at publish time.
 // If roles are unspecified, the default role is "target".
 func (r *NotaryRepository) AddTarget(target *Target, roles ...string) error {
+
 	cl, err := changelist.NewFileChangelist(filepath.Join(r.tufRepoPath, "changelist"))
 	if err != nil {
 		return err
@@ -325,6 +324,7 @@ func (r *NotaryRepository) AddTarget(target *Target, roles ...string) error {
 // roles in the repository when the changelist gets applied at publish time.
 // If roles are unspecified, the default role is "target".
 func (r *NotaryRepository) RemoveTarget(targetName string, roles ...string) error {
+
 	cl, err := changelist.NewFileChangelist(filepath.Join(r.tufRepoPath, "changelist"))
 	if err != nil {
 		return err
