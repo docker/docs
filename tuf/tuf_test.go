@@ -16,21 +16,13 @@ import (
 
 func initRepo(t *testing.T, cryptoService signed.CryptoService, keyDB *keys.KeyDB) *Repo {
 	rootKey, err := cryptoService.Create("root", data.ED25519Key)
-	if err != nil {
-		t.Fatal(err)
-	}
+	assert.NoError(t, err)
 	targetsKey, err := cryptoService.Create("targets", data.ED25519Key)
-	if err != nil {
-		t.Fatal(err)
-	}
+	assert.NoError(t, err)
 	snapshotKey, err := cryptoService.Create("snapshot", data.ED25519Key)
-	if err != nil {
-		t.Fatal(err)
-	}
+	assert.NoError(t, err)
 	timestampKey, err := cryptoService.Create("timestamp", data.ED25519Key)
-	if err != nil {
-		t.Fatal(err)
-	}
+	assert.NoError(t, err)
 
 	keyDB.AddKey(rootKey)
 	keyDB.AddKey(targetsKey)
@@ -73,33 +65,58 @@ func initRepo(t *testing.T, cryptoService signed.CryptoService, keyDB *keys.KeyD
 
 	repo := NewRepo(keyDB, cryptoService)
 	err = repo.InitRepo(false)
-	if err != nil {
-		t.Fatal(err)
-	}
+	assert.NoError(t, err)
 	return repo
 }
 
+// we require that at least the base targets role is available when creating
+// initializing a snapshot
+func TestInitSnapshotNoTargets(t *testing.T) {
+	cryptoService := signed.NewEd25519()
+	keyDB := keys.NewDB()
+	rootKey, err := cryptoService.Create("root", data.ED25519Key)
+	assert.NoError(t, err)
+	snapshotKey, err := cryptoService.Create("snapshot", data.ED25519Key)
+	assert.NoError(t, err)
+
+	keyDB.AddKey(rootKey)
+	keyDB.AddKey(snapshotKey)
+
+	rootRole := &data.Role{
+		Name: "root",
+		RootRole: data.RootRole{
+			KeyIDs:    []string{rootKey.ID()},
+			Threshold: 1,
+		},
+	}
+	snapshotRole := &data.Role{
+		Name: "snapshot",
+		RootRole: data.RootRole{
+			KeyIDs:    []string{snapshotKey.ID()},
+			Threshold: 1,
+		},
+	}
+
+	keyDB.AddRole(rootRole)
+	keyDB.AddRole(snapshotRole)
+
+	repo := NewRepo(keyDB, cryptoService)
+	err = repo.InitSnapshot()
+	assert.Error(t, err)
+	assert.IsType(t, ErrNotLoaded{}, err)
+}
+
 func writeRepo(t *testing.T, dir string, repo *Repo) {
-	//err := os.Remove(dir)
-	//if err != nil {
-	//	t.Fatal(err)
-	//}
 	err := os.MkdirAll(dir, 0755)
-	if err != nil {
-		t.Fatal(err)
-	}
+	assert.NoError(t, err)
 	signedRoot, err := repo.SignRoot(data.DefaultExpires("root"))
-	if err != nil {
-		t.Fatal(err)
-	}
+	assert.NoError(t, err)
 	rootJSON, _ := json.Marshal(signedRoot)
 	ioutil.WriteFile(dir+"/root.json", rootJSON, 0755)
 
 	for r := range repo.Targets {
 		signedTargets, err := repo.SignTargets(r, data.DefaultExpires("targets"))
-		if err != nil {
-			t.Fatal(err)
-		}
+		assert.NoError(t, err)
 		targetsJSON, _ := json.Marshal(signedTargets)
 		p := path.Join(dir, r+".json")
 		parentDir := filepath.Dir(p)
@@ -108,16 +125,12 @@ func writeRepo(t *testing.T, dir string, repo *Repo) {
 	}
 
 	signedSnapshot, err := repo.SignSnapshot(data.DefaultExpires("snapshot"))
-	if err != nil {
-		t.Fatal(err)
-	}
+	assert.NoError(t, err)
 	snapshotJSON, _ := json.Marshal(signedSnapshot)
 	ioutil.WriteFile(dir+"/snapshot.json", snapshotJSON, 0755)
 
 	signedTimestamp, err := repo.SignTimestamp(data.DefaultExpires("timestamp"))
-	if err != nil {
-		t.Fatal(err)
-	}
+	assert.NoError(t, err)
 	timestampJSON, _ := json.Marshal(signedTimestamp)
 	ioutil.WriteFile(dir+"/timestamp.json", timestampJSON, 0755)
 }
@@ -135,18 +148,12 @@ func TestUpdateDelegations(t *testing.T) {
 	repo := initRepo(t, ed25519, keyDB)
 
 	testKey, err := ed25519.Create("targets/test", data.ED25519Key)
-	if err != nil {
-		t.Fatal(err)
-	}
+	assert.NoError(t, err)
 	role, err := data.NewRole("targets/test", 1, []string{testKey.ID()}, []string{"test"}, []string{})
-	if err != nil {
-		t.Fatal(err)
-	}
+	assert.NoError(t, err)
 
 	err = repo.UpdateDelegations(role, data.KeyList{testKey})
-	if err != nil {
-		t.Fatal(err)
-	}
+	assert.NoError(t, err)
 
 	r := repo.Targets[data.CanonicalTargetsRole]
 	assert.Len(t, r.Signed.Delegations.Roles, 1)
@@ -156,18 +163,12 @@ func TestUpdateDelegations(t *testing.T) {
 	assert.Equal(t, testKey.ID(), keyIDs[0])
 
 	testDeepKey, err := ed25519.Create("targets/test/deep", data.ED25519Key)
-	if err != nil {
-		t.Fatal(err)
-	}
+	assert.NoError(t, err)
 	roleDeep, err := data.NewRole("targets/test/deep", 1, []string{testDeepKey.ID()}, []string{"test/deep"}, []string{})
-	if err != nil {
-		t.Fatal(err)
-	}
+	assert.NoError(t, err)
 
 	err = repo.UpdateDelegations(roleDeep, data.KeyList{testDeepKey})
-	if err != nil {
-		t.Fatal(err)
-	}
+	assert.NoError(t, err)
 
 	r = repo.Targets["targets/test"]
 	assert.Len(t, r.Signed.Delegations.Roles, 1)
