@@ -57,7 +57,7 @@ func validateRootSuccessfully(t *testing.T, rootType string) {
 	assert.Len(t, repo.CertManager.TrustedCertificateStore().GetCertificates(), 0)
 
 	// This list targets is expected to succeed and the certificate store to have the new certificate
-	_, err = repo.ListTargets()
+	_, err = repo.ListTargets(data.CanonicalTargetsRole)
 	assert.NoError(t, err)
 	assert.Len(t, repo.CertManager.TrustedCertificateStore().GetCertificates(), 1)
 
@@ -78,7 +78,7 @@ func validateRootSuccessfully(t *testing.T, rootType string) {
 
 	// This list targets is expected to fail, since there already exists a certificate
 	// in the store for the dnsName docker.com/notary, so TOFUS doesn't apply
-	_, err = repo.ListTargets()
+	_, err = repo.ListTargets(data.CanonicalTargetsRole)
 	if assert.Error(t, err, "An error was expected") {
 		assert.Equal(t, err, &certs.ErrValidationFail{
 			Reason: "failed to validate data with current trusted certificates",

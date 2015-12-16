@@ -420,13 +420,13 @@ func (r *NotaryRepository) ListTargets(roles ...string) ([]*Target, error) {
 	}
 
 	var targetList []*Target
-	for _, r := range roles {
-		tgts, ok := r.tufRepo.Targets[r]
+	for _, role := range roles {
+		tgts, ok := r.tufRepo.Targets[role]
 		if !ok {
 			// not every role has to exist
 			continue
 		}
-		for name, meta := range r.tufRepo.Targets[r].Signed.Targets {
+		for name, meta := range tgts.Signed.Targets {
 			target := &Target{Name: name, Hashes: meta.Hashes, Length: meta.Length}
 			targetList = append(targetList, target)
 		}

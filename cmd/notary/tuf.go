@@ -164,7 +164,7 @@ func tufList(cmd *cobra.Command, args []string) {
 	}
 
 	// Retreive the remote list of signed targets
-	targetList, err := nRepo.ListTargets()
+	targetList, err := nRepo.ListTargets(data.CanonicalTargetsRole, "targets/releases")
 	if err != nil {
 		fatalf(err.Error())
 	}

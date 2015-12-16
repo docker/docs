@@ -768,7 +768,7 @@ func testListEmptyTargets(t *testing.T, rootType string) {
 
 	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL, false)
 
-	_, err = repo.ListTargets()
+	_, err = repo.ListTargets(data.CanonicalTargetsRole)
 	assert.Error(t, err) // no trust data
 }
 
@@ -869,7 +869,7 @@ func testListTarget(t *testing.T, rootType string) {
 
 	fakeServerData(t, repo, mux, keys)
 
-	targets, err := repo.ListTargets()
+	targets, err := repo.ListTargets(data.CanonicalTargetsRole)
 	assert.NoError(t, err)
 
 	// Should be two targets
@@ -1056,7 +1056,7 @@ func assertPublishSucceeds(t *testing.T, repo1 *NotaryRepository) {
 
 	// Should be two targets
 	for _, repo := range []*NotaryRepository{repo1, repo2} {
-		targets, err := repo.ListTargets()
+		targets, err := repo.ListTargets(data.CanonicalTargetsRole)
 		assert.NoError(t, err)
 
 		assert.Len(t, targets, 2, "unexpected number of targets returned by ListTargets")
@@ -1113,7 +1113,7 @@ func testPublishAfterPullServerHasSnapshotKey(t *testing.T, rootType string) {
 	assertRepoHasExpectedMetadata(t, repo, data.CanonicalSnapshotRole, false)
 
 	// list, so that the snapshot metadata is pulled from server
-	targets, err := repo.ListTargets()
+	targets, err := repo.ListTargets(data.CanonicalTargetsRole)
 	assert.NoError(t, err)
 	assert.Equal(t, []*Target{published}, targets)
 	// listing downloaded the timestamp and snapshot metadata info
@@ -1436,7 +1436,7 @@ func TestRemoteServerUnavailableNoLocalCache(t *testing.T) {
 		ts.URL, http.DefaultTransport, passphraseRetriever)
 	assert.NoError(t, err, "error creating repo: %s", err)
 
-	_, err = repo.ListTargets()
+	_, err = repo.ListTargets(data.CanonicalTargetsRole)
 	assert.Error(t, err)
 	assert.IsType(t, store.ErrServerUnavailable{}, err)
 
