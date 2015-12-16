@@ -322,11 +322,18 @@ func (tr *Repo) InitTargets(role string) error {
 
 // InitSnapshot initializes a snapshot based on the current root and targets
 func (tr *Repo) InitSnapshot() error {
+	if tr.Root == nil {
+		return ErrNotLoaded{role: "root"}
+	}
 	root, err := tr.Root.ToSigned()
 	if err != nil {
 		return err
 	}
-	targets, err := tr.Targets[data.ValidRoles["targets"]].ToSigned()
+
+	if _, ok := tr.Targets[data.RoleName(data.CanonicalTargetsRole)]; !ok {
+		return ErrNotLoaded{role: "targets"}
+	}
+	targets, err := tr.Targets[data.RoleName(data.CanonicalTargetsRole)].ToSigned()
 	if err != nil {
 		return err
 	}

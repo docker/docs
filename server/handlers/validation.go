@@ -5,6 +5,8 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"path/filepath"
+	"sort"
 	"strings"
 
 	"github.com/Sirupsen/logrus"
@@ -28,8 +30,12 @@ func validateUpdate(cs signed.CryptoService, gun string, updates []storage.MetaU
 	kdb := keys.NewDB()
 	repo := tuf.NewRepo(kdb, cs)
 	rootRole := data.RoleName(data.CanonicalRootRole)
-	targetsRole := data.RoleName(data.CanonicalTargetsRole)
 	snapshotRole := data.RoleName(data.CanonicalSnapshotRole)
+
+	// some delegated targets role may be invalid based on other updates
+	// that have been made by other clients. We'll rebuild the slice of
+	// updates with only the things we should actually update
+	updatesToApply := make([]storage.MetaUpdate, 0, len(updates))
 
 	// check that the necessary roles are present:
 	roles := make(map[string]storage.MetaUpdate)
@@ -59,6 +65,7 @@ func validateUpdate(cs signed.CryptoService, gun string, updates []storage.MetaU
 			return nil, validation.ErrValidation{Msg: err.Error()}
 		}
 		logrus.Debug("Successfully validated root")
+		updatesToApply = append(updatesToApply, rootUpdate)
 	} else {
 		if oldRootJSON == nil {
 			return nil, validation.ErrValidation{Msg: "no pre-existing root and no root provided in update."}
@@ -74,25 +81,16 @@ func validateUpdate(cs signed.CryptoService, gun string, updates []storage.MetaU
 	}
 
 	// TODO: validate delegated targets roles.
-	var t *data.SignedTargets
-	if _, ok := roles[targetsRole]; ok {
-		if t, err = validateTargets(targetsRole, roles, kdb); err != nil {
-			logrus.Error("ErrBadTargets: ", err.Error())
-			return nil, validation.ErrBadTargets{Msg: err.Error()}
-		}
-		repo.SetTargets(targetsRole, t)
-	} else {
-		targetsJSON, err := store.GetCurrent(gun, data.CanonicalTargetsRole)
-		if err != nil {
-			return nil, validation.ErrValidation{Msg: err.Error()}
-		}
-		targets := &data.SignedTargets{}
-		err = json.Unmarshal(targetsJSON, targets)
-		if err != nil {
-			return nil, validation.ErrValidation{Msg: err.Error()}
-		}
-		repo.SetTargets(data.CanonicalTargetsRole, targets)
+	targetsToUpdate, err := loadAndValidateTargets(gun, repo, roles, kdb, store)
+	if err != nil {
+		return nil, err
 	}
+	updatesToApply = append(updatesToApply, targetsToUpdate...)
+
+	// there's no need to load files from the database if no targets etc...
+	// were uploaded because that means they haven't been updated and
+	// the snapshot will already contain the correct hashes and sizes for
+	// those targets (incl. delegated targets)
 	logrus.Debug("Successfully validated targets")
 
 	// At this point, root and targets must have been loaded into the repo
@@ -116,6 +114,7 @@ func validateUpdate(cs signed.CryptoService, gun string, updates []storage.MetaU
 			return nil, validation.ErrBadSnapshot{Msg: err.Error()}
 		}
 		logrus.Debug("Successfully validated snapshot")
+		updatesToApply = append(updatesToApply, roles[snapshotRole])
 	} else {
 		// Check:
 		//   - we have a snapshot key
@@ -127,9 +126,64 @@ func validateUpdate(cs signed.CryptoService, gun string, updates []storage.MetaU
 		if err != nil {
 			return nil, err
 		}
-		updates = append(updates, *update)
+		updatesToApply = append(updatesToApply, *update)
 	}
-	return updates, nil
+	return updatesToApply, nil
+}
+
+func loadAndValidateTargets(gun string, repo *tuf.Repo, roles map[string]storage.MetaUpdate, kdb *keys.KeyDB, store storage.MetaStore) ([]storage.MetaUpdate, error) {
+	targetsRoles := make(utils.RoleList, 0)
+	for role := range roles {
+		if role == data.RoleName(data.CanonicalTargetsRole) || data.IsDelegation(role) {
+			targetsRoles = append(targetsRoles, role)
+		}
+	}
+
+	// by sorting, we'll always process shallower targets updates before deeper
+	// ones (i.e. we'll load and validate targets before targets/foo). This
+	// helps ensure we only load from storage when necessary in a cleaner way.
+	// RoleList sorts paths with fewer segments first
+	sort.Sort(targetsRoles)
+
+	updatesToApply := make([]storage.MetaUpdate, 0, len(targetsRoles))
+	for _, role := range targetsRoles {
+		parentRole := filepath.Dir(role)
+
+		// don't load parent if current role is "targets" or if the parent has
+		// already been loaded
+		_, ok := repo.Targets[parentRole]
+		if role != data.RoleName(data.CanonicalTargetsRole) && !ok {
+			err := loadTargetsFromStore(gun, parentRole, repo, store)
+			if err != nil {
+				return nil, err
+			}
+		}
+		var (
+			t   *data.SignedTargets
+			err error
+		)
+		if t, err = validateTargets(role, roles, kdb); err != nil {
+			logrus.Error("ErrBadTargets: ", err.Error())
+			return nil, validation.ErrBadTargets{Msg: err.Error()}
+		}
+		// this will load keys and roles into the kdb
+		err = repo.SetTargets(role, t)
+		if err != nil {
+			return nil, err
+		}
+		updatesToApply = append(updatesToApply, roles[role])
+	}
+	return updatesToApply, nil
+}
+
+func loadTargetsFromStore(gun, role string, repo *tuf.Repo, store storage.MetaStore) error {
+	tgtJSON, err := store.GetCurrent(gun, role)
+	t := &data.SignedTargets{}
+	err = json.Unmarshal(tgtJSON, t)
+	if err != nil {
+		return err
+	}
+	return repo.SetTargets(role, t)
 }
 
 func generateSnapshot(gun string, kdb *keys.KeyDB, repo *tuf.Repo, store storage.MetaStore) (*storage.MetaUpdate, error) {
@@ -175,6 +229,7 @@ func generateSnapshot(gun string, kdb *keys.KeyDB, repo *tuf.Repo, store storage
 			return nil, validation.ErrValidation{Msg: err.Error()}
 		}
 	} else {
+		// this will only occurr if no snapshot has ever been created for the repository
 		err := repo.InitSnapshot()
 		if err != nil {
 			return nil, validation.ErrBadSnapshot{Msg: err.Error()}
