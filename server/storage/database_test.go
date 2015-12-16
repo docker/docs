@@ -224,7 +224,7 @@ func TestSQLGetCurrent(t *testing.T) {
 	byt, err := dbStore.GetCurrent("testGUN", "root")
 	assert.Nil(t, byt)
 	assert.Error(t, err, "There should be an error Getting an empty table")
-	assert.IsType(t, &ErrNotFound{}, err, "Should get a not found error")
+	assert.IsType(t, ErrNotFound{}, err, "Should get a not found error")
 
 	tuf := SampleTUF(0)
 	query := gormDB.Create(&tuf)

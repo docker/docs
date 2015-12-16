@@ -23,7 +23,7 @@ func TestGetCurrent(t *testing.T) {
 	s := NewMemStorage()
 
 	_, err := s.GetCurrent("gun", "role")
-	assert.IsType(t, &ErrNotFound{}, err, "Expected error to be ErrNotFound")
+	assert.IsType(t, ErrNotFound{}, err, "Expected error to be ErrNotFound")
 
 	s.UpdateCurrent("gun", MetaUpdate{"role", 1, []byte("test")})
 	d, err := s.GetCurrent("gun", "role")
