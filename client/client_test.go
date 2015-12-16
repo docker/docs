@@ -11,6 +11,7 @@ import (
 	"os"
 	"path/filepath"
 	"sort"
+	"strings"
 	"testing"
 
 	"github.com/Sirupsen/logrus"
@@ -426,20 +427,11 @@ func testInitRepoPasswordInvalid(t *testing.T, rootType string) {
 	assert.EqualError(t, err, trustmanager.ErrPasswordInvalid{}.Error())
 }
 
-// TestAddTarget adds a target to the repo and confirms that the changelist
-// is updated correctly.
-// We test this with both an RSA and ECDSA root key
-func TestAddTarget(t *testing.T) {
-	testAddTarget(t, data.ECDSAKey)
-	if !testing.Short() {
-		testAddTarget(t, data.RSAKey)
-	}
-}
-
-func addTarget(t *testing.T, repo *NotaryRepository, targetName, targetFile string) *Target {
+func addTarget(t *testing.T, repo *NotaryRepository, targetName, targetFile string,
+	roles ...string) *Target {
 	target, err := NewTarget(targetName, targetFile)
 	assert.NoError(t, err, "error creating target")
-	err = repo.AddTarget(target)
+	err = repo.AddTarget(target, roles...)
 	assert.NoError(t, err, "error adding target")
 	return target
 }
@@ -451,7 +443,10 @@ func getChanges(t *testing.T, repo *NotaryRepository) []changelist.Change {
 	return changeList.List()
 }
 
-func testAddTarget(t *testing.T, rootType string) {
+// TestAddTargetToTargetRoleByDefault adds a target without specifying a role
+// to a repo without delegations.  Confirms that the changelist is created
+// correctly, for the targets scope.
+func TestAddTargetToTargetRoleByDefault(t *testing.T) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)
@@ -463,46 +458,314 @@ func testAddTarget(t *testing.T, rootType string) {
 	ts, _, _ := simpleTestServer(t)
 	defer ts.Close()
 
-	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL, false)
+	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
 
-	// tests need to manually boostrap timestamp as client doesn't generate it
-	err = repo.tufRepo.InitTimestamp()
-	assert.NoError(t, err, "error creating repository: %s", err)
+	testAddOrDeleteTarget(t, repo, changelist.ActionCreate, nil,
+		[]string{data.CanonicalTargetsRole})
+}
+
+// Tests that adding a target to a repo or deleting a target from a repo,
+// with the given roles, makes a change to the expected scopes
+func testAddOrDeleteTarget(t *testing.T, repo *NotaryRepository, action string,
+	rolesToChange []string, expectedScopes []string) {
+
 	assert.Len(t, getChanges(t, repo), 0, "should start with zero changes")
 
-	// Add fixtures/intermediate-ca.crt as a target. There's no particular
-	// reason for using this file except that it happens to be available as
-	// a fixture.
-	addTarget(t, repo, "latest", "../fixtures/intermediate-ca.crt")
-	changes := getChanges(t, repo)
-	assert.Len(t, changes, 1, "wrong number of changes files found")
-
-	for _, c := range changes { // there is only one
-		assert.EqualValues(t, changelist.ActionCreate, c.Action())
-		assert.Equal(t, "targets", c.Scope())
-		assert.Equal(t, "target", c.Type())
-		assert.Equal(t, "latest", c.Path())
-		assert.NotEmpty(t, c.Content())
+	if action == changelist.ActionCreate {
+		// Add fixtures/intermediate-ca.crt as a target. There's no particular
+		// reason for using this file except that it happens to be available as
+		// a fixture.
+		addTarget(t, repo, "latest", "../fixtures/intermediate-ca.crt", rolesToChange...)
+	} else {
+		err := repo.RemoveTarget("latest", rolesToChange...)
+		assert.NoError(t, err, "error removing target")
 	}
 
-	// Create a second target
-	addTarget(t, repo, "current", "../fixtures/intermediate-ca.crt")
+	changes := getChanges(t, repo)
+	assert.Len(t, changes, len(expectedScopes), "wrong number of changes files found")
+
+	foundScopes := make(map[string]bool)
+	for _, c := range changes { // there is only one
+		assert.EqualValues(t, action, c.Action())
+		foundScopes[c.Scope()] = true
+		assert.Equal(t, "target", c.Type())
+		assert.Equal(t, "latest", c.Path())
+		if action == changelist.ActionCreate {
+			assert.NotEmpty(t, c.Content())
+		} else {
+			assert.Empty(t, c.Content())
+		}
+	}
+	assert.Len(t, foundScopes, len(expectedScopes))
+	for _, expectedScope := range expectedScopes {
+		_, ok := foundScopes[expectedScope]
+		assert.True(t, ok, "Target was not added/removed from %s", expectedScope)
+	}
+
+	// add/delete a second time
+	if action == changelist.ActionCreate {
+		addTarget(t, repo, "current", "../fixtures/intermediate-ca.crt", rolesToChange...)
+	} else {
+		err := repo.RemoveTarget("current", rolesToChange...)
+		assert.NoError(t, err, "error removing target")
+	}
+
 	changes = getChanges(t, repo)
-	assert.Len(t, changes, 2, "wrong number of changelist files found")
+	assert.Len(t, changes, 2*len(expectedScopes),
+		"wrong number of changelist files found")
 
 	newFileFound := false
+	foundScopes = make(map[string]bool)
 	for _, c := range changes {
 		if c.Path() != "latest" {
-			assert.EqualValues(t, changelist.ActionCreate, c.Action())
-			assert.Equal(t, "targets", c.Scope())
+			assert.EqualValues(t, action, c.Action())
+			foundScopes[c.Scope()] = true
 			assert.Equal(t, "target", c.Type())
 			assert.Equal(t, "current", c.Path())
-			assert.NotEmpty(t, c.Content())
+			if action == changelist.ActionCreate {
+				assert.NotEmpty(t, c.Content())
+			} else {
+				assert.Empty(t, c.Content())
+			}
 
 			newFileFound = true
 		}
 	}
 	assert.True(t, newFileFound, "second changelist file not found")
+	assert.Len(t, foundScopes, len(expectedScopes))
+	for _, expectedScope := range expectedScopes {
+		_, ok := foundScopes[expectedScope]
+		assert.True(t, ok, "Target was not added/removed from %s", expectedScope)
+	}
+}
+
+// TestAddTargetToSpecifiedValidRoles adds a target to the specified roles.
+// Confirms that the changelist is created correctly, one for each of the
+// the specified roles as scopes.
+func TestAddTargetToSpecifiedValidRoles(t *testing.T) {
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	defer os.RemoveAll(tempBaseDir)
+
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+
+	gun := "docker.com/notary"
+
+	ts, _, _ := simpleTestServer(t)
+	defer ts.Close()
+
+	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
+
+	roleName := filepath.Join(data.CanonicalTargetsRole, "a")
+	testAddOrDeleteTarget(t, repo, changelist.ActionCreate,
+		[]string{
+			strings.ToUpper(data.CanonicalTargetsRole),
+			strings.ToUpper(roleName),
+		},
+		[]string{data.CanonicalTargetsRole, roleName})
+}
+
+// TestAddTargetToSpecifiedInvalidRoles expects errors to be returned if
+// adding a target to an invalid role.  If any of the roles are invalid,
+// no targets are added to any roles.
+func TestAddTargetToSpecifiedInvalidRoles(t *testing.T) {
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+	defer os.RemoveAll(tempBaseDir)
+
+	gun := "docker.com/notary"
+
+	ts, _, _ := simpleTestServer(t)
+	defer ts.Close()
+
+	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
+
+	invalidRoles := []string{
+		data.CanonicalRootRole,
+		data.CanonicalSnapshotRole,
+		data.CanonicalTimestampRole,
+		"target/otherrole",
+		"otherrole",
+	}
+
+	for _, invalidRole := range invalidRoles {
+		target, err := NewTarget("latest", "../fixtures/intermediate-ca.crt")
+		assert.NoError(t, err, "error creating target")
+
+		err = repo.AddTarget(target, data.CanonicalTargetsRole, invalidRole)
+		assert.Error(t, err, "Expected an ErrInvalidRole error")
+		assert.IsType(t, data.ErrInvalidRole{}, err)
+
+		changes := getChanges(t, repo)
+		assert.Len(t, changes, 0)
+	}
+}
+
+// TestAddTargetErrorWritingChanges expects errors writing a change to file
+// to be propagated.
+func TestAddTargetErrorWritingChanges(t *testing.T) {
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	defer os.RemoveAll(tempBaseDir)
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+
+	gun := "docker.com/notary"
+
+	ts, _, _ := simpleTestServer(t)
+	defer ts.Close()
+
+	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
+
+	target, err := NewTarget("latest", "../fixtures/intermediate-ca.crt")
+	assert.NoError(t, err, "error creating target")
+
+	// first, make the actual changefile unwritable by making the changelist
+	// directory unwritable
+	changelistPath := filepath.Join(repo.tufRepoPath, "changelist")
+	err = os.MkdirAll(changelistPath, 0744)
+	assert.NoError(t, err, "could not create changelist dir")
+	err = os.Chmod(changelistPath, 0600)
+	assert.NoError(t, err, "could not change permission of changelist dir")
+
+	err = repo.AddTarget(target, data.CanonicalTargetsRole)
+	assert.Error(t, err, "Expected an error writing the change")
+	assert.IsType(t, &os.PathError{}, err)
+
+	// then break prevent the changlist directory from being able to be created
+	err = os.Chmod(changelistPath, 0744)
+	assert.NoError(t, err, "could not change permission of temp dir")
+	err = os.RemoveAll(changelistPath)
+	assert.NoError(t, err, "could not remove changelist dir")
+	// creating a changelist file so the directory can't be created
+	err = ioutil.WriteFile(changelistPath, []byte("hi"), 0644)
+	assert.NoError(t, err, "could not write temporary file")
+
+	err = repo.AddTarget(target, data.CanonicalTargetsRole)
+	assert.Error(t, err, "Expected an error writing the change")
+	assert.IsType(t, &os.PathError{}, err)
+}
+
+// TestRemoveTargetToTargetRoleByDefault removes a target without specifying a
+// role from a repo.  Confirms that the changelist is created correctly for
+// the targets scope.
+func TestRemoveTargetToTargetRoleByDefault(t *testing.T) {
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	defer os.RemoveAll(tempBaseDir)
+
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+
+	gun := "docker.com/notary"
+
+	ts, _, _ := simpleTestServer(t)
+	defer ts.Close()
+
+	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
+
+	testAddOrDeleteTarget(t, repo, changelist.ActionDelete, nil,
+		[]string{data.CanonicalTargetsRole})
+}
+
+// TestRemoveTargetFromSpecifiedValidRoles removes a target from the specified
+// roles. Confirms that the changelist is created correctly, one for each of
+// the the specified roles as scopes.
+func TestRemoveTargetFromSpecifiedValidRoles(t *testing.T) {
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	defer os.RemoveAll(tempBaseDir)
+
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+
+	gun := "docker.com/notary"
+
+	ts, _, _ := simpleTestServer(t)
+	defer ts.Close()
+
+	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
+
+	roleName := filepath.Join(data.CanonicalTargetsRole, "a")
+	testAddOrDeleteTarget(t, repo, changelist.ActionDelete,
+		[]string{
+			strings.ToUpper(data.CanonicalTargetsRole),
+			strings.ToUpper(roleName),
+		},
+		[]string{data.CanonicalTargetsRole, roleName})
+}
+
+// TestRemoveTargetFromSpecifiedInvalidRoles expects errors to be returned if
+// removing a target to an invalid role.  If any of the roles are invalid,
+// no targets are removed from any roles.
+func TestRemoveTargetToSpecifiedInvalidRoles(t *testing.T) {
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+	defer os.RemoveAll(tempBaseDir)
+
+	gun := "docker.com/notary"
+
+	ts, _, _ := simpleTestServer(t)
+	defer ts.Close()
+
+	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
+
+	invalidRoles := []string{
+		data.CanonicalRootRole,
+		data.CanonicalSnapshotRole,
+		data.CanonicalTimestampRole,
+		"target/otherrole",
+		"otherrole",
+	}
+
+	for _, invalidRole := range invalidRoles {
+		err = repo.RemoveTarget(data.CanonicalTargetsRole, invalidRole)
+		assert.Error(t, err, "Expected an ErrInvalidRole error")
+		assert.IsType(t, data.ErrInvalidRole{}, err)
+
+		changes := getChanges(t, repo)
+		assert.Len(t, changes, 0)
+	}
+}
+
+// TestRemoveTargetErrorWritingChanges expects errors writing a change to file
+// to be propagated.
+func TestRemoveTargetErrorWritingChanges(t *testing.T) {
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	defer os.Remove(tempBaseDir)
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+
+	gun := "docker.com/notary"
+
+	ts, _, _ := simpleTestServer(t)
+	defer ts.Close()
+
+	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
+
+	// first, make the actual changefile unwritable by making the changelist
+	// directory unwritable
+	changelistPath := filepath.Join(repo.tufRepoPath, "changelist")
+	err = os.MkdirAll(changelistPath, 0744)
+	assert.NoError(t, err, "could not create changelist dir")
+	err = os.Chmod(changelistPath, 0600)
+	assert.NoError(t, err, "could not change permission of changelist dir")
+
+	err = repo.RemoveTarget(data.CanonicalTargetsRole)
+	assert.Error(t, err, "Expected an error writing the change")
+	assert.IsType(t, &os.PathError{}, err)
+
+	// then break prevent the changlist directory from being able to be created
+	err = os.Chmod(changelistPath, 0744)
+	assert.NoError(t, err, "could not change permission of temp dir")
+	err = os.RemoveAll(changelistPath)
+	assert.NoError(t, err, "could not remove changelist dir")
+	// creating a changelist file so the directory can't be created
+	err = ioutil.WriteFile(changelistPath, []byte("hi"), 0644)
+	assert.NoError(t, err, "could not write temporary file")
+
+	err = repo.RemoveTarget(data.CanonicalTargetsRole)
+	assert.Error(t, err, "Expected an error writing the change")
+	assert.IsType(t, &os.PathError{}, err)
 }
 
 // TestListTarget fakes serving signed metadata files over the test's
