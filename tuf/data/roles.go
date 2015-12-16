@@ -98,16 +98,23 @@ func ValidRole(name string) bool {
 	if v, ok := ValidRoles[name]; ok {
 		return name == v
 	}
-	targetsBase := fmt.Sprintf("%s/", ValidRoles[CanonicalTargetsRole])
-	if strings.HasPrefix(name, targetsBase) {
+
+	if IsDelegation(name) {
 		return true
 	}
+
 	for _, v := range ValidRoles {
 		if name == v {
 			return true
 		}
 	}
 	return false
+}
+
+// IsDelegation checks if the role is a delegation or a root role
+func IsDelegation(role string) bool {
+	targetsBase := fmt.Sprintf("%s/", ValidRoles[CanonicalTargetsRole])
+	return strings.HasPrefix(role, targetsBase) && !strings.HasSuffix(role, "/")
 }
 
 // RootRole is a cut down role as it appears in the root.json
@@ -186,8 +193,7 @@ func (r Role) CheckPrefixes(hash string) bool {
 
 // IsDelegation checks if the role is a delegation or a root role
 func (r Role) IsDelegation() bool {
-	targetsBase := fmt.Sprintf("%s/", ValidRoles[CanonicalTargetsRole])
-	return strings.HasPrefix(r.Name, targetsBase)
+	return IsDelegation(r.Name)
 }
 
 // AddKeys merges the ids into the current list of role key ids

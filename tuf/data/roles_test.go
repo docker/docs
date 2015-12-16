@@ -1,6 +1,7 @@
 package data
 
 import (
+	"path/filepath"
 	"strings"
 	"testing"
 
@@ -180,4 +181,38 @@ func TestErrNoSuchRole(t *testing.T) {
 func TestErrInvalidRole(t *testing.T) {
 	var err error = ErrInvalidRole{Role: "test"}
 	assert.False(t, strings.Contains(err.Error(), "Reason"))
+}
+
+func TestIsDelegation(t *testing.T) {
+	assert.True(t, IsDelegation(filepath.Join(CanonicalTargetsRole, "level1")))
+	assert.True(t, IsDelegation(
+		filepath.Join(CanonicalTargetsRole, "level1", "level2", "level3")))
+
+	assert.False(t, IsDelegation(""))
+	assert.False(t, IsDelegation(CanonicalRootRole))
+	assert.False(t, IsDelegation(filepath.Join(CanonicalRootRole, "level1")))
+
+	assert.False(t, IsDelegation(CanonicalTargetsRole))
+	assert.False(t, IsDelegation(CanonicalTargetsRole+"/"))
+	assert.False(t, IsDelegation(filepath.Join(CanonicalTargetsRole, "level1")+"/"))
+}
+
+func TestValidRoleFunction(t *testing.T) {
+	assert.True(t, ValidRole(CanonicalRootRole))
+	assert.True(t, ValidRole(CanonicalTimestampRole))
+	assert.True(t, ValidRole(CanonicalSnapshotRole))
+	assert.True(t, ValidRole(CanonicalTargetsRole))
+	assert.True(t, ValidRole(filepath.Join(CanonicalTargetsRole, "level1")))
+	assert.True(t, ValidRole(
+		filepath.Join(CanonicalTargetsRole, "level1", "level2", "level3")))
+
+	assert.False(t, ValidRole(""))
+	assert.False(t, ValidRole(CanonicalRootRole+"/"))
+	assert.False(t, ValidRole(CanonicalTimestampRole+"/"))
+	assert.False(t, ValidRole(CanonicalSnapshotRole+"/"))
+	assert.False(t, ValidRole(CanonicalTargetsRole+"/"))
+
+	assert.False(t, ValidRole(filepath.Join(CanonicalRootRole, "level1")))
+
+	assert.False(t, ValidRole(filepath.Join("role")))
 }
