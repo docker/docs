@@ -1475,3 +1475,55 @@ func TestRemoteServerUnavailableNoLocalCache(t *testing.T) {
 	assert.Error(t, err)
 	assert.IsType(t, store.ErrServerUnavailable{}, err)
 }
+
+// AddDelegation creates a valid changefile (rejects invalid delegation names),
+// which when applied, adds a new delegation role with the correct keys.
+func TestAddDelegation(t *testing.T) {
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	defer os.RemoveAll(tempBaseDir)
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+
+	gun := "docker.com/notary"
+	ts, _, _ := simpleTestServer(t)
+	defer ts.Close()
+
+	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
+	targetKeyIds := repo.CryptoService.ListKeys(data.CanonicalTargetsRole)
+	assert.NotEmpty(t, targetKeyIds)
+	targetPubKey := repo.CryptoService.GetKey(targetKeyIds[0])
+	assert.NotNil(t, targetPubKey)
+
+	err = repo.AddDelegation("root", 1, []data.PublicKey{targetPubKey})
+	assert.Error(t, err)
+	assert.IsType(t, data.ErrInvalidRole{}, err)
+	assert.Empty(t, getChanges(t, repo))
+
+	err = repo.AddDelegation("targets/a", 1, []data.PublicKey{targetPubKey})
+	assert.NoError(t, err)
+
+	// ensure that the changefile is correct
+	changes := getChanges(t, repo)
+	assert.Len(t, changes, 1)
+	assert.Equal(t, changelist.ActionCreate, changes[0].Action())
+	assert.Equal(t, "targets/a", changes[0].Scope())
+	assert.Equal(t, changelist.TypeTargetsDelegation, changes[0].Type())
+	assert.Equal(t, "", changes[0].Path())
+	assert.NotEmpty(t, changes[0].Content())
+
+	// ensure that it can be applied correctly
+	err = applyTargetsChange(repo.tufRepo, changes[0])
+	assert.NoError(t, err)
+
+	targetRole := repo.tufRepo.Targets[data.CanonicalTargetsRole]
+	assert.Len(t, targetRole.Signed.Delegations.Roles, 1)
+	assert.Len(t, targetRole.Signed.Delegations.Keys, 1)
+
+	_, ok := targetRole.Signed.Delegations.Keys[targetPubKey.ID()]
+	assert.True(t, ok)
+
+	newDelegationRole := targetRole.Signed.Delegations.Roles[0]
+	assert.Len(t, newDelegationRole.KeyIDs, 1)
+	assert.Equal(t, targetPubKey.ID(), newDelegationRole.KeyIDs[0])
+	assert.Equal(t, "targets/a", newDelegationRole.Name)
+}
