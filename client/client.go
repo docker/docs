@@ -259,9 +259,48 @@ func (r *NotaryRepository) Initialize(rootKeyID string, serverManagedRoles ...st
 	return r.saveMetadata(serverManagesSnapshot)
 }
 
-// AddTarget adds a new target to the repository to the given roles, forcing a
-// timestamps check from TUF. If roles are unspecified, AddTarget the default
-// role is "target"
+// adds a TUF Change template to the given roles
+func addChange(cl *changelist.FileChangelist, c changelist.Change,
+	roles ...string) error {
+	if len(roles) == 0 {
+		roles = []string{data.CanonicalTargetsRole}
+	}
+
+	var changes []changelist.Change
+	for _, role := range roles {
+		role = strings.ToLower(role)
+
+		if !data.ValidRole(role) {
+			return data.ErrInvalidRole{Role: role}
+		}
+
+		if _, ok := data.ValidRoles[role]; ok && role != data.CanonicalTargetsRole {
+			return data.ErrInvalidRole{
+				Role:   role,
+				Reason: "cannot add targets to this role",
+			}
+		}
+
+		changes = append(changes, changelist.NewTufChange(
+			c.Action(),
+			role,
+			c.Type(),
+			c.Path(),
+			c.Content(),
+		))
+	}
+
+	for _, c := range changes {
+		if err := cl.Add(c); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// AddTarget creates new changelist entries to add a target to the given roles
+// in the repository when the changelist gets appied at publish time.
+// If roles are unspecified, the default role is "target".
 func (r *NotaryRepository) AddTarget(target *Target, roles ...string) error {
 	cl, err := changelist.NewFileChangelist(filepath.Join(r.tufRepoPath, "changelist"))
 	if err != nil {
@@ -276,58 +315,24 @@ func (r *NotaryRepository) AddTarget(target *Target, roles ...string) error {
 		return err
 	}
 
-	if len(roles) == 0 {
-		roles = []string{data.CanonicalTargetsRole}
-	}
-
-	var changes []*changelist.TufChange
-	for _, role := range roles {
-		role = strings.ToLower(role)
-
-		if !data.ValidRole(role) {
-			return data.ErrInvalidRole{Role: role}
-		}
-
-		_, ok := data.ValidRoles[role]
-		if ok && role != data.CanonicalTargetsRole {
-			return data.ErrInvalidRole{
-				Role:   role,
-				Reason: "cannot add targets to this role",
-			}
-		}
-
-		changes = append(changes, changelist.NewTufChange(
-			changelist.ActionCreate,
-			role,
-			changelist.TypeTargetsTarget,
-			target.Name,
-			metaJSON,
-		))
-	}
-
-	for _, c := range changes {
-		err = cl.Add(c)
-		if err != nil {
-			return err
-		}
-	}
-	return nil
+	template := changelist.NewTufChange(
+		changelist.ActionCreate, "", changelist.TypeTargetsTarget,
+		target.Name, metaJSON)
+	return addChange(cl, template, roles...)
 }
 
-// RemoveTarget creates a new changelist entry to remove a target from the repository
-// when the changelist gets applied at publish time
-func (r *NotaryRepository) RemoveTarget(targetName string) error {
+// RemoveTarget creates new changelist entries to remove a target from the given
+// roles in the repository when the changelist gets applied at publish time.
+// If roles are unspecified, the default role is "target".
+func (r *NotaryRepository) RemoveTarget(targetName string, roles ...string) error {
 	cl, err := changelist.NewFileChangelist(filepath.Join(r.tufRepoPath, "changelist"))
 	if err != nil {
 		return err
 	}
 	logrus.Debugf("Removing target \"%s\"", targetName)
-	c := changelist.NewTufChange(changelist.ActionDelete, changelist.ScopeTargets, "target", targetName, nil)
-	err = cl.Add(c)
-	if err != nil {
-		return err
-	}
-	return nil
+	template := changelist.NewTufChange(changelist.ActionDelete, "",
+		changelist.TypeTargetsTarget, targetName, nil)
+	return addChange(cl, template, roles...)
 }
 
 // ListTargets lists all targets for the current repository
