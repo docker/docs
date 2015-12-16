@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strings"
 	"time"
 
 	"github.com/Sirupsen/logrus"
@@ -258,8 +259,10 @@ func (r *NotaryRepository) Initialize(rootKeyID string, serverManagedRoles ...st
 	return r.saveMetadata(serverManagesSnapshot)
 }
 
-// AddTarget adds a new target to the repository, forcing a timestamps check from TUF
-func (r *NotaryRepository) AddTarget(target *Target) error {
+// AddTarget adds a new target to the repository to the given roles, forcing a
+// timestamps check from TUF. If roles are unspecified, AddTarget the default
+// role is "target"
+func (r *NotaryRepository) AddTarget(target *Target, roles ...string) error {
 	cl, err := changelist.NewFileChangelist(filepath.Join(r.tufRepoPath, "changelist"))
 	if err != nil {
 		return err
@@ -273,16 +276,40 @@ func (r *NotaryRepository) AddTarget(target *Target) error {
 		return err
 	}
 
-	c := changelist.NewTufChange(
-		changelist.ActionCreate,
-		changelist.ScopeTargets,
-		changelist.TypeTargetsTarget,
-		target.Name,
-		metaJSON,
-	)
-	err = cl.Add(c)
-	if err != nil {
-		return err
+	if len(roles) == 0 {
+		roles = []string{data.CanonicalTargetsRole}
+	}
+
+	var changes []*changelist.TufChange
+	for _, role := range roles {
+		role = strings.ToLower(role)
+
+		if !data.ValidRole(role) {
+			return data.ErrInvalidRole{Role: role}
+		}
+
+		_, ok := data.ValidRoles[role]
+		if ok && role != data.CanonicalTargetsRole {
+			return data.ErrInvalidRole{
+				Role:   role,
+				Reason: "cannot add targets to this role",
+			}
+		}
+
+		changes = append(changes, changelist.NewTufChange(
+			changelist.ActionCreate,
+			role,
+			changelist.TypeTargetsTarget,
+			target.Name,
+			metaJSON,
+		))
+	}
+
+	for _, c := range changes {
+		err = cl.Add(c)
+		if err != nil {
+			return err
+		}
 	}
 	return nil
 }
