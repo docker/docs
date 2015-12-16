@@ -6,6 +6,7 @@ import (
 	regJson "encoding/json"
 	"fmt"
 	"io/ioutil"
+	"math"
 	"net/http"
 	"net/http/httptest"
 	"os"
@@ -1175,11 +1176,31 @@ func testPublish(t *testing.T, rootType string, serverManagesSnapshot bool) {
 	assertPublishSucceeds(t, repo)
 }
 
+// asserts that publish succeeds by adding to the default only and publishing;
+// the targets should appear in targets
 func assertPublishSucceeds(t *testing.T, repo1 *NotaryRepository) {
-	// Create 2 targets
-	latestTarget := addTarget(t, repo1, "latest", "../fixtures/intermediate-ca.crt")
-	currentTarget := addTarget(t, repo1, "current", "../fixtures/intermediate-ca.crt")
-	assert.Len(t, getChanges(t, repo1), 2, "wrong number of changelist files found")
+	assertPublishToRolesSucceeds(t, repo1, nil, []string{data.CanonicalTargetsRole})
+}
+
+// asserts that adding to the given roles results in the targets actually
+func assertPublishToRolesSucceeds(t *testing.T, repo1 *NotaryRepository,
+	publishToRoles []string, expectedPublishedRoles []string) {
+
+	// were there unpublished changes before?
+	changesOffset := len(getChanges(t, repo1))
+
+	// Create 2 targets - (actually 3, but we delete 1)
+	addTarget(t, repo1, "toDelete", "../fixtures/intermediate-ca.crt", publishToRoles...)
+	latestTarget := addTarget(
+		t, repo1, "latest", "../fixtures/intermediate-ca.crt", publishToRoles...)
+	currentTarget := addTarget(
+		t, repo1, "current", "../fixtures/intermediate-ca.crt", publishToRoles...)
+	repo1.RemoveTarget("toDelete", publishToRoles...)
+
+	// if no roles are provided, the default role is target
+	numRoles := int(math.Max(1, float64(len(publishToRoles))))
+	assert.Len(t, getChanges(t, repo1), changesOffset+4*numRoles,
+		"wrong number of changelist files found")
 
 	// Now test Publish
 	err := repo1.Publish()
@@ -1187,7 +1208,7 @@ func assertPublishSucceeds(t *testing.T, repo1 *NotaryRepository) {
 	assert.Len(t, getChanges(t, repo1), 0, "wrong number of changelist files found")
 
 	// Create a new repo and pull from the server
-	tempBaseDir, err := ioutil.TempDir("/tmp", "notary-test-")
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)
 
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
@@ -1196,26 +1217,30 @@ func assertPublishSucceeds(t *testing.T, repo1 *NotaryRepository) {
 		http.DefaultTransport, passphraseRetriever)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
-	// Should be two targets
-	for _, repo := range []*NotaryRepository{repo1, repo2} {
-		targets, err := repo.ListTargets(data.CanonicalTargetsRole)
-		assert.NoError(t, err)
+	// Should be two targets per role
+	for _, role := range expectedPublishedRoles {
+		for _, repo := range []*NotaryRepository{repo1, repo2} {
+			targets, err := repo.ListTargets(role)
+			assert.NoError(t, err)
 
-		assert.Len(t, targets, 2, "unexpected number of targets returned by ListTargets")
+			assert.Len(t, targets, 2, "unexpected number of targets returned by ListTargets")
 
-		sort.Stable(targetSorter(targets))
+			sort.Stable(targetSorter(targets))
 
-		assert.Equal(t, currentTarget, targets[0], "current target does not match")
-		assert.Equal(t, latestTarget, targets[1], "latest target does not match")
+			assert.Equal(t, currentTarget, targets[0], "current target does not match")
+			assert.Equal(t, latestTarget, targets[1], "latest target does not match")
 
-		// Also test GetTargetByName
-		newLatestTarget, err := repo.GetTargetByName("latest")
-		assert.NoError(t, err)
-		assert.Equal(t, latestTarget, newLatestTarget, "latest target does not match")
+			// Also test GetTargetByName
+			if role == data.CanonicalTargetsRole {
+				newLatestTarget, err := repo.GetTargetByName("latest")
+				assert.NoError(t, err)
+				assert.Equal(t, latestTarget, newLatestTarget, "latest target does not match")
 
-		newCurrentTarget, err := repo.GetTargetByName("current")
-		assert.NoError(t, err)
-		assert.Equal(t, currentTarget, newCurrentTarget, "current target does not match")
+				newCurrentTarget, err := repo.GetTargetByName("current")
+				assert.NoError(t, err)
+				assert.Equal(t, currentTarget, newCurrentTarget, "current target does not match")
+			}
+		}
 	}
 }
 
@@ -1396,6 +1421,215 @@ func TestPublishSnapshotLocalKeysCreatedFirst(t *testing.T) {
 	assert.Error(t, err)
 	assert.Contains(t, err.Error(), "Oh no I cannot create keys")
 	assert.False(t, requestMade)
+}
+
+// Publishing delegations works so long as the delegation parent exists by the
+// time that delegation addition change is applied.  Most of the tests for
+// applying delegation changes in in helpers_test.go (applyTargets tests), so
+// this is just a sanity test to make sure Publish calls it correctly and
+// no fallback happens.
+func TestPublishDelegations(t *testing.T) {
+	var tempDirs [2]string
+	for i := 0; i < 2; i++ {
+		tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+		assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+		defer os.RemoveAll(tempBaseDir)
+		tempDirs[i] = tempBaseDir
+	}
+
+	gun := "docker.com/notary"
+	ts := fullTestServer(t)
+	defer ts.Close()
+
+	repo1, _ := initializeRepo(t, data.ECDSAKey, tempDirs[0], gun, ts.URL, false)
+	delgKey, err := repo1.CryptoService.Create("targets/a", data.ECDSAKey)
+	assert.NoError(t, err, "error creating delegation key")
+
+	// This should publish fine, even though targets/a/b is dependent upon
+	// targets/a, because these should execute in order
+	for _, delgName := range []string{"targets/a", "targets/a/b", "targets/c"} {
+		assert.NoError(t,
+			repo1.AddDelegation(delgName, 1, []data.PublicKey{delgKey}),
+			"error creating delegation")
+	}
+	assert.Len(t, getChanges(t, repo1), 3, "wrong number of changelist files found")
+	assert.NoError(t, repo1.Publish())
+	assert.Len(t, getChanges(t, repo1), 0, "wrong number of changelist files found")
+
+	// this should not publish, because targets/z doesn't exist
+	assert.NoError(t,
+		repo1.AddDelegation("targets/z/y", 1, []data.PublicKey{delgKey}),
+		"error creating delegation")
+	assert.Len(t, getChanges(t, repo1), 1, "wrong number of changelist files found")
+	assert.Error(t, repo1.Publish())
+	assert.Len(t, getChanges(t, repo1), 1, "wrong number of changelist files found")
+
+	// Create a new repo and pull from the server
+	repo2, err := NewNotaryRepository(tempDirs[1], gun, ts.URL,
+		http.DefaultTransport, passphraseRetriever)
+	assert.NoError(t, err, "error creating repository: %s", err)
+
+	// pull
+	_, err = repo2.ListTargets()
+	assert.NoError(t, err, "unable to pull repo")
+
+	for _, repo := range []*NotaryRepository{repo1, repo2} {
+		// targets should have delegations targets/a and targets/c
+		targets := repo.tufRepo.Targets[data.CanonicalTargetsRole]
+		assert.Len(t, targets.Signed.Delegations.Roles, 2)
+		assert.Len(t, targets.Signed.Delegations.Keys, 1)
+
+		_, ok := targets.Signed.Delegations.Keys[delgKey.ID()]
+		assert.True(t, ok)
+
+		foundRoleNames := make(map[string]bool)
+		for _, r := range targets.Signed.Delegations.Roles {
+			foundRoleNames[r.Name] = true
+		}
+		assert.True(t, foundRoleNames["targets/a"])
+		assert.True(t, foundRoleNames["targets/c"])
+
+		// targets/a should have delegation targets/a/b only
+		a := repo.tufRepo.Targets["targets/a"]
+		assert.Len(t, a.Signed.Delegations.Roles, 1)
+		assert.Len(t, a.Signed.Delegations.Keys, 1)
+
+		_, ok = a.Signed.Delegations.Keys[delgKey.ID()]
+		assert.True(t, ok)
+
+		assert.Equal(t, "targets/a/b", a.Signed.Delegations.Roles[0].Name)
+	}
+}
+
+// If a changelist specifies a particular role to push targets to, and there
+// is no such role, publish will try to publish to its parent.  If the parent
+// doesn't work, it falls back on its parent, and so forth, and eventually
+// falls back on publishing to "target".  This *only* falls back if the role
+// doesn't exist, not if the user doesn't have a key.  (different test)
+func TestPublishTargetsDelgationScopeFallback(t *testing.T) {
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+	defer os.RemoveAll(tempBaseDir)
+
+	gun := "docker.com/notary"
+	ts := fullTestServer(t)
+	defer ts.Close()
+
+	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
+	assertPublishToRolesSucceeds(t, repo, []string{"targets/a/b", "targets/b/c"},
+		[]string{data.CanonicalTargetsRole})
+}
+
+// If a changelist specifies a particular role to push targets to, and there
+// is a role but no key, publish not fall back and just fail.
+func TestPublishTargetsDelgationScopeNoFallbackIfNoKeys(t *testing.T) {
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+	defer os.RemoveAll(tempBaseDir)
+
+	gun := "docker.com/notary"
+	ts := fullTestServer(t)
+	defer ts.Close()
+
+	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
+
+	// generate a key that isn't in the cryptoservice, so we can't sign this
+	// one
+	aPrivKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
+	assert.NoError(t, err, "error generating key that is not in our cryptoservice")
+	aPubKey := data.PublicKeyFromPrivate(aPrivKey)
+
+	// ensure that the role exists
+	assert.NoError(t, repo.AddDelegation("targets/a", 1, []data.PublicKey{aPubKey}))
+	assert.NoError(t, repo.Publish())
+
+	// add a target to targets/a/b - no role b, so it falls back on a, which
+	// exists but there is no signing key for
+	addTarget(t, repo, "latest", "../fixtures/intermediate-ca.crt", "targets/a/b")
+	assert.Len(t, getChanges(t, repo), 1, "wrong number of changelist files found")
+
+	// Now Publish should fail
+	assert.NoError(t, repo.Publish())
+	assert.Len(t, getChanges(t, repo), 1, "wrong number of changelist files found")
+
+	targets, err := repo.ListTargets("targets", "targets/a", "targets/a/b")
+	assert.NoError(t, err)
+	assert.Empty(t, targets)
+}
+
+// If a changelist specifies a particular role to push targets to, and is such
+// a role and the keys are present, publish will write to that role only, and
+// not its parents.  This tests the case where the local machine knows about
+// all the roles (in fact, the role creations will be applied before the
+// targets)
+func TestPublishTargetsDelgationSuccessLocallyHasRoles(t *testing.T) {
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+	defer os.RemoveAll(tempBaseDir)
+
+	gun := "docker.com/notary"
+	ts := fullTestServer(t)
+	defer ts.Close()
+
+	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
+	delgKey, err := repo.CryptoService.Create("targets/a", data.ECDSAKey)
+	assert.NoError(t, err, "error creating delegation key")
+
+	for _, delgName := range []string{"targets/a", "targets/a/b"} {
+		assert.NoError(t,
+			repo.AddDelegation(delgName, 1, []data.PublicKey{delgKey}),
+			"error creating delegation")
+	}
+
+	assertPublishToRolesSucceeds(t, repo, []string{"targets/a/b"},
+		[]string{"targets/a/b"})
+}
+
+// If a changelist specifies a particular role to push targets to, and is such
+// a role and the keys are present, publish will write to that role only, and
+// not its parents.  Tests:
+// - case where the local doesn't know about all the roles, and has to download
+//   them before publish.
+// - owner of a repo may not have the delegated keys, so can't sign a delegated
+//   role
+func TestPublishTargetsDelgationSuccessNeedsToDownloadRoles(t *testing.T) {
+	var tempDirs [2]string
+	for i := 0; i < 2; i++ {
+		tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+		assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+		defer os.RemoveAll(tempBaseDir)
+		tempDirs[i] = tempBaseDir
+	}
+
+	gun := "docker.com/notary"
+	ts := fullTestServer(t)
+	defer ts.Close()
+
+	// this is the original repo - it owns the root/targets keys and creates
+	// the delegation
+	ownerRepo, _ := initializeRepo(t, data.ECDSAKey, tempDirs[0], gun, ts.URL, false)
+	// this is a user, or otherwise a repo that only has access to the delegation
+	// key so it can publish targets to the delegated role
+	delgRepo, err := NewNotaryRepository(tempDirs[1], gun, ts.URL,
+		http.DefaultTransport, passphraseRetriever)
+	assert.NoError(t, err, "error creating repository: %s", err)
+
+	// create delegated key on the delegated repo
+	delgKey, err := delgRepo.CryptoService.Create("targets/a", data.ECDSAKey)
+	assert.NoError(t, err, "error creating delegation key")
+
+	// owner creates delegations, adds the delegated key to them, and publishes them
+	for _, delgName := range []string{"targets/a", "targets/a/b"} {
+		assert.NoError(t,
+			ownerRepo.AddDelegation(delgName, 1, []data.PublicKey{delgKey}),
+			"error creating delegation")
+	}
+	assert.NoError(t, ownerRepo.Publish())
+
+	// delegated repo now publishes to delegated roles, but it will need
+	// to download those roles first, since it doesn't know about them
+	assertPublishToRolesSucceeds(t, delgRepo, []string{"targets/a/b"},
+		[]string{"targets/a/b"})
 }
 
 // Rotate invalid roles, or attempt to delegate target signing to the server
