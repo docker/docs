@@ -826,6 +826,18 @@ func fakeServerData(t *testing.T, repo *NotaryRepository, mux *http.ServeMux,
 			targetsJSON, _ := json.Marshal(signedTargets)
 			fmt.Fprint(w, string(targetsJSON))
 		})
+
+	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/targets/level1.json",
+		func(w http.ResponseWriter, r *http.Request) {
+			signedTargets, err := savedTUFRepo.SignTargets(
+				"targets/level1",
+				data.DefaultExpires(data.CanonicalTargetsRole),
+			)
+			assert.NoError(t, err)
+			targetsJSON, err := json.Marshal(signedTargets)
+			assert.NoError(t, err)
+			fmt.Fprint(w, string(targetsJSON))
+		})
 }
 
 // We want to sort by name, so we can guarantee ordering.
@@ -889,6 +901,82 @@ func testListTarget(t *testing.T, rootType string) {
 	newCurrentTarget, err := repo.GetTargetByName("current")
 	assert.NoError(t, err)
 	assert.Equal(t, currentTarget, newCurrentTarget, "current target does not match")
+}
+
+func testListTargetWithDelegates(t *testing.T, rootType string) {
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	defer os.RemoveAll(tempBaseDir)
+
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+
+	gun := "docker.com/notary"
+
+	ts, mux, keys := simpleTestServer(t)
+	defer ts.Close()
+
+	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL, false)
+
+	// tests need to manually boostrap timestamp as client doesn't generate it
+	err = repo.tufRepo.InitTimestamp()
+	assert.NoError(t, err, "error creating repository: %s", err)
+
+	// setup delegated targets/level1 role
+	k, err := repo.CryptoService.Create("targets/level1", rootType)
+	assert.NoError(t, err)
+	r, err := data.NewRole("targets/level1", 1, []string{k.ID()}, nil, nil)
+	assert.NoError(t, err)
+	repo.tufRepo.UpdateDelegations(r, []data.PublicKey{k})
+
+	latestTarget := addTarget(t, repo, "latest", "../fixtures/intermediate-ca.crt")
+	addTarget(t, repo, "current", "../fixtures/intermediate-ca.crt")
+
+	delegatedTarget := addTarget(t, repo, "current", "../fixtures/root-ca.crt", "targets/level1")
+	otherTarget := addTarget(t, repo, "other", "../fixtures/root-ca.crt", "targets/level1")
+
+	_, ok := repo.tufRepo.Targets["targets/level1"].Signed.Targets["current"]
+	assert.True(t, ok)
+	_, ok = repo.tufRepo.Targets["targets/level1"].Signed.Targets["other"]
+	assert.True(t, ok)
+
+	// Apply the changelist. Normally, this would be done by Publish
+
+	// load the changelist for this repo
+	cl, err := changelist.NewFileChangelist(
+		filepath.Join(tempBaseDir, "tuf", filepath.FromSlash(gun), "changelist"))
+	assert.NoError(t, err, "could not open changelist")
+
+	// apply the changelist to the repo
+	err = applyChangelist(repo.tufRepo, cl)
+	assert.NoError(t, err, "could not apply changelist")
+
+	fakeServerData(t, repo, mux, keys)
+
+	targets, err := repo.ListTargets(data.CanonicalTargetsRole, "targets/level1")
+	assert.NoError(t, err)
+
+	// Should be two targets
+	assert.Len(t, targets, 3, "unexpected number of targets returned by ListTargets")
+
+	sort.Stable(targetSorter(targets))
+
+	// current should be first
+	assert.Equal(t, delegatedTarget, targets[0], "current target does not match")
+	assert.Equal(t, latestTarget, targets[1], "latest target does not match")
+	assert.Equal(t, otherTarget, targets[2], "other target does not match")
+
+	// Also test GetTargetByName
+	newLatestTarget, err := repo.GetTargetByName("latest")
+	assert.NoError(t, err)
+	assert.Equal(t, latestTarget, newLatestTarget, "latest target does not match")
+
+	newCurrentTarget, err := repo.GetTargetByName("current")
+	assert.NoError(t, err)
+	assert.Equal(t, delegatedTarget, newCurrentTarget, "current target does not match")
+
+	newOtherTarget, err := repo.GetTargetByName("current")
+	assert.NoError(t, err)
+	assert.Equal(t, otherTarget, newOtherTarget, "current target does not match")
 }
 
 // TestValidateRootKey verifies that the public data in root.json for the root
