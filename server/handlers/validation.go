@@ -37,7 +37,6 @@ func validateUpdate(cs signed.CryptoService, gun string, updates []storage.MetaU
 	// updates with only the things we should actually update
 	updatesToApply := make([]storage.MetaUpdate, 0, len(updates))
 
-	// check that the necessary roles are present:
 	roles := make(map[string]storage.MetaUpdate)
 	for _, v := range updates {
 		roles[v.Role] = v
@@ -163,6 +162,12 @@ func loadAndValidateTargets(gun string, repo *tuf.Repo, roles map[string]storage
 			err error
 		)
 		if t, err = validateTargets(role, roles, kdb); err != nil {
+			if err == signed.ErrUnknownRole {
+				// role wasn't found in its parent. It has been removed
+				// or never existed. Drop this role from the update
+				// (by not adding it to updatesToApply)
+				continue
+			}
 			logrus.Error("ErrBadTargets: ", err.Error())
 			return nil, validation.ErrBadTargets{Msg: err.Error()}
 		}
