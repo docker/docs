@@ -729,7 +729,8 @@ func TestApplyTargetsDelegationCreate2Deep(t *testing.T) {
 	assert.Equal(t, "level1/level2", role.Paths[0])
 }
 
-func TestApplyTargetsDelegationInvalidParent(t *testing.T) {
+// Applying a delegation whose parent doesn't exist fails.
+func TestApplyTargetsDelegationParentDoesntExist(t *testing.T) {
 	_, repo, cs := testutils.EmptyRepo()
 
 	// make sure a key exists for the previous level, so it's not a missing
