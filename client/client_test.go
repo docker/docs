@@ -602,9 +602,8 @@ func TestAddTargetToSpecifiedInvalidRoles(t *testing.T) {
 	}
 }
 
-// TestAddTargetErrorWritingChanges expects errors writing a change to file
-// to be propagated.
-func TestAddTargetErrorWritingChanges(t *testing.T) {
+// General way to assert that errors writing a changefile are propagated up
+func testErrorWritingChangefiles(t *testing.T, writeChangeFile func(*NotaryRepository) error) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)
@@ -617,9 +616,6 @@ func TestAddTargetErrorWritingChanges(t *testing.T) {
 
 	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
 
-	target, err := NewTarget("latest", "../fixtures/intermediate-ca.crt")
-	assert.NoError(t, err, "error creating target")
-
 	// first, make the actual changefile unwritable by making the changelist
 	// directory unwritable
 	changelistPath := filepath.Join(repo.tufRepoPath, "changelist")
@@ -628,7 +624,7 @@ func TestAddTargetErrorWritingChanges(t *testing.T) {
 	err = os.Chmod(changelistPath, 0600)
 	assert.NoError(t, err, "could not change permission of changelist dir")
 
-	err = repo.AddTarget(target, data.CanonicalTargetsRole)
+	err = writeChangeFile(repo)
 	assert.Error(t, err, "Expected an error writing the change")
 	assert.IsType(t, &os.PathError{}, err)
 
@@ -641,9 +637,19 @@ func TestAddTargetErrorWritingChanges(t *testing.T) {
 	err = ioutil.WriteFile(changelistPath, []byte("hi"), 0644)
 	assert.NoError(t, err, "could not write temporary file")
 
-	err = repo.AddTarget(target, data.CanonicalTargetsRole)
+	err = writeChangeFile(repo)
 	assert.Error(t, err, "Expected an error writing the change")
 	assert.IsType(t, &os.PathError{}, err)
+}
+
+// TestAddTargetErrorWritingChanges expects errors writing a change to file
+// to be propagated.
+func TestAddTargetErrorWritingChanges(t *testing.T) {
+	testErrorWritingChangefiles(t, func(repo *NotaryRepository) error {
+		target, err := NewTarget("latest", "../fixtures/intermediate-ca.crt")
+		assert.NoError(t, err, "error creating target")
+		return repo.AddTarget(target, data.CanonicalTargetsRole)
+	})
 }
 
 // TestRemoveTargetToTargetRoleByDefault removes a target without specifying a
@@ -718,7 +724,7 @@ func TestRemoveTargetToSpecifiedInvalidRoles(t *testing.T) {
 	}
 
 	for _, invalidRole := range invalidRoles {
-		err = repo.RemoveTarget(data.CanonicalTargetsRole, invalidRole)
+		err = repo.RemoveTarget("latest", data.CanonicalTargetsRole, invalidRole)
 		assert.Error(t, err, "Expected an ErrInvalidRole error")
 		assert.IsType(t, data.ErrInvalidRole{}, err)
 
@@ -730,42 +736,9 @@ func TestRemoveTargetToSpecifiedInvalidRoles(t *testing.T) {
 // TestRemoveTargetErrorWritingChanges expects errors writing a change to file
 // to be propagated.
 func TestRemoveTargetErrorWritingChanges(t *testing.T) {
-	// Temporary directory where test files will be created
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	defer os.Remove(tempBaseDir)
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-
-	gun := "docker.com/notary"
-
-	ts, _, _ := simpleTestServer(t)
-	defer ts.Close()
-
-	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
-
-	// first, make the actual changefile unwritable by making the changelist
-	// directory unwritable
-	changelistPath := filepath.Join(repo.tufRepoPath, "changelist")
-	err = os.MkdirAll(changelistPath, 0744)
-	assert.NoError(t, err, "could not create changelist dir")
-	err = os.Chmod(changelistPath, 0600)
-	assert.NoError(t, err, "could not change permission of changelist dir")
-
-	err = repo.RemoveTarget(data.CanonicalTargetsRole)
-	assert.Error(t, err, "Expected an error writing the change")
-	assert.IsType(t, &os.PathError{}, err)
-
-	// then break prevent the changlist directory from being able to be created
-	err = os.Chmod(changelistPath, 0744)
-	assert.NoError(t, err, "could not change permission of temp dir")
-	err = os.RemoveAll(changelistPath)
-	assert.NoError(t, err, "could not remove changelist dir")
-	// creating a changelist file so the directory can't be created
-	err = ioutil.WriteFile(changelistPath, []byte("hi"), 0644)
-	assert.NoError(t, err, "could not write temporary file")
-
-	err = repo.RemoveTarget(data.CanonicalTargetsRole)
-	assert.Error(t, err, "Expected an error writing the change")
-	assert.IsType(t, &os.PathError{}, err)
+	testErrorWritingChangefiles(t, func(repo *NotaryRepository) error {
+		return repo.RemoveTarget("latest", data.CanonicalTargetsRole)
+	})
 }
 
 // TestListTarget fakes serving signed metadata files over the test's
@@ -1556,6 +1529,19 @@ func TestAddDelegationChangefileApplicable(t *testing.T) {
 	assert.Equal(t, "targets/a", newDelegationRole.Name)
 }
 
+// TestAddDelegationErrorWritingChanges expects errors writing a change to file
+// to be propagated.
+func TestAddDelegationErrorWritingChanges(t *testing.T) {
+	testErrorWritingChangefiles(t, func(repo *NotaryRepository) error {
+		targetKeyIds := repo.CryptoService.ListKeys(data.CanonicalTargetsRole)
+		assert.NotEmpty(t, targetKeyIds)
+		targetPubKey := repo.CryptoService.GetKey(targetKeyIds[0])
+		assert.NotNil(t, targetPubKey)
+
+		return repo.AddDelegation("targets/a", 1, []data.PublicKey{targetPubKey})
+	})
+}
+
 // RemoveDelegation rejects attempts to remove invalidly-named delegations,
 // but otherwise does not validate the name of the delegation to remove.  This
 // test ensures that the changefile generated by RemoveDelegation is correct.
@@ -1628,4 +1614,12 @@ func TestRemoveDelegationChangefileApplicable(t *testing.T) {
 	targetRole = repo.tufRepo.Targets[data.CanonicalTargetsRole]
 	assert.Empty(t, targetRole.Signed.Delegations.Roles)
 	assert.Empty(t, targetRole.Signed.Delegations.Keys)
+}
+
+// TestRemoveDelegationErrorWritingChanges expects errors writing a change to
+// file to be propagated.
+func TestRemoveDelegationErrorWritingChanges(t *testing.T) {
+	testErrorWritingChangefiles(t, func(repo *NotaryRepository) error {
+		return repo.RemoveDelegation("targets/a")
+	})
 }
