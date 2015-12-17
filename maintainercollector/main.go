@@ -33,6 +33,7 @@ var (
 	projects = []string{
 		"boot2docker",
 		"compose",
+		"containerd",
 		"distribution",
 		"docker",
 		"docker-bench-security",
