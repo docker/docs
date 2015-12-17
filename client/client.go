@@ -296,6 +296,74 @@ func addChange(cl *changelist.FileChangelist, c changelist.Change, roles ...stri
 	return nil
 }
 
+// AddDelegation creates a new changelist entry to add a delegation to the repository
+// when the changelist gets applied at publish time.  This does not do any validation
+// other than checking the name of the delegation to add - all that will happen
+// at publish time.
+func (r *NotaryRepository) AddDelegation(name string, threshold int,
+	delegationKeys []data.PublicKey) error {
+
+	if !data.IsDelegation(name) {
+		return data.ErrInvalidRole{Role: name, Reason: "invalid delegation role name"}
+	}
+
+	cl, err := changelist.NewFileChangelist(filepath.Join(r.tufRepoPath, "changelist"))
+	if err != nil {
+		return err
+	}
+	defer cl.Close()
+
+	logrus.Debugf(`Adding delegation "%s" with threshold %d, and %d keys\n`,
+		name, threshold, len(delegationKeys))
+
+	tdJSON, err := json.Marshal(&changelist.TufDelegation{
+		NewThreshold: threshold,
+		AddKeys:      data.KeyList(delegationKeys),
+	})
+	if err != nil {
+		return err
+	}
+
+	template := changelist.NewTufChange(
+		changelist.ActionCreate,
+		name,
+		changelist.TypeTargetsDelegation,
+		"", // no path
+		tdJSON,
+	)
+
+	return addChange(cl, template, name)
+}
+
+// RemoveDelegation creates a new changelist entry to remove a delegation from
+// the repository when the changelist gets applied at publish time.
+// This does not validate that the delegation exists, since one might exist
+// after applying all changes.
+func (r *NotaryRepository) RemoveDelegation(name string) error {
+
+	if !data.IsDelegation(name) {
+		return data.ErrInvalidRole{Role: name, Reason: "invalid delegation role name"}
+	}
+
+	cl, err := changelist.NewFileChangelist(filepath.Join(r.tufRepoPath, "changelist"))
+	if err != nil {
+		return err
+	}
+	defer cl.Close()
+
+	logrus.Debugf(`Removing delegation "%s"\n`, name)
+
+	template := changelist.NewTufChange(
+		changelist.ActionDelete,
+		name,
+		changelist.TypeTargetsDelegation,
+		"", // no path
+		nil,
+	)
+
+	return addChange(cl, template, name)
+}
+
 // AddTarget creates new changelist entries to add a target to the given roles
 // in the repository when the changelist gets appied at publish time.
 // If roles are unspecified, the default role is "target".
