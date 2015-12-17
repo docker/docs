@@ -17,7 +17,7 @@ var passphraseRetriever = func(string, string, bool, int) (string, bool, error) 
 // sure the repository looks correct on disk.
 // We test this with both an RSA and ECDSA root key
 func TestValidateRoot(t *testing.T) {
-	logrus.SetLevel(logrus.DebugLevel)
+	logrus.SetLevel(logrus.ErrorLevel)
 	validateRootSuccessfully(t, data.ECDSAKey)
 	if !testing.Short() {
 		validateRootSuccessfully(t, data.RSAKey)

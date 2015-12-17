@@ -10,6 +10,7 @@ import (
 	"net/http/httptest"
 	"os"
 	"path/filepath"
+	"reflect"
 	"sort"
 	"strings"
 	"testing"
@@ -748,9 +749,11 @@ func TestRemoveTargetErrorWritingChanges(t *testing.T) {
 func TestListTarget(t *testing.T) {
 	testListEmptyTargets(t, data.ECDSAKey)
 	testListTarget(t, data.ECDSAKey)
+	testListTargetWithDelegates(t, data.ECDSAKey)
 	if !testing.Short() {
 		testListEmptyTargets(t, data.RSAKey)
 		testListTarget(t, data.RSAKey)
+		testListTargetWithDelegates(t, data.RSAKey)
 	}
 }
 
@@ -795,6 +798,14 @@ func fakeServerData(t *testing.T, repo *NotaryRepository, mux *http.ServeMux,
 		"targets", data.DefaultExpires("targets"))
 	assert.NoError(t, err)
 
+	signedLevel1, err := savedTUFRepo.SignTargets(
+		"targets/level1",
+		data.DefaultExpires(data.CanonicalTargetsRole),
+	)
+	if _, ok := savedTUFRepo.Targets["targets/level1"]; ok {
+		assert.NoError(t, err)
+	}
+
 	signedSnapshot, err := savedTUFRepo.SignSnapshot(
 		data.DefaultExpires("snapshot"))
 	assert.NoError(t, err)
@@ -829,14 +840,9 @@ func fakeServerData(t *testing.T, repo *NotaryRepository, mux *http.ServeMux,
 
 	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/targets/level1.json",
 		func(w http.ResponseWriter, r *http.Request) {
-			signedTargets, err := savedTUFRepo.SignTargets(
-				"targets/level1",
-				data.DefaultExpires(data.CanonicalTargetsRole),
-			)
+			level1JSON, err := json.Marshal(signedLevel1)
 			assert.NoError(t, err)
-			targetsJSON, err := json.Marshal(signedTargets)
-			assert.NoError(t, err)
-			fmt.Fprint(w, string(targetsJSON))
+			fmt.Fprint(w, string(level1JSON))
 		})
 }
 
@@ -921,23 +927,17 @@ func testListTargetWithDelegates(t *testing.T, rootType string) {
 	err = repo.tufRepo.InitTimestamp()
 	assert.NoError(t, err, "error creating repository: %s", err)
 
+	latestTarget := addTarget(t, repo, "latest", "../fixtures/intermediate-ca.crt")
+	addTarget(t, repo, "current", "../fixtures/intermediate-ca.crt")
+
 	// setup delegated targets/level1 role
 	k, err := repo.CryptoService.Create("targets/level1", rootType)
 	assert.NoError(t, err)
 	r, err := data.NewRole("targets/level1", 1, []string{k.ID()}, nil, nil)
 	assert.NoError(t, err)
 	repo.tufRepo.UpdateDelegations(r, []data.PublicKey{k})
-
-	latestTarget := addTarget(t, repo, "latest", "../fixtures/intermediate-ca.crt")
-	addTarget(t, repo, "current", "../fixtures/intermediate-ca.crt")
-
 	delegatedTarget := addTarget(t, repo, "current", "../fixtures/root-ca.crt", "targets/level1")
 	otherTarget := addTarget(t, repo, "other", "../fixtures/root-ca.crt", "targets/level1")
-
-	_, ok := repo.tufRepo.Targets["targets/level1"].Signed.Targets["current"]
-	assert.True(t, ok)
-	_, ok = repo.tufRepo.Targets["targets/level1"].Signed.Targets["other"]
-	assert.True(t, ok)
 
 	// Apply the changelist. Normally, this would be done by Publish
 
@@ -949,6 +949,11 @@ func testListTargetWithDelegates(t *testing.T, rootType string) {
 	// apply the changelist to the repo
 	err = applyChangelist(repo.tufRepo, cl)
 	assert.NoError(t, err, "could not apply changelist")
+
+	_, ok := repo.tufRepo.Targets["targets/level1"].Signed.Targets["current"]
+	assert.True(t, ok)
+	_, ok = repo.tufRepo.Targets["targets/level1"].Signed.Targets["other"]
+	assert.True(t, ok)
 
 	fakeServerData(t, repo, mux, keys)
 
@@ -970,13 +975,13 @@ func testListTargetWithDelegates(t *testing.T, rootType string) {
 	assert.NoError(t, err)
 	assert.Equal(t, latestTarget, newLatestTarget, "latest target does not match")
 
-	newCurrentTarget, err := repo.GetTargetByName("current")
+	newCurrentTarget, err := repo.GetTargetByName("current", "targets", "targets/level1")
 	assert.NoError(t, err)
 	assert.Equal(t, delegatedTarget, newCurrentTarget, "current target does not match")
 
-	newOtherTarget, err := repo.GetTargetByName("current")
+	newOtherTarget, err := repo.GetTargetByName("other")
 	assert.NoError(t, err)
-	assert.Equal(t, otherTarget, newOtherTarget, "current target does not match")
+	assert.True(t, reflect.DeepEqual(otherTarget, newOtherTarget), "other target does not match")
 }
 
 // TestValidateRootKey verifies that the public data in root.json for the root

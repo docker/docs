@@ -37,10 +37,11 @@ func applyChangelist(repo *tuf.Repo, cl changelist.Changelist) error {
 		if err != nil {
 			return err
 		}
-		switch c.Scope() {
-		case changelist.ScopeTargets:
+		isDel := data.IsDelegation(c.Scope())
+		switch {
+		case c.Scope() == changelist.ScopeTargets || isDel:
 			err = applyTargetsChange(repo, c)
-		case changelist.ScopeRoot:
+		case c.Scope() == changelist.ScopeRoot:
 			err = applyRootChange(repo, c)
 		default:
 			logrus.Debug("scope not supported: ", c.Scope())
@@ -133,6 +134,9 @@ func changeTargetMeta(repo *tuf.Repo, c changelist.Change) error {
 		}
 		files := data.Files{c.Path(): *meta}
 		_, err = repo.AddTargets(c.Scope(), files)
+		if err != nil {
+			logrus.Errorf("couldn't add target to %s: %s", c.Scope(), err.Error())
+		}
 	case changelist.ActionDelete:
 		logrus.Debug("changelist remove: ", c.Path())
 		err = repo.RemoveTargets(c.Scope(), c.Path())

@@ -520,7 +520,7 @@ func (c Client) RoleTargetsPath(role string, hashSha256 string, consistent bool)
 
 // TargetMeta ensures the repo is up to date. It assumes downloadTargets
 // has already downloaded all delegated roles
-func (c Client) TargetMeta(path string) (*data.FileMeta, error) {
+func (c Client) TargetMeta(role, path string) (*data.FileMeta, error) {
 	c.Update()
 	var meta *data.FileMeta
 
@@ -528,14 +528,14 @@ func (c Client) TargetMeta(path string) (*data.FileMeta, error) {
 	pathHex := hex.EncodeToString(pathDigest[:])
 
 	// FIFO list of targets delegations to inspect for target
-	roles := []string{data.ValidRoles["targets"]}
-	var role string
+	roles := []string{role}
+	var curr string
 	for len(roles) > 0 {
 		// have to do these lines here because of order of execution in for statement
-		role = roles[0]
+		curr = roles[0]
 		roles = roles[1:]
 
-		meta = c.local.TargetMeta(role, path)
+		meta = c.local.TargetMeta(curr, path)
 		if meta != nil {
 			// we found the target!
 			return meta, nil
