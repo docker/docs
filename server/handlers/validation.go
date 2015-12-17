@@ -79,7 +79,6 @@ func validateUpdate(cs signed.CryptoService, gun string, updates []storage.MetaU
 		}
 	}
 
-	// TODO: validate delegated targets roles.
 	targetsToUpdate, err := loadAndValidateTargets(gun, repo, roles, kdb, store)
 	if err != nil {
 		return nil, err
