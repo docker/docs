@@ -4,9 +4,11 @@ import (
 	"crypto/rand"
 	"encoding/json"
 	"fmt"
+	"reflect"
 	"testing"
 
 	"github.com/docker/notary/trustmanager"
+	"github.com/docker/notary/tuf"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/keys"
 	"github.com/docker/notary/tuf/signed"
@@ -349,7 +351,7 @@ func TestValidateSnapshotGenerateNoTargets(t *testing.T) {
 	assert.Error(t, err)
 }
 
-func TestValidateSnapshotGenerateLoadRootTargets(t *testing.T) {
+func TestValidateSnapshotGenerate(t *testing.T) {
 	kdb, repo, cs := testutils.EmptyRepo()
 	store := storage.NewMemStorage()
 	snapRole := kdb.GetRole(data.CanonicalSnapshotRole)
@@ -366,10 +368,9 @@ func TestValidateSnapshotGenerateLoadRootTargets(t *testing.T) {
 	root, targets, _, _, err := getUpdates(r, tg, sn, ts)
 	assert.NoError(t, err)
 
-	updates := []storage.MetaUpdate{}
+	updates := []storage.MetaUpdate{targets}
 
 	store.UpdateCurrent("testGUN", root)
-	store.UpdateCurrent("testGUN", targets)
 
 	copyTimestampKey(t, kdb, store, "testGUN")
 	updates, err = validateUpdate(cs, "testGUN", updates, store)
@@ -784,3 +785,237 @@ func TestGenerateSnapshotNoKey(t *testing.T) {
 }
 
 // ### End generateSnapshot tests ###
+
+// ### Target validation with delegations tests
+func TestLoadTargetsFromStore(t *testing.T) {
+	_, repo, _ := testutils.EmptyRepo()
+	store := storage.NewMemStorage()
+
+	st, err := repo.SignTargets(
+		data.CanonicalTargetsRole,
+		data.DefaultExpires(data.CanonicalTargetsRole),
+	)
+	assert.NoError(t, err)
+
+	tgs, err := json.Marshal(st)
+	assert.NoError(t, err)
+	update := storage.MetaUpdate{
+		Role:    data.CanonicalTargetsRole,
+		Version: 1,
+		Data:    tgs,
+	}
+	store.UpdateCurrent("gun", update)
+
+	generated := repo.Targets[data.CanonicalTargetsRole]
+	delete(repo.Targets, data.CanonicalTargetsRole)
+	_, ok := repo.Targets[data.CanonicalTargetsRole]
+	assert.False(t, ok)
+
+	err = loadTargetsFromStore("gun", data.CanonicalTargetsRole, repo, store)
+	assert.NoError(t, err)
+	loaded, ok := repo.Targets[data.CanonicalTargetsRole]
+	assert.True(t, ok)
+	assert.True(t, reflect.DeepEqual(generated.Signatures, loaded.Signatures))
+	assert.Len(t, loaded.Signed.Targets, 0)
+	assert.Equal(t, len(generated.Signed.Targets), len(loaded.Signed.Targets))
+	assert.Len(t, loaded.Signed.Delegations.Roles, 0)
+	assert.Equal(t, len(generated.Signed.Delegations.Roles), len(loaded.Signed.Delegations.Roles))
+	assert.Len(t, loaded.Signed.Delegations.Keys, 0)
+	assert.Equal(t, len(generated.Signed.Delegations.Keys), len(loaded.Signed.Delegations.Keys))
+	assert.True(t, generated.Signed.Expires.Equal(loaded.Signed.Expires))
+	assert.Equal(t, generated.Signed.Type, loaded.Signed.Type)
+	assert.Equal(t, generated.Signed.Version, loaded.Signed.Version)
+}
+
+func TestValidateTargetsLoadParent(t *testing.T) {
+	_, baseRepo, cs := testutils.EmptyRepo()
+	store := storage.NewMemStorage()
+
+	k, err := cs.Create("targets/level1", data.ED25519Key)
+	assert.NoError(t, err)
+	r, err := data.NewRole("targets/level1", 1, []string{k.ID()}, nil, nil)
+	assert.NoError(t, err)
+
+	baseRepo.UpdateDelegations(r, []data.PublicKey{k})
+
+	// we're not going to validate things loaded from storage, so no need
+	// to sign the base targets, just Marshal it and set it into storage
+	tgtsJSON, err := json.Marshal(baseRepo.Targets["targets"])
+	assert.NoError(t, err)
+	update := storage.MetaUpdate{
+		Role:    data.CanonicalTargetsRole,
+		Version: 1,
+		Data:    tgtsJSON,
+	}
+	store.UpdateCurrent("gun", update)
+
+	// generate the update object we're doing to use to call loadAndValidateTargets
+	del, err := baseRepo.SignTargets("targets/level1", data.DefaultExpires(data.CanonicalTargetsRole))
+	assert.NoError(t, err)
+	delJSON, err := json.Marshal(del)
+	assert.NoError(t, err)
+
+	delUpdate := storage.MetaUpdate{
+		Role:    "targets/level1",
+		Version: 1,
+		Data:    delJSON,
+	}
+
+	roles := map[string]storage.MetaUpdate{"targets/level1": delUpdate}
+
+	kdb := keys.NewDB()
+	valRepo := tuf.NewRepo(kdb, nil)
+	valRepo.SetRoot(baseRepo.Root)
+
+	updates, err := loadAndValidateTargets("gun", valRepo, roles, kdb, store)
+	assert.NoError(t, err)
+	assert.Len(t, updates, 1)
+	assert.Equal(t, "targets/level1", updates[0].Role)
+	assert.Equal(t, delJSON, updates[0].Data)
+}
+
+func TestValidateTargetsParentInUpdate(t *testing.T) {
+	_, baseRepo, cs := testutils.EmptyRepo()
+	store := storage.NewMemStorage()
+
+	k, err := cs.Create("targets/level1", data.ED25519Key)
+	assert.NoError(t, err)
+	r, err := data.NewRole("targets/level1", 1, []string{k.ID()}, nil, nil)
+	assert.NoError(t, err)
+
+	baseRepo.UpdateDelegations(r, []data.PublicKey{k})
+
+	targets, err := baseRepo.SignTargets("targets", data.DefaultExpires(data.CanonicalTargetsRole))
+
+	tgtsJSON, err := json.Marshal(targets)
+	assert.NoError(t, err)
+	update := storage.MetaUpdate{
+		Role:    data.CanonicalTargetsRole,
+		Version: 1,
+		Data:    tgtsJSON,
+	}
+	store.UpdateCurrent("gun", update)
+
+	del, err := baseRepo.SignTargets("targets/level1", data.DefaultExpires(data.CanonicalTargetsRole))
+	assert.NoError(t, err)
+	delJSON, err := json.Marshal(del)
+	assert.NoError(t, err)
+
+	delUpdate := storage.MetaUpdate{
+		Role:    "targets/level1",
+		Version: 1,
+		Data:    delJSON,
+	}
+
+	roles := map[string]storage.MetaUpdate{
+		"targets/level1": delUpdate,
+		"targets":        update,
+	}
+
+	kdb := keys.NewDB()
+	valRepo := tuf.NewRepo(kdb, nil)
+	valRepo.SetRoot(baseRepo.Root)
+
+	// because we sort the roles, the list of returned updates
+	// will contain shallower roles first, in this case "targets",
+	// and then "targets/level1"
+	updates, err := loadAndValidateTargets("gun", valRepo, roles, kdb, store)
+	assert.NoError(t, err)
+	assert.Len(t, updates, 2)
+	assert.Equal(t, "targets", updates[0].Role)
+	assert.Equal(t, tgtsJSON, updates[0].Data)
+	assert.Equal(t, "targets/level1", updates[1].Role)
+	assert.Equal(t, delJSON, updates[1].Data)
+}
+
+func TestValidateTargetsParentNotFound(t *testing.T) {
+	_, baseRepo, cs := testutils.EmptyRepo()
+	store := storage.NewMemStorage()
+
+	k, err := cs.Create("targets/level1", data.ED25519Key)
+	assert.NoError(t, err)
+	r, err := data.NewRole("targets/level1", 1, []string{k.ID()}, nil, nil)
+	assert.NoError(t, err)
+
+	baseRepo.UpdateDelegations(r, []data.PublicKey{k})
+
+	// generate the update object we're doing to use to call loadAndValidateTargets
+	del, err := baseRepo.SignTargets("targets/level1", data.DefaultExpires(data.CanonicalTargetsRole))
+	assert.NoError(t, err)
+	delJSON, err := json.Marshal(del)
+	assert.NoError(t, err)
+
+	delUpdate := storage.MetaUpdate{
+		Role:    "targets/level1",
+		Version: 1,
+		Data:    delJSON,
+	}
+
+	roles := map[string]storage.MetaUpdate{"targets/level1": delUpdate}
+
+	kdb := keys.NewDB()
+	valRepo := tuf.NewRepo(kdb, nil)
+	valRepo.SetRoot(baseRepo.Root)
+
+	_, err = loadAndValidateTargets("gun", valRepo, roles, kdb, store)
+	assert.Error(t, err)
+	assert.IsType(t, storage.ErrNotFound{}, err)
+}
+
+func TestValidateTargetsRoleNotInParent(t *testing.T) {
+	kdb, baseRepo, cs := testutils.EmptyRepo()
+	store := storage.NewMemStorage()
+
+	k, err := cs.Create("targets/level1", data.ED25519Key)
+	assert.NoError(t, err)
+	r, err := data.NewRole("targets/level1", 1, []string{k.ID()}, nil, nil)
+	assert.NoError(t, err)
+
+	kdb.AddKey(k)
+	err = kdb.AddRole(r)
+	assert.NoError(t, err)
+
+	baseRepo.InitTargets("targets/level1")
+
+	targets, err := baseRepo.SignTargets("targets", data.DefaultExpires(data.CanonicalTargetsRole))
+
+	tgtsJSON, err := json.Marshal(targets)
+	assert.NoError(t, err)
+	update := storage.MetaUpdate{
+		Role:    data.CanonicalTargetsRole,
+		Version: 1,
+		Data:    tgtsJSON,
+	}
+	store.UpdateCurrent("gun", update)
+
+	del, err := baseRepo.SignTargets("targets/level1", data.DefaultExpires(data.CanonicalTargetsRole))
+	assert.NoError(t, err)
+	delJSON, err := json.Marshal(del)
+	assert.NoError(t, err)
+
+	delUpdate := storage.MetaUpdate{
+		Role:    "targets/level1",
+		Version: 1,
+		Data:    delJSON,
+	}
+
+	roles := map[string]storage.MetaUpdate{
+		"targets/level1": delUpdate,
+		"targets":        update,
+	}
+
+	kdb = keys.NewDB()
+	valRepo := tuf.NewRepo(kdb, nil)
+	valRepo.SetRoot(baseRepo.Root)
+
+	// because we sort the roles, the list of returned updates
+	// will contain shallower roles first, in this case "targets",
+	// and then "targets/level1"
+	updates, err := loadAndValidateTargets("gun", valRepo, roles, kdb, store)
+	assert.NoError(t, err)
+	assert.Len(t, updates, 1)
+	assert.Equal(t, "targets", updates[0].Role)
+	assert.Equal(t, tgtsJSON, updates[0].Data)
+}
+
+// ### End target validation with delegations tests
