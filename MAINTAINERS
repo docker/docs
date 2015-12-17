@@ -231,6 +231,8 @@ or feedback about project operations.
         People = ["ehazlett", "tianon"]
     [Org.compose]
         People = ["aanand", "bfirsh", "dnephin", "mnowster"]
+    [Org.containerd]
+        People = ["crosbymichael"]
     [Org.distribution]
         People = ["aaronlehmann", "dmcgowan", "dmp42", "richardscothern", "shykes", "stevvooe"]
     [Org.docker]
