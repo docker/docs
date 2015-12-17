@@ -16,7 +16,7 @@ func TestRoleListLess(t *testing.T) {
 	rl := RoleList{"foo", "foo/bar", "bar/foo"}
 	assert.True(t, rl.Less(0, 1))
 	assert.False(t, rl.Less(1, 2))
-	assert.False(t, rl.Less(2, 1))
+	assert.True(t, rl.Less(2, 1))
 }
 
 func TestRoleListSwap(t *testing.T) {

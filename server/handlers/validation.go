@@ -139,10 +139,10 @@ func loadAndValidateTargets(gun string, repo *tuf.Repo, roles map[string]storage
 		}
 	}
 
-	// by sorting, we'll always process shallower targets updates before deeper
+	// N.B. RoleList sorts paths with fewer segments first.
+	// By sorting, we'll always process shallower targets updates before deeper
 	// ones (i.e. we'll load and validate targets before targets/foo). This
 	// helps ensure we only load from storage when necessary in a cleaner way.
-	// RoleList sorts paths with fewer segments first
 	sort.Sort(targetsRoles)
 
 	updatesToApply := make([]storage.MetaUpdate, 0, len(targetsRoles))
