@@ -2,9 +2,9 @@ package data
 
 import (
 	"fmt"
-	"strings"
-	"regexp"
 	"path/filepath"
+	"regexp"
+	"strings"
 )
 
 // Canonical base role names
@@ -116,9 +116,13 @@ func ValidRole(name string) bool {
 // IsDelegation checks if the role is a delegation or a root role
 func IsDelegation(role string) bool {
 	targetsBase := fmt.Sprintf("%s/", ValidRoles[CanonicalTargetsRole])
-	whitelistedChars, _ := regexp.MatchString("^[a-zA-Z0-9_/]*$", role)
+	whitelistedChars, err := regexp.MatchString("^[a-zA-Z0-9_/]*$", role)
+	if err != nil {
+		return false
+	}
+	// Removes ., .., extra slashes, and trailing slash
 	isClean := filepath.Clean(role) == role
-	return strings.HasPrefix(role, targetsBase) && !strings.HasSuffix(role, "/") && whitelistedChars && isClean
+	return strings.HasPrefix(role, targetsBase) && whitelistedChars && isClean
 }
 
 // RootRole is a cut down role as it appears in the root.json
