@@ -520,9 +520,14 @@ func (c Client) RoleTargetsPath(role string, hashSha256 string, consistent bool)
 
 // TargetMeta ensures the repo is up to date. It assumes downloadTargets
 // has already downloaded all delegated roles
-func (c Client) TargetMeta(role, path string) (*data.FileMeta, error) {
+func (c Client) TargetMeta(role, path string, excludeRoles ...string) (*data.FileMeta, error) {
 	c.Update()
 	var meta *data.FileMeta
+
+	excl := make(map[string]bool)
+	for _, r := range excludeRoles {
+		excl[r] = true
+	}
 
 	pathDigest := sha256.Sum256([]byte(path))
 	pathHex := hex.EncodeToString(pathDigest[:])
@@ -542,7 +547,9 @@ func (c Client) TargetMeta(role, path string) (*data.FileMeta, error) {
 		}
 		delegations := c.local.TargetDelegations(role, path, pathHex)
 		for _, d := range delegations {
-			roles = append(roles, d.Name)
+			if !excl[d.Name] {
+				roles = append(roles, d.Name)
+			}
 		}
 	}
 	return meta, nil

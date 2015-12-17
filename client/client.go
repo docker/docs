@@ -419,8 +419,34 @@ func (r *NotaryRepository) ListTargets(roles ...string) ([]*Target, error) {
 		return nil, err
 	}
 
+	if len(roles) == 0 {
+		roles = []string{data.CanonicalTargetsRole}
+	}
 	targets := make(map[string]*Target)
 	for _, role := range roles {
+		// we don't need to do anything special with removing role from
+		// roles because listSubtree always processes role and only excludes
+		// descendent delegations that appear in roles.
+		r.listSubtree(targets, role, roles...)
+	}
+
+	var targetList []*Target
+	for _, v := range targets {
+		targetList = append(targetList, v)
+	}
+
+	return targetList, nil
+}
+
+func (r *NotaryRepository) listSubtree(targets map[string]*Target, role string, exclude ...string) {
+	excl := make(map[string]bool)
+	for _, r := range exclude {
+		excl[r] = true
+	}
+	roles := []string{role}
+	for len(roles) > 0 {
+		role = roles[0]
+		roles = roles[1:]
 		tgts, ok := r.tufRepo.Targets[role]
 		if !ok {
 			// not every role has to exist
@@ -430,14 +456,12 @@ func (r *NotaryRepository) ListTargets(roles ...string) ([]*Target, error) {
 			target := &Target{Name: name, Hashes: meta.Hashes, Length: meta.Length}
 			targets[name] = target
 		}
+		for _, d := range tgts.Signed.Delegations.Roles {
+			if !excl[d.Name] {
+				roles = append(roles, d.Name)
+			}
+		}
 	}
-
-	var targetList []*Target
-	for _, v := range targets {
-		targetList = append(targetList, v)
-	}
-
-	return targetList, nil
 }
 
 // GetTargetByName returns a target given a name. If no roles are passed
@@ -467,7 +491,7 @@ func (r *NotaryRepository) GetTargetByName(name string, roles ...string) (*Targe
 		meta *data.FileMeta
 	)
 	for i := len(roles) - 1; i >= 0; i-- {
-		meta, err = c.TargetMeta(roles[i], name)
+		meta, err = c.TargetMeta(roles[i], name, roles...)
 		if err != nil {
 			// important to error here otherwise there might be malicious
 			// behaviour that prevents a legitimate version of a target
