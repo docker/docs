@@ -1476,9 +1476,10 @@ func TestRemoteServerUnavailableNoLocalCache(t *testing.T) {
 	assert.IsType(t, store.ErrServerUnavailable{}, err)
 }
 
-// AddDelegation creates a valid changefile (rejects invalid delegation names),
-// which when applied, adds a new delegation role with the correct keys.
-func TestAddDelegation(t *testing.T) {
+// AddDelegation creates a valid changefile (rejects invalid delegation names,
+// but does not check the delegation hierarchy).  When applied, the change adds
+// a new delegation role with the correct keys.
+func TestAddDelegationChangefileValid(t *testing.T) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)
@@ -1499,17 +1500,44 @@ func TestAddDelegation(t *testing.T) {
 	assert.IsType(t, data.ErrInvalidRole{}, err)
 	assert.Empty(t, getChanges(t, repo))
 
-	err = repo.AddDelegation("targets/a", 1, []data.PublicKey{targetPubKey})
+	// to show that adding does not care about the hierarchy
+	err = repo.AddDelegation("targets/a/b/c", 1, []data.PublicKey{targetPubKey})
 	assert.NoError(t, err)
 
-	// ensure that the changefile is correct
+	// ensure that the changefiles is correct
 	changes := getChanges(t, repo)
 	assert.Len(t, changes, 1)
 	assert.Equal(t, changelist.ActionCreate, changes[0].Action())
-	assert.Equal(t, "targets/a", changes[0].Scope())
+	assert.Equal(t, "targets/a/b/c", changes[0].Scope())
 	assert.Equal(t, changelist.TypeTargetsDelegation, changes[0].Type())
 	assert.Equal(t, "", changes[0].Path())
 	assert.NotEmpty(t, changes[0].Content())
+}
+
+// The changefile produced by AddDelegation, when applied, actually adds
+// the delegation to the repo (assuming the delegation hierarchy is correct -
+// tests for change application validation are in helpers_test.go)
+func TestAddDelegationChangefileApplicable(t *testing.T) {
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	defer os.RemoveAll(tempBaseDir)
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+
+	gun := "docker.com/notary"
+	ts, _, _ := simpleTestServer(t)
+	defer ts.Close()
+
+	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
+	targetKeyIds := repo.CryptoService.ListKeys(data.CanonicalTargetsRole)
+	assert.NotEmpty(t, targetKeyIds)
+	targetPubKey := repo.CryptoService.GetKey(targetKeyIds[0])
+	assert.NotNil(t, targetPubKey)
+
+	// this hierarchy has to be right to be applied
+	err = repo.AddDelegation("targets/a", 1, []data.PublicKey{targetPubKey})
+	assert.NoError(t, err)
+	changes := getChanges(t, repo)
+	assert.Len(t, changes, 1)
 
 	// ensure that it can be applied correctly
 	err = applyTargetsChange(repo.tufRepo, changes[0])
@@ -1550,20 +1578,23 @@ func TestRemoveDelegationChangefileValid(t *testing.T) {
 	assert.IsType(t, data.ErrInvalidRole{}, err)
 	assert.Empty(t, getChanges(t, repo))
 
-	assert.NoError(t, repo.RemoveDelegation("targets/a"))
+	// to demonstrate that so long as the delegation name is valid, the
+	// existence of the delegation doesn't matter
+	assert.NoError(t, repo.RemoveDelegation("targets/a/b/c"))
 
 	// ensure that the changefile is correct
 	changes := getChanges(t, repo)
 	assert.Len(t, changes, 1)
 	assert.Equal(t, changelist.ActionDelete, changes[0].Action())
-	assert.Equal(t, "targets/a", changes[0].Scope())
+	assert.Equal(t, "targets/a/b/c", changes[0].Scope())
 	assert.Equal(t, changelist.TypeTargetsDelegation, changes[0].Type())
 	assert.Equal(t, "", changes[0].Path())
 	assert.Empty(t, changes[0].Content())
 }
 
-// RemoveDelegation, when applied, actually removes the delegation from the
-// repo.
+// The changefile produced by RemoveDelegation, when applied, actually removes
+// the delegation from the repo (assuming the repo exists - tests for
+// change application validation are in helpers_test.go)
 func TestRemoveDelegationChangefileApplicable(t *testing.T) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
