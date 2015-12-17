@@ -336,14 +336,45 @@ func TestDownloadTargetsDeepHappy(t *testing.T) {
 	remoteStorage := store.NewMemoryStore(nil, nil)
 	client := NewClient(repo, remoteStorage, kdb, localStorage)
 
-	k, err := cs.Create("targets/level1", data.ED25519Key)
-	assert.NoError(t, err)
-	r, err := data.NewRole("targets/level1", 1, []string{k.ID()}, nil, nil)
-	assert.NoError(t, err)
+	delegations := []string{
+		// left subtree
+		"targets/level1",
+		"targets/level1/a",
+		"targets/level1/a/i",
+		"targets/level1/a/ii",
+		"targets/level1/a/iii",
+		// right subtree
+		"targets/level2",
+		"targets/level2/b",
+		"targets/level2/b/i",
+		"targets/level2/b/i/0",
+		"targets/level2/b/i/1",
+	}
 
-	repo.UpdateDelegations(r, []data.PublicKey{k})
-	repo.InitTargets("targets/level1")
+	for _, r := range delegations {
+		// create role
+		k, err := cs.Create(r, data.ED25519Key)
+		assert.NoError(t, err)
+		role, err := data.NewRole(r, 1, []string{k.ID()}, nil, nil)
+		assert.NoError(t, err)
 
+		// add role to repo
+		repo.UpdateDelegations(role, []data.PublicKey{k})
+		repo.InitTargets(r)
+	}
+
+	// can only sign after adding all delegations
+	for _, r := range delegations {
+		// serialize and store role
+		signedOrig, err := repo.SignTargets(r, data.DefaultExpires("targets"))
+		assert.NoError(t, err)
+		orig, err := json.Marshal(signedOrig)
+		assert.NoError(t, err)
+		err = remoteStorage.SetMeta(r, orig)
+		assert.NoError(t, err)
+	}
+
+	// serialize and store targets after adding all delegations
 	signedOrig, err := repo.SignTargets("targets", data.DefaultExpires("targets"))
 	assert.NoError(t, err)
 	orig, err := json.Marshal(signedOrig)
@@ -351,26 +382,26 @@ func TestDownloadTargetsDeepHappy(t *testing.T) {
 	err = remoteStorage.SetMeta("targets", orig)
 	assert.NoError(t, err)
 
-	signedOrig, err = repo.SignTargets("targets/level1", data.DefaultExpires("targets"))
-	assert.NoError(t, err)
-	orig, err = json.Marshal(signedOrig)
-	assert.NoError(t, err)
-	err = remoteStorage.SetMeta("targets/level1", orig)
-	assert.NoError(t, err)
-
 	// call repo.SignSnapshot to update the targets role in the snapshot
 	repo.SignSnapshot(data.DefaultExpires("snapshot"))
 
 	delete(repo.Targets, "targets")
-	delete(repo.Targets, "targets/level1")
+	for _, r := range delegations {
+		delete(repo.Targets, r)
+		_, ok := repo.Targets[r]
+		assert.False(t, ok)
+	}
 
 	err = client.downloadTargets("targets")
 	assert.NoError(t, err)
 
 	_, ok := repo.Targets["targets"]
 	assert.True(t, ok)
-	_, ok = repo.Targets["targets/level1"]
-	assert.True(t, ok)
+
+	for _, r := range delegations {
+		_, ok = repo.Targets[r]
+		assert.True(t, ok)
+	}
 }
 
 func TestDownloadTargetChecksumMismatch(t *testing.T) {

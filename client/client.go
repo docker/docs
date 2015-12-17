@@ -440,8 +440,13 @@ func (r *NotaryRepository) ListTargets(roles ...string) ([]*Target, error) {
 	return targetList, nil
 }
 
-// GetTargetByName returns a target given a name
-func (r *NotaryRepository) GetTargetByName(name string) (*Target, error) {
+// GetTargetByName returns a target given a name. If no roles are passed
+// it uses the targets role and does a search of the entire delegation
+// graph, finding the first entry in a breadth first search of the delegations.
+// If roles are passed, they should be passed in ascending priority and
+// the target entry found in the subtree of the highest priority role
+// will be returned
+func (r *NotaryRepository) GetTargetByName(name string, roles ...string) (*Target, error) {
 	c, err := r.bootstrapClient()
 	if err != nil {
 		return nil, err
@@ -455,11 +460,25 @@ func (r *NotaryRepository) GetTargetByName(name string) (*Target, error) {
 		return nil, err
 	}
 
-	meta, err := c.TargetMeta(name)
+	if len(roles) == 0 {
+		roles = append(roles, data.CanonicalTargetsRole)
+	}
+	var (
+		meta *data.FileMeta
+	)
+	for i := len(roles) - 1; i >= 0; i-- {
+		meta, err = c.TargetMeta(roles[i], name)
+		if err != nil {
+			// important to error here otherwise there might be malicious
+			// behaviour that prevents a legitimate version of a target
+			// being found
+			return nil, err
+		} else if meta != nil {
+			break
+		}
+	}
 	if meta == nil {
 		return nil, fmt.Errorf("No trust data for %s", name)
-	} else if err != nil {
-		return nil, err
 	}
 
 	return &Target{Name: name, Hashes: meta.Hashes, Length: meta.Length}, nil
