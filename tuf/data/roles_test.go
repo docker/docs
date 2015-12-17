@@ -197,25 +197,25 @@ func TestIsDelegation(t *testing.T) {
 	assert.False(t, IsDelegation(filepath.Join(CanonicalTargetsRole, "level1")+"/"))
 
 	assert.False(t, IsDelegation(
-		filepath.Join(CanonicalTargetsRole, "directory") + "/../../traversal"))
+		filepath.Join(CanonicalTargetsRole, "directory")+"/../../traversal"))
 
 	assert.False(t, IsDelegation(
-		filepath.Join(CanonicalTargetsRole) + "///test/middle/slashes"))
+		filepath.Join(CanonicalTargetsRole)+"///test/middle/slashes"))
 
 	assert.False(t, IsDelegation(
-		filepath.Join(CanonicalTargetsRole) + "/./././"))
+		filepath.Join(CanonicalTargetsRole)+"/./././"))
 
 	assert.False(t, IsDelegation(
 		filepath.Join("  ", CanonicalTargetsRole, "level1")))
 
 	assert.False(t, IsDelegation(
-		filepath.Join("  " + CanonicalTargetsRole, "level1")))
+		filepath.Join("  "+CanonicalTargetsRole, "level1")))
 
 	assert.False(t, IsDelegation(
-		filepath.Join(CanonicalTargetsRole, "level1" + "  ")))
+		filepath.Join(CanonicalTargetsRole, "level1"+"  ")))
 
 	assert.False(t, IsDelegation(
-		filepath.Join(CanonicalTargetsRole, "white   space" + "level2")))
+		filepath.Join(CanonicalTargetsRole, "white   space"+"level2")))
 }
 
 func TestValidRoleFunction(t *testing.T) {
