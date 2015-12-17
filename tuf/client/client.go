@@ -393,6 +393,11 @@ func (c *Client) downloadTargets(role string) error {
 		keyIDs := r.KeyIDs
 		s, err := c.getTargetsFile(role, keyIDs, snap.Meta, root.ConsistentSnapshot, r.Threshold)
 		if err != nil {
+			if _, ok := err.(store.ErrMetaNotFound); ok {
+				// if the role meta hasn't been published,
+				// that's ok, continue
+				continue
+			}
 			logrus.Error("Error getting targets file:", err)
 			return err
 		}
@@ -520,10 +525,7 @@ func (c Client) RoleTargetsPath(role string, hashSha256 string, consistent bool)
 
 // TargetMeta ensures the repo is up to date. It assumes downloadTargets
 // has already downloaded all delegated roles
-func (c Client) TargetMeta(role, path string, excludeRoles ...string) (*data.FileMeta, error) {
-	c.Update()
-	var meta *data.FileMeta
-
+func (c Client) TargetMeta(role, path string, excludeRoles ...string) *data.FileMeta {
 	excl := make(map[string]bool)
 	for _, r := range excludeRoles {
 		excl[r] = true
@@ -534,7 +536,10 @@ func (c Client) TargetMeta(role, path string, excludeRoles ...string) (*data.Fil
 
 	// FIFO list of targets delegations to inspect for target
 	roles := []string{role}
-	var curr string
+	var (
+		meta *data.FileMeta
+		curr string
+	)
 	for len(roles) > 0 {
 		// have to do these lines here because of order of execution in for statement
 		curr = roles[0]
@@ -543,7 +548,7 @@ func (c Client) TargetMeta(role, path string, excludeRoles ...string) (*data.Fil
 		meta = c.local.TargetMeta(curr, path)
 		if meta != nil {
 			// we found the target!
-			return meta, nil
+			return meta
 		}
 		delegations := c.local.TargetDelegations(role, path, pathHex)
 		for _, d := range delegations {
@@ -552,7 +557,7 @@ func (c Client) TargetMeta(role, path string, excludeRoles ...string) (*data.Fil
 			}
 		}
 	}
-	return meta, nil
+	return meta
 }
 
 // DownloadTarget downloads the target to dst from the remote

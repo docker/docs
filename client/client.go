@@ -491,21 +491,13 @@ func (r *NotaryRepository) GetTargetByName(name string, roles ...string) (*Targe
 		meta *data.FileMeta
 	)
 	for i := len(roles) - 1; i >= 0; i-- {
-		meta, err = c.TargetMeta(roles[i], name, roles...)
-		if err != nil {
-			// important to error here otherwise there might be malicious
-			// behaviour that prevents a legitimate version of a target
-			// being found
-			return nil, err
-		} else if meta != nil {
-			break
+		meta = c.TargetMeta(roles[i], name, roles...)
+		if meta != nil {
+			return &Target{Name: name, Hashes: meta.Hashes, Length: meta.Length}, nil
 		}
 	}
-	if meta == nil {
-		return nil, fmt.Errorf("No trust data for %s", name)
-	}
+	return nil, fmt.Errorf("No trust data for %s", name)
 
-	return &Target{Name: name, Hashes: meta.Hashes, Length: meta.Length}, nil
 }
 
 // GetChangelist returns the list of the repository's unpublished changes
