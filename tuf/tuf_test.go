@@ -317,7 +317,7 @@ func TestUpdateDelegationsReplaceRole(t *testing.T) {
 
 	// create one now to assert that replacing the delegation doesn't delete the
 	// metadata
-	repo.Targets["targets/test"] = data.NewTargets()
+	repo.InitTargets("targets/test")
 
 	// create another role with the same name and ensure it replaces the
 	// previous role
@@ -404,7 +404,7 @@ func TestDeleteDelegations(t *testing.T) {
 	assert.Equal(t, testKey.ID(), keyIDs[0])
 
 	// ensure that the metadata is there
-	repo.Targets["targets/test"] = data.NewTargets()
+	repo.InitTargets("targets/test")
 
 	err = repo.DeleteDelegation(*role)
 	assert.Len(t, r.Signed.Delegations.Roles, 0)
@@ -551,7 +551,7 @@ func TestGetDelegationRoleAndMetadataExistDelegationDoesntExists(t *testing.T) {
 	assert.NoError(t, repo.UpdateDelegations(role, data.KeyList{testKey}))
 
 	// ensure metadata exists
-	repo.Targets["targets/level1"] = data.NewTargets()
+	repo.InitTargets("targets/level1")
 
 	_, err = repo.GetDelegation("targets/level1/level2")
 	assert.Error(t, err)
@@ -673,4 +673,34 @@ func TestAddTargetsRoleDoesntExist(t *testing.T) {
 	_, err := repo.AddTargets("targets/test", data.Files{"f": f})
 	assert.Error(t, err)
 	assert.IsType(t, data.ErrInvalidRole{}, err)
+}
+
+// adding a key to a role marks root as dirty as well as the role
+func TestAddBaseKeysToRoot(t *testing.T) {
+	for role := range data.ValidRoles {
+		ed25519 := signed.NewEd25519()
+		keyDB := keys.NewDB()
+		repo := initRepo(t, ed25519, keyDB)
+
+		key, err := ed25519.Create(role, data.ED25519Key)
+		assert.NoError(t, err)
+
+		assert.Len(t, repo.Root.Signed.Roles[role].KeyIDs, 1)
+
+		assert.NoError(t, repo.AddBaseKeys(role, key))
+
+		_, ok := repo.Root.Signed.Keys[key.ID()]
+		assert.True(t, ok)
+		assert.Len(t, repo.Root.Signed.Roles[role].KeyIDs, 2)
+		assert.True(t, repo.Root.Dirty)
+
+		switch role {
+		case data.CanonicalSnapshotRole:
+			assert.True(t, repo.Snapshot.Dirty)
+		case data.CanonicalTargetsRole:
+			assert.True(t, repo.Targets[data.CanonicalTargetsRole].Dirty)
+		case data.CanonicalTimestampRole:
+			assert.True(t, repo.Timestamp.Dirty)
+		}
+	}
 }
