@@ -10,6 +10,7 @@ import (
 	"net/http/httptest"
 	"os"
 	"path/filepath"
+	"reflect"
 	"sort"
 	"strings"
 	"testing"
@@ -748,9 +749,11 @@ func TestRemoveTargetErrorWritingChanges(t *testing.T) {
 func TestListTarget(t *testing.T) {
 	testListEmptyTargets(t, data.ECDSAKey)
 	testListTarget(t, data.ECDSAKey)
+	testListTargetWithDelegates(t, data.ECDSAKey)
 	if !testing.Short() {
 		testListEmptyTargets(t, data.RSAKey)
 		testListTarget(t, data.RSAKey)
+		testListTargetWithDelegates(t, data.RSAKey)
 	}
 }
 
@@ -768,7 +771,7 @@ func testListEmptyTargets(t *testing.T, rootType string) {
 
 	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL, false)
 
-	_, err = repo.ListTargets()
+	_, err = repo.ListTargets(data.CanonicalTargetsRole)
 	assert.Error(t, err) // no trust data
 }
 
@@ -794,6 +797,22 @@ func fakeServerData(t *testing.T, repo *NotaryRepository, mux *http.ServeMux,
 	signedTargets, err := savedTUFRepo.SignTargets(
 		"targets", data.DefaultExpires("targets"))
 	assert.NoError(t, err)
+
+	signedLevel1, err := savedTUFRepo.SignTargets(
+		"targets/level1",
+		data.DefaultExpires(data.CanonicalTargetsRole),
+	)
+	if _, ok := savedTUFRepo.Targets["targets/level1"]; ok {
+		assert.NoError(t, err)
+	}
+
+	signedLevel2, err := savedTUFRepo.SignTargets(
+		"targets/level2",
+		data.DefaultExpires(data.CanonicalTargetsRole),
+	)
+	if _, ok := savedTUFRepo.Targets["targets/level2"]; ok {
+		assert.NoError(t, err)
+	}
 
 	signedSnapshot, err := savedTUFRepo.SignSnapshot(
 		data.DefaultExpires("snapshot"))
@@ -825,6 +844,20 @@ func fakeServerData(t *testing.T, repo *NotaryRepository, mux *http.ServeMux,
 		func(w http.ResponseWriter, r *http.Request) {
 			targetsJSON, _ := json.Marshal(signedTargets)
 			fmt.Fprint(w, string(targetsJSON))
+		})
+
+	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/targets/level1.json",
+		func(w http.ResponseWriter, r *http.Request) {
+			level1JSON, err := json.Marshal(signedLevel1)
+			assert.NoError(t, err)
+			fmt.Fprint(w, string(level1JSON))
+		})
+
+	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/targets/level2.json",
+		func(w http.ResponseWriter, r *http.Request) {
+			level2JSON, err := json.Marshal(signedLevel2)
+			assert.NoError(t, err)
+			fmt.Fprint(w, string(level2JSON))
 		})
 }
 
@@ -869,7 +902,7 @@ func testListTarget(t *testing.T, rootType string) {
 
 	fakeServerData(t, repo, mux, keys)
 
-	targets, err := repo.ListTargets()
+	targets, err := repo.ListTargets(data.CanonicalTargetsRole)
 	assert.NoError(t, err)
 
 	// Should be two targets
@@ -889,6 +922,115 @@ func testListTarget(t *testing.T, rootType string) {
 	newCurrentTarget, err := repo.GetTargetByName("current")
 	assert.NoError(t, err)
 	assert.Equal(t, currentTarget, newCurrentTarget, "current target does not match")
+}
+
+func testListTargetWithDelegates(t *testing.T, rootType string) {
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	defer os.RemoveAll(tempBaseDir)
+
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+
+	gun := "docker.com/notary"
+
+	ts, mux, keys := simpleTestServer(t)
+	defer ts.Close()
+
+	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL, false)
+
+	// tests need to manually boostrap timestamp as client doesn't generate it
+	err = repo.tufRepo.InitTimestamp()
+	assert.NoError(t, err, "error creating repository: %s", err)
+
+	latestTarget := addTarget(t, repo, "latest", "../fixtures/intermediate-ca.crt")
+	currentTarget := addTarget(t, repo, "current", "../fixtures/intermediate-ca.crt")
+
+	// setup delegated targets/level1 role
+	k, err := repo.CryptoService.Create("targets/level1", rootType)
+	assert.NoError(t, err)
+	r, err := data.NewRole("targets/level1", 1, []string{k.ID()}, nil, nil)
+	assert.NoError(t, err)
+	repo.tufRepo.UpdateDelegations(r, []data.PublicKey{k})
+	delegatedTarget := addTarget(t, repo, "current", "../fixtures/root-ca.crt", "targets/level1")
+	otherTarget := addTarget(t, repo, "other", "../fixtures/root-ca.crt", "targets/level1")
+
+	// setup delegated targets/level2 role
+	k, err = repo.CryptoService.Create("targets/level2", rootType)
+	assert.NoError(t, err)
+	r, err = data.NewRole("targets/level2", 1, []string{k.ID()}, nil, nil)
+	assert.NoError(t, err)
+	repo.tufRepo.UpdateDelegations(r, []data.PublicKey{k})
+	// this target should not show up as the one in targets/level1 takes higher priority
+	_ = addTarget(t, repo, "current", "../fixtures/notary-server.crt", "targets/level2")
+	// this target should show up as the name doesn't exist elsewhere
+	level2Target := addTarget(t, repo, "level2", "../fixtures/notary-server.crt", "targets/level2")
+
+	// Apply the changelist. Normally, this would be done by Publish
+
+	// load the changelist for this repo
+	cl, err := changelist.NewFileChangelist(
+		filepath.Join(tempBaseDir, "tuf", filepath.FromSlash(gun), "changelist"))
+	assert.NoError(t, err, "could not open changelist")
+
+	// apply the changelist to the repo
+	err = applyChangelist(repo.tufRepo, cl)
+	assert.NoError(t, err, "could not apply changelist")
+
+	_, ok := repo.tufRepo.Targets["targets/level1"].Signed.Targets["current"]
+	assert.True(t, ok)
+	_, ok = repo.tufRepo.Targets["targets/level1"].Signed.Targets["other"]
+	assert.True(t, ok)
+	_, ok = repo.tufRepo.Targets["targets/level2"].Signed.Targets["level2"]
+	assert.True(t, ok)
+
+	fakeServerData(t, repo, mux, keys)
+
+	// test default listing
+	targets, err := repo.ListTargets()
+	assert.NoError(t, err)
+
+	// Should be two targets
+	assert.Len(t, targets, 4, "unexpected number of targets returned by ListTargets")
+
+	sort.Stable(targetSorter(targets))
+
+	// current should be first.
+	assert.Equal(t, currentTarget, targets[0], "current target does not match")
+	assert.Equal(t, latestTarget, targets[1], "latest target does not match")
+	assert.Equal(t, level2Target, targets[2], "level2 target does not match")
+	assert.Equal(t, otherTarget, targets[3], "other target does not match")
+
+	// test listing with priority specified
+	targets, err = repo.ListTargets("targets/level1", data.CanonicalTargetsRole)
+	assert.NoError(t, err)
+
+	// Should be two targets
+	assert.Len(t, targets, 4, "unexpected number of targets returned by ListTargets")
+
+	sort.Stable(targetSorter(targets))
+
+	// current should be first
+	assert.Equal(t, delegatedTarget, targets[0], "current target does not match")
+	assert.Equal(t, latestTarget, targets[1], "latest target does not match")
+	assert.Equal(t, level2Target, targets[2], "level2 target does not match")
+	assert.Equal(t, otherTarget, targets[3], "other target does not match")
+
+	// Also test GetTargetByName
+	newLatestTarget, err := repo.GetTargetByName("latest")
+	assert.NoError(t, err)
+	assert.Equal(t, latestTarget, newLatestTarget, "latest target does not match")
+
+	newCurrentTarget, err := repo.GetTargetByName("current", "targets/level1", "targets")
+	assert.NoError(t, err)
+	assert.Equal(t, delegatedTarget, newCurrentTarget, "current target does not match")
+
+	newOtherTarget, err := repo.GetTargetByName("other")
+	assert.NoError(t, err)
+	assert.True(t, reflect.DeepEqual(otherTarget, newOtherTarget), "other target does not match")
+
+	newLevel2Target, err := repo.GetTargetByName("level2")
+	assert.NoError(t, err)
+	assert.True(t, reflect.DeepEqual(level2Target, newLevel2Target), "level2 target does not match")
 }
 
 // TestValidateRootKey verifies that the public data in root.json for the root
@@ -1056,7 +1198,7 @@ func assertPublishSucceeds(t *testing.T, repo1 *NotaryRepository) {
 
 	// Should be two targets
 	for _, repo := range []*NotaryRepository{repo1, repo2} {
-		targets, err := repo.ListTargets()
+		targets, err := repo.ListTargets(data.CanonicalTargetsRole)
 		assert.NoError(t, err)
 
 		assert.Len(t, targets, 2, "unexpected number of targets returned by ListTargets")
@@ -1113,7 +1255,7 @@ func testPublishAfterPullServerHasSnapshotKey(t *testing.T, rootType string) {
 	assertRepoHasExpectedMetadata(t, repo, data.CanonicalSnapshotRole, false)
 
 	// list, so that the snapshot metadata is pulled from server
-	targets, err := repo.ListTargets()
+	targets, err := repo.ListTargets(data.CanonicalTargetsRole)
 	assert.NoError(t, err)
 	assert.Equal(t, []*Target{published}, targets)
 	// listing downloaded the timestamp and snapshot metadata info
@@ -1436,7 +1578,7 @@ func TestRemoteServerUnavailableNoLocalCache(t *testing.T) {
 		ts.URL, http.DefaultTransport, passphraseRetriever)
 	assert.NoError(t, err, "error creating repo: %s", err)
 
-	_, err = repo.ListTargets()
+	_, err = repo.ListTargets(data.CanonicalTargetsRole)
 	assert.Error(t, err)
 	assert.IsType(t, store.ErrServerUnavailable{}, err)
 

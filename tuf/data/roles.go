@@ -189,6 +189,9 @@ func (r Role) ValidKey(id string) bool {
 
 // CheckPaths checks if a given path is valid for the role
 func (r Role) CheckPaths(path string) bool {
+	if len(r.Paths) == 0 {
+		return true
+	}
 	for _, p := range r.Paths {
 		if strings.HasPrefix(path, p) {
 			return true
@@ -199,6 +202,9 @@ func (r Role) CheckPaths(path string) bool {
 
 // CheckPrefixes checks if a given hash matches the prefixes for the role
 func (r Role) CheckPrefixes(hash string) bool {
+	if len(r.PathHashPrefixes) == 0 {
+		return true
+	}
 	for _, p := range r.PathHashPrefixes {
 		if strings.HasPrefix(hash, p) {
 			return true
