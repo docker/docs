@@ -6,21 +6,14 @@ import (
 	"testing"
 
 	"github.com/docker/notary/client/changelist"
-	tuf "github.com/docker/notary/tuf"
 	"github.com/docker/notary/tuf/data"
-	"github.com/docker/notary/tuf/keys"
 	"github.com/docker/notary/tuf/testutils"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestApplyTargetsChange(t *testing.T) {
-	kdb := keys.NewDB()
-	role, err := data.NewRole("targets", 1, nil, nil, nil)
-	assert.NoError(t, err)
-	kdb.AddRole(role)
-
-	repo := tuf.NewRepo(kdb, nil)
-	err = repo.InitTargets(data.CanonicalTargetsRole)
+	_, repo, _ := testutils.EmptyRepo()
+	_, err := repo.InitTargets(data.CanonicalTargetsRole)
 	assert.NoError(t, err)
 	hash := sha256.Sum256([]byte{})
 	f := &data.FileMeta{
@@ -57,13 +50,8 @@ func TestApplyTargetsChange(t *testing.T) {
 }
 
 func TestApplyChangelist(t *testing.T) {
-	kdb := keys.NewDB()
-	role, err := data.NewRole("targets", 1, nil, nil, nil)
-	assert.NoError(t, err)
-	kdb.AddRole(role)
-
-	repo := tuf.NewRepo(kdb, nil)
-	err = repo.InitTargets(data.CanonicalTargetsRole)
+	_, repo, _ := testutils.EmptyRepo()
+	_, err := repo.InitTargets(data.CanonicalTargetsRole)
 	assert.NoError(t, err)
 	hash := sha256.Sum256([]byte{})
 	f := &data.FileMeta{
@@ -105,13 +93,8 @@ func TestApplyChangelist(t *testing.T) {
 }
 
 func TestApplyChangelistMulti(t *testing.T) {
-	kdb := keys.NewDB()
-	role, err := data.NewRole("targets", 1, nil, nil, nil)
-	assert.NoError(t, err)
-	kdb.AddRole(role)
-
-	repo := tuf.NewRepo(kdb, nil)
-	err = repo.InitTargets(data.CanonicalTargetsRole)
+	_, repo, _ := testutils.EmptyRepo()
+	_, err := repo.InitTargets(data.CanonicalTargetsRole)
 	assert.NoError(t, err)
 	hash := sha256.Sum256([]byte{})
 	f := &data.FileMeta{

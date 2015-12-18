@@ -215,6 +215,31 @@ func TestUpdateDelegationsParentMissing(t *testing.T) {
 	assert.False(t, ok, "no targets file should be created for nonexistent parent delegation")
 }
 
+// Updating delegations needs to modify the parent of the role being updated.
+// If there is no signing key for that parent, the delegation cannot be added.
+func TestUpdateDelegationsMissingParentKey(t *testing.T) {
+	ed25519 := signed.NewEd25519()
+	keyDB := keys.NewDB()
+	repo := initRepo(t, ed25519, keyDB)
+
+	// remove the target key (all keys)
+	repo.cryptoService = signed.NewEd25519()
+
+	roleKey, err := ed25519.Create("Invalid Role", data.ED25519Key)
+	assert.NoError(t, err)
+
+	role, err := data.NewRole("targets/role", 1, []string{}, []string{}, []string{})
+	assert.NoError(t, err)
+
+	err = repo.UpdateDelegations(role, data.KeyList{roleKey})
+	assert.Error(t, err)
+	assert.IsType(t, signed.ErrNoKeys{}, err)
+
+	// no empty delegation metadata created for new delegation
+	_, ok := repo.Targets["targets/role"]
+	assert.False(t, ok, "no targets file should be created for empty delegation")
+}
+
 func TestUpdateDelegationsInvalidRole(t *testing.T) {
 	ed25519 := signed.NewEd25519()
 	keyDB := keys.NewDB()
@@ -241,7 +266,9 @@ func TestUpdateDelegationsInvalidRole(t *testing.T) {
 	assert.False(t, ok, "no targets file should be created since delegation failed")
 }
 
-func TestUpdateDelegationsRoleMissingKey(t *testing.T) {
+// A delegation can be created with a role that is missing a signing key, so
+// long as UpdateDelegations is called with the key
+func TestUpdateDelegationsRoleThatIsMissingDelegationKey(t *testing.T) {
 	ed25519 := signed.NewEd25519()
 	keyDB := keys.NewDB()
 	repo := initRepo(t, ed25519, keyDB)
@@ -403,10 +430,16 @@ func TestDeleteDelegations(t *testing.T) {
 	assert.Len(t, keyIDs, 1)
 	assert.Equal(t, testKey.ID(), keyIDs[0])
 
-	// ensure that the metadata is there
-	repo.InitTargets("targets/test")
+	// ensure that the metadata is there and snapshot is there
+	targets, err := repo.InitTargets("targets/test")
+	assert.NoError(t, err)
+	targetsSigned, err := targets.ToSigned()
+	assert.NoError(t, err)
+	assert.NoError(t, repo.UpdateSnapshot("targets/test", targetsSigned))
+	_, ok = repo.Snapshot.Signed.Meta["targets/test"]
+	assert.True(t, ok)
 
-	err = repo.DeleteDelegation(*role)
+	assert.NoError(t, repo.DeleteDelegation(*role))
 	assert.Len(t, r.Signed.Delegations.Roles, 0)
 	assert.Len(t, r.Signed.Delegations.Keys, 0)
 	assert.True(t, r.Dirty)
@@ -414,7 +447,35 @@ func TestDeleteDelegations(t *testing.T) {
 	// metadata should be deleted
 	_, ok = repo.Targets["targets/test"]
 	assert.False(t, ok)
+	_, ok = repo.Snapshot.Signed.Meta["targets/test"]
+	assert.False(t, ok)
+}
 
+func TestDeleteDelegationsRoleNotExistBecauseNoParentMeta(t *testing.T) {
+	ed25519 := signed.NewEd25519()
+	keyDB := keys.NewDB()
+	repo := initRepo(t, ed25519, keyDB)
+
+	testKey, err := ed25519.Create("targets/test", data.ED25519Key)
+	assert.NoError(t, err)
+	role, err := data.NewRole("targets/test", 1, []string{testKey.ID()}, []string{"test"}, []string{})
+	assert.NoError(t, err)
+
+	err = repo.UpdateDelegations(role, data.KeyList{testKey})
+	assert.NoError(t, err)
+
+	// no empty delegation metadata created for new delegation
+	_, ok := repo.Targets["targets/test"]
+	assert.False(t, ok, "no targets file should be created for empty delegation")
+
+	delRole, err := data.NewRole(
+		"targets/test/a", 1, []string{testKey.ID()}, []string{"test"}, []string{})
+
+	err = repo.DeleteDelegation(*delRole)
+	assert.NoError(t, err)
+	// still no metadata
+	_, ok = repo.Targets["targets/test"]
+	assert.False(t, ok)
 }
 
 func TestDeleteDelegationsRoleNotExist(t *testing.T) {
@@ -473,6 +534,54 @@ func TestDeleteDelegationsParentMissing(t *testing.T) {
 	r, ok := repo.Targets[data.CanonicalTargetsRole]
 	assert.True(t, ok)
 	assert.Len(t, r.Signed.Delegations.Roles, 0)
+}
+
+// Can't delete a delegation if we don't have the parent's signing key
+func TestDeleteDelegationsMissingParentSigningKey(t *testing.T) {
+	ed25519 := signed.NewEd25519()
+	keyDB := keys.NewDB()
+	repo := initRepo(t, ed25519, keyDB)
+
+	testKey, err := ed25519.Create("targets/test", data.ED25519Key)
+	assert.NoError(t, err)
+	role, err := data.NewRole("targets/test", 1, []string{testKey.ID()}, []string{"test"}, []string{})
+	assert.NoError(t, err)
+
+	err = repo.UpdateDelegations(role, data.KeyList{testKey})
+	assert.NoError(t, err)
+
+	r, ok := repo.Targets[data.CanonicalTargetsRole]
+	assert.True(t, ok)
+	assert.Len(t, r.Signed.Delegations.Roles, 1)
+	assert.Len(t, r.Signed.Delegations.Keys, 1)
+	keyIDs := r.Signed.Delegations.Roles[0].KeyIDs
+	assert.Len(t, keyIDs, 1)
+	assert.Equal(t, testKey.ID(), keyIDs[0])
+
+	// ensure that the metadata is there and snapshot is there
+	targets, err := repo.InitTargets("targets/test")
+	assert.NoError(t, err)
+	targetsSigned, err := targets.ToSigned()
+	assert.NoError(t, err)
+	assert.NoError(t, repo.UpdateSnapshot("targets/test", targetsSigned))
+	_, ok = repo.Snapshot.Signed.Meta["targets/test"]
+	assert.True(t, ok)
+
+	// delete all signing keys
+	repo.cryptoService = signed.NewEd25519()
+	err = repo.DeleteDelegation(*role)
+	assert.Error(t, err)
+	assert.IsType(t, signed.ErrNoKeys{}, err)
+
+	assert.Len(t, r.Signed.Delegations.Roles, 1)
+	assert.Len(t, r.Signed.Delegations.Keys, 1)
+	assert.True(t, r.Dirty)
+
+	// metadata should be here still
+	_, ok = repo.Targets["targets/test"]
+	assert.True(t, ok)
+	_, ok = repo.Snapshot.Signed.Meta["targets/test"]
+	assert.True(t, ok)
 }
 
 func TestDeleteDelegationsMidSliceRole(t *testing.T) {
@@ -673,6 +782,129 @@ func TestAddTargetsRoleDoesntExist(t *testing.T) {
 	_, err := repo.AddTargets("targets/test", data.Files{"f": f})
 	assert.Error(t, err)
 	assert.IsType(t, data.ErrInvalidRole{}, err)
+}
+
+// Adding targets to a role that we don't have signing keys for fails
+func TestAddTargetsNoSigningKeys(t *testing.T) {
+	hash := sha256.Sum256([]byte{})
+	f := data.FileMeta{
+		Length: 1,
+		Hashes: map[string][]byte{
+			"sha256": hash[:],
+		},
+	}
+
+	ed25519 := signed.NewEd25519()
+	keyDB := keys.NewDB()
+	repo := initRepo(t, ed25519, keyDB)
+
+	testKey, err := ed25519.Create("targets/test", data.ED25519Key)
+	assert.NoError(t, err)
+	role, err := data.NewRole(
+		"targets/test", 1, []string{testKey.ID()}, []string{"test"}, []string{})
+	assert.NoError(t, err)
+
+	err = repo.UpdateDelegations(role, data.KeyList{testKey})
+	assert.NoError(t, err)
+
+	// now delete the signing key (all keys)
+	repo.cryptoService = signed.NewEd25519()
+
+	// adding the targets to the role should create the metadata though
+	_, err = repo.AddTargets("targets/test", data.Files{"f": f})
+	assert.Error(t, err)
+	assert.IsType(t, signed.ErrNoKeys{}, err)
+}
+
+// Removing targets from a role that exists, has targets, and is signable
+// should succeed, even if we also want to remove targets that don't exist.
+func TestRemoveExistingAndNonexistingTargets(t *testing.T) {
+	ed25519 := signed.NewEd25519()
+	keyDB := keys.NewDB()
+	repo := initRepo(t, ed25519, keyDB)
+
+	testKey, err := ed25519.Create("targets/test", data.ED25519Key)
+	assert.NoError(t, err)
+	role, err := data.NewRole(
+		"targets/test", 1, []string{testKey.ID()}, []string{"test"}, []string{})
+	assert.NoError(t, err)
+
+	err = repo.UpdateDelegations(role, data.KeyList{testKey})
+	assert.NoError(t, err)
+
+	// no empty metadata is created for this role
+	_, ok := repo.Targets["targets/test"]
+	assert.False(t, ok, "no empty targets file should be created")
+
+	// now remove a target
+	assert.NoError(t, repo.RemoveTargets("targets/test", "f"))
+
+	// still no metadata
+	_, ok = repo.Targets["targets/test"]
+	assert.False(t, ok)
+}
+
+// Removing targets from a role that exists but without metadata succeeds.
+func TestRemoveTargetsNonexistentMetadata(t *testing.T) {
+	ed25519 := signed.NewEd25519()
+	keyDB := keys.NewDB()
+	repo := initRepo(t, ed25519, keyDB)
+
+	err := repo.RemoveTargets("targets/test", "f")
+	assert.Error(t, err)
+	assert.IsType(t, data.ErrInvalidRole{}, err)
+}
+
+// Removing targets from a role that doesn't exist fails
+func TestRemoveTargetsRoleDoesntExist(t *testing.T) {
+	ed25519 := signed.NewEd25519()
+	keyDB := keys.NewDB()
+	repo := initRepo(t, ed25519, keyDB)
+
+	err := repo.RemoveTargets("targets/test", "f")
+	assert.Error(t, err)
+	assert.IsType(t, data.ErrInvalidRole{}, err)
+}
+
+// Removing targets from a role that we don't have signing keys for fails
+func TestRemoveTargetsNoSigningKeys(t *testing.T) {
+	hash := sha256.Sum256([]byte{})
+	f := data.FileMeta{
+		Length: 1,
+		Hashes: map[string][]byte{
+			"sha256": hash[:],
+		},
+	}
+
+	ed25519 := signed.NewEd25519()
+	keyDB := keys.NewDB()
+	repo := initRepo(t, ed25519, keyDB)
+
+	testKey, err := ed25519.Create("targets/test", data.ED25519Key)
+	assert.NoError(t, err)
+	role, err := data.NewRole(
+		"targets/test", 1, []string{testKey.ID()}, []string{"test"}, []string{})
+	assert.NoError(t, err)
+
+	err = repo.UpdateDelegations(role, data.KeyList{testKey})
+	assert.NoError(t, err)
+
+	// adding the targets to the role should create the metadata though
+	_, err = repo.AddTargets("targets/test", data.Files{"f": f})
+	assert.NoError(t, err)
+
+	r, ok := repo.Targets["targets/test"]
+	assert.True(t, ok)
+	_, ok = r.Signed.Targets["f"]
+	assert.True(t, ok)
+
+	// now delete the signing key (all keys)
+	repo.cryptoService = signed.NewEd25519()
+
+	// now remove the target - it should fail
+	err = repo.RemoveTargets("targets/test", "f")
+	assert.Error(t, err)
+	assert.IsType(t, signed.ErrNoKeys{}, err)
 }
 
 // adding a key to a role marks root as dirty as well as the role
