@@ -42,6 +42,21 @@ func TestSetMeta(t *testing.T) {
 	assert.Equal(t, testContent, content, "Content written to file was corrupted.")
 }
 
+func TestSetMetaWithNoParentDirectory(t *testing.T) {
+	s, err := NewFilesystemStore(testDir, "metadata", "json", "targets")
+	assert.Nil(t, err, "Initializing FilesystemStore returned unexpected error: %v", err)
+	defer os.RemoveAll(testDir)
+
+	testContent := []byte("test data")
+
+	err = s.SetMeta("noexist/"+"testMeta", testContent)
+	assert.Nil(t, err, "SetMeta returned unexpected error: %v", err)
+
+	content, err := ioutil.ReadFile(path.Join(testDir, "metadata", "noexist/testMeta.json"))
+	assert.Nil(t, err, "Error reading file: %v", err)
+	assert.Equal(t, testContent, content, "Content written to file was corrupted.")
+}
+
 func TestGetMeta(t *testing.T) {
 	s, err := NewFilesystemStore(testDir, "metadata", "json", "targets")
 	assert.Nil(t, err, "Initializing FilesystemStore returned unexpected error: %v", err)
