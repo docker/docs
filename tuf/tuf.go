@@ -164,11 +164,20 @@ func (tr *Repo) GetDelegation(role string) (*data.Role, error) {
 	if !r.IsDelegation() {
 		return nil, data.ErrInvalidRole{Role: role, Reason: "not a valid delegated role"}
 	}
+
 	parent := filepath.Dir(role)
-	p, ok := tr.Targets[parent]
-	if !ok {
+
+	// check the parent role
+	if parentRole := tr.keysDB.GetRole(parent); parentRole == nil {
 		return nil, data.ErrInvalidRole{Role: role, Reason: "parent role not found"}
 	}
+
+	// check the parent role's metadata
+	p, ok := tr.Targets[parent]
+	if !ok { // the parent targetfile may not exist yet, so it can't be in the list
+		return nil, data.ErrNoSuchRole{Role: role}
+	}
+
 	foundAt := utils.FindRoleIndex(p.Signed.Delegations.Roles, role)
 	if foundAt < 0 {
 		return nil, data.ErrNoSuchRole{Role: role}
@@ -185,10 +194,19 @@ func (tr *Repo) UpdateDelegations(role *data.Role, keys []data.PublicKey) error 
 		return data.ErrInvalidRole{Role: role.Name, Reason: "not a valid delegated role"}
 	}
 	parent := filepath.Dir(role.Name)
-	p, ok := tr.Targets[parent]
-	if !ok {
+
+	// check the parent role
+	if parentRole := tr.keysDB.GetRole(parent); parentRole == nil {
 		return data.ErrInvalidRole{Role: role.Name, Reason: "parent role not found"}
 	}
+
+	// check the parent role's metadata
+	p, ok := tr.Targets[parent]
+	if !ok { // the parent targetfile may not exist yet - if not, then create it
+		p = data.NewTargets()
+		tr.Targets[parent] = p
+	}
+
 	for _, k := range keys {
 		if !utils.StrSliceContains(role.KeyIDs, k.ID()) {
 			role.KeyIDs = append(role.KeyIDs, k.ID())
@@ -214,11 +232,11 @@ func (tr *Repo) UpdateDelegations(role *data.Role, keys []data.PublicKey) error 
 	// We've made a change to parent. Set it to dirty
 	p.Dirty = true
 
-	roleTargets := data.NewTargets() // NewTargets always marked Dirty
-	tr.Targets[role.Name] = roleTargets
+	// We don't actually want to create the new delegation metadata yet.
+	// When we add a delegation, it may only be signable by a key we don't have
+	// (hence we are delegating signing).
 
 	tr.keysDB.AddRole(role)
-
 	utils.RemoveUnusedKeys(p)
 
 	return nil
@@ -476,18 +494,26 @@ func (tr Repo) FindTarget(path string) *data.FileMeta {
 }
 
 // AddTargets will attempt to add the given targets specifically to
-// the directed role. If the user does not have the signing keys for the role
-// the function will return an error and the full slice of targets.
+// the directed role. If the metadata for the role doesn't exist yet,
+// AddTargets will create one.
 func (tr *Repo) AddTargets(role string, targets data.Files) (data.Files, error) {
-	t, ok := tr.Targets[role]
-	if !ok {
-		return targets, data.ErrInvalidRole{Role: role, Reason: "does not exist"}
+	// check the role exists
+	r := tr.keysDB.GetRole(role)
+	if r == nil {
+		return nil, data.ErrInvalidRole{Role: role, Reason: "does not exist"}
 	}
+
+	// check the role's metadata
+	t, ok := tr.Targets[role]
+	if !ok { // the targetfile may not exist yet - if not, then create it
+		t = data.NewTargets()
+		tr.Targets[role] = t
+	}
+
 	invalid := make(data.Files)
 	for path, target := range targets {
 		pathDigest := sha256.Sum256([]byte(path))
 		pathHex := hex.EncodeToString(pathDigest[:])
-		r := tr.keysDB.GetRole(role)
 		if role == data.ValidRoles["targets"] || (r.CheckPaths(path) || r.CheckPrefixes(pathHex)) {
 			t.Signed.Targets[path] = target
 		} else {

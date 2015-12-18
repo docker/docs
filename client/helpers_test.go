@@ -764,6 +764,44 @@ func TestApplyTargetsDelegationParentDoesntExist(t *testing.T) {
 	assert.IsType(t, data.ErrInvalidRole{}, err)
 }
 
+// If there is no delegation target, ApplyTargets creates it
+func TestApplyChangelistCreatesDelegation(t *testing.T) {
+	_, repo, cs := testutils.EmptyRepo()
+
+	newKey, err := cs.Create("targets/level1", data.ED25519Key)
+	assert.NoError(t, err)
+
+	r, err := data.NewRole("targets/level1", 1, []string{newKey.ID()}, nil, nil)
+	assert.NoError(t, err)
+	repo.UpdateDelegations(r, []data.PublicKey{newKey})
+	delete(repo.Targets, "targets/level1")
+
+	hash := sha256.Sum256([]byte{})
+	f := &data.FileMeta{
+		Length: 1,
+		Hashes: map[string][]byte{
+			"sha256": hash[:],
+		},
+	}
+	fjson, err := json.Marshal(f)
+	assert.NoError(t, err)
+
+	cl := changelist.NewMemChangelist()
+	assert.NoError(t, cl.Add(&changelist.TufChange{
+		Actn:       changelist.ActionCreate,
+		Role:       "targets/level1",
+		ChangeType: "target",
+		ChangePath: "latest",
+		Data:       fjson,
+	}))
+
+	assert.NoError(t, applyChangelist(repo, cl))
+	_, ok := repo.Targets["targets/level1"]
+	assert.True(t, ok, "Failed to create the delegation target")
+	_, ok = repo.Targets["targets/level1"].Signed.Targets["latest"]
+	assert.True(t, ok, "Failed to write change to delegation target")
+}
+
 // Each change applies only to the role specified
 func TestApplyChangelistTargetsToMultipleRoles(t *testing.T) {
 	_, repo, cs := testutils.EmptyRepo()
@@ -808,7 +846,8 @@ func TestApplyChangelistTargetsToMultipleRoles(t *testing.T) {
 	assert.NoError(t, applyChangelist(repo, cl))
 	_, ok := repo.Targets["targets/level1"].Signed.Targets["latest"]
 	assert.True(t, ok)
-	assert.Empty(t, repo.Targets["targets/level2"].Signed.Targets)
+	_, ok = repo.Targets["targets/level2"]
+	assert.False(t, ok, "no change to targets/level2, so metadata not created")
 }
 
 // ApplyTargets falls back to role that exists when adding or deleting a change
