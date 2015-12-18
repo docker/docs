@@ -187,6 +187,10 @@ func TestIsDelegation(t *testing.T) {
 	assert.True(t, IsDelegation(filepath.Join(CanonicalTargetsRole, "level1")))
 	assert.True(t, IsDelegation(
 		filepath.Join(CanonicalTargetsRole, "level1", "level2", "level3")))
+	assert.True(t, IsDelegation(filepath.Join(CanonicalTargetsRole, "under_score")))
+	assert.True(t, IsDelegation(filepath.Join(CanonicalTargetsRole, "hyphen-hyphen")))
+	assert.False(t, IsDelegation(
+		filepath.Join(CanonicalTargetsRole, strings.Repeat("x", 255-len(CanonicalTargetsRole)))))
 
 	assert.False(t, IsDelegation(""))
 	assert.False(t, IsDelegation(CanonicalRootRole))
@@ -195,6 +199,31 @@ func TestIsDelegation(t *testing.T) {
 	assert.False(t, IsDelegation(CanonicalTargetsRole))
 	assert.False(t, IsDelegation(CanonicalTargetsRole+"/"))
 	assert.False(t, IsDelegation(filepath.Join(CanonicalTargetsRole, "level1")+"/"))
+	assert.False(t, IsDelegation(filepath.Join(CanonicalTargetsRole, "UpperCase")))
+
+	assert.False(t, IsDelegation(
+		filepath.Join(CanonicalTargetsRole, "directory")+"/../../traversal"))
+
+	assert.False(t, IsDelegation(
+		filepath.Join(CanonicalTargetsRole)+"///test/middle/slashes"))
+
+	assert.False(t, IsDelegation(
+		filepath.Join(CanonicalTargetsRole)+"/./././"))
+
+	assert.False(t, IsDelegation(
+		filepath.Join("  ", CanonicalTargetsRole, "level1")))
+
+	assert.False(t, IsDelegation(
+		filepath.Join("  "+CanonicalTargetsRole, "level1")))
+
+	assert.False(t, IsDelegation(
+		filepath.Join(CanonicalTargetsRole, "level1"+"  ")))
+
+	assert.False(t, IsDelegation(
+		filepath.Join(CanonicalTargetsRole, "white   space"+"level2")))
+
+	assert.False(t, IsDelegation(
+		filepath.Join(CanonicalTargetsRole, strings.Repeat("x", 256-len(CanonicalTargetsRole)))))
 }
 
 func TestValidRoleFunction(t *testing.T) {
