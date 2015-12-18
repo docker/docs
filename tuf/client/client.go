@@ -393,7 +393,7 @@ func (c *Client) downloadTargets(role string) error {
 		keyIDs := r.KeyIDs
 		s, err := c.getTargetsFile(role, keyIDs, snap.Meta, root.ConsistentSnapshot, r.Threshold)
 		if err != nil {
-			if _, ok := err.(store.ErrMetaNotFound); ok {
+			if _, ok := err.(store.ErrMissingMeta); ok {
 				// if the role meta hasn't been published,
 				// that's ok, continue
 				continue
