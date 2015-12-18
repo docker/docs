@@ -833,7 +833,7 @@ func TestValidateTargetsLoadParent(t *testing.T) {
 
 	k, err := cs.Create("targets/level1", data.ED25519Key)
 	assert.NoError(t, err)
-	r, err := data.NewRole("targets/level1", 1, []string{k.ID()}, nil, nil)
+	r, err := data.NewRole("targets/level1", 1, []string{k.ID()}, []string{""}, nil)
 	assert.NoError(t, err)
 
 	baseRepo.UpdateDelegations(r, []data.PublicKey{k})
@@ -880,7 +880,7 @@ func TestValidateTargetsParentInUpdate(t *testing.T) {
 
 	k, err := cs.Create("targets/level1", data.ED25519Key)
 	assert.NoError(t, err)
-	r, err := data.NewRole("targets/level1", 1, []string{k.ID()}, nil, nil)
+	r, err := data.NewRole("targets/level1", 1, []string{k.ID()}, []string{""}, nil)
 	assert.NoError(t, err)
 
 	baseRepo.UpdateDelegations(r, []data.PublicKey{k})
@@ -934,7 +934,7 @@ func TestValidateTargetsParentNotFound(t *testing.T) {
 
 	k, err := cs.Create("targets/level1", data.ED25519Key)
 	assert.NoError(t, err)
-	r, err := data.NewRole("targets/level1", 1, []string{k.ID()}, nil, nil)
+	r, err := data.NewRole("targets/level1", 1, []string{k.ID()}, []string{""}, nil)
 	assert.NoError(t, err)
 
 	baseRepo.UpdateDelegations(r, []data.PublicKey{k})
@@ -968,7 +968,7 @@ func TestValidateTargetsRoleNotInParent(t *testing.T) {
 
 	k, err := cs.Create("targets/level1", data.ED25519Key)
 	assert.NoError(t, err)
-	r, err := data.NewRole("targets/level1", 1, []string{k.ID()}, nil, nil)
+	r, err := data.NewRole("targets/level1", 1, []string{k.ID()}, []string{""}, nil)
 	assert.NoError(t, err)
 
 	kdb.AddKey(k)

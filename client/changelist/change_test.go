@@ -17,6 +17,7 @@ func TestTufDelegation(t *testing.T) {
 		NewName:      "targets/new_name",
 		NewThreshold: 1,
 		AddKeys:      kl,
+		AddPaths:     []string{""},
 	}
 
 	r, err := td.ToNewRole("targets/old_name")
@@ -24,6 +25,6 @@ func TestTufDelegation(t *testing.T) {
 	assert.Equal(t, td.NewName, r.Name)
 	assert.Len(t, r.KeyIDs, 1)
 	assert.Equal(t, kl[0].ID(), r.KeyIDs[0])
-	assert.Len(t, r.Paths, 0)
+	assert.Len(t, r.Paths, 1)
 	assert.Len(t, r.PathHashPrefixes, 0)
 }

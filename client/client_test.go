@@ -948,7 +948,7 @@ func testListTargetWithDelegates(t *testing.T, rootType string) {
 	// setup delegated targets/level1 role
 	k, err := repo.CryptoService.Create("targets/level1", rootType)
 	assert.NoError(t, err)
-	r, err := data.NewRole("targets/level1", 1, []string{k.ID()}, nil, nil)
+	r, err := data.NewRole("targets/level1", 1, []string{k.ID()}, []string{""}, nil)
 	assert.NoError(t, err)
 	repo.tufRepo.UpdateDelegations(r, []data.PublicKey{k})
 	delegatedTarget := addTarget(t, repo, "current", "../fixtures/root-ca.crt", "targets/level1")
@@ -957,7 +957,7 @@ func testListTargetWithDelegates(t *testing.T, rootType string) {
 	// setup delegated targets/level2 role
 	k, err = repo.CryptoService.Create("targets/level2", rootType)
 	assert.NoError(t, err)
-	r, err = data.NewRole("targets/level2", 1, []string{k.ID()}, nil, nil)
+	r, err = data.NewRole("targets/level2", 1, []string{k.ID()}, []string{""}, nil)
 	assert.NoError(t, err)
 	repo.tufRepo.UpdateDelegations(r, []data.PublicKey{k})
 	// this target should not show up as the one in targets/level1 takes higher priority
@@ -1610,13 +1610,13 @@ func TestAddDelegationChangefileValid(t *testing.T) {
 	targetPubKey := repo.CryptoService.GetKey(targetKeyIds[0])
 	assert.NotNil(t, targetPubKey)
 
-	err = repo.AddDelegation("root", 1, []data.PublicKey{targetPubKey})
+	err = repo.AddDelegation("root", 1, []data.PublicKey{targetPubKey}, []string{""})
 	assert.Error(t, err)
 	assert.IsType(t, data.ErrInvalidRole{}, err)
 	assert.Empty(t, getChanges(t, repo))
 
 	// to show that adding does not care about the hierarchy
-	err = repo.AddDelegation("targets/a/b/c", 1, []data.PublicKey{targetPubKey})
+	err = repo.AddDelegation("targets/a/b/c", 1, []data.PublicKey{targetPubKey}, []string{""})
 	assert.NoError(t, err)
 
 	// ensure that the changefiles is correct
@@ -1649,7 +1649,7 @@ func TestAddDelegationChangefileApplicable(t *testing.T) {
 	assert.NotNil(t, targetPubKey)
 
 	// this hierarchy has to be right to be applied
-	err = repo.AddDelegation("targets/a", 1, []data.PublicKey{targetPubKey})
+	err = repo.AddDelegation("targets/a", 1, []data.PublicKey{targetPubKey}, []string{""})
 	assert.NoError(t, err)
 	changes := getChanges(t, repo)
 	assert.Len(t, changes, 1)
@@ -1680,7 +1680,7 @@ func TestAddDelegationErrorWritingChanges(t *testing.T) {
 		targetPubKey := repo.CryptoService.GetKey(targetKeyIds[0])
 		assert.NotNil(t, targetPubKey)
 
-		return repo.AddDelegation("targets/a", 1, []data.PublicKey{targetPubKey})
+		return repo.AddDelegation("targets/a", 1, []data.PublicKey{targetPubKey}, []string{""})
 	})
 }
 
@@ -1738,7 +1738,7 @@ func TestRemoveDelegationChangefileApplicable(t *testing.T) {
 	assert.NotNil(t, rootPubKey)
 
 	// add a delegation first so it can be removed
-	assert.NoError(t, repo.AddDelegation("targets/a", 1, []data.PublicKey{rootPubKey}))
+	assert.NoError(t, repo.AddDelegation("targets/a", 1, []data.PublicKey{rootPubKey}, []string{""}))
 	changes := getChanges(t, repo)
 	assert.Len(t, changes, 1)
 	assert.NoError(t, applyTargetsChange(repo.tufRepo, changes[0]))

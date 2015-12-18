@@ -226,7 +226,7 @@ func TestUpdateDelegationsRoleMissingKey(t *testing.T) {
 	roleKey, err := ed25519.Create("Invalid Role", data.ED25519Key)
 	assert.NoError(t, err)
 
-	role, err := data.NewRole("targets/role", 1, []string{}, []string{}, []string{})
+	role, err := data.NewRole("targets/role", 1, []string{}, []string{""}, []string{})
 	assert.NoError(t, err)
 
 	// key should get added to role as part of updating the delegation
@@ -250,7 +250,7 @@ func TestUpdateDelegationsNotEnoughKeys(t *testing.T) {
 	roleKey, err := ed25519.Create("Invalid Role", data.ED25519Key)
 	assert.NoError(t, err)
 
-	role, err := data.NewRole("targets/role", 2, []string{}, []string{}, []string{})
+	role, err := data.NewRole("targets/role", 2, []string{}, []string{""}, []string{})
 	assert.NoError(t, err)
 
 	// key should get added to role as part of updating the delegation
@@ -371,7 +371,7 @@ func TestDeleteDelegationsRoleNotExist(t *testing.T) {
 	// a role as dirty
 	repo.Targets[data.CanonicalTargetsRole].Dirty = false
 
-	role, err := data.NewRole("targets/test", 1, []string{}, []string{}, []string{})
+	role, err := data.NewRole("targets/test", 1, []string{}, []string{""}, []string{})
 	assert.NoError(t, err)
 
 	err = repo.DeleteDelegation(*role)
@@ -389,7 +389,7 @@ func TestDeleteDelegationsInvalidRole(t *testing.T) {
 
 	// data.NewRole errors if the role isn't a valid TUF role so use one of the non-delegation
 	// valid roles
-	invalidRole, err := data.NewRole("root", 1, []string{}, []string{}, []string{})
+	invalidRole, err := data.NewRole("root", 1, []string{}, []string{""}, []string{})
 	assert.NoError(t, err)
 
 	err = repo.DeleteDelegation(*invalidRole)
@@ -405,7 +405,7 @@ func TestDeleteDelegationsParentMissing(t *testing.T) {
 	keyDB := keys.NewDB()
 	repo := initRepo(t, ed25519, keyDB)
 
-	testRole, err := data.NewRole("targets/test/deep", 1, []string{}, []string{}, []string{})
+	testRole, err := data.NewRole("targets/test/deep", 1, []string{}, []string{""}, []string{})
 	assert.NoError(t, err)
 
 	err = repo.DeleteDelegation(*testRole)
@@ -423,19 +423,19 @@ func TestDeleteDelegationsMidSliceRole(t *testing.T) {
 
 	testKey, err := ed25519.Create("targets/test", data.ED25519Key)
 	assert.NoError(t, err)
-	role, err := data.NewRole("targets/test", 1, []string{}, []string{}, []string{})
+	role, err := data.NewRole("targets/test", 1, []string{}, []string{""}, []string{})
 	assert.NoError(t, err)
 
 	err = repo.UpdateDelegations(role, data.KeyList{testKey})
 	assert.NoError(t, err)
 
-	role2, err := data.NewRole("targets/test2", 1, []string{}, []string{}, []string{})
+	role2, err := data.NewRole("targets/test2", 1, []string{}, []string{""}, []string{})
 	assert.NoError(t, err)
 
 	err = repo.UpdateDelegations(role2, data.KeyList{testKey})
 	assert.NoError(t, err)
 
-	role3, err := data.NewRole("targets/test3", 1, []string{}, []string{}, []string{})
+	role3, err := data.NewRole("targets/test3", 1, []string{}, []string{""}, []string{})
 	assert.NoError(t, err)
 
 	err = repo.UpdateDelegations(role3, data.KeyList{testKey})

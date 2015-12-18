@@ -108,8 +108,18 @@ func TestSubtractStrSlicesEqual(t *testing.T) {
 	assert.Len(t, res, 0)
 }
 
+func TestNewRolePathsAndHashPrefixRejection(t *testing.T) {
+	_, err := NewRole("targets/level1", 1, []string{"abc"}, nil, nil)
+	assert.Error(t, err)
+	assert.IsType(t, ErrInvalidRole{}, err)
+
+	_, err = NewRole("targets/level1", 1, []string{"abc"}, []string{""}, []string{""})
+	assert.Error(t, err)
+	assert.IsType(t, ErrInvalidRole{}, err)
+}
+
 func TestAddRemoveKeys(t *testing.T) {
-	role, err := NewRole("targets", 1, []string{"abc"}, nil, nil)
+	role, err := NewRole("targets", 1, []string{"abc"}, []string{""}, nil)
 	assert.NoError(t, err)
 	role.AddKeys([]string{"abc"})
 	assert.Equal(t, []string{"abc"}, role.KeyIDs)
