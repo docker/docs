@@ -216,14 +216,14 @@ func addKeyForRole(kdb *keys.KeyDB, role string, key data.PublicKey) error {
 // signs and serializes the metadata for a canonical role in a tuf repo to JSON
 func serializeCanonicalRole(tufRepo *tuf.Repo, role string) (out []byte, err error) {
 	var s *data.Signed
-	switch role {
-	case data.CanonicalRootRole:
+	if role == data.CanonicalRootRole {
 		s, err = tufRepo.SignRoot(data.DefaultExpires(role))
-	case data.CanonicalSnapshotRole:
+	} else if role == data.CanonicalSnapshotRole {
 		s, err = tufRepo.SignSnapshot(data.DefaultExpires(role))
-	case data.CanonicalTargetsRole:
-		s, err = tufRepo.SignTargets(role, data.DefaultExpires(role))
-	default:
+	} else if _, ok := tufRepo.Targets[role]; ok {
+		s, err = tufRepo.SignTargets(
+			role, data.DefaultExpires(data.CanonicalTargetsRole))
+	} else {
 		err = fmt.Errorf("%s not supported role to sign on the client", role)
 	}
 

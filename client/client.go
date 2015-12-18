@@ -584,12 +584,17 @@ func (r *NotaryRepository) Publish() error {
 		updatedFiles[data.CanonicalRootRole] = rootJSON
 	}
 
-	// we will always re-sign targets
-	targetsJSON, err := serializeCanonicalRole(r.tufRepo, data.CanonicalTargetsRole)
-	if err != nil {
-		return err
+	// iterate through all the targets files - if they are dirty, or if they
+	// are the canonical target role, then sign and update
+	for roleName, roleObj := range r.tufRepo.Targets {
+		if roleName == data.CanonicalTargetsRole || roleObj.Dirty {
+			targetsJSON, err := serializeCanonicalRole(r.tufRepo, roleName)
+			if err != nil {
+				return err
+			}
+			updatedFiles[roleName] = targetsJSON
+		}
 	}
-	updatedFiles[data.CanonicalTargetsRole] = targetsJSON
 
 	// if we initialized the repo while designating the server as the snapshot
 	// signer, then there won't be a snapshots file.  However, we might now
