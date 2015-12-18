@@ -566,6 +566,12 @@ func (tr *Repo) SignRoot(expires time.Time) (*data.Signed, error) {
 // SignTargets signs the targets file for the given top level or delegated targets role
 func (tr *Repo) SignTargets(role string, expires time.Time) (*data.Signed, error) {
 	logrus.Debugf("sign targets called for role %s", role)
+	if _, ok := tr.Targets[role]; !ok {
+		return nil, data.ErrInvalidRole{
+			Role:   role,
+			Reason: "SignTargets called with non-existant targets role",
+		}
+	}
 	tr.Targets[role].Signed.Expires = expires
 	tr.Targets[role].Signed.Version++
 	signed, err := tr.Targets[role].ToSigned()

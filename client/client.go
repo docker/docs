@@ -403,8 +403,14 @@ func (r *NotaryRepository) RemoveTarget(targetName string, roles ...string) erro
 	return addChange(cl, template, roles...)
 }
 
-// ListTargets lists all targets for the current repository
-func (r *NotaryRepository) ListTargets() ([]*Target, error) {
+// ListTargets lists all targets for the current repository. The list of
+// roles should be passed in order from highest to lowest priority.
+// IMPORTANT: if you pass a set of roles such as [ "targets/a", "targets/x"
+// "targets/a/b" ], even though "targets/a/b" is part of the "targets/a" subtree
+// its entries will be strictly shadowed by those in other parts of the "targets/a"
+// subtree and also the "targets/x" subtree, as we will defer parsing it until
+// we explicitly reach it in our iteration of the provided list of roles.
+func (r *NotaryRepository) ListTargets(roles ...string) ([]*Target, error) {
 	c, err := r.bootstrapClient()
 	if err != nil {
 		return nil, err
@@ -418,17 +424,60 @@ func (r *NotaryRepository) ListTargets() ([]*Target, error) {
 		return nil, err
 	}
 
+	if len(roles) == 0 {
+		roles = []string{data.CanonicalTargetsRole}
+	}
+	targets := make(map[string]*Target)
+	for _, role := range roles {
+		// we don't need to do anything special with removing role from
+		// roles because listSubtree always processes role and only excludes
+		// descendent delegations that appear in roles.
+		r.listSubtree(targets, role, roles...)
+	}
+
 	var targetList []*Target
-	for name, meta := range r.tufRepo.Targets["targets"].Signed.Targets {
-		target := &Target{Name: name, Hashes: meta.Hashes, Length: meta.Length}
-		targetList = append(targetList, target)
+	for _, v := range targets {
+		targetList = append(targetList, v)
 	}
 
 	return targetList, nil
 }
 
-// GetTargetByName returns a target given a name
-func (r *NotaryRepository) GetTargetByName(name string) (*Target, error) {
+func (r *NotaryRepository) listSubtree(targets map[string]*Target, role string, exclude ...string) {
+	excl := make(map[string]bool)
+	for _, r := range exclude {
+		excl[r] = true
+	}
+	roles := []string{role}
+	for len(roles) > 0 {
+		role = roles[0]
+		roles = roles[1:]
+		tgts, ok := r.tufRepo.Targets[role]
+		if !ok {
+			// not every role has to exist
+			continue
+		}
+		for name, meta := range tgts.Signed.Targets {
+			if _, ok := targets[name]; !ok {
+				targets[name] = &Target{Name: name, Hashes: meta.Hashes, Length: meta.Length}
+			}
+		}
+		for _, d := range tgts.Signed.Delegations.Roles {
+			if !excl[d.Name] {
+				roles = append(roles, d.Name)
+			}
+		}
+	}
+}
+
+// GetTargetByName returns a target given a name. If no roles are passed
+// it uses the targets role and does a search of the entire delegation
+// graph, finding the first entry in a breadth first search of the delegations.
+// If roles are passed, they should be passed in descending priority and
+// the target entry found in the subtree of the highest priority role
+// will be returned
+// See the IMPORTANT section on ListTargets above. Those roles also apply here.
+func (r *NotaryRepository) GetTargetByName(name string, roles ...string) (*Target, error) {
 	c, err := r.bootstrapClient()
 	if err != nil {
 		return nil, err
@@ -442,14 +491,20 @@ func (r *NotaryRepository) GetTargetByName(name string) (*Target, error) {
 		return nil, err
 	}
 
-	meta, err := c.TargetMeta(name)
-	if meta == nil {
-		return nil, fmt.Errorf("No trust data for %s", name)
-	} else if err != nil {
-		return nil, err
+	if len(roles) == 0 {
+		roles = append(roles, data.CanonicalTargetsRole)
 	}
+	var (
+		meta *data.FileMeta
+	)
+	for _, role := range roles {
+		meta = c.TargetMeta(role, name, roles...)
+		if meta != nil {
+			return &Target{Name: name, Hashes: meta.Hashes, Length: meta.Length}, nil
+		}
+	}
+	return nil, fmt.Errorf("No trust data for %s", name)
 
-	return &Target{Name: name, Hashes: meta.Hashes, Length: meta.Length}, nil
 }
 
 // GetChangelist returns the list of the repository's unpublished changes
