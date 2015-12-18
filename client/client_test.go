@@ -943,7 +943,7 @@ func testListTargetWithDelegates(t *testing.T, rootType string) {
 	assert.NoError(t, err, "error creating repository: %s", err)
 
 	latestTarget := addTarget(t, repo, "latest", "../fixtures/intermediate-ca.crt")
-	addTarget(t, repo, "current", "../fixtures/intermediate-ca.crt")
+	currentTarget := addTarget(t, repo, "current", "../fixtures/intermediate-ca.crt")
 
 	// setup delegated targets/level1 role
 	k, err := repo.CryptoService.Create("targets/level1", rootType)
@@ -985,7 +985,23 @@ func testListTargetWithDelegates(t *testing.T, rootType string) {
 
 	fakeServerData(t, repo, mux, keys)
 
-	targets, err := repo.ListTargets("targets/level1", data.CanonicalTargetsRole)
+	// test default listing
+	targets, err := repo.ListTargets()
+	assert.NoError(t, err)
+
+	// Should be two targets
+	assert.Len(t, targets, 4, "unexpected number of targets returned by ListTargets")
+
+	sort.Stable(targetSorter(targets))
+
+	// current should be first.
+	assert.Equal(t, currentTarget, targets[0], "current target does not match")
+	assert.Equal(t, latestTarget, targets[1], "latest target does not match")
+	assert.Equal(t, level2Target, targets[2], "level2 target does not match")
+	assert.Equal(t, otherTarget, targets[3], "other target does not match")
+
+	// test listing with priority specified
+	targets, err = repo.ListTargets("targets/level1", data.CanonicalTargetsRole)
 	assert.NoError(t, err)
 
 	// Should be two targets
