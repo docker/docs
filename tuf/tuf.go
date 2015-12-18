@@ -212,16 +212,18 @@ func (tr *Repo) UpdateDelegations(role *data.Role, keys []data.PublicKey) error 
 	}
 	parent := filepath.Dir(role.Name)
 
-	// check the parent role
-	if parentRole := tr.keysDB.GetRole(parent); parentRole == nil {
-		return data.ErrInvalidRole{Role: role.Name, Reason: "parent role not found"}
+	if err := tr.VerifyCanSign(parent); err != nil {
+		return err
 	}
 
 	// check the parent role's metadata
 	p, ok := tr.Targets[parent]
 	if !ok { // the parent targetfile may not exist yet - if not, then create it
-		p = data.NewTargets()
-		tr.Targets[parent] = p
+		var err error
+		p, err = tr.InitTargets(parent)
+		if err != nil {
+			return err
+		}
 	}
 
 	for _, k := range keys {
@@ -270,9 +272,20 @@ func (tr *Repo) DeleteDelegation(role data.Role) error {
 	name := role.Name
 
 	parent := filepath.Dir(name)
+	if err := tr.VerifyCanSign(parent); err != nil {
+		return err
+	}
+
+	// delete delegated data from Targets map and Snapshot - if they don't
+	// exist, these are no-op
+	delete(tr.Targets, name)
+	tr.Snapshot.DeleteMeta(name)
+
 	p, ok := tr.Targets[parent]
 	if !ok {
-		return data.ErrInvalidRole{Role: name, Reason: "parent role not found"}
+		// if there is no parent metadata (the role exists though), then this
+		// is as good as done.
+		return nil
 	}
 
 	foundAt := utils.FindRoleIndex(p.Signed.Delegations.Roles, name)
@@ -289,10 +302,6 @@ func (tr *Repo) DeleteDelegation(role data.Role) error {
 		utils.RemoveUnusedKeys(p)
 
 		p.Dirty = true
-
-		// delete delegated data from Targets map and Snapshot
-		delete(tr.Targets, name)
-		tr.Snapshot.DeleteMeta(name)
 	} // if the role wasn't found, it's a good as deleted
 
 	return nil
@@ -306,7 +315,7 @@ func (tr *Repo) InitRepo(consistent bool) error {
 	if err := tr.InitRoot(consistent); err != nil {
 		return err
 	}
-	if err := tr.InitTargets(data.CanonicalTargetsRole); err != nil {
+	if _, err := tr.InitTargets(data.CanonicalTargetsRole); err != nil {
 		return err
 	}
 	if err := tr.InitSnapshot(); err != nil {
@@ -341,18 +350,18 @@ func (tr *Repo) InitRoot(consistent bool) error {
 	return nil
 }
 
-// InitTargets initializes an empty targets
-func (tr *Repo) InitTargets(role string) error {
+// InitTargets initializes an empty targets, and returns the new empty target
+func (tr *Repo) InitTargets(role string) (*data.SignedTargets, error) {
 	r := data.Role{Name: role}
 	if !r.IsDelegation() && !(data.CanonicalRole(role) == data.CanonicalTargetsRole) {
-		return data.ErrInvalidRole{
+		return nil, data.ErrInvalidRole{
 			Role:   role,
 			Reason: fmt.Sprintf("role is not a valid targets role name: %s", role),
 		}
 	}
 	targets := data.NewTargets()
 	tr.Targets[data.RoleName(role)] = targets
-	return nil
+	return targets, nil
 }
 
 // InitSnapshot initializes a snapshot based on the current root and targets
@@ -510,22 +519,48 @@ func (tr Repo) FindTarget(path string) *data.FileMeta {
 	return walkTargets("targets")
 }
 
+// VerifyCanSign returns nil if the role exists and we have at least one
+// signing key for the role, false otherwise.  This does not check that we have
+// enough signing keys to meet the threshold, since we want to support the use
+// case of multiple signers for a role.  It returns an error if the role doesn't
+// exist or if there are no signing keys.
+func (tr *Repo) VerifyCanSign(roleName string) error {
+	role := tr.keysDB.GetRole(roleName)
+	if role == nil {
+		return data.ErrInvalidRole{Role: roleName, Reason: "does not exist"}
+	}
+
+	for _, keyID := range role.KeyIDs {
+		p, _, err := tr.cryptoService.GetPrivateKey(keyID)
+		if err == nil && p != nil {
+			return nil
+		}
+	}
+	return signed.ErrNoKeys{KeyIDs: role.KeyIDs}
+}
+
 // AddTargets will attempt to add the given targets specifically to
 // the directed role. If the metadata for the role doesn't exist yet,
 // AddTargets will create one.
 func (tr *Repo) AddTargets(role string, targets data.Files) (data.Files, error) {
-	// check the role exists
-	r := tr.keysDB.GetRole(role)
-	if r == nil {
-		return nil, data.ErrInvalidRole{Role: role, Reason: "does not exist"}
+
+	err := tr.VerifyCanSign(role)
+	if err != nil {
+		return nil, err
 	}
 
 	// check the role's metadata
 	t, ok := tr.Targets[role]
 	if !ok { // the targetfile may not exist yet - if not, then create it
-		t = data.NewTargets()
-		tr.Targets[role] = t
+		var err error
+		t, err = tr.InitTargets(role)
+		if err != nil {
+			return nil, err
+		}
 	}
+
+	// VerifyCanSign already makes sure this is not nil
+	r := tr.keysDB.GetRole(role)
 
 	invalid := make(data.Files)
 	for path, target := range targets {
@@ -546,15 +581,19 @@ func (tr *Repo) AddTargets(role string, targets data.Files) (data.Files, error) 
 
 // RemoveTargets removes the given target (paths) from the given target role (delegation)
 func (tr *Repo) RemoveTargets(role string, targets ...string) error {
-	t, ok := tr.Targets[role]
-	if !ok {
-		return data.ErrInvalidRole{Role: role, Reason: "does not exist"}
+	if err := tr.VerifyCanSign(role); err != nil {
+		return err
 	}
 
-	for _, path := range targets {
-		delete(t.Signed.Targets, path)
+	// if the role exists but metadata does not yet, then our work is done
+	t, ok := tr.Targets[role]
+	if ok {
+		for _, path := range targets {
+			delete(t.Signed.Targets, path)
+		}
+		t.Dirty = true
 	}
-	t.Dirty = true
+
 	return nil
 }
 
