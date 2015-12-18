@@ -405,6 +405,11 @@ func (r *NotaryRepository) RemoveTarget(targetName string, roles ...string) erro
 
 // ListTargets lists all targets for the current repository. The list of
 // roles should be passed in order from highest to lowest priority.
+// IMPORTANT: if you pass a set of roles such as [ "targets/a", "targets/x"
+// "targets/a/b" ], even though "targets/a/b" is part of the "targets/a" subtree
+// its entries will be strictly shadowed by those in other parts of the "targets/a"
+// subtree and also the "targets/x" subtree, as we will defer parsing it until
+// we explicitly reach it in our iteration of the provided list of roles.
 func (r *NotaryRepository) ListTargets(roles ...string) ([]*Target, error) {
 	c, err := r.bootstrapClient()
 	if err != nil {
@@ -471,6 +476,7 @@ func (r *NotaryRepository) listSubtree(targets map[string]*Target, role string, 
 // If roles are passed, they should be passed in descending priority and
 // the target entry found in the subtree of the highest priority role
 // will be returned
+// See the IMPORTANT section on ListTargets above. Those roles also apply here.
 func (r *NotaryRepository) GetTargetByName(name string, roles ...string) (*Target, error) {
 	c, err := r.bootstrapClient()
 	if err != nil {
