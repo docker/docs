@@ -50,6 +50,7 @@ func TestPopStringWrongType(t *testing.T) {
 	_, err := s.PopString()
 	assert.Error(t, err)
 	assert.IsType(t, ErrBadTypeCast{}, err)
+	assert.Len(t, s.s, 1)
 }
 
 func TestPopStringEmpty(t *testing.T) {
