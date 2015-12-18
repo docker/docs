@@ -116,13 +116,21 @@ func ValidRole(name string) bool {
 // IsDelegation checks if the role is a delegation or a root role
 func IsDelegation(role string) bool {
 	targetsBase := fmt.Sprintf("%s/", ValidRoles[CanonicalTargetsRole])
-	whitelistedChars, err := regexp.MatchString("^[a-zA-Z0-9_/]*$", role)
+
+	whitelistedChars, err := regexp.MatchString("^[-a-z0-9_/]+$", role)
 	if err != nil {
 		return false
 	}
+
+	// Limit size of full role string to 255 chars for db column size limit
+	correctLength := len(role) < 256
+
 	// Removes ., .., extra slashes, and trailing slash
 	isClean := filepath.Clean(role) == role
-	return strings.HasPrefix(role, targetsBase) && whitelistedChars && isClean
+	return strings.HasPrefix(role, targetsBase) &&
+		whitelistedChars &&
+		correctLength &&
+		isClean
 }
 
 // RootRole is a cut down role as it appears in the root.json
