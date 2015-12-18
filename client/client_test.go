@@ -855,9 +855,9 @@ func fakeServerData(t *testing.T, repo *NotaryRepository, mux *http.ServeMux,
 
 	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/targets/level2.json",
 		func(w http.ResponseWriter, r *http.Request) {
-			level1JSON, err := json.Marshal(signedLevel2)
+			level2JSON, err := json.Marshal(signedLevel2)
 			assert.NoError(t, err)
-			fmt.Fprint(w, string(level1JSON))
+			fmt.Fprint(w, string(level2JSON))
 		})
 }
 
