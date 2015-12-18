@@ -404,7 +404,7 @@ func (r *NotaryRepository) RemoveTarget(targetName string, roles ...string) erro
 }
 
 // ListTargets lists all targets for the current repository. The list of
-// roles should be passed in order from lowest to highest priority.
+// roles should be passed in order from highest to lowest priority.
 func (r *NotaryRepository) ListTargets(roles ...string) ([]*Target, error) {
 	c, err := r.bootstrapClient()
 	if err != nil {
@@ -453,8 +453,10 @@ func (r *NotaryRepository) listSubtree(targets map[string]*Target, role string, 
 			continue
 		}
 		for name, meta := range tgts.Signed.Targets {
-			target := &Target{Name: name, Hashes: meta.Hashes, Length: meta.Length}
-			targets[name] = target
+			if _, ok := targets[name]; !ok {
+				target := &Target{Name: name, Hashes: meta.Hashes, Length: meta.Length}
+				targets[name] = target
+			}
 		}
 		for _, d := range tgts.Signed.Delegations.Roles {
 			if !excl[d.Name] {
@@ -467,7 +469,7 @@ func (r *NotaryRepository) listSubtree(targets map[string]*Target, role string, 
 // GetTargetByName returns a target given a name. If no roles are passed
 // it uses the targets role and does a search of the entire delegation
 // graph, finding the first entry in a breadth first search of the delegations.
-// If roles are passed, they should be passed in ascending priority and
+// If roles are passed, they should be passed in descending priority and
 // the target entry found in the subtree of the highest priority role
 // will be returned
 func (r *NotaryRepository) GetTargetByName(name string, roles ...string) (*Target, error) {
@@ -490,8 +492,8 @@ func (r *NotaryRepository) GetTargetByName(name string, roles ...string) (*Targe
 	var (
 		meta *data.FileMeta
 	)
-	for i := len(roles) - 1; i >= 0; i-- {
-		meta = c.TargetMeta(roles[i], name, roles...)
+	for _, role := range roles {
+		meta = c.TargetMeta(role, name, roles...)
 		if meta != nil {
 			return &Target{Name: name, Hashes: meta.Hashes, Length: meta.Length}, nil
 		}

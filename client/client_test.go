@@ -957,7 +957,7 @@ func testListTargetWithDelegates(t *testing.T, rootType string) {
 
 	fakeServerData(t, repo, mux, keys)
 
-	targets, err := repo.ListTargets(data.CanonicalTargetsRole, "targets/level1")
+	targets, err := repo.ListTargets("targets/level1", data.CanonicalTargetsRole)
 	assert.NoError(t, err)
 
 	// Should be two targets
@@ -975,7 +975,7 @@ func testListTargetWithDelegates(t *testing.T, rootType string) {
 	assert.NoError(t, err)
 	assert.Equal(t, latestTarget, newLatestTarget, "latest target does not match")
 
-	newCurrentTarget, err := repo.GetTargetByName("current", "targets", "targets/level1")
+	newCurrentTarget, err := repo.GetTargetByName("current", "targets/level1", "targets")
 	assert.NoError(t, err)
 	assert.Equal(t, delegatedTarget, newCurrentTarget, "current target does not match")
 
