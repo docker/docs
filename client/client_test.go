@@ -1496,7 +1496,7 @@ func TestPublishDelegations(t *testing.T) {
 	// targets/a, because these should execute in order
 	for _, delgName := range []string{"targets/a", "targets/a/b", "targets/c"} {
 		assert.NoError(t,
-			repo1.AddDelegation(delgName, 1, []data.PublicKey{delgKey}),
+			repo1.AddDelegation(delgName, 1, []data.PublicKey{delgKey}, []string{""}),
 			"error creating delegation")
 	}
 	assert.Len(t, getChanges(t, repo1), 3, "wrong number of changelist files found")
@@ -1505,7 +1505,7 @@ func TestPublishDelegations(t *testing.T) {
 
 	// this should not publish, because targets/z doesn't exist
 	assert.NoError(t,
-		repo1.AddDelegation("targets/z/y", 1, []data.PublicKey{delgKey}),
+		repo1.AddDelegation("targets/z/y", 1, []data.PublicKey{delgKey}, []string{""}),
 		"error creating delegation")
 	assert.Len(t, getChanges(t, repo1), 1, "wrong number of changelist files found")
 	assert.Error(t, repo1.Publish())
@@ -1587,7 +1587,7 @@ func TestPublishTargetsDelgationScopeNoFallbackIfNoKeys(t *testing.T) {
 	aPubKey := data.PublicKeyFromPrivate(aPrivKey)
 
 	// ensure that the role exists
-	assert.NoError(t, repo.AddDelegation("targets/a", 1, []data.PublicKey{aPubKey}))
+	assert.NoError(t, repo.AddDelegation("targets/a", 1, []data.PublicKey{aPubKey}, []string{""}))
 	assert.NoError(t, repo.Publish())
 
 	// add a target to targets/a/b - no role b, so it falls back on a, which
@@ -1624,7 +1624,7 @@ func TestPublishTargetsDelgationSuccessLocallyHasRoles(t *testing.T) {
 
 	for _, delgName := range []string{"targets/a", "targets/a/b"} {
 		assert.NoError(t,
-			repo.AddDelegation(delgName, 1, []data.PublicKey{delgKey}),
+			repo.AddDelegation(delgName, 1, []data.PublicKey{delgKey}, []string{""}),
 			"error creating delegation")
 	}
 
@@ -1672,10 +1672,10 @@ func TestPublishTargetsDelgationSuccessNeedsToDownloadRoles(t *testing.T) {
 
 	// owner creates delegations, adds the delegated key to them, and publishes them
 	assert.NoError(t,
-		ownerRepo.AddDelegation("targets/a", 1, []data.PublicKey{aKey}),
+		ownerRepo.AddDelegation("targets/a", 1, []data.PublicKey{aKey}, []string{""}),
 		"error creating delegation")
 	assert.NoError(t,
-		ownerRepo.AddDelegation("targets/a/b", 1, []data.PublicKey{bKey}),
+		ownerRepo.AddDelegation("targets/a/b", 1, []data.PublicKey{bKey}, []string{""}),
 		"error creating delegation")
 
 	assert.NoError(t, ownerRepo.Publish())

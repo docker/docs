@@ -228,7 +228,7 @@ func TestUpdateDelegationsMissingParentKey(t *testing.T) {
 	roleKey, err := ed25519.Create("Invalid Role", data.ED25519Key)
 	assert.NoError(t, err)
 
-	role, err := data.NewRole("targets/role", 1, []string{}, []string{}, []string{})
+	role, err := data.NewRole("targets/role", 1, []string{}, []string{""}, []string{})
 	assert.NoError(t, err)
 
 	err = repo.UpdateDelegations(role, data.KeyList{roleKey})
@@ -630,12 +630,12 @@ func TestGetDelegationRoleAndMetadataExistDelegationExists(t *testing.T) {
 	assert.NoError(t, err)
 
 	role, err := data.NewRole(
-		"targets/level1", 1, []string{testKey.ID()}, []string{}, []string{})
+		"targets/level1", 1, []string{testKey.ID()}, []string{""}, []string{})
 	assert.NoError(t, err)
 	assert.NoError(t, repo.UpdateDelegations(role, data.KeyList{testKey}))
 
 	role, err = data.NewRole(
-		"targets/level1/level2", 1, []string{testKey.ID()}, []string{}, []string{})
+		"targets/level1/level2", 1, []string{testKey.ID()}, []string{""}, []string{})
 	assert.NoError(t, err)
 	assert.NoError(t, repo.UpdateDelegations(role, data.KeyList{testKey}))
 
@@ -655,7 +655,7 @@ func TestGetDelegationRoleAndMetadataExistDelegationDoesntExists(t *testing.T) {
 	assert.NoError(t, err)
 
 	role, err := data.NewRole(
-		"targets/level1", 1, []string{testKey.ID()}, []string{}, []string{})
+		"targets/level1", 1, []string{testKey.ID()}, []string{""}, []string{})
 	assert.NoError(t, err)
 	assert.NoError(t, repo.UpdateDelegations(role, data.KeyList{testKey}))
 
@@ -677,7 +677,7 @@ func TestGetDelegationRoleAndMetadataDoesntExists(t *testing.T) {
 	assert.NoError(t, err)
 
 	role, err := data.NewRole(
-		"targets/level1", 1, []string{testKey.ID()}, []string{}, []string{})
+		"targets/level1", 1, []string{testKey.ID()}, []string{""}, []string{})
 	assert.NoError(t, err)
 	assert.NoError(t, repo.UpdateDelegations(role, data.KeyList{testKey}))
 
@@ -744,7 +744,7 @@ func TestAddTargetsRoleExistsAndMetadataDoesntExist(t *testing.T) {
 	testKey, err := ed25519.Create("targets/test", data.ED25519Key)
 	assert.NoError(t, err)
 	role, err := data.NewRole(
-		"targets/test", 1, []string{testKey.ID()}, []string{"test"}, []string{})
+		"targets/test", 1, []string{testKey.ID()}, []string{""}, []string{})
 	assert.NoError(t, err)
 
 	err = repo.UpdateDelegations(role, data.KeyList{testKey})
@@ -883,7 +883,7 @@ func TestRemoveTargetsNoSigningKeys(t *testing.T) {
 	testKey, err := ed25519.Create("targets/test", data.ED25519Key)
 	assert.NoError(t, err)
 	role, err := data.NewRole(
-		"targets/test", 1, []string{testKey.ID()}, []string{"test"}, []string{})
+		"targets/test", 1, []string{testKey.ID()}, []string{""}, []string{})
 	assert.NoError(t, err)
 
 	err = repo.UpdateDelegations(role, data.KeyList{testKey})
