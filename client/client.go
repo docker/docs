@@ -454,8 +454,7 @@ func (r *NotaryRepository) listSubtree(targets map[string]*Target, role string, 
 		}
 		for name, meta := range tgts.Signed.Targets {
 			if _, ok := targets[name]; !ok {
-				target := &Target{Name: name, Hashes: meta.Hashes, Length: meta.Length}
-				targets[name] = target
+				targets[name] = &Target{Name: name, Hashes: meta.Hashes, Length: meta.Length}
 			}
 		}
 		for _, d := range tgts.Signed.Delegations.Roles {
