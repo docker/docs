@@ -754,7 +754,7 @@ func TestApplyChangelistCreatesDelegation(t *testing.T) {
 	newKey, err := cs.Create("targets/level1", data.ED25519Key)
 	assert.NoError(t, err)
 
-	r, err := data.NewRole("targets/level1", 1, []string{newKey.ID()}, nil, nil)
+	r, err := data.NewRole("targets/level1", 1, []string{newKey.ID()}, []string{""}, nil)
 	assert.NoError(t, err)
 	repo.UpdateDelegations(r, []data.PublicKey{newKey})
 	delete(repo.Targets, "targets/level1")
@@ -792,11 +792,11 @@ func TestApplyChangelistTargetsToMultipleRoles(t *testing.T) {
 	newKey, err := cs.Create("targets/level1", data.ED25519Key)
 	assert.NoError(t, err)
 
-	r, err := data.NewRole("targets/level1", 1, []string{newKey.ID()}, nil, nil)
+	r, err := data.NewRole("targets/level1", 1, []string{newKey.ID()}, []string{""}, nil)
 	assert.NoError(t, err)
 	repo.UpdateDelegations(r, []data.PublicKey{newKey})
 
-	r, err = data.NewRole("targets/level2", 1, []string{newKey.ID()}, nil, nil)
+	r, err = data.NewRole("targets/level2", 1, []string{newKey.ID()}, []string{""}, nil)
 	assert.NoError(t, err)
 	repo.UpdateDelegations(r, []data.PublicKey{newKey})
 
@@ -897,4 +897,41 @@ func TestChangeTargetMetaFallbackFailsInvalidRole(t *testing.T) {
 	})
 	assert.Error(t, err)
 	assert.IsType(t, data.ErrInvalidRole{}, err)
+}
+
+// If applying a change fails due to a prefix error, it does not fall back
+// on the parent.
+func TestChangeTargetMetaDoesntFallbackIfPrefixError(t *testing.T) {
+	_, repo, cs := testutils.EmptyRepo()
+
+	newKey, err := cs.Create("targets/level1", data.ED25519Key)
+	assert.NoError(t, err)
+
+	r, err := data.NewRole("targets/level1", 1, []string{newKey.ID()},
+		[]string{"pathprefix"}, nil)
+	assert.NoError(t, err)
+	repo.UpdateDelegations(r, []data.PublicKey{newKey})
+
+	hash := sha256.Sum256([]byte{})
+	f := &data.FileMeta{
+		Length: 1,
+		Hashes: map[string][]byte{
+			"sha256": hash[:],
+		},
+	}
+	fjson, err := json.Marshal(f)
+	assert.NoError(t, err)
+
+	err = changeTargetMeta(repo, &changelist.TufChange{
+		Actn:       changelist.ActionCreate,
+		Role:       "targets/level1",
+		ChangeType: "target",
+		ChangePath: "notPathPrefix",
+		Data:       fjson,
+	})
+	assert.Error(t, err)
+
+	// no target in targets or targets/latest
+	assert.Empty(t, repo.Targets[data.CanonicalTargetsRole].Signed.Targets)
+	assert.Empty(t, repo.Targets["targets/level1"].Signed.Targets)
 }

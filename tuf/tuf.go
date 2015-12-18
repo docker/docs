@@ -108,8 +108,7 @@ func (tr *Repo) AddBaseKeys(role string, keys ...data.PublicKey) error {
 			tr.Snapshot.Dirty = true
 		}
 	case data.CanonicalTargetsRole:
-		target, ok := tr.Targets[data.CanonicalTargetsRole]
-		if ok {
+		if target, ok := tr.Targets[data.CanonicalTargetsRole]; ok {
 			target.Dirty = true
 		}
 	case data.CanonicalTimestampRole:
