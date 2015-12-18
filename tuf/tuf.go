@@ -99,8 +99,25 @@ func (tr *Repo) AddBaseKeys(role string, keys ...data.PublicKey) error {
 	}
 	tr.keysDB.AddRole(r)
 	tr.Root.Dirty = true
-	return nil
 
+	// also, whichever role was switched out needs to be re-signed
+	// root has already been marked dirty
+	switch role {
+	case data.CanonicalSnapshotRole:
+		if tr.Snapshot != nil {
+			tr.Snapshot.Dirty = true
+		}
+	case data.CanonicalTargetsRole:
+		target, ok := tr.Targets[data.CanonicalTargetsRole]
+		if ok {
+			target.Dirty = true
+		}
+	case data.CanonicalTimestampRole:
+		if tr.Timestamp != nil {
+			tr.Timestamp.Dirty = true
+		}
+	}
+	return nil
 }
 
 // ReplaceBaseKeys is used to replace all keys for the given role with the new keys

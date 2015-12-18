@@ -584,10 +584,9 @@ func (r *NotaryRepository) Publish() error {
 		updatedFiles[data.CanonicalRootRole] = rootJSON
 	}
 
-	// iterate through all the targets files - if they are dirty, or if they
-	// are the canonical target role, then sign and update
+	// iterate through all the targets files - if they are dirty, sign and update
 	for roleName, roleObj := range r.tufRepo.Targets {
-		if roleName == data.CanonicalTargetsRole || roleObj.Dirty {
+		if roleObj.Dirty {
 			targetsJSON, err := serializeCanonicalRole(r.tufRepo, roleName)
 			if err != nil {
 				return err

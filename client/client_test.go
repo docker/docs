@@ -1550,7 +1550,7 @@ func TestPublishTargetsDelgationScopeNoFallbackIfNoKeys(t *testing.T) {
 	assert.Len(t, getChanges(t, repo), 1, "wrong number of changelist files found")
 
 	// Now Publish should fail
-	assert.NoError(t, repo.Publish())
+	assert.Error(t, repo.Publish())
 	assert.Len(t, getChanges(t, repo), 1, "wrong number of changelist files found")
 
 	targets, err := repo.ListTargets("targets", "targets/a", "targets/a/b")
@@ -1607,24 +1607,31 @@ func TestPublishTargetsDelgationSuccessNeedsToDownloadRoles(t *testing.T) {
 	defer ts.Close()
 
 	// this is the original repo - it owns the root/targets keys and creates
-	// the delegation
-	ownerRepo, _ := initializeRepo(t, data.ECDSAKey, tempDirs[0], gun, ts.URL, false)
+	// the delegation to which it doesn't have the key (so server snapshot
+	// signing would be required)
+	ownerRepo, _ := initializeRepo(t, data.ECDSAKey, tempDirs[0], gun, ts.URL, true)
 	// this is a user, or otherwise a repo that only has access to the delegation
 	// key so it can publish targets to the delegated role
 	delgRepo, err := NewNotaryRepository(tempDirs[1], gun, ts.URL,
 		http.DefaultTransport, passphraseRetriever)
 	assert.NoError(t, err, "error creating repository: %s", err)
 
-	// create delegated key on the delegated repo
-	delgKey, err := delgRepo.CryptoService.Create("targets/a", data.ECDSAKey)
+	// create a key on the owner repo
+	aKey, err := ownerRepo.CryptoService.Create("targets/a", data.ECDSAKey)
+	assert.NoError(t, err, "error creating delegation key")
+
+	// create a key on the delegated repo
+	bKey, err := delgRepo.CryptoService.Create("targets/a/b", data.ECDSAKey)
 	assert.NoError(t, err, "error creating delegation key")
 
 	// owner creates delegations, adds the delegated key to them, and publishes them
-	for _, delgName := range []string{"targets/a", "targets/a/b"} {
-		assert.NoError(t,
-			ownerRepo.AddDelegation(delgName, 1, []data.PublicKey{delgKey}),
-			"error creating delegation")
-	}
+	assert.NoError(t,
+		ownerRepo.AddDelegation("targets/a", 1, []data.PublicKey{aKey}),
+		"error creating delegation")
+	assert.NoError(t,
+		ownerRepo.AddDelegation("targets/a/b", 1, []data.PublicKey{bKey}),
+		"error creating delegation")
+
 	assert.NoError(t, ownerRepo.Publish())
 
 	// delegated repo now publishes to delegated roles, but it will need
