@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"path/filepath"
 	"time"
 
 	"github.com/Sirupsen/logrus"
@@ -122,6 +123,22 @@ func changeTargetsDelegation(repo *tuf.Repo, c changelist.Change) error {
 
 }
 
+// applies a function repeatedly, falling back on the parent role, until it no
+// longer can
+func doWithRoleFallback(role string, doFunc func(string) error) error {
+	for role == data.CanonicalTargetsRole || data.IsDelegation(role) {
+		err := doFunc(role)
+		if err == nil {
+			return nil
+		}
+		if _, ok := err.(data.ErrInvalidRole); !ok {
+			return err
+		}
+		role = filepath.Dir(role)
+	}
+	return data.ErrInvalidRole{Role: role}
+}
+
 func changeTargetMeta(repo *tuf.Repo, c changelist.Change) error {
 	var err error
 	switch c.Action() {
@@ -133,13 +150,25 @@ func changeTargetMeta(repo *tuf.Repo, c changelist.Change) error {
 			return err
 		}
 		files := data.Files{c.Path(): *meta}
-		_, err = repo.AddTargets(c.Scope(), files)
+
+		err = doWithRoleFallback(c.Scope(), func(role string) error {
+			_, e := repo.AddTargets(role, files)
+			return e
+		})
 		if err != nil {
 			logrus.Errorf("couldn't add target to %s: %s", c.Scope(), err.Error())
 		}
+
 	case changelist.ActionDelete:
 		logrus.Debug("changelist remove: ", c.Path())
-		err = repo.RemoveTargets(c.Scope(), c.Path())
+
+		err = doWithRoleFallback(c.Scope(), func(role string) error {
+			return repo.RemoveTargets(role, c.Path())
+		})
+		if err != nil {
+			logrus.Errorf("couldn't remove target from %s: %s", c.Scope(), err.Error())
+		}
+
 	default:
 		logrus.Debug("action not yet supported: ", c.Action())
 	}
