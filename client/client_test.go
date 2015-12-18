@@ -1140,28 +1140,74 @@ func testGetChangelist(t *testing.T, rootType string) {
 	assert.Equal(t, "latest", latestChange.Path())
 }
 
-// Create a repo, instantiate a notary server, and publish the repo to the
-// server, signing all the non-timestamp metadata.
+// Create a repo, instantiate a notary server, and publish the bare repo to the
+// server, signing all the non-timestamp metadata.  Root, targets, and snapshots
+// (if locally signing) should be sent.
+func TestPublishBareRepo(t *testing.T) {
+	testPublishNoData(t, data.ECDSAKey, true)
+	testPublishNoData(t, data.ECDSAKey, false)
+	if !testing.Short() {
+		testPublishNoData(t, data.RSAKey, true)
+		testPublishNoData(t, data.RSAKey, false)
+	}
+}
+
+func testPublishNoData(t *testing.T, rootType string, serverManagesSnapshot bool) {
+	var tempDirs [2]string
+	for i := 0; i < 2; i++ {
+		tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+		assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+		defer os.RemoveAll(tempBaseDir)
+		tempDirs[i] = tempBaseDir
+	}
+
+	gun := "docker.com/notary"
+	ts := fullTestServer(t)
+	defer ts.Close()
+
+	repo1, _ := initializeRepo(t, rootType, tempDirs[0], gun, ts.URL,
+		serverManagesSnapshot)
+	assert.NoError(t, repo1.Publish())
+
+	// use another repo to check metadata
+	repo2, err := NewNotaryRepository(tempDirs[1], gun, ts.URL,
+		http.DefaultTransport, passphraseRetriever)
+	assert.NoError(t, err, "error creating repository: %s", err)
+
+	targets, err := repo2.ListTargets()
+	assert.NoError(t, err)
+	assert.Empty(t, targets)
+
+	for role := range data.ValidRoles {
+		// we don't cache timstamp metadata
+		if role != data.CanonicalTimestampRole {
+			assertRepoHasExpectedMetadata(t, repo2, role, true)
+		}
+	}
+}
+
+// Create a repo, instantiate a notary server, and publish the repo with
+// some targets to the server, signing all the non-timestamp metadata.
 // We test this with both an RSA and ECDSA root key
 func TestPublishClientHasSnapshotKey(t *testing.T) {
-	testPublish(t, data.ECDSAKey, false)
+	testPublishWithData(t, data.ECDSAKey, false)
 	if !testing.Short() {
-		testPublish(t, data.RSAKey, false)
+		testPublishWithData(t, data.RSAKey, false)
 	}
 }
 
 // Create a repo, instantiate a notary server (designating the server as the
-// snapshot signer) , and publish the repo to the server, signing the root and
-// targets metadata only.  The server should sign just fine.
+// snapshot signer) , and publish the repo with some targets to the server,
+// signing the root and targets metadata only.  The server should sign just fine.
 // We test this with both an RSA and ECDSA root key
 func TestPublishAfterInitServerHasSnapshotKey(t *testing.T) {
-	testPublish(t, data.ECDSAKey, true)
+	testPublishWithData(t, data.ECDSAKey, true)
 	if !testing.Short() {
-		testPublish(t, data.RSAKey, true)
+		testPublishWithData(t, data.RSAKey, true)
 	}
 }
 
-func testPublish(t *testing.T, rootType string, serverManagesSnapshot bool) {
+func testPublishWithData(t *testing.T, rootType string, serverManagesSnapshot bool) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("/tmp", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)

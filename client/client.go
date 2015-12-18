@@ -522,7 +522,7 @@ func (r *NotaryRepository) GetChangelist() (changelist.Changelist, error) {
 // Publish pushes the local changes in signed material to the remote notary-server
 // Conceptually it performs an operation similar to a `git rebase`
 func (r *NotaryRepository) Publish() error {
-	var updateRoot bool
+	var initialPublish bool
 	// attempt to initialize the repo from the remote store
 	c, err := r.bootstrapClient()
 	if err != nil {
@@ -538,10 +538,11 @@ func (r *NotaryRepository) Publish() error {
 				return err
 			}
 			// We had local data but the server doesn't know about the repo yet,
-			// ensure we will push the initial root file.  The root may not
-			// be marked as Dirty, since there may not be any changes that
-			// update it, so use a different boolean.
-			updateRoot = true
+			// ensure we will push the initial root and targets file.  Either or
+			// both of the root and targets may not be marked as Dirty, since
+			// there may not be any changes that update them, so use a
+			// different boolean.
+			initialPublish = true
 		} else {
 			// The remote store returned an error other than 404. We're
 			// unable to determine if the repo has been initialized or not.
@@ -576,7 +577,7 @@ func (r *NotaryRepository) Publish() error {
 	updatedFiles := make(map[string][]byte)
 
 	// check if our root file is nearing expiry. Resign if it is.
-	if nearExpiry(r.tufRepo.Root) || r.tufRepo.Root.Dirty || updateRoot {
+	if nearExpiry(r.tufRepo.Root) || r.tufRepo.Root.Dirty || initialPublish {
 		rootJSON, err := serializeCanonicalRole(r.tufRepo, data.CanonicalRootRole)
 		if err != nil {
 			return err
@@ -586,7 +587,7 @@ func (r *NotaryRepository) Publish() error {
 
 	// iterate through all the targets files - if they are dirty, sign and update
 	for roleName, roleObj := range r.tufRepo.Targets {
-		if roleObj.Dirty {
+		if roleObj.Dirty || (roleName == data.CanonicalTargetsRole && initialPublish) {
 			targetsJSON, err := serializeCanonicalRole(r.tufRepo, roleName)
 			if err != nil {
 				return err
