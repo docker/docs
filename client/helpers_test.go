@@ -763,3 +763,116 @@ func TestApplyTargetsDelegationParentDoesntExist(t *testing.T) {
 	assert.Error(t, err)
 	assert.IsType(t, data.ErrInvalidRole{}, err)
 }
+
+// Each change applies only to the role specified
+func TestApplyChangelistTargetsToMultipleRoles(t *testing.T) {
+	_, repo, cs := testutils.EmptyRepo()
+
+	newKey, err := cs.Create("targets/level1", data.ED25519Key)
+	assert.NoError(t, err)
+
+	r, err := data.NewRole("targets/level1", 1, []string{newKey.ID()}, nil, nil)
+	assert.NoError(t, err)
+	repo.UpdateDelegations(r, []data.PublicKey{newKey})
+
+	r, err = data.NewRole("targets/level2", 1, []string{newKey.ID()}, nil, nil)
+	assert.NoError(t, err)
+	repo.UpdateDelegations(r, []data.PublicKey{newKey})
+
+	hash := sha256.Sum256([]byte{})
+	f := &data.FileMeta{
+		Length: 1,
+		Hashes: map[string][]byte{
+			"sha256": hash[:],
+		},
+	}
+	fjson, err := json.Marshal(f)
+	assert.NoError(t, err)
+
+	cl := changelist.NewMemChangelist()
+	assert.NoError(t, cl.Add(&changelist.TufChange{
+		Actn:       changelist.ActionCreate,
+		Role:       "targets/level1",
+		ChangeType: "target",
+		ChangePath: "latest",
+		Data:       fjson,
+	}))
+	assert.NoError(t, cl.Add(&changelist.TufChange{
+		Actn:       changelist.ActionDelete,
+		Role:       "targets/level2",
+		ChangeType: "target",
+		ChangePath: "latest",
+		Data:       nil,
+	}))
+
+	assert.NoError(t, applyChangelist(repo, cl))
+	_, ok := repo.Targets["targets/level1"].Signed.Targets["latest"]
+	assert.True(t, ok)
+	assert.Empty(t, repo.Targets["targets/level2"].Signed.Targets)
+}
+
+// ApplyTargets falls back to role that exists when adding or deleting a change
+func TestApplyChangelistTargetsFallbackRoles(t *testing.T) {
+	_, repo, _ := testutils.EmptyRepo()
+
+	hash := sha256.Sum256([]byte{})
+	f := &data.FileMeta{
+		Length: 1,
+		Hashes: map[string][]byte{
+			"sha256": hash[:],
+		},
+	}
+	fjson, err := json.Marshal(f)
+	assert.NoError(t, err)
+
+	cl := changelist.NewMemChangelist()
+	assert.NoError(t, cl.Add(&changelist.TufChange{
+		Actn:       changelist.ActionCreate,
+		Role:       "targets/level1/level2/level3/level4",
+		ChangeType: "target",
+		ChangePath: "latest",
+		Data:       fjson,
+	}))
+
+	assert.NoError(t, applyChangelist(repo, cl))
+	_, ok := repo.Targets[data.CanonicalTargetsRole].Signed.Targets["latest"]
+	assert.True(t, ok)
+
+	// now delete and assert it applies to
+	cl = changelist.NewMemChangelist()
+	assert.NoError(t, cl.Add(&changelist.TufChange{
+		Actn:       changelist.ActionDelete,
+		Role:       "targets/level1/level2/level3/level4",
+		ChangeType: "target",
+		ChangePath: "latest",
+		Data:       nil,
+	}))
+
+	assert.NoError(t, applyChangelist(repo, cl))
+	assert.Empty(t, repo.Targets[data.CanonicalTargetsRole].Signed.Targets)
+}
+
+// changeTargetMeta fallback fails with ErrInvalidRole if role is invalid
+func TestChangeTargetMetaFallbackFailsInvalidRole(t *testing.T) {
+	_, repo, _ := testutils.EmptyRepo()
+
+	hash := sha256.Sum256([]byte{})
+	f := &data.FileMeta{
+		Length: 1,
+		Hashes: map[string][]byte{
+			"sha256": hash[:],
+		},
+	}
+	fjson, err := json.Marshal(f)
+	assert.NoError(t, err)
+
+	err = changeTargetMeta(repo, &changelist.TufChange{
+		Actn:       changelist.ActionCreate,
+		Role:       "ruhroh",
+		ChangeType: "target",
+		ChangePath: "latest",
+		Data:       fjson,
+	})
+	assert.Error(t, err)
+	assert.IsType(t, data.ErrInvalidRole{}, err)
+}

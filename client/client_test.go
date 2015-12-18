@@ -1223,7 +1223,8 @@ func assertPublishToRolesSucceeds(t *testing.T, repo1 *NotaryRepository,
 			targets, err := repo.ListTargets(role)
 			assert.NoError(t, err)
 
-			assert.Len(t, targets, 2, "unexpected number of targets returned by ListTargets")
+			assert.Len(t, targets, 2,
+				"unexpected number of targets returned by ListTargets(%s)", role)
 
 			sort.Stable(targetSorter(targets))
 
