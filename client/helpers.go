@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"path/filepath"
 	"time"
 
 	"github.com/Sirupsen/logrus"
@@ -122,6 +123,22 @@ func changeTargetsDelegation(repo *tuf.Repo, c changelist.Change) error {
 
 }
 
+// applies a function repeatedly, falling back on the parent role, until it no
+// longer can
+func doWithRoleFallback(role string, doFunc func(string) error) error {
+	for role == data.CanonicalTargetsRole || data.IsDelegation(role) {
+		err := doFunc(role)
+		if err == nil {
+			return nil
+		}
+		if _, ok := err.(data.ErrInvalidRole); !ok {
+			return err
+		}
+		role = filepath.Dir(role)
+	}
+	return data.ErrInvalidRole{Role: role}
+}
+
 func changeTargetMeta(repo *tuf.Repo, c changelist.Change) error {
 	var err error
 	switch c.Action() {
@@ -133,13 +150,25 @@ func changeTargetMeta(repo *tuf.Repo, c changelist.Change) error {
 			return err
 		}
 		files := data.Files{c.Path(): *meta}
-		_, err = repo.AddTargets(c.Scope(), files)
+
+		err = doWithRoleFallback(c.Scope(), func(role string) error {
+			_, e := repo.AddTargets(role, files)
+			return e
+		})
 		if err != nil {
 			logrus.Errorf("couldn't add target to %s: %s", c.Scope(), err.Error())
 		}
+
 	case changelist.ActionDelete:
 		logrus.Debug("changelist remove: ", c.Path())
-		err = repo.RemoveTargets(c.Scope(), c.Path())
+
+		err = doWithRoleFallback(c.Scope(), func(role string) error {
+			return repo.RemoveTargets(role, c.Path())
+		})
+		if err != nil {
+			logrus.Errorf("couldn't remove target from %s: %s", c.Scope(), err.Error())
+		}
+
 	default:
 		logrus.Debug("action not yet supported: ", c.Action())
 	}
@@ -216,13 +245,14 @@ func addKeyForRole(kdb *keys.KeyDB, role string, key data.PublicKey) error {
 // signs and serializes the metadata for a canonical role in a tuf repo to JSON
 func serializeCanonicalRole(tufRepo *tuf.Repo, role string) (out []byte, err error) {
 	var s *data.Signed
-	switch role {
-	case data.CanonicalRootRole:
+	switch {
+	case role == data.CanonicalRootRole:
 		s, err = tufRepo.SignRoot(data.DefaultExpires(role))
-	case data.CanonicalSnapshotRole:
+	case role == data.CanonicalSnapshotRole:
 		s, err = tufRepo.SignSnapshot(data.DefaultExpires(role))
-	case data.CanonicalTargetsRole:
-		s, err = tufRepo.SignTargets(role, data.DefaultExpires(role))
+	case tufRepo.Targets[role] != nil:
+		s, err = tufRepo.SignTargets(
+			role, data.DefaultExpires(data.CanonicalTargetsRole))
 	default:
 		err = fmt.Errorf("%s not supported role to sign on the client", role)
 	}

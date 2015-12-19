@@ -6,21 +6,14 @@ import (
 	"testing"
 
 	"github.com/docker/notary/client/changelist"
-	tuf "github.com/docker/notary/tuf"
 	"github.com/docker/notary/tuf/data"
-	"github.com/docker/notary/tuf/keys"
 	"github.com/docker/notary/tuf/testutils"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestApplyTargetsChange(t *testing.T) {
-	kdb := keys.NewDB()
-	role, err := data.NewRole("targets", 1, nil, nil, nil)
-	assert.NoError(t, err)
-	kdb.AddRole(role)
-
-	repo := tuf.NewRepo(kdb, nil)
-	err = repo.InitTargets(data.CanonicalTargetsRole)
+	_, repo, _ := testutils.EmptyRepo()
+	_, err := repo.InitTargets(data.CanonicalTargetsRole)
 	assert.NoError(t, err)
 	hash := sha256.Sum256([]byte{})
 	f := &data.FileMeta{
@@ -57,13 +50,8 @@ func TestApplyTargetsChange(t *testing.T) {
 }
 
 func TestApplyChangelist(t *testing.T) {
-	kdb := keys.NewDB()
-	role, err := data.NewRole("targets", 1, nil, nil, nil)
-	assert.NoError(t, err)
-	kdb.AddRole(role)
-
-	repo := tuf.NewRepo(kdb, nil)
-	err = repo.InitTargets(data.CanonicalTargetsRole)
+	_, repo, _ := testutils.EmptyRepo()
+	_, err := repo.InitTargets(data.CanonicalTargetsRole)
 	assert.NoError(t, err)
 	hash := sha256.Sum256([]byte{})
 	f := &data.FileMeta{
@@ -105,13 +93,8 @@ func TestApplyChangelist(t *testing.T) {
 }
 
 func TestApplyChangelistMulti(t *testing.T) {
-	kdb := keys.NewDB()
-	role, err := data.NewRole("targets", 1, nil, nil, nil)
-	assert.NoError(t, err)
-	kdb.AddRole(role)
-
-	repo := tuf.NewRepo(kdb, nil)
-	err = repo.InitTargets(data.CanonicalTargetsRole)
+	_, repo, _ := testutils.EmptyRepo()
+	_, err := repo.InitTargets(data.CanonicalTargetsRole)
 	assert.NoError(t, err)
 	hash := sha256.Sum256([]byte{})
 	f := &data.FileMeta{
@@ -762,4 +745,193 @@ func TestApplyTargetsDelegationParentDoesntExist(t *testing.T) {
 	err = applyTargetsChange(repo, ch)
 	assert.Error(t, err)
 	assert.IsType(t, data.ErrInvalidRole{}, err)
+}
+
+// If there is no delegation target, ApplyTargets creates it
+func TestApplyChangelistCreatesDelegation(t *testing.T) {
+	_, repo, cs := testutils.EmptyRepo()
+
+	newKey, err := cs.Create("targets/level1", data.ED25519Key)
+	assert.NoError(t, err)
+
+	r, err := data.NewRole("targets/level1", 1, []string{newKey.ID()}, []string{""}, nil)
+	assert.NoError(t, err)
+	repo.UpdateDelegations(r, []data.PublicKey{newKey})
+	delete(repo.Targets, "targets/level1")
+
+	hash := sha256.Sum256([]byte{})
+	f := &data.FileMeta{
+		Length: 1,
+		Hashes: map[string][]byte{
+			"sha256": hash[:],
+		},
+	}
+	fjson, err := json.Marshal(f)
+	assert.NoError(t, err)
+
+	cl := changelist.NewMemChangelist()
+	assert.NoError(t, cl.Add(&changelist.TufChange{
+		Actn:       changelist.ActionCreate,
+		Role:       "targets/level1",
+		ChangeType: "target",
+		ChangePath: "latest",
+		Data:       fjson,
+	}))
+
+	assert.NoError(t, applyChangelist(repo, cl))
+	_, ok := repo.Targets["targets/level1"]
+	assert.True(t, ok, "Failed to create the delegation target")
+	_, ok = repo.Targets["targets/level1"].Signed.Targets["latest"]
+	assert.True(t, ok, "Failed to write change to delegation target")
+}
+
+// Each change applies only to the role specified
+func TestApplyChangelistTargetsToMultipleRoles(t *testing.T) {
+	_, repo, cs := testutils.EmptyRepo()
+
+	newKey, err := cs.Create("targets/level1", data.ED25519Key)
+	assert.NoError(t, err)
+
+	r, err := data.NewRole("targets/level1", 1, []string{newKey.ID()}, []string{""}, nil)
+	assert.NoError(t, err)
+	repo.UpdateDelegations(r, []data.PublicKey{newKey})
+
+	r, err = data.NewRole("targets/level2", 1, []string{newKey.ID()}, []string{""}, nil)
+	assert.NoError(t, err)
+	repo.UpdateDelegations(r, []data.PublicKey{newKey})
+
+	hash := sha256.Sum256([]byte{})
+	f := &data.FileMeta{
+		Length: 1,
+		Hashes: map[string][]byte{
+			"sha256": hash[:],
+		},
+	}
+	fjson, err := json.Marshal(f)
+	assert.NoError(t, err)
+
+	cl := changelist.NewMemChangelist()
+	assert.NoError(t, cl.Add(&changelist.TufChange{
+		Actn:       changelist.ActionCreate,
+		Role:       "targets/level1",
+		ChangeType: "target",
+		ChangePath: "latest",
+		Data:       fjson,
+	}))
+	assert.NoError(t, cl.Add(&changelist.TufChange{
+		Actn:       changelist.ActionDelete,
+		Role:       "targets/level2",
+		ChangeType: "target",
+		ChangePath: "latest",
+		Data:       nil,
+	}))
+
+	assert.NoError(t, applyChangelist(repo, cl))
+	_, ok := repo.Targets["targets/level1"].Signed.Targets["latest"]
+	assert.True(t, ok)
+	_, ok = repo.Targets["targets/level2"]
+	assert.False(t, ok, "no change to targets/level2, so metadata not created")
+}
+
+// ApplyTargets falls back to role that exists when adding or deleting a change
+func TestApplyChangelistTargetsFallbackRoles(t *testing.T) {
+	_, repo, _ := testutils.EmptyRepo()
+
+	hash := sha256.Sum256([]byte{})
+	f := &data.FileMeta{
+		Length: 1,
+		Hashes: map[string][]byte{
+			"sha256": hash[:],
+		},
+	}
+	fjson, err := json.Marshal(f)
+	assert.NoError(t, err)
+
+	cl := changelist.NewMemChangelist()
+	assert.NoError(t, cl.Add(&changelist.TufChange{
+		Actn:       changelist.ActionCreate,
+		Role:       "targets/level1/level2/level3/level4",
+		ChangeType: "target",
+		ChangePath: "latest",
+		Data:       fjson,
+	}))
+
+	assert.NoError(t, applyChangelist(repo, cl))
+	_, ok := repo.Targets[data.CanonicalTargetsRole].Signed.Targets["latest"]
+	assert.True(t, ok)
+
+	// now delete and assert it applies to
+	cl = changelist.NewMemChangelist()
+	assert.NoError(t, cl.Add(&changelist.TufChange{
+		Actn:       changelist.ActionDelete,
+		Role:       "targets/level1/level2/level3/level4",
+		ChangeType: "target",
+		ChangePath: "latest",
+		Data:       nil,
+	}))
+
+	assert.NoError(t, applyChangelist(repo, cl))
+	assert.Empty(t, repo.Targets[data.CanonicalTargetsRole].Signed.Targets)
+}
+
+// changeTargetMeta fallback fails with ErrInvalidRole if role is invalid
+func TestChangeTargetMetaFallbackFailsInvalidRole(t *testing.T) {
+	_, repo, _ := testutils.EmptyRepo()
+
+	hash := sha256.Sum256([]byte{})
+	f := &data.FileMeta{
+		Length: 1,
+		Hashes: map[string][]byte{
+			"sha256": hash[:],
+		},
+	}
+	fjson, err := json.Marshal(f)
+	assert.NoError(t, err)
+
+	err = changeTargetMeta(repo, &changelist.TufChange{
+		Actn:       changelist.ActionCreate,
+		Role:       "ruhroh",
+		ChangeType: "target",
+		ChangePath: "latest",
+		Data:       fjson,
+	})
+	assert.Error(t, err)
+	assert.IsType(t, data.ErrInvalidRole{}, err)
+}
+
+// If applying a change fails due to a prefix error, it does not fall back
+// on the parent.
+func TestChangeTargetMetaDoesntFallbackIfPrefixError(t *testing.T) {
+	_, repo, cs := testutils.EmptyRepo()
+
+	newKey, err := cs.Create("targets/level1", data.ED25519Key)
+	assert.NoError(t, err)
+
+	r, err := data.NewRole("targets/level1", 1, []string{newKey.ID()},
+		[]string{"pathprefix"}, nil)
+	assert.NoError(t, err)
+	repo.UpdateDelegations(r, []data.PublicKey{newKey})
+
+	hash := sha256.Sum256([]byte{})
+	f := &data.FileMeta{
+		Length: 1,
+		Hashes: map[string][]byte{
+			"sha256": hash[:],
+		},
+	}
+	fjson, err := json.Marshal(f)
+	assert.NoError(t, err)
+
+	err = changeTargetMeta(repo, &changelist.TufChange{
+		Actn:       changelist.ActionCreate,
+		Role:       "targets/level1",
+		ChangeType: "target",
+		ChangePath: "notPathPrefix",
+		Data:       fjson,
+	})
+	assert.Error(t, err)
+
+	// no target in targets or targets/latest
+	assert.Empty(t, repo.Targets[data.CanonicalTargetsRole].Signed.Targets)
+	assert.Empty(t, repo.Targets["targets/level1"].Signed.Targets)
 }
