@@ -301,7 +301,7 @@ func addChange(cl *changelist.FileChangelist, c changelist.Change, roles ...stri
 // other than checking the name of the delegation to add - all that will happen
 // at publish time.
 func (r *NotaryRepository) AddDelegation(name string, threshold int,
-	delegationKeys []data.PublicKey) error {
+	delegationKeys []data.PublicKey, paths []string) error {
 
 	if !data.IsDelegation(name) {
 		return data.ErrInvalidRole{Role: name, Reason: "invalid delegation role name"}
@@ -319,6 +319,7 @@ func (r *NotaryRepository) AddDelegation(name string, threshold int,
 	tdJSON, err := json.Marshal(&changelist.TufDelegation{
 		NewThreshold: threshold,
 		AddKeys:      data.KeyList(delegationKeys),
+		AddPaths:     paths,
 	})
 	if err != nil {
 		return err

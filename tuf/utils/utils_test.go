@@ -9,7 +9,7 @@ import (
 func TestUnusedDelegationKeys(t *testing.T) {
 	targets := data.NewTargets()
 
-	role, err := data.NewRole("targets/test", 1, []string{}, nil, nil)
+	role, err := data.NewRole("targets/test", 1, []string{}, []string{""}, nil)
 	assert.NoError(t, err)
 
 	discard := UnusedDelegationKeys(*targets)
@@ -30,7 +30,7 @@ func TestUnusedDelegationKeys(t *testing.T) {
 func TestRemoveUnusedKeys(t *testing.T) {
 	targets := data.NewTargets()
 
-	role, err := data.NewRole("targets/test", 1, []string{"123"}, nil, nil)
+	role, err := data.NewRole("targets/test", 1, []string{"123"}, []string{""}, nil)
 	assert.NoError(t, err)
 
 	targets.Signed.Delegations.Keys["123"] = nil
@@ -47,7 +47,7 @@ func TestRemoveUnusedKeys(t *testing.T) {
 }
 
 func TestFindRoleIndexFound(t *testing.T) {
-	role, err := data.NewRole("targets/test", 1, []string{}, nil, nil)
+	role, err := data.NewRole("targets/test", 1, []string{}, []string{""}, nil)
 	assert.NoError(t, err)
 
 	assert.Equal(
@@ -58,7 +58,7 @@ func TestFindRoleIndexFound(t *testing.T) {
 }
 
 func TestFindRoleIndexNotFound(t *testing.T) {
-	role, err := data.NewRole("targets/test", 1, []string{}, nil, nil)
+	role, err := data.NewRole("targets/test", 1, []string{}, []string{""}, nil)
 	assert.NoError(t, err)
 
 	assert.Equal(
