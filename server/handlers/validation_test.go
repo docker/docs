@@ -836,7 +836,11 @@ func TestValidateTargetsLoadParent(t *testing.T) {
 	r, err := data.NewRole("targets/level1", 1, []string{k.ID()}, []string{""}, nil)
 	assert.NoError(t, err)
 
-	baseRepo.UpdateDelegations(r, []data.PublicKey{k})
+	err = baseRepo.UpdateDelegations(r, []data.PublicKey{k})
+	assert.NoError(t, err)
+
+	// no targets file is created for the new delegations, so force one
+	baseRepo.InitTargets("targets/level1")
 
 	// we're not going to validate things loaded from storage, so no need
 	// to sign the base targets, just Marshal it and set it into storage
@@ -884,6 +888,9 @@ func TestValidateTargetsParentInUpdate(t *testing.T) {
 	assert.NoError(t, err)
 
 	baseRepo.UpdateDelegations(r, []data.PublicKey{k})
+
+	// no targets file is created for the new delegations, so force one
+	baseRepo.InitTargets("targets/level1")
 
 	targets, err := baseRepo.SignTargets("targets", data.DefaultExpires(data.CanonicalTargetsRole))
 
@@ -938,6 +945,9 @@ func TestValidateTargetsParentNotFound(t *testing.T) {
 	assert.NoError(t, err)
 
 	baseRepo.UpdateDelegations(r, []data.PublicKey{k})
+
+	// no targets file is created for the new delegations, so force one
+	baseRepo.InitTargets("targets/level1")
 
 	// generate the update object we're doing to use to call loadAndValidateTargets
 	del, err := baseRepo.SignTargets("targets/level1", data.DefaultExpires(data.CanonicalTargetsRole))

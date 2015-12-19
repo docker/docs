@@ -500,7 +500,7 @@ func (c Client) getTargetsFile(role string, keyIDs []string, snapshotMeta data.F
 		// if we error when setting meta, we should continue.
 		err = c.cache.SetMeta(role, raw)
 		if err != nil {
-			logrus.Errorf("Failed to write snapshot to local cache: %s", err.Error())
+			logrus.Errorf("Failed to write %s to local cache: %s", role, err.Error())
 		}
 	}
 	return s, nil
