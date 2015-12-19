@@ -19,7 +19,7 @@ Trusted Registry and the commercially supported Docker Engine. For notes on
 older versions of these, see the [prior release notes archive](prior-release-notes.md).
 
 # Docker Trusted Registry 1.4.2
-(18 December 2015)
+(21 December 2015)
 
 Release notes for the Trusted Registry contain the following sections:
 
