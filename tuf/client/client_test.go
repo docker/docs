@@ -355,7 +355,7 @@ func TestDownloadTargetsDeepHappy(t *testing.T) {
 		// create role
 		k, err := cs.Create(r, data.ED25519Key)
 		assert.NoError(t, err)
-		role, err := data.NewRole(r, 1, []string{k.ID()}, nil, nil)
+		role, err := data.NewRole(r, 1, []string{k.ID()}, []string{""}, nil)
 		assert.NoError(t, err)
 
 		// add role to repo
