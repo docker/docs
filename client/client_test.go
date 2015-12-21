@@ -123,6 +123,23 @@ func createRepoAndKey(t *testing.T, rootType, tempBaseDir, gun, url string) (
 	return repo, rootPubKey.ID()
 }
 
+// creates a new notary repository with the same gun and url as the previous
+// repo, so that it can be used to pull the trust data the original repo pushed
+func newRepoToTestRepo(t *testing.T, existingRepo *NotaryRepository) *NotaryRepository {
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	assert.NoError(t, err, "failed to create a temporary directory")
+
+	repo, err := NewNotaryRepository(
+		tempBaseDir, existingRepo.gun, existingRepo.baseURL,
+		http.DefaultTransport, passphraseRetriever)
+	assert.NoError(t, err, "error creating repository: %s", err)
+	if err != nil {
+		defer os.RemoveAll(tempBaseDir)
+	}
+
+	return repo
+}
+
 // Initializing a new repo while specifying that the server should manage the root
 // role will fail.
 func TestInitRepositoryManagedRolesIncludingRoot(t *testing.T) {
@@ -1170,9 +1187,8 @@ func testPublishNoData(t *testing.T, rootType string, serverManagesSnapshot bool
 	assert.NoError(t, repo1.Publish())
 
 	// use another repo to check metadata
-	repo2, err := NewNotaryRepository(tempDirs[1], gun, ts.URL,
-		http.DefaultTransport, passphraseRetriever)
-	assert.NoError(t, err, "error creating repository: %s", err)
+	repo2 := newRepoToTestRepo(t, repo1)
+	defer os.RemoveAll(repo2.baseDir)
 
 	targets, err := repo2.ListTargets()
 	assert.NoError(t, err)
@@ -1253,15 +1269,9 @@ func assertPublishToRolesSucceeds(t *testing.T, repo1 *NotaryRepository,
 	assert.NoError(t, err)
 	assert.Len(t, getChanges(t, repo1), 0, "wrong number of changelist files found")
 
-	// Create a new repo and pull from the server
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	defer os.RemoveAll(tempBaseDir)
-
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-
-	repo2, err := NewNotaryRepository(tempBaseDir, repo1.gun, repo1.baseURL,
-		http.DefaultTransport, passphraseRetriever)
-	assert.NoError(t, err, "error creating repository: %s", err)
+	// use another repo to check metadata
+	repo2 := newRepoToTestRepo(t, repo1)
+	defer os.RemoveAll(repo2.baseDir)
 
 	// Should be two targets per role
 	for _, role := range expectedPublishedRoles {
@@ -1476,19 +1486,15 @@ func TestPublishSnapshotLocalKeysCreatedFirst(t *testing.T) {
 // this is just a sanity test to make sure Publish calls it correctly and
 // no fallback happens.
 func TestPublishDelegations(t *testing.T) {
-	var tempDirs [2]string
-	for i := 0; i < 2; i++ {
-		tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-		assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-		defer os.RemoveAll(tempBaseDir)
-		tempDirs[i] = tempBaseDir
-	}
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+	defer os.RemoveAll(tempBaseDir)
 
 	gun := "docker.com/notary"
 	ts := fullTestServer(t)
 	defer ts.Close()
 
-	repo1, _ := initializeRepo(t, data.ECDSAKey, tempDirs[0], gun, ts.URL, false)
+	repo1, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
 	delgKey, err := repo1.CryptoService.Create("targets/a", data.ECDSAKey)
 	assert.NoError(t, err, "error creating delegation key")
 
@@ -1511,10 +1517,9 @@ func TestPublishDelegations(t *testing.T) {
 	assert.Error(t, repo1.Publish())
 	assert.Len(t, getChanges(t, repo1), 1, "wrong number of changelist files found")
 
-	// Create a new repo and pull from the server
-	repo2, err := NewNotaryRepository(tempDirs[1], gun, ts.URL,
-		http.DefaultTransport, passphraseRetriever)
-	assert.NoError(t, err, "error creating repository: %s", err)
+	// use another repo to check metadata
+	repo2 := newRepoToTestRepo(t, repo1)
+	defer os.RemoveAll(repo2.baseDir)
 
 	// pull
 	_, err = repo2.ListTargets()
@@ -1931,55 +1936,80 @@ func TestRotateKeyInvalidRole(t *testing.T) {
 
 // Rotates the keys.  After the rotation, downloading the latest metadata
 // and assert that the keys have changed
-func assertRotationSuccessful(t *testing.T, repo *NotaryRepository,
-	keysToRotate map[string]bool) {
+func assertRotationSuccessful(t *testing.T, repo1 *NotaryRepository,
+	keysToRotate map[string]bool, alreadyPublished bool) {
+	// Create 2 new repos:  1 will download repo data before the publish,
+	// and one only downloads after the publish. This reflects a client
+	// that has some previous trust data (but is not the publisher), and a
+	// completely new client being able to read the rotated trust data.
+	repo2 := newRepoToTestRepo(t, repo1)
+	defer os.RemoveAll(repo2.baseDir)
+
+	repos := []*NotaryRepository{repo1, repo2}
+
+	if alreadyPublished {
+		repo3 := newRepoToTestRepo(t, repo1)
+		defer os.RemoveAll(repo2.baseDir)
+
+		// force a pull on repo3
+		_, err := repo3.GetTargetByName("latest")
+		assert.NoError(t, err)
+
+		repos = append(repos, repo3)
+	}
 
 	oldKeyIDs := make(map[string][]string)
 	for role := range keysToRotate {
-		keyIDs := repo.tufRepo.Root.Signed.Roles[role].KeyIDs
+		keyIDs := repo1.tufRepo.Root.Signed.Roles[role].KeyIDs
 		oldKeyIDs[role] = keyIDs
 	}
 
 	// Do rotation
 	for role, serverManaged := range keysToRotate {
-		assert.NoError(t, repo.RotateKey(role, serverManaged))
+		assert.NoError(t, repo1.RotateKey(role, serverManaged))
 	}
 
 	// Publish
-	err := repo.Publish()
+	err := repo1.Publish()
 	assert.NoError(t, err)
 
-	// Get root.json. Check keys have changed.
-	_, err = repo.GetTargetByName("latest") // force a pull
-	assert.NoError(t, err)
+	// Download data from remote and check that keys have changed
+	for _, repo := range repos {
+		_, err := repo.GetTargetByName("latest") // force a pull
+		assert.NoError(t, err)
 
-	for role, isRemoteKey := range keysToRotate {
-		keyIDs := repo.tufRepo.Root.Signed.Roles[role].KeyIDs
-		assert.Len(t, keyIDs, 1)
+		for role, isRemoteKey := range keysToRotate {
+			keyIDs := repo.tufRepo.Root.Signed.Roles[role].KeyIDs
+			assert.Len(t, keyIDs, 1)
 
-		// the new key is not the same as any of the old keys, and the
-		// old keys have been removed not just from the TUF file, but
-		// from the cryptoservice
-		for _, oldKeyID := range oldKeyIDs[role] {
-			assert.NotEqual(t, oldKeyID, keyIDs[0])
-			_, _, err := repo.CryptoService.GetPrivateKey(oldKeyID)
-			assert.Error(t, err)
+			// the new key is not the same as any of the old keys, and the
+			// old keys have been removed not just from the TUF file, but
+			// from the cryptoservice
+			for _, oldKeyID := range oldKeyIDs[role] {
+				assert.NotEqual(t, oldKeyID, keyIDs[0])
+				_, _, err := repo.CryptoService.GetPrivateKey(oldKeyID)
+				assert.Error(t, err)
+			}
+
+			// On the old repo, the new key is present in the cryptoservice, or
+			// not present if remote.  On the new repo, no keys are ever in the
+			// cryptoservice
+			key, _, err := repo.CryptoService.GetPrivateKey(keyIDs[0])
+			if repo != repo1 || isRemoteKey {
+				assert.Error(t, err)
+				assert.Nil(t, key)
+			} else {
+				assert.NoError(t, err)
+				assert.NotNil(t, key)
+			}
 		}
 
-		// the new key is present in the cryptoservice, or not present if remote
-		key, _, err := repo.CryptoService.GetPrivateKey(keyIDs[0])
-		if isRemoteKey {
-			assert.Error(t, err)
-			assert.Nil(t, key)
-		} else {
-			assert.NoError(t, err)
-			assert.NotNil(t, key)
-		}
+		// Confirm changelist dir empty (on repo1, it should be empty after
+		// after publishing changes, on repo2, there should never have been
+		// any changelists)
+		changes := getChanges(t, repo)
+		assert.Len(t, changes, 0, "wrong number of changelist files found")
 	}
-
-	// Confirm changelist dir empty after publishing changes
-	changes := getChanges(t, repo)
-	assert.Len(t, changes, 0, "wrong number of changelist files found")
 }
 
 // Initialize repo to have the server sign snapshots (remote snapshot key)
@@ -2003,7 +2033,7 @@ func TestRotateBeforePublishFromRemoteKeyToLocalKey(t *testing.T) {
 	addTarget(t, repo, "latest", "../fixtures/intermediate-ca.crt")
 	assertRotationSuccessful(t, repo, map[string]bool{
 		data.CanonicalTargetsRole:  false,
-		data.CanonicalSnapshotRole: false})
+		data.CanonicalSnapshotRole: false}, false)
 }
 
 // Initialize a repo, locally signed snapshots
@@ -2063,7 +2093,7 @@ func testRotateKeySuccess(t *testing.T, serverManagesSnapshotInit bool,
 
 	// Get root.json and capture targets + snapshot key IDs
 	repo.GetTargetByName("latest") // force a pull
-	assertRotationSuccessful(t, repo, keysToRotate)
+	assertRotationSuccessful(t, repo, keysToRotate, true)
 }
 
 // If there is no local cache, notary operations return the remote error code
