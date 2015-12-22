@@ -34,10 +34,12 @@ import (
 	"golang.org/x/net/context"
 )
 
-func simpleTestServer(t *testing.T) (
+func simpleTestServer(t *testing.T, roles ...string) (
 	*httptest.Server, *http.ServeMux, map[string]data.PrivateKey) {
 
-	roles := []string{data.CanonicalTimestampRole, data.CanonicalSnapshotRole}
+	if len(roles) == 0 {
+		roles = []string{data.CanonicalTimestampRole, data.CanonicalSnapshotRole}
+	}
 	keys := make(map[string]data.PrivateKey)
 	mux := http.NewServeMux()
 
@@ -203,6 +205,42 @@ func TestInitRepositoryManagedRolesIncludingTimestamp(t *testing.T) {
 		t, data.ECDSAKey, tempBaseDir, "docker.com/notary", ts.URL)
 	err = repo.Initialize(rootPubKeyID, data.CanonicalTimestampRole)
 	assert.NoError(t, err)
+}
+
+// Initializing a new repo fails if unable to get the timestamp key, even if
+// the snapshot key is available
+func TestInitRepositoryNeedsRemoteTimestampKey(t *testing.T) {
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("/tmp", "notary-test-")
+	assert.NoError(t, err, "failed to create a temporary directory")
+	defer os.RemoveAll(tempBaseDir)
+
+	ts, _, _ := simpleTestServer(t, data.CanonicalSnapshotRole)
+	defer ts.Close()
+
+	repo, rootPubKeyID := createRepoAndKey(
+		t, data.ECDSAKey, tempBaseDir, "docker.com/notary", ts.URL)
+	err = repo.Initialize(rootPubKeyID, data.CanonicalTimestampRole)
+	assert.Error(t, err)
+	assert.IsType(t, store.ErrMetaNotFound{}, err)
+}
+
+// Initializing a new repo with remote server signing fails if unable to get
+// the snapshot key, even if the timestamp key is available
+func TestInitRepositoryNeedsRemoteSnapshotKey(t *testing.T) {
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("/tmp", "notary-test-")
+	assert.NoError(t, err, "failed to create a temporary directory")
+	defer os.RemoveAll(tempBaseDir)
+
+	ts, _, _ := simpleTestServer(t, data.CanonicalTimestampRole)
+	defer ts.Close()
+
+	repo, rootPubKeyID := createRepoAndKey(
+		t, data.ECDSAKey, tempBaseDir, "docker.com/notary", ts.URL)
+	err = repo.Initialize(rootPubKeyID, data.CanonicalSnapshotRole)
+	assert.Error(t, err)
+	assert.IsType(t, store.ErrMetaNotFound{}, err)
 }
 
 // passing timestamp + snapshot, or just snapshot, is tested in the next two
@@ -1385,24 +1423,48 @@ func testPublishNoOneHasSnapshotKey(t *testing.T, rootType string) {
 	assert.IsType(t, validation.ErrBadHierarchy{}, err)
 }
 
-// If the snapshot metadata is corrupt, whether the client or server has the
-// snapshot key, we can't publish.
-// We test this with both an RSA and ECDSA root key
+// If the snapshot metadata is corrupt or the snapshot metadata is unreadable,
+// whether the client or server has the snapshot key, we can't publish.
 func TestPublishSnapshotCorrupt(t *testing.T) {
-	testPublishBadExistingSnapshot(t, data.ECDSAKey, true, true)
-	testPublishBadExistingSnapshot(t, data.ECDSAKey, false, true)
+	testPublishBadMetadataAfterInit(t, data.CanonicalSnapshotRole, true)
+	testPublishBadMetadataAfterInit(t, data.CanonicalSnapshotRole, false)
 }
 
-// If the snapshot metadata is unreadable, whether the client or server has the
-// snapshot key, we can't publish.
-// We test this with both an RSA and ECDSA root key
-func TestPublishSnapshotUnreadable(t *testing.T) {
-	testPublishBadExistingSnapshot(t, data.ECDSAKey, true, false)
-	testPublishBadExistingSnapshot(t, data.ECDSAKey, false, false)
+// If the targets metadata is corrupt or the targets metadata is unreadable,
+// we can't publish.  This is even if there is no change to targets.
+func TestPublishTargetsCorrupt(t *testing.T) {
+	testPublishBadMetadataAfterInit(t, data.CanonicalTargetsRole, false)
 }
 
-func testPublishBadExistingSnapshot(t *testing.T, rootType string,
-	serverManagesSnapshot bool, readable bool) {
+// If the root metadata is corrupt or the root metadata is unreadable,
+// whether the client or server has the snapshot key, we can't publish.  This
+// is even if there is no change to root.
+func TestPublishRootCorrupt(t *testing.T) {
+	testPublishBadMetadataAfterInit(t, data.CanonicalRootRole, false)
+}
+
+func assertCannotPublishIfMetadataCorrupt(t *testing.T, repo *NotaryRepository, roleName string) {
+	// readable, but corrupt file
+	repo.fileStore.SetMeta(roleName, []byte("this isn't JSON"))
+	err := repo.Publish()
+	assert.Error(t, err)
+	assert.IsType(t, &regJson.SyntaxError{}, err)
+
+	// make an unreadable file by creating a directory instead of a file
+	path := fmt.Sprintf("%s.%s",
+		filepath.Join(repo.baseDir, tufDir, filepath.FromSlash(repo.gun),
+			"metadata", roleName), "json")
+	os.RemoveAll(path)
+	assert.NoError(t, os.Mkdir(path, 0755))
+	defer os.RemoveAll(path)
+
+	err = repo.Publish()
+	assert.Error(t, err)
+	assert.IsType(t, &os.PathError{}, err)
+}
+
+func testPublishBadMetadataAfterInit(
+	t *testing.T, roleName string, serverManagesSnapshot bool) {
 
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("/tmp", "notary-test-")
@@ -1414,30 +1476,10 @@ func testPublishBadExistingSnapshot(t *testing.T, rootType string,
 	defer ts.Close()
 
 	repo, _ := initializeRepo(
-		t, rootType, tempBaseDir, gun, ts.URL, serverManagesSnapshot)
+		t, data.ECDSAKey, tempBaseDir, gun, ts.URL, serverManagesSnapshot)
 
 	addTarget(t, repo, "v1", "../fixtures/intermediate-ca.crt")
-
-	var expectedErrType interface{}
-	if readable {
-		// write a corrupt snapshots file
-		repo.fileStore.SetMeta(data.CanonicalSnapshotRole, []byte("this isn't JSON"))
-		expectedErrType = &regJson.SyntaxError{}
-	} else {
-		// create a directory instead of a file
-		path := fmt.Sprintf("%s.%s",
-			filepath.Join(tempBaseDir, tufDir, filepath.FromSlash(gun),
-				"metadata", data.CanonicalSnapshotRole), "json")
-		os.RemoveAll(path)
-		err := os.Mkdir(path, 0755)
-		defer os.RemoveAll(path)
-		assert.NoError(t, err)
-
-		expectedErrType = &os.PathError{}
-	}
-	err = repo.Publish()
-	assert.Error(t, err)
-	assert.IsType(t, expectedErrType, err)
+	assertCannotPublishIfMetadataCorrupt(t, repo, roleName)
 }
 
 type cannotCreateKeys struct {
