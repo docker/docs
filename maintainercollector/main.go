@@ -39,6 +39,8 @@ var (
 		"docker-bench-security",
 		"docker-py",
 		"dockercraft",
+		"go-connections",
+		"go-units",
 		"kitematic",
 		"leeroy",
 		"libchan",
