@@ -1,7 +1,6 @@
 package client
 
 import (
-	"io/ioutil"
 	"os"
 	"testing"
 
@@ -25,21 +24,16 @@ func TestValidateRoot(t *testing.T) {
 }
 
 func validateRootSuccessfully(t *testing.T, rootType string) {
-	// Temporary directory where test files will be created
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	defer os.RemoveAll(tempBaseDir)
-
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-
 	gun := "docker.com/notary"
 
 	ts, mux, keys := simpleTestServer(t)
 	defer ts.Close()
 
-	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL, false)
+	repo, _ := initializeRepo(t, rootType, gun, ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
 
 	// tests need to manually boostrap timestamp as client doesn't generate it
-	err = repo.tufRepo.InitTimestamp()
+	err := repo.tufRepo.InitTimestamp()
 	assert.NoError(t, err, "error creating repository: %s", err)
 
 	// Initialize is supposed to have created new certificate for this repository
