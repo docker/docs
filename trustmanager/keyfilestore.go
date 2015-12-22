@@ -54,10 +54,10 @@ func (s *KeyFileStore) Name() string {
 }
 
 // AddKey stores the contents of a PEM-encoded private key as a PEM block
-func (s *KeyFileStore) AddKey(name, alias string, privKey data.PrivateKey) error {
+func (s *KeyFileStore) AddKey(name, role string, privKey data.PrivateKey) error {
 	s.Lock()
 	defer s.Unlock()
-	return addKey(s, s.Retriever, s.cachedKeys, name, alias, privKey)
+	return addKey(s, s.Retriever, s.cachedKeys, name, role, privKey)
 }
 
 // GetKey returns the PrivateKey given a KeyID
@@ -153,7 +153,7 @@ func (s *KeyMemoryStore) ImportKey(pemBytes []byte, alias string) error {
 	return importKey(s, s.Retriever, s.cachedKeys, alias, pemBytes)
 }
 
-func addKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, cachedKeys map[string]*cachedKey, name, alias string, privKey data.PrivateKey) error {
+func addKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, cachedKeys map[string]*cachedKey, name, role string, privKey data.PrivateKey) error {
 
 	var (
 		chosenPassphrase string
@@ -162,7 +162,7 @@ func addKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, cached
 	)
 
 	for attempts := 0; ; attempts++ {
-		chosenPassphrase, giveup, err = passphraseRetriever(name, alias, true, attempts)
+		chosenPassphrase, giveup, err = passphraseRetriever(name, role, true, attempts)
 		if err != nil {
 			continue
 		}
@@ -175,7 +175,7 @@ func addKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, cached
 		break
 	}
 
-	return encryptAndAddKey(s, chosenPassphrase, cachedKeys, name, alias, privKey)
+	return encryptAndAddKey(s, chosenPassphrase, cachedKeys, name, role, privKey)
 }
 
 func getKeyAlias(s LimitedFileStore, keyID string) (string, error) {
@@ -234,9 +234,7 @@ func listKeys(s LimitedFileStore) map[string]string {
 			f = strings.TrimPrefix(f, nonRootKeysSubdir+"/")
 		}
 
-		// Remove the extension from the full filename
-		// abcde_root.key becomes abcde_root
-		keyIDFull := strings.TrimSpace(strings.TrimSuffix(f, filepath.Ext(f)))
+		keyIDFull := strings.TrimSpace(f)
 
 		// If the key does not have a _, it is malformed
 		underscoreIndex := strings.LastIndex(keyIDFull, "_")

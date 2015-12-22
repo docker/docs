@@ -23,6 +23,10 @@ func NewSimpleFileStore(baseDir string, fileExt string) (*SimpleFileStore, error
 		return nil, err
 	}
 
+	if !strings.HasPrefix(fileExt, ".") {
+		fileExt = "." + fileExt
+	}
+
 	return &SimpleFileStore{
 		baseDir: baseDir,
 		fileExt: fileExt,
@@ -34,6 +38,10 @@ func NewSimpleFileStore(baseDir string, fileExt string) (*SimpleFileStore, error
 func NewPrivateSimpleFileStore(baseDir string, fileExt string) (*SimpleFileStore, error) {
 	if err := CreatePrivateDirectory(baseDir); err != nil {
 		return nil, err
+	}
+
+	if !strings.HasPrefix(fileExt, ".") {
+		fileExt = "." + fileExt
 	}
 
 	return &SimpleFileStore{
@@ -144,7 +152,8 @@ func (f *SimpleFileStore) list(path string) []string {
 			if err != nil {
 				return err
 			}
-			files = append(files, fp)
+			trimmed := strings.TrimSuffix(fp, f.fileExt)
+			files = append(files, trimmed)
 		}
 		return nil
 	})
@@ -153,7 +162,7 @@ func (f *SimpleFileStore) list(path string) []string {
 
 // genFileName returns the name using the right extension
 func (f *SimpleFileStore) genFileName(name string) string {
-	return fmt.Sprintf("%s.%s", name, f.fileExt)
+	return fmt.Sprintf("%s%s", name, f.fileExt)
 }
 
 // BaseDir returns the base directory of the filestore
