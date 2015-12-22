@@ -93,9 +93,7 @@ func TestImportExportZip(t *testing.T) {
 	// exist and are encrypted with the expected passphrase.
 	for _, f := range zipReader.File {
 		expectedPassphrase, present := passphraseByFile[f.Name]
-		if !present {
-			t.Fatalf("unexpected file %s in zip file", f.Name)
-		}
+		assert.True(t, present, "unexpected file %s in zip file", f.Name)
 
 		delete(passphraseByFile, f.Name)
 
@@ -114,9 +112,7 @@ func TestImportExportZip(t *testing.T) {
 	zipReader.Close()
 
 	// Are there any keys that didn't make it to the zip?
-	for fileNotFound := range passphraseByFile {
-		t.Fatalf("%s not found in zip", fileNotFound)
-	}
+	assert.Len(t, passphraseByFile, 0)
 
 	// Create new repo to test import
 	tempBaseDir2, err := ioutil.TempDir("", "notary-test-")
@@ -199,9 +195,7 @@ func TestImportExportGUN(t *testing.T) {
 	privKeyMap := cs.ListAllKeys()
 	for privKeyName := range privKeyMap {
 		_, alias, err := cs.GetPrivateKey(privKeyName)
-		if err != nil {
-			t.Fatalf("privKey %s has no alias", privKeyName)
-		}
+		assert.NoError(t, err, "privKey %s has no alias", privKeyName)
 		if alias == "root" {
 			continue
 		}
@@ -215,9 +209,7 @@ func TestImportExportGUN(t *testing.T) {
 	for _, f := range zipReader.File {
 
 		expectedPassphrase, present := passphraseByFile[f.Name]
-		if !present {
-			t.Fatalf("unexpected file %s in zip file", f.Name)
-		}
+		assert.True(t, present, "unexpected file %s in zip file", f.Name)
 
 		delete(passphraseByFile, f.Name)
 
@@ -236,9 +228,7 @@ func TestImportExportGUN(t *testing.T) {
 	zipReader.Close()
 
 	// Are there any keys that didn't make it to the zip?
-	for fileNotFound := range passphraseByFile {
-		t.Fatalf("%s not found in zip", fileNotFound)
-	}
+	assert.Len(t, passphraseByFile, 0)
 
 	// Create new repo to test import
 	tempBaseDir2, err := ioutil.TempDir("", "notary-test-")
@@ -264,9 +254,7 @@ func TestImportExportGUN(t *testing.T) {
 			continue
 		}
 		_, alias, err := cs2.GetPrivateKey(privKeyName)
-		if err != nil {
-			t.Fatalf("privKey %s has no alias", privKeyName)
-		}
+		assert.NoError(t, err, "privKey %s has no alias", privKeyName)
 		if alias == "root" {
 			continue
 		}
