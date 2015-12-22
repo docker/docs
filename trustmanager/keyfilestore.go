@@ -180,7 +180,11 @@ func addKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, cached
 	return encryptAndAddKey(s, chosenPassphrase, cachedKeys, name, role, privKey)
 }
 
-func getKeyAlias(s LimitedFileStore, keyID string) (string, error) {
+// getKeyRole finds the role for the given keyID. It attempts to look
+// both in the newer format PEM headers, and also in the legacy filename
+// format. It returns: the role, whether it was found in the legacy format
+// (true == legacy), and an error
+func getKeyRole(s LimitedFileStore, keyID string) (string, bool, error) {
 	name := strings.TrimSpace(strings.TrimSuffix(filepath.Base(keyID), filepath.Ext(keyID)))
 
 	for _, file := range s.ListFiles() {
@@ -189,22 +193,21 @@ func getKeyAlias(s LimitedFileStore, keyID string) (string, error) {
 		if strings.HasPrefix(filename, name) {
 			d, err := s.Get(file)
 			if err != nil {
-				return "", err
+				return "", false, err
 			}
 			block, _ := pem.Decode(d)
 			if block != nil {
 				if role, ok := block.Headers["role"]; ok {
-					return role, nil
+					return role, false, nil
 				}
 			}
 
-			aliasPlusDotKey := strings.TrimPrefix(filename, name+"_")
-			retVal := strings.TrimSuffix(aliasPlusDotKey, "."+keyExtension)
-			return retVal, nil
+			role := strings.TrimPrefix(filename, name+"_")
+			return role, true, nil
 		}
 	}
 
-	return "", &ErrKeyNotFound{KeyID: keyID}
+	return "", false, &ErrKeyNotFound{KeyID: keyID}
 }
 
 // GetKey returns the PrivateKey given a KeyID
@@ -247,7 +250,8 @@ func listKeys(s LimitedFileStore) map[string]string {
 
 		keyIDFull = strings.TrimSpace(keyIDFull)
 
-		// If the key does not have a _, it is malformed
+		// If the key does not have a _, we'll attempt to
+		// read it as a PEM
 		underscoreIndex := strings.LastIndex(keyIDFull, "_")
 		if underscoreIndex == -1 {
 			keyID := keyIDFull
@@ -277,15 +281,19 @@ func listKeys(s LimitedFileStore) map[string]string {
 
 // RemoveKey removes the key from the keyfilestore
 func removeKey(s LimitedFileStore, cachedKeys map[string]*cachedKey, name string) error {
-	keyAlias, err := getKeyAlias(s, name)
+	role, legacy, err := getKeyRole(s, name)
 	if err != nil {
 		return err
 	}
 
 	delete(cachedKeys, name)
 
+	if legacy {
+		name = name + "_" + role
+	}
+
 	// being in a subdirectory is for backwards compatibliity
-	err = s.Remove(filepath.Join(getSubdir(keyAlias), name))
+	err = s.Remove(filepath.Join(getSubdir(role), name))
 	if err != nil {
 		return err
 	}
@@ -303,17 +311,21 @@ func getSubdir(alias string) string {
 // Given a key ID, gets the bytes and alias belonging to that key if the key
 // exists
 func getRawKey(s LimitedFileStore, name string) ([]byte, string, error) {
-	keyAlias, err := getKeyAlias(s, name)
+	role, legacy, err := getKeyRole(s, name)
 	if err != nil {
 		return nil, "", err
 	}
 
+	if legacy {
+		name = name + "_" + role
+	}
+
 	var keyBytes []byte
-	keyBytes, err = s.Get(filepath.Join(getSubdir(keyAlias), name))
+	keyBytes, err = s.Get(filepath.Join(getSubdir(role), name))
 	if err != nil {
 		return nil, "", err
 	}
-	return keyBytes, keyAlias, nil
+	return keyBytes, role, nil
 }
 
 // GetPasswdDecryptBytes gets the password to decript the given pem bytes.
