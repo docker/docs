@@ -15,7 +15,6 @@ import (
 	"math/big"
 	"net/http"
 	"net/url"
-	"path/filepath"
 	"time"
 
 	"github.com/Sirupsen/logrus"
@@ -117,11 +116,15 @@ func fingerprintCert(cert *x509.Certificate) (CertID, error) {
 
 // loadCertsFromDir receives a store AddCertFromFile for each certificate found
 func loadCertsFromDir(s *X509FileStore) error {
-	certFiles := s.fileStore.ListFiles()
-	for _, f := range certFiles {
+	for _, f := range s.fileStore.ListFiles() {
 		// ListFiles returns relative paths
-		fullPath := filepath.Join(s.fileStore.BaseDir(), f)
-		err := s.AddCertFromFile(fullPath)
+		data, err := s.fileStore.Get(f)
+		if err != nil {
+			// the filestore told us it had a file that it then couldn't serve.
+			// this is a serious problem so error immediately
+			return err
+		}
+		err = s.AddCertFromPEM(data)
 		if err != nil {
 			if _, ok := err.(*ErrCertValidation); ok {
 				logrus.Debugf("ignoring certificate, did not pass validation: %s", f)

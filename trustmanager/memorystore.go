@@ -1,7 +1,7 @@
 package trustmanager
 
 import (
-	"errors"
+	"os"
 	"sync"
 )
 
@@ -20,10 +20,6 @@ func NewMemoryFileStore() *MemoryFileStore {
 	}
 }
 
-// ErrMemFileNotFound is returned for a nonexistent "file" in the memory file
-// store
-var ErrMemFileNotFound = errors.New("key not found in memory file store")
-
 // Add writes data to a file with a given name
 func (f *MemoryFileStore) Add(name string, data []byte) error {
 	f.Lock()
@@ -39,7 +35,7 @@ func (f *MemoryFileStore) Remove(name string) error {
 	defer f.Unlock()
 
 	if _, present := f.files[name]; !present {
-		return ErrMemFileNotFound
+		return os.ErrNotExist
 	}
 	delete(f.files, name)
 
@@ -53,7 +49,7 @@ func (f *MemoryFileStore) Get(name string) ([]byte, error) {
 
 	fileData, present := f.files[name]
 	if !present {
-		return nil, ErrMemFileNotFound
+		return nil, os.ErrNotExist
 	}
 
 	return fileData, nil
