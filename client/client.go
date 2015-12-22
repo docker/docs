@@ -367,7 +367,7 @@ func (r *NotaryRepository) RemoveDelegation(name string) error {
 
 // AddTarget creates new changelist entries to add a target to the given roles
 // in the repository when the changelist gets appied at publish time.
-// If roles are unspecified, the default role is "target".
+// If roles are unspecified, the default role is "targets".
 func (r *NotaryRepository) AddTarget(target *Target, roles ...string) error {
 
 	cl, err := changelist.NewFileChangelist(filepath.Join(r.tufRepoPath, "changelist"))
