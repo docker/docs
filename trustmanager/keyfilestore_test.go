@@ -26,7 +26,6 @@ var passphraseRetriever = func(keyID string, alias string, createNew bool, numAt
 func TestAddKey(t *testing.T) {
 	testName := "docker.com/notary/root"
 	testExt := "key"
-	testAlias := "root"
 
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
@@ -34,7 +33,7 @@ func TestAddKey(t *testing.T) {
 	defer os.RemoveAll(tempBaseDir)
 
 	// Since we're generating this manually we need to add the extension '.'
-	expectedFilePath := filepath.Join(tempBaseDir, privDir, rootKeysSubdir, testName+"_"+testAlias+"."+testExt)
+	expectedFilePath := filepath.Join(tempBaseDir, privDir, rootKeysSubdir, testName+"."+testExt)
 
 	// Create our store
 	store, err := NewKeyFileStore(tempBaseDir, passphraseRetriever)
@@ -97,7 +96,7 @@ EMl3eFOJXjIch/wIesRSN+2dGOsl7neercjMh1i9RvpCwHDx/E0=
 	defer os.RemoveAll(tempBaseDir)
 
 	// Since we're generating this manually we need to add the extension '.'
-	filePath := filepath.Join(tempBaseDir, privDir, rootKeysSubdir, testName+"_"+testAlias+"."+testExt)
+	filePath := filepath.Join(tempBaseDir, privDir, rootKeysSubdir, testName+"."+testExt)
 
 	os.MkdirAll(filepath.Dir(filePath), perms)
 	err = ioutil.WriteFile(filePath, testData, perms)
@@ -215,7 +214,7 @@ func TestGetDecryptedWithTamperedCipherText(t *testing.T) {
 	assert.NoError(t, err, "failed to add key to store")
 
 	// Since we're generating this manually we need to add the extension '.'
-	expectedFilePath := filepath.Join(tempBaseDir, privDir, rootKeysSubdir, privKey.ID()+"_"+testAlias+"."+testExt)
+	expectedFilePath := filepath.Join(tempBaseDir, privDir, rootKeysSubdir, privKey.ID()+"."+testExt)
 
 	// Get file description, open file
 	fp, err := os.OpenFile(expectedFilePath, os.O_WRONLY, 0600)
@@ -322,7 +321,7 @@ func TestRemoveKey(t *testing.T) {
 	defer os.RemoveAll(tempBaseDir)
 
 	// Since we're generating this manually we need to add the extension '.'
-	expectedFilePath := filepath.Join(tempBaseDir, privDir, nonRootKeysSubdir, testName+"_"+testAlias+"."+testExt)
+	expectedFilePath := filepath.Join(tempBaseDir, privDir, nonRootKeysSubdir, testName+"."+testExt)
 
 	// Create our store
 	store, err := NewKeyFileStore(tempBaseDir, passphraseRetriever)

@@ -80,13 +80,13 @@ func TestImportExportZip(t *testing.T) {
 		if alias == "root" {
 			continue
 		}
-		relKeyPath := filepath.Join("tuf_keys", privKeyName+"_"+alias+".key")
+		relKeyPath := filepath.Join("tuf_keys", privKeyName+".key")
 		passphraseByFile[relKeyPath] = exportPassphrase
 	}
 
 	// Add root key to the map. This will use the export passphrase because it
 	// will be reencrypted.
-	relRootKey := filepath.Join("root_keys", rootKeyID+"_root.key")
+	relRootKey := filepath.Join("root_keys", rootKeyID+".key")
 	passphraseByFile[relRootKey] = exportPassphrase
 
 	// Iterate through the files in the archive, checking that the files
@@ -145,7 +145,7 @@ func TestImportExportZip(t *testing.T) {
 		if alias == "root" {
 			continue
 		}
-		relKeyPath := filepath.Join("tuf_keys", privKeyName+"_"+alias+".key")
+		relKeyPath := filepath.Join("tuf_keys", privKeyName+".key")
 		privKeyFileName := filepath.Join(tempBaseDir2, "private", relKeyPath)
 		_, err = os.Stat(privKeyFileName)
 		assert.NoError(t, err, "missing private key for role %s: %s", alias, privKeyName)
@@ -154,7 +154,7 @@ func TestImportExportZip(t *testing.T) {
 	// Look for keys in root_keys
 	// There should be a file named after the key ID of the root key we
 	// passed in.
-	rootKeyFilename := rootKeyID + "_root.key"
+	rootKeyFilename := rootKeyID + ".key"
 	_, err = os.Stat(filepath.Join(tempBaseDir2, "private", "root_keys", rootKeyFilename))
 	assert.NoError(t, err, "missing root key")
 }
@@ -205,7 +205,7 @@ func TestImportExportGUN(t *testing.T) {
 		if alias == "root" {
 			continue
 		}
-		relKeyPath := filepath.Join("tuf_keys", privKeyName+"_"+alias+".key")
+		relKeyPath := filepath.Join("tuf_keys", privKeyName+".key")
 
 		passphraseByFile[relKeyPath] = exportPassphrase
 	}
@@ -270,7 +270,7 @@ func TestImportExportGUN(t *testing.T) {
 		if alias == "root" {
 			continue
 		}
-		relKeyPath := filepath.Join("tuf_keys", privKeyName+"_"+alias+".key")
+		relKeyPath := filepath.Join("tuf_keys", privKeyName+".key")
 		privKeyFileName := filepath.Join(tempBaseDir2, "private", relKeyPath)
 		_, err = os.Stat(privKeyFileName)
 		assert.NoError(t, err)
@@ -318,7 +318,7 @@ func TestImportExportRootKey(t *testing.T) {
 	// Look for repo's root key in repo2
 	// There should be a file named after the key ID of the root key we
 	// imported.
-	rootKeyFilename := rootKeyID + "_root.key"
+	rootKeyFilename := rootKeyID + ".key"
 	_, err = os.Stat(filepath.Join(tempBaseDir2, "private", "root_keys", rootKeyFilename))
 	assert.NoError(t, err, "missing root key")
 
@@ -386,7 +386,7 @@ func TestImportExportRootKeyReencrypt(t *testing.T) {
 	// Look for repo's root key in repo2
 	// There should be a file named after the key ID of the root key we
 	// imported.
-	rootKeyFilename := rootKeyID + "_root.key"
+	rootKeyFilename := rootKeyID + ".key"
 	_, err = os.Stat(filepath.Join(tempBaseDir2, "private", "root_keys", rootKeyFilename))
 	assert.NoError(t, err, "missing root key")
 
