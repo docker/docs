@@ -9,37 +9,35 @@ identifier="mn_ucp"
 
 # Release Notes
 
-The latest release is 0.5.  Consult with your Docker sales engineer for the release notes of earlier versions.
+The latest release is 0.6.  Consult with your Docker sales engineer for the 
+release notes of earlier versions.
 
-## Version 0.5
+## Version 0.6
 
 The following notes apply to this release:
 
-## 3.16 kernel or higher
+## Licensing
 
-Your hosts must have a 3.16.0 kernel or higher to use UCP. If you don't have the proper kernel installed, the UCP bootstrapper returns this error.
+- Licensing functionality is now enabled
 
-```
-INFO[0000] Verifying your system is compatible with UCP
-FATA[0000] Your kernel version 3.13.0 is too old.  UCP requires at least version 3.16.0 for all features to work.  To proceed with an old kernel use the '--old-kernel' flag
-```
+UCP will start in an "unlicensed" mode.  This will not limit any functionality.
+Please consult with your Docker sales engineer for details of UCP licensing.
 
-If you don't want to use Docker's new networking features such as mult-host networking, use the '--old-kernel' flag to proceed anyway.
+## UI
 
-## New networking
+- Sidebar is now permanently visible and is responsive for smaller screens
+- Fixed issue with hidden item count on Applications View
+- Dashboard chart enhancements
+- Disable stats and exec on stopped container
+- UI Link to UCP documentation
+- Tags displayed on image removal dialog
+- Enhanced breadcrumb tracking
+- Licensing configuration
 
-This release includes support for the new networking features added in Docker Engine 1.0. These features include multi-host networking which allows you to configure custom container networks that span across several Docker hosts.
+## Images
 
-You must enable the networking features manually on your UCP cluster after bootstrapping each node.  To learn the process or to run through it, see [Set up container networking with UCP](networking.md) in the documentation.
+- CFSSL updated to 1.1.0
 
-## High Availability
+## Misc
 
-This release includes support for setting up High Availability of your UCP Controller. In this mode additional replicas can be created when joining a new node to the swarm cluster.
-
-## External logging
-
-This release supports external logging facilities.
-
-## New upgrade command
-
-This version of UCP includes an `upgrade` command. You cannot upgrade from version 0.4 to version 0.5. You can use the `upgrade` command to upgrade from version 0.5 and future, newer versions of UCP.
+- Banner is now shown reporting high availability status
