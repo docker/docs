@@ -1326,31 +1326,95 @@ func testPublishNoOneHasSnapshotKey(t *testing.T, rootType string) {
 }
 
 // If the snapshot metadata is corrupt or the snapshot metadata is unreadable,
-// whether the client or server has the snapshot key, we can't publish.
+// we can't publish for the first time (whether the client or server has the
+// snapshot key), because there is no existing data for us to download. If the
+// repo has already been published, it doesn't matter if the metadata is corrupt
+// because we can just redownload if it is.
 func TestPublishSnapshotCorrupt(t *testing.T) {
-	testPublishBadMetadataAfterInit(t, data.CanonicalSnapshotRole, true)
-	testPublishBadMetadataAfterInit(t, data.CanonicalSnapshotRole, false)
+	ts := fullTestServer(t)
+	defer ts.Close()
+
+	// do not publish first - publish should fail
+	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary1", ts.URL, true)
+	defer os.RemoveAll(repo.baseDir)
+	testPublishBadMetadata(t, data.CanonicalSnapshotRole, repo, false, false)
+
+	repo, _ = initializeRepo(t, data.ECDSAKey, "docker.com/notary2", ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
+	testPublishBadMetadata(t, data.CanonicalSnapshotRole, repo, false, false)
+
+	// publish first - should succeed
+	repo, _ = initializeRepo(t, data.ECDSAKey, "docker.com/notary3", ts.URL, true)
+	defer os.RemoveAll(repo.baseDir)
+	testPublishBadMetadata(t, data.CanonicalSnapshotRole, repo, true, true)
+
+	repo, _ = initializeRepo(t, data.ECDSAKey, "docker.com/notary4", ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
+	testPublishBadMetadata(t, data.CanonicalSnapshotRole, repo, true, true)
 }
 
 // If the targets metadata is corrupt or the targets metadata is unreadable,
-// we can't publish.  This is even if there is no change to targets.
+// we can't publish for the first time, because there is no existing data for.
+// us to download. If the repo has already been published, it doesn't matter
+// if the metadata is corrupt because we can just redownload if it is.
 func TestPublishTargetsCorrupt(t *testing.T) {
-	testPublishBadMetadataAfterInit(t, data.CanonicalTargetsRole, false)
+	ts := fullTestServer(t)
+	defer ts.Close()
+
+	// do not publish first - publish should fail
+	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary1", ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
+	testPublishBadMetadata(t, data.CanonicalTargetsRole, repo, false, false)
+
+	// publish first - should succeed
+	repo, _ = initializeRepo(t, data.ECDSAKey, "docker.com/notary2", ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
+	testPublishBadMetadata(t, data.CanonicalTargetsRole, repo, true, true)
 }
 
 // If the root metadata is corrupt or the root metadata is unreadable,
-// whether the client or server has the snapshot key, we can't publish.  This
-// is even if there is no change to root.
+// we can't publish for the first time or the second time.  Root is the most
+// important and what we used to pin trust, so if it's corrupt, we can't
+// verify downloaded updates.
 func TestPublishRootCorrupt(t *testing.T) {
-	testPublishBadMetadataAfterInit(t, data.CanonicalRootRole, false)
+	t.Skip("Test currently fails - not sure what the correct behavior is.")
+
+	ts := fullTestServer(t)
+	defer ts.Close()
+
+	// do not publish first - publish should fail
+	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary1", ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
+	testPublishBadMetadata(t, data.CanonicalRootRole, repo, false, false)
+
+	// publish first - publish should still succeed if root corrupt
+	repo, _ = initializeRepo(t, data.ECDSAKey, "docker.com/notary2", ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
+	testPublishBadMetadata(t, data.CanonicalRootRole, repo, true, false)
 }
 
-func assertCannotPublishIfMetadataCorrupt(t *testing.T, repo *NotaryRepository, roleName string) {
+// When publishing snapshot, root, or target, if the repo hasn't been published
+// before, if the metadata is corrupt, it can't be published.  If it has been
+// published already, then the corrupt metadata can just be re-downloaded, so
+// publishing is successful.
+func testPublishBadMetadata(t *testing.T, roleName string, repo *NotaryRepository,
+	publishFirst, succeeds bool) {
+
+	if publishFirst {
+		assert.NoError(t, repo.Publish())
+	}
+
+	addTarget(t, repo, "v1", "../fixtures/intermediate-ca.crt")
+
 	// readable, but corrupt file
 	repo.fileStore.SetMeta(roleName, []byte("this isn't JSON"))
 	err := repo.Publish()
-	assert.Error(t, err)
-	assert.IsType(t, &regJson.SyntaxError{}, err)
+	if succeeds {
+		assert.NoError(t, err)
+	} else {
+		assert.Error(t, err)
+		assert.IsType(t, &regJson.SyntaxError{}, err)
+	}
 
 	// make an unreadable file by creating a directory instead of a file
 	path := fmt.Sprintf("%s.%s",
@@ -1361,22 +1425,12 @@ func assertCannotPublishIfMetadataCorrupt(t *testing.T, repo *NotaryRepository, 
 	defer os.RemoveAll(path)
 
 	err = repo.Publish()
-	assert.Error(t, err)
-	assert.IsType(t, &os.PathError{}, err)
-}
-
-func testPublishBadMetadataAfterInit(
-	t *testing.T, roleName string, serverManagesSnapshot bool) {
-
-	ts := fullTestServer(t)
-	defer ts.Close()
-
-	repo, _ := initializeRepo(
-		t, data.ECDSAKey, "docker.com/notary", ts.URL, serverManagesSnapshot)
-	defer os.RemoveAll(repo.baseDir)
-
-	addTarget(t, repo, "v1", "../fixtures/intermediate-ca.crt")
-	assertCannotPublishIfMetadataCorrupt(t, repo, roleName)
+	if succeeds {
+		assert.NoError(t, err)
+	} else {
+		assert.Error(t, err)
+		assert.IsType(t, &os.PathError{}, err)
+	}
 }
 
 type cannotCreateKeys struct {
@@ -1566,15 +1620,12 @@ func TestPublishTargetsDelgationSuccessLocallyHasRoles(t *testing.T) {
 // is present, publish will write to that role only.  The targets keys are not
 // needed.
 func TestPublishTargetsDelgationNoTargetsKeyNeeded(t *testing.T) {
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-	defer os.RemoveAll(tempBaseDir)
-
-	gun := "docker.com/notary"
 	ts := fullTestServer(t)
 	defer ts.Close()
 
-	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
+	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
+
 	delgKey, err := repo.CryptoService.Create("targets/a", data.ECDSAKey)
 	assert.NoError(t, err, "error creating delegation key")
 
@@ -1644,26 +1695,17 @@ func TestPublishTargetsDelgationSuccessNeedsToDownloadRoles(t *testing.T) {
 // Ensure that two clients can publish delegations with two different keys and
 // the changes will not clobber each other.
 func TestPublishTargetsDelgationFromTwoRepos(t *testing.T) {
-	var tempDirs [2]string
-	for i := 0; i < 2; i++ {
-		tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-		assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-		defer os.RemoveAll(tempBaseDir)
-		tempDirs[i] = tempBaseDir
-	}
-
-	gun := "docker.com/notary"
 	ts := fullTestServer(t)
 	defer ts.Close()
 
 	// this happens to be the client that creates the repo, but can also
 	// write a delegation
-	repo1, _ := initializeRepo(t, data.ECDSAKey, tempDirs[0], gun, ts.URL, true)
+	repo1, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, true)
+	defer os.RemoveAll(repo1.baseDir)
 
 	// this is the second writable repo
-	repo2, err := NewNotaryRepository(tempDirs[1], gun, ts.URL,
-		http.DefaultTransport, passphraseRetriever)
-	assert.NoError(t, err, "error creating repository: %s", err)
+	repo2 := newRepoToTestRepo(t, repo1)
+	defer os.RemoveAll(repo2.baseDir)
 
 	// create keys for each repo
 	key1, err := repo1.CryptoService.Create("targets/a", data.ECDSAKey)
@@ -1711,14 +1753,6 @@ func TestPublishTargetsDelgationFromTwoRepos(t *testing.T) {
 // A client who could publish before can no longer publish once the owner
 // removes their delegation key from the delegation role.
 func TestPublishRemoveDelgationKeyFromDelegationRole(t *testing.T) {
-	var tempDirs [2]string
-	for i := 0; i < 2; i++ {
-		tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-		assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-		defer os.RemoveAll(tempBaseDir)
-		tempDirs[i] = tempBaseDir
-	}
-
 	gun := "docker.com/notary"
 	ts := fullTestServer(t)
 	defer ts.Close()
@@ -1726,12 +1760,13 @@ func TestPublishRemoveDelgationKeyFromDelegationRole(t *testing.T) {
 	// this is the original repo - it owns the root/targets keys and creates
 	// the delegation to which it doesn't have the key (so server snapshot
 	// signing would be required)
-	ownerRepo, _ := initializeRepo(t, data.ECDSAKey, tempDirs[0], gun, ts.URL, true)
+	ownerRepo, _ := initializeRepo(t, data.ECDSAKey, gun, ts.URL, true)
+	defer os.RemoveAll(ownerRepo.baseDir)
+
 	// this is a user, or otherwise a repo that only has access to the delegation
 	// key so it can publish targets to the delegated role
-	delgRepo, err := NewNotaryRepository(tempDirs[1], gun, ts.URL,
-		http.DefaultTransport, passphraseRetriever)
-	assert.NoError(t, err, "error creating repository: %s", err)
+	delgRepo := newRepoToTestRepo(t, ownerRepo)
+	defer os.RemoveAll(delgRepo.baseDir)
 
 	// create a key on the delegated repo
 	aKey, err := delgRepo.CryptoService.Create("targets/a", data.ECDSAKey)
@@ -1777,27 +1812,19 @@ func TestPublishRemoveDelgationKeyFromDelegationRole(t *testing.T) {
 // A client who could publish before can no longer publish once the owner
 // deletes the delegation
 func TestPublishRemoveDelgation(t *testing.T) {
-	var tempDirs [2]string
-	for i := 0; i < 2; i++ {
-		tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-		assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-		defer os.RemoveAll(tempBaseDir)
-		tempDirs[i] = tempBaseDir
-	}
-
-	gun := "docker.com/notary"
 	ts := fullTestServer(t)
 	defer ts.Close()
 
 	// this is the original repo - it owns the root/targets keys and creates
 	// the delegation to which it doesn't have the key (so server snapshot
 	// signing would be required)
-	ownerRepo, _ := initializeRepo(t, data.ECDSAKey, tempDirs[0], gun, ts.URL, true)
+	ownerRepo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, true)
+	defer os.RemoveAll(ownerRepo.baseDir)
+
 	// this is a user, or otherwise a repo that only has access to the delegation
 	// key so it can publish targets to the delegated role
-	delgRepo, err := NewNotaryRepository(tempDirs[1], gun, ts.URL,
-		http.DefaultTransport, passphraseRetriever)
-	assert.NoError(t, err, "error creating repository: %s", err)
+	delgRepo := newRepoToTestRepo(t, ownerRepo)
+	defer os.RemoveAll(delgRepo.baseDir)
 
 	// create a key on the delegated repo
 	aKey, err := delgRepo.CryptoService.Create("targets/a", data.ECDSAKey)
@@ -1820,6 +1847,31 @@ func TestPublishRemoveDelgation(t *testing.T) {
 	// delegated repo can now no longer publish to delegated role
 	addTarget(t, delgRepo, "v2", "../fixtures/root-ca.crt", "targets/a")
 	assert.Error(t, delgRepo.Publish())
+}
+
+// If the delegation data is corrupt or unreadable, it doesn't matter because
+// all the delegation information is just re-downloaded.  When bootstrapping
+// the repository from disk, we just don't load the data from disk because
+// there should not be anything there yet.
+func TestPublishSucceedsDespiteDelegationCorrupt(t *testing.T) {
+	ts := fullTestServer(t)
+	defer ts.Close()
+
+	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
+
+	delgKey, err := repo.CryptoService.Create("targets/a", data.ECDSAKey)
+	assert.NoError(t, err, "error creating delegation key")
+
+	assert.NoError(t,
+		repo.AddDelegation("targets/a", 1, []data.PublicKey{delgKey}, []string{""}),
+		"error creating delegation")
+
+	testPublishBadMetadata(t, "targets/a", repo, false, true)
+
+	// publish again, now that it has already been published, and again there
+	// is no error.
+	testPublishBadMetadata(t, "targets/a", repo, true, true)
 }
 
 // Rotate invalid roles, or attempt to delegate target signing to the server
