@@ -129,7 +129,7 @@ func getHandler(ctx context.Context, w http.ResponseWriter, r *http.Request, var
 	out, err := store.GetCurrent(gun, tufRole)
 	if err != nil {
 		if _, ok := err.(storage.ErrNotFound); ok {
-			logrus.Error(gun + ":" + tufRole)
+			logrus.Error("404 GET " + gun + ":" + tufRole)
 			return errors.ErrMetadataNotFound.WithDetail(nil)
 		}
 		logger.Error("500 GET")
