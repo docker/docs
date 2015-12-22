@@ -414,18 +414,26 @@ func blockType(k data.PrivateKey) (string, error) {
 }
 
 // KeyToPEM returns a PEM encoded key from a Private Key
-func KeyToPEM(privKey data.PrivateKey) ([]byte, error) {
+func KeyToPEM(privKey data.PrivateKey, role string) ([]byte, error) {
 	bt, err := blockType(privKey)
 	if err != nil {
 		return nil, err
 	}
 
-	return pem.EncodeToMemory(&pem.Block{Type: bt, Bytes: privKey.Private()}), nil
+	block := &pem.Block{
+		Type: bt,
+		Headers: map[string]string{
+			"role": role,
+		},
+		Bytes: privKey.Private(),
+	}
+
+	return pem.EncodeToMemory(block), nil
 }
 
 // EncryptPrivateKey returns an encrypted PEM key given a Privatekey
 // and a passphrase
-func EncryptPrivateKey(key data.PrivateKey, passphrase string) ([]byte, error) {
+func EncryptPrivateKey(key data.PrivateKey, role, passphrase string) ([]byte, error) {
 	bt, err := blockType(key)
 	if err != nil {
 		return nil, err
@@ -442,6 +450,11 @@ func EncryptPrivateKey(key data.PrivateKey, passphrase string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	if encryptedPEMBlock.Headers == nil {
+		encryptedPEMBlock.Headers = make(map[string]string)
+	}
+	encryptedPEMBlock.Headers["role"] = role
 
 	return pem.EncodeToMemory(encryptedPEMBlock), nil
 }

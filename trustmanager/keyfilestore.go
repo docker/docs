@@ -333,7 +333,7 @@ func GetPasswdDecryptBytes(passphraseRetriever passphrase.Retriever, pemBytes []
 	return privKey, passwd, nil
 }
 
-func encryptAndAddKey(s LimitedFileStore, passwd string, cachedKeys map[string]*cachedKey, name, alias string, privKey data.PrivateKey) error {
+func encryptAndAddKey(s LimitedFileStore, passwd string, cachedKeys map[string]*cachedKey, name, role string, privKey data.PrivateKey) error {
 
 	var (
 		pemPrivKey []byte
@@ -341,17 +341,17 @@ func encryptAndAddKey(s LimitedFileStore, passwd string, cachedKeys map[string]*
 	)
 
 	if passwd != "" {
-		pemPrivKey, err = EncryptPrivateKey(privKey, passwd)
+		pemPrivKey, err = EncryptPrivateKey(privKey, role, passwd)
 	} else {
-		pemPrivKey, err = KeyToPEM(privKey)
+		pemPrivKey, err = KeyToPEM(privKey, role)
 	}
 
 	if err != nil {
 		return err
 	}
 
-	cachedKeys[name] = &cachedKey{alias: alias, key: privKey}
-	return s.Add(filepath.Join(getSubdir(alias), name+"_"+alias), pemPrivKey)
+	cachedKeys[name] = &cachedKey{alias: role, key: privKey}
+	return s.Add(filepath.Join(getSubdir(role), name+"_"+role), pemPrivKey)
 }
 
 func importKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, cachedKeys map[string]*cachedKey, alias string, pemBytes []byte) error {
