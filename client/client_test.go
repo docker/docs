@@ -1156,6 +1156,37 @@ func testPublishNoData(t *testing.T, rootType string, serverManagesSnapshot bool
 	}
 }
 
+// Publishing an uninitialized repo will fail, but initializing and republishing
+// after should succeed
+func TestPublishUninitializedRepo(t *testing.T) {
+	gun := "docker.com/notary"
+	ts := fullTestServer(t)
+	defer ts.Close()
+
+	// uninitialized repo should fail to publish
+	tempBaseDir, err := ioutil.TempDir("", "notary-tests")
+	assert.NoError(t, err)
+	defer os.RemoveAll(tempBaseDir)
+
+	repo, err := NewNotaryRepository(tempBaseDir, gun, ts.URL,
+		http.DefaultTransport, passphraseRetriever)
+	assert.NoError(t, err, "error creating repository: %s", err)
+	err = repo.Publish()
+	assert.Error(t, err)
+
+	// no metadata created
+	assertRepoHasExpectedMetadata(t, repo, data.CanonicalRootRole, false)
+	assertRepoHasExpectedMetadata(t, repo, data.CanonicalSnapshotRole, false)
+	assertRepoHasExpectedMetadata(t, repo, data.CanonicalTargetsRole, false)
+
+	// now, initialize and republish in the same directory
+	rootPubKey, err := repo.CryptoService.Create("root", data.ECDSAKey)
+	assert.NoError(t, err, "error generating root key: %s", err)
+
+	assert.NoError(t, repo.Initialize(rootPubKey.ID()))
+	assert.NoError(t, repo.Publish())
+}
+
 // Create a repo, instantiate a notary server, and publish the repo with
 // some targets to the server, signing all the non-timestamp metadata.
 // We test this with both an RSA and ECDSA root key
