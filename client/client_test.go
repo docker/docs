@@ -1473,6 +1473,26 @@ func testPublishBadMetadata(t *testing.T, roleName string, repo *NotaryRepositor
 	}
 }
 
+// If the repo is not initialized, calling repo.Publish() should return ErrRepoNotInitialized
+func TestNotInitializedOnPublish(t *testing.T) {
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("/tmp", "notary-test-")
+	defer os.RemoveAll(tempBaseDir)
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+
+	gun := "docker.com/notary"
+	ts := fullTestServer(t)
+	defer ts.Close()
+
+	repo, _ := createRepoAndKey(t, data.ECDSAKey, tempBaseDir, gun, ts.URL)
+
+	addTarget(t, repo, "v1", "../fixtures/intermediate-ca.crt")
+
+	err = repo.Publish()
+	assert.Error(t, err)
+	assert.IsType(t, &ErrRepoNotInitialized{}, err)
+}
+
 type cannotCreateKeys struct {
 	signed.CryptoService
 }
