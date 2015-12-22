@@ -1184,6 +1184,12 @@ func TestPublishUninitializedRepo(t *testing.T) {
 	assert.NoError(t, err, "error generating root key: %s", err)
 
 	assert.NoError(t, repo.Initialize(rootPubKey.ID()))
+
+	// now metadata is created
+	assertRepoHasExpectedMetadata(t, repo, data.CanonicalRootRole, true)
+	assertRepoHasExpectedMetadata(t, repo, data.CanonicalSnapshotRole, true)
+	assertRepoHasExpectedMetadata(t, repo, data.CanonicalTargetsRole, true)
+
 	assert.NoError(t, repo.Publish())
 }
 
@@ -1224,7 +1230,8 @@ func assertPublishSucceeds(t *testing.T, repo1 *NotaryRepository) {
 	assertPublishToRolesSucceeds(t, repo1, nil, []string{data.CanonicalTargetsRole})
 }
 
-// asserts that adding to the given roles results in the targets actually
+// asserts that adding to the given roles results in the targets actually being
+// added only to the expected roles and no others
 func assertPublishToRolesSucceeds(t *testing.T, repo1 *NotaryRepository,
 	publishToRoles []string, expectedPublishedRoles []string) {
 
@@ -1365,20 +1372,22 @@ func TestPublishSnapshotCorrupt(t *testing.T) {
 	ts := fullTestServer(t)
 	defer ts.Close()
 
-	// do not publish first - publish should fail
+	// do not publish first - publish should fail with corrupt snapshot data even with server signing snapshot
 	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary1", ts.URL, true)
 	defer os.RemoveAll(repo.baseDir)
 	testPublishBadMetadata(t, data.CanonicalSnapshotRole, repo, false, false)
 
+	// do not publish first - publish should fail with corrupt snapshot data with local snapshot signing
 	repo, _ = initializeRepo(t, data.ECDSAKey, "docker.com/notary2", ts.URL, false)
 	defer os.RemoveAll(repo.baseDir)
 	testPublishBadMetadata(t, data.CanonicalSnapshotRole, repo, false, false)
 
-	// publish first - should succeed
+	// publish first - publish again should succeed despite corrupt snapshot data (server signing snapshot)
 	repo, _ = initializeRepo(t, data.ECDSAKey, "docker.com/notary3", ts.URL, true)
 	defer os.RemoveAll(repo.baseDir)
 	testPublishBadMetadata(t, data.CanonicalSnapshotRole, repo, true, true)
 
+	// publish first - publish again should succeed despite corrupt snapshot data (local snapshot signing)
 	repo, _ = initializeRepo(t, data.ECDSAKey, "docker.com/notary4", ts.URL, false)
 	defer os.RemoveAll(repo.baseDir)
 	testPublishBadMetadata(t, data.CanonicalSnapshotRole, repo, true, true)
@@ -1392,36 +1401,36 @@ func TestPublishTargetsCorrupt(t *testing.T) {
 	ts := fullTestServer(t)
 	defer ts.Close()
 
-	// do not publish first - publish should fail
+	// do not publish first - publish should fail with corrupt snapshot data
 	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary1", ts.URL, false)
 	defer os.RemoveAll(repo.baseDir)
 	testPublishBadMetadata(t, data.CanonicalTargetsRole, repo, false, false)
 
-	// publish first - should succeed
+	// publish first - publish again should succeed despite corrupt snapshot data
 	repo, _ = initializeRepo(t, data.ECDSAKey, "docker.com/notary2", ts.URL, false)
 	defer os.RemoveAll(repo.baseDir)
 	testPublishBadMetadata(t, data.CanonicalTargetsRole, repo, true, true)
 }
 
 // If the root metadata is corrupt or the root metadata is unreadable,
-// we can't publish for the first time or the second time.  Root is the most
-// important and what we used to pin trust, so if it's corrupt, we can't
-// verify downloaded updates.
+// we can't publish for the first time.  If there is already a remote root,
+// we just download that and verify (using our trusted certificate trust
+// anchors) that it is signed with the same keys, and if so, we just use the
+// remote root.
 func TestPublishRootCorrupt(t *testing.T) {
-	t.Skip("Test currently fails - not sure what the correct behavior is.")
-
 	ts := fullTestServer(t)
 	defer ts.Close()
 
-	// do not publish first - publish should fail
+	// do not publish first - publish should fail with corrupt snapshot data
 	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary1", ts.URL, false)
 	defer os.RemoveAll(repo.baseDir)
 	testPublishBadMetadata(t, data.CanonicalRootRole, repo, false, false)
 
-	// publish first - publish should still succeed if root corrupt
+	// publish first - publish should still succeed if root corrupt since the
+	// remote root is signed with the same key.
 	repo, _ = initializeRepo(t, data.ECDSAKey, "docker.com/notary2", ts.URL, false)
 	defer os.RemoveAll(repo.baseDir)
-	testPublishBadMetadata(t, data.CanonicalRootRole, repo, true, false)
+	testPublishBadMetadata(t, data.CanonicalRootRole, repo, true, true)
 }
 
 // When publishing snapshot, root, or target, if the repo hasn't been published
