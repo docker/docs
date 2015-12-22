@@ -1833,7 +1833,7 @@ func TestPublishRevokeDelgation(t *testing.T) {
 	assert.NoError(t, err)
 	tdJSON, err := json.Marshal(&changelist.TufDelegation{
 		NewThreshold: 1,
-		AddKeys:      data.KeyList{newKey},
+		AddKeys:      data.KeyList([]data.PublicKey{newKey}),
 		RemoveKeys:   []string{aKey.ID()},
 	})
 	assert.NoError(t, err)
