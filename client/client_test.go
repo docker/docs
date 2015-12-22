@@ -1657,10 +1657,8 @@ func TestPublishTargetsDelgationNoTargetsKeyNeeded(t *testing.T) {
 
 	// remove targets key - it is not even needed
 	targetsKeys := repo.CryptoService.ListKeys(data.CanonicalTargetsRole)
-	assert.NotEmpty(t, targetsKeys)
-	for _, k := range targetsKeys {
-		assert.NoError(t, repo.CryptoService.RemoveKey(k))
-	}
+	assert.Len(t, targetsKeys, 1)
+	assert.NoError(t, repo.CryptoService.RemoveKey(targetsKeys[0]))
 
 	assertPublishToRolesSucceeds(t, repo, []string{"targets/a/b"},
 		[]string{"targets/a/b"})
@@ -1738,7 +1736,6 @@ func TestPublishTargetsDelgationFromTwoRepos(t *testing.T) {
 	// this happens to be the client that creates the repo, but can also
 	// write a delegation
 	repo1, _ := initializeRepo(t, data.ECDSAKey, tempDirs[0], gun, ts.URL, true)
-	defer os.RemoveAll(repo1.baseDir)
 
 	// this is the second writable repo
 	repo2, err := NewNotaryRepository(tempDirs[1], gun, ts.URL,
@@ -1770,7 +1767,7 @@ func TestPublishTargetsDelgationFromTwoRepos(t *testing.T) {
 	addTarget(t, repo1, "third", "../fixtures/root-ca.crt", "targets/a")
 	assert.NoError(t, repo1.Publish())
 
-	// both should see both targets
+	// both repos should be able to see all targets
 	for _, repo := range []*NotaryRepository{repo1, repo2} {
 		targets, err := repo.ListTargets()
 		assert.NoError(t, err)
@@ -1789,8 +1786,8 @@ func TestPublishTargetsDelgationFromTwoRepos(t *testing.T) {
 }
 
 // A client who could publish before can no longer publish once the owner
-// revokes their delegation.
-func TestPublishRevokeDelgation(t *testing.T) {
+// removes their delegation key from the delegation role.
+func TestPublishRemoveDelgationKeyFromDelegationRole(t *testing.T) {
 	var tempDirs [2]string
 	for i := 0; i < 2; i++ {
 		tempBaseDir, err := ioutil.TempDir("", "notary-test-")
