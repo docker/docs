@@ -9,5 +9,5 @@ type ErrMetaNotFound struct {
 }
 
 func (err ErrMetaNotFound) Error() string {
-	return fmt.Sprintf("no %s trust data available", err.Role)
+	return fmt.Sprintf("%s trust data unavailable", err.Role)
 }
