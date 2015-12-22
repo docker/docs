@@ -4,6 +4,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path"
+	"path/filepath"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -54,6 +55,24 @@ func TestSetMetaWithNoParentDirectory(t *testing.T) {
 
 	content, err := ioutil.ReadFile(path.Join(testDir, "metadata", "noexist/testMeta.json"))
 	assert.Nil(t, err, "Error reading file: %v", err)
+	assert.Equal(t, testContent, content, "Content written to file was corrupted.")
+}
+
+// if something already existed there, remove it first and write a new file
+func TestSetMetaRemovesExistingFileBeforeWriting(t *testing.T) {
+	s, err := NewFilesystemStore(testDir, "metadata", "json", "targets")
+	assert.Nil(t, err, "Initializing FilesystemStore returned unexpected error: %v", err)
+	defer os.RemoveAll(testDir)
+
+	// make a directory where we want metadata to go
+	os.Mkdir(filepath.Join(testDir, "metadata", "root.json"), 0700)
+
+	testContent := []byte("test data")
+	err = s.SetMeta("root", testContent)
+	assert.NoError(t, err, "SetMeta returned unexpected error: %v", err)
+
+	content, err := ioutil.ReadFile(path.Join(testDir, "metadata", "root.json"))
+	assert.NoError(t, err, "Error reading file: %v", err)
 	assert.Equal(t, testContent, content, "Content written to file was corrupted.")
 }
 
