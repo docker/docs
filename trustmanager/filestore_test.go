@@ -340,7 +340,14 @@ func TestFileStoreConsistency(t *testing.T) {
 	assert.NoError(t, err)
 	defer os.RemoveAll(tempBaseDir)
 
+	tempBaseDir2, err := ioutil.TempDir("", "notary-test-")
+	assert.NoError(t, err)
+	defer os.RemoveAll(tempBaseDir2)
+
 	s, err := NewPrivateSimpleFileStore(tempBaseDir, "txt")
+	assert.NoError(t, err)
+
+	s2, err := NewPrivateSimpleFileStore(tempBaseDir2, ".txt")
 	assert.NoError(t, err)
 
 	file1Data := make([]byte, 20)
@@ -359,21 +366,23 @@ func TestFileStoreConsistency(t *testing.T) {
 	file2Path := "path/file2"
 	file3Path := "long/path/file3"
 
-	s.Add(file1Path, file1Data)
-	s.Add(file2Path, file2Data)
-	s.Add(file3Path, file3Data)
+	for _, s := range []LimitedFileStore{s, s2} {
+		s.Add(file1Path, file1Data)
+		s.Add(file2Path, file2Data)
+		s.Add(file3Path, file3Data)
 
-	paths := map[string][]byte{
-		file1Path: file1Data,
-		file2Path: file2Data,
-		file3Path: file3Data,
-	}
-	for _, p := range s.ListFiles() {
-		_, ok := paths[p]
-		assert.True(t, ok, fmt.Sprintf("returned path not found: %s", p))
-		d, err := s.Get(p)
-		assert.NoError(t, err)
-		assert.Equal(t, paths[p], d)
+		paths := map[string][]byte{
+			file1Path: file1Data,
+			file2Path: file2Data,
+			file3Path: file3Data,
+		}
+		for _, p := range s.ListFiles() {
+			_, ok := paths[p]
+			assert.True(t, ok, fmt.Sprintf("returned path not found: %s", p))
+			d, err := s.Get(p)
+			assert.NoError(t, err)
+			assert.Equal(t, paths[p], d)
+		}
 	}
 
 }
