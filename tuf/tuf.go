@@ -530,9 +530,17 @@ func (tr *Repo) VerifyCanSign(roleName string) error {
 	}
 
 	for _, keyID := range role.KeyIDs {
-		p, _, err := tr.cryptoService.GetPrivateKey(keyID)
-		if err == nil && p != nil {
-			return nil
+		k := tr.keysDB.GetKey(keyID)
+		canonicalID, err := utils.CanonicalKeyID(k)
+		check := []string{keyID}
+		if err == nil {
+			check = append(check, canonicalID)
+		}
+		for _, id := range check {
+			p, _, err := tr.cryptoService.GetPrivateKey(id)
+			if err == nil && p != nil {
+				return nil
+			}
 		}
 	}
 	return signed.ErrNoKeys{KeyIDs: role.KeyIDs}
