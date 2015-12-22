@@ -55,6 +55,8 @@ func TestAddKey(t *testing.T) {
 
 func TestGet(t *testing.T) {
 	testData := []byte(`-----BEGIN RSA PRIVATE KEY-----
+role: root
+
 MIIEogIBAAKCAQEAyUIXjsrWRrvPa4Bzp3VJ6uOUGPay2fUpSV8XzNxZxIG/Opdr
 +k3EQi1im6WOqF3Y5AS1UjYRxNuRN+cAZeo3uS1pOTuoSupBXuchVw8s4hZJ5vXn
 TRmGb+xY7tZ1ZVgPfAZDib9sRSUsL/gC+aSyprAjG/YBdbF06qKbfOfsoCEYW1OQ
@@ -109,7 +111,7 @@ EMl3eFOJXjIch/wIesRSN+2dGOsl7neercjMh1i9RvpCwHDx/E0=
 	privKey, _, err := store.GetKey(testName)
 	assert.NoError(t, err, "failed to get key from store")
 
-	pemPrivKey, err := KeyToPEM(privKey)
+	pemPrivKey, err := KeyToPEM(privKey, testAlias)
 	assert.NoError(t, err, "failed to convert key to PEM")
 	assert.Equal(t, testData, pemPrivKey)
 }
@@ -513,7 +515,7 @@ func assertExportKeySuccess(
 func assertImportKeySuccess(
 	t *testing.T, s KeyStore, expectedKey data.PrivateKey) {
 
-	pemBytes, err := EncryptPrivateKey(expectedKey, cannedPassphrase)
+	pemBytes, err := EncryptPrivateKey(expectedKey, "root", cannedPassphrase)
 	assert.NoError(t, err)
 
 	err = s.ImportKey(pemBytes, "root")

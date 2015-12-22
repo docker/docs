@@ -465,7 +465,7 @@ func TestClientKeyImportExportRootOnly(t *testing.T) {
 		privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
 		assert.NoError(t, err)
 
-		pemBytes, err := trustmanager.EncryptPrivateKey(privKey, testPassphrase)
+		pemBytes, err := trustmanager.EncryptPrivateKey(privKey, "root", testPassphrase)
 		assert.NoError(t, err)
 
 		nBytes, err := tempFile.Write(pemBytes)

@@ -328,7 +328,7 @@ func TestImportExportRootKey(t *testing.T) {
 	assert.NoError(t, err, "could not read key file")
 	privKey, err := trustmanager.ParsePEMPrivateKey(pemBytes, oldPassphrase)
 	assert.NoError(t, err, "could not decrypt key file")
-	decryptedPEMBytes, err := trustmanager.KeyToPEM(privKey)
+	decryptedPEMBytes, err := trustmanager.KeyToPEM(privKey, "root")
 	assert.NoError(t, err, "could not convert key to PEM")
 
 	err = cs2.ImportRootKey(bytes.NewReader(decryptedPEMBytes))
