@@ -1604,7 +1604,7 @@ func TestPublishTargetsDelgationScopeNoFallbackIfNoKeys(t *testing.T) {
 	assert.Empty(t, targets)
 }
 
-// If a changelist specifies a particular role to push targets to, and is such
+// If a changelist specifies a particular role to push targets to, and such
 // a role and the keys are present, publish will write to that role only, and
 // not its parents.  This tests the case where the local machine knows about
 // all the roles (in fact, the role creations will be applied before the
@@ -1626,6 +1626,40 @@ func TestPublishTargetsDelgationSuccessLocallyHasRoles(t *testing.T) {
 		assert.NoError(t,
 			repo.AddDelegation(delgName, 1, []data.PublicKey{delgKey}, []string{""}),
 			"error creating delegation")
+	}
+
+	assertPublishToRolesSucceeds(t, repo, []string{"targets/a/b"},
+		[]string{"targets/a/b"})
+}
+
+// If a changelist specifies a particular role to push targets to, and the role
+// is present, publish will write to that role only.  The targets keys are not
+// needed.
+func TestPublishTargetsDelgationNoTargetsKeyNeeded(t *testing.T) {
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+	defer os.RemoveAll(tempBaseDir)
+
+	gun := "docker.com/notary"
+	ts := fullTestServer(t)
+	defer ts.Close()
+
+	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
+	delgKey, err := repo.CryptoService.Create("targets/a", data.ECDSAKey)
+	assert.NoError(t, err, "error creating delegation key")
+
+	for _, delgName := range []string{"targets/a", "targets/a/b"} {
+		assert.NoError(t,
+			repo.AddDelegation(delgName, 1, []data.PublicKey{delgKey}, []string{""}),
+			"error creating delegation")
+	}
+	assert.NoError(t, repo.Publish())
+
+	// remove targets key - it is not even needed
+	targetsKeys := repo.CryptoService.ListKeys(data.CanonicalTargetsRole)
+	assert.NotEmpty(t, targetsKeys)
+	for _, k := range targetsKeys {
+		assert.NoError(t, repo.CryptoService.RemoveKey(k))
 	}
 
 	assertPublishToRolesSucceeds(t, repo, []string{"targets/a/b"},
@@ -1684,6 +1718,188 @@ func TestPublishTargetsDelgationSuccessNeedsToDownloadRoles(t *testing.T) {
 	// to download those roles first, since it doesn't know about them
 	assertPublishToRolesSucceeds(t, delgRepo, []string{"targets/a/b"},
 		[]string{"targets/a/b"})
+}
+
+// Ensure that two clients can publish delegations with two different keys and
+// the changes will not clobber each other.
+func TestPublishTargetsDelgationFromTwoRepos(t *testing.T) {
+	var tempDirs [2]string
+	for i := 0; i < 2; i++ {
+		tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+		assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+		defer os.RemoveAll(tempBaseDir)
+		tempDirs[i] = tempBaseDir
+	}
+
+	gun := "docker.com/notary"
+	ts := fullTestServer(t)
+	defer ts.Close()
+
+	// this happens to be the client that creates the repo, but can also
+	// write a delegation
+	repo1, _ := initializeRepo(t, data.ECDSAKey, tempDirs[0], gun, ts.URL, true)
+	defer os.RemoveAll(repo1.baseDir)
+
+	// this is the second writable repo
+	repo2, err := NewNotaryRepository(tempDirs[1], gun, ts.URL,
+		http.DefaultTransport, passphraseRetriever)
+	assert.NoError(t, err, "error creating repository: %s", err)
+
+	// create keys for each repo
+	key1, err := repo1.CryptoService.Create("targets/a", data.ECDSAKey)
+	assert.NoError(t, err, "error creating delegation key")
+
+	// create a key on the delegated repo
+	key2, err := repo2.CryptoService.Create("targets/a", data.ECDSAKey)
+	assert.NoError(t, err, "error creating delegation key")
+
+	// delegation includes both keys
+	assert.NoError(t,
+		repo1.AddDelegation("targets/a", 1, []data.PublicKey{key1, key2}, []string{""}),
+		"error creating delegation")
+
+	assert.NoError(t, repo1.Publish())
+
+	// both repos add targets and publish
+	addTarget(t, repo1, "first", "../fixtures/root-ca.crt", "targets/a")
+	assert.NoError(t, repo1.Publish())
+	addTarget(t, repo2, "second", "../fixtures/root-ca.crt", "targets/a")
+	assert.NoError(t, repo2.Publish())
+
+	// first repo can publish again
+	addTarget(t, repo1, "third", "../fixtures/root-ca.crt", "targets/a")
+	assert.NoError(t, repo1.Publish())
+
+	// both should see both targets
+	for _, repo := range []*NotaryRepository{repo1, repo2} {
+		targets, err := repo.ListTargets()
+		assert.NoError(t, err)
+		assert.Len(t, targets, 3)
+
+		found := make(map[string]bool)
+		for _, t := range targets {
+			found[t.Name] = true
+		}
+
+		for _, targetName := range []string{"first", "second", "third"} {
+			_, ok := found[targetName]
+			assert.True(t, ok)
+		}
+	}
+}
+
+// A client who could publish before can no longer publish once the owner
+// revokes their delegation.
+func TestPublishRevokeDelgation(t *testing.T) {
+	var tempDirs [2]string
+	for i := 0; i < 2; i++ {
+		tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+		assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+		defer os.RemoveAll(tempBaseDir)
+		tempDirs[i] = tempBaseDir
+	}
+
+	gun := "docker.com/notary"
+	ts := fullTestServer(t)
+	defer ts.Close()
+
+	// this is the original repo - it owns the root/targets keys and creates
+	// the delegation to which it doesn't have the key (so server snapshot
+	// signing would be required)
+	ownerRepo, _ := initializeRepo(t, data.ECDSAKey, tempDirs[0], gun, ts.URL, true)
+	// this is a user, or otherwise a repo that only has access to the delegation
+	// key so it can publish targets to the delegated role
+	delgRepo, err := NewNotaryRepository(tempDirs[1], gun, ts.URL,
+		http.DefaultTransport, passphraseRetriever)
+	assert.NoError(t, err, "error creating repository: %s", err)
+
+	// create a key on the delegated repo
+	aKey, err := delgRepo.CryptoService.Create("targets/a", data.ECDSAKey)
+	assert.NoError(t, err, "error creating delegation key")
+
+	// owner creates delegation, adds the delegated key to it, and publishes it
+	assert.NoError(t,
+		ownerRepo.AddDelegation("targets/a", 1, []data.PublicKey{aKey}, []string{""}),
+		"error creating delegation")
+	assert.NoError(t, ownerRepo.Publish())
+
+	// delegated repo can now publish to delegated role
+	addTarget(t, delgRepo, "v1", "../fixtures/root-ca.crt", "targets/a")
+	assert.NoError(t, delgRepo.Publish())
+
+	// owner revokes delegation
+	// note there is no removekeyfromdelegation yet, so here's a hack to do so
+	newKey, err := ownerRepo.CryptoService.Create("targets/a", data.ECDSAKey)
+	assert.NoError(t, err)
+	tdJSON, err := json.Marshal(&changelist.TufDelegation{
+		NewThreshold: 1,
+		AddKeys:      data.KeyList{newKey},
+		RemoveKeys:   []string{aKey.ID()},
+	})
+	assert.NoError(t, err)
+
+	cl, err := changelist.NewFileChangelist(filepath.Join(ownerRepo.tufRepoPath, "changelist"))
+	assert.NoError(t, cl.Add(changelist.NewTufChange(
+		changelist.ActionUpdate,
+		"targets/a",
+		changelist.TypeTargetsDelegation,
+		"",
+		tdJSON,
+	)))
+	cl.Close()
+	assert.NoError(t, ownerRepo.Publish())
+
+	// delegated repo can now no longer publish to delegated role
+	addTarget(t, delgRepo, "v2", "../fixtures/root-ca.crt", "targets/a")
+	assert.Error(t, delgRepo.Publish())
+}
+
+// A client who could publish before can no longer publish once the owner
+// deletes the delegation
+func TestPublishRemoveDelgation(t *testing.T) {
+	var tempDirs [2]string
+	for i := 0; i < 2; i++ {
+		tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+		assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+		defer os.RemoveAll(tempBaseDir)
+		tempDirs[i] = tempBaseDir
+	}
+
+	gun := "docker.com/notary"
+	ts := fullTestServer(t)
+	defer ts.Close()
+
+	// this is the original repo - it owns the root/targets keys and creates
+	// the delegation to which it doesn't have the key (so server snapshot
+	// signing would be required)
+	ownerRepo, _ := initializeRepo(t, data.ECDSAKey, tempDirs[0], gun, ts.URL, true)
+	// this is a user, or otherwise a repo that only has access to the delegation
+	// key so it can publish targets to the delegated role
+	delgRepo, err := NewNotaryRepository(tempDirs[1], gun, ts.URL,
+		http.DefaultTransport, passphraseRetriever)
+	assert.NoError(t, err, "error creating repository: %s", err)
+
+	// create a key on the delegated repo
+	aKey, err := delgRepo.CryptoService.Create("targets/a", data.ECDSAKey)
+	assert.NoError(t, err, "error creating delegation key")
+
+	// owner creates delegation, adds the delegated key to it, and publishes it
+	assert.NoError(t,
+		ownerRepo.AddDelegation("targets/a", 1, []data.PublicKey{aKey}, []string{""}),
+		"error creating delegation")
+	assert.NoError(t, ownerRepo.Publish())
+
+	// delegated repo can now publish to delegated role
+	addTarget(t, delgRepo, "v1", "../fixtures/root-ca.crt", "targets/a")
+	assert.NoError(t, delgRepo.Publish())
+
+	// owner removes delegation
+	assert.NoError(t, ownerRepo.RemoveDelegation("targets/a"))
+	assert.NoError(t, ownerRepo.Publish())
+
+	// delegated repo can now no longer publish to delegated role
+	addTarget(t, delgRepo, "v2", "../fixtures/root-ca.crt", "targets/a")
+	assert.Error(t, delgRepo.Publish())
 }
 
 // Rotate invalid roles, or attempt to delegate target signing to the server
