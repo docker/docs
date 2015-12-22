@@ -93,6 +93,18 @@ discussed with them among the other maintainers so that they are not surprised
 by a pull request removing them.
 """
 
+    [Rules.alumni]
+
+        title = "Alumni"
+
+        text = """
+Projects can opt to keep a list of former maintainers in the MAINTAINERS file.
+Instead of removing a maintainer from the file when they step down, the maintainer
+is moved to the alumni list (`[Org.Alumni]`). People on this list have
+no official capacity in the project, it's a way to say "thank you" for the
+work they have done for the project.
+"""
+
     [Rules.bdfl]
 
         title = "The Benevolent dictator for life (BDFL)"
