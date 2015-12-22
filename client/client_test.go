@@ -1064,12 +1064,10 @@ func testValidateRootKey(t *testing.T, rootType string) {
 	assert.NotEmpty(t, keyids)
 
 	for _, keyid := range keyids {
-		if key, ok := decodedRoot.Keys[keyid]; !ok {
-			t.Fatal("key id not found in keys")
-		} else {
-			_, err := trustmanager.LoadCertFromPEM(key.Public())
-			assert.NoError(t, err, "key is not a valid cert")
-		}
+		key, ok := decodedRoot.Keys[keyid]
+		assert.True(t, ok, "key id not found in keys")
+		_, err := trustmanager.LoadCertFromPEM(key.Public())
+		assert.NoError(t, err, "key is not a valid cert")
 	}
 }
 
