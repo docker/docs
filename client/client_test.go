@@ -95,8 +95,13 @@ func errorTestServer(t *testing.T, errorCode int) *httptest.Server {
 	return server
 }
 
-func initializeRepo(t *testing.T, rootType, tempBaseDir, gun, url string,
+// initializes a repository in a temporary directory
+func initializeRepo(t *testing.T, rootType, gun, url string,
 	serverManagesSnapshot bool) (*NotaryRepository, string) {
+
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	serverManagedRoles := []string{}
 	if serverManagesSnapshot {
@@ -105,8 +110,11 @@ func initializeRepo(t *testing.T, rootType, tempBaseDir, gun, url string,
 
 	repo, rootPubKeyID := createRepoAndKey(t, rootType, tempBaseDir, gun, url)
 
-	err := repo.Initialize(rootPubKeyID, serverManagedRoles...)
+	err = repo.Initialize(rootPubKeyID, serverManagedRoles...)
 	assert.NoError(t, err, "error creating repository: %s", err)
+	if err != nil {
+		os.RemoveAll(tempBaseDir)
+	}
 
 	return repo, rootPubKeyID
 }
@@ -393,17 +401,12 @@ func assertRepoHasExpectedMetadata(t *testing.T, repo *NotaryRepository,
 
 func testInitRepo(t *testing.T, rootType string, serverManagesSnapshot bool) {
 	gun := "docker.com/notary"
-	// Temporary directory where test files will be created
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	defer os.RemoveAll(tempBaseDir)
-
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	ts, _, _ := simpleTestServer(t)
 	defer ts.Close()
 
-	repo, rootKeyID := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL,
-		serverManagesSnapshot)
+	repo, rootKeyID := initializeRepo(t, rootType, gun, ts.URL, serverManagesSnapshot)
+	defer os.RemoveAll(repo.baseDir)
 
 	assertRepoHasExpectedKeys(t, repo, rootKeyID, !serverManagesSnapshot)
 	assertRepoHasExpectedCerts(t, repo)
@@ -504,18 +507,11 @@ func getChanges(t *testing.T, repo *NotaryRepository) []changelist.Change {
 // to a repo without delegations.  Confirms that the changelist is created
 // correctly, for the targets scope.
 func TestAddTargetToTargetRoleByDefault(t *testing.T) {
-	// Temporary directory where test files will be created
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	defer os.RemoveAll(tempBaseDir)
-
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-
-	gun := "docker.com/notary"
-
 	ts, _, _ := simpleTestServer(t)
 	defer ts.Close()
 
-	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
+	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
 
 	testAddOrDeleteTarget(t, repo, changelist.ActionCreate, nil,
 		[]string{data.CanonicalTargetsRole})
@@ -600,18 +596,11 @@ func testAddOrDeleteTarget(t *testing.T, repo *NotaryRepository, action string,
 // Confirms that the changelist is created correctly, one for each of the
 // the specified roles as scopes.
 func TestAddTargetToSpecifiedValidRoles(t *testing.T) {
-	// Temporary directory where test files will be created
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	defer os.RemoveAll(tempBaseDir)
-
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-
-	gun := "docker.com/notary"
-
 	ts, _, _ := simpleTestServer(t)
 	defer ts.Close()
 
-	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
+	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
 
 	roleName := filepath.Join(data.CanonicalTargetsRole, "a")
 	testAddOrDeleteTarget(t, repo, changelist.ActionCreate,
@@ -626,17 +615,11 @@ func TestAddTargetToSpecifiedValidRoles(t *testing.T) {
 // adding a target to an invalid role.  If any of the roles are invalid,
 // no targets are added to any roles.
 func TestAddTargetToSpecifiedInvalidRoles(t *testing.T) {
-	// Temporary directory where test files will be created
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-	defer os.RemoveAll(tempBaseDir)
-
-	gun := "docker.com/notary"
-
 	ts, _, _ := simpleTestServer(t)
 	defer ts.Close()
 
-	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
+	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
 
 	invalidRoles := []string{
 		data.CanonicalRootRole,
@@ -661,22 +644,16 @@ func TestAddTargetToSpecifiedInvalidRoles(t *testing.T) {
 
 // General way to assert that errors writing a changefile are propagated up
 func testErrorWritingChangefiles(t *testing.T, writeChangeFile func(*NotaryRepository) error) {
-	// Temporary directory where test files will be created
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	defer os.RemoveAll(tempBaseDir)
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-
-	gun := "docker.com/notary"
-
 	ts, _, _ := simpleTestServer(t)
 	defer ts.Close()
 
-	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
+	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
 
 	// first, make the actual changefile unwritable by making the changelist
 	// directory unwritable
 	changelistPath := filepath.Join(repo.tufRepoPath, "changelist")
-	err = os.MkdirAll(changelistPath, 0744)
+	err := os.MkdirAll(changelistPath, 0744)
 	assert.NoError(t, err, "could not create changelist dir")
 	err = os.Chmod(changelistPath, 0600)
 	assert.NoError(t, err, "could not change permission of changelist dir")
@@ -713,18 +690,11 @@ func TestAddTargetErrorWritingChanges(t *testing.T) {
 // role from a repo.  Confirms that the changelist is created correctly for
 // the targets scope.
 func TestRemoveTargetToTargetRoleByDefault(t *testing.T) {
-	// Temporary directory where test files will be created
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	defer os.RemoveAll(tempBaseDir)
-
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-
-	gun := "docker.com/notary"
-
 	ts, _, _ := simpleTestServer(t)
 	defer ts.Close()
 
-	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
+	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
 
 	testAddOrDeleteTarget(t, repo, changelist.ActionDelete, nil,
 		[]string{data.CanonicalTargetsRole})
@@ -734,18 +704,11 @@ func TestRemoveTargetToTargetRoleByDefault(t *testing.T) {
 // roles. Confirms that the changelist is created correctly, one for each of
 // the the specified roles as scopes.
 func TestRemoveTargetFromSpecifiedValidRoles(t *testing.T) {
-	// Temporary directory where test files will be created
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	defer os.RemoveAll(tempBaseDir)
-
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-
-	gun := "docker.com/notary"
-
 	ts, _, _ := simpleTestServer(t)
 	defer ts.Close()
 
-	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
+	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
 
 	roleName := filepath.Join(data.CanonicalTargetsRole, "a")
 	testAddOrDeleteTarget(t, repo, changelist.ActionDelete,
@@ -760,17 +723,11 @@ func TestRemoveTargetFromSpecifiedValidRoles(t *testing.T) {
 // removing a target to an invalid role.  If any of the roles are invalid,
 // no targets are removed from any roles.
 func TestRemoveTargetToSpecifiedInvalidRoles(t *testing.T) {
-	// Temporary directory where test files will be created
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-	defer os.RemoveAll(tempBaseDir)
-
-	gun := "docker.com/notary"
-
 	ts, _, _ := simpleTestServer(t)
 	defer ts.Close()
 
-	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
+	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
 
 	invalidRoles := []string{
 		data.CanonicalRootRole,
@@ -781,7 +738,7 @@ func TestRemoveTargetToSpecifiedInvalidRoles(t *testing.T) {
 	}
 
 	for _, invalidRole := range invalidRoles {
-		err = repo.RemoveTarget("latest", data.CanonicalTargetsRole, invalidRole)
+		err := repo.RemoveTarget("latest", data.CanonicalTargetsRole, invalidRole)
 		assert.Error(t, err, "Expected an ErrInvalidRole error")
 		assert.IsType(t, data.ErrInvalidRole{}, err)
 
@@ -814,20 +771,13 @@ func TestListTarget(t *testing.T) {
 }
 
 func testListEmptyTargets(t *testing.T, rootType string) {
-	// Temporary directory where test files will be created
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	defer os.RemoveAll(tempBaseDir)
-
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-
-	gun := "docker.com/notary"
-
 	ts := fullTestServer(t)
 	defer ts.Close()
 
-	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL, false)
+	repo, _ := initializeRepo(t, rootType, "docker.com/notary", ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
 
-	_, err = repo.ListTargets(data.CanonicalTargetsRole)
+	_, err := repo.ListTargets(data.CanonicalTargetsRole)
 	assert.Error(t, err) // no trust data
 }
 
@@ -925,21 +875,14 @@ func (k targetSorter) Swap(i, j int)      { k[i], k[j] = k[j], k[i] }
 func (k targetSorter) Less(i, j int) bool { return k[i].Name < k[j].Name }
 
 func testListTarget(t *testing.T, rootType string) {
-	// Temporary directory where test files will be created
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	defer os.RemoveAll(tempBaseDir)
-
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-
-	gun := "docker.com/notary"
-
 	ts, mux, keys := simpleTestServer(t)
 	defer ts.Close()
 
-	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL, false)
+	repo, _ := initializeRepo(t, rootType, "docker.com/notary", ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
 
 	// tests need to manually boostrap timestamp as client doesn't generate it
-	err = repo.tufRepo.InitTimestamp()
+	err := repo.tufRepo.InitTimestamp()
 	assert.NoError(t, err, "error creating repository: %s", err)
 
 	latestTarget := addTarget(t, repo, "latest", "../fixtures/intermediate-ca.crt")
@@ -949,7 +892,7 @@ func testListTarget(t *testing.T, rootType string) {
 
 	// load the changelist for this repo
 	cl, err := changelist.NewFileChangelist(
-		filepath.Join(tempBaseDir, "tuf", filepath.FromSlash(gun), "changelist"))
+		filepath.Join(repo.baseDir, "tuf", filepath.FromSlash(repo.gun), "changelist"))
 	assert.NoError(t, err, "could not open changelist")
 
 	// apply the changelist to the repo
@@ -981,21 +924,14 @@ func testListTarget(t *testing.T, rootType string) {
 }
 
 func testListTargetWithDelegates(t *testing.T, rootType string) {
-	// Temporary directory where test files will be created
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	defer os.RemoveAll(tempBaseDir)
-
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-
-	gun := "docker.com/notary"
-
 	ts, mux, keys := simpleTestServer(t)
 	defer ts.Close()
 
-	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL, false)
+	repo, _ := initializeRepo(t, rootType, "docker.com/notary", ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
 
 	// tests need to manually boostrap timestamp as client doesn't generate it
-	err = repo.tufRepo.InitTimestamp()
+	err := repo.tufRepo.InitTimestamp()
 	assert.NoError(t, err, "error creating repository: %s", err)
 
 	latestTarget := addTarget(t, repo, "latest", "../fixtures/intermediate-ca.crt")
@@ -1025,7 +961,7 @@ func testListTargetWithDelegates(t *testing.T, rootType string) {
 
 	// load the changelist for this repo
 	cl, err := changelist.NewFileChangelist(
-		filepath.Join(tempBaseDir, "tuf", filepath.FromSlash(gun), "changelist"))
+		filepath.Join(repo.baseDir, "tuf", filepath.FromSlash(repo.gun), "changelist"))
 	assert.NoError(t, err, "could not open changelist")
 
 	// apply the changelist to the repo
@@ -1099,20 +1035,14 @@ func TestValidateRootKey(t *testing.T) {
 }
 
 func testValidateRootKey(t *testing.T, rootType string) {
-	// Temporary directory where test files will be created
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	defer os.RemoveAll(tempBaseDir)
-
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-
-	gun := "docker.com/notary"
-
 	ts, _, _ := simpleTestServer(t)
 	defer ts.Close()
 
-	initializeRepo(t, rootType, tempBaseDir, gun, ts.URL, false)
+	repo, _ := initializeRepo(t, rootType, "docker.com/notary", ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
 
-	rootJSONFile := filepath.Join(tempBaseDir, "tuf", filepath.FromSlash(gun), "metadata", "root.json")
+	rootJSONFile := filepath.Join(repo.baseDir, "tuf", filepath.FromSlash(repo.gun),
+		"metadata", "root.json")
 
 	jsonBytes, err := ioutil.ReadFile(rootJSONFile)
 	assert.NoError(t, err, "error reading TUF metadata file %s: %s", rootJSONFile, err)
@@ -1154,17 +1084,11 @@ func TestGetChangelist(t *testing.T) {
 }
 
 func testGetChangelist(t *testing.T, rootType string) {
-	// Temporary directory where test files will be created
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	defer os.RemoveAll(tempBaseDir)
-
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-
-	gun := "docker.com/notary"
 	ts, _, _ := simpleTestServer(t)
 	defer ts.Close()
 
-	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL, false)
+	repo, _ := initializeRepo(t, rootType, "docker.com/notary", ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
 	assert.Len(t, getChanges(t, repo), 0, "No changes should be in changelist yet")
 
 	// Create 2 targets
@@ -1208,20 +1132,12 @@ func TestPublishBareRepo(t *testing.T) {
 }
 
 func testPublishNoData(t *testing.T, rootType string, serverManagesSnapshot bool) {
-	var tempDirs [2]string
-	for i := 0; i < 2; i++ {
-		tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-		assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-		defer os.RemoveAll(tempBaseDir)
-		tempDirs[i] = tempBaseDir
-	}
-
-	gun := "docker.com/notary"
 	ts := fullTestServer(t)
 	defer ts.Close()
 
-	repo1, _ := initializeRepo(t, rootType, tempDirs[0], gun, ts.URL,
+	repo1, _ := initializeRepo(t, rootType, "docker.com/notary", ts.URL,
 		serverManagesSnapshot)
+	defer os.RemoveAll(repo1.baseDir)
 	assert.NoError(t, repo1.Publish())
 
 	// use another repo to check metadata
@@ -1262,17 +1178,12 @@ func TestPublishAfterInitServerHasSnapshotKey(t *testing.T) {
 }
 
 func testPublishWithData(t *testing.T, rootType string, serverManagesSnapshot bool) {
-	// Temporary directory where test files will be created
-	tempBaseDir, err := ioutil.TempDir("/tmp", "notary-test-")
-	defer os.RemoveAll(tempBaseDir)
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-
-	gun := "docker.com/notary"
 	ts := fullTestServer(t)
 	defer ts.Close()
 
-	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL,
+	repo, _ := initializeRepo(t, rootType, "docker.com/notary", ts.URL,
 		serverManagesSnapshot)
+	defer os.RemoveAll(repo.baseDir)
 	assertPublishSucceeds(t, repo)
 }
 
@@ -1351,16 +1262,11 @@ func TestPublishAfterPullServerHasSnapshotKey(t *testing.T) {
 }
 
 func testPublishAfterPullServerHasSnapshotKey(t *testing.T, rootType string) {
-	// Temporary directory where test files will be created
-	tempBaseDir, err := ioutil.TempDir("/tmp", "notary-test-")
-	defer os.RemoveAll(tempBaseDir)
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-
-	gun := "docker.com/notary"
 	ts := fullTestServer(t)
 	defer ts.Close()
 
-	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL, true)
+	repo, _ := initializeRepo(t, rootType, "docker.com/notary", ts.URL, true)
+	defer os.RemoveAll(repo.baseDir)
 	// no timestamp metadata because that comes from the server
 	assertRepoHasExpectedMetadata(t, repo, data.CanonicalTimestampRole, false)
 	// no snapshot metadata because that comes from the server
@@ -1368,8 +1274,8 @@ func testPublishAfterPullServerHasSnapshotKey(t *testing.T, rootType string) {
 
 	// Publish something
 	published := addTarget(t, repo, "v1", "../fixtures/intermediate-ca.crt")
-	err = repo.Publish()
-	assert.NoError(t, err)
+	assert.NoError(t, repo.Publish())
+
 	// still no timestamp or snapshot metadata info
 	assertRepoHasExpectedMetadata(t, repo, data.CanonicalTimestampRole, false)
 	assertRepoHasExpectedMetadata(t, repo, data.CanonicalSnapshotRole, false)
@@ -1399,17 +1305,13 @@ func TestPublishNoOneHasSnapshotKey(t *testing.T) {
 }
 
 func testPublishNoOneHasSnapshotKey(t *testing.T, rootType string) {
-	// Temporary directory where test files will be created
-	tempBaseDir, err := ioutil.TempDir("/tmp", "notary-test-")
-	defer os.RemoveAll(tempBaseDir)
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-
-	gun := "docker.com/notary"
 	ts := fullTestServer(t)
 	defer ts.Close()
 
 	// create repo and delete the snapshot key and metadata
-	repo, _ := initializeRepo(t, rootType, tempBaseDir, gun, ts.URL, false)
+	repo, _ := initializeRepo(t, rootType, "docker.com/notary", ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
+
 	snapshotRole, ok := repo.tufRepo.Root.Signed.Roles[data.CanonicalSnapshotRole]
 	assert.True(t, ok)
 	for _, keyID := range snapshotRole.KeyIDs {
@@ -1418,7 +1320,7 @@ func testPublishNoOneHasSnapshotKey(t *testing.T, rootType string) {
 
 	// Publish something
 	addTarget(t, repo, "v1", "../fixtures/intermediate-ca.crt")
-	err = repo.Publish()
+	err := repo.Publish()
 	assert.Error(t, err)
 	assert.IsType(t, validation.ErrBadHierarchy{}, err)
 }
@@ -1466,17 +1368,12 @@ func assertCannotPublishIfMetadataCorrupt(t *testing.T, repo *NotaryRepository, 
 func testPublishBadMetadataAfterInit(
 	t *testing.T, roleName string, serverManagesSnapshot bool) {
 
-	// Temporary directory where test files will be created
-	tempBaseDir, err := ioutil.TempDir("/tmp", "notary-test-")
-	defer os.RemoveAll(tempBaseDir)
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-
-	gun := "docker.com/notary"
 	ts := fullTestServer(t)
 	defer ts.Close()
 
 	repo, _ := initializeRepo(
-		t, data.ECDSAKey, tempBaseDir, gun, ts.URL, serverManagesSnapshot)
+		t, data.ECDSAKey, "docker.com/notary", ts.URL, serverManagesSnapshot)
+	defer os.RemoveAll(repo.baseDir)
 
 	addTarget(t, repo, "v1", "../fixtures/intermediate-ca.crt")
 	assertCannotPublishIfMetadataCorrupt(t, repo, roleName)
@@ -1528,15 +1425,12 @@ func TestPublishSnapshotLocalKeysCreatedFirst(t *testing.T) {
 // this is just a sanity test to make sure Publish calls it correctly and
 // no fallback happens.
 func TestPublishDelegations(t *testing.T) {
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-	defer os.RemoveAll(tempBaseDir)
-
-	gun := "docker.com/notary"
 	ts := fullTestServer(t)
 	defer ts.Close()
 
-	repo1, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
+	repo1, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
+	defer os.RemoveAll(repo1.baseDir)
+
 	delgKey, err := repo1.CryptoService.Create("targets/a", data.ECDSAKey)
 	assert.NoError(t, err, "error creating delegation key")
 
@@ -1601,15 +1495,11 @@ func TestPublishDelegations(t *testing.T) {
 // falls back on publishing to "target".  This *only* falls back if the role
 // doesn't exist, not if the user doesn't have a key.  (different test)
 func TestPublishTargetsDelgationScopeFallback(t *testing.T) {
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-	defer os.RemoveAll(tempBaseDir)
-
-	gun := "docker.com/notary"
 	ts := fullTestServer(t)
 	defer ts.Close()
 
-	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
+	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
 	assertPublishToRolesSucceeds(t, repo, []string{"targets/a/b", "targets/b/c"},
 		[]string{data.CanonicalTargetsRole})
 }
@@ -1617,15 +1507,11 @@ func TestPublishTargetsDelgationScopeFallback(t *testing.T) {
 // If a changelist specifies a particular role to push targets to, and there
 // is a role but no key, publish not fall back and just fail.
 func TestPublishTargetsDelgationScopeNoFallbackIfNoKeys(t *testing.T) {
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-	defer os.RemoveAll(tempBaseDir)
-
-	gun := "docker.com/notary"
 	ts := fullTestServer(t)
 	defer ts.Close()
 
-	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
+	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
 
 	// generate a key that isn't in the cryptoservice, so we can't sign this
 	// one
@@ -1657,15 +1543,12 @@ func TestPublishTargetsDelgationScopeNoFallbackIfNoKeys(t *testing.T) {
 // all the roles (in fact, the role creations will be applied before the
 // targets)
 func TestPublishTargetsDelgationSuccessLocallyHasRoles(t *testing.T) {
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-	defer os.RemoveAll(tempBaseDir)
-
-	gun := "docker.com/notary"
 	ts := fullTestServer(t)
 	defer ts.Close()
 
-	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
+	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
+
 	delgKey, err := repo.CryptoService.Create("targets/a", data.ECDSAKey)
 	assert.NoError(t, err, "error creating delegation key")
 
@@ -1719,14 +1602,6 @@ func TestPublishTargetsDelgationNoTargetsKeyNeeded(t *testing.T) {
 // - owner of a repo may not have the delegated keys, so can't sign a delegated
 //   role
 func TestPublishTargetsDelgationSuccessNeedsToDownloadRoles(t *testing.T) {
-	var tempDirs [2]string
-	for i := 0; i < 2; i++ {
-		tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-		assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-		defer os.RemoveAll(tempBaseDir)
-		tempDirs[i] = tempBaseDir
-	}
-
 	gun := "docker.com/notary"
 	ts := fullTestServer(t)
 	defer ts.Close()
@@ -1734,12 +1609,13 @@ func TestPublishTargetsDelgationSuccessNeedsToDownloadRoles(t *testing.T) {
 	// this is the original repo - it owns the root/targets keys and creates
 	// the delegation to which it doesn't have the key (so server snapshot
 	// signing would be required)
-	ownerRepo, _ := initializeRepo(t, data.ECDSAKey, tempDirs[0], gun, ts.URL, true)
+	ownerRepo, _ := initializeRepo(t, data.ECDSAKey, gun, ts.URL, true)
+	defer os.RemoveAll(ownerRepo.baseDir)
+
 	// this is a user, or otherwise a repo that only has access to the delegation
 	// key so it can publish targets to the delegated role
-	delgRepo, err := NewNotaryRepository(tempDirs[1], gun, ts.URL,
-		http.DefaultTransport, passphraseRetriever)
-	assert.NoError(t, err, "error creating repository: %s", err)
+	delgRepo := newRepoToTestRepo(t, ownerRepo)
+	defer os.RemoveAll(delgRepo.baseDir)
 
 	// create a key on the owner repo
 	aKey, err := ownerRepo.CryptoService.Create("targets/a", data.ECDSAKey)
@@ -1948,15 +1824,11 @@ func TestPublishRemoveDelgation(t *testing.T) {
 
 // Rotate invalid roles, or attempt to delegate target signing to the server
 func TestRotateKeyInvalidRole(t *testing.T) {
-	tempBaseDir, err := ioutil.TempDir("/tmp", "notary-test-")
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-	defer os.RemoveAll(tempBaseDir)
-
-	gun := "docker.com/notary"
 	ts, _, _ := simpleTestServer(t)
 	defer ts.Close()
 
-	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
+	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
 
 	// the equivalent of: (root, true), (root, false), (timestamp, true),
 	// (timestamp, false), (targets, true)
@@ -1968,7 +1840,7 @@ func TestRotateKeyInvalidRole(t *testing.T) {
 			if role == data.CanonicalTargetsRole && !serverManagesKey {
 				continue
 			}
-			err = repo.RotateKey(role, serverManagesKey)
+			err := repo.RotateKey(role, serverManagesKey)
 			assert.Error(t, err,
 				"Rotating a %s key with server-managing the key as %v should fail",
 				role, serverManagesKey)
@@ -2059,17 +1931,12 @@ func assertRotationSuccessful(t *testing.T, repo1 *NotaryRepository,
 //    snapshots are locally signed (local snapshot key)
 // Assert that we can publish.
 func TestRotateBeforePublishFromRemoteKeyToLocalKey(t *testing.T) {
-	// Temporary directory where test files will be created
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	defer os.RemoveAll(tempBaseDir)
-
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-
-	gun := "docker.com/notary"
 	ts := fullTestServer(t)
 	defer ts.Close()
 
-	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, true)
+	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, true)
+	defer os.RemoveAll(repo.baseDir)
+
 	// Adding a target will allow us to confirm the repository is still valid
 	// after rotating the keys.
 	addTarget(t, repo, "latest", "../fixtures/intermediate-ca.crt")
@@ -2112,26 +1979,19 @@ func TestRotateKeyAfterPublishServerManagementChange(t *testing.T) {
 func testRotateKeySuccess(t *testing.T, serverManagesSnapshotInit bool,
 	keysToRotate map[string]bool) {
 
-	// Temporary directory where test files will be created
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	defer os.RemoveAll(tempBaseDir)
-
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-
-	gun := "docker.com/notary"
 	ts := fullTestServer(t)
 	defer ts.Close()
 
-	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL,
+	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL,
 		serverManagesSnapshotInit)
+	defer os.RemoveAll(repo.baseDir)
 
 	// Adding a target will allow us to confirm the repository is still valid after
 	// rotating the keys.
 	addTarget(t, repo, "latest", "../fixtures/intermediate-ca.crt")
 
 	// Publish
-	err = repo.Publish()
-	assert.NoError(t, err)
+	assert.NoError(t, repo.Publish())
 
 	// Get root.json and capture targets + snapshot key IDs
 	repo.GetTargetByName("latest") // force a pull
@@ -2168,22 +2028,19 @@ func TestRemoteServerUnavailableNoLocalCache(t *testing.T) {
 // but does not check the delegation hierarchy).  When applied, the change adds
 // a new delegation role with the correct keys.
 func TestAddDelegationChangefileValid(t *testing.T) {
-	// Temporary directory where test files will be created
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	defer os.RemoveAll(tempBaseDir)
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-
 	gun := "docker.com/notary"
 	ts, _, _ := simpleTestServer(t)
 	defer ts.Close()
 
-	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
+	repo, _ := initializeRepo(t, data.ECDSAKey, gun, ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
+
 	targetKeyIds := repo.CryptoService.ListKeys(data.CanonicalTargetsRole)
 	assert.NotEmpty(t, targetKeyIds)
 	targetPubKey := repo.CryptoService.GetKey(targetKeyIds[0])
 	assert.NotNil(t, targetPubKey)
 
-	err = repo.AddDelegation("root", 1, []data.PublicKey{targetPubKey}, []string{""})
+	err := repo.AddDelegation("root", 1, []data.PublicKey{targetPubKey}, []string{""})
 	assert.Error(t, err)
 	assert.IsType(t, data.ErrInvalidRole{}, err)
 	assert.Empty(t, getChanges(t, repo))
@@ -2206,23 +2063,20 @@ func TestAddDelegationChangefileValid(t *testing.T) {
 // the delegation to the repo (assuming the delegation hierarchy is correct -
 // tests for change application validation are in helpers_test.go)
 func TestAddDelegationChangefileApplicable(t *testing.T) {
-	// Temporary directory where test files will be created
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	defer os.RemoveAll(tempBaseDir)
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-
 	gun := "docker.com/notary"
 	ts, _, _ := simpleTestServer(t)
 	defer ts.Close()
 
-	repo, _ := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
+	repo, _ := initializeRepo(t, data.ECDSAKey, gun, ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
+
 	targetKeyIds := repo.CryptoService.ListKeys(data.CanonicalTargetsRole)
 	assert.NotEmpty(t, targetKeyIds)
 	targetPubKey := repo.CryptoService.GetKey(targetKeyIds[0])
 	assert.NotNil(t, targetPubKey)
 
 	// this hierarchy has to be right to be applied
-	err = repo.AddDelegation("targets/a", 1, []data.PublicKey{targetPubKey}, []string{""})
+	err := repo.AddDelegation("targets/a", 1, []data.PublicKey{targetPubKey}, []string{""})
 	assert.NoError(t, err)
 	changes := getChanges(t, repo)
 	assert.Len(t, changes, 1)
@@ -2261,20 +2115,16 @@ func TestAddDelegationErrorWritingChanges(t *testing.T) {
 // but otherwise does not validate the name of the delegation to remove.  This
 // test ensures that the changefile generated by RemoveDelegation is correct.
 func TestRemoveDelegationChangefileValid(t *testing.T) {
-	// Temporary directory where test files will be created
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	defer os.RemoveAll(tempBaseDir)
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-
 	gun := "docker.com/notary"
 	ts, _, _ := simpleTestServer(t)
 	defer ts.Close()
 
-	repo, rootKeyID := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
+	repo, rootKeyID := initializeRepo(t, data.ECDSAKey, gun, ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
 	rootPubKey := repo.CryptoService.GetKey(rootKeyID)
 	assert.NotNil(t, rootPubKey)
 
-	err = repo.RemoveDelegation("root")
+	err := repo.RemoveDelegation("root")
 	assert.Error(t, err)
 	assert.IsType(t, data.ErrInvalidRole{}, err)
 	assert.Empty(t, getChanges(t, repo))
@@ -2297,16 +2147,12 @@ func TestRemoveDelegationChangefileValid(t *testing.T) {
 // the delegation from the repo (assuming the repo exists - tests for
 // change application validation are in helpers_test.go)
 func TestRemoveDelegationChangefileApplicable(t *testing.T) {
-	// Temporary directory where test files will be created
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	defer os.RemoveAll(tempBaseDir)
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-
 	gun := "docker.com/notary"
 	ts, _, _ := simpleTestServer(t)
 	defer ts.Close()
 
-	repo, rootKeyID := initializeRepo(t, data.ECDSAKey, tempBaseDir, gun, ts.URL, false)
+	repo, rootKeyID := initializeRepo(t, data.ECDSAKey, gun, ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
 	rootPubKey := repo.CryptoService.GetKey(rootKeyID)
 	assert.NotNil(t, rootPubKey)
 
