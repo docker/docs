@@ -75,6 +75,9 @@ func (f *FilesystemStore) SetMeta(name string, meta []byte) error {
 		return err
 	}
 
+	// if something already exists, just delete it and re-write it
+	os.RemoveAll(path)
+
 	// Write the file to disk
 	if err = ioutil.WriteFile(path, meta, 0600); err != nil {
 		return err
