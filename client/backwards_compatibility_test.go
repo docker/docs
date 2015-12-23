@@ -88,4 +88,14 @@ func Test0Dot1RepoFormat(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Len(t, targets, 1)
 	assert.Equal(t, "v1", targets[0].Name)
+
+	// Also check that we can add/remove keys by rotating keys
+	oldTargetsKeys := repo.CryptoService.ListKeys(data.CanonicalTargetsRole)
+	assert.NoError(t, repo.RotateKey(data.CanonicalTargetsRole, false))
+	assert.NoError(t, repo.Publish())
+	newTargetsKeys := repo.CryptoService.ListKeys(data.CanonicalTargetsRole)
+
+	assert.Len(t, oldTargetsKeys, 1)
+	assert.Len(t, newTargetsKeys, 1)
+	assert.NotEqual(t, oldTargetsKeys[0], newTargetsKeys[0])
 }
