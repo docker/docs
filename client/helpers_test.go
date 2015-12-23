@@ -49,6 +49,52 @@ func TestApplyTargetsChange(t *testing.T) {
 	assert.False(t, ok)
 }
 
+// Adding the same target twice doesn't actually add it.
+func TestApplyAddTargetTwice(t *testing.T) {
+	_, repo, _ := testutils.EmptyRepo()
+	_, err := repo.InitTargets(data.CanonicalTargetsRole)
+	assert.NoError(t, err)
+	hash := sha256.Sum256([]byte{})
+	f := &data.FileMeta{
+		Length: 1,
+		Hashes: map[string][]byte{
+			"sha256": hash[:],
+		},
+	}
+	fjson, err := json.Marshal(f)
+	assert.NoError(t, err)
+
+	cl := changelist.NewMemChangelist()
+	assert.NoError(t, cl.Add(&changelist.TufChange{
+		Actn:       changelist.ActionCreate,
+		Role:       changelist.ScopeTargets,
+		ChangeType: "target",
+		ChangePath: "latest",
+		Data:       fjson,
+	}))
+	assert.NoError(t, cl.Add(&changelist.TufChange{
+		Actn:       changelist.ActionCreate,
+		Role:       changelist.ScopeTargets,
+		ChangeType: "target",
+		ChangePath: "latest",
+		Data:       fjson,
+	}))
+
+	assert.NoError(t, applyChangelist(repo, cl))
+	assert.Len(t, repo.Targets["targets"].Signed.Targets, 1)
+	assert.NotEmpty(t, repo.Targets["targets"].Signed.Targets["latest"])
+
+	assert.NoError(t, applyTargetsChange(repo, &changelist.TufChange{
+		Actn:       changelist.ActionCreate,
+		Role:       changelist.ScopeTargets,
+		ChangeType: "target",
+		ChangePath: "latest",
+		Data:       fjson,
+	}))
+	assert.Len(t, repo.Targets["targets"].Signed.Targets, 1)
+	assert.NotEmpty(t, repo.Targets["targets"].Signed.Targets["latest"])
+}
+
 func TestApplyChangelist(t *testing.T) {
 	_, repo, _ := testutils.EmptyRepo()
 	_, err := repo.InitTargets(data.CanonicalTargetsRole)
