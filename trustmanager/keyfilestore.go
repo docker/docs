@@ -254,7 +254,6 @@ func listKeys(s LimitedFileStore) map[string]string {
 		// read it as a PEM
 		underscoreIndex := strings.LastIndex(keyIDFull, "_")
 		if underscoreIndex == -1 {
-			keyID := keyIDFull
 			d, err := s.Get(f)
 			if err != nil {
 				logrus.Error(err)
@@ -265,7 +264,7 @@ func listKeys(s LimitedFileStore) map[string]string {
 				continue
 			}
 			if role, ok := block.Headers["role"]; ok {
-				keyIDMap[keyID] = role
+				keyIDMap[keyIDFull] = role
 			}
 		} else {
 			// The keyID is the first part of the keyname
