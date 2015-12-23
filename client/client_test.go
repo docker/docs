@@ -1588,19 +1588,12 @@ func TestPublishDelegations(t *testing.T) {
 // this is just a sanity test to make sure Publish calls it correctly and
 // no fallback happens.
 func TestPublishDelegationsX509(t *testing.T) {
-	var tempDirs [2]string
-	for i := 0; i < 2; i++ {
-		tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-		assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-		defer os.RemoveAll(tempBaseDir)
-		tempDirs[i] = tempBaseDir
-	}
-
-	gun := "docker.com/notary"
 	ts := fullTestServer(t)
 	defer ts.Close()
 
-	repo1, _ := initializeRepo(t, data.ECDSAKey, tempDirs[0], gun, ts.URL, false)
+	repo1, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
+	defer os.RemoveAll(repo1.baseDir)
+
 	delgKey, err := repo1.CryptoService.Create("targets/a", data.ECDSAKey)
 	assert.NoError(t, err, "error creating delegation key")
 
@@ -1633,9 +1626,8 @@ func TestPublishDelegationsX509(t *testing.T) {
 	assert.Len(t, getChanges(t, repo1), 1, "wrong number of changelist files found")
 
 	// Create a new repo and pull from the server
-	repo2, err := NewNotaryRepository(tempDirs[1], gun, ts.URL,
-		http.DefaultTransport, passphraseRetriever)
-	assert.NoError(t, err, "error creating repository: %s", err)
+	repo2 := newRepoToTestRepo(t, repo1)
+	defer os.RemoveAll(repo2.baseDir)
 
 	// pull
 	_, err = repo2.ListTargets()
