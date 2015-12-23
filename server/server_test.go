@@ -25,9 +25,7 @@ func TestRunBadAddr(t *testing.T) {
 		"",
 		nil,
 	)
-	if err == nil {
-		t.Fatal("Passed bad addr, Run should have failed")
-	}
+	assert.Error(t, err, "Passed bad addr, Run should have failed")
 }
 
 func TestRunReservedPort(t *testing.T) {
@@ -42,12 +40,14 @@ func TestRunReservedPort(t *testing.T) {
 		nil,
 	)
 
-	if _, ok := err.(*net.OpError); !ok {
-		t.Fatalf("Received unexpected err: %s", err.Error())
-	}
-	if !strings.Contains(err.Error(), "bind: permission denied") {
-		t.Fatalf("Received unexpected err: %s", err.Error())
-	}
+	assert.Error(t, err)
+	assert.IsType(t, &net.OpError{}, err)
+	assert.True(
+		t,
+		strings.Contains(err.Error(), "bind: permission denied"),
+		"Received unexpected err: %s",
+		err.Error(),
+	)
 }
 
 func TestMetricsEndpoint(t *testing.T) {

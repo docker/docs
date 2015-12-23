@@ -80,22 +80,20 @@ func TestImportExportZip(t *testing.T) {
 		if alias == "root" {
 			continue
 		}
-		relKeyPath := filepath.Join("tuf_keys", privKeyName+"_"+alias+".key")
+		relKeyPath := filepath.Join("tuf_keys", privKeyName+".key")
 		passphraseByFile[relKeyPath] = exportPassphrase
 	}
 
 	// Add root key to the map. This will use the export passphrase because it
 	// will be reencrypted.
-	relRootKey := filepath.Join("root_keys", rootKeyID+"_root.key")
+	relRootKey := filepath.Join("root_keys", rootKeyID+".key")
 	passphraseByFile[relRootKey] = exportPassphrase
 
 	// Iterate through the files in the archive, checking that the files
 	// exist and are encrypted with the expected passphrase.
 	for _, f := range zipReader.File {
 		expectedPassphrase, present := passphraseByFile[f.Name]
-		if !present {
-			t.Fatalf("unexpected file %s in zip file", f.Name)
-		}
+		assert.True(t, present, "unexpected file %s in zip file", f.Name)
 
 		delete(passphraseByFile, f.Name)
 
@@ -114,9 +112,7 @@ func TestImportExportZip(t *testing.T) {
 	zipReader.Close()
 
 	// Are there any keys that didn't make it to the zip?
-	for fileNotFound := range passphraseByFile {
-		t.Fatalf("%s not found in zip", fileNotFound)
-	}
+	assert.Len(t, passphraseByFile, 0)
 
 	// Create new repo to test import
 	tempBaseDir2, err := ioutil.TempDir("", "notary-test-")
@@ -145,7 +141,7 @@ func TestImportExportZip(t *testing.T) {
 		if alias == "root" {
 			continue
 		}
-		relKeyPath := filepath.Join("tuf_keys", privKeyName+"_"+alias+".key")
+		relKeyPath := filepath.Join("tuf_keys", privKeyName+".key")
 		privKeyFileName := filepath.Join(tempBaseDir2, "private", relKeyPath)
 		_, err = os.Stat(privKeyFileName)
 		assert.NoError(t, err, "missing private key for role %s: %s", alias, privKeyName)
@@ -154,7 +150,7 @@ func TestImportExportZip(t *testing.T) {
 	// Look for keys in root_keys
 	// There should be a file named after the key ID of the root key we
 	// passed in.
-	rootKeyFilename := rootKeyID + "_root.key"
+	rootKeyFilename := rootKeyID + ".key"
 	_, err = os.Stat(filepath.Join(tempBaseDir2, "private", "root_keys", rootKeyFilename))
 	assert.NoError(t, err, "missing root key")
 }
@@ -199,13 +195,11 @@ func TestImportExportGUN(t *testing.T) {
 	privKeyMap := cs.ListAllKeys()
 	for privKeyName := range privKeyMap {
 		_, alias, err := cs.GetPrivateKey(privKeyName)
-		if err != nil {
-			t.Fatalf("privKey %s has no alias", privKeyName)
-		}
+		assert.NoError(t, err, "privKey %s has no alias", privKeyName)
 		if alias == "root" {
 			continue
 		}
-		relKeyPath := filepath.Join("tuf_keys", privKeyName+"_"+alias+".key")
+		relKeyPath := filepath.Join("tuf_keys", privKeyName+".key")
 
 		passphraseByFile[relKeyPath] = exportPassphrase
 	}
@@ -215,9 +209,7 @@ func TestImportExportGUN(t *testing.T) {
 	for _, f := range zipReader.File {
 
 		expectedPassphrase, present := passphraseByFile[f.Name]
-		if !present {
-			t.Fatalf("unexpected file %s in zip file", f.Name)
-		}
+		assert.True(t, present, "unexpected file %s in zip file", f.Name)
 
 		delete(passphraseByFile, f.Name)
 
@@ -236,9 +228,7 @@ func TestImportExportGUN(t *testing.T) {
 	zipReader.Close()
 
 	// Are there any keys that didn't make it to the zip?
-	for fileNotFound := range passphraseByFile {
-		t.Fatalf("%s not found in zip", fileNotFound)
-	}
+	assert.Len(t, passphraseByFile, 0)
 
 	// Create new repo to test import
 	tempBaseDir2, err := ioutil.TempDir("", "notary-test-")
@@ -264,13 +254,11 @@ func TestImportExportGUN(t *testing.T) {
 			continue
 		}
 		_, alias, err := cs2.GetPrivateKey(privKeyName)
-		if err != nil {
-			t.Fatalf("privKey %s has no alias", privKeyName)
-		}
+		assert.NoError(t, err, "privKey %s has no alias", privKeyName)
 		if alias == "root" {
 			continue
 		}
-		relKeyPath := filepath.Join("tuf_keys", privKeyName+"_"+alias+".key")
+		relKeyPath := filepath.Join("tuf_keys", privKeyName+".key")
 		privKeyFileName := filepath.Join(tempBaseDir2, "private", relKeyPath)
 		_, err = os.Stat(privKeyFileName)
 		assert.NoError(t, err)
@@ -318,7 +306,7 @@ func TestImportExportRootKey(t *testing.T) {
 	// Look for repo's root key in repo2
 	// There should be a file named after the key ID of the root key we
 	// imported.
-	rootKeyFilename := rootKeyID + "_root.key"
+	rootKeyFilename := rootKeyID + ".key"
 	_, err = os.Stat(filepath.Join(tempBaseDir2, "private", "root_keys", rootKeyFilename))
 	assert.NoError(t, err, "missing root key")
 
@@ -328,7 +316,7 @@ func TestImportExportRootKey(t *testing.T) {
 	assert.NoError(t, err, "could not read key file")
 	privKey, err := trustmanager.ParsePEMPrivateKey(pemBytes, oldPassphrase)
 	assert.NoError(t, err, "could not decrypt key file")
-	decryptedPEMBytes, err := trustmanager.KeyToPEM(privKey)
+	decryptedPEMBytes, err := trustmanager.KeyToPEM(privKey, "root")
 	assert.NoError(t, err, "could not convert key to PEM")
 
 	err = cs2.ImportRootKey(bytes.NewReader(decryptedPEMBytes))
@@ -386,7 +374,7 @@ func TestImportExportRootKeyReencrypt(t *testing.T) {
 	// Look for repo's root key in repo2
 	// There should be a file named after the key ID of the root key we
 	// imported.
-	rootKeyFilename := rootKeyID + "_root.key"
+	rootKeyFilename := rootKeyID + ".key"
 	_, err = os.Stat(filepath.Join(tempBaseDir2, "private", "root_keys", rootKeyFilename))
 	assert.NoError(t, err, "missing root key")
 
