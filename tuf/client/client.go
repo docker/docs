@@ -82,7 +82,7 @@ func (c *Client) update() error {
 		// In this instance the root has not expired base on time, but is
 		// expired based on the snapshot dictating a new root has been produced.
 		logrus.Debug(err)
-		return tuf.ErrLocalRootExpired{}
+		return err
 	}
 	// will always need top level targets at a minimum
 	err = c.downloadTargets("targets")
