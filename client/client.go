@@ -535,6 +535,9 @@ func (r *NotaryRepository) Publish() error {
 				// corrupt metadata.  We need better errors from bootstrapRepo.
 				logrus.Debugf("Unable to load repository from local files: %s",
 					err.Error())
+				if _, ok := err.(store.ErrMetaNotFound); ok {
+					return &ErrRepoNotInitialized{}
+				}
 				return err
 			}
 			// We had local data but the server doesn't know about the repo yet,
