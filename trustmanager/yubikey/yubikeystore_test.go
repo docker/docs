@@ -339,7 +339,7 @@ func TestYubiImportNewKey(t *testing.T) {
 	privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
 	assert.NoError(t, err)
 
-	pemBytes, err := trustmanager.EncryptPrivateKey(privKey, "passphrase")
+	pemBytes, err := trustmanager.EncryptPrivateKey(privKey, "root", "passphrase")
 	assert.NoError(t, err)
 
 	err = store.ImportKey(pemBytes, "root")
@@ -388,7 +388,7 @@ func TestYubiImportExistingKey(t *testing.T) {
 	assert.NotNil(t, k)
 
 	// import the key, which should have already been added to the yubikey
-	pemBytes, err := trustmanager.EncryptPrivateKey(key, "passphrase")
+	pemBytes, err := trustmanager.EncryptPrivateKey(key, "root", "passphrase")
 	assert.NoError(t, err)
 	err = newStore.ImportKey(pemBytes, "root")
 	assert.NoError(t, err)
@@ -418,7 +418,7 @@ func TestYubiImportNonRootKey(t *testing.T) {
 	privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
 	assert.NoError(t, err)
 
-	pemBytes, err := trustmanager.EncryptPrivateKey(privKey, "passphrase")
+	pemBytes, err := trustmanager.EncryptPrivateKey(privKey, "root", "passphrase")
 	assert.NoError(t, err)
 
 	err = store.ImportKey(pemBytes, privKey.ID())
@@ -690,7 +690,7 @@ func TestYubiImportKeyCleansUpOnError(t *testing.T) {
 	privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
 	assert.NoError(t, err)
 
-	pemBytes, err := trustmanager.EncryptPrivateKey(privKey, "passphrase")
+	pemBytes, err := trustmanager.EncryptPrivateKey(privKey, "root", "passphrase")
 	assert.NoError(t, err)
 
 	var _importkey = func() error { return store.ImportKey(pemBytes, "root") }

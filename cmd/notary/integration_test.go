@@ -223,7 +223,7 @@ func assertNumKeys(t *testing.T, tempDir string, numRoot, numSigning int,
 	assert.Len(t, signing, numSigning)
 	for _, rootKeyID := range root {
 		_, err := os.Stat(filepath.Join(
-			tempDir, "private", "root_keys", rootKeyID+"_root.key"))
+			tempDir, "private", "root_keys", rootKeyID+".key"))
 		// os.IsExist checks to see if the error is because a file already
 		// exist, and hence doesn't actually the right funciton to use here
 		assert.Equal(t, rootOnDisk, !os.IsNotExist(err))
@@ -465,7 +465,7 @@ func TestClientKeyImportExportRootOnly(t *testing.T) {
 		privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
 		assert.NoError(t, err)
 
-		pemBytes, err := trustmanager.EncryptPrivateKey(privKey, testPassphrase)
+		pemBytes, err := trustmanager.EncryptPrivateKey(privKey, "root", testPassphrase)
 		assert.NoError(t, err)
 
 		nBytes, err := tempFile.Write(pemBytes)

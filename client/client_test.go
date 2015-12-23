@@ -15,6 +15,7 @@ import (
 	"sort"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/Sirupsen/logrus"
 	ctxu "github.com/docker/distribution/context"
@@ -1064,12 +1065,10 @@ func testValidateRootKey(t *testing.T, rootType string) {
 	assert.NotEmpty(t, keyids)
 
 	for _, keyid := range keyids {
-		if key, ok := decodedRoot.Keys[keyid]; !ok {
-			t.Fatal("key id not found in keys")
-		} else {
-			_, err := trustmanager.LoadCertFromPEM(key.Public())
-			assert.NoError(t, err, "key is not a valid cert")
-		}
+		key, ok := decodedRoot.Keys[keyid]
+		assert.True(t, ok, "key id not found in keys")
+		_, err := trustmanager.LoadCertFromPEM(key.Public())
+		assert.NoError(t, err, "key is not a valid cert")
 	}
 }
 
@@ -1597,6 +1596,85 @@ func TestPublishDelegations(t *testing.T) {
 		assert.Len(t, a.Signed.Delegations.Keys, 1)
 
 		_, ok = a.Signed.Delegations.Keys[delgKey.ID()]
+		assert.True(t, ok)
+
+		assert.Equal(t, "targets/a/b", a.Signed.Delegations.Roles[0].Name)
+	}
+}
+
+// Publishing delegations works so long as the delegation parent exists by the
+// time that delegation addition change is applied.  Most of the tests for
+// applying delegation changes in in helpers_test.go (applyTargets tests), so
+// this is just a sanity test to make sure Publish calls it correctly and
+// no fallback happens.
+func TestPublishDelegationsX509(t *testing.T) {
+	ts := fullTestServer(t)
+	defer ts.Close()
+
+	repo1, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
+	defer os.RemoveAll(repo1.baseDir)
+
+	delgKey, err := repo1.CryptoService.Create("targets/a", data.ECDSAKey)
+	assert.NoError(t, err, "error creating delegation key")
+
+	start := time.Now()
+	privKey, _, err := repo1.CryptoService.GetPrivateKey(delgKey.ID())
+	assert.NoError(t, err)
+	cert, err := cryptoservice.GenerateCertificate(
+		privKey, "targets/a", start, start.AddDate(1, 0, 0),
+	)
+	assert.NoError(t, err)
+	delgCert := data.NewECDSAx509PublicKey(trustmanager.CertToPEM(cert))
+
+	// This should publish fine, even though targets/a/b is dependent upon
+	// targets/a, because these should execute in order
+	for _, delgName := range []string{"targets/a", "targets/a/b", "targets/c"} {
+		assert.NoError(t,
+			repo1.AddDelegation(delgName, 1, []data.PublicKey{delgCert}, []string{""}),
+			"error creating delegation")
+	}
+	assert.Len(t, getChanges(t, repo1), 3, "wrong number of changelist files found")
+	assert.NoError(t, repo1.Publish())
+	assert.Len(t, getChanges(t, repo1), 0, "wrong number of changelist files found")
+
+	// this should not publish, because targets/z doesn't exist
+	assert.NoError(t,
+		repo1.AddDelegation("targets/z/y", 1, []data.PublicKey{delgCert}, []string{""}),
+		"error creating delegation")
+	assert.Len(t, getChanges(t, repo1), 1, "wrong number of changelist files found")
+	assert.Error(t, repo1.Publish())
+	assert.Len(t, getChanges(t, repo1), 1, "wrong number of changelist files found")
+
+	// Create a new repo and pull from the server
+	repo2 := newRepoToTestRepo(t, repo1)
+	defer os.RemoveAll(repo2.baseDir)
+
+	// pull
+	_, err = repo2.ListTargets()
+	assert.NoError(t, err, "unable to pull repo")
+
+	for _, repo := range []*NotaryRepository{repo1, repo2} {
+		// targets should have delegations targets/a and targets/c
+		targets := repo.tufRepo.Targets[data.CanonicalTargetsRole]
+		assert.Len(t, targets.Signed.Delegations.Roles, 2)
+		assert.Len(t, targets.Signed.Delegations.Keys, 1)
+
+		_, ok := targets.Signed.Delegations.Keys[delgCert.ID()]
+		assert.True(t, ok)
+
+		foundRoleNames := make(map[string]bool)
+		for _, r := range targets.Signed.Delegations.Roles {
+			foundRoleNames[r.Name] = true
+		}
+		assert.True(t, foundRoleNames["targets/a"])
+		assert.True(t, foundRoleNames["targets/c"])
+
+		// targets/a should have delegation targets/a/b only
+		a := repo.tufRepo.Targets["targets/a"]
+		assert.Len(t, a.Signed.Delegations.Roles, 1)
+		assert.Len(t, a.Signed.Delegations.Keys, 1)
+
+		_, ok = a.Signed.Delegations.Keys[delgCert.ID()]
 		assert.True(t, ok)
 
 		assert.Equal(t, "targets/a/b", a.Signed.Delegations.Roles[0].Name)

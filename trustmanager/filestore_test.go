@@ -1,9 +1,9 @@
 package trustmanager
 
 import (
-	"bytes"
 	"crypto/rand"
 	"fmt"
+	"github.com/stretchr/testify/assert"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -14,18 +14,16 @@ import (
 func TestAddFile(t *testing.T) {
 	testData := []byte("This test data should be part of the file.")
 	testName := "docker.com/notary/certificate"
-	testExt := "crt"
+	testExt := ".crt"
 	perms := os.FileMode(0755)
 
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	if err != nil {
-		t.Fatalf("failed to create a temporary directory: %v", err)
-	}
+	assert.NoError(t, err)
 	defer os.RemoveAll(tempBaseDir)
 
 	// Since we're generating this manually we need to add the extension '.'
-	expectedFilePath := filepath.Join(tempBaseDir, testName+"."+testExt)
+	expectedFilePath := filepath.Join(tempBaseDir, testName+testExt)
 
 	// Create our SimpleFileStore
 	store := &SimpleFileStore{
@@ -36,40 +34,29 @@ func TestAddFile(t *testing.T) {
 
 	// Call the Add function
 	err = store.Add(testName, testData)
-	if err != nil {
-		t.Fatalf("failed to add file to store: %v", err)
-	}
+	assert.NoError(t, err)
 
 	// Check to see if file exists
 	b, err := ioutil.ReadFile(expectedFilePath)
-	if err != nil {
-		t.Fatalf("expected file not found: %v", err)
-	}
-
-	if !bytes.Equal(b, testData) {
-		t.Fatalf("unexpected content in the file: %s", expectedFilePath)
-	}
+	assert.NoError(t, err)
+	assert.Equal(t, testData, b, "unexpected content in the file: %s", expectedFilePath)
 }
 
 func TestRemoveFile(t *testing.T) {
 	testName := "docker.com/notary/certificate"
-	testExt := "crt"
+	testExt := ".crt"
 	perms := os.FileMode(0755)
 
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	if err != nil {
-		t.Fatalf("failed to create a temporary directory: %v", err)
-	}
+	assert.NoError(t, err)
 	defer os.RemoveAll(tempBaseDir)
 
 	// Since we're generating this manually we need to add the extension '.'
-	expectedFilePath := filepath.Join(tempBaseDir, testName+"."+testExt)
+	expectedFilePath := filepath.Join(tempBaseDir, testName+testExt)
 
 	_, err = generateRandomFile(expectedFilePath, perms)
-	if err != nil {
-		t.Fatalf("failed to generate random file: %v", err)
-	}
+	assert.NoError(t, err)
 
 	// Create our SimpleFileStore
 	store := &SimpleFileStore{
@@ -80,36 +67,28 @@ func TestRemoveFile(t *testing.T) {
 
 	// Call the Remove function
 	err = store.Remove(testName)
-	if err != nil {
-		t.Fatalf("failed to remove file from store: %v", err)
-	}
+	assert.NoError(t, err)
 
 	// Check to see if file exists
 	_, err = os.Stat(expectedFilePath)
-	if err == nil {
-		t.Fatalf("expected not to find file: %s", expectedFilePath)
-	}
+	assert.Error(t, err)
 }
 
 func TestRemoveDir(t *testing.T) {
 	testName := "docker.com/diogomonica/"
-	testExt := "key"
+	testExt := ".key"
 	perms := os.FileMode(0700)
 
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	if err != nil {
-		t.Fatalf("failed to create a temporary directory: %v", err)
-	}
+	assert.NoError(t, err)
 	defer os.RemoveAll(tempBaseDir)
 
 	// Since we're generating this manually we need to add the extension '.'
-	expectedFilePath := filepath.Join(tempBaseDir, testName+"."+testExt)
+	expectedFilePath := filepath.Join(tempBaseDir, testName+testExt)
 
 	_, err = generateRandomFile(expectedFilePath, perms)
-	if err != nil {
-		t.Fatalf("failed to generate random file: %v", err)
-	}
+	assert.NoError(t, err)
 
 	// Create our SimpleFileStore
 	store := &SimpleFileStore{
@@ -120,16 +99,12 @@ func TestRemoveDir(t *testing.T) {
 
 	// Call the RemoveDir function
 	err = store.RemoveDir(testName)
-	if err != nil {
-		t.Fatalf("failed to remove directory: %v", err)
-	}
+	assert.NoError(t, err)
 
 	expectedDirectory := filepath.Dir(expectedFilePath)
 	// Check to see if file exists
 	_, err = os.Stat(expectedDirectory)
-	if err == nil {
-		t.Fatalf("expected not to find directory: %s", expectedDirectory)
-	}
+	assert.Error(t, err)
 }
 
 func TestListFiles(t *testing.T) {
@@ -139,9 +114,7 @@ func TestListFiles(t *testing.T) {
 
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	if err != nil {
-		t.Fatalf("failed to create a temporary directory: %v", err)
-	}
+	assert.NoError(t, err)
 	defer os.RemoveAll(tempBaseDir)
 
 	var expectedFilePath string
@@ -151,9 +124,7 @@ func TestListFiles(t *testing.T) {
 		expectedFilename := testName + strconv.Itoa(i) + "." + testExt
 		expectedFilePath = filepath.Join(tempBaseDir, expectedFilename)
 		_, err = generateRandomFile(expectedFilePath, perms)
-		if err != nil {
-			t.Fatalf("failed to generate random file: %v", err)
-		}
+		assert.NoError(t, err)
 	}
 
 	// Create our SimpleFileStore
@@ -165,9 +136,7 @@ func TestListFiles(t *testing.T) {
 
 	// Call the List function. Expect 10 files
 	files := store.ListFiles()
-	if len(files) != 10 {
-		t.Fatalf("expected 10 files in listing, got: %d", len(files))
-	}
+	assert.Len(t, files, 10)
 }
 
 func TestListDir(t *testing.T) {
@@ -177,9 +146,7 @@ func TestListDir(t *testing.T) {
 
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	if err != nil {
-		t.Fatalf("failed to create a temporary directory: %v", err)
-	}
+	assert.NoError(t, err)
 	defer os.RemoveAll(tempBaseDir)
 
 	var expectedFilePath string
@@ -189,9 +156,7 @@ func TestListDir(t *testing.T) {
 		fileName := fmt.Sprintf("%s-%s.%s", testName, strconv.Itoa(i), testExt)
 		expectedFilePath = filepath.Join(tempBaseDir, fileName)
 		_, err = generateRandomFile(expectedFilePath, perms)
-		if err != nil {
-			t.Fatalf("failed to generate random file: %v", err)
-		}
+		assert.NoError(t, err)
 	}
 
 	// Create our SimpleFileStore
@@ -203,21 +168,15 @@ func TestListDir(t *testing.T) {
 
 	// Call the ListDir function
 	files := store.ListDir("docker.com/")
-	if len(files) != 10 {
-		t.Fatalf("expected 10 files in listing, got: %d", len(files))
-	}
+	assert.Len(t, files, 10)
 	files = store.ListDir("docker.com/notary")
-	if len(files) != 10 {
-		t.Fatalf("expected 10 files in listing, got: %d", len(files))
-	}
+	assert.Len(t, files, 10)
 	files = store.ListDir("fakedocker.com/")
-	if len(files) != 0 {
-		t.Fatalf("expected 0 files in listing, got: %d", len(files))
-	}
+	assert.Len(t, files, 0)
 }
 
 func TestGetPath(t *testing.T) {
-	testExt := "crt"
+	testExt := ".crt"
 	perms := os.FileMode(0755)
 
 	// Create our SimpleFileStore
@@ -231,24 +190,14 @@ func TestGetPath(t *testing.T) {
 	secondPath := "/docker.io/testing-dashes/@#$%^&().crt"
 
 	result, err := store.GetPath("diogomonica.com/openvpn/0xdeadbeef")
-	if err != nil {
-		t.Fatalf("unexpected error from GetPath: %v", err)
-	}
-	if result != firstPath {
-		t.Fatalf("Expecting: %s", firstPath)
-	}
+	assert.Equal(t, firstPath, result, "unexpected error from GetPath: %v", err)
 
 	result, err = store.GetPath("/docker.io/testing-dashes/@#$%^&()")
-	if err != nil {
-		t.Fatalf("unexpected error from GetPath: %v", err)
-	}
-	if result != secondPath {
-		t.Fatalf("Expecting: %s", secondPath)
-	}
+	assert.Equal(t, secondPath, result, "unexpected error from GetPath: %v", err)
 }
 
 func TestGetPathProtection(t *testing.T) {
-	testExt := "crt"
+	testExt := ".crt"
 	perms := os.FileMode(0755)
 
 	// Create our SimpleFileStore
@@ -259,22 +208,19 @@ func TestGetPathProtection(t *testing.T) {
 	}
 
 	// Should deny requests for paths outside the filestore
-	if _, err := store.GetPath("../../etc/passwd"); err != ErrPathOutsideStore {
-		t.Fatalf("expected ErrPathOutsideStore error from GetPath")
-	}
-	if _, err := store.GetPath("private/../../../etc/passwd"); err != ErrPathOutsideStore {
-		t.Fatalf("expected ErrPathOutsideStore error from GetPath")
-	}
+	_, err := store.GetPath("../../etc/passwd")
+	assert.Error(t, err)
+	assert.Equal(t, ErrPathOutsideStore, err)
+
+	_, err = store.GetPath("private/../../../etc/passwd")
+	assert.Error(t, err)
+	assert.Equal(t, ErrPathOutsideStore, err)
 
 	// Convoluted paths should work as long as they end up inside the store
 	expected := "/path/to/filestore/filename.crt"
 	result, err := store.GetPath("private/../../filestore/./filename")
-	if err != nil {
-		t.Fatalf("unexpected error from GetPath: %v", err)
-	}
-	if result != expected {
-		t.Fatalf("Expecting: %s (got: %s)", expected, result)
-	}
+	assert.NoError(t, err)
+	assert.Equal(t, expected, result)
 
 	// Repeat tests with a relative baseDir
 	relStore := &SimpleFileStore{
@@ -284,43 +230,35 @@ func TestGetPathProtection(t *testing.T) {
 	}
 
 	// Should deny requests for paths outside the filestore
-	if _, err := relStore.GetPath("../../etc/passwd"); err != ErrPathOutsideStore {
-		t.Fatalf("expected ErrPathOutsideStore error from GetPath")
-	}
-	if _, err := relStore.GetPath("private/../../../etc/passwd"); err != ErrPathOutsideStore {
-		t.Fatalf("expected ErrPathOutsideStore error from GetPath")
-	}
+	_, err = relStore.GetPath("../../etc/passwd")
+	assert.Error(t, err)
+	assert.Equal(t, ErrPathOutsideStore, err)
+	_, err = relStore.GetPath("private/../../../etc/passwd")
+	assert.Error(t, err)
+	assert.Equal(t, ErrPathOutsideStore, err)
 
 	// Convoluted paths should work as long as they end up inside the store
 	expected = "relative/file/path/filename.crt"
 	result, err = relStore.GetPath("private/../../path/./filename")
-	if err != nil {
-		t.Fatalf("unexpected error from GetPath: %v", err)
-	}
-	if result != expected {
-		t.Fatalf("Expecting: %s (got: %s)", expected, result)
-	}
+	assert.NoError(t, err)
+	assert.Equal(t, expected, result)
 }
 
 func TestGetData(t *testing.T) {
 	testName := "docker.com/notary/certificate"
-	testExt := "crt"
+	testExt := ".crt"
 	perms := os.FileMode(0755)
 
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	if err != nil {
-		t.Fatalf("failed to create a temporary directory: %v", err)
-	}
+	assert.NoError(t, err)
 	defer os.RemoveAll(tempBaseDir)
 
 	// Since we're generating this manually we need to add the extension '.'
-	expectedFilePath := filepath.Join(tempBaseDir, testName+"."+testExt)
+	expectedFilePath := filepath.Join(tempBaseDir, testName+testExt)
 
 	expectedData, err := generateRandomFile(expectedFilePath, perms)
-	if err != nil {
-		t.Fatalf("failed to generate random file: %v", err)
-	}
+	assert.NoError(t, err)
 
 	// Create our SimpleFileStore
 	store := &SimpleFileStore{
@@ -329,13 +267,8 @@ func TestGetData(t *testing.T) {
 		perms:   perms,
 	}
 	testData, err := store.Get(testName)
-	if err != nil {
-		t.Fatalf("failed to get data from: %s", testName)
-
-	}
-	if !bytes.Equal(testData, expectedData) {
-		t.Fatalf("unexpected content for the file: %s", expectedFilePath)
-	}
+	assert.NoError(t, err, "failed to get data from: %s", testName)
+	assert.Equal(t, expectedData, testData, "unexpected content for the file: %s", expectedFilePath)
 }
 
 func TestCreateDirectory(t *testing.T) {
@@ -343,9 +276,7 @@ func TestCreateDirectory(t *testing.T) {
 
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	if err != nil {
-		t.Fatalf("failed to create a temporary directory: %v", err)
-	}
+	assert.NoError(t, err)
 	defer os.RemoveAll(tempBaseDir)
 
 	dirPath := filepath.Join(tempBaseDir, testDir)
@@ -355,19 +286,13 @@ func TestCreateDirectory(t *testing.T) {
 
 	// Check to see if file exists
 	fi, err := os.Stat(dirPath)
-	if err != nil {
-		t.Fatalf("expected find directory: %s", dirPath)
-	}
+	assert.NoError(t, err)
 
 	// Check to see if it is a directory
-	if !fi.IsDir() {
-		t.Fatalf("expected to be directory: %s", dirPath)
-	}
+	assert.True(t, fi.IsDir(), "expected to be directory: %s", dirPath)
 
 	// Check to see if the permissions match
-	if fi.Mode().String() != "drwxr-xr-x" {
-		t.Fatalf("permissions are wrong for: %s. Got: %s", dirPath, fi.Mode().String())
-	}
+	assert.Equal(t, "drwxr-xr-x", fi.Mode().String(), "permissions are wrong for: %s. Got: %s", dirPath, fi.Mode().String())
 }
 
 func TestCreatePrivateDirectory(t *testing.T) {
@@ -375,9 +300,7 @@ func TestCreatePrivateDirectory(t *testing.T) {
 
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	if err != nil {
-		t.Fatalf("failed to create a temporary directory: %v", err)
-	}
+	assert.NoError(t, err)
 	defer os.RemoveAll(tempBaseDir)
 
 	dirPath := filepath.Join(tempBaseDir, testDir)
@@ -387,19 +310,13 @@ func TestCreatePrivateDirectory(t *testing.T) {
 
 	// Check to see if file exists
 	fi, err := os.Stat(dirPath)
-	if err != nil {
-		t.Fatalf("expected find directory: %s", dirPath)
-	}
+	assert.NoError(t, err)
 
 	// Check to see if it is a directory
-	if !fi.IsDir() {
-		t.Fatalf("expected to be directory: %s", dirPath)
-	}
+	assert.True(t, fi.IsDir(), "expected to be directory: %s", dirPath)
 
 	// Check to see if the permissions match
-	if fi.Mode().String() != "drwx------" {
-		t.Fatalf("permissions are wrong for: %s. Got: %s", dirPath, fi.Mode().String())
-	}
+	assert.Equal(t, "drwx------", fi.Mode().String(), "permissions are wrong for: %s. Got: %s", dirPath, fi.Mode().String())
 }
 
 func generateRandomFile(filePath string, perms os.FileMode) ([]byte, error) {
@@ -415,4 +332,57 @@ func generateRandomFile(filePath string, perms os.FileMode) ([]byte, error) {
 	}
 
 	return rndBytes, nil
+}
+
+func TestFileStoreConsistency(t *testing.T) {
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	assert.NoError(t, err)
+	defer os.RemoveAll(tempBaseDir)
+
+	tempBaseDir2, err := ioutil.TempDir("", "notary-test-")
+	assert.NoError(t, err)
+	defer os.RemoveAll(tempBaseDir2)
+
+	s, err := NewPrivateSimpleFileStore(tempBaseDir, "txt")
+	assert.NoError(t, err)
+
+	s2, err := NewPrivateSimpleFileStore(tempBaseDir2, ".txt")
+	assert.NoError(t, err)
+
+	file1Data := make([]byte, 20)
+	_, err = rand.Read(file1Data)
+	assert.NoError(t, err)
+
+	file2Data := make([]byte, 20)
+	_, err = rand.Read(file2Data)
+	assert.NoError(t, err)
+
+	file3Data := make([]byte, 20)
+	_, err = rand.Read(file3Data)
+	assert.NoError(t, err)
+
+	file1Path := "file1"
+	file2Path := "path/file2"
+	file3Path := "long/path/file3"
+
+	for _, s := range []LimitedFileStore{s, s2} {
+		s.Add(file1Path, file1Data)
+		s.Add(file2Path, file2Data)
+		s.Add(file3Path, file3Data)
+
+		paths := map[string][]byte{
+			file1Path: file1Data,
+			file2Path: file2Data,
+			file3Path: file3Data,
+		}
+		for _, p := range s.ListFiles() {
+			_, ok := paths[p]
+			assert.True(t, ok, fmt.Sprintf("returned path not found: %s", p))
+			d, err := s.Get(p)
+			assert.NoError(t, err)
+			assert.Equal(t, paths[p], d)
+		}
+	}
+
 }
