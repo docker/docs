@@ -3,6 +3,7 @@ package api
 import (
 	"crypto/rand"
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/docker/notary/signer"
@@ -28,18 +29,16 @@ func Handlers(cryptoServices signer.CryptoServiceIndex) *mux.Router {
 // algorithm specified in the HTTP request. If the algorithm isn't specified
 // or isn't supported, an error is returned to the client and this function
 // returns a nil CryptoService
-func getCryptoService(w http.ResponseWriter, algorithm string, cryptoServices signer.CryptoServiceIndex) signed.CryptoService {
+func getCryptoService(algorithm string, cryptoServices signer.CryptoServiceIndex) (signed.CryptoService, error) {
 	if algorithm == "" {
-		http.Error(w, "algorithm not specified", http.StatusBadRequest)
-		return nil
+		return nil, fmt.Errorf("algorithm not specified")
 	}
 
 	if service, ok := cryptoServices[algorithm]; ok {
-		return service
+		return service, nil
 	}
 
-	http.Error(w, "algorithm "+algorithm+" not supported", http.StatusBadRequest)
-	return nil
+	return nil, fmt.Errorf("algorithm " + algorithm + " not supported")
 }
 
 // KeyInfo returns a Handler that given a specific Key ID param, returns the public key bits of that key
@@ -79,9 +78,9 @@ func KeyInfo(cryptoServices signer.CryptoServiceIndex) http.Handler {
 func CreateKey(cryptoServices signer.CryptoServiceIndex) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		vars := mux.Vars(r)
-		cryptoService := getCryptoService(w, vars["Algorithm"], cryptoServices)
-		if cryptoService == nil {
-			// Error handled inside getCryptoService
+		cryptoService, err := getCryptoService(vars["Algorithm"], cryptoServices)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
 
