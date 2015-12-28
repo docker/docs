@@ -20,7 +20,7 @@ func (r RoleList) Less(i, j int) bool {
 	segsI := strings.Split(r[i], "/")
 	segsJ := strings.Split(r[j], "/")
 	if len(segsI) == len(segsJ) {
-		return strings.Compare(r[i], r[j]) == -1
+		return r[i] < r[j]
 	}
 	return len(segsI) < len(segsJ)
 }
