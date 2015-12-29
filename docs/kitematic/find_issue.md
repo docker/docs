@@ -15,9 +15,9 @@ Currently, the Kitematic GUI shows the name of a selected container, but not the
 
 To find and claim an issue you want to work on:
 
-1. Go to the `kitematic/kitematic` <a href="https://github.com/kitematic/kitematic" target="_blank">repository</a>.
+1. Go to the `docker/kitematic` <a href="https://github.com/docker/kitematic" target="_blank">repository</a>.
 
-2. Click the "Issues" link.
+2. Click the **Issues** link.
 
     A list of the open issues appears.
 
@@ -31,7 +31,7 @@ To find and claim an issue you want to work on:
 
     The comments on the issues describe the problem and can provide information for a potential solution.
 
-    For this exercise we will select the issue #xxxx Missing container id.
+    For this exercise we will select the issue <a href="https://github.com/docker/kitematic/issues/1191" target="_blank">#1191 Missing container id</a>.
 
 5. When you find an open issue that both interests you and is unclaimed, add a
 `#dibs` comment. Make sure that no other user has chosen to work on the issue.

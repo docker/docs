@@ -25,7 +25,7 @@ As you learned in the previous exercise, adding the container id to the containe
 
 Let's provide another missing piece of information for Kitematic users:
 
-_When I look at an active container in Kitematic, I want to know what command the container is currently running_
+"_When I look at an active container in Kitematic, I want to know what command the container is currently running_."
 
 ![An active container in Kitematic](images/kitematic_gui_container_id.png)
 
