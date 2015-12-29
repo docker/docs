@@ -65,12 +65,12 @@ the above installer link will have an uninstaller available.
 
 To fork the master branch of Kitematic:
 
-1. Go to the <a href="https://github.com/docker/kitematic "target="_blank">kitematic/kitematic repository </a>.
+1. Go to the <a href="https://github.com/docker/kitematic "target="_blank">docker/kitematic repository </a>.
 
-2. Click "Fork" in the upper right corner of the GitHub interface.
+2. Click **Fork** in the upper right corner of the GitHub interface.
 
     GitHub forks the repository to your GitHub account. The original
-    `kitematic/kitematic` repository becomes a new fork `YOUR_ACCOUNT/kitematic`
+    `docker/kitematic` repository becomes a new fork `YOUR_ACCOUNT/kitematic`
     under your account.
 
 3. Copy your fork's clone URL from GitHub.
@@ -95,9 +95,9 @@ To clone your repository and create a branch for the issue:
 
 4. Create and checkout a branch for the issue you will be working on.
 
-        $ git checkout -b xxxx-branch
+        $ git checkout -b 1191-branch
 
-    where _xxxx_ is the number of the issue previously noted.
+    As previously mentioned, issue <a href="https://github.com/docker/kitematic/issues/1191" target="_blank">#1191</a> is set up as an example to use for this exercise.
 
 ## Set up your signature and upstream remote
 You can set your signature globally or locally.
@@ -117,7 +117,7 @@ You can set your signature globally or locally.
 4. Set your local repository to track changes upstream, on the `kitematic`
 repository.
 
-        $ git remote add upstream https://github.com/kitematic/kitematic.git
+        $ git remote add upstream https://github.com/docker/kitematic.git
 
 (To learn more, see <a
 href="http://docs.docker.com/opensource/project/set-up-git/#set-your-signature-and-an-upstream-remote" target="_blank"> Set up your signature and an upstream remote</a>.)
