@@ -16,17 +16,15 @@ Rebasing helps verify that your commit is clean, and allows for an easier and fa
 
 Once you've cleaned up your commits:
 
-1. Push your code to your repository under the same name as your local branch.
+1. Push your code to your repository under the same name as your local branch (in the case of this example, 1191-branch).
 
-        $ git push origin xxxx-branch:xxxx-branch
-
-      where _xxxx_ is the number of the issue your worked on.
+        $ git push origin 1191-branch:1191-branch
 
 2. Open a web browser to your fork on GitHub.
 
     You should see the latest activity from your branch.
 
-3. Click "Compare & pull request."
+3. Click **Compare & pull request**.
 
     The system displays the pull request dialog.
 
@@ -48,7 +46,7 @@ Once you've cleaned up your commits:
 
     ![Commits](images/pr_commits_expected.png)
 
-6. Press "Create pull request".
+6. Click **Create pull request**.
 
     The system creates the request and opens it for you in the `kitematic/kitematic`
     repository.

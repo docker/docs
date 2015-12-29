@@ -11,7 +11,7 @@ weight=4
 
 ## Develop in Kitematic (work on an issue)
 
-For this tutorial, we will work on issue #XXXX which is a request to display the container id in Kitematic for easy identification. (Currently, Kitematic shows the container name but not the id.)
+For this tutorial, we will work on issue <a href="https://github.com/docker/kitematic/issues/1191" target="_blank"> #1191</a> which is a request to display the container id in Kitematic for easy identification. (Currently, Kitematic shows the container name but not the id.)
 
 To do this, edit the container `General Settings` layout.
 
