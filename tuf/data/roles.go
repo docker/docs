@@ -115,12 +115,10 @@ func ValidRole(name string) bool {
 
 // IsDelegation checks if the role is a delegation or a root role
 func IsDelegation(role string) bool {
-	targetsBase := fmt.Sprintf("%s/", ValidRoles[CanonicalTargetsRole])
+	targetsBase := ValidRoles[CanonicalTargetsRole] + "/"
 
-	whitelistedChars, err := regexp.MatchString("^[-a-z0-9_/]+$", role)
-	if err != nil {
-		return false
-	}
+	delegationRegexp := regexp.MustCompile("^[-a-z0-9_/]+$")
+	whitelistedChars := delegationRegexp.MatchString(role)
 
 	// Limit size of full role string to 255 chars for db column size limit
 	correctLength := len(role) < 256
@@ -274,7 +272,9 @@ func mergeStrSlices(orig, new []string) []string {
 	}
 	for _, e := range new {
 		if !have[e] {
-			orig = append(orig, e)
+			origCopy := make([]string, len(orig))
+			copy(origCopy, orig)
+			orig = append(origCopy, e)
 		}
 	}
 	return orig

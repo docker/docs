@@ -33,7 +33,7 @@ type ErrServerUnavailable struct {
 }
 
 func (err ErrServerUnavailable) Error() string {
-	return fmt.Sprintf("Unable to reach trust server at this time: %d.", err.code)
+	return fmt.Sprintf("unable to reach trust server at this time: %d.", err.code)
 }
 
 // ErrMaliciousServer indicates the server returned a response that is highly suspected
@@ -42,7 +42,7 @@ func (err ErrServerUnavailable) Error() string {
 type ErrMaliciousServer struct{}
 
 func (err ErrMaliciousServer) Error() string {
-	return "Trust server returned a bad response."
+	return "trust server returned a bad response."
 }
 
 // ErrInvalidOperation indicates that the server returned a 400 response and
@@ -53,9 +53,9 @@ type ErrInvalidOperation struct {
 
 func (err ErrInvalidOperation) Error() string {
 	if err.msg != "" {
-		return fmt.Sprintf("Trust server rejected operation: %s", err.msg)
+		return fmt.Sprintf("trust server rejected operation: %s", err.msg)
 	}
-	return "Trust server rejected operation."
+	return "trust server rejected operation."
 }
 
 // HTTPStore manages pulling and pushing metadata from and to a remote
