@@ -2,7 +2,7 @@ package data
 
 import (
 	"fmt"
-	"path/filepath"
+	"path"
 	"regexp"
 	"strings"
 )
@@ -126,7 +126,7 @@ func IsDelegation(role string) bool {
 	correctLength := len(role) < 256
 
 	// Removes ., .., extra slashes, and trailing slash
-	isClean := filepath.Clean(role) == role
+	isClean := path.Clean(role) == role
 	return strings.HasPrefix(role, targetsBase) &&
 		whitelistedChars &&
 		correctLength &&
