@@ -8,19 +8,30 @@ weight="-99"
 
 # UCP Release Notes
 
-The latest release is 0.6.  Consult with your Docker sales engineer for the 
+The latest release is 0.6.  Consult with your Docker sales engineer for the
 release notes of earlier versions.
 
 ## Version 0.6
 
 The following notes apply to this release:
 
-## Licensing
+## Licensing functionality enabled
 
-- Licensing functionality is now enabled
+This release enables UPC licensing functionality. UCP starts in "unlicensed" mode. This mode does not limit any functionality. However, when you start UCP, an informational banner appears on the application noting it is unlicensed.
 
-UCP will start in an "unlicensed" mode.  This will not limit any functionality.
-Please consult with your Docker sales engineer for details of UCP licensing.
+For the purposes of this beta, you can use an existing DTR license and remove the banner by doing the following:
+
+1. Install UCP.
+
+2. Log into the controller.
+
+3. Go to the **Settings** page.
+
+    ![License](../images/license.png)
+
+4. Upload a valid DTR license.
+
+    After a successful upload, the banner disappears.
 
 ## UI
 
