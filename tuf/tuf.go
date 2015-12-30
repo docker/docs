@@ -7,7 +7,7 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"path/filepath"
+	"path"
 	"strings"
 	"time"
 
@@ -181,7 +181,7 @@ func (tr *Repo) GetDelegation(role string) (*data.Role, error) {
 		return nil, data.ErrInvalidRole{Role: role, Reason: "not a valid delegated role"}
 	}
 
-	parent := filepath.Dir(role)
+	parent := path.Dir(role)
 
 	// check the parent role
 	if parentRole := tr.keysDB.GetRole(parent); parentRole == nil {
@@ -209,7 +209,7 @@ func (tr *Repo) UpdateDelegations(role *data.Role, keys []data.PublicKey) error 
 	if !role.IsDelegation() || !role.IsValid() {
 		return data.ErrInvalidRole{Role: role.Name, Reason: "not a valid delegated role"}
 	}
-	parent := filepath.Dir(role.Name)
+	parent := path.Dir(role.Name)
 
 	if err := tr.VerifyCanSign(parent); err != nil {
 		return err
@@ -270,7 +270,7 @@ func (tr *Repo) DeleteDelegation(role data.Role) error {
 	// the role variable must not be used past this assignment for safety
 	name := role.Name
 
-	parent := filepath.Dir(name)
+	parent := path.Dir(name)
 	if err := tr.VerifyCanSign(parent); err != nil {
 		return err
 	}

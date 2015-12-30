@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"path/filepath"
+	"path"
 	"time"
 
 	"github.com/Sirupsen/logrus"
@@ -134,7 +134,7 @@ func doWithRoleFallback(role string, doFunc func(string) error) error {
 		if _, ok := err.(data.ErrInvalidRole); !ok {
 			return err
 		}
-		role = filepath.Dir(role)
+		role = path.Dir(role)
 	}
 	return data.ErrInvalidRole{Role: role}
 }
