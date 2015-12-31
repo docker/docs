@@ -13,7 +13,7 @@ These instructions explain how to install Docker Universal Control Plane (UCP). 
 - [Plan your installation](#plan-your-installation)
 - [Step 1: Verify you have the prerequisites](#step-1-verify-you-have-the-prerequisites)
 - [Step 2: Configure your network for UCP](#step-2-configure-your-network-for-ucp)
-- [Step 3: Install Docker CS Engine 1.9](#step-3-install-docker-cs-engine-19)
+- [Step 3: Install Docker CS Engine 1.9](#step-3-install-docker-cs-engine-1-9)
 - [Step 4: (optional) Create user-named volumes](#step-4-optional-create-user-named-volumes)
 - [Step 5: Install the UCP controller](#step-5-install-the-ucp-controller)
 - [Step 6: (optional) Add a controller replica to the UCP cluster](#step-6-optional-add-a-controller-replica-to-the-ucp-cluster)
@@ -36,7 +36,7 @@ Docker Engine CLI. The bootstrapper has subcommands to `install` a controller or
 
 You can use the bootstrapper as an interactive script or by passing command-line
 options. Regardless of how you use the bootstrapper, the installer supplies some
-quick default options for both data volumes and the certificate authority (CA).  
+quick default options for both data volumes and the certificate authority (CA).
 ### Default versus the custom installation options
 
 The first time you install, you should build a sandbox environment using
@@ -58,7 +58,7 @@ in your sandbox.
 
 When you bootstrap a controller or node, you must supply a host address either
 interactively or using the `--host-address` option. The host address can be a
-pubic IP address and/or fully-qualified domain name.  
+pubic IP address and/or fully-qualified domain name.
 
 If you are using a cloud provider such as AWS or Digital Ocean, you may need to
 allocate a private network for your UCP installation. You can use this network
@@ -157,53 +157,21 @@ Using a different  port is a customization. These instructions assume you are us
 
 ## Step 3: Install Docker CS Engine 1.9
 
-The BETA program requires that you install the 1.9.0 version of Docker CS
-Engine. Follow the instructions for your particular operating system and ensure
+The BETA program requires that you install the Docker CS Engine 1.9.0 or above.
+Follow the instructions for your particular operating system and ensure
 you are pointing at the proper repo.
 
 Install the Docker CS Engine on both the controller node and each member node.
 
-### RHEL 7.0, 7.1
+### RHEL 7.0, 7.1 and CentOS 7.1
 
 Use the detailed [Red Hat Linux installation
-instructions](http://docs.docker.com/installation/rhel/) and refer to this repo
-to install:
-
-```
-[dockerrepo]
-name=Docker Repository
-baseurl=https://yum.dockerproject.org/repo/testing/centos/7
-enabled=1
-gpgcheck=1
-gpgkey=https://yum.dockerproject.org/gpg
-EOF
-```
+instructions](https://docs.docker.com/docker-trusted-registry/install/install-csengine/#centos-7-1-rhel-7-0-7-1-yum-based-systems)
 
 ### Ubuntu 14.04 LTS
 
 Use the [detailed Ubuntu installation
-instructions](http://docs.docker.com/installation/ubuntulinux/) to refer to this
-repo to install:
-
-```
-deb https://apt.dockerproject.org/repo ubuntu-trusty testing
-```
-
-### CentOS 7.1
-
-Use the [detailed CentOS installation
-instructions](http://docs.docker.com/installation/centos/) to refer to this
-repo to install:
-
-```
-[dockerrepo]
-name=Docker Repository
-baseurl=https://yum.dockerproject.org/repo/testing/centos/7
-enabled=1
-gpgcheck=1
-gpgkey=https://yum.dockerproject.org/gpg
-EOF
-```
+instructions](https://docs.docker.com/docker-trusted-registry/install/install-csengine/#install-on-ubuntu-14-04-lts)
 
 
 ## Step 4: (optional) Create user-named volumes
