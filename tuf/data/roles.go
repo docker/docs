@@ -270,14 +270,14 @@ func mergeStrSlices(orig, new []string) []string {
 	for _, e := range orig {
 		have[e] = true
 	}
+	merged := make([]string, len(orig), len(orig)+len(new))
+	copy(merged, orig)
 	for _, e := range new {
 		if !have[e] {
-			origCopy := make([]string, len(orig))
-			copy(origCopy, orig)
-			orig = append(origCopy, e)
+			merged = append(merged, e)
 		}
 	}
-	return orig
+	return merged
 }
 
 func subtractStrSlices(orig, remove []string) []string {
