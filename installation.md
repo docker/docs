@@ -456,6 +456,42 @@ Once you download the bundle, you can install and use it.
          com.docker.ucp.license_max_engines=0
          com.docker.ucp.license_expires=EXPIRED
 
+### Client Bundles on Externally Managed CA Configuration                                           
+
+If UCP is configured with an external CA, it will be unable to sign client bundles for non-admin users automatically. It is still possible to manually issue certificates signed by the CA that UCP users can use to interact with UCP via the CLI.
+
+Generate an 2048-bit RSA private key.
+
+```
+openssl genrsa -out key.pem 2048
+```
+
+Generate a Certificate Signing Request (CSR).  The output `cert.csr` should be provided to your organization's CA owner to be signed, with a minimum of client authentication usage. 
+
+```
+openssl req -new -sha256 -key key.pem -out cert.csr
+```
+
+Your CA owner will sign the CSR, and provide `cert.pem` and `ca.pem` files.
+
+Extract the public key from the signed certificate:
+
+```
+openssl x509 -pubkey -noout -in cert.pem  > cert.pub 
+```
+
+The contents of cert.pub will then need to be added to your profile.  You can add this in the UI by clicking the User Menu in the top right corner, and select profile.
+
+Once you are on the User Profile screen, click the "Add an Existing Public Key" button and provide the contents of cert.pub, along with a memorable label for this bundle.
+
+Now that you have linked the public key to you account, the next step is to configure your CLI. To configure your CLI to use the certificate bundle that you have generated, you will need to export the following environment variables:
+
+```
+export DOCKER_TLS_VERIFY=1
+export DOCKER_CERT_PATH=$(pwd)
+export DOCKER_HOST=tcp://<ucp-hostname>:443
+```
+
 ## Uninstall
 
 The bootstrapper can also uninstall UCP from the controller and the nodes. To see the uninstall options before you uninstall, use the following:
