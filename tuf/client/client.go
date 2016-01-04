@@ -550,7 +550,7 @@ func (c Client) TargetMeta(role, path string, excludeRoles ...string) (*data.Fil
 			// we found the target!
 			return meta, curr
 		}
-		delegations := c.local.TargetDelegations(role, path, pathHex)
+		delegations := c.local.TargetDelegations(curr, path, pathHex)
 		for _, d := range delegations {
 			if !excl[d.Name] {
 				roles = append(roles, d.Name)
