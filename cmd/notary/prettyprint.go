@@ -148,13 +148,14 @@ func prettyPrintTargets(ts []*client.Target, writer io.Writer) {
 
 	sort.Stable(targetsSorter(ts))
 
-	table := getTable([]string{"Name", "Digest", "Size (bytes)"}, writer)
+	table := getTable([]string{"Name", "Digest", "Size (bytes)", "Role"}, writer)
 
 	for _, t := range ts {
 		table.Append([]string{
 			t.Name,
 			hex.EncodeToString(t.Hashes["sha256"]),
 			fmt.Sprintf("%d", t.Length),
+			t.Role,
 		})
 	}
 	table.Render()
