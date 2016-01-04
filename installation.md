@@ -57,31 +57,30 @@ in your sandbox.
 ### IP addresses and fully-qualified domain names
 
 When you bootstrap a controller or node, you must supply a host address either
-interactively or using the `--host-address` option. The host address can be a
-pubic IP address and/or fully-qualified domain name.
+interactively or using the `--host-address` option. The host address can be an accessible IP address and/or fully-qualified domain name.  
 
 If you are using a cloud provider such as AWS or Digital Ocean, you may need to
 allocate a private network for your UCP installation. You can use this network
-as long as the controller and nodes can communicate via among each other via
+as long as the controller and nodes can communicate via
 their private IPs. If the private IPs do not support communication among the
-UCP cluster, using public IPs or full-qualified domain names are required.
+UCP cluster, using public IPs or full-qualified domain names are required. For
+more information about what ports and protocols are required see [Step 2: Configure your network for UCP](#step-2-configure-your-network-for-ucp).
 
 ### Subject alternative names (SANs)
 
 Further, UCP requires that all clients, including the Docker Engine, use a Swarm
 TLS certificate chain signed by the UCP Swarm Root CA. You build the certificate
-chain by passing the `--san` (subject alternative names or SANs) values to the
+by passing the `--san` (subject alternative names or SANs) values to the
 boostrapper's `install` or `join`. A SAN value can be the pubic IP address
 and/or fully-qualified domain name.
 
 For the controller and each node, you must specify at least one SAN; you can
-specify more. It is not an either/or choice. Because you can specify multiple
-SANs, you can provide both types.
+specify more.
 
 If you are using a cloud provider and specified private IPs for the host address
 values, consider whether you need to access your cluster through a public
 network as well as the private network space. If the answer is yes, your SAN
-values should be public IPs or full-qualified hostnames.
+values should contain both the public IPs or full-qualified hostnames and the private network IPs.
 
 ### Mixpanel analytics
 
@@ -207,7 +206,7 @@ When you install, the script prompts you for the following information:
 
 * a password to use for the UCP `admin` account
 * your Docker Hub username/password/email
-*  at lease one SAN value which is the actual external, publically-accessible IP address or fully-qualified domain name for the controller node
+*  at lease one SAN value which is the accessible IP address or fully-qualified domain name for the controller node
 
 When you have the information you'll be prompted for, do the following to
 install:
@@ -233,7 +232,7 @@ install:
 3. Enter the address into your browser to view the UCP login screen.
 
     Your browser may warn you about the connection. The warning appears because
-    the UCP certification was issued by a built-in certificate authority. Your
+    the UCP certificate was issued by a built-in certificate authority. Your
     actions with the install actually created the certificate. If you are
     concerned, the certificate's fingerprint is displayed during install and you
     can compare it.  
@@ -258,12 +257,12 @@ install:
 In this optional step, you configure support for UCP's high-availability
 feature. You do this by adding one or more UCP *replicas* using the
 bootstrapper's `ucp join` subcommand.  The first time you install, you should
-skip this optional step and try it later. Later, try an install where your
+skip this optional step and try it later. Later, try an install where you
 configure high-availability.
 
 When adding nodes to your cluster, you decide which nodes you to use as
-*replicas* and which nodes are simply additional Engines for extra capacity.  A
-replica is node in your cluster that can act as an additional UCP controller.
+*replicas* and which nodes are simply for extra capacity.  A
+replica is a node in your cluster that can act as an additional UCP controller.
 Should the primary controller fail, a replica can take over the controller role
 for the cluster.  If you are trying out the optional HA deployment:
 
@@ -282,7 +281,7 @@ The bootstrapper prompts you for the following information:
 * the URL of the UCP controller, for example `https://52.70.188.239`
 * the username/password of an UCP administrator account
 * your Docker Hub username/password/email
-* at least one SAN value which is the actual external, publically-accessible IP address or fully-qualified domain name for node
+* at least one SAN value which is an accessible IP address or fully-qualified domain name for node
 
 When you have the information you'll be prompted for, do the following to install:
 
@@ -404,14 +403,14 @@ command an authorization token. Of course, you need to have `curl` installed as 
 
 ### Install the certificate bundle
 
-Once you download the bundle, you can install and use it.
+Once you download the bundle, you can unzip and use it.
 
 1. Make sure you have `zip` installed.
 
-        $ which zip
-        /usr/bin/zip
+        $ which unzip
+        /usr/bin/unzip
 
-    If you don't install it before continuing.
+    If you don't, install it before continuing.
 
 2. Open the folder containing the bundle file.
 
@@ -466,7 +465,7 @@ Generate an 2048-bit RSA private key.
 openssl genrsa -out key.pem 2048
 ```
 
-Generate a Certificate Signing Request (CSR).  The output `cert.csr` should be provided to your organization's CA owner to be signed, with a minimum of client authentication usage. 
+Generate a Certificate Signing Request (CSR).  The output `cert.csr` should be provided to your organization's CA owner to be signed, with a minimum of client authentication usage.
 
 ```
 openssl req -new -sha256 -key key.pem -out cert.csr
@@ -477,7 +476,7 @@ Your CA owner will sign the CSR, and provide `cert.pem` and `ca.pem` files.
 Extract the public key from the signed certificate:
 
 ```
-openssl x509 -pubkey -noout -in cert.pem  > cert.pub 
+openssl x509 -pubkey -noout -in cert.pem  > cert.pub
 ```
 
 The contents of cert.pub will then need to be added to your profile.  You can add this in the UI by clicking the User Menu in the top right corner, and select profile.
@@ -494,7 +493,7 @@ export DOCKER_HOST=tcp://<ucp-hostname>:443
 
 ## Uninstall
 
-The bootstrapper can also uninstall UCP from the controller and the nodes. To see the uninstall options before you uninstall, use the following:
+The bootstrapper can also uninstall UCP from the controller and the nodes. The uninstall process will not remove any other containers that are running, except those recognized to be part of UCP. To see the uninstall options before you uninstall, use the following:
 
 ```bash
 docker run --rm -it dockerorca/ucp uninstall --help
