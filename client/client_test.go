@@ -518,6 +518,35 @@ func TestAddTargetToTargetRoleByDefault(t *testing.T) {
 		[]string{data.CanonicalTargetsRole})
 }
 
+// Adding a target ignores the role of the target object, and goes by the
+// roles passed to AddTarget (or the default targets role, if no roles are passed)
+func TestAddTargetIgnoresTargetRole(t *testing.T) {
+	ts, _, _ := simpleTestServer(t)
+	defer ts.Close()
+
+	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
+
+	targetObj, err := NewTarget("latest", "../fixtures/root-ca.crt")
+	assert.NoError(t, err, "error creating target")
+	targetObj.Role = "targets/whosits"
+
+	// if no roles are passed, the scope is targets, not whatever targetObj has
+	// specified
+	assert.NoError(t, repo.AddTarget(targetObj))
+	changes := getChanges(t, repo)
+	assert.Len(t, changes, 1)
+	assert.Equal(t, data.CanonicalTargetsRole, changes[0].Scope())
+
+	// if roles are passed, the scope is one of those roles, not whatever
+	// targetObj has specified
+	assert.NoError(t, repo.AddTarget(targetObj, "targets/one", "targets/two"))
+	changes = getChanges(t, repo)
+	assert.Len(t, changes, 3)
+	assert.Equal(t, "targets/one", changes[1].Scope())
+	assert.Equal(t, "targets/two", changes[2].Scope())
+}
+
 // Tests that adding a target to a repo or deleting a target from a repo,
 // with the given roles, makes a change to the expected scopes
 func testAddOrDeleteTarget(t *testing.T, repo *NotaryRepository, action string,
@@ -593,7 +622,8 @@ func testAddOrDeleteTarget(t *testing.T, repo *NotaryRepository, action string,
 	}
 }
 
-// TestAddTargetToSpecifiedValidRoles adds a target to the specified roles.
+// TestAddTargetToSpecifiedValidRoles adds a target to the specified roles,
+// ignoring whatever role is in the target.
 // Confirms that the changelist is created correctly, one for each of the
 // the specified roles as scopes.
 func TestAddTargetToSpecifiedValidRoles(t *testing.T) {
@@ -761,14 +791,14 @@ func TestRemoveTargetErrorWritingChanges(t *testing.T) {
 // of listed targets.
 // We test this with both an RSA and ECDSA root key
 func TestListTarget(t *testing.T) {
-	// testListEmptyTargets(t, data.ECDSAKey)
-	// testListTarget(t, data.ECDSAKey)
+	testListEmptyTargets(t, data.ECDSAKey)
+	testListTarget(t, data.ECDSAKey)
 	testListTargetWithDelegates(t, data.ECDSAKey)
-	// if !testing.Short() {
-	// 	testListEmptyTargets(t, data.RSAKey)
-	// 	testListTarget(t, data.RSAKey)
-	// 	testListTargetWithDelegates(t, data.RSAKey)
-	// }
+	if !testing.Short() {
+		testListEmptyTargets(t, data.RSAKey)
+		testListTarget(t, data.RSAKey)
+		testListTargetWithDelegates(t, data.RSAKey)
+	}
 }
 
 func testListEmptyTargets(t *testing.T, rootType string) {
