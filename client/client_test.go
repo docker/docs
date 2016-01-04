@@ -529,7 +529,7 @@ func TestAddTargetIgnoresTargetRole(t *testing.T) {
 
 	targetObj, err := NewTarget("latest", "../fixtures/root-ca.crt")
 	assert.NoError(t, err, "error creating target")
-	targetObj.Role = "targets/whosits"
+	targetObj.Role = "targets/whoisit"
 
 	// if no roles are passed, the scope is targets, not whatever targetObj has
 	// specified
@@ -940,7 +940,7 @@ func testListTarget(t *testing.T, rootType string) {
 
 	sort.Stable(targetSorter(targets))
 
-	// the targets should both be find in the targets role
+	// the targets should both be found in the targets role
 	latestTarget.Role = data.CanonicalTargetsRole
 	currentTarget.Role = data.CanonicalTargetsRole
 
@@ -1016,7 +1016,7 @@ func testListTargetWithDelegates(t *testing.T, rootType string) {
 	targets, err := repo.ListTargets()
 	assert.NoError(t, err)
 
-	// Should be two targets
+	// Should be four targets
 	assert.Len(t, targets, 4, "unexpected number of targets returned by ListTargets")
 
 	sort.Stable(targetSorter(targets))
@@ -1037,7 +1037,7 @@ func testListTargetWithDelegates(t *testing.T, rootType string) {
 	targets, err = repo.ListTargets("targets/level1", data.CanonicalTargetsRole)
 	assert.NoError(t, err)
 
-	// Should be two targets
+	// Should be four targets
 	assert.Len(t, targets, 4, "unexpected number of targets returned by ListTargets")
 
 	sort.Stable(targetSorter(targets))

@@ -157,7 +157,7 @@ func TestPrettyPrintZeroTargets(t *testing.T) {
 
 }
 
-// Targets are sorted by name, and the name, SHA256 digest, and size are
+// Targets are sorted by name, and the name, SHA256 digest, size, and role are
 // printed.
 func TestPrettyPrintSortedTargets(t *testing.T) {
 	hashes := make([][]byte, 3)
@@ -167,9 +167,9 @@ func TestPrettyPrintSortedTargets(t *testing.T) {
 		assert.NoError(t, err)
 	}
 	unsorted := []*client.Target{
-		{Name: "zebra", Hashes: data.Hashes{"sha256": hashes[0]}, Length: 8},
-		{Name: "abracadabra", Hashes: data.Hashes{"sha256": hashes[1]}, Length: 1},
-		{Name: "bee", Hashes: data.Hashes{"sha256": hashes[2]}, Length: 5},
+		{Name: "zebra", Role: "targets/b", Hashes: data.Hashes{"sha256": hashes[0]}, Length: 8},
+		{Name: "abracadabra", Role: "targets", Hashes: data.Hashes{"sha256": hashes[1]}, Length: 1},
+		{Name: "bee", Role: "targets/a", Hashes: data.Hashes{"sha256": hashes[2]}, Length: 5},
 	}
 
 	var b bytes.Buffer
@@ -178,9 +178,9 @@ func TestPrettyPrintSortedTargets(t *testing.T) {
 	assert.NoError(t, err)
 
 	expected := [][]string{
-		{"abracadabra", "b012", "1"},
-		{"bee", "c012", "5"},
-		{"zebra", "a012", "8"},
+		{"abracadabra", "b012", "1", "targets"},
+		{"bee", "c012", "5", "targets/a"},
+		{"zebra", "a012", "8", "targets/b"},
 	}
 
 	lines := strings.Split(strings.TrimSpace(string(text)), "\n")
@@ -188,7 +188,7 @@ func TestPrettyPrintSortedTargets(t *testing.T) {
 
 	// starts with headers
 	assert.True(t, reflect.DeepEqual(strings.Fields(lines[0]), strings.Fields(
-		"NAME     DIGEST      SIZE (BYTES)")))
+		"NAME     DIGEST      SIZE (BYTES)   ROLE")))
 	assert.Equal(t, "----", lines[1][:4])
 
 	for i, line := range lines[2:] {
