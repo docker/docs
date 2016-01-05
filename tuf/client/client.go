@@ -8,7 +8,6 @@ import (
 	"fmt"
 	"io"
 	"path"
-	"path/filepath"
 	"strings"
 
 	"github.com/Sirupsen/logrus"
@@ -506,11 +505,12 @@ func (c Client) getTargetsFile(role string, keyIDs []string, snapshotMeta data.F
 	return s, nil
 }
 
-// RoleTargetsPath generates the appropriate filename for the targets file,
+// RoleTargetsPath generates the appropriate HTTP URL for the targets file,
 // based on whether the repo is marked as consistent.
 func (c Client) RoleTargetsPath(role string, hashSha256 string, consistent bool) (string, error) {
 	if consistent {
-		dir := filepath.Dir(role)
+		// Use path instead of filepath since we refer to the TUF role directly instead of its target files
+		dir := path.Dir(role)
 		if strings.Contains(role, "/") {
 			lastSlashIdx := strings.LastIndex(role, "/")
 			role = role[lastSlashIdx+1:]

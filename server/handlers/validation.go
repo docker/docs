@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"path/filepath"
+	"path"
 	"sort"
 	"strings"
 
@@ -145,7 +145,7 @@ func loadAndValidateTargets(gun string, repo *tuf.Repo, roles map[string]storage
 
 	updatesToApply := make([]storage.MetaUpdate, 0, len(targetsRoles))
 	for _, role := range targetsRoles {
-		parentRole := filepath.Dir(role)
+		parentRole := path.Dir(role)
 
 		// don't load parent if current role is "targets" or if the parent has
 		// already been loaded
