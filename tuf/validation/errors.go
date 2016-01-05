@@ -93,7 +93,7 @@ func (s *SerializableError) UnmarshalJSON(text []byte) (err error) {
 		err = json.Unmarshal(text, &e)
 		theError = e.Error
 	default:
-		err = fmt.Errorf("do not know how to unmarshall %s", x.Name)
+		err = fmt.Errorf("do not know how to unmarshal %s", x.Name)
 		return
 	}
 	if err != nil {
