@@ -352,7 +352,7 @@ func (tr *Repo) InitRoot(consistent bool) error {
 // InitTargets initializes an empty targets, and returns the new empty target
 func (tr *Repo) InitTargets(role string) (*data.SignedTargets, error) {
 	r := data.Role{Name: role}
-	if !r.IsDelegation() && !(data.CanonicalRole(role) == data.CanonicalTargetsRole) {
+	if !r.IsDelegation() && data.CanonicalRole(role) != data.CanonicalTargetsRole {
 		return nil, data.ErrInvalidRole{
 			Role:   role,
 			Reason: fmt.Sprintf("role is not a valid targets role name: %s", role),
