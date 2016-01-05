@@ -39,6 +39,7 @@ var (
 		"docker-bench-security",
 		"docker-py",
 		"dockercraft",
+		"engine-api",
 		"go-connections",
 		"go-units",
 		"kitematic",
