@@ -869,7 +869,7 @@ func fakeServerData(t *testing.T, repo *NotaryRepository, mux *http.ServeMux,
 }
 
 // We want to sort by name, so we can guarantee ordering.
-type targetSorter []*Target
+type targetSorter []*TargetWithRole
 
 func (k targetSorter) Len() int           { return len(k) }
 func (k targetSorter) Swap(i, j int)      { k[i], k[j] = k[j], k[i] }
@@ -910,18 +910,25 @@ func testListTarget(t *testing.T, rootType string) {
 
 	sort.Stable(targetSorter(targets))
 
+	// the targets should both be found in the targets role
+	for _, foundTarget := range targets {
+		assert.Equal(t, data.CanonicalTargetsRole, foundTarget.Role)
+	}
+
 	// current should be first
-	assert.Equal(t, currentTarget, targets[0], "current target does not match")
-	assert.Equal(t, latestTarget, targets[1], "latest target does not match")
+	assert.True(t, reflect.DeepEqual(*currentTarget, targets[0].Target), "current target does not match")
+	assert.True(t, reflect.DeepEqual(*latestTarget, targets[1].Target), "latest target does not match")
 
 	// Also test GetTargetByName
 	newLatestTarget, err := repo.GetTargetByName("latest")
 	assert.NoError(t, err)
-	assert.Equal(t, latestTarget, newLatestTarget, "latest target does not match")
+	assert.Equal(t, data.CanonicalTargetsRole, newLatestTarget.Role)
+	assert.True(t, reflect.DeepEqual(*latestTarget, newLatestTarget.Target), "latest target does not match")
 
 	newCurrentTarget, err := repo.GetTargetByName("current")
 	assert.NoError(t, err)
-	assert.Equal(t, currentTarget, newCurrentTarget, "current target does not match")
+	assert.Equal(t, data.CanonicalTargetsRole, newCurrentTarget.Role)
+	assert.True(t, reflect.DeepEqual(*currentTarget, newCurrentTarget.Target), "current target does not match")
 }
 
 func testListTargetWithDelegates(t *testing.T, rootType string) {
@@ -982,48 +989,66 @@ func testListTargetWithDelegates(t *testing.T, rootType string) {
 	targets, err := repo.ListTargets()
 	assert.NoError(t, err)
 
-	// Should be two targets
+	// Should be four targets
 	assert.Len(t, targets, 4, "unexpected number of targets returned by ListTargets")
 
 	sort.Stable(targetSorter(targets))
 
 	// current should be first.
-	assert.Equal(t, currentTarget, targets[0], "current target does not match")
-	assert.Equal(t, latestTarget, targets[1], "latest target does not match")
-	assert.Equal(t, level2Target, targets[2], "level2 target does not match")
-	assert.Equal(t, otherTarget, targets[3], "other target does not match")
+	assert.True(t, reflect.DeepEqual(*currentTarget, targets[0].Target), "current target does not match")
+	assert.Equal(t, data.CanonicalTargetsRole, targets[0].Role)
+
+	assert.True(t, reflect.DeepEqual(*latestTarget, targets[1].Target), "latest target does not match")
+	assert.Equal(t, data.CanonicalTargetsRole, targets[1].Role)
+
+	assert.True(t, reflect.DeepEqual(*level2Target, targets[2].Target), "level2 target does not match")
+	assert.Equal(t, "targets/level2", targets[2].Role)
+
+	assert.True(t, reflect.DeepEqual(*otherTarget, targets[3].Target), "other target does not match")
+	assert.Equal(t, "targets/level1", targets[3].Role)
 
 	// test listing with priority specified
 	targets, err = repo.ListTargets("targets/level1", data.CanonicalTargetsRole)
 	assert.NoError(t, err)
 
-	// Should be two targets
+	// Should be four targets
 	assert.Len(t, targets, 4, "unexpected number of targets returned by ListTargets")
 
 	sort.Stable(targetSorter(targets))
 
-	// current should be first
-	assert.Equal(t, delegatedTarget, targets[0], "current target does not match")
-	assert.Equal(t, latestTarget, targets[1], "latest target does not match")
-	assert.Equal(t, level2Target, targets[2], "level2 target does not match")
-	assert.Equal(t, otherTarget, targets[3], "other target does not match")
+	// current (in delegated role) should be first
+	assert.True(t, reflect.DeepEqual(*delegatedTarget, targets[0].Target), "current target does not match")
+	assert.Equal(t, "targets/level1", targets[0].Role)
+
+	assert.True(t, reflect.DeepEqual(*latestTarget, targets[1].Target), "latest target does not match")
+	assert.Equal(t, data.CanonicalTargetsRole, targets[1].Role)
+
+	assert.True(t, reflect.DeepEqual(*level2Target, targets[2].Target), "level2 target does not match")
+	assert.Equal(t, "targets/level2", targets[2].Role)
+
+	assert.True(t, reflect.DeepEqual(*otherTarget, targets[3].Target), "other target does not match")
+	assert.Equal(t, "targets/level1", targets[3].Role)
 
 	// Also test GetTargetByName
 	newLatestTarget, err := repo.GetTargetByName("latest")
 	assert.NoError(t, err)
-	assert.Equal(t, latestTarget, newLatestTarget, "latest target does not match")
+	assert.True(t, reflect.DeepEqual(*latestTarget, newLatestTarget.Target), "latest target does not match")
+	assert.Equal(t, data.CanonicalTargetsRole, newLatestTarget.Role)
 
 	newCurrentTarget, err := repo.GetTargetByName("current", "targets/level1", "targets")
 	assert.NoError(t, err)
-	assert.Equal(t, delegatedTarget, newCurrentTarget, "current target does not match")
+	assert.True(t, reflect.DeepEqual(*delegatedTarget, newCurrentTarget.Target), "current target does not match")
+	assert.Equal(t, "targets/level1", newCurrentTarget.Role)
 
 	newOtherTarget, err := repo.GetTargetByName("other")
 	assert.NoError(t, err)
-	assert.True(t, reflect.DeepEqual(otherTarget, newOtherTarget), "other target does not match")
+	assert.True(t, reflect.DeepEqual(*otherTarget, newOtherTarget.Target), "other target does not match")
+	assert.Equal(t, "targets/level1", newOtherTarget.Role)
 
 	newLevel2Target, err := repo.GetTargetByName("level2")
 	assert.NoError(t, err)
-	assert.True(t, reflect.DeepEqual(level2Target, newLevel2Target), "level2 target does not match")
+	assert.True(t, reflect.DeepEqual(*level2Target, newLevel2Target.Target), "level2 target does not match")
+	assert.Equal(t, "targets/level2", newLevel2Target.Role)
 }
 
 // TestValidateRootKey verifies that the public data in root.json for the root
@@ -1270,19 +1295,21 @@ func assertPublishToRolesSucceeds(t *testing.T, repo1 *NotaryRepository,
 
 			sort.Stable(targetSorter(targets))
 
-			assert.Equal(t, currentTarget, targets[0], "current target does not match")
-			assert.Equal(t, latestTarget, targets[1], "latest target does not match")
+			assert.True(t, reflect.DeepEqual(*currentTarget, targets[0].Target), "current target does not match")
+			assert.Equal(t, role, targets[0].Role)
+			assert.True(t, reflect.DeepEqual(*latestTarget, targets[1].Target), "latest target does not match")
+			assert.Equal(t, role, targets[1].Role)
 
 			// Also test GetTargetByName
-			if role == data.CanonicalTargetsRole {
-				newLatestTarget, err := repo.GetTargetByName("latest")
-				assert.NoError(t, err)
-				assert.Equal(t, latestTarget, newLatestTarget, "latest target does not match")
+			newLatestTarget, err := repo.GetTargetByName("latest", role)
+			assert.NoError(t, err)
+			assert.True(t, reflect.DeepEqual(*latestTarget, newLatestTarget.Target), "latest target does not match")
+			assert.Equal(t, role, newLatestTarget.Role)
 
-				newCurrentTarget, err := repo.GetTargetByName("current")
-				assert.NoError(t, err)
-				assert.Equal(t, currentTarget, newCurrentTarget, "current target does not match")
-			}
+			newCurrentTarget, err := repo.GetTargetByName("current", role)
+			assert.NoError(t, err)
+			assert.True(t, reflect.DeepEqual(*currentTarget, newCurrentTarget.Target), "current target does not match")
+			assert.Equal(t, role, newCurrentTarget.Role)
 		}
 	}
 }
@@ -1320,7 +1347,7 @@ func testPublishAfterPullServerHasSnapshotKey(t *testing.T, rootType string) {
 	// list, so that the snapshot metadata is pulled from server
 	targets, err := repo.ListTargets(data.CanonicalTargetsRole)
 	assert.NoError(t, err)
-	assert.Equal(t, []*Target{published}, targets)
+	assert.Equal(t, []*TargetWithRole{{Target: *published, Role: data.CanonicalTargetsRole}}, targets)
 	// listing downloaded the timestamp and snapshot metadata info
 	assertRepoHasExpectedMetadata(t, repo, data.CanonicalTimestampRole, true)
 	assertRepoHasExpectedMetadata(t, repo, data.CanonicalSnapshotRole, true)
