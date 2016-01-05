@@ -420,7 +420,7 @@ func (r *NotaryRepository) RemoveTarget(targetName string, roles ...string) erro
 // subtree and also the "targets/x" subtree, as we will defer parsing it until
 // we explicitly reach it in our iteration of the provided list of roles.
 func (r *NotaryRepository) ListTargets(roles ...string) ([]*TargetWithRole, error) {
-	_, err := r.Update()
+	_, err := r.Update(false)
 	if err != nil {
 		return nil, err
 	}
@@ -480,7 +480,7 @@ func (r *NotaryRepository) listSubtree(targets map[string]*TargetWithRole, role 
 // will be returned
 // See the IMPORTANT section on ListTargets above. Those roles also apply here.
 func (r *NotaryRepository) GetTargetByName(name string, roles ...string) (*TargetWithRole, error) {
-	c, err := r.Update()
+	c, err := r.Update(false)
 	if err != nil {
 		return nil, err
 	}
@@ -515,7 +515,7 @@ func (r *NotaryRepository) GetChangelist() (changelist.Changelist, error) {
 func (r *NotaryRepository) Publish() error {
 	var initialPublish bool
 	// update first before publishing
-	_, err := r.Update()
+	_, err := r.Update(true)
 	if err != nil {
 		// If the remote is not aware of the repo, then this is being published
 		// for the first time.  Try to load from disk instead for publishing.
@@ -717,8 +717,8 @@ func (r *NotaryRepository) saveMetadata(ignoreSnapshot bool) error {
 
 // Update bootstraps a trust anchor (root.json) before updating all the
 // metadata from the repo.
-func (r *NotaryRepository) Update() (*tufclient.Client, error) {
-	c, err := r.bootstrapClient()
+func (r *NotaryRepository) Update(forWrite bool) (*tufclient.Client, error) {
+	c, err := r.bootstrapClient(forWrite)
 	if err != nil {
 		if _, ok := err.(store.ErrMetaNotFound); ok {
 			host := r.baseURL
@@ -737,53 +737,49 @@ func (r *NotaryRepository) Update() (*tufclient.Client, error) {
 	return c, nil
 }
 
-func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
-	var rootJSON []byte
-	remote, err := getRemoteStore(r.baseURL, r.gun, r.roundTrip)
-	if err == nil {
+func (r *NotaryRepository) bootstrapClient(checkInitialized bool) (*tufclient.Client, error) {
+	var (
+		rootJSON   []byte
+		err        error
+		signedRoot *data.SignedRoot
+	)
+	// try to read root from cache first. We will trust this root
+	// until we detect a problem during update which will cause
+	// us to download a new root and perform a rotation.
+	rootJSON, cachedRootErr := r.fileStore.GetMeta("root", maxSize)
+
+	if cachedRootErr == nil {
+		signedRoot, cachedRootErr = r.validateRoot(rootJSON)
+	}
+
+	remote, remoteErr := getRemoteStore(r.baseURL, r.gun, r.roundTrip)
+	if remoteErr != nil {
+		logrus.Error(remoteErr)
+	} else if cachedRootErr != nil || checkInitialized {
+		// remoteErr was nil and we had a cachedRootErr (or are specifically
+		// checking for initialization of the repo).
+
 		// if remote store successfully set up, try and get root from remote
-		rootJSON, err = remote.GetMeta("root", maxSize)
-	}
-
-	// if remote store couldn't be setup, or we failed to get a root from it
-	// load the root from cache (offline operation)
-	if err != nil {
-		if err, ok := err.(store.ErrMetaNotFound); ok {
-			// if the error was MetaNotFound then we successfully contacted
-			// the store and it doesn't know about the repo.
+		tmpJSON, err := remote.GetMeta("root", maxSize)
+		if err != nil {
+			// we didn't have a root in cache and were unable to load one from
+			// the server. Nothing we can do but error.
 			return nil, err
 		}
-		result, cacheErr := r.fileStore.GetMeta("root", maxSize)
-		if cacheErr != nil {
-			// if cache didn't return a root, we cannot proceed - just return
-			// the original error.
-			return nil, err
+		if cachedRootErr != nil {
+			// if we entered the remote download code because there was a cache
+			// error and not simply to check the initialization state of the
+			// repo, we want to use the downloaded data as our root.
+			signedRoot, err = r.validateRoot(tmpJSON)
+			if err != nil {
+				return nil, err
+			}
 		}
-		rootJSON = result
-		logrus.Debugf(
-			"Using local cache instead of remote due to failure: %s", err.Error())
-	}
-	// can't just unmarshal into SignedRoot because validate root
-	// needs the root.Signed field to still be []byte for signature
-	// validation
-	root := &data.Signed{}
-	err = json.Unmarshal(rootJSON, root)
-	if err != nil {
-		return nil, err
-	}
-
-	err = r.CertManager.ValidateRoot(root, r.gun)
-	if err != nil {
-		return nil, err
 	}
 
 	kdb := keys.NewDB()
 	r.tufRepo = tuf.NewRepo(kdb, r.CryptoService)
 
-	signedRoot, err := data.RootFromSigned(root)
-	if err != nil {
-		return nil, err
-	}
 	err = r.tufRepo.SetRoot(signedRoot)
 	if err != nil {
 		return nil, err
@@ -795,6 +791,28 @@ func (r *NotaryRepository) bootstrapClient() (*tufclient.Client, error) {
 		kdb,
 		r.fileStore,
 	), nil
+}
+
+// validateRoot MUST only be used during bootstrapping. It will only validate
+// signatures of the root based on known keys, not expiry or other metadata.
+// This is so that an out of date root can be loaded to be used in a rotation
+// should the TUF update process detect a problem.
+func (r *NotaryRepository) validateRoot(rootJSON []byte) (*data.SignedRoot, error) {
+	// can't just unmarshal into SignedRoot because validate root
+	// needs the root.Signed field to still be []byte for signature
+	// validation
+	root := &data.Signed{}
+	err := json.Unmarshal(rootJSON, root)
+	if err != nil {
+		return nil, err
+	}
+
+	err = r.CertManager.ValidateRoot(root, r.gun)
+	if err != nil {
+		return nil, err
+	}
+
+	return data.RootFromSigned(root)
 }
 
 // RotateKey removes all existing keys associated with the role, and either
