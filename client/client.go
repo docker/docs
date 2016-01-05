@@ -130,7 +130,13 @@ type Target struct {
 	Name   string      // the name of the target
 	Hashes data.Hashes // the hash of the target
 	Length int64       // the size in bytes of the target
-	Role   string      // the role where the target was found - used for reading only
+}
+
+// TargetWithRole represents a Target that exists in a particular role - this is
+// produced by ListTargets and GetTargetByName
+type TargetWithRole struct {
+	Target
+	Role string
 }
 
 // NewTarget is a helper method that returns a Target
@@ -369,8 +375,6 @@ func (r *NotaryRepository) RemoveDelegation(name string) error {
 // AddTarget creates new changelist entries to add a target to the given roles
 // in the repository when the changelist gets appied at publish time.
 // If roles are unspecified, the default role is "targets".
-// AddTarget ignores the role in the `target` object, since passing a list of
-// roles means the target can be added to more than one role at a time.
 func (r *NotaryRepository) AddTarget(target *Target, roles ...string) error {
 
 	cl, err := changelist.NewFileChangelist(filepath.Join(r.tufRepoPath, "changelist"))
@@ -414,7 +418,7 @@ func (r *NotaryRepository) RemoveTarget(targetName string, roles ...string) erro
 // its entries will be strictly shadowed by those in other parts of the "targets/a"
 // subtree and also the "targets/x" subtree, as we will defer parsing it until
 // we explicitly reach it in our iteration of the provided list of roles.
-func (r *NotaryRepository) ListTargets(roles ...string) ([]*Target, error) {
+func (r *NotaryRepository) ListTargets(roles ...string) ([]*TargetWithRole, error) {
 	c, err := r.bootstrapClient()
 	if err != nil {
 		return nil, err
@@ -431,7 +435,7 @@ func (r *NotaryRepository) ListTargets(roles ...string) ([]*Target, error) {
 	if len(roles) == 0 {
 		roles = []string{data.CanonicalTargetsRole}
 	}
-	targets := make(map[string]*Target)
+	targets := make(map[string]*TargetWithRole)
 	for _, role := range roles {
 		// we don't need to do anything special with removing role from
 		// roles because listSubtree always processes role and only excludes
@@ -439,7 +443,7 @@ func (r *NotaryRepository) ListTargets(roles ...string) ([]*Target, error) {
 		r.listSubtree(targets, role, roles...)
 	}
 
-	var targetList []*Target
+	var targetList []*TargetWithRole
 	for _, v := range targets {
 		targetList = append(targetList, v)
 	}
@@ -447,7 +451,7 @@ func (r *NotaryRepository) ListTargets(roles ...string) ([]*Target, error) {
 	return targetList, nil
 }
 
-func (r *NotaryRepository) listSubtree(targets map[string]*Target, role string, exclude ...string) {
+func (r *NotaryRepository) listSubtree(targets map[string]*TargetWithRole, role string, exclude ...string) {
 	excl := make(map[string]bool)
 	for _, r := range exclude {
 		excl[r] = true
@@ -463,7 +467,8 @@ func (r *NotaryRepository) listSubtree(targets map[string]*Target, role string, 
 		}
 		for name, meta := range tgts.Signed.Targets {
 			if _, ok := targets[name]; !ok {
-				targets[name] = &Target{Name: name, Hashes: meta.Hashes, Length: meta.Length, Role: role}
+				targets[name] = &TargetWithRole{
+					Target: Target{Name: name, Hashes: meta.Hashes, Length: meta.Length}, Role: role}
 			}
 		}
 		for _, d := range tgts.Signed.Delegations.Roles {
@@ -481,7 +486,7 @@ func (r *NotaryRepository) listSubtree(targets map[string]*Target, role string, 
 // the target entry found in the subtree of the highest priority role
 // will be returned
 // See the IMPORTANT section on ListTargets above. Those roles also apply here.
-func (r *NotaryRepository) GetTargetByName(name string, roles ...string) (*Target, error) {
+func (r *NotaryRepository) GetTargetByName(name string, roles ...string) (*TargetWithRole, error) {
 	c, err := r.bootstrapClient()
 	if err != nil {
 		return nil, err
@@ -501,7 +506,8 @@ func (r *NotaryRepository) GetTargetByName(name string, roles ...string) (*Targe
 	for _, role := range roles {
 		meta, foundRole := c.TargetMeta(role, name, roles...)
 		if meta != nil {
-			return &Target{Name: name, Hashes: meta.Hashes, Length: meta.Length, Role: foundRole}, nil
+			return &TargetWithRole{
+				Target: Target{Name: name, Hashes: meta.Hashes, Length: meta.Length}, Role: foundRole}, nil
 		}
 	}
 	return nil, fmt.Errorf("No trust data for %s", name)
