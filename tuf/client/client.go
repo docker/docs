@@ -525,7 +525,7 @@ func (c Client) RoleTargetsPath(role string, hashSha256 string, consistent bool)
 
 // TargetMeta ensures the repo is up to date. It assumes downloadTargets
 // has already downloaded all delegated roles
-func (c Client) TargetMeta(role, path string, excludeRoles ...string) *data.FileMeta {
+func (c Client) TargetMeta(role, path string, excludeRoles ...string) (*data.FileMeta, string) {
 	excl := make(map[string]bool)
 	for _, r := range excludeRoles {
 		excl[r] = true
@@ -548,16 +548,16 @@ func (c Client) TargetMeta(role, path string, excludeRoles ...string) *data.File
 		meta = c.local.TargetMeta(curr, path)
 		if meta != nil {
 			// we found the target!
-			return meta
+			return meta, curr
 		}
-		delegations := c.local.TargetDelegations(role, path, pathHex)
+		delegations := c.local.TargetDelegations(curr, path, pathHex)
 		for _, d := range delegations {
 			if !excl[d.Name] {
 				roles = append(roles, d.Name)
 			}
 		}
 	}
-	return meta
+	return meta, ""
 }
 
 // DownloadTarget downloads the target to dst from the remote

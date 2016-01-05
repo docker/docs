@@ -130,7 +130,7 @@ func prettyPrintKeys(keyStores []trustmanager.KeyStore, writer io.Writer) {
 
 // --- pretty printing targets ---
 
-type targetsSorter []*client.Target
+type targetsSorter []*client.TargetWithRole
 
 func (t targetsSorter) Len() int      { return len(t) }
 func (t targetsSorter) Swap(i, j int) { t[i], t[j] = t[j], t[i] }
@@ -140,7 +140,7 @@ func (t targetsSorter) Less(i, j int) bool {
 
 // Given a list of KeyStores in order of listing preference, pretty-prints the
 // root keys and then the signing keys.
-func prettyPrintTargets(ts []*client.Target, writer io.Writer) {
+func prettyPrintTargets(ts []*client.TargetWithRole, writer io.Writer) {
 	if len(ts) == 0 {
 		writer.Write([]byte("\nNo targets present in this repository.\n\n"))
 		return
@@ -148,13 +148,14 @@ func prettyPrintTargets(ts []*client.Target, writer io.Writer) {
 
 	sort.Stable(targetsSorter(ts))
 
-	table := getTable([]string{"Name", "Digest", "Size (bytes)"}, writer)
+	table := getTable([]string{"Name", "Digest", "Size (bytes)", "Role"}, writer)
 
 	for _, t := range ts {
 		table.Append([]string{
 			t.Name,
 			hex.EncodeToString(t.Hashes["sha256"]),
 			fmt.Sprintf("%d", t.Length),
+			t.Role,
 		})
 	}
 	table.Render()
