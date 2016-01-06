@@ -242,6 +242,11 @@
 			"Rev": "089c7181b8c728499929ff09b62d3fdd8df8adff"
 		},
 		{
+			"ImportPath": "github.com/stretchr/testify/require",
+			"Comment": "v1.0-17-g089c718",
+			"Rev": "089c7181b8c728499929ff09b62d3fdd8df8adff"
+		},
+		{
 			"ImportPath": "golang.org/x/crypto/bcrypt",
 			"Rev": "bfc286917c5fcb7420d7e3092b50bbfd31b38a98"
 		},
