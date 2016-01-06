@@ -393,7 +393,7 @@ func requireRepoHasExpectedMetadata(t *testing.T, repo *NotaryRepository,
 		require.Len(t, decodedRoot.Roles, len(data.ValidRoles),
 			"wrong number of roles in root.json")
 
-		for role := range data.ValidRoles {
+		for _, role := range data.ValidRoles {
 			_, ok := decodedRoot.Roles[role]
 			require.True(t, ok, "Missing role %s in root.json", role)
 		}
@@ -1172,7 +1172,7 @@ func testPublishNoData(t *testing.T, rootType string, serverManagesSnapshot bool
 	require.NoError(t, err)
 	require.Empty(t, targets)
 
-	for role := range data.ValidRoles {
+	for _, role := range data.ValidRoles {
 		// we don't cache timstamp metadata
 		if role != data.CanonicalTimestampRole {
 			requireRepoHasExpectedMetadata(t, repo2, role, true)
@@ -2049,7 +2049,7 @@ func TestRotateKeyInvalidRole(t *testing.T) {
 
 	// the equivalent of: (root, true), (root, false), (timestamp, true),
 	// (timestamp, false), (targets, true)
-	for role := range data.ValidRoles {
+	for _, role := range data.ValidRoles {
 		if role == data.CanonicalSnapshotRole {
 			continue
 		}

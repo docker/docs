@@ -30,8 +30,8 @@ import (
 func validateUpdate(cs signed.CryptoService, gun string, updates []storage.MetaUpdate, store storage.MetaStore) ([]storage.MetaUpdate, error) {
 	kdb := keys.NewDB()
 	repo := tuf.NewRepo(kdb, cs)
-	rootRole := data.RoleName(data.CanonicalRootRole)
-	snapshotRole := data.RoleName(data.CanonicalSnapshotRole)
+	rootRole := data.CanonicalRootRole
+	snapshotRole := data.CanonicalSnapshotRole
 
 	// some delegated targets role may be invalid based on other updates
 	// that have been made by other clients. We'll rebuild the slice of
@@ -133,7 +133,7 @@ func validateUpdate(cs signed.CryptoService, gun string, updates []storage.MetaU
 func loadAndValidateTargets(gun string, repo *tuf.Repo, roles map[string]storage.MetaUpdate, kdb *keys.KeyDB, store storage.MetaStore) ([]storage.MetaUpdate, error) {
 	targetsRoles := make(utils.RoleList, 0)
 	for role := range roles {
-		if role == data.RoleName(data.CanonicalTargetsRole) || data.IsDelegation(role) {
+		if role == data.CanonicalTargetsRole || data.IsDelegation(role) {
 			targetsRoles = append(targetsRoles, role)
 		}
 	}
@@ -151,7 +151,7 @@ func loadAndValidateTargets(gun string, repo *tuf.Repo, roles map[string]storage
 		// don't load parent if current role is "targets" or if the parent has
 		// already been loaded
 		_, ok := repo.Targets[parentRole]
-		if role != data.RoleName(data.CanonicalTargetsRole) && !ok {
+		if role != data.CanonicalTargetsRole && !ok {
 			err := loadTargetsFromStore(gun, parentRole, repo, store)
 			if err != nil {
 				return nil, err
@@ -195,7 +195,7 @@ func loadTargetsFromStore(gun, role string, repo *tuf.Repo, store storage.MetaSt
 }
 
 func generateSnapshot(gun string, kdb *keys.KeyDB, repo *tuf.Repo, store storage.MetaStore) (*storage.MetaUpdate, error) {
-	role := kdb.GetRole(data.RoleName(data.CanonicalSnapshotRole))
+	role := kdb.GetRole(data.CanonicalSnapshotRole)
 	if role == nil {
 		return nil, validation.ErrBadRoot{Msg: "root did not include snapshot role"}
 	}
@@ -285,8 +285,8 @@ func validateSnapshot(role string, oldSnap *data.SignedSnapshot, snapUpdate stor
 }
 
 func checkSnapshotEntries(role string, oldSnap, snap *data.SignedSnapshot, roles map[string]storage.MetaUpdate) error {
-	snapshotRole := data.RoleName(data.CanonicalSnapshotRole)
-	timestampRole := data.RoleName(data.CanonicalTimestampRole) // just in case
+	snapshotRole := data.CanonicalSnapshotRole
+	timestampRole := data.CanonicalTimestampRole
 	for r, update := range roles {
 		if r == snapshotRole || r == timestampRole {
 			continue
@@ -386,10 +386,10 @@ func validateRoot(gun string, oldRoot, newRoot []byte, store storage.MetaStore) 
 // threshold number of signatures is invalid, if there are an invalid
 // number of roles and keys, or if the timestamp keys are invalid
 func checkRoot(oldRoot, newRoot *data.SignedRoot, timestampKey data.PublicKey) error {
-	rootRole := data.RoleName(data.CanonicalRootRole)
-	targetsRole := data.RoleName(data.CanonicalTargetsRole)
-	snapshotRole := data.RoleName(data.CanonicalSnapshotRole)
-	timestampRole := data.RoleName(data.CanonicalTimestampRole)
+	rootRole := data.CanonicalRootRole
+	targetsRole := data.CanonicalTargetsRole
+	snapshotRole := data.CanonicalSnapshotRole
+	timestampRole := data.CanonicalTimestampRole
 
 	var oldRootRole *data.RootRole
 	newRootRole, ok := newRoot.Signed.Roles[rootRole]
