@@ -774,6 +774,12 @@ func (r *NotaryRepository) bootstrapClient(checkInitialized bool) (*tufclient.Cl
 			if err != nil {
 				return nil, err
 			}
+
+			err = r.fileStore.SetMeta("root", tmpJSON)
+			if err != nil {
+				// if we can't write cache we should still continue, just log error
+				logrus.Errorf("could not save root to cache: %s", err.Error())
+			}
 		}
 	}
 
