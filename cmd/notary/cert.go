@@ -3,8 +3,9 @@ package main
 import (
 	"crypto/x509"
 	"os"
+	"path/filepath"
 
-	"github.com/docker/notary/certs"
+	"github.com/docker/notary"
 	"github.com/docker/notary/trustmanager"
 
 	"github.com/spf13/cobra"
@@ -52,7 +53,12 @@ func certRemove(cmd *cobra.Command, args []string) {
 	parseConfig()
 
 	trustDir := mainViper.GetString("trust_dir")
-	certManager, err := certs.NewManager(trustDir)
+	trustPath := filepath.Join(trustDir, notary.TrustedCertsDir)
+	// Load all individual (non-CA) certificates that aren't expired and don't use SHA1
+	trustedCertificateStore, err := trustmanager.NewX509FilteredFileStore(
+		trustPath,
+		trustmanager.FilterCertsExpiredSha1,
+	)
 	if err != nil {
 		fatalf("Failed to create a new truststore manager with directory: %s", trustDir)
 	}
@@ -67,14 +73,14 @@ func certRemove(cmd *cobra.Command, args []string) {
 			fatalf("Invalid certificate ID provided: %s", certID)
 		}
 		// Attempt to find this certificates
-		cert, err := certManager.TrustedCertificateStore().GetCertificateByCertID(certID)
+		cert, err := trustedCertificateStore.GetCertificateByCertID(certID)
 		if err != nil {
 			fatalf("Unable to retrieve certificate with cert ID: %s", certID)
 		}
 		certsToRemove = append(certsToRemove, cert)
 	} else {
 		// We got the -g flag, it's a GUN
-		toRemove, err := certManager.TrustedCertificateStore().GetCertificatesByCN(
+		toRemove, err := trustedCertificateStore.GetCertificatesByCN(
 			certRemoveGUN)
 		if err != nil {
 			fatalf("%v", err)
@@ -102,7 +108,7 @@ func certRemove(cmd *cobra.Command, args []string) {
 
 	// Remove all the certs
 	for _, cert := range certsToRemove {
-		err = certManager.TrustedCertificateStore().RemoveCert(cert)
+		err = trustedCertificateStore.RemoveCert(cert)
 		if err != nil {
 			fatalf("Failed to remove root certificate for %s", cert.Subject.CommonName)
 		}
@@ -117,12 +123,17 @@ func certList(cmd *cobra.Command, args []string) {
 	parseConfig()
 
 	trustDir := mainViper.GetString("trust_dir")
-	certManager, err := certs.NewManager(trustDir)
+	trustPath := filepath.Join(trustDir, notary.TrustedCertsDir)
+	// Load all individual (non-CA) certificates that aren't expired and don't use SHA1
+	trustedCertificateStore, err := trustmanager.NewX509FilteredFileStore(
+		trustPath,
+		trustmanager.FilterCertsExpiredSha1,
+	)
 	if err != nil {
 		fatalf("Failed to create a new truststore manager with directory: %s", trustDir)
 	}
 
-	trustedCerts := certManager.TrustedCertificateStore().GetCertificates()
+	trustedCerts := trustedCertificateStore.GetCertificates()
 
 	cmd.Println("")
 	prettyPrintCerts(trustedCerts, cmd.Out())
