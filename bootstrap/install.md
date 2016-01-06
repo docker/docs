@@ -5,7 +5,7 @@ USAGE:
    docker run --rm -it \
         --name ucp \
         -v /var/run/docker.sock:/var/run/docker.sock \
-        dockerorca/ucp \
+        docker/ucp \
         install [OPTIONS]
  ```
 DESCRIPTION:

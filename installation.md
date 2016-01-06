@@ -199,7 +199,7 @@ If you choose this option, create your volumes prior to installing UCP. The volu
 In this step you install the UCP controller. The controller includes a running Swarm manager and node as well. Use the following command to pull the bootstrapper image and review the `install` options:
 
 ```bash
-docker run --rm -it dockerorca/ucp install --help
+docker run --rm -it docker/ucp install --help
 ```
 
 
@@ -223,7 +223,7 @@ install:
         $ docker run --rm -it \
           -v /var/run/docker.sock:/var/run/docker.sock \
           --name ucp \
-          dockerorca/ucp \
+          docker/ucp \
           install -i
 
     The bootstrapper pulls several images and prompts you for the installation values it needs. When it completes, the bootstrapper prompts you to login into the UCP GUI.
@@ -274,7 +274,7 @@ Repeat the install for each node you want to add. Use the following command to p
 
 
 ```bash
-docker run --rm -it dockerorca/ucp join --help
+docker run --rm -it docker/ucp join --help
 ```
 
 The bootstrapper prompts you for the following information:
@@ -290,7 +290,7 @@ When you have the information you'll be prompted for, do the following to instal
 
 2. Run the `ucp` bootstrapper.
 
-        $ docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock --name ucp dockerorca/ucp join --replica -i
+        $ docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock --name ucp docker/ucp join --replica -i
 
     The bootstrapper pulls several images and prompts you for the installation values it needs. When it completes, the bootstrapper notifies you that it is starting swarm.
 
@@ -316,7 +316,7 @@ When you have the information you'll be prompted for, do the following to instal
 In this step, you install one or more UCP nodes using the `ucp join` subcommand. Repeat the install for each node you want to add. Use the following command to pull the bootstrapper image and review the `join` options:
 
 ```bash
-docker run --rm -it dockerorca/ucp join --help
+docker run --rm -it docker/ucp join --help
 ```
 
 The bootstrapper prompts you for the following information:
@@ -332,7 +332,7 @@ When you have the information you'll be prompted for, do the following to instal
 
 2. Run the `ucp` bootstrapper.
 
-        $ docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock --name ucp dockerorca/ucp join -i
+        $ docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock --name ucp docker/ucp join -i
 
     The bootstrapper pulls several images and prompts you for the installation values it needs. When it completes, the bootstrapper notifies you that it is starting swarm.
 
@@ -497,7 +497,7 @@ export DOCKER_HOST=tcp://<ucp-hostname>:443
 The bootstrapper can also uninstall UCP from the controller and the nodes. To see the uninstall options before you uninstall, use the following:
 
 ```bash
-docker run --rm -it dockerorca/ucp uninstall --help
+docker run --rm -it docker/ucp uninstall --help
 ```
 
 To uninstall, do the following:
@@ -506,7 +506,7 @@ To uninstall, do the following:
 
 2. Enter the following command to uninstall:
 
-        $ docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock --name ucp dockerorca/ucp uninstall
+        $ docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock --name ucp docker/ucp uninstall
 
 3. Repeat the uninstall on each node making sure to save the controller till last.
 
