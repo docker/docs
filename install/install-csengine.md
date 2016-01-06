@@ -1,7 +1,7 @@
 +++
 title = "Manually Install the CS Docker Engine"
 description = "Install instructions for the commercially supported Docker Engine"
-keywords = ["docker, documentation, about, technology, enterprise, hub, commercially supported Docker Engine, CS engine, registry"]
+keywords = ["docker, documentation, about, technology, enterprise, hub, commercially supported Docker Engine, CS engine, registry, pin, patch, migrate"]
 [menu.main]
 parent="smn_dhe_install"
 +++
@@ -9,23 +9,20 @@ parent="smn_dhe_install"
 
 # Manually Install the CS Docker Engine
 
-This document describes the process of installing the Commercially Supported
-Docker Engine (CS Engine). Installing the CS Engine is a prerequisite for
-installing the Docker Trusted Registry. Use these instructions if you
-are installing the CS Engine on physical or cloud infrastructures.
+This document describes the process of installing the commercially supported
+Docker engine (CS engine). Installing the CS engine is a prerequisite for
+installing Docker Trusted Registry. Use these instructions if you
+are installing the CS engine on physical or cloud infrastructures.
 
-Note that you first install the CS Engine before you install Docker Trusted
-Registry. If you are upgrading, you reverse that order and upgrade the Trusted
-Registry first. To upgrade, see the [upgrade documentation](upgrade.md). You will need to install the latest version of the CS Engine to run with the latest
-version of the Trusted Registry. You will also want to install the CS Engine on
+You first install the CS engine before you install Docker Trusted Registry.
+However, if you are upgrading, you reverse that order and upgrade the Trusted
+Registry first. To upgrade, see the [upgrade documentation](upgrade.md). You will need to install the latest version of the CS engine to run with the latest
+version of the Trusted Registry. You will also want to install the CS engine on
 any clients, especially in your production environment.
 
-If your cloud provider is AWS, you have the option of installing the CS Engine
+If your cloud provider is AWS, you have the option of installing the CS engine
 using an Amazon Machine Image (AMI). For more information, read the [installation overview](index.md) to understand your options.
 
-## Prerequisites
-
-You need a login to Docker Hub. If you have not already done so, go to Docker Hub and [sign up for an account](https://hub.docker.com). You do not need a license for the CS Engine, only for the Docker Trusted Registry.
 
 ## CentOS 7.1 & RHEL 7.0/7.1 (YUM-based systems)
 
@@ -38,13 +35,13 @@ kernel.
 
 2. Add Docker's public key for CS packages:
 
-    `$ sudo rpm --import "https://pgp.mit.edu/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e"`
+    `$ sudo rpm --import "https://sks-keyservers.net/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e"`
 
 3. Install yum-utils if necessary:
 
     `$ sudo yum install -y yum-utils`
 
-4. Add the repository:
+4. Add the repository. Notice in the following code that it gets the latest version of the CS engine. Each time you either install or upgrade, ensure that the you are requesting the version that you want.
 
     ```
     $ sudo yum-config-manager --add-repo https://packages.docker.com/1.9/yum/repo/main/centos/7
@@ -97,7 +94,7 @@ kernel.
 
 2. Add Docker's public key for CS packages:
 
-    `$ curl -s 'https://pgp.mit.edu/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e' | sudo apt-key add --import`
+    `$ curl -s 'https://sks-keyservers.net/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e' | sudo apt-key add --import`
 
 3. Install the HTTPS helper for apt (your system may already have it):
 
@@ -113,21 +110,22 @@ kernel.
 
     `$ echo "deb https://packages.docker.com/1.9/apt/repo ubuntu-trusty main" | sudo tee /etc/apt/sources.list.d/docker.list`
 
-        **Note**: modify the "ubuntu-trusty" string for your flavor of ubuntu or debian.
-        * debian-jessie (Debian 8)
-        * debian-stretch (future release)
-        * debian-wheezy (Debian 7)
-        * ubuntu-precise (Ubuntu 12.04)
-        * ubuntu-trusty (Ubuntu 14.04)
-        * ubuntu-utopic (Ubuntu 14.10)
-        * ubuntu-vivid (Ubuntu 15.04)
-        * ubuntu-wily (Ubuntu 15.10)
+      You must modify the "ubuntu-trusty" string for your flavor of ubuntu or debian as seen in the following options.
+
+      * debian-jessie (Debian 8)
+      * debian-stretch (future release)
+      * debian-wheezy (Debian 7)
+      * ubuntu-precise (Ubuntu 12.04)
+      * ubuntu-trusty (Ubuntu 14.04)
+      * ubuntu-utopic (Ubuntu 14.10)
+      * ubuntu-vivid (Ubuntu 15.04)
+      * ubuntu-wily (Ubuntu 15.10)
 
 6. Run the following to install commercially supported Docker Engine and its dependencies:
 
     `$ sudo apt-get update && sudo apt-get install docker-engine`
 
-7. Confirm the Docker daemon is running with `sudo service docker start`.
+7. Confirm the Docker daemon is running:
 
         $ sudo service docker start
 

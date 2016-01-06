@@ -1,7 +1,7 @@
 +++
 title = "Upgrade Trusted Registry and the CS Engine"
 description = "Upgrade Trusted Registry and the CS Engine"
-keywords = ["docker, documentation, about, technology, hub, upgrade, enterprise"]
+keywords = ["docker, documentation, about, technology, hub, upgrade, enterprise, pin, patch, migrate"]
 [menu.main]
 parent="smn_dhe_install"
 +++
@@ -12,25 +12,18 @@ parent="smn_dhe_install"
 This document describes the process and steps necessary to upgrade Docker
 Trusted Registry and the commercially supported engine (CS engine). When you
 first install, the general order is to install the CS engine, then install the
-Trusted Registry. However, when you upgrade, you reverse that order.
-
-  **Note**: Ensure when upgrading the Trusted Registry, that you also upgrade to the latest CS Engine.
+Trusted Registry. However, when you upgrade, you reverse that order. Ensure when upgrading the Trusted Registry, that you also upgrade to the latest CS Engine.
 
 The CS engine has two procedures for upgrading, from versions 1.6.x to 1.9.0
 and from version 1.9.0 to 1.9.x which are described in this document.
 
-The following are overall steps, which are explained in detail in this document:
-
-* Upgrade to latest version of Docker Trusted Registry.
-* Get the latest version of the CS engine.
-* Turn off the Trusted Registry and restart it again with the latest CS engine.
-* Make any changes in your configuration.
-* Verify you have completed the upgrade process with no errors.
-
 ## Upgrade Docker Trusted Registry
 
-Periodic upgrades to the Trusted Registry triggers a notification to appear in your Admin dashboard if you have enabled Upgrade checking in the
-General > Settings section of the user interface (UI).
+Periodic upgrades to the Trusted Registry trigger a notification to appear in
+your Admin dashboard if you have enabled Upgrade checking. This is located in
+the General > Settings section of the Trusted Registry Admin dashboard. To
+perform this upgrade, you should schedule it during your downtime and allow
+about 15 minutes.
 
 To upgrade, perform the following steps:
 
@@ -48,16 +41,12 @@ Available and an enabled button displays Update to version X.X.X.
 
       The Dashboard displays a message that the upgrade successfully completed and that you need to upgrade to the latest CS Engine.
 
-### What is updated?
+### What is updated in the Trusted Registry?
 
-* The Trusted Registry pulls new container images from Docker Hub.
-* It then deploys those containers.
-* It stops and removes the old containers.
-
-The upgrade process requires a small amount of downtime to complete.
+The Trusted Registry pulls new container images from Docker Hub. Then it deploys those containers. Finally, it stops and removes the old containers.
 
 > **Note**: If the CS engine is upgraded first, then
-> the Trusted Registry can still be upgraded from the command line by running the following command. Ensure to put the correct version that you want.
+> the Trusted Registry can still be upgraded from a command line by running the following command. Ensure to put the correct version that you want.
 >
 > `$ sudo bash -c "$(sudo docker run docker/trusted-registry:1.3.3 upgrade 1.4.0)"`
 
@@ -66,7 +55,7 @@ The upgrade process requires a small amount of downtime to complete.
 
 The following steps describe how to upgrade from prior versions to 1.9.0.
 
->**Note**: The installation mechanism for versions prior to 1.9.0 are incompatible with 1.9.0. You must uninstall your earlier version before upgrading to a current version.
+The installation mechanism for versions prior to 1.9.0 are incompatible with 1.9.0. Therefore, you must uninstall your earlier version before upgrading to a current version.
 
 First, stop the Trusted Registry prior to upgrading the CS engine.
 
@@ -79,8 +68,7 @@ Next, following the instructions that are based on your operating system.
 ### CentOS 7.1 & RHEL 7.0/7.1 (YUM-based systems)
 
 Perform the following commands in your terminal to remove your current CS
-engine, and install the new version. When complete, restart the Trusted Registry
-again.
+engine, and install the new version.
 
 1. Remove the current engine:
 
@@ -88,7 +76,9 @@ again.
 
 2. Add Docker's public key for CS packages:
 
-    `$ sudo rpm --import "https://pgp.mit.edu/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e"`
+    ```
+    $ sudo rpm --import "https://sks-keyservers.net/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e"
+    ```
 
 3. Install yum-utils if necessary:
 
@@ -111,7 +101,7 @@ again.
     $ sudo systemctl start docker.service
     ```
 
-7. Restart the Trusted Registry:  
+7. Restart the Trusted Registry.  
 
     ```
     $ sudo bash -c "$(sudo docker run docker/trusted-registry restart)"
@@ -120,8 +110,7 @@ again.
 ### Ubuntu 14.04 LTS (APT-based systems)
 
 Perform the following commands in your terminal to remove your current CS
-engine, and install the new version. When complete, restart the Trusted Registry
-again.
+engine, and install the new version.
 
 1. Remove the current engine:
 
@@ -129,7 +118,9 @@ again.
 
 2. Add Docker's public key for CS packages:
 
-    `$ curl -s 'https://pgp.mit.edu/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e' | sudo apt-key add --import`
+    ```
+    $ curl -s 'https://sks-keyservers.net/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e' | sudo apt-key add --import
+    ```
 
 3. Install the HTTPS helper for apt (your system may already have it):
 
@@ -145,15 +136,16 @@ again.
 
     `$ echo "deb https://packages.docker.com/1.9/apt/repo ubuntu-trusty main" | sudo tee /etc/apt/sources.list.d/docker.list`
 
-        **Note**: modify the "ubuntu-trusty" string for your flavor of ubuntu or debian.
-        * debian-jessie (Debian 8)
-        * debian-stretch (future release)
-        * debian-wheezy (Debian 7)
-        * ubuntu-precise (Ubuntu 12.04)
-        * ubuntu-trusty (Ubuntu 14.04)
-        * ubuntu-utopic (Ubuntu 14.10)
-        * ubuntu-vivid (Ubuntu 15.04)
-        * ubuntu-wily (Ubuntu 15.10)
+      Modify the "ubuntu-trusty" string for your flavor of ubuntu or debian as seen in the following options.
+
+      * debian-jessie (Debian 8)
+      * debian-stretch (future release)
+      * debian-wheezy (Debian 7)
+      * ubuntu-precise (Ubuntu 12.04)
+      * ubuntu-trusty (Ubuntu 14.04)
+      * ubuntu-utopic (Ubuntu 14.10)
+      * ubuntu-vivid (Ubuntu 15.04)
+      * ubuntu-wily (Ubuntu 15.10)
 
 6. Install the new package:
 
@@ -167,7 +159,7 @@ again.
 
 Upgrading minor versions of the CS engine, can solve potential issues or may
 contain a needed feature. Docker has streamlined the upgrade path for upgrading
-the CS engine. The steps are as follows:
+the CS engine. Perform the following steps depending on your type of system.
 
 ### CentOS 7.1 & RHEL 7.0/7.1 (YUM-based systems)
 1. Update your `docker-engine` package:

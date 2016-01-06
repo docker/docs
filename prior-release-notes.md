@@ -106,128 +106,140 @@ Customers who are currently using DHE 1.0 **must** follow the [upgrading instruc
 
 ## Commercially Supported Docker Engine
 
+This section of the archived release notes pertains to issues, fixes, and new features regarding the commercially supported Docker engine.
+
+### CS Docker Engine 1.6.2-cs7
+(12 October 2015)
+
+As part of our ongoing security efforts, <a href="http://blog.docker.com/2015/10/security-release-docker-1-8-3-1-6-2-cs7" target="_blank">a vulnerability was discovered</a> that affects the way content
+is stored and retrieved within the Docker Engine and CS Docker Engine. Today we
+are releasing a security update that fixes this issue in both Docker Engine 1.8.3 and CS Docker Engine 1.6.2-cs7. The <a href="https://github.com/docker/docker/blob/master/CHANGELOG.md#161-2015-10-12" target="_blank">change log for Docker Engine 1.8.3</a> has a complete list of all the changes incorporated into both the open source and commercially
+supported releases.
+
+We recommend that users upgrade to CS Docker Engine 1.6.2-cs7. If you are unable
+to upgrade to CS Docker Engine 1.6.2-cs7  right away, remember to only pull
+content from trusted sources.
+
+To keep up to date on all the latest Docker Security news, make sure you check
+out our [Security page](http://www.docker.com/docker-security), subscribe to our mailing list, or find us in #docker-security.
+
+
+### CS Docker Engine 1.6.2-cs6
+(23 July 2015)
+
+* Certifies support for CentOS 7.1.
+
 ### CS Docker Engine 1.6.2-cs5
 (21 May 2015)
 
-For customers running Docker Engine on [supported versions of RedHat Enterprise
-Linux](https://www.docker.com/enterprise/support/) with SELinux
-enabled, the `docker build` and `docker run`
-commands will not have DNS host name resolution and bind-mounted volumes may
-not be accessible.
-As a result, customers with SELinux will be unable to use hostname-based network
-access in either `docker build` or `docker run`, nor will they be able to
-`docker run` containers
-that use `--volume` or `-v` bind-mounts (with an incorrect SELinux label) in
-their environment. By installing Docker
-Engine 1.6.2-cs5, customers can use Docker as intended on RHEL with SELinux enabled.
+For customers running Docker Engine on [supported versions of RedHat Enterprise Linux](https://www.docker.com/enterprise/support/) with SELinux enabled, the `docker build` and `docker run` commands will not have DNS host name resolution and bind-mounted volumes may not be accessible. As a result, customers with
+SELinux will be unable to use hostname-based network access in either `docker build` or `docker run`, nor will they be able to `docker run` containers that use `--volume` or `-v` bind-mounts (with an incorrect SELinux label) in their environment. By installing Docker Engine 1.6.2-cs5, customers can use Docker as intended on RHEL with SELinux enabled.
 
-For example, you see will failures like:
+For example, you see will failures such as:
 
-```
-[root@dtr ~]# docker -v
-Docker version 1.6.0-cs2, build b8dd430
-[root@dtr ~]# ping dtr.home.org.au
-PING dtr.home.org.au (10.10.10.104) 56(84) bytes of data.
-64 bytes from dtr.home.gateway (10.10.10.104): icmp_seq=1 ttl=64 time=0.663 ms
-^C
---- dtr.home.org.au ping statistics ---
-2 packets transmitted, 2 received, 0% packet loss, time 1001ms
-rtt min/avg/max/mdev = 0.078/0.370/0.663/0.293 ms
-[root@dtr ~]# docker run --rm -it debian ping dtr.home.org.au
-ping: unknown host
-[root@dtr ~]# docker run --rm -it debian cat /etc/resolv.conf
-cat: /etc/resolv.conf: Permission denied
-[root@dtr ~]# docker run --rm -it debian apt-get update
-Err http://httpredir.debian.org jessie InRelease
+  ```
+  [root@dtr ~]# docker -v
+  Docker version 1.6.0-cs2, build b8dd430
+  [root@dtr ~]# ping dtr.home.org.au
+  PING dtr.home.org.au (10.10.10.104) 56(84) bytes of data.
+  64 bytes from dtr.home.gateway (10.10.10.104): icmp_seq=1 ttl=64 time=0.663 ms
+  ^C
+  --- dtr.home.org.au ping statistics ---
+  2 packets transmitted, 2 received, 0% packet loss, time 1001ms
+  rtt min/avg/max/mdev = 0.078/0.370/0.663/0.293 ms
+  [root@dtr ~]# docker run --rm -it debian ping dtr.home.org.au
+  ping: unknown host
+  [root@dtr ~]# docker run --rm -it debian cat /etc/resolv.conf
+  cat: /etc/resolv.conf: Permission denied
+  [root@dtr ~]# docker run --rm -it debian apt-get update
+  Err http://httpredir.debian.org jessie InRelease
 
-Err http://security.debian.org jessie/updates InRelease
+  Err http://security.debian.org jessie/updates InRelease
 
-Err http://httpredir.debian.org jessie-updates InRelease
+  Err http://httpredir.debian.org jessie-updates InRelease
 
-Err http://security.debian.org jessie/updates Release.gpg
-  Could not resolve 'security.debian.org'
-Err http://httpredir.debian.org jessie Release.gpg
-  Could not resolve 'httpredir.debian.org'
-Err http://httpredir.debian.org jessie-updates Release.gpg
-  Could not resolve 'httpredir.debian.org'
-[output truncated]
+  Err http://security.debian.org jessie/updates Release.gpg
+    Could not resolve 'security.debian.org'
+  Err http://httpredir.debian.org jessie Release.gpg
+    Could not resolve 'httpredir.debian.org'
+  Err http://httpredir.debian.org jessie-updates Release.gpg
+    Could not resolve 'httpredir.debian.org'
+  [output truncated]
 
-```
+  ```
 
 or when running a `docker build`:
 
-```
-[root@dtr ~]# docker build .
-Sending build context to Docker daemon 11.26 kB
-Sending build context to Docker daemon
-Step 0 : FROM fedora
- ---> e26efd418c48
-Step 1 : RUN yum install httpd
- ---> Running in cf274900ea35
+  ```
+  [root@dtr ~]# docker build .
+  Sending build context to Docker daemon 11.26 kB
+  Sending build context to Docker daemon
+  Step 0 : FROM fedora
+   ---> e26efd418c48
+  Step 1 : RUN yum install httpd
+   ---> Running in cf274900ea35
 
-One of the configured repositories failed (Fedora 21 - x86_64),
-and yum doesn't have enough cached data to continue. At this point the only
-safe thing yum can do is fail. There are a few ways to work "fix" this:
+  One of the configured repositories failed (Fedora 21 - x86_64),
+  and yum doesn't have enough cached data to continue. At this point the only
+  safe thing yum can do is fail. There are a few ways to work "fix" this:
 
-[output truncated]
-```
+  [output truncated]
+  ```
 
+**Affected Versions**: All previous versions of Docker Engine when SELinux is
+ enabled.
 
-**Affected Versions**: All previous versions of Docker Engine when SELinux
-is enabled.
-
-Docker **highly recommends** that all customers running previous versions of
-Docker Engine update to this release.
+Docker **highly recommends** that all customers running previous versions of Docker Engine update to this release.
 
 #### **How to workaround this issue**
 
-Customers who choose not to install this update have two options. The
-first option is to disable SELinux. This is *not recommended* for production
-systems where SELinux is typically required.
+Customers who choose not to install this update have two options. The first
+option is to disable SELinux. This is *not recommended* for production systems
+where SELinux is typically required.
 
 The second option is to pass the following parameter in to `docker run`.
 
-  	     --security-opt=label:type:docker_t
+    	     --security-opt=label:type:docker_t
 
 This parameter cannot be passed to the `docker build` command.
 
 #### **Upgrade notes**
 
-When upgrading, make sure you stop Docker Trusted Registry first, perform the Engine upgrade, and
-then restart Docker Trusted Registry.
+When upgrading, make sure you stop Docker Trusted Registry first, perform the Engine upgrade, and then restart Docker Trusted Registry.
 
 If you are running with SELinux enabled, previous Docker Engine releases allowed
 you to bind-mount additional volumes or files inside the container as follows:
 
-		$ docker run -it -v /home/user/foo.txt:/foobar.txt:ro <imagename>
+  		`$ docker run -it -v /home/user/foo.txt:/foobar.txt:ro <imagename>`
 
-In the 1.6.2-cs5 release, you must ensure additional bind-mounts have the correct
-SELinux context. For example, if you want to mount `foobar.txt` as read-only
-into the container, do the following to create and test your bind-mount:
+In the 1.6.2-cs5 release, you must ensure additional bind-mounts have the
+correct SELinux context. For example, if you want to mount `foobar.txt` as
+read-only into the container, do the following to create and test your
+bind-mount:
 
-1. Add the `z` option to the bind mount when you specify `docker run`.
+  1. Add the `z` option to the bind mount when you specify `docker run`.
 
-		$ docker run -it -v /home/user/foo.txt:/foobar.txt:ro,z <imagename>
+  		$ docker run -it -v /home/user/foo.txt:/foobar.txt:ro,z <imagename>
 
-2. Exec into your new container.
+  2. Exec into your new container.
 
-	For example, if your container is `bashful_curie`, open a shell on the
-	container:
+  	For example, if your container is `bashful_curie`, open a shell on the
+  	container:
 
-		$ docker exec -it bashful_curie bash
+  		$ docker exec -it bashful_curie bash
 
-3. Use `cat` to check the permissions on the mounted file.
+  3. Use `cat` to check the permissions on the mounted file.
 
-		$ cat /foobar.txt
-		the contents of foobar appear
+  		$ cat /foobar.txt
+  		the contents of foobar appear
 
-	If you see the file's contents, your mount succeeded. If you receive a
-	`Permission denied` message and/or the `/var/log/audit/audit.log` file on
-	your Docker host contains an AVC Denial message, the mount did not succeed.
+If you see the file's contents, your mount succeeded. If you receive a
+`Permission denied` message and/or the `/var/log/audit/audit.log` file on your
+Docker host contains an AVC Denial message, the mount did not succeed.
 
-		type=AVC msg=audit(1432145409.197:7570): avc:  denied  { read } for  pid=21167 comm="cat" name="foobar.txt" dev="xvda2" ino=17704136 scontext=system_u:system_r:svirt_lxc_net_t:s0:c909,c965 tcontext=unconfined_u:object_r:user_home_t:s0 tclass=file
+  		type=AVC msg=audit(1432145409.197:7570): avc:  denied  { read } for  pid=21167 comm="cat" name="foobar.txt" dev="xvda2" ino=17704136 scontext=system_u:system_r:svirt_lxc_net_t:s0:c909,c965 tcontext=unconfined_u:object_r:user_home_t:s0 tclass=file
 
-	Recheck your command line to make sure you passed in the `z` option.
+Recheck your command line to make sure you passed in the `z` option.
 
 
 ### CS Docker Engine 1.6.2-cs4
@@ -247,7 +259,7 @@ may only be exploited by a malicious Dockerfile or image.  Users are advised to
 run their own images and/or images built by trusted parties, such as those in
 the official images library.
 
-Please send any questions to security@docker.com.
+Send any questions to security@docker.com.
 
 
 #### **[CVE-2015-3629](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3629) Symlink traversal on container respawn allows local privilege escalation**
@@ -322,5 +334,5 @@ Because this addition is preventative, no CVE-ID is requested.
 ### CS Docker Engine 1.6.0-cs2
 (23 Apr 2015)
 
-- First release, please see the [Docker Engine 1.6.0 Release notes](http://docs.docker.com/v1.6/release-notes/)
+First release, see the [Docker Engine 1.6.0 Release notes](http://docs.docker.com/v1.6/release-notes/)
   for more details.
