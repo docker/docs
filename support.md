@@ -54,7 +54,7 @@ Run the following when pointed at the machine the UCP server is running on
 sudo bash -c "docker run --rm -it \
         --name ucp \
         -v /var/run/docker.sock:/var/run/docker.sock \
-        dockerorca/ucp \
+        docker/ucp \
         dump-certs > /usr/local/share/ca-certificates/orca.crt"
 sudo update-ca-certificates
 ```
