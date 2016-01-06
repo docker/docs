@@ -10,12 +10,12 @@ weight=100
 
 # Release Notes: Docker Trusted Registry & Commercially Supported Docker Engine
 
-This document describes the latest changes, additions, known issues, and fixes for both the Docker Trusted Registry and the commercially supported Docker engine.
+This document describes the latest changes, additions, known issues, and fixes for both the Docker Trusted Registry and the commercially supported Docker .
 
 ## Prior Versions
 
 These notes refer to the current and immediately prior releases of Docker
-Trusted Registry and the commercially supported Docker Engine. For notes on
+Trusted Registry and the commercially supported Docker . For notes on
 older versions, see the [prior release notes archive](prior-release-notes.md).
 
 # Docker Trusted Registry 1.4.2
@@ -201,10 +201,10 @@ compatibility reasons.
 
 This release addresses the following issues:
 
-* The commercially supported engine 1.9.1-cs3 now supports multi-host networking
-for all the kernels that the base CS engine is supported on.
+* The commercially supported Engine 1.9.1-cs3 now supports multi-host networking
+for all the kernels that the base CS Engine is supported on.
 
->**Note**: Centos 7 has its firewall enabled by default and it prevents the VXLAN tunnel from communicating. If this applies to you, then after installing the CS engine, execute the following command in the Linux host:
+>**Note**: Centos 7 has its firewall enabled by default and it prevents the VXLAN tunnel from communicating. If this applies to you, then after installing the CS Engine, execute the following command in the Linux host:
 
 `sudo firewall-cmd --zone=public --permanent --add-port=4789/udp`
 
@@ -252,7 +252,7 @@ documentation.
 
 * Docker Content Trust. Use Content Trust to both verify the integrity and the publisher of all the data received from a registry over any channel. Content Trust is currently only supported using Docker Hub notary servers.
 
-* Updated the release cadence of the CS Docker engine. Starting with this version, Docker supports **every** major release of Docker engine from open
+* Updated the release cadence of the CS Docker Engine. Starting with this version, Docker supports **every** major release of Docker Engine from open
 source with three releases under support at one time. This means you’ll be able
 to take advantage of the latest and greatest features and you won’t have to wait
 for a supported release to take advantage of a specific feature.

@@ -7,14 +7,14 @@ parent="smn_dhe_install"
 +++
 
 
-# Upgrade the Trusted Registry and the CS engine
+# Upgrade the Trusted Registry and the CS Engine
 
 This document describes the process and steps necessary to upgrade Docker
-Trusted Registry and the commercially supported engine (CS engine). When you
-first install, the general order is to install the CS engine, then install the
+Trusted Registry and the commercially supported Engine (CS Engine). When you
+first install, the general order is to install the CS Engine, then install the
 Trusted Registry. However, when you upgrade, you reverse that order. Ensure when upgrading the Trusted Registry, that you also upgrade to the latest CS Engine.
 
-The CS engine has two procedures for upgrading, from versions 1.6.x to 1.9.0
+The CS Engine has two procedures for upgrading, from versions 1.6.x to 1.9.0
 and from version 1.9.0 to 1.9.x which are described in this document.
 
 ## Upgrade Docker Trusted Registry
@@ -45,19 +45,19 @@ Available and an enabled button displays Update to version X.X.X.
 
 The Trusted Registry pulls new container images from Docker Hub. Then it deploys those containers. Finally, it stops and removes the old containers.
 
-> **Note**: If the CS engine is upgraded first, then
+> **Note**: If the CS Engine is upgraded first, then
 > the Trusted Registry can still be upgraded from a command line by running the following command. Ensure to put the correct version that you want.
 >
 > `$ sudo bash -c "$(sudo docker run docker/trusted-registry:1.3.3 upgrade 1.4.0)"`
 
 
-## Upgrade to the latest version of the CS engine
+## Upgrade to the latest version of the CS Engine
 
 The following steps describe how to upgrade from prior versions to 1.9.0.
 
 The installation mechanism for versions prior to 1.9.0 are incompatible with 1.9.0. Therefore, you must uninstall your earlier version before upgrading to a current version.
 
-First, stop the Trusted Registry prior to upgrading the CS engine.
+First, stop the Trusted Registry prior to upgrading the CS Engine.
 
     `$ sudo bash -c "$(sudo docker run docker/trusted-registry:1.4.0 stop)"`
 
@@ -68,9 +68,9 @@ Next, following the instructions that are based on your operating system.
 ### CentOS 7.1 & RHEL 7.0/7.1 (YUM-based systems)
 
 Perform the following commands in your terminal to remove your current CS
-engine, and install the new version.
+Engine, and install the new version.
 
-1. Remove the current engine:
+1. Remove the current Engine:
 
     `$ sudo yum remove docker-engine-cs`
 
@@ -110,9 +110,9 @@ engine, and install the new version.
 ### Ubuntu 14.04 LTS (APT-based systems)
 
 Perform the following commands in your terminal to remove your current CS
-engine, and install the new version.
+Engine, and install the new version.
 
-1. Remove the current engine:
+1. Remove the current Engine:
 
     `$ sudo apt-get remove docker-engine-cs`
 
@@ -149,17 +149,17 @@ engine, and install the new version.
 
 6. Install the new package:
 
-    `$ sudo apt-get update && sudo apt-get install docker-engine`
+    `$ sudo apt-get update && sudo apt-get install docker-Engine`
 
 7. Restart the Trusted Registry:  
 
      `$ sudo bash -c "$(sudo docker run docker/trusted-registry restart)"`
 
-## Upgrade the CS engine from versions 1.9.0 and later
+## Upgrade the CS Engine from versions 1.9.0 and later
 
-Upgrading minor versions of the CS engine, can solve potential issues or may
+Upgrading minor versions of the CS Engine, can solve potential issues or may
 contain a needed feature. Docker has streamlined the upgrade path for upgrading
-the CS engine. Perform the following steps depending on your type of system.
+the CS Engine. Perform the following steps depending on your type of system.
 
 ### CentOS 7.1 & RHEL 7.0/7.1 (YUM-based systems)
 1. Update your `docker-engine` package:
@@ -216,6 +216,6 @@ This setting deprecates the old "Admin Search Filter" field.
 * To configure for your environment, see the
 [configuration instructions](../configuration.md).
 * To use Docker Trusted Registry, see [the User guide](../userguide.md).
-* See [installing the CS engine](install-csengine.md).
+* See [installing the CS Engine](install-csengine.md).
 * To make administrative changes, see [the Admin guide](../adminguide.md).
 * To see previous changes, see [the release notes](../release-notes.md).

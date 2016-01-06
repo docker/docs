@@ -1,7 +1,7 @@
 +++
 title = "Manually Install the CS Docker Engine"
 description = "Install instructions for the commercially supported Docker Engine"
-keywords = ["docker, documentation, about, technology, enterprise, hub, commercially supported Docker Engine, CS engine, registry, pin, patch, migrate"]
+keywords = ["docker, documentation, about, technology, enterprise, hub, commercially supported Docker Engine, CS Engine, registry, pin, patch, migrate"]
 [menu.main]
 parent="smn_dhe_install"
 +++
@@ -10,17 +10,17 @@ parent="smn_dhe_install"
 # Manually Install the CS Docker Engine
 
 This document describes the process of installing the commercially supported
-Docker engine (CS engine). Installing the CS engine is a prerequisite for
+Docker Engine (CS Engine). Installing the CS Engine is a prerequisite for
 installing Docker Trusted Registry. Use these instructions if you
-are installing the CS engine on physical or cloud infrastructures.
+are installing the CS Engine on physical or cloud infrastructures.
 
-You first install the CS engine before you install Docker Trusted Registry.
+You first install the CS Engine before you install Docker Trusted Registry.
 However, if you are upgrading, you reverse that order and upgrade the Trusted
-Registry first. To upgrade, see the [upgrade documentation](upgrade.md). You will need to install the latest version of the CS engine to run with the latest
-version of the Trusted Registry. You will also want to install the CS engine on
+Registry first. To upgrade, see the [upgrade documentation](upgrade.md). You will need to install the latest version of the CS Engine to run with the latest
+version of the Trusted Registry. You will also want to install the CS Engine on
 any clients, especially in your production environment.
 
-If your cloud provider is AWS, you have the option of installing the CS engine
+If your cloud provider is AWS, you have the option of installing the CS Engine
 using an Amazon Machine Image (AMI). For more information, read the [installation overview](index.md) to understand your options.
 
 
@@ -41,7 +41,7 @@ kernel.
 
     `$ sudo yum install -y yum-utils`
 
-4. Add the repository. Notice in the following code that it gets the latest version of the CS engine. Each time you either install or upgrade, ensure that the you are requesting the version that you want.
+4. Add the repository. Notice in the following code that it gets the latest version of the CS Engine. Each time you either install or upgrade, ensure that the you are requesting the version that you want.
 
     ```
     $ sudo yum-config-manager --add-repo https://packages.docker.com/1.9/yum/repo/main/centos/7

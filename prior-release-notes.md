@@ -10,7 +10,7 @@ weight=101
 
 # Release Notes
 
-This document contains the previous versions of the Docker Trusted Registry and commercially supported engine release notes.
+This document contains the previous versions of the Docker Trusted Registry and commercially supported Engine release notes.
 
 ## Docker Trusted Registry
 
@@ -106,7 +106,7 @@ Customers who are currently using DHE 1.0 **must** follow the [upgrading instruc
 
 ## Commercially Supported Docker Engine
 
-This section of the archived release notes pertains to issues, fixes, and new features regarding the commercially supported Docker engine.
+This section of the archived release notes pertains to issues, fixes, and new features regarding the commercially supported Docker Engine.
 
 ### CS Docker Engine 1.6.2-cs7
 (12 October 2015)
