@@ -101,7 +101,8 @@
 		},
 		{
 			"ImportPath": "github.com/dvsekhvalnov/jose2go",
-			"Rev": "5307afb3bb6169b0f68cdf519a5964c843344441"
+			"Comment": "v1.2",
+			"Rev": "6387d3c1f5abd8443b223577d5a7e0f4e0e5731f"
 		},
 		{
 			"ImportPath": "github.com/go-sql-driver/mysql",
