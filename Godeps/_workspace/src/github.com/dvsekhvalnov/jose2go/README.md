@@ -10,10 +10,13 @@ Extensively unit tested and cross tested (100+ tests) for compatibility with [jo
 
 
 ## Status
-Used in production. GA ready. Current version is 1.1
+Used in production. GA ready. Current version is 1.2
 
 ## Important
 v1.2 breaks `jose.Decode` interface by returning 3 values instead of 2.
+
+v1.2 deprecates `jose.Compress` method in favor of using configuration options to `jose.Encrypt`,
+the method will be removed in next release.
 
 ###Migration to v1.2
 Pre v1.2 decoding:
@@ -28,6 +31,17 @@ Should be updated to v1.2:
 payload, headers, err := jose.Decode(token,sharedKey)
 ```
 
+Pre v1.2 compression:
+
+```Go
+token,err := jose.Compress(payload,jose.DIR,jose.A128GCM,jose.DEF, key)
+```
+
+Should be update to v1.2:
+
+```Go
+token, err := jose.Encrypt(payload, jose.DIR, jose.A128GCM, key, jose.Zip(jose.DEF))
+```
 
 ## Supported JWA algorithms
 
@@ -368,15 +382,15 @@ import (
 
 func main() {
 
-	payload :=  `{"hello": "world"}`
+	payload := `{"hello": "world"}`
 
-	sharedKey :=[]byte{194,164,235,6,138,248,171,239,24,216,11,22,137,199,215,133}
+	sharedKey := []byte{194, 164, 235, 6, 138, 248, 171, 239, 24, 216, 11, 22, 137, 199, 215, 133}
 
-	token,err := jose.Compress(payload,jose.DIR,jose.A128GCM,jose.DEF, sharedKey)
+	token, err := jose.Encrypt(payload, jose.DIR, jose.A128GCM, sharedKey, jose.Zip(jose.DEF))
 
-	if(err==nil) {
+	if err == nil {
 		//go use token
-		fmt.Printf("\nDIR A128GCM DEFLATED= %v\n",token)
+		fmt.Printf("\nDIR A128GCM DEFLATED= %v\n", token)
 	}
 }
 ```
@@ -583,6 +597,64 @@ func main() {
 }	
 ```
 	
+### Adding extra headers    
+It's possible to pass additional headers while encoding token. **jose2go** provides convenience configuration helpers: `Header(name string, value interface{})` and `Headers(headers map[string]interface{})` that can be passed to `Sign(..)` and `Encrypt(..)` calls. 
+
+Note: **jose2go** do not allow to override `alg`, `enc` and `zip` headers.
+
+Example of signing with extra headers:
+```Go
+	token, err := jose.Sign(payload, jose.ES256, key,
+                    		jose.Header("keyid", "111-222-333"),
+                    		jose.Header("trans-id", "aaa-bbb"))
+```
+
+Encryption with extra headers:
+```Go
+token, err := jose.Encrypt(payload, jose.DIR, jose.A128GCM, sharedKey,
+                    jose.Headers(map[string]interface{}{"keyid": "111-22-33", "cty": "text/plain"}))
+```
+    
+### Two phase validation
+In some cases validation (decoding) key can be unknown prior to examining token content. For instance one can use different keys per token issuer or rely on headers information to determine which key to use, do logging or other things.
+
+**jose2go** allows to pass `func(headers map[string]interface{}, payload string) key interface{}` callback instead of key to `jose.Decode(..)`. Callback will be executed prior to decoding and integrity validation and will recieve parsed headers and payload as is (for encrypted tokens it will be cipher text). Callback should return key to be used for actual decoding process.    
+
+Example of decoding token with callback:
+
+```Go
+package main
+
+import (
+	"crypto/rsa"
+	"fmt"
+	"github.com/dvsekhvalnov/jose2go"
+	"github.com/dvsekhvalnov/jose2go/keys/rsa"
+	"io/ioutil"
+)
+
+func main() {
+
+	token := "eyJhbGciOiJSUzI1NiIsImN0eSI6InRleHRcL3BsYWluIn0.eyJoZWxsbyI6ICJ3b3JsZCJ9.NL_dfVpZkhNn4bZpCyMq5TmnXbT4yiyecuB6Kax_lV8Yq2dG8wLfea-T4UKnrjLOwxlbwLwuKzffWcnWv3LVAWfeBxhGTa0c4_0TX_wzLnsgLuU6s9M2GBkAIuSMHY6UTFumJlEeRBeiqZNrlqvmAzQ9ppJHfWWkW4stcgLCLMAZbTqvRSppC1SMxnvPXnZSWn_Fk_q3oGKWw6Nf0-j-aOhK0S0Lcr0PV69ZE4xBYM9PUS1MpMe2zF5J3Tqlc1VBcJ94fjDj1F7y8twmMT3H1PI9RozO-21R0SiXZ_a93fxhE_l_dj5drgOek7jUN9uBDjkXUwJPAyp9YPehrjyLdw"
+
+	payload, _, err := jose.Decode(token,
+		func(headers map[string]interface{}, payload string) interface{} {            
+            //log something
+			fmt.Printf("\nHeaders before decoding: %v\n", headers)
+			fmt.Printf("\nPayload before decoding: %v\n", payload)
+
+            //lookup key based on keyid header as en example
+            //or lookup based on something from payload, e.g. 'iss' claim for instance
+			return FindKey(headers['keyid'])
+		})
+
+	if err == nil {
+		//go use token
+		fmt.Printf("\ndecoded payload = %v\n", payload)
+	}
+}
+```
+    
 ### Dealing with keys	
 **jose2go** provides several helper methods to simplify loading & importing of elliptic and rsa keys. Import `jose2go/keys/rsa` or `jose2go/keys/ecc` respectively: 
 
@@ -733,6 +805,8 @@ Checkout `jose_test.go` for more examples.
 ##Changelog
 ### 1.2
 - interface to access token headers after decoding 
+- interface to provide extra headers for token encoding
+- two-phase validation support
     
 ### 1.1
 - security and bug fixes
