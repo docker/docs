@@ -737,6 +737,11 @@ func (r *NotaryRepository) Update(forWrite bool) (*tufclient.Client, error) {
 	return c, nil
 }
 
+// bootstrapClient attempts to bootstrap a root.json to be used as the trust
+// anchor for a repository. The checkInitialized argument indicates whether
+// we should always attempt to contact the server to determine if the repository
+// is initialized or not. If set to true, we will always attempt to download
+// and return an error if the remote repository errors.
 func (r *NotaryRepository) bootstrapClient(checkInitialized bool) (*tufclient.Client, error) {
 	var (
 		rootJSON   []byte
