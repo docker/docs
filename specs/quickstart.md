@@ -10,8 +10,6 @@ running quickly, so lets dive right in!
 
 # Prerequisites
 
-* You'll need access to the dockerorca images on hub - if the link below gives an error, ask someone on the **#tuca** slack channel to give you access.
-    * [https://hub.docker.com/r/dockerorca/orca-bootstrap/](https://hub.docker.com/r/dockerorca/orca-bootstrap/)
 * You'll need at leasts one docker engine (local or remote should work)
     * If you want to build a multi-node deployment, **all** the nodes must be able to see eachother, so make sure if you're using remote engines, they're all on the same remote network.
 * UCP installs its own Swarm, so don't set up Swarm first, just install UCP directly on your engine(s)
@@ -29,7 +27,7 @@ running quickly, so lets dive right in!
 docker run --rm -it \
     -v /var/run/docker.sock:/var/run/docker.sock \
     --name ucp \
-    dockerorca/ucp \
+    docker/ucp \
     install --swarm-port 3376 -i
 ```
 
@@ -104,7 +102,7 @@ volume as it will not be used when using an external UCP Root CA.
 docker run --rm -it \
     -v /var/run/docker.sock:/var/run/docker.sock \
     --name ucp \
-    dockerorca/ucp \
+    docker/ucp \
     install --swarm-port 3376 -i --external-orca-ca
 ```
 
@@ -115,7 +113,7 @@ To add capacity to your cluster, run the following on the engine you want to add
 docker run --rm -it \
     -v /var/run/docker.sock:/var/run/docker.sock \
     --name ucp \
-    dockerorca/ucp \
+    docker/ucp \
     join -i
 ```
 
@@ -136,7 +134,7 @@ against the engine you want to uninstall (**not** against UCP itself)
 docker run --rm -it \
     -v /var/run/docker.sock:/var/run/docker.sock \
     --name ucp \
-    dockerorca/ucp \
+    docker/ucp \
     uninstall
 ```
 
