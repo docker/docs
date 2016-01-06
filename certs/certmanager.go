@@ -51,25 +51,19 @@ func NewManager(baseDir string) (*Manager, error) {
 	trustPath := filepath.Join(baseDir, trustDir)
 
 	// Load all CAs that aren't expired and don't use SHA1
-	trustedCAStore, err := trustmanager.NewX509FilteredFileStore(trustPath, func(cert *x509.Certificate) bool {
-		return cert.IsCA && cert.BasicConstraintsValid && cert.SubjectKeyId != nil &&
-			time.Now().Before(cert.NotAfter) &&
-			cert.SignatureAlgorithm != x509.SHA1WithRSA &&
-			cert.SignatureAlgorithm != x509.DSAWithSHA1 &&
-			cert.SignatureAlgorithm != x509.ECDSAWithSHA1
-	})
+	trustedCAStore, err := trustmanager.NewX509FilteredFileStore(
+		trustPath,
+		trustmanager.FilterCertsExpiredSha1,
+	)
 	if err != nil {
 		return nil, err
 	}
 
 	// Load all individual (non-CA) certificates that aren't expired and don't use SHA1
-	trustedCertificateStore, err := trustmanager.NewX509FilteredFileStore(trustPath, func(cert *x509.Certificate) bool {
-		return !cert.IsCA &&
-			time.Now().Before(cert.NotAfter) &&
-			cert.SignatureAlgorithm != x509.SHA1WithRSA &&
-			cert.SignatureAlgorithm != x509.DSAWithSHA1 &&
-			cert.SignatureAlgorithm != x509.ECDSAWithSHA1
-	})
+	trustedCertificateStore, err := trustmanager.NewX509FilteredFileStore(
+		trustPath,
+		trustmanager.FilterCertsExpiredSha1,
+	)
 	if err != nil {
 		return nil, err
 	}
