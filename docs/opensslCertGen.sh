@@ -4,7 +4,7 @@
 # a public CA or an internal CA should be used
 
 
-CLIENT_USAGE=<<EOL
+CLIENT_USAGE=$(cat <<EOL
 Generate a self-signed client cert and key to be used in mutual TLS.
 
 ${0} client [-o <output file prefix>]
@@ -12,18 +12,20 @@ ${0} client [-o <output file prefix>]
 Example:
     ${0} client -o clienttls
 EOL
+)
 
-SERVER_USAGE=<<EOL
+SERVER_USAGE=$(cat <<EOL
 Generate a self-signed cert key and certificate.
 
 ${0} server -n <common name> [-o <output file prefix>]
-    [-r <root key if don't want it self-signed>]
+    [-r <root key if do not want it self-signed>]
     [-a <subjectAltName>] [-a <subjectAltName>] ...
 
 Example:
     ${0} server -o servertls -n notary-server -a DNS:notaryserver \
-        -a DNS:notary_server -a IP:127.0.0.1"
+        -a DNS:notary_server -a IP:127.0.0.1
 EOL
+)
 
 if [[ -z "${1}" ]]; then
     printf "${CLIENT_USAGE}\n\n${SERVER_USAGE}\n\n"
