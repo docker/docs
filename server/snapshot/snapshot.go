@@ -1,9 +1,8 @@
 package snapshot
 
 import (
-	"encoding/json"
-
 	"github.com/Sirupsen/logrus"
+	"github.com/jfrazelle/go/canonical/json"
 
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/tuf/data"
@@ -70,7 +69,7 @@ func GetOrCreateSnapshot(gun string, store storage.MetaStore, cryptoService sign
 		logrus.Error("Failed to create a new snapshot")
 		return nil, err
 	}
-	out, err := json.Marshal(sgnd)
+	out, err := json.MarshalCanonical(sgnd)
 	if err != nil {
 		logrus.Error("Failed to marshal new snapshot")
 		return nil, err
