@@ -2,7 +2,6 @@ package client
 
 import (
 	"bytes"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"io/ioutil"
@@ -13,6 +12,8 @@ import (
 	"time"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/jfrazelle/go/canonical/json"
+
 	"github.com/docker/notary/certs"
 	"github.com/docker/notary/client/changelist"
 	"github.com/docker/notary/cryptoservice"
@@ -323,7 +324,7 @@ func (r *NotaryRepository) AddDelegation(name string, threshold int,
 	logrus.Debugf(`Adding delegation "%s" with threshold %d, and %d keys\n`,
 		name, threshold, len(delegationKeys))
 
-	tdJSON, err := json.Marshal(&changelist.TufDelegation{
+	tdJSON, err := json.MarshalCanonical(&changelist.TufDelegation{
 		NewThreshold: threshold,
 		AddKeys:      data.KeyList(delegationKeys),
 		AddPaths:     paths,
@@ -385,7 +386,7 @@ func (r *NotaryRepository) AddTarget(target *Target, roles ...string) error {
 	logrus.Debugf("Adding target \"%s\" with sha256 \"%x\" and size %d bytes.\n", target.Name, target.Hashes["sha256"], target.Length)
 
 	meta := data.FileMeta{Length: target.Length, Hashes: target.Hashes}
-	metaJSON, err := json.Marshal(meta)
+	metaJSON, err := json.MarshalCanonical(meta)
 	if err != nil {
 		return err
 	}
@@ -719,7 +720,7 @@ func (r *NotaryRepository) saveMetadata(ignoreSnapshot bool) error {
 		if err != nil {
 			return err
 		}
-		targetsJSON, err := json.Marshal(signedTargets)
+		targetsJSON, err := json.MarshalCanonical(signedTargets)
 		if err != nil {
 			return err
 		}
@@ -845,7 +846,7 @@ func (r *NotaryRepository) rootFileKeyChange(role, action string, key data.Publi
 		RoleName: role,
 		Keys:     kl,
 	}
-	metaJSON, err := json.Marshal(meta)
+	metaJSON, err := json.MarshalCanonical(meta)
 	if err != nil {
 		return err
 	}

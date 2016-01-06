@@ -2,27 +2,26 @@ package handlers
 
 import (
 	"bytes"
-	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 
-	"golang.org/x/net/context"
-
 	ctxu "github.com/docker/distribution/context"
 	"github.com/docker/distribution/registry/api/errcode"
+	"github.com/jfrazelle/go/canonical/json"
+	"github.com/stretchr/testify/assert"
+	"golang.org/x/net/context"
+
 	"github.com/docker/notary/server/errors"
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/store"
-	"github.com/docker/notary/tuf/validation"
-
 	"github.com/docker/notary/tuf/testutils"
+	"github.com/docker/notary/tuf/validation"
 	"github.com/docker/notary/utils"
-	"github.com/stretchr/testify/assert"
 )
 
 type handlerState struct {
@@ -179,7 +178,7 @@ func TestGetHandlerRoot(t *testing.T) {
 	ctx = context.WithValue(ctx, "metaStore", metaStore)
 
 	root, err := repo.SignRoot(data.DefaultExpires("root"))
-	rootJSON, err := json.Marshal(root)
+	rootJSON, err := json.MarshalCanonical(root)
 	assert.NoError(t, err)
 	metaStore.UpdateCurrent("gun", storage.MetaUpdate{Role: "root", Version: 1, Data: rootJSON})
 
@@ -205,13 +204,13 @@ func TestGetHandlerTimestamp(t *testing.T) {
 	ctx := getContext(handlerState{store: metaStore, crypto: crypto})
 
 	sn, err := repo.SignSnapshot(data.DefaultExpires("snapshot"))
-	snJSON, err := json.Marshal(sn)
+	snJSON, err := json.MarshalCanonical(sn)
 	assert.NoError(t, err)
 	metaStore.UpdateCurrent(
 		"gun", storage.MetaUpdate{Role: "snapshot", Version: 1, Data: snJSON})
 
 	ts, err := repo.SignTimestamp(data.DefaultExpires("timestamp"))
-	tsJSON, err := json.Marshal(ts)
+	tsJSON, err := json.MarshalCanonical(ts)
 	assert.NoError(t, err)
 	metaStore.UpdateCurrent(
 		"gun", storage.MetaUpdate{Role: "timestamp", Version: 1, Data: tsJSON})
@@ -238,7 +237,7 @@ func TestGetHandlerSnapshot(t *testing.T) {
 	ctx := getContext(handlerState{store: metaStore, crypto: crypto})
 
 	sn, err := repo.SignSnapshot(data.DefaultExpires("snapshot"))
-	snJSON, err := json.Marshal(sn)
+	snJSON, err := json.MarshalCanonical(sn)
 	assert.NoError(t, err)
 	metaStore.UpdateCurrent(
 		"gun", storage.MetaUpdate{Role: "snapshot", Version: 1, Data: snJSON})

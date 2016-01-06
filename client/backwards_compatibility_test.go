@@ -14,7 +14,7 @@ import (
 	"github.com/docker/notary/client/changelist"
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/tuf/data"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 // recursively copies the contents of one directory into another - ignores
@@ -63,8 +63,8 @@ func Test0Dot1RepoFormat(t *testing.T) {
 	// and publishing will modify the files
 	tmpDir, err := ioutil.TempDir("", "notary-backwards-compat-test")
 	defer os.RemoveAll(tmpDir)
-	assert.NoError(t, err)
-	assert.NoError(t, recursiveCopy("../fixtures/compatibility/notary0.1", tmpDir))
+	require.NoError(t, err)
+	require.NoError(t, recursiveCopy("../fixtures/compatibility/notary0.1", tmpDir))
 
 	gun := "docker.io/notary0.1/samplerepo"
 	passwd := "randompass"
@@ -74,28 +74,28 @@ func Test0Dot1RepoFormat(t *testing.T) {
 
 	repo, err := NewNotaryRepository(tmpDir, gun, ts.URL, http.DefaultTransport,
 		passphrase.ConstantRetriever(passwd))
-	assert.NoError(t, err, "error creating repo: %s", err)
+	require.NoError(t, err, "error creating repo: %s", err)
 
 	// rotate the timestamp key, since the server doesn't have that one
 	timestampPubKey, err := getRemoteKey(ts.URL, gun, data.CanonicalTimestampRole, http.DefaultTransport)
-	assert.NoError(t, err)
-	assert.NoError(
+	require.NoError(t, err)
+	require.NoError(
 		t, repo.rootFileKeyChange(data.CanonicalTimestampRole, changelist.ActionCreate, timestampPubKey))
 
-	assert.NoError(t, repo.Publish())
+	require.NoError(t, repo.Publish())
 
 	targets, err := repo.ListTargets()
-	assert.NoError(t, err)
-	assert.Len(t, targets, 1)
-	assert.Equal(t, "v1", targets[0].Name)
+	require.NoError(t, err)
+	require.Len(t, targets, 1)
+	require.Equal(t, "v1", targets[0].Name)
 
 	// Also check that we can add/remove keys by rotating keys
 	oldTargetsKeys := repo.CryptoService.ListKeys(data.CanonicalTargetsRole)
-	assert.NoError(t, repo.RotateKey(data.CanonicalTargetsRole, false))
-	assert.NoError(t, repo.Publish())
+	require.NoError(t, repo.RotateKey(data.CanonicalTargetsRole, false))
+	require.NoError(t, repo.Publish())
 	newTargetsKeys := repo.CryptoService.ListKeys(data.CanonicalTargetsRole)
 
-	assert.Len(t, oldTargetsKeys, 1)
-	assert.Len(t, newTargetsKeys, 1)
-	assert.NotEqual(t, oldTargetsKeys[0], newTargetsKeys[0])
+	require.Len(t, oldTargetsKeys, 1)
+	require.Len(t, newTargetsKeys, 1)
+	require.NotEqual(t, oldTargetsKeys[0], newTargetsKeys[0])
 }
