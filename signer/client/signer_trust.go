@@ -185,11 +185,16 @@ func (trust *NotarySigner) CheckHealth(timeout time.Duration) error {
 	status, err := trust.kmClient.CheckHealth(ctx, &pb.Void{})
 	defer cancel()
 	if err == nil && len(status.Status) > 0 {
-		return fmt.Errorf("Trust is not healthy")
-	} else if err != nil && grpc.Code(err) == codes.DeadlineExceeded {
-		return fmt.Errorf(
-			"Timed out reaching trust service after %s.", timeout)
+		var stats string
+		for k, v := range status.Status {
+			stats += k + ":" + v + "; "
+		}
+		return fmt.Errorf("Trust is not healthy: %s", stats)
 	}
+	if err != nil && grpc.Code(err) == codes.DeadlineExceeded {
+		return fmt.Errorf("Timed out reaching trust service after %s.", timeout)
+	}
+
 	return err
 }
 
