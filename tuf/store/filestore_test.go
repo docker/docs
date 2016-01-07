@@ -91,23 +91,20 @@ func TestGetMeta(t *testing.T) {
 	assert.Equal(t, testContent, content, "Content read from file was corrupted.")
 }
 
-func TestGetMetaNoSuchMetadata(t *testing.T) {
-	testDir, err := ioutil.TempDir("/tmp", "testFileSystemStore")
-	assert.NoError(t, err)
-	// ensure that the random directory doesn't exist
-	os.RemoveAll(testDir)
+func TestGetSetMetadata(t *testing.T) {
+	s, err := NewFilesystemStore(testDir, "metadata", "json", "targets")
+	assert.NoError(t, err, "Initializing FilesystemStore returned unexpected error", err)
+	defer os.RemoveAll(testDir)
 
-	// don't use the constructor, which creates the directories - just
-	s := FilesystemStore{
-		baseDir:       testDir,
-		metaDir:       "metadata",
-		metaExtension: "json",
-		targetsDir:    "targets",
-	}
+	testGetSetMeta(t, func() MetadataStore { return s })
+}
 
-	_, err = s.GetMeta("testMeta", int64(5))
-	assert.Error(t, err)
-	assert.IsType(t, ErrMetaNotFound{}, err)
+func TestRemoveMetadata(t *testing.T) {
+	s, err := NewFilesystemStore(testDir, "metadata", "json", "targets")
+	assert.NoError(t, err, "Initializing FilesystemStore returned unexpected error", err)
+	defer os.RemoveAll(testDir)
+
+	testRemoveMeta(t, func() MetadataStore { return s })
 }
 
 func TestRemoveAll(t *testing.T) {
