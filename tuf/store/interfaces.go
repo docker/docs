@@ -15,6 +15,7 @@ type MetadataStore interface {
 	SetMeta(name string, blob []byte) error
 	SetMultiMeta(map[string][]byte) error
 	RemoveAll() error
+	RemoveMeta(name string) error
 }
 
 // PublicKeyStore must be implemented by a key service
