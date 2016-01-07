@@ -17,7 +17,8 @@ Registry, that you also upgrade to the latest CS Engine.
 
 The CS Engine has three upgrade paths which are described in this document:
 
-* [**Legacy**: versions 1.6.x to 1.9.x onwards](#upgrade-legacy-to-the-latest-version")
+
+* [**Legacy**: versions 1.6.x to 1.9.x onwards](#upgrade-legacy-to-latest-version")
 * [**Major to major upgrades**: versions 1.9.0 to 1.10.x](#upgrade-major-to-major-versions")
 * [**Minor to minor upgrades**: versions 1.10 to 1.10.x](#upgrade-minor-to-minor-versions")
 
@@ -47,6 +48,33 @@ Available and an enabled button displays Update to version X.X.X.
 
       The Dashboard displays a message that the upgrade successfully completed and that you need to upgrade to the latest CS Engine.
 
+## Upgrade Docker Trusted Registry offline
+
+To upgrade the Trusted Registry offline, perform the following steps:
+
+1. Since you are retrieving a large file, use the `wget` command in your command line to get the Trusted Registry files. The following command is an example getting DTR 1.4.3. Ensure to get your correct version.
+
+      `wget https://packages.docker.com/dtr/1.4/dtr-1.4.3.tar`
+
+2. After downloading, move the `tar` file to the offline machine you want to install the Trusted Registry.
+
+3. On that machine, verify that the CS Engine is installed. If it is not, see the [CS Engine install directions](install-csengine.md).
+
+    `$ docker --version`
+
+    > **Note:** To remain compliant with your Docker Trusted Registry support agreement, you **must** use the current version of commercially supported Docker Engine. Running the open source version of Engine is **not** supported.
+
+5. Open a terminal window on that machine and load the `tar` file using the following command. Again, ensure you get the correct version.
+
+      `$ sudo docker load < dtr-1.4.3.tar`
+
+6. Upgrade the Trusted Registry with the following command:
+
+      `$ sudo bash -c "$(docker run dockerhubenterprise/trusted-registry-dev upgrade latest)"`
+
+    > **Note**: `sudo` is needed for `docker/trusted-registry` commands to
+    > ensure that the Bash script is run with full access to the Docker host.
+
 ### What is updated in the Trusted Registry?
 
 The Trusted Registry pulls new container images from Docker Hub. Then it deploys those containers. Finally, it stops and removes the old containers.
@@ -54,6 +82,7 @@ The Trusted Registry pulls new container images from Docker Hub. Then it deploys
 If the CS Engine is upgraded first, then the Trusted Registry can still be
 upgraded from a command line by running the following command. Ensure to put the
 correct version that you want.
+
 
 ```
 $ sudo bash -c "$(sudo docker run docker/trusted-registry:1.3.3 upgrade 1.4.3)"
@@ -117,12 +146,7 @@ Engine, and install the new version.
     $ sudo systemctl start docker.service
     ```
 
-7. Verify that the CS Engine is running:
-
-      `$ sudo docker info`
-
-
-8. Now you can restart the Trusted Registry.  
+7. Now you can restart the Trusted Registry.  
 
     ```
     $ sudo bash -c "$(sudo docker run docker/trusted-registry restart)"
@@ -171,17 +195,12 @@ Engine, and install the new version.
       * ubuntu-wily (Ubuntu 15.10)
 
 
-6. Install the new package:		
+6. Install the upgraded package:
 
-       `$ sudo apt-get update && sudo apt-get install docker-engine`
-
-
-7. Verify that the CS Engine is running:
-
-      `$ sudo docker info`
+    `$ sudo apt-get upgrade docker-engine`
 
 
-8. Restart the Trusted Registry:  
+7. Restart the Trusted Registry:  
 
      `$ sudo bash -c "$(sudo docker run docker/trusted-registry restart)"`
 
@@ -193,7 +212,6 @@ as 1.9.0 to 1.10.0. Perform the following steps depending on your type of
 system.
 
 #### CentOS 7.1 & RHEL 7.0/7.1 (YUM-based systems)
-
 
 1. Add the repository. Notice in the following code that it gets the latest version of the CS Engine. Each time you either install or upgrade, ensure that the you are requesting the version and the OS that you want.
 
@@ -302,7 +320,6 @@ steps depending on your type of system.
 
 #### Ubuntu 14.04 LTS (APT-based systems)
 
-
 1. Update your `docker-engine` package:
 
     `$ sudo apt-get update && sudo apt-get upgrade docker-engine`
@@ -312,7 +329,6 @@ steps depending on your type of system.
     `$ sudo docker info`    
 
 3. Restart the Trusted Registry:  
-
     `$ sudo bash -c "$(sudo docker run docker/trusted-registry restart)"`
 
 #### SUSE Enterprise 12.3
@@ -328,7 +344,6 @@ steps depending on your type of system.
 3. Restart the Trusted Registry:  
 
       `$ sudo bash -c "$(sudo docker run docker/trusted-registry restart)"`
-
 
 ## See also
 

@@ -1,19 +1,19 @@
 +++
-title = "Manually install Trusted Registry"
-description = "Manually install Trusted Registry"
-keywords = ["docker, documentation, about, technology, understanding, enterprise, hub,  registry"]
+title = "Install the Trusted Registry offline"
+description = "Install the Trusted Registry offline"
+keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, offline, Trusted Registry, registry"]
 [menu.main]
 parent="workw_dtr_install"
 +++
 
 
-# Manually install Trusted Registry
+# Install the Trusted Registry offline
 
 This document describes the process of obtaining, installing, and securing
-Docker Trusted Registry. You can use these instructions if you are installing Trusted Registry on a physical or cloud infrastructure.
+Docker Trusted Registry offline. Since your system is not connected to the internet, there will be no notifications regarding upgrading either the CS Engine or the Trusted Registry. You will also not be able to link from the Trusted Registry UI to our documentation except for the API documentation. Docker recommends that you contact customer support to obtain the latest information.
 
-If your cloud provider is AWS, you have the option of installing Trusted Registry using an Amazon Machine Image (AMI) instead. For more information, read the [installation overview](index.md) to understand your options.
-
+For more information about installing, read the
+[installation overview](index.md) to understand your options.
 
 ## Prerequisites
 
@@ -22,6 +22,7 @@ Docker Trusted Registry runs on the following 64-bit platforms:
 * Ubuntu 14.04 LTS
 * RHEL 7.0 and 7.1
 * CentOS 7.1
+* SUSE Linux Enterprise 12
 
 Docker Trusted Registry requires the latest commercially supported Docker Engine (CS Engine), running on a supported host.
 
@@ -49,58 +50,60 @@ Registry by running the "docker/trusted-registry" container. Once installed, it
 is able to restart and reconfigure itself using the Docker socket that is
 bind-mounted to this container.
 
-1. Log in to the machine where you want to install Trusted Registry.
+1. Since you are retrieving a large file, use the `wget` command in your command line to get the Trusted Registry files. The following command is an example getting DTR 1.4.3. Ensure to get your correct version.
 
-2. Verify that CS Engine is installed.
+      `wget https://packages.docker.com/dtr/1.4/dtr-1.4.3.tar`
 
-        $ docker --version
+2. After downloading, move the `tar` file to the offline machine you want to install the Trusted Registry.
+
+3. On that machine, verify that the CS Engine is installed. If it is not, see the [CS Engine install directions](install-csengine.md).
+
+    `$ docker --version`
 
     > **Note:** To remain compliant with your Docker Trusted Registry support agreement, you **must** use the current version of commercially supported Docker Engine. Running the open source version of Engine is **not** supported.
 
-3. Login into the Docker Hub from the command line.
+5. Open a terminal window on that machine and load the `tar` file using the following command. Again, ensure you get the correct version.
 
-        $ docker login
+      `$ sudo docker load < dtr-1.4.3.tar`
 
-4. Install the Trusted Registry
+6. Install the Trusted Registry with the following command:
 
-	       $ sudo bash -c "$(sudo docker run docker/trusted-registry install)"
+      `$ sudo bash -c "$(sudo docker run docker/trusted-registry install)"`
+
 
     > **Note**: `sudo` is needed for `docker/trusted-registry` commands to
     > ensure that the Bash script is run with full access to the Docker host.
 
-    The command executes a shell script that creates the needed directories,
-    pulls the registry's images, and run its containers. Depending on your
-    internet connection, this process may take several minutes to complete. A successful outcome completes as follows:
+    The command runs the registry's containers from the images you loaded in the previous step. You will know that you successfully installed by the following in part:
 
-          $ sudo bash -c "$(sudo docker run docker/trusted-registry install)"
-          Unable to find image 'docker/trusted-registry:latest' locally
-          Pulling repository docker/trusted-registry
-          c46d58daad7d: Pulling image (latest) from docker/trusted-registry
-          c46d58daad7d: Pulling image (latest) from docker/trusted-registry
-          c46d58daad7d: Pulling dependent layers
-          511136ea3c5a: Download complete
-          fa4fd76b09ce: Pulling metadata
-          fa4fd76b09ce: Pulling fs layer
-          ff2996b1faed: Download complete
-          ...
-          fd7612809d57: Pulling metadata
-          fd7612809d57: Pulling fs layer
-          fd7612809d57: Download complete
-          Status: Downloaded newer image for docker/trusted-registry:latest
-          Unable to find image 'docker/trusted-registry:1.1.0' locally
-          Pulling repository docker/trusted-registry
-          c46d58daad7d: Download complete
-          511136ea3c5a: Download complete
-          ...
-          Status: Image is up to date for docker/trusted-registry:1.1.0
-          INFO  [1.0.0_8ce62a61e058] Attempting to connect to docker engine dockerHost="unix:///var/run/docker.sock"
-          INFO  [1.0.0_8ce62a61e058] Running install command
-          <...output truncated...>
-          Creating container docker_trusted_registry_load_balancer with docker daemon unix:///var/run/docker.sock
-          Starting container docker_trusted_registry_load_balancer with docker daemon unix:///var/run/docker.sock
-          Bringing up docker_trusted_registry_log_aggregator.
-          Creating container docker_trusted_registry_log_aggregator with docker daemon unix:///var/run/docker.sock
-          Starting container docker_trusted_registry_log_aggregator with docker daemon unix:///var/run/docker.sock
+    Image is up to date for docker/trusted-registry:1.4.3
+
+
+    ```
+    Checking for required image: docker/trusted-registry-distribution:v2.2.1
+    Checking for required image: postgres:9.4.1
+    ...
+    INFO  [1.4.3-003501_g657863b] Attempting to connect to docker engine dockerHost="unix:///var/run/docker.sock"
+    INFO  [1.4.3-003501_g657863b] Running install command
+    INFO  [1.4.3-003501_g657863b] Running pull command
+    INFO  [1.4.3-003501_g657863b] Using links? false
+    INFO  [1.4.3-003501_g657863b] DTR Network created
+    Bringing up docker_trusted_registry_postgres.
+    Creating container docker_trusted_registry_postgres with docker daemon unix:///var/run/docker.sock
+    Starting container docker_trusted_registry_postgres with docker daemon unix:///var/run/docker.sock
+    ...
+    Bringing up docker_trusted_registry_log_aggregator.
+    Creating container docker_trusted_registry_log_aggregator with docker daemon unix:///var/run/docker.sock
+    Starting container docker_trusted_registry_log_aggregator with docker daemon unix:///var/run/docker.sock
+    Bringing up docker_trusted_registry_auth_server.
+    Creating container docker_trusted_registry_auth_server with docker daemon unix:///var/run/docker.sock
+    Starting container docker_trusted_registry_auth_server with docker daemon unix:///var/run/docker.sock
+    Bringing up docker_trusted_registry_postgres.
+    Creating container docker_trusted_registry_postgres with docker daemon unix:///var/run/docker.sock
+    Container already exists for daemon at unix:///var/run/docker.sock: docker_trusted_registry_postgres
+    Starting container docker_trusted_registry_postgres with docker daemon unix:///var/run/docker.sock
+    Container docker_trusted_registry_postgres is already running for daemon at unix:///var/run/docker.sock
+    ```
 
 5. Use `docker ps` to list all the running containers.
 
@@ -148,7 +151,7 @@ upload it to your Docker Trusted Registry web admin server. Follow these steps:
 
 3. Go to your Docker Trusted Registry instance in your browser, click Settings in the global nav bar. Click License in the Settings nav bar. Click the Choose File button. It opens a standard file browser. Locate and select the license file you downloaded in the previous step. Approve the selection to close the dialog.
 
-4. Click the Save and restart button. Docker Trusted Registry quits and then restarts with the applied the license.
+4. Click Save and restart. Docker Trusted Registry quits and then restarts with the applied the license.
 
 5. Verify the acceptance of the license by confirming that the "Unlicensed copy"
    warning is no longer present.
@@ -173,7 +176,7 @@ Trusted Registry to Push and pull images](../userguide.md) to create a repositor
 By default, there is no authentication set on either the Docker Trusted Registry
 web admin interface or the Docker Trusted Registry. You can restrict access
 using an in-Docker Trusted Registry configured set of users (and passwords), or
-you can configure Docker Trusted Registry to use LDAP- based authentication.
+you can configure Docker Trusted Registry to use LDAP based authentication.
 
 See [Docker Trusted Registry Authentication settings](../configuration.md#authentication) for more details.
 
