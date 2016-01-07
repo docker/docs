@@ -1,6 +1,6 @@
 +++
 aliases = [ "/docker-hub-enterprise/" ]
-title = "Trusted Registry"
+title = "Docker Trusted Registry"
 description = "Docker Trusted Registry"
 keywords = ["docker, documentation, about, technology, understanding, enterprise, hub,  registry"]
 [menu.main]
