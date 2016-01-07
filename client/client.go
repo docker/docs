@@ -772,9 +772,8 @@ func (r *NotaryRepository) bootstrapClient(checkInitialized bool) (*tufclient.Cl
 			return nil, err
 		}
 		if cachedRootErr != nil {
-			// if we entered the remote download code because there was a cache
-			// error and not simply to check the initialization state of the
-			// repo, we want to use the downloaded data as our root.
+			// we always want to use the downloaded root if there was a cache
+			// error.
 			signedRoot, err = r.validateRoot(tmpJSON)
 			if err != nil {
 				return nil, err
@@ -790,6 +789,10 @@ func (r *NotaryRepository) bootstrapClient(checkInitialized bool) (*tufclient.Cl
 
 	kdb := keys.NewDB()
 	r.tufRepo = tuf.NewRepo(kdb, r.CryptoService)
+
+	if signedRoot == nil {
+		return nil, ErrRepoNotInitialized{}
+	}
 
 	err = r.tufRepo.SetRoot(signedRoot)
 	if err != nil {

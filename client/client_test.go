@@ -2407,7 +2407,7 @@ func TestRemoveDelegationErrorWritingChanges(t *testing.T) {
 // a TUF server
 func TestBootstrapClientBadURL(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+	require.NoError(t, err, "failed to create a temporary directory: %s", err)
 	repo, err := NewNotaryRepository(
 		tempBaseDir,
 		"testGun",
@@ -2415,18 +2415,47 @@ func TestBootstrapClientBadURL(t *testing.T) {
 		http.DefaultTransport,
 		passphraseRetriever,
 	)
-	assert.NoError(t, err, "error creating repo: %s", err)
+	require.NoError(t, err, "error creating repo: %s", err)
 
 	c, err := repo.bootstrapClient(false)
-	assert.Nil(t, c)
-	assert.Error(t, err)
+	require.Nil(t, c)
+	require.Error(t, err)
 
 	c, err2 := repo.bootstrapClient(true)
-	assert.Nil(t, c)
-	assert.Error(t, err2)
+	require.Nil(t, c)
+	require.Error(t, err2)
 
 	// same error should be returned because we don't have local data
 	// and are requesting remote root regardless of checkInitialized
 	// value
-	assert.EqualError(t, err, err2.Error())
+	require.EqualError(t, err, err2.Error())
+}
+
+// TestBootstrapClientInvalidURL checks that bootstrapClient correctly
+// returns an error when the URL is valid but does not point to
+// a TUF server
+func TestBootstrapClientInvalidURL(t *testing.T) {
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	require.NoError(t, err, "failed to create a temporary directory: %s", err)
+	repo, err := NewNotaryRepository(
+		tempBaseDir,
+		"testGun",
+		"#!*)&!)#*^%!#)%^!#",
+		http.DefaultTransport,
+		passphraseRetriever,
+	)
+	require.NoError(t, err, "error creating repo: %s", err)
+
+	c, err := repo.bootstrapClient(false)
+	require.Nil(t, c)
+	require.Error(t, err)
+
+	c, err2 := repo.bootstrapClient(true)
+	require.Nil(t, c)
+	require.Error(t, err2)
+
+	// same error should be returned because we don't have local data
+	// and are requesting remote root regardless of checkInitialized
+	// value
+	require.EqualError(t, err, err2.Error())
 }
