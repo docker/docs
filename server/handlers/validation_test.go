@@ -2,11 +2,14 @@ package handlers
 
 import (
 	"crypto/rand"
-	"encoding/json"
 	"fmt"
 	"reflect"
 	"testing"
 
+	"github.com/jfrazelle/go/canonical/json"
+	"github.com/stretchr/testify/assert"
+
+	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf"
 	"github.com/docker/notary/tuf/data"
@@ -14,9 +17,6 @@ import (
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/testutils"
 	"github.com/docker/notary/tuf/validation"
-	"github.com/stretchr/testify/assert"
-
-	"github.com/docker/notary/server/storage"
 )
 
 func copyTimestampKey(t *testing.T, fromKeyDB *keys.KeyDB,
@@ -797,7 +797,7 @@ func TestLoadTargetsFromStore(t *testing.T) {
 	)
 	assert.NoError(t, err)
 
-	tgs, err := json.Marshal(st)
+	tgs, err := json.MarshalCanonical(st)
 	assert.NoError(t, err)
 	update := storage.MetaUpdate{
 		Role:    data.CanonicalTargetsRole,
@@ -844,7 +844,7 @@ func TestValidateTargetsLoadParent(t *testing.T) {
 
 	// we're not going to validate things loaded from storage, so no need
 	// to sign the base targets, just Marshal it and set it into storage
-	tgtsJSON, err := json.Marshal(baseRepo.Targets["targets"])
+	tgtsJSON, err := json.MarshalCanonical(baseRepo.Targets["targets"])
 	assert.NoError(t, err)
 	update := storage.MetaUpdate{
 		Role:    data.CanonicalTargetsRole,
@@ -856,7 +856,7 @@ func TestValidateTargetsLoadParent(t *testing.T) {
 	// generate the update object we're doing to use to call loadAndValidateTargets
 	del, err := baseRepo.SignTargets("targets/level1", data.DefaultExpires(data.CanonicalTargetsRole))
 	assert.NoError(t, err)
-	delJSON, err := json.Marshal(del)
+	delJSON, err := json.MarshalCanonical(del)
 	assert.NoError(t, err)
 
 	delUpdate := storage.MetaUpdate{
@@ -894,7 +894,7 @@ func TestValidateTargetsParentInUpdate(t *testing.T) {
 
 	targets, err := baseRepo.SignTargets("targets", data.DefaultExpires(data.CanonicalTargetsRole))
 
-	tgtsJSON, err := json.Marshal(targets)
+	tgtsJSON, err := json.MarshalCanonical(targets)
 	assert.NoError(t, err)
 	update := storage.MetaUpdate{
 		Role:    data.CanonicalTargetsRole,
@@ -905,7 +905,7 @@ func TestValidateTargetsParentInUpdate(t *testing.T) {
 
 	del, err := baseRepo.SignTargets("targets/level1", data.DefaultExpires(data.CanonicalTargetsRole))
 	assert.NoError(t, err)
-	delJSON, err := json.Marshal(del)
+	delJSON, err := json.MarshalCanonical(del)
 	assert.NoError(t, err)
 
 	delUpdate := storage.MetaUpdate{
@@ -952,7 +952,7 @@ func TestValidateTargetsParentNotFound(t *testing.T) {
 	// generate the update object we're doing to use to call loadAndValidateTargets
 	del, err := baseRepo.SignTargets("targets/level1", data.DefaultExpires(data.CanonicalTargetsRole))
 	assert.NoError(t, err)
-	delJSON, err := json.Marshal(del)
+	delJSON, err := json.MarshalCanonical(del)
 	assert.NoError(t, err)
 
 	delUpdate := storage.MetaUpdate{
@@ -989,7 +989,7 @@ func TestValidateTargetsRoleNotInParent(t *testing.T) {
 
 	targets, err := baseRepo.SignTargets("targets", data.DefaultExpires(data.CanonicalTargetsRole))
 
-	tgtsJSON, err := json.Marshal(targets)
+	tgtsJSON, err := json.MarshalCanonical(targets)
 	assert.NoError(t, err)
 	update := storage.MetaUpdate{
 		Role:    data.CanonicalTargetsRole,
@@ -1000,7 +1000,7 @@ func TestValidateTargetsRoleNotInParent(t *testing.T) {
 
 	del, err := baseRepo.SignTargets("targets/level1", data.DefaultExpires(data.CanonicalTargetsRole))
 	assert.NoError(t, err)
-	delJSON, err := json.Marshal(del)
+	delJSON, err := json.MarshalCanonical(del)
 	assert.NoError(t, err)
 
 	delUpdate := storage.MetaUpdate{

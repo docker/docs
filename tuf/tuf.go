@@ -5,13 +5,14 @@ import (
 	"bytes"
 	"crypto/sha256"
 	"encoding/hex"
-	"encoding/json"
 	"fmt"
 	"path"
 	"strings"
 	"time"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/jfrazelle/go/canonical/json"
+
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/keys"
 	"github.com/docker/notary/tuf/signed"
@@ -606,7 +607,7 @@ func (tr *Repo) RemoveTargets(role string, targets ...string) error {
 
 // UpdateSnapshot updates the FileMeta for the given role based on the Signed object
 func (tr *Repo) UpdateSnapshot(role string, s *data.Signed) error {
-	jsonData, err := json.Marshal(s)
+	jsonData, err := json.MarshalCanonical(s)
 	if err != nil {
 		return err
 	}
@@ -621,7 +622,7 @@ func (tr *Repo) UpdateSnapshot(role string, s *data.Signed) error {
 
 // UpdateTimestamp updates the snapshot meta in the timestamp based on the Signed object
 func (tr *Repo) UpdateTimestamp(s *data.Signed) error {
-	jsonData, err := json.Marshal(s)
+	jsonData, err := json.MarshalCanonical(s)
 	if err != nil {
 		return err
 	}
