@@ -37,6 +37,7 @@ import (
 )
 
 const (
+	jsonLogFormat   = "json"
 	debugAddr       = "localhost:8080"
 	envPrefix       = "NOTARY_SIGNER"
 	defaultAliasEnv = "DEFAULT_ALIAS"
@@ -44,6 +45,7 @@ const (
 
 var (
 	debug      bool
+	logFormat  string
 	configFile string
 	mainViper  = viper.New()
 )
@@ -53,6 +55,12 @@ func init() {
 	// Setup flags
 	flag.StringVar(&configFile, "config", "", "Path to configuration file")
 	flag.BoolVar(&debug, "debug", false, "show the version and exit")
+	flag.StringVar(&logFormat, "logf", "json", "Set the format of the logs. Only 'json' and 'logfmt' are supported at the moment.")
+
+	// this needs to be in init so that _ALL_ logs are in the correct format
+	if logFormat == jsonLogFormat {
+		logrus.SetFormatter(new(logrus.JSONFormatter))
+	}
 }
 
 func passphraseRetriever(keyName, alias string, createNew bool, attempts int) (passphrase string, giveup bool, err error) {

@@ -28,10 +28,14 @@ import (
 )
 
 // DebugAddress is the debug server address to listen on
-const DebugAddress = "localhost:8080"
+const (
+	jsonLogFormat = "json"
+	DebugAddress  = "localhost:8080"
+)
 
 var (
 	debug      bool
+	logFormat  string
 	configFile string
 	envPrefix  = "NOTARY_SERVER"
 	mainViper  = viper.New()
@@ -42,6 +46,12 @@ func init() {
 	// Setup flags
 	flag.StringVar(&configFile, "config", "", "Path to configuration file")
 	flag.BoolVar(&debug, "debug", false, "Enable the debugging server on localhost:8080")
+	flag.StringVar(&logFormat, "logf", "json", "Set the format of the logs. Only 'json' and 'logfmt' are supported at the moment.")
+
+	// this needs to be in init so that _ALL_ logs are in the correct format
+	if logFormat == jsonLogFormat {
+		logrus.SetFormatter(new(logrus.JSONFormatter))
+	}
 }
 
 // get the address for the HTTP server, and parses the optional TLS
