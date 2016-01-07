@@ -26,6 +26,9 @@ var ValidRoles = map[string]string{
 	CanonicalTimestampRole: CanonicalTimestampRole,
 }
 
+// Regex for validating delegation names
+var delegationRegexp = regexp.MustCompile("^[-a-z0-9_/]+$")
+
 // ErrNoSuchRole indicates the roles doesn't exist
 type ErrNoSuchRole struct {
 	Role string
@@ -117,7 +120,6 @@ func ValidRole(name string) bool {
 func IsDelegation(role string) bool {
 	targetsBase := ValidRoles[CanonicalTargetsRole] + "/"
 
-	delegationRegexp := regexp.MustCompile("^[-a-z0-9_/]+$")
 	whitelistedChars := delegationRegexp.MatchString(role)
 
 	// Limit size of full role string to 255 chars for db column size limit
