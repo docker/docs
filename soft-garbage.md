@@ -23,11 +23,16 @@ layers. Tags, which are labels applied to images, point to manifests. You can
 reference an image by tag or directly by the hash of the manifest. If you
 purposefully delete one of those manifests and the image layers referenced by
 that manifest become orphaned, then they can be removed during the garbage
-collection job. This occurs if they are not referenced by other manifests.
+collection job. In the following diagram, _both_ manifests point to the first layer, #2543d8.
 
-Since many developers may use a base image for future images, it is possible that there will be image layers that will never be deleted. There might
-be other manifests that point to layers of the base image which could still be
-used by others.
+![Garbage collection illustration</soft-garbage/>](assets/gc1.png)
+
+Since many developers may use a base image for future images, it is possible
+that there will be image layers that will never be deleted. There might be other
+manifests that point to layers of the base image which could still be used by
+others as seen in the second diagram.
+
+![Garbage collection illustration</soft-garbage/>](assets/gc3.png)
 
 ## Prerequisites
 You need an image to remove.
@@ -98,9 +103,9 @@ deleted. Docker recommends performing garbage collection weekly during off time.
 While garbage collection is occurring, anyone who tries to push an image will
 get an error message.
 
-## See your garbage collection results
+## View your garbage collection results
 
-View your results by running the following example in a Trusted Registry CLI:
+See your results by running the following example in a Trusted Registry CLI:
 
 ```
 curl -u <username>:<password> https://<DTR
