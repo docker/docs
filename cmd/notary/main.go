@@ -120,7 +120,13 @@ func setupCommand(notaryCmd *cobra.Command) {
 		retriever:    retriever,
 	}
 
+	cmdDelegationGenerator := &delegationCommander{
+		configGetter: parseConfig,
+		retriever:    retriever,
+	}
+
 	notaryCmd.AddCommand(cmdKeyGenerator.GetCommand())
+	notaryCmd.AddCommand(cmdDelegationGenerator.GetCommand())
 	notaryCmd.AddCommand(cmdCert)
 	notaryCmd.AddCommand(cmdTufInit)
 	notaryCmd.AddCommand(cmdTufList)
