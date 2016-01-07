@@ -2401,3 +2401,32 @@ func TestRemoveDelegationErrorWritingChanges(t *testing.T) {
 		return repo.RemoveDelegation("targets/a")
 	})
 }
+
+// TestBootstrapClientBadURL checks that bootstrapClient correctly
+// returns an error when the URL is valid but does not point to
+// a TUF server
+func TestBootstrapClientBadURL(t *testing.T) {
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+	repo, err := NewNotaryRepository(
+		tempBaseDir,
+		"testGun",
+		"http://localhost:9998",
+		http.DefaultTransport,
+		passphraseRetriever,
+	)
+	assert.NoError(t, err, "error creating repo: %s", err)
+
+	c, err := repo.bootstrapClient(false)
+	assert.Nil(t, c)
+	assert.Error(t, err)
+
+	c, err2 := repo.bootstrapClient(true)
+	assert.Nil(t, c)
+	assert.Error(t, err2)
+
+	// same error should be returned because we don't have local data
+	// and are requesting remote root regardless of checkInitialized
+	// value
+	assert.EqualError(t, err, err2.Error())
+}
