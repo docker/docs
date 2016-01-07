@@ -15,6 +15,7 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/Sirupsen/logrus"
 	ctxu "github.com/docker/distribution/context"
@@ -142,6 +143,223 @@ func TestClientTufInteraction(t *testing.T) {
 	output, err = runCommand(t, tempDir, "-s", server.URL, "list", "gun")
 	assert.NoError(t, err)
 	assert.False(t, strings.Contains(string(output), target))
+}
+
+// Initialize repo and test delegations commands by adding, listing, and removing delegations
+func TestClientDelegationsInteraction(t *testing.T) {
+	setUp(t)
+
+	tempDir := tempDirWithConfig(t, "{}")
+	defer os.RemoveAll(tempDir)
+
+	server := setupServer()
+	defer server.Close()
+
+	// Setup certificate
+	tempFile, err := ioutil.TempFile("/tmp", "pemfile")
+	assert.NoError(t, err)
+
+	privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
+	startTime := time.Now()
+	endTime := startTime.AddDate(10, 0, 0)
+	cert, err := cryptoservice.GenerateCertificate(privKey, "gun", startTime, endTime)
+	assert.NoError(t, err)
+
+	_, err = tempFile.Write(trustmanager.CertToPEM(cert))
+	assert.NoError(t, err)
+	tempFile.Close()
+	defer os.Remove(tempFile.Name())
+
+	rawPubBytes, _ := ioutil.ReadFile(tempFile.Name())
+	parsedPubKey, _ := trustmanager.ParsePEMPublicKey(rawPubBytes)
+	keyID := parsedPubKey.ID()
+
+	var output string
+
+	// -- tests --
+
+	// init repo
+	_, err = runCommand(t, tempDir, "-s", server.URL, "init", "gun")
+	assert.NoError(t, err)
+
+	// publish repo
+	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
+	assert.NoError(t, err)
+
+	// list delegations - none yet
+	output, err = runCommand(t, tempDir, "-s", server.URL, "delegation", "list", "gun")
+	assert.NoError(t, err)
+	assert.Contains(t, output, "No such roles published in this repository.")
+
+	// add new valid delegation with single new cert
+	output, err = runCommand(t, tempDir, "delegation", "add", "gun", "targets/delegation", tempFile.Name())
+	assert.NoError(t, err)
+	assert.Contains(t, output, "Addition of delegation role")
+
+	// check status - see delegation
+	output, err = runCommand(t, tempDir, "status", "gun")
+	assert.NoError(t, err)
+	assert.Contains(t, output, "Unpublished changes for gun")
+
+	// list delegations - none yet because still unpublished
+	output, err = runCommand(t, tempDir, "-s", server.URL, "delegation", "list", "gun")
+	assert.NoError(t, err)
+	assert.Contains(t, output, "No such roles published in this repository.")
+
+	// publish repo
+	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
+	assert.NoError(t, err)
+
+	// check status - no changelist
+	output, err = runCommand(t, tempDir, "status", "gun")
+	assert.NoError(t, err)
+	assert.Contains(t, output, "No unpublished changes for gun")
+
+	// list delegations - we should see our added delegation
+	output, err = runCommand(t, tempDir, "-s", server.URL, "delegation", "list", "gun")
+	assert.NoError(t, err)
+	assert.Contains(t, output, "targets/delegation")
+
+	// Setup another certificate
+	tempFile2, err := ioutil.TempFile("/tmp", "pemfile2")
+	assert.NoError(t, err)
+
+	privKey, err = trustmanager.GenerateECDSAKey(rand.Reader)
+	startTime = time.Now()
+	endTime = startTime.AddDate(10, 0, 0)
+	cert, err = cryptoservice.GenerateCertificate(privKey, "gun", startTime, endTime)
+	assert.NoError(t, err)
+
+	_, err = tempFile2.Write(trustmanager.CertToPEM(cert))
+	assert.NoError(t, err)
+	assert.NoError(t, err)
+	tempFile2.Close()
+	defer os.Remove(tempFile2.Name())
+
+	rawPubBytes2, _ := ioutil.ReadFile(tempFile2.Name())
+	parsedPubKey2, _ := trustmanager.ParsePEMPublicKey(rawPubBytes2)
+	keyID2 := parsedPubKey2.ID()
+
+	// add to the delegation by specifying the same role, this time add a path
+	output, err = runCommand(t, tempDir, "delegation", "add", "gun", "targets/delegation", tempFile2.Name(), "--paths", "path")
+	assert.NoError(t, err)
+	assert.Contains(t, output, "Addition of delegation role")
+
+	// publish repo
+	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
+	assert.NoError(t, err)
+
+	// list delegations - we should see two keys
+	output, err = runCommand(t, tempDir, "-s", server.URL, "delegation", "list", "gun")
+	assert.NoError(t, err)
+	assert.Contains(t, output, ",")
+	assert.Contains(t, output, "path")
+
+	// remove the delegation's first key
+	output, err = runCommand(t, tempDir, "delegation", "remove", "gun", "targets/delegation", keyID)
+	assert.NoError(t, err)
+	assert.Contains(t, output, "Removal of delegation role")
+
+	// publish repo
+	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
+	assert.NoError(t, err)
+
+	// list delegations - we should see the delegation but with only the second key
+	output, err = runCommand(t, tempDir, "-s", server.URL, "delegation", "list", "gun")
+	assert.NoError(t, err)
+	assert.NotContains(t, output, ",")
+
+	// remove the delegation's second key
+	output, err = runCommand(t, tempDir, "delegation", "remove", "gun", "targets/delegation", keyID2)
+	assert.NoError(t, err)
+	assert.Contains(t, output, "Removal of delegation role")
+
+	// publish repo
+	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
+	assert.NoError(t, err)
+
+	// list delegations - we should see no delegations
+	output, err = runCommand(t, tempDir, "-s", server.URL, "delegation", "list", "gun")
+	assert.NoError(t, err)
+	assert.Contains(t, output, "No such roles published in this repository.")
+
+	// add delegation with multiple certs and multiple paths
+	output, err = runCommand(t, tempDir, "delegation", "add", "gun", "targets/delegation", tempFile.Name(), tempFile2.Name(), "--paths", "path1,path2")
+	assert.NoError(t, err)
+	assert.Contains(t, output, "Addition of delegation role")
+
+	// publish repo
+	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
+	assert.NoError(t, err)
+
+	// list delegations - we should see two keys
+	output, err = runCommand(t, tempDir, "-s", server.URL, "delegation", "list", "gun")
+	assert.NoError(t, err)
+	assert.Contains(t, output, ",")
+	assert.Contains(t, output, "path1,path2")
+
+	// add delegation with multiple certs and multiple paths
+	output, err = runCommand(t, tempDir, "delegation", "add", "gun", "targets/delegation", "--paths", "path3")
+	assert.NoError(t, err)
+	assert.Contains(t, output, "Addition of delegation role")
+
+	// publish repo
+	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
+	assert.NoError(t, err)
+
+	// list delegations - we should see two keys
+	output, err = runCommand(t, tempDir, "-s", server.URL, "delegation", "list", "gun")
+	assert.NoError(t, err)
+	assert.Contains(t, output, ",")
+	assert.Contains(t, output, "path1,path2,path3")
+
+	// just remove two paths from this delegation
+	output, err = runCommand(t, tempDir, "delegation", "remove", "gun", "targets/delegation", "--paths", "path2,path3")
+	assert.NoError(t, err)
+	assert.Contains(t, output, "Removal of delegation role")
+
+	// publish repo
+	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
+	assert.NoError(t, err)
+
+	// list delegations - we should see the same two keys, and only path1
+	output, err = runCommand(t, tempDir, "-s", server.URL, "delegation", "list", "gun")
+	assert.NoError(t, err)
+	assert.Contains(t, output, ",")
+	assert.Contains(t, output, "path1")
+	assert.NotContains(t, output, "path2")
+	assert.NotContains(t, output, "path3")
+
+	// remove the remaining path, should not remove the delegation entirely
+	output, err = runCommand(t, tempDir, "delegation", "remove", "gun", "targets/delegation", "--paths", "path1")
+	assert.NoError(t, err)
+	assert.Contains(t, output, "Removal of delegation role")
+
+	// publish repo
+	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
+	assert.NoError(t, err)
+
+	// list delegations - we should see the same two keys, and no paths
+	output, err = runCommand(t, tempDir, "-s", server.URL, "delegation", "list", "gun")
+	assert.NoError(t, err)
+	assert.Contains(t, output, ",")
+	assert.NotContains(t, output, "path1")
+	assert.NotContains(t, output, "path2")
+	assert.NotContains(t, output, "path3")
+
+	// remove by force to delete the delegation entirely
+	output, err = runCommand(t, tempDir, "delegation", "remove", "gun", "targets/delegation", "-y")
+	assert.NoError(t, err)
+	assert.Contains(t, output, "Removal of delegation role")
+
+	// publish repo
+	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
+	assert.NoError(t, err)
+
+	// list delegations - we should see no delegations
+	output, err = runCommand(t, tempDir, "-s", server.URL, "delegation", "list", "gun")
+	assert.NoError(t, err)
+	assert.Contains(t, output, "No such roles published in this repository.")
 }
 
 // Splits a string into lines, and returns any lines that are not empty (

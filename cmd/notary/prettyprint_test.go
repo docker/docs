@@ -214,6 +214,58 @@ func generateCertificate(t *testing.T, gun string, expireInHours int64) *x509.Ce
 	return cert
 }
 
+// --- tests for pretty printing roles ---
+
+// If there are no roles, no table is printed, only a line saying that there
+// are no roles.
+func TestPrettyPrintZeroRoles(t *testing.T) {
+	var b bytes.Buffer
+	prettyPrintRoles([]*data.Role{}, &b)
+	text, err := ioutil.ReadAll(&b)
+	assert.NoError(t, err)
+
+	lines := strings.Split(strings.TrimSpace(string(text)), "\n")
+	assert.Len(t, lines, 1)
+	assert.Equal(t, "No such roles published in this repository.", lines[0])
+}
+
+// Roles are sorted by name, and the name, paths, and KeyIDs are printed.
+func TestPrettyPrintSortedRoles(t *testing.T) {
+	var err error
+
+	unsorted := []*data.Role{
+		{Name: "targets/zebra", Paths: []string{"stripes", "black", "white"}, RootRole: data.RootRole{KeyIDs: []string{"101"}, Threshold: 1}},
+		{Name: "targets/aardvark/unicorn/pony", Paths: []string{"rainbows"}, RootRole: data.RootRole{KeyIDs: []string{"135"}, Threshold: 1}},
+		{Name: "targets/bee", Paths: []string{"honey"}, RootRole: data.RootRole{KeyIDs: []string{"246"}, Threshold: 1}},
+		{Name: "targets/bee/wasp", Paths: []string{"honey/sting"}, RootRole: data.RootRole{KeyIDs: []string{"246", "468"}, Threshold: 1}},
+	}
+
+	var b bytes.Buffer
+	prettyPrintRoles(unsorted, &b)
+	text, err := ioutil.ReadAll(&b)
+	assert.NoError(t, err)
+
+	expected := [][]string{
+		{"targets/aardvark/unicorn/pony", "rainbows", "135", "1"},
+		{"targets/bee", "honey", "246", "1"},
+		{"targets/bee/wasp", "honey/sting", "246,468", "1"},
+		{"targets/zebra", "stripes,black,white", "101", "1"},
+	}
+
+	lines := strings.Split(strings.TrimSpace(string(text)), "\n")
+	assert.Len(t, lines, len(expected)+2)
+
+	// starts with headers
+	assert.True(t, reflect.DeepEqual(strings.Fields(lines[0]), strings.Fields(
+		"ROLE     PATHS      KEY IDS   THRESHOLD")))
+	assert.Equal(t, "----", lines[1][:4])
+
+	for i, line := range lines[2:] {
+		splitted := strings.Fields(line)
+		assert.Equal(t, expected[i], splitted)
+	}
+}
+
 // If there are no certs in the cert store store, a message that there are no
 // certs should be displayed.
 func TestPrettyPrintZeroCerts(t *testing.T) {
