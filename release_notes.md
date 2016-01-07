@@ -8,46 +8,52 @@ weight="-99"
 
 # UCP Release Notes
 
-The latest release is 0.6.  Consult with your Docker sales engineer for the
+The latest release is 0.7.  Consult with your Docker sales engineer for the
 release notes of earlier versions.
 
-## Version 0.6
+## Version 0.7
 
 The following notes apply to this release:
 
-## Licensing functionality enabled
+### Public images on Docker Hub.
 
-This release enables UPC licensing functionality. UCP starts in "unlicensed" mode. This mode does not limit any functionality. However, when you start UCP, an informational banner appears on the application noting it is unlicensed.
+The UCP images now live within the `docker` organization on Docker Hub, and
+are publicly accessible.
 
-For the purposes of this beta, you can use an existing DTR license and remove the banner by doing the following:
+```bash
+docker run --rm -it \
+     --name ucp \
+     -v /var/run/docker.sock:/var/run/docker.sock \
+     docker/ucp \
+     install --help
+```
 
-1. Install UCP.
+### Upgrade
 
-2. Log into the controller.
+Prior versions 0.5-0.6 of the beta can now be upgraded using the UCP tool.
+Run the following command to review usage information.
 
-3. Go to the **Settings** page.
+```bash
+docker run --rm -it \
+    --name ucp \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    docker/ucp \
+    upgrade --help
+```
 
-    ![License](../images/license.png)
+### UI
 
-4. Upload a valid DTR license.
+- New Volumes UI
+- Paged views for nodes, containers, images, networks, volumes, and accounts to better handle large
+  scale deployments.
+- Support for browser based client cert login.
+- Cluster Controllers listed on Nodes screen
+- Ability to disable anonymous usage reporting
 
-    After a successful upload, the banner disappears.
 
-## UI
+### Misc
 
-- Sidebar is now permanently visible and is responsive for smaller screens
-- Fixed issue with hidden item count on Applications View
-- Dashboard chart enhancements
-- Disable stats and exec on stopped container
-- UI Link to UCP documentation
-- Tags displayed on image removal dialog
-- Enhanced breadcrumb tracking
-- Licensing configuration
-
-## Images
-
-- CFSSL updated to 1.1.0
-
-## Misc
-
-- Banner is now shown reporting high availability status
+- Fix restarting daemon or rebooting breaks cfssl and client bundle generation
+- Controller port can be changed at install time (default 443)
+- Fix TLS cipher support for direct admin access to engine proxy
+- Fix event streaming and logs with follow
