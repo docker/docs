@@ -2,10 +2,10 @@ package snapshot
 
 import (
 	"bytes"
-	"encoding/json"
 	"testing"
 	"time"
 
+	"github.com/jfrazelle/go/canonical/json"
 	"github.com/stretchr/testify/assert"
 
 	"github.com/docker/notary/server/storage"
@@ -140,7 +140,7 @@ func TestGetSnapshotCurrValid(t *testing.T) {
 			},
 		},
 	}
-	snapJSON, _ := json.Marshal(snapshot)
+	snapJSON, _ := json.MarshalCanonical(snapshot)
 
 	// test when db is missing the role data
 	store.UpdateCurrent("gun", storage.MetaUpdate{Role: "snapshot", Version: 0, Data: snapJSON})
@@ -165,7 +165,7 @@ func TestGetSnapshotCurrExpired(t *testing.T) {
 	_, err := GetOrCreateSnapshotKey("gun", store, crypto, data.ED25519Key)
 
 	snapshot := &data.SignedSnapshot{}
-	snapJSON, _ := json.Marshal(snapshot)
+	snapJSON, _ := json.MarshalCanonical(snapshot)
 
 	store.UpdateCurrent("gun", storage.MetaUpdate{Role: "snapshot", Version: 0, Data: snapJSON})
 	_, err = GetOrCreateSnapshot("gun", store, crypto)
@@ -179,7 +179,7 @@ func TestGetSnapshotCurrCorrupt(t *testing.T) {
 	_, err := GetOrCreateSnapshotKey("gun", store, crypto, data.ED25519Key)
 
 	snapshot := &data.SignedSnapshot{}
-	snapJSON, _ := json.Marshal(snapshot)
+	snapJSON, _ := json.MarshalCanonical(snapshot)
 
 	store.UpdateCurrent("gun", storage.MetaUpdate{Role: "snapshot", Version: 0, Data: snapJSON[1:]})
 	_, err = GetOrCreateSnapshot("gun", store, crypto)

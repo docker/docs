@@ -2,17 +2,18 @@ package tuf
 
 import (
 	"crypto/sha256"
-	"encoding/json"
 	"io/ioutil"
 	"os"
 	"path"
 	"path/filepath"
 	"testing"
 
+	"github.com/jfrazelle/go/canonical/json"
+	"github.com/stretchr/testify/assert"
+
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/keys"
 	"github.com/docker/notary/tuf/signed"
-	"github.com/stretchr/testify/assert"
 )
 
 func initRepo(t *testing.T, cryptoService signed.CryptoService, keyDB *keys.KeyDB) *Repo {
@@ -112,13 +113,13 @@ func writeRepo(t *testing.T, dir string, repo *Repo) {
 	assert.NoError(t, err)
 	signedRoot, err := repo.SignRoot(data.DefaultExpires("root"))
 	assert.NoError(t, err)
-	rootJSON, _ := json.Marshal(signedRoot)
+	rootJSON, _ := json.MarshalCanonical(signedRoot)
 	ioutil.WriteFile(dir+"/root.json", rootJSON, 0755)
 
 	for r := range repo.Targets {
 		signedTargets, err := repo.SignTargets(r, data.DefaultExpires("targets"))
 		assert.NoError(t, err)
-		targetsJSON, _ := json.Marshal(signedTargets)
+		targetsJSON, _ := json.MarshalCanonical(signedTargets)
 		p := path.Join(dir, r+".json")
 		parentDir := filepath.Dir(p)
 		os.MkdirAll(parentDir, 0755)
@@ -127,12 +128,12 @@ func writeRepo(t *testing.T, dir string, repo *Repo) {
 
 	signedSnapshot, err := repo.SignSnapshot(data.DefaultExpires("snapshot"))
 	assert.NoError(t, err)
-	snapshotJSON, _ := json.Marshal(signedSnapshot)
+	snapshotJSON, _ := json.MarshalCanonical(signedSnapshot)
 	ioutil.WriteFile(dir+"/snapshot.json", snapshotJSON, 0755)
 
 	signedTimestamp, err := repo.SignTimestamp(data.DefaultExpires("timestamp"))
 	assert.NoError(t, err)
-	timestampJSON, _ := json.Marshal(signedTimestamp)
+	timestampJSON, _ := json.MarshalCanonical(signedTimestamp)
 	ioutil.WriteFile(dir+"/timestamp.json", timestampJSON, 0755)
 }
 

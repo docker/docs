@@ -1,17 +1,17 @@
 package testutils
 
 import (
-	"encoding/json"
 	"math/rand"
 	"time"
 
-	"github.com/docker/notary/tuf/data"
-	"github.com/docker/notary/tuf/utils"
 	fuzz "github.com/google/gofuzz"
+	"github.com/jfrazelle/go/canonical/json"
 
 	tuf "github.com/docker/notary/tuf"
+	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/keys"
 	"github.com/docker/notary/tuf/signed"
+	"github.com/docker/notary/tuf/utils"
 )
 
 // EmptyRepo creates an in memory key database, crypto service
@@ -83,19 +83,19 @@ func Sign(repo *tuf.Repo) (root, targets, snapshot, timestamp *data.Signed, err 
 
 // Serialize takes the Signed objects for the 4 top level roles and serializes them all to JSON
 func Serialize(sRoot, sTargets, sSnapshot, sTimestamp *data.Signed) (root, targets, snapshot, timestamp []byte, err error) {
-	root, err = json.Marshal(sRoot)
+	root, err = json.MarshalCanonical(sRoot)
 	if err != nil {
 		return nil, nil, nil, nil, err
 	}
-	targets, err = json.Marshal(sTargets)
+	targets, err = json.MarshalCanonical(sTargets)
 	if err != nil {
 		return nil, nil, nil, nil, err
 	}
-	snapshot, err = json.Marshal(sSnapshot)
+	snapshot, err = json.MarshalCanonical(sSnapshot)
 	if err != nil {
 		return nil, nil, nil, nil, err
 	}
-	timestamp, err = json.Marshal(sTimestamp)
+	timestamp, err = json.MarshalCanonical(sTimestamp)
 	if err != nil {
 		return nil, nil, nil, nil, err
 	}

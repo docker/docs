@@ -77,7 +77,7 @@ func GetOrCreateTimestamp(gun string, store storage.MetaStore, cryptoService sig
 		logrus.Error("Failed to create a new timestamp")
 		return nil, err
 	}
-	out, err := json.Marshal(sgnd)
+	out, err := json.MarshalCanonical(sgnd)
 	if err != nil {
 		logrus.Error("Failed to marshal new timestamp")
 		return nil, err

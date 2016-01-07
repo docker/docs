@@ -27,12 +27,12 @@ type Snapshot struct {
 // and targets objects
 func NewSnapshot(root *Signed, targets *Signed) (*SignedSnapshot, error) {
 	logrus.Debug("generating new snapshot...")
-	targetsJSON, err := json.Marshal(targets)
+	targetsJSON, err := json.MarshalCanonical(targets)
 	if err != nil {
 		logrus.Debug("Error Marshalling Targets")
 		return nil, err
 	}
-	rootJSON, err := json.Marshal(root)
+	rootJSON, err := json.MarshalCanonical(root)
 	if err != nil {
 		logrus.Debug("Error Marshalling Root")
 		return nil, err
