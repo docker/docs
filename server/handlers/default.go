@@ -119,7 +119,7 @@ func getHandler(ctx context.Context, w http.ResponseWriter, r *http.Request, var
 
 	logger := ctxu.GetLoggerWithFields(ctx, map[string]interface{}{"gun": gun, "tufRole": tufRole})
 
-	switch data.CanonicalRole(tufRole) {
+	switch tufRole {
 	case data.CanonicalTimestampRole:
 		return getTimestamp(ctx, w, logger, store, gun)
 	case data.CanonicalSnapshotRole:

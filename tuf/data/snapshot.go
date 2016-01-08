@@ -52,8 +52,8 @@ func NewSnapshot(root *Signed, targets *Signed) (*SignedSnapshot, error) {
 			Version: 0,
 			Expires: DefaultExpires("snapshot"),
 			Meta: Files{
-				ValidRoles["root"]:    rootMeta,
-				ValidRoles["targets"]: targetsMeta,
+				CanonicalRootRole:    rootMeta,
+				CanonicalTargetsRole: targetsMeta,
 			},
 		},
 	}, nil
