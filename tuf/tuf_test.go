@@ -910,7 +910,7 @@ func TestRemoveTargetsNoSigningKeys(t *testing.T) {
 
 // adding a key to a role marks root as dirty as well as the role
 func TestAddBaseKeysToRoot(t *testing.T) {
-	for _, role := range data.ValidRoles {
+	for _, role := range data.BaseRoles {
 		ed25519 := signed.NewEd25519()
 		keyDB := keys.NewDB()
 		repo := initRepo(t, ed25519, keyDB)

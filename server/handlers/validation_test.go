@@ -455,7 +455,7 @@ func TestValidateRootInvalidTimestampThreshold(t *testing.T) {
 
 // If any role has a threshold < 1, validation fails
 func TestValidateRootInvalidZeroThreshold(t *testing.T) {
-	for _, role := range data.ValidRoles {
+	for _, role := range data.BaseRoles {
 		kdb, oldRepo, cs := testutils.EmptyRepo()
 		tsRole, ok := oldRepo.Root.Signed.Roles[role]
 		assert.True(t, ok)

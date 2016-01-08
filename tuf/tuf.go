@@ -307,7 +307,7 @@ func (tr *Repo) DeleteDelegation(role data.Role) error {
 	return nil
 }
 
-// InitRepo creates the base files for a repo. It inspects data.ValidRoles and
+// InitRepo creates the base files for a repo. It inspects data.BaseRoles and
 // data.ValidTypes to determine what the role names and filename should be. It
 // also relies on the keysDB having already been populated with the keys and
 // roles.
@@ -329,7 +329,7 @@ func (tr *Repo) InitRepo(consistent bool) error {
 func (tr *Repo) InitRoot(consistent bool) error {
 	rootRoles := make(map[string]*data.RootRole)
 	rootKeys := make(map[string]data.PublicKey)
-	for _, r := range data.ValidRoles {
+	for _, r := range data.BaseRoles {
 		role := tr.keysDB.GetRole(r)
 		if role == nil {
 			return data.ErrInvalidRole{Role: data.CanonicalRootRole, Reason: "root role not initialized in key database"}
