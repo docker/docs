@@ -14,8 +14,8 @@ func TestDeleteMeta(t *testing.T) {
 			Version: 0,
 			Expires: DefaultExpires("snapshot"),
 			Meta: Files{
-				ValidRoles["root"]:    FileMeta{},
-				ValidRoles["targets"]: FileMeta{},
+				CanonicalRootRole:    FileMeta{},
+				CanonicalTargetsRole: FileMeta{},
 			},
 		},
 	}

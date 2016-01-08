@@ -307,7 +307,7 @@ func (tr *Repo) DeleteDelegation(role data.Role) error {
 	return nil
 }
 
-// InitRepo creates the base files for a repo. It inspects data.ValidRoles and
+// InitRepo creates the base files for a repo. It inspects data.BaseRoles and
 // data.ValidTypes to determine what the role names and filename should be. It
 // also relies on the keysDB having already been populated with the keys and
 // roles.
@@ -329,7 +329,7 @@ func (tr *Repo) InitRepo(consistent bool) error {
 func (tr *Repo) InitRoot(consistent bool) error {
 	rootRoles := make(map[string]*data.RootRole)
 	rootKeys := make(map[string]data.PublicKey)
-	for _, r := range data.ValidRoles {
+	for _, r := range data.BaseRoles {
 		role := tr.keysDB.GetRole(r)
 		if role == nil {
 			return data.ErrInvalidRole{Role: data.CanonicalRootRole, Reason: "root role not initialized in key database"}
@@ -353,14 +353,14 @@ func (tr *Repo) InitRoot(consistent bool) error {
 // InitTargets initializes an empty targets, and returns the new empty target
 func (tr *Repo) InitTargets(role string) (*data.SignedTargets, error) {
 	r := data.Role{Name: role}
-	if !r.IsDelegation() && data.CanonicalRole(role) != data.CanonicalTargetsRole {
+	if !r.IsDelegation() && role != data.CanonicalTargetsRole {
 		return nil, data.ErrInvalidRole{
 			Role:   role,
 			Reason: fmt.Sprintf("role is not a valid targets role name: %s", role),
 		}
 	}
 	targets := data.NewTargets()
-	tr.Targets[data.RoleName(role)] = targets
+	tr.Targets[role] = targets
 	return targets, nil
 }
 
@@ -374,10 +374,10 @@ func (tr *Repo) InitSnapshot() error {
 		return err
 	}
 
-	if _, ok := tr.Targets[data.RoleName(data.CanonicalTargetsRole)]; !ok {
+	if _, ok := tr.Targets[data.CanonicalTargetsRole]; !ok {
 		return ErrNotLoaded{role: "targets"}
 	}
-	targets, err := tr.Targets[data.RoleName(data.CanonicalTargetsRole)].ToSigned()
+	targets, err := tr.Targets[data.CanonicalTargetsRole].ToSigned()
 	if err != nil {
 		return err
 	}
@@ -574,7 +574,7 @@ func (tr *Repo) AddTargets(role string, targets data.Files) (data.Files, error) 
 	for path, target := range targets {
 		pathDigest := sha256.Sum256([]byte(path))
 		pathHex := hex.EncodeToString(pathDigest[:])
-		if role == data.ValidRoles["targets"] || (r.CheckPaths(path) || r.CheckPrefixes(pathHex)) {
+		if role == data.CanonicalTargetsRole || (r.CheckPaths(path) || r.CheckPrefixes(pathHex)) {
 			t.Signed.Targets[path] = target
 		} else {
 			invalid[path] = target
@@ -640,7 +640,7 @@ func (tr *Repo) SignRoot(expires time.Time) (*data.Signed, error) {
 	logrus.Debug("signing root...")
 	tr.Root.Signed.Expires = expires
 	tr.Root.Signed.Version++
-	root := tr.keysDB.GetRole(data.ValidRoles["root"])
+	root := tr.keysDB.GetRole(data.CanonicalRootRole)
 	signed, err := tr.Root.ToSigned()
 	if err != nil {
 		return nil, err
@@ -708,7 +708,7 @@ func (tr *Repo) SignSnapshot(expires time.Time) (*data.Signed, error) {
 	if err != nil {
 		return nil, err
 	}
-	snapshot := tr.keysDB.GetRole(data.ValidRoles["snapshot"])
+	snapshot := tr.keysDB.GetRole(data.CanonicalSnapshotRole)
 	signed, err = tr.sign(signed, *snapshot)
 	if err != nil {
 		return nil, err
@@ -734,7 +734,7 @@ func (tr *Repo) SignTimestamp(expires time.Time) (*data.Signed, error) {
 	if err != nil {
 		return nil, err
 	}
-	timestamp := tr.keysDB.GetRole(data.ValidRoles["timestamp"])
+	timestamp := tr.keysDB.GetRole(data.CanonicalTimestampRole)
 	signed, err = tr.sign(signed, *timestamp)
 	if err != nil {
 		return nil, err
