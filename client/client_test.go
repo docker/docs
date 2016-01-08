@@ -430,7 +430,7 @@ func assertRepoHasExpectedCerts(t *testing.T, repo *NotaryRepository) {
 	// are valid
 	certManager, err := certs.NewManager(repo.baseDir)
 	assert.NoError(t, err)
-	certificates := certManager.TrustedCertificateStore().GetCertificates()
+	certificates := certManager.GetCertificates()
 	assert.Len(t, certificates, 1, "unexpected number of trusted certificates")
 
 	certID, err := trustmanager.FingerprintCert(certificates[0])

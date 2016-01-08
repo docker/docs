@@ -84,7 +84,7 @@ type NotaryRepository struct {
 	CryptoService signed.CryptoService
 	tufRepo       *tuf.Repo
 	roundTrip     http.RoundTripper
-	CertManager   *certs.Manager
+	CertManager   trustmanager.X509Store
 }
 
 // repositoryFromKeystores is a helper function for NewNotaryRepository that
@@ -197,7 +197,7 @@ func (r *NotaryRepository) Initialize(rootKeyID string, serverManagedRoles ...st
 	if err != nil {
 		return err
 	}
-	r.CertManager.AddTrustedCert(rootCert)
+	r.CertManager.AddCert(rootCert)
 
 	// The root key gets stored in the TUF metadata X509 encoded, linking
 	// the tuf root.json to our X509 PKI.
@@ -837,7 +837,7 @@ func (r *NotaryRepository) validateRoot(rootJSON []byte) (*data.SignedRoot, erro
 		return nil, err
 	}
 
-	err = r.CertManager.ValidateRoot(root, r.gun)
+	err = certs.ValidateRoot(r.CertManager, root, r.gun)
 	if err != nil {
 		return nil, err
 	}

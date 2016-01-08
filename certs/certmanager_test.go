@@ -134,12 +134,12 @@ func TestValidateRoot(t *testing.T) {
 
 	// This call to ValidateRoot will succeed since we are using a valid PEM
 	// encoded certificate, and have no other certificates for this CN
-	err = certManager.ValidateRoot(&testSignedRoot, "docker.com/notary")
+	err = ValidateRoot(certManager, &testSignedRoot, "docker.com/notary")
 	assert.NoError(t, err)
 
 	// This call to ValidateRoot will fail since we are passing in a dnsName that
 	// doesn't match the CN of the certificate.
-	err = certManager.ValidateRoot(&testSignedRoot, "diogomonica.com/notary")
+	err = ValidateRoot(certManager, &testSignedRoot, "diogomonica.com/notary")
 	if assert.Error(t, err, "An error was expected") {
 		assert.Equal(t, err, &ErrValidationFail{Reason: "unable to retrieve valid leaf certificates"})
 	}
@@ -154,7 +154,7 @@ func TestValidateRoot(t *testing.T) {
 	// Unmarshal our signedroot
 	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
 
-	err = certManager.ValidateRoot(&testSignedRoot, "docker.com/notary")
+	err = ValidateRoot(certManager, &testSignedRoot, "docker.com/notary")
 	assert.Error(t, err, "illegal base64 data at input byte")
 
 	//
@@ -167,7 +167,7 @@ func TestValidateRoot(t *testing.T) {
 	// Unmarshal our signedroot
 	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
 
-	err = certManager.ValidateRoot(&testSignedRoot, "docker.com/notary")
+	err = ValidateRoot(certManager, &testSignedRoot, "docker.com/notary")
 	if assert.Error(t, err, "An error was expected") {
 		assert.Equal(t, err, &ErrValidationFail{Reason: "unable to retrieve valid leaf certificates"})
 	}
@@ -183,7 +183,7 @@ func TestValidateRoot(t *testing.T) {
 	// Unmarshal our signedroot
 	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
 
-	err = certManager.ValidateRoot(&testSignedRoot, "docker.com/notary")
+	err = ValidateRoot(certManager, &testSignedRoot, "docker.com/notary")
 	if assert.Error(t, err, "An error was expected") {
 		assert.Equal(t, err, &ErrValidationFail{Reason: "unable to retrieve valid leaf certificates"})
 	}
@@ -202,7 +202,7 @@ func TestValidateRoot(t *testing.T) {
 	// Unmarshal our signedroot
 	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
 
-	err = certManager.ValidateRoot(&testSignedRoot, "secure.example.com")
+	err = ValidateRoot(certManager, &testSignedRoot, "secure.example.com")
 	if assert.Error(t, err, "An error was expected") {
 		assert.Equal(t, err, &ErrValidationFail{Reason: "failed to validate integrity of roots"})
 	}
@@ -221,7 +221,7 @@ func TestValidateSuccessfulRootRotation(t *testing.T) {
 // manager and certificates for two keys which have been added to the keystore.
 // Also returns the temporary directory so it can be cleaned up.
 func filestoreWithTwoCerts(t *testing.T, gun, keyAlg string) (
-	string, *Manager, *cryptoservice.CryptoService, []*x509.Certificate) {
+	string, trustmanager.X509Store, *cryptoservice.CryptoService, []*x509.Certificate) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
@@ -260,7 +260,7 @@ func testValidateSuccessfulRootRotation(t *testing.T, keyAlg, rootKeyType string
 	replRootCert := certificates[1]
 
 	// Add the old root cert part of trustedCertificates
-	certManager.AddTrustedCert(origRootCert)
+	certManager.AddCert(origRootCert)
 
 	// We need the PEM representation of the replacement key to put it into the TUF data
 	origRootPEMCert := trustmanager.CertToPEM(origRootCert)
@@ -291,11 +291,11 @@ func testValidateSuccessfulRootRotation(t *testing.T, keyAlg, rootKeyType string
 
 	// This call to ValidateRoot will succeed since we are using a valid PEM
 	// encoded certificate, and have no other certificates for this CN
-	err = certManager.ValidateRoot(signedTestRoot, gun)
+	err = ValidateRoot(certManager, signedTestRoot, gun)
 	assert.NoError(t, err)
 
 	// Finally, validate the only trusted certificate that exists is the new one
-	certificates = certManager.trustedCertificateStore.GetCertificates()
+	certificates = certManager.GetCertificates()
 	assert.Len(t, certificates, 1)
 	assert.Equal(t, certificates[0], replRootCert)
 }
@@ -320,7 +320,7 @@ func testValidateRootRotationMissingOrigSig(t *testing.T, keyAlg, rootKeyType st
 	replRootCert := certificates[1]
 
 	// Add the old root cert part of trustedCertificates
-	certManager.AddTrustedCert(origRootCert)
+	certManager.AddCert(origRootCert)
 
 	// We need the PEM representation of the replacement key to put it into the TUF data
 	replRootPEMCert := trustmanager.CertToPEM(replRootCert)
@@ -347,12 +347,12 @@ func testValidateRootRotationMissingOrigSig(t *testing.T, keyAlg, rootKeyType st
 
 	// This call to ValidateRoot will succeed since we are using a valid PEM
 	// encoded certificate, and have no other certificates for this CN
-	err = certManager.ValidateRoot(signedTestRoot, gun)
+	err = ValidateRoot(certManager, signedTestRoot, gun)
 	assert.Error(t, err, "insuficient signatures on root")
 
 	// Finally, validate the only trusted certificate that exists is still
 	// the old one
-	certificates = certManager.trustedCertificateStore.GetCertificates()
+	certificates = certManager.GetCertificates()
 	assert.Len(t, certificates, 1)
 	assert.Equal(t, certificates[0], origRootCert)
 }
@@ -377,7 +377,7 @@ func testValidateRootRotationMissingNewSig(t *testing.T, keyAlg, rootKeyType str
 	replRootCert := certificates[1]
 
 	// Add the old root cert part of trustedCertificates
-	certManager.AddTrustedCert(origRootCert)
+	certManager.AddCert(origRootCert)
 
 	// We need the PEM representation of the replacement key to put it into the TUF data
 	origRootPEMCert := trustmanager.CertToPEM(origRootCert)
@@ -406,12 +406,12 @@ func testValidateRootRotationMissingNewSig(t *testing.T, keyAlg, rootKeyType str
 
 	// This call to ValidateRoot will succeed since we are using a valid PEM
 	// encoded certificate, and have no other certificates for this CN
-	err = certManager.ValidateRoot(signedTestRoot, gun)
+	err = ValidateRoot(certManager, signedTestRoot, gun)
 	assert.Error(t, err, "insuficient signatures on root")
 
 	// Finally, validate the only trusted certificate that exists is still
 	// the old one
-	certificates = certManager.trustedCertificateStore.GetCertificates()
+	certificates = certManager.GetCertificates()
 	assert.Len(t, certificates, 1)
 	assert.Equal(t, certificates[0], origRootCert)
 }
