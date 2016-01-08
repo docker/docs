@@ -1,15 +1,15 @@
 package timestamp
 
 import (
+	"encoding/json"
 	"testing"
 	"time"
 
-	"github.com/jfrazelle/go/canonical/json"
+	"github.com/docker/notary/tuf/data"
+	"github.com/docker/notary/tuf/signed"
 	"github.com/stretchr/testify/assert"
 
 	"github.com/docker/notary/server/storage"
-	"github.com/docker/notary/tuf/data"
-	"github.com/docker/notary/tuf/signed"
 )
 
 func TestTimestampExpired(t *testing.T) {
@@ -53,7 +53,7 @@ func TestGetTimestamp(t *testing.T) {
 	crypto := signed.NewEd25519()
 
 	snapshot := &data.SignedSnapshot{}
-	snapJSON, _ := json.MarshalCanonical(snapshot)
+	snapJSON, _ := json.Marshal(snapshot)
 
 	store.UpdateCurrent("gun", storage.MetaUpdate{Role: "snapshot", Version: 0, Data: snapJSON})
 	// create a key to be used by GetTimestamp
@@ -70,7 +70,7 @@ func TestGetTimestampNewSnapshot(t *testing.T) {
 
 	snapshot := data.SignedSnapshot{}
 	snapshot.Signed.Version = 0
-	snapJSON, _ := json.MarshalCanonical(snapshot)
+	snapJSON, _ := json.Marshal(snapshot)
 
 	store.UpdateCurrent("gun", storage.MetaUpdate{Role: "snapshot", Version: 0, Data: snapJSON})
 	// create a key to be used by GetTimestamp
@@ -82,7 +82,7 @@ func TestGetTimestampNewSnapshot(t *testing.T) {
 
 	snapshot = data.SignedSnapshot{}
 	snapshot.Signed.Version = 1
-	snapJSON, _ = json.MarshalCanonical(snapshot)
+	snapJSON, _ = json.Marshal(snapshot)
 
 	store.UpdateCurrent("gun", storage.MetaUpdate{Role: "snapshot", Version: 1, Data: snapJSON})
 

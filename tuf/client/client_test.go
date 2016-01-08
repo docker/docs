@@ -2,20 +2,20 @@ package client
 
 import (
 	"crypto/sha256"
+	"encoding/json"
 	"strconv"
 	"testing"
 	"time"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/jfrazelle/go/canonical/json"
+	tuf "github.com/docker/notary/tuf"
+	"github.com/docker/notary/tuf/testutils"
 	"github.com/stretchr/testify/assert"
 
-	tuf "github.com/docker/notary/tuf"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/keys"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/store"
-	"github.com/docker/notary/tuf/testutils"
 )
 
 func TestRotation(t *testing.T) {
@@ -204,7 +204,7 @@ func TestCheckRootExpired(t *testing.T) {
 
 	signedRoot, err := root.ToSigned()
 	assert.NoError(t, err)
-	rootJSON, err := json.MarshalCanonical(signedRoot)
+	rootJSON, err := json.Marshal(signedRoot)
 	assert.NoError(t, err)
 
 	rootHash := sha256.Sum256(rootJSON)
@@ -238,7 +238,7 @@ func TestChecksumMismatch(t *testing.T) {
 	client := NewClient(repo, remoteStorage, nil, localStorage)
 
 	sampleTargets := data.NewTargets()
-	orig, err := json.MarshalCanonical(sampleTargets)
+	orig, err := json.Marshal(sampleTargets)
 	origSha256 := sha256.Sum256(orig)
 	orig[0] = '}' // corrupt data, should be a {
 	assert.NoError(t, err)
@@ -256,7 +256,7 @@ func TestChecksumMatch(t *testing.T) {
 	client := NewClient(repo, remoteStorage, nil, localStorage)
 
 	sampleTargets := data.NewTargets()
-	orig, err := json.MarshalCanonical(sampleTargets)
+	orig, err := json.Marshal(sampleTargets)
 	origSha256 := sha256.Sum256(orig)
 	assert.NoError(t, err)
 
@@ -273,7 +273,7 @@ func TestSizeMismatchLong(t *testing.T) {
 	client := NewClient(repo, remoteStorage, nil, localStorage)
 
 	sampleTargets := data.NewTargets()
-	orig, err := json.MarshalCanonical(sampleTargets)
+	orig, err := json.Marshal(sampleTargets)
 	origSha256 := sha256.Sum256(orig)
 	assert.NoError(t, err)
 	l := int64(len(orig))
@@ -296,7 +296,7 @@ func TestSizeMismatchShort(t *testing.T) {
 	client := NewClient(repo, remoteStorage, nil, localStorage)
 
 	sampleTargets := data.NewTargets()
-	orig, err := json.MarshalCanonical(sampleTargets)
+	orig, err := json.Marshal(sampleTargets)
 	origSha256 := sha256.Sum256(orig)
 	assert.NoError(t, err)
 	l := int64(len(orig))
@@ -319,7 +319,7 @@ func TestDownloadTargetsHappy(t *testing.T) {
 
 	signedOrig, err := repo.SignTargets("targets", data.DefaultExpires("targets"))
 	assert.NoError(t, err)
-	orig, err := json.MarshalCanonical(signedOrig)
+	orig, err := json.Marshal(signedOrig)
 	assert.NoError(t, err)
 	err = remoteStorage.SetMeta("targets", orig)
 	assert.NoError(t, err)
@@ -369,7 +369,7 @@ func TestDownloadTargetsDeepHappy(t *testing.T) {
 		// serialize and store role
 		signedOrig, err := repo.SignTargets(r, data.DefaultExpires("targets"))
 		assert.NoError(t, err)
-		orig, err := json.MarshalCanonical(signedOrig)
+		orig, err := json.Marshal(signedOrig)
 		assert.NoError(t, err)
 		err = remoteStorage.SetMeta(r, orig)
 		assert.NoError(t, err)
@@ -378,7 +378,7 @@ func TestDownloadTargetsDeepHappy(t *testing.T) {
 	// serialize and store targets after adding all delegations
 	signedOrig, err := repo.SignTargets("targets", data.DefaultExpires("targets"))
 	assert.NoError(t, err)
-	orig, err := json.MarshalCanonical(signedOrig)
+	orig, err := json.Marshal(signedOrig)
 	assert.NoError(t, err)
 	err = remoteStorage.SetMeta("targets", orig)
 	assert.NoError(t, err)
@@ -414,7 +414,7 @@ func TestDownloadTargetChecksumMismatch(t *testing.T) {
 	// create and "upload" sample targets
 	signedOrig, err := repo.SignTargets("targets", data.DefaultExpires("targets"))
 	assert.NoError(t, err)
-	orig, err := json.MarshalCanonical(signedOrig)
+	orig, err := json.Marshal(signedOrig)
 	assert.NoError(t, err)
 	origSha256 := sha256.Sum256(orig)
 	orig[0] = '}' // corrupt data, should be a {
@@ -454,7 +454,7 @@ func TestDownloadTargetsNoChecksum(t *testing.T) {
 	// create and "upload" sample targets
 	signedOrig, err := repo.SignTargets("targets", data.DefaultExpires("targets"))
 	assert.NoError(t, err)
-	orig, err := json.MarshalCanonical(signedOrig)
+	orig, err := json.Marshal(signedOrig)
 	assert.NoError(t, err)
 	err = remoteStorage.SetMeta("targets", orig)
 	assert.NoError(t, err)
@@ -476,7 +476,7 @@ func TestDownloadTargetsNoSnapshot(t *testing.T) {
 	// create and "upload" sample targets
 	signedOrig, err := repo.SignTargets("targets", data.DefaultExpires("targets"))
 	assert.NoError(t, err)
-	orig, err := json.MarshalCanonical(signedOrig)
+	orig, err := json.Marshal(signedOrig)
 	assert.NoError(t, err)
 	err = remoteStorage.SetMeta("targets", orig)
 	assert.NoError(t, err)
@@ -496,7 +496,7 @@ func TestBootstrapDownloadRootHappy(t *testing.T) {
 	// create and "upload" sample root
 	signedOrig, err := repo.SignRoot(data.DefaultExpires("root"))
 	assert.NoError(t, err)
-	orig, err := json.MarshalCanonical(signedOrig)
+	orig, err := json.Marshal(signedOrig)
 	assert.NoError(t, err)
 	err = remoteStorage.SetMeta("root", orig)
 	assert.NoError(t, err)
@@ -517,7 +517,7 @@ func TestUpdateDownloadRootHappy(t *testing.T) {
 	// create and "upload" sample root, snapshot, and timestamp
 	signedOrig, err := repo.SignRoot(data.DefaultExpires("root"))
 	assert.NoError(t, err)
-	orig, err := json.MarshalCanonical(signedOrig)
+	orig, err := json.Marshal(signedOrig)
 	assert.NoError(t, err)
 	err = remoteStorage.SetMeta("root", orig)
 	assert.NoError(t, err)
@@ -542,7 +542,7 @@ func TestUpdateDownloadRootBadChecksum(t *testing.T) {
 	// create and "upload" sample root, snapshot, and timestamp
 	signedOrig, err := repo.SignRoot(data.DefaultExpires("root"))
 	assert.NoError(t, err)
-	orig, err := json.MarshalCanonical(signedOrig)
+	orig, err := json.Marshal(signedOrig)
 	assert.NoError(t, err)
 	err = remoteStorage.SetMeta("root", orig)
 	assert.NoError(t, err)
@@ -562,7 +562,7 @@ func TestDownloadTimestampHappy(t *testing.T) {
 	// create and "upload" sample timestamp
 	signedOrig, err := repo.SignTimestamp(data.DefaultExpires("timestamp"))
 	assert.NoError(t, err)
-	orig, err := json.MarshalCanonical(signedOrig)
+	orig, err := json.Marshal(signedOrig)
 	assert.NoError(t, err)
 	err = remoteStorage.SetMeta("timestamp", orig)
 	assert.NoError(t, err)
@@ -580,14 +580,14 @@ func TestDownloadSnapshotHappy(t *testing.T) {
 	// create and "upload" sample snapshot and timestamp
 	signedOrig, err := repo.SignSnapshot(data.DefaultExpires("snapshot"))
 	assert.NoError(t, err)
-	orig, err := json.MarshalCanonical(signedOrig)
+	orig, err := json.Marshal(signedOrig)
 	assert.NoError(t, err)
 	err = remoteStorage.SetMeta("snapshot", orig)
 	assert.NoError(t, err)
 
 	signedOrig, err = repo.SignTimestamp(data.DefaultExpires("timestamp"))
 	assert.NoError(t, err)
-	orig, err = json.MarshalCanonical(signedOrig)
+	orig, err = json.Marshal(signedOrig)
 	assert.NoError(t, err)
 	err = remoteStorage.SetMeta("timestamp", orig)
 	assert.NoError(t, err)
@@ -607,7 +607,7 @@ func TestDownloadSnapshotNoTimestamp(t *testing.T) {
 	// create and "upload" sample snapshot and timestamp
 	signedOrig, err := repo.SignSnapshot(data.DefaultExpires("snapshot"))
 	assert.NoError(t, err)
-	orig, err := json.MarshalCanonical(signedOrig)
+	orig, err := json.Marshal(signedOrig)
 	assert.NoError(t, err)
 	err = remoteStorage.SetMeta("snapshot", orig)
 	assert.NoError(t, err)
@@ -627,7 +627,7 @@ func TestDownloadSnapshotNoChecksum(t *testing.T) {
 	// create and "upload" sample snapshot and timestamp
 	signedOrig, err := repo.SignSnapshot(data.DefaultExpires("snapshot"))
 	assert.NoError(t, err)
-	orig, err := json.MarshalCanonical(signedOrig)
+	orig, err := json.Marshal(signedOrig)
 	assert.NoError(t, err)
 	err = remoteStorage.SetMeta("snapshot", orig)
 	assert.NoError(t, err)
@@ -651,7 +651,7 @@ func TestDownloadSnapshotBadChecksum(t *testing.T) {
 	// create and "upload" sample snapshot and timestamp
 	signedOrig, err := repo.SignSnapshot(data.DefaultExpires("snapshot"))
 	assert.NoError(t, err)
-	orig, err := json.MarshalCanonical(signedOrig)
+	orig, err := json.Marshal(signedOrig)
 	assert.NoError(t, err)
 	err = remoteStorage.SetMeta("snapshot", orig)
 	assert.NoError(t, err)

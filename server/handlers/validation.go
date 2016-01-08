@@ -10,7 +10,6 @@ import (
 	"strings"
 
 	"github.com/Sirupsen/logrus"
-	cjson "github.com/jfrazelle/go/canonical/json"
 
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/tuf"
@@ -247,7 +246,7 @@ func generateSnapshot(gun string, kdb *keys.KeyDB, repo *tuf.Repo, store storage
 	if err != nil {
 		return nil, validation.ErrBadSnapshot{Msg: err.Error()}
 	}
-	sgndJSON, err := cjson.MarshalCanonical(sgnd)
+	sgndJSON, err := json.Marshal(sgnd)
 	if err != nil {
 		return nil, validation.ErrBadSnapshot{Msg: err.Error()}
 	}
