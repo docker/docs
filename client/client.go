@@ -13,6 +13,9 @@ import (
 	"time"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/jfrazelle/go/canonical/json"
+
+	"github.com/docker/notary"
 	"github.com/docker/notary/certs"
 	"github.com/docker/notary/client/changelist"
 	"github.com/docker/notary/cryptoservice"
@@ -84,7 +87,7 @@ type NotaryRepository struct {
 	CryptoService signed.CryptoService
 	tufRepo       *tuf.Repo
 	roundTrip     http.RoundTripper
-	CertManager   trustmanager.X509Store
+	CertStore     trustmanager.X509Store
 }
 
 // repositoryFromKeystores is a helper function for NewNotaryRepository that
@@ -93,7 +96,11 @@ type NotaryRepository struct {
 func repositoryFromKeystores(baseDir, gun, baseURL string, rt http.RoundTripper,
 	keyStores []trustmanager.KeyStore) (*NotaryRepository, error) {
 
-	certManager, err := certs.NewManager(baseDir)
+	certPath := filepath.Join(baseDir, notary.TrustedCertsDir)
+	certStore, err := trustmanager.NewX509FilteredFileStore(
+		certPath,
+		trustmanager.FilterCertsExpiredSha1,
+	)
 	if err != nil {
 		return nil, err
 	}
@@ -107,7 +114,7 @@ func repositoryFromKeystores(baseDir, gun, baseURL string, rt http.RoundTripper,
 		tufRepoPath:   filepath.Join(baseDir, tufDir, filepath.FromSlash(gun)),
 		CryptoService: cryptoService,
 		roundTrip:     rt,
-		CertManager:   certManager,
+		CertStore:     certStore,
 	}
 
 	fileStore, err := store.NewFilesystemStore(
@@ -197,7 +204,7 @@ func (r *NotaryRepository) Initialize(rootKeyID string, serverManagedRoles ...st
 	if err != nil {
 		return err
 	}
-	r.CertManager.AddCert(rootCert)
+	r.CertStore.AddCert(rootCert)
 
 	// The root key gets stored in the TUF metadata X509 encoded, linking
 	// the tuf root.json to our X509 PKI.
@@ -837,7 +844,7 @@ func (r *NotaryRepository) validateRoot(rootJSON []byte) (*data.SignedRoot, erro
 		return nil, err
 	}
 
-	err = certs.ValidateRoot(r.CertManager, root, r.gun)
+	err = certs.ValidateRoot(r.CertStore, root, r.gun)
 	if err != nil {
 		return nil, err
 	}

@@ -53,10 +53,9 @@ func certRemove(cmd *cobra.Command, args []string) {
 	parseConfig()
 
 	trustDir := mainViper.GetString("trust_dir")
-	trustPath := filepath.Join(trustDir, notary.TrustedCertsDir)
-	// Load all individual (non-CA) certificates that aren't expired and don't use SHA1
-	trustedCertificateStore, err := trustmanager.NewX509FilteredFileStore(
-		trustPath,
+	certPath := filepath.Join(trustDir, notary.TrustedCertsDir)
+	certStore, err := trustmanager.NewX509FilteredFileStore(
+		certPath,
 		trustmanager.FilterCertsExpiredSha1,
 	)
 	if err != nil {
@@ -73,14 +72,14 @@ func certRemove(cmd *cobra.Command, args []string) {
 			fatalf("Invalid certificate ID provided: %s", certID)
 		}
 		// Attempt to find this certificates
-		cert, err := trustedCertificateStore.GetCertificateByCertID(certID)
+		cert, err := certStore.GetCertificateByCertID(certID)
 		if err != nil {
 			fatalf("Unable to retrieve certificate with cert ID: %s", certID)
 		}
 		certsToRemove = append(certsToRemove, cert)
 	} else {
 		// We got the -g flag, it's a GUN
-		toRemove, err := trustedCertificateStore.GetCertificatesByCN(
+		toRemove, err := certStore.GetCertificatesByCN(
 			certRemoveGUN)
 		if err != nil {
 			fatalf("%v", err)
@@ -108,7 +107,7 @@ func certRemove(cmd *cobra.Command, args []string) {
 
 	// Remove all the certs
 	for _, cert := range certsToRemove {
-		err = trustedCertificateStore.RemoveCert(cert)
+		err = certStore.RemoveCert(cert)
 		if err != nil {
 			fatalf("Failed to remove root certificate for %s", cert.Subject.CommonName)
 		}
@@ -123,17 +122,17 @@ func certList(cmd *cobra.Command, args []string) {
 	parseConfig()
 
 	trustDir := mainViper.GetString("trust_dir")
-	trustPath := filepath.Join(trustDir, notary.TrustedCertsDir)
+	certPath := filepath.Join(trustDir, notary.TrustedCertsDir)
 	// Load all individual (non-CA) certificates that aren't expired and don't use SHA1
-	trustedCertificateStore, err := trustmanager.NewX509FilteredFileStore(
-		trustPath,
+	certStore, err := trustmanager.NewX509FilteredFileStore(
+		certPath,
 		trustmanager.FilterCertsExpiredSha1,
 	)
 	if err != nil {
 		fatalf("Failed to create a new truststore manager with directory: %s", trustDir)
 	}
 
-	trustedCerts := trustedCertificateStore.GetCertificates()
+	trustedCerts := certStore.GetCertificates()
 
 	cmd.Println("")
 	prettyPrintCerts(trustedCerts, cmd.Out())

@@ -36,7 +36,7 @@ func validateRootSuccessfully(t *testing.T, rootType string) {
 
 	// Initialize is supposed to have created new certificate for this repository
 	// Lets check for it and store it for later use
-	allCerts := repo.CertManager.GetCertificates()
+	allCerts := repo.CertStore.GetCertificates()
 	assert.Len(t, allCerts, 1)
 
 	fakeServerData(t, repo, mux, keys)
@@ -44,14 +44,14 @@ func validateRootSuccessfully(t *testing.T, rootType string) {
 	//
 	// Test TOFUS logic. We remove all certs and expect a new one to be added after ListTargets
 	//
-	err = repo.CertManager.RemoveAll()
+	err = repo.CertStore.RemoveAll()
 	assert.NoError(t, err)
-	assert.Len(t, repo.CertManager.GetCertificates(), 0)
+	assert.Len(t, repo.CertStore.GetCertificates(), 0)
 
 	// This list targets is expected to succeed and the certificate store to have the new certificate
 	_, err = repo.ListTargets(data.CanonicalTargetsRole)
 	assert.NoError(t, err)
-	assert.Len(t, repo.CertManager.GetCertificates(), 1)
+	assert.Len(t, repo.CertStore.GetCertificates(), 1)
 
 	//
 	// Test certificate mismatch logic. We remove all certs, add a different cert to the
@@ -59,12 +59,12 @@ func validateRootSuccessfully(t *testing.T, rootType string) {
 	//
 
 	// First, remove all certs
-	err = repo.CertManager.RemoveAll()
+	err = repo.CertStore.RemoveAll()
 	assert.NoError(t, err)
-	assert.Len(t, repo.CertManager.GetCertificates(), 0)
+	assert.Len(t, repo.CertStore.GetCertificates(), 0)
 
 	// Add a previously generated certificate with CN=docker.com/notary
-	err = repo.CertManager.AddCertFromFile(
+	err = repo.CertStore.AddCertFromFile(
 		"../fixtures/self-signed_docker.com-notary.crt")
 	assert.NoError(t, err)
 
