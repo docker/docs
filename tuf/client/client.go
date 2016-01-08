@@ -272,7 +272,7 @@ func (c *Client) downloadTimestamp() error {
 			if err == nil {
 				// couldn't retrieve data from server and don't have valid
 				// data in cache.
-				return store.ErrMetaNotFound{}
+				return store.ErrMetaNotFound{Resource: data.CanonicalTimestampRole}
 			}
 			return err
 		}
