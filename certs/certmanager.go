@@ -15,7 +15,6 @@ import (
 
 // Manager is an abstraction around trusted root CA stores
 type Manager struct {
-	trustedCAStore          trustmanager.X509Store
 	trustedCertificateStore trustmanager.X509Store
 }
 
@@ -50,15 +49,6 @@ func (err ErrRootRotationFail) Error() string {
 func NewManager(baseDir string) (*Manager, error) {
 	trustPath := filepath.Join(baseDir, trustDir)
 
-	// Load all CAs that aren't expired and don't use SHA1
-	trustedCAStore, err := trustmanager.NewX509FilteredFileStore(
-		trustPath,
-		trustmanager.FilterCertsExpiredSha1,
-	)
-	if err != nil {
-		return nil, err
-	}
-
 	// Load all individual (non-CA) certificates that aren't expired and don't use SHA1
 	trustedCertificateStore, err := trustmanager.NewX509FilteredFileStore(
 		trustPath,
@@ -69,7 +59,6 @@ func NewManager(baseDir string) (*Manager, error) {
 	}
 
 	return &Manager{
-		trustedCAStore:          trustedCAStore,
 		trustedCertificateStore: trustedCertificateStore,
 	}, nil
 }
@@ -80,20 +69,10 @@ func (m *Manager) TrustedCertificateStore() trustmanager.X509Store {
 	return m.trustedCertificateStore
 }
 
-// TrustedCAStore returns the CA store being managed by this Manager
-func (m *Manager) TrustedCAStore() trustmanager.X509Store {
-	return m.trustedCAStore
-}
-
 // AddTrustedCert adds a cert to the trusted certificate store (not the CA
 // store)
 func (m *Manager) AddTrustedCert(cert *x509.Certificate) {
 	m.trustedCertificateStore.AddCert(cert)
-}
-
-// AddTrustedCACert adds a cert to the trusted CA certificate store
-func (m *Manager) AddTrustedCACert(cert *x509.Certificate) {
-	m.trustedCAStore.AddCert(cert)
 }
 
 /*
