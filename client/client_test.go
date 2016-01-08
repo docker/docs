@@ -19,7 +19,10 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	ctxu "github.com/docker/distribution/context"
-	"github.com/docker/notary/certs"
+	"github.com/jfrazelle/go/canonical/json"
+	"golang.org/x/net/context"
+
+	"github.com/docker/notary"
 	"github.com/docker/notary/client/changelist"
 	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/passphrase"
@@ -428,9 +431,13 @@ func assertRepoHasExpectedCerts(t *testing.T, repo *NotaryRepository) {
 	// The repo should have a certificate manager and have created certs using
 	// it, so create a new manager, and check that the certs do exist and
 	// are valid
-	certManager, err := certs.NewManager(repo.baseDir)
+	trustPath := filepath.Join(repo.baseDir, notary.TrustedCertsDir)
+	certStore, err := trustmanager.NewX509FilteredFileStore(
+		trustPath,
+		trustmanager.FilterCertsExpiredSha1,
+	)
 	assert.NoError(t, err)
-	certificates := certManager.GetCertificates()
+	certificates := certStore.GetCertificates()
 	assert.Len(t, certificates, 1, "unexpected number of trusted certificates")
 
 	certID, err := trustmanager.FingerprintCert(certificates[0])

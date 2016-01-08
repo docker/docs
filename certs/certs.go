@@ -4,7 +4,6 @@ import (
 	"crypto/x509"
 	"errors"
 	"fmt"
-	"path/filepath"
 	"time"
 
 	"github.com/Sirupsen/logrus"
@@ -12,8 +11,6 @@ import (
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
 )
-
-const trustDir = "trusted_certificates"
 
 // ErrValidationFail is returned when there is no valid trusted certificates
 // being served inside of the roots.json
@@ -37,23 +34,6 @@ type ErrRootRotationFail struct {
 // by either failing to add the new root certificate, or delete the old ones
 func (err ErrRootRotationFail) Error() string {
 	return fmt.Sprintf("could not rotate trust to a new trusted root: %s", err.Reason)
-}
-
-// NewManager returns an initialized Manager, or an error
-// if it fails to load certificates
-func NewManager(baseDir string) (trustmanager.X509Store, error) {
-	trustPath := filepath.Join(baseDir, trustDir)
-
-	// Load all individual (non-CA) certificates that aren't expired and don't use SHA1
-	trustedCertificateStore, err := trustmanager.NewX509FilteredFileStore(
-		trustPath,
-		trustmanager.FilterCertsExpiredSha1,
-	)
-	if err != nil {
-		return nil, err
-	}
-
-	return trustedCertificateStore, nil
 }
 
 /*
