@@ -15,9 +15,9 @@ const (
 	CanonicalTimestampRole = "timestamp"
 )
 
-// ValidRoles is an easy to iterate list of the top level
+// BaseRoles is an easy to iterate list of the top level
 // roles.
-var ValidRoles = []string{
+var BaseRoles = []string{
 	CanonicalRootRole,
 	CanonicalTargetsRole,
 	CanonicalSnapshotRole,
@@ -59,7 +59,7 @@ func ValidRole(name string) bool {
 		return true
 	}
 
-	for _, v := range ValidRoles {
+	for _, v := range BaseRoles {
 		if name == v {
 			return true
 		}
