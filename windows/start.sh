@@ -26,22 +26,17 @@ VM_EXISTS_CODE=$?
 set -e
 
 if [ $VM_EXISTS_CODE -eq 1 ]; then
-  echo "Creating Machine $VM..."
   $DOCKER_MACHINE rm -f $VM &> /dev/null || :
   rm -rf ~/.docker/machine/machines/$VM
   $DOCKER_MACHINE create -d virtualbox $VM
-else
-  echo "Machine $VM already exists in VirtualBox."
 fi
 
 VM_STATUS=$($DOCKER_MACHINE status $VM 2>&1)
 if [ "$VM_STATUS" != "Running" ]; then
-  echo "Starting machine $VM..."
   $DOCKER_MACHINE start $VM
   yes | $DOCKER_MACHINE regenerate-certs $VM
 fi
 
-echo "Setting environment variables for machine $VM..."
 eval "$($DOCKER_MACHINE env --shell=bash $VM)"
 
 clear
