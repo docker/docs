@@ -66,7 +66,6 @@ Name: "Git"; Description: "Git for Windows"; Types: full custom; Flags: disablen
 Source: ".\docker-quickstart-terminal.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#dockerCli}"; DestDir: "{app}"; Flags: ignoreversion; Components: "Docker"
 Source: ".\start.sh"; DestDir: "{app}"; Flags: ignoreversion; Components: "Docker"
-Source: ".\delete.sh"; DestDir: "{app}"; Flags: ignoreversion; Components: "Docker"
 Source: "{#dockerMachineCli}"; DestDir: "{app}"; Flags: ignoreversion; Components: "DockerMachine"
 Source: "{#dockerComposeCli}"; DestDir: "{app}"; Flags: ignoreversion; Components: "DockerCompose"
 Source: "{#kitematic}\*"; DestDir: "{app}\kitematic"; Flags: ignoreversion recursesubdirs; Components: "Kitematic"
@@ -82,7 +81,7 @@ Name: "{userprograms}\Docker\Docker Quickstart Terminal"; WorkingDir: "{app}"; F
 Name: "{commondesktop}\Docker Quickstart Terminal"; WorkingDir: "{app}"; Filename: "{pf64}\Git\bin\bash.exe"; Parameters: "--login -i ""{app}\start.sh"""; IconFilename: "{app}/docker-quickstart-terminal.ico"; Tasks: desktopicon; Components: "Docker"
 
 [UninstallRun]
-Filename: "{app}\delete.sh"
+Filename: "{app}\docker-machine.exe"; Parameters: "rm -f default"
 
 [UninstallDelete]
 Type: filesandordirs; Name: "{localappdata}\..\Roaming\Kitematic"
