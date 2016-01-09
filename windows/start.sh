@@ -63,4 +63,5 @@ echo "For help getting started, check out the docs at https://docs.docker.com"
 echo
 cd
 
+alias docker="MSYS_NO_PATHCONV=1 docker"
 exec "$BASH" --login -i
