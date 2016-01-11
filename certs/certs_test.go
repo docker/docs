@@ -123,7 +123,7 @@ func TestValidateRoot(t *testing.T) {
 	defer os.RemoveAll(tempBaseDir)
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
-	// Create a Manager
+	// Create a X509Store
 	trustPath := filepath.Join(tempBaseDir, notary.TrustedCertsDir)
 	certStore, err := trustmanager.NewX509FilteredFileStore(
 		trustPath,
@@ -223,8 +223,8 @@ func TestValidateSuccessfulRootRotation(t *testing.T) {
 	}
 }
 
-// Generates a Manager in a temporary directory and returns the
-// manager and certificates for two keys which have been added to the keystore.
+// Generates a X509Store in a temporary directory and returns the
+// store and certificates for two keys which have been added to the keystore.
 // Also returns the temporary directory so it can be cleaned up.
 func filestoreWithTwoCerts(t *testing.T, gun, keyAlg string) (
 	string, trustmanager.X509Store, *cryptoservice.CryptoService, []*x509.Certificate) {
