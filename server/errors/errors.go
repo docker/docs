@@ -44,6 +44,12 @@ var (
 		Description:    "An error occurred when attempting to apply an update at the storage layer.",
 		HTTPStatusCode: http.StatusInternalServerError,
 	})
+	ErrOldVersion = errcode.Register(errGroup, errcode.ErrorDescriptor{
+		Value:          "VERSION",
+		Message:        "A newer version of metadata is already available.",
+		Description:    "A newer version of the repository's metadata is already available in storage.",
+		HTTPStatusCode: http.StatusBadRequest,
+	})
 	ErrMetadataNotFound = errcode.Register(errGroup, errcode.ErrorDescriptor{
 		Value:          "METADATA_NOT_FOUND",
 		Message:        "You have requested metadata that does not exist.",
