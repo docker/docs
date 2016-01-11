@@ -23,7 +23,7 @@ First deploy UCP with debug. If you're using TLS (e.g., with bootstrap install) 
 sudo bash -c "docker run --rm -it \
         --name ucp \
         -v /var/run/docker.sock:/var/run/docker.sock \
-        dockerorca/ucp \
+        docker/ucp \
         dump-certs > /usr/local/share/ca-certificates/orca.crt"
 sudo update-ca-certificates
 ```
