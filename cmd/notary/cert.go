@@ -59,7 +59,7 @@ func certRemove(cmd *cobra.Command, args []string) {
 		trustmanager.FilterCertsExpiredSha1,
 	)
 	if err != nil {
-		fatalf("Failed to create a new truststore manager with directory: %s", trustDir)
+		fatalf("Failed to create a new truststore with directory: %s", trustDir)
 	}
 
 	var certsToRemove []*x509.Certificate
@@ -129,7 +129,7 @@ func certList(cmd *cobra.Command, args []string) {
 		trustmanager.FilterCertsExpiredSha1,
 	)
 	if err != nil {
-		fatalf("Failed to create a new truststore manager with directory: %s", trustDir)
+		fatalf("Failed to create a new truststore with directory: %s", trustDir)
 	}
 
 	trustedCerts := certStore.GetCertificates()
