@@ -361,7 +361,7 @@ func getKeyRole(s LimitedFileStore, keyID string) (string, bool, error) {
 		}
 	}
 
-	return "", false, &ErrKeyNotFound{KeyID: keyID}
+	return "", false, ErrKeyNotFound{KeyID: keyID}
 }
 
 // GetKey returns the PrivateKey given a KeyID
