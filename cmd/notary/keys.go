@@ -371,7 +371,7 @@ func (k *keyCommander) keysRotate(cmd *cobra.Command, args []string) error {
 	if k.rotateKeyServerManaged {
 		// this does not actually push the changes, just creates the keys, but
 		// it creates a key remotely so it needs a transport
-		rt = getTransport(config, gun, true)
+		rt = getTransport(config, gun, false)
 	}
 	nRepo, err := notaryclient.NewNotaryRepository(
 		config.GetString("trust_dir"), gun, getRemoteTrustServer(config),
