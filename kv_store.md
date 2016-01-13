@@ -39,6 +39,75 @@ workaround problems.  Further documentation for the etcd API is available
 at https://github.com/coreos/etcd/blob/master/Documentation/api.md
 
 
+### Troubleshooting with etcdctl
+
+The `ucp-kv` container(s) running on the primary controller (and
+replicas in an HA configuration) contain the `etcdctl` binary, which
+can be accessed using `docker exec`.  The following list some examples
+(and their output) using the tool to perform various tasks on the
+etcd cluster.  These commands assume you are running directly against
+the engine in question.  If you are running these commands through UCP,
+you should specify the node specific container name.
+
+* Check the health of the etcd cluster (on failure it will exit with an error code, and no output)
+    ```
+docker exec -it ucp-kv etcdctl \
+        --endpoint https://127.0.0.1:2379 \
+        --ca-file /etc/docker/ssl/ca.pem \
+        --cert-file /etc/docker/ssl/cert.pem \
+        --key-file /etc/docker/ssl/key.pem \
+        cluster-health
+    ```
+    ```
+member 16c9ae1872e8b1f0 is healthy: got healthy result from https://192.168.122.64:12379
+member c5a24cfdb4263e72 is healthy: got healthy result from https://192.168.122.196:12379
+member ca3c1bb18f1b30bf is healthy: got healthy result from https://192.168.122.223:12379
+cluster is healthy
+```
+
+* List the current members of the cluster
+    ```
+docker exec -it ucp-kv etcdctl \
+        --endpoint https://127.0.0.1:2379 \
+        --ca-file /etc/docker/ssl/ca.pem \
+        --cert-file /etc/docker/ssl/cert.pem \
+        --key-file /etc/docker/ssl/key.pem \
+        member list
+    ```
+    ```
+16c9ae1872e8b1f0: name=orca-kv-192.168.122.64 peerURLs=https://192.168.122.64:12380 clientURLs=https://192.168.122.64:12379
+c5a24cfdb4263e72: name=orca-kv-192.168.122.196 peerURLs=https://192.168.122.196:12380 clientURLs=https://192.168.122.196:12379
+ca3c1bb18f1b30bf: name=orca-kv-192.168.122.223 peerURLs=https://192.168.122.223:12380 clientURLs=https://192.168.122.223:12379
+```
+
+* Remove a failed member (use the list above first to get the ID)
+    ```
+docker exec -it ucp-kv etcdctl \
+        --endpoint https://127.0.0.1:2379 \
+        --ca-file /etc/docker/ssl/ca.pem \
+        --cert-file /etc/docker/ssl/cert.pem \
+        --key-file /etc/docker/ssl/key.pem \
+        member remove c5a24cfdb4263e72
+    ```
+    ```
+Removed member c5a24cfdb4263e72 from cluster
+```
+
+* Show the current value of a key
+    ```
+docker exec -it ucp-kv etcdctl \
+        --endpoint https://127.0.0.1:2379 \
+        --ca-file /etc/docker/ssl/ca.pem \
+        --cert-file /etc/docker/ssl/cert.pem \
+        --key-file /etc/docker/ssl/key.pem \
+        ls /docker/swarm/nodes
+    ```
+    ```
+/docker/swarm/nodes/192.168.122.196:12376
+/docker/swarm/nodes/192.168.122.64:12376
+/docker/swarm/nodes/192.168.122.223:12376
+```
+
 
 ### Learn about the certificates
 
