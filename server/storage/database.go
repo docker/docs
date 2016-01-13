@@ -1,6 +1,8 @@
 package storage
 
 import (
+	"crypto/sha256"
+	"encoding/hex"
 	"fmt"
 
 	"github.com/Sirupsen/logrus"
@@ -58,11 +60,12 @@ func (db *SQLStorage) UpdateCurrent(gun string, update MetaUpdate) error {
 	if !exists.RecordNotFound() {
 		return &ErrOldVersion{}
 	}
-
+	checksum := sha256.Sum256(update.Data)
 	return translateOldVersionError(db.Create(&TUFFile{
 		Gun:     gun,
 		Role:    update.Role,
 		Version: update.Version,
+		Sha256:  hex.EncodeToString(checksum[:]),
 		Data:    update.Data,
 	}).Error)
 }
@@ -99,11 +102,13 @@ func (db *SQLStorage) UpdateMany(gun string, updates []MetaUpdate) error {
 		}
 
 		var row TUFFile
+		checksum := sha256.Sum256(update.Data)
+		hexChecksum := hex.EncodeToString(checksum[:])
 		query = tx.Where(map[string]interface{}{
 			"gun":     gun,
 			"role":    update.Role,
 			"version": update.Version,
-		}).Attrs("data", update.Data).FirstOrCreate(&row)
+		}).Attrs("data", update.Data).Attrs("sha256", hexChecksum).FirstOrCreate(&row)
 
 		if query.Error != nil {
 			return rollback(translateOldVersionError(query.Error))

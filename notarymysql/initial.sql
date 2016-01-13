@@ -4,9 +4,11 @@ CREATE TABLE `tuf_files` (
 	`gun` varchar(255) NOT NULL,
 	`role` varchar(255) NOT NULL,
 	`version` int(11) NOT NULL,
+	`sha256` char(64) DEFAULT NULL,
 	`data` longblob NOT NULL,
 	PRIMARY KEY (`id`),
 	UNIQUE KEY `gun` (`gun`,`role`,`version`)
+	INDEX `sha256` (`sha256`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `timestamp_keys`;
