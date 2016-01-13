@@ -151,10 +151,10 @@ notary-dockerfile:
 	@docker build --rm --force-rm -t notary .
 
 server-dockerfile:
-	@docker build --rm --force-rm -f Dockerfile.server -t notary-server .
+	@docker build --rm --force-rm -f server.Dockerfile -t notary-server .
 
 signer-dockerfile:
-	@docker build --rm --force-rm -f Dockerfile.signer -t notary-signer .
+	@docker build --rm --force-rm -f signer.Dockerfile -t notary-signer .
 
 docker-images: notary-dockerfile server-dockerfile signer-dockerfile
 
