@@ -2407,7 +2407,7 @@ func TestRemoveDelegationErrorWritingChanges(t *testing.T) {
 // a TUF server
 func TestBootstrapClientBadURL(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	require.NoError(t, err, "failed to create a temporary directory: %s", err)
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 	repo, err := NewNotaryRepository(
 		tempBaseDir,
 		"testGun",
@@ -2415,20 +2415,20 @@ func TestBootstrapClientBadURL(t *testing.T) {
 		http.DefaultTransport,
 		passphraseRetriever,
 	)
-	require.NoError(t, err, "error creating repo: %s", err)
+	assert.NoError(t, err, "error creating repo: %s", err)
 
 	c, err := repo.bootstrapClient(false)
-	require.Nil(t, c)
-	require.Error(t, err)
+	assert.Nil(t, c)
+	assert.Error(t, err)
 
 	c, err2 := repo.bootstrapClient(true)
-	require.Nil(t, c)
-	require.Error(t, err2)
+	assert.Nil(t, c)
+	assert.Error(t, err2)
 
 	// same error should be returned because we don't have local data
 	// and are requesting remote root regardless of checkInitialized
 	// value
-	require.EqualError(t, err, err2.Error())
+	assert.EqualError(t, err, err2.Error())
 }
 
 // TestBootstrapClientInvalidURL checks that bootstrapClient correctly
@@ -2436,7 +2436,7 @@ func TestBootstrapClientBadURL(t *testing.T) {
 // a TUF server
 func TestBootstrapClientInvalidURL(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	require.NoError(t, err, "failed to create a temporary directory: %s", err)
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 	repo, err := NewNotaryRepository(
 		tempBaseDir,
 		"testGun",
@@ -2444,18 +2444,18 @@ func TestBootstrapClientInvalidURL(t *testing.T) {
 		http.DefaultTransport,
 		passphraseRetriever,
 	)
-	require.NoError(t, err, "error creating repo: %s", err)
+	assert.NoError(t, err, "error creating repo: %s", err)
 
 	c, err := repo.bootstrapClient(false)
-	require.Nil(t, c)
-	require.Error(t, err)
+	assert.Nil(t, c)
+	assert.Error(t, err)
 
 	c, err2 := repo.bootstrapClient(true)
-	require.Nil(t, c)
-	require.Error(t, err2)
+	assert.Nil(t, c)
+	assert.Error(t, err2)
 
 	// same error should be returned because we don't have local data
 	// and are requesting remote root regardless of checkInitialized
 	// value
-	require.EqualError(t, err, err2.Error())
+	assert.EqualError(t, err, err2.Error())
 }
