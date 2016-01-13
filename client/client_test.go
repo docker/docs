@@ -35,6 +35,60 @@ import (
 	"golang.org/x/net/context"
 )
 
+const password = "passphrase"
+
+type passRoleRecorder struct {
+	rolesCreated []string
+	rolesAsked   []string
+}
+
+func newRoleRecorder() *passRoleRecorder {
+	return &passRoleRecorder{}
+}
+
+func (p *passRoleRecorder) clear() {
+	p.rolesCreated = nil
+	p.rolesAsked = nil
+}
+
+func (p *passRoleRecorder) retriever(_, alias string, createNew bool, _ int) (string, bool, error) {
+	if createNew {
+		p.rolesCreated = append(p.rolesCreated, alias)
+	} else {
+		p.rolesAsked = append(p.rolesAsked, alias)
+	}
+	return password, false, nil
+}
+
+func (p *passRoleRecorder) compareRolesRecorded(t *testing.T, expected []string, created bool,
+	args ...interface{}) {
+
+	var actual, useExpected sort.StringSlice
+	copy(expected, useExpected) // don't sort expected, since we don't want to mutate it
+	sort.Stable(useExpected)
+
+	if created {
+		copy(p.rolesCreated, actual)
+	} else {
+		copy(p.rolesAsked, actual)
+	}
+	sort.Stable(actual)
+
+	assert.Equal(t, useExpected, actual, args...)
+}
+
+// requires the following keys be created: order does not matter
+func (p *passRoleRecorder) assertCreated(t *testing.T, expected []string, args ...interface{}) {
+	p.compareRolesRecorded(t, expected, true, args...)
+}
+
+// requires that passwords be asked for the following keys: order does not matter
+func (p *passRoleRecorder) assertAsked(t *testing.T, expected []string, args ...interface{}) {
+	p.compareRolesRecorded(t, expected, false, args...)
+}
+
+var passphraseRetriever = passphrase.ConstantRetriever(password)
+
 func simpleTestServer(t *testing.T, roles ...string) (
 	*httptest.Server, *http.ServeMux, map[string]data.PrivateKey) {
 
@@ -109,46 +163,70 @@ func initializeRepo(t *testing.T, rootType, gun, url string,
 		serverManagedRoles = []string{data.CanonicalSnapshotRole}
 	}
 
-	repo, rootPubKeyID := createRepoAndKey(t, rootType, tempBaseDir, gun, url)
+	repo, rec, rootPubKeyID := createRepoAndKey(t, rootType, tempBaseDir, gun, url)
 
 	err = repo.Initialize(rootPubKeyID, serverManagedRoles...)
-	assert.NoError(t, err, "error creating repository: %s", err)
 	if err != nil {
 		os.RemoveAll(tempBaseDir)
 	}
+	assert.NoError(t, err, "error creating repository: %s", err)
 
+	// generates the target role, maybe the snapshot role
+	if serverManagesSnapshot {
+		rec.assertCreated(t, []string{data.CanonicalTargetsRole})
+	} else {
+		rec.assertCreated(t, []string{data.CanonicalTargetsRole, data.CanonicalSnapshotRole})
+	}
+	// root key is cached by the cryptoservice, so when signing we don't actually ask
+	// for the passphrase
+	rec.assertAsked(t, nil)
 	return repo, rootPubKeyID
 }
 
 // Creates a new repository and adds a root key.  Returns the repo and key ID.
 func createRepoAndKey(t *testing.T, rootType, tempBaseDir, gun, url string) (
-	*NotaryRepository, string) {
+	*NotaryRepository, *passRoleRecorder, string) {
 
+	rec := newRoleRecorder()
 	repo, err := NewNotaryRepository(
-		tempBaseDir, gun, url, http.DefaultTransport, passphraseRetriever)
+		tempBaseDir, gun, url, http.DefaultTransport, rec.retriever)
 	assert.NoError(t, err, "error creating repo: %s", err)
 
 	rootPubKey, err := repo.CryptoService.Create("root", rootType)
 	assert.NoError(t, err, "error generating root key: %s", err)
 
-	return repo, rootPubKey.ID()
+	rec.assertCreated(t, []string{data.CanonicalRootRole},
+		"root passphrase should have been required to generate a root key")
+	rec.assertAsked(t, nil)
+	rec.clear()
+
+	return repo, rec, rootPubKey.ID()
 }
 
 // creates a new notary repository with the same gun and url as the previous
-// repo, so that it can be used to pull the trust data the original repo pushed
-func newRepoToTestRepo(t *testing.T, existingRepo *NotaryRepository) *NotaryRepository {
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	assert.NoError(t, err, "failed to create a temporary directory")
+// repo, in order to eliminate caches (for instance, cryptoservice cache)
+// if a new directory is to be created, it also eliminates the tuf metadata
+// cache
+func newRepoToTestRepo(t *testing.T, existingRepo *NotaryRepository, newDir bool) (
+	*NotaryRepository, *passRoleRecorder) {
 
-	repo, err := NewNotaryRepository(
-		tempBaseDir, existingRepo.gun, existingRepo.baseURL,
-		http.DefaultTransport, passphraseRetriever)
-	assert.NoError(t, err, "error creating repository: %s", err)
-	if err != nil {
-		defer os.RemoveAll(tempBaseDir)
+	repoDir := existingRepo.baseDir
+	if newDir {
+		tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+		assert.NoError(t, err, "failed to create a temporary directory")
+		repoDir = tempBaseDir
 	}
 
-	return repo
+	rec := newRoleRecorder()
+	repo, err := NewNotaryRepository(
+		repoDir, existingRepo.gun, existingRepo.baseURL,
+		http.DefaultTransport, rec.retriever)
+	assert.NoError(t, err, "error creating repository: %s", err)
+	if err != nil && newDir {
+		defer os.RemoveAll(repoDir)
+	}
+
+	return repo, rec
 }
 
 // Initializing a new repo while specifying that the server should manage the root
@@ -159,7 +237,7 @@ func TestInitRepositoryManagedRolesIncludingRoot(t *testing.T) {
 	assert.NoError(t, err, "failed to create a temporary directory")
 	defer os.RemoveAll(tempBaseDir)
 
-	repo, rootPubKeyID := createRepoAndKey(
+	repo, rec, rootPubKeyID := createRepoAndKey(
 		t, data.ECDSAKey, tempBaseDir, "docker.com/notary", "http://localhost")
 	err = repo.Initialize(rootPubKeyID, data.CanonicalRootRole)
 	assert.Error(t, err)
@@ -167,6 +245,8 @@ func TestInitRepositoryManagedRolesIncludingRoot(t *testing.T) {
 	// Just testing the error message here in this one case
 	assert.Equal(t, err.Error(),
 		"notary does not support the server managing the root key")
+	// no key creation happened
+	rec.assertCreated(t, nil)
 }
 
 // Initializing a new repo while specifying that the server should manage some
@@ -177,11 +257,13 @@ func TestInitRepositoryManagedRolesInvalidRole(t *testing.T) {
 	assert.NoError(t, err, "failed to create a temporary directory")
 	defer os.RemoveAll(tempBaseDir)
 
-	repo, rootPubKeyID := createRepoAndKey(
+	repo, rec, rootPubKeyID := createRepoAndKey(
 		t, data.ECDSAKey, tempBaseDir, "docker.com/notary", "http://localhost")
 	err = repo.Initialize(rootPubKeyID, "randomrole")
 	assert.Error(t, err)
 	assert.IsType(t, ErrInvalidRemoteRole{}, err)
+	// no key creation happened
+	rec.assertCreated(t, nil)
 }
 
 // Initializing a new repo while specifying that the server should manage the
@@ -192,11 +274,13 @@ func TestInitRepositoryManagedRolesIncludingTargets(t *testing.T) {
 	assert.NoError(t, err, "failed to create a temporary directory")
 	defer os.RemoveAll(tempBaseDir)
 
-	repo, rootPubKeyID := createRepoAndKey(
+	repo, rec, rootPubKeyID := createRepoAndKey(
 		t, data.ECDSAKey, tempBaseDir, "docker.com/notary", "http://localhost")
 	err = repo.Initialize(rootPubKeyID, data.CanonicalTargetsRole)
 	assert.Error(t, err)
 	assert.IsType(t, ErrInvalidRemoteRole{}, err)
+	// no key creation happened
+	rec.assertCreated(t, nil)
 }
 
 // Initializing a new repo while specifying that the server should manage the
@@ -210,10 +294,12 @@ func TestInitRepositoryManagedRolesIncludingTimestamp(t *testing.T) {
 	ts, _, _ := simpleTestServer(t)
 	defer ts.Close()
 
-	repo, rootPubKeyID := createRepoAndKey(
+	repo, rec, rootPubKeyID := createRepoAndKey(
 		t, data.ECDSAKey, tempBaseDir, "docker.com/notary", ts.URL)
 	err = repo.Initialize(rootPubKeyID, data.CanonicalTimestampRole)
 	assert.NoError(t, err)
+	// generates the target role, the snapshot role
+	rec.assertCreated(t, []string{data.CanonicalTargetsRole, data.CanonicalSnapshotRole})
 }
 
 // Initializing a new repo fails if unable to get the timestamp key, even if
@@ -227,11 +313,15 @@ func TestInitRepositoryNeedsRemoteTimestampKey(t *testing.T) {
 	ts, _, _ := simpleTestServer(t, data.CanonicalSnapshotRole)
 	defer ts.Close()
 
-	repo, rootPubKeyID := createRepoAndKey(
+	repo, rec, rootPubKeyID := createRepoAndKey(
 		t, data.ECDSAKey, tempBaseDir, "docker.com/notary", ts.URL)
 	err = repo.Initialize(rootPubKeyID, data.CanonicalTimestampRole)
 	assert.Error(t, err)
 	assert.IsType(t, store.ErrMetaNotFound{}, err)
+
+	// locally managed keys are created first, to avoid unnecssary network calls,
+	// so they would have been generated
+	rec.assertCreated(t, []string{data.CanonicalTargetsRole, data.CanonicalSnapshotRole})
 }
 
 // Initializing a new repo with remote server signing fails if unable to get
@@ -245,11 +335,15 @@ func TestInitRepositoryNeedsRemoteSnapshotKey(t *testing.T) {
 	ts, _, _ := simpleTestServer(t, data.CanonicalTimestampRole)
 	defer ts.Close()
 
-	repo, rootPubKeyID := createRepoAndKey(
+	repo, rec, rootPubKeyID := createRepoAndKey(
 		t, data.ECDSAKey, tempBaseDir, "docker.com/notary", ts.URL)
 	err = repo.Initialize(rootPubKeyID, data.CanonicalSnapshotRole)
 	assert.Error(t, err)
 	assert.IsType(t, store.ErrMetaNotFound{}, err)
+
+	// locally managed keys are created first, to avoid unnecssary network calls,
+	// so they would have been generated
+	rec.assertCreated(t, []string{data.CanonicalTargetsRole})
 }
 
 // passing timestamp + snapshot, or just snapshot, is tested in the next two
@@ -261,9 +355,11 @@ func TestInitRepositoryNeedsRemoteSnapshotKey(t *testing.T) {
 // This test case covers the default case where the server only manages the
 // timestamp key.
 func TestInitRepoServerOnlyManagesTimestampKey(t *testing.T) {
-	testInitRepo(t, data.ECDSAKey, false)
+	testInitRepoMetadata(t, data.ECDSAKey, false)
+	testInitRepoSigningKeys(t, data.ECDSAKey, false)
 	if !testing.Short() {
-		testInitRepo(t, data.RSAKey, false)
+		testInitRepoMetadata(t, data.RSAKey, false)
+		testInitRepoSigningKeys(t, data.RSAKey, false)
 	}
 }
 
@@ -272,9 +368,11 @@ func TestInitRepoServerOnlyManagesTimestampKey(t *testing.T) {
 // We test this with both an RSA and ECDSA root key.
 // This test case covers the server managing both the timestap and snapshot keys.
 func TestInitRepoServerManagesTimestampAndSnapshotKeys(t *testing.T) {
-	testInitRepo(t, data.ECDSAKey, true)
+	testInitRepoMetadata(t, data.ECDSAKey, true)
+	testInitRepoSigningKeys(t, data.ECDSAKey, true)
 	if !testing.Short() {
-		testInitRepo(t, data.RSAKey, true)
+		testInitRepoMetadata(t, data.RSAKey, true)
+		testInitRepoSigningKeys(t, data.RSAKey, false)
 	}
 }
 
@@ -400,7 +498,7 @@ func assertRepoHasExpectedMetadata(t *testing.T, repo *NotaryRepository,
 	}
 }
 
-func testInitRepo(t *testing.T, rootType string, serverManagesSnapshot bool) {
+func testInitRepoMetadata(t *testing.T, rootType string, serverManagesSnapshot bool) {
 	gun := "docker.com/notary"
 
 	ts, _, _ := simpleTestServer(t)
@@ -415,6 +513,39 @@ func testInitRepo(t *testing.T, rootType string, serverManagesSnapshot bool) {
 	assertRepoHasExpectedMetadata(t, repo, data.CanonicalTargetsRole, true)
 	assertRepoHasExpectedMetadata(t, repo, data.CanonicalSnapshotRole,
 		!serverManagesSnapshot)
+}
+
+func testInitRepoSigningKeys(t *testing.T, rootType string, serverManagesSnapshot bool) {
+	ts, _, _ := simpleTestServer(t)
+	defer ts.Close()
+
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+
+	repo, _, rootPubKeyID := createRepoAndKey(
+		t, data.ECDSAKey, tempBaseDir, "docker.com/notary", ts.URL)
+
+	// create a new repository, so we can wipe out the cryptoservice's cached
+	// keys, so we can test which keys it asks for passwords for
+	repo, rec := newRepoToTestRepo(t, repo, false)
+
+	if serverManagesSnapshot {
+		err = repo.Initialize(rootPubKeyID, data.CanonicalSnapshotRole)
+	} else {
+		err = repo.Initialize(rootPubKeyID)
+	}
+
+	assert.NoError(t, err, "error initializing repository")
+
+	// generates the target role, maybe the snapshot role
+	if serverManagesSnapshot {
+		rec.assertCreated(t, []string{data.CanonicalTargetsRole})
+	} else {
+		rec.assertCreated(t, []string{data.CanonicalTargetsRole, data.CanonicalSnapshotRole})
+	}
+	// root is asked for signing the root role
+	rec.assertAsked(t, []string{data.CanonicalRootRole})
 }
 
 // TestInitRepoAttemptsExceeded tests error handling when passphrase.Retriever
@@ -508,14 +639,30 @@ func getChanges(t *testing.T, repo *NotaryRepository) []changelist.Change {
 // to a repo without delegations.  Confirms that the changelist is created
 // correctly, for the targets scope.
 func TestAddTargetToTargetRoleByDefault(t *testing.T) {
+	testAddTargetToTargetRoleByDefault(t, false)
+	testAddTargetToTargetRoleByDefault(t, true)
+}
+
+func testAddTargetToTargetRoleByDefault(t *testing.T, clearCache bool) {
 	ts, _, _ := simpleTestServer(t)
 	defer ts.Close()
 
 	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
 	defer os.RemoveAll(repo.baseDir)
 
+	var rec *passRoleRecorder
+	if clearCache {
+		repo, rec = newRepoToTestRepo(t, repo, false)
+	}
+
 	testAddOrDeleteTarget(t, repo, changelist.ActionCreate, nil,
 		[]string{data.CanonicalTargetsRole})
+
+	if clearCache {
+		// no key creation or signing happened, because add doesn't ever require signing
+		rec.assertCreated(t, nil)
+		rec.assertAsked(t, nil)
+	}
 }
 
 // Tests that adding a target to a repo or deleting a target from a repo,
@@ -597,11 +744,21 @@ func testAddOrDeleteTarget(t *testing.T, repo *NotaryRepository, action string,
 // Confirms that the changelist is created correctly, one for each of the
 // the specified roles as scopes.
 func TestAddTargetToSpecifiedValidRoles(t *testing.T) {
+	testAddTargetToSpecifiedValidRoles(t, false)
+	testAddTargetToSpecifiedValidRoles(t, true)
+}
+
+func testAddTargetToSpecifiedValidRoles(t *testing.T, clearCache bool) {
 	ts, _, _ := simpleTestServer(t)
 	defer ts.Close()
 
 	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
 	defer os.RemoveAll(repo.baseDir)
+
+	var rec *passRoleRecorder
+	if clearCache {
+		repo, rec = newRepoToTestRepo(t, repo, false)
+	}
 
 	roleName := filepath.Join(data.CanonicalTargetsRole, "a")
 	testAddOrDeleteTarget(t, repo, changelist.ActionCreate,
@@ -610,17 +767,33 @@ func TestAddTargetToSpecifiedValidRoles(t *testing.T) {
 			strings.ToUpper(roleName),
 		},
 		[]string{data.CanonicalTargetsRole, roleName})
+
+	if clearCache {
+		// no key creation or signing happened, because add doesn't ever require signing
+		rec.assertCreated(t, nil)
+		rec.assertAsked(t, nil)
+	}
 }
 
 // TestAddTargetToSpecifiedInvalidRoles expects errors to be returned if
 // adding a target to an invalid role.  If any of the roles are invalid,
 // no targets are added to any roles.
 func TestAddTargetToSpecifiedInvalidRoles(t *testing.T) {
+	testAddTargetToSpecifiedInvalidRoles(t, false)
+	testAddTargetToSpecifiedInvalidRoles(t, true)
+}
+
+func testAddTargetToSpecifiedInvalidRoles(t *testing.T, clearCache bool) {
 	ts, _, _ := simpleTestServer(t)
 	defer ts.Close()
 
 	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
 	defer os.RemoveAll(repo.baseDir)
+
+	var rec *passRoleRecorder
+	if clearCache {
+		repo, rec = newRepoToTestRepo(t, repo, false)
+	}
 
 	invalidRoles := []string{
 		data.CanonicalRootRole,
@@ -640,6 +813,12 @@ func TestAddTargetToSpecifiedInvalidRoles(t *testing.T) {
 
 		changes := getChanges(t, repo)
 		assert.Len(t, changes, 0)
+	}
+
+	if clearCache {
+		// no key creation or signing happened, because add doesn't ever require signing
+		rec.assertCreated(t, nil)
+		rec.assertAsked(t, nil)
 	}
 }
 
@@ -691,25 +870,51 @@ func TestAddTargetErrorWritingChanges(t *testing.T) {
 // role from a repo.  Confirms that the changelist is created correctly for
 // the targets scope.
 func TestRemoveTargetToTargetRoleByDefault(t *testing.T) {
+	testRemoveTargetToTargetRoleByDefault(t, false)
+	testRemoveTargetToTargetRoleByDefault(t, true)
+}
+
+func testRemoveTargetToTargetRoleByDefault(t *testing.T, clearCache bool) {
 	ts, _, _ := simpleTestServer(t)
 	defer ts.Close()
 
 	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
 	defer os.RemoveAll(repo.baseDir)
 
+	var rec *passRoleRecorder
+	if clearCache {
+		repo, rec = newRepoToTestRepo(t, repo, false)
+	}
+
 	testAddOrDeleteTarget(t, repo, changelist.ActionDelete, nil,
 		[]string{data.CanonicalTargetsRole})
+
+	if clearCache {
+		// no key creation or signing happened, because remove doesn't ever require signing
+		rec.assertCreated(t, nil)
+		rec.assertAsked(t, nil)
+	}
 }
 
 // TestRemoveTargetFromSpecifiedValidRoles removes a target from the specified
 // roles. Confirms that the changelist is created correctly, one for each of
 // the the specified roles as scopes.
 func TestRemoveTargetFromSpecifiedValidRoles(t *testing.T) {
+	testRemoveTargetFromSpecifiedValidRoles(t, false)
+	testRemoveTargetFromSpecifiedValidRoles(t, true)
+}
+
+func testRemoveTargetFromSpecifiedValidRoles(t *testing.T, clearCache bool) {
 	ts, _, _ := simpleTestServer(t)
 	defer ts.Close()
 
 	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
 	defer os.RemoveAll(repo.baseDir)
+
+	var rec *passRoleRecorder
+	if clearCache {
+		repo, rec = newRepoToTestRepo(t, repo, false)
+	}
 
 	roleName := filepath.Join(data.CanonicalTargetsRole, "a")
 	testAddOrDeleteTarget(t, repo, changelist.ActionDelete,
@@ -718,17 +923,33 @@ func TestRemoveTargetFromSpecifiedValidRoles(t *testing.T) {
 			strings.ToUpper(roleName),
 		},
 		[]string{data.CanonicalTargetsRole, roleName})
+
+	if clearCache {
+		// no key creation or signing happened, because remove doesn't ever require signing
+		rec.assertCreated(t, nil)
+		rec.assertAsked(t, nil)
+	}
 }
 
 // TestRemoveTargetFromSpecifiedInvalidRoles expects errors to be returned if
 // removing a target to an invalid role.  If any of the roles are invalid,
 // no targets are removed from any roles.
 func TestRemoveTargetToSpecifiedInvalidRoles(t *testing.T) {
+	testRemoveTargetToSpecifiedInvalidRoles(t, false)
+	testRemoveTargetToSpecifiedInvalidRoles(t, true)
+}
+
+func testRemoveTargetToSpecifiedInvalidRoles(t *testing.T, clearCache bool) {
 	ts, _, _ := simpleTestServer(t)
 	defer ts.Close()
 
 	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
 	defer os.RemoveAll(repo.baseDir)
+
+	var rec *passRoleRecorder
+	if clearCache {
+		repo, rec = newRepoToTestRepo(t, repo, false)
+	}
 
 	invalidRoles := []string{
 		data.CanonicalRootRole,
@@ -745,6 +966,12 @@ func TestRemoveTargetToSpecifiedInvalidRoles(t *testing.T) {
 
 		changes := getChanges(t, repo)
 		assert.Len(t, changes, 0)
+	}
+
+	if clearCache {
+		// no key creation or signing happened, because remove doesn't ever require signing
+		rec.assertCreated(t, nil)
+		rec.assertAsked(t, nil)
 	}
 }
 
@@ -1147,25 +1374,46 @@ func testGetChangelist(t *testing.T, rootType string) {
 // server, signing all the non-timestamp metadata.  Root, targets, and snapshots
 // (if locally signing) should be sent.
 func TestPublishBareRepo(t *testing.T) {
-	testPublishNoData(t, data.ECDSAKey, true)
-	testPublishNoData(t, data.ECDSAKey, false)
+	testPublishNoData(t, data.ECDSAKey, false, true)
+	testPublishNoData(t, data.ECDSAKey, false, false)
+	testPublishNoData(t, data.ECDSAKey, true, true)
+	testPublishNoData(t, data.ECDSAKey, true, false)
 	if !testing.Short() {
-		testPublishNoData(t, data.RSAKey, true)
-		testPublishNoData(t, data.RSAKey, false)
+		testPublishNoData(t, data.RSAKey, false, true)
+		testPublishNoData(t, data.RSAKey, false, false)
+		testPublishNoData(t, data.RSAKey, true, true)
+		testPublishNoData(t, data.RSAKey, true, false)
 	}
 }
 
-func testPublishNoData(t *testing.T, rootType string, serverManagesSnapshot bool) {
+func testPublishNoData(t *testing.T, rootType string, clearCache, serverManagesSnapshot bool) {
 	ts := fullTestServer(t)
 	defer ts.Close()
 
 	repo1, _ := initializeRepo(t, rootType, "docker.com/notary", ts.URL,
 		serverManagesSnapshot)
 	defer os.RemoveAll(repo1.baseDir)
+
+	var rec *passRoleRecorder
+	if clearCache {
+		rec = newRoleRecorder()
+		repo1, rec = newRepoToTestRepo(t, repo1, false)
+	}
+
 	assert.NoError(t, repo1.Publish())
 
+	if clearCache {
+		// signing is only done by the target/snapshot keys
+		rec.assertCreated(t, nil)
+		if serverManagesSnapshot {
+			rec.assertAsked(t, []string{data.CanonicalTargetsRole})
+		} else {
+			rec.assertAsked(t, []string{data.CanonicalTargetsRole, data.CanonicalSnapshotRole})
+		}
+	}
+
 	// use another repo to check metadata
-	repo2 := newRepoToTestRepo(t, repo1)
+	repo2, _ := newRepoToTestRepo(t, repo1, true)
 	defer os.RemoveAll(repo2.baseDir)
 
 	targets, err := repo2.ListTargets()
@@ -1221,9 +1469,11 @@ func TestPublishUninitializedRepo(t *testing.T) {
 // some targets to the server, signing all the non-timestamp metadata.
 // We test this with both an RSA and ECDSA root key
 func TestPublishClientHasSnapshotKey(t *testing.T) {
-	testPublishWithData(t, data.ECDSAKey, false)
+	testPublishWithData(t, data.ECDSAKey, true, false)
+	testPublishWithData(t, data.ECDSAKey, false, false)
 	if !testing.Short() {
-		testPublishWithData(t, data.RSAKey, false)
+		testPublishWithData(t, data.RSAKey, true, false)
+		testPublishWithData(t, data.RSAKey, false, false)
 	}
 }
 
@@ -1232,26 +1482,39 @@ func TestPublishClientHasSnapshotKey(t *testing.T) {
 // signing the root and targets metadata only.  The server should sign just fine.
 // We test this with both an RSA and ECDSA root key
 func TestPublishAfterInitServerHasSnapshotKey(t *testing.T) {
-	testPublishWithData(t, data.ECDSAKey, true)
+	testPublishWithData(t, data.ECDSAKey, true, true)
+	testPublishWithData(t, data.ECDSAKey, false, true)
 	if !testing.Short() {
-		testPublishWithData(t, data.RSAKey, true)
+		testPublishWithData(t, data.RSAKey, true, true)
+		testPublishWithData(t, data.RSAKey, false, true)
 	}
 }
 
-func testPublishWithData(t *testing.T, rootType string, serverManagesSnapshot bool) {
+func testPublishWithData(t *testing.T, rootType string, clearCache, serverManagesSnapshot bool) {
 	ts := fullTestServer(t)
 	defer ts.Close()
 
 	repo, _ := initializeRepo(t, rootType, "docker.com/notary", ts.URL,
 		serverManagesSnapshot)
 	defer os.RemoveAll(repo.baseDir)
-	assertPublishSucceeds(t, repo)
-}
 
-// asserts that publish succeeds by adding to the default only and publishing;
-// the targets should appear in targets
-func assertPublishSucceeds(t *testing.T, repo1 *NotaryRepository) {
-	assertPublishToRolesSucceeds(t, repo1, nil, []string{data.CanonicalTargetsRole})
+	var rec *passRoleRecorder
+	if clearCache {
+		rec = newRoleRecorder()
+		repo, rec = newRepoToTestRepo(t, repo, false)
+	}
+
+	assertPublishToRolesSucceeds(t, repo, nil, []string{data.CanonicalTargetsRole})
+
+	if clearCache {
+		// signing is only done by the target/snapshot keys
+		rec.assertCreated(t, nil)
+		if serverManagesSnapshot {
+			rec.assertAsked(t, []string{data.CanonicalTargetsRole})
+		} else {
+			rec.assertAsked(t, []string{data.CanonicalTargetsRole, data.CanonicalSnapshotRole})
+		}
+	}
 }
 
 // asserts that adding to the given roles results in the targets actually being
@@ -1281,7 +1544,7 @@ func assertPublishToRolesSucceeds(t *testing.T, repo1 *NotaryRepository,
 	assert.Len(t, getChanges(t, repo1), 0, "wrong number of changelist files found")
 
 	// use another repo to check metadata
-	repo2 := newRepoToTestRepo(t, repo1)
+	repo2, _ := newRepoToTestRepo(t, repo1, true)
 	defer os.RemoveAll(repo2.baseDir)
 
 	// Should be two targets per role
@@ -1510,7 +1773,7 @@ func TestNotInitializedOnPublish(t *testing.T) {
 	ts := fullTestServer(t)
 	defer ts.Close()
 
-	repo, _ := createRepoAndKey(t, data.ECDSAKey, tempBaseDir, gun, ts.URL)
+	repo, _, _ := createRepoAndKey(t, data.ECDSAKey, tempBaseDir, gun, ts.URL)
 
 	addTarget(t, repo, "v1", "../fixtures/intermediate-ca.crt")
 
@@ -1559,20 +1822,46 @@ func TestPublishSnapshotLocalKeysCreatedFirst(t *testing.T) {
 	assert.False(t, requestMade)
 }
 
+func createKey(t *testing.T, repo *NotaryRepository, role string, x509 bool) data.PublicKey {
+	key, err := repo.CryptoService.Create(role, data.ECDSAKey)
+	assert.NoError(t, err, "error creating key")
+
+	if x509 {
+		start := time.Now()
+		privKey, _, err := repo.CryptoService.GetPrivateKey(key.ID())
+		assert.NoError(t, err)
+		cert, err := cryptoservice.GenerateCertificate(
+			privKey, role, start, start.AddDate(1, 0, 0),
+		)
+		assert.NoError(t, err)
+		return data.NewECDSAx509PublicKey(trustmanager.CertToPEM(cert))
+	}
+	return key
+}
+
 // Publishing delegations works so long as the delegation parent exists by the
 // time that delegation addition change is applied.  Most of the tests for
 // applying delegation changes in in helpers_test.go (applyTargets tests), so
 // this is just a sanity test to make sure Publish calls it correctly and
 // no fallback happens.
 func TestPublishDelegations(t *testing.T) {
+	testPublishDelegations(t, true, false)
+	testPublishDelegations(t, false, false)
+}
+
+func TestPublishDelegationsX509(t *testing.T) {
+	testPublishDelegations(t, true, true)
+	testPublishDelegations(t, false, true)
+}
+
+func testPublishDelegations(t *testing.T, clearCache, x509Keys bool) {
 	ts := fullTestServer(t)
 	defer ts.Close()
 
 	repo1, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
 	defer os.RemoveAll(repo1.baseDir)
 
-	delgKey, err := repo1.CryptoService.Create("targets/a", data.ECDSAKey)
-	assert.NoError(t, err, "error creating delegation key")
+	delgKey := createKey(t, repo1, "targets/a", x509Keys)
 
 	// This should publish fine, even though targets/a/b is dependent upon
 	// targets/a, because these should execute in order
@@ -1582,8 +1871,21 @@ func TestPublishDelegations(t *testing.T) {
 			"error creating delegation")
 	}
 	assert.Len(t, getChanges(t, repo1), 3, "wrong number of changelist files found")
+
+	var rec *passRoleRecorder
+	if clearCache {
+		repo1, rec = newRepoToTestRepo(t, repo1, false)
+	}
+
 	assert.NoError(t, repo1.Publish())
 	assert.Len(t, getChanges(t, repo1), 0, "wrong number of changelist files found")
+
+	if clearCache {
+		// when publishing, only the parents of the delegations created need to be signed
+		// (and snapshot)
+		rec.assertAsked(t, []string{data.CanonicalTargetsRole, "targets/a", data.CanonicalSnapshotRole})
+		rec.clear()
+	}
 
 	// this should not publish, because targets/z doesn't exist
 	assert.NoError(t,
@@ -1593,12 +1895,16 @@ func TestPublishDelegations(t *testing.T) {
 	assert.Error(t, repo1.Publish())
 	assert.Len(t, getChanges(t, repo1), 1, "wrong number of changelist files found")
 
+	if clearCache {
+		rec.assertAsked(t, nil)
+	}
+
 	// use another repo to check metadata
-	repo2 := newRepoToTestRepo(t, repo1)
+	repo2, _ := newRepoToTestRepo(t, repo1, false)
 	defer os.RemoveAll(repo2.baseDir)
 
 	// pull
-	_, err = repo2.ListTargets()
+	_, err := repo2.ListTargets()
 	assert.NoError(t, err, "unable to pull repo")
 
 	for _, repo := range []*NotaryRepository{repo1, repo2} {
@@ -1629,103 +1935,45 @@ func TestPublishDelegations(t *testing.T) {
 	}
 }
 
-// Publishing delegations works so long as the delegation parent exists by the
-// time that delegation addition change is applied.  Most of the tests for
-// applying delegation changes in in helpers_test.go (applyTargets tests), so
-// this is just a sanity test to make sure Publish calls it correctly and
-// no fallback happens.
-func TestPublishDelegationsX509(t *testing.T) {
-	ts := fullTestServer(t)
-	defer ts.Close()
-
-	repo1, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
-	defer os.RemoveAll(repo1.baseDir)
-
-	delgKey, err := repo1.CryptoService.Create("targets/a", data.ECDSAKey)
-	assert.NoError(t, err, "error creating delegation key")
-
-	start := time.Now()
-	privKey, _, err := repo1.CryptoService.GetPrivateKey(delgKey.ID())
-	assert.NoError(t, err)
-	cert, err := cryptoservice.GenerateCertificate(
-		privKey, "targets/a", start, start.AddDate(1, 0, 0),
-	)
-	assert.NoError(t, err)
-	delgCert := data.NewECDSAx509PublicKey(trustmanager.CertToPEM(cert))
-
-	// This should publish fine, even though targets/a/b is dependent upon
-	// targets/a, because these should execute in order
-	for _, delgName := range []string{"targets/a", "targets/a/b", "targets/c"} {
-		assert.NoError(t,
-			repo1.AddDelegation(delgName, 1, []data.PublicKey{delgCert}, []string{""}),
-			"error creating delegation")
-	}
-	assert.Len(t, getChanges(t, repo1), 3, "wrong number of changelist files found")
-	assert.NoError(t, repo1.Publish())
-	assert.Len(t, getChanges(t, repo1), 0, "wrong number of changelist files found")
-
-	// this should not publish, because targets/z doesn't exist
-	assert.NoError(t,
-		repo1.AddDelegation("targets/z/y", 1, []data.PublicKey{delgCert}, []string{""}),
-		"error creating delegation")
-	assert.Len(t, getChanges(t, repo1), 1, "wrong number of changelist files found")
-	assert.Error(t, repo1.Publish())
-	assert.Len(t, getChanges(t, repo1), 1, "wrong number of changelist files found")
-
-	// Create a new repo and pull from the server
-	repo2 := newRepoToTestRepo(t, repo1)
-	defer os.RemoveAll(repo2.baseDir)
-
-	// pull
-	_, err = repo2.ListTargets()
-	assert.NoError(t, err, "unable to pull repo")
-
-	for _, repo := range []*NotaryRepository{repo1, repo2} {
-		// targets should have delegations targets/a and targets/c
-		targets := repo.tufRepo.Targets[data.CanonicalTargetsRole]
-		assert.Len(t, targets.Signed.Delegations.Roles, 2)
-		assert.Len(t, targets.Signed.Delegations.Keys, 1)
-
-		_, ok := targets.Signed.Delegations.Keys[delgCert.ID()]
-		assert.True(t, ok)
-
-		foundRoleNames := make(map[string]bool)
-		for _, r := range targets.Signed.Delegations.Roles {
-			foundRoleNames[r.Name] = true
-		}
-		assert.True(t, foundRoleNames["targets/a"])
-		assert.True(t, foundRoleNames["targets/c"])
-
-		// targets/a should have delegation targets/a/b only
-		a := repo.tufRepo.Targets["targets/a"]
-		assert.Len(t, a.Signed.Delegations.Roles, 1)
-		assert.Len(t, a.Signed.Delegations.Keys, 1)
-
-		_, ok = a.Signed.Delegations.Keys[delgCert.ID()]
-		assert.True(t, ok)
-
-		assert.Equal(t, "targets/a/b", a.Signed.Delegations.Roles[0].Name)
-	}
-}
-
 // If a changelist specifies a particular role to push targets to, and there
 // is no such role, publish will try to publish to its parent.  If the parent
 // doesn't work, it falls back on its parent, and so forth, and eventually
 // falls back on publishing to "target".  This *only* falls back if the role
 // doesn't exist, not if the user doesn't have a key.  (different test)
 func TestPublishTargetsDelgationScopeFallback(t *testing.T) {
+	testPublishTargetsDelgationScopeFallback(t, true)
+	testPublishTargetsDelgationScopeFallback(t, false)
+}
+
+func testPublishTargetsDelgationScopeFallback(t *testing.T, clearCache bool) {
 	ts := fullTestServer(t)
 	defer ts.Close()
 
 	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
 	defer os.RemoveAll(repo.baseDir)
+
+	var rec *passRoleRecorder
+	if clearCache {
+		repo, rec = newRepoToTestRepo(t, repo, false)
+	}
+
 	assertPublishToRolesSucceeds(t, repo, []string{"targets/a/b", "targets/b/c"},
 		[]string{data.CanonicalTargetsRole})
+
+	if clearCache {
+		rec.assertAsked(t, []string{data.CanonicalTargetsRole, data.CanonicalSnapshotRole})
+		rec.assertCreated(t, nil)
+	}
 }
 
 // If a changelist specifies a particular role to push targets to, and there
 // is a role but no key, publish not fall back and just fail.
 func TestPublishTargetsDelgationScopeNoFallbackIfNoKeys(t *testing.T) {
+	testPublishTargetsDelgationScopeNoFallbackIfNoKeys(t, true)
+	testPublishTargetsDelgationScopeNoFallbackIfNoKeys(t, false)
+}
+
+func testPublishTargetsDelgationScopeNoFallbackIfNoKeys(t *testing.T, clearCache bool) {
 	ts := fullTestServer(t)
 	defer ts.Close()
 
@@ -1738,9 +1986,19 @@ func TestPublishTargetsDelgationScopeNoFallbackIfNoKeys(t *testing.T) {
 	assert.NoError(t, err, "error generating key that is not in our cryptoservice")
 	aPubKey := data.PublicKeyFromPrivate(aPrivKey)
 
+	var rec *passRoleRecorder
+	if clearCache {
+		repo, rec = newRepoToTestRepo(t, repo, false)
+	}
+
 	// ensure that the role exists
 	assert.NoError(t, repo.AddDelegation("targets/a", 1, []data.PublicKey{aPubKey}, []string{""}))
 	assert.NoError(t, repo.Publish())
+
+	if clearCache {
+		rec.assertAsked(t, []string{data.CanonicalTargetsRole, data.CanonicalSnapshotRole})
+		rec.clear()
+	}
 
 	// add a target to targets/a/b - no role b, so it falls back on a, which
 	// exists but there is no signing key for
@@ -1750,6 +2008,10 @@ func TestPublishTargetsDelgationScopeNoFallbackIfNoKeys(t *testing.T) {
 	// Now Publish should fail
 	assert.Error(t, repo.Publish())
 	assert.Len(t, getChanges(t, repo), 1, "wrong number of changelist files found")
+	if clearCache {
+		rec.assertAsked(t, nil)
+		rec.clear()
+	}
 
 	targets, err := repo.ListTargets("targets", "targets/a", "targets/a/b")
 	assert.NoError(t, err)
@@ -1768,17 +2030,24 @@ func TestPublishTargetsDelgationSuccessLocallyHasRoles(t *testing.T) {
 	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
 	defer os.RemoveAll(repo.baseDir)
 
-	delgKey, err := repo.CryptoService.Create("targets/a", data.ECDSAKey)
-	assert.NoError(t, err, "error creating delegation key")
-
 	for _, delgName := range []string{"targets/a", "targets/a/b"} {
+		delgKey := createKey(t, repo, delgName, false)
 		assert.NoError(t,
 			repo.AddDelegation(delgName, 1, []data.PublicKey{delgKey}, []string{""}),
 			"error creating delegation")
 	}
 
+	// just always check signing now, we've already established we can publish
+	// delgations with and without the metadata and key cache
+	var rec *passRoleRecorder
+	repo, rec = newRepoToTestRepo(t, repo, false)
+
 	assertPublishToRolesSucceeds(t, repo, []string{"targets/a/b"},
 		[]string{"targets/a/b"})
+
+	// first time publishing, so everything gets signed
+	rec.assertAsked(t, []string{data.CanonicalTargetsRole, "targets/a", "targets/a/b",
+		data.CanonicalSnapshotRole})
 }
 
 // If a changelist specifies a particular role to push targets to, and the role
@@ -1791,15 +2060,22 @@ func TestPublishTargetsDelgationNoTargetsKeyNeeded(t *testing.T) {
 	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
 	defer os.RemoveAll(repo.baseDir)
 
-	delgKey, err := repo.CryptoService.Create("targets/a", data.ECDSAKey)
-	assert.NoError(t, err, "error creating delegation key")
-
 	for _, delgName := range []string{"targets/a", "targets/a/b"} {
+		delgKey := createKey(t, repo, delgName, false)
 		assert.NoError(t,
 			repo.AddDelegation(delgName, 1, []data.PublicKey{delgKey}, []string{""}),
 			"error creating delegation")
 	}
+
+	// just always check signing now, we've already established we can publish
+	// delgations with and without the metadata and key cache
+	var rec *passRoleRecorder
+	repo, rec = newRepoToTestRepo(t, repo, false)
+
 	assert.NoError(t, repo.Publish())
+	// first time publishing, so all delegation parents get signed
+	rec.assertAsked(t, []string{data.CanonicalTargetsRole, "targets/a", data.CanonicalSnapshotRole})
+	rec.clear()
 
 	// remove targets key - it is not even needed
 	targetsKeys := repo.CryptoService.ListKeys(data.CanonicalTargetsRole)
@@ -1808,6 +2084,9 @@ func TestPublishTargetsDelgationNoTargetsKeyNeeded(t *testing.T) {
 
 	assertPublishToRolesSucceeds(t, repo, []string{"targets/a/b"},
 		[]string{"targets/a/b"})
+
+	// only the target delegation gets signed - snapshot key has already been cached
+	rec.assertAsked(t, []string{"targets/a/b"})
 }
 
 // If a changelist specifies a particular role to push targets to, and is such
@@ -1830,7 +2109,7 @@ func TestPublishTargetsDelgationSuccessNeedsToDownloadRoles(t *testing.T) {
 
 	// this is a user, or otherwise a repo that only has access to the delegation
 	// key so it can publish targets to the delegated role
-	delgRepo := newRepoToTestRepo(t, ownerRepo)
+	delgRepo, _ := newRepoToTestRepo(t, ownerRepo, true)
 	defer os.RemoveAll(delgRepo.baseDir)
 
 	// create a key on the owner repo
@@ -1841,6 +2120,11 @@ func TestPublishTargetsDelgationSuccessNeedsToDownloadRoles(t *testing.T) {
 	bKey, err := delgRepo.CryptoService.Create("targets/a/b", data.ECDSAKey)
 	assert.NoError(t, err, "error creating delegation key")
 
+	// clear metadata and unencrypted private key cache
+	var ownerRec, delgRec *passRoleRecorder
+	ownerRepo, ownerRec = newRepoToTestRepo(t, ownerRepo, false)
+	delgRepo, delgRec = newRepoToTestRepo(t, delgRepo, false)
+
 	// owner creates delegations, adds the delegated key to them, and publishes them
 	assert.NoError(t,
 		ownerRepo.AddDelegation("targets/a", 1, []data.PublicKey{aKey}, []string{""}),
@@ -1850,11 +2134,14 @@ func TestPublishTargetsDelgationSuccessNeedsToDownloadRoles(t *testing.T) {
 		"error creating delegation")
 
 	assert.NoError(t, ownerRepo.Publish())
+	// delegation parents all get signed
+	ownerRec.assertAsked(t, []string{data.CanonicalTargetsRole, "targets/a"})
 
 	// delegated repo now publishes to delegated roles, but it will need
 	// to download those roles first, since it doesn't know about them
 	assertPublishToRolesSucceeds(t, delgRepo, []string{"targets/a/b"},
 		[]string{"targets/a/b"})
+	delgRec.assertAsked(t, []string{"targets/a/b"})
 }
 
 // Ensure that two clients can publish delegations with two different keys and
@@ -1869,7 +2156,7 @@ func TestPublishTargetsDelgationFromTwoRepos(t *testing.T) {
 	defer os.RemoveAll(repo1.baseDir)
 
 	// this is the second writable repo
-	repo2 := newRepoToTestRepo(t, repo1)
+	repo2, _ := newRepoToTestRepo(t, repo1, true)
 	defer os.RemoveAll(repo2.baseDir)
 
 	// create keys for each repo
@@ -1887,15 +2174,28 @@ func TestPublishTargetsDelgationFromTwoRepos(t *testing.T) {
 
 	assert.NoError(t, repo1.Publish())
 
+	// clear metadata and unencrypted private key cache
+	var rec1, rec2 *passRoleRecorder
+	repo1, rec1 = newRepoToTestRepo(t, repo1, false)
+	repo2, rec2 = newRepoToTestRepo(t, repo2, false)
+
 	// both repos add targets and publish
 	addTarget(t, repo1, "first", "../fixtures/root-ca.crt", "targets/a")
 	assert.NoError(t, repo1.Publish())
+	rec1.assertAsked(t, []string{"targets/a"})
+	rec1.clear()
+
 	addTarget(t, repo2, "second", "../fixtures/root-ca.crt", "targets/a")
 	assert.NoError(t, repo2.Publish())
+	rec2.assertAsked(t, []string{"targets/a"})
+	rec2.clear()
 
 	// first repo can publish again
 	addTarget(t, repo1, "third", "../fixtures/root-ca.crt", "targets/a")
 	assert.NoError(t, repo1.Publish())
+	// key has been cached now
+	rec1.assertAsked(t, nil)
+	rec1.clear()
 
 	// both repos should be able to see all targets
 	for _, repo := range []*NotaryRepository{repo1, repo2} {
@@ -1930,7 +2230,7 @@ func TestPublishRemoveDelgationKeyFromDelegationRole(t *testing.T) {
 
 	// this is a user, or otherwise a repo that only has access to the delegation
 	// key so it can publish targets to the delegated role
-	delgRepo := newRepoToTestRepo(t, ownerRepo)
+	delgRepo, _ := newRepoToTestRepo(t, ownerRepo, true)
 	defer os.RemoveAll(delgRepo.baseDir)
 
 	// create a key on the delegated repo
@@ -1988,7 +2288,7 @@ func TestPublishRemoveDelgation(t *testing.T) {
 
 	// this is a user, or otherwise a repo that only has access to the delegation
 	// key so it can publish targets to the delegated role
-	delgRepo := newRepoToTestRepo(t, ownerRepo)
+	delgRepo, _ := newRepoToTestRepo(t, ownerRepo, true)
 	defer os.RemoveAll(delgRepo.baseDir)
 
 	// create a key on the delegated repo
@@ -2073,13 +2373,13 @@ func assertRotationSuccessful(t *testing.T, repo1 *NotaryRepository,
 	// and one only downloads after the publish. This reflects a client
 	// that has some previous trust data (but is not the publisher), and a
 	// completely new client being able to read the rotated trust data.
-	repo2 := newRepoToTestRepo(t, repo1)
+	repo2, _ := newRepoToTestRepo(t, repo1, true)
 	defer os.RemoveAll(repo2.baseDir)
 
 	repos := []*NotaryRepository{repo1, repo2}
 
 	if alreadyPublished {
-		repo3 := newRepoToTestRepo(t, repo1)
+		repo3, _ := newRepoToTestRepo(t, repo1, true)
 		defer os.RemoveAll(repo2.baseDir)
 
 		// force a pull on repo3
@@ -2213,6 +2513,13 @@ func testRotateKeySuccess(t *testing.T, serverManagesSnapshotInit bool,
 	// Get root.json and capture targets + snapshot key IDs
 	repo.GetTargetByName("latest") // force a pull
 	assertRotationSuccessful(t, repo, keysToRotate, true)
+
+	var keysToExpectCreated []string
+	for role, serverManaged := range keysToRotate {
+		if !serverManaged {
+			keysToExpectCreated = append(keysToExpectCreated, role)
+		}
+	}
 }
 
 // If there is no local cache, notary operations return the remote error code
