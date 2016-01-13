@@ -17,6 +17,28 @@ import (
 	"github.com/docker/notary/tuf/signed"
 )
 
+func createKey(cs signed.CryptoService, gun, role string) (data.PublicKey, error) {
+	key, err := cs.Create(role, data.ECDSAKey)
+	if err != nil {
+		return nil, err
+	}
+	if role == data.CanonicalRootRole {
+		start := time.Now().AddDate(0, 0, -1)
+		privKey, _, err := cs.GetPrivateKey(key.ID())
+		if err != nil {
+			return nil, err
+		}
+		cert, err := cryptoservice.GenerateCertificate(
+			privKey, gun, start, start.AddDate(1, 0, 0),
+		)
+		if err != nil {
+			return nil, err
+		}
+		key = data.NewECDSAx509PublicKey(trustmanager.CertToPEM(cert))
+	}
+	return key, nil
+}
+
 // EmptyRepo creates an in memory key database, crypto service
 // and initializes a repo with no targets or delegations.
 func EmptyRepo(gun string) (*keys.KeyDB, *tuf.Repo, signed.CryptoService, error) {
@@ -26,20 +48,9 @@ func EmptyRepo(gun string) (*keys.KeyDB, *tuf.Repo, signed.CryptoService, error)
 	r := tuf.NewRepo(kdb, c)
 
 	for _, role := range data.BaseRoles {
-		key, _ := c.Create(role, data.ECDSAKey)
-		if role == data.CanonicalRootRole {
-			start := time.Now().AddDate(0, 0, -1)
-			privKey, _, err := c.GetPrivateKey(key.ID())
-			if err != nil {
-				return nil, nil, nil, err
-			}
-			cert, err := cryptoservice.GenerateCertificate(
-				privKey, gun, start, start.AddDate(1, 0, 0),
-			)
-			if err != nil {
-				return nil, nil, nil, err
-			}
-			key = data.NewECDSAx509PublicKey(trustmanager.CertToPEM(cert))
+		key, err := createKey(c, gun, role)
+		if err != nil {
+			return nil, nil, nil, err
 		}
 		role, _ := data.NewRole(role, 1, []string{key.ID()}, nil, nil)
 		kdb.AddKey(key)

@@ -124,6 +124,7 @@ endef
 gen-cover: go_version
 	@mkdir -p "$(COVERDIR)"
 	$(foreach PKG,$(PKGS),$(call gocover,$(PKG)))
+	rm "$(COVERDIR)"/*testutils*.cover
 
 # Generates the cover binaries and runs them all in serial, so this can be used
 # run all tests with a yubikey without any problems
