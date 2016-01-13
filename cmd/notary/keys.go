@@ -16,6 +16,7 @@ import (
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/trustmanager"
 
+	"github.com/docker/notary"
 	"github.com/docker/notary/tuf/data"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -253,7 +254,7 @@ func (k *keyCommander) keysExportRoot(cmd *cobra.Command, args []string) error {
 	keyID := args[0]
 	exportFilename := args[1]
 
-	if len(keyID) != idSize {
+	if len(keyID) != notary.Sha256HexSize {
 		return fmt.Errorf("Please specify a valid root key ID")
 	}
 
@@ -473,7 +474,7 @@ func (k *keyCommander) keyRemove(cmd *cobra.Command, args []string) error {
 	keyID := args[0]
 
 	// This is an invalid ID
-	if len(keyID) != idSize {
+	if len(keyID) != notary.Sha256HexSize {
 		return fmt.Errorf("invalid key ID provided: %s", keyID)
 	}
 	cmd.Println("")

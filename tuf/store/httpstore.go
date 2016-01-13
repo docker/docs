@@ -227,6 +227,11 @@ func (s HTTPStore) SetMultiMeta(metas map[string][]byte) error {
 	return translateStatusToError(resp, "POST metadata endpoint")
 }
 
+// RemoveAll in the interface is not supported, admins should use the DeleteHandler endpoint directly to delete remote data for a GUN
+func (s HTTPStore) RemoveAll() error {
+	return errors.New("remove all functionality not supported for HTTPStore")
+}
+
 func (s HTTPStore) buildMetaURL(name string) (*url.URL, error) {
 	var filename string
 	if name != "" {

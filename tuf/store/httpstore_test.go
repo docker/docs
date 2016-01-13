@@ -244,3 +244,19 @@ func TestTranslateErrorsWhenCannotParse400(t *testing.T) {
 		assert.IsType(t, ErrInvalidOperation{}, err)
 	}
 }
+
+func TestHTTPStoreRemoveAll(t *testing.T) {
+	// Set up a simple handler and server for our store
+	handler := func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte(testRoot))
+	}
+	server := httptest.NewServer(http.HandlerFunc(handler))
+	defer server.Close()
+	store, err := NewHTTPStore(server.URL, "metadata", "json", "targets", "key", http.DefaultTransport)
+	assert.NoError(t, err)
+
+	// currently unsupported since there is no use case
+	// check for the error
+	err = store.RemoveAll()
+	assert.Error(t, err)
+}

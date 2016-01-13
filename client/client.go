@@ -13,7 +13,6 @@ import (
 	"time"
 
 	"github.com/Sirupsen/logrus"
-
 	"github.com/docker/notary"
 	"github.com/docker/notary/certs"
 	"github.com/docker/notary/client/changelist"
@@ -907,6 +906,30 @@ func (r *NotaryRepository) rootFileKeyChange(role, action string, key data.Publi
 	err = cl.Add(c)
 	if err != nil {
 		return err
+	}
+	return nil
+}
+
+// DeleteTrustData removes the trust data stored for this repo in the TUF cache and certificate store on the client side
+func (r *NotaryRepository) DeleteTrustData() error {
+	// Clear TUF files and cache
+	if err := r.fileStore.RemoveAll(); err != nil {
+		return fmt.Errorf("error clearing TUF repo data: %v", err)
+	}
+	r.tufRepo = tuf.NewRepo(nil, nil)
+	// Clear certificates
+	certificates, err := r.CertStore.GetCertificatesByCN(r.gun)
+	if err != nil {
+		// If there were no certificates to delete, we're done
+		if _, ok := err.(*trustmanager.ErrNoCertificatesFound); ok {
+			return nil
+		}
+		return fmt.Errorf("error retrieving certificates for %s: %v", r.gun, err)
+	}
+	for _, cert := range certificates {
+		if err := r.CertStore.RemoveCert(cert); err != nil {
+			return fmt.Errorf("error removing certificate: %v: %v", cert, err)
+		}
 	}
 	return nil
 }
