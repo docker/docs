@@ -8,6 +8,7 @@ type TUFFile struct {
 	Gun     string `sql:"type:varchar(255);not null"`
 	Role    string `sql:"type:varchar(255);not null"`
 	Version int    `sql:"not null"`
+	Sha256  string `sql:"type:varchar(64);"`
 	Data    []byte `sql:"type:longblob;not null"`
 }
 

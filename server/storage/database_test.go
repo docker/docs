@@ -1,6 +1,8 @@
 package storage
 
 import (
+	"crypto/sha256"
+	"encoding/hex"
 	"io/ioutil"
 	"os"
 	"testing"
@@ -8,16 +10,20 @@ import (
 	"github.com/docker/notary/tuf/data"
 	"github.com/jinzhu/gorm"
 	_ "github.com/mattn/go-sqlite3"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 // SampleTUF returns a sample TUFFile with the given Version (ID will have
 // to be set independently)
 func SampleTUF(version int) TUFFile {
+	data := []byte("1")
+	checksum := sha256.Sum256(data)
+	hexChecksum := hex.EncodeToString(checksum[:])
 	return TUFFile{
 		Gun:     "testGUN",
 		Role:    "root",
 		Version: version,
+		Sha256:  hexChecksum,
 		Data:    []byte("1"),
 	}
 }
@@ -33,21 +39,21 @@ func SampleUpdate(version int) MetaUpdate {
 // SetUpSQLite creates a sqlite database for testing
 func SetUpSQLite(t *testing.T, dbDir string) (*gorm.DB, *SQLStorage) {
 	dbStore, err := NewSQLStorage("sqlite3", dbDir+"test_db")
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// Create the DB tables
 	err = CreateTUFTable(dbStore.DB)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	err = CreateKeyTable(dbStore.DB)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// verify that the tables are empty
 	var count int
 	for _, model := range [2]interface{}{&TUFFile{}, &Key{}} {
 		query := dbStore.DB.Model(model).Count(&count)
-		assert.NoError(t, query.Error)
-		assert.Equal(t, 0, count)
+		require.NoError(t, query.Error)
+		require.Equal(t, 0, count)
 	}
 	return &dbStore.DB, dbStore
 }
@@ -61,16 +67,16 @@ func TestSQLUpdateCurrentNew(t *testing.T) {
 
 	// Adding a new TUF file should succeed
 	err = dbStore.UpdateCurrent("testGUN", SampleUpdate(0))
-	assert.NoError(t, err, "Creating a row in an empty DB failed.")
+	require.NoError(t, err, "Creating a row in an empty DB failed.")
 
 	// There should just be one row
 	var rows []TUFFile
-	query := gormDB.Select("ID, Gun, Role, Version, Data").Find(&rows)
-	assert.NoError(t, query.Error)
+	query := gormDB.Select("ID, Gun, Role, Version, Sha256, Data").Find(&rows)
+	require.NoError(t, query.Error)
 
 	expected := SampleTUF(0)
 	expected.ID = 1
-	assert.Equal(t, []TUFFile{expected}, rows)
+	require.Equal(t, []TUFFile{expected}, rows)
 }
 
 // TestSQLUpdateCurrentNewVersion asserts that UpdateCurrent will add a
@@ -83,22 +89,22 @@ func TestSQLUpdateCurrentNewVersion(t *testing.T) {
 	// insert row
 	oldVersion := SampleTUF(0)
 	query := gormDB.Create(&oldVersion)
-	assert.NoError(t, query.Error, "Creating a row in an empty DB failed.")
+	require.NoError(t, query.Error, "Creating a row in an empty DB failed.")
 
 	// UpdateCurrent with a newer version should succeed
 	update := SampleUpdate(2)
 	err = dbStore.UpdateCurrent("testGUN", update)
-	assert.NoError(t, err, "Creating a row in an empty DB failed.")
+	require.NoError(t, err, "Creating a row in an empty DB failed.")
 
 	// There should just be one row
 	var rows []TUFFile
-	query = gormDB.Select("ID, Gun, Role, Version, Data").Find(&rows)
-	assert.NoError(t, query.Error)
+	query = gormDB.Select("ID, Gun, Role, Version, Sha256, Data").Find(&rows)
+	require.NoError(t, query.Error)
 
 	oldVersion.Model = gorm.Model{ID: 1}
 	expected := SampleTUF(2)
 	expected.Model = gorm.Model{ID: 2}
-	assert.Equal(t, []TUFFile{oldVersion, expected}, rows)
+	require.Equal(t, []TUFFile{oldVersion, expected}, rows)
 }
 
 // TestSQLUpdateCurrentOldVersionError asserts that an error is raised if
@@ -111,22 +117,22 @@ func TestSQLUpdateCurrentOldVersionError(t *testing.T) {
 	// insert row
 	newVersion := SampleTUF(3)
 	query := gormDB.Create(&newVersion)
-	assert.NoError(t, query.Error, "Creating a row in an empty DB failed.")
+	require.NoError(t, query.Error, "Creating a row in an empty DB failed.")
 
 	// UpdateCurrent should fail due to the version being lower than the
 	// previous row
 	err = dbStore.UpdateCurrent("testGUN", SampleUpdate(0))
-	assert.Error(t, err, "Error should not be nil")
-	assert.IsType(t, &ErrOldVersion{}, err,
+	require.Error(t, err, "Error should not be nil")
+	require.IsType(t, &ErrOldVersion{}, err,
 		"Expected ErrOldVersion error type, got: %v", err)
 
 	// There should just be one row
 	var rows []TUFFile
-	query = gormDB.Select("ID, Gun, Role, Version, Data").Find(&rows)
-	assert.NoError(t, query.Error)
+	query = gormDB.Select("ID, Gun, Role, Version, Sha256, Data").Find(&rows)
+	require.NoError(t, query.Error)
 
 	newVersion.Model = gorm.Model{ID: 1}
-	assert.Equal(t, []TUFFile{newVersion}, rows)
+	require.Equal(t, []TUFFile{newVersion}, rows)
 
 	dbStore.DB.Close()
 }
@@ -147,21 +153,24 @@ func TestSQLUpdateMany(t *testing.T) {
 		},
 		SampleUpdate(2),
 	})
-	assert.NoError(t, err, "UpdateMany errored unexpectedly: %v", err)
+	require.NoError(t, err, "UpdateMany errored unexpectedly: %v", err)
 
 	gorm1 := SampleTUF(0)
 	gorm1.ID = 1
+	data := []byte("2")
+	checksum := sha256.Sum256(data)
+	hexChecksum := hex.EncodeToString(checksum[:])
 	gorm2 := TUFFile{
 		Model: gorm.Model{ID: 2}, Gun: "testGUN", Role: "targets",
-		Version: 1, Data: []byte("2")}
+		Version: 1, Sha256: hexChecksum, Data: data}
 	gorm3 := SampleTUF(2)
 	gorm3.ID = 3
 	expected := []TUFFile{gorm1, gorm2, gorm3}
 
 	var rows []TUFFile
-	query := gormDB.Select("ID, Gun, Role, Version, Data").Find(&rows)
-	assert.NoError(t, query.Error)
-	assert.Equal(t, expected, rows)
+	query := gormDB.Select("ID, Gun, Role, Version, Sha256, Data").Find(&rows)
+	require.NoError(t, query.Error)
+	require.Equal(t, expected, rows)
 
 	dbStore.DB.Close()
 }
@@ -175,7 +184,7 @@ func TestSQLUpdateManyVersionOrder(t *testing.T) {
 
 	err = dbStore.UpdateMany(
 		"testGUN", []MetaUpdate{SampleUpdate(2), SampleUpdate(0)})
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// the whole transaction should have rolled back, so there should be
 	// no entries.
@@ -185,9 +194,9 @@ func TestSQLUpdateManyVersionOrder(t *testing.T) {
 	gorm2.ID = 2
 
 	var rows []TUFFile
-	query := gormDB.Select("ID, Gun, Role, Version, Data").Find(&rows)
-	assert.NoError(t, query.Error)
-	assert.Equal(t, []TUFFile{gorm1, gorm2}, rows)
+	query := gormDB.Select("ID, Gun, Role, Version, Sha256, Data").Find(&rows)
+	require.NoError(t, query.Error)
+	require.Equal(t, []TUFFile{gorm1, gorm2}, rows)
 
 	dbStore.DB.Close()
 }
@@ -201,17 +210,17 @@ func TestSQLUpdateManyDuplicateRollback(t *testing.T) {
 
 	update := SampleUpdate(0)
 	err = dbStore.UpdateMany("testGUN", []MetaUpdate{update, update})
-	assert.Error(
+	require.Error(
 		t, err, "There should be an error updating the same data twice.")
-	assert.IsType(t, &ErrOldVersion{}, err,
+	require.IsType(t, &ErrOldVersion{}, err,
 		"UpdateMany returned wrong error type")
 
 	// the whole transaction should have rolled back, so there should be
 	// no entries.
 	var count int
 	query := gormDB.Model(&TUFFile{}).Count(&count)
-	assert.NoError(t, query.Error)
-	assert.Equal(t, 0, count)
+	require.NoError(t, query.Error)
+	require.Equal(t, 0, count)
 
 	dbStore.DB.Close()
 }
@@ -222,17 +231,17 @@ func TestSQLGetCurrent(t *testing.T) {
 	defer os.RemoveAll(tempBaseDir)
 
 	byt, err := dbStore.GetCurrent("testGUN", "root")
-	assert.Nil(t, byt)
-	assert.Error(t, err, "There should be an error Getting an empty table")
-	assert.IsType(t, ErrNotFound{}, err, "Should get a not found error")
+	require.Nil(t, byt)
+	require.Error(t, err, "There should be an error Getting an empty table")
+	require.IsType(t, ErrNotFound{}, err, "Should get a not found error")
 
 	tuf := SampleTUF(0)
 	query := gormDB.Create(&tuf)
-	assert.NoError(t, query.Error, "Creating a row in an empty DB failed.")
+	require.NoError(t, query.Error, "Creating a row in an empty DB failed.")
 
 	byt, err = dbStore.GetCurrent("testGUN", "root")
-	assert.NoError(t, err, "There should not be any errors getting.")
-	assert.Equal(t, []byte("1"), byt, "Returned data was incorrect")
+	require.NoError(t, err, "There should not be any errors getting.")
+	require.Equal(t, []byte("1"), byt, "Returned data was incorrect")
 
 	dbStore.DB.Close()
 }
@@ -244,16 +253,16 @@ func TestSQLDelete(t *testing.T) {
 
 	tuf := SampleTUF(0)
 	query := gormDB.Create(&tuf)
-	assert.NoError(t, query.Error, "Creating a row in an empty DB failed.")
+	require.NoError(t, query.Error, "Creating a row in an empty DB failed.")
 
 	err = dbStore.Delete("testGUN")
-	assert.NoError(t, err, "There should not be any errors deleting.")
+	require.NoError(t, err, "There should not be any errors deleting.")
 
 	// verify deletion
 	var count int
 	query = gormDB.Model(&TUFFile{}).Count(&count)
-	assert.NoError(t, query.Error)
-	assert.Equal(t, 0, count)
+	require.NoError(t, query.Error)
+	require.Equal(t, 0, count)
 
 	dbStore.DB.Close()
 }
@@ -264,9 +273,9 @@ func TestSQLGetKeyNoKey(t *testing.T) {
 	defer os.RemoveAll(tempBaseDir)
 
 	cipher, public, err := dbStore.GetKey("testGUN", data.CanonicalTimestampRole)
-	assert.Equal(t, "", cipher)
-	assert.Nil(t, public)
-	assert.IsType(t, &ErrNoKey{}, err,
+	require.Equal(t, "", cipher)
+	require.Nil(t, public)
+	require.IsType(t, &ErrNoKey{}, err,
 		"Expected ErrNoKey from GetKey")
 
 	query := gormDB.Create(&Key{
@@ -275,13 +284,13 @@ func TestSQLGetKeyNoKey(t *testing.T) {
 		Cipher: "testCipher",
 		Public: []byte("1"),
 	})
-	assert.NoError(
+	require.NoError(
 		t, query.Error, "Inserting timestamp into empty DB should succeed")
 
 	cipher, public, err = dbStore.GetKey("testGUN", data.CanonicalTimestampRole)
-	assert.Equal(t, "testCipher", cipher,
+	require.Equal(t, "testCipher", cipher,
 		"Returned cipher was incorrect")
-	assert.Equal(t, []byte("1"), public, "Returned pubkey was incorrect")
+	require.Equal(t, []byte("1"), public, "Returned pubkey was incorrect")
 }
 
 func TestSQLSetKeyExists(t *testing.T) {
@@ -290,22 +299,22 @@ func TestSQLSetKeyExists(t *testing.T) {
 	defer os.RemoveAll(tempBaseDir)
 
 	err = dbStore.SetKey("testGUN", data.CanonicalTimestampRole, "testCipher", []byte("1"))
-	assert.NoError(t, err, "Inserting timestamp into empty DB should succeed")
+	require.NoError(t, err, "Inserting timestamp into empty DB should succeed")
 
 	err = dbStore.SetKey("testGUN", data.CanonicalTimestampRole, "testCipher", []byte("1"))
-	assert.Error(t, err)
-	assert.IsType(t, &ErrKeyExists{}, err,
+	require.Error(t, err)
+	require.IsType(t, &ErrKeyExists{}, err,
 		"Expected ErrKeyExists from SetKey")
 
 	var rows []Key
 	query := gormDB.Select("ID, Gun, Cipher, Public").Find(&rows)
-	assert.NoError(t, query.Error)
+	require.NoError(t, query.Error)
 
 	expected := Key{Gun: "testGUN", Cipher: "testCipher",
 		Public: []byte("1")}
 	expected.Model = gorm.Model{ID: 1}
 
-	assert.Equal(t, []Key{expected}, rows)
+	require.Equal(t, []Key{expected}, rows)
 
 	dbStore.DB.Close()
 }
@@ -316,14 +325,14 @@ func TestSQLSetKeyMultipleRoles(t *testing.T) {
 	defer os.RemoveAll(tempBaseDir)
 
 	err = dbStore.SetKey("testGUN", data.CanonicalTimestampRole, "testCipher", []byte("1"))
-	assert.NoError(t, err, "Inserting timestamp into empty DB should succeed")
+	require.NoError(t, err, "Inserting timestamp into empty DB should succeed")
 
 	err = dbStore.SetKey("testGUN", data.CanonicalSnapshotRole, "testCipher", []byte("1"))
-	assert.NoError(t, err, "Inserting snapshot key into DB with timestamp key should succeed")
+	require.NoError(t, err, "Inserting snapshot key into DB with timestamp key should succeed")
 
 	var rows []Key
 	query := gormDB.Select("ID, Gun, Role, Cipher, Public").Find(&rows)
-	assert.NoError(t, query.Error)
+	require.NoError(t, query.Error)
 
 	expectedTS := Key{Gun: "testGUN", Role: "timestamp", Cipher: "testCipher",
 		Public: []byte("1")}
@@ -333,7 +342,7 @@ func TestSQLSetKeyMultipleRoles(t *testing.T) {
 		Public: []byte("1")}
 	expectedSN.Model = gorm.Model{ID: 2}
 
-	assert.Equal(t, []Key{expectedTS, expectedSN}, rows)
+	require.Equal(t, []Key{expectedTS, expectedSN}, rows)
 
 	dbStore.DB.Close()
 }
@@ -344,14 +353,14 @@ func TestSQLSetKeyMultipleGuns(t *testing.T) {
 	defer os.RemoveAll(tempBaseDir)
 
 	err = dbStore.SetKey("testGUN", data.CanonicalTimestampRole, "testCipher", []byte("1"))
-	assert.NoError(t, err, "Inserting timestamp into empty DB should succeed")
+	require.NoError(t, err, "Inserting timestamp into empty DB should succeed")
 
 	err = dbStore.SetKey("testAnotherGUN", data.CanonicalTimestampRole, "testCipher", []byte("1"))
-	assert.NoError(t, err, "Inserting snapshot key into DB with timestamp key should succeed")
+	require.NoError(t, err, "Inserting snapshot key into DB with timestamp key should succeed")
 
 	var rows []Key
 	query := gormDB.Select("ID, Gun, Role, Cipher, Public").Find(&rows)
-	assert.NoError(t, query.Error)
+	require.NoError(t, query.Error)
 
 	expected1 := Key{Gun: "testGUN", Role: "timestamp", Cipher: "testCipher",
 		Public: []byte("1")}
@@ -361,7 +370,7 @@ func TestSQLSetKeyMultipleGuns(t *testing.T) {
 		Public: []byte("1")}
 	expected2.Model = gorm.Model{ID: 2}
 
-	assert.Equal(t, []Key{expected1, expected2}, rows)
+	require.Equal(t, []Key{expected1, expected2}, rows)
 
 	dbStore.DB.Close()
 }
@@ -372,11 +381,11 @@ func TestSQLSetKeySameRoleGun(t *testing.T) {
 	defer os.RemoveAll(tempBaseDir)
 
 	err = dbStore.SetKey("testGUN", data.CanonicalTimestampRole, "testCipher", []byte("1"))
-	assert.NoError(t, err, "Inserting timestamp into empty DB should succeed")
+	require.NoError(t, err, "Inserting timestamp into empty DB should succeed")
 
 	err = dbStore.SetKey("testGUN", data.CanonicalTimestampRole, "testCipher", []byte("2"))
-	assert.Error(t, err)
-	assert.IsType(t, &ErrKeyExists{}, err,
+	require.Error(t, err)
+	require.IsType(t, &ErrKeyExists{}, err,
 		"Expected ErrKeyExists from SetKey")
 
 	dbStore.DB.Close()
@@ -394,17 +403,17 @@ func TestDBCheckHealthTableMissing(t *testing.T) {
 
 	// No tables, health check fails
 	err = dbStore.CheckHealth()
-	assert.Error(t, err, "Cannot access table:")
+	require.Error(t, err, "Cannot access table:")
 
 	// only one table existing causes health check to fail
 	CreateTUFTable(dbStore.DB)
 	err = dbStore.CheckHealth()
-	assert.Error(t, err, "Cannot access table:")
+	require.Error(t, err, "Cannot access table:")
 	dbStore.DropTable(&TUFFile{})
 
 	CreateKeyTable(dbStore.DB)
 	err = dbStore.CheckHealth()
-	assert.Error(t, err, "Cannot access table:")
+	require.Error(t, err, "Cannot access table:")
 }
 
 // TestDBCheckHealthDBCOnnection asserts that if the DB is not connectable, the
@@ -415,10 +424,10 @@ func TestDBCheckHealthDBConnectionFail(t *testing.T) {
 	defer os.RemoveAll(tempBaseDir)
 
 	err = dbStore.Close()
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	err = dbStore.CheckHealth()
-	assert.Error(t, err, "Cannot access table:")
+	require.Error(t, err, "Cannot access table:")
 }
 
 // TestDBCheckHealthSuceeds asserts that if the DB is connectable and both
@@ -429,5 +438,5 @@ func TestDBCheckHealthSucceeds(t *testing.T) {
 	defer os.RemoveAll(tempBaseDir)
 
 	err = dbStore.CheckHealth()
-	assert.NoError(t, err)
+	require.NoError(t, err)
 }
