@@ -10,8 +10,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-var passphraseRetriever = func(string, string, bool, int) (string, bool, error) { return "passphrase", false, nil }
-
 // TestValidateRoot through the process of initializing a repository and makes
 // sure the repository looks correct on disk.
 // We test this with both an RSA and ECDSA root key

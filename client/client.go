@@ -555,9 +555,21 @@ func (r *NotaryRepository) Publish() error {
 	// we send anything to remote
 	updatedFiles := make(map[string][]byte)
 
-	// check if our root file is nearing expiry. Resign if it is.
-	if nearExpiry(r.tufRepo.Root) || r.tufRepo.Root.Dirty || initialPublish {
+	// check if our root file is nearing expiry or dirty. Resign if it is.  If
+	// root is not dirty but we are publishing for the first time, then just
+	// publish the existing root we have.
+	if nearExpiry(r.tufRepo.Root) || r.tufRepo.Root.Dirty {
 		rootJSON, err := serializeCanonicalRole(r.tufRepo, data.CanonicalRootRole)
+		if err != nil {
+			return err
+		}
+		updatedFiles[data.CanonicalRootRole] = rootJSON
+	} else if initialPublish {
+		root, err := r.tufRepo.Root.ToSigned()
+		if err != nil {
+			return err
+		}
+		rootJSON, err := json.Marshal(root)
 		if err != nil {
 			return err
 		}
