@@ -354,6 +354,13 @@ func (ps passwordStore) Basic(u *url.URL) (string, string) {
 	return username, password
 }
 
+// getTransport returns an http.RoundTripper to be used for all http requests.
+// It correctly handles the auth challenge/credentials required to interact
+// with a notary server over both HTTP Basic Auth and the JWT auth implemented
+// in the notary-server
+// The readOnly flag indicates if the operation should be performed as an
+// anonymous read only operation. If the command entered requires write
+// permissions on the server, readOnly must be false
 func getTransport(config *viper.Viper, gun string, readOnly bool) http.RoundTripper {
 	// Attempt to get a root CA from the config file. Nil is the host defaults.
 	rootCAFile := config.GetString("remote_server.root_ca")
