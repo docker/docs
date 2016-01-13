@@ -41,3 +41,8 @@ func (es OfflineStore) GetKey(role string) ([]byte, error) {
 func (es OfflineStore) GetTarget(path string) (io.ReadCloser, error) {
 	return nil, err
 }
+
+// RemoveAll return ErrOffline
+func (es OfflineStore) RemoveAll() error {
+	return err
+}

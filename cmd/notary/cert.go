@@ -6,8 +6,8 @@ import (
 	"path/filepath"
 
 	"github.com/docker/notary"
+	notaryclient "github.com/docker/notary/client"
 	"github.com/docker/notary/trustmanager"
-
 	"github.com/spf13/cobra"
 )
 
@@ -43,6 +43,7 @@ var cmdCertRemove = &cobra.Command{
 }
 
 // certRemove deletes a certificate given a cert ID or a gun
+// If given a gun, certRemove will also remove local TUF data
 func certRemove(cmd *cobra.Command, args []string) {
 	// If the user hasn't provided -g with a gun, or a cert ID, show usage
 	// If the user provided -g and a cert ID, also show usage
@@ -63,37 +64,49 @@ func certRemove(cmd *cobra.Command, args []string) {
 	}
 
 	var certsToRemove []*x509.Certificate
+	var certFoundByID *x509.Certificate
+	var removeTrustData bool
 
 	// If there is no GUN, we expect a cert ID
 	if certRemoveGUN == "" {
 		certID := args[0]
-		// This is an invalid ID
-		if len(certID) != idSize {
-			fatalf("Invalid certificate ID provided: %s", certID)
-		}
-		// Attempt to find this certificates
-		cert, err := certStore.GetCertificateByCertID(certID)
+		// Attempt to find this certificate
+		certFoundByID, err = certStore.GetCertificateByCertID(certID)
 		if err != nil {
+			// This is an invalid ID, the user might have forgotten a character
+			if len(certID) != notary.Sha256HexSize {
+				fatalf("Unable to retrieve certificate with invalid certificate ID provided: %s", certID)
+			}
 			fatalf("Unable to retrieve certificate with cert ID: %s", certID)
 		}
-		certsToRemove = append(certsToRemove, cert)
-	} else {
-		// We got the -g flag, it's a GUN
-		toRemove, err := certStore.GetCertificatesByCN(
-			certRemoveGUN)
-		if err != nil {
-			fatalf("%v", err)
-		}
-		certsToRemove = append(certsToRemove, toRemove...)
+		// the GUN is the CN from the certificate
+		certRemoveGUN = certFoundByID.Subject.CommonName
+		certsToRemove = []*x509.Certificate{certFoundByID}
 	}
 
-	// List all the keys about to be removed
+	toRemove, err := certStore.GetCertificatesByCN(certRemoveGUN)
+	// We could not find any certificates matching the user's query, so propagate the error
+	if err != nil {
+		fatalf("%v", err)
+	}
+
+	// If we specified a GUN or if the ID we specified is the only certificate with its CN, remove all GUN certs and trust data too
+	if certFoundByID == nil || len(toRemove) == 1 {
+		removeTrustData = true
+		certsToRemove = toRemove
+	}
+
+	// List all the certificates about to be removed
 	cmd.Printf("The following certificates will be removed:\n\n")
 	for _, cert := range certsToRemove {
 		// This error can't occur because we're getting certs off of an
 		// x509 store that indexes by ID.
 		certID, _ := trustmanager.FingerprintCert(cert)
 		cmd.Printf("%s - %s\n", cert.Subject.CommonName, certID)
+	}
+	// If we were given a GUN or the last ID for a GUN, inform the user that we'll also delete all TUF data
+	if removeTrustData {
+		cmd.Printf("\nAll local trust data will be removed for %s\n", certRemoveGUN)
 	}
 	cmd.Println("\nAre you sure you want to remove these certificates? (yes/no)")
 
@@ -105,11 +118,24 @@ func certRemove(cmd *cobra.Command, args []string) {
 		}
 	}
 
-	// Remove all the certs
-	for _, cert := range certsToRemove {
-		err = certStore.RemoveCert(cert)
+	if removeTrustData {
+		// Remove all TUF data, so call RemoveTrustData on a NotaryRepository with the GUN
+		// no online operations are performed so the transport argument is nil
+		nRepo, err := notaryclient.NewNotaryRepository(trustDir, certRemoveGUN, getRemoteTrustServer(mainViper), nil, retriever)
 		if err != nil {
-			fatalf("Failed to remove root certificate for %s", cert.Subject.CommonName)
+			fatalf("Could not establish trust data for GUN %s", certRemoveGUN)
+		}
+		// DeleteTrustData will pick up all of the same certificates by GUN (CN) and remove them
+		err = nRepo.DeleteTrustData()
+		if err != nil {
+			fatalf("Failed to delete trust data for %s", certRemoveGUN)
+		}
+	} else {
+		for _, cert := range certsToRemove {
+			err = certStore.RemoveCert(cert)
+			if err != nil {
+				fatalf("Failed to remove cert %s", cert)
+			}
 		}
 	}
 }

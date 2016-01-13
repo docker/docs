@@ -95,3 +95,11 @@ func (m *memoryStore) Commit(map[string][]byte, bool, map[string]data.Hashes) er
 func (m *memoryStore) GetKey(role string) ([]byte, error) {
 	return nil, fmt.Errorf("GetKey is not implemented for the memoryStore")
 }
+
+// Clear this existing memory store by setting this store as new empty one
+func (m *memoryStore) RemoveAll() error {
+	m.meta = make(map[string][]byte)
+	m.files = make(map[string][]byte)
+	m.keys = make(map[string][]data.PrivateKey)
+	return nil
+}
