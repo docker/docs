@@ -565,11 +565,7 @@ func (r *NotaryRepository) Publish() error {
 		}
 		updatedFiles[data.CanonicalRootRole] = rootJSON
 	} else if initialPublish {
-		root, err := r.tufRepo.Root.ToSigned()
-		if err != nil {
-			return err
-		}
-		rootJSON, err := json.Marshal(root)
+		rootJSON, err := r.tufRepo.Root.MarshalJSON()
 		if err != nil {
 			return err
 		}
