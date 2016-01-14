@@ -722,23 +722,32 @@ func (r *NotaryRepository) saveMetadata(ignoreSnapshot bool) error {
 	return r.fileStore.SetMeta(data.CanonicalSnapshotRole, snapshotJSON)
 }
 
+// returns a properly constructed ErrRepositoryNotExist error based on this
+// repo's information
+func (r *NotaryRepository) errRepositoryNotExist() error {
+	host := r.baseURL
+	parsed, err := url.Parse(r.baseURL)
+	if err == nil {
+		host = parsed.Host // try to exclude the scheme and any paths
+	}
+	return ErrRepositoryNotExist{remote: host, gun: r.gun}
+}
+
 // Update bootstraps a trust anchor (root.json) before updating all the
 // metadata from the repo.
 func (r *NotaryRepository) Update(forWrite bool) (*tufclient.Client, error) {
 	c, err := r.bootstrapClient(forWrite)
 	if err != nil {
 		if _, ok := err.(store.ErrMetaNotFound); ok {
-			host := r.baseURL
-			parsed, err := url.Parse(r.baseURL)
-			if err == nil {
-				host = parsed.Host // try to exclude the scheme and any paths
-			}
-			return nil, ErrRepositoryNotExist{remote: host, gun: r.gun}
+			return nil, r.errRepositoryNotExist()
 		}
 		return nil, err
 	}
 	err = c.Update()
 	if err != nil {
+		if notFound, ok := err.(store.ErrMetaNotFound); ok && notFound.Resource == data.CanonicalRootRole {
+			return nil, r.errRepositoryNotExist()
+		}
 		return nil, err
 	}
 	return c, nil

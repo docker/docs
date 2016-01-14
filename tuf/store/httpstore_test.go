@@ -219,7 +219,7 @@ func TestTranslateErrorsParse400Errors(t *testing.T) {
 		Body:       ioutil.NopCloser(errorBody),
 	}
 
-	finalError := translateStatusToError(&errorResp)
+	finalError := translateStatusToError(&errorResp, "")
 	assert.Equal(t, origErr, finalError)
 }
 
@@ -240,7 +240,7 @@ func TestTranslateErrorsWhenCannotParse400(t *testing.T) {
 			Body:       ioutil.NopCloser(bytes.NewBuffer([]byte(body))),
 		}
 
-		err := translateStatusToError(&errorResp)
+		err := translateStatusToError(&errorResp, "")
 		assert.IsType(t, ErrInvalidOperation{}, err)
 	}
 }
