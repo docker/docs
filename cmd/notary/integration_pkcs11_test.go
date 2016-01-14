@@ -13,17 +13,16 @@ import (
 
 func init() {
 	yubikey.SetYubikeyKeyMode(yubikey.KeymodeNone)
-	oldRetriever := retriever
+	regRetriver := passphrase.PromptRetriever()
 
-	var fake = func(k, a string, c bool, n int) (string, bool, error) {
+	retriever = func(k, a string, c bool, n int) (string, bool, error) {
 		if k == "Yubikey" {
-			return oldRetriever(k, a, c, n)
+			return regRetriver(k, a, c, n)
 		}
 		return testPassphrase, false, nil
 	}
 
-	retriever = fake
-	getRetriever = func() passphrase.Retriever { return fake }
+	getRetriever = func() passphrase.Retriever { return retriever }
 
 	// best effort at removing keys here, so nil is fine
 	s, err := yubikey.NewYubiKeyStore(nil, retriever)
