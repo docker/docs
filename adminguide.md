@@ -1,7 +1,7 @@
 +++
 title = "Admin tasks"
 description = "Documentation describing administration of Docker Trusted Registry"
-keywords = ["docker, documentation, about, technology, hub, registry, enterprise, admin tasks, dashboard, settings, logs, reporting, Notary, diagnostics"]
+keywords = ["docker, documentation, about, technology, hub, registry, enterprise, admin tasks, dashboard, settings, logs, reporting, Notary, diagnostics, admin guide, administration"]
 [menu.main]
 parent="workw_dtr"
 weight=4
@@ -9,12 +9,12 @@ weight=4
 
 
 
-# Docker Trusted Registry Administrator tasks
+# Docker Trusted Registry administrator tasks
 
-This document explains the tasks and functions an administrator of Docker
-Trusted Registry needs to understand such as reporting, logging, system
-management, performance metrics, optimizing the Trusted Registry file size, and
-deleting containers. For tasks Docker Trusted Registry users need to accomplish,
+This document explains the tasks and functions a Docker Trusted Registry
+administrator needs to understand such as reporting, logging, system management,
+performance metrics, optimizing the Trusted Registry file size, and deleting
+containers. For tasks Docker Trusted Registry users need to accomplish,
 such as pushing and pulling images, go to the [User's Guide](userguide.md). For
 using the Trusted Registry user interface (UI) to view, manage, or assign
 permissions regarding repositories, organizations, and teams, go to the
@@ -33,9 +33,7 @@ provided below for each container providing a Docker Trusted Registry service.
 In addition, if your registry is using a filesystem storage driver, you can view
 a usage meter indicating used and available space on the storage volume.
 Third-party storage back-ends are not supported. If you are using one, this
-meter is not displayed.
-
-You can mouse-over the charts or meters to see detailed data points.
+meter is not displayed. Mouse-over the charts or meters to see detailed data points.
 
 Clicking a service name, such as Load Balancer or Admin Server, displays the
 network, CPU, and memory (RAM) utilization data for the specified service. See
@@ -52,7 +50,6 @@ sub-catagorized into the following sub-headings:
 * **License**, where you apply your license
 * **Garbage collection**, set up cron job
 * **Auth**, authentication method settings: managed or LDAP
-
 * **Updates**, where you upgrade your registry
 
 Refer to the [configuration documentation](configuration.md) for details.
@@ -94,25 +91,29 @@ collects the following information:
 * Error logs
 * Crash logs
 
-## Emergency access to Docker Trusted Registry
+## Emergency access to the Trusted Registry
 
 If your authenticated or public access to the Trusted Registry UI has stopped
 working, but your Trusted Registry admin container is still running, you can add
 an
 [ambassador container](https://docs.docker.com/articles/ambassador_pattern_linking/)
-to get temporary unsecure access to it by running:
+to get temporary unsecure access to it.
 
-    $ docker run --rm -it --link docker_trusted_registry_admin_server:admin -p 9999:80 svendowideit/ambassador
+For Trusted Registry version 1.4.3, run the following command in a Trusted Registry CLI:
 
-> **Note:** This guide assumes that you are a member of the `docker` group, > or
-have root privileges. Otherwise, you may need to add `sudo` to the previous
-example command. >
->
+```
+docker run --rm -it --net dtr -p 9999:80 svendowideit/ambassador dockertrustedregistry_admin_server_1 80
+```
+However, if you are running a version prior to it,  1.4.2 or earlier, then continue to run this command:
 
-This gives you access on port `9999` on your Trusted Registry server -
-`http://<dtr-host-ip>:9999`.
+```
+$ docker run --rm -it --link docker_trusted_registry_admin_server:admin -p 9999:80 svendowideit/ambassador
+```
 
-### SSH Access to host
+Either command gives you access on port `9999` on your Trusted Registry server
+`http://<dtr-host-ip>:9999`. This guide assumes that you are a member of the `docker` group, or you  have root privileges. Otherwise, you may need to add `sudo` to the previous example command.
+
+### SSH access to host
 
 As an extra measure of safety, ensure you have SSH access to the Trusted
 Registry host before you start using it.
@@ -137,19 +138,16 @@ multiple image storage services are used in order to provide greater uptime and
 faster, more efficient resource utilization.
 * `postgres`: A database service used to host authentication (LDAP) data and other datasets as needed by Docker Trusted Registry.
 
-## Docker Trusted Registry system management
+## Trusted Registry system management
 
 The `docker/trusted-registry` image is used to control the Trusted Registry
 system. This image uses the Docker socket to orchestrate the multiple services
-that comprise the Trusted Registry.
+that comprise the Trusted Registry. The bash script needs access to run `docker` commands, so if you are not in the `docker` group, then you will need super user (sudo) access.
 
      $ sudo bash -c "$(sudo docker run docker/trusted-registry [COMMAND])"
 
 Supported commands are: `install`, `start`, `stop`, `restart`, `pull`, `info`,
 `export-settings`, `diagnostics`, `status`, `upgrade`.
-
-> **Note**: `sudo` is needed for `docker/trusted-registry` commands to
-> ensure that the Bash script is run with full access to the Docker host.
 
 ### `install`
 
@@ -200,7 +198,6 @@ docker_trusted_registry_auth_server
 
 Display the version and info for the Docker daemon, and version and image ID's
 of Docker Trusted Registry.
-
 
 ```
 $ sudo bash -c "$(docker run docker/trusted-registry info)"
@@ -266,19 +263,16 @@ INFO  [1.1.0-alpha-001472_g8a9ddb4] Attempting to connect to docker engine docke
 
 ### `diagnostics`
 
-The `diagnostics` command is used to extract configuration and run time data
-about your containers for support purposes.
-
-The output includes the `docker inspect` output for all
-containers, running and not, so check the resulting files for passwords
-and other proprietary information before sending it.
+Use the `diagnostics` command to extract configuration and run time data about
+your containers for support purposes. The output includes the `docker inspect`
+output for all containers, running and not, so check the resulting files for
+passwords and other proprietary information before sending it.
 
 `$ sudo bash -c "$(docker run docker/trusted-registry diagnostics)" > diagnostics.zip`
 
-> **Warning:** These diagnostics files may contain secrets that you need to remove
-> before passing on - such as raw container log files, Azure storage credentials, or passwords that may be
-> sent to non-Docker Trusted Registry containers using the `docker run -e PASSWORD=asdf` environment variable
-> options.
+> **Warning:** These diagnostics files may contain secrets that you need to remove before passing on, such as raw container log files, Azure storage
+credentials, or passwords that may be sent to non-Docker Trusted Registry
+containers using the `docker run -e PASSWORD=asdf` environment variable options.
 
 Stream to STDOUT a zip file containing CSDE and Docker Trusted Registry
 configuration, state, and log files to help the Docker Enterprise support team:
@@ -300,8 +294,7 @@ Export the Trusted Registry configuration files for backup or diagnostics use.
 
 `$ sudo bash -c "$(docker run docker/trusted-registry export-settings)" > export-settings.tar.gz`
 
-> **Warning:** These diagnostics files may contain secrets that you need to remove
-> before passing on - such as Azure storage credentials.
+> **Warning:** These diagnostics files may contain secrets that you need to remove before passing on, such as Azure storage credentials.
 
 Stream to STDOUT a gzipped tar file containing the Trusted Registry
 configuration files from `/usr/local/etc/dtr/`:
@@ -319,16 +312,11 @@ configuration files from `/usr/local/etc/dtr/`:
 To debug client Docker daemon communication issues with the Trusted Registry,
 Docker also provides a diagnostics tool to be run on the client Docker daemon.
 
-> **Warning:** These diagnostics files may contain secrets that you need to remove
-> before passing on - such as raw container log files, Azure storage credentials, or passwords that may be
-> sent to non-Docker Trusted Registry containers using the `docker run -e PASSWORD=asdf` environment variable
-> options.
+> **Warning:** These diagnostics files may contain secrets that you need to remove before passing on, such as raw container log files, Azure storage credentials, or passwords that may be sent to non-Docker Trusted Registry containers using the `docker run -e PASSWORD=asdf` environment variable options.
 
-You can download and run this tool using the following command:
-
-> **Note:** If you supply an administrator username and password, then the
-> `diagnostics` tool will also download some logs and configuration data
-> from the remote Docker Trusted Registry server.
+If you supply an administrator username and password, then the `diagnostics`
+tool also downloads additional logs and configuration data from the remote
+Trusted Registry server. Download and run this tool using the following command:
 
 ```
 $ wget https://dhe.mycompany.com/admin/bin/diagnostics && chmod +x diagnostics
@@ -343,7 +331,7 @@ copy logs from DTR Adminserver into ZIP output: "Failed to read next tar header:
 error running "dmidecode": "exit status 127"]
 ```
 
-The zip file will contain the following information:
+The zip file contains the following information:
 
 - your local Docker host's `ca-certificates.crt`
 - `containers/`: the first 20 running, stopped and paused containers `docker inspect`
@@ -356,11 +344,13 @@ The zip file will contain the following information:
 - `sysinfo/`: local Host information
 - `errors.txt`: errors and warnings encountered while running diagnostics
 
-### Starting and stopping Docker Trusted Registry
+### Starting and stopping the Trusted Registry
 
 If you need to stop and/or start the Trusted Registry (for example, upgrading, or troubleshooting), use the following commands:
 
 `sudo bash -c "$(docker run docker/trusted-registry stop)"`
+
+
 `sudo bash -c "$(docker run docker/trusted-registry start)"`
 
 ## See also
