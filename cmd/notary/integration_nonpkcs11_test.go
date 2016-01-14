@@ -9,9 +9,8 @@ import (
 )
 
 func init() {
-	fake := passphrase.ConstantRetriever("pass")
-	retriever = fake
-	getRetriever = func() passphrase.Retriever { return fake }
+	retriever = passphrase.ConstantRetriever("pass")
+	getRetriever = func() passphrase.Retriever { return retriever }
 }
 
 func rootOnHardware() bool {
