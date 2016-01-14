@@ -11,13 +11,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-var rootOnHardware = yubikey.YubikeyAccessible
-
-// Per-test set up that returns a cleanup function.  This set up:
-// - changes the passphrase retriever to always produce a constant passphrase
-// - disables touch on yubikeys
-// - deletes all keys on the yubikey
-func setUp(t *testing.T) func() {
+func init() {
+	yubikey.SetYubikeyKeyMode(yubikey.KeymodeNone)
 	oldRetriever := retriever
 
 	var fake = func(k, a string, c bool, n int) (string, bool, error) {
@@ -29,20 +24,26 @@ func setUp(t *testing.T) func() {
 
 	retriever = fake
 	getRetriever = func() passphrase.Retriever { return fake }
-	yubikey.SetYubikeyKeyMode(yubikey.KeymodeNone)
 
-	// //we're just removing keys here, so nil is fine
+	// best effort at removing keys here, so nil is fine
+	s, err := yubikey.NewYubiKeyStore(nil, retriever)
+	if err != nil {
+		for k := range s.ListKeys() {
+			s.RemoveKey(k)
+		}
+	}
+}
+
+var rootOnHardware = yubikey.YubikeyAccessible
+
+// Per-test set up deletes all keys on the yubikey
+func setUp(t *testing.T) {
+	//we're just removing keys here, so nil is fine
 	s, err := yubikey.NewYubiKeyStore(nil, retriever)
 	assert.NoError(t, err)
 	for k := range s.ListKeys() {
 		err := s.RemoveKey(k)
 		assert.NoError(t, err)
-	}
-
-	return func() {
-		retriever = oldRetriever
-		getRetriever = getPassphraseRetriever
-		yubikey.SetYubikeyKeyMode(yubikey.KeymodeTouch | yubikey.KeymodePinOnce)
 	}
 }
 
