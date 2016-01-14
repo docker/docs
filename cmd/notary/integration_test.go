@@ -75,8 +75,7 @@ func setupServer() *httptest.Server {
 // verifies the target, and then removes the target.
 func TestClientTufInteraction(t *testing.T) {
 	// -- setup --
-	cleanup := setUp(t)
-	defer cleanup()
+	setUp(t)
 
 	tempDir := tempDirWithConfig(t, "{}")
 	defer os.RemoveAll(tempDir)
@@ -255,8 +254,7 @@ func assertSuccessfullyPublish(
 // Tests root key generation and key rotation
 func TestClientKeyGenerationRotation(t *testing.T) {
 	// -- setup --
-	cleanup := setUp(t)
-	defer cleanup()
+	setUp(t)
 
 	tempDir := tempDirWithConfig(t, "{}")
 	defer os.RemoveAll(tempDir)
@@ -333,8 +331,7 @@ func TestClientKeyGenerationRotation(t *testing.T) {
 // able to publish successfully
 func TestClientKeyBackupAndRestore(t *testing.T) {
 	// -- setup --
-	cleanup := setUp(t)
-	defer cleanup()
+	setUp(t)
 
 	dirs := make([]string, 3)
 	for i := 0; i < 3; i++ {
@@ -380,7 +377,9 @@ func TestClientKeyBackupAndRestore(t *testing.T) {
 
 	_, err = runCommand(t, dirs[1], "key", "restore", zipfile)
 	assert.NoError(t, err)
-	assertNumKeys(t, dirs[1], 1, 4, !rootOnHardware()) // all keys should be there
+	// all keys should be there, including root because the root key was backed up to disk,
+	// and export just backs up all the keys on disk
+	assertNumKeys(t, dirs[1], 1, 4, true)
 
 	// can list and publish to both repos using restored keys
 	for _, gun := range []string{"gun1", "gun2"} {
@@ -438,8 +437,7 @@ func exportRoot(t *testing.T, exportTo string) string {
 // Tests import/export root key only
 func TestClientKeyImportExportRootOnly(t *testing.T) {
 	// -- setup --
-	cleanup := setUp(t)
-	defer cleanup()
+	setUp(t)
 
 	tempDir := tempDirWithConfig(t, "{}")
 	defer os.RemoveAll(tempDir)
@@ -513,8 +511,7 @@ func assertNumCerts(t *testing.T, tempDir string, expectedNum int) []string {
 // TestClientCertInteraction
 func TestClientCertInteraction(t *testing.T) {
 	// -- setup --
-	cleanup := setUp(t)
-	defer cleanup()
+	setUp(t)
 
 	tempDir := tempDirWithConfig(t, "{}")
 	defer os.RemoveAll(tempDir)
@@ -547,8 +544,7 @@ func TestClientCertInteraction(t *testing.T) {
 // Tests default root key generation
 func TestDefaultRootKeyGeneration(t *testing.T) {
 	// -- setup --
-	cleanup := setUp(t)
-	defer cleanup()
+	setUp(t)
 
 	tempDir := tempDirWithConfig(t, "{}")
 	defer os.RemoveAll(tempDir)
