@@ -29,7 +29,7 @@ func (c canonicalJSON) Unmarshal(from []byte, to interface{}) error {
 }
 
 // defaultSerializer is a canonical JSON serializer
-var defaultSerializer = serializer(canonicalJSON{})
+var defaultSerializer serializer = canonicalJSON{}
 
 func setDefaultSerializer(s serializer) {
 	defaultSerializer = s

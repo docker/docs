@@ -47,6 +47,7 @@ func (r SignedRoot) ToSigned() (*Signed, error) {
 	if err != nil {
 		return nil, err
 	}
+	// cast into a json.RawMessage
 	signed := json.RawMessage{}
 	err = signed.UnmarshalJSON(s)
 	if err != nil {

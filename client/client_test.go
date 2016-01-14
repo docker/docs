@@ -1827,7 +1827,7 @@ func createKey(t *testing.T, repo *NotaryRepository, role string, x509 bool) dat
 	assert.NoError(t, err, "error creating key")
 
 	if x509 {
-		start := time.Now()
+		start := time.Now().AddDate(0, 0, -1)
 		privKey, _, err := repo.CryptoService.GetPrivateKey(key.ID())
 		assert.NoError(t, err)
 		cert, err := cryptoservice.GenerateCertificate(
