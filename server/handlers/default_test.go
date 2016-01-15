@@ -385,3 +385,43 @@ func TestAtomicUpdateNonValidationFailureNotPropagated(t *testing.T) {
 	assert.Equal(t, errors.ErrInvalidUpdate, errorObj.Code)
 	assert.Nil(t, errorObj.Detail)
 }
+
+type invalidVersionStore struct {
+	storage.MemStorage
+}
+
+func (s *invalidVersionStore) UpdateMany(_ string, _ []storage.MetaUpdate) error {
+	return storage.ErrOldVersion{}
+}
+
+// a non-validation failure, such as the storage failing, will be propagated
+// as a detail in the error (which gets serialized as the body of the response)
+func TestAtomicUpdateVersionErrorPropagated(t *testing.T) {
+	metaStore := storage.NewMemStorage()
+	gun := "testGUN"
+	vars := map[string]string{"imageName": gun}
+
+	kdb, repo, cs := testutils.EmptyRepo()
+	copyTimestampKey(t, kdb, metaStore, gun)
+	state := handlerState{store: &invalidVersionStore{*metaStore}, crypto: cs}
+
+	r, tg, sn, ts, err := testutils.Sign(repo)
+	assert.NoError(t, err)
+	rs, tgs, sns, _, err := testutils.Serialize(r, tg, sn, ts)
+	assert.NoError(t, err)
+
+	req, err := store.NewMultiPartMetaRequest("", map[string][]byte{
+		data.CanonicalRootRole:     rs,
+		data.CanonicalTargetsRole:  tgs,
+		data.CanonicalSnapshotRole: sns,
+	})
+
+	rw := httptest.NewRecorder()
+
+	err = atomicUpdateHandler(getContext(state), rw, req, vars)
+	assert.Error(t, err)
+	errorObj, ok := err.(errcode.Error)
+	assert.True(t, ok, "Expected an errcode.Error, got %v", err)
+	assert.Equal(t, errors.ErrOldVersion, errorObj.Code)
+	assert.Equal(t, storage.ErrOldVersion{}, errorObj.Detail)
+}
