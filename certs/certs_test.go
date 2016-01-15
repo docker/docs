@@ -6,9 +6,11 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"os"
+	"path/filepath"
 	"testing"
 	"text/template"
 
+	"github.com/docker/notary"
 	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
@@ -121,8 +123,12 @@ func TestValidateRoot(t *testing.T) {
 	defer os.RemoveAll(tempBaseDir)
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
-	// Create a Manager
-	certManager, err := NewManager(tempBaseDir)
+	// Create a X509Store
+	trustPath := filepath.Join(tempBaseDir, notary.TrustedCertsDir)
+	certStore, err := trustmanager.NewX509FilteredFileStore(
+		trustPath,
+		trustmanager.FilterCertsExpiredSha1,
+	)
 	assert.NoError(t, err)
 
 	// Execute our template
@@ -134,12 +140,12 @@ func TestValidateRoot(t *testing.T) {
 
 	// This call to ValidateRoot will succeed since we are using a valid PEM
 	// encoded certificate, and have no other certificates for this CN
-	err = certManager.ValidateRoot(&testSignedRoot, "docker.com/notary")
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary")
 	assert.NoError(t, err)
 
 	// This call to ValidateRoot will fail since we are passing in a dnsName that
 	// doesn't match the CN of the certificate.
-	err = certManager.ValidateRoot(&testSignedRoot, "diogomonica.com/notary")
+	err = ValidateRoot(certStore, &testSignedRoot, "diogomonica.com/notary")
 	if assert.Error(t, err, "An error was expected") {
 		assert.Equal(t, err, &ErrValidationFail{Reason: "unable to retrieve valid leaf certificates"})
 	}
@@ -154,7 +160,7 @@ func TestValidateRoot(t *testing.T) {
 	// Unmarshal our signedroot
 	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
 
-	err = certManager.ValidateRoot(&testSignedRoot, "docker.com/notary")
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary")
 	assert.Error(t, err, "illegal base64 data at input byte")
 
 	//
@@ -167,7 +173,7 @@ func TestValidateRoot(t *testing.T) {
 	// Unmarshal our signedroot
 	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
 
-	err = certManager.ValidateRoot(&testSignedRoot, "docker.com/notary")
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary")
 	if assert.Error(t, err, "An error was expected") {
 		assert.Equal(t, err, &ErrValidationFail{Reason: "unable to retrieve valid leaf certificates"})
 	}
@@ -183,7 +189,7 @@ func TestValidateRoot(t *testing.T) {
 	// Unmarshal our signedroot
 	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
 
-	err = certManager.ValidateRoot(&testSignedRoot, "docker.com/notary")
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary")
 	if assert.Error(t, err, "An error was expected") {
 		assert.Equal(t, err, &ErrValidationFail{Reason: "unable to retrieve valid leaf certificates"})
 	}
@@ -202,7 +208,7 @@ func TestValidateRoot(t *testing.T) {
 	// Unmarshal our signedroot
 	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
 
-	err = certManager.ValidateRoot(&testSignedRoot, "secure.example.com")
+	err = ValidateRoot(certStore, &testSignedRoot, "secure.example.com")
 	if assert.Error(t, err, "An error was expected") {
 		assert.Equal(t, err, &ErrValidationFail{Reason: "failed to validate integrity of roots"})
 	}
@@ -217,11 +223,11 @@ func TestValidateSuccessfulRootRotation(t *testing.T) {
 	}
 }
 
-// Generates a Manager in a temporary directory and returns the
-// manager and certificates for two keys which have been added to the keystore.
+// Generates a X509Store in a temporary directory and returns the
+// store and certificates for two keys which have been added to the keystore.
 // Also returns the temporary directory so it can be cleaned up.
 func filestoreWithTwoCerts(t *testing.T, gun, keyAlg string) (
-	string, *Manager, *cryptoservice.CryptoService, []*x509.Certificate) {
+	string, trustmanager.X509Store, *cryptoservice.CryptoService, []*x509.Certificate) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
@@ -231,7 +237,11 @@ func filestoreWithTwoCerts(t *testing.T, gun, keyAlg string) (
 	cryptoService := cryptoservice.NewCryptoService(gun, fileKeyStore)
 
 	// Create a Manager
-	certManager, err := NewManager(tempBaseDir)
+	trustPath := filepath.Join(tempBaseDir, notary.TrustedCertsDir)
+	certStore, err := trustmanager.NewX509FilteredFileStore(
+		trustPath,
+		trustmanager.FilterCertsExpiredSha1,
+	)
 	assert.NoError(t, err)
 
 	certificates := make([]*x509.Certificate, 2)
@@ -247,20 +257,20 @@ func filestoreWithTwoCerts(t *testing.T, gun, keyAlg string) (
 
 		certificates[i] = cert
 	}
-	return tempBaseDir, certManager, cryptoService, certificates
+	return tempBaseDir, certStore, cryptoService, certificates
 }
 
 func testValidateSuccessfulRootRotation(t *testing.T, keyAlg, rootKeyType string) {
 	// The gun to test
 	gun := "docker.com/notary"
 
-	tempBaseDir, certManager, cs, certificates := filestoreWithTwoCerts(t, gun, keyAlg)
+	tempBaseDir, certStore, cs, certificates := filestoreWithTwoCerts(t, gun, keyAlg)
 	defer os.RemoveAll(tempBaseDir)
 	origRootCert := certificates[0]
 	replRootCert := certificates[1]
 
 	// Add the old root cert part of trustedCertificates
-	certManager.AddTrustedCert(origRootCert)
+	certStore.AddCert(origRootCert)
 
 	// We need the PEM representation of the replacement key to put it into the TUF data
 	origRootPEMCert := trustmanager.CertToPEM(origRootCert)
@@ -291,11 +301,11 @@ func testValidateSuccessfulRootRotation(t *testing.T, keyAlg, rootKeyType string
 
 	// This call to ValidateRoot will succeed since we are using a valid PEM
 	// encoded certificate, and have no other certificates for this CN
-	err = certManager.ValidateRoot(signedTestRoot, gun)
+	err = ValidateRoot(certStore, signedTestRoot, gun)
 	assert.NoError(t, err)
 
 	// Finally, validate the only trusted certificate that exists is the new one
-	certificates = certManager.trustedCertificateStore.GetCertificates()
+	certificates = certStore.GetCertificates()
 	assert.Len(t, certificates, 1)
 	assert.Equal(t, certificates[0], replRootCert)
 }
@@ -313,14 +323,14 @@ func TestValidateRootRotationMissingOrigSig(t *testing.T) {
 func testValidateRootRotationMissingOrigSig(t *testing.T, keyAlg, rootKeyType string) {
 	gun := "docker.com/notary"
 
-	tempBaseDir, certManager, cryptoService, certificates := filestoreWithTwoCerts(
+	tempBaseDir, certStore, cryptoService, certificates := filestoreWithTwoCerts(
 		t, gun, keyAlg)
 	defer os.RemoveAll(tempBaseDir)
 	origRootCert := certificates[0]
 	replRootCert := certificates[1]
 
 	// Add the old root cert part of trustedCertificates
-	certManager.AddTrustedCert(origRootCert)
+	certStore.AddCert(origRootCert)
 
 	// We need the PEM representation of the replacement key to put it into the TUF data
 	replRootPEMCert := trustmanager.CertToPEM(replRootCert)
@@ -347,12 +357,12 @@ func testValidateRootRotationMissingOrigSig(t *testing.T, keyAlg, rootKeyType st
 
 	// This call to ValidateRoot will succeed since we are using a valid PEM
 	// encoded certificate, and have no other certificates for this CN
-	err = certManager.ValidateRoot(signedTestRoot, gun)
+	err = ValidateRoot(certStore, signedTestRoot, gun)
 	assert.Error(t, err, "insuficient signatures on root")
 
 	// Finally, validate the only trusted certificate that exists is still
 	// the old one
-	certificates = certManager.trustedCertificateStore.GetCertificates()
+	certificates = certStore.GetCertificates()
 	assert.Len(t, certificates, 1)
 	assert.Equal(t, certificates[0], origRootCert)
 }
@@ -370,14 +380,14 @@ func TestValidateRootRotationMissingNewSig(t *testing.T) {
 func testValidateRootRotationMissingNewSig(t *testing.T, keyAlg, rootKeyType string) {
 	gun := "docker.com/notary"
 
-	tempBaseDir, certManager, cryptoService, certificates := filestoreWithTwoCerts(
+	tempBaseDir, certStore, cryptoService, certificates := filestoreWithTwoCerts(
 		t, gun, keyAlg)
 	defer os.RemoveAll(tempBaseDir)
 	origRootCert := certificates[0]
 	replRootCert := certificates[1]
 
 	// Add the old root cert part of trustedCertificates
-	certManager.AddTrustedCert(origRootCert)
+	certStore.AddCert(origRootCert)
 
 	// We need the PEM representation of the replacement key to put it into the TUF data
 	origRootPEMCert := trustmanager.CertToPEM(origRootCert)
@@ -406,12 +416,12 @@ func testValidateRootRotationMissingNewSig(t *testing.T, keyAlg, rootKeyType str
 
 	// This call to ValidateRoot will succeed since we are using a valid PEM
 	// encoded certificate, and have no other certificates for this CN
-	err = certManager.ValidateRoot(signedTestRoot, gun)
+	err = ValidateRoot(certStore, signedTestRoot, gun)
 	assert.Error(t, err, "insuficient signatures on root")
 
 	// Finally, validate the only trusted certificate that exists is still
 	// the old one
-	certificates = certManager.trustedCertificateStore.GetCertificates()
+	certificates = certStore.GetCertificates()
 	assert.Len(t, certificates, 1)
 	assert.Equal(t, certificates[0], origRootCert)
 }

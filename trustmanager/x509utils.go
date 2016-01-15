@@ -532,3 +532,14 @@ func X509PublicKeyID(certPubKey data.PublicKey) (string, error) {
 
 	return key.ID(), nil
 }
+
+// FilterCertsExpiredSha1 can be used as the filter function to cert store
+// initializers to filter out all expired or SHA-1 certificate that we
+// shouldn't load.
+func FilterCertsExpiredSha1(cert *x509.Certificate) bool {
+	return !cert.IsCA &&
+		time.Now().Before(cert.NotAfter) &&
+		cert.SignatureAlgorithm != x509.SHA1WithRSA &&
+		cert.SignatureAlgorithm != x509.DSAWithSHA1 &&
+		cert.SignatureAlgorithm != x509.ECDSAWithSHA1
+}

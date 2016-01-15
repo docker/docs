@@ -19,7 +19,11 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	ctxu "github.com/docker/distribution/context"
-	"github.com/docker/notary/certs"
+	"github.com/jfrazelle/go/canonical/json"
+	"github.com/stretchr/testify/assert"
+	"golang.org/x/net/context"
+
+	"github.com/docker/notary"
 	"github.com/docker/notary/client/changelist"
 	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/passphrase"
@@ -30,9 +34,6 @@ import (
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/store"
 	"github.com/docker/notary/tuf/validation"
-	"github.com/jfrazelle/go/canonical/json"
-	"github.com/stretchr/testify/assert"
-	"golang.org/x/net/context"
 )
 
 const password = "passphrase"
@@ -422,15 +423,19 @@ func assertRepoHasExpectedKeys(t *testing.T, repo *NotaryRepository,
 		"there should be no timestamp key because the server manages it")
 }
 
-// This creates a new certificate manager in the repo's base directory and
+// This creates a new certificate store in the repo's base directory and
 // makes sure the repo has the right certificates
 func assertRepoHasExpectedCerts(t *testing.T, repo *NotaryRepository) {
-	// The repo should have a certificate manager and have created certs using
-	// it, so create a new manager, and check that the certs do exist and
+	// The repo should have a certificate store and have created certs using
+	// it, so create a new store, and check that the certs do exist and
 	// are valid
-	certManager, err := certs.NewManager(repo.baseDir)
+	trustPath := filepath.Join(repo.baseDir, notary.TrustedCertsDir)
+	certStore, err := trustmanager.NewX509FilteredFileStore(
+		trustPath,
+		trustmanager.FilterCertsExpiredSha1,
+	)
 	assert.NoError(t, err)
-	certificates := certManager.TrustedCertificateStore().GetCertificates()
+	certificates := certStore.GetCertificates()
 	assert.Len(t, certificates, 1, "unexpected number of trusted certificates")
 
 	certID, err := trustmanager.FingerprintCert(certificates[0])
