@@ -96,6 +96,11 @@ func atomicUpdateHandler(ctx context.Context, w http.ResponseWriter, r *http.Req
 	}
 	err = store.UpdateMany(gun, updates)
 	if err != nil {
+		// If we have an old version error, surface to user with error code
+		if _, ok := err.(storage.ErrOldVersion); ok {
+			return errors.ErrOldVersion.WithDetail(err)
+		}
+		// More generic storage update error, possibly due to attempted rollback
 		return errors.ErrUpdating.WithDetail(nil)
 	}
 	return nil
