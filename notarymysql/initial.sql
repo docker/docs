@@ -7,7 +7,7 @@ CREATE TABLE `tuf_files` (
 	`sha256` char(64) DEFAULT NULL,
 	`data` longblob NOT NULL,
 	PRIMARY KEY (`id`),
-	UNIQUE KEY `gun` (`gun`,`role`,`version`)
+	UNIQUE KEY `gun` (`gun`,`role`,`version`),
 	INDEX `sha256` (`sha256`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
