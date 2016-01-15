@@ -33,6 +33,7 @@ import (
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/store"
+	"github.com/docker/notary/tuf/utils"
 	"github.com/docker/notary/tuf/validation"
 )
 
@@ -2770,4 +2771,68 @@ func TestBootstrapClientInvalidURL(t *testing.T) {
 	// and are requesting remote root regardless of checkInitialized
 	// value
 	assert.EqualError(t, err, err2.Error())
+}
+
+func TestPublishTargetsDelgationCanUseUserKeyWithArbitraryRole(t *testing.T) {
+	testPublishTargetsDelgationCanUseUserKeyWithArbitraryRole(t, false)
+	testPublishTargetsDelgationCanUseUserKeyWithArbitraryRole(t, true)
+}
+
+func testPublishTargetsDelgationCanUseUserKeyWithArbitraryRole(t *testing.T, x509 bool) {
+	gun := "docker.com/notary"
+	ts := fullTestServer(t)
+	defer ts.Close()
+
+	// this is the original repo - it owns the root/targets keys and creates
+	// the delegation to which it doesn't have the key (so server snapshot
+	// signing would be required)
+	ownerRepo, _ := initializeRepo(t, data.ECDSAKey, gun, ts.URL, true)
+	defer os.RemoveAll(ownerRepo.baseDir)
+
+	// this is a user, or otherwise a repo that only has access to the delegation
+	// key so it can publish targets to the delegated role
+	delgRepo, _ := newRepoToTestRepo(t, ownerRepo, true)
+	defer os.RemoveAll(delgRepo.baseDir)
+
+	// create a key on the owner repo
+	aKey := createKey(t, ownerRepo, "user", x509)
+	aKeyID, err := utils.CanonicalKeyID(aKey)
+	assert.NoError(t, err)
+	// move this to the tuf_keys directory without any GUN, and ensure that we
+	// can sign with it
+	assert.NoError(t, os.Rename(
+		filepath.Join(ownerRepo.baseDir, "private/tuf_keys", gun, aKeyID+".key"),
+		filepath.Join(ownerRepo.baseDir, "private/tuf_keys", aKeyID+".key")))
+
+	// create a key on the delegated repo
+	bKey := createKey(t, delgRepo, "notARealRoleName", x509)
+	bKeyID, err := utils.CanonicalKeyID(bKey)
+	assert.NoError(t, err)
+	assert.NoError(t, os.Rename(
+		filepath.Join(delgRepo.baseDir, "private/tuf_keys", gun, bKeyID+".key"),
+		filepath.Join(delgRepo.baseDir, "private/tuf_keys", bKeyID+".key")))
+
+	// clear metadata and unencrypted private key cache
+	var ownerRec, delgRec *passRoleRecorder
+	ownerRepo, ownerRec = newRepoToTestRepo(t, ownerRepo, false)
+	delgRepo, delgRec = newRepoToTestRepo(t, delgRepo, false)
+
+	// owner creates delegations, adds the delegated key to them, and publishes them
+	assert.NoError(t,
+		ownerRepo.AddDelegation("targets/a", 1, []data.PublicKey{aKey}, []string{""}),
+		"error creating delegation")
+	assert.NoError(t,
+		ownerRepo.AddDelegation("targets/a/b", 1, []data.PublicKey{bKey}, []string{""}),
+		"error creating delegation")
+
+	assert.NoError(t, ownerRepo.Publish())
+	// delegation parents all get signed
+	ownerRec.assertAsked(t, []string{data.CanonicalTargetsRole, "targets/a"})
+
+	// delegated repo now publishes to delegated roles, but it will need
+	// to download those roles first, since it doesn't know about them
+	assertPublishToRolesSucceeds(t, delgRepo, []string{"targets/a/b"},
+		[]string{"targets/a/b"})
+
+	delgRec.assertAsked(t, []string{"targets/a/b"})
 }
