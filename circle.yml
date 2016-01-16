@@ -1,11 +1,25 @@
 machine:
-  xcode:
-    version: "7.0"
+  services:
+    - docker
+
+dependencies:
+  cache_directories:
+    - "~/docker"
+
+  override:
+    - if [[ -e ~/docker/image.tar ]]; then docker load -i ~/docker/windows-installer.tar; fi
+    - if [[ -e ~/docker/image.tar ]]; then docker load -i ~/docker/osx-installer.tar; fi
+    - make
+    - mkdir -p ~/docker; docker save windows-installer > ~/docker/windows-installer.tar
+    - mkdir -p ~/docker; docker save osx-installer > ~/docker/osx-installer.tar
+
+test:
+  post:
+    - cp dist/* $CIRCLE_ARTIFACTS
 
 deployment:
   release:
     tag: /v.*/
     owner: docker
     commands:
-      - github-release upload --user docker --repo toolbox --tag $CIRCLE_TAG --file dist/DockerToolbox.exe --name DockerToolbox-$(echo $CIRCLE_TAG | cut -c2-).exe
-      - github-release upload --user docker --repo toolbox --tag $CIRCLE_TAG --file dist/DockerToolbox.pkg --name DockerToolbox-$(echo $CIRCLE_TAG | cut -c2-).pkg
+      - git push --tags -f git@github.com:docker/toolbox-release.git
