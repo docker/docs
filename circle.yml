@@ -7,5 +7,7 @@ machine:
     - docker
 
 test:
+  override:
+    - make
   post:
     - cp dist/* $CIRCLE_ARTIFACTS
