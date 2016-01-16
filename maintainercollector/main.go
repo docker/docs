@@ -41,6 +41,7 @@ var (
 		"dockercraft",
 		"engine-api",
 		"go-connections",
+		"go-plugins-helpers",
 		"go-units",
 		"kitematic",
 		"leeroy",
