@@ -98,7 +98,10 @@ func prettyPrintKeys(keyStores []trustmanager.KeyStore, writer io.Writer) {
 		for keyPath, role := range store.ListKeys() {
 			gun := ""
 			if role != data.CanonicalRootRole {
-				gun = filepath.Dir(keyPath)
+				dirPath := filepath.Dir(keyPath)
+				if dirPath != "." { // no gun
+					gun = dirPath
+				}
 			}
 			info = append(info, keyInfo{
 				role:     role,
@@ -108,6 +111,7 @@ func prettyPrintKeys(keyStores []trustmanager.KeyStore, writer io.Writer) {
 			})
 		}
 	}
+
 	if len(info) == 0 {
 		writer.Write([]byte("No signing keys found.\n"))
 		return
