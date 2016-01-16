@@ -260,3 +260,9 @@ func TestHTTPStoreRemoveAll(t *testing.T) {
 	err = store.RemoveAll()
 	assert.Error(t, err)
 }
+
+func TestHTTPOffline(t *testing.T) {
+	s, err := NewHTTPStore("https://localhost/", "", "", "", "", nil)
+	assert.NoError(t, err)
+	assert.IsType(t, &OfflineStore{}, s)
+}
