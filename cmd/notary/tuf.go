@@ -426,7 +426,9 @@ func tokenAuth(config *viper.Viper, baseTransport *http.Transport, gun string,
 	}
 	resp, err := pingClient.Do(req)
 	if err != nil {
-		fatalf(err.Error())
+		logrus.Errorf("could not reach %s: %s", trustServerURL, err.Error())
+		logrus.Info("continuing in offline mode")
+		return nil
 	}
 	defer resp.Body.Close()
 
