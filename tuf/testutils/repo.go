@@ -5,6 +5,9 @@ import (
 	"math/rand"
 	"time"
 
+	"github.com/docker/notary/cryptoservice"
+	"github.com/docker/notary/passphrase"
+	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/utils"
 	fuzz "github.com/google/gofuzz"
@@ -16,20 +19,35 @@ import (
 
 // EmptyRepo creates an in memory key database, crypto service
 // and initializes a repo with no targets or delegations.
-func EmptyRepo() (*keys.KeyDB, *tuf.Repo, signed.CryptoService) {
-	c := signed.NewEd25519()
+func EmptyRepo() (*keys.KeyDB, *tuf.Repo, signed.CryptoService, error) {
+	c := cryptoservice.NewCryptoService(
+		"", trustmanager.NewKeyMemoryStore(passphrase.ConstantRetriever("")))
 	kdb := keys.NewDB()
 	r := tuf.NewRepo(kdb, c)
 
 	for _, role := range []string{"root", "targets", "snapshot", "timestamp"} {
-		key, _ := c.Create(role, data.ED25519Key)
+		key, _ := c.Create(role, data.ECDSAKey)
+		if role == "root" {
+			start := time.Now().AddDate(0, 0, -1)
+			privKey, _, err := c.GetPrivateKey(key.ID())
+			if err != nil {
+				return nil, nil, nil, err
+			}
+			cert, err := cryptoservice.GenerateCertificate(
+				privKey, role, start, start.AddDate(1, 0, 0),
+			)
+			if err != nil {
+				return nil, nil, nil, err
+			}
+			key = data.NewECDSAx509PublicKey(trustmanager.CertToPEM(cert))
+		}
 		role, _ := data.NewRole(role, 1, []string{key.ID()}, nil, nil)
 		kdb.AddKey(key)
 		kdb.AddRole(role)
 	}
 
 	r.InitRepo(false)
-	return kdb, r, c
+	return kdb, r, c, nil
 }
 
 // AddTarget generates a fake target and adds it to a repo.
