@@ -6,24 +6,6 @@ machine:
   services:
     - docker
 
-dependencies:
-  cache_directories:
-    - "~/docker"
-
-  override:
-    - if [[ -e ~/docker/windows-installer.tar ]]; then docker load -i ~/docker/windows-installer.tar; fi
-    - if [[ -e ~/docker/osx-installer.tar ]]; then docker load -i ~/docker/osx-installer.tar; fi
-    - make
-    - mkdir -p ~/docker; docker save windows-installer > ~/docker/windows-installer.tar
-    - mkdir -p ~/docker; docker save osx-installer > ~/docker/osx-installer.tar
-
 test:
   post:
     - cp dist/* $CIRCLE_ARTIFACTS
-
-deployment:
-  release:
-    tag: /v.*/
-    owner: docker
-    commands:
-      - git push --tags -f git@github.com:docker/toolbox-release.git
