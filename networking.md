@@ -1,7 +1,7 @@
 +++
-title = "Set up container networking"
-description = "Docker Universal Control Plane"
-[menu.ucp]
+title ="Set up container networking"
+description="Docker Universal Control Plane"
+[menu.main]
 +++
 
 
@@ -127,7 +127,7 @@ certificate. To do this on Chrome:
 
 ## Configure networking and restart the daemon
 
-If you followed the prerequisites, you should have a list of the SAN values you used with the UCP boostrapper to `install` the controller and `join` each node. With these values in hand, do the following:
+If you followed the prerequisites, you should have a list of the SAN values you used `docker/ucp install` to create the controller and `join` each node. With these values in hand, do the following:
 
 1. Log into the host running the UCP controller.
 
@@ -149,34 +149,63 @@ If you followed the prerequisites, you should have a list of the SAN values you 
 
     **Centos/Redhat**:
 
-        $ sudo vi /lib/systemd/system/docker.service
+      1. Create a drop-in directory.
 
-5. Uncomment the `DOCKER_OPTS` line and add the following options.
+        $ sudo mkdir -p /etc/systemd/system/docker.service.d
 
-        --cluster-advertise CURRENT_HOST_PUBLIC_IP_OR_DNS:12376
-        --cluster-store etcd://CONTROLLER_PUBLIC_IP_OR_DNS:12379
-        --cluster-store-opt kv.cacertfile=/var/lib/docker/discovery_certs/ca.pem
-        --cluster-store-opt kv.certfile=/var/lib/docker/discovery_certs/cert.pem
-        --cluster-store-opt kv.keyfile=/var/lib/docker/discovery_certs/key.pem
+      2. Create a new systemd drop-in file.
 
-    Replace `CURRENT_HOST_PUBLIC_IP` with the IP of the host whose file you are
-    configuration. Replace `CONTROLLER_PUBLIC_IP_OR_DOMAIN` with the IP address
-    of the UCP controller. When you are done, the line should look similar to
-    the following:
+        $ sudo vi /etc/systemd/system/docker.service.d/10-execstart.conf
 
-        DOCKER_OPTS="--dns 8.8.8.8 --dns 8.8.4.4 --cluster-advertise 52.70.180.235:12376 --cluster-store etcd://52.70.188.239:12379 --cluster-store-opt kv.cacertfile=/var/lib/docker/discovery_certs/ca.pem --cluster-store-opt kv.certfile=/var/lib/docker/discovery_certs/cert.pem --cluster-store-opt kv.keyfile=/var/lib/docker/discovery_certs/key.pem"
+5. Set the start options.
 
-6. Save and close the Docker configuration file file.
+    **Ubuntu**:
+      Uncomment the `DOCKER_OPTS` line and add the following options.
+
+          --cluster-advertise CURRENT_HOST_PUBLIC_IP_OR_DNS:12376
+          --cluster-store etcd://CONTROLLER_PUBLIC_IP_OR_DNS:12379
+          --cluster-store-opt kv.cacertfile=/var/lib/docker/discovery_certs/ca.pem
+          --cluster-store-opt kv.certfile=/var/lib/docker/discovery_certs/cert.pem
+          --cluster-store-opt kv.keyfile=/var/lib/docker/discovery_certs/key.pem
+
+      Replace `CURRENT_HOST_PUBLIC_IP` with the IP of the host whose file you
+      are configuration. Replace `CONTROLLER_PUBLIC_IP_OR_DOMAIN` with the IP
+      address of the UCP controller. When you are done, the line should look
+      similar to the following:
+
+          DOCKER_OPTS="--dns 8.8.8.8 --dns 8.8.4.4 --cluster-advertise 52.70.180.235:12376 --cluster-store etcd://52.70.188.239:12379 --cluster-store-opt kv.cacertfile=/var/lib/docker/discovery_certs/ca.pem --cluster-store-opt kv.certfile=/var/lib/docker/discovery_certs/cert.pem --cluster-store-opt kv.keyfile=/var/lib/docker/discovery_certs/key.pem"
+
+    **Centos/Redhat**:
+
+          [Service]
+          ExecStart=
+          ExecStart=/usr/bin/docker daemon -H fd://
+          --cluster-advertise CURRENT_HOST_PUBLIC_IP_OR_DNS:12376
+          --cluster-store etcd://CONTROLLER_PUBLIC_IP_OR_DNS:12379
+          --cluster-store-opt
+          kv.cacertfile=/var/lib/docker/discovery_certs/ca.pem
+          --cluster-store-opt
+          kv.certfile=/var/lib/docker/discovery_certs/cert.pem
+          --cluster-store-opt kv.keyfile=/var/lib/docker/discovery_certs/key.pem
+
+      >**Note**: This drop-in file overrides any existing Docker `ExecStart`
+      options. If you have existing `ExecStart` options, you should modify these
+      appropriately. For detailed information on these options, see [Custom
+      Docker daemon
+      options](https://docs.docker.com/engine/articles/systemd/#custom-docker-daemon-options)
+
+6. Save and close the Docker configuration file.
 
 6. Restart the Docker daemon.
 
     **Ubuntu**:
 
-        $ sudo docker restart
+        $ sudo service docker restart
 
     **Centos/RedHat**:
 
-        $ sudo systemdctl restart docker.service
+        $ sudo systemctl daemon-reload
+        $ sudo systemctl restart docker.service
 
 7. Review the Docker logs to check the restart.
 
@@ -195,6 +224,17 @@ If you followed the prerequisites, you should have a list of the SAN values you 
         $ docker network rm my-custom-network
 
 9. Repeat steps 1-8 on the remaining nodes in your cluster.
+
+## High availability and networking
+
+If you are using high availability with container networking, you must  enter in all of the `etcd` IP addresses (master and replicas):
+
+```
+--cluster-store etcd://[etcd_IP1:port],[etcd_IP2:port],[etcd_IP3:port]
+```
+
+This configuration ensures that, if the master `etcd` fails, UCP and Swarm
+know where to look up a replica's key-value store.
 
 
 ## Troubleshoot the daemon configuration

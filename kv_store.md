@@ -1,14 +1,14 @@
 +++
-title = "Key/Value Store Backends"
-description = "Docker Universal Control Plane"
-[menu.ucp]
+title ="UCP Key/Value Store Backends"
+description="Docker Universal Control Plane"
+[menu.main]
 +++
 
 
-# Key/Value Store Backends
+# UCP Key/Value Store Backend
 
 In this release, UCP leverages the [etcd](https://github.com/coreos/etcd/) KV
-store.
+store internally for node discovery and high availability. This use is specific to UCP. The services you deploy on UCP can use whichever key-store is appropriate for the service.
 
 Under normal circumstances, you should not have to access the KV store
 directly.  To mitigate unforeseen problems or change advanced settings,
