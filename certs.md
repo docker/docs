@@ -1,8 +1,7 @@
-
 +++
-title = "Manually setting up a CA"
-description = "Docker Universal Control Plane"
-[menu.ucp]
+title ="Manually setting up a CA"
+description="Docker Universal Control Plane"
+[menu.main]
 +++
 
 

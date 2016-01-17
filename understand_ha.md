@@ -1,7 +1,7 @@
 +++
-title = "Set up high availability"
-description = "Docker Universal Control Plane"
-[menu.ucp]
+title ="Set up high availability"
+description="Docker Universal Control Plane"
+[menu.main]
 +++
 
 
@@ -25,7 +25,7 @@ UCP in production.
 
 * **Primary Controller** This is the first host you run the bootstrapper `install` against.  It runs the following containers/services
 
-    * **ucp-kv** This etcd container runs the replicated KV store
+    * **ucp-kv** This etcd container runs the replicated KV store inside UCP. The services you deploy on UCP can use whichever key-store is appropriate for the service.
     * **ucp-swarm-manger** This Swarm Manager uses the replicated KV store for leader election and cluster membership tracking
     * **ucp-controller** This container runs the UCP server, using the replicated KV store for configuration state
     * **ucp-swarm-join** Runs the swarm join command to periodically publish this nodes existence to the KV store.  If the node goes down, this publishing stops, and the registration times out, and the node is automatically dropped from the cluster

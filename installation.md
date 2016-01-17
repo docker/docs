@@ -1,7 +1,7 @@
 +++
-title = "Quickstart Guide"
-description = "Docker Universal Control Plane"
-[menu.ucp]
+title ="Quickstart Guide"
+description="Docker Universal Control Plane"
+[menu.main]
 weight="-98"
 +++
 
@@ -24,27 +24,51 @@ These instructions explain how to install Docker Universal Control Plane (UCP). 
 - [Installing with your own certificates](#installing-with-your-own-certificates)
 - [Where to go next](#where-to-go-next)
 
+**Upgrade Note**: If you have installed UCP 0.6.0 or higher, you can upgrade to UCP 0.7.0 using the [upgrade](reference/upgrade.md) command.
+
 ## Plan your installation
 
-The UCP installation consists of running the `ucp bootstrapper` image using the
-Docker Engine CLI. The bootstrapper has subcommands to `install` a controller or `join` a node to a UCP controller.  During an install, the bootstrapper:
+The UCP installation consists of using the Docker Engine CLI to run the `ucp`
+tool. The `ucp` tool is an image with subcommands to `install` a controller or
+`join` a node to a UCP controller. The general format of these commands are:
+
+| Docker client | `run` command with options | `ucp` image | Subcommand with options |
+|---------------|----------------------------|--------------|-------------------------|
+| `docker` | `run --rm -it` | `docker/ucp` | `install --help` |
+| `docker` | `run --rm -it` | `docker/ucp` | `join --help` |
+| `docker` | `run --rm -it` | `docker/ucp` | `uninstall --help` |
+
+You can these two subcommands interactively by passing them the `-i`
+option or by passing command-line options. This installation guide's steps
+assume both are run interactively.
+
+To list all the possible subcommands, use:
+
+```
+$ docker run --rm -it docker/ucp  --help
+```
+
+### Default versus the custom installation options
+
+This installation guide walks you through
 
 * configures data volumes on the controller
 * generates a certificate chain on the controller
 * creates a Swarm cluster
 * loads and launches the appropriate images
 
-You can use the bootstrapper as an interactive script or by passing command-line
-options. Regardless of how you use the bootstrapper, the installer supplies some
-quick default options for both data volumes and the certificate authority (CA).
-### Default versus the custom installation options
+
+Regardless of how you use the `docker/ucp install` command, the installer
+supplies some quick default options for both data volumes and the certificate
+authority (CA).
 
 The first time you install, you should build a sandbox environment using
-`bootstrapper` defaults. After installing and using this sandbox environment,
+`ucp` defaults. After installing and using this sandbox environment,
 you can uninstall it and try a custom installation. In a custom installation you
 can:
 
 * use the high availability feature
+* customize the port used by the UCP web application
 * customize the port used by the Swarm manager
 * create your own data volumes
 * use your own certs
@@ -56,8 +80,12 @@ in your sandbox.
 
 ### IP addresses and fully-qualified domain names
 
-When you bootstrap a controller or node, you must supply a host address either
-interactively or using the `--host-address` option. The host address can be an accessible IP address and/or fully-qualified domain name.  
+The `docker/ucp install` subcommand works to do as much network discovery as it
+can. If your network configuration defines fully-qualified domain names (FQDN)
+on each host, the installer uses this information to obtain accurate host
+addresses. If you haven't set up your network with FQDNs and the installer
+discovery fails, you must supply the installer an accessible host address either
+interactively or using the `--host-address` option.
 
 If you are using a cloud provider such as AWS or Digital Ocean, you may need to
 allocate a private network for your UCP installation. You can use this network
@@ -69,18 +97,19 @@ more information about what ports and protocols are required see [Step 2: Config
 ### Subject alternative names (SANs)
 
 Further, UCP requires that all clients, including the Docker Engine, use a Swarm
-TLS certificate chain signed by the UCP Swarm Root CA. You build the certificate
-by passing the `--san` (subject alternative names or SANs) values to the
-boostrapper's `install` or `join`. A SAN value can be the pubic IP address
-and/or fully-qualified domain name.
+TLS certificate chain signed by the UCP Swarm Root CA. You provide the
+certificate system with subject alternative names or SANs. The SANs are used to
+set up individual "leaf certificates."
 
 For the controller and each node, you must specify at least one SAN; you can
-specify more.
+specify more. You can pass the `--san` values to the boostrapper's `install` or
+`join`. A SAN value can be the pubic IP address and/or fully-qualified domain
+name.
 
 If you are using a cloud provider and specified private IPs for the host address
 values, consider whether you need to access your cluster through a public
 network as well as the private network space. If the answer is yes, your SAN
-values should contain both the public IPs or full-qualified hostnames and the private network IPs.
+values should contain both the public IPs or full-qualified domain names (FQDN) and the private network IPs.
 
 ### Mixpanel analytics
 
@@ -111,7 +140,7 @@ Ocean. To install, the controller and the nodes require a minimum of 1.50 GB of 
 * Ubuntu 14.04 LTS
 * CentOS 7.1
 
-Your system must have a 3.16.0 kernel or higher. If you don't have the proper kernel installed, the UCP bootstrapper returns this error.
+Your system must have a 3.16.0 kernel or higher. If you don't have the proper kernel installed, the `docker/ucp install` command returns this error.
 
 ```
 INFO[0000] Verifying your system is compatible with UCP
@@ -125,12 +154,6 @@ on both the controller and the nodes. The CS Engine can be installed manually or
 from an image if your cloud provider support its. These instructions assume you
 are installing both UCP and Engine manually.
 
-Finally, installing UCP requires you to pull an image from the Docker Hub. If
-you don't already have a Docker Hub account with access to the UCP Beta. Make
-sure you [create an account first](https://hub.docker.com/). Once you have a Hub
-account, [request access to the UCP BETA
-program](https://goto.docker.com/try-universal-control-plane.html).
-
 ## Step 2: Configure your network for UCP
 
 UCP includes Docker Swarm as part of its installation. So, you don't need to
@@ -138,14 +161,37 @@ install Docker Swarm. You do need to ensure that the UCP controller and nodes
 can communicate across your network. Configure your network making sure to open
 the following ports:
 
-| Port             | Description     |
-|------------------|-----------------|
-| `443`            | UCP controller     |
-| `2376`           | Swarm manager   |
-| `12376`          | Engine proxy    |
-| `12379`, `12380` | Key Value store |
-| `12381`          | Swarm CA service|
-| `12382`          | UCP CA service |
+<table>
+  <tr>
+    <th>Port</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><code>443</code> </td>
+    <td>UCP controller port. Open this port to allow inbound access to the UCP interface or CLI.</td>
+  </tr>
+  <tr>
+    <td><code>2376</code></td>
+    <td>Allows inbound access from the nodes to the Swarm manager.</td>
+  </tr>
+  <tr>
+    <td><code>12376</code></td>
+    <td>Open this on secondary nodes to allow the Engine proxy to access the Orca server node.</td>
+  </tr>
+  <tr>
+    <td><code>12379</code>, <code>12380</code></td>
+    <td>Key Value store </td>
+  </tr>
+  <tr>
+    <td><code>12381</code></td>
+    <td>Swarm CA service</td>
+  </tr>
+  <tr>
+    <td><code>12382` </td>
+    <td>UCP CA service</td>
+  </tr>
+</table>
+
 
 All the communication among the controller, nodes, and key value store is
 protected by mutual TLS. The UCP installation of Swarm provides and configures
@@ -175,13 +221,14 @@ instructions](https://docs.docker.com/docker-trusted-registry/install/install-cs
 
 ## Step 4: (optional) Create user-named volumes
 
-UCP uses named volumes for persistence of user data.  By default, the `ucp`
-bootstrapper creates for you. It uses the default volume driver and flags. The
-first time you install, you should skip this step and try it later. Later, try
-an install where your take the option to use custom volume driver and create
+UCP uses named volumes for persistence of user data.  By default, the `ucp
+install` command creates for you. It uses the default volume driver and flags.
+The first time you install, you should skip this step and try it later. Later,
+try an install where your take the option to use custom volume driver and create
 your own volumes.
 
-If you choose this option, create your volumes prior to installing UCP. The volumes UCP requires are:
+If you choose this option, create your volumes prior to installing UCP. The
+volumes UCP requires are:
 
 | Volume name             | Data                                                                                 |
 |-------------------------|--------------------------------------------------------------------------------------|
@@ -195,17 +242,17 @@ If you choose this option, create your volumes prior to installing UCP. The volu
 
 ## Step 5: Install the UCP controller
 
-In this step you install the UCP controller. The controller includes a running Swarm manager and node as well. Use the following command to pull the bootstrapper image and review the `install` options:
+In this step you install the UCP controller. The controller includes a running
+Swarm manager and node as well. Use the following command to pull the
+`docker/ucp` image and review the `install` options:
 
 ```bash
 docker run --rm -it docker/ucp install --help
 ```
 
-
 When you install, the script prompts you for the following information:
 
 * a password to use for the UCP `admin` account
-* your Docker Hub username/password/email
 *  at lease one SAN value which is the accessible IP address or fully-qualified domain name for the controller node
 
 When you have the information you'll be prompted for, do the following to
@@ -217,15 +264,11 @@ install:
 
     ![Open certs](../images/ip_cloud_provider.png)
 
-2. Run the `ucp` bootstrapper.
+2. Run the `ucp` command interactively.
 
-        $ docker run --rm -it \
-          -v /var/run/docker.sock:/var/run/docker.sock \
-          --name ucp \
-          docker/ucp \
-          install -i
+        $ docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock --name ucp docker/ucp install -i
 
-    The bootstrapper pulls several images and prompts you for the installation values it needs. When it completes, the bootstrapper prompts you to login into the UCP GUI.
+    The command pulls several images and prompts you for the installation values it needs. When it completes, the command prompts you to login into the UCP GUI.
 
         INFO[0053] Login to UCP at https://10.0.0.32:443
 
@@ -243,7 +286,7 @@ install:
 
     ![](../images/login.png)
 
-5. Enter `admin` for the username along with the password you provided to the bootstrapper.
+5. Enter `admin` for the username along with the password you provided to the `install`.
 
     If you didn't enter an admin password, the default password is `orca` After
     you enter the correct credentials, the UCP dashboard displays.
@@ -255,10 +298,10 @@ install:
 ## Step 6: (optional) Add a controller replica to the UCP cluster
 
 In this optional step, you configure support for UCP's high-availability
-feature. You do this by adding one or more UCP *replicas* using the
-bootstrapper's `ucp join` subcommand.  The first time you install, you should
-skip this optional step and try it later. Later, try an install where you
-configure high-availability.
+feature. You do this by adding one or more UCP *replicas* using the `docker/ucp
+join` subcommand.  The first time you install, you should skip this optional
+step and try it later. Later, try an install where you configure
+high-availability.
 
 When adding nodes to your cluster, you decide which nodes you to use as
 *replicas* and which nodes are simply for extra capacity.  A
@@ -269,29 +312,30 @@ for the cluster.  If you are trying out the optional HA deployment:
 * Configure the controller and replicas before adding additional Engine nodes.
 * Configure a minimum of two replicas in addition to the controller.
 
-Repeat the install for each node you want to add. Use the following command to pull the bootstrapper image and review the `join` options:
+Repeat the install for each node you want to add. Use the following command to pull the `docker/ucp` image and review the `join` options:
 
 
 ```bash
 docker run --rm -it docker/ucp join --help
 ```
 
-The bootstrapper prompts you for the following information:
+The `docker/ucp join` prompts you for the following information:
 
 * the URL of the UCP controller, for example `https://52.70.188.239`
 * the username/password of an UCP administrator account
-* your Docker Hub username/password/email
 * at least one SAN value which is an accessible IP address or fully-qualified domain name for node
 
 When you have the information you'll be prompted for, do the following to install:
 
 1. Log into the host where you mean to install the node.
 
-2. Run the `ucp` bootstrapper.
+2. Run the `dokcer/ucp join` command.
 
         $ docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock --name ucp docker/ucp join --replica -i
 
-    The bootstrapper pulls several images and prompts you for the installation values it needs. When it completes, the bootstrapper notifies you that it is starting swarm.
+    The `join` pulls several images and prompts you for the installation values
+    it needs. When it completes, the command notifies you that it is starting
+    swarm.
 
         INFO[0005] Verifying your system is compatible with UCP
         INFO[0011] Sending add host request to UCP server      
@@ -312,28 +356,27 @@ When you have the information you'll be prompted for, do the following to instal
 
 ## Step 7: Add an Engine node to the UCP cluster
 
-In this step, you install one or more UCP nodes using the `ucp join` subcommand. Repeat the install for each node you want to add. Use the following command to pull the bootstrapper image and review the `join` options:
+In this step, you install one or more UCP nodes using the `ucp join` subcommand. Repeat the install for each node you want to add. Use the following command to pull the `docker/ucp` image and review the `join` options:
 
 ```bash
 docker run --rm -it docker/ucp join --help
 ```
 
-The bootstrapper prompts you for the following information:
+The `docker/ucp join` command prompts you for the following information:
 
 * the URL of the UCP controller, for example `https://52.70.188.239`
 * the username/password of an UCP administrator account
-* your Docker Hub username/password/email
 * at least one SAN value which is the actual external, publically-accessible IP address or fully-qualified domain name for node
 
 When you have the information you'll be prompted for, do the following to install:
 
 1. Log into the system where you mean to install the node.
 
-2. Run the `ucp` bootstrapper.
+2. Run the `docker/ucp join` command.
 
         $ docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock --name ucp docker/ucp join -i
 
-    The bootstrapper pulls several images and prompts you for the installation values it needs. When it completes, the bootstrapper notifies you that it is starting swarm.
+    The `join` pulls several images and prompts you for the installation values it needs. When it completes, the command notifies you that it is starting Swarm.
 
         INFO[0005] Verifying your system is compatible with UCP
         INFO[0011] Sending add host request to UCP server      
@@ -493,7 +536,7 @@ export DOCKER_HOST=tcp://<ucp-hostname>:443
 
 ## Uninstall
 
-The bootstrapper can also uninstall UCP from the controller and the nodes. The uninstall process will not remove any other containers that are running, except those recognized to be part of UCP. To see the uninstall options before you uninstall, use the following:
+The `docker/ucp uninstall` command removes UCP from the controller and the nodes. The uninstall process does not remove any other containers that are running, except those recognized to be part of UCP. To see the `uninstall` options before you uninstall, use the following:
 
 ```bash
 docker run --rm -it docker/ucp uninstall --help
@@ -505,13 +548,13 @@ To uninstall, do the following:
 
 2. Enter the following command to uninstall:
 
-        $ docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock --name ucp docker/ucp uninstall
+        $ docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock --name ucp docker/ucp uninstall -i
 
 3. Repeat the uninstall on each node making sure to save the controller till last.
 
 ## Block Mixpanel analytics
 
-To block the outflow of Mixplanel analytic data to Docker, do the following:
+To block the outflow of Mixpanel analytic data to Docker, do the following:
 
 1. Log into the system running the UCP controller.
 
@@ -581,7 +624,7 @@ controller.
     </tr>
     </table>
 
-4. Follow "Step 5" above to install UCP but pass in an additional `--external-ucp-ca` option to the bootstrapper, for example:
+4. Follow "Step 5" above to install UCP but pass in an additional `--external-ucp-ca` option to the `docker/run install`, for example:
 
         docker run --rm -it \
           -v /var/run/docker.sock:/var/run/docker.sock \

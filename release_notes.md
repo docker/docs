@@ -1,7 +1,7 @@
 +++
-title = "Release Notes"
-description = "Docker Universal Control Plane"
-[menu.ucp]
+title ="Release Notes"
+description="Docker Universal Control Plane"
+[menu.main]
 weight="-99"
 +++
 
