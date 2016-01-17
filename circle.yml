@@ -5,9 +5,3 @@ machine:
     - sudo chmod 0755 /usr/bin/docker
   services:
     - docker
-
-test:
-  override:
-    - make
-  post:
-    - cp dist/* $CIRCLE_ARTIFACTS
