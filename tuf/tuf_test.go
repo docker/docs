@@ -936,3 +936,19 @@ func TestAddBaseKeysToRoot(t *testing.T) {
 		}
 	}
 }
+
+func TestGetAllRoles(t *testing.T) {
+	ed25519 := signed.NewEd25519()
+	keyDB := keys.NewDB()
+	repo := initRepo(t, ed25519, keyDB)
+
+	// After we init, we get the base roles
+	roles, err := repo.GetAllRoles()
+	assert.Len(t, roles, len(data.BaseRoles))
+
+	// Clear the keysDB, check that we error
+	repo.keysDB = keys.NewDB()
+	roles, err = repo.GetAllRoles()
+	assert.Error(t, err)
+	assert.IsType(t, data.ErrNoRoles{}, err)
+}
