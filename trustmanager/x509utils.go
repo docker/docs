@@ -205,7 +205,8 @@ func GetLeafCerts(certs []*x509.Certificate) []*x509.Certificate {
 
 // GetIntermediateCerts parses a list of x509 Certificates and returns all of the
 // ones marked as a CA, to be used as intermediates
-func GetIntermediateCerts(certs []*x509.Certificate) (intCerts []*x509.Certificate) {
+func GetIntermediateCerts(certs []*x509.Certificate) []*x509.Certificate {
+	var intCerts []*x509.Certificate
 	for _, cert := range certs {
 		if cert.IsCA {
 			intCerts = append(intCerts, cert)
