@@ -173,7 +173,8 @@ func TestGetKeyHandlerCreatesOnce(t *testing.T) {
 
 func TestGetHandlerRoot(t *testing.T) {
 	metaStore := storage.NewMemStorage()
-	_, repo, _ := testutils.EmptyRepo()
+	_, repo, _, err := testutils.EmptyRepo("gun")
+	assert.NoError(t, err)
 
 	ctx := context.Background()
 	ctx = context.WithValue(ctx, "metaStore", metaStore)
@@ -200,7 +201,8 @@ func TestGetHandlerRoot(t *testing.T) {
 
 func TestGetHandlerTimestamp(t *testing.T) {
 	metaStore := storage.NewMemStorage()
-	_, repo, crypto := testutils.EmptyRepo()
+	_, repo, crypto, err := testutils.EmptyRepo("gun")
+	assert.NoError(t, err)
 
 	ctx := getContext(handlerState{store: metaStore, crypto: crypto})
 
@@ -233,7 +235,8 @@ func TestGetHandlerTimestamp(t *testing.T) {
 
 func TestGetHandlerSnapshot(t *testing.T) {
 	metaStore := storage.NewMemStorage()
-	_, repo, crypto := testutils.EmptyRepo()
+	_, repo, crypto, err := testutils.EmptyRepo("gun")
+	assert.NoError(t, err)
 
 	ctx := getContext(handlerState{store: metaStore, crypto: crypto})
 
@@ -320,7 +323,8 @@ func TestAtomicUpdateValidationFailurePropagated(t *testing.T) {
 	gun := "testGUN"
 	vars := map[string]string{"imageName": gun}
 
-	kdb, repo, cs := testutils.EmptyRepo()
+	kdb, repo, cs, err := testutils.EmptyRepo(gun)
+	assert.NoError(t, err)
 	copyTimestampKey(t, kdb, metaStore, gun)
 	state := handlerState{store: metaStore, crypto: cs}
 
@@ -361,7 +365,8 @@ func TestAtomicUpdateNonValidationFailureNotPropagated(t *testing.T) {
 	gun := "testGUN"
 	vars := map[string]string{"imageName": gun}
 
-	kdb, repo, cs := testutils.EmptyRepo()
+	kdb, repo, cs, err := testutils.EmptyRepo(gun)
+	assert.NoError(t, err)
 	copyTimestampKey(t, kdb, metaStore, gun)
 	state := handlerState{store: &failStore{*metaStore}, crypto: cs}
 
@@ -401,7 +406,8 @@ func TestAtomicUpdateVersionErrorPropagated(t *testing.T) {
 	gun := "testGUN"
 	vars := map[string]string{"imageName": gun}
 
-	kdb, repo, cs := testutils.EmptyRepo()
+	kdb, repo, cs, err := testutils.EmptyRepo(gun)
+	assert.NoError(t, err)
 	copyTimestampKey(t, kdb, metaStore, gun)
 	state := handlerState{store: &invalidVersionStore{*metaStore}, crypto: cs}
 
