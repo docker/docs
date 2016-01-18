@@ -327,7 +327,7 @@ func (c *Client) downloadSnapshot() error {
 		}
 		err := json.Unmarshal(raw, old)
 		if err == nil {
-			snap, err := data.TimestampFromSigned(old)
+			snap, err := data.SnapshotFromSigned(old)
 			if err == nil {
 				version = snap.Signed.Version
 			} else {
