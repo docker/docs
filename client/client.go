@@ -169,7 +169,7 @@ func (r *NotaryRepository) Initialize(rootKeyID string, serverManagedRoles ...st
 	// currently we only support server managing timestamps and snapshots, and
 	// nothing else - timestamps are always managed by the server, and implicit
 	// (do not have to be passed in as part of `serverManagedRoles`, so that
-	// the API of Initialize doens't change).
+	// the API of Initialize doesn't change).
 	var serverManagesSnapshot bool
 	locallyManagedKeys := []string{
 		data.CanonicalTargetsRole,
@@ -396,7 +396,7 @@ func (r *NotaryRepository) RemoveDelegation(name string, keyIDs, paths []string,
 }
 
 // AddTarget creates new changelist entries to add a target to the given roles
-// in the repository when the changelist gets appied at publish time.
+// in the repository when the changelist gets applied at publish time.
 // If roles are unspecified, the default role is "targets".
 func (r *NotaryRepository) AddTarget(target *Target, roles ...string) error {
 
@@ -454,7 +454,7 @@ func (r *NotaryRepository) ListTargets(roles ...string) ([]*TargetWithRole, erro
 	for _, role := range roles {
 		// we don't need to do anything special with removing role from
 		// roles because listSubtree always processes role and only excludes
-		// descendent delegations that appear in roles.
+		// descendant delegations that appear in roles.
 		r.listSubtree(targets, role, roles...)
 	}
 
@@ -569,6 +569,56 @@ func (r *NotaryRepository) GetDelegationRoles() ([]*data.Role, error) {
 		delegationsList = append(delegationsList, delegationMeta.Signed.Delegations.Roles...)
 	}
 	return allDelegations, nil
+}
+
+// RoleWithSignatures is a Role with its associated signatures
+type RoleWithSignatures struct {
+	Signatures []data.Signature
+	data.Role
+}
+
+// GetRepoRoleMetaInfo returns a list of RoleWithSignatures objects for this repo
+// This represents the latest metadata for each role in this repo
+func (r *NotaryRepository) GetRepoRoleMetaInfo() ([]RoleWithSignatures, error) {
+	// Update to latest repo state
+	_, err := r.Update(false)
+	if err != nil {
+		return nil, err
+	}
+
+	// Get all role info from our updated keysDB
+	roles, err := r.tufRepo.GetAllRoles()
+	if err != nil {
+		return nil, err
+	}
+
+	var roleWithSigs []RoleWithSignatures
+
+	// Populate RoleWithSignatures with Role from keysDB and signatures from TUF metadata
+	for _, role := range roles {
+		roleWithSig := RoleWithSignatures{Role: *role, Signatures: nil}
+		switch role.Name {
+		case data.CanonicalRootRole:
+			roleWithSig.Signatures = r.tufRepo.Root.Signatures
+		case data.CanonicalTargetsRole:
+			roleWithSig.Signatures = r.tufRepo.Targets[data.CanonicalTargetsRole].Signatures
+		case data.CanonicalSnapshotRole:
+			roleWithSig.Signatures = r.tufRepo.Snapshot.Signatures
+		case data.CanonicalTimestampRole:
+			roleWithSig.Signatures = r.tufRepo.Timestamp.Signatures
+		default:
+			// If the role isn't a delegation, we should error -- this is only possible if we have invalid keyDB state
+			if !data.IsDelegation(role.Name) {
+				return nil, data.ErrInvalidRole{Role: role.Name, Reason: "invalid role name"}
+			}
+			if _, ok := r.tufRepo.Targets[role.Name]; ok {
+				// We'll only find a signature if we've published any targets with this delegation
+				roleWithSig.Signatures = r.tufRepo.Targets[role.Name].Signatures
+			}
+		}
+		roleWithSigs = append(roleWithSigs, roleWithSig)
+	}
+	return roleWithSigs, nil
 }
 
 // Publish pushes the local changes in signed material to the remote notary-server
