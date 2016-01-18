@@ -629,7 +629,7 @@ func (r *NotaryRepository) publish(cl changelist.Changelist) error {
 	if err == nil {
 		// Only update the snapshot if we've successfully signed it.
 		updatedFiles[data.CanonicalSnapshotRole] = snapshotJSON
-	} else if _, ok := err.(signed.ErrNoKeys); ok {
+	} else if signErr, ok := err.(signed.ErrInsufficientSignatures); ok && signErr.FoundKeys == 0 {
 		// If signing fails due to us not having the snapshot key, then
 		// assume the server is going to sign, and do not include any snapshot
 		// data.

@@ -13,19 +13,18 @@ package signed
 
 import (
 	"crypto/rand"
-	"fmt"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/utils"
 )
 
-// Sign takes a data.Signed and keys, calculates and adds the signature
-// to the data.Signed
+// Sign takes a data.Signed and keys, calculates and adds at least minSignature
+// signatures to the data.Signed
 // N.B. All public keys for a role should be passed so that this function
 //      can correctly clean up signatures that are no longer valid.
-func Sign(service CryptoService, s *data.Signed, keys []data.PublicKey) error {
-	logrus.Debugf("sign called with %d keys", len(keys))
+func Sign(service CryptoService, s *data.Signed, keys []data.PublicKey, minSignatures int) error {
+	logrus.Debugf("sign called with %d/%d keys", minSignatures, len(keys))
 	signatures := make([]data.Signature, 0, len(s.Signatures)+1)
 	signingKeyIDs := make(map[string]struct{})
 	tufIDs := make(map[string]data.PublicKey)
@@ -48,9 +47,10 @@ func Sign(service CryptoService, s *data.Signed, keys []data.PublicKey) error {
 		privKeys[key.ID()] = k
 	}
 
-	// Check to ensure we have at least one signing key
-	if len(privKeys) == 0 {
-		return ErrNoKeys{KeyIDs: ids}
+	// Check to ensure we have enough signing keys
+	if len(privKeys) < minSignatures {
+		return ErrInsufficientSignatures{FoundKeys: len(privKeys),
+			NeededKeys: minSignatures, KeyIDs: ids}
 	}
 
 	// Do signing and generate list of signatures
@@ -68,13 +68,10 @@ func Sign(service CryptoService, s *data.Signed, keys []data.PublicKey) error {
 		})
 	}
 
-	// Check we produced at least on signature
-	if len(signatures) < 1 {
-		return ErrInsufficientSignatures{
-			Name: fmt.Sprintf(
-				"cryptoservice failed to produce any signatures for keys with IDs: %v",
-				ids),
-		}
+	// Check we produced enough signatures
+	if len(signatures) < minSignatures {
+		return ErrInsufficientSignatures{FoundKeys: len(signatures),
+			NeededKeys: minSignatures, KeyIDs: ids}
 	}
 
 	for _, sig := range s.Signatures {
