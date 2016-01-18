@@ -312,7 +312,7 @@ func TestSizeMismatchShort(t *testing.T) {
 }
 
 func TestDownloadTargetsHappy(t *testing.T) {
-	kdb, repo, _, err := testutils.EmptyRepo()
+	kdb, repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	localStorage := store.NewMemoryStore(nil, nil)
 	remoteStorage := store.NewMemoryStore(nil, nil)
@@ -333,7 +333,7 @@ func TestDownloadTargetsHappy(t *testing.T) {
 }
 
 func TestDownloadTargetsDeepHappy(t *testing.T) {
-	kdb, repo, cs, err := testutils.EmptyRepo()
+	kdb, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	localStorage := store.NewMemoryStore(nil, nil)
 	remoteStorage := store.NewMemoryStore(nil, nil)
@@ -408,7 +408,7 @@ func TestDownloadTargetsDeepHappy(t *testing.T) {
 }
 
 func TestDownloadTargetChecksumMismatch(t *testing.T) {
-	kdb, repo, _, err := testutils.EmptyRepo()
+	kdb, repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	localStorage := store.NewMemoryStore(nil, nil)
 	remoteStorage := store.NewMemoryStore(nil, nil)
@@ -449,7 +449,7 @@ func TestDownloadTargetChecksumMismatch(t *testing.T) {
 // TestDownloadTargetsNoChecksum: it's never valid to download any targets
 // role (incl. delegations) when a checksum is not available.
 func TestDownloadTargetsNoChecksum(t *testing.T) {
-	kdb, repo, _, err := testutils.EmptyRepo()
+	kdb, repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	localStorage := store.NewMemoryStore(nil, nil)
 	remoteStorage := store.NewMemoryStore(nil, nil)
@@ -472,7 +472,7 @@ func TestDownloadTargetsNoChecksum(t *testing.T) {
 // TestDownloadTargetsNoSnapshot: it's never valid to download any targets
 // role (incl. delegations) when a checksum is not available.
 func TestDownloadTargetsNoSnapshot(t *testing.T) {
-	kdb, repo, _, err := testutils.EmptyRepo()
+	kdb, repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	localStorage := store.NewMemoryStore(nil, nil)
 	remoteStorage := store.NewMemoryStore(nil, nil)
@@ -493,7 +493,7 @@ func TestDownloadTargetsNoSnapshot(t *testing.T) {
 }
 
 func TestBootstrapDownloadRootHappy(t *testing.T) {
-	kdb, repo, _, err := testutils.EmptyRepo()
+	kdb, repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	localStorage := store.NewMemoryStore(nil, nil)
 	remoteStorage := store.NewMemoryStore(nil, nil)
@@ -515,7 +515,7 @@ func TestBootstrapDownloadRootHappy(t *testing.T) {
 }
 
 func TestUpdateDownloadRootHappy(t *testing.T) {
-	kdb, repo, _, err := testutils.EmptyRepo()
+	kdb, repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	localStorage := store.NewMemoryStore(nil, nil)
 	remoteStorage := store.NewMemoryStore(nil, nil)
@@ -537,7 +537,7 @@ func TestUpdateDownloadRootHappy(t *testing.T) {
 }
 
 func TestUpdateDownloadRootBadChecksum(t *testing.T) {
-	kdb, repo, _, err := testutils.EmptyRepo()
+	kdb, repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	localStorage := store.NewMemoryStore(nil, nil)
 	remoteStorage := store.NewMemoryStore(nil, nil)
@@ -562,7 +562,7 @@ func TestUpdateDownloadRootBadChecksum(t *testing.T) {
 }
 
 func TestDownloadTimestampHappy(t *testing.T) {
-	kdb, repo, _, err := testutils.EmptyRepo()
+	kdb, repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	localStorage := store.NewMemoryStore(nil, nil)
 	remoteStorage := store.NewMemoryStore(nil, nil)
@@ -581,7 +581,7 @@ func TestDownloadTimestampHappy(t *testing.T) {
 }
 
 func TestDownloadSnapshotHappy(t *testing.T) {
-	kdb, repo, _, err := testutils.EmptyRepo()
+	kdb, repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	localStorage := store.NewMemoryStore(nil, nil)
 	remoteStorage := store.NewMemoryStore(nil, nil)
@@ -609,7 +609,7 @@ func TestDownloadSnapshotHappy(t *testing.T) {
 // TestDownloadSnapshotNoChecksum: It should never be valid to download a
 // snapshot if we don't have a checksum
 func TestDownloadSnapshotNoTimestamp(t *testing.T) {
-	kdb, repo, _, err := testutils.EmptyRepo()
+	kdb, repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	localStorage := store.NewMemoryStore(nil, nil)
 	remoteStorage := store.NewMemoryStore(nil, nil)
@@ -630,7 +630,7 @@ func TestDownloadSnapshotNoTimestamp(t *testing.T) {
 }
 
 func TestDownloadSnapshotNoChecksum(t *testing.T) {
-	kdb, repo, _, err := testutils.EmptyRepo()
+	kdb, repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	localStorage := store.NewMemoryStore(nil, nil)
 	remoteStorage := store.NewMemoryStore(nil, nil)
@@ -651,7 +651,7 @@ func TestDownloadSnapshotNoChecksum(t *testing.T) {
 }
 
 func TestDownloadSnapshotBadChecksum(t *testing.T) {
-	kdb, repo, _, err := testutils.EmptyRepo()
+	kdb, repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	localStorage := store.NewMemoryStore(nil, nil)
 	remoteStorage := store.NewMemoryStore(nil, nil)
@@ -680,7 +680,7 @@ func TestDownloadSnapshotBadChecksum(t *testing.T) {
 // was found. If the path doesn't exist in that role subtree, returns
 // nil and an empty string.
 func TestTargetMeta(t *testing.T) {
-	kdb, repo, cs, err := testutils.EmptyRepo()
+	kdb, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	localStorage := store.NewMemoryStore(nil, nil)
 	client := NewClient(repo, nil, kdb, localStorage)

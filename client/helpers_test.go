@@ -12,7 +12,7 @@ import (
 )
 
 func TestApplyTargetsChange(t *testing.T) {
-	_, repo, _, err := testutils.EmptyRepo()
+	_, repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	_, err = repo.InitTargets(data.CanonicalTargetsRole)
 	assert.NoError(t, err)
@@ -52,7 +52,7 @@ func TestApplyTargetsChange(t *testing.T) {
 
 // Adding the same target twice doesn't actually add it.
 func TestApplyAddTargetTwice(t *testing.T) {
-	_, repo, _, err := testutils.EmptyRepo()
+	_, repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	_, err = repo.InitTargets(data.CanonicalTargetsRole)
 	assert.NoError(t, err)
@@ -98,7 +98,7 @@ func TestApplyAddTargetTwice(t *testing.T) {
 }
 
 func TestApplyChangelist(t *testing.T) {
-	_, repo, _, err := testutils.EmptyRepo()
+	_, repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	_, err = repo.InitTargets(data.CanonicalTargetsRole)
 	assert.NoError(t, err)
@@ -142,7 +142,7 @@ func TestApplyChangelist(t *testing.T) {
 }
 
 func TestApplyChangelistMulti(t *testing.T) {
-	_, repo, _, err := testutils.EmptyRepo()
+	_, repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	_, err = repo.InitTargets(data.CanonicalTargetsRole)
 	assert.NoError(t, err)
@@ -183,7 +183,7 @@ func TestApplyChangelistMulti(t *testing.T) {
 }
 
 func TestApplyTargetsDelegationCreateDelete(t *testing.T) {
-	_, repo, cs, err := testutils.EmptyRepo()
+	_, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	newKey, err := cs.Create("targets/level1", data.ED25519Key)
@@ -241,7 +241,7 @@ func TestApplyTargetsDelegationCreateDelete(t *testing.T) {
 }
 
 func TestApplyTargetsDelegationCreate2SharedKey(t *testing.T) {
-	_, repo, cs, err := testutils.EmptyRepo()
+	_, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	newKey, err := cs.Create("targets/level1", data.ED25519Key)
@@ -339,7 +339,7 @@ func TestApplyTargetsDelegationCreate2SharedKey(t *testing.T) {
 }
 
 func TestApplyTargetsDelegationCreateEdit(t *testing.T) {
-	_, repo, cs, err := testutils.EmptyRepo()
+	_, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	newKey, err := cs.Create("targets/level1", data.ED25519Key)
@@ -407,7 +407,7 @@ func TestApplyTargetsDelegationCreateEdit(t *testing.T) {
 }
 
 func TestApplyTargetsDelegationEditNonExisting(t *testing.T) {
-	_, repo, cs, err := testutils.EmptyRepo()
+	_, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	newKey, err := cs.Create("targets/level1", data.ED25519Key)
@@ -438,7 +438,7 @@ func TestApplyTargetsDelegationEditNonExisting(t *testing.T) {
 }
 
 func TestApplyTargetsDelegationCreateAlreadyExisting(t *testing.T) {
-	_, repo, cs, err := testutils.EmptyRepo()
+	_, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	newKey, err := cs.Create("targets/level1", data.ED25519Key)
@@ -476,7 +476,7 @@ func TestApplyTargetsDelegationCreateAlreadyExisting(t *testing.T) {
 }
 
 func TestApplyTargetsDelegationInvalidRole(t *testing.T) {
-	_, repo, cs, err := testutils.EmptyRepo()
+	_, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	newKey, err := cs.Create("targets/level1", data.ED25519Key)
@@ -506,7 +506,7 @@ func TestApplyTargetsDelegationInvalidRole(t *testing.T) {
 }
 
 func TestApplyTargetsDelegationInvalidJSONContent(t *testing.T) {
-	_, repo, cs, err := testutils.EmptyRepo()
+	_, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	newKey, err := cs.Create("targets/level1", data.ED25519Key)
@@ -536,7 +536,7 @@ func TestApplyTargetsDelegationInvalidJSONContent(t *testing.T) {
 }
 
 func TestApplyTargetsDelegationInvalidAction(t *testing.T) {
-	_, repo, _, err := testutils.EmptyRepo()
+	_, repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	ch := changelist.NewTufChange(
@@ -552,7 +552,7 @@ func TestApplyTargetsDelegationInvalidAction(t *testing.T) {
 }
 
 func TestApplyTargetsChangeInvalidType(t *testing.T) {
-	_, repo, _, err := testutils.EmptyRepo()
+	_, repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	ch := changelist.NewTufChange(
@@ -571,7 +571,7 @@ func TestApplyTargetsChangeInvalidType(t *testing.T) {
 // These next 2 tests check that attempting to edit an existing role to
 // create an invalid role errors in both possible combinations.
 func TestApplyTargetsDelegationConflictPathsPrefixes(t *testing.T) {
-	_, repo, cs, err := testutils.EmptyRepo()
+	_, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	newKey, err := cs.Create("targets/level1", data.ED25519Key)
@@ -618,7 +618,7 @@ func TestApplyTargetsDelegationConflictPathsPrefixes(t *testing.T) {
 }
 
 func TestApplyTargetsDelegationConflictPrefixesPaths(t *testing.T) {
-	_, repo, cs, err := testutils.EmptyRepo()
+	_, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	newKey, err := cs.Create("targets/level1", data.ED25519Key)
@@ -665,7 +665,7 @@ func TestApplyTargetsDelegationConflictPrefixesPaths(t *testing.T) {
 }
 
 func TestApplyTargetsDelegationCreateInvalid(t *testing.T) {
-	_, repo, cs, err := testutils.EmptyRepo()
+	_, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	newKey, err := cs.Create("targets/level1", data.ED25519Key)
@@ -696,7 +696,7 @@ func TestApplyTargetsDelegationCreateInvalid(t *testing.T) {
 }
 
 func TestApplyTargetsDelegationCreate2Deep(t *testing.T) {
-	_, repo, cs, err := testutils.EmptyRepo()
+	_, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	newKey, err := cs.Create("targets/level1", data.ED25519Key)
@@ -777,7 +777,7 @@ func TestApplyTargetsDelegationCreate2Deep(t *testing.T) {
 
 // Applying a delegation whose parent doesn't exist fails.
 func TestApplyTargetsDelegationParentDoesntExist(t *testing.T) {
-	_, repo, cs, err := testutils.EmptyRepo()
+	_, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	// make sure a key exists for the previous level, so it's not a missing
@@ -813,7 +813,7 @@ func TestApplyTargetsDelegationParentDoesntExist(t *testing.T) {
 
 // If there is no delegation target, ApplyTargets creates it
 func TestApplyChangelistCreatesDelegation(t *testing.T) {
-	_, repo, cs, err := testutils.EmptyRepo()
+	_, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	newKey, err := cs.Create("targets/level1", data.ED25519Key)
@@ -852,7 +852,7 @@ func TestApplyChangelistCreatesDelegation(t *testing.T) {
 
 // Each change applies only to the role specified
 func TestApplyChangelistTargetsToMultipleRoles(t *testing.T) {
-	_, repo, cs, err := testutils.EmptyRepo()
+	_, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	newKey, err := cs.Create("targets/level1", data.ED25519Key)
@@ -901,7 +901,7 @@ func TestApplyChangelistTargetsToMultipleRoles(t *testing.T) {
 
 // ApplyTargets falls back to role that exists when adding or deleting a change
 func TestApplyChangelistTargetsFallbackRoles(t *testing.T) {
-	_, repo, _, err := testutils.EmptyRepo()
+	_, repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	hash := sha256.Sum256([]byte{})
@@ -943,7 +943,7 @@ func TestApplyChangelistTargetsFallbackRoles(t *testing.T) {
 
 // changeTargetMeta fallback fails with ErrInvalidRole if role is invalid
 func TestChangeTargetMetaFallbackFailsInvalidRole(t *testing.T) {
-	_, repo, _, err := testutils.EmptyRepo()
+	_, repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	hash := sha256.Sum256([]byte{})
@@ -970,7 +970,7 @@ func TestChangeTargetMetaFallbackFailsInvalidRole(t *testing.T) {
 // If applying a change fails due to a prefix error, it does not fall back
 // on the parent.
 func TestChangeTargetMetaDoesntFallbackIfPrefixError(t *testing.T) {
-	_, repo, cs, err := testutils.EmptyRepo()
+	_, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	newKey, err := cs.Create("targets/level1", data.ED25519Key)

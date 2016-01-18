@@ -153,7 +153,8 @@ func validRootLeafCerts(root *data.SignedRoot, gun string) ([]*x509.Certificate,
 	for _, cert := range allLeafCerts {
 		// Validate that this leaf certificate has a CN that matches the exact gun
 		if cert.Subject.CommonName != gun {
-			logrus.Debugf("error leaf certificate CN: %s doesn't match the given GUN: %s", cert.Subject.CommonName)
+			logrus.Debugf("error leaf certificate CN: %s doesn't match the given GUN: %s",
+				cert.Subject.CommonName, gun)
 			continue
 		}
 		// Make sure the certificate is not expired

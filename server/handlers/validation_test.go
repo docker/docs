@@ -69,7 +69,7 @@ func getUpdates(r, tg, sn, ts *data.Signed) (
 }
 
 func TestValidateEmptyNew(t *testing.T) {
-	kdb, repo, cs, err := testutils.EmptyRepo()
+	kdb, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 
@@ -86,7 +86,7 @@ func TestValidateEmptyNew(t *testing.T) {
 }
 
 func TestValidateNoNewRoot(t *testing.T) {
-	kdb, repo, cs, err := testutils.EmptyRepo()
+	kdb, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 
@@ -104,7 +104,7 @@ func TestValidateNoNewRoot(t *testing.T) {
 }
 
 func TestValidateNoNewTargets(t *testing.T) {
-	kdb, repo, cs, err := testutils.EmptyRepo()
+	kdb, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 
@@ -122,7 +122,7 @@ func TestValidateNoNewTargets(t *testing.T) {
 }
 
 func TestValidateOnlySnapshot(t *testing.T) {
-	kdb, repo, cs, err := testutils.EmptyRepo()
+	kdb, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 
@@ -142,7 +142,7 @@ func TestValidateOnlySnapshot(t *testing.T) {
 }
 
 func TestValidateOldRoot(t *testing.T) {
-	kdb, repo, cs, err := testutils.EmptyRepo()
+	kdb, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 
@@ -160,7 +160,7 @@ func TestValidateOldRoot(t *testing.T) {
 }
 
 func TestValidateRootRotation(t *testing.T) {
-	kdb, repo, crypto, err := testutils.EmptyRepo()
+	kdb, repo, crypto, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 
@@ -206,7 +206,7 @@ func TestValidateRootRotation(t *testing.T) {
 }
 
 func TestValidateNoRoot(t *testing.T) {
-	kdb, repo, cs, err := testutils.EmptyRepo()
+	kdb, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 
@@ -224,7 +224,7 @@ func TestValidateNoRoot(t *testing.T) {
 }
 
 func TestValidateSnapshotMissing(t *testing.T) {
-	kdb, repo, cs, err := testutils.EmptyRepo()
+	kdb, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 
@@ -242,7 +242,7 @@ func TestValidateSnapshotMissing(t *testing.T) {
 }
 
 func TestValidateSnapshotGenerateNoPrev(t *testing.T) {
-	kdb, repo, cs, err := testutils.EmptyRepo()
+	kdb, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 	snapRole := kdb.GetRole(data.CanonicalSnapshotRole)
@@ -267,7 +267,7 @@ func TestValidateSnapshotGenerateNoPrev(t *testing.T) {
 }
 
 func TestValidateSnapshotGenerateWithPrev(t *testing.T) {
-	kdb, repo, cs, err := testutils.EmptyRepo()
+	kdb, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 	snapRole := kdb.GetRole(data.CanonicalSnapshotRole)
@@ -308,7 +308,7 @@ func TestValidateSnapshotGenerateWithPrev(t *testing.T) {
 }
 
 func TestValidateSnapshotGeneratePrevCorrupt(t *testing.T) {
-	kdb, repo, cs, err := testutils.EmptyRepo()
+	kdb, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 	snapRole := kdb.GetRole(data.CanonicalSnapshotRole)
@@ -339,7 +339,7 @@ func TestValidateSnapshotGeneratePrevCorrupt(t *testing.T) {
 }
 
 func TestValidateSnapshotGenerateNoTargets(t *testing.T) {
-	kdb, repo, cs, err := testutils.EmptyRepo()
+	kdb, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 	snapRole := kdb.GetRole(data.CanonicalSnapshotRole)
@@ -364,7 +364,7 @@ func TestValidateSnapshotGenerateNoTargets(t *testing.T) {
 }
 
 func TestValidateSnapshotGenerate(t *testing.T) {
-	kdb, repo, cs, err := testutils.EmptyRepo()
+	kdb, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 	snapRole := kdb.GetRole(data.CanonicalSnapshotRole)
@@ -394,7 +394,7 @@ func TestValidateSnapshotGenerate(t *testing.T) {
 // happen if pushing an existing repository from one server to another that
 // does not have the repo.
 func TestValidateRootNoTimestampKey(t *testing.T) {
-	_, oldRepo, cs, err := testutils.EmptyRepo()
+	_, oldRepo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	r, tg, sn, ts, err := testutils.Sign(oldRepo)
@@ -426,7 +426,7 @@ func TestValidateRootNoTimestampKey(t *testing.T) {
 // repository from one server to another that had already initialized the same
 // repo.
 func TestValidateRootInvalidTimestampKey(t *testing.T) {
-	_, oldRepo, cs, err := testutils.EmptyRepo()
+	_, oldRepo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	r, tg, sn, ts, err := testutils.Sign(oldRepo)
@@ -449,7 +449,7 @@ func TestValidateRootInvalidTimestampKey(t *testing.T) {
 
 // If the timestamp role has a threshold > 1, validation fails.
 func TestValidateRootInvalidTimestampThreshold(t *testing.T) {
-	kdb, oldRepo, cs, err := testutils.EmptyRepo()
+	kdb, oldRepo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	tsRole, ok := oldRepo.Root.Signed.Roles[data.CanonicalTimestampRole]
 	assert.True(t, ok)
@@ -472,7 +472,7 @@ func TestValidateRootInvalidTimestampThreshold(t *testing.T) {
 // If any role has a threshold < 1, validation fails
 func TestValidateRootInvalidZeroThreshold(t *testing.T) {
 	for _, role := range data.BaseRoles {
-		kdb, oldRepo, cs, err := testutils.EmptyRepo()
+		kdb, oldRepo, cs, err := testutils.EmptyRepo("docker.com/notary")
 		assert.NoError(t, err)
 		tsRole, ok := oldRepo.Root.Signed.Roles[role]
 		assert.True(t, ok)
@@ -497,7 +497,7 @@ func TestValidateRootInvalidZeroThreshold(t *testing.T) {
 // These tests remove a role from the Root file and
 // check for a validation.ErrBadRoot
 func TestValidateRootRoleMissing(t *testing.T) {
-	kdb, repo, cs, err := testutils.EmptyRepo()
+	kdb, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 
@@ -517,7 +517,7 @@ func TestValidateRootRoleMissing(t *testing.T) {
 }
 
 func TestValidateTargetsRoleMissing(t *testing.T) {
-	kdb, repo, cs, err := testutils.EmptyRepo()
+	kdb, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 
@@ -537,7 +537,7 @@ func TestValidateTargetsRoleMissing(t *testing.T) {
 }
 
 func TestValidateSnapshotRoleMissing(t *testing.T) {
-	kdb, repo, cs, err := testutils.EmptyRepo()
+	kdb, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 
@@ -560,7 +560,7 @@ func TestValidateSnapshotRoleMissing(t *testing.T) {
 
 // ### Signature missing negative tests ###
 func TestValidateRootSigMissing(t *testing.T) {
-	kdb, repo, cs, err := testutils.EmptyRepo()
+	kdb, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 
@@ -583,7 +583,7 @@ func TestValidateRootSigMissing(t *testing.T) {
 }
 
 func TestValidateTargetsSigMissing(t *testing.T) {
-	kdb, repo, cs, err := testutils.EmptyRepo()
+	kdb, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 
@@ -604,7 +604,7 @@ func TestValidateTargetsSigMissing(t *testing.T) {
 }
 
 func TestValidateSnapshotSigMissing(t *testing.T) {
-	kdb, repo, cs, err := testutils.EmptyRepo()
+	kdb, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 
@@ -628,7 +628,7 @@ func TestValidateSnapshotSigMissing(t *testing.T) {
 
 // ### Corrupted metadata negative tests ###
 func TestValidateRootCorrupt(t *testing.T) {
-	kdb, repo, cs, err := testutils.EmptyRepo()
+	kdb, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 
@@ -649,7 +649,7 @@ func TestValidateRootCorrupt(t *testing.T) {
 }
 
 func TestValidateTargetsCorrupt(t *testing.T) {
-	kdb, repo, cs, err := testutils.EmptyRepo()
+	kdb, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 
@@ -670,7 +670,7 @@ func TestValidateTargetsCorrupt(t *testing.T) {
 }
 
 func TestValidateSnapshotCorrupt(t *testing.T) {
-	kdb, repo, cs, err := testutils.EmptyRepo()
+	kdb, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 
@@ -694,7 +694,7 @@ func TestValidateSnapshotCorrupt(t *testing.T) {
 
 // ### Snapshot size mismatch negative tests ###
 func TestValidateRootModifiedSize(t *testing.T) {
-	kdb, repo, cs, err := testutils.EmptyRepo()
+	kdb, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 
@@ -719,7 +719,7 @@ func TestValidateRootModifiedSize(t *testing.T) {
 }
 
 func TestValidateTargetsModifiedSize(t *testing.T) {
-	kdb, repo, cs, err := testutils.EmptyRepo()
+	kdb, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 
@@ -744,7 +744,7 @@ func TestValidateTargetsModifiedSize(t *testing.T) {
 
 // ### Snapshot hash mismatch negative tests ###
 func TestValidateRootModifiedHash(t *testing.T) {
-	kdb, repo, cs, err := testutils.EmptyRepo()
+	kdb, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 
@@ -770,7 +770,7 @@ func TestValidateRootModifiedHash(t *testing.T) {
 }
 
 func TestValidateTargetsModifiedHash(t *testing.T) {
-	kdb, repo, cs, err := testutils.EmptyRepo()
+	kdb, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 
@@ -806,7 +806,7 @@ func TestGenerateSnapshotNoRole(t *testing.T) {
 }
 
 func TestGenerateSnapshotNoKey(t *testing.T) {
-	kdb, _, _, err := testutils.EmptyRepo()
+	kdb, _, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 
@@ -819,7 +819,7 @@ func TestGenerateSnapshotNoKey(t *testing.T) {
 
 // ### Target validation with delegations tests
 func TestLoadTargetsFromStore(t *testing.T) {
-	_, repo, _, err := testutils.EmptyRepo()
+	_, repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 
@@ -860,7 +860,7 @@ func TestLoadTargetsFromStore(t *testing.T) {
 }
 
 func TestValidateTargetsLoadParent(t *testing.T) {
-	_, baseRepo, cs, err := testutils.EmptyRepo()
+	_, baseRepo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 
@@ -912,7 +912,7 @@ func TestValidateTargetsLoadParent(t *testing.T) {
 }
 
 func TestValidateTargetsParentInUpdate(t *testing.T) {
-	_, baseRepo, cs, err := testutils.EmptyRepo()
+	_, baseRepo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 
@@ -970,7 +970,7 @@ func TestValidateTargetsParentInUpdate(t *testing.T) {
 }
 
 func TestValidateTargetsParentNotFound(t *testing.T) {
-	_, baseRepo, cs, err := testutils.EmptyRepo()
+	_, baseRepo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 
@@ -1008,7 +1008,7 @@ func TestValidateTargetsParentNotFound(t *testing.T) {
 }
 
 func TestValidateTargetsRoleNotInParent(t *testing.T) {
-	kdb, baseRepo, cs, err := testutils.EmptyRepo()
+	kdb, baseRepo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 
