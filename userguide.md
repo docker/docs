@@ -4,7 +4,7 @@ description = "Documentation describing basic use of Docker Trusted Registry"
 keywords = ["docker, documentation, about, technology, hub, push, pull, user interface, account management, enterprise"]
 [menu.main]
 parent="workw_dtr"
-weight=3
+weight=4
 +++
 
 

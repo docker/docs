@@ -41,7 +41,7 @@ You should be able to complete the installation in under thirty minutes.
 
 1. Log into the <a href="https://portal.azure.com/#" target="_blank">Microsoft Azure portal</a>.
 
-    ![Azure portal](images/azure_portal.png)
+    ![Azure portal](../images/azure_portal.png)
 
 2. Choose the + New option.
 
@@ -49,7 +49,7 @@ You should be able to complete the installation in under thirty minutes.
 
 4. Search for `Docker Trusted Registry`.
 
-    ![Azure filter](images/azure_filter.png)
+    ![Azure filter](../images/azure_filter.png)
 
 5. Double click Docker Trusted Registry.
 
@@ -59,7 +59,7 @@ You should be able to complete the installation in under thirty minutes.
 
     The system prompts you to enter basic configuration settings.
 
-    ![Azure basics](images/basic_configuration.png)
+    ![Azure basics](../images/basic_configuration.png)
 
     For production, you should always choose to use an SSH public key. This
     example uses a trial version of Azure, so Password authentication is
@@ -70,6 +70,7 @@ You should be able to complete the installation in under thirty minutes.
     If you were going into production, the size and storage of an instance would
     depend on the load and configuration you were planning for. For this
     example, the defaults are sufficient.
+
 8. When you reach the Buy page, press Purchase.
 
     The Docker Trusted Registry is a bring your own license (BYOL) purchase, so
@@ -80,7 +81,7 @@ You should be able to complete the installation in under thirty minutes.
 
 9. After the provisioning completes, copy the IP address of your instance.
 
-    ![Azure basics](images/azure_ip.png)
+    ![Azure basics](../images/azure_ip.png)
 
 10. In a terminal or through PuTTy, connect to your Trusted Registry instance.
 
@@ -180,7 +181,7 @@ or pull from Docker Trusted Registry until you secure it.
 
 There are several options and methods for securing Docker Trusted Registry. For
 more information, see the [configuration
-documentation](../configuration.md#security)
+documentation](../configure/configuration.md#security).
 
 ## Push and pull images
 
@@ -196,13 +197,13 @@ web admin interface or the Docker Trusted Registry. You can restrict access
 using an in-Docker Trusted Registry configured set of users (and passwords), or
 you can configure Docker Trusted Registry to use LDAP-based authentication.
 
-See [Docker Trusted Registry Authentication settings](../configuration.md#authentication) for more details.
+See [Docker Trusted Registry Authentication settings](../configure/configuration.md#authentication) for more details.
 
 ## See also
 
 * [Upgrade information](upgrade.md) to upgrade either the Docker Trusted Registry or the commercially supported engine.
 * [Install the CS Engine](install-csengine.md).
-* To configure for your environment, see the [configuration instructions](../configuration.md).
+* To configure for your environment, see the [configuration instructions](../configure/configuration.md).
 * To use Docker Trusted Registry, see the [User guide](../userguide.md).
 * To make administrative changes, see the[Admin guide](../adminguide.md).
 * To see previous changes, see [the release notes](../release-notes.md).

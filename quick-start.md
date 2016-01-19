@@ -230,7 +230,7 @@ Now that you’ve created the custom image, it can be pushed to Docker Trusted R
 You can view the traffic throughput from the custom image being pushed, by selecting `Network` from the `Load Balancer` tile on the Docker Trusted Registry Dashboard:
 ![](http://i.imgur.com/8KlHj9u.png)
 
-![Docker Trusted Registry console push throughput](assets/console-push.png)
+![Docker Trusted Registry console push throughput](images/console-push.png)
 
 Once the image is successfully pushed, it can be downloaded, or pulled, by any
 Docker host that has access to Docker Trusted Registry.
@@ -305,13 +305,13 @@ The previous `docker run` command mapped port `1973` on the container to port
 > not trusted. You may wish to add the certificate to the trusted store in order
 > to prevent further warnings in the future.
 
-![Jenkins landing page](assets/jenkins-ui.png)
+![Jenkins landing page](images/jenkins-ui.png)
 
 From within the Jenkins Web UI, navigate to `Manage Jenkins` (on the left-hand
 pane) > `Manage Plugins` > `Installed`. The  `Role-based Authorization Strategy`
 plugin should be present with the `Uninstall` button available to the right.
 
-![Jenkins plugin manager](assets/jenkins-plugins.png)
+![Jenkins plugin manager](images/jenkins-plugins.png)
 
 In another browser session, try to access Jenkins via the default HTTP port 8080
  `http://<docker-host>:8080`. This should result in a "connection timeout",

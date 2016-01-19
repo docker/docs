@@ -22,6 +22,7 @@ Docker Trusted Registry runs on the following 64-bit platforms:
 * Ubuntu 14.04 LTS
 * RHEL 7.0 and 7.1
 * CentOS 7.1
+* SUSE Linux Enterprise 12
 
 Docker Trusted Registry requires the latest commercially supported Docker Engine (CS Engine), running on a supported host.
 
@@ -159,7 +160,7 @@ Securing Docker Trusted Registry is **required**. You will not be able to push
 or pull from Docker Trusted Registry until you secure it.
 
 There are several options and methods for securing Docker Trusted Registry. For
-more information, see the [configuration documentation](../configuration.md#security)
+more information, see the [configuration documentation](../configure/configuration.md#security)
 
 ## Push and pull images
 
@@ -175,12 +176,12 @@ web admin interface or the Docker Trusted Registry. You can restrict access
 using an in-Docker Trusted Registry configured set of users (and passwords), or
 you can configure Docker Trusted Registry to use LDAP- based authentication.
 
-See [Docker Trusted Registry Authentication settings](../configuration.md#authentication) for more details.
+See [Docker Trusted Registry Authentication settings](../configure/configuration.md#authentication) for more details.
 
 ## See also
 
 * To configure for your environment, see the
-[configuration instructions](../configuration.md).
+[configuration instructions](../configure/configuration.md).
 * To use Docker Trusted Registry, see [the User guide](../userguide.md).
 * To make administrative changes, see [the Admin guide](../adminguide.md).
 * To see previous changes, see [the release notes](../release-notes.md).

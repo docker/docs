@@ -66,4 +66,4 @@ docs-build:
 	docker build -t "$(DOCKER_DOCS_IMAGE)" .
 
 images:
-	$(MAKE) -C assets
+	$(MAKE) -C images

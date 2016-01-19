@@ -333,7 +333,7 @@ steps depending on your type of system.
 ## See also
 
 * To configure for your environment, see the
-[configuration instructions](../configuration.md).
+[configuration instructions](../configure/configuration.md).
 * To use Docker Trusted Registry, see [the User guide](../userguide.md).
 * See [installing the CS Engine](install-csengine.md).
 * To make administrative changes, see [the Admin guide](../adminguide.md).

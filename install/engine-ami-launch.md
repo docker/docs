@@ -1,4 +1,3 @@
-
 +++
 title = "Install Docker Engine for AWS AMI (BDS)"
 description = "Install Docker Engine for AWS AMI (BDS)"
@@ -87,7 +86,7 @@ The following steps walk you through the 1-Click Launch settings:
 
 5. From the Security Group box, select "Create new based on seller settings".
 
-    ![](images/aws-engine-sg-rules.png)
+    ![](../images/aws-engine-sg-rules.png)
 
     This option has security implications. It allows incoming connections to the listed ports from any host or IP address. You should lock this down in line with your existing AWS security policies.
 
@@ -274,7 +273,7 @@ For more information on using Docker Engineer in AWS, go to the [AWS Documentati
 ## See also
 
 * To configure for your environment, see
-[Configuration instructions](../configuration.md).
+[Configuration instructions](../configure/configuration.md).
 * To use Docker Trusted Registry, see [the User guide](../userguide.md).
 * To make administrative changes, see [the Admin guide](../adminguide.md).
 * To see previous changes, see [the release notes](../release-notes.md).

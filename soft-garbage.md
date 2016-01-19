@@ -25,14 +25,14 @@ purposefully delete one of those manifests and the image layers referenced by
 that manifest become orphaned, then they can be removed during the garbage
 collection job. In the following diagram, _both_ manifests point to the first layer, #2543d8.
 
-![Garbage collection illustration</soft-garbage/>](assets/gc1.png)
+![Garbage collection illustration</soft-garbage/>](images/gc1.png)
 
 Since many developers may use a base image for future images, it is possible
-that there will be image layers that will never be deleted. There might be other
+that there will be image layers that will  never be deleted. There might be other
 manifests that point to layers of the base image which could still be used by
 others as seen in the second diagram.
 
-![Garbage collection illustration</soft-garbage/>](assets/gc3.png)
+![Garbage collection illustration</soft-garbage/>](images/gc3.png)
 
 ## Prerequisites
 You need an image to remove.
@@ -49,9 +49,18 @@ If a developer removes the manifest of an image, then it is called a soft
 deletion. Developers won't be able to access that image, although physically, it
 it still in the repository.
 
-To perform a soft deletion, open a Trusted Registry command line and type:
+You can perform a soft deletion, either from the UI or from the command line.
 
-`curl -u <username>:<password> -X DELETE https://<DTR HOST>/api/v0/repositories/<namespace>/<reponame>/manifests/<reference>`
+From the Trusted Registry dashboard, navigate to Repositories > Tags. Click the trash can next to the images you want to remove. They are now marked for the garbage collection job.
+
+![Soft deletion of a tag in the UIn</soft-garbage/>](images/tag-removal.png)
+
+
+If you prefer to not use the UI, then you can open a Trusted Registry command line and type:
+
+```
+curl -u <username>:<password> -X DELETE https://<DTR HOST>/api/v0/repositories/<namespace>/<reponame>/manifests/<reference>
+```
 
 You can only delete one image at a time and you must also be authenticated as a
 user who has "write" level access to the repository.
@@ -116,9 +125,9 @@ The results are also displayed in the Trusted Registry UI by navigating to Setti
 
 ### See also
 
-* [**Administrator Guide**](adminguide.md) Go here if you are an administrator
+* See the [administrator guide](adminguide.md) if you are an administrator
 responsible for running and maintaining Docker Trusted Registry.
 
-* [**Configuration**](configuration.md) Go here to find out details about
+* See [configuration](configure/configuration.md) to find out details about
 setting up and configuring Docker Trusted Registry for your particular
 environment.

@@ -4,7 +4,7 @@ description = "Documentation describing administration of Docker Trusted Registr
 keywords = ["docker, documentation, about, technology, hub, registry, enterprise, admin tasks, dashboard, settings, logs, reporting, Notary, diagnostics, admin guide, administration"]
 [menu.main]
 parent="workw_dtr"
-weight=4
+weight=5
 +++
 
 
@@ -22,7 +22,7 @@ permissions regarding repositories, organizations, and teams, go to the
 
 ## Reporting Dashboard
 
-![Docker Trusted Registry Dashboard</admin/metrics/>](assets/admin-metrics.png)
+![Docker Trusted Registry Dashboard</admin/metrics/>](images/admin-metrics.png)
 
 The Docker Trusted Registry Dashboard displays "hardware" resource utilization
 and network traffic metrics for the Docker Trusted Registry host as well as for
@@ -67,7 +67,7 @@ the API documentation for details.
 
 ### Logs tab
 
-![System Logs page</admin/logs/>](assets/admin-logs.png)
+![System Logs page</admin/logs/>](images/admin-logs.png)
 
 Use this tab to view the logs from your Docker Trusted Registry's containers.
 Based on the  filter, see log sections for each service. Older or newer logs can

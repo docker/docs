@@ -19,7 +19,7 @@ hourly subscription. If you a purchase a license or you have a trial license, it
 
 1. Go to the [Docker Subscription page](https://hub.docker.com/enterprise/) and select an edition. After completing a brief registration process, follow the steps to acquire it.
 
-      **Note**: You may need to disable any pop-up blocker installed on your browser in order to complete the download.
+      You may need to disable any pop-up blocker installed on your browser in order to complete the download.
 
 2. After acquiring your license, view or download it by logging in to
 Docker Hub, going to your account settings (gear icon at upper right), and
@@ -30,7 +30,14 @@ The Licenses page displays your currently available licenses and if you selected
 
 When installing Docker Trusted Registry, you must first obtain your license, then apply it.
 
-**Note** The Licenses page is where you download the CS engine script by selecting the operating system it needs to run on.
+## Apply your license
+
+![Settings page</configuration/settings#http>](../images/admin-settings-license2.png)
+
+Use the Trusted Registry dashboard (Settings > License) to enter your license ID or apply for a new license.
 
 ## See also
-* For information on how to download the CS engine, see [Installing the CS engine](install/install-csengine.md).
+
+* To continue to configure for your environment, see the overview
+[configuration instructions](../configuration.md).
+* To use Docker Trusted Registry, see the [User guide](userguide.md).
