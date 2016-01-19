@@ -2312,7 +2312,7 @@ func TestPublishRemoveDelgation(t *testing.T) {
 	assert.NoError(t, delgRepo.Publish())
 
 	// owner removes delegation
-	assert.NoError(t, ownerRepo.RemoveDelegation("targets/a"))
+	assert.NoError(t, ownerRepo.RemoveDelegation("targets/a", []string{aKey.ID()}, []string{}, false))
 	assert.NoError(t, ownerRepo.Publish())
 
 	// delegated repo can now no longer publish to delegated role
@@ -2654,23 +2654,22 @@ func TestRemoveDelegationChangefileValid(t *testing.T) {
 	rootPubKey := repo.CryptoService.GetKey(rootKeyID)
 	assert.NotNil(t, rootPubKey)
 
-	err := repo.RemoveDelegation("root")
+	err := repo.RemoveDelegation("root", []string{rootKeyID}, []string{}, false)
 	assert.Error(t, err)
 	assert.IsType(t, data.ErrInvalidRole{}, err)
 	assert.Empty(t, getChanges(t, repo))
 
 	// to demonstrate that so long as the delegation name is valid, the
 	// existence of the delegation doesn't matter
-	assert.NoError(t, repo.RemoveDelegation("targets/a/b/c"))
+	assert.NoError(t, repo.RemoveDelegation("targets/a/b/c", []string{rootKeyID}, []string{}, false))
 
 	// ensure that the changefile is correct
 	changes := getChanges(t, repo)
 	assert.Len(t, changes, 1)
-	assert.Equal(t, changelist.ActionDelete, changes[0].Action())
+	assert.Equal(t, changelist.ActionUpdate, changes[0].Action())
 	assert.Equal(t, "targets/a/b/c", changes[0].Scope())
 	assert.Equal(t, changelist.TypeTargetsDelegation, changes[0].Type())
 	assert.Equal(t, "", changes[0].Path())
-	assert.Empty(t, changes[0].Content())
 }
 
 // The changefile produced by RemoveDelegation, when applied, actually removes
@@ -2697,7 +2696,7 @@ func TestRemoveDelegationChangefileApplicable(t *testing.T) {
 	assert.Len(t, targetRole.Signed.Delegations.Keys, 1)
 
 	// now remove it
-	assert.NoError(t, repo.RemoveDelegation("targets/a"))
+	assert.NoError(t, repo.RemoveDelegation("targets/a", []string{rootKeyID}, []string{}, false))
 	changes = getChanges(t, repo)
 	assert.Len(t, changes, 2)
 	assert.NoError(t, applyTargetsChange(repo.tufRepo, changes[1]))
@@ -2711,7 +2710,7 @@ func TestRemoveDelegationChangefileApplicable(t *testing.T) {
 // file to be propagated.
 func TestRemoveDelegationErrorWritingChanges(t *testing.T) {
 	testErrorWritingChangefiles(t, func(repo *NotaryRepository) error {
-		return repo.RemoveDelegation("targets/a")
+		return repo.RemoveDelegation("targets/a", []string{""}, []string{}, false)
 	})
 }
 

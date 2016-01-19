@@ -352,7 +352,7 @@ func (r *NotaryRepository) AddDelegation(name string, threshold int,
 // the repository when the changelist gets applied at publish time.
 // This does not validate that the delegation exists, since one might exist
 // after applying all changes.
-func (r *NotaryRepository) RemoveDelegation(name string) error {
+func (r *NotaryRepository) RemoveDelegation(name string, keyIDs, paths []string, removeAll bool) error {
 
 	if !data.IsDelegation(name) {
 		return data.ErrInvalidRole{Role: name, Reason: "invalid delegation role name"}
@@ -365,14 +365,35 @@ func (r *NotaryRepository) RemoveDelegation(name string) error {
 	defer cl.Close()
 
 	logrus.Debugf(`Removing delegation "%s"\n`, name)
+	var template *changelist.TufChange
 
-	template := changelist.NewTufChange(
-		changelist.ActionDelete,
-		name,
-		changelist.TypeTargetsDelegation,
-		"", // no path
-		nil,
-	)
+	// We use the Delete action only for force removal, Update is used for removing individual keys and paths
+	if removeAll {
+		template = changelist.NewTufChange(
+			changelist.ActionDelete,
+			name,
+			changelist.TypeTargetsDelegation,
+			"",  // no path
+			nil, // deleting role, no data needed
+		)
+
+	} else {
+		tdJSON, err := json.Marshal(&changelist.TufDelegation{
+			RemoveKeys:  keyIDs,
+			RemovePaths: paths,
+		})
+		if err != nil {
+			return err
+		}
+
+		template = changelist.NewTufChange(
+			changelist.ActionUpdate,
+			name,
+			changelist.TypeTargetsDelegation,
+			"", // no path
+			tdJSON,
+		)
+	}
 
 	return addChange(cl, template, name)
 }
@@ -512,6 +533,45 @@ func (r *NotaryRepository) GetChangelist() (changelist.Changelist, error) {
 		return nil, err
 	}
 	return cl, nil
+}
+
+// GetDelegationRoles returns the keys and roles of the repository's delegations
+func (r *NotaryRepository) GetDelegationRoles() ([]*data.Role, error) {
+	// Update state of the repo to latest
+	if _, err := r.Update(false); err != nil {
+		return nil, err
+	}
+
+	// All top level delegations (ex: targets/level1) are stored exclusively in targets.json
+	targets, ok := r.tufRepo.Targets[data.CanonicalTargetsRole]
+	if !ok {
+		return nil, store.ErrMetaNotFound{data.CanonicalTargetsRole}
+	}
+
+	allDelegations := targets.Signed.Delegations.Roles
+
+	// make a copy for traversing nested delegations
+	delegationsList := make([]*data.Role, len(allDelegations))
+	copy(delegationsList, allDelegations)
+
+	// Now traverse to lower level delegations (ex: targets/level1/level2)
+	for len(delegationsList) > 0 {
+		// Pop off first delegation to traverse
+		delegation := delegationsList[0]
+		delegationsList = delegationsList[1:]
+
+		// Get metadata
+		delegationMeta, ok := r.tufRepo.Targets[delegation.Name]
+		// If we get an error, don't try to traverse further into this subtree because it doesn't exist or is malformed
+		if !ok {
+			continue
+		}
+
+		// Add nested delegations to return list and exploration list
+		allDelegations = append(allDelegations, delegationMeta.Signed.Delegations.Roles...)
+		delegationsList = append(delegationsList, delegationMeta.Signed.Delegations.Roles...)
+	}
+	return allDelegations, nil
 }
 
 // Publish pushes the local changes in signed material to the remote notary-server

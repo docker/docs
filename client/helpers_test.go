@@ -225,12 +225,18 @@ func TestApplyTargetsDelegationCreateDelete(t *testing.T) {
 	assert.Equal(t, "level1", role.Paths[0])
 
 	// delete delegation
+	td = &changelist.TufDelegation{
+		RemoveKeys: []string{newKey.ID()},
+	}
+
+	tdJSON, err = json.Marshal(td)
+	assert.NoError(t, err)
 	ch = changelist.NewTufChange(
 		changelist.ActionDelete,
 		"targets/level1",
 		changelist.TypeTargetsDelegation,
 		"",
-		nil,
+		tdJSON,
 	)
 
 	err = applyTargetsChange(repo, ch)
@@ -307,13 +313,18 @@ func TestApplyTargetsDelegationCreate2SharedKey(t *testing.T) {
 	assert.Equal(t, "targets/level2", role2.Name)
 	assert.Equal(t, "level2", role2.Paths[0])
 
-	// delete one delegation, ensure key remains
+	// delete one delegation, ensure shared key remains
+	td = &changelist.TufDelegation{
+		RemoveKeys: []string{newKey.ID()},
+	}
+	tdJSON, err = json.Marshal(td)
+	assert.NoError(t, err)
 	ch = changelist.NewTufChange(
 		changelist.ActionDelete,
 		"targets/level1",
 		changelist.TypeTargetsDelegation,
 		"",
-		nil,
+		tdJSON,
 	)
 
 	err = applyTargetsChange(repo, ch)
@@ -328,7 +339,7 @@ func TestApplyTargetsDelegationCreate2SharedKey(t *testing.T) {
 		"targets/level2",
 		changelist.TypeTargetsDelegation,
 		"",
-		nil,
+		tdJSON,
 	)
 
 	err = applyTargetsChange(repo, ch)
@@ -468,11 +479,91 @@ func TestApplyTargetsDelegationCreateAlreadyExisting(t *testing.T) {
 	// we have sufficient checks elsewhere we don't need to confirm that
 	// creating fresh works here via more asserts.
 
-	// when attempting to create the same role again, assert we receive
-	// an ErrInvalidRole because an existing role can't be "created"
+	extraKey, err := cs.Create("targets/level1", data.ED25519Key)
+	assert.NoError(t, err)
+
+	// create delegation
+	kl = data.KeyList{extraKey}
+	td = &changelist.TufDelegation{
+		NewThreshold: 1,
+		AddKeys:      kl,
+		AddPaths:     []string{"level1"},
+	}
+
+	tdJSON, err = json.Marshal(td)
+	assert.NoError(t, err)
+
+	ch = changelist.NewTufChange(
+		changelist.ActionCreate,
+		"targets/level1",
+		changelist.TypeTargetsDelegation,
+		"",
+		tdJSON,
+	)
+
+	// when attempting to create the same role again, check that we added a key
 	err = applyTargetsChange(repo, ch)
-	assert.Error(t, err)
-	assert.IsType(t, data.ErrInvalidRole{}, err)
+	assert.NoError(t, err)
+	delegation, err := repo.GetDelegation("targets/level1")
+	assert.NoError(t, err)
+	assert.Contains(t, delegation.Paths, "level1")
+	assert.Equal(t, len(delegation.KeyIDs), 2)
+}
+
+func TestApplyTargetsDelegationAlreadyExistingMergePaths(t *testing.T) {
+	_, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
+	assert.NoError(t, err)
+
+	newKey, err := cs.Create("targets/level1", data.ED25519Key)
+	assert.NoError(t, err)
+
+	// create delegation
+	kl := data.KeyList{newKey}
+	td := &changelist.TufDelegation{
+		NewThreshold: 1,
+		AddKeys:      kl,
+		AddPaths:     []string{"level1"},
+	}
+
+	tdJSON, err := json.Marshal(td)
+	assert.NoError(t, err)
+
+	ch := changelist.NewTufChange(
+		changelist.ActionCreate,
+		"targets/level1",
+		changelist.TypeTargetsDelegation,
+		"",
+		tdJSON,
+	)
+
+	err = applyTargetsChange(repo, ch)
+	assert.NoError(t, err)
+	// we have sufficient checks elsewhere we don't need to confirm that
+	// creating fresh works here via more asserts.
+
+	// Use different path for this changelist
+	td.AddPaths = []string{"level2"}
+
+	tdJSON, err = json.Marshal(td)
+	assert.NoError(t, err)
+
+	ch = changelist.NewTufChange(
+		changelist.ActionCreate,
+		"targets/level1",
+		changelist.TypeTargetsDelegation,
+		"",
+		tdJSON,
+	)
+
+	// when attempting to create the same role again, check that we
+	// merged with previous details
+	err = applyTargetsChange(repo, ch)
+	assert.NoError(t, err)
+	delegation, err := repo.GetDelegation("targets/level1")
+	assert.NoError(t, err)
+	// Assert we have both paths
+	assert.Contains(t, delegation.Paths, "level2")
+	assert.Contains(t, delegation.Paths, "level1")
 }
 
 func TestApplyTargetsDelegationInvalidRole(t *testing.T) {
