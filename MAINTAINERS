@@ -351,6 +351,8 @@ or feedback about project operations.
         People = ["abronan", "aluzzardi", "chanwit", "dongluochen", "jimmyxian", "mhbauer", "vieux"]
     [Org.toolbox]
         People = ["jeffdm", "lisean106", "mchiang0610"]
+    [Org."v1.10-migrator"]
+        People = ["tonistiigi"]
 
 [People]
     [People.aanand]
