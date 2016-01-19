@@ -5,3 +5,8 @@ machine:
     - sudo chmod 0755 /usr/bin/docker
   services:
     - docker
+
+deployment:
+  release:
+    tag: /v.*/
+    owner: docker
