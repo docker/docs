@@ -312,7 +312,7 @@ or feedback about project operations.
     [Org.distribution]
         People = ["aaronlehmann", "dmcgowan", "dmp42", "richardscothern", "shykes", "stevvooe"]
     [Org.docker]
-        People = ["calavera", "cpuguy83", "crosbymichael", "duglin", "estesp", "icecrime", "jfrazelle", "lk4d4", "runcom", "tianon", "tibor", "unclejack", "vbatts", "vdemeester"]
+        People = ["calavera", "coolljt0725", "cpuguy83", "crosbymichael", "duglin", "estesp", "icecrime", "jfrazelle", "lk4d4", "mhbauer", "runcom", "tianon", "tibor", "tonistiigi", "unclejack", "vbatts", "vdemeester"]
     [Org.docker-bench-security]
         People = ["diogomonica", "konstruktoid"]
     [Org.docker-py]
@@ -323,6 +323,8 @@ or feedback about project operations.
         People = ["calavera", "dongluochen", "mhbauer"]
     [Org.go-connections]
         People = ["calavera"]
+    [Org.go-plugins-helpers]
+        People = ["calavera", "dave-tucker", "runcom"]
     [Org.go-units]
         People = ["calavera"]
     [Org.kitematic]
@@ -342,7 +344,7 @@ or feedback about project operations.
     [Org.migrator]
         People = ["mbentley"]
     [Org.notary]
-        People = ["cyli", "diogomonica", "dmcgowan", "endophage", "nathanmccauley"]
+        People = ["cyli", "diogomonica", "dmcgowan", "endophage", "nathanmccauley", "riyazdf"]
     [Org.spdystream]
         People = ["dmcgowan"]
     [Org.swarm]
@@ -387,6 +389,10 @@ or feedback about project operations.
         Name = "Chanwit Kaewkasi"
         Email = "chanwit@gmail.com"
         GitHub = "chanwit"
+    [People.coolljt0725]
+        Name = "Lei Jitang"
+        Email = "leijitang@huawei.com"
+        GitHub = "coolljt0725"
     [People.cpuguy83]
         Name = "Brian Goff"
         Email = "cpuguy83@gmail.com"
@@ -399,6 +405,10 @@ or feedback about project operations.
         Name = "Ying Li"
         Email = "ying.li@docker.com"
         GitHub = "cyli"
+    [People.dave-tucker]
+        Name = "Dave Tucker"
+        Email = "dt@docker.com"
+        GitHub = "dave-tucker"
     [People.davetucker]
         Name = "Dave Tucker"
         Email = "dave.tucker@docker.com"
@@ -543,9 +553,13 @@ or feedback about project operations.
         Name = "Richard Scothern"
         Email = "richard.scothern@gmail.com"
         GitHub = "richardscothern"
+    [People.riyazdf]
+        Name = "Riyaz Faizullabhoy"
+        Email = "riyaz@docker.com"
+        GitHub = "riyazdf"
     [People.runcom]
         Name = "Antonio Murdaca"
-        Email = "me@runcom.ninja"
+        Email = "runcom@redhat.com"
         GitHub = "runcom"
     [People.sanimej]
         Name = "Santhosh Manohar"
@@ -583,6 +597,10 @@ or feedback about project operations.
         Name = "Tibor Vass"
         Email = "tibor@docker.com"
         GitHub = "tiborvass"
+    [People.tonistiigi]
+        Name = "Tõnis Tiigi"
+        Email = "tonis@docker.com"
+        GitHub = "tonistiigi"
     [People.unclejack]
         Name = "Cristian Staretu"
         Email = "cristian.staretu@gmail.com"
