@@ -1,6 +1,8 @@
 package storage
 
 import (
+	"crypto/sha256"
+	"encoding/hex"
 	"fmt"
 	"strings"
 	"sync"
@@ -19,16 +21,18 @@ type ver struct {
 // MemStorage is really just designed for dev and testing. It is very
 // inefficient in many scenarios
 type MemStorage struct {
-	lock    sync.Mutex
-	tufMeta map[string][]*ver
-	keys    map[string]map[string]*key
+	lock      sync.Mutex
+	tufMeta   map[string][]*ver
+	keys      map[string]map[string]*key
+	checksums map[string][]byte
 }
 
 // NewMemStorage instantiates a memStorage instance
 func NewMemStorage() *MemStorage {
 	return &MemStorage{
-		tufMeta: make(map[string][]*ver),
-		keys:    make(map[string]map[string]*key),
+		tufMeta:   make(map[string][]*ver),
+		keys:      make(map[string]map[string]*key),
+		checksums: make(map[string][]byte),
 	}
 }
 
@@ -45,6 +49,9 @@ func (st *MemStorage) UpdateCurrent(gun string, update MetaUpdate) error {
 		}
 	}
 	st.tufMeta[id] = append(st.tufMeta[id], &ver{version: update.Version, data: update.Data})
+	checksumBytes := sha256.Sum256(update.Data)
+	checksum := hex.EncodeToString(checksumBytes[:])
+	st.checksums[checksum] = update.Data
 	return nil
 }
 
@@ -66,6 +73,17 @@ func (st *MemStorage) GetCurrent(gun, role string) (data []byte, err error) {
 		return nil, ErrNotFound{}
 	}
 	return space[len(space)-1].data, nil
+}
+
+// GetChecksum returns the metadada for a given role, under a GUN
+func (st *MemStorage) GetChecksum(gun, role, checksum string) (data []byte, err error) {
+	st.lock.Lock()
+	defer st.lock.Unlock()
+	data, ok := st.checksums[checksum]
+	if !ok || len(data) == 0 {
+		return nil, ErrNotFound{}
+	}
+	return data, nil
 }
 
 // Delete delets all the metadata for a given GUN
