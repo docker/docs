@@ -143,6 +143,9 @@ func (u *unwritableStore) SetMeta(role string, meta []byte) error {
 // Update can succeed even if we cannot write any metadata to the repo (assuming
 // no data in the repo)
 func TestUpdateSucceedsEvenIfCannotWriteNewRepo(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode")
+	}
 	s, err := testutils.NewMetadataSwizzler("docker.com/notary")
 	require.NoError(t, err)
 
@@ -183,6 +186,9 @@ func TestUpdateSucceedsEvenIfCannotWriteNewRepo(t *testing.T) {
 // Update can succeed even if we cannot write any metadata to the repo (assuming
 // existing data in the repo)
 func TestUpdateSucceedsEvenIfCannotWriteExistingRepo(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode")
+	}
 	s, err := testutils.NewMetadataSwizzler("docker.com/notary")
 	require.NoError(t, err)
 
@@ -237,6 +243,9 @@ type messUpMetadata func(role string) error
 // If a repo has corrupt metadata (in that the hash doesn't match the snapshot) or
 // missing metadata, an update will replace all of it
 func TestUpdateReplacesCorruptOrMissingMetadata(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode")
+	}
 	s, err := testutils.NewMetadataSwizzler("docker.com/notary")
 	require.NoError(t, err)
 
@@ -258,7 +267,7 @@ func TestUpdateReplacesCorruptOrMissingMetadata(t *testing.T) {
 
 	waysToMessUp := map[string]messUpMetadata{
 		"invalid JSON":     swizzler.SetInvalidJSON,
-		"missing metadata": swizzler.DeleteMetadata,
+		"missing metadata": swizzler.RemoveMetadata,
 	}
 	for _, role := range s.Roles {
 		for text, messItUp := range waysToMessUp {
@@ -283,6 +292,9 @@ func TestUpdateReplacesCorruptOrMissingMetadata(t *testing.T) {
 // the repo will just get the new root from the server, whether or not the update
 // is for writing (forced update)
 func TestUpdateWhenLocalRootRecoverablyCorrupt(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode")
+	}
 	s, err := testutils.NewMetadataSwizzler("docker.com/notary")
 	require.NoError(t, err)
 
@@ -346,6 +358,9 @@ func TestUpdateWhenLocalRootRecoverablyCorrupt(t *testing.T) {
 // it will refuse to update if the root key has changed and the new root is
 // not signed by the old and new key
 func TestUpdateFailsIfServerRootKeyChangedWithoutMultiSign(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode")
+	}
 	serverSwizzler, err := testutils.NewMetadataSwizzler("docker.com/notary")
 	require.NoError(t, err)
 
