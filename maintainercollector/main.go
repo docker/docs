@@ -55,6 +55,7 @@ var (
 		"spdystream",
 		"swarm",
 		"toolbox",
+		"v1.10-migrator",
 	}
 )
 
