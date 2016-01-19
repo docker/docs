@@ -17,7 +17,6 @@ import (
 const (
 	configDir        = ".notary/"
 	defaultServerURL = "https://notary-server:4443"
-	idSize           = 64
 )
 
 var (

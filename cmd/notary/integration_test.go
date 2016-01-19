@@ -15,6 +15,7 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/Sirupsen/logrus"
 	ctxu "github.com/docker/distribution/context"
@@ -525,11 +526,17 @@ func TestClientCertInteraction(t *testing.T) {
 	_, err = runCommand(t, tempDir, "-s", server.URL, "init", "gun2")
 	assert.NoError(t, err)
 	certs := assertNumCerts(t, tempDir, 2)
+	assertNumKeys(t, tempDir, 1, 4, !rootOnHardware())
 
 	// remove certs for one gun
 	_, err = runCommand(t, tempDir, "cert", "remove", "-g", "gun1", "-y")
 	assert.NoError(t, err)
 	certs = assertNumCerts(t, tempDir, 1)
+	// assert that when we remove cert by gun, we do not remove repo signing keys
+	assertNumKeys(t, tempDir, 1, 4, !rootOnHardware())
+	// assert that when we remove cert by gun, we also remove TUF metadata
+	_, err = os.Stat(filepath.Join(tempDir, "tuf", "gun1"))
+	assert.Error(t, err)
 
 	// remove a single cert
 	certID := strings.Fields(certs[0])[1]
@@ -539,6 +546,42 @@ func TestClientCertInteraction(t *testing.T) {
 	_, err = runCommand(t, tempDir, "cert", "remove", certID, "-y", "-g", "")
 	assert.NoError(t, err)
 	assertNumCerts(t, tempDir, 0)
+	// assert that when we remove the last cert ID for a gun, we also remove TUF metadata
+	_, err = os.Stat(filepath.Join(tempDir, "tuf", "gun2"))
+	assert.Error(t, err)
+
+	// Setup certificate with nonexistent repo GUN
+	// Check that we can only remove one certificate when specifying one ID
+	startTime := time.Now()
+	privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
+	assert.NoError(t, err)
+	noGunCert, err := cryptoservice.GenerateCertificate(
+		privKey, "nonexistent", startTime, startTime.AddDate(10, 0, 0))
+	assert.NoError(t, err)
+	certStore, err := trustmanager.NewX509FileStore(filepath.Join(tempDir, "trusted_certificates"))
+	assert.NoError(t, err)
+	err = certStore.AddCert(noGunCert)
+	assert.NoError(t, err)
+
+	certs = assertNumCerts(t, tempDir, 1)
+	certID = strings.Fields(certs[0])[1]
+
+	privKey, err = trustmanager.GenerateECDSAKey(rand.Reader)
+	assert.NoError(t, err)
+	noGunCert2, err := cryptoservice.GenerateCertificate(
+		privKey, "nonexistent", startTime, startTime.AddDate(10, 0, 0))
+	assert.NoError(t, err)
+	err = certStore.AddCert(noGunCert2)
+	assert.NoError(t, err)
+
+	certs = assertNumCerts(t, tempDir, 2)
+
+	// passing an empty gun to overwrite previously stored gun
+	_, err = runCommand(t, tempDir, "cert", "remove", certID, "-y", "-g", "")
+	assert.NoError(t, err)
+
+	// Since another cert with the same GUN exists, we didn't remove everything
+	assertNumCerts(t, tempDir, 1)
 }
 
 // Tests default root key generation

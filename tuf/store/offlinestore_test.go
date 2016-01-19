@@ -27,6 +27,10 @@ func TestOfflineStore(t *testing.T) {
 	_, err = s.GetTarget("")
 	require.Error(t, err)
 	require.IsType(t, ErrOffline{}, err)
+
+	err = s.RemoveAll()
+	require.Error(t, err)
+	require.IsType(t, ErrOffline{}, err)
 }
 
 func TestErrOffline(t *testing.T) {

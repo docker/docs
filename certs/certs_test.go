@@ -236,7 +236,7 @@ func filestoreWithTwoCerts(t *testing.T, gun, keyAlg string) (
 
 	cryptoService := cryptoservice.NewCryptoService(gun, fileKeyStore)
 
-	// Create a Manager
+	// Create a store
 	trustPath := filepath.Join(tempBaseDir, notary.TrustedCertsDir)
 	certStore, err := trustmanager.NewX509FilteredFileStore(
 		trustPath,
