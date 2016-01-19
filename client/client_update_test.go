@@ -1,27 +1,31 @@
 package client
 
 import (
-	"os"
-	"path"
-	"testing"
-	"time"
-
+	"bytes"
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"net/http/httptest"
 	"os"
 	"testing"
 
-	"github.com/docker/notary/tuf/data"
-	"github.com/docker/notary/tuf/signed"
-	"github.com/docker/notary/tuf/store"
-	json "github.com/jfrazelle/go/canonical/json"
-	"github.com/stretchr/testify/require"
-
+	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/store"
+	"github.com/docker/notary/tuf/testutils"
 	"github.com/stretchr/testify/require"
 )
+
+func newBlankRepo(t *testing.T, url string) *NotaryRepository {
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	require.NoError(t, err, "failed to create a temporary directory: %s", err)
+
+	repo, err := NewNotaryRepository(tempBaseDir, "docker.com/notary", url,
+		http.DefaultTransport, passphrase.ConstantRetriever("pass"))
+	require.NoError(t, err)
+	return repo
+}
 
 // If there's no local cache, we go immediately to check the remote server for
 // root, and if it doesn't exist, we return ErrRepositoryNotExist. This happens
@@ -32,21 +36,16 @@ func TestUpdateNotExistNoLocalCache(t *testing.T) {
 }
 
 func testUpdateNotExistNoLocalCache(t *testing.T, forWrite bool) {
-	// Temporary directory where test files will be created
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	require.NoError(t, err, "failed to create a temporary directory: %s", err)
-	defer os.RemoveAll(tempBaseDir)
-
 	ts, _, _ := simpleTestServer(t)
 	defer ts.Close()
 
-	repo, err := NewNotaryRepository(tempBaseDir, "docker.com/notary", ts.URL,
-		http.DefaultTransport, nil)
-	require.NoError(t, err)
+	repo := newBlankRepo(t, ts.URL)
+	defer os.RemoveAll(repo.baseDir)
 
 	// there is no metadata at all - this is a fresh repo, and the server isn't
 	// aware of the root.
-	_, err = repo.Update(forWrite)
+	_, err := repo.Update(forWrite)
+	require.Error(t, err)
 	require.IsType(t, ErrRepositoryNotExist{}, err)
 }
 
@@ -69,6 +68,7 @@ func testUpdateNotExistWithLocalCache(t *testing.T, forWrite bool) {
 	// the repo has metadata, but the server is unaware of any metadata
 	// whatsoever.
 	_, err := repo.Update(forWrite)
+	require.Error(t, err)
 	require.IsType(t, ErrRepositoryNotExist{}, err)
 }
 
@@ -101,243 +101,326 @@ func testUpdateWithLocalCacheRemoteMissingMetadata(t *testing.T, forWrite bool) 
 	// the first thing the client tries to get is the timestamp - so that
 	// will be the failed metadata update.
 	_, err = repo.Update(forWrite)
+	require.Error(t, err)
 	require.IsType(t, store.ErrMetaNotFound{}, err)
 	metaNotFound, ok := err.(store.ErrMetaNotFound)
 	require.True(t, ok)
 	require.Equal(t, data.CanonicalTimestampRole, metaNotFound.Resource)
 }
 
-type messUpMetadata func(t *testing.T, cs signed.CryptoService, ms store.MetadataStore, role string)
+// create a server that just serves static metadata files from a metaStore
+func readOnlyServer(t *testing.T, cache store.MetadataStore, roles []string) *httptest.Server {
+	mux := http.NewServeMux()
 
-// corrupts metadata into something that is no longer valid JSON
-func invalidJSONMetadata(t *testing.T, _ signed.CryptoService, ms store.MetadataStore, role string) {
-	require.NoError(t, ms.SetMeta(role, []byte("nope")))
-}
+	// serve all the metadata files from the metadata cache
+	for _, roleName := range roles {
+		localRoleName := roleName
+		mux.HandleFunc(
+			fmt.Sprintf("/v2/docker.com/notary/_trust/tuf/%s.json", localRoleName),
+			func(w http.ResponseWriter, r *http.Request) {
+				metaBytes, err := cache.GetMeta(localRoleName, maxSize)
+				require.NoError(t, err)
+				w.Write(metaBytes)
+			})
 
-// corrupts the metadata into something that is valid JSON, but not unmarshalable at all
-func allUnmarshallableMetadata(t *testing.T, _ signed.CryptoService, ms store.MetadataStore, role string) {
-	metaBytes, err := json.MarshalCanonical(data.Signed{})
-	require.NoError(t, err)
-	require.NoError(t, ms.SetMeta(role, metaBytes))
-}
-
-// messes up the metadata in such a way that the hash is no longer valid
-func invalidateMetadataHash(t *testing.T, _ signed.CryptoService, ms store.MetadataStore, role string) {
-	b, err := ms.GetMeta(role, maxSize)
-	require.NoError(t, err)
-
-	var unmarshalled map[string]interface{}
-	require.NoError(t, json.Unmarshal(b, &unmarshalled))
-
-	signed, ok := unmarshalled["signed"].(map[string]interface{})
-	require.True(t, ok)
-	signed["boogeyman"] = "exists"
-
-	metaBytes, err := json.MarshalCanonical(unmarshalled)
-	require.NoError(t, err)
-
-	require.NoError(t, ms.SetMeta(role, metaBytes))
-}
-
-// deletes the metadata
-func deleteMetadata(t *testing.T, _ signed.CryptoService, ms store.MetadataStore, role string) {
-	require.NoError(t, ms.DeleteMeta(role))
-}
-
-func serializeMetadata(t *testing.T, s *data.Signed, cs signed.CryptoService, role string) []byte {
-	// delete the existing signatures
-	s.Signatures = []data.Signature{}
-
-	pubKeys := cs.ListKeys(role)
-	require.Len(t, pubKeys, 1, "no keys for %s", role)
-	pubKey := cs.GetKey(pubKeys[0])
-	require.NotNil(t, pubKey, "unable to get %s key %s", role, pubKeys[0])
-
-	require.NoError(t, signed.Sign(cs, s, pubKey))
-
-	metaBytes, err := json.MarshalCanonical(s)
-	require.NoError(t, err)
-
-	return metaBytes
-}
-
-// signs the metadata with the wrong key
-func invalidateMetadataSig(t *testing.T, _ signed.CryptoService, ms store.MetadataStore, role string) {
-	b, err := ms.GetMeta(role, maxSize)
-	require.NoError(t, err)
-
-	signedThing := data.Signed{}
-	require.NoError(t, json.Unmarshal(b, &signedThing), "error unmarshalling data for %s", role)
-
-	// create an invalid key, but not in the existing CryptoService
-	cs := signed.NewEd25519()
-	_, err = cs.Create("root", data.ED25519Key)
-	require.NoError(t, err)
-
-	metaBytes := serializeMetadata(t, &signedThing, cs, "root")
-	require.NoError(t, ms.SetMeta(role, metaBytes))
-}
-
-func signedMetaFromStore(t *testing.T, ms store.MetadataStore, role string) data.SignedMeta {
-	b, err := ms.GetMeta(role, maxSize)
-	require.NoError(t, err)
-
-	signedMeta := data.SignedMeta{}
-	require.NoError(t, json.Unmarshal(b, &signedMeta), "error unmarshalling data for %s", role)
-
-	return signedMeta
-}
-
-func signedMetaToSigned(t *testing.T, signedMeta data.SignedMeta) data.Signed {
-	s, err := json.MarshalCanonical(signedMeta.Signed)
-	require.NoError(t, err)
-	signed := json.RawMessage{}
-	require.NoError(t, signed.UnmarshalJSON(s))
-
-	return data.Signed{Signed: signed}
-}
-
-// corrupt the metadata in such a way that it is JSON parsable, and correctly signed, but will not
-// unmarshal correctly because it has the wrong type
-func corruptSignedMetadata(t *testing.T, cs signed.CryptoService, ms store.MetadataStore, role string) {
-	if role != data.CanonicalTimestampRole || len(cs.ListKeys(role)) > 0 {
-		signedMeta := signedMetaFromStore(t, ms, role)
-		signedMeta.Signed.Type = "nonexistent"
-		signedThing := signedMetaToSigned(t, signedMeta)
-		metaBytes := serializeMetadata(t, &signedThing, cs, role)
-		require.NoError(t, ms.SetMeta(role, metaBytes))
-	}
-}
-
-// decrements the metadata version, which would make it invalid - don't do anything if we don't
-// have the timestamp key
-func decrementMetadataVersion(t *testing.T, cs signed.CryptoService, ms store.MetadataStore, role string) {
-	if role != data.CanonicalTimestampRole || len(cs.ListKeys(role)) > 0 {
-		signedMeta := signedMetaFromStore(t, ms, role)
-		signedMeta.Signed.Version--
-		signedThing := signedMetaToSigned(t, signedMeta)
-		metaBytes := serializeMetadata(t, &signedThing, cs, role)
-		require.NoError(t, ms.SetMeta(role, metaBytes))
-	}
-}
-
-// expire the metadata, which would make it invalid - don't do anything if we don't have the
-// timestamp key
-func expireMetadata(t *testing.T, cs signed.CryptoService, ms store.MetadataStore, role string) {
-	if role != data.CanonicalTimestampRole || len(cs.ListKeys(role)) > 0 {
-		signedMeta := signedMetaFromStore(t, ms, role)
-		signedMeta.Signed.Expires = time.Now().AddDate(-1, -1, -1)
-		signedThing := signedMetaToSigned(t, signedMeta)
-		metaBytes := serializeMetadata(t, &signedThing, cs, role)
-		require.NoError(t, ms.SetMeta(role, metaBytes))
-	}
-}
-
-// increments a threshold for a metadata role - invalidates the metadata for which the threshold
-// is increased, since there is only 1 signature for each
-func incrementThreshold(t *testing.T, cs signed.CryptoService, ms store.MetadataStore, role string) {
-	roleSpecifyingThreshold := data.CanonicalRootRole
-	if data.IsDelegation(role) {
-		roleSpecifyingThreshold = path.Dir(role)
 	}
 
-	b, err := ms.GetMeta(roleSpecifyingThreshold, maxSize)
-	require.NoError(t, err)
-
-	signedThing := &data.Signed{}
-	require.NoError(t, json.Unmarshal(b, signedThing), "error unmarshalling data for %s",
-		roleSpecifyingThreshold)
-
-	if roleSpecifyingThreshold == data.CanonicalRootRole {
-		signedRoot, err := data.RootFromSigned(signedThing)
-		require.NoError(t, err)
-		signedRoot.Signed.Roles[role].Threshold++
-		signedThing, err = signedRoot.ToSigned()
-		require.NoError(t, err)
-	} else {
-		signedTargets, err := data.TargetsFromSigned(signedThing)
-		require.NoError(t, err)
-		for _, roleObject := range signedTargets.Signed.Delegations.Roles {
-			if roleObject.Name == role {
-				roleObject.Threshold++
-				break
-			}
-		}
-		signedThing, err = signedTargets.ToSigned()
-		require.NoError(t, err)
-	}
-
-	metaBytes := serializeMetadata(t, signedThing, cs, roleSpecifyingThreshold)
-	require.NoError(t, ms.SetMeta(roleSpecifyingThreshold, metaBytes))
+	return httptest.NewServer(mux)
 }
 
-// If a repo has corrupt metadata, an update will replace all the metadata
-func TestUpdateReplacesCorruptOrMissingMetadata(t *testing.T) {
-	// create repo with 2 level delegations
-	ts := fullTestServer(t)
+type unwritableStore struct {
+	store.MetadataStore
+	roleToNotWrite string
+}
+
+func (u *unwritableStore) SetMeta(role string, meta []byte) error {
+	if role == u.roleToNotWrite {
+		return fmt.Errorf("Non-writable")
+	}
+	return u.MetadataStore.SetMeta(role, meta)
+}
+
+// Update can succeed even if we cannot write any metadata to the repo (assuming
+// no data in the repo)
+func TestUpdateSucceedsEvenIfCannotWriteNewRepo(t *testing.T) {
+	s, err := testutils.NewMetadataSwizzler("docker.com/notary")
+	require.NoError(t, err)
+
+	ts := readOnlyServer(t, s.MetadataCache, s.Roles)
 	defer ts.Close()
 
-	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
-	defer os.RemoveAll(repo.baseDir)
+	for _, role := range s.Roles {
+		repo := newBlankRepo(t, ts.URL)
+		repo.fileStore = &unwritableStore{MetadataStore: repo.fileStore, roleToNotWrite: role}
+		_, err := repo.Update(false)
 
-	delegatedRoles := []string{"targets/a", "targets/a/b"}
-	for _, delgName := range delegatedRoles {
-		delgKey, err := repo.CryptoService.Create(delgName, data.ECDSAKey)
-		require.NoError(t, err, "error creating delegation key")
+		if role == data.CanonicalRootRole {
+			require.Error(t, err) // because checkRoot loads root from cache to check hashes
+			continue
+		} else {
+			require.NoError(t, err)
+		}
 
-		require.NoError(t,
-			repo.AddDelegation(delgName, 1, []data.PublicKey{delgKey}, []string{""}),
-			"error creating delegation")
+		for _, r := range s.Roles {
+			expected, err := s.MetadataCache.GetMeta(r, maxSize)
+			require.NoError(t, err, "problem getting expected metadata for %s", r)
+			actual, err := repo.fileStore.GetMeta(r, maxSize)
+			if r == role {
+				require.Error(t, err)
+				require.IsType(t, store.ErrMetaNotFound{}, err,
+					"expected no data because unable to write for %s", role)
+			} else {
+				require.NoError(t, err, "problem getting repo metadata for %s", r)
+				require.True(t, bytes.Equal(expected, actual),
+					"%s: expected to update since only %s was unwritable", r, role)
+			}
+		}
+
+		os.RemoveAll(repo.baseDir)
 	}
-	// add a target so the second level delegation is created
-	addTarget(t, repo, "first", "../fixtures/root-ca.crt", "targets/a/b")
-	require.NoError(t, repo.Publish())
-	_, err := repo.Update() // ensure we have all metadata to start with
+}
+
+// Update can succeed even if we cannot write any metadata to the repo (assuming
+// existing data in the repo)
+func TestUpdateSucceedsEvenIfCannotWriteExistingRepo(t *testing.T) {
+	s, err := testutils.NewMetadataSwizzler("docker.com/notary")
 	require.NoError(t, err)
 
-	// corrupt any number of roles - an update should fix all of them
-	roles := []string{
-		data.CanonicalTimestampRole,
-		data.CanonicalSnapshotRole,
-		"targets/a",
-		"targets/a/b",
-		data.CanonicalTargetsRole,
-		data.CanonicalRootRole,
-	}
+	ts := readOnlyServer(t, s.MetadataCache, s.Roles)
+	defer ts.Close()
 
-	// store original metadata
-	origMeta := make(map[string][]byte)
-	for _, role := range roles {
-		b, err := repo.fileStore.GetMeta(role, maxSize)
-		require.NoError(t, err)
-		require.NotNil(t, b)
-		origMeta[role] = b
-	}
+	// download existing metadata
+	repo := newBlankRepo(t, ts.URL)
+	defer os.RemoveAll(repo.baseDir)
+	_, err = repo.Update(false)
+	require.NoError(t, err)
 
-	// mess up metadata in different ways, update the repo, and assert that the metadata is fixed.
-	waysToMessUp := map[string]messUpMetadata{
-		"corrupted/invalid JSON":       invalidJSONMetadata,
-		"metadata has invalid hash":    invalidateMetadataHash,
-		"missing metadata":             deleteMetadata,
-		"metadata signed by wrong key": invalidateMetadataSig,
-		"expired metadata":             expireMetadata,
-		"insufficient signatures":      incrementThreshold,
-		// decremented version just tests that updates do not need to increment
-		// by 1, only increment at all
-		"version much lower": decrementMetadataVersion,
-	}
-	for i := range roles {
-		for text, messItUp := range waysToMessUp {
-			for _, role := range roles[:i+1] {
-				messItUp(t, repo.CryptoService, repo.fileStore, role)
+	origFileStore := repo.fileStore
+	for _, role := range s.Roles {
+		for _, forWrite := range []bool{true, false} {
+			// bump versions of everything on the server, to force everything to update
+			for _, r := range s.Roles {
+				require.NoError(t, s.OffsetMetadataVersion(r, 1))
 			}
-			_, err := repo.Update()
+			require.NoError(t, s.UpdateSnapshotHashes())
+			require.NoError(t, s.UpdateTimestampHash())
+
+			// update fileStore
+			repo.fileStore = &unwritableStore{MetadataStore: origFileStore, roleToNotWrite: role}
+			_, err := repo.Update(forWrite)
+
+			if role == data.CanonicalRootRole {
+				require.Error(t, err) // because checkRoot loads root from cache to check hashes
+				continue
+			}
 			require.NoError(t, err)
-			for role, origBytes := range origMeta {
-				b, err := repo.fileStore.GetMeta(role, maxSize)
-				require.NoError(t, err, "problem getting metadata for %s", role)
-				require.Equal(t, origBytes, b, "%s for %s expected to recover after update", text, role)
+
+			for _, r := range s.Roles {
+				expected, err := s.MetadataCache.GetMeta(r, maxSize)
+				require.NoError(t, err, "problem getting expected metadata for %s", r)
+				actual, err := repo.fileStore.GetMeta(r, maxSize)
+				require.NoError(t, err, "problem getting repo metadata for %s", r)
+				if role == r {
+					require.False(t, bytes.Equal(expected, actual),
+						"%s: expected to not update because %s was unwritable", r, role)
+				} else {
+					require.True(t, bytes.Equal(expected, actual),
+						"%s: expected to update since only %s was unwritable", r, role)
+				}
 			}
+		}
+	}
+}
+
+type messUpMetadata func(role string) error
+
+// If a repo has corrupt metadata (in that the hash doesn't match the snapshot) or
+// missing metadata, an update will replace all of it
+func TestUpdateReplacesCorruptOrMissingMetadata(t *testing.T) {
+	s, err := testutils.NewMetadataSwizzler("docker.com/notary")
+	require.NoError(t, err)
+
+	ts := readOnlyServer(t, s.MetadataCache, s.Roles)
+	defer ts.Close()
+
+	repo := newBlankRepo(t, ts.URL)
+	defer os.RemoveAll(repo.baseDir)
+
+	_, err = repo.Update(false) // ensure we have all metadata to start with
+	require.NoError(t, err)
+
+	// we want to swizzle the local cache, not the server, so create a new one
+	swizzler := testutils.MetadataSwizzler{
+		MetadataCache: repo.fileStore,
+		CryptoService: repo.CryptoService,
+		Roles:         s.Roles,
+	}
+
+	waysToMessUp := map[string]messUpMetadata{
+		"invalid JSON":     swizzler.SetInvalidJSON,
+		"missing metadata": swizzler.DeleteMetadata,
+	}
+	for _, role := range s.Roles {
+		for text, messItUp := range waysToMessUp {
+			for _, forWrite := range []bool{true, false} {
+				require.NoError(t, messItUp(role), "could not fuzz %s (%s)", role, text)
+				_, err := repo.Update(forWrite)
+				require.NoError(t, err)
+				for _, role := range s.Roles {
+					expected, err := s.MetadataCache.GetMeta(role, maxSize)
+					require.NoError(t, err, "problem getting expected metadata for %s", role)
+					actual, err := repo.fileStore.GetMeta(role, maxSize)
+					require.NoError(t, err, "problem getting repo metadata for %s", role)
+					require.True(t, bytes.Equal(expected, actual),
+						"%s for %s: expected to recover after update", text, role)
+				}
+			}
+		}
+	}
+}
+
+// If a repo has an invalid root (signed by wrong key, expired, invalid version, etc.),
+// the repo will just get the new root from the server, whether or not the update
+// is for writing (forced update)
+func TestUpdateWhenLocalRootRecoverablyCorrupt(t *testing.T) {
+	s, err := testutils.NewMetadataSwizzler("docker.com/notary")
+	require.NoError(t, err)
+
+	ts := readOnlyServer(t, s.MetadataCache, s.Roles)
+	defer ts.Close()
+
+	repo := newBlankRepo(t, ts.URL)
+	defer os.RemoveAll(repo.baseDir)
+
+	_, err = repo.Update(false) // ensure we have all metadata to start with
+	require.NoError(t, err)
+
+	// we want to swizzle the local cache, not the server, so create a new one
+	swizzler := testutils.MetadataSwizzler{
+		MetadataCache: repo.fileStore,
+		CryptoService: s.CryptoService,
+		Roles:         s.Roles,
+	}
+
+	waysToMessUp := map[string]messUpMetadata{
+		// TODO: If invalid threshold fails because it's an invalid role, then this
+		// should also fail because it's an invalid role (if the metadata type is wrong)
+		"wrong metadata type":                  swizzler.SetInvalidMetadataType,
+		"signed with right key but wrong hash": swizzler.InvalidateMetadataSignatures,
+		"signed with wrong key":                swizzler.SignMetadataWithInvalidKey,
+		"expired":                              swizzler.ExpireMetadata,
+
+		"negative version": func(r string) error { return swizzler.OffsetMetadataVersion(r, -100) },
+		// // TODO: This fails at bootstrapClient, when we do SetRoot - then the only way to recover
+		// // from this type of local data corruption/change is to probably wipe out the local cache.
+		// // Is that ok?  It seems like this is a client corruption where we can just redownload
+		// "invalid threshold": func(r string) error { return swizzler.SetThreshold(r, 0) },
+		// // TODO: this makes more sense, but the on-disk root itself does not have sufficient sigs.
+		// // Is it ok to use it as the trust anchor?
+		// "insufficient signatures": func(r string) error { return swizzler.SetThreshold(r, 5) },
+	}
+
+	role := data.CanonicalRootRole
+	for text, messItUp := range waysToMessUp {
+		for _, forWrite := range []bool{true, false} {
+			repo.baseURL = ts.URL
+			require.NoError(t, messItUp(role), "could not fuzz %s (%s)", role, text)
+			_, err := repo.Update(forWrite)
+			require.NoError(t, err, "unable to update after locally fuzzing: %s", text)
+
+			for _, role := range s.Roles {
+				expected, err := s.MetadataCache.GetMeta(role, maxSize)
+				require.NoError(t, err, "problem getting expected metadata for %s", role)
+				actual, err := repo.fileStore.GetMeta(role, maxSize)
+				require.NoError(t, err, "problem getting repo metadata for %s", role)
+				require.True(t, bytes.Equal(expected, actual),
+					"%s for %s: expected to recover after update", text, role)
+			}
+		}
+	}
+}
+
+// If a repo has an invalid root (signed by wrong key, expired, invalid version,
+// invalid number of signatures, etc.), the repo will just get the new root from
+// the server, whether or not the update is for writing (forced update), but
+// it will refuse to update if the root key has changed and the new root is
+// not signed by the old and new key
+func TestUpdateFailsIfServerRootKeyChangedWithoutMultiSign(t *testing.T) {
+	serverSwizzler, err := testutils.NewMetadataSwizzler("docker.com/notary")
+	require.NoError(t, err)
+
+	ts := readOnlyServer(t, serverSwizzler.MetadataCache, serverSwizzler.Roles)
+	defer ts.Close()
+
+	origMeta := make(map[string][]byte)
+	for _, role := range serverSwizzler.Roles {
+		origMetadata, err := serverSwizzler.MetadataCache.GetMeta(role, maxSize)
+		require.NoError(t, err)
+		origMeta[role] = origMetadata
+	}
+
+	repo := newBlankRepo(t, ts.URL)
+	defer os.RemoveAll(repo.baseDir)
+
+	_, err = repo.Update(false) // ensure we have all metadata to start with
+	require.NoError(t, err)
+	ts.Close()
+
+	// rotate the server's root.json root key so that they no longer match trust anchors
+	require.NoError(t, serverSwizzler.ChangeRootKey())
+	// bump versions, update snapshot and timestamp too so it will not fail on a hash
+	require.NoError(t, serverSwizzler.OffsetMetadataVersion(data.CanonicalRootRole, 1))
+	require.NoError(t, serverSwizzler.OffsetMetadataVersion(data.CanonicalSnapshotRole, 1))
+	require.NoError(t, serverSwizzler.OffsetMetadataVersion(data.CanonicalTimestampRole, 1))
+	require.NoError(t, serverSwizzler.UpdateSnapshotHashes(data.CanonicalRootRole))
+	require.NoError(t, serverSwizzler.UpdateTimestampHash())
+
+	// we want to swizzle the local cache, not the server, so create a new one
+	swizzler := testutils.MetadataSwizzler{
+		MetadataCache: repo.fileStore,
+		CryptoService: serverSwizzler.CryptoService,
+		Roles:         serverSwizzler.Roles,
+	}
+
+	waysToMessUp := map[string]messUpMetadata{
+		"wrong metadata type":                  swizzler.SetInvalidMetadataType,
+		"signed with right key but wrong hash": swizzler.InvalidateMetadataSignatures,
+		"signed with wrong key":                swizzler.SignMetadataWithInvalidKey,
+		"expired":                              swizzler.ExpireMetadata,
+
+		"negative version":        func(r string) error { return swizzler.OffsetMetadataVersion(r, -100) },
+		"invalid threshold":       func(r string) error { return swizzler.SetThreshold(r, 0) },
+		"insufficient signatures": func(r string) error { return swizzler.SetThreshold(r, 5) },
+	}
+
+	role := data.CanonicalRootRole
+	for text, messItUp := range waysToMessUp {
+		for _, forWrite := range []bool{true, false} {
+			require.NoError(t, messItUp(role), "could not fuzz %s (%s)", role, text)
+			messedUpMeta, err := repo.fileStore.GetMeta(data.CanonicalRootRole, maxSize)
+			require.NoError(t, err)
+
+			_, err = repo.Update(forWrite)
+			require.Error(t, err) // the new server has a different root, update fails
+
+			// we can't test that all the metadata is the same, because we probably would
+			// have downloaded a new timestamp and maybe snapshot.  But the root should be the
+			// same because it has failed to update.
+			for role, expected := range origMeta {
+				if role != data.CanonicalTimestampRole && role != data.CanonicalSnapshotRole {
+					actual, err := repo.fileStore.GetMeta(role, maxSize)
+					require.NoError(t, err, "problem getting repo metadata for %s", role)
+
+					if role == data.CanonicalRootRole {
+						expected = messedUpMeta
+					}
+					require.True(t, bytes.Equal(expected, actual),
+						"%s for %s: expected to not have updated", text, role)
+				}
+			}
+			// revert our original root metadata
+			require.NoError(t,
+				repo.fileStore.SetMeta(data.CanonicalRootRole, origMeta[data.CanonicalRootRole]))
 		}
 	}
 }
