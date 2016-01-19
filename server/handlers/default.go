@@ -11,7 +11,6 @@ import (
 	"github.com/gorilla/mux"
 	"golang.org/x/net/context"
 
-	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary/server/errors"
 	"github.com/docker/notary/server/snapshot"
 	"github.com/docker/notary/server/storage"
@@ -115,6 +114,7 @@ func GetHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) err
 
 func getHandler(ctx context.Context, w http.ResponseWriter, r *http.Request, vars map[string]string) error {
 	gun := vars["imageName"]
+	checksum := vars["checksum"]
 	tufRole := vars["tufRole"]
 	s := ctx.Value("metaStore")
 	store, ok := s.(storage.MetaStore)
@@ -124,30 +124,7 @@ func getHandler(ctx context.Context, w http.ResponseWriter, r *http.Request, var
 
 	logger := ctxu.GetLoggerWithFields(ctx, map[string]interface{}{"gun": gun, "tufRole": tufRole})
 
-	switch tufRole {
-	case data.CanonicalTimestampRole:
-		return getTimestamp(ctx, w, logger, store, gun)
-	case data.CanonicalSnapshotRole:
-		return getSnapshot(ctx, w, logger, store, gun)
-	}
-
-	out, err := store.GetCurrent(gun, tufRole)
-	if err != nil {
-		if _, ok := err.(storage.ErrNotFound); ok {
-			logrus.Errorf("404 GET %s:%s, error: %v", gun, tufRole, err)
-			return errors.ErrMetadataNotFound.WithDetail(nil)
-		}
-		logger.Error("500 GET")
-		return errors.ErrUnknown.WithDetail(err)
-	}
-	if out == nil {
-		logger.Error("404 GET")
-		return errors.ErrMetadataNotFound.WithDetail(nil)
-	}
-	w.Write(out)
-	logger.Debug("200 GET")
-
-	return nil
+	return getRole(ctx, logger, w, store, gun, tufRole, checksum)
 }
 
 // DeleteHandler deletes all data for a GUN. A 200 responses indicates success.
@@ -165,56 +142,6 @@ func DeleteHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) 
 		logger.Error("500 DELETE repository")
 		return errors.ErrUnknown.WithDetail(err)
 	}
-	return nil
-}
-
-// getTimestampHandler returns a timestamp.json given a GUN
-func getTimestamp(ctx context.Context, w http.ResponseWriter, logger ctxu.Logger, store storage.MetaStore, gun string) error {
-	cryptoServiceVal := ctx.Value("cryptoService")
-	cryptoService, ok := cryptoServiceVal.(signed.CryptoService)
-	if !ok {
-		return errors.ErrNoCryptoService.WithDetail(nil)
-	}
-
-	out, err := timestamp.GetOrCreateTimestamp(gun, store, cryptoService)
-	if err != nil {
-		switch err.(type) {
-		case *storage.ErrNoKey, storage.ErrNotFound:
-			logger.Error("404 GET timestamp")
-			return errors.ErrMetadataNotFound.WithDetail(nil)
-		default:
-			logger.Error("500 GET timestamp")
-			return errors.ErrUnknown.WithDetail(err)
-		}
-	}
-
-	logger.Debug("200 GET timestamp")
-	w.Write(out)
-	return nil
-}
-
-// getTimestampHandler returns a timestamp.json given a GUN
-func getSnapshot(ctx context.Context, w http.ResponseWriter, logger ctxu.Logger, store storage.MetaStore, gun string) error {
-	cryptoServiceVal := ctx.Value("cryptoService")
-	cryptoService, ok := cryptoServiceVal.(signed.CryptoService)
-	if !ok {
-		return errors.ErrNoCryptoService.WithDetail(nil)
-	}
-
-	out, err := snapshot.GetOrCreateSnapshot(gun, store, cryptoService)
-	if err != nil {
-		switch err.(type) {
-		case *storage.ErrNoKey, storage.ErrNotFound:
-			logger.Error("404 GET snapshot")
-			return errors.ErrMetadataNotFound.WithDetail(nil)
-		default:
-			logger.Error("500 GET snapshot")
-			return errors.ErrUnknown.WithDetail(err)
-		}
-	}
-
-	logger.Debug("200 GET snapshot")
-	w.Write(out)
 	return nil
 }
 

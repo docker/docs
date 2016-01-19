@@ -1,7 +1,11 @@
 package server
 
 import (
+	"crypto/sha256"
+	"encoding/hex"
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"net"
 	"net/http"
 	"net/http/httptest"
@@ -84,4 +88,51 @@ func TestGetKeysEndpoint(t *testing.T) {
 		assert.NoError(t, err)
 		assert.Equal(t, expectedStatus, res.StatusCode)
 	}
+}
+
+func TestGetRoleByHash(t *testing.T) {
+	store := storage.NewMemStorage()
+
+	ts := data.SignedTimestamp{
+		Signatures: make([]data.Signature, 0),
+		Signed: data.Timestamp{
+			Type:    data.TUFTypes["timestamp"],
+			Version: 0,
+			Expires: data.DefaultExpires("timestamp"),
+		},
+	}
+	j, err := json.Marshal(&ts)
+	update := storage.MetaUpdate{
+		Role:    data.CanonicalTimestampRole,
+		Version: 1,
+		Data:    j,
+	}
+	checksumBytes := sha256.Sum256(j)
+	checksum := hex.EncodeToString(checksumBytes[:])
+
+	store.UpdateCurrent("gun", update)
+
+	ctx := context.WithValue(
+		context.Background(), "metaStore", store)
+
+	ctx = context.WithValue(ctx, "keyAlgorithm", data.ED25519Key)
+
+	handler := RootHandler(nil, ctx, signed.NewEd25519())
+	serv := httptest.NewServer(handler)
+	defer serv.Close()
+
+	res, err := http.Get(fmt.Sprintf(
+		"%s/v2/gun/_trust/tuf/%s.%s.json",
+		serv.URL,
+		checksum,
+		data.CanonicalTimestampRole,
+	))
+	assert.NoError(t, err)
+	assert.Equal(t, http.StatusOK, res.StatusCode)
+
+	body, err := ioutil.ReadAll(res.Body)
+	assert.NoError(t, err)
+	defer res.Body.Close()
+	// if content is equal, checksums are guaranteed to be equal
+	assert.EqualValues(t, j, body)
 }
