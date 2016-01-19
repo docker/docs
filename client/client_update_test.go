@@ -28,107 +28,44 @@ func newBlankRepo(t *testing.T, url string) *NotaryRepository {
 	return repo
 }
 
-// If there's no local cache, we go immediately to check the remote server for
-// root, and if it doesn't exist, we return ErrRepositoryNotExist. This happens
-// with or without a force check (update for write).
-func TestUpdateNotExistNoLocalCache(t *testing.T) {
-	testUpdateNotExistNoLocalCache(t, false)
-	testUpdateNotExistNoLocalCache(t, true)
-}
+var metadataDelegations = []string{"targets/a", "targets/a/b", "targets/a/b/c"}
 
-func testUpdateNotExistNoLocalCache(t *testing.T, forWrite bool) {
-	ts, _, _ := simpleTestServer(t)
-	defer ts.Close()
-
-	repo := newBlankRepo(t, ts.URL)
-	defer os.RemoveAll(repo.baseDir)
-
-	// there is no metadata at all - this is a fresh repo, and the server isn't
-	// aware of the root.
-	_, err := repo.Update(forWrite)
-	require.Error(t, err)
-	require.IsType(t, ErrRepositoryNotExist{}, err)
-}
-
-// If there is a local cache, we use the local root as the trust anchor and we
-// then an update. If the server has no root.json, we return an ErrRepositoryNotExist.
-// If we force check (update for write), then it hits the server first, and
-// still returns an ErrRepositoryNotExist.
-func TestUpdateNotExistWithLocalCache(t *testing.T) {
-	testUpdateNotExistWithLocalCache(t, false)
-	testUpdateNotExistWithLocalCache(t, true)
-}
-
-func testUpdateNotExistWithLocalCache(t *testing.T, forWrite bool) {
-	ts, _, _ := simpleTestServer(t)
-	defer ts.Close()
-
-	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
-	defer os.RemoveAll(repo.baseDir)
-
-	// the repo has metadata, but the server is unaware of any metadata
-	// whatsoever.
-	_, err := repo.Update(forWrite)
-	require.Error(t, err)
-	require.IsType(t, ErrRepositoryNotExist{}, err)
-}
-
-// If there is a local cache, we use the local root as the trust anchor and we
-// then an update. If the server has a root.json, but is missing other data,
-// then we propagate the ErrMetaNotFound.  Same if we force check
-// (update for write); the root exists, but other metadata doesn't.
-func TestUpdateWithLocalCacheRemoteMissingMetadata(t *testing.T) {
-	testUpdateWithLocalCacheRemoteMissingMetadata(t, false)
-	testUpdateWithLocalCacheRemoteMissingMetadata(t, true)
-}
-
-func testUpdateWithLocalCacheRemoteMissingMetadata(t *testing.T, forWrite bool) {
-	ts, m, _ := simpleTestServer(t)
-	defer ts.Close()
-
-	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
-	defer os.RemoveAll(repo.baseDir)
-
-	rootJSON, err := repo.fileStore.GetMeta(data.CanonicalRootRole, maxSize)
+func newServerSwizzler(t *testing.T) (map[string][]byte, *testutils.MetadataSwizzler) {
+	serverMeta, cs, err := testutils.NewRepoMetadata("docker.com/notary", metadataDelegations...)
 	require.NoError(t, err)
 
-	// the server should know about the root.json, and nothing else
-	m.HandleFunc(
-		fmt.Sprintf("/v2/docker.com/notary/_trust/tuf/root.json"),
-		func(w http.ResponseWriter, r *http.Request) {
-			fmt.Fprint(w, string(rootJSON))
-		})
+	serverSwizzler := testutils.NewMetadataSwizzler("docker.com/notary", serverMeta, cs)
+	require.NoError(t, err)
 
-	// the first thing the client tries to get is the timestamp - so that
-	// will be the failed metadata update.
-	_, err = repo.Update(forWrite)
-	require.Error(t, err)
-	require.IsType(t, store.ErrMetaNotFound{}, err)
-	metaNotFound, ok := err.(store.ErrMetaNotFound)
-	require.True(t, ok)
-	require.Equal(t, data.CanonicalTimestampRole, metaNotFound.Resource)
+	return serverMeta, serverSwizzler
 }
 
-// create a server that just serves static metadata files from a metaStore
-func readOnlyServer(t *testing.T, cache store.MetadataStore) *httptest.Server {
-	m := mux.NewRouter()
-	m.HandleFunc("/v2/docker.com/notary/_trust/tuf/{role:.*}.json",
-		func(w http.ResponseWriter, r *http.Request) {
-			vars := mux.Vars(r)
-			metaBytes, err := cache.GetMeta(vars["role"], maxSize)
-			require.NoError(t, err)
-			w.Write(metaBytes)
-		})
-
-	return httptest.NewServer(m)
-}
-
+// bumps the versions of everything in the metadata cache, to force local cache
+// to update
 func bumpVersions(t *testing.T, s *testutils.MetadataSwizzler) {
+	// bump versions of everything on the server, to force everything to update
 	for _, r := range s.Roles {
 		require.NoError(t, s.OffsetMetadataVersion(r, 1))
 	}
 	require.NoError(t, s.UpdateSnapshotHashes())
 	require.NoError(t, s.UpdateTimestampHash())
+}
+
+// create a server that just serves static metadata files from a metaStore
+func readOnlyServer(t *testing.T, cache store.MetadataStore, notFoundStatus int) *httptest.Server {
+	m := mux.NewRouter()
+	m.HandleFunc("/v2/docker.com/notary/_trust/tuf/{role:.*}.json",
+		func(w http.ResponseWriter, r *http.Request) {
+			vars := mux.Vars(r)
+			metaBytes, err := cache.GetMeta(vars["role"], maxSize)
+			if _, ok := err.(store.ErrMetaNotFound); ok {
+				w.WriteHeader(notFoundStatus)
+			} else {
+				require.NoError(t, err)
+				w.Write(metaBytes)
+			}
+		})
+	return httptest.NewServer(m)
 }
 
 type unwritableStore struct {
@@ -150,10 +87,10 @@ func TestUpdateSucceedsEvenIfCannotWriteNewRepo(t *testing.T) {
 		t.Skip("skipping test in short mode")
 	}
 
-	serverMeta, _, err := testutils.NewRepoMetadata("docker.com/notary", "targets/a", "targets/a/b", "targets/a/b/c")
+	serverMeta, _, err := testutils.NewRepoMetadata("docker.com/notary", metadataDelegations...)
 	require.NoError(t, err)
 
-	ts := readOnlyServer(t, store.NewMemoryStore(serverMeta, nil))
+	ts := readOnlyServer(t, store.NewMemoryStore(serverMeta, nil), http.StatusNotFound)
 	defer ts.Close()
 
 	for role := range serverMeta {
@@ -191,20 +128,15 @@ func TestUpdateSucceedsEvenIfCannotWriteExistingRepo(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping test in short mode")
 	}
-	serverMeta, cs, err := testutils.NewRepoMetadata("docker.com/notary", "targets/a", "targets/a/b", "targets/a/b/c")
-	require.NoError(t, err)
-
-	serverSwizzler := testutils.NewMetadataSwizzler("docker.com/notary", serverMeta, cs)
-	require.NoError(t, err)
-
-	ts := readOnlyServer(t, serverSwizzler.MetadataCache)
+	serverMeta, serverSwizzler := newServerSwizzler(t)
+	ts := readOnlyServer(t, serverSwizzler.MetadataCache, http.StatusNotFound)
 	defer ts.Close()
 
 	// download existing metadata
 	repo := newBlankRepo(t, ts.URL)
 	defer os.RemoveAll(repo.baseDir)
 
-	_, err = repo.Update(false)
+	_, err := repo.Update(false)
 	require.NoError(t, err)
 
 	origFileStore := repo.fileStore
@@ -267,10 +199,10 @@ func TestUpdateReplacesCorruptOrMissingMetadata(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping test in short mode")
 	}
-	serverMeta, cs, err := testutils.NewRepoMetadata("docker.com/notary", "targets/a", "targets/a/b", "targets/a/b/c")
+	serverMeta, cs, err := testutils.NewRepoMetadata("docker.com/notary", metadataDelegations...)
 	require.NoError(t, err)
 
-	ts := readOnlyServer(t, store.NewMemoryStore(serverMeta, nil))
+	ts := readOnlyServer(t, store.NewMemoryStore(serverMeta, nil), http.StatusNotFound)
 	defer ts.Close()
 
 	repo := newBlankRepo(t, ts.URL)
@@ -310,23 +242,17 @@ func TestUpdateFailsIfServerRootKeyChangedWithoutMultiSign(t *testing.T) {
 		t.Skip("skipping test in short mode")
 	}
 
-	serverMeta, cs, err := testutils.NewRepoMetadata("docker.com/notary", "targets/a", "targets/a/b", "targets/a/b/c")
-	require.NoError(t, err)
-
-	serverSwizzler := testutils.NewMetadataSwizzler("docker.com/notary", serverMeta, cs)
-	require.NoError(t, err)
-
+	serverMeta, serverSwizzler := newServerSwizzler(t)
 	origMeta := testutils.CopyRepoMetadata(serverMeta)
 
-	ts := readOnlyServer(t, serverSwizzler.MetadataCache)
+	ts := readOnlyServer(t, serverSwizzler.MetadataCache, http.StatusNotFound)
 	defer ts.Close()
 
 	repo := newBlankRepo(t, ts.URL)
 	defer os.RemoveAll(repo.baseDir)
 
-	_, err = repo.Update(false) // ensure we have all metadata to start with
+	_, err := repo.Update(false) // ensure we have all metadata to start with
 	require.NoError(t, err)
-	ts.Close()
 
 	// rotate the server's root.json root key so that they no longer match trust anchors
 	require.NoError(t, serverSwizzler.ChangeRootKey())
@@ -378,6 +304,311 @@ func TestUpdateFailsIfServerRootKeyChangedWithoutMultiSign(t *testing.T) {
 			// revert our original root metadata
 			require.NoError(t,
 				repo.fileStore.SetMeta(data.CanonicalRootRole, origMeta[data.CanonicalRootRole]))
+		}
+	}
+}
+
+type updateOpts struct {
+	notFoundCode     int    // what code to return when the cache doesn't have the metadata
+	serverHasNewData bool   // whether the server should have the same or new version than the local cache
+	localCache       bool   // whether the repo should have a local cache before updating
+	forWrite         bool   // whether the update is for writing or not (force check remote root.json)
+	role             string // the role to mess up on the server
+}
+
+// If there's no local cache, we go immediately to check the remote server for
+// root, and if it doesn't exist, we return ErrRepositoryNotExist. This happens
+// with or without a force check (update for write).
+func TestUpdateRemoteRootNotExistNoLocalCache(t *testing.T) {
+	testUpdateRemoteError(t, updateOpts{
+		notFoundCode:     http.StatusNotFound,
+		serverHasNewData: false,
+		localCache:       false,
+		forWrite:         false,
+		role:             data.CanonicalRootRole,
+	}, ErrRepositoryNotExist{})
+	testUpdateRemoteError(t, updateOpts{
+		notFoundCode:     http.StatusNotFound,
+		serverHasNewData: false,
+		localCache:       false,
+		forWrite:         true,
+		role:             data.CanonicalRootRole,
+	}, ErrRepositoryNotExist{})
+}
+
+// If there is a local cache, we use the local root as the trust anchor and we
+// then an update. If the server has no root.json, we return an ErrRepositoryNotExist.
+// If we force check (update for write), then it hits the server first, and
+// still returns an ErrRepositoryNotExist.  This is the
+// case where the server has the same data as the client, in which case we might
+// be able to just used the cached data and not have to download.
+func TestUpdateRemoteRootNotExistCanUseLocalCache(t *testing.T) {
+	// if for-write is false, then we don't need to check the root.json on bootstrap,
+	// and hence we can just use the cached version on update
+	testUpdateRemoteError(t, updateOpts{
+		notFoundCode:     http.StatusNotFound,
+		serverHasNewData: false,
+		localCache:       true,
+		forWrite:         false,
+		role:             data.CanonicalRootRole,
+	}, nil)
+	// fails because bootstrap requires a check to remote root.json and fails if
+	// the check fails
+	testUpdateRemoteError(t, updateOpts{
+		notFoundCode:     http.StatusNotFound,
+		serverHasNewData: false,
+		localCache:       true,
+		forWrite:         true,
+		role:             data.CanonicalRootRole,
+	}, ErrRepositoryNotExist{})
+}
+
+// If there is a local cache, we use the local root as the trust anchor and we
+// then an update. If the server has no root.json, we return an ErrRepositoryNotExist.
+// If we force check (update for write), then it hits the server first, and
+// still returns an ErrRepositoryNotExist. This is the case where the server
+// has new updated data, so we cannot default to cached data.
+func TestUpdateRemoteRootNotExistCannotUseLocalCache(t *testing.T) {
+	testUpdateRemoteError(t, updateOpts{
+		notFoundCode:     http.StatusNotFound,
+		serverHasNewData: true,
+		localCache:       true,
+		forWrite:         false,
+		role:             data.CanonicalRootRole,
+	}, ErrRepositoryNotExist{})
+	testUpdateRemoteError(t, updateOpts{
+		notFoundCode:     http.StatusNotFound,
+		serverHasNewData: true,
+		localCache:       true,
+		forWrite:         true,
+		role:             data.CanonicalRootRole,
+	}, ErrRepositoryNotExist{})
+}
+
+// If there's no local cache, we go immediately to check the remote server for
+// root, and if it 50X's, we return ErrServerUnavailable. This happens
+// with or without a force check (update for write).
+func TestUpdateRemoteRoot50XNoLocalCache(t *testing.T) {
+	testUpdateRemoteError(t, updateOpts{
+		notFoundCode:     http.StatusServiceUnavailable,
+		serverHasNewData: false,
+		localCache:       false,
+		forWrite:         false,
+		role:             data.CanonicalRootRole,
+	}, store.ErrServerUnavailable{})
+	testUpdateRemoteError(t, updateOpts{
+		notFoundCode:     http.StatusServiceUnavailable,
+		serverHasNewData: false,
+		localCache:       false,
+		forWrite:         true,
+		role:             data.CanonicalRootRole,
+	}, store.ErrServerUnavailable{})
+}
+
+// If there is a local cache, we use the local root as the trust anchor and we
+// then an update. If the server 50X's on root.json, we return an ErrServerUnavailable.
+// This happens with or without a force check (update for write).  This is the
+// case where the server has the same data as the client, in which case we might
+// be able to just used the cached data and not have to download.
+func TestUpdateRemoteRoot50XCanUseLocalCache(t *testing.T) {
+	// if for-write is false, then we don't need to check the root.json on bootstrap,
+	// and hence we can just use the cached version on update
+	testUpdateRemoteError(t, updateOpts{
+		notFoundCode:     http.StatusServiceUnavailable,
+		serverHasNewData: false,
+		localCache:       true,
+		forWrite:         false,
+		role:             data.CanonicalRootRole,
+	}, nil)
+	// fails because bootstrap requires a check to remote root.json and fails if
+	// the check fails
+	testUpdateRemoteError(t, updateOpts{
+		notFoundCode:     http.StatusServiceUnavailable,
+		serverHasNewData: false,
+		localCache:       true,
+		forWrite:         true,
+		role:             data.CanonicalRootRole,
+	}, store.ErrServerUnavailable{})
+}
+
+// If there is a local cache, we use the local root as the trust anchor and we
+// then an update. If the server 50X's on root.json, we return an ErrServerUnavailable.
+// This happens with or without a force check (update for write)
+func TestUpdateRemoteRoot50XCannotUseLocalCache(t *testing.T) {
+	// if for-write is false, then we don't need to check the root.json on bootstrap,
+	// and hence we can just use the cached version on update
+	testUpdateRemoteError(t, updateOpts{
+		notFoundCode:     http.StatusServiceUnavailable,
+		serverHasNewData: true,
+		localCache:       true,
+		forWrite:         false,
+		role:             data.CanonicalRootRole,
+	}, store.ErrServerUnavailable{})
+	// fails because of bootstrap
+	testUpdateRemoteError(t, updateOpts{
+		notFoundCode:     http.StatusServiceUnavailable,
+		serverHasNewData: true,
+		localCache:       true,
+		forWrite:         true,
+		role:             data.CanonicalRootRole,
+	}, store.ErrServerUnavailable{})
+}
+
+// If there is no local cache, we just update. If the server has a root.json,
+// but is missing other data, then we propagate the ErrMetaNotFound.  Skipping
+// force check, because that only matters for root.
+func TestUpdateNonRootRemoteMissingMetadataNoLocalCache(t *testing.T) {
+	for _, role := range append(data.BaseRoles, "targets/a", "targets/a/b") {
+		if role == data.CanonicalRootRole {
+			continue
+		}
+		testUpdateRemoteError(t, updateOpts{
+			notFoundCode:     http.StatusNotFound,
+			serverHasNewData: false,
+			localCache:       false,
+			forWrite:         false,
+			role:             role,
+		}, store.ErrMetaNotFound{})
+	}
+}
+
+// If there is a local cache, we update anyway and see if anything's different
+// (assuming remote has a root.json).  If anything's missing, and nothing has
+// changed, we don't need to try to download and can just use the local cache.
+// Skipping force check, because that only matters for root.
+func TestUpdateNonRootRemoteMissingMetadataCanUseLocalCache(t *testing.T) {
+	// TODO: fix timestamp
+	for _, role := range append(data.BaseRoles, "targets/a", "targets/a/b") {
+		if role == data.CanonicalRootRole {
+			continue
+		}
+		testUpdateRemoteError(t, updateOpts{
+			notFoundCode:     http.StatusNotFound,
+			serverHasNewData: false,
+			localCache:       true,
+			forWrite:         false,
+			role:             role,
+		}, nil)
+	}
+}
+
+// If there is a local cache, we update anyway and see if anything's different
+// (assuming remote has a root.json).  If the server has new data, we cannot
+// use the local cache so if the server is missing any metadata we cannot update.
+// Skipping force check, because that only matters for root.
+func TestUpdateNonRootRemoteMissingMetadataCannotUseLocalCache(t *testing.T) {
+	for _, role := range append(data.BaseRoles, "targets/a", "targets/a/b") {
+		if role == data.CanonicalRootRole {
+			continue
+		}
+		testUpdateRemoteError(t, updateOpts{
+			notFoundCode:     http.StatusNotFound,
+			serverHasNewData: true,
+			localCache:       true,
+			forWrite:         false,
+			role:             role,
+		}, store.ErrMetaNotFound{})
+	}
+}
+
+// If there is no local cache, we just update. If the server 50X's when getting
+// metadata, we propagate ErrServerUnavailable.
+func TestUpdateNonRootRemote50XNoLocalCache(t *testing.T) {
+	// TODO: fix json syntax error
+	for _, role := range append(data.BaseRoles, "targets/a", "targets/a/b") {
+		if role == data.CanonicalRootRole {
+			continue
+		}
+		testUpdateRemoteError(t, updateOpts{
+			notFoundCode:     http.StatusServiceUnavailable,
+			serverHasNewData: false,
+			localCache:       false,
+			forWrite:         false,
+			role:             role,
+		}, store.ErrServerUnavailable{})
+	}
+}
+
+// If there is a local cache, we update anyway and see if anything's different
+// (assuming remote has a root.json).  If anything 50X's, and nothing has
+// changed, we don't need to try to download and can just use the local cache.
+// This happens whether or not we force a remote check (because that's on the
+// root)
+func TestUpdateNonRootRemote50XCanUseLocalCache(t *testing.T) {
+	for _, role := range append(data.BaseRoles, "targets/a", "targets/a/b") {
+		if role == data.CanonicalRootRole {
+			continue
+		}
+		testUpdateRemoteError(t, updateOpts{
+			notFoundCode:     http.StatusServiceUnavailable,
+			serverHasNewData: false,
+			localCache:       true,
+			forWrite:         false,
+			role:             role,
+		}, nil)
+	}
+}
+
+// If there is a local cache, we update anyway and see if anything's different
+// (assuming remote has a root.json).  If the server has new data, we cannot
+// use the local cache so if the server 50X's on any metadata we cannot update.
+// This happens whether or not we force a remote check (because that's on the
+// root)
+func TestUpdateNonRootRemote50XCannotUseLocalCache(t *testing.T) {
+	for _, role := range append(data.BaseRoles, "targets/a", "targets/a/b") {
+		if role == data.CanonicalRootRole {
+			continue
+		}
+
+		var errExpected interface{} = store.ErrServerUnavailable{}
+		if role == data.CanonicalTimestampRole {
+			// if we can't download the timestamp, we use the cached timestamp.
+			// it says that we have all the local data already, so we download
+			// nothing.  So the update won't error, it will just fail to update
+			// to the latest version.
+
+			// TODO: should we warn that we may not have the latest version?
+			errExpected = nil
+		}
+
+		testUpdateRemoteError(t, updateOpts{
+			notFoundCode:     http.StatusServiceUnavailable,
+			serverHasNewData: true,
+			localCache:       true,
+			forWrite:         false,
+			role:             role,
+		}, errExpected)
+	}
+}
+
+func testUpdateRemoteError(t *testing.T, opts updateOpts, errExpected interface{}) {
+	_, serverSwizzler := newServerSwizzler(t)
+	ts := readOnlyServer(t, serverSwizzler.MetadataCache, opts.notFoundCode)
+	defer ts.Close()
+
+	repo := newBlankRepo(t, ts.URL)
+	defer os.RemoveAll(repo.baseDir)
+
+	if opts.localCache {
+		_, err := repo.Update(false) // acquire local cache
+		require.NoError(t, err)
+	}
+
+	if opts.serverHasNewData {
+		bumpVersions(t, serverSwizzler)
+	}
+
+	require.NoError(t, serverSwizzler.MetadataCache.RemoveMeta(opts.role))
+
+	_, err := repo.Update(opts.forWrite)
+	if errExpected == nil {
+		require.NoError(t, err)
+	} else {
+		require.Error(t, err)
+		require.IsType(t, errExpected, err)
+		if metaNotFound, ok := err.(store.ErrMetaNotFound); ok {
+			require.True(t, ok)
+			require.Equal(t, opts.role, metaNotFound.Resource)
 		}
 	}
 }
