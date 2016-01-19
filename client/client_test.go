@@ -13,7 +13,6 @@ import (
 	"path/filepath"
 	"reflect"
 	"sort"
-	"strings"
 	"testing"
 	"time"
 
@@ -769,8 +768,8 @@ func testAddTargetToSpecifiedValidRoles(t *testing.T, clearCache bool) {
 	roleName := filepath.Join(data.CanonicalTargetsRole, "a")
 	testAddOrDeleteTarget(t, repo, changelist.ActionCreate,
 		[]string{
-			strings.ToUpper(data.CanonicalTargetsRole),
-			strings.ToUpper(roleName),
+			data.CanonicalTargetsRole,
+			roleName,
 		},
 		[]string{data.CanonicalTargetsRole, roleName})
 
@@ -807,6 +806,7 @@ func testAddTargetToSpecifiedInvalidRoles(t *testing.T, clearCache bool) {
 		data.CanonicalTimestampRole,
 		"target/otherrole",
 		"otherrole",
+		"TARGETS/ALLCAPSROLE",
 	}
 
 	for _, invalidRole := range invalidRoles {
@@ -925,8 +925,8 @@ func testRemoveTargetFromSpecifiedValidRoles(t *testing.T, clearCache bool) {
 	roleName := filepath.Join(data.CanonicalTargetsRole, "a")
 	testAddOrDeleteTarget(t, repo, changelist.ActionDelete,
 		[]string{
-			strings.ToUpper(data.CanonicalTargetsRole),
-			strings.ToUpper(roleName),
+			data.CanonicalTargetsRole,
+			roleName,
 		},
 		[]string{data.CanonicalTargetsRole, roleName})
 
