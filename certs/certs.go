@@ -45,7 +45,7 @@ that list is non-empty means that we've already seen this repository before, and
 have a list of trusted certificates for it. In this case, we use this list of
 certificates to attempt to validate this root file.
 
-If the previous validation suceeds, or in the case where we found no trusted
+If the previous validation succeeds, or in the case where we found no trusted
 certificates for this particular GUN, we check the integrity of the root by
 making sure that it is validated by itself. This means that we will attempt to
 validate the root data with the certificates that are included in the root keys
@@ -142,7 +142,7 @@ func ValidateRoot(certStore trustmanager.X509Store, root *data.Signed, gun strin
 	return nil
 }
 
-// validRootLeafCerts returns a list of non-exipired, non-sha1 certificates whoose
+// validRootLeafCerts returns a list of non-exipired, non-sha1 certificates whose
 // Common-Names match the provided GUN
 func validRootLeafCerts(root *data.SignedRoot, gun string) ([]*x509.Certificate, error) {
 	// Get a list of all of the leaf certificates present in root
