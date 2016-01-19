@@ -109,3 +109,30 @@ func TestGetMetaNoSuchMetadata(t *testing.T) {
 	assert.Error(t, err)
 	assert.IsType(t, ErrMetaNotFound{}, err)
 }
+
+func TestRemoveAll(t *testing.T) {
+	s, err := NewFilesystemStore(testDir, "metadata", "json", "targets")
+	assert.Nil(t, err, "Initializing FilesystemStore returned unexpected error: %v", err)
+	defer os.RemoveAll(testDir)
+
+	testContent := []byte("test data")
+
+	// Write some files in metadata and targets dirs
+	metaPath := path.Join(testDir, "metadata", "testMeta.json")
+	ioutil.WriteFile(metaPath, testContent, 0600)
+	targetsPath := path.Join(testDir, "targets", "testTargets.json")
+	ioutil.WriteFile(targetsPath, testContent, 0600)
+
+	// Remove all
+	err = s.RemoveAll()
+	assert.Nil(t, err, "Removing all from FilesystemStore returned unexpected error: %v", err)
+
+	// Test that files no longer exist
+	_, err = ioutil.ReadFile(metaPath)
+	assert.True(t, os.IsNotExist(err))
+	_, err = ioutil.ReadFile(targetsPath)
+	assert.True(t, os.IsNotExist(err))
+
+	// Removing the empty filestore returns nil
+	assert.Nil(t, s.RemoveAll())
+}

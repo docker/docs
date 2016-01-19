@@ -84,3 +84,8 @@ func (f *FilesystemStore) SetMeta(name string, meta []byte) error {
 	}
 	return nil
 }
+
+// RemoveAll clears the existing filestore by removing its base directory
+func (f *FilesystemStore) RemoveAll() error {
+	return os.RemoveAll(f.baseDir)
+}
