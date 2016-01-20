@@ -247,19 +247,21 @@ func (c *Client) downloadTimestamp() error {
 	// We may not have a cached timestamp if this is the first time
 	// we're interacting with the repo. This will result in the
 	// version being 0
-	var download bool
-	old := &data.Signed{}
-	version := 0
+	var (
+		saveToCache bool
+		old         *data.Signed
+		version     = 0
+	)
 	cachedTS, err := c.cache.GetMeta(role, maxSize)
 	if err == nil {
-		err := json.Unmarshal(cachedTS, old)
+		cached := &data.Signed{}
+		err := json.Unmarshal(cachedTS, cached)
 		if err == nil {
-			ts, err := data.TimestampFromSigned(old)
+			ts, err := data.TimestampFromSigned(cached)
 			if err == nil {
 				version = ts.Signed.Version
 			}
-		} else {
-			old = nil
+			old = cached
 		}
 	}
 	// unlike root, targets and snapshot, always try and download timestamps
@@ -278,14 +280,14 @@ func (c *Client) downloadTimestamp() error {
 		logrus.Warn("Error while downloading remote metadata, using cached timestamp - this might not be the latest version available remotely")
 		s = old
 	} else {
-		download = true
+		saveToCache = true
 	}
 	err = signed.Verify(s, role, version, c.keysDB)
 	if err != nil {
 		return err
 	}
 	logrus.Debug("successfully verified timestamp")
-	if download {
+	if saveToCache {
 		c.cache.SetMeta(role, raw)
 	}
 	ts, err := data.TimestampFromSigned(s)
