@@ -30,7 +30,7 @@ func (e ErrNoKeyForRole) Error() string {
 
 // MetadataSwizzler fuzzes the metadata in a MetadataStore
 type MetadataSwizzler struct {
-	gun           string
+	Gun           string
 	MetadataCache store.MetadataStore
 	CryptoService signed.CryptoService
 	Roles         []string // list of Roles in the metadataStore
@@ -100,83 +100,22 @@ func signedFromStore(cache store.MetadataStore, role string) (*data.Signed, erro
 	return signed, nil
 }
 
-var delegatedRoles = []string{"targets/a", "targets/a/b"}
+// NewMetadataSwizzler returns a new swizzler when given a gun,
+// mapping of roles to initial metadata bytes, and a cryptoservice
+func NewMetadataSwizzler(gun string, initialMetadata map[string][]byte,
+	cryptoService signed.CryptoService) *MetadataSwizzler {
 
-// DefaultRoles are the defualt roles that NewMetadataSwizzler creates
-var DefaultRoles = append(data.BaseRoles, delegatedRoles...)
-
-// NewMetadataSwizzler creates a new tuf.Repo and generates metadata to fuzz.
-func NewMetadataSwizzler(gun string) (*MetadataSwizzler, error) {
-	_, tufRepo, cs, err := EmptyRepo(gun)
-	if err != nil {
-		return nil, err
+	var roles []string
+	for roleName := range initialMetadata {
+		roles = append(roles, roleName)
 	}
 
-	for _, delgName := range delegatedRoles {
-		// create a delegations key and a delegation in the tuf repo
-		delgKey, err := cs.Create(delgName, data.ED25519Key)
-		if err != nil {
-			return nil, err
-		}
-		role, err := data.NewRole(delgName, 1, []string{}, []string{"/"}, []string{})
-		if err != nil {
-			return nil, err
-		}
-		if err := tufRepo.UpdateDelegations(role, []data.PublicKey{delgKey}); err != nil {
-			return nil, err
-		}
-
-		// create the targets metadata
-		if _, ok := tufRepo.Targets[delgName]; !ok {
-			_, err := tufRepo.InitTargets(delgName)
-			if err != nil {
-				return nil, err
-			}
-		}
+	return &MetadataSwizzler{
+		Gun:           gun,
+		MetadataCache: store.NewMemoryStore(initialMetadata, nil),
+		CryptoService: cryptoService,
+		Roles:         roles,
 	}
-
-	meta := make(map[string][]byte)
-
-	// now we need to create a signed target/serialize, add it to the snapshot,
-	// and save the signed target metadata to the store - this must be done
-	// in a separate loop because "targets/a" can't be serialized until "targets/a/b"
-	// has been added
-	for _, delgName := range delegatedRoles {
-		signedThing, err := tufRepo.SignTargets(delgName, data.DefaultExpires("targets"))
-		if err != nil {
-			return nil, err
-		}
-		metaBytes, err := json.MarshalCanonical(signedThing)
-		if err != nil {
-			return nil, err
-		}
-		meta[delgName] = metaBytes
-	}
-
-	// these need to be generated after the delegations are created and signed so
-	// the snapshot will have the delegation metadata
-	rs, tgs, ss, ts, err := Sign(tufRepo)
-	if err != nil {
-		return nil, err
-	}
-	rf, tgf, sf, tf, err := Serialize(rs, tgs, ss, ts)
-	if err != nil {
-		return nil, err
-	}
-
-	meta[data.CanonicalRootRole] = rf
-	meta[data.CanonicalSnapshotRole] = sf
-	meta[data.CanonicalTargetsRole] = tgf
-	meta[data.CanonicalTimestampRole] = tf
-
-	swizzler := MetadataSwizzler{
-		gun:           gun,
-		MetadataCache: store.NewMemoryStore(meta, nil),
-		CryptoService: cs,
-		Roles:         DefaultRoles,
-	}
-
-	return &swizzler, nil
 }
 
 // SetInvalidJSON corrupts metadata into something that is no longer valid JSON
@@ -307,8 +246,8 @@ func (m *MetadataSwizzler) SignMetadataWithInvalidKey(role string) error {
 
 	// create an invalid key, but not in the existing CryptoService
 	cs := cryptoservice.NewCryptoService(
-		m.gun, trustmanager.NewKeyMemoryStore(passphrase.ConstantRetriever("")))
-	key, err := createKey(cs, m.gun, role)
+		m.Gun, trustmanager.NewKeyMemoryStore(passphrase.ConstantRetriever("")))
+	key, err := createKey(cs, m.Gun, role)
 	if err != nil {
 		return err
 	}
@@ -433,7 +372,7 @@ func (m *MetadataSwizzler) SetThreshold(role string, newThreshold int) error {
 // ChangeRootKey swaps out the root key with a new key, and re-signs the metadata
 // with the new key
 func (m *MetadataSwizzler) ChangeRootKey() error {
-	key, err := createKey(m.CryptoService, m.gun, data.CanonicalRootRole)
+	key, err := createKey(m.CryptoService, m.Gun, data.CanonicalRootRole)
 	if err != nil {
 		return err
 	}

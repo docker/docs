@@ -1,8 +1,8 @@
 package testutils
 
 import (
-	"encoding/json"
 	"math/rand"
+	"sort"
 	"time"
 
 	"github.com/docker/notary/cryptoservice"
@@ -11,6 +11,7 @@ import (
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/utils"
 	fuzz "github.com/google/gofuzz"
+	"github.com/jfrazelle/go/canonical/json"
 
 	tuf "github.com/docker/notary/tuf"
 	"github.com/docker/notary/tuf/keys"
@@ -40,15 +41,16 @@ func createKey(cs signed.CryptoService, gun, role string) (data.PublicKey, error
 }
 
 // EmptyRepo creates an in memory key database, crypto service
-// and initializes a repo with no targets or delegations.
-func EmptyRepo(gun string) (*keys.KeyDB, *tuf.Repo, signed.CryptoService, error) {
-	c := cryptoservice.NewCryptoService(
+// and initializes a repo with no targets.  Delegations are only created
+// if delegation roles are passed in.
+func EmptyRepo(gun string, delegationRoles ...string) (*keys.KeyDB, *tuf.Repo, signed.CryptoService, error) {
+	cs := cryptoservice.NewCryptoService(
 		gun, trustmanager.NewKeyMemoryStore(passphrase.ConstantRetriever("")))
 	kdb := keys.NewDB()
-	r := tuf.NewRepo(kdb, c)
+	r := tuf.NewRepo(kdb, cs)
 
 	for _, role := range data.BaseRoles {
-		key, err := createKey(c, gun, role)
+		key, err := createKey(cs, gun, role)
 		if err != nil {
 			return nil, nil, nil, err
 		}
@@ -58,7 +60,80 @@ func EmptyRepo(gun string) (*keys.KeyDB, *tuf.Repo, signed.CryptoService, error)
 	}
 
 	r.InitRepo(false)
-	return kdb, r, c, nil
+
+	// sort the delegation roles so that we make sure to create the parents
+	// first
+	sort.Strings(delegationRoles)
+	for _, delgName := range delegationRoles {
+		// create a delegations key and a delegation in the tuf repo
+		delgKey, err := createKey(cs, gun, delgName)
+		if err != nil {
+			return nil, nil, nil, err
+		}
+		role, err := data.NewRole(delgName, 1, []string{}, []string{""}, []string{})
+		if err != nil {
+			return nil, nil, nil, err
+		}
+		if err := r.UpdateDelegations(role, []data.PublicKey{delgKey}); err != nil {
+			return nil, nil, nil, err
+		}
+	}
+
+	return kdb, r, cs, nil
+}
+
+// NewRepoMetadata creates a TUF repo and returns the metadata
+func NewRepoMetadata(gun string, delegationRoles ...string) (map[string][]byte, signed.CryptoService, error) {
+	_, tufRepo, cs, err := EmptyRepo(gun, delegationRoles...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	meta := make(map[string][]byte)
+
+	for _, delgName := range delegationRoles {
+		// is there metadata yet?  if empty, it may not be created
+		if _, ok := tufRepo.Targets[delgName]; ok {
+			signedThing, err := tufRepo.SignTargets(delgName, data.DefaultExpires("targets"))
+			if err != nil {
+				return nil, nil, err
+			}
+			metaBytes, err := json.MarshalCanonical(signedThing)
+			if err != nil {
+				return nil, nil, err
+			}
+
+			meta[delgName] = metaBytes
+		}
+	}
+
+	// these need to be generated after the delegations are created and signed so
+	// the snapshot will have the delegation metadata
+	rs, tgs, ss, ts, err := Sign(tufRepo)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	rf, tgf, sf, tf, err := Serialize(rs, tgs, ss, ts)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	meta[data.CanonicalRootRole] = rf
+	meta[data.CanonicalSnapshotRole] = sf
+	meta[data.CanonicalTargetsRole] = tgf
+	meta[data.CanonicalTimestampRole] = tf
+
+	return meta, cs, nil
+}
+
+// CopyRepoMetadata makes a copy of a metadata->bytes mapping
+func CopyRepoMetadata(from map[string][]byte) map[string][]byte {
+	copied := make(map[string][]byte)
+	for roleName, metaBytes := range from {
+		copied[roleName] = metaBytes
+	}
+	return copied
 }
 
 // AddTarget generates a fake target and adds it to a repo.
