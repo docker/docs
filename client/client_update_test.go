@@ -337,7 +337,9 @@ func TestUpdateRemoteRootNotExistNoLocalCache(t *testing.T) {
 }
 
 // If there is a local cache, we use the local root as the trust anchor and we
-// then an update. If the server has no root.json, we return an ErrRepositoryNotExist.
+// then an update. If the server has no root.json, and we don't need to force
+// check (update for write), we can used the cached root because the timestamp
+// has not changed.
 // If we force check (update for write), then it hits the server first, and
 // still returns an ErrRepositoryNotExist.  This is the
 // case where the server has the same data as the client, in which case we might
@@ -406,13 +408,14 @@ func TestUpdateRemoteRoot50XNoLocalCache(t *testing.T) {
 }
 
 // If there is a local cache, we use the local root as the trust anchor and we
-// then an update. If the server 50X's on root.json, we return an ErrServerUnavailable.
-// This happens with or without a force check (update for write).  This is the
-// case where the server has the same data as the client, in which case we might
-// be able to just used the cached data and not have to download.
+// then an update. If the server 50X's on root.json, and we don't force check,
+// then because the timestamp is the same we can just use our cached root.json
+// and don't have to download another.
+// If we force check (update for write), we return an ErrServerUnavailable.
+// This is the case where the server has the same data as the client
 func TestUpdateRemoteRoot50XCanUseLocalCache(t *testing.T) {
 	// if for-write is false, then we don't need to check the root.json on bootstrap,
-	// and hence we can just use the cached version on update
+	// and hence we can just use the cached version on update.
 	testUpdateRemoteError(t, updateOpts{
 		notFoundCode:     http.StatusServiceUnavailable,
 		serverHasNewData: false,
@@ -458,6 +461,7 @@ func TestUpdateRemoteRoot50XCannotUseLocalCache(t *testing.T) {
 // but is missing other data, then we propagate the ErrMetaNotFound.  Skipping
 // force check, because that only matters for root.
 func TestUpdateNonRootRemoteMissingMetadataNoLocalCache(t *testing.T) {
+	// TODO: fix json syntax error
 	for _, role := range append(data.BaseRoles, "targets/a", "targets/a/b") {
 		if role == data.CanonicalRootRole {
 			continue
@@ -473,11 +477,15 @@ func TestUpdateNonRootRemoteMissingMetadataNoLocalCache(t *testing.T) {
 }
 
 // If there is a local cache, we update anyway and see if anything's different
-// (assuming remote has a root.json).  If anything's missing, and nothing has
-// changed, we don't need to try to download and can just use the local cache.
+// (assuming remote has a root.json).  If the timestamp is missing, we use the
+// local timestamp and already have all data, so nothing needs to be downloaded.
+// If the timestamp is present, but the same, we already have all the data, so
+// nothing needs to be downloaded.
 // Skipping force check, because that only matters for root.
 func TestUpdateNonRootRemoteMissingMetadataCanUseLocalCache(t *testing.T) {
-	// TODO: fix timestamp
+	// really we can delete everything at once except for the timestamp, but
+	// it's better to check one by one in case we change the download code
+	// somewhat.
 	for _, role := range append(data.BaseRoles, "targets/a", "targets/a/b") {
 		if role == data.CanonicalRootRole {
 			continue
@@ -501,13 +509,22 @@ func TestUpdateNonRootRemoteMissingMetadataCannotUseLocalCache(t *testing.T) {
 		if role == data.CanonicalRootRole {
 			continue
 		}
+		var errExpected interface{} = store.ErrMetaNotFound{}
+		if role == data.CanonicalTimestampRole {
+			// if we can't download the timestamp, we use the cached timestamp.
+			// it says that we have all the local data already, so we download
+			// nothing.  So the update won't error, it will just fail to update
+			// to the latest version.  We log a warning in this case.
+			errExpected = nil
+		}
+
 		testUpdateRemoteError(t, updateOpts{
 			notFoundCode:     http.StatusNotFound,
 			serverHasNewData: true,
 			localCache:       true,
 			forWrite:         false,
 			role:             role,
-		}, store.ErrMetaNotFound{})
+		}, errExpected)
 	}
 }
 
@@ -530,11 +547,13 @@ func TestUpdateNonRootRemote50XNoLocalCache(t *testing.T) {
 }
 
 // If there is a local cache, we update anyway and see if anything's different
-// (assuming remote has a root.json).  If anything 50X's, and nothing has
-// changed, we don't need to try to download and can just use the local cache.
-// This happens whether or not we force a remote check (because that's on the
-// root)
+// (assuming remote has a root.json).  If the timestamp is 50X's, we use the
+// local timestamp and already have all data, so nothing needs to be downloaded.
+// If the timestamp is present, but the same, we already have all the data, so
+// nothing needs to be downloaded.
 func TestUpdateNonRootRemote50XCanUseLocalCache(t *testing.T) {
+	// actually everything can error at once, but it's better to check one by
+	// one in case we change the download code somewhat.
 	for _, role := range append(data.BaseRoles, "targets/a", "targets/a/b") {
 		if role == data.CanonicalRootRole {
 			continue
@@ -565,9 +584,7 @@ func TestUpdateNonRootRemote50XCannotUseLocalCache(t *testing.T) {
 			// if we can't download the timestamp, we use the cached timestamp.
 			// it says that we have all the local data already, so we download
 			// nothing.  So the update won't error, it will just fail to update
-			// to the latest version.
-
-			// TODO: should we warn that we may not have the latest version?
+			// to the latest version.  We log a warning in this case.
 			errExpected = nil
 		}
 
@@ -606,9 +623,5 @@ func testUpdateRemoteError(t *testing.T, opts updateOpts, errExpected interface{
 	} else {
 		require.Error(t, err)
 		require.IsType(t, errExpected, err)
-		if metaNotFound, ok := err.(store.ErrMetaNotFound); ok {
-			require.True(t, ok)
-			require.Equal(t, opts.role, metaNotFound.Resource)
-		}
 	}
 }
