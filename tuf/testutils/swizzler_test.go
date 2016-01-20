@@ -18,21 +18,20 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func getAllMeta(t *testing.T, f *MetadataSwizzler) map[string][]byte {
-	meta := make(map[string][]byte)
-	for _, role := range f.Roles {
-		origMetadata, err := f.MetadataCache.GetMeta(role, maxSize)
-		require.NoError(t, err)
-		meta[role] = origMetadata
-	}
-	return meta
+// creates a new swizzler with 3 delegation targets (and only 2 metadata files
+// for those targets), and returns the swizzler along with a copy of the original
+// metadata
+func createNewSwizzler(t *testing.T) (*MetadataSwizzler, map[string][]byte) {
+	gun := "docker.com/notary"
+	m, cs, err := NewRepoMetadata(gun, "targets/a", "targets/a/b", "targets/a/b/c")
+	require.NoError(t, err)
+
+	return NewMetadataSwizzler(gun, m, cs), CopyRepoMetadata(m)
 }
 
 // A new swizzler should have metadata for all roles, and a snapshot of all roles
 func TestNewSwizzler(t *testing.T) {
-	f, err := NewMetadataSwizzler("docker.com/notary")
-	require.NoError(t, err)
-	origMeta := getAllMeta(t, f)
+	f, origMeta := createNewSwizzler(t)
 
 	for _, role := range f.Roles {
 		metaBytes, ok := origMeta[role]
@@ -77,9 +76,7 @@ func TestNewSwizzler(t *testing.T) {
 // This invalidates the metadata so that it can no longer be unmarshalled as
 // JSON as any sort
 func TestSwizzlerSetInvalidJSON(t *testing.T) {
-	f, err := NewMetadataSwizzler("docker.com/notary")
-	require.NoError(t, err)
-	origMeta := getAllMeta(t, f)
+	f, origMeta := createNewSwizzler(t)
 
 	f.SetInvalidJSON(data.CanonicalSnapshotRole)
 
@@ -101,9 +98,7 @@ func TestSwizzlerSetInvalidJSON(t *testing.T) {
 // This modifies metdata so that it is unmarshallable as JSON, but cannot be
 // unmarshalled as a Signed object
 func TestSwizzlerSetInvalidSigned(t *testing.T) {
-	f, err := NewMetadataSwizzler("docker.com/notary")
-	require.NoError(t, err)
-	origMeta := getAllMeta(t, f)
+	f, origMeta := createNewSwizzler(t)
 
 	f.SetInvalidSigned(data.CanonicalTargetsRole)
 
@@ -127,9 +122,7 @@ func TestSwizzlerSetInvalidSigned(t *testing.T) {
 // This modifies metdata so that it is unmarshallable as JSON, but cannot be
 // unmarshalled as a Signed object
 func TestSwizzlerSetInvalidSignedMeta(t *testing.T) {
-	f, err := NewMetadataSwizzler("docker.com/notary")
-	require.NoError(t, err)
-	origMeta := getAllMeta(t, f)
+	f, origMeta := createNewSwizzler(t)
 
 	f.SetInvalidSignedMeta(data.CanonicalTargetsRole)
 
@@ -153,9 +146,7 @@ func TestSwizzlerSetInvalidSignedMeta(t *testing.T) {
 // This modifies metdata so that it is unmarshallable as JSON, but cannot be
 // unmarshalled as a Signed object
 func TestSwizzlerSetInvalidMetadataType(t *testing.T) {
-	f, err := NewMetadataSwizzler("docker.com/notary")
-	require.NoError(t, err)
-	origMeta := getAllMeta(t, f)
+	f, origMeta := createNewSwizzler(t)
 
 	f.SetInvalidMetadataType(data.CanonicalTargetsRole)
 
@@ -178,9 +169,7 @@ func TestSwizzlerSetInvalidMetadataType(t *testing.T) {
 // field.  This does not prevent it from being unmarshalled as Signed* object,
 // but the signature is no longer valid because the hash is different.
 func TestSwizzlerInvalidateMetadataSignatures(t *testing.T) {
-	f, err := NewMetadataSwizzler("docker.com/notary")
-	require.NoError(t, err)
-	origMeta := getAllMeta(t, f)
+	f, origMeta := createNewSwizzler(t)
 
 	f.InvalidateMetadataSignatures(data.CanonicalRootRole)
 
@@ -211,9 +200,7 @@ func TestSwizzlerInvalidateMetadataSignatures(t *testing.T) {
 
 // This just deletes the metadata entirely from the cache
 func TestSwizzlerRemoveMetadata(t *testing.T) {
-	f, err := NewMetadataSwizzler("docker.com/notary")
-	require.NoError(t, err)
-	origMeta := getAllMeta(t, f)
+	f, origMeta := createNewSwizzler(t)
 
 	f.RemoveMetadata("targets/a")
 
@@ -231,9 +218,7 @@ func TestSwizzlerRemoveMetadata(t *testing.T) {
 
 // This signs the metadata with the wrong key
 func TestSwizzlerSignMetadataWithInvalidKey(t *testing.T) {
-	f, err := NewMetadataSwizzler("docker.com/notary")
-	require.NoError(t, err)
-	origMeta := getAllMeta(t, f)
+	f, origMeta := createNewSwizzler(t)
 
 	f.SignMetadataWithInvalidKey(data.CanonicalTimestampRole)
 
@@ -260,9 +245,7 @@ func TestSwizzlerSignMetadataWithInvalidKey(t *testing.T) {
 
 // This updates the metadata version with a particular number
 func TestSwizzlerOffsetMetadataVersion(t *testing.T) {
-	f, err := NewMetadataSwizzler("docker.com/notary")
-	require.NoError(t, err)
-	origMeta := getAllMeta(t, f)
+	f, origMeta := createNewSwizzler(t)
 
 	f.OffsetMetadataVersion("targets/a", -2)
 
@@ -285,9 +268,7 @@ func TestSwizzlerOffsetMetadataVersion(t *testing.T) {
 
 // This causes the metadata to be expired
 func TestSwizzlerExpireMetadata(t *testing.T) {
-	f, err := NewMetadataSwizzler("docker.com/notary")
-	require.NoError(t, err)
-	origMeta := getAllMeta(t, f)
+	f, origMeta := createNewSwizzler(t)
 
 	f.ExpireMetadata(data.CanonicalRootRole)
 
@@ -311,9 +292,7 @@ func TestSwizzlerExpireMetadata(t *testing.T) {
 
 // This sets the threshold for a base role
 func TestSwizzlerSetThresholdBaseRole(t *testing.T) {
-	f, err := NewMetadataSwizzler("docker.com/notary")
-	require.NoError(t, err)
-	origMeta := getAllMeta(t, f)
+	f, origMeta := createNewSwizzler(t)
 
 	f.SetThreshold(data.CanonicalTargetsRole, 3)
 
@@ -341,9 +320,7 @@ func TestSwizzlerSetThresholdBaseRole(t *testing.T) {
 
 // This sets the threshold for a delegation
 func TestSwizzlerSetThresholdDelegatedRole(t *testing.T) {
-	f, err := NewMetadataSwizzler("docker.com/notary")
-	require.NoError(t, err)
-	origMeta := getAllMeta(t, f)
+	f, origMeta := createNewSwizzler(t)
 
 	f.SetThreshold("targets/a/b", 3)
 
@@ -367,9 +344,7 @@ func TestSwizzlerSetThresholdDelegatedRole(t *testing.T) {
 
 // This changes the root key
 func TestSwizzlerChangeRootKey(t *testing.T) {
-	f, err := NewMetadataSwizzler("docker.com/notary")
-	require.NoError(t, err)
-	origMeta := getAllMeta(t, f)
+	f, origMeta := createNewSwizzler(t)
 
 	f.ChangeRootKey()
 
@@ -420,10 +395,7 @@ func TestSwizzlerChangeRootKey(t *testing.T) {
 // has been fuzzed and we want all the hashes to be correct.  If roles are provided,
 // only hashes for those roles will be re-generated.
 func TestSwizzlerUpdateSnapshotHashesSpecifiedRoles(t *testing.T) {
-	f, err := NewMetadataSwizzler("docker.com/notary")
-	require.NoError(t, err)
-	origMeta, err := f.MetadataCache.GetMeta(data.CanonicalSnapshotRole, maxSize)
-	require.NoError(t, err)
+	f, origMeta := createNewSwizzler(t)
 
 	// nothing has changed, signed data should be the same (signatures might
 	// change because signatures may have random elements
@@ -431,7 +403,7 @@ func TestSwizzlerUpdateSnapshotHashesSpecifiedRoles(t *testing.T) {
 	newMeta, err := f.MetadataCache.GetMeta(data.CanonicalSnapshotRole, maxSize)
 
 	origSigned, newSigned := &data.Signed{}, &data.Signed{}
-	require.NoError(t, json.Unmarshal(origMeta, origSigned))
+	require.NoError(t, json.Unmarshal(origMeta[data.CanonicalSnapshotRole], origSigned))
 	require.NoError(t, json.Unmarshal(newMeta, newSigned))
 	require.True(t, bytes.Equal(origSigned.Signed, newSigned.Signed))
 
@@ -444,10 +416,10 @@ func TestSwizzlerUpdateSnapshotHashesSpecifiedRoles(t *testing.T) {
 
 	newMeta, err = f.MetadataCache.GetMeta(data.CanonicalSnapshotRole, maxSize)
 	require.NoError(t, err)
-	require.False(t, bytes.Equal(origMeta, newMeta))
+	require.False(t, bytes.Equal(origMeta[data.CanonicalSnapshotRole], newMeta))
 
 	origSnapshot, newSnapshot := &data.SignedSnapshot{}, &data.SignedSnapshot{}
-	require.NoError(t, json.Unmarshal(origMeta, origSnapshot))
+	require.NoError(t, json.Unmarshal(origMeta[data.CanonicalSnapshotRole], origSnapshot))
 	require.NoError(t, json.Unmarshal(newMeta, newSnapshot))
 
 	// only the targets checksum was regenerated, since that was specified
@@ -467,10 +439,7 @@ func TestSwizzlerUpdateSnapshotHashesSpecifiedRoles(t *testing.T) {
 // has been fuzzed and we want all the hashes to be correct.  If no roles are provided,
 // all hashes are regenerated
 func TestSwizzlerUpdateSnapshotHashesNoSpecifiedRoles(t *testing.T) {
-	f, err := NewMetadataSwizzler("docker.com/notary")
-	require.NoError(t, err)
-	origMeta, err := f.MetadataCache.GetMeta(data.CanonicalSnapshotRole, maxSize)
-	require.NoError(t, err)
+	f, origMeta := createNewSwizzler(t)
 
 	// nothing has changed, signed data should be the same (signatures might
 	// change because signatures may have random elements
@@ -479,7 +448,7 @@ func TestSwizzlerUpdateSnapshotHashesNoSpecifiedRoles(t *testing.T) {
 	require.NoError(t, err)
 
 	origSigned, newSigned := &data.Signed{}, &data.Signed{}
-	require.NoError(t, json.Unmarshal(origMeta, origSigned))
+	require.NoError(t, json.Unmarshal(origMeta[data.CanonicalSnapshotRole], origSigned))
 	require.NoError(t, json.Unmarshal(newMeta, newSigned))
 	require.True(t, bytes.Equal(origSigned.Signed, newSigned.Signed))
 
@@ -492,10 +461,10 @@ func TestSwizzlerUpdateSnapshotHashesNoSpecifiedRoles(t *testing.T) {
 
 	newMeta, err = f.MetadataCache.GetMeta(data.CanonicalSnapshotRole, maxSize)
 	require.NoError(t, err)
-	require.False(t, bytes.Equal(origMeta, newMeta))
+	require.False(t, bytes.Equal(origMeta[data.CanonicalSnapshotRole], newMeta))
 
 	origSnapshot, newSnapshot := &data.SignedSnapshot{}, &data.SignedSnapshot{}
-	require.NoError(t, json.Unmarshal(origMeta, origSnapshot))
+	require.NoError(t, json.Unmarshal(origMeta[data.CanonicalSnapshotRole], origSnapshot))
 	require.NoError(t, json.Unmarshal(newMeta, newSnapshot))
 
 	for _, role := range f.Roles {
@@ -516,10 +485,7 @@ func TestSwizzlerUpdateSnapshotHashesNoSpecifiedRoles(t *testing.T) {
 
 // UpdateTimestamp will re-calculate the snapshot hash
 func TestSwizzlerUpdateTimestamp(t *testing.T) {
-	f, err := NewMetadataSwizzler("docker.com/notary")
-	require.NoError(t, err)
-	origMeta, err := f.MetadataCache.GetMeta(data.CanonicalTimestampRole, maxSize)
-	require.NoError(t, err)
+	f, origMeta := createNewSwizzler(t)
 
 	// nothing has changed, signed data should be the same (signatures might
 	// change because signatures may have random elements
@@ -528,7 +494,7 @@ func TestSwizzlerUpdateTimestamp(t *testing.T) {
 	require.NoError(t, err)
 
 	origSigned, newSigned := &data.Signed{}, &data.Signed{}
-	require.NoError(t, json.Unmarshal(origMeta, origSigned))
+	require.NoError(t, json.Unmarshal(origMeta[data.CanonicalTimestampRole], origSigned))
 	require.NoError(t, json.Unmarshal(newMeta, newSigned))
 	require.True(t, bytes.Equal(origSigned.Signed, newSigned.Signed))
 
@@ -539,10 +505,10 @@ func TestSwizzlerUpdateTimestamp(t *testing.T) {
 
 	newMeta, err = f.MetadataCache.GetMeta(data.CanonicalTimestampRole, maxSize)
 	require.NoError(t, err)
-	require.False(t, bytes.Equal(origMeta, newMeta))
+	require.False(t, bytes.Equal(origMeta[data.CanonicalTimestampRole], newMeta))
 
 	origTimestamp, newTimestamp := &data.SignedTimestamp{}, &data.SignedTimestamp{}
-	require.NoError(t, json.Unmarshal(origMeta, origTimestamp))
+	require.NoError(t, json.Unmarshal(origMeta[data.CanonicalTimestampRole], origTimestamp))
 	require.NoError(t, json.Unmarshal(newMeta, newTimestamp))
 
 	require.Len(t, origTimestamp.Signed.Meta, 1)
@@ -555,8 +521,7 @@ func TestSwizzlerUpdateTimestamp(t *testing.T) {
 // functions which require re-signing the metadata will return ErrNoKeyForRole if
 // the signing key is missing
 func TestMissingSigningKey(t *testing.T) {
-	f, err := NewMetadataSwizzler("docker.com/notary")
-	require.NoError(t, err)
+	f, _ := createNewSwizzler(t)
 
 	// delete the snapshot, timestamp, and root keys
 	noKeys := []string{
