@@ -9,7 +9,6 @@ import (
 	"net/url"
 	"os"
 	"path/filepath"
-	"strings"
 	"time"
 
 	"github.com/Sirupsen/logrus"
@@ -280,8 +279,6 @@ func addChange(cl *changelist.FileChangelist, c changelist.Change, roles ...stri
 
 	var changes []changelist.Change
 	for _, role := range roles {
-		role = strings.ToLower(role)
-
 		// Ensure we can only add targets to the CanonicalTargetsRole,
 		// or a Delegation role (which is <CanonicalTargetsRole>/something else)
 		if role != data.CanonicalTargetsRole && !data.IsDelegation(role) {
