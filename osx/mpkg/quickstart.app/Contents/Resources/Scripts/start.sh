@@ -13,27 +13,27 @@ unset LD_LIBRARY_PATH
 
 clear
 
-if [ ! -f $DOCKER_MACHINE ] || [ ! -f $VBOXMANAGE ]; then
+if [ ! -f "${DOCKER_MACHINE}" ] || [ ! -f "${VBOXMANAGE}" ]; then
   echo "Either VirtualBox or Docker Machine are not installed. Please re-run the Toolbox Installer and try again."
   exit 1
 fi
 
-$VBOXMANAGE showvminfo $VM &> /dev/null
+"${VBOXMANAGE}" list vms | grep \""${VM}"\" &> /dev/null
 VM_EXISTS_CODE=$?
 
 if [ $VM_EXISTS_CODE -eq 1 ]; then
-  $DOCKER_MACHINE rm -f $VM &> /dev/null
-  rm -rf ~/.docker/machine/machines/$VM
-  $DOCKER_MACHINE create -d virtualbox --virtualbox-memory 2048 --virtualbox-disk-size 204800 $VM
+  "${DOCKER_MACHINE}" rm -f "${VM}" &> /dev/null
+  rm -rf ~/.docker/machine/machines/"${VM}"
+  "${DOCKER_MACHINE}" create -d virtualbox --virtualbox-memory 2048 --virtualbox-disk-size 204800 "${VM}"
 fi
 
-VM_STATUS=$($DOCKER_MACHINE status $VM 2>&1)
-if [ "$VM_STATUS" != "Running" ]; then
-  $DOCKER_MACHINE start $VM
-  yes | $DOCKER_MACHINE regenerate-certs $VM
+VM_STATUS="$(${DOCKER_MACHINE} status ${VM} 2>&1)"
+if [ "${VM_STATUS}" != "Running" ]; then
+  "${DOCKER_MACHINE}" start "${VM}"
+  yes | "${DOCKER_MACHINE}" regenerate-certs "${VM}"
 fi
 
-eval $($DOCKER_MACHINE env --shell=bash $VM)
+eval "$(${DOCKER_MACHINE} env --shell=bash ${VM})"
 
 clear
 cat << EOF
@@ -50,13 +50,13 @@ cat << EOF
 
 
 EOF
-echo -e "${BLUE}docker${NC} is configured to use the ${GREEN}$VM${NC} machine with IP ${GREEN}$($DOCKER_MACHINE ip $VM)${NC}"
+echo -e "${BLUE}docker${NC} is configured to use the ${GREEN}${VM}${NC} machine with IP ${GREEN}$(${DOCKER_MACHINE} ip ${VM})${NC}"
 echo "For help getting started, check out the docs at https://docs.docker.com"
 echo
 
-USER_SHELL=$(dscl /Search -read /Users/$USER UserShell | awk '{print $2}' | head -n 1)
-if [[ $USER_SHELL == *"/bash"* ]] || [[ $USER_SHELL == *"/zsh"* ]] || [[ $USER_SHELL == *"/sh"* ]]; then
-  $USER_SHELL --login
+USER_SHELL="$(dscl /Search -read /Users/${USER} UserShell | awk '{print $2}' | head -n 1)"
+if [[ "${USER_SHELL}" == *"/bash"* ]] || [[ "${USER_SHELL}" == *"/zsh"* ]] || [[ "${USER_SHELL}" == *"/sh"* ]]; then
+  "${USER_SHELL}" --login
 else
-  $USER_SHELL
+  "${USER_SHELL}"
 fi
