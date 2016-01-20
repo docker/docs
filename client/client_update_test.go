@@ -461,7 +461,6 @@ func TestUpdateRemoteRoot50XCannotUseLocalCache(t *testing.T) {
 // but is missing other data, then we propagate the ErrMetaNotFound.  Skipping
 // force check, because that only matters for root.
 func TestUpdateNonRootRemoteMissingMetadataNoLocalCache(t *testing.T) {
-	// TODO: fix json syntax error
 	for _, role := range append(data.BaseRoles, "targets/a", "targets/a/b") {
 		if role == data.CanonicalRootRole {
 			continue
@@ -531,7 +530,6 @@ func TestUpdateNonRootRemoteMissingMetadataCannotUseLocalCache(t *testing.T) {
 // If there is no local cache, we just update. If the server 50X's when getting
 // metadata, we propagate ErrServerUnavailable.
 func TestUpdateNonRootRemote50XNoLocalCache(t *testing.T) {
-	// TODO: fix json syntax error
 	for _, role := range append(data.BaseRoles, "targets/a", "targets/a/b") {
 		if role == data.CanonicalRootRole {
 			continue
