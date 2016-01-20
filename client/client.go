@@ -542,7 +542,7 @@ func (r *NotaryRepository) GetDelegationRoles() ([]*data.Role, error) {
 	// All top level delegations (ex: targets/level1) are stored exclusively in targets.json
 	targets, ok := r.tufRepo.Targets[data.CanonicalTargetsRole]
 	if !ok {
-		return nil, store.ErrMetaNotFound{data.CanonicalTargetsRole}
+		return nil, store.ErrMetaNotFound{Resource: data.CanonicalTargetsRole}
 	}
 
 	allDelegations := targets.Signed.Delegations.Roles
