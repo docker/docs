@@ -54,7 +54,7 @@ func (c *Client) Update() error {
 	if err != nil {
 		logrus.Debug("Error occurred. Root will be downloaded and another update attempted")
 		if err := c.downloadRoot(); err != nil {
-			logrus.Error("client Update (Root):", err)
+			logrus.Error("Client Update (Root):", err)
 			return err
 		}
 		// If we error again, we now have the latest root and just want to fail
@@ -266,9 +266,6 @@ func (c *Client) downloadTimestamp() error {
 	// from remote, only using the cache one if we couldn't reach remote.
 	raw, s, err := c.downloadSigned(role, maxSize, nil)
 	if err != nil || len(raw) == 0 {
-		if err, ok := err.(store.ErrMetaNotFound); ok {
-			return err
-		}
 		if old == nil {
 			if err == nil {
 				// couldn't retrieve data from server and don't have valid
@@ -277,7 +274,8 @@ func (c *Client) downloadTimestamp() error {
 			}
 			return err
 		}
-		logrus.Debug("using cached timestamp")
+		logrus.Debug(err.Error())
+		logrus.Warn("Error while downloading remote metadata, using cached timestamp - this might not be the latest version available remotely")
 		s = old
 	} else {
 		download = true
