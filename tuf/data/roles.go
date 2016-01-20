@@ -37,13 +37,6 @@ func (e ErrNoSuchRole) Error() string {
 	return fmt.Sprintf("role does not exist: %s", e.Role)
 }
 
-// ErrNoRoles indicates no roles exist for this repo
-type ErrNoRoles struct{}
-
-func (e ErrNoRoles) Error() string {
-	return fmt.Sprintf("no roles exist")
-}
-
 // ErrInvalidRole represents an error regarding a role. Typically
 // something like a role for which sone of the public keys were
 // not found in the TUF repo.

@@ -2950,8 +2950,8 @@ func TestDeleteRepoNoCerts(t *testing.T) {
 	assertRepoHasExpectedKeys(t, repo, rootKeyID, true)
 }
 
-// Test that we get a correct map of key IDs
-func TestGetRepoRoleMetaInfo(t *testing.T) {
+// Test that we get a correct list of roles with keys and signatures
+func TestListRoles(t *testing.T) {
 	ts := fullTestServer(t)
 	defer ts.Close()
 
@@ -2960,7 +2960,7 @@ func TestGetRepoRoleMetaInfo(t *testing.T) {
 
 	assert.NoError(t, repo.Publish())
 
-	rolesWithSigs, err := repo.GetRepoRoleMetaInfo()
+	rolesWithSigs, err := repo.ListRoles()
 	assert.NoError(t, err)
 
 	// Should only have base roles at this point
@@ -2980,7 +2980,7 @@ func TestGetRepoRoleMetaInfo(t *testing.T) {
 
 	assert.NoError(t, repo.Publish())
 
-	rolesWithSigs, err = repo.GetRepoRoleMetaInfo()
+	rolesWithSigs, err = repo.ListRoles()
 	assert.NoError(t, err)
 
 	assert.Len(t, rolesWithSigs, len(data.BaseRoles)+1)
@@ -2998,7 +2998,7 @@ func TestGetRepoRoleMetaInfo(t *testing.T) {
 	addTarget(t, repo, "current", "../fixtures/intermediate-ca.crt", "targets/a")
 	assert.NoError(t, repo.Publish())
 
-	rolesWithSigs, err = repo.GetRepoRoleMetaInfo()
+	rolesWithSigs, err = repo.ListRoles()
 	assert.NoError(t, err)
 
 	assert.Len(t, rolesWithSigs, len(data.BaseRoles)+1)
@@ -3017,7 +3017,7 @@ func TestGetRepoRoleMetaInfo(t *testing.T) {
 
 	assert.NoError(t, repo.Publish())
 
-	rolesWithSigs, err = repo.GetRepoRoleMetaInfo()
+	rolesWithSigs, err = repo.ListRoles()
 	assert.NoError(t, err)
 
 	assert.Len(t, rolesWithSigs, len(data.BaseRoles)+2)
@@ -3039,12 +3039,12 @@ func TestGetRepoRoleMetaInfo(t *testing.T) {
 	assert.NoError(t, repo2.Publish())
 
 	// repo2 only has the base roles
-	rolesWithSigs2, err := repo2.GetRepoRoleMetaInfo()
+	rolesWithSigs2, err := repo2.ListRoles()
 	assert.NoError(t, err)
 	assert.Len(t, rolesWithSigs2, len(data.BaseRoles))
 
 	// original repo stays in same state (base roles + 2 delegations)
-	rolesWithSigs, err = repo.GetRepoRoleMetaInfo()
+	rolesWithSigs, err = repo.ListRoles()
 	assert.NoError(t, err)
 	assert.Len(t, rolesWithSigs, len(data.BaseRoles)+2)
 }
