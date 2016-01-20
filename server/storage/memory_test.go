@@ -94,3 +94,10 @@ func TestSetKeySameRoleGun(t *testing.T) {
 	assert.Equal(t, []byte("test"), k.public, "Public key did not match expected")
 
 }
+
+func TestGetChecksumNotFound(t *testing.T) {
+	s := NewMemStorage()
+	_, err := s.GetChecksum("gun", "root", "12345")
+	assert.Error(t, err)
+	assert.IsType(t, ErrNotFound{}, err)
+}
