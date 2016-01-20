@@ -53,7 +53,7 @@ func getRole(ctx context.Context, logger ctxu.Logger, w io.Writer, store storage
 // getMaybeServerSigned writes the current snapshot or timestamp (based on the
 // role passed) to the provided writer or returns an error. In retrieving
 // the timestamp and snapshot, based on the keys held by the server, a new one
-// might be generated and signed due to expiry of the previoud one or updates
+// might be generated and signed due to expiry of the previous one or updates
 // to other roles.
 func getMaybeServerSigned(ctx context.Context, w io.Writer, logger ctxu.Logger, store storage.MetaStore, gun, role string) error {
 	cryptoServiceVal := ctx.Value("cryptoService")

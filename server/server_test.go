@@ -90,6 +90,9 @@ func TestGetKeysEndpoint(t *testing.T) {
 	}
 }
 
+// This just checks the URL routing is working correctly.
+// More detailed tests for this path including negative
+// tests are located in /server/handlers/
 func TestGetRoleByHash(t *testing.T) {
 	store := storage.NewMemStorage()
 
@@ -102,6 +105,7 @@ func TestGetRoleByHash(t *testing.T) {
 		},
 	}
 	j, err := json.Marshal(&ts)
+	assert.NoError(t, err)
 	update := storage.MetaUpdate{
 		Role:    data.CanonicalTimestampRole,
 		Version: 1,
