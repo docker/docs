@@ -395,10 +395,11 @@ func getTransport(config *viper.Viper, gun string, readOnly bool) http.RoundTrip
 		TLSClientConfig:     tlsConfig,
 		DisableKeepAlives:   true,
 	}
-	return tokenAuth(config, base, gun, readOnly)
+	trustServerURL := getRemoteTrustServer(config)
+	return tokenAuth(trustServerURL, base, gun, readOnly)
 }
 
-func tokenAuth(config *viper.Viper, baseTransport *http.Transport, gun string,
+func tokenAuth(trustServerURL string, baseTransport *http.Transport, gun string,
 	readOnly bool) http.RoundTripper {
 
 	// TODO(dmcgowan): add notary specific headers
@@ -407,7 +408,6 @@ func tokenAuth(config *viper.Viper, baseTransport *http.Transport, gun string,
 		Transport: authTransport,
 		Timeout:   5 * time.Second,
 	}
-	trustServerURL := getRemoteTrustServer(config)
 	endpoint, err := url.Parse(trustServerURL)
 	if err != nil {
 		fatalf("Could not parse remote trust server url (%s): %s", trustServerURL, err.Error())
@@ -426,9 +426,20 @@ func tokenAuth(config *viper.Viper, baseTransport *http.Transport, gun string,
 	}
 	resp, err := pingClient.Do(req)
 	if err != nil {
-		fatalf(err.Error())
+		logrus.Errorf("could not reach %s: %s", trustServerURL, err.Error())
+		logrus.Info("continuing in offline mode")
+		return nil
 	}
+	// non-nil err means we must close body
 	defer resp.Body.Close()
+	if resp.StatusCode < http.StatusOK || resp.StatusCode >= http.StatusMultipleChoices {
+		// If we didn't get a 2XX range status code, we're not talking to a notary server.
+		// The http client should be configured to handle redirects so at this point, 3XX is
+		// not a valid status code.
+		logrus.Errorf("could not reach %s: %d", trustServerURL, resp.StatusCode)
+		logrus.Info("continuing in offline mode")
+		return nil
+	}
 
 	challengeManager := auth.NewSimpleChallengeManager()
 	if err := challengeManager.AddResponse(resp); err != nil {

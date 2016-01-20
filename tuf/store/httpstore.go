@@ -85,6 +85,9 @@ func NewHTTPStore(baseURL, metaPrefix, metaExtension, targetsPrefix, keyExtensio
 	if !base.IsAbs() {
 		return nil, errors.New("HTTPStore requires an absolute baseURL")
 	}
+	if roundTrip == nil {
+		return &OfflineStore{}, nil
+	}
 	return &HTTPStore{
 		baseURL:       *base,
 		metaPrefix:    metaPrefix,
