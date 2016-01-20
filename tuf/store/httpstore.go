@@ -185,6 +185,12 @@ func (s HTTPStore) SetMeta(name string, blob []byte) error {
 	return translateStatusToError(resp, "POST "+name)
 }
 
+// RemoveMeta always fails, because we should never be able to delete metadata
+// remotely
+func (s HTTPStore) RemoveMeta(name string) error {
+	return ErrInvalidOperation{msg: "cannot delete metadata"}
+}
+
 // NewMultiPartMetaRequest builds a request with the provided metadata updates
 // in multipart form
 func NewMultiPartMetaRequest(url string, metas map[string][]byte) (*http.Request, error) {

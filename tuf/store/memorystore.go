@@ -54,6 +54,13 @@ func (m *memoryStore) SetMultiMeta(metas map[string][]byte) error {
 	return nil
 }
 
+// RemoveMeta removes the metadata for a single role - if the metadata doesn't
+// exist, no error is returned
+func (m *memoryStore) RemoveMeta(name string) error {
+	delete(m.meta, name)
+	return nil
+}
+
 func (m *memoryStore) GetTarget(path string) (io.ReadCloser, error) {
 	return &utils.NoopCloser{Reader: bytes.NewReader(m.files[path])}, nil
 }
