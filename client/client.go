@@ -577,20 +577,17 @@ type RoleWithSignatures struct {
 	data.Role
 }
 
-// GetRepoRoleMetaInfo returns a list of RoleWithSignatures objects for this repo
+// ListRoles returns a list of RoleWithSignatures objects for this repo
 // This represents the latest metadata for each role in this repo
-func (r *NotaryRepository) GetRepoRoleMetaInfo() ([]RoleWithSignatures, error) {
+func (r *NotaryRepository) ListRoles() ([]RoleWithSignatures, error) {
 	// Update to latest repo state
 	_, err := r.Update(false)
 	if err != nil {
 		return nil, err
 	}
 
-	// Get all role info from our updated keysDB
-	roles, err := r.tufRepo.GetAllRoles()
-	if err != nil {
-		return nil, err
-	}
+	// Get all role info from our updated keysDB, can be empty
+	roles := r.tufRepo.GetAllLoadedRoles()
 
 	var roleWithSigs []RoleWithSignatures
 

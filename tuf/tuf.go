@@ -173,13 +173,9 @@ func (tr *Repo) RemoveBaseKeys(role string, keyIDs ...string) error {
 	return nil
 }
 
-// GetAllRoles returns a list of all role entries for this TUF repo
-func (tr *Repo) GetAllRoles() ([]*data.Role, error) {
-	roles := tr.keysDB.GetAllRoles()
-	if len(roles) == 0 {
-		return nil, data.ErrNoRoles{}
-	}
-	return roles, nil
+// GetAllLoadedRoles returns a list of all role entries loaded in this TUF repo, could be empty
+func (tr *Repo) GetAllLoadedRoles() []*data.Role {
+	return tr.keysDB.GetAllRoles()
 }
 
 // GetDelegation finds the role entry representing the provided

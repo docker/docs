@@ -943,12 +943,11 @@ func TestGetAllRoles(t *testing.T) {
 	repo := initRepo(t, ed25519, keyDB)
 
 	// After we init, we get the base roles
-	roles, err := repo.GetAllRoles()
+	roles := repo.GetAllLoadedRoles()
 	assert.Len(t, roles, len(data.BaseRoles))
 
-	// Clear the keysDB, check that we error
+	// Clear the keysDB, check that we get an empty list
 	repo.keysDB = keys.NewDB()
-	roles, err = repo.GetAllRoles()
-	assert.Error(t, err)
-	assert.IsType(t, data.ErrNoRoles{}, err)
+	roles = repo.GetAllLoadedRoles()
+	assert.Len(t, roles, 0)
 }
