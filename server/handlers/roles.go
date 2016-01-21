@@ -3,8 +3,6 @@ package handlers
 import (
 	"io"
 
-	"github.com/Sirupsen/logrus"
-	ctxu "github.com/docker/distribution/context"
 	"golang.org/x/net/context"
 
 	"github.com/docker/notary/server/errors"
@@ -15,7 +13,7 @@ import (
 	"github.com/docker/notary/tuf/signed"
 )
 
-func getRole(ctx context.Context, logger ctxu.Logger, w io.Writer, store storage.MetaStore, gun, role, checksum string) error {
+func getRole(ctx context.Context, w io.Writer, store storage.MetaStore, gun, role, checksum string) error {
 	var (
 		out []byte
 		err error
@@ -25,7 +23,7 @@ func getRole(ctx context.Context, logger ctxu.Logger, w io.Writer, store storage
 		// handled specially
 		switch role {
 		case data.CanonicalTimestampRole, data.CanonicalSnapshotRole:
-			return getMaybeServerSigned(ctx, w, logger, store, gun, role)
+			return getMaybeServerSigned(ctx, w, store, gun, role)
 		}
 		out, err = store.GetCurrent(gun, role)
 	} else {
@@ -34,18 +32,14 @@ func getRole(ctx context.Context, logger ctxu.Logger, w io.Writer, store storage
 
 	if err != nil {
 		if _, ok := err.(storage.ErrNotFound); ok {
-			logrus.Errorf("404 GET %s:%s@%s, error: %v", gun, role, checksum, err)
-			return errors.ErrMetadataNotFound.WithDetail(nil)
+			return errors.ErrMetadataNotFound.WithDetail(err)
 		}
-		logger.Error("500 GET")
 		return errors.ErrUnknown.WithDetail(err)
 	}
 	if out == nil {
-		logger.Error("404 GET")
 		return errors.ErrMetadataNotFound.WithDetail(nil)
 	}
 	w.Write(out)
-	logger.Debug("200 GET")
 
 	return nil
 }
@@ -55,7 +49,7 @@ func getRole(ctx context.Context, logger ctxu.Logger, w io.Writer, store storage
 // the timestamp and snapshot, based on the keys held by the server, a new one
 // might be generated and signed due to expiry of the previous one or updates
 // to other roles.
-func getMaybeServerSigned(ctx context.Context, w io.Writer, logger ctxu.Logger, store storage.MetaStore, gun, role string) error {
+func getMaybeServerSigned(ctx context.Context, w io.Writer, store storage.MetaStore, gun, role string) error {
 	cryptoServiceVal := ctx.Value("cryptoService")
 	cryptoService, ok := cryptoServiceVal.(signed.CryptoService)
 	if !ok {
@@ -75,15 +69,12 @@ func getMaybeServerSigned(ctx context.Context, w io.Writer, logger ctxu.Logger, 
 	if err != nil {
 		switch err.(type) {
 		case *storage.ErrNoKey, storage.ErrNotFound:
-			logger.Errorf("404 GET %s", role)
-			return errors.ErrMetadataNotFound.WithDetail(nil)
+			return errors.ErrMetadataNotFound.WithDetail(err)
 		default:
-			logger.Errorf("500 GET %s", role)
 			return errors.ErrUnknown.WithDetail(err)
 		}
 	}
 
-	logger.Debugf("200 GET %s", role)
 	w.Write(out)
 	return nil
 }

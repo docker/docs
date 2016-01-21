@@ -122,9 +122,7 @@ func getHandler(ctx context.Context, w http.ResponseWriter, r *http.Request, var
 		return errors.ErrNoStorage.WithDetail(nil)
 	}
 
-	logger := ctxu.GetLoggerWithFields(ctx, map[string]interface{}{"gun": gun, "tufRole": tufRole})
-
-	return getRole(ctx, logger, w, store, gun, tufRole, checksum)
+	return getRole(ctx, w, store, gun, tufRole, checksum)
 }
 
 // DeleteHandler deletes all data for a GUN. A 200 responses indicates success.

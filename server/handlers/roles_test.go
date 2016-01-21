@@ -3,7 +3,6 @@ package handlers
 import (
 	"testing"
 
-	"github.com/Sirupsen/logrus"
 	"github.com/docker/distribution/registry/api/errcode"
 	"github.com/stretchr/testify/require"
 	"golang.org/x/net/context"
@@ -17,7 +16,7 @@ import (
 func TestGetMaybeServerSignedNoCrypto(t *testing.T) {
 	err := getMaybeServerSigned(
 		context.Background(),
-		nil, nil, nil, "", "",
+		nil, nil, "", "",
 	)
 	require.Error(t, err)
 	require.IsType(t, errcode.Error{}, err)
@@ -37,7 +36,6 @@ func TestGetMaybeServerSignedNoKey(t *testing.T) {
 	err := getMaybeServerSigned(
 		ctx,
 		nil,
-		logrus.StandardLogger(),
 		store,
 		"gun",
 		data.CanonicalTimestampRole,

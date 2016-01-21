@@ -100,7 +100,7 @@ func TestGetRoleByHash(t *testing.T) {
 		Signatures: make([]data.Signature, 0),
 		Signed: data.Timestamp{
 			Type:    data.TUFTypes["timestamp"],
-			Version: 0,
+			Version: 1,
 			Expires: data.DefaultExpires("timestamp"),
 		},
 	}
@@ -114,6 +114,25 @@ func TestGetRoleByHash(t *testing.T) {
 	checksumBytes := sha256.Sum256(j)
 	checksum := hex.EncodeToString(checksumBytes[:])
 
+	store.UpdateCurrent("gun", update)
+
+	// create and add a newer timestamp. We're going to try and request
+	// the older version we created above.
+	ts = data.SignedTimestamp{
+		Signatures: make([]data.Signature, 0),
+		Signed: data.Timestamp{
+			Type:    data.TUFTypes["timestamp"],
+			Version: 2,
+			Expires: data.DefaultExpires("timestamp"),
+		},
+	}
+	newJ, err := json.Marshal(&ts)
+	assert.NoError(t, err)
+	update = storage.MetaUpdate{
+		Role:    data.CanonicalTimestampRole,
+		Version: 2,
+		Data:    newJ,
+	}
 	store.UpdateCurrent("gun", update)
 
 	ctx := context.WithValue(
