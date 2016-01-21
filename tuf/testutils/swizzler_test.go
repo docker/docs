@@ -159,13 +159,13 @@ func TestSwizzlerSetInvalidSigned(t *testing.T) {
 func TestSwizzlerSetInvalidSignedMeta(t *testing.T) {
 	f, origMeta := createNewSwizzler(t)
 
-	f.SetInvalidSignedMeta(data.CanonicalTargetsRole)
+	f.SetInvalidSignedMeta(data.CanonicalRootRole)
 
 	for role, metaBytes := range origMeta {
 		newMeta, err := f.MetadataCache.GetMeta(role, -1)
 		require.NoError(t, err)
 
-		if role != data.CanonicalTargetsRole {
+		if role != data.CanonicalRootRole {
 			require.True(t, bytes.Equal(metaBytes, newMeta), "bytes have changed for role %s", role)
 		} else {
 			require.False(t, bytes.Equal(metaBytes, newMeta))
@@ -227,6 +227,7 @@ func TestSwizzlerInvalidateMetadataSignatures(t *testing.T) {
 				require.Equal(t, origSigned.Signatures[i].KeyID, newSigned.Signatures[i].KeyID)
 				require.Equal(t, origSigned.Signatures[i].Method, newSigned.Signatures[i].Method)
 				require.NotEqual(t, origSigned.Signatures[i].Signature, newSigned.Signatures[i].Signature)
+				require.Equal(t, []byte("invalid signature"), newSigned.Signatures[i].Signature)
 			}
 			require.True(t, bytes.Equal(origSigned.Signed, newSigned.Signed))
 		}
