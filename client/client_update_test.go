@@ -42,10 +42,10 @@ func newServerSwizzler(t *testing.T) (map[string][]byte, *testutils.MetadataSwiz
 
 // bumps the versions of everything in the metadata cache, to force local cache
 // to update
-func bumpVersions(t *testing.T, s *testutils.MetadataSwizzler) {
+func bumpVersions(t *testing.T, s *testutils.MetadataSwizzler, offset int) {
 	// bump versions of everything on the server, to force everything to update
 	for _, r := range s.Roles {
-		require.NoError(t, s.OffsetMetadataVersion(r, 1))
+		require.NoError(t, s.OffsetMetadataVersion(r, offset))
 	}
 	require.NoError(t, s.UpdateSnapshotHashes())
 	require.NoError(t, s.UpdateTimestampHash())
@@ -144,7 +144,7 @@ func TestUpdateSucceedsEvenIfCannotWriteExistingRepo(t *testing.T) {
 	for role := range serverMeta {
 		for _, forWrite := range []bool{true, false} {
 			// bump versions of everything on the server, to force everything to update
-			bumpVersions(t, serverSwizzler)
+			bumpVersions(t, serverSwizzler, 1)
 
 			// update fileStore
 			repo.fileStore = &unwritableStore{MetadataStore: origFileStore, roleToNotWrite: role}
@@ -257,7 +257,7 @@ func TestUpdateFailsIfServerRootKeyChangedWithoutMultiSign(t *testing.T) {
 	// rotate the server's root.json root key so that they no longer match trust anchors
 	require.NoError(t, serverSwizzler.ChangeRootKey())
 	// bump versions, update snapshot and timestamp too so it will not fail on a hash
-	bumpVersions(t, serverSwizzler)
+	bumpVersions(t, serverSwizzler, 1)
 
 	// we want to swizzle the local cache, not the server, so create a new one
 	repoSwizzler := &testutils.MetadataSwizzler{
@@ -308,7 +308,7 @@ func TestUpdateFailsIfServerRootKeyChangedWithoutMultiSign(t *testing.T) {
 	}
 }
 
-type updateOpts struct {
+type non200Opts struct {
 	notFoundCode     int    // what code to return when the cache doesn't have the metadata
 	serverHasNewData bool   // whether the server should have the same or new version than the local cache
 	localCache       bool   // whether the repo should have a local cache before updating
@@ -320,14 +320,14 @@ type updateOpts struct {
 // root, and if it doesn't exist, we return ErrRepositoryNotExist. This happens
 // with or without a force check (update for write).
 func TestUpdateRemoteRootNotExistNoLocalCache(t *testing.T) {
-	testUpdateRemoteError(t, updateOpts{
+	testUpdateRemoteNon200Error(t, non200Opts{
 		notFoundCode:     http.StatusNotFound,
 		serverHasNewData: false,
 		localCache:       false,
 		forWrite:         false,
 		role:             data.CanonicalRootRole,
 	}, ErrRepositoryNotExist{})
-	testUpdateRemoteError(t, updateOpts{
+	testUpdateRemoteNon200Error(t, non200Opts{
 		notFoundCode:     http.StatusNotFound,
 		serverHasNewData: false,
 		localCache:       false,
@@ -347,7 +347,7 @@ func TestUpdateRemoteRootNotExistNoLocalCache(t *testing.T) {
 func TestUpdateRemoteRootNotExistCanUseLocalCache(t *testing.T) {
 	// if for-write is false, then we don't need to check the root.json on bootstrap,
 	// and hence we can just use the cached version on update
-	testUpdateRemoteError(t, updateOpts{
+	testUpdateRemoteNon200Error(t, non200Opts{
 		notFoundCode:     http.StatusNotFound,
 		serverHasNewData: false,
 		localCache:       true,
@@ -356,7 +356,7 @@ func TestUpdateRemoteRootNotExistCanUseLocalCache(t *testing.T) {
 	}, nil)
 	// fails because bootstrap requires a check to remote root.json and fails if
 	// the check fails
-	testUpdateRemoteError(t, updateOpts{
+	testUpdateRemoteNon200Error(t, non200Opts{
 		notFoundCode:     http.StatusNotFound,
 		serverHasNewData: false,
 		localCache:       true,
@@ -371,14 +371,14 @@ func TestUpdateRemoteRootNotExistCanUseLocalCache(t *testing.T) {
 // still returns an ErrRepositoryNotExist. This is the case where the server
 // has new updated data, so we cannot default to cached data.
 func TestUpdateRemoteRootNotExistCannotUseLocalCache(t *testing.T) {
-	testUpdateRemoteError(t, updateOpts{
+	testUpdateRemoteNon200Error(t, non200Opts{
 		notFoundCode:     http.StatusNotFound,
 		serverHasNewData: true,
 		localCache:       true,
 		forWrite:         false,
 		role:             data.CanonicalRootRole,
 	}, ErrRepositoryNotExist{})
-	testUpdateRemoteError(t, updateOpts{
+	testUpdateRemoteNon200Error(t, non200Opts{
 		notFoundCode:     http.StatusNotFound,
 		serverHasNewData: true,
 		localCache:       true,
@@ -391,14 +391,14 @@ func TestUpdateRemoteRootNotExistCannotUseLocalCache(t *testing.T) {
 // root, and if it 50X's, we return ErrServerUnavailable. This happens
 // with or without a force check (update for write).
 func TestUpdateRemoteRoot50XNoLocalCache(t *testing.T) {
-	testUpdateRemoteError(t, updateOpts{
+	testUpdateRemoteNon200Error(t, non200Opts{
 		notFoundCode:     http.StatusServiceUnavailable,
 		serverHasNewData: false,
 		localCache:       false,
 		forWrite:         false,
 		role:             data.CanonicalRootRole,
 	}, store.ErrServerUnavailable{})
-	testUpdateRemoteError(t, updateOpts{
+	testUpdateRemoteNon200Error(t, non200Opts{
 		notFoundCode:     http.StatusServiceUnavailable,
 		serverHasNewData: false,
 		localCache:       false,
@@ -416,7 +416,7 @@ func TestUpdateRemoteRoot50XNoLocalCache(t *testing.T) {
 func TestUpdateRemoteRoot50XCanUseLocalCache(t *testing.T) {
 	// if for-write is false, then we don't need to check the root.json on bootstrap,
 	// and hence we can just use the cached version on update.
-	testUpdateRemoteError(t, updateOpts{
+	testUpdateRemoteNon200Error(t, non200Opts{
 		notFoundCode:     http.StatusServiceUnavailable,
 		serverHasNewData: false,
 		localCache:       true,
@@ -425,7 +425,7 @@ func TestUpdateRemoteRoot50XCanUseLocalCache(t *testing.T) {
 	}, nil)
 	// fails because bootstrap requires a check to remote root.json and fails if
 	// the check fails
-	testUpdateRemoteError(t, updateOpts{
+	testUpdateRemoteNon200Error(t, non200Opts{
 		notFoundCode:     http.StatusServiceUnavailable,
 		serverHasNewData: false,
 		localCache:       true,
@@ -440,7 +440,7 @@ func TestUpdateRemoteRoot50XCanUseLocalCache(t *testing.T) {
 func TestUpdateRemoteRoot50XCannotUseLocalCache(t *testing.T) {
 	// if for-write is false, then we don't need to check the root.json on bootstrap,
 	// and hence we can just use the cached version on update
-	testUpdateRemoteError(t, updateOpts{
+	testUpdateRemoteNon200Error(t, non200Opts{
 		notFoundCode:     http.StatusServiceUnavailable,
 		serverHasNewData: true,
 		localCache:       true,
@@ -448,7 +448,7 @@ func TestUpdateRemoteRoot50XCannotUseLocalCache(t *testing.T) {
 		role:             data.CanonicalRootRole,
 	}, store.ErrServerUnavailable{})
 	// fails because of bootstrap
-	testUpdateRemoteError(t, updateOpts{
+	testUpdateRemoteNon200Error(t, non200Opts{
 		notFoundCode:     http.StatusServiceUnavailable,
 		serverHasNewData: true,
 		localCache:       true,
@@ -465,7 +465,7 @@ func TestUpdateNonRootRemoteMissingMetadataNoLocalCache(t *testing.T) {
 		if role == data.CanonicalRootRole {
 			continue
 		}
-		testUpdateRemoteError(t, updateOpts{
+		testUpdateRemoteNon200Error(t, non200Opts{
 			notFoundCode:     http.StatusNotFound,
 			serverHasNewData: false,
 			localCache:       false,
@@ -489,7 +489,7 @@ func TestUpdateNonRootRemoteMissingMetadataCanUseLocalCache(t *testing.T) {
 		if role == data.CanonicalRootRole {
 			continue
 		}
-		testUpdateRemoteError(t, updateOpts{
+		testUpdateRemoteNon200Error(t, non200Opts{
 			notFoundCode:     http.StatusNotFound,
 			serverHasNewData: false,
 			localCache:       true,
@@ -517,7 +517,7 @@ func TestUpdateNonRootRemoteMissingMetadataCannotUseLocalCache(t *testing.T) {
 			errExpected = nil
 		}
 
-		testUpdateRemoteError(t, updateOpts{
+		testUpdateRemoteNon200Error(t, non200Opts{
 			notFoundCode:     http.StatusNotFound,
 			serverHasNewData: true,
 			localCache:       true,
@@ -534,7 +534,7 @@ func TestUpdateNonRootRemote50XNoLocalCache(t *testing.T) {
 		if role == data.CanonicalRootRole {
 			continue
 		}
-		testUpdateRemoteError(t, updateOpts{
+		testUpdateRemoteNon200Error(t, non200Opts{
 			notFoundCode:     http.StatusServiceUnavailable,
 			serverHasNewData: false,
 			localCache:       false,
@@ -556,7 +556,7 @@ func TestUpdateNonRootRemote50XCanUseLocalCache(t *testing.T) {
 		if role == data.CanonicalRootRole {
 			continue
 		}
-		testUpdateRemoteError(t, updateOpts{
+		testUpdateRemoteNon200Error(t, non200Opts{
 			notFoundCode:     http.StatusServiceUnavailable,
 			serverHasNewData: false,
 			localCache:       true,
@@ -586,7 +586,7 @@ func TestUpdateNonRootRemote50XCannotUseLocalCache(t *testing.T) {
 			errExpected = nil
 		}
 
-		testUpdateRemoteError(t, updateOpts{
+		testUpdateRemoteNon200Error(t, non200Opts{
 			notFoundCode:     http.StatusServiceUnavailable,
 			serverHasNewData: true,
 			localCache:       true,
@@ -596,7 +596,7 @@ func TestUpdateNonRootRemote50XCannotUseLocalCache(t *testing.T) {
 	}
 }
 
-func testUpdateRemoteError(t *testing.T, opts updateOpts, errExpected interface{}) {
+func testUpdateRemoteNon200Error(t *testing.T, opts non200Opts, errExpected interface{}) {
 	_, serverSwizzler := newServerSwizzler(t)
 	ts := readOnlyServer(t, serverSwizzler.MetadataCache, opts.notFoundCode)
 	defer ts.Close()
@@ -610,16 +610,22 @@ func testUpdateRemoteError(t *testing.T, opts updateOpts, errExpected interface{
 	}
 
 	if opts.serverHasNewData {
-		bumpVersions(t, serverSwizzler)
+		bumpVersions(t, serverSwizzler, 1)
 	}
 
-	require.NoError(t, serverSwizzler.MetadataCache.RemoveMeta(opts.role))
+	require.NoError(t, serverSwizzler.RemoveMetadata(opts.role), "failed to remove %s", opts.role)
 
 	_, err := repo.Update(opts.forWrite)
 	if errExpected == nil {
-		require.NoError(t, err)
+		require.NoError(t, err, "expected no failure updating when %s is %v (forWrite: %v)",
+			opts.role, opts.notFoundCode, opts.forWrite)
 	} else {
-		require.Error(t, err)
-		require.IsType(t, errExpected, err)
+		require.Error(t, err, "expected failure updating when %s is %v (forWrite: %v)",
+			opts.role, opts.notFoundCode, opts.forWrite)
+		require.IsType(t, errExpected, err, "wrong update error when %s is %v (forWrite: %v)",
+			opts.role, opts.notFoundCode, opts.forWrite)
+		if notFound, ok := err.(store.ErrMetaNotFound); ok {
+			require.Equal(t, opts.role, notFound.Resource, "wrong resource missing (forWrite: %v)", opts.forWrite)
+		}
 	}
 }
