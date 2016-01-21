@@ -451,7 +451,7 @@ func TestDBGetChecksum(t *testing.T) {
 		Signatures: make([]data.Signature, 0),
 		Signed: data.Timestamp{
 			Type:    data.TUFTypes["timestamp"],
-			Version: 0,
+			Version: 1,
 			Expires: data.DefaultExpires("timestamp"),
 		},
 	}
@@ -464,6 +464,26 @@ func TestDBGetChecksum(t *testing.T) {
 	}
 	checksumBytes := sha256.Sum256(j)
 	checksum := hex.EncodeToString(checksumBytes[:])
+
+	store.UpdateCurrent("gun", update)
+
+	// create and add a newer timestamp. We're going to try and get the one
+	// created above by checksum
+	ts = data.SignedTimestamp{
+		Signatures: make([]data.Signature, 0),
+		Signed: data.Timestamp{
+			Type:    data.TUFTypes["timestamp"],
+			Version: 2,
+			Expires: data.DefaultExpires("timestamp"),
+		},
+	}
+	newJ, err := json.Marshal(&ts)
+	require.NoError(t, err)
+	update = MetaUpdate{
+		Role:    data.CanonicalTimestampRole,
+		Version: 2,
+		Data:    newJ,
+	}
 
 	store.UpdateCurrent("gun", update)
 
