@@ -432,8 +432,9 @@ func tokenAuth(trustServerURL string, baseTransport *http.Transport, gun string,
 	}
 	// non-nil err means we must close body
 	defer resp.Body.Close()
-	if resp.StatusCode < http.StatusOK || resp.StatusCode >= http.StatusMultipleChoices {
-		// If we didn't get a 2XX range status code, we're not talking to a notary server.
+	if (resp.StatusCode < http.StatusOK || resp.StatusCode >= http.StatusMultipleChoices) &&
+		resp.StatusCode != http.StatusUnauthorized {
+		// If we didn't get a 2XX range or 401 status code, we're not talking to a notary server.
 		// The http client should be configured to handle redirects so at this point, 3XX is
 		// not a valid status code.
 		logrus.Errorf("could not reach %s: %d", trustServerURL, resp.StatusCode)
