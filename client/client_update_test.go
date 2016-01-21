@@ -10,6 +10,7 @@ import (
 	"testing"
 
 	"github.com/docker/notary/passphrase"
+	"github.com/docker/notary/tuf/client"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/store"
 	"github.com/docker/notary/tuf/testutils"
@@ -604,5 +605,126 @@ func testUpdateRemoteNon200Error(t *testing.T, opts updateOpts, errExpected inte
 		if notFound, ok := err.(store.ErrMetaNotFound); ok {
 			require.Equal(t, opts.role, notFound.Resource, "wrong resource missing (forWrite: %v)", opts.forWrite)
 		}
+	}
+}
+
+// If there's no local cache, we go immediately to check the remote server for
+// root. Having extra spaces doesn't prevent it from validating during bootstrap,
+// but it will fail validation during update. So it will fail with or without
+// a force check (update for write).  If any of the other roles (except
+// timestamp, because there is no checksum for that) have an extra space, they
+// will also fail during update with the same error.
+func TestUpdateRemoteChecksumWrongNoLocalCache(t *testing.T) {
+	for _, role := range append(data.BaseRoles, delegationsWithNonEmptyMetadata...) {
+		testUpdateRemoteFileChecksumWrong(t, updateOpts{
+			serverHasNewData: false,
+			localCache:       false,
+			forWrite:         false,
+			role:             role,
+		}, role != data.CanonicalTimestampRole) // timestamp role should not fail
+
+		if role == data.CanonicalRootRole {
+			testUpdateRemoteFileChecksumWrong(t, updateOpts{
+				serverHasNewData: false,
+				localCache:       false,
+				forWrite:         true,
+				role:             role,
+			}, true)
+		}
+	}
+}
+
+// If there's is a local cache, and the remote server has the same data (except
+// corrupted), then we can just use our local cache.  So update succeeds (
+// with or without a force check (update for write))
+func TestUpdateRemoteChecksumWrongCanUseLocalCache(t *testing.T) {
+	for _, role := range append(data.BaseRoles, delegationsWithNonEmptyMetadata...) {
+		testUpdateRemoteFileChecksumWrong(t, updateOpts{
+			serverHasNewData: false,
+			localCache:       true,
+			forWrite:         false,
+			role:             role,
+		}, false)
+
+		if role == data.CanonicalRootRole {
+			testUpdateRemoteFileChecksumWrong(t, updateOpts{
+				serverHasNewData: false,
+				localCache:       true,
+				forWrite:         true,
+				role:             role,
+			}, false)
+		}
+	}
+}
+
+// If there's is a local cache, but the remote server has new data (some corrupted),
+// we go immediately to check the remote server for root.  Having
+// extra spaces doesn't prevent it from validating during bootstrap,
+// but it will fail validation during update. So it will fail with or without
+// a force check (update for write).  If any of the other roles (except
+// timestamp, because there is no checksum for that) have an extra space, they
+// will also fail during update with the same error.
+func TestUpdateRemoteChecksumWrongCannotUseLocalCache(t *testing.T) {
+	for _, role := range append(data.BaseRoles, delegationsWithNonEmptyMetadata...) {
+		testUpdateRemoteFileChecksumWrong(t, updateOpts{
+			serverHasNewData: true,
+			localCache:       true,
+			forWrite:         false,
+			role:             role,
+		}, role != data.CanonicalTimestampRole) // timestamp role should not fail
+
+		if role == data.CanonicalRootRole {
+			testUpdateRemoteFileChecksumWrong(t, updateOpts{
+				serverHasNewData: true,
+				localCache:       true,
+				forWrite:         true,
+				role:             role,
+			}, true)
+		}
+	}
+}
+
+func testUpdateRemoteFileChecksumWrong(t *testing.T, opts updateOpts, errExpected bool) {
+	_, serverSwizzler := newServerSwizzler(t)
+	ts := readOnlyServer(t, serverSwizzler.MetadataCache, http.StatusNotFound)
+	defer ts.Close()
+
+	repo := newBlankRepo(t, ts.URL)
+	defer os.RemoveAll(repo.baseDir)
+
+	if opts.localCache {
+		_, err := repo.Update(false) // acquire local cache
+		require.NoError(t, err)
+	}
+
+	if opts.serverHasNewData {
+		bumpVersions(t, serverSwizzler, 1)
+	}
+
+	require.NoError(t, serverSwizzler.AddExtraSpace(opts.role), "failed to add space to %s", opts.role)
+
+	_, err := repo.Update(opts.forWrite)
+	if !errExpected {
+		require.NoError(t, err, "expected no failure updating when %s has the wrong checksum (forWrite: %v)",
+			opts.role, opts.forWrite)
+	} else {
+		require.Error(t, err, "expected failure updating when %s has the wrong checksum (forWrite: %v)",
+			opts.role, opts.forWrite)
+
+		// it could be ErrMaliciousServer (if the server sent the metadata with a content length)
+		// or a checksum error (if the server didn't set content length because transfer-encoding
+		// was specified).  For the timestamp, which is really short, it should be the content-length.
+
+		var rightError bool
+		if opts.role == data.CanonicalTimestampRole {
+			_, rightError = err.(store.ErrMaliciousServer)
+		} else {
+			_, isErrChecksum := err.(client.ErrChecksumMismatch)
+			_, isErrMaliciousServer := err.(store.ErrMaliciousServer)
+			rightError = isErrChecksum || isErrMaliciousServer
+		}
+		require.True(t, rightError, err,
+			"wrong update error (%v) when %s has the wrong checksum (forWrite: %v)",
+			err, opts.role, opts.forWrite)
 	}
 }
