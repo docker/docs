@@ -123,6 +123,18 @@ func (m *MetadataSwizzler) SetInvalidJSON(role string) error {
 	return m.MetadataCache.SetMeta(role, metaBytes[5:])
 }
 
+// AddExtraSpace adds an extra space to the beginning and end of the serialized
+// JSON bytes, which should not affect serialization, but will change the checksum
+// of the file.
+func (m *MetadataSwizzler) AddExtraSpace(role string) error {
+	metaBytes, err := m.MetadataCache.GetMeta(role, maxSize)
+	if err != nil {
+		return err
+	}
+	newBytes := append(append([]byte{' '}, metaBytes...), ' ')
+	return m.MetadataCache.SetMeta(role, newBytes)
+}
+
 // SetInvalidSigned corrupts the metadata into something that is valid JSON,
 // but not unmarshallable into signed JSON
 func (m *MetadataSwizzler) SetInvalidSigned(role string) error {
