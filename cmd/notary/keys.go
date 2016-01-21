@@ -104,6 +104,12 @@ var cmdKeyRemoveTemplate = usageTemplate{
 	Long:  "Removes the key with the given keyID.  If the key is stored in more than one location, you will be asked which one to remove.",
 }
 
+var cmdKeyPasswdTemplate = usageTemplate{
+	Use:   "passwd [ keyID ]",
+	Short: "Changes the passphrase for the root key with the given keyID.",
+	Long:  "Changes the passphrase for the root key with the given keyID.  Will require validation of the old passphrase.",
+}
+
 type keyCommander struct {
 	// these need to be set
 	configGetter func() *viper.Viper
@@ -123,6 +129,7 @@ func (k *keyCommander) GetCommand() *cobra.Command {
 	cmd.AddCommand(cmdKeysRestoreTemplate.ToCommand(k.keysRestore))
 	cmd.AddCommand(cmdKeyImportRootTemplate.ToCommand(k.keysImportRoot))
 	cmd.AddCommand(cmdKeyRemoveTemplate.ToCommand(k.keyRemove))
+	cmd.AddCommand(cmdKeyPasswdTemplate.ToCommand(k.keyPassphraseChange))
 
 	cmdKeysBackup := cmdKeysBackupTemplate.ToCommand(k.keysBackup)
 	cmdKeysBackup.Flags().StringVarP(
@@ -482,6 +489,47 @@ func (k *keyCommander) keyRemove(cmd *cobra.Command, args []string) error {
 		cmd.Out())
 	cmd.Println("")
 	return err
+}
+
+// keyPassphraseChange changes the passphrase for a root key's private key based on ID
+func (k *keyCommander) keyPassphraseChange(cmd *cobra.Command, args []string) error {
+	if len(args) < 1 {
+		return fmt.Errorf("must specify the key ID of the root key to change the passphrase of")
+	}
+
+	config := k.configGetter()
+	ks, err := k.getKeyStores(config, true)
+	if err != nil {
+		return err
+	}
+
+	keyID := args[0]
+
+	// This is an invalid ID
+	if len(keyID) != notary.Sha256HexSize {
+		return fmt.Errorf("invalid key ID provided: %s", keyID)
+	}
+
+	// We only allow for changing the root key, so use no gun
+	cs := cryptoservice.NewCryptoService("", ks...)
+	privKey, role, err := cs.GetPrivateKey(keyID)
+	if err != nil {
+		return fmt.Errorf("could not retrieve local root key for key ID provided: %s", keyID)
+	}
+
+	// Must use a different passphrase retriever to avoid caching the
+	// unlocking passphrase and reusing that.
+	passChangeRetriever := getRetriever()
+	keyStore, err := trustmanager.NewKeyFileStore(config.GetString("trust_dir"), passChangeRetriever)
+	err = keyStore.AddKey(keyID, role, privKey)
+	if err != nil {
+		return err
+	}
+
+	cmd.Println("")
+	cmd.Printf("Successfully updated passphrase for key ID: %s", keyID)
+	cmd.Println("")
+	return nil
 }
 
 func (k *keyCommander) getKeyStores(
