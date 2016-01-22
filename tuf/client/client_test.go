@@ -842,7 +842,7 @@ func TestDownloadTimestampNoLocalTimestampRemoteTimestampEmpty(t *testing.T) {
 	kdb, repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	localStorage := store.NewMemoryStore(nil, nil)
-	remoteStorage := store.NewMemoryStore(map[string][]byte{data.CanonicalTimestampRole: []byte{}}, nil)
+	remoteStorage := store.NewMemoryStore(map[string][]byte{data.CanonicalTimestampRole: {}}, nil)
 	client := NewClient(repo, remoteStorage, kdb, localStorage)
 
 	err = client.downloadTimestamp()
