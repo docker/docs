@@ -220,13 +220,13 @@ func generateCertificate(t *testing.T, gun string, expireInHours int64) *x509.Ce
 // are no roles.
 func TestPrettyPrintZeroRoles(t *testing.T) {
 	var b bytes.Buffer
-	prettyPrintRoles([]*data.Role{}, &b)
+	prettyPrintRoles([]*data.Role{}, &b, "delegations")
 	text, err := ioutil.ReadAll(&b)
 	assert.NoError(t, err)
 
 	lines := strings.Split(strings.TrimSpace(string(text)), "\n")
 	assert.Len(t, lines, 1)
-	assert.Equal(t, "No such roles published in this repository.", lines[0])
+	assert.Equal(t, "No delegations present in this repository.", lines[0])
 }
 
 // Roles are sorted by name, and the name, paths, and KeyIDs are printed.
@@ -241,7 +241,7 @@ func TestPrettyPrintSortedRoles(t *testing.T) {
 	}
 
 	var b bytes.Buffer
-	prettyPrintRoles(unsorted, &b)
+	prettyPrintRoles(unsorted, &b, "delegations")
 	text, err := ioutil.ReadAll(&b)
 	assert.NoError(t, err)
 

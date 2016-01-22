@@ -176,9 +176,9 @@ func prettyPrintTargets(ts []*client.TargetWithRole, writer io.Writer) {
 }
 
 // Pretty-prints the list of provided Roles
-func prettyPrintRoles(rs []*data.Role, writer io.Writer) {
+func prettyPrintRoles(rs []*data.Role, writer io.Writer, roleType string) {
 	if len(rs) == 0 {
-		writer.Write([]byte("\nNo such roles published in this repository.\n\n"))
+		writer.Write([]byte(fmt.Sprintf("\nNo %s present in this repository.\n\n", roleType)))
 		return
 	}
 

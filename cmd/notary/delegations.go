@@ -32,9 +32,9 @@ var cmdDelegationRemoveTemplate = usageTemplate{
 }
 
 var cmdDelegationAddTemplate = usageTemplate{
-	Use:   "add [ GUN ] [ Role ] <PEM file path 1> ...",
-	Short: "Add a keys to delegation using the provided public key certificate PEMs.",
-	Long:  "Add a keys to delegation using the provided public key certificate PEMs in a specific Global Unique Name.",
+	Use:   "add [ GUN ] [ Role ] <X509 file path 1> ...",
+	Short: "Add a keys to delegation using the provided public key X509 certificates.",
+	Long:  "Add a keys to delegation using the provided public key PEM encoded X509 certificates in a specific Global Unique Name.",
 }
 
 var paths []string
@@ -84,7 +84,7 @@ func (d *delegationCommander) delegationsList(cmd *cobra.Command, args []string)
 	}
 
 	cmd.Println("")
-	prettyPrintRoles(delegationRoles, cmd.Out())
+	prettyPrintRoles(delegationRoles, cmd.Out(), "delegations")
 	cmd.Println("")
 	return nil
 }
@@ -99,6 +99,11 @@ func (d *delegationCommander) delegationRemove(cmd *cobra.Command, args []string
 
 	gun := args[0]
 	role := args[1]
+
+	// Check if role is valid delegation name before requiring any user input
+	if !data.IsDelegation(role) {
+		return fmt.Errorf("invalid delegation name %s", role)
+	}
 
 	// If we're only given the gun and the role, attempt to remove all data for this delegation
 	if len(args) == 2 && paths == nil {
@@ -143,10 +148,11 @@ func (d *delegationCommander) delegationRemove(cmd *cobra.Command, args []string
 	cmd.Println("")
 	if removeAll {
 		cmd.Printf("Forced removal (including all keys and paths) of delegation role %s to repository \"%s\" staged for next publish.\n", role, gun)
+	} else {
+		cmd.Printf(
+			"Removal of delegation role %s with keys %s and paths %s, to repository \"%s\" staged for next publish.\n",
+			role, keyIDs, paths, gun)
 	}
-	cmd.Printf(
-		"Removal of delegation role %s with keys %s and paths %s, to repository \"%s\" staged for next publish.\n",
-		role, keyIDs, paths, gun)
 	cmd.Println("")
 
 	return nil
