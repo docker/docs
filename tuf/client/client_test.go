@@ -819,3 +819,96 @@ func TestTargetMeta(t *testing.T) {
 	assert.Equal(t, &f, fileMeta)
 	assert.Equal(t, "targets/level1/a/i", role)
 }
+
+// If there is no local cache and also no remote timestamp, downloading the timestamp
+// fails with a store.ErrMetaNotFound
+func TestDownloadTimestampNoTimestamps(t *testing.T) {
+	kdb, repo, _, err := testutils.EmptyRepo("docker.com/notary")
+	assert.NoError(t, err)
+	localStorage := store.NewMemoryStore(nil, nil)
+	remoteStorage := store.NewMemoryStore(nil, nil)
+	client := NewClient(repo, remoteStorage, kdb, localStorage)
+
+	err = client.downloadTimestamp()
+	assert.Error(t, err)
+	notFoundErr, ok := err.(store.ErrMetaNotFound)
+	assert.True(t, ok)
+	assert.Equal(t, data.CanonicalTimestampRole, notFoundErr.Resource)
+}
+
+// If there is no local cache and the remote timestamp is empty, downloading the timestamp
+// fails with a store.ErrMetaNotFound
+func TestDownloadTimestampNoLocalTimestampRemoteTimestampEmpty(t *testing.T) {
+	kdb, repo, _, err := testutils.EmptyRepo("docker.com/notary")
+	assert.NoError(t, err)
+	localStorage := store.NewMemoryStore(nil, nil)
+	remoteStorage := store.NewMemoryStore(map[string][]byte{data.CanonicalTimestampRole: []byte{}}, nil)
+	client := NewClient(repo, remoteStorage, kdb, localStorage)
+
+	err = client.downloadTimestamp()
+	assert.Error(t, err)
+	assert.IsType(t, &json.SyntaxError{}, err)
+}
+
+// If there is no local cache and the remote timestamp is invalid, downloading the timestamp
+// fails with a store.ErrMetaNotFound
+func TestDownloadTimestampNoLocalTimestampRemoteTimestampInvalid(t *testing.T) {
+	kdb, repo, _, err := testutils.EmptyRepo("docker.com/notary")
+	assert.NoError(t, err)
+	localStorage := store.NewMemoryStore(nil, nil)
+
+	// add a timestamp to the remote cache
+	tsSigned, err := repo.SignTimestamp(data.DefaultExpires("timestamp"))
+	assert.NoError(t, err)
+	tsSigned.Signatures[0].Signature = []byte("12345") // invalidate the signature
+	ts, err := json.Marshal(tsSigned)
+	assert.NoError(t, err)
+	remoteStorage := store.NewMemoryStore(map[string][]byte{data.CanonicalTimestampRole: ts}, nil)
+
+	client := NewClient(repo, remoteStorage, kdb, localStorage)
+	err = client.downloadTimestamp()
+	assert.Error(t, err)
+	assert.IsType(t, signed.ErrRoleThreshold{}, err)
+}
+
+// If there is is a local cache and no remote timestamp, we fall back on the cached timestamp
+func TestDownloadTimestampLocalTimestampNoRemoteTimestamp(t *testing.T) {
+	kdb, repo, _, err := testutils.EmptyRepo("docker.com/notary")
+	assert.NoError(t, err)
+
+	// add a timestamp to the local cache
+	tsSigned, err := repo.SignTimestamp(data.DefaultExpires("timestamp"))
+	assert.NoError(t, err)
+	ts, err := json.Marshal(tsSigned)
+	assert.NoError(t, err)
+	localStorage := store.NewMemoryStore(map[string][]byte{data.CanonicalTimestampRole: ts}, nil)
+
+	remoteStorage := store.NewMemoryStore(nil, nil)
+	client := NewClient(repo, remoteStorage, kdb, localStorage)
+
+	err = client.downloadTimestamp()
+	assert.NoError(t, err)
+}
+
+// If there is is a local cache and the remote timestamp is invalid, we fall back on the cached timestamp
+func TestDownloadTimestampLocalTimestampInvalidRemoteTimestamp(t *testing.T) {
+	kdb, repo, _, err := testutils.EmptyRepo("docker.com/notary")
+	assert.NoError(t, err)
+
+	// add a timestamp to the local cache
+	tsSigned, err := repo.SignTimestamp(data.DefaultExpires("timestamp"))
+	assert.NoError(t, err)
+	ts, err := json.Marshal(tsSigned)
+	assert.NoError(t, err)
+	localStorage := store.NewMemoryStore(map[string][]byte{data.CanonicalTimestampRole: ts}, nil)
+
+	// add a timestamp to the remote cache
+	tsSigned.Signatures[0].Signature = []byte("12345") // invalidate the signature
+	ts, err = json.Marshal(tsSigned)
+	assert.NoError(t, err)
+	remoteStorage := store.NewMemoryStore(map[string][]byte{data.CanonicalTimestampRole: ts}, nil)
+
+	client := NewClient(repo, remoteStorage, kdb, localStorage)
+	err = client.downloadTimestamp()
+	assert.NoError(t, err)
+}

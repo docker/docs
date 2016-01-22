@@ -876,11 +876,6 @@ func TestUpdateNonRootRemoteCorruptedCanUseLocalCache(t *testing.T) {
 		if role == data.CanonicalRootRole {
 			continue
 		}
-		// TODO: this is a bug right now where timestamp will not fall back if
-		// there is any error other than JSON unmarshalling
-		if role == data.CanonicalTimestampRole {
-			continue
-		}
 		for _, testData := range waysToMessUpServer {
 			testUpdateRemoteCorruptValidChecksum(t, updateOpts{
 				localCache: true,
@@ -893,23 +888,24 @@ func TestUpdateNonRootRemoteCorruptedCanUseLocalCache(t *testing.T) {
 // Having a local cache, if the server has new same data should fail in all cases
 // (except if we modify the timestamp) because the metadata is re-downloaded.
 // In the case of the timestamp, we'd default to our cached timestamp, and
-// not have to redownload anything.
+// not have to redownload anything (usually)
 func TestUpdateNonRootRemoteCorruptedCannotUseLocalCache(t *testing.T) {
-	for _, role := range []string{"snapshot"} { //append(data.BaseRoles, "targets/a", "targets/a/b") {
+	for _, role := range append(data.BaseRoles, "targets/a", "targets/a/b") {
 		if role == data.CanonicalRootRole {
 			continue
 		}
-		// TODO: this is a bug right now where timestamp will not fall back if
-		// there is any error other than JSON unmarshalling
-		if role == data.CanonicalTimestampRole {
-			continue
-		}
 		for _, testData := range waysToMessUpServer {
+			// in general the cached timsestamp will always succeed, but if the threshold has been
+			// increased, it fails because when we download the new timestamp, it validates as per our
+			// previous root.  But the root hash doesn't match.  So we download a new root and
+			// try the update again.  In this case, both the old and new timestamps won't have enough
+			// signatures.
+			shouldFail := role != data.CanonicalTimestampRole || testData.desc == "insufficient signatures"
 			testUpdateRemoteCorruptValidChecksum(t, updateOpts{
 				serverHasNewData: true,
 				localCache:       true,
 				role:             role,
-			}, testData, role != data.CanonicalTimestampRole)
+			}, testData, shouldFail)
 		}
 	}
 }
@@ -951,7 +947,6 @@ func testUpdateRemoteCorruptValidChecksum(t *testing.T, opts updateOpts, expt sw
 			serverSwizzler.UpdateTimestampHash()
 		}
 	}
-
 	_, err := repo.Update(opts.forWrite)
 	if shouldErr {
 		require.Error(t, err, "expected failure updating when %s", msg)

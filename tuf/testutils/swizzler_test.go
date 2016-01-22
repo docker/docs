@@ -107,7 +107,7 @@ func TestSwizzlerAddExtraSpace(t *testing.T) {
 	require.NoError(t, json.Unmarshal(origMeta[data.CanonicalSnapshotRole], snapshot))
 
 	for role, metaBytes := range origMeta {
-		newMeta, err := f.MetadataCache.GetMeta(role, maxSize)
+		newMeta, err := f.MetadataCache.GetMeta(role, -1)
 		require.NoError(t, err)
 
 		if role != data.CanonicalTargetsRole {

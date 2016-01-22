@@ -128,7 +128,7 @@ func (m *MetadataSwizzler) SetInvalidJSON(role string) error {
 // JSON bytes, which should not affect serialization, but will change the checksum
 // of the file.
 func (m *MetadataSwizzler) AddExtraSpace(role string) error {
-	metaBytes, err := m.MetadataCache.GetMeta(role, maxSize)
+	metaBytes, err := m.MetadataCache.GetMeta(role, -1)
 	if err != nil {
 		return err
 	}
