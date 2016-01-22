@@ -147,8 +147,8 @@ func TestGetRoleByHash(t *testing.T) {
 	res, err := http.Get(fmt.Sprintf(
 		"%s/v2/gun/_trust/tuf/%s.%s.json",
 		serv.URL,
-		checksum,
 		data.CanonicalTimestampRole,
+		checksum,
 	))
 	assert.NoError(t, err)
 	assert.Equal(t, http.StatusOK, res.StatusCode)
