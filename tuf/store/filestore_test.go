@@ -89,6 +89,12 @@ func TestGetMeta(t *testing.T) {
 	assert.Nil(t, err, "GetMeta returned unexpected error: %v", err)
 
 	assert.Equal(t, testContent, content, "Content read from file was corrupted.")
+
+	// Check that we return only up to size bytes
+	content, err = s.GetMeta("testMeta", 4)
+	assert.Nil(t, err, "GetMeta returned unexpected error: %v", err)
+
+	assert.Equal(t, []byte("test"), content, "Content read from file was corrupted.")
 }
 
 func TestGetSetMetadata(t *testing.T) {
