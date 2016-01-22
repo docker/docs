@@ -249,9 +249,9 @@ func (c *Client) downloadTimestamp() error {
 	// we're interacting with the repo. This will result in the
 	// version being 0
 	var (
-		saveToCache bool
-		old         *data.Signed
-		version     = 0
+		old     *data.Signed
+		ts      *data.SignedTimestamp
+		version = 0
 	)
 	cachedTS, err := c.cache.GetMeta(role, notary.MaxTimestampSize)
 	if err == nil {
@@ -268,35 +268,37 @@ func (c *Client) downloadTimestamp() error {
 	// unlike root, targets and snapshot, always try and download timestamps
 	// from remote, only using the cache one if we couldn't reach remote.
 	raw, s, err := c.downloadSigned(role, notary.MaxTimestampSize, nil)
-	if err != nil || len(raw) == 0 {
-		if old == nil {
-			if err == nil {
-				// couldn't retrieve data from server and don't have valid
-				// data in cache.
-				return store.ErrMetaNotFound{Resource: data.CanonicalTimestampRole}
-			}
-			return err
+	if err == nil {
+		ts, err = c.verifyTimestamp(s, version, c.keysDB)
+		if err == nil {
+			logrus.Debug("successfully verified downloaded timestamp")
+			c.cache.SetMeta(role, raw)
+			c.local.SetTimestamp(ts)
+			return nil
 		}
-		logrus.Debug(err.Error())
-		logrus.Warn("Error while downloading remote metadata, using cached timestamp - this might not be the latest version available remotely")
-		s = old
-	} else {
-		saveToCache = true
 	}
-	err = signed.Verify(s, role, version, c.keysDB)
+	if old == nil {
+		// couldn't retrieve valid data from server and don't have unmarshallable data in cache.
+		logrus.Debug("no cached timestamp available")
+		return err
+	}
+	logrus.Debug(err.Error())
+	logrus.Warn("Error while downloading remote metadata, using cached timestamp - this might not be the latest version available remotely")
+	ts, err = c.verifyTimestamp(old, version, c.keysDB)
 	if err != nil {
 		return err
 	}
-	logrus.Debug("successfully verified timestamp")
-	if saveToCache {
-		c.cache.SetMeta(role, raw)
-	}
-	ts, err := data.TimestampFromSigned(s)
-	if err != nil {
-		return err
-	}
+	logrus.Debug("successfully verified cached timestamp")
 	c.local.SetTimestamp(ts)
 	return nil
+}
+
+// verifies that a timestamp is valid, and returned the SignedTimestamp object to add to the tuf repo
+func (c *Client) verifyTimestamp(s *data.Signed, minVersion int, kdb *keys.KeyDB) (*data.SignedTimestamp, error) {
+	if err := signed.Verify(s, data.CanonicalTimestampRole, minVersion, kdb); err != nil {
+		return nil, err
+	}
+	return data.TimestampFromSigned(s)
 }
 
 // downloadSnapshot is responsible for downloading the snapshot.json
