@@ -2,16 +2,21 @@ package client
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"os"
+	"reflect"
 	"testing"
+	"time"
 
+	"github.com/docker/notary/certs"
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/tuf/client"
 	"github.com/docker/notary/tuf/data"
+	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/store"
 	"github.com/docker/notary/tuf/testutils"
 	"github.com/gorilla/mux"
@@ -726,5 +731,243 @@ func testUpdateRemoteFileChecksumWrong(t *testing.T, opts updateOpts, errExpecte
 		require.True(t, rightError, err,
 			"wrong update error (%v) when %s has the wrong checksum (forWrite: %v)",
 			err, opts.role, opts.forWrite)
+	}
+}
+
+// --- these tests below assume the checksums are correct (since the server can sign snapshots and
+// timestamps, so can be malicious) ---
+
+type swizzleServer func(*testutils.MetadataSwizzler, string) error
+
+type swizzleExpectations struct {
+	desc       string
+	swizzle    swizzleServer
+	expectErrs []interface{}
+}
+
+// this does not include delete, which is tested separately so we can try to get
+// 404s and 503s
+var waysToMessUpServer = []swizzleExpectations{
+	{desc: "invalid JSON", expectErrs: []interface{}{&json.SyntaxError{}},
+		swizzle: (*testutils.MetadataSwizzler).SetInvalidJSON},
+
+	{desc: "an invalid Signed", expectErrs: []interface{}{&json.UnmarshalTypeError{}},
+		swizzle: (*testutils.MetadataSwizzler).SetInvalidSigned},
+
+	{desc: "an invalid SignedMeta",
+		// it depends which field gets unmarshalled first
+		expectErrs: []interface{}{&json.UnmarshalTypeError{}, &time.ParseError{}},
+		swizzle:    (*testutils.MetadataSwizzler).SetInvalidSignedMeta},
+
+	// for the errors below, when we bootstrap root, we get cert.ErrValidationFail failures
+	// for everything else, the errors come from tuf/signed
+
+	{desc: "invalid SignedMeta Type", expectErrs: []interface{}{
+		&certs.ErrValidationFail{}, signed.ErrWrongType},
+		swizzle: (*testutils.MetadataSwizzler).SetInvalidMetadataType},
+
+	{desc: "invalid signatures", expectErrs: []interface{}{
+		&certs.ErrValidationFail{}, signed.ErrRoleThreshold{}},
+		swizzle: (*testutils.MetadataSwizzler).InvalidateMetadataSignatures},
+
+	{desc: "meta signed by wrong key", expectErrs: []interface{}{
+		&certs.ErrValidationFail{}, signed.ErrRoleThreshold{}},
+		swizzle: (*testutils.MetadataSwizzler).SignMetadataWithInvalidKey},
+
+	{desc: "expired metadata", expectErrs: []interface{}{
+		&certs.ErrValidationFail{}, signed.ErrExpired{}},
+		swizzle: (*testutils.MetadataSwizzler).ExpireMetadata},
+
+	{desc: "lower metadata version", expectErrs: []interface{}{
+		&certs.ErrValidationFail{}, signed.ErrLowVersion{}},
+		swizzle: func(s *testutils.MetadataSwizzler, role string) error {
+			return s.OffsetMetadataVersion(role, -2)
+		}},
+
+	{desc: "insufficient signatures", expectErrs: []interface{}{
+		&certs.ErrValidationFail{}, signed.ErrRoleThreshold{}},
+		swizzle: func(s *testutils.MetadataSwizzler, role string) error {
+			return s.SetThreshold(role, 2)
+		}},
+}
+
+// If there's no local cache, we go immediately to check the remote server for
+// root, and if it invalid (corrupted), we cannot update.  This happens
+// with and without a force check (update for write).
+func TestUpdateRootRemoteCorruptedNoLocalCache(t *testing.T) {
+	for _, testData := range waysToMessUpServer {
+		if testData.desc == "insufficient signatures" {
+			// TODO: fix bug where we don't check for enough signatures to meet the
+			// threshold when bootstrapping the root
+			continue
+		}
+
+		testUpdateRemoteCorruptValidChecksum(t, updateOpts{
+			forWrite: false,
+			role:     data.CanonicalRootRole,
+		}, testData, true)
+		testUpdateRemoteCorruptValidChecksum(t, updateOpts{
+			forWrite: true,
+			role:     data.CanonicalRootRole,
+		}, testData, true)
+	}
+}
+
+// Having a local cache, if the server has the same data (timestamp has not changed),
+// should succeed in all cases if whether forWrite (force check) is true or not
+// because the fact that the timestamp hasn't changed should mean that we don't
+// have to re-download the root.
+func TestUpdateRootRemoteCorruptedCanUseLocalCache(t *testing.T) {
+	for _, testData := range waysToMessUpServer {
+		testUpdateRemoteCorruptValidChecksum(t, updateOpts{
+			localCache: true,
+			forWrite:   false,
+			role:       data.CanonicalRootRole,
+		}, testData, false)
+		testUpdateRemoteCorruptValidChecksum(t, updateOpts{
+			localCache: true,
+			forWrite:   true,
+			role:       data.CanonicalRootRole,
+		}, testData, false)
+	}
+}
+
+// Having a local cache, if the server has new same data should fail in all cases
+// because the metadata is re-downloaded.
+func TestUpdateRootRemoteCorruptedCannotUseLocalCache(t *testing.T) {
+	for _, testData := range waysToMessUpServer {
+		testUpdateRemoteCorruptValidChecksum(t, updateOpts{
+			serverHasNewData: true,
+			localCache:       true,
+			forWrite:         false,
+			role:             data.CanonicalRootRole,
+		}, testData, true)
+		testUpdateRemoteCorruptValidChecksum(t, updateOpts{
+			serverHasNewData: true,
+			localCache:       true,
+			forWrite:         true,
+			role:             data.CanonicalRootRole,
+		}, testData, true)
+	}
+}
+
+// If there's no local cache, we just download from the server and if anything
+// is corrupt, we cannot update.
+func TestUpdateNonRootRemoteCorruptedNoLocalCache(t *testing.T) {
+	for _, role := range append(data.BaseRoles, "targets/a", "targets/a/b") {
+		if role == data.CanonicalRootRole {
+			continue
+		}
+		for _, testData := range waysToMessUpServer {
+			testUpdateRemoteCorruptValidChecksum(t, updateOpts{
+				role: role,
+			}, testData, true)
+		}
+	}
+}
+
+// Having a local cache, if the server has the same data (timestamp has not changed),
+// should succeed in all cases if whether forWrite (force check) is true or not.
+// If the timestamp is fine, it hasn't changed and we don't have to download
+// anything. If it's broken, we used the cached timestamp and again download
+// nothing.
+func TestUpdateNonRootRemoteCorruptedCanUseLocalCache(t *testing.T) {
+	for _, role := range append(data.BaseRoles, "targets/a", "targets/a/b") {
+		if role == data.CanonicalRootRole {
+			continue
+		}
+		// TODO: this is a bug right now where timestamp will not fall back if
+		// there is any error other than JSON unmarshalling
+		if role == data.CanonicalTimestampRole {
+			continue
+		}
+		for _, testData := range waysToMessUpServer {
+			testUpdateRemoteCorruptValidChecksum(t, updateOpts{
+				localCache: true,
+				role:       role,
+			}, testData, false)
+		}
+	}
+}
+
+// Having a local cache, if the server has new same data should fail in all cases
+// (except if we modify the timestamp) because the metadata is re-downloaded.
+// In the case of the timestamp, we'd default to our cached timestamp, and
+// not have to redownload anything.
+func TestUpdateNonRootRemoteCorruptedCannotUseLocalCache(t *testing.T) {
+	for _, role := range []string{"snapshot"} { //append(data.BaseRoles, "targets/a", "targets/a/b") {
+		if role == data.CanonicalRootRole {
+			continue
+		}
+		// TODO: this is a bug right now where timestamp will not fall back if
+		// there is any error other than JSON unmarshalling
+		if role == data.CanonicalTimestampRole {
+			continue
+		}
+		for _, testData := range waysToMessUpServer {
+			testUpdateRemoteCorruptValidChecksum(t, updateOpts{
+				serverHasNewData: true,
+				localCache:       true,
+				role:             role,
+			}, testData, role != data.CanonicalTimestampRole)
+		}
+	}
+}
+
+func testUpdateRemoteCorruptValidChecksum(t *testing.T, opts updateOpts, expt swizzleExpectations, shouldErr bool) {
+	_, serverSwizzler := newServerSwizzler(t)
+	ts := readOnlyServer(t, serverSwizzler.MetadataCache, http.StatusNotFound)
+	defer ts.Close()
+
+	repo := newBlankRepo(t, ts.URL)
+	defer os.RemoveAll(repo.baseDir)
+
+	if opts.localCache {
+		_, err := repo.Update(false)
+		require.NoError(t, err)
+	}
+
+	if opts.serverHasNewData {
+		bumpVersions(t, serverSwizzler, 1)
+	}
+
+	msg := fmt.Sprintf("swizzling %s to return: %v (forWrite: %v)", opts.role, expt.desc, opts.forWrite)
+
+	require.NoError(t, expt.swizzle(serverSwizzler, opts.role),
+		"failed %s", msg)
+
+	// update the snapshot and timestamp hashes to make sure it's not an involuntary checksum failure
+	// unless we want the server to not actually have any new data
+	if !opts.localCache || opts.serverHasNewData {
+		// we don't want to sign if we are trying to swizzle one of these roles to
+		// have a different signature - updating hashes would be pointless (because
+		// nothing else has changed) and would just overwrite the signature.
+		isSignatureSwizzle := expt.desc == "invalid signatures" || expt.desc == "meta signed by wrong key"
+		// just try to do these - if they fail (probably because they've been swizzled), that's fine
+		if opts.role != data.CanonicalSnapshotRole || !isSignatureSwizzle {
+			serverSwizzler.UpdateSnapshotHashes()
+		}
+		if opts.role != data.CanonicalTimestampRole || !isSignatureSwizzle {
+			serverSwizzler.UpdateTimestampHash()
+		}
+	}
+
+	_, err := repo.Update(opts.forWrite)
+	if shouldErr {
+		require.Error(t, err, "expected failure updating when %s", msg)
+
+		errType := reflect.TypeOf(err)
+		isExpectedType := false
+		var expectedTypes []string
+		for _, expectErr := range expt.expectErrs {
+			expectedType := reflect.TypeOf(expectErr)
+			isExpectedType = isExpectedType || errType == expectedType
+			expectedTypes = append(expectedTypes, expectedType.String())
+		}
+		require.True(t, isExpectedType, "expected one of %v when %s: got %s",
+			expectedTypes, msg, errType)
+
+	} else {
+		require.NoError(t, err, "expected no failure updating when %s", msg)
 	}
 }
