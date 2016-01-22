@@ -822,6 +822,28 @@ func TestDefaultRootKeyGeneration(t *testing.T) {
 	assertNumKeys(t, tempDir, 1, 0, true)
 }
 
+// Tests the interaction with the verbose and log-level flags
+func TestLogLevelFlags(t *testing.T) {
+	// Test default to fatal
+	setVerbosityLevel()
+	assert.Equal(t, "fatal", logrus.GetLevel().String())
+
+	// Test that verbose (-v) sets to error
+	verbose = true
+	setVerbosityLevel()
+	assert.Equal(t, "error", logrus.GetLevel().String())
+
+	// Test that debug (-D) sets to debug
+	debug = true
+	setVerbosityLevel()
+	assert.Equal(t, "debug", logrus.GetLevel().String())
+
+	// Test that unsetting verboseError still uses verboseDebug
+	verbose = false
+	setVerbosityLevel()
+	assert.Equal(t, "debug", logrus.GetLevel().String())
+}
+
 func tempDirWithConfig(t *testing.T, config string) string {
 	tempDir, err := ioutil.TempDir("/tmp", "repo")
 	assert.NoError(t, err)
