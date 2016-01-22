@@ -6,16 +6,13 @@ import (
 	"time"
 
 	"github.com/docker/go/canonical/json"
+	"github.com/docker/notary"
 	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/store"
-)
-
-const (
-	maxSize = 5 << 20
 )
 
 // ErrNoKeyForRole returns an error when the cryptoservice provided to
@@ -87,7 +84,7 @@ func serializeMetadata(cs signed.CryptoService, s *data.Signed, role string,
 
 // gets a Signed from the metadata store
 func signedFromStore(cache store.MetadataStore, role string) (*data.Signed, error) {
-	b, err := cache.GetMeta(role, maxSize)
+	b, err := cache.GetMeta(role, notary.MaxMetaSize)
 	if err != nil {
 		return nil, err
 	}
@@ -120,7 +117,7 @@ func NewMetadataSwizzler(gun string, initialMetadata map[string][]byte,
 
 // SetInvalidJSON corrupts metadata into something that is no longer valid JSON
 func (m *MetadataSwizzler) SetInvalidJSON(role string) error {
-	metaBytes, err := m.MetadataCache.GetMeta(role, maxSize)
+	metaBytes, err := m.MetadataCache.GetMeta(role, notary.MaxMetaSize)
 	if err != nil {
 		return err
 	}
@@ -327,7 +324,7 @@ func (m *MetadataSwizzler) SetThreshold(role string, newThreshold int) error {
 		roleSpecifier = path.Dir(role)
 	}
 
-	b, err := m.MetadataCache.GetMeta(roleSpecifier, maxSize)
+	b, err := m.MetadataCache.GetMeta(roleSpecifier, notary.MaxMetaSize)
 	if err != nil {
 		return err
 	}
@@ -377,7 +374,7 @@ func (m *MetadataSwizzler) ChangeRootKey() error {
 		return err
 	}
 
-	b, err := m.MetadataCache.GetMeta(data.CanonicalRootRole, maxSize)
+	b, err := m.MetadataCache.GetMeta(data.CanonicalRootRole, notary.MaxMetaSize)
 	if err != nil {
 		return err
 	}
@@ -410,7 +407,7 @@ func (m *MetadataSwizzler) UpdateSnapshotHashes(roles ...string) error {
 		snapshotSigned *data.Signed
 		err            error
 	)
-	if metaBytes, err = m.MetadataCache.GetMeta(data.CanonicalSnapshotRole, maxSize); err != nil {
+	if metaBytes, err = m.MetadataCache.GetMeta(data.CanonicalSnapshotRole, notary.MaxMetaSize); err != nil {
 		return err
 	}
 
@@ -426,7 +423,7 @@ func (m *MetadataSwizzler) UpdateSnapshotHashes(roles ...string) error {
 
 	for _, role := range roles {
 		if role != data.CanonicalSnapshotRole && role != data.CanonicalTimestampRole {
-			if metaBytes, err = m.MetadataCache.GetMeta(role, maxSize); err != nil {
+			if metaBytes, err = m.MetadataCache.GetMeta(role, notary.MaxMetaSize); err != nil {
 				return err
 			}
 
@@ -458,7 +455,7 @@ func (m *MetadataSwizzler) UpdateTimestampHash() error {
 		timestampSigned *data.Signed
 		err             error
 	)
-	if metaBytes, err = m.MetadataCache.GetMeta(data.CanonicalTimestampRole, maxSize); err != nil {
+	if metaBytes, err = m.MetadataCache.GetMeta(data.CanonicalTimestampRole, notary.MaxMetaSize); err != nil {
 		return err
 	}
 	// we can't just create a new timestamp, because then the expiry would be
@@ -467,7 +464,7 @@ func (m *MetadataSwizzler) UpdateTimestampHash() error {
 		return err
 	}
 
-	if metaBytes, err = m.MetadataCache.GetMeta(data.CanonicalSnapshotRole, maxSize); err != nil {
+	if metaBytes, err = m.MetadataCache.GetMeta(data.CanonicalSnapshotRole, notary.MaxMetaSize); err != nil {
 		return err
 	}
 

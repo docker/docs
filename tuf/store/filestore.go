@@ -44,7 +44,7 @@ func (f *FilesystemStore) getPath(name string) string {
 	return filepath.Join(f.metaDir, fileName)
 }
 
-// GetMeta returns the meta for the given name (a role)
+// GetMeta returns the meta for the given name (a role) up to size bytes
 func (f *FilesystemStore) GetMeta(name string, size int64) ([]byte, error) {
 	meta, err := ioutil.ReadFile(f.getPath(name))
 	if err != nil {
@@ -53,7 +53,11 @@ func (f *FilesystemStore) GetMeta(name string, size int64) ([]byte, error) {
 		}
 		return nil, err
 	}
-	return meta, nil
+	// Only return up to size bytes
+	if int64(len(meta)) < size {
+		return meta, nil
+	}
+	return meta[:size], nil
 }
 
 // SetMultiMeta sets the metadata for multiple roles in one operation
