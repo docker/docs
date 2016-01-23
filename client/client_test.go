@@ -1115,7 +1115,7 @@ func testListTarget(t *testing.T, rootType string) {
 	repo, _ := initializeRepo(t, rootType, "docker.com/notary", ts.URL, false)
 	defer os.RemoveAll(repo.baseDir)
 
-	// tests need to manually boostrap timestamp as client doesn't generate it
+	// tests need to manually bootstrap timestamp as client doesn't generate it
 	err := repo.tufRepo.InitTimestamp()
 	assert.NoError(t, err, "error creating repository: %s", err)
 
@@ -1171,7 +1171,7 @@ func testListTargetWithDelegates(t *testing.T, rootType string) {
 	repo, _ := initializeRepo(t, rootType, "docker.com/notary", ts.URL, false)
 	defer os.RemoveAll(repo.baseDir)
 
-	// tests need to manually boostrap timestamp as client doesn't generate it
+	// tests need to manually bootstrap timestamp as client doesn't generate it
 	err := repo.tufRepo.InitTimestamp()
 	assert.NoError(t, err, "error creating repository: %s", err)
 
@@ -2948,4 +2948,103 @@ func TestDeleteRepoNoCerts(t *testing.T) {
 
 	// Assert keys for this repo exist locally
 	assertRepoHasExpectedKeys(t, repo, rootKeyID, true)
+}
+
+// Test that we get a correct list of roles with keys and signatures
+func TestListRoles(t *testing.T) {
+	ts := fullTestServer(t)
+	defer ts.Close()
+
+	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
+
+	assert.NoError(t, repo.Publish())
+
+	rolesWithSigs, err := repo.ListRoles()
+	assert.NoError(t, err)
+
+	// Should only have base roles at this point
+	assert.Len(t, rolesWithSigs, len(data.BaseRoles))
+	// Each base role should only have one key, one signature, and its key should match the signature's key
+	for _, role := range rolesWithSigs {
+		assert.Len(t, role.Signatures, 1)
+		assert.Len(t, role.KeyIDs, 1)
+		assert.Equal(t, role.Signatures[0].KeyID, role.KeyIDs[0])
+	}
+
+	// Create a delegation on the top level
+	aKey := createKey(t, repo, "user", true)
+	assert.NoError(t,
+		repo.AddDelegation("targets/a", 1, []data.PublicKey{aKey}, []string{""}),
+		"error creating delegation")
+
+	assert.NoError(t, repo.Publish())
+
+	rolesWithSigs, err = repo.ListRoles()
+	assert.NoError(t, err)
+
+	assert.Len(t, rolesWithSigs, len(data.BaseRoles)+1)
+	// The delegation hasn't published any targets or metadata so it won't have a signature yet
+	for _, role := range rolesWithSigs {
+		if role.Name == "targets/a" {
+			assert.Nil(t, role.Signatures)
+		} else {
+			assert.Len(t, role.Signatures, 1)
+			assert.Equal(t, role.Signatures[0].KeyID, role.KeyIDs[0])
+		}
+		assert.Len(t, role.KeyIDs, 1)
+	}
+
+	addTarget(t, repo, "current", "../fixtures/intermediate-ca.crt", "targets/a")
+	assert.NoError(t, repo.Publish())
+
+	rolesWithSigs, err = repo.ListRoles()
+	assert.NoError(t, err)
+
+	assert.Len(t, rolesWithSigs, len(data.BaseRoles)+1)
+	// The delegation should have a signature now
+	for _, role := range rolesWithSigs {
+		assert.Len(t, role.Signatures, 1)
+		assert.Equal(t, role.Signatures[0].KeyID, role.KeyIDs[0])
+		assert.Len(t, role.KeyIDs, 1)
+	}
+
+	// Create another delegation, one level further
+	bKey := createKey(t, repo, "user", true)
+	assert.NoError(t,
+		repo.AddDelegation("targets/a/b", 1, []data.PublicKey{bKey}, []string{""}),
+		"error creating delegation")
+
+	assert.NoError(t, repo.Publish())
+
+	rolesWithSigs, err = repo.ListRoles()
+	assert.NoError(t, err)
+
+	assert.Len(t, rolesWithSigs, len(data.BaseRoles)+2)
+	// The nested delegation hasn't published any targets or metadata so it won't have a signature yet
+	for _, role := range rolesWithSigs {
+		if role.Name == "targets/a/b" {
+			assert.Nil(t, role.Signatures)
+		} else {
+			assert.Len(t, role.Signatures, 1)
+			assert.Equal(t, role.Signatures[0].KeyID, role.KeyIDs[0])
+		}
+		assert.Len(t, role.KeyIDs, 1)
+	}
+
+	// Now make another repo and check that we don't pick up its roles
+	repo2, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary2", ts.URL, false)
+	defer os.RemoveAll(repo2.baseDir)
+
+	assert.NoError(t, repo2.Publish())
+
+	// repo2 only has the base roles
+	rolesWithSigs2, err := repo2.ListRoles()
+	assert.NoError(t, err)
+	assert.Len(t, rolesWithSigs2, len(data.BaseRoles))
+
+	// original repo stays in same state (base roles + 2 delegations)
+	rolesWithSigs, err = repo.ListRoles()
+	assert.NoError(t, err)
+	assert.Len(t, rolesWithSigs, len(data.BaseRoles)+2)
 }
