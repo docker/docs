@@ -12,7 +12,7 @@ subsystem. Along with host and bridge networks, you can now create custom
 networks that encompass multiple hosts running Docker Engine. This last feature
 is known as multi-host networking.
 
-- [Understand multi-host networking and UCP](#understand-multi-host-networking-and-ucp)
+- [Multi-host networking and UCP](#understand-multi-host-networking-and-ucp)
 - [Prerequisites](#prerequisites)
 - [Configure networking and restart the daemon](#configure-networking-and-restart-the-daemon)
 - [Troubleshoot the daemon configuration](#troubleshoot-the-daemon-configuration)
@@ -21,7 +21,7 @@ is known as multi-host networking.
 
 These installation instructions were written using the Ubuntu 14.0.3 operating system. This means that the file paths and commands used in the instructions are specific to Ubuntu 14.0.3. If you are installing on another operating system, the steps are the same but your commands and paths may differ.
 
-## Understand multi-host networking and UCP
+## Multi-host networking and UCP
 
 You create a multi-host network using the Docker client or the UCP administration console.  Multi-host networks rely on the `overlay` network plugin driver. To create a network, using the CLI.
 
@@ -42,7 +42,7 @@ Error response from daemon: failed to parse pool request for address space "Glob
 If you attempt the same operation from UCP's web administration, you receive
 the same error.
 
-![Network error](../images/network_gui_error.png)
+![Network error](images/network_gui_error.png)
 
 This error returns because the networking features rely on a key-value store. In
 a UCP environment, that key-value store is configured through UCP and protected
@@ -91,7 +91,7 @@ If you used public IP addresses, do the following:
     cloud provider's console or command line that this value is indeed the
     public IP. For example, the AWS console shows these values to you:
 
-    ![Open certs](../images/ip_cloud_provider.png)
+    ![Open certs](images/ip_cloud_provider.png)
 
 3. Note the host's IP address.
 
@@ -114,7 +114,7 @@ certificate. To do this on Chrome:
 
 2. In the address bar, click on the connection icon.
 
-    ![Open certs](../images/browser_cert_open.png)
+    ![Open certs](images/browser_cert_open.png)
 
     The browser opens displays the connection information. Depending on your Chrome version the dialog may be slightly different.
 
@@ -122,7 +122,7 @@ certificate. To do this on Chrome:
 
 4. Open the **Details** view and scroll down to the **Subject Alternative Name** section.
 
-    ![SAN](../images/browser_cert_san.png)
+    ![SAN](images/browser_cert_san.png)
 
 
 ## Configure networking and restart the daemon
