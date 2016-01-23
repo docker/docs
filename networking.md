@@ -12,7 +12,7 @@ subsystem. Along with host and bridge networks, you can now create custom
 networks that encompass multiple hosts running Docker Engine. This last feature
 is known as multi-host networking.
 
-- [Multi-host networking and UCP](#understand-multi-host-networking-and-ucp)
+- [Multi-host networking and UCP](#multi-host-networking-and-ucp)
 - [Prerequisites](#prerequisites)
 - [Configure networking and restart the daemon](#configure-networking-and-restart-the-daemon)
 - [Troubleshoot the daemon configuration](#troubleshoot-the-daemon-configuration)
