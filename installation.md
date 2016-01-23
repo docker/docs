@@ -13,7 +13,7 @@ These instructions explain how to install Docker Universal Control Plane (UCP). 
 - [Plan your installation](#plan-your-installation)
 - [Step 1: Verify you have the prerequisites](#step-1-verify-you-have-the-prerequisites)
 - [Step 2: Configure your network for UCP](#step-2-configure-your-network-for-ucp)
-- [Step 3: Install Docker CS Engine 1.9](#step-3-install-docker-cs-engine-1-9)
+- [Step 3: Install Docker CS Engine 1.9](#step-3-install-docker-cs-engine)
 - [Step 4: (optional) Create user-named volumes](#step-4-optional-create-user-named-volumes)
 - [Step 5: Install the UCP controller](#step-5-install-the-ucp-controller)
 - [Step 6: (optional) Add a controller replica to the UCP cluster](#step-6-optional-add-a-controller-replica-to-the-ucp-cluster)
@@ -200,7 +200,7 @@ TLS for you automatically.
 Finally, you can specify a different port for the Swarm manager if you need to.
 Using a different  port is a customization. These instructions assume you are using the default `2376` port.
 
-## Step 3: Install Docker CS Engine 1.9
+## Step 3: Install Docker CS Engine
 
 The BETA program requires that you install the Docker CS Engine 1.9.0 or above.
 Follow the instructions for your particular operating system and ensure
@@ -262,7 +262,7 @@ install:
 
     If you are installing on a cloud provider such as AWS, make sure the instance has a public IP or hostname.
 
-    ![Open certs](../images/ip_cloud_provider.png)
+    ![Open certs](images/ip_cloud_provider.png)
 
 2. Run the `ucp` command interactively.
 
@@ -284,14 +284,14 @@ install:
 
     The login screen displays.
 
-    ![](../images/login.png)
+    ![](images/login.png)
 
 5. Enter `admin` for the username along with the password you provided to the `install`.
 
     If you didn't enter an admin password, the default password is `orca` After
     you enter the correct credentials, the UCP dashboard displays.
 
-    ![](../images/dashboard.png)
+    ![](images/dashboard.png)
 
     The dashboard shows a single node, your controller node.
 
@@ -351,7 +351,7 @@ When you have the information you'll be prompted for, do the following to instal
 
     Simply clicking on the nodes from the Dashboard takes you to the page. The page should display your new nodes.
 
-      ![](../images/nodes.png)
+      ![](images/nodes.png)
 
 
 ## Step 7: Add an Engine node to the UCP cluster
@@ -388,7 +388,7 @@ When you have the information you'll be prompted for, do the following to instal
 
     Simply clicking on the nodes from the Dashboard takes you to the page. The page should display your new nodes.
 
-      ![](../images/nodes.png)
+      ![](images/nodes.png)
 
 ## Step 8: Set up certs for the Docker CLI
 

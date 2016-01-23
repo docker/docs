@@ -11,10 +11,10 @@ weight="-100"
 
 The following are available:
 
-* [Release Notes](release_notes)
-* [UCP Quickstart Guide](installation)  
-* [Key/Value Store Backends](kv_store )   
-* [Manually setting up a CA](certs)  
-* [Set up container networking with UCP](networking)  
-* [Set up high availability](understand_ha)  
-* [Work with Docker Support](support)
+* [Release Notes](release_notes.md)
+* [UCP Quickstart Guide](installation.md)
+* [Key/Value Store Backends](kv_store.md)
+* [Manually setting up a CA](certs.md)
+* [Set up container networking with UCP](networking.md)
+* [Set up high availability](understand_ha.md)
+* [Work with Docker Support](support.md)
