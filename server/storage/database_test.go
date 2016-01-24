@@ -3,6 +3,7 @@ package storage
 import (
 	"crypto/sha256"
 	"encoding/hex"
+	"encoding/json"
 	"io/ioutil"
 	"os"
 	"testing"
@@ -439,4 +440,64 @@ func TestDBCheckHealthSucceeds(t *testing.T) {
 
 	err = dbStore.CheckHealth()
 	require.NoError(t, err)
+}
+
+func TestDBGetChecksum(t *testing.T) {
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	_, store := SetUpSQLite(t, tempBaseDir)
+	defer os.RemoveAll(tempBaseDir)
+
+	ts := data.SignedTimestamp{
+		Signatures: make([]data.Signature, 0),
+		Signed: data.Timestamp{
+			Type:    data.TUFTypes["timestamp"],
+			Version: 1,
+			Expires: data.DefaultExpires("timestamp"),
+		},
+	}
+	j, err := json.Marshal(&ts)
+	require.NoError(t, err)
+	update := MetaUpdate{
+		Role:    data.CanonicalTimestampRole,
+		Version: 1,
+		Data:    j,
+	}
+	checksumBytes := sha256.Sum256(j)
+	checksum := hex.EncodeToString(checksumBytes[:])
+
+	store.UpdateCurrent("gun", update)
+
+	// create and add a newer timestamp. We're going to try and get the one
+	// created above by checksum
+	ts = data.SignedTimestamp{
+		Signatures: make([]data.Signature, 0),
+		Signed: data.Timestamp{
+			Type:    data.TUFTypes["timestamp"],
+			Version: 2,
+			Expires: data.DefaultExpires("timestamp"),
+		},
+	}
+	newJ, err := json.Marshal(&ts)
+	require.NoError(t, err)
+	update = MetaUpdate{
+		Role:    data.CanonicalTimestampRole,
+		Version: 2,
+		Data:    newJ,
+	}
+
+	store.UpdateCurrent("gun", update)
+
+	data, err := store.GetChecksum("gun", data.CanonicalTimestampRole, checksum)
+	require.NoError(t, err)
+	require.EqualValues(t, j, data)
+}
+
+func TestDBGetChecksumNotFound(t *testing.T) {
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	_, store := SetUpSQLite(t, tempBaseDir)
+	defer os.RemoveAll(tempBaseDir)
+
+	_, err = store.GetChecksum("gun", data.CanonicalTimestampRole, "12345")
+	require.Error(t, err)
+	require.IsType(t, ErrNotFound{}, err)
 }

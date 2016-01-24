@@ -127,7 +127,23 @@ func (db *SQLStorage) UpdateMany(gun string, updates []MetaUpdate) error {
 func (db *SQLStorage) GetCurrent(gun, tufRole string) ([]byte, error) {
 	var row TUFFile
 	q := db.Select("data").Where(&TUFFile{Gun: gun, Role: tufRole}).Order("version desc").Limit(1).First(&row)
+	return returnRead(q, row)
+}
 
+// GetChecksum gets a specific TUF record by its hex checksum
+func (db *SQLStorage) GetChecksum(gun, tufRole, checksum string) ([]byte, error) {
+	var row TUFFile
+	q := db.Select("data").Where(
+		&TUFFile{
+			Gun:    gun,
+			Role:   tufRole,
+			Sha256: checksum,
+		},
+	).First(&row)
+	return returnRead(q, row)
+}
+
+func returnRead(q *gorm.DB, row TUFFile) ([]byte, error) {
 	if q.RecordNotFound() {
 		return nil, ErrNotFound{}
 	} else if q.Error != nil {

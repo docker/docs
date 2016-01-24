@@ -29,6 +29,11 @@ type MetaStore interface {
 	// role, an error is returned.
 	GetCurrent(gun, tufRole string) (data []byte, err error)
 
+	// GetChecksum return the given tuf role file for the GUN with the
+	// provided checksum. If the given (gun, role, checksum) are not
+	// found, it returns storage.ErrNotFound
+	GetChecksum(gun, tufRole, checksum string) (data []byte, err error)
+
 	// Delete removes all metadata for a given GUN.  It does not return an
 	// error if no metadata exists for the given GUN.
 	Delete(gun string) error
