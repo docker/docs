@@ -3,7 +3,7 @@ title = "Account and repository management"
 description = "Account and repository management"
 keywords = ["docker, documentation, about, technology, hub, user interface, account management, accounts, enterprise"]
 [menu.main]
-parent="smn_dhe"
+parent="workw_dtr"
 weight=10
 +++
 

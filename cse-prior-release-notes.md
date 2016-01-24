@@ -3,7 +3,7 @@ title = "Prior CS Engine release notes"
 description = "Archived release notes for commercially supported Docker Engine"
 keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry,release, commercially supported Docker Engine"]
 [menu.main]
-parent="smn_dhe"
+parent="workw_dtr"
 weight=103
 +++
 

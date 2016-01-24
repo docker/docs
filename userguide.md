@@ -3,7 +3,7 @@ title = "User guide"
 description = "Documentation describing basic use of Docker Trusted Registry"
 keywords = ["docker, documentation, about, technology, hub, push, pull, user interface, account management, enterprise"]
 [menu.main]
-parent="smn_dhe"
+parent="workw_dtr"
 weight=3
 +++
 

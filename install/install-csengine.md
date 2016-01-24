@@ -3,7 +3,7 @@ title = "Manually Install the CS Docker Engine"
 description = "Install instructions for the commercially supported Docker Engine"
 keywords = ["docker, documentation, about, technology, enterprise, hub, commercially supported Docker Engine, CS Engine, registry, pin, patch, migrate"]
 [menu.main]
-parent="smn_dhe_install"
+parent="workw_dtr_install"
 +++
 
 

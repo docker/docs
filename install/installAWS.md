@@ -5,7 +5,7 @@ title = "Install AWS"
 description = "Install Trusted Registry in Amazon Web Services (BYOL)"
 keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry, AWS, AMI, Amazon"]
 [menu.main]
-parent="smn_dhe_install"
+parent="workw_dtr_install"
 +++
 
 

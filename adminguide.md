@@ -3,7 +3,7 @@ title = "Admin tasks"
 description = "Documentation describing administration of Docker Trusted Registry"
 keywords = ["docker, documentation, about, technology, hub, registry, enterprise, admin tasks, dashboard, settings, logs, reporting, Notary, diagnostics"]
 [menu.main]
-parent="smn_dhe"
+parent="workw_dtr"
 weight=4
 +++
 

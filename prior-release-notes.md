@@ -3,7 +3,7 @@ title = "Prior Trusted Registry release notes"
 description = "Archived release notes for Docker Trusted Registry"
 keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry, Docker Trusted Registry, release"]
 [menu.main]
-parent="smn_dhe"
+parent="workw_dtr"
 weight=101
 +++
 

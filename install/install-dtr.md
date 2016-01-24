@@ -3,7 +3,7 @@ title = "Manually install Trusted Registry"
 description = "Manually install Trusted Registry"
 keywords = ["docker, documentation, about, technology, understanding, enterprise, hub,  registry"]
 [menu.main]
-parent="smn_dhe_install"
+parent="workw_dtr_install"
 +++
 
 

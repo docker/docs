@@ -3,7 +3,7 @@ title = "Install on Microsoft Azure"
 description = "Install Trusted Registry in Microsoft Azure (BYOL)"
 keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry, Azure, VHD, Microsoft"]
 [menu.main]
-parent="smn_dhe_install"
+parent="workw_dtr_install"
 +++
 
 

@@ -4,8 +4,8 @@ title = "Trusted Registry License"
 description = "Trusted Registry License"
 keywords = ["docker, documentation, about, technology, hub, registry, license,  enterprise, CS engine script"]
 [menu.main]
-parent="smn_dhe"
-weight=9
+parent="workw_dtr"
+weight=90
 +++
 
 
@@ -13,7 +13,7 @@ weight=9
 
 To run Docker Trusted Registry, you need a Docker license, obtained either by
 purchasing Docker Trusted Registry, acquiring a trial license, or through an AWS
-hourly subscription. If you a purchase a license or you have a trial license, it is associated with your free Docker Hub account or Docker Hub organization. 
+hourly subscription. If you a purchase a license or you have a trial license, it is associated with your free Docker Hub account or Docker Hub organization.
 
 ## Get your Trusted Registry License
 

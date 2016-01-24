@@ -4,7 +4,7 @@ title = "Install Docker Engine for AWS AMI (BDS)"
 description = "Install Docker Engine for AWS AMI (BDS)"
 keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry, AWS, AMI, Amazon"]
 [menu.main]
-parent="smn_dhe_install"
+parent="workw_dtr_install"
 +++
 
 # Install Docker Engine for AWS AMI (BDS)

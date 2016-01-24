@@ -3,7 +3,7 @@ title = "Upgrade Trusted Registry and the CS Engine"
 description = "Upgrade Trusted Registry and the CS Engine"
 keywords = ["docker, documentation, about, technology, hub, upgrade, enterprise, pin, patch, migrate"]
 [menu.main]
-parent="smn_dhe_install"
+parent="workw_dtr_install"
 +++
 
 

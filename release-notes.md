@@ -3,7 +3,7 @@ title = "Docker Trusted Registry release notes"
 description = "Docker Trusted Registry release notes "
 keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry, release notes, Docker Trusted Registry"]
 [menu.main]
-parent="smn_dhe"
+parent="workw_dtr"
 weight=100
 +++
 

@@ -4,7 +4,7 @@ title = "CS Engine release notes"
 description = "Commercially supported Docker Engine release notes"
 keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry, Commercially Supported Docker Engine, release notes"]
 [menu.main]
-parent="smn_dhe"
+parent="workw_dtr"
 weight=102
 +++
 <![end-metadata]-->

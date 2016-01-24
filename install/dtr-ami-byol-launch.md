@@ -3,7 +3,7 @@ title = "Install Docker Subscription for AWS (BYOL))"
 description = "Install Docker Subscription for AWS (BYOL)"
 keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry, AWS, Amazon, AMI"]
 [menu.main]
-parent="smn_dhe_install"
+parent="workw_dtr_install"
 weight=-1
 +++
 

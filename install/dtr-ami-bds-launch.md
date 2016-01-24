@@ -3,7 +3,7 @@ title = "Install Trusted Registry for AWS AMI (BDS)"
 description = "Install Docker Trusted Registry for AWS (Business Day Support)"
 keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry, AWS, Amazon, AMI"]
 [menu.main]
-parent="smn_dhe_install"
+parent="workw_dtr_install"
 +++
 
 # Install Trusted Registry for AWS AMI (BDS)

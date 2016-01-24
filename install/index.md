@@ -3,8 +3,8 @@ title = "Installation"
 description = "Trusted Registry Installation Overview"
 keywords = ["docker, documentation, about, technology, install, enterprise, hub, CS engine, Docker Trusted Registry"]
 [menu.main]
-parent="smn_dhe"
-identifier="smn_dhe_install"
+parent="workw_dtr"
+identifier="workw_dtr_install"
 +++
 
 # Trusted Registry installation overview

@@ -4,7 +4,7 @@ title = "Support"
 description = "Commercial Support"
 keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry,  support"]
 [menu.main]
-parent="smn_dhe"
+parent="workw_dtr"
 weight=99
 +++
 

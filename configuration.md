@@ -3,7 +3,7 @@ title = "Configuration options"
 description = "Configuration instructions for Docker Trusted Registry"
 keywords = ["docker, documentation, about, technology, understanding, enterprise, hub,  registry"]
 [menu.main]
-parent="smn_dhe"
+parent="workw_dtr"
 weight=5
 +++
 

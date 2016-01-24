@@ -3,7 +3,7 @@ title = "Remove an image and garbage collection"
 description = "Remove an image and garbage collection"
 keywords = ["docker, documentation, about, technology, hub, registry, soft deletion, cron job, garbage collection, enterprise"]
 [menu.main]
-parent="smn_dhe"
+parent="workw_dtr"
 weight=12
 +++
 
