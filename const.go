@@ -2,7 +2,8 @@ package notary
 
 // application wide constants
 const (
-	// MaxMetaSize is the maximum size of metadata - 5MiB
+	// MaxMetaSize is the maximum size of metadata - 5MiB.
+	// Should be used only for testing, downloading new timestamps, or downloading roles when we have no local metadata
 	MaxMetaSize int64 = 5 << 20
 	// MinRSABitSize is the minimum bit size for RSA keys allowed in notary
 	MinRSABitSize = 2048
