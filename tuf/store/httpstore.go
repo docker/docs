@@ -23,6 +23,7 @@ import (
 	"path"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/docker/notary"
 	"github.com/docker/notary/tuf/validation"
 )
 
@@ -140,6 +141,7 @@ func translateStatusToError(resp *http.Response, resource string) error {
 // GetMeta downloads the named meta file with the given size. A short body
 // is acceptable because in the case of timestamp.json, the size is a cap,
 // not an exact length.
+// If size is -1, this corresponds to "infinite," but we cut off at 100MB
 func (s HTTPStore) GetMeta(name string, size int64) ([]byte, error) {
 	url, err := s.buildMetaURL(name)
 	if err != nil {
@@ -157,6 +159,9 @@ func (s HTTPStore) GetMeta(name string, size int64) ([]byte, error) {
 	if err := translateStatusToError(resp, name); err != nil {
 		logrus.Debugf("received HTTP status %d when requesting %s.", resp.StatusCode, name)
 		return nil, err
+	}
+	if size == -1 {
+		size = notary.MaxDownloadSize
 	}
 	if resp.ContentLength > size {
 		return nil, ErrMaliciousServer{}
