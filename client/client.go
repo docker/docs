@@ -53,9 +53,9 @@ type ErrInvalidRemoteRole struct {
 	Role string
 }
 
-func (e ErrInvalidRemoteRole) Error() string {
+func (err ErrInvalidRemoteRole) Error() string {
 	return fmt.Sprintf(
-		"notary does not support the server managing the %s key", e.Role)
+		"notary does not support the server managing the %s key", err.Role)
 }
 
 // ErrRepositoryNotExist is returned when an action is taken on a remote
