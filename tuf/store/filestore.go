@@ -2,6 +2,7 @@ package store
 
 import (
 	"fmt"
+	"github.com/docker/notary"
 	"io/ioutil"
 	"os"
 	"path"
@@ -45,6 +46,7 @@ func (f *FilesystemStore) getPath(name string) string {
 }
 
 // GetMeta returns the meta for the given name (a role) up to size bytes
+// If size is -1, this corresponds to "infinite," but we cut off at 100MB
 func (f *FilesystemStore) GetMeta(name string, size int64) ([]byte, error) {
 	meta, err := ioutil.ReadFile(f.getPath(name))
 	if err != nil {
@@ -52,6 +54,9 @@ func (f *FilesystemStore) GetMeta(name string, size int64) ([]byte, error) {
 			err = ErrMetaNotFound{Resource: name}
 		}
 		return nil, err
+	}
+	if size == -1 {
+		size = notary.MaxDownloadSize
 	}
 	// Only return up to size bytes
 	if int64(len(meta)) < size {

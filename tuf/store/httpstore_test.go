@@ -80,6 +80,56 @@ func TestHTTPStoreGetMeta(t *testing.T) {
 
 }
 
+// Test that passing -1 to httpstore's GetMeta will return all content
+func TestHTTPStoreGetAllMeta(t *testing.T) {
+	handler := func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte(testRoot))
+	}
+	server := httptest.NewServer(http.HandlerFunc(handler))
+	defer server.Close()
+	store, err := NewHTTPStore(
+		server.URL,
+		"metadata",
+		"txt",
+		"targets",
+		"key",
+		&http.Transport{},
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	j, err := store.GetMeta("root", -1)
+	if err != nil {
+		t.Fatal(err)
+	}
+	p := &data.Signed{}
+	err = json.Unmarshal(j, p)
+	if err != nil {
+		t.Fatal(err)
+	}
+	rootKey, err := base64.StdEncoding.DecodeString(testRootKey)
+	assert.NoError(t, err)
+	k := data.NewPublicKey("ecdsa-x509", rootKey)
+
+	sigBytes := p.Signatures[0].Signature
+	if err != nil {
+		t.Fatal(err)
+	}
+	var decoded map[string]interface{}
+	if err := json.Unmarshal(p.Signed, &decoded); err != nil {
+		t.Fatal(err)
+	}
+	msg, err := json.MarshalCanonical(decoded)
+	if err != nil {
+		t.Fatal(err)
+	}
+	method := p.Signatures[0].Method
+	err = signed.Verifiers[method].Verify(k, sigBytes, msg)
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestSetMultiMeta(t *testing.T) {
 	metas := map[string][]byte{
 		"root":    []byte("root data"),

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 
+	"github.com/docker/notary"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/utils"
 )
@@ -31,9 +32,13 @@ type memoryStore struct {
 	keys  map[string][]data.PrivateKey
 }
 
+// If size is -1, this corresponds to "infinite," but we cut off at 100MB
 func (m *memoryStore) GetMeta(name string, size int64) ([]byte, error) {
 	d, ok := m.meta[name]
 	if ok {
+		if size == -1 {
+			size = notary.MaxDownloadSize
+		}
 		if int64(len(d)) < size {
 			return d, nil
 		}

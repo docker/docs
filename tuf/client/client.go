@@ -130,7 +130,9 @@ func (c Client) checkRoot() error {
 func (c *Client) downloadRoot() error {
 	logrus.Debug("Downloading Root...")
 	role := data.CanonicalRootRole
-	size := notary.MaxMetaSize
+	// We can't read an exact size for the root metadata without risking getting stuck in the TUF update cycle
+	// since it's possible that downloading timestamp/snapshot metadata may fail due to a signature mismatch
+	var size int64 = -1
 	var expectedSha256 []byte
 	if c.local.Snapshot != nil {
 		size = c.local.Snapshot.Signed.Meta[role].Length
@@ -251,7 +253,7 @@ func (c *Client) downloadTimestamp() error {
 		old         *data.Signed
 		version     = 0
 	)
-	cachedTS, err := c.cache.GetMeta(role, notary.MaxMetaSize)
+	cachedTS, err := c.cache.GetMeta(role, notary.MaxTimestampSize)
 	if err == nil {
 		cached := &data.Signed{}
 		err := json.Unmarshal(cachedTS, cached)
@@ -265,7 +267,7 @@ func (c *Client) downloadTimestamp() error {
 	}
 	// unlike root, targets and snapshot, always try and download timestamps
 	// from remote, only using the cache one if we couldn't reach remote.
-	raw, s, err := c.downloadSigned(role, notary.MaxMetaSize, nil)
+	raw, s, err := c.downloadSigned(role, notary.MaxTimestampSize, nil)
 	if err != nil || len(raw) == 0 {
 		if old == nil {
 			if err == nil {
