@@ -743,14 +743,16 @@ func TestClientCertInteraction(t *testing.T) {
 	_, err = runCommand(t, tempDir, "-s", server.URL, "init", "gun2")
 	assert.NoError(t, err)
 	certs := assertNumCerts(t, tempDir, 2)
-	assertNumKeys(t, tempDir, 1, 4, !rootOnHardware())
+	// root is always on disk, because even if there's a yubikey a backup is created
+	assertNumKeys(t, tempDir, 1, 4, true)
 
 	// remove certs for one gun
 	_, err = runCommand(t, tempDir, "cert", "remove", "-g", "gun1", "-y")
 	assert.NoError(t, err)
 	certs = assertNumCerts(t, tempDir, 1)
 	// assert that when we remove cert by gun, we do not remove repo signing keys
-	assertNumKeys(t, tempDir, 1, 4, !rootOnHardware())
+	// (root is always on disk, because even if there's a yubikey a backup is created)
+	assertNumKeys(t, tempDir, 1, 4, true)
 	// assert that when we remove cert by gun, we also remove TUF metadata
 	_, err = os.Stat(filepath.Join(tempDir, "tuf", "gun1"))
 	assert.Error(t, err)
