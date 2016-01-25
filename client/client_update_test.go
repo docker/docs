@@ -638,11 +638,12 @@ func testUpdateRemoteNon200Error(t *testing.T, opts updateOpts, errExpected inte
 }
 
 // If there's no local cache, we go immediately to check the remote server for
-// root. Having extra spaces doesn't prevent it from validating during bootstrap,
+// root. If the root is corrupted in transit in such a way that the signature is
+// wrong, but it is correct in all other ways, then it validates during bootstrap,
 // but it will fail validation during update. So it will fail with or without
 // a force check (update for write).  If any of the other roles (except
-// timestamp, because there is no checksum for that) have an extra space, they
-// will also fail during update with the same error.
+// timestamp, because there is no checksum for that) are corrupted in the same
+// way, they will also fail during update with the same error.
 func TestUpdateRemoteChecksumWrongNoLocalCache(t *testing.T) {
 	for _, role := range append(data.BaseRoles, delegationsWithNonEmptyMetadata...) {
 		testUpdateRemoteFileChecksumWrong(t, updateOpts{
@@ -686,13 +687,14 @@ func TestUpdateRemoteChecksumWrongCanUseLocalCache(t *testing.T) {
 	}
 }
 
-// If there's is a local cache, but the remote server has new data (some corrupted),
-// we go immediately to check the remote server for root.  Having
-// extra spaces doesn't prevent it from validating during bootstrap,
+// If there's is a local cache, but the remote server has new data (some
+// corrupted), we go immediately to check the remote server for root.  If the
+// root is corrupted in transit in such a way that the signature is wrong, but
+// it is correct in all other ways, it from validates during bootstrap,
 // but it will fail validation during update. So it will fail with or without
 // a force check (update for write).  If any of the other roles (except
-// timestamp, because there is no checksum for that) have an extra space, they
-// will also fail during update with the same error.
+// timestamp, because there is no checksum for that) is corrupted in the same
+// way, they will also fail during update with the same error.
 func TestUpdateRemoteChecksumWrongCannotUseLocalCache(t *testing.T) {
 	for _, role := range append(data.BaseRoles, delegationsWithNonEmptyMetadata...) {
 		testUpdateRemoteFileChecksumWrong(t, updateOpts{
@@ -730,7 +732,7 @@ func testUpdateRemoteFileChecksumWrong(t *testing.T, opts updateOpts, errExpecte
 		bumpVersions(t, serverSwizzler, 1)
 	}
 
-	require.NoError(t, serverSwizzler.AddExtraSpace(opts.role), "failed to add space to %s", opts.role)
+	require.NoError(t, serverSwizzler.AddExtraSpace(opts.role), "failed to checksum-corrupt to %s", opts.role)
 
 	_, err := repo.Update(opts.forWrite)
 	if !errExpected {
@@ -816,8 +818,9 @@ func TestUpdateRootRemoteCorruptedNoLocalCache(t *testing.T) {
 	}
 	for _, testData := range waysToMessUpServer {
 		if testData.desc == "insufficient signatures" {
-			// TODO: bug right now if we download the root during the bootstrap phase,
-			// we don't check for enough signatures to meet the threshold
+			// Currently if we download the root during the bootstrap phase,
+			// we don't check for enough signatures to meet the threshold.  We
+			// are also not entirely sure if we want to support threshold.
 			continue
 		}
 
@@ -1013,8 +1016,9 @@ func TestUpdateLocalAndRemoteRootCorrupt(t *testing.T) {
 				continue
 			}
 			if serverExpt.desc == "insufficient signatures" {
-				// TODO: bug right now if we download the root during the bootstrap phase,
-				// we don't check for enough signatures to meet the threshold
+				// Currently if we download the root during the bootstrap phase,
+				// we don't check for enough signatures to meet the threshold.
+				// We are also not sure if we want to support thresholds.
 				continue
 			}
 			testUpdateLocalAndRemoteRootCorrupt(t, true, localExpt, serverExpt)
