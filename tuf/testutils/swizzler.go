@@ -5,13 +5,13 @@ import (
 	"path"
 	"time"
 
+	"github.com/docker/go/canonical/json"
 	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/store"
-	"github.com/jfrazelle/go/canonical/json"
 )
 
 const (

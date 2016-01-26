@@ -5,7 +5,7 @@ import (
 	"encoding/hex"
 	"testing"
 
-	"github.com/jfrazelle/go/canonical/json"
+	"github.com/docker/go/canonical/json"
 	"github.com/stretchr/testify/assert"
 )
 
