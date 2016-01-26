@@ -8,52 +8,48 @@ weight="-99"
 
 # UCP Release Notes
 
-The latest release is 0.7.  Consult with your Docker sales engineer for the
+The latest release is 0.8.  Consult with your Docker sales engineer for the
 release notes of earlier versions.
 
-## Version 0.7
+## Version 0.8
 
 The following notes apply to this release:
 
-### Public images on Docker Hub.
+### LDAP/AD integration
 
-The UCP images now live within the `docker` organization on Docker Hub, and
-are publicly accessible.
+You can now configure UCP to use an LDAP or Active Directory service
+for authentication.  When logged in with an admin account, go to the
+Settings page and select "LDAP" from the Auth Method pull-down.
 
-```bash
-docker run --rm -it \
-     --name ucp \
-     -v /var/run/docker.sock:/var/run/docker.sock \
-     docker/ucp \
-     install --help
-```
+### DTR integration
 
-### Upgrade
+You can now configure UCP to connect to a Docker Trusted Registry version
+1.4.3 or newer.
 
-Prior versions 0.5-0.6 of the beta can now be upgraded using the UCP tool.
-Run the following command to review usage information.
+### Teams and ACL
 
-```bash
-docker run --rm -it \
-    --name ucp \
-    -v /var/run/docker.sock:/var/run/docker.sock \
-    docker/ucp \
-    upgrade --help
-```
+Teams can be set up to map to LDAP/AD groups, or managed entirely
+within UCP.  Labels can then be set up on resources, and access can be
+granted to those labels.
+
+### Multi-host networking
+
+The UCP bootstrapping tool now contains a utility for viewing and
+configuring daemon configuraion.  After deploying your controllers
+and replica nodes, you can enable multi-host networking with the
+`engine-discovery` command.  For more usage information, run
+`docker run --rm docker/ucp engine-discovery --help`
 
 ### UI
 
-- New Volumes UI
-- Paged views for nodes, containers, images, networks, volumes, and accounts to better handle large
-  scale deployments.
-- Support for browser based client cert login.
-- Cluster Controllers listed on Nodes screen
-- Ability to disable anonymous usage reporting
+- Refined look and feel
+- Teams UI
+- LDAP/AD configuration UI
+- Collapseable navigation bar
 
 
 ### Misc
 
-- Fix restarting daemon or rebooting breaks cfssl and client bundle generation
-- Controller port can be changed at install time (default 443)
-- Fix TLS cipher support for direct admin access to engine proxy
-- Fix event streaming and logs with follow
+- Now requires engine 1.10.0-rc1 or newer
+- Etcd updated to 2.2.4
+- Swarm 1.1.0-RC2
