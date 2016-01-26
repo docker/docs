@@ -1,11 +1,24 @@
 #!/bin/bash
 set -e
 
-DB_NAME='notary'
+# Although the Notary-Server and Notary-Signer could use the same
+# database, it's better to seperate that for security.
+DB_NAME_SERVER='notaryserver'
+DB_NAME_SIGNER='notarysigner'
+DB_NAME=($DB_NAME_SERVER,$DB_NAME_SIGNER)
+
 DB_TABLE_FILES='tuf_files'
 DB_TABLE_KEYS='timestamp_keys'
 DB_USER='root'
 DB_PASS=''
+
+# Default username and password for Notary-Server
+DB_USER_SERVER='server'
+DB_PASS_SERVER=''
+
+# Default username and password for Notary-Signer
+DB_USER_SIGNER='signer'
+DB_PASS_SIGNER=''
 
 DB_REMOTE_ROOT_NAME=''
 DB_REMOTE_ROOT_PASS=''
@@ -101,10 +114,15 @@ if [ -n "${DB_USER}" -o -n "${DB_NAME}" ]; then
         echo "Creating database \"$db\"..."
         mysql --defaults-file=/etc/mysql/debian.cnf \
           -e "CREATE DATABASE IF NOT EXISTS \`$db\` DEFAULT CHARACTER SET \`utf8\` COLLATE \`utf8_unicode_ci\`;"
-          if [ -n "${DB_USER}" ]; then
-            echo "Granting access to database \"$db\" for user \"${DB_USER}\"..."
+          if [ -n "${DB_USER_SERVER}" -a $db = $DB_NAME_SERVER ]; then
+            echo "Granting access to database \"$db\" for user \"${DB_USER_SERVER}\"..."
             mysql --defaults-file=/etc/mysql/debian.cnf \
-            -e "GRANT ALL PRIVILEGES ON \`$db\`.* TO '${DB_USER}' IDENTIFIED BY '${DB_PASS}';"
+            -e "GRANT ALL PRIVILEGES ON \`$db\`.* TO '${DB_USER_SERVER}' IDENTIFIED BY '${DB_PASS_SERVER}';"
+          fi
+          if [ -n "${DB_USER_SIGNER}" -a $db = $DB_NAME_SIGNER ]; then
+            echo "Granting access to database \"$db\" for user \"${DB_USER_SIGNER}\"..."
+            mysql --defaults-file=/etc/mysql/debian.cnf \
+            -e "GRANT ALL PRIVILEGES ON \`$db\`.* TO '${DB_USER_SIGNER}' IDENTIFIED BY '${DB_PASS_SIGNER}';"
           fi
           # Create our Database:
           mysql -uroot $db < ./initial.sql
