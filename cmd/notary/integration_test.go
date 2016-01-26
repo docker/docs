@@ -189,7 +189,7 @@ func TestClientDelegationsInteraction(t *testing.T) {
 	// list delegations - none yet
 	output, err = runCommand(t, tempDir, "-s", server.URL, "delegation", "list", "gun")
 	assert.NoError(t, err)
-	assert.Contains(t, output, "No such roles published in this repository.")
+	assert.Contains(t, output, "No delegations present in this repository.")
 
 	// add new valid delegation with single new cert
 	output, err = runCommand(t, tempDir, "delegation", "add", "gun", "targets/delegation", tempFile.Name())
@@ -204,7 +204,7 @@ func TestClientDelegationsInteraction(t *testing.T) {
 	// list delegations - none yet because still unpublished
 	output, err = runCommand(t, tempDir, "-s", server.URL, "delegation", "list", "gun")
 	assert.NoError(t, err)
-	assert.Contains(t, output, "No such roles published in this repository.")
+	assert.Contains(t, output, "No delegations present in this repository.")
 
 	// publish repo
 	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
@@ -281,7 +281,7 @@ func TestClientDelegationsInteraction(t *testing.T) {
 	// list delegations - we should see no delegations
 	output, err = runCommand(t, tempDir, "-s", server.URL, "delegation", "list", "gun")
 	assert.NoError(t, err)
-	assert.Contains(t, output, "No such roles published in this repository.")
+	assert.Contains(t, output, "No delegations present in this repository.")
 
 	// add delegation with multiple certs and multiple paths
 	output, err = runCommand(t, tempDir, "delegation", "add", "gun", "targets/delegation", tempFile.Name(), tempFile2.Name(), "--paths", "path1,path2")
@@ -350,7 +350,7 @@ func TestClientDelegationsInteraction(t *testing.T) {
 	// remove by force to delete the delegation entirely
 	output, err = runCommand(t, tempDir, "delegation", "remove", "gun", "targets/delegation", "-y")
 	assert.NoError(t, err)
-	assert.Contains(t, output, "Removal of delegation role")
+	assert.Contains(t, output, "Forced removal (including all keys and paths) of delegation role")
 
 	// publish repo
 	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
@@ -359,7 +359,7 @@ func TestClientDelegationsInteraction(t *testing.T) {
 	// list delegations - we should see no delegations
 	output, err = runCommand(t, tempDir, "-s", server.URL, "delegation", "list", "gun")
 	assert.NoError(t, err)
-	assert.Contains(t, output, "No such roles published in this repository.")
+	assert.Contains(t, output, "No delegations present in this repository.")
 }
 
 // Splits a string into lines, and returns any lines that are not empty (
