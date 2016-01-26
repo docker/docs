@@ -20,6 +20,7 @@ const (
 )
 
 var (
+	debug             bool
 	verbose           bool
 	trustDir          string
 	configFile        string
@@ -37,10 +38,7 @@ func init() {
 }
 
 func parseConfig() *viper.Viper {
-	if verbose {
-		logrus.SetLevel(logrus.DebugLevel)
-		logrus.SetOutput(os.Stderr)
-	}
+	setVerbosityLevel()
 
 	// Get home directory for current user
 	homeDir, err := homedir.Dir()
@@ -112,6 +110,7 @@ func setupCommand(notaryCmd *cobra.Command) {
 	notaryCmd.PersistentFlags().StringVarP(&trustDir, "trustDir", "d", "", "Directory where the trust data is persisted to")
 	notaryCmd.PersistentFlags().StringVarP(&configFile, "configFile", "c", "", "Path to the configuration file to use")
 	notaryCmd.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "Verbose output")
+	notaryCmd.PersistentFlags().BoolVarP(&debug, "debug", "D", false, "Debug output")
 	notaryCmd.PersistentFlags().StringVarP(&remoteTrustServer, "server", "s", "", "Remote trust server location")
 
 	cmdKeyGenerator := &keyCommander{
@@ -179,4 +178,16 @@ func getPassphraseRetriever() passphrase.Retriever {
 		}
 		return baseRetriever(keyName, alias, createNew, numAttempts)
 	}
+}
+
+// Set the logging level to fatal on default, or the most specific level the user specified (debug or error)
+func setVerbosityLevel() {
+	if debug {
+		logrus.SetLevel(logrus.DebugLevel)
+	} else if verbose {
+		logrus.SetLevel(logrus.ErrorLevel)
+	} else {
+		logrus.SetLevel(logrus.FatalLevel)
+	}
+	logrus.SetOutput(os.Stderr)
 }
