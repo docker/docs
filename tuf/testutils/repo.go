@@ -5,13 +5,13 @@ import (
 	"sort"
 	"time"
 
+	"github.com/docker/go/canonical/json"
 	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/utils"
 	fuzz "github.com/google/gofuzz"
-	"github.com/jfrazelle/go/canonical/json"
 
 	tuf "github.com/docker/notary/tuf"
 	"github.com/docker/notary/tuf/keys"
