@@ -14,24 +14,18 @@ import (
 
 const (
 	testKeyPEM1 = "-----BEGIN PUBLIC KEY-----\nMIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAnKuXZeefa2LmgxaL5NsM\nzKOHNe+x/nL6ik+lDBCTV6OdcwAhHQS+PONGhrChIUVR6Vth3hUCrreLzPO73Oo5\nVSCuRJ53UronENl6lsa5mFKP8StYLvIDITNvkoT3j52BJIjyNUK9UKY9As2TNqDf\nBEPIRp28ev/NViwGOEkBu2UAbwCIdnDXm8JQErCZA0Ydm7PKGgjLbFsFGrVzqXHK\n6pdzJXlhr9yap3UpgQ/iO9JtoEYB2EXsnSrPc9JRjR30bNHHtnVql3fvinXrAEwq\n3xmN4p+R4VGzfdQN+8Kl/IPjqWB535twhFYEG/B7Ze8IwbygBjK3co/KnOPqMUrM\nBI8ztvPiogz+MvXb8WvarZ6TMTh8ifZI96r7zzqyzjR1hJulEy3IsMGvz8XS2J0X\n7sXoaqszEtXdq5ef5zKVxkiyIQZcbPgmpHLq4MgfdryuVVc/RPASoRIXG4lKaTJj\n1ANMFPxDQpHudCLxwCzjCb+sVa20HBRPTnzo8LSZkI6jAgMBAAE=\n-----END PUBLIC KEY-----"
-	testKeyID1  = "51324b59d4888faa91219ebbe5a3876bb4efb21f0602ddf363cd4c3996ded3d4"
 )
 
+// A CryptoService which does not contain any keys.
 type FailingCryptoService struct {
-	testKey data.PrivateKey
-}
-
-func (mts *FailingCryptoService) Sign(keyIDs []string, _ []byte) ([]data.Signature, error) {
-	sigs := make([]data.Signature, 0, len(keyIDs))
-	return sigs, nil
 }
 
 func (mts *FailingCryptoService) Create(_, _, _ string) (data.PublicKey, error) {
-	return mts.testKey, nil
+	return nil, nil
 }
 
 func (mts *FailingCryptoService) ListKeys(role string) []string {
-	return []string{mts.testKey.ID()}
+	return []string{}
 }
 
 func (mts *FailingCryptoService) AddKey(role, gun string, key data.PrivateKey) error {
@@ -39,25 +33,14 @@ func (mts *FailingCryptoService) AddKey(role, gun string, key data.PrivateKey) e
 }
 
 func (mts *FailingCryptoService) ListAllKeys() map[string]string {
-	return map[string]string{
-		mts.testKey.ID(): data.CanonicalRootRole,
-		mts.testKey.ID(): data.CanonicalTargetsRole,
-		mts.testKey.ID(): data.CanonicalSnapshotRole,
-		mts.testKey.ID(): data.CanonicalTimestampRole,
-	}
+	return map[string]string{}
 }
 
 func (mts *FailingCryptoService) GetKey(keyID string) data.PublicKey {
-	if keyID == "testID" {
-		return data.PublicKeyFromPrivate(mts.testKey)
-	}
 	return nil
 }
 
 func (mts *FailingCryptoService) GetPrivateKey(keyID string) (data.PrivateKey, string, error) {
-	if mts.testKey != nil {
-		return mts.testKey, "testRole", nil
-	}
 	return nil, "", trustmanager.ErrKeyNotFound{KeyID: keyID}
 }
 
@@ -65,16 +48,9 @@ func (mts *FailingCryptoService) RemoveKey(keyID string) error {
 	return nil
 }
 
+// A CryptoService which only only allows using one key
 type MockCryptoService struct {
 	testKey data.PrivateKey
-}
-
-func (mts *MockCryptoService) Sign(keyIDs []string, _ []byte) ([]data.Signature, error) {
-	sigs := make([]data.Signature, 0, len(keyIDs))
-	for _, keyID := range keyIDs {
-		sigs = append(sigs, data.Signature{KeyID: keyID})
-	}
-	return sigs, nil
 }
 
 func (mts *MockCryptoService) Create(_, _, _ string) (data.PublicKey, error) {
@@ -86,7 +62,7 @@ func (mts *MockCryptoService) AddKey(role, gun string, key data.PrivateKey) erro
 }
 
 func (mts *MockCryptoService) GetKey(keyID string) data.PublicKey {
-	if keyID == "testID" {
+	if keyID == mts.testKey.ID() {
 		return data.PublicKeyFromPrivate(mts.testKey)
 	}
 	return nil
@@ -106,40 +82,13 @@ func (mts *MockCryptoService) ListAllKeys() map[string]string {
 }
 
 func (mts *MockCryptoService) GetPrivateKey(keyID string) (data.PrivateKey, string, error) {
-	return mts.testKey, "testRole", nil
+	if keyID == mts.testKey.ID() {
+		return mts.testKey, "testRole", nil
+	}
+	return nil, "", trustmanager.ErrKeyNotFound{KeyID: keyID}
 }
 
 func (mts *MockCryptoService) RemoveKey(keyID string) error {
-	return nil
-}
-
-var _ CryptoService = &MockCryptoService{}
-
-type StrictMockCryptoService struct {
-	MockCryptoService
-}
-
-func (mts *StrictMockCryptoService) GetKey(keyID string) data.PublicKey {
-	if keyID == mts.testKey.ID() {
-		return data.PublicKeyFromPrivate(mts.testKey)
-	}
-	return nil
-}
-
-func (mts *StrictMockCryptoService) ListKeys(role string) []string {
-	return []string{mts.testKey.ID()}
-}
-
-func (mts *StrictMockCryptoService) ListAllKeys() map[string]string {
-	return map[string]string{
-		mts.testKey.ID(): data.CanonicalRootRole,
-		mts.testKey.ID(): data.CanonicalTargetsRole,
-		mts.testKey.ID(): data.CanonicalSnapshotRole,
-		mts.testKey.ID(): data.CanonicalTimestampRole,
-	}
-}
-
-func (mts *StrictMockCryptoService) AddKey(role, gun string, key data.PrivateKey) error {
 	return nil
 }
 
@@ -261,7 +210,7 @@ func TestSignWithX509(t *testing.T) {
 
 	// test signing against a service that only recognizes a RSAKey (not
 	// RSAx509 key)
-	mockCryptoService := &StrictMockCryptoService{MockCryptoService{privKey}}
+	mockCryptoService := &MockCryptoService{privKey}
 	testData := data.Signed{
 		Signed: &json.RawMessage{},
 	}
