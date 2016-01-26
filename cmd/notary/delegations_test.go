@@ -80,6 +80,18 @@ func TestRemoveInvalidDelegationName(t *testing.T) {
 	assert.Error(t, err)
 }
 
+func TestRemoveAllInvalidDelegationName(t *testing.T) {
+	// Cleanup after test
+	defer os.RemoveAll(testTrustDir)
+
+	// Setup commander
+	commander := setup()
+
+	// Should error due to invalid delegation name (should be prefixed by "targets/")
+	err := commander.delegationRemove(commander.GetCommand(), []string{"gun", "INVALID_NAME"})
+	assert.Error(t, err)
+}
+
 func TestAddInvalidNumArgs(t *testing.T) {
 	// Setup commander
 	commander := setup()
