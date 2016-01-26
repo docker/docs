@@ -11,11 +11,11 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/docker/go/canonical/json"
 	"github.com/docker/notary/client"
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
-	"github.com/jfrazelle/go/canonical/json"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"

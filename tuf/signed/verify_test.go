@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/jfrazelle/go/canonical/json"
+	"github.com/docker/go/canonical/json"
 	"github.com/stretchr/testify/assert"
 
 	"github.com/docker/notary/tuf/data"

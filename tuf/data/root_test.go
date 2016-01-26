@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	cjson "github.com/jfrazelle/go/canonical/json"
+	cjson "github.com/docker/go/canonical/json"
 	"github.com/stretchr/testify/require"
 )
 
