@@ -1,6 +1,21 @@
 #!/bin/bash
 set -e
 
+# This database is used by both of Notary-Server and Notary-Signer
+# the early days which we would not use it any longer.
+DB_NAME_OLD='notary'
+
+# Message which will be displayed when the database 'notary' exsit.
+DB_WARNING="
+=============== WARNING =================
+# The schema has changed.               #
+# People should migrate those tables in #
+# 'notary'                              #
+# to                                    #
+# 'notaryserver' and 'notarysigner'     #
+=========================================
+"
+
 # Although the Notary-Server and Notary-Signer could use the same
 # database, it's better to seperate that for security.
 DB_NAME_SERVER='notaryserver'
@@ -105,6 +120,14 @@ if [ -n "${DB_USER}" -o -n "${DB_NAME}" ]; then
     fi
     sleep 1
   done
+
+  # To check whether the old database is exist or not and warning people to
+  # manually migrate those tables.
+  if [ -n "${DB_NAME_OLD}" ]; then
+      if mysql --defaults-file=/etc/mysql/debian.cnf -e "USE $DB_NAME_OLD;" 2>/dev/null; then
+        echo "$DB_WARNING"
+      fi
+  fi
 
   if [ -n "${DB_NAME}" ]; then
     for db in $(awk -F',' '{for (i = 1 ; i <= NF ; i++) print $i}' <<< "${DB_NAME}"); do
