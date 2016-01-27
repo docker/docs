@@ -141,15 +141,17 @@ if [ -n "${DB_USER}" -o -n "${DB_NAME}" ]; then
             echo "Granting access to database \"$db\" for user \"${DB_USER_SERVER}\"..."
             mysql --defaults-file=/etc/mysql/debian.cnf \
             -e "GRANT ALL PRIVILEGES ON \`$db\`.* TO '${DB_USER_SERVER}' IDENTIFIED BY '${DB_PASS_SERVER}';"
+            # Create our Database:
+            mysql -uroot $db < ./initial-notaryserver.sql
+            mysql -uroot $db < ./migrate-notaryserver.sql
           fi
           if [ -n "${DB_USER_SIGNER}" -a $db = $DB_NAME_SIGNER ]; then
             echo "Granting access to database \"$db\" for user \"${DB_USER_SIGNER}\"..."
             mysql --defaults-file=/etc/mysql/debian.cnf \
             -e "GRANT ALL PRIVILEGES ON \`$db\`.* TO '${DB_USER_SIGNER}' IDENTIFIED BY '${DB_PASS_SIGNER}';"
+            # Create our Database:
+            mysql -uroot $db < ./initial-notarysigner.sql
           fi
-          # Create our Database:
-          mysql -uroot $db < ./initial.sql
-          mysql -uroot $db < ./migrate.sql
       fi
     done
   fi
