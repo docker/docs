@@ -639,9 +639,11 @@ func TestGetDelegationRoleAndMetadataExistDelegationExists(t *testing.T) {
 	assert.NoError(t, err)
 	assert.NoError(t, repo.UpdateDelegations(role, data.KeyList{testKey}))
 
-	gottenRole, err := repo.GetDelegation("targets/level1/level2")
+	gottenRole, gottenKeys, err := repo.GetDelegation("targets/level1/level2")
 	assert.NoError(t, err)
 	assert.Equal(t, role, gottenRole)
+	_, ok := gottenKeys[testKey.ID()]
+	assert.True(t, ok)
 }
 
 // If the parent exists, the metadata exists, and the delegation isn't in it,
@@ -662,7 +664,7 @@ func TestGetDelegationRoleAndMetadataExistDelegationDoesntExists(t *testing.T) {
 	// ensure metadata exists
 	repo.InitTargets("targets/level1")
 
-	_, err = repo.GetDelegation("targets/level1/level2")
+	_, _, err = repo.GetDelegation("targets/level1/level2")
 	assert.Error(t, err)
 	assert.IsType(t, data.ErrNoSuchRole{}, err)
 }
@@ -685,7 +687,7 @@ func TestGetDelegationRoleAndMetadataDoesntExists(t *testing.T) {
 	_, ok := repo.Targets["targets/test"]
 	assert.False(t, ok, "no targets file should be created for empty delegation")
 
-	_, err = repo.GetDelegation("targets/level1/level2")
+	_, _, err = repo.GetDelegation("targets/level1/level2")
 	assert.Error(t, err)
 	assert.IsType(t, data.ErrNoSuchRole{}, err)
 }
@@ -696,7 +698,7 @@ func TestGetDelegationParentMissing(t *testing.T) {
 	keyDB := keys.NewDB()
 	repo := initRepo(t, ed25519, keyDB)
 
-	_, err := repo.GetDelegation("targets/level1/level2")
+	_, _, err := repo.GetDelegation("targets/level1/level2")
 	assert.Error(t, err)
 	assert.IsType(t, data.ErrInvalidRole{}, err)
 }

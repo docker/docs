@@ -23,6 +23,7 @@ import (
 	"github.com/docker/notary/tuf/keys"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/store"
+	"github.com/docker/notary/tuf/utils"
 )
 
 func init() {
@@ -529,6 +530,7 @@ func (r *NotaryRepository) GetChangelist() (changelist.Changelist, error) {
 }
 
 // GetDelegationRoles returns the keys and roles of the repository's delegations
+// Also converts key IDs to canonical key IDs to keep consistent with signing prompts
 func (r *NotaryRepository) GetDelegationRoles() ([]*data.Role, error) {
 	// Update state of the repo to latest
 	if _, err := r.Update(false); err != nil {
@@ -541,7 +543,11 @@ func (r *NotaryRepository) GetDelegationRoles() ([]*data.Role, error) {
 		return nil, store.ErrMetaNotFound{Resource: data.CanonicalTargetsRole}
 	}
 
-	allDelegations := targets.Signed.Delegations.Roles
+	// make a copy of top-level Delegations and only show canonical key IDs
+	allDelegations, err := translateDelegationsToCanonicalIDs(targets.Signed.Delegations)
+	if err != nil {
+		return nil, err
+	}
 
 	// make a copy for traversing nested delegations
 	delegationsList := make([]*data.Role, len(allDelegations))
@@ -560,11 +566,40 @@ func (r *NotaryRepository) GetDelegationRoles() ([]*data.Role, error) {
 			continue
 		}
 
-		// Add nested delegations to return list and exploration list
-		allDelegations = append(allDelegations, delegationMeta.Signed.Delegations.Roles...)
+		// For the return list, update with a copy that includes canonicalKeyIDs
+		canonicalDelegations, err := translateDelegationsToCanonicalIDs(delegationMeta.Signed.Delegations)
+		if err != nil {
+			return nil, err
+		}
+		allDelegations = append(allDelegations, canonicalDelegations...)
+		// Add nested delegations to the exploration list
 		delegationsList = append(delegationsList, delegationMeta.Signed.Delegations.Roles...)
 	}
+
+	// Convert all key IDs to canonical IDs:
 	return allDelegations, nil
+}
+
+func translateDelegationsToCanonicalIDs(delegationInfo data.Delegations) ([]*data.Role, error) {
+	canonicalDelegations := make([]*data.Role, len(delegationInfo.Roles))
+	copy(canonicalDelegations, delegationInfo.Roles)
+	delegationKeys := delegationInfo.Keys
+	for i, delegation := range canonicalDelegations {
+		canonicalKeyIDs := []string{}
+		for _, keyID := range delegation.KeyIDs {
+			pubKey, ok := delegationKeys[keyID]
+			if !ok {
+				return nil, fmt.Errorf("Could not translate canonical key IDs for %s", delegation.Name)
+			}
+			canonicalKeyID, err := utils.CanonicalKeyID(pubKey)
+			if err != nil {
+				return nil, fmt.Errorf("Could not translate canonical key IDs for %s: %v", delegation.Name, err)
+			}
+			canonicalKeyIDs = append(canonicalKeyIDs, canonicalKeyID)
+		}
+		canonicalDelegations[i].KeyIDs = canonicalKeyIDs
+	}
+	return canonicalDelegations, nil
 }
 
 // RoleWithSignatures is a Role with its associated signatures

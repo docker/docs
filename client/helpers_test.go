@@ -504,10 +504,14 @@ func TestApplyTargetsDelegationCreateAlreadyExisting(t *testing.T) {
 	// when attempting to create the same role again, check that we added a key
 	err = applyTargetsChange(repo, ch)
 	assert.NoError(t, err)
-	delegation, err := repo.GetDelegation("targets/level1")
+	delegation, keys, err := repo.GetDelegation("targets/level1")
 	assert.NoError(t, err)
 	assert.Contains(t, delegation.Paths, "level1")
 	assert.Equal(t, len(delegation.KeyIDs), 2)
+	for _, keyID := range delegation.KeyIDs {
+		_, ok := keys[keyID]
+		assert.True(t, ok)
+	}
 }
 
 func TestApplyTargetsDelegationAlreadyExistingMergePaths(t *testing.T) {
@@ -559,7 +563,7 @@ func TestApplyTargetsDelegationAlreadyExistingMergePaths(t *testing.T) {
 	// merged with previous details
 	err = applyTargetsChange(repo, ch)
 	assert.NoError(t, err)
-	delegation, err := repo.GetDelegation("targets/level1")
+	delegation, _, err := repo.GetDelegation("targets/level1")
 	assert.NoError(t, err)
 	// Assert we have both paths
 	assert.Contains(t, delegation.Paths, "level2")
