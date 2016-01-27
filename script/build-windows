@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/bin/sh
+
+set -e
 
 docker build -t windows-installer -f Dockerfile.windows .
 CONTAINER="$(docker run -d windows-installer)"
