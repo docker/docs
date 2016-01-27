@@ -2312,7 +2312,9 @@ func TestPublishRemoveDelgation(t *testing.T) {
 	assert.NoError(t, delgRepo.Publish())
 
 	// owner removes delegation
-	assert.NoError(t, ownerRepo.RemoveDelegation("targets/a", []string{aKey.ID()}, []string{}, false))
+	aKeyCanonicalID, err := utils.CanonicalKeyID(aKey)
+	assert.NoError(t, err)
+	assert.NoError(t, ownerRepo.RemoveDelegation("targets/a", []string{aKeyCanonicalID}, []string{}, false))
 	assert.NoError(t, ownerRepo.Publish())
 
 	// delegated repo can now no longer publish to delegated role
@@ -2696,7 +2698,9 @@ func TestRemoveDelegationChangefileApplicable(t *testing.T) {
 	assert.Len(t, targetRole.Signed.Delegations.Keys, 1)
 
 	// now remove it
-	assert.NoError(t, repo.RemoveDelegation("targets/a", []string{rootKeyID}, []string{}, false))
+	rootKeyCanonicalID, err := utils.CanonicalKeyID(rootPubKey)
+	assert.NoError(t, err)
+	assert.NoError(t, repo.RemoveDelegation("targets/a", []string{rootKeyCanonicalID}, []string{}, false))
 	changes = getChanges(t, repo)
 	assert.Len(t, changes, 2)
 	assert.NoError(t, applyTargetsChange(repo.tufRepo, changes[1]))

@@ -24,6 +24,7 @@ import (
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
+	"github.com/docker/notary/tuf/utils"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
@@ -172,7 +173,8 @@ func TestClientDelegationsInteraction(t *testing.T) {
 
 	rawPubBytes, _ := ioutil.ReadFile(tempFile.Name())
 	parsedPubKey, _ := trustmanager.ParsePEMPublicKey(rawPubBytes)
-	keyID := parsedPubKey.ID()
+	keyID, err := utils.CanonicalKeyID(parsedPubKey)
+	assert.NoError(t, err)
 
 	var output string
 
@@ -219,6 +221,7 @@ func TestClientDelegationsInteraction(t *testing.T) {
 	output, err = runCommand(t, tempDir, "-s", server.URL, "delegation", "list", "gun")
 	assert.NoError(t, err)
 	assert.Contains(t, output, "targets/delegation")
+	assert.Contains(t, output, keyID)
 
 	// Setup another certificate
 	tempFile2, err := ioutil.TempFile("/tmp", "pemfile2")
@@ -238,9 +241,10 @@ func TestClientDelegationsInteraction(t *testing.T) {
 
 	rawPubBytes2, _ := ioutil.ReadFile(tempFile2.Name())
 	parsedPubKey2, _ := trustmanager.ParsePEMPublicKey(rawPubBytes2)
-	keyID2 := parsedPubKey2.ID()
+	keyID2, err := utils.CanonicalKeyID(parsedPubKey2)
+	assert.NoError(t, err)
 
-	// add to the delegation by specifying the same role, this time add a path
+	// add to the delegation by specifying the same role, this time add another key and path
 	output, err = runCommand(t, tempDir, "delegation", "add", "gun", "targets/delegation", tempFile2.Name(), "--paths", "path")
 	assert.NoError(t, err)
 	assert.Contains(t, output, "Addition of delegation role")
@@ -254,6 +258,8 @@ func TestClientDelegationsInteraction(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Contains(t, output, ",")
 	assert.Contains(t, output, "path")
+	assert.Contains(t, output, keyID)
+	assert.Contains(t, output, keyID2)
 
 	// remove the delegation's first key
 	output, err = runCommand(t, tempDir, "delegation", "remove", "gun", "targets/delegation", keyID)
@@ -267,7 +273,8 @@ func TestClientDelegationsInteraction(t *testing.T) {
 	// list delegations - we should see the delegation but with only the second key
 	output, err = runCommand(t, tempDir, "-s", server.URL, "delegation", "list", "gun")
 	assert.NoError(t, err)
-	assert.NotContains(t, output, ",")
+	assert.NotContains(t, output, keyID)
+	assert.Contains(t, output, keyID2)
 
 	// remove the delegation's second key
 	output, err = runCommand(t, tempDir, "delegation", "remove", "gun", "targets/delegation", keyID2)
@@ -297,6 +304,8 @@ func TestClientDelegationsInteraction(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Contains(t, output, ",")
 	assert.Contains(t, output, "path1,path2")
+	assert.Contains(t, output, keyID)
+	assert.Contains(t, output, keyID2)
 
 	// add delegation with multiple certs and multiple paths
 	output, err = runCommand(t, tempDir, "delegation", "add", "gun", "targets/delegation", "--paths", "path3")
@@ -329,6 +338,8 @@ func TestClientDelegationsInteraction(t *testing.T) {
 	assert.Contains(t, output, "path1")
 	assert.NotContains(t, output, "path2")
 	assert.NotContains(t, output, "path3")
+	assert.Contains(t, output, keyID)
+	assert.Contains(t, output, keyID2)
 
 	// remove the remaining path, should not remove the delegation entirely
 	output, err = runCommand(t, tempDir, "delegation", "remove", "gun", "targets/delegation", "--paths", "path1")
@@ -346,6 +357,8 @@ func TestClientDelegationsInteraction(t *testing.T) {
 	assert.NotContains(t, output, "path1")
 	assert.NotContains(t, output, "path2")
 	assert.NotContains(t, output, "path3")
+	assert.Contains(t, output, keyID)
+	assert.Contains(t, output, keyID2)
 
 	// remove by force to delete the delegation entirely
 	output, err = runCommand(t, tempDir, "delegation", "remove", "gun", "targets/delegation", "-y")

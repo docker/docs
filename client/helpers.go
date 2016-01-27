@@ -14,6 +14,7 @@ import (
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/keys"
 	"github.com/docker/notary/tuf/store"
+	"github.com/docker/notary/tuf/utils"
 )
 
 // Use this to initialize remote HTTPStores from the config settings
@@ -80,7 +81,7 @@ func changeTargetsDelegation(repo *tuf.Repo, c changelist.Change) error {
 		if err != nil {
 			return err
 		}
-		r, err := repo.GetDelegation(c.Scope())
+		r, _, err := repo.GetDelegation(c.Scope())
 		if _, ok := err.(data.ErrNoSuchRole); err != nil && !ok {
 			// error that wasn't ErrNoSuchRole
 			return err
@@ -104,12 +105,28 @@ func changeTargetsDelegation(repo *tuf.Repo, c changelist.Change) error {
 		if err != nil {
 			return err
 		}
-		r, err := repo.GetDelegation(c.Scope())
+		r, keys, err := repo.GetDelegation(c.Scope())
 		if err != nil {
 			return err
 		}
+
+		// We need to translate the keys from canonical ID to TUF ID for compatibility
+		canonicalToTUFID := make(map[string]string)
+		for tufID, pubKey := range keys {
+			canonicalID, err := utils.CanonicalKeyID(pubKey)
+			if err != nil {
+				return err
+			}
+			canonicalToTUFID[canonicalID] = tufID
+		}
+
+		removeTUFKeyIDs := []string{}
+		for _, canonID := range td.RemoveKeys {
+			removeTUFKeyIDs = append(removeTUFKeyIDs, canonicalToTUFID[canonID])
+		}
+
 		// If we specify the only keys left delete the role, else just delete specified keys
-		if strings.Join(r.KeyIDs, ";") == strings.Join(td.RemoveKeys, ";") && len(td.AddKeys) == 0 {
+		if strings.Join(r.KeyIDs, ";") == strings.Join(removeTUFKeyIDs, ";") && len(td.AddKeys) == 0 {
 			r := data.Role{Name: c.Scope()}
 			return repo.DeleteDelegation(r)
 		}
@@ -120,7 +137,7 @@ func changeTargetsDelegation(repo *tuf.Repo, c changelist.Change) error {
 		if err := r.AddPathHashPrefixes(td.AddPathHashPrefixes); err != nil {
 			return err
 		}
-		r.RemoveKeys(td.RemoveKeys)
+		r.RemoveKeys(removeTUFKeyIDs)
 		r.RemovePaths(td.RemovePaths)
 		r.RemovePathHashPrefixes(td.RemovePathHashPrefixes)
 		return repo.UpdateDelegations(r, td.AddKeys)
