@@ -1,10 +1,11 @@
 <!--[metadata]>
 +++
-title = "Notary Server Configuration File"
+title = "Server Configuration File"
 description = "Specifies the configuration file for Notary Server"
 keywords = ["docker, notary, notary-server, configuration"]
 [menu.main]
 parent="mn_notary"
+weight=80
 +++
 <![end-metadata]-->
 

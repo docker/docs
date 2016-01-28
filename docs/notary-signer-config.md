@@ -1,10 +1,11 @@
 <!--[metadata]>
 +++
-title = "Notary Signer Configuration File"
+title = "Signer Configuration File"
 description = "Specifies the configuration file for Notary Signer"
 keywords = ["docker, notary, notary-signer, configuration"]
 [menu.main]
 parent="mn_notary"
+weight=90
 +++
 <![end-metadata]-->
 
