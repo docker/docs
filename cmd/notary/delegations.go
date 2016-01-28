@@ -42,8 +42,8 @@ type delegationCommander struct {
 	configGetter func() (*viper.Viper, error)
 	retriever    passphrase.Retriever
 
-	paths                []string
-	removeAll, removeYes bool
+	paths               []string
+	removeAll, forceYes bool
 }
 
 func (d *delegationCommander) GetCommand() *cobra.Command {
@@ -53,7 +53,7 @@ func (d *delegationCommander) GetCommand() *cobra.Command {
 	cmdRemDelg := cmdDelegationRemoveTemplate.ToCommand(d.delegationRemove)
 	cmdRemDelg.Flags().StringSliceVar(&d.paths, "paths", nil, "List of paths to remove")
 	cmdRemDelg.Flags().BoolVarP(
-		&d.removeYes, "yes", "y", false, "Answer yes to the removal question (no confirmation)")
+		&d.forceYes, "yes", "y", false, "Answer yes to the removal question (no confirmation)")
 	cmd.AddCommand(cmdRemDelg)
 
 	cmdAddDelg := cmdDelegationAddTemplate.ToCommand(d.delegationAdd)
@@ -146,7 +146,7 @@ func (d *delegationCommander) delegationRemove(cmd *cobra.Command, args []string
 	if d.removeAll {
 		cmd.Println("\nAre you sure you want to remove all data for this delegation? (yes/no)")
 		// Ask for confirmation before force removing delegation
-		if !d.removeYes {
+		if !d.forceYes {
 			confirmed := askConfirm()
 			if !confirmed {
 				fatalf("Aborting action.")
@@ -171,9 +171,14 @@ func (d *delegationCommander) delegationRemove(cmd *cobra.Command, args []string
 	if d.removeAll {
 		cmd.Printf("Forced removal (including all keys and paths) of delegation role %s to repository \"%s\" staged for next publish.\n", role, gun)
 	} else {
-		cmd.Printf(
-			"Removal of delegation role %s with keys %s and paths %s, to repository \"%s\" staged for next publish.\n",
-			role, keyIDs, d.paths, gun)
+		removingItems := ""
+		if len(keyIDs) > 0 {
+			removingItems = removingItems + fmt.Sprintf("with keys %s, ", keyIDs)
+		}
+		if d.paths != nil {
+			removingItems = removingItems + fmt.Sprintf("with paths [%s], ", prettyPrintPaths(d.paths))
+		}
+		cmd.Printf("Removal of delegation role %s %sto repository \"%s\" staged for next publish.\n", role, removingItems, gun)
 	}
 	cmd.Println("")
 
@@ -240,8 +245,8 @@ func (d *delegationCommander) delegationAdd(cmd *cobra.Command, args []string) e
 
 	cmd.Println("")
 	cmd.Printf(
-		"Addition of delegation role %s with keys %s and paths %s, to repository \"%s\" staged for next publish.\n",
-		role, pubKeyIDs, d.paths, gun)
+		"Addition of delegation role %s with keys %s to paths [%s], to repository \"%s\" staged for next publish.\n",
+		role, pubKeyIDs, prettyPrintPaths(d.paths), gun)
 	cmd.Println("")
 	return nil
 }
