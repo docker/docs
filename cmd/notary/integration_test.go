@@ -195,10 +195,11 @@ func TestClientDelegationsInteraction(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Contains(t, output, "No delegations present in this repository.")
 
-	// add new valid delegation with single new cert
+	// add new valid delegation with single new cert, and "" path
 	output, err = runCommand(t, tempDir, "delegation", "add", "gun", "targets/delegation", tempFile.Name())
 	assert.NoError(t, err)
 	assert.Contains(t, output, "Addition of delegation role")
+	assert.Contains(t, output, "\"\"")
 
 	// check status - see delegation
 	output, err = runCommand(t, tempDir, "status", "gun")
@@ -224,6 +225,7 @@ func TestClientDelegationsInteraction(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Contains(t, output, "targets/delegation")
 	assert.Contains(t, output, keyID)
+	assert.Contains(t, output, "\"\"")
 
 	// Setup another certificate
 	tempFile2, err := ioutil.TempFile("", "pemfile2")
@@ -246,7 +248,7 @@ func TestClientDelegationsInteraction(t *testing.T) {
 	keyID2, err := utils.CanonicalKeyID(parsedPubKey2)
 	assert.NoError(t, err)
 
-	// add to the delegation by specifying the same role, this time add another key and path
+	// add to the delegation by specifying the same role, this time add a scoped path
 	output, err = runCommand(t, tempDir, "delegation", "add", "gun", "targets/delegation", tempFile2.Name(), "--paths", "path")
 	assert.NoError(t, err)
 	assert.Contains(t, output, "Addition of delegation role")
