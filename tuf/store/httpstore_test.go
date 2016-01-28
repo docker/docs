@@ -266,3 +266,14 @@ func TestHTTPOffline(t *testing.T) {
 	assert.NoError(t, err)
 	assert.IsType(t, &OfflineStore{}, s)
 }
+
+func TestErrServerUnavailable(t *testing.T) {
+	for i := 200; i < 600; i++ {
+		err := ErrServerUnavailable{code: i}
+		if i == 401 {
+			assert.Contains(t, err.Error(), "not authorized")
+		} else {
+			assert.Contains(t, err.Error(), "unable to reach trust server")
+		}
+	}
+}
