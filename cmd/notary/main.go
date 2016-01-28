@@ -22,6 +22,7 @@ const (
 var (
 	debug             bool
 	verbose           bool
+	roles             []string
 	trustDir          string
 	configFile        string
 	remoteTrustServer string
@@ -127,8 +128,11 @@ func setupCommand(notaryCmd *cobra.Command) {
 	notaryCmd.AddCommand(cmdDelegationGenerator.GetCommand())
 	notaryCmd.AddCommand(cmdCert)
 	notaryCmd.AddCommand(cmdTufInit)
+	cmdTufList.Flags().StringSliceVarP(&roles, "roles", "r", nil, "Delegation roles to list targets for (will shadow targets role)")
 	notaryCmd.AddCommand(cmdTufList)
+	cmdTufAdd.Flags().StringSliceVarP(&roles, "roles", "r", nil, "Delegation roles to add this target to")
 	notaryCmd.AddCommand(cmdTufAdd)
+	cmdTufRemove.Flags().StringSliceVarP(&roles, "roles", "r", nil, "Delegation roles to remove this target from")
 	notaryCmd.AddCommand(cmdTufRemove)
 	notaryCmd.AddCommand(cmdTufStatus)
 	notaryCmd.AddCommand(cmdTufPublish)
