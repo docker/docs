@@ -470,12 +470,17 @@ func KeyToPEM(privKey data.PrivateKey, role string) ([]byte, error) {
 		return nil, err
 	}
 
-	block := &pem.Block{
-		Type: bt,
-		Headers: map[string]string{
+	headers := map[string]string{}
+	if role != "" {
+		headers = map[string]string{
 			"role": role,
-		},
-		Bytes: privKey.Private(),
+		}
+	}
+
+	block := &pem.Block{
+		Type:    bt,
+		Headers: headers,
+		Bytes:   privKey.Private(),
 	}
 
 	return pem.EncodeToMemory(block), nil
