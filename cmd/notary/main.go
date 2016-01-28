@@ -133,7 +133,7 @@ func setupCommand(notaryCmd *cobra.Command) {
 	notaryCmd.AddCommand(cmdTufStatus)
 	notaryCmd.AddCommand(cmdTufPublish)
 	notaryCmd.AddCommand(cmdTufLookup)
-	notaryCmd.AddCommand(cmdVerify)
+	notaryCmd.AddCommand(cmdTufVerify)
 }
 
 func main() {
