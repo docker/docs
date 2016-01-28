@@ -33,6 +33,9 @@ type ErrServerUnavailable struct {
 }
 
 func (err ErrServerUnavailable) Error() string {
+	if err.code == 401 {
+		return fmt.Sprintf("you are not authorized to perform this operation: server returned 401.")
+	}
 	return fmt.Sprintf("unable to reach trust server at this time: %d.", err.code)
 }
 
