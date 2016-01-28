@@ -50,6 +50,11 @@ func runCommand(t *testing.T, tempDir string, args ...string) (string, error) {
 	output, err := ioutil.ReadAll(b)
 	assert.NoError(t, err)
 
+	// Clean up state to mimic running a fresh command next time
+	for _, command := range cmd.Commands() {
+		command.ResetFlags()
+	}
+
 	return string(output), retErr
 }
 
