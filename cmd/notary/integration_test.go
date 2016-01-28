@@ -384,7 +384,9 @@ func TestClientDelegationsPublishing(t *testing.T) {
 
 	privKey, err := trustmanager.GenerateRSAKey(rand.Reader, 2048)
 	assert.NoError(t, err)
-	privKeyBytes, err := trustmanager.KeyToPEM(privKey, "")
+	privKeyBytesNoRole, err := trustmanager.KeyToPEM(privKey, "")
+	assert.NoError(t, err)
+	privKeyBytesWithRole, err := trustmanager.KeyToPEM(privKey, "user")
 	assert.NoError(t, err)
 	startTime := time.Now()
 	endTime := startTime.AddDate(10, 0, 0)
@@ -462,7 +464,7 @@ func TestClientDelegationsPublishing(t *testing.T) {
 	assert.NoError(t, os.Remove(filepath.Join(keyDir, "gun", targetKeyID+".key")))
 
 	// Note that we need to use the canonical key ID, followed by the base of the role here
-	err = ioutil.WriteFile(filepath.Join(keyDir, canonicalKeyID+"_releases.key"), privKeyBytes, 0700)
+	err = ioutil.WriteFile(filepath.Join(keyDir, canonicalKeyID+"_releases.key"), privKeyBytesNoRole, 0700)
 	assert.NoError(t, err)
 
 	// add a target using the delegation -- will only add to targets/releases
@@ -498,6 +500,30 @@ func TestClientDelegationsPublishing(t *testing.T) {
 	output, err = runCommand(t, tempDir, "-s", server.URL, "list", "gun", "--roles", "targets/releases")
 	assert.NoError(t, err)
 	assert.Contains(t, output, "No targets present")
+
+	// Try adding a target with a different key style - private/tuf_keys/canonicalKeyID.key with "user" set as the "role" PEM header
+	// First remove the old key and add the new style
+	assert.NoError(t, os.Remove(filepath.Join(keyDir, canonicalKeyID+"_releases.key")))
+	err = ioutil.WriteFile(filepath.Join(keyDir, canonicalKeyID+".key"), privKeyBytesWithRole, 0700)
+	assert.NoError(t, err)
+
+	// add a target using the delegation -- will only add to targets/releases
+	_, err = runCommand(t, tempDir, "add", "gun", target, tempTargetFile.Name(), "--roles", "targets/releases")
+	assert.NoError(t, err)
+
+	// list targets for targets/releases - we should see no targets until we publish
+	output, err = runCommand(t, tempDir, "-s", server.URL, "list", "gun", "--roles", "targets/releases")
+	assert.NoError(t, err)
+	assert.Contains(t, output, "No targets")
+
+	// publish repo
+	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
+	assert.NoError(t, err)
+
+	// list targets for targets/releases - we should see our target!
+	output, err = runCommand(t, tempDir, "-s", server.URL, "list", "gun", "--roles", "targets/releases")
+	assert.NoError(t, err)
+	assert.Contains(t, output, "targets/releases")
 }
 
 // Splits a string into lines, and returns any lines that are not empty (
