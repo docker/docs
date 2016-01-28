@@ -1,5 +1,6 @@
 <!--[metadata]>
 +++
+draft=true
 title = "Notary CLI"
 description = "Description of the Notary CLI"
 keywords = ["docker, notary, trust, image, signing, repository, cli"]

@@ -1,6 +1,6 @@
 <!--[metadata]>
 +++
-title = "Notary Signer"
+title = "Signer"
 description = "Description of the Notary Signer"
 keywords = ["docker, notary, notary-singer"]
 [menu.main]
@@ -26,7 +26,7 @@ Note that when you generate client certificates to be used with Notary Signer,
 please make sure that the certificates **are not CAs**.  Otherwise any client
 that is compromised can sign any number of other client certs.
 
-As an example, please see [this script](opensslCertGen.sh) to see how to
+As an example, please see [this script](https://github.com/docker/notary/blob/master/docs/opensslCertGen.sh) to see how to
 generate client SSL certs with basic constraints using OpenSSL.
 
 ### Signer storage
@@ -135,7 +135,7 @@ However, the attacker cannot do anything useful with the timestamp keys unless
 they also [compromise the Notary Server](
 notary-server.md#what-happens-if-the-server-is-compromised)
 
-The attacker can prevent Notary Signer from signing timestap metadata from
+The attacker can prevent Notary Signer from signing timestamp metadata from
 Notary Server and return invalid public key IDs when the Notary Server
 requests it.  This means an attacker can execute a denial of service attack
 that prevents the Notary Server from being able to update any metadata.
