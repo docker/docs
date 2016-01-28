@@ -75,11 +75,11 @@ var cmdTufStatus = &cobra.Command{
 	Run:   tufStatus,
 }
 
-var cmdVerify = &cobra.Command{
+var cmdTufVerify = &cobra.Command{
 	Use:   "verify [ GUN ] <target>",
 	Short: "Verifies if the content is included in the remote trusted collection",
 	Long:  "Verifies if the data passed in STDIN is included in the remote trusted collection identified by the Global Unique Name.",
-	Run:   verify,
+	Run:   tufVerify,
 }
 
 func tufAdd(cmd *cobra.Command, args []string) {
@@ -273,7 +273,7 @@ func tufRemove(cmd *cobra.Command, args []string) {
 	cmd.Printf("Removal of %s from %s staged for next publish.\n", targetName, gun)
 }
 
-func verify(cmd *cobra.Command, args []string) {
+func tufVerify(cmd *cobra.Command, args []string) {
 	if len(args) < 2 {
 		cmd.Usage()
 		fatalf("Must specify a GUN and target")
