@@ -1,10 +1,8 @@
 package store
 
 import (
-	"bytes"
 	"crypto/sha256"
 	"fmt"
-	"io"
 
 	"github.com/docker/notary"
 	"github.com/docker/notary/tuf/data"
@@ -45,7 +43,10 @@ type MemoryStore struct {
 	keys       map[string][]data.PrivateKey
 }
 
+// GetMeta returns up to size bytes of data references by name.
 // If size is -1, this corresponds to "infinite," but we cut off at 100MB
+// as we will always know the size for everything but a timestamp and
+// sometimes a root, neither of which should be exceptionally large
 func (m *MemoryStore) GetMeta(name string, size int64) ([]byte, error) {
 	d, ok := m.meta[name]
 	if ok {
@@ -67,6 +68,7 @@ func (m *MemoryStore) GetMeta(name string, size int64) ([]byte, error) {
 	return nil, ErrMetaNotFound{Resource: name}
 }
 
+// SetMeta sets the metadata value for the given name
 func (m *MemoryStore) SetMeta(name string, meta []byte) error {
 	m.meta[name] = meta
 
@@ -76,6 +78,8 @@ func (m *MemoryStore) SetMeta(name string, meta []byte) error {
 	return nil
 }
 
+// SetMultiMeta sets multiple pieces of metadata for multiple names
+// in a single operation.
 func (m *MemoryStore) SetMultiMeta(metas map[string][]byte) error {
 	for role, blob := range metas {
 		m.SetMeta(role, blob)
@@ -86,56 +90,22 @@ func (m *MemoryStore) SetMultiMeta(metas map[string][]byte) error {
 // RemoveMeta removes the metadata for a single role - if the metadata doesn't
 // exist, no error is returned
 func (m *MemoryStore) RemoveMeta(name string) error {
-	delete(m.meta, name)
-	return nil
-}
-
-func (m *MemoryStore) GetTarget(path string) (io.ReadCloser, error) {
-	return &utils.NoopCloser{Reader: bytes.NewReader(m.files[path])}, nil
-}
-
-func (m *MemoryStore) WalkStagedTargets(paths []string, targetsFn targetsWalkFunc) error {
-	if len(paths) == 0 {
-		for path, dat := range m.files {
-			meta, err := data.NewFileMeta(bytes.NewReader(dat), "sha256")
-			if err != nil {
-				return err
-			}
-			if err = targetsFn(path, meta); err != nil {
-				return err
-			}
-		}
-		return nil
-	}
-
-	for _, path := range paths {
-		dat, ok := m.files[path]
-		if !ok {
-			return ErrMetaNotFound{Resource: path}
-		}
-		meta, err := data.NewFileMeta(bytes.NewReader(dat), "sha256")
-		if err != nil {
-			return err
-		}
-		if err = targetsFn(path, meta); err != nil {
-			return err
-		}
+	if meta, ok := m.meta[name]; ok {
+		checksum := sha256.Sum256(meta)
+		path := utils.URLFilePath(name, checksum[:], true)
+		delete(m.meta, name)
+		delete(m.consistent, path)
 	}
 	return nil
 }
 
-func (m *MemoryStore) Commit(map[string][]byte, bool, map[string]data.Hashes) error {
-	return nil
-}
-
+// GetKey returns the public key for the given role
 func (m *MemoryStore) GetKey(role string) ([]byte, error) {
 	return nil, fmt.Errorf("GetKey is not implemented for the MemoryStore")
 }
 
-// Clear this existing memory store by setting this store as new empty one
+// RemoveAll clears the existing memory store by setting this store as new empty one
 func (m *MemoryStore) RemoveAll() error {
-	m.meta = make(map[string][]byte)
-	m.files = make(map[string][]byte)
-	m.keys = make(map[string][]data.PrivateKey)
+	*m = *NewMemoryStore(nil, nil)
 	return nil
 }
