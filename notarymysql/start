@@ -5,11 +5,11 @@ set -e
 # the early days which we would not use it any longer.
 DB_NAME_OLD='notary'
 
-# Message which will be displayed when the database 'notary' exsit.
+# Message which will be displayed when the database 'notary' exsits.
 DB_WARNING="
 =============== WARNING =================
 # The schema has changed.               #
-# People should migrate those tables in #
+# Make sure you migrate the tables in   #
 # 'notary'                              #
 # to                                    #
 # 'notaryserver' and 'notarysigner'     #
@@ -17,7 +17,7 @@ DB_WARNING="
 "
 
 # Although the Notary-Server and Notary-Signer could use the same
-# database, it's better to seperate that for security.
+# database, it's better to separate that for security.
 DB_NAME_SERVER='notaryserver'
 DB_NAME_SIGNER='notarysigner'
 DB_NAME=($DB_NAME_SERVER,$DB_NAME_SIGNER)
@@ -121,8 +121,8 @@ if [ -n "${DB_USER}" -o -n "${DB_NAME}" ]; then
     sleep 1
   done
 
-  # To check whether the old database is exist or not and warning people to
-  # manually migrate those tables.
+  # Check whether the old database exists and warn users to
+  # manually migrate those tables if so.
   if [ -n "${DB_NAME_OLD}" ]; then
       if mysql --defaults-file=/etc/mysql/debian.cnf -e "USE $DB_NAME_OLD;" 2>/dev/null; then
         echo "$DB_WARNING"
