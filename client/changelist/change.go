@@ -88,6 +88,7 @@ type TufDelegation struct {
 	RemoveKeys             []string     `json:"remove_keys,omitempty"`
 	AddPaths               []string     `json:"add_paths,omitempty"`
 	RemovePaths            []string     `json:"remove_paths,omitempty"`
+	ClearAllPaths          bool         `json:"clear_paths,omitempty"`
 	AddPathHashPrefixes    []string     `json:"add_prefixes,omitempty"`
 	RemovePathHashPrefixes []string     `json:"remove_prefixes,omitempty"`
 }

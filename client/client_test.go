@@ -1910,10 +1910,10 @@ func testPublishDelegations(t *testing.T, clearCache, x509Keys bool) {
 	// targets/a, because these should execute in order
 	for _, delgName := range []string{"targets/a", "targets/a/b", "targets/c"} {
 		assert.NoError(t,
-			repo1.AddDelegation(delgName, 1, []data.PublicKey{delgKey}, []string{""}),
+			repo1.AddDelegation(delgName, []data.PublicKey{delgKey}, []string{""}),
 			"error creating delegation")
 	}
-	assert.Len(t, getChanges(t, repo1), 3, "wrong number of changelist files found")
+	assert.Len(t, getChanges(t, repo1), 6, "wrong number of changelist files found")
 
 	var rec *passRoleRecorder
 	if clearCache {
@@ -1932,11 +1932,11 @@ func testPublishDelegations(t *testing.T, clearCache, x509Keys bool) {
 
 	// this should not publish, because targets/z doesn't exist
 	assert.NoError(t,
-		repo1.AddDelegation("targets/z/y", 1, []data.PublicKey{delgKey}, []string{""}),
+		repo1.AddDelegation("targets/z/y", []data.PublicKey{delgKey}, []string{""}),
 		"error creating delegation")
-	assert.Len(t, getChanges(t, repo1), 1, "wrong number of changelist files found")
+	assert.Len(t, getChanges(t, repo1), 2, "wrong number of changelist files found")
 	assert.Error(t, repo1.Publish())
-	assert.Len(t, getChanges(t, repo1), 1, "wrong number of changelist files found")
+	assert.Len(t, getChanges(t, repo1), 2, "wrong number of changelist files found")
 
 	if clearCache {
 		rec.assertAsked(t, nil)
@@ -2035,7 +2035,7 @@ func testPublishTargetsDelgationScopeNoFallbackIfNoKeys(t *testing.T, clearCache
 	}
 
 	// ensure that the role exists
-	assert.NoError(t, repo.AddDelegation("targets/a", 1, []data.PublicKey{aPubKey}, []string{""}))
+	assert.NoError(t, repo.AddDelegation("targets/a", []data.PublicKey{aPubKey}, []string{""}))
 	assert.NoError(t, repo.Publish())
 
 	if clearCache {
@@ -2076,7 +2076,7 @@ func TestPublishTargetsDelgationSuccessLocallyHasRoles(t *testing.T) {
 	for _, delgName := range []string{"targets/a", "targets/a/b"} {
 		delgKey := createKey(t, repo, delgName, false)
 		assert.NoError(t,
-			repo.AddDelegation(delgName, 1, []data.PublicKey{delgKey}, []string{""}),
+			repo.AddDelegation(delgName, []data.PublicKey{delgKey}, []string{""}),
 			"error creating delegation")
 	}
 
@@ -2106,7 +2106,7 @@ func TestPublishTargetsDelgationNoTargetsKeyNeeded(t *testing.T) {
 	for _, delgName := range []string{"targets/a", "targets/a/b"} {
 		delgKey := createKey(t, repo, delgName, false)
 		assert.NoError(t,
-			repo.AddDelegation(delgName, 1, []data.PublicKey{delgKey}, []string{""}),
+			repo.AddDelegation(delgName, []data.PublicKey{delgKey}, []string{""}),
 			"error creating delegation")
 	}
 
@@ -2170,10 +2170,10 @@ func TestPublishTargetsDelgationSuccessNeedsToDownloadRoles(t *testing.T) {
 
 	// owner creates delegations, adds the delegated key to them, and publishes them
 	assert.NoError(t,
-		ownerRepo.AddDelegation("targets/a", 1, []data.PublicKey{aKey}, []string{""}),
+		ownerRepo.AddDelegation("targets/a", []data.PublicKey{aKey}, []string{""}),
 		"error creating delegation")
 	assert.NoError(t,
-		ownerRepo.AddDelegation("targets/a/b", 1, []data.PublicKey{bKey}, []string{""}),
+		ownerRepo.AddDelegation("targets/a/b", []data.PublicKey{bKey}, []string{""}),
 		"error creating delegation")
 
 	assert.NoError(t, ownerRepo.Publish())
@@ -2212,7 +2212,7 @@ func TestPublishTargetsDelgationFromTwoRepos(t *testing.T) {
 
 	// delegation includes both keys
 	assert.NoError(t,
-		repo1.AddDelegation("targets/a", 1, []data.PublicKey{key1, key2}, []string{""}),
+		repo1.AddDelegation("targets/a", []data.PublicKey{key1, key2}, []string{""}),
 		"error creating delegation")
 
 	assert.NoError(t, repo1.Publish())
@@ -2282,7 +2282,7 @@ func TestPublishRemoveDelgationKeyFromDelegationRole(t *testing.T) {
 
 	// owner creates delegation, adds the delegated key to it, and publishes it
 	assert.NoError(t,
-		ownerRepo.AddDelegation("targets/a", 1, []data.PublicKey{aKey}, []string{""}),
+		ownerRepo.AddDelegation("targets/a", []data.PublicKey{aKey}, []string{""}),
 		"error creating delegation")
 	assert.NoError(t, ownerRepo.Publish())
 
@@ -2340,7 +2340,7 @@ func TestPublishRemoveDelgation(t *testing.T) {
 
 	// owner creates delegation, adds the delegated key to it, and publishes it
 	assert.NoError(t,
-		ownerRepo.AddDelegation("targets/a", 1, []data.PublicKey{aKey}, []string{""}),
+		ownerRepo.AddDelegation("targets/a", []data.PublicKey{aKey}, []string{""}),
 		"error creating delegation")
 	assert.NoError(t, ownerRepo.Publish())
 
@@ -2351,7 +2351,7 @@ func TestPublishRemoveDelgation(t *testing.T) {
 	// owner removes delegation
 	aKeyCanonicalID, err := utils.CanonicalKeyID(aKey)
 	assert.NoError(t, err)
-	assert.NoError(t, ownerRepo.RemoveDelegation("targets/a", []string{aKeyCanonicalID}, []string{}, false))
+	assert.NoError(t, ownerRepo.RemoveDelegationKeys("targets/a", []string{aKeyCanonicalID}))
 	assert.NoError(t, ownerRepo.Publish())
 
 	// delegated repo can now no longer publish to delegated role
@@ -2374,7 +2374,7 @@ func TestPublishSucceedsDespiteDelegationCorrupt(t *testing.T) {
 	assert.NoError(t, err, "error creating delegation key")
 
 	assert.NoError(t,
-		repo.AddDelegation("targets/a", 1, []data.PublicKey{delgKey}, []string{""}),
+		repo.AddDelegation("targets/a", []data.PublicKey{delgKey}, []string{""}),
 		"error creating delegation")
 
 	testPublishBadMetadata(t, "targets/a", repo, false, true)
@@ -2609,22 +2609,25 @@ func TestAddDelegationChangefileValid(t *testing.T) {
 	targetPubKey := repo.CryptoService.GetKey(targetKeyIds[0])
 	assert.NotNil(t, targetPubKey)
 
-	err := repo.AddDelegation("root", 1, []data.PublicKey{targetPubKey}, []string{""})
+	err := repo.AddDelegation("root", []data.PublicKey{targetPubKey}, []string{""})
 	assert.Error(t, err)
 	assert.IsType(t, data.ErrInvalidRole{}, err)
 	assert.Empty(t, getChanges(t, repo))
 
 	// to show that adding does not care about the hierarchy
-	err = repo.AddDelegation("targets/a/b/c", 1, []data.PublicKey{targetPubKey}, []string{""})
+	err = repo.AddDelegation("targets/a/b/c", []data.PublicKey{targetPubKey}, []string{""})
 	assert.NoError(t, err)
 
 	// ensure that the changefiles is correct
 	changes := getChanges(t, repo)
-	assert.Len(t, changes, 1)
+	assert.Len(t, changes, 2)
 	assert.Equal(t, changelist.ActionCreate, changes[0].Action())
 	assert.Equal(t, "targets/a/b/c", changes[0].Scope())
 	assert.Equal(t, changelist.TypeTargetsDelegation, changes[0].Type())
-	assert.Equal(t, "", changes[0].Path())
+	assert.Equal(t, changelist.ActionCreate, changes[1].Action())
+	assert.Equal(t, "targets/a/b/c", changes[1].Scope())
+	assert.Equal(t, changelist.TypeTargetsDelegation, changes[1].Type())
+	assert.Equal(t, "", changes[1].Path())
 	assert.NotEmpty(t, changes[0].Content())
 }
 
@@ -2645,10 +2648,10 @@ func TestAddDelegationChangefileApplicable(t *testing.T) {
 	assert.NotNil(t, targetPubKey)
 
 	// this hierarchy has to be right to be applied
-	err := repo.AddDelegation("targets/a", 1, []data.PublicKey{targetPubKey}, []string{""})
+	err := repo.AddDelegation("targets/a", []data.PublicKey{targetPubKey}, []string{""})
 	assert.NoError(t, err)
 	changes := getChanges(t, repo)
-	assert.Len(t, changes, 1)
+	assert.Len(t, changes, 2)
 
 	// ensure that it can be applied correctly
 	err = applyTargetsChange(repo.tufRepo, changes[0])
@@ -2676,7 +2679,7 @@ func TestAddDelegationErrorWritingChanges(t *testing.T) {
 		targetPubKey := repo.CryptoService.GetKey(targetKeyIds[0])
 		assert.NotNil(t, targetPubKey)
 
-		return repo.AddDelegation("targets/a", 1, []data.PublicKey{targetPubKey}, []string{""})
+		return repo.AddDelegation("targets/a", []data.PublicKey{targetPubKey}, []string{""})
 	})
 }
 
@@ -2693,14 +2696,14 @@ func TestRemoveDelegationChangefileValid(t *testing.T) {
 	rootPubKey := repo.CryptoService.GetKey(rootKeyID)
 	assert.NotNil(t, rootPubKey)
 
-	err := repo.RemoveDelegation("root", []string{rootKeyID}, []string{}, false)
+	err := repo.RemoveDelegationKeys("root", []string{rootKeyID})
 	assert.Error(t, err)
 	assert.IsType(t, data.ErrInvalidRole{}, err)
 	assert.Empty(t, getChanges(t, repo))
 
 	// to demonstrate that so long as the delegation name is valid, the
 	// existence of the delegation doesn't matter
-	assert.NoError(t, repo.RemoveDelegation("targets/a/b/c", []string{rootKeyID}, []string{}, false))
+	assert.NoError(t, repo.RemoveDelegationKeys("targets/a/b/c", []string{rootKeyID}))
 
 	// ensure that the changefile is correct
 	changes := getChanges(t, repo)
@@ -2711,7 +2714,7 @@ func TestRemoveDelegationChangefileValid(t *testing.T) {
 	assert.Equal(t, "", changes[0].Path())
 }
 
-// The changefile produced by RemoveDelegation, when applied, actually removes
+// The changefile produced by RemoveDelegationKeys, when applied, actually removes
 // the delegation from the repo (assuming the repo exists - tests for
 // change application validation are in helpers_test.go)
 func TestRemoveDelegationChangefileApplicable(t *testing.T) {
@@ -2725,10 +2728,11 @@ func TestRemoveDelegationChangefileApplicable(t *testing.T) {
 	assert.NotNil(t, rootPubKey)
 
 	// add a delegation first so it can be removed
-	assert.NoError(t, repo.AddDelegation("targets/a", 1, []data.PublicKey{rootPubKey}, []string{""}))
+	assert.NoError(t, repo.AddDelegation("targets/a", []data.PublicKey{rootPubKey}, []string{""}))
 	changes := getChanges(t, repo)
-	assert.Len(t, changes, 1)
+	assert.Len(t, changes, 2)
 	assert.NoError(t, applyTargetsChange(repo.tufRepo, changes[0]))
+	assert.NoError(t, applyTargetsChange(repo.tufRepo, changes[1]))
 
 	targetRole := repo.tufRepo.Targets[data.CanonicalTargetsRole]
 	assert.Len(t, targetRole.Signed.Delegations.Roles, 1)
@@ -2737,21 +2741,51 @@ func TestRemoveDelegationChangefileApplicable(t *testing.T) {
 	// now remove it
 	rootKeyCanonicalID, err := utils.CanonicalKeyID(rootPubKey)
 	assert.NoError(t, err)
-	assert.NoError(t, repo.RemoveDelegation("targets/a", []string{rootKeyCanonicalID}, []string{}, false))
+	assert.NoError(t, repo.RemoveDelegationKeys("targets/a", []string{rootKeyCanonicalID}))
 	changes = getChanges(t, repo)
-	assert.Len(t, changes, 2)
-	assert.NoError(t, applyTargetsChange(repo.tufRepo, changes[1]))
+	assert.Len(t, changes, 3)
+	assert.NoError(t, applyTargetsChange(repo.tufRepo, changes[2]))
 
 	targetRole = repo.tufRepo.Targets[data.CanonicalTargetsRole]
 	assert.Empty(t, targetRole.Signed.Delegations.Roles)
 	assert.Empty(t, targetRole.Signed.Delegations.Keys)
 }
 
+// The changefile with the ClearAllPaths key, when applied, actually removes
+// all paths from the specified delegation in the repo (assuming the repo and delegation exist)
+func TestClearAllPathsDelegationChangefileApplicable(t *testing.T) {
+	gun := "docker.com/notary"
+	ts, _, _ := simpleTestServer(t)
+	defer ts.Close()
+
+	repo, rootKeyID := initializeRepo(t, data.ECDSAKey, gun, ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
+	rootPubKey := repo.CryptoService.GetKey(rootKeyID)
+	assert.NotNil(t, rootPubKey)
+
+	// add a delegation first so it can be removed
+	assert.NoError(t, repo.AddDelegation("targets/a", []data.PublicKey{rootPubKey}, []string{"abc,123,xyz,path"}))
+	changes := getChanges(t, repo)
+	assert.Len(t, changes, 2)
+	assert.NoError(t, applyTargetsChange(repo.tufRepo, changes[0]))
+	assert.NoError(t, applyTargetsChange(repo.tufRepo, changes[1]))
+
+	// now clear paths it
+	assert.NoError(t, repo.ClearDelegationPaths("targets/a"))
+	changes = getChanges(t, repo)
+	assert.Len(t, changes, 3)
+	assert.NoError(t, applyTargetsChange(repo.tufRepo, changes[2]))
+
+	delgRoles := repo.tufRepo.Targets[data.CanonicalTargetsRole].Signed.Delegations.Roles
+	assert.Len(t, delgRoles, 1)
+	assert.Len(t, delgRoles[0].Paths, 0)
+}
+
 // TestRemoveDelegationErrorWritingChanges expects errors writing a change to
 // file to be propagated.
 func TestRemoveDelegationErrorWritingChanges(t *testing.T) {
 	testErrorWritingChangefiles(t, func(repo *NotaryRepository) error {
-		return repo.RemoveDelegation("targets/a", []string{""}, []string{}, false)
+		return repo.RemoveDelegationKeysAndPaths("targets/a", []string{""}, []string{})
 	})
 }
 
@@ -2859,10 +2893,10 @@ func testPublishTargetsDelgationCanUseUserKeyWithArbitraryRole(t *testing.T, x50
 
 	// owner creates delegations, adds the delegated key to them, and publishes them
 	assert.NoError(t,
-		ownerRepo.AddDelegation("targets/a", 1, []data.PublicKey{aKey}, []string{""}),
+		ownerRepo.AddDelegation("targets/a", []data.PublicKey{aKey}, []string{""}),
 		"error creating delegation")
 	assert.NoError(t,
-		ownerRepo.AddDelegation("targets/a/b", 1, []data.PublicKey{bKey}, []string{""}),
+		ownerRepo.AddDelegation("targets/a/b", []data.PublicKey{bKey}, []string{""}),
 		"error creating delegation")
 
 	assert.NoError(t, ownerRepo.Publish())
@@ -3016,7 +3050,7 @@ func TestListRoles(t *testing.T) {
 	// Create a delegation on the top level
 	aKey := createKey(t, repo, "user", true)
 	assert.NoError(t,
-		repo.AddDelegation("targets/a", 1, []data.PublicKey{aKey}, []string{""}),
+		repo.AddDelegation("targets/a", []data.PublicKey{aKey}, []string{""}),
 		"error creating delegation")
 
 	assert.NoError(t, repo.Publish())
@@ -3053,7 +3087,7 @@ func TestListRoles(t *testing.T) {
 	// Create another delegation, one level further
 	bKey := createKey(t, repo, "user", true)
 	assert.NoError(t,
-		repo.AddDelegation("targets/a/b", 1, []data.PublicKey{bKey}, []string{""}),
+		repo.AddDelegation("targets/a/b", []data.PublicKey{bKey}, []string{""}),
 		"error creating delegation")
 
 	assert.NoError(t, repo.Publish())

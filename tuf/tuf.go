@@ -242,7 +242,6 @@ func (tr *Repo) UpdateDelegations(role *data.Role, keys []data.PublicKey) error 
 		p.Signed.Delegations.Keys[k.ID()] = k
 		tr.keysDB.AddKey(k)
 	}
-
 	// if the role has fewer keys than the threshold, it
 	// will never be able to create a valid targets file
 	// and should be considered invalid.

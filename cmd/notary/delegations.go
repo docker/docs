@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	"github.com/docker/notary"
 	notaryclient "github.com/docker/notary/client"
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/trustmanager"
@@ -139,13 +138,19 @@ func (d *delegationCommander) delegationRemove(cmd *cobra.Command, args []string
 		} else {
 			cmd.Println("Confirmed `yes` from flag")
 		}
+		// Delete the entire delegation
+		err = nRepo.RemoveDelegationRole(role)
+		if err != nil {
+			return fmt.Errorf("failed to remove delegation: %v", err)
+		}
+	} else {
+		// Remove any keys or paths that we passed in
+		err = nRepo.RemoveDelegationKeysAndPaths(role, keyIDs, paths)
+		if err != nil {
+			return fmt.Errorf("failed to remove delegation: %v", err)
+		}
 	}
 
-	// Remove the delegation from the repository
-	err = nRepo.RemoveDelegation(role, keyIDs, paths, removeAll)
-	if err != nil {
-		return fmt.Errorf("failed to remove delegation: %v", err)
-	}
 	cmd.Println("")
 	if removeAll {
 		cmd.Printf("Forced removal (including all keys and paths) of delegation role %s to repository \"%s\" staged for next publish.\n", role, gun)
@@ -197,9 +202,7 @@ func (d *delegationCommander) delegationAdd(cmd *cobra.Command, args []string) e
 	}
 
 	// Add the delegation to the repository
-	// Sets threshold to 1 since we only added one key - thresholds are not currently fully supported, though
-	// one can use additional client-side validation to check for signatures from a quorum of varying delegation roles
-	err = nRepo.AddDelegation(role, notary.MinThreshold, pubKeys, paths)
+	err = nRepo.AddDelegation(role, pubKeys, paths)
 	if err != nil {
 		return fmt.Errorf("failed to create delegation: %v", err)
 	}
