@@ -12,6 +12,7 @@ import (
 	"testing"
 
 	"github.com/docker/go/canonical/json"
+	"github.com/docker/notary"
 	"github.com/docker/notary/client"
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/trustmanager"
@@ -400,4 +401,35 @@ func TestRotateKeyBothKeys(t *testing.T) {
 	}
 	assert.True(t, targetsFound, "targets key was not created")
 	assert.True(t, snapshotFound, "snapshot key was not created")
+}
+
+func TestChangeKeyPassphraseInvalidID(t *testing.T) {
+	k := &keyCommander{
+		configGetter: viper.New,
+		retriever:    passphrase.ConstantRetriever("pass"),
+	}
+	err := k.keyPassphraseChange(&cobra.Command{}, []string{"too_short"})
+	assert.Error(t, err)
+	assert.Contains(t, err.Error(), "invalid key ID provided")
+}
+
+func TestChangeKeyPassphraseInvalidNumArgs(t *testing.T) {
+	k := &keyCommander{
+		configGetter: viper.New,
+		retriever:    passphrase.ConstantRetriever("pass"),
+	}
+	err := k.keyPassphraseChange(&cobra.Command{}, []string{})
+	assert.Error(t, err)
+	assert.Contains(t, err.Error(), "must specify the key ID")
+}
+
+func TestChangeKeyPassphraseNonexistentID(t *testing.T) {
+	k := &keyCommander{
+		configGetter: viper.New,
+		retriever:    passphrase.ConstantRetriever("pass"),
+	}
+	// Valid ID size, but does not exist as a key ID
+	err := k.keyPassphraseChange(&cobra.Command{}, []string{strings.Repeat("x", notary.Sha256HexSize)})
+	assert.Error(t, err)
+	assert.Contains(t, err.Error(), "could not retrieve local root key for key ID provided")
 }
