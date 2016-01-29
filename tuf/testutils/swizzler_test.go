@@ -5,6 +5,7 @@ package testutils
 
 import (
 	"bytes"
+	"crypto/sha256"
 	"encoding/json"
 	"reflect"
 	"testing"
@@ -95,6 +96,40 @@ func TestSwizzlerSetInvalidJSON(t *testing.T) {
 	}
 }
 
+// This adds a single byte of whitespace to the metadata file, so it should be parsed
+// and deserialized the same way, but checksums against snapshot/timestamp may fail
+func TestSwizzlerAddExtraSpace(t *testing.T) {
+	f, origMeta := createNewSwizzler(t)
+
+	f.AddExtraSpace(data.CanonicalTargetsRole)
+
+	snapshot := &data.SignedSnapshot{}
+	require.NoError(t, json.Unmarshal(origMeta[data.CanonicalSnapshotRole], snapshot))
+
+	for role, metaBytes := range origMeta {
+		newMeta, err := f.MetadataCache.GetMeta(role, -1)
+		require.NoError(t, err)
+
+		if role != data.CanonicalTargetsRole {
+			require.True(t, bytes.Equal(metaBytes, newMeta), "bytes have changed for role %s", role)
+		} else {
+			require.False(t, bytes.Equal(metaBytes, newMeta))
+			require.True(t, bytes.Equal(metaBytes, newMeta[1:len(metaBytes)+1]))
+			require.Equal(t, byte(' '), newMeta[0])
+			require.Equal(t, byte(' '), newMeta[len(newMeta)-1])
+
+			// make sure the hash is not the same as the hash in snapshot
+			newHash := sha256.Sum256(newMeta)
+			require.False(t, bytes.Equal(
+				snapshot.Signed.Meta[data.CanonicalTargetsRole].Hashes["sha256"],
+				newHash[:]))
+			require.NotEqual(t,
+				snapshot.Signed.Meta[data.CanonicalTargetsRole].Length,
+				len(newMeta))
+		}
+	}
+}
+
 // This modifies metdata so that it is unmarshallable as JSON, but cannot be
 // unmarshalled as a Signed object
 func TestSwizzlerSetInvalidSigned(t *testing.T) {
@@ -124,13 +159,13 @@ func TestSwizzlerSetInvalidSigned(t *testing.T) {
 func TestSwizzlerSetInvalidSignedMeta(t *testing.T) {
 	f, origMeta := createNewSwizzler(t)
 
-	f.SetInvalidSignedMeta(data.CanonicalTargetsRole)
+	f.SetInvalidSignedMeta(data.CanonicalRootRole)
 
 	for role, metaBytes := range origMeta {
 		newMeta, err := f.MetadataCache.GetMeta(role, -1)
 		require.NoError(t, err)
 
-		if role != data.CanonicalTargetsRole {
+		if role != data.CanonicalRootRole {
 			require.True(t, bytes.Equal(metaBytes, newMeta), "bytes have changed for role %s", role)
 		} else {
 			require.False(t, bytes.Equal(metaBytes, newMeta))
@@ -192,6 +227,7 @@ func TestSwizzlerInvalidateMetadataSignatures(t *testing.T) {
 				require.Equal(t, origSigned.Signatures[i].KeyID, newSigned.Signatures[i].KeyID)
 				require.Equal(t, origSigned.Signatures[i].Method, newSigned.Signatures[i].Method)
 				require.NotEqual(t, origSigned.Signatures[i].Signature, newSigned.Signatures[i].Signature)
+				require.Equal(t, []byte("invalid signature"), newSigned.Signatures[i].Signature)
 			}
 			require.True(t, bytes.Equal(origSigned.Signed, newSigned.Signed))
 		}
