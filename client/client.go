@@ -9,6 +9,7 @@ import (
 	"net/url"
 	"os"
 	"path/filepath"
+	"strings"
 	"time"
 
 	"github.com/Sirupsen/logrus"
@@ -885,7 +886,10 @@ func (r *NotaryRepository) Update(forWrite bool) (*tufclient.Client, error) {
 	}
 	err = c.Update()
 	if err != nil {
-		if notFound, ok := err.(store.ErrMetaNotFound); ok && notFound.Resource == data.CanonicalRootRole {
+		// notFound.Resource may include a checksum so when the role is root,
+		// it will be root.json or root.<checksum>.json. Therefore best we can
+		// do it match a "root." prefix
+		if notFound, ok := err.(store.ErrMetaNotFound); ok && strings.HasPrefix(notFound.Resource, data.CanonicalRootRole+".") {
 			return nil, r.errRepositoryNotExist()
 		}
 		return nil, err

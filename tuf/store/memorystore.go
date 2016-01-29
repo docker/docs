@@ -2,6 +2,7 @@ package store
 
 import (
 	"bytes"
+	"crypto/sha256"
 	"fmt"
 	"io"
 
@@ -12,28 +13,40 @@ import (
 
 // NewMemoryStore returns a MetadataStore that operates entirely in memory.
 // Very useful for testing
-func NewMemoryStore(meta map[string][]byte, files map[string][]byte) RemoteStore {
+func NewMemoryStore(meta map[string][]byte, files map[string][]byte) *MemoryStore {
+	var consistent = make(map[string][]byte)
 	if meta == nil {
 		meta = make(map[string][]byte)
+	} else {
+		// add all seed meta to consistent
+		for name, data := range meta {
+			checksum := sha256.Sum256(data)
+			path := utils.URLFilePath(name, checksum[:], true)
+			consistent[path] = data
+		}
 	}
 	if files == nil {
 		files = make(map[string][]byte)
 	}
-	return &memoryStore{
-		meta:  meta,
-		files: files,
-		keys:  make(map[string][]data.PrivateKey),
+	return &MemoryStore{
+		meta:       meta,
+		consistent: consistent,
+		files:      files,
+		keys:       make(map[string][]data.PrivateKey),
 	}
 }
 
-type memoryStore struct {
-	meta  map[string][]byte
-	files map[string][]byte
-	keys  map[string][]data.PrivateKey
+// MemoryStore implements a mock RemoteStore entirely in memory.
+// For testing purposes only.
+type MemoryStore struct {
+	meta       map[string][]byte
+	consistent map[string][]byte
+	files      map[string][]byte
+	keys       map[string][]data.PrivateKey
 }
 
 // If size is -1, this corresponds to "infinite," but we cut off at 100MB
-func (m *memoryStore) GetMeta(name string, size int64) ([]byte, error) {
+func (m *MemoryStore) GetMeta(name string, size int64) ([]byte, error) {
 	d, ok := m.meta[name]
 	if ok {
 		if size == -1 {
@@ -44,15 +57,26 @@ func (m *memoryStore) GetMeta(name string, size int64) ([]byte, error) {
 		}
 		return d[:size], nil
 	}
+	d, ok = m.consistent[name]
+	if ok {
+		if int64(len(d)) < size {
+			return d, nil
+		}
+		return d[:size], nil
+	}
 	return nil, ErrMetaNotFound{Resource: name}
 }
 
-func (m *memoryStore) SetMeta(name string, meta []byte) error {
+func (m *MemoryStore) SetMeta(name string, meta []byte) error {
 	m.meta[name] = meta
+
+	checksum := sha256.Sum256(meta)
+	path := utils.URLFilePath(name, checksum[:], true)
+	m.consistent[path] = meta
 	return nil
 }
 
-func (m *memoryStore) SetMultiMeta(metas map[string][]byte) error {
+func (m *MemoryStore) SetMultiMeta(metas map[string][]byte) error {
 	for role, blob := range metas {
 		m.SetMeta(role, blob)
 	}
@@ -61,16 +85,16 @@ func (m *memoryStore) SetMultiMeta(metas map[string][]byte) error {
 
 // RemoveMeta removes the metadata for a single role - if the metadata doesn't
 // exist, no error is returned
-func (m *memoryStore) RemoveMeta(name string) error {
+func (m *MemoryStore) RemoveMeta(name string) error {
 	delete(m.meta, name)
 	return nil
 }
 
-func (m *memoryStore) GetTarget(path string) (io.ReadCloser, error) {
+func (m *MemoryStore) GetTarget(path string) (io.ReadCloser, error) {
 	return &utils.NoopCloser{Reader: bytes.NewReader(m.files[path])}, nil
 }
 
-func (m *memoryStore) WalkStagedTargets(paths []string, targetsFn targetsWalkFunc) error {
+func (m *MemoryStore) WalkStagedTargets(paths []string, targetsFn targetsWalkFunc) error {
 	if len(paths) == 0 {
 		for path, dat := range m.files {
 			meta, err := data.NewFileMeta(bytes.NewReader(dat), "sha256")
@@ -100,16 +124,16 @@ func (m *memoryStore) WalkStagedTargets(paths []string, targetsFn targetsWalkFun
 	return nil
 }
 
-func (m *memoryStore) Commit(map[string][]byte, bool, map[string]data.Hashes) error {
+func (m *MemoryStore) Commit(map[string][]byte, bool, map[string]data.Hashes) error {
 	return nil
 }
 
-func (m *memoryStore) GetKey(role string) ([]byte, error) {
-	return nil, fmt.Errorf("GetKey is not implemented for the memoryStore")
+func (m *MemoryStore) GetKey(role string) ([]byte, error) {
+	return nil, fmt.Errorf("GetKey is not implemented for the MemoryStore")
 }
 
 // Clear this existing memory store by setting this store as new empty one
-func (m *memoryStore) RemoveAll() error {
+func (m *MemoryStore) RemoveAll() error {
 	m.meta = make(map[string][]byte)
 	m.files = make(map[string][]byte)
 	m.keys = make(map[string][]data.PrivateKey)

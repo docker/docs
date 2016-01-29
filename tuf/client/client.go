@@ -7,8 +7,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"path"
-	"strings"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary"
@@ -179,7 +177,8 @@ func (c *Client) downloadRoot() error {
 	var s *data.Signed
 	var raw []byte
 	if download {
-		raw, s, err = c.downloadSigned(role, size, expectedSha256)
+		// use consistent download if we have the checksum.
+		raw, s, err = c.downloadSigned(role, size, expectedSha256, len(expectedSha256) > 0)
 		if err != nil {
 			return err
 		}
@@ -267,7 +266,7 @@ func (c *Client) downloadTimestamp() error {
 	}
 	// unlike root, targets and snapshot, always try and download timestamps
 	// from remote, only using the cache one if we couldn't reach remote.
-	raw, s, err := c.downloadSigned(role, notary.MaxTimestampSize, nil)
+	raw, s, err := c.downloadSigned(role, notary.MaxTimestampSize, nil, false)
 	if err == nil {
 		ts, err = c.verifyTimestamp(s, version, c.keysDB)
 		if err == nil {
@@ -344,7 +343,7 @@ func (c *Client) downloadSnapshot() error {
 	}
 	var s *data.Signed
 	if download {
-		raw, s, err = c.downloadSigned(role, size, expectedSha256)
+		raw, s, err = c.downloadSigned(role, size, expectedSha256, true)
 		if err != nil {
 			return err
 		}
@@ -421,8 +420,9 @@ func (c *Client) downloadTargets(role string) error {
 	return nil
 }
 
-func (c *Client) downloadSigned(role string, size int64, expectedSha256 []byte) ([]byte, *data.Signed, error) {
-	raw, err := c.remote.GetMeta(role, size)
+func (c *Client) downloadSigned(role string, size int64, expectedSha256 []byte, consistent bool) ([]byte, *data.Signed, error) {
+	rolePath := utils.URLFilePath(role, expectedSha256, consistent)
+	raw, err := c.remote.GetMeta(rolePath, size)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -481,11 +481,7 @@ func (c Client) getTargetsFile(role string, keyIDs []string, snapshotMeta data.F
 	size := snapshotMeta[role].Length
 	var s *data.Signed
 	if download {
-		rolePath, err := c.RoleTargetsPath(role, hex.EncodeToString(expectedSha256), consistent)
-		if err != nil {
-			return nil, err
-		}
-		raw, s, err = c.downloadSigned(rolePath, size, expectedSha256)
+		raw, s, err = c.downloadSigned(role, size, expectedSha256, true)
 		if err != nil {
 			return nil, err
 		}
@@ -507,24 +503,6 @@ func (c Client) getTargetsFile(role string, keyIDs []string, snapshotMeta data.F
 		}
 	}
 	return s, nil
-}
-
-// RoleTargetsPath generates the appropriate HTTP URL for the targets file,
-// based on whether the repo is marked as consistent.
-func (c Client) RoleTargetsPath(role string, hashSha256 string, consistent bool) (string, error) {
-	if consistent {
-		// Use path instead of filepath since we refer to the TUF role directly instead of its target files
-		dir := path.Dir(role)
-		if strings.Contains(role, "/") {
-			lastSlashIdx := strings.LastIndex(role, "/")
-			role = role[lastSlashIdx+1:]
-		}
-		role = path.Join(
-			dir,
-			fmt.Sprintf("%s.%s.json", hashSha256, role),
-		)
-	}
-	return role, nil
 }
 
 // TargetMeta ensures the repo is up to date. It assumes downloadTargets
