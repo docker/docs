@@ -6,7 +6,6 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"io"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary"
@@ -540,19 +539,4 @@ func (c Client) TargetMeta(role, path string, excludeRoles ...string) (*data.Fil
 		}
 	}
 	return meta, ""
-}
-
-// DownloadTarget downloads the target to dst from the remote
-func (c Client) DownloadTarget(dst io.Writer, path string, meta *data.FileMeta) error {
-	reader, err := c.remote.GetTarget(path)
-	if err != nil {
-		return err
-	}
-	defer reader.Close()
-	r := io.TeeReader(
-		io.LimitReader(reader, meta.Length),
-		dst,
-	)
-	err = utils.ValidateTarget(r, meta)
-	return err
 }
