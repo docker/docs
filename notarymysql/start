@@ -1,11 +1,39 @@
 #!/bin/bash
 set -e
 
-DB_NAME='notary'
+# This database is used by both of Notary-Server and Notary-Signer
+# the early days which we would not use it any longer.
+DB_NAME_OLD='notary'
+
+# Message which will be displayed when the database 'notary' exsits.
+DB_WARNING="
+=============== WARNING =================
+# The schema has changed.               #
+# Make sure you migrate the tables in   #
+# 'notary'                              #
+# to                                    #
+# 'notaryserver' and 'notarysigner'     #
+=========================================
+"
+
+# Although the Notary-Server and Notary-Signer could use the same
+# database, it's better to separate that for security.
+DB_NAME_SERVER='notaryserver'
+DB_NAME_SIGNER='notarysigner'
+DB_NAME=($DB_NAME_SERVER,$DB_NAME_SIGNER)
+
 DB_TABLE_FILES='tuf_files'
 DB_TABLE_KEYS='timestamp_keys'
 DB_USER='root'
 DB_PASS=''
+
+# Default username and password for Notary-Server
+DB_USER_SERVER='server'
+DB_PASS_SERVER=''
+
+# Default username and password for Notary-Signer
+DB_USER_SIGNER='signer'
+DB_PASS_SIGNER=''
 
 DB_REMOTE_ROOT_NAME=''
 DB_REMOTE_ROOT_PASS=''
@@ -93,6 +121,14 @@ if [ -n "${DB_USER}" -o -n "${DB_NAME}" ]; then
     sleep 1
   done
 
+  # Check whether the old database exists and warn users to
+  # manually migrate those tables if so.
+  if [ -n "${DB_NAME_OLD}" ]; then
+      if mysql --defaults-file=/etc/mysql/debian.cnf -e "USE $DB_NAME_OLD;" 2>/dev/null; then
+        echo "$DB_WARNING"
+      fi
+  fi
+
   if [ -n "${DB_NAME}" ]; then
     for db in $(awk -F',' '{for (i = 1 ; i <= NF ; i++) print $i}' <<< "${DB_NAME}"); do
       if mysql --defaults-file=/etc/mysql/debian.cnf -e "USE $db;" 2>/dev/null; then
@@ -101,14 +137,21 @@ if [ -n "${DB_USER}" -o -n "${DB_NAME}" ]; then
         echo "Creating database \"$db\"..."
         mysql --defaults-file=/etc/mysql/debian.cnf \
           -e "CREATE DATABASE IF NOT EXISTS \`$db\` DEFAULT CHARACTER SET \`utf8\` COLLATE \`utf8_unicode_ci\`;"
-          if [ -n "${DB_USER}" ]; then
-            echo "Granting access to database \"$db\" for user \"${DB_USER}\"..."
+          if [ -n "${DB_USER_SERVER}" -a $db = $DB_NAME_SERVER ]; then
+            echo "Granting access to database \"$db\" for user \"${DB_USER_SERVER}\"..."
             mysql --defaults-file=/etc/mysql/debian.cnf \
-            -e "GRANT ALL PRIVILEGES ON \`$db\`.* TO '${DB_USER}' IDENTIFIED BY '${DB_PASS}';"
+            -e "GRANT ALL PRIVILEGES ON \`$db\`.* TO '${DB_USER_SERVER}' IDENTIFIED BY '${DB_PASS_SERVER}';"
+            # Create our Database:
+            mysql -uroot $db < ./initial-notaryserver.sql
+            mysql -uroot $db < ./migrate-notaryserver.sql
           fi
-          # Create our Database:
-          mysql -uroot $db < ./initial.sql
-          mysql -uroot $db < ./migrate.sql
+          if [ -n "${DB_USER_SIGNER}" -a $db = $DB_NAME_SIGNER ]; then
+            echo "Granting access to database \"$db\" for user \"${DB_USER_SIGNER}\"..."
+            mysql --defaults-file=/etc/mysql/debian.cnf \
+            -e "GRANT ALL PRIVILEGES ON \`$db\`.* TO '${DB_USER_SIGNER}' IDENTIFIED BY '${DB_PASS_SIGNER}';"
+            # Create our Database:
+            mysql -uroot $db < ./initial-notarysigner.sql
+          fi
       fi
     done
   fi
