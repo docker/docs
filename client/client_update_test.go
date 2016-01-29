@@ -9,6 +9,7 @@ import (
 	"net/http/httptest"
 	"os"
 	"reflect"
+	"strings"
 	"testing"
 	"time"
 
@@ -61,17 +62,18 @@ func bumpVersions(t *testing.T, s *testutils.MetadataSwizzler, offset int) {
 // create a server that just serves static metadata files from a metaStore
 func readOnlyServer(t *testing.T, cache store.MetadataStore, notFoundStatus int) *httptest.Server {
 	m := mux.NewRouter()
-	m.HandleFunc("/v2/docker.com/notary/_trust/tuf/{role:.*}.json",
-		func(w http.ResponseWriter, r *http.Request) {
-			vars := mux.Vars(r)
-			metaBytes, err := cache.GetMeta(vars["role"], -1)
-			if _, ok := err.(store.ErrMetaNotFound); ok {
-				w.WriteHeader(notFoundStatus)
-			} else {
-				require.NoError(t, err)
-				w.Write(metaBytes)
-			}
-		})
+	handler := func(w http.ResponseWriter, r *http.Request) {
+		vars := mux.Vars(r)
+		metaBytes, err := cache.GetMeta(vars["role"], -1)
+		if _, ok := err.(store.ErrMetaNotFound); ok {
+			w.WriteHeader(notFoundStatus)
+		} else {
+			require.NoError(t, err)
+			w.Write(metaBytes)
+		}
+	}
+	m.HandleFunc("/v2/docker.com/notary/_trust/tuf/{role:.*}.{checksum:.*}.json", handler)
+	m.HandleFunc("/v2/docker.com/notary/_trust/tuf/{role:.*}.json", handler)
 	return httptest.NewServer(m)
 }
 
@@ -632,7 +634,7 @@ func testUpdateRemoteNon200Error(t *testing.T, opts updateOpts, errExpected inte
 		require.IsType(t, errExpected, err, "wrong update error when %s is %v (forWrite: %v)",
 			opts.role, opts.notFoundCode, opts.forWrite)
 		if notFound, ok := err.(store.ErrMetaNotFound); ok {
-			require.Equal(t, opts.role, notFound.Resource, "wrong resource missing (forWrite: %v)", opts.forWrite)
+			require.True(t, strings.HasPrefix(notFound.Resource, opts.role), "wrong resource missing (forWrite: %v)", opts.forWrite)
 		}
 	}
 }

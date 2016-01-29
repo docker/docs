@@ -5,6 +5,7 @@ import (
 	"crypto/sha256"
 	"crypto/sha512"
 	"crypto/tls"
+	"encoding/hex"
 	"fmt"
 	"io"
 	"net/http"
@@ -145,4 +146,15 @@ func FindRoleIndex(rs []*data.Role, name string) int {
 		}
 	}
 	return -1
+}
+
+// URLFilePath generates the appropriate HTTP URL path for the role,
+// based on whether the repo is marked as consistent. The RemoteStore
+// is responsible for adding file extensions.
+func URLFilePath(role string, hashSha256 []byte, consistent bool) string {
+	if consistent && len(hashSha256) > 0 {
+		hash := hex.EncodeToString(hashSha256)
+		return fmt.Sprintf("%s.%s", role, hash)
+	}
+	return role
 }

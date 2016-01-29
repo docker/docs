@@ -3,6 +3,8 @@ package client
 import (
 	"bytes"
 	"crypto/rand"
+	"crypto/sha256"
+	"encoding/hex"
 	regJson "encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -1062,7 +1064,33 @@ func fakeServerData(t *testing.T, repo *NotaryRepository, mux *http.ServeMux,
 		data.DefaultExpires("timestamp"))
 	assert.NoError(t, err)
 
+	timestampJSON, _ := json.Marshal(signedTimestamp)
+	snapshotJSON, _ := json.Marshal(signedSnapshot)
+	targetsJSON, _ := json.Marshal(signedTargets)
+	level1JSON, _ := json.Marshal(signedLevel1)
+	level2JSON, _ := json.Marshal(signedLevel2)
+
+	cksmBytes := sha256.Sum256(rootFileBytes)
+	rootChecksum := hex.EncodeToString(cksmBytes[:])
+
+	cksmBytes = sha256.Sum256(snapshotJSON)
+	snapshotChecksum := hex.EncodeToString(cksmBytes[:])
+
+	cksmBytes = sha256.Sum256(targetsJSON)
+	targetsChecksum := hex.EncodeToString(cksmBytes[:])
+
+	cksmBytes = sha256.Sum256(level1JSON)
+	level1Checksum := hex.EncodeToString(cksmBytes[:])
+
+	cksmBytes = sha256.Sum256(level2JSON)
+	level2Checksum := hex.EncodeToString(cksmBytes[:])
+
 	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/root.json",
+		func(w http.ResponseWriter, r *http.Request) {
+			assert.NoError(t, err)
+			fmt.Fprint(w, string(rootFileBytes))
+		})
+	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/root."+rootChecksum+".json",
 		func(w http.ResponseWriter, r *http.Request) {
 			assert.NoError(t, err)
 			fmt.Fprint(w, string(rootFileBytes))
@@ -1070,33 +1098,42 @@ func fakeServerData(t *testing.T, repo *NotaryRepository, mux *http.ServeMux,
 
 	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/timestamp.json",
 		func(w http.ResponseWriter, r *http.Request) {
-			timestampJSON, _ := json.Marshal(signedTimestamp)
 			fmt.Fprint(w, string(timestampJSON))
 		})
 
 	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/snapshot.json",
 		func(w http.ResponseWriter, r *http.Request) {
-			snapshotJSON, _ := json.Marshal(signedSnapshot)
+			fmt.Fprint(w, string(snapshotJSON))
+		})
+	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/snapshot."+snapshotChecksum+".json",
+		func(w http.ResponseWriter, r *http.Request) {
 			fmt.Fprint(w, string(snapshotJSON))
 		})
 
 	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/targets.json",
 		func(w http.ResponseWriter, r *http.Request) {
-			targetsJSON, _ := json.Marshal(signedTargets)
+			fmt.Fprint(w, string(targetsJSON))
+		})
+	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/targets."+targetsChecksum+".json",
+		func(w http.ResponseWriter, r *http.Request) {
 			fmt.Fprint(w, string(targetsJSON))
 		})
 
 	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/targets/level1.json",
 		func(w http.ResponseWriter, r *http.Request) {
-			level1JSON, err := json.Marshal(signedLevel1)
-			assert.NoError(t, err)
+			fmt.Fprint(w, string(level1JSON))
+		})
+	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/targets/level1."+level1Checksum+".json",
+		func(w http.ResponseWriter, r *http.Request) {
 			fmt.Fprint(w, string(level1JSON))
 		})
 
 	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/targets/level2.json",
 		func(w http.ResponseWriter, r *http.Request) {
-			level2JSON, err := json.Marshal(signedLevel2)
-			assert.NoError(t, err)
+			fmt.Fprint(w, string(level2JSON))
+		})
+	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/targets/level2."+level2Checksum+".json",
+		func(w http.ResponseWriter, r *http.Request) {
 			fmt.Fprint(w, string(level2JSON))
 		})
 }
