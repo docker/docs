@@ -1,4 +1,4 @@
--- This migrates initial.sql to tables that are needed for GORM
+-- This migrates initial-notaryserver.sql to tables that are needed for GORM
 
 ALTER TABLE `tuf_files`
 ADD COLUMN `created_at` timestamp NULL DEFAULT NULL AFTER `id`,

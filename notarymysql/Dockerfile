@@ -7,8 +7,9 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
 
 ADD start /start
-ADD initial.sql /initial.sql
-ADD migrate.sql /migrate.sql
+ADD initial-notaryserver.sql /initial-notaryserver.sql
+ADD initial-notarysigner.sql /initial-notarysigner.sql
+ADD migrate-notaryserver.sql /migrate-notaryserver.sql
 RUN chmod 755 /start
 
 EXPOSE 3306
