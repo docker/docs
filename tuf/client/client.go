@@ -11,6 +11,7 @@ import (
 	"strings"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/docker/notary"
 	tuf "github.com/docker/notary/tuf"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/keys"
@@ -18,8 +19,6 @@ import (
 	"github.com/docker/notary/tuf/store"
 	"github.com/docker/notary/tuf/utils"
 )
-
-const maxSize int64 = 5 << 20
 
 // Client is a usability wrapper around a raw TUF repo
 type Client struct {
@@ -131,7 +130,9 @@ func (c Client) checkRoot() error {
 func (c *Client) downloadRoot() error {
 	logrus.Debug("Downloading Root...")
 	role := data.CanonicalRootRole
-	size := maxSize
+	// We can't read an exact size for the root metadata without risking getting stuck in the TUF update cycle
+	// since it's possible that downloading timestamp/snapshot metadata may fail due to a signature mismatch
+	var size int64 = -1
 	var expectedSha256 []byte
 	if c.local.Snapshot != nil {
 		size = c.local.Snapshot.Signed.Meta[role].Length
@@ -252,7 +253,7 @@ func (c *Client) downloadTimestamp() error {
 		old         *data.Signed
 		version     = 0
 	)
-	cachedTS, err := c.cache.GetMeta(role, maxSize)
+	cachedTS, err := c.cache.GetMeta(role, notary.MaxTimestampSize)
 	if err == nil {
 		cached := &data.Signed{}
 		err := json.Unmarshal(cachedTS, cached)
@@ -266,7 +267,7 @@ func (c *Client) downloadTimestamp() error {
 	}
 	// unlike root, targets and snapshot, always try and download timestamps
 	// from remote, only using the cache one if we couldn't reach remote.
-	raw, s, err := c.downloadSigned(role, maxSize, nil)
+	raw, s, err := c.downloadSigned(role, notary.MaxTimestampSize, nil)
 	if err != nil || len(raw) == 0 {
 		if old == nil {
 			if err == nil {

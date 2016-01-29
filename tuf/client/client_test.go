@@ -3,6 +3,7 @@ package client
 import (
 	"crypto/sha256"
 	"encoding/json"
+	"fmt"
 	"strconv"
 	"testing"
 	"time"
@@ -332,6 +333,51 @@ func TestDownloadTargetsHappy(t *testing.T) {
 	assert.NoError(t, err)
 }
 
+// TestDownloadTargetsLarge: Check that we can download very large targets metadata files,
+// which may be caused by adding a large number of targets.
+// This test is slow, so it will not run in short mode.
+func TestDownloadTargetsLarge(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode")
+	}
+
+	kdb, repo, _, err := testutils.EmptyRepo("docker.com/notary")
+	assert.NoError(t, err)
+	localStorage := store.NewMemoryStore(nil, nil)
+	remoteStorage := store.NewMemoryStore(nil, nil)
+	client := NewClient(repo, remoteStorage, kdb, localStorage)
+
+	hash := sha256.Sum256([]byte{})
+	f := data.FileMeta{
+		Length: 1,
+		Hashes: map[string][]byte{
+			"sha256": hash[:],
+		},
+	}
+	// Add a ton of target files to the targets role to make this targets metadata huge
+	// 75,000 targets results in > 5MB (~6.5MB on recent runs)
+	for i := 0; i < 75000; i++ {
+		_, err = repo.AddTargets(data.CanonicalTargetsRole, data.Files{strconv.Itoa(i): f})
+		assert.NoError(t, err)
+	}
+
+	signedOrig, err := repo.SignTargets("targets", data.DefaultExpires("targets"))
+	assert.NoError(t, err)
+	orig, err := json.Marshal(signedOrig)
+	assert.NoError(t, err)
+	err = remoteStorage.SetMeta("targets", orig)
+	assert.NoError(t, err)
+
+	// call repo.SignSnapshot to update the targets role in the snapshot
+	repo.SignSnapshot(data.DefaultExpires("snapshot"))
+
+	// Clear the cache to force an online download
+	client.cache.RemoveAll()
+
+	err = client.downloadTargets("targets")
+	assert.NoError(t, err)
+}
+
 func TestDownloadTargetsDeepHappy(t *testing.T) {
 	kdb, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
@@ -601,6 +647,49 @@ func TestDownloadSnapshotHappy(t *testing.T) {
 	assert.NoError(t, err)
 	err = remoteStorage.SetMeta("timestamp", orig)
 	assert.NoError(t, err)
+
+	err = client.downloadSnapshot()
+	assert.NoError(t, err)
+}
+
+// TestDownloadSnapshotLarge: Check that we can download very large snapshot metadata files,
+// which may be caused by adding a large number of delegations.
+// This test is slow, so it will not run in short mode.
+func TestDownloadSnapshotLarge(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode")
+	}
+	kdb, repo, _, err := testutils.EmptyRepo("docker.com/notary")
+	assert.NoError(t, err)
+	localStorage := store.NewMemoryStore(nil, nil)
+	remoteStorage := store.NewMemoryStore(nil, nil)
+	client := NewClient(repo, remoteStorage, kdb, localStorage)
+
+	// Add a ton of empty delegation roles to targets to make snapshot data huge
+	// This can also be done by adding legitimate delegations but it will be much slower
+	// 75,000 delegation roles results in > 5MB (~7.3MB on recent runs)
+	for i := 0; i < 75000; i++ {
+		newRole := &data.SignedTargets{}
+		repo.Targets[fmt.Sprintf("targets/%d", i)] = newRole
+	}
+
+	// create and "upload" sample snapshot and timestamp
+	signedOrig, err := repo.SignSnapshot(data.DefaultExpires("snapshot"))
+	assert.NoError(t, err)
+	orig, err := json.Marshal(signedOrig)
+	assert.NoError(t, err)
+	err = remoteStorage.SetMeta("snapshot", orig)
+	assert.NoError(t, err)
+
+	signedOrig, err = repo.SignTimestamp(data.DefaultExpires("timestamp"))
+	assert.NoError(t, err)
+	orig, err = json.Marshal(signedOrig)
+	assert.NoError(t, err)
+	err = remoteStorage.SetMeta("timestamp", orig)
+	assert.NoError(t, err)
+
+	// Clear the cache to force an online download
+	client.cache.RemoveAll()
 
 	err = client.downloadSnapshot()
 	assert.NoError(t, err)

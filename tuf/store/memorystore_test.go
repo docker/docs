@@ -21,6 +21,10 @@ func TestMemoryStore(t *testing.T) {
 	require.NoError(t, err)
 	require.Equal(t, metaContent, meta)
 
+	meta, err = s.GetMeta("exists", -1)
+	require.NoError(t, err)
+	require.Equal(t, metaContent, meta)
+
 	err = s.RemoveAll()
 	require.NoError(t, err)
 
