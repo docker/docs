@@ -440,7 +440,7 @@ command an authorization token. Of course, you need to have `curl` installed as 
 
 4. Curl the client bundle down to your node.
 
-		    $ curl -k -H "X-Access-Token:admin:$AUTHTOKEN" https://<ducp-0 IP>/api/clientbundle -o bundle.zip
+		    $ curl -k -H "Authorization: Bearer $AUTHTOKEN" https://<ducp-0 IP>/api/clientbundle -o bundle.zip
 
     The browser downloads a `bundle.zip` file.
 
