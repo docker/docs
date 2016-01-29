@@ -117,6 +117,9 @@ Configuration options:
 	The debugging server provides [pprof](https://golang.org/pkg/net/http/pprof/)
 	and [expvar](https://golang.org/pkg/expvar/) endpoints.
 
+- `-logf=<format>` - This flag sets the output format for the logs. Possible 
+    formats are "json" and "logfmt"
+
 
 Get the official Docker image, which comes with [some sane defaults](
 https://github.com/docker/notary/blob/master/fixtures/server-config-local.json),
