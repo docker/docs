@@ -136,8 +136,13 @@ func changeTargetsDelegation(repo *tuf.Repo, c changelist.Change) error {
 		if err := r.AddPathHashPrefixes(td.AddPathHashPrefixes); err != nil {
 			return err
 		}
-		r.RemoveKeys(removeTUFKeyIDs)
-		r.RemovePaths(td.RemovePaths)
+
+		// Clear all paths if we're given the flag, else remove specified paths
+		if td.ClearAllPaths {
+			r.RemovePaths(r.Paths)
+		} else {
+			r.RemovePaths(td.RemovePaths)
+		}
 		r.RemovePathHashPrefixes(td.RemovePathHashPrefixes)
 		return repo.UpdateDelegations(r, td.AddKeys)
 	case changelist.ActionDelete:
