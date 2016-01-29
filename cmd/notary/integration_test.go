@@ -844,6 +844,36 @@ func TestLogLevelFlags(t *testing.T) {
 	assert.Equal(t, "debug", logrus.GetLevel().String())
 }
 
+func TestClientKeyPassphraseChange(t *testing.T) {
+	// -- setup --
+	setUp(t)
+
+	tempDir := tempDirWithConfig(t, "{}")
+	defer os.RemoveAll(tempDir)
+
+	server := setupServer()
+	defer server.Close()
+
+	// -- tests --
+	_, err := runCommand(t, tempDir, "-s", server.URL, "init", "gun1")
+	assert.NoError(t, err)
+
+	// we should have three keys stored locally in total: root, targets, snapshot
+	rootIDs, _ := assertNumKeys(t, tempDir, 1, 2, true)
+
+	// only one rootID, try changing the private key passphrase
+	rootID := rootIDs[0]
+	_, err = runCommand(t, tempDir, "-s", server.URL, "key", "passwd", rootID)
+	assert.NoError(t, err)
+	// make sure we can init a new repo with this key
+	_, err = runCommand(t, tempDir, "-s", server.URL, "init", "gun2")
+	assert.NoError(t, err)
+
+	// assert that the root key ID didn't change
+	rootIDs, _ = assertNumKeys(t, tempDir, 1, 4, true)
+	assert.Equal(t, rootID, rootIDs[0])
+}
+
 func tempDirWithConfig(t *testing.T, config string) string {
 	tempDir, err := ioutil.TempDir("/tmp", "repo")
 	assert.NoError(t, err)
