@@ -42,8 +42,8 @@ type delegationCommander struct {
 	configGetter func() (*viper.Viper, error)
 	retriever    passphrase.Retriever
 
-	paths               []string
-	removeAll, forceYes bool
+	paths                         []string
+	allPaths, removeAll, forceYes bool
 }
 
 func (d *delegationCommander) GetCommand() *cobra.Command {
@@ -52,12 +52,13 @@ func (d *delegationCommander) GetCommand() *cobra.Command {
 
 	cmdRemDelg := cmdDelegationRemoveTemplate.ToCommand(d.delegationRemove)
 	cmdRemDelg.Flags().StringSliceVar(&d.paths, "paths", nil, "List of paths to remove")
-	cmdRemDelg.Flags().BoolVarP(
-		&d.forceYes, "yes", "y", false, "Answer yes to the removal question (no confirmation)")
+	cmdRemDelg.Flags().BoolVarP(&d.forceYes, "yes", "y", false, "Answer yes to the removal question (no confirmation)")
+	cmdRemDelg.Flags().BoolVar(&d.allPaths, "all-paths", false, "Remove all paths from this delegation")
 	cmd.AddCommand(cmdRemDelg)
 
 	cmdAddDelg := cmdDelegationAddTemplate.ToCommand(d.delegationAdd)
 	cmdAddDelg.Flags().StringSliceVar(&d.paths, "paths", nil, "List of paths to add")
+	cmdAddDelg.Flags().BoolVar(&d.allPaths, "all-paths", false, "Add all paths to this delegation")
 	cmd.AddCommand(cmdAddDelg)
 	return cmd
 }
@@ -121,18 +122,19 @@ func (d *delegationCommander) delegationRemove(cmd *cobra.Command, args []string
 	}
 
 	// If we're only given the gun and the role, attempt to remove all data for this delegation
-	if len(args) == 2 && d.paths == nil {
+	if len(args) == 2 && d.paths == nil && !d.allPaths {
 		d.removeAll = true
 	}
 
 	keyIDs := []string{}
-	// Change nil paths to empty slice for TUF
-	if d.paths == nil {
-		d.paths = []string{}
-	}
 
 	if len(args) > 2 {
 		keyIDs = args[2:]
+	}
+
+	// If the user passes --all-paths, don't use any of the passed in --paths
+	if d.allPaths {
+		d.paths = nil
 	}
 
 	// no online operations are performed by add so the transport argument
@@ -160,6 +162,12 @@ func (d *delegationCommander) delegationRemove(cmd *cobra.Command, args []string
 			return fmt.Errorf("failed to remove delegation: %v", err)
 		}
 	} else {
+		if d.allPaths {
+			err = nRepo.ClearDelegationPaths(role)
+			if err != nil {
+				return fmt.Errorf("failed to remove delegation: %v", err)
+			}
+		}
 		// Remove any keys or paths that we passed in
 		err = nRepo.RemoveDelegationKeysAndPaths(role, keyIDs, d.paths)
 		if err != nil {
@@ -175,6 +183,9 @@ func (d *delegationCommander) delegationRemove(cmd *cobra.Command, args []string
 		if len(keyIDs) > 0 {
 			removingItems = removingItems + fmt.Sprintf("with keys %s, ", keyIDs)
 		}
+		if d.allPaths {
+			removingItems = removingItems + "with all paths,"
+		}
 		if d.paths != nil {
 			removingItems = removingItems + fmt.Sprintf("with paths [%s], ", prettyPrintPaths(d.paths))
 		}
@@ -187,7 +198,7 @@ func (d *delegationCommander) delegationRemove(cmd *cobra.Command, args []string
 
 // delegationAdd creates a new delegation by adding a public key from a certificate to a specific role in a GUN
 func (d *delegationCommander) delegationAdd(cmd *cobra.Command, args []string) error {
-	if len(args) < 2 || len(args) < 3 && d.paths == nil {
+	if len(args) < 2 || len(args) < 3 && d.paths == nil && !d.allPaths {
 		cmd.Usage()
 		return fmt.Errorf("must specify the Global Unique Name and the role of the delegation along with the public key certificate paths and/or a list of paths to add")
 	}
@@ -219,6 +230,18 @@ func (d *delegationCommander) delegationAdd(cmd *cobra.Command, args []string) e
 		}
 	}
 
+	for _, path := range d.paths {
+		if path == "" {
+			d.allPaths = true
+			break
+		}
+	}
+
+	// If the user passes --all-paths (or gave the "" path in --paths), give the "" path
+	if d.allPaths {
+		d.paths = []string{""}
+	}
+
 	// no online operations are performed by add so the transport argument
 	// should be nil
 	nRepo, err := notaryclient.NewNotaryRepository(
@@ -244,9 +267,16 @@ func (d *delegationCommander) delegationAdd(cmd *cobra.Command, args []string) e
 	}
 
 	cmd.Println("")
+	addingItems := ""
+	if len(pubKeyIDs) > 0 {
+		addingItems = addingItems + fmt.Sprintf("with keys %s, ", pubKeys)
+	}
+	if d.paths != nil || d.allPaths {
+		addingItems = addingItems + fmt.Sprintf("with paths [%s], ", prettyPrintPaths(d.paths))
+	}
 	cmd.Printf(
-		"Addition of delegation role %s with keys %s to paths [%s], to repository \"%s\" staged for next publish.\n",
-		role, pubKeyIDs, prettyPrintPaths(d.paths), gun)
+		"Addition of delegation role %s %s to repository \"%s\" staged for next publish.\n",
+		role, addingItems, gun)
 	cmd.Println("")
 	return nil
 }

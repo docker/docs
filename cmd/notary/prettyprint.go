@@ -202,9 +202,9 @@ func prettyPrintRoles(rs []*data.Role, writer io.Writer, roleType string) {
 func prettyPrintPaths(paths []string) string {
 	prettyPaths := []string{}
 	for _, path := range paths {
-		// manually escape ""
+		// manually escape "" and designate that it is all paths with an extra print <all paths>
 		if path == "" {
-			path = "\"\""
+			path = "\"\" <all paths>"
 		}
 		prettyPaths = append(prettyPaths, path)
 	}
