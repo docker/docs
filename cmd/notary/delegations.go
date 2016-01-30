@@ -9,6 +9,7 @@ import (
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
+	"github.com/docker/notary/tuf/utils"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -206,7 +207,11 @@ func (d *delegationCommander) delegationAdd(cmd *cobra.Command, args []string) e
 	// Make keyID slice for better CLI print
 	pubKeyIDs := []string{}
 	for _, pubKey := range pubKeys {
-		pubKeyIDs = append(pubKeyIDs, pubKey.ID())
+		pubKeyID, err := utils.CanonicalKeyID(pubKey)
+		if err != nil {
+			return err
+		}
+		pubKeyIDs = append(pubKeyIDs, pubKeyID)
 	}
 
 	cmd.Println("")
