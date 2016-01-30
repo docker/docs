@@ -5,6 +5,7 @@ description = "Description of the Notary MySQL"
 keywords = ["docker, notary, notary-mysql"]
 [menu.main]
 parent="mn_notary"
+weight=9
 +++
 <![end-metadata]-->
 
