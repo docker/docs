@@ -104,7 +104,8 @@ func tufAdd(cmd *cobra.Command, args []string) {
 	if err != nil {
 		fatalf(err.Error())
 	}
-	err = nRepo.AddTarget(target)
+	// If roles is empty, we default to adding to targets
+	err = nRepo.AddTarget(target, roles...)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -163,8 +164,9 @@ func tufList(cmd *cobra.Command, args []string) {
 		fatalf(err.Error())
 	}
 
-	// Retreive the remote list of signed targets
-	targetList, err := nRepo.ListTargets(data.CanonicalTargetsRole, "targets/releases")
+	// Retrieve the remote list of signed targets, prioritizing the passed-in list over targets
+	roles = append(roles, data.CanonicalTargetsRole)
+	targetList, err := nRepo.ListTargets(roles...)
 	if err != nil {
 		fatalf(err.Error())
 	}
@@ -265,7 +267,8 @@ func tufRemove(cmd *cobra.Command, args []string) {
 	if err != nil {
 		fatalf(err.Error())
 	}
-	err = repo.RemoveTarget(targetName)
+	// If roles is empty, we default to removing from targets
+	err = repo.RemoveTarget(targetName, roles...)
 	if err != nil {
 		fatalf(err.Error())
 	}
