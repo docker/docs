@@ -1,6 +1,6 @@
 <!--[metadata]>
 +++
-title = "Notary Server"
+title = "Server Architecture"
 description = "Description of the Notary Server"
 keywords = ["docker, notary, notary-server"]
 [menu.main]
@@ -8,7 +8,7 @@ parent="mn_notary"
 +++
 <![end-metadata]-->
 
-# Notary Server
+# Notary Server Architecture
 
 The Notary Server stores and updates the signed
 [TUF metadata files](
@@ -35,7 +35,7 @@ and a cert bundle from this authorization server containing the public key it
 uses to sign tokens.
 
 If token authentication is enabled on Notary Server, then any client that
-does not have a token will be redirected to the authoriziation server.
+does not have a token will be redirected to the authorization server.
 The client will log in, obtain a token, and then present the token to
 Notary Server on future requests.
 
@@ -66,7 +66,7 @@ certificates for your deployment of Notary Server, please make
 sure that the certificates **are not CAs**.  Otherwise if the server is
 compromised, it can sign any number of other client certs.
 
-As an example, please see [this script](opensslCertGen.sh) to see how to
+As an example, please see [this script](https://github.com/docker/notary/blob/master/docs/opensslCertGen.sh) to see how to
 generate client SSL certs with basic constraints using OpenSSL.
 
 ### How to configure and run Notary Server
