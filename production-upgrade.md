@@ -1,10 +1,29 @@
+<!--[metadata]>
 +++
-title ="Quickstart Guide"
-description="Docker Universal Control Plane"
+title = "Upgrade production installation"
+description = "Upgrade production installation"
+keywords = ["tbd, tbd"]
 [menu.main]
-weight="-98"
+parent="mn_ucp"
+weight=-80
 +++
+<![end-metadata]-->
 
+# Upgrade a production installation
+
+Intro 1-2 paras, page purpose, intended user, list steps if page is tutorial.
+
+
+## Plan your upgrade
+
+tbd
+
+## Upgrade procedure
+
+tbd
+
+
+<!--[metadata]>
 
 # Docker UCP Quickstart Guide
 
@@ -641,3 +660,4 @@ To learn more you can also investigate:
 * Try the [UCP hands-on lab](https://github.com/docker/ucp_lab).
 * [How to use the Docker Client](http://docs.docker.com/reference/commandline/cli/)
 * [An overview of Docker Swarm](http://docs.docker.com/swarm/)
+<![end-metadata]-->

@@ -1,9 +1,11 @@
+<!--[metadata]>
 +++
 title ="Set up high availability"
 description="Docker Universal Control Plane"
 [menu.main]
+parent="mn_ucp"
 +++
-
+<![end-metadata]-->
 
 
 # Set up high availability

@@ -1,11 +1,13 @@
+<!--[metadata]>
 +++
 title ="Manually setting up a CA"
 description="Docker Universal Control Plane"
 [menu.main]
+parent="mn_ucp"
 +++
+<![end-metadata]-->
 
-
-# Manually setting up a CA
+# Manually set up a Certificate Authority
 
 A few features of UCP require an external CA (cfssl or equivalent) to sign
 certs. By default in developer mode, these services aren't created (maybe we'll
