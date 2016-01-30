@@ -179,31 +179,36 @@ func (tr *Repo) GetAllLoadedRoles() []*data.Role {
 }
 
 // GetDelegation finds the role entry representing the provided
-// role name or ErrInvalidRole
-func (tr *Repo) GetDelegation(role string) (*data.Role, error) {
+// role name along with its associated public keys, or ErrInvalidRole
+func (tr *Repo) GetDelegation(role string) (*data.Role, data.Keys, error) {
 	r := data.Role{Name: role}
 	if !r.IsDelegation() {
-		return nil, data.ErrInvalidRole{Role: role, Reason: "not a valid delegated role"}
+		return nil, nil, data.ErrInvalidRole{Role: role, Reason: "not a valid delegated role"}
 	}
 
 	parent := path.Dir(role)
 
 	// check the parent role
 	if parentRole := tr.keysDB.GetRole(parent); parentRole == nil {
-		return nil, data.ErrInvalidRole{Role: role, Reason: "parent role not found"}
+		return nil, nil, data.ErrInvalidRole{Role: role, Reason: "parent role not found"}
 	}
 
 	// check the parent role's metadata
 	p, ok := tr.Targets[parent]
 	if !ok { // the parent targetfile may not exist yet, so it can't be in the list
-		return nil, data.ErrNoSuchRole{Role: role}
+		return nil, nil, data.ErrNoSuchRole{Role: role}
 	}
 
 	foundAt := utils.FindRoleIndex(p.Signed.Delegations.Roles, role)
 	if foundAt < 0 {
-		return nil, data.ErrNoSuchRole{Role: role}
+		return nil, nil, data.ErrNoSuchRole{Role: role}
 	}
-	return p.Signed.Delegations.Roles[foundAt], nil
+	delegationRole := p.Signed.Delegations.Roles[foundAt]
+	keys := make(data.Keys)
+	for _, keyID := range delegationRole.KeyIDs {
+		keys[keyID] = p.Signed.Delegations.Keys[keyID]
+	}
+	return delegationRole, keys, nil
 }
 
 // UpdateDelegations updates the appropriate delegations, either adding
