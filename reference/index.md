@@ -1,12 +1,12 @@
 +++
-title = "ucp Tool"
+title = "ucp tool Reference"
 description = "Run UCP commands"
 [menu.main]
 identifier = "ucp_ref"
 parent = "mn_ucp"
 +++
 
-# ucp Tool
+# ucp tool Reference
 
 
 ```

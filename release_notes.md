@@ -1,10 +1,12 @@
+<!--[metadata]>
 +++
 title ="Release Notes"
 description="Docker Universal Control Plane"
 [menu.main]
-weight="-99"
+parent="mn_ucp"
+weight="99"
 +++
-
+<![end-metadata]-->
 
 # UCP Release Notes
 

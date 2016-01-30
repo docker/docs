@@ -1,9 +1,11 @@
+<!--[metadata]>
 +++
 title ="Set up container networking"
 description="Docker Universal Control Plane"
 [menu.main]
+parent="mn_ucp"
 +++
-
+<![end-metadata]-->
 
 # Set up container networking with UCP
 
