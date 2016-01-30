@@ -24,6 +24,7 @@ import (
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
+	"github.com/docker/notary/tuf/utils"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
@@ -49,6 +50,11 @@ func runCommand(t *testing.T, tempDir string, args ...string) (string, error) {
 	retErr := cmd.Execute()
 	output, err := ioutil.ReadAll(b)
 	assert.NoError(t, err)
+
+	// Clean up state to mimic running a fresh command next time
+	for _, command := range cmd.Commands() {
+		command.ResetFlags()
+	}
 
 	return string(output), retErr
 }
@@ -360,6 +366,164 @@ func TestClientDelegationsInteraction(t *testing.T) {
 	output, err = runCommand(t, tempDir, "-s", server.URL, "delegation", "list", "gun")
 	assert.NoError(t, err)
 	assert.Contains(t, output, "No delegations present in this repository.")
+}
+
+// Initialize repo and test publishing targets with delegation roles
+func TestClientDelegationsPublishing(t *testing.T) {
+	setUp(t)
+
+	tempDir := tempDirWithConfig(t, "{}")
+	defer os.RemoveAll(tempDir)
+
+	server := setupServer()
+	defer server.Close()
+
+	// Setup certificate for delegation role
+	tempFile, err := ioutil.TempFile("/tmp", "pemfile")
+	assert.NoError(t, err)
+
+	privKey, err := trustmanager.GenerateRSAKey(rand.Reader, 2048)
+	assert.NoError(t, err)
+	privKeyBytesNoRole, err := trustmanager.KeyToPEM(privKey, "")
+	assert.NoError(t, err)
+	privKeyBytesWithRole, err := trustmanager.KeyToPEM(privKey, "user")
+	assert.NoError(t, err)
+	startTime := time.Now()
+	endTime := startTime.AddDate(10, 0, 0)
+	cert, err := cryptoservice.GenerateCertificate(privKey, "gun", startTime, endTime)
+	assert.NoError(t, err)
+
+	_, err = tempFile.Write(trustmanager.CertToPEM(cert))
+	assert.NoError(t, err)
+	tempFile.Close()
+	defer os.Remove(tempFile.Name())
+
+	rawPubBytes, _ := ioutil.ReadFile(tempFile.Name())
+	parsedPubKey, _ := trustmanager.ParsePEMPublicKey(rawPubBytes)
+	canonicalKeyID, err := utils.CanonicalKeyID(parsedPubKey)
+	assert.NoError(t, err)
+
+	// Set up targets for publishing
+	tempTargetFile, err := ioutil.TempFile("/tmp", "targetfile")
+	assert.NoError(t, err)
+	tempTargetFile.Close()
+	defer os.Remove(tempTargetFile.Name())
+
+	var target = "sdgkadga"
+
+	var output string
+
+	// init repo
+	_, err = runCommand(t, tempDir, "-s", server.URL, "init", "gun")
+	assert.NoError(t, err)
+
+	// publish repo
+	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
+	assert.NoError(t, err)
+
+	// list delegations - none yet
+	output, err = runCommand(t, tempDir, "-s", server.URL, "delegation", "list", "gun")
+	assert.NoError(t, err)
+	assert.Contains(t, output, "No delegations present in this repository.")
+
+	// publish repo
+	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
+	assert.NoError(t, err)
+
+	// validate that we have all keys, including snapshot
+	assertNumKeys(t, tempDir, 1, 2, true)
+
+	// rotate the snapshot key to server
+	output, err = runCommand(t, tempDir, "-s", server.URL, "key", "rotate", "gun", "-r", "--key-type", "snapshot")
+	assert.NoError(t, err)
+
+	// publish repo
+	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
+	assert.NoError(t, err)
+
+	// validate that we lost the snapshot signing key
+	_, signingKeyIDs := assertNumKeys(t, tempDir, 1, 1, true)
+	targetKeyID := signingKeyIDs[0]
+
+	// add new valid delegation with single new cert
+	output, err = runCommand(t, tempDir, "delegation", "add", "gun", "targets/releases", tempFile.Name(), "--paths", "\"\"")
+	assert.NoError(t, err)
+	assert.Contains(t, output, "Addition of delegation role")
+
+	// publish repo
+	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
+	assert.NoError(t, err)
+
+	// list delegations - we should see our one delegation
+	output, err = runCommand(t, tempDir, "-s", server.URL, "delegation", "list", "gun")
+	assert.NoError(t, err)
+	assert.NotContains(t, output, "No delegations present in this repository.")
+
+	// remove the targets key to demonstrate that delegates don't need this key
+	keyDir := filepath.Join(tempDir, "private", "tuf_keys")
+	assert.NoError(t, os.Remove(filepath.Join(keyDir, "gun", targetKeyID+".key")))
+
+	// Note that we need to use the canonical key ID, followed by the base of the role here
+	err = ioutil.WriteFile(filepath.Join(keyDir, canonicalKeyID+"_releases.key"), privKeyBytesNoRole, 0700)
+	assert.NoError(t, err)
+
+	// add a target using the delegation -- will only add to targets/releases
+	_, err = runCommand(t, tempDir, "add", "gun", target, tempTargetFile.Name(), "--roles", "targets/releases")
+	assert.NoError(t, err)
+
+	// list targets for targets/releases - we should see no targets until we publish
+	output, err = runCommand(t, tempDir, "-s", server.URL, "list", "gun", "--roles", "targets/releases")
+	assert.NoError(t, err)
+	assert.Contains(t, output, "No targets")
+
+	output, err = runCommand(t, tempDir, "-s", server.URL, "status", "gun")
+	assert.NoError(t, err)
+
+	// publish repo
+	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
+	assert.NoError(t, err)
+
+	// list targets for targets/releases - we should see our target!
+	output, err = runCommand(t, tempDir, "-s", server.URL, "list", "gun", "--roles", "targets/releases")
+	assert.NoError(t, err)
+	assert.Contains(t, output, "targets/releases")
+
+	// remove the target for this role only
+	_, err = runCommand(t, tempDir, "remove", "gun", target, "--roles", "targets/releases")
+	assert.NoError(t, err)
+
+	// publish repo
+	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
+	assert.NoError(t, err)
+
+	// list targets for targets/releases - we should see no targets
+	output, err = runCommand(t, tempDir, "-s", server.URL, "list", "gun", "--roles", "targets/releases")
+	assert.NoError(t, err)
+	assert.Contains(t, output, "No targets present")
+
+	// Try adding a target with a different key style - private/tuf_keys/canonicalKeyID.key with "user" set as the "role" PEM header
+	// First remove the old key and add the new style
+	assert.NoError(t, os.Remove(filepath.Join(keyDir, canonicalKeyID+"_releases.key")))
+	err = ioutil.WriteFile(filepath.Join(keyDir, canonicalKeyID+".key"), privKeyBytesWithRole, 0700)
+	assert.NoError(t, err)
+
+	// add a target using the delegation -- will only add to targets/releases
+	_, err = runCommand(t, tempDir, "add", "gun", target, tempTargetFile.Name(), "--roles", "targets/releases")
+	assert.NoError(t, err)
+
+	// list targets for targets/releases - we should see no targets until we publish
+	output, err = runCommand(t, tempDir, "-s", server.URL, "list", "gun", "--roles", "targets/releases")
+	assert.NoError(t, err)
+	assert.Contains(t, output, "No targets")
+
+	// publish repo
+	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
+	assert.NoError(t, err)
+
+	// list targets for targets/releases - we should see our target!
+	output, err = runCommand(t, tempDir, "-s", server.URL, "list", "gun", "--roles", "targets/releases")
+	assert.NoError(t, err)
+	assert.Contains(t, output, "targets/releases")
 }
 
 // Splits a string into lines, and returns any lines that are not empty (
