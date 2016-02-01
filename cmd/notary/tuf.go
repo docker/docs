@@ -299,8 +299,8 @@ func tufVerify(cmd *cobra.Command, args []string) {
 
 	target, err := nRepo.GetTargetByName(targetName)
 	if err != nil {
-		logrus.Error("notary: data not present in the trusted collection.")
-		os.Exit(-11)
+		logrus.Errorf("error retrieving target by name:%s, error:%v", targetName, err)
+		os.Exit(1)
 	}
 
 	// Create hasher and hash data
