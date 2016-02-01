@@ -245,7 +245,7 @@ func TestChecksumMismatch(t *testing.T) {
 
 	remoteStorage.SetMeta("targets", orig)
 
-	_, _, err = client.downloadSigned("targets", int64(len(orig)), origSha256[:], false)
+	_, _, err = client.downloadSigned("targets", int64(len(orig)), origSha256[:])
 	assert.IsType(t, ErrChecksumMismatch{}, err)
 }
 
@@ -262,14 +262,14 @@ func TestChecksumMatch(t *testing.T) {
 
 	remoteStorage.SetMeta("targets", orig)
 
-	_, _, err = client.downloadSigned("targets", int64(len(orig)), origSha256[:], false)
+	_, _, err = client.downloadSigned("targets", int64(len(orig)), origSha256[:])
 	assert.NoError(t, err)
 }
 
 func TestSizeMismatchLong(t *testing.T) {
 	repo := tuf.NewRepo(nil, nil)
 	localStorage := store.NewMemoryStore(nil, nil)
-	remoteStorage := store.NewMemoryStore(nil, nil)
+	remoteStorage := testutils.NewLongMemoryStore(nil, nil)
 	client := NewClient(repo, remoteStorage, nil, localStorage)
 
 	sampleTargets := data.NewTargets()
@@ -278,12 +278,9 @@ func TestSizeMismatchLong(t *testing.T) {
 	assert.NoError(t, err)
 	l := int64(len(orig))
 
-	orig = append([]byte(" "), orig...)
-	assert.Equal(t, l+1, int64(len(orig)))
-
 	remoteStorage.SetMeta("targets", orig)
 
-	_, _, err = client.downloadSigned("targets", l, origSha256[:], false)
+	_, _, err = client.downloadSigned("targets", l, origSha256[:])
 	// size just limits the data received, the error is caught
 	// either during checksum verification or during json deserialization
 	assert.IsType(t, ErrChecksumMismatch{}, err)
@@ -292,7 +289,7 @@ func TestSizeMismatchLong(t *testing.T) {
 func TestSizeMismatchShort(t *testing.T) {
 	repo := tuf.NewRepo(nil, nil)
 	localStorage := store.NewMemoryStore(nil, nil)
-	remoteStorage := store.NewMemoryStore(nil, nil)
+	remoteStorage := testutils.NewShortMemoryStore(nil, nil)
 	client := NewClient(repo, remoteStorage, nil, localStorage)
 
 	sampleTargets := data.NewTargets()
@@ -301,11 +298,9 @@ func TestSizeMismatchShort(t *testing.T) {
 	assert.NoError(t, err)
 	l := int64(len(orig))
 
-	orig = orig[1:]
-
 	remoteStorage.SetMeta("targets", orig)
 
-	_, _, err = client.downloadSigned("targets", l, origSha256[:], false)
+	_, _, err = client.downloadSigned("targets", l, origSha256[:])
 	// size just limits the data received, the error is caught
 	// either during checksum verification or during json deserialization
 	assert.IsType(t, ErrChecksumMismatch{}, err)

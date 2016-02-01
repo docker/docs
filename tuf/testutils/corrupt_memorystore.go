@@ -26,3 +26,46 @@ func (cm CorruptingMemoryStore) GetMeta(name string, size int64) ([]byte, error)
 	d[0] = '}' // all our content is JSON so must start with {
 	return d, err
 }
+
+// LongMemoryStore corrupts all data returned by GetMeta
+type LongMemoryStore struct {
+	store.MemoryStore
+}
+
+// NewLongMemoryStore returns a new instance of memory store that
+// returns one byte too much data on any request to GetMeta
+func NewLongMemoryStore(meta map[string][]byte, files map[string][]byte) *LongMemoryStore {
+	s := store.NewMemoryStore(meta, files)
+	return &LongMemoryStore{MemoryStore: *s}
+}
+
+// GetMeta returns one byte too much
+func (lm LongMemoryStore) GetMeta(name string, size int64) ([]byte, error) {
+	d, err := lm.MemoryStore.GetMeta(name, size)
+	if err != nil {
+		return nil, err
+	}
+	d = append(d, ' ')
+	return d, err
+}
+
+// ShortMemoryStore corrupts all data returned by GetMeta
+type ShortMemoryStore struct {
+	store.MemoryStore
+}
+
+// NewShortMemoryStore returns a new instance of memory store that
+// returns one byte too little data on any request to GetMeta
+func NewShortMemoryStore(meta map[string][]byte, files map[string][]byte) *ShortMemoryStore {
+	s := store.NewMemoryStore(meta, files)
+	return &ShortMemoryStore{MemoryStore: *s}
+}
+
+// GetMeta returns one byte too few
+func (sm ShortMemoryStore) GetMeta(name string, size int64) ([]byte, error) {
+	d, err := sm.MemoryStore.GetMeta(name, size)
+	if err != nil {
+		return nil, err
+	}
+	return d[1:], err
+}
