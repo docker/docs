@@ -365,7 +365,7 @@ func (r *NotaryRepository) AddDelegationPaths(name string, paths []string) error
 	}
 	defer cl.Close()
 
-	logrus.Debugf(`Adding delegation "%s" with threshold %d, and %s paths\n`, name, paths)
+	logrus.Debugf(`Adding %s paths to delegation %s\n`, paths, name)
 
 	tdJSON, err := json.Marshal(&changelist.TufDelegation{
 		AddPaths: paths,
