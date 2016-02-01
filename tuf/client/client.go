@@ -177,7 +177,7 @@ func (c *Client) downloadRoot() error {
 	var raw []byte
 	if download {
 		// use consistent download if we have the checksum.
-		raw, s, err = c.downloadSigned(role, size, expectedSha256, len(expectedSha256) > 0)
+		raw, s, err = c.downloadSigned(role, size, expectedSha256)
 		if err != nil {
 			return err
 		}
@@ -265,7 +265,7 @@ func (c *Client) downloadTimestamp() error {
 	}
 	// unlike root, targets and snapshot, always try and download timestamps
 	// from remote, only using the cache one if we couldn't reach remote.
-	raw, s, err := c.downloadSigned(role, notary.MaxTimestampSize, nil, false)
+	raw, s, err := c.downloadSigned(role, notary.MaxTimestampSize, nil)
 	if err == nil {
 		ts, err = c.verifyTimestamp(s, version, c.keysDB)
 		if err == nil {
@@ -342,7 +342,7 @@ func (c *Client) downloadSnapshot() error {
 	}
 	var s *data.Signed
 	if download {
-		raw, s, err = c.downloadSigned(role, size, expectedSha256, true)
+		raw, s, err = c.downloadSigned(role, size, expectedSha256)
 		if err != nil {
 			return err
 		}
@@ -419,8 +419,8 @@ func (c *Client) downloadTargets(role string) error {
 	return nil
 }
 
-func (c *Client) downloadSigned(role string, size int64, expectedSha256 []byte, consistent bool) ([]byte, *data.Signed, error) {
-	rolePath := utils.URLFilePath(role, expectedSha256, consistent)
+func (c *Client) downloadSigned(role string, size int64, expectedSha256 []byte) ([]byte, *data.Signed, error) {
+	rolePath := utils.ConsistentName(role, expectedSha256)
 	raw, err := c.remote.GetMeta(rolePath, size)
 	if err != nil {
 		return nil, nil, err
@@ -480,7 +480,7 @@ func (c Client) getTargetsFile(role string, keyIDs []string, snapshotMeta data.F
 	size := snapshotMeta[role].Length
 	var s *data.Signed
 	if download {
-		raw, s, err = c.downloadSigned(role, size, expectedSha256, true)
+		raw, s, err = c.downloadSigned(role, size, expectedSha256)
 		if err != nil {
 			return nil, err
 		}

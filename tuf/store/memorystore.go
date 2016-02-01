@@ -19,7 +19,7 @@ func NewMemoryStore(meta map[string][]byte, files map[string][]byte) *MemoryStor
 		// add all seed meta to consistent
 		for name, data := range meta {
 			checksum := sha256.Sum256(data)
-			path := utils.URLFilePath(name, checksum[:], true)
+			path := utils.ConsistentName(name, checksum[:])
 			consistent[path] = data
 		}
 	}
@@ -73,7 +73,7 @@ func (m *MemoryStore) SetMeta(name string, meta []byte) error {
 	m.meta[name] = meta
 
 	checksum := sha256.Sum256(meta)
-	path := utils.URLFilePath(name, checksum[:], true)
+	path := utils.ConsistentName(name, checksum[:])
 	m.consistent[path] = meta
 	return nil
 }
@@ -92,7 +92,7 @@ func (m *MemoryStore) SetMultiMeta(metas map[string][]byte) error {
 func (m *MemoryStore) RemoveMeta(name string) error {
 	if meta, ok := m.meta[name]; ok {
 		checksum := sha256.Sum256(meta)
-		path := utils.URLFilePath(name, checksum[:], true)
+		path := utils.ConsistentName(name, checksum[:])
 		delete(m.meta, name)
 		delete(m.consistent, path)
 	}
