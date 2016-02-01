@@ -4,6 +4,7 @@ import (
 	"crypto/x509"
 	"errors"
 	"fmt"
+	"strings"
 	"time"
 
 	"github.com/Sirupsen/logrus"
@@ -34,6 +35,18 @@ type ErrRootRotationFail struct {
 // by either failing to add the new root certificate, or delete the old ones
 func (err ErrRootRotationFail) Error() string {
 	return fmt.Sprintf("could not rotate trust to a new trusted root: %s", err.Reason)
+}
+
+func certIDs(certs []*x509.Certificate) string {
+	ids := make([]string, 0, len(certs))
+	for _, cert := range certs {
+		id, err := trustmanager.FingerprintCert(cert)
+		if err != nil {
+			id = fmt.Sprintf("[Error %s]", err)
+		}
+		ids = append(ids, id)
+	}
+	return strings.Join(ids, ", ")
 }
 
 /*
@@ -92,7 +105,8 @@ func ValidateRoot(certStore trustmanager.X509Store, root *data.Signed, gun strin
 	// If we have certificates that match this specific GUN, let's make sure to
 	// use them first to validate that this new root is valid.
 	if len(trustedCerts) != 0 {
-		logrus.Debugf("found %d valid root certificates for %s", len(trustedCerts), gun)
+		logrus.Debugf("found %d valid root certificates for %s: %s", len(trustedCerts), gun,
+			certIDs(trustedCerts))
 		err = signed.VerifyRoot(root, 0, trustmanager.CertsToKeys(trustedCerts))
 		if err != nil {
 			logrus.Debugf("failed to verify TUF data for: %s, %v", gun, err)
@@ -186,7 +200,8 @@ func validRootLeafCerts(root *data.SignedRoot, gun string) ([]*x509.Certificate,
 		return nil, errors.New("no valid leaf certificates found in any of the root keys")
 	}
 
-	logrus.Debugf("found %d valid leaf certificates for %s", len(validLeafCerts), gun)
+	logrus.Debugf("found %d valid leaf certificates for %s: %s", len(validLeafCerts), gun,
+		certIDs(validLeafCerts))
 	return validLeafCerts, nil
 }
 
