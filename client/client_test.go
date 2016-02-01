@@ -2751,7 +2751,7 @@ func TestRemoveDelegationChangefileApplicable(t *testing.T) {
 	assert.Empty(t, targetRole.Signed.Delegations.Keys)
 }
 
-// The changefile with the ClearAllPaths key, when applied, actually removes
+// The changefile with the ClearAllPaths key set, when applied, actually removes
 // all paths from the specified delegation in the repo (assuming the repo and delegation exist)
 func TestClearAllPathsDelegationChangefileApplicable(t *testing.T) {
 	gun := "docker.com/notary"
@@ -2779,6 +2779,92 @@ func TestClearAllPathsDelegationChangefileApplicable(t *testing.T) {
 	delgRoles := repo.tufRepo.Targets[data.CanonicalTargetsRole].Signed.Delegations.Roles
 	assert.Len(t, delgRoles, 1)
 	assert.Len(t, delgRoles[0].Paths, 0)
+}
+
+// TestFullAddDelegationChangefileApplicable generates a single changelist with AddKeys and AddPaths set,
+// (in the old style of AddDelegation) and tests that all of its changes are reflected on publish
+func TestFullAddDelegationChangefileApplicable(t *testing.T) {
+	gun := "docker.com/notary"
+	ts, _, _ := simpleTestServer(t)
+	defer ts.Close()
+
+	repo, rootKeyID := initializeRepo(t, data.ECDSAKey, gun, ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
+	rootPubKey := repo.CryptoService.GetKey(rootKeyID)
+	assert.NotNil(t, rootPubKey)
+
+	key2, err := repo.CryptoService.Create("user", data.ECDSAKey)
+	assert.NoError(t, err)
+
+	delegationName := "targets/a"
+
+	// manually create the changelist object to load multiple keys
+	tdJSON, err := json.Marshal(&changelist.TufDelegation{
+		NewThreshold: notary.MinThreshold,
+		AddKeys:      data.KeyList([]data.PublicKey{rootPubKey, key2}),
+		AddPaths:     []string{"abc", "123", "xyz"},
+	})
+	change := newCreateDelegationChange(delegationName, tdJSON)
+	cl, err := changelist.NewFileChangelist(filepath.Join(repo.tufRepoPath, "changelist"))
+	addChange(cl, change, delegationName)
+
+	changes := getChanges(t, repo)
+	assert.Len(t, changes, 1)
+	assert.NoError(t, applyTargetsChange(repo.tufRepo, changes[0]))
+
+	delgRoles := repo.tufRepo.Targets[data.CanonicalTargetsRole].Signed.Delegations.Roles
+	assert.Len(t, delgRoles, 1)
+	assert.Len(t, delgRoles[0].Paths, 3)
+	assert.Len(t, delgRoles[0].KeyIDs, 2)
+	assert.Equal(t, delgRoles[0].Name, delegationName)
+}
+
+// TestFullRemoveDelegationChangefileApplicable generates a single changelist with RemoveKeys and RemovePaths set,
+// (in the old style of RemoveDelegation) and tests that all of its changes are reflected on publish
+func TestFullRemoveDelegationChangefileApplicable(t *testing.T) {
+	gun := "docker.com/notary"
+	ts, _, _ := simpleTestServer(t)
+	defer ts.Close()
+
+	repo, rootKeyID := initializeRepo(t, data.ECDSAKey, gun, ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
+	rootPubKey := repo.CryptoService.GetKey(rootKeyID)
+	assert.NotNil(t, rootPubKey)
+
+	key2, err := repo.CryptoService.Create("user", data.ECDSAKey)
+	assert.NoError(t, err)
+	key2CanonicalID, err := utils.CanonicalKeyID(key2)
+	assert.NoError(t, err)
+
+	delegationName := "targets/a"
+
+	assert.NoError(t, repo.AddDelegation(delegationName, []data.PublicKey{rootPubKey, key2}, []string{"abc", "123"}))
+	changes := getChanges(t, repo)
+	assert.Len(t, changes, 2)
+	assert.NoError(t, applyTargetsChange(repo.tufRepo, changes[0]))
+	assert.NoError(t, applyTargetsChange(repo.tufRepo, changes[1]))
+
+	targetRole := repo.tufRepo.Targets[data.CanonicalTargetsRole]
+	assert.Len(t, targetRole.Signed.Delegations.Roles, 1)
+	assert.Len(t, targetRole.Signed.Delegations.Keys, 2)
+
+	// manually create the changelist object to load multiple keys
+	tdJSON, err := json.Marshal(&changelist.TufDelegation{
+		RemoveKeys:  []string{key2CanonicalID},
+		RemovePaths: []string{"abc", "123"},
+	})
+	change := newUpdateDelegationChange(delegationName, tdJSON)
+	cl, err := changelist.NewFileChangelist(filepath.Join(repo.tufRepoPath, "changelist"))
+	addChange(cl, change, delegationName)
+
+	changes = getChanges(t, repo)
+	assert.Len(t, changes, 3)
+	assert.NoError(t, applyTargetsChange(repo.tufRepo, changes[2]))
+
+	delgRoles := repo.tufRepo.Targets[data.CanonicalTargetsRole].Signed.Delegations.Roles
+	assert.Len(t, delgRoles, 1)
+	assert.Len(t, delgRoles[0].Paths, 0)
+	assert.Len(t, delgRoles[0].KeyIDs, 1)
 }
 
 // TestRemoveDelegationErrorWritingChanges expects errors writing a change to
