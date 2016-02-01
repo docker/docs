@@ -122,19 +122,19 @@ In the same directory as the `plugins` file and the private key and certificate,
 create a new [`Dockerfile`](https://docs.docker.com/reference/builder/) with the
 following contents:
 
-     FROM jenkins
+    FROM jenkins
 
-     #New plugins must be placed in the plugins file
-     COPY plugins /usr/share/jenkins/plugins
+    # New plugins must be placed in the plugins file
+    COPY plugins /usr/share/jenkins/plugins
 
-     #The plugins.sh script will install new plugins
-     RUN /usr/local/bin/plugins.sh /usr/share/jenkins/plugins
+    # The plugins.sh script will install new plugins
+    RUN /usr/local/bin/plugins.sh /usr/share/jenkins/plugins
 
-     #Copy private key and cert to image
-     COPY https.pem /var/lib/jenkins/cert
-     COPY https.key /var/lib/jenkins/pk
+    # Copy private key and cert to image
+    COPY https.pem /var/lib/jenkins/cert
+    COPY https.key /var/lib/jenkins/pk
 
-     #Configure HTTP off and HTTPS on, using port 1973
+    # Configure HTTP off and HTTPS on, using port 1973
     ENV JENKINS_OPTS --httpPort=-1 --httpsPort=1973 --httpsCertificate=/var/lib/jenkins/cert --httpsPrivateKey=/var/lib/jenkins/pk
 
 The first `COPY` instruction in the above will copy the `plugins` file created
@@ -256,7 +256,7 @@ You can view the traffic throughput from the custom image being pulled on the Do
 Now that the `jnkns-img` image has been pulled locally from Docker Trusted Registry, you can view it
 in the output of the `docker images` command:
 
-     $ docker images
+    $ docker images
     REPOSITORY     TAG    IMAGE ID    CREATED    VIRTUAL SIZE
     dtr.yourdomain.com/ci-infrastructure/jnkns-img    latest  fc0ab3008d40    2 minutes ago    888.1 MB
 
