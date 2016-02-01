@@ -60,6 +60,9 @@ docs-build:
 #	echo "$(GIT_BRANCH)" > GIT_BRANCH
 #	echo "$(AWS_S3_BUCKET)" > AWS_S3_BUCKET
 #	echo "$(GITCOMMIT)" > GITCOMMIT
+	# bring the generated apidocs into the context.
+	rm -rf ./apidocgen/
+	cp -r ../apidocgen/output apidocgen
 	docker build -t "$(DOCKER_DOCS_IMAGE)" .
 
 images:

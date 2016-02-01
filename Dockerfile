@@ -18,3 +18,5 @@ COPY . /src
 
 COPY . /docs/content/$PROJECT/
 
+# This kludge only exists when run from the DTR repo (useful for testing)
+RUN mv -f /docs/content/$PROJECT/apidocgen/ /docs/content/apidocs/ || true
