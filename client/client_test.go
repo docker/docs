@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"crypto/rand"
 	"crypto/sha256"
+	"crypto/x509"
 	"encoding/hex"
 	regJson "encoding/json"
 	"fmt"
@@ -3338,4 +3339,135 @@ func TestListRoles(t *testing.T) {
 	rolesWithSigs, err = repo.ListRoles()
 	require.NoError(t, err)
 	require.Len(t, rolesWithSigs, len(data.BaseRoles)+2)
+}
+
+func logRepoTrustRoot(t *testing.T, prefix string, repo *NotaryRepository) {
+	logrus.Debugf("==== %s", prefix)
+	root := repo.tufRepo.Root
+	logrus.Debugf("Root signatures:")
+	for _, s := range root.Signatures {
+		logrus.Debugf("\t%s", s.KeyID)
+	}
+	logrus.Debugf("Valid root keys:")
+	for _, k := range root.Signed.Roles[data.CanonicalRootRole].KeyIDs {
+		logrus.Debugf("\t%s", k)
+	}
+	logrus.Debugf("All trusted certs:")
+	certs, err := repo.CertStore.GetCertificatesByCN(repo.gun)
+	require.NoError(t, err)
+	for _, cert := range certs {
+		id, err := trustmanager.FingerprintCert(cert)
+		require.NoError(t, err)
+		logrus.Debugf("\t%s", id)
+	}
+}
+
+// ID of the (only) certificate trusted by the root role metadata
+func rootRoleCertID(t *testing.T, repo *NotaryRepository) string {
+	rootKeys := repo.tufRepo.Root.Signed.Roles[data.CanonicalRootRole].KeyIDs
+	require.Len(t, rootKeys, 1)
+	return rootKeys[0]
+}
+
+func verifyOnlyTrustedCertificate(t *testing.T, repo *NotaryRepository, certID string) {
+	certs, err := repo.CertStore.GetCertificatesByCN(repo.gun)
+	require.NoError(t, err)
+	require.Len(t, certs, 1)
+	id, err := trustmanager.FingerprintCert(certs[0])
+	require.NoError(t, err)
+	require.Equal(t, certID, id)
+}
+
+func TestRotateRootCert(t *testing.T) {
+	ts := fullTestServer(t)
+	defer ts.Close()
+
+	// Set up author's view of the repo and publish first version.
+	authorRepo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
+	defer os.RemoveAll(authorRepo.baseDir)
+	err := authorRepo.Publish()
+	require.NoError(t, err)
+	oldRootCertID := rootRoleCertID(t, authorRepo)
+
+	// Initialize an user, using the original certificate.
+	userRepo, _ := newRepoToTestRepo(t, authorRepo, true)
+	defer os.RemoveAll(userRepo.baseDir)
+	err = userRepo.Update(false)
+	require.NoError(t, err)
+
+	// Rotate root certificate.
+	certs, err := authorRepo.ListRootCerts()
+	require.NoError(t, err)
+	var cert *x509.Certificate
+	require.Len(t, certs, 1)
+	// Just get the only certificate in there.
+	for _, c := range certs {
+		cert = c
+	}
+	logRepoTrustRoot(t, "original", authorRepo)
+	err = authorRepo.RotateRootCert(cert)
+	require.NoError(t, err)
+	logRepoTrustRoot(t, "post-rotate", authorRepo)
+
+	// Set up a target to verify the repo is actually usable.
+	publishedTarget := addTarget(t, authorRepo, "current", "../fixtures/intermediate-ca.crt")
+
+	// Publish the rotation
+	logRepoTrustRoot(t, "pre-publish", authorRepo)
+	err = authorRepo.Publish()
+	require.NoError(t, err)
+	logRepoTrustRoot(t, "post-publish", authorRepo)
+	newRootCertID := rootRoleCertID(t, authorRepo)
+	require.NotEqual(t, oldRootCertID, newRootCertID)
+
+	// Verify the user can use the rotated repo, and see the added target.
+	receivedTarget, err := userRepo.GetTargetByName("current")
+	require.NoError(t, err)
+	require.Equal(t, newRootCertID, rootRoleCertID(t, userRepo))
+	require.True(t, reflect.DeepEqual(*publishedTarget, receivedTarget.Target), "target does not match")
+	logRepoTrustRoot(t, "client", userRepo)
+
+	// Verify that clients initialized post-rotation can use the repo, and use
+	// the new certificate immediately.
+	freshUserRepo, _ := newRepoToTestRepo(t, authorRepo, true)
+	defer os.RemoveAll(freshUserRepo.baseDir)
+	receivedTarget, err = freshUserRepo.GetTargetByName("current")
+	require.NoError(t, err)
+	require.Equal(t, newRootCertID, rootRoleCertID(t, freshUserRepo))
+	verifyOnlyTrustedCertificate(t, freshUserRepo, newRootCertID)
+	require.True(t, reflect.DeepEqual(*publishedTarget, receivedTarget.Target), "target does not match")
+	logRepoTrustRoot(t, "fresh client", freshUserRepo)
+
+	// NotaryRepository.Update's handling of certificate rotation is weird:
+	//
+	// On every run, NotaryRepository.bootstrapClient rotates the trusted certificates
+	// based on CACHED root data.
+	// Then the client calls Repo.Update, which fetches a new timestmap,
+	// notices an updated root.json, validates it and stores it into the cache.
+	//
+	// So, the locally trusted certificates are rotated only on the SECOND call of
+	// NotaryRepository.Update after the rotation is pushed to the server.
+	//
+	// This would be nice to fix eventually (breaking down the NotaryRepository.Update
+	// / Repo.Update separation which causes this), but for now, just ensure that the
+	// second update does result in updated certificates.
+
+	// Verify that the author eventually rotates to the new certificate.
+	err = authorRepo.Update(false)
+	require.NoError(t, err)
+	logRepoTrustRoot(t, "author refresh 1", authorRepo)
+	require.Equal(t, newRootCertID, rootRoleCertID(t, authorRepo))
+	// verifyOnlyTrustedCertificate(t, authorRepo, newRootCertID)
+	err = authorRepo.Update(false)
+	require.NoError(t, err)
+	logRepoTrustRoot(t, "author refresh 2", authorRepo)
+	require.Equal(t, newRootCertID, rootRoleCertID(t, authorRepo))
+	verifyOnlyTrustedCertificate(t, authorRepo, newRootCertID)
+
+	// Verify that the user initialized with the original certificate eventually
+	// rotates to the new certificate.
+	err = userRepo.Update(false)
+	require.NoError(t, err)
+	logRepoTrustRoot(t, "user refresh 1", userRepo)
+	require.Equal(t, newRootCertID, rootRoleCertID(t, userRepo))
 }
