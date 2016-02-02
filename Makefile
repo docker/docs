@@ -71,6 +71,14 @@ ${PREFIX}/bin/notary-signer: NOTARY_VERSION $(shell find . -type f -name '*.go')
 	@echo "+ $@"
 	@godep go build -tags ${NOTARY_BUILDTAGS} -o $@ ${GO_LDFLAGS} ./cmd/notary-signer
 
+${PREFIX}/bin/static/notary-server: NOTARY_VERSION $(shell find . -type f -name '*.go')
+	@echo "+ $@"
+	@godep go build -tags ${NOTARY_BUILDTAGS} -o $@ ${GO_LDFLAGS_STATIC} ./cmd/notary-server
+	
+${PREFIX}/bin/static/notary-signer: NOTARY_VERSION $(shell find . -type f -name '*.go')
+	@echo "+ $@"
+	@godep go build -tags ${NOTARY_BUILDTAGS} -o $@ ${GO_LDFLAGS_STATIC} ./cmd/notary-signer
+
 vet: go_version
 	@echo "+ $@"
 ifeq ($(shell uname -s), Darwin)
@@ -151,6 +159,9 @@ clean-protos:
 	@rm proto/*.pb.go
 
 binaries: go_version ${PREFIX}/bin/notary-server ${PREFIX}/bin/notary ${PREFIX}/bin/notary-signer
+	@echo "+ $@"
+
+static: go_version ${PREFIX}/bin/static/notary-server ${PREFIX}/bin/static/notary-signer
 	@echo "+ $@"
 
 define template
