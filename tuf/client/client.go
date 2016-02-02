@@ -6,9 +6,6 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"io"
-	"path"
-	"strings"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary"
@@ -179,6 +176,7 @@ func (c *Client) downloadRoot() error {
 	var s *data.Signed
 	var raw []byte
 	if download {
+		// use consistent download if we have the checksum.
 		raw, s, err = c.downloadSigned(role, size, expectedSha256)
 		if err != nil {
 			return err
@@ -422,7 +420,8 @@ func (c *Client) downloadTargets(role string) error {
 }
 
 func (c *Client) downloadSigned(role string, size int64, expectedSha256 []byte) ([]byte, *data.Signed, error) {
-	raw, err := c.remote.GetMeta(role, size)
+	rolePath := utils.ConsistentName(role, expectedSha256)
+	raw, err := c.remote.GetMeta(rolePath, size)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -481,11 +480,7 @@ func (c Client) getTargetsFile(role string, keyIDs []string, snapshotMeta data.F
 	size := snapshotMeta[role].Length
 	var s *data.Signed
 	if download {
-		rolePath, err := c.RoleTargetsPath(role, hex.EncodeToString(expectedSha256), consistent)
-		if err != nil {
-			return nil, err
-		}
-		raw, s, err = c.downloadSigned(rolePath, size, expectedSha256)
+		raw, s, err = c.downloadSigned(role, size, expectedSha256)
 		if err != nil {
 			return nil, err
 		}
@@ -507,24 +502,6 @@ func (c Client) getTargetsFile(role string, keyIDs []string, snapshotMeta data.F
 		}
 	}
 	return s, nil
-}
-
-// RoleTargetsPath generates the appropriate HTTP URL for the targets file,
-// based on whether the repo is marked as consistent.
-func (c Client) RoleTargetsPath(role string, hashSha256 string, consistent bool) (string, error) {
-	if consistent {
-		// Use path instead of filepath since we refer to the TUF role directly instead of its target files
-		dir := path.Dir(role)
-		if strings.Contains(role, "/") {
-			lastSlashIdx := strings.LastIndex(role, "/")
-			role = role[lastSlashIdx+1:]
-		}
-		role = path.Join(
-			dir,
-			fmt.Sprintf("%s.%s.json", hashSha256, role),
-		)
-	}
-	return role, nil
 }
 
 // TargetMeta ensures the repo is up to date. It assumes downloadTargets
@@ -562,19 +539,4 @@ func (c Client) TargetMeta(role, path string, excludeRoles ...string) (*data.Fil
 		}
 	}
 	return meta, ""
-}
-
-// DownloadTarget downloads the target to dst from the remote
-func (c Client) DownloadTarget(dst io.Writer, path string, meta *data.FileMeta) error {
-	reader, err := c.remote.GetTarget(path)
-	if err != nil {
-		return err
-	}
-	defer reader.Close()
-	r := io.TeeReader(
-		io.LimitReader(reader, meta.Length),
-		dst,
-	)
-	err = utils.ValidateTarget(r, meta)
-	return err
 }
