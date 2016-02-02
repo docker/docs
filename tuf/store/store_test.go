@@ -41,7 +41,7 @@ func testRemoveMeta(t *testing.T, factory storeFactory) {
 
 func TestMemoryStoreMetadata(t *testing.T) {
 	factory := func() MetadataStore {
-		return NewMemoryStore(nil, nil)
+		return NewMemoryStore(nil)
 	}
 
 	testGetSetMeta(t, factory)
