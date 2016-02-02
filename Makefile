@@ -1,3 +1,5 @@
+.PHONY: docs osx windows
+
 default: osx windows
 	@true
 
@@ -15,3 +17,6 @@ clean-osx:
 
 clean-windows:
 	rm -f dist/DockerToolbox-*.exe
+
+docs:
+	$(MAKE) -C docs docs
