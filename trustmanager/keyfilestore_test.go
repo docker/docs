@@ -60,6 +60,14 @@ func testAddKeyWithRole(t *testing.T, role, expectedSubdir string) {
 	b, err := ioutil.ReadFile(expectedFilePath)
 	assert.NoError(t, err, "expected file not found")
 	assert.Contains(t, string(b), "-----BEGIN EC PRIVATE KEY-----")
+
+	// Check that we have the role and gun info for this key's ID
+	keyInfo, ok := store.keyIDMap[privKey.ID()]
+	assert.True(t, ok)
+	assert.Equal(t, role, keyInfo.role)
+	if role != data.CanonicalRootRole {
+		assert.Equal(t, filepath.Dir(testName), keyInfo.gun)
+	}
 }
 
 func TestGet(t *testing.T) {
@@ -157,6 +165,11 @@ EMl3eFOJXjIch/wIesRSN+2dGOsl7neercjMh1i9RvpCwHDx/E0=
 		pemPrivKey, err := KeyToPEM(privKey, role)
 		assert.NoError(t, err, "failed to convert key to PEM")
 		assert.Equal(t, testData, pemPrivKey)
+
+		// Test that we can get purely by the ID we provided to AddKey (without gun)
+		privKeyByID, _, err := store.GetKey("keyID")
+		assert.NoError(t, err)
+		assert.Equal(t, privKey, privKeyByID)
 	} else {
 		assert.Error(t, err, "should not have succeeded getting key from store")
 		assert.Nil(t, privKey)
