@@ -21,7 +21,10 @@ notarysigner:
   command: -config=fixtures/signer-config.json
 notarymysql:
   volumes:
-    - notarymysql:/var/lib/mysql
-  build: ./notarymysql/
+    - ./notarymysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    - ./notarymysql/data:/var/lib/mysql
+  image: mariadb:10.1.10
   ports:
     - "3306:3306"
+  environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
