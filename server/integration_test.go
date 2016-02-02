@@ -32,7 +32,6 @@ func TestValidationErrorFormat(t *testing.T) {
 		fmt.Sprintf("%s/v2/gun/_trust/tuf/", server.URL),
 		"",
 		"json",
-		"",
 		"key",
 		http.DefaultTransport,
 	)

@@ -109,7 +109,7 @@ func NewMetadataSwizzler(gun string, initialMetadata map[string][]byte,
 
 	return &MetadataSwizzler{
 		Gun:           gun,
-		MetadataCache: store.NewMemoryStore(initialMetadata, nil),
+		MetadataCache: store.NewMemoryStore(initialMetadata),
 		CryptoService: cryptoService,
 		Roles:         roles,
 	}

@@ -23,7 +23,6 @@ func getRemoteStore(baseURL, gun string, rt http.RoundTripper) (store.RemoteStor
 		baseURL+"/v2/"+gun+"/_trust/tuf/",
 		"",
 		"json",
-		"",
 		"key",
 		rt,
 	)

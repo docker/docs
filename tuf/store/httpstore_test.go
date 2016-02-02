@@ -40,7 +40,6 @@ func TestHTTPStoreGetMeta(t *testing.T) {
 		server.URL,
 		"metadata",
 		"txt",
-		"targets",
 		"key",
 		&http.Transport{},
 	)
@@ -91,7 +90,6 @@ func TestHTTPStoreGetAllMeta(t *testing.T) {
 		server.URL,
 		"metadata",
 		"txt",
-		"targets",
 		"key",
 		&http.Transport{},
 	)
@@ -164,7 +162,7 @@ func TestSetMultiMeta(t *testing.T) {
 	}
 	server := httptest.NewServer(http.HandlerFunc(handler))
 	defer server.Close()
-	store, err := NewHTTPStore(server.URL, "metadata", "json", "targets", "key", http.DefaultTransport)
+	store, err := NewHTTPStore(server.URL, "metadata", "json", "key", http.DefaultTransport)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -218,7 +216,6 @@ func testErrorCode(t *testing.T, errorCode int, errType error) {
 		server.URL,
 		"metadata",
 		"txt",
-		"targets",
 		"key",
 		&http.Transport{},
 	)
@@ -302,7 +299,7 @@ func TestHTTPStoreRemoveAll(t *testing.T) {
 	}
 	server := httptest.NewServer(http.HandlerFunc(handler))
 	defer server.Close()
-	store, err := NewHTTPStore(server.URL, "metadata", "json", "targets", "key", http.DefaultTransport)
+	store, err := NewHTTPStore(server.URL, "metadata", "json", "key", http.DefaultTransport)
 	assert.NoError(t, err)
 
 	// currently unsupported since there is no use case
@@ -312,7 +309,7 @@ func TestHTTPStoreRemoveAll(t *testing.T) {
 }
 
 func TestHTTPOffline(t *testing.T) {
-	s, err := NewHTTPStore("https://localhost/", "", "", "", "", nil)
+	s, err := NewHTTPStore("https://localhost/", "", "", "", nil)
 	assert.NoError(t, err)
 	assert.IsType(t, &OfflineStore{}, s)
 }

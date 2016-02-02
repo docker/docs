@@ -11,7 +11,7 @@ import (
 
 // NewMemoryStore returns a MetadataStore that operates entirely in memory.
 // Very useful for testing
-func NewMemoryStore(meta map[string][]byte, files map[string][]byte) *MemoryStore {
+func NewMemoryStore(meta map[string][]byte) *MemoryStore {
 	var consistent = make(map[string][]byte)
 	if meta == nil {
 		meta = make(map[string][]byte)
@@ -23,13 +23,9 @@ func NewMemoryStore(meta map[string][]byte, files map[string][]byte) *MemoryStor
 			consistent[path] = data
 		}
 	}
-	if files == nil {
-		files = make(map[string][]byte)
-	}
 	return &MemoryStore{
 		meta:       meta,
 		consistent: consistent,
-		files:      files,
 		keys:       make(map[string][]data.PrivateKey),
 	}
 }
@@ -39,7 +35,6 @@ func NewMemoryStore(meta map[string][]byte, files map[string][]byte) *MemoryStor
 type MemoryStore struct {
 	meta       map[string][]byte
 	consistent map[string][]byte
-	files      map[string][]byte
 	keys       map[string][]data.PrivateKey
 }
 
@@ -106,6 +101,6 @@ func (m *MemoryStore) GetKey(role string) ([]byte, error) {
 
 // RemoveAll clears the existing memory store by setting this store as new empty one
 func (m *MemoryStore) RemoveAll() error {
-	*m = *NewMemoryStore(nil, nil)
+	*m = *NewMemoryStore(nil)
 	return nil
 }
