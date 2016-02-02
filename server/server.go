@@ -89,13 +89,13 @@ func RootHandler(ac auth.AccessController, ctx context.Context, trust signed.Cry
 		prometheus.InstrumentHandlerWithOpts(
 			prometheusOpts("UpdateTuf"),
 			hand(handlers.AtomicUpdateHandler, "push", "pull")))
-	r.Methods("GET").Path("/v2/{imageName:.*}/_trust/tuf/{tufRole:root|targets(?:/[^/\\s]+)*|snapshot|timestamp}.json").Handler(
-		prometheus.InstrumentHandlerWithOpts(
-			prometheusOpts("GetRole"),
-			hand(handlers.GetHandler, "pull")))
 	r.Methods("GET").Path("/v2/{imageName:.*}/_trust/tuf/{tufRole:root|targets(?:/[^/\\s]+)*|snapshot|timestamp}.{checksum:[a-fA-F0-9]{64}|[a-fA-F0-9]{96}|[a-fA-F0-9]{128}}.json").Handler(
 		prometheus.InstrumentHandlerWithOpts(
 			prometheusOpts("GetRoleByHash"),
+			hand(handlers.GetHandler, "pull")))
+	r.Methods("GET").Path("/v2/{imageName:.*}/_trust/tuf/{tufRole:root|targets(?:/[^/\\s]+)*|snapshot|timestamp}.json").Handler(
+		prometheus.InstrumentHandlerWithOpts(
+			prometheusOpts("GetRole"),
 			hand(handlers.GetHandler, "pull")))
 	r.Methods("GET").Path(
 		"/v2/{imageName:.*}/_trust/tuf/{tufRole:snapshot|timestamp}.key").Handler(
