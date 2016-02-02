@@ -59,7 +59,7 @@ func TestMetricsEndpoint(t *testing.T) {
 	ts := httptest.NewServer(handler)
 	defer ts.Close()
 
-	res, err := http.Get(ts.URL + "/_notary_server/metrics")
+	res, err := http.Get(ts.URL + "/metrics")
 	assert.NoError(t, err)
 	assert.Equal(t, http.StatusOK, res.StatusCode)
 }

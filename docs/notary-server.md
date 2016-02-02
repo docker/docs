@@ -188,5 +188,5 @@ Notary Server provides the following features for operational friendliness:
 1. A [Bugsnag](https://bugsnag.com) hook for error logs, if a Bugsnag
 	configuration is provided.
 
-1. A [prometheus](http://prometheus.io/) endpoint at `/_notary_server/metrics`
+1. A [prometheus](http://prometheus.io/) endpoint at `/metrics`
 	which provides HTTP stats.
