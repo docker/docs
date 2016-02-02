@@ -88,10 +88,12 @@ type keyCommander struct {
 	getRetriever func() passphrase.Retriever
 
 	// these are for command line parsing - no need to set
-	keysExportChangePassphrase     bool
-	keysExportGUN                  string
-	rotateKeyRole                  string
-	rotateKeyServerManaged         bool
+	keysExportChangePassphrase bool
+	keysExportGUN              string
+	keysImportGUN              string
+	keysImportRole             string
+	rotateKeyRole              string
+	rotateKeyServerManaged     bool
 }
 
 func (k *keyCommander) GetCommand() *cobra.Command {
@@ -99,7 +101,12 @@ func (k *keyCommander) GetCommand() *cobra.Command {
 	cmd.AddCommand(cmdKeyListTemplate.ToCommand(k.keysList))
 	cmd.AddCommand(cmdKeyGenerateRootKeyTemplate.ToCommand(k.keysGenerateRootKey))
 	cmd.AddCommand(cmdKeysRestoreTemplate.ToCommand(k.keysRestore))
-	cmd.AddCommand(cmdKeyImportTemplate.ToCommand(k.keysImportRoot))
+	cmdKeysImport := cmdKeyImportTemplate.ToCommand(k.keysImport)
+	cmdKeysImport.Flags().StringVarP(
+		&k.keysExportGUN, "gun", "g", "", "Globally Unique Name to import key to")
+	cmdKeysImport.Flags().StringVarP(
+		&k.keysImportRole, "role", "r", data.CanonicalRootRole, "Role to import key to")
+	cmd.AddCommand(cmdKeysImport)
 
 	cmd.AddCommand(cmdKeyRemoveTemplate.ToCommand(k.keyRemove))
 	cmd.AddCommand(cmdKeyPasswdTemplate.ToCommand(k.keyPassphraseChange))
@@ -333,8 +340,8 @@ func (k *keyCommander) keysRestore(cmd *cobra.Command, args []string) error {
 	return nil
 }
 
-// keysImportRoot imports a root key from a PEM file
-func (k *keyCommander) keysImportRoot(cmd *cobra.Command, args []string) error {
+// keysImport imports a private key from a PEM file
+func (k *keyCommander) keysImport(cmd *cobra.Command, args []string) error {
 	if len(args) != 1 {
 		cmd.Usage()
 		return fmt.Errorf("Must specify input filename for import")
@@ -348,7 +355,6 @@ func (k *keyCommander) keysImportRoot(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
-	cs := cryptoservice.NewCryptoService("", ks...)
 
 	importFilename := args[0]
 
@@ -358,7 +364,12 @@ func (k *keyCommander) keysImportRoot(cmd *cobra.Command, args []string) error {
 	}
 	defer importFile.Close()
 
-	err = cs.ImportRootKey(importFile)
+	cs := cryptoservice.NewCryptoService(k.keysImportGUN, ks...)
+	if k.keysImportRole == data.CanonicalRootRole {
+		err = cs.ImportRootKey(importFile)
+	} else {
+		err = cs.ImportRoleKey(importFile, k.keysImportRole)
+	}
 
 	if err != nil {
 		return fmt.Errorf("Error importing root key: %v", err)
