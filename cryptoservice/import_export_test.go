@@ -284,7 +284,7 @@ func TestImportExportRootKey(t *testing.T) {
 	tempKeyFilePath := tempKeyFile.Name()
 	defer os.Remove(tempKeyFilePath)
 
-	err = cs.ExportRootKey(tempKeyFile, rootKeyID)
+	err = cs.ExportKey(tempKeyFile, rootKeyID, data.CanonicalRootRole)
 	assert.NoError(t, err)
 	tempKeyFile.Close()
 
@@ -352,7 +352,7 @@ func TestImportExportRootKeyReencrypt(t *testing.T) {
 	tempKeyFilePath := tempKeyFile.Name()
 	defer os.Remove(tempKeyFilePath)
 
-	err = cs.ExportRootKeyReencrypt(tempKeyFile, rootKeyID, newPassphraseRetriever)
+	err = cs.ExportKeyReencrypt(tempKeyFile, rootKeyID, newPassphraseRetriever)
 	assert.NoError(t, err)
 	tempKeyFile.Close()
 
