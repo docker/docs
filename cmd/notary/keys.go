@@ -103,7 +103,7 @@ func (k *keyCommander) GetCommand() *cobra.Command {
 	cmd.AddCommand(cmdKeysRestoreTemplate.ToCommand(k.keysRestore))
 	cmdKeysImport := cmdKeyImportTemplate.ToCommand(k.keysImport)
 	cmdKeysImport.Flags().StringVarP(
-		&k.keysExportGUN, "gun", "g", "", "Globally Unique Name to import key to")
+		&k.keysImportGUN, "gun", "g", "", "Globally Unique Name to import key to")
 	cmdKeysImport.Flags().StringVarP(
 		&k.keysImportRole, "role", "r", data.CanonicalRootRole, "Role to import key to")
 	cmd.AddCommand(cmdKeysImport)
@@ -267,7 +267,7 @@ func (k *keyCommander) keysExport(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	// Search for this key, determine whether this key has a GUN
+	// Search for this key in all of our keystores, determine whether this key has a GUN
 	keyGun := ""
 	keyRole := ""
 	for _, store := range ks {
@@ -340,7 +340,7 @@ func (k *keyCommander) keysRestore(cmd *cobra.Command, args []string) error {
 	return nil
 }
 
-// keysImport imports a private key from a PEM file
+// keysImport imports a private key from a PEM file for a role
 func (k *keyCommander) keysImport(cmd *cobra.Command, args []string) error {
 	if len(args) != 1 {
 		cmd.Usage()
@@ -368,7 +368,7 @@ func (k *keyCommander) keysImport(cmd *cobra.Command, args []string) error {
 	if k.keysImportRole == data.CanonicalRootRole {
 		err = cs.ImportRootKey(importFile)
 	} else {
-		err = cs.ImportRoleKey(importFile, k.keysImportRole)
+		err = cs.ImportRoleKey(importFile, k.keysImportRole, k.retriever)
 	}
 
 	if err != nil {

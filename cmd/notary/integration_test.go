@@ -674,6 +674,47 @@ func TestClientDelegationsPublishing(t *testing.T) {
 	output, err = runCommand(t, tempDir, "-s", server.URL, "list", "gun", "--roles", "targets/releases")
 	assert.NoError(t, err)
 	assert.Contains(t, output, "targets/releases")
+
+	// remove the target for this role only
+	_, err = runCommand(t, tempDir, "remove", "gun", target, "--roles", "targets/releases")
+	assert.NoError(t, err)
+
+	// publish repo
+	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
+	assert.NoError(t, err)
+
+	// Now try using the key import command to instantiate the private key with this role
+	assert.NoError(t, os.Remove(filepath.Join(keyDir, canonicalKeyID+".key")))
+	tempPrivFile, err := ioutil.TempFile("/tmp", "privfile")
+	assert.NoError(t, err)
+	defer os.Remove(tempPrivFile.Name())
+
+	// Write the private key to a file so we can import it
+	_, err = tempPrivFile.Write(privKeyBytesNoRole)
+	assert.NoError(t, err)
+	tempPrivFile.Close()
+
+	// Import the private key, associating it with our delegation role
+	_, err = runCommand(t, tempDir, "key", "import", tempPrivFile.Name(), "--role", "targets/releases")
+	assert.NoError(t, err)
+
+	// add a target using the delegation -- will only add to targets/releases
+	_, err = runCommand(t, tempDir, "add", "gun", target, tempTargetFile.Name(), "--roles", "targets/releases")
+	assert.NoError(t, err)
+
+	// list targets for targets/releases - we should see no targets until we publish
+	output, err = runCommand(t, tempDir, "-s", server.URL, "list", "gun", "--roles", "targets/releases")
+	assert.NoError(t, err)
+	assert.Contains(t, output, "No targets")
+
+	// publish repo
+	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
+	assert.NoError(t, err)
+
+	// list targets for targets/releases - we should see our target!
+	output, err = runCommand(t, tempDir, "-s", server.URL, "list", "gun", "--roles", "targets/releases")
+	assert.NoError(t, err)
+	assert.Contains(t, output, "targets/releases")
 }
 
 // Splits a string into lines, and returns any lines that are not empty (
