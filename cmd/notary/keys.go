@@ -22,34 +22,6 @@ import (
 	"github.com/spf13/viper"
 )
 
-type usageTemplate struct {
-	Use   string
-	Short string
-	Long  string
-}
-
-type cobraRunE func(cmd *cobra.Command, args []string) error
-
-func (u usageTemplate) ToCommand(run cobraRunE) *cobra.Command {
-	c := cobra.Command{
-		Use:   u.Use,
-		Short: u.Short,
-		Long:  u.Long,
-	}
-	if run != nil {
-		// newer versions of cobra support a run function that returns an error,
-		// but in the meantime, this should help ease the transition
-		c.Run = func(cmd *cobra.Command, args []string) {
-			err := run(cmd, args)
-			if err != nil {
-				cmd.Usage()
-				fatalf(err.Error())
-			}
-		}
-	}
-	return &c
-}
-
 var cmdKeyTemplate = usageTemplate{
 	Use:   "key",
 	Short: "Operates on keys.",
@@ -112,8 +84,8 @@ var cmdKeyPasswdTemplate = usageTemplate{
 
 type keyCommander struct {
 	// these need to be set
-	configGetter func() *viper.Viper
-	retriever    passphrase.Retriever
+	configGetter func() (*viper.Viper, error)
+	getRetriever func() passphrase.Retriever
 
 	// these are for command line parsing - no need to set
 	keysExportRootChangePassphrase bool
@@ -158,10 +130,14 @@ func (k *keyCommander) GetCommand() *cobra.Command {
 
 func (k *keyCommander) keysList(cmd *cobra.Command, args []string) error {
 	if len(args) > 0 {
+		cmd.Usage()
 		return fmt.Errorf("")
 	}
 
-	config := k.configGetter()
+	config, err := k.configGetter()
+	if err != nil {
+		return err
+	}
 	ks, err := k.getKeyStores(config, true)
 	if err != nil {
 		return err
@@ -177,6 +153,7 @@ func (k *keyCommander) keysGenerateRootKey(cmd *cobra.Command, args []string) er
 	// We require one or no arguments (since we have a default value), but if the
 	// user passes in more than one argument, we error out.
 	if len(args) > 1 {
+		cmd.Usage()
 		return fmt.Errorf(
 			"Please provide only one Algorithm as an argument to generate (rsa, ecdsa)")
 	}
@@ -198,7 +175,10 @@ func (k *keyCommander) keysGenerateRootKey(cmd *cobra.Command, args []string) er
 		return fmt.Errorf("Algorithm not allowed, possible values are: RSA, ECDSA")
 	}
 
-	config := k.configGetter()
+	config, err := k.configGetter()
+	if err != nil {
+		return err
+	}
 	ks, err := k.getKeyStores(config, true)
 	if err != nil {
 		return err
@@ -217,10 +197,14 @@ func (k *keyCommander) keysGenerateRootKey(cmd *cobra.Command, args []string) er
 // keysBackup exports a collection of keys to a ZIP file
 func (k *keyCommander) keysBackup(cmd *cobra.Command, args []string) error {
 	if len(args) < 1 {
+		cmd.Usage()
 		return fmt.Errorf("Must specify output filename for export")
 	}
 
-	config := k.configGetter()
+	config, err := k.configGetter()
+	if err != nil {
+		return err
+	}
 	ks, err := k.getKeyStores(config, false)
 	if err != nil {
 		return err
@@ -236,7 +220,7 @@ func (k *keyCommander) keysBackup(cmd *cobra.Command, args []string) error {
 
 	// Must use a different passphrase retriever to avoid caching the
 	// unlocking passphrase and reusing that.
-	exportRetriever := getRetriever()
+	exportRetriever := k.getRetriever()
 	if k.keysExportGUN != "" {
 		err = cs.ExportKeysByGUN(exportFile, k.keysExportGUN, exportRetriever)
 	} else {
@@ -255,6 +239,7 @@ func (k *keyCommander) keysBackup(cmd *cobra.Command, args []string) error {
 // keysExportRoot exports a root key by ID to a PEM file
 func (k *keyCommander) keysExportRoot(cmd *cobra.Command, args []string) error {
 	if len(args) < 2 {
+		cmd.Usage()
 		return fmt.Errorf("Must specify key ID and output filename for export")
 	}
 
@@ -265,7 +250,10 @@ func (k *keyCommander) keysExportRoot(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("Please specify a valid root key ID")
 	}
 
-	config := k.configGetter()
+	config, err := k.configGetter()
+	if err != nil {
+		return err
+	}
 	ks, err := k.getKeyStores(config, true)
 	if err != nil {
 		return err
@@ -279,7 +267,7 @@ func (k *keyCommander) keysExportRoot(cmd *cobra.Command, args []string) error {
 	if k.keysExportRootChangePassphrase {
 		// Must use a different passphrase retriever to avoid caching the
 		// unlocking passphrase and reusing that.
-		exportRetriever := getRetriever()
+		exportRetriever := k.getRetriever()
 		err = cs.ExportRootKeyReencrypt(exportFile, keyID, exportRetriever)
 	} else {
 		err = cs.ExportRootKey(exportFile, keyID)
@@ -295,12 +283,16 @@ func (k *keyCommander) keysExportRoot(cmd *cobra.Command, args []string) error {
 // keysRestore imports keys from a ZIP file
 func (k *keyCommander) keysRestore(cmd *cobra.Command, args []string) error {
 	if len(args) < 1 {
+		cmd.Usage()
 		return fmt.Errorf("Must specify input filename for import")
 	}
 
 	importFilename := args[0]
 
-	config := k.configGetter()
+	config, err := k.configGetter()
+	if err != nil {
+		return err
+	}
 	ks, err := k.getKeyStores(config, true)
 	if err != nil {
 		return err
@@ -324,10 +316,14 @@ func (k *keyCommander) keysRestore(cmd *cobra.Command, args []string) error {
 // keysImportRoot imports a root key from a PEM file
 func (k *keyCommander) keysImportRoot(cmd *cobra.Command, args []string) error {
 	if len(args) != 1 {
+		cmd.Usage()
 		return fmt.Errorf("Must specify input filename for import")
 	}
 
-	config := k.configGetter()
+	config, err := k.configGetter()
+	if err != nil {
+		return err
+	}
 	ks, err := k.getKeyStores(config, true)
 	if err != nil {
 		return err
@@ -352,6 +348,7 @@ func (k *keyCommander) keysImportRoot(cmd *cobra.Command, args []string) error {
 
 func (k *keyCommander) keysRotate(cmd *cobra.Command, args []string) error {
 	if len(args) < 1 {
+		cmd.Usage()
 		return fmt.Errorf("Must specify a GUN")
 	}
 	rotateKeyRole := strings.ToLower(k.rotateKeyRole)
@@ -372,18 +369,24 @@ func (k *keyCommander) keysRotate(cmd *cobra.Command, args []string) error {
 			"remote signing/key management is only supported for the snapshot key")
 	}
 
-	config := k.configGetter()
+	config, err := k.configGetter()
+	if err != nil {
+		return err
+	}
 
 	gun := args[0]
 	var rt http.RoundTripper
 	if k.rotateKeyServerManaged {
 		// this does not actually push the changes, just creates the keys, but
 		// it creates a key remotely so it needs a transport
-		rt = getTransport(config, gun, false)
+		rt, err = getTransport(config, gun, false)
+		if err != nil {
+			return err
+		}
 	}
 	nRepo, err := notaryclient.NewNotaryRepository(
 		config.GetString("trust_dir"), gun, getRemoteTrustServer(config),
-		rt, k.retriever)
+		rt, k.getRetriever())
 	if err != nil {
 		return err
 	}
@@ -470,10 +473,14 @@ func removeKeyInteractively(keyStores []trustmanager.KeyStore, keyID string,
 // keyRemove deletes a private key based on ID
 func (k *keyCommander) keyRemove(cmd *cobra.Command, args []string) error {
 	if len(args) < 1 {
+		cmd.Usage()
 		return fmt.Errorf("must specify the key ID of the key to remove")
 	}
 
-	config := k.configGetter()
+	config, err := k.configGetter()
+	if err != nil {
+		return err
+	}
 	ks, err := k.getKeyStores(config, true)
 	if err != nil {
 		return err
@@ -494,10 +501,14 @@ func (k *keyCommander) keyRemove(cmd *cobra.Command, args []string) error {
 // keyPassphraseChange changes the passphrase for a root key's private key based on ID
 func (k *keyCommander) keyPassphraseChange(cmd *cobra.Command, args []string) error {
 	if len(args) < 1 {
+		cmd.Usage()
 		return fmt.Errorf("must specify the key ID of the root key to change the passphrase of")
 	}
 
-	config := k.configGetter()
+	config, err := k.configGetter()
+	if err != nil {
+		return err
+	}
 	ks, err := k.getKeyStores(config, true)
 	if err != nil {
 		return err
@@ -519,7 +530,7 @@ func (k *keyCommander) keyPassphraseChange(cmd *cobra.Command, args []string) er
 
 	// Must use a different passphrase retriever to avoid caching the
 	// unlocking passphrase and reusing that.
-	passChangeRetriever := getRetriever()
+	passChangeRetriever := k.getRetriever()
 	keyStore, err := trustmanager.NewKeyFileStore(config.GetString("trust_dir"), passChangeRetriever)
 	err = keyStore.AddKey(keyID, role, privKey)
 	if err != nil {
@@ -534,9 +545,10 @@ func (k *keyCommander) keyPassphraseChange(cmd *cobra.Command, args []string) er
 
 func (k *keyCommander) getKeyStores(
 	config *viper.Viper, withHardware bool) ([]trustmanager.KeyStore, error) {
+	retriever := k.getRetriever()
 
 	directory := config.GetString("trust_dir")
-	fileKeyStore, err := trustmanager.NewKeyFileStore(directory, k.retriever)
+	fileKeyStore, err := trustmanager.NewKeyFileStore(directory, retriever)
 	if err != nil {
 		return nil, fmt.Errorf(
 			"Failed to create private key store in directory: %s", directory)
@@ -545,7 +557,7 @@ func (k *keyCommander) getKeyStores(
 	ks := []trustmanager.KeyStore{fileKeyStore}
 
 	if withHardware {
-		yubiStore, err := getYubiKeyStore(fileKeyStore, k.retriever)
+		yubiStore, err := getYubiKeyStore(fileKeyStore, retriever)
 		if err == nil && yubiStore != nil {
 			// Note that the order is important, since we want to prioritize
 			// the yubikey store
