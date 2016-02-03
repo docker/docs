@@ -14,7 +14,9 @@ func TestTokenAuth(t *testing.T) {
 		baseTransport = &http.Transport{}
 		gun           = "test"
 	)
-	require.Nil(t, tokenAuth("https://localhost:9999", baseTransport, gun, readOnly))
+	auth, err := tokenAuth("https://localhost:9999", baseTransport, gun, readOnly)
+	require.NoError(t, err)
+	require.Nil(t, auth)
 }
 
 func StatusOKTestHandler(w http.ResponseWriter, r *http.Request) {
@@ -31,7 +33,9 @@ func TestTokenAuth200Status(t *testing.T) {
 	s := httptest.NewServer(http.HandlerFunc(NotAuthorizedTestHandler))
 	defer s.Close()
 
-	require.NotNil(t, tokenAuth(s.URL, baseTransport, gun, readOnly))
+	auth, err := tokenAuth(s.URL, baseTransport, gun, readOnly)
+	require.NoError(t, err)
+	require.NotNil(t, auth)
 }
 
 func NotAuthorizedTestHandler(w http.ResponseWriter, r *http.Request) {
@@ -47,7 +51,9 @@ func TestTokenAuth401Status(t *testing.T) {
 	s := httptest.NewServer(http.HandlerFunc(NotAuthorizedTestHandler))
 	defer s.Close()
 
-	require.NotNil(t, tokenAuth(s.URL, baseTransport, gun, readOnly))
+	auth, err := tokenAuth(s.URL, baseTransport, gun, readOnly)
+	require.NoError(t, err)
+	require.NotNil(t, auth)
 }
 
 func NotFoundTestHandler(w http.ResponseWriter, r *http.Request) {
@@ -63,5 +69,7 @@ func TestTokenAuthNon200Non401Status(t *testing.T) {
 	s := httptest.NewServer(http.HandlerFunc(NotFoundTestHandler))
 	defer s.Close()
 
-	require.Nil(t, tokenAuth(s.URL, baseTransport, gun, readOnly))
+	auth, err := tokenAuth(s.URL, baseTransport, gun, readOnly)
+	require.NoError(t, err)
+	require.Nil(t, auth)
 }

@@ -3,24 +3,25 @@ package main
 import (
 	"crypto/rand"
 	"crypto/x509"
-	"github.com/docker/notary/cryptoservice"
-	"github.com/docker/notary/trustmanager"
-	"github.com/spf13/viper"
-	"github.com/stretchr/testify/assert"
 	"io/ioutil"
 	"os"
 	"testing"
 	"time"
+
+	"github.com/docker/notary/cryptoservice"
+	"github.com/docker/notary/trustmanager"
+	"github.com/spf13/viper"
+	"github.com/stretchr/testify/assert"
 )
 
 var testTrustDir = "trust_dir"
 
 func setup() *delegationCommander {
 	return &delegationCommander{
-		configGetter: func() *viper.Viper {
+		configGetter: func() (*viper.Viper, error) {
 			mainViper := viper.New()
 			mainViper.Set("trust_dir", testTrustDir)
-			return mainViper
+			return mainViper, nil
 		},
 		retriever: nil,
 	}
