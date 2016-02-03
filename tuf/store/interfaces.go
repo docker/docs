@@ -1,11 +1,5 @@
 package store
 
-import (
-	"github.com/docker/notary/tuf/data"
-)
-
-type targetsWalkFunc func(path string, meta data.FileMeta) error
-
 // MetadataStore must be implemented by anything that intends to interact
 // with a store of TUF files
 type MetadataStore interface {

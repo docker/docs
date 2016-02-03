@@ -10,16 +10,11 @@ import (
 )
 
 // NewFilesystemStore creates a new store in a directory tree
-func NewFilesystemStore(baseDir, metaSubDir, metaExtension, targetsSubDir string) (*FilesystemStore, error) {
+func NewFilesystemStore(baseDir, metaSubDir, metaExtension string) (*FilesystemStore, error) {
 	metaDir := path.Join(baseDir, metaSubDir)
-	targetsDir := path.Join(baseDir, targetsSubDir)
 
 	// Make sure we can create the necessary dirs and they are writable
 	err := os.MkdirAll(metaDir, 0700)
-	if err != nil {
-		return nil, err
-	}
-	err = os.MkdirAll(targetsDir, 0700)
 	if err != nil {
 		return nil, err
 	}
@@ -28,7 +23,6 @@ func NewFilesystemStore(baseDir, metaSubDir, metaExtension, targetsSubDir string
 		baseDir:       baseDir,
 		metaDir:       metaDir,
 		metaExtension: metaExtension,
-		targetsDir:    targetsDir,
 	}, nil
 }
 
@@ -37,7 +31,6 @@ type FilesystemStore struct {
 	baseDir       string
 	metaDir       string
 	metaExtension string
-	targetsDir    string
 }
 
 func (f *FilesystemStore) getPath(name string) string {

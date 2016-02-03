@@ -99,7 +99,7 @@ func TestUpdateSucceedsEvenIfCannotWriteNewRepo(t *testing.T) {
 	serverMeta, _, err := testutils.NewRepoMetadata("docker.com/notary", metadataDelegations...)
 	require.NoError(t, err)
 
-	ts := readOnlyServer(t, store.NewMemoryStore(serverMeta, nil), http.StatusNotFound)
+	ts := readOnlyServer(t, store.NewMemoryStore(serverMeta), http.StatusNotFound)
 	defer ts.Close()
 
 	for role := range serverMeta {
@@ -215,7 +215,7 @@ func TestUpdateReplacesCorruptOrMissingMetadata(t *testing.T) {
 	serverMeta, cs, err := testutils.NewRepoMetadata("docker.com/notary", metadataDelegations...)
 	require.NoError(t, err)
 
-	ts := readOnlyServer(t, store.NewMemoryStore(serverMeta, nil), http.StatusNotFound)
+	ts := readOnlyServer(t, store.NewMemoryStore(serverMeta), http.StatusNotFound)
 	defer ts.Close()
 
 	repo := newBlankRepo(t, ts.URL)
