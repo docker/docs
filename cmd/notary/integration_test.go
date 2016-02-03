@@ -20,31 +20,28 @@ import (
 	"github.com/Sirupsen/logrus"
 	ctxu "github.com/docker/distribution/context"
 	"github.com/docker/notary/cryptoservice"
+	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/server"
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/utils"
 	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/net/context"
 )
 
 var testPassphrase = "passphrase"
+var NewNotaryCommand func() *cobra.Command
 
 // run a command and return the output as a string
 func runCommand(t *testing.T, tempDir string, args ...string) (string, error) {
-	// Using a new viper and Command so we don't have state between command invocations
-	mainViper = viper.New()
-	cmd := &cobra.Command{}
-	setupCommand(cmd)
-
 	b := new(bytes.Buffer)
 
 	// Create an empty config file so we don't load the default on ~/.notary/config.json
 	configFile := filepath.Join(tempDir, "config.json")
 
+	cmd := NewNotaryCommand()
 	cmd.SetArgs(append([]string{"-c", configFile, "-d", tempDir}, args...))
 	cmd.SetOutput(b)
 	retErr := cmd.Execute()
@@ -74,7 +71,7 @@ func setupServer() *httptest.Server {
 	ctx = ctxu.WithLogger(ctx, logrus.NewEntry(l))
 
 	cryptoService := cryptoservice.NewCryptoService(
-		"", trustmanager.NewKeyMemoryStore(retriever))
+		"", trustmanager.NewKeyMemoryStore(passphrase.ConstantRetriever("pass")))
 	return httptest.NewServer(server.RootHandler(nil, ctx, cryptoService))
 }
 
@@ -90,7 +87,7 @@ func TestClientTufInteraction(t *testing.T) {
 	server := setupServer()
 	defer server.Close()
 
-	tempFile, err := ioutil.TempFile("/tmp", "targetfile")
+	tempFile, err := ioutil.TempFile("", "targetfile")
 	assert.NoError(t, err)
 	tempFile.Close()
 	defer os.Remove(tempFile.Name())
@@ -162,7 +159,7 @@ func TestClientDelegationsInteraction(t *testing.T) {
 	defer server.Close()
 
 	// Setup certificate
-	tempFile, err := ioutil.TempFile("/tmp", "pemfile")
+	tempFile, err := ioutil.TempFile("", "pemfile")
 	assert.NoError(t, err)
 
 	privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
@@ -229,7 +226,7 @@ func TestClientDelegationsInteraction(t *testing.T) {
 	assert.Contains(t, output, keyID)
 
 	// Setup another certificate
-	tempFile2, err := ioutil.TempFile("/tmp", "pemfile2")
+	tempFile2, err := ioutil.TempFile("", "pemfile2")
 	assert.NoError(t, err)
 
 	privKey, err = trustmanager.GenerateECDSAKey(rand.Reader)
@@ -391,7 +388,7 @@ func TestClientDelegationsPublishing(t *testing.T) {
 	defer server.Close()
 
 	// Setup certificate for delegation role
-	tempFile, err := ioutil.TempFile("/tmp", "pemfile")
+	tempFile, err := ioutil.TempFile("", "pemfile")
 	assert.NoError(t, err)
 
 	privKey, err := trustmanager.GenerateRSAKey(rand.Reader, 2048)
@@ -416,7 +413,7 @@ func TestClientDelegationsPublishing(t *testing.T) {
 	assert.NoError(t, err)
 
 	// Set up targets for publishing
-	tempTargetFile, err := ioutil.TempFile("/tmp", "targetfile")
+	tempTargetFile, err := ioutil.TempFile("", "targetfile")
 	assert.NoError(t, err)
 	tempTargetFile.Close()
 	defer os.Remove(tempTargetFile.Name())
@@ -655,7 +652,7 @@ func TestClientKeyGenerationRotation(t *testing.T) {
 
 	tempfiles := make([]string, 2)
 	for i := 0; i < 2; i++ {
-		tempFile, err := ioutil.TempFile("/tmp", "targetfile")
+		tempFile, err := ioutil.TempFile("", "targetfile")
 		assert.NoError(t, err)
 		tempFile.Close()
 		tempfiles[i] = tempFile.Name()
@@ -736,7 +733,7 @@ func TestClientKeyBackupAndRestore(t *testing.T) {
 
 	tempfiles := make([]string, 2)
 	for i := 0; i < 2; i++ {
-		tempFile, err := ioutil.TempFile("/tmp", "tempfile")
+		tempFile, err := ioutil.TempFile("", "tempfile")
 		assert.NoError(t, err)
 		tempFile.Close()
 		tempfiles[i] = tempFile.Name()
@@ -815,10 +812,13 @@ func exportRoot(t *testing.T, exportTo string) string {
 	oldRoot, _ := assertNumKeys(t, tempDir, 1, 0, true)
 
 	// export does not require a password
-	oldRetriever := retriever
-	retriever = nil
+	oldNewCommand := NewNotaryCommand
+	NewNotaryCommand = func() *cobra.Command {
+		commander := &notaryCommander{getRetriever: func() passphrase.Retriever { return nil }}
+		return commander.GetCommand()
+	}
 	defer func() { // but import will, later
-		retriever = oldRetriever
+		NewNotaryCommand = oldNewCommand
 	}()
 
 	_, err = runCommand(
@@ -844,7 +844,7 @@ func TestClientKeyImportExportRootOnly(t *testing.T) {
 		rootKeyID string
 	)
 
-	tempFile, err := ioutil.TempFile("/tmp", "pemfile")
+	tempFile, err := ioutil.TempFile("", "pemfile")
 	assert.NoError(t, err)
 	// close later, because we might need to write to it
 	defer os.Remove(tempFile.Name())
@@ -1001,22 +1001,23 @@ func TestDefaultRootKeyGeneration(t *testing.T) {
 // Tests the interaction with the verbose and log-level flags
 func TestLogLevelFlags(t *testing.T) {
 	// Test default to fatal
-	setVerbosityLevel()
+	n := notaryCommander{}
+	n.setVerbosityLevel()
 	assert.Equal(t, "fatal", logrus.GetLevel().String())
 
 	// Test that verbose (-v) sets to error
-	verbose = true
-	setVerbosityLevel()
+	n.verbose = true
+	n.setVerbosityLevel()
 	assert.Equal(t, "error", logrus.GetLevel().String())
 
 	// Test that debug (-D) sets to debug
-	debug = true
-	setVerbosityLevel()
+	n.debug = true
+	n.setVerbosityLevel()
 	assert.Equal(t, "debug", logrus.GetLevel().String())
 
 	// Test that unsetting verboseError still uses verboseDebug
-	verbose = false
-	setVerbosityLevel()
+	n.verbose = false
+	n.setVerbosityLevel()
 	assert.Equal(t, "debug", logrus.GetLevel().String())
 }
 
@@ -1051,7 +1052,7 @@ func TestClientKeyPassphraseChange(t *testing.T) {
 }
 
 func tempDirWithConfig(t *testing.T, config string) string {
-	tempDir, err := ioutil.TempDir("/tmp", "repo")
+	tempDir, err := ioutil.TempDir("", "repo")
 	assert.NoError(t, err)
 	err = ioutil.WriteFile(filepath.Join(tempDir, "config.json"), []byte(config), 0644)
 	assert.NoError(t, err)
