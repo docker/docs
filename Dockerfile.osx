@@ -35,7 +35,7 @@ RUN chmod +x /docker
 
 
 ENV DOCKER_MACHINE_VERSION 0.6.0-rc3
-RUN curl -fsSL -o /docker-machine https://github.com/docker/machine/releases/download/v$DOCKER_MACHINE_VERSION/docker-machine_Darwin-x86_64
+RUN curl -fsSL -o /docker-machine https://github.com/docker/machine/releases/download/v$DOCKER_MACHINE_VERSION/docker-machine-Darwin-x86_64
 
 RUN chmod +x /docker-machine
 
