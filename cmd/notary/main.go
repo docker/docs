@@ -41,6 +41,17 @@ func (u usageTemplate) ToCommand(run cobraRunE) *cobra.Command {
 	return &c
 }
 
+func pathRelativeToCwd(path string) string {
+	if path == "" || filepath.IsAbs(path) {
+		return path
+	}
+	cwd, err := os.Getwd()
+	if err != nil {
+		return filepath.Clean(path)
+	}
+	return filepath.Clean(filepath.Join(cwd, path))
+}
+
 type notaryCommander struct {
 	// this needs to be set
 	getRetriever func() passphrase.Retriever
@@ -51,6 +62,10 @@ type notaryCommander struct {
 	trustDir          string
 	configFile        string
 	remoteTrustServer string
+
+	tlsCAFile   string
+	tlsCertFile string
+	tlsKeyFile  string
 }
 
 func (n *notaryCommander) parseConfig() (*viper.Viper, error) {
@@ -96,7 +111,16 @@ func (n *notaryCommander) parseConfig() (*viper.Viper, error) {
 	// At this point we either have the default value or the one set by the config.
 	// Either way, some command-line flags have precedence and overwrites the value
 	if n.trustDir != "" {
-		config.Set("trust_dir", n.trustDir)
+		config.Set("trust_dir", pathRelativeToCwd(n.trustDir))
+	}
+	if n.tlsCAFile != "" {
+		config.Set("remote_server.root_ca", pathRelativeToCwd(n.tlsCAFile))
+	}
+	if n.tlsCertFile != "" {
+		config.Set("remote_server.tls_client_cert", pathRelativeToCwd(n.tlsCertFile))
+	}
+	if n.tlsKeyFile != "" {
+		config.Set("remote_server.tls_client_key", pathRelativeToCwd(n.tlsKeyFile))
 	}
 	if n.remoteTrustServer != "" {
 		config.Set("remote_server.url", n.remoteTrustServer)
@@ -138,6 +162,9 @@ func (n *notaryCommander) GetCommand() *cobra.Command {
 	notaryCmd.PersistentFlags().BoolVarP(&n.verbose, "verbose", "v", false, "Verbose output")
 	notaryCmd.PersistentFlags().BoolVarP(&n.debug, "debug", "D", false, "Debug output")
 	notaryCmd.PersistentFlags().StringVarP(&n.remoteTrustServer, "server", "s", "", "Remote trust server location")
+	notaryCmd.PersistentFlags().StringVar(&n.tlsCAFile, "tlscacert", "", "Trust certs signed only by this CA")
+	notaryCmd.PersistentFlags().StringVar(&n.tlsCertFile, "tlscert", "", "Path to TLS certificate file")
+	notaryCmd.PersistentFlags().StringVar(&n.tlsKeyFile, "tlskey", "", "Path to TLS key file")
 
 	cmdKeyGenerator := &keyCommander{
 		configGetter: n.parseConfig,

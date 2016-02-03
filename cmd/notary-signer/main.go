@@ -154,11 +154,7 @@ func setupHTTPServer(httpAddr string, tlsConfig *tls.Config,
 }
 
 func getAddrAndTLSConfig(configuration *viper.Viper) (string, string, *tls.Config, error) {
-	tlsOpts, err := utils.ParseServerTLS(configuration, true)
-	if err != nil {
-		return "", "", nil, fmt.Errorf("unable to set up TLS: %s", err.Error())
-	}
-	tlsConfig, err := utils.ConfigureServerTLS(tlsOpts)
+	tlsConfig, err := utils.ParseServerTLS(configuration, true)
 	if err != nil {
 		return "", "", nil, fmt.Errorf("unable to set up TLS: %s", err.Error())
 	}

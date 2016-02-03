@@ -21,6 +21,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"golang.org/x/net/context"
 
+	"github.com/docker/go-connections/tlsconfig"
 	"github.com/docker/notary/server"
 	"github.com/docker/notary/utils"
 	"github.com/docker/notary/version"
@@ -63,39 +64,27 @@ func getAddrAndTLSConfig(configuration *viper.Viper) (string, *tls.Config, error
 		return "", nil, fmt.Errorf("http listen address required for server")
 	}
 
-	tlsOpts, err := utils.ParseServerTLS(configuration, false)
+	tlsConfig, err := utils.ParseServerTLS(configuration, false)
 	if err != nil {
 		return "", nil, fmt.Errorf(err.Error())
 	}
-	// do not support this yet since the client doesn't have client cert support
-	if tlsOpts != nil {
-		tlsOpts.ClientCAFile = ""
-		tlsConfig, err := utils.ConfigureServerTLS(tlsOpts)
-		if err != nil {
-			return "", nil, fmt.Errorf(
-				"unable to set up TLS for server: %s", err.Error())
-		}
-		return httpAddr, tlsConfig, nil
-	}
-	return httpAddr, nil, nil
+	return httpAddr, tlsConfig, nil
 }
 
 // sets up TLS for the GRPC connection to notary-signer
 func grpcTLS(configuration *viper.Viper) (*tls.Config, error) {
 	rootCA := utils.GetPathRelativeToConfig(configuration, "trust_service.tls_ca_file")
-	serverName := configuration.GetString("trust_service.hostname")
 	clientCert := utils.GetPathRelativeToConfig(configuration, "trust_service.tls_client_cert")
 	clientKey := utils.GetPathRelativeToConfig(configuration, "trust_service.tls_client_key")
 
-	if (clientCert == "" && clientKey != "") || (clientCert != "" && clientKey == "") {
-		return nil, fmt.Errorf("Partial TLS configuration found. Either include both a client cert and client key file in the configuration, or include neither.")
+	if clientCert == "" && clientKey != "" || clientCert != "" && clientKey == "" {
+		return nil, fmt.Errorf("either pass both client key and cert, or neither")
 	}
 
-	tlsConfig, err := utils.ConfigureClientTLS(&utils.ClientTLSOpts{
-		RootCAFile:     rootCA,
-		ServerName:     serverName,
-		ClientCertFile: clientCert,
-		ClientKeyFile:  clientKey,
+	tlsConfig, err := tlsconfig.Client(tlsconfig.Options{
+		CAFile:   rootCA,
+		CertFile: clientCert,
+		KeyFile:  clientKey,
 	})
 	if err != nil {
 		return nil, fmt.Errorf(

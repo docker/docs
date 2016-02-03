@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"reflect"
 	"strings"
 	"testing"
 	"time"
@@ -78,8 +79,7 @@ func TestGetAddrAndTLSConfigSuccessWithoutTLS(t *testing.T) {
 	assert.Nil(t, tlsConf)
 }
 
-// We don't support client CAs yet on notary server
-func TestGetAddrAndTLSConfigSkipClientTLS(t *testing.T) {
+func TestGetAddrAndTLSConfigWithClientTLS(t *testing.T) {
 	httpAddr, tlsConf, err := getAddrAndTLSConfig(configure(fmt.Sprintf(`{
 		"server": {
 			"http_addr": ":2345",
@@ -90,7 +90,7 @@ func TestGetAddrAndTLSConfigSkipClientTLS(t *testing.T) {
 	}`, Cert, Key, Root)))
 	assert.NoError(t, err)
 	assert.Equal(t, ":2345", httpAddr)
-	assert.Nil(t, tlsConf.ClientCAs)
+	assert.NotNil(t, tlsConf.ClientCAs)
 }
 
 // If neither "remote" nor "local" is passed for "trust_service.type", an
@@ -200,7 +200,7 @@ func TestGetTrustServiceTLSMissingCertOrKey(t *testing.T) {
 			fakeRegister)
 		assert.Error(t, err)
 		assert.True(t,
-			strings.Contains(err.Error(), "Partial TLS configuration found."))
+			strings.Contains(err.Error(), "either pass both client key and cert, or neither"))
 	}
 	// no health function ever registered
 	assert.Equal(t, 0, registerCalled)
@@ -233,7 +233,6 @@ func TestGetTrustServiceNoTLSConfig(t *testing.T) {
 	assert.NoError(t, err)
 	assert.IsType(t, &client.NotarySigner{}, trust)
 	assert.Equal(t, "ecdsa", algo)
-	assert.Equal(t, "notary-signer", tlsConfig.ServerName)
 	assert.Nil(t, tlsConfig.RootCAs)
 	assert.Nil(t, tlsConfig.Certificates)
 	// health function registered
@@ -267,8 +266,8 @@ func TestGetTrustServiceTLSSuccess(t *testing.T) {
 	assert.NoError(t, err)
 	assert.IsType(t, &client.NotarySigner{}, trust)
 	assert.Equal(t, "ecdsa", algo)
-	assert.Equal(t, "notary-signer", tlsConfig.ServerName)
-	assert.Equal(t, []tls.Certificate{keypair}, tlsConfig.Certificates)
+	assert.Len(t, tlsConfig.Certificates, 1)
+	assert.True(t, reflect.DeepEqual(keypair, tlsConfig.Certificates[0]))
 	// health function registered
 	assert.Equal(t, 1, registerCalled)
 }
