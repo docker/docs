@@ -65,7 +65,7 @@ the above installer link will have an uninstaller available.
 
 To fork the master branch of Kitematic:
 
-1. Go to the <a href="https://github.com/docker/kitematic "target="_blank">docker/kitematic repository </a>.
+1. Go to the <a href="https://github.com/docker/kitematic" target="_blank">docker/kitematic repository </a>.
 
 2. Click **Fork** in the upper right corner of the GitHub interface.
 
