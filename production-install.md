@@ -635,12 +635,7 @@ for the UCP controller.  This cert is used by UCP's main management web UI
 and the Docker remote API. The remote API is visible to the Docker CLI. In this release, the Swarm Root CA is always managed by UCP.
 
 The external UCP Root CA model supports customers managing their own CA, or
-purchasing certs from a commercial CA.  When operating in this mode, UCP can
-not generate regular user certificates, as those must be managed and signed
-externally, however admin account certs can be generated as they are signed by
-the internal Swarm Root CA.  Normal user accounts should be signed by the same
-external Root CA (or a trusted intermediary), and the public keys manually added
-through the UI.
+purchasing certs from a commercial CA.
 
 The first time you install, we recommend you skip user-supplied certs and use
 the default certificates instead. The default TLS certificate files are placed
