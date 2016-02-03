@@ -184,7 +184,7 @@ func (d *delegationCommander) delegationRemove(cmd *cobra.Command, args []string
 			removingItems = removingItems + fmt.Sprintf("with keys %s, ", keyIDs)
 		}
 		if d.allPaths {
-			removingItems = removingItems + "with all paths,"
+			removingItems = removingItems + "with all paths, "
 		}
 		if d.paths != nil {
 			removingItems = removingItems + fmt.Sprintf("with paths [%s], ", prettyPrintPaths(d.paths))
@@ -198,7 +198,7 @@ func (d *delegationCommander) delegationRemove(cmd *cobra.Command, args []string
 
 // delegationAdd creates a new delegation by adding a public key from a certificate to a specific role in a GUN
 func (d *delegationCommander) delegationAdd(cmd *cobra.Command, args []string) error {
-    // We must have at least the gun and role name, and at least one key or path (or the --all-paths flag) to add
+	// We must have at least the gun and role name, and at least one key or path (or the --all-paths flag) to add
 	if len(args) < 2 || len(args) < 3 && d.paths == nil && !d.allPaths {
 		cmd.Usage()
 		return fmt.Errorf("must specify the Global Unique Name and the role of the delegation along with the public key certificate paths and/or a list of paths to add")
@@ -276,7 +276,7 @@ func (d *delegationCommander) delegationAdd(cmd *cobra.Command, args []string) e
 		addingItems = addingItems + fmt.Sprintf("with paths [%s], ", prettyPrintPaths(d.paths))
 	}
 	cmd.Printf(
-		"Addition of delegation role %s %s to repository \"%s\" staged for next publish.\n",
+		"Addition of delegation role %s %sto repository \"%s\" staged for next publish.\n",
 		role, addingItems, gun)
 	cmd.Println("")
 	return nil
