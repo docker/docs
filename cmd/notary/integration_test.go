@@ -387,7 +387,7 @@ func TestClientDelegationsInteraction(t *testing.T) {
 	assert.NoError(t, err)
 
 	// Add more individual paths so we can test a delegation remove --all-paths
-	output, err = runCommand(t, tempDir, "delegation", "add", "gun", "targets/delegation", "--paths", "banana,apple,orange,kiwi")
+	output, err = runCommand(t, tempDir, "delegation", "add", "gun", "targets/delegation", "--paths", "banana/split,apple/crumble/pie,orange.peel,kiwi")
 	assert.NoError(t, err)
 
 	// publish repo
@@ -399,9 +399,9 @@ func TestClientDelegationsInteraction(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Contains(t, output, "abcdef")
 	assert.Contains(t, output, "123456")
-	assert.Contains(t, output, "banana")
-	assert.Contains(t, output, "apple")
-	assert.Contains(t, output, "orange")
+	assert.Contains(t, output, "banana/split")
+	assert.Contains(t, output, "apple/crumble/pie")
+	assert.Contains(t, output, "orange.peel")
 	assert.Contains(t, output, "kiwi")
 
 	// Try adding "", and check that adding it with other paths clears out the others
@@ -417,9 +417,9 @@ func TestClientDelegationsInteraction(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Contains(t, output, "abcdef")
 	assert.Contains(t, output, "123456")
-	assert.Contains(t, output, "banana")
-	assert.Contains(t, output, "apple")
-	assert.Contains(t, output, "orange")
+	assert.Contains(t, output, "banana/split")
+	assert.Contains(t, output, "apple/crumble/pie")
+	assert.Contains(t, output, "orange.peel")
 	assert.Contains(t, output, "kiwi")
 	assert.Contains(t, output, "\"\"")
 	assert.NotContains(t, output, "grapefruit")
@@ -438,9 +438,9 @@ func TestClientDelegationsInteraction(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Contains(t, output, "abcdef")
 	assert.Contains(t, output, "123456")
-	assert.Contains(t, output, "banana")
-	assert.Contains(t, output, "apple")
-	assert.Contains(t, output, "orange")
+	assert.Contains(t, output, "banana/split")
+	assert.Contains(t, output, "apple/crumble/pie")
+	assert.Contains(t, output, "orange.peel")
 	assert.Contains(t, output, "kiwi")
 	assert.NotContains(t, output, "\"\"")
 
@@ -457,9 +457,9 @@ func TestClientDelegationsInteraction(t *testing.T) {
 	assert.NoError(t, err)
 	assert.NotContains(t, output, "abcdef")
 	assert.NotContains(t, output, "123456")
-	assert.NotContains(t, output, "banana")
-	assert.NotContains(t, output, "apple")
-	assert.NotContains(t, output, "orange")
+	assert.NotContains(t, output, "banana/split")
+	assert.NotContains(t, output, "apple/crumble/pie")
+	assert.NotContains(t, output, "orange.peel")
 	assert.NotContains(t, output, "kiwi")
 
 	// remove by force to delete the delegation entirely
