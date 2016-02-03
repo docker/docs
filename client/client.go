@@ -116,7 +116,6 @@ func repositoryFromKeystores(baseDir, gun, baseURL string, rt http.RoundTripper,
 		nRepo.tufRepoPath,
 		"metadata",
 		"json",
-		"",
 	)
 	if err != nil {
 		return nil, err

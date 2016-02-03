@@ -7,7 +7,7 @@ import (
 )
 
 func TestMemoryStore(t *testing.T) {
-	s := NewMemoryStore(nil, nil)
+	s := NewMemoryStore(nil)
 	_, err := s.GetMeta("nonexistent", 0)
 	require.Error(t, err)
 	require.IsType(t, ErrMetaNotFound{}, err)

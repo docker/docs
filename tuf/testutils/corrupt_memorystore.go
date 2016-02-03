@@ -11,8 +11,8 @@ type CorruptingMemoryStore struct {
 
 // NewCorruptingMemoryStore returns a new instance of memory store that
 // corrupts all data requested from it.
-func NewCorruptingMemoryStore(meta map[string][]byte, files map[string][]byte) *CorruptingMemoryStore {
-	s := store.NewMemoryStore(meta, files)
+func NewCorruptingMemoryStore(meta map[string][]byte) *CorruptingMemoryStore {
+	s := store.NewMemoryStore(meta)
 	return &CorruptingMemoryStore{MemoryStore: *s}
 }
 
@@ -34,8 +34,8 @@ type LongMemoryStore struct {
 
 // NewLongMemoryStore returns a new instance of memory store that
 // returns one byte too much data on any request to GetMeta
-func NewLongMemoryStore(meta map[string][]byte, files map[string][]byte) *LongMemoryStore {
-	s := store.NewMemoryStore(meta, files)
+func NewLongMemoryStore(meta map[string][]byte) *LongMemoryStore {
+	s := store.NewMemoryStore(meta)
 	return &LongMemoryStore{MemoryStore: *s}
 }
 
@@ -56,8 +56,8 @@ type ShortMemoryStore struct {
 
 // NewShortMemoryStore returns a new instance of memory store that
 // returns one byte too little data on any request to GetMeta
-func NewShortMemoryStore(meta map[string][]byte, files map[string][]byte) *ShortMemoryStore {
-	s := store.NewMemoryStore(meta, files)
+func NewShortMemoryStore(meta map[string][]byte) *ShortMemoryStore {
+	s := store.NewMemoryStore(meta)
 	return &ShortMemoryStore{MemoryStore: *s}
 }
 
