@@ -6,11 +6,16 @@ import (
 	"testing"
 
 	"github.com/docker/notary/passphrase"
+	"github.com/spf13/cobra"
 )
 
 func init() {
-	retriever = passphrase.ConstantRetriever("pass")
-	getRetriever = func() passphrase.Retriever { return retriever }
+	NewNotaryCommand = func() *cobra.Command {
+		commander := &notaryCommander{
+			getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+		}
+		return commander.GetCommand()
+	}
 }
 
 func rootOnHardware() bool {
