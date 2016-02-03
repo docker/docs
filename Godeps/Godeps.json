@@ -1,6 +1,6 @@
 {
 	"ImportPath": "github.com/docker/notary",
-	"GoVersion": "go1.5.1",
+	"GoVersion": "go1.5.2",
 	"Packages": [
 		"./..."
 	],
@@ -96,6 +96,16 @@
 			"Rev": "786b29d4db80a6175e72b47a794ee044918ba734"
 		},
 		{
+			"ImportPath": "github.com/docker/go-connections/tlsconfig",
+			"Comment": "v0.1.2-6-gd834a4d",
+			"Rev": "d834a4de0c32df550d39ff9d5a66b741367a008a"
+		},
+		{
+			"ImportPath": "github.com/docker/go/canonical/json",
+			"Comment": "v1.5.1-1-1-gbaf439e",
+			"Rev": "baf439e6c161bd2106346fc8022b74ac2444e311"
+		},
+		{
 			"ImportPath": "github.com/docker/libtrust",
 			"Rev": "fa567046d9b14f6aa788882a950d69651d230b21"
 		},
@@ -130,11 +140,6 @@
 			"Rev": "76626ae9c91c4f2a10f34cad8ce83ea42c93bb75"
 		},
 		{
-			"ImportPath": "github.com/docker/go/canonical/json",
-			"Comment": "v1.5.1-1-1-gbaf439e",
-			"Rev": "baf439e6c161bd2106346fc8022b74ac2444e311"
-		},
-		{
 			"ImportPath": "github.com/jinzhu/gorm",
 			"Rev": "82d726bbfd8cefbe2dcdc7f7f0484551c0d40433"
 		},
@@ -165,10 +170,6 @@
 		{
 			"ImportPath": "github.com/matttproud/golang_protobuf_extensions/pbutil",
 			"Rev": "d0c3fe89de86839aecf2e0579c40ba3bb336a453"
-		},
-		{
-			"ImportPath": "github.com/miekg/pkcs11",
-			"Rev": "88c9f842544e629ec046105d7fb50d5daafae737"
 		},
 		{
 			"ImportPath": "github.com/mitchellh/go-homedir",
