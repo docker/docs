@@ -2,17 +2,27 @@ package utils
 
 import (
 	"bytes"
+	"crypto/tls"
 	"fmt"
 	"os"
+	"path/filepath"
+	"reflect"
 	"testing"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/bugsnag/bugsnag-go"
+	"github.com/docker/notary/trustmanager"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 )
 
 const envPrefix = "NOTARY_TESTING_ENV_PREFIX"
+
+const (
+	Cert = "../fixtures/notary-server.crt"
+	Key  = "../fixtures/notary-server.key"
+	Root = "../fixtures/root-ca.crt"
+)
 
 // initializes a viper object with test configuration
 func configure(jsonConfig string) *viper.Viper {
@@ -234,28 +244,27 @@ func TestParseStorageWithEnvironmentVariables(t *testing.T) {
 // If TLS is required and the parameters are missing, an error is returned
 func TestParseTLSNoTLSWhenRequired(t *testing.T) {
 	invalids := []string{
-		`{"server": {"tls_cert_file": "path/to/cert"}}`,
-		`{"server": {"tls_key_file": "path/to/key"}}`,
+		fmt.Sprintf(`{"server": {"tls_cert_file": "%s"}}`, Cert),
+		fmt.Sprintf(`{"server": {"tls_key_file": "%s"}}`, Key),
 	}
 	for _, configJSON := range invalids {
 		_, err := ParseServerTLS(configure(configJSON), true)
 		assert.Error(t, err)
-		assert.Contains(t, err.Error(),
-			"both the TLS certificate and key are mandatory")
+		assert.Contains(t, err.Error(), "no such file or directory")
 	}
 }
 
 // If TLS is not and the cert/key are partially provided, an error is returned
 func TestParseTLSPartialTLS(t *testing.T) {
 	invalids := []string{
-		`{"server": {"tls_cert_file": "path/to/cert"}}`,
-		`{"server": {"tls_key_file": "path/to/key"}}`,
+		fmt.Sprintf(`{"server": {"tls_cert_file": "%s"}}`, Cert),
+		fmt.Sprintf(`{"server": {"tls_key_file": "%s"}}`, Key),
 	}
 	for _, configJSON := range invalids {
 		_, err := ParseServerTLS(configure(configJSON), false)
 		assert.Error(t, err)
 		assert.Contains(t, err.Error(),
-			"either include both a cert and key file, or neither to disable TLS")
+			"either include both a cert and key file, or no TLS information at all to disable TLS")
 	}
 }
 
@@ -264,76 +273,95 @@ func TestParseTLSNoTLSNotRequired(t *testing.T) {
 		"server": {}
 	}`)
 
-	tlsOpts, err := ParseServerTLS(config, false)
+	tlsConfig, err := ParseServerTLS(config, false)
 	assert.NoError(t, err)
-	assert.Nil(t, tlsOpts)
+	assert.Nil(t, tlsConfig)
 }
 
 func TestParseTLSWithTLS(t *testing.T) {
-	config := configure(`{
+	config := configure(fmt.Sprintf(`{
 		"server": {
-			"tls_cert_file": "path/to/cert",
-			"tls_key_file": "path/to/key",
-			"client_ca_file": "path/to/clientca"
+			"tls_cert_file": "%s",
+			"tls_key_file": "%s",
+			"client_ca_file": "%s"
 		}
-	}`)
+	}`, Cert, Key, Root))
 
-	expected := ServerTLSOpts{
-		ServerCertFile: "path/to/cert",
-		ServerKeyFile:  "path/to/key",
-		ClientCAFile:   "path/to/clientca",
-	}
-
-	tlsOpts, err := ParseServerTLS(config, false)
+	tlsConfig, err := ParseServerTLS(config, false)
 	assert.NoError(t, err)
-	assert.Equal(t, expected, *tlsOpts)
+
+	expectedCert, err := tls.LoadX509KeyPair(Cert, Key)
+	assert.NoError(t, err)
+
+	expectedRoot, err := trustmanager.LoadCertFromFile(Root)
+	assert.NoError(t, err)
+
+	assert.Len(t, tlsConfig.Certificates, 1)
+	assert.True(t, reflect.DeepEqual(expectedCert, tlsConfig.Certificates[0]))
+
+	subjects := tlsConfig.ClientCAs.Subjects()
+	assert.Len(t, subjects, 1)
+	assert.True(t, bytes.Equal(expectedRoot.RawSubject, subjects[0]))
+	assert.Equal(t, tlsConfig.ClientAuth, tls.RequireAndVerifyClientCert)
 }
 
 func TestParseTLSWithTLSRelativeToConfigFile(t *testing.T) {
-	config := configure(`{
+	currDir, err := os.Getwd()
+	assert.NoError(t, err)
+
+	config := configure(fmt.Sprintf(`{
 		"server": {
-			"tls_cert_file": "path/to/cert",
-			"tls_key_file": "/abspath/to/key",
+			"tls_cert_file": "%s",
+			"tls_key_file": "%s",
 			"client_ca_file": ""
 		}
-	}`)
-	config.SetConfigFile("/opt/me.json")
+	}`, Cert, filepath.Clean(filepath.Join(currDir, Key))))
+	config.SetConfigFile(filepath.Join(currDir, "me.json"))
 
-	expected := ServerTLSOpts{
-		ServerCertFile: "/opt/path/to/cert",
-		ServerKeyFile:  "/abspath/to/key",
-		ClientCAFile:   "",
-	}
-
-	tlsOpts, err := ParseServerTLS(config, false)
+	tlsConfig, err := ParseServerTLS(config, false)
 	assert.NoError(t, err)
-	assert.Equal(t, expected, *tlsOpts)
+
+	expectedCert, err := tls.LoadX509KeyPair(Cert, Key)
+	assert.NoError(t, err)
+
+	assert.Len(t, tlsConfig.Certificates, 1)
+	assert.True(t, reflect.DeepEqual(expectedCert, tlsConfig.Certificates[0]))
+
+	assert.Nil(t, tlsConfig.ClientCAs)
+	assert.Equal(t, tlsConfig.ClientAuth, tls.NoClientCert)
 }
 
 func TestParseTLSWithEnvironmentVariables(t *testing.T) {
-	config := configure(`{
+	config := configure(fmt.Sprintf(`{
 		"server": {
-			"tls_cert_file": "path/to/cert",
+			"tls_cert_file": "%s",
 			"client_ca_file": "nosuchfile"
 		}
-	}`)
+	}`, Cert))
 
 	vars := map[string]string{
-		"SERVER_TLS_KEY_FILE":   "path/to/key",
-		"SERVER_CLIENT_CA_FILE": "path/to/clientca",
+		"SERVER_TLS_KEY_FILE":   Key,
+		"SERVER_CLIENT_CA_FILE": Root,
 	}
 	setupEnvironmentVariables(t, vars)
 	defer cleanupEnvironmentVariables(t, vars)
 
-	expected := ServerTLSOpts{
-		ServerCertFile: "path/to/cert",
-		ServerKeyFile:  "path/to/key",
-		ClientCAFile:   "path/to/clientca",
-	}
-
-	tlsOpts, err := ParseServerTLS(config, true)
+	tlsConfig, err := ParseServerTLS(config, true)
 	assert.NoError(t, err)
-	assert.Equal(t, expected, *tlsOpts)
+
+	expectedCert, err := tls.LoadX509KeyPair(Cert, Key)
+	assert.NoError(t, err)
+
+	expectedRoot, err := trustmanager.LoadCertFromFile(Root)
+	assert.NoError(t, err)
+
+	assert.Len(t, tlsConfig.Certificates, 1)
+	assert.True(t, reflect.DeepEqual(expectedCert, tlsConfig.Certificates[0]))
+
+	subjects := tlsConfig.ClientCAs.Subjects()
+	assert.Len(t, subjects, 1)
+	assert.True(t, bytes.Equal(expectedRoot.RawSubject, subjects[0]))
+	assert.Equal(t, tlsConfig.ClientAuth, tls.RequireAndVerifyClientCert)
 }
 
 func TestParseViperWithInvalidFile(t *testing.T) {

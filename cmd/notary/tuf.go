@@ -18,6 +18,7 @@ import (
 	"github.com/docker/distribution/registry/client/auth"
 	"github.com/docker/distribution/registry/client/transport"
 	"github.com/docker/docker/pkg/term"
+	"github.com/docker/go-connections/tlsconfig"
 	notaryclient "github.com/docker/notary/client"
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/tuf/data"
@@ -446,14 +447,23 @@ func (ps passwordStore) Basic(u *url.URL) (string, string) {
 func getTransport(config *viper.Viper, gun string, readOnly bool) (http.RoundTripper, error) {
 	// Attempt to get a root CA from the config file. Nil is the host defaults.
 	rootCAFile := utils.GetPathRelativeToConfig(config, "remote_server.root_ca")
+	clientCert := utils.GetPathRelativeToConfig(config, "remote_server.tls_client_cert")
+	clientKey := utils.GetPathRelativeToConfig(config, "remote_server.tls_client_key")
 
 	insecureSkipVerify := false
 	if config.IsSet("remote_server.skipTLSVerify") {
 		insecureSkipVerify = config.GetBool("remote_server.skipTLSVerify")
 	}
-	tlsConfig, err := utils.ConfigureClientTLS(&utils.ClientTLSOpts{
-		RootCAFile:         rootCAFile,
+
+	if clientCert == "" && clientKey != "" || clientCert != "" && clientKey == "" {
+		return nil, fmt.Errorf("either pass both client key and cert, or neither")
+	}
+
+	tlsConfig, err := tlsconfig.Client(tlsconfig.Options{
+		CAFile:             rootCAFile,
 		InsecureSkipVerify: insecureSkipVerify,
+		CertFile:           clientCert,
+		KeyFile:            clientKey,
 	})
 	if err != nil {
 		logrus.Fatal("Unable to configure TLS: ", err.Error())
