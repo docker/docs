@@ -97,8 +97,8 @@
 		},
 		{
 			"ImportPath": "github.com/docker/go-connections/tlsconfig",
-			"Comment": "v0.1.2-6-gd834a4d",
-			"Rev": "d834a4de0c32df550d39ff9d5a66b741367a008a"
+			"Comment": "v0.1.2-7-g6e4c13d",
+			"Rev": "6e4c13dc022344c3623c9eacbaf7cfd0fa9fcae3"
 		},
 		{
 			"ImportPath": "github.com/docker/go/canonical/json",
