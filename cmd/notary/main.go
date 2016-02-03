@@ -72,17 +72,13 @@ func (n *notaryCommander) parseConfig() (*viper.Viper, error) {
 
 	// If there was a commandline configFile set, we parse that.
 	// If there wasn't we attempt to find it on the default location ~/.notary/config.json
-	configFileName, configFileExt, configPath := "config", "json", defaultTrustDir
 	if n.configFile != "" {
-		configFileExt = strings.TrimPrefix(filepath.Ext(n.configFile), ".")
-		configFileName = strings.TrimSuffix(filepath.Base(n.configFile), filepath.Ext(n.configFile))
-		configPath = filepath.Dir(n.configFile)
+		config.SetConfigFile(n.configFile)
+	} else {
+		config.SetConfigFile(filepath.Join(defaultTrustDir, "config.json"))
 	}
 
 	// Setup the configuration details into viper
-	config.SetConfigName(configFileName)
-	config.SetConfigType(configFileExt)
-	config.AddConfigPath(configPath)
 	config.SetDefault("trust_dir", defaultTrustDir)
 	config.SetDefault("remote_server", map[string]string{"url": defaultServerURL})
 
