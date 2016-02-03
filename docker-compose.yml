@@ -2,23 +2,28 @@ notaryserver:
   build: .
   dockerfile: server.Dockerfile
   links:
-   - notarymysql
-   - notarysigner
-  ports:
-   - "8080"
-   - "4443:4443"
+    - notarymysql
+    - notarysigner
   environment:
-   - SERVICE_NAME=notary
-  command: -config=fixtures/server-config.json
-notarysigner:
+    - SERVICE_NAME=notaryserver
   volumes:
-   - /dev/bus/usb/003/010:/dev/bus/usb/002/010
-   - /var/run/pcscd/pcscd.comm:/var/run/pcscd/pcscd.comm
+    - ./migrations:/migrations
+  ports:
+    - "8080"
+    - "4443:4443"
+  entrypoint: /bin/bash
+  command: -c "/migrations/migrate.sh; notary-server -config=fixtures/server-config.json"
+notarysigner:
   build: .
   dockerfile: signer.Dockerfile
   links:
-   - notarymysql
-  command: -config=fixtures/signer-config.json
+    - notarymysql
+  environment:
+    - SERVICE_NAME=notarysigner
+  volumes:
+    - ./migrations:/migrations
+  entrypoint: /bin/bash
+  command: -c "/migrations/migrate.sh; notary-signer -config=fixtures/signer-config.json"
 notarymysql:
   volumes:
     - ./notarymysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
