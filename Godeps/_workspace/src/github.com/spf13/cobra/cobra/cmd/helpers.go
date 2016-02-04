@@ -104,11 +104,11 @@ func guessImportPath() string {
 		er("Cobra only supports project within $GOPATH")
 	}
 
-	return strings.TrimPrefix(projectPath, getSrcPath())
+	return filepath.ToSlash(filepath.Clean(strings.TrimPrefix(projectPath, getSrcPath())))
 }
 
 func getSrcPath() string {
-	return os.Getenv("GOPATH") + string(os.PathSeparator) + "src" + string(os.PathSeparator)
+	return filepath.Join(os.Getenv("GOPATH"), "src") + string(os.PathSeparator)
 }
 
 func projectName() string {
@@ -135,29 +135,30 @@ func guessProjectPath() {
 		}
 
 		if projectPath == "" {
-			projectPath = x
+			projectPath = filepath.Clean(x)
 			return
 		}
 	}
 
 	srcPath := getSrcPath()
-	// if provided inspect for logical locations
+	// if provided, inspect for logical locations
 	if strings.ContainsRune(inputPath, os.PathSeparator) {
-		if filepath.IsAbs(inputPath) {
+		if filepath.IsAbs(inputPath) || filepath.HasPrefix(inputPath, string(os.PathSeparator)) {
 			// if Absolute, use it
-			projectPath = inputPath
+			projectPath = filepath.Clean(inputPath)
 			return
 		}
-		// If not absolute but contains slashes.. assuming it means create it from $GOPATH
+		// If not absolute but contains slashes,
+		// assuming it means create it from $GOPATH
 		count := strings.Count(inputPath, string(os.PathSeparator))
 
 		switch count {
-		// If only one directory deep assume "github.com"
+		// If only one directory deep, assume "github.com"
 		case 1:
-			projectPath = srcPath + "github.com" + string(os.PathSeparator) + inputPath
+			projectPath = filepath.Join(srcPath, "github.com", inputPath)
 			return
 		case 2:
-			projectPath = srcPath + inputPath
+			projectPath = filepath.Join(srcPath, inputPath)
 			return
 		default:
 			er("Unknown directory")
@@ -167,18 +168,18 @@ func guessProjectPath() {
 		if projectBase == "" {
 			x, err := getWd()
 			if err == nil {
-				projectPath = x + string(os.PathSeparator) + inputPath
+				projectPath = filepath.Join(x, inputPath)
 				return
 			}
 			er(err)
 		} else {
-			projectPath = srcPath + projectBase + string(os.PathSeparator) + inputPath
+			projectPath = filepath.Join(srcPath, projectBase, inputPath)
 			return
 		}
 	}
 }
 
-// IsEmpty checks if a given path is empty.
+// isEmpty checks if a given path is empty.
 func isEmpty(path string) (bool, error) {
 	if b, _ := exists(path); !b {
 		return false, fmt.Errorf("%q path does not exist", path)
@@ -202,7 +203,7 @@ func isEmpty(path string) (bool, error) {
 	return fi.Size() == 0, nil
 }
 
-// IsDir checks if a given path is a directory.
+// isDir checks if a given path is a directory.
 func isDir(path string) (bool, error) {
 	fi, err := os.Stat(path)
 	if err != nil {
@@ -211,7 +212,7 @@ func isDir(path string) (bool, error) {
 	return fi.IsDir(), nil
 }
 
-// DirExists checks if a path exists and is a directory.
+// dirExists checks if a path exists and is a directory.
 func dirExists(path string) (bool, error) {
 	fi, err := os.Stat(path)
 	if err == nil && fi.IsDir() {
@@ -308,13 +309,13 @@ func getLicense() License {
 }
 
 func whichLicense() string {
-	// if explicitly flagged use that
+	// if explicitly flagged, use that
 	if userLicense != "" {
 		return matchLicense(userLicense)
 	}
 
 	// if already present in the project, use that
-	// TODO:Inpect project for existing license
+	// TODO: Inspect project for existing license
 
 	// default to viper's setting
 
@@ -325,7 +326,7 @@ func copyrightLine() string {
 	author := viper.GetString("author")
 	year := time.Now().Format("2006")
 
-	return "Copyright ©" + year + " " + author
+	return "Copyright © " + year + " " + author
 }
 
 func commentifyString(in string) string {
@@ -333,7 +334,11 @@ func commentifyString(in string) string {
 	lines := strings.Split(in, "\n")
 	for _, x := range lines {
 		if !strings.HasPrefix(x, "//") {
-			newlines = append(newlines, "// "+x)
+			if x != "" {
+				newlines = append(newlines, "// "+x)
+			} else {
+				newlines = append(newlines, "//")
+			}
 		} else {
 			newlines = append(newlines, x)
 		}
