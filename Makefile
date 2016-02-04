@@ -71,13 +71,21 @@ ${PREFIX}/bin/notary-signer: NOTARY_VERSION $(shell find . -type f -name '*.go')
 	@echo "+ $@"
 	@godep go build -tags ${NOTARY_BUILDTAGS} -o $@ ${GO_LDFLAGS} ./cmd/notary-signer
 
+ifeq ($(shell uname -s),Darwin)
+${PREFIX}/bin/static/notary-server:
+	@echo "notary-server: static builds not supported on OS X"
+
+${PREFIX}/bin/static/notary-signer:
+	@echo "notary-signer: static builds not supported on OS X"
+else
 ${PREFIX}/bin/static/notary-server: NOTARY_VERSION $(shell find . -type f -name '*.go')
 	@echo "+ $@"
 	@godep go build -tags ${NOTARY_BUILDTAGS} -o $@ ${GO_LDFLAGS_STATIC} ./cmd/notary-server
-	
+
 ${PREFIX}/bin/static/notary-signer: NOTARY_VERSION $(shell find . -type f -name '*.go')
 	@echo "+ $@"
 	@godep go build -tags ${NOTARY_BUILDTAGS} -o $@ ${GO_LDFLAGS_STATIC} ./cmd/notary-signer
+endif
 
 vet: go_version
 	@echo "+ $@"
