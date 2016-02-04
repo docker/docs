@@ -1169,17 +1169,36 @@ func TestClientKeyPassphraseChange(t *testing.T) {
 	server := setupServer()
 	defer server.Close()
 
+	target := "sdgkadga"
+	tempFile, err := ioutil.TempFile("/tmp", "targetfile")
+	assert.NoError(t, err)
+	tempFile.Close()
+	defer os.Remove(tempFile.Name())
+
 	// -- tests --
-	_, err := runCommand(t, tempDir, "-s", server.URL, "init", "gun1")
+	_, err = runCommand(t, tempDir, "-s", server.URL, "init", "gun1")
 	assert.NoError(t, err)
 
 	// we should have three keys stored locally in total: root, targets, snapshot
-	rootIDs, _ := assertNumKeys(t, tempDir, 1, 2, true)
+	rootIDs, signingIDs := assertNumKeys(t, tempDir, 1, 2, true)
+	for _, keyID := range signingIDs {
+		// try changing the private key passphrase
+		_, err = runCommand(t, tempDir, "-s", server.URL, "key", "passwd", keyID)
+		assert.NoError(t, err)
+
+		// assert that the signing keys (number and IDs) didn't change
+		_, signingIDs = assertNumKeys(t, tempDir, 1, 2, true)
+		assert.Contains(t, signingIDs, keyID)
+
+		// make sure we can still publish with this signing key
+		assertSuccessfullyPublish(t, tempDir, server.URL, "gun1", target, tempFile.Name())
+	}
 
 	// only one rootID, try changing the private key passphrase
 	rootID := rootIDs[0]
 	_, err = runCommand(t, tempDir, "-s", server.URL, "key", "passwd", rootID)
 	assert.NoError(t, err)
+
 	// make sure we can init a new repo with this key
 	_, err = runCommand(t, tempDir, "-s", server.URL, "init", "gun2")
 	assert.NoError(t, err)
