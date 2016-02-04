@@ -78,8 +78,8 @@ var cmdKeyRemoveTemplate = usageTemplate{
 
 var cmdKeyPasswdTemplate = usageTemplate{
 	Use:   "passwd [ keyID ]",
-	Short: "Changes the passphrase for the root key with the given keyID.",
-	Long:  "Changes the passphrase for the root key with the given keyID.  Will require validation of the old passphrase.",
+	Short: "Changes the passphrase for the key with the given keyID.",
+	Long:  "Changes the passphrase for the key with the given keyID.  Will require validation of the old passphrase.",
 }
 
 type keyCommander struct {
@@ -502,7 +502,7 @@ func (k *keyCommander) keyRemove(cmd *cobra.Command, args []string) error {
 func (k *keyCommander) keyPassphraseChange(cmd *cobra.Command, args []string) error {
 	if len(args) < 1 {
 		cmd.Usage()
-		return fmt.Errorf("must specify the key ID of the root key to change the passphrase of")
+		return fmt.Errorf("must specify the key ID of the key to change the passphrase of")
 	}
 
 	config, err := k.configGetter()
@@ -521,18 +521,26 @@ func (k *keyCommander) keyPassphraseChange(cmd *cobra.Command, args []string) er
 		return fmt.Errorf("invalid key ID provided: %s", keyID)
 	}
 
-	// We only allow for changing the root key, so use no gun
-	cs := cryptoservice.NewCryptoService("", ks...)
+	// Find the key's GUN by ID, in case it is a non-root key
+	var keyGUN string
+	for _, store := range ks {
+		for keypath := range store.ListKeys() {
+			if filepath.Base(keypath) == keyID {
+				keyGUN = filepath.Dir(keypath)
+			}
+		}
+	}
+	cs := cryptoservice.NewCryptoService(keyGUN, ks...)
 	privKey, role, err := cs.GetPrivateKey(keyID)
 	if err != nil {
-		return fmt.Errorf("could not retrieve local root key for key ID provided: %s", keyID)
+		return fmt.Errorf("could not retrieve local key for key ID provided: %s", keyID)
 	}
 
 	// Must use a different passphrase retriever to avoid caching the
 	// unlocking passphrase and reusing that.
 	passChangeRetriever := k.getRetriever()
 	keyStore, err := trustmanager.NewKeyFileStore(config.GetString("trust_dir"), passChangeRetriever)
-	err = keyStore.AddKey(keyID, role, privKey)
+	err = keyStore.AddKey(filepath.Join(keyGUN, keyID), role, privKey)
 	if err != nil {
 		return err
 	}
