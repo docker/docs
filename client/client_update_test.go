@@ -60,7 +60,7 @@ func bumpVersions(t *testing.T, s *testutils.MetadataSwizzler, offset int) {
 }
 
 // create a server that just serves static metadata files from a metaStore
-func readOnlyServer(t *testing.T, cache store.MetadataStore, notFoundStatus int) *httptest.Server {
+func readOnlyServer(t *testing.T, cache store.MetadataStore, notFoundStatus int, gun string) *httptest.Server {
 	m := mux.NewRouter()
 	handler := func(w http.ResponseWriter, r *http.Request) {
 		vars := mux.Vars(r)
@@ -72,8 +72,8 @@ func readOnlyServer(t *testing.T, cache store.MetadataStore, notFoundStatus int)
 			w.Write(metaBytes)
 		}
 	}
-	m.HandleFunc("/v2/docker.com/notary/_trust/tuf/{role:.*}.{checksum:.*}.json", handler)
-	m.HandleFunc("/v2/docker.com/notary/_trust/tuf/{role:.*}.json", handler)
+	m.HandleFunc(fmt.Sprintf("/v2/%s/_trust/tuf/{role:.*}.{checksum:.*}.json", gun), handler)
+	m.HandleFunc(fmt.Sprintf("/v2/%s/_trust/tuf/{role:.*}.json", gun), handler)
 	return httptest.NewServer(m)
 }
 
@@ -99,7 +99,7 @@ func TestUpdateSucceedsEvenIfCannotWriteNewRepo(t *testing.T) {
 	serverMeta, _, err := testutils.NewRepoMetadata("docker.com/notary", metadataDelegations...)
 	require.NoError(t, err)
 
-	ts := readOnlyServer(t, store.NewMemoryStore(serverMeta), http.StatusNotFound)
+	ts := readOnlyServer(t, store.NewMemoryStore(serverMeta), http.StatusNotFound, "docker.com/notary")
 	defer ts.Close()
 
 	for role := range serverMeta {
@@ -138,7 +138,7 @@ func TestUpdateSucceedsEvenIfCannotWriteExistingRepo(t *testing.T) {
 		t.Skip("skipping test in short mode")
 	}
 	serverMeta, serverSwizzler := newServerSwizzler(t)
-	ts := readOnlyServer(t, serverSwizzler.MetadataCache, http.StatusNotFound)
+	ts := readOnlyServer(t, serverSwizzler.MetadataCache, http.StatusNotFound, "docker.com/notary")
 	defer ts.Close()
 
 	// download existing metadata
@@ -215,7 +215,7 @@ func TestUpdateReplacesCorruptOrMissingMetadata(t *testing.T) {
 	serverMeta, cs, err := testutils.NewRepoMetadata("docker.com/notary", metadataDelegations...)
 	require.NoError(t, err)
 
-	ts := readOnlyServer(t, store.NewMemoryStore(serverMeta), http.StatusNotFound)
+	ts := readOnlyServer(t, store.NewMemoryStore(serverMeta), http.StatusNotFound, "docker.com/notary")
 	defer ts.Close()
 
 	repo := newBlankRepo(t, ts.URL)
@@ -259,7 +259,7 @@ func TestUpdateFailsIfServerRootKeyChangedWithoutMultiSign(t *testing.T) {
 	serverMeta, serverSwizzler := newServerSwizzler(t)
 	origMeta := testutils.CopyRepoMetadata(serverMeta)
 
-	ts := readOnlyServer(t, serverSwizzler.MetadataCache, http.StatusNotFound)
+	ts := readOnlyServer(t, serverSwizzler.MetadataCache, http.StatusNotFound, "docker.com/notary")
 	defer ts.Close()
 
 	repo := newBlankRepo(t, ts.URL)
@@ -607,7 +607,7 @@ func TestUpdateNonRootRemote50XCannotUseLocalCache(t *testing.T) {
 
 func testUpdateRemoteNon200Error(t *testing.T, opts updateOpts, errExpected interface{}) {
 	_, serverSwizzler := newServerSwizzler(t)
-	ts := readOnlyServer(t, serverSwizzler.MetadataCache, opts.notFoundCode)
+	ts := readOnlyServer(t, serverSwizzler.MetadataCache, opts.notFoundCode, "docker.com/notary")
 	defer ts.Close()
 
 	repo := newBlankRepo(t, ts.URL)
@@ -719,7 +719,7 @@ func TestUpdateRemoteChecksumWrongCannotUseLocalCache(t *testing.T) {
 
 func testUpdateRemoteFileChecksumWrong(t *testing.T, opts updateOpts, errExpected bool) {
 	_, serverSwizzler := newServerSwizzler(t)
-	ts := readOnlyServer(t, serverSwizzler.MetadataCache, http.StatusNotFound)
+	ts := readOnlyServer(t, serverSwizzler.MetadataCache, http.StatusNotFound, "docker.com/notary")
 	defer ts.Close()
 
 	repo := newBlankRepo(t, ts.URL)
@@ -948,7 +948,7 @@ func TestUpdateNonRootRemoteCorruptedCannotUseLocalCache(t *testing.T) {
 
 func testUpdateRemoteCorruptValidChecksum(t *testing.T, opts updateOpts, expt swizzleExpectations, shouldErr bool) {
 	_, serverSwizzler := newServerSwizzler(t)
-	ts := readOnlyServer(t, serverSwizzler.MetadataCache, http.StatusNotFound)
+	ts := readOnlyServer(t, serverSwizzler.MetadataCache, http.StatusNotFound, "docker.com/notary")
 	defer ts.Close()
 
 	repo := newBlankRepo(t, ts.URL)
@@ -1031,7 +1031,7 @@ func TestUpdateLocalAndRemoteRootCorrupt(t *testing.T) {
 
 func testUpdateLocalAndRemoteRootCorrupt(t *testing.T, forWrite bool, localExpt, serverExpt swizzleExpectations) {
 	_, serverSwizzler := newServerSwizzler(t)
-	ts := readOnlyServer(t, serverSwizzler.MetadataCache, http.StatusNotFound)
+	ts := readOnlyServer(t, serverSwizzler.MetadataCache, http.StatusNotFound, "docker.com/notary")
 	defer ts.Close()
 
 	repo := newBlankRepo(t, ts.URL)
