@@ -142,8 +142,9 @@ func (n *notaryCommander) GetCommand() *cobra.Command {
 		Use:           "notary",
 		Short:         "Notary allows the creation of trusted collections.",
 		Long:          "Notary allows the creation and management of collections of signed targets, allowing the signing and validation of arbitrary content.",
-		SilenceUsage:  true,
-		SilenceErrors: true,
+		SilenceUsage:  true, // we don't want to print out usage for EVERY error
+		SilenceErrors: true, // we do our own error reporting with fatalf
+		Run:           func(cmd *cobra.Command, args []string) { cmd.Usage() },
 	}
 	notaryCmd.SetOutput(os.Stdout)
 	notaryCmd.AddCommand(&cobra.Command{
