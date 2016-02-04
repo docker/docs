@@ -1,6 +1,6 @@
 <!--* [metadata]>
 +++
-title = "Notary"
+title = "Docker Notary"
 description = "List of Notary Documentation"
 keywords = ["docker, notary, trust, image, signing, repository, tuf"]
 [menu.main]
