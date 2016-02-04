@@ -1,5 +1,5 @@
 FROM golang:1.5.3
-MAINTAINER Diogo Monica "diogo@docker.com"
+MAINTAINER David Lawrence "david.lawrence@docker.com"
 
 RUN apt-get update && apt-get install -y \
     libltdl-dev \
