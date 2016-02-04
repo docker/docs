@@ -249,7 +249,7 @@ func TestPrettyPrintSortedRoles(t *testing.T) {
 		{"targets/aardvark/unicorn/pony", "rainbows", "135", "1"},
 		{"targets/bee", "honey", "246", "1"},
 		{"targets/bee/wasp", "honey/sting", "246,468", "1"},
-		{"targets/zebra", "stripes,black,white", "101", "1"},
+		{"targets/zebra", "black,stripes,white", "101", "1"},
 	}
 
 	lines := strings.Split(strings.TrimSpace(string(text)), "\n")

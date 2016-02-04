@@ -462,6 +462,44 @@ func TestClientDelegationsInteraction(t *testing.T) {
 	assert.NotContains(t, output, "orange.peel")
 	assert.NotContains(t, output, "kiwi")
 
+	// Check that we ignore other --paths if we pass in --all-paths on an add
+	output, err = runCommand(t, tempDir, "delegation", "add", "gun", "targets/delegation", "--all-paths", "--paths", "grapefruit,pomegranate")
+	assert.NoError(t, err)
+
+	// publish repo
+	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
+	assert.NoError(t, err)
+
+	// list delegations - we should only see "", and not the other paths specified
+	output, err = runCommand(t, tempDir, "-s", server.URL, "delegation", "list", "gun")
+	assert.NoError(t, err)
+	assert.Contains(t, output, "\"\"")
+	assert.NotContains(t, output, "grapefruit")
+	assert.NotContains(t, output, "pomegranate")
+
+	// Add those extra paths we ignored to set up the next test
+	output, err = runCommand(t, tempDir, "delegation", "add", "gun", "targets/delegation", "--paths", "grapefruit,pomegranate")
+	assert.NoError(t, err)
+
+	// publish repo
+	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
+	assert.NoError(t, err)
+
+	// Check that we ignore other --paths if we pass in --all-paths on a remove
+	output, err = runCommand(t, tempDir, "delegation", "remove", "gun", "targets/delegation", "--all-paths", "--paths", "pomegranate")
+	assert.NoError(t, err)
+
+	// publish repo
+	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
+	assert.NoError(t, err)
+
+	// list delegations - we should see no paths
+	output, err = runCommand(t, tempDir, "-s", server.URL, "delegation", "list", "gun")
+	assert.NoError(t, err)
+	assert.NotContains(t, output, "\"\"")
+	assert.NotContains(t, output, "grapefruit")
+	assert.NotContains(t, output, "pomegranate")
+
 	// remove by force to delete the delegation entirely
 	output, err = runCommand(t, tempDir, "delegation", "remove", "gun", "targets/delegation", "-y")
 	assert.NoError(t, err)
