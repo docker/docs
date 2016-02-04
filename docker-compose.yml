@@ -5,25 +5,21 @@ notaryserver:
     - notarymysql
     - notarysigner
   environment:
-    - SERVICE_NAME=notaryserver
-  volumes:
-    - ./migrations:/migrations
+    - SERVICE_NAME="notaryserver"
   ports:
     - "8080"
     - "4443:4443"
   entrypoint: /bin/bash
-  command: -c "/migrations/migrate.sh; notary-server -config=fixtures/server-config.json"
+  command: -c "./migrations/migrate.sh && notary-server -config=fixtures/server-config.json"
 notarysigner:
   build: .
   dockerfile: signer.Dockerfile
   links:
     - notarymysql
   environment:
-    - SERVICE_NAME=notarysigner
-  volumes:
-    - ./migrations:/migrations
+    - SERVICE_NAME="notarysigner"
   entrypoint: /bin/bash
-  command: -c "/migrations/migrate.sh; notary-signer -config=fixtures/signer-config.json"
+  command: -c "./migrations/migrate.sh && notary-signer -config=fixtures/signer-config.json"
 notarymysql:
   volumes:
     - ./notarymysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
@@ -32,4 +28,4 @@ notarymysql:
   ports:
     - "3306:3306"
   environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: true
+    - MYSQL_ALLOW_EMPTY_PASSWORD="true"
