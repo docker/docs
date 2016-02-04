@@ -49,7 +49,7 @@ func TestImport0Dot1Zip(t *testing.T) {
 }
 
 func get0Dot1(t *testing.T) (*trustmanager.KeyFileStore, passphrase.Retriever, string) {
-	gun := "docker.io/notary0.1/samplerepo"
+	gun := "docker.com/notary0.1/samplerepo"
 	ret := passphrase.ConstantRetriever("randompass")
 
 	// produce the zip file
