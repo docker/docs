@@ -200,6 +200,8 @@ func prettyPrintRoles(rs []*data.Role, writer io.Writer, roleType string) {
 
 // Pretty-prints a list of delegation paths, and ensures the empty string is printed as "" in the console
 func prettyPrintPaths(paths []string) string {
+	// sort paths first
+	sort.Strings(paths)
 	prettyPaths := []string{}
 	for _, path := range paths {
 		// manually escape "" and designate that it is all paths with an extra print <all paths>
