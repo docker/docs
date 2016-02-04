@@ -254,7 +254,7 @@ func TestParseTLSNoTLSWhenRequired(t *testing.T) {
 	}
 }
 
-// If TLS is not and the cert/key are partially provided, an error is returned
+// If TLS is not required and the cert/key are partially provided, an error is returned
 func TestParseTLSPartialTLS(t *testing.T) {
 	invalids := []string{
 		fmt.Sprintf(`{"server": {"tls_cert_file": "%s"}}`, Cert),

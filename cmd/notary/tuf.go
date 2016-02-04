@@ -466,7 +466,7 @@ func getTransport(config *viper.Viper, gun string, readOnly bool) (http.RoundTri
 		KeyFile:            clientKey,
 	})
 	if err != nil {
-		logrus.Fatal("Unable to configure TLS: ", err.Error())
+		return nil, fmt.Errorf("unable to configure TLS: %s", err.Error())
 	}
 
 	base := &http.Transport{
