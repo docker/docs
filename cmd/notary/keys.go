@@ -20,6 +20,7 @@ import (
 	"github.com/docker/notary/tuf/data"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	"io/ioutil"
 )
 
 var cmdKeyTemplate = usageTemplate{
@@ -364,11 +365,49 @@ func (k *keyCommander) keysImport(cmd *cobra.Command, args []string) error {
 	}
 	defer importFile.Close()
 
+	pemBytes, err := ioutil.ReadAll(importFile)
+	if err != nil {
+		return fmt.Errorf("Error reading input file: %v", err)
+	}
+
+	pemRole := trustmanager.ReadRoleFromPEM(pemBytes)
+
+	// Rewind after reading the first time
+	_, err = importFile.Seek(0, 0)
+	if err != nil {
+		return fmt.Errorf("Error reading input file: %v", err)
+	}
+
+	if pemRole != "" && !data.ValidRole(pemRole) {
+		return fmt.Errorf("Invalid role specified for key: %s", pemRole)
+	}
+
+	if k.keysImportRole != "" && !data.ValidRole(k.keysImportRole) {
+		return fmt.Errorf("Invalid role specified for key: %s", k.keysImportRole)
+	}
+
+	// If the PEM key doesn't have a role in it, we must have --role set
+	if pemRole == "" && k.keysImportRole == "" {
+		return fmt.Errorf("Could not infer role, and no role was specified for key")
+	}
+
+	// If both  PEM role and a --role are provided and they don't match, error
+	if pemRole != "" && k.keysImportRole != "" && pemRole != k.keysImportRole {
+		return fmt.Errorf("Specified role %s does not match role %s in PEM headers", k.keysImportRole, pemRole)
+	}
+
+	// If we're importing to targets or snapshot, we need a GUN
+	if (k.keysImportRole == data.CanonicalTargetsRole || k.keysImportRole == data.CanonicalSnapshotRole) ||
+		(pemRole == data.CanonicalTargetsRole || pemRole == data.CanonicalSnapshotRole) &&
+			k.keysImportGUN == "" {
+		return fmt.Errorf("Must specify GUN for %s key", k.keysImportRole)
+	}
+
 	cs := cryptoservice.NewCryptoService(k.keysImportGUN, ks...)
 	if k.keysImportRole == data.CanonicalRootRole {
 		err = cs.ImportRootKey(importFile)
 	} else {
-		err = cs.ImportRoleKey(importFile, k.keysImportRole, k.retriever)
+		err = cs.ImportRoleKey(importFile, k.keysImportRole, k.getRetriever())
 	}
 
 	if err != nil {

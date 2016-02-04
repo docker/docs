@@ -514,6 +514,20 @@ func EncryptPrivateKey(key data.PrivateKey, role, passphrase string) ([]byte, er
 	return pem.EncodeToMemory(encryptedPEMBlock), nil
 }
 
+// ReadRoleFromPEM returns the value from the role PEM header, if it exists
+// If it doesn't exist, returns nil
+func ReadRoleFromPEM(pemBytes []byte) string {
+	pemBlock, _ := pem.Decode(pemBytes)
+	if pemBlock.Headers == nil {
+		return ""
+	}
+	role, ok := pemBlock.Headers["role"]
+	if !ok {
+		return ""
+	}
+	return role
+}
+
 // CertToKey transforms a single input certificate into its corresponding
 // PublicKey
 func CertToKey(cert *x509.Certificate) data.PublicKey {

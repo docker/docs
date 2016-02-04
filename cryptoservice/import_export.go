@@ -112,6 +112,7 @@ func (cs *CryptoService) ImportRootKey(source io.Reader) error {
 // the key ID.
 func (cs *CryptoService) ImportRoleKey(source io.Reader, role string, newPassphraseRetriever passphrase.Retriever) error {
 	pemBytes, err := ioutil.ReadAll(source)
+
 	if err != nil {
 		return err
 	}
