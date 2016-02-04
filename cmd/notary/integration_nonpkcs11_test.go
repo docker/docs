@@ -12,7 +12,7 @@ import (
 func init() {
 	NewNotaryCommand = func() *cobra.Command {
 		commander := &notaryCommander{
-			getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+			getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever(testPassphrase) },
 		}
 		return commander.GetCommand()
 	}

@@ -106,7 +106,7 @@ func (k *keyCommander) GetCommand() *cobra.Command {
 	cmdKeysImport.Flags().StringVarP(
 		&k.keysImportGUN, "gun", "g", "", "Globally Unique Name to import key to")
 	cmdKeysImport.Flags().StringVarP(
-		&k.keysImportRole, "role", "r", data.CanonicalRootRole, "Role to import key to")
+		&k.keysImportRole, "role", "r", "", "Role to import key to (if not in PEM headers)")
 	cmd.AddCommand(cmdKeysImport)
 
 	cmd.AddCommand(cmdKeyRemoveTemplate.ToCommand(k.keyRemove))
@@ -396,18 +396,24 @@ func (k *keyCommander) keysImport(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("Specified role %s does not match role %s in PEM headers", k.keysImportRole, pemRole)
 	}
 
+	// Determine which role to add to between PEM headers and --role flag:
+	var importRole string
+	if k.keysImportRole != "" {
+		importRole = k.keysImportRole
+	} else {
+		importRole = pemRole
+	}
+
 	// If we're importing to targets or snapshot, we need a GUN
-	if (k.keysImportRole == data.CanonicalTargetsRole || k.keysImportRole == data.CanonicalSnapshotRole) ||
-		(pemRole == data.CanonicalTargetsRole || pemRole == data.CanonicalSnapshotRole) &&
-			k.keysImportGUN == "" {
-		return fmt.Errorf("Must specify GUN for %s key", k.keysImportRole)
+	if (importRole == data.CanonicalTargetsRole || importRole == data.CanonicalSnapshotRole) && k.keysImportGUN == "" {
+		return fmt.Errorf("Must specify GUN for %s key", importRole)
 	}
 
 	cs := cryptoservice.NewCryptoService(k.keysImportGUN, ks...)
-	if k.keysImportRole == data.CanonicalRootRole {
+	if importRole == data.CanonicalRootRole {
 		err = cs.ImportRootKey(importFile)
 	} else {
-		err = cs.ImportRoleKey(importFile, k.keysImportRole, k.getRetriever())
+		err = cs.ImportRoleKey(importFile, importRole, k.getRetriever())
 	}
 
 	if err != nil {

@@ -41,10 +41,10 @@ func (cs *CryptoService) ExportKey(dest io.Writer, keyID, role string) error {
 		err      error
 	)
 
+	if role != data.CanonicalRootRole {
+		keyID = filepath.Join(cs.gun, keyID)
+	}
 	for _, ks := range cs.keyStores {
-		if role != data.CanonicalRootRole {
-			keyID = filepath.Join(cs.gun, keyID)
-		}
 		pemBytes, err = ks.ExportKey(keyID)
 		if err != nil {
 			continue

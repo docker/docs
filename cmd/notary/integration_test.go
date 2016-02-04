@@ -683,7 +683,7 @@ func TestClientDelegationsPublishing(t *testing.T) {
 	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
 	assert.NoError(t, err)
 
-	// Now try using the key import command to instantiate the private key with this role
+	// Now remove this key, and make a new file to import the delegation's key from
 	assert.NoError(t, os.Remove(filepath.Join(keyDir, canonicalKeyID+".key")))
 	tempPrivFile, err := ioutil.TempFile("/tmp", "privfile")
 	assert.NoError(t, err)
@@ -1067,6 +1067,235 @@ func TestClientKeyImportExportRootOnly(t *testing.T) {
 	assertNumKeys(t, tempDir, 1, 2, !rootOnHardware())
 	assertSuccessfullyPublish(
 		t, tempDir, server.URL, "gun", target, tempFile.Name())
+}
+
+// Tests importing and exporting keys for all different roles and GUNs
+func TestClientKeyImportExportAllRoles(t *testing.T) {
+	// -- setup --
+	setUp(t)
+
+	tempDir := tempDirWithConfig(t, "{}")
+	defer os.RemoveAll(tempDir)
+
+	server := setupServer()
+	defer server.Close()
+
+	tempFile, err := ioutil.TempFile("", "pemfile")
+	assert.NoError(t, err)
+	// close later, because we might need to write to it
+	defer os.Remove(tempFile.Name())
+
+	privKey1, err := trustmanager.GenerateECDSAKey(rand.Reader)
+	assert.NoError(t, err)
+
+	privKey2, err := trustmanager.GenerateECDSAKey(rand.Reader)
+	assert.NoError(t, err)
+
+	privKey3, err := trustmanager.GenerateECDSAKey(rand.Reader)
+	assert.NoError(t, err)
+
+	privKey4, err := trustmanager.GenerateECDSAKey(rand.Reader)
+	assert.NoError(t, err)
+
+	// -- tests --
+	_, err = runCommand(t, tempDir, "-s", server.URL, "init", "gun")
+	assert.NoError(t, err)
+
+	rootPemBytes, err := trustmanager.EncryptPrivateKey(privKey1, "root", testPassphrase)
+	assert.NoError(t, err)
+	ioutil.WriteFile(tempFile.Name(), rootPemBytes, 0644)
+
+	// Import from root, specified in PEM
+	_, err = runCommand(t, tempDir, "key", "import", tempFile.Name())
+	assert.NoError(t, err)
+	_, err = os.Stat(filepath.Join(tempDir, "private", "root_keys", privKey1.ID()+".key"))
+	assert.Nil(t, err)
+
+	// Ensure exporting this key by ID gets the same key
+	_, err = runCommand(t, tempDir, "key", "export", privKey1.ID(), tempFile.Name())
+	assert.NoError(t, err)
+	// Compare the bytes of the exported file and the root key file in the repo
+	exportedBytes, err := ioutil.ReadFile(tempFile.Name())
+	assert.NoError(t, err)
+	repoBytes, err := ioutil.ReadFile(filepath.Join(tempDir, "private", "root_keys", privKey1.ID()+".key"))
+	assert.NoError(t, err)
+	assert.Equal(t, repoBytes, exportedBytes)
+
+	targetsPemBytes, err := trustmanager.EncryptPrivateKey(privKey2, "targets", testPassphrase)
+	assert.NoError(t, err)
+	ioutil.WriteFile(tempFile.Name(), targetsPemBytes, 0644)
+
+	// Import from snapshot, specified in PEM.  Must supply GUN
+	_, err = runCommand(t, tempDir, "key", "import", tempFile.Name(), "--gun", "gun")
+	assert.NoError(t, err)
+	_, err = os.Stat(filepath.Join(tempDir, "private", "tuf_keys", "gun", privKey2.ID()+".key"))
+	assert.Nil(t, err)
+
+	// Ensure exporting this key by ID gets the same key
+	_, err = runCommand(t, tempDir, "key", "export", privKey2.ID(), tempFile.Name())
+	assert.NoError(t, err)
+	// Compare the bytes of the exported file and the targets key file in the repo
+	exportedBytes, err = ioutil.ReadFile(tempFile.Name())
+	assert.NoError(t, err)
+	repoBytes, err = ioutil.ReadFile(filepath.Join(tempDir, "private", "tuf_keys", "gun", privKey2.ID()+".key"))
+	assert.NoError(t, err)
+	assert.Equal(t, repoBytes, exportedBytes)
+
+	snapshotPemBytes, err := trustmanager.EncryptPrivateKey(privKey3, "snapshot", testPassphrase)
+	assert.NoError(t, err)
+	ioutil.WriteFile(tempFile.Name(), snapshotPemBytes, 0644)
+
+	// Import from snapshot, specified in PEM.  Must supply GUN
+	_, err = runCommand(t, tempDir, "key", "import", tempFile.Name(), "--gun", "gun")
+	assert.NoError(t, err)
+	_, err = os.Stat(filepath.Join(tempDir, "private", "tuf_keys", "gun", privKey3.ID()+".key"))
+	assert.Nil(t, err)
+
+	// Ensure exporting this key by ID gets the same key
+	_, err = runCommand(t, tempDir, "key", "export", privKey3.ID(), tempFile.Name())
+	assert.NoError(t, err)
+	// Compare the bytes of the exported file and the snapshot key file in the repo
+	exportedBytes, err = ioutil.ReadFile(tempFile.Name())
+	assert.NoError(t, err)
+	repoBytes, err = ioutil.ReadFile(filepath.Join(tempDir, "private", "tuf_keys", "gun", privKey3.ID()+".key"))
+	assert.NoError(t, err)
+	assert.Equal(t, repoBytes, exportedBytes)
+
+	delegationPemBytes, err := trustmanager.EncryptPrivateKey(privKey4, "targets/releases", testPassphrase)
+	assert.NoError(t, err)
+	ioutil.WriteFile(tempFile.Name(), delegationPemBytes, 0644)
+
+	// Import from delegation key, specified in PEM.  No GUN needed
+	_, err = runCommand(t, tempDir, "key", "import", tempFile.Name())
+	assert.NoError(t, err)
+	_, err = os.Stat(filepath.Join(tempDir, "private", "tuf_keys", privKey4.ID()+".key"))
+	assert.Nil(t, err)
+
+	// Ensure exporting this key by ID gets the same key
+	_, err = runCommand(t, tempDir, "key", "export", privKey4.ID(), tempFile.Name())
+	assert.NoError(t, err)
+	// Compare the bytes of the exported file and the delegation key file in the repo
+	exportedBytes, err = ioutil.ReadFile(tempFile.Name())
+	assert.NoError(t, err)
+	repoBytes, err = ioutil.ReadFile(filepath.Join(tempDir, "private", "tuf_keys", privKey4.ID()+".key"))
+	assert.NoError(t, err)
+	assert.Equal(t, repoBytes, exportedBytes)
+
+	rootPemBytes, err = trustmanager.EncryptPrivateKey(privKey1, "", testPassphrase)
+	assert.NoError(t, err)
+	ioutil.WriteFile(tempFile.Name(), rootPemBytes, 0644)
+
+	// Import from root, specified in flag only
+	_, err = runCommand(t, tempDir, "key", "import", tempFile.Name(), "--role", "root")
+	assert.NoError(t, err)
+	_, err = os.Stat(filepath.Join(tempDir, "private", "root_keys", privKey1.ID()+".key"))
+	assert.NoError(t, err)
+
+	// Assert the PEM role header is "root"
+	pemBytes, err := ioutil.ReadFile(filepath.Join(tempDir, "private", "root_keys", privKey1.ID()+".key"))
+	assert.NoError(t, err)
+	assert.Equal(t, "root", trustmanager.ReadRoleFromPEM(pemBytes))
+
+	// Ensure exporting this key by ID gets the same key
+	_, err = runCommand(t, tempDir, "key", "export", privKey1.ID(), tempFile.Name())
+	assert.NoError(t, err)
+	// Compare the bytes of the exported file and the root key file in the repo
+	exportedBytes, err = ioutil.ReadFile(tempFile.Name())
+	assert.NoError(t, err)
+	repoBytes, err = ioutil.ReadFile(filepath.Join(tempDir, "private", "root_keys", privKey1.ID()+".key"))
+	assert.NoError(t, err)
+	assert.Equal(t, repoBytes, exportedBytes)
+
+	// Ensure exporting this key and changing the passphrase works
+	_, err = runCommand(t, tempDir, "key", "export", privKey1.ID(), tempFile.Name(), "-p")
+	assert.NoError(t, err)
+
+	targetsPemBytes, err = trustmanager.EncryptPrivateKey(privKey2, "", testPassphrase)
+	assert.NoError(t, err)
+	ioutil.WriteFile(tempFile.Name(), targetsPemBytes, 0644)
+
+	// Import from snapshot, specified in flag.  Must supply GUN
+	_, err = runCommand(t, tempDir, "key", "import", tempFile.Name(), "--gun", "gun", "--role", "targets")
+	assert.NoError(t, err)
+	_, err = os.Stat(filepath.Join(tempDir, "private", "tuf_keys", "gun", privKey2.ID()+".key"))
+	assert.NoError(t, err)
+
+	// Assert the PEM role header is "targets"
+	pemBytes, err = ioutil.ReadFile(filepath.Join(tempDir, "private", "tuf_keys", "gun", privKey2.ID()+".key"))
+	assert.NoError(t, err)
+	assert.Equal(t, "targets", trustmanager.ReadRoleFromPEM(pemBytes))
+
+	// Ensure exporting this key by ID gets the same key
+	_, err = runCommand(t, tempDir, "key", "export", privKey2.ID(), tempFile.Name())
+	assert.NoError(t, err)
+	// Compare the bytes of the exported file and the targets key file in the repo
+	exportedBytes, err = ioutil.ReadFile(tempFile.Name())
+	assert.NoError(t, err)
+	repoBytes, err = ioutil.ReadFile(filepath.Join(tempDir, "private", "tuf_keys", "gun", privKey2.ID()+".key"))
+	assert.NoError(t, err)
+	assert.Equal(t, repoBytes, exportedBytes)
+
+	// Ensure exporting this key and changing the passphrase works
+	_, err = runCommand(t, tempDir, "key", "export", privKey2.ID(), tempFile.Name(), "-p")
+	assert.NoError(t, err)
+
+	snapshotPemBytes, err = trustmanager.EncryptPrivateKey(privKey3, "", testPassphrase)
+	assert.NoError(t, err)
+	ioutil.WriteFile(tempFile.Name(), snapshotPemBytes, 0644)
+
+	// Import from snapshot, specified in flags.  Must supply GUN
+	_, err = runCommand(t, tempDir, "key", "import", tempFile.Name(), "--gun", "gun", "--role", "snapshot")
+	assert.NoError(t, err)
+	_, err = os.Stat(filepath.Join(tempDir, "private", "tuf_keys", "gun", privKey3.ID()+".key"))
+	assert.NoError(t, err)
+
+	// Assert the PEM role header is "snapshot"
+	pemBytes, err = ioutil.ReadFile(filepath.Join(tempDir, "private", "tuf_keys", "gun", privKey3.ID()+".key"))
+	assert.NoError(t, err)
+	assert.Equal(t, "snapshot", trustmanager.ReadRoleFromPEM(pemBytes))
+
+	// Ensure exporting this key by ID gets the same key
+	_, err = runCommand(t, tempDir, "key", "export", privKey3.ID(), tempFile.Name())
+	assert.NoError(t, err)
+	// Compare the bytes of the exported file and the snapshot key file in the repo
+	exportedBytes, err = ioutil.ReadFile(tempFile.Name())
+	assert.NoError(t, err)
+	repoBytes, err = ioutil.ReadFile(filepath.Join(tempDir, "private", "tuf_keys", "gun", privKey3.ID()+".key"))
+	assert.NoError(t, err)
+	assert.Equal(t, repoBytes, exportedBytes)
+
+	// Ensure exporting this key and changing the passphrase works
+	_, err = runCommand(t, tempDir, "key", "export", privKey3.ID(), tempFile.Name(), "-p")
+	assert.NoError(t, err)
+
+	delegationPemBytes, err = trustmanager.EncryptPrivateKey(privKey4, "", testPassphrase)
+	assert.NoError(t, err)
+	ioutil.WriteFile(tempFile.Name(), delegationPemBytes, 0644)
+
+	// Import from delegation key, specified in flag.  No GUN needed
+	_, err = runCommand(t, tempDir, "key", "import", tempFile.Name(), "--role", "targets/delegation")
+	assert.NoError(t, err)
+	_, err = os.Stat(filepath.Join(tempDir, "private", "tuf_keys", privKey4.ID()+".key"))
+	assert.NoError(t, err)
+
+	// Assert the PEM role header is "targets/delegation"
+	pemBytes, err = ioutil.ReadFile(filepath.Join(tempDir, "private", "tuf_keys", privKey4.ID()+".key"))
+	assert.NoError(t, err)
+	assert.Equal(t, "targets/delegation", trustmanager.ReadRoleFromPEM(pemBytes))
+
+	// Ensure exporting this key by ID gets the same key
+	_, err = runCommand(t, tempDir, "key", "export", privKey4.ID(), tempFile.Name())
+	assert.NoError(t, err)
+	// Compare the bytes of the exported file and the delegation key file in the repo
+	exportedBytes, err = ioutil.ReadFile(tempFile.Name())
+	assert.NoError(t, err)
+	repoBytes, err = ioutil.ReadFile(filepath.Join(tempDir, "private", "tuf_keys", privKey4.ID()+".key"))
+	assert.NoError(t, err)
+	assert.Equal(t, repoBytes, exportedBytes)
+
+	// Ensure exporting this key and changing the passphrase works
+	_, err = runCommand(t, tempDir, "key", "export", privKey4.ID(), tempFile.Name(), "-p")
+	assert.NoError(t, err)
 }
 
 func assertNumCerts(t *testing.T, tempDir string, expectedNum int) []string {

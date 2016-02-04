@@ -390,8 +390,7 @@ func TestImportExportNonRootKey(t *testing.T) {
 
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	fmt.Println(tempBaseDir)
-	//defer os.RemoveAll(tempBaseDir)
+	defer os.RemoveAll(tempBaseDir)
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	fileStore, err := trustmanager.NewKeyFileStore(tempBaseDir, oldPassphraseRetriever)
@@ -411,8 +410,7 @@ func TestImportExportNonRootKey(t *testing.T) {
 
 	// Create new repo to test import
 	tempBaseDir2, err := ioutil.TempDir("", "notary-test-")
-	fmt.Println(tempBaseDir2)
-	//defer os.RemoveAll(tempBaseDir2)
+	defer os.RemoveAll(tempBaseDir2)
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	fileStore2, err := trustmanager.NewKeyFileStore(tempBaseDir2, oldPassphraseRetriever)
