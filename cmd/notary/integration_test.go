@@ -195,10 +195,11 @@ func TestClientDelegationsInteraction(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Contains(t, output, "No delegations present in this repository.")
 
-	// add new valid delegation with single new cert
+	// add new valid delegation with single new cert, and no path
 	output, err = runCommand(t, tempDir, "delegation", "add", "gun", "targets/delegation", tempFile.Name())
 	assert.NoError(t, err)
 	assert.Contains(t, output, "Addition of delegation role")
+	assert.NotContains(t, output, "path")
 
 	// check status - see delegation
 	output, err = runCommand(t, tempDir, "status", "gun")
@@ -219,11 +220,30 @@ func TestClientDelegationsInteraction(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Contains(t, output, "No unpublished changes for gun")
 
-	// list delegations - we should see our added delegation
+	// list delegations - we should see our added delegation, with no paths
 	output, err = runCommand(t, tempDir, "-s", server.URL, "delegation", "list", "gun")
 	assert.NoError(t, err)
 	assert.Contains(t, output, "targets/delegation")
 	assert.Contains(t, output, keyID)
+	assert.NotContains(t, output, "\"\"")
+
+	// add all paths to this delegation
+	output, err = runCommand(t, tempDir, "delegation", "add", "gun", "targets/delegation", "--all-paths")
+	assert.NoError(t, err)
+	assert.Contains(t, output, "Addition of delegation role")
+	assert.Contains(t, output, "\"\"")
+	assert.Contains(t, output, "<all paths>")
+
+	// publish repo
+	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
+	assert.NoError(t, err)
+
+	// list delegations - we should see our added delegation, with no paths
+	output, err = runCommand(t, tempDir, "-s", server.URL, "delegation", "list", "gun")
+	assert.NoError(t, err)
+	assert.Contains(t, output, "targets/delegation")
+	assert.Contains(t, output, "\"\"")
+	assert.Contains(t, output, "<all paths>")
 
 	// Setup another certificate
 	tempFile2, err := ioutil.TempFile("", "pemfile2")
@@ -246,7 +266,7 @@ func TestClientDelegationsInteraction(t *testing.T) {
 	keyID2, err := utils.CanonicalKeyID(parsedPubKey2)
 	assert.NoError(t, err)
 
-	// add to the delegation by specifying the same role, this time add another key and path
+	// add to the delegation by specifying the same role, this time add a scoped path
 	output, err = runCommand(t, tempDir, "delegation", "add", "gun", "targets/delegation", tempFile2.Name(), "--paths", "path")
 	assert.NoError(t, err)
 	assert.Contains(t, output, "Addition of delegation role")
@@ -361,6 +381,124 @@ func TestClientDelegationsInteraction(t *testing.T) {
 	assert.NotContains(t, output, "path3")
 	assert.Contains(t, output, keyID)
 	assert.Contains(t, output, keyID2)
+
+	// Add a bunch of individual paths so we can test a delegation remove --all-paths
+	output, err = runCommand(t, tempDir, "delegation", "add", "gun", "targets/delegation", "--paths", "abcdef,123456")
+	assert.NoError(t, err)
+
+	// Add more individual paths so we can test a delegation remove --all-paths
+	output, err = runCommand(t, tempDir, "delegation", "add", "gun", "targets/delegation", "--paths", "banana/split,apple/crumble/pie,orange.peel,kiwi")
+	assert.NoError(t, err)
+
+	// publish repo
+	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
+	assert.NoError(t, err)
+
+	// list delegations - we should see all of our paths
+	output, err = runCommand(t, tempDir, "-s", server.URL, "delegation", "list", "gun")
+	assert.NoError(t, err)
+	assert.Contains(t, output, "abcdef")
+	assert.Contains(t, output, "123456")
+	assert.Contains(t, output, "banana/split")
+	assert.Contains(t, output, "apple/crumble/pie")
+	assert.Contains(t, output, "orange.peel")
+	assert.Contains(t, output, "kiwi")
+
+	// Try adding "", and check that adding it with other paths clears out the others
+	output, err = runCommand(t, tempDir, "delegation", "add", "gun", "targets/delegation", "--paths", "\"\",grapefruit,pomegranate")
+	assert.NoError(t, err)
+
+	// publish repo
+	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
+	assert.NoError(t, err)
+
+	// list delegations - we should see all of our old paths, and ""
+	output, err = runCommand(t, tempDir, "-s", server.URL, "delegation", "list", "gun")
+	assert.NoError(t, err)
+	assert.Contains(t, output, "abcdef")
+	assert.Contains(t, output, "123456")
+	assert.Contains(t, output, "banana/split")
+	assert.Contains(t, output, "apple/crumble/pie")
+	assert.Contains(t, output, "orange.peel")
+	assert.Contains(t, output, "kiwi")
+	assert.Contains(t, output, "\"\"")
+	assert.NotContains(t, output, "grapefruit")
+	assert.NotContains(t, output, "pomegranate")
+
+	// Try removing just ""
+	output, err = runCommand(t, tempDir, "delegation", "remove", "gun", "targets/delegation", "--paths", "\"\"")
+	assert.NoError(t, err)
+
+	// publish repo
+	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
+	assert.NoError(t, err)
+
+	// list delegations - we should see all of our old paths without ""
+	output, err = runCommand(t, tempDir, "-s", server.URL, "delegation", "list", "gun")
+	assert.NoError(t, err)
+	assert.Contains(t, output, "abcdef")
+	assert.Contains(t, output, "123456")
+	assert.Contains(t, output, "banana/split")
+	assert.Contains(t, output, "apple/crumble/pie")
+	assert.Contains(t, output, "orange.peel")
+	assert.Contains(t, output, "kiwi")
+	assert.NotContains(t, output, "\"\"")
+
+	// Remove --all-paths to clear out all paths from this delegation
+	output, err = runCommand(t, tempDir, "delegation", "remove", "gun", "targets/delegation", "--all-paths")
+	assert.NoError(t, err)
+
+	// publish repo
+	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
+	assert.NoError(t, err)
+
+	// list delegations - we should see all of our paths
+	output, err = runCommand(t, tempDir, "-s", server.URL, "delegation", "list", "gun")
+	assert.NoError(t, err)
+	assert.NotContains(t, output, "abcdef")
+	assert.NotContains(t, output, "123456")
+	assert.NotContains(t, output, "banana/split")
+	assert.NotContains(t, output, "apple/crumble/pie")
+	assert.NotContains(t, output, "orange.peel")
+	assert.NotContains(t, output, "kiwi")
+
+	// Check that we ignore other --paths if we pass in --all-paths on an add
+	output, err = runCommand(t, tempDir, "delegation", "add", "gun", "targets/delegation", "--all-paths", "--paths", "grapefruit,pomegranate")
+	assert.NoError(t, err)
+
+	// publish repo
+	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
+	assert.NoError(t, err)
+
+	// list delegations - we should only see "", and not the other paths specified
+	output, err = runCommand(t, tempDir, "-s", server.URL, "delegation", "list", "gun")
+	assert.NoError(t, err)
+	assert.Contains(t, output, "\"\"")
+	assert.NotContains(t, output, "grapefruit")
+	assert.NotContains(t, output, "pomegranate")
+
+	// Add those extra paths we ignored to set up the next test
+	output, err = runCommand(t, tempDir, "delegation", "add", "gun", "targets/delegation", "--paths", "grapefruit,pomegranate")
+	assert.NoError(t, err)
+
+	// publish repo
+	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
+	assert.NoError(t, err)
+
+	// Check that we ignore other --paths if we pass in --all-paths on a remove
+	output, err = runCommand(t, tempDir, "delegation", "remove", "gun", "targets/delegation", "--all-paths", "--paths", "pomegranate")
+	assert.NoError(t, err)
+
+	// publish repo
+	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
+	assert.NoError(t, err)
+
+	// list delegations - we should see no paths
+	output, err = runCommand(t, tempDir, "-s", server.URL, "delegation", "list", "gun")
+	assert.NoError(t, err)
+	assert.NotContains(t, output, "\"\"")
+	assert.NotContains(t, output, "grapefruit")
+	assert.NotContains(t, output, "pomegranate")
 
 	// remove by force to delete the delegation entirely
 	output, err = runCommand(t, tempDir, "delegation", "remove", "gun", "targets/delegation", "-y")
