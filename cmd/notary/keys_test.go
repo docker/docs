@@ -440,7 +440,7 @@ func TestKeyImportInvalidFlagRole(t *testing.T) {
 		getRetriever:   func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
 		keysImportRole: "invalid",
 	}
-	tempFileName := generateTempTestKeyFile(t, "invalid")
+	tempFileName := generateTempTestKeyFile(t, "")
 	defer os.Remove(tempFileName)
 
 	err := k.keysImport(&cobra.Command{}, []string{tempFileName})
@@ -450,9 +450,8 @@ func TestKeyImportInvalidFlagRole(t *testing.T) {
 
 func TestKeyImportInvalidPEMRole(t *testing.T) {
 	k := &keyCommander{
-		configGetter:   func() (*viper.Viper, error) { return viper.New(), nil },
-		getRetriever:   func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
-		keysImportRole: "targets",
+		configGetter: func() (*viper.Viper, error) { return viper.New(), nil },
+		getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
 	}
 	tempFileName := generateTempTestKeyFile(t, "invalid")
 	defer os.Remove(tempFileName)
