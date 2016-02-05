@@ -32,7 +32,9 @@ You can now configure UCP to connect to a Docker Trusted Registry version
 
 Teams can be set up to map to LDAP/AD groups, or managed entirely
 within UCP.  Labels can then be set up on resources, and access can be
-granted to those labels.
+granted to those labels. Note that you may see issues in non-admin accounts
+created in earlier versions of UCP, so it is best to recreate these accounts
+if upgrading from an earlier version.
 
 ### Multi-host networking
 
