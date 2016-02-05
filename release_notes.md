@@ -55,9 +55,9 @@ and replica nodes, you can enable multi-host networking with the
 - Now requires engine 1.10.0-rc1 or newer
 - Etcd updated to 2.2.4
 - Swarm 1.1.0-RC2
-- 
 
-## Known Issues
+
+### Known Issues
 
 In testing this beta version there are a few known issues we have
 are already working on. Here they are in case you run into them:
