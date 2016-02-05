@@ -10,6 +10,7 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/docker/notary/client/changelist"
 	"github.com/docker/notary/passphrase"
@@ -17,6 +18,22 @@ import (
 	"github.com/docker/notary/tuf/store"
 	"github.com/stretchr/testify/require"
 )
+
+// Once a fixture is read in, ensure that it's valid by making sure the expiry
+// times of all the metadata and certificates is > 10 years ahead
+func requireValidFixture(t *testing.T, notaryRepo *NotaryRepository) {
+	tenYearsInFuture := time.Now().AddDate(10, 0, 0)
+	require.True(t, notaryRepo.tufRepo.Root.Signed.Expires.After(tenYearsInFuture))
+	require.True(t, notaryRepo.tufRepo.Snapshot.Signed.Expires.After(tenYearsInFuture))
+	require.True(t, notaryRepo.tufRepo.Timestamp.Signed.Expires.After(tenYearsInFuture))
+	for _, targetObj := range notaryRepo.tufRepo.Targets {
+		require.True(t, targetObj.Signed.Expires.After(tenYearsInFuture))
+	}
+
+	for _, cert := range notaryRepo.CertStore.GetCertificates() {
+		require.True(t, cert.NotAfter.After(tenYearsInFuture))
+	}
+}
 
 // recursively copies the contents of one directory into another - ignores
 // symlinks
@@ -82,6 +99,9 @@ func Test0Dot1RepoFormat(t *testing.T) {
 	require.NoError(t, err)
 	require.Len(t, targets, 1)
 	require.Equal(t, "LICENSE", targets[0].Name)
+
+	// ok, now that everything has been loaded, verify that the fixture is valid
+	requireValidFixture(t, repo)
 
 	// delete the timestamp metadata, since the server will ignore the uploaded
 	// one and try to create a new one from scratch, which will be the wrong version
