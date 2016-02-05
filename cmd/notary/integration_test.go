@@ -10,6 +10,7 @@ import (
 	"bytes"
 	"crypto/rand"
 	"io/ioutil"
+	"net/http"
 	"net/http/httptest"
 	"os"
 	"path/filepath"
@@ -56,11 +57,8 @@ func runCommand(t *testing.T, tempDir string, args ...string) (string, error) {
 	return string(output), retErr
 }
 
-// makes a testing notary-server
-func setupServer() *httptest.Server {
-	// Set up server
-	ctx := context.WithValue(
-		context.Background(), "metaStore", storage.NewMemStorage())
+func setupServerHandler(metaStore storage.MetaStore) http.Handler {
+	ctx := context.WithValue(context.Background(), "metaStore", metaStore)
 
 	ctx = context.WithValue(ctx, "keyAlgorithm", data.ECDSAKey)
 
@@ -72,7 +70,12 @@ func setupServer() *httptest.Server {
 
 	cryptoService := cryptoservice.NewCryptoService(
 		"", trustmanager.NewKeyMemoryStore(passphrase.ConstantRetriever("pass")))
-	return httptest.NewServer(server.RootHandler(nil, ctx, cryptoService))
+	return server.RootHandler(nil, ctx, cryptoService)
+}
+
+// makes a testing notary-server
+func setupServer() *httptest.Server {
+	return httptest.NewServer(setupServerHandler(storage.NewMemStorage()))
 }
 
 // Initializes a repo, adds a target, publishes the target, lists the target,
