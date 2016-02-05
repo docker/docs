@@ -275,11 +275,12 @@ func (k *keyCommander) keysExport(cmd *cobra.Command, args []string) error {
 		for keypath, role := range store.ListKeys() {
 			if filepath.Base(keypath) == keyID {
 				keyRole = role
-				if role != data.CanonicalRootRole {
-					dirPath := filepath.Dir(keypath)
-					if dirPath != "." { // no gun
-						keyGun = dirPath
-					}
+				if role == data.CanonicalRootRole {
+					continue
+				}
+				dirPath := filepath.Dir(keypath)
+				if dirPath != "." { // no gun
+					keyGun = dirPath
 				}
 				break
 			}
@@ -372,20 +373,6 @@ func (k *keyCommander) keysImport(cmd *cobra.Command, args []string) error {
 
 	pemRole := trustmanager.ReadRoleFromPEM(pemBytes)
 
-	// Rewind after reading the first time
-	_, err = importFile.Seek(0, 0)
-	if err != nil {
-		return fmt.Errorf("Error reading input file: %v", err)
-	}
-
-	if pemRole != "" && !data.ValidRole(pemRole) {
-		return fmt.Errorf("Invalid role specified for key: %s", pemRole)
-	}
-
-	if k.keysImportRole != "" && !data.ValidRole(k.keysImportRole) {
-		return fmt.Errorf("Invalid role specified for key: %s", k.keysImportRole)
-	}
-
 	// If the PEM key doesn't have a role in it, we must have --role set
 	if pemRole == "" && k.keysImportRole == "" {
 		return fmt.Errorf("Could not infer role, and no role was specified for key")
@@ -410,11 +397,7 @@ func (k *keyCommander) keysImport(cmd *cobra.Command, args []string) error {
 	}
 
 	cs := cryptoservice.NewCryptoService(k.keysImportGUN, ks...)
-	if importRole == data.CanonicalRootRole {
-		err = cs.ImportRootKey(importFile)
-	} else {
-		err = cs.ImportRoleKey(importFile, importRole, k.getRetriever())
-	}
+	err = cs.ImportRoleKey(pemBytes, importRole, k.getRetriever())
 
 	if err != nil {
 		return fmt.Errorf("Error importing root key: %v", err)

@@ -104,19 +104,19 @@ func (cs *CryptoService) ExportKeyReencrypt(dest io.Writer, keyID string, newPas
 // It prompts for the key's passphrase to verify the data and to determine
 // the key ID.
 func (cs *CryptoService) ImportRootKey(source io.Reader) error {
-	return cs.ImportRoleKey(source, data.CanonicalRootRole, nil)
-}
-
-// ImportRoleKey imports a private key in PEM format key from an io.Reader
-// It prompts for the key's passphrase to verify the data and to determine
-// the key ID.
-func (cs *CryptoService) ImportRoleKey(source io.Reader, role string, newPassphraseRetriever passphrase.Retriever) error {
 	pemBytes, err := ioutil.ReadAll(source)
-
 	if err != nil {
 		return err
 	}
+	return cs.ImportRoleKey(pemBytes, data.CanonicalRootRole, nil)
+}
+
+// ImportRoleKey imports a private key in PEM format key from a byte array
+// It prompts for the key's passphrase to verify the data and to determine
+// the key ID.
+func (cs *CryptoService) ImportRoleKey(pemBytes []byte, role string, newPassphraseRetriever passphrase.Retriever) error {
 	var alias string
+	var err error
 	if role == data.CanonicalRootRole {
 		alias = role
 		if err = checkRootKeyIsEncrypted(pemBytes); err != nil {
