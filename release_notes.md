@@ -47,7 +47,7 @@ and replica nodes, you can enable multi-host networking with the
 - Refined look and feel
 - Teams UI
 - LDAP/AD configuration UI
-- Collapseable navigation bar
+- Collapsible navigation bar
 
 
 ### Misc
@@ -62,5 +62,5 @@ and replica nodes, you can enable multi-host networking with the
 In testing this beta version there are a few known issues we have
 are already working on. Here they are in case you run into them:
 - You may see problems regarding access control when using non-admin
-users created from a previous UCP version. It is best to recrate such
+users created from a previous UCP version. It is best to recreate such
 accounts after upgrading to UCP 0.8.
