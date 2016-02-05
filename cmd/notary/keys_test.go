@@ -434,33 +434,6 @@ func TestChangeKeyPassphraseNonexistentID(t *testing.T) {
 	assert.Contains(t, err.Error(), "could not retrieve local key for key ID provided")
 }
 
-func TestKeyImportInvalidFlagRole(t *testing.T) {
-	k := &keyCommander{
-		configGetter:   func() (*viper.Viper, error) { return viper.New(), nil },
-		getRetriever:   func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
-		keysImportRole: "invalid",
-	}
-	tempFileName := generateTempTestKeyFile(t, "")
-	defer os.Remove(tempFileName)
-
-	err := k.keysImport(&cobra.Command{}, []string{tempFileName})
-	assert.Error(t, err)
-	assert.Contains(t, err.Error(), "Invalid role specified for key:")
-}
-
-func TestKeyImportInvalidPEMRole(t *testing.T) {
-	k := &keyCommander{
-		configGetter: func() (*viper.Viper, error) { return viper.New(), nil },
-		getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
-	}
-	tempFileName := generateTempTestKeyFile(t, "invalid")
-	defer os.Remove(tempFileName)
-
-	err := k.keysImport(&cobra.Command{}, []string{tempFileName})
-	assert.Error(t, err)
-	assert.Contains(t, err.Error(), "Invalid role specified for key:")
-}
-
 func TestKeyImportMismatchingRoles(t *testing.T) {
 	k := &keyCommander{
 		configGetter:   func() (*viper.Viper, error) { return viper.New(), nil },

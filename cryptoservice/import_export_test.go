@@ -77,7 +77,7 @@ func TestImportExportZip(t *testing.T) {
 		_, alias, err := cs.GetPrivateKey(privKeyName)
 		assert.NoError(t, err, "privKey %s has no alias", privKeyName)
 
-		if alias == "root" {
+		if alias == data.CanonicalRootRole {
 			continue
 		}
 		relKeyPath := filepath.Join("tuf_keys", privKeyName+".key")
@@ -138,7 +138,7 @@ func TestImportExportZip(t *testing.T) {
 		_, alias, err := cs2.GetPrivateKey(privKeyName)
 		assert.NoError(t, err, "privKey %s has no alias", privKeyName)
 
-		if alias == "root" {
+		if alias == data.CanonicalRootRole {
 			continue
 		}
 		relKeyPath := filepath.Join("tuf_keys", privKeyName+".key")
@@ -196,7 +196,7 @@ func TestImportExportGUN(t *testing.T) {
 	for privKeyName := range privKeyMap {
 		_, alias, err := cs.GetPrivateKey(privKeyName)
 		assert.NoError(t, err, "privKey %s has no alias", privKeyName)
-		if alias == "root" {
+		if alias == data.CanonicalRootRole {
 			continue
 		}
 		relKeyPath := filepath.Join("tuf_keys", privKeyName+".key")
@@ -250,12 +250,12 @@ func TestImportExportGUN(t *testing.T) {
 	// Look for keys in private. The filenames should match the key IDs
 	// in the repo's private key store.
 	for privKeyName, role := range privKeyMap {
-		if role == "root" {
+		if role == data.CanonicalRootRole {
 			continue
 		}
 		_, alias, err := cs2.GetPrivateKey(privKeyName)
 		assert.NoError(t, err, "privKey %s has no alias", privKeyName)
-		if alias == "root" {
+		if alias == data.CanonicalRootRole {
 			continue
 		}
 		relKeyPath := filepath.Join("tuf_keys", privKeyName+".key")
@@ -329,7 +329,7 @@ func TestImportExportRootKey(t *testing.T) {
 	// Should be able to unlock the root key with the old password
 	key, alias, err := cs2.GetPrivateKey(rootKeyID)
 	assert.NoError(t, err, "could not unlock root key")
-	assert.Equal(t, "root", alias)
+	assert.Equal(t, data.CanonicalRootRole, alias)
 	assert.Equal(t, rootKeyID, key.ID())
 }
 
@@ -381,7 +381,7 @@ func TestImportExportRootKeyReencrypt(t *testing.T) {
 	// Should be able to unlock the root key with the new password
 	key, alias, err := cs2.GetPrivateKey(rootKeyID)
 	assert.NoError(t, err, "could not unlock root key")
-	assert.Equal(t, "root", alias)
+	assert.Equal(t, data.CanonicalRootRole, alias)
 	assert.Equal(t, rootKeyID, key.ID())
 }
 
@@ -419,7 +419,10 @@ func TestImportExportNonRootKey(t *testing.T) {
 	keyReader, err := os.Open(tempKeyFilePath)
 	assert.NoError(t, err, "could not open key file")
 
-	err = cs2.ImportRoleKey(keyReader, data.CanonicalTargetsRole, oldPassphraseRetriever)
+	pemBytes, err := ioutil.ReadAll(keyReader)
+	assert.NoError(t, err, "could not read key file")
+
+	err = cs2.ImportRoleKey(pemBytes, data.CanonicalTargetsRole, oldPassphraseRetriever)
 	assert.NoError(t, err)
 	keyReader.Close()
 
@@ -433,7 +436,7 @@ func TestImportExportNonRootKey(t *testing.T) {
 	// Check that the key is the same
 	key, alias, err := cs2.GetPrivateKey(targetsKeyID)
 	assert.NoError(t, err, "could not unlock targets key")
-	assert.Equal(t, "targets", alias)
+	assert.Equal(t, data.CanonicalTargetsRole, alias)
 	assert.Equal(t, targetsKeyID, key.ID())
 }
 
@@ -471,7 +474,10 @@ func TestImportExportNonRootKeyReencrypt(t *testing.T) {
 	keyReader, err := os.Open(tempKeyFilePath)
 	assert.NoError(t, err, "could not open key file")
 
-	err = cs2.ImportRoleKey(keyReader, "snapshot", newPassphraseRetriever)
+	pemBytes, err := ioutil.ReadAll(keyReader)
+	assert.NoError(t, err, "could not read key file")
+
+	err = cs2.ImportRoleKey(pemBytes, data.CanonicalSnapshotRole, newPassphraseRetriever)
 	assert.NoError(t, err)
 	keyReader.Close()
 
@@ -485,6 +491,6 @@ func TestImportExportNonRootKeyReencrypt(t *testing.T) {
 	// Should be able to unlock the root key with the new password
 	key, alias, err := cs2.GetPrivateKey(snapshotKeyID)
 	assert.NoError(t, err, "could not unlock snapshot key")
-	assert.Equal(t, "snapshot", alias)
+	assert.Equal(t, data.CanonicalSnapshotRole, alias)
 	assert.Equal(t, snapshotKeyID, key.ID())
 }
