@@ -32,9 +32,7 @@ You can now configure UCP to connect to a Docker Trusted Registry version
 
 Teams can be set up to map to LDAP/AD groups, or managed entirely
 within UCP.  Labels can then be set up on resources, and access can be
-granted to those labels. Note that you may see issues in non-admin accounts
-created in earlier versions of UCP, so it is best to recreate these accounts
-if upgrading from an earlier version.
+granted to those labels.
 
 ### Multi-host networking
 
@@ -57,3 +55,12 @@ and replica nodes, you can enable multi-host networking with the
 - Now requires engine 1.10.0-rc1 or newer
 - Etcd updated to 2.2.4
 - Swarm 1.1.0-RC2
+- 
+
+## Known Issues
+
+In testing this beta version there are a few known issues we have
+are already working on. Here they are in case you run into them:
+- You may see problems regarding access control when using non-admin
+users created from a previous UCP version. It is best to recrate such
+accounts after upgrading to UCP 0.8.
