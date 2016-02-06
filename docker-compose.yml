@@ -5,7 +5,7 @@ notaryserver:
     - notarymysql
     - notarysigner
   environment:
-    - SERVICE_NAME="notaryserver"
+    - SERVICE_NAME=notaryserver
   ports:
     - "8080"
     - "4443:4443"
@@ -17,13 +17,13 @@ notarysigner:
   links:
     - notarymysql
   environment:
-    - SERVICE_NAME="notarysigner"
+    - SERVICE_NAME=notarysigner
   entrypoint: /bin/bash
   command: -c "./migrations/migrate.sh && notary-signer -config=fixtures/signer-config.json"
 notarymysql:
   volumes:
     - ./notarymysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
-    - ./notarymysql/data:/var/lib/mysql
+    - notarydata:/var/lib/mysql
   image: mariadb:10.1.10
   ports:
     - "3306:3306"
