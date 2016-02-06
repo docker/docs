@@ -435,10 +435,10 @@ func removeKeyInteractively(keyStores []trustmanager.KeyStore, keyID string,
 	var storesByIndex []trustmanager.KeyStore
 
 	for _, store := range keyStores {
-		for keypath, role := range store.ListKeys() {
+		for keypath, keyInfo := range store.ListKeys() {
 			if filepath.Base(keypath) == keyID {
 				foundKeys = append(foundKeys,
-					[]string{keypath, role, store.Name()})
+					[]string{keypath, keyInfo.Role, store.Name()})
 				storesByIndex = append(storesByIndex, store)
 			}
 		}

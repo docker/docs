@@ -93,8 +93,8 @@ func TestPrettyPrintRootAndSigningKeys(t *testing.T) {
 
 	longNameShortened := "..." + strings.Repeat("z", 37)
 
-	keys := make([]data.PrivateKey, 3)
-	for i := 0; i < 3; i++ {
+	keys := make([]data.PrivateKey, 4)
+	for i := 0; i < 4; i++ {
 		key, err := trustmanager.GenerateED25519Key(rand.Reader)
 		assert.NoError(t, err)
 		keys[i] = key
@@ -105,9 +105,9 @@ func TestPrettyPrintRootAndSigningKeys(t *testing.T) {
 	// add keys to the key stores
 	assert.NoError(t, keyStores[0].AddKey(keys[0].ID(), root, keys[0]))
 	assert.NoError(t, keyStores[1].AddKey(keys[0].ID(), root, keys[0]))
-	assert.NoError(t, keyStores[0].AddKey(strings.Repeat("a/", 30)+keys[0].ID(), "targets", keys[0]))
-	assert.NoError(t, keyStores[1].AddKey("short/gun/"+keys[0].ID(), "snapshot", keys[0]))
-	assert.NoError(t, keyStores[0].AddKey(keys[1].ID(), "targets/a", keys[1]))
+	assert.NoError(t, keyStores[0].AddKey(strings.Repeat("a/", 30)+keys[1].ID(), "targets", keys[1]))
+	assert.NoError(t, keyStores[1].AddKey("short/gun/"+keys[1].ID(), "snapshot", keys[1]))
+	assert.NoError(t, keyStores[0].AddKey(keys[3].ID(), "targets/a", keys[3]))
 	assert.NoError(t, keyStores[0].AddKey(keys[2].ID(), "invalidRole", keys[2]))
 
 	expected := [][]string{
@@ -116,10 +116,10 @@ func TestPrettyPrintRootAndSigningKeys(t *testing.T) {
 		{root, keys[0].ID(), longNameShortened},
 		// these have no gun, so they come first
 		{"invalidRole", keys[2].ID(), keyStores[0].Name()},
-		{"targets/a", keys[1].ID(), keyStores[0].Name()},
+		{"targets/a", keys[3].ID(), keyStores[0].Name()},
 		// these have guns, and are sorted then by guns
-		{"targets", "..." + strings.Repeat("/a", 11), keys[0].ID(), keyStores[0].Name()},
-		{"snapshot", "short/gun", keys[0].ID(), longNameShortened},
+		{"targets", "..." + strings.Repeat("/a", 11), keys[1].ID(), keyStores[0].Name()},
+		{"snapshot", "short/gun", keys[1].ID(), longNameShortened},
 	}
 
 	var b bytes.Buffer

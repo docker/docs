@@ -121,7 +121,7 @@ func (cs *CryptoService) ListKeys(role string) []string {
 	var res []string
 	for _, ks := range cs.keyStores {
 		for k, r := range ks.ListKeys() {
-			if r == role {
+			if r.Role == role {
 				res = append(res, k)
 			}
 		}
@@ -134,7 +134,7 @@ func (cs *CryptoService) ListAllKeys() map[string]string {
 	res := make(map[string]string)
 	for _, ks := range cs.keyStores {
 		for k, r := range ks.ListKeys() {
-			res[k] = r // keys are content addressed so don't care about overwrites
+			res[k] = r.Role // keys are content addressed so don't care about overwrites
 		}
 	}
 	return res

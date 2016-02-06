@@ -617,6 +617,7 @@ func (s *YubiKeyStore) setLibLoader(loader pkcs11LibLoader) {
 	s.libLoader = loader
 }
 
+// TODO: yubi key store refactor
 func (s *YubiKeyStore) ListKeys() map[string]string {
 	if len(s.keys) > 0 {
 		return buildKeyMap(s.keys)

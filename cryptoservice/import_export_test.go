@@ -199,7 +199,7 @@ func TestImportExportGUN(t *testing.T) {
 		if alias == data.CanonicalRootRole {
 			continue
 		}
-		relKeyPath := filepath.Join("tuf_keys", privKeyName+".key")
+		relKeyPath := filepath.Join("tuf_keys", gun, privKeyName+".key")
 
 		passphraseByFile[relKeyPath] = exportPassphrase
 	}
@@ -258,7 +258,7 @@ func TestImportExportGUN(t *testing.T) {
 		if alias == data.CanonicalRootRole {
 			continue
 		}
-		relKeyPath := filepath.Join("tuf_keys", privKeyName+".key")
+		relKeyPath := filepath.Join("tuf_keys", gun, privKeyName+".key")
 		privKeyFileName := filepath.Join(tempBaseDir2, "private", relKeyPath)
 		_, err = os.Stat(privKeyFileName)
 		assert.NoError(t, err)

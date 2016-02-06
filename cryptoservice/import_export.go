@@ -191,7 +191,6 @@ func (cs *CryptoService) ImportKeysZip(zipReader zip.Reader) error {
 	// Iterate through the files in the archive. Don't add the keys
 	for _, f := range zipReader.File {
 		fNameTrimmed := strings.TrimSuffix(f.Name, filepath.Ext(f.Name))
-
 		rc, err := f.Open()
 		if err != nil {
 			return err
@@ -214,9 +213,6 @@ func (cs *CryptoService) ImportKeysZip(zipReader zip.Reader) error {
 	}
 
 	for keyName, pemBytes := range newKeys {
-		if keyName[len(keyName)-5:] == "_root" {
-			keyName = "root"
-		}
 		// try to import the key to all key stores. As long as one of them
 		// succeeds, consider it a success
 		var tmpErr error
@@ -271,18 +267,18 @@ func (cs *CryptoService) ExportKeysByGUN(dest io.Writer, gun string, passphraseR
 }
 
 func moveKeysByGUN(oldKeyStore, newKeyStore trustmanager.KeyStore, gun string) error {
-	for relKeyPath := range oldKeyStore.ListKeys() {
+	for keyID, keyInfo := range oldKeyStore.ListKeys() {
 		// Skip keys that aren't associated with this GUN
-		if !strings.HasPrefix(relKeyPath, filepath.FromSlash(gun)) {
+		if keyInfo.Gun != gun {
 			continue
 		}
 
-		privKey, alias, err := oldKeyStore.GetKey(relKeyPath)
+		privKey, alias, err := oldKeyStore.GetKey(keyID)
 		if err != nil {
 			return err
 		}
 
-		err = newKeyStore.AddKey(relKeyPath, alias, privKey)
+		err = newKeyStore.AddKey(filepath.Join(keyInfo.Gun, keyID), alias, privKey)
 		if err != nil {
 			return err
 		}
@@ -292,13 +288,13 @@ func moveKeysByGUN(oldKeyStore, newKeyStore trustmanager.KeyStore, gun string) e
 }
 
 func moveKeys(oldKeyStore, newKeyStore trustmanager.KeyStore) error {
-	for f := range oldKeyStore.ListKeys() {
-		privateKey, role, err := oldKeyStore.GetKey(f)
+	for keyID, keyInfo := range oldKeyStore.ListKeys() {
+		privateKey, role, err := oldKeyStore.GetKey(keyID)
 		if err != nil {
 			return err
 		}
 
-		err = newKeyStore.AddKey(f, role, privateKey)
+		err = newKeyStore.AddKey(filepath.Join(keyInfo.Gun, keyID), role, privateKey)
 
 		if err != nil {
 			return err

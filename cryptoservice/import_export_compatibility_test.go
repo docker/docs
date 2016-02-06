@@ -27,7 +27,10 @@ func TestImport0Dot1Zip(t *testing.T) {
 	zipWriter.Close()
 	zipFile.Close()
 
-	origKeys := ks.ListKeys()
+	origKeys := make(map[string]string)
+	for keyID, keyInfo := range ks.ListKeys() {
+		origKeys[keyID] = keyInfo.Role
+	}
 	assert.Len(t, origKeys, 3)
 
 	// now import the zip file into a new cryptoservice
@@ -89,10 +92,12 @@ func importExportedZip(t *testing.T, original *CryptoService,
 	zipFile, err := ioutil.TempFile("", "notary-test-zipFile")
 	defer os.RemoveAll(zipFile.Name())
 	if gun != "" {
-		original.ExportKeysByGUN(zipFile, gun, ret)
+		err = original.ExportKeysByGUN(zipFile, gun, ret)
+		assert.NoError(t, err)
 		cs = NewCryptoService(gun, ks)
 	} else {
-		original.ExportAllKeys(zipFile, ret)
+		err = original.ExportAllKeys(zipFile, ret)
+		assert.NoError(t, err)
 		cs = NewCryptoService(original.gun, ks)
 	}
 	zipFile.Close()
@@ -122,9 +127,9 @@ func TestImportExport0Dot1GUNKeys(t *testing.T) {
 	// remove root from expected key list, because root is not exported when
 	// we export by gun
 	expectedKeys := make(map[string]string)
-	for keyID, role := range ks.ListKeys() {
-		if role != data.CanonicalRootRole {
-			expectedKeys[keyID] = role
+	for keyID, keyInfo := range ks.ListKeys() {
+		if keyInfo.Role != data.CanonicalRootRole {
+			expectedKeys[keyID] = keyInfo.Role
 		}
 	}
 
