@@ -44,7 +44,7 @@ type KeyStore interface {
 	// succeeds.  Otherwise, returns an error if it cannot add.
 	AddKey(name, alias string, privKey data.PrivateKey) error
 	GetKey(name string) (data.PrivateKey, string, error)
-	ListKeys() map[string]string
+	ListKeys() map[string]KeyInfo
 	RemoveKey(name string) error
 	ExportKey(name string) ([]byte, error)
 	ImportKey(pemBytes []byte, alias string) error

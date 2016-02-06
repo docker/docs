@@ -391,15 +391,15 @@ func requireRepoHasExpectedKeys(t *testing.T, repo *NotaryRepository,
 	require.NoError(t, err)
 
 	roles := make(map[string]bool)
-	for keyID, role := range ks.ListKeys() {
-		if role == data.CanonicalRootRole {
-			require.Equal(t, rootKeyID, keyID, "Unexpected root key ID")
+	for keyID, keyInfo := range ks.ListKeys() {
+		if keyInfo.Role == data.CanonicalRootRole {
+			assert.Equal(t, rootKeyID, keyID, "Unexpected root key ID")
 		}
 		// just to ensure the content of the key files created are valid
 		_, r, err := ks.GetKey(keyID)
 		require.NoError(t, err)
-		require.Equal(t, role, r)
-		roles[role] = true
+		require.Equal(t, keyInfo.Role, r)
+		roles[keyInfo.Role] = true
 	}
 	// there is a root key and a targets key
 	alwaysThere := []string{data.CanonicalRootRole, data.CanonicalTargetsRole}
