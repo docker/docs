@@ -2,6 +2,6 @@ CREATE DATABASE IF NOT EXISTS `notarysigner`;
 
 CREATE USER "signer"@"%" IDENTIFIED BY "";
 
-GRANT 
+GRANT
 	ALL PRIVILEGES ON `notarysigner`.* 
 	TO "signer"@"%";

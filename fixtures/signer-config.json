@@ -11,6 +11,6 @@
 	},
 	"storage": {
 		"backend": "mysql",
-		"db_url": "signer@tcp(notarymysql:3306)/notarysigner?parseTime=True"
+		"db_url": "signer@tcp(mysql:3306)/notarysigner?parseTime=True"
 	}
 }
