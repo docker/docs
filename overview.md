@@ -32,5 +32,4 @@ The current doc theme does not allow us to create a split menu: a menu whose lab
 * [UCP Key/Value Store Backend](kv_store.md)
 * [Set up container networking with UCP](networking.md)
 * [Set up high availability](understand_ha.md)
-* [Manually set up a Certificate Authority](certs.md)
 * [Deploy an application thru UCP](deploy-application.md)
