@@ -551,16 +551,7 @@ func (k *keyCommander) keyPassphraseChange(cmd *cobra.Command, args []string) er
 		return fmt.Errorf("invalid key ID provided: %s", keyID)
 	}
 
-	// Find the key's GUN by ID, in case it is a non-root key
-	var keyGUN string
-	for _, store := range ks {
-		for keypath := range store.ListKeys() {
-			if filepath.Base(keypath) == keyID {
-				keyGUN = filepath.Dir(keypath)
-			}
-		}
-	}
-	cs := cryptoservice.NewCryptoService(keyGUN, ks...)
+	cs := cryptoservice.NewCryptoService("", ks...)
 	privKey, role, err := cs.GetPrivateKey(keyID)
 	if err != nil {
 		return fmt.Errorf("could not retrieve local key for key ID provided: %s", keyID)
@@ -570,7 +561,11 @@ func (k *keyCommander) keyPassphraseChange(cmd *cobra.Command, args []string) er
 	// unlocking passphrase and reusing that.
 	passChangeRetriever := k.getRetriever()
 	keyStore, err := trustmanager.NewKeyFileStore(config.GetString("trust_dir"), passChangeRetriever)
-	err = keyStore.AddKey(filepath.Join(keyGUN, keyID), role, privKey)
+	keyInfo, err := cs.GetKeyInfo(keyID)
+	if err != nil {
+		return err
+	}
+	err = keyStore.AddKey(filepath.Join(keyInfo.Gun, keyID), role, privKey)
 	if err != nil {
 		return err
 	}
