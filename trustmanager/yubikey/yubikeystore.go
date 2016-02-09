@@ -618,7 +618,7 @@ func (s *YubiKeyStore) setLibLoader(loader pkcs11LibLoader) {
 }
 
 // TODO: yubi key store refactor
-func (s *YubiKeyStore) ListKeys() map[string]string {
+func (s *YubiKeyStore) ListKeys() map[string]KeyInfo {
 	if len(s.keys) > 0 {
 		return buildKeyMap(s.keys)
 	}
@@ -777,6 +777,11 @@ func (s *YubiKeyStore) ImportKey(pemBytes []byte, keyPath string) error {
 	}
 	_, err = s.addKey(privKey.ID(), "root", privKey)
 	return err
+}
+
+// Not yet implemented
+func (s *YubiKeyStore) GetKeyInfo(keyID string) (trustmanager.KeyInfo, error) {
+	return trustmanager.KeyInfo{}, fmt.Errorf("Not yet implemented")
 }
 
 func cleanup(ctx IPKCS11Ctx, session pkcs11.SessionHandle) {

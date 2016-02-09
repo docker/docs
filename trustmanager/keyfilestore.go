@@ -131,6 +131,20 @@ func (s *KeyMemoryStore) loadKeyInfo() {
 	s.keyInfoMap = generateKeyInfoMap(s)
 }
 
+func (s *KeyFileStore) GetKeyInfo(keyID string) (KeyInfo, error) {
+	if info, ok := s.keyInfoMap[keyID]; ok {
+		return info, nil
+	}
+	return KeyInfo{}, fmt.Errorf("Could not find info for keyID %s", keyID)
+}
+
+func (s *KeyMemoryStore) GetKeyInfo(keyID string) (KeyInfo, error) {
+	if info, ok := s.keyInfoMap[keyID]; ok {
+		return info, nil
+	}
+	return KeyInfo{}, fmt.Errorf("Could not find info for keyID %s", keyID)
+}
+
 // Name returns a user friendly name for the location this store
 // keeps its data
 func (s *KeyFileStore) Name() string {

@@ -105,6 +105,16 @@ func (cs *CryptoService) GetKey(keyID string) data.PublicKey {
 	return data.PublicKeyFromPrivate(privKey)
 }
 
+// GetKeyInfo returns role and GUN info of a key by ID
+func (cs *CryptoService) GetKeyInfo(keyID string) (trustmanager.KeyInfo, error) {
+	for _, store := range cs.keyStores {
+		if info, err := store.GetKeyInfo(keyID); err == nil {
+			return info, nil
+		}
+	}
+	return trustmanager.KeyInfo{}, fmt.Errorf("Could not find info for keyID %s", keyID)
+}
+
 // RemoveKey deletes a key by ID
 func (cs *CryptoService) RemoveKey(keyID string) (err error) {
 	keyPaths := []string{keyID, filepath.Join(cs.gun, keyID)}
