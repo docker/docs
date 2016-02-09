@@ -66,7 +66,7 @@ Additional help is available for each command with the '--help' option.
 
 | Command | Description |
 |---------------------------------|-----------------------------------------------------------------------------|
-| [`install`](instal.md) | Install UCP on this engine. |
+| [`install`](install.md) | Install UCP on this engine. |
 | [`join`](join.md) | Join this engine to an existing UCP. |
 | [`upgrade`](upgrade.md) | Upgrade the UCP components on this Engine. |
 | [`images`](images.md) | Verify the UCP images on this Engine. |
