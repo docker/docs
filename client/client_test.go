@@ -393,7 +393,7 @@ func requireRepoHasExpectedKeys(t *testing.T, repo *NotaryRepository,
 	roles := make(map[string]bool)
 	for keyID, keyInfo := range ks.ListKeys() {
 		if keyInfo.Role == data.CanonicalRootRole {
-			assert.Equal(t, rootKeyID, keyID, "Unexpected root key ID")
+			require.Equal(t, rootKeyID, keyID, "Unexpected root key ID")
 		}
 		// just to ensure the content of the key files created are valid
 		_, r, err := ks.GetKey(keyID)
@@ -1024,13 +1024,10 @@ func fakeServerData(t *testing.T, repo *NotaryRepository, mux *http.ServeMux,
 
 	timestampKey, ok := keys[data.CanonicalTimestampRole]
 	require.True(t, ok)
-	savedTUFRepo := repo.tufRepo // in case this is overwritten
+	// Add timestamp key via the server's cryptoservice so it can sign
+	repo.CryptoService.AddKey(data.CanonicalTimestampRole, timestampKey)
 
-	fileStore, err := trustmanager.NewKeyFileStore(repo.baseDir, passphraseRetriever)
-	require.NoError(t, err)
-	fileStore.AddKey(
-		filepath.Join(filepath.FromSlash(repo.gun), timestampKey.ID()),
-		"nonroot", timestampKey)
+	savedTUFRepo := repo.tufRepo // in case this is overwritten
 
 	rootJSONFile := filepath.Join(repo.baseDir, "tuf",
 		filepath.FromSlash(repo.gun), "metadata", "root.json")

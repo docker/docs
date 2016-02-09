@@ -78,19 +78,16 @@ func (cs *CryptoService) Create(role, algorithm string) (data.PublicKey, error) 
 // If that fails, try to get the key with the GUN (non-root key).
 // If that fails, then we don't have the key.
 func (cs *CryptoService) GetPrivateKey(keyID string) (k data.PrivateKey, role string, err error) {
-	keyPaths := []string{keyID, filepath.Join(cs.gun, keyID)}
 	for _, ks := range cs.keyStores {
-		for _, keyPath := range keyPaths {
-			k, role, err = ks.GetKey(keyPath)
-			if err == nil {
-				return
-			}
-			switch err.(type) {
-			case trustmanager.ErrPasswordInvalid, trustmanager.ErrAttemptsExceeded:
-				return
-			default:
-				continue
-			}
+		k, role, err = ks.GetKey(keyID)
+		if err == nil {
+			return
+		}
+		switch err.(type) {
+		case trustmanager.ErrPasswordInvalid, trustmanager.ErrAttemptsExceeded:
+			return
+		default:
+			continue
 		}
 	}
 	return // returns whatever the final values were
@@ -117,11 +114,22 @@ func (cs *CryptoService) GetKeyInfo(keyID string) (trustmanager.KeyInfo, error) 
 
 // RemoveKey deletes a key by ID
 func (cs *CryptoService) RemoveKey(keyID string) (err error) {
-	keyPaths := []string{keyID, filepath.Join(cs.gun, keyID)}
 	for _, ks := range cs.keyStores {
-		for _, keyPath := range keyPaths {
-			ks.RemoveKey(keyPath)
-		}
+		ks.RemoveKey(keyID)
+	}
+	return // returns whatever the final values were
+}
+
+
+// AddKey adds a private key to a specified role.
+// The GUN is inferred from the cryptoservice itself for non-root roles
+func (cs *CryptoService) AddKey(role string, key data.PrivateKey) (err error) {
+	keyID := key.ID()
+	if role != data.CanonicalRootRole {
+		keyID = filepath.Join(cs.gun, key.ID())
+	}
+	for _, ks := range cs.keyStores {
+		ks.AddKey(keyID, role, key)
 	}
 	return // returns whatever the final values were
 }
