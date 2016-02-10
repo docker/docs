@@ -270,11 +270,10 @@ func TestValidateSnapshotGenerateWithPrev(t *testing.T) {
 	kdb, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
-	snapRole := kdb.GetRole(data.CanonicalSnapshotRole)
+	snapRole, err := repo.GetRole(data.CanonicalSnapshotRole)
+	assert.NoError(t, err)
 
-	for _, id := range snapRole.KeyIDs {
-		k := kdb.GetKey(id)
-		assert.NotNil(t, k)
+	for _, k := range snapRole.Keys {
 		err := store.SetKey("testGUN", data.CanonicalSnapshotRole, k.Algorithm(), k.Public())
 		assert.NoError(t, err)
 	}
@@ -311,11 +310,10 @@ func TestValidateSnapshotGeneratePrevCorrupt(t *testing.T) {
 	kdb, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
-	snapRole := kdb.GetRole(data.CanonicalSnapshotRole)
+	snapRole, err := repo.GetRole(data.CanonicalSnapshotRole)
+	assert.NoError(t, err)
 
-	for _, id := range snapRole.KeyIDs {
-		k := kdb.GetKey(id)
-		assert.NotNil(t, k)
+	for _, k := range snapRole.Keys {
 		err := store.SetKey("testGUN", data.CanonicalSnapshotRole, k.Algorithm(), k.Public())
 		assert.NoError(t, err)
 	}
@@ -342,11 +340,10 @@ func TestValidateSnapshotGenerateNoTargets(t *testing.T) {
 	kdb, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
-	snapRole := kdb.GetRole(data.CanonicalSnapshotRole)
+	snapRole, err := repo.GetRole(data.CanonicalSnapshotRole)
+	assert.NoError(t, err)
 
-	for _, id := range snapRole.KeyIDs {
-		k := kdb.GetKey(id)
-		assert.NotNil(t, k)
+	for _, k := range snapRole.Keys {
 		err := store.SetKey("testGUN", data.CanonicalSnapshotRole, k.Algorithm(), k.Public())
 		assert.NoError(t, err)
 	}
@@ -367,11 +364,10 @@ func TestValidateSnapshotGenerate(t *testing.T) {
 	kdb, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
-	snapRole := kdb.GetRole(data.CanonicalSnapshotRole)
+	snapRole, err := repo.GetRole(data.CanonicalSnapshotRole)
+	assert.NoError(t, err)
 
-	for _, id := range snapRole.KeyIDs {
-		k := kdb.GetKey(id)
-		assert.NotNil(t, k)
+	for _, k := range snapRole.Keys {
 		err := store.SetKey("testGUN", data.CanonicalSnapshotRole, k.Algorithm(), k.Public())
 		assert.NoError(t, err)
 	}
@@ -799,18 +795,18 @@ func TestValidateTargetsModifiedHash(t *testing.T) {
 
 // ### generateSnapshot tests ###
 func TestGenerateSnapshotNoRole(t *testing.T) {
-	kdb := keys.NewDB()
-	_, err := generateSnapshot("gun", kdb, nil, nil)
+	repo := tuf.NewRepo(keys.NewDB(), nil)
+	_, err := generateSnapshot("gun", repo, nil)
 	assert.Error(t, err)
 	assert.IsType(t, validation.ErrBadRoot{}, err)
 }
 
 func TestGenerateSnapshotNoKey(t *testing.T) {
-	kdb, _, _, err := testutils.EmptyRepo("docker.com/notary")
+	_, repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 
-	_, err = generateSnapshot("gun", kdb, nil, store)
+	_, err = generateSnapshot("gun", repo, store)
 	assert.Error(t, err)
 	assert.IsType(t, validation.ErrBadHierarchy{}, err)
 }
@@ -904,7 +900,7 @@ func TestValidateTargetsLoadParent(t *testing.T) {
 	valRepo := tuf.NewRepo(kdb, nil)
 	valRepo.SetRoot(baseRepo.Root)
 
-	updates, err := loadAndValidateTargets("gun", valRepo, roles, kdb, store)
+	updates, err := loadAndValidateTargets("gun", valRepo, roles, store)
 	assert.NoError(t, err)
 	assert.Len(t, updates, 1)
 	assert.Equal(t, "targets/level1", updates[0].Role)
@@ -960,7 +956,7 @@ func TestValidateTargetsParentInUpdate(t *testing.T) {
 	// because we sort the roles, the list of returned updates
 	// will contain shallower roles first, in this case "targets",
 	// and then "targets/level1"
-	updates, err := loadAndValidateTargets("gun", valRepo, roles, kdb, store)
+	updates, err := loadAndValidateTargets("gun", valRepo, roles, store)
 	assert.NoError(t, err)
 	assert.Len(t, updates, 2)
 	assert.Equal(t, "targets", updates[0].Role)
@@ -1002,7 +998,7 @@ func TestValidateTargetsParentNotFound(t *testing.T) {
 	valRepo := tuf.NewRepo(kdb, nil)
 	valRepo.SetRoot(baseRepo.Root)
 
-	_, err = loadAndValidateTargets("gun", valRepo, roles, kdb, store)
+	_, err = loadAndValidateTargets("gun", valRepo, roles, store)
 	assert.Error(t, err)
 	assert.IsType(t, storage.ErrNotFound{}, err)
 }
@@ -1057,7 +1053,7 @@ func TestValidateTargetsRoleNotInParent(t *testing.T) {
 	// because we sort the roles, the list of returned updates
 	// will contain shallower roles first, in this case "targets",
 	// and then "targets/level1"
-	updates, err := loadAndValidateTargets("gun", valRepo, roles, kdb, store)
+	updates, err := loadAndValidateTargets("gun", valRepo, roles, store)
 	assert.NoError(t, err)
 	assert.Len(t, updates, 1)
 	assert.Equal(t, "targets", updates[0].Role)

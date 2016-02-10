@@ -79,7 +79,7 @@ func validateUpdate(cs signed.CryptoService, gun string, updates []storage.MetaU
 		}
 	}
 
-	targetsToUpdate, err := loadAndValidateTargets(gun, repo, roles, kdb, store)
+	targetsToUpdate, err := loadAndValidateTargets(gun, repo, roles, store)
 	if err != nil {
 		return nil, err
 	}
@@ -107,7 +107,7 @@ func validateUpdate(cs signed.CryptoService, gun string, updates []storage.MetaU
 			}
 		}
 
-		if err := validateSnapshot(snapshotRole, oldSnap, roles[snapshotRole], roles, kdb); err != nil {
+		if err := validateSnapshot(snapshotRole, oldSnap, roles[snapshotRole], roles, repo); err != nil {
 			logrus.Error("ErrBadSnapshot: ", err.Error())
 			return nil, validation.ErrBadSnapshot{Msg: err.Error()}
 		}
@@ -120,7 +120,7 @@ func validateUpdate(cs signed.CryptoService, gun string, updates []storage.MetaU
 		// Then:
 		//   - generate a new snapshot
 		//   - add it to the updates
-		update, err := generateSnapshot(gun, kdb, repo, store)
+		update, err := generateSnapshot(gun, repo, store)
 		if err != nil {
 			return nil, err
 		}
@@ -129,7 +129,7 @@ func validateUpdate(cs signed.CryptoService, gun string, updates []storage.MetaU
 	return updatesToApply, nil
 }
 
-func loadAndValidateTargets(gun string, repo *tuf.Repo, roles map[string]storage.MetaUpdate, kdb *keys.KeyDB, store storage.MetaStore) ([]storage.MetaUpdate, error) {
+func loadAndValidateTargets(gun string, repo *tuf.Repo, roles map[string]storage.MetaUpdate, store storage.MetaStore) ([]storage.MetaUpdate, error) {
 	targetsRoles := make(utils.RoleList, 0)
 	for role := range roles {
 		if role == data.CanonicalTargetsRole || data.IsDelegation(role) {
@@ -160,8 +160,8 @@ func loadAndValidateTargets(gun string, repo *tuf.Repo, roles map[string]storage
 			t   *data.SignedTargets
 			err error
 		)
-		if t, err = validateTargets(role, roles, kdb); err != nil {
-			if err == signed.ErrUnknownRole {
+		if t, err = validateTargets(role, roles, repo); err != nil {
+			if _, ok := err.(tuf.ErrNotLoaded); ok {
 				// role wasn't found in its parent. It has been removed
 				// or never existed. Drop this role from the update
 				// (by not adding it to updatesToApply)
@@ -193,9 +193,9 @@ func loadTargetsFromStore(gun, role string, repo *tuf.Repo, store storage.MetaSt
 	return repo.SetTargets(role, t)
 }
 
-func generateSnapshot(gun string, kdb *keys.KeyDB, repo *tuf.Repo, store storage.MetaStore) (*storage.MetaUpdate, error) {
-	role := kdb.GetRole(data.CanonicalSnapshotRole)
-	if role == nil {
+func generateSnapshot(gun string, repo *tuf.Repo, store storage.MetaStore) (*storage.MetaUpdate, error) {
+	role, err := repo.GetRole(data.CanonicalSnapshotRole)
+	if err != nil {
 		return nil, validation.ErrBadRoot{Msg: "root did not include snapshot role"}
 	}
 
@@ -257,7 +257,7 @@ func generateSnapshot(gun string, kdb *keys.KeyDB, repo *tuf.Repo, store storage
 	}, nil
 }
 
-func validateSnapshot(role string, oldSnap *data.SignedSnapshot, snapUpdate storage.MetaUpdate, roles map[string]storage.MetaUpdate, kdb *keys.KeyDB) error {
+func validateSnapshot(role string, oldSnap *data.SignedSnapshot, snapUpdate storage.MetaUpdate, roles map[string]storage.MetaUpdate, repo *tuf.Repo) error {
 	s := &data.Signed{}
 	err := json.Unmarshal(snapUpdate.Data, s)
 	if err != nil {
@@ -265,7 +265,11 @@ func validateSnapshot(role string, oldSnap *data.SignedSnapshot, snapUpdate stor
 	}
 	// version specifically gets validated when writing to store to
 	// better handle race conditions there.
-	if err := signed.Verify(s, role, 0, kdb); err != nil {
+	snapshotRole, err := repo.GetRole(role)
+	if err != nil {
+		return err
+	}
+	if err := signed.Verify(s, snapshotRole, 0); err != nil {
 		return err
 	}
 
@@ -315,7 +319,7 @@ func checkHashes(meta data.FileMeta, update []byte) bool {
 	return true
 }
 
-func validateTargets(role string, roles map[string]storage.MetaUpdate, kdb *keys.KeyDB) (*data.SignedTargets, error) {
+func validateTargets(role string, roles map[string]storage.MetaUpdate, repo *tuf.Repo) (*data.SignedTargets, error) {
 	// TODO: when delegations are being validated, validate parent
 	//       role exists for any delegation
 	s := &data.Signed{}
@@ -325,7 +329,11 @@ func validateTargets(role string, roles map[string]storage.MetaUpdate, kdb *keys
 	}
 	// version specifically gets validated when writing to store to
 	// better handle race conditions there.
-	if err := signed.Verify(s, role, 0, kdb); err != nil {
+	targetsRole, err := repo.GetRole(role)
+	if err != nil {
+		return nil, err
+	}
+	if err := signed.Verify(s, targetsRole, 0); err != nil {
 		return nil, err
 	}
 	t, err := data.TargetsFromSigned(s)
