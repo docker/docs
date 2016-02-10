@@ -953,3 +953,203 @@ func TestGetAllRoles(t *testing.T) {
 	roles = repo.GetAllLoadedRoles()
 	assert.Len(t, roles, 0)
 }
+
+func TestGetBaseRoles(t *testing.T) {
+	ed25519 := signed.NewEd25519()
+	keyDB := keys.NewDB()
+	repo := initRepo(t, ed25519, keyDB)
+
+	// After we init, we get the base roles
+	for _, role := range data.BaseRoles {
+		baseRole, err := repo.GetBaseRole(role)
+		assert.NoError(t, err)
+
+		assert.Equal(t, role, baseRole.GetName())
+		keyIDs := repo.cryptoService.ListKeys(role)
+		for _, keyID := range keyIDs {
+			_, ok := baseRole.Keys[keyID]
+			assert.True(t, ok)
+			assert.Contains(t, baseRole.ListKeyIDs(), keyID)
+		}
+		// initRepo should set all key thresholds to 1
+		assert.Equal(t, 1, baseRole.GetThreshold())
+		assert.False(t, baseRole.IsDelegationRole())
+		assert.True(t, baseRole.IsBaseRole())
+		_, err = baseRole.ListPathHashPrefixes()
+		assert.Error(t, err)
+		_, err = baseRole.ListPaths()
+		assert.Error(t, err)
+	}
+}
+
+func TestGetBaseRolesInvalidName(t *testing.T) {
+	ed25519 := signed.NewEd25519()
+	keyDB := keys.NewDB()
+	repo := initRepo(t, ed25519, keyDB)
+
+	_, err := repo.GetBaseRole("invalid")
+	assert.Error(t, err)
+
+	_, err = repo.GetBaseRole("targets/delegation")
+	assert.Error(t, err)
+}
+
+func TestGetDelegationValidRoles(t *testing.T) {
+	ed25519 := signed.NewEd25519()
+	keyDB := keys.NewDB()
+	repo := initRepo(t, ed25519, keyDB)
+
+	testKey1, err := ed25519.Create("targets/test", data.ED25519Key)
+	assert.NoError(t, err)
+	role, err := data.NewRole(
+		"targets/test", 1, []string{testKey1.ID()}, []string{"path", "anotherpath"}, []string{})
+	assert.NoError(t, err)
+
+	err = repo.UpdateDelegations(role, data.KeyList{testKey1})
+	assert.NoError(t, err)
+
+	delgRole, err := repo.GetDelegationRole("targets/test")
+	assert.NoError(t, err)
+	assert.True(t, delgRole.IsDelegationRole())
+	assert.False(t, delgRole.IsBaseRole())
+	assert.Equal(t, "targets/test", delgRole.GetName())
+	assert.Equal(t, 1, delgRole.GetThreshold())
+	assert.Equal(t, []string{testKey1.ID()}, delgRole.ListKeyIDs())
+	delgPaths, err := delgRole.ListPaths()
+	assert.NoError(t, err)
+	delgPathPrefixes, err := delgRole.ListPathHashPrefixes()
+	assert.NoError(t, err)
+	assert.Empty(t, delgPathPrefixes)
+	assert.Equal(t, []string{"path", "anotherpath"}, delgPaths)
+	assert.Equal(t, testKey1, delgRole.Keys[testKey1.ID()])
+
+	testKey2, err := ed25519.Create("targets/a", data.ED25519Key)
+	assert.NoError(t, err)
+	role, err = data.NewRole(
+		"targets/a", 1, []string{testKey2.ID()}, []string{""}, []string{})
+	assert.NoError(t, err)
+
+	err = repo.UpdateDelegations(role, data.KeyList{testKey2})
+	assert.NoError(t, err)
+
+	delgRole, err = repo.GetDelegationRole("targets/a")
+	assert.NoError(t, err)
+	assert.True(t, delgRole.IsDelegationRole())
+	assert.False(t, delgRole.IsBaseRole())
+	assert.Equal(t, "targets/a", delgRole.GetName())
+	assert.Equal(t, 1, delgRole.GetThreshold())
+	assert.Equal(t, []string{testKey2.ID()}, delgRole.ListKeyIDs())
+	delgPaths, err = delgRole.ListPaths()
+	assert.NoError(t, err)
+	assert.Equal(t, []string{""}, delgPaths)
+	delgPathPrefixes, err = delgRole.ListPathHashPrefixes()
+	assert.NoError(t, err)
+	assert.Empty(t, delgPathPrefixes)
+	assert.Equal(t, testKey2, delgRole.Keys[testKey2.ID()])
+
+	testKey3, err := ed25519.Create("targets/test/b", data.ED25519Key)
+	assert.NoError(t, err)
+	role, err = data.NewRole(
+		"targets/test/b", 1, []string{testKey3.ID()}, []string{"path/subpath", "anotherpath"}, []string{})
+	assert.NoError(t, err)
+
+	err = repo.UpdateDelegations(role, data.KeyList{testKey3})
+	assert.NoError(t, err)
+
+	delgRole, err = repo.GetDelegationRole("targets/test/b")
+	assert.NoError(t, err)
+	assert.True(t, delgRole.IsDelegationRole())
+	assert.False(t, delgRole.IsBaseRole())
+	assert.Equal(t, "targets/test/b", delgRole.GetName())
+	assert.Equal(t, 1, delgRole.GetThreshold())
+	assert.Equal(t, []string{testKey3.ID()}, delgRole.ListKeyIDs())
+	delgPaths, err = delgRole.ListPaths()
+	assert.NoError(t, err)
+	assert.Equal(t, []string{"path/subpath", "anotherpath"}, delgPaths)
+	delgPathPrefixes, err = delgRole.ListPathHashPrefixes()
+	assert.NoError(t, err)
+	assert.Empty(t, delgPathPrefixes)
+	assert.Equal(t, testKey3, delgRole.Keys[testKey3.ID()])
+
+	testKey4, err := ed25519.Create("targets/test/c", data.ED25519Key)
+	assert.NoError(t, err)
+	// Try adding empty paths, ensure this is valid
+	role, err = data.NewRole(
+		"targets/test/c", 1, []string{testKey4.ID()}, []string{}, []string{})
+	assert.NoError(t, err)
+
+	err = repo.UpdateDelegations(role, data.KeyList{testKey3})
+	assert.NoError(t, err)
+}
+
+func TestGetDelegationRolesInvalidName(t *testing.T) {
+	ed25519 := signed.NewEd25519()
+	keyDB := keys.NewDB()
+	repo := initRepo(t, ed25519, keyDB)
+
+	_, err := repo.GetDelegationRole("invalid")
+	assert.Error(t, err)
+
+	for _, role := range data.BaseRoles {
+		_, err = repo.GetDelegationRole(role)
+		assert.Error(t, err)
+	}
+}
+
+func TestGetDelegationRolesInvalidPaths(t *testing.T) {
+	ed25519 := signed.NewEd25519()
+	keyDB := keys.NewDB()
+	repo := initRepo(t, ed25519, keyDB)
+
+	testKey1, err := ed25519.Create("targets/test", data.ED25519Key)
+	assert.NoError(t, err)
+	role, err := data.NewRole(
+		"targets/test", 1, []string{testKey1.ID()}, []string{"path", "anotherpath"}, []string{})
+	assert.NoError(t, err)
+
+	err = repo.UpdateDelegations(role, data.KeyList{testKey1})
+	assert.NoError(t, err)
+
+	testKey2, err := ed25519.Create("targets/test/b", data.ED25519Key)
+	assert.NoError(t, err)
+	// Now we add a delegation with a path that is not prefixed by its parent delegation
+	role, err = data.NewRole(
+		"targets/test/b", 1, []string{testKey2.ID()}, []string{"invalidpath"}, []string{})
+	assert.NoError(t, err)
+
+	err = repo.UpdateDelegations(role, data.KeyList{testKey2})
+	assert.NoError(t, err)
+
+	// Getting this delegation should fail path verification
+	_, err = repo.GetDelegationRole("targets/test/b")
+	assert.Error(t, err)
+}
+
+func TestGetDelegationRolesInvalidPathHashPrefix(t *testing.T) {
+	ed25519 := signed.NewEd25519()
+	keyDB := keys.NewDB()
+	repo := initRepo(t, ed25519, keyDB)
+
+	testKey1, err := ed25519.Create("targets/test", data.ED25519Key)
+	assert.NoError(t, err)
+	role, err := data.NewRole(
+		"targets/test", 1, []string{testKey1.ID()}, []string{}, []string{"pathhash", "anotherpathhash"})
+	assert.NoError(t, err)
+
+	err = repo.UpdateDelegations(role, data.KeyList{testKey1})
+	assert.NoError(t, err)
+
+	testKey2, err := ed25519.Create("targets/test/b", data.ED25519Key)
+	assert.NoError(t, err)
+	// Now we add a delegation with a path that is not prefixed by its parent delegation
+	role, err = data.NewRole(
+		"targets/test/b", 1, []string{testKey2.ID()}, []string{}, []string{"invalidpathhash"})
+	assert.NoError(t, err)
+
+	err = repo.UpdateDelegations(role, data.KeyList{testKey2})
+	assert.NoError(t, err)
+
+	// Getting this delegation should fail path verification
+	_, err = repo.GetDelegationRole("targets/test/b")
+	assert.Error(t, err)
+}

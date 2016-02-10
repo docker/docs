@@ -120,12 +120,12 @@ type BaseRole struct {
 	Threshold int                  `json:"threshold"`
 }
 
-// Returns true for BaseRole
+// IsBaseRole returns true for BaseRole
 func (b BaseRole) IsBaseRole() bool {
 	return true
 }
 
-// Returns false for BaseRole
+// IsDelegationRole returns false for BaseRole
 func (b BaseRole) IsDelegationRole() bool {
 	return false
 }
@@ -142,7 +142,7 @@ func (b BaseRole) GetThreshold() int {
 
 // ListKeys retrieves the public keys valid for this role
 func (b BaseRole) ListKeys() KeyList {
-	keys := make(KeyList)
+	keys := KeyList{}
 	for _, key := range b.Keys {
 		keys = append(keys, key)
 	}
@@ -151,7 +151,7 @@ func (b BaseRole) ListKeys() KeyList {
 
 // ListKeyIDs retrieves the list of key IDs valid for this role
 func (b BaseRole) ListKeyIDs() []string {
-	keyIDs := make([]string)
+	keyIDs := []string{}
 	for id := range b.Keys {
 		keyIDs = append(keyIDs, id)
 	}
@@ -163,7 +163,7 @@ func (b BaseRole) ListPaths() ([]string, error) {
 	return nil, fmt.Errorf("%s is not a delegation role", b.Name)
 }
 
-// ListPaths returns an error for non-delegations
+// ListPathHashPrefixes returns an error for non-delegations
 func (b BaseRole) ListPathHashPrefixes() ([]string, error) {
 	return nil, fmt.Errorf("%s is not a delegation role", b.Name)
 }
@@ -175,12 +175,12 @@ type DelegationRole struct {
 	PathHashPrefixes []string `json:"path_hash_prefixes,omitempty"`
 }
 
-// Returns false for DelegationRole
+// IsBaseRole returns false for DelegationRole
 func (d DelegationRole) IsBaseRole() bool {
 	return false
 }
 
-// Returns true for DelegationRole
+// IsDelegationRole returns true for DelegationRole
 func (d DelegationRole) IsDelegationRole() bool {
 	return true
 }
@@ -197,7 +197,7 @@ func (d DelegationRole) GetThreshold() int {
 
 // ListKeys retrieves the public keys valid for this role
 func (d DelegationRole) ListKeys() KeyList {
-	keys := make(KeyList)
+	keys := KeyList{}
 	for _, key := range d.Keys {
 		keys = append(keys, key)
 	}
@@ -206,7 +206,7 @@ func (d DelegationRole) ListKeys() KeyList {
 
 // ListKeyIDs retrieves the list of key IDs valid for this role
 func (d DelegationRole) ListKeyIDs() []string {
-	keyIDs := make([]string)
+	keyIDs := []string{}
 	for id := range d.Keys {
 		keyIDs = append(keyIDs, id)
 	}
@@ -218,7 +218,7 @@ func (d DelegationRole) ListPaths() ([]string, error) {
 	return d.Paths, nil
 }
 
-// ListPaths lists the paths of this rol
+// ListPathHashPrefixes lists the paths of this role
 func (d DelegationRole) ListPathHashPrefixes() ([]string, error) {
 	return d.PathHashPrefixes, nil
 }

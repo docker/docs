@@ -173,6 +173,138 @@ func (tr *Repo) RemoveBaseKeys(role string, keyIDs ...string) error {
 	return nil
 }
 
+// GetBaseRole gets a base role from this repo's metadata
+func (tr *Repo) GetBaseRole(name string) (data.BaseRole, error) {
+	if !data.IsBaseRole(name) {
+		return data.BaseRole{}, data.ErrInvalidRole{Role: name, Reason: "invalid base role name"}
+	}
+	if tr.Root == nil {
+		return data.BaseRole{}, ErrNotLoaded{data.CanonicalRootRole}
+	}
+	roleData, ok := tr.Root.Signed.Roles[name]
+	if !ok {
+		return data.BaseRole{}, ErrNotLoaded{name}
+	}
+	// Get all public keys for the base role from TUF metadata
+	keyIDs := roleData.KeyIDs
+	pubKeys := make(map[string]data.PublicKey)
+	for _, keyID := range keyIDs {
+		pubKey, ok := tr.Root.Signed.Keys[keyID]
+		if !ok {
+			return data.BaseRole{}, fmt.Errorf("key with ID %s, specified as a signing key for role %s, was not found in root metadata", keyID, name)
+		}
+		pubKeys[keyID] = pubKey
+	}
+
+	return data.BaseRole{
+		Name:      name,
+		Keys:      pubKeys,
+		Threshold: roleData.Threshold,
+	}, nil
+}
+
+// GetDelegationRole gets a delegation role from this repo's metadata, walking from the targets role down to the delegation itself
+func (tr *Repo) GetDelegationRole(name string) (data.DelegationRole, error) {
+	if !data.IsDelegation(name) {
+		return data.DelegationRole{}, data.ErrInvalidRole{Role: name, Reason: "invalid delegation name"}
+	}
+	if tr.Root == nil {
+		return data.DelegationRole{}, ErrNotLoaded{data.CanonicalRootRole}
+	}
+	_, ok := tr.Root.Signed.Roles[data.CanonicalTargetsRole]
+	if !ok {
+		return data.DelegationRole{}, ErrNotLoaded{data.CanonicalTargetsRole}
+	}
+	// Traverse target metadata, down to delegation itself
+	// Get all public keys for the base role from TUF metadata
+	signedTargetData, ok := tr.Targets[data.CanonicalTargetsRole]
+	if !ok {
+		return data.DelegationRole{}, fmt.Errorf("TUF data for targets does not exist in targets metadata", name)
+	}
+
+	// Keep track of paths and path hash prefixes to validate as we traverse the delegations tree, targets implicitly has ""
+	whiteListedPaths := []string{""}
+	whiteListedPathHashes := []string{""}
+
+	// Start with top level roles in targets
+	delegationRoles := signedTargetData.Signed.Delegations.Roles
+	var foundRole *data.Role
+	for len(delegationRoles) > 0 {
+		delgRole := delegationRoles[0]
+		delegationRoles = delegationRoles[1:]
+
+		// If this role is delegated above or is our desired role, validate paths and traverse its child roles
+		if delgRole.Name == name || strings.HasPrefix(name, delgRole.Name+"/") {
+			if okPaths := validateDelegationPathPrefixes(whiteListedPaths, delgRole.Paths); !okPaths {
+				return data.DelegationRole{}, fmt.Errorf("Invalid paths specified for delegation %s", delgRole.Name)
+			}
+			whiteListedPaths = delgRole.Paths
+			if okPathHashPrefixes := validateDelegationPathPrefixes(whiteListedPathHashes, delgRole.PathHashPrefixes); !okPathHashPrefixes {
+				return data.DelegationRole{}, fmt.Errorf("Invalid path hash prefixes specified for delegation %s", delgRole.Name)
+			}
+
+			// If we found the role, we can exit the loop
+			if delgRole.Name == name {
+				foundRole = delgRole
+				break
+			}
+
+			// If this is a parent role, keep traversing
+			whiteListedPathHashes = delgRole.PathHashPrefixes
+			delegationRoles = append(delegationRoles, tr.Targets[delgRole.Name].Signed.Delegations.Roles...)
+		}
+	}
+
+	if foundRole == nil {
+		return data.DelegationRole{}, fmt.Errorf("could not find valid delegation for role %s", name)
+	}
+
+	pubKeys := make(map[string]data.PublicKey)
+	parentData, ok := tr.Targets[path.Dir(foundRole.Name)]
+	if !ok {
+		return data.DelegationRole{}, fmt.Errorf("delegation parent data for %s does not exist in targets metadata", foundRole.Name)
+	}
+	for _, keyID := range foundRole.KeyIDs {
+		pubKey, ok := parentData.Signed.Delegations.Keys[keyID]
+		if !ok {
+			return data.DelegationRole{}, fmt.Errorf("delegation %s does not exist in targets metadata", foundRole.Name)
+		}
+		pubKeys[keyID] = pubKey
+	}
+
+	return data.DelegationRole{
+		BaseRole: data.BaseRole{
+			Name:      name,
+			Keys:      pubKeys,
+			Threshold: foundRole.Threshold,
+		},
+		Paths:            foundRole.Paths,
+		PathHashPrefixes: foundRole.PathHashPrefixes,
+	}, nil
+}
+
+// Returns true if the delegationPaths are prefixed by parentPaths
+func validateDelegationPathPrefixes(parentPaths, delegationPaths []string) bool {
+	if len(delegationPaths) == 0 {
+		return true
+	}
+	// Validate each individual delegation path
+	for _, delgPath := range delegationPaths {
+		isPrefixed := false
+		for _, parentPath := range parentPaths {
+			if strings.HasPrefix(delgPath, parentPath) {
+				isPrefixed = true
+				break
+			}
+		}
+		// If the delegation path did not match prefix against any parent path, it is not valid
+		if !isPrefixed {
+			return false
+		}
+	}
+	return true
+}
+
 // GetAllLoadedRoles returns a list of all role entries loaded in this TUF repo, could be empty
 func (tr *Repo) GetAllLoadedRoles() []*data.Role {
 	return tr.keysDB.GetAllRoles()
