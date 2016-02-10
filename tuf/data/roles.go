@@ -2,10 +2,11 @@ package data
 
 import (
 	"fmt"
-	"github.com/Sirupsen/logrus"
 	"path"
 	"regexp"
 	"strings"
+
+	"github.com/Sirupsen/logrus"
 )
 
 // Canonical base role names
@@ -243,4 +244,10 @@ func subtractStrSlices(orig, remove []string) []string {
 		}
 	}
 	return keep
+}
+
+// RoleWithKeys is a role that has the signing keys for the role embedded
+type RoleWithKeys struct {
+	Role
+	Keys map[string]PublicKey
 }
