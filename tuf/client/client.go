@@ -204,8 +204,12 @@ func (c Client) verifyRoot(role string, s *data.Signed, minVersion int) error {
 	// Still need to determine if there has been a root key update and
 	// confirm signature with new root key
 	logrus.Debug("verifying root with existing keys")
-	err := signed.Verify(s, role, minVersion, c.keysDB)
+	rootRole, err := c.local.GetRole(role)
 	if err != nil {
+		logrus.Debug("no previous root role loaded")
+		return err
+	}
+	if err = signed.Verify(s, rootRole, minVersion); err != nil {
 		logrus.Debug("root did not verify with existing keys")
 		return err
 	}
@@ -227,7 +231,12 @@ func (c Client) verifyRoot(role string, s *data.Signed, minVersion int) error {
 	// TODO(endophage): be more intelligent and only re-verify if we detect
 	//                  there has been a change in root keys
 	logrus.Debug("verifying root with updated keys")
-	err = signed.Verify(s, role, minVersion, c.keysDB)
+	rootRole, err = c.local.GetRole(role)
+	if err != nil {
+		logrus.Debug("root role with new keys not loaded")
+		return err
+	}
+	err = signed.Verify(s, rootRole, minVersion)
 	if err != nil {
 		logrus.Debug("root did not verify with new keys")
 		return err
@@ -267,7 +276,7 @@ func (c *Client) downloadTimestamp() error {
 	// from remote, only using the cache one if we couldn't reach remote.
 	raw, s, err := c.downloadSigned(role, notary.MaxTimestampSize, nil)
 	if err == nil {
-		ts, err = c.verifyTimestamp(s, version, c.keysDB)
+		ts, err = c.verifyTimestamp(s, version)
 		if err == nil {
 			logrus.Debug("successfully verified downloaded timestamp")
 			c.cache.SetMeta(role, raw)
@@ -282,7 +291,7 @@ func (c *Client) downloadTimestamp() error {
 	}
 	logrus.Debug(err.Error())
 	logrus.Warn("Error while downloading remote metadata, using cached timestamp - this might not be the latest version available remotely")
-	ts, err = c.verifyTimestamp(old, version, c.keysDB)
+	ts, err = c.verifyTimestamp(old, version)
 	if err != nil {
 		return err
 	}
@@ -292,8 +301,13 @@ func (c *Client) downloadTimestamp() error {
 }
 
 // verifies that a timestamp is valid, and returned the SignedTimestamp object to add to the tuf repo
-func (c *Client) verifyTimestamp(s *data.Signed, minVersion int, kdb *keys.KeyDB) (*data.SignedTimestamp, error) {
-	if err := signed.Verify(s, data.CanonicalTimestampRole, minVersion, kdb); err != nil {
+func (c *Client) verifyTimestamp(s *data.Signed, minVersion int) (*data.SignedTimestamp, error) {
+	timestampRole, err := c.local.GetRole(data.CanonicalTimestampRole)
+	if err != nil {
+		logrus.Debug("no timestamp role loaded")
+		return nil, err
+	}
+	if err := signed.Verify(s, timestampRole, minVersion); err != nil {
 		return nil, err
 	}
 	return data.TimestampFromSigned(s)
@@ -351,7 +365,12 @@ func (c *Client) downloadSnapshot() error {
 		s = old
 	}
 
-	err = signed.Verify(s, role, version, c.keysDB)
+	snapshotRole, err := c.local.GetRole(role)
+	if err != nil {
+		logrus.Debug("no snapshot role loaded")
+		return err
+	}
+	err = signed.Verify(s, snapshotRole, version)
 	if err != nil {
 		return err
 	}
@@ -489,8 +508,12 @@ func (c Client) getTargetsFile(role string, keyIDs []string, snapshotMeta data.F
 		s = old
 	}
 
-	err = signed.Verify(s, role, version, c.keysDB)
+	targetsRole, err := c.local.GetRole(role)
 	if err != nil {
+		logrus.Debugf("no %s role loaded", role)
+		return nil, err
+	}
+	if err = signed.Verify(s, targetsRole, version); err != nil {
 		return nil, err
 	}
 	logrus.Debugf("successfully verified %s", role)
