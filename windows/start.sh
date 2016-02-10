@@ -15,8 +15,13 @@ BLUE='\033[1;34m'
 GREEN='\033[0;32m'
 NC='\033[0m'
 
-if [ ! -f "${DOCKER_MACHINE}" ] || [ ! -f "${VBOXMANAGE}" ]; then
-  echo "Either VirtualBox or Docker Machine are not installed. Please re-run the Toolbox Installer and try again."
+if [ ! -f "${DOCKER_MACHINE}" ]; then
+  echo "Docker Machine is not installed. Please re-run the Toolbox Installer and try again."
+  exit 1
+fi
+
+if [ ! -f "${VBOXMANAGE}" ]; then
+  echo "VirtualBox is not installed. Please re-run the Toolbox Installer and try again."
   exit 1
 fi
 
