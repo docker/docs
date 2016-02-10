@@ -69,6 +69,16 @@ func ValidRole(name string) bool {
 	return false
 }
 
+// IsBaseRole checks if a role name is valid base role
+func IsBaseRole(name string) bool {
+	for _, v := range BaseRoles {
+		if name == v {
+			return true
+		}
+	}
+	return false
+}
+
 // IsDelegation checks if the role is a delegation or a root role
 func IsDelegation(role string) bool {
 	targetsBase := CanonicalTargetsRole + "/"
@@ -87,18 +97,130 @@ func IsDelegation(role string) bool {
 }
 
 // RootRole is a cut down role as it appears in the root.json
+// Eventually should only be used for immediately before and after serialization/deserialization
 type RootRole struct {
 	KeyIDs    []string `json:"keyids"`
 	Threshold int      `json:"threshold"`
 }
 
 // Role is a more verbose role as they appear in targets delegations
+// Eventually should only be used for immediately before and after serialization/deserialization
 type Role struct {
 	RootRole
 	Name             string   `json:"name"`
 	Paths            []string `json:"paths,omitempty"`
 	PathHashPrefixes []string `json:"path_hash_prefixes,omitempty"`
 	Email            string   `json:"email,omitempty"`
+}
+
+// BaseRole is an internal representation of a root/targets/snapshot/timestamp role, with its public keys included
+type BaseRole struct {
+	Keys      map[string]PublicKey `json:"keys"`
+	Name      string               `json:"name"`
+	Threshold int                  `json:"threshold"`
+}
+
+// Returns true for BaseRole
+func (b BaseRole) IsBaseRole() bool {
+	return true
+}
+
+// Returns false for BaseRole
+func (b BaseRole) IsDelegationRole() bool {
+	return false
+}
+
+// GetName retrieves the name of this role
+func (b BaseRole) GetName() string {
+	return b.Name
+}
+
+// GetThreshold retrieves the threshold of this role
+func (b BaseRole) GetThreshold() int {
+	return b.Threshold
+}
+
+// ListKeys retrieves the public keys valid for this role
+func (b BaseRole) ListKeys() KeyList {
+	keys := make(KeyList)
+	for _, key := range b.Keys {
+		keys = append(keys, key)
+	}
+	return keys
+}
+
+// ListKeyIDs retrieves the list of key IDs valid for this role
+func (b BaseRole) ListKeyIDs() []string {
+	keyIDs := make([]string)
+	for id := range b.Keys {
+		keyIDs = append(keyIDs, id)
+	}
+	return keyIDs
+}
+
+// ListPaths returns an error for non-delegations
+func (b BaseRole) ListPaths() ([]string, error) {
+	return nil, fmt.Errorf("%s is not a delegation role", b.Name)
+}
+
+// ListPaths returns an error for non-delegations
+func (b BaseRole) ListPathHashPrefixes() ([]string, error) {
+	return nil, fmt.Errorf("%s is not a delegation role", b.Name)
+}
+
+// DelegationRole is an internal representation of a delegation role, with its public keys included
+type DelegationRole struct {
+	BaseRole
+	Paths            []string `json:"paths,omitempty"`
+	PathHashPrefixes []string `json:"path_hash_prefixes,omitempty"`
+}
+
+// Returns false for DelegationRole
+func (d DelegationRole) IsBaseRole() bool {
+	return false
+}
+
+// Returns true for DelegationRole
+func (d DelegationRole) IsDelegationRole() bool {
+	return true
+}
+
+// GetName retrieves the name of this role
+func (d DelegationRole) GetName() string {
+	return d.Name
+}
+
+// GetThreshold retrieves the threshold of this role
+func (d DelegationRole) GetThreshold() int {
+	return d.Threshold
+}
+
+// ListKeys retrieves the public keys valid for this role
+func (d DelegationRole) ListKeys() KeyList {
+	keys := make(KeyList)
+	for _, key := range d.Keys {
+		keys = append(keys, key)
+	}
+	return keys
+}
+
+// ListKeyIDs retrieves the list of key IDs valid for this role
+func (d DelegationRole) ListKeyIDs() []string {
+	keyIDs := make([]string)
+	for id := range d.Keys {
+		keyIDs = append(keyIDs, id)
+	}
+	return keyIDs
+}
+
+// ListPaths lists the paths of this role
+func (d DelegationRole) ListPaths() ([]string, error) {
+	return d.Paths, nil
+}
+
+// ListPaths lists the paths of this rol
+func (d DelegationRole) ListPathHashPrefixes() ([]string, error) {
+	return d.PathHashPrefixes, nil
 }
 
 // NewRole creates a new Role object from the given parameters
