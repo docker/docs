@@ -108,7 +108,7 @@ func TestYubiAddKeysAndRetrieve(t *testing.T) {
 		for _, k := range keys {
 			r, ok := listedKeys[k]
 			assert.True(t, ok)
-			assert.Equal(t, data.CanonicalRootRole, r)
+			assert.Equal(t, data.CanonicalRootRole, r.Role)
 
 			_, _, err := store.GetKey(k)
 			assert.NoError(t, err)
@@ -150,7 +150,7 @@ func TestYubiAddKeyFailureIfNoMoreSlots(t *testing.T) {
 		_, _, err := store.GetKey(badKey.ID())
 		assert.Error(t, err)
 		for k := range store.ListKeys() {
-			assert.NotEqual(t, badKey, k)
+			assert.NotEqual(t, badKey.ID(), k)
 		}
 	}
 }
@@ -519,7 +519,7 @@ type pkcs11Stubbable interface {
 var setupErrors = []string{"Initialize", "GetSlotList", "OpenSession"}
 
 // Create a new store, so that we avoid any cache issues, and list keys
-func cleanListKeys(t *testing.T) map[string]string {
+func cleanListKeys(t *testing.T) map[string]trustmanager.KeyInfo {
 	cleanStore, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
 	assert.NoError(t, err)
 	return cleanStore.ListKeys()

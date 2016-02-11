@@ -131,6 +131,7 @@ func (s *KeyMemoryStore) loadKeyInfo() {
 	s.keyInfoMap = generateKeyInfoMap(s)
 }
 
+// GetKeyInfo returns the corresponding gun and role key info for a keyID
 func (s *KeyFileStore) GetKeyInfo(keyID string) (KeyInfo, error) {
 	if info, ok := s.keyInfoMap[keyID]; ok {
 		return info, nil
@@ -138,6 +139,7 @@ func (s *KeyFileStore) GetKeyInfo(keyID string) (KeyInfo, error) {
 	return KeyInfo{}, fmt.Errorf("Could not find info for keyID %s", keyID)
 }
 
+// GetKeyInfo returns the corresponding gun and role key info for a keyID
 func (s *KeyMemoryStore) GetKeyInfo(keyID string) (KeyInfo, error) {
 	if info, ok := s.keyInfoMap[keyID]; ok {
 		return info, nil

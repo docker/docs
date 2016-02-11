@@ -137,6 +137,11 @@ func (trust *NotarySigner) Create(role, algorithm string) (data.PublicKey, error
 	return public, nil
 }
 
+// AddKey adds a key
+func (trust *NotarySigner) AddKey(role string, k data.PrivateKey) error {
+	return errors.New("Adding a key to NotarySigner is not supported")
+}
+
 // RemoveKey deletes a key
 func (trust *NotarySigner) RemoveKey(keyid string) error {
 	_, err := trust.kmClient.DeleteKey(context.Background(), &pb.KeyID{ID: keyid})
