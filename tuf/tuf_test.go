@@ -1120,9 +1120,12 @@ func TestGetDelegationRolesInvalidPaths(t *testing.T) {
 	err = repo.UpdateDelegations(role, data.KeyList{testKey2})
 	assert.NoError(t, err)
 
-	// Getting this delegation should fail path verification
-	_, err = repo.GetDelegationRole("targets/test/b")
-	assert.Error(t, err)
+	// Getting this delegation should fail path verification, so it'll have 0 paths
+	delgRole, err := repo.GetDelegationRole("targets/test/b")
+	assert.NoError(t, err)
+	delgPaths, err := delgRole.ListPaths()
+	assert.NoError(t, err)
+	assert.Empty(t, delgPaths)
 }
 
 func TestGetDelegationRolesInvalidPathHashPrefix(t *testing.T) {
@@ -1150,6 +1153,9 @@ func TestGetDelegationRolesInvalidPathHashPrefix(t *testing.T) {
 	assert.NoError(t, err)
 
 	// Getting this delegation should fail path verification
-	_, err = repo.GetDelegationRole("targets/test/b")
-	assert.Error(t, err)
+	delgRole, err := repo.GetDelegationRole("targets/test/b")
+	assert.NoError(t, err)
+	delgPathHashPrefixes, err := delgRole.ListPathHashPrefixes()
+	assert.NoError(t, err)
+	assert.Empty(t, delgPathHashPrefixes)
 }
