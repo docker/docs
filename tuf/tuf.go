@@ -222,7 +222,7 @@ func (tr *Repo) GetDelegationRole(name string) (data.DelegationRole, error) {
 		return data.DelegationRole{}, fmt.Errorf("TUF data for targets does not exist in targets metadata", name)
 	}
 
-	// Keep track of paths and path hash prefixes to validate as we traverse the delegations tree, targets implicitly has ""
+	// Keep track of paths and path hash prefixes to restrict as we traverse the delegations tree, targets implicitly has ""
 	whiteListedPaths := []string{""}
 	whiteListedPathHashes := []string{""}
 
@@ -233,10 +233,10 @@ func (tr *Repo) GetDelegationRole(name string) (data.DelegationRole, error) {
 		delgRole := delegationRoles[0]
 		delegationRoles = delegationRoles[1:]
 
-		// If this role is delegated above or is our desired role, validate paths and traverse its child roles
+		// If this role is delegated above or is our desired role, restrict paths and traverse its child roles
 		if delgRole.Name == name || strings.HasPrefix(name, delgRole.Name+"/") {
-			delgRole.Paths = validateDelegationPathPrefixes(whiteListedPaths, delgRole.Paths)
-			delgRole.PathHashPrefixes = validateDelegationPathPrefixes(whiteListedPathHashes, delgRole.PathHashPrefixes)
+			delgRole.Paths = data.RestrictDelegationPathPrefixes(whiteListedPaths, delgRole.Paths)
+			delgRole.PathHashPrefixes = data.RestrictDelegationPathPrefixes(whiteListedPathHashes, delgRole.PathHashPrefixes)
 
 			// If we found the role, we can exit the loop
 			if delgRole.Name == name {
@@ -277,30 +277,6 @@ func (tr *Repo) GetDelegationRole(name string) (data.DelegationRole, error) {
 		Paths:            foundRole.Paths,
 		PathHashPrefixes: foundRole.PathHashPrefixes,
 	}, nil
-}
-
-// Returns the list valid delegationPaths that are prefixed by parentPaths
-func validateDelegationPathPrefixes(parentPaths, delegationPaths []string) []string {
-	validPaths := []string{}
-	if len(delegationPaths) == 0 {
-		return validPaths
-	}
-
-	// Validate each individual delegation path
-	for _, delgPath := range delegationPaths {
-		isPrefixed := false
-		for _, parentPath := range parentPaths {
-			if strings.HasPrefix(delgPath, parentPath) {
-				isPrefixed = true
-				break
-			}
-		}
-		// If the delegation path did not match prefix against any parent path, it is not valid
-		if isPrefixed {
-			validPaths = append(validPaths, delgPath)
-		}
-	}
-	return validPaths
 }
 
 // GetAllLoadedRoles returns a list of all role entries loaded in this TUF repo, could be empty

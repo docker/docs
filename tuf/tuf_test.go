@@ -1131,3 +1131,67 @@ func TestGetDelegationRolesInvalidPathHashPrefix(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Empty(t, delgRole.PathHashPrefixes)
 }
+
+func TestDelegationRolesParent(t *testing.T) {
+	delgA := data.DelegationRole{
+		BaseRole: data.BaseRole{
+			Keys:      nil,
+			Name:      "targets/a",
+			Threshold: 1,
+		},
+		Paths:            []string{"path", "anotherpath"},
+		PathHashPrefixes: []string{"pathhash", "anotherpathhash"},
+	}
+
+	delgB := data.DelegationRole{
+		BaseRole: data.BaseRole{
+			Keys:      nil,
+			Name:      "targets/a/b",
+			Threshold: 1,
+		},
+		Paths:            []string{"path/b", "anotherpath/b", "b/invalidpath"},
+		PathHashPrefixes: []string{"pathhash/b", "anotherpathhash/b", "b/invalidpathhash"},
+	}
+
+	// Assert direct parent relationship
+	assert.True(t, delgA.IsParentOf(delgB))
+	assert.False(t, delgB.IsParentOf(delgA))
+	assert.False(t, delgA.IsParentOf(delgA))
+
+	delgC := data.DelegationRole{
+		BaseRole: data.BaseRole{
+			Keys:      nil,
+			Name:      "targets/a/b/c",
+			Threshold: 1,
+		},
+		Paths:            []string{"path/b", "anotherpath/b/c", "c/invalidpath"},
+		PathHashPrefixes: []string{"pathhash/b/c", "anotherpathhash/b/c", "c/invalidpathhash"},
+	}
+
+	// Assert direct parent relationship
+	assert.True(t, delgB.IsParentOf(delgC))
+	assert.False(t, delgB.IsParentOf(delgB))
+	assert.False(t, delgA.IsParentOf(delgC))
+	assert.False(t, delgC.IsParentOf(delgB))
+	assert.False(t, delgC.IsParentOf(delgA))
+	assert.False(t, delgC.IsParentOf(delgC))
+
+	// Check that parents correctly restrict paths
+	restrictedDelgB, err := delgA.RestrictChild(delgB)
+	assert.NoError(t, err)
+	assert.Contains(t, restrictedDelgB.Paths, "path/b")
+	assert.Contains(t, restrictedDelgB.Paths, "anotherpath/b")
+	assert.NotContains(t, restrictedDelgB.Paths, "b/invalidpath")
+	assert.Contains(t, restrictedDelgB.PathHashPrefixes, "pathhash/b")
+	assert.Contains(t, restrictedDelgB.PathHashPrefixes, "anotherpathhash/b")
+	assert.NotContains(t, restrictedDelgB.PathHashPrefixes, "b/invalidpathhash")
+
+	_, err = delgB.RestrictChild(delgA)
+	assert.Error(t, err)
+	_, err = delgA.RestrictChild(delgC)
+	assert.Error(t, err)
+	_, err = delgC.RestrictChild(delgB)
+	assert.Error(t, err)
+	_, err = delgC.RestrictChild(delgA)
+	assert.Error(t, err)
+}
