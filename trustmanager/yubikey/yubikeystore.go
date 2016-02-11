@@ -617,8 +617,7 @@ func (s *YubiKeyStore) setLibLoader(loader pkcs11LibLoader) {
 	s.libLoader = loader
 }
 
-// TODO: yubi key store refactor
-func (s *YubiKeyStore) ListKeys() map[string]KeyInfo {
+func (s *YubiKeyStore) ListKeys() map[string]trustmanager.KeyInfo {
 	if len(s.keys) > 0 {
 		return buildKeyMap(s.keys)
 	}
@@ -896,10 +895,10 @@ func login(ctx IPKCS11Ctx, session pkcs11.SessionHandle, passRetriever passphras
 	return nil
 }
 
-func buildKeyMap(keys map[string]yubiSlot) map[string]string {
-	res := make(map[string]string)
+func buildKeyMap(keys map[string]yubiSlot) map[string]trustmanager.KeyInfo {
+	res := make(map[string]trustmanager.KeyInfo)
 	for k, v := range keys {
-		res[k] = v.role
+		res[k] = trustmanager.KeyInfo{Role: v.role, Gun: ""}
 	}
 	return res
 }

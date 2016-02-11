@@ -120,7 +120,6 @@ func (cs *CryptoService) RemoveKey(keyID string) (err error) {
 	return // returns whatever the final values were
 }
 
-
 // AddKey adds a private key to a specified role.
 // The GUN is inferred from the cryptoservice itself for non-root roles
 func (cs *CryptoService) AddKey(role string, key data.PrivateKey) (err error) {
