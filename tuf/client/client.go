@@ -200,11 +200,11 @@ func (c *Client) downloadRoot() error {
 
 func (c Client) verifyRoot(role string, s *data.Signed, minVersion int) error {
 	// this will confirm that the root has been signed by the old root role
-	// as c.keysDB contains the root keys we bootstrapped with.
+	// with the root keys we bootstrapped with.
 	// Still need to determine if there has been a root key update and
 	// confirm signature with new root key
 	logrus.Debug("verifying root with existing keys")
-	rootRole, err := c.local.GetRole(role)
+	rootRole, err := c.local.GetRoleWithKeys(role)
 	if err != nil {
 		logrus.Debug("no previous root role loaded")
 		return err
@@ -231,7 +231,7 @@ func (c Client) verifyRoot(role string, s *data.Signed, minVersion int) error {
 	// TODO(endophage): be more intelligent and only re-verify if we detect
 	//                  there has been a change in root keys
 	logrus.Debug("verifying root with updated keys")
-	rootRole, err = c.local.GetRole(role)
+	rootRole, err = c.local.GetRoleWithKeys(role)
 	if err != nil {
 		logrus.Debug("root role with new keys not loaded")
 		return err
@@ -302,7 +302,7 @@ func (c *Client) downloadTimestamp() error {
 
 // verifies that a timestamp is valid, and returned the SignedTimestamp object to add to the tuf repo
 func (c *Client) verifyTimestamp(s *data.Signed, minVersion int) (*data.SignedTimestamp, error) {
-	timestampRole, err := c.local.GetRole(data.CanonicalTimestampRole)
+	timestampRole, err := c.local.GetRoleWithKeys(data.CanonicalTimestampRole)
 	if err != nil {
 		logrus.Debug("no timestamp role loaded")
 		return nil, err
@@ -365,7 +365,7 @@ func (c *Client) downloadSnapshot() error {
 		s = old
 	}
 
-	snapshotRole, err := c.local.GetRole(role)
+	snapshotRole, err := c.local.GetRoleWithKeys(role)
 	if err != nil {
 		logrus.Debug("no snapshot role loaded")
 		return err
@@ -508,7 +508,7 @@ func (c Client) getTargetsFile(role string, keyIDs []string, snapshotMeta data.F
 		s = old
 	}
 
-	targetsRole, err := c.local.GetRole(role)
+	targetsRole, err := c.local.GetRoleWithKeys(role)
 	if err != nil {
 		logrus.Debugf("no %s role loaded", role)
 		return nil, err

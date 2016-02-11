@@ -194,7 +194,7 @@ func loadTargetsFromStore(gun, role string, repo *tuf.Repo, store storage.MetaSt
 }
 
 func generateSnapshot(gun string, repo *tuf.Repo, store storage.MetaStore) (*storage.MetaUpdate, error) {
-	role, err := repo.GetRole(data.CanonicalSnapshotRole)
+	role, err := repo.GetRoleWithKeys(data.CanonicalSnapshotRole)
 	if err != nil {
 		return nil, validation.ErrBadRoot{Msg: "root did not include snapshot role"}
 	}
@@ -265,7 +265,7 @@ func validateSnapshot(role string, oldSnap *data.SignedSnapshot, snapUpdate stor
 	}
 	// version specifically gets validated when writing to store to
 	// better handle race conditions there.
-	snapshotRole, err := repo.GetRole(role)
+	snapshotRole, err := repo.GetRoleWithKeys(role)
 	if err != nil {
 		return err
 	}
@@ -329,7 +329,7 @@ func validateTargets(role string, roles map[string]storage.MetaUpdate, repo *tuf
 	}
 	// version specifically gets validated when writing to store to
 	// better handle race conditions there.
-	targetsRole, err := repo.GetRole(role)
+	targetsRole, err := repo.GetRoleWithKeys(role)
 	if err != nil {
 		return nil, err
 	}
