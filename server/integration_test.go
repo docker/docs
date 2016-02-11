@@ -40,10 +40,15 @@ func TestValidationErrorFormat(t *testing.T) {
 	assert.NoError(t, err)
 	r, tg, sn, ts, err := testutils.Sign(repo)
 	assert.NoError(t, err)
-	rs, _, _, _, err := testutils.Serialize(r, tg, sn, ts)
+	rs, rt, _, _, err := testutils.Serialize(r, tg, sn, ts)
 	assert.NoError(t, err)
 
-	err = client.SetMultiMeta(map[string][]byte{data.CanonicalRootRole: rs})
+	// No snapshot is passed, and the server doesn't have the snapshot key,
+	// so ErrBadHierarchy
+	err = client.SetMultiMeta(map[string][]byte{
+		data.CanonicalRootRole:    rs,
+		data.CanonicalTargetsRole: rt,
+	})
 	assert.Error(t, err)
-	assert.IsType(t, validation.ErrBadRoot{}, err)
+	assert.IsType(t, validation.ErrBadHierarchy{}, err)
 }
