@@ -122,20 +122,12 @@ type BaseRole struct {
 
 // ListKeys retrieves the public keys valid for this role
 func (b BaseRole) ListKeys() KeyList {
-	keys := KeyList{}
-	for _, key := range b.Keys {
-		keys = append(keys, key)
-	}
-	return keys
+	return listKeys(b.Keys)
 }
 
 // ListKeyIDs retrieves the list of key IDs valid for this role
 func (b BaseRole) ListKeyIDs() []string {
-	keyIDs := []string{}
-	for id := range b.Keys {
-		keyIDs = append(keyIDs, id)
-	}
-	return keyIDs
+	return listKeyIDs(b.Keys)
 }
 
 // DelegationRole is an internal representation of a delegation role, with its public keys included
@@ -147,20 +139,83 @@ type DelegationRole struct {
 
 // ListKeys retrieves the public keys valid for this role
 func (d DelegationRole) ListKeys() KeyList {
+	return listKeys(d.Keys)
+}
+
+// ListKeyIDs retrieves the list of key IDs valid for this role
+func (d DelegationRole) ListKeyIDs() []string {
+	return listKeyIDs(d.Keys)
+}
+
+func listKeys(keyMap map[string]PublicKey) KeyList {
 	keys := KeyList{}
-	for _, key := range d.Keys {
+	for _, key := range keyMap {
 		keys = append(keys, key)
 	}
 	return keys
 }
 
-// ListKeyIDs retrieves the list of key IDs valid for this role
-func (d DelegationRole) ListKeyIDs() []string {
+func listKeyIDs(keyMap map[string]PublicKey) []string {
 	keyIDs := []string{}
-	for id := range d.Keys {
+	for id := range keyMap {
 		keyIDs = append(keyIDs, id)
 	}
 	return keyIDs
+}
+
+// RestrictChild restricts the paths and path hash prefixes for the passed in delegation role,
+// returning a copy of the role with validated paths as if it was a direct child
+func (d DelegationRole) RestrictChild(child DelegationRole) (DelegationRole, error) {
+	if !d.IsParentOf(child) {
+		return DelegationRole{}, fmt.Errorf("%s is not a parent of %s", d.Name, child.Name)
+	}
+	return DelegationRole{
+		BaseRole: BaseRole{
+			Keys:      child.Keys,
+			Name:      child.Name,
+			Threshold: child.Threshold,
+		},
+		Paths:            RestrictDelegationPathPrefixes(d.Paths, child.Paths),
+		PathHashPrefixes: RestrictDelegationPathPrefixes(d.PathHashPrefixes, child.PathHashPrefixes),
+	}, nil
+}
+
+// IsParentOf returns whether the passed in delegation role is the direct child of this role,
+// determined by delegation name.
+// Ex: targets/a is a direct parent of targets/a/b, but targets/a is not a direct parent of targets/a/b/c
+func (d DelegationRole) IsParentOf(child DelegationRole) bool {
+	// Check that the child has the prefix
+	if !strings.HasPrefix(child.Name, d.Name) {
+		return false
+	}
+	// Check that there are no parents in between by trimming the name with "/" attached
+	trimmedName := strings.TrimPrefix(child.Name, d.Name+"/")
+	// Check that the remaining path is equal to the base of the delegation path
+	return trimmedName == path.Base(child.Name)
+}
+
+// RestrictDelegationPathPrefixes returns the list of valid delegationPaths that are prefixed by parentPaths
+func RestrictDelegationPathPrefixes(parentPaths, delegationPaths []string) []string {
+	validPaths := []string{}
+	if len(delegationPaths) == 0 {
+		return validPaths
+	}
+
+	// Validate each individual delegation path
+	for _, delgPath := range delegationPaths {
+		isPrefixed := false
+		for _, parentPath := range parentPaths {
+			if strings.HasPrefix(delgPath, parentPath) {
+				isPrefixed = true
+				break
+			}
+		}
+		// If the delegation path did not match prefix against any parent path, it is not valid
+		if isPrefixed {
+			validPaths = append(validPaths, delgPath)
+		}
+	}
+	return validPaths
 }
 
 // NewRole creates a new Role object from the given parameters
