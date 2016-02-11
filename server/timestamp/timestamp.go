@@ -6,7 +6,6 @@ import (
 	"github.com/docker/go/canonical/json"
 	"github.com/docker/notary/tuf"
 	"github.com/docker/notary/tuf/data"
-	"github.com/docker/notary/tuf/keys"
 	"github.com/docker/notary/tuf/signed"
 
 	"github.com/Sirupsen/logrus"
@@ -54,46 +53,40 @@ func GetOrCreateTimestampKey(gun string, store storage.MetaStore, crypto signed.
 func GetOrCreateTimestamp(gun string, store storage.MetaStore, cryptoService signed.CryptoService) (
 	*time.Time, []byte, error) {
 
-	_, snapshot, err := snapshot.GetOrCreateSnapshot(gun, store, cryptoService)
+	lastModified, timestampJSON, err := store.GetCurrent(gun, data.CanonicalTimestampRole)
 	if err != nil {
+		logrus.Error("error retrieving timestamp: ", err.Error())
 		return nil, nil, err
 	}
-	lastModified, d, err := store.GetCurrent(gun, data.CanonicalTimestampRole)
+
+	prev := &data.SignedTimestamp{}
+	if err := json.Unmarshal(timestampJSON, prev); err != nil {
+		logrus.Error("Failed to unmarshal existing timestamp")
+		return nil, nil, err
+	}
+
+	_, snapshot, err := snapshot.GetOrCreateSnapshot(gun, store, cryptoService)
 	if err != nil {
-		if _, ok := err.(storage.ErrNotFound); !ok {
-			logrus.Error("error retrieving timestamp: ", err.Error())
-			return nil, nil, err
-		}
-		logrus.Debug("No timestamp found, will proceed to create first timestamp")
+		logrus.Debug("Previous timestamp, but no valid snapshot for GUN ", gun)
+		return nil, nil, err
 	}
-	var ts *data.SignedTimestamp
-	if d != nil {
-		ts = &data.SignedTimestamp{}
-		err := json.Unmarshal(d, ts)
-		if err != nil {
-			logrus.Error("Failed to unmarshal existing timestamp")
-			return nil, nil, err
-		}
-		if !timestampExpired(ts) && !snapshotExpired(ts, snapshot) {
-			return lastModified, d, nil
-		}
+
+	if !timestampExpired(prev) && !snapshotExpired(prev, snapshot) {
+		return lastModified, timestampJSON, nil
 	}
-	sgnd, version, err := CreateTimestamp(gun, ts, snapshot, store, cryptoService)
+
+	update, err := createTimestamp(gun, prev, snapshot, store, cryptoService)
 	if err != nil {
 		logrus.Error("Failed to create a new timestamp")
 		return nil, nil, err
 	}
-	out, err := json.Marshal(sgnd)
-	if err != nil {
-		logrus.Error("Failed to marshal new timestamp")
-		return nil, nil, err
-	}
-	err = store.UpdateCurrent(gun, storage.MetaUpdate{Role: "timestamp", Version: version, Data: out})
-	if err != nil {
-		return nil, nil, err
-	}
+
 	c := time.Now()
-	return &c, out, nil
+
+	if err = store.UpdateCurrent(gun, *update); err != nil {
+		return nil, nil, err
+	}
+	return &c, update.Data, nil
 }
 
 // timestampExpired compares the current time to the expiry time of the timestamp
@@ -112,17 +105,22 @@ func snapshotExpired(ts *data.SignedTimestamp, snapshot []byte) bool {
 // is assumed this is the immediately previous one, and the new one will have a
 // version number one higher than prev. The store is used to lookup the current
 // snapshot, this function does not save the newly generated timestamp.
-func CreateTimestamp(gun string, prev *data.SignedTimestamp, snapshot []byte, store storage.MetaStore, cryptoService signed.CryptoService) (*data.Signed, int, error) {
-	kdb := keys.NewDB()
-	repo := tuf.NewRepo(kdb, cryptoService)
+func createTimestamp(gun string, prev *data.SignedTimestamp, snapshot []byte, store storage.MetaStore,
+	cryptoService signed.CryptoService) (*storage.MetaUpdate, error) {
+
+	repo := tuf.NewRepo(cryptoService)
 
 	// load the current root to ensure we use the correct timestamp key.
-	root, err := store.GetCurrent(gun, data.CanonicalRootRole)
+	_, root, err := store.GetCurrent(gun, data.CanonicalRootRole)
+	if err != nil {
+		logrus.Debug("Previous timestamp, but no root for GUN ", gun)
+		return nil, err
+	}
 	r := &data.SignedRoot{}
 	err = json.Unmarshal(root, r)
 	if err != nil {
-		// couldn't parse root
-		return nil, 0, err
+		logrus.Debug("Could not unmarshal previous root for GUN ", gun)
+		return nil, err
 	}
 	repo.SetRoot(r)
 
@@ -130,25 +128,37 @@ func CreateTimestamp(gun string, prev *data.SignedTimestamp, snapshot []byte, st
 	sn := &data.SignedSnapshot{}
 	err = json.Unmarshal(snapshot, sn)
 	if err != nil {
-		// couldn't parse snapshot
-		return nil, 0, err
+		logrus.Debug("Could not unmarshal previous snapshot for GUN ", gun)
+		return nil, err
 	}
 	repo.SetSnapshot(sn)
 
-	if prev == nil {
-		// no previous timestamp: generate first timestamp
-		repo.InitTimestamp()
-	} else {
-		// set repo timestamp to previous timestamp to use as base for
-		// generating new one
-		repo.SetTimestamp(prev)
-	}
+	return NewTimestampUpdate(prev, repo)
+}
 
-	out, err := repo.SignTimestamp(
-		data.DefaultExpires(data.CanonicalTimestampRole),
-	)
-	if err != nil {
-		return nil, 0, err
+// NewTimestampUpdate produces a new timestamp and returns it as a metadata update, given the
+// previous timestamp and the TUF repo assuming that the root and current snapshot have already
+// been loaded.
+func NewTimestampUpdate(prev *data.SignedTimestamp, repo *tuf.Repo) (*storage.MetaUpdate, error) {
+	if prev != nil {
+		repo.SetTimestamp(prev) // SetTimestamp never errors
+	} else {
+		// this will only occur if no timestamp has ever been created for the repository
+		if err := repo.InitTimestamp(); err != nil {
+			return nil, err
+		}
 	}
-	return out, repo.Timestamp.Signed.Version, nil
+	sgnd, err := repo.SignTimestamp(data.DefaultExpires(data.CanonicalTimestampRole))
+	if err != nil {
+		return nil, err
+	}
+	sgndJSON, err := json.Marshal(sgnd)
+	if err != nil {
+		return nil, err
+	}
+	return &storage.MetaUpdate{
+		Role:    data.CanonicalTimestampRole,
+		Version: repo.Timestamp.Signed.Version,
+		Data:    sgndJSON,
+	}, nil
 }

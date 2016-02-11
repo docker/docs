@@ -2,9 +2,10 @@ package snapshot
 
 import (
 	"bytes"
-	"encoding/json"
 	"testing"
 	"time"
+
+	"github.com/docker/go/canonical/json"
 
 	"github.com/stretchr/testify/assert"
 
