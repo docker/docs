@@ -270,7 +270,7 @@ func TestValidateSnapshotGenerateWithPrev(t *testing.T) {
 	kdb, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
-	snapRole, err := repo.GetRole(data.CanonicalSnapshotRole)
+	snapRole, err := repo.GetRoleWithKeys(data.CanonicalSnapshotRole)
 	assert.NoError(t, err)
 
 	for _, k := range snapRole.Keys {
@@ -310,7 +310,7 @@ func TestValidateSnapshotGeneratePrevCorrupt(t *testing.T) {
 	kdb, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
-	snapRole, err := repo.GetRole(data.CanonicalSnapshotRole)
+	snapRole, err := repo.GetRoleWithKeys(data.CanonicalSnapshotRole)
 	assert.NoError(t, err)
 
 	for _, k := range snapRole.Keys {
@@ -340,7 +340,7 @@ func TestValidateSnapshotGenerateNoTargets(t *testing.T) {
 	kdb, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
-	snapRole, err := repo.GetRole(data.CanonicalSnapshotRole)
+	snapRole, err := repo.GetRoleWithKeys(data.CanonicalSnapshotRole)
 	assert.NoError(t, err)
 
 	for _, k := range snapRole.Keys {
@@ -364,7 +364,7 @@ func TestValidateSnapshotGenerate(t *testing.T) {
 	kdb, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
-	snapRole, err := repo.GetRole(data.CanonicalSnapshotRole)
+	snapRole, err := repo.GetRoleWithKeys(data.CanonicalSnapshotRole)
 	assert.NoError(t, err)
 
 	for _, k := range snapRole.Keys {

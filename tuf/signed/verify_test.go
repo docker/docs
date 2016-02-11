@@ -23,7 +23,7 @@ func TestRoleNoKeys(t *testing.T) {
 		nil,
 	)
 	assert.NoError(t, err)
-	roleWithKeys := &data.RoleWithKeys{Role: *r, Keys: map[string]data.PublicKey{k.ID(): k}}
+	roleWithKeys := &data.RoleWithKeys{Role: *r, Keys: data.Keys{k.ID(): k}}
 
 	meta := &data.SignedCommon{Type: "Root", Version: 1, Expires: data.DefaultExpires("root")}
 
@@ -47,7 +47,7 @@ func TestNotEnoughSigs(t *testing.T) {
 		nil,
 	)
 	assert.NoError(t, err)
-	roleWithKeys := &data.RoleWithKeys{Role: *r, Keys: map[string]data.PublicKey{k.ID(): k}}
+	roleWithKeys := &data.RoleWithKeys{Role: *r, Keys: data.Keys{k.ID(): k}}
 
 	meta := &data.SignedCommon{Type: "Root", Version: 1, Expires: data.DefaultExpires("root")}
 
@@ -73,7 +73,7 @@ func TestMoreThanEnoughSigs(t *testing.T) {
 		nil,
 	)
 	assert.NoError(t, err)
-	roleWithKeys := &data.RoleWithKeys{Role: *r, Keys: map[string]data.PublicKey{k1.ID(): k1, k2.ID(): k2}}
+	roleWithKeys := &data.RoleWithKeys{Role: *r, Keys: data.Keys{k1.ID(): k1, k2.ID(): k2}}
 
 	meta := &data.SignedCommon{Type: "Root", Version: 1, Expires: data.DefaultExpires("root")}
 
@@ -98,7 +98,7 @@ func TestDuplicateSigs(t *testing.T) {
 		nil,
 	)
 	assert.NoError(t, err)
-	roleWithKeys := &data.RoleWithKeys{Role: *r, Keys: map[string]data.PublicKey{k.ID(): k}}
+	roleWithKeys := &data.RoleWithKeys{Role: *r, Keys: data.Keys{k.ID(): k}}
 
 	meta := &data.SignedCommon{Type: "Root", Version: 1, Expires: data.DefaultExpires("root")}
 
@@ -125,7 +125,7 @@ func TestUnknownKeyBelowThreshold(t *testing.T) {
 		nil,
 	)
 	assert.NoError(t, err)
-	roleWithKeys := &data.RoleWithKeys{Role: *r, Keys: map[string]data.PublicKey{k.ID(): k, unknown.ID(): unknown}}
+	roleWithKeys := &data.RoleWithKeys{Role: *r, Keys: data.Keys{k.ID(): k, unknown.ID(): unknown}}
 
 	meta := &data.SignedCommon{Type: "Root", Version: 1, Expires: data.DefaultExpires("root")}
 
@@ -209,7 +209,7 @@ func Test(t *testing.T) {
 				nil,
 			)
 			assert.NoError(t, err)
-			run.roleData = &data.RoleWithKeys{Role: *r, Keys: map[string]data.PublicKey{k.ID(): k}}
+			run.roleData = &data.RoleWithKeys{Role: *r, Keys: data.Keys{k.ID(): k}}
 			meta := &data.SignedCommon{Type: run.typ, Version: run.ver, Expires: *run.exp}
 
 			b, err := json.MarshalCanonical(meta)
