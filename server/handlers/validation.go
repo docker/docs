@@ -11,7 +11,9 @@ import (
 
 	"github.com/Sirupsen/logrus"
 
+	"github.com/docker/notary/server/snapshot"
 	"github.com/docker/notary/server/storage"
+	"github.com/docker/notary/server/timestamp"
 	"github.com/docker/notary/tuf"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
@@ -124,7 +126,14 @@ func validateUpdate(cs signed.CryptoService, gun string, updates []storage.MetaU
 		}
 		updatesToApply = append(updatesToApply, *update)
 	}
-	return updatesToApply, nil
+
+	// generate a timestamp immediately
+	update, err := generateTimestamp(gun, repo, store)
+	if err != nil {
+		return nil, err
+	}
+
+	return append(updatesToApply, *update), nil
 }
 
 func loadAndValidateTargets(gun string, repo *tuf.Repo, roles map[string]storage.MetaUpdate, store storage.MetaStore) ([]storage.MetaUpdate, error) {
@@ -192,71 +201,79 @@ func loadTargetsFromStore(gun, role string, repo *tuf.Repo, store storage.MetaSt
 	return repo.SetTargets(role, t)
 }
 
+// generateSnapshot generates a new snapshot from the previous one in the store - this assumes all
+// the other roles except timestamp have already been set on the repo, and will set the generated
+// snapshot on the repo as well
 func generateSnapshot(gun string, repo *tuf.Repo, store storage.MetaStore) (*storage.MetaUpdate, error) {
-	role, err := repo.GetBaseRole(data.CanonicalSnapshotRole)
-	if err != nil {
-		return nil, validation.ErrBadRoot{Msg: "root did not include snapshot role"}
-	}
-
-	algo, keyBytes, err := store.GetKey(gun, data.CanonicalSnapshotRole)
-	if err != nil {
-		return nil, validation.ErrBadHierarchy{Msg: "could not retrieve snapshot key. client must provide snapshot"}
-	}
-	foundK := data.NewPublicKey(algo, keyBytes)
-
-	validKey := false
-	for _, id := range role.ListKeyIDs() {
-		if id == foundK.ID() {
-			validKey = true
-			break
+	var prev *data.SignedSnapshot
+	_, currentJSON, err := store.GetCurrent(gun, data.CanonicalSnapshotRole)
+	if err == nil {
+		prev = new(data.SignedSnapshot)
+		if err = json.Unmarshal(currentJSON, prev); err != nil {
+			logrus.Error("Failed to unmarshal existing snapshot for GUN ", gun)
+			return nil, err
 		}
 	}
-	if !validKey {
+
+	if _, ok := err.(storage.ErrNotFound); !ok && err != nil {
+		return nil, validation.ErrValidation{Msg: err.Error()}
+	}
+
+	metaUpdate, err := snapshot.NewSnapshotUpdate(prev, repo)
+	switch err.(type) {
+	case signed.ErrInsufficientSignatures, signed.ErrNoKeys:
+		// If we cannot sign the snapshot, then we don't have keys for the snapshot,
+		// and the client should have submitted a snapshot
 		return nil, validation.ErrBadHierarchy{
 			Missing: data.CanonicalSnapshotRole,
 			Msg:     "no snapshot was included in update and server does not hold current snapshot key for repository"}
-	}
+	case nil:
+		return metaUpdate, nil
 
-	_, currentJSON, err := store.GetCurrent(gun, data.CanonicalSnapshotRole)
-	if err != nil {
-		if _, ok := err.(storage.ErrNotFound); !ok {
-			return nil, validation.ErrValidation{Msg: err.Error()}
-		}
+	default:
+		return nil, validation.ErrValidation{Msg: err.Error()}
 	}
-	var sn *data.SignedSnapshot
-	if currentJSON != nil {
-		sn = new(data.SignedSnapshot)
-		err := json.Unmarshal(currentJSON, sn)
-		if err != nil {
-			return nil, validation.ErrValidation{Msg: err.Error()}
-		}
-		err = repo.SetSnapshot(sn)
-		if err != nil {
-			return nil, validation.ErrValidation{Msg: err.Error()}
-		}
-	} else {
-		// this will only occur if no snapshot has ever been created for the repository
-		err := repo.InitSnapshot()
-		if err != nil {
-			return nil, validation.ErrBadSnapshot{Msg: err.Error()}
-		}
-	}
-	sgnd, err := repo.SignSnapshot(data.DefaultExpires(data.CanonicalSnapshotRole))
-	if err != nil {
-		return nil, validation.ErrBadSnapshot{Msg: err.Error()}
-	}
-	sgndJSON, err := json.Marshal(sgnd)
-	if err != nil {
-		return nil, validation.ErrBadSnapshot{Msg: err.Error()}
-	}
-	return &storage.MetaUpdate{
-		Role:    data.CanonicalSnapshotRole,
-		Version: repo.Snapshot.Signed.Version,
-		Data:    sgndJSON,
-	}, nil
 }
 
+// generateTimestamp generates a new timestamp from the previous one in the store - this assumes all
+// the other roles have already been set on the repo, and will set the generated timestamp on the repo as well
+func generateTimestamp(gun string, repo *tuf.Repo, store storage.MetaStore) (*storage.MetaUpdate, error) {
+	var prev *data.SignedTimestamp
+	_, currentJSON, err := store.GetCurrent(gun, data.CanonicalTimestampRole)
+	if err == nil {
+		prev = new(data.SignedTimestamp)
+		if err = json.Unmarshal(currentJSON, prev); err != nil {
+			logrus.Error("Failed to unmarshal existing timestamp for GUN ", gun)
+			return nil, err
+		}
+	}
+
+	if _, ok := err.(storage.ErrNotFound); !ok && err != nil {
+		return nil, validation.ErrValidation{Msg: err.Error()}
+	}
+
+	metaUpdate, err := timestamp.NewTimestampUpdate(prev, repo)
+	if err != nil {
+		_, noSigs := err.(signed.ErrInsufficientSignatures)
+		_, noKeys := err.(signed.ErrNoKeys)
+		// If we cannot sign the timestamp, then we don't have keys for the timestamp,
+		// and the client screwed up their root
+		if noSigs || noKeys {
+			return nil, validation.ErrBadRoot{
+				Msg: fmt.Sprintf("none of the following timestamp keys exist on the server: %s",
+					strings.Join(repo.Root.Signed.Roles[data.CanonicalTimestampRole].KeyIDs, ", ")),
+			}
+		}
+
+		return nil, validation.ErrValidation{Msg: err.Error()}
+	}
+	return metaUpdate, nil
+}
+
+// validateSnapshot validates that the given snapshot update is valid.  It also sets the new snapshot
+// on the TUF repo, if it is valid
 func validateSnapshot(role string, oldSnap *data.SignedSnapshot, snapUpdate storage.MetaUpdate, roles map[string]storage.MetaUpdate, repo *tuf.Repo) error {
+
 	s := &data.Signed{}
 	err := json.Unmarshal(snapUpdate.Data, s)
 	if err != nil {
@@ -283,6 +300,7 @@ func validateSnapshot(role string, oldSnap *data.SignedSnapshot, snapUpdate stor
 	if err != nil {
 		return err
 	}
+	repo.SetSnapshot(snap)
 	return nil
 }
 
@@ -378,14 +396,7 @@ func validateRoot(gun string, oldRoot, newRoot []byte, store storage.MetaStore) 
 		return nil, err
 	}
 
-	// Don't update if a timestamp key doesn't exist.
-	algo, keyBytes, err := store.GetKey(gun, data.CanonicalTimestampRole)
-	if err != nil || algo == "" || keyBytes == nil {
-		return nil, fmt.Errorf("no timestamp key for %s", gun)
-	}
-	timestampKey := data.NewPublicKey(algo, keyBytes)
-
-	if err := checkRoot(parsedOldRoot, parsedNewRoot, timestampKey); err != nil {
+	if err := checkRoot(parsedOldRoot, parsedNewRoot, gun, store); err != nil {
 		// TODO(david): how strict do we want to be here about old signatures
 		//              for rotations? Should the user have to provide a flag
 		//              which gets transmitted to force a root update without
@@ -402,7 +413,7 @@ func validateRoot(gun string, oldRoot, newRoot []byte, store storage.MetaStore) 
 // checkRoot errors if an invalid rotation has taken place, if the
 // threshold number of signatures is invalid, if there are an invalid
 // number of roles and keys, or if the timestamp keys are invalid
-func checkRoot(oldRoot, newRoot *data.SignedRoot, timestampKey data.PublicKey) error {
+func checkRoot(oldRoot, newRoot *data.SignedRoot, gun string, store storage.MetaStore) error {
 	rootRole := data.CanonicalRootRole
 	targetsRole := data.CanonicalTargetsRole
 	snapshotRole := data.CanonicalSnapshotRole
@@ -476,8 +487,6 @@ func checkRoot(oldRoot, newRoot *data.SignedRoot, timestampKey data.PublicKey) e
 		return err
 	}
 
-	var timestampKeyIDs []string
-
 	// at a minimum, check the 4 required roles are present
 	for _, r := range []string{rootRole, targetsRole, snapshotRole, timestampRole} {
 		role, ok := root.Signed.Roles[r]
@@ -494,20 +503,7 @@ func checkRoot(oldRoot, newRoot *data.SignedRoot, timestampKey data.PublicKey) e
 		if len(role.KeyIDs) < role.Threshold {
 			return fmt.Errorf("%s role has insufficient number of keys", r)
 		}
-
-		if r == timestampRole {
-			timestampKeyIDs = role.KeyIDs
-		}
 	}
 
-	// ensure that at least one of the timestamp keys specified in the role
-	// actually exists
-
-	for _, keyID := range timestampKeyIDs {
-		if timestampKey.ID() == keyID {
-			return nil
-		}
-	}
-	return fmt.Errorf("none of the following timestamp keys exist: %s",
-		strings.Join(timestampKeyIDs, ", "))
+	return nil
 }

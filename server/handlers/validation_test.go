@@ -1,12 +1,13 @@
 package handlers
 
 import (
-	"crypto/rand"
 	"encoding/json"
-	"fmt"
+	"path"
 	"reflect"
 	"testing"
 
+	"github.com/docker/notary/cryptoservice"
+	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf"
@@ -17,20 +18,16 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func copyTimestampKey(t *testing.T, fromRepo *tuf.Repo,
-	toStore storage.MetaStore, gun string) {
-
-	role, err := fromRepo.GetBaseRole(data.CanonicalTimestampRole)
-	assert.NoError(t, err)
-	assert.NotNil(t, role, "No timestamp role in the root file")
-	assert.Len(t, role.ListKeyIDs(), 1, fmt.Sprintf(
-		"Expected 1 timestamp key in timestamp role, got %d", len(role.ListKeyIDs())))
-
-	pubTimestampKey := role.ListKeys()[0]
-
-	err = toStore.SetKey(gun, data.CanonicalTimestampRole, pubTimestampKey.Algorithm(),
-		pubTimestampKey.Public())
-	assert.NoError(t, err)
+func copyKeys(t *testing.T, from signed.CryptoService, roles ...string) signed.CryptoService {
+	memKeyStore := trustmanager.NewKeyMemoryStore(passphrase.ConstantRetriever("pass"))
+	for _, role := range roles {
+		for _, keyID := range from.ListKeys(role) {
+			key, _, err := from.GetPrivateKey(keyID)
+			assert.NoError(t, err)
+			memKeyStore.AddKey(path.Base(keyID), data.CanonicalTimestampRole, key)
+		}
+	}
+	return cryptoservice.NewCryptoService("", memKeyStore)
 }
 
 // Returns a mapping of role name to `MetaUpdate` objects
@@ -77,8 +74,8 @@ func TestValidateEmptyNew(t *testing.T) {
 
 	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
 
-	copyTimestampKey(t, repo, store, "testGUN")
-	_, err = validateUpdate(cs, "testGUN", updates, store)
+	serverCrypto := copyKeys(t, cs, data.CanonicalTimestampRole)
+	_, err = validateUpdate(serverCrypto, "testGUN", updates, store)
 	assert.NoError(t, err)
 }
 
@@ -95,8 +92,8 @@ func TestValidateNoNewRoot(t *testing.T) {
 	store.UpdateCurrent("testGUN", root)
 	updates := []storage.MetaUpdate{targets, snapshot, timestamp}
 
-	copyTimestampKey(t, repo, store, "testGUN")
-	_, err = validateUpdate(cs, "testGUN", updates, store)
+	serverCrypto := copyKeys(t, cs, data.CanonicalTimestampRole)
+	_, err = validateUpdate(serverCrypto, "testGUN", updates, store)
 	assert.NoError(t, err)
 }
 
@@ -113,8 +110,8 @@ func TestValidateNoNewTargets(t *testing.T) {
 	store.UpdateCurrent("testGUN", targets)
 	updates := []storage.MetaUpdate{root, snapshot, timestamp}
 
-	copyTimestampKey(t, repo, store, "testGUN")
-	_, err = validateUpdate(cs, "testGUN", updates, store)
+	serverCrypto := copyKeys(t, cs, data.CanonicalTimestampRole)
+	_, err = validateUpdate(serverCrypto, "testGUN", updates, store)
 	assert.NoError(t, err)
 }
 
@@ -133,8 +130,8 @@ func TestValidateOnlySnapshot(t *testing.T) {
 
 	updates := []storage.MetaUpdate{snapshot}
 
-	copyTimestampKey(t, repo, store, "testGUN")
-	_, err = validateUpdate(cs, "testGUN", updates, store)
+	serverCrypto := copyKeys(t, cs, data.CanonicalTimestampRole)
+	_, err = validateUpdate(serverCrypto, "testGUN", updates, store)
 	assert.NoError(t, err)
 }
 
@@ -151,8 +148,8 @@ func TestValidateOldRoot(t *testing.T) {
 	store.UpdateCurrent("testGUN", root)
 	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
 
-	copyTimestampKey(t, repo, store, "testGUN")
-	_, err = validateUpdate(cs, "testGUN", updates, store)
+	serverCrypto := copyKeys(t, cs, data.CanonicalTimestampRole)
+	_, err = validateUpdate(serverCrypto, "testGUN", updates, store)
 	assert.NoError(t, err)
 }
 
@@ -197,8 +194,8 @@ func TestValidateRootRotation(t *testing.T) {
 
 	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
 
-	copyTimestampKey(t, repo, store, "testGUN")
-	_, err = validateUpdate(crypto, "testGUN", updates, store)
+	serverCrypto := copyKeys(t, crypto, data.CanonicalTimestampRole)
+	_, err = validateUpdate(serverCrypto, "testGUN", updates, store)
 	assert.NoError(t, err)
 }
 
@@ -214,13 +211,13 @@ func TestValidateNoRoot(t *testing.T) {
 
 	updates := []storage.MetaUpdate{targets, snapshot, timestamp}
 
-	copyTimestampKey(t, repo, store, "testGUN")
-	_, err = validateUpdate(cs, "testGUN", updates, store)
+	serverCrypto := copyKeys(t, cs, data.CanonicalTimestampRole)
+	_, err = validateUpdate(serverCrypto, "testGUN", updates, store)
 	assert.Error(t, err)
 	assert.IsType(t, validation.ErrValidation{}, err)
 }
 
-func TestValidateSnapshotMissing(t *testing.T) {
+func TestValidateSnapshotMissingNoSnapshotKey(t *testing.T) {
 	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
@@ -232,8 +229,8 @@ func TestValidateSnapshotMissing(t *testing.T) {
 
 	updates := []storage.MetaUpdate{root, targets}
 
-	copyTimestampKey(t, repo, store, "testGUN")
-	_, err = validateUpdate(cs, "testGUN", updates, store)
+	serverCrypto := copyKeys(t, cs, data.CanonicalTimestampRole)
+	_, err = validateUpdate(serverCrypto, "testGUN", updates, store)
 	assert.Error(t, err)
 	assert.IsType(t, validation.ErrBadHierarchy{}, err)
 }
@@ -257,8 +254,8 @@ func TestValidateSnapshotGenerateNoPrev(t *testing.T) {
 
 	updates := []storage.MetaUpdate{root, targets}
 
-	copyTimestampKey(t, repo, store, "testGUN")
-	_, err = validateUpdate(cs, "testGUN", updates, store)
+	serverCrypto := copyKeys(t, cs, data.CanonicalTimestampRole, data.CanonicalSnapshotRole)
+	_, err = validateUpdate(serverCrypto, "testGUN", updates, store)
 	assert.NoError(t, err)
 }
 
@@ -288,8 +285,8 @@ func TestValidateSnapshotGenerateWithPrev(t *testing.T) {
 	prev, err := data.SnapshotFromSigned(sn)
 	assert.NoError(t, err)
 
-	copyTimestampKey(t, repo, store, "testGUN")
-	updates, err = validateUpdate(cs, "testGUN", updates, store)
+	serverCrypto := copyKeys(t, cs, data.CanonicalTimestampRole, data.CanonicalSnapshotRole)
+	updates, err = validateUpdate(serverCrypto, "testGUN", updates, store)
 	assert.NoError(t, err)
 
 	for _, u := range updates {
@@ -327,8 +324,8 @@ func TestValidateSnapshotGeneratePrevCorrupt(t *testing.T) {
 	// the next version
 	store.UpdateCurrent("testGUN", snapshot)
 
-	copyTimestampKey(t, repo, store, "testGUN")
-	updates, err = validateUpdate(cs, "testGUN", updates, store)
+	serverCrypto := copyKeys(t, cs, data.CanonicalTimestampRole, data.CanonicalSnapshotRole)
+	updates, err = validateUpdate(serverCrypto, "testGUN", updates, store)
 	assert.Error(t, err)
 }
 
@@ -351,8 +348,8 @@ func TestValidateSnapshotGenerateNoTargets(t *testing.T) {
 
 	updates := []storage.MetaUpdate{root}
 
-	copyTimestampKey(t, repo, store, "testGUN")
-	updates, err = validateUpdate(cs, "testGUN", updates, store)
+	serverCrypto := copyKeys(t, cs, data.CanonicalTimestampRole, data.CanonicalSnapshotRole)
+	updates, err = validateUpdate(serverCrypto, "testGUN", updates, store)
 	assert.Error(t, err)
 }
 
@@ -377,8 +374,8 @@ func TestValidateSnapshotGenerate(t *testing.T) {
 
 	store.UpdateCurrent("testGUN", root)
 
-	copyTimestampKey(t, repo, store, "testGUN")
-	updates, err = validateUpdate(cs, "testGUN", updates, store)
+	serverCrypto := copyKeys(t, cs, data.CanonicalTimestampRole, data.CanonicalSnapshotRole)
+	updates, err = validateUpdate(serverCrypto, "testGUN", updates, store)
 	assert.NoError(t, err)
 }
 
@@ -386,7 +383,7 @@ func TestValidateSnapshotGenerate(t *testing.T) {
 // happen if pushing an existing repository from one server to another that
 // does not have the repo.
 func TestValidateRootNoTimestampKey(t *testing.T) {
-	oldRepo, cs, err := testutils.EmptyRepo("docker.com/notary")
+	oldRepo, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	r, tg, sn, ts, err := testutils.Sign(oldRepo)
@@ -397,20 +394,15 @@ func TestValidateRootNoTimestampKey(t *testing.T) {
 	store := storage.NewMemStorage()
 	updates := []storage.MetaUpdate{root, targets, snapshot}
 
-	// sanity check - no timestamp keys for the GUN
-	_, _, err = store.GetKey("testGUN", data.CanonicalTimestampRole)
-	assert.Error(t, err)
-	assert.IsType(t, &storage.ErrNoKey{}, err)
-
 	// do not copy the targets key to the storage, and try to update the root
-	_, err = validateUpdate(cs, "testGUN", updates, store)
+	serverCrypto := signed.NewEd25519()
+	_, err = validateUpdate(serverCrypto, "testGUN", updates, store)
 	assert.Error(t, err)
 	assert.IsType(t, validation.ErrBadRoot{}, err)
 
 	// there should still be no timestamp keys - one should not have been
 	// created
-	_, _, err = store.GetKey("testGUN", data.CanonicalTimestampRole)
-	assert.Error(t, err)
+	assert.Empty(t, serverCrypto.ListAllKeys())
 }
 
 // If the timestamp key in the store does not match the timestamp key in
@@ -418,7 +410,7 @@ func TestValidateRootNoTimestampKey(t *testing.T) {
 // repository from one server to another that had already initialized the same
 // repo.
 func TestValidateRootInvalidTimestampKey(t *testing.T) {
-	oldRepo, cs, err := testutils.EmptyRepo("docker.com/notary")
+	oldRepo, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	r, tg, sn, ts, err := testutils.Sign(oldRepo)
@@ -429,12 +421,11 @@ func TestValidateRootInvalidTimestampKey(t *testing.T) {
 	store := storage.NewMemStorage()
 	updates := []storage.MetaUpdate{root, targets, snapshot}
 
-	key, err := trustmanager.GenerateECDSAKey(rand.Reader)
-	assert.NoError(t, err)
-	err = store.SetKey("testGUN", data.CanonicalRootRole, key.Algorithm(), key.Public())
+	serverCrypto := signed.NewEd25519()
+	_, err = serverCrypto.Create(data.CanonicalTimestampRole, data.ED25519Key)
 	assert.NoError(t, err)
 
-	_, err = validateUpdate(cs, "testGUN", updates, store)
+	_, err = validateUpdate(serverCrypto, "testGUN", updates, store)
 	assert.Error(t, err)
 	assert.IsType(t, validation.ErrBadRoot{}, err)
 }
@@ -455,8 +446,8 @@ func TestValidateRootInvalidTimestampThreshold(t *testing.T) {
 	store := storage.NewMemStorage()
 	updates := []storage.MetaUpdate{root, targets, snapshot}
 
-	copyTimestampKey(t, oldRepo, store, "testGUN")
-	_, err = validateUpdate(cs, "testGUN", updates, store)
+	serverCrypto := copyKeys(t, cs, data.CanonicalTimestampRole)
+	_, err = validateUpdate(serverCrypto, "testGUN", updates, store)
 	assert.Error(t, err)
 	assert.Contains(t, err.Error(), "timestamp role has invalid threshold")
 }
@@ -478,8 +469,8 @@ func TestValidateRootInvalidZeroThreshold(t *testing.T) {
 		store := storage.NewMemStorage()
 		updates := []storage.MetaUpdate{root, targets, snapshot}
 
-		copyTimestampKey(t, oldRepo, store, "testGUN")
-		_, err = validateUpdate(cs, "testGUN", updates, store)
+		serverCrypto := copyKeys(t, cs, data.CanonicalTimestampRole)
+		_, err = validateUpdate(serverCrypto, "testGUN", updates, store)
 		assert.Error(t, err)
 		assert.Contains(t, err.Error(), "invalid threshold")
 	}
@@ -502,8 +493,8 @@ func TestValidateRootRoleMissing(t *testing.T) {
 
 	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
 
-	copyTimestampKey(t, repo, store, "testGUN")
-	_, err = validateUpdate(cs, "testGUN", updates, store)
+	serverCrypto := copyKeys(t, cs, data.CanonicalTimestampRole)
+	_, err = validateUpdate(serverCrypto, "testGUN", updates, store)
 	assert.Error(t, err)
 	assert.IsType(t, validation.ErrBadRoot{}, err)
 }
@@ -522,8 +513,8 @@ func TestValidateTargetsRoleMissing(t *testing.T) {
 
 	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
 
-	copyTimestampKey(t, repo, store, "testGUN")
-	_, err = validateUpdate(cs, "testGUN", updates, store)
+	serverCrypto := copyKeys(t, cs, data.CanonicalTimestampRole)
+	_, err = validateUpdate(serverCrypto, "testGUN", updates, store)
 	assert.Error(t, err)
 	assert.IsType(t, validation.ErrBadRoot{}, err)
 }
@@ -542,8 +533,8 @@ func TestValidateSnapshotRoleMissing(t *testing.T) {
 
 	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
 
-	copyTimestampKey(t, repo, store, "testGUN")
-	_, err = validateUpdate(cs, "testGUN", updates, store)
+	serverCrypto := copyKeys(t, cs, data.CanonicalTimestampRole)
+	_, err = validateUpdate(serverCrypto, "testGUN", updates, store)
 	assert.Error(t, err)
 	assert.IsType(t, validation.ErrBadRoot{}, err)
 }
@@ -568,8 +559,8 @@ func TestValidateRootSigMissing(t *testing.T) {
 
 	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
 
-	copyTimestampKey(t, repo, store, "testGUN")
-	_, err = validateUpdate(cs, "testGUN", updates, store)
+	serverCrypto := copyKeys(t, cs, data.CanonicalTimestampRole)
+	_, err = validateUpdate(serverCrypto, "testGUN", updates, store)
 	assert.Error(t, err)
 	assert.IsType(t, validation.ErrBadRoot{}, err)
 }
@@ -589,8 +580,8 @@ func TestValidateTargetsSigMissing(t *testing.T) {
 
 	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
 
-	copyTimestampKey(t, repo, store, "testGUN")
-	_, err = validateUpdate(cs, "testGUN", updates, store)
+	serverCrypto := copyKeys(t, cs, data.CanonicalTimestampRole)
+	_, err = validateUpdate(serverCrypto, "testGUN", updates, store)
 	assert.Error(t, err)
 	assert.IsType(t, validation.ErrBadTargets{}, err)
 }
@@ -610,8 +601,8 @@ func TestValidateSnapshotSigMissing(t *testing.T) {
 
 	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
 
-	copyTimestampKey(t, repo, store, "testGUN")
-	_, err = validateUpdate(cs, "testGUN", updates, store)
+	serverCrypto := copyKeys(t, cs, data.CanonicalTimestampRole)
+	_, err = validateUpdate(serverCrypto, "testGUN", updates, store)
 	assert.Error(t, err)
 	assert.IsType(t, validation.ErrBadSnapshot{}, err)
 }
@@ -634,8 +625,8 @@ func TestValidateRootCorrupt(t *testing.T) {
 
 	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
 
-	copyTimestampKey(t, repo, store, "testGUN")
-	_, err = validateUpdate(cs, "testGUN", updates, store)
+	serverCrypto := copyKeys(t, cs, data.CanonicalTimestampRole)
+	_, err = validateUpdate(serverCrypto, "testGUN", updates, store)
 	assert.Error(t, err)
 	assert.IsType(t, validation.ErrBadRoot{}, err)
 }
@@ -655,8 +646,8 @@ func TestValidateTargetsCorrupt(t *testing.T) {
 
 	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
 
-	copyTimestampKey(t, repo, store, "testGUN")
-	_, err = validateUpdate(cs, "testGUN", updates, store)
+	serverCrypto := copyKeys(t, cs, data.CanonicalTimestampRole)
+	_, err = validateUpdate(serverCrypto, "testGUN", updates, store)
 	assert.Error(t, err)
 	assert.IsType(t, validation.ErrBadTargets{}, err)
 }
@@ -676,8 +667,8 @@ func TestValidateSnapshotCorrupt(t *testing.T) {
 
 	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
 
-	copyTimestampKey(t, repo, store, "testGUN")
-	_, err = validateUpdate(cs, "testGUN", updates, store)
+	serverCrypto := copyKeys(t, cs, data.CanonicalTimestampRole)
+	_, err = validateUpdate(serverCrypto, "testGUN", updates, store)
 	assert.Error(t, err)
 	assert.IsType(t, validation.ErrBadSnapshot{}, err)
 }
@@ -704,8 +695,8 @@ func TestValidateRootModifiedSize(t *testing.T) {
 
 	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
 
-	copyTimestampKey(t, repo, store, "testGUN")
-	_, err = validateUpdate(cs, "testGUN", updates, store)
+	serverCrypto := copyKeys(t, cs, data.CanonicalTimestampRole)
+	_, err = validateUpdate(serverCrypto, "testGUN", updates, store)
 	assert.Error(t, err)
 	assert.IsType(t, validation.ErrBadRoot{}, err)
 }
@@ -726,8 +717,8 @@ func TestValidateTargetsModifiedSize(t *testing.T) {
 
 	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
 
-	copyTimestampKey(t, repo, store, "testGUN")
-	_, err = validateUpdate(cs, "testGUN", updates, store)
+	serverCrypto := copyKeys(t, cs, data.CanonicalTimestampRole)
+	_, err = validateUpdate(serverCrypto, "testGUN", updates, store)
 	assert.Error(t, err)
 	assert.IsType(t, validation.ErrBadSnapshot{}, err)
 }
@@ -755,8 +746,8 @@ func TestValidateRootModifiedHash(t *testing.T) {
 
 	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
 
-	copyTimestampKey(t, repo, store, "testGUN")
-	_, err = validateUpdate(cs, "testGUN", updates, store)
+	serverCrypto := copyKeys(t, cs, data.CanonicalTimestampRole)
+	_, err = validateUpdate(serverCrypto, "testGUN", updates, store)
 	assert.Error(t, err)
 	assert.IsType(t, validation.ErrBadSnapshot{}, err)
 }
@@ -781,8 +772,8 @@ func TestValidateTargetsModifiedHash(t *testing.T) {
 
 	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
 
-	copyTimestampKey(t, repo, store, "testGUN")
-	_, err = validateUpdate(cs, "testGUN", updates, store)
+	serverCrypto := copyKeys(t, cs, data.CanonicalTimestampRole)
+	_, err = validateUpdate(serverCrypto, "testGUN", updates, store)
 	assert.Error(t, err)
 	assert.IsType(t, validation.ErrBadSnapshot{}, err)
 }
@@ -790,17 +781,22 @@ func TestValidateTargetsModifiedHash(t *testing.T) {
 // ### End snapshot hash mismatch negative tests ###
 
 // ### generateSnapshot tests ###
-func TestGenerateSnapshotNoRole(t *testing.T) {
+func TestGenerateSnapshotRootNotLoaded(t *testing.T) {
 	repo := tuf.NewRepo(nil)
-	_, err := generateSnapshot("gun", repo, nil)
+	_, err := generateSnapshot("gun", repo, storage.NewMemStorage())
 	assert.Error(t, err)
-	assert.IsType(t, validation.ErrBadRoot{}, err)
+	assert.IsType(t, validation.ErrValidation{}, err)
 }
 
 func TestGenerateSnapshotNoKey(t *testing.T) {
-	repo, _, err := testutils.EmptyRepo("docker.com/notary")
+	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
+
+	// delete snapshot key in the cryptoservice
+	for _, keyID := range cs.ListKeys(data.CanonicalSnapshotRole) {
+		assert.NoError(t, cs.RemoveKey(keyID))
+	}
 
 	_, err = generateSnapshot("gun", repo, store)
 	assert.Error(t, err)
