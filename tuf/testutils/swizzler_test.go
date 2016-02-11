@@ -406,12 +406,14 @@ func TestSwizzlerChangeRootKey(t *testing.T) {
 
 			require.NotEqual(t, len(origRoot.Signed.Keys), len(newRoot.Signed.Keys))
 
+			var rootRole data.Role
 			for r, origRole := range origRoot.Signed.Roles {
 				newRole := newRoot.Signed.Roles[r]
 				require.Len(t, origRole.KeyIDs, 1)
 				require.Len(t, newRole.KeyIDs, 1)
 				if r == data.CanonicalRootRole {
 					require.NotEqual(t, origRole.KeyIDs[0], newRole.KeyIDs[0])
+					rootRole = data.Role{RootRole: *newRole, Name: data.CanonicalRootRole}
 				} else {
 					require.Equal(t, origRole.KeyIDs[0], newRole.KeyIDs[0])
 				}
@@ -420,7 +422,9 @@ func TestSwizzlerChangeRootKey(t *testing.T) {
 			require.NoError(t, tufRepo.SetRoot(newRoot))
 			signedThing, err := newRoot.ToSigned()
 			require.NoError(t, err)
-			require.NoError(t, signed.Verify(signedThing, data.CanonicalRootRole, 1, kdb))
+			newKey := newRoot.Signed.Keys[rootRole.KeyIDs[0]]
+			require.NoError(t, signed.Verify(signedThing,
+				&data.RoleWithKeys{Role: rootRole, Keys: map[string]data.PublicKey{newKey.ID(): newKey}}, 1))
 		default:
 			require.True(t, bytes.Equal(origMeta, newMeta), "bytes have changed for role %s", role)
 		}
