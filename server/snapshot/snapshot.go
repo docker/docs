@@ -1,8 +1,9 @@
 package snapshot
 
 import (
-	"encoding/json"
 	"time"
+
+	"github.com/docker/go/canonical/json"
 
 	"github.com/Sirupsen/logrus"
 
