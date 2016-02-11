@@ -390,6 +390,52 @@ func TestAddGetKeyMemStore(t *testing.T) {
 	assert.Equal(t, retrievedKey.Private(), privKey.Private())
 }
 
+func TestAddGetKeyInfoMemStore(t *testing.T) {
+	gun := "docker.com/notary"
+
+	// Create our store
+	store := NewKeyMemoryStore(passphraseRetriever)
+
+	rootKey, err := GenerateECDSAKey(rand.Reader)
+	assert.NoError(t, err, "could not generate private key")
+
+	// Call the AddKey function
+	err = store.AddKey(rootKey.ID(), data.CanonicalRootRole, rootKey)
+	assert.NoError(t, err, "failed to add key to store")
+
+	// Get and validate key info
+	rootInfo, err := store.GetKeyInfo(rootKey.ID())
+	assert.NoError(t, err)
+	assert.Equal(t, data.CanonicalRootRole, rootInfo.Role)
+	assert.Equal(t, "", rootInfo.Gun)
+
+	targetsKey, err := GenerateECDSAKey(rand.Reader)
+	assert.NoError(t, err, "could not generate private key")
+
+	// Call the AddKey function
+	err = store.AddKey(filepath.Join(gun, targetsKey.ID()), data.CanonicalTargetsRole, targetsKey)
+	assert.NoError(t, err, "failed to add key to store")
+
+	// Get and validate key info
+	targetsInfo, err := store.GetKeyInfo(targetsKey.ID())
+	assert.NoError(t, err)
+	assert.Equal(t, data.CanonicalTargetsRole, targetsInfo.Role)
+	assert.Equal(t, gun, targetsInfo.Gun)
+
+	delgKey, err := GenerateECDSAKey(rand.Reader)
+	assert.NoError(t, err, "could not generate private key")
+
+	// Call the AddKey function
+	err = store.AddKey(filepath.Join(gun, delgKey.ID()), "targets/delegation", delgKey)
+	assert.NoError(t, err, "failed to add key to store")
+
+	// Get and validate key info
+	delgInfo, err := store.GetKeyInfo(delgKey.ID())
+	assert.NoError(t, err)
+	assert.Equal(t, "targets/delegation", delgInfo.Role)
+	assert.Equal(t, gun, delgInfo.Gun)
+}
+
 func TestGetDecryptedWithTamperedCipherText(t *testing.T) {
 	testExt := "key"
 	testAlias := "root"
