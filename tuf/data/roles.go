@@ -120,26 +120,6 @@ type BaseRole struct {
 	Threshold int                  `json:"threshold"`
 }
 
-// IsBaseRole returns true for BaseRole
-func (b BaseRole) IsBaseRole() bool {
-	return true
-}
-
-// IsDelegationRole returns false for BaseRole
-func (b BaseRole) IsDelegationRole() bool {
-	return false
-}
-
-// GetName retrieves the name of this role
-func (b BaseRole) GetName() string {
-	return b.Name
-}
-
-// GetThreshold retrieves the threshold of this role
-func (b BaseRole) GetThreshold() int {
-	return b.Threshold
-}
-
 // ListKeys retrieves the public keys valid for this role
 func (b BaseRole) ListKeys() KeyList {
 	keys := KeyList{}
@@ -158,41 +138,11 @@ func (b BaseRole) ListKeyIDs() []string {
 	return keyIDs
 }
 
-// ListPaths returns an error for non-delegations
-func (b BaseRole) ListPaths() ([]string, error) {
-	return nil, fmt.Errorf("%s is not a delegation role", b.Name)
-}
-
-// ListPathHashPrefixes returns an error for non-delegations
-func (b BaseRole) ListPathHashPrefixes() ([]string, error) {
-	return nil, fmt.Errorf("%s is not a delegation role", b.Name)
-}
-
 // DelegationRole is an internal representation of a delegation role, with its public keys included
 type DelegationRole struct {
 	BaseRole
 	Paths            []string `json:"paths,omitempty"`
 	PathHashPrefixes []string `json:"path_hash_prefixes,omitempty"`
-}
-
-// IsBaseRole returns false for DelegationRole
-func (d DelegationRole) IsBaseRole() bool {
-	return false
-}
-
-// IsDelegationRole returns true for DelegationRole
-func (d DelegationRole) IsDelegationRole() bool {
-	return true
-}
-
-// GetName retrieves the name of this role
-func (d DelegationRole) GetName() string {
-	return d.Name
-}
-
-// GetThreshold retrieves the threshold of this role
-func (d DelegationRole) GetThreshold() int {
-	return d.Threshold
 }
 
 // ListKeys retrieves the public keys valid for this role
@@ -211,16 +161,6 @@ func (d DelegationRole) ListKeyIDs() []string {
 		keyIDs = append(keyIDs, id)
 	}
 	return keyIDs
-}
-
-// ListPaths lists the paths of this role
-func (d DelegationRole) ListPaths() ([]string, error) {
-	return d.Paths, nil
-}
-
-// ListPathHashPrefixes lists the paths of this role
-func (d DelegationRole) ListPathHashPrefixes() ([]string, error) {
-	return d.PathHashPrefixes, nil
 }
 
 // NewRole creates a new Role object from the given parameters

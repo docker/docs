@@ -964,7 +964,7 @@ func TestGetBaseRoles(t *testing.T) {
 		baseRole, err := repo.GetBaseRole(role)
 		assert.NoError(t, err)
 
-		assert.Equal(t, role, baseRole.GetName())
+		assert.Equal(t, role, baseRole.Name)
 		keyIDs := repo.cryptoService.ListKeys(role)
 		for _, keyID := range keyIDs {
 			_, ok := baseRole.Keys[keyID]
@@ -972,13 +972,7 @@ func TestGetBaseRoles(t *testing.T) {
 			assert.Contains(t, baseRole.ListKeyIDs(), keyID)
 		}
 		// initRepo should set all key thresholds to 1
-		assert.Equal(t, 1, baseRole.GetThreshold())
-		assert.False(t, baseRole.IsDelegationRole())
-		assert.True(t, baseRole.IsBaseRole())
-		_, err = baseRole.ListPathHashPrefixes()
-		assert.Error(t, err)
-		_, err = baseRole.ListPaths()
-		assert.Error(t, err)
+		assert.Equal(t, 1, baseRole.Threshold)
 	}
 }
 
@@ -1010,17 +1004,11 @@ func TestGetDelegationValidRoles(t *testing.T) {
 
 	delgRole, err := repo.GetDelegationRole("targets/test")
 	assert.NoError(t, err)
-	assert.True(t, delgRole.IsDelegationRole())
-	assert.False(t, delgRole.IsBaseRole())
-	assert.Equal(t, "targets/test", delgRole.GetName())
-	assert.Equal(t, 1, delgRole.GetThreshold())
+	assert.Equal(t, "targets/test", delgRole.Name)
+	assert.Equal(t, 1, delgRole.Threshold)
 	assert.Equal(t, []string{testKey1.ID()}, delgRole.ListKeyIDs())
-	delgPaths, err := delgRole.ListPaths()
-	assert.NoError(t, err)
-	delgPathPrefixes, err := delgRole.ListPathHashPrefixes()
-	assert.NoError(t, err)
-	assert.Empty(t, delgPathPrefixes)
-	assert.Equal(t, []string{"path", "anotherpath"}, delgPaths)
+	assert.Empty(t, delgRole.PathHashPrefixes)
+	assert.Equal(t, []string{"path", "anotherpath"}, delgRole.Paths)
 	assert.Equal(t, testKey1, delgRole.Keys[testKey1.ID()])
 
 	testKey2, err := ed25519.Create("targets/a", data.ED25519Key)
@@ -1034,17 +1022,11 @@ func TestGetDelegationValidRoles(t *testing.T) {
 
 	delgRole, err = repo.GetDelegationRole("targets/a")
 	assert.NoError(t, err)
-	assert.True(t, delgRole.IsDelegationRole())
-	assert.False(t, delgRole.IsBaseRole())
-	assert.Equal(t, "targets/a", delgRole.GetName())
-	assert.Equal(t, 1, delgRole.GetThreshold())
+	assert.Equal(t, "targets/a", delgRole.Name)
+	assert.Equal(t, 1, delgRole.Threshold)
 	assert.Equal(t, []string{testKey2.ID()}, delgRole.ListKeyIDs())
-	delgPaths, err = delgRole.ListPaths()
-	assert.NoError(t, err)
-	assert.Equal(t, []string{""}, delgPaths)
-	delgPathPrefixes, err = delgRole.ListPathHashPrefixes()
-	assert.NoError(t, err)
-	assert.Empty(t, delgPathPrefixes)
+	assert.Equal(t, []string{""}, delgRole.Paths)
+	assert.Empty(t, delgRole.PathHashPrefixes)
 	assert.Equal(t, testKey2, delgRole.Keys[testKey2.ID()])
 
 	testKey3, err := ed25519.Create("targets/test/b", data.ED25519Key)
@@ -1058,17 +1040,11 @@ func TestGetDelegationValidRoles(t *testing.T) {
 
 	delgRole, err = repo.GetDelegationRole("targets/test/b")
 	assert.NoError(t, err)
-	assert.True(t, delgRole.IsDelegationRole())
-	assert.False(t, delgRole.IsBaseRole())
-	assert.Equal(t, "targets/test/b", delgRole.GetName())
-	assert.Equal(t, 1, delgRole.GetThreshold())
+	assert.Equal(t, "targets/test/b", delgRole.Name)
+	assert.Equal(t, 1, delgRole.Threshold)
 	assert.Equal(t, []string{testKey3.ID()}, delgRole.ListKeyIDs())
-	delgPaths, err = delgRole.ListPaths()
-	assert.NoError(t, err)
-	assert.Equal(t, []string{"path/subpath", "anotherpath"}, delgPaths)
-	delgPathPrefixes, err = delgRole.ListPathHashPrefixes()
-	assert.NoError(t, err)
-	assert.Empty(t, delgPathPrefixes)
+	assert.Equal(t, []string{"path/subpath", "anotherpath"}, delgRole.Paths)
+	assert.Empty(t, delgRole.PathHashPrefixes)
 	assert.Equal(t, testKey3, delgRole.Keys[testKey3.ID()])
 
 	testKey4, err := ed25519.Create("targets/test/c", data.ED25519Key)
@@ -1123,9 +1099,7 @@ func TestGetDelegationRolesInvalidPaths(t *testing.T) {
 	// Getting this delegation should fail path verification, so it'll have 0 paths
 	delgRole, err := repo.GetDelegationRole("targets/test/b")
 	assert.NoError(t, err)
-	delgPaths, err := delgRole.ListPaths()
-	assert.NoError(t, err)
-	assert.Empty(t, delgPaths)
+	assert.Empty(t, delgRole.Paths)
 }
 
 func TestGetDelegationRolesInvalidPathHashPrefix(t *testing.T) {
@@ -1152,10 +1126,8 @@ func TestGetDelegationRolesInvalidPathHashPrefix(t *testing.T) {
 	err = repo.UpdateDelegations(role, data.KeyList{testKey2})
 	assert.NoError(t, err)
 
-	// Getting this delegation should fail path verification
+	// Getting this delegation should fail path hash verification, so it'll be empty
 	delgRole, err := repo.GetDelegationRole("targets/test/b")
 	assert.NoError(t, err)
-	delgPathHashPrefixes, err := delgRole.ListPathHashPrefixes()
-	assert.NoError(t, err)
-	assert.Empty(t, delgPathHashPrefixes)
+	assert.Empty(t, delgRole.PathHashPrefixes)
 }
