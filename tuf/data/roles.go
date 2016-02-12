@@ -137,16 +137,6 @@ type DelegationRole struct {
 	PathHashPrefixes []string `json:"path_hash_prefixes,omitempty"`
 }
 
-// ListKeys retrieves the public keys valid for this role
-func (d DelegationRole) ListKeys() KeyList {
-	return listKeys(d.Keys)
-}
-
-// ListKeyIDs retrieves the list of key IDs valid for this role
-func (d DelegationRole) ListKeyIDs() []string {
-	return listKeyIDs(d.Keys)
-}
-
 func listKeys(keyMap map[string]PublicKey) KeyList {
 	keys := KeyList{}
 	for _, key := range keyMap {
@@ -184,14 +174,7 @@ func (d DelegationRole) RestrictChild(child DelegationRole) (DelegationRole, err
 // determined by delegation name.
 // Ex: targets/a is a direct parent of targets/a/b, but targets/a is not a direct parent of targets/a/b/c
 func (d DelegationRole) IsParentOf(child DelegationRole) bool {
-	// Check that the child has the prefix
-	if !strings.HasPrefix(child.Name, d.Name) {
-		return false
-	}
-	// Check that there are no parents in between by trimming the name with "/" attached
-	trimmedName := strings.TrimPrefix(child.Name, d.Name+"/")
-	// Check that the remaining path is equal to the base of the delegation path
-	return trimmedName == path.Base(child.Name)
+	return path.Dir(child.Name) == d.Name
 }
 
 // RestrictDelegationPathPrefixes returns the list of valid delegationPaths that are prefixed by parentPaths
