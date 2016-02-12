@@ -13,12 +13,6 @@ import (
 	"github.com/docker/notary/tuf/data"
 )
 
-const (
-	rootKeysSubdir    = "root_keys"
-	nonRootKeysSubdir = "tuf_keys"
-	privDir           = "private"
-)
-
 type keyInfoMap map[string]KeyInfo
 
 // KeyFileStore persists and manages private keys on disk
@@ -73,10 +67,10 @@ func generateKeyInfoMap(s LimitedFileStore) map[string]KeyInfo {
 	for _, keyPath := range s.ListFiles() {
 		// Remove the prefix of the directory from the filename for GUN/role/ID parsing
 		var keyIDAndGun, keyRole string
-		if strings.HasPrefix(keyPath, rootKeysSubdir+"/") {
-			keyIDAndGun = strings.TrimPrefix(keyPath, rootKeysSubdir+"/")
+		if strings.HasPrefix(keyPath, notary.RootKeysSubdir+"/") {
+			keyIDAndGun = strings.TrimPrefix(keyPath, notary.RootKeysSubdir+"/")
 		} else {
-			keyIDAndGun = strings.TrimPrefix(keyPath, nonRootKeysSubdir+"/")
+			keyIDAndGun = strings.TrimPrefix(keyPath, notary.NonRootKeysSubdir+"/")
 		}
 
 		// Separate the ID and GUN (can be empty) from the filepath
@@ -206,6 +200,9 @@ func (s *KeyFileStore) RemoveKey(name string) error {
 // ExportKey exports the encrypted bytes from the keystore and writes it to
 // dest.
 func (s *KeyFileStore) ExportKey(name string) ([]byte, error) {
+	if keyInfo, ok := s.keyInfoMap[name]; ok {
+		name = filepath.Join(keyInfo.Gun, name)
+	}
 	keyBytes, _, err := getRawKey(s, name)
 	if err != nil {
 		return nil, err
