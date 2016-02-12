@@ -263,26 +263,11 @@ func (k *keyCommander) keysExport(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	// Search for this key in all of our keystores, determine whether this key has a GUN
-	keyGun := ""
-	keyRole := ""
-	for _, store := range ks {
-		for keypath, role := range store.ListKeys() {
-			if filepath.Base(keypath) == keyID {
-				keyRole = role
-				if role == data.CanonicalRootRole {
-					continue
-				}
-				dirPath := filepath.Dir(keypath)
-				if dirPath != "." { // no gun
-					keyGun = dirPath
-				}
-				break
-			}
-		}
+	cs := cryptoservice.NewCryptoService("", ks...)
+	keyInfo, err := cs.GetKeyInfo(keyID)
+	if err != nil {
+		return fmt.Errorf("Could not retrieve info for key %s", keyID)
 	}
-
-	cs := cryptoservice.NewCryptoService(keyGun, ks...)
 
 	exportFile, err := os.Create(exportFilename)
 	if err != nil {
@@ -294,12 +279,12 @@ func (k *keyCommander) keysExport(cmd *cobra.Command, args []string) error {
 		exportRetriever := k.getRetriever()
 		err = cs.ExportKeyReencrypt(exportFile, keyID, exportRetriever)
 	} else {
-		err = cs.ExportKey(exportFile, keyID, keyRole)
+		err = cs.ExportKey(exportFile, keyID, keyInfo.Role)
 	}
 	exportFile.Close()
 	if err != nil {
 		os.Remove(exportFilename)
-		return fmt.Errorf("Error exporting %s key: %v", keyRole, err)
+		return fmt.Errorf("Error exporting %s key: %v", keyInfo.Role, err)
 	}
 	return nil
 }
