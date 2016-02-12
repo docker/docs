@@ -18,4 +18,10 @@ const (
 	Sha256HexSize = 64
 	// TrustedCertsDir is the directory, under the notary repo base directory, where trusted certs are stored
 	TrustedCertsDir = "trusted_certificates"
+	// PrivDir is the directory, under the notary repo base directory, where private keys are stored
+	PrivDir = "private"
+	// RootKeysSubdir is the subdirectory under PrivDir where root private keys are stored
+	RootKeysSubdir = "root_keys"
+	// NonRootKeysSubdir is the subdirectory under PrivDir where non-root private keys are stored
+	NonRootKeysSubdir = "tuf_keys"
 )

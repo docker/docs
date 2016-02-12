@@ -20,6 +20,7 @@ import (
 	"github.com/docker/notary/tuf/data"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	"io/ioutil"
 )
 
 var cmdKeyTemplate = usageTemplate{
@@ -52,10 +53,10 @@ var cmdKeysBackupTemplate = usageTemplate{
 	Long:  "Backs up all of your accessible of keys. The keys are reencrypted with a new passphrase. The output is a ZIP file.  If the --gun option is passed, only signing keys and no root keys will be backed up.  Does not work on keys that are only in hardware (e.g. Yubikeys).",
 }
 
-var cmdKeyExportRootTemplate = usageTemplate{
+var cmdKeyExportTemplate = usageTemplate{
 	Use:   "export [ keyID ] [ pemfilename ]",
-	Short: "Export a root key on disk to a PEM file.",
-	Long:  "Exports a single root key on disk, without reencrypting. The output is a PEM file. Does not work on keys that are only in hardware (e.g. Yubikeys).",
+	Short: "Export a private key on disk to a PEM file.",
+	Long:  "Exports a single private key on disk, without reencrypting. The output is a PEM file. Does not work on keys that are only in hardware (e.g. Yubikeys).",
 }
 
 var cmdKeysRestoreTemplate = usageTemplate{
@@ -64,10 +65,10 @@ var cmdKeysRestoreTemplate = usageTemplate{
 	Long:  "Restores one or more keys from a ZIP file. If hardware key storage (e.g. a Yubikey) is available, root keys will be imported into the hardware, but not backed up to disk in the same location as the other, non-root keys.",
 }
 
-var cmdKeyImportRootTemplate = usageTemplate{
+var cmdKeyImportTemplate = usageTemplate{
 	Use:   "import [ pemfilename ]",
-	Short: "Imports a root key from a PEM file.",
-	Long:  "Imports a single root key from a PEM file. If a hardware key storage (e.g. Yubikey) is available, the root key will be imported into the hardware but not backed up on disk again.",
+	Short: "Imports a key from a PEM file.",
+	Long:  "Imports a single key from a PEM file. If a hardware key storage (e.g. Yubikey) is available, the root key will be imported into the hardware but not backed up on disk again.",
 }
 
 var cmdKeyRemoveTemplate = usageTemplate{
@@ -88,10 +89,12 @@ type keyCommander struct {
 	getRetriever func() passphrase.Retriever
 
 	// these are for command line parsing - no need to set
-	keysExportRootChangePassphrase bool
-	keysExportGUN                  string
-	rotateKeyRole                  string
-	rotateKeyServerManaged         bool
+	keysExportChangePassphrase bool
+	keysExportGUN              string
+	keysImportGUN              string
+	keysImportRole             string
+	rotateKeyRole              string
+	rotateKeyServerManaged     bool
 }
 
 func (k *keyCommander) GetCommand() *cobra.Command {
@@ -99,7 +102,13 @@ func (k *keyCommander) GetCommand() *cobra.Command {
 	cmd.AddCommand(cmdKeyListTemplate.ToCommand(k.keysList))
 	cmd.AddCommand(cmdKeyGenerateRootKeyTemplate.ToCommand(k.keysGenerateRootKey))
 	cmd.AddCommand(cmdKeysRestoreTemplate.ToCommand(k.keysRestore))
-	cmd.AddCommand(cmdKeyImportRootTemplate.ToCommand(k.keysImportRoot))
+	cmdKeysImport := cmdKeyImportTemplate.ToCommand(k.keysImport)
+	cmdKeysImport.Flags().StringVarP(
+		&k.keysImportGUN, "gun", "g", "", "Globally Unique Name to import key to")
+	cmdKeysImport.Flags().StringVarP(
+		&k.keysImportRole, "role", "r", "", "Role to import key to (if not in PEM headers)")
+	cmd.AddCommand(cmdKeysImport)
+
 	cmd.AddCommand(cmdKeyRemoveTemplate.ToCommand(k.keyRemove))
 	cmd.AddCommand(cmdKeyPasswdTemplate.ToCommand(k.keyPassphraseChange))
 
@@ -108,11 +117,11 @@ func (k *keyCommander) GetCommand() *cobra.Command {
 		&k.keysExportGUN, "gun", "g", "", "Globally Unique Name to export keys for")
 	cmd.AddCommand(cmdKeysBackup)
 
-	cmdKeyExportRoot := cmdKeyExportRootTemplate.ToCommand(k.keysExportRoot)
-	cmdKeyExportRoot.Flags().BoolVarP(
-		&k.keysExportRootChangePassphrase, "change-passphrase", "p", false,
+	cmdKeyExport := cmdKeyExportTemplate.ToCommand(k.keysExport)
+	cmdKeyExport.Flags().BoolVarP(
+		&k.keysExportChangePassphrase, "change-passphrase", "p", false,
 		"Set a new passphrase for the key being exported")
-	cmd.AddCommand(cmdKeyExportRoot)
+	cmd.AddCommand(cmdKeyExport)
 
 	cmdRotateKey := cmdRotateKeyTemplate.ToCommand(k.keysRotate)
 	cmdRotateKey.Flags().BoolVarP(&k.rotateKeyServerManaged, "server-managed", "r",
@@ -236,8 +245,8 @@ func (k *keyCommander) keysBackup(cmd *cobra.Command, args []string) error {
 	return nil
 }
 
-// keysExportRoot exports a root key by ID to a PEM file
-func (k *keyCommander) keysExportRoot(cmd *cobra.Command, args []string) error {
+// keysExport exports a key by ID to a PEM file
+func (k *keyCommander) keysExport(cmd *cobra.Command, args []string) error {
 	if len(args) < 2 {
 		cmd.Usage()
 		return fmt.Errorf("Must specify key ID and output filename for export")
@@ -247,7 +256,7 @@ func (k *keyCommander) keysExportRoot(cmd *cobra.Command, args []string) error {
 	exportFilename := args[1]
 
 	if len(keyID) != notary.Sha256HexSize {
-		return fmt.Errorf("Please specify a valid root key ID")
+		return fmt.Errorf("Please specify a valid key ID")
 	}
 
 	config, err := k.configGetter()
@@ -258,24 +267,44 @@ func (k *keyCommander) keysExportRoot(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
-	cs := cryptoservice.NewCryptoService("", ks...)
+
+	// Search for this key in all of our keystores, determine whether this key has a GUN
+	keyGun := ""
+	keyRole := ""
+	for _, store := range ks {
+		for keypath, role := range store.ListKeys() {
+			if filepath.Base(keypath) == keyID {
+				keyRole = role
+				if role == data.CanonicalRootRole {
+					continue
+				}
+				dirPath := filepath.Dir(keypath)
+				if dirPath != "." { // no gun
+					keyGun = dirPath
+				}
+				break
+			}
+		}
+	}
+
+	cs := cryptoservice.NewCryptoService(keyGun, ks...)
 
 	exportFile, err := os.Create(exportFilename)
 	if err != nil {
 		return fmt.Errorf("Error creating output file: %v", err)
 	}
-	if k.keysExportRootChangePassphrase {
+	if k.keysExportChangePassphrase {
 		// Must use a different passphrase retriever to avoid caching the
 		// unlocking passphrase and reusing that.
 		exportRetriever := k.getRetriever()
-		err = cs.ExportRootKeyReencrypt(exportFile, keyID, exportRetriever)
+		err = cs.ExportKeyReencrypt(exportFile, keyID, exportRetriever)
 	} else {
-		err = cs.ExportRootKey(exportFile, keyID)
+		err = cs.ExportKey(exportFile, keyID, keyRole)
 	}
 	exportFile.Close()
 	if err != nil {
 		os.Remove(exportFilename)
-		return fmt.Errorf("Error exporting root key: %v", err)
+		return fmt.Errorf("Error exporting %s key: %v", keyRole, err)
 	}
 	return nil
 }
@@ -313,8 +342,8 @@ func (k *keyCommander) keysRestore(cmd *cobra.Command, args []string) error {
 	return nil
 }
 
-// keysImportRoot imports a root key from a PEM file
-func (k *keyCommander) keysImportRoot(cmd *cobra.Command, args []string) error {
+// keysImport imports a private key from a PEM file for a role
+func (k *keyCommander) keysImport(cmd *cobra.Command, args []string) error {
 	if len(args) != 1 {
 		cmd.Usage()
 		return fmt.Errorf("Must specify input filename for import")
@@ -328,7 +357,6 @@ func (k *keyCommander) keysImportRoot(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
-	cs := cryptoservice.NewCryptoService("", ks...)
 
 	importFilename := args[0]
 
@@ -338,7 +366,38 @@ func (k *keyCommander) keysImportRoot(cmd *cobra.Command, args []string) error {
 	}
 	defer importFile.Close()
 
-	err = cs.ImportRootKey(importFile)
+	pemBytes, err := ioutil.ReadAll(importFile)
+	if err != nil {
+		return fmt.Errorf("Error reading input file: %v", err)
+	}
+
+	pemRole := trustmanager.ReadRoleFromPEM(pemBytes)
+
+	// If the PEM key doesn't have a role in it, we must have --role set
+	if pemRole == "" && k.keysImportRole == "" {
+		return fmt.Errorf("Could not infer role, and no role was specified for key")
+	}
+
+	// If both  PEM role and a --role are provided and they don't match, error
+	if pemRole != "" && k.keysImportRole != "" && pemRole != k.keysImportRole {
+		return fmt.Errorf("Specified role %s does not match role %s in PEM headers", k.keysImportRole, pemRole)
+	}
+
+	// Determine which role to add to between PEM headers and --role flag:
+	var importRole string
+	if k.keysImportRole != "" {
+		importRole = k.keysImportRole
+	} else {
+		importRole = pemRole
+	}
+
+	// If we're importing to targets or snapshot, we need a GUN
+	if (importRole == data.CanonicalTargetsRole || importRole == data.CanonicalSnapshotRole) && k.keysImportGUN == "" {
+		return fmt.Errorf("Must specify GUN for %s key", importRole)
+	}
+
+	cs := cryptoservice.NewCryptoService(k.keysImportGUN, ks...)
+	err = cs.ImportRoleKey(pemBytes, importRole, k.getRetriever())
 
 	if err != nil {
 		return fmt.Errorf("Error importing root key: %v", err)

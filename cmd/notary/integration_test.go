@@ -20,6 +20,7 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	ctxu "github.com/docker/distribution/context"
+	"github.com/docker/notary"
 	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/server"
@@ -674,6 +675,47 @@ func TestClientDelegationsPublishing(t *testing.T) {
 	output, err = runCommand(t, tempDir, "-s", server.URL, "list", "gun", "--roles", "targets/releases")
 	assert.NoError(t, err)
 	assert.Contains(t, output, "targets/releases")
+
+	// remove the target for this role only
+	_, err = runCommand(t, tempDir, "remove", "gun", target, "--roles", "targets/releases")
+	assert.NoError(t, err)
+
+	// publish repo
+	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
+	assert.NoError(t, err)
+
+	// Now remove this key, and make a new file to import the delegation's key from
+	assert.NoError(t, os.Remove(filepath.Join(keyDir, canonicalKeyID+".key")))
+	tempPrivFile, err := ioutil.TempFile("/tmp", "privfile")
+	assert.NoError(t, err)
+	defer os.Remove(tempPrivFile.Name())
+
+	// Write the private key to a file so we can import it
+	_, err = tempPrivFile.Write(privKeyBytesNoRole)
+	assert.NoError(t, err)
+	tempPrivFile.Close()
+
+	// Import the private key, associating it with our delegation role
+	_, err = runCommand(t, tempDir, "key", "import", tempPrivFile.Name(), "--role", "targets/releases")
+	assert.NoError(t, err)
+
+	// add a target using the delegation -- will only add to targets/releases
+	_, err = runCommand(t, tempDir, "add", "gun", target, tempTargetFile.Name(), "--roles", "targets/releases")
+	assert.NoError(t, err)
+
+	// list targets for targets/releases - we should see no targets until we publish
+	output, err = runCommand(t, tempDir, "-s", server.URL, "list", "gun", "--roles", "targets/releases")
+	assert.NoError(t, err)
+	assert.Contains(t, output, "No targets")
+
+	// publish repo
+	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
+	assert.NoError(t, err)
+
+	// list targets for targets/releases - we should see our target!
+	output, err = runCommand(t, tempDir, "-s", server.URL, "list", "gun", "--roles", "targets/releases")
+	assert.NoError(t, err)
+	assert.Contains(t, output, "targets/releases")
 }
 
 // Splits a string into lines, and returns any lines that are not empty (
@@ -1026,6 +1068,104 @@ func TestClientKeyImportExportRootOnly(t *testing.T) {
 	assertNumKeys(t, tempDir, 1, 2, !rootOnHardware())
 	assertSuccessfullyPublish(
 		t, tempDir, server.URL, "gun", target, tempFile.Name())
+}
+
+// Helper method to get the subdirectory for TUF keys
+func getKeySubdir(role, gun string) string {
+	subdir := notary.PrivDir
+	switch role {
+	case data.CanonicalRootRole:
+		return filepath.Join(subdir, notary.RootKeysSubdir)
+	case data.CanonicalTargetsRole:
+		return filepath.Join(subdir, notary.NonRootKeysSubdir, gun)
+	case data.CanonicalSnapshotRole:
+		return filepath.Join(subdir, notary.NonRootKeysSubdir, gun)
+	default:
+		return filepath.Join(subdir, notary.NonRootKeysSubdir)
+	}
+}
+
+// Tests importing and exporting keys for all different roles and GUNs
+func TestClientKeyImportExportAllRoles(t *testing.T) {
+	// -- setup --
+	setUp(t)
+
+	tempDir := tempDirWithConfig(t, "{}")
+	defer os.RemoveAll(tempDir)
+
+	server := setupServer()
+	defer server.Close()
+
+	// -- tests --
+	_, err := runCommand(t, tempDir, "-s", server.URL, "init", "gun")
+	assert.NoError(t, err)
+
+	testRoles := append(data.BaseRoles, "targets/releases")
+	// Test importing and exporting keys to all base roles and delegation role
+	for _, role := range testRoles {
+		// Do this while importing keys that have the PEM header role set or have --role set on import
+		for _, setKeyRole := range []bool{true, false} {
+			// Make a new key for this role
+			privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
+			assert.NoError(t, err)
+
+			// Make a tempfile for importing
+			tempFile, err := ioutil.TempFile("", "pemfile")
+			assert.NoError(t, err)
+
+			// Specify the role in the PEM header
+			pemBytes, err := trustmanager.EncryptPrivateKey(privKey, role, testPassphrase)
+			assert.NoError(t, err)
+			ioutil.WriteFile(tempFile.Name(), pemBytes, 0644)
+
+			// If we need to set the key role with the --role flag, do so on import
+			if setKeyRole {
+				// If it's targets/snapshot we must specify the GUN
+				if role == data.CanonicalTargetsRole || role == data.CanonicalSnapshotRole {
+					_, err = runCommand(t, tempDir, "key", "import", tempFile.Name(), "--gun", "gun", "--role", role)
+				} else {
+					_, err = runCommand(t, tempDir, "key", "import", tempFile.Name(), "--role", role)
+				}
+			} else {
+				// If it's targets/snapshot we must specify the GUN
+				if role == data.CanonicalTargetsRole || role == data.CanonicalSnapshotRole {
+					_, err = runCommand(t, tempDir, "key", "import", tempFile.Name(), "--gun", "gun")
+				} else {
+					_, err = runCommand(t, tempDir, "key", "import", tempFile.Name())
+				}
+			}
+			assert.NoError(t, err)
+
+			// Test that we imported correctly
+			keySubdir := getKeySubdir(role, "gun")
+			_, err = os.Stat(filepath.Join(tempDir, keySubdir, privKey.ID()+".key"))
+			assert.Nil(t, err)
+
+			// Remove the input file so we can test exporting
+			assert.NoError(t, os.Remove(tempFile.Name()))
+
+			// Make a tempfile for exporting to
+			tempFile, err = ioutil.TempFile("", "pemfile")
+			assert.NoError(t, err)
+
+			// Ensure exporting this key by ID gets the same key
+			_, err = runCommand(t, tempDir, "key", "export", privKey.ID(), tempFile.Name())
+			assert.NoError(t, err)
+			// Compare the bytes of the exported file and the root key file in the repo
+			exportedBytes, err := ioutil.ReadFile(tempFile.Name())
+			assert.NoError(t, err)
+			repoBytes, err := ioutil.ReadFile(filepath.Join(tempDir, keySubdir, privKey.ID()+".key"))
+			assert.NoError(t, err)
+			assert.Equal(t, repoBytes, exportedBytes)
+
+			// Ensure exporting this key and changing the passphrase works
+			_, err = runCommand(t, tempDir, "key", "export", privKey.ID(), tempFile.Name(), "-p")
+			assert.NoError(t, err)
+
+			// Remove the export file for cleanup
+			assert.NoError(t, os.Remove(tempFile.Name()))
+		}
+	}
 }
 
 func assertNumCerts(t *testing.T, tempDir string, expectedNum int) []string {

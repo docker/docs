@@ -9,6 +9,7 @@ import (
 	"path/filepath"
 	"testing"
 
+	"github.com/docker/notary"
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/tuf/data"
 	"github.com/stretchr/testify/assert"
@@ -25,11 +26,11 @@ var passphraseRetriever = func(keyID string, alias string, createNew bool, numAt
 }
 
 func TestAddKey(t *testing.T) {
-	testAddKeyWithRole(t, data.CanonicalRootRole, rootKeysSubdir)
-	testAddKeyWithRole(t, data.CanonicalTargetsRole, nonRootKeysSubdir)
-	testAddKeyWithRole(t, data.CanonicalSnapshotRole, nonRootKeysSubdir)
-	testAddKeyWithRole(t, "targets/a/b/c", nonRootKeysSubdir)
-	testAddKeyWithRole(t, "invalidRole", nonRootKeysSubdir)
+	testAddKeyWithRole(t, data.CanonicalRootRole, notary.RootKeysSubdir)
+	testAddKeyWithRole(t, data.CanonicalTargetsRole, notary.NonRootKeysSubdir)
+	testAddKeyWithRole(t, data.CanonicalSnapshotRole, notary.NonRootKeysSubdir)
+	testAddKeyWithRole(t, "targets/a/b/c", notary.NonRootKeysSubdir)
+	testAddKeyWithRole(t, "invalidRole", notary.NonRootKeysSubdir)
 }
 
 func testAddKeyWithRole(t *testing.T, role, expectedSubdir string) {
@@ -42,7 +43,7 @@ func testAddKeyWithRole(t *testing.T, role, expectedSubdir string) {
 	defer os.RemoveAll(tempBaseDir)
 
 	// Since we're generating this manually we need to add the extension '.'
-	expectedFilePath := filepath.Join(tempBaseDir, privDir, expectedSubdir, testName+"."+testExt)
+	expectedFilePath := filepath.Join(tempBaseDir, notary.PrivDir, expectedSubdir, testName+"."+testExt)
 
 	// Create our store
 	store, err := NewKeyFileStore(tempBaseDir, passphraseRetriever)
@@ -73,22 +74,22 @@ func TestGet(t *testing.T) {
 
 	// Root role needs to go in the rootKeySubdir to be read.
 	// All other roles can go in the nonRootKeysSubdir, possibly under a GUN
-	rootKeysSubdirWithGUN := filepath.Clean(filepath.Join(rootKeysSubdir, gun))
-	nonRootKeysSubdirWithGUN := filepath.Clean(filepath.Join(nonRootKeysSubdir, gun))
+	rootKeysSubdirWithGUN := filepath.Clean(filepath.Join(notary.RootKeysSubdir, gun))
+	nonRootKeysSubdirWithGUN := filepath.Clean(filepath.Join(notary.NonRootKeysSubdir, gun))
 
-	testGetKeyWithRole(t, "", data.CanonicalRootRole, rootKeysSubdir, true)
+	testGetKeyWithRole(t, "", data.CanonicalRootRole, notary.RootKeysSubdir, true)
 	testGetKeyWithRole(t, gun, data.CanonicalRootRole, rootKeysSubdirWithGUN, true)
 	for _, role := range nonRootRolesToTest {
-		testGetKeyWithRole(t, "", role, nonRootKeysSubdir, true)
+		testGetKeyWithRole(t, "", role, notary.NonRootKeysSubdir, true)
 		testGetKeyWithRole(t, gun, role, nonRootKeysSubdirWithGUN, true)
 	}
 
 	// Root cannot go in the nonRootKeysSubdir, or it won't be able to be read,
 	// and vice versa
-	testGetKeyWithRole(t, "", data.CanonicalRootRole, nonRootKeysSubdir, false)
+	testGetKeyWithRole(t, "", data.CanonicalRootRole, notary.NonRootKeysSubdir, false)
 	testGetKeyWithRole(t, gun, data.CanonicalRootRole, nonRootKeysSubdirWithGUN, false)
 	for _, role := range nonRootRolesToTest {
-		testGetKeyWithRole(t, "", role, rootKeysSubdir, false)
+		testGetKeyWithRole(t, "", role, notary.RootKeysSubdir, false)
 		testGetKeyWithRole(t, gun, role, rootKeysSubdirWithGUN, false)
 	}
 }
@@ -136,7 +137,7 @@ EMl3eFOJXjIch/wIesRSN+2dGOsl7neercjMh1i9RvpCwHDx/E0=
 	defer os.RemoveAll(tempBaseDir)
 
 	// Since we're generating this manually we need to add the extension '.'
-	filePath := filepath.Join(tempBaseDir, privDir, expectedSubdir, testName+"."+testExt)
+	filePath := filepath.Join(tempBaseDir, notary.PrivDir, expectedSubdir, testName+"."+testExt)
 	os.MkdirAll(filepath.Dir(filePath), perms)
 	err = ioutil.WriteFile(filePath, testData, perms)
 	assert.NoError(t, err, "failed to write test file")
@@ -206,7 +207,7 @@ EMl3eFOJXjIch/wIesRSN+2dGOsl7neercjMh1i9RvpCwHDx/E0=
 	defer os.RemoveAll(tempBaseDir)
 
 	// Since we're generating this manually we need to add the extension '.'
-	filePath := filepath.Join(tempBaseDir, privDir, rootKeysSubdir, testName+"_"+testAlias+"."+testExt)
+	filePath := filepath.Join(tempBaseDir, notary.PrivDir, notary.RootKeysSubdir, testName+"_"+testAlias+"."+testExt)
 
 	os.MkdirAll(filepath.Dir(filePath), perms)
 	err = ioutil.WriteFile(filePath, testData, perms)
@@ -258,7 +259,7 @@ func TestListKeys(t *testing.T) {
 	}
 
 	// Write an invalid filename to the directory
-	filePath := filepath.Join(tempBaseDir, privDir, rootKeysSubdir, "fakekeyname.key")
+	filePath := filepath.Join(tempBaseDir, notary.PrivDir, notary.RootKeysSubdir, "fakekeyname.key")
 	err = ioutil.WriteFile(filePath, []byte("data"), perms)
 	assert.NoError(t, err, "failed to write test file")
 
@@ -312,7 +313,7 @@ func TestGetDecryptedWithTamperedCipherText(t *testing.T) {
 	assert.NoError(t, err, "failed to add key to store")
 
 	// Since we're generating this manually we need to add the extension '.'
-	expectedFilePath := filepath.Join(tempBaseDir, privDir, rootKeysSubdir, privKey.ID()+"."+testExt)
+	expectedFilePath := filepath.Join(tempBaseDir, notary.PrivDir, notary.RootKeysSubdir, privKey.ID()+"."+testExt)
 
 	// Get file description, open file
 	fp, err := os.OpenFile(expectedFilePath, os.O_WRONLY, 0600)
@@ -409,11 +410,11 @@ func testGetDecryptedWithInvalidPassphrase(t *testing.T, store KeyStore, newStor
 }
 
 func TestRemoveKey(t *testing.T) {
-	testRemoveKeyWithRole(t, data.CanonicalRootRole, rootKeysSubdir)
-	testRemoveKeyWithRole(t, data.CanonicalTargetsRole, nonRootKeysSubdir)
-	testRemoveKeyWithRole(t, data.CanonicalSnapshotRole, nonRootKeysSubdir)
-	testRemoveKeyWithRole(t, "targets/a/b/c", nonRootKeysSubdir)
-	testRemoveKeyWithRole(t, "invalidRole", nonRootKeysSubdir)
+	testRemoveKeyWithRole(t, data.CanonicalRootRole, notary.RootKeysSubdir)
+	testRemoveKeyWithRole(t, data.CanonicalTargetsRole, notary.NonRootKeysSubdir)
+	testRemoveKeyWithRole(t, data.CanonicalSnapshotRole, notary.NonRootKeysSubdir)
+	testRemoveKeyWithRole(t, "targets/a/b/c", notary.NonRootKeysSubdir)
+	testRemoveKeyWithRole(t, "invalidRole", notary.NonRootKeysSubdir)
 }
 
 func testRemoveKeyWithRole(t *testing.T, role, expectedSubdir string) {
@@ -426,7 +427,7 @@ func testRemoveKeyWithRole(t *testing.T, role, expectedSubdir string) {
 	defer os.RemoveAll(tempBaseDir)
 
 	// Since we're generating this manually we need to add the extension '.'
-	expectedFilePath := filepath.Join(tempBaseDir, privDir, expectedSubdir, testName+"."+testExt)
+	expectedFilePath := filepath.Join(tempBaseDir, notary.PrivDir, expectedSubdir, testName+"."+testExt)
 
 	// Create our store
 	store, err := NewKeyFileStore(tempBaseDir, passphraseRetriever)
