@@ -204,7 +204,7 @@ func (c Client) verifyRoot(role string, s *data.Signed, minVersion int) error {
 	// Still need to determine if there has been a root key update and
 	// confirm signature with new root key
 	logrus.Debug("verifying root with existing keys")
-	rootRole, err := c.local.GetRoleWithKeys(role)
+	rootRole, err := c.local.GetBaseRole(role)
 	if err != nil {
 		logrus.Debug("no previous root role loaded")
 		return err
@@ -231,7 +231,7 @@ func (c Client) verifyRoot(role string, s *data.Signed, minVersion int) error {
 	// TODO(endophage): be more intelligent and only re-verify if we detect
 	//                  there has been a change in root keys
 	logrus.Debug("verifying root with updated keys")
-	rootRole, err = c.local.GetRoleWithKeys(role)
+	rootRole, err = c.local.GetBaseRole(role)
 	if err != nil {
 		logrus.Debug("root role with new keys not loaded")
 		return err
@@ -302,7 +302,7 @@ func (c *Client) downloadTimestamp() error {
 
 // verifies that a timestamp is valid, and returned the SignedTimestamp object to add to the tuf repo
 func (c *Client) verifyTimestamp(s *data.Signed, minVersion int) (*data.SignedTimestamp, error) {
-	timestampRole, err := c.local.GetRoleWithKeys(data.CanonicalTimestampRole)
+	timestampRole, err := c.local.GetBaseRole(data.CanonicalTimestampRole)
 	if err != nil {
 		logrus.Debug("no timestamp role loaded")
 		return nil, err
@@ -365,7 +365,7 @@ func (c *Client) downloadSnapshot() error {
 		s = old
 	}
 
-	snapshotRole, err := c.local.GetRoleWithKeys(role)
+	snapshotRole, err := c.local.GetBaseRole(role)
 	if err != nil {
 		logrus.Debug("no snapshot role loaded")
 		return err
@@ -406,12 +406,8 @@ func (c *Client) downloadTargets(role string) error {
 		}
 		snap := c.local.Snapshot.Signed
 		root := c.local.Root.Signed
-		r := c.keysDB.GetRole(role)
-		if r == nil {
-			return fmt.Errorf("Invalid role: %s", role)
-		}
-		keyIDs := r.KeyIDs
-		s, err := c.getTargetsFile(role, keyIDs, snap.Meta, root.ConsistentSnapshot, r.Threshold)
+
+		s, err := c.getTargetsFile(role, snap.Meta, root.ConsistentSnapshot)
 		if err != nil {
 			if _, ok := err.(ErrMissingMeta); ok && role != data.CanonicalTargetsRole {
 				// if the role meta hasn't been published,
@@ -458,7 +454,7 @@ func (c *Client) downloadSigned(role string, size int64, expectedSha256 []byte) 
 	return raw, s, nil
 }
 
-func (c Client) getTargetsFile(role string, keyIDs []string, snapshotMeta data.Files, consistent bool, threshold int) (*data.Signed, error) {
+func (c Client) getTargetsFile(role string, snapshotMeta data.Files, consistent bool) (*data.Signed, error) {
 	// require role exists in snapshots
 	roleMeta, ok := snapshotMeta[role]
 	if !ok {
@@ -507,13 +503,22 @@ func (c Client) getTargetsFile(role string, keyIDs []string, snapshotMeta data.F
 		logrus.Debug("using cached ", role)
 		s = old
 	}
-
-	targetsRole, err := c.local.GetRoleWithKeys(role)
-	if err != nil {
-		logrus.Debugf("no %s role loaded", role)
-		return nil, err
+	var targetOrDelgRole data.BaseRole
+	if data.IsDelegation(role) {
+		delgRole, err := c.local.GetDelegationRole(role)
+		if err != nil {
+			logrus.Debugf("no %s delegation role loaded", role)
+			return nil, err
+		}
+		targetOrDelgRole = delgRole.BaseRole
+	} else {
+		targetOrDelgRole, err = c.local.GetBaseRole(role)
+		if err != nil {
+			logrus.Debugf("no %s role loaded", role)
+			return nil, err
+		}
 	}
-	if err = signed.Verify(s, targetsRole, version); err != nil {
+	if err = signed.Verify(s, targetOrDelgRole, version); err != nil {
 		return nil, err
 	}
 	logrus.Debugf("successfully verified %s", role)

@@ -32,9 +32,13 @@ func TestRotation(t *testing.T) {
 	rootRole, err := data.NewRole("root", 1, []string{rootKey.ID()}, nil, nil)
 	assert.NoError(t, err, "Error creating root role")
 
-	kdb.AddKey(rootKey)
-	err = kdb.AddRole(rootRole)
-	assert.NoError(t, err, "Error adding root role to db")
+	originalRoot, err := data.NewRoot(
+		map[string]data.PublicKey{rootKey.ID(): rootKey},
+		map[string]*data.RootRole{"root": &rootRole.RootRole},
+		false,
+	)
+
+	repo.Root = originalRoot
 
 	// Generate new key and role. These will appear in the root.json
 	// but will not be added to the keyDB.
@@ -87,9 +91,13 @@ func TestRotationNewSigMissing(t *testing.T) {
 	rootRole, err := data.NewRole("root", 1, []string{rootKey.ID()}, nil, nil)
 	assert.NoError(t, err, "Error creating root role")
 
-	kdb.AddKey(rootKey)
-	err = kdb.AddRole(rootRole)
-	assert.NoError(t, err, "Error adding root role to db")
+	originalRoot, err := data.NewRoot(
+		map[string]data.PublicKey{rootKey.ID(): rootKey},
+		map[string]*data.RootRole{"root": &rootRole.RootRole},
+		false,
+	)
+
+	repo.Root = originalRoot
 
 	// Generate new key and role. These will appear in the root.json
 	// but will not be added to the keyDB.
@@ -148,9 +156,13 @@ func TestRotationOldSigMissing(t *testing.T) {
 	rootRole, err := data.NewRole("root", 1, []string{rootKey.ID()}, nil, nil)
 	assert.NoError(t, err, "Error creating root role")
 
-	kdb.AddKey(rootKey)
-	err = kdb.AddRole(rootRole)
-	assert.NoError(t, err, "Error adding root role to db")
+	originalRoot, err := data.NewRoot(
+		map[string]data.PublicKey{rootKey.ID(): rootKey},
+		map[string]*data.RootRole{"root": &rootRole.RootRole},
+		false,
+	)
+
+	repo.Root = originalRoot
 
 	// Generate new key and role. These will appear in the root.json
 	// but will not be added to the keyDB.

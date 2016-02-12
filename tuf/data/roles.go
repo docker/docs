@@ -335,9 +335,3 @@ func subtractStrSlices(orig, remove []string) []string {
 	}
 	return keep
 }
-
-// RoleWithKeys is a role that has the signing keys for the role embedded
-type RoleWithKeys struct {
-	Role
-	Keys Keys
-}

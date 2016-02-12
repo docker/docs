@@ -871,19 +871,3 @@ func (tr Repo) sign(signedData *data.Signed, role data.Role) (*data.Signed, erro
 	}
 	return signedData, nil
 }
-
-// GetRoleWithKeys returns a RoleWithKeys object, given a role name.
-func (tr Repo) GetRoleWithKeys(role string) (*data.RoleWithKeys, error) {
-	roleData := tr.keysDB.GetRole(role)
-	if roleData == nil {
-		return nil, ErrNotLoaded{role: role}
-	}
-	keysInRole := make(data.Keys)
-	for _, keyID := range roleData.KeyIDs {
-		k := tr.keysDB.GetKey(keyID)
-		if k != nil {
-			keysInRole[keyID] = k
-		}
-	}
-	return &data.RoleWithKeys{Role: *roleData, Keys: keysInRole}, nil
-}

@@ -424,7 +424,7 @@ func TestSwizzlerChangeRootKey(t *testing.T) {
 			require.NoError(t, err)
 			newKey := newRoot.Signed.Keys[rootRole.KeyIDs[0]]
 			require.NoError(t, signed.Verify(signedThing,
-				&data.RoleWithKeys{Role: rootRole, Keys: map[string]data.PublicKey{newKey.ID(): newKey}}, 1))
+				data.BaseRole{Name: data.CanonicalRootRole, Keys: map[string]data.PublicKey{newKey.ID(): newKey}, Threshold: 1}, 1))
 		default:
 			require.True(t, bytes.Equal(origMeta, newMeta), "bytes have changed for role %s", role)
 		}
