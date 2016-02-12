@@ -175,7 +175,7 @@ func (tr *Repo) RemoveBaseKeys(role string, keyIDs ...string) error {
 
 // GetBaseRole gets a base role from this repo's metadata
 func (tr *Repo) GetBaseRole(name string) (data.BaseRole, error) {
-	if !data.IsBaseRole(name) {
+	if !data.ValidRole(name) && !data.IsDelegation(name) {
 		return data.BaseRole{}, data.ErrInvalidRole{Role: name, Reason: "invalid base role name"}
 	}
 	if tr.Root == nil {
@@ -222,10 +222,6 @@ func (tr *Repo) GetDelegationRole(name string) (data.DelegationRole, error) {
 		return data.DelegationRole{}, ErrNotLoaded{data.CanonicalTargetsRole}
 	}
 
-	// Keep track of paths and path hash prefixes to restrict as we traverse the delegations tree, targets implicitly has ""
-	whiteListedPaths := []string{""}
-	whiteListedPathHashes := []string{""}
-
 	// Start with top level roles in targets
 	delegationRoles := signedTargetData.Signed.Delegations.Roles
 	var foundRole *data.Role
@@ -233,10 +229,8 @@ func (tr *Repo) GetDelegationRole(name string) (data.DelegationRole, error) {
 		delgRole := delegationRoles[0]
 		delegationRoles = delegationRoles[1:]
 
-		// If this role is delegated above or is our desired role, restrict paths and traverse its child roles
+		// If this role is delegated above or is our desired role, traverse it
 		if delgRole.Name == name || strings.HasPrefix(name, delgRole.Name+"/") {
-			delgRole.Paths = data.RestrictDelegationPathPrefixes(whiteListedPaths, delgRole.Paths)
-			delgRole.PathHashPrefixes = data.RestrictDelegationPathPrefixes(whiteListedPathHashes, delgRole.PathHashPrefixes)
 
 			// If we found the role, we can exit the loop
 			if delgRole.Name == name {
@@ -245,8 +239,6 @@ func (tr *Repo) GetDelegationRole(name string) (data.DelegationRole, error) {
 			}
 
 			// If this is a parent role, keep traversing
-			whiteListedPaths = delgRole.Paths
-			whiteListedPathHashes = delgRole.PathHashPrefixes
 			if delegationMeta, ok := tr.Targets[delgRole.Name]; ok {
 				delegationRoles = append(delegationRoles, delegationMeta.Signed.Delegations.Roles...)
 			}
