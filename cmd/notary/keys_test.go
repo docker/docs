@@ -433,3 +433,102 @@ func TestChangeKeyPassphraseNonexistentID(t *testing.T) {
 	assert.Error(t, err)
 	assert.Contains(t, err.Error(), "could not retrieve local key for key ID provided")
 }
+
+func TestKeyImportMismatchingRoles(t *testing.T) {
+	k := &keyCommander{
+		configGetter:   func() (*viper.Viper, error) { return viper.New(), nil },
+		getRetriever:   func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+		keysImportRole: "targets",
+	}
+	tempFileName := generateTempTestKeyFile(t, "snapshot")
+	defer os.Remove(tempFileName)
+
+	err := k.keysImport(&cobra.Command{}, []string{tempFileName})
+	assert.Error(t, err)
+	assert.Contains(t, err.Error(), "does not match role")
+}
+
+func TestKeyImportNoGUNForTargetsPEM(t *testing.T) {
+	k := &keyCommander{
+		configGetter: func() (*viper.Viper, error) { return viper.New(), nil },
+		getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+	}
+	tempFileName := generateTempTestKeyFile(t, "targets")
+	defer os.Remove(tempFileName)
+
+	err := k.keysImport(&cobra.Command{}, []string{tempFileName})
+	assert.Error(t, err)
+	assert.Contains(t, err.Error(), "Must specify GUN")
+}
+
+func TestKeyImportNoGUNForSnapshotPEM(t *testing.T) {
+	k := &keyCommander{
+		configGetter: func() (*viper.Viper, error) { return viper.New(), nil },
+		getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+	}
+	tempFileName := generateTempTestKeyFile(t, "snapshot")
+	defer os.Remove(tempFileName)
+
+	err := k.keysImport(&cobra.Command{}, []string{tempFileName})
+	assert.Error(t, err)
+	assert.Contains(t, err.Error(), "Must specify GUN")
+}
+
+func TestKeyImportNoGUNForTargetsFlag(t *testing.T) {
+	k := &keyCommander{
+		configGetter:   func() (*viper.Viper, error) { return viper.New(), nil },
+		getRetriever:   func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+		keysImportRole: "targets",
+	}
+	tempFileName := generateTempTestKeyFile(t, "")
+	defer os.Remove(tempFileName)
+
+	err := k.keysImport(&cobra.Command{}, []string{tempFileName})
+	assert.Error(t, err)
+	assert.Contains(t, err.Error(), "Must specify GUN")
+}
+
+func TestKeyImportNoGUNForSnapshotFlag(t *testing.T) {
+	k := &keyCommander{
+		configGetter:   func() (*viper.Viper, error) { return viper.New(), nil },
+		getRetriever:   func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+		keysImportRole: "snapshot",
+	}
+	tempFileName := generateTempTestKeyFile(t, "")
+	defer os.Remove(tempFileName)
+
+	err := k.keysImport(&cobra.Command{}, []string{tempFileName})
+	assert.Error(t, err)
+	assert.Contains(t, err.Error(), "Must specify GUN")
+}
+
+func TestKeyImportNoRole(t *testing.T) {
+	k := &keyCommander{
+		configGetter: func() (*viper.Viper, error) { return viper.New(), nil },
+		getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+	}
+	tempFileName := generateTempTestKeyFile(t, "")
+	defer os.Remove(tempFileName)
+
+	err := k.keysImport(&cobra.Command{}, []string{tempFileName})
+	assert.Error(t, err)
+	assert.Contains(t, err.Error(), "Could not infer role, and no role was specified for key")
+}
+
+func generateTempTestKeyFile(t *testing.T, role string) string {
+	privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
+	if err != nil {
+		return ""
+	}
+	keyBytes, err := trustmanager.KeyToPEM(privKey, role)
+	assert.NoError(t, err)
+
+	tempPrivFile, err := ioutil.TempFile("/tmp", "privfile")
+	assert.NoError(t, err)
+
+	// Write the private key to a file so we can import it
+	_, err = tempPrivFile.Write(keyBytes)
+	assert.NoError(t, err)
+	tempPrivFile.Close()
+	return tempPrivFile.Name()
+}

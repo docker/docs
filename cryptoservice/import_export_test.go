@@ -77,7 +77,7 @@ func TestImportExportZip(t *testing.T) {
 		_, alias, err := cs.GetPrivateKey(privKeyName)
 		assert.NoError(t, err, "privKey %s has no alias", privKeyName)
 
-		if alias == "root" {
+		if alias == data.CanonicalRootRole {
 			continue
 		}
 		relKeyPath := filepath.Join("tuf_keys", privKeyName+".key")
@@ -138,7 +138,7 @@ func TestImportExportZip(t *testing.T) {
 		_, alias, err := cs2.GetPrivateKey(privKeyName)
 		assert.NoError(t, err, "privKey %s has no alias", privKeyName)
 
-		if alias == "root" {
+		if alias == data.CanonicalRootRole {
 			continue
 		}
 		relKeyPath := filepath.Join("tuf_keys", privKeyName+".key")
@@ -196,7 +196,7 @@ func TestImportExportGUN(t *testing.T) {
 	for privKeyName := range privKeyMap {
 		_, alias, err := cs.GetPrivateKey(privKeyName)
 		assert.NoError(t, err, "privKey %s has no alias", privKeyName)
-		if alias == "root" {
+		if alias == data.CanonicalRootRole {
 			continue
 		}
 		relKeyPath := filepath.Join("tuf_keys", privKeyName+".key")
@@ -250,12 +250,12 @@ func TestImportExportGUN(t *testing.T) {
 	// Look for keys in private. The filenames should match the key IDs
 	// in the repo's private key store.
 	for privKeyName, role := range privKeyMap {
-		if role == "root" {
+		if role == data.CanonicalRootRole {
 			continue
 		}
 		_, alias, err := cs2.GetPrivateKey(privKeyName)
 		assert.NoError(t, err, "privKey %s has no alias", privKeyName)
-		if alias == "root" {
+		if alias == data.CanonicalRootRole {
 			continue
 		}
 		relKeyPath := filepath.Join("tuf_keys", privKeyName+".key")
@@ -284,7 +284,7 @@ func TestImportExportRootKey(t *testing.T) {
 	tempKeyFilePath := tempKeyFile.Name()
 	defer os.Remove(tempKeyFilePath)
 
-	err = cs.ExportRootKey(tempKeyFile, rootKeyID)
+	err = cs.ExportKey(tempKeyFile, rootKeyID, data.CanonicalRootRole)
 	assert.NoError(t, err)
 	tempKeyFile.Close()
 
@@ -329,7 +329,7 @@ func TestImportExportRootKey(t *testing.T) {
 	// Should be able to unlock the root key with the old password
 	key, alias, err := cs2.GetPrivateKey(rootKeyID)
 	assert.NoError(t, err, "could not unlock root key")
-	assert.Equal(t, "root", alias)
+	assert.Equal(t, data.CanonicalRootRole, alias)
 	assert.Equal(t, rootKeyID, key.ID())
 }
 
@@ -352,7 +352,7 @@ func TestImportExportRootKeyReencrypt(t *testing.T) {
 	tempKeyFilePath := tempKeyFile.Name()
 	defer os.Remove(tempKeyFilePath)
 
-	err = cs.ExportRootKeyReencrypt(tempKeyFile, rootKeyID, newPassphraseRetriever)
+	err = cs.ExportKeyReencrypt(tempKeyFile, rootKeyID, newPassphraseRetriever)
 	assert.NoError(t, err)
 	tempKeyFile.Close()
 
@@ -381,6 +381,116 @@ func TestImportExportRootKeyReencrypt(t *testing.T) {
 	// Should be able to unlock the root key with the new password
 	key, alias, err := cs2.GetPrivateKey(rootKeyID)
 	assert.NoError(t, err, "could not unlock root key")
-	assert.Equal(t, "root", alias)
+	assert.Equal(t, data.CanonicalRootRole, alias)
 	assert.Equal(t, rootKeyID, key.ID())
+}
+
+func TestImportExportNonRootKey(t *testing.T) {
+	gun := "docker.com/notary"
+
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	defer os.RemoveAll(tempBaseDir)
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+
+	fileStore, err := trustmanager.NewKeyFileStore(tempBaseDir, oldPassphraseRetriever)
+	cs := NewCryptoService(gun, fileStore)
+	pubKey, err := cs.Create(data.CanonicalTargetsRole, data.ECDSAKey)
+	assert.NoError(t, err)
+
+	targetsKeyID := pubKey.ID()
+
+	tempKeyFile, err := ioutil.TempFile("", "notary-test-export-")
+	tempKeyFilePath := tempKeyFile.Name()
+	defer os.Remove(tempKeyFilePath)
+
+	err = cs.ExportKey(tempKeyFile, targetsKeyID, data.CanonicalTargetsRole)
+	assert.NoError(t, err)
+	tempKeyFile.Close()
+
+	// Create new repo to test import
+	tempBaseDir2, err := ioutil.TempDir("", "notary-test-")
+	defer os.RemoveAll(tempBaseDir2)
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+
+	fileStore2, err := trustmanager.NewKeyFileStore(tempBaseDir2, oldPassphraseRetriever)
+	cs2 := NewCryptoService(gun, fileStore2)
+
+	keyReader, err := os.Open(tempKeyFilePath)
+	assert.NoError(t, err, "could not open key file")
+
+	pemBytes, err := ioutil.ReadAll(keyReader)
+	assert.NoError(t, err, "could not read key file")
+
+	err = cs2.ImportRoleKey(pemBytes, data.CanonicalTargetsRole, oldPassphraseRetriever)
+	assert.NoError(t, err)
+	keyReader.Close()
+
+	// Look for repo's targets key in repo2
+	// There should be a file named after the key ID of the targets key we
+	// imported.
+	targetsKeyFilename := targetsKeyID + ".key"
+	_, err = os.Stat(filepath.Join(tempBaseDir2, "private", "tuf_keys", "docker.com/notary", targetsKeyFilename))
+	assert.NoError(t, err, "missing targets key")
+
+	// Check that the key is the same
+	key, alias, err := cs2.GetPrivateKey(targetsKeyID)
+	assert.NoError(t, err, "could not unlock targets key")
+	assert.Equal(t, data.CanonicalTargetsRole, alias)
+	assert.Equal(t, targetsKeyID, key.ID())
+}
+
+func TestImportExportNonRootKeyReencrypt(t *testing.T) {
+	gun := "docker.com/notary"
+
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	defer os.RemoveAll(tempBaseDir)
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+
+	fileStore, err := trustmanager.NewKeyFileStore(tempBaseDir, oldPassphraseRetriever)
+	cs := NewCryptoService(gun, fileStore)
+	pubKey, err := cs.Create(data.CanonicalSnapshotRole, data.ECDSAKey)
+	assert.NoError(t, err)
+
+	snapshotKeyID := pubKey.ID()
+
+	tempKeyFile, err := ioutil.TempFile("", "notary-test-export-")
+	tempKeyFilePath := tempKeyFile.Name()
+	defer os.Remove(tempKeyFilePath)
+
+	err = cs.ExportKeyReencrypt(tempKeyFile, snapshotKeyID, newPassphraseRetriever)
+	assert.NoError(t, err)
+	tempKeyFile.Close()
+
+	// Create new repo to test import
+	tempBaseDir2, err := ioutil.TempDir("", "notary-test-")
+	defer os.RemoveAll(tempBaseDir2)
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+
+	fileStore2, err := trustmanager.NewKeyFileStore(tempBaseDir2, newPassphraseRetriever)
+	cs2 := NewCryptoService(gun, fileStore2)
+
+	keyReader, err := os.Open(tempKeyFilePath)
+	assert.NoError(t, err, "could not open key file")
+
+	pemBytes, err := ioutil.ReadAll(keyReader)
+	assert.NoError(t, err, "could not read key file")
+
+	err = cs2.ImportRoleKey(pemBytes, data.CanonicalSnapshotRole, newPassphraseRetriever)
+	assert.NoError(t, err)
+	keyReader.Close()
+
+	// Look for repo's snapshot key in repo2
+	// There should be a file named after the key ID of the snapshot key we
+	// imported.
+	snapshotKeyFilename := snapshotKeyID + ".key"
+	_, err = os.Stat(filepath.Join(tempBaseDir2, "private", "tuf_keys", "docker.com/notary", snapshotKeyFilename))
+	assert.NoError(t, err, "missing snapshot key")
+
+	// Should be able to unlock the root key with the new password
+	key, alias, err := cs2.GetPrivateKey(snapshotKeyID)
+	assert.NoError(t, err, "could not unlock snapshot key")
+	assert.Equal(t, data.CanonicalSnapshotRole, alias)
+	assert.Equal(t, snapshotKeyID, key.ID())
 }
