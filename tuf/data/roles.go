@@ -69,16 +69,6 @@ func ValidRole(name string) bool {
 	return false
 }
 
-// IsBaseRole checks if a role name is valid base role
-func IsBaseRole(name string) bool {
-	for _, v := range BaseRoles {
-		if name == v {
-			return true
-		}
-	}
-	return false
-}
-
 // IsDelegation checks if the role is a delegation or a root role
 func IsDelegation(role string) bool {
 	targetsBase := CanonicalTargetsRole + "/"
@@ -153,9 +143,9 @@ func listKeyIDs(keyMap map[string]PublicKey) []string {
 	return keyIDs
 }
 
-// RestrictChild restricts the paths and path hash prefixes for the passed in delegation role,
+// Restrict restricts the paths and path hash prefixes for the passed in delegation role,
 // returning a copy of the role with validated paths as if it was a direct child
-func (d DelegationRole) RestrictChild(child DelegationRole) (DelegationRole, error) {
+func (d DelegationRole) Restrict(child DelegationRole) (DelegationRole, error) {
 	if !d.IsParentOf(child) {
 		return DelegationRole{}, fmt.Errorf("%s is not a parent of %s", d.Name, child.Name)
 	}

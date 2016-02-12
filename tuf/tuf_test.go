@@ -1096,10 +1096,10 @@ func TestGetDelegationRolesInvalidPaths(t *testing.T) {
 	err = repo.UpdateDelegations(role, data.KeyList{testKey2})
 	assert.NoError(t, err)
 
-	// Getting this delegation should fail path verification, so it'll have 0 paths
+	// Getting this delegation does not actually restrict paths, unless we use the RestrictChild method
 	delgRole, err := repo.GetDelegationRole("targets/test/b")
 	assert.NoError(t, err)
-	assert.Empty(t, delgRole.Paths)
+	assert.Contains(t, delgRole.Paths, "invalidpath")
 
 	delgRole, err = repo.GetDelegationRole("targets/test")
 	assert.NoError(t, err)
@@ -1131,10 +1131,10 @@ func TestGetDelegationRolesInvalidPathHashPrefix(t *testing.T) {
 	err = repo.UpdateDelegations(role, data.KeyList{testKey2})
 	assert.NoError(t, err)
 
-	// Getting this delegation should fail path hash verification, so it'll be empty
+	// Getting this delegation does not actually restrict paths, unless we use the RestrictChild method
 	delgRole, err := repo.GetDelegationRole("targets/test/b")
 	assert.NoError(t, err)
-	assert.Empty(t, delgRole.PathHashPrefixes)
+	assert.Contains(t, delgRole.PathHashPrefixes, "invalidpathhash")
 
 	delgRole, err = repo.GetDelegationRole("targets/test")
 	assert.NoError(t, err)
@@ -1187,7 +1187,7 @@ func TestDelegationRolesParent(t *testing.T) {
 	assert.False(t, delgC.IsParentOf(delgC))
 
 	// Check that parents correctly restrict paths
-	restrictedDelgB, err := delgA.RestrictChild(delgB)
+	restrictedDelgB, err := delgA.Restrict(delgB)
 	assert.NoError(t, err)
 	assert.Contains(t, restrictedDelgB.Paths, "path/b")
 	assert.Contains(t, restrictedDelgB.Paths, "anotherpath/b")
@@ -1196,12 +1196,24 @@ func TestDelegationRolesParent(t *testing.T) {
 	assert.Contains(t, restrictedDelgB.PathHashPrefixes, "anotherpathhash/b")
 	assert.NotContains(t, restrictedDelgB.PathHashPrefixes, "b/invalidpathhash")
 
-	_, err = delgB.RestrictChild(delgA)
+	_, err = delgB.Restrict(delgA)
 	assert.Error(t, err)
-	_, err = delgA.RestrictChild(delgC)
+	_, err = delgA.Restrict(delgC)
 	assert.Error(t, err)
-	_, err = delgC.RestrictChild(delgB)
+	_, err = delgC.Restrict(delgB)
 	assert.Error(t, err)
-	_, err = delgC.RestrictChild(delgA)
+	_, err = delgC.Restrict(delgA)
 	assert.Error(t, err)
+
+	// Make delgA have no paths and check that it changes delgB and delgC accordingly when chained
+	delgA.Paths = []string{}
+	delgA.PathHashPrefixes = []string{}
+	restrictedDelgB, err = delgA.Restrict(delgB)
+	assert.NoError(t, err)
+	assert.Empty(t, restrictedDelgB.Paths)
+	assert.Empty(t, restrictedDelgB.PathHashPrefixes)
+	restrictedDelgC, err := restrictedDelgB.Restrict(delgC)
+	assert.NoError(t, err)
+	assert.Empty(t, restrictedDelgC.Paths)
+	assert.Empty(t, restrictedDelgC.PathHashPrefixes)
 }
