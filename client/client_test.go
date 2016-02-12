@@ -1025,7 +1025,7 @@ func fakeServerData(t *testing.T, repo *NotaryRepository, mux *http.ServeMux,
 	timestampKey, ok := keys[data.CanonicalTimestampRole]
 	require.True(t, ok)
 	// Add timestamp key via the server's cryptoservice so it can sign
-	repo.CryptoService.AddKey(data.CanonicalTimestampRole, timestampKey)
+	repo.CryptoService.AddKey(timestampKey, data.CanonicalTimestampRole)
 
 	savedTUFRepo := repo.tufRepo // in case this is overwritten
 
@@ -3095,21 +3095,14 @@ func testPublishTargetsDelegationCanUseUserKeyWithArbitraryRole(t *testing.T, x5
 
 	// create a key on the owner repo
 	aKey := createKey(t, ownerRepo, "user", x509)
-	aKeyID, err := utils.CanonicalKeyID(aKey)
+
+	_, err := utils.CanonicalKeyID(aKey)
 	require.NoError(t, err)
-	// move this to the tuf_keys directory without any GUN, and ensure that we
-	// can sign with it
-	require.NoError(t, os.Rename(
-		filepath.Join(ownerRepo.baseDir, "private/tuf_keys", gun, aKeyID+".key"),
-		filepath.Join(ownerRepo.baseDir, "private/tuf_keys", aKeyID+".key")))
 
 	// create a key on the delegated repo
 	bKey := createKey(t, delgRepo, "notARealRoleName", x509)
-	bKeyID, err := utils.CanonicalKeyID(bKey)
+	_, err = utils.CanonicalKeyID(bKey)
 	require.NoError(t, err)
-	require.NoError(t, os.Rename(
-		filepath.Join(delgRepo.baseDir, "private/tuf_keys", gun, bKeyID+".key"),
-		filepath.Join(delgRepo.baseDir, "private/tuf_keys", bKeyID+".key")))
 
 	// clear metadata and unencrypted private key cache
 	var ownerRec, delgRec *passRoleRecorder

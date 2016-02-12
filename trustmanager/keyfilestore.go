@@ -79,7 +79,7 @@ func generateKeyInfoMap(s LimitedFileStore) map[string]KeyInfo {
 		keyID := filepath.Base(keyIDAndGun)
 
 		// If the key does not have a _, we'll attempt to
-		// read it as a PEM
+		// read the role from PEM headers
 		underscoreIndex := strings.LastIndex(keyID, "_")
 		if underscoreIndex == -1 {
 			d, err := s.Get(keyPath)
@@ -148,14 +148,17 @@ func (s *KeyFileStore) Name() string {
 }
 
 // AddKey stores the contents of a PEM-encoded private key as a PEM block
-func (s *KeyFileStore) AddKey(name, role string, privKey data.PrivateKey) error {
+func (s *KeyFileStore) AddKey(privKey data.PrivateKey, keyInfo KeyInfo) error {
 	s.Lock()
 	defer s.Unlock()
-	err := addKey(s, s.Retriever, s.cachedKeys, name, role, privKey)
+	if keyInfo.Role == data.CanonicalRootRole || data.IsDelegation(keyInfo.Role) || !data.ValidRole(keyInfo.Role) {
+		keyInfo.Gun = ""
+	}
+	err := addKey(s, s.Retriever, s.cachedKeys, filepath.Join(keyInfo.Gun, privKey.ID()), keyInfo.Role, privKey)
 	if err != nil {
 		return err
 	}
-	s.keyInfoMap[privKey.ID()] = KeyInfo{Gun: getGunFromFullID(name), Role: role}
+	s.keyInfoMap[privKey.ID()] = keyInfo
 	return nil
 }
 
@@ -248,14 +251,17 @@ func (s *KeyMemoryStore) Name() string {
 }
 
 // AddKey stores the contents of a PEM-encoded private key as a PEM block
-func (s *KeyMemoryStore) AddKey(name, alias string, privKey data.PrivateKey) error {
+func (s *KeyMemoryStore) AddKey(privKey data.PrivateKey, keyInfo KeyInfo) error {
 	s.Lock()
 	defer s.Unlock()
-	err := addKey(s, s.Retriever, s.cachedKeys, name, alias, privKey)
+	if keyInfo.Role == data.CanonicalRootRole || data.IsDelegation(keyInfo.Role) || !data.ValidRole(keyInfo.Role) {
+		keyInfo.Gun = ""
+	}
+	err := addKey(s, s.Retriever, s.cachedKeys, filepath.Join(keyInfo.Gun, privKey.ID()), keyInfo.Role, privKey)
 	if err != nil {
 		return err
 	}
-	s.keyInfoMap[privKey.ID()] = KeyInfo{Gun: getGunFromFullID(name), Role: alias}
+	s.keyInfoMap[privKey.ID()] = keyInfo
 	return nil
 }
 

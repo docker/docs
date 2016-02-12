@@ -537,7 +537,7 @@ func (k *keyCommander) keyPassphraseChange(cmd *cobra.Command, args []string) er
 	}
 
 	cs := cryptoservice.NewCryptoService("", ks...)
-	privKey, role, err := cs.GetPrivateKey(keyID)
+	privKey, _, err := cs.GetPrivateKey(keyID)
 	if err != nil {
 		return fmt.Errorf("could not retrieve local key for key ID provided: %s", keyID)
 	}
@@ -550,7 +550,7 @@ func (k *keyCommander) keyPassphraseChange(cmd *cobra.Command, args []string) er
 	if err != nil {
 		return err
 	}
-	err = keyStore.AddKey(filepath.Join(keyInfo.Gun, keyID), role, privKey)
+	err = keyStore.AddKey(privKey, keyInfo)
 	if err != nil {
 		return err
 	}

@@ -52,16 +52,9 @@ func (cs *CryptoService) Create(role, algorithm string) (data.PublicKey, error) 
 	}
 	logrus.Debugf("generated new %s key for role: %s and keyID: %s", algorithm, role, privKey.ID())
 
-	// Store the private key into our keystore with the name being: /GUN/ID.key with an alias of role
-	var keyPath string
-	if role == data.CanonicalRootRole {
-		keyPath = privKey.ID()
-	} else {
-		keyPath = filepath.Join(cs.gun, privKey.ID())
-	}
-
+	// Store the private key into our keystore
 	for _, ks := range cs.keyStores {
-		err = ks.AddKey(keyPath, role, privKey)
+		err = ks.AddKey(privKey, trustmanager.KeyInfo{Role: role, Gun: cs.gun})
 		if err == nil {
 			return data.PublicKeyFromPrivate(privKey), nil
 		}
@@ -119,13 +112,19 @@ func (cs *CryptoService) RemoveKey(keyID string) (err error) {
 
 // AddKey adds a private key to a specified role.
 // The GUN is inferred from the cryptoservice itself for non-root roles
-func (cs *CryptoService) AddKey(role string, key data.PrivateKey) (err error) {
+func (cs *CryptoService) AddKey(key data.PrivateKey, role string) (err error) {
 	keyID := key.ID()
 	if role != data.CanonicalRootRole {
 		keyID = filepath.Join(cs.gun, key.ID())
 	}
 	for _, ks := range cs.keyStores {
-		ks.AddKey(keyID, role, key)
+		if keyInfo, err := ks.GetKeyInfo(keyID); err == nil {
+			if keyInfo.Role != role {
+				return fmt.Errorf("key with same ID already exists for role: %s", keyInfo.Role)
+			}
+			continue
+		}
+		ks.AddKey(key, trustmanager.KeyInfo{Role: role, Gun: cs.gun})
 	}
 	return // returns whatever the final values were
 }
