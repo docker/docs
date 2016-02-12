@@ -42,7 +42,7 @@ const (
 type KeyStore interface {
 	// Add Key adds a key to the KeyStore, and if the key already exists,
 	// succeeds.  Otherwise, returns an error if it cannot add.
-	AddKey(name, alias string, privKey data.PrivateKey) error
+	AddKey(privKey data.PrivateKey, keyInfo KeyInfo) error
 	GetKey(name string) (data.PrivateKey, string, error)
 	GetKeyInfo(keyID string) (KeyInfo, error)
 	ListKeys() map[string]KeyInfo

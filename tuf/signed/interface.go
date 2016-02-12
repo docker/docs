@@ -16,7 +16,7 @@ type KeyService interface {
 	Create(role, algorithm string) (data.PublicKey, error)
 
 	// AddKey adds a private key to the specified role
-	AddKey(role string, key data.PrivateKey) error
+	AddKey(key data.PrivateKey, role string) error
 
 	// GetKey retrieves the public key if present, otherwise it returns nil
 	GetKey(keyID string) data.PublicKey

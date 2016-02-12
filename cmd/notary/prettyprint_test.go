@@ -103,12 +103,12 @@ func TestPrettyPrintRootAndSigningKeys(t *testing.T) {
 	root := data.CanonicalRootRole
 
 	// add keys to the key stores
-	assert.NoError(t, keyStores[0].AddKey(keys[0].ID(), root, keys[0]))
-	assert.NoError(t, keyStores[1].AddKey(keys[0].ID(), root, keys[0]))
-	assert.NoError(t, keyStores[0].AddKey(strings.Repeat("a/", 30)+keys[1].ID(), "targets", keys[1]))
-	assert.NoError(t, keyStores[1].AddKey("short/gun/"+keys[1].ID(), "snapshot", keys[1]))
-	assert.NoError(t, keyStores[0].AddKey(keys[3].ID(), "targets/a", keys[3]))
-	assert.NoError(t, keyStores[0].AddKey(keys[2].ID(), "invalidRole", keys[2]))
+	assert.NoError(t, keyStores[0].AddKey(keys[0], trustmanager.KeyInfo{Role: root, Gun: ""}))
+	assert.NoError(t, keyStores[1].AddKey(keys[0], trustmanager.KeyInfo{Role: root, Gun: ""}))
+	assert.NoError(t, keyStores[0].AddKey(keys[1], trustmanager.KeyInfo{Role: "targets", Gun: strings.Repeat("/a", 30)}))
+	assert.NoError(t, keyStores[1].AddKey(keys[1], trustmanager.KeyInfo{Role: "snapshot", Gun: "short/gun"}))
+	assert.NoError(t, keyStores[0].AddKey(keys[3], trustmanager.KeyInfo{Role: "targets/a", Gun: ""}))
+	assert.NoError(t, keyStores[0].AddKey(keys[2], trustmanager.KeyInfo{Role: "invalidRole", Gun: ""}))
 
 	expected := [][]string{
 		// root always comes first

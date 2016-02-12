@@ -29,7 +29,7 @@ func (mts *FailingCryptoService) ListKeys(role string) []string {
 	return []string{mts.testKey.ID()}
 }
 
-func (mts *FailingCryptoService) AddKey(role string, key data.PrivateKey) error {
+func (mts *FailingCryptoService) AddKey(key data.PrivateKey, role string) error {
 	return nil
 }
 
@@ -72,7 +72,7 @@ func (mts *MockCryptoService) Create(_ string, _ string) (data.PublicKey, error)
 	return mts.testKey, nil
 }
 
-func (mts *MockCryptoService) AddKey(role string, key data.PrivateKey) error {
+func (mts *MockCryptoService) AddKey(key data.PrivateKey, role string) error {
 	return nil
 }
 
@@ -134,7 +134,7 @@ func (mts *StrictMockCryptoService) ListAllKeys() map[string]string {
 	}
 }
 
-func (mts *StrictMockCryptoService) AddKey(role string, key data.PrivateKey) error {
+func (mts *StrictMockCryptoService) AddKey(key data.PrivateKey, role string) error {
 	return nil
 }
 

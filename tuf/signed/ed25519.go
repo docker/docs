@@ -30,7 +30,7 @@ func NewEd25519() *Ed25519 {
 }
 
 // AddKey allows you to add a private key
-func (e *Ed25519) AddKey(role string, k data.PrivateKey) error {
+func (e *Ed25519) AddKey(k data.PrivateKey, role string) error {
 	e.addKey(role, k)
 	return nil
 }

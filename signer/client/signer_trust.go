@@ -138,7 +138,7 @@ func (trust *NotarySigner) Create(role, algorithm string) (data.PublicKey, error
 }
 
 // AddKey adds a key
-func (trust *NotarySigner) AddKey(role string, k data.PrivateKey) error {
+func (trust *NotarySigner) AddKey(k data.PrivateKey, role string) error {
 	return errors.New("Adding a key to NotarySigner is not supported")
 }
 

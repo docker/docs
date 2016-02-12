@@ -64,7 +64,12 @@ func (cs *CryptoService) ExportKey(dest io.Writer, keyID, role string) error {
 // ExportKeyReencrypt exports the specified private key to an io.Writer in
 // PEM format. The key is reencrypted with a new passphrase.
 func (cs *CryptoService) ExportKeyReencrypt(dest io.Writer, keyID string, newPassphraseRetriever passphrase.Retriever) error {
-	privateKey, role, err := cs.GetPrivateKey(keyID)
+	privateKey, _, err := cs.GetPrivateKey(keyID)
+	if err != nil {
+		return err
+	}
+
+	keyInfo, err := cs.GetKeyInfo(keyID)
 	if err != nil {
 		return err
 	}
@@ -78,7 +83,7 @@ func (cs *CryptoService) ExportKeyReencrypt(dest io.Writer, keyID string, newPas
 		return err
 	}
 
-	err = tempKeyStore.AddKey(keyID, role, privateKey)
+	err = tempKeyStore.AddKey(privateKey, keyInfo)
 	if err != nil {
 		return err
 	}
@@ -270,12 +275,12 @@ func moveKeysByGUN(oldKeyStore, newKeyStore trustmanager.KeyStore, gun string) e
 			continue
 		}
 
-		privKey, alias, err := oldKeyStore.GetKey(keyID)
+		privKey, _, err := oldKeyStore.GetKey(keyID)
 		if err != nil {
 			return err
 		}
 
-		err = newKeyStore.AddKey(filepath.Join(keyInfo.Gun, keyID), alias, privKey)
+		err = newKeyStore.AddKey(privKey, keyInfo)
 		if err != nil {
 			return err
 		}
@@ -286,12 +291,12 @@ func moveKeysByGUN(oldKeyStore, newKeyStore trustmanager.KeyStore, gun string) e
 
 func moveKeys(oldKeyStore, newKeyStore trustmanager.KeyStore) error {
 	for keyID, keyInfo := range oldKeyStore.ListKeys() {
-		privateKey, role, err := oldKeyStore.GetKey(keyID)
+		privateKey, _, err := oldKeyStore.GetKey(keyID)
 		if err != nil {
 			return err
 		}
 
-		err = newKeyStore.AddKey(filepath.Join(keyInfo.Gun, keyID), role, privateKey)
+		err = newKeyStore.AddKey(privateKey, keyInfo)
 
 		if err != nil {
 			return err

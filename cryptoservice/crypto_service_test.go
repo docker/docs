@@ -147,7 +147,7 @@ func (c CryptoServiceTester) TestGetPrivateKeyMultipleKeystores(t *testing.T) {
 	assert.NoError(t, err, c.errorMsg("error creating key"))
 
 	for _, store := range cryptoService.keyStores {
-		err := store.AddKey(privKey.ID(), c.role, privKey)
+		err := store.AddKey(privKey, trustmanager.KeyInfo{Role: c.role, Gun: c.gun})
 		assert.NoError(t, err)
 	}
 
@@ -237,7 +237,7 @@ func (c CryptoServiceTester) TestRemoveFromMultipleKeystores(t *testing.T) {
 	assert.NoError(t, err, c.errorMsg("error creating key"))
 
 	for _, store := range cryptoService.keyStores {
-		err := store.AddKey(privKey.ID(), "root", privKey)
+		err := store.AddKey(privKey, trustmanager.KeyInfo{Role: data.CanonicalRootRole, Gun: ""})
 		assert.NoError(t, err)
 	}
 
@@ -271,7 +271,7 @@ func (c CryptoServiceTester) TestListFromMultipleKeystores(t *testing.T) {
 		// both keystores
 		for j, store := range cryptoService.keyStores {
 			if i == j || i == 2 {
-				store.AddKey(privKey.ID(), "root", privKey)
+				store.AddKey(privKey, trustmanager.KeyInfo{Role: data.CanonicalRootRole, Gun: ""})
 			}
 		}
 	}

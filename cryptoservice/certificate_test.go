@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/docker/notary/trustmanager"
+	"github.com/docker/notary/tuf/data"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -16,7 +17,7 @@ func TestGenerateCertificate(t *testing.T) {
 
 	keyStore := trustmanager.NewKeyMemoryStore(passphraseRetriever)
 
-	err = keyStore.AddKey(privKey.ID(), "root", privKey)
+	err = keyStore.AddKey(privKey, trustmanager.KeyInfo{Role: data.CanonicalRootRole, Gun: ""})
 	assert.NoError(t, err, "could not add key to store")
 
 	// Check GenerateCertificate method
