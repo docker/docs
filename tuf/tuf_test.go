@@ -1100,6 +1100,11 @@ func TestGetDelegationRolesInvalidPaths(t *testing.T) {
 	delgRole, err := repo.GetDelegationRole("targets/test/b")
 	assert.NoError(t, err)
 	assert.Empty(t, delgRole.Paths)
+
+	delgRole, err = repo.GetDelegationRole("targets/test")
+	assert.NoError(t, err)
+	assert.Contains(t, delgRole.Paths, "path")
+	assert.Contains(t, delgRole.Paths, "anotherpath")
 }
 
 func TestGetDelegationRolesInvalidPathHashPrefix(t *testing.T) {
@@ -1130,6 +1135,11 @@ func TestGetDelegationRolesInvalidPathHashPrefix(t *testing.T) {
 	delgRole, err := repo.GetDelegationRole("targets/test/b")
 	assert.NoError(t, err)
 	assert.Empty(t, delgRole.PathHashPrefixes)
+
+	delgRole, err = repo.GetDelegationRole("targets/test")
+	assert.NoError(t, err)
+	assert.Contains(t, delgRole.PathHashPrefixes, "pathhash")
+	assert.Contains(t, delgRole.PathHashPrefixes, "anotherpathhash")
 }
 
 func TestDelegationRolesParent(t *testing.T) {

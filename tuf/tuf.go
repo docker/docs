@@ -219,7 +219,7 @@ func (tr *Repo) GetDelegationRole(name string) (data.DelegationRole, error) {
 	// Get all public keys for the base role from TUF metadata
 	signedTargetData, ok := tr.Targets[data.CanonicalTargetsRole]
 	if !ok {
-		return data.DelegationRole{}, fmt.Errorf("TUF data for targets does not exist in targets metadata", name)
+		return data.DelegationRole{}, ErrNotLoaded{data.CanonicalTargetsRole}
 	}
 
 	// Keep track of paths and path hash prefixes to restrict as we traverse the delegations tree, targets implicitly has ""
@@ -247,23 +247,25 @@ func (tr *Repo) GetDelegationRole(name string) (data.DelegationRole, error) {
 			// If this is a parent role, keep traversing
 			whiteListedPaths = delgRole.Paths
 			whiteListedPathHashes = delgRole.PathHashPrefixes
-			delegationRoles = append(delegationRoles, tr.Targets[delgRole.Name].Signed.Delegations.Roles...)
+			if delegationMeta, ok := tr.Targets[delgRole.Name]; ok {
+				delegationRoles = append(delegationRoles, delegationMeta.Signed.Delegations.Roles...)
+			}
 		}
 	}
 
 	if foundRole == nil {
-		return data.DelegationRole{}, fmt.Errorf("could not find valid delegation for role %s", name)
+		return data.DelegationRole{}, ErrNotLoaded{name}
 	}
 
 	pubKeys := make(map[string]data.PublicKey)
 	parentData, ok := tr.Targets[path.Dir(foundRole.Name)]
 	if !ok {
-		return data.DelegationRole{}, fmt.Errorf("delegation parent data for %s does not exist in targets metadata", foundRole.Name)
+		return data.DelegationRole{}, ErrNotLoaded{path.Dir(path.Dir(foundRole.Name))}
 	}
 	for _, keyID := range foundRole.KeyIDs {
 		pubKey, ok := parentData.Signed.Delegations.Keys[keyID]
 		if !ok {
-			return data.DelegationRole{}, fmt.Errorf("delegation %s does not exist in targets metadata", foundRole.Name)
+			return data.DelegationRole{}, ErrNotLoaded{name}
 		}
 		pubKeys[keyID] = pubKey
 	}
