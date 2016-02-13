@@ -21,6 +21,7 @@ import (
 	"github.com/Sirupsen/logrus"
 	ctxu "github.com/docker/distribution/context"
 	"github.com/docker/go/canonical/json"
+	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"golang.org/x/net/context"
 
@@ -247,7 +248,7 @@ func TestInitRepositoryManagedRolesIncludingRoot(t *testing.T) {
 	require.IsType(t, ErrInvalidRemoteRole{}, err)
 	// Just testing the error message here in this one case
 	require.Equal(t, err.Error(),
-		"notary does not support the server managing the root key")
+		"notary does not permit the server managing the root key")
 	// no key creation happened
 	rec.requireCreated(t, nil)
 }
@@ -2553,14 +2554,18 @@ func TestRotateKeyInvalidRole(t *testing.T) {
 	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
 	defer os.RemoveAll(repo.baseDir)
 
-	// the equivalent of: (root, true), (root, false), (timestamp, true),
-	// (timestamp, false), (targets, true)
+	// the equivalent of: (root, true), (root, false), (timestamp, false), (targets, true)
 	for _, role := range data.BaseRoles {
 		if role == data.CanonicalSnapshotRole {
 			continue
 		}
 		for _, serverManagesKey := range []bool{true, false} {
+			// we support local rotation of the targets key and remote rotation of the
+			// timestamp key
 			if role == data.CanonicalTargetsRole && !serverManagesKey {
+				continue
+			}
+			if role == data.CanonicalTimestampRole && serverManagesKey {
 				continue
 			}
 			err := repo.RotateKey(role, serverManagesKey)
@@ -2569,6 +2574,21 @@ func TestRotateKeyInvalidRole(t *testing.T) {
 				role, serverManagesKey)
 		}
 	}
+}
+
+// If remotely rotating key fails, the failure is propagated
+func TestRemoteRotationError(t *testing.T) {
+	ts, _, _ := simpleTestServer(t)
+
+	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, true)
+	defer os.RemoveAll(repo.baseDir)
+
+	ts.Close()
+
+	// server has died, so this should fail
+	err := repo.RotateKey(data.CanonicalTimestampRole, true)
+	assert.Error(t, err)
+	assert.Contains(t, err.Error(), "unable to rotate remote key")
 }
 
 // Rotates the keys.  After the rotation, downloading the latest metadata

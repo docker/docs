@@ -38,7 +38,7 @@ var cmdKeyListTemplate = usageTemplate{
 var cmdRotateKeyTemplate = usageTemplate{
 	Use:   "rotate [ GUN ]",
 	Short: "Rotate the signing (non-root) keys for the given Globally Unique Name.",
-	Long:  "Removes all the old signing (non-root) keys for the given Globally Unique Name, and generates new ones.  This only makes local changes - please use then `notary publish` to push the key rotation changes to the remote server.",
+	Long:  "Removes old signing (non-root) keys for the given Globally Unique Name, and generates new ones.  If rotating to a server-managed key, the key rotation is automatically published.  If rotating to locally-managed key(s), only local, non-online changes are made - please use then `notary publish` to push the key rotation changes to the remote server.",
 }
 
 var cmdKeyGenerateRootKeyTemplate = usageTemplate{
@@ -420,12 +420,10 @@ func (k *keyCommander) keysRotate(cmd *cobra.Command, args []string) error {
 		rolesToRotate = []string{data.CanonicalSnapshotRole}
 	case data.CanonicalTargetsRole:
 		rolesToRotate = []string{data.CanonicalTargetsRole}
+	case data.CanonicalTimestampRole:
+		rolesToRotate = []string{data.CanonicalTimestampRole}
 	default:
 		return fmt.Errorf("key rotation not supported for %s keys", k.rotateKeyRole)
-	}
-	if k.rotateKeyServerManaged && rotateKeyRole != data.CanonicalSnapshotRole {
-		return fmt.Errorf(
-			"remote signing/key management is only supported for the snapshot key")
 	}
 
 	config, err := k.configGetter()

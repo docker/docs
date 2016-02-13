@@ -11,10 +11,16 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/docker/go/canonical/json"
+	"golang.org/x/net/context"
+
+	"github.com/Sirupsen/logrus"
+	ctxu "github.com/docker/distribution/context"
 	"github.com/docker/notary"
 	"github.com/docker/notary/client"
+	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/passphrase"
+	"github.com/docker/notary/server"
+	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
 	"github.com/spf13/cobra"
@@ -227,12 +233,12 @@ func TestRemoveMultikeysRemoveOnlyChosenKey(t *testing.T) {
 	}
 }
 
-// Non-roles, root, and timestamp can't be rotated
+// Non-roles, root, and delegation keys can't be rotated with this command line
 func TestRotateKeyInvalidRoles(t *testing.T) {
 	invalids := []string{
 		data.CanonicalRootRole,
-		data.CanonicalTimestampRole,
 		"notevenARole",
+		"targets/a",
 	}
 	for _, role := range invalids {
 		for _, serverManaged := range []bool{true, false} {
@@ -260,8 +266,20 @@ func TestRotateKeyTargetCannotBeServerManaged(t *testing.T) {
 	}
 	err := k.keysRotate(&cobra.Command{}, []string{"gun"})
 	assert.Error(t, err)
-	assert.Contains(t, err.Error(),
-		"remote signing/key management is only supported for the snapshot key")
+	assert.IsType(t, client.ErrInvalidRemoteRole{}, err)
+}
+
+// Cannot rotate a timestamp key and require that it is locally managed it
+func TestRotateKeyTimestampCannotBeLocallyManaged(t *testing.T) {
+	k := &keyCommander{
+		configGetter:           func() (*viper.Viper, error) { return viper.New(), nil },
+		getRetriever:           func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+		rotateKeyRole:          data.CanonicalTimestampRole,
+		rotateKeyServerManaged: false,
+	}
+	err := k.keysRotate(&cobra.Command{}, []string{"gun"})
+	assert.Error(t, err)
+	assert.IsType(t, client.ErrInvalidLocalRole{}, err)
 }
 
 // rotate key must be provided with a gun
@@ -280,17 +298,23 @@ func TestRotateKeyNoGUN(t *testing.T) {
 func setUpRepo(t *testing.T, tempBaseDir, gun string, ret passphrase.Retriever) (
 	*httptest.Server, map[string]string) {
 
-	// server that always returns 200 (and a key)
-	key, err := trustmanager.GenerateECDSAKey(rand.Reader)
-	assert.NoError(t, err)
-	pubKey := data.PublicKeyFromPrivate(key)
-	jsonBytes, err := json.MarshalCanonical(&pubKey)
-	assert.NoError(t, err)
-	keyJSON := string(jsonBytes)
-	ts := httptest.NewServer(http.HandlerFunc(
-		func(w http.ResponseWriter, r *http.Request) {
-			fmt.Fprint(w, keyJSON)
-		}))
+	// Set up server
+	ctx := context.WithValue(
+		context.Background(), "metaStore", storage.NewMemStorage())
+
+	// Do not pass one of the const KeyAlgorithms here as the value! Passing a
+	// string is in itself good test that we are handling it correctly as we
+	// will be receiving a string from the configuration.
+	ctx = context.WithValue(ctx, "keyAlgorithm", "ecdsa")
+
+	// Eat the logs instead of spewing them out
+	l := logrus.New()
+	l.Out = bytes.NewBuffer(nil)
+	ctx = ctxu.WithLogger(ctx, logrus.NewEntry(l))
+
+	cryptoService := cryptoservice.NewCryptoService(
+		"", trustmanager.NewKeyMemoryStore(ret))
+	ts := httptest.NewServer(server.RootHandler(nil, ctx, cryptoService))
 
 	repo, err := client.NewNotaryRepository(
 		tempBaseDir, gun, ts.URL, http.DefaultTransport, ret)
@@ -309,39 +333,61 @@ func setUpRepo(t *testing.T, tempBaseDir, gun string, ret passphrase.Retriever) 
 // that the correct config variables are passed for the client to request a key
 // from the remote server.
 func TestRotateKeyRemoteServerManagesKey(t *testing.T) {
-	// Temporary directory where test files will be created
-	tempBaseDir, err := ioutil.TempDir("/tmp", "notary-test-")
-	defer os.RemoveAll(tempBaseDir)
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
-	gun := "docker.com/notary"
+	for _, role := range []string{data.CanonicalSnapshotRole, data.CanonicalTimestampRole} {
+		// Temporary directory where test files will be created
+		tempBaseDir, err := ioutil.TempDir("/tmp", "notary-test-")
+		defer os.RemoveAll(tempBaseDir)
+		assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+		gun := "docker.com/notary"
 
-	ret := passphrase.ConstantRetriever("pass")
+		ret := passphrase.ConstantRetriever("pass")
 
-	ts, initialKeys := setUpRepo(t, tempBaseDir, gun, ret)
-	defer ts.Close()
+		ts, initialKeys := setUpRepo(t, tempBaseDir, gun, ret)
+		defer ts.Close()
 
-	k := &keyCommander{
-		configGetter: func() (*viper.Viper, error) {
-			v := viper.New()
-			v.SetDefault("trust_dir", tempBaseDir)
-			v.SetDefault("remote_server.url", ts.URL)
-			return v, nil
-		},
-		getRetriever:           func() passphrase.Retriever { return ret },
-		rotateKeyRole:          data.CanonicalSnapshotRole,
-		rotateKeyServerManaged: true,
+		k := &keyCommander{
+			configGetter: func() (*viper.Viper, error) {
+				v := viper.New()
+				v.SetDefault("trust_dir", tempBaseDir)
+				v.SetDefault("remote_server.url", ts.URL)
+				return v, nil
+			},
+			getRetriever:           func() passphrase.Retriever { return ret },
+			rotateKeyRole:          role,
+			rotateKeyServerManaged: true,
+		}
+		err = k.keysRotate(&cobra.Command{}, []string{gun})
+		assert.NoError(t, err)
+
+		repo, err := client.NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport, ret)
+		assert.NoError(t, err, "error creating repo: %s", err)
+
+		cl, err := repo.GetChangelist()
+		assert.NoError(t, err, "unable to get changelist: %v", err)
+		assert.Len(t, cl.List(), 1, "expected a single key rotation change")
+
+		assert.NoError(t, repo.Publish())
+
+		finalKeys := repo.CryptoService.ListAllKeys()
+		assert.Len(t, initialKeys, 3)
+		// no keys have been created, since a remote key was specified
+		if role == data.CanonicalSnapshotRole {
+			assert.Len(t, finalKeys, 2)
+			for k, r := range initialKeys {
+				if r != data.CanonicalSnapshotRole {
+					_, ok := finalKeys[k]
+					assert.True(t, ok)
+				}
+			}
+		} else {
+			assert.Len(t, finalKeys, 3)
+			for k := range initialKeys {
+				_, ok := finalKeys[k]
+				assert.True(t, ok)
+			}
+		}
+
 	}
-	err = k.keysRotate(&cobra.Command{}, []string{gun})
-	assert.NoError(t, err)
-
-	repo, err := client.NewNotaryRepository(tempBaseDir, gun, ts.URL, nil, ret)
-	assert.NoError(t, err, "error creating repo: %s", err)
-
-	cl, err := repo.GetChangelist()
-	assert.NoError(t, err, "unable to get changelist: %v", err)
-	assert.Len(t, cl.List(), 1)
-	// no keys have been created, since a remote key was specified
-	assert.Equal(t, initialKeys, repo.CryptoService.ListAllKeys())
 }
 
 // The command line uses NotaryRepository's RotateKey - this is just testing

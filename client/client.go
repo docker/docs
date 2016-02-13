@@ -46,7 +46,18 @@ type ErrInvalidRemoteRole struct {
 
 func (err ErrInvalidRemoteRole) Error() string {
 	return fmt.Sprintf(
-		"notary does not support the server managing the %s key", err.Role)
+		"notary does not permit the server managing the %s key", err.Role)
+}
+
+// ErrInvalidLocalRole is returned when the client wants to manage
+// an unsupported key type
+type ErrInvalidLocalRole struct {
+	Role string
+}
+
+func (err ErrInvalidLocalRole) Error() string {
+	return fmt.Sprintf(
+		"notary does not permit the client managing the %s key", err.Role)
 }
 
 // ErrRepositoryNotExist is returned when an action is taken on a remote
@@ -543,11 +554,10 @@ func (r *NotaryRepository) Publish() error {
 			initialPublish = true
 		} else {
 			// We could not update, so we cannot publish.
-			logrus.Error("Could not publish Repository: ", err.Error())
+			logrus.Error("Could not publish Repository since we could not update: ", err.Error())
 			return err
 		}
 	}
-
 	cl, err := r.GetChangelist()
 	if err != nil {
 		return err
@@ -640,7 +650,7 @@ func (r *NotaryRepository) Publish() error {
 // to load metadata for all roles.  Since server snapshots are supported,
 // if the snapshot metadata fails to load, that's ok.
 // This can also be unified with some cache reading tools from tuf/client.
-// This assumes that bootstrapRepo is only used by Publish()
+// This assumes that bootstrapRepo is only used by Publish() or RotateKey()
 func (r *NotaryRepository) bootstrapRepo() error {
 	tufRepo := tuf.NewRepo(r.CryptoService)
 
@@ -858,25 +868,36 @@ func (r *NotaryRepository) validateRoot(rootJSON []byte) (*data.SignedRoot, erro
 // creates and adds one new key or delegates managing the key to the server.
 // These changes are staged in a changelist until publish is called.
 func (r *NotaryRepository) RotateKey(role string, serverManagesKey bool) error {
-	if role == data.CanonicalRootRole || role == data.CanonicalTimestampRole {
-		return fmt.Errorf(
-			"notary does not currently support rotating the %s key", role)
-	}
-	if serverManagesKey && role == data.CanonicalTargetsRole {
-		return ErrInvalidRemoteRole{Role: data.CanonicalTargetsRole}
+	switch {
+	// We currently support locally managing targets keys, remotely managing
+	// timestamp keys, and locally or remotely managing snapshot keys.
+	case role == data.CanonicalTargetsRole:
+		if serverManagesKey {
+			return ErrInvalidRemoteRole{Role: data.CanonicalTargetsRole}
+		}
+	case role == data.CanonicalTimestampRole:
+		if !serverManagesKey {
+			return ErrInvalidLocalRole{Role: data.CanonicalTimestampRole}
+		}
+	case role == data.CanonicalSnapshotRole:
+	default:
+		return fmt.Errorf("notary does not currently permit rotating the %s key", role)
 	}
 
 	var (
-		pubKey data.PublicKey
-		err    error
+		pubKey       data.PublicKey
+		err          error
+		errFmtString string
 	)
 	if serverManagesKey {
 		pubKey, err = getRemoteKey(r.baseURL, r.gun, role, r.roundTrip)
+		errFmtString = "unable to rotate remote key: %s"
 	} else {
 		pubKey, err = r.CryptoService.Create(role, data.ECDSAKey)
+		errFmtString = "unable to generate key: %s"
 	}
 	if err != nil {
-		return err
+		return fmt.Errorf(errFmtString, err)
 	}
 
 	return r.rootFileKeyChange(role, changelist.ActionCreate, pubKey)
