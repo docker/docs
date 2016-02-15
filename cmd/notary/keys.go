@@ -36,9 +36,9 @@ var cmdKeyListTemplate = usageTemplate{
 }
 
 var cmdRotateKeyTemplate = usageTemplate{
-	Use:   "rotate [ GUN ]",
-	Short: "Rotate the signing (non-root) keys for the given Globally Unique Name.",
-	Long:  "Removes old signing (non-root) keys for the given Globally Unique Name, and generates new ones.  If rotating to a server-managed key, the key rotation is automatically published.  If rotating to locally-managed key(s), only local, non-online changes are made - please use then `notary publish` to push the key rotation changes to the remote server.",
+	Use:   "rotate [ GUN ] [ key role ]",
+	Short: "Rotate a signing (non-root) key of the given type for the given Globally Unique Name and role.",
+	Long:  "Generates a new signing key (non-root) for the given Globally Unique Name and role.  Rotating to a server-managed key is an online-only operation: a new key is requested from the server rather than generated, and if successful, the key rotation is immediately published.  Rotating to a locally-managed key is an offline operation only: `notary publish` must be executed manually afterward to publish to the remote server.\nThe role must be one of \"snapshot\", \"targets\", or \"timestamp\".",
 }
 
 var cmdKeyGenerateRootKeyTemplate = usageTemplate{
@@ -125,13 +125,9 @@ func (k *keyCommander) GetCommand() *cobra.Command {
 
 	cmdRotateKey := cmdRotateKeyTemplate.ToCommand(k.keysRotate)
 	cmdRotateKey.Flags().BoolVarP(&k.rotateKeyServerManaged, "server-managed", "r",
-		false, "Signing and key management will be handled by the remote server. "+
-			"(no key will be generated or stored locally) "+
-			"Can only be used in conjunction with --key-type.")
-	cmdRotateKey.Flags().StringVarP(&k.rotateKeyRole, "key-type", "t", "",
-		`Key type to rotate.  Supported values: "targets", "snapshot". `+
-			`If not provided, both targets and snapshot keys will be rotated, `+
-			`and the new keys will be locally generated and stored.`)
+		false, "Signing and key management will be handled by the remote server "+
+			"(no key will be generated or stored locally). "+
+			"Required for timestamp role, optional for snapshot role")
 	cmd.AddCommand(cmdRotateKey)
 
 	return cmd
@@ -406,24 +402,9 @@ func (k *keyCommander) keysImport(cmd *cobra.Command, args []string) error {
 }
 
 func (k *keyCommander) keysRotate(cmd *cobra.Command, args []string) error {
-	if len(args) < 1 {
+	if len(args) < 2 {
 		cmd.Usage()
-		return fmt.Errorf("Must specify a GUN")
-	}
-	rotateKeyRole := strings.ToLower(k.rotateKeyRole)
-
-	var rolesToRotate []string
-	switch rotateKeyRole {
-	case "":
-		rolesToRotate = []string{data.CanonicalSnapshotRole, data.CanonicalTargetsRole}
-	case data.CanonicalSnapshotRole:
-		rolesToRotate = []string{data.CanonicalSnapshotRole}
-	case data.CanonicalTargetsRole:
-		rolesToRotate = []string{data.CanonicalTargetsRole}
-	case data.CanonicalTimestampRole:
-		rolesToRotate = []string{data.CanonicalTimestampRole}
-	default:
-		return fmt.Errorf("key rotation not supported for %s keys", k.rotateKeyRole)
+		return fmt.Errorf("Must specify a GUN and a key role to rotate")
 	}
 
 	config, err := k.configGetter()
@@ -432,6 +413,8 @@ func (k *keyCommander) keysRotate(cmd *cobra.Command, args []string) error {
 	}
 
 	gun := args[0]
+	rotateKeyRole := args[1]
+
 	var rt http.RoundTripper
 	if k.rotateKeyServerManaged {
 		// this does not actually push the changes, just creates the keys, but
@@ -447,12 +430,7 @@ func (k *keyCommander) keysRotate(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
-	for _, role := range rolesToRotate {
-		if err := nRepo.RotateKey(role, k.rotateKeyServerManaged); err != nil {
-			return err
-		}
-	}
-	return nil
+	return nRepo.RotateKey(rotateKeyRole, k.rotateKeyServerManaged)
 }
 
 func removeKeyInteractively(keyStores []trustmanager.KeyStore, keyID string,

@@ -106,7 +106,7 @@ var exampleValidCommands = []string{
 	"add repo v1 somefile",
 	"verify repo v1",
 	"key list",
-	"key rotate repo",
+	"key rotate repo snapshot",
 	"key generate rsa",
 	"key backup tempfile.zip",
 	"key export e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 backup.pem",

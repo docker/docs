@@ -39,7 +39,7 @@ func (err ErrRepoNotInitialized) Error() string {
 }
 
 // ErrInvalidRemoteRole is returned when the server is requested to manage
-// an unsupported key type
+// a key type that is not permitted
 type ErrInvalidRemoteRole struct {
 	Role string
 }
@@ -50,7 +50,7 @@ func (err ErrInvalidRemoteRole) Error() string {
 }
 
 // ErrInvalidLocalRole is returned when the client wants to manage
-// an unsupported key type
+// a key type that is not permitted
 type ErrInvalidLocalRole struct {
 	Role string
 }
@@ -869,17 +869,18 @@ func (r *NotaryRepository) validateRoot(rootJSON []byte) (*data.SignedRoot, erro
 // These changes are staged in a changelist until publish is called.
 func (r *NotaryRepository) RotateKey(role string, serverManagesKey bool) error {
 	switch {
-	// We currently support locally managing targets keys, remotely managing
-	// timestamp keys, and locally or remotely managing snapshot keys.
+	// We currently support locally or remotely managing snapshot keys...
+	case role == data.CanonicalSnapshotRole:
+	// locally managing targets keys only
 	case role == data.CanonicalTargetsRole:
 		if serverManagesKey {
 			return ErrInvalidRemoteRole{Role: data.CanonicalTargetsRole}
 		}
+	// and remotely managing timestamp keys only
 	case role == data.CanonicalTimestampRole:
 		if !serverManagesKey {
 			return ErrInvalidLocalRole{Role: data.CanonicalTimestampRole}
 		}
-	case role == data.CanonicalSnapshotRole:
 	default:
 		return fmt.Errorf("notary does not currently permit rotating the %s key", role)
 	}

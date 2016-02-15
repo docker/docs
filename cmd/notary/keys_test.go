@@ -233,7 +233,7 @@ func TestRemoveMultikeysRemoveOnlyChosenKey(t *testing.T) {
 	}
 }
 
-// Non-roles, root, and delegation keys can't be rotated with this command line
+// Non-roles, root, and delegation keys can't be rotated with the command line
 func TestRotateKeyInvalidRoles(t *testing.T) {
 	invalids := []string{
 		data.CanonicalRootRole,
@@ -248,15 +248,19 @@ func TestRotateKeyInvalidRoles(t *testing.T) {
 				rotateKeyRole:          role,
 				rotateKeyServerManaged: serverManaged,
 			}
-			err := k.keysRotate(&cobra.Command{}, []string{"gun"})
+			commands := []string{"gun", role}
+			if serverManaged {
+				commands = append(commands, "-r")
+			}
+			err := k.keysRotate(&cobra.Command{}, commands)
 			assert.Error(t, err)
 			assert.Contains(t, err.Error(),
-				fmt.Sprintf("key rotation not supported for %s keys", role))
+				fmt.Sprintf("does not currently permit rotating the %s key", role))
 		}
 	}
 }
 
-// Cannot rotate a targets key and require that the server manage it
+// Cannot rotate a targets key and require that it is server managed
 func TestRotateKeyTargetCannotBeServerManaged(t *testing.T) {
 	k := &keyCommander{
 		configGetter:           func() (*viper.Viper, error) { return viper.New(), nil },
@@ -264,12 +268,12 @@ func TestRotateKeyTargetCannotBeServerManaged(t *testing.T) {
 		rotateKeyRole:          data.CanonicalTargetsRole,
 		rotateKeyServerManaged: true,
 	}
-	err := k.keysRotate(&cobra.Command{}, []string{"gun"})
+	err := k.keysRotate(&cobra.Command{}, []string{"gun", data.CanonicalTargetsRole})
 	assert.Error(t, err)
 	assert.IsType(t, client.ErrInvalidRemoteRole{}, err)
 }
 
-// Cannot rotate a timestamp key and require that it is locally managed it
+// Cannot rotate a timestamp key and require that it is locally managed
 func TestRotateKeyTimestampCannotBeLocallyManaged(t *testing.T) {
 	k := &keyCommander{
 		configGetter:           func() (*viper.Viper, error) { return viper.New(), nil },
@@ -277,7 +281,7 @@ func TestRotateKeyTimestampCannotBeLocallyManaged(t *testing.T) {
 		rotateKeyRole:          data.CanonicalTimestampRole,
 		rotateKeyServerManaged: false,
 	}
-	err := k.keysRotate(&cobra.Command{}, []string{"gun"})
+	err := k.keysRotate(&cobra.Command{}, []string{"gun", data.CanonicalTimestampRole})
 	assert.Error(t, err)
 	assert.IsType(t, client.ErrInvalidLocalRole{}, err)
 }
@@ -353,11 +357,9 @@ func TestRotateKeyRemoteServerManagesKey(t *testing.T) {
 				return v, nil
 			},
 			getRetriever:           func() passphrase.Retriever { return ret },
-			rotateKeyRole:          role,
 			rotateKeyServerManaged: true,
 		}
-		err = k.keysRotate(&cobra.Command{}, []string{gun})
-		assert.NoError(t, err)
+		assert.NoError(t, k.keysRotate(&cobra.Command{}, []string{gun, role}))
 
 		repo, err := client.NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport, ret)
 		assert.NoError(t, err, "error creating repo: %s", err)
@@ -391,8 +393,7 @@ func TestRotateKeyRemoteServerManagesKey(t *testing.T) {
 }
 
 // The command line uses NotaryRepository's RotateKey - this is just testing
-// that the correct config variables are passed for the client to rotate
-// both the targets and snapshot key, and create them locally
+// that multiple keys can be rotated at once locally
 func TestRotateKeyBothKeys(t *testing.T) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("/tmp", "notary-test-")
@@ -415,8 +416,8 @@ func TestRotateKeyBothKeys(t *testing.T) {
 		},
 		getRetriever: func() passphrase.Retriever { return ret },
 	}
-	err = k.keysRotate(&cobra.Command{}, []string{gun})
-	assert.NoError(t, err)
+	assert.NoError(t, k.keysRotate(&cobra.Command{}, []string{gun, data.CanonicalTargetsRole}))
+	assert.NoError(t, k.keysRotate(&cobra.Command{}, []string{gun, data.CanonicalSnapshotRole}))
 
 	repo, err := client.NewNotaryRepository(tempBaseDir, gun, ts.URL, nil, ret)
 	assert.NoError(t, err, "error creating repo: %s", err)
