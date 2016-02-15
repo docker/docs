@@ -589,7 +589,7 @@ func TestClientDelegationsPublishing(t *testing.T) {
 	assertNumKeys(t, tempDir, 1, 2, true)
 
 	// rotate the snapshot key to server
-	output, err = runCommand(t, tempDir, "-s", server.URL, "key", "rotate", "gun", "-r", "--key-type", "snapshot")
+	output, err = runCommand(t, tempDir, "-s", server.URL, "key", "rotate", "gun", "snapshot", "-r")
 	assert.NoError(t, err)
 
 	// publish repo
@@ -871,7 +871,9 @@ func TestClientKeyGenerationRotation(t *testing.T) {
 	assertSuccessfullyPublish(t, tempDir, server.URL, "gun", target, tempfiles[0])
 
 	// rotate the signing keys
-	_, err = runCommand(t, tempDir, "key", "rotate", "gun")
+	_, err = runCommand(t, tempDir, "key", "rotate", "gun", data.CanonicalSnapshotRole)
+	assert.NoError(t, err)
+	_, err = runCommand(t, tempDir, "key", "rotate", "gun", data.CanonicalTargetsRole)
 	assert.NoError(t, err)
 	root, sign := assertNumKeys(t, tempDir, 1, 4, true)
 	assert.Equal(t, origRoot[0], root[0])
