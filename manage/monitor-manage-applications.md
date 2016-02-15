@@ -1,5 +1,6 @@
 <!--[metadata]>
 +++
+draft=true
 title = "Applications"
 description = "Monitor, manage, troubleshoot applications"
 keywords = ["tbd, tbd"]

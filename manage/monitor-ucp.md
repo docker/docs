@@ -1,11 +1,11 @@
 <!--[metadata]>
 +++
-title = "Your UCP installation"
+title = "Monitor and Manage UCP"
 description = "Monitor and Manage UCP"
 keywords = ["tbd, tbd"]
 [menu.main]
-parent="mn_manage_ucp"
-weight=-100
+parent="mn_ucp"
+weight=-80
 +++
 <![end-metadata]-->
 

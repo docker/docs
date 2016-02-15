@@ -5,7 +5,7 @@ description = "Upgrade production installation"
 keywords = ["tbd, tbd"]
 [menu.main]
 parent="mn_ucp"
-weight=-80
+weight=-81
 +++
 <![end-metadata]-->
 
