@@ -24,10 +24,10 @@ type Root struct {
 	ConsistentSnapshot bool                 `json:"consistent_snapshot"`
 }
 
-// isValidRoot returns an error, or nil, depending on whether the content of the struct
+// isValidRootStructure returns an error, or nil, depending on whether the content of the struct
 // is valid for root metadata.  This does not check signatures or expiry, just that
 // the metadata content is valid.
-func isValidRoot(r Root) error {
+func isValidRootStructure(r Root) error {
 	expectedType := TUFTypes[CanonicalRootRole]
 	if r.Type != expectedType {
 		return ErrInvalidMeta{
@@ -114,10 +114,10 @@ func (r *SignedRoot) MarshalJSON() ([]byte, error) {
 // that it is a valid SignedRoot
 func RootFromSigned(s *Signed) (*SignedRoot, error) {
 	r := Root{}
-	if err := json.Unmarshal(s.Signed, &r); err != nil {
+	if err := defaultSerializer.Unmarshal(s.Signed, &r); err != nil {
 		return nil, err
 	}
-	if err := isValidRoot(r); err != nil {
+	if err := isValidRootStructure(r); err != nil {
 		return nil, err
 	}
 	sigs := make([]Signature, len(s.Signatures))

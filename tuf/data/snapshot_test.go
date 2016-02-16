@@ -17,6 +17,7 @@ func validSnapshotTemplate() *SignedSnapshot {
 			Type: "Snapshot", Version: 1, Expires: time.Now(), Meta: Files{
 				CanonicalRootRole:    FileMeta{},
 				CanonicalTargetsRole: FileMeta{},
+				"targets/a":          FileMeta{},
 			}},
 		Signatures: []Signature{
 			{KeyID: "key1", Method: "method1", Signature: []byte("hello")},
@@ -101,6 +102,17 @@ func TestSnapshotMarshalJSONMarshallingErrorsPropagated(t *testing.T) {
 	require.EqualError(t, err, "bad")
 }
 
+func TestSnapshotFromSignedUnmarshallingErrorsPropagated(t *testing.T) {
+	signed, err := validSnapshotTemplate().ToSigned()
+	require.NoError(t, err)
+
+	setDefaultSerializer(errorSerializer{})
+	defer setDefaultSerializer(canonicalJSON{})
+
+	_, err = SnapshotFromSigned(signed)
+	require.EqualError(t, err, "bad")
+}
+
 // SnapshotFromSigned succeeds if the snapshot is valid, and copies the signatures
 // rather than assigns them
 func TestSnapshotFromSignedCopiesSignatures(t *testing.T) {
@@ -168,7 +180,7 @@ func TestSnapshotGetMeta(t *testing.T) {
 	require.IsType(t, &FileMeta{}, f)
 
 	// now one that doesn't exist
-	f, err = ts.GetMeta("targets/a")
+	f, err = ts.GetMeta("targets/a/b")
 	require.Error(t, err)
 	require.IsType(t, ErrMissingMeta{}, err)
 	require.Nil(t, f)
