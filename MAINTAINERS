@@ -300,7 +300,7 @@ or feedback about project operations.
 
 [Org]
     [Org.Curators]
-        People = ["thajeztah"]
+        People = ["amitshukla", "thajeztah"]
     [Org."Docs maintainers"]
         People = ["jamtur01", "moxiegirl", "sven", "thajeztah"]
     [Org.boot2docker]
@@ -329,6 +329,8 @@ or feedback about project operations.
         People = ["calavera"]
     [Org.kitematic]
         People = ["elesant", "frenchben", "jeffdm", "mchiang0610"]
+    [Org.leadership]
+        People = ["abronan"]
     [Org.leeroy]
         People = ["calavera", "jfrazelle"]
     [Org.libchan]
@@ -338,7 +340,7 @@ or feedback about project operations.
     [Org.libkv]
         People = ["abronan", "aluzzardi", "sanimej", "vieux"]
     [Org.libnetwork]
-        People = ["aboch", "lk4d4", "icecrime", "mrjana", "mavenugo"]
+        People = ["aboch", "lk4d4", "icecrime", "mrjana", "mavenugo", "sanimej"]
     [Org.machine]
         People = ["dgageot", "ehazlett", "jeanlaurent", "nathanleclaire"]
     [Org.migrator]
@@ -348,7 +350,7 @@ or feedback about project operations.
     [Org.spdystream]
         People = ["dmcgowan"]
     [Org.swarm]
-        People = ["abronan", "aluzzardi", "chanwit", "dongluochen", "jimmyxian", "mhbauer", "vieux"]
+        People = ["abronan", "aluzzardi", "chanwit", "dongluochen", "jimmyxian", "mhbauer", "nishanttotla", "vieux"]
     [Org.toolbox]
         People = ["jeffdm", "lisean106", "mchiang0610"]
     [Org."v1.10-migrator"]
@@ -379,10 +381,18 @@ or feedback about project operations.
         Name = "Andrea Luzzardi"
         Email = "al@docker.com"
         GitHub = "aluzzardi"
+    [People.amitshukla]
+        Name = "Amit Shukla"
+        Email = "amit.shukla@docker.com"
+        GitHub = "amitshukla"
     [People.bfirsh]
         Name = "Ben Firshman"
         Email = "ben@firshman.co.uk"
         GitHub = "bfirsh"
+    [People.brianbland]
+        Name = "Brian Bland"
+        Email = "brian.bland@docker.com"
+        GitHub = "BrianBland"
     [People.calavera]
         Name = "David Calavera"
         Email = "david.calavera@gmail.com"
@@ -551,6 +561,10 @@ or feedback about project operations.
         Name = "Nathan McCauley"
         Email = "nathan.mccauley@docker.com"
         GitHub = "nathanmccauley"
+    [People.nishanttotla]
+        Name = "Nishant Totla"
+        Email = "nishanttotla@gmail.com"
+        GitHub = "nishanttotla"
     [People.richardscothern]
         Name = "Richard Scothern"
         Email = "richard.scothern@gmail.com"
