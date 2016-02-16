@@ -572,7 +572,7 @@ func (r *NotaryRepository) Publish() error {
 		r.tufRepo, data.CanonicalSnapshotRole)
 
 	if err == nil {
-		// Only update the snapshot if we've sucessfully signed it.
+		// Only update the snapshot if we've successfully signed it.
 		updatedFiles[data.CanonicalSnapshotRole] = snapshotJSON
 	} else if _, ok := err.(signed.ErrNoKeys); ok {
 		// If signing fails due to us not having the snapshot key, then
