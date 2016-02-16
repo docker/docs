@@ -9,6 +9,7 @@ import (
 	"net/http/httptest"
 	"os"
 	"reflect"
+	"regexp"
 	"strings"
 	"testing"
 	"time"
@@ -812,6 +813,36 @@ var waysToMessUpServer = []swizzleExpectations{
 		}},
 }
 
+var _waysToMessUpServerRoot []swizzleExpectations
+
+// A getter that also sets once through - we can just add these, but it's very easier to do it
+// programmatically
+func waysToMessUpServerRoot() []swizzleExpectations {
+	if _waysToMessUpServerRoot == nil {
+		_waysToMessUpServerRoot = waysToMessUpServer
+		for _, roleName := range data.BaseRoles {
+			_waysToMessUpServerRoot = append(_waysToMessUpServerRoot,
+				swizzleExpectations{
+					desc: fmt.Sprintf("no %s keys", roleName),
+					expectErrs: []interface{}{
+						&certs.ErrValidationFail{}, signed.ErrRoleThreshold{}},
+					swizzle: func(s *testutils.MetadataSwizzler, role string) error {
+						return s.MutateRoot(func(r *data.Root) {
+							r.Roles[roleName].KeyIDs = []string{}
+						})
+					}},
+				swizzleExpectations{
+					desc:       fmt.Sprintf("no %s role", roleName),
+					expectErrs: []interface{}{tuf.ErrNotLoaded{}},
+					swizzle: func(s *testutils.MetadataSwizzler, role string) error {
+						return s.MutateRoot(func(r *data.Root) { delete(r.Roles, roleName) })
+					}},
+			)
+		}
+	}
+	return _waysToMessUpServerRoot
+}
+
 // If there's no local cache, we go immediately to check the remote server for
 // root, and if it invalid (corrupted), we cannot update.  This happens
 // with and without a force check (update for write).
@@ -820,28 +851,7 @@ func TestUpdateRootRemoteCorruptedNoLocalCache(t *testing.T) {
 		t.Skip("skipping test in short mode")
 	}
 
-	waysToMessUpServerRoot := waysToMessUpServer
-	for _, roleName := range data.BaseRoles {
-		waysToMessUpServerRoot = append(waysToMessUpServer,
-			swizzleExpectations{
-				desc: fmt.Sprintf("no %s keys", roleName),
-				expectErrs: []interface{}{
-					&certs.ErrValidationFail{}, signed.ErrRoleThreshold{}},
-				swizzle: func(s *testutils.MetadataSwizzler, role string) error {
-					return s.MutateRoot(func(r *data.Root) {
-						r.Roles[roleName].KeyIDs = []string{}
-					})
-				}},
-			swizzleExpectations{
-				desc:       fmt.Sprintf("no %s role", roleName),
-				expectErrs: []interface{}{tuf.ErrNotLoaded{}},
-				swizzle: func(s *testutils.MetadataSwizzler, role string) error {
-					return s.MutateRoot(func(r *data.Root) { delete(r.Roles, roleName) })
-				}},
-		)
-	}
-
-	for _, testData := range waysToMessUpServerRoot {
+	for _, testData := range waysToMessUpServerRoot() {
 		if testData.desc == "insufficient signatures" {
 			// Currently if we download the root during the bootstrap phase,
 			// we don't check for enough signatures to meet the threshold.  We
@@ -869,28 +879,7 @@ func TestUpdateRootRemoteCorruptedCanUseLocalCache(t *testing.T) {
 		t.Skip("skipping test in short mode")
 	}
 
-	waysToMessUpServerRoot := waysToMessUpServer
-	for _, roleName := range data.BaseRoles {
-		waysToMessUpServerRoot = append(waysToMessUpServer,
-			swizzleExpectations{
-				desc: fmt.Sprintf("no %s keys", roleName),
-				expectErrs: []interface{}{
-					&certs.ErrValidationFail{}, signed.ErrRoleThreshold{}},
-				swizzle: func(s *testutils.MetadataSwizzler, role string) error {
-					return s.MutateRoot(func(r *data.Root) {
-						r.Roles[roleName].KeyIDs = []string{}
-					})
-				}},
-			swizzleExpectations{
-				desc:       fmt.Sprintf("no %s role", roleName),
-				expectErrs: []interface{}{tuf.ErrNotLoaded{}},
-				swizzle: func(s *testutils.MetadataSwizzler, role string) error {
-					return s.MutateRoot(func(r *data.Root) { delete(r.Roles, roleName) })
-				}},
-		)
-	}
-
-	for _, testData := range waysToMessUpServerRoot {
+	for _, testData := range waysToMessUpServerRoot() {
 		testUpdateRemoteCorruptValidChecksum(t, updateOpts{
 			localCache: true,
 			forWrite:   false,
@@ -910,43 +899,29 @@ func TestUpdateRootRemoteCorruptedCannotUseLocalCache(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping test in short mode")
 	}
+	for _, testData := range waysToMessUpServerRoot() {
+		// TODO: Bug: currently, if any role is missing from the root, the
+		// update succeeds because the cached root, with good roles, was
+		// bootstrapped and hence the roles are loaded into the KeyDB by the
+		// time the update happens.  So when the new root is loaded, although
+		// it is missing roles, the cached role from the KeyDB is used instead.
+		// But really, if the root is missing a role, it should be invalid and
+		// the update should fail instead.
+		isbuggy, err := regexp.MatchString("no [a-z]+ role", testData.desc)
+		require.NoError(t, err)
 
-	waysToMessUpServerRoot := waysToMessUpServer
-	for _, roleName := range data.BaseRoles {
-		waysToMessUpServerRoot = append(waysToMessUpServer,
-			swizzleExpectations{
-				desc: fmt.Sprintf("no %s keys", roleName),
-				expectErrs: []interface{}{
-					&certs.ErrValidationFail{}, signed.ErrRoleThreshold{}},
-				swizzle: func(s *testutils.MetadataSwizzler, role string) error {
-					return s.MutateRoot(func(r *data.Root) {
-						r.Roles[roleName].KeyIDs = []string{}
-					})
-				}},
-			swizzleExpectations{
-				desc:       fmt.Sprintf("no %s role", roleName),
-				expectErrs: []interface{}{tuf.ErrNotLoaded{}},
-				swizzle: func(s *testutils.MetadataSwizzler, role string) error {
-					return s.MutateRoot(func(r *data.Root) { delete(r.Roles, roleName) })
-				}},
-		)
-	}
-
-	// if the timestamp role is missing, then the timestamp is broken,
-	// so it will revert to the prevoius timestamp
-	for _, testData := range waysToMessUpServerRoot {
 		testUpdateRemoteCorruptValidChecksum(t, updateOpts{
 			serverHasNewData: true,
 			localCache:       true,
 			forWrite:         false,
 			role:             data.CanonicalRootRole,
-		}, testData, !strings.HasPrefix(testData.desc, "no timestamp role"))
+		}, testData, !isbuggy)
 		testUpdateRemoteCorruptValidChecksum(t, updateOpts{
 			serverHasNewData: true,
 			localCache:       true,
 			forWrite:         true,
 			role:             data.CanonicalRootRole,
-		}, testData, !strings.HasPrefix(testData.desc, "no timestamp role"))
+		}, testData, !isbuggy)
 	}
 }
 
