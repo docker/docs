@@ -318,7 +318,7 @@ func (c *Client) downloadSnapshot() error {
 	logrus.Debug("Downloading Snapshot...")
 	role := data.CanonicalSnapshotRole
 	if c.local.Timestamp == nil {
-		return data.ErrMissingMeta{Role: "snapshot"}
+		return tuf.ErrNotLoaded{Role: data.CanonicalTimestampRole}
 	}
 	size := c.local.Timestamp.Signed.Meta[role].Length
 	expectedSha256, ok := c.local.Timestamp.Signed.Meta[role].Hashes["sha256"]
@@ -402,7 +402,7 @@ func (c *Client) downloadTargets(role string) error {
 			return err
 		}
 		if c.local.Snapshot == nil {
-			return data.ErrMissingMeta{Role: role}
+			return tuf.ErrNotLoaded{Role: data.CanonicalSnapshotRole}
 		}
 		snap := c.local.Snapshot.Signed
 		root := c.local.Root.Signed

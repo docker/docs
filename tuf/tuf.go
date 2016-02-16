@@ -40,11 +40,11 @@ func (e ErrLocalRootExpired) Error() string {
 // the repo. This means specifically that the relevant JSON file has not
 // been loaded.
 type ErrNotLoaded struct {
-	role string
+	Role string
 }
 
 func (err ErrNotLoaded) Error() string {
-	return fmt.Sprintf("%s role has not been loaded", err.role)
+	return fmt.Sprintf("%s role has not been loaded", err.Role)
 }
 
 // Repo is an in memory representation of the TUF Repo.
@@ -74,7 +74,7 @@ func NewRepo(cryptoService signed.CryptoService) *Repo {
 // AddBaseKeys is used to add keys to the role in root.json
 func (tr *Repo) AddBaseKeys(role string, keys ...data.PublicKey) error {
 	if tr.Root == nil {
-		return ErrNotLoaded{role: "root"}
+		return ErrNotLoaded{Role: data.CanonicalRootRole}
 	}
 	ids := []string{}
 	for _, k := range keys {
@@ -120,7 +120,7 @@ func (tr *Repo) ReplaceBaseKeys(role string, keys ...data.PublicKey) error {
 // RemoveBaseKeys is used to remove keys from the roles in root.json
 func (tr *Repo) RemoveBaseKeys(role string, keyIDs ...string) error {
 	if tr.Root == nil {
-		return ErrNotLoaded{role: "root"}
+		return ErrNotLoaded{Role: data.CanonicalRootRole}
 	}
 	var keep []string
 	toDelete := make(map[string]struct{})
@@ -468,7 +468,7 @@ func (tr *Repo) InitTargets(role string) (*data.SignedTargets, error) {
 // InitSnapshot initializes a snapshot based on the current root and targets
 func (tr *Repo) InitSnapshot() error {
 	if tr.Root == nil {
-		return ErrNotLoaded{role: "root"}
+		return ErrNotLoaded{Role: data.CanonicalRootRole}
 	}
 	root, err := tr.Root.ToSigned()
 	if err != nil {
@@ -476,7 +476,7 @@ func (tr *Repo) InitSnapshot() error {
 	}
 
 	if _, ok := tr.Targets[data.CanonicalTargetsRole]; !ok {
-		return ErrNotLoaded{role: "targets"}
+		return ErrNotLoaded{Role: data.CanonicalTargetsRole}
 	}
 	targets, err := tr.Targets[data.CanonicalTargetsRole].ToSigned()
 	if err != nil {
