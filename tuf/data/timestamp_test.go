@@ -100,6 +100,17 @@ func TestTimestampMarshalJSONMarshallingErrorsPropagated(t *testing.T) {
 	require.EqualError(t, err, "bad")
 }
 
+func TestTimestampFromSignedUnmarshallingErrorsPropagated(t *testing.T) {
+	signed, err := validTimestampTemplate().ToSigned()
+	require.NoError(t, err)
+
+	setDefaultSerializer(errorSerializer{})
+	defer setDefaultSerializer(canonicalJSON{})
+
+	_, err = TimestampFromSigned(signed)
+	require.EqualError(t, err, "bad")
+}
+
 // TimestampFromSigned succeeds if the timestamp is valid, and copies the signatures
 // rather than assigns them
 func TestTimestampFromSignedCopiesSignatures(t *testing.T) {

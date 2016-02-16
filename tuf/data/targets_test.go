@@ -108,6 +108,17 @@ func TestTargetsMarshalJSONMarshallingErrorsPropagated(t *testing.T) {
 	require.EqualError(t, err, "bad")
 }
 
+func TestTargetsFromSignedUnmarshallingErrorsPropagated(t *testing.T) {
+	signed, err := validTargetsTemplate().ToSigned()
+	require.NoError(t, err)
+
+	setDefaultSerializer(errorSerializer{})
+	defer setDefaultSerializer(canonicalJSON{})
+
+	_, err = TargetsFromSigned(signed, CanonicalTargetsRole)
+	require.EqualError(t, err, "bad")
+}
+
 // TargetsFromSigned succeeds if the targets is valid, and copies the signatures
 // rather than assigns them
 func TestTargetsFromSignedCopiesSignatures(t *testing.T) {
@@ -127,7 +138,7 @@ func TestTargetsFromSignedCopiesSignatures(t *testing.T) {
 
 // If the targets metadata contains delegations which are invalid, the targets metadata
 // fails to validate and thus fails to convert into a SignedTargets
-func TestTargetsBaseFromSignedValidatesDelegations(t *testing.T) {
+func TestTargetsFromSignedValidatesDelegations(t *testing.T) {
 	for _, roleName := range []string{CanonicalTargetsRole, path.Join(CanonicalTargetsRole, "a")} {
 		targets := validTargetsTemplate()
 		delgRole, err := NewRole(path.Join(roleName, "b"), 1, []string{"key1"}, nil, nil)
@@ -141,6 +152,8 @@ func TestTargetsBaseFromSignedValidatesDelegations(t *testing.T) {
 		_, err = TargetsFromSigned(s, roleName)
 		require.Error(t, err)
 		require.IsType(t, ErrInvalidMeta{}, err)
+
+		delgRole.Threshold = 1
 
 		// Keys that aren't in the list of keys
 		delgRole.KeyIDs = []string{"keys11"}
@@ -200,5 +213,17 @@ func TestTargetsFromSignedValidatesRoleType(t *testing.T) {
 		sTargets, err := TargetsFromSigned(s, roleName)
 		require.NoError(t, err)
 		require.Equal(t, "Targets", sTargets.Signed.Type)
+	}
+}
+
+// The rolename passed to TargetsFromSigned must be a valid targets role name
+func TestTargetsFromSignedValidatesRoleName(t *testing.T) {
+	for _, roleName := range []string{"TARGETS", "root/a"} {
+		tg := validTargetsTemplate()
+		s, err := tg.ToSigned()
+		require.NoError(t, err)
+
+		_, err = TargetsFromSigned(s, roleName)
+		require.IsType(t, ErrInvalidRole{}, err)
 	}
 }

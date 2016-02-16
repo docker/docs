@@ -23,10 +23,14 @@ type Targets struct {
 	Delegations Delegations `json:"delegations,omitempty"`
 }
 
-// isValidTargets returns an error, or nil, depending on whether the content of the struct
+// isValidTargetsStructure returns an error, or nil, depending on whether the content of the struct
 // is valid for targets metadata.  This does not check signatures or expiry, just that
 // the metadata content is valid.
-func isValidTargets(t Targets, roleName string) error {
+func isValidTargetsStructure(t Targets, roleName string) error {
+	if roleName != CanonicalTargetsRole && !IsDelegation(roleName) {
+		return ErrInvalidRole{Role: roleName}
+	}
+
 	// even if it's a delegated role, the metadata type is "Targets"
 	expectedType := TUFTypes[CanonicalTargetsRole]
 	if t.Type != expectedType {
@@ -145,10 +149,10 @@ func (t *SignedTargets) MarshalJSON() ([]byte, error) {
 // a role name (so it can validate the SignedTargets object)
 func TargetsFromSigned(s *Signed, roleName string) (*SignedTargets, error) {
 	t := Targets{}
-	if err := json.Unmarshal(s.Signed, &t); err != nil {
+	if err := defaultSerializer.Unmarshal(s.Signed, &t); err != nil {
 		return nil, err
 	}
-	if err := isValidTargets(t, roleName); err != nil {
+	if err := isValidTargetsStructure(t, roleName); err != nil {
 		return nil, err
 	}
 	sigs := make([]Signature, len(s.Signatures))

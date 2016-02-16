@@ -16,8 +16,12 @@ type errorSerializer struct {
 	canonicalJSON
 }
 
-func (e errorSerializer) MarshalCanonical(from interface{}) ([]byte, error) {
+func (e errorSerializer) MarshalCanonical(interface{}) ([]byte, error) {
 	return nil, fmt.Errorf("bad")
+}
+
+func (e errorSerializer) Unmarshal([]byte, interface{}) error {
+	return fmt.Errorf("bad")
 }
 
 func validRootTemplate() *SignedRoot {
@@ -121,6 +125,17 @@ func TestRootMarshalJSONMarshallingErrorsPropagated(t *testing.T) {
 		Signed: Root{Type: "root", Version: 2, Expires: time.Now()},
 	}
 	_, err := r.MarshalJSON()
+	require.EqualError(t, err, "bad")
+}
+
+func TestRootFromSignedUnmarshallingErrorsPropagated(t *testing.T) {
+	signed, err := validRootTemplate().ToSigned()
+	require.NoError(t, err)
+
+	setDefaultSerializer(errorSerializer{})
+	defer setDefaultSerializer(canonicalJSON{})
+
+	_, err = RootFromSigned(signed)
 	require.EqualError(t, err, "bad")
 }
 
