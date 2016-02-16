@@ -536,7 +536,7 @@ func TestDownloadTargetsNoSnapshot(t *testing.T) {
 	repo.Snapshot = nil
 
 	err = client.downloadTargets("targets")
-	assert.IsType(t, data.ErrMissingMeta{}, err)
+	assert.IsType(t, tuf.ErrNotLoaded{}, err)
 }
 
 func TestBootstrapDownloadRootHappy(t *testing.T) {
@@ -740,7 +740,7 @@ func TestDownloadSnapshotNoTimestamp(t *testing.T) {
 	repo.Timestamp = nil
 
 	err = client.downloadSnapshot()
-	assert.IsType(t, data.ErrMissingMeta{}, err)
+	assert.IsType(t, tuf.ErrNotLoaded{}, err)
 }
 
 func TestDownloadSnapshotNoChecksum(t *testing.T) {
