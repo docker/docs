@@ -15,6 +15,7 @@ import (
 
 	"github.com/docker/notary/certs"
 	"github.com/docker/notary/passphrase"
+	"github.com/docker/notary/tuf"
 	"github.com/docker/notary/tuf/client"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
@@ -818,7 +819,29 @@ func TestUpdateRootRemoteCorruptedNoLocalCache(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping test in short mode")
 	}
-	for _, testData := range waysToMessUpServer {
+
+	waysToMessUpServerRoot := waysToMessUpServer
+	for _, roleName := range data.BaseRoles {
+		waysToMessUpServerRoot = append(waysToMessUpServer,
+			swizzleExpectations{
+				desc: fmt.Sprintf("no %s keys", roleName),
+				expectErrs: []interface{}{
+					&certs.ErrValidationFail{}, signed.ErrRoleThreshold{}},
+				swizzle: func(s *testutils.MetadataSwizzler, role string) error {
+					return s.MutateRoot(func(r *data.Root) {
+						r.Roles[roleName].KeyIDs = []string{}
+					})
+				}},
+			swizzleExpectations{
+				desc:       fmt.Sprintf("no %s role", roleName),
+				expectErrs: []interface{}{tuf.ErrNotLoaded{}},
+				swizzle: func(s *testutils.MetadataSwizzler, role string) error {
+					return s.MutateRoot(func(r *data.Root) { delete(r.Roles, roleName) })
+				}},
+		)
+	}
+
+	for _, testData := range waysToMessUpServerRoot {
 		if testData.desc == "insufficient signatures" {
 			// Currently if we download the root during the bootstrap phase,
 			// we don't check for enough signatures to meet the threshold.  We
@@ -842,7 +865,32 @@ func TestUpdateRootRemoteCorruptedNoLocalCache(t *testing.T) {
 // because the fact that the timestamp hasn't changed should mean that we don't
 // have to re-download the root.
 func TestUpdateRootRemoteCorruptedCanUseLocalCache(t *testing.T) {
-	for _, testData := range waysToMessUpServer {
+	if testing.Short() {
+		t.Skip("skipping test in short mode")
+	}
+
+	waysToMessUpServerRoot := waysToMessUpServer
+	for _, roleName := range data.BaseRoles {
+		waysToMessUpServerRoot = append(waysToMessUpServer,
+			swizzleExpectations{
+				desc: fmt.Sprintf("no %s keys", roleName),
+				expectErrs: []interface{}{
+					&certs.ErrValidationFail{}, signed.ErrRoleThreshold{}},
+				swizzle: func(s *testutils.MetadataSwizzler, role string) error {
+					return s.MutateRoot(func(r *data.Root) {
+						r.Roles[roleName].KeyIDs = []string{}
+					})
+				}},
+			swizzleExpectations{
+				desc:       fmt.Sprintf("no %s role", roleName),
+				expectErrs: []interface{}{tuf.ErrNotLoaded{}},
+				swizzle: func(s *testutils.MetadataSwizzler, role string) error {
+					return s.MutateRoot(func(r *data.Root) { delete(r.Roles, roleName) })
+				}},
+		)
+	}
+
+	for _, testData := range waysToMessUpServerRoot {
 		testUpdateRemoteCorruptValidChecksum(t, updateOpts{
 			localCache: true,
 			forWrite:   false,
@@ -862,19 +910,43 @@ func TestUpdateRootRemoteCorruptedCannotUseLocalCache(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping test in short mode")
 	}
-	for _, testData := range waysToMessUpServer {
+
+	waysToMessUpServerRoot := waysToMessUpServer
+	for _, roleName := range data.BaseRoles {
+		waysToMessUpServerRoot = append(waysToMessUpServer,
+			swizzleExpectations{
+				desc: fmt.Sprintf("no %s keys", roleName),
+				expectErrs: []interface{}{
+					&certs.ErrValidationFail{}, signed.ErrRoleThreshold{}},
+				swizzle: func(s *testutils.MetadataSwizzler, role string) error {
+					return s.MutateRoot(func(r *data.Root) {
+						r.Roles[roleName].KeyIDs = []string{}
+					})
+				}},
+			swizzleExpectations{
+				desc:       fmt.Sprintf("no %s role", roleName),
+				expectErrs: []interface{}{tuf.ErrNotLoaded{}},
+				swizzle: func(s *testutils.MetadataSwizzler, role string) error {
+					return s.MutateRoot(func(r *data.Root) { delete(r.Roles, roleName) })
+				}},
+		)
+	}
+
+	// if the timestamp role is missing, then the timestamp is broken,
+	// so it will revert to the prevoius timestamp
+	for _, testData := range waysToMessUpServerRoot {
 		testUpdateRemoteCorruptValidChecksum(t, updateOpts{
 			serverHasNewData: true,
 			localCache:       true,
 			forWrite:         false,
 			role:             data.CanonicalRootRole,
-		}, testData, true)
+		}, testData, !strings.HasPrefix(testData.desc, "no timestamp role"))
 		testUpdateRemoteCorruptValidChecksum(t, updateOpts{
 			serverHasNewData: true,
 			localCache:       true,
 			forWrite:         true,
 			role:             data.CanonicalRootRole,
-		}, testData, true)
+		}, testData, !strings.HasPrefix(testData.desc, "no timestamp role"))
 	}
 }
 
