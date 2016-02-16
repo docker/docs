@@ -17,7 +17,7 @@ const (
 // Types for TufChanges are namespaced by the Role they
 // are relevant for. The Root and Targets roles are the
 // only ones for which user action can cause a change, as
-// all changes in Snapshot and Timestamp are programatically
+// all changes in Snapshot and Timestamp are programmatically
 // generated base on Root and Targets changes.
 const (
 	TypeRootRole          = "role"

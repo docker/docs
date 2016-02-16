@@ -484,7 +484,7 @@ func TestDeleteDelegationsRoleNotExist(t *testing.T) {
 	repo := initRepo(t, ed25519, keyDB)
 
 	// initRepo leaves all the roles as Dirty. Set to false
-	// to test removing a non-existant role doesn't mark
+	// to test removing a non-existent role doesn't mark
 	// a role as dirty
 	repo.Targets[data.CanonicalTargetsRole].Dirty = false
 
