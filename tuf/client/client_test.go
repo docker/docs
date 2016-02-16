@@ -513,7 +513,7 @@ func TestDownloadTargetsNoChecksum(t *testing.T) {
 	delete(repo.Snapshot.Signed.Meta["targets"].Hashes, "sha256")
 
 	err = client.downloadTargets("targets")
-	assert.IsType(t, ErrMissingMeta{}, err)
+	assert.IsType(t, data.ErrMissingMeta{}, err)
 }
 
 // TestDownloadTargetsNoSnapshot: it's never valid to download any targets
@@ -536,7 +536,7 @@ func TestDownloadTargetsNoSnapshot(t *testing.T) {
 	repo.Snapshot = nil
 
 	err = client.downloadTargets("targets")
-	assert.IsType(t, ErrMissingMeta{}, err)
+	assert.IsType(t, data.ErrMissingMeta{}, err)
 }
 
 func TestBootstrapDownloadRootHappy(t *testing.T) {
@@ -740,7 +740,7 @@ func TestDownloadSnapshotNoTimestamp(t *testing.T) {
 	repo.Timestamp = nil
 
 	err = client.downloadSnapshot()
-	assert.IsType(t, ErrMissingMeta{}, err)
+	assert.IsType(t, data.ErrMissingMeta{}, err)
 }
 
 func TestDownloadSnapshotNoChecksum(t *testing.T) {
@@ -761,7 +761,7 @@ func TestDownloadSnapshotNoChecksum(t *testing.T) {
 	delete(repo.Timestamp.Signed.Meta["snapshot"].Hashes, "sha256")
 
 	err = client.downloadSnapshot()
-	assert.IsType(t, ErrMissingMeta{}, err)
+	assert.IsType(t, data.ErrMissingMeta{}, err)
 }
 
 func TestDownloadSnapshotChecksumNotFound(t *testing.T) {
