@@ -346,7 +346,7 @@ func validateTargets(role string, roles map[string]storage.MetaUpdate, repo *tuf
 	if err := signed.Verify(s, targetOrDelgRole, 0); err != nil {
 		return nil, err
 	}
-	t, err := data.TargetsFromSigned(s)
+	t, err := data.TargetsFromSigned(s, role)
 	if err != nil {
 		return nil, err
 	}

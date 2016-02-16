@@ -212,13 +212,3 @@ func (s *Signature) UnmarshalJSON(data []byte) error {
 	*s = Signature(uSignature)
 	return nil
 }
-
-// ErrInvalidMeta is the error to be returned when metadata is invalid
-type ErrInvalidMeta struct {
-	Role string
-	Msg  string
-}
-
-func (e ErrInvalidMeta) Error() string {
-	return fmt.Sprintf("%s metadata invalid: %s", e.Role, e.Msg)
-}

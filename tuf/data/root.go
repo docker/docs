@@ -47,7 +47,9 @@ func isValidRoot(r Root) error {
 		}
 		if roleObj.Threshold < 1 {
 			return ErrInvalidMeta{
-				Role: CanonicalRootRole, Msg: fmt.Sprintf("invalid threshold: %v", roleObj.Threshold)}
+				Role: CanonicalRootRole,
+				Msg:  fmt.Sprintf("invalid threshold for %s: %v", roleName, roleObj.Threshold),
+			}
 		}
 		for _, keyID := range roleObj.KeyIDs {
 			if _, ok := r.Keys[keyID]; !ok {

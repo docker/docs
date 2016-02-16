@@ -378,7 +378,7 @@ func (m *MetadataSwizzler) SetThreshold(role string, newThreshold int) error {
 			return err
 		}
 	} else {
-		signedTargets, err := data.TargetsFromSigned(signedThing)
+		signedTargets, err := data.TargetsFromSigned(signedThing, roleSpecifier)
 		if err != nil {
 			return err
 		}
