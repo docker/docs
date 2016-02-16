@@ -1,6 +1,7 @@
 package data
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/docker/go/canonical/json"
@@ -23,14 +24,51 @@ type Root struct {
 	ConsistentSnapshot bool                 `json:"consistent_snapshot"`
 }
 
+// isValidRoot returns an error, or nil, depending on whether the content of the struct
+// is valid for root metadata.  This does not check signatures or expiry, just that
+// the metadata content is valid.
+func isValidRoot(r Root) error {
+	expectedType := TUFTypes[CanonicalRootRole]
+	if r.Type != expectedType {
+		return ErrInvalidMeta{
+			Role: CanonicalRootRole, Msg: fmt.Sprintf("expected type %s, not %s", expectedType, r.Type)}
+	}
+	if len(r.Roles) < 4 {
+		return ErrInvalidMeta{Role: CanonicalRootRole, Msg: "does not have all required roles"}
+	} else if len(r.Roles) > 4 {
+		return ErrInvalidMeta{Role: CanonicalRootRole, Msg: "specifies too many roles"}
+	}
+
+	for _, roleName := range BaseRoles {
+		roleObj, ok := r.Roles[roleName]
+		if !ok || roleObj == nil {
+			return ErrInvalidMeta{
+				Role: CanonicalRootRole, Msg: fmt.Sprintf("missing %s role specification", roleName)}
+		}
+		if roleObj.Threshold < 1 {
+			return ErrInvalidMeta{
+				Role: CanonicalRootRole, Msg: fmt.Sprintf("invalid threshold: %v", roleObj.Threshold)}
+		}
+		for _, keyID := range roleObj.KeyIDs {
+			if _, ok := r.Keys[keyID]; !ok {
+				return ErrInvalidMeta{
+					Role: CanonicalRootRole,
+					Msg:  fmt.Sprintf("%s role specifies key ID %s without corresponding key", roleName, keyID),
+				}
+			}
+		}
+	}
+	return nil
+}
+
 // NewRoot initializes a new SignedRoot with a set of keys, roles, and the consistent flag
 func NewRoot(keys map[string]PublicKey, roles map[string]*RootRole, consistent bool) (*SignedRoot, error) {
 	signedRoot := &SignedRoot{
 		Signatures: make([]Signature, 0),
 		Signed: Root{
-			Type:               TUFTypes["root"],
+			Type:               TUFTypes[CanonicalRootRole],
 			Version:            0,
-			Expires:            DefaultExpires("root"),
+			Expires:            DefaultExpires(CanonicalRootRole),
 			Keys:               keys,
 			Roles:              roles,
 			ConsistentSnapshot: consistent,
@@ -42,7 +80,7 @@ func NewRoot(keys map[string]PublicKey, roles map[string]*RootRole, consistent b
 }
 
 // ToSigned partially serializes a SignedRoot for further signing
-func (r SignedRoot) ToSigned() (*Signed, error) {
+func (r *SignedRoot) ToSigned() (*Signed, error) {
 	s, err := defaultSerializer.MarshalCanonical(r.Signed)
 	if err != nil {
 		return nil, err
@@ -62,7 +100,7 @@ func (r SignedRoot) ToSigned() (*Signed, error) {
 }
 
 // MarshalJSON returns the serialized form of SignedRoot as bytes
-func (r SignedRoot) MarshalJSON() ([]byte, error) {
+func (r *SignedRoot) MarshalJSON() ([]byte, error) {
 	signed, err := r.ToSigned()
 	if err != nil {
 		return nil, err
@@ -70,11 +108,14 @@ func (r SignedRoot) MarshalJSON() ([]byte, error) {
 	return defaultSerializer.Marshal(signed)
 }
 
-// RootFromSigned fully unpacks a Signed object into a SignedRoot
+// RootFromSigned fully unpacks a Signed object into a SignedRoot and ensures
+// that it is a valid SignedRoot
 func RootFromSigned(s *Signed) (*SignedRoot, error) {
 	r := Root{}
-	err := json.Unmarshal(s.Signed, &r)
-	if err != nil {
+	if err := json.Unmarshal(s.Signed, &r); err != nil {
+		return nil, err
+	}
+	if err := isValidRoot(r); err != nil {
 		return nil, err
 	}
 	sigs := make([]Signature, len(s.Signatures))

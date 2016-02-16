@@ -47,7 +47,12 @@ func TestRotation(t *testing.T) {
 	// Generate a new root with the replacement key and role
 	testRoot, err := data.NewRoot(
 		map[string]data.PublicKey{replacementKey.ID(): replacementKey},
-		map[string]*data.RootRole{"root": &replacementRole.RootRole},
+		map[string]*data.RootRole{
+			data.CanonicalRootRole:      &replacementRole.RootRole,
+			data.CanonicalSnapshotRole:  &replacementRole.RootRole,
+			data.CanonicalTargetsRole:   &replacementRole.RootRole,
+			data.CanonicalTimestampRole: &replacementRole.RootRole,
+		},
 		false,
 	)
 	assert.NoError(t, err, "Failed to create new root")
