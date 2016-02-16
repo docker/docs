@@ -9,6 +9,7 @@ import (
 	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/trustmanager"
+	"github.com/docker/notary/tuf"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/store"
@@ -41,7 +42,11 @@ func getPubKeys(cs signed.CryptoService, s *data.Signed, role string) ([]data.Pu
 		if err := json.Unmarshal(s.Signed, root); err != nil {
 			return nil, err
 		}
-		for _, pubKeyID := range root.Roles[data.CanonicalRootRole].KeyIDs {
+		rootRole, ok := root.Roles[data.CanonicalRootRole]
+		if !ok || rootRole == nil {
+			return nil, tuf.ErrNotLoaded{}
+		}
+		for _, pubKeyID := range rootRole.KeyIDs {
 			pubKeys = append(pubKeys, root.Keys[pubKeyID])
 		}
 	} else {
@@ -546,6 +551,12 @@ func (m *MetadataSwizzler) MutateRoot(mutate func(*data.Root)) error {
 		return err
 	}
 
+	// get the original keys, in case the mutation messes with the signing keys
+	oldPubKeys, err := getPubKeys(m.CryptoService, signedThing, data.CanonicalRootRole)
+	if err != nil {
+		return err
+	}
+
 	mutate(&root)
 
 	rootBytes, err := json.MarshalCanonical(root)
@@ -555,8 +566,8 @@ func (m *MetadataSwizzler) MutateRoot(mutate func(*data.Root)) error {
 	signedThing.Signed = json.RawMessage(rootBytes)
 
 	pubKeys, err := getPubKeys(m.CryptoService, signedThing, data.CanonicalRootRole)
-	if err != nil {
-		return err
+	if err != nil || len(pubKeys) == 0 { // we have to sign it somehow - might as well use the old keys
+		pubKeys = oldPubKeys
 	}
 
 	metaBytes, err := serializeMetadata(m.CryptoService, signedThing, data.CanonicalRootRole, pubKeys...)
