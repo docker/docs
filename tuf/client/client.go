@@ -417,7 +417,7 @@ func (c *Client) downloadTargets(role string) error {
 			logrus.Error("Error getting targets file:", err)
 			return err
 		}
-		t, err := data.TargetsFromSigned(s)
+		t, err := data.TargetsFromSigned(s, role)
 		if err != nil {
 			return err
 		}
@@ -481,7 +481,7 @@ func (c Client) getTargetsFile(role string, snapshotMeta data.Files, consistent 
 		}
 		err := json.Unmarshal(raw, old)
 		if err == nil {
-			targ, err := data.TargetsFromSigned(old)
+			targ, err := data.TargetsFromSigned(old, role)
 			if err == nil {
 				version = targ.Signed.Version
 			} else {

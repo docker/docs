@@ -2,6 +2,8 @@ package data
 
 import (
 	"errors"
+	"fmt"
+	"path"
 
 	"github.com/docker/go/canonical/json"
 )
@@ -19,6 +21,38 @@ type Targets struct {
 	SignedCommon
 	Targets     Files       `json:"targets"`
 	Delegations Delegations `json:"delegations,omitempty"`
+}
+
+// isValidTargets returns an error, or nil, depending on whether the content of the struct
+// is valid for targets metadata.  This does not check signatures or expiry, just that
+// the metadata content is valid.
+func isValidTargets(t Targets, roleName string) error {
+	// even if it's a delegated role, the metadata type is "Targets"
+	expectedType := TUFTypes[CanonicalTargetsRole]
+	if t.Type != expectedType {
+		return ErrInvalidMeta{
+			Role: roleName, Msg: fmt.Sprintf("expected type %s, not %s", expectedType, t.Type)}
+	}
+
+	for _, roleObj := range t.Delegations.Roles {
+		if !IsDelegation(roleObj.Name) || path.Dir(roleObj.Name) != roleName {
+			return ErrInvalidMeta{
+				Role: roleName, Msg: fmt.Sprintf("delegation role %s invalid", roleObj.Name)}
+		}
+		if roleObj.Threshold < 1 {
+			return ErrInvalidMeta{
+				Role: roleName, Msg: fmt.Sprintf("invalid threshold for %s: %v ", roleObj.Name, roleObj.Threshold)}
+		}
+		for _, keyID := range roleObj.KeyIDs {
+			if _, ok := t.Delegations.Keys[keyID]; !ok {
+				return ErrInvalidMeta{
+					Role: roleName,
+					Msg:  fmt.Sprintf("%s role specifies key ID %s without corresponding key", roleObj.Name, keyID),
+				}
+			}
+		}
+	}
+	return nil
 }
 
 // NewTargets intiializes a new empty SignedTargets object
@@ -80,8 +114,8 @@ func (t *SignedTargets) AddDelegation(role *Role, keys []*PublicKey) error {
 }
 
 // ToSigned partially serializes a SignedTargets for further signing
-func (t SignedTargets) ToSigned() (*Signed, error) {
-	s, err := json.MarshalCanonical(t.Signed)
+func (t *SignedTargets) ToSigned() (*Signed, error) {
+	s, err := defaultSerializer.MarshalCanonical(t.Signed)
 	if err != nil {
 		return nil, err
 	}
@@ -98,11 +132,23 @@ func (t SignedTargets) ToSigned() (*Signed, error) {
 	}, nil
 }
 
-// TargetsFromSigned fully unpacks a Signed object into a SignedTargets
-func TargetsFromSigned(s *Signed) (*SignedTargets, error) {
-	t := Targets{}
-	err := json.Unmarshal(s.Signed, &t)
+// MarshalJSON returns the serialized form of SignedTargets as bytes
+func (t *SignedTargets) MarshalJSON() ([]byte, error) {
+	signed, err := t.ToSigned()
 	if err != nil {
+		return nil, err
+	}
+	return defaultSerializer.Marshal(signed)
+}
+
+// TargetsFromSigned fully unpacks a Signed object into a SignedTargets, given
+// a role name (so it can validate the SignedTargets object)
+func TargetsFromSigned(s *Signed, roleName string) (*SignedTargets, error) {
+	t := Targets{}
+	if err := json.Unmarshal(s.Signed, &t); err != nil {
+		return nil, err
+	}
+	if err := isValidTargets(t, roleName); err != nil {
 		return nil, err
 	}
 	sigs := make([]Signature, len(s.Signatures))
