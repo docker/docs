@@ -109,10 +109,10 @@ lint:
 #
 # be run first
 
-# misspell target, don't include Godeps, binaries, or python test files
+# misspell target, don't include Godeps, binaries, python tests, or git files
 misspell:
 	@echo "+ $@"
-	@test -z "$$(find . -name '*' | grep -v Godeps/_workspace/src/ | grep -v bin/ | grep -v misc/ | xargs misspell | tee /dev/stderr)"
+	@test -z "$$(find . -name '*' | grep -v Godeps/_workspace/src/ | grep -v bin/ | grep -v misc/ | grep -v .git/ | xargs misspell | tee /dev/stderr)"
 
 build: go_version
 	@echo "+ $@"
