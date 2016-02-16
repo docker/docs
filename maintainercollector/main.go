@@ -44,6 +44,7 @@ var (
 		"go-plugins-helpers",
 		"go-units",
 		"kitematic",
+		"leadership",
 		"leeroy",
 		"libchan",
 		"libcompose",
