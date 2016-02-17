@@ -250,7 +250,7 @@ configure it.
 **Token authentication:**
 
 This is an implementation of the same authentication used by
-[docker registry](https://github.com/docker/distribution).  (JTW token-based
+[docker registry](https://github.com/docker/distribution).  (JWT token-based
 authentication post login.)
 
 <table>
