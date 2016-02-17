@@ -1,8 +1,6 @@
 package data
 
 import (
-	"crypto/sha256"
-	"encoding/hex"
 	"errors"
 
 	"github.com/docker/go/canonical/json"
@@ -59,22 +57,11 @@ func (t SignedTargets) GetMeta(path string) *FileMeta {
 // order to determine priority.
 func (t SignedTargets) GetDelegations(path string) []*Role {
 	var roles []*Role
-	pathHashBytes := sha256.Sum256([]byte(path))
-	pathHash := hex.EncodeToString(pathHashBytes[:])
 	for _, r := range t.Signed.Delegations.Roles {
-		if !r.IsValid() {
-			// Role has both Paths and PathHashPrefixes.
-			continue
-		}
 		if r.CheckPaths(path) {
 			roles = append(roles, r)
 			continue
 		}
-		if r.CheckPrefixes(pathHash) {
-			roles = append(roles, r)
-			continue
-		}
-		//keysDB.AddRole(r)
 	}
 	return roles
 }

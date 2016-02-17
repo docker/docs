@@ -36,7 +36,7 @@ func TestValidationErrorFormat(t *testing.T) {
 		http.DefaultTransport,
 	)
 
-	_, repo, _, err := testutils.EmptyRepo("docker.com/notary")
+	repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	r, tg, sn, ts, err := testutils.Sign(repo)
 	assert.NoError(t, err)

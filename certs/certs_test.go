@@ -280,7 +280,7 @@ func testValidateSuccessfulRootRotation(t *testing.T, keyAlg, rootKeyType string
 	origRootKey := data.NewPublicKey(rootKeyType, origRootPEMCert)
 	replRootKey := data.NewPublicKey(rootKeyType, replRootPEMCert)
 
-	rootRole, err := data.NewRole("root", 1, []string{replRootKey.ID()}, nil, nil)
+	rootRole, err := data.NewRole("root", 1, []string{replRootKey.ID()}, nil)
 	assert.NoError(t, err)
 
 	testRoot, err := data.NewRoot(
@@ -338,7 +338,7 @@ func testValidateRootRotationMissingOrigSig(t *testing.T, keyAlg, rootKeyType st
 	// Tuf key with PEM-encoded x509 certificate
 	replRootKey := data.NewPublicKey(rootKeyType, replRootPEMCert)
 
-	rootRole, err := data.NewRole("root", 1, []string{replRootKey.ID()}, nil, nil)
+	rootRole, err := data.NewRole("root", 1, []string{replRootKey.ID()}, nil)
 	assert.NoError(t, err)
 
 	testRoot, err := data.NewRoot(
@@ -397,7 +397,7 @@ func testValidateRootRotationMissingNewSig(t *testing.T, keyAlg, rootKeyType str
 	origRootKey := data.NewPublicKey(rootKeyType, origRootPEMCert)
 	replRootKey := data.NewPublicKey(rootKeyType, replRootPEMCert)
 
-	rootRole, err := data.NewRole("root", 1, []string{replRootKey.ID()}, nil, nil)
+	rootRole, err := data.NewRole("root", 1, []string{replRootKey.ID()}, nil)
 	assert.NoError(t, err)
 
 	testRoot, err := data.NewRoot(

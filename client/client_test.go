@@ -1218,7 +1218,7 @@ func testListTargetWithDelegates(t *testing.T, rootType string) {
 	// setup delegated targets/level1 role
 	k, err := repo.CryptoService.Create("targets/level1", rootType)
 	assert.NoError(t, err)
-	r, err := data.NewRole("targets/level1", 1, []string{k.ID()}, []string{""}, nil)
+	r, err := data.NewRole("targets/level1", 1, []string{k.ID()}, []string{""})
 	assert.NoError(t, err)
 	repo.tufRepo.UpdateDelegations(r, []data.PublicKey{k})
 	delegatedTarget := addTarget(t, repo, "current", "../fixtures/root-ca.crt", "targets/level1")
@@ -1227,7 +1227,7 @@ func testListTargetWithDelegates(t *testing.T, rootType string) {
 	// setup delegated targets/level2 role
 	k, err = repo.CryptoService.Create("targets/level2", rootType)
 	assert.NoError(t, err)
-	r, err = data.NewRole("targets/level2", 1, []string{k.ID()}, []string{""}, nil)
+	r, err = data.NewRole("targets/level2", 1, []string{k.ID()}, []string{""})
 	assert.NoError(t, err)
 	repo.tufRepo.UpdateDelegations(r, []data.PublicKey{k})
 	// this target should not show up as the one in targets/level1 takes higher priority
