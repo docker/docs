@@ -52,7 +52,6 @@ To enable high-availability, you must join at least one node with the
 | `--dns-search` [`--dns-search option --dns-search option`] | Set custom DNS search domains for the UCP infrastructure containers. |
 | `--disable-tracking` | Disable anonymous tracking and analytics. |
 | `--disable-usage` | Disable anonymous usage reporting. |
-| `--image-version "0.7.0"` | Select a specific UCP version. |
 | `--url` | The connection URL for the remote UCP controller [`$UCP_URL`] |
 | `--fingerprint ` | The fingerprint of the UCP controller you trust [`$UCP_FINGERPRINT`] |
 | `--replica` | Configure this node as a full Orca controller replica. |
