@@ -94,8 +94,8 @@ Root: HKCU; Subkey: "Environment"; ValueType:string; ValueName:"DOCKER_TOOLBOX_I
 #include "guid.iss"
 
 var
-	restart: boolean;
-	TrackingDisabled: Boolean;
+  restart: boolean;
+  TrackingDisabled: Boolean;
   TrackingCheckBox: TNewCheckBox;
 
 function uuid(): String;
@@ -122,32 +122,32 @@ end;
 
 function WindowsVersionString(): String;
 var
-	ResultCode: Integer;
-	lines : TArrayOfString;
+  ResultCode: Integer;
+  lines : TArrayOfString;
 begin
-	if not Exec(ExpandConstant('{cmd}'), ExpandConstant('/c wmic os get caption | more +1 > C:\windows-version.txt'), '', SW_HIDE, ewWaitUntilTerminated, ResultCode) then begin
-		Result := 'N/A';
-		exit;
-	end;
+  if not Exec(ExpandConstant('{cmd}'), ExpandConstant('/c wmic os get caption | more +1 > C:\windows-version.txt'), '', SW_HIDE, ewWaitUntilTerminated, ResultCode) then begin
+    Result := 'N/A';
+    exit;
+  end;
 
-	if LoadStringsFromFile(ExpandConstant('C:\windows-version.txt'), lines) then begin
-		Result := lines[0];
-	end else begin
-		Result := 'N/A'
-	end;
+  if LoadStringsFromFile(ExpandConstant('C:\windows-version.txt'), lines) then begin
+    Result := lines[0];
+  end else begin
+    Result := 'N/A'
+  end;
 end;
 
 procedure TrackEventWithProperties(name: String; properties: String);
 var
   payload: String;
   WinHttpReq: Variant;
-	tracking: String;
+  tracking: String;
 begin
   if TrackingDisabled or WizardSilent() then
     exit;
 
-	if Length(properties) > 0 then
-		properties := ', ' + properties;
+  if Length(properties) > 0 then
+    properties := ', ' + properties;
 
   try
     payload := Encode64(Format(ExpandConstant('{{"event": "%s", "properties": {{"token": "{#MixpanelToken}", "distinct_id": "%s", "os": "win32", "os version": "%s", "version": "{#MyAppVersion}" %s}}'), [name, uuid(), WindowsVersionString(), properties]));
@@ -161,42 +161,42 @@ end;
 
 procedure TrackEvent(name: String);
 begin
-	TrackEventWithProperties(name, '');
+  TrackEventWithProperties(name, '');
 end;
 
 function NeedToInstallVirtualBox(): Boolean;
 begin
-	// TODO: Also compare versions
-	Result := (
-		(GetEnv('VBOX_INSTALL_PATH') = '')
-		and
-		(GetEnv('VBOX_MSI_INSTALL_PATH') = '')
-	);
+  // TODO: Also compare versions
+  Result := (
+    (GetEnv('VBOX_INSTALL_PATH') = '')
+    and
+    (GetEnv('VBOX_MSI_INSTALL_PATH') = '')
+  );
 end;
 
 function VBoxPath(): String;
 begin
-	if GetEnv('VBOX_INSTALL_PATH') <> '' then
-		Result := GetEnv('VBOX_INSTALL_PATH')
-	else
-		Result := GetEnv('VBOX_MSI_INSTALL_PATH')
+  if GetEnv('VBOX_INSTALL_PATH') <> '' then
+    Result := GetEnv('VBOX_INSTALL_PATH')
+  else
+    Result := GetEnv('VBOX_MSI_INSTALL_PATH')
 end;
 
 function NeedToInstallGit(): Boolean;
 begin
-	// TODO: Find a better way to see if Git is installed
-	Result := not DirExists('C:\Program Files\Git') or not FileExists('C:\Program Files\Git\git-bash.exe')
+  // TODO: Find a better way to see if Git is installed
+  Result := not DirExists('C:\Program Files\Git') or not FileExists('C:\Program Files\Git\git-bash.exe')
 end;
 
 procedure InitializeWizard;
 var
   WelcomePage: TWizardPage;
-	TrackingLabel: TLabel;
+  TrackingLabel: TLabel;
 begin
 
   WelcomePage := PageFromID(wpWelcome)
 
-	WizardForm.WelcomeLabel2.AutoSize := True;
+  WizardForm.WelcomeLabel2.AutoSize := True;
 
   TrackingCheckBox := TNewCheckBox.Create(WizardForm);
   TrackingCheckBox.Top := WizardForm.WelcomeLabel2.Top + WizardForm.WelcomeLabel2.Height + 10;
@@ -207,22 +207,22 @@ begin
   TrackingCheckBox.Checked := True;
   TrackingCheckBox.Parent := WelcomePage.Surface;
 
-	TrackingLabel := TLabel.Create(WizardForm);
-	TrackingLabel.Parent := WelcomePage.Surface;
-	TrackingLabel.Font := WizardForm.WelcomeLabel2.Font;
-	TrackingLabel.Font.Color := clGray;
+  TrackingLabel := TLabel.Create(WizardForm);
+  TrackingLabel.Parent := WelcomePage.Surface;
+  TrackingLabel.Font := WizardForm.WelcomeLabel2.Font;
+  TrackingLabel.Font.Color := clGray;
   TrackingLabel.Caption := 'This collects anonymous data to help us detect installation problems and improve the overall experience. We only use it to aggregate statistics and will never share it with third parties.';
-	TrackingLabel.WordWrap := True;
-	TrackingLabel.Visible := True;
-	TrackingLabel.Left := WizardForm.WelcomeLabel2.Left;
-	TrackingLabel.Width := WizardForm.WelcomeLabel2.Width;
-	TrackingLabel.Top := TrackingCheckBox.Top + TrackingCheckBox.Height + 5;
-	TrackingLabel.Height := 100;
+  TrackingLabel.WordWrap := True;
+  TrackingLabel.Visible := True;
+  TrackingLabel.Left := WizardForm.WelcomeLabel2.Left;
+  TrackingLabel.Width := WizardForm.WelcomeLabel2.Width;
+  TrackingLabel.Top := TrackingCheckBox.Top + TrackingCheckBox.Height + 5;
+  TrackingLabel.Height := 100;
 
-		// Don't do this until we can compare versions
-		// Wizardform.ComponentsList.Checked[3] := NeedToInstallVirtualBox();
-		Wizardform.ComponentsList.ItemEnabled[3] := not NeedToInstallVirtualBox();
-		Wizardform.ComponentsList.Checked[5] := NeedToInstallGit();
+    // Don't do this until we can compare versions
+    // Wizardform.ComponentsList.Checked[3] := NeedToInstallVirtualBox();
+    Wizardform.ComponentsList.ItemEnabled[3] := not NeedToInstallVirtualBox();
+    Wizardform.ComponentsList.Checked[5] := NeedToInstallGit();
 end;
 
 function InitializeSetup(): boolean;
@@ -234,43 +234,43 @@ end;
 function NextButtonClick(CurPageID: Integer): Boolean;
 begin
   if CurPageID = wpWelcome then begin
-			if TrackingCheckBox.Checked then begin
-				TrackEventWithProperties('Continued from Overview', '"Tracking Enabled": "Yes"');
-				TrackingDisabled := False;
-				DeleteFile(ExpandConstant('{userdocs}\..\.docker\machine\no-error-report'));
-			end else begin
-				TrackEventWithProperties('Continued from Overview', '"Tracking Enabled": "No"');
-				TrackingDisabled := True;
-				CreateDir(ExpandConstant('{userdocs}\..\.docker\machine'));
-				SaveStringToFile(ExpandConstant('{userdocs}\..\.docker\machine\no-error-report'), '', False);
-			end;
+      if TrackingCheckBox.Checked then begin
+        TrackEventWithProperties('Continued from Overview', '"Tracking Enabled": "Yes"');
+        TrackingDisabled := False;
+        DeleteFile(ExpandConstant('{userdocs}\..\.docker\machine\no-error-report'));
+      end else begin
+        TrackEventWithProperties('Continued from Overview', '"Tracking Enabled": "No"');
+        TrackingDisabled := True;
+        CreateDir(ExpandConstant('{userdocs}\..\.docker\machine'));
+        SaveStringToFile(ExpandConstant('{userdocs}\..\.docker\machine\no-error-report'), '', False);
+      end;
   end;
   Result := True
 end;
 
 procedure RunInstallVirtualBox();
 var
-	ResultCode: Integer;
+  ResultCode: Integer;
 begin
-	WizardForm.FilenameLabel.Caption := 'installing VirtualBox'
-	if not Exec(ExpandConstant('msiexec'), ExpandConstant('/qn /i "{app}\installers\virtualbox\virtualbox.msi" /norestart'), '', SW_HIDE, ewWaitUntilTerminated, ResultCode) then
-		MsgBox('virtualbox install failure', mbInformation, MB_OK);
+  WizardForm.FilenameLabel.Caption := 'installing VirtualBox'
+  if not Exec(ExpandConstant('msiexec'), ExpandConstant('/qn /i "{app}\installers\virtualbox\virtualbox.msi" /norestart'), '', SW_HIDE, ewWaitUntilTerminated, ResultCode) then
+    MsgBox('virtualbox install failure', mbInformation, MB_OK);
 end;
 
 procedure RunInstallGit();
 var
-	ResultCode: Integer;
+  ResultCode: Integer;
 begin
-	WizardForm.FilenameLabel.Caption := 'installing Git for Windows'
-	if Exec(ExpandConstant('{app}\installers\git\git.exe'), '/sp- /verysilent /norestart', '', SW_HIDE, ewWaitUntilTerminated, ResultCode) then
-	begin
-		// handle success if necessary; ResultCode contains the exit code
-		//MsgBox('git installed OK', mbInformation, MB_OK);
-	end
-	else begin
-		// handle failure if necessary; ResultCode contains the error code
-		MsgBox('git install failure', mbInformation, MB_OK);
-	end;
+  WizardForm.FilenameLabel.Caption := 'installing Git for Windows'
+  if Exec(ExpandConstant('{app}\installers\git\git.exe'), '/sp- /verysilent /norestart', '', SW_HIDE, ewWaitUntilTerminated, ResultCode) then
+  begin
+    // handle success if necessary; ResultCode contains the exit code
+    //MsgBox('git installed OK', mbInformation, MB_OK);
+  end
+  else begin
+    // handle failure if necessary; ResultCode contains the error code
+    MsgBox('git install failure', mbInformation, MB_OK);
+  end;
 end;
 
 procedure CopyBoot2DockerISO();
@@ -284,81 +284,81 @@ end;
 
 function CanUpgradeVM(): Boolean;
 var
-	ResultCode: Integer;
+  ResultCode: Integer;
 begin
-	if NeedToInstallVirtualBox() or not FileExists(ExpandConstant('{app}\docker-machine.exe')) then begin
-		Result := false
-		exit
-	end;
+  if NeedToInstallVirtualBox() or not FileExists(ExpandConstant('{app}\docker-machine.exe')) then begin
+    Result := false
+    exit
+  end;
 
-	ExecAsOriginalUser(VBoxPath() + 'VBoxManage.exe', 'showvminfo default', '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
-	if ResultCode <> 0 then begin
-		Result := false
-		exit
-	end;
+  ExecAsOriginalUser(VBoxPath() + 'VBoxManage.exe', 'showvminfo default', '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
+  if ResultCode <> 0 then begin
+    Result := false
+    exit
+  end;
 
-	if not DirExists(ExpandConstant('{userdocs}\..\.docker\machine\machines\default')) then begin
-		Result := false
-		exit
-	end;
+  if not DirExists(ExpandConstant('{userdocs}\..\.docker\machine\machines\default')) then begin
+    Result := false
+    exit
+  end;
 
-	Result := true
+  Result := true
 end;
 
 function UpgradeVM() : Boolean;
 var
-	ResultCode: Integer;
+  ResultCode: Integer;
 begin
-	TrackEvent('VM Upgrade Started');
-	WizardForm.StatusLabel.Caption := 'Upgrading Docker Toolbox VM...'
-	ExecAsOriginalUser(ExpandConstant('{app}\docker-machine.exe'), 'stop default', '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
-	if (ResultCode = 0) or (ResultCode = 1) then
-	begin
-		FileCopy(ExpandConstant('{userdocs}\..\.docker\machine\cache\boot2docker.iso'), ExpandConstant('{userdocs}\..\.docker\machine\machines\default\boot2docker.iso'), false)
-		TrackEvent('VM Upgrade Succeeded');
-	end
-	else begin
-		TrackEvent('VM Upgrade Failed');
-		MsgBox('VM Upgrade Failed because the VirtualBox VM could not be stopped.', mbCriticalError, MB_OK);
-		Result := false
-		WizardForm.Close;
-		exit;
-	end;
-	Result := true
+  TrackEvent('VM Upgrade Started');
+  WizardForm.StatusLabel.Caption := 'Upgrading Docker Toolbox VM...'
+  ExecAsOriginalUser(ExpandConstant('{app}\docker-machine.exe'), 'stop default', '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
+  if (ResultCode = 0) or (ResultCode = 1) then
+  begin
+    FileCopy(ExpandConstant('{userdocs}\..\.docker\machine\cache\boot2docker.iso'), ExpandConstant('{userdocs}\..\.docker\machine\machines\default\boot2docker.iso'), false)
+    TrackEvent('VM Upgrade Succeeded');
+  end
+  else begin
+    TrackEvent('VM Upgrade Failed');
+    MsgBox('VM Upgrade Failed because the VirtualBox VM could not be stopped.', mbCriticalError, MB_OK);
+    Result := false
+    WizardForm.Close;
+    exit;
+  end;
+  Result := true
 end;
 
 const
-	ModPathName = 'modifypath';
-	ModPathType = 'user';
+  ModPathName = 'modifypath';
+  ModPathType = 'user';
 
 function ModPathDir(): TArrayOfString;
 begin
-	setArrayLength(Result, 1);
-	Result[0] := ExpandConstant('{app}');
+  setArrayLength(Result, 1);
+  Result[0] := ExpandConstant('{app}');
 end;
 #include "modpath.iss"
 
 procedure CurStepChanged(CurStep: TSetupStep);
 var
-	Success: Boolean;
+  Success: Boolean;
 begin
-	Success := True;
-	if CurStep = ssPostInstall then
+  Success := True;
+  if CurStep = ssPostInstall then
   begin
-		trackEvent('Installing Files Succeeded');
+    trackEvent('Installing Files Succeeded');
     if IsTaskSelected(ModPathName) then
-			ModPath();
+      ModPath();
     if not WizardSilent() then
-		begin
-			if IsTaskSelected('upgradevm') then
-			begin
-				if CanUpgradeVM() then begin
-					Success := UpgradeVM();
-				end;
-			end;
-		end;
+    begin
+      if IsTaskSelected('upgradevm') then
+      begin
+        if CanUpgradeVM() then begin
+          Success := UpgradeVM();
+        end;
+      end;
+    end;
 
-		if Success then
-			trackEvent('Installer Finished');
+    if Success then
+      trackEvent('Installer Finished');
   end;
 end;
