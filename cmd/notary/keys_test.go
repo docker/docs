@@ -33,6 +33,7 @@ var ret = passphrase.ConstantRetriever("pass")
 // If there are no keys, removeKeyInteractively will just return an error about
 // there not being any key
 func TestRemoveIfNoKey(t *testing.T) {
+	setUp(t)
 	var buf bytes.Buffer
 	stores := []trustmanager.KeyStore{trustmanager.NewKeyMemoryStore(nil)}
 	err := removeKeyInteractively(stores, "12345", &buf, &buf)
@@ -44,6 +45,7 @@ func TestRemoveIfNoKey(t *testing.T) {
 // anything other than 'yes'/'y'/'' response will abort the deletion and
 // not delete the key.
 func TestRemoveOneKeyAbort(t *testing.T) {
+	setUp(t)
 	nos := []string{"no", "NO", "AAAARGH", "   N    "}
 	store := trustmanager.NewKeyMemoryStore(ret)
 
@@ -73,6 +75,7 @@ func TestRemoveOneKeyAbort(t *testing.T) {
 // If there is one key, asking to remove it will ask for confirmation.  Passing
 // 'yes'/'y'/'' response will continue the deletion.
 func TestRemoveOneKeyConfirm(t *testing.T) {
+	setUp(t)
 	yesses := []string{"yes", " Y ", "yE", "   ", ""}
 
 	for _, yesAnswer := range yesses {
@@ -103,6 +106,7 @@ func TestRemoveOneKeyConfirm(t *testing.T) {
 // delete and will do so over and over until the user quits if the answer is
 // invalid.
 func TestRemoveMultikeysInvalidInput(t *testing.T) {
+	setUp(t)
 	in := bytes.NewBuffer([]byte("nota number\n9999\n-3\n0"))
 
 	key, err := trustmanager.GenerateED25519Key(rand.Reader)
@@ -151,6 +155,7 @@ func TestRemoveMultikeysInvalidInput(t *testing.T) {
 // delete.  Then it will confirm whether they want to delete, and the user can
 // abort at that confirmation.
 func TestRemoveMultikeysAbortChoice(t *testing.T) {
+	setUp(t)
 	in := bytes.NewBuffer([]byte("1\nn\n"))
 
 	key, err := trustmanager.GenerateED25519Key(rand.Reader)
@@ -189,6 +194,7 @@ func TestRemoveMultikeysAbortChoice(t *testing.T) {
 // delete.  Then it will confirm whether they want to delete, and if the user
 // confirms, will remove it from the correct key store.
 func TestRemoveMultikeysRemoveOnlyChosenKey(t *testing.T) {
+	setUp(t)
 	in := bytes.NewBuffer([]byte("1\ny\n"))
 
 	key, err := trustmanager.GenerateED25519Key(rand.Reader)
@@ -235,6 +241,7 @@ func TestRemoveMultikeysRemoveOnlyChosenKey(t *testing.T) {
 
 // Non-roles, root, and delegation keys can't be rotated with the command line
 func TestRotateKeyInvalidRoles(t *testing.T) {
+	setUp(t)
 	invalids := []string{
 		data.CanonicalRootRole,
 		"notevenARole",
@@ -262,6 +269,7 @@ func TestRotateKeyInvalidRoles(t *testing.T) {
 
 // Cannot rotate a targets key and require that it is server managed
 func TestRotateKeyTargetCannotBeServerManaged(t *testing.T) {
+	setUp(t)
 	k := &keyCommander{
 		configGetter:           func() (*viper.Viper, error) { return viper.New(), nil },
 		getRetriever:           func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
@@ -275,6 +283,7 @@ func TestRotateKeyTargetCannotBeServerManaged(t *testing.T) {
 
 // Cannot rotate a timestamp key and require that it is locally managed
 func TestRotateKeyTimestampCannotBeLocallyManaged(t *testing.T) {
+	setUp(t)
 	k := &keyCommander{
 		configGetter:           func() (*viper.Viper, error) { return viper.New(), nil },
 		getRetriever:           func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
@@ -288,6 +297,7 @@ func TestRotateKeyTimestampCannotBeLocallyManaged(t *testing.T) {
 
 // rotate key must be provided with a gun
 func TestRotateKeyNoGUN(t *testing.T) {
+	setUp(t)
 	k := &keyCommander{
 		configGetter:  func() (*viper.Viper, error) { return viper.New(), nil },
 		getRetriever:  func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
@@ -338,6 +348,7 @@ func setUpRepo(t *testing.T, tempBaseDir, gun string, ret passphrase.Retriever) 
 // from the remote server.
 func TestRotateKeyRemoteServerManagesKey(t *testing.T) {
 	for _, role := range []string{data.CanonicalSnapshotRole, data.CanonicalTimestampRole} {
+		setUp(t)
 		// Temporary directory where test files will be created
 		tempBaseDir, err := ioutil.TempDir("/tmp", "notary-test-")
 		defer os.RemoveAll(tempBaseDir)
@@ -348,6 +359,7 @@ func TestRotateKeyRemoteServerManagesKey(t *testing.T) {
 
 		ts, initialKeys := setUpRepo(t, tempBaseDir, gun, ret)
 		defer ts.Close()
+		assert.Len(t, initialKeys, 3)
 
 		k := &keyCommander{
 			configGetter: func() (*viper.Viper, error) {
@@ -359,7 +371,7 @@ func TestRotateKeyRemoteServerManagesKey(t *testing.T) {
 			getRetriever:           func() passphrase.Retriever { return ret },
 			rotateKeyServerManaged: true,
 		}
-		assert.NoError(t, k.keysRotate(&cobra.Command{}, []string{gun, role}))
+		assert.NoError(t, k.keysRotate(&cobra.Command{}, []string{gun, role, "-r"}))
 
 		repo, err := client.NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport, ret)
 		assert.NoError(t, err, "error creating repo: %s", err)
@@ -369,7 +381,6 @@ func TestRotateKeyRemoteServerManagesKey(t *testing.T) {
 		assert.Len(t, cl.List(), 0, "expected the changes to have been published")
 
 		finalKeys := repo.CryptoService.ListAllKeys()
-		assert.Len(t, initialKeys, 3)
 		// no keys have been created, since a remote key was specified
 		if role == data.CanonicalSnapshotRole {
 			assert.Len(t, finalKeys, 2)
@@ -393,6 +404,7 @@ func TestRotateKeyRemoteServerManagesKey(t *testing.T) {
 // The command line uses NotaryRepository's RotateKey - this is just testing
 // that multiple keys can be rotated at once locally
 func TestRotateKeyBothKeys(t *testing.T) {
+	setUp(t)
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("/tmp", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)
@@ -449,6 +461,7 @@ func TestRotateKeyBothKeys(t *testing.T) {
 }
 
 func TestChangeKeyPassphraseInvalidID(t *testing.T) {
+	setUp(t)
 	k := &keyCommander{
 		configGetter: func() (*viper.Viper, error) { return viper.New(), nil },
 		getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
@@ -459,6 +472,7 @@ func TestChangeKeyPassphraseInvalidID(t *testing.T) {
 }
 
 func TestChangeKeyPassphraseInvalidNumArgs(t *testing.T) {
+	setUp(t)
 	k := &keyCommander{
 		configGetter: func() (*viper.Viper, error) { return viper.New(), nil },
 		getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
@@ -469,6 +483,7 @@ func TestChangeKeyPassphraseInvalidNumArgs(t *testing.T) {
 }
 
 func TestChangeKeyPassphraseNonexistentID(t *testing.T) {
+	setUp(t)
 	k := &keyCommander{
 		configGetter: func() (*viper.Viper, error) { return viper.New(), nil },
 		getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
@@ -480,6 +495,7 @@ func TestChangeKeyPassphraseNonexistentID(t *testing.T) {
 }
 
 func TestKeyImportMismatchingRoles(t *testing.T) {
+	setUp(t)
 	k := &keyCommander{
 		configGetter:   func() (*viper.Viper, error) { return viper.New(), nil },
 		getRetriever:   func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
@@ -494,6 +510,7 @@ func TestKeyImportMismatchingRoles(t *testing.T) {
 }
 
 func TestKeyImportNoGUNForTargetsPEM(t *testing.T) {
+	setUp(t)
 	k := &keyCommander{
 		configGetter: func() (*viper.Viper, error) { return viper.New(), nil },
 		getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
@@ -507,6 +524,7 @@ func TestKeyImportNoGUNForTargetsPEM(t *testing.T) {
 }
 
 func TestKeyImportNoGUNForSnapshotPEM(t *testing.T) {
+	setUp(t)
 	k := &keyCommander{
 		configGetter: func() (*viper.Viper, error) { return viper.New(), nil },
 		getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
@@ -520,6 +538,7 @@ func TestKeyImportNoGUNForSnapshotPEM(t *testing.T) {
 }
 
 func TestKeyImportNoGUNForTargetsFlag(t *testing.T) {
+	setUp(t)
 	k := &keyCommander{
 		configGetter:   func() (*viper.Viper, error) { return viper.New(), nil },
 		getRetriever:   func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
@@ -534,6 +553,7 @@ func TestKeyImportNoGUNForTargetsFlag(t *testing.T) {
 }
 
 func TestKeyImportNoGUNForSnapshotFlag(t *testing.T) {
+	setUp(t)
 	k := &keyCommander{
 		configGetter:   func() (*viper.Viper, error) { return viper.New(), nil },
 		getRetriever:   func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
@@ -548,6 +568,7 @@ func TestKeyImportNoGUNForSnapshotFlag(t *testing.T) {
 }
 
 func TestKeyImportNoRole(t *testing.T) {
+	setUp(t)
 	k := &keyCommander{
 		configGetter: func() (*viper.Viper, error) { return viper.New(), nil },
 		getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
@@ -561,6 +582,7 @@ func TestKeyImportNoRole(t *testing.T) {
 }
 
 func generateTempTestKeyFile(t *testing.T, role string) string {
+	setUp(t)
 	privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
 	if err != nil {
 		return ""
