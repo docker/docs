@@ -195,7 +195,7 @@ func TestValidateRoot(t *testing.T) {
 	}
 
 	//
-	// This call to ValidateRoot will suceed in getting to the TUF validation, since
+	// This call to ValidateRoot will succeed in getting to the TUF validation, since
 	// we are using a valid PEM encoded certificate chain of intermediate + leaf cert
 	// that are signed by a trusted root authority and the leaf cert has a correct CN.
 	// It will, however, fail to validate, because it has an invalid TUF signature

@@ -25,7 +25,7 @@ const (
 
 const (
 	// N parameter was chosen to be ~100ms of work using the default implementation
-	// on the 2.3GHz Core i7 Haswell processor in a late-2013 Apple Retina Macbook
+	// on the 2.3GHz Core i7 processor in a late-2013 Apple Retina Macbook
 	// Pro (it takes ~113ms).
 	scryptN = 32768
 	scryptR = 8

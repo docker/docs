@@ -104,6 +104,16 @@ lint:
 	@echo "+ $@"
 	@test -z "$$(golint ./... | grep -v .pb. | grep -v Godeps/_workspace/src/ | tee /dev/stderr)"
 
+# Requires that the following:
+# go get -u github.com/client9/misspell/cmd/misspell
+#
+# be run first
+
+# misspell target, don't include Godeps, binaries, python tests, or git files
+misspell:
+	@echo "+ $@"
+	@test -z "$$(find . -name '*' | grep -v Godeps/_workspace/src/ | grep -v bin/ | grep -v misc/ | grep -v .git/ | xargs misspell | tee /dev/stderr)"
+
 build: go_version
 	@echo "+ $@"
 	@go build -tags "${NOTARY_BUILDTAGS}" -v ${GO_LDFLAGS} ./...
