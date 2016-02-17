@@ -366,9 +366,7 @@ func TestRotateKeyRemoteServerManagesKey(t *testing.T) {
 
 		cl, err := repo.GetChangelist()
 		assert.NoError(t, err, "unable to get changelist: %v", err)
-		assert.Len(t, cl.List(), 1, "expected a single key rotation change")
-
-		assert.NoError(t, repo.Publish())
+		assert.Len(t, cl.List(), 0, "expected the changes to have been published")
 
 		finalKeys := repo.CryptoService.ListAllKeys()
 		assert.Len(t, initialKeys, 3)
