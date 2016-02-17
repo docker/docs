@@ -300,6 +300,53 @@ func (c CryptoServiceTester) TestListFromMultipleKeystores(t *testing.T) {
 	}
 }
 
+// asserts that adding a key adds to all keystores
+// and adding an existing key either succeeds if the role matches or fails if it does not
+func (c CryptoServiceTester) TestAddKey(t *testing.T) {
+	cryptoService := c.cryptoServiceFactory()
+	cryptoService.keyStores = append(cryptoService.keyStores,
+		trustmanager.NewKeyMemoryStore(passphraseRetriever))
+
+	privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
+	assert.NoError(t, err)
+
+	// Add the key to the targets role
+	assert.NoError(t, cryptoService.AddKey(privKey, data.CanonicalTargetsRole))
+
+	// Check that we added the key and its info to only the first keystore
+	retrievedKey, retrievedRole, err := cryptoService.keyStores[0].GetKey(privKey.ID())
+	assert.NoError(t, err)
+	assert.Equal(t, privKey.Private(), retrievedKey.Private())
+	assert.Equal(t, data.CanonicalTargetsRole, retrievedRole)
+
+	retrievedKeyInfo, err := cryptoService.keyStores[0].GetKeyInfo(privKey.ID())
+	assert.NoError(t, err)
+	assert.Equal(t, data.CanonicalTargetsRole, retrievedKeyInfo.Role)
+	assert.Equal(t, cryptoService.gun, retrievedKeyInfo.Gun)
+
+	// The key should not exist in the second keystore
+	_, _, err = cryptoService.keyStores[1].GetKey(privKey.ID())
+	assert.Error(t, err)
+	_, err = cryptoService.keyStores[1].GetKeyInfo(privKey.ID())
+	assert.Error(t, err)
+
+	// We should be able to successfully get the key from the cryptoservice level
+	retrievedKey, retrievedRole, err = cryptoService.GetPrivateKey(privKey.ID())
+	assert.NoError(t, err)
+	assert.Equal(t, privKey.Private(), retrievedKey.Private())
+	assert.Equal(t, data.CanonicalTargetsRole, retrievedRole)
+	retrievedKeyInfo, err = cryptoService.GetKeyInfo(privKey.ID())
+	assert.NoError(t, err)
+	assert.Equal(t, data.CanonicalTargetsRole, retrievedKeyInfo.Role)
+	assert.Equal(t, cryptoService.gun, retrievedKeyInfo.Gun)
+
+	// Add the same key to the targets role, since the info is the same we should have no error
+	assert.NoError(t, cryptoService.AddKey(privKey, data.CanonicalTargetsRole))
+
+	// Try to add the same key to the snapshot role, which should error due to the role mismatch
+	assert.Error(t, cryptoService.AddKey(privKey, data.CanonicalSnapshotRole))
+}
+
 // Prints out an error message with information about the key algorithm,
 // role, and test name. Ideally we could generate different tests given
 // data, without having to put for loops in one giant test function, but
@@ -330,6 +377,7 @@ func testCryptoService(t *testing.T, gun string) {
 				keyAlgo: algo,
 				gun:     gun,
 			}
+			cst.TestAddKey(t)
 			cst.TestCreateAndGetKey(t)
 			cst.TestCreateAndGetWhenMultipleKeystores(t)
 			cst.TestGetNonexistentKey(t)
