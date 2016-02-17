@@ -105,7 +105,7 @@ func NewSnapshotUpdate(prev *data.SignedSnapshot, repo *tuf.Repo) (*storage.Meta
 	if prev != nil {
 		repo.SetSnapshot(prev) // SetSnapshot never errors
 	} else {
-		// this will only occurr if no snapshot has ever been created for the repository
+		// this will only occur if no snapshot has ever been created for the repository
 		if err := repo.InitSnapshot(); err != nil {
 			return nil, err
 		}

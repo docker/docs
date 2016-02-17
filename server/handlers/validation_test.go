@@ -24,7 +24,7 @@ func copyKeys(t *testing.T, from signed.CryptoService, roles ...string) signed.C
 		for _, keyID := range from.ListKeys(role) {
 			key, _, err := from.GetPrivateKey(keyID)
 			assert.NoError(t, err)
-			memKeyStore.AddKey(path.Base(keyID), data.CanonicalTimestampRole, key)
+			memKeyStore.AddKey(path.Base(keyID), role, key)
 		}
 	}
 	return cryptoservice.NewCryptoService("", memKeyStore)
