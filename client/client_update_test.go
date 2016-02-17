@@ -919,12 +919,8 @@ func waysToMessUpServerNonRootPerRole(t *testing.T) map[string][]swizzleExpectat
 		perRoleSwizzling[data.CanonicalSnapshotRole] = append(
 			perRoleSwizzling[data.CanonicalSnapshotRole],
 			swizzleExpectations{
-				desc: fmt.Sprintf("snapshot missing root meta checksum"),
-				// TODO: this should probably be always client.ErrMissingMeta
-				// or some kind of snapshot validation failure - please see
-				// https://github.com/docker/notary/pull/572#discussion_r53093988 for an explanation
-				// of the JSON syntax error
-				expectErrs: []interface{}{&json.SyntaxError{}, client.ErrMissingMeta{}},
+				desc:       fmt.Sprintf("snapshot missing root meta checksum"),
+				expectErrs: []interface{}{client.ErrMissingMeta{}},
 				swizzle: func(s *testutils.MetadataSwizzler, role string) error {
 					return s.MutateSnapshot(func(sn *data.Snapshot) {
 						delete(sn.Meta, missing)

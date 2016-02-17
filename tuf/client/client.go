@@ -129,8 +129,10 @@ func (c *Client) downloadRoot() error {
 	var size int64 = -1
 	var expectedSha256 []byte
 	if c.local.Snapshot != nil {
-		size = c.local.Snapshot.Signed.Meta[role].Length
-		expectedSha256 = c.local.Snapshot.Signed.Meta[role].Hashes["sha256"]
+		if prevRootMeta, ok := c.local.Snapshot.Signed.Meta[role]; ok {
+			size = prevRootMeta.Length
+			expectedSha256 = prevRootMeta.Hashes["sha256"]
+		}
 	}
 
 	// if we're bootstrapping we may not have a cached root, an
