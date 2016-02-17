@@ -38,8 +38,7 @@ func TestRotation(t *testing.T) {
 
 	repo.Root = originalRoot
 
-	// Generate new key and role. These will appear in the root.json
-	// but will not be added to the keyDB.
+	// Generate new key and role.
 	replacementKey, err := signer.Create("root", data.ED25519Key)
 	assert.NoError(t, err, "Error creating replacement root key")
 	replacementRole, err := data.NewRole("root", 1, []string{replacementKey.ID()}, nil)
@@ -96,8 +95,7 @@ func TestRotationNewSigMissing(t *testing.T) {
 
 	repo.Root = originalRoot
 
-	// Generate new key and role. These will appear in the root.json
-	// but will not be added to the keyDB.
+	// Generate new key and role.
 	replacementKey, err := signer.Create("root", data.ED25519Key)
 	assert.NoError(t, err, "Error creating replacement root key")
 	replacementRole, err := data.NewRole("root", 1, []string{replacementKey.ID()}, nil)
@@ -160,8 +158,7 @@ func TestRotationOldSigMissing(t *testing.T) {
 
 	repo.Root = originalRoot
 
-	// Generate new key and role. These will appear in the root.json
-	// but will not be added to the keyDB.
+	// Generate new key and role.
 	replacementKey, err := signer.Create("root", data.ED25519Key)
 	assert.NoError(t, err, "Error creating replacement root key")
 	replacementRole, err := data.NewRole("root", 1, []string{replacementKey.ID()}, nil)

@@ -39,7 +39,7 @@ func createKey(cs signed.CryptoService, gun, role string) (data.PublicKey, error
 	return key, nil
 }
 
-// EmptyRepo creates an in memory key database, crypto service
+// EmptyRepo creates an in memory crypto service
 // and initializes a repo with no targets.  Delegations are only created
 // if delegation roles are passed in.
 func EmptyRepo(gun string, delegationRoles ...string) (*tuf.Repo, signed.CryptoService, error) {

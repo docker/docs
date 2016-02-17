@@ -88,9 +88,9 @@ func IsDelegation(role string) bool {
 
 // BaseRole is an internal representation of a root/targets/snapshot/timestamp role, with its public keys included
 type BaseRole struct {
-	Keys      map[string]PublicKey `json:"keys"`
-	Name      string               `json:"name"`
-	Threshold int                  `json:"threshold"`
+	Keys      map[string]PublicKey
+	Name      string
+	Threshold int
 }
 
 // NewBaseRole creates a new BaseRole object with the provided parameters
@@ -119,7 +119,7 @@ func (b BaseRole) ListKeyIDs() []string {
 // DelegationRole is an internal representation of a delegation role, with its public keys included
 type DelegationRole struct {
 	BaseRole
-	Paths []string `json:"paths,omitempty"`
+	Paths []string
 }
 
 func listKeys(keyMap map[string]PublicKey) KeyList {
@@ -212,14 +212,13 @@ type Role struct {
 	RootRole
 	Name  string   `json:"name"`
 	Paths []string `json:"paths,omitempty"`
-	Email string   `json:"email,omitempty"`
 }
 
 // NewRole creates a new Role object from the given parameters
 func NewRole(name string, threshold int, keyIDs, paths []string) (*Role, error) {
 	if IsDelegation(name) {
 		if len(paths) == 0 {
-			logrus.Debugf("role %s with no Paths and no PathHashPrefixes will never be able to publish content until one or more are added", name)
+			logrus.Debugf("role %s with no Paths will never be able to publish content until one or more are added", name)
 		}
 	}
 	if threshold < 1 {

@@ -23,7 +23,7 @@ func copyTimestampKey(t *testing.T, fromRepo *tuf.Repo,
 
 	role, err := fromRepo.GetBaseRole(data.CanonicalTimestampRole)
 	assert.NoError(t, err)
-	assert.NotNil(t, role, "No timestamp role in the KeyDB")
+	assert.NotNil(t, role, "No timestamp role in the root file")
 	assert.Len(t, role.ListKeyIDs(), 1, fmt.Sprintf(
 		"Expected 1 timestamp key in timestamp role, got %d", len(role.ListKeyIDs())))
 
@@ -1006,8 +1006,8 @@ func TestValidateTargetsRoleNotInParent(t *testing.T) {
 	assert.NoError(t, err)
 	r, err := data.NewRole("targets/level1", 1, []string{level1Key.ID()}, []string{""})
 
-	baseRepo.Targets["targets"].Signed.Delegations.Roles = []*data.Role{r}
-	baseRepo.Targets["targets"].Signed.Delegations.Keys = data.Keys{
+	baseRepo.Targets[data.CanonicalTargetsRole].Signed.Delegations.Roles = []*data.Role{r}
+	baseRepo.Targets[data.CanonicalTargetsRole].Signed.Delegations.Keys = data.Keys{
 		level1Key.ID(): level1Key,
 	}
 
@@ -1025,9 +1025,9 @@ func TestValidateTargetsRoleNotInParent(t *testing.T) {
 	}
 
 	// set back to empty so stored targets doesn't have reference to level1
-	baseRepo.Targets["targets"].Signed.Delegations.Roles = nil
-	baseRepo.Targets["targets"].Signed.Delegations.Keys = nil
-	targets, err := baseRepo.SignTargets("targets", data.DefaultExpires(data.CanonicalTargetsRole))
+	baseRepo.Targets[data.CanonicalTargetsRole].Signed.Delegations.Roles = nil
+	baseRepo.Targets[data.CanonicalTargetsRole].Signed.Delegations.Keys = nil
+	targets, err := baseRepo.SignTargets(data.CanonicalTargetsRole, data.DefaultExpires(data.CanonicalTargetsRole))
 
 	tgtsJSON, err := json.Marshal(targets)
 	assert.NoError(t, err)
@@ -1039,8 +1039,8 @@ func TestValidateTargetsRoleNotInParent(t *testing.T) {
 	store.UpdateCurrent("gun", update)
 
 	roles := map[string]storage.MetaUpdate{
-		"targets/level1": delUpdate,
-		"targets":        update,
+		"targets/level1":          delUpdate,
+		data.CanonicalTargetsRole: update,
 	}
 
 	valRepo := tuf.NewRepo(nil)
@@ -1052,7 +1052,7 @@ func TestValidateTargetsRoleNotInParent(t *testing.T) {
 	updates, err := loadAndValidateTargets("gun", valRepo, roles, store)
 	assert.NoError(t, err)
 	assert.Len(t, updates, 1)
-	assert.Equal(t, "targets", updates[0].Role)
+	assert.Equal(t, data.CanonicalTargetsRole, updates[0].Role)
 	assert.Equal(t, tgtsJSON, updates[0].Data)
 }
 

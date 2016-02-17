@@ -57,43 +57,16 @@ func initRepo(t *testing.T, cryptoService signed.CryptoService) *Repo {
 	return repo
 }
 
-// INVALIDATED - InitRoot now requires that all 4 of the base roles exist
-// we require that at least the base targets role is available when creating
-// initializing a snapshot
-//func TestInitSnapshotNoTargets(t *testing.T) {
-//	cryptoService := signed.NewEd25519()
-//	keyDB := keys.NewDB()
-//	rootKey, err := cryptoService.Create("root", data.ED25519Key)
-//	assert.NoError(t, err)
-//	snapshotKey, err := cryptoService.Create("snapshot", data.ED25519Key)
-//	assert.NoError(t, err)
-//
-//	keyDB.AddKey(rootKey)
-//	keyDB.AddKey(snapshotKey)
-//
-//	rootRole := &data.Role{
-//		Name: "root",
-//		RootRole: data.RootRole{
-//			KeyIDs:    []string{rootKey.ID()},
-//			Threshold: 1,
-//		},
-//	}
-//	snapshotRole := &data.Role{
-//		Name: "snapshot",
-//		RootRole: data.RootRole{
-//			KeyIDs:    []string{snapshotKey.ID()},
-//			Threshold: 1,
-//		},
-//	}
-//
-//	keyDB.AddRole(rootRole)
-//	keyDB.AddRole(snapshotRole)
-//
-//	repo := NewRepo(cryptoService)
-//	err = repo.InitSnapshot()
-//	assert.Error(t, err)
-//	assert.IsType(t, ErrNotLoaded{}, err)
-//}
+func TestInitSnapshotNoTargets(t *testing.T) {
+	cs := signed.NewEd25519()
+	repo := initRepo(t, cs)
+
+	repo.Targets = make(map[string]*data.SignedTargets)
+
+	err := repo.InitSnapshot()
+	assert.Error(t, err)
+	assert.IsType(t, ErrNotLoaded{}, err)
+}
 
 func writeRepo(t *testing.T, dir string, repo *Repo) {
 	err := os.MkdirAll(dir, 0755)
@@ -1002,7 +975,11 @@ func TestGetDelegationRolesInvalidName(t *testing.T) {
 	for _, role := range data.BaseRoles {
 		_, err = repo.GetDelegationRole(role)
 		assert.Error(t, err)
+		assert.IsType(t, data.ErrInvalidRole{}, err)
 	}
+	_, err = repo.GetDelegationRole("targets/doesnt_exist")
+	assert.Error(t, err)
+	assert.IsType(t, data.ErrInvalidRole{}, err)
 }
 
 func TestGetDelegationRolesInvalidPaths(t *testing.T) {
@@ -1102,4 +1079,46 @@ func TestDelegationRolesParent(t *testing.T) {
 	restrictedDelgC, err := restrictedDelgB.Restrict(delgC)
 	assert.NoError(t, err)
 	assert.Empty(t, restrictedDelgC.Paths)
+}
+
+func TestGetBaseRoleEmptyRepo(t *testing.T) {
+	repo := NewRepo(nil)
+	_, err := repo.GetBaseRole(data.CanonicalRootRole)
+	assert.Error(t, err)
+	assert.IsType(t, ErrNotLoaded{}, err)
+}
+
+func TestGetBaseRoleKeyMissing(t *testing.T) {
+	ed25519 := signed.NewEd25519()
+	repo := initRepo(t, ed25519)
+
+	// change root role to have a KeyID that doesn't exist
+	repo.Root.Signed.Roles[data.CanonicalRootRole].KeyIDs = []string{"abc"}
+
+	_, err := repo.GetBaseRole(data.CanonicalRootRole)
+	assert.Error(t, err)
+	assert.IsType(t, data.ErrInvalidRole{}, err)
+}
+
+func TestGetDelegationRoleKeyMissing(t *testing.T) {
+	ed25519 := signed.NewEd25519()
+	repo := initRepo(t, ed25519)
+
+	// add a delegation that has a KeyID that doesn't exist
+	// in the relevant key map
+	tar := repo.Targets[data.CanonicalTargetsRole]
+	tar.Signed.Delegations.Roles = []*data.Role{
+		{
+			RootRole: data.RootRole{
+				KeyIDs:    []string{"abc"},
+				Threshold: 1,
+			},
+			Name:  "targets/missing_key",
+			Paths: []string{""},
+		},
+	}
+
+	_, err := repo.GetDelegationRole("targets/missing_key")
+	assert.Error(t, err)
+	assert.IsType(t, data.ErrInvalidRole{}, err)
 }
