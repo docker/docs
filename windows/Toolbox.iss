@@ -28,6 +28,7 @@ ArchitecturesInstallIn64BitMode=x64
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName=Docker
 DisableProgramGroupPage=yes
+DisableWelcomePage=no
 OutputBaseFilename=DockerToolbox
 Compression=lzma
 SolidCompression=yes
