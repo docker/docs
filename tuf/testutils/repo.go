@@ -14,7 +14,6 @@ import (
 	fuzz "github.com/google/gofuzz"
 
 	tuf "github.com/docker/notary/tuf"
-	"github.com/docker/notary/tuf/keys"
 	"github.com/docker/notary/tuf/signed"
 )
 
@@ -43,23 +42,34 @@ func createKey(cs signed.CryptoService, gun, role string) (data.PublicKey, error
 // EmptyRepo creates an in memory key database, crypto service
 // and initializes a repo with no targets.  Delegations are only created
 // if delegation roles are passed in.
-func EmptyRepo(gun string, delegationRoles ...string) (*keys.KeyDB, *tuf.Repo, signed.CryptoService, error) {
+func EmptyRepo(gun string, delegationRoles ...string) (*tuf.Repo, signed.CryptoService, error) {
 	cs := cryptoservice.NewCryptoService(
 		gun, trustmanager.NewKeyMemoryStore(passphrase.ConstantRetriever("")))
-	kdb := keys.NewDB()
-	r := tuf.NewRepo(kdb, cs)
+	r := tuf.NewRepo(cs)
 
+	baseRoles := map[string]data.BaseRole{}
 	for _, role := range data.BaseRoles {
 		key, err := createKey(cs, gun, role)
 		if err != nil {
-			return nil, nil, nil, err
+			return nil, nil, err
 		}
-		role, _ := data.NewRole(role, 1, []string{key.ID()}, nil, nil)
-		kdb.AddKey(key)
-		kdb.AddRole(role)
+		baseRoles[role] = data.NewBaseRole(
+			role,
+			1,
+			key,
+		)
 	}
 
-	r.InitRepo(false)
+	r.InitRoot(
+		baseRoles[data.CanonicalRootRole],
+		baseRoles[data.CanonicalTimestampRole],
+		baseRoles[data.CanonicalSnapshotRole],
+		baseRoles[data.CanonicalTargetsRole],
+		false,
+	)
+	r.InitTargets(data.CanonicalTargetsRole)
+	r.InitSnapshot()
+	r.InitTimestamp()
 
 	// sort the delegation roles so that we make sure to create the parents
 	// first
@@ -68,23 +78,23 @@ func EmptyRepo(gun string, delegationRoles ...string) (*keys.KeyDB, *tuf.Repo, s
 		// create a delegations key and a delegation in the tuf repo
 		delgKey, err := createKey(cs, gun, delgName)
 		if err != nil {
-			return nil, nil, nil, err
+			return nil, nil, err
 		}
-		role, err := data.NewRole(delgName, 1, []string{}, []string{""}, []string{})
+		role, err := data.NewRole(delgName, 1, []string{}, []string{""})
 		if err != nil {
-			return nil, nil, nil, err
+			return nil, nil, err
 		}
 		if err := r.UpdateDelegations(role, []data.PublicKey{delgKey}); err != nil {
-			return nil, nil, nil, err
+			return nil, nil, err
 		}
 	}
 
-	return kdb, r, cs, nil
+	return r, cs, nil
 }
 
 // NewRepoMetadata creates a TUF repo and returns the metadata
 func NewRepoMetadata(gun string, delegationRoles ...string) (map[string][]byte, signed.CryptoService, error) {
-	_, tufRepo, cs, err := EmptyRepo(gun, delegationRoles...)
+	tufRepo, cs, err := EmptyRepo(gun, delegationRoles...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -167,19 +177,19 @@ func RandomByteSlice(maxSize int) []byte {
 // Sign signs all top level roles in a repo in the appropriate order
 func Sign(repo *tuf.Repo) (root, targets, snapshot, timestamp *data.Signed, err error) {
 	root, err = repo.SignRoot(data.DefaultExpires("root"))
-	if err != nil {
+	if _, ok := err.(data.ErrInvalidRole); err != nil && !ok {
 		return nil, nil, nil, nil, err
 	}
 	targets, err = repo.SignTargets("targets", data.DefaultExpires("targets"))
-	if err != nil {
+	if _, ok := err.(data.ErrInvalidRole); err != nil && !ok {
 		return nil, nil, nil, nil, err
 	}
 	snapshot, err = repo.SignSnapshot(data.DefaultExpires("snapshot"))
-	if err != nil {
+	if _, ok := err.(data.ErrInvalidRole); err != nil && !ok {
 		return nil, nil, nil, nil, err
 	}
 	timestamp, err = repo.SignTimestamp(data.DefaultExpires("timestamp"))
-	if err != nil {
+	if _, ok := err.(data.ErrInvalidRole); err != nil && !ok {
 		return nil, nil, nil, nil, err
 	}
 	return

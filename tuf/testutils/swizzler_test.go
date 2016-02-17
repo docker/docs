@@ -13,7 +13,6 @@ import (
 
 	"github.com/docker/notary/tuf"
 	"github.com/docker/notary/tuf/data"
-	"github.com/docker/notary/tuf/keys"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/store"
 	"github.com/stretchr/testify/require"
@@ -384,8 +383,7 @@ func TestSwizzlerChangeRootKey(t *testing.T) {
 
 	f.ChangeRootKey()
 
-	kdb := keys.NewDB()
-	tufRepo := tuf.NewRepo(kdb, f.CryptoService)
+	tufRepo := tuf.NewRepo(f.CryptoService)
 
 	// we want to test these in a specific order
 	roles := []string{data.CanonicalRootRole, data.CanonicalTargetsRole, data.CanonicalSnapshotRole,

@@ -14,7 +14,6 @@ import (
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/tuf"
 	"github.com/docker/notary/tuf/data"
-	"github.com/docker/notary/tuf/keys"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/utils"
 	"github.com/docker/notary/tuf/validation"
@@ -27,8 +26,7 @@ import (
 // created and added if snapshotting has been delegated to the
 // server
 func validateUpdate(cs signed.CryptoService, gun string, updates []storage.MetaUpdate, store storage.MetaStore) ([]storage.MetaUpdate, error) {
-	kdb := keys.NewDB()
-	repo := tuf.NewRepo(kdb, cs)
+	repo := tuf.NewRepo(cs)
 	rootRole := data.CanonicalRootRole
 	snapshotRole := data.CanonicalSnapshotRole
 
@@ -162,7 +160,7 @@ func loadAndValidateTargets(gun string, repo *tuf.Repo, roles map[string]storage
 			err error
 		)
 		if t, err = validateTargets(role, roles, repo); err != nil {
-			if _, ok := err.(tuf.ErrNotLoaded); ok {
+			if _, ok := err.(data.ErrInvalidRole); ok {
 				// role wasn't found in its parent. It has been removed
 				// or never existed. Drop this role from the update
 				// (by not adding it to updatesToApply)
@@ -331,19 +329,19 @@ func validateTargets(role string, roles map[string]storage.MetaUpdate, repo *tuf
 	// version specifically gets validated when writing to store to
 	// better handle race conditions there.
 	var targetOrDelgRole data.BaseRole
-	if data.IsDelegation(role) {
+	if role == data.CanonicalTargetsRole {
+		targetOrDelgRole, err = repo.GetBaseRole(role)
+		if err != nil {
+			logrus.Debugf("no %s role loaded", role)
+			return nil, err
+		}
+	} else {
 		delgRole, err := repo.GetDelegationRole(role)
 		if err != nil {
 			logrus.Debugf("no %s delegation role loaded", role)
 			return nil, err
 		}
 		targetOrDelgRole = delgRole.BaseRole
-	} else {
-		targetOrDelgRole, err = repo.GetBaseRole(role)
-		if err != nil {
-			logrus.Debugf("no %s role loaded", role)
-			return nil, err
-		}
 	}
 	if err := signed.Verify(s, targetOrDelgRole, 0); err != nil {
 		return nil, err

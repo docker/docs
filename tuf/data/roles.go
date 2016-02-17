@@ -86,28 +86,24 @@ func IsDelegation(role string) bool {
 		isClean
 }
 
-// RootRole is a cut down role as it appears in the root.json
-// Eventually should only be used for immediately before and after serialization/deserialization
-type RootRole struct {
-	KeyIDs    []string `json:"keyids"`
-	Threshold int      `json:"threshold"`
-}
-
-// Role is a more verbose role as they appear in targets delegations
-// Eventually should only be used for immediately before and after serialization/deserialization
-type Role struct {
-	RootRole
-	Name             string   `json:"name"`
-	Paths            []string `json:"paths,omitempty"`
-	PathHashPrefixes []string `json:"path_hash_prefixes,omitempty"`
-	Email            string   `json:"email,omitempty"`
-}
-
 // BaseRole is an internal representation of a root/targets/snapshot/timestamp role, with its public keys included
 type BaseRole struct {
 	Keys      map[string]PublicKey `json:"keys"`
 	Name      string               `json:"name"`
 	Threshold int                  `json:"threshold"`
+}
+
+// NewBaseRole creates a new BaseRole object with the provided parameters
+func NewBaseRole(name string, threshold int, keys ...PublicKey) BaseRole {
+	r := BaseRole{
+		Name:      name,
+		Threshold: threshold,
+		Keys:      make(map[string]PublicKey),
+	}
+	for _, k := range keys {
+		r.Keys[k.ID()] = k
+	}
+	return r
 }
 
 // ListKeys retrieves the public keys valid for this role
@@ -123,8 +119,7 @@ func (b BaseRole) ListKeyIDs() []string {
 // DelegationRole is an internal representation of a delegation role, with its public keys included
 type DelegationRole struct {
 	BaseRole
-	Paths            []string `json:"paths,omitempty"`
-	PathHashPrefixes []string `json:"path_hash_prefixes,omitempty"`
+	Paths []string `json:"paths,omitempty"`
 }
 
 func listKeys(keyMap map[string]PublicKey) KeyList {
@@ -155,8 +150,7 @@ func (d DelegationRole) Restrict(child DelegationRole) (DelegationRole, error) {
 			Name:      child.Name,
 			Threshold: child.Threshold,
 		},
-		Paths:            RestrictDelegationPathPrefixes(d.Paths, child.Paths),
-		PathHashPrefixes: RestrictDelegationPathPrefixes(d.PathHashPrefixes, child.PathHashPrefixes),
+		Paths: RestrictDelegationPathPrefixes(d.Paths, child.Paths),
 	}, nil
 }
 
@@ -165,6 +159,20 @@ func (d DelegationRole) Restrict(child DelegationRole) (DelegationRole, error) {
 // Ex: targets/a is a direct parent of targets/a/b, but targets/a is not a direct parent of targets/a/b/c
 func (d DelegationRole) IsParentOf(child DelegationRole) bool {
 	return path.Dir(child.Name) == d.Name
+}
+
+// CheckPaths checks if a given path is valid for the role
+func (d DelegationRole) CheckPaths(path string) bool {
+	return checkPaths(path, d.Paths)
+}
+
+func checkPaths(path string, permitted []string) bool {
+	for _, p := range permitted {
+		if strings.HasPrefix(path, p) {
+			return true
+		}
+	}
+	return false
 }
 
 // RestrictDelegationPathPrefixes returns the list of valid delegationPaths that are prefixed by parentPaths
@@ -191,16 +199,26 @@ func RestrictDelegationPathPrefixes(parentPaths, delegationPaths []string) []str
 	return validPaths
 }
 
+// RootRole is a cut down role as it appears in the root.json
+// Eventually should only be used for immediately before and after serialization/deserialization
+type RootRole struct {
+	KeyIDs    []string `json:"keyids"`
+	Threshold int      `json:"threshold"`
+}
+
+// Role is a more verbose role as they appear in targets delegations
+// Eventually should only be used for immediately before and after serialization/deserialization
+type Role struct {
+	RootRole
+	Name  string   `json:"name"`
+	Paths []string `json:"paths,omitempty"`
+	Email string   `json:"email,omitempty"`
+}
+
 // NewRole creates a new Role object from the given parameters
-func NewRole(name string, threshold int, keyIDs, paths, pathHashPrefixes []string) (*Role, error) {
-	if len(paths) > 0 && len(pathHashPrefixes) > 0 {
-		return nil, ErrInvalidRole{
-			Role:   name,
-			Reason: "roles may not have both Paths and PathHashPrefixes",
-		}
-	}
+func NewRole(name string, threshold int, keyIDs, paths []string) (*Role, error) {
 	if IsDelegation(name) {
-		if len(paths) == 0 && len(pathHashPrefixes) == 0 {
+		if len(paths) == 0 {
 			logrus.Debugf("role %s with no Paths and no PathHashPrefixes will never be able to publish content until one or more are added", name)
 		}
 	}
@@ -215,52 +233,15 @@ func NewRole(name string, threshold int, keyIDs, paths, pathHashPrefixes []strin
 			KeyIDs:    keyIDs,
 			Threshold: threshold,
 		},
-		Name:             name,
-		Paths:            paths,
-		PathHashPrefixes: pathHashPrefixes,
+		Name:  name,
+		Paths: paths,
 	}, nil
 
 }
 
-// IsValid checks if the role has defined both paths and path hash prefixes,
-// having both is invalid
-func (r Role) IsValid() bool {
-	return !(len(r.Paths) > 0 && len(r.PathHashPrefixes) > 0)
-}
-
-// ValidKey checks if the given id is a recognized signing key for the role
-func (r Role) ValidKey(id string) bool {
-	for _, key := range r.KeyIDs {
-		if key == id {
-			return true
-		}
-	}
-	return false
-}
-
 // CheckPaths checks if a given path is valid for the role
 func (r Role) CheckPaths(path string) bool {
-	for _, p := range r.Paths {
-		if strings.HasPrefix(path, p) {
-			return true
-		}
-	}
-	return false
-}
-
-// CheckPrefixes checks if a given hash matches the prefixes for the role
-func (r Role) CheckPrefixes(hash string) bool {
-	for _, p := range r.PathHashPrefixes {
-		if strings.HasPrefix(hash, p) {
-			return true
-		}
-	}
-	return false
-}
-
-// IsDelegation checks if the role is a delegation or a root role
-func (r Role) IsDelegation() bool {
-	return IsDelegation(r.Name)
+	return checkPaths(path, r.Paths)
 }
 
 // AddKeys merges the ids into the current list of role key ids
@@ -273,22 +254,7 @@ func (r *Role) AddPaths(paths []string) error {
 	if len(paths) == 0 {
 		return nil
 	}
-	if len(r.PathHashPrefixes) > 0 {
-		return ErrInvalidRole{Role: r.Name, Reason: "attempted to add paths to role that already has hash prefixes"}
-	}
 	r.Paths = mergeStrSlices(r.Paths, paths)
-	return nil
-}
-
-// AddPathHashPrefixes merges the prefixes into the list of role path hash prefixes
-func (r *Role) AddPathHashPrefixes(prefixes []string) error {
-	if len(prefixes) == 0 {
-		return nil
-	}
-	if len(r.Paths) > 0 {
-		return ErrInvalidRole{Role: r.Name, Reason: "attempted to add hash prefixes to role that already has paths"}
-	}
-	r.PathHashPrefixes = mergeStrSlices(r.PathHashPrefixes, prefixes)
 	return nil
 }
 
@@ -300,11 +266,6 @@ func (r *Role) RemoveKeys(ids []string) {
 // RemovePaths removes the paths from the current list of role paths
 func (r *Role) RemovePaths(paths []string) {
 	r.Paths = subtractStrSlices(r.Paths, paths)
-}
-
-// RemovePathHashPrefixes removes the prefixes from the current list of path hash prefixes
-func (r *Role) RemovePathHashPrefixes(prefixes []string) {
-	r.PathHashPrefixes = subtractStrSlices(r.PathHashPrefixes, prefixes)
 }
 
 func mergeStrSlices(orig, new []string) []string {

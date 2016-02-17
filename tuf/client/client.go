@@ -11,7 +11,6 @@ import (
 	"github.com/docker/notary"
 	tuf "github.com/docker/notary/tuf"
 	"github.com/docker/notary/tuf/data"
-	"github.com/docker/notary/tuf/keys"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/store"
 	"github.com/docker/notary/tuf/utils"
@@ -21,16 +20,14 @@ import (
 type Client struct {
 	local  *tuf.Repo
 	remote store.RemoteStore
-	keysDB *keys.KeyDB
 	cache  store.MetadataStore
 }
 
 // NewClient initialized a Client with the given repo, remote source of content, key database, and cache
-func NewClient(local *tuf.Repo, remote store.RemoteStore, keysDB *keys.KeyDB, cache store.MetadataStore) *Client {
+func NewClient(local *tuf.Repo, remote store.RemoteStore, cache store.MetadataStore) *Client {
 	return &Client{
 		local:  local,
 		remote: remote,
-		keysDB: keysDB,
 		cache:  cache,
 	}
 }
