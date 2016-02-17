@@ -4,7 +4,6 @@ title ="Universal Control Plane"
 description="Docker Universal Control Plane"
 [menu.main]
 identifier="mn_ucp"
-weight="-100"
 +++
 <![end-metadata]-->
 

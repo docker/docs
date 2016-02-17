@@ -1,11 +1,10 @@
 <!--[metadata]>
 +++
-draft=true
 title = "Users"
 description = "Manage and troubleshoot UCP Users"
 keywords = ["tbd, tbd"]
 [menu.main]
-parent="mn_manage_ucp"
+parent="mn_ucp"
 +++
 <![end-metadata]-->
 
