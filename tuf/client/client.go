@@ -23,7 +23,7 @@ type Client struct {
 	cache  store.MetadataStore
 }
 
-// NewClient initialized a Client with the given repo, remote source of content, key database, and cache
+// NewClient initialized a Client with the given repo, remote source of content, and cache
 func NewClient(local *tuf.Repo, remote store.RemoteStore, cache store.MetadataStore) *Client {
 	return &Client{
 		local:  local,
@@ -206,25 +206,27 @@ func (c Client) verifyRoot(role string, s *data.Signed, minVersion int) error {
 		logrus.Debug("no previous root role loaded")
 		return err
 	}
+	// Verify using the rootRole loaded from the known root.json
 	if err = signed.Verify(s, rootRole, minVersion); err != nil {
 		logrus.Debug("root did not verify with existing keys")
 		return err
 	}
 
-	// This will cause keyDB to get updated, overwriting any keyIDs associated
-	// with the roles in root.json
 	logrus.Debug("updating known root roles and keys")
 	root, err := data.RootFromSigned(s)
 	if err != nil {
 		logrus.Error(err.Error())
 		return err
 	}
+	// replace the existing root.json with the new one (just in memory, we
+	// have another validation step before we fully accept the new root)
 	err = c.local.SetRoot(root)
 	if err != nil {
 		logrus.Error(err.Error())
 		return err
 	}
-	// verify again now that the old keys have been replaced with the new keys.
+	// Verify the new root again having loaded the rootRole out of this new
+	// file (verifies self-referential integrity)
 	// TODO(endophage): be more intelligent and only re-verify if we detect
 	//                  there has been a change in root keys
 	logrus.Debug("verifying root with updated keys")

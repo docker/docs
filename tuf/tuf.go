@@ -62,8 +62,9 @@ type Repo struct {
 	cryptoService signed.CryptoService
 }
 
-// NewRepo initializes a Repo instance with a keysDB and a signer.
-// If the Repo will only be used for reading, the signer should be nil.
+// NewRepo initializes a Repo instance with a CryptoService.
+// If the Repo will only be used for reading, the CryptoService
+// can be nil.
 func NewRepo(cryptoService signed.CryptoService) *Repo {
 	repo := &Repo{
 		Targets:       make(map[string]*data.SignedTargets),
@@ -180,7 +181,10 @@ func (tr *Repo) GetBaseRole(name string) (data.BaseRole, error) {
 	for _, keyID := range keyIDs {
 		pubKey, ok := tr.Root.Signed.Keys[keyID]
 		if !ok {
-			return data.BaseRole{}, fmt.Errorf("key with ID %s, specified as a signing key for role %s, was not found in root metadata", keyID, name)
+			return data.BaseRole{}, data.ErrInvalidRole{
+				Role:   name,
+				Reason: fmt.Sprintf("key with ID %s was not found in root metadata", keyID),
+			}
 		}
 		pubKeys[keyID] = pubKey
 	}
@@ -211,42 +215,51 @@ func (tr *Repo) GetDelegationRole(name string) (data.DelegationRole, error) {
 		return data.DelegationRole{}, ErrNotLoaded{data.CanonicalTargetsRole}
 	}
 
-	// Start with top level roles in targets
+	// Start with top level roles in targets. Walk the chain of ancestors
+	// until finding the desired role, or we run out of targets files to search.
 	delegationRoles := signedTargetData.Signed.Delegations.Roles
 	var foundRole *data.Role
 	for len(delegationRoles) > 0 {
 		delgRole := delegationRoles[0]
 		delegationRoles = delegationRoles[1:]
 
-		// If this role is delegated above or is our desired role, traverse it
-		if delgRole.Name == name || strings.HasPrefix(name, delgRole.Name+"/") {
+		// If we found the role, we can exit the loop
+		if delgRole.Name == name {
+			foundRole = delgRole
+			break
+		}
 
-			// If we found the role, we can exit the loop
-			if delgRole.Name == name {
-				foundRole = delgRole
-				break
-			}
-
-			// If this is a parent role, keep traversing
+		// If the current role is an ancestor of our desired role, add its children
+		// to the queue of roles to investigate.
+		if strings.HasPrefix(name, delgRole.Name+"/") {
 			if delegationMeta, ok := tr.Targets[delgRole.Name]; ok {
 				delegationRoles = append(delegationRoles, delegationMeta.Signed.Delegations.Roles...)
 			}
 		}
 	}
 
+	// We never found the delegation. In the context of this repo it is considered
+	// invalid. N.B. it may be that it existed at one point but an ancestor has since
+	// been modified/removed.
 	if foundRole == nil {
 		return data.DelegationRole{}, data.ErrInvalidRole{Role: name, Reason: "delegation does not exist"}
 	}
 
 	pubKeys := make(map[string]data.PublicKey)
-	parentData, ok := tr.Targets[path.Dir(foundRole.Name)]
+	parentRoleName := path.Dir(foundRole.Name)
+	parentData, ok := tr.Targets[parentRoleName]
 	if !ok {
-		return data.DelegationRole{}, ErrNotLoaded{path.Dir(path.Dir(foundRole.Name))}
+		// This should be impossible to reach given we inspected the parent to
+		// get foundRole
+		return data.DelegationRole{}, ErrNotLoaded{parentRoleName}
 	}
 	for _, keyID := range foundRole.KeyIDs {
 		pubKey, ok := parentData.Signed.Delegations.Keys[keyID]
 		if !ok {
-			return data.DelegationRole{}, ErrNotLoaded{name}
+			return data.DelegationRole{}, data.ErrInvalidRole{
+				Role:   name,
+				Reason: fmt.Sprintf("key with ID %s was not found in %s's metadata", keyID, parentRoleName),
+			}
 		}
 		pubKeys[keyID] = pubKey
 	}
@@ -264,6 +277,11 @@ func (tr *Repo) GetDelegationRole(name string) (data.DelegationRole, error) {
 // GetAllLoadedRoles returns a list of all role entries loaded in this TUF repo, could be empty
 func (tr *Repo) GetAllLoadedRoles() []*data.Role {
 	var res []*data.Role
+	if tr.Root == nil {
+		// if root isn't loaded, we should consider we have no loaded roles because we can't
+		// trust any other state that might be present
+		return res
+	}
 	for name, rr := range tr.Root.Signed.Roles {
 		res = append(res, &data.Role{
 			RootRole: *rr,
@@ -413,8 +431,8 @@ func (tr *Repo) DeleteDelegation(role data.Role) error {
 	return nil
 }
 
-// InitRoot initializes an empty root file with the 4 core roles based
-// on the current content of the key db
+// InitRoot initializes an empty root file with the 4 core roles passed to the
+// method, and the consistent flag.
 func (tr *Repo) InitRoot(root, timestamp, snapshot, targets data.BaseRole, consistent bool) error {
 	rootRoles := make(map[string]*data.RootRole)
 	rootKeys := make(map[string]data.PublicKey)
@@ -489,9 +507,7 @@ func (tr *Repo) InitTimestamp() error {
 	return nil
 }
 
-// SetRoot parses the Signed object into a SignedRoot object, sets
-// the keys and roles in the KeyDB, and sets the Repo.Root field
-// to the SignedRoot object.
+// SetRoot sets the Repo.Root field to the SignedRoot object.
 func (tr *Repo) SetRoot(s *data.SignedRoot) error {
 	tr.Root = s
 	return nil
@@ -511,9 +527,8 @@ func (tr *Repo) SetSnapshot(s *data.SignedSnapshot) error {
 	return nil
 }
 
-// SetTargets parses the Signed object into a SignedTargets object,
-// reads the delegated roles and keys into the KeyDB, and sets the
-// SignedTargets object agaist the role in the Repo.Targets map.
+// SetTargets sets the SignedTargets object agaist the role in the
+// Repo.Targets map.
 func (tr *Repo) SetTargets(role string, s *data.SignedTargets) error {
 	tr.Targets[role] = s
 	return nil
