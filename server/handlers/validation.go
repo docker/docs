@@ -107,7 +107,7 @@ func validateUpdate(cs signed.CryptoService, gun string, updates []storage.MetaU
 			}
 		}
 
-		if err := validateSnapshot(snapshotRole, oldSnap, roles[snapshotRole], roles, repo); err != nil {
+		if err := loadAndValidateSnapshot(snapshotRole, oldSnap, roles[snapshotRole], roles, repo); err != nil {
 			logrus.Error("ErrBadSnapshot: ", err.Error())
 			return nil, validation.ErrBadSnapshot{Msg: err.Error()}
 		}
@@ -270,10 +270,9 @@ func generateTimestamp(gun string, repo *tuf.Repo, store storage.MetaStore) (*st
 	return metaUpdate, nil
 }
 
-// validateSnapshot validates that the given snapshot update is valid.  It also sets the new snapshot
+// loadAndValidateSnapshot validates that the given snapshot update is valid.  It also sets the new snapshot
 // on the TUF repo, if it is valid
-func validateSnapshot(role string, oldSnap *data.SignedSnapshot, snapUpdate storage.MetaUpdate, roles map[string]storage.MetaUpdate, repo *tuf.Repo) error {
-
+func loadAndValidateSnapshot(role string, oldSnap *data.SignedSnapshot, snapUpdate storage.MetaUpdate, roles map[string]storage.MetaUpdate, repo *tuf.Repo) error {
 	s := &data.Signed{}
 	err := json.Unmarshal(snapUpdate.Data, s)
 	if err != nil {
