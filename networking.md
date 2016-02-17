@@ -9,23 +9,22 @@ parent="mn_ucp"
 
 # Enable container networking with UCP
 
-Along with host and bridge networks, Docker Engine provides for users to create
-container overlay networks. These networks span multiple hosts running Docker
-Engine. Launching a container on one host, makes the container available to all
-hosts in that container network. Another name for this capability is multi-host
-network.
+Along with host and bridge networks, Docker Engine lets users create container
+overlay networks. These networks span multiple hosts running Docker Engine.
+Launching a container on one host, makes the container available to all hosts in
+that container network. Another name for this capability is multi-host networking.
 
 This page explains how to use the `engine-discovery` command to enable
-multi-host networks on your UCP installation. You'll do a complete configuration
-on all nodes within your UCP deployment.
+multi-host container networks on your UCP installation. You'll do a complete
+configuration on all nodes within your UCP deployment.
 
 ## About container networks and UCP
 
-You create a mulit-host container network using the Docker Engine client or the
-UCP administration console. Container networks are custom networks you create
-using the `overlay` network plugin driver. You must configure container networking
-explicitly on UCP. Once you have your UCP installation running but
-before you start using it, you enable container networks.
+You create a container network using the Docker Engine client or the UCP
+administration console. Container networks are custom networks you create using
+the `overlay` network plugin driver. You must configure container networking
+explicitly on UCP. Once you have your UCP installation running but before you
+start using it, you enable container networks.
 
 Enabling container networking is a process. First, you run the
 `engine-discovery` subcommand on the node. This subcommand configures the Engine
@@ -40,7 +39,7 @@ these key nodes. You should enable networking on the controller first and then
 the replicas. Once these are configured, you run the subcommand on each worker
 node.
 
-Once you've enabled container networks, you can create one through UCP the
+After you've configured discovery, you can create a container through UCP the
 application or the Engine CLI. To create a network using the Engine CLI, open a
 command line on any UCP node and do the following:
 
@@ -112,7 +111,10 @@ To enable the networking feature, do the following.
     network. The command installs discovery on a UCP installation
     with a two controllers (a primary and a replica).
 
-        $ docker run --rm -it --name ucp -v /var/run/docker.sock:/var/run/docker.sock docker/ucp:0.8.0 engine-discovery --controller 192.168.99.106 --controller 192.168.99.116 --host-address 192.168.99.106
+        $ docker run --rm -it --name ucp \
+        -v /var/run/docker.sock:/var/run/docker.sock docker/ucp:0.8.0 engine-discovery \
+        --controller 192.168.99.106 --controller 192.168.99.116 \
+        --host-address 192.168.99.106
         INFO[0000] New configuration established.  Signaling the daemon to load it...
         INFO[0001] Successfully delivered signal to daemon  
 
@@ -208,7 +210,22 @@ configuration and make sure you have properly configured it.
 ### daemon configuration errors
 
 The `engine-discovery` command works by modifying the start configuration for
-the Docker daemon. If you have trouble, try these troubleshooting measures:
+the Docker daemon. The tool stores the configuration the
+`/etc/docker/daemon.json` file on the node.  To view the configuration:
+
+```
+$ sudo cat /etc/docker/daemon.json
+{
+	"cluster-advertise": "10.0.11.78:12376",
+	"cluster-store": "etcd://10.0.11.78:12379,10.0.11.149:12379,10.0.26.238:12379",
+	"cluster-store-opts": {
+		"kv.cacertfile": "/var/lib/docker/discovery_certs/ca.pem",
+		"kv.certfile": "/var/lib/docker/discovery_certs/cert.pem",
+		"kv.keyfile": "/var/lib/docker/discovery_certs/key.pem"
+	}
+```
+
+If you have trouble with discovery, try these troubleshooting measures:
 
 * Review the daemon logs to ensure the daemon was started.
 * Add the `-D` (debug) to the Docker daemon start options.
