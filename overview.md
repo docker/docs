@@ -24,11 +24,10 @@ The current doc theme does not allow us to create a split menu: a menu whose lab
 * [Plan a production installation](plan-production-install.md)
 * [Install UCP for production](production-install.md)
 * [Upgrade a production installation](production-upgrade.md)
-* [Manage, monitor, and troubleshoot UCP and its resources](manage/index.md)
+* [Manage, monitor, and troubleshoot UCP and its resources](manage/monitor-ucp.md)
 * [Commands reference](reference/index.md)
 * [Work with Docker Support](support.md)
 * [UCP Release Notes](release_notes.md)
-<!--[metadata]>Older beta docs may change, stay or go tbd<![end-metadata]-->
 * [UCP Key/Value Store Backend](kv_store.md)
 * [Set up container networking with UCP](networking.md)
 * [Set up high availability](understand_ha.md)
