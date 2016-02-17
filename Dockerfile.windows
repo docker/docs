@@ -13,7 +13,7 @@ RUN mkdir innosetup && \
     unrar e innounp045.rar
 
 RUN cd innosetup && \
-    curl -fsSL -o is-unicode.exe http://www.jrsoftware.org/download.php/is-unicode.exe && \
+    curl -fsSL -o is-unicode.exe http://files.jrsoftware.org/is/5/isetup-5.5.8-unicode.exe && \
     wine "./innounp.exe" -e "is-unicode.exe"
 
 # installer components
