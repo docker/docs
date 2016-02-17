@@ -65,45 +65,13 @@ func NewKeyFileStore(baseDir string, passphraseRetriever passphrase.Retriever) (
 func generateKeyInfoMap(s LimitedFileStore) map[string]KeyInfo {
 	keyInfoMap := make(map[string]KeyInfo)
 	for _, keyPath := range s.ListFiles() {
-		// Remove the prefix of the directory from the filename for GUN/role/ID parsing
-		var keyIDAndGun, keyRole string
-		if strings.HasPrefix(keyPath, notary.RootKeysSubdir+"/") {
-			keyIDAndGun = strings.TrimPrefix(keyPath, notary.RootKeysSubdir+"/")
-		} else {
-			keyIDAndGun = strings.TrimPrefix(keyPath, notary.NonRootKeysSubdir+"/")
+		d, err := s.Get(keyPath)
+		if err != nil {
+			logrus.Error(err)
+			continue
 		}
-
-		// Separate the ID and GUN (can be empty) from the filepath
-		keyIDAndGun = strings.TrimSpace(keyIDAndGun)
-		keyGun := getGunFromFullID(keyIDAndGun)
-		keyID := filepath.Base(keyIDAndGun)
-
-		// If the key does not have a _, we'll attempt to
-		// read the role from PEM headers
-		underscoreIndex := strings.LastIndex(keyID, "_")
-		if underscoreIndex == -1 {
-			d, err := s.Get(keyPath)
-			if err != nil {
-				logrus.Error(err)
-				continue
-			}
-			block, _ := pem.Decode(d)
-			if block == nil {
-				continue
-			}
-			if role, ok := block.Headers["role"]; ok {
-				keyRole = role
-			}
-		} else {
-			// This is the legacy KEYID_ROLE filename
-			// The keyID is the first part of the keyname
-			// The keyRole is the second part of the keyname
-			// in a key named abcde_root, abcde is the keyID and root is the KeyAlias
-			legacyID := keyID
-			keyID = legacyID[:underscoreIndex]
-			keyRole = legacyID[underscoreIndex+1:]
-		}
-		keyInfoMap[keyID] = KeyInfo{Gun: keyGun, Role: keyRole}
+		keyID, keyInfo := getImportedKeyInfo(d, keyPath)
+		keyInfoMap[keyID] = keyInfo
 	}
 	return keyInfoMap
 }
@@ -173,9 +141,9 @@ func (s *KeyFileStore) GetKey(name string) (data.PrivateKey, string, error) {
 	return getKey(s, s.Retriever, s.cachedKeys, name)
 }
 
-// ListKeys returns a list of unique PublicKeys present on the KeyFileStore.
+// ListKeys returns a list of unique PublicKeys present on the KeyFileStore, by returning a copy of the keyInfoMap
 func (s *KeyFileStore) ListKeys() map[string]KeyInfo {
-	return s.keyInfoMap
+	return copyKeyInfoMap(s.keyInfoMap)
 }
 
 // RemoveKey removes the key from the keyfilestore
@@ -215,7 +183,6 @@ func (s *KeyFileStore) ExportKey(name string) ([]byte, error) {
 
 // ImportKey imports the private key in the encrypted bytes into the keystore
 // with the given key ID and alias.
-// This is only used for root, so no need to touch the keyInfoMap
 func (s *KeyFileStore) ImportKey(pemBytes []byte, alias string) error {
 	err := importKey(s, s.Retriever, s.cachedKeys, alias, pemBytes)
 	if err != nil {
@@ -276,9 +243,18 @@ func (s *KeyMemoryStore) GetKey(name string) (data.PrivateKey, string, error) {
 	return getKey(s, s.Retriever, s.cachedKeys, name)
 }
 
-// ListKeys returns a list of unique PublicKeys present on the KeyFileStore.
+// ListKeys returns a list of unique PublicKeys present on the KeyFileStore, by returning a copy of the keyInfoMap
 func (s *KeyMemoryStore) ListKeys() map[string]KeyInfo {
-	return s.keyInfoMap
+	return copyKeyInfoMap(s.keyInfoMap)
+}
+
+// copyKeyInfoMap returns a deep copy of the passed-in keyInfoMap
+func copyKeyInfoMap(keyInfoMap map[string]KeyInfo) map[string]KeyInfo {
+	copyMap := make(map[string]KeyInfo)
+	for keyID, keyInfo := range keyInfoMap {
+		copyMap[keyID] = KeyInfo{Role: keyInfo.Role, Gun: keyInfo.Gun}
+	}
+	return copyMap
 }
 
 // RemoveKey removes the key from the keystore
@@ -328,20 +304,22 @@ func (s *KeyMemoryStore) ImportKey(pemBytes []byte, alias string) error {
 func getImportedKeyInfo(pemBytes []byte, filename string) (string, KeyInfo) {
 	var keyID, gun, role string
 	// Try to read the role and gun from the filepath and PEM headers
-	if filepath.HasPrefix(filename, "root_keys") {
+	if filepath.HasPrefix(filename, notary.RootKeysSubdir+"/") {
 		role = data.CanonicalRootRole
 		gun = ""
-		filename = strings.TrimPrefix(filename, "root_keys")
+		filename = strings.TrimPrefix(filename, notary.RootKeysSubdir+"/")
 	} else {
-		filename = strings.TrimPrefix(filename, "tuf_keys")
+		filename = strings.TrimPrefix(filename, notary.NonRootKeysSubdir+"/")
 		gun = getGunFromFullID(filename)
 	}
 	keyIDFull := filepath.Base(filename)
 	underscoreIndex := strings.LastIndex(keyIDFull, "_")
 	if underscoreIndex == -1 {
 		block, _ := pem.Decode(pemBytes)
-		if keyRole, ok := block.Headers["role"]; ok {
-			role = keyRole
+		if block != nil {
+			if keyRole, ok := block.Headers["role"]; ok {
+				role = keyRole
+			}
 		}
 		keyID = filepath.Base(keyIDFull)
 	} else {
@@ -458,7 +436,7 @@ func removeKey(s LimitedFileStore, cachedKeys map[string]*cachedKey, name string
 
 // Assumes 2 subdirectories, 1 containing root keys and 1 containing tuf keys
 func getSubdir(alias string) string {
-	if alias == "root" {
+	if alias == data.CanonicalRootRole {
 		return notary.RootKeysSubdir
 	}
 	return notary.NonRootKeysSubdir

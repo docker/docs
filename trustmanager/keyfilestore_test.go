@@ -169,11 +169,9 @@ func TestGet(t *testing.T) {
 
 	// Root role needs to go in the rootKeySubdir to be read.
 	// All other roles can go in the nonRootKeysSubdir, possibly under a GUN
-	rootKeysSubdirWithGUN := filepath.Clean(filepath.Join(notary.RootKeysSubdir, gun))
 	nonRootKeysSubdirWithGUN := filepath.Clean(filepath.Join(notary.NonRootKeysSubdir, gun))
 
 	testGetKeyWithRole(t, "", data.CanonicalRootRole, notary.RootKeysSubdir, true)
-	testGetKeyWithRole(t, gun, data.CanonicalRootRole, rootKeysSubdirWithGUN, true)
 	for _, role := range nonRootRolesToTest {
 		testGetKeyWithRole(t, "", role, notary.NonRootKeysSubdir, true)
 		testGetKeyWithRole(t, gun, role, nonRootKeysSubdirWithGUN, true)
@@ -185,7 +183,6 @@ func TestGet(t *testing.T) {
 	testGetKeyWithRole(t, gun, data.CanonicalRootRole, nonRootKeysSubdirWithGUN, false)
 	for _, role := range nonRootRolesToTest {
 		testGetKeyWithRole(t, "", role, notary.RootKeysSubdir, false)
-		testGetKeyWithRole(t, gun, role, rootKeysSubdirWithGUN, false)
 	}
 }
 
@@ -367,6 +364,14 @@ func TestListKeys(t *testing.T) {
 	// Check to see if the keystore still lists two keys
 	keyMap := store.ListKeys()
 	assert.Len(t, keyMap, len(roles))
+
+	// Check that ListKeys() returns a copy of the state
+	// so modifying its returned information does not change the underlying store's keyInfo
+	for keyID := range keyMap {
+		delete(keyMap, keyID)
+		_, err = store.GetKeyInfo(keyID)
+		assert.NoError(t, err)
+	}
 }
 
 func TestAddGetKeyMemStore(t *testing.T) {

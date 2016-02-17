@@ -12,6 +12,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/docker/notary"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
 	"github.com/stretchr/testify/assert"
@@ -80,13 +81,13 @@ func TestImportExportZip(t *testing.T) {
 		if alias == data.CanonicalRootRole {
 			continue
 		}
-		relKeyPath := filepath.Join("tuf_keys", privKeyName+".key")
+		relKeyPath := filepath.Join(notary.NonRootKeysSubdir, privKeyName+".key")
 		passphraseByFile[relKeyPath] = exportPassphrase
 	}
 
 	// Add root key to the map. This will use the export passphrase because it
 	// will be reencrypted.
-	relRootKey := filepath.Join("root_keys", rootKeyID+".key")
+	relRootKey := filepath.Join(notary.RootKeysSubdir, rootKeyID+".key")
 	passphraseByFile[relRootKey] = exportPassphrase
 
 	// Iterate through the files in the archive, checking that the files
@@ -141,8 +142,8 @@ func TestImportExportZip(t *testing.T) {
 		if alias == data.CanonicalRootRole {
 			continue
 		}
-		relKeyPath := filepath.Join("tuf_keys", privKeyName+".key")
-		privKeyFileName := filepath.Join(tempBaseDir2, "private", relKeyPath)
+		relKeyPath := filepath.Join(notary.NonRootKeysSubdir, privKeyName+".key")
+		privKeyFileName := filepath.Join(tempBaseDir2, notary.PrivDir, relKeyPath)
 		_, err = os.Stat(privKeyFileName)
 		assert.NoError(t, err, "missing private key for role %s: %s", alias, privKeyName)
 	}
@@ -151,7 +152,7 @@ func TestImportExportZip(t *testing.T) {
 	// There should be a file named after the key ID of the root key we
 	// passed in.
 	rootKeyFilename := rootKeyID + ".key"
-	_, err = os.Stat(filepath.Join(tempBaseDir2, "private", "root_keys", rootKeyFilename))
+	_, err = os.Stat(filepath.Join(tempBaseDir2, notary.PrivDir, notary.RootKeysSubdir, rootKeyFilename))
 	assert.NoError(t, err, "missing root key")
 }
 
@@ -199,7 +200,7 @@ func TestImportExportGUN(t *testing.T) {
 		if alias == data.CanonicalRootRole {
 			continue
 		}
-		relKeyPath := filepath.Join("tuf_keys", gun, privKeyName+".key")
+		relKeyPath := filepath.Join(notary.NonRootKeysSubdir, gun, privKeyName+".key")
 
 		passphraseByFile[relKeyPath] = exportPassphrase
 	}
@@ -258,8 +259,8 @@ func TestImportExportGUN(t *testing.T) {
 		if alias == data.CanonicalRootRole {
 			continue
 		}
-		relKeyPath := filepath.Join("tuf_keys", gun, privKeyName+".key")
-		privKeyFileName := filepath.Join(tempBaseDir2, "private", relKeyPath)
+		relKeyPath := filepath.Join(notary.NonRootKeysSubdir, gun, privKeyName+".key")
+		privKeyFileName := filepath.Join(tempBaseDir2, notary.PrivDir, relKeyPath)
 		_, err = os.Stat(privKeyFileName)
 		assert.NoError(t, err)
 	}
@@ -307,7 +308,7 @@ func TestImportExportRootKey(t *testing.T) {
 	// There should be a file named after the key ID of the root key we
 	// imported.
 	rootKeyFilename := rootKeyID + ".key"
-	_, err = os.Stat(filepath.Join(tempBaseDir2, "private", "root_keys", rootKeyFilename))
+	_, err = os.Stat(filepath.Join(tempBaseDir2, notary.PrivDir, notary.RootKeysSubdir, rootKeyFilename))
 	assert.NoError(t, err, "missing root key")
 
 	// Try to import a decrypted version of the root key and make sure it
@@ -375,7 +376,7 @@ func TestImportExportRootKeyReencrypt(t *testing.T) {
 	// There should be a file named after the key ID of the root key we
 	// imported.
 	rootKeyFilename := rootKeyID + ".key"
-	_, err = os.Stat(filepath.Join(tempBaseDir2, "private", "root_keys", rootKeyFilename))
+	_, err = os.Stat(filepath.Join(tempBaseDir2, notary.PrivDir, notary.RootKeysSubdir, rootKeyFilename))
 	assert.NoError(t, err, "missing root key")
 
 	// Should be able to unlock the root key with the new password
@@ -430,7 +431,7 @@ func TestImportExportNonRootKey(t *testing.T) {
 	// There should be a file named after the key ID of the targets key we
 	// imported.
 	targetsKeyFilename := targetsKeyID + ".key"
-	_, err = os.Stat(filepath.Join(tempBaseDir2, "private", "tuf_keys", "docker.com/notary", targetsKeyFilename))
+	_, err = os.Stat(filepath.Join(tempBaseDir2, notary.PrivDir, notary.NonRootKeysSubdir, "docker.com/notary", targetsKeyFilename))
 	assert.NoError(t, err, "missing targets key")
 
 	// Check that the key is the same
@@ -485,7 +486,7 @@ func TestImportExportNonRootKeyReencrypt(t *testing.T) {
 	// There should be a file named after the key ID of the snapshot key we
 	// imported.
 	snapshotKeyFilename := snapshotKeyID + ".key"
-	_, err = os.Stat(filepath.Join(tempBaseDir2, "private", "tuf_keys", "docker.com/notary", snapshotKeyFilename))
+	_, err = os.Stat(filepath.Join(tempBaseDir2, notary.PrivDir, notary.NonRootKeysSubdir, "docker.com/notary", snapshotKeyFilename))
 	assert.NoError(t, err, "missing snapshot key")
 
 	// Should be able to unlock the root key with the new password

@@ -3,7 +3,6 @@ package cryptoservice
 import (
 	"crypto/rand"
 	"fmt"
-	"path/filepath"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary/trustmanager"
@@ -113,18 +112,22 @@ func (cs *CryptoService) RemoveKey(keyID string) (err error) {
 // AddKey adds a private key to a specified role.
 // The GUN is inferred from the cryptoservice itself for non-root roles
 func (cs *CryptoService) AddKey(key data.PrivateKey, role string) (err error) {
-	keyID := key.ID()
-	if role != data.CanonicalRootRole {
-		keyID = filepath.Join(cs.gun, key.ID())
-	}
+	// First check if this key already exists in any of our keystores
 	for _, ks := range cs.keyStores {
-		if keyInfo, err := ks.GetKeyInfo(keyID); err == nil {
+		if keyInfo, err := ks.GetKeyInfo(key.ID()); err == nil {
 			if keyInfo.Role != role {
 				return fmt.Errorf("key with same ID already exists for role: %s", keyInfo.Role)
 			}
-			continue
+			logrus.Debugf("key with same ID %s and role %s already exists", key.ID(), keyInfo.Role)
+			return nil
 		}
-		ks.AddKey(key, trustmanager.KeyInfo{Role: role, Gun: cs.gun})
+	}
+	// If the key didn't exist in any of our keystores, add and return on the first successful keystore
+	for _, ks := range cs.keyStores {
+		// Try to add to this keystore, return if successful
+		if err = ks.AddKey(key, trustmanager.KeyInfo{Role: role, Gun: cs.gun}); err == nil {
+			return nil
+		}
 	}
 	return // returns whatever the final values were
 }
