@@ -1087,6 +1087,10 @@ func getKeySubdir(role, gun string) string {
 
 // Tests importing and exporting keys for all different roles and GUNs
 func TestClientKeyImportExportAllRoles(t *testing.T) {
+	if rootOnHardware() {
+		t.Log("Cannot import or export a non-root key from hardware. Will skip test.")
+		return
+	}
 	// -- setup --
 	setUp(t)
 
