@@ -48,7 +48,7 @@ type KeyStore interface {
 	ListKeys() map[string]KeyInfo
 	RemoveKey(name string) error
 	ExportKey(name string) ([]byte, error)
-	ImportKey(pemBytes []byte, alias string) error
+	ImportKey(pemBytes []byte, role, gun string) error
 	Name() string
 }
 

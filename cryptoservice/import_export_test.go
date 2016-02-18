@@ -300,9 +300,11 @@ func TestImportExportRootKey(t *testing.T) {
 	keyReader, err := os.Open(tempKeyFilePath)
 	assert.NoError(t, err, "could not open key file")
 
-	err = cs2.ImportRootKey(keyReader)
-	assert.NoError(t, err)
+	pemImportBytes, err := ioutil.ReadAll(keyReader)
 	keyReader.Close()
+	assert.NoError(t, err)
+	err = cs2.ImportRoleKey(pemImportBytes, data.CanonicalRootRole, nil)
+	assert.NoError(t, err)
 
 	// Look for repo's root key in repo2
 	// There should be a file named after the key ID of the root key we
@@ -320,11 +322,15 @@ func TestImportExportRootKey(t *testing.T) {
 	decryptedPEMBytes, err := trustmanager.KeyToPEM(privKey, "root")
 	assert.NoError(t, err, "could not convert key to PEM")
 
-	err = cs2.ImportRootKey(bytes.NewReader(decryptedPEMBytes))
+	pemImportBytes, err = ioutil.ReadAll(bytes.NewReader(decryptedPEMBytes))
+	assert.NoError(t, err)
+	err = cs2.ImportRoleKey(pemImportBytes, data.CanonicalRootRole, nil)
 	assert.EqualError(t, err, ErrRootKeyNotEncrypted.Error())
 
 	// Try to import garbage and make sure it doesn't succeed
-	err = cs2.ImportRootKey(strings.NewReader("this is not PEM"))
+	pemImportBytes, err = ioutil.ReadAll(strings.NewReader("this is not PEM"))
+	assert.NoError(t, err)
+	err = cs2.ImportRoleKey(pemImportBytes, data.CanonicalRootRole, nil)
 	assert.EqualError(t, err, ErrNoValidPrivateKey.Error())
 
 	// Should be able to unlock the root key with the old password
@@ -368,9 +374,11 @@ func TestImportExportRootKeyReencrypt(t *testing.T) {
 	keyReader, err := os.Open(tempKeyFilePath)
 	assert.NoError(t, err, "could not open key file")
 
-	err = cs2.ImportRootKey(keyReader)
-	assert.NoError(t, err)
+	pemImportBytes, err := ioutil.ReadAll(keyReader)
 	keyReader.Close()
+	assert.NoError(t, err)
+	err = cs2.ImportRoleKey(pemImportBytes, data.CanonicalRootRole, nil)
+	assert.NoError(t, err)
 
 	// Look for repo's root key in repo2
 	// There should be a file named after the key ID of the root key we

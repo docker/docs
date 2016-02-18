@@ -3,7 +3,6 @@ package signed
 import (
 	"crypto/rand"
 	"encoding/pem"
-	"io"
 	"testing"
 
 	"github.com/docker/notary/cryptoservice"
@@ -60,10 +59,6 @@ func (mts *FailingCryptoService) RemoveKey(keyID string) error {
 	return nil
 }
 
-func (mts *FailingCryptoService) ImportRootKey(r io.Reader) error {
-	return nil
-}
-
 type MockCryptoService struct {
 	testKey data.PrivateKey
 }
@@ -104,10 +99,6 @@ func (mts *MockCryptoService) RemoveKey(keyID string) error {
 	return nil
 }
 
-func (mts *MockCryptoService) ImportRootKey(r io.Reader) error {
-	return nil
-}
-
 var _ CryptoService = &MockCryptoService{}
 
 type StrictMockCryptoService struct {
@@ -135,10 +126,6 @@ func (mts *StrictMockCryptoService) ListAllKeys() map[string]string {
 }
 
 func (mts *StrictMockCryptoService) AddKey(key data.PrivateKey, role string) error {
-	return nil
-}
-
-func (mts *StrictMockCryptoService) ImportRootKey(r io.Reader) error {
 	return nil
 }
 

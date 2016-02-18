@@ -771,10 +771,10 @@ func assertExportKeySuccess(
 func assertImportKeySuccess(
 	t *testing.T, s KeyStore, expectedKey data.PrivateKey) {
 
-	pemBytes, err := EncryptPrivateKey(expectedKey, "root", cannedPassphrase)
+	pemBytes, err := EncryptPrivateKey(expectedKey, data.CanonicalRootRole, cannedPassphrase)
 	assert.NoError(t, err)
 
-	err = s.ImportKey(pemBytes, "root")
+	err = s.ImportKey(pemBytes, data.CanonicalRootRole, "")
 	assert.NoError(t, err)
 
 	reimportedKey, reimportedAlias, err := s.GetKey(expectedKey.ID())

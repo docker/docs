@@ -11,7 +11,6 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/docker/notary"
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
@@ -102,49 +101,22 @@ func (cs *CryptoService) ExportKeyReencrypt(dest io.Writer, keyID string, newPas
 	return nil
 }
 
-// ImportRootKey imports a root in PEM format key from an io.Reader
-// It prompts for the key's passphrase to verify the data and to determine
-// the key ID.
-func (cs *CryptoService) ImportRootKey(source io.Reader) error {
-	pemBytes, err := ioutil.ReadAll(source)
-	if err != nil {
-		return err
-	}
-	return cs.ImportRoleKey(pemBytes, data.CanonicalRootRole, nil)
-}
-
 // ImportRoleKey imports a private key in PEM format key from a byte array
 // It prompts for the key's passphrase to verify the data and to determine
 // the key ID.
 func (cs *CryptoService) ImportRoleKey(pemBytes []byte, role string, newPassphraseRetriever passphrase.Retriever) error {
-	var alias string
 	var err error
+	keyGun := cs.gun
 	if role == data.CanonicalRootRole {
-		alias = role
+		keyGun = ""
 		if err = checkRootKeyIsEncrypted(pemBytes); err != nil {
-			return err
-		}
-	} else {
-		// Parse the private key to get the key ID so that we can import it to the correct location
-		privKey, err := trustmanager.ParsePEMPrivateKey(pemBytes, "")
-		if err != nil {
-			privKey, _, err = trustmanager.GetPasswdDecryptBytes(newPassphraseRetriever, pemBytes, role, string(role))
-			if err != nil {
-				return err
-			}
-		}
-		// Since we're importing a non-root role, we need to pass the path as an alias
-		alias = filepath.Join(notary.NonRootKeysSubdir, cs.gun, privKey.ID())
-		// We also need to ensure that the role is properly set in the PEM headers
-		pemBytes, err = trustmanager.KeyToPEM(privKey, role)
-		if err != nil {
 			return err
 		}
 	}
 
 	for _, ks := range cs.keyStores {
 		// don't redeclare err, we want the value carried out of the loop
-		if err = ks.ImportKey(pemBytes, alias); err == nil {
+		if err = ks.ImportKey(pemBytes, role, keyGun); err == nil {
 			return nil //bail on the first keystore we import to
 		}
 	}
@@ -215,11 +187,12 @@ func (cs *CryptoService) ImportKeysZip(zipReader zip.Reader) error {
 	}
 
 	for keyName, pemBytes := range newKeys {
+		_, keyInfo := trustmanager.KeyInfoFromPEM(pemBytes, keyName)
 		// try to import the key to all key stores. As long as one of them
 		// succeeds, consider it a success
 		var tmpErr error
 		for _, ks := range cs.keyStores {
-			if err := ks.ImportKey(pemBytes, keyName); err != nil {
+			if err := ks.ImportKey(pemBytes, keyInfo.Role, keyInfo.Gun); err != nil {
 				tmpErr = err
 			} else {
 				tmpErr = nil
