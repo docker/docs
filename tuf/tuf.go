@@ -222,33 +222,47 @@ func (tr *Repo) GetDelegationRole(name string) (data.DelegationRole, error) {
 	}
 	// Traverse target metadata, down to delegation itself
 	// Get all public keys for the base role from TUF metadata
-	signedTargetData, ok := tr.Targets[data.CanonicalTargetsRole]
+	_, ok = tr.Targets[data.CanonicalTargetsRole]
 	if !ok {
 		return data.DelegationRole{}, ErrNotLoaded{data.CanonicalTargetsRole}
 	}
 
 	// Start with top level roles in targets. Walk the chain of ancestors
 	// until finding the desired role, or we run out of targets files to search.
-	delegationRoles := signedTargetData.Signed.Delegations.Roles
-	var foundRole *data.Role
-	for len(delegationRoles) > 0 {
-		delgRole := delegationRoles[0]
-		delegationRoles = delegationRoles[1:]
-
-		// If we found the role, we can exit the loop
-		if delgRole.Name == name {
-			foundRole = delgRole
-			break
+	var foundRole *data.DelegationRole
+	buildDelegationRoleVisitor := func(tgt *data.SignedTargets, roleName string) error {
+		if tgt == nil {
+			return ErrContinueWalk{}
 		}
 
-		// If the current role is an ancestor of our desired role, add its children
-		// to the queue of roles to investigate.
-		if strings.HasPrefix(name, delgRole.Name+"/") {
-			if delegationMeta, ok := tr.Targets[delgRole.Name]; ok {
-				delegationRoles = append(delegationRoles, delegationMeta.Signed.Delegations.Roles...)
+		// Try to find the delegation and build a DelegationRole structure
+		for _, role := range tgt.Signed.Delegations.Roles {
+			if role.Name == name {
+				pubKeys := make(map[string]data.PublicKey)
+				for _, keyID := range role.KeyIDs {
+					pubKey, ok := tgt.Signed.Delegations.Keys[keyID]
+					if !ok {
+						// Couldn't retrieve all keys, so stop walking
+						return ErrStopWalk{}
+					}
+					pubKeys[keyID] = pubKey
+				}
+				foundRole = &data.DelegationRole{
+					BaseRole: data.BaseRole{
+						Name:      role.Name,
+						Keys:      pubKeys,
+						Threshold: role.Threshold,
+					},
+					Paths: role.Paths,
+				}
+				return ErrStopWalk{}
 			}
 		}
+		return ErrContinueWalk{}
 	}
+
+	// Walk to the parent of this delegation, since that is where its role metadata exists
+	tr.WalkTargets("", path.Dir(name), buildDelegationRoleVisitor)
 
 	// We never found the delegation. In the context of this repo it is considered
 	// invalid. N.B. it may be that it existed at one point but an ancestor has since
@@ -257,33 +271,7 @@ func (tr *Repo) GetDelegationRole(name string) (data.DelegationRole, error) {
 		return data.DelegationRole{}, data.ErrInvalidRole{Role: name, Reason: "delegation does not exist"}
 	}
 
-	pubKeys := make(map[string]data.PublicKey)
-	parentRoleName := path.Dir(foundRole.Name)
-	parentData, ok := tr.Targets[parentRoleName]
-	if !ok {
-		// This should be impossible to reach given we inspected the parent to
-		// get foundRole
-		return data.DelegationRole{}, ErrNotLoaded{parentRoleName}
-	}
-	for _, keyID := range foundRole.KeyIDs {
-		pubKey, ok := parentData.Signed.Delegations.Keys[keyID]
-		if !ok {
-			return data.DelegationRole{}, data.ErrInvalidRole{
-				Role:   name,
-				Reason: fmt.Sprintf("key with ID %s was not found in %s's metadata", keyID, parentRoleName),
-			}
-		}
-		pubKeys[keyID] = pubKey
-	}
-
-	return data.DelegationRole{
-		BaseRole: data.BaseRole{
-			Name:      name,
-			Keys:      pubKeys,
-			Threshold: foundRole.Threshold,
-		},
-		Paths: foundRole.Paths,
-	}, nil
+	return *foundRole, nil
 }
 
 // GetAllLoadedRoles returns a list of all role entries loaded in this TUF repo, could be empty
@@ -620,14 +608,15 @@ type walkVisitorFunc func(*data.SignedTargets, string) error
 // to call the visitor function on.
 func (tr *Repo) WalkTargets(targetPath, rolePath string, visitTarget walkVisitorFunc) error {
 	// Start with the base targets role, which implicitly has the "" targets path
-	targetsRole, err := tr.GetBaseRole(data.CanonicalTargetsRole)
-	if err != nil {
-		return err
+	targetsRole, ok := tr.Root.Signed.Roles[data.CanonicalTargetsRole]
+	if !ok {
+		return data.ErrInvalidRole{Role: data.CanonicalTargetsRole, Reason: "role not found in root file"}
 	}
 	// Make the targets role have the empty path, when we treat it as a delegation role
-	roles := []data.DelegationRole{
+	roles := []*data.Role{
 		{
-			BaseRole: targetsRole,
+			RootRole: *targetsRole,
+			Name:     data.CanonicalTargetsRole,
 			Paths:    []string{""},
 		},
 	}
@@ -645,34 +634,22 @@ func (tr *Repo) WalkTargets(targetPath, rolePath string, visitTarget walkVisitor
 
 		// We're at a prefix of the desired role subtree, so add its delegation role children and continue walking
 		if strings.HasPrefix(rolePath, role.Name+"/") {
-			for _, delgRole := range tr.Targets[role.Name].Signed.Delegations.Roles {
-				delegationRole, err := tr.GetDelegationRole(delgRole.Name)
-				if err != nil {
-					return err
-				}
-				roles = append(roles, delegationRole)
-			}
+			roles = append(roles, signedTgt.Signed.Delegations.Roles...)
 			continue
 		}
 
 		// Determine whether to visit this role or not:
 		// If the paths validate against the specified targetPath and the rolePath is empty or is in the subtree
-		if role.CheckPaths(targetPath) && isAncestorRole(role.Name, rolePath) {
+		if isValidPath(targetPath, role) && isAncestorRole(role.Name, rolePath) {
 			// If we had matching path or role name, visit this target and determine whether or not to keep walking
-			err = visitTarget(signedTgt, role.Name)
+			err := visitTarget(signedTgt, role.Name)
 			switch err.(type) {
 			case ErrStopWalk:
 				// If the visitor function signalled a stop, return nil to finish the walk
 				return nil
 			case ErrContinueWalk:
 				// If the visitor function signalled to continue, add this role's delegation to the walk
-				for _, delgRole := range tr.Targets[role.Name].Signed.Delegations.Roles {
-					delegationRole, err := tr.GetDelegationRole(delgRole.Name)
-					if err != nil {
-						return err
-					}
-					roles = append(roles, delegationRole)
-				}
+				roles = append(roles, signedTgt.Signed.Delegations.Roles...)
 			default:
 				// Return out if we got a different error or nil
 				return err
@@ -687,6 +664,12 @@ func (tr *Repo) WalkTargets(targetPath, rolePath string, visitTarget walkVisitor
 // Will return true if given an empty candidateAncestor role name
 func isAncestorRole(candidateChild, candidateAncestor string) bool {
 	return candidateAncestor == "" || candidateAncestor == candidateChild || strings.HasPrefix(candidateChild, candidateAncestor+"/")
+}
+
+// helper function that returns whether the delegation Role is valid against the given path
+// Will return true if given an empty candidatePath
+func isValidPath(candidatePath string, delgRole *data.Role) bool {
+	return candidatePath == "" || delgRole.CheckPaths(candidatePath)
 }
 
 // AddTargets will attempt to add the given targets specifically to
