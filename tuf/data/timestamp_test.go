@@ -136,7 +136,7 @@ func TestTimestampFromSignedValidatesMeta(t *testing.T) {
 	s, err := ts.ToSigned()
 	require.NoError(t, err)
 	_, err = TimestampFromSigned(s)
-	require.IsType(t, ErrInvalidMeta{}, err)
+	require.IsType(t, ErrInvalidMetadata{}, err)
 
 	// add some extra metadata to make sure it's not failing because the metadata
 	// is empty
@@ -144,7 +144,7 @@ func TestTimestampFromSignedValidatesMeta(t *testing.T) {
 	s, err = ts.ToSigned()
 	require.NoError(t, err)
 	_, err = TimestampFromSigned(s)
-	require.IsType(t, ErrInvalidMeta{}, err)
+	require.IsType(t, ErrInvalidMetadata{}, err)
 }
 
 // Type must be "Timestamp"
@@ -156,7 +156,7 @@ func TestTimestampFromSignedValidatesRoleType(t *testing.T) {
 		s, err := ts.ToSigned()
 		require.NoError(t, err)
 		_, err = TimestampFromSigned(s)
-		require.IsType(t, ErrInvalidMeta{}, err)
+		require.IsType(t, ErrInvalidMetadata{}, err)
 	}
 
 	ts = validTimestampTemplate()

@@ -29,12 +29,12 @@ type Timestamp struct {
 func isValidTimestampStructure(t Timestamp) error {
 	expectedType := TUFTypes[CanonicalTimestampRole]
 	if t.Type != expectedType {
-		return ErrInvalidMeta{
-			Role: CanonicalTimestampRole, Msg: fmt.Sprintf("expected type %s, not %s", expectedType, t.Type)}
+		return ErrInvalidMetadata{
+			role: CanonicalTimestampRole, msg: fmt.Sprintf("expected type %s, not %s", expectedType, t.Type)}
 	}
 
 	if _, ok := t.Meta[CanonicalSnapshotRole]; !ok {
-		return ErrInvalidMeta{Role: CanonicalTimestampRole, Msg: "missing snapshot checksum information"}
+		return ErrInvalidMetadata{role: CanonicalTimestampRole, msg: "missing snapshot checksum information"}
 	}
 	return nil
 }

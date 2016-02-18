@@ -30,15 +30,15 @@ type Snapshot struct {
 func isValidSnapshotStructure(s Snapshot) error {
 	expectedType := TUFTypes[CanonicalSnapshotRole]
 	if s.Type != expectedType {
-		return ErrInvalidMeta{
-			Role: CanonicalSnapshotRole, Msg: fmt.Sprintf("expected type %s, not %s", expectedType, s.Type)}
+		return ErrInvalidMetadata{
+			role: CanonicalSnapshotRole, msg: fmt.Sprintf("expected type %s, not %s", expectedType, s.Type)}
 	}
 
 	for _, role := range []string{CanonicalRootRole, CanonicalTargetsRole} {
 		if _, ok := s.Meta[role]; !ok {
-			return ErrInvalidMeta{
-				Role: CanonicalSnapshotRole,
-				Msg:  fmt.Sprintf("missing %s checksum information", role),
+			return ErrInvalidMetadata{
+				role: CanonicalSnapshotRole,
+				msg:  fmt.Sprintf("missing %s checksum information", role),
 			}
 		}
 	}

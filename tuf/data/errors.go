@@ -2,14 +2,14 @@ package data
 
 import "fmt"
 
-// ErrInvalidMeta is the error to be returned when metadata is invalid
-type ErrInvalidMeta struct {
-	Role string
-	Msg  string
+// ErrInvalidMetadata is the error to be returned when metadata is invalid
+type ErrInvalidMetadata struct {
+	role string
+	msg  string
 }
 
-func (e ErrInvalidMeta) Error() string {
-	return fmt.Sprintf("%s type metadata invalid: %s", e.Role, e.Msg)
+func (e ErrInvalidMetadata) Error() string {
+	return fmt.Sprintf("%s type metadata invalid: %s", e.role, e.msg)
 }
 
 // ErrMissingMeta - couldn't find the FileMeta object for a role or target
