@@ -536,37 +536,3 @@ func (c Client) getTargetsFile(role string, snapshotMeta data.Files, consistent 
 	}
 	return s, nil
 }
-
-// TargetMeta ensures the repo is up to date. It assumes downloadTargets
-// has already downloaded all delegated roles
-func (c Client) TargetMeta(role, path string, excludeRoles ...string) (*data.FileMeta, string) {
-	excl := make(map[string]bool)
-	for _, r := range excludeRoles {
-		excl[r] = true
-	}
-
-	// FIFO list of targets delegations to inspect for target
-	roles := []string{role}
-	var (
-		meta *data.FileMeta
-		curr string
-	)
-	for len(roles) > 0 {
-		// have to do these lines here because of order of execution in for statement
-		curr = roles[0]
-		roles = roles[1:]
-
-		meta = c.local.TargetMeta(curr, path)
-		if meta != nil {
-			// we found the target!
-			return meta, curr
-		}
-		delegations := c.local.TargetDelegations(curr, path)
-		for _, d := range delegations {
-			if !excl[d.Name] {
-				roles = append(roles, d.Name)
-			}
-		}
-	}
-	return meta, ""
-}

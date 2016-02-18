@@ -47,6 +47,20 @@ func (err ErrNotLoaded) Error() string {
 	return fmt.Sprintf("%s role has not been loaded", err.Role)
 }
 
+// ErrStopWalk - used by visitor functions to signal WalkTargets to stop walking
+type ErrStopWalk struct{}
+
+func (e ErrStopWalk) Error() string {
+	return "Error: signalled to stop the walk"
+}
+
+// ErrContinueWalk - used by visitor functions to signal WalkTargets to continue walking
+type ErrContinueWalk struct{}
+
+func (e ErrContinueWalk) Error() string {
+	return "Error: signalled to continue the walk"
+}
+
 // Repo is an in memory representation of the TUF Repo.
 // It operates at the data.Signed level, accepting and producing
 // data.Signed objects. Users of a Repo are responsible for
@@ -558,32 +572,6 @@ func (tr Repo) TargetDelegations(role, path string) []*data.Role {
 	return roles
 }
 
-// FindTarget attempts to find the target represented by the given
-// path by starting at the top targets file and traversing
-// appropriate delegations until the first entry is found or it
-// runs out of locations to search.
-// N.B. Multiple entries may exist in different delegated roles
-//      for the same target. Only the first one encountered is returned.
-func (tr Repo) FindTarget(path string) *data.FileMeta {
-
-	var walkTargets func(role string) *data.FileMeta
-	walkTargets = func(role string) *data.FileMeta {
-		if m := tr.TargetMeta(role, path); m != nil {
-			return m
-		}
-		// Depth first search of delegations based on order
-		// as presented in current targets file for role:
-		for _, r := range tr.TargetDelegations(role, path) {
-			if m := walkTargets(r.Name); m != nil {
-				return m
-			}
-		}
-		return nil
-	}
-
-	return walkTargets("targets")
-}
-
 // VerifyCanSign returns nil if the role exists and we have at least one
 // signing key for the role, false otherwise.  This does not check that we have
 // enough signing keys to meet the threshold, since we want to support the use
@@ -622,6 +610,83 @@ func (tr *Repo) VerifyCanSign(roleName string) error {
 		}
 	}
 	return signed.ErrNoKeys{KeyIDs: role.ListKeyIDs()}
+}
+
+// used for walking the targets/delegations tree, potentially modifying the underlying SignedTargets for the repo
+type walkVisitorFunc func(*data.SignedTargets, string) error
+
+// WalkTargets will apply the specified visitor function to iteratively walk the targets/delegation metadata tree,
+// until receiving a ErrStopWalk.  The walk starts from the base "targets" role, and searches for the correct targetPath and/or rolePath
+// to call the visitor function on.
+func (tr *Repo) WalkTargets(targetPath, rolePath string, visitTarget walkVisitorFunc) error {
+	// Start with the base targets role, which implicitly has the "" targets path
+	targetsRole, err := tr.GetBaseRole(data.CanonicalTargetsRole)
+	if err != nil {
+		return err
+	}
+	// Make the targets role have the empty path, when we treat it as a delegation role
+	roles := []data.DelegationRole{
+		{
+			BaseRole: targetsRole,
+			Paths:    []string{""},
+		},
+	}
+
+	for len(roles) > 0 {
+		role := roles[0]
+		roles = roles[1:]
+
+		// Check the role metadata
+		signedTgt, ok := tr.Targets[role.Name]
+		if !ok {
+			// The role meta doesn't exist in the repo so continue onward
+			continue
+		}
+
+		// We're at a prefix of the desired role subtree, so add its delegation role children and continue walking
+		if strings.HasPrefix(rolePath, role.Name+"/") {
+			for _, delgRole := range tr.Targets[role.Name].Signed.Delegations.Roles {
+				delegationRole, err := tr.GetDelegationRole(delgRole.Name)
+				if err != nil {
+					return err
+				}
+				roles = append(roles, delegationRole)
+			}
+			continue
+		}
+
+		// Determine whether to visit this role or not:
+		// If the paths validate against the specified targetPath and the rolePath is empty or is in the subtree
+		if role.CheckPaths(targetPath) && isAncestorRole(role.Name, rolePath) {
+			// If we had matching path or role name, visit this target and determine whether or not to keep walking
+			err = visitTarget(signedTgt, role.Name)
+			switch err.(type) {
+			case ErrStopWalk:
+				// If the visitor function signalled a stop, return nil to finish the walk
+				return nil
+			case ErrContinueWalk:
+				// If the visitor function signalled to continue, add this role's delegation to the walk
+				for _, delgRole := range tr.Targets[role.Name].Signed.Delegations.Roles {
+					delegationRole, err := tr.GetDelegationRole(delgRole.Name)
+					if err != nil {
+						return err
+					}
+					roles = append(roles, delegationRole)
+				}
+			default:
+				// Return out if we got a different error or nil
+				return err
+			}
+
+		}
+	}
+	return nil
+}
+
+// helper function that returns whether the candidateChild role name is an ancestor or equal to the candidateAncestor role name
+// Will return true if given an empty candidateAncestor role name
+func isAncestorRole(candidateChild, candidateAncestor string) bool {
+	return candidateAncestor == "" || candidateAncestor == candidateChild || strings.HasPrefix(candidateChild, candidateAncestor+"/")
 }
 
 // AddTargets will attempt to add the given targets specifically to

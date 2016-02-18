@@ -8,6 +8,7 @@ import (
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary"
 	"github.com/docker/notary/client/changelist"
+	"github.com/docker/notary/tuf"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/store"
 	"github.com/docker/notary/tuf/utils"
@@ -245,45 +246,28 @@ func (r *NotaryRepository) GetDelegationRoles() ([]*data.Role, error) {
 	}
 
 	// All top level delegations (ex: targets/level1) are stored exclusively in targets.json
-	targets, ok := r.tufRepo.Targets[data.CanonicalTargetsRole]
+	_, ok := r.tufRepo.Targets[data.CanonicalTargetsRole]
 	if !ok {
 		return nil, store.ErrMetaNotFound{Resource: data.CanonicalTargetsRole}
 	}
 
-	// make a copy of top-level Delegations and only show canonical key IDs
-	allDelegations, err := translateDelegationsToCanonicalIDs(targets.Signed.Delegations)
-	if err != nil {
-		return nil, err
-	}
-
 	// make a copy for traversing nested delegations
-	delegationsList := make([]*data.Role, len(allDelegations))
-	copy(delegationsList, allDelegations)
+	allDelegations := []*data.Role{}
 
-	// Now traverse to lower level delegations (ex: targets/level1/level2)
-	for len(delegationsList) > 0 {
-		// Pop off first delegation to traverse
-		delegation := delegationsList[0]
-		delegationsList = delegationsList[1:]
-
-		// Get metadata
-		delegationMeta, ok := r.tufRepo.Targets[delegation.Name]
-		// If we get an error, don't try to traverse further into this subtree because it doesn't exist or is malformed
-		if !ok {
-			continue
+	// Define a visitor function to populate the delegations list and translate their key IDs to canonical IDs
+	delegationCanonicalListVisitor := func(tgt *data.SignedTargets, roleName string) error {
+		if tgt == nil {
+			return tuf.ErrContinueWalk{}
 		}
-
 		// For the return list, update with a copy that includes canonicalKeyIDs
-		canonicalDelegations, err := translateDelegationsToCanonicalIDs(delegationMeta.Signed.Delegations)
+		canonicalDelegations, err := translateDelegationsToCanonicalIDs(tgt.Signed.Delegations)
 		if err != nil {
-			return nil, err
+			return err
 		}
 		allDelegations = append(allDelegations, canonicalDelegations...)
-		// Add nested delegations to the exploration list
-		delegationsList = append(delegationsList, delegationMeta.Signed.Delegations.Roles...)
+		return tuf.ErrContinueWalk{}
 	}
-
-	// Convert all key IDs to canonical IDs:
+	r.tufRepo.WalkTargets("", "", delegationCanonicalListVisitor)
 	return allDelegations, nil
 }
 
