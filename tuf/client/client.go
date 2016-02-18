@@ -3,7 +3,6 @@ package client
 import (
 	"bytes"
 	"crypto/sha256"
-	"encoding/hex"
 	"encoding/json"
 	"fmt"
 
@@ -539,9 +538,6 @@ func (c Client) TargetMeta(role, path string, excludeRoles ...string) (*data.Fil
 		excl[r] = true
 	}
 
-	pathDigest := sha256.Sum256([]byte(path))
-	pathHex := hex.EncodeToString(pathDigest[:])
-
 	// FIFO list of targets delegations to inspect for target
 	roles := []string{role}
 	var (
@@ -558,7 +554,7 @@ func (c Client) TargetMeta(role, path string, excludeRoles ...string) (*data.Fil
 			// we found the target!
 			return meta, curr
 		}
-		delegations := c.local.TargetDelegations(curr, path, pathHex)
+		delegations := c.local.TargetDelegations(curr, path)
 		for _, d := range delegations {
 			if !excl[d.Name] {
 				roles = append(roles, d.Name)
