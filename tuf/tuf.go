@@ -3,8 +3,6 @@ package tuf
 
 import (
 	"bytes"
-	"crypto/sha256"
-	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"path"
@@ -548,11 +546,7 @@ func (tr Repo) TargetMeta(role, path string) *data.FileMeta {
 
 // TargetDelegations returns a slice of Roles that are valid publishers
 // for the target path provided.
-func (tr Repo) TargetDelegations(role, path, pathHex string) []*data.Role {
-	if pathHex == "" {
-		pathDigest := sha256.Sum256([]byte(path))
-		pathHex = hex.EncodeToString(pathDigest[:])
-	}
+func (tr Repo) TargetDelegations(role, path string) []*data.Role {
 	var roles []*data.Role
 	if t, ok := tr.Targets[role]; ok {
 		for _, r := range t.Signed.Delegations.Roles {
@@ -571,8 +565,6 @@ func (tr Repo) TargetDelegations(role, path, pathHex string) []*data.Role {
 // N.B. Multiple entries may exist in different delegated roles
 //      for the same target. Only the first one encountered is returned.
 func (tr Repo) FindTarget(path string) *data.FileMeta {
-	pathDigest := sha256.Sum256([]byte(path))
-	pathHex := hex.EncodeToString(pathDigest[:])
 
 	var walkTargets func(role string) *data.FileMeta
 	walkTargets = func(role string) *data.FileMeta {
@@ -581,7 +573,7 @@ func (tr Repo) FindTarget(path string) *data.FileMeta {
 		}
 		// Depth first search of delegations based on order
 		// as presented in current targets file for role:
-		for _, r := range tr.TargetDelegations(role, path, pathHex) {
+		for _, r := range tr.TargetDelegations(role, path) {
 			if m := walkTargets(r.Name); m != nil {
 				return m
 			}
