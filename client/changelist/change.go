@@ -82,15 +82,13 @@ func (c TufChange) Content() []byte {
 // this includes creating a delegations. This format is used to avoid
 // unexpected race conditions between humans modifying the same delegation
 type TufDelegation struct {
-	NewName                string       `json:"new_name,omitempty"`
-	NewThreshold           int          `json:"threshold, omitempty"`
-	AddKeys                data.KeyList `json:"add_keys, omitempty"`
-	RemoveKeys             []string     `json:"remove_keys,omitempty"`
-	AddPaths               []string     `json:"add_paths,omitempty"`
-	RemovePaths            []string     `json:"remove_paths,omitempty"`
-	ClearAllPaths          bool         `json:"clear_paths,omitempty"`
-	AddPathHashPrefixes    []string     `json:"add_prefixes,omitempty"`
-	RemovePathHashPrefixes []string     `json:"remove_prefixes,omitempty"`
+	NewName       string       `json:"new_name,omitempty"`
+	NewThreshold  int          `json:"threshold, omitempty"`
+	AddKeys       data.KeyList `json:"add_keys, omitempty"`
+	RemoveKeys    []string     `json:"remove_keys,omitempty"`
+	AddPaths      []string     `json:"add_paths,omitempty"`
+	RemovePaths   []string     `json:"remove_paths,omitempty"`
+	ClearAllPaths bool         `json:"clear_paths,omitempty"`
 }
 
 // ToNewRole creates a fresh role object from the TufDelegation data
@@ -99,5 +97,5 @@ func (td TufDelegation) ToNewRole(scope string) (*data.Role, error) {
 	if td.NewName != "" {
 		name = td.NewName
 	}
-	return data.NewRole(name, td.NewThreshold, td.AddKeys.IDs(), td.AddPaths, td.AddPathHashPrefixes)
+	return data.NewRole(name, td.NewThreshold, td.AddKeys.IDs(), td.AddPaths)
 }

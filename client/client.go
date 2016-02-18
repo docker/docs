@@ -21,7 +21,6 @@ import (
 	"github.com/docker/notary/tuf"
 	tufclient "github.com/docker/notary/tuf/client"
 	"github.com/docker/notary/tuf/data"
-	"github.com/docker/notary/tuf/keys"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/store"
 )
@@ -214,11 +213,16 @@ func (r *NotaryRepository) Initialize(rootKeyID string, serverManagedRoles ...st
 		return fmt.Errorf("invalid format for root key: %s", privKey.Algorithm())
 	}
 
-	kdb := keys.NewDB()
-	err = addKeyForRole(kdb, data.CanonicalRootRole, rootKey)
-	if err != nil {
-		return err
-	}
+	var (
+		rootRole = data.NewBaseRole(
+			data.CanonicalRootRole,
+			notary.MinThreshold,
+			rootKey,
+		)
+		timestampRole data.BaseRole
+		snapshotRole  data.BaseRole
+		targetsRole   data.BaseRole
+	)
 
 	// we want to create all the local keys first so we don't have to
 	// make unnecessary network calls
@@ -228,8 +232,19 @@ func (r *NotaryRepository) Initialize(rootKeyID string, serverManagedRoles ...st
 		if err != nil {
 			return err
 		}
-		if err := addKeyForRole(kdb, role, key); err != nil {
-			return err
+		switch role {
+		case data.CanonicalSnapshotRole:
+			snapshotRole = data.NewBaseRole(
+				role,
+				notary.MinThreshold,
+				key,
+			)
+		case data.CanonicalTargetsRole:
+			targetsRole = data.NewBaseRole(
+				role,
+				notary.MinThreshold,
+				key,
+			)
 		}
 	}
 	for _, role := range remotelyManagedKeys {
@@ -240,14 +255,31 @@ func (r *NotaryRepository) Initialize(rootKeyID string, serverManagedRoles ...st
 		}
 		logrus.Debugf("got remote %s %s key with keyID: %s",
 			role, key.Algorithm(), key.ID())
-		if err := addKeyForRole(kdb, role, key); err != nil {
-			return err
+		switch role {
+		case data.CanonicalSnapshotRole:
+			snapshotRole = data.NewBaseRole(
+				role,
+				notary.MinThreshold,
+				key,
+			)
+		case data.CanonicalTimestampRole:
+			timestampRole = data.NewBaseRole(
+				role,
+				notary.MinThreshold,
+				key,
+			)
 		}
 	}
 
-	r.tufRepo = tuf.NewRepo(kdb, r.CryptoService)
+	r.tufRepo = tuf.NewRepo(r.CryptoService)
 
-	err = r.tufRepo.InitRoot(false)
+	err = r.tufRepo.InitRoot(
+		rootRole,
+		timestampRole,
+		snapshotRole,
+		targetsRole,
+		false,
+	)
 	if err != nil {
 		logrus.Debug("Error on InitRoot: ", err.Error())
 		return err
@@ -471,7 +503,7 @@ func (r *NotaryRepository) ListRoles() ([]RoleWithSignatures, error) {
 		case data.CanonicalTimestampRole:
 			roleWithSig.Signatures = r.tufRepo.Timestamp.Signatures
 		default:
-			// If the role isn't a delegation, we should error -- this is only possible if we have invalid keyDB state
+			// If the role isn't a delegation, we should error -- this is only possible if we have invalid state
 			if !data.IsDelegation(role.Name) {
 				return nil, data.ErrInvalidRole{Role: role.Name, Reason: "invalid role name"}
 			}
@@ -610,8 +642,7 @@ func (r *NotaryRepository) Publish() error {
 // This can also be unified with some cache reading tools from tuf/client.
 // This assumes that bootstrapRepo is only used by Publish()
 func (r *NotaryRepository) bootstrapRepo() error {
-	kdb := keys.NewDB()
-	tufRepo := tuf.NewRepo(kdb, r.CryptoService)
+	tufRepo := tuf.NewRepo(r.CryptoService)
 
 	logrus.Debugf("Loading trusted collection.")
 	rootJSON, err := r.fileStore.GetMeta("root", -1)
@@ -783,8 +814,7 @@ func (r *NotaryRepository) bootstrapClient(checkInitialized bool) (*tufclient.Cl
 		}
 	}
 
-	kdb := keys.NewDB()
-	r.tufRepo = tuf.NewRepo(kdb, r.CryptoService)
+	r.tufRepo = tuf.NewRepo(r.CryptoService)
 
 	if signedRoot == nil {
 		return nil, ErrRepoNotInitialized{}
@@ -798,7 +828,6 @@ func (r *NotaryRepository) bootstrapClient(checkInitialized bool) (*tufclient.Cl
 	return tufclient.NewClient(
 		r.tufRepo,
 		remote,
-		kdb,
 		r.fileStore,
 	), nil
 }
@@ -891,7 +920,7 @@ func (r *NotaryRepository) DeleteTrustData() error {
 	if err := r.fileStore.RemoveAll(); err != nil {
 		return fmt.Errorf("error clearing TUF repo data: %v", err)
 	}
-	r.tufRepo = tuf.NewRepo(nil, nil)
+	r.tufRepo = tuf.NewRepo(nil)
 	// Clear certificates
 	certificates, err := r.CertStore.GetCertificatesByCN(r.gun)
 	if err != nil {

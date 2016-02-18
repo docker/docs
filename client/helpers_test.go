@@ -12,7 +12,7 @@ import (
 )
 
 func TestApplyTargetsChange(t *testing.T) {
-	_, repo, _, err := testutils.EmptyRepo("docker.com/notary")
+	repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	_, err = repo.InitTargets(data.CanonicalTargetsRole)
 	assert.NoError(t, err)
@@ -52,7 +52,7 @@ func TestApplyTargetsChange(t *testing.T) {
 
 // Adding the same target twice doesn't actually add it.
 func TestApplyAddTargetTwice(t *testing.T) {
-	_, repo, _, err := testutils.EmptyRepo("docker.com/notary")
+	repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	_, err = repo.InitTargets(data.CanonicalTargetsRole)
 	assert.NoError(t, err)
@@ -98,7 +98,7 @@ func TestApplyAddTargetTwice(t *testing.T) {
 }
 
 func TestApplyChangelist(t *testing.T) {
-	_, repo, _, err := testutils.EmptyRepo("docker.com/notary")
+	repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	_, err = repo.InitTargets(data.CanonicalTargetsRole)
 	assert.NoError(t, err)
@@ -142,7 +142,7 @@ func TestApplyChangelist(t *testing.T) {
 }
 
 func TestApplyChangelistMulti(t *testing.T) {
-	_, repo, _, err := testutils.EmptyRepo("docker.com/notary")
+	repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	_, err = repo.InitTargets(data.CanonicalTargetsRole)
 	assert.NoError(t, err)
@@ -183,7 +183,7 @@ func TestApplyChangelistMulti(t *testing.T) {
 }
 
 func TestApplyTargetsDelegationCreateDelete(t *testing.T) {
-	_, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
+	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	newKey, err := cs.Create("targets/level1", data.ED25519Key)
@@ -247,7 +247,7 @@ func TestApplyTargetsDelegationCreateDelete(t *testing.T) {
 }
 
 func TestApplyTargetsDelegationCreate2SharedKey(t *testing.T) {
-	_, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
+	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	newKey, err := cs.Create("targets/level1", data.ED25519Key)
@@ -350,7 +350,7 @@ func TestApplyTargetsDelegationCreate2SharedKey(t *testing.T) {
 }
 
 func TestApplyTargetsDelegationCreateEdit(t *testing.T) {
-	_, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
+	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	newKey, err := cs.Create("targets/level1", data.ED25519Key)
@@ -418,7 +418,7 @@ func TestApplyTargetsDelegationCreateEdit(t *testing.T) {
 }
 
 func TestApplyTargetsDelegationEditNonExisting(t *testing.T) {
-	_, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
+	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	newKey, err := cs.Create("targets/level1", data.ED25519Key)
@@ -449,7 +449,7 @@ func TestApplyTargetsDelegationEditNonExisting(t *testing.T) {
 }
 
 func TestApplyTargetsDelegationCreateAlreadyExisting(t *testing.T) {
-	_, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
+	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	newKey, err := cs.Create("targets/level1", data.ED25519Key)
@@ -515,7 +515,7 @@ func TestApplyTargetsDelegationCreateAlreadyExisting(t *testing.T) {
 }
 
 func TestApplyTargetsDelegationAlreadyExistingMergePaths(t *testing.T) {
-	_, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
+	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	newKey, err := cs.Create("targets/level1", data.ED25519Key)
@@ -571,7 +571,7 @@ func TestApplyTargetsDelegationAlreadyExistingMergePaths(t *testing.T) {
 }
 
 func TestApplyTargetsDelegationInvalidRole(t *testing.T) {
-	_, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
+	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	newKey, err := cs.Create("targets/level1", data.ED25519Key)
@@ -601,7 +601,7 @@ func TestApplyTargetsDelegationInvalidRole(t *testing.T) {
 }
 
 func TestApplyTargetsDelegationInvalidJSONContent(t *testing.T) {
-	_, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
+	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	newKey, err := cs.Create("targets/level1", data.ED25519Key)
@@ -631,7 +631,7 @@ func TestApplyTargetsDelegationInvalidJSONContent(t *testing.T) {
 }
 
 func TestApplyTargetsDelegationInvalidAction(t *testing.T) {
-	_, repo, _, err := testutils.EmptyRepo("docker.com/notary")
+	repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	ch := changelist.NewTufChange(
@@ -647,7 +647,7 @@ func TestApplyTargetsDelegationInvalidAction(t *testing.T) {
 }
 
 func TestApplyTargetsChangeInvalidType(t *testing.T) {
-	_, repo, _, err := testutils.EmptyRepo("docker.com/notary")
+	repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	ch := changelist.NewTufChange(
@@ -662,136 +662,8 @@ func TestApplyTargetsChangeInvalidType(t *testing.T) {
 	assert.Error(t, err)
 }
 
-// A delegated role MUST NOT have both Paths and PathHashPrefixes defined.
-// These next 2 tests check that attempting to edit an existing role to
-// create an invalid role errors in both possible combinations.
-func TestApplyTargetsDelegationConflictPathsPrefixes(t *testing.T) {
-	_, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
-	assert.NoError(t, err)
-
-	newKey, err := cs.Create("targets/level1", data.ED25519Key)
-	assert.NoError(t, err)
-
-	// create delegation
-	kl := data.KeyList{newKey}
-	td := &changelist.TufDelegation{
-		NewThreshold: 1,
-		AddKeys:      kl,
-		AddPaths:     []string{"level1"},
-	}
-
-	tdJSON, err := json.Marshal(td)
-	assert.NoError(t, err)
-
-	ch := changelist.NewTufChange(
-		changelist.ActionCreate,
-		"targets/level1",
-		changelist.TypeTargetsDelegation,
-		"",
-		tdJSON,
-	)
-
-	err = applyTargetsChange(repo, ch)
-	assert.NoError(t, err)
-
-	// add prefixes and update
-	td.AddPathHashPrefixes = []string{"abc"}
-
-	tdJSON, err = json.Marshal(td)
-	assert.NoError(t, err)
-
-	ch = changelist.NewTufChange(
-		changelist.ActionUpdate,
-		"targets/level1",
-		changelist.TypeTargetsDelegation,
-		"",
-		tdJSON,
-	)
-
-	err = applyTargetsChange(repo, ch)
-	assert.Error(t, err)
-}
-
-func TestApplyTargetsDelegationConflictPrefixesPaths(t *testing.T) {
-	_, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
-	assert.NoError(t, err)
-
-	newKey, err := cs.Create("targets/level1", data.ED25519Key)
-	assert.NoError(t, err)
-
-	// create delegation
-	kl := data.KeyList{newKey}
-	td := &changelist.TufDelegation{
-		NewThreshold:        1,
-		AddKeys:             kl,
-		AddPathHashPrefixes: []string{"abc"},
-	}
-
-	tdJSON, err := json.Marshal(td)
-	assert.NoError(t, err)
-
-	ch := changelist.NewTufChange(
-		changelist.ActionCreate,
-		"targets/level1",
-		changelist.TypeTargetsDelegation,
-		"",
-		tdJSON,
-	)
-
-	err = applyTargetsChange(repo, ch)
-	assert.NoError(t, err)
-
-	// add paths and update
-	td.AddPaths = []string{"level1"}
-
-	tdJSON, err = json.Marshal(td)
-	assert.NoError(t, err)
-
-	ch = changelist.NewTufChange(
-		changelist.ActionUpdate,
-		"targets/level1",
-		changelist.TypeTargetsDelegation,
-		"",
-		tdJSON,
-	)
-
-	err = applyTargetsChange(repo, ch)
-	assert.Error(t, err)
-}
-
-func TestApplyTargetsDelegationCreateInvalid(t *testing.T) {
-	_, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
-	assert.NoError(t, err)
-
-	newKey, err := cs.Create("targets/level1", data.ED25519Key)
-	assert.NoError(t, err)
-
-	// create delegation
-	kl := data.KeyList{newKey}
-	td := &changelist.TufDelegation{
-		NewThreshold:        1,
-		AddKeys:             kl,
-		AddPaths:            []string{"level1"},
-		AddPathHashPrefixes: []string{"abc"},
-	}
-
-	tdJSON, err := json.Marshal(td)
-	assert.NoError(t, err)
-
-	ch := changelist.NewTufChange(
-		changelist.ActionCreate,
-		"targets/level1",
-		changelist.TypeTargetsDelegation,
-		"",
-		tdJSON,
-	)
-
-	err = applyTargetsChange(repo, ch)
-	assert.Error(t, err)
-}
-
 func TestApplyTargetsDelegationCreate2Deep(t *testing.T) {
-	_, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
+	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	newKey, err := cs.Create("targets/level1", data.ED25519Key)
@@ -872,7 +744,7 @@ func TestApplyTargetsDelegationCreate2Deep(t *testing.T) {
 
 // Applying a delegation whose parent doesn't exist fails.
 func TestApplyTargetsDelegationParentDoesntExist(t *testing.T) {
-	_, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
+	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	// make sure a key exists for the previous level, so it's not a missing
@@ -908,13 +780,13 @@ func TestApplyTargetsDelegationParentDoesntExist(t *testing.T) {
 
 // If there is no delegation target, ApplyTargets creates it
 func TestApplyChangelistCreatesDelegation(t *testing.T) {
-	_, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
+	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	newKey, err := cs.Create("targets/level1", data.ED25519Key)
 	assert.NoError(t, err)
 
-	r, err := data.NewRole("targets/level1", 1, []string{newKey.ID()}, []string{""}, nil)
+	r, err := data.NewRole("targets/level1", 1, []string{newKey.ID()}, []string{""})
 	assert.NoError(t, err)
 	repo.UpdateDelegations(r, []data.PublicKey{newKey})
 	delete(repo.Targets, "targets/level1")
@@ -947,17 +819,17 @@ func TestApplyChangelistCreatesDelegation(t *testing.T) {
 
 // Each change applies only to the role specified
 func TestApplyChangelistTargetsToMultipleRoles(t *testing.T) {
-	_, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
+	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	newKey, err := cs.Create("targets/level1", data.ED25519Key)
 	assert.NoError(t, err)
 
-	r, err := data.NewRole("targets/level1", 1, []string{newKey.ID()}, []string{""}, nil)
+	r, err := data.NewRole("targets/level1", 1, []string{newKey.ID()}, []string{""})
 	assert.NoError(t, err)
 	repo.UpdateDelegations(r, []data.PublicKey{newKey})
 
-	r, err = data.NewRole("targets/level2", 1, []string{newKey.ID()}, []string{""}, nil)
+	r, err = data.NewRole("targets/level2", 1, []string{newKey.ID()}, []string{""})
 	assert.NoError(t, err)
 	repo.UpdateDelegations(r, []data.PublicKey{newKey})
 
@@ -996,7 +868,7 @@ func TestApplyChangelistTargetsToMultipleRoles(t *testing.T) {
 
 // ApplyTargets falls back to role that exists when adding or deleting a change
 func TestApplyChangelistTargetsFallbackRoles(t *testing.T) {
-	_, repo, _, err := testutils.EmptyRepo("docker.com/notary")
+	repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	hash := sha256.Sum256([]byte{})
@@ -1038,7 +910,7 @@ func TestApplyChangelistTargetsFallbackRoles(t *testing.T) {
 
 // changeTargetMeta fallback fails with ErrInvalidRole if role is invalid
 func TestChangeTargetMetaFallbackFailsInvalidRole(t *testing.T) {
-	_, repo, _, err := testutils.EmptyRepo("docker.com/notary")
+	repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	hash := sha256.Sum256([]byte{})
@@ -1065,14 +937,14 @@ func TestChangeTargetMetaFallbackFailsInvalidRole(t *testing.T) {
 // If applying a change fails due to a prefix error, it does not fall back
 // on the parent.
 func TestChangeTargetMetaDoesntFallbackIfPrefixError(t *testing.T) {
-	_, repo, cs, err := testutils.EmptyRepo("docker.com/notary")
+	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 
 	newKey, err := cs.Create("targets/level1", data.ED25519Key)
 	assert.NoError(t, err)
 
 	r, err := data.NewRole("targets/level1", 1, []string{newKey.ID()},
-		[]string{"pathprefix"}, nil)
+		[]string{"pathprefix"})
 	assert.NoError(t, err)
 	repo.UpdateDelegations(r, []data.PublicKey{newKey})
 

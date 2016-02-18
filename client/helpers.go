@@ -12,7 +12,6 @@ import (
 	"github.com/docker/notary/client/changelist"
 	tuf "github.com/docker/notary/tuf"
 	"github.com/docker/notary/tuf/data"
-	"github.com/docker/notary/tuf/keys"
 	"github.com/docker/notary/tuf/store"
 	"github.com/docker/notary/tuf/utils"
 )
@@ -133,9 +132,6 @@ func changeTargetsDelegation(repo *tuf.Repo, c changelist.Change) error {
 		if err := r.AddPaths(td.AddPaths); err != nil {
 			return err
 		}
-		if err := r.AddPathHashPrefixes(td.AddPathHashPrefixes); err != nil {
-			return err
-		}
 
 		// Clear all paths if we're given the flag, else remove specified paths
 		if td.ClearAllPaths {
@@ -144,7 +140,6 @@ func changeTargetsDelegation(repo *tuf.Repo, c changelist.Change) error {
 			r.RemovePaths(td.RemovePaths)
 		}
 		r.RemoveKeys(removeTUFKeyIDs)
-		r.RemovePathHashPrefixes(td.RemovePathHashPrefixes)
 		return repo.UpdateDelegations(r, td.AddKeys)
 	case changelist.ActionDelete:
 		r := data.Role{Name: c.Scope()}
@@ -259,19 +254,6 @@ func getRemoteKey(url, gun, role string, rt http.RoundTripper) (data.PublicKey, 
 	}
 
 	return pubKey, nil
-}
-
-// add a key to a KeyDB, and create a role for the key and add it.
-func addKeyForRole(kdb *keys.KeyDB, role string, key data.PublicKey) error {
-	theRole, err := data.NewRole(role, 1, []string{key.ID()}, nil, nil)
-	if err != nil {
-		return err
-	}
-	kdb.AddKey(key)
-	if err := kdb.AddRole(theRole); err != nil {
-		return err
-	}
-	return nil
 }
 
 // signs and serializes the metadata for a canonical role in a tuf repo to JSON

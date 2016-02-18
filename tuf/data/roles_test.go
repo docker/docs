@@ -64,7 +64,7 @@ func TestSubtractStrSlicesEqual(t *testing.T) {
 }
 
 func TestAddRemoveKeys(t *testing.T) {
-	role, err := NewRole("targets", 1, []string{"abc"}, []string{""}, nil)
+	role, err := NewRole("targets", 1, []string{"abc"}, []string{""})
 	assert.NoError(t, err)
 	role.AddKeys([]string{"abc"})
 	assert.Equal(t, []string{"abc"}, role.KeyIDs)
@@ -75,7 +75,7 @@ func TestAddRemoveKeys(t *testing.T) {
 }
 
 func TestAddRemovePaths(t *testing.T) {
-	role, err := NewRole("targets", 1, []string{"abc"}, []string{"123"}, nil)
+	role, err := NewRole("targets", 1, []string{"abc"}, []string{"123"})
 	assert.NoError(t, err)
 	err = role.AddPaths([]string{"123"})
 	assert.NoError(t, err)
@@ -87,44 +87,10 @@ func TestAddRemovePaths(t *testing.T) {
 	assert.Equal(t, []string{"456"}, role.Paths)
 }
 
-func TestAddRemovePathHashPrefixes(t *testing.T) {
-	role, err := NewRole("targets", 1, []string{"abc"}, nil, []string{"123"})
-	assert.NoError(t, err)
-	err = role.AddPathHashPrefixes([]string{"123"})
-	assert.NoError(t, err)
-	assert.Equal(t, []string{"123"}, role.PathHashPrefixes)
-	err = role.AddPathHashPrefixes([]string{"456"})
-	assert.NoError(t, err)
-	assert.Equal(t, []string{"123", "456"}, role.PathHashPrefixes)
-	role.RemovePathHashPrefixes([]string{"123"})
-	assert.Equal(t, []string{"456"}, role.PathHashPrefixes)
-}
-
-func TestAddPathConflict(t *testing.T) {
-	role, err := NewRole("targets", 1, []string{"abc"}, nil, []string{"123"})
-	assert.NoError(t, err)
-	err = role.AddPaths([]string{"123"})
-	assert.Error(t, err)
-}
-
-func TestAddPathHashPrefixesConflict(t *testing.T) {
-	role, err := NewRole("targets", 1, []string{"abc"}, []string{"123"}, nil)
-	assert.NoError(t, err)
-	err = role.AddPathHashPrefixes([]string{"123"})
-	assert.Error(t, err)
-}
-
 func TestAddPathNil(t *testing.T) {
-	role, err := NewRole("targets", 1, []string{"abc"}, nil, []string{"123"})
+	role, err := NewRole("targets", 1, []string{"abc"}, nil)
 	assert.NoError(t, err)
 	err = role.AddPaths(nil)
-	assert.NoError(t, err)
-}
-
-func TestAddPathHashPrefixesNil(t *testing.T) {
-	role, err := NewRole("targets", 1, []string{"abc"}, []string{"123"}, nil)
-	assert.NoError(t, err)
-	err = role.AddPathHashPrefixes(nil)
 	assert.NoError(t, err)
 }
 

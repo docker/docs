@@ -13,7 +13,6 @@ import (
 
 	"github.com/docker/notary/tuf"
 	"github.com/docker/notary/tuf/data"
-	"github.com/docker/notary/tuf/keys"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/store"
 	"github.com/stretchr/testify/require"
@@ -384,8 +383,7 @@ func TestSwizzlerChangeRootKey(t *testing.T) {
 
 	f.ChangeRootKey()
 
-	kdb := keys.NewDB()
-	tufRepo := tuf.NewRepo(kdb, f.CryptoService)
+	tufRepo := tuf.NewRepo(f.CryptoService)
 
 	// we want to test these in a specific order
 	roles := []string{data.CanonicalRootRole, data.CanonicalTargetsRole, data.CanonicalSnapshotRole,
@@ -424,7 +422,7 @@ func TestSwizzlerChangeRootKey(t *testing.T) {
 			require.NoError(t, err)
 			newKey := newRoot.Signed.Keys[rootRole.KeyIDs[0]]
 			require.NoError(t, signed.Verify(signedThing,
-				&data.RoleWithKeys{Role: rootRole, Keys: map[string]data.PublicKey{newKey.ID(): newKey}}, 1))
+				data.BaseRole{Name: data.CanonicalRootRole, Keys: map[string]data.PublicKey{newKey.ID(): newKey}, Threshold: 1}, 1))
 		default:
 			require.True(t, bytes.Equal(origMeta, newMeta), "bytes have changed for role %s", role)
 		}

@@ -63,7 +63,7 @@ func VerifyRoot(s *data.Signed, minVersion int, keys map[string]data.PublicKey) 
 
 // Verify checks the signatures and metadata (expiry, version) for the signed role
 // data
-func Verify(s *data.Signed, role *data.RoleWithKeys, minVersion int) error {
+func Verify(s *data.Signed, role data.BaseRole, minVersion int) error {
 	if err := verifyMeta(s, role.Name, minVersion); err != nil {
 		return err
 	}
@@ -95,7 +95,7 @@ func IsExpired(t time.Time) bool {
 }
 
 // VerifySignatures checks the we have sufficient valid signatures for the given role
-func VerifySignatures(s *data.Signed, roleData *data.RoleWithKeys) error {
+func VerifySignatures(s *data.Signed, roleData data.BaseRole) error {
 	if len(s.Signatures) == 0 {
 		return ErrNoSignatures
 	}
@@ -103,7 +103,7 @@ func VerifySignatures(s *data.Signed, roleData *data.RoleWithKeys) error {
 	if roleData.Threshold < 1 {
 		return ErrRoleThreshold{}
 	}
-	logrus.Debugf("%s role has key IDs: %s", roleData.Name, strings.Join(roleData.KeyIDs, ","))
+	logrus.Debugf("%s role has key IDs: %s", roleData.Name, strings.Join(roleData.ListKeyIDs(), ","))
 
 	// remarshal the signed part so we can verify the signature, since the signature has
 	// to be of a canonically marshalled signed object
@@ -119,10 +119,6 @@ func VerifySignatures(s *data.Signed, roleData *data.RoleWithKeys) error {
 	valid := make(map[string]struct{})
 	for _, sig := range s.Signatures {
 		logrus.Debug("verifying signature for key ID: ", sig.KeyID)
-		if !roleData.ValidKey(sig.KeyID) {
-			logrus.Debugf("continuing b/c keyid was invalid: %s for roledata %s\n", sig.KeyID, roleData)
-			continue
-		}
 		key, ok := roleData.Keys[sig.KeyID]
 		if !ok {
 			logrus.Debugf("continuing b/c keyid lookup was nil: %s\n", sig.KeyID)

@@ -280,12 +280,12 @@ func testValidateSuccessfulRootRotation(t *testing.T, keyAlg, rootKeyType string
 	origRootKey := data.NewPublicKey(rootKeyType, origRootPEMCert)
 	replRootKey := data.NewPublicKey(rootKeyType, replRootPEMCert)
 
-	rootRole, err := data.NewRole("root", 1, []string{replRootKey.ID()}, nil, nil)
+	rootRole, err := data.NewRole(data.CanonicalRootRole, 1, []string{replRootKey.ID()}, nil)
 	assert.NoError(t, err)
 
 	testRoot, err := data.NewRoot(
 		map[string]data.PublicKey{replRootKey.ID(): replRootKey},
-		map[string]*data.RootRole{"root": &rootRole.RootRole},
+		map[string]*data.RootRole{data.CanonicalRootRole: &rootRole.RootRole},
 		false,
 	)
 	assert.NoError(t, err, "Failed to create new root")
@@ -338,12 +338,12 @@ func testValidateRootRotationMissingOrigSig(t *testing.T, keyAlg, rootKeyType st
 	// Tuf key with PEM-encoded x509 certificate
 	replRootKey := data.NewPublicKey(rootKeyType, replRootPEMCert)
 
-	rootRole, err := data.NewRole("root", 1, []string{replRootKey.ID()}, nil, nil)
+	rootRole, err := data.NewRole(data.CanonicalRootRole, 1, []string{replRootKey.ID()}, nil)
 	assert.NoError(t, err)
 
 	testRoot, err := data.NewRoot(
 		map[string]data.PublicKey{replRootKey.ID(): replRootKey},
-		map[string]*data.RootRole{"root": &rootRole.RootRole},
+		map[string]*data.RootRole{data.CanonicalRootRole: &rootRole.RootRole},
 		false,
 	)
 	assert.NoError(t, err, "Failed to create new root")
@@ -397,12 +397,12 @@ func testValidateRootRotationMissingNewSig(t *testing.T, keyAlg, rootKeyType str
 	origRootKey := data.NewPublicKey(rootKeyType, origRootPEMCert)
 	replRootKey := data.NewPublicKey(rootKeyType, replRootPEMCert)
 
-	rootRole, err := data.NewRole("root", 1, []string{replRootKey.ID()}, nil, nil)
+	rootRole, err := data.NewRole(data.CanonicalRootRole, 1, []string{replRootKey.ID()}, nil)
 	assert.NoError(t, err)
 
 	testRoot, err := data.NewRoot(
 		map[string]data.PublicKey{replRootKey.ID(): replRootKey},
-		map[string]*data.RootRole{"root": &rootRole.RootRole},
+		map[string]*data.RootRole{data.CanonicalRootRole: &rootRole.RootRole},
 		false,
 	)
 	assert.NoError(t, err, "Failed to create new root")
