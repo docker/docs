@@ -10,7 +10,7 @@ weight=-100
 <![end-metadata]-->
 
 
-# Evaluation installation
+# Evaluation installation and quickstart
 
 This page helps you to learn about Docker Universal Control Plane (UCP) at a
 high-level through installing and running UCP in your local, sandbox
@@ -48,17 +48,21 @@ a Docker Swarm cluster. The UCP installation process by default secures the clus
 ![Sandbox](images/sandbox.png)
 
 This example is intended as an introduction for non-technical users wanting to
-explore UCP for themselves. If you are a high technical user intending to act as
+explore UCP for themselves. If you are a highly technical user intending to act as
 UCP administration operator, you may prefer to skip this and go straight to
 [Plan a production installation](plan-production-install.md).
 
+>**Note**: The command examples in this page were tested for a Mac OSX environment.
+If you are in another, you may need to adjust the commands to use analogous
+commands for you environment.
 
 ## Step 2. Verify the prerequisites
 
 Because Docker Engine and UCP both rely on Linux-specific features, you can't
 run natively in Mac or Windows. Instead, you must install the Docker Toolbox
 application. The application installs a VirtualBox Virtual Machine (VM), the
-Docker Engine itself, and the Docker Toolbox management tool. These tools enable you to run Engine CLI commands from your Mac OS X or Windows shell.
+Docker Engine itself, and the Docker Toolbox management tool. These tools enable
+you to run Engine CLI commands from your Mac OS X or Windows shell.
 
 Your Mac must be running OS X 10.8 "Mountain Lion" or higher to perform this
 procedure. To check your Mac OS X version, see <a href="https://docs.docker.com/mac/step_one/" target="_blank">the Docker Engine getting started on Mac</a>.
@@ -71,7 +75,7 @@ If you haven't already done so, make you have installed Docker Toolbox on your l
 
 ## Step 3. Provision hosts with Engine
 
-In this step, you provision to VMs for your UCP installation. This step is
+In this step, you provision two VMs for your UCP installation. This step is
 purely to enable your evaluation. You would never run UCP in production on local
 VMs with the open source Engine.
 
@@ -96,7 +100,9 @@ Set up the nodes for your evaluation:
     3.00 GB disk space. When you create your virtual host, you supply options to
     size it appropriately.
 
-        $ docker-machine create -d virtualbox --virtualbox-memory "3000" --virtualbox-disk-size "6000" node1
+        $ docker-machine create -d virtualbox \
+        --virtualbox-memory "2000" \
+        --virtualbox-disk-size "5000" node1
         Running pre-create checks...
         Creating machine...
         (node1) Copying /Users/mary/.docker/machine/cache/boot2docker.iso to /Users/mary/.docker/machine/machines/node1/boot2docker.iso...
@@ -118,7 +124,8 @@ Set up the nodes for your evaluation:
 
 4. Create a VM named `node2`.  
 
-        $ docker-machine create -d virtualbox --virtualbox-memory "5000" node2
+        $ docker-machine create -d virtualbox \
+        --virtualbox-memory "2000" node2
 
 5. Use the Machine `ls` command to list your hosts.
 
@@ -174,10 +181,10 @@ UCP's high availability feature. High availability allows you to designate
 several nodes as controller replicas. In this way, if one controller fails
 a replica node is ready to take its place.  
 
-For this evaluation, you won't don't need that level of robustness. A single
+For this evaluation, you won't need that level of robustness. A single
 host for the controller suffices.
 
-1. If you don't already have open, open a terminal on your computer.
+1. If you don't already have one, open a terminal on your computer.
 
 2. Connect the terminal environment to the `node1` you created.
 
@@ -195,11 +202,27 @@ host for the controller suffices.
 
         $ eval $(docker-machine env node1)
 
+    c. Verify that `node1` has an active environment.
+
+        $ docker-machine ls
+        NAME         ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER    ERRORS
+        node1        *        virtualbox   Running   tcp://192.168.99.104:2376           v1.10.0   
+        node2        -        virtualbox   Running   tcp://192.168.99.102:2376           v1.10.0   
+
+      An `*` (asterisk) in the `ACTIVE` field indicates that the `node1` environment is active.
+
     The client will send the `docker` commands in the following steps to the Docker Engine on on `node1`.
 
 3. Start the `ucp` tool to install interactively.
 
-        $ docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock --name ucp docker/ucp install --swarm-port 3376 -i --host-address $(docker-machine ip node1)
+    >**Note**: If you are on a Windows system, your shell can't resolve the
+    `$(docker-machine ip node2)` variable. So, replace it with the actual IP
+    address.
+
+        $ docker run --rm -it \
+        -v /var/run/docker.sock:/var/run/docker.sock \
+        --name ucp docker/ucp install -i\
+        --swarm-port 3376 --host-address $(docker-machine ip node1)
         Unable to find image 'docker/ucp:latest' locally
         latest: Pulling from docker/ucp
         0198ad4008dc: Pull complete
@@ -279,17 +302,23 @@ In this step, you log into UCP, get a license, and install it. Docker allows you
 
 5. Enter `admin` for the username along with the password you provided to the `install`.
 
-    After you enter the correct credentials, the UCP dashboard displays.
+    After you enter the correct credentials, the UCP dashboard prompts for a
+    license.
+
+    ![](images/skip-this.png)    
+
+6. Press *Skip for now* to continue to the dashboard.
 
     ![](images/dashboard.png)
 
-    The dashboard shows a single node, your controller node. It also shows you a message saying that you need a license. Docker allows you to download a trial license.
+    The dashboard shows a single node, your controller node. It also shows you a
+    banner saying that you need a license.
 
 6. Follow the link on the UCP **Dashboard** to the Docker website to get a trial license.
 
     You must fill out a short form. After you complete the form, you are prompted with some **Installation Steps**.
 
-7. Press *Next* until you reach the **Add License** step.
+7. Press **Next** until you reach the **Add License** step.
 
     ![](images/get-license.png)
 
@@ -322,7 +351,8 @@ controller. You'll know you've succeeded if you see this list:
 ![](images/controller-containers.png)
 
 The containers reflect the architecture of UCP.  The containers are running
-Swarm, a key-value store process, and some containers with certificate volumes. Explore the other resources   
+Swarm, a key-value store process, and some containers with certificate volumes.
+Explore the other resources.   
 
 ## Step 7. Join a node
 
@@ -330,7 +360,7 @@ In this step, you join your UCP `node2` to the controller using the `ucp join`
 subcommand. In a UCP production installation, you'd do this step for each node
 you want to add.
 
-1. If you don't already have open, open a terminal on your computer.
+1. If you don't already have one, open a terminal on your computer.
 
 2. Connect the terminal environment to the `node2` you provisioned earlier.
 
@@ -352,7 +382,14 @@ you want to add.
 
 2. Run the `docker/ucp join` command.
 
-        $ docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock --name ucp docker/ucp join -i --host-address $(docker-machine ip node2)
+    >**Note**: If you are on a Windows system, your shell can't resolve the
+    `$(docker-machine ip node2)` variable. So, replace it with the actual IP
+    address.
+
+        $ docker run --rm -it \
+        -v /var/run/docker.sock:/var/run/docker.sock \
+        --name ucp docker/ucp join -i \
+        --host-address $(docker-machine ip node2)
 
     The `join` pulls several images and prompts you for the UCL of the UCP Server.
 
@@ -435,7 +472,7 @@ dashboard.  The container will run an Nginx server, so you'll need to launch the
 4. Enter `nginx` for the image name.
 
     An image is simply predefined software you want to run. The software might
-    an actual standalone application or maybe some component software necessary
+    be an actual standalone application or maybe some component software necessary
     to support a complex service.
 
 5. Enter `nginx_server` for the container name.
@@ -450,7 +487,7 @@ dashboard.  The container will run an Nginx server, so you'll need to launch the
 
 8. Use the plus sign to add another **Port**.
 
-9. For this port, enter `90` in the **Port** and **Host Port** field.
+9. For this port, enter `80` in the **Port** and **Host Port** field.
 
     When you are done, your dialog looks like the following:
 
@@ -499,78 +536,90 @@ Download the bundle and configure your environment.
 
     The browser downloads the `ucp-bundle-admin.zip` file.
 
+4. Open a new shell on your local machine.
+
+5. Make sure your shell is does not have an active Docker Machine host.
+
+        $ docker-machine ls
+        NAME    ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER    ERRORS
+        moxie   -        virtualbox   Stopped                                       Unknown   
+        test    -        virtualbox   Running   tcp://192.168.99.100:2376           v1.10.1  
+
+    While Machine has a stopped and running host, neither is active in the shell. You know this because neither host shows an * (asterisk) indicating the shell is configured.
+
+4. Create a directory to hold the deploy information.
+
+        $ mkdir deploy-app
+
 4. Navigate to where the bundle was downloaded, and unzip the client bundle
 
-		$ unzip bundle.zip
-		Archive:  bundle.zip
- 		extracting: ca.pem
-		extracting: cert.pem
-		extracting: key.pem
- 		extracting: cert.pub
-		extracting: env.sh
+    		$ unzip bundle.zip
+    		Archive:  bundle.zip
+     		extracting: ca.pem
+    		extracting: cert.pem
+    		extracting: key.pem
+     		extracting: cert.pub
+    		extracting: env.sh
 
 5. Change into the directory that was created when the bundle was unzipped
 
-6. Execute the `env.sh` script to set the appropriate environment variables for your UCP deployment
+6. Execute the `env.sh` script to set the appropriate environment variables for your UCP deployment.
 
-		$ source env.sh
+    		$ source env.sh
 
-7. Connect the terminal environment to the `node1`, your controller node.
+    If you are on Windows, you may need to set the environment variables manually.
 
-        $ eval "$(docker-machine env node1)"
+7. Run `docker info` to examine the UCP deployment.
 
-7. Run `docker info` to examine the Docker Swarm.
+    Your output should show that you are managing UCP vs. a single node.
 
-    Your output should show that you are managing the swarm vs. a single node.
-
-		$ docker info
-    $ docker info
-    Containers: 12
-     Running: 0
-     Paused: 0
-     Stopped: 0
-    Images: 17
-    Role: primary
-    Strategy: spread
-    Filters: health, port, dependency, affinity, constraint
-    Nodes: 2
-     node1: 192.168.99.106:12376
-      └ Status: Healthy
-      └ Containers: 9
-      └ Reserved CPUs: 0 / 1
-      └ Reserved Memory: 0 B / 3.01 GiB
-      └ Labels: executiondriver=native-0.2, kernelversion=4.1.17-boot2docker, operatingsystem=Boot2Docker 1.10.0 (TCL 6.4.1); master : b09ed60 - Thu Feb  4 20:16:08 UTC 2016, provider=virtualbox, storagedriver=aufs
-      └ Error: (none)
-      └ UpdatedAt: 2016-02-09T12:03:16Z
-     node2: 192.168.99.107:12376
-      └ Status: Healthy
-      └ Containers: 3
-      └ Reserved CPUs: 0 / 1
-      └ Reserved Memory: 0 B / 4.956 GiB
-      └ Labels: executiondriver=native-0.2, kernelversion=4.1.17-boot2docker, operatingsystem=Boot2Docker 1.10.0 (TCL 6.4.1); master : b09ed60 - Thu Feb  4 20:16:08 UTC 2016, provider=virtualbox, storagedriver=aufs
-      └ Error: (none)
-      └ UpdatedAt: 2016-02-09T12:03:11Z
-    Cluster Managers: 1
-     192.168.99.106: Healthy
-      └ Orca Controller: https://192.168.99.106:443
-      └ Swarm Manager: tcp://192.168.99.106:3376
-      └ KV: etcd://192.168.99.106:12379
-    Plugins:
-     Volume:
-     Network:
-    CPUs: 2
-    Total Memory: 7.966 GiB
-    Name: ucp-controller-node1
-    ID: P5QI:ZFCX:ELZ6:RX2F:ADCT:SJ7X:LAMQ:AA4L:ZWGR:IA5V:CXDE:FTT2
-    WARNING: No oom kill disable support
-    WARNING: No cpu cfs quota support
-    WARNING: No cpu cfs period support
-    WARNING: No cpu shares support
-    WARNING: No cpuset support
-    Labels:
-     com.docker.ucp.license_key=p3vPAznHhbitGG_KM36NvCWDiDDEU7aP_Y9z4i7V4DNb
-     com.docker.ucp.license_max_engines=1
-     com.docker.ucp.license_expires=2016-11-11 00:53:53 +0000 UTC
+        $ docker info
+        Containers: 12
+         Running: 0
+         Paused: 0
+         Stopped: 0
+        Images: 17
+        Role: primary
+        Strategy: spread
+        Filters: health, port, dependency, affinity, constraint
+        Nodes: 2
+         node1: 192.168.99.106:12376
+          └ Status: Healthy
+          └ Containers: 9
+          └ Reserved CPUs: 0 / 1
+          └ Reserved Memory: 0 B / 3.01 GiB
+          └ Labels: executiondriver=native-0.2, kernelversion=4.1.17-boot2docker, operatingsystem=Boot2Docker 1.10.0 (TCL 6.4.1); master : b09ed60 - Thu Feb  4 20:16:08 UTC 2016, provider=virtualbox, storagedriver=aufs
+          └ Error: (none)
+          └ UpdatedAt: 2016-02-09T12:03:16Z
+         node2: 192.168.99.107:12376
+          └ Status: Healthy
+          └ Containers: 3
+          └ Reserved CPUs: 0 / 1
+          └ Reserved Memory: 0 B / 4.956 GiB
+          └ Labels: executiondriver=native-0.2, kernelversion=4.1.17-boot2docker, operatingsystem=Boot2Docker 1.10.0 (TCL 6.4.1); master : b09ed60 - Thu Feb  4 20:16:08 UTC 2016, provider=virtualbox, storagedriver=aufs
+          └ Error: (none)
+          └ UpdatedAt: 2016-02-09T12:03:11Z
+        Cluster Managers: 1
+         192.168.99.106: Healthy
+          └ Orca Controller: https://192.168.99.106:443
+          └ Swarm Manager: tcp://192.168.99.106:3376
+          └ KV: etcd://192.168.99.106:12379
+        Plugins:
+         Volume:
+         Network:
+        CPUs: 2
+        Total Memory: 7.966 GiB
+        Name: ucp-controller-node1
+        ID: P5QI:ZFCX:ELZ6:RX2F:ADCT:SJ7X:LAMQ:AA4L:ZWGR:IA5V:CXDE:FTT2
+        WARNING: No oom kill disable support
+        WARNING: No cpu cfs quota support
+        WARNING: No cpu cfs period support
+        WARNING: No cpu shares support
+        WARNING: No cpuset support
+        Labels:
+         com.docker.ucp.license_key=p3vPAznHhbitGG_KM36NvCWDiDDEU7aP_Y9z4i7V4DNb
+         com.docker.ucp.license_max_engines=1
+         com.docker.ucp.license_expires=2016-11-11 00:53:53 +0000 UTC
 
 ## Step 11. Deploy with the CLI
 
@@ -610,11 +659,11 @@ In this exercise, you'll launch another Nginx container. Only this time, you'll 
 
 8. Scroll down to the ports section.
 
-  You'll see an IP address with port `80/tcp` for the server. This time, you'll
-  find that the port mapped on this container than the one created yourself.
-  That's because the command didn't explicitly map a port, so the Engine chose
-  mapped the default Nginx port `80` inside the container to an arbitrary port
-  on the node.
+    You'll see an IP address with port `80/tcp` for the server. This time, you'll
+    find that the port mapped on this container than the one created yourself.
+    That's because the command didn't explicitly map a port, so the Engine chose
+    mapped the default Nginx port `80` inside the container to an arbitrary port
+    on the node.
 
 4. Copy the IP address to your browser and paste the information you copied.
 
