@@ -783,7 +783,7 @@ var waysToMessUpServer = []swizzleExpectations{
 	// for everything else, the errors come from tuf/signed
 
 	{desc: "invalid SignedMeta Type", expectErrs: []interface{}{
-		&certs.ErrValidationFail{}, signed.ErrWrongType, data.ErrInvalidMeta{}},
+		&certs.ErrValidationFail{}, signed.ErrWrongType, data.ErrInvalidMetadata{}},
 		swizzle: (*testutils.MetadataSwizzler).SetInvalidMetadataType},
 
 	{desc: "invalid signatures", expectErrs: []interface{}{

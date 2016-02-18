@@ -34,25 +34,19 @@ func isValidTargetsStructure(t Targets, roleName string) error {
 	// even if it's a delegated role, the metadata type is "Targets"
 	expectedType := TUFTypes[CanonicalTargetsRole]
 	if t.Type != expectedType {
-		return ErrInvalidMeta{
-			Role: roleName, Msg: fmt.Sprintf("expected type %s, not %s", expectedType, t.Type)}
+		return ErrInvalidMetadata{
+			role: roleName, msg: fmt.Sprintf("expected type %s, not %s", expectedType, t.Type)}
 	}
 
 	for _, roleObj := range t.Delegations.Roles {
 		if !IsDelegation(roleObj.Name) || path.Dir(roleObj.Name) != roleName {
-			return ErrInvalidMeta{
-				Role: roleName, Msg: fmt.Sprintf("delegation role %s invalid", roleObj.Name)}
+			return ErrInvalidMetadata{
+				role: roleName, msg: fmt.Sprintf("delegation role %s invalid", roleObj.Name)}
 		}
-		if roleObj.Threshold < 1 {
-			return ErrInvalidMeta{
-				Role: roleName, Msg: fmt.Sprintf("invalid threshold for %s: %v ", roleObj.Name, roleObj.Threshold)}
-		}
-		for _, keyID := range roleObj.KeyIDs {
-			if _, ok := t.Delegations.Keys[keyID]; !ok {
-				return ErrInvalidMeta{
-					Role: roleName,
-					Msg:  fmt.Sprintf("%s role specifies key ID %s without corresponding key", roleObj.Name, keyID),
-				}
+		if err := isValidRootRoleStructure(roleObj.RootRole, t.Delegations.Keys); err != nil {
+			return ErrInvalidMetadata{
+				role: roleName,
+				msg:  fmt.Sprintf("role %s: %s", roleObj.Name, err.Error()),
 			}
 		}
 	}

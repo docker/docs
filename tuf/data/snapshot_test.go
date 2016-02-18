@@ -139,7 +139,7 @@ func TestSnapshotFromSignedValidatesMeta(t *testing.T) {
 		s, err := sn.ToSigned()
 		require.NoError(t, err)
 		_, err = SnapshotFromSigned(s)
-		require.IsType(t, ErrInvalidMeta{}, err)
+		require.IsType(t, ErrInvalidMetadata{}, err)
 
 		// add some extra metadata to make sure it's not failing because the metadata
 		// is empty
@@ -147,7 +147,7 @@ func TestSnapshotFromSignedValidatesMeta(t *testing.T) {
 		s, err = sn.ToSigned()
 		require.NoError(t, err)
 		_, err = SnapshotFromSigned(s)
-		require.IsType(t, ErrInvalidMeta{}, err)
+		require.IsType(t, ErrInvalidMetadata{}, err)
 	}
 }
 
@@ -160,7 +160,7 @@ func TestSnapshotFromSignedValidatesRoleType(t *testing.T) {
 		s, err := sn.ToSigned()
 		require.NoError(t, err)
 		_, err = SnapshotFromSigned(s)
-		require.IsType(t, ErrInvalidMeta{}, err)
+		require.IsType(t, ErrInvalidMetadata{}, err)
 	}
 
 	sn = validSnapshotTemplate()

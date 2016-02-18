@@ -171,36 +171,36 @@ func TestRootFromSignedValidatesRoleData(t *testing.T) {
 		// Invalid threshold
 		root.Signed.Roles[roleName].Threshold = 0
 		_, err = rootToSignedAndBack(t, root)
-		require.IsType(t, ErrInvalidMeta{}, err)
+		require.IsType(t, ErrInvalidMetadata{}, err)
 
 		// Keys that aren't in the list of keys
 		root.Signed.Roles[roleName].Threshold = 1
 		root.Signed.Roles[roleName].KeyIDs = []string{"key11"}
 		_, err = rootToSignedAndBack(t, root)
-		require.IsType(t, ErrInvalidMeta{}, err)
+		require.IsType(t, ErrInvalidMetadata{}, err)
 
 		// role is nil
 		root.Signed.Roles[roleName] = nil
 		_, err = rootToSignedAndBack(t, root)
-		require.IsType(t, ErrInvalidMeta{}, err)
+		require.IsType(t, ErrInvalidMetadata{}, err)
 
 		// too few roles
 		delete(root.Signed.Roles, roleName)
 		_, err = rootToSignedAndBack(t, root)
-		require.IsType(t, ErrInvalidMeta{}, err)
+		require.IsType(t, ErrInvalidMetadata{}, err)
 
 		// add an extra role that doesn't belong, so that the number of roles
 		// is correct a required one is still missing
 		root.Signed.Roles["extraneous"] = &RootRole{KeyIDs: []string{"key3"}, Threshold: 1}
 		_, err = rootToSignedAndBack(t, root)
-		require.IsType(t, ErrInvalidMeta{}, err)
+		require.IsType(t, ErrInvalidMetadata{}, err)
 	}
 
 	// Add an extra role without messing with the others
 	root := validRootTemplate()
 	root.Signed.Roles["extraneous"] = &RootRole{KeyIDs: []string{"key3"}, Threshold: 1}
 	_, err = rootToSignedAndBack(t, root)
-	require.IsType(t, ErrInvalidMeta{}, err)
+	require.IsType(t, ErrInvalidMetadata{}, err)
 }
 
 // The type must be "Root"
@@ -210,7 +210,7 @@ func TestRootFromSignedValidatesRoleType(t *testing.T) {
 	for _, invalid := range []string{"Root ", CanonicalSnapshotRole, "rootroot", "RoOt", "root"} {
 		root.Signed.Type = invalid
 		_, err := rootToSignedAndBack(t, root)
-		require.IsType(t, ErrInvalidMeta{}, err)
+		require.IsType(t, ErrInvalidMetadata{}, err)
 	}
 
 	root.Signed.Type = "Root"

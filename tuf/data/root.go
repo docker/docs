@@ -30,33 +30,25 @@ type Root struct {
 func isValidRootStructure(r Root) error {
 	expectedType := TUFTypes[CanonicalRootRole]
 	if r.Type != expectedType {
-		return ErrInvalidMeta{
-			Role: CanonicalRootRole, Msg: fmt.Sprintf("expected type %s, not %s", expectedType, r.Type)}
+		return ErrInvalidMetadata{
+			role: CanonicalRootRole, msg: fmt.Sprintf("expected type %s, not %s", expectedType, r.Type)}
 	}
 	if len(r.Roles) < 4 {
-		return ErrInvalidMeta{Role: CanonicalRootRole, Msg: "does not have all required roles"}
+		return ErrInvalidMetadata{role: CanonicalRootRole, msg: "does not have all required roles"}
 	} else if len(r.Roles) > 4 {
-		return ErrInvalidMeta{Role: CanonicalRootRole, Msg: "specifies too many roles"}
+		return ErrInvalidMetadata{role: CanonicalRootRole, msg: "specifies too many roles"}
 	}
 
 	for _, roleName := range BaseRoles {
 		roleObj, ok := r.Roles[roleName]
 		if !ok || roleObj == nil {
-			return ErrInvalidMeta{
-				Role: CanonicalRootRole, Msg: fmt.Sprintf("missing %s role specification", roleName)}
+			return ErrInvalidMetadata{
+				role: CanonicalRootRole, msg: fmt.Sprintf("missing %s role specification", roleName)}
 		}
-		if roleObj.Threshold < 1 {
-			return ErrInvalidMeta{
-				Role: CanonicalRootRole,
-				Msg:  fmt.Sprintf("invalid threshold for %s: %v", roleName, roleObj.Threshold),
-			}
-		}
-		for _, keyID := range roleObj.KeyIDs {
-			if _, ok := r.Keys[keyID]; !ok {
-				return ErrInvalidMeta{
-					Role: CanonicalRootRole,
-					Msg:  fmt.Sprintf("%s role specifies key ID %s without corresponding key", roleName, keyID),
-				}
+		if err := isValidRootRoleStructure(*roleObj, r.Keys); err != nil {
+			return ErrInvalidMetadata{
+				role: CanonicalRootRole,
+				msg:  fmt.Sprintf("role %s: %s", roleName, err.Error()),
 			}
 		}
 	}

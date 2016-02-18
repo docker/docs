@@ -151,7 +151,7 @@ func TestTargetsFromSignedValidatesDelegations(t *testing.T) {
 		require.NoError(t, err)
 		_, err = TargetsFromSigned(s, roleName)
 		require.Error(t, err)
-		require.IsType(t, ErrInvalidMeta{}, err)
+		require.IsType(t, ErrInvalidMetadata{}, err)
 
 		delgRole.Threshold = 1
 
@@ -161,7 +161,7 @@ func TestTargetsFromSignedValidatesDelegations(t *testing.T) {
 		require.NoError(t, err)
 		_, err = TargetsFromSigned(s, roleName)
 		require.Error(t, err)
-		require.IsType(t, ErrInvalidMeta{}, err)
+		require.IsType(t, ErrInvalidMetadata{}, err)
 
 		delgRole.KeyIDs = []string{"keys1"}
 
@@ -171,7 +171,7 @@ func TestTargetsFromSignedValidatesDelegations(t *testing.T) {
 		require.NoError(t, err)
 		_, err = TargetsFromSigned(s, roleName)
 		require.Error(t, err)
-		require.IsType(t, ErrInvalidMeta{}, err)
+		require.IsType(t, ErrInvalidMetadata{}, err)
 
 		// more than one level deep
 		delgRole.Name = path.Join(roleName, "x", "y")
@@ -179,7 +179,7 @@ func TestTargetsFromSignedValidatesDelegations(t *testing.T) {
 		require.NoError(t, err)
 		_, err = TargetsFromSigned(s, roleName)
 		require.Error(t, err)
-		require.IsType(t, ErrInvalidMeta{}, err)
+		require.IsType(t, ErrInvalidMetadata{}, err)
 
 		// not in delegation hierarchy
 		if IsDelegation(roleName) {
@@ -188,7 +188,7 @@ func TestTargetsFromSignedValidatesDelegations(t *testing.T) {
 			require.NoError(t, err)
 			_, err = TargetsFromSigned(s, roleName)
 			require.Error(t, err)
-			require.IsType(t, ErrInvalidMeta{}, err)
+			require.IsType(t, ErrInvalidMetadata{}, err)
 		}
 	}
 }
@@ -203,7 +203,7 @@ func TestTargetsFromSignedValidatesRoleType(t *testing.T) {
 			s, err := tg.ToSigned()
 			require.NoError(t, err)
 			_, err = TargetsFromSigned(s, roleName)
-			require.IsType(t, ErrInvalidMeta{}, err)
+			require.IsType(t, ErrInvalidMetadata{}, err)
 		}
 
 		tg = validTargetsTemplate()
