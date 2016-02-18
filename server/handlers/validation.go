@@ -14,7 +14,6 @@ import (
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/tuf"
 	"github.com/docker/notary/tuf/data"
-	"github.com/docker/notary/tuf/keys"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/utils"
 	"github.com/docker/notary/tuf/validation"
@@ -27,8 +26,7 @@ import (
 // created and added if snapshotting has been delegated to the
 // server
 func validateUpdate(cs signed.CryptoService, gun string, updates []storage.MetaUpdate, store storage.MetaStore) ([]storage.MetaUpdate, error) {
-	kdb := keys.NewDB()
-	repo := tuf.NewRepo(kdb, cs)
+	repo := tuf.NewRepo(cs)
 	rootRole := data.CanonicalRootRole
 	snapshotRole := data.CanonicalSnapshotRole
 
@@ -145,15 +143,16 @@ func loadAndValidateTargets(gun string, repo *tuf.Repo, roles map[string]storage
 
 	updatesToApply := make([]storage.MetaUpdate, 0, len(targetsRoles))
 	for _, role := range targetsRoles {
-		parentRole := path.Dir(role)
-
-		// don't load parent if current role is "targets" or if the parent has
-		// already been loaded
-		_, ok := repo.Targets[parentRole]
-		if role != data.CanonicalTargetsRole && !ok {
-			err := loadTargetsFromStore(gun, parentRole, repo, store)
-			if err != nil {
-				return nil, err
+		// don't load parent if current role is "targets",
+		// we must load all ancestor roles for delegations to validate the full parent chain
+		ancestorRole := role
+		for ancestorRole != data.CanonicalTargetsRole {
+			ancestorRole = path.Dir(ancestorRole)
+			if _, ok := repo.Targets[ancestorRole]; !ok {
+				err := loadTargetsFromStore(gun, ancestorRole, repo, store)
+				if err != nil {
+					return nil, err
+				}
 			}
 		}
 		var (
@@ -161,7 +160,7 @@ func loadAndValidateTargets(gun string, repo *tuf.Repo, roles map[string]storage
 			err error
 		)
 		if t, err = validateTargets(role, roles, repo); err != nil {
-			if _, ok := err.(tuf.ErrNotLoaded); ok {
+			if _, ok := err.(data.ErrInvalidRole); ok {
 				// role wasn't found in its parent. It has been removed
 				// or never existed. Drop this role from the update
 				// (by not adding it to updatesToApply)
@@ -194,7 +193,7 @@ func loadTargetsFromStore(gun, role string, repo *tuf.Repo, store storage.MetaSt
 }
 
 func generateSnapshot(gun string, repo *tuf.Repo, store storage.MetaStore) (*storage.MetaUpdate, error) {
-	role, err := repo.GetRoleWithKeys(data.CanonicalSnapshotRole)
+	role, err := repo.GetBaseRole(data.CanonicalSnapshotRole)
 	if err != nil {
 		return nil, validation.ErrBadRoot{Msg: "root did not include snapshot role"}
 	}
@@ -206,7 +205,7 @@ func generateSnapshot(gun string, repo *tuf.Repo, store storage.MetaStore) (*sto
 	foundK := data.NewPublicKey(algo, keyBytes)
 
 	validKey := false
-	for _, id := range role.KeyIDs {
+	for _, id := range role.ListKeyIDs() {
 		if id == foundK.ID() {
 			validKey = true
 			break
@@ -265,7 +264,7 @@ func validateSnapshot(role string, oldSnap *data.SignedSnapshot, snapUpdate stor
 	}
 	// version specifically gets validated when writing to store to
 	// better handle race conditions there.
-	snapshotRole, err := repo.GetRoleWithKeys(role)
+	snapshotRole, err := repo.GetBaseRole(role)
 	if err != nil {
 		return err
 	}
@@ -329,11 +328,22 @@ func validateTargets(role string, roles map[string]storage.MetaUpdate, repo *tuf
 	}
 	// version specifically gets validated when writing to store to
 	// better handle race conditions there.
-	targetsRole, err := repo.GetRoleWithKeys(role)
-	if err != nil {
-		return nil, err
+	var targetOrDelgRole data.BaseRole
+	if role == data.CanonicalTargetsRole {
+		targetOrDelgRole, err = repo.GetBaseRole(role)
+		if err != nil {
+			logrus.Debugf("no %s role loaded", role)
+			return nil, err
+		}
+	} else {
+		delgRole, err := repo.GetDelegationRole(role)
+		if err != nil {
+			logrus.Debugf("no %s delegation role loaded", role)
+			return nil, err
+		}
+		targetOrDelgRole = delgRole.BaseRole
 	}
-	if err := signed.Verify(s, targetsRole, 0); err != nil {
+	if err := signed.Verify(s, targetOrDelgRole, 0); err != nil {
 		return nil, err
 	}
 	t, err := data.TargetsFromSigned(s)

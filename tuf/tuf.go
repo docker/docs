@@ -13,7 +13,6 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary/tuf/data"
-	"github.com/docker/notary/tuf/keys"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/utils"
 )
@@ -40,7 +39,8 @@ func (e ErrLocalRootExpired) Error() string {
 }
 
 // ErrNotLoaded - attempted to access data that has not been loaded into
-// the repo
+// the repo. This means specifically that the relevant JSON file has not
+// been loaded.
 type ErrNotLoaded struct {
 	role string
 }
@@ -59,16 +59,15 @@ type Repo struct {
 	Targets       map[string]*data.SignedTargets
 	Snapshot      *data.SignedSnapshot
 	Timestamp     *data.SignedTimestamp
-	keysDB        *keys.KeyDB
 	cryptoService signed.CryptoService
 }
 
-// NewRepo initializes a Repo instance with a keysDB and a signer.
-// If the Repo will only be used for reading, the signer should be nil.
-func NewRepo(keysDB *keys.KeyDB, cryptoService signed.CryptoService) *Repo {
+// NewRepo initializes a Repo instance with a CryptoService.
+// If the Repo will only be used for reading, the CryptoService
+// can be nil.
+func NewRepo(cryptoService signed.CryptoService) *Repo {
 	repo := &Repo{
 		Targets:       make(map[string]*data.SignedTargets),
-		keysDB:        keysDB,
 		cryptoService: cryptoService,
 	}
 	return repo
@@ -83,21 +82,9 @@ func (tr *Repo) AddBaseKeys(role string, keys ...data.PublicKey) error {
 	for _, k := range keys {
 		// Store only the public portion
 		tr.Root.Signed.Keys[k.ID()] = k
-		tr.keysDB.AddKey(k)
 		tr.Root.Signed.Roles[role].KeyIDs = append(tr.Root.Signed.Roles[role].KeyIDs, k.ID())
 		ids = append(ids, k.ID())
 	}
-	r, err := data.NewRole(
-		role,
-		tr.Root.Signed.Roles[role].Threshold,
-		ids,
-		nil,
-		nil,
-	)
-	if err != nil {
-		return err
-	}
-	tr.keysDB.AddRole(r)
 	tr.Root.Dirty = true
 
 	// also, whichever role was switched out needs to be re-signed
@@ -121,8 +108,11 @@ func (tr *Repo) AddBaseKeys(role string, keys ...data.PublicKey) error {
 
 // ReplaceBaseKeys is used to replace all keys for the given role with the new keys
 func (tr *Repo) ReplaceBaseKeys(role string, keys ...data.PublicKey) error {
-	r := tr.keysDB.GetRole(role)
-	err := tr.RemoveBaseKeys(role, r.KeyIDs...)
+	r, err := tr.GetBaseRole(role)
+	if err != nil {
+		return err
+	}
+	err = tr.RemoveBaseKeys(role, r.ListKeyIDs()...)
 	if err != nil {
 		return err
 	}
@@ -173,23 +163,150 @@ func (tr *Repo) RemoveBaseKeys(role string, keyIDs ...string) error {
 	return nil
 }
 
+// GetBaseRole gets a base role from this repo's metadata
+func (tr *Repo) GetBaseRole(name string) (data.BaseRole, error) {
+	if !data.ValidRole(name) {
+		return data.BaseRole{}, data.ErrInvalidRole{Role: name, Reason: "invalid base role name"}
+	}
+	if tr.Root == nil {
+		return data.BaseRole{}, ErrNotLoaded{data.CanonicalRootRole}
+	}
+	roleData, ok := tr.Root.Signed.Roles[name]
+	if !ok {
+		return data.BaseRole{}, data.ErrInvalidRole{Role: name, Reason: "role not found in root file"}
+	}
+	// Get all public keys for the base role from TUF metadata
+	keyIDs := roleData.KeyIDs
+	pubKeys := make(map[string]data.PublicKey)
+	for _, keyID := range keyIDs {
+		pubKey, ok := tr.Root.Signed.Keys[keyID]
+		if !ok {
+			return data.BaseRole{}, data.ErrInvalidRole{
+				Role:   name,
+				Reason: fmt.Sprintf("key with ID %s was not found in root metadata", keyID),
+			}
+		}
+		pubKeys[keyID] = pubKey
+	}
+
+	return data.BaseRole{
+		Name:      name,
+		Keys:      pubKeys,
+		Threshold: roleData.Threshold,
+	}, nil
+}
+
+// GetDelegationRole gets a delegation role from this repo's metadata, walking from the targets role down to the delegation itself
+func (tr *Repo) GetDelegationRole(name string) (data.DelegationRole, error) {
+	if !data.IsDelegation(name) {
+		return data.DelegationRole{}, data.ErrInvalidRole{Role: name, Reason: "invalid delegation name"}
+	}
+	if tr.Root == nil {
+		return data.DelegationRole{}, ErrNotLoaded{data.CanonicalRootRole}
+	}
+	_, ok := tr.Root.Signed.Roles[data.CanonicalTargetsRole]
+	if !ok {
+		return data.DelegationRole{}, ErrNotLoaded{data.CanonicalTargetsRole}
+	}
+	// Traverse target metadata, down to delegation itself
+	// Get all public keys for the base role from TUF metadata
+	signedTargetData, ok := tr.Targets[data.CanonicalTargetsRole]
+	if !ok {
+		return data.DelegationRole{}, ErrNotLoaded{data.CanonicalTargetsRole}
+	}
+
+	// Start with top level roles in targets. Walk the chain of ancestors
+	// until finding the desired role, or we run out of targets files to search.
+	delegationRoles := signedTargetData.Signed.Delegations.Roles
+	var foundRole *data.Role
+	for len(delegationRoles) > 0 {
+		delgRole := delegationRoles[0]
+		delegationRoles = delegationRoles[1:]
+
+		// If we found the role, we can exit the loop
+		if delgRole.Name == name {
+			foundRole = delgRole
+			break
+		}
+
+		// If the current role is an ancestor of our desired role, add its children
+		// to the queue of roles to investigate.
+		if strings.HasPrefix(name, delgRole.Name+"/") {
+			if delegationMeta, ok := tr.Targets[delgRole.Name]; ok {
+				delegationRoles = append(delegationRoles, delegationMeta.Signed.Delegations.Roles...)
+			}
+		}
+	}
+
+	// We never found the delegation. In the context of this repo it is considered
+	// invalid. N.B. it may be that it existed at one point but an ancestor has since
+	// been modified/removed.
+	if foundRole == nil {
+		return data.DelegationRole{}, data.ErrInvalidRole{Role: name, Reason: "delegation does not exist"}
+	}
+
+	pubKeys := make(map[string]data.PublicKey)
+	parentRoleName := path.Dir(foundRole.Name)
+	parentData, ok := tr.Targets[parentRoleName]
+	if !ok {
+		// This should be impossible to reach given we inspected the parent to
+		// get foundRole
+		return data.DelegationRole{}, ErrNotLoaded{parentRoleName}
+	}
+	for _, keyID := range foundRole.KeyIDs {
+		pubKey, ok := parentData.Signed.Delegations.Keys[keyID]
+		if !ok {
+			return data.DelegationRole{}, data.ErrInvalidRole{
+				Role:   name,
+				Reason: fmt.Sprintf("key with ID %s was not found in %s's metadata", keyID, parentRoleName),
+			}
+		}
+		pubKeys[keyID] = pubKey
+	}
+
+	return data.DelegationRole{
+		BaseRole: data.BaseRole{
+			Name:      name,
+			Keys:      pubKeys,
+			Threshold: foundRole.Threshold,
+		},
+		Paths: foundRole.Paths,
+	}, nil
+}
+
 // GetAllLoadedRoles returns a list of all role entries loaded in this TUF repo, could be empty
 func (tr *Repo) GetAllLoadedRoles() []*data.Role {
-	return tr.keysDB.GetAllRoles()
+	var res []*data.Role
+	if tr.Root == nil {
+		// if root isn't loaded, we should consider we have no loaded roles because we can't
+		// trust any other state that might be present
+		return res
+	}
+	for name, rr := range tr.Root.Signed.Roles {
+		res = append(res, &data.Role{
+			RootRole: *rr,
+			Name:     name,
+		})
+	}
+	for _, delegate := range tr.Targets {
+		for _, r := range delegate.Signed.Delegations.Roles {
+			res = append(res, r)
+		}
+	}
+	return res
 }
 
 // GetDelegation finds the role entry representing the provided
 // role name along with its associated public keys, or ErrInvalidRole
 func (tr *Repo) GetDelegation(role string) (*data.Role, data.Keys, error) {
-	r := data.Role{Name: role}
-	if !r.IsDelegation() {
+	if !data.IsDelegation(role) {
 		return nil, nil, data.ErrInvalidRole{Role: role, Reason: "not a valid delegated role"}
 	}
 
 	parent := path.Dir(role)
 
 	// check the parent role
-	if parentRole := tr.keysDB.GetRole(parent); parentRole == nil {
+	if _, err := tr.GetDelegationRole(parent); parent != data.CanonicalTargetsRole && err != nil {
 		return nil, nil, data.ErrInvalidRole{Role: role, Reason: "parent role not found"}
 	}
 
@@ -216,7 +333,7 @@ func (tr *Repo) GetDelegation(role string) (*data.Role, data.Keys, error) {
 // provided, the IDs will be added to the role (if they do not exist
 // there already), and the keys will be added to the targets file.
 func (tr *Repo) UpdateDelegations(role *data.Role, keys []data.PublicKey) error {
-	if !role.IsDelegation() || !role.IsValid() {
+	if !data.IsDelegation(role.Name) {
 		return data.ErrInvalidRole{Role: role.Name, Reason: "not a valid delegated role"}
 	}
 	parent := path.Dir(role.Name)
@@ -240,7 +357,6 @@ func (tr *Repo) UpdateDelegations(role *data.Role, keys []data.PublicKey) error 
 			role.KeyIDs = append(role.KeyIDs, k.ID())
 		}
 		p.Signed.Delegations.Keys[k.ID()] = k
-		tr.keysDB.AddKey(k)
 	}
 
 	// if the role has fewer keys than the threshold, it
@@ -264,7 +380,6 @@ func (tr *Repo) UpdateDelegations(role *data.Role, keys []data.PublicKey) error 
 	// When we add a delegation, it may only be signable by a key we don't have
 	// (hence we are delegating signing).
 
-	tr.keysDB.AddRole(role)
 	utils.RemoveUnusedKeys(p)
 
 	return nil
@@ -274,7 +389,7 @@ func (tr *Repo) UpdateDelegations(role *data.Role, keys []data.PublicKey) error 
 // targets object. It also deletes the delegation from the snapshot.
 // DeleteDelegation will only make use of the role Name field.
 func (tr *Repo) DeleteDelegation(role data.Role) error {
-	if !role.IsDelegation() {
+	if !data.IsDelegation(role.Name) {
 		return data.ErrInvalidRole{Role: role.Name, Reason: "not a valid delegated role"}
 	}
 	// the role variable must not be used past this assignment for safety
@@ -316,53 +431,32 @@ func (tr *Repo) DeleteDelegation(role data.Role) error {
 	return nil
 }
 
-// InitRepo creates the base files for a repo. It inspects data.BaseRoles and
-// data.ValidTypes to determine what the role names and filename should be. It
-// also relies on the keysDB having already been populated with the keys and
-// roles.
-func (tr *Repo) InitRepo(consistent bool) error {
-	if err := tr.InitRoot(consistent); err != nil {
-		return err
-	}
-	if _, err := tr.InitTargets(data.CanonicalTargetsRole); err != nil {
-		return err
-	}
-	if err := tr.InitSnapshot(); err != nil {
-		return err
-	}
-	return tr.InitTimestamp()
-}
-
-// InitRoot initializes an empty root file with the 4 core roles based
-// on the current content of th ekey db
-func (tr *Repo) InitRoot(consistent bool) error {
+// InitRoot initializes an empty root file with the 4 core roles passed to the
+// method, and the consistent flag.
+func (tr *Repo) InitRoot(root, timestamp, snapshot, targets data.BaseRole, consistent bool) error {
 	rootRoles := make(map[string]*data.RootRole)
 	rootKeys := make(map[string]data.PublicKey)
-	for _, r := range data.BaseRoles {
-		role := tr.keysDB.GetRole(r)
-		if role == nil {
-			return data.ErrInvalidRole{Role: data.CanonicalRootRole, Reason: "root role not initialized in key database"}
+
+	for _, r := range []data.BaseRole{root, timestamp, snapshot, targets} {
+		rootRoles[r.Name] = &data.RootRole{
+			Threshold: r.Threshold,
+			KeyIDs:    r.ListKeyIDs(),
 		}
-		rootRoles[r] = &role.RootRole
-		for _, kid := range role.KeyIDs {
-			// don't need to check if GetKey returns nil, Key presence was
-			// checked by KeyDB when role was added.
-			key := tr.keysDB.GetKey(kid)
-			rootKeys[kid] = key
+		for kid, k := range r.Keys {
+			rootKeys[kid] = k
 		}
 	}
-	root, err := data.NewRoot(rootKeys, rootRoles, consistent)
+	r, err := data.NewRoot(rootKeys, rootRoles, consistent)
 	if err != nil {
 		return err
 	}
-	tr.Root = root
+	tr.Root = r
 	return nil
 }
 
 // InitTargets initializes an empty targets, and returns the new empty target
 func (tr *Repo) InitTargets(role string) (*data.SignedTargets, error) {
-	r := data.Role{Name: role}
-	if !r.IsDelegation() && role != data.CanonicalTargetsRole {
+	if !data.IsDelegation(role) && role != data.CanonicalTargetsRole {
 		return nil, data.ErrInvalidRole{
 			Role:   role,
 			Reason: fmt.Sprintf("role is not a valid targets role name: %s", role),
@@ -413,31 +507,8 @@ func (tr *Repo) InitTimestamp() error {
 	return nil
 }
 
-// SetRoot parses the Signed object into a SignedRoot object, sets
-// the keys and roles in the KeyDB, and sets the Repo.Root field
-// to the SignedRoot object.
+// SetRoot sets the Repo.Root field to the SignedRoot object.
 func (tr *Repo) SetRoot(s *data.SignedRoot) error {
-	for _, key := range s.Signed.Keys {
-		logrus.Debug("Adding key ", key.ID())
-		tr.keysDB.AddKey(key)
-	}
-	for roleName, role := range s.Signed.Roles {
-		logrus.Debugf("Adding role %s with keys %s", roleName, strings.Join(role.KeyIDs, ","))
-		baseRole, err := data.NewRole(
-			roleName,
-			role.Threshold,
-			role.KeyIDs,
-			nil,
-			nil,
-		)
-		if err != nil {
-			return err
-		}
-		err = tr.keysDB.AddRole(baseRole)
-		if err != nil {
-			return err
-		}
-	}
 	tr.Root = s
 	return nil
 }
@@ -456,16 +527,9 @@ func (tr *Repo) SetSnapshot(s *data.SignedSnapshot) error {
 	return nil
 }
 
-// SetTargets parses the Signed object into a SignedTargets object,
-// reads the delegated roles and keys into the KeyDB, and sets the
-// SignedTargets object agaist the role in the Repo.Targets map.
+// SetTargets sets the SignedTargets object agaist the role in the
+// Repo.Targets map.
 func (tr *Repo) SetTargets(role string, s *data.SignedTargets) error {
-	for _, k := range s.Signed.Delegations.Keys {
-		tr.keysDB.AddKey(k)
-	}
-	for _, r := range s.Signed.Delegations.Roles {
-		tr.keysDB.AddRole(r)
-	}
 	tr.Targets[role] = s
 	return nil
 }
@@ -492,7 +556,7 @@ func (tr Repo) TargetDelegations(role, path, pathHex string) []*data.Role {
 	var roles []*data.Role
 	if t, ok := tr.Targets[role]; ok {
 		for _, r := range t.Signed.Delegations.Roles {
-			if r.CheckPrefixes(pathHex) || r.CheckPaths(path) {
+			if r.CheckPaths(path) {
 				roles = append(roles, r)
 			}
 		}
@@ -534,16 +598,28 @@ func (tr Repo) FindTarget(path string) *data.FileMeta {
 // case of multiple signers for a role.  It returns an error if the role doesn't
 // exist or if there are no signing keys.
 func (tr *Repo) VerifyCanSign(roleName string) error {
-	role := tr.keysDB.GetRole(roleName)
-	if role == nil {
+	var (
+		role data.BaseRole
+		err  error
+	)
+	// we only need the BaseRole part of a delegation because we're just
+	// checking KeyIDs
+	if data.IsDelegation(roleName) {
+		r, err := tr.GetDelegationRole(roleName)
+		if err != nil {
+			return err
+		}
+		role = r.BaseRole
+	} else {
+		role, err = tr.GetBaseRole(roleName)
+	}
+	if err != nil {
 		return data.ErrInvalidRole{Role: roleName, Reason: "does not exist"}
 	}
 
-	for _, keyID := range role.KeyIDs {
-		k := tr.keysDB.GetKey(keyID)
-		canonicalID, err := utils.CanonicalKeyID(k)
+	for keyID, k := range role.Keys {
 		check := []string{keyID}
-		if err == nil {
+		if canonicalID, err := utils.CanonicalKeyID(k); err == nil {
 			check = append(check, canonicalID)
 		}
 		for _, id := range check {
@@ -553,7 +629,7 @@ func (tr *Repo) VerifyCanSign(roleName string) error {
 			}
 		}
 	}
-	return signed.ErrNoKeys{KeyIDs: role.KeyIDs}
+	return signed.ErrNoKeys{KeyIDs: role.ListKeyIDs()}
 }
 
 // AddTargets will attempt to add the given targets specifically to
@@ -576,14 +652,19 @@ func (tr *Repo) AddTargets(role string, targets data.Files) (data.Files, error) 
 		}
 	}
 
-	// VerifyCanSign already makes sure this is not nil
-	r := tr.keysDB.GetRole(role)
+	var r data.DelegationRole
+	if role != data.CanonicalTargetsRole {
+		// we only call r.CheckPaths if the role is not "targets"
+		// so r being nil is fine in the case role == "targets"
+		r, err = tr.GetDelegationRole(role)
+		if err != nil {
+			return nil, err
+		}
+	}
 
 	invalid := make(data.Files)
 	for path, target := range targets {
-		pathDigest := sha256.Sum256([]byte(path))
-		pathHex := hex.EncodeToString(pathDigest[:])
-		if role == data.CanonicalTargetsRole || (r.CheckPaths(path) || r.CheckPrefixes(pathHex)) {
+		if role == data.CanonicalTargetsRole || r.CheckPaths(path) {
 			t.Signed.Targets[path] = target
 		} else {
 			invalid[path] = target
@@ -649,12 +730,15 @@ func (tr *Repo) SignRoot(expires time.Time) (*data.Signed, error) {
 	logrus.Debug("signing root...")
 	tr.Root.Signed.Expires = expires
 	tr.Root.Signed.Version++
-	root := tr.keysDB.GetRole(data.CanonicalRootRole)
+	root, err := tr.GetBaseRole(data.CanonicalRootRole)
+	if err != nil {
+		return nil, err
+	}
 	signed, err := tr.Root.ToSigned()
 	if err != nil {
 		return nil, err
 	}
-	signed, err = tr.sign(signed, *root)
+	signed, err = tr.sign(signed, root)
 	if err != nil {
 		return nil, err
 	}
@@ -678,8 +762,22 @@ func (tr *Repo) SignTargets(role string, expires time.Time) (*data.Signed, error
 		logrus.Debug("errored getting targets data.Signed object")
 		return nil, err
 	}
-	targets := tr.keysDB.GetRole(role)
-	signed, err = tr.sign(signed, *targets)
+
+	var targets data.BaseRole
+	if role == data.CanonicalTargetsRole {
+		targets, err = tr.GetBaseRole(role)
+	} else {
+		tr, err := tr.GetDelegationRole(role)
+		if err != nil {
+			return nil, err
+		}
+		targets = tr.BaseRole
+	}
+	if err != nil {
+		return nil, err
+	}
+
+	signed, err = tr.sign(signed, targets)
 	if err != nil {
 		logrus.Debug("errored signing ", role)
 		return nil, err
@@ -717,8 +815,11 @@ func (tr *Repo) SignSnapshot(expires time.Time) (*data.Signed, error) {
 	if err != nil {
 		return nil, err
 	}
-	snapshot := tr.keysDB.GetRole(data.CanonicalSnapshotRole)
-	signed, err = tr.sign(signed, *snapshot)
+	snapshot, err := tr.GetBaseRole(data.CanonicalSnapshotRole)
+	if err != nil {
+		return nil, err
+	}
+	signed, err = tr.sign(signed, snapshot)
 	if err != nil {
 		return nil, err
 	}
@@ -743,8 +844,11 @@ func (tr *Repo) SignTimestamp(expires time.Time) (*data.Signed, error) {
 	if err != nil {
 		return nil, err
 	}
-	timestamp := tr.keysDB.GetRole(data.CanonicalTimestampRole)
-	signed, err = tr.sign(signed, *timestamp)
+	timestamp, err := tr.GetBaseRole(data.CanonicalTimestampRole)
+	if err != nil {
+		return nil, err
+	}
+	signed, err = tr.sign(signed, timestamp)
 	if err != nil {
 		return nil, err
 	}
@@ -753,37 +857,14 @@ func (tr *Repo) SignTimestamp(expires time.Time) (*data.Signed, error) {
 	return signed, nil
 }
 
-func (tr Repo) sign(signedData *data.Signed, role data.Role) (*data.Signed, error) {
-	ks := make([]data.PublicKey, 0, len(role.KeyIDs))
-	for _, kid := range role.KeyIDs {
-		k := tr.keysDB.GetKey(kid)
-		if k == nil {
-			continue
-		}
-		ks = append(ks, k)
-	}
+func (tr Repo) sign(signedData *data.Signed, role data.BaseRole) (*data.Signed, error) {
+	ks := role.ListKeys()
 	if len(ks) < 1 {
-		return nil, keys.ErrInvalidKey
+		return nil, signed.ErrNoKeys{}
 	}
 	err := signed.Sign(tr.cryptoService, signedData, ks...)
 	if err != nil {
 		return nil, err
 	}
 	return signedData, nil
-}
-
-// GetRoleWithKeys returns a RoleWithKeys object, given a role name.
-func (tr Repo) GetRoleWithKeys(role string) (*data.RoleWithKeys, error) {
-	roleData := tr.keysDB.GetRole(role)
-	if roleData == nil {
-		return nil, ErrNotLoaded{role: role}
-	}
-	keysInRole := make(data.Keys)
-	for _, keyID := range roleData.KeyIDs {
-		k := tr.keysDB.GetKey(keyID)
-		if k != nil {
-			keysInRole[keyID] = k
-		}
-	}
-	return &data.RoleWithKeys{Role: *roleData, Keys: keysInRole}, nil
 }

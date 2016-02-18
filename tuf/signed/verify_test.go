@@ -15,15 +15,8 @@ func TestRoleNoKeys(t *testing.T) {
 	cs := NewEd25519()
 	k, err := cs.Create("root", data.ED25519Key)
 	assert.NoError(t, err)
-	r, err := data.NewRole(
-		"root",
-		1,
-		[]string{},
-		nil,
-		nil,
-	)
 	assert.NoError(t, err)
-	roleWithKeys := &data.RoleWithKeys{Role: *r, Keys: data.Keys{k.ID(): k}}
+	roleWithKeys := data.BaseRole{Name: "root", Keys: data.Keys{}, Threshold: 1}
 
 	meta := &data.SignedCommon{Type: "Root", Version: 1, Expires: data.DefaultExpires("root")}
 
@@ -39,15 +32,8 @@ func TestNotEnoughSigs(t *testing.T) {
 	cs := NewEd25519()
 	k, err := cs.Create("root", data.ED25519Key)
 	assert.NoError(t, err)
-	r, err := data.NewRole(
-		"root",
-		2,
-		[]string{k.ID()},
-		nil,
-		nil,
-	)
 	assert.NoError(t, err)
-	roleWithKeys := &data.RoleWithKeys{Role: *r, Keys: data.Keys{k.ID(): k}}
+	roleWithKeys := data.BaseRole{Name: "root", Keys: data.Keys{k.ID(): k}, Threshold: 2}
 
 	meta := &data.SignedCommon{Type: "Root", Version: 1, Expires: data.DefaultExpires("root")}
 
@@ -65,15 +51,7 @@ func TestMoreThanEnoughSigs(t *testing.T) {
 	assert.NoError(t, err)
 	k2, err := cs.Create("root", data.ED25519Key)
 	assert.NoError(t, err)
-	r, err := data.NewRole(
-		"root",
-		1,
-		[]string{k1.ID(), k2.ID()},
-		nil,
-		nil,
-	)
-	assert.NoError(t, err)
-	roleWithKeys := &data.RoleWithKeys{Role: *r, Keys: data.Keys{k1.ID(): k1, k2.ID(): k2}}
+	roleWithKeys := data.BaseRole{Name: "root", Keys: data.Keys{k1.ID(): k1, k2.ID(): k2}, Threshold: 1}
 
 	meta := &data.SignedCommon{Type: "Root", Version: 1, Expires: data.DefaultExpires("root")}
 
@@ -90,15 +68,7 @@ func TestDuplicateSigs(t *testing.T) {
 	cs := NewEd25519()
 	k, err := cs.Create("root", data.ED25519Key)
 	assert.NoError(t, err)
-	r, err := data.NewRole(
-		"root",
-		2,
-		[]string{k.ID()},
-		nil,
-		nil,
-	)
-	assert.NoError(t, err)
-	roleWithKeys := &data.RoleWithKeys{Role: *r, Keys: data.Keys{k.ID(): k}}
+	roleWithKeys := data.BaseRole{Name: "root", Keys: data.Keys{k.ID(): k}, Threshold: 2}
 
 	meta := &data.SignedCommon{Type: "Root", Version: 1, Expires: data.DefaultExpires("root")}
 
@@ -117,15 +87,7 @@ func TestUnknownKeyBelowThreshold(t *testing.T) {
 	assert.NoError(t, err)
 	unknown, err := cs.Create("root", data.ED25519Key)
 	assert.NoError(t, err)
-	r, err := data.NewRole(
-		"root",
-		2,
-		[]string{k.ID()},
-		nil,
-		nil,
-	)
-	assert.NoError(t, err)
-	roleWithKeys := &data.RoleWithKeys{Role: *r, Keys: data.Keys{k.ID(): k, unknown.ID(): unknown}}
+	roleWithKeys := data.BaseRole{Name: "root", Keys: data.Keys{k.ID(): k}, Threshold: 2}
 
 	meta := &data.SignedCommon{Type: "Root", Version: 1, Expires: data.DefaultExpires("root")}
 
@@ -142,7 +104,7 @@ func Test(t *testing.T) {
 	cryptoService := NewEd25519()
 	type test struct {
 		name     string
-		roleData *data.RoleWithKeys
+		roleData data.BaseRole
 		s        *data.Signed
 		ver      int
 		exp      *time.Time
@@ -201,15 +163,7 @@ func Test(t *testing.T) {
 		}
 		if run.s == nil {
 			k, _ := cryptoService.Create("root", data.ED25519Key)
-			r, err := data.NewRole(
-				"root",
-				1,
-				[]string{k.ID()},
-				nil,
-				nil,
-			)
-			assert.NoError(t, err)
-			run.roleData = &data.RoleWithKeys{Role: *r, Keys: data.Keys{k.ID(): k}}
+			run.roleData = data.BaseRole{Name: "root", Keys: data.Keys{k.ID(): k}, Threshold: 1}
 			meta := &data.SignedCommon{Type: run.typ, Version: run.ver, Expires: *run.exp}
 
 			b, err := json.MarshalCanonical(meta)
