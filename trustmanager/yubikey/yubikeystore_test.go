@@ -339,10 +339,10 @@ func TestYubiImportNewKey(t *testing.T) {
 	privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
 	assert.NoError(t, err)
 
-	pemBytes, err := trustmanager.EncryptPrivateKey(privKey, "root", "passphrase")
+	pemBytes, err := trustmanager.EncryptPrivateKey(privKey, data.CanonicalRootRole, "passphrase")
 	assert.NoError(t, err)
 
-	err = store.ImportKey(pemBytes, "root")
+	err = store.ImportKey(pemBytes, data.CanonicalRootRole, "")
 	assert.NoError(t, err)
 
 	// key is not in backup store
@@ -388,9 +388,9 @@ func TestYubiImportExistingKey(t *testing.T) {
 	assert.NotNil(t, k)
 
 	// import the key, which should have already been added to the yubikey
-	pemBytes, err := trustmanager.EncryptPrivateKey(key, "root", "passphrase")
+	pemBytes, err := trustmanager.EncryptPrivateKey(key, data.CanonicalRootRole, "passphrase")
 	assert.NoError(t, err)
-	err = newStore.ImportKey(pemBytes, "root")
+	err = newStore.ImportKey(pemBytes, data.CanonicalRootRole, "")
 	assert.NoError(t, err)
 
 	// key is not in backup store
@@ -418,10 +418,10 @@ func TestYubiImportNonRootKey(t *testing.T) {
 	privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
 	assert.NoError(t, err)
 
-	pemBytes, err := trustmanager.EncryptPrivateKey(privKey, "root", "passphrase")
+	pemBytes, err := trustmanager.EncryptPrivateKey(privKey, data.CanonicalRootRole, "passphrase")
 	assert.NoError(t, err)
 
-	err = store.ImportKey(pemBytes, privKey.ID())
+	err = store.ImportKey(pemBytes, data.CanonicalTargetsRole, "")
 	assert.Error(t, err)
 
 	// key is not in backup store
@@ -690,10 +690,10 @@ func TestYubiImportKeyCleansUpOnError(t *testing.T) {
 	privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
 	assert.NoError(t, err)
 
-	pemBytes, err := trustmanager.EncryptPrivateKey(privKey, "root", "passphrase")
+	pemBytes, err := trustmanager.EncryptPrivateKey(privKey, data.CanonicalRootRole, "passphrase")
 	assert.NoError(t, err)
 
-	var _importkey = func() error { return store.ImportKey(pemBytes, "root") }
+	var _importkey = func() error { return store.ImportKey(pemBytes, data.CanonicalRootRole, "") }
 
 	testYubiFunctionCleansUpOnLoginError(t, store, _importkey)
 	// all the PKCS11 functions ImportKey depends on that aren't the login/logout

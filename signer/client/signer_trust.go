@@ -202,9 +202,3 @@ func (trust *NotarySigner) CheckHealth(timeout time.Duration) error {
 
 	return err
 }
-
-// ImportRootKey satisfies the CryptoService interface. It should not be implemented
-// for a NotarySigner.
-func (trust *NotarySigner) ImportRootKey(r io.Reader) error {
-	return errors.New("Importing a root key to NotarySigner is not supported")
-}

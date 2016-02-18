@@ -70,10 +70,35 @@ func generateKeyInfoMap(s LimitedFileStore) map[string]KeyInfo {
 			logrus.Error(err)
 			continue
 		}
-		keyID, keyInfo := getImportedKeyInfo(d, keyPath)
+		keyID, keyInfo := KeyInfoFromPEM(d, keyPath)
 		keyInfoMap[keyID] = keyInfo
 	}
 	return keyInfoMap
+}
+
+// Attempts to infer the keyID, role, and GUN from the specified key path.
+// Note that non-root roles can only be inferred if this is a legacy style filename: KEYID_ROLE.key
+func inferKeyInfoFromKeyPath(keyPath string) (string, string, string) {
+	var keyID, role, gun string
+	keyID = filepath.Base(keyPath)
+	underscoreIndex := strings.LastIndex(keyID, "_")
+
+	// This is the legacy KEYID_ROLE filename
+	// The keyID is the first part of the keyname
+	// The keyRole is the second part of the keyname
+	// in a key named abcde_root, abcde is the keyID and root is the KeyAlias
+	if underscoreIndex != -1 {
+		role = keyID[underscoreIndex+1:]
+		keyID = keyID[:underscoreIndex]
+	}
+
+	if filepath.HasPrefix(keyPath, notary.RootKeysSubdir+"/") {
+		return keyID, data.CanonicalRootRole, ""
+	}
+
+	keyPath = strings.TrimPrefix(keyPath, notary.NonRootKeysSubdir+"/")
+	gun = getGunFromFullID(keyPath)
+	return keyID, role, gun
 }
 
 func getGunFromFullID(fullKeyID string) string {
@@ -182,14 +207,16 @@ func (s *KeyFileStore) ExportKey(name string) ([]byte, error) {
 }
 
 // ImportKey imports the private key in the encrypted bytes into the keystore
-// with the given key ID and alias.
-func (s *KeyFileStore) ImportKey(pemBytes []byte, alias string) error {
-	err := importKey(s, s.Retriever, s.cachedKeys, alias, pemBytes)
+// with the given key ID, role, and gun.
+func (s *KeyFileStore) ImportKey(pemBytes []byte, role, gun string) error {
+	if data.IsDelegation(role) {
+		gun = ""
+	}
+	keyID, err := importKey(s, s.Retriever, s.cachedKeys, role, gun, pemBytes)
 	if err != nil {
 		return err
 	}
-	keyID, keyInfo := getImportedKeyInfo(pemBytes, alias)
-	s.keyInfoMap[keyID] = keyInfo
+	s.keyInfoMap[keyID] = KeyInfo{Role: role, Gun: gun}
 	return nil
 }
 
@@ -291,45 +318,28 @@ func (s *KeyMemoryStore) ExportKey(name string) ([]byte, error) {
 
 // ImportKey imports the private key in the encrypted bytes into the keystore
 // with the given key ID and alias.
-func (s *KeyMemoryStore) ImportKey(pemBytes []byte, alias string) error {
-	err := importKey(s, s.Retriever, s.cachedKeys, alias, pemBytes)
+func (s *KeyMemoryStore) ImportKey(pemBytes []byte, role, gun string) error {
+	if data.IsDelegation(role) {
+		gun = ""
+	}
+	keyID, err := importKey(s, s.Retriever, s.cachedKeys, role, gun, pemBytes)
 	if err != nil {
 		return err
 	}
-	keyID, keyInfo := getImportedKeyInfo(pemBytes, alias)
-	s.keyInfoMap[keyID] = keyInfo
+	s.keyInfoMap[keyID] = KeyInfo{Role: role, Gun: gun}
 	return nil
 }
 
-func getImportedKeyInfo(pemBytes []byte, filename string) (string, KeyInfo) {
-	var keyID, gun, role string
-	// Try to read the role and gun from the filepath and PEM headers
-	if filepath.HasPrefix(filename, notary.RootKeysSubdir+"/") {
-		role = data.CanonicalRootRole
-		gun = ""
-		filename = strings.TrimPrefix(filename, notary.RootKeysSubdir+"/")
-	} else {
-		filename = strings.TrimPrefix(filename, notary.NonRootKeysSubdir+"/")
-		gun = getGunFromFullID(filename)
-	}
-	keyIDFull := filepath.Base(filename)
-	underscoreIndex := strings.LastIndex(keyIDFull, "_")
-	if underscoreIndex == -1 {
+// KeyInfoFromPEM attempts to get a keyID and KeyInfo from the filename and PEM bytes of a key
+func KeyInfoFromPEM(pemBytes []byte, filename string) (string, KeyInfo) {
+	keyID, role, gun := inferKeyInfoFromKeyPath(filename)
+	if role == "" {
 		block, _ := pem.Decode(pemBytes)
 		if block != nil {
 			if keyRole, ok := block.Headers["role"]; ok {
 				role = keyRole
 			}
 		}
-		keyID = filepath.Base(keyIDFull)
-	} else {
-		// This is the legacy KEYID_ROLE filename
-		// The keyID is the first part of the keyname
-		// The keyRole is the second part of the keyname
-		// in a key named abcde_root, abcde is the keyID and root is the KeyAlias
-		legacyID := keyIDFull
-		keyID = legacyID[:underscoreIndex]
-		role = legacyID[underscoreIndex+1:]
 	}
 	return keyID, KeyInfo{Gun: gun, Role: role}
 }
@@ -521,20 +531,23 @@ func encryptAndAddKey(s LimitedFileStore, passwd string, cachedKeys map[string]*
 	return s.Add(filepath.Join(getSubdir(role), name), pemPrivKey)
 }
 
-func importKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, cachedKeys map[string]*cachedKey, alias string, pemBytes []byte) error {
-
-	if alias != data.CanonicalRootRole {
-		return s.Add(alias, pemBytes)
-	}
-
-	privKey, passphrase, err := GetPasswdDecryptBytes(
-		passphraseRetriever, pemBytes, "", "imported "+alias)
-
+func importKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, cachedKeys map[string]*cachedKey, role, gun string, pemBytes []byte) (string, error) {
+	// See if the key is encrypted. If its encrypted we'll fail to parse the private key on this first check
+	privKey, err := ParsePEMPrivateKey(pemBytes, "")
 	if err != nil {
-		return err
+		var password string
+		privKey, password, err = GetPasswdDecryptBytes(passphraseRetriever, pemBytes, "", "imported "+role)
+		if err != nil {
+			return "", err
+		}
+		if role == data.CanonicalRootRole {
+			return privKey.ID(), encryptAndAddKey(s, password, cachedKeys, privKey.ID(), role, privKey)
+		}
 	}
-
-	var name string
-	name = privKey.ID()
-	return encryptAndAddKey(s, passphrase, cachedKeys, name, alias, privKey)
+	pemBytesWithRole, err := KeyToPEM(privKey, role)
+	if err != nil {
+		return privKey.ID(), err
+	}
+	s.Add(filepath.Join(getSubdir(role), gun, privKey.ID()), pemBytesWithRole)
+	return privKey.ID(), nil
 }

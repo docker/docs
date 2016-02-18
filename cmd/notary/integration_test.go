@@ -803,7 +803,7 @@ func assertNumKeys(t *testing.T, tempDir string, numRoot, numSigning int,
 		_, err := os.Stat(filepath.Join(
 			tempDir, "private", "root_keys", rootKeyID+".key"))
 		// os.IsExist checks to see if the error is because a file already
-		// exist, and hence doesn't actually the right funciton to use here
+		// exists, and hence it isn't actually the right function to use here
 		assert.Equal(t, rootOnDisk, !os.IsNotExist(err))
 
 		// this function is declared is in the build-tagged setup files
@@ -945,7 +945,7 @@ func TestClientKeyBackupAndRestore(t *testing.T) {
 	assert.NoError(t, err)
 	// all keys should be there, including root because the root key was backed up to disk,
 	// and export just backs up all the keys on disk
-	assertNumKeys(t, dirs[1], 1, 4, true)
+	assertNumKeys(t, dirs[1], 1, 4, !rootOnHardware())
 
 	// can list and publish to both repos using restored keys
 	for _, gun := range []string{"gun1", "gun2"} {
