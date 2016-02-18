@@ -22,15 +22,17 @@ docker run --rm \
 ## Description
 
 Dumps out the public certificates for the UCP controller running on the local
-engine. Use the output of this command to populate local certificate trust
-stores as desired.
+engine. By default, this command dumps both the CA and certificate. You can use
+the output of this command to populate local certificate trust stores as
+desired.
 
 
 ## Options
 
-| Option                | Description                                                                  |
-|-----------------------|------------------------------------------------------------------------------|
-| `--debug`, `-D`       | Enable debug                                                                 |
-| `--jsonlog`           | Produce json formatted output for easier parsing                             |
-| `--interactive`, `-i` | Enable interactive mode.,You are prompted to enter all required information. |
-| `--swarm`             | Dump the Docker Swarm CA cert instead of the public cert.                    |
+| Option                | Description                                                                         |
+|-----------------------|-------------------------------------------------------------------------------------|
+| `--debug`, `-D`       | Enable debug                                                                        |
+| `--jsonlog`           | Produce json formatted output for easier parsing                                    |
+| `--interactive`, `-i` | Enable interactive mode.,You are prompted to enter all required information.        |
+| `--ca`                | Dump only the contents of the `ca.pem` file (default is to dump both ca and cert).  |
+| `--cluster`           | Dump the internal UCP Cluster Root CA and cert instead of the public server cert.   |

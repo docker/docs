@@ -8,27 +8,27 @@ weight="-100"
 +++
 <![end-metadata]-->
 
-<!--[metadata]>
-NOTICE:
-The current doc theme does not allow us to create a split menu: a menu whose label is both a link and a dropdown. Our theme redesign fixes this but it is in RFD, so earliest out is about March 2016. In the mean time
 
-* the overview.md pages to show up in the menu.
-* when a user clicks Overview, we will redirect go to https://docs.docker.com/ucp/
-* Later, after the redesign goes live, we will re-redirect in the unlikely event someone was able to book mark https://docs.docker.com/ucp/overview
-<![end-metadata]-->
+# UCP table of contents
 
-# UCP overview
+Universal Control Plane is a Docker native solution designed to provision and
+cluster Docker hosts and their resources. You can use UCP to deploy and manage
+Dockerized applications. UCP has full support for the Docker API. This feature
+means an easy deployment of applications from development to test to production
+&ndash; without code changes.
 
-* [Overview](overview.md)
+The UCP documentation includes the following topics:
+
+* [UCP Overview](index.md)
 * [Evaluation installation](evaluation-install.md)
 * [Plan a production installation](plan-production-install.md)
 * [Install UCP for production](production-install.md)
-* [Upgrade a production installation](production-upgrade.md)
-* [Manage, monitor, and troubleshoot UCP and its resources](manage/monitor-ucp.md)
-* [Commands reference](reference/index.md)
-* [Work with Docker Support](support.md)
-* [UCP Release Notes](release_notes.md)
-* [UCP Key/Value Store Backend](kv_store.md)
 * [Set up container networking with UCP](networking.md)
 * [Set up high availability](understand_ha.md)
 * [Deploy an application thru UCP](deploy-application.md)
+* [UCP Key/Value Store Backend](kv_store.md)
+* [Manage, monitor, and troubleshoot UCP and its resources](manage/monitor-ucp.md)
+* [Manage and authorize users](manage/monitor-manage-users.md)
+* [The ucp tool reference](reference/index.md)
+* [Work with Docker Support](support.md)
+* [UCP Release Notes](release_notes.md)

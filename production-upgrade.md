@@ -1,5 +1,6 @@
 <!--[metadata]>
 +++
+draft="true"
 title = "Upgrade production installation"
 description = "Upgrade production installation"
 keywords = ["tbd, tbd"]
