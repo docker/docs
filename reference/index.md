@@ -4,7 +4,7 @@ description = "Run UCP commands"
 [menu.main]
 identifier = "ucp_ref"
 parent = "mn_ucp"
-weight=110
+weight=90
 +++
 
 # ucp tool Reference

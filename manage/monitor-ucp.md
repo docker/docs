@@ -4,7 +4,7 @@ title = "Monitor and troubleshoot UCP"
 description = "Monitor your Docker Universal Control Plane installation, and learn how to troubleshoot it."
 keywords = ["Docker, UCP, troubleshoot"]
 [menu.main]
-parent="mn_ucp"
+parent="mn_manage_ucp"
 weight=-80
 +++
 <![end-metadata]-->
