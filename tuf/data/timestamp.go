@@ -2,6 +2,7 @@ package data
 
 import (
 	"bytes"
+	"crypto/sha256"
 	"fmt"
 	"time"
 
@@ -33,8 +34,12 @@ func isValidTimestampStructure(t Timestamp) error {
 			role: CanonicalTimestampRole, msg: fmt.Sprintf("expected type %s, not %s", expectedType, t.Type)}
 	}
 
-	if _, ok := t.Meta[CanonicalSnapshotRole]; !ok {
-		return ErrInvalidMetadata{role: CanonicalTimestampRole, msg: "missing snapshot checksum information"}
+	// Meta is a map of FileMeta, so if the role isn't in the map it returns
+	// an empty FileMeta, which has an empty map, and you can check on keys
+	// from an empty map.
+	if cs, ok := t.Meta[CanonicalSnapshotRole].Hashes["sha256"]; !ok || len(cs) != sha256.Size {
+		return ErrInvalidMetadata{
+			role: CanonicalTimestampRole, msg: "missing or invalid snapshot sha256 checksum information"}
 	}
 	return nil
 }
