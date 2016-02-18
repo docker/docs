@@ -789,62 +789,6 @@ func TestDownloadSnapshotChecksumNotFound(t *testing.T) {
 	assert.IsType(t, store.ErrMetaNotFound{}, err)
 }
 
-// TargetMeta returns the file metadata for a file path in the role subtree,
-// if it exists. It also returns the role in that subtree in which the target
-// was found. If the path doesn't exist in that role subtree, returns
-// nil and an empty string.
-func TestTargetMeta(t *testing.T) {
-	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
-	assert.NoError(t, err)
-	localStorage := store.NewMemoryStore(nil)
-	client := NewClient(repo, nil, localStorage)
-
-	delegations := []string{
-		"targets/level1",
-		"targets/level1/a",
-		"targets/level1/a/i",
-	}
-
-	k, err := cs.Create("", data.ED25519Key)
-	assert.NoError(t, err)
-
-	hash := sha256.Sum256([]byte{})
-	f := data.FileMeta{
-		Length: 1,
-		Hashes: map[string][]byte{
-			"sha256": hash[:],
-		},
-	}
-
-	for i, r := range delegations {
-		// create role
-		role, err := data.NewRole(r, 1, []string{k.ID()}, []string{""})
-		assert.NoError(t, err)
-
-		// add role to repo
-		repo.UpdateDelegations(role, []data.PublicKey{k})
-		repo.InitTargets(r)
-
-		// add a target to the role
-		_, err = repo.AddTargets(r, data.Files{strconv.Itoa(i): f})
-		assert.NoError(t, err)
-	}
-
-	// returns the right level
-	fileMeta, role := client.TargetMeta("targets", "1")
-	assert.Equal(t, &f, fileMeta)
-	assert.Equal(t, "targets/level1/a", role)
-
-	// looks only in subtree
-	fileMeta, role = client.TargetMeta("targets/level1/a", "0")
-	assert.Nil(t, fileMeta)
-	assert.Equal(t, "", role)
-
-	fileMeta, role = client.TargetMeta("targets/level1/a", "2")
-	assert.Equal(t, &f, fileMeta)
-	assert.Equal(t, "targets/level1/a/i", role)
-}
-
 // If there is no local cache and also no remote timestamp, downloading the timestamp
 // fails with a store.ErrMetaNotFound
 func TestDownloadTimestampNoTimestamps(t *testing.T) {

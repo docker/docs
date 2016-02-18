@@ -390,10 +390,23 @@ func (r *NotaryRepository) ListTargets(roles ...string) ([]*TargetWithRole, erro
 	}
 	targets := make(map[string]*TargetWithRole)
 	for _, role := range roles {
-		// we don't need to do anything special with removing role from
-		// roles because listSubtree always processes role and only excludes
-		// descendant delegations that appear in roles.
-		r.listSubtree(targets, role, roles...)
+		// Define a visitor function to populate the targets map in priority order
+		listVisitorFunc := func(tgt *data.SignedTargets, roleName string) error {
+			if tgt == nil {
+				return tuf.ErrContinueWalk{}
+			}
+			// We found targets so we should try to add them to our targets map
+			for targetName, targetMeta := range tgt.Signed.Targets {
+				// Follow the priority by not overriding previously set targets
+				if _, ok := targets[targetName]; ok {
+					continue
+				}
+				targets[targetName] =
+					&TargetWithRole{Target: Target{Name: targetName, Hashes: targetMeta.Hashes, Length: targetMeta.Length}, Role: roleName}
+			}
+			return tuf.ErrContinueWalk{}
+		}
+		r.tufRepo.WalkTargets("", role, listVisitorFunc)
 	}
 
 	var targetList []*TargetWithRole
@@ -404,34 +417,6 @@ func (r *NotaryRepository) ListTargets(roles ...string) ([]*TargetWithRole, erro
 	return targetList, nil
 }
 
-func (r *NotaryRepository) listSubtree(targets map[string]*TargetWithRole, role string, exclude ...string) {
-	excl := make(map[string]bool)
-	for _, r := range exclude {
-		excl[r] = true
-	}
-	roles := []string{role}
-	for len(roles) > 0 {
-		role = roles[0]
-		roles = roles[1:]
-		tgts, ok := r.tufRepo.Targets[role]
-		if !ok {
-			// not every role has to exist
-			continue
-		}
-		for name, meta := range tgts.Signed.Targets {
-			if _, ok := targets[name]; !ok {
-				targets[name] = &TargetWithRole{
-					Target: Target{Name: name, Hashes: meta.Hashes, Length: meta.Length}, Role: role}
-			}
-		}
-		for _, d := range tgts.Signed.Delegations.Roles {
-			if !excl[d.Name] {
-				roles = append(roles, d.Name)
-			}
-		}
-	}
-}
-
 // GetTargetByName returns a target given a name. If no roles are passed
 // it uses the targets role and does a search of the entire delegation
 // graph, finding the first entry in a breadth first search of the delegations.
@@ -440,7 +425,7 @@ func (r *NotaryRepository) listSubtree(targets map[string]*TargetWithRole, role 
 // will be returned
 // See the IMPORTANT section on ListTargets above. Those roles also apply here.
 func (r *NotaryRepository) GetTargetByName(name string, roles ...string) (*TargetWithRole, error) {
-	c, err := r.Update(false)
+	_, err := r.Update(false)
 	if err != nil {
 		return nil, err
 	}
@@ -448,11 +433,26 @@ func (r *NotaryRepository) GetTargetByName(name string, roles ...string) (*Targe
 	if len(roles) == 0 {
 		roles = append(roles, data.CanonicalTargetsRole)
 	}
+	var resultMeta data.FileMeta
+	var resultRoleName string
 	for _, role := range roles {
-		meta, foundRole := c.TargetMeta(role, name, roles...)
-		if meta != nil {
-			return &TargetWithRole{
-				Target: Target{Name: name, Hashes: meta.Hashes, Length: meta.Length}, Role: foundRole}, nil
+		// Define a visitor function to find the specified target
+		getTargetVisitorFunc := func(tgt *data.SignedTargets, roleName string) error {
+			var ok bool
+			if tgt == nil {
+				return tuf.ErrContinueWalk{}
+			}
+			// We found the target so we should stop our walk
+			// and set the resultMeta and resultRoleName variables
+			if resultMeta, ok = tgt.Signed.Targets[name]; ok {
+				resultRoleName = roleName
+				return tuf.ErrStopWalk{}
+			}
+			return tuf.ErrContinueWalk{}
+		}
+		err = r.tufRepo.WalkTargets(name, role, getTargetVisitorFunc)
+		if err == nil {
+			return &TargetWithRole{Target: Target{Name: name, Hashes: resultMeta.Hashes, Length: resultMeta.Length}, Role: resultRoleName}, nil
 		}
 	}
 	return nil, fmt.Errorf("No trust data for %s", name)
