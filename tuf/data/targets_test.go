@@ -141,7 +141,7 @@ func TestTargetsFromSignedCopiesSignatures(t *testing.T) {
 func TestTargetsFromSignedValidatesDelegations(t *testing.T) {
 	for _, roleName := range []string{CanonicalTargetsRole, path.Join(CanonicalTargetsRole, "a")} {
 		targets := validTargetsTemplate()
-		delgRole, err := NewRole(path.Join(roleName, "b"), 1, []string{"key1"}, nil, nil)
+		delgRole, err := NewRole(path.Join(roleName, "b"), 1, []string{"key1"}, nil)
 		require.NoError(t, err)
 		targets.Signed.Delegations.Roles = []*Role{delgRole}
 

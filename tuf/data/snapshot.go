@@ -2,6 +2,7 @@ package data
 
 import (
 	"bytes"
+	"crypto/sha256"
 	"fmt"
 	"time"
 
@@ -35,10 +36,13 @@ func isValidSnapshotStructure(s Snapshot) error {
 	}
 
 	for _, role := range []string{CanonicalRootRole, CanonicalTargetsRole} {
-		if _, ok := s.Meta[role]; !ok {
+		// Meta is a map of FileMeta, so if the role isn't in the map it returns
+		// an empty FileMeta, which has an empty map, and you can check on keys
+		// from an empty map.
+		if checksum, ok := s.Meta[role].Hashes["sha256"]; !ok || len(checksum) != sha256.Size {
 			return ErrInvalidMetadata{
 				role: CanonicalSnapshotRole,
-				msg:  fmt.Sprintf("missing %s checksum information", role),
+				msg:  fmt.Sprintf("missing or invalid %s sha256 checksum information", role),
 			}
 		}
 	}
