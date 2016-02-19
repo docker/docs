@@ -195,12 +195,6 @@ func TestRootFromSignedValidatesRoleData(t *testing.T) {
 		_, err = rootToSignedAndBack(t, root)
 		require.IsType(t, ErrInvalidMetadata{}, err)
 	}
-
-	// Add an extra role without messing with the others
-	root := validRootTemplate()
-	root.Signed.Roles["extraneous"] = &RootRole{KeyIDs: []string{"key3"}, Threshold: 1}
-	_, err = rootToSignedAndBack(t, root)
-	require.IsType(t, ErrInvalidMetadata{}, err)
 }
 
 // The type must be "Root"
