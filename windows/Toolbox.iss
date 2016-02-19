@@ -35,7 +35,6 @@ SolidCompression=yes
 WizardImageFile=windows-installer-side.bmp
 WizardSmallImageFile=windows-installer-logo.bmp
 WizardImageStretch=yes
-WizardImageBackColor=$EBB822
 UninstallDisplayIcon={app}\unins000.exe
 SetupIconFile=toolbox.ico
 ChangesEnvironment=true
@@ -95,7 +94,6 @@ Root: HKCU; Subkey: "Environment"; ValueType:string; ValueName:"DOCKER_TOOLBOX_I
 #include "guid.iss"
 
 var
-  restart: boolean;
   TrackingDisabled: Boolean;
   TrackingCheckBox: TNewCheckBox;
 
@@ -142,7 +140,6 @@ procedure TrackEventWithProperties(name: String; properties: String);
 var
   payload: String;
   WinHttpReq: Variant;
-  tracking: String;
 begin
   if TrackingDisabled or WizardSilent() then
     exit;
