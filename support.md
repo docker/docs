@@ -1,21 +1,33 @@
 <!--[metadata]>
 +++
-title ="Work with Docker Support"
-description="Docker Universal Control Plane"
+title ="Get support"
+description="Your Docker subscription gives you access to prioritized support. You can file tickets via email, your the support portal."
+keywords = ["Docker, support", "help"]
 [menu.main]
 parent="mn_ucp"
 weight="89"
 +++
 <![end-metadata]-->
 
-# Work with Docker Support
+# Get support
 
-Your UCP purchase includes a contract with Docker Support. Depending on your request, Support may ask you to provide a data transfer or "dump" of information from you system. UCP supports generating support dumps across the entire Swarm cluster. The dump operation use the public `dsinfo` image developed by Docker Support.
+Your Docker Data Center, or Universal Control Plane subscription gives you
+access to prioritized support. The service levels depend on your subscription.
 
-To generate a dump for your cluster:
+If you need help, you can file a ticket via:
 
-1. Log into as a user UCP with the administrator privileges.
+* [Email](mailto:support@docker.com)
+* [Docker support page](https://support.docker.com/)
 
-2. Click **Admin** > **Support Dump**.
+Be sure to use your company email when filing tickets.
 
-    UCP builds a `docker-support-<datestamp>-<timestap>.zip` file and downloads it to your browser's default download folder.
+## Download a support dump
+
+Docker Support engineers may ask you to provide a UCP support dump. For this:
+
+1. Log into UCP with an administrator account
+
+2. On the top-right menu, **click your username**, and choose **Support Dump**.
+
+UCP downloads the `docker-support-<datestamp>-<timestap>.zip`, that you can
+send to support.
