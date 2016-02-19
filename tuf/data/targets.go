@@ -78,19 +78,43 @@ func (t SignedTargets) GetMeta(path string) *FileMeta {
 	return nil
 }
 
-// GetDelegations filters the roles and associated keys that may be
-// the signers for the given target path. If no appropriate roles
-// can be found, it will simply return nil for the return values.
-// The returned slice of Role will have order maintained relative
-// to the role slice on Delegations per TUF spec proposal on using
-// order to determine priority.
-func (t SignedTargets) GetDelegations(path string) []*Role {
-	var roles []*Role
-	for _, r := range t.Signed.Delegations.Roles {
-		if r.CheckPaths(path) {
-			roles = append(roles, r)
+// GetValidDelegations filters the delegation roles specified in the signed targets, and
+// only returns roles that are direct children and restricts their paths
+func (t SignedTargets) GetValidDelegations(parent DelegationRole) []DelegationRole {
+	roles := t.buildDelegationRoles()
+	result := []DelegationRole{}
+	for _, r := range roles {
+		validRole, err := parent.Restrict(r)
+		if err != nil {
 			continue
 		}
+		result = append(result, validRole)
+	}
+	return result
+}
+
+// helper function to create DelegationRole structures from all delegations in a SignedTargets
+func (t SignedTargets) buildDelegationRoles() []DelegationRole {
+	var roles []DelegationRole
+	for _, roleData := range t.Signed.Delegations.Roles {
+		keyIDs := roleData.KeyIDs
+		pubKeys := make(map[string]PublicKey)
+		for _, keyID := range keyIDs {
+			pubKey, ok := t.Signed.Delegations.Keys[keyID]
+			if !ok {
+				continue
+			}
+			pubKeys[keyID] = pubKey
+		}
+
+		roles = append(roles, DelegationRole{
+			BaseRole: BaseRole{
+				Name:      roleData.Name,
+				Keys:      pubKeys,
+				Threshold: roleData.Threshold,
+			},
+			Paths: roleData.Paths,
+		})
 	}
 	return roles
 }

@@ -608,15 +608,14 @@ type walkVisitorFunc func(*data.SignedTargets, string) error
 // to call the visitor function on.
 func (tr *Repo) WalkTargets(targetPath, rolePath string, visitTarget walkVisitorFunc) error {
 	// Start with the base targets role, which implicitly has the "" targets path
-	targetsRole, ok := tr.Root.Signed.Roles[data.CanonicalTargetsRole]
-	if !ok {
-		return data.ErrInvalidRole{Role: data.CanonicalTargetsRole, Reason: "role not found in root file"}
+	targetsRole, err := tr.GetBaseRole(data.CanonicalTargetsRole)
+	if err != nil {
+		return err
 	}
 	// Make the targets role have the empty path, when we treat it as a delegation role
-	roles := []*data.Role{
+	roles := []data.DelegationRole{
 		{
-			RootRole: *targetsRole,
-			Name:     data.CanonicalTargetsRole,
+			BaseRole: targetsRole,
 			Paths:    []string{""},
 		},
 	}
@@ -634,7 +633,7 @@ func (tr *Repo) WalkTargets(targetPath, rolePath string, visitTarget walkVisitor
 
 		// We're at a prefix of the desired role subtree, so add its delegation role children and continue walking
 		if strings.HasPrefix(rolePath, role.Name+"/") {
-			roles = append(roles, signedTgt.Signed.Delegations.Roles...)
+			roles = append(roles, signedTgt.GetValidDelegations(role)...)
 			continue
 		}
 
@@ -649,7 +648,7 @@ func (tr *Repo) WalkTargets(targetPath, rolePath string, visitTarget walkVisitor
 				return nil
 			case ErrContinueWalk:
 				// If the visitor function signalled to continue, add this role's delegation to the walk
-				roles = append(roles, signedTgt.Signed.Delegations.Roles...)
+				roles = append(roles, signedTgt.GetValidDelegations(role)...)
 			default:
 				// Return out if we got a different error or nil
 				return err
@@ -668,7 +667,7 @@ func isAncestorRole(candidateChild, candidateAncestor string) bool {
 
 // helper function that returns whether the delegation Role is valid against the given path
 // Will return true if given an empty candidatePath
-func isValidPath(candidatePath string, delgRole *data.Role) bool {
+func isValidPath(candidatePath string, delgRole data.DelegationRole) bool {
 	return candidatePath == "" || delgRole.CheckPaths(candidatePath)
 }
 
@@ -676,7 +675,6 @@ func isValidPath(candidatePath string, delgRole *data.Role) bool {
 // the directed role. If the metadata for the role doesn't exist yet,
 // AddTargets will create one.
 func (tr *Repo) AddTargets(role string, targets data.Files) (data.Files, error) {
-
 	err := tr.VerifyCanSign(role)
 	if err != nil {
 		return nil, err
