@@ -46,6 +46,9 @@ docs-draft: docs-build
 docs-shell: docs-build
 	$(DOCKER_RUN_DOCS) -p $(if $(DOCSPORT),$(DOCSPORT):)8000 "$(DOCKER_DOCS_IMAGE)" bash
 
+test: docs-build
+	$(DOCKER_RUN_DOCS) "$(DOCKER_DOCS_IMAGE)"
+
 
 docs-build:
 #	( git remote | grep -v upstream ) || git diff --name-status upstream/release..upstream/docs ./ > ./changed-files
