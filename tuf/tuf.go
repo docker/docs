@@ -682,37 +682,38 @@ func (tr *Repo) AddTargets(role string, targets data.Files) (data.Files, error) 
 		return nil, err
 	}
 
-	// check the role's metadata
-	t, ok := tr.Targets[role]
+	// check existence of the role's metadata
+	_, ok := tr.Targets[role]
 	if !ok { // the targetfile may not exist yet - if not, then create it
 		var err error
-		t, err = tr.InitTargets(role)
+		_, err = tr.InitTargets(role)
 		if err != nil {
 			return nil, err
 		}
 	}
 
-	var r data.DelegationRole
-	if role != data.CanonicalTargetsRole {
-		// we only call r.CheckPaths if the role is not "targets"
-		// so r being nil is fine in the case role == "targets"
-		r, err = tr.GetDelegationRole(role)
-		if err != nil {
-			return nil, err
+	addedTargets := make(data.Files)
+	addTargetVisitor := func(targetPath string, targetMeta data.FileMeta) func(*data.SignedTargets, string) error {
+		return func(tgt *data.SignedTargets, roleName string) error {
+			if tgt == nil {
+				return ErrContinueWalk{}
+			}
+
+			// We've already validated the role's target path in our walk, so just modify the metadata
+			tgt.Signed.Targets[targetPath] = targetMeta
+			tgt.Dirty = true
+			// Also add to our new addedTargets map to keep track of every target we've added successfully
+			addedTargets[targetPath] = targetMeta
+			return ErrStopWalk{}
 		}
 	}
 
-	invalid := make(data.Files)
+	// Walk the role tree while validating the target paths, and add all of our targets
 	for path, target := range targets {
-		if role == data.CanonicalTargetsRole || r.CheckPaths(path) {
-			t.Signed.Targets[path] = target
-		} else {
-			invalid[path] = target
-		}
+		tr.WalkTargets(path, role, addTargetVisitor(path, target))
 	}
-	t.Dirty = true
-	if len(invalid) > 0 {
-		return invalid, fmt.Errorf("Could not add all targets")
+	if len(addedTargets) != len(targets) {
+		return nil, fmt.Errorf("Could not add all targets")
 	}
 	return nil, nil
 }
