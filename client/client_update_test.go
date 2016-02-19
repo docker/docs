@@ -813,8 +813,8 @@ var waysToMessUpServer = []swizzleExpectations{
 
 var _waysToMessUpServerRoot []swizzleExpectations
 
-// A getter that also sets once through - we can just add these, but it's very easier to do it
-// programmatically
+// We also want to remove a every role from root once, or remove the role's keys.
+// This function generates once and caches the result for later re-use.
 func waysToMessUpServerRoot() []swizzleExpectations {
 	if _waysToMessUpServerRoot == nil {
 		_waysToMessUpServerRoot = waysToMessUpServer
