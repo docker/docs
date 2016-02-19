@@ -59,7 +59,7 @@ echo
 cd
 
 docker () {
-  MSYS_NO_PATHCONV=1 docker.exe $@
+  MSYS_NO_PATHCONV=1 docker.exe "$@"
 }
 export -f docker
 
