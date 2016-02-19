@@ -722,13 +722,25 @@ func (tr *Repo) RemoveTargets(role string, targets ...string) error {
 		return err
 	}
 
+	removeTargetVisitor := func(targetPath string) func(*data.SignedTargets, string) error {
+		return func(tgt *data.SignedTargets, roleName string) error {
+			if tgt == nil {
+				return ErrContinueWalk{}
+			}
+
+			// We've already validated the role's target path in our walk, so just modify the metadata
+			delete(tgt.Signed.Targets, targetPath)
+			tgt.Dirty = true
+			return ErrStopWalk{}
+		}
+	}
+
 	// if the role exists but metadata does not yet, then our work is done
-	t, ok := tr.Targets[role]
+	_, ok := tr.Targets[role]
 	if ok {
 		for _, path := range targets {
-			delete(t.Signed.Targets, path)
+			tr.WalkTargets("", role, removeTargetVisitor(path))
 		}
-		t.Dirty = true
 	}
 
 	return nil
