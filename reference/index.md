@@ -1,9 +1,10 @@
 +++
-title = "ucp tool Reference"
+title = "UCP tool reference"
 description = "Run UCP commands"
 [menu.main]
 identifier = "ucp_ref"
 parent = "mn_ucp"
+weight=110
 +++
 
 # ucp tool Reference
@@ -21,11 +22,11 @@ The UCP installation consists of using the Docker Engine CLI to run the `ucp`
 tool. The `ucp` tool is an image with subcommands to `install` a controller or
 `join` a node to a UCP controller. The general format of these commands are:
 
-| Docker client | `run` command with options | `ucp` image | Subcommand with options |
-|---------------|----------------------------|--------------|-------------------------|
-| `docker` | `run --rm -it` | `docker/ucp` | `install --help` |
-| `docker` | `run --rm -it` | `docker/ucp` | `join --help` |
-| `docker` | `run --rm -it` | `docker/ucp` | `uninstall --help` |
+| Docker client | `run` command with options | `ucp` image  | Subcommand with options |
+|:--------------|:---------------------------|:-------------|:------------------------|
+| `docker`      | `run --rm -it`             | `docker/ucp` | `install --help`        |
+| `docker`      | `run --rm -it`             | `docker/ucp` | `join --help`           |
+| `docker`      | `run --rm -it`             | `docker/ucp` | `uninstall --help`      |
 
 You can these two subcommands interactively by passing them the `-i`
 option or by passing command-line options. This installation guide's steps
@@ -64,13 +65,13 @@ Additional help is available for each command with the '--help' option.
 
 ## Subcommands
 
-| Command | Description |
-|---------------------------------|-----------------------------------------------------------------------------|
-| [`install`](install.md) | Install UCP on this engine. |
-| [`join`](join.md) | Join this engine to an existing UCP. |
-| [`upgrade`](upgrade.md) | Upgrade the UCP components on this Engine. |
-| [`images`](images.md) | Verify the UCP images on this Engine. |
-| [`uninstall`](uninstall.md) | Uninstall UCP components from this Engine. |
-| [`dump-certs`](dump-certs.md) | Dump out the public certs for this UCP controller. |
+| Command                         | Description                                                                 |
+|:--------------------------------|:----------------------------------------------------------------------------|
+| [`install`](install.md)         | Install UCP on this engine.                                                 |
+| [`join`](join.md)               | Join this engine to an existing UCP.                                        |
+| [`upgrade`](upgrade.md)         | Upgrade the UCP components on this Engine.                                  |
+| [`images`](images.md)           | Verify the UCP images on this Engine.                                       |
+| [`uninstall`](uninstall.md)     | Uninstall UCP components from this Engine.                                  |
+| [`dump-certs`](dump-certs.md)   | Dump out the public certs for this UCP controller.                          |
 | [`fingerprint`](fingerprint.md) | Dump out the TLS fingerprint for the UCP controller running on this Engine. |
-| [`help`](help.md) | Shows a list of commands or help for one command. |
+| [`help`](help.md)               | Shows a list of commands or help for one command.                           |
