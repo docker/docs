@@ -230,7 +230,7 @@ func (tr *Repo) GetDelegationRole(name string) (data.DelegationRole, error) {
 	// Start with top level roles in targets. Walk the chain of ancestors
 	// until finding the desired role, or we run out of targets files to search.
 	var foundRole *data.DelegationRole
-	buildDelegationRoleVisitor := func(tgt *data.SignedTargets, roleName string) error {
+	buildDelegationRoleVisitor := func(tgt *data.SignedTargets, validRole data.DelegationRole) error {
 		if tgt == nil {
 			return ErrContinueWalk{}
 		}
@@ -242,8 +242,8 @@ func (tr *Repo) GetDelegationRole(name string) (data.DelegationRole, error) {
 				for _, keyID := range role.KeyIDs {
 					pubKey, ok := tgt.Signed.Delegations.Keys[keyID]
 					if !ok {
-						// Couldn't retrieve all keys, so stop walking
-						return ErrStopWalk{}
+						// Couldn't retrieve all keys, so stop walking and return invalid role
+						return data.ErrInvalidRole{Role: name, Reason: "delegation does not exist"}
 					}
 					pubKeys[keyID] = pubKey
 				}
@@ -262,7 +262,10 @@ func (tr *Repo) GetDelegationRole(name string) (data.DelegationRole, error) {
 	}
 
 	// Walk to the parent of this delegation, since that is where its role metadata exists
-	tr.WalkTargets("", path.Dir(name), buildDelegationRoleVisitor)
+	err := tr.WalkTargets("", path.Dir(name), buildDelegationRoleVisitor)
+	if err != nil {
+		return data.DelegationRole{}, err
+	}
 
 	// We never found the delegation. In the context of this repo it is considered
 	// invalid. N.B. it may be that it existed at one point but an ancestor has since
@@ -388,22 +391,20 @@ func (tr *Repo) UpdateDelegations(role *data.Role, keys []data.PublicKey) error 
 // DeleteDelegation removes a delegated targets role from its parent
 // targets object. It also deletes the delegation from the snapshot.
 // DeleteDelegation will only make use of the role Name field.
-func (tr *Repo) DeleteDelegation(role data.Role) error {
-	if !data.IsDelegation(role.Name) {
-		return data.ErrInvalidRole{Role: role.Name, Reason: "not a valid delegated role"}
+func (tr *Repo) DeleteDelegation(roleName string) error {
+	if !data.IsDelegation(roleName) {
+		return data.ErrInvalidRole{Role: roleName, Reason: "not a valid delegated role"}
 	}
-	// the role variable must not be used past this assignment for safety
-	name := role.Name
 
-	parent := path.Dir(name)
+	parent := path.Dir(roleName)
 	if err := tr.VerifyCanSign(parent); err != nil {
 		return err
 	}
 
 	// delete delegated data from Targets map and Snapshot - if they don't
 	// exist, these are no-op
-	delete(tr.Targets, name)
-	tr.Snapshot.DeleteMeta(name)
+	delete(tr.Targets, roleName)
+	tr.Snapshot.DeleteMeta(roleName)
 
 	p, ok := tr.Targets[parent]
 	if !ok {
@@ -412,7 +413,7 @@ func (tr *Repo) DeleteDelegation(role data.Role) error {
 		return nil
 	}
 
-	foundAt := utils.FindRoleIndex(p.Signed.Delegations.Roles, name)
+	foundAt := utils.FindRoleIndex(p.Signed.Delegations.Roles, roleName)
 
 	if foundAt >= 0 {
 		var roles []*data.Role
@@ -601,7 +602,7 @@ func (tr *Repo) VerifyCanSign(roleName string) error {
 }
 
 // used for walking the targets/delegations tree, potentially modifying the underlying SignedTargets for the repo
-type walkVisitorFunc func(*data.SignedTargets, string) error
+type walkVisitorFunc func(*data.SignedTargets, data.DelegationRole) error
 
 // WalkTargets will apply the specified visitor function to iteratively walk the targets/delegation metadata tree,
 // until receiving a ErrStopWalk.  The walk starts from the base "targets" role, and searches for the correct targetPath and/or rolePath
@@ -641,7 +642,7 @@ func (tr *Repo) WalkTargets(targetPath, rolePath string, visitTarget walkVisitor
 		// If the paths validate against the specified targetPath and the rolePath is empty or is in the subtree
 		if isValidPath(targetPath, role) && isAncestorRole(role.Name, rolePath) {
 			// If we had matching path or role name, visit this target and determine whether or not to keep walking
-			err := visitTarget(signedTgt, role.Name)
+			err := visitTarget(signedTgt, role)
 			switch err.(type) {
 			case ErrStopWalk:
 				// If the visitor function signalled a stop, return nil to finish the walk
@@ -691,8 +692,8 @@ func (tr *Repo) AddTargets(role string, targets data.Files) (data.Files, error) 
 	}
 
 	addedTargets := make(data.Files)
-	addTargetVisitor := func(targetPath string, targetMeta data.FileMeta) func(*data.SignedTargets, string) error {
-		return func(tgt *data.SignedTargets, roleName string) error {
+	addTargetVisitor := func(targetPath string, targetMeta data.FileMeta) func(*data.SignedTargets, data.DelegationRole) error {
+		return func(tgt *data.SignedTargets, validRole data.DelegationRole) error {
 			if tgt == nil {
 				return ErrContinueWalk{}
 			}
@@ -722,13 +723,15 @@ func (tr *Repo) RemoveTargets(role string, targets ...string) error {
 		return err
 	}
 
-	removeTargetVisitor := func(targetPath string) func(*data.SignedTargets, string) error {
-		return func(tgt *data.SignedTargets, roleName string) error {
+	removeTargetVisitor := func(targetPath string) func(*data.SignedTargets, data.DelegationRole) error {
+		return func(tgt *data.SignedTargets, validRole data.DelegationRole) error {
 			if tgt == nil {
 				return ErrContinueWalk{}
 			}
 
-			// We've already validated the role's target path in our walk, so just modify the metadata
+			// We've already validated the role path in our walk, so just modify the metadata
+			// We don't check against the target path against the valid role paths because it's
+			// possible we got into an invalid state and are trying to fix it
 			delete(tgt.Signed.Targets, targetPath)
 			tgt.Dirty = true
 			return ErrStopWalk{}

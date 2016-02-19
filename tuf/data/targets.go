@@ -93,7 +93,8 @@ func (t SignedTargets) GetValidDelegations(parent DelegationRole) []DelegationRo
 	return result
 }
 
-// helper function to create DelegationRole structures from all delegations in a SignedTargets
+// helper function to create DelegationRole structures from all delegations in a SignedTargets,
+// these delegations are read directly from the SignedTargets and not modified or validated
 func (t SignedTargets) buildDelegationRoles() []DelegationRole {
 	var roles []DelegationRole
 	for _, roleData := range t.Signed.Delegations.Roles {

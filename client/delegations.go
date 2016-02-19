@@ -255,11 +255,12 @@ func (r *NotaryRepository) GetDelegationRoles() ([]*data.Role, error) {
 	allDelegations := []*data.Role{}
 
 	// Define a visitor function to populate the delegations list and translate their key IDs to canonical IDs
-	delegationCanonicalListVisitor := func(tgt *data.SignedTargets, roleName string) error {
+	delegationCanonicalListVisitor := func(tgt *data.SignedTargets, validRole data.DelegationRole) error {
 		if tgt == nil {
 			return tuf.ErrContinueWalk{}
 		}
 		// For the return list, update with a copy that includes canonicalKeyIDs
+		// These aren't validated by the validRole
 		canonicalDelegations, err := translateDelegationsToCanonicalIDs(tgt.Signed.Delegations)
 		if err != nil {
 			return err
@@ -267,7 +268,10 @@ func (r *NotaryRepository) GetDelegationRoles() ([]*data.Role, error) {
 		allDelegations = append(allDelegations, canonicalDelegations...)
 		return tuf.ErrContinueWalk{}
 	}
-	r.tufRepo.WalkTargets("", "", delegationCanonicalListVisitor)
+	err := r.tufRepo.WalkTargets("", "", delegationCanonicalListVisitor)
+	if err != nil {
+		return nil, err
+	}
 	return allDelegations, nil
 }
 

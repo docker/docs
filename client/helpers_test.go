@@ -445,7 +445,7 @@ func TestApplyTargetsDelegationEditNonExisting(t *testing.T) {
 
 	err = applyTargetsChange(repo, ch)
 	assert.Error(t, err)
-	assert.IsType(t, data.ErrNoSuchRole{}, err)
+	assert.IsType(t, data.ErrInvalidRole{}, err)
 }
 
 func TestApplyTargetsDelegationCreateAlreadyExisting(t *testing.T) {
