@@ -33,12 +33,9 @@ func isValidRootStructure(r Root) error {
 		return ErrInvalidMetadata{
 			role: CanonicalRootRole, msg: fmt.Sprintf("expected type %s, not %s", expectedType, r.Type)}
 	}
-	if len(r.Roles) < 4 {
-		return ErrInvalidMetadata{role: CanonicalRootRole, msg: "does not have all required roles"}
-	} else if len(r.Roles) > 4 {
-		return ErrInvalidMetadata{role: CanonicalRootRole, msg: "specifies too many roles"}
-	}
 
+	// all the base roles MUST appear in the root.json - other roles are allowed,
+	// but other than the mirror role (not currently supported) are out of spec
 	for _, roleName := range BaseRoles {
 		roleObj, ok := r.Roles[roleName]
 		if !ok || roleObj == nil {
@@ -74,7 +71,7 @@ func NewRoot(keys map[string]PublicKey, roles map[string]*RootRole, consistent b
 }
 
 // ToSigned partially serializes a SignedRoot for further signing
-func (r *SignedRoot) ToSigned() (*Signed, error) {
+func (r SignedRoot) ToSigned() (*Signed, error) {
 	s, err := defaultSerializer.MarshalCanonical(r.Signed)
 	if err != nil {
 		return nil, err
@@ -94,7 +91,7 @@ func (r *SignedRoot) ToSigned() (*Signed, error) {
 }
 
 // MarshalJSON returns the serialized form of SignedRoot as bytes
-func (r *SignedRoot) MarshalJSON() ([]byte, error) {
+func (r SignedRoot) MarshalJSON() ([]byte, error) {
 	signed, err := r.ToSigned()
 	if err != nil {
 		return nil, err
