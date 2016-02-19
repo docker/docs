@@ -391,18 +391,19 @@ func (r *NotaryRepository) ListTargets(roles ...string) ([]*TargetWithRole, erro
 	targets := make(map[string]*TargetWithRole)
 	for _, role := range roles {
 		// Define a visitor function to populate the targets map in priority order
-		listVisitorFunc := func(tgt *data.SignedTargets, roleName string) error {
+		listVisitorFunc := func(tgt *data.SignedTargets, validRole data.DelegationRole) error {
 			if tgt == nil {
 				return tuf.ErrContinueWalk{}
 			}
 			// We found targets so we should try to add them to our targets map
 			for targetName, targetMeta := range tgt.Signed.Targets {
 				// Follow the priority by not overriding previously set targets
-				if _, ok := targets[targetName]; ok {
+				// and check that this path is valid with this role
+				if _, ok := targets[targetName]; ok || !validRole.CheckPaths(targetName) {
 					continue
 				}
 				targets[targetName] =
-					&TargetWithRole{Target: Target{Name: targetName, Hashes: targetMeta.Hashes, Length: targetMeta.Length}, Role: roleName}
+					&TargetWithRole{Target: Target{Name: targetName, Hashes: targetMeta.Hashes, Length: targetMeta.Length}, Role: validRole.Name}
 			}
 			return tuf.ErrContinueWalk{}
 		}
@@ -437,15 +438,15 @@ func (r *NotaryRepository) GetTargetByName(name string, roles ...string) (*Targe
 	var resultRoleName string
 	for _, role := range roles {
 		// Define a visitor function to find the specified target
-		getTargetVisitorFunc := func(tgt *data.SignedTargets, roleName string) error {
+		getTargetVisitorFunc := func(tgt *data.SignedTargets, validRole data.DelegationRole) error {
 			var ok bool
 			if tgt == nil {
 				return tuf.ErrContinueWalk{}
 			}
-			// We found the target so we should stop our walk
-			// and set the resultMeta and resultRoleName variables
+			// We found the target and validated path compatiblity in our walk,
+			// so we should stop our walk and set the resultMeta and resultRoleName variables
 			if resultMeta, ok = tgt.Signed.Targets[name]; ok {
-				resultRoleName = roleName
+				resultRoleName = validRole.Name
 				return tuf.ErrStopWalk{}
 			}
 			return tuf.ErrContinueWalk{}

@@ -390,7 +390,7 @@ func TestDeleteDelegations(t *testing.T) {
 	_, ok = repo.Snapshot.Signed.Meta["targets/test"]
 	assert.True(t, ok)
 
-	assert.NoError(t, repo.DeleteDelegation(*role))
+	assert.NoError(t, repo.DeleteDelegation(role.Name))
 	assert.Len(t, r.Signed.Delegations.Roles, 0)
 	assert.Len(t, r.Signed.Delegations.Keys, 0)
 	assert.True(t, r.Dirty)
@@ -420,7 +420,7 @@ func TestDeleteDelegationsRoleNotExistBecauseNoParentMeta(t *testing.T) {
 
 	delRole, err := data.NewRole("targets/test/a", 1, []string{testKey.ID()}, []string{"test"})
 
-	err = repo.DeleteDelegation(*delRole)
+	err = repo.DeleteDelegation(delRole.Name)
 	assert.NoError(t, err)
 	// still no metadata
 	_, ok = repo.Targets["targets/test"]
@@ -439,7 +439,7 @@ func TestDeleteDelegationsRoleNotExist(t *testing.T) {
 	role, err := data.NewRole("targets/test", 1, []string{}, []string{""})
 	assert.NoError(t, err)
 
-	err = repo.DeleteDelegation(*role)
+	err = repo.DeleteDelegation(role.Name)
 	assert.NoError(t, err)
 	r, ok := repo.Targets[data.CanonicalTargetsRole]
 	assert.True(t, ok)
@@ -457,7 +457,7 @@ func TestDeleteDelegationsInvalidRole(t *testing.T) {
 	invalidRole, err := data.NewRole("root", 1, []string{}, []string{""})
 	assert.NoError(t, err)
 
-	err = repo.DeleteDelegation(*invalidRole)
+	err = repo.DeleteDelegation(invalidRole.Name)
 	assert.Error(t, err)
 	assert.IsType(t, data.ErrInvalidRole{}, err)
 
@@ -473,7 +473,7 @@ func TestDeleteDelegationsParentMissing(t *testing.T) {
 	testRole, err := data.NewRole("targets/test/deep", 1, []string{}, []string{""})
 	assert.NoError(t, err)
 
-	err = repo.DeleteDelegation(*testRole)
+	err = repo.DeleteDelegation(testRole.Name)
 	assert.Error(t, err)
 	assert.IsType(t, data.ErrInvalidRole{}, err)
 
@@ -514,7 +514,7 @@ func TestDeleteDelegationsMissingParentSigningKey(t *testing.T) {
 
 	// delete all signing keys
 	repo.cryptoService = signed.NewEd25519()
-	err = repo.DeleteDelegation(*role)
+	err = repo.DeleteDelegation(role.Name)
 	assert.Error(t, err)
 	assert.IsType(t, signed.ErrNoKeys{}, err)
 
@@ -553,7 +553,7 @@ func TestDeleteDelegationsMidSliceRole(t *testing.T) {
 	err = repo.UpdateDelegations(role3, data.KeyList{testKey})
 	assert.NoError(t, err)
 
-	err = repo.DeleteDelegation(*role2)
+	err = repo.DeleteDelegation(role2.Name)
 	assert.NoError(t, err)
 
 	r, ok := repo.Targets[data.CanonicalTargetsRole]
