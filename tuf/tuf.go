@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/docker/notary/client/changelist"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/utils"
@@ -299,92 +300,82 @@ func (tr *Repo) GetAllLoadedRoles() []*data.Role {
 	return res
 }
 
-// GetDelegation finds the role entry representing the provided
-// role name along with its associated public keys, or ErrInvalidRole
-func (tr *Repo) GetDelegation(role string) (*data.Role, data.Keys, error) {
-	if !data.IsDelegation(role) {
-		return nil, nil, data.ErrInvalidRole{Role: role, Reason: "not a valid delegated role"}
-	}
-
-	parent := path.Dir(role)
-
-	// check the parent role
-	if _, err := tr.GetDelegationRole(parent); parent != data.CanonicalTargetsRole && err != nil {
-		return nil, nil, data.ErrInvalidRole{Role: role, Reason: "parent role not found"}
-	}
-
-	// check the parent role's metadata
-	p, ok := tr.Targets[parent]
-	if !ok { // the parent targetfile may not exist yet, so it can't be in the list
-		return nil, nil, data.ErrNoSuchRole{Role: role}
-	}
-
-	foundAt := utils.FindRoleIndex(p.Signed.Delegations.Roles, role)
-	if foundAt < 0 {
-		return nil, nil, data.ErrNoSuchRole{Role: role}
-	}
-	delegationRole := p.Signed.Delegations.Roles[foundAt]
-	keys := make(data.Keys)
-	for _, keyID := range delegationRole.KeyIDs {
-		keys[keyID] = p.Signed.Delegations.Keys[keyID]
-	}
-	return delegationRole, keys, nil
-}
-
 // UpdateDelegations updates the appropriate delegations, either adding
 // a new delegation or updating an existing one. If keys are
 // provided, the IDs will be added to the role (if they do not exist
 // there already), and the keys will be added to the targets file.
-func (tr *Repo) UpdateDelegations(role *data.Role, keys []data.PublicKey) error {
-	if !data.IsDelegation(role.Name) {
-		return data.ErrInvalidRole{Role: role.Name, Reason: "not a valid delegated role"}
+func (tr *Repo) UpdateDelegations(roleName string, changes changelist.TufDelegation) error {
+	if !data.IsDelegation(roleName) {
+		return data.ErrInvalidRole{Role: roleName, Reason: "not a valid delegated role"}
 	}
-	parent := path.Dir(role.Name)
+	parent := path.Dir(roleName)
 
 	if err := tr.VerifyCanSign(parent); err != nil {
 		return err
 	}
 
 	// check the parent role's metadata
-	p, ok := tr.Targets[parent]
+	_, ok := tr.Targets[parent]
 	if !ok { // the parent targetfile may not exist yet - if not, then create it
 		var err error
-		p, err = tr.InitTargets(parent)
+		_, err = tr.InitTargets(parent)
 		if err != nil {
 			return err
 		}
 	}
 
-	for _, k := range keys {
-		if !utils.StrSliceContains(role.KeyIDs, k.ID()) {
-			role.KeyIDs = append(role.KeyIDs, k.ID())
+	// Walk to parent, and either set or update this delegation
+	// Ensure all updates are valid
+	delegationUpdateVisitor := func(tgt *data.SignedTargets, validRole data.DelegationRole) error {
+		var err error
+		var createdRole bool
+		// Validate the changes underneath this restricted validRole for adding paths
+		changes.AddPaths = data.RestrictDelegationPathPrefixes(validRole.Paths, changes.AddPaths)
+		// Try to find the delegation and amend it using our changelist
+		var delgRole *data.Role
+		for _, role := range tgt.Signed.Delegations.Roles {
+			if role.Name == roleName {
+				delgRole = role
+				delgRole.AddPaths(changes.AddPaths)
+				delgRole.RemovePaths(changes.RemovePaths)
+				if changes.ClearAllPaths {
+					delgRole.Paths = []string{}
+				}
+				delgRole.RemoveKeys(changes.RemoveKeys)
+			}
 		}
-		p.Signed.Delegations.Keys[k.ID()] = k
+		// We didn't find the role earlier, so create it
+		if delgRole == nil {
+			delgRole, err = changes.ToNewRole(roleName)
+			if err != nil {
+				return err
+			}
+			createdRole = true
+		}
+		// Add the key IDs to the role and the keys themselves to the parent
+		for _, k := range changes.AddKeys {
+			if !utils.StrSliceContains(delgRole.KeyIDs, k.ID()) {
+				delgRole.KeyIDs = append(delgRole.KeyIDs, k.ID())
+			}
+			tgt.Signed.Delegations.Keys[k.ID()] = k
+		}
+		// Make sure we have a valid role still
+		if len(delgRole.KeyIDs) < delgRole.Threshold {
+			return data.ErrInvalidRole{Role: roleName, Reason: "insufficient keys to meet threshold"}
+		}
+		if createdRole {
+			tgt.Signed.Delegations.Roles = append(tgt.Signed.Delegations.Roles, delgRole)
+		}
+		tgt.Dirty = true
+		utils.RemoveUnusedKeys(tgt)
+		return ErrStopWalk{}
 	}
 
-	// if the role has fewer keys than the threshold, it
-	// will never be able to create a valid targets file
-	// and should be considered invalid.
-	if len(role.KeyIDs) < role.Threshold {
-		return data.ErrInvalidRole{Role: role.Name, Reason: "insufficient keys to meet threshold"}
+	// Walk to the parent of this delegation, since that is where its role metadata exists
+	err := tr.WalkTargets("", parent, delegationUpdateVisitor)
+	if err != nil {
+		return err
 	}
-
-	foundAt := utils.FindRoleIndex(p.Signed.Delegations.Roles, role.Name)
-
-	if foundAt >= 0 {
-		p.Signed.Delegations.Roles[foundAt] = role
-	} else {
-		p.Signed.Delegations.Roles = append(p.Signed.Delegations.Roles, role)
-	}
-	// We've made a change to parent. Set it to dirty
-	p.Dirty = true
-
-	// We don't actually want to create the new delegation metadata yet.
-	// When we add a delegation, it may only be signable by a key we don't have
-	// (hence we are delegating signing).
-
-	utils.RemoveUnusedKeys(p)
-
 	return nil
 }
 

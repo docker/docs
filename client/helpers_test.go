@@ -504,14 +504,10 @@ func TestApplyTargetsDelegationCreateAlreadyExisting(t *testing.T) {
 	// when attempting to create the same role again, check that we added a key
 	err = applyTargetsChange(repo, ch)
 	assert.NoError(t, err)
-	delegation, keys, err := repo.GetDelegation("targets/level1")
+	delegation, err := repo.GetDelegationRole("targets/level1")
 	assert.NoError(t, err)
 	assert.Contains(t, delegation.Paths, "level1")
-	assert.Equal(t, len(delegation.KeyIDs), 2)
-	for _, keyID := range delegation.KeyIDs {
-		_, ok := keys[keyID]
-		assert.True(t, ok)
-	}
+	assert.Equal(t, len(delegation.ListKeyIDs()), 2)
 }
 
 func TestApplyTargetsDelegationAlreadyExistingMergePaths(t *testing.T) {
@@ -563,7 +559,7 @@ func TestApplyTargetsDelegationAlreadyExistingMergePaths(t *testing.T) {
 	// merged with previous details
 	err = applyTargetsChange(repo, ch)
 	assert.NoError(t, err)
-	delegation, _, err := repo.GetDelegation("targets/level1")
+	delegation, err := repo.GetDelegationRole("targets/level1")
 	assert.NoError(t, err)
 	// Assert we have both paths
 	assert.Contains(t, delegation.Paths, "level2")
@@ -786,9 +782,8 @@ func TestApplyChangelistCreatesDelegation(t *testing.T) {
 	newKey, err := cs.Create("targets/level1", data.ED25519Key)
 	assert.NoError(t, err)
 
-	r, err := data.NewRole("targets/level1", 1, []string{newKey.ID()}, []string{""})
+	err = repo.UpdateDelegations("targets/level1", changelist.TufDelegation{AddKeys: []data.PublicKey{newKey}, AddPaths: []string{""}, NewThreshold: 1})
 	assert.NoError(t, err)
-	repo.UpdateDelegations(r, []data.PublicKey{newKey})
 	delete(repo.Targets, "targets/level1")
 
 	hash := sha256.Sum256([]byte{})
@@ -825,13 +820,11 @@ func TestApplyChangelistTargetsToMultipleRoles(t *testing.T) {
 	newKey, err := cs.Create("targets/level1", data.ED25519Key)
 	assert.NoError(t, err)
 
-	r, err := data.NewRole("targets/level1", 1, []string{newKey.ID()}, []string{""})
+	err = repo.UpdateDelegations("targets/level1", changelist.TufDelegation{AddKeys: []data.PublicKey{newKey}, AddPaths: []string{""}, NewThreshold: 1})
 	assert.NoError(t, err)
-	repo.UpdateDelegations(r, []data.PublicKey{newKey})
 
-	r, err = data.NewRole("targets/level2", 1, []string{newKey.ID()}, []string{""})
+	err = repo.UpdateDelegations("targets/level2", changelist.TufDelegation{AddKeys: []data.PublicKey{newKey}, AddPaths: []string{""}, NewThreshold: 1})
 	assert.NoError(t, err)
-	repo.UpdateDelegations(r, []data.PublicKey{newKey})
 
 	hash := sha256.Sum256([]byte{})
 	f := &data.FileMeta{
@@ -943,10 +936,8 @@ func TestChangeTargetMetaDoesntFallbackIfPrefixError(t *testing.T) {
 	newKey, err := cs.Create("targets/level1", data.ED25519Key)
 	assert.NoError(t, err)
 
-	r, err := data.NewRole("targets/level1", 1, []string{newKey.ID()},
-		[]string{"pathprefix"})
+	err = repo.UpdateDelegations("targets/level1", changelist.TufDelegation{AddKeys: []data.PublicKey{newKey}, AddPaths: []string{"pathprefix"}, NewThreshold: 1})
 	assert.NoError(t, err)
-	repo.UpdateDelegations(r, []data.PublicKey{newKey})
 
 	hash := sha256.Sum256([]byte{})
 	f := &data.FileMeta{

@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/docker/notary"
 	"github.com/docker/notary/client/changelist"
 	tuf "github.com/docker/notary/tuf"
 	"github.com/docker/notary/tuf/data"
@@ -85,35 +86,28 @@ func changeTargetsDelegation(repo *tuf.Repo, c changelist.Change) error {
 			return err
 		}
 
-		r, _, _ := repo.GetDelegation(c.Scope())
 		if err == nil {
-			// role existed, attempt to merge paths and keys
-			if err := r.AddPaths(td.AddPaths); err != nil {
-				return err
-			}
-			return repo.UpdateDelegations(r, td.AddKeys)
+			// role existed, merge paths and keys to this copy of the delegation role
+			addTD := changelist.TufDelegation{AddPaths: td.AddPaths, AddKeys: td.AddKeys}
+			return repo.UpdateDelegations(c.Scope(), addTD)
 		}
-		// create brand new role
-		r, err = td.ToNewRole(c.Scope())
-		if err != nil {
-			return err
-		}
-		return repo.UpdateDelegations(r, td.AddKeys)
+		// try to create brand new role
+		createTD := changelist.TufDelegation{AddPaths: td.AddPaths, AddKeys: td.AddKeys, NewThreshold: notary.MinThreshold}
+		return repo.UpdateDelegations(c.Scope(), createTD)
 	case changelist.ActionUpdate:
 		td := changelist.TufDelegation{}
 		err := json.Unmarshal(c.Content(), &td)
 		if err != nil {
 			return err
 		}
-		_, err = repo.GetDelegationRole(c.Scope())
+		delgRole, err := repo.GetDelegationRole(c.Scope())
 		if err != nil {
 			return err
 		}
-		r, keys, _ := repo.GetDelegation(c.Scope())
 
 		// We need to translate the keys from canonical ID to TUF ID for compatibility
 		canonicalToTUFID := make(map[string]string)
-		for tufID, pubKey := range keys {
+		for tufID, pubKey := range delgRole.Keys {
 			canonicalID, err := utils.CanonicalKeyID(pubKey)
 			if err != nil {
 				return err
@@ -125,24 +119,13 @@ func changeTargetsDelegation(repo *tuf.Repo, c changelist.Change) error {
 		for _, canonID := range td.RemoveKeys {
 			removeTUFKeyIDs = append(removeTUFKeyIDs, canonicalToTUFID[canonID])
 		}
+		td.RemoveKeys = removeTUFKeyIDs
 
 		// If we specify the only keys left delete the role, else just delete specified keys
-		if strings.Join(r.KeyIDs, ";") == strings.Join(removeTUFKeyIDs, ";") && len(td.AddKeys) == 0 {
+		if strings.Join(delgRole.ListKeyIDs(), ";") == strings.Join(removeTUFKeyIDs, ";") && len(td.AddKeys) == 0 {
 			return repo.DeleteDelegation(c.Scope())
 		}
-		// if we aren't deleting and the role exists, merge
-		if err := r.AddPaths(td.AddPaths); err != nil {
-			return err
-		}
-
-		// Clear all paths if we're given the flag, else remove specified paths
-		if td.ClearAllPaths {
-			r.RemovePaths(r.Paths)
-		} else {
-			r.RemovePaths(td.RemovePaths)
-		}
-		r.RemoveKeys(removeTUFKeyIDs)
-		return repo.UpdateDelegations(r, td.AddKeys)
+		return repo.UpdateDelegations(c.Scope(), td)
 	case changelist.ActionDelete:
 		return repo.DeleteDelegation(c.Scope())
 	default:

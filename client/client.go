@@ -443,7 +443,7 @@ func (r *NotaryRepository) GetTargetByName(name string, roles ...string) (*Targe
 			if tgt == nil {
 				return tuf.ErrContinueWalk{}
 			}
-			// We found the target and validated path compatiblity in our walk,
+			// We found the target and validated path compatibility in our walk,
 			// so we should stop our walk and set the resultMeta and resultRoleName variables
 			if resultMeta, ok = tgt.Signed.Targets[name]; ok {
 				resultRoleName = validRole.Name
