@@ -4,6 +4,7 @@ Script that automates trusted pull/pushes on different docker versions.
 
 from __future__ import print_function
 from collections import OrderedDict
+import atexit
 import json
 import os
 import platform
@@ -24,29 +25,31 @@ from urlparse import urljoin
 # version.
 DOCKERS = {
     "1.8": "docker-1.8.3",
-    "1.9": "docker",
-    "1.10": "docker-1.10.0-dev"
+    "1.9": "docker-1.9.1",
+    "1.10": "docker",
+    "1.10.2": "docker-1.10.2.RC1",
 }
 
 # delete any of these if you want to specify the docker binaries yourself
 DOWNLOAD_DOCKERS = {
     "1.8": ("https://get.docker.com", "docker-1.8.3"),
     "1.9": ("https://get.docker.com", "docker-1.9.1"),
-    # "1.10": ("https://experimental.docker.com", "docker-1.10.0-dev")
+    "1.10": ("https://get.docker.com", "docker-1.10.1")
 }
 
 # please replace with private registry if you want to test against a private
 # registry
 REGISTRY = "docker.io"
 
-# please enter your username if it does not match your shell username
-REGISTRY_USERNAME = pwd.getpwuid(os.getuid())[0]
+# please enter your username if it does not match your shell username, or set the
+# environment variable DOCKER_USERNAME
+REGISTRY_USERNAME = os.getenv("DOCKER_USERNAME", pwd.getpwuid(os.getuid())[0])
 
 # what you want the testing repo names to be prefixed with
 REPO_PREFIX = "docker_test"
 
-# Assumes default docker trust dir
-TRUST_DIR = os.path.expanduser("~/.docker/trust")
+# Assumes default docker config dir
+DEFAULT_DOCKER_CONFIG = os.path.expanduser("~/.docker")
 
 # Assumes the test will be run with `python misc/dockertest.py` from
 # the root of the notary repo after binaries are built
@@ -79,23 +82,44 @@ def download_docker(download_dir="/tmp"):
         os.chmod(filename, 0755)
         DOCKERS[version] = filename
 
-
 def setup():
     """
     Ensure we are set up to run the test
     """
     download_docker()
-    # make sure that the cert is in the right place
+    # copy the docker config dir over so we don't break anything in real docker
+    # config directory
+    os.mkdir(_TEMP_DOCKER_CONFIG_DIR)
+    # copy any docker creds over so we can push
+    configfile = os.path.join(_TEMP_DOCKER_CONFIG_DIR, "config.json")
+    shutil.copyfile(os.path.join(DEFAULT_DOCKER_CONFIG, "config.json"), configfile)
+    # always clean up the config file so creds aren't left in this temp directory
+    atexit.register(os.remove, configfile)
+    defaulttlsdir = os.path.join(DEFAULT_DOCKER_CONFIG, "tls")
+    tlsdir = os.path.join(_TEMP_DOCKER_CONFIG_DIR, "tls")
+    if os.path.exists(tlsdir):
+        shutil.copytree(defaulttlsdir, tlsdir)
+
+    # make sure that the cert is in the right place for local notary
     if TRUST_SERVER == "https://notary-server:4443":
-        tlsdir = os.path.join(TRUST_DIR, "tls", "notary-server:4443")
+        tlsdir = os.path.join(tlsdir, "notary-server:4443")
         if not os.path.isdir(tlsdir):
-            shutil.rmtree(tlsdir)  # in case it's not a directory
+            try:
+                shutil.rmtree(tlsdir)  # in case it's not a directory
+            except OSError as ex:
+                if "No such file or directory" not in str(ex):
+                    raise
             os.makedirs(tlsdir)
         cert = os.path.join(tlsdir, "root-ca.crt")
         if not os.path.isfile(cert):
             shutil.copyfile("fixtures/root-ca.crt", cert)
 
 # ---- tests ----
+
+_TEMPDIR = mkdtemp(prefix="docker-version-test")
+_TEMP_DOCKER_CONFIG_DIR = os.path.join(_TEMPDIR, "docker-config-dir")
+_TRUST_DIR = os.path.join(_TEMP_DOCKER_CONFIG_DIR, "trust")
+
 
 _ENV = os.environ.copy()
 _ENV.update({
@@ -114,10 +138,11 @@ _ENV.update({
 
     # environment variables used by docker 1.8
     "DOCKER_CONTENT_TRUST_OFFLINE_PASSPHRASE": "randompass",
-    "DOCKER_CONTENT_TRUST_TAGGING_PASSPHRASE": "randompass"
-})
+    "DOCKER_CONTENT_TRUST_TAGGING_PASSPHRASE": "randompass",
 
-_TEMPDIR = mkdtemp(prefix="docker-version-test")
+    # do not use the default docker config directory
+    "DOCKER_CONFIG": _TEMP_DOCKER_CONFIG_DIR
+})
 
 _DIGEST_REGEX = re.compile(r"\b[dD]igest: sha256:([0-9a-fA-F]+)\b")
 _SIZE_REGEX = re.compile(r"\bsize: ([0-9]+)\b")
@@ -130,8 +155,20 @@ def clear_tuf():
     Removes the trusted certificates and TUF metadata in ~/.docker/trust
     """
     try:
-        shutil.rmtree(os.path.join(TRUST_DIR, "trusted_certificates"))
-        shutil.rmtree(os.path.join(TRUST_DIR, "tuf"))
+        shutil.rmtree(os.path.join(_TRUST_DIR, "trusted_certificates"))
+        shutil.rmtree(os.path.join(_TRUST_DIR, "tuf"))
+    except OSError as ex:
+        if "No such file or directory" not in str(ex):
+            raise
+
+def clear_keys():
+    """
+    Removes the TUF keys in trust directory, since the key format changed
+    between versions and can cause problems if testing newer docker versions
+    before testing older docker versions.
+    """
+    try:
+        shutil.rmtree(os.path.join(_TRUST_DIR, "private"))
     except OSError as ex:
         if "No such file or directory" not in str(ex):
             raise
@@ -216,8 +253,8 @@ def push(fout, docker_version, image, tag):
     # list
     targets = notary_list(fout, image)
     for target in targets:
-        if target[0] == docker_version:
-            assert_equality(target, [docker_version, sha, size, "targets"])
+        if target[0] == tag:
+            assert_equality(target, [tag, sha, size, "targets"])
     return sha, size
 
 
@@ -228,7 +265,7 @@ def notary_list(fout, repo):
     """
     clear_tuf()
     output = run_cmd(
-        "{0} -d {1} list {2}".format(NOTARY_CLIENT, TRUST_DIR, repo), fout)
+        "{0} -d {1} list {2}".format(NOTARY_CLIENT, _TRUST_DIR, repo), fout)
     lines = output.strip().split("\n")
     assert len(lines) >= 3, "not enough targets"
     return [line.strip().split() for line in lines[2:]]
@@ -272,7 +309,7 @@ def test_push(tempdir, docker_version, image, tag="", allow_push_failure=False,
             sha, size = push(fout, docker_version, image, tag=tag)
         except subprocess.CalledProcessError:
             if allow_push_failure:
-                return {"push": "failed"}
+                return {"push": "failed, but that was expected"}
             raise
 
         return_val = {
@@ -287,9 +324,11 @@ def test_push(tempdir, docker_version, image, tag="", allow_push_failure=False,
 
         for ver in DOCKERS:
             try:
-                pull(fout, ver, image, docker_version, sha)
+                pull(fout, ver, image, tag, sha)
             except subprocess.CalledProcessError:
-                return_val["push"][ver] = "pull failed"
+                print("pulling {0}:{1} with {2} (expected hash {3}) failed".format(
+                    image, tag, ver, sha))
+                raise
             else:
                 return_val["push"][ver] = "pull succeeded"
 
@@ -317,17 +356,27 @@ def test_docker_version(docker_version, repo_name="", do_after_first_push=None):
     if do_after_first_push:
         tag = docker_version + "_push_again"
         result[tag] = test_push(
-            tempdir, docker_version, image, tag=tag, allow_push_failure=True)
+            tempdir, docker_version, image, tag=tag,
+            # 1.8.x and 1.9.x might fail to push again after snapshot rotation
+            # or delegation manipulation
+            allow_push_failure=re.compile(r"1\.[0-9](\.\d+)?$").search(docker_version))
 
     for ver in DOCKERS:
         if ver != docker_version:
-            result[ver] = test_push(
-                tempdir, ver, image, allow_push_failure=True)
+            # 1.8.x and 1.9.x will fail to push if the repo was created by
+            # a more recent docker, since the key format has changed, or if a
+            # snapshot rotation or delegation has occurred
+            can_fail = (
+                (do_after_first_push or
+                 re.compile(r"1\.[1-9][0-9](\.\d+)?$").search(docker_version)) and
+                re.compile(r"1\.[0-9](\.\d+)?$").search(ver))
+
+            result[ver] = test_push(tempdir, ver, image, allow_push_failure=can_fail)
 
     # find all the successfully pushed tags
     expected_tags = {}
     for ver in result:
-        if result[ver]["push"] != "failed":
+        if isinstance(result[ver]["push"], dict):
             expected_tags[ver] = result[ver]["push"]
 
     with open(os.path.join(tempdir, "pull_a"), 'wb') as fout:
@@ -363,10 +412,10 @@ def rotate_to_server_snapshot(fout, image):
     """
     run_cmd(
         "{0} -d {1} key rotate {2} -t snapshot -r".format(
-            NOTARY_CLIENT, TRUST_DIR, image),
+            NOTARY_CLIENT, _TRUST_DIR, image),
         fout)
     run_cmd(
-        "{0} -d {1} publish {2}".format(NOTARY_CLIENT, TRUST_DIR, image),
+        "{0} -d {1} publish {2}".format(NOTARY_CLIENT, _TRUST_DIR, image),
         fout)
 
 
@@ -378,22 +427,24 @@ def test_all_docker_versions():
     print("Output files at", _TEMPDIR)
     results = OrderedDict()
     for docker_version in DOCKERS:
+        clear_keys()
+
+        # test with just creating a regular repo
         result = test_docker_version(docker_version)
         print("\nRepo created with docker {0}:".format(docker_version))
         print(json.dumps(result, indent=2))
         results[docker_version] = result
 
-        if docker_version != "1.10":
-            repo_name = "repo_by_{0}_snapshot_rotation".format(docker_version)
-            result = test_docker_version(
-                docker_version, repo_name=repo_name,
-                do_after_first_push=rotate_to_server_snapshot)
+        # do snapshot rotation after creating the repo, and see if it's still ok
+        repo_name = "repo_by_{0}_snapshot_rotation".format(docker_version)
+        result = test_docker_version(
+            docker_version, repo_name=repo_name,
+            do_after_first_push=rotate_to_server_snapshot)
 
-            print("\nRepo created with docker {0} and snapshot key rotated:"
-                  .format(docker_version))
-            print(json.dumps(result, indent=2))
-            results[docker_version + "_snapshot_rotation"] = result
-
+        print("\nRepo created with docker {0} and snapshot key rotated:"
+              .format(docker_version))
+        print(json.dumps(result, indent=2))
+        results[docker_version + "_snapshot_rotation"] = result
 
     with open(os.path.join(_TEMPDIR, "total_results.json"), 'wb') as fout:
         json.dump(results, fout, indent=2)
