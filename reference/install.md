@@ -52,7 +52,6 @@ before running the install.
 | `--dns-search` [`--dns-search option --dns-search option`] | Set custom DNS search domains for the UCP infrastructure containers. |
 | `--disable-tracking` | Disable anonymous tracking and analytics. |
 | `--disable-usage` | Disable anonymous usage reporting. |
-| `--image-version "0.7.0"` | Select a specific UCP version. |
 | `--external-ucp-ca` | Set up UCP with an external CA. |
 | `--preserve-certs` | Don't (re)generate certs on the host if existing ones are found. |
 | `--binpack` | Set Swarm scheduler to binpack mode (default spread). |
