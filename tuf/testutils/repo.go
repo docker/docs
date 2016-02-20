@@ -13,6 +13,7 @@ import (
 	"github.com/docker/notary/tuf/utils"
 	fuzz "github.com/google/gofuzz"
 
+	"github.com/docker/notary/client/changelist"
 	tuf "github.com/docker/notary/tuf"
 	"github.com/docker/notary/tuf/signed"
 )
@@ -80,11 +81,7 @@ func EmptyRepo(gun string, delegationRoles ...string) (*tuf.Repo, signed.CryptoS
 		if err != nil {
 			return nil, nil, err
 		}
-		role, err := data.NewRole(delgName, 1, []string{}, []string{""})
-		if err != nil {
-			return nil, nil, err
-		}
-		if err := r.UpdateDelegations(role, []data.PublicKey{delgKey}); err != nil {
+		if err := r.UpdateDelegations(delgName, changelist.TufDelegation{AddKeys: []data.PublicKey{delgKey}, AddPaths: []string{""}, NewThreshold: 1, NewName: delgName}); err != nil {
 			return nil, nil, err
 		}
 	}

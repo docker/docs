@@ -1218,18 +1218,16 @@ func testListTargetWithDelegates(t *testing.T, rootType string) {
 	// setup delegated targets/level1 role
 	k, err := repo.CryptoService.Create("targets/level1", rootType)
 	assert.NoError(t, err)
-	r, err := data.NewRole("targets/level1", 1, []string{k.ID()}, []string{""})
+	err = repo.tufRepo.UpdateDelegations("targets/level1", changelist.TufDelegation{AddKeys: []data.PublicKey{k}, AddPaths: []string{""}, NewThreshold: 1})
 	assert.NoError(t, err)
-	repo.tufRepo.UpdateDelegations(r, []data.PublicKey{k})
 	delegatedTarget := addTarget(t, repo, "current", "../fixtures/root-ca.crt", "targets/level1")
 	otherTarget := addTarget(t, repo, "other", "../fixtures/root-ca.crt", "targets/level1")
 
 	// setup delegated targets/level2 role
 	k, err = repo.CryptoService.Create("targets/level2", rootType)
 	assert.NoError(t, err)
-	r, err = data.NewRole("targets/level2", 1, []string{k.ID()}, []string{""})
+	err = repo.tufRepo.UpdateDelegations("targets/level2", changelist.TufDelegation{AddKeys: []data.PublicKey{k}, AddPaths: []string{""}, NewThreshold: 1})
 	assert.NoError(t, err)
-	repo.tufRepo.UpdateDelegations(r, []data.PublicKey{k})
 	// this target should not show up as the one in targets/level1 takes higher priority
 	_ = addTarget(t, repo, "current", "../fixtures/notary-server.crt", "targets/level2")
 	// this target should show up as the name doesn't exist elsewhere
