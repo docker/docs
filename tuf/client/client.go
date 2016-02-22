@@ -5,6 +5,7 @@ import (
 	"crypto/sha256"
 	"encoding/json"
 	"fmt"
+	"path"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary"
@@ -428,7 +429,11 @@ func (c *Client) downloadTargets(role string) error {
 
 		// push delegated roles contained in the targets file onto the stack
 		for _, r := range t.Signed.Delegations.Roles {
-			stack.Push(r.Name)
+			if path.Dir(r.Name) == role {
+				// only load children that are direct 1st generation descendants
+				// of the role we've just downloaded
+				stack.Push(r.Name)
+			}
 		}
 	}
 	return nil
