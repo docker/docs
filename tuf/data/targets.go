@@ -93,29 +93,43 @@ func (t SignedTargets) GetValidDelegations(parent DelegationRole) []DelegationRo
 	return result
 }
 
+// BuildDelegationRole returns a copy of a DelegationRole using the information in this SignedTargets for the specified role name.
+// Will error for invalid role name or key metadata within this SignedTargets.  Path data is not validated.
+func (t *SignedTargets) BuildDelegationRole(roleName string) (DelegationRole, error) {
+	for _, role := range t.Signed.Delegations.Roles {
+		if role.Name == roleName {
+			pubKeys := make(map[string]PublicKey)
+			for _, keyID := range role.KeyIDs {
+				pubKey, ok := t.Signed.Delegations.Keys[keyID]
+				if !ok {
+					// Couldn't retrieve all keys, so stop walking and return invalid role
+					return DelegationRole{}, ErrInvalidRole{Role: roleName, Reason: "delegation does not exist with all specified keys"}
+				}
+				pubKeys[keyID] = pubKey
+			}
+			return DelegationRole{
+				BaseRole: BaseRole{
+					Name:      role.Name,
+					Keys:      pubKeys,
+					Threshold: role.Threshold,
+				},
+				Paths: role.Paths,
+			}, nil
+		}
+	}
+	return DelegationRole{}, ErrNoSuchRole{Role: roleName}
+}
+
 // helper function to create DelegationRole structures from all delegations in a SignedTargets,
 // these delegations are read directly from the SignedTargets and not modified or validated
 func (t SignedTargets) buildDelegationRoles() []DelegationRole {
 	var roles []DelegationRole
 	for _, roleData := range t.Signed.Delegations.Roles {
-		keyIDs := roleData.KeyIDs
-		pubKeys := make(map[string]PublicKey)
-		for _, keyID := range keyIDs {
-			pubKey, ok := t.Signed.Delegations.Keys[keyID]
-			if !ok {
-				continue
-			}
-			pubKeys[keyID] = pubKey
+		delgRole, err := t.BuildDelegationRole(roleData.Name)
+		if err != nil {
+			continue
 		}
-
-		roles = append(roles, DelegationRole{
-			BaseRole: BaseRole{
-				Name:      roleData.Name,
-				Keys:      pubKeys,
-				Threshold: roleData.Threshold,
-			},
-			Paths: roleData.Paths,
-		})
+		roles = append(roles, delgRole)
 	}
 	return roles
 }

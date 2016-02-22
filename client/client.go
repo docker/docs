@@ -23,6 +23,7 @@ import (
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/store"
+	"github.com/docker/notary/tuf/utils"
 )
 
 func init() {
@@ -390,11 +391,11 @@ func (r *NotaryRepository) ListTargets(roles ...string) ([]*TargetWithRole, erro
 	}
 	targets := make(map[string]*TargetWithRole)
 	for _, role := range roles {
+		// Define an array of roles to skip for this walk (see IMPORTANT comment above)
+		skipRoles := utils.StrSliceRemove(roles, role)
+
 		// Define a visitor function to populate the targets map in priority order
-		listVisitorFunc := func(tgt *data.SignedTargets, validRole data.DelegationRole) error {
-			if tgt == nil {
-				return tuf.ErrContinueWalk{}
-			}
+		listVisitorFunc := func(tgt *data.SignedTargets, validRole data.DelegationRole) interface{} {
 			// We found targets so we should try to add them to our targets map
 			for targetName, targetMeta := range tgt.Signed.Targets {
 				// Follow the priority by not overriding previously set targets
@@ -405,9 +406,9 @@ func (r *NotaryRepository) ListTargets(roles ...string) ([]*TargetWithRole, erro
 				targets[targetName] =
 					&TargetWithRole{Target: Target{Name: targetName, Hashes: targetMeta.Hashes, Length: targetMeta.Length}, Role: validRole.Name}
 			}
-			return tuf.ErrContinueWalk{}
+			return nil
 		}
-		r.tufRepo.WalkTargets("", role, listVisitorFunc)
+		r.tufRepo.WalkTargets("", role, listVisitorFunc, skipRoles...)
 	}
 
 	var targetList []*TargetWithRole
@@ -436,23 +437,27 @@ func (r *NotaryRepository) GetTargetByName(name string, roles ...string) (*Targe
 	}
 	var resultMeta data.FileMeta
 	var resultRoleName string
+	var foundTarget bool
 	for _, role := range roles {
+		// Define an array of roles to skip for this walk (see IMPORTANT comment above)
+		skipRoles := utils.StrSliceRemove(roles, role)
+
 		// Define a visitor function to find the specified target
-		getTargetVisitorFunc := func(tgt *data.SignedTargets, validRole data.DelegationRole) error {
-			var ok bool
+		getTargetVisitorFunc := func(tgt *data.SignedTargets, validRole data.DelegationRole) interface{} {
 			if tgt == nil {
-				return tuf.ErrContinueWalk{}
+				return nil
 			}
 			// We found the target and validated path compatibility in our walk,
 			// so we should stop our walk and set the resultMeta and resultRoleName variables
-			if resultMeta, ok = tgt.Signed.Targets[name]; ok {
+			if resultMeta, foundTarget = tgt.Signed.Targets[name]; foundTarget {
 				resultRoleName = validRole.Name
-				return tuf.ErrStopWalk{}
+				return tuf.StopWalk{}
 			}
-			return tuf.ErrContinueWalk{}
+			return nil
 		}
-		err = r.tufRepo.WalkTargets(name, role, getTargetVisitorFunc)
-		if err == nil {
+		err = r.tufRepo.WalkTargets(name, role, getTargetVisitorFunc, skipRoles...)
+		// Check that we didn't error, and that we assigned to our target
+		if err == nil && foundTarget {
 			return &TargetWithRole{Target: Target{Name: name, Hashes: resultMeta.Hashes, Length: resultMeta.Length}, Role: resultRoleName}, nil
 		}
 	}

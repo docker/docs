@@ -874,16 +874,12 @@ func TestGetDelegationRolesInvalidPaths(t *testing.T) {
 
 	testKey2, err := ed25519.Create("targets/test/b", data.ED25519Key)
 	assert.NoError(t, err)
-	// Now we add a delegation with a path that is not prefixed by its parent delegation, the invalid path won't be added
+	// Now we add a delegation with a path that is not prefixed by its parent delegation, the invalid path can't be added so there is an error
 	err = repo.UpdateDelegations("targets/test/b", changelist.TufDelegation{AddKeys: []data.PublicKey{testKey2}, AddPaths: []string{"invalidpath"}, NewThreshold: 1})
-	assert.NoError(t, err)
+	assert.Error(t, err)
+	assert.IsType(t, data.ErrInvalidRole{}, err)
 
-	// Updating the delegation will restrict paths
-	delgRole, err := repo.GetDelegationRole("targets/test/b")
-	assert.NoError(t, err)
-	assert.NotContains(t, delgRole.Paths, "invalidpath")
-
-	delgRole, err = repo.GetDelegationRole("targets/test")
+	delgRole, err := repo.GetDelegationRole("targets/test")
 	assert.NoError(t, err)
 	assert.Contains(t, delgRole.Paths, "path")
 	assert.Contains(t, delgRole.Paths, "anotherpath")

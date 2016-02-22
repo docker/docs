@@ -81,7 +81,7 @@ func EmptyRepo(gun string, delegationRoles ...string) (*tuf.Repo, signed.CryptoS
 		if err != nil {
 			return nil, nil, err
 		}
-		if err := r.UpdateDelegations(delgName, changelist.TufDelegation{AddKeys: []data.PublicKey{delgKey}, AddPaths: []string{""}, NewThreshold: 1, NewName: delgName}); err != nil {
+		if err := r.UpdateDelegations(delgName, changelist.TufDelegation{AddKeys: []data.PublicKey{delgKey}, AddPaths: []string{""}, NewThreshold: 1}); err != nil {
 			return nil, nil, err
 		}
 	}

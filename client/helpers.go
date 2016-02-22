@@ -80,18 +80,8 @@ func changeTargetsDelegation(repo *tuf.Repo, c changelist.Change) error {
 		if err != nil {
 			return err
 		}
-		_, err = repo.GetDelegationRole(c.Scope())
-		if _, ok := err.(data.ErrInvalidRole); err != nil && !ok {
-			// error that wasn't ErrInvalidRole
-			return err
-		}
 
-		if err == nil {
-			// role existed, merge paths and keys to this copy of the delegation role
-			addTD := changelist.TufDelegation{AddPaths: td.AddPaths, AddKeys: td.AddKeys}
-			return repo.UpdateDelegations(c.Scope(), addTD)
-		}
-		// try to create brand new role
+		// try to create brand new role or update one
 		createTD := changelist.TufDelegation{AddPaths: td.AddPaths, AddKeys: td.AddKeys, NewThreshold: notary.MinThreshold}
 		return repo.UpdateDelegations(c.Scope(), createTD)
 	case changelist.ActionUpdate:

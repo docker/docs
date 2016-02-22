@@ -8,7 +8,6 @@ import (
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary"
 	"github.com/docker/notary/client/changelist"
-	"github.com/docker/notary/tuf"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/store"
 	"github.com/docker/notary/tuf/utils"
@@ -255,10 +254,7 @@ func (r *NotaryRepository) GetDelegationRoles() ([]*data.Role, error) {
 	allDelegations := []*data.Role{}
 
 	// Define a visitor function to populate the delegations list and translate their key IDs to canonical IDs
-	delegationCanonicalListVisitor := func(tgt *data.SignedTargets, validRole data.DelegationRole) error {
-		if tgt == nil {
-			return tuf.ErrContinueWalk{}
-		}
+	delegationCanonicalListVisitor := func(tgt *data.SignedTargets, validRole data.DelegationRole) interface{} {
 		// For the return list, update with a copy that includes canonicalKeyIDs
 		// These aren't validated by the validRole
 		canonicalDelegations, err := translateDelegationsToCanonicalIDs(tgt.Signed.Delegations)
@@ -266,7 +262,7 @@ func (r *NotaryRepository) GetDelegationRoles() ([]*data.Role, error) {
 			return err
 		}
 		allDelegations = append(allDelegations, canonicalDelegations...)
-		return tuf.ErrContinueWalk{}
+		return nil
 	}
 	err := r.tufRepo.WalkTargets("", "", delegationCanonicalListVisitor)
 	if err != nil {
