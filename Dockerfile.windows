@@ -17,8 +17,8 @@ RUN cd innosetup && \
     wine "./innounp.exe" -e "is-unicode.exe"
 
 # installer components
-ENV INSTALLER_VERSION 1.10.1a
-ENV DOCKER_VERSION 1.10.1
+ENV INSTALLER_VERSION 1.10.2a
+ENV DOCKER_VERSION 1.10.2
 ENV DOCKER_MACHINE_VERSION 0.6.0
 ENV DOCKER_COMPOSE_VERSION 1.6.0
 ENV BOOT2DOCKER_ISO_VERSION $DOCKER_VERSION
@@ -30,8 +30,7 @@ ENV MIXPANEL_TOKEN c306ae65c33d7d09fe3e546f36493a6e
 
 RUN mkdir /bundle
 WORKDIR /bundle
-# RUN curl -fsSL -o docker.exe "https://get.docker.com/builds/Windows/x86_64/docker-$DOCKER_VERSION.exe"
-RUN curl -fsSL -o docker.exe "https://test.docker.com/builds/Windows/x86_64/docker-$DOCKER_VERSION.exe"
+RUN curl -fsSL -o docker.exe "https://get.docker.com/builds/Windows/x86_64/docker-$DOCKER_VERSION.exe"
 
 RUN curl -fsSL -o docker-machine.exe "https://github.com/docker/machine/releases/download/v$DOCKER_MACHINE_VERSION/docker-machine-Windows-x86_64.exe"
 
