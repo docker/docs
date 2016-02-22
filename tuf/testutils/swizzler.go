@@ -559,11 +559,10 @@ func (m *MetadataSwizzler) MutateRoot(mutate func(*data.Root)) error {
 
 	mutate(&root)
 
-	rootBytes, err := json.MarshalCanonical(root)
+	signedThing, err = data.SignedRoot{Signed: root, Signatures: signedThing.Signatures}.ToSigned()
 	if err != nil {
 		return err
 	}
-	signedThing.Signed = json.RawMessage(rootBytes)
 
 	pubKeys, err := getPubKeys(m.CryptoService, signedThing, data.CanonicalRootRole)
 	if err != nil || len(pubKeys) == 0 { // we have to sign it somehow - might as well use the old keys
@@ -592,11 +591,10 @@ func (m *MetadataSwizzler) MutateTimestamp(mutate func(*data.Timestamp)) error {
 
 	mutate(&timestamp)
 
-	timestampBytes, err := json.MarshalCanonical(timestamp)
+	signedThing, err = data.SignedTimestamp{Signed: timestamp, Signatures: signedThing.Signatures}.ToSigned()
 	if err != nil {
 		return err
 	}
-	signedThing.Signed = json.RawMessage(timestampBytes)
 
 	pubKeys, err := getPubKeys(m.CryptoService, signedThing, data.CanonicalTimestampRole)
 	if err != nil {
@@ -625,11 +623,10 @@ func (m *MetadataSwizzler) MutateSnapshot(mutate func(*data.Snapshot)) error {
 
 	mutate(&snapshot)
 
-	snapshotBytes, err := json.MarshalCanonical(snapshot)
+	signedThing, err = data.SignedSnapshot{Signed: snapshot, Signatures: signedThing.Signatures}.ToSigned()
 	if err != nil {
 		return err
 	}
-	signedThing.Signed = json.RawMessage(snapshotBytes)
 
 	pubKeys, err := getPubKeys(m.CryptoService, signedThing, data.CanonicalSnapshotRole)
 	if err != nil {
@@ -658,11 +655,10 @@ func (m *MetadataSwizzler) MutateTargets(mutate func(*data.Targets)) error {
 
 	mutate(&targets)
 
-	targetsBytes, err := json.MarshalCanonical(targets)
+	signedThing, err = data.SignedTargets{Signed: targets, Signatures: signedThing.Signatures}.ToSigned()
 	if err != nil {
 		return err
 	}
-	signedThing.Signed = json.RawMessage(targetsBytes)
 
 	pubKeys, err := getPubKeys(m.CryptoService, signedThing, data.CanonicalTargetsRole)
 	if err != nil {
