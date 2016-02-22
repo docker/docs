@@ -20,8 +20,6 @@ The following topics are covered:
 * [UCP architecture](#ucp-architecture)
 * [The UCP installation](#the-ucp-installation)
 * [Understand your installation options](#understand-your-installation-options)
-* [Security Considerations](#security-considerations)
-* [Docker Engine Configuration](#docker-engine-configuration)
 * [Installation checklist](#installation-checklist)
 
 ## UCP architecture
@@ -32,8 +30,8 @@ In this cluster, there are 3 different types of nodes:
 
 * [UCP controller node](#UCP-controller-node): the node that handles user
 requests,
-* [UCP replica nodes](#ucp-replica-nodes): replicas of the controller node
-that can take its place if it fails,
+* [UCP replica nodes](#ucp-replica-nodes): replicas of the controller node, for
+high-availability,
 * [UCP nodes](#ucp-nodes): the nodes that run your own containers.
 
 ![](images/ucp-architecture.png)
@@ -46,19 +44,24 @@ using a web browser, or a CLI client.
 Below is a list of the containers that are deployed to the controller node,
 when running the `ucp install` command:
 
-| Container name    | Description                                                                               |
-|:------------------|:------------------------------------------------------------------------------------------|
-| ucp-controller    | Manages UCP resources, admin configuration, and user commands.                            |
-| ucp-swarm-manager | Accepts requests the from UCP controller.                                                 |
-| ucp-kv            | Internal node discovery, cluster configuration, and support for HA.                       |
-| ucp-ca            | Allow external systems to reach UCP. Proxy for TLS.                                       |
-| ucp-swarm-ca      | Allow external systems to reach UCP, Swarm, and Engine, using credentials. Proxy for TLS. |
+| Name                  | Description                                                                                                                                                                                                                      |
+|:----------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `ucp-kv`              | This container runs the key-value store used by UCP. Don't use this key-value store in your applications, since it's for internal use only.                                                                                      |
+| `ucp-swarm-manager`   | This Swarm manager uses the replicated KV store for leader election and cluster membership tracking.                                                                                                                             |
+| `ucp-controller`      | This container runs the UCP server, using the replicated KV store for configuration state.                                                                                                                                       |
+| `ucp-swarm-join`      | Runs the `swarm join` command to periodically publish this node existence to the KV store. If the node goes down, this publishing stops, and the registration times out, and the node is automatically dropped from the cluster. |
+| `ucp-proxy`           | Runs a local TLS proxy for the docker socket to enable secure access of the local docker daemon.                                                                                                                                 |
+| `ucp-cluster-root-ca` | Run the Swarm CA used for admin certificate bundles, and adding new nodes.                                                                                                                                                       |
+| `ucp-client-root-ca`  | Run the (optional) UCP CA used for signing user bundles.                                                                                                                                                                         |
 
 
 #### UCP replica nodes
 
 Docker UCP has support for high availability. You can configure replica nodes
-to stand by, and be ready to take the place of the controller if it fails.
+for:
+
+* Load-balancing user requests across the controller and replica nodes,
+* Maintain a copy of the system configuration, in case the controller fails.
 
 A cluster with N controller and replica nodes can only tolerate (N-1)/2 node
 failures. So be sure to set up at least two replicas, when installing UCP for
@@ -67,13 +70,13 @@ production.
 Below is a list of the containers that are deployed to the controller node,
 when running the `ucp join --replica` command:
 
-| Container name    | Description                                                         |
-|:------------------|:--------------------------------------------------------------------|
-| ucp-controller    | Manages UCP resources, admin configuration, and user commands.      |
-| ucp-swarm-manager | Accepts requests from the UCP controller.                           |
-| ucp-kv            | Internal node discovery, cluster configuration, and support for HA. |
-| ucp-proxy         | Manages TLS and requests from swarm manager.                        |
-| ucp-swarm-join    | Heartbeat for Swarm nodes to ensure they are running.               |
+| Name                | Description                                                                                                                                                                                                                      |
+|:--------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `ucp-kv`            | This container runs the key-value store used by UCP. Don't use this key-value store in your applications, since it's for internal use only.                                                                                      |
+| `ucp-swarm-manager` | This Swarm manager uses the replicated KV store for leader election and cluster membership tracking.                                                                                                                             |
+| `ucp-controller`    | This container runs the UCP server, using the replicated KV store for configuration state.                                                                                                                                       |
+| `ucp-swarm-join`    | Runs the `swarm join` command to periodically publish this node existence to the KV store. If the node goes down, this publishing stops, and the registration times out, and the node is automatically dropped from the cluster. |
+| `ucp-proxy`         | Runs a local TLS proxy for the docker socket to enable secure access of the local docker daemon.                                                                                                                                 |
 
 In UCP v1.0 the controller serves as root CA, and no other nodes are able to
 sign certificates. If the controller fails, it might not be possible to add new
@@ -89,10 +92,10 @@ nodes.
 Below is a list of the containers that are deployed to the controller node,
 when running the `ucp join` command:
 
-| Container name | Description                                           |
-|:---------------|:------------------------------------------------------|
-| ucp-proxy      | Manages TLS and requests from swarm manager.          |
-| ucp-swarm-join | Heartbeat for Swarm nodes to ensure they are running. |
+| Name             | Description                                                                                                                                                                                                                      |
+|:-----------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `ucp-swarm-join` | Runs the `swarm join` command to periodically publish this node existence to the KV store. If the node goes down, this publishing stops, and the registration times out, and the node is automatically dropped from the cluster. |
+| `ucp-proxy`      | Runs a local TLS proxy for the docker socket to enable secure access of the local docker daemon.                                                                                                                                 |
 
 
 ## The UCP installation
@@ -174,18 +177,19 @@ The following ports are using on UCP installation:
 
 | Hosts                       | Direction | Port                | Purpose                                                     |
 |:----------------------------|:---------:|:--------------------|:------------------------------------------------------------|
-| controller, replicas        |    in     | 443  (configurable) | web app and CLI client access to UCP.                       |
-| controller, replicas        |    in     | 2376 (configurable) | swarm manager accepts requests from UCP controller.         |
-| controller, replicas, nodes |    in     | 2375                | heartbeat for nodes, to ensure they are running.            |
-| controller, replicas, nodes |    in     | 12376               | proxy for TLS, provides access to UCP, Swarm, and Engine.   |
-| controller, replicas        |    in     | 12379               | internal node configuration, cluster configuration, and HA. |
-| controller, replicas        |    in     | 12380               | internal node configuration, cluster configuration, and HA. |
-| controller                  |    in     | 12381               | proxy for TLS, provides access to UCP.                      |
-| controller                  |    in     | 12382               | manages TLS and requests from swarm manager.                |
-| controller, replicas        |    out    | 443                 | send anonymous usage reports to Docker.                     |
+| controller, replicas        |    in     | 443  (configurable) | Web app and CLI client access to UCP.                       |
+| controller, replicas        |    in     | 2376 (configurable) | Swarm manager accepts requests from UCP controller.         |
+| controller, replicas, nodes |    in     | 2375                | Heartbeat for nodes, to ensure they are running.            |
+| controller, replicas, nodes |    in     | 12376               | Proxy for TLS, provides access to UCP, Swarm, and Engine.   |
+| controller, replicas        |    in     | 12379               | Internal node configuration, cluster configuration, and HA. |
+| controller, replicas        |    in     | 12380               | Internal node configuration, cluster configuration, and HA. |
+| controller                  |    in     | 12381               | Proxy for TLS, provides access to UCP.                      |
+| controller                  |    in     | 12382               | Manages TLS and requests from swarm manager.                |
+| controller, replicas        |    out    | 443                 | Send anonymous usage reports to Docker.                     |
 
-UCP collects anonymous data on the usage of UCP and reports to Docker.
-This data is entirely anonymous and does not identify your company or users.
+UCP collects anonymous usage metrics, to help us improve it.
+These metrics are entirely anonymous, don't identify your company, users,
+applications, or any other sensitive information.
 You can disable this at any time on the UCP settings screen.
 
 
@@ -203,19 +207,6 @@ If you're installing UCP on a cloud provider such as AWS or Digital Ocean,
 you might need to create a private network for you UCP installation. In that
 case, make sure all nodes of the cluster can communicate using their private
 IPs.
-
-If the nodes in the cluster cannot communicate using the private IPs,
-you'll need to use public IPs or Fully Qualified Domain Names.
-[Check the ports used](#ports-used) by UCP.
-
-
-If you are using a cloud provider such as AWS or Digital Ocean, you may need to
-create a private network for your UCP installation. You can use this network
-as long as the controller and nodes can communicate via
-their private IPs. If the private IPs do not support communication among the
-UCP cluster, using public IPs or full-qualified domain names are required. For
-more information about what ports and protocols are required see
-[Step 2: Configure your network for UCP](#step-2-configure-your-network-for-ucp).
 
 
 ### Subject alternative names (SANs)
