@@ -1,6 +1,7 @@
 +++
 title = "upgrade"
 description = "Upgrade UCP controller"
+keywords= ["upgrade, ucp"]
 [menu.main]
 identifier = "ucp_upgrade"
 parent = "ucp_ref"

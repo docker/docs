@@ -1,5 +1,6 @@
 +++
 title = "UCP tool reference"
+keywords= ["tool, reference, ucp"]
 description = "Run UCP commands"
 [menu.main]
 identifier = "ucp_ref"

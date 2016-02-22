@@ -1,5 +1,6 @@
 +++
 title = "dump-certs"
+keywords= ["dump-certs, ucp"]
 description = "Dump out public certificates"
 [menu.main]
 parent ="ucp_ref"

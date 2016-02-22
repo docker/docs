@@ -1,6 +1,7 @@
 <!--[metadata]>
 +++
 title ="Set up high availability"
+keywords= ["replica, controller, availability, high, ucp"]
 description="Docker Universal Control Plane"
 [menu.main]
 parent="mn_ucp"

@@ -1,5 +1,6 @@
 +++
 title = "help"
+keywords= ["help, ucp"]
 description = "List the UCP commands"
 [menu.main]
 identifier="ucp_help"
