@@ -1,5 +1,6 @@
 +++
 title = "uninstall"
+keywords= ["uninstall, ucp"]
 description = "Uninstall a UCP controller and nodes"
 [menu.main]
 identifier = "ucp_uninstall"

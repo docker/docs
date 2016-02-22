@@ -1,6 +1,7 @@
 <!--[metadata]>
 +++
 title ="Docker Universal Control Plane"
+keywords= ["univeral, introduction, overview, ucp"]
 description="Docker Universal Control Plane"
 [menu.main]
 parent="mn_ucp"

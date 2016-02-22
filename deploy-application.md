@@ -2,7 +2,7 @@
 +++
 title = "Deploy an application"
 description = "Deploy an application thru UCP"
-keywords = ["tbd, tbd"]
+keywords = ["deploy, application"]
 [menu.main]
 parent="mn_ucp"
 weight=-80
@@ -216,7 +216,7 @@ frontend that sends jobs to asynchronous background workers. The application's
 design can accommodate arbitrarily large scale. The diagram below shows the high
 level architecture of the application.
 
-![](../images/app-architecture.jpg)
+![](images/app-architecture.jpg)
 
 The application is fully dockerized with all services running inside of
 containers.
@@ -372,7 +372,7 @@ In this step, you deploy the application in UCP.
 
 8. Expand to the app to see which nodes the application containers are running in.
 
-    ![](../images/votingapp_default.png)
+    ![](images/votingapp_default.png)
 
 ## Step 5. Test the application
 
@@ -403,4 +403,4 @@ DNS name to the public IP address of the `votingapp_web-vote-app_1` node.
 
 3. Point your web browser to [http://votingapp.local](http://votingapp.local)
 
-    ![](../images/vote-app-test.jpg)
+    ![](images/vote-app-test.jpg)
