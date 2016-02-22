@@ -221,7 +221,7 @@ host for the controller suffices.
 
         $ docker run --rm -it \
         -v /var/run/docker.sock:/var/run/docker.sock \
-        --name ucp docker/ucp install -i\
+        --name ucp docker/ucp install -i \
         --swarm-port 3376 --host-address $(docker-machine ip node1)
         Unable to find image 'docker/ucp:latest' locally
         latest: Pulling from docker/ucp
