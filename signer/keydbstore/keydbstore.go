@@ -66,9 +66,9 @@ func (s *KeyDBStore) Name() string {
 	return "database"
 }
 
-// AddKey stores the contents of a private key. Both name and alias are ignored,
+// AddKey stores the contents of a private key. Both role and gun are ignored,
 // we always use Key IDs as name, and don't support aliases
-func (s *KeyDBStore) AddKey(name, alias string, privKey data.PrivateKey) error {
+func (s *KeyDBStore) AddKey(privKey data.PrivateKey, keyInfo trustmanager.KeyInfo) error {
 
 	passphrase, _, err := s.retriever(privKey.ID(), s.defaultPassAlias, false, 1)
 	if err != nil {
@@ -145,8 +145,13 @@ func (s *KeyDBStore) GetKey(name string) (data.PrivateKey, string, error) {
 	return privKey, "", nil
 }
 
+// GetKeyInfo returns the PrivateKey's role and gun in a KeyInfo given a KeyID
+func (s *KeyDBStore) GetKeyInfo(name string) (trustmanager.KeyInfo, error) {
+	return trustmanager.KeyInfo{}, fmt.Errorf("GetKeyInfo currently not supported for KeyDBStore, as it does not track roles or GUNs")
+}
+
 // ListKeys always returns nil. This method is here to satisfy the KeyStore interface
-func (s *KeyDBStore) ListKeys() map[string]string {
+func (s *KeyDBStore) ListKeys() map[string]trustmanager.KeyInfo {
 	return nil
 }
 
@@ -215,7 +220,7 @@ func (s *KeyDBStore) ExportKey(name string) ([]byte, error) {
 }
 
 // ImportKey is currently unimplemented and will always return an error
-func (s *KeyDBStore) ImportKey(pemBytes []byte, alias string) error {
+func (s *KeyDBStore) ImportKey(pemBytes []byte, role, gun string) error {
 	return errors.New("Importing into a KeyDBStore is not supported")
 }
 
