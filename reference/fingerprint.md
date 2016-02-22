@@ -1,7 +1,10 @@
 +++
 title = "fingerprint"
 description = "Dump out TLS certificates."
+keywords= ["fingerprint, ucp"]
 [menu.main]
+keywords= ["tool, reference, ucp"]
+
 parent = "ucp_ref"
 +++
 

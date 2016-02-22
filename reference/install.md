@@ -1,5 +1,6 @@
 +++
 title = "install"
+keywords= ["install, ucp"]
 description = "Install UCP controller"
 [menu.main]
 identifier = "ucp_install"

@@ -1,6 +1,7 @@
 <!--[metadata]>
 +++
 title ="Set up container networking"
+keywords= ["networking, kv, engine-discovery, ucp"]
 description="Docker Universal Control Plane"
 [menu.main]
 parent="mn_ucp"

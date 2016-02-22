@@ -1,5 +1,6 @@
 +++
 title = "images"
+keywords= ["images, ucp"]
 description = "description"
 [menu.main]
 identifier = "ucp_images"

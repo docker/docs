@@ -117,10 +117,10 @@ meaning they contain only users managed by UCP.
 
 Teams you create via an LDAP or Active Directory connection are known as
 **Discovered** teams. To use LDAP or Active Directory, you must have already
-[configured the AUTH settings in UCP](ldap-config.md). When you create a
-**Discovered** team, the system imports the members and applies the default
-authorization set in UCP's **AUTH** settings. The value appears in the **DEFAULT
-PERMISSIONS FOR NEW DISCOVERED ACCOUNTS** field.  
+configured the AUTH settings in UCP. When you create a **Discovered** team, the
+system imports the members and applies the default authorization set in UCP's
+**AUTH** settings. The value appears in the **DEFAULT PERMISSIONS FOR NEW
+DISCOVERED ACCOUNTS** field.   
 
 ![LDAP config](../images/ldap_access.png)
 

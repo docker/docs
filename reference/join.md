@@ -1,5 +1,6 @@
 +++
 title = "join"
+keywords= ["join, ucp"]
 description = "Join this Engine to an existing UCP"
 [menu.main]
 identifier = "ucp_join"

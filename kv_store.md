@@ -1,6 +1,7 @@
 <!--[metadata]>
 +++
 title ="UCP Key/Value Store Backends"
+keywords= ["ectd, key, value, store, ucp"]
 description="Docker Universal Control Plane"
 [menu.main]
 parent="mn_ucp"

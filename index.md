@@ -1,6 +1,7 @@
 <!--[metadata]>
 +++
 title ="Universal Control Plane"
+keywords= ["universal, control, plane, ucp"]
 description="Docker Universal Control Plane"
 [menu.main]
 identifier="mn_ucp"
@@ -61,7 +62,7 @@ organizational risk within enterprises.
 
 ## Where to go next
 
-* If you are interested in evaluating UCP on your laptop, you can use the [evaluation installation and quickstart](evaluation-installation.md).
+* If you are interested in evaluating UCP on your laptop, you can use the [evaluation installation and quickstart](evaluation-install.md).
 
 * Technical users and managers can get detailed explanation of the UCP architecture and requirements from the [plan a production installation](plan-production-install.md) page. The step-by-step [production installation](plan-production-install.md) is also available.
 
