@@ -80,11 +80,10 @@ func EmptyRepo(gun string, delegationRoles ...string) (*tuf.Repo, signed.CryptoS
 		if err != nil {
 			return nil, nil, err
 		}
-		role, err := data.NewRole(delgName, 1, []string{}, []string{""})
-		if err != nil {
+		if err := r.UpdateDelegationKeys(delgName, []data.PublicKey{delgKey}, []string{}, 1); err != nil {
 			return nil, nil, err
 		}
-		if err := r.UpdateDelegations(role, []data.PublicKey{delgKey}); err != nil {
+		if err := r.UpdateDelegationPaths(delgName, []string{""}, []string{}, false); err != nil {
 			return nil, nil, err
 		}
 	}

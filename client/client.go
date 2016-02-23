@@ -23,6 +23,7 @@ import (
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/store"
+	"github.com/docker/notary/tuf/utils"
 )
 
 func init() {
@@ -390,10 +391,24 @@ func (r *NotaryRepository) ListTargets(roles ...string) ([]*TargetWithRole, erro
 	}
 	targets := make(map[string]*TargetWithRole)
 	for _, role := range roles {
-		// we don't need to do anything special with removing role from
-		// roles because listSubtree always processes role and only excludes
-		// descendant delegations that appear in roles.
-		r.listSubtree(targets, role, roles...)
+		// Define an array of roles to skip for this walk (see IMPORTANT comment above)
+		skipRoles := utils.StrSliceRemove(roles, role)
+
+		// Define a visitor function to populate the targets map in priority order
+		listVisitorFunc := func(tgt *data.SignedTargets, validRole data.DelegationRole) interface{} {
+			// We found targets so we should try to add them to our targets map
+			for targetName, targetMeta := range tgt.Signed.Targets {
+				// Follow the priority by not overriding previously set targets
+				// and check that this path is valid with this role
+				if _, ok := targets[targetName]; ok || !validRole.CheckPaths(targetName) {
+					continue
+				}
+				targets[targetName] =
+					&TargetWithRole{Target: Target{Name: targetName, Hashes: targetMeta.Hashes, Length: targetMeta.Length}, Role: validRole.Name}
+			}
+			return nil
+		}
+		r.tufRepo.WalkTargets("", role, listVisitorFunc, skipRoles...)
 	}
 
 	var targetList []*TargetWithRole
@@ -404,34 +419,6 @@ func (r *NotaryRepository) ListTargets(roles ...string) ([]*TargetWithRole, erro
 	return targetList, nil
 }
 
-func (r *NotaryRepository) listSubtree(targets map[string]*TargetWithRole, role string, exclude ...string) {
-	excl := make(map[string]bool)
-	for _, r := range exclude {
-		excl[r] = true
-	}
-	roles := []string{role}
-	for len(roles) > 0 {
-		role = roles[0]
-		roles = roles[1:]
-		tgts, ok := r.tufRepo.Targets[role]
-		if !ok {
-			// not every role has to exist
-			continue
-		}
-		for name, meta := range tgts.Signed.Targets {
-			if _, ok := targets[name]; !ok {
-				targets[name] = &TargetWithRole{
-					Target: Target{Name: name, Hashes: meta.Hashes, Length: meta.Length}, Role: role}
-			}
-		}
-		for _, d := range tgts.Signed.Delegations.Roles {
-			if !excl[d.Name] {
-				roles = append(roles, d.Name)
-			}
-		}
-	}
-}
-
 // GetTargetByName returns a target given a name. If no roles are passed
 // it uses the targets role and does a search of the entire delegation
 // graph, finding the first entry in a breadth first search of the delegations.
@@ -440,7 +427,7 @@ func (r *NotaryRepository) listSubtree(targets map[string]*TargetWithRole, role 
 // will be returned
 // See the IMPORTANT section on ListTargets above. Those roles also apply here.
 func (r *NotaryRepository) GetTargetByName(name string, roles ...string) (*TargetWithRole, error) {
-	c, err := r.Update(false)
+	_, err := r.Update(false)
 	if err != nil {
 		return nil, err
 	}
@@ -448,11 +435,30 @@ func (r *NotaryRepository) GetTargetByName(name string, roles ...string) (*Targe
 	if len(roles) == 0 {
 		roles = append(roles, data.CanonicalTargetsRole)
 	}
+	var resultMeta data.FileMeta
+	var resultRoleName string
+	var foundTarget bool
 	for _, role := range roles {
-		meta, foundRole := c.TargetMeta(role, name, roles...)
-		if meta != nil {
-			return &TargetWithRole{
-				Target: Target{Name: name, Hashes: meta.Hashes, Length: meta.Length}, Role: foundRole}, nil
+		// Define an array of roles to skip for this walk (see IMPORTANT comment above)
+		skipRoles := utils.StrSliceRemove(roles, role)
+
+		// Define a visitor function to find the specified target
+		getTargetVisitorFunc := func(tgt *data.SignedTargets, validRole data.DelegationRole) interface{} {
+			if tgt == nil {
+				return nil
+			}
+			// We found the target and validated path compatibility in our walk,
+			// so we should stop our walk and set the resultMeta and resultRoleName variables
+			if resultMeta, foundTarget = tgt.Signed.Targets[name]; foundTarget {
+				resultRoleName = validRole.Name
+				return tuf.StopWalk{}
+			}
+			return nil
+		}
+		err = r.tufRepo.WalkTargets(name, role, getTargetVisitorFunc, skipRoles...)
+		// Check that we didn't error, and that we assigned to our target
+		if err == nil && foundTarget {
+			return &TargetWithRole{Target: Target{Name: name, Hashes: resultMeta.Hashes, Length: resultMeta.Length}, Role: resultRoleName}, nil
 		}
 	}
 	return nil, fmt.Errorf("No trust data for %s", name)
