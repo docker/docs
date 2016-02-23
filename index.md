@@ -17,6 +17,6 @@ The following documentation for Docker Trusted Registry is available:
 * [Quick Start: Basic User Workflow](quick-start.md)
 * [User Guide](userguide.md)
 * [Administrator Guide](adminguide.md)
-* [Configuration](configuration.md)
+* [Configuration](configure/configuration.md)
 * [Support](support.md)
 * [Release Notes](release-notes.md)

@@ -53,7 +53,7 @@ Notary](/engine/security/trust/deploying_notary.md). You can deploy a Notary
 server on the same machine as the Trusted Registry. If you do this, you can
 connect to the Notary server directly using the IP address of the `docker0`
 interface. The interface's address is typically `172.17.42.1`. Read more about
-[Docker Networking](/engine/userguide/networking/index.md) to learn about the
+[Docker Networking](https://docs.docker.com/engine/userguide/networking/index.md) to learn about the
 `docker0` interface. You can also connect using the machine's external IP
 address and port combination provided you expose the proper port.  
 
@@ -78,8 +78,8 @@ easier for clients to automatically use the correct Notary server.
 
     To configure your Docker client to be able to push signed images to Docker
     Trusted Registry refer to the CLI Reference's [Environment Variables
-    Section](/engine/reference/commandline/cli.md#environment-variables) and
-    [Notary Section](/engine/reference/commandline/cli.md#Notary).
+    Section](https://docs.docker.com/engine/reference/commandline/cli.md#environment-variables) and
+    [Notary Section](https://docs.docker.com/engine/reference/commandline/cli.md#Notary).
 
     This requires you to set the `DOCKER_CONTENT_TRUST` variable and configure
     your system to trust Docker Trusted Registry's TLS certificate if it doesn't
@@ -95,4 +95,4 @@ the Trusted Registry interface.
 
 * To continue to configure for your environment, see the overview
 [configuration instructions](configuration.md).
-* To use Docker Trusted Registry, see the [User guide](userguide.md).
+* To use Docker Trusted Registry, see the [User guide](../userguide.md).

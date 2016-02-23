@@ -32,12 +32,12 @@ When installing Docker Trusted Registry, you must first obtain your license, the
 
 ## Apply your license
 
-![Settings page</configuration/settings#http>](../images/admin-settings-license2.png)
+![Settings page</configuration/settings#http>](images/admin-settings-license2.png)
 
 Use the Trusted Registry dashboard (Settings > License) to enter your license ID or apply for a new license.
 
 ## See also
 
 * To continue to configure for your environment, see the overview
-[configuration instructions](../configuration.md).
+[configuration instructions](configure/configuration.md).
 * To use Docker Trusted Registry, see the [User guide](userguide.md).

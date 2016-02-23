@@ -194,8 +194,8 @@ The **Settings** screen is where you edit the details screen.
 ## See also
 
 * To configure for your environment, see the
-[Configuration instructions](../configure/configuration.md).
+[Configuration instructions](configure/configuration.md).
 * To administer the Trusted Registry, see the [Admin guide ](adminguide.md).
 * To use Docker Trusted Registry, see the [User guide](userguide.md).
-* To upgrade, see the [Upgrade guide](../install/upgrade.md).
+* To upgrade, see the [Upgrade guide](install/upgrade.md).
 * To see previous changes, see the [release notes](release-notes.md).

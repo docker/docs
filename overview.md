@@ -58,7 +58,7 @@ day.
 responsible for running and maintaining Docker Trusted Registry.
 * [**Installation**](install/index.md) Go here for the steps you'll need to install
 Docker Trusted Registry and get it working.
-* [**Configuration**](configuration.md) Go here to find out details about
+* [**Configuration**](configure/configuration.md) Go here to find out details about
 setting up and configuring Docker Trusted Registry for your particular environment.
 * [**Support**](install/index.md) Go here for information on getting support for Docker Trusted Registry.
 * [**The Docker Trusted Registry product page**](https://www.docker.com/docker-trusted-registry).

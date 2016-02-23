@@ -27,7 +27,7 @@ Release notes contain the following sections:
 * Fixed or updated with this release
 
 ## Additional storage backend
-This release introduces using Openstack Swift as a storage backend. Refer to the [configuration documentation](configuration.md) for details on the Swift driver.  
+This release introduces using Openstack Swift as a storage backend. Refer to the [configuration documentation](configure/configuration.md) for details on the Swift driver.  
 
 ## Fixed or updated with this release
 This release addresses the following issues in Docker Trusted Registry 1.4.1.
@@ -114,7 +114,7 @@ documentation.
 
 * Different repository behavior. A repository must first exist before you can push an image to it. This means you must explicitly create (or have it performed for you if you don't have the correct permissions) a repository. This behavior is different than how you would perform this in a free and open-source software registry.
 
-* New experimental feature. Docker Trusted Registry now integrates with Docker Content Trust using Notary. This is an experimental feature that is available with this release. See the [configuration documentation](configuration.md).
+* New experimental feature. Docker Trusted Registry now integrates with Docker Content Trust using Notary. This is an experimental feature that is available with this release. See the [configuration documentation](configure/configuration.md).
 
 ### Fixed with this release
 This release corrects the following issues in Docker Trusted Registry 1.3.3.
