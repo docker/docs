@@ -9,6 +9,7 @@ import (
 	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/trustmanager"
+	"github.com/docker/notary/tuf"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/store"
@@ -41,7 +42,11 @@ func getPubKeys(cs signed.CryptoService, s *data.Signed, role string) ([]data.Pu
 		if err := json.Unmarshal(s.Signed, root); err != nil {
 			return nil, err
 		}
-		for _, pubKeyID := range root.Roles[data.CanonicalRootRole].KeyIDs {
+		rootRole, ok := root.Roles[data.CanonicalRootRole]
+		if !ok || rootRole == nil {
+			return nil, tuf.ErrNotLoaded{}
+		}
+		for _, pubKeyID := range rootRole.KeyIDs {
 			pubKeys = append(pubKeys, root.Keys[pubKeyID])
 		}
 	} else {
@@ -531,4 +536,138 @@ func (m *MetadataSwizzler) UpdateTimestampHash() error {
 		return err
 	}
 	return m.MetadataCache.SetMeta(data.CanonicalTimestampRole, metaBytes)
+}
+
+// MutateRoot takes a function that mutates the root metadata - once done, it
+// serializes the root again
+func (m *MetadataSwizzler) MutateRoot(mutate func(*data.Root)) error {
+	signedThing, err := signedFromStore(m.MetadataCache, data.CanonicalRootRole)
+	if err != nil {
+		return err
+	}
+
+	var root data.Root
+	if err := json.Unmarshal(signedThing.Signed, &root); err != nil {
+		return err
+	}
+
+	// get the original keys, in case the mutation messes with the signing keys
+	oldPubKeys, err := getPubKeys(m.CryptoService, signedThing, data.CanonicalRootRole)
+	if err != nil {
+		return err
+	}
+
+	mutate(&root)
+
+	signedThing, err = data.SignedRoot{Signed: root, Signatures: signedThing.Signatures}.ToSigned()
+	if err != nil {
+		return err
+	}
+
+	pubKeys, err := getPubKeys(m.CryptoService, signedThing, data.CanonicalRootRole)
+	if err != nil || len(pubKeys) == 0 { // we have to sign it somehow - might as well use the old keys
+		pubKeys = oldPubKeys
+	}
+
+	metaBytes, err := serializeMetadata(m.CryptoService, signedThing, data.CanonicalRootRole, pubKeys...)
+	if err != nil {
+		return err
+	}
+	return m.MetadataCache.SetMeta(data.CanonicalRootRole, metaBytes)
+}
+
+// MutateTimestamp takes a function that mutates the timestamp metadata - once done, it
+// serializes the timestamp again
+func (m *MetadataSwizzler) MutateTimestamp(mutate func(*data.Timestamp)) error {
+	signedThing, err := signedFromStore(m.MetadataCache, data.CanonicalTimestampRole)
+	if err != nil {
+		return err
+	}
+
+	var timestamp data.Timestamp
+	if err := json.Unmarshal(signedThing.Signed, &timestamp); err != nil {
+		return err
+	}
+
+	mutate(&timestamp)
+
+	signedThing, err = data.SignedTimestamp{Signed: timestamp, Signatures: signedThing.Signatures}.ToSigned()
+	if err != nil {
+		return err
+	}
+
+	pubKeys, err := getPubKeys(m.CryptoService, signedThing, data.CanonicalTimestampRole)
+	if err != nil {
+		return err
+	}
+
+	metaBytes, err := serializeMetadata(m.CryptoService, signedThing, data.CanonicalTimestampRole, pubKeys...)
+	if err != nil {
+		return err
+	}
+	return m.MetadataCache.SetMeta(data.CanonicalTimestampRole, metaBytes)
+}
+
+// MutateSnapshot takes a function that mutates the snapshot metadata - once done, it
+// serializes the snapshot again
+func (m *MetadataSwizzler) MutateSnapshot(mutate func(*data.Snapshot)) error {
+	signedThing, err := signedFromStore(m.MetadataCache, data.CanonicalSnapshotRole)
+	if err != nil {
+		return err
+	}
+
+	var snapshot data.Snapshot
+	if err := json.Unmarshal(signedThing.Signed, &snapshot); err != nil {
+		return err
+	}
+
+	mutate(&snapshot)
+
+	signedThing, err = data.SignedSnapshot{Signed: snapshot, Signatures: signedThing.Signatures}.ToSigned()
+	if err != nil {
+		return err
+	}
+
+	pubKeys, err := getPubKeys(m.CryptoService, signedThing, data.CanonicalSnapshotRole)
+	if err != nil {
+		return err
+	}
+
+	metaBytes, err := serializeMetadata(m.CryptoService, signedThing, data.CanonicalSnapshotRole, pubKeys...)
+	if err != nil {
+		return err
+	}
+	return m.MetadataCache.SetMeta(data.CanonicalSnapshotRole, metaBytes)
+}
+
+// MutateTargets takes a function that mutates the targets metadata - once done, it
+// serializes the targets again
+func (m *MetadataSwizzler) MutateTargets(mutate func(*data.Targets)) error {
+	signedThing, err := signedFromStore(m.MetadataCache, data.CanonicalTargetsRole)
+	if err != nil {
+		return err
+	}
+
+	var targets data.Targets
+	if err := json.Unmarshal(signedThing.Signed, &targets); err != nil {
+		return err
+	}
+
+	mutate(&targets)
+
+	signedThing, err = data.SignedTargets{Signed: targets, Signatures: signedThing.Signatures}.ToSigned()
+	if err != nil {
+		return err
+	}
+
+	pubKeys, err := getPubKeys(m.CryptoService, signedThing, data.CanonicalTargetsRole)
+	if err != nil {
+		return err
+	}
+
+	metaBytes, err := serializeMetadata(m.CryptoService, signedThing, data.CanonicalTargetsRole, pubKeys...)
+	if err != nil {
+		return err
+	}
+	return m.MetadataCache.SetMeta(data.CanonicalTargetsRole, metaBytes)
 }
