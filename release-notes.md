@@ -1,5 +1,5 @@
 +++
-title = "Docker Trusted Registry release notes"
+title = "Trusted Registry release notes"
 description = "Docker Trusted Registry release notes "
 keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry, release notes, Docker Trusted Registry"]
 [menu.main]
@@ -17,6 +17,33 @@ for the Docker Trusted Registry.
 
 These notes refer to the current and immediately prior releases of Docker
 Trusted Registry. For notes on older versions, see the [prior release notes archive](prior-release-notes.md).
+
+# Docker Trusted Registry 1.4.3
+(22 February 2016)
+
+The Trusted Registry is supported on SUSE Linux Enterprise 12 OS.
+
+This release addresses the following issues in Docker Trusted Registry 1.4.2.
+
+* Improved the Trusted Registry UI response when performing certain operations with a large set of users.
+
+* Created a new Trusted Registry screen where image tags in a repository are displayed. This fixed the issue where long image tags were truncated in the UI.
+
+* You can now download the Trusted Registry for offline installation. Refer to the documentation.
+
+* Corrected an issue where if the Trusted Registry was set to a non default port, users couldn’t push images to it.
+
+* Improved LDAP configuration. There are now additional user search filters in the Trust Registry UI. The location is Settings > Auth. Select LDAP authentication method. The filters are:
+
+    * `UsernameAttrIsEmail`
+    * `ScopeOneLevel`
+
+* Fixed an issue where the Trusted Registry correctly updates team members after an LDAP sync. This removed duplication of users if they were moved to a different team.
+
+* Previously, if you started the Trusted Registry 1.4.2 with CS Engine 1.7.0 onwards, it might not start because `docker` might start the Trusted Registry containers in an order that makes [links impossible to create](https://github.com/docker/docker/issues/17118). Using CS Engine 1.9 and later with the latest Trusted Registry includes creation of a custom network that allows all containers to connect to each other without links. This means that every time the Trusted Registry starts up, there should be no error.
+
+    Also, when you upgrade CS Engine from 1.6 to 1.9 and the Trusted Registry admin server starts, it checks if it's running with links enabled. If that happens, the Trusted Registry restarts everything, creating the new network if necessary and removing the links, replacing them with a custom "dtr" network.
+
 
 # Docker Trusted Registry 1.4.2
 (21 December 2015)

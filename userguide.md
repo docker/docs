@@ -18,6 +18,7 @@ go to the [Administrator's Guide](adminguide.md).
 Task you can do:
 
 * View organizations, repositories, and team members through the Trusted Registry user interface.
+* Create repositories if you have read-write permissions.
 * Tag an image so that it can later be removed from the Trusted Registry repository. See the [documentation](soft-garbage.md) for deleting an image.
 * Push tags
 * Pull tags
@@ -31,6 +32,16 @@ Depending on your permissions, you can use the Trusted Registry user interface t
 * View the repositories within each organization that you belong to.
 
 For specifics on this feature, see the [account management](accounts.md) documentation.
+
+## Create a repository
+
+If you have read-write permissions, you can create a repository. You will need to create one if you have installed the Trusted Registry and you want to test your installation by pushing an image to a repository.
+
+1. In the Trusted Registry UI, navigate to Repositories and click New repository.
+
+![Repo screen</admin/settings#http>](images/repo.png)
+
+2. Enter a name, select visibility, and click Save.
 
 ## Push and pull overview
 

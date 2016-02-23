@@ -13,6 +13,36 @@ weight=103
 This document contains the previous versions of the commercially supported
 Docker Engine release notes. It includes issues, fixes, and new features.
 
+## CS Engine 1.9.0
+(12 November 2015)
+
+Highlighted feature summary:
+
+* Network Management and Plugins. Networks are now first class objects that can be listed, created, deleted, inspected, and connected to or disconnected from a
+container. They can be manipulated outside of the container themselves and are
+fully manageable on its own lifecycle. You can also use plugins to extend
+network functionality.
+
+* Docker, Inc. now provides support for the in-box Overlay (for cross-host networking) and Bridge network plugins. You can find more information about how
+to manage networks and using network plugins in the [documentation](https://docs.docker.com/engine/userguide/networking/dockernetworks/).
+
+* Volume Management and Plugins. Volumes also become discrete, manageable objects in Docker. Volumes can be listed, created, deleted, and inspected.
+Similar to networks, they have their own managed lifecycle outside of the
+container. Plugins allow others to write and extend the functionality of volumes
+or provide integration with other types of storage.
+
+* The in-box volume driver is included and supported. You can find more information about how to manage volumes  and using  volume plugins in the
+documentation.
+
+* Docker Content Trust. Use Content Trust to both verify the integrity and the publisher of all the data received from a registry over any channel. Content Trust is currently only supported using Docker Hub notary servers.
+
+* Updated the release cadence of the CS Docker Engine. Starting with this version, Docker supports **every** major release of Docker Engine from open
+source with three releases under support at one time. This means you’ll be able
+to take advantage of the latest and greatest features and you won’t have to wait
+for a supported release to take advantage of a specific feature.
+
+Refer to the [detailed list](https://github.com/docker/docker/releases) of all changes since the release of CS Engine 1.6.
+
 ## CS Engine 1.6.2-cs7
 (12 October 2015)
 

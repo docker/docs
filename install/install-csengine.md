@@ -11,7 +11,10 @@ parent="workw_dtr_install"
 
 This document describes the process of installing the commercially supported
 Docker Engine (CS Engine). Installing the CS Engine is a prerequisite for
-installing Docker Trusted Registry and/or the Universal Control Plane (UCP). Follow these instructions if you are installing the CS Engine on physical or cloud infrastructures.
+installing Docker Trusted Registry and/or the Universal Control Plane (UCP).
+Follow these instructions if you are installing the CS Engine on physical or
+cloud infrastructures.
+
 
 You first install the CS Engine before you install Docker Trusted Registry.
 However, if you are upgrading, you reverse that order and upgrade the Trusted
@@ -24,11 +27,13 @@ using an Amazon Machine Image (AMI). For more information, read the [installatio
 
 The CS Engine is supported on the following operating systems:
 
+
 * [CentOS 7.1/7.2 & RHEL 7.0/7.1 (YUM-based systems)](#install-on-centos-7-1-rhel-7-0-7-1-yum-based-systems)
 * [Ubuntu 14.04 LTS](#install-on-ubuntu-14-04-lts)
 * [SUSE Linux Enterprise 12](#install-on-suse-linux-enterprise-12-3)
 
-## Install on CentOS 7.1/7.2 & RHEL 7.0/7.1 (YUM-based systems)
+
+## Install CentOS 7.1/7.2 & RHEL 7.0/7.1 (YUM-based systems)
 
 This section explains how to install on CentOS 7.1/7.2 & RHEL 7.0/7.1. Only
 these versions are supported. CentOS 7.0 is **not** supported. On RHEL,
@@ -50,6 +55,7 @@ to update its RHEL kernel.
 4. Add the repository. Notice in the following code that it gets the latest
 version of the CS Engine. Each time you either install or upgrade, ensure that
 you are requesting the version and the OS that you want.
+
 
     ```
     $ sudo yum-config-manager --add-repo https://packages.docker.com/1.10/yum/repo/main/centos/7
@@ -144,6 +150,7 @@ you are requesting the version and the OS that you want.
     `$ sudo usermod -a -G docker $USER`
 
     Log out and log back in to have your new permissions take effect.
+
 
 ## Install on SUSE Linux Enterprise 12.3
 
