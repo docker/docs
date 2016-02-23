@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"time"
 
-	"fmt"
 	"github.com/docker/go/canonical/json"
 )
 

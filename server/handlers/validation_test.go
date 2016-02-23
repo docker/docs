@@ -7,7 +7,6 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/docker/notary/client/changelist"
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf"
@@ -860,7 +859,9 @@ func TestValidateTargetsLoadParent(t *testing.T) {
 	k, err := cs.Create("targets/level1", data.ED25519Key)
 	assert.NoError(t, err)
 
-	err = baseRepo.UpdateDelegations("targets/level1", changelist.TufDelegation{AddKeys: []data.PublicKey{k}, AddPaths: []string{""}, NewThreshold: 1})
+	err = baseRepo.UpdateDelegationKeys("targets/level1", []data.PublicKey{k}, []string{}, 1)
+	assert.NoError(t, err)
+	err = baseRepo.UpdateDelegationPaths("targets/level1", []string{""}, []string{}, false)
 	assert.NoError(t, err)
 
 	// no targets file is created for the new delegations, so force one
@@ -909,7 +910,9 @@ func TestValidateTargetsParentInUpdate(t *testing.T) {
 	k, err := cs.Create("targets/level1", data.ED25519Key)
 	assert.NoError(t, err)
 
-	err = baseRepo.UpdateDelegations("targets/level1", changelist.TufDelegation{AddKeys: []data.PublicKey{k}, AddPaths: []string{""}, NewThreshold: 1})
+	err = baseRepo.UpdateDelegationKeys("targets/level1", []data.PublicKey{k}, []string{}, 1)
+	assert.NoError(t, err)
+	err = baseRepo.UpdateDelegationPaths("targets/level1", []string{""}, []string{}, false)
 	assert.NoError(t, err)
 
 	// no targets file is created for the new delegations, so force one
@@ -965,7 +968,9 @@ func TestValidateTargetsParentNotFound(t *testing.T) {
 	k, err := cs.Create("targets/level1", data.ED25519Key)
 	assert.NoError(t, err)
 
-	err = baseRepo.UpdateDelegations("targets/level1", changelist.TufDelegation{AddKeys: []data.PublicKey{k}, AddPaths: []string{""}, NewThreshold: 1})
+	err = baseRepo.UpdateDelegationKeys("targets/level1", []data.PublicKey{k}, []string{}, 1)
+	assert.NoError(t, err)
+	err = baseRepo.UpdateDelegationPaths("targets/level1", []string{""}, []string{}, false)
 	assert.NoError(t, err)
 
 	// no targets file is created for the new delegations, so force one

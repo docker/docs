@@ -1237,7 +1237,9 @@ func testListTargetWithDelegates(t *testing.T, rootType string) {
 	// setup delegated targets/level1 role
 	k, err := repo.CryptoService.Create("targets/level1", rootType)
 	assert.NoError(t, err)
-	err = repo.tufRepo.UpdateDelegations("targets/level1", changelist.TufDelegation{AddKeys: []data.PublicKey{k}, AddPaths: []string{""}, NewThreshold: 1})
+	err = repo.tufRepo.UpdateDelegationKeys("targets/level1", []data.PublicKey{k}, []string{}, 1)
+	assert.NoError(t, err)
+	err = repo.tufRepo.UpdateDelegationPaths("targets/level1", []string{""}, []string{}, false)
 	assert.NoError(t, err)
 	delegatedTarget := addTarget(t, repo, "current", "../fixtures/root-ca.crt", "targets/level1")
 	otherTarget := addTarget(t, repo, "other", "../fixtures/root-ca.crt", "targets/level1")
@@ -1245,7 +1247,9 @@ func testListTargetWithDelegates(t *testing.T, rootType string) {
 	// setup delegated targets/level2 role
 	k, err = repo.CryptoService.Create("targets/level2", rootType)
 	assert.NoError(t, err)
-	err = repo.tufRepo.UpdateDelegations("targets/level2", changelist.TufDelegation{AddKeys: []data.PublicKey{k}, AddPaths: []string{""}, NewThreshold: 1})
+	err = repo.tufRepo.UpdateDelegationKeys("targets/level2", []data.PublicKey{k}, []string{}, 1)
+	assert.NoError(t, err)
+	err = repo.tufRepo.UpdateDelegationPaths("targets/level2", []string{""}, []string{}, false)
 	assert.NoError(t, err)
 	// this target should not show up as the one in targets/level1 takes higher priority
 	_ = addTarget(t, repo, "current", "../fixtures/notary-server.crt", "targets/level2")
@@ -1275,7 +1279,9 @@ func testListTargetWithDelegates(t *testing.T, rootType string) {
 	// This is done separately due to target shadowing
 	k, err = repo.CryptoService.Create("targets/level1/level2", rootType)
 	assert.NoError(t, err)
-	err = repo.tufRepo.UpdateDelegations("targets/level1/level2", changelist.TufDelegation{AddKeys: []data.PublicKey{k}, AddPaths: []string{"level2"}, NewThreshold: 1})
+	err = repo.tufRepo.UpdateDelegationKeys("targets/level1/level2", []data.PublicKey{k}, []string{}, 1)
+	assert.NoError(t, err)
+	err = repo.tufRepo.UpdateDelegationPaths("targets/level1/level2", []string{"level2"}, []string{}, false)
 	assert.NoError(t, err)
 	nestedTarget := addTarget(t, repo, "level2", "../fixtures/notary-signer.crt", "targets/level1/level2")
 	// load the changelist for this repo
@@ -1385,13 +1391,17 @@ func TestListTargetRestrictsDelegationPaths(t *testing.T) {
 	// setup delegated targets/level1 role
 	k, err := repo.CryptoService.Create("targets/level1", data.ECDSAKey)
 	assert.NoError(t, err)
-	err = repo.tufRepo.UpdateDelegations("targets/level1", changelist.TufDelegation{AddKeys: []data.PublicKey{k}, AddPaths: []string{""}, NewThreshold: 1})
+	err = repo.tufRepo.UpdateDelegationKeys("targets/level1", []data.PublicKey{k}, []string{}, 1)
+	assert.NoError(t, err)
+	err = repo.tufRepo.UpdateDelegationPaths("targets/level1", []string{""}, []string{}, false)
 	assert.NoError(t, err)
 	addTarget(t, repo, "level1-target", "../fixtures/root-ca.crt", "targets/level1")
 	addTarget(t, repo, "incorrectly-named-target", "../fixtures/root-ca.crt", "targets/level1")
 
 	// setup delegated targets/level2 role
-	err = repo.tufRepo.UpdateDelegations("targets/level1/level2", changelist.TufDelegation{AddKeys: []data.PublicKey{k}, AddPaths: []string{""}, NewThreshold: 1})
+	err = repo.tufRepo.UpdateDelegationKeys("targets/level1/level2", []data.PublicKey{k}, []string{}, 1)
+	assert.NoError(t, err)
+	err = repo.tufRepo.UpdateDelegationPaths("targets/level1/level2", []string{""}, []string{}, false)
 	assert.NoError(t, err)
 	addTarget(t, repo, "level2-target", "../fixtures/notary-server.crt", "targets/level1/level2")
 	addTarget(t, repo, "level1-level2-target", "../fixtures/notary-server.crt", "targets/level1/level2")
@@ -1410,14 +1420,14 @@ func TestListTargetRestrictsDelegationPaths(t *testing.T) {
 	assert.NoError(t, cl.Clear(""))
 
 	// Now restrict the paths
-	err = repo.tufRepo.UpdateDelegations("targets/level1", changelist.TufDelegation{AddPaths: []string{"level1"}})
+	err = repo.tufRepo.UpdateDelegationPaths("targets/level1", []string{"level1"}, []string{}, false)
 	assert.NoError(t, err)
-	err = repo.tufRepo.UpdateDelegations("targets/level1/level2", changelist.TufDelegation{AddPaths: []string{"level1-level2", "level2"}})
+	err = repo.tufRepo.UpdateDelegationPaths("targets/level1/level2", []string{"level1-level2", "level2"}, []string{}, false)
 	assert.NoError(t, err)
 
-	err = repo.tufRepo.UpdateDelegations("targets/level1", changelist.TufDelegation{RemovePaths: []string{""}})
+	err = repo.tufRepo.UpdateDelegationPaths("targets/level1", []string{}, []string{""}, false)
 	assert.NoError(t, err)
-	err = repo.tufRepo.UpdateDelegations("targets/level1/level2", changelist.TufDelegation{RemovePaths: []string{""}})
+	err = repo.tufRepo.UpdateDelegationPaths("targets/level1/level2", []string{}, []string{""}, false)
 	assert.NoError(t, err)
 
 	// load the changelist for this repo

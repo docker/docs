@@ -9,7 +9,6 @@ import (
 	"time"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/docker/notary"
 	"github.com/docker/notary/client/changelist"
 	tuf "github.com/docker/notary/tuf"
 	"github.com/docker/notary/tuf/data"
@@ -81,9 +80,13 @@ func changeTargetsDelegation(repo *tuf.Repo, c changelist.Change) error {
 			return err
 		}
 
-		// try to create brand new role or update one
-		createTD := changelist.TufDelegation{AddPaths: td.AddPaths, AddKeys: td.AddKeys, NewThreshold: notary.MinThreshold}
-		return repo.UpdateDelegations(c.Scope(), createTD)
+		// Try to create brand new role or update one
+		// First add the keys, then the paths.  We can only add keys and paths in this scenario
+		err = repo.UpdateDelegationKeys(c.Scope(), td.AddKeys, []string{}, td.NewThreshold)
+		if err != nil {
+			return err
+		}
+		return repo.UpdateDelegationPaths(c.Scope(), td.AddPaths, []string{}, false)
 	case changelist.ActionUpdate:
 		td := changelist.TufDelegation{}
 		err := json.Unmarshal(c.Content(), &td)
@@ -109,13 +112,16 @@ func changeTargetsDelegation(repo *tuf.Repo, c changelist.Change) error {
 		for _, canonID := range td.RemoveKeys {
 			removeTUFKeyIDs = append(removeTUFKeyIDs, canonicalToTUFID[canonID])
 		}
-		td.RemoveKeys = removeTUFKeyIDs
 
 		// If we specify the only keys left delete the role, else just delete specified keys
 		if strings.Join(delgRole.ListKeyIDs(), ";") == strings.Join(removeTUFKeyIDs, ";") && len(td.AddKeys) == 0 {
 			return repo.DeleteDelegation(c.Scope())
 		}
-		return repo.UpdateDelegations(c.Scope(), td)
+		err = repo.UpdateDelegationKeys(c.Scope(), td.AddKeys, removeTUFKeyIDs, td.NewThreshold)
+		if err != nil {
+			return err
+		}
+		return repo.UpdateDelegationPaths(c.Scope(), td.AddPaths, td.RemovePaths, td.ClearAllPaths)
 	case changelist.ActionDelete:
 		return repo.DeleteDelegation(c.Scope())
 	default:

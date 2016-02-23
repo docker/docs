@@ -782,8 +782,9 @@ func TestApplyChangelistCreatesDelegation(t *testing.T) {
 	newKey, err := cs.Create("targets/level1", data.ED25519Key)
 	assert.NoError(t, err)
 
-	err = repo.UpdateDelegations("targets/level1", changelist.TufDelegation{AddKeys: []data.PublicKey{newKey}, AddPaths: []string{""}, NewThreshold: 1})
+	err = repo.UpdateDelegationKeys("targets/level1", []data.PublicKey{newKey}, []string{}, 1)
 	assert.NoError(t, err)
+	err = repo.UpdateDelegationPaths("targets/level1", []string{""}, []string{}, false)
 	delete(repo.Targets, "targets/level1")
 
 	hash := sha256.Sum256([]byte{})
@@ -820,10 +821,14 @@ func TestApplyChangelistTargetsToMultipleRoles(t *testing.T) {
 	newKey, err := cs.Create("targets/level1", data.ED25519Key)
 	assert.NoError(t, err)
 
-	err = repo.UpdateDelegations("targets/level1", changelist.TufDelegation{AddKeys: []data.PublicKey{newKey}, AddPaths: []string{""}, NewThreshold: 1})
+	err = repo.UpdateDelegationKeys("targets/level1", []data.PublicKey{newKey}, []string{}, 1)
+	assert.NoError(t, err)
+	err = repo.UpdateDelegationPaths("targets/level1", []string{""}, []string{}, false)
 	assert.NoError(t, err)
 
-	err = repo.UpdateDelegations("targets/level2", changelist.TufDelegation{AddKeys: []data.PublicKey{newKey}, AddPaths: []string{""}, NewThreshold: 1})
+	err = repo.UpdateDelegationKeys("targets/level2", []data.PublicKey{newKey}, []string{}, 1)
+	assert.NoError(t, err)
+	err = repo.UpdateDelegationPaths("targets/level2", []string{""}, []string{}, false)
 	assert.NoError(t, err)
 
 	hash := sha256.Sum256([]byte{})
@@ -936,7 +941,9 @@ func TestChangeTargetMetaDoesntFallbackIfPrefixError(t *testing.T) {
 	newKey, err := cs.Create("targets/level1", data.ED25519Key)
 	assert.NoError(t, err)
 
-	err = repo.UpdateDelegations("targets/level1", changelist.TufDelegation{AddKeys: []data.PublicKey{newKey}, AddPaths: []string{"pathprefix"}, NewThreshold: 1})
+	err = repo.UpdateDelegationKeys("targets/level1", []data.PublicKey{newKey}, []string{}, 1)
+	assert.NoError(t, err)
+	err = repo.UpdateDelegationPaths("targets/level1", []string{"pathprefix"}, []string{}, false)
 	assert.NoError(t, err)
 
 	hash := sha256.Sum256([]byte{})
