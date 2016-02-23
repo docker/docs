@@ -811,6 +811,36 @@ var waysToMessUpServer = []swizzleExpectations{
 		}},
 }
 
+var _waysToMessUpServerRoot []swizzleExpectations
+
+// We also want to remove a every role from root once, or remove the role's keys.
+// This function generates once and caches the result for later re-use.
+func waysToMessUpServerRoot() []swizzleExpectations {
+	if _waysToMessUpServerRoot == nil {
+		_waysToMessUpServerRoot = waysToMessUpServer
+		for _, roleName := range data.BaseRoles {
+			_waysToMessUpServerRoot = append(_waysToMessUpServerRoot,
+				swizzleExpectations{
+					desc: fmt.Sprintf("no %s keys", roleName),
+					expectErrs: []interface{}{
+						&certs.ErrValidationFail{}, signed.ErrRoleThreshold{}},
+					swizzle: func(s *testutils.MetadataSwizzler, role string) error {
+						return s.MutateRoot(func(r *data.Root) {
+							r.Roles[roleName].KeyIDs = []string{}
+						})
+					}},
+				swizzleExpectations{
+					desc:       fmt.Sprintf("no %s role", roleName),
+					expectErrs: []interface{}{data.ErrInvalidRole{}},
+					swizzle: func(s *testutils.MetadataSwizzler, role string) error {
+						return s.MutateRoot(func(r *data.Root) { delete(r.Roles, roleName) })
+					}},
+			)
+		}
+	}
+	return _waysToMessUpServerRoot
+}
+
 // If there's no local cache, we go immediately to check the remote server for
 // root, and if it invalid (corrupted), we cannot update.  This happens
 // with and without a force check (update for write).
@@ -818,7 +848,8 @@ func TestUpdateRootRemoteCorruptedNoLocalCache(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping test in short mode")
 	}
-	for _, testData := range waysToMessUpServer {
+
+	for _, testData := range waysToMessUpServerRoot() {
 		if testData.desc == "insufficient signatures" {
 			// Currently if we download the root during the bootstrap phase,
 			// we don't check for enough signatures to meet the threshold.  We
@@ -842,7 +873,11 @@ func TestUpdateRootRemoteCorruptedNoLocalCache(t *testing.T) {
 // because the fact that the timestamp hasn't changed should mean that we don't
 // have to re-download the root.
 func TestUpdateRootRemoteCorruptedCanUseLocalCache(t *testing.T) {
-	for _, testData := range waysToMessUpServer {
+	if testing.Short() {
+		t.Skip("skipping test in short mode")
+	}
+
+	for _, testData := range waysToMessUpServerRoot() {
 		testUpdateRemoteCorruptValidChecksum(t, updateOpts{
 			localCache: true,
 			forWrite:   false,
@@ -862,7 +897,7 @@ func TestUpdateRootRemoteCorruptedCannotUseLocalCache(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping test in short mode")
 	}
-	for _, testData := range waysToMessUpServer {
+	for _, testData := range waysToMessUpServerRoot() {
 		testUpdateRemoteCorruptValidChecksum(t, updateOpts{
 			serverHasNewData: true,
 			localCache:       true,
@@ -876,6 +911,69 @@ func TestUpdateRootRemoteCorruptedCannotUseLocalCache(t *testing.T) {
 			role:             data.CanonicalRootRole,
 		}, testData, true)
 	}
+}
+
+func waysToMessUpServerNonRootPerRole(t *testing.T) map[string][]swizzleExpectations {
+	perRoleSwizzling := make(map[string][]swizzleExpectations)
+	for _, missing := range []string{data.CanonicalRootRole, data.CanonicalTargetsRole} {
+		perRoleSwizzling[data.CanonicalSnapshotRole] = append(
+			perRoleSwizzling[data.CanonicalSnapshotRole],
+			swizzleExpectations{
+				desc:       fmt.Sprintf("snapshot missing root meta checksum"),
+				expectErrs: []interface{}{client.ErrMissingMeta{}},
+				swizzle: func(s *testutils.MetadataSwizzler, role string) error {
+					return s.MutateSnapshot(func(sn *data.Snapshot) {
+						delete(sn.Meta, missing)
+					})
+				},
+			})
+	}
+	perRoleSwizzling[data.CanonicalTargetsRole] = []swizzleExpectations{{
+		desc:       fmt.Sprintf("target missing delegations data"),
+		expectErrs: []interface{}{client.ErrChecksumMismatch{}},
+		swizzle: func(s *testutils.MetadataSwizzler, role string) error {
+			return s.MutateTargets(func(tg *data.Targets) {
+				tg.Delegations.Roles = tg.Delegations.Roles[1:]
+			})
+		},
+	}}
+	perRoleSwizzling[data.CanonicalTimestampRole] = []swizzleExpectations{{
+		desc:       fmt.Sprintf("timestamp missing snapshot meta checksum"),
+		expectErrs: []interface{}{client.ErrMissingMeta{}},
+		swizzle: func(s *testutils.MetadataSwizzler, role string) error {
+			return s.MutateTimestamp(func(ts *data.Timestamp) {
+				delete(ts.Meta, data.CanonicalSnapshotRole)
+			})
+		},
+	}}
+	perRoleSwizzling["targets/a"] = []swizzleExpectations{{
+		desc:       fmt.Sprintf("delegation has invalid role"),
+		expectErrs: []interface{}{client.ErrMissingMeta{}},
+		swizzle: func(s *testutils.MetadataSwizzler, role string) error {
+			return s.MutateTargets(func(tg *data.Targets) {
+				var keyIDs []string
+				for k := range tg.Delegations.Keys {
+					keyIDs = append(keyIDs, k)
+				}
+				// add the keys from root too
+				rootMeta, err := s.MetadataCache.GetMeta(data.CanonicalRootRole, -1)
+				require.NoError(t, err)
+
+				signedRoot := &data.SignedRoot{}
+				require.NoError(t, json.Unmarshal(rootMeta, signedRoot))
+
+				for k := range signedRoot.Signed.Keys {
+					keyIDs = append(keyIDs, k)
+				}
+
+				// add an invalid role (root) to delegation
+				tg.Delegations.Roles = append(tg.Delegations.Roles,
+					&data.Role{RootRole: data.RootRole{KeyIDs: keyIDs, Threshold: 1},
+						Name: data.CanonicalRootRole})
+			})
+		},
+	}}
+	return perRoleSwizzling
 }
 
 // If there's no local cache, we just download from the server and if anything
@@ -892,6 +990,32 @@ func TestUpdateNonRootRemoteCorruptedNoLocalCache(t *testing.T) {
 			testUpdateRemoteCorruptValidChecksum(t, updateOpts{
 				role: role,
 			}, testData, true)
+		}
+	}
+	for role, expectations := range waysToMessUpServerNonRootPerRole(t) {
+		for _, testData := range expectations {
+			switch role {
+			case data.CanonicalSnapshotRole:
+				testUpdateRemoteCorruptValidChecksum(t, updateOpts{
+					role: role,
+				}, testData, true)
+			case data.CanonicalTargetsRole:
+				// if there are no delegation target roles, we're fine, we just don't
+				// download them
+				testUpdateRemoteCorruptValidChecksum(t, updateOpts{
+					role: role,
+				}, testData, false)
+			case data.CanonicalTimestampRole:
+				testUpdateRemoteCorruptValidChecksum(t, updateOpts{
+					role: role,
+				}, testData, true)
+			case "targets/a":
+				// TODO: Bug where invalid (non-delegation) roles in delegations
+				// are accepted
+				testUpdateRemoteCorruptValidChecksum(t, updateOpts{
+					role: role,
+				}, testData, false)
+			}
 		}
 	}
 }
@@ -914,6 +1038,37 @@ func TestUpdateNonRootRemoteCorruptedCanUseLocalCache(t *testing.T) {
 				localCache: true,
 				role:       role,
 			}, testData, false)
+		}
+	}
+	for role, expectations := range waysToMessUpServerNonRootPerRole(t) {
+		for _, testData := range expectations {
+
+			switch role {
+			case data.CanonicalSnapshotRole:
+				testUpdateRemoteCorruptValidChecksum(t, updateOpts{
+					localCache: true,
+					role:       role,
+				}, testData, false)
+			case data.CanonicalTargetsRole:
+				testUpdateRemoteCorruptValidChecksum(t, updateOpts{
+					localCache: true,
+					role:       role,
+				}, testData, false)
+			case data.CanonicalTimestampRole:
+				// TODO: Bug: this should succeed, because it's an invalid timestamp metadata
+				// and hence should fall back on the the local cached timestamp.  It's not
+				// succeeding now because the failure occurs on downloading the snapshot,
+				// not during the validation of the timestamp.
+				testUpdateRemoteCorruptValidChecksum(t, updateOpts{
+					localCache: true,
+					role:       role,
+				}, testData, true)
+			case "targets/a":
+				testUpdateRemoteCorruptValidChecksum(t, updateOpts{
+					localCache: true,
+					role:       role,
+				}, testData, false)
+			}
 		}
 	}
 }
@@ -942,6 +1097,41 @@ func TestUpdateNonRootRemoteCorruptedCannotUseLocalCache(t *testing.T) {
 				localCache:       true,
 				role:             role,
 			}, testData, shouldFail)
+		}
+	}
+
+	for role, expectations := range waysToMessUpServerNonRootPerRole(t) {
+		for _, testData := range expectations {
+			switch role {
+			case data.CanonicalSnapshotRole:
+				testUpdateRemoteCorruptValidChecksum(t, updateOpts{
+					serverHasNewData: true,
+					localCache:       true,
+					role:             role,
+				}, testData, true)
+			case data.CanonicalTargetsRole:
+				// if there are no delegation target roles, we're fine, we just don't
+				// download them
+				testUpdateRemoteCorruptValidChecksum(t, updateOpts{
+					serverHasNewData: true,
+					localCache:       true,
+					role:             role,
+				}, testData, false)
+			case data.CanonicalTimestampRole:
+				testUpdateRemoteCorruptValidChecksum(t, updateOpts{
+					serverHasNewData: true,
+					localCache:       true,
+					role:             role,
+				}, testData, true)
+			case "targets/a":
+				// TODO: Bug where invalid (non-delegation) roles in delegations
+				// are accepted
+				testUpdateRemoteCorruptValidChecksum(t, updateOpts{
+					serverHasNewData: true,
+					localCache:       true,
+					role:             role,
+				}, testData, false)
+			}
 		}
 	}
 }
@@ -977,10 +1167,16 @@ func testUpdateRemoteCorruptValidChecksum(t *testing.T, opts updateOpts, expt sw
 		isSignatureSwizzle := expt.desc == "invalid signatures" || expt.desc == "meta signed by wrong key"
 		// just try to do these - if they fail (probably because they've been swizzled), that's fine
 		if opts.role != data.CanonicalSnapshotRole || !isSignatureSwizzle {
-			serverSwizzler.UpdateSnapshotHashes()
+			// if we are purposely editing out some snapshot metadata, don't re-generate
+			if !strings.HasPrefix(expt.desc, "snapshot missing") {
+				serverSwizzler.UpdateSnapshotHashes()
+			}
 		}
 		if opts.role != data.CanonicalTimestampRole || !isSignatureSwizzle {
-			serverSwizzler.UpdateTimestampHash()
+			// if we are purposely editing out some timestamp metadata, don't re-generate
+			if !strings.HasPrefix(expt.desc, "timestamp missing") {
+				serverSwizzler.UpdateTimestampHash()
+			}
 		}
 	}
 	_, err := repo.Update(opts.forWrite)
