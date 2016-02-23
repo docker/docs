@@ -43,11 +43,8 @@ func isValidTargetsStructure(t Targets, roleName string) error {
 			return ErrInvalidMetadata{
 				role: roleName, msg: fmt.Sprintf("delegation role %s invalid", roleObj.Name)}
 		}
-		if err := isValidRootRoleStructure(roleObj.RootRole, t.Delegations.Keys); err != nil {
-			return ErrInvalidMetadata{
-				role: roleName,
-				msg:  fmt.Sprintf("role %s: %s", roleObj.Name, err.Error()),
-			}
+		if err := isValidRootRoleStructure(roleName, roleObj.Name, roleObj.RootRole, t.Delegations.Keys); err != nil {
+			return err
 		}
 	}
 	return nil
