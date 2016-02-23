@@ -42,14 +42,6 @@ GO_VERSION = $(shell go version | awk '{print $$3}')
 .DELETE_ON_ERROR: cover
 .DEFAULT: default
 
-go_version:
-ifeq (,$(findstring go1.5.,$(GO_VERSION)))
-	$(error Requires go version 1.5.x - found $(GO_VERSION))
-else
-	@echo
-endif
-
-
 all: AUTHORS clean fmt vet fmt lint build test binaries
 
 AUTHORS: .git/HEAD
@@ -87,7 +79,7 @@ ${PREFIX}/bin/static/notary-signer: NOTARY_VERSION $(shell find . -type f -name 
 	@godep go build -tags ${NOTARY_BUILDTAGS} -o $@ ${GO_LDFLAGS_STATIC} ./cmd/notary-signer
 endif
 
-vet: go_version
+vet: 
 	@echo "+ $@"
 ifeq ($(shell uname -s), Darwin)
 	@test -z "$(shell find . -iname *test*.go | grep -v _test.go | grep -v Godeps | xargs echo "This file should end with '_test':"  | tee /dev/stderr)"
@@ -114,14 +106,14 @@ misspell:
 	@echo "+ $@"
 	@test -z "$$(find . -name '*' | grep -v Godeps/_workspace/src/ | grep -v bin/ | grep -v misc/ | grep -v .git/ | xargs misspell | tee /dev/stderr)"
 
-build: go_version
+build:
 	@echo "+ $@"
 	@go build -tags "${NOTARY_BUILDTAGS}" -v ${GO_LDFLAGS} ./...
 
 # When running `go test ./...`, it runs all the suites in parallel, which causes
 # problems when running with a yubikey
 test: TESTOPTS =
-test: go_version
+test: 
 	@echo Note: when testing with a yubikey plugged in, make sure to include 'TESTOPTS="-p 1"'
 	@echo "+ $@ $(TESTOPTS)"
 	@echo
@@ -147,7 +139,7 @@ define gocover
 $(GO_EXC) test $(OPTS) $(TESTOPTS) -covermode="$(COVERMODE)" -coverprofile="$(COVERDIR)/$(subst /,-,$(1)).$(subst $(_space),.,$(NOTARY_BUILDTAGS)).coverage.txt" "$(1)" || exit 1;
 endef
 
-gen-cover: go_version
+gen-cover: 
 	@mkdir -p "$(COVERDIR)"
 	$(foreach PKG,$(PKGS),$(call gocover,$(PKG)))
 	rm -f "$(COVERDIR)"/*testutils*.coverage.txt
@@ -176,10 +168,10 @@ covmerge:
 clean-protos:
 	@rm proto/*.pb.go
 
-binaries: go_version ${PREFIX}/bin/notary-server ${PREFIX}/bin/notary ${PREFIX}/bin/notary-signer
+binaries: ${PREFIX}/bin/notary-server ${PREFIX}/bin/notary ${PREFIX}/bin/notary-signer
 	@echo "+ $@"
 
-static: go_version ${PREFIX}/bin/static/notary-server ${PREFIX}/bin/static/notary-signer
+static: ${PREFIX}/bin/static/notary-server ${PREFIX}/bin/static/notary-signer
 	@echo "+ $@"
 
 define template
@@ -187,7 +179,7 @@ mkdir -p ${PREFIX}/cross/$(1)/$(2);
 GOOS=$(1) GOARCH=$(2) CGO_ENABLED=0 go build -o ${PREFIX}/cross/$(1)/$(2)/notary -a -tags "static_build netgo" -installsuffix netgo ${GO_LDFLAGS_STATIC} ./cmd/notary;
 endef
 
-cross: go_version
+cross: 
 	$(foreach GOARCH,$(GOARCHS),$(foreach GOOS,$(GOOSES),$(call template,$(GOOS),$(GOARCH))))
 
 
