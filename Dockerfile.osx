@@ -26,7 +26,7 @@ RUN curl -fsSL -o /vbox.dmg http://download.virtualbox.org/virtualbox/$VBOX_VERS
 
 # Download the Docker parts
 
-ENV INSTALLER_VERSION 1.10.2a
+ENV INSTALLER_VERSION 1.10.2
 ENV DOCKER_VERSION 1.10.2
 RUN curl -fsSL -o /docker https://get.docker.com/builds/Darwin/x86_64/docker-$DOCKER_VERSION
 
