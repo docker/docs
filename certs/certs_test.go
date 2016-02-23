@@ -285,7 +285,11 @@ func testValidateSuccessfulRootRotation(t *testing.T, keyAlg, rootKeyType string
 
 	testRoot, err := data.NewRoot(
 		map[string]data.PublicKey{replRootKey.ID(): replRootKey},
-		map[string]*data.RootRole{data.CanonicalRootRole: &rootRole.RootRole},
+		map[string]*data.RootRole{
+			data.CanonicalRootRole:      &rootRole.RootRole,
+			data.CanonicalTimestampRole: &rootRole.RootRole,
+			data.CanonicalTargetsRole:   &rootRole.RootRole,
+			data.CanonicalSnapshotRole:  &rootRole.RootRole},
 		false,
 	)
 	assert.NoError(t, err, "Failed to create new root")
