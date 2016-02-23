@@ -85,6 +85,34 @@ func NewRoot(keys map[string]PublicKey, roles map[string]*RootRole, consistent b
 	return signedRoot, nil
 }
 
+// BuildBaseRole returns a copy of a BaseRole using the information in this SignedRoot for the specified role name.
+// Will error for invalid role name or key metadata within this SignedRoot
+func (r SignedRoot) BuildBaseRole(roleName string) (BaseRole, error) {
+	roleData, ok := r.Signed.Roles[roleName]
+	if !ok {
+		return BaseRole{}, ErrInvalidRole{Role: roleName, Reason: "role not found in root file"}
+	}
+	// Get all public keys for the base role from TUF metadata
+	keyIDs := roleData.KeyIDs
+	pubKeys := make(map[string]PublicKey)
+	for _, keyID := range keyIDs {
+		pubKey, ok := r.Signed.Keys[keyID]
+		if !ok {
+			return BaseRole{}, ErrInvalidRole{
+				Role:   roleName,
+				Reason: fmt.Sprintf("key with ID %s was not found in root metadata", keyID),
+			}
+		}
+		pubKeys[keyID] = pubKey
+	}
+
+	return BaseRole{
+		Name:      roleName,
+		Keys:      pubKeys,
+		Threshold: roleData.Threshold,
+	}, nil
+}
+
 // ToSigned partially serializes a SignedRoot for further signing
 func (r SignedRoot) ToSigned() (*Signed, error) {
 	s, err := defaultSerializer.MarshalCanonical(r.Signed)

@@ -1056,6 +1056,15 @@ func fakeServerData(t *testing.T, repo *NotaryRepository, mux *http.ServeMux,
 		assert.NoError(t, err)
 	}
 
+	nested, err := savedTUFRepo.SignTargets(
+		"targets/level1/level2",
+		data.DefaultExpires(data.CanonicalTargetsRole),
+	)
+
+	if _, ok := savedTUFRepo.Targets["targets/level1/level2"]; ok {
+		assert.NoError(t, err)
+	}
+
 	signedSnapshot, err := savedTUFRepo.SignSnapshot(
 		data.DefaultExpires("snapshot"))
 	assert.NoError(t, err)
@@ -1069,6 +1078,7 @@ func fakeServerData(t *testing.T, repo *NotaryRepository, mux *http.ServeMux,
 	targetsJSON, _ := json.Marshal(signedTargets)
 	level1JSON, _ := json.Marshal(signedLevel1)
 	level2JSON, _ := json.Marshal(signedLevel2)
+	nestedJSON, _ := json.Marshal(nested)
 
 	cksmBytes := sha256.Sum256(rootFileBytes)
 	rootChecksum := hex.EncodeToString(cksmBytes[:])
@@ -1084,6 +1094,9 @@ func fakeServerData(t *testing.T, repo *NotaryRepository, mux *http.ServeMux,
 
 	cksmBytes = sha256.Sum256(level2JSON)
 	level2Checksum := hex.EncodeToString(cksmBytes[:])
+
+	cksmBytes = sha256.Sum256(nestedJSON)
+	nestedChecksum := hex.EncodeToString(cksmBytes[:])
 
 	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/root.json",
 		func(w http.ResponseWriter, r *http.Request) {
@@ -1134,6 +1147,12 @@ func fakeServerData(t *testing.T, repo *NotaryRepository, mux *http.ServeMux,
 		})
 	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/targets/level2."+level2Checksum+".json",
 		func(w http.ResponseWriter, r *http.Request) {
+			fmt.Fprint(w, string(level2JSON))
+		})
+	mux.HandleFunc("/v2/docker.com/notary/_trust/tuf/targets/level1/level2."+nestedChecksum+".json",
+		func(w http.ResponseWriter, r *http.Request) {
+			level2JSON, err := json.Marshal(nested)
+			assert.NoError(t, err)
 			fmt.Fprint(w, string(level2JSON))
 		})
 }
@@ -1218,18 +1237,20 @@ func testListTargetWithDelegates(t *testing.T, rootType string) {
 	// setup delegated targets/level1 role
 	k, err := repo.CryptoService.Create("targets/level1", rootType)
 	assert.NoError(t, err)
-	r, err := data.NewRole("targets/level1", 1, []string{k.ID()}, []string{""})
+	err = repo.tufRepo.UpdateDelegationKeys("targets/level1", []data.PublicKey{k}, []string{}, 1)
 	assert.NoError(t, err)
-	repo.tufRepo.UpdateDelegations(r, []data.PublicKey{k})
+	err = repo.tufRepo.UpdateDelegationPaths("targets/level1", []string{""}, []string{}, false)
+	assert.NoError(t, err)
 	delegatedTarget := addTarget(t, repo, "current", "../fixtures/root-ca.crt", "targets/level1")
 	otherTarget := addTarget(t, repo, "other", "../fixtures/root-ca.crt", "targets/level1")
 
 	// setup delegated targets/level2 role
 	k, err = repo.CryptoService.Create("targets/level2", rootType)
 	assert.NoError(t, err)
-	r, err = data.NewRole("targets/level2", 1, []string{k.ID()}, []string{""})
+	err = repo.tufRepo.UpdateDelegationKeys("targets/level2", []data.PublicKey{k}, []string{}, 1)
 	assert.NoError(t, err)
-	repo.tufRepo.UpdateDelegations(r, []data.PublicKey{k})
+	err = repo.tufRepo.UpdateDelegationPaths("targets/level2", []string{""}, []string{}, false)
+	assert.NoError(t, err)
 	// this target should not show up as the one in targets/level1 takes higher priority
 	_ = addTarget(t, repo, "current", "../fixtures/notary-server.crt", "targets/level2")
 	// this target should show up as the name doesn't exist elsewhere
@@ -1242,15 +1263,36 @@ func testListTargetWithDelegates(t *testing.T, rootType string) {
 		filepath.Join(repo.baseDir, "tuf", filepath.FromSlash(repo.gun), "changelist"))
 	assert.NoError(t, err, "could not open changelist")
 
-	// apply the changelist to the repo
+	// apply the changelist to the repo, then clear it
 	err = applyChangelist(repo.tufRepo, cl)
 	assert.NoError(t, err, "could not apply changelist")
+	assert.NoError(t, cl.Clear(""))
 
 	_, ok := repo.tufRepo.Targets["targets/level1"].Signed.Targets["current"]
 	assert.True(t, ok)
 	_, ok = repo.tufRepo.Targets["targets/level1"].Signed.Targets["other"]
 	assert.True(t, ok)
 	_, ok = repo.tufRepo.Targets["targets/level2"].Signed.Targets["level2"]
+	assert.True(t, ok)
+
+	// setup delegated targets/level1/level2 role separately, which can only modify paths prefixed with "level2"
+	// This is done separately due to target shadowing
+	k, err = repo.CryptoService.Create("targets/level1/level2", rootType)
+	assert.NoError(t, err)
+	err = repo.tufRepo.UpdateDelegationKeys("targets/level1/level2", []data.PublicKey{k}, []string{}, 1)
+	assert.NoError(t, err)
+	err = repo.tufRepo.UpdateDelegationPaths("targets/level1/level2", []string{"level2"}, []string{}, false)
+	assert.NoError(t, err)
+	nestedTarget := addTarget(t, repo, "level2", "../fixtures/notary-signer.crt", "targets/level1/level2")
+	// load the changelist for this repo
+	cl, err = changelist.NewFileChangelist(
+		filepath.Join(repo.baseDir, "tuf", filepath.FromSlash(repo.gun), "changelist"))
+	assert.NoError(t, err, "could not open changelist")
+	// apply the changelist to the repo
+	err = applyChangelist(repo.tufRepo, cl)
+	assert.NoError(t, err, "could not apply changelist")
+	// check the changelist was applied
+	_, ok = repo.tufRepo.Targets["targets/level1/level2"].Signed.Targets["level2"]
 	assert.True(t, ok)
 
 	fakeServerData(t, repo, mux, keys)
@@ -1271,6 +1313,7 @@ func testListTargetWithDelegates(t *testing.T, rootType string) {
 	assert.True(t, reflect.DeepEqual(*latestTarget, targets[1].Target), "latest target does not match")
 	assert.Equal(t, data.CanonicalTargetsRole, targets[1].Role)
 
+	// This target shadows the "level2" target in level1/level2
 	assert.True(t, reflect.DeepEqual(*level2Target, targets[2].Target), "level2 target does not match")
 	assert.Equal(t, "targets/level2", targets[2].Role)
 
@@ -1293,8 +1336,9 @@ func testListTargetWithDelegates(t *testing.T, rootType string) {
 	assert.True(t, reflect.DeepEqual(*latestTarget, targets[1].Target), "latest target does not match")
 	assert.Equal(t, data.CanonicalTargetsRole, targets[1].Role)
 
-	assert.True(t, reflect.DeepEqual(*level2Target, targets[2].Target), "level2 target does not match")
-	assert.Equal(t, "targets/level2", targets[2].Role)
+	// Now the level1/level2 target shadows the level2 target
+	assert.True(t, reflect.DeepEqual(*nestedTarget, targets[2].Target), "level1/level2 target does not match")
+	assert.Equal(t, "targets/level1/level2", targets[2].Role)
 
 	assert.True(t, reflect.DeepEqual(*otherTarget, targets[3].Target), "other target does not match")
 	assert.Equal(t, "targets/level1", targets[3].Role)
@@ -1319,6 +1363,123 @@ func testListTargetWithDelegates(t *testing.T, rootType string) {
 	assert.NoError(t, err)
 	assert.True(t, reflect.DeepEqual(*level2Target, newLevel2Target.Target), "level2 target does not match")
 	assert.Equal(t, "targets/level2", newLevel2Target.Role)
+
+	// Shadow by prioritizing level1, but exclude level1/level2, so we should still get targets/level2's level2 target
+	newLevel2Target, err = repo.GetTargetByName("level2", "targets/level1", "targets/level2", "targets/level1/level2")
+	assert.NoError(t, err)
+	assert.True(t, reflect.DeepEqual(*level2Target, newLevel2Target.Target), "level2 target does not match")
+	assert.Equal(t, "targets/level2", newLevel2Target.Role)
+
+	// Prioritize level1 to get level1/level2's level2 target
+	newLevel2Target, err = repo.GetTargetByName("level2", "targets/level1")
+	assert.NoError(t, err)
+	assert.True(t, reflect.DeepEqual(*nestedTarget, newLevel2Target.Target), "level2 target does not match")
+	assert.Equal(t, "targets/level1/level2", newLevel2Target.Role)
+}
+
+func TestListTargetRestrictsDelegationPaths(t *testing.T) {
+	ts, mux, keys := simpleTestServer(t)
+	defer ts.Close()
+
+	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
+
+	// tests need to manually bootstrap timestamp as client doesn't generate it
+	err := repo.tufRepo.InitTimestamp()
+	assert.NoError(t, err, "error creating repository: %s", err)
+
+	// setup delegated targets/level1 role
+	k, err := repo.CryptoService.Create("targets/level1", data.ECDSAKey)
+	assert.NoError(t, err)
+	err = repo.tufRepo.UpdateDelegationKeys("targets/level1", []data.PublicKey{k}, []string{}, 1)
+	assert.NoError(t, err)
+	err = repo.tufRepo.UpdateDelegationPaths("targets/level1", []string{""}, []string{}, false)
+	assert.NoError(t, err)
+	addTarget(t, repo, "level1-target", "../fixtures/root-ca.crt", "targets/level1")
+	addTarget(t, repo, "incorrectly-named-target", "../fixtures/root-ca.crt", "targets/level1")
+
+	// setup delegated targets/level2 role
+	err = repo.tufRepo.UpdateDelegationKeys("targets/level1/level2", []data.PublicKey{k}, []string{}, 1)
+	assert.NoError(t, err)
+	err = repo.tufRepo.UpdateDelegationPaths("targets/level1/level2", []string{""}, []string{}, false)
+	assert.NoError(t, err)
+	addTarget(t, repo, "level2-target", "../fixtures/notary-server.crt", "targets/level1/level2")
+	addTarget(t, repo, "level1-level2-target", "../fixtures/notary-server.crt", "targets/level1/level2")
+
+	// Apply the changelist. Normally, this would be done by Publish
+
+	// load the changelist for this repo
+	cl, err := changelist.NewFileChangelist(
+		filepath.Join(repo.baseDir, "tuf", filepath.FromSlash(repo.gun), "changelist"))
+	assert.NoError(t, err, "could not open changelist")
+
+	// apply the changelist to the repo
+	err = applyChangelist(repo.tufRepo, cl)
+	assert.NoError(t, err, "could not apply changelist")
+
+	assert.NoError(t, cl.Clear(""))
+
+	// Now restrict the paths
+	err = repo.tufRepo.UpdateDelegationPaths("targets/level1", []string{"level1"}, []string{}, false)
+	assert.NoError(t, err)
+	err = repo.tufRepo.UpdateDelegationPaths("targets/level1/level2", []string{"level1-level2", "level2"}, []string{}, false)
+	assert.NoError(t, err)
+
+	err = repo.tufRepo.UpdateDelegationPaths("targets/level1", []string{}, []string{""}, false)
+	assert.NoError(t, err)
+	err = repo.tufRepo.UpdateDelegationPaths("targets/level1/level2", []string{}, []string{""}, false)
+	assert.NoError(t, err)
+
+	// load the changelist for this repo
+	cl, err = changelist.NewFileChangelist(
+		filepath.Join(repo.baseDir, "tuf", filepath.FromSlash(repo.gun), "changelist"))
+	assert.NoError(t, err, "could not open changelist")
+
+	// apply the changelist to the repo
+	err = applyChangelist(repo.tufRepo, cl)
+	assert.NoError(t, err, "could not apply changelist")
+
+	fakeServerData(t, repo, mux, keys)
+
+	// test default listing
+	targets, err := repo.ListTargets("targets/level1")
+	assert.NoError(t, err)
+
+	// Should be four targets
+	assert.Len(t, targets, 2, "unexpected number of targets returned by ListTargets")
+
+	sort.Stable(targetSorter(targets))
+
+	var foundLevel1, foundLevel2 bool
+
+	for _, tgts := range targets {
+		switch tgts.Name {
+		case "level1-target":
+			assert.Equal(t, "targets/level1", tgts.Role)
+			foundLevel1 = true
+		case "level1-level2-target":
+			assert.Equal(t, "targets/level1/level2", tgts.Role)
+			foundLevel2 = true
+		}
+	}
+
+	assert.True(t, foundLevel1)
+	assert.True(t, foundLevel2)
+
+	// test GetTargetByName
+	tgt, err := repo.GetTargetByName("level1-target", "targets/level1")
+	assert.NoError(t, err)
+	assert.NotNil(t, tgt)
+	assert.Equal(t, tgt.Role, "targets/level1")
+
+	tgt, err = repo.GetTargetByName("level1-level2-target", "targets/level1")
+	assert.NoError(t, err)
+	assert.NotNil(t, tgt)
+	assert.Equal(t, tgt.Role, "targets/level1/level2")
+
+	tgt, err = repo.GetTargetByName("level2-target", "targets/level1/level2")
+	assert.Error(t, err)
+	assert.Nil(t, tgt)
 }
 
 // TestValidateRootKey verifies that the public data in root.json for the root

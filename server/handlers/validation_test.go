@@ -7,6 +7,7 @@ import (
 	"reflect"
 	"testing"
 
+	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf"
 	"github.com/docker/notary/tuf/data"
@@ -14,8 +15,6 @@ import (
 	"github.com/docker/notary/tuf/testutils"
 	"github.com/docker/notary/tuf/validation"
 	"github.com/stretchr/testify/assert"
-
-	"github.com/docker/notary/server/storage"
 )
 
 func copyTimestampKey(t *testing.T, fromRepo *tuf.Repo,
@@ -859,10 +858,10 @@ func TestValidateTargetsLoadParent(t *testing.T) {
 
 	k, err := cs.Create("targets/level1", data.ED25519Key)
 	assert.NoError(t, err)
-	r, err := data.NewRole("targets/level1", 1, []string{k.ID()}, []string{""})
-	assert.NoError(t, err)
 
-	err = baseRepo.UpdateDelegations(r, []data.PublicKey{k})
+	err = baseRepo.UpdateDelegationKeys("targets/level1", []data.PublicKey{k}, []string{}, 1)
+	assert.NoError(t, err)
+	err = baseRepo.UpdateDelegationPaths("targets/level1", []string{""}, []string{}, false)
 	assert.NoError(t, err)
 
 	// no targets file is created for the new delegations, so force one
@@ -910,10 +909,11 @@ func TestValidateTargetsParentInUpdate(t *testing.T) {
 
 	k, err := cs.Create("targets/level1", data.ED25519Key)
 	assert.NoError(t, err)
-	r, err := data.NewRole("targets/level1", 1, []string{k.ID()}, []string{""})
-	assert.NoError(t, err)
 
-	baseRepo.UpdateDelegations(r, []data.PublicKey{k})
+	err = baseRepo.UpdateDelegationKeys("targets/level1", []data.PublicKey{k}, []string{}, 1)
+	assert.NoError(t, err)
+	err = baseRepo.UpdateDelegationPaths("targets/level1", []string{""}, []string{}, false)
+	assert.NoError(t, err)
 
 	// no targets file is created for the new delegations, so force one
 	baseRepo.InitTargets("targets/level1")
@@ -967,10 +967,11 @@ func TestValidateTargetsParentNotFound(t *testing.T) {
 
 	k, err := cs.Create("targets/level1", data.ED25519Key)
 	assert.NoError(t, err)
-	r, err := data.NewRole("targets/level1", 1, []string{k.ID()}, []string{""})
-	assert.NoError(t, err)
 
-	baseRepo.UpdateDelegations(r, []data.PublicKey{k})
+	err = baseRepo.UpdateDelegationKeys("targets/level1", []data.PublicKey{k}, []string{}, 1)
+	assert.NoError(t, err)
+	err = baseRepo.UpdateDelegationPaths("targets/level1", []string{""}, []string{}, false)
+	assert.NoError(t, err)
 
 	// no targets file is created for the new delegations, so force one
 	baseRepo.InitTargets("targets/level1")

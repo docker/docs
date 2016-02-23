@@ -245,45 +245,29 @@ func (r *NotaryRepository) GetDelegationRoles() ([]*data.Role, error) {
 	}
 
 	// All top level delegations (ex: targets/level1) are stored exclusively in targets.json
-	targets, ok := r.tufRepo.Targets[data.CanonicalTargetsRole]
+	_, ok := r.tufRepo.Targets[data.CanonicalTargetsRole]
 	if !ok {
 		return nil, store.ErrMetaNotFound{Resource: data.CanonicalTargetsRole}
 	}
 
-	// make a copy of top-level Delegations and only show canonical key IDs
-	allDelegations, err := translateDelegationsToCanonicalIDs(targets.Signed.Delegations)
+	// make a copy for traversing nested delegations
+	allDelegations := []*data.Role{}
+
+	// Define a visitor function to populate the delegations list and translate their key IDs to canonical IDs
+	delegationCanonicalListVisitor := func(tgt *data.SignedTargets, validRole data.DelegationRole) interface{} {
+		// For the return list, update with a copy that includes canonicalKeyIDs
+		// These aren't validated by the validRole
+		canonicalDelegations, err := translateDelegationsToCanonicalIDs(tgt.Signed.Delegations)
+		if err != nil {
+			return err
+		}
+		allDelegations = append(allDelegations, canonicalDelegations...)
+		return nil
+	}
+	err := r.tufRepo.WalkTargets("", "", delegationCanonicalListVisitor)
 	if err != nil {
 		return nil, err
 	}
-
-	// make a copy for traversing nested delegations
-	delegationsList := make([]*data.Role, len(allDelegations))
-	copy(delegationsList, allDelegations)
-
-	// Now traverse to lower level delegations (ex: targets/level1/level2)
-	for len(delegationsList) > 0 {
-		// Pop off first delegation to traverse
-		delegation := delegationsList[0]
-		delegationsList = delegationsList[1:]
-
-		// Get metadata
-		delegationMeta, ok := r.tufRepo.Targets[delegation.Name]
-		// If we get an error, don't try to traverse further into this subtree because it doesn't exist or is malformed
-		if !ok {
-			continue
-		}
-
-		// For the return list, update with a copy that includes canonicalKeyIDs
-		canonicalDelegations, err := translateDelegationsToCanonicalIDs(delegationMeta.Signed.Delegations)
-		if err != nil {
-			return nil, err
-		}
-		allDelegations = append(allDelegations, canonicalDelegations...)
-		// Add nested delegations to the exploration list
-		delegationsList = append(delegationsList, delegationMeta.Signed.Delegations.Roles...)
-	}
-
-	// Convert all key IDs to canonical IDs:
 	return allDelegations, nil
 }
 
