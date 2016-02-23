@@ -9,7 +9,6 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/docker/notary/client/changelist"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/stretchr/testify/assert"
@@ -110,7 +109,9 @@ func TestUpdateDelegations(t *testing.T) {
 
 	testKey, err := ed25519.Create("targets/test", data.ED25519Key)
 	assert.NoError(t, err)
-	err = repo.UpdateDelegations("targets/test", changelist.TufDelegation{AddKeys: []data.PublicKey{testKey}, AddPaths: []string{"test"}, NewThreshold: 1})
+	err = repo.UpdateDelegationKeys("targets/test", []data.PublicKey{testKey}, []string{}, 1)
+	assert.NoError(t, err)
+	err = repo.UpdateDelegationPaths("targets/test", []string{"test"}, []string{}, false)
 	assert.NoError(t, err)
 
 	// no empty metadata is created for this role
@@ -127,7 +128,9 @@ func TestUpdateDelegations(t *testing.T) {
 
 	testDeepKey, err := ed25519.Create("targets/test/deep", data.ED25519Key)
 	assert.NoError(t, err)
-	err = repo.UpdateDelegations("targets/test/deep", changelist.TufDelegation{AddKeys: []data.PublicKey{testDeepKey}, AddPaths: []string{"test/deep"}, NewThreshold: 1})
+	err = repo.UpdateDelegationKeys("targets/test/deep", []data.PublicKey{testDeepKey}, []string{}, 1)
+	assert.NoError(t, err)
+	err = repo.UpdateDelegationPaths("targets/test/deep", []string{"test/deep"}, []string{}, false)
 	assert.NoError(t, err)
 
 	// this metadata didn't exist before, but creating targets/test/deep created
@@ -151,7 +154,7 @@ func TestUpdateDelegationsParentMissing(t *testing.T) {
 	repo := initRepo(t, ed25519)
 
 	testDeepKey, err := ed25519.Create("targets/test/deep", data.ED25519Key)
-	err = repo.UpdateDelegations("targets/test/deep", changelist.TufDelegation{AddKeys: []data.PublicKey{testDeepKey}, AddPaths: []string{"test/deep"}, NewThreshold: 1})
+	err = repo.UpdateDelegationKeys("targets/test/deep", []data.PublicKey{testDeepKey}, []string{}, 1)
 	assert.Error(t, err)
 	assert.IsType(t, data.ErrInvalidRole{}, err)
 
@@ -176,7 +179,7 @@ func TestUpdateDelegationsMissingParentKey(t *testing.T) {
 	roleKey, err := ed25519.Create("Invalid Role", data.ED25519Key)
 	assert.NoError(t, err)
 
-	err = repo.UpdateDelegations("targets/role", changelist.TufDelegation{AddKeys: []data.PublicKey{roleKey}, AddPaths: []string{""}, NewThreshold: 1})
+	err = repo.UpdateDelegationKeys("targets/role", []data.PublicKey{roleKey}, []string{}, 1)
 	assert.Error(t, err)
 	assert.IsType(t, signed.ErrNoKeys{}, err)
 
@@ -192,7 +195,7 @@ func TestUpdateDelegationsInvalidRole(t *testing.T) {
 	roleKey, err := ed25519.Create("Invalid Role", data.ED25519Key)
 	assert.NoError(t, err)
 
-	err = repo.UpdateDelegations("root", changelist.TufDelegation{AddKeys: []data.PublicKey{roleKey}, AddPaths: []string{}, NewThreshold: 1})
+	err = repo.UpdateDelegationKeys("root", []data.PublicKey{roleKey}, []string{}, 1)
 	assert.Error(t, err)
 	assert.IsType(t, data.ErrInvalidRole{}, err)
 
@@ -215,7 +218,9 @@ func TestUpdateDelegationsRoleThatIsMissingDelegationKey(t *testing.T) {
 	assert.NoError(t, err)
 
 	// key should get added to role as part of updating the delegation
-	err = repo.UpdateDelegations("targets/role", changelist.TufDelegation{AddKeys: []data.PublicKey{roleKey}, AddPaths: []string{""}, NewThreshold: 1})
+	err = repo.UpdateDelegationKeys("targets/role", []data.PublicKey{roleKey}, []string{}, 1)
+	assert.NoError(t, err)
+	err = repo.UpdateDelegationPaths("targets/role", []string{""}, []string{}, false)
 	assert.NoError(t, err)
 
 	r, ok := repo.Targets[data.CanonicalTargetsRole]
@@ -239,7 +244,7 @@ func TestUpdateDelegationsNotEnoughKeys(t *testing.T) {
 	roleKey, err := ed25519.Create("Invalid Role", data.ED25519Key)
 	assert.NoError(t, err)
 
-	err = repo.UpdateDelegations("targets/role", changelist.TufDelegation{AddKeys: []data.PublicKey{roleKey}, AddPaths: []string{""}, NewThreshold: 2})
+	err = repo.UpdateDelegationKeys("targets/role", []data.PublicKey{roleKey}, []string{}, 2)
 	assert.Error(t, err)
 	assert.IsType(t, data.ErrInvalidRole{}, err)
 
@@ -254,7 +259,9 @@ func TestUpdateDelegationsAddKeyToRole(t *testing.T) {
 
 	testKey, err := ed25519.Create("targets/test", data.ED25519Key)
 	assert.NoError(t, err)
-	err = repo.UpdateDelegations("targets/test", changelist.TufDelegation{AddKeys: []data.PublicKey{testKey}, AddPaths: []string{"test"}, NewThreshold: 1})
+	err = repo.UpdateDelegationKeys("targets/test", []data.PublicKey{testKey}, []string{}, 1)
+	assert.NoError(t, err)
+	err = repo.UpdateDelegationPaths("targets/test", []string{"test"}, []string{}, false)
 	assert.NoError(t, err)
 
 	r, ok := repo.Targets[data.CanonicalTargetsRole]
@@ -268,7 +275,7 @@ func TestUpdateDelegationsAddKeyToRole(t *testing.T) {
 	testKey2, err := ed25519.Create("targets/test", data.ED25519Key)
 	assert.NoError(t, err)
 
-	err = repo.UpdateDelegations("targets/test", changelist.TufDelegation{AddKeys: []data.PublicKey{testKey2}})
+	err = repo.UpdateDelegationKeys("targets/test", []data.PublicKey{testKey2}, []string{}, 1)
 	assert.NoError(t, err)
 
 	r, ok = repo.Targets["targets"]
@@ -289,7 +296,9 @@ func TestDeleteDelegations(t *testing.T) {
 
 	testKey, err := ed25519.Create("targets/test", data.ED25519Key)
 	assert.NoError(t, err)
-	err = repo.UpdateDelegations("targets/test", changelist.TufDelegation{AddKeys: []data.PublicKey{testKey}, AddPaths: []string{"test"}, NewThreshold: 1})
+	err = repo.UpdateDelegationKeys("targets/test", []data.PublicKey{testKey}, []string{}, 1)
+	assert.NoError(t, err)
+	err = repo.UpdateDelegationPaths("targets/test", []string{"test"}, []string{}, false)
 	assert.NoError(t, err)
 
 	r, ok := repo.Targets[data.CanonicalTargetsRole]
@@ -328,7 +337,9 @@ func TestDeleteDelegationsRoleNotExistBecauseNoParentMeta(t *testing.T) {
 	testKey, err := ed25519.Create("targets/test", data.ED25519Key)
 	assert.NoError(t, err)
 
-	err = repo.UpdateDelegations("targets/test", changelist.TufDelegation{AddKeys: []data.PublicKey{testKey}, AddPaths: []string{"test"}, NewThreshold: 1})
+	err = repo.UpdateDelegationKeys("targets/test", []data.PublicKey{testKey}, []string{}, 1)
+	assert.NoError(t, err)
+	err = repo.UpdateDelegationPaths("targets/test", []string{"test"}, []string{}, false)
 	assert.NoError(t, err)
 
 	// no empty delegation metadata created for new delegation
@@ -406,7 +417,9 @@ func TestDeleteDelegationsMissingParentSigningKey(t *testing.T) {
 
 	testKey, err := ed25519.Create("targets/test", data.ED25519Key)
 	assert.NoError(t, err)
-	err = repo.UpdateDelegations("targets/test", changelist.TufDelegation{AddKeys: []data.PublicKey{testKey}, AddPaths: []string{"test"}, NewThreshold: 1})
+	err = repo.UpdateDelegationKeys("targets/test", []data.PublicKey{testKey}, []string{}, 1)
+	assert.NoError(t, err)
+	err = repo.UpdateDelegationPaths("targets/test", []string{"test"}, []string{}, false)
 	assert.NoError(t, err)
 
 	r, ok := repo.Targets[data.CanonicalTargetsRole]
@@ -449,13 +462,19 @@ func TestDeleteDelegationsMidSliceRole(t *testing.T) {
 
 	testKey, err := ed25519.Create("targets/test", data.ED25519Key)
 	assert.NoError(t, err)
-	err = repo.UpdateDelegations("targets/test", changelist.TufDelegation{AddKeys: []data.PublicKey{testKey}, AddPaths: []string{""}, NewThreshold: 1})
+	err = repo.UpdateDelegationKeys("targets/test", []data.PublicKey{testKey}, []string{}, 1)
+	assert.NoError(t, err)
+	err = repo.UpdateDelegationPaths("targets/test", []string{""}, []string{}, false)
 	assert.NoError(t, err)
 
-	err = repo.UpdateDelegations("targets/test2", changelist.TufDelegation{AddKeys: []data.PublicKey{testKey}, AddPaths: []string{""}, NewThreshold: 1})
+	err = repo.UpdateDelegationKeys("targets/test2", []data.PublicKey{testKey}, []string{}, 1)
+	assert.NoError(t, err)
+	err = repo.UpdateDelegationPaths("targets/test2", []string{""}, []string{}, false)
 	assert.NoError(t, err)
 
-	err = repo.UpdateDelegations("targets/test3", changelist.TufDelegation{AddKeys: []data.PublicKey{testKey}, AddPaths: []string{"test"}, NewThreshold: 1})
+	err = repo.UpdateDelegationKeys("targets/test3", []data.PublicKey{testKey}, []string{}, 1)
+	assert.NoError(t, err)
+	err = repo.UpdateDelegationPaths("targets/test3", []string{"test"}, []string{}, false)
 	assert.NoError(t, err)
 
 	err = repo.DeleteDelegation("targets/test2")
@@ -477,10 +496,14 @@ func TestGetDelegationRoleAndMetadataExistDelegationExists(t *testing.T) {
 	testKey, err := ed25519.Create("meh", data.ED25519Key)
 	assert.NoError(t, err)
 
-	err = repo.UpdateDelegations("targets/level1", changelist.TufDelegation{AddKeys: []data.PublicKey{testKey}, AddPaths: []string{""}, NewThreshold: 1})
+	err = repo.UpdateDelegationKeys("targets/level1", []data.PublicKey{testKey}, []string{}, 1)
+	assert.NoError(t, err)
+	err = repo.UpdateDelegationPaths("targets/level1", []string{""}, []string{}, false)
 	assert.NoError(t, err)
 
-	err = repo.UpdateDelegations("targets/level1/level2", changelist.TufDelegation{AddKeys: []data.PublicKey{testKey}, AddPaths: []string{""}, NewThreshold: 1})
+	err = repo.UpdateDelegationKeys("targets/level1/level2", []data.PublicKey{testKey}, []string{}, 1)
+	assert.NoError(t, err)
+	err = repo.UpdateDelegationPaths("targets/level1/level2", []string{""}, []string{}, false)
 	assert.NoError(t, err)
 
 	gottenRole, err := repo.GetDelegationRole("targets/level1/level2")
@@ -501,7 +524,9 @@ func TestGetDelegationRoleAndMetadataExistDelegationDoesntExists(t *testing.T) {
 	testKey, err := ed25519.Create("meh", data.ED25519Key)
 	assert.NoError(t, err)
 
-	err = repo.UpdateDelegations("targets/level1", changelist.TufDelegation{AddKeys: []data.PublicKey{testKey}, AddPaths: []string{""}, NewThreshold: 1})
+	err = repo.UpdateDelegationKeys("targets/level1", []data.PublicKey{testKey}, []string{}, 1)
+	assert.NoError(t, err)
+	err = repo.UpdateDelegationPaths("targets/level1", []string{""}, []string{}, false)
 	assert.NoError(t, err)
 
 	// ensure metadata exists
@@ -520,7 +545,9 @@ func TestGetDelegationRoleAndMetadataDoesntExists(t *testing.T) {
 	testKey, err := ed25519.Create("meh", data.ED25519Key)
 	assert.NoError(t, err)
 
-	err = repo.UpdateDelegations("targets/level1", changelist.TufDelegation{AddKeys: []data.PublicKey{testKey}, AddPaths: []string{""}, NewThreshold: 1})
+	err = repo.UpdateDelegationKeys("targets/level1", []data.PublicKey{testKey}, []string{}, 1)
+	assert.NoError(t, err)
+	err = repo.UpdateDelegationPaths("targets/level1", []string{""}, []string{}, false)
 	assert.NoError(t, err)
 
 	// no empty delegation metadata created for new delegation
@@ -582,7 +609,9 @@ func TestAddTargetsRoleExistsAndMetadataDoesntExist(t *testing.T) {
 
 	testKey, err := ed25519.Create("targets/test", data.ED25519Key)
 	assert.NoError(t, err)
-	err = repo.UpdateDelegations("targets/test", changelist.TufDelegation{AddKeys: []data.PublicKey{testKey}, AddPaths: []string{""}, NewThreshold: 1})
+	err = repo.UpdateDelegationKeys("targets/test", []data.PublicKey{testKey}, []string{}, 1)
+	assert.NoError(t, err)
+	err = repo.UpdateDelegationPaths("targets/test", []string{""}, []string{}, false)
 	assert.NoError(t, err)
 
 	// no empty metadata is created for this role
@@ -633,7 +662,9 @@ func TestAddTargetsNoSigningKeys(t *testing.T) {
 
 	testKey, err := ed25519.Create("targets/test", data.ED25519Key)
 	assert.NoError(t, err)
-	err = repo.UpdateDelegations("targets/test", changelist.TufDelegation{AddKeys: []data.PublicKey{testKey}, AddPaths: []string{"test"}, NewThreshold: 1})
+	err = repo.UpdateDelegationKeys("targets/test", []data.PublicKey{testKey}, []string{}, 1)
+	assert.NoError(t, err)
+	err = repo.UpdateDelegationPaths("targets/test", []string{"test"}, []string{}, false)
 	assert.NoError(t, err)
 
 	// now delete the signing key (all keys)
@@ -653,7 +684,9 @@ func TestRemoveExistingAndNonexistingTargets(t *testing.T) {
 
 	testKey, err := ed25519.Create("targets/test", data.ED25519Key)
 	assert.NoError(t, err)
-	err = repo.UpdateDelegations("targets/test", changelist.TufDelegation{AddKeys: []data.PublicKey{testKey}, AddPaths: []string{"test"}, NewThreshold: 1})
+	err = repo.UpdateDelegationKeys("targets/test", []data.PublicKey{testKey}, []string{}, 1)
+	assert.NoError(t, err)
+	err = repo.UpdateDelegationPaths("targets/test", []string{"test"}, []string{}, false)
 	assert.NoError(t, err)
 
 	// no empty metadata is created for this role
@@ -703,7 +736,9 @@ func TestRemoveTargetsNoSigningKeys(t *testing.T) {
 
 	testKey, err := ed25519.Create("targets/test", data.ED25519Key)
 	assert.NoError(t, err)
-	err = repo.UpdateDelegations("targets/test", changelist.TufDelegation{AddKeys: []data.PublicKey{testKey}, AddPaths: []string{""}, NewThreshold: 1})
+	err = repo.UpdateDelegationKeys("targets/test", []data.PublicKey{testKey}, []string{}, 1)
+	assert.NoError(t, err)
+	err = repo.UpdateDelegationPaths("targets/test", []string{""}, []string{}, false)
 	assert.NoError(t, err)
 
 	// adding the targets to the role should create the metadata though
@@ -801,7 +836,9 @@ func TestGetDelegationValidRoles(t *testing.T) {
 	testKey1, err := ed25519.Create("targets/test", data.ED25519Key)
 	assert.NoError(t, err)
 
-	err = repo.UpdateDelegations("targets/test", changelist.TufDelegation{AddKeys: []data.PublicKey{testKey1}, AddPaths: []string{"path", "anotherpath"}, NewThreshold: 1})
+	err = repo.UpdateDelegationKeys("targets/test", []data.PublicKey{testKey1}, []string{}, 1)
+	assert.NoError(t, err)
+	err = repo.UpdateDelegationPaths("targets/test", []string{"path", "anotherpath"}, []string{}, false)
 	assert.NoError(t, err)
 
 	delgRole, err := repo.GetDelegationRole("targets/test")
@@ -814,7 +851,9 @@ func TestGetDelegationValidRoles(t *testing.T) {
 
 	testKey2, err := ed25519.Create("targets/a", data.ED25519Key)
 	assert.NoError(t, err)
-	err = repo.UpdateDelegations("targets/a", changelist.TufDelegation{AddKeys: []data.PublicKey{testKey2}, AddPaths: []string{""}, NewThreshold: 1})
+	err = repo.UpdateDelegationKeys("targets/a", []data.PublicKey{testKey2}, []string{}, 1)
+	assert.NoError(t, err)
+	err = repo.UpdateDelegationPaths("targets/a", []string{""}, []string{}, false)
 	assert.NoError(t, err)
 
 	delgRole, err = repo.GetDelegationRole("targets/a")
@@ -827,7 +866,9 @@ func TestGetDelegationValidRoles(t *testing.T) {
 
 	testKey3, err := ed25519.Create("targets/test/b", data.ED25519Key)
 	assert.NoError(t, err)
-	err = repo.UpdateDelegations("targets/test/b", changelist.TufDelegation{AddKeys: []data.PublicKey{testKey3}, AddPaths: []string{"path/subpath", "anotherpath"}, NewThreshold: 1})
+	err = repo.UpdateDelegationKeys("targets/test/b", []data.PublicKey{testKey3}, []string{}, 1)
+	assert.NoError(t, err)
+	err = repo.UpdateDelegationPaths("targets/test/b", []string{"path/subpath", "anotherpath"}, []string{}, false)
 	assert.NoError(t, err)
 
 	delgRole, err = repo.GetDelegationRole("targets/test/b")
@@ -841,7 +882,9 @@ func TestGetDelegationValidRoles(t *testing.T) {
 	testKey4, err := ed25519.Create("targets/test/c", data.ED25519Key)
 	assert.NoError(t, err)
 	// Try adding empty paths, ensure this is valid
-	err = repo.UpdateDelegations("targets/test/c", changelist.TufDelegation{AddKeys: []data.PublicKey{testKey4}, AddPaths: []string{}, NewThreshold: 1})
+	err = repo.UpdateDelegationKeys("targets/test/c", []data.PublicKey{testKey4}, []string{}, 1)
+	assert.NoError(t, err)
+	err = repo.UpdateDelegationPaths("targets/test/c", []string{}, []string{}, false)
 	assert.NoError(t, err)
 }
 
@@ -869,13 +912,17 @@ func TestGetDelegationRolesInvalidPaths(t *testing.T) {
 	testKey1, err := ed25519.Create("targets/test", data.ED25519Key)
 	assert.NoError(t, err)
 
-	err = repo.UpdateDelegations("targets/test", changelist.TufDelegation{AddKeys: []data.PublicKey{testKey1}, AddPaths: []string{"path", "anotherpath"}, NewThreshold: 1})
+	err = repo.UpdateDelegationKeys("targets/test", []data.PublicKey{testKey1}, []string{}, 1)
+	assert.NoError(t, err)
+	err = repo.UpdateDelegationPaths("targets/test", []string{"path", "anotherpath"}, []string{}, false)
 	assert.NoError(t, err)
 
 	testKey2, err := ed25519.Create("targets/test/b", data.ED25519Key)
 	assert.NoError(t, err)
 	// Now we add a delegation with a path that is not prefixed by its parent delegation, the invalid path can't be added so there is an error
-	err = repo.UpdateDelegations("targets/test/b", changelist.TufDelegation{AddKeys: []data.PublicKey{testKey2}, AddPaths: []string{"invalidpath"}, NewThreshold: 1})
+	err = repo.UpdateDelegationKeys("targets/test/b", []data.PublicKey{testKey2}, []string{}, 1)
+	assert.NoError(t, err)
+	err = repo.UpdateDelegationPaths("targets/test/b", []string{"invalidpath"}, []string{}, false)
 	assert.Error(t, err)
 	assert.IsType(t, data.ErrInvalidRole{}, err)
 

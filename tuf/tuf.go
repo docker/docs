@@ -10,7 +10,7 @@ import (
 	"time"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/docker/notary/client/changelist"
+	"github.com/docker/notary"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/utils"
@@ -257,35 +257,13 @@ func (tr *Repo) GetAllLoadedRoles() []*data.Role {
 	return res
 }
 
-// UpdateDelegations updates the appropriate delegations, either adding
-// a new delegation or updating an existing one. If keys are
-// provided, the IDs will be added to the role (if they do not exist
-// there already), and the keys will be added to the targets file.
-func (tr *Repo) UpdateDelegations(roleName string, changes changelist.TufDelegation) error {
-	if !data.IsDelegation(roleName) {
-		return data.ErrInvalidRole{Role: roleName, Reason: "not a valid delegated role"}
-	}
-	parent := path.Dir(roleName)
-
-	if err := tr.VerifyCanSign(parent); err != nil {
-		return err
-	}
-
-	// check the parent role's metadata
-	_, ok := tr.Targets[parent]
-	if !ok { // the parent targetfile may not exist yet - if not, then create it
-		var err error
-		_, err = tr.InitTargets(parent)
-		if err != nil {
-			return err
-		}
-	}
-	// Walk to parent, and either set or update this delegation
-	// Ensure all updates are valid
-	delegationUpdateVisitor := func(tgt *data.SignedTargets, validRole data.DelegationRole) interface{} {
+// Walk to parent, and either create or update this delegation.  We can only create a new delegation if we're given keys
+// Ensure all updates are valid, by checking against parent ancestor paths and ensuring the keys meet the role threshold.
+func delegationUpdateVisitor(roleName string, addKeys data.KeyList, removeKeys, addPaths, removePaths []string, clearAllPaths bool, newThreshold int) walkVisitorFunc {
+	return func(tgt *data.SignedTargets, validRole data.DelegationRole) interface{} {
 		var err error
 		// Validate the changes underneath this restricted validRole for adding paths, reject invalid path additions
-		if len(changes.AddPaths) != len(data.RestrictDelegationPathPrefixes(validRole.Paths, changes.AddPaths)) {
+		if len(addPaths) != len(data.RestrictDelegationPathPrefixes(validRole.Paths, addPaths)) {
 			return data.ErrInvalidRole{Role: roleName, Reason: "invalid paths to add to role"}
 		}
 		// Try to find the delegation and amend it using our changelist
@@ -305,24 +283,29 @@ func (tr *Repo) UpdateDelegations(roleName string, changes changelist.TufDelegat
 					Name:  role.Name,
 					Paths: pathsCopy,
 				}
-				delgRole.RemovePaths(changes.RemovePaths)
-				if changes.ClearAllPaths {
+				delgRole.RemovePaths(removePaths)
+				if clearAllPaths {
 					delgRole.Paths = []string{}
 				}
-				delgRole.AddPaths(changes.AddPaths)
-				delgRole.RemoveKeys(changes.RemoveKeys)
+				delgRole.AddPaths(addPaths)
+				delgRole.RemoveKeys(removeKeys)
 				break
 			}
 		}
-		// We didn't find the role earlier, so create it
+		// We didn't find the role earlier, so create it only if we have keys to add
 		if delgRole == nil {
-			delgRole, err = changes.ToNewRole(roleName)
-			if err != nil {
-				return err
+			if len(addKeys) > 0 {
+				delgRole, err = data.NewRole(roleName, newThreshold, addKeys.IDs(), addPaths)
+				if err != nil {
+					return err
+				}
+			} else {
+				// If we can't find the role and didn't specify keys to add, this is an error
+				return data.ErrInvalidRole{Role: roleName, Reason: "cannot create new delegation without keys"}
 			}
 		}
 		// Add the key IDs to the role and the keys themselves to the parent
-		for _, k := range changes.AddKeys {
+		for _, k := range addKeys {
 			if !utils.StrSliceContains(delgRole.KeyIDs, k.ID()) {
 				delgRole.KeyIDs = append(delgRole.KeyIDs, k.ID())
 			}
@@ -334,7 +317,7 @@ func (tr *Repo) UpdateDelegations(roleName string, changes changelist.TufDelegat
 		// NOTE: this closure CANNOT error after this point, as we've committed to editing the SignedTargets metadata in the repo object.
 		// Any errors related to updating this delegation must occur before this point.
 		// If all of our changes were valid, we should edit the actual SignedTargets to match our copy
-		for _, k := range changes.AddKeys {
+		for _, k := range addKeys {
 			tgt.Signed.Delegations.Keys[k.ID()] = k
 		}
 		foundAt := utils.FindRoleIndex(tgt.Signed.Delegations.Roles, delgRole.Name)
@@ -347,11 +330,65 @@ func (tr *Repo) UpdateDelegations(roleName string, changes changelist.TufDelegat
 		utils.RemoveUnusedKeys(tgt)
 		return StopWalk{}
 	}
+}
+
+// UpdateDelegationKeys updates the appropriate delegations, either adding
+// a new delegation or updating an existing one. If keys are
+// provided, the IDs will be added to the role (if they do not exist
+// there already), and the keys will be added to the targets file.
+func (tr *Repo) UpdateDelegationKeys(roleName string, addKeys data.KeyList, removeKeys []string, newThreshold int) error {
+	if !data.IsDelegation(roleName) {
+		return data.ErrInvalidRole{Role: roleName, Reason: "not a valid delegated role"}
+	}
+	parent := path.Dir(roleName)
+
+	if err := tr.VerifyCanSign(parent); err != nil {
+		return err
+	}
+
+	// check the parent role's metadata
+	_, ok := tr.Targets[parent]
+	if !ok { // the parent targetfile may not exist yet - if not, then create it
+		var err error
+		_, err = tr.InitTargets(parent)
+		if err != nil {
+			return err
+		}
+	}
 
 	// Walk to the parent of this delegation, since that is where its role metadata exists
 	// We do not have to verify that the walker reached its desired role in this scenario
 	// since we've already done another walk to the parent role in VerifyCanSign, and potentially made a targets file
-	err := tr.WalkTargets("", parent, delegationUpdateVisitor)
+	err := tr.WalkTargets("", parent, delegationUpdateVisitor(roleName, addKeys, removeKeys, []string{}, []string{}, false, newThreshold))
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+// UpdateDelegationPaths updates the appropriate delegation's paths.
+// It is not allowed to create a new delegation.
+func (tr *Repo) UpdateDelegationPaths(roleName string, addPaths, removePaths []string, clearPaths bool) error {
+	if !data.IsDelegation(roleName) {
+		return data.ErrInvalidRole{Role: roleName, Reason: "not a valid delegated role"}
+	}
+	parent := path.Dir(roleName)
+
+	if err := tr.VerifyCanSign(parent); err != nil {
+		return err
+	}
+
+	// check the parent role's metadata
+	_, ok := tr.Targets[parent]
+	if !ok { // the parent targetfile may not exist yet
+		// if not, this is an error because a delegation must exist to edit only paths
+		return data.ErrInvalidRole{Role: roleName, Reason: "no valid delegated role exists"}
+	}
+
+	// Walk to the parent of this delegation, since that is where its role metadata exists
+	// We do not have to verify that the walker reached its desired role in this scenario
+	// since we've already done another walk to the parent role in VerifyCanSign
+	err := tr.WalkTargets("", parent, delegationUpdateVisitor(roleName, data.KeyList{}, []string{}, addPaths, removePaths, clearPaths, notary.MinThreshold))
 	if err != nil {
 		return err
 	}

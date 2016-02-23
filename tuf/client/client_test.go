@@ -13,7 +13,6 @@ import (
 	"github.com/docker/notary/tuf/testutils"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/docker/notary/client/changelist"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/store"
@@ -411,7 +410,9 @@ func TestDownloadTargetsDeepHappy(t *testing.T) {
 		assert.NoError(t, err)
 
 		// add role to repo
-		err = repo.UpdateDelegations(r, changelist.TufDelegation{AddKeys: []data.PublicKey{k}, AddPaths: []string{""}, NewThreshold: 1})
+		err = repo.UpdateDelegationKeys(r, []data.PublicKey{k}, []string{}, 1)
+		assert.NoError(t, err)
+		err = repo.UpdateDelegationPaths(r, []string{""}, []string{}, false)
 		assert.NoError(t, err)
 		repo.InitTargets(r)
 	}
