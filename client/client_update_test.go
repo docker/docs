@@ -783,7 +783,7 @@ var waysToMessUpServer = []swizzleExpectations{
 	// for everything else, the errors come from tuf/signed
 
 	{desc: "invalid SignedMeta Type", expectErrs: []interface{}{
-		&certs.ErrValidationFail{}, signed.ErrWrongType},
+		&certs.ErrValidationFail{}, signed.ErrWrongType, data.ErrInvalidMetadata{}},
 		swizzle: (*testutils.MetadataSwizzler).SetInvalidMetadataType},
 
 	{desc: "invalid signatures", expectErrs: []interface{}{
@@ -831,7 +831,7 @@ func waysToMessUpServerRoot() []swizzleExpectations {
 					}},
 				swizzleExpectations{
 					desc:       fmt.Sprintf("no %s role", roleName),
-					expectErrs: []interface{}{data.ErrInvalidRole{}},
+					expectErrs: []interface{}{data.ErrInvalidMetadata{}},
 					swizzle: func(s *testutils.MetadataSwizzler, role string) error {
 						return s.MutateRoot(func(r *data.Root) { delete(r.Roles, roleName) })
 					}},
@@ -920,7 +920,7 @@ func waysToMessUpServerNonRootPerRole(t *testing.T) map[string][]swizzleExpectat
 			perRoleSwizzling[data.CanonicalSnapshotRole],
 			swizzleExpectations{
 				desc:       fmt.Sprintf("snapshot missing root meta checksum"),
-				expectErrs: []interface{}{client.ErrMissingMeta{}},
+				expectErrs: []interface{}{data.ErrInvalidMetadata{}},
 				swizzle: func(s *testutils.MetadataSwizzler, role string) error {
 					return s.MutateSnapshot(func(sn *data.Snapshot) {
 						delete(sn.Meta, missing)
@@ -939,7 +939,7 @@ func waysToMessUpServerNonRootPerRole(t *testing.T) map[string][]swizzleExpectat
 	}}
 	perRoleSwizzling[data.CanonicalTimestampRole] = []swizzleExpectations{{
 		desc:       fmt.Sprintf("timestamp missing snapshot meta checksum"),
-		expectErrs: []interface{}{client.ErrMissingMeta{}},
+		expectErrs: []interface{}{data.ErrInvalidMetadata{}},
 		swizzle: func(s *testutils.MetadataSwizzler, role string) error {
 			return s.MutateTimestamp(func(ts *data.Timestamp) {
 				delete(ts.Meta, data.CanonicalSnapshotRole)
@@ -948,7 +948,7 @@ func waysToMessUpServerNonRootPerRole(t *testing.T) map[string][]swizzleExpectat
 	}}
 	perRoleSwizzling["targets/a"] = []swizzleExpectations{{
 		desc:       fmt.Sprintf("delegation has invalid role"),
-		expectErrs: []interface{}{client.ErrMissingMeta{}},
+		expectErrs: []interface{}{data.ErrInvalidMetadata{}},
 		swizzle: func(s *testutils.MetadataSwizzler, role string) error {
 			return s.MutateTargets(func(tg *data.Targets) {
 				var keyIDs []string
@@ -1010,11 +1010,9 @@ func TestUpdateNonRootRemoteCorruptedNoLocalCache(t *testing.T) {
 					role: role,
 				}, testData, true)
 			case "targets/a":
-				// TODO: Bug where invalid (non-delegation) roles in delegations
-				// are accepted
 				testUpdateRemoteCorruptValidChecksum(t, updateOpts{
 					role: role,
-				}, testData, false)
+				}, testData, true)
 			}
 		}
 	}
@@ -1055,14 +1053,10 @@ func TestUpdateNonRootRemoteCorruptedCanUseLocalCache(t *testing.T) {
 					role:       role,
 				}, testData, false)
 			case data.CanonicalTimestampRole:
-				// TODO: Bug: this should succeed, because it's an invalid timestamp metadata
-				// and hence should fall back on the the local cached timestamp.  It's not
-				// succeeding now because the failure occurs on downloading the snapshot,
-				// not during the validation of the timestamp.
 				testUpdateRemoteCorruptValidChecksum(t, updateOpts{
 					localCache: true,
 					role:       role,
-				}, testData, true)
+				}, testData, false)
 			case "targets/a":
 				testUpdateRemoteCorruptValidChecksum(t, updateOpts{
 					localCache: true,
@@ -1118,19 +1112,19 @@ func TestUpdateNonRootRemoteCorruptedCannotUseLocalCache(t *testing.T) {
 					role:             role,
 				}, testData, false)
 			case data.CanonicalTimestampRole:
-				testUpdateRemoteCorruptValidChecksum(t, updateOpts{
-					serverHasNewData: true,
-					localCache:       true,
-					role:             role,
-				}, testData, true)
-			case "targets/a":
-				// TODO: Bug where invalid (non-delegation) roles in delegations
-				// are accepted
+				// If the timestamp is invalid, we just default to the previous
+				// cached version of the timestamp, so the update succeeds
 				testUpdateRemoteCorruptValidChecksum(t, updateOpts{
 					serverHasNewData: true,
 					localCache:       true,
 					role:             role,
 				}, testData, false)
+			case "targets/a":
+				testUpdateRemoteCorruptValidChecksum(t, updateOpts{
+					serverHasNewData: true,
+					localCache:       true,
+					role:             role,
+				}, testData, true)
 			}
 		}
 	}

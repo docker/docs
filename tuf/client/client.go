@@ -319,12 +319,12 @@ func (c *Client) downloadSnapshot() error {
 	logrus.Debug("Downloading Snapshot...")
 	role := data.CanonicalSnapshotRole
 	if c.local.Timestamp == nil {
-		return ErrMissingMeta{role: "snapshot"}
+		return tuf.ErrNotLoaded{Role: data.CanonicalTimestampRole}
 	}
 	size := c.local.Timestamp.Signed.Meta[role].Length
 	expectedSha256, ok := c.local.Timestamp.Signed.Meta[role].Hashes["sha256"]
 	if !ok {
-		return ErrMissingMeta{role: "snapshot"}
+		return data.ErrMissingMeta{Role: "snapshot"}
 	}
 
 	var download bool
@@ -403,14 +403,14 @@ func (c *Client) downloadTargets(role string) error {
 			return err
 		}
 		if c.local.Snapshot == nil {
-			return ErrMissingMeta{role: role}
+			return tuf.ErrNotLoaded{Role: data.CanonicalSnapshotRole}
 		}
 		snap := c.local.Snapshot.Signed
 		root := c.local.Root.Signed
 
 		s, err := c.getTargetsFile(role, snap.Meta, root.ConsistentSnapshot)
 		if err != nil {
-			if _, ok := err.(ErrMissingMeta); ok && role != data.CanonicalTargetsRole {
+			if _, ok := err.(data.ErrMissingMeta); ok && role != data.CanonicalTargetsRole {
 				// if the role meta hasn't been published,
 				// that's ok, continue
 				continue
@@ -418,7 +418,7 @@ func (c *Client) downloadTargets(role string) error {
 			logrus.Error("Error getting targets file:", err)
 			return err
 		}
-		t, err := data.TargetsFromSigned(s)
+		t, err := data.TargetsFromSigned(s, role)
 		if err != nil {
 			return err
 		}
@@ -463,11 +463,11 @@ func (c Client) getTargetsFile(role string, snapshotMeta data.Files, consistent 
 	// require role exists in snapshots
 	roleMeta, ok := snapshotMeta[role]
 	if !ok {
-		return nil, ErrMissingMeta{role: role}
+		return nil, data.ErrMissingMeta{Role: role}
 	}
 	expectedSha256, ok := snapshotMeta[role].Hashes["sha256"]
 	if !ok {
-		return nil, ErrMissingMeta{role: role}
+		return nil, data.ErrMissingMeta{Role: role}
 	}
 
 	// try to get meta file from content addressed cache
@@ -486,7 +486,7 @@ func (c Client) getTargetsFile(role string, snapshotMeta data.Files, consistent 
 		}
 		err := json.Unmarshal(raw, old)
 		if err == nil {
-			targ, err := data.TargetsFromSigned(old)
+			targ, err := data.TargetsFromSigned(old, role)
 			if err == nil {
 				version = targ.Signed.Version
 			} else {

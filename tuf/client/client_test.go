@@ -47,7 +47,12 @@ func TestRotation(t *testing.T) {
 	// Generate a new root with the replacement key and role
 	testRoot, err := data.NewRoot(
 		map[string]data.PublicKey{replacementKey.ID(): replacementKey},
-		map[string]*data.RootRole{"root": &replacementRole.RootRole},
+		map[string]*data.RootRole{
+			data.CanonicalRootRole:      &replacementRole.RootRole,
+			data.CanonicalSnapshotRole:  &replacementRole.RootRole,
+			data.CanonicalTargetsRole:   &replacementRole.RootRole,
+			data.CanonicalTimestampRole: &replacementRole.RootRole,
+		},
 		false,
 	)
 	assert.NoError(t, err, "Failed to create new root")
@@ -508,7 +513,7 @@ func TestDownloadTargetsNoChecksum(t *testing.T) {
 	delete(repo.Snapshot.Signed.Meta["targets"].Hashes, "sha256")
 
 	err = client.downloadTargets("targets")
-	assert.IsType(t, ErrMissingMeta{}, err)
+	assert.IsType(t, data.ErrMissingMeta{}, err)
 }
 
 // TestDownloadTargetsNoSnapshot: it's never valid to download any targets
@@ -531,7 +536,7 @@ func TestDownloadTargetsNoSnapshot(t *testing.T) {
 	repo.Snapshot = nil
 
 	err = client.downloadTargets("targets")
-	assert.IsType(t, ErrMissingMeta{}, err)
+	assert.IsType(t, tuf.ErrNotLoaded{}, err)
 }
 
 func TestBootstrapDownloadRootHappy(t *testing.T) {
@@ -735,7 +740,7 @@ func TestDownloadSnapshotNoTimestamp(t *testing.T) {
 	repo.Timestamp = nil
 
 	err = client.downloadSnapshot()
-	assert.IsType(t, ErrMissingMeta{}, err)
+	assert.IsType(t, tuf.ErrNotLoaded{}, err)
 }
 
 func TestDownloadSnapshotNoChecksum(t *testing.T) {
@@ -756,7 +761,7 @@ func TestDownloadSnapshotNoChecksum(t *testing.T) {
 	delete(repo.Timestamp.Signed.Meta["snapshot"].Hashes, "sha256")
 
 	err = client.downloadSnapshot()
-	assert.IsType(t, ErrMissingMeta{}, err)
+	assert.IsType(t, data.ErrMissingMeta{}, err)
 }
 
 func TestDownloadSnapshotChecksumNotFound(t *testing.T) {

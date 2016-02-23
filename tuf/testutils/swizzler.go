@@ -378,7 +378,7 @@ func (m *MetadataSwizzler) SetThreshold(role string, newThreshold int) error {
 			return err
 		}
 	} else {
-		signedTargets, err := data.TargetsFromSigned(signedThing)
+		signedTargets, err := data.TargetsFromSigned(signedThing, roleSpecifier)
 		if err != nil {
 			return err
 		}
@@ -559,7 +559,8 @@ func (m *MetadataSwizzler) MutateRoot(mutate func(*data.Root)) error {
 
 	mutate(&root)
 
-	signedThing, err = data.SignedRoot{Signed: root, Signatures: signedThing.Signatures}.ToSigned()
+	sRoot := &data.SignedRoot{Signed: root, Signatures: signedThing.Signatures}
+	signedThing, err = sRoot.ToSigned()
 	if err != nil {
 		return err
 	}
@@ -591,7 +592,8 @@ func (m *MetadataSwizzler) MutateTimestamp(mutate func(*data.Timestamp)) error {
 
 	mutate(&timestamp)
 
-	signedThing, err = data.SignedTimestamp{Signed: timestamp, Signatures: signedThing.Signatures}.ToSigned()
+	sTimestamp := &data.SignedTimestamp{Signed: timestamp, Signatures: signedThing.Signatures}
+	signedThing, err = sTimestamp.ToSigned()
 	if err != nil {
 		return err
 	}
@@ -623,7 +625,8 @@ func (m *MetadataSwizzler) MutateSnapshot(mutate func(*data.Snapshot)) error {
 
 	mutate(&snapshot)
 
-	signedThing, err = data.SignedSnapshot{Signed: snapshot, Signatures: signedThing.Signatures}.ToSigned()
+	sSnapshot := &data.SignedSnapshot{Signed: snapshot, Signatures: signedThing.Signatures}
+	signedThing, err = sSnapshot.ToSigned()
 	if err != nil {
 		return err
 	}
@@ -655,7 +658,8 @@ func (m *MetadataSwizzler) MutateTargets(mutate func(*data.Targets)) error {
 
 	mutate(&targets)
 
-	signedThing, err = data.SignedTargets{Signed: targets, Signatures: signedThing.Signatures}.ToSigned()
+	sTargets := &data.SignedTargets{Signed: targets, Signatures: signedThing.Signatures}
+	signedThing, err = sTargets.ToSigned()
 	if err != nil {
 		return err
 	}

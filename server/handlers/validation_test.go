@@ -482,7 +482,7 @@ func TestValidateRootInvalidZeroThreshold(t *testing.T) {
 		copyTimestampKey(t, oldRepo, store, "testGUN")
 		_, err = validateUpdate(cs, "testGUN", updates, store)
 		assert.Error(t, err)
-		assert.Contains(t, err.Error(), "role has invalid threshold")
+		assert.Contains(t, err.Error(), "invalid threshold")
 	}
 }
 
