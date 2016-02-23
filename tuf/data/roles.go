@@ -214,18 +214,6 @@ type Role struct {
 	Paths []string `json:"paths,omitempty"`
 }
 
-func isValidRootRoleStructure(r RootRole, validKeys Keys) error {
-	if r.Threshold < 1 {
-		return fmt.Errorf("invalid threshold: %v ", r.Threshold)
-	}
-	for _, keyID := range r.KeyIDs {
-		if _, ok := validKeys[keyID]; !ok {
-			return fmt.Errorf("key ID %s specified without corresponding key", keyID)
-		}
-	}
-	return nil
-}
-
 // NewRole creates a new Role object from the given parameters
 func NewRole(name string, threshold int, keyIDs, paths []string) (*Role, error) {
 	if IsDelegation(name) {

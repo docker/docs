@@ -42,10 +42,25 @@ func isValidRootStructure(r Root) error {
 			return ErrInvalidMetadata{
 				role: CanonicalRootRole, msg: fmt.Sprintf("missing %s role specification", roleName)}
 		}
-		if err := isValidRootRoleStructure(*roleObj, r.Keys); err != nil {
+		if err := isValidRootRoleStructure(CanonicalRootRole, roleName, *roleObj, r.Keys); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func isValidRootRoleStructure(metaContainingRole, rootRoleName string, r RootRole, validKeys Keys) error {
+	if r.Threshold < 1 {
+		return ErrInvalidMetadata{
+			role: metaContainingRole,
+			msg:  fmt.Sprintf("invalid threshold specified for %s: %v ", rootRoleName, r.Threshold),
+		}
+	}
+	for _, keyID := range r.KeyIDs {
+		if _, ok := validKeys[keyID]; !ok {
 			return ErrInvalidMetadata{
-				role: CanonicalRootRole,
-				msg:  fmt.Sprintf("role %s: %s", roleName, err.Error()),
+				role: metaContainingRole,
+				msg:  fmt.Sprintf("key ID %s specified in %s without corresponding key", keyID, rootRoleName),
 			}
 		}
 	}
