@@ -1,5 +1,9 @@
 package notary
 
+import (
+	"time"
+)
+
 // application wide constants
 const (
 	// MaxDownloadSize is the maximum size we'll download for metadata if no limit is given
@@ -24,4 +28,23 @@ const (
 	RootKeysSubdir = "root_keys"
 	// NonRootKeysSubdir is the subdirectory under PrivDir where non-root private keys are stored
 	NonRootKeysSubdir = "tuf_keys"
+
+	// Day is a duration of one day
+	Day  = 24 * time.Hour
+	Year = 365 * Day
+
+	// NotaryRootExpiry is the duration representing the expiry time of the Root role
+	NotaryRootExpiry      = 10 * Year
+	NotaryTargetsExpiry   = 3 * Year
+	NotarySnapshotExpiry  = 3 * Year
+	NotaryTimestampExpiry = 14 * Day
 )
+
+// NotaryDefaultExpiries is the construct used to configure the default expiry times of
+// the various role files.
+var NotaryDefaultExpiries = map[string]time.Duration{
+	"root":      NotaryRootExpiry,
+	"targets":   NotaryTargetsExpiry,
+	"snapshot":  NotarySnapshotExpiry,
+	"timestamp": NotaryTimestampExpiry,
+}

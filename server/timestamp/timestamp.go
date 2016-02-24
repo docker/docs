@@ -8,6 +8,7 @@ import (
 	"github.com/docker/notary/tuf/signed"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/docker/notary/server/snapshot"
 	"github.com/docker/notary/server/storage"
 )
 
@@ -49,7 +50,7 @@ func GetOrCreateTimestampKey(gun string, store storage.MetaStore, crypto signed.
 // a new timestamp is generated either because none exists, or because the current
 // one has expired. Once generated, the timestamp is saved in the store.
 func GetOrCreateTimestamp(gun string, store storage.MetaStore, cryptoService signed.CryptoService) ([]byte, error) {
-	snapshot, err := store.GetCurrent(gun, "snapshot")
+	snapshot, err := snapshot.GetOrCreateSnapshot(gun, store, cryptoService)
 	if err != nil {
 		return nil, err
 	}
