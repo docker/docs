@@ -50,7 +50,7 @@ func NewTimestamp(snapshot *Signed) (*SignedTimestamp, error) {
 	if err != nil {
 		return nil, err
 	}
-	snapshotMeta, err := NewFileMeta(bytes.NewReader(snapshotJSON), "sha256")
+	snapshotMeta, err := NewFileMeta(bytes.NewReader(snapshotJSON), NotaryDefaultHashes...)
 	if err != nil {
 		return nil, err
 	}
