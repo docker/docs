@@ -270,7 +270,7 @@ func (d *delegationCommander) delegationAdd(cmd *cobra.Command, args []string) e
 	cmd.Println("")
 	addingItems := ""
 	if len(pubKeyIDs) > 0 {
-		addingItems = addingItems + fmt.Sprintf("with keys %s, ", pubKeys)
+		addingItems = addingItems + fmt.Sprintf("with keys %s, ", pubKeyIDs)
 	}
 	if d.paths != nil || d.allPaths {
 		addingItems = addingItems + fmt.Sprintf("with paths [%s], ", prettyPrintPaths(d.paths))
