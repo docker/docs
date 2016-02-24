@@ -203,6 +203,7 @@ func TestClientDelegationsInteraction(t *testing.T) {
 	output, err = runCommand(t, tempDir, "delegation", "add", "gun", "targets/delegation", tempFile.Name())
 	assert.NoError(t, err)
 	assert.Contains(t, output, "Addition of delegation role")
+	assert.Contains(t, output, keyID)
 	assert.NotContains(t, output, "path")
 
 	// check status - see delegation
@@ -274,6 +275,7 @@ func TestClientDelegationsInteraction(t *testing.T) {
 	output, err = runCommand(t, tempDir, "delegation", "add", "gun", "targets/delegation", tempFile2.Name(), "--paths", "path")
 	assert.NoError(t, err)
 	assert.Contains(t, output, "Addition of delegation role")
+	assert.Contains(t, output, keyID2)
 
 	// publish repo
 	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
@@ -320,6 +322,8 @@ func TestClientDelegationsInteraction(t *testing.T) {
 	output, err = runCommand(t, tempDir, "delegation", "add", "gun", "targets/delegation", tempFile.Name(), tempFile2.Name(), "--paths", "path1,path2")
 	assert.NoError(t, err)
 	assert.Contains(t, output, "Addition of delegation role")
+	assert.Contains(t, output, keyID)
+	assert.Contains(t, output, keyID2)
 
 	// publish repo
 	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
@@ -600,6 +604,7 @@ func TestClientDelegationsPublishing(t *testing.T) {
 	output, err = runCommand(t, tempDir, "delegation", "add", "gun", "targets/releases", tempFile.Name(), "--paths", "\"\"")
 	assert.NoError(t, err)
 	assert.Contains(t, output, "Addition of delegation role")
+	assert.Contains(t, output, canonicalKeyID)
 
 	// publish repo
 	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
