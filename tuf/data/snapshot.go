@@ -63,11 +63,11 @@ func NewSnapshot(root *Signed, targets *Signed) (*SignedSnapshot, error) {
 		logrus.Debug("Error Marshalling Root")
 		return nil, err
 	}
-	rootMeta, err := NewFileMeta(bytes.NewReader(rootJSON), "sha256")
+	rootMeta, err := NewFileMeta(bytes.NewReader(rootJSON), NotaryDefaultHashes...)
 	if err != nil {
 		return nil, err
 	}
-	targetsMeta, err := NewFileMeta(bytes.NewReader(targetsJSON), "sha256")
+	targetsMeta, err := NewFileMeta(bytes.NewReader(targetsJSON), NotaryDefaultHashes...)
 	if err != nil {
 		return nil, err
 	}
