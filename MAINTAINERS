@@ -340,7 +340,7 @@ or feedback about project operations.
     [Org.libkv]
         People = ["abronan", "aluzzardi", "sanimej", "vieux"]
     [Org.libnetwork]
-        People = ["aboch", "lk4d4", "icecrime", "mrjana", "mavenugo", "sanimej"]
+        People = ["aboch", "lk4d4", "icecrime", "mrjana", "mavenugo", "sanimej", "chenchun"]
     [Org.machine]
         People = ["dgageot", "ehazlett", "jeanlaurent", "nathanleclaire"]
     [Org.migrator]
@@ -401,6 +401,10 @@ or feedback about project operations.
         Name = "Chanwit Kaewkasi"
         Email = "chanwit@gmail.com"
         GitHub = "chanwit"
+    [People.chenchun]
+        Name = "Chun Chen"
+        Email = "ramichen@tencent.com"
+        GitHub = "chenchun"
     [People.coolljt0725]
         Name = "Lei Jitang"
         Email = "leijitang@huawei.com"
