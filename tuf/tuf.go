@@ -760,7 +760,7 @@ func (tr *Repo) UpdateSnapshot(role string, s *data.Signed) error {
 	if err != nil {
 		return err
 	}
-	meta, err := data.NewFileMeta(bytes.NewReader(jsonData), "sha256")
+	meta, err := data.NewFileMeta(bytes.NewReader(jsonData), data.NotaryDefaultHashes...)
 	if err != nil {
 		return err
 	}
@@ -775,7 +775,7 @@ func (tr *Repo) UpdateTimestamp(s *data.Signed) error {
 	if err != nil {
 		return err
 	}
-	meta, err := data.NewFileMeta(bytes.NewReader(jsonData), "sha256")
+	meta, err := data.NewFileMeta(bytes.NewReader(jsonData), data.NotaryDefaultHashes...)
 	if err != nil {
 		return err
 	}
