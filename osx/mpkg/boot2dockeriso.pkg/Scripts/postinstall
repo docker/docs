@@ -2,13 +2,21 @@
 
 CONSOLE_USER=$(stat -f '%Su' /dev/console)
 CONSOLE_USER_HOME=$(su $CONSOLE_USER -c 'echo $HOME')
-
-# Place boot2docker ISO in cache
-mkdir -p $CONSOLE_USER_HOME/.docker/machine/cache
-cp /usr/local/share/boot2docker/boot2docker.iso $CONSOLE_USER_HOME/.docker/machine/cache/boot2docker.iso
-chown -R $CONSOLE_USER:staff $CONSOLE_USER_HOME/.docker
+VM=default
 
 # Fix permissions on binaries
 chown -R $CONSOLE_USER:admin /usr/local/bin/docker || true
-chown -R $CONSOLE_USER:admin /usr/local/bin/docker-machine* || true
+chown -R $CONSOLE_USER:admin /usr/local/bin/docker-machine || true
 chown -R $CONSOLE_USER:admin /usr/local/bin/docker-compose || true
+
+# Place boot2docker ISO in cache & upgrade the boot2docker VM
+mkdir -p $CONSOLE_USER_HOME/.docker/machine/cache
+cp /usr/local/share/boot2docker/boot2docker.iso $CONSOLE_USER_HOME/.docker/machine/cache/boot2docker.iso
+
+if [ -d "$CONSOLE_USER_HOME/.docker/machine/machines/$VM" ] && [ -f /usr/local/bin/docker-machine ]; then
+  sudo -i -u "$CONSOLE_USER" "/usr/local/bin/docker-machine stop $VM || true"
+  cp /usr/local/share/boot2docker/boot2docker.iso $CONSOLE_USER_HOME/.docker/machine/machines/$VM/boot2docker.iso
+fi
+
+chown -R $CONSOLE_USER:staff $CONSOLE_USER_HOME/.docker
+

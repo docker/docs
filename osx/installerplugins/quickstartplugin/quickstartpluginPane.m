@@ -17,6 +17,7 @@
 
 - (void) didEnterPane:(InstallerSectionDirection)dir {
     self.previousEnabled = NO;
+    [Mixpanel trackEvent:@"Installing Files Succeeded" forPane:self];
 }
 
 - (void) willEnterPane:(InstallerSectionDirection)dir {
