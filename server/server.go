@@ -9,6 +9,7 @@ import (
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/distribution/health"
 	"github.com/docker/distribution/registry/auth"
+	"github.com/docker/notary"
 	"github.com/docker/notary/server/handlers"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
@@ -19,11 +20,7 @@ import (
 )
 
 func init() {
-	data.SetDefaultExpiryTimes(
-		map[string]int{
-			"timestamp": 14,
-		},
-	)
+	data.SetDefaultExpiryTimes(notary.NotaryDefaultExpiries)
 }
 
 func prometheusOpts(operation string) prometheus.SummaryOpts {

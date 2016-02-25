@@ -52,7 +52,11 @@ func TestGetTimestamp(t *testing.T) {
 	store := storage.NewMemStorage()
 	crypto := signed.NewEd25519()
 
-	snapshot := &data.SignedSnapshot{}
+	snapshot := &data.SignedSnapshot{
+		Signed: data.Snapshot{
+			Expires: data.DefaultExpires(data.CanonicalSnapshotRole),
+		},
+	}
 	snapJSON, _ := json.Marshal(snapshot)
 
 	store.UpdateCurrent("gun", storage.MetaUpdate{Role: "snapshot", Version: 0, Data: snapJSON})
@@ -68,7 +72,11 @@ func TestGetTimestampNewSnapshot(t *testing.T) {
 	store := storage.NewMemStorage()
 	crypto := signed.NewEd25519()
 
-	snapshot := data.SignedSnapshot{}
+	snapshot := &data.SignedSnapshot{
+		Signed: data.Snapshot{
+			Expires: data.DefaultExpires(data.CanonicalSnapshotRole),
+		},
+	}
 	snapshot.Signed.Version = 0
 	snapJSON, _ := json.Marshal(snapshot)
 
@@ -80,7 +88,11 @@ func TestGetTimestampNewSnapshot(t *testing.T) {
 	ts1, err := GetOrCreateTimestamp("gun", store, crypto)
 	assert.Nil(t, err, "GetTimestamp errored")
 
-	snapshot = data.SignedSnapshot{}
+	snapshot = &data.SignedSnapshot{
+		Signed: data.Snapshot{
+			Expires: data.DefaultExpires(data.CanonicalSnapshotRole),
+		},
+	}
 	snapshot.Signed.Version = 1
 	snapJSON, _ = json.Marshal(snapshot)
 
