@@ -85,10 +85,6 @@ func NewSnapshot(root *Signed, targets *Signed) (*SignedSnapshot, error) {
 	}, nil
 }
 
-func (sp *SignedSnapshot) hashForRole(role string) []byte {
-	return sp.Signed.Meta[role].Hashes["sha256"]
-}
-
 // ToSigned partially serializes a SignedSnapshot for further signing
 func (sp *SignedSnapshot) ToSigned() (*Signed, error) {
 	s, err := defaultSerializer.MarshalCanonical(sp.Signed)
