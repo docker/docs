@@ -7,14 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1B4C91481B8500A700A06068 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1B4C91461B8500A700A06068 /* InfoPlist.strings */; };
-		1B4C914B1B8500A700A06068 /* managevmpluginPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4C914A1B8500A700A06068 /* managevmpluginPane.m */; };
-		1B4C914E1B8500A700A06068 /* managevmplugin.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B4C914C1B8500A700A06068 /* managevmplugin.xib */; };
-		1B4C91511B8500A700A06068 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1B4C914F1B8500A700A06068 /* Localizable.strings */; };
-		1B4C91531B8500A700A06068 /* InstallerSections.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1B4C91521B8500A700A06068 /* InstallerSections.plist */; };
-		1B4C915A1B8500BB00A06068 /* toolboxcheck.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B4C91571B8500BB00A06068 /* toolboxcheck.png */; };
-		1B4C915B1B8500BB00A06068 /* boot2docker.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B4C91581B8500BB00A06068 /* boot2docker.png */; };
-		1B4C915C1B8500BB00A06068 /* toolbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B4C91591B8500BB00A06068 /* toolbox.png */; };
 		1B4C91B91B85198100A06068 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1B4C91B71B85198100A06068 /* InfoPlist.strings */; };
 		1B4C91BC1B85198100A06068 /* quickstartpluginPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4C91BB1B85198100A06068 /* quickstartpluginPane.m */; };
 		1B4C91BF1B85198100A06068 /* quickstartplugin.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B4C91BD1B85198100A06068 /* quickstartplugin.xib */; };
@@ -31,17 +23,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1B4C91421B8500A700A06068 /* managevmplugin.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = managevmplugin.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		1B4C91451B8500A700A06068 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1B4C91471B8500A700A06068 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		1B4C91491B8500A700A06068 /* managevmpluginPane.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = managevmpluginPane.h; sourceTree = "<group>"; };
-		1B4C914A1B8500A700A06068 /* managevmpluginPane.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = managevmpluginPane.m; sourceTree = "<group>"; };
-		1B4C914D1B8500A700A06068 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/managevmplugin.xib; sourceTree = "<group>"; };
-		1B4C91501B8500A700A06068 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		1B4C91521B8500A700A06068 /* InstallerSections.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = InstallerSections.plist; sourceTree = "<group>"; };
-		1B4C91571B8500BB00A06068 /* toolboxcheck.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toolboxcheck.png; sourceTree = "<group>"; };
-		1B4C91581B8500BB00A06068 /* boot2docker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boot2docker.png; sourceTree = "<group>"; };
-		1B4C91591B8500BB00A06068 /* toolbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toolbox.png; sourceTree = "<group>"; };
 		1B4C915E1B85023200A06068 /* mixpanel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = mixpanel.h; path = common/mixpanel.h; sourceTree = "<group>"; };
 		1B4C91B31B85198100A06068 /* quickstartplugin.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = quickstartplugin.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B4C91B61B85198100A06068 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -65,13 +46,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		1B4C913F1B8500A700A06068 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1B4C91B01B85198100A06068 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -93,38 +67,11 @@
 			isa = PBXGroup;
 			children = (
 				1BF102BB1B8BDEDA00FCB650 /* overviewplugin.bundle */,
-				1B4C91421B8500A700A06068 /* managevmplugin.bundle */,
 				1B4C91B31B85198100A06068 /* quickstartplugin.bundle */,
 				1BF102BC1B8BDEDA00FCB650 /* overviewplugin */,
-				1B4C91431B8500A700A06068 /* managevmplugin */,
 				1B4C91B41B85198100A06068 /* quickstartplugin */,
 				1B4C915D1B85021200A06068 /* common */,
 			);
-			sourceTree = "<group>";
-		};
-		1B4C91431B8500A700A06068 /* managevmplugin */ = {
-			isa = PBXGroup;
-			children = (
-				1B4C91571B8500BB00A06068 /* toolboxcheck.png */,
-				1B4C91581B8500BB00A06068 /* boot2docker.png */,
-				1B4C91591B8500BB00A06068 /* toolbox.png */,
-				1B4C91491B8500A700A06068 /* managevmpluginPane.h */,
-				1B4C914A1B8500A700A06068 /* managevmpluginPane.m */,
-				1B4C914C1B8500A700A06068 /* managevmplugin.xib */,
-				1B4C914F1B8500A700A06068 /* Localizable.strings */,
-				1B4C91521B8500A700A06068 /* InstallerSections.plist */,
-				1B4C91441B8500A700A06068 /* Supporting Files */,
-			);
-			path = managevmplugin;
-			sourceTree = "<group>";
-		};
-		1B4C91441B8500A700A06068 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				1B4C91451B8500A700A06068 /* Info.plist */,
-				1B4C91461B8500A700A06068 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		1B4C915D1B85021200A06068 /* common */ = {
@@ -185,23 +132,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1B4C91411B8500A700A06068 /* managevmplugin */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1B4C91541B8500A700A06068 /* Build configuration list for PBXNativeTarget "managevmplugin" */;
-			buildPhases = (
-				1B4C913E1B8500A700A06068 /* Sources */,
-				1B4C913F1B8500A700A06068 /* Frameworks */,
-				1B4C91401B8500A700A06068 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = managevmplugin;
-			productName = managevmplugin;
-			productReference = 1B4C91421B8500A700A06068 /* managevmplugin.bundle */;
-			productType = "com.apple.product-type.bundle";
-		};
 		1B4C91B21B85198100A06068 /* quickstartplugin */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1B4C91C51B85198100A06068 /* Build configuration list for PBXNativeTarget "quickstartplugin" */;
@@ -245,9 +175,6 @@
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Docker Inc";
 				TargetAttributes = {
-					1B4C91411B8500A700A06068 = {
-						CreatedOnToolsVersion = 6.4;
-					};
 					1B4C91B21B85198100A06068 = {
 						CreatedOnToolsVersion = 6.4;
 					};
@@ -269,7 +196,6 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1B4C91411B8500A700A06068 /* managevmplugin */,
 				1B4C91B21B85198100A06068 /* quickstartplugin */,
 				1BF102BA1B8BDEDA00FCB650 /* overviewplugin */,
 			);
@@ -277,20 +203,6 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		1B4C91401B8500A700A06068 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1B4C915C1B8500BB00A06068 /* toolbox.png in Resources */,
-				1B4C914E1B8500A700A06068 /* managevmplugin.xib in Resources */,
-				1B4C91511B8500A700A06068 /* Localizable.strings in Resources */,
-				1B4C915B1B8500BB00A06068 /* boot2docker.png in Resources */,
-				1B4C91481B8500A700A06068 /* InfoPlist.strings in Resources */,
-				1B4C915A1B8500BB00A06068 /* toolboxcheck.png in Resources */,
-				1B4C91531B8500A700A06068 /* InstallerSections.plist in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1B4C91B11B85198100A06068 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -319,14 +231,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		1B4C913E1B8500A700A06068 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1B4C914B1B8500A700A06068 /* managevmpluginPane.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1B4C91AF1B85198100A06068 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -346,30 +250,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		1B4C91461B8500A700A06068 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1B4C91471B8500A700A06068 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		1B4C914C1B8500A700A06068 /* managevmplugin.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1B4C914D1B8500A700A06068 /* Base */,
-			);
-			name = managevmplugin.xib;
-			sourceTree = "<group>";
-		};
-		1B4C914F1B8500A700A06068 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1B4C91501B8500A700A06068 /* en */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
 		1B4C91B71B85198100A06068 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -501,38 +381,6 @@
 			};
 			name = Release;
 		};
-		1B4C91551B8500A700A06068 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/../mpkg/Plugins";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = managevmplugin/Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.docker.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Debug;
-		};
-		1B4C91561B8500A700A06068 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/../mpkg/Plugins";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = managevmplugin/Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.docker.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Release;
-		};
 		1B4C91C61B85198100A06068 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -603,15 +451,6 @@
 			buildConfigurations = (
 				1B4C90851B84FDEB00A06068 /* Debug */,
 				1B4C90861B84FDEB00A06068 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1B4C91541B8500A700A06068 /* Build configuration list for PBXNativeTarget "managevmplugin" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1B4C91551B8500A700A06068 /* Debug */,
-				1B4C91561B8500A700A06068 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
