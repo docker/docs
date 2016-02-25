@@ -27,13 +27,7 @@ import (
 )
 
 func init() {
-	data.SetDefaultExpiryTimes(
-		map[string]int{
-			"root":     3650,
-			"targets":  1095,
-			"snapshot": 1095,
-		},
-	)
+	data.SetDefaultExpiryTimes(notary.NotaryDefaultExpiries)
 }
 
 // ErrRepoNotInitialized is returned when trying to publish an uninitialized
