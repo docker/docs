@@ -29,11 +29,10 @@ behavior.
 
 ## Options
 
-| Option                    | Description                                                                      |
-|---------------------------|----------------------------------------------------------------------------------|
-| `--debug`, `-D`           | Enable debug.                                                                    |
-| `--jsonlog`               | Produce json formatted output for easier parsing.                                |
-| `--interactive`, `-i`     | Enable interactive mode. You are prompted to enter all required information. |
-| `--image-version "0.7.0"` | Select a specific UCP version.                                                   |
-| `--pull "missing"`        | Specify image pull behavior (`always`, when `missing`, or `never`).              |
-| `--list`                  | Don`t do anything, just list the images used by UCP                              |
+| Option                | Description                                                                  |
+|:----------------------|:-----------------------------------------------------------------------------|
+| `--debug`, `-D`       | Enable debug.                                                                |
+| `--jsonlog`           | Produce json formatted output for easier parsing.                            |
+| `--interactive`, `-i` | Enable interactive mode. You are prompted to enter all required information. |
+| `--pull "missing"`    | Specify image pull behavior (`always`, when `missing`, or `never`).          |
+| `--list`              | Don`t do anything, just list the images used by UCP                          |
