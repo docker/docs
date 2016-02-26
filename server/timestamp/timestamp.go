@@ -1,6 +1,8 @@
 package timestamp
 
 import (
+	"time"
+
 	"github.com/docker/go/canonical/json"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
@@ -47,16 +49,18 @@ func GetOrCreateTimestampKey(gun string, store storage.MetaStore, crypto signed.
 // GetOrCreateTimestamp returns the current timestamp for the gun. This may mean
 // a new timestamp is generated either because none exists, or because the current
 // one has expired. Once generated, the timestamp is saved in the store.
-func GetOrCreateTimestamp(gun string, store storage.MetaStore, cryptoService signed.CryptoService) ([]byte, error) {
-	snapshot, err := snapshot.GetOrCreateSnapshot(gun, store, cryptoService)
+func GetOrCreateTimestamp(gun string, store storage.MetaStore, cryptoService signed.CryptoService) (
+	*time.Time, []byte, error) {
+
+	_, snapshot, err := snapshot.GetOrCreateSnapshot(gun, store, cryptoService)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-	_, d, err := store.GetCurrent(gun, "timestamp")
+	creation, d, err := store.GetCurrent(gun, data.CanonicalTimestampRole)
 	if err != nil {
 		if _, ok := err.(storage.ErrNotFound); !ok {
 			logrus.Error("error retrieving timestamp: ", err.Error())
-			return nil, err
+			return nil, nil, err
 		}
 		logrus.Debug("No timestamp found, will proceed to create first timestamp")
 	}
@@ -65,27 +69,28 @@ func GetOrCreateTimestamp(gun string, store storage.MetaStore, cryptoService sig
 		err := json.Unmarshal(d, ts)
 		if err != nil {
 			logrus.Error("Failed to unmarshal existing timestamp")
-			return nil, err
+			return nil, nil, err
 		}
 		if !timestampExpired(ts) && !snapshotExpired(ts, snapshot) {
-			return d, nil
+			return creation, d, nil
 		}
 	}
 	sgnd, version, err := CreateTimestamp(gun, ts, snapshot, store, cryptoService)
 	if err != nil {
 		logrus.Error("Failed to create a new timestamp")
-		return nil, err
+		return nil, nil, err
 	}
 	out, err := json.Marshal(sgnd)
 	if err != nil {
 		logrus.Error("Failed to marshal new timestamp")
-		return nil, err
+		return nil, nil, err
 	}
 	err = store.UpdateCurrent(gun, storage.MetaUpdate{Role: "timestamp", Version: version, Data: out})
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-	return out, nil
+	c := time.Now()
+	return &c, out, nil
 }
 
 // timestampExpired compares the current time to the expiry time of the timestamp

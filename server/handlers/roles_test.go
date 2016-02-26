@@ -14,10 +14,7 @@ import (
 )
 
 func TestGetMaybeServerSignedNoCrypto(t *testing.T) {
-	err := getMaybeServerSigned(
-		context.Background(),
-		nil, nil, "", "",
-	)
+	_, _, err := getMaybeServerSigned(context.Background(), nil, "", "")
 	require.Error(t, err)
 	require.IsType(t, errcode.Error{}, err)
 
@@ -33,9 +30,8 @@ func TestGetMaybeServerSignedNoKey(t *testing.T) {
 	ctx = context.WithValue(ctx, "cryptoService", crypto)
 	ctx = context.WithValue(ctx, "keyAlgorithm", data.ED25519Key)
 
-	err := getMaybeServerSigned(
+	_, _, err := getMaybeServerSigned(
 		ctx,
-		nil,
 		store,
 		"gun",
 		data.CanonicalTimestampRole,

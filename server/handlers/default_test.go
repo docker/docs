@@ -2,6 +2,8 @@ package handlers
 
 import (
 	"bytes"
+	"crypto/sha256"
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -172,6 +174,28 @@ func TestGetKeyHandlerCreatesOnce(t *testing.T) {
 	}
 }
 
+// Verifies that the body is as expected, the ETag is as expected,
+func verifyGetResponse(t *testing.T, rw *httptest.ResponseRecorder, expectedBytes []byte,
+	getWithChecksum bool, checksumHex string) {
+
+	body, err := ioutil.ReadAll(rw.Body)
+	assert.NoError(t, err)
+	assert.True(t, bytes.Equal(expectedBytes, body))
+
+	lastModified, err := time.Parse(time.RFC1123, rw.HeaderMap.Get("Last-Modified"))
+	assert.NoError(t, err)
+	assert.True(t, lastModified.After(time.Now().Add(-5*time.Minute)))
+
+	cacheControl := rw.HeaderMap.Get("Cache-Control")
+	maxAge := NonConsistentCacheMaxAge
+	if getWithChecksum {
+		maxAge = ConsistentCacheMaxAge
+	}
+	assert.Equal(t, fmt.Sprintf("public, max-age=%v", maxAge), cacheControl)
+
+	assert.Equal(t, rw.HeaderMap.Get("ETag"), checksumHex)
+}
+
 func TestGetHandlerRoot(t *testing.T) {
 	metaStore := storage.NewMemStorage()
 	repo, _, err := testutils.EmptyRepo("gun")
@@ -194,10 +218,17 @@ func TestGetHandlerRoot(t *testing.T) {
 		"tufRole":   "root",
 	}
 
-	rw := httptest.NewRecorder()
+	checksumBytes := sha256.Sum256(rootJSON)
+	checksumHex := hex.EncodeToString(checksumBytes[:])
 
-	err = getHandler(ctx, rw, req, vars)
-	assert.NoError(t, err)
+	rw := httptest.NewRecorder()
+	assert.NoError(t, getHandler(ctx, rw, req, vars))
+	verifyGetResponse(t, rw, rootJSON, false, checksumHex)
+
+	vars["checksum"] = checksumHex
+	rw = httptest.NewRecorder()
+	assert.NoError(t, getHandler(ctx, rw, req, vars))
+	verifyGetResponse(t, rw, rootJSON, true, checksumHex)
 }
 
 func TestGetHandlerTimestamp(t *testing.T) {
@@ -228,10 +259,17 @@ func TestGetHandlerTimestamp(t *testing.T) {
 		"tufRole":   "timestamp",
 	}
 
-	rw := httptest.NewRecorder()
+	checksumBytes := sha256.Sum256(tsJSON)
+	checksumHex := hex.EncodeToString(checksumBytes[:])
 
-	err = getHandler(ctx, rw, req, vars)
-	assert.NoError(t, err)
+	rw := httptest.NewRecorder()
+	assert.NoError(t, getHandler(ctx, rw, req, vars))
+	verifyGetResponse(t, rw, tsJSON, false, checksumHex)
+
+	vars["checksum"] = checksumHex
+	rw = httptest.NewRecorder()
+	assert.NoError(t, getHandler(ctx, rw, req, vars))
+	verifyGetResponse(t, rw, tsJSON, true, checksumHex)
 }
 
 func TestGetHandlerSnapshot(t *testing.T) {
@@ -256,10 +294,17 @@ func TestGetHandlerSnapshot(t *testing.T) {
 		"tufRole":   "snapshot",
 	}
 
-	rw := httptest.NewRecorder()
+	checksumBytes := sha256.Sum256(snJSON)
+	checksumHex := hex.EncodeToString(checksumBytes[:])
 
-	err = getHandler(ctx, rw, req, vars)
-	assert.NoError(t, err)
+	rw := httptest.NewRecorder()
+	assert.NoError(t, getHandler(ctx, rw, req, vars))
+	verifyGetResponse(t, rw, snJSON, false, checksumHex)
+
+	vars["checksum"] = checksumHex
+	rw = httptest.NewRecorder()
+	assert.NoError(t, getHandler(ctx, rw, req, vars))
+	verifyGetResponse(t, rw, snJSON, true, checksumHex)
 }
 
 func TestGetHandler404(t *testing.T) {
