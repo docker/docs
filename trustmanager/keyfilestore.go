@@ -209,7 +209,7 @@ func (s *KeyFileStore) ExportKey(name string) ([]byte, error) {
 // ImportKey imports the private key in the encrypted bytes into the keystore
 // with the given key ID, role, and gun.
 func (s *KeyFileStore) ImportKey(pemBytes []byte, role, gun string) error {
-	if data.IsDelegation(role) {
+	if role == data.CanonicalRootRole || data.IsDelegation(role) || !data.ValidRole(role) {
 		gun = ""
 	}
 	keyID, err := importKey(s, s.Retriever, s.cachedKeys, role, gun, pemBytes)
@@ -319,7 +319,7 @@ func (s *KeyMemoryStore) ExportKey(name string) ([]byte, error) {
 // ImportKey imports the private key in the encrypted bytes into the keystore
 // with the given key ID and alias.
 func (s *KeyMemoryStore) ImportKey(pemBytes []byte, role, gun string) error {
-	if data.IsDelegation(role) {
+	if role == data.CanonicalRootRole || data.IsDelegation(role) || !data.ValidRole(role) {
 		gun = ""
 	}
 	keyID, err := importKey(s, s.Retriever, s.cachedKeys, role, gun, pemBytes)
