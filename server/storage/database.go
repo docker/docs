@@ -4,6 +4,7 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"fmt"
+	"time"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/go-sql-driver/mysql"
@@ -117,16 +118,17 @@ func (db *SQLStorage) UpdateMany(gun string, updates []MetaUpdate) error {
 }
 
 // GetCurrent gets a specific TUF record
-func (db *SQLStorage) GetCurrent(gun, tufRole string) ([]byte, error) {
+func (db *SQLStorage) GetCurrent(gun, tufRole string) (*time.Time, []byte, error) {
 	var row TUFFile
-	q := db.Select("data").Where(&TUFFile{Gun: gun, Role: tufRole}).Order("version desc").Limit(1).First(&row)
+	q := db.Select("created_at, data").Where(
+		&TUFFile{Gun: gun, Role: tufRole}).Order("version desc").Limit(1).First(&row)
 	return returnRead(q, row)
 }
 
 // GetChecksum gets a specific TUF record by its hex checksum
-func (db *SQLStorage) GetChecksum(gun, tufRole, checksum string) ([]byte, error) {
+func (db *SQLStorage) GetChecksum(gun, tufRole, checksum string) (*time.Time, []byte, error) {
 	var row TUFFile
-	q := db.Select("data").Where(
+	q := db.Select("created_at, data").Where(
 		&TUFFile{
 			Gun:    gun,
 			Role:   tufRole,
@@ -136,13 +138,13 @@ func (db *SQLStorage) GetChecksum(gun, tufRole, checksum string) ([]byte, error)
 	return returnRead(q, row)
 }
 
-func returnRead(q *gorm.DB, row TUFFile) ([]byte, error) {
+func returnRead(q *gorm.DB, row TUFFile) (*time.Time, []byte, error) {
 	if q.RecordNotFound() {
-		return nil, ErrNotFound{}
+		return nil, nil, ErrNotFound{}
 	} else if q.Error != nil {
-		return nil, q.Error
+		return nil, nil, q.Error
 	}
-	return row.Data, nil
+	return &(row.CreatedAt), row.Data, nil
 }
 
 // Delete deletes all the records for a specific GUN

@@ -52,7 +52,7 @@ func GetOrCreateTimestamp(gun string, store storage.MetaStore, cryptoService sig
 	if err != nil {
 		return nil, err
 	}
-	d, err := store.GetCurrent(gun, "timestamp")
+	_, d, err := store.GetCurrent(gun, "timestamp")
 	if err != nil {
 		if _, ok := err.(storage.ErrNotFound); !ok {
 			logrus.Error("error retrieving timestamp: ", err.Error())

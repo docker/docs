@@ -10,6 +10,7 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/docker/go-connections/tlsconfig"
 	"github.com/docker/notary/passphrase"
@@ -209,14 +210,14 @@ type recordingMetaStore struct {
 
 // GetCurrent gets the metadata from the underlying MetaStore, but also records
 // that the metadata was requested
-func (r *recordingMetaStore) GetCurrent(gun, role string) (data []byte, err error) {
+func (r *recordingMetaStore) GetCurrent(gun, role string) (*time.Time, []byte, error) {
 	r.gotten = append(r.gotten, fmt.Sprintf("%s.%s", gun, role))
 	return r.MemStorage.GetCurrent(gun, role)
 }
 
 // GetChecksum gets the metadata from the underlying MetaStore, but also records
 // that the metadata was requested
-func (r *recordingMetaStore) GetChecksum(gun, role, checksum string) (data []byte, err error) {
+func (r *recordingMetaStore) GetChecksum(gun, role, checksum string) (*time.Time, []byte, error) {
 	r.gotten = append(r.gotten, fmt.Sprintf("%s.%s", gun, role))
 	return r.MemStorage.GetChecksum(gun, role, checksum)
 }

@@ -41,7 +41,7 @@ func validateUpdate(cs signed.CryptoService, gun string, updates []storage.MetaU
 	}
 
 	var root *data.SignedRoot
-	oldRootJSON, err := store.GetCurrent(gun, rootRole)
+	_, oldRootJSON, err := store.GetCurrent(gun, rootRole)
 	if _, ok := err.(storage.ErrNotFound); err != nil && !ok {
 		// problem with storage. No expectation we can
 		// write if we can't read so bail.
@@ -92,7 +92,7 @@ func validateUpdate(cs signed.CryptoService, gun string, updates []storage.MetaU
 	// At this point, root and targets must have been loaded into the repo
 	if _, ok := roles[snapshotRole]; ok {
 		var oldSnap *data.SignedSnapshot
-		oldSnapJSON, err := store.GetCurrent(gun, snapshotRole)
+		_, oldSnapJSON, err := store.GetCurrent(gun, snapshotRole)
 		if _, ok := err.(storage.ErrNotFound); err != nil && !ok {
 			// problem with storage. No expectation we can
 			// write if we can't read so bail.
@@ -180,7 +180,7 @@ func loadAndValidateTargets(gun string, repo *tuf.Repo, roles map[string]storage
 }
 
 func loadTargetsFromStore(gun, role string, repo *tuf.Repo, store storage.MetaStore) error {
-	tgtJSON, err := store.GetCurrent(gun, role)
+	_, tgtJSON, err := store.GetCurrent(gun, role)
 	if err != nil {
 		return err
 	}
@@ -217,7 +217,7 @@ func generateSnapshot(gun string, repo *tuf.Repo, store storage.MetaStore) (*sto
 			Msg:     "no snapshot was included in update and server does not hold current snapshot key for repository"}
 	}
 
-	currentJSON, err := store.GetCurrent(gun, data.CanonicalSnapshotRole)
+	_, currentJSON, err := store.GetCurrent(gun, data.CanonicalSnapshotRole)
 	if err != nil {
 		if _, ok := err.(storage.ErrNotFound); !ok {
 			return nil, validation.ErrValidation{Msg: err.Error()}
