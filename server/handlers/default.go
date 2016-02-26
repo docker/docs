@@ -2,11 +2,16 @@ package handlers
 
 import (
 	"bytes"
+	"crypto/sha256"
+	"encoding/hex"
 	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
 	"strings"
+	"time"
 
+	"github.com/Sirupsen/logrus"
 	ctxu "github.com/docker/distribution/context"
 	"github.com/gorilla/mux"
 	"golang.org/x/net/context"
@@ -18,6 +23,14 @@ import (
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/validation"
+)
+
+const (
+	// ConsistentCacheMaxAge is the Cache-Control header's max age for consistent downloads
+	ConsistentCacheMaxAge int = 30 * 24 * 60 * 60 // 30 days
+
+	// NonConsistentCacheMaxAge is the Cache-Control header's max age for current (non-consistent) downloads
+	NonConsistentCacheMaxAge int = 5 * 60 // five minutes
 )
 
 // MainHandler is the default handler for the server
@@ -122,7 +135,30 @@ func getHandler(ctx context.Context, w http.ResponseWriter, r *http.Request, var
 		return errors.ErrNoStorage.WithDetail(nil)
 	}
 
-	return getRole(ctx, w, store, gun, tufRole, checksum)
+	creation, output, err := getRole(ctx, store, gun, tufRole, checksum)
+	if err != nil {
+		return err
+	}
+	if creation == nil {
+		// This shouldn't ever happen, but if it does, it just messes up the cache headers, so
+		// proceed anyway
+		logrus.Warnf("Got bytes out for %s's %s (checksum: %s), but missing creation date",
+			gun, tufRole, checksum)
+		creation = &time.Time{} // set the last modification date to the beginning of time
+	}
+
+	maxAge := ConsistentCacheMaxAge
+	if checksum == "" { // maxAge should be much shorter for metadata without checksums
+		maxAge = NonConsistentCacheMaxAge
+		shasum := sha256.Sum256(output)
+		checksum = hex.EncodeToString(shasum[:])
+	}
+
+	w.Header().Set("Cache-Control", fmt.Sprintf("public, max-age=%v", maxAge))
+	w.Header().Set("Last-Modified", creation.Format(time.RFC1123))
+	w.Header().Set("ETag", checksum)
+	w.Write(output)
+	return nil
 }
 
 // DeleteHandler deletes all data for a GUN. A 200 responses indicates success.
