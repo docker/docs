@@ -25,9 +25,9 @@ func getRole(ctx context.Context, w io.Writer, store storage.MetaStore, gun, rol
 		case data.CanonicalTimestampRole, data.CanonicalSnapshotRole:
 			return getMaybeServerSigned(ctx, w, store, gun, role)
 		}
-		out, err = store.GetCurrent(gun, role)
+		_, out, err = store.GetCurrent(gun, role)
 	} else {
-		out, err = store.GetChecksum(gun, role, checksum)
+		_, out, err = store.GetChecksum(gun, role, checksum)
 	}
 
 	if err != nil {

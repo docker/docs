@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
+	"time"
 
 	"golang.org/x/net/context"
 
@@ -354,8 +355,8 @@ type failStore struct {
 	storage.MemStorage
 }
 
-func (s *failStore) GetCurrent(_, _ string) ([]byte, error) {
-	return nil, fmt.Errorf("oh no! storage has failed")
+func (s *failStore) GetCurrent(_, _ string) (*time.Time, []byte, error) {
+	return nil, nil, fmt.Errorf("oh no! storage has failed")
 }
 
 // a non-validation failure, such as the storage failing, will not be propagated
