@@ -119,6 +119,9 @@ type Files map[string]FileMeta
 // and target file
 type Hashes map[string][]byte
 
+// NotaryDefaultHashes contains the default supported hash algorithms.
+var NotaryDefaultHashes = []string{notary.SHA256, notary.SHA512}
+
 // FileMeta contains the size and hashes for a metadata or target file. Custom
 // data can be optionally added.
 type FileMeta struct {
@@ -137,12 +140,12 @@ func NewFileMeta(r io.Reader, hashAlgorithms ...string) (FileMeta, error) {
 	for _, hashAlgorithm := range hashAlgorithms {
 		var h hash.Hash
 		switch hashAlgorithm {
-		case "sha256":
+		case notary.SHA256:
 			h = sha256.New()
-		case "sha512":
+		case notary.SHA512:
 			h = sha512.New()
 		default:
-			return FileMeta{}, fmt.Errorf("Unknown Hash Algorithm: %s", hashAlgorithm)
+			return FileMeta{}, fmt.Errorf("Unknown hash algorithm: %s", hashAlgorithm)
 		}
 		hashes[hashAlgorithm] = h
 		r = io.TeeReader(r, h)
