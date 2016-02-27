@@ -56,7 +56,7 @@ func GetOrCreateTimestamp(gun string, store storage.MetaStore, cryptoService sig
 	if err != nil {
 		return nil, nil, err
 	}
-	creation, d, err := store.GetCurrent(gun, data.CanonicalTimestampRole)
+	lastModified, d, err := store.GetCurrent(gun, data.CanonicalTimestampRole)
 	if err != nil {
 		if _, ok := err.(storage.ErrNotFound); !ok {
 			logrus.Error("error retrieving timestamp: ", err.Error())
@@ -72,7 +72,7 @@ func GetOrCreateTimestamp(gun string, store storage.MetaStore, cryptoService sig
 			return nil, nil, err
 		}
 		if !timestampExpired(ts) && !snapshotExpired(ts, snapshot) {
-			return creation, d, nil
+			return lastModified, d, nil
 		}
 	}
 	sgnd, version, err := CreateTimestamp(gun, ts, snapshot, store, cryptoService)

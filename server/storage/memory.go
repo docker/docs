@@ -15,9 +15,9 @@ type key struct {
 }
 
 type ver struct {
-	version  int
-	data     []byte
-	creation time.Time
+	version      int
+	data         []byte
+	createupdate time.Time
 }
 
 // MemStorage is really just designed for dev and testing. It is very
@@ -50,7 +50,7 @@ func (st *MemStorage) UpdateCurrent(gun string, update MetaUpdate) error {
 			}
 		}
 	}
-	version := ver{version: update.Version, data: update.Data, creation: time.Now()}
+	version := ver{version: update.Version, data: update.Data, createupdate: time.Now()}
 	st.tufMeta[id] = append(st.tufMeta[id], &version)
 	checksumBytes := sha256.Sum256(update.Data)
 	checksum := hex.EncodeToString(checksumBytes[:])
@@ -71,7 +71,7 @@ func (st *MemStorage) UpdateMany(gun string, updates []MetaUpdate) error {
 	return nil
 }
 
-// GetCurrent returns the creation date metadata for a given role, under a GUN.
+// GetCurrent returns the createupdate date metadata for a given role, under a GUN.
 func (st *MemStorage) GetCurrent(gun, role string) (*time.Time, []byte, error) {
 	id := entryKey(gun, role)
 	st.lock.Lock()
@@ -80,10 +80,10 @@ func (st *MemStorage) GetCurrent(gun, role string) (*time.Time, []byte, error) {
 	if !ok || len(space) == 0 {
 		return nil, nil, ErrNotFound{}
 	}
-	return &(space[len(space)-1].creation), space[len(space)-1].data, nil
+	return &(space[len(space)-1].createupdate), space[len(space)-1].data, nil
 }
 
-// GetChecksum returns the creation date and metadata for a given role, under a GUN.
+// GetChecksum returns the createupdate date and metadata for a given role, under a GUN.
 func (st *MemStorage) GetChecksum(gun, role, checksum string) (*time.Time, []byte, error) {
 	st.lock.Lock()
 	defer st.lock.Unlock()
@@ -91,7 +91,7 @@ func (st *MemStorage) GetChecksum(gun, role, checksum string) (*time.Time, []byt
 	if !ok || len(space.data) == 0 {
 		return nil, nil, ErrNotFound{}
 	}
-	return &(space.creation), space.data, nil
+	return &(space.createupdate), space.data, nil
 }
 
 // Delete deletes all the metadata for a given GUN

@@ -15,9 +15,9 @@ import (
 
 func getRole(ctx context.Context, store storage.MetaStore, gun, role, checksum string) (*time.Time, []byte, error) {
 	var (
-		creation *time.Time
-		out      []byte
-		err      error
+		lastModified *time.Time
+		out          []byte
+		err          error
 	)
 	if checksum == "" {
 		// the timestamp and snapshot might be server signed so are
@@ -26,9 +26,9 @@ func getRole(ctx context.Context, store storage.MetaStore, gun, role, checksum s
 		case data.CanonicalTimestampRole, data.CanonicalSnapshotRole:
 			return getMaybeServerSigned(ctx, store, gun, role)
 		}
-		creation, out, err = store.GetCurrent(gun, role)
+		lastModified, out, err = store.GetCurrent(gun, role)
 	} else {
-		creation, out, err = store.GetChecksum(gun, role, checksum)
+		lastModified, out, err = store.GetChecksum(gun, role, checksum)
 	}
 
 	if err != nil {
@@ -41,7 +41,7 @@ func getRole(ctx context.Context, store storage.MetaStore, gun, role, checksum s
 		return nil, nil, errors.ErrMetadataNotFound.WithDetail(nil)
 	}
 
-	return creation, out, nil
+	return lastModified, out, nil
 }
 
 // getMaybeServerSigned writes the current snapshot or timestamp (based on the
@@ -57,15 +57,15 @@ func getMaybeServerSigned(ctx context.Context, store storage.MetaStore, gun, rol
 	}
 
 	var (
-		creation *time.Time
-		out      []byte
-		err      error
+		lastModified *time.Time
+		out          []byte
+		err          error
 	)
 	switch role {
 	case data.CanonicalSnapshotRole:
-		creation, out, err = snapshot.GetOrCreateSnapshot(gun, store, cryptoService)
+		lastModified, out, err = snapshot.GetOrCreateSnapshot(gun, store, cryptoService)
 	case data.CanonicalTimestampRole:
-		creation, out, err = timestamp.GetOrCreateTimestamp(gun, store, cryptoService)
+		lastModified, out, err = timestamp.GetOrCreateTimestamp(gun, store, cryptoService)
 	}
 	if err != nil {
 		switch err.(type) {
@@ -76,5 +76,5 @@ func getMaybeServerSigned(ctx context.Context, store storage.MetaStore, gun, rol
 		}
 	}
 
-	return creation, out, nil
+	return lastModified, out, nil
 }

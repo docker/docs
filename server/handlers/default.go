@@ -26,8 +26,11 @@ import (
 )
 
 // NewCacheControlConfig creates a new configuration for Cache-Control headers,
-// which by default, sets cache max-age values for consistent (by checksum)
-// downloads 30 days and non-consistent (current) downloads to 5 minutes
+// which by default, sets cache max-age values for consistent
+// (content-addressable, by checksum) downloads 30 days and non-consistent
+// (current/latest version) downloads to 5 minutes.
+// If a max-age of <=0 is supplied, then caching will be disabled for that type
+// of download (this may be desirable for the current downloads, for example).
 func NewCacheControlConfig() *CacheControlConfig {
 	return &CacheControlConfig{
 		headerVals: map[string]int{
@@ -61,7 +64,7 @@ func (c *CacheControlConfig) UpdateConsistentHeaders(headers http.Header, lastMo
 	c.updateHeaders(headers, lastModified, true)
 }
 
-// UpdateCurrentHeaders updates the given Headers object with th eCache-Control
+// UpdateCurrentHeaders updates the given Headers object with the Cache-Control
 // headers for current (non-consistent) downloads
 func (c *CacheControlConfig) UpdateCurrentHeaders(headers http.Header, lastModified time.Time) {
 	c.updateHeaders(headers, lastModified, false)

@@ -101,5 +101,5 @@ func TestGetTimestampNewSnapshot(t *testing.T) {
 	c2, ts2, err := GetOrCreateTimestamp("gun", store, crypto)
 	assert.NoError(t, err, "GetTimestamp errored")
 	assert.NotEqual(t, ts1, ts2, "Timestamp was not regenerated when snapshot changed")
-	assert.True(t, c1.Before(*c2), "Timestamp creation time incorrect")
+	assert.True(t, c1.Before(*c2), "Timestamp modification time incorrect")
 }

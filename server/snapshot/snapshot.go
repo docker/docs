@@ -49,7 +49,7 @@ func GetOrCreateSnapshotKey(gun string, store storage.KeyStore, crypto signed.Cr
 func GetOrCreateSnapshot(gun string, store storage.MetaStore, cryptoService signed.CryptoService) (
 	*time.Time, []byte, error) {
 
-	creation, d, err := store.GetCurrent(gun, data.CanonicalSnapshotRole)
+	lastModified, d, err := store.GetCurrent(gun, data.CanonicalSnapshotRole)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -63,7 +63,7 @@ func GetOrCreateSnapshot(gun string, store storage.MetaStore, cryptoService sign
 		}
 
 		if !snapshotExpired(sn) {
-			return creation, d, nil
+			return lastModified, d, nil
 		}
 	}
 
