@@ -153,7 +153,7 @@ func (t *tufCommander) tufInit(cmd *cobra.Command, args []string) error {
 	}
 	gun := args[0]
 
-	rt, err := getTransport(config, gun, false, "push", "pull")
+	rt, err := getTransport(config, gun, false)
 	if err != nil {
 		return err
 	}
@@ -198,7 +198,7 @@ func (t *tufCommander) tufList(cmd *cobra.Command, args []string) error {
 	}
 	gun := args[0]
 
-	rt, err := getTransport(config, gun, true, "pull")
+	rt, err := getTransport(config, gun, true)
 	if err != nil {
 		return err
 	}
@@ -233,7 +233,7 @@ func (t *tufCommander) tufLookup(cmd *cobra.Command, args []string) error {
 	gun := args[0]
 	targetName := args[1]
 
-	rt, err := getTransport(config, gun, true, "pull")
+	rt, err := getTransport(config, gun, true)
 	if err != nil {
 		return err
 	}
@@ -304,7 +304,7 @@ func (t *tufCommander) tufPublish(cmd *cobra.Command, args []string) error {
 
 	cmd.Println("Pushing changes to", gun)
 
-	rt, err := getTransport(config, gun, false, "push", "pull")
+	rt, err := getTransport(config, gun, false)
 	if err != nil {
 		return err
 	}
@@ -369,7 +369,7 @@ func (t *tufCommander) tufVerify(cmd *cobra.Command, args []string) error {
 	gun := args[0]
 	targetName := args[1]
 
-	rt, err := getTransport(config, gun, true, "pull")
+	rt, err := getTransport(config, gun, true)
 	if err != nil {
 		return err
 	}
@@ -444,7 +444,7 @@ func (ps passwordStore) Basic(u *url.URL) (string, string) {
 // The readOnly flag indicates if the operation should be performed as an
 // anonymous read only operation. If the command entered requires write
 // permissions on the server, readOnly must be false
-func getTransport(config *viper.Viper, gun string, readOnly bool, actions ...string) (http.RoundTripper, error) {
+func getTransport(config *viper.Viper, gun string, readOnly bool) (http.RoundTripper, error) {
 	// Attempt to get a root CA from the config file. Nil is the host defaults.
 	rootCAFile := utils.GetPathRelativeToConfig(config, "remote_server.root_ca")
 	clientCert := utils.GetPathRelativeToConfig(config, "remote_server.tls_client_cert")
@@ -481,11 +481,11 @@ func getTransport(config *viper.Viper, gun string, readOnly bool, actions ...str
 		DisableKeepAlives:   true,
 	}
 	trustServerURL := getRemoteTrustServer(config)
-	return tokenAuth(trustServerURL, base, gun, readOnly, actions...)
+	return tokenAuth(trustServerURL, base, gun, readOnly)
 }
 
 func tokenAuth(trustServerURL string, baseTransport *http.Transport, gun string,
-	readOnly bool, actions ...string) (http.RoundTripper, error) {
+	readOnly bool) (http.RoundTripper, error) {
 
 	// TODO(dmcgowan): add notary specific headers
 	authTransport := transport.NewTransport(baseTransport)
@@ -533,6 +533,13 @@ func tokenAuth(trustServerURL string, baseTransport *http.Transport, gun string,
 	}
 
 	ps := passwordStore{anonymous: readOnly}
+
+	var actions []string
+	if readOnly {
+		actions = []string{"pull"}
+	} else {
+		actions = []string{"push", "pull"}
+	}
 	tokenHandler := auth.NewTokenHandler(authTransport, ps, gun, actions...)
 	basicHandler := auth.NewBasicHandler(ps)
 	modifier := transport.RequestModifier(auth.NewAuthorizer(challengeManager, tokenHandler, basicHandler))
