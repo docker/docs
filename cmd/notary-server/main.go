@@ -8,6 +8,7 @@ import (
 	"net/http"
 	_ "net/http/pprof"
 	"os"
+	"strconv"
 	"time"
 
 	"github.com/Sirupsen/logrus"
@@ -23,6 +24,7 @@ import (
 
 	"github.com/docker/go-connections/tlsconfig"
 	"github.com/docker/notary/server"
+	"github.com/docker/notary/server/handlers"
 	"github.com/docker/notary/utils"
 	"github.com/docker/notary/version"
 	"github.com/spf13/viper"
@@ -32,6 +34,7 @@ import (
 const (
 	jsonLogFormat = "json"
 	DebugAddress  = "localhost:8080"
+	maxMaxAge     = 31536000
 )
 
 var (
@@ -170,6 +173,29 @@ func getTrustService(configuration *viper.Viper, sFactory signerFactory,
 	return notarySigner, keyAlgo, nil
 }
 
+func getCacheConfig(configuration *viper.Viper) (*handlers.CacheControlConfig, error) {
+	cacheConfig := handlers.NewCacheControlConfig()
+	for _, option := range []string{"current_metadata", "metadata_by_checksum"} {
+		m := configuration.GetString(fmt.Sprintf("caching.max_age.%s", option))
+		if m == "" {
+			continue
+		}
+		seconds, err := strconv.Atoi(m)
+		if err != nil || seconds < 0 || seconds > maxMaxAge {
+			return nil, fmt.Errorf(
+				"must specify a cache-control max-age between 0 and %v", maxMaxAge)
+		}
+
+		switch option {
+		case "current_metadata":
+			cacheConfig.SetCurrentCacheMaxAge(seconds)
+		default:
+			cacheConfig.SetConsistentCacheMaxAge(seconds)
+		}
+	}
+	return cacheConfig, nil
+}
+
 func main() {
 	flag.Usage = usage
 	flag.Parse()
@@ -214,6 +240,12 @@ func main() {
 		logrus.Fatal(err.Error())
 	}
 	ctx = context.WithValue(ctx, "metaStore", store)
+
+	cacheConfig, err := getCacheConfig(mainViper)
+	if err != nil {
+		logrus.Fatal(err.Error())
+	}
+	ctx = context.WithValue(ctx, "cacheConfig", cacheConfig)
 
 	httpAddr, tlsConfig, err := getAddrAndTLSConfig(mainViper)
 	if err != nil {

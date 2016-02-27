@@ -5,6 +5,7 @@ import (
 	"crypto/tls"
 	"fmt"
 	"io/ioutil"
+	"net/http"
 	"os"
 	"reflect"
 	"strings"
@@ -327,4 +328,26 @@ func TestGetMemoryStore(t *testing.T) {
 	assert.NoError(t, err)
 	_, ok := store.(*storage.MemStorage)
 	assert.True(t, ok)
+}
+
+func TestGetCacheConfig(t *testing.T) {
+	valid := `{"caching": {"max_age": {"current_metadata": 0, "metadata_by_checksum": 31536000}}}`
+	invalids := []string{
+		`{"caching": {"max_age": {"current_metadata": 0, "metadata_by_checksum": 31539000}}}`,
+		`{"caching": {"max_age": {"current_metadata": -1, "metadata_by_checksum": 300}}}`,
+		`{"caching": {"max_age": {"current_metadata": "hello", "metadata_by_checksum": 300}}}`,
+	}
+
+	cacheConfig, err := getCacheConfig(configure(valid))
+	assert.NoError(t, err)
+	h := http.Header{}
+	cacheConfig.UpdateCurrentHeaders(h, time.Now())
+	assert.True(t, strings.Contains(h.Get("Cache-Control"), "max-age=0"))
+	cacheConfig.UpdateConsistentHeaders(h, time.Now())
+	assert.True(t, strings.Contains(h.Get("Cache-Control"), "max-age=31536000"))
+
+	for _, invalid := range invalids {
+		_, err := getCacheConfig(configure(invalid))
+		assert.Error(t, err)
+	}
 }
