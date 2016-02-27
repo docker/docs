@@ -20,6 +20,10 @@ const (
 	PubCertPerms = 0755
 	// Sha256HexSize is how big a Sha256 hex is in number of characters
 	Sha256HexSize = 64
+	// SHA256 is the name of SHA256 hash algorithm
+	SHA256 = "sha256"
+	// SHA512 is the name of SHA512 hash algorithm
+	SHA512 = "sha512"
 	// TrustedCertsDir is the directory, under the notary repo base directory, where trusted certs are stored
 	TrustedCertsDir = "trusted_certificates"
 	// PrivDir is the directory, under the notary repo base directory, where private keys are stored
