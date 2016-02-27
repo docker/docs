@@ -26,7 +26,7 @@ type MetaStore interface {
 	// none of the metadata is added, and an error is be returned.
 	UpdateMany(gun string, updates []MetaUpdate) error
 
-	// GetCurrent returns the creation date and data part of the metadata for
+	// GetCurrent returns the modification date and data part of the metadata for
 	// the latest version of the given GUN and role.  If there is no data for
 	// the given GUN and role, an error is returned.
 	GetCurrent(gun, tufRole string) (created *time.Time, data []byte, err error)

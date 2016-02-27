@@ -34,7 +34,10 @@ import (
 const (
 	jsonLogFormat = "json"
 	DebugAddress  = "localhost:8080"
-	maxMaxAge     = 31536000
+	// This is the generally recommended maximum age for Cache-Control headers
+	// (one year, in seconds, since one year is forever in terms of internet
+	// content)
+	maxMaxAge = 31536000
 )
 
 var (
@@ -173,6 +176,13 @@ func getTrustService(configuration *viper.Viper, sFactory signerFactory,
 	return notarySigner, keyAlgo, nil
 }
 
+// Gets the cache configuration for GET-ting metadata.  This is the max-age
+// (an integer in seconds, just like in the Cache-Control header) for consistent
+// (content-addressable) downloads and current (latest version) downloads.
+// The max-age must be between 0 and 31536000 (one year in seconds, which is
+// the recommended maximum time data is cached), else parsing will return an
+// error.  A max-age of 0 will disable caching for that type of download
+// (consistent or current).
 func getCacheConfig(configuration *viper.Viper) (*handlers.CacheControlConfig, error) {
 	cacheConfig := handlers.NewCacheControlConfig()
 	for _, option := range []string{"current_metadata", "metadata_by_checksum"} {

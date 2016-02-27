@@ -4,6 +4,7 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"os"
 	"testing"
@@ -244,7 +245,8 @@ func TestSQLGetCurrent(t *testing.T) {
 	cDate, byt, err := dbStore.GetCurrent("testGUN", "root")
 	require.NoError(t, err, "There should not be any errors getting.")
 	require.Equal(t, []byte("1"), byt, "Returned data was incorrect")
-	// the creation date was sometime wthin the last minute
+	// the update date was sometime wthin the last minute
+	fmt.Println(cDate)
 	require.True(t, cDate.After(time.Now().Add(-1*time.Minute)))
 	require.True(t, cDate.Before(time.Now().Add(5*time.Second)))
 

@@ -120,9 +120,12 @@ func (db *SQLStorage) UpdateMany(gun string, updates []MetaUpdate) error {
 // GetCurrent gets a specific TUF record
 func (db *SQLStorage) GetCurrent(gun, tufRole string) (*time.Time, []byte, error) {
 	var row TUFFile
-	q := db.Select("created_at, data").Where(
+	q := db.Select("updated_at, data").Where(
 		&TUFFile{Gun: gun, Role: tufRole}).Order("version desc").Limit(1).First(&row)
-	return returnRead(q, row)
+	if err := isReadErr(q, row); err != nil {
+		return nil, nil, err
+	}
+	return &(row.UpdatedAt), row.Data, nil
 }
 
 // GetChecksum gets a specific TUF record by its hex checksum
@@ -135,16 +138,19 @@ func (db *SQLStorage) GetChecksum(gun, tufRole, checksum string) (*time.Time, []
 			Sha256: checksum,
 		},
 	).First(&row)
-	return returnRead(q, row)
-}
-
-func returnRead(q *gorm.DB, row TUFFile) (*time.Time, []byte, error) {
-	if q.RecordNotFound() {
-		return nil, nil, ErrNotFound{}
-	} else if q.Error != nil {
-		return nil, nil, q.Error
+	if err := isReadErr(q, row); err != nil {
+		return nil, nil, err
 	}
 	return &(row.CreatedAt), row.Data, nil
+}
+
+func isReadErr(q *gorm.DB, row TUFFile) error {
+	if q.RecordNotFound() {
+		return ErrNotFound{}
+	} else if q.Error != nil {
+		return q.Error
+	}
+	return nil
 }
 
 // Delete deletes all the records for a specific GUN
