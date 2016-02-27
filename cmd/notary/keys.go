@@ -438,7 +438,7 @@ func (k *keyCommander) keysRotate(cmd *cobra.Command, args []string) error {
 	if k.rotateKeyServerManaged {
 		// this does not actually push the changes, just creates the keys, but
 		// it creates a key remotely so it needs a transport
-		rt, err = getTransport(config, gun, false, "push", "pull")
+		rt, err = getTransport(config, gun, false)
 		if err != nil {
 			return err
 		}
