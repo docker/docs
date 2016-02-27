@@ -3,6 +3,7 @@ package data
 import (
 	"crypto/sha256"
 	"crypto/sha512"
+	"crypto/subtle"
 	"fmt"
 	"hash"
 	"io"
@@ -128,6 +129,81 @@ type FileMeta struct {
 	Length int64           `json:"length"`
 	Hashes Hashes          `json:"hashes"`
 	Custom json.RawMessage `json:"custom,omitempty"`
+}
+
+// CheckHashes verifies all the checksums specified by the "hashes" of the payload.
+func CheckHashes(payload []byte, hashes Hashes) error {
+	cnt := 0
+
+	// k, v indicate the hash algorithm and the corresponding value
+	for k, v := range hashes {
+		switch k {
+		case notary.SHA256:
+			checksum := sha256.Sum256(payload)
+			if subtle.ConstantTimeCompare(checksum[:], v) == 0 {
+				return fmt.Errorf("%s checksum mismatched", k)
+			}
+			cnt++
+		case notary.SHA512:
+			checksum := sha512.Sum512(payload)
+			if subtle.ConstantTimeCompare(checksum[:], v) == 0 {
+				return fmt.Errorf("%s checksum mismatched", k)
+			}
+			cnt++
+		}
+	}
+
+	if cnt == 0 {
+		return fmt.Errorf("at least one supported hash needed")
+	}
+
+	return nil
+}
+
+// GetSupportedHashes returns the checksums of all the supported hash algorithms
+// of the given payload
+func GetSupportedHashes(payload []byte) Hashes {
+	hashes := make(Hashes)
+
+	for _, v := range NotaryDefaultHashes {
+		switch v {
+		case notary.SHA256:
+			checksum := sha256.Sum256(payload)
+			hashes[v] = checksum[:]
+		case notary.SHA512:
+			checksum := sha512.Sum512(payload)
+			hashes[v] = checksum[:]
+		}
+	}
+
+	return hashes
+}
+
+// CheckValidHashStructures returns an error, or nil, depending on whether
+// the content of the hashes is valid or not.
+func CheckValidHashStructures(hashes Hashes) error {
+	cnt := 0
+
+	for k, v := range hashes {
+		switch k {
+		case notary.SHA256:
+			if len(v) != sha256.Size {
+				return fmt.Errorf("invalid %s checksum", notary.SHA256)
+			}
+			cnt++
+		case notary.SHA512:
+			if len(v) != sha512.Size {
+				return fmt.Errorf("invalid %s checksum", notary.SHA512)
+			}
+			cnt++
+		}
+	}
+
+	if cnt == 0 {
+		return fmt.Errorf("at least one supported hash needed")
+	}
+
+	return nil
 }
 
 // NewFileMeta generates a FileMeta object from the reader, using the
