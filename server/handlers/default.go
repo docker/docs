@@ -25,13 +25,68 @@ import (
 	"github.com/docker/notary/tuf/validation"
 )
 
-const (
-	// ConsistentCacheMaxAge is the Cache-Control header's max age for consistent downloads
-	ConsistentCacheMaxAge int = 30 * 24 * 60 * 60 // 30 days
+// NewCacheControlConfig creates a new configuration for Cache-Control headers,
+// which by default, sets cache max-age values for consistent (by checksum)
+// downloads 30 days and non-consistent (current) downloads to 5 minutes
+func NewCacheControlConfig() *CacheControlConfig {
+	return &CacheControlConfig{
+		headerVals: map[string]int{
+			"consistent": 30 * 24 * 60 * 60, // 30 days
+			"current":    5 * 60,            // 5 minutes
+		},
+	}
+}
 
-	// NonConsistentCacheMaxAge is the Cache-Control header's max age for current (non-consistent) downloads
-	NonConsistentCacheMaxAge int = 5 * 60 // five minutes
-)
+// CacheControlConfig is the configuration for the max cache age for
+// cache control headers.
+type CacheControlConfig struct {
+	headerVals map[string]int
+}
+
+// SetConsistentCacheMaxAge sets the Cache-Control header value for consistent
+// downloads
+func (c *CacheControlConfig) SetConsistentCacheMaxAge(value int) {
+	c.headerVals["consistent"] = value
+}
+
+// SetCurrentCacheMaxAge sets the Cache-Control header value for current
+// (non-consistent) downloads
+func (c *CacheControlConfig) SetCurrentCacheMaxAge(value int) {
+	c.headerVals["current"] = value
+}
+
+// UpdateConsistentHeaders updates the given Headers object with the Cache-Control
+// headers for consistent downloads
+func (c *CacheControlConfig) UpdateConsistentHeaders(headers http.Header, lastModified time.Time) {
+	c.updateHeaders(headers, lastModified, true)
+}
+
+// UpdateCurrentHeaders updates the given Headers object with th eCache-Control
+// headers for current (non-consistent) downloads
+func (c *CacheControlConfig) UpdateCurrentHeaders(headers http.Header, lastModified time.Time) {
+	c.updateHeaders(headers, lastModified, false)
+}
+
+func (c *CacheControlConfig) updateHeaders(headers http.Header, lastModified time.Time, consistent bool) {
+	var seconds int
+	var cacheHeader string
+
+	if consistent {
+		seconds = c.headerVals["consistent"]
+		cacheHeader = fmt.Sprintf("public, max-age=%v, s-maxage=%v, must-revalidate", seconds, seconds)
+	} else {
+		seconds = c.headerVals["current"]
+		cacheHeader = fmt.Sprintf("public, max-age=%v, s-maxage=%v", seconds, seconds)
+	}
+
+	if seconds > 0 {
+		headers.Set("Cache-Control", cacheHeader)
+		headers.Set("Last-Modified", lastModified.Format(time.RFC1123))
+	} else {
+		headers.Set("Cache-Control", "max-age=0, no-cache, no-store")
+		headers.Set("Pragma", "no-cache")
+	}
+}
 
 // MainHandler is the default handler for the server
 func MainHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
@@ -130,32 +185,42 @@ func getHandler(ctx context.Context, w http.ResponseWriter, r *http.Request, var
 	checksum := vars["checksum"]
 	tufRole := vars["tufRole"]
 	s := ctx.Value("metaStore")
+	c := ctx.Value("cacheConfig")
+
 	store, ok := s.(storage.MetaStore)
 	if !ok {
 		return errors.ErrNoStorage.WithDetail(nil)
 	}
 
-	creation, output, err := getRole(ctx, store, gun, tufRole, checksum)
+	// If cache control headers were not provided, just use the default values
+	cacheConfig, ok := c.(*CacheControlConfig)
+	if !ok {
+		cacheConfig = NewCacheControlConfig()
+	}
+
+	lastModified, output, err := getRole(ctx, store, gun, tufRole, checksum)
 	if err != nil {
 		return err
 	}
-	if creation == nil {
+	if lastModified == nil {
 		// This shouldn't ever happen, but if it does, it just messes up the cache headers, so
 		// proceed anyway
-		logrus.Warnf("Got bytes out for %s's %s (checksum: %s), but missing creation date",
+		logrus.Warnf("Got bytes out for %s's %s (checksum: %s), but missing lastModified date",
 			gun, tufRole, checksum)
-		creation = &time.Time{} // set the last modification date to the beginning of time
+		lastModified = &time.Time{} // set the last modification date to the beginning of time
 	}
 
-	maxAge := ConsistentCacheMaxAge
-	if checksum == "" { // maxAge should be much shorter for metadata without checksums
-		maxAge = NonConsistentCacheMaxAge
+	switch checksum {
+	case "":
+		cacheConfig.UpdateCurrentHeaders(w.Header(), *lastModified)
+
 		shasum := sha256.Sum256(output)
 		checksum = hex.EncodeToString(shasum[:])
+
+	default:
+		cacheConfig.UpdateConsistentHeaders(w.Header(), *lastModified)
 	}
 
-	w.Header().Set("Cache-Control", fmt.Sprintf("public, max-age=%v", maxAge))
-	w.Header().Set("Last-Modified", creation.Format(time.RFC1123))
 	w.Header().Set("ETag", checksum)
 	w.Write(output)
 	return nil
