@@ -53,7 +53,7 @@ func validateUpdate(cs signed.CryptoService, gun string, updates []storage.MetaU
 	if rootUpdate, ok := roles[rootRole]; ok {
 		// if root is present, validate its integrity, possibly
 		// against a previous root
-		if root, err = validateRoot(gun, oldRootJSON, rootUpdate.Data, store); err != nil {
+		if root, err = validateRoot(gun, oldRootJSON, rootUpdate.Data); err != nil {
 			logrus.Error("ErrBadRoot: ", err.Error())
 			return nil, validation.ErrBadRoot{Msg: err.Error()}
 		}
@@ -373,134 +373,88 @@ func validateTargets(role string, roles map[string]storage.MetaUpdate, repo *tuf
 	return t, nil
 }
 
-func validateRoot(gun string, oldRoot, newRoot []byte, store storage.MetaStore) (
+// validateRoot returns the parsed data.SignedRoot object if the new root:
+// - is a valid root metadata object
+// - has the correct number of timestamp keys
+// - validates against the previous root's signatures (if there was a rotation)
+// - is valid against itself (signature-wise)
+func validateRoot(gun string, oldRoot, newRoot []byte) (
 	*data.SignedRoot, error) {
 
-	var parsedOldRoot *data.SignedRoot
-	parsedNewRoot := &data.SignedRoot{}
-
-	if oldRoot != nil {
-		parsedOldRoot = &data.SignedRoot{}
-		err := json.Unmarshal(oldRoot, parsedOldRoot)
-		if err != nil {
-			// TODO(david): if we can't read the old root should we continue
-			//             here to check new root self referential integrity?
-			//             This would permit recovery of a repo with a corrupted
-			//             root.
-			logrus.Warn("Old root could not be parsed.")
-		}
-	}
-	err := json.Unmarshal(newRoot, parsedNewRoot)
+	parsedNewSigned := &data.Signed{}
+	err := json.Unmarshal(newRoot, parsedNewSigned)
 	if err != nil {
 		return nil, err
 	}
 
-	if err := checkRoot(parsedOldRoot, parsedNewRoot, gun, store); err != nil {
-		// TODO(david): how strict do we want to be here about old signatures
-		//              for rotations? Should the user have to provide a flag
-		//              which gets transmitted to force a root update without
-		//              correct old key signatures.
+	// validates the structure of the root metadata
+	parsedNewRoot, err := data.RootFromSigned(parsedNewSigned)
+	if err != nil {
 		return nil, err
 	}
 
-	if !data.ValidTUFType(parsedNewRoot.Signed.Type, data.CanonicalRootRole) {
-		return nil, fmt.Errorf("root has wrong type")
+	newRootRole, _ := parsedNewRoot.BuildBaseRole(data.CanonicalRootRole)
+	if err != nil { // should never happen, since the root metadata has been validated
+		return nil, err
 	}
+
+	newTimestampRole, err := parsedNewRoot.BuildBaseRole(data.CanonicalTimestampRole)
+	if err != nil { // should never happen, since the root metadata has been validated
+		return nil, err
+	}
+	// According to the TUF spec, any role may have more than one signing
+	// key and require a threshold signature.  However, notary-server
+	// creates the timestamp, and there is only ever one, so a threshold
+	// greater than one would just always fail validation
+	if newTimestampRole.Threshold != 1 {
+		return nil, fmt.Errorf("timestamp role has invalid threshold")
+	}
+
+	if oldRoot != nil {
+		if err := checkAgainstOldRoot(oldRoot, newRootRole, parsedNewSigned); err != nil {
+			return nil, err
+		}
+	}
+
+	if err := signed.VerifyRoot(parsedNewSigned, newRootRole.Threshold, newRootRole.Keys); err != nil {
+		return nil, err
+	}
+
 	return parsedNewRoot, nil
 }
 
-// checkRoot errors if an invalid rotation has taken place, if the
-// threshold number of signatures is invalid, if there are an invalid
-// number of roles and keys, or if the timestamp keys are invalid
-func checkRoot(oldRoot, newRoot *data.SignedRoot, gun string, store storage.MetaStore) error {
-	rootRole := data.CanonicalRootRole
-	targetsRole := data.CanonicalTargetsRole
-	snapshotRole := data.CanonicalSnapshotRole
-	timestampRole := data.CanonicalTimestampRole
-
-	var oldRootRole *data.RootRole
-	newRootRole, ok := newRoot.Signed.Roles[rootRole]
-	if !ok {
-		return errors.New("new root is missing role entry for root role")
+// checkAgainstOldRoot errors if an invalid root rotation has taken place
+func checkAgainstOldRoot(oldRoot []byte, newRootRole data.BaseRole, newSigned *data.Signed) error {
+	parsedOldRoot := &data.SignedRoot{}
+	err := json.Unmarshal(oldRoot, parsedOldRoot)
+	if err != nil {
+		logrus.Warn("Old root could not be parsed, and cannot be used to check the new root.")
+		return nil
 	}
 
-	oldThreshold := 1
-	rotation := false
-	oldKeys := map[string]data.PublicKey{}
-	newKeys := map[string]data.PublicKey{}
-	if oldRoot != nil {
-		// check for matching root key IDs
-		oldRootRole = oldRoot.Signed.Roles[rootRole]
-		oldThreshold = oldRootRole.Threshold
-
-		for _, kid := range oldRootRole.KeyIDs {
-			k, ok := oldRoot.Signed.Keys[kid]
-			if !ok {
-				// if the key itself wasn't contained in the root
-				// we're skipping it because it could never have
-				// been used to validate this root.
-				continue
-			}
-			oldKeys[kid] = data.NewPublicKey(k.Algorithm(), k.Public())
-		}
-
-		// super simple check for possible rotation
-		rotation = len(oldKeys) != len(newRootRole.KeyIDs)
+	oldRootRole, err := parsedOldRoot.BuildBaseRole(data.CanonicalRootRole)
+	if err != nil {
+		logrus.Warn("Old root does not have a valid root role, and cannot be used to check the new root.")
+		return nil
 	}
-	// if old and new had the same number of keys, iterate
-	// to see if there's a difference.
-	for _, kid := range newRootRole.KeyIDs {
-		k, ok := newRoot.Signed.Keys[kid]
-		if !ok {
-			// if the key itself wasn't contained in the root
-			// we're skipping it because it could never have
-			// been used to validate this root.
-			continue
-		}
-		newKeys[kid] = data.NewPublicKey(k.Algorithm(), k.Public())
 
-		if oldRoot != nil {
-			if _, ok := oldKeys[kid]; !ok {
+	// if the set of keys has changed between the old root and new root, then a root
+	// rotation may have taken place
+	rotation := len(oldRootRole.Keys) != len(newRootRole.Keys)
+	if !rotation { // if the number of keys is the same, we need to check every key
+		for kid := range newRootRole.Keys {
+			if _, ok := oldRootRole.Keys[kid]; !ok {
 				// if there is any difference in keys, a key rotation may have
 				// occurred.
 				rotation = true
 			}
 		}
 	}
-	newSigned, err := newRoot.ToSigned()
-	if err != nil {
-		return err
-	}
-	if rotation {
-		err = signed.VerifyRoot(newSigned, oldThreshold, oldKeys)
-		if err != nil {
-			return fmt.Errorf("rotation detected and new root was not signed with at least %d old keys", oldThreshold)
-		}
-	}
-	err = signed.VerifyRoot(newSigned, newRootRole.Threshold, newKeys)
-	if err != nil {
-		return err
-	}
-	root, err := data.RootFromSigned(newSigned)
-	if err != nil {
-		return err
-	}
 
-	// at a minimum, check the 4 required roles are present
-	for _, r := range []string{rootRole, targetsRole, snapshotRole, timestampRole} {
-		role, ok := root.Signed.Roles[r]
-		if !ok {
-			return fmt.Errorf("missing required %s role from root", r)
-		}
-		// According to the TUF spec, any role may have more than one signing
-		// key and require a threshold signature.  However, notary-server
-		// creates the timestamp, and there is only ever one, so a threshold
-		// greater than one would just always fail validation
-		if (r == timestampRole && role.Threshold != 1) || role.Threshold < 1 {
-			return fmt.Errorf("%s role has invalid threshold", r)
-		}
-		if len(role.KeyIDs) < role.Threshold {
-			return fmt.Errorf("%s role has insufficient number of keys", r)
+	if rotation {
+		if err := signed.VerifyRoot(newSigned, oldRootRole.Threshold, oldRootRole.Keys); err != nil {
+			return fmt.Errorf("rotation detected and new root was not signed with at least %d old keys",
+				oldRootRole.Threshold)
 		}
 	}
 
