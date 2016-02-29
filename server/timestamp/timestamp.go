@@ -1,8 +1,6 @@
 package timestamp
 
 import (
-	"bytes"
-
 	"github.com/docker/go/canonical/json"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
@@ -95,16 +93,15 @@ func timestampExpired(ts *data.SignedTimestamp) bool {
 	return signed.IsExpired(ts.Signed.Expires)
 }
 
+// snapshotExpired verifies the checksum(s) for the given snapshot using metadata from the timestamp
 func snapshotExpired(ts *data.SignedTimestamp, snapshot []byte) bool {
-	meta, err := data.NewFileMeta(bytes.NewReader(snapshot), "sha256")
-	if err != nil {
-		// if we can't generate FileMeta from the current snapshot, we should
-		// continue to serve the old timestamp if it isn't time expired
-		// because we won't be able to generate a new one.
-		return false
+	// If this check failed, it means the current snapshot was not exactly what we expect
+	// via the timestamp. So we can consider it to be "expired."
+	if err := data.CheckHashes(snapshot, ts.Signed.Meta["snapshot"].Hashes); err != nil {
+		return true
 	}
-	hash := meta.Hashes["sha256"]
-	return !bytes.Equal(hash, ts.Signed.Meta["snapshot"].Hashes["sha256"])
+
+	return false
 }
 
 // CreateTimestamp creates a new timestamp. If a prev timestamp is provided, it
