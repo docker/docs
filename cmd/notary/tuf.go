@@ -533,7 +533,14 @@ func tokenAuth(trustServerURL string, baseTransport *http.Transport, gun string,
 	}
 
 	ps := passwordStore{anonymous: readOnly}
-	tokenHandler := auth.NewTokenHandler(authTransport, ps, gun, "push", "pull")
+
+	var actions []string
+	if readOnly {
+		actions = []string{"pull"}
+	} else {
+		actions = []string{"push", "pull"}
+	}
+	tokenHandler := auth.NewTokenHandler(authTransport, ps, gun, actions...)
 	basicHandler := auth.NewBasicHandler(ps)
 	modifier := transport.RequestModifier(auth.NewAuthorizer(challengeManager, tokenHandler, basicHandler))
 	return transport.NewTransport(baseTransport, modifier), nil
