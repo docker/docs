@@ -109,7 +109,7 @@ func setUpCryptoservices(configuration *viper.Viper, allowedBackends []string) (
 		keyStore = dbStore
 	}
 
-	cryptoService := cryptoservice.NewCryptoService("", keyStore)
+	cryptoService := cryptoservice.NewCryptoService(keyStore)
 	cryptoServices := make(signer.CryptoServiceIndex)
 	cryptoServices[data.ED25519Key] = cryptoService
 	cryptoServices[data.ECDSAKey] = cryptoService

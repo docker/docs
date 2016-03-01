@@ -268,8 +268,7 @@ func (m *MetadataSwizzler) SignMetadataWithInvalidKey(role string) error {
 	}
 
 	// create an invalid key, but not in the existing CryptoService
-	cs := cryptoservice.NewCryptoService(
-		m.Gun, trustmanager.NewKeyMemoryStore(passphrase.ConstantRetriever("")))
+	cs := cryptoservice.NewCryptoService(trustmanager.NewKeyMemoryStore(passphrase.ConstantRetriever("")))
 	key, err := createKey(cs, m.Gun, role)
 	if err != nil {
 		return err

@@ -219,11 +219,6 @@ func (s *KeyDBStore) ExportKey(name string) ([]byte, error) {
 	return nil, errors.New("Exporting from a KeyDBStore is not supported.")
 }
 
-// ImportKey is currently unimplemented and will always return an error
-func (s *KeyDBStore) ImportKey(pemBytes []byte, role, gun string) error {
-	return errors.New("Importing into a KeyDBStore is not supported")
-}
-
 // HealthCheck verifies that DB exists and is query-able
 func (s *KeyDBStore) HealthCheck() error {
 	dbPrivateKey := GormPrivateKey{}

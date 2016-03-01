@@ -206,20 +206,6 @@ func (s *KeyFileStore) ExportKey(name string) ([]byte, error) {
 	return keyBytes, nil
 }
 
-// ImportKey imports the private key in the encrypted bytes into the keystore
-// with the given key ID, role, and gun.
-func (s *KeyFileStore) ImportKey(pemBytes []byte, role, gun string) error {
-	if role == data.CanonicalRootRole || data.IsDelegation(role) || !data.ValidRole(role) {
-		gun = ""
-	}
-	keyID, err := importKey(s, s.Retriever, s.cachedKeys, role, gun, pemBytes)
-	if err != nil {
-		return err
-	}
-	s.keyInfoMap[keyID] = KeyInfo{Role: role, Gun: gun}
-	return nil
-}
-
 // NewKeyMemoryStore returns a new KeyMemoryStore which holds keys in memory
 func NewKeyMemoryStore(passphraseRetriever passphrase.Retriever) *KeyMemoryStore {
 	memStore := NewMemoryFileStore()
@@ -314,20 +300,6 @@ func (s *KeyMemoryStore) ExportKey(name string) ([]byte, error) {
 		return nil, err
 	}
 	return keyBytes, nil
-}
-
-// ImportKey imports the private key in the encrypted bytes into the keystore
-// with the given key ID and alias.
-func (s *KeyMemoryStore) ImportKey(pemBytes []byte, role, gun string) error {
-	if role == data.CanonicalRootRole || data.IsDelegation(role) || !data.ValidRole(role) {
-		gun = ""
-	}
-	keyID, err := importKey(s, s.Retriever, s.cachedKeys, role, gun, pemBytes)
-	if err != nil {
-		return err
-	}
-	s.keyInfoMap[keyID] = KeyInfo{Role: role, Gun: gun}
-	return nil
 }
 
 // KeyInfoFromPEM attempts to get a keyID and KeyInfo from the filename and PEM bytes of a key
@@ -529,25 +501,4 @@ func encryptAndAddKey(s LimitedFileStore, passwd string, cachedKeys map[string]*
 
 	cachedKeys[name] = &cachedKey{alias: role, key: privKey}
 	return s.Add(filepath.Join(getSubdir(role), name), pemPrivKey)
-}
-
-func importKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, cachedKeys map[string]*cachedKey, role, gun string, pemBytes []byte) (string, error) {
-	// See if the key is encrypted. If its encrypted we'll fail to parse the private key on this first check
-	privKey, err := ParsePEMPrivateKey(pemBytes, "")
-	if err != nil {
-		var password string
-		privKey, password, err = GetPasswdDecryptBytes(passphraseRetriever, pemBytes, "", "imported "+role)
-		if err != nil {
-			return "", err
-		}
-		if role == data.CanonicalRootRole {
-			return privKey.ID(), encryptAndAddKey(s, password, cachedKeys, privKey.ID(), role, privKey)
-		}
-	}
-	pemBytesWithRole, err := KeyToPEM(privKey, role)
-	if err != nil {
-		return privKey.ID(), err
-	}
-	s.Add(filepath.Join(getSubdir(role), gun, privKey.ID()), pemBytesWithRole)
-	return privKey.ID(), nil
 }

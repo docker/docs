@@ -10,12 +10,10 @@ import (
 type KeyService interface {
 	// Create issues a new key pair and is responsible for loading
 	// the private key into the appropriate signing service.
-	// The role isn't currently used for anything, but it's here to support
-	// future features
-	Create(role, algorithm string) (data.PublicKey, error)
+	Create(role, gun, algorithm string) (data.PublicKey, error)
 
-	// AddKey adds a private key to the specified role
-	AddKey(key data.PrivateKey, role string) error
+	// AddKey adds a private key to the specified role and gun
+	AddKey(role, gun string, key data.PrivateKey) error
 
 	// GetKey retrieves the public key if present, otherwise it returns nil
 	GetKey(keyID string) data.PublicKey

@@ -27,7 +27,7 @@ func NewEd25519() *Ed25519 {
 }
 
 // AddKey allows you to add a private key
-func (e *Ed25519) AddKey(k data.PrivateKey, role string) error {
+func (e *Ed25519) AddKey(role, gun string, k data.PrivateKey) error {
 	e.addKey(role, k)
 	return nil
 }
@@ -67,7 +67,7 @@ func (e *Ed25519) ListAllKeys() map[string]string {
 }
 
 // Create generates a new key and returns the public part
-func (e *Ed25519) Create(role, algorithm string) (data.PublicKey, error) {
+func (e *Ed25519) Create(role, gun, algorithm string) (data.PublicKey, error) {
 	if algorithm != data.ED25519Key {
 		return nil, errors.New("only ED25519 supported by this cryptoservice")
 	}

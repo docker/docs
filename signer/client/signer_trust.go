@@ -128,7 +128,7 @@ func NewNotarySigner(hostname string, port string, tlsConfig *tls.Config) *Notar
 }
 
 // Create creates a remote key and returns the PublicKey associated with the remote private key
-func (trust *NotarySigner) Create(role, algorithm string) (data.PublicKey, error) {
+func (trust *NotarySigner) Create(role, algorithm, gun string) (data.PublicKey, error) {
 	publicKey, err := trust.kmClient.CreateKey(context.Background(), &pb.Algorithm{Algorithm: algorithm})
 	if err != nil {
 		return nil, err
@@ -138,7 +138,7 @@ func (trust *NotarySigner) Create(role, algorithm string) (data.PublicKey, error
 }
 
 // AddKey adds a key
-func (trust *NotarySigner) AddKey(k data.PrivateKey, role string) error {
+func (trust *NotarySigner) AddKey(role, gun string, k data.PrivateKey) error {
 	return errors.New("Adding a key to NotarySigner is not supported")
 }
 

@@ -13,7 +13,7 @@ import (
 
 func TestRoleNoKeys(t *testing.T) {
 	cs := NewEd25519()
-	k, err := cs.Create("root", data.ED25519Key)
+	k, err := cs.Create("root", "", data.ED25519Key)
 	require.NoError(t, err)
 	require.NoError(t, err)
 	roleWithKeys := data.BaseRole{Name: "root", Keys: data.Keys{}, Threshold: 1}
@@ -30,7 +30,7 @@ func TestRoleNoKeys(t *testing.T) {
 
 func TestNotEnoughSigs(t *testing.T) {
 	cs := NewEd25519()
-	k, err := cs.Create("root", data.ED25519Key)
+	k, err := cs.Create("root", "", data.ED25519Key)
 	require.NoError(t, err)
 	require.NoError(t, err)
 	roleWithKeys := data.BaseRole{Name: "root", Keys: data.Keys{k.ID(): k}, Threshold: 2}
@@ -47,9 +47,9 @@ func TestNotEnoughSigs(t *testing.T) {
 
 func TestMoreThanEnoughSigs(t *testing.T) {
 	cs := NewEd25519()
-	k1, err := cs.Create("root", data.ED25519Key)
+	k1, err := cs.Create("root", "", data.ED25519Key)
 	require.NoError(t, err)
-	k2, err := cs.Create("root", data.ED25519Key)
+	k2, err := cs.Create("root", "", data.ED25519Key)
 	require.NoError(t, err)
 	roleWithKeys := data.BaseRole{Name: "root", Keys: data.Keys{k1.ID(): k1, k2.ID(): k2}, Threshold: 1}
 
@@ -66,7 +66,7 @@ func TestMoreThanEnoughSigs(t *testing.T) {
 
 func TestDuplicateSigs(t *testing.T) {
 	cs := NewEd25519()
-	k, err := cs.Create("root", data.ED25519Key)
+	k, err := cs.Create("root", "", data.ED25519Key)
 	require.NoError(t, err)
 	roleWithKeys := data.BaseRole{Name: "root", Keys: data.Keys{k.ID(): k}, Threshold: 2}
 
@@ -83,9 +83,9 @@ func TestDuplicateSigs(t *testing.T) {
 
 func TestUnknownKeyBelowThreshold(t *testing.T) {
 	cs := NewEd25519()
-	k, err := cs.Create("root", data.ED25519Key)
+	k, err := cs.Create("root", "", data.ED25519Key)
 	require.NoError(t, err)
-	unknown, err := cs.Create("root", data.ED25519Key)
+	unknown, err := cs.Create("root", "", data.ED25519Key)
 	require.NoError(t, err)
 	roleWithKeys := data.BaseRole{Name: "root", Keys: data.Keys{k.ID(): k}, Threshold: 2}
 
@@ -162,7 +162,7 @@ func Test(t *testing.T) {
 			run.typ = data.TUFTypes[run.role]
 		}
 		if run.s == nil {
-			k, _ := cryptoService.Create("root", data.ED25519Key)
+			k, _ := cryptoService.Create("root", "", data.ED25519Key)
 			run.roleData = data.BaseRole{Name: "root", Keys: data.Keys{k.ID(): k}, Threshold: 1}
 			meta := &data.SignedCommon{Type: run.typ, Version: run.ver, Expires: *run.exp}
 

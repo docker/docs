@@ -10,7 +10,7 @@ import (
 
 func TestTufDelegation(t *testing.T) {
 	cs := signed.NewEd25519()
-	key, err := cs.Create("targets/new_name", data.ED25519Key)
+	key, err := cs.Create("targets/new_name", "gun", data.ED25519Key)
 	assert.NoError(t, err)
 	kl := data.KeyList{key}
 	td := TufDelegation{

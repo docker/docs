@@ -13,7 +13,6 @@ import (
 
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/trustmanager"
-	"github.com/docker/notary/tuf/data"
 )
 
 const zipMadeByUNIX = 3 << 8
@@ -101,29 +100,6 @@ func (cs *CryptoService) ExportKeyReencrypt(dest io.Writer, keyID string, newPas
 	return nil
 }
 
-// ImportRoleKey imports a private key in PEM format key from a byte array
-// It prompts for the key's passphrase to verify the data and to determine
-// the key ID.
-func (cs *CryptoService) ImportRoleKey(pemBytes []byte, role string, newPassphraseRetriever passphrase.Retriever) error {
-	var err error
-	keyGun := cs.gun
-	if role == data.CanonicalRootRole {
-		keyGun = ""
-		if err = checkRootKeyIsEncrypted(pemBytes); err != nil {
-			return err
-		}
-	}
-
-	for _, ks := range cs.keyStores {
-		// don't redeclare err, we want the value carried out of the loop
-		if err = ks.ImportKey(pemBytes, role, keyGun); err == nil {
-			return nil //bail on the first keystore we import to
-		}
-	}
-
-	return err
-}
-
 // ExportAllKeys exports all keys to an io.Writer in zip format.
 // newPassphraseRetriever will be used to obtain passphrases to use to encrypt the existing keys.
 func (cs *CryptoService) ExportAllKeys(dest io.Writer, newPassphraseRetriever passphrase.Retriever) error {
@@ -156,7 +132,7 @@ func (cs *CryptoService) ExportAllKeys(dest io.Writer, newPassphraseRetriever pa
 // ImportKeysZip imports keys from a zip file provided as an zip.Reader. The
 // keys in the root_keys directory are left encrypted, but the other keys are
 // decrypted with the specified passphrase.
-func (cs *CryptoService) ImportKeysZip(zipReader zip.Reader) error {
+func (cs *CryptoService) ImportKeysZip(zipReader zip.Reader, retriever passphrase.Retriever) error {
 	// Temporarily store the keys in maps, so we can bail early if there's
 	// an error (for example, wrong passphrase), without leaving the key
 	// store in an inconsistent state
@@ -179,7 +155,7 @@ func (cs *CryptoService) ImportKeysZip(zipReader zip.Reader) error {
 		// Note that using / as a separator is okay here - the zip
 		// package guarantees that the separator will be /
 		if fNameTrimmed[len(fNameTrimmed)-5:] == "_root" {
-			if err = checkRootKeyIsEncrypted(fileBytes); err != nil {
+			if err = CheckRootKeyIsEncrypted(fileBytes); err != nil {
 				return err
 			}
 		}
@@ -187,20 +163,18 @@ func (cs *CryptoService) ImportKeysZip(zipReader zip.Reader) error {
 	}
 
 	for keyName, pemBytes := range newKeys {
+		// Get the key role information as well as its data.PrivateKey representation
 		_, keyInfo := trustmanager.KeyInfoFromPEM(pemBytes, keyName)
-		// try to import the key to all key stores. As long as one of them
-		// succeeds, consider it a success
-		var tmpErr error
-		for _, ks := range cs.keyStores {
-			if err := ks.ImportKey(pemBytes, keyInfo.Role, keyInfo.Gun); err != nil {
-				tmpErr = err
-			} else {
-				tmpErr = nil
-				break
+		privKey, err := trustmanager.ParsePEMPrivateKey(pemBytes, "")
+		if err != nil {
+			privKey, _, err = trustmanager.GetPasswdDecryptBytes(retriever, pemBytes, "", "imported "+keyInfo.Role)
+			if err != nil {
+				return err
 			}
 		}
-		if tmpErr != nil {
-			return tmpErr
+		// Add the key to our cryptoservice, will add to the first successful keystore
+		if err = cs.AddKey(keyInfo.Role, keyInfo.Gun, privKey); err != nil {
+			return err
 		}
 	}
 
@@ -320,9 +294,9 @@ func addKeysToArchive(zipWriter *zip.Writer, newKeyStore *trustmanager.KeyFileSt
 	return nil
 }
 
-// checkRootKeyIsEncrypted makes sure the root key is encrypted. We have
+// CheckRootKeyIsEncrypted makes sure the root key is encrypted. We have
 // internal assumptions that depend on this.
-func checkRootKeyIsEncrypted(pemBytes []byte) error {
+func CheckRootKeyIsEncrypted(pemBytes []byte) error {
 	block, _ := pem.Decode(pemBytes)
 	if block == nil {
 		return ErrNoValidPrivateKey

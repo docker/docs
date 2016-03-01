@@ -32,7 +32,7 @@ type CryptoServiceTester struct {
 }
 
 func (c CryptoServiceTester) cryptoServiceFactory() *CryptoService {
-	return NewCryptoService(c.gun, trustmanager.NewKeyMemoryStore(passphraseRetriever))
+	return NewCryptoService(trustmanager.NewKeyMemoryStore(passphraseRetriever))
 }
 
 // asserts that created key exists
@@ -40,7 +40,7 @@ func (c CryptoServiceTester) TestCreateAndGetKey(t *testing.T) {
 	cryptoService := c.cryptoServiceFactory()
 
 	// Test Create
-	tufKey, err := cryptoService.Create(c.role, c.keyAlgo)
+	tufKey, err := cryptoService.Create(c.role, c.gun, c.keyAlgo)
 	assert.NoError(t, err, c.errorMsg("error creating key"))
 
 	// Test GetKey
@@ -66,13 +66,13 @@ func (c CryptoServiceTester) TestCreateAndGetWhenMultipleKeystores(t *testing.T)
 		trustmanager.NewKeyMemoryStore(passphraseRetriever))
 
 	// Test Create
-	tufKey, err := cryptoService.Create(c.role, c.keyAlgo)
+	tufKey, err := cryptoService.Create(c.role, c.gun, c.keyAlgo)
 	assert.NoError(t, err, c.errorMsg("error creating key"))
 
 	// Only the first keystore should have the key
 	keyPath := tufKey.ID()
-	if c.role != data.CanonicalRootRole && cryptoService.gun != "" {
-		keyPath = filepath.Join(cryptoService.gun, keyPath)
+	if c.role != data.CanonicalRootRole && c.gun != "" {
+		keyPath = filepath.Join(c.gun, keyPath)
 	}
 	_, _, err = cryptoService.keyStores[0].GetKey(keyPath)
 	assert.NoError(t, err, c.errorMsg(
@@ -106,7 +106,7 @@ func (c CryptoServiceTester) TestSignWithKey(t *testing.T) {
 	cryptoService := c.cryptoServiceFactory()
 	content := []byte("this is a secret")
 
-	tufKey, err := cryptoService.Create(c.role, c.keyAlgo)
+	tufKey, err := cryptoService.Create(c.role, c.gun, c.keyAlgo)
 	assert.NoError(t, err, c.errorMsg("error creating key"))
 
 	// Test Sign
@@ -171,15 +171,15 @@ func (c CryptoServiceTester) TestGetPrivateKeyPasswordInvalid(t *testing.T) {
 	retriever := passphrase.ConstantRetriever("password")
 	store, err := trustmanager.NewKeyFileStore(tempBaseDir, retriever)
 	assert.NoError(t, err)
-	cryptoService := NewCryptoService(c.gun, store)
-	pubKey, err := cryptoService.Create(c.role, c.keyAlgo)
+	cryptoService := NewCryptoService(store)
+	pubKey, err := cryptoService.Create(c.role, c.gun, c.keyAlgo)
 	assert.NoError(t, err, "error generating key: %s", err)
 
 	// cryptoService's FileKeyStore caches the unlocked private key, so to test
 	// private key unlocking we need a new instance.
 	store, err = trustmanager.NewKeyFileStore(tempBaseDir, giveUpPassphraseRetriever)
 	assert.NoError(t, err)
-	cryptoService = NewCryptoService(c.gun, store)
+	cryptoService = NewCryptoService(store)
 
 	_, _, err = cryptoService.GetPrivateKey(pubKey.ID())
 	assert.EqualError(t, err, trustmanager.ErrPasswordInvalid{}.Error())
@@ -195,8 +195,8 @@ func (c CryptoServiceTester) TestGetPrivateKeyAttemptsExceeded(t *testing.T) {
 	retriever := passphrase.ConstantRetriever("password")
 	store, err := trustmanager.NewKeyFileStore(tempBaseDir, retriever)
 	assert.NoError(t, err)
-	cryptoService := NewCryptoService(c.gun, store)
-	pubKey, err := cryptoService.Create(c.role, c.keyAlgo)
+	cryptoService := NewCryptoService(store)
+	pubKey, err := cryptoService.Create(c.role, c.gun, c.keyAlgo)
 	assert.NoError(t, err, "error generating key: %s", err)
 
 	// trustmanager.KeyFileStore and trustmanager.KeyMemoryStore both cache the unlocked
@@ -206,7 +206,7 @@ func (c CryptoServiceTester) TestGetPrivateKeyAttemptsExceeded(t *testing.T) {
 	retriever = passphrase.ConstantRetriever("incorrect password")
 	store, err = trustmanager.NewKeyFileStore(tempBaseDir, retriever)
 	assert.NoError(t, err)
-	cryptoService = NewCryptoService(c.gun, store)
+	cryptoService = NewCryptoService(store)
 
 	_, _, err = cryptoService.GetPrivateKey(pubKey.ID())
 	assert.EqualError(t, err, trustmanager.ErrAttemptsExceeded{}.Error())
@@ -216,7 +216,7 @@ func (c CryptoServiceTester) TestGetPrivateKeyAttemptsExceeded(t *testing.T) {
 func (c CryptoServiceTester) TestRemoveCreatedKey(t *testing.T) {
 	cryptoService := c.cryptoServiceFactory()
 
-	tufKey, err := cryptoService.Create(c.role, c.keyAlgo)
+	tufKey, err := cryptoService.Create(c.role, c.gun, c.keyAlgo)
 	assert.NoError(t, err, c.errorMsg("error creating key"))
 	assert.NotNil(t, cryptoService.GetKey(tufKey.ID()))
 
@@ -311,7 +311,7 @@ func (c CryptoServiceTester) TestAddKey(t *testing.T) {
 	assert.NoError(t, err)
 
 	// Add the key to the targets role
-	assert.NoError(t, cryptoService.AddKey(privKey, data.CanonicalTargetsRole))
+	assert.NoError(t, cryptoService.AddKey(data.CanonicalTargetsRole, c.gun, privKey))
 
 	// Check that we added the key and its info to only the first keystore
 	retrievedKey, retrievedRole, err := cryptoService.keyStores[0].GetKey(privKey.ID())
@@ -322,7 +322,7 @@ func (c CryptoServiceTester) TestAddKey(t *testing.T) {
 	retrievedKeyInfo, err := cryptoService.keyStores[0].GetKeyInfo(privKey.ID())
 	assert.NoError(t, err)
 	assert.Equal(t, data.CanonicalTargetsRole, retrievedKeyInfo.Role)
-	assert.Equal(t, cryptoService.gun, retrievedKeyInfo.Gun)
+	assert.Equal(t, c.gun, retrievedKeyInfo.Gun)
 
 	// The key should not exist in the second keystore
 	_, _, err = cryptoService.keyStores[1].GetKey(privKey.ID())
@@ -338,13 +338,13 @@ func (c CryptoServiceTester) TestAddKey(t *testing.T) {
 	retrievedKeyInfo, err = cryptoService.GetKeyInfo(privKey.ID())
 	assert.NoError(t, err)
 	assert.Equal(t, data.CanonicalTargetsRole, retrievedKeyInfo.Role)
-	assert.Equal(t, cryptoService.gun, retrievedKeyInfo.Gun)
+	assert.Equal(t, c.gun, retrievedKeyInfo.Gun)
 
 	// Add the same key to the targets role, since the info is the same we should have no error
-	assert.NoError(t, cryptoService.AddKey(privKey, data.CanonicalTargetsRole))
+	assert.NoError(t, cryptoService.AddKey(data.CanonicalTargetsRole, c.gun, privKey))
 
 	// Try to add the same key to the snapshot role, which should error due to the role mismatch
-	assert.Error(t, cryptoService.AddKey(privKey, data.CanonicalSnapshotRole))
+	assert.Error(t, cryptoService.AddKey(data.CanonicalSnapshotRole, c.gun, privKey))
 }
 
 // Prints out an error message with information about the key algorithm,

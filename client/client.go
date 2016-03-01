@@ -104,7 +104,7 @@ func repositoryFromKeystores(baseDir, gun, baseURL string, rt http.RoundTripper,
 		return nil, err
 	}
 
-	cryptoService := cryptoservice.NewCryptoService(gun, keyStores...)
+	cryptoService := cryptoservice.NewCryptoService(keyStores...)
 
 	nRepo := &NotaryRepository{
 		gun:           gun,
@@ -234,7 +234,7 @@ func (r *NotaryRepository) Initialize(rootKeyID string, serverManagedRoles ...st
 	// make unnecessary network calls
 	for _, role := range locallyManagedKeys {
 		// This is currently hardcoding the keys to ECDSA.
-		key, err := r.CryptoService.Create(role, data.ECDSAKey)
+		key, err := r.CryptoService.Create(role, r.gun, data.ECDSAKey)
 		if err != nil {
 			return err
 		}
@@ -903,7 +903,7 @@ func (r *NotaryRepository) RotateKey(role string, serverManagesKey bool) error {
 		pubKey, err = getRemoteKey(r.baseURL, r.gun, role, r.roundTrip)
 		errFmtMsg = "unable to rotate remote key: %s"
 	default:
-		pubKey, err = r.CryptoService.Create(role, data.ECDSAKey)
+		pubKey, err = r.CryptoService.Create(role, r.gun, data.ECDSAKey)
 		errFmtMsg = "unable to generate key: %s"
 	}
 

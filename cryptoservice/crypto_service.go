@@ -16,17 +16,16 @@ const (
 // CryptoService implements Sign and Create, holding a specific GUN and keystore to
 // operate on
 type CryptoService struct {
-	gun       string
 	keyStores []trustmanager.KeyStore
 }
 
 // NewCryptoService returns an instance of CryptoService
-func NewCryptoService(gun string, keyStores ...trustmanager.KeyStore) *CryptoService {
-	return &CryptoService{gun: gun, keyStores: keyStores}
+func NewCryptoService(keyStores ...trustmanager.KeyStore) *CryptoService {
+	return &CryptoService{keyStores: keyStores}
 }
 
 // Create is used to generate keys for targets, snapshots and timestamps
-func (cs *CryptoService) Create(role, algorithm string) (data.PublicKey, error) {
+func (cs *CryptoService) Create(role, gun, algorithm string) (data.PublicKey, error) {
 	var privKey data.PrivateKey
 	var err error
 
@@ -53,7 +52,7 @@ func (cs *CryptoService) Create(role, algorithm string) (data.PublicKey, error) 
 
 	// Store the private key into our keystore
 	for _, ks := range cs.keyStores {
-		err = ks.AddKey(privKey, trustmanager.KeyInfo{Role: role, Gun: cs.gun})
+		err = ks.AddKey(privKey, trustmanager.KeyInfo{Role: role, Gun: gun})
 		if err == nil {
 			return data.PublicKeyFromPrivate(privKey), nil
 		}
@@ -111,7 +110,7 @@ func (cs *CryptoService) RemoveKey(keyID string) (err error) {
 
 // AddKey adds a private key to a specified role.
 // The GUN is inferred from the cryptoservice itself for non-root roles
-func (cs *CryptoService) AddKey(key data.PrivateKey, role string) (err error) {
+func (cs *CryptoService) AddKey(role, gun string, key data.PrivateKey) (err error) {
 	// First check if this key already exists in any of our keystores
 	for _, ks := range cs.keyStores {
 		if keyInfo, err := ks.GetKeyInfo(key.ID()); err == nil {
@@ -125,7 +124,7 @@ func (cs *CryptoService) AddKey(key data.PrivateKey, role string) (err error) {
 	// If the key didn't exist in any of our keystores, add and return on the first successful keystore
 	for _, ks := range cs.keyStores {
 		// Try to add to this keystore, return if successful
-		if err = ks.AddKey(key, trustmanager.KeyInfo{Role: role, Gun: cs.gun}); err == nil {
+		if err = ks.AddKey(key, trustmanager.KeyInfo{Role: role, Gun: gun}); err == nil {
 			return nil
 		}
 	}

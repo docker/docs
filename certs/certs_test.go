@@ -234,7 +234,7 @@ func filestoreWithTwoCerts(t *testing.T, gun, keyAlg string) (
 	fileKeyStore, err := trustmanager.NewKeyFileStore(tempBaseDir, passphraseRetriever)
 	assert.NoError(t, err)
 
-	cryptoService := cryptoservice.NewCryptoService(gun, fileKeyStore)
+	cryptoService := cryptoservice.NewCryptoService(fileKeyStore)
 
 	// Create a store
 	trustPath := filepath.Join(tempBaseDir, notary.TrustedCertsDir)
@@ -246,7 +246,7 @@ func filestoreWithTwoCerts(t *testing.T, gun, keyAlg string) (
 
 	certificates := make([]*x509.Certificate, 2)
 	for i := 0; i < 2; i++ {
-		pubKey, err := cryptoService.Create("root", keyAlg)
+		pubKey, err := cryptoService.Create("root", gun, keyAlg)
 		assert.NoError(t, err)
 
 		key, _, err := fileKeyStore.GetKey(pubKey.ID())
