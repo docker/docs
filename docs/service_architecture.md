@@ -21,7 +21,7 @@ Framework](https://theupdateframework.github.io/).
 A Notary service consists of a Notary server, which stores and updates the
 signed [TUF metadata files](
 https://github.com/theupdateframework/tuf/blob/develop/docs/tuf-spec.txt#L348)
-for multiple repositories in an associated database, and a Notary signer, which
+for multiple trusted collections in an associated database, and a Notary signer, which
 stores private keys for and signs metadata for the Notary server. The following
 diagram illustrates this architecture:
 
@@ -33,7 +33,7 @@ responsible for:
 
 - ensuring that any uploaded metadata is valid, signed, and self-consistent
 - generating the timestamp (and sometimes snapshot) metadata
-- storing and serving to clients the latest valid metadata for any repository
+- storing and serving to clients the latest valid metadata for any trusted collection
 
 The Notary signer is responsible for:
 
@@ -86,7 +86,7 @@ sever, and signer:
 6. Notary server is the source of truth for the state of a trusted collection of
    data, storing both client-uploaded and server-generated metadata in the TUF
    database. The generated timestamp and snapshot metadata certify that the
-   metadata files the client uploaded are the most recent for that repository.
+   metadata files the client uploaded are the most recent for that trusted collection.
 
    Finally, Notary server will notify the client that their upload was successful.
 
@@ -118,18 +118,18 @@ operations with any key the Signer holds.
     able to download or upload metadata.
 
 - **Malicious Content** - An attacker can create, store, and serve arbitrary
-    metadata content for one or more repositories. However, they do not have
+    metadata content for one or more trusted collections. However, they do not have
     access to any client-side keys, such as root, targets, and potentially the
-    snapshot keys for the existing repositories.
+    snapshot keys for the existing trusted collections.
 
-    Only clients who have never seen the repositories, and who do not have any
+    Only clients who have never seen the trusted collections, and who do not have any
     form of pinned trust, can be tricked into downloading and
-    trusting the malicious content for these repositories.
+    trusting the malicious content for these trusted collections.
 
-    Clients that have previously interacted with any repository, or that have
-    their trust pinned to a specific certificate for the repositories will immediately
+    Clients that have previously interacted with any trusted collection, or that have
+    their trust pinned to a specific certificate for the collections will immediately
     detect that the content is malicious and would not trust any root, targets,
-    or (maybe) snapshot metadata for these repositories.
+    or (maybe) snapshot metadata for these collections.
 
 - **Rollback, Freeze, Mix and Match** - The attacker can request that
     the Notary signer sign any arbitrary timestamp (and maybe snapshot) metadata
