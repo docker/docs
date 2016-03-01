@@ -11,8 +11,8 @@ weight=4
 
 # Run a Notary service
 
-This document is for anyone who wants to [run their own Notary
-service](running_a_service.md) (such as those who want to use Notary with a
+This document is for anyone who wants to run their own Notary
+service (such as those who want to use Notary with a
 private Docker registry). Running a Notary service requires that you are already
 familiar with using [Docker Engine](https://docs.docker.com/engine/userguide/)
 and [Docker Compose](https://docs.docker.com/compose/overview/).

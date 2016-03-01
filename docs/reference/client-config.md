@@ -40,7 +40,7 @@ In addition please see the optional password [environment
 variables](#environment-variables-optional) that the Notary client can take for
 ease of use.
 
-An example (full) clietn configuration file.
+An example (full) client configuration file.
 
 ```json
 {
@@ -145,6 +145,6 @@ passphrase.
 
 ## Related information
 
-* [Server Configuration File](server-config.md)
+* [Notary Server Configuration File](server-config.md)
 * [Notary Signer Configuration File](signer-config.md)
 * [Configuration sections common to the Notary Server and Signer](common-configs.md)

@@ -11,8 +11,7 @@ parent="mn_notary_config"
 
 # Notary signer configuration file
 
-This document is for power users of the [notary client](../advanced_usage.md),
-or for those who are [running their own service](../running_a_service.md) who
+This document is for those who are [running their own service](../running_a_service.md) who
 want to facilitate CLI interaction or specify custom options.
 
 ## Overview
@@ -203,7 +202,7 @@ Example:
 			private keys will be encrypted using this password, which
 			must also be provided as the environment variable
 			<code>NOTARY_SIGNER_&lt;DEFAULT_ALIAS_VALUE&gt;</code>.
-			Please see the <a href="#notary-signer-envvars">environment variable</a>
+			Please see the <a href="#environment-variables-required-if-using-mysql">environment variable</a>
 			section for more information.</td>
 	</tr>
 </table>
@@ -261,6 +260,6 @@ attempts to sign data using those keys will fail.
 
 ## Related information
 
-* [Server Configuration File](server-config.md)
+* [Notary Server Configuration File](server-config.md)
 * [Notary Client Configuration File](client-config.md)
 * [Configuration sections common to the Notary server and signer](common-configs.md)
