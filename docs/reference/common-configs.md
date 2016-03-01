@@ -96,5 +96,4 @@ required parameters below, to configure it.
 ## Related information
 
 * [Notary Server Configuration File](server-config.md)
-* [Notary Client Configuration File](client-config.md)
 * [Notary Signer Configuration File](signer-config.md)

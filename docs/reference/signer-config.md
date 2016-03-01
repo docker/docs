@@ -11,71 +11,42 @@ parent="mn_notary_config"
 
 # Notary signer configuration file
 
-This document is for those who are [running their own service](../running_a_service.md) who
-want to facilitate CLI interaction or specify custom options.
+This document is for those who are [running their own Notary service](../running_a_service.md) who
+want to specify custom options.
 
 ## Overview
 
-Notary signer [requires environment
-variables](#environment-variables-required-if-using-mysql) to encrypt private
-keys at rest. It also requires a configuration file, the path to which is
+Notary signer [requires environment variables](#environment-variables-required-if-using-mysql)
+to encrypt private keys at rest. It also requires a configuration file, the path to which is
 specified on the command line using the `-config` flag.
 
-A Notary signer configuration file consists of the following sections:
+Here is a full signer configuration file example; please click on the top level JSON keys to
+learn more about the configuration section corresponding to that key:
 
-<table>
-	<tr>
-		<td><a href="#server-section-required">server</a></td>
-		<td>HTTPS and GRPC configuration</td>
-		<td>(required)</td>
-	</tr>
-	<tr>
-		<td><a href="#storage-section-required">storage</a></td>
-		<td>TUF metadata storage configuration</td>
-		<td>(required)</td>
-	</tr>
-	<tr>
-		<td><a href="../common-configs/#logging-section-optional">logging</a></td>
-		<td>logging configuration</td>
-		<td>(optional)</td>
-	</tr>
-	<tr>
-		<td><a href="../common-configs/#reporting-section-optional">reporting</a></td>
-		<td>ops/reporting configuration</td>
-		<td>(optional)</td>
-	</tr>
-</table>
-
-See the [environment variables](#environment-variables-required-if-using-mysql)
-to encrypt private keys at rest.
-
-An example (full) server configuration file.
-
-```json
-{
-  "server": {
+<pre><code class="language-json">{
+  <a href="#server-section-required">"server"</a>: {
     "http_addr": ":4444",
     "grpc_addr": ":7899",
     "tls_cert_file": "./fixtures/notary-signer.crt",
     "tls_key_file": "./fixtures/notary-signer.key",
     "client_ca_file": "./fixtures/notary-server.crt"
   },
-  "logging": {
+  <a href="../common-configs/#logging-section-optional">"logging"</a>: {
     "level": 2
   },
-  "storage": {
+  <a href="#storage-section-required">"storage"</a>: {
     "backend": "mysql",
     "db_url": "user:pass@tcp(notarymysql:3306)/databasename?parseTime=true",
     "default_alias": "passwordalias1"
   },
-  "reporting": {
+  <a href="../common-configs/#reporting-section-optional">"reporting"</a>: {
     "bugsnag": {
       "api_key": "c9d60ae4c7e70c4b6c4ebd3e8056d2b8",
       "release_stage": "production"
     }
   }
 }
-```
+</code></pre>
 
 ## server section (required)
 
@@ -261,5 +232,4 @@ attempts to sign data using those keys will fail.
 ## Related information
 
 * [Notary Server Configuration File](server-config.md)
-* [Notary Client Configuration File](client-config.md)
 * [Configuration sections common to the Notary server and signer](common-configs.md)
