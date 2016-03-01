@@ -1,6 +1,6 @@
 <!--[metadata]>
 +++
-title = "Client configuration"
+title = "Client Configuration"
 description = "Configuring the Notary client, server and signer."
 keywords = ["docker, notary, notary-client, notary-server, notary server, notary-signer, notary signer"]
 [menu.main]
@@ -28,8 +28,7 @@ Here is a full client configuration file example; please click on the top level
 JSON keys to learn more about the configuration section corresponding to that key:
 
 
-<pre><code class="language-json">
-{
+<pre><code class="language-json">{
   <a href="#trust-dir-section-optional">"trust_dir"</a> : "~/.docker/trust",
   <a href="#remote-server-section-optional">"remote_server"</a>: {
     "url": "https://my-notary-server.my-private-registry.com",
