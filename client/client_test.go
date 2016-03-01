@@ -2580,6 +2580,47 @@ func TestRotateKeyInvalidRole(t *testing.T) {
 	}
 }
 
+// Initialize repo to have local signing of snapshots.  Rotate the key to have
+// the server manage the snapshot key.  Assert that this publishes the key change
+// but not any other changes.
+func TestRemoteRotationOnlyPublishesKeyChanges(t *testing.T) {
+	ts := fullTestServer(t)
+	defer ts.Close()
+
+	repo1, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
+	defer os.RemoveAll(repo1.baseDir)
+
+	oldSnapshotRole, err := repo1.tufRepo.GetBaseRole(data.CanonicalSnapshotRole)
+	assert.NoError(t, err)
+
+	// Add and make sure it's not published when the key is rotated
+	addTarget(t, repo1, "latest", "../fixtures/intermediate-ca.crt")
+	cl, err := repo1.GetChangelist()
+	assert.NoError(t, err)
+	assert.Len(t, cl.List(), 1)
+
+	assert.NoError(t, repo1.RotateKey(data.CanonicalSnapshotRole, true))
+	assert.Len(t, cl.List(), 1, "rotating key published other changes")
+
+	// ensure that the key rotation was public by pulling from a new repo
+	repo2, _ := newRepoToTestRepo(t, repo1, true)
+	defer os.RemoveAll(repo2.baseDir)
+	tgts, err := repo2.ListTargets()
+	assert.NoError(t, err)
+	assert.Len(t, tgts, 0, "No targets should have been published")
+
+	newSnapshotRole, err := repo2.tufRepo.GetBaseRole(data.CanonicalSnapshotRole)
+	assert.NoError(t, err)
+
+	// assert that the snapshot key has changed
+	assert.Len(t, oldSnapshotRole.Keys, 1)
+	assert.Len(t, newSnapshotRole.Keys, 1)
+	for k := range oldSnapshotRole.Keys {
+		_, ok := newSnapshotRole.Keys[k]
+		assert.False(t, ok)
+	}
+}
+
 // If remotely rotating key fails, the failure is propagated
 func TestRemoteRotationError(t *testing.T) {
 	ts, _, _ := simpleTestServer(t)
