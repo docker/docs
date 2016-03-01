@@ -12,7 +12,9 @@ weight=4
 
 # List of Notary Documentation
 
-* [Server Architecture](notary-server.md)
-* [Signer](notary-signer.md)
-* [Server Configuration File](notary-server-config.md)
-* [Signer Configuration File](notary-signer-config.md)
+* [Getting Started](getting_started.md)
+* [Advanced Usage](advanced_usage.md)
+* [Service Architecture](service_architecture.md)
+* [Running a Service](running_a_service.md)
+* [Configuration files](reference/index.md)
+* [Changelog](changelog.md)
