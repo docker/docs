@@ -8,7 +8,6 @@ import (
 	"github.com/Sirupsen/logrus"
 	"github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
-	"github.com/mattn/go-sqlite3"
 )
 
 // SQLStorage implements a versioned store using a relational database.
@@ -37,12 +36,6 @@ func translateOldVersionError(err error) error {
 		// 1022 = Can't write; duplicate key in table '%s'
 		// 1062 = Duplicate entry '%s' for key %d
 		if err.Number == 1022 || err.Number == 1062 {
-			return &ErrOldVersion{}
-		}
-	case *sqlite3.Error:
-		// https://godoc.org/github.com/mattn/go-sqlite3#pkg-variables
-		if err.Code == sqlite3.ErrConstraint &&
-			err.ExtendedCode == sqlite3.ErrConstraintUnique {
 			return &ErrOldVersion{}
 		}
 	}
