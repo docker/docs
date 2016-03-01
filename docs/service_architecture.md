@@ -79,23 +79,22 @@ sever, and signer:
    generates the timestamp (and maybe snapshot) metadata. It sends this
    generated metadata to the Notary signer to be signed.
 
-5. Notary signer gets the requisite encrypted private keys from its database if
-   it has them, decrypts the keys, and uses them to sign the metadata. If
+5. Notary signer retrieves the necessary encrypted private keys from its database
+   if available, decrypts the keys, and uses them to sign the metadata. If
    successful, it sends the signatures back to Notary server.
 
-6. Notary server stores all the signed metadata, both client-uploaded and
-   server-generated metadata, in the TUF database. The generated timestamp and
-   snapshot metadata certify that the metadata files the client uploaded are the
-   most recent for that repository.
+6. Notary server is the source of truth for the state of a trusted collection of
+   data, storing both client-uploaded and server-generated metadata in the TUF
+   database. The generated timestamp and snapshot metadata certify that the
+   metadata files the client uploaded are the most recent for that repository.
 
    Finally, Notary server will notify the client that their upload was successful.
 
 7. The client can now immediately download the latest metadata from the server,
    using the still-valid bearer token to connect. Notary server only needs to
-   obtain the metadata from the database, since none of the metadata is expired
-   yet.
+   obtain the metadata from the database, since none of the metadata has expired.
 
-   If the timestamp were expired, for example, Notary server would go through
+   In the case that the timestamp has expired, Notary server would go through
    the entire sequence where it generates a new timestamp, request Notary signer
    for a signature, stores the newly signed timestamp in the database. It then
    sends this new timestamp, along with the rest of the stored metadata, to the
@@ -104,53 +103,57 @@ sever, and signer:
 
 ## Threat model
 
-Both the server and the signer are possible attack vectors. This section
-discusses how the architecture responds when compromised.
+Both the server and the signer are potential attack vectors. This section
+discusses how our architecture is designed to deal with compromises.
 
 ## Notary server compromise
 
-In the event of a Notary server compromise, an attacker would have access to
-the metadata stored in the database as well as access to Notary signer to
- sign anything with any key the Signer holds.
+In the event of a Notary server compromise, an attacker would have direct access to
+the metadata stored in the database as well as well as access to the credentials
+used to communicate with Notary signer, and therefore, access to arbitrary signing
+operations with any key the Signer holds.
 
 - **Denial of Service** - An attacker could reject client requests and corrupt
- 	or delete metadata from the database, thus preventing clients from being
+ 	  or delete metadata from the database, thus preventing clients from being
     able to download or upload metadata.
 
 - **Malicious Content** - An attacker can create, store, and serve arbitrary
     metadata content for one or more repositories. However, they do not have
-    access to the original root, target, or (maybe) snapshots keys for
-    existing repositories.
+    access to any client-side keys, such as root, targets, and potentially the
+    snapshot keys for the existing repositories.
 
-    Only clients who have never seen, and do not have any form of pinned trust
-    for, the compromised repositories can be tricked into downloading and
+    Only clients who have never seen the repositories, and who do not have any
+    form of pinned trust, can be tricked into downloading and
     trusting the malicious content for these repositories.
 
-    Clients who have pinned trust for the compromised repositories, either
-    due to configuration or due to TOFU (trust on first use), will immediately
+    Clients that have previously interacted with any repository, or that have
+    their trust pinned to a specific certificate for the repositories will immediately
     detect that the content is malicious and would not trust any root, targets,
     or (maybe) snapshot metadata for these repositories.
 
- - **Rollback, Mix and Match** - The attacker can request that
-    the Notary signer sign whatever timestamp (and maybe snapshot) metadata
-    they want. They can create valid timestamp and snapshot metadata that
-    certifies that the latest version of the repository contains
-    strictly older, or even a mix of older and newer, data.
+ - **Rollback, Freeze, Mix and Match** - The attacker can request that
+    the Notary signer sign any arbitrary timestamp (and maybe snapshot) metadata
+    they want. Attackers can lauch a freeze attack, and, depending on whether
+    the snapshot key is available, a mix-and-match attack up to the expiration
+    of the targets file.
 
     Clients both with and without pinned trust would be vulnerable to these
-    attacks.
+    attacks, so long as the attacker ensures that the version number of their
+    malicious metadata is higher than the version number of the most recent
+    good metadata that any client may have.
 
- Note that the timestamp and snapshot keys are never compromised; once the
- Server compromise is mitigated, an attacker will not be able to generate
- valid timestamp or snapshot metadata and serve them on a malicious mirror, for
- example.
+ Note that the timestamp and snapshot keys cannot be compromised in a server-only
+ compromise, so a key rotation would not be necessary.  Once the Server
+ compromise is mitigated, an attacker will not be
+ able to generate valid timestamp or snapshot metadata and serve them on a
+ malicious mirror, for example.
 
 ### Notary signer compromise
 
 In the event of a Notary signer compromise, an attacker would have access to
 all the private keys stored in a database. If the keys are stored in an HSM,
-they would have the ability to interfere with the keys in the HSM, but not
-to exfiltrate the private keys.
+they would have the ability to sign arbitrary content with, and to delete, the
+keys in the HSM, but not to exfiltrate the private material.
 
 - **Denial of Service** - An attacker could reject all Notary server requests
   and corrupt or delete keys from the database (or even delete keys from an
@@ -158,9 +161,10 @@ to exfiltrate the private keys.
   timestamps or snapshots.
 
 - **Key Compromise** - If the Notary signer uses a database as its backend,
-  an attacker can exfiltrate all the private keys. This will let them set
-  up a malicious mirror to perform rollback and mix and match attacks,
-  for instance.
+  an attacker can exfiltrate all the private material.  Note that the capabilities
+  of an attacker are the same as of a Notary server compromise in terms of
+  signing arbitrary metadata, with the important detail that in this particular
+  case key rotations will be necessary to recover from the attack.
 
 ## Related information
 
