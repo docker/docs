@@ -1,70 +1,118 @@
 <!--[metadata]>
 +++
-title = "Server Configuration File"
-description = "Specifies the configuration file for Notary Server"
-keywords = ["docker, notary, notary-server, configuration"]
+title = "Server Configuration"
+description = "Configuring the notary client, server and signer."
+keywords = ["docker, notary, notary-client, notary-server, notary server, notary-signer, notary signer"]
 [menu.main]
-parent="mn_notary"
-weight=80
+parent="mn_notary_config"
 +++
 <![end-metadata]-->
 
-# Notary Server Configuration File
+# Notary server configuration file
+
+This document is for power users of the [notary client](../advanced_usage.md),
+or for those who are [running their own service](../running_a_service.md) who
+want to facilitate CLI interaction or specify custom options.
+
+For full specific configuration information, see the [common configuration
+file](common-configs.md) for the Notary server and signer.
+
+## Overview
+
+A configuration file is required by Notary server, and the path to the
+configuration file must be specified using the `-config` option on the command
+line.
+
+The configuration file consists of the following sections:
+
+<table>
+	<tr>
+		<td><a href="#server-section-required">server</a></td>
+		<td>HTTPS configuration</td>
+		<td>(required)</td>
+	</tr>
+	<tr>
+		<td><a href="#trust-service-section-required">trust_service</a></td>
+		<td>signing service configuration</td>
+		<td>(required)</td>
+	</tr>
+	<tr>
+		<td><a href="#storage-section-required">storage</a></td>
+		<td>TUF metadata storage configuration</td>
+		<td>(required)</td>
+	</tr>
+	<tr>
+		<td><a href="#auth-section-optional">auth</a></td>
+		<td>server authentication configuration</td>
+		<td>(optional)</td>
+	</tr>
+	<tr>
+		<td><a href="../common-configs/#logging-section-optional">logging</a></td>
+		<td>logging configuration</td>
+		<td>(optional)</td>
+	</tr>
+	<tr>
+		<td><a href="../common-configs/#reporting-section-optional">reporting</a></td>
+		<td>ops/reporting configuration</td>
+		<td>(optional)</td>
+	</tr>
+</table>
 
 An example (full) server configuration file.
 
 ```json
 {
-	"server": {
-		"http_addr": ":4443",
-		"tls_key_file": "./fixtures/notary-server.key",
-		"tls_cert_file": "./fixtures/notary-server.crt"
-	},
-	"trust_service": {
-		"type": "remote",
-		"hostname": "notarysigner",
-		"port": "7899",
-		"key_algorithm": "ecdsa",
-		"tls_ca_file": "./fixtures/root-ca.crt",
-		"tls_client_cert": "./fixtures/notary-server.crt",
-		"tls_client_key": "./fixtures/notary-server.key"
-	},
-	"storage": {
-		"backend": "mysql",
-		"db_url": "user:pass@tcp(notarymysql:3306)/databasename?parseTime=true"
-	},
-	"auth": {
-		"type": "token",
-		"options": {
-			"realm": "https://auth.docker.io/token",
-			"service": "notary-server",
-			"issuer": "auth.docker.io",
-			"rootcertbundle": "/path/to/auth.docker.io/cert"
-		}
-	},
-	"logging": {
-		"level": "debug"
-	},
-	"reporting": {
-		"bugsnag": {
-			"api_key": "c9d60ae4c7e70c4b6c4ebd3e8056d2b8",
-			"release_stage": "production"
-		}
-	}
+  "server": {
+    "http_addr": ":4443",
+    "tls_key_file": "./fixtures/notary-server.key",
+    "tls_cert_file": "./fixtures/notary-server.crt"
+  },
+  "trust_service": {
+    "type": "remote",
+    "hostname": "notarysigner",
+    "port": "7899",
+    "key_algorithm": "ecdsa",
+    "tls_ca_file": "./fixtures/root-ca.crt",
+    "tls_client_cert": "./fixtures/notary-server.crt",
+    "tls_client_key": "./fixtures/notary-server.key"
+  },
+  "storage": {
+    "backend": "mysql",
+    "db_url": "user:pass@tcp(notarymysql:3306)/databasename?parseTime=true"
+  },
+  "auth": {
+    "type": "token",
+    "options": {
+      "realm": "https://auth.docker.io/token",
+      "service": "notary-server",
+      "issuer": "auth.docker.io",
+      "rootcertbundle": "/path/to/auth.docker.io/cert"
+    }
+  },
+  "logging": {
+    "level": "debug"
+  },
+  "reporting": {
+    "bugsnag": {
+      "api_key": "c9d60ae4c7e70c4b6c4ebd3e8056d2b8",
+      "release_stage": "production"
+    }
+  }
 }
 ```
 
-## `server` section (required)
+## server section (required)
 
 Example:
 
 ```json
 "server": {
-	"http_addr": ":4443",
-	"tls_key_file": "./fixtures/notary-server.key",
-	"tls_cert_file": "./fixtures/notary-server.crt"
+  "http_addr": ":4443",
+  "tls_key_file": "./fixtures/notary-server.key",
+  "tls_cert_file": "./fixtures/notary-server.crt"
 }
 ```
+
 <table>
 	<tr>
 		<th>Parameter</th>
@@ -106,22 +154,24 @@ Example:
 	</tr>
 </table>
 
-## `trust service` section (required)
+
+## trust_service section (required)
 
 This section configures either a remote trust service, such as
-[Notary Signer](notary-signer.md) or a local in-memory ED25519 trust service.
+[Notary signer](#notary-signer-configuration-file) or a local in-memory
+ED25519 trust service.
 
 Remote trust service example:
 
 ```json
 "trust_service": {
-	"type": "remote",
-	"hostname": "notarysigner",
-	"port": "7899",
-	"key_algorithm": "ecdsa",
-	"tls_ca_file": "./fixtures/root-ca.crt",
-	"tls_client_key": "./fixtures/notary-server.key",
-	"tls_client_cert": "./fixtures/notary-server.crt"
+  "type": "remote",
+  "hostname": "notarysigner",
+  "port": "7899",
+  "key_algorithm": "ecdsa",
+  "tls_ca_file": "./fixtures/root-ca.crt",
+  "tls_client_cert": "./fixtures/notary-server.crt",
+  "tls_client_key": "./fixtures/notary-server.key"
 }
 ```
 
@@ -129,7 +179,7 @@ Local trust service example:
 
 ```json
 "trust_service": {
-	"type": "local"
+  "type": "local"
 }
 ```
 
@@ -165,9 +215,9 @@ Local trust service example:
 		<td valign="top"><code>tls_ca_file</code></td>
 		<td valign="top">no</td>
 		<td valign="top">The path to the root CA that signed the TLS
-			certificate of the remote service. This parameter if said root
-			CA is not in the system's default trust roots. The path is
-			relative to the directory of the configuration file.</td>
+			certificate of the remote service. This parameter must be
+			provided if said root CA is not in the system's default trust
+			roots. The path is relative to the directory of the configuration file.</td>
 	</tr>
 	<tr>
 		<td valign="top"><code>tls_client_key</code></td>
@@ -187,18 +237,17 @@ Local trust service example:
 	</tr>
 </table>
 
-
-## `storage` section (required)
+## storage section (required)
 
 The storage section specifies which storage backend the server should use to
-store TUF metadata.  Currently, we only support MySQL or an in-memory store.
+store TUF metadata.  Only MySQL or an in-memory store is supported.
 
 DB storage example:
 
 ```json
 "storage": {
-	"backend": "mysql",
-	"db_url": "user:pass@tcp(notarymysql:3306)/databasename?parseTime=true"
+  "backend": "mysql",
+  "db_url": "user:pass@tcp(notarymysql:3306)/databasename?parseTime=true"
 }
 ```
 
@@ -220,11 +269,12 @@ DB storage example:
 		<td valign="top">yes if not <code>memory</code></td>
 		<td valign="top">The <a href="https://github.com/go-sql-driver/mysql">
 			the Data Source Name used to access the DB.</a>
-			(note: please include "parseTime=true" as part of the the DSN)</td>
+			(note: please include <code>parseTime=true</code> as part of the the DSN)</td>
 	</tr>
 </table>
 
-## `auth` section (optional)
+
+## auth section (optional)
 
 This sections specifies the authentication options for the server.
 Currently, we only support token authentication.
@@ -233,13 +283,13 @@ Example:
 
 ```json
 "auth": {
-	"type": "token",
-	"options": {
-		"realm": "https://auth.docker.io",
-		"service": "notary-server",
-		"issuer": "auth.docker.io",
-		"rootcertbundle": "/path/to/auth.docker.io/cert"
-	}
+  "type": "token",
+  "options": {
+    "realm": "https://auth.docker.io",
+    "service": "notary-server",
+    "issuer": "auth.docker.io",
+    "rootcertbundle": "/path/to/auth.docker.io/cert"
+  }
 }
 ```
 
@@ -262,7 +312,7 @@ authentication post login.)
 	<tr>
 		<td valign="top"><code>type</code></td>
 		<td valign="top">yes</td>
-		<td valign="top">Must be `"token"`; all other values will result in no
+		<td valign="top">Must be <code>"token"</code>; all other values will result in no
 			authentication (and the rest of the parameters will be ignored)</td>
 	</tr>
 	<tr>
@@ -275,77 +325,8 @@ authentication post login.)
 	</tr>
 </table>
 
-## `logging` section (optional)
+## Related information
 
-The logging section sets the log level of the server.  If it is not provided
-or invalid, the server defaults to an ERROR logging level.
-
-Example:
-
-```json
-"logging": {
-	"level": "debug"
-}
-```
-
-Note that this entire section is optional.  However, if you would like to
-specify a different log level, then you need the required parameters
-below to configure it.
-
-<table>
-	<tr>
-		<th>Parameter</th>
-		<th>Required</th>
-		<th>Description</th>
-	</tr>
-	<tr>
-		<td valign="top"><code>level</code></td>
-		<td valign="top">yes</td>
-		<td valign="top">One of <code>"debug"</code>, <code>"info"</code>,
-			<code>"warning"</code>, <code>"error"</code>, <code>"fatal"</code>,
-			or <code>"panic"</code></td>
-	</tr>
-</table>
-
-## `reporting` section (optional)
-
-The reporting section contains any configuration for useful for running the
-service, such as reporting errors. Currently, we only support reporting errors
-to [Bugsnag](https://bugsnag.com).
-
-See [bugsnag-go](https://github.com/bugsnag/bugsnag-go/) for more information
-about these configuration parameters.
-
-```json
-"reporting": {
-	"bugsnag": {
-		"api_key": "c9d60ae4c7e70c4b6c4ebd3e8056d2b8",
-		"release_stage": "production"
-	}
-}
-```
-
-Note that this entire section is optional.  However, if you would like to
-report errors to Bugsnag, then you need to include a `bugsnag` subsection,
-along with the required parameters below, to configure it.
-
-**Bugsnag reporting:**
-
-<table>
-	<tr>
-		<th>Parameter</th>
-		<th>Required</th>
-		<th>Description</th>
-	</tr>
-	<tr>
-		<td valign="top"><code>api_key</code></td>
-		<td valign="top">yes</td>
-		<td>The BugSnag API key to use to report errors.</td>
-	</tr>
-	<tr>
-		<td valign="top"><code>release_stage</code></td>
-		<td valign="top">yes</td>
-		<td>The current release stage, such as "production".  You can
-			use this value to filter errors in the Bugsnag dashboard.</td>
-	</tr>
-</table>
+* [Notary Client Configuration File](client-config.md)
+* [Notary Signer Configuration File](signer-config.md)
+* [Configuration sections common to the Notary Server and Signer](common-configs.md)
