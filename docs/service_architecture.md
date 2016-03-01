@@ -106,7 +106,7 @@ sever, and signer:
 Both the server and the signer are potential attack vectors. This section
 discusses how our architecture is designed to deal with compromises.
 
-## Notary server compromise
+### Notary server compromise
 
 In the event of a Notary server compromise, an attacker would have direct access to
 the metadata stored in the database as well as well as access to the credentials
@@ -114,7 +114,7 @@ used to communicate with Notary signer, and therefore, access to arbitrary signi
 operations with any key the Signer holds.
 
 - **Denial of Service** - An attacker could reject client requests and corrupt
- 	  or delete metadata from the database, thus preventing clients from being
+    or delete metadata from the database, thus preventing clients from being
     able to download or upload metadata.
 
 - **Malicious Content** - An attacker can create, store, and serve arbitrary
@@ -131,7 +131,7 @@ operations with any key the Signer holds.
     detect that the content is malicious and would not trust any root, targets,
     or (maybe) snapshot metadata for these repositories.
 
- - **Rollback, Freeze, Mix and Match** - The attacker can request that
+- **Rollback, Freeze, Mix and Match** - The attacker can request that
     the Notary signer sign any arbitrary timestamp (and maybe snapshot) metadata
     they want. Attackers can lauch a freeze attack, and, depending on whether
     the snapshot key is available, a mix-and-match attack up to the expiration

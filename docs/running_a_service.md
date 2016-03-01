@@ -199,7 +199,7 @@ When you initialize a development service using the provided docker-compose.yml
 file, these sample certificates are used to create a more production like
 environment.
 
-YOU MUST ACQUIRE YOUR OWN CERTIFICATES TO USE IN A PRODUCTION DEPLOYMENT.
+**You must acquire _your_ _own_ _certificates_ to use in a production deployment.**
 
 The sample private key files in the Notary repository are obviously public knowledge
 and using them in a production deployment is highly insecure.
