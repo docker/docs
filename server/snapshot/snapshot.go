@@ -21,7 +21,7 @@ func GetOrCreateSnapshotKey(gun string, store storage.KeyStore, crypto signed.Cr
 	}
 
 	if _, ok := err.(*storage.ErrNoKey); ok {
-		key, err := crypto.Create("snapshot", createAlgorithm)
+		key, err := crypto.Create("snapshot", gun, createAlgorithm)
 		if err != nil {
 			return nil, err
 		}

@@ -52,7 +52,7 @@ func TestGetSnapshotKeyCreate(t *testing.T) {
 func TestGetSnapshotKeyExisting(t *testing.T) {
 	store := storage.NewMemStorage()
 	crypto := signed.NewEd25519()
-	key, err := crypto.Create(data.CanonicalSnapshotRole, data.ED25519Key)
+	key, err := crypto.Create(data.CanonicalSnapshotRole, "gun", data.ED25519Key)
 	assert.NoError(t, err)
 
 	store.SetKey("gun", data.CanonicalSnapshotRole, data.ED25519Key, key.Public())
@@ -95,7 +95,7 @@ func (ks keyStore) SetKey(gun, role, algorithm string, public []byte) error {
 // first insert.
 func TestGetSnapshotKeyExistsOnSet(t *testing.T) {
 	crypto := signed.NewEd25519()
-	key, err := crypto.Create(data.CanonicalSnapshotRole, data.ED25519Key)
+	key, err := crypto.Create(data.CanonicalSnapshotRole, "gun", data.ED25519Key)
 	assert.NoError(t, err)
 	store := &keyStore{k: key}
 

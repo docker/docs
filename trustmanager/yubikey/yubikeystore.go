@@ -762,22 +762,6 @@ func (s *YubiKeyStore) ExportKey(keyID string) ([]byte, error) {
 	return nil, errors.New("Keys cannot be exported from a Yubikey.")
 }
 
-// ImportKey imports only root keys into a Yubikey, ignoring the specified gun
-func (s *YubiKeyStore) ImportKey(pemBytes []byte, role, gun string) error {
-	logrus.Debugf("Attempting to import: %s key inside of YubiKeyStore", role)
-	if role != data.CanonicalRootRole {
-		return fmt.Errorf("yubikey only supports storing root keys")
-	}
-	privKey, _, err := trustmanager.GetPasswdDecryptBytes(
-		s.passRetriever, pemBytes, "", "imported root")
-	if err != nil {
-		logrus.Debugf("Failed to get and retrieve a key from: %s", role)
-		return err
-	}
-	_, err = s.addKey(privKey.ID(), role, privKey)
-	return err
-}
-
 // Not yet implemented
 func (s *YubiKeyStore) GetKeyInfo(keyID string) (trustmanager.KeyInfo, error) {
 	return trustmanager.KeyInfo{}, fmt.Errorf("Not yet implemented")

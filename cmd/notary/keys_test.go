@@ -326,15 +326,14 @@ func setUpRepo(t *testing.T, tempBaseDir, gun string, ret passphrase.Retriever) 
 	l.Out = bytes.NewBuffer(nil)
 	ctx = ctxu.WithLogger(ctx, logrus.NewEntry(l))
 
-	cryptoService := cryptoservice.NewCryptoService(
-		"", trustmanager.NewKeyMemoryStore(ret))
+	cryptoService := cryptoservice.NewCryptoService(trustmanager.NewKeyMemoryStore(ret))
 	ts := httptest.NewServer(server.RootHandler(nil, ctx, cryptoService, nil, nil))
 
 	repo, err := client.NewNotaryRepository(
 		tempBaseDir, gun, ts.URL, http.DefaultTransport, ret)
 	assert.NoError(t, err, "error creating repo: %s", err)
 
-	rootPubKey, err := repo.CryptoService.Create("root", data.ECDSAKey)
+	rootPubKey, err := repo.CryptoService.Create("root", "", data.ECDSAKey)
 	assert.NoError(t, err, "error generating root key: %s", err)
 
 	err = repo.Initialize(rootPubKey.ID())

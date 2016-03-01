@@ -187,9 +187,9 @@ func (k *keyCommander) keysGenerateRootKey(cmd *cobra.Command, args []string) er
 	if err != nil {
 		return err
 	}
-	cs := cryptoservice.NewCryptoService("", ks...)
+	cs := cryptoservice.NewCryptoService(ks...)
 
-	pubKey, err := cs.Create(data.CanonicalRootRole, algorithm)
+	pubKey, err := cs.Create(data.CanonicalRootRole, "", algorithm)
 	if err != nil {
 		return fmt.Errorf("Failed to create a new root key: %v", err)
 	}
@@ -215,7 +215,7 @@ func (k *keyCommander) keysBackup(cmd *cobra.Command, args []string) error {
 	}
 	exportFilename := args[0]
 
-	cs := cryptoservice.NewCryptoService("", ks...)
+	cs := cryptoservice.NewCryptoService(ks...)
 
 	exportFile, err := os.Create(exportFilename)
 	if err != nil {
@@ -263,7 +263,7 @@ func (k *keyCommander) keysExport(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	cs := cryptoservice.NewCryptoService("", ks...)
+	cs := cryptoservice.NewCryptoService(ks...)
 	keyInfo, err := cs.GetKeyInfo(keyID)
 	if err != nil {
 		return fmt.Errorf("Could not retrieve info for key %s", keyID)
@@ -306,7 +306,7 @@ func (k *keyCommander) keysRestore(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
-	cs := cryptoservice.NewCryptoService("", ks...)
+	cs := cryptoservice.NewCryptoService(ks...)
 
 	zipReader, err := zip.OpenReader(importFilename)
 	if err != nil {
@@ -314,7 +314,7 @@ func (k *keyCommander) keysRestore(cmd *cobra.Command, args []string) error {
 	}
 	defer zipReader.Close()
 
-	err = cs.ImportKeysZip(zipReader.Reader)
+	err = cs.ImportKeysZip(zipReader.Reader, k.getRetriever())
 
 	if err != nil {
 		return fmt.Errorf("Error importing keys: %v", err)
@@ -376,11 +376,25 @@ func (k *keyCommander) keysImport(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("Must specify GUN for %s key", importRole)
 	}
 
-	cs := cryptoservice.NewCryptoService(k.keysImportGUN, ks...)
-	err = cs.ImportRoleKey(pemBytes, importRole, k.getRetriever())
+	// Root keys must be encrypted
+	if importRole == data.CanonicalRootRole {
+		if err = cryptoservice.CheckRootKeyIsEncrypted(pemBytes); err != nil {
+			return err
+		}
+	}
 
+	cs := cryptoservice.NewCryptoService(ks...)
+	// Convert to a data.PrivateKey, potentially decrypting the key
+	privKey, err := trustmanager.ParsePEMPrivateKey(pemBytes, "")
 	if err != nil {
-		return fmt.Errorf("Error importing root key: %v", err)
+		privKey, _, err = trustmanager.GetPasswdDecryptBytes(k.getRetriever(), pemBytes, "", "imported "+importRole)
+		if err != nil {
+			return err
+		}
+	}
+	err = cs.AddKey(importRole, k.keysImportGUN, privKey)
+	if err != nil {
+		return fmt.Errorf("Error importing key: %v", err)
 	}
 	return nil
 }
@@ -536,7 +550,7 @@ func (k *keyCommander) keyPassphraseChange(cmd *cobra.Command, args []string) er
 		return fmt.Errorf("invalid key ID provided: %s", keyID)
 	}
 
-	cs := cryptoservice.NewCryptoService("", ks...)
+	cs := cryptoservice.NewCryptoService(ks...)
 	privKey, _, err := cs.GetPrivateKey(keyID)
 	if err != nil {
 		return fmt.Errorf("could not retrieve local key for key ID provided: %s", keyID)

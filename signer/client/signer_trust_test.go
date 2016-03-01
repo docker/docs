@@ -169,7 +169,7 @@ func (c *StubClientFromServers) CheckHealth(ctx context.Context, v *pb.Void,
 }
 
 func setUpSigner(t *testing.T, store trustmanager.KeyStore) NotarySigner {
-	cryptoService := cryptoservice.NewCryptoService("", store)
+	cryptoService := cryptoservice.NewCryptoService(store)
 	cryptoServices := signer.CryptoServiceIndex{
 		data.ED25519Key: cryptoService,
 		data.RSAKey:     cryptoService,

@@ -156,7 +156,7 @@ func TestSetupCryptoServicesDBStoreSuccess(t *testing.T) {
 	os.Setenv("NOTARY_SIGNER_TIMESTAMP", "password")
 	defer os.Unsetenv("NOTARY_SIGNER_TIMESTAMP")
 
-	_, err = ecService.Create("timestamp", data.ECDSAKey)
+	_, err = ecService.Create("timestamp", "", data.ECDSAKey)
 	assert.NoError(t, err)
 	db.Model(&gormKey).Count(&count)
 	assert.Equal(t, 1, count)
@@ -182,7 +182,7 @@ func TestSetupCryptoServicesMemoryStore(t *testing.T) {
 
 	// since the keystores are not exposed by CryptoService, try creating
 	// and getting the key
-	pubKey, err := ecService.Create("", data.ECDSAKey)
+	pubKey, err := ecService.Create("", "", data.ECDSAKey)
 	assert.NoError(t, err)
 	privKey, _, err := ecService.GetPrivateKey(pubKey.ID())
 	assert.NoError(t, err)

@@ -2,14 +2,12 @@ package cryptoservice
 
 import (
 	"archive/zip"
-	"bytes"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"os"
 	"path/filepath"
-	"strings"
 	"testing"
 
 	"github.com/docker/notary"
@@ -50,8 +48,8 @@ func TestImportExportZip(t *testing.T) {
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	fileStore, err := trustmanager.NewKeyFileStore(tempBaseDir, newPassphraseRetriever)
-	cs := NewCryptoService(gun, fileStore)
-	pubKey, err := cs.Create(data.CanonicalRootRole, data.ECDSAKey)
+	cs := NewCryptoService(fileStore)
+	pubKey, err := cs.Create(data.CanonicalRootRole, gun, data.ECDSAKey)
 	assert.NoError(t, err)
 
 	rootKeyID := pubKey.ID()
@@ -122,14 +120,14 @@ func TestImportExportZip(t *testing.T) {
 
 	fileStore2, err := trustmanager.NewKeyFileStore(tempBaseDir2, newPassphraseRetriever)
 	assert.NoError(t, err)
-	cs2 := NewCryptoService(gun, fileStore2)
+	cs2 := NewCryptoService(fileStore2)
 
 	// Reopen the zip file for importing
 	zipReader, err = zip.OpenReader(tempZipFilePath)
 	assert.NoError(t, err, "could not open zip file")
 
 	// Now try with a valid passphrase. This time it should succeed.
-	err = cs2.ImportKeysZip(zipReader.Reader)
+	err = cs2.ImportKeysZip(zipReader.Reader, newPassphraseRetriever)
 	assert.NoError(t, err)
 	zipReader.Close()
 
@@ -165,10 +163,10 @@ func TestImportExportGUN(t *testing.T) {
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	fileStore, err := trustmanager.NewKeyFileStore(tempBaseDir, newPassphraseRetriever)
-	cs := NewCryptoService(gun, fileStore)
-	_, err = cs.Create(data.CanonicalRootRole, data.ECDSAKey)
-	_, err = cs.Create(data.CanonicalTargetsRole, data.ECDSAKey)
-	_, err = cs.Create(data.CanonicalSnapshotRole, data.ECDSAKey)
+	cs := NewCryptoService(fileStore)
+	_, err = cs.Create(data.CanonicalRootRole, gun, data.ECDSAKey)
+	_, err = cs.Create(data.CanonicalTargetsRole, gun, data.ECDSAKey)
+	_, err = cs.Create(data.CanonicalSnapshotRole, gun, data.ECDSAKey)
 	assert.NoError(t, err)
 
 	tempZipFile, err := ioutil.TempFile("", "notary-test-export-")
@@ -237,14 +235,14 @@ func TestImportExportGUN(t *testing.T) {
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	fileStore2, err := trustmanager.NewKeyFileStore(tempBaseDir2, newPassphraseRetriever)
-	cs2 := NewCryptoService(gun, fileStore2)
+	cs2 := NewCryptoService(fileStore2)
 
 	// Reopen the zip file for importing
 	zipReader, err = zip.OpenReader(tempZipFilePath)
 	assert.NoError(t, err, "could not open zip file")
 
 	// Now try with a valid passphrase. This time it should succeed.
-	err = cs2.ImportKeysZip(zipReader.Reader)
+	err = cs2.ImportKeysZip(zipReader.Reader, newPassphraseRetriever)
 	assert.NoError(t, err)
 	zipReader.Close()
 
@@ -266,7 +264,7 @@ func TestImportExportGUN(t *testing.T) {
 	}
 }
 
-func TestImportExportRootKey(t *testing.T) {
+func TestExportRootKey(t *testing.T) {
 	gun := "docker.com/notary"
 
 	// Temporary directory where test files will be created
@@ -275,8 +273,8 @@ func TestImportExportRootKey(t *testing.T) {
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	fileStore, err := trustmanager.NewKeyFileStore(tempBaseDir, oldPassphraseRetriever)
-	cs := NewCryptoService(gun, fileStore)
-	pubKey, err := cs.Create(data.CanonicalRootRole, data.ECDSAKey)
+	cs := NewCryptoService(fileStore)
+	pubKey, err := cs.Create(data.CanonicalRootRole, gun, data.ECDSAKey)
 	assert.NoError(t, err)
 
 	rootKeyID := pubKey.ID()
@@ -295,7 +293,7 @@ func TestImportExportRootKey(t *testing.T) {
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	fileStore2, err := trustmanager.NewKeyFileStore(tempBaseDir2, oldPassphraseRetriever)
-	cs2 := NewCryptoService(gun, fileStore2)
+	cs2 := NewCryptoService(fileStore2)
 
 	keyReader, err := os.Open(tempKeyFilePath)
 	assert.NoError(t, err, "could not open key file")
@@ -303,7 +301,11 @@ func TestImportExportRootKey(t *testing.T) {
 	pemImportBytes, err := ioutil.ReadAll(keyReader)
 	keyReader.Close()
 	assert.NoError(t, err)
-	err = cs2.ImportRoleKey(pemImportBytes, data.CanonicalRootRole, nil)
+
+	// Convert to a data.PrivateKey, potentially decrypting the key, and add it to the cryptoservice
+	privKey, _, err := trustmanager.GetPasswdDecryptBytes(oldPassphraseRetriever, pemImportBytes, "", "imported "+data.CanonicalRootRole)
+	assert.NoError(t, err)
+	err = cs2.AddKey(data.CanonicalRootRole, gun, privKey)
 	assert.NoError(t, err)
 
 	// Look for repo's root key in repo2
@@ -312,35 +314,9 @@ func TestImportExportRootKey(t *testing.T) {
 	rootKeyFilename := rootKeyID + ".key"
 	_, err = os.Stat(filepath.Join(tempBaseDir2, notary.PrivDir, notary.RootKeysSubdir, rootKeyFilename))
 	assert.NoError(t, err, "missing root key")
-
-	// Try to import a decrypted version of the root key and make sure it
-	// doesn't succeed
-	pemBytes, err := ioutil.ReadFile(tempKeyFilePath)
-	assert.NoError(t, err, "could not read key file")
-	privKey, err := trustmanager.ParsePEMPrivateKey(pemBytes, oldPassphrase)
-	assert.NoError(t, err, "could not decrypt key file")
-	decryptedPEMBytes, err := trustmanager.KeyToPEM(privKey, "root")
-	assert.NoError(t, err, "could not convert key to PEM")
-
-	pemImportBytes, err = ioutil.ReadAll(bytes.NewReader(decryptedPEMBytes))
-	assert.NoError(t, err)
-	err = cs2.ImportRoleKey(pemImportBytes, data.CanonicalRootRole, nil)
-	assert.EqualError(t, err, ErrRootKeyNotEncrypted.Error())
-
-	// Try to import garbage and make sure it doesn't succeed
-	pemImportBytes, err = ioutil.ReadAll(strings.NewReader("this is not PEM"))
-	assert.NoError(t, err)
-	err = cs2.ImportRoleKey(pemImportBytes, data.CanonicalRootRole, nil)
-	assert.EqualError(t, err, ErrNoValidPrivateKey.Error())
-
-	// Should be able to unlock the root key with the old password
-	key, alias, err := cs2.GetPrivateKey(rootKeyID)
-	assert.NoError(t, err, "could not unlock root key")
-	assert.Equal(t, data.CanonicalRootRole, alias)
-	assert.Equal(t, rootKeyID, key.ID())
 }
 
-func TestImportExportRootKeyReencrypt(t *testing.T) {
+func TestExportRootKeyReencrypt(t *testing.T) {
 	gun := "docker.com/notary"
 
 	// Temporary directory where test files will be created
@@ -349,8 +325,8 @@ func TestImportExportRootKeyReencrypt(t *testing.T) {
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	fileStore, err := trustmanager.NewKeyFileStore(tempBaseDir, oldPassphraseRetriever)
-	cs := NewCryptoService(gun, fileStore)
-	pubKey, err := cs.Create(data.CanonicalRootRole, data.ECDSAKey)
+	cs := NewCryptoService(fileStore)
+	pubKey, err := cs.Create(data.CanonicalRootRole, gun, data.ECDSAKey)
 	assert.NoError(t, err)
 
 	rootKeyID := pubKey.ID()
@@ -369,7 +345,7 @@ func TestImportExportRootKeyReencrypt(t *testing.T) {
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	fileStore2, err := trustmanager.NewKeyFileStore(tempBaseDir2, newPassphraseRetriever)
-	cs2 := NewCryptoService(gun, fileStore2)
+	cs2 := NewCryptoService(fileStore2)
 
 	keyReader, err := os.Open(tempKeyFilePath)
 	assert.NoError(t, err, "could not open key file")
@@ -377,7 +353,11 @@ func TestImportExportRootKeyReencrypt(t *testing.T) {
 	pemImportBytes, err := ioutil.ReadAll(keyReader)
 	keyReader.Close()
 	assert.NoError(t, err)
-	err = cs2.ImportRoleKey(pemImportBytes, data.CanonicalRootRole, nil)
+
+	// Convert to a data.PrivateKey, potentially decrypting the key, and add it to the cryptoservice
+	privKey, _, err := trustmanager.GetPasswdDecryptBytes(newPassphraseRetriever, pemImportBytes, "", "imported "+data.CanonicalRootRole)
+	assert.NoError(t, err)
+	err = cs2.AddKey(data.CanonicalRootRole, gun, privKey)
 	assert.NoError(t, err)
 
 	// Look for repo's root key in repo2
@@ -394,7 +374,7 @@ func TestImportExportRootKeyReencrypt(t *testing.T) {
 	assert.Equal(t, rootKeyID, key.ID())
 }
 
-func TestImportExportNonRootKey(t *testing.T) {
+func TestExportNonRootKey(t *testing.T) {
 	gun := "docker.com/notary"
 
 	// Temporary directory where test files will be created
@@ -403,8 +383,8 @@ func TestImportExportNonRootKey(t *testing.T) {
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	fileStore, err := trustmanager.NewKeyFileStore(tempBaseDir, oldPassphraseRetriever)
-	cs := NewCryptoService(gun, fileStore)
-	pubKey, err := cs.Create(data.CanonicalTargetsRole, data.ECDSAKey)
+	cs := NewCryptoService(fileStore)
+	pubKey, err := cs.Create(data.CanonicalTargetsRole, gun, data.ECDSAKey)
 	assert.NoError(t, err)
 
 	targetsKeyID := pubKey.ID()
@@ -423,7 +403,7 @@ func TestImportExportNonRootKey(t *testing.T) {
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	fileStore2, err := trustmanager.NewKeyFileStore(tempBaseDir2, oldPassphraseRetriever)
-	cs2 := NewCryptoService(gun, fileStore2)
+	cs2 := NewCryptoService(fileStore2)
 
 	keyReader, err := os.Open(tempKeyFilePath)
 	assert.NoError(t, err, "could not open key file")
@@ -431,7 +411,10 @@ func TestImportExportNonRootKey(t *testing.T) {
 	pemBytes, err := ioutil.ReadAll(keyReader)
 	assert.NoError(t, err, "could not read key file")
 
-	err = cs2.ImportRoleKey(pemBytes, data.CanonicalTargetsRole, oldPassphraseRetriever)
+	// Convert to a data.PrivateKey, potentially decrypting the key, and add it to the cryptoservice
+	privKey, _, err := trustmanager.GetPasswdDecryptBytes(oldPassphraseRetriever, pemBytes, "", "imported "+data.CanonicalTargetsRole)
+	assert.NoError(t, err)
+	err = cs2.AddKey(data.CanonicalTargetsRole, gun, privKey)
 	assert.NoError(t, err)
 	keyReader.Close()
 
@@ -449,7 +432,7 @@ func TestImportExportNonRootKey(t *testing.T) {
 	assert.Equal(t, targetsKeyID, key.ID())
 }
 
-func TestImportExportNonRootKeyReencrypt(t *testing.T) {
+func TestExportNonRootKeyReencrypt(t *testing.T) {
 	gun := "docker.com/notary"
 
 	// Temporary directory where test files will be created
@@ -458,8 +441,8 @@ func TestImportExportNonRootKeyReencrypt(t *testing.T) {
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	fileStore, err := trustmanager.NewKeyFileStore(tempBaseDir, oldPassphraseRetriever)
-	cs := NewCryptoService(gun, fileStore)
-	pubKey, err := cs.Create(data.CanonicalSnapshotRole, data.ECDSAKey)
+	cs := NewCryptoService(fileStore)
+	pubKey, err := cs.Create(data.CanonicalSnapshotRole, gun, data.ECDSAKey)
 	assert.NoError(t, err)
 
 	snapshotKeyID := pubKey.ID()
@@ -478,7 +461,7 @@ func TestImportExportNonRootKeyReencrypt(t *testing.T) {
 	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	fileStore2, err := trustmanager.NewKeyFileStore(tempBaseDir2, newPassphraseRetriever)
-	cs2 := NewCryptoService(gun, fileStore2)
+	cs2 := NewCryptoService(fileStore2)
 
 	keyReader, err := os.Open(tempKeyFilePath)
 	assert.NoError(t, err, "could not open key file")
@@ -486,7 +469,10 @@ func TestImportExportNonRootKeyReencrypt(t *testing.T) {
 	pemBytes, err := ioutil.ReadAll(keyReader)
 	assert.NoError(t, err, "could not read key file")
 
-	err = cs2.ImportRoleKey(pemBytes, data.CanonicalSnapshotRole, newPassphraseRetriever)
+	// Convert to a data.PrivateKey, potentially decrypting the key, and add it to the cryptoservice
+	privKey, _, err := trustmanager.GetPasswdDecryptBytes(newPassphraseRetriever, pemBytes, "", "imported "+data.CanonicalSnapshotRole)
+	assert.NoError(t, err)
+	err = cs2.AddKey(data.CanonicalSnapshotRole, gun, privKey)
 	assert.NoError(t, err)
 	keyReader.Close()
 

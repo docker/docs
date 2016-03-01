@@ -84,7 +84,7 @@ func CreateKey(cryptoServices signer.CryptoServiceIndex) http.Handler {
 			return
 		}
 
-		tufKey, err := cryptoService.Create("", vars["Algorithm"])
+		tufKey, err := cryptoService.Create("", "", vars["Algorithm"])
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			w.Write([]byte(err.Error()))
