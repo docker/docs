@@ -10,8 +10,7 @@ parent="mn_notary_config"
 
 # Notary server configuration file
 
-This document is for power users of the [notary client](../advanced_usage.md),
-or for those who are [running their own service](../running_a_service.md) who
+This document is for those who are [running their own service](../running_a_service.md) who
 want to facilitate CLI interaction or specify custom options.
 
 For full specific configuration information, see the [common configuration
