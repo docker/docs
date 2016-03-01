@@ -11,9 +11,8 @@ weight=4
 
 # Notary client configuration file
 
-This document is for power users of the [Notary client](../advanced_usage.md),
-or for those who are [running their own service](../running_a_service.md) who
-want to facilitate CLI interaction or specify custom options.
+This document is for power users of the [Notary client](../advanced_usage.md)
+who want to facilitate CLI interaction or specify custom options.
 
 The configuration file for Notary client normally resides at `~/.notary/config.json`,
 but the path to a different configuration file can be specified using the
@@ -21,38 +20,25 @@ but the path to a different configuration file can be specified using the
 
 ## Overview of the file
 
-A configuration file consists of the following sections:
+In addition to the configuration file format, please see the optional password
+[environment variables](#environment-variables-optional) that the Notary client
+can take for ease of use.
 
-<table>
-	<tr>
-		<td><a href="#trust-dir-section-optional">trust_dir</a></td>
-		<td>TUF key and metadata directory</td>
-		<td>(optional)</td>
-	</tr>
-	<tr>
-		<td><a href="#remote-server-section-optional">remote_server</a></td>
-		<td>remote Notary Server configuration</td>
-		<td>(optional)</td>
-	</tr>
-</table>
+Here is a full client configuration file example; please click on the top level
+JSON keys to learn more about the configuration section corresponding to that key:
 
-In addition please see the optional password [environment
-variables](#environment-variables-optional) that the Notary client can take for
-ease of use.
 
-An example (full) client configuration file.
-
-```json
+<pre><code class="language-json">
 {
-  "trust_dir" : "~/.docker/trust",
-  "remote_server": {
+  <a href="#trust-dir-section-optional">"trust_dir"</a> : "~/.docker/trust",
+  <a href="#remote-server-section-optional">"remote_server"</a>: {
     "url": "https://my-notary-server.my-private-registry.com",
     "root-ca": "./fixtures/root-ca.crt",
     "tls_client_cert": "./fixtures/secure.example.com.crt",
     "tls_client_key": "./fixtures/secure.example.com.crt"
   }
 }
-```
+</code></pre>
 
 ## trust_dir section (optional)
 
@@ -142,9 +128,3 @@ passphrase.
 |`NOTARY_ROOT_PASSPHRASE`     | The root/offline key passphrase         |
 |`NOTARY_TARGETS_PASSPHRASE`  | The targets (an online) key passphrase  |
 |`NOTARY_SNAPSHOT_PASSPHRASE` | The snapshot (an online) key passphrase |
-
-## Related information
-
-* [Notary Server Configuration File](server-config.md)
-* [Notary Signer Configuration File](signer-config.md)
-* [Configuration sections common to the Notary Server and Signer](common-configs.md)
