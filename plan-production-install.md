@@ -64,7 +64,7 @@ A cluster with N controller and replica nodes can only tolerate (N-1)/2 node
 failures. So be sure to set up at least two replicas, when installing UCP for
 production.
 
-Below is a list of the containers that are deployed to the controller node,
+Below is a list of the containers that are deployed to the replica node,
 when running the `ucp join --replica` command:
 
 | Container name    | Description                                                         |
@@ -86,7 +86,7 @@ your containers using UCP, it spreads the load across these nodes. You can
 configure the strategies used by UCP to deploy the containers across multiple
 nodes.
 
-Below is a list of the containers that are deployed to the controller node,
+Below is a list of the containers that are deployed to the node,
 when running the `ucp join` command:
 
 | Container name | Description                                           |
