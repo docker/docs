@@ -142,7 +142,7 @@ func (k *keyCommander) keysList(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
-	ks, err := k.getKeyStores(config, true)
+	ks, err := k.getKeyStores(config, true, false)
 	if err != nil {
 		return err
 	}
@@ -183,7 +183,7 @@ func (k *keyCommander) keysGenerateRootKey(cmd *cobra.Command, args []string) er
 	if err != nil {
 		return err
 	}
-	ks, err := k.getKeyStores(config, true)
+	ks, err := k.getKeyStores(config, true, true)
 	if err != nil {
 		return err
 	}
@@ -209,7 +209,7 @@ func (k *keyCommander) keysBackup(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
-	ks, err := k.getKeyStores(config, false)
+	ks, err := k.getKeyStores(config, false, false)
 	if err != nil {
 		return err
 	}
@@ -258,7 +258,7 @@ func (k *keyCommander) keysExport(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
-	ks, err := k.getKeyStores(config, true)
+	ks, err := k.getKeyStores(config, true, false)
 	if err != nil {
 		return err
 	}
@@ -302,7 +302,7 @@ func (k *keyCommander) keysRestore(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
-	ks, err := k.getKeyStores(config, true)
+	ks, err := k.getKeyStores(config, true, true)
 	if err != nil {
 		return err
 	}
@@ -333,7 +333,7 @@ func (k *keyCommander) keysImport(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
-	ks, err := k.getKeyStores(config, true)
+	ks, err := k.getKeyStores(config, true, false)
 	if err != nil {
 		return err
 	}
@@ -510,7 +510,7 @@ func (k *keyCommander) keyRemove(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
-	ks, err := k.getKeyStores(config, true)
+	ks, err := k.getKeyStores(config, true, false)
 	if err != nil {
 		return err
 	}
@@ -538,7 +538,7 @@ func (k *keyCommander) keyPassphraseChange(cmd *cobra.Command, args []string) er
 	if err != nil {
 		return err
 	}
-	ks, err := k.getKeyStores(config, true)
+	ks, err := k.getKeyStores(config, true, false)
 	if err != nil {
 		return err
 	}
@@ -579,7 +579,7 @@ func (k *keyCommander) keyPassphraseChange(cmd *cobra.Command, args []string) er
 }
 
 func (k *keyCommander) getKeyStores(
-	config *viper.Viper, withHardware bool) ([]trustmanager.KeyStore, error) {
+	config *viper.Viper, withHardware, hardwareBackup bool) ([]trustmanager.KeyStore, error) {
 	retriever := k.getRetriever()
 
 	directory := config.GetString("trust_dir")
@@ -592,7 +592,12 @@ func (k *keyCommander) getKeyStores(
 	ks := []trustmanager.KeyStore{fileKeyStore}
 
 	if withHardware {
-		yubiStore, err := getYubiKeyStore(fileKeyStore, retriever)
+		var yubiStore trustmanager.KeyStore
+		if hardwareBackup {
+			yubiStore, err = getYubiKeyStore(fileKeyStore, retriever)
+		} else {
+			yubiStore, err = getYubiKeyStore(nil, retriever)
+		}
 		if err == nil && yubiStore != nil {
 			// Note that the order is important, since we want to prioritize
 			// the yubikey store
