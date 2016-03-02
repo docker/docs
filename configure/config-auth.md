@@ -27,7 +27,7 @@ There are three authentication methods:
 
 ![Auth settings page</admin/settings#auth>](../images/admin-settings-auth.png)
 
-> **Note**: If you have issues logging into the Docker Trusted Registry admin web interface after changing the authentication settings, you may need to use the [emergency access to the Docker Trusted Registry admin web interface](../adminguide.md/#emergency-access-to-the-trusted-registry:ea325b0e2f1f338fce9ff1e56f5ebfb2").
+> **Note**: If you have issues logging into the Docker Trusted Registry admin web interface after changing the authentication settings, you may need to use the [emergency access to the Docker Trusted Registry admin web interface](../adminguide.md/#emergency-access-to-the-trusted-registry).
 
 ## No authentication (None)
 
