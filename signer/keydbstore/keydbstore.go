@@ -68,7 +68,7 @@ func (s *KeyDBStore) Name() string {
 
 // AddKey stores the contents of a private key. Both role and gun are ignored,
 // we always use Key IDs as name, and don't support aliases
-func (s *KeyDBStore) AddKey(privKey data.PrivateKey, keyInfo trustmanager.KeyInfo) error {
+func (s *KeyDBStore) AddKey(keyInfo trustmanager.KeyInfo, privKey data.PrivateKey) error {
 
 	passphrase, _, err := s.retriever(privKey.ID(), s.defaultPassAlias, false, 1)
 	if err != nil {

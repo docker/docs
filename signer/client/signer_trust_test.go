@@ -120,7 +120,7 @@ func TestGetPrivateKeyAndSignWithExistingKey(t *testing.T) {
 
 	store := trustmanager.NewKeyMemoryStore(ret)
 
-	err = store.AddKey(key, trustmanager.KeyInfo{Role: data.CanonicalTimestampRole, Gun: "gun"})
+	err = store.AddKey(trustmanager.KeyInfo{Role: data.CanonicalTimestampRole, Gun: "gun"}, key)
 	assert.NoError(t, err, "could not add key to store")
 
 	signer := setUpSigner(t, store)

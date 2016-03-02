@@ -60,7 +60,7 @@ func testAddKey(t *testing.T, store trustmanager.KeyStore) (data.PrivateKey, err
 	privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
 	assert.NoError(t, err)
 
-	err = store.AddKey(privKey, trustmanager.KeyInfo{Role: data.CanonicalRootRole, Gun: ""})
+	err = store.AddKey(trustmanager.KeyInfo{Role: data.CanonicalRootRole, Gun: ""}, privKey)
 	return privKey, err
 }
 
@@ -215,7 +215,7 @@ type nonworkingBackup struct {
 }
 
 // AddKey stores the contents of a PEM-encoded private key as a PEM block
-func (s *nonworkingBackup) AddKey(privKey data.PrivateKey, keyInfo trustmanager.KeyInfo) error {
+func (s *nonworkingBackup) AddKey(keyInfo trustmanager.KeyInfo, privKey data.PrivateKey) error {
 	return errors.New("Nope!")
 }
 
@@ -271,7 +271,7 @@ func TestYubiAddDuplicateKeySucceedsButDoesNotBackup(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Len(t, cleanStore.ListKeys(), 1)
 
-	err = cleanStore.AddKey(key, trustmanager.KeyInfo{Role: data.CanonicalRootRole, Gun: ""})
+	err = cleanStore.AddKey(trustmanager.KeyInfo{Role: data.CanonicalRootRole, Gun: ""}, key)
 	assert.NoError(t, err)
 
 	// there should be just 1 key on the yubikey
