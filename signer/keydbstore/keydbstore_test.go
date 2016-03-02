@@ -84,7 +84,7 @@ func TestCreateSuccessPopulatesCache(t *testing.T) {
 	assert.NoError(t, err)
 
 	// Test writing new key in database
-	err = dbStore.AddKey(testKey, trustmanager.KeyInfo{Role: data.CanonicalTimestampRole, Gun: "gun/ignored"})
+	err = dbStore.AddKey(trustmanager.KeyInfo{Role: data.CanonicalTimestampRole, Gun: "gun/ignored"}, testKey)
 	assert.NoError(t, err)
 
 	testGetSuccessFromCache(t, dbStore, testKey)
@@ -101,7 +101,7 @@ func TestGetSuccessPopulatesCache(t *testing.T) {
 	// Create a new KeyDB store and add a key
 	dbStore, err := NewKeyDBStore(retriever, "ignoredalias", "sqlite3", tmpFilename)
 	assert.NoError(t, err)
-	err = dbStore.AddKey(testKey, trustmanager.KeyInfo{Role: data.CanonicalTimestampRole, Gun: "gun/ignored"})
+	err = dbStore.AddKey(trustmanager.KeyInfo{Role: data.CanonicalTimestampRole, Gun: "gun/ignored"}, testKey)
 	assert.NoError(t, err)
 
 	// delete the cache
@@ -126,15 +126,15 @@ func TestDoubleCreate(t *testing.T) {
 	assert.NoError(t, err)
 
 	// Test writing new key in database/cache
-	err = dbStore.AddKey(testKey, trustmanager.KeyInfo{Role: data.CanonicalTimestampRole, Gun: "gun/ignored"})
+	err = dbStore.AddKey(trustmanager.KeyInfo{Role: data.CanonicalTimestampRole, Gun: "gun/ignored"}, testKey)
 	assert.NoError(t, err)
 
 	// Test writing the same key in the database. Should fail.
-	err = dbStore.AddKey(testKey, trustmanager.KeyInfo{Role: data.CanonicalTimestampRole, Gun: "gun/ignored"})
+	err = dbStore.AddKey(trustmanager.KeyInfo{Role: data.CanonicalTimestampRole, Gun: "gun/ignored"}, testKey)
 	assert.Error(t, err, "failed to add private key to database:")
 
 	// Test writing new key succeeds
-	err = dbStore.AddKey(anotherTestKey, trustmanager.KeyInfo{Role: data.CanonicalTimestampRole, Gun: "gun/ignored"})
+	err = dbStore.AddKey(trustmanager.KeyInfo{Role: data.CanonicalTimestampRole, Gun: "gun/ignored"}, anotherTestKey)
 	assert.NoError(t, err)
 }
 
@@ -150,7 +150,7 @@ func TestCreateDelete(t *testing.T) {
 	assert.NoError(t, err)
 
 	// Test writing new key in database/cache
-	err = dbStore.AddKey(testKey, trustmanager.KeyInfo{Role: "", Gun: ""})
+	err = dbStore.AddKey(trustmanager.KeyInfo{Role: "", Gun: ""}, testKey)
 	assert.NoError(t, err)
 
 	// Test deleting the key from the db
@@ -174,7 +174,7 @@ func TestKeyRotation(t *testing.T) {
 	assert.NoError(t, err)
 
 	// Test writing new key in database/cache
-	err = dbStore.AddKey(testKey, trustmanager.KeyInfo{Role: data.CanonicalTimestampRole, Gun: "gun/ignored"})
+	err = dbStore.AddKey(trustmanager.KeyInfo{Role: data.CanonicalTimestampRole, Gun: "gun/ignored"}, testKey)
 	assert.NoError(t, err)
 
 	// Try rotating the key to alias-2

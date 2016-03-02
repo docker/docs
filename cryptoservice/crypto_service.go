@@ -52,7 +52,7 @@ func (cs *CryptoService) Create(role, gun, algorithm string) (data.PublicKey, er
 
 	// Store the private key into our keystore
 	for _, ks := range cs.keyStores {
-		err = ks.AddKey(privKey, trustmanager.KeyInfo{Role: role, Gun: gun})
+		err = ks.AddKey(trustmanager.KeyInfo{Role: role, Gun: gun}, privKey)
 		if err == nil {
 			return data.PublicKeyFromPrivate(privKey), nil
 		}
@@ -67,8 +67,7 @@ func (cs *CryptoService) Create(role, gun, algorithm string) (data.PublicKey, er
 // GetPrivateKey returns a private key and role if present by ID.
 func (cs *CryptoService) GetPrivateKey(keyID string) (k data.PrivateKey, role string, err error) {
 	for _, ks := range cs.keyStores {
-		k, role, err = ks.GetKey(keyID)
-		if err == nil {
+		if k, role, err = ks.GetKey(keyID); err == nil {
 			return
 		}
 		switch err.(type) {
@@ -124,7 +123,7 @@ func (cs *CryptoService) AddKey(role, gun string, key data.PrivateKey) (err erro
 	// If the key didn't exist in any of our keystores, add and return on the first successful keystore
 	for _, ks := range cs.keyStores {
 		// Try to add to this keystore, return if successful
-		if err = ks.AddKey(key, trustmanager.KeyInfo{Role: role, Gun: gun}); err == nil {
+		if err = ks.AddKey(trustmanager.KeyInfo{Role: role, Gun: gun}, key); err == nil {
 			return nil
 		}
 	}

@@ -639,13 +639,13 @@ func (s *YubiKeyStore) ListKeys() map[string]trustmanager.KeyInfo {
 }
 
 // AddKey puts a key inside the Yubikey, as well as writing it to the backup store
-func (s *YubiKeyStore) AddKey(privKey data.PrivateKey, keyInfo trustmanager.KeyInfo) error {
+func (s *YubiKeyStore) AddKey(keyInfo trustmanager.KeyInfo, privKey data.PrivateKey) error {
 	added, err := s.addKey(privKey.ID(), keyInfo.Role, privKey)
 	if err != nil {
 		return err
 	}
 	if added {
-		err = s.backupStore.AddKey(privKey, keyInfo)
+		err = s.backupStore.AddKey(keyInfo, privKey)
 		if err != nil {
 			defer s.RemoveKey(privKey.ID())
 			return ErrBackupFailed{err: err.Error()}

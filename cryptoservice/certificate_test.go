@@ -17,7 +17,7 @@ func TestGenerateCertificate(t *testing.T) {
 
 	keyStore := trustmanager.NewKeyMemoryStore(passphraseRetriever)
 
-	err = keyStore.AddKey(privKey, trustmanager.KeyInfo{Role: data.CanonicalRootRole, Gun: ""})
+	err = keyStore.AddKey(trustmanager.KeyInfo{Role: data.CanonicalRootRole, Gun: ""}, privKey)
 	assert.NoError(t, err, "could not add key to store")
 
 	// Check GenerateCertificate method

@@ -141,7 +141,7 @@ func (s *KeyFileStore) Name() string {
 }
 
 // AddKey stores the contents of a PEM-encoded private key as a PEM block
-func (s *KeyFileStore) AddKey(privKey data.PrivateKey, keyInfo KeyInfo) error {
+func (s *KeyFileStore) AddKey(keyInfo KeyInfo, privKey data.PrivateKey) error {
 	s.Lock()
 	defer s.Unlock()
 	if keyInfo.Role == data.CanonicalRootRole || data.IsDelegation(keyInfo.Role) || !data.ValidRole(keyInfo.Role) {
@@ -231,7 +231,7 @@ func (s *KeyMemoryStore) Name() string {
 }
 
 // AddKey stores the contents of a PEM-encoded private key as a PEM block
-func (s *KeyMemoryStore) AddKey(privKey data.PrivateKey, keyInfo KeyInfo) error {
+func (s *KeyMemoryStore) AddKey(keyInfo KeyInfo, privKey data.PrivateKey) error {
 	s.Lock()
 	defer s.Unlock()
 	if keyInfo.Role == data.CanonicalRootRole || data.IsDelegation(keyInfo.Role) || !data.ValidRole(keyInfo.Role) {

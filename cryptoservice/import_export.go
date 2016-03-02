@@ -81,7 +81,7 @@ func (cs *CryptoService) ExportKeyReencrypt(dest io.Writer, keyID string, newPas
 		return err
 	}
 
-	err = tempKeyStore.AddKey(privateKey, keyInfo)
+	err = tempKeyStore.AddKey(keyInfo, privateKey)
 	if err != nil {
 		return err
 	}
@@ -227,7 +227,7 @@ func moveKeysByGUN(oldKeyStore, newKeyStore trustmanager.KeyStore, gun string) e
 			return err
 		}
 
-		err = newKeyStore.AddKey(privKey, keyInfo)
+		err = newKeyStore.AddKey(keyInfo, privKey)
 		if err != nil {
 			return err
 		}
@@ -243,7 +243,7 @@ func moveKeys(oldKeyStore, newKeyStore trustmanager.KeyStore) error {
 			return err
 		}
 
-		err = newKeyStore.AddKey(privateKey, keyInfo)
+		err = newKeyStore.AddKey(keyInfo, privateKey)
 
 		if err != nil {
 			return err

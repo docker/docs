@@ -53,7 +53,7 @@ func testAddKeyWithRole(t *testing.T, role, expectedSubdir string) {
 	expectedFilePath := filepath.Join(tempBaseDir, notary.PrivDir, expectedSubdir, privKey.ID()+"."+testExt)
 
 	// Call the AddKey function
-	err = store.AddKey(privKey, KeyInfo{Role: role, Gun: gun})
+	err = store.AddKey(KeyInfo{Role: role, Gun: gun}, privKey)
 	assert.NoError(t, err, "failed to add key to store")
 
 	// Check to see if file exists
@@ -152,7 +152,7 @@ func TestKeyStoreInternalState(t *testing.T) {
 	// Generate a new targets key and add it with its gun, check that the map gets updated back
 	privKey, err := GenerateECDSAKey(rand.Reader)
 	assert.NoError(t, err, "could not generate private key")
-	assert.NoError(t, store.AddKey(privKey, KeyInfo{Role: data.CanonicalTargetsRole, Gun: gun}))
+	assert.NoError(t, store.AddKey(KeyInfo{Role: data.CanonicalTargetsRole, Gun: gun}, privKey))
 	assert.Equal(t, gun, store.keyInfoMap[privKey.ID()].Gun)
 	assert.Equal(t, data.CanonicalTargetsRole, store.keyInfoMap[privKey.ID()].Role)
 }
@@ -342,7 +342,7 @@ func TestListKeys(t *testing.T) {
 
 		// Call the AddKey function
 		gun := filepath.Dir(testName)
-		err = store.AddKey(privKey, KeyInfo{Role: role, Gun: gun})
+		err = store.AddKey(KeyInfo{Role: role, Gun: gun}, privKey)
 		assert.NoError(t, err, "failed to add key to store")
 
 		// Check to see if the keystore lists this key
@@ -384,7 +384,7 @@ func TestAddGetKeyMemStore(t *testing.T) {
 	assert.NoError(t, err, "could not generate private key")
 
 	// Call the AddKey function
-	err = store.AddKey(privKey, KeyInfo{Role: testAlias, Gun: ""})
+	err = store.AddKey(KeyInfo{Role: testAlias, Gun: ""}, privKey)
 	assert.NoError(t, err, "failed to add key to store")
 
 	// Check to see if file exists
@@ -406,7 +406,7 @@ func TestAddGetKeyInfoMemStore(t *testing.T) {
 	assert.NoError(t, err, "could not generate private key")
 
 	// Call the AddKey function
-	err = store.AddKey(rootKey, KeyInfo{Role: data.CanonicalRootRole, Gun: ""})
+	err = store.AddKey(KeyInfo{Role: data.CanonicalRootRole, Gun: ""}, rootKey)
 	assert.NoError(t, err, "failed to add key to store")
 
 	// Get and validate key info
@@ -419,7 +419,7 @@ func TestAddGetKeyInfoMemStore(t *testing.T) {
 	assert.NoError(t, err, "could not generate private key")
 
 	// Call the AddKey function
-	err = store.AddKey(targetsKey, KeyInfo{Role: data.CanonicalTargetsRole, Gun: gun})
+	err = store.AddKey(KeyInfo{Role: data.CanonicalTargetsRole, Gun: gun}, targetsKey)
 	assert.NoError(t, err, "failed to add key to store")
 
 	// Get and validate key info
@@ -432,7 +432,7 @@ func TestAddGetKeyInfoMemStore(t *testing.T) {
 	assert.NoError(t, err, "could not generate private key")
 
 	// Call the AddKey function
-	err = store.AddKey(delgKey, KeyInfo{Role: "targets/delegation", Gun: gun})
+	err = store.AddKey(KeyInfo{Role: "targets/delegation", Gun: gun}, delgKey)
 	assert.NoError(t, err, "failed to add key to store")
 
 	// Get and validate key info
@@ -460,7 +460,7 @@ func TestGetDecryptedWithTamperedCipherText(t *testing.T) {
 	assert.NoError(t, err, "could not generate private key")
 
 	// Call the AddEncryptedKey function
-	err = store.AddKey(privKey, KeyInfo{Role: testAlias, Gun: ""})
+	err = store.AddKey(KeyInfo{Role: testAlias, Gun: ""}, privKey)
 	assert.NoError(t, err, "failed to add key to store")
 
 	// Since we're generating this manually we need to add the extension '.'
@@ -551,7 +551,7 @@ func testGetDecryptedWithInvalidPassphrase(t *testing.T, store KeyStore, newStor
 	assert.NoError(t, err, "could not generate private key")
 
 	// Call the AddKey function
-	err = store.AddKey(privKey, KeyInfo{Role: testAlias, Gun: ""})
+	err = store.AddKey(KeyInfo{Role: testAlias, Gun: ""}, privKey)
 	assert.NoError(t, err, "failed to add key to store")
 
 	// Try to decrypt the file with an invalid passphrase
@@ -588,7 +588,7 @@ func testRemoveKeyWithRole(t *testing.T, role, expectedSubdir string) {
 	// Since we're generating this manually we need to add the extension '.'
 	expectedFilePath := filepath.Join(tempBaseDir, notary.PrivDir, expectedSubdir, privKey.ID()+"."+testExt)
 
-	err = store.AddKey(privKey, KeyInfo{Role: role, Gun: gun})
+	err = store.AddKey(KeyInfo{Role: role, Gun: gun}, privKey)
 	assert.NoError(t, err, "failed to add key to store")
 
 	// Check to see if file exists
@@ -629,7 +629,7 @@ func TestKeysAreCached(t *testing.T) {
 	assert.NoError(t, err, "could not generate private key")
 
 	// Call the AddKey function
-	err = store.AddKey(privKey, KeyInfo{Role: testAlias, Gun: gun})
+	err = store.AddKey(KeyInfo{Role: testAlias, Gun: gun}, privKey)
 	assert.NoError(t, err, "failed to add key to store")
 
 	assert.Equal(t, 1, numTimesCalled, "numTimesCalled should have been 1")
@@ -676,7 +676,7 @@ func TestKeyFileStoreExportSuccess(t *testing.T) {
 	// Create our FileStore and add the key
 	store, err := NewKeyFileStore(tempBaseDir, passphraseRetriever)
 	assert.NoError(t, err)
-	err = store.AddKey(privKey, KeyInfo{Role: data.CanonicalRootRole, Gun: ""})
+	err = store.AddKey(KeyInfo{Role: data.CanonicalRootRole, Gun: ""}, privKey)
 	assert.NoError(t, err)
 
 	assertExportKeySuccess(t, store, privKey)
@@ -706,7 +706,7 @@ func TestKeyMemoryStoreExportSuccess(t *testing.T) {
 	// Create our MemoryStore and add key to it
 	store := NewKeyMemoryStore(passphraseRetriever)
 	assert.NoError(t, err)
-	err = store.AddKey(privKey, KeyInfo{Role: data.CanonicalRootRole, Gun: ""})
+	err = store.AddKey(KeyInfo{Role: data.CanonicalRootRole, Gun: ""}, privKey)
 	assert.NoError(t, err)
 
 	assertExportKeySuccess(t, store, privKey)

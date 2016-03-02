@@ -560,11 +560,14 @@ func (k *keyCommander) keyPassphraseChange(cmd *cobra.Command, args []string) er
 	// unlocking passphrase and reusing that.
 	passChangeRetriever := k.getRetriever()
 	keyStore, err := trustmanager.NewKeyFileStore(config.GetString("trust_dir"), passChangeRetriever)
+	if err != nil {
+		return err
+	}
 	keyInfo, err := cs.GetKeyInfo(keyID)
 	if err != nil {
 		return err
 	}
-	err = keyStore.AddKey(privKey, keyInfo)
+	err = keyStore.AddKey(keyInfo, privKey)
 	if err != nil {
 		return err
 	}
