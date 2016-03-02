@@ -644,7 +644,7 @@ func (s *YubiKeyStore) AddKey(keyInfo trustmanager.KeyInfo, privKey data.Private
 	if err != nil {
 		return err
 	}
-	if added {
+	if added && s.backupStore != nil {
 		err = s.backupStore.AddKey(keyInfo, privKey)
 		if err != nil {
 			defer s.RemoveKey(privKey.ID())
