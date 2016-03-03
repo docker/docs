@@ -172,34 +172,34 @@ func (s *KeyFileStore) ListKeys() map[string]KeyInfo {
 }
 
 // RemoveKey removes the key from the keyfilestore
-func (s *KeyFileStore) RemoveKey(name string) error {
+func (s *KeyFileStore) RemoveKey(keyID string) error {
 	s.Lock()
 	defer s.Unlock()
 	// If this is a bare key ID without the gun, prepend the gun so the filestore lookup succeeds
-	if keyInfo, ok := s.keyInfoMap[name]; ok {
-		name = filepath.Join(keyInfo.Gun, name)
+	if keyInfo, ok := s.keyInfoMap[keyID]; ok {
+		keyID = filepath.Join(keyInfo.Gun, keyID)
 	}
-	err := removeKey(s, s.cachedKeys, name)
+	err := removeKey(s, s.cachedKeys, keyID)
 	if err != nil {
 		return err
 	}
 	// Remove this key from our keyInfo map if we removed from our filesystem
-	if _, ok := s.keyInfoMap[name]; ok {
-		delete(s.keyInfoMap, name)
+	if _, ok := s.keyInfoMap[keyID]; ok {
+		delete(s.keyInfoMap, keyID)
 	} else {
 		// This might be of the form GUN/ID  - try to delete without the gun
-		delete(s.keyInfoMap, filepath.Base(name))
+		delete(s.keyInfoMap, filepath.Base(keyID))
 	}
 	return nil
 }
 
 // ExportKey exports the encrypted bytes from the keystore and writes it to
 // dest.
-func (s *KeyFileStore) ExportKey(name string) ([]byte, error) {
-	if keyInfo, ok := s.keyInfoMap[name]; ok {
-		name = filepath.Join(keyInfo.Gun, name)
+func (s *KeyFileStore) ExportKey(keyID string) ([]byte, error) {
+	if keyInfo, ok := s.keyInfoMap[keyID]; ok {
+		keyID = filepath.Join(keyInfo.Gun, keyID)
 	}
-	keyBytes, _, err := getRawKey(s, name)
+	keyBytes, _, err := getRawKey(s, keyID)
 	if err != nil {
 		return nil, err
 	}
@@ -271,31 +271,31 @@ func copyKeyInfoMap(keyInfoMap map[string]KeyInfo) map[string]KeyInfo {
 }
 
 // RemoveKey removes the key from the keystore
-func (s *KeyMemoryStore) RemoveKey(name string) error {
+func (s *KeyMemoryStore) RemoveKey(keyID string) error {
 	s.Lock()
 	defer s.Unlock()
 	// If this is a bare key ID without the gun, prepend the gun so the filestore lookup succeeds
-	if keyInfo, ok := s.keyInfoMap[name]; ok {
-		name = filepath.Join(keyInfo.Gun, name)
+	if keyInfo, ok := s.keyInfoMap[keyID]; ok {
+		keyID = filepath.Join(keyInfo.Gun, keyID)
 	}
-	err := removeKey(s, s.cachedKeys, name)
+	err := removeKey(s, s.cachedKeys, keyID)
 	if err != nil {
 		return err
 	}
 	// Remove this key from our keyInfo map if we removed from our filesystem
-	if _, ok := s.keyInfoMap[name]; ok {
-		delete(s.keyInfoMap, name)
+	if _, ok := s.keyInfoMap[keyID]; ok {
+		delete(s.keyInfoMap, keyID)
 	} else {
 		// This might be of the form GUN/ID  - try to delete without the gun
-		delete(s.keyInfoMap, filepath.Base(name))
+		delete(s.keyInfoMap, filepath.Base(keyID))
 	}
 	return nil
 }
 
 // ExportKey exports the encrypted bytes from the keystore and writes it to
 // dest.
-func (s *KeyMemoryStore) ExportKey(name string) ([]byte, error) {
-	keyBytes, _, err := getRawKey(s, name)
+func (s *KeyMemoryStore) ExportKey(keyID string) ([]byte, error) {
+	keyBytes, _, err := getRawKey(s, keyID)
 	if err != nil {
 		return nil, err
 	}
