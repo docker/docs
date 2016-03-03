@@ -18,7 +18,7 @@ want to facilitate CLI interaction or specify custom options.
 
 You can configure the following aspects of Notary:
 
-* [Server Configuration File](server-config.md)
 * [Notary Client Configuration File](client-config.md)
+* [Notary Server Configuration File](server-config.md)
 * [Notary Signer Configuration File](signer-config.md)
 * [Configuration sections common to the Notary Server and Signer](common-configs.md)

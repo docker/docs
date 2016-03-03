@@ -11,10 +11,6 @@ weight=5
 
 # Configure sections common to Notary server and signer
 
-This document is for power users of the [notary client](../advanced_usage.md),
-or for those who are [running their own service](../running_a_service.md) who
-want to facilitate CLI interaction or specify custom options.
-
 The logging and bug reporting configuration options for both Notary server and
 Notary signer have the same keys and format. The following sections provide
 further detail.
@@ -99,6 +95,5 @@ required parameters below, to configure it.
 
 ## Related information
 
-* [Server Configuration File](server-config.md)
-* [Notary Client Configuration File](client-config.md)
+* [Notary Server Configuration File](server-config.md)
 * [Notary Signer Configuration File](signer-config.md)
