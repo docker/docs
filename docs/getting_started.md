@@ -26,7 +26,7 @@ insight you can provide regarding issues.
 
 ## Understand Notary naming
 
-Notary uses Globally Unique Names (GUNs) to identify trust repositories. To
+Notary uses Globally Unique Names (GUNs) to identify trust collections. To
 enable Notary to run in a multi-tenant fashion, you must use use this format
 when interacting with Docker Hub through the Notary client. When specifying
 Docker image names for the Notary client, the GUN format is:
@@ -80,7 +80,7 @@ signers, based on the choice of the administrator as to how they organize their
 collaborators.
 
 When you run a `docker pull` command, Docker Engine is using an integrated
-Notary library, the same one the Notary CLI uses. To request the mapping of tag
+Notary library (the same one as Notary CLI) to request the mapping of tag
 to sha256 digest for the one tag you are interested in (or if you passed the
 `--all` flag, the client will use the list operation to efficiently retrieve all
 the mappings). Having validated the signatures on the trust data, the client

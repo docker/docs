@@ -11,8 +11,8 @@ weight=4
 
 # Run a Notary service
 
-This document is for anyone who wants to [run their own Notary
-service](running_a_service.md) (such as those who want to use Notary with a
+This document is for anyone who wants to run their own Notary
+service (such as those who want to use Notary with a
 private Docker registry). Running a Notary service requires that you are already
 familiar with using [Docker Engine](https://docs.docker.com/engine/userguide/)
 and [Docker Compose](https://docs.docker.com/compose/overview/).
@@ -30,7 +30,7 @@ $ docker-compose up
 ```
 
 This will build the development Notary server and Notary signer images, and
-start up a containers for the Notary server, Notary signer, and the MySQL
+start up containers for the Notary server, Notary signer, and the MySQL
 database that both of them share.  The MySQL data is stored in a volume.
 
 Notary server and Notary signer communicate over mutually authenticated TLS
@@ -51,7 +51,7 @@ To connect using the Notary Client CLI, please see [Getting Started](getting_sta
 documentation.
 
 The self-signed certificate's subject name and subject alternative names are
-`notary-server`, `notaryserver`, and `localhost`, so if your Docker host not
+`notary-server`, `notaryserver`, and `localhost`, so if your Docker host is not
 on localhost (for example if you are using Docker Machine), you'll need to
 update your hosts file such that the name `notary-server` is associated with
 the IP address of your Docker host.
@@ -60,8 +60,8 @@ the IP address of your Docker host.
 
 Both the Notary server and the Notary signer take
 [JSON configuration files](reference/index.md). Pre-built images, such as
-the [development images above](#notary-service-temp) provide these configuration
-files for you with some sane defaults.
+the [development images above](#run-a-service-for-testing-or-development)
+provide these configuration files for you with some sane defaults.
 
 However, for running in production, or if you just want to change those defaults
 on your development service, you probably want to change those defaults.
@@ -199,9 +199,9 @@ When you initialize a development service using the provided docker-compose.yml
 file, these sample certificates are used to create a more production like
 environment.
 
-YOU MUST ACQUIRE YOUR OWN CERTIFICATES TO USE IN A PRODUCTION DEPLOYMENT.
+**You must acquire _your_ _own_ _certificates_ to use in a production deployment.**
 
-The private key files in the Notary repository are obviously public knowledge
+The sample private key files in the Notary repository are obviously public knowledge
 and using them in a production deployment is highly insecure.
 
 ### Databases

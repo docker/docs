@@ -10,12 +10,8 @@ parent="mn_notary_config"
 
 # Notary server configuration file
 
-This document is for power users of the [notary client](../advanced_usage.md),
-or for those who are [running their own service](../running_a_service.md) who
-want to facilitate CLI interaction or specify custom options.
-
-For full specific configuration information, see the [common configuration
-file](common-configs.md) for the Notary server and signer.
+This document is for those who are [running their own Notary service](../running_a_service.md) who
+want to specify custom options.
 
 ## Overview
 
@@ -23,51 +19,16 @@ A configuration file is required by Notary server, and the path to the
 configuration file must be specified using the `-config` option on the command
 line.
 
-The configuration file consists of the following sections:
+Here is a full server configuration file example; please click on the top level JSON keys to
+learn more about the configuration section corresponding to that key:
 
-<table>
-	<tr>
-		<td><a href="#server-section-required">server</a></td>
-		<td>HTTPS configuration</td>
-		<td>(required)</td>
-	</tr>
-	<tr>
-		<td><a href="#trust-service-section-required">trust_service</a></td>
-		<td>signing service configuration</td>
-		<td>(required)</td>
-	</tr>
-	<tr>
-		<td><a href="#storage-section-required">storage</a></td>
-		<td>TUF metadata storage configuration</td>
-		<td>(required)</td>
-	</tr>
-	<tr>
-		<td><a href="#auth-section-optional">auth</a></td>
-		<td>server authentication configuration</td>
-		<td>(optional)</td>
-	</tr>
-	<tr>
-		<td><a href="../common-configs/#logging-section-optional">logging</a></td>
-		<td>logging configuration</td>
-		<td>(optional)</td>
-	</tr>
-	<tr>
-		<td><a href="../common-configs/#reporting-section-optional">reporting</a></td>
-		<td>ops/reporting configuration</td>
-		<td>(optional)</td>
-	</tr>
-</table>
-
-An example (full) server configuration file.
-
-```json
-{
-  "server": {
+<pre><code class="language-json">{
+  <a href="#server-section-required">"server"</a>: {
     "http_addr": ":4443",
     "tls_key_file": "./fixtures/notary-server.key",
     "tls_cert_file": "./fixtures/notary-server.crt"
   },
-  "trust_service": {
+  <a href="#trust-service-section-required">"trust_service"</a>: {
     "type": "remote",
     "hostname": "notarysigner",
     "port": "7899",
@@ -76,11 +37,11 @@ An example (full) server configuration file.
     "tls_client_cert": "./fixtures/notary-server.crt",
     "tls_client_key": "./fixtures/notary-server.key"
   },
-  "storage": {
+  <a href="#storage-section-required">"storage"</a>: {
     "backend": "mysql",
     "db_url": "user:pass@tcp(notarymysql:3306)/databasename?parseTime=true"
   },
-  "auth": {
+  <a href="#auth-section-optional">"auth"</a>: {
     "type": "token",
     "options": {
       "realm": "https://auth.docker.io/token",
@@ -89,17 +50,17 @@ An example (full) server configuration file.
       "rootcertbundle": "/path/to/auth.docker.io/cert"
     }
   },
-  "logging": {
+  <a href="../common-configs/#logging-section-optional">"logging"</a>: {
     "level": "debug"
   },
-  "reporting": {
+  <a href="../common-configs/#reporting-section-optional">"reporting"</a>: {
     "bugsnag": {
       "api_key": "c9d60ae4c7e70c4b6c4ebd3e8056d2b8",
       "release_stage": "production"
     }
   }
 }
-```
+</code></pre>
 
 ## server section (required)
 
@@ -158,7 +119,7 @@ Example:
 ## trust_service section (required)
 
 This section configures either a remote trust service, such as
-[Notary signer](#notary-signer-configuration-file) or a local in-memory
+[Notary signer](signer-config.md) or a local in-memory
 ED25519 trust service.
 
 Remote trust service example:
@@ -299,8 +260,8 @@ configure it.
 
 **Token authentication:**
 
-This is an implementation of the same authentication used by
-[docker registry](https://github.com/docker/distribution).  (JWT token-based
+This is an implementation of the same authentication used by version 2 of the
+[Docker registry](https://github.com/docker/distribution).  (JWT token-based
 authentication post login.)
 
 <table>
@@ -327,6 +288,5 @@ authentication post login.)
 
 ## Related information
 
-* [Notary Client Configuration File](client-config.md)
 * [Notary Signer Configuration File](signer-config.md)
 * [Configuration sections common to the Notary Server and Signer](common-configs.md)
