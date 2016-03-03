@@ -550,28 +550,43 @@ func (k *keyCommander) keyPassphraseChange(cmd *cobra.Command, args []string) er
 		return fmt.Errorf("invalid key ID provided: %s", keyID)
 	}
 
-	cs := cryptoservice.NewCryptoService(ks...)
-	privKey, _, err := cs.GetPrivateKey(keyID)
-	if err != nil {
+	// Find which keyStore we should replace the key password in, and replace if we find it
+	var foundKeyStore trustmanager.KeyStore
+	var privKey data.PrivateKey
+	var keyInfo trustmanager.KeyInfo
+	var cs *cryptoservice.CryptoService
+	for _, keyStore := range ks {
+		cs = cryptoservice.NewCryptoService(keyStore)
+		if privKey, _, err = cs.GetPrivateKey(keyID); err == nil {
+			foundKeyStore = keyStore
+			break
+		}
+	}
+	if foundKeyStore == nil {
 		return fmt.Errorf("could not retrieve local key for key ID provided: %s", keyID)
 	}
-
 	// Must use a different passphrase retriever to avoid caching the
 	// unlocking passphrase and reusing that.
 	passChangeRetriever := k.getRetriever()
-	keyStore, err := trustmanager.NewKeyFileStore(config.GetString("trust_dir"), passChangeRetriever)
+	var addingKeyStore trustmanager.KeyStore
+	switch foundKeyStore.Name() {
+	case "yubikey":
+		addingKeyStore, err = getYubiKeyStore(nil, passChangeRetriever)
+		keyInfo = trustmanager.KeyInfo{Role: data.CanonicalRootRole}
+	default:
+		addingKeyStore, err = trustmanager.NewKeyFileStore(config.GetString("trust_dir"), passChangeRetriever)
+		if err != nil {
+			return err
+		}
+		keyInfo, err = foundKeyStore.GetKeyInfo(keyID)
+	}
 	if err != nil {
 		return err
 	}
-	keyInfo, err := cs.GetKeyInfo(keyID)
+	err = addingKeyStore.AddKey(keyInfo, privKey)
 	if err != nil {
 		return err
 	}
-	err = keyStore.AddKey(keyInfo, privKey)
-	if err != nil {
-		return err
-	}
-
 	cmd.Println("")
 	cmd.Printf("Successfully updated passphrase for key ID: %s", keyID)
 	cmd.Println("")
