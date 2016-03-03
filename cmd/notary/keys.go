@@ -527,7 +527,7 @@ func (k *keyCommander) keyRemove(cmd *cobra.Command, args []string) error {
 	return err
 }
 
-// keyPassphraseChange changes the passphrase for a root key's private key based on ID
+// keyPassphraseChange changes the passphrase for a private key based on ID
 func (k *keyCommander) keyPassphraseChange(cmd *cobra.Command, args []string) error {
 	if len(args) < 1 {
 		cmd.Usage()

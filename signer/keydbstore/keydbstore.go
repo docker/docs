@@ -156,15 +156,15 @@ func (s *KeyDBStore) ListKeys() map[string]trustmanager.KeyInfo {
 }
 
 // RemoveKey removes the key from the keyfilestore
-func (s *KeyDBStore) RemoveKey(name string) error {
+func (s *KeyDBStore) RemoveKey(keyID string) error {
 	s.Lock()
 	defer s.Unlock()
 
-	delete(s.cachedKeys, name)
+	delete(s.cachedKeys, keyID)
 
 	// Retrieve the GORM private key from the database
 	dbPrivateKey := GormPrivateKey{}
-	if s.db.Where(&GormPrivateKey{KeyID: name}).First(&dbPrivateKey).RecordNotFound() {
+	if s.db.Where(&GormPrivateKey{KeyID: keyID}).First(&dbPrivateKey).RecordNotFound() {
 		return trustmanager.ErrKeyNotFound{}
 	}
 
@@ -215,7 +215,7 @@ func (s *KeyDBStore) RotateKeyPassphrase(name, newPassphraseAlias string) error 
 }
 
 // ExportKey is currently unimplemented and will always return an error
-func (s *KeyDBStore) ExportKey(name string) ([]byte, error) {
+func (s *KeyDBStore) ExportKey(keyID string) ([]byte, error) {
 	return nil, errors.New("Exporting from a KeyDBStore is not supported.")
 }
 

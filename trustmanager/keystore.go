@@ -43,11 +43,11 @@ type KeyStore interface {
 	// AddKey adds a key to the KeyStore, and if the key already exists,
 	// succeeds.  Otherwise, returns an error if it cannot add.
 	AddKey(keyInfo KeyInfo, privKey data.PrivateKey) error
-	GetKey(name string) (data.PrivateKey, string, error)
+	GetKey(keyID string) (data.PrivateKey, string, error)
 	GetKeyInfo(keyID string) (KeyInfo, error)
 	ListKeys() map[string]KeyInfo
-	RemoveKey(name string) error
-	ExportKey(name string) ([]byte, error)
+	RemoveKey(keyID string) error
+	ExportKey(keyID string) ([]byte, error)
 	Name() string
 }
 
