@@ -93,31 +93,37 @@ To enable the networking feature, do the following.
 
 2. Review the `discovery-engine` help.
 
-        $ docker run --rm docker/ucp engine-discovery --help
+    ```bash
+    $ docker run --rm docker/ucp engine-discovery --help
+    ```
 
-2. Leave the UCP processes running.
+3. Leave the UCP processes running.
 
-3. Run the `discovery-engine` command.  
+4. Run the `discovery-engine` command.  
 
     The command syntax is:
 
-        docker run --rm -it --name ucp \
-          -v /var/run/docker.sock:/var/run/docker.sock \
-          docker/ucp:0.8.0 engine-discovery
-          --controller <private IP> [--controller <private IP> ]
-          --host-address [<private IP>]
+    ```bash
+    $ docker run --rm -it --name ucp \
+      -v /var/run/docker.sock:/var/run/docker.sock \
+      docker/ucp engine-discovery
+      --controller <private IP> [--controller <private IP> ]
+      --host-address [<private IP>]
+    ```
 
     If you are using high availability, you must provide the controller and all
     the replica's by passing multiple `--controller` flags. when you configure
     network. The command installs discovery on a UCP installation
     with a two controllers (a primary and a replica).
 
-        $ docker run --rm -it --name ucp \
-        -v /var/run/docker.sock:/var/run/docker.sock docker/ucp:0.8.0 engine-discovery \
-        --controller 192.168.99.106 --controller 192.168.99.116 \
-        --host-address 192.168.99.106
-        INFO[0000] New configuration established.  Signaling the daemon to load it...
-        INFO[0001] Successfully delivered signal to daemon  
+    ```bash
+    $ docker run --rm -it --name ucp \
+      -v /var/run/docker.sock:/var/run/docker.sock docker/ucp engine-discovery \
+      --controller 192.168.99.106 --controller 192.168.99.116 \
+      --host-address 192.168.99.106
+      INFO[0000] New configuration established.  Signaling the daemon to load it...
+      INFO[0001] Successfully delivered signal to daemon  
+    ```
 
     The `host-address` value is the the external address of the node you're
     operating against. This is the address other nodes when communicating with
@@ -127,9 +133,11 @@ To enable the networking feature, do the following.
     to discover the address of the current node.  If the command cannot discover
     the address, it fails and prompts you to supply it:    
 
-        FATA[0000] flag needs an argument: -host-address  
+    ```bash
+    FATA[0000] flag needs an argument: -host-address  
+    ```
 
-4. Restart the Engine `daemon`.
+5. Restart the Engine `daemon`.
 
     The Engine `daemon` is a OS service process running on each node in your
     cluster.  How you restart a service is operating-system dependent. Some
@@ -140,14 +148,18 @@ To enable the networking feature, do the following.
 
     **Ubuntu**:
 
-        $ sudo service docker restart
+    ```bash
+    $ sudo service docker restart
+    ```
 
     **Centos/RedHat**:
 
-        $ sudo systemctl daemon-reload
-        $ sudo systemctl restart docker.service
+    ```bash
+    $ sudo systemctl daemon-reload
+    $ sudo systemctl restart docker.service
+    ```
 
-5. Review the Docker logs to check the restart.
+6. Review the Docker logs to check the restart.
 
     The logging facilities for the Engine daemon is installation dependent. Some
     example review operations include the following, keep in mind your
@@ -155,21 +167,27 @@ To enable the networking feature, do the following.
 
     **Ubuntu**:
 
-        $ sudo tail -f /var/log/upstart/docker.log
+    ```bash
+    $ sudo tail -f /var/log/upstart/docker.log
+    ```
 
     **Centos/RedHat**:
 
-        $ sudo journalctl -fu docker.service
+    ```bash
+    $ sudo journalctl -fu docker.service
+    ```
 
-6. Verify that you can create and remove a custom network.
+7. Verify that you can create and remove a custom network.
 
-        $ docker network create -d overlay my-custom-network
-        $ docker network ls
-        $ docker network rm my-custom-network
+    ```bash
+    $ docker network create -d overlay my-custom-network
+    $ docker network ls
+    $ docker network rm my-custom-network
+    ```
 
-7. Repeat steps 2-6 on the replica nodes in your cluster.
+8. Repeat steps 2-6 on the replica nodes in your cluster.
 
-8. After enabling networking on the controllers and replicas, repeat steps 2-6 on
+9. After enabling networking on the controllers and replicas, repeat steps 2-6 on
 the remaining nodes in the cluster.
 
 ## Adding new nodes and replicas
@@ -194,7 +212,7 @@ and UCP.
 
 ### Create: failed to parse pool request for address
 
-```
+```bash
 $ docker network create -d overlay my-custom-network
 Error response from daemon: failed to parse pool request for address space "GlobalDefault" pool "" subpool "": cannot find address space GlobalDefault (most likely the backing datastore is not configured)
 ```
@@ -217,13 +235,13 @@ the Docker daemon. The tool stores the configuration the
 ```
 $ sudo cat /etc/docker/daemon.json
 {
-	"cluster-advertise": "10.0.11.78:12376",
-	"cluster-store": "etcd://10.0.11.78:12379,10.0.11.149:12379,10.0.26.238:12379",
-	"cluster-store-opts": {
-		"kv.cacertfile": "/var/lib/docker/discovery_certs/ca.pem",
-		"kv.certfile": "/var/lib/docker/discovery_certs/cert.pem",
-		"kv.keyfile": "/var/lib/docker/discovery_certs/key.pem"
-	}
+  "cluster-advertise": "10.0.11.78:12376",
+  "cluster-store": "etcd://10.0.11.78:12379,10.0.11.149:12379,10.0.26.238:12379",
+  "cluster-store-opts": {
+    "kv.cacertfile": "/var/lib/docker/discovery_certs/ca.pem",
+    "kv.certfile": "/var/lib/docker/discovery_certs/cert.pem",
+    "kv.keyfile": "/var/lib/docker/discovery_certs/key.pem"
+}
 ```
 
 If you have trouble with discovery, try these troubleshooting measures:
@@ -237,6 +255,6 @@ key-store `etcd://CONTROLLER_PUBLIC_IP_OR_DOMAIN:PORT` on the UCP controller.
 A ping requires that inbound ICMP requests are allowed on the controller.
 * Stop the daemon and start it manually from the command line.
 
-        sudo /usr/bin/docker daemon -D --cluster-advertise eth0:12376 --cluster-store etcd://CONTROLLER_PUBLIC_IP_OR_DOMAIN:12379 --cluster-store-opt kv.cacertfile=/var/lib/docker/discovery_certs/ca.pem --cluster-store-opt kv.certfile=/var/lib/docker/discovery_certs/cert.pem --cluster-store-opt kv.keyfile=/var/lib/docker/discovery_certs/key.pem
+        $ sudo /usr/bin/docker daemon -D --cluster-advertise eth0:12376 --cluster-store etcd://CONTROLLER_PUBLIC_IP_OR_DOMAIN:12379 --cluster-store-opt kv.cacertfile=/var/lib/docker/discovery_certs/ca.pem --cluster-store-opt kv.certfile=/var/lib/docker/discovery_certs/cert.pem --cluster-store-opt kv.keyfile=/var/lib/docker/discovery_certs/key.pem
 
 Remember, you'll need to restart the daemon each time you change the start options.
