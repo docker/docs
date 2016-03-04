@@ -15,7 +15,7 @@ This page explains how to install Docker Universal Control Plane (UCP) on a
 production environment. A Docker UCP installation, consists of:
 
 * A controller node where UCP is running,
-* Replica nodes that are ready to take the controller place if it fails,
+* Replicas of the controller node, for high-availability,
 * One or more nodes used to run your containers.
 
 The controller node can serve as a controller and also run your containers.
@@ -28,10 +28,11 @@ contains the following sections:
 - [Step 4: Create user-named volumes](#step-4-customize-user-named-volumes-optional)
 - [Step 5: Customize the CA used](#step-5-customize-the-ca-used-optional)
 - [Step 6: Install the UCP controller](#step-6-install-the-ucp-controller)
-- [Step 7: Add controller replicas to the UCP cluster](#step-7-add-controller-replicas-to-the-ucp-cluster)
-- [Step 8: Add more nodes to the UCP cluster](#step-8-add-more-nodes-to-the-ucp-cluster)
-- [Step 9: Set up certificates for the Docker CLI](#step-9-set-up-certificates-for-the-docker-cli)
-- [Disable usage reporting](#disable-usage-reporting)
+- [Step 7: License your installation](#step-7-license-your-installation)
+- [Step 8: Add controller replicas to the UCP cluster](#step-8-add-controller-replicas-to-the-ucp-cluster)
+- [Step 9: Add more nodes to the UCP cluster](#step-9-add-more-nodes-to-the-ucp-cluster)
+- [Step 10: Set up certificates for the Docker CLI](#step-10-set-up-certificates-for-the-docker-cli)
+- [Disable collection of usage metrics](#disable-collection-of-usage-metrics)
 - [Uninstall](#uninstall)
 - [Where to go next](#where-to-go-next)
 
@@ -102,7 +103,7 @@ your UCP cluster, including the controller node.
 For each node, follow the Docker CS Engine installation instructions for your
 particular operating system:
 
-* [Red Hat Linux installation
+* [Red Hat Linux and CentOs installation
 instructions](https://docs.docker.com/docker-trusted-registry/install/install-csengine/#centos-7-1-rhel-7-0-7-1-yum-based-systems)
 * [Ubuntu installation
 instructions](https://docs.docker.com/docker-trusted-registry/install/install-csengine/#install-on-ubuntu-14-04-lts)
@@ -111,15 +112,15 @@ instructions](https://docs.docker.com/docker-trusted-registry/install/install-cs
 
 UCP uses named volumes to persist user data:
 
-| Volume name                | Data                                                                                                           |
-|:---------------------------|:---------------------------------------------------------------------------------------------------------------|
-| ucp-root-ca                | The certificate and key for the UCP root CA. Do not create this volume if you are using your own certificates. |
-| ucp-swarm-root-ca          | The certificate and key for the Swarm root CA.                                                                 |
-| ucp-server-certs           | The controller certificates for the UCP controllers web server.                                                |
-| ucp-swarm-node-certs       | The Swarm certificates for the current node (repeated on every node in the cluster).                           |
-| ucp-swarm-kv-certs         | The Swarm KV client certificates for the current node (repeated on every node in the cluster).                 |
-| ucp-swarm-controller-certs | The UCP Controller Swarm client certificates for the current node.                                             |
-| ucp-kv                     | Key value store persistence.                                                                                   |
+| Volume name                 | Data                                                                                                           |
+|:----------------------------|:---------------------------------------------------------------------------------------------------------------|
+| ucp-client-root-ca          | The certificate and key for the UCP root CA. Do not create this volume if you are using your own certificates. |
+| ucp-cluster-root-ca         | The certificate and key for the Swarm root CA.                                                                 |
+| ucp-controller-server-certs | The controller certificates for the UCP controllers web server.                                                |
+| ucp-node-certs              | The Swarm certificates for the current node (repeated on every node in the cluster).                           |
+| ucp-kv-certs                | The Swarm KV client certificates for the current node (repeated on every node in the cluster).                 |
+| ucp-controller-client-certs | The UCP Controller Swarm client certificates for the current node.                                             |
+| ucp-kv                      | Key value store persistence.                                                                                   |
 
 The `ucp install` command creates these volumes for you with the default
 volume driver and flags.
@@ -194,12 +195,33 @@ On the controller node, install UCP:
     installation values it needs.
     When the installation is complete, the command asks you to log into UCP.
 
-        INFO[0053] Login to UCP at https://10.0.0.32:443
+        INFO[0053] Login to UCP at https://52.70.188.239:443
 
-3. Enter the address in your browser to navigate to the UCP login screen.
+## Step 7: License your installation
+
+Now that your UCP controller is installed, download and apply the
+license to your installation:
+
+1. Navigate to [Docker Hub](https://hub.docker.com/) to download your license.
+On the top-right menu, choose **Settings**.
+
+    ![Docker hub home page](images/docker-hub-settings.png)
+
+2. Navigate to the **Licenses** tab.
+
+    ![Docker Hub licenses page](images/docker-hub-license.png)
+
+    Download the license by clicking on it.
+
+3. **Navigate to UCP** to apply the license.
+
+    In your browser, navigate to the IP of the node where you installed the
+    UCP controller. In this example, it's `https://52.70.188.239`.
+
+    ![UCP login screen](images/login.png)
 
     Your browser may warn that the connection to UCP is not secure. The warning
-    appears because you are accessing UCP using HTTPS, but the certificates used
+    appears because you are accessing UCP with HTTPS, but the certificates used
     by UCP were issued during the installation by a built-in certificate
     authority.
 
@@ -207,19 +229,28 @@ On the controller node, install UCP:
     You can use the server fingerprint displayed during the installation,
     and compare it with the certificate displayed on your browser.
 
-4. Accept the security warning to proceed to UCP.
-
-    ![UCP Login screenshot](images/login.png)
-
-5. Login with the admin username and the password you provided during
+4. **Login** with the admin username and the password you chose during
 the installation.
 
-    After logging in, you are redirected to the UCP dashboard. It should show
-    that there's only a single node in your cluster: the controller node.
+    If you installed non-interactively, the default administrator
+    credentials are *admin/orca*.
+
+5. Apply your license file.
+
+    After logging in, you're redirected to the licensing page. Click the
+    **Upload License** button, and choose your license file.
+
+    ![UCP Login screenshot](images/skip-this.png)
+
+6. Check the **Dashboard** page.
+
+    After applying the license, you're redirected to the UCP dashboard. It
+    should show that there's only a single node in your cluster:
+    the controller node.
 
     ![UCP dashboard screenshot](images/dashboard.png)
 
-## Step 7: Add controller replicas to the UCP cluster
+## Step 8: Add controller replicas to the UCP cluster
 
 Docker UCP has support for high-availability. You set other nodes to be
 replicas of the UCP controller, that way you can load-balance user requests
@@ -279,14 +310,15 @@ For each node that you want to turn into a controller replica:
     a primary controller and two replicas. Never run a cluster with only
     the primary controller and a single replica.  
 
-4. Log into UCP with your browser and navigate to the **Nodes** page.
+4. Log into UCP.
 
-    The nodes page should now display your new replica nodes.
+    The Dashboard page should now display your new replica nodes. In the
+    bottom of the screen, you can see the health of the controller and replicas.
 
-      ![UCP nodes page](images/nodes.png)
+      ![UCP nodes page](images/replica-nodes.png)
 
 
-## Step 8: Add more nodes to the UCP cluster
+## Step 9: Add more nodes to the UCP cluster
 
 Now you can add additional nodes to your UCP cluster. These are the nodes that
 will be running your containers.
@@ -296,7 +328,7 @@ information:
 
 * The URL of the UCP controller, for example `https://52.70.188.239`.
 * The username/password of an UCP administrator account.
-* At least one SAN value which is the actual external, publically-accessible IP
+* At least one SAN value which is the actual external, publicly-accessible IP
 address or fully-qualified domain name for node.
 
 So be sure to have this information at hand. If you're installing UCP on a cloud
@@ -329,11 +361,11 @@ For each node that you want to add to your UCP cluster:
 
 4. Log into UCP with your browser and navigate to the **Nodes** page.
 
-    The nodes page should now display your new replica nodes.
+    The nodes page should now display all the nodes of your cluster.
 
-    ![UCP nodes page](images/nodes.png)
+    ![UCP nodes page](images/nodes-page.png)
 
-## Step 9: Set up certificates for the Docker CLI
+## Step 10: Set up certificates for the Docker CLI
 
 After installing UCP, you can run the `docker` command, against UCP
 cluster nodes.
@@ -506,11 +538,11 @@ can use to interact with UCP with the CLI client.
     export DOCKER_HOST=tcp://<ucp-hostname>:443
     ```
 
-## Disable usage reporting
+## Disable collection of usage metrics
 
-Docker UCP uses Mixpanel to collect analytics. This feature collects anonymous
-data on your usage of UCP and returns it to Docker. This data is entirely
-anonymous and does not identify your company or users.
+UCP collects anonymous usage metrics, to help us improve it.
+These metrics are entirely anonymous, don't identify your company, users,
+applications, or any other sensitive information.
 
 To disable usage reporting:
 
@@ -543,7 +575,16 @@ To uninstall UCP from a node:
 
 2. Run the the following command:
 
-        $ docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock --name ucp docker/ucp uninstall -i
+    ```
+    $ docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock --name ucp docker/ucp uninstall -i
+
+    INFO[0000] Removing UCP Containers
+    INFO[0001] Removing UCP images
+    INFO[0007] Removing UCP volumes
+    ```
+
+    After uninstalling UCP, you can remove the `docker/ucp` images that
+    were pulled from Docker Hub when installing UCP.
 
 3. Repeat steps 1 and 2 on each node of the cluster. Make sure to save
 the controller for last.
@@ -551,6 +592,5 @@ the controller for last.
 ## Where to go next
 
 * Read more [about Docker UCP](https://www.docker.com/universal-control-plane)
-* Visit the [UCP forum](https://forums.docker.com/c/commercial-products/ucpbeta)
 * Read more [about the Docker CLI client](http://docs.docker.com/reference/commandline/cli/)
 * Learn [about Docker Swarm](http://docs.docker.com/swarm/)

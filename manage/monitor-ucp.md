@@ -20,8 +20,7 @@ if something goes wrong.
 Docker UCP has several components:
 
 * UCP controller node: the node that handles user requests,
-* UCP replica nodes: replicas of the controller node that can take its place
-if it fails,
+* UCP replica nodes: replicas of the controller node, for high-availability,
 * UCP nodes: the nodes that run your own containers.
 
 [Learn more about the UCP architecture](../plan-production-install.md#ucp-architecture).
@@ -53,8 +52,8 @@ filter dropdown choose **Show all containers** to see all the UCP components.
 
 ![UCP container list](../images/container-list.png)
 
-You can see more information about these containers. On the right-hand side of
-a container, **click the options knob** to see the container details.
+You can see more information about these containers. **Click on the container**
+to see its details.
 
 ![UCP container details](../images/container-detail-2.png)
 
