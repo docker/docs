@@ -235,7 +235,7 @@ func generateSnapshot(gun string, repo *tuf.Repo, store storage.MetaStore) (*sto
 			return nil, validation.ErrValidation{Msg: err.Error()}
 		}
 	} else {
-		// this will only occurr if no snapshot has ever been created for the repository
+		// this will only occur if no snapshot has ever been created for the repository
 		err := repo.InitSnapshot()
 		if err != nil {
 			return nil, validation.ErrBadSnapshot{Msg: err.Error()}
