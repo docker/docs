@@ -13,8 +13,7 @@ endif
 CTIMEVAR=-X $(NOTARY_PKG)/version.GitCommit=$(GITCOMMIT) -X $(NOTARY_PKG)/version.NotaryVersion=$(NOTARY_VERSION)
 GO_LDFLAGS=-ldflags "-w $(CTIMEVAR)"
 GO_LDFLAGS_STATIC=-ldflags "-w $(CTIMEVAR) -extldflags -static"
-GOOSES = darwin freebsd linux
-GOARCHS = amd64
+GOOSES = darwin linux
 NOTARY_BUILDTAGS ?= pkcs11
 GO_EXC = go
 NOTARYDIR := /go/src/github.com/docker/notary
@@ -174,15 +173,6 @@ binaries: ${PREFIX}/bin/notary-server ${PREFIX}/bin/notary ${PREFIX}/bin/notary-
 static: ${PREFIX}/bin/static/notary-server ${PREFIX}/bin/static/notary-signer
 	@echo "+ $@"
 
-define template
-mkdir -p ${PREFIX}/cross/$(1)/$(2);
-GOOS=$(1) GOARCH=$(2) CGO_ENABLED=0 go build -o ${PREFIX}/cross/$(1)/$(2)/notary -a -tags "static_build netgo" -installsuffix netgo ${GO_LDFLAGS_STATIC} ./cmd/notary;
-endef
-
-cross:
-	$(foreach GOARCH,$(GOARCHS),$(foreach GOOS,$(GOOSES),$(call template,$(GOOS),$(GOARCH))))
-
-
 notary-dockerfile:
 	@docker build --rm --force-rm -t notary .
 
@@ -196,6 +186,10 @@ docker-images: notary-dockerfile server-dockerfile signer-dockerfile
 
 shell: notary-dockerfile
 	docker run --rm -it -v $(CURDIR)/cross:$(NOTARYDIR)/cross -v $(CURDIR)/bin:$(NOTARYDIR)/bin notary bash
+
+cross: notary-dockerfile
+	@rm -rf $(CURDIR)/cross
+	docker run --rm -v $(CURDIR)/cross:$(NOTARYDIR)/cross -e NOTARY_BUILDTAGS=$(NOTARY_BUILDTAGS) notary .build/cross.sh $(GOOSES)
 
 
 clean:
