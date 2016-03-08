@@ -127,11 +127,11 @@ Registry CA into your UCP.
 
     b. Run the following command:
 
-      openssl s_client -host <dtr-fully-qualified-domain-name> -port 443 </dev/null 2>/dev/null | openssl x509 -CAform PEM | tee /tmp/dtr.pem
+        openssl s_client -host <dtr-fully-qualified-domain-name> -port 443 </dev/null 2>/dev/null | openssl x509 -CAform PEM | tee /tmp/dtr.pem
 
       For example:
 
-      $ openssl s_client -host ec2-54-187-154-87.us-west-2.compute.amazonaws.com -port 443 </dev/null 2>/dev/null | openssl x509 -CAform PEM | tee /tmp/dtr.pem
+        $ openssl s_client -host ec2-54-187-154-87.us-west-2.compute.amazonaws.com -port 443 </dev/null 2>/dev/null | openssl x509 -CAform PEM | tee /tmp/dtr.pem
 
     c. Upload the `dtr.pem` file you just created.
 
