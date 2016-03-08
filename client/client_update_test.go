@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"os"
+	"path"
 	"reflect"
 	"strings"
 	"testing"
@@ -982,7 +983,7 @@ func TestUpdateNonRootRemoteCorruptedNoLocalCache(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping test in short mode")
 	}
-	for _, role := range append(data.BaseRoles, "targets/a", "targets/a/b") {
+	for _, role := range append(data.BaseRoles, delegationsWithNonEmptyMetadata...) {
 		if role == data.CanonicalRootRole {
 			continue
 		}
@@ -1027,7 +1028,7 @@ func TestUpdateNonRootRemoteCorruptedCanUseLocalCache(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping test in short mode")
 	}
-	for _, role := range append(data.BaseRoles, "targets/a", "targets/a/b") {
+	for _, role := range append(data.BaseRoles, delegationsWithNonEmptyMetadata...) {
 		if role == data.CanonicalRootRole {
 			continue
 		}
@@ -1067,15 +1068,16 @@ func TestUpdateNonRootRemoteCorruptedCanUseLocalCache(t *testing.T) {
 	}
 }
 
-// Having a local cache, if the server has new same data should fail in all cases
-// (except if we modify the timestamp) because the metadata is re-downloaded.
+// Having a local cache, if the server has all new data (some being corrupt),
+// and update should fail in all cases (except if we modify the timestamp)
+// because the metadata is re-downloaded.
 // In the case of the timestamp, we'd default to our cached timestamp, and
 // not have to redownload anything (usually)
 func TestUpdateNonRootRemoteCorruptedCannotUseLocalCache(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping test in short mode")
 	}
-	for _, role := range append(data.BaseRoles, "targets/a", "targets/a/b") {
+	for _, role := range append(data.BaseRoles, delegationsWithNonEmptyMetadata...) {
 		if role == data.CanonicalRootRole {
 			continue
 		}
@@ -1264,4 +1266,58 @@ func testUpdateLocalAndRemoteRootCorrupt(t *testing.T, forWrite bool, localExpt,
 	}
 	require.True(t, isExpectedType, "expected one of %v when %s: got %s",
 		expectedTypes, msg, errType)
+}
+
+// Update when we have a local cache.  This differs from
+// TestUpdateNonRootRemoteCorruptedCannotUseLocalCache in that
+// in this case, the ONLY change upstream is that a key is rotated.
+// Therefore the only metadata that needs to change is the root
+// (or the targets file), the snapshot, and the timestamp.  All other data has
+// the same checksum as the data already cached (whereas in
+// TestUpdateNonRootRemoteCorruptedCannotUseLocalCache all the metadata has their
+// versions bumped and are re-signed).  The update should still fail, because
+// the local cache no longer matches.
+func TestUpdateRemoteKeyRotated(t *testing.T) {
+	for _, role := range append(data.BaseRoles, delegationsWithNonEmptyMetadata...) {
+		testUpdateRemoteKeyRotated(t, role)
+	}
+}
+
+func testUpdateRemoteKeyRotated(t *testing.T, targetsRole string) {
+	_, serverSwizzler := newServerSwizzler(t)
+	ts := readOnlyServer(t, serverSwizzler.MetadataCache, http.StatusNotFound, "docker.com/notary")
+	defer ts.Close()
+
+	repo := newBlankRepo(t, ts.URL)
+	defer os.RemoveAll(repo.baseDir)
+
+	// get local cache
+	_, err := repo.Update(false)
+	require.NoError(t, err)
+
+	cs := signed.NewEd25519()
+	pubKey, err := cs.Create(targetsRole, data.ED25519Key)
+	require.NoError(t, err)
+
+	// bump the version
+	bumpRole := path.Dir(targetsRole)
+	if !data.IsDelegation(targetsRole) {
+		bumpRole = data.CanonicalRootRole
+	}
+	require.NoError(t, serverSwizzler.OffsetMetadataVersion(bumpRole, 1),
+		"failed to swizzle remote %s to bump version", bumpRole)
+	// now change the key
+	require.NoError(t, serverSwizzler.RotateKey(targetsRole, pubKey),
+		"failed to swizzle remote %s to rotate key", targetsRole)
+
+	// update the hashes on both snapshot and timestamp
+	require.NoError(t, serverSwizzler.UpdateSnapshotHashes())
+	require.NoError(t, serverSwizzler.UpdateTimestampHash())
+
+	msg := fmt.Sprintf("swizzling %s remotely to rotate key (forWrite: false)", targetsRole)
+
+	_, err = repo.Update(false)
+	require.Error(t, err, "expected failure updating when %s", msg)
+	require.IsType(t, signed.ErrRoleThreshold{}, err, "expected ErrRoleThreshold when %s: got %s",
+		msg, reflect.TypeOf(err))
 }

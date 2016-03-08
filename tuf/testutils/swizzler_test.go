@@ -670,3 +670,67 @@ func TestSwizzlerMutateTargets(t *testing.T) {
 		}
 	}
 }
+
+// This rotates the key of some base role
+func TestSwizzlerRotateKeyBaseRole(t *testing.T) {
+	f, origMeta := createNewSwizzler(t)
+
+	theRole := data.CanonicalSnapshotRole
+	cs := signed.NewEd25519()
+	pubKey, err := cs.Create(theRole, data.ED25519Key)
+	assert.NoError(t, err)
+
+	assert.NoError(t, f.RotateKey(theRole, pubKey))
+
+	for role, metaBytes := range origMeta {
+		newMeta, err := f.MetadataCache.GetMeta(role, -1)
+		require.NoError(t, err)
+
+		if role != data.CanonicalRootRole {
+			require.True(t, bytes.Equal(metaBytes, newMeta), "bytes have changed for role %s", role)
+		} else {
+			require.False(t, bytes.Equal(metaBytes, newMeta))
+			origSigned, newSigned := &data.SignedRoot{}, &data.SignedRoot{}
+			require.NoError(t, json.Unmarshal(metaBytes, origSigned))
+			require.NoError(t, json.Unmarshal(newMeta, newSigned))
+			require.NotEqual(t, []string{pubKey.ID()}, origSigned.Signed.Roles[theRole].KeyIDs)
+			require.Equal(t, []string{pubKey.ID()}, newSigned.Signed.Roles[theRole].KeyIDs)
+			_, ok := origSigned.Signed.Keys[pubKey.ID()]
+			require.False(t, ok)
+			_, ok = newSigned.Signed.Keys[pubKey.ID()]
+			require.True(t, ok)
+		}
+	}
+}
+
+// This rotates the key of some delegation role
+func TestSwizzlerRotateKeyDelegationRole(t *testing.T) {
+	f, origMeta := createNewSwizzler(t)
+
+	theRole := "targets/a/b"
+	cs := signed.NewEd25519()
+	pubKey, err := cs.Create(theRole, data.ED25519Key)
+	assert.NoError(t, err)
+
+	assert.NoError(t, f.RotateKey(theRole, pubKey))
+
+	for role, metaBytes := range origMeta {
+		newMeta, err := f.MetadataCache.GetMeta(role, -1)
+		require.NoError(t, err)
+
+		if role != "targets/a" {
+			require.True(t, bytes.Equal(metaBytes, newMeta), "bytes have changed for role %s", role)
+		} else {
+			require.False(t, bytes.Equal(metaBytes, newMeta))
+			origSigned, newSigned := &data.SignedTargets{}, &data.SignedTargets{}
+			require.NoError(t, json.Unmarshal(metaBytes, origSigned))
+			require.NoError(t, json.Unmarshal(newMeta, newSigned))
+			require.NotEqual(t, []string{pubKey.ID()}, origSigned.Signed.Delegations.Roles[0].KeyIDs)
+			require.Equal(t, []string{pubKey.ID()}, newSigned.Signed.Delegations.Roles[0].KeyIDs)
+			_, ok := origSigned.Signed.Delegations.Keys[pubKey.ID()]
+			require.False(t, ok)
+			_, ok = newSigned.Signed.Delegations.Keys[pubKey.ID()]
+			require.True(t, ok)
+		}
+	}
+}

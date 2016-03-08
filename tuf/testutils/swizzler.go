@@ -405,6 +405,65 @@ func (m *MetadataSwizzler) SetThreshold(role string, newThreshold int) error {
 	return m.MetadataCache.SetMeta(roleSpecifier, metaBytes)
 }
 
+// RotateKey rotates the key for a role - this can invalidate that role's metadata
+// if it is not signed by that key.  Particularly if the key being rotated is the
+// root key, because it is not signed by the new key, only the old key.
+func (m *MetadataSwizzler) RotateKey(role string, key data.PublicKey) error {
+	roleSpecifier := data.CanonicalRootRole
+	if data.IsDelegation(role) {
+		roleSpecifier = path.Dir(role)
+	}
+
+	b, err := m.MetadataCache.GetMeta(roleSpecifier, -1)
+	if err != nil {
+		return err
+	}
+
+	signedThing := &data.Signed{}
+	if err := json.Unmarshal(b, signedThing); err != nil {
+		return err
+	}
+
+	// get keys before the keys are rotated
+	pubKeys, err := getPubKeys(m.CryptoService, signedThing, roleSpecifier)
+	if err != nil {
+		return err
+	}
+
+	if roleSpecifier == data.CanonicalRootRole {
+		signedRoot, err := data.RootFromSigned(signedThing)
+		if err != nil {
+			return err
+		}
+		signedRoot.Signed.Roles[role].KeyIDs = []string{key.ID()}
+		signedRoot.Signed.Keys[key.ID()] = key
+		if signedThing, err = signedRoot.ToSigned(); err != nil {
+			return err
+		}
+	} else {
+		signedTargets, err := data.TargetsFromSigned(signedThing, roleSpecifier)
+		if err != nil {
+			return err
+		}
+		for _, roleObject := range signedTargets.Signed.Delegations.Roles {
+			if roleObject.Name == role {
+				roleObject.KeyIDs = []string{key.ID()}
+				break
+			}
+		}
+		signedTargets.Signed.Delegations.Keys[key.ID()] = key
+		if signedThing, err = signedTargets.ToSigned(); err != nil {
+			return err
+		}
+	}
+
+	metaBytes, err := serializeMetadata(m.CryptoService, signedThing, roleSpecifier, pubKeys...)
+	if err != nil {
+		return err
+	}
+	return m.MetadataCache.SetMeta(roleSpecifier, metaBytes)
+}
+
 // ChangeRootKey swaps out the root key with a new key, and re-signs the metadata
 // with the new key
 func (m *MetadataSwizzler) ChangeRootKey() error {
