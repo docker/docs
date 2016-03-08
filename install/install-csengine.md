@@ -18,12 +18,15 @@ cloud infrastructures.
 
 You first install the CS Engine before you install Docker Trusted Registry.
 However, if you are upgrading, you reverse that order and upgrade the Trusted
-Registry first. To upgrade, see the [upgrade documentation](upgrade.md). You will need to install the latest version of the CS Engine to run with the latest
-version of the Trusted Registry. You will also want to install the CS Engine on
+Registry first. To upgrade, see the [upgrade documentation](upgrade.md).
+You will need to install the latest version of the CS Engine to run with the
+latest version of the Trusted Registry. You will also want to install the
+CS Engine on
 any clients, especially in your production environment.
 
 If your cloud provider is AWS, you have the option of installing the CS Engine
-using an Amazon Machine Image (AMI). For more information, read the [installation overview](index.md) to understand your options.
+using an Amazon Machine Image (AMI). For more information, read
+the [installation overview](index.md) to understand your options.
 
 The CS Engine is supported on the following operating systems:
 
@@ -44,30 +47,34 @@ to update its RHEL kernel.
 
 2. Add Docker's public key for CS packages:
 
-    ```
+    ```bash
     $ sudo rpm --import "https://sks-keyservers.net/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e"
     ```
 
 3. Install yum-utils if necessary:
 
-    `$ sudo yum install -y yum-utils`
+    ```bash
+    $ sudo yum install -y yum-utils
+    ```
 
 4. Add the repository. Notice in the following code that it gets the latest
 version of the CS Engine. Each time you either install or upgrade, ensure that
 you are requesting the version and the OS that you want.
 
 
-    ```
+    ```bash
     $ sudo yum-config-manager --add-repo https://packages.docker.com/1.10/yum/repo/main/centos/7
     ```
 
 5. Install the CS Engine with the following command:
 
-    `$ sudo yum install docker-engine`
+    ```bash
+    $ sudo yum install docker-engine
+    ```
 
 6. Enable the Docker daemon as a service and then start it.
 
-    ```
+    ```bash
     $ sudo systemctl enable docker.service
     $ sudo systemctl start docker.service
     ```
@@ -97,9 +104,13 @@ you are requesting the version and the OS that you want.
         To try something more ambitious, you can run an Ubuntu container with:
          $ docker run -it ubuntu bash
 
-8. (Optional) Add non-sudo access to the Docker socket by adding your user to the `docker` group.
 
-    `$ sudo usermod -a -G docker $USER`
+8. (Optional) Add non-sudo access to the Docker socket by adding your user
+to the `docker` group.
+
+    ```bash
+    $ sudo usermod -a -G docker $USER
+    ```
 
 9. Log out and log back in to have your new permissions take effect.
 
@@ -110,44 +121,61 @@ you are requesting the version and the OS that you want.
 
 2. Add Docker's public key for CS packages:
 
-    `$ curl -s 'https://sks-keyservers.net/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e' | sudo apt-key add --import`
+    ```bash
+    $ curl -s 'https://sks-keyservers.net/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e' | sudo apt-key add --import
+    ```
 
 3. Install the HTTPS helper for apt (your system may already have it):
 
-    `$ sudo apt-get update && sudo apt-get install apt-transport-https`
+    ```bash
+    $ sudo apt-get update && sudo apt-get install apt-transport-https
+    ```
 
 4. Install additional virtual drivers not in the base image.
 
-        $ sudo apt-get install -y linux-image-extra-virtual
+    ```bash
+    $ sudo apt-get install -y linux-image-extra-virtual
+    ```
 
-      You may need to reboot your server after updating the LTS kernel.
+    You may need to reboot your server after updating the LTS kernel.
 
 5. Add the repository for the new version:
 
-    `$ echo "deb https://packages.docker.com/1.10/apt/repo ubuntu-trusty main" | sudo tee /etc/apt/sources.list.d/docker.list`
+    ```bash
+    $ echo "deb https://packages.docker.com/1.10/apt/repo ubuntu-trusty main" | sudo tee /etc/apt/sources.list.d/docker.list
+    ```
 
-      You must modify the "ubuntu-trusty" string for your flavor of ubuntu or debian as seen in the following options.
+    You must modify the "ubuntu-trusty" string for your flavor of ubuntu or
+    debian as seen in the following options:
 
-      * debian-jessie (Debian 8)
-      * debian-stretch (future release)
-      * debian-wheezy (Debian 7)
-      * ubuntu-precise (Ubuntu 12.04)
-      * ubuntu-trusty (Ubuntu 14.04)
-      * ubuntu-utopic (Ubuntu 14.10)
-      * ubuntu-vivid (Ubuntu 15.04)
-      * ubuntu-wily (Ubuntu 15.10)
+    * debian-jessie (Debian 8)
+    * debian-stretch (future release)
+    * debian-wheezy (Debian 7)
+    * ubuntu-precise (Ubuntu 12.04)
+    * ubuntu-trusty (Ubuntu 14.04)
+    * ubuntu-utopic (Ubuntu 14.10)
+    * ubuntu-vivid (Ubuntu 15.04)
+    * ubuntu-wily (Ubuntu 15.10)
 
-6. Run the following to install commercially supported Docker Engine and its dependencies:
+6. Run the following to install commercially supported Docker Engine and its
+dependencies:
 
-    `$ sudo apt-get update && sudo apt-get install docker-engine`
+    ```bash
+    $ sudo apt-get update && sudo apt-get install docker-engine
+    ```
 
 7. Confirm the Docker daemon is running:
 
-    `$ sudo docker info`
+    ```bash
+    $ sudo docker info
+    ```
 
-8. Optionally, add non-sudo access to the Docker socket by adding your user to the `docker` group.
+8. Optionally, add non-sudo access to the Docker socket by adding your
+user to the `docker` group.
 
-    `$ sudo usermod -a -G docker $USER`
+    ```bash
+    $ sudo usermod -a -G docker $USER
+    ```
 
     Log out and log back in to have your new permissions take effect.
 
@@ -156,37 +184,48 @@ you are requesting the version and the OS that you want.
 
 1. Log into the system as a user with root or sudo permissions.
 
-2. Refresh your repository so that curl commands and CA certificates are available: `$ sudo zypper ref`.
+2. Refresh your repository so that curl commands and CA certificates
+are available.
 
-3. Add the repository and the signing key. Notice in the following code that it gets the latest version of the CS Engine. Each time you either install or upgrade, ensure that the you are requesting the version and the OS that you want.
+    ```bash
+    $ sudo zypper ref
+    ```
 
-      ```
-      $ sudo zypper ar -t YUM https://packages.docker.com/1.10/yum/repo/main/opensuse/12.3 docker-1.10
+3. Add the repository and the signing key. Notice in the following code
+that it gets the latest version of the CS Engine. Each time you either
+install or upgrade, ensure that the you are requesting the version and the
+OS that you want.
 
-      $ sudo rpm --import 'https://sks-keyservers.net/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e'
-      ```
+    ```bash
+    $ sudo zypper ar -t YUM https://packages.docker.com/1.10/yum/repo/main/opensuse/12.3 docker-1.10
+    $ sudo rpm --import 'https://sks-keyservers.net/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e'
+    ```
 
 4. Install the Docker daemon package:
 
-      ```
-      $ sudo zypper install docker-engine
-      ```
+    ```bash
+    $ sudo zypper install docker-engine
+    ```
 
 5. Enable the Docker daemon as a service and then start it:
 
-      ```
-      $ sudo systemctl enable docker.service
-      $ sudo systemctl start docker.service
-      ```
+    ```bash
+    $ sudo systemctl enable docker.service
+    $ sudo systemctl start docker.service
+    ```
 
 6. Confirm the Docker daemon is running:
 
-    `$ sudo docker info`
+    ```bash
+    $ sudo docker info
+    ```
 
+7. Optionally, add non-sudo access to the Docker socket by adding your user
+to the `docker` group.
 
-7. Optionally, add non-sudo access to the Docker socket by adding your user to the `docker` group.
-
-    `$ sudo usermod -a -G docker $USER`
+    ```bash
+    $ sudo usermod -a -G docker $USER
+    ```
 
 8. Log out and log back in to have your new permissions take effect.
 
