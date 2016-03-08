@@ -12,7 +12,42 @@ weight="99"
 
 # UCP Release Notes
 
-## Version 1.0
+
+## Version 1.0.1
+
+**Features**
+
+* Core
+  * Upgraded Swarm to 1.1.3
+  * Improved support for `docker cp`
+  * System CA pool fallback for secure DTR connections
+
+* UI
+  * Added checkbox to select all containers in Containers screen
+  * Removed click handlers from UI elements containing checkboxes
+  * Usernames and team names now need to be url-compatible
+  * Several usability improvements to Team screen
+  * Messages now display team name, instead of Id
+  * Added support for Growl style notifications
+  * Improved usability of Applications page, when there are no applications
+  deployed
+  * Several improvements to form validations
+  * Improved error messages displayed when users try to pull an image with
+  no name
+  * Don't allow creating teams with the same name
+  * Non-admin users can no longer see cluster overview in Dashboard screen
+  * Page size control is no longer displayed when the list has few elements
+  * Renamed 'Roles' to 'Permissions'
+
+**Bug fixes**
+
+* Users that are on a team and have permission set to 'None', can no longer see
+containers
+* Volume driver options are now being correctly sent to Docker Engine
+* Fix bug with visibility to User containers with the owner the same as a label
+
+
+## Version 1.0.0
 
 **Features**
 
@@ -74,67 +109,3 @@ use `ucp uninstall` command from version 1.0:
 
 After uninstalling, you can [Install UCP for evaluation](evaluation-install.md),
 or [Install UCP for production](production-install.md).
-
-## Version 0.9
-
-**Features**
-
-* Allow editing user accounts
-* Renamed 'role' to 'permission level'
-* Improved the UI of the Container and Settings screens
-* Added tooltips for contextual help
-* The dashboard now shows the scheduling strategy being used
-
-**Bug fixes**
-
-* Fixed http 404 error when accessing UCP
-
-**Other notes**
-
-It's not possible to upgrade from a previous version to v0.9. If you've
-already installed UCP, use the `--fresh-install` option with the `ucp install`
-command, to do remove the old installation, and install v0.9.
-
-## Version 0.8
-
-**Features**
-
-* LDAP/AD integration
-
-    You can now choose between the built-in, LDAP, or Active Directory service
-    for authentication. To change the authentication service, login into UCP
-    with an administrator account, navigate to the Settings page, and click
-    the Auth tab.
-
-* DTR integration
-
-    You can now configure UCP to connect to a Docker Trusted Registry version
-    1.4.3 or higher.
-
-* Teams and ACLs
-
-    You can now apply labels to resources, and manage permissions based on
-    labels. You can also create teams to apply the same permissions to
-    multiple users.
-
-* Multi-host networking
-
-    The `ucp` install tool now lets you set up multi-host networking.
-    For more information run `docker run --rm docker/ucp engine-discovery --help`.
-
-* UI
-
-    Overall changes to the UI to make UCP easier to use. The UI for managing
-    teams and LDAP integration was improved.
-
-
-**Other notes**
-
-This version of UCP requires Docker Engine 1.10.0-rc1 or higher. It was also
-changed to use Swarm 1.1.0-RC2, and Etcd 2.2.4 internally.
-
-**Known issues**
-
-If you've upgraded from a previous version, you might have
-access control problems, when using non-admin users.
-As a work around, recreate those users and delete the old ones.
