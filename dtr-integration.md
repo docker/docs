@@ -132,7 +132,7 @@ Registry CA into your UCP.
 
     b. Upload the `dtr.pem` file you just created.
 
-      ![](images/dtr-integrate.png)
+      ![](images/dtr-integrate-2.png)
 
 6. Press **Update Registry** to save your changes.
 
