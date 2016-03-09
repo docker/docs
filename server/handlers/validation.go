@@ -216,7 +216,7 @@ func generateSnapshot(gun string, repo *tuf.Repo, store storage.MetaStore) (*sto
 	}
 
 	if _, ok := err.(storage.ErrNotFound); !ok && err != nil {
-		return nil, validation.ErrValidation{Msg: err.Error()}
+		return nil, err
 	}
 
 	metaUpdate, err := snapshot.NewSnapshotUpdate(prev, repo)
@@ -249,7 +249,7 @@ func generateTimestamp(gun string, repo *tuf.Repo, store storage.MetaStore) (*st
 	}
 
 	if _, ok := err.(storage.ErrNotFound); !ok && err != nil {
-		return nil, validation.ErrValidation{Msg: err.Error()}
+		return nil, err
 	}
 
 	metaUpdate, err := timestamp.NewTimestampUpdate(prev, repo)

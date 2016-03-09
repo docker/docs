@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"bytes"
 	"encoding/json"
 	"path"
 	"reflect"
@@ -17,6 +18,32 @@ import (
 	"github.com/docker/notary/tuf/validation"
 	"github.com/stretchr/testify/assert"
 )
+
+// this is a fake storage that serves errors
+type getFailStore struct {
+	errsToReturn map[string]error
+	storage.MetaStore
+}
+
+// GetCurrent returns the current metadata, or an error depending on whether
+// getFailStore is configured to return an error for this role
+func (f getFailStore) GetCurrent(gun, tufRole string) ([]byte, error) {
+	err := f.errsToReturn[tufRole]
+	if err == nil {
+		return f.MetaStore.GetCurrent(gun, tufRole)
+	}
+	return nil, err
+}
+
+// GetChecksum returns the metadata with this checksum, or an error depending on
+// whether getFailStore is configured to return an error for this role
+func (f getFailStore) GetChecksum(gun, tufRole, checksum string) ([]byte, error) {
+	err := f.errsToReturn[tufRole]
+	if err == nil {
+		return f.MetaStore.GetChecksum(gun, tufRole, checksum)
+	}
+	return nil, err
+}
 
 func copyKeys(t *testing.T, from signed.CryptoService, roles ...string) signed.CryptoService {
 	memKeyStore := trustmanager.NewKeyMemoryStore(passphrase.ConstantRetriever("pass"))
@@ -75,8 +102,106 @@ func TestValidateEmptyNew(t *testing.T) {
 	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
 
 	serverCrypto := copyKeys(t, cs, data.CanonicalTimestampRole)
-	_, err = validateUpdate(serverCrypto, "testGUN", updates, store)
+	updates, err = validateUpdate(serverCrypto, "testGUN", updates, store)
 	assert.NoError(t, err)
+
+	// we generated our own timestamp, and did not take the other timestamp,
+	// but all other metadata should come from updates
+	founds := make(map[string]bool)
+	for _, update := range updates {
+		switch update.Role {
+		case data.CanonicalRootRole:
+			assert.True(t, bytes.Equal(update.Data, root.Data))
+			founds[data.CanonicalRootRole] = true
+		case data.CanonicalSnapshotRole:
+			assert.True(t, bytes.Equal(update.Data, snapshot.Data))
+			founds[data.CanonicalSnapshotRole] = true
+		case data.CanonicalTargetsRole:
+			assert.True(t, bytes.Equal(update.Data, targets.Data))
+			founds[data.CanonicalTargetsRole] = true
+		case data.CanonicalTimestampRole:
+			assert.False(t, bytes.Equal(update.Data, timestamp.Data))
+			founds[data.CanonicalTimestampRole] = true
+		}
+	}
+	assert.Len(t, founds, 4)
+}
+
+func TestValidatePrevTimestamp(t *testing.T) {
+	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
+	assert.NoError(t, err)
+
+	r, tg, sn, ts, err := testutils.Sign(repo)
+	assert.NoError(t, err)
+	root, targets, snapshot, timestamp, err := getUpdates(r, tg, sn, ts)
+	assert.NoError(t, err)
+
+	updates := []storage.MetaUpdate{root, targets, snapshot}
+
+	store := storage.NewMemStorage()
+	store.UpdateCurrent("testGUN", timestamp)
+
+	serverCrypto := copyKeys(t, cs, data.CanonicalTimestampRole)
+	updates, err = validateUpdate(serverCrypto, "testGUN", updates, store)
+	assert.NoError(t, err)
+
+	// we generated our own timestamp, and did not take the other timestamp,
+	// but all other metadata should come from updates
+	var foundTimestamp bool
+	for _, update := range updates {
+		if update.Role == data.CanonicalTimestampRole {
+			foundTimestamp = true
+			oldTimestamp, newTimestamp := &data.SignedTimestamp{}, &data.SignedTimestamp{}
+			assert.NoError(t, json.Unmarshal(timestamp.Data, oldTimestamp))
+			assert.NoError(t, json.Unmarshal(update.Data, newTimestamp))
+			assert.Equal(t, oldTimestamp.Signed.Version+1, newTimestamp.Signed.Version)
+		}
+	}
+	assert.True(t, foundTimestamp)
+}
+
+func TestValidatePreviousTimestampCorrupt(t *testing.T) {
+	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
+	assert.NoError(t, err)
+
+	r, tg, sn, ts, err := testutils.Sign(repo)
+	assert.NoError(t, err)
+	root, targets, snapshot, timestamp, err := getUpdates(r, tg, sn, ts)
+	assert.NoError(t, err)
+
+	updates := []storage.MetaUpdate{root, targets, snapshot}
+
+	// have corrupt timestamp data in the storage already
+	store := storage.NewMemStorage()
+	timestamp.Data = timestamp.Data[1:]
+	store.UpdateCurrent("testGUN", timestamp)
+
+	serverCrypto := copyKeys(t, cs, data.CanonicalTimestampRole)
+	_, err = validateUpdate(serverCrypto, "testGUN", updates, store)
+	assert.Error(t, err)
+	assert.IsType(t, &json.SyntaxError{}, err)
+}
+
+func TestValidateGetCurrentTimestampBroken(t *testing.T) {
+	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
+	assert.NoError(t, err)
+
+	r, tg, sn, ts, err := testutils.Sign(repo)
+	assert.NoError(t, err)
+	root, targets, snapshot, _, err := getUpdates(r, tg, sn, ts)
+	assert.NoError(t, err)
+
+	updates := []storage.MetaUpdate{root, targets, snapshot}
+
+	store := getFailStore{
+		MetaStore:    storage.NewMemStorage(),
+		errsToReturn: map[string]error{data.CanonicalTimestampRole: data.ErrNoSuchRole{}},
+	}
+
+	serverCrypto := copyKeys(t, cs, data.CanonicalTimestampRole)
+	updates, err = validateUpdate(serverCrypto, "testGUN", updates, store)
+	assert.Error(t, err)
+	assert.IsType(t, data.ErrNoSuchRole{}, err)
 }
 
 func TestValidateNoNewRoot(t *testing.T) {
@@ -327,6 +452,36 @@ func TestValidateSnapshotGeneratePrevCorrupt(t *testing.T) {
 	serverCrypto := copyKeys(t, cs, data.CanonicalTimestampRole, data.CanonicalSnapshotRole)
 	updates, err = validateUpdate(serverCrypto, "testGUN", updates, store)
 	assert.Error(t, err)
+	assert.IsType(t, &json.SyntaxError{}, err)
+}
+
+// Store is broken when getting the current snapshot
+func TestValidateSnapshotGenerateStoreGetCurrentSnapshotBroken(t *testing.T) {
+	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
+	assert.NoError(t, err)
+	store := getFailStore{
+		MetaStore:    storage.NewMemStorage(),
+		errsToReturn: map[string]error{data.CanonicalSnapshotRole: data.ErrNoSuchRole{}},
+	}
+	snapRole, err := repo.GetBaseRole(data.CanonicalSnapshotRole)
+	assert.NoError(t, err)
+
+	for _, k := range snapRole.Keys {
+		err := store.SetKey("testGUN", data.CanonicalSnapshotRole, k.Algorithm(), k.Public())
+		assert.NoError(t, err)
+	}
+
+	r, tg, sn, ts, err := testutils.Sign(repo)
+	assert.NoError(t, err)
+	root, targets, _, _, err := getUpdates(r, tg, sn, ts)
+	assert.NoError(t, err)
+
+	updates := []storage.MetaUpdate{root, targets}
+
+	serverCrypto := copyKeys(t, cs, data.CanonicalTimestampRole, data.CanonicalSnapshotRole)
+	_, err = validateUpdate(serverCrypto, "testGUN", updates, store)
+	assert.Error(t, err)
+	assert.IsType(t, data.ErrNoSuchRole{}, err)
 }
 
 func TestValidateSnapshotGenerateNoTargets(t *testing.T) {

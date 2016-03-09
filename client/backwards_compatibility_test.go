@@ -125,6 +125,13 @@ func Test0Dot1RepoFormat(t *testing.T) {
 	require.Len(t, oldTargetsKeys, 1)
 	require.Len(t, newTargetsKeys, 1)
 	require.NotEqual(t, oldTargetsKeys[0], newTargetsKeys[0])
+
+	// rotate the snapshot key to the server and ensure that the server can re-generate the snapshot
+	// and we can download the snapshot
+	require.NoError(t, repo.RotateKey(data.CanonicalSnapshotRole, true))
+	require.NoError(t, repo.Publish())
+	_, err = repo.Update(false)
+	require.NoError(t, err)
 }
 
 // Ensures that the current client can download metadata that is published from notary 0.1 repos
