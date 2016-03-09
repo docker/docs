@@ -28,14 +28,14 @@ boost your own well being.
 
 Docker users are people using Docker in their daily work. To help Docker users, visit:
 
-* the <a href="https://groups.google.com/forum/#!forum/docker-user"
-target="_blank">Docker-user</a> Google group
+* the <a href="https://forums.docker.com/"
+target="_blank">Docker Community Forum</a>
 * the `#docker` channel on Freenode IRC
 *  <a href="http://stackoverflow.com/search?tab=newest&q=docker"
 target="_blank">StackOverflow</a>
 
 You can also check the <a href="http://goo.gl/Kv8EdU" target="_blank">list of
-open user questions</a> on the Docker project.
+open user questions</a> on the Docker Engine project.
 
 
 ## Docker contributors
