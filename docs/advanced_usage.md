@@ -227,7 +227,7 @@ other delegation roles will be supported in a future release. By default, Engine
 `targets/releases` role if it exists; if it does not exist, the Engine  will
 fall back to retrieving images signed by the default `targets` role.
 
-To use the `targets/releases` role for pushing and pulling images with content trust, follow the steps above to add and publish the delegation role with notary. When adding the delegation, the `--all-paths` flag should be used. By default, pushing with Docker Content Trust will attempt to add to the `targets/releases` role and will fallback to `targets` _only_ if the delegation does not exist.
+To use the `targets/releases` role for pushing and pulling images with content trust, follow the steps above to add and publish the delegation role with notary. When adding the delegation, the `--all-paths` flag should be used. By default, pushing with Docker Content Trust will attempt to add to whichever delegations exist directly under targets (ex: `targets/releases`, but not `targets/nested/delegation`).
 
 # Files and state on disk
 

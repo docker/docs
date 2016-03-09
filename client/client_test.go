@@ -2046,8 +2046,7 @@ func createKey(t *testing.T, repo *NotaryRepository, role string, x509 bool) dat
 // Publishing delegations works so long as the delegation parent exists by the
 // time that delegation addition change is applied.  Most of the tests for
 // applying delegation changes in in helpers_test.go (applyTargets tests), so
-// this is just a sanity test to make sure Publish calls it correctly and
-// no fallback happens.
+// this is just a sanity test to make sure Publish calls it correctly
 func TestPublishDelegations(t *testing.T) {
 	testPublishDelegations(t, true, false)
 	testPublishDelegations(t, false, false)
@@ -2140,44 +2139,13 @@ func testPublishDelegations(t *testing.T, clearCache, x509Keys bool) {
 }
 
 // If a changelist specifies a particular role to push targets to, and there
-// is no such role, publish will try to publish to its parent.  If the parent
-// doesn't work, it falls back on its parent, and so forth, and eventually
-// falls back on publishing to "target".  This *only* falls back if the role
-// doesn't exist, not if the user doesn't have a key.  (different test)
-func TestPublishTargetsDelgationScopeFallback(t *testing.T) {
-	testPublishTargetsDelgationScopeFallback(t, true)
-	testPublishTargetsDelgationScopeFallback(t, false)
+// is a role but no key, publish should just fail outright.
+func TestPublishTargetsDelegationScopeFailIfNoKeys(t *testing.T) {
+	testPublishTargetsDelegationScopeFailIfNoKeys(t, true)
+	testPublishTargetsDelegationScopeFailIfNoKeys(t, false)
 }
 
-func testPublishTargetsDelgationScopeFallback(t *testing.T, clearCache bool) {
-	ts := fullTestServer(t)
-	defer ts.Close()
-
-	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
-	defer os.RemoveAll(repo.baseDir)
-
-	var rec *passRoleRecorder
-	if clearCache {
-		repo, rec = newRepoToTestRepo(t, repo, false)
-	}
-
-	requirePublishToRolesSucceeds(t, repo, []string{"targets/a/b", "targets/b/c"},
-		[]string{data.CanonicalTargetsRole})
-
-	if clearCache {
-		rec.requireAsked(t, []string{data.CanonicalTargetsRole, data.CanonicalSnapshotRole})
-		rec.requireCreated(t, nil)
-	}
-}
-
-// If a changelist specifies a particular role to push targets to, and there
-// is a role but no key, publish not fall back and just fail.
-func TestPublishTargetsDelgationScopeNoFallbackIfNoKeys(t *testing.T) {
-	testPublishTargetsDelgationScopeNoFallbackIfNoKeys(t, true)
-	testPublishTargetsDelgationScopeNoFallbackIfNoKeys(t, false)
-}
-
-func testPublishTargetsDelgationScopeNoFallbackIfNoKeys(t *testing.T, clearCache bool) {
+func testPublishTargetsDelegationScopeFailIfNoKeys(t *testing.T, clearCache bool) {
 	ts := fullTestServer(t)
 	defer ts.Close()
 
@@ -2227,7 +2195,7 @@ func testPublishTargetsDelgationScopeNoFallbackIfNoKeys(t *testing.T, clearCache
 // not its parents.  This tests the case where the local machine knows about
 // all the roles (in fact, the role creations will be applied before the
 // targets)
-func TestPublishTargetsDelgationSuccessLocallyHasRoles(t *testing.T) {
+func TestPublishTargetsDelegationSuccessLocallyHasRoles(t *testing.T) {
 	ts := fullTestServer(t)
 	defer ts.Close()
 
@@ -2242,7 +2210,7 @@ func TestPublishTargetsDelgationSuccessLocallyHasRoles(t *testing.T) {
 	}
 
 	// just always check signing now, we've already established we can publish
-	// delgations with and without the metadata and key cache
+	// delegations with and without the metadata and key cache
 	var rec *passRoleRecorder
 	repo, rec = newRepoToTestRepo(t, repo, false)
 
@@ -2257,7 +2225,7 @@ func TestPublishTargetsDelgationSuccessLocallyHasRoles(t *testing.T) {
 // If a changelist specifies a particular role to push targets to, and the role
 // is present, publish will write to that role only.  The targets keys are not
 // needed.
-func TestPublishTargetsDelgationNoTargetsKeyNeeded(t *testing.T) {
+func TestPublishTargetsDelegationNoTargetsKeyNeeded(t *testing.T) {
 	ts := fullTestServer(t)
 	defer ts.Close()
 
@@ -2272,7 +2240,7 @@ func TestPublishTargetsDelgationNoTargetsKeyNeeded(t *testing.T) {
 	}
 
 	// just always check signing now, we've already established we can publish
-	// delgations with and without the metadata and key cache
+	// delegations with and without the metadata and key cache
 	var rec *passRoleRecorder
 	repo, rec = newRepoToTestRepo(t, repo, false)
 
@@ -2300,7 +2268,7 @@ func TestPublishTargetsDelgationNoTargetsKeyNeeded(t *testing.T) {
 //   them before publish.
 // - owner of a repo may not have the delegated keys, so can't sign a delegated
 //   role
-func TestPublishTargetsDelgationSuccessNeedsToDownloadRoles(t *testing.T) {
+func TestPublishTargetsDelegationSuccessNeedsToDownloadRoles(t *testing.T) {
 	gun := "docker.com/notary"
 	ts := fullTestServer(t)
 	defer ts.Close()
@@ -2350,7 +2318,7 @@ func TestPublishTargetsDelgationSuccessNeedsToDownloadRoles(t *testing.T) {
 
 // Ensure that two clients can publish delegations with two different keys and
 // the changes will not clobber each other.
-func TestPublishTargetsDelgationFromTwoRepos(t *testing.T) {
+func TestPublishTargetsDelegationFromTwoRepos(t *testing.T) {
 	ts := fullTestServer(t)
 	defer ts.Close()
 
@@ -2421,7 +2389,7 @@ func TestPublishTargetsDelgationFromTwoRepos(t *testing.T) {
 
 // A client who could publish before can no longer publish once the owner
 // removes their delegation key from the delegation role.
-func TestPublishRemoveDelgationKeyFromDelegationRole(t *testing.T) {
+func TestPublishRemoveDelegationKeyFromDelegationRole(t *testing.T) {
 	gun := "docker.com/notary"
 	ts := fullTestServer(t)
 	defer ts.Close()
@@ -2480,7 +2448,7 @@ func TestPublishRemoveDelgationKeyFromDelegationRole(t *testing.T) {
 
 // A client who could publish before can no longer publish once the owner
 // deletes the delegation
-func TestPublishRemoveDelgation(t *testing.T) {
+func TestPublishRemoveDelegation(t *testing.T) {
 	ts := fullTestServer(t)
 	defer ts.Close()
 
@@ -3107,12 +3075,12 @@ func TestBootstrapClientInvalidURL(t *testing.T) {
 	require.EqualError(t, err, err2.Error())
 }
 
-func TestPublishTargetsDelgationCanUseUserKeyWithArbitraryRole(t *testing.T) {
-	testPublishTargetsDelgationCanUseUserKeyWithArbitraryRole(t, false)
-	testPublishTargetsDelgationCanUseUserKeyWithArbitraryRole(t, true)
+func TestPublishTargetsDelegationCanUseUserKeyWithArbitraryRole(t *testing.T) {
+	testPublishTargetsDelegationCanUseUserKeyWithArbitraryRole(t, false)
+	testPublishTargetsDelegationCanUseUserKeyWithArbitraryRole(t, true)
 }
 
-func testPublishTargetsDelgationCanUseUserKeyWithArbitraryRole(t *testing.T, x509 bool) {
+func testPublishTargetsDelegationCanUseUserKeyWithArbitraryRole(t *testing.T, x509 bool) {
 	gun := "docker.com/notary"
 	ts := fullTestServer(t)
 	defer ts.Close()
