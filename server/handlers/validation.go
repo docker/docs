@@ -55,7 +55,7 @@ func validateUpdate(cs signed.CryptoService, gun string, updates []storage.MetaU
 		// against a previous root
 		if root, err = validateRoot(gun, oldRootJSON, rootUpdate.Data); err != nil {
 			logrus.Error("ErrBadRoot: ", err.Error())
-			return nil, validation.ErrBadRoot{Msg: err.Error()}
+			return nil, err
 		}
 
 		// setting root will update keys db
@@ -71,7 +71,7 @@ func validateUpdate(cs signed.CryptoService, gun string, updates []storage.MetaU
 		}
 		parsedOldRoot := &data.SignedRoot{}
 		if err := json.Unmarshal(oldRootJSON, parsedOldRoot); err != nil {
-			return nil, validation.ErrValidation{Msg: "pre-existing root is corrupted and no root provided in update."}
+			return nil, fmt.Errorf("pre-existing root is corrupt")
 		}
 		if err = repo.SetRoot(parsedOldRoot); err != nil {
 			logrus.Error("ErrValidation: ", err.Error())
@@ -384,23 +384,23 @@ func validateRoot(gun string, oldRoot, newRoot []byte) (
 	parsedNewSigned := &data.Signed{}
 	err := json.Unmarshal(newRoot, parsedNewSigned)
 	if err != nil {
-		return nil, err
+		return nil, validation.ErrBadRoot{Msg: err.Error()}
 	}
 
 	// validates the structure of the root metadata
 	parsedNewRoot, err := data.RootFromSigned(parsedNewSigned)
 	if err != nil {
-		return nil, err
+		return nil, validation.ErrBadRoot{Msg: err.Error()}
 	}
 
 	newRootRole, _ := parsedNewRoot.BuildBaseRole(data.CanonicalRootRole)
 	if err != nil { // should never happen, since the root metadata has been validated
-		return nil, err
+		return nil, validation.ErrBadRoot{Msg: err.Error()}
 	}
 
 	newTimestampRole, err := parsedNewRoot.BuildBaseRole(data.CanonicalTimestampRole)
 	if err != nil { // should never happen, since the root metadata has been validated
-		return nil, err
+		return nil, validation.ErrBadRoot{Msg: err.Error()}
 	}
 	// According to the TUF spec, any role may have more than one signing
 	// key and require a threshold signature.  However, notary-server
@@ -417,7 +417,7 @@ func validateRoot(gun string, oldRoot, newRoot []byte) (
 	}
 
 	if err := signed.VerifyRoot(parsedNewSigned, newRootRole.Threshold, newRootRole.Keys); err != nil {
-		return nil, err
+		return nil, validation.ErrBadRoot{Msg: err.Error()}
 	}
 
 	return parsedNewRoot, nil
@@ -429,13 +429,13 @@ func checkAgainstOldRoot(oldRoot []byte, newRootRole data.BaseRole, newSigned *d
 	err := json.Unmarshal(oldRoot, parsedOldRoot)
 	if err != nil {
 		logrus.Warn("Old root could not be parsed, and cannot be used to check the new root.")
-		return nil
+		return err
 	}
 
 	oldRootRole, err := parsedOldRoot.BuildBaseRole(data.CanonicalRootRole)
 	if err != nil {
 		logrus.Warn("Old root does not have a valid root role, and cannot be used to check the new root.")
-		return nil
+		return err
 	}
 
 	// if the set of keys has changed between the old root and new root, then a root
@@ -453,8 +453,9 @@ func checkAgainstOldRoot(oldRoot []byte, newRootRole data.BaseRole, newSigned *d
 
 	if rotation {
 		if err := signed.VerifyRoot(newSigned, oldRootRole.Threshold, oldRootRole.Keys); err != nil {
-			return fmt.Errorf("rotation detected and new root was not signed with at least %d old keys",
-				oldRootRole.Threshold)
+			return validation.ErrBadRoot{Msg: fmt.Sprintf(
+				"rotation detected and new root was not signed with at least %d old keys",
+				oldRootRole.Threshold)}
 		}
 	}
 

@@ -6,6 +6,7 @@ import (
 	"path"
 	"reflect"
 	"testing"
+	"time"
 
 	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/passphrase"
@@ -27,22 +28,22 @@ type getFailStore struct {
 
 // GetCurrent returns the current metadata, or an error depending on whether
 // getFailStore is configured to return an error for this role
-func (f getFailStore) GetCurrent(gun, tufRole string) ([]byte, error) {
+func (f getFailStore) GetCurrent(gun, tufRole string) (*time.Time, []byte, error) {
 	err := f.errsToReturn[tufRole]
 	if err == nil {
 		return f.MetaStore.GetCurrent(gun, tufRole)
 	}
-	return nil, err
+	return nil, nil, err
 }
 
 // GetChecksum returns the metadata with this checksum, or an error depending on
 // whether getFailStore is configured to return an error for this role
-func (f getFailStore) GetChecksum(gun, tufRole, checksum string) ([]byte, error) {
+func (f getFailStore) GetChecksum(gun, tufRole, checksum string) (*time.Time, []byte, error) {
 	err := f.errsToReturn[tufRole]
 	if err == nil {
 		return f.MetaStore.GetChecksum(gun, tufRole, checksum)
 	}
-	return nil, err
+	return nil, nil, err
 }
 
 func copyKeys(t *testing.T, from signed.CryptoService, roles ...string) signed.CryptoService {
@@ -278,6 +279,81 @@ func TestValidateOldRoot(t *testing.T) {
 	assert.NoError(t, err)
 }
 
+func TestValidateOldRootCorrupt(t *testing.T) {
+	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
+	assert.NoError(t, err)
+	store := storage.NewMemStorage()
+
+	r, tg, sn, ts, err := testutils.Sign(repo)
+	assert.NoError(t, err)
+	root, targets, snapshot, timestamp, err := getUpdates(r, tg, sn, ts)
+	assert.NoError(t, err)
+
+	badRoot := storage.MetaUpdate{
+		Version: root.Version,
+		Role:    root.Role,
+		Data:    root.Data[1:],
+	}
+	store.UpdateCurrent("testGUN", badRoot)
+	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
+
+	serverCrypto := copyKeys(t, cs, data.CanonicalTimestampRole)
+	_, err = validateUpdate(serverCrypto, "testGUN", updates, store)
+	assert.Error(t, err)
+	assert.IsType(t, &json.SyntaxError{}, err)
+}
+
+func TestValidateOldRootCorruptRootRole(t *testing.T) {
+	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
+	assert.NoError(t, err)
+	store := storage.NewMemStorage()
+
+	r, tg, sn, ts, err := testutils.Sign(repo)
+	assert.NoError(t, err)
+	root, targets, snapshot, timestamp, err := getUpdates(r, tg, sn, ts)
+	assert.NoError(t, err)
+
+	// so a valid root, but missing the root role
+	signedRoot, err := data.RootFromSigned(r)
+	assert.NoError(t, err)
+	delete(signedRoot.Signed.Roles, data.CanonicalRootRole)
+	badRootJSON, err := json.Marshal(signedRoot)
+	assert.NoError(t, err)
+	badRoot := storage.MetaUpdate{
+		Version: root.Version,
+		Role:    root.Role,
+		Data:    badRootJSON,
+	}
+	store.UpdateCurrent("testGUN", badRoot)
+	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
+
+	serverCrypto := copyKeys(t, cs, data.CanonicalTimestampRole)
+	_, err = validateUpdate(serverCrypto, "testGUN", updates, store)
+	assert.Error(t, err)
+	assert.IsType(t, data.ErrInvalidRole{}, err)
+}
+
+func TestValidateRootGetCurrentRootBroken(t *testing.T) {
+	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
+	assert.NoError(t, err)
+	store := getFailStore{
+		MetaStore:    storage.NewMemStorage(),
+		errsToReturn: map[string]error{data.CanonicalRootRole: data.ErrNoSuchRole{}},
+	}
+
+	r, tg, sn, ts, err := testutils.Sign(repo)
+	assert.NoError(t, err)
+	root, targets, snapshot, timestamp, err := getUpdates(r, tg, sn, ts)
+	assert.NoError(t, err)
+
+	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
+
+	serverCrypto := copyKeys(t, cs, data.CanonicalTimestampRole)
+	_, err = validateUpdate(serverCrypto, "testGUN", updates, store)
+	assert.Error(t, err)
+	assert.IsType(t, data.ErrNoSuchRole{}, err)
+}
+
 func TestValidateRootRotation(t *testing.T) {
 	repo, crypto, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
@@ -322,6 +398,48 @@ func TestValidateRootRotation(t *testing.T) {
 	serverCrypto := copyKeys(t, crypto, data.CanonicalTimestampRole)
 	_, err = validateUpdate(serverCrypto, "testGUN", updates, store)
 	assert.NoError(t, err)
+}
+
+func TestInvalidRootRotation(t *testing.T) {
+	repo, crypto, err := testutils.EmptyRepo("docker.com/notary")
+	assert.NoError(t, err)
+	store := storage.NewMemStorage()
+
+	r, tg, sn, ts, err := testutils.Sign(repo)
+	assert.NoError(t, err)
+	root, targets, snapshot, timestamp, err := getUpdates(r, tg, sn, ts)
+	assert.NoError(t, err)
+
+	store.UpdateCurrent("testGUN", root)
+
+	rootKey, err := crypto.Create("root", data.ED25519Key)
+	assert.NoError(t, err)
+	rootRole, err := data.NewRole("root", 1, []string{rootKey.ID()}, nil)
+	assert.NoError(t, err)
+
+	repo.Root.Signed.Roles["root"] = &rootRole.RootRole
+	repo.Root.Signed.Keys[rootKey.ID()] = rootKey
+
+	r, err = repo.SignRoot(data.DefaultExpires(data.CanonicalRootRole))
+	assert.NoError(t, err)
+	err = signed.Sign(crypto, r, rootKey)
+	assert.NoError(t, err)
+
+	rt, err := data.RootFromSigned(r)
+	assert.NoError(t, err)
+	repo.SetRoot(rt)
+
+	sn, err = repo.SignSnapshot(data.DefaultExpires(data.CanonicalSnapshotRole))
+	assert.NoError(t, err)
+	root, targets, snapshot, timestamp, err = getUpdates(r, tg, sn, ts)
+	assert.NoError(t, err)
+
+	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
+
+	serverCrypto := copyKeys(t, crypto, data.CanonicalTimestampRole)
+	_, err = validateUpdate(serverCrypto, "testGUN", updates, store)
+	assert.Error(t, err)
+	assert.Contains(t, err.Error(), "new root was not signed with at least 1 old keys")
 }
 
 func TestValidateNoRoot(t *testing.T) {
