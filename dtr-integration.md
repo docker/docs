@@ -122,10 +122,7 @@ Registry CA into your UCP.
     a self-signed root CA, you *must* follow this step. To create the Trusted
     Registry root CA file:
 
-    a. Connect to the DTR node via an authorized UCP certificate
-    bundle.
-
-    b. Run the following command:
+    a. Run the following command from a machine (Linux/Mac) capable of connecting to your DTR node:
 
         openssl s_client -host <dtr-fully-qualified-domain-name> -port 443 </dev/null 2>/dev/null | openssl x509 -CAform PEM | tee /tmp/dtr.pem
 
@@ -133,7 +130,7 @@ Registry CA into your UCP.
 
         $ openssl s_client -host ec2-54-187-154-87.us-west-2.compute.amazonaws.com -port 443 </dev/null 2>/dev/null | openssl x509 -CAform PEM | tee /tmp/dtr.pem
 
-    c. Upload the `dtr.pem` file you just created.
+    b. Upload the `dtr.pem` file you just created.
 
       ![](images/dtr-integrate.png)
 
