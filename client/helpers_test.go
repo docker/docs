@@ -864,8 +864,8 @@ func TestApplyChangelistTargetsToMultipleRoles(t *testing.T) {
 	require.False(t, ok, "no change to targets/level2, so metadata not created")
 }
 
-// ApplyTargets falls back to role that exists when adding or deleting a change
-func TestApplyChangelistTargetsFallbackRoles(t *testing.T) {
+// ApplyTargets does not fall back to role that exists when adding or deleting a change to a nonexistent delegation
+func TestApplyChangelistTargetsDoesNotFallbackRoles(t *testing.T) {
 	repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	require.NoError(t, err)
 
@@ -887,12 +887,11 @@ func TestApplyChangelistTargetsFallbackRoles(t *testing.T) {
 		ChangePath: "latest",
 		Data:       fjson,
 	}))
+	err = applyChangelist(repo, cl)
+	require.Error(t, err)
+	require.IsType(t, data.ErrInvalidRole{}, err)
 
-	require.NoError(t, applyChangelist(repo, cl))
-	_, ok := repo.Targets[data.CanonicalTargetsRole].Signed.Targets["latest"]
-	require.True(t, ok)
-
-	// now delete and require it applies to
+	// now try a delete and assert the same error
 	cl = changelist.NewMemChangelist()
 	require.NoError(t, cl.Add(&changelist.TufChange{
 		Actn:       changelist.ActionDelete,
@@ -902,12 +901,13 @@ func TestApplyChangelistTargetsFallbackRoles(t *testing.T) {
 		Data:       nil,
 	}))
 
-	require.NoError(t, applyChangelist(repo, cl))
-	require.Empty(t, repo.Targets[data.CanonicalTargetsRole].Signed.Targets)
+	err = applyChangelist(repo, cl)
+	require.Error(t, err)
+	require.IsType(t, data.ErrInvalidRole{}, err)
 }
 
-// changeTargetMeta fallback fails with ErrInvalidRole if role is invalid
-func TestChangeTargetMetaFallbackFailsInvalidRole(t *testing.T) {
+// changeTargetMeta fails with ErrInvalidRole if role is invalid
+func TestChangeTargetMetaFailsInvalidRole(t *testing.T) {
 	repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	require.NoError(t, err)
 
@@ -932,9 +932,8 @@ func TestChangeTargetMetaFallbackFailsInvalidRole(t *testing.T) {
 	require.IsType(t, data.ErrInvalidRole{}, err)
 }
 
-// If applying a change fails due to a prefix error, it does not fall back
-// on the parent.
-func TestChangeTargetMetaDoesntFallbackIfPrefixError(t *testing.T) {
+// If applying a change fails due to a prefix error, changeTargetMeta fails outright
+func TestChangeTargetMetaFailsIfPrefixError(t *testing.T) {
 	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	require.NoError(t, err)
 
