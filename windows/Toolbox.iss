@@ -88,7 +88,7 @@ Filename: "{app}\docker-machine.exe"; Parameters: "rm -f default"
 Type: filesandordirs; Name: "{localappdata}\..\Roaming\Kitematic"
 
 [Registry]
-Root: HKCU; Subkey: "Environment"; ValueType:string; ValueName:"DOCKER_TOOLBOX_INSTALL_PATH"; ValueData:"{app}" ; Flags: preservestringtype ;
+Root: HKCU; Subkey: "Environment"; ValueType:string; ValueName:"DOCKER_TOOLBOX_INSTALL_PATH"; ValueData:"{app}" ; Flags: preservestringtype uninsdeletevalue;
 
 [Code]
 #include "base64.iss"
