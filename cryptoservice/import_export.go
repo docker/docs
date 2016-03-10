@@ -164,7 +164,10 @@ func (cs *CryptoService) ImportKeysZip(zipReader zip.Reader, retriever passphras
 
 	for keyName, pemBytes := range newKeys {
 		// Get the key role information as well as its data.PrivateKey representation
-		_, keyInfo := trustmanager.KeyInfoFromPEM(pemBytes, keyName)
+		_, keyInfo, err := trustmanager.KeyInfoFromPEM(pemBytes, keyName)
+		if err != nil {
+			return err
+		}
 		privKey, err := trustmanager.ParsePEMPrivateKey(pemBytes, "")
 		if err != nil {
 			privKey, _, err = trustmanager.GetPasswdDecryptBytes(retriever, pemBytes, "", "imported "+keyInfo.Role)

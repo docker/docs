@@ -70,7 +70,11 @@ func generateKeyInfoMap(s LimitedFileStore) map[string]KeyInfo {
 			logrus.Error(err)
 			continue
 		}
-		keyID, keyInfo := KeyInfoFromPEM(d, keyPath)
+		keyID, keyInfo, err := KeyInfoFromPEM(d, keyPath)
+		if err != nil {
+			logrus.Error(err)
+			continue
+		}
 		keyInfoMap[keyID] = keyInfo
 	}
 	return keyInfoMap
@@ -184,12 +188,7 @@ func (s *KeyFileStore) RemoveKey(keyID string) error {
 		return err
 	}
 	// Remove this key from our keyInfo map if we removed from our filesystem
-	if _, ok := s.keyInfoMap[keyID]; ok {
-		delete(s.keyInfoMap, keyID)
-	} else {
-		// This might be of the form GUN/ID  - try to delete without the gun
-		delete(s.keyInfoMap, filepath.Base(keyID))
-	}
+	delete(s.keyInfoMap, filepath.Base(keyID))
 	return nil
 }
 
@@ -296,17 +295,18 @@ func (s *KeyMemoryStore) ExportKey(keyID string) ([]byte, error) {
 }
 
 // KeyInfoFromPEM attempts to get a keyID and KeyInfo from the filename and PEM bytes of a key
-func KeyInfoFromPEM(pemBytes []byte, filename string) (string, KeyInfo) {
+func KeyInfoFromPEM(pemBytes []byte, filename string) (string, KeyInfo, error) {
 	keyID, role, gun := inferKeyInfoFromKeyPath(filename)
 	if role == "" {
 		block, _ := pem.Decode(pemBytes)
-		if block != nil {
-			if keyRole, ok := block.Headers["role"]; ok {
-				role = keyRole
-			}
+		if block == nil {
+			return "", KeyInfo{}, fmt.Errorf("could not decode PEM block for key %s", filename)
+		}
+		if keyRole, ok := block.Headers["role"]; ok {
+			role = keyRole
 		}
 	}
-	return keyID, KeyInfo{Gun: gun, Role: role}
+	return keyID, KeyInfo{Gun: gun, Role: role}, nil
 }
 
 func addKey(s LimitedFileStore, passphraseRetriever passphrase.Retriever, cachedKeys map[string]*cachedKey, name, role string, privKey data.PrivateKey) error {
