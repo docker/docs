@@ -193,8 +193,7 @@ func (s *KeyFileStore) RemoveKey(keyID string) error {
 	return nil
 }
 
-// ExportKey exports the encrypted bytes from the keystore and writes it to
-// dest.
+// ExportKey exports the encrypted bytes from the keystore
 func (s *KeyFileStore) ExportKey(keyID string) ([]byte, error) {
 	if keyInfo, ok := s.keyInfoMap[keyID]; ok {
 		keyID = filepath.Join(keyInfo.Gun, keyID)
@@ -283,17 +282,11 @@ func (s *KeyMemoryStore) RemoveKey(keyID string) error {
 		return err
 	}
 	// Remove this key from our keyInfo map if we removed from our filesystem
-	if _, ok := s.keyInfoMap[keyID]; ok {
-		delete(s.keyInfoMap, keyID)
-	} else {
-		// This might be of the form GUN/ID  - try to delete without the gun
-		delete(s.keyInfoMap, filepath.Base(keyID))
-	}
+	delete(s.keyInfoMap, filepath.Base(keyID))
 	return nil
 }
 
-// ExportKey exports the encrypted bytes from the keystore and writes it to
-// dest.
+// ExportKey exports the encrypted bytes from the keystore
 func (s *KeyMemoryStore) ExportKey(keyID string) ([]byte, error) {
 	keyBytes, _, err := getRawKey(s, keyID)
 	if err != nil {
