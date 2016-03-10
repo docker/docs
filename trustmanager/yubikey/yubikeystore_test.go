@@ -116,6 +116,45 @@ func TestYubiAddKeysAndRetrieve(t *testing.T) {
 	}
 }
 
+// Test that we can successfully keys enough times to fill up all the slots in the Yubikey, even without a backup store
+func TestYubiAddKeysWithoutBackup(t *testing.T) {
+	if !YubikeyAccessible() {
+		t.Skip("Must have Yubikey access.")
+	}
+	clearAllKeys(t)
+
+	SetYubikeyKeyMode(KeymodeNone)
+	defer func() {
+		SetYubikeyKeyMode(KeymodeTouch | KeymodePinOnce)
+	}()
+
+	// create 4 keys on the original store
+	store, err := NewYubiKeyStore(nil, ret)
+	assert.NoError(t, err)
+	keys := addMaxKeys(t, store)
+
+	// create a new store, since we want to be sure the original store's cache
+	// is not masking any issues
+	cleanStore, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
+	assert.NoError(t, err)
+
+	// All 4 keys should be in the original store, in the clean store (which
+	// makes sure the keys are actually on the Yubikey and not on the original
+	// store's cache)
+	for _, store := range []trustmanager.KeyStore{store, cleanStore} {
+		listedKeys := store.ListKeys()
+		assert.Len(t, listedKeys, numSlots)
+		for _, k := range keys {
+			r, ok := listedKeys[k]
+			assert.True(t, ok)
+			assert.Equal(t, data.CanonicalRootRole, r.Role)
+
+			_, _, err := store.GetKey(k)
+			assert.NoError(t, err)
+		}
+	}
+}
+
 // We can't add a key if there are no more slots
 func TestYubiAddKeyFailureIfNoMoreSlots(t *testing.T) {
 	if !YubikeyAccessible() {

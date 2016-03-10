@@ -302,7 +302,7 @@ func (k *keyCommander) keysRestore(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
-	ks, err := k.getKeyStores(config, true, true)
+	ks, err := k.getKeyStores(config, true, false)
 	if err != nil {
 		return err
 	}
