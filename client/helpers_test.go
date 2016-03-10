@@ -864,8 +864,8 @@ func TestApplyChangelistTargetsToMultipleRoles(t *testing.T) {
 	require.False(t, ok, "no change to targets/level2, so metadata not created")
 }
 
-// ApplyTargets does not fall back to role that exists when adding or deleting a change to a nonexistent delegation
-func TestApplyChangelistTargetsDoesNotFallbackRoles(t *testing.T) {
+// ApplyTargets fails when adding or deleting a change to a nonexistent delegation
+func TestApplyChangelistTargetsFailsNonexistentRole(t *testing.T) {
 	repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	require.NoError(t, err)
 

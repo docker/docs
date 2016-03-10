@@ -141,7 +141,7 @@ func changeTargetMeta(repo *tuf.Repo, c changelist.Change) error {
 		}
 		files := data.Files{c.Path(): *meta}
 
-		// Attempt to add the target to this role, with no fallback
+		// Attempt to add the target to this role
 		if _, err = repo.AddTargets(c.Scope(), files); err != nil {
 			logrus.Errorf("couldn't add target to %s: %s", c.Scope(), err.Error())
 		}
@@ -149,7 +149,7 @@ func changeTargetMeta(repo *tuf.Repo, c changelist.Change) error {
 	case changelist.ActionDelete:
 		logrus.Debug("changelist remove: ", c.Path())
 
-		// Attempt to remove the target from this role, with no fallback
+		// Attempt to remove the target from this role
 		if err = repo.RemoveTargets(c.Scope(), c.Path()); err != nil {
 			logrus.Errorf("couldn't remove target from %s: %s", c.Scope(), err.Error())
 		}
