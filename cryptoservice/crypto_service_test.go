@@ -300,7 +300,7 @@ func (c CryptoServiceTester) TestListFromMultipleKeystores(t *testing.T) {
 	}
 }
 
-// asserts that adding a key adds to all keystores
+// asserts that adding a key adds to just the first keystore
 // and adding an existing key either succeeds if the role matches or fails if it does not
 func (c CryptoServiceTester) TestAddKey(t *testing.T) {
 	cryptoService := c.cryptoServiceFactory()

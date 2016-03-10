@@ -105,8 +105,8 @@ func TestPrettyPrintRootAndSigningKeys(t *testing.T) {
 	// add keys to the key stores
 	assert.NoError(t, keyStores[0].AddKey(trustmanager.KeyInfo{Role: root, Gun: ""}, keys[0]))
 	assert.NoError(t, keyStores[1].AddKey(trustmanager.KeyInfo{Role: root, Gun: ""}, keys[0]))
-	assert.NoError(t, keyStores[0].AddKey(trustmanager.KeyInfo{Role: "targets", Gun: strings.Repeat("/a", 30)}, keys[1]))
-	assert.NoError(t, keyStores[1].AddKey(trustmanager.KeyInfo{Role: "snapshot", Gun: "short/gun"}, keys[1]))
+	assert.NoError(t, keyStores[0].AddKey(trustmanager.KeyInfo{Role: data.CanonicalTargetsRole, Gun: strings.Repeat("/a", 30)}, keys[1]))
+	assert.NoError(t, keyStores[1].AddKey(trustmanager.KeyInfo{Role: data.CanonicalSnapshotRole, Gun: "short/gun"}, keys[1]))
 	assert.NoError(t, keyStores[0].AddKey(trustmanager.KeyInfo{Role: "targets/a", Gun: ""}, keys[3]))
 	assert.NoError(t, keyStores[0].AddKey(trustmanager.KeyInfo{Role: "invalidRole", Gun: ""}, keys[2]))
 
@@ -118,8 +118,8 @@ func TestPrettyPrintRootAndSigningKeys(t *testing.T) {
 		{"invalidRole", keys[2].ID(), keyStores[0].Name()},
 		{"targets/a", keys[3].ID(), keyStores[0].Name()},
 		// these have guns, and are sorted then by guns
-		{"targets", "..." + strings.Repeat("/a", 11), keys[1].ID(), keyStores[0].Name()},
-		{"snapshot", "short/gun", keys[1].ID(), longNameShortened},
+		{data.CanonicalTargetsRole, "..." + strings.Repeat("/a", 11), keys[1].ID(), keyStores[0].Name()},
+		{data.CanonicalSnapshotRole, "short/gun", keys[1].ID(), longNameShortened},
 	}
 
 	var b bytes.Buffer
