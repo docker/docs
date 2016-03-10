@@ -64,4 +64,5 @@ mounting the file at `/docker_subscription.lic` in the tool.
 | `--preserve-certs`                                         | Don't (re)generate certs on the host if existing ones are found.                               |
 | `--binpack`                                                | Set Swarm scheduler to binpack mode (default spread).                                          |
 | `--random`                                                 | Set Swarm scheduler to random mode (default spread).                                           |
-| `--pull "missing"`                                         | Specify image pull behavior (`always`, when `missing`, or `never`).                            |
+| `--pull "missing"`                                         | Specify image pull behavior (`always`, when `missing`, or `never`).                            
+| `--swarm-experimental`                                    | Enable experimental Swarm features (e.g. container rescheduling). Note: Use only for install, not join). |
