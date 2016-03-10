@@ -21,6 +21,7 @@ weight="99"
   * Upgraded Swarm to 1.1.3
   * Improved support for `docker cp`
   * System CA pool fallback for secure DTR connections
+  * Added `--swarm-experimental` option during UCP install
 
 * UI
   * Added checkbox to select all containers in Containers screen
