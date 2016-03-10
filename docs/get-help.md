@@ -39,14 +39,10 @@ community members and developers.
     </td>
   </tr>
   <tr>
-    <td>Google Groups</td>
+    <td>Forum</td>
     <td>
-      There are two groups.
-      <a href="https://groups.google.com/forum/#!forum/docker-user" target="_blank">Docker-user</a>
-      is for people using Docker containers.
-      The <a href="https://groups.google.com/forum/#!forum/docker-dev" target="_blank">docker-dev</a>
-      group is for contributors and other people contributing to the Docker
-      project.
+      The <a href="https://forums.docker.com/"
+      target="_blank">Docker Community Forum</a> is for contributors and others working with Docker software or projects.
     </td>
   </tr>
   <tr>
