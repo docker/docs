@@ -138,10 +138,10 @@ func ParseBugsnag(configuration *viper.Viper) (*bugsnag.Configuration, error) {
 
 // SetupViper sets up an instance of viper to also look at environment
 // variables
-func SetupViper(configuration *viper.Viper, envPrefix string) {
-	configuration.SetEnvPrefix(envPrefix)
-	configuration.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
-	configuration.AutomaticEnv()
+func SetupViper(v *viper.Viper, envPrefix string) {
+	v.SetEnvPrefix(envPrefix)
+	v.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
+	v.AutomaticEnv()
 }
 
 // SetUpBugsnag configures bugsnag and sets up a logrus hook
