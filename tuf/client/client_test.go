@@ -1,6 +1,7 @@
 package client
 
 import (
+	"bytes"
 	"crypto/sha256"
 	"encoding/json"
 	"fmt"
@@ -252,7 +253,8 @@ func TestChecksumMismatch(t *testing.T) {
 	orig, err := json.Marshal(sampleTargets)
 	assert.NoError(t, err)
 
-	origHashes := data.GetSupportedHashes(orig)
+	origHashes, err := GetSupportedHashes(orig)
+	assert.NoError(t, err)
 
 	remoteStorage.SetMeta("targets", orig)
 
@@ -270,7 +272,8 @@ func TestChecksumMatch(t *testing.T) {
 	orig, err := json.Marshal(sampleTargets)
 	assert.NoError(t, err)
 
-	origHashes := data.GetSupportedHashes(orig)
+	origHashes, err := GetSupportedHashes(orig)
+	assert.NoError(t, err)
 
 	remoteStorage.SetMeta("targets", orig)
 
@@ -289,7 +292,8 @@ func TestSizeMismatchLong(t *testing.T) {
 	assert.NoError(t, err)
 	l := int64(len(orig))
 
-	origHashes := data.GetSupportedHashes(orig)
+	origHashes, err := GetSupportedHashes(orig)
+	assert.NoError(t, err)
 
 	remoteStorage.SetMeta("targets", orig)
 
@@ -310,7 +314,9 @@ func TestSizeMismatchShort(t *testing.T) {
 	assert.NoError(t, err)
 	l := int64(len(orig))
 
-	origHashes := data.GetSupportedHashes(orig)
+	origHashes, err := GetSupportedHashes(orig)
+	assert.NoError(t, err)
+
 	remoteStorage.SetMeta("targets", orig)
 
 	_, _, err = client.downloadSigned("targets", l, origHashes)
@@ -886,4 +892,16 @@ func TestDownloadTimestampLocalTimestampInvalidRemoteTimestamp(t *testing.T) {
 	client := NewClient(repo, remoteStorage, localStorage)
 	err = client.downloadTimestamp()
 	assert.NoError(t, err)
+}
+
+// GetSupportedHashes is a helper function that returns
+// the checksums of all the supported hash algorithms
+// of the given payload.
+func GetSupportedHashes(payload []byte) (data.Hashes, error) {
+	meta, err := data.NewFileMeta(bytes.NewReader(payload), data.NotaryDefaultHashes...)
+	if err != nil {
+		return nil, err
+	}
+
+	return meta.Hashes, nil
 }

@@ -124,14 +124,6 @@ func TestCheckHashes(t *testing.T) {
 	assert.Contains(t, err.Error(), "checksum mismatched")
 }
 
-func TestGetSupportedHashes(t *testing.T) {
-	raw := []byte("Illidan")
-
-	hashes := GetSupportedHashes(raw)
-	err := CheckHashes(raw, hashes)
-	assert.NoError(t, err)
-}
-
 func TestCheckValidHashStructures(t *testing.T) {
 	var err error
 	hashes := make(Hashes)
