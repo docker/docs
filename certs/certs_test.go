@@ -32,6 +32,10 @@ const validIntermediateAndCertRSA = `LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tDQpNSUl
 
 const signedRSARootTemplate = `{"signed":{"_type":"Root","consistent_snapshot":false,"expires":"2016-07-16T23:34:13.389129622-07:00","keys":{"1fc4fdc38f66558658c5c59b67f1716bdc6a74ef138b023ae5931db69f51d670":{"keytype":"ecdsa","keyval":{"private":null,"public":"MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE8nIgzLigo5D47dWQe1IUjzHXxvyx0j/OL16VQymuloWsgVDxxT6+mH3CeviMAs+/McnEPE9exnm6SQGR5x3XMw=="}},"23c29cc372109c819e081bc953b7657d05e3f968f03c21d0d75ea457590f3d14":{"keytype":"ecdsa","keyval":{"private":null,"public":"MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEClUFVWkc85OQScfTQRS02VaLIEaeCmxdwYS/hcTLVoTxlFfRfs7HyalTwXGAGO79XZZS+koE6s8D0xGcCJQkLQ=="}},"49cf5c6404a35fa41d5a5aa2ce539dfee0d7a2176d0da488914a38603b1f4292":{"keytype":"rsa-x509","keyval":{"private":null,"public":"{{.RootPem}}"}},"e3a5a4fdaf11ea1ec58f5efed6f3639b39cd4cfa1418c8b55c9a8c2447ace5d9":{"keytype":"ecdsa","keyval":{"private":null,"public":"MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEgl3rzMPMEKhS1k/AX16MM4PdidpjJr+z4pj0Td+30QnpbOIARgpyR1PiFztU8BZlqG3cUazvFclr2q/xHvfrqw=="}}},"roles":{"root":{"keyids":["49cf5c6404a35fa41d5a5aa2ce539dfee0d7a2176d0da488914a38603b1f4292"],"threshold":1},"snapshot":{"keyids":["23c29cc372109c819e081bc953b7657d05e3f968f03c21d0d75ea457590f3d14"],"threshold":1},"targets":{"keyids":["1fc4fdc38f66558658c5c59b67f1716bdc6a74ef138b023ae5931db69f51d670"],"threshold":1},"timestamp":{"keyids":["e3a5a4fdaf11ea1ec58f5efed6f3639b39cd4cfa1418c8b55c9a8c2447ace5d9"],"threshold":1}},"version":2},"signatures":[{"keyid":"49cf5c6404a35fa41d5a5aa2ce539dfee0d7a2176d0da488914a38603b1f4292","method":"rsapss","sig":"YlZwtCj028Xc23+KHfj6govFEY6hMbBXO5HT20F0I5ZeIPb1l7OmkjEiwp9ZHusClY+QeqiP1CFh\n/AfCbv4tLanqMkXPtm8UJJ1hMZVq86coieB32PQDj9k6x1hErHzvPUbOzTRW2BQkFFMZFkLDAd06\npH8lmxyPLOhdkVE8qIT7sBCy/4bQIGfvEX6yCDz84MZdcLNX5B9mzGi9A7gDloh9IEZxA8UgoI18\nSYpv/fYeSZSqM/ws2G+kiELGgTWhcZ+gOlF7ArM/DOlcC/NYqcvY1ugE6Gn7G8opre6NOofdRp3w\n603A2rMMvYTwqKLY6oX/d+07A2+WGHXPUy5otCAybWOw2hIZ35Jjmh12g6Dc6Qk4K2zXwAgvWwBU\nWlT8MlP1Tf7f80jnGjh0aARlHI4LCxlYU5L/pCaYuHgynujvLuzoOuiiPfJv7sYvKoQ8UieE1w//\nHc8E6tWtV5G2FguKLurMoKZ9FBWcanDO0fg5AWuG3qcgUJdvh9acQ33EKer1fqBxs6LSAUWo8rDt\nQkg+b55AW0YBukAW9IAfMySQGAS2e3mHZ8nK/ijaygCRu7/P+NgKY9/zpmfL2xgcNslLcANcSOOt\nhiJS6yqYM9i9G0af0yw/TxAT4ntwjVm8u52UyR/hXIiUc/mjZcYRbSmJOHws902+i+Z/qv72knk="}]}`
 
+const rootPubKeyID = "49cf5c6404a35fa41d5a5aa2ce539dfee0d7a2176d0da488914a38603b1f4292"
+
+const targetsPubKeyID = "1fc4fdc38f66558658c5c59b67f1716bdc6a74ef138b023ae5931db69f51d670"
+
 func TestCertsToRemove(t *testing.T) {
 	// Get a few certificates to test with
 	cert1, err := trustmanager.LoadCertFromFile("../fixtures/secure.example.com.crt")
@@ -138,12 +142,12 @@ func TestValidateRoot(t *testing.T) {
 
 	// This call to ValidateRoot will succeed since we are using a valid PEM
 	// encoded certificate, and have no other certificates for this CN
-	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary")
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{TOFU: true})
 	require.NoError(t, err)
 
 	// This call to ValidateRoot will fail since we are passing in a dnsName that
 	// doesn't match the CN of the certificate.
-	err = ValidateRoot(certStore, &testSignedRoot, "diogomonica.com/notary")
+	err = ValidateRoot(certStore, &testSignedRoot, "diogomonica.com/notary", notary.TrustPinConfig{TOFU: true})
 	require.Error(t, err, "An error was expected")
 	require.Equal(t, err, &ErrValidationFail{Reason: "unable to retrieve valid leaf certificates"})
 
@@ -157,7 +161,7 @@ func TestValidateRoot(t *testing.T) {
 	// Unmarshal our signedroot
 	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
 
-	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary")
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{TOFU: true})
 	require.Error(t, err, "illegal base64 data at input byte")
 
 	//
@@ -170,7 +174,7 @@ func TestValidateRoot(t *testing.T) {
 	// Unmarshal our signedroot
 	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
 
-	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary")
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{TOFU: true})
 	require.Error(t, err, "An error was expected")
 	require.Equal(t, err, &ErrValidationFail{Reason: "unable to retrieve valid leaf certificates"})
 
@@ -185,7 +189,7 @@ func TestValidateRoot(t *testing.T) {
 	// Unmarshal our signedroot
 	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
 
-	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary")
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{TOFU: true})
 	require.Error(t, err, "An error was expected")
 	require.Equal(t, err, &ErrValidationFail{Reason: "unable to retrieve valid leaf certificates"})
 
@@ -203,9 +207,150 @@ func TestValidateRoot(t *testing.T) {
 	// Unmarshal our signedroot
 	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
 
-	err = ValidateRoot(certStore, &testSignedRoot, "secure.example.com")
+	err = ValidateRoot(certStore, &testSignedRoot, "secure.example.com", notary.TrustPinConfig{TOFU: true})
 	require.Error(t, err, "An error was expected")
 	require.Equal(t, err, &ErrValidationFail{Reason: "failed to validate integrity of roots"})
+}
+
+func TestValidateRootWithoutTOFUS(t *testing.T) {
+	var testSignedRoot data.Signed
+	var signedRootBytes bytes.Buffer
+
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	defer os.RemoveAll(tempBaseDir)
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+
+	// Create a X509Store
+	trustPath := filepath.Join(tempBaseDir, notary.TrustedCertsDir)
+	certStore, err := trustmanager.NewX509FilteredFileStore(
+		trustPath,
+		trustmanager.FilterCertsExpiredSha1,
+	)
+	assert.NoError(t, err)
+
+	// Execute our template
+	templ, _ := template.New("SignedRSARootTemplate").Parse(signedRSARootTemplate)
+	templ.Execute(&signedRootBytes, SignedRSARootTemplate{RootPem: validPEMEncodedRSARoot})
+
+	// Unmarshal our signedroot
+	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
+
+	// This call to ValidateRoot will fail since we are explicitly disabling TOFU and have no local certs
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{TOFU: false})
+	assert.Error(t, err)
+}
+
+func TestValidateRootWithPinnedCert(t *testing.T) {
+	var testSignedRoot data.Signed
+	var signedRootBytes bytes.Buffer
+
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	defer os.RemoveAll(tempBaseDir)
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+
+	// Create a X509Store
+	trustPath := filepath.Join(tempBaseDir, notary.TrustedCertsDir)
+	certStore, err := trustmanager.NewX509FilteredFileStore(
+		trustPath,
+		trustmanager.FilterCertsExpiredSha1,
+	)
+	assert.NoError(t, err)
+
+	// Execute our template
+	templ, _ := template.New("SignedRSARootTemplate").Parse(signedRSARootTemplate)
+	templ.Execute(&signedRootBytes, SignedRSARootTemplate{RootPem: validPEMEncodedRSARoot})
+
+	// Unmarshal our signedroot
+	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
+
+	// This call to ValidateRoot should succeed with the correct Cert ID (same as root public key ID)
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string]string{"docker.com/notary": rootPubKeyID}})
+	assert.NoError(t, err)
+}
+
+func TestValidateRootFailuresWithPinnedCert(t *testing.T) {
+	var testSignedRoot data.Signed
+	var signedRootBytes bytes.Buffer
+
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	defer os.RemoveAll(tempBaseDir)
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+
+	// Create a X509Store
+	trustPath := filepath.Join(tempBaseDir, notary.TrustedCertsDir)
+	certStore, err := trustmanager.NewX509FilteredFileStore(
+		trustPath,
+		trustmanager.FilterCertsExpiredSha1,
+	)
+	assert.NoError(t, err)
+
+	// Execute our template
+	templ, _ := template.New("SignedRSARootTemplate").Parse(signedRSARootTemplate)
+	templ.Execute(&signedRootBytes, SignedRSARootTemplate{RootPem: validPEMEncodedRSARoot})
+
+	// Unmarshal our signedroot
+	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
+
+	// This call to ValidateRoot should fail due to an incorrect cert ID
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string]string{"docker.com/notary": "ABSOLUTELY NOT A CERT ID"}})
+	assert.Error(t, err)
+	certStore.RemoveAll()
+
+	// This call to ValidateRoot should fail due to an empty cert ID
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string]string{"docker.com/notary": ""}})
+	assert.Error(t, err)
+	certStore.RemoveAll()
+
+	// This call to ValidateRoot should fail due to an invalid GUN (even though the cert ID is correct), and TOFUS defaults to false
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string]string{"not_a_gun": rootPubKeyID}, TOFU: false})
+	assert.Error(t, err)
+	certStore.RemoveAll()
+
+	// This call to ValidateRoot should fail due to an invalid cert ID, even though it's a valid key ID for targets
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string]string{"docker.com/notary": targetsPubKeyID}})
+	assert.Error(t, err)
+	certStore.RemoveAll()
+
+	// This call to ValidateRoot should succeed because we fall through to TOFUS even though we have no matching GUNs under Certs
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string]string{"not_a_gun": rootPubKeyID}, TOFU: true})
+	assert.NoError(t, err)
+	certStore.RemoveAll()
+}
+
+func TestValidateRootWithPinnedCA(t *testing.T) {
+	var testSignedRoot data.Signed
+	var signedRootBytes bytes.Buffer
+
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
+	defer os.RemoveAll(tempBaseDir)
+	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+
+	// Create a X509Store
+	trustPath := filepath.Join(tempBaseDir, notary.TrustedCertsDir)
+	certStore, err := trustmanager.NewX509FilteredFileStore(
+		trustPath,
+		trustmanager.FilterCertsExpiredSha1,
+	)
+	assert.NoError(t, err)
+
+	// Execute our template
+	templ, _ := template.New("SignedRSARootTemplate").Parse(signedRSARootTemplate)
+	templ.Execute(&signedRootBytes, SignedRSARootTemplate{RootPem: validPEMEncodedRSARoot})
+
+	// Unmarshal our signedroot
+	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
+
+	// This call to ValidateRoot will fail because we have an invalid path for the CA
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{CA: map[string]string{"docker.com/notary": filepath.Join(tempBaseDir, "nonexistent")}})
+	assert.Error(t, err)
+
+	// This call to ValidateRoot will fail because we have no valid GUNs to use
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{CA: map[string]string{"docker.com/notary": filepath.Join(tempBaseDir, "nonexistent")}})
+	assert.Error(t, err)
 }
 
 // TestValidateSuccessfulRootRotation runs through a full root certificate rotation
@@ -296,7 +441,7 @@ func testValidateSuccessfulRootRotation(t *testing.T, keyAlg, rootKeyType string
 
 	// This call to ValidateRoot will succeed since we are using a valid PEM
 	// encoded certificate, and have no other certificates for this CN
-	err = ValidateRoot(certStore, signedTestRoot, gun)
+	err = ValidateRoot(certStore, signedTestRoot, gun, notary.TrustPinConfig{TOFU: true})
 	require.NoError(t, err)
 
 	// Finally, validate the only trusted certificate that exists is the new one
@@ -357,7 +502,7 @@ func testValidateRootRotationMissingOrigSig(t *testing.T, keyAlg, rootKeyType st
 
 	// This call to ValidateRoot will succeed since we are using a valid PEM
 	// encoded certificate, and have no other certificates for this CN
-	err = ValidateRoot(certStore, signedTestRoot, gun)
+	err = ValidateRoot(certStore, signedTestRoot, gun, notary.TrustPinConfig{TOFU: true})
 	require.Error(t, err, "insuficient signatures on root")
 
 	// Finally, validate the only trusted certificate that exists is still
@@ -421,7 +566,7 @@ func testValidateRootRotationMissingNewSig(t *testing.T, keyAlg, rootKeyType str
 
 	// This call to ValidateRoot will succeed since we are using a valid PEM
 	// encoded certificate, and have no other certificates for this CN
-	err = ValidateRoot(certStore, signedTestRoot, gun)
+	err = ValidateRoot(certStore, signedTestRoot, gun, notary.TrustPinConfig{TOFU: true})
 	require.Error(t, err, "insuficient signatures on root")
 
 	// Finally, validate the only trusted certificate that exists is still
