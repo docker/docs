@@ -1,6 +1,7 @@
 package client
 
 import (
+	"bytes"
 	"crypto/sha256"
 	"encoding/json"
 	"fmt"
@@ -250,12 +251,14 @@ func TestChecksumMismatch(t *testing.T) {
 
 	sampleTargets := data.NewTargets()
 	orig, err := json.Marshal(sampleTargets)
-	origSha256 := sha256.Sum256(orig)
+	assert.NoError(t, err)
+
+	origHashes, err := GetSupportedHashes(orig)
 	assert.NoError(t, err)
 
 	remoteStorage.SetMeta("targets", orig)
 
-	_, _, err = client.downloadSigned("targets", int64(len(orig)), origSha256[:])
+	_, _, err = client.downloadSigned("targets", int64(len(orig)), origHashes)
 	assert.IsType(t, ErrChecksumMismatch{}, err)
 }
 
@@ -267,12 +270,14 @@ func TestChecksumMatch(t *testing.T) {
 
 	sampleTargets := data.NewTargets()
 	orig, err := json.Marshal(sampleTargets)
-	origSha256 := sha256.Sum256(orig)
+	assert.NoError(t, err)
+
+	origHashes, err := GetSupportedHashes(orig)
 	assert.NoError(t, err)
 
 	remoteStorage.SetMeta("targets", orig)
 
-	_, _, err = client.downloadSigned("targets", int64(len(orig)), origSha256[:])
+	_, _, err = client.downloadSigned("targets", int64(len(orig)), origHashes)
 	assert.NoError(t, err)
 }
 
@@ -284,13 +289,15 @@ func TestSizeMismatchLong(t *testing.T) {
 
 	sampleTargets := data.NewTargets()
 	orig, err := json.Marshal(sampleTargets)
-	origSha256 := sha256.Sum256(orig)
 	assert.NoError(t, err)
 	l := int64(len(orig))
 
+	origHashes, err := GetSupportedHashes(orig)
+	assert.NoError(t, err)
+
 	remoteStorage.SetMeta("targets", orig)
 
-	_, _, err = client.downloadSigned("targets", l, origSha256[:])
+	_, _, err = client.downloadSigned("targets", l, origHashes)
 	// size just limits the data received, the error is caught
 	// either during checksum verification or during json deserialization
 	assert.IsType(t, ErrChecksumMismatch{}, err)
@@ -304,13 +311,15 @@ func TestSizeMismatchShort(t *testing.T) {
 
 	sampleTargets := data.NewTargets()
 	orig, err := json.Marshal(sampleTargets)
-	origSha256 := sha256.Sum256(orig)
 	assert.NoError(t, err)
 	l := int64(len(orig))
 
+	origHashes, err := GetSupportedHashes(orig)
+	assert.NoError(t, err)
+
 	remoteStorage.SetMeta("targets", orig)
 
-	_, _, err = client.downloadSigned("targets", l, origSha256[:])
+	_, _, err = client.downloadSigned("targets", l, origHashes)
 	// size just limits the data received, the error is caught
 	// either during checksum verification or during json deserialization
 	assert.IsType(t, ErrChecksumMismatch{}, err)
@@ -512,6 +521,7 @@ func TestDownloadTargetsNoChecksum(t *testing.T) {
 	assert.NoError(t, err)
 
 	delete(repo.Snapshot.Signed.Meta["targets"].Hashes, "sha256")
+	delete(repo.Snapshot.Signed.Meta["targets"].Hashes, "sha512")
 
 	err = client.downloadTargets("targets")
 	assert.IsType(t, data.ErrMissingMeta{}, err)
@@ -721,8 +731,6 @@ func TestDownloadSnapshotLarge(t *testing.T) {
 	assert.NoError(t, err)
 }
 
-// TestDownloadSnapshotNoChecksum: It should never be valid to download a
-// snapshot if we don't have a checksum
 func TestDownloadSnapshotNoTimestamp(t *testing.T) {
 	repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
@@ -744,6 +752,8 @@ func TestDownloadSnapshotNoTimestamp(t *testing.T) {
 	assert.IsType(t, tuf.ErrNotLoaded{}, err)
 }
 
+// TestDownloadSnapshotNoChecksum: It should never be valid to download a
+// snapshot if we don't have a checksum
 func TestDownloadSnapshotNoChecksum(t *testing.T) {
 	repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
@@ -760,6 +770,7 @@ func TestDownloadSnapshotNoChecksum(t *testing.T) {
 	assert.NoError(t, err)
 
 	delete(repo.Timestamp.Signed.Meta["snapshot"].Hashes, "sha256")
+	delete(repo.Timestamp.Signed.Meta["snapshot"].Hashes, "sha512")
 
 	err = client.downloadSnapshot()
 	assert.IsType(t, data.ErrMissingMeta{}, err)
@@ -881,4 +892,16 @@ func TestDownloadTimestampLocalTimestampInvalidRemoteTimestamp(t *testing.T) {
 	client := NewClient(repo, remoteStorage, localStorage)
 	err = client.downloadTimestamp()
 	assert.NoError(t, err)
+}
+
+// GetSupportedHashes is a helper function that returns
+// the checksums of all the supported hash algorithms
+// of the given payload.
+func GetSupportedHashes(payload []byte) (data.Hashes, error) {
+	meta, err := data.NewFileMeta(bytes.NewReader(payload), data.NotaryDefaultHashes...)
+	if err != nil {
+		return nil, err
+	}
+
+	return meta.Hashes, nil
 }

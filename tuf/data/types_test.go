@@ -53,3 +53,111 @@ func TestSignatureUnmarshalJSON(t *testing.T) {
 	// Check that the method string is lowercased
 	assert.Equal(t, sig.Method.String(), "rsa")
 }
+
+func TestCheckHashes(t *testing.T) {
+	var err error
+	raw := []byte("Bumblebee")
+
+	// Since only provide an un-supported hash algorithm here,
+	// it should be considered as fail.
+	unSupported := make(Hashes)
+	unSupported["Arthas"] = []byte("is past away.")
+	err = CheckHashes(raw, unSupported)
+	assert.Error(t, err)
+	assert.Contains(t, err.Error(), "at least one supported hash needed")
+
+	// Expected to fail since there is no checksum at all.
+	hashes := make(Hashes)
+	err = CheckHashes(raw, hashes)
+	assert.Error(t, err)
+	assert.Contains(t, err.Error(), "at least one supported hash needed")
+
+	// The most standard one.
+	hashes["sha256"], err = hex.DecodeString("d13e2b60d74c2e6f4f449b5e536814edf9a4827f5a9f4f957fc92e77609b9c92")
+	assert.NoError(t, err)
+	hashes["sha512"], err = hex.DecodeString("f2330f50d0f3ee56cf0d7f66aad8205e0cb9972c323208ffaa914ef7b3c240ae4774b5bbd1db2ce226ee967cfa9058173a853944f9b44e2e08abca385e2b7ed4")
+	assert.NoError(t, err)
+	err = CheckHashes(raw, hashes)
+	assert.NoError(t, err)
+
+	// Expected as success since there are already supported hash here,
+	// just ignore the unsupported one.
+	hashes["Saar"] = []byte("survives again in CTM.")
+	err = CheckHashes(raw, hashes)
+	assert.NoError(t, err)
+
+	only256 := make(Hashes)
+	only256["sha256"], err = hex.DecodeString("d13e2b60d74c2e6f4f449b5e536814edf9a4827f5a9f4f957fc92e77609b9c92")
+	assert.NoError(t, err)
+	err = CheckHashes(raw, only256)
+	assert.NoError(t, err)
+
+	only512 := make(Hashes)
+	only512["sha512"], err = hex.DecodeString("f2330f50d0f3ee56cf0d7f66aad8205e0cb9972c323208ffaa914ef7b3c240ae4774b5bbd1db2ce226ee967cfa9058173a853944f9b44e2e08abca385e2b7ed4")
+	assert.NoError(t, err)
+	err = CheckHashes(raw, only512)
+	assert.NoError(t, err)
+
+	// Expected to fail due to the failure of sha256
+	malicious256 := make(Hashes)
+	malicious256["sha256"] = []byte("malicious data")
+	err = CheckHashes(raw, malicious256)
+	assert.Error(t, err)
+	assert.Contains(t, err.Error(), "checksum mismatched")
+
+	// Expected to fail due to the failure of sha512
+	malicious512 := make(Hashes)
+	malicious512["sha512"] = []byte("malicious data")
+	err = CheckHashes(raw, malicious512)
+	assert.Error(t, err)
+	assert.Contains(t, err.Error(), "checksum mismatched")
+
+	// Expected to fail because of the failure of sha512
+	// even though the sha256 is OK.
+	doubleFace := make(Hashes)
+	doubleFace["sha256"], err = hex.DecodeString("d13e2b60d74c2e6f4f449b5e536814edf9a4827f5a9f4f957fc92e77609b9c92")
+	assert.NoError(t, err)
+	doubleFace["sha512"], err = hex.DecodeString("d13e2b60d74c2e6f4f449b5e536814edf9a4827f5a9f4f957fc92e77609b9c92")
+	assert.NoError(t, err)
+	err = CheckHashes(raw, doubleFace)
+	assert.Error(t, err)
+	assert.Contains(t, err.Error(), "checksum mismatched")
+}
+
+func TestCheckValidHashStructures(t *testing.T) {
+	var err error
+	hashes := make(Hashes)
+
+	// Expected to fail since there is no checksum at all.
+	err = CheckValidHashStructures(hashes)
+	assert.Error(t, err)
+	assert.Contains(t, err.Error(), "at least one supported hash needed")
+
+	// Expected to fail even though the checksum of sha384 is valid,
+	// because we haven't provided a supported hash algorithm yet (ex: sha256).
+	hashes["sha384"], err = hex.DecodeString("64becc3c23843942b1040ffd4743d1368d988ddf046d17d448a6e199c02c3044b425a680112b399d4dbe9b35b7ccc989")
+	err = CheckValidHashStructures(hashes)
+	assert.Error(t, err)
+	assert.Contains(t, err.Error(), "at least one supported hash needed")
+
+	hashes["sha256"], err = hex.DecodeString("766af0ef090a4f2307e49160fa242db6fb95f071ad81a198eeb7d770e61cd6d8")
+	assert.NoError(t, err)
+	err = CheckValidHashStructures(hashes)
+	assert.NoError(t, err)
+
+	hashes["sha512"], err = hex.DecodeString("795d9e95db099464b6730844f28effddb010b0d5abae5d5892a6ee04deacb09c9e622f89e816458b5a1a81761278d7d3a6a7c269d9707eff8858b16c51de0315")
+	assert.NoError(t, err)
+	err = CheckValidHashStructures(hashes)
+	assert.NoError(t, err)
+
+	// Also should be succeed since only check the length of the checksum.
+	hashes["sha256"], err = hex.DecodeString("01234567890a4f2307e49160fa242db6fb95f071ad81a198eeb7d770e61cd6d8")
+	err = CheckValidHashStructures(hashes)
+	assert.NoError(t, err)
+
+	// Should failed since the first '0' is missing.
+	hashes["sha256"], err = hex.DecodeString("1234567890a4f2307e49160fa242db6fb95f071ad81a198eeb7d770e61cd6d8")
+	err = CheckValidHashStructures(hashes)
+	assert.Error(t, err)
+	assert.Contains(t, err.Error(), "invalid")
+}
