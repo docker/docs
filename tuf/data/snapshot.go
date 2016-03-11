@@ -7,6 +7,7 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/go/canonical/json"
+	"github.com/docker/notary"
 )
 
 // SignedSnapshot is a fully unpacked snapshot.json
@@ -40,7 +41,7 @@ func isValidSnapshotStructure(s Snapshot) error {
 		// from an empty map.
 		//
 		// For now sha256 is required and sha512 is not.
-		if _, ok := s.Meta[role].Hashes["sha256"]; !ok {
+		if _, ok := s.Meta[role].Hashes[notary.SHA256]; !ok {
 			return ErrInvalidMetadata{
 				role: CanonicalSnapshotRole,
 				msg:  fmt.Sprintf("missing %s sha256 checksum information", role),

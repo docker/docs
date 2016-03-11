@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/docker/go/canonical/json"
+	"github.com/docker/notary"
 )
 
 // SignedTimestamp is a fully unpacked timestamp.json
@@ -38,7 +39,7 @@ func isValidTimestampStructure(t Timestamp) error {
 	// from an empty map.
 	//
 	// For now sha256 is required and sha512 is not.
-	if _, ok := t.Meta[CanonicalSnapshotRole].Hashes["sha256"]; !ok {
+	if _, ok := t.Meta[CanonicalSnapshotRole].Hashes[notary.SHA256]; !ok {
 		return ErrInvalidMetadata{
 			role: CanonicalTimestampRole, msg: "missing snapshot sha256 checksum information"}
 	}
