@@ -33,7 +33,7 @@ ports:
 
 You can optionally use an externally generated and signed certificate for the
 UCP controller by using the `--external-ucp-ca`. Create a storage volume named
-`ucp-server-certs` with ca.pem, cert.pem, and key.pem in the root directory
+`ucp-controller-server-certs` with ca.pem, cert.pem, and key.pem in the root directory
 before running the install.
 
 A license file can optionally be added during install by volume
