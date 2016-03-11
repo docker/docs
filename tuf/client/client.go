@@ -453,7 +453,7 @@ func (c *Client) downloadSigned(role string, size int64, expectedHashes data.Has
 		return nil, nil, err
 	}
 
-	if len(expectedHashes) != 0 {
+	if expectedHashes != nil {
 		if err := data.CheckHashes(raw, expectedHashes); err != nil {
 			return nil, nil, ErrChecksumMismatch{role: role}
 		}
