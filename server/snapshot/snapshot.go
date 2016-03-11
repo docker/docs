@@ -46,7 +46,6 @@ func GetOrCreateSnapshotKey(gun string, store storage.KeyStore, crypto signed.Cr
 // whatever the most recent snapshot is to create the next one, only updating
 // the expiry time and version.
 func GetOrCreateSnapshot(gun string, store storage.MetaStore, cryptoService signed.CryptoService) ([]byte, error) {
-
 	d, err := store.GetCurrent(gun, "snapshot")
 	if err != nil {
 		return nil, err

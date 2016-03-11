@@ -140,7 +140,7 @@ func NewTarget(targetName string, targetPath string) (*Target, error) {
 		return nil, err
 	}
 
-	meta, err := data.NewFileMeta(bytes.NewBuffer(b))
+	meta, err := data.NewFileMeta(bytes.NewBuffer(b), data.NotaryDefaultHashes...)
 	if err != nil {
 		return nil, err
 	}

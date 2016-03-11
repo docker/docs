@@ -2,12 +2,12 @@ package data
 
 import (
 	"bytes"
-	"crypto/sha256"
 	"fmt"
 	"time"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/go/canonical/json"
+	"github.com/docker/notary"
 )
 
 // SignedSnapshot is a fully unpacked snapshot.json
@@ -39,10 +39,18 @@ func isValidSnapshotStructure(s Snapshot) error {
 		// Meta is a map of FileMeta, so if the role isn't in the map it returns
 		// an empty FileMeta, which has an empty map, and you can check on keys
 		// from an empty map.
-		if checksum, ok := s.Meta[role].Hashes["sha256"]; !ok || len(checksum) != sha256.Size {
+		//
+		// For now sha256 is required and sha512 is not.
+		if _, ok := s.Meta[role].Hashes[notary.SHA256]; !ok {
 			return ErrInvalidMetadata{
 				role: CanonicalSnapshotRole,
-				msg:  fmt.Sprintf("missing or invalid %s sha256 checksum information", role),
+				msg:  fmt.Sprintf("missing %s sha256 checksum information", role),
+			}
+		}
+		if err := CheckValidHashStructures(s.Meta[role].Hashes); err != nil {
+			return ErrInvalidMetadata{
+				role: CanonicalSnapshotRole,
+				msg:  fmt.Sprintf("invalid %s checksum information, %v", role, err),
 			}
 		}
 	}
@@ -63,11 +71,11 @@ func NewSnapshot(root *Signed, targets *Signed) (*SignedSnapshot, error) {
 		logrus.Debug("Error Marshalling Root")
 		return nil, err
 	}
-	rootMeta, err := NewFileMeta(bytes.NewReader(rootJSON), "sha256")
+	rootMeta, err := NewFileMeta(bytes.NewReader(rootJSON), NotaryDefaultHashes...)
 	if err != nil {
 		return nil, err
 	}
-	targetsMeta, err := NewFileMeta(bytes.NewReader(targetsJSON), "sha256")
+	targetsMeta, err := NewFileMeta(bytes.NewReader(targetsJSON), NotaryDefaultHashes...)
 	if err != nil {
 		return nil, err
 	}

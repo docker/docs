@@ -2,7 +2,6 @@ package main
 
 import (
 	"bufio"
-	"crypto/sha256"
 	"fmt"
 	"io/ioutil"
 	"net"
@@ -11,8 +10,6 @@ import (
 	"os"
 	"strings"
 	"time"
-
-	"crypto/subtle"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/distribution/registry/client/auth"
@@ -385,13 +382,10 @@ func (t *tufCommander) tufVerify(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("error retrieving target by name:%s, error:%v", targetName, err)
 	}
 
-	// Create hasher and hash data
-	stdinHash := sha256.Sum256(payload)
-	serverHash := target.Hashes["sha256"]
-
-	if subtle.ConstantTimeCompare(stdinHash[:], serverHash) == 0 {
-		return fmt.Errorf("notary: data not present in the trusted collection")
+	if err := data.CheckHashes(payload, target.Hashes); err != nil {
+		return fmt.Errorf("data not present in the trusted collection, %v", err)
 	}
+
 	_, _ = os.Stdout.Write(payload)
 	return nil
 }

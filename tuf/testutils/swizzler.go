@@ -530,7 +530,7 @@ func (m *MetadataSwizzler) UpdateSnapshotHashes(roles ...string) error {
 				return err
 			}
 
-			meta, err := data.NewFileMeta(bytes.NewReader(metaBytes), "sha256")
+			meta, err := data.NewFileMeta(bytes.NewReader(metaBytes), data.NotaryDefaultHashes...)
 			if err != nil {
 				return err
 			}
@@ -575,7 +575,7 @@ func (m *MetadataSwizzler) UpdateTimestampHash() error {
 		return err
 	}
 
-	snapshotMeta, err := data.NewFileMeta(bytes.NewReader(metaBytes), "sha256")
+	snapshotMeta, err := data.NewFileMeta(bytes.NewReader(metaBytes), data.NotaryDefaultHashes...)
 	if err != nil {
 		return err
 	}
