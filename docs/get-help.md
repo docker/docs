@@ -25,6 +25,13 @@ community members and developers.
 <table>
   <col width="25%">
   <col width="75%">
+    <tr>
+    <td>Forum</td>
+    <td>
+      The <a href="https://forums.docker.com/"
+      target="_blank">Docker Community Forum</a> is for contributors and others working with Docker software or projects.
+    </td>
+  </tr>
   <tr>
     <td>Internet Relay Chat (IRC)</th>
     <td>
@@ -36,13 +43,6 @@ community members and developers.
         <a href="https://botbot.me/freenode/docker/#" target="_blank">our chat archives</a>.
       </p>
       Use our IRC quickstart guide below for easy ways to get started with IRC.
-    </td>
-  </tr>
-  <tr>
-    <td>Forum</td>
-    <td>
-      The <a href="https://forums.docker.com/"
-      target="_blank">Docker Community Forum</a> is for contributors and others working with Docker software or projects.
     </td>
   </tr>
   <tr>
