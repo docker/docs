@@ -160,25 +160,6 @@ func CheckHashes(payload []byte, hashes Hashes) error {
 	return nil
 }
 
-// GetSupportedHashes returns the checksums of all the supported hash algorithms
-// of the given payload
-func GetSupportedHashes(payload []byte) Hashes {
-	hashes := make(Hashes)
-
-	for _, v := range NotaryDefaultHashes {
-		switch v {
-		case notary.SHA256:
-			checksum := sha256.Sum256(payload)
-			hashes[v] = checksum[:]
-		case notary.SHA512:
-			checksum := sha512.Sum512(payload)
-			hashes[v] = checksum[:]
-		}
-	}
-
-	return hashes
-}
-
 // CheckValidHashStructures returns an error, or nil, depending on whether
 // the content of the hashes is valid or not.
 func CheckValidHashStructures(hashes Hashes) error {
