@@ -97,11 +97,7 @@ func timestampExpired(ts *data.SignedTimestamp) bool {
 func snapshotExpired(ts *data.SignedTimestamp, snapshot []byte) bool {
 	// If this check failed, it means the current snapshot was not exactly what we expect
 	// via the timestamp. So we can consider it to be "expired."
-	if err := data.CheckHashes(snapshot, ts.Signed.Meta["snapshot"].Hashes); err != nil {
-		return true
-	}
-
-	return false
+	return data.CheckHashes(snapshot, ts.Signed.Meta[data.CanonicalSnapshotRole].Hashes) != nil
 }
 
 // CreateTimestamp creates a new timestamp. If a prev timestamp is provided, it
