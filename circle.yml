@@ -11,4 +11,4 @@ deployment:
     tag: /v.*/
     owner: docker
     commands:
-      - echo "Deploying $CIRCLE_TAG"
+      - ./script/deploy.sh
