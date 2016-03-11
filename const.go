@@ -64,3 +64,11 @@ var NotaryDefaultExpiries = map[string]time.Duration{
 	"snapshot":  NotarySnapshotExpiry,
 	"timestamp": NotaryTimestampExpiry,
 }
+
+// TrustPinConfig represents the configuration under the trust_pinning section of the config file
+// This struct represents the preferred way to bootstrap trust for this repository
+type TrustPinConfig struct {
+	CA    map[string]string
+	Certs map[string]string
+	TOFU  bool
+}

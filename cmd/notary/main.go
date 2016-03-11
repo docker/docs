@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/docker/notary"
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/version"
@@ -97,6 +98,7 @@ func (n *notaryCommander) parseConfig() (*viper.Viper, error) {
 	// Setup the configuration details into viper
 	config.SetDefault("trust_dir", defaultTrustDir)
 	config.SetDefault("remote_server", map[string]string{"url": defaultServerURL})
+	config.SetDefault("trust_pinning", notary.TrustPinConfig{TOFU: true})
 
 	// Find and read the config file
 	if err := config.ReadInConfig(); err != nil {
@@ -107,6 +109,13 @@ func (n *notaryCommander) parseConfig() (*viper.Viper, error) {
 		if n.configFile != "" || !os.IsNotExist(err) {
 			return nil, fmt.Errorf("error opening config file: %v", err)
 		}
+	}
+
+	// Check that the trust_pinning section was a valid notary.TrustPinConfig object
+	// We parse this here so that parsing and usage are separated in code, we then use type assertions later
+	if _, ok := config.Get("trust_pinning").(notary.TrustPinConfig); !ok {
+		// Return a noisy error if the user passed an invalid trust_pinning section instead of sticking to default TOFUS
+		return nil, fmt.Errorf("error parsing trust_pinning section of config")
 	}
 
 	// At this point we either have the default value or the one set by the config.
