@@ -229,15 +229,15 @@ You can also send the `--san` option to specify the SANs for a host.
 UCP uses named volumes for persistence of data. When installing UCP for
 production, you need to create the following volumes:
 
-| Volume name                | Data                                                                                                           |
-|:---------------------------|:---------------------------------------------------------------------------------------------------------------|
-| ucp-root-ca                | The certificate and key for the UCP root CA. Do not create this volume if you are using your own certificates. |
-| ucp-swarm-root-ca          | The certificate and key for the Swarm root CA.                                                                 |
-| ucp-server-certs           | The controller certificates for the UCP controllers web server.                                                |
-| ucp-swarm-node-certs       | The Swarm certificates for the current node (repeated on every node in the cluster).                           |
-| ucp-swarm-kv-certs         | The Swarm KV client certificates for the current node (repeated on every node in the cluster).                 |
-| ucp-swarm-controller-certs | The UCP Controller Swarm client certificates for the current node.                                             |
-| ucp-kv                     | Key value store persistence.                                                                                   |
+| Volume name                 | Data                                                                                                           |
+|:----------------------------|:---------------------------------------------------------------------------------------------------------------|
+| ucp-client-root-ca          | The certificate and key for the UCP root CA. Do not create this volume if you are using your own certificates. |
+| ucp-cluster-root-ca         | The certificate and key for the Swarm root CA.                                                                 |
+| ucp-controller-server-certs | The controller certificates for the UCP controllers web server.                                                |
+| ucp-node-certs              | The Swarm certificates for the current node (repeated on every node in the cluster).                           |
+| ucp-kv-certs                | The Swarm KV client certificates for the current node (repeated on every node in the cluster).                 |
+| ucp-controller-client-certs | The UCP Controller Swarm client certificates for the current node.                                             |
+| ucp-kv                      | Key value store persistence.                                                                                   |
 
 If you don't create these volumes, the `ucp install` command creates them for
 you with the default volume driver and flags.

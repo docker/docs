@@ -151,7 +151,7 @@ To install UCP with your own external root CA:
 
 1. Log into the machine where you intend to install UCP.
 
-2. Make sure you have created a named volume called `ucp-server-certs`.
+2. Make sure you have created a named volume called `ucp-controller-server-certs`.
 
 3. Add the following files to the volume's top-level directory:
 
