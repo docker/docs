@@ -2,8 +2,6 @@ package handlers
 
 import (
 	"bytes"
-	"crypto/sha256"
-	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -174,51 +172,7 @@ func TestGetKeyHandlerCreatesOnce(t *testing.T) {
 	}
 }
 
-type expectedCacheSetting int
-
-const (
-	checksumCaching expectedCacheSetting = iota
-	currentCaching
-	noCaching
-)
-
-// Verifies that the body is as expected, the ETag is as expected, and cache control headers
-// are as expected
-func verifyGetResponse(t *testing.T, rw *httptest.ResponseRecorder, expectedBytes []byte,
-	checksumHex string, cacheType expectedCacheSetting, cacheConfig *CacheControlConfig) {
-
-	body, err := ioutil.ReadAll(rw.Body)
-	assert.NoError(t, err)
-	assert.True(t, bytes.Equal(expectedBytes, body))
-
-	assert.Equal(t, rw.HeaderMap.Get("ETag"), checksumHex)
-
-	cacheControl := rw.HeaderMap.Get("Cache-Control")
-	switch cacheType {
-	case checksumCaching:
-		maxAge := cacheConfig.headerVals["consistent"]
-		assert.Equal(t, fmt.Sprintf("public, max-age=%v, s-maxage=%v, must-revalidate", maxAge, maxAge), cacheControl)
-	case currentCaching:
-		maxAge := cacheConfig.headerVals["current"]
-		assert.Equal(t, fmt.Sprintf("public, max-age=%v, s-maxage=%v", maxAge, maxAge), cacheControl)
-	default:
-		assert.Equal(t, "max-age=0, no-cache, no-store", cacheControl)
-	}
-
-	switch cacheType {
-	case checksumCaching, currentCaching:
-		lastModified, err := time.Parse(time.RFC1123, rw.HeaderMap.Get("Last-Modified"))
-		assert.NoError(t, err)
-		assert.True(t, lastModified.After(time.Now().Add(-5*time.Minute)))
-
-		assert.Equal(t, "", rw.HeaderMap.Get("Pragma"))
-	default:
-		assert.Equal(t, "", rw.HeaderMap.Get("Last-Modified"))
-		assert.Equal(t, "no-cache", rw.HeaderMap.Get("Pragma"))
-	}
-}
-
-func TestGetHandlerRootAndNoCacheConfigProvided(t *testing.T) {
+func TestGetHandlerRoot(t *testing.T) {
 	metaStore := storage.NewMemStorage()
 	repo, _, err := testutils.EmptyRepo("gun")
 	assert.NoError(t, err)
@@ -240,22 +194,13 @@ func TestGetHandlerRootAndNoCacheConfigProvided(t *testing.T) {
 		"tufRole":   "root",
 	}
 
-	checksumBytes := sha256.Sum256(rootJSON)
-	checksumHex := hex.EncodeToString(checksumBytes[:])
-
-	cacheConfig := NewCacheControlConfig()
-
 	rw := httptest.NewRecorder()
-	assert.NoError(t, getHandler(ctx, rw, req, vars))
-	verifyGetResponse(t, rw, rootJSON, checksumHex, currentCaching, cacheConfig)
 
-	vars["checksum"] = checksumHex
-	rw = httptest.NewRecorder()
-	assert.NoError(t, getHandler(ctx, rw, req, vars))
-	verifyGetResponse(t, rw, rootJSON, checksumHex, checksumCaching, cacheConfig)
+	err = getHandler(ctx, rw, req, vars)
+	assert.NoError(t, err)
 }
 
-func TestGetHandlerTimestampWithCacheValues(t *testing.T) {
+func TestGetHandlerTimestamp(t *testing.T) {
 	metaStore := storage.NewMemStorage()
 	repo, crypto, err := testutils.EmptyRepo("gun")
 	assert.NoError(t, err)
@@ -283,25 +228,13 @@ func TestGetHandlerTimestampWithCacheValues(t *testing.T) {
 		"tufRole":   "timestamp",
 	}
 
-	cacheConfig := NewCacheControlConfig()
-	cacheConfig.SetConsistentCacheMaxAge(365 * 24 * 60 * 60)
-	cacheConfig.SetCurrentCacheMaxAge(1)
-	ctx = context.WithValue(ctx, "cacheConfig", cacheConfig)
-
-	checksumBytes := sha256.Sum256(tsJSON)
-	checksumHex := hex.EncodeToString(checksumBytes[:])
-
 	rw := httptest.NewRecorder()
-	assert.NoError(t, getHandler(ctx, rw, req, vars))
-	verifyGetResponse(t, rw, tsJSON, checksumHex, currentCaching, cacheConfig)
 
-	vars["checksum"] = checksumHex
-	rw = httptest.NewRecorder()
-	assert.NoError(t, getHandler(ctx, rw, req, vars))
-	verifyGetResponse(t, rw, tsJSON, checksumHex, checksumCaching, cacheConfig)
+	err = getHandler(ctx, rw, req, vars)
+	assert.NoError(t, err)
 }
 
-func TestGetHandlerSnapshotWithNoCaching(t *testing.T) {
+func TestGetHandlerSnapshot(t *testing.T) {
 	metaStore := storage.NewMemStorage()
 	repo, crypto, err := testutils.EmptyRepo("gun")
 	assert.NoError(t, err)
@@ -323,22 +256,10 @@ func TestGetHandlerSnapshotWithNoCaching(t *testing.T) {
 		"tufRole":   "snapshot",
 	}
 
-	cacheConfig := NewCacheControlConfig()
-	cacheConfig.SetConsistentCacheMaxAge(0)
-	cacheConfig.SetCurrentCacheMaxAge(-1)
-	ctx = context.WithValue(ctx, "cacheConfig", cacheConfig)
-
-	checksumBytes := sha256.Sum256(snJSON)
-	checksumHex := hex.EncodeToString(checksumBytes[:])
-
 	rw := httptest.NewRecorder()
-	assert.NoError(t, getHandler(ctx, rw, req, vars))
-	verifyGetResponse(t, rw, snJSON, checksumHex, noCaching, cacheConfig)
 
-	vars["checksum"] = checksumHex
-	rw = httptest.NewRecorder()
-	assert.NoError(t, getHandler(ctx, rw, req, vars))
-	verifyGetResponse(t, rw, snJSON, checksumHex, noCaching, cacheConfig)
+	err = getHandler(ctx, rw, req, vars)
+	assert.NoError(t, err)
 }
 
 func TestGetHandler404(t *testing.T) {
