@@ -11,7 +11,6 @@ import (
 	_ "github.com/docker/distribution/registry/auth/htpasswd"
 	_ "github.com/docker/distribution/registry/auth/token"
 	"github.com/docker/go-connections/tlsconfig"
-	"github.com/docker/notary/server/handlers"
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/signer/client"
 	"github.com/docker/notary/tuf/data"
@@ -123,7 +122,7 @@ func getTrustService(configuration *viper.Viper, sFactory signerFactory,
 	hRegister(
 		"Trust operational",
 		// If the trust service fails, the server is degraded but not
-		// exactly unheatlthy, so always return healthy and just log an
+		// exactly unhealthy, so always return healthy and just log an
 		// error.
 		func() error {
 			err := notarySigner.CheckHealth(minute)
@@ -136,30 +135,29 @@ func getTrustService(configuration *viper.Viper, sFactory signerFactory,
 	return notarySigner, keyAlgo, nil
 }
 
-// Gets the cache configuration for GET-ting metadata.  This is the max-age
-// (an integer in seconds, just like in the Cache-Control header) for consistent
-// (content-addressable) downloads and current (latest version) downloads.
-// The max-age must be between 0 and 31536000 (one year in seconds, which is
-// the recommended maximum time data is cached), else parsing will return an
-// error.  A max-age of 0 will disable caching for that type of download
-// (consistent or current).
-func getCacheConfig(configuration *viper.Viper) (*handlers.CacheControlConfig, error) {
-	cacheConfig := handlers.NewCacheControlConfig()
-	for option, setMaxAge := range map[string]func(int){
-		"current_metadata":     cacheConfig.SetCurrentCacheMaxAge,
-		"metadata_by_checksum": cacheConfig.SetConsistentCacheMaxAge,
-	} {
-		m := configuration.GetString(fmt.Sprintf("caching.max_age.%s", option))
+// Gets the cache configuration for GET-ting current and checksummed metadata
+// This is mainly the max-age (an integer in seconds, just like in the
+// Cache-Control header) for consistent (content-addressable) downloads and
+// current (latest version) downloads. The max-age must be between 0 and 31536000
+// (one year in seconds, which is the recommended maximum time data is cached),
+// else parsing will return an error.  A max-age of 0 will disable caching for
+// that type of download (consistent or current).
+func getCacheConfig(configuration *viper.Viper) (utils.CacheControlConfig, utils.CacheControlConfig, error) {
+	var cccs []utils.CacheControlConfig
+	types := []string{"current_metadata", "metadata_by_checksum"}
+
+	for _, optionName := range types {
+		m := configuration.GetString(fmt.Sprintf("caching.max_age.%s", optionName))
 		if m == "" {
 			continue
 		}
 		seconds, err := strconv.Atoi(m)
 		if err != nil || seconds < 0 || seconds > maxMaxAge {
-			return nil, fmt.Errorf(
+			return nil, nil, fmt.Errorf(
 				"must specify a cache-control max-age between 0 and %v", maxMaxAge)
 		}
 
-		setMaxAge(seconds)
+		cccs = append(cccs, utils.NewCacheControlConfig(seconds, optionName == "current_metadata"))
 	}
-	return cacheConfig, nil
+	return cccs[0], cccs[1], nil
 }

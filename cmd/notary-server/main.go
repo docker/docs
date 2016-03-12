@@ -95,11 +95,10 @@ func main() {
 	}
 	ctx = context.WithValue(ctx, "metaStore", store)
 
-	cacheConfig, err := getCacheConfig(mainViper)
+	currentCache, consistentCache, err := getCacheConfig(mainViper)
 	if err != nil {
 		logrus.Fatal(err.Error())
 	}
-	ctx = context.WithValue(ctx, "cacheConfig", cacheConfig)
 
 	httpAddr, tlsConfig, err := getAddrAndTLSConfig(mainViper)
 	if err != nil {
@@ -109,11 +108,15 @@ func main() {
 	logrus.Info("Starting Server")
 	err = server.Run(
 		ctx,
-		httpAddr,
-		tlsConfig,
-		trust,
-		mainViper.GetString("auth.type"),
-		mainViper.Get("auth.options"),
+		server.Config{
+			Addr:                         httpAddr,
+			TLSConfig:                    tlsConfig,
+			Trust:                        trust,
+			AuthMethod:                   mainViper.GetString("auth.type"),
+			AuthOpts:                     mainViper.Get("auth.options"),
+			CurrentCacheControlConfig:    currentCache,
+			ConsistentCacheControlConfig: consistentCache,
+		},
 	)
 
 	logrus.Error(err.Error())

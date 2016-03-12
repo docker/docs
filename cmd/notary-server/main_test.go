@@ -5,7 +5,6 @@ import (
 	"crypto/tls"
 	"fmt"
 	"io/ioutil"
-	"net/http"
 	"os"
 	"reflect"
 	"strings"
@@ -338,16 +337,13 @@ func TestGetCacheConfig(t *testing.T) {
 		`{"caching": {"max_age": {"current_metadata": "hello", "metadata_by_checksum": 300}}}`,
 	}
 
-	cacheConfig, err := getCacheConfig(configure(valid))
+	current, consistent, err := getCacheConfig(configure(valid))
 	assert.NoError(t, err)
-	h := http.Header{}
-	cacheConfig.UpdateCurrentHeaders(h, time.Now())
-	assert.True(t, strings.Contains(h.Get("Cache-Control"), "max-age=0"))
-	cacheConfig.UpdateConsistentHeaders(h, time.Now())
-	assert.True(t, strings.Contains(h.Get("Cache-Control"), "max-age=31536000"))
+	assert.IsType(t, utils.NoCacheControl{}, current)
+	assert.IsType(t, utils.PublicCacheControl{}, consistent)
 
 	for _, invalid := range invalids {
-		_, err := getCacheConfig(configure(invalid))
+		_, _, err := getCacheConfig(configure(invalid))
 		assert.Error(t, err)
 	}
 }

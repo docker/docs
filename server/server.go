@@ -31,12 +31,22 @@ func prometheusOpts(operation string) prometheus.SummaryOpts {
 	}
 }
 
+// Config tells Run how to configure a server
+type Config struct {
+	Addr                         string
+	TLSConfig                    *tls.Config
+	Trust                        signed.CryptoService
+	AuthMethod                   string
+	AuthOpts                     interface{}
+	ConsistentCacheControlConfig utils.CacheControlConfig
+	CurrentCacheControlConfig    utils.CacheControlConfig
+}
+
 // Run sets up and starts a TLS server that can be cancelled using the
 // given configuration. The context it is passed is the context it should
 // use directly for the TLS server, and generate children off for requests
-func Run(ctx context.Context, addr string, tlsConfig *tls.Config, trust signed.CryptoService, authMethod string, authOpts interface{}) error {
-
-	tcpAddr, err := net.ResolveTCPAddr("tcp", addr)
+func Run(ctx context.Context, conf Config) error {
+	tcpAddr, err := net.ResolveTCPAddr("tcp", conf.Addr)
 	if err != nil {
 		return err
 	}
@@ -46,29 +56,29 @@ func Run(ctx context.Context, addr string, tlsConfig *tls.Config, trust signed.C
 		return err
 	}
 
-	if tlsConfig != nil {
+	if conf.TLSConfig != nil {
 		logrus.Info("Enabling TLS")
-		lsnr = tls.NewListener(lsnr, tlsConfig)
+		lsnr = tls.NewListener(lsnr, conf.TLSConfig)
 	}
 
 	var ac auth.AccessController
-	if authMethod == "token" {
-		authOptions, ok := authOpts.(map[string]interface{})
+	if conf.AuthMethod == "token" {
+		authOptions, ok := conf.AuthOpts.(map[string]interface{})
 		if !ok {
 			return fmt.Errorf("auth.options must be a map[string]interface{}")
 		}
-		ac, err = auth.GetAccessController(authMethod, authOptions)
+		ac, err = auth.GetAccessController(conf.AuthMethod, authOptions)
 		if err != nil {
 			return err
 		}
 	}
 
 	svr := http.Server{
-		Addr:    addr,
-		Handler: RootHandler(ac, ctx, trust),
+		Addr:    conf.Addr,
+		Handler: RootHandler(ac, ctx, conf.Trust, conf.ConsistentCacheControlConfig, conf.CurrentCacheControlConfig),
 	}
 
-	logrus.Info("Starting on ", addr)
+	logrus.Info("Starting on ", conf.Addr)
 
 	err = svr.Serve(lsnr)
 
@@ -77,7 +87,9 @@ func Run(ctx context.Context, addr string, tlsConfig *tls.Config, trust signed.C
 
 // RootHandler returns the handler that routes all the paths from / for the
 // server.
-func RootHandler(ac auth.AccessController, ctx context.Context, trust signed.CryptoService) http.Handler {
+func RootHandler(ac auth.AccessController, ctx context.Context, trust signed.CryptoService,
+	consistent, current utils.CacheControlConfig) http.Handler {
+
 	hand := utils.RootHandlerFactory(ac, ctx, trust)
 
 	r := mux.NewRouter()
@@ -89,11 +101,11 @@ func RootHandler(ac auth.AccessController, ctx context.Context, trust signed.Cry
 	r.Methods("GET").Path("/v2/{imageName:.*}/_trust/tuf/{tufRole:root|targets(?:/[^/\\s]+)*|snapshot|timestamp}.{checksum:[a-fA-F0-9]{64}|[a-fA-F0-9]{96}|[a-fA-F0-9]{128}}.json").Handler(
 		prometheus.InstrumentHandlerWithOpts(
 			prometheusOpts("GetRoleByHash"),
-			hand(handlers.GetHandler, "pull")))
+			utils.WrapWithCacheHandler(consistent, hand(handlers.GetHandler, "pull"))))
 	r.Methods("GET").Path("/v2/{imageName:.*}/_trust/tuf/{tufRole:root|targets(?:/[^/\\s]+)*|snapshot|timestamp}.json").Handler(
 		prometheus.InstrumentHandlerWithOpts(
 			prometheusOpts("GetRole"),
-			hand(handlers.GetHandler, "pull")))
+			utils.WrapWithCacheHandler(current, hand(handlers.GetHandler, "pull"))))
 	r.Methods("GET").Path(
 		"/v2/{imageName:.*}/_trust/tuf/{tufRole:snapshot|timestamp}.key").Handler(
 		prometheus.InstrumentHandlerWithOpts(
