@@ -328,7 +328,7 @@ func setUpRepo(t *testing.T, tempBaseDir, gun string, ret passphrase.Retriever) 
 
 	cryptoService := cryptoservice.NewCryptoService(
 		"", trustmanager.NewKeyMemoryStore(ret))
-	ts := httptest.NewServer(server.RootHandler(nil, ctx, cryptoService))
+	ts := httptest.NewServer(server.RootHandler(nil, ctx, cryptoService, nil, nil))
 
 	repo, err := client.NewNotaryRepository(
 		tempBaseDir, gun, ts.URL, http.DefaultTransport, ret)
@@ -414,14 +414,13 @@ func TestRotateKeyBothKeys(t *testing.T) {
 	ret := passphrase.ConstantRetriever("pass")
 
 	ts, initialKeys := setUpRepo(t, tempBaseDir, gun, ret)
-	// we won't need this anymore since we are creating keys locally
-	ts.Close()
+	defer ts.Close()
 
 	k := &keyCommander{
 		configGetter: func() (*viper.Viper, error) {
 			v := viper.New()
 			v.SetDefault("trust_dir", tempBaseDir)
-			// won't need a remote server URL, since we are creating local keys
+			v.SetDefault("remote_server.url", ts.URL)
 			return v, nil
 		},
 		getRetriever: func() passphrase.Retriever { return ret },
@@ -434,30 +433,32 @@ func TestRotateKeyBothKeys(t *testing.T) {
 
 	cl, err := repo.GetChangelist()
 	assert.NoError(t, err, "unable to get changelist: %v", err)
-	assert.Len(t, cl.List(), 2)
+	assert.Len(t, cl.List(), 0)
 
-	// two new keys have been created, and the old keys should still be there
+	// two new keys have been created, and the old keys should still be gone
 	newKeys := repo.CryptoService.ListAllKeys()
+	// there should be 3 keys - snapshot, targets, and root
+	assert.Len(t, newKeys, 3)
+
+	// the old snapshot/targets keys should be gone
 	for keyID, role := range initialKeys {
 		r, ok := newKeys[keyID]
-		assert.True(t, ok, "original key %s missing", keyID)
-		assert.Equal(t, role, r)
-		delete(newKeys, keyID)
-	}
-	// there should be 2 keys left
-	assert.Len(t, newKeys, 2)
-	// one for each role
-	var targetsFound, snapshotFound bool
-	for _, role := range newKeys {
-		switch role {
-		case data.CanonicalTargetsRole:
-			targetsFound = true
-		case data.CanonicalSnapshotRole:
-			snapshotFound = true
+		switch r {
+		case data.CanonicalSnapshotRole, data.CanonicalTargetsRole:
+			assert.False(t, ok, "original key %s still there", keyID)
+		case data.CanonicalRootRole:
+			assert.Equal(t, role, r)
+			assert.True(t, ok, "old root key has changed")
 		}
 	}
-	assert.True(t, targetsFound, "targets key was not created")
-	assert.True(t, snapshotFound, "snapshot key was not created")
+
+	found := make(map[string]bool)
+	for _, role := range newKeys {
+		found[role] = true
+	}
+	assert.True(t, found[data.CanonicalTargetsRole], "targets key was not created")
+	assert.True(t, found[data.CanonicalSnapshotRole], "snapshot key was not created")
+	assert.True(t, found[data.CanonicalRootRole], "root key was removed somehow")
 }
 
 func TestChangeKeyPassphraseInvalidID(t *testing.T) {

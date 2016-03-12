@@ -871,28 +871,13 @@ func TestClientKeyGenerationRotation(t *testing.T) {
 	assertSuccessfullyPublish(t, tempDir, server.URL, "gun", target, tempfiles[0])
 
 	// rotate the signing keys
-	_, err = runCommand(t, tempDir, "key", "rotate", "gun", data.CanonicalSnapshotRole)
+	_, err = runCommand(t, tempDir, "-s", server.URL, "key", "rotate", "gun", data.CanonicalSnapshotRole)
 	assert.NoError(t, err)
-	_, err = runCommand(t, tempDir, "key", "rotate", "gun", data.CanonicalTargetsRole)
+	_, err = runCommand(t, tempDir, "-s", server.URL, "key", "rotate", "gun", data.CanonicalTargetsRole)
 	assert.NoError(t, err)
-	root, sign := assertNumKeys(t, tempDir, 1, 4, true)
+	root, sign := assertNumKeys(t, tempDir, 1, 2, true)
 	assert.Equal(t, origRoot[0], root[0])
-	// there should be the new keys and the old keys
-	for _, origKey := range origSign {
-		found := false
-		for _, key := range sign {
-			if key == origKey {
-				found = true
-			}
-		}
-		assert.True(t, found, "Old key not found in list of old and new keys")
-	}
 
-	// publish the key rotation
-	_, err = runCommand(t, tempDir, "-s", server.URL, "publish", "gun")
-	assert.NoError(t, err)
-	root, sign = assertNumKeys(t, tempDir, 1, 2, true)
-	assert.Equal(t, origRoot[0], root[0])
 	// just do a cursory rotation check that the keys aren't equal anymore
 	for _, origKey := range origSign {
 		for _, key := range sign {
