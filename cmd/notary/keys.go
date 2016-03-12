@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
-	"net/http"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -38,7 +37,7 @@ var cmdKeyListTemplate = usageTemplate{
 var cmdRotateKeyTemplate = usageTemplate{
 	Use:   "rotate [ GUN ] [ key role ]",
 	Short: "Rotate a signing (non-root) key of the given type for the given Globally Unique Name and role.",
-	Long:  "Generates a new signing key (non-root) for the given Globally Unique Name and role.  Rotating to a server-managed key is an online-only operation: a new key is requested from the server rather than generated, and if successful, the key rotation is immediately published.  Rotating to a locally-managed key is an offline operation only: `notary publish` must be executed manually afterward to publish to the remote server.\nThe role must be one of \"snapshot\", \"targets\", or \"timestamp\".",
+	Long:  "Generates a new key for the given Globally Unique Name and role (one of \"snapshot\", \"targets\", or \"timestamp\").  If rotating to a server-managed key, a new key is requested from the server rather than generated.  If the generation or key request is successful, the key rotation is immediately published.  No other changes, even if they are staged, will be published.",
 }
 
 var cmdKeyGenerateRootKeyTemplate = usageTemplate{
@@ -415,15 +414,11 @@ func (k *keyCommander) keysRotate(cmd *cobra.Command, args []string) error {
 	gun := args[0]
 	rotateKeyRole := args[1]
 
-	var rt http.RoundTripper
-	if k.rotateKeyServerManaged {
-		// this does not actually push the changes, just creates the keys, but
-		// it creates a key remotely so it needs a transport
-		rt, err = getTransport(config, gun, false)
-		if err != nil {
-			return err
-		}
+	rt, err := getTransport(config, gun, false)
+	if err != nil {
+		return err
 	}
+
 	nRepo, err := notaryclient.NewNotaryRepository(
 		config.GetString("trust_dir"), gun, getRemoteTrustServer(config),
 		rt, k.getRetriever())

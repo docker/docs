@@ -875,44 +875,47 @@ func (r *NotaryRepository) RotateKey(role string, serverManagesKey bool) error {
 	switch {
 	// We currently support locally or remotely managing snapshot keys...
 	case role == data.CanonicalSnapshotRole:
+		break
+
 	// locally managing targets keys only
-	case role == data.CanonicalTargetsRole:
-		if serverManagesKey {
-			return ErrInvalidRemoteRole{Role: data.CanonicalTargetsRole}
-		}
+	case role == data.CanonicalTargetsRole && !serverManagesKey:
+		break
+	case role == data.CanonicalTargetsRole && serverManagesKey:
+		return ErrInvalidRemoteRole{Role: data.CanonicalTargetsRole}
+
 	// and remotely managing timestamp keys only
-	case role == data.CanonicalTimestampRole:
-		if !serverManagesKey {
-			return ErrInvalidLocalRole{Role: data.CanonicalTimestampRole}
-		}
+	case role == data.CanonicalTimestampRole && serverManagesKey:
+		break
+	case role == data.CanonicalTimestampRole && !serverManagesKey:
+		return ErrInvalidLocalRole{Role: data.CanonicalTimestampRole}
+
 	default:
 		return fmt.Errorf("notary does not currently permit rotating the %s key", role)
 	}
 
-	if serverManagesKey {
-		pubKey, err := getRemoteKey(r.baseURL, r.gun, role, r.roundTrip)
-		if err != nil {
-			return fmt.Errorf("unable to rotate remote key: %s", err)
-		}
-		cl := changelist.NewMemChangelist()
-		if err := r.rootFileKeyChange(cl, role, changelist.ActionCreate, pubKey); err != nil {
-			return err
-		}
-		return r.publish(cl)
+	var (
+		pubKey    data.PublicKey
+		err       error
+		errFmtMsg string
+	)
+	switch serverManagesKey {
+	case true:
+		pubKey, err = getRemoteKey(r.baseURL, r.gun, role, r.roundTrip)
+		errFmtMsg = "unable to rotate remote key: %s"
+	default:
+		pubKey, err = r.CryptoService.Create(role, data.ECDSAKey)
+		errFmtMsg = "unable to generate key: %s"
 	}
 
-	pubKey, err := r.CryptoService.Create(role, data.ECDSAKey)
 	if err != nil {
-		return fmt.Errorf("unable to generate key: %s", err)
+		return fmt.Errorf(errFmtMsg, err)
 	}
 
-	cl, err := changelist.NewFileChangelist(filepath.Join(r.tufRepoPath, "changelist"))
-	if err != nil {
+	cl := changelist.NewMemChangelist()
+	if err := r.rootFileKeyChange(cl, role, changelist.ActionCreate, pubKey); err != nil {
 		return err
 	}
-	defer cl.Close()
-
-	return r.rootFileKeyChange(cl, role, changelist.ActionCreate, pubKey)
+	return r.publish(cl)
 }
 
 func (r *NotaryRepository) rootFileKeyChange(cl changelist.Changelist, role, action string, key data.PublicKey) error {

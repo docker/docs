@@ -21,7 +21,6 @@ import (
 	"github.com/Sirupsen/logrus"
 	ctxu "github.com/docker/distribution/context"
 	"github.com/docker/go/canonical/json"
-	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"golang.org/x/net/context"
 
@@ -2580,47 +2579,6 @@ func TestRotateKeyInvalidRole(t *testing.T) {
 	}
 }
 
-// Initialize repo to have local signing of snapshots.  Rotate the key to have
-// the server manage the snapshot key.  Assert that this publishes the key change
-// but not any other changes.
-func TestRemoteRotationOnlyPublishesKeyChanges(t *testing.T) {
-	ts := fullTestServer(t)
-	defer ts.Close()
-
-	repo1, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
-	defer os.RemoveAll(repo1.baseDir)
-
-	oldSnapshotRole, err := repo1.tufRepo.GetBaseRole(data.CanonicalSnapshotRole)
-	assert.NoError(t, err)
-
-	// Add and make sure it's not published when the key is rotated
-	addTarget(t, repo1, "latest", "../fixtures/intermediate-ca.crt")
-	cl, err := repo1.GetChangelist()
-	assert.NoError(t, err)
-	assert.Len(t, cl.List(), 1)
-
-	assert.NoError(t, repo1.RotateKey(data.CanonicalSnapshotRole, true))
-	assert.Len(t, cl.List(), 1, "rotating key published other changes")
-
-	// ensure that the key rotation was public by pulling from a new repo
-	repo2, _ := newRepoToTestRepo(t, repo1, true)
-	defer os.RemoveAll(repo2.baseDir)
-	tgts, err := repo2.ListTargets()
-	assert.NoError(t, err)
-	assert.Len(t, tgts, 0, "No targets should have been published")
-
-	newSnapshotRole, err := repo2.tufRepo.GetBaseRole(data.CanonicalSnapshotRole)
-	assert.NoError(t, err)
-
-	// assert that the snapshot key has changed
-	assert.Len(t, oldSnapshotRole.Keys, 1)
-	assert.Len(t, newSnapshotRole.Keys, 1)
-	for k := range oldSnapshotRole.Keys {
-		_, ok := newSnapshotRole.Keys[k]
-		assert.False(t, ok)
-	}
-}
-
 // If remotely rotating key fails, the failure is propagated
 func TestRemoteRotationError(t *testing.T) {
 	ts, _, _ := simpleTestServer(t)
@@ -2632,14 +2590,13 @@ func TestRemoteRotationError(t *testing.T) {
 
 	// server has died, so this should fail
 	err := repo.RotateKey(data.CanonicalTimestampRole, true)
-	assert.Error(t, err)
-	assert.Contains(t, err.Error(), "unable to rotate remote key")
+	require.Error(t, err)
+	require.Contains(t, err.Error(), "unable to rotate remote key")
 }
 
 // Rotates the keys.  After the rotation, downloading the latest metadata
 // and require that the keys have changed
-func requireRotationSuccessful(t *testing.T, repo1 *NotaryRepository,
-	keysToRotate map[string]bool, alreadyPublished bool) {
+func requireRotationSuccessful(t *testing.T, repo1 *NotaryRepository, keysToRotate map[string]bool) {
 	// Create 2 new repos:  1 will download repo data before the publish,
 	// and one only downloads after the publish. This reflects a client
 	// that has some previous trust data (but is not the publisher), and a
@@ -2649,35 +2606,26 @@ func requireRotationSuccessful(t *testing.T, repo1 *NotaryRepository,
 
 	repos := []*NotaryRepository{repo1, repo2}
 
-	if alreadyPublished {
-		repo3, _ := newRepoToTestRepo(t, repo1, true)
-		defer os.RemoveAll(repo2.baseDir)
-
-		// force a pull on repo3
-		_, err := repo3.GetTargetByName("latest")
-		require.NoError(t, err)
-
-		repos = append(repos, repo3)
-	}
-
 	oldKeyIDs := make(map[string][]string)
 	for role := range keysToRotate {
 		keyIDs := repo1.tufRepo.Root.Signed.Roles[role].KeyIDs
 		oldKeyIDs[role] = keyIDs
 	}
 
+	// Confirm no changelists get published
+	changesPre := getChanges(t, repo1)
+
 	// Do rotation
 	for role, serverManaged := range keysToRotate {
 		require.NoError(t, repo1.RotateKey(role, serverManaged))
 	}
 
-	// Publish
-	err := repo1.Publish()
-	require.NoError(t, err)
+	changesPost := getChanges(t, repo1)
+	require.Equal(t, changesPre, changesPost)
 
 	// Download data from remote and check that keys have changed
 	for _, repo := range repos {
-		_, err := repo.GetTargetByName("latest") // force a pull
+		_, err := repo.Update(true)
 		require.NoError(t, err)
 
 		for role, isRemoteKey := range keysToRotate {
@@ -2705,12 +2653,6 @@ func requireRotationSuccessful(t *testing.T, repo1 *NotaryRepository,
 				require.NotNil(t, key)
 			}
 		}
-
-		// Confirm changelist dir empty (on repo1, it should be empty after
-		// after publishing changes, on repo2, there should never have been
-		// any changelists)
-		changes := getChanges(t, repo)
-		require.Len(t, changes, 0, "wrong number of changelist files found")
 	}
 }
 
@@ -2726,11 +2668,16 @@ func TestRotateBeforePublishFromRemoteKeyToLocalKey(t *testing.T) {
 	defer os.RemoveAll(repo.baseDir)
 
 	// Adding a target will allow us to confirm the repository is still valid
-	// after rotating the keys.
+	// after rotating the keys when we publish (and that rotation doesn't publish
+	// non-key-rotation changes)
 	addTarget(t, repo, "latest", "../fixtures/intermediate-ca.crt")
 	requireRotationSuccessful(t, repo, map[string]bool{
 		data.CanonicalTargetsRole:  false,
-		data.CanonicalSnapshotRole: false}, false)
+		data.CanonicalSnapshotRole: false})
+
+	require.NoError(t, repo.Publish())
+	_, err := repo.GetTargetByName("latest")
+	require.NoError(t, err)
 }
 
 // Initialize a repo, locally signed snapshots
@@ -2778,12 +2725,13 @@ func testRotateKeySuccess(t *testing.T, serverManagesSnapshotInit bool,
 	// rotating the keys.
 	addTarget(t, repo, "latest", "../fixtures/intermediate-ca.crt")
 
+	requireRotationSuccessful(t, repo, keysToRotate)
+
 	// Publish
 	require.NoError(t, repo.Publish())
-
 	// Get root.json and capture targets + snapshot key IDs
-	repo.GetTargetByName("latest") // force a pull
-	requireRotationSuccessful(t, repo, keysToRotate, true)
+	_, err := repo.GetTargetByName("latest")
+	require.NoError(t, err)
 
 	var keysToExpectCreated []string
 	for role, serverManaged := range keysToRotate {
