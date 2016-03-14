@@ -8,7 +8,7 @@ for i in $(seq 0 4); do
     echo "Trying build $i..."
     make clean
     BUILD_EXIT_CODE=$(make)
-    if [[ "$BUILD_EXIT_CODE" -eq 0 ]]; then
+    if [[ $? -eq 0 ]]; then
         cp dist/* $CIRCLE_ARTIFACTS
 
         if [ ! -z "$CIRCLE_TAG" ]; then
