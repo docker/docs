@@ -1,13 +1,11 @@
 #!/bin/bash
 
-set -e
-
 # Try several times to do the build (sometimes network or other issues causes
 # it to fail)
 for i in $(seq 0 4); do
     echo "Trying build $i..."
     make clean
-    BUILD_EXIT_CODE=$(make)
+    make
     if [[ $? -eq 0 ]]; then
         cp dist/* $CIRCLE_ARTIFACTS
 
