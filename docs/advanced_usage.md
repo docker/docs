@@ -95,6 +95,9 @@ notary server will then sign snapshots. This is particularly useful when using
 delegations with a trusted collection, so that delegates will never need access to the
 snapshot key to push their updates to the collection.
 
+Note that new collections created by a Docker 1.11 Engine client will have the server manage the snapshot key by default.
+To reclaim control of the snapshot key on the client, use the `notary key rotate` command without the `-r` flag.
+
 ### Use a Yubikey
 
 Notary can be used with [Yubikey
@@ -120,6 +123,7 @@ targets key or allow a collaborator write access to all targets of the
 collection.
 
 Before adding any delegations, you should rotate the snapshot key to the server.
+Note that this is done by default for new collections created with a Docker Engine 1.11 client.
 This is such that delegation roles will not require the snapshot key to publish
 their own targets to the collection, since the server can publish the valid
 snapshot with the delegation targets:
