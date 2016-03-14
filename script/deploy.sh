@@ -1,12 +1,14 @@
 #!/bin/bash
 
+set -e
+
 # Try several times to do the build (sometimes network or other issues causes
 # it to fail)
 for i in $(seq 0 4); do
     echo "Trying build $i..."
     make clean
-    make
-    if [[ $? -eq 0 ]]; then
+    BUILD_EXIT_CODE=$(make)
+    if [[ "$BUILD_EXIT_CODE" -eq 0 ]]; then
         cp dist/* $CIRCLE_ARTIFACTS
 
         if [ ! -z "$CIRCLE_TAG" ]; then
@@ -18,3 +20,5 @@ for i in $(seq 0 4); do
         exit 0
     fi
 done
+
+exit 1

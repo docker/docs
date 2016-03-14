@@ -6,6 +6,10 @@ machine:
   services:
     - docker
 
+test:
+  override:
+    - exit 0
+
 deployment:
   release:
     tag: /v.*/
