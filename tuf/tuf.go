@@ -575,8 +575,9 @@ func (tr Repo) TargetDelegations(role, path string) []*data.Role {
 // exist or if there are no signing keys.
 func (tr *Repo) VerifyCanSign(roleName string) error {
 	var (
-		role data.BaseRole
-		err  error
+		role            data.BaseRole
+		err             error
+		canonicalKeyIDs []string
 	)
 	// we only need the BaseRole part of a delegation because we're just
 	// checking KeyIDs
@@ -597,6 +598,7 @@ func (tr *Repo) VerifyCanSign(roleName string) error {
 		check := []string{keyID}
 		if canonicalID, err := utils.CanonicalKeyID(k); err == nil {
 			check = append(check, canonicalID)
+			canonicalKeyIDs = append(canonicalKeyIDs, canonicalID)
 		}
 		for _, id := range check {
 			p, _, err := tr.cryptoService.GetPrivateKey(id)
@@ -605,7 +607,7 @@ func (tr *Repo) VerifyCanSign(roleName string) error {
 			}
 		}
 	}
-	return signed.ErrNoKeys{KeyIDs: role.ListKeyIDs()}
+	return signed.ErrNoKeys{KeyIDs: canonicalKeyIDs}
 }
 
 // used for walking the targets/delegations tree, potentially modifying the underlying SignedTargets for the repo
