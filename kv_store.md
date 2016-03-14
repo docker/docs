@@ -107,11 +107,11 @@ docker exec -it ucp-kv etcdctl \
         --ca-file /etc/docker/ssl/ca.pem \
         --cert-file /etc/docker/ssl/cert.pem \
         --key-file /etc/docker/ssl/key.pem \
-        ls /docker/swarm/nodes
+        ls /docker/nodes
 
-/docker/swarm/nodes/192.168.122.196:12376
-/docker/swarm/nodes/192.168.122.64:12376
-/docker/swarm/nodes/192.168.122.223:12376
+/docker/nodes/192.168.122.196:12376
+/docker/nodes/192.168.122.64:12376
+/docker/nodes/192.168.122.223:12376
 ```
 
 
