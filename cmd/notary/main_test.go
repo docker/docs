@@ -10,6 +10,7 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/docker/go-connections/tlsconfig"
 	"github.com/docker/notary/passphrase"
@@ -195,7 +196,7 @@ func TestBareCommandPrintsUsageAndNoError(t *testing.T) {
 		cmd := NewNotaryCommand()
 		cmd.SetOutput(b)
 
-		cmd.SetArgs([]string{"-c", filepath.Join(tempdir, "idonotexist.json"), bareCommand})
+		cmd.SetArgs([]string{"-c", filepath.Join(tempdir, "idonotexist.json"), "-d", tempdir, bareCommand})
 		require.NoError(t, cmd.Execute(), "Expected no error from a help request")
 		// usage is printed
 		require.Contains(t, b.String(), "Usage:", "expected usage when running `notary %s`", bareCommand)
@@ -209,14 +210,14 @@ type recordingMetaStore struct {
 
 // GetCurrent gets the metadata from the underlying MetaStore, but also records
 // that the metadata was requested
-func (r *recordingMetaStore) GetCurrent(gun, role string) (data []byte, err error) {
+func (r *recordingMetaStore) GetCurrent(gun, role string) (*time.Time, []byte, error) {
 	r.gotten = append(r.gotten, fmt.Sprintf("%s.%s", gun, role))
 	return r.MemStorage.GetCurrent(gun, role)
 }
 
 // GetChecksum gets the metadata from the underlying MetaStore, but also records
 // that the metadata was requested
-func (r *recordingMetaStore) GetChecksum(gun, role, checksum string) (data []byte, err error) {
+func (r *recordingMetaStore) GetChecksum(gun, role, checksum string) (*time.Time, []byte, error) {
 	r.gotten = append(r.gotten, fmt.Sprintf("%s.%s", gun, role))
 	return r.MemStorage.GetChecksum(gun, role, checksum)
 }
@@ -255,7 +256,7 @@ func TestConfigFileTLSCannotBeRelativeToCWD(t *testing.T) {
 	// set a config file, so it doesn't check ~/.notary/config.json by default,
 	// and execute a random command so that the flags are parsed
 	cmd := NewNotaryCommand()
-	cmd.SetArgs([]string{"-c", configFile, "list", "repo"})
+	cmd.SetArgs([]string{"-c", configFile, "-d", tempDir, "list", "repo"})
 	cmd.SetOutput(new(bytes.Buffer)) // eat the output
 	err = cmd.Execute()
 	assert.Error(t, err, "expected a failure due to TLS")
@@ -309,7 +310,7 @@ func TestConfigFileTLSCanBeRelativeToConfigOrAbsolute(t *testing.T) {
 	// set a config file, so it doesn't check ~/.notary/config.json by default,
 	// and execute a random command so that the flags are parsed
 	cmd := NewNotaryCommand()
-	cmd.SetArgs([]string{"-c", configFile.Name(), "list", "repo"})
+	cmd.SetArgs([]string{"-c", configFile.Name(), "-d", tempDir, "list", "repo"})
 	cmd.SetOutput(new(bytes.Buffer)) // eat the output
 	err = cmd.Execute()
 	assert.Error(t, err, "there was no repository, so list should have failed")
@@ -356,7 +357,7 @@ func TestConfigFileOverridenByCmdLineFlags(t *testing.T) {
 
 	cmd := NewNotaryCommand()
 	cmd.SetArgs([]string{
-		"-c", configFile, "list", "repo",
+		"-c", configFile, "-d", tempDir, "list", "repo",
 		"--tlscacert", "../../fixtures/root-ca.crt",
 		"--tlscert", filepath.Clean(filepath.Join(cwd, "../../fixtures/notary-server.crt")),
 		"--tlskey", "../../fixtures/notary-server.key"})

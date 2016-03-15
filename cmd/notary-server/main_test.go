@@ -328,3 +328,22 @@ func TestGetMemoryStore(t *testing.T) {
 	_, ok := store.(*storage.MemStorage)
 	assert.True(t, ok)
 }
+
+func TestGetCacheConfig(t *testing.T) {
+	valid := `{"caching": {"max_age": {"current_metadata": 0, "metadata_by_checksum": 31536000}}}`
+	invalids := []string{
+		`{"caching": {"max_age": {"current_metadata": 0, "metadata_by_checksum": 31539000}}}`,
+		`{"caching": {"max_age": {"current_metadata": -1, "metadata_by_checksum": 300}}}`,
+		`{"caching": {"max_age": {"current_metadata": "hello", "metadata_by_checksum": 300}}}`,
+	}
+
+	current, consistent, err := getCacheConfig(configure(valid))
+	assert.NoError(t, err)
+	assert.IsType(t, utils.NoCacheControl{}, current)
+	assert.IsType(t, utils.PublicCacheControl{}, consistent)
+
+	for _, invalid := range invalids {
+		_, _, err := getCacheConfig(configure(invalid))
+		assert.Error(t, err)
+	}
+}

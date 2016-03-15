@@ -1,5 +1,7 @@
 package storage
 
+import "time"
+
 // KeyStore provides a minimal interface for managing key persistence
 type KeyStore interface {
 	// GetKey returns the algorithm and public key for the given GUN and role.
@@ -24,15 +26,15 @@ type MetaStore interface {
 	// none of the metadata is added, and an error is be returned.
 	UpdateMany(gun string, updates []MetaUpdate) error
 
-	// GetCurrent returns the data part of the metadata for the latest version
-	// of the given GUN and role.  If there is no data for the given GUN and
-	// role, an error is returned.
-	GetCurrent(gun, tufRole string) (data []byte, err error)
+	// GetCurrent returns the modification date and data part of the metadata for
+	// the latest version of the given GUN and role.  If there is no data for
+	// the given GUN and role, an error is returned.
+	GetCurrent(gun, tufRole string) (created *time.Time, data []byte, err error)
 
-	// GetChecksum return the given tuf role file for the GUN with the
-	// provided checksum. If the given (gun, role, checksum) are not
-	// found, it returns storage.ErrNotFound
-	GetChecksum(gun, tufRole, checksum string) (data []byte, err error)
+	// GetChecksum returns the given TUF role file and creation date for the
+	// GUN with the provided checksum. If the given (gun, role, checksum) are
+	// not found, it returns storage.ErrNotFound
+	GetChecksum(gun, tufRole, checksum string) (created *time.Time, data []byte, err error)
 
 	// Delete removes all metadata for a given GUN.  It does not return an
 	// error if no metadata exists for the given GUN.
