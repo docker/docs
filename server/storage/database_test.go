@@ -4,9 +4,11 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"os"
 	"testing"
+	"time"
 
 	"github.com/docker/notary/tuf/data"
 	"github.com/jinzhu/gorm"
@@ -231,7 +233,7 @@ func TestSQLGetCurrent(t *testing.T) {
 	gormDB, dbStore := SetUpSQLite(t, tempBaseDir)
 	defer os.RemoveAll(tempBaseDir)
 
-	byt, err := dbStore.GetCurrent("testGUN", "root")
+	_, byt, err := dbStore.GetCurrent("testGUN", "root")
 	require.Nil(t, byt)
 	require.Error(t, err, "There should be an error Getting an empty table")
 	require.IsType(t, ErrNotFound{}, err, "Should get a not found error")
@@ -240,9 +242,13 @@ func TestSQLGetCurrent(t *testing.T) {
 	query := gormDB.Create(&tuf)
 	require.NoError(t, query.Error, "Creating a row in an empty DB failed.")
 
-	byt, err = dbStore.GetCurrent("testGUN", "root")
+	cDate, byt, err := dbStore.GetCurrent("testGUN", "root")
 	require.NoError(t, err, "There should not be any errors getting.")
 	require.Equal(t, []byte("1"), byt, "Returned data was incorrect")
+	// the update date was sometime wthin the last minute
+	fmt.Println(cDate)
+	require.True(t, cDate.After(time.Now().Add(-1*time.Minute)))
+	require.True(t, cDate.Before(time.Now().Add(5*time.Second)))
 
 	dbStore.DB.Close()
 }
@@ -487,9 +493,12 @@ func TestDBGetChecksum(t *testing.T) {
 
 	store.UpdateCurrent("gun", update)
 
-	data, err := store.GetChecksum("gun", data.CanonicalTimestampRole, checksum)
+	cDate, data, err := store.GetChecksum("gun", data.CanonicalTimestampRole, checksum)
 	require.NoError(t, err)
 	require.EqualValues(t, j, data)
+	// the creation date was sometime wthin the last minute
+	require.True(t, cDate.After(time.Now().Add(-1*time.Minute)))
+	require.True(t, cDate.Before(time.Now().Add(5*time.Second)))
 }
 
 func TestDBGetChecksumNotFound(t *testing.T) {
@@ -497,7 +506,7 @@ func TestDBGetChecksumNotFound(t *testing.T) {
 	_, store := SetUpSQLite(t, tempBaseDir)
 	defer os.RemoveAll(tempBaseDir)
 
-	_, err = store.GetChecksum("gun", data.CanonicalTimestampRole, "12345")
+	_, _, err = store.GetChecksum("gun", data.CanonicalTimestampRole, "12345")
 	require.Error(t, err)
 	require.IsType(t, ErrNotFound{}, err)
 }

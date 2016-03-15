@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"strings"
 
+	"github.com/Sirupsen/logrus"
 	ctxu "github.com/docker/distribution/context"
 	"github.com/gorilla/mux"
 	"golang.org/x/net/context"
@@ -18,6 +19,7 @@ import (
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/validation"
+	"github.com/docker/notary/utils"
 )
 
 // MainHandler is the default handler for the server
@@ -117,12 +119,28 @@ func getHandler(ctx context.Context, w http.ResponseWriter, r *http.Request, var
 	checksum := vars["checksum"]
 	tufRole := vars["tufRole"]
 	s := ctx.Value("metaStore")
+
 	store, ok := s.(storage.MetaStore)
 	if !ok {
 		return errors.ErrNoStorage.WithDetail(nil)
 	}
 
-	return getRole(ctx, w, store, gun, tufRole, checksum)
+	lastModified, output, err := getRole(ctx, store, gun, tufRole, checksum)
+	if err != nil {
+		return err
+	}
+	if lastModified != nil {
+		// This shouldn't always be true, but in case it is nil, and the last modified headers
+		// are not set, the cache control handler should set the last modified date to the beginning
+		// of time.
+		utils.SetLastModifiedHeader(w.Header(), *lastModified)
+	} else {
+		logrus.Warnf("Got bytes out for %s's %s (checksum: %s), but missing lastModified date",
+			gun, tufRole, checksum)
+	}
+
+	w.Write(output)
+	return nil
 }
 
 // DeleteHandler deletes all data for a GUN. A 200 responses indicates success.

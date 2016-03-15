@@ -22,11 +22,11 @@ func TestUpdateCurrent(t *testing.T) {
 func TestGetCurrent(t *testing.T) {
 	s := NewMemStorage()
 
-	_, err := s.GetCurrent("gun", "role")
+	_, _, err := s.GetCurrent("gun", "role")
 	assert.IsType(t, ErrNotFound{}, err, "Expected error to be ErrNotFound")
 
 	s.UpdateCurrent("gun", MetaUpdate{"role", 1, []byte("test")})
-	d, err := s.GetCurrent("gun", "role")
+	_, d, err := s.GetCurrent("gun", "role")
 	assert.Nil(t, err, "Expected error to be nil")
 	assert.Equal(t, []byte("test"), d, "Data was incorrect")
 }
@@ -97,7 +97,7 @@ func TestSetKeySameRoleGun(t *testing.T) {
 
 func TestGetChecksumNotFound(t *testing.T) {
 	s := NewMemStorage()
-	_, err := s.GetChecksum("gun", "root", "12345")
+	_, _, err := s.GetChecksum("gun", "root", "12345")
 	assert.Error(t, err)
 	assert.IsType(t, ErrNotFound{}, err)
 }

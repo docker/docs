@@ -118,7 +118,7 @@ func TestGetSnapshotNotExists(t *testing.T) {
 	store := storage.NewMemStorage()
 	crypto := signed.NewEd25519()
 
-	_, err := GetOrCreateSnapshot("gun", store, crypto)
+	_, _, err := GetOrCreateSnapshot("gun", store, crypto)
 	assert.Error(t, err)
 }
 
@@ -144,18 +144,23 @@ func TestGetSnapshotCurrValid(t *testing.T) {
 
 	// test when db is missing the role data
 	store.UpdateCurrent("gun", storage.MetaUpdate{Role: "snapshot", Version: 0, Data: snapJSON})
-	_, err = GetOrCreateSnapshot("gun", store, crypto)
+	c1, result, err := GetOrCreateSnapshot("gun", store, crypto)
 	assert.NoError(t, err)
+	assert.True(t, bytes.Equal(snapJSON, result))
 
 	// test when db has the role data
 	store.UpdateCurrent("gun", storage.MetaUpdate{Role: "root", Version: 0, Data: newData})
-	_, err = GetOrCreateSnapshot("gun", store, crypto)
+	c2, result, err := GetOrCreateSnapshot("gun", store, crypto)
 	assert.NoError(t, err)
+	assert.True(t, bytes.Equal(snapJSON, result))
+	assert.True(t, c1.Equal(*c2))
 
-	// test when db role data is expired
+	// test when db role data is corrupt
 	store.UpdateCurrent("gun", storage.MetaUpdate{Role: "root", Version: 1, Data: []byte{3}})
-	_, err = GetOrCreateSnapshot("gun", store, crypto)
+	c2, result, err = GetOrCreateSnapshot("gun", store, crypto)
 	assert.NoError(t, err)
+	assert.True(t, bytes.Equal(snapJSON, result))
+	assert.True(t, c1.Equal(*c2))
 }
 
 func TestGetSnapshotCurrExpired(t *testing.T) {
@@ -168,8 +173,10 @@ func TestGetSnapshotCurrExpired(t *testing.T) {
 	snapJSON, _ := json.Marshal(snapshot)
 
 	store.UpdateCurrent("gun", storage.MetaUpdate{Role: "snapshot", Version: 0, Data: snapJSON})
-	_, err = GetOrCreateSnapshot("gun", store, crypto)
+	c1, newJSON, err := GetOrCreateSnapshot("gun", store, crypto)
 	assert.NoError(t, err)
+	assert.False(t, bytes.Equal(snapJSON, newJSON))
+	assert.True(t, c1.After(time.Now().Add(-1*time.Minute)))
 }
 
 func TestGetSnapshotCurrCorrupt(t *testing.T) {
@@ -182,7 +189,7 @@ func TestGetSnapshotCurrCorrupt(t *testing.T) {
 	snapJSON, _ := json.Marshal(snapshot)
 
 	store.UpdateCurrent("gun", storage.MetaUpdate{Role: "snapshot", Version: 0, Data: snapJSON[1:]})
-	_, err = GetOrCreateSnapshot("gun", store, crypto)
+	_, _, err = GetOrCreateSnapshot("gun", store, crypto)
 	assert.Error(t, err)
 }
 

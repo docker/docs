@@ -2,6 +2,7 @@ package snapshot
 
 import (
 	"encoding/json"
+	"time"
 
 	"github.com/Sirupsen/logrus"
 
@@ -45,10 +46,12 @@ func GetOrCreateSnapshotKey(gun string, store storage.KeyStore, crypto signed.Cr
 // GetOrCreateSnapshot either returns the exisiting latest snapshot, or uses
 // whatever the most recent snapshot is to create the next one, only updating
 // the expiry time and version.
-func GetOrCreateSnapshot(gun string, store storage.MetaStore, cryptoService signed.CryptoService) ([]byte, error) {
-	d, err := store.GetCurrent(gun, "snapshot")
+func GetOrCreateSnapshot(gun string, store storage.MetaStore, cryptoService signed.CryptoService) (
+	*time.Time, []byte, error) {
+
+	lastModified, d, err := store.GetCurrent(gun, data.CanonicalSnapshotRole)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
 	sn := &data.SignedSnapshot{}
@@ -56,29 +59,30 @@ func GetOrCreateSnapshot(gun string, store storage.MetaStore, cryptoService sign
 		err := json.Unmarshal(d, sn)
 		if err != nil {
 			logrus.Error("Failed to unmarshal existing snapshot")
-			return nil, err
+			return nil, nil, err
 		}
 
 		if !snapshotExpired(sn) {
-			return d, nil
+			return lastModified, d, nil
 		}
 	}
 
 	sgnd, version, err := createSnapshot(gun, sn, store, cryptoService)
 	if err != nil {
 		logrus.Error("Failed to create a new snapshot")
-		return nil, err
+		return nil, nil, err
 	}
 	out, err := json.Marshal(sgnd)
 	if err != nil {
 		logrus.Error("Failed to marshal new snapshot")
-		return nil, err
+		return nil, nil, err
 	}
 	err = store.UpdateCurrent(gun, storage.MetaUpdate{Role: "snapshot", Version: version, Data: out})
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-	return out, nil
+	c := time.Now()
+	return &c, out, nil
 }
 
 // snapshotExpired simply checks if the snapshot is past its expiry time
