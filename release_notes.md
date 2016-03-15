@@ -24,6 +24,7 @@ weight="99"
   * Added `--swarm-experimental` option during UCP install
 
 * UI
+  * Can provide one-time credentials to deploy a container from a private registry in UI
   * Added checkbox to select all containers in Containers screen
   * Removed click handlers from UI elements containing checkboxes
   * Usernames and team names now need to be url-compatible
