@@ -21,11 +21,6 @@ type FailingCryptoService struct {
 	testKey data.PrivateKey
 }
 
-func (mts *FailingCryptoService) Sign(keyIDs []string, _ []byte) ([]data.Signature, error) {
-	sigs := make([]data.Signature, 0, len(keyIDs))
-	return sigs, nil
-}
-
 func (mts *FailingCryptoService) Create(_, _ string) (data.PublicKey, error) {
 	return mts.testKey, nil
 }
@@ -36,10 +31,10 @@ func (mts *FailingCryptoService) ListKeys(role string) []string {
 
 func (mts *FailingCryptoService) ListAllKeys() map[string]string {
 	return map[string]string{
-		mts.testKey.ID(): "root",
-		mts.testKey.ID(): "targets",
-		mts.testKey.ID(): "snapshot",
-		mts.testKey.ID(): "timestamp",
+		mts.testKey.ID(): data.CanonicalRootRole,
+		mts.testKey.ID(): data.CanonicalTargetsRole,
+		mts.testKey.ID(): data.CanonicalSnapshotRole,
+		mts.testKey.ID(): data.CanonicalTimestampRole,
 	}
 }
 
@@ -69,14 +64,6 @@ type MockCryptoService struct {
 	testKey data.PrivateKey
 }
 
-func (mts *MockCryptoService) Sign(keyIDs []string, _ []byte) ([]data.Signature, error) {
-	sigs := make([]data.Signature, 0, len(keyIDs))
-	for _, keyID := range keyIDs {
-		sigs = append(sigs, data.Signature{KeyID: keyID})
-	}
-	return sigs, nil
-}
-
 func (mts *MockCryptoService) Create(_ string, _ string) (data.PublicKey, error) {
 	return mts.testKey, nil
 }
@@ -94,10 +81,10 @@ func (mts *MockCryptoService) ListKeys(role string) []string {
 
 func (mts *MockCryptoService) ListAllKeys() map[string]string {
 	return map[string]string{
-		mts.testKey.ID(): "root",
-		mts.testKey.ID(): "targets",
-		mts.testKey.ID(): "snapshot",
-		mts.testKey.ID(): "timestamp",
+		mts.testKey.ID(): data.CanonicalRootRole,
+		mts.testKey.ID(): data.CanonicalTargetsRole,
+		mts.testKey.ID(): data.CanonicalSnapshotRole,
+		mts.testKey.ID(): data.CanonicalTimestampRole,
 	}
 }
 
@@ -119,16 +106,6 @@ type StrictMockCryptoService struct {
 	MockCryptoService
 }
 
-func (mts *StrictMockCryptoService) Sign(keyIDs []string, _ []byte) ([]data.Signature, error) {
-	sigs := make([]data.Signature, 0, len(keyIDs))
-	for _, keyID := range keyIDs {
-		if keyID == mts.testKey.ID() {
-			sigs = append(sigs, data.Signature{KeyID: keyID})
-		}
-	}
-	return sigs, nil
-}
-
 func (mts *StrictMockCryptoService) GetKey(keyID string) data.PublicKey {
 	if keyID == mts.testKey.ID() {
 		return data.PublicKeyFromPrivate(mts.testKey)
@@ -142,10 +119,10 @@ func (mts *StrictMockCryptoService) ListKeys(role string) []string {
 
 func (mts *StrictMockCryptoService) ListAllKeys() map[string]string {
 	return map[string]string{
-		mts.testKey.ID(): "root",
-		mts.testKey.ID(): "targets",
-		mts.testKey.ID(): "snapshot",
-		mts.testKey.ID(): "timestamp",
+		mts.testKey.ID(): data.CanonicalRootRole,
+		mts.testKey.ID(): data.CanonicalTargetsRole,
+		mts.testKey.ID(): data.CanonicalSnapshotRole,
+		mts.testKey.ID(): data.CanonicalTimestampRole,
 	}
 }
 
@@ -156,7 +133,7 @@ func (mts *StrictMockCryptoService) ImportRootKey(r io.Reader) error {
 // Test signing and ensure the expected signature is added
 func TestBasicSign(t *testing.T) {
 	cs := NewEd25519()
-	key, err := cs.Create("root", data.ED25519Key)
+	key, err := cs.Create(data.CanonicalRootRole, data.ED25519Key)
 	require.NoError(t, err)
 	testData := data.Signed{}
 
@@ -176,7 +153,7 @@ func TestBasicSign(t *testing.T) {
 // with the same key ID
 func TestReSign(t *testing.T) {
 	cs := NewEd25519()
-	key, err := cs.Create("root", data.ED25519Key)
+	key, err := cs.Create(data.CanonicalRootRole, data.ED25519Key)
 	require.NoError(t, err)
 	testData := data.Signed{}
 
@@ -198,8 +175,9 @@ func TestMultiSign(t *testing.T) {
 	cs := NewEd25519()
 	testData := data.Signed{}
 
-	key1, err := cs.Create("root", data.ED25519Key)
+	key1, err := cs.Create(data.CanonicalRootRole, data.ED25519Key)
 	require.NoError(t, err)
+
 	Sign(cs, &testData, key1)
 
 	// reinitializing cs means it won't know about key1. We want
@@ -207,8 +185,9 @@ func TestMultiSign(t *testing.T) {
 	// that the signature for key1 is left intact and the signature
 	// for key2 is added
 	cs = NewEd25519()
-	key2, err := cs.Create("root", data.ED25519Key)
+	key2, err := cs.Create(data.CanonicalRootRole, data.ED25519Key)
 	require.NoError(t, err)
+
 	Sign(
 		cs,
 		&testData,
@@ -229,7 +208,6 @@ func TestMultiSign(t *testing.T) {
 		}
 	}
 	require.Equal(t, 2, count)
-
 }
 
 func TestSignReturnsNoSigs(t *testing.T) {
@@ -269,4 +247,60 @@ func TestSignWithX509(t *testing.T) {
 
 	require.Len(t, testData.Signatures, 1)
 	require.Equal(t, tufRSAx509Key.ID(), testData.Signatures[0].KeyID)
+}
+
+func TestSignRemovesValidSigByInvalidKey(t *testing.T) {
+	cs := NewEd25519()
+	testData := data.Signed{}
+
+	key1, err := cs.Create(data.CanonicalRootRole, data.ED25519Key)
+	require.NoError(t, err)
+
+	Sign(cs, &testData, key1)
+	require.Len(t, testData.Signatures, 1)
+	require.Equal(t, key1.ID(), testData.Signatures[0].KeyID)
+
+	key2, err := cs.Create(data.CanonicalRootRole, data.ED25519Key)
+	require.NoError(t, err)
+
+	// should remove key1 sig even though it's valid. It no longer appears
+	// in the list of signing keys for the role
+	Sign(
+		cs,
+		&testData,
+		key2,
+	)
+
+	require.Len(t, testData.Signatures, 1)
+	require.Equal(t, key2.ID(), testData.Signatures[0].KeyID)
+}
+
+func TestSignRemovesInvalidSig(t *testing.T) {
+	cs := NewEd25519()
+	testData := data.Signed{}
+
+	key1, err := cs.Create(data.CanonicalRootRole, data.ED25519Key)
+	require.NoError(t, err)
+
+	Sign(cs, &testData, key1)
+	require.Len(t, testData.Signatures, 1)
+	require.Equal(t, key1.ID(), testData.Signatures[0].KeyID)
+
+	// we need cs to "forget" key1 so we can't sign with it
+	cs = NewEd25519()
+	key2, err := cs.Create(data.CanonicalRootRole, data.ED25519Key)
+	require.NoError(t, err)
+
+	// modify test data to invalidate key1 sig
+	testData.Signed = []byte{0xff}
+	// should remove key1 sig because it's out of date
+	Sign(
+		cs,
+		&testData,
+		key1,
+		key2,
+	)
+
+	require.Len(t, testData.Signatures, 1)
+	require.Equal(t, key2.ID(), testData.Signatures[0].KeyID)
 }

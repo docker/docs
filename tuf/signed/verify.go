@@ -2,6 +2,7 @@ package signed
 
 import (
 	"errors"
+	"fmt"
 	"strings"
 	"time"
 
@@ -124,16 +125,8 @@ func VerifySignatures(s *data.Signed, roleData data.BaseRole) error {
 			logrus.Debugf("continuing b/c keyid lookup was nil: %s\n", sig.KeyID)
 			continue
 		}
-		// method lookup is consistent due to Unmarshal JSON doing lower case for us.
-		method := sig.Method
-		verifier, ok := Verifiers[method]
-		if !ok {
-			logrus.Debugf("continuing b/c signing method is not supported: %s\n", sig.Method)
-			continue
-		}
-
-		if err := verifier.Verify(key, sig.Signature, msg); err != nil {
-			logrus.Debugf("continuing b/c signature was invalid\n")
+		if err := VerifySignature(msg, sig, key); err != nil {
+			logrus.Debugf("continuing b/c %s", err.Error())
 			continue
 		}
 		valid[sig.KeyID] = struct{}{}
@@ -143,5 +136,20 @@ func VerifySignatures(s *data.Signed, roleData data.BaseRole) error {
 		return ErrRoleThreshold{}
 	}
 
+	return nil
+}
+
+// VerifySignature checks a single signature and public key against a payload
+func VerifySignature(msg []byte, sig data.Signature, pk data.PublicKey) error {
+	// method lookup is consistent due to Unmarshal JSON doing lower case for us.
+	method := sig.Method
+	verifier, ok := Verifiers[method]
+	if !ok {
+		return fmt.Errorf("signing method is not supported: %s\n", sig.Method)
+	}
+
+	if err := verifier.Verify(pk, sig.Signature, msg); err != nil {
+		return fmt.Errorf("signature was invalid\n")
+	}
 	return nil
 }
