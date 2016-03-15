@@ -159,7 +159,8 @@ func TestSwizzlerSetInvalidSigned(t *testing.T) {
 func TestSwizzlerSetInvalidSignedMeta(t *testing.T) {
 	f, origMeta := createNewSwizzler(t)
 
-	f.SetInvalidSignedMeta(data.CanonicalRootRole)
+	err := f.SetInvalidSignedMeta(data.CanonicalRootRole)
+	require.NoError(t, err)
 
 	for role, metaBytes := range origMeta {
 		newMeta, err := f.MetadataCache.GetMeta(role, -1)
@@ -306,7 +307,8 @@ func TestSwizzlerOffsetMetadataVersion(t *testing.T) {
 func TestSwizzlerExpireMetadata(t *testing.T) {
 	f, origMeta := createNewSwizzler(t)
 
-	f.ExpireMetadata(data.CanonicalRootRole)
+	err := f.ExpireMetadata(data.CanonicalRootRole)
+	require.NoError(t, err)
 
 	for role, metaBytes := range origMeta {
 		newMeta, err := f.MetadataCache.GetMeta(role, -1)
@@ -330,7 +332,8 @@ func TestSwizzlerExpireMetadata(t *testing.T) {
 func TestSwizzlerSetThresholdBaseRole(t *testing.T) {
 	f, origMeta := createNewSwizzler(t)
 
-	f.SetThreshold(data.CanonicalTargetsRole, 3)
+	err := f.SetThreshold(data.CanonicalTargetsRole, 3)
+	require.NoError(t, err)
 
 	for role, metaBytes := range origMeta {
 		newMeta, err := f.MetadataCache.GetMeta(role, -1)
@@ -382,7 +385,8 @@ func TestSwizzlerSetThresholdDelegatedRole(t *testing.T) {
 func TestSwizzlerChangeRootKey(t *testing.T) {
 	f, origMeta := createNewSwizzler(t)
 
-	f.ChangeRootKey()
+	err := f.ChangeRootKey()
+	require.NoError(t, err)
 
 	tufRepo := tuf.NewRepo(f.CryptoService)
 
