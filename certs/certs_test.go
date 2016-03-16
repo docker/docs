@@ -297,27 +297,22 @@ func TestValidateRootFailuresWithPinnedCert(t *testing.T) {
 	// This call to ValidateRoot should fail due to an incorrect cert ID
 	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string]string{"docker.com/notary": "ABSOLUTELY NOT A CERT ID"}})
 	assert.Error(t, err)
-	certStore.RemoveAll()
 
 	// This call to ValidateRoot should fail due to an empty cert ID
 	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string]string{"docker.com/notary": ""}})
 	assert.Error(t, err)
-	certStore.RemoveAll()
 
 	// This call to ValidateRoot should fail due to an invalid GUN (even though the cert ID is correct), and TOFUS defaults to false
 	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string]string{"not_a_gun": rootPubKeyID}, TOFU: false})
 	assert.Error(t, err)
-	certStore.RemoveAll()
 
 	// This call to ValidateRoot should fail due to an invalid cert ID, even though it's a valid key ID for targets
 	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string]string{"docker.com/notary": targetsPubKeyID}})
 	assert.Error(t, err)
-	certStore.RemoveAll()
 
 	// This call to ValidateRoot should succeed because we fall through to TOFUS even though we have no matching GUNs under Certs
 	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string]string{"not_a_gun": rootPubKeyID}, TOFU: true})
 	assert.NoError(t, err)
-	certStore.RemoveAll()
 }
 
 func TestValidateRootWithPinnedCA(t *testing.T) {
@@ -348,8 +343,8 @@ func TestValidateRootWithPinnedCA(t *testing.T) {
 	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{CA: map[string]string{"docker.com/notary": filepath.Join(tempBaseDir, "nonexistent")}})
 	assert.Error(t, err)
 
-	// This call to ValidateRoot will fail because we have no valid GUNs to use
-	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{CA: map[string]string{"docker.com/notary": filepath.Join(tempBaseDir, "nonexistent")}})
+	// This call to ValidateRoot will fail because we have no valid GUNs to use, and TOFUS is disabled
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{CA: map[string]string{"othergun": filepath.Join(tempBaseDir, "nonexistent")}, TOFU: false})
 	assert.Error(t, err)
 }
 
