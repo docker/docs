@@ -420,7 +420,7 @@ func (k *keyCommander) keysRotate(cmd *cobra.Command, args []string) error {
 
 	nRepo, err := notaryclient.NewNotaryRepository(
 		config.GetString("trust_dir"), gun, getRemoteTrustServer(config),
-		rt, k.getRetriever(), config.Get("trust_pinning").(notary.TrustPinConfig))
+		rt, k.getRetriever(), getTrustPinning(config))
 	if err != nil {
 		return err
 	}

@@ -139,7 +139,7 @@ func (c *certCommander) certRemove(cmd *cobra.Command, args []string) error {
 		// Remove all TUF data, so call RemoveTrustData on a NotaryRepository with the GUN
 		// no online operations are performed so the transport argument is nil
 		nRepo, err := notaryclient.NewNotaryRepository(
-			trustDir, c.certRemoveGUN, getRemoteTrustServer(config), nil, c.retriever, config.Get("trust_pinning").(notary.TrustPinConfig))
+			trustDir, c.certRemoveGUN, getRemoteTrustServer(config), nil, c.retriever, getTrustPinning(config))
 		if err != nil {
 			return fmt.Errorf("Could not establish trust data for GUN %s", c.certRemoveGUN)
 		}
