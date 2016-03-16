@@ -13,7 +13,7 @@ import (
 	"github.com/bugsnag/bugsnag-go"
 	"github.com/docker/notary/trustmanager"
 	"github.com/spf13/viper"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 const envPrefix = "NOTARY_TESTING_ENV_PREFIX"
@@ -37,7 +37,7 @@ func configure(jsonConfig string) *viper.Viper {
 func setupEnvironmentVariables(t *testing.T, vars map[string]string) {
 	for k, v := range vars {
 		err := os.Setenv(fmt.Sprintf("%s_%s", envPrefix, k), v)
-		assert.NoError(t, err)
+		require.NoError(t, err)
 	}
 }
 
@@ -45,7 +45,7 @@ func setupEnvironmentVariables(t *testing.T, vars map[string]string) {
 func cleanupEnvironmentVariables(t *testing.T, vars map[string]string) {
 	for k := range vars {
 		err := os.Unsetenv(fmt.Sprintf("%s_%s", envPrefix, k))
-		assert.NoError(t, err)
+		require.NoError(t, err)
 	}
 
 }
@@ -54,8 +54,8 @@ func cleanupEnvironmentVariables(t *testing.T, vars map[string]string) {
 func TestParseInvalidLogLevel(t *testing.T) {
 	_, err := ParseLogLevel(configure(`{"logging": {"level": "horatio"}}`),
 		logrus.DebugLevel)
-	assert.Error(t, err)
-	assert.Contains(t, err.Error(), "not a valid logrus Level")
+	require.Error(t, err)
+	require.Contains(t, err.Error(), "not a valid logrus Level")
 }
 
 // If there is no logging level configured it is set to the default level
@@ -63,8 +63,8 @@ func TestParseNoLogLevel(t *testing.T) {
 	empties := []string{`{}`, `{"logging": {}}`}
 	for _, configJSON := range empties {
 		lvl, err := ParseLogLevel(configure(configJSON), logrus.DebugLevel)
-		assert.NoError(t, err)
-		assert.Equal(t, logrus.DebugLevel, lvl)
+		require.NoError(t, err)
+		require.Equal(t, logrus.DebugLevel, lvl)
 	}
 }
 
@@ -72,8 +72,8 @@ func TestParseNoLogLevel(t *testing.T) {
 func TestParseLogLevel(t *testing.T) {
 	lvl, err := ParseLogLevel(configure(`{"logging": {"level": "error"}}`),
 		logrus.DebugLevel)
-	assert.NoError(t, err)
-	assert.Equal(t, logrus.ErrorLevel, lvl)
+	require.NoError(t, err)
+	require.Equal(t, logrus.ErrorLevel, lvl)
 }
 
 func TestParseLogLevelWithEnvironmentVariables(t *testing.T) {
@@ -83,16 +83,16 @@ func TestParseLogLevelWithEnvironmentVariables(t *testing.T) {
 
 	lvl, err := ParseLogLevel(configure(`{}`),
 		logrus.DebugLevel)
-	assert.NoError(t, err)
-	assert.Equal(t, logrus.ErrorLevel, lvl)
+	require.NoError(t, err)
+	require.Equal(t, logrus.ErrorLevel, lvl)
 }
 
 // An error is returned if there's no API key
 func TestParseInvalidBugsnag(t *testing.T) {
 	_, err := ParseBugsnag(configure(
 		`{"reporting": {"bugsnag": {"endpoint": "http://12345"}}}`))
-	assert.Error(t, err)
-	assert.Contains(t, err.Error(), "must provide an API key")
+	require.Error(t, err)
+	require.Contains(t, err.Error(), "must provide an API key")
 }
 
 // If there's no bugsnag, a nil pointer is returned
@@ -100,8 +100,8 @@ func TestParseNoBugsnag(t *testing.T) {
 	empties := []string{`{}`, `{"reporting": {}}`}
 	for _, configJSON := range empties {
 		bugconf, err := ParseBugsnag(configure(configJSON))
-		assert.NoError(t, err)
-		assert.Nil(t, bugconf)
+		require.NoError(t, err)
+		require.Nil(t, bugconf)
 	}
 }
 
@@ -123,8 +123,8 @@ func TestParseBugsnag(t *testing.T) {
 	}
 
 	bugconf, err := ParseBugsnag(config)
-	assert.NoError(t, err)
-	assert.Equal(t, expected, *bugconf)
+	require.NoError(t, err)
+	require.Equal(t, expected, *bugconf)
 }
 
 func TestParseBugsnagWithEnvironmentVariables(t *testing.T) {
@@ -151,8 +151,8 @@ func TestParseBugsnagWithEnvironmentVariables(t *testing.T) {
 	}
 
 	bugconf, err := ParseBugsnag(config)
-	assert.NoError(t, err)
-	assert.Equal(t, expected, *bugconf)
+	require.NoError(t, err)
+	require.Equal(t, expected, *bugconf)
 }
 
 // If the storage backend is invalid or not provided, an error is returned.
@@ -166,8 +166,8 @@ func TestParseInvalidStorageBackend(t *testing.T) {
 	for _, configJSON := range invalids {
 		_, err := ParseStorage(configure(configJSON),
 			[]string{MySQLBackend, SqliteBackend})
-		assert.Error(t, err, fmt.Sprintf("'%s' should be an error", configJSON))
-		assert.Contains(t, err.Error(),
+		require.Error(t, err, fmt.Sprintf("'%s' should be an error", configJSON))
+		require.Contains(t, err.Error(),
 			"must specify one of these supported backends: mysql, sqlite3")
 	}
 }
@@ -183,8 +183,8 @@ func TestParseInvalidStorageNoDBSource(t *testing.T) {
 			configJSON := fmt.Sprintf(configJSONFmt, backend)
 			_, err := ParseStorage(configure(configJSON),
 				[]string{MySQLBackend, SqliteBackend})
-			assert.Error(t, err, fmt.Sprintf("'%s' should be an error", configJSON))
-			assert.Contains(t, err.Error(),
+			require.Error(t, err, fmt.Sprintf("'%s' should be an error", configJSON))
+			require.Contains(t, err.Error(),
 				fmt.Sprintf("must provide a non-empty database source for %s", backend))
 		}
 	}
@@ -197,8 +197,8 @@ func TestParseStorageMemoryStore(t *testing.T) {
 	expected := Storage{Backend: MemoryBackend}
 
 	store, err := ParseStorage(config, []string{MySQLBackend, MemoryBackend})
-	assert.NoError(t, err)
-	assert.Equal(t, expected, *store)
+	require.NoError(t, err)
+	require.Equal(t, expected, *store)
 }
 
 // A supported backend with DB source will be successfully parsed.
@@ -216,8 +216,8 @@ func TestParseStorageDBStore(t *testing.T) {
 	}
 
 	store, err := ParseStorage(config, []string{"mysql"})
-	assert.NoError(t, err)
-	assert.Equal(t, expected, *store)
+	require.NoError(t, err)
+	require.Equal(t, expected, *store)
 }
 
 func TestParseStorageWithEnvironmentVariables(t *testing.T) {
@@ -237,8 +237,8 @@ func TestParseStorageWithEnvironmentVariables(t *testing.T) {
 	}
 
 	store, err := ParseStorage(config, []string{"mysql"})
-	assert.NoError(t, err)
-	assert.Equal(t, expected, *store)
+	require.NoError(t, err)
+	require.Equal(t, expected, *store)
 }
 
 // If TLS is required and the parameters are missing, an error is returned
@@ -249,8 +249,8 @@ func TestParseTLSNoTLSWhenRequired(t *testing.T) {
 	}
 	for _, configJSON := range invalids {
 		_, err := ParseServerTLS(configure(configJSON), true)
-		assert.Error(t, err)
-		assert.Contains(t, err.Error(), "no such file or directory")
+		require.Error(t, err)
+		require.Contains(t, err.Error(), "no such file or directory")
 	}
 }
 
@@ -262,8 +262,8 @@ func TestParseTLSPartialTLS(t *testing.T) {
 	}
 	for _, configJSON := range invalids {
 		_, err := ParseServerTLS(configure(configJSON), false)
-		assert.Error(t, err)
-		assert.Contains(t, err.Error(),
+		require.Error(t, err)
+		require.Contains(t, err.Error(),
 			"either include both a cert and key file, or no TLS information at all to disable TLS")
 	}
 }
@@ -274,8 +274,8 @@ func TestParseTLSNoTLSNotRequired(t *testing.T) {
 	}`)
 
 	tlsConfig, err := ParseServerTLS(config, false)
-	assert.NoError(t, err)
-	assert.Nil(t, tlsConfig)
+	require.NoError(t, err)
+	require.Nil(t, tlsConfig)
 }
 
 func TestParseTLSWithTLS(t *testing.T) {
@@ -288,26 +288,26 @@ func TestParseTLSWithTLS(t *testing.T) {
 	}`, Cert, Key, Root))
 
 	tlsConfig, err := ParseServerTLS(config, false)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	expectedCert, err := tls.LoadX509KeyPair(Cert, Key)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	expectedRoot, err := trustmanager.LoadCertFromFile(Root)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
-	assert.Len(t, tlsConfig.Certificates, 1)
-	assert.True(t, reflect.DeepEqual(expectedCert, tlsConfig.Certificates[0]))
+	require.Len(t, tlsConfig.Certificates, 1)
+	require.True(t, reflect.DeepEqual(expectedCert, tlsConfig.Certificates[0]))
 
 	subjects := tlsConfig.ClientCAs.Subjects()
-	assert.Len(t, subjects, 1)
-	assert.True(t, bytes.Equal(expectedRoot.RawSubject, subjects[0]))
-	assert.Equal(t, tlsConfig.ClientAuth, tls.RequireAndVerifyClientCert)
+	require.Len(t, subjects, 1)
+	require.True(t, bytes.Equal(expectedRoot.RawSubject, subjects[0]))
+	require.Equal(t, tlsConfig.ClientAuth, tls.RequireAndVerifyClientCert)
 }
 
 func TestParseTLSWithTLSRelativeToConfigFile(t *testing.T) {
 	currDir, err := os.Getwd()
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	config := configure(fmt.Sprintf(`{
 		"server": {
@@ -319,16 +319,16 @@ func TestParseTLSWithTLSRelativeToConfigFile(t *testing.T) {
 	config.SetConfigFile(filepath.Join(currDir, "me.json"))
 
 	tlsConfig, err := ParseServerTLS(config, false)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	expectedCert, err := tls.LoadX509KeyPair(Cert, Key)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
-	assert.Len(t, tlsConfig.Certificates, 1)
-	assert.True(t, reflect.DeepEqual(expectedCert, tlsConfig.Certificates[0]))
+	require.Len(t, tlsConfig.Certificates, 1)
+	require.True(t, reflect.DeepEqual(expectedCert, tlsConfig.Certificates[0]))
 
-	assert.Nil(t, tlsConfig.ClientCAs)
-	assert.Equal(t, tlsConfig.ClientAuth, tls.NoClientCert)
+	require.Nil(t, tlsConfig.ClientCAs)
+	require.Equal(t, tlsConfig.ClientAuth, tls.NoClientCert)
 }
 
 func TestParseTLSWithEnvironmentVariables(t *testing.T) {
@@ -347,21 +347,21 @@ func TestParseTLSWithEnvironmentVariables(t *testing.T) {
 	defer cleanupEnvironmentVariables(t, vars)
 
 	tlsConfig, err := ParseServerTLS(config, true)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	expectedCert, err := tls.LoadX509KeyPair(Cert, Key)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	expectedRoot, err := trustmanager.LoadCertFromFile(Root)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
-	assert.Len(t, tlsConfig.Certificates, 1)
-	assert.True(t, reflect.DeepEqual(expectedCert, tlsConfig.Certificates[0]))
+	require.Len(t, tlsConfig.Certificates, 1)
+	require.True(t, reflect.DeepEqual(expectedCert, tlsConfig.Certificates[0]))
 
 	subjects := tlsConfig.ClientCAs.Subjects()
-	assert.Len(t, subjects, 1)
-	assert.True(t, bytes.Equal(expectedRoot.RawSubject, subjects[0]))
-	assert.Equal(t, tlsConfig.ClientAuth, tls.RequireAndVerifyClientCert)
+	require.Len(t, subjects, 1)
+	require.True(t, bytes.Equal(expectedRoot.RawSubject, subjects[0]))
+	require.Equal(t, tlsConfig.ClientAuth, tls.RequireAndVerifyClientCert)
 }
 
 func TestParseViperWithInvalidFile(t *testing.T) {
@@ -369,13 +369,13 @@ func TestParseViperWithInvalidFile(t *testing.T) {
 	SetupViper(v, envPrefix)
 
 	err := ParseViper(v, "Chronicle_Of_Dark_Secrets.json")
-	assert.Error(t, err)
-	assert.Contains(t, err.Error(), "Could not read config")
+	require.Error(t, err)
+	require.Contains(t, err.Error(), "Could not read config")
 }
 
 func TestParseViperWithValidFile(t *testing.T) {
 	file, err := os.Create("/tmp/Chronicle_Of_Dark_Secrets.json")
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	defer os.Remove(file.Name())
 
 	file.WriteString(`{"logging": {"level": "debug"}}`)
@@ -384,7 +384,7 @@ func TestParseViperWithValidFile(t *testing.T) {
 	SetupViper(v, envPrefix)
 
 	err = ParseViper(v, "/tmp/Chronicle_Of_Dark_Secrets.json")
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
-	assert.Equal(t, "debug", v.GetString("logging.level"))
+	require.Equal(t, "debug", v.GetString("logging.level"))
 }
