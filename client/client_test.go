@@ -247,7 +247,7 @@ func TestInitRepositoryManagedRolesIncludingRoot(t *testing.T) {
 	require.IsType(t, ErrInvalidRemoteRole{}, err)
 	// Just testing the error message here in this one case
 	require.Equal(t, err.Error(),
-		"notary does not support the server managing the root key")
+		"notary does not permit the server managing the root key")
 	// no key creation happened
 	rec.requireCreated(t, nil)
 }
@@ -2553,14 +2553,22 @@ func TestRotateKeyInvalidRole(t *testing.T) {
 	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
 	defer os.RemoveAll(repo.baseDir)
 
-	// the equivalent of: (root, true), (root, false), (timestamp, true),
-	// (timestamp, false), (targets, true)
+	// the equivalent of: remotely rotating the root key
+	// (RotateKey("root", true)), locally rotating the root key (RotateKey("root", false)),
+	// locally rotating the timestamp key (RotateKey("timestamp", false)),
+	// and remotely rotating the targets key (RotateKey(targets, true)), all of which should
+	// fail
 	for _, role := range data.BaseRoles {
 		if role == data.CanonicalSnapshotRole {
 			continue
 		}
 		for _, serverManagesKey := range []bool{true, false} {
+			// we support local rotation of the targets key and remote rotation of the
+			// timestamp key
 			if role == data.CanonicalTargetsRole && !serverManagesKey {
+				continue
+			}
+			if role == data.CanonicalTimestampRole && serverManagesKey {
 				continue
 			}
 			err := repo.RotateKey(role, serverManagesKey)
@@ -2571,10 +2579,24 @@ func TestRotateKeyInvalidRole(t *testing.T) {
 	}
 }
 
+// If remotely rotating key fails, the failure is propagated
+func TestRemoteRotationError(t *testing.T) {
+	ts, _, _ := simpleTestServer(t)
+
+	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, true)
+	defer os.RemoveAll(repo.baseDir)
+
+	ts.Close()
+
+	// server has died, so this should fail
+	err := repo.RotateKey(data.CanonicalTimestampRole, true)
+	require.Error(t, err)
+	require.Contains(t, err.Error(), "unable to rotate remote key")
+}
+
 // Rotates the keys.  After the rotation, downloading the latest metadata
 // and require that the keys have changed
-func requireRotationSuccessful(t *testing.T, repo1 *NotaryRepository,
-	keysToRotate map[string]bool, alreadyPublished bool) {
+func requireRotationSuccessful(t *testing.T, repo1 *NotaryRepository, keysToRotate map[string]bool) {
 	// Create 2 new repos:  1 will download repo data before the publish,
 	// and one only downloads after the publish. This reflects a client
 	// that has some previous trust data (but is not the publisher), and a
@@ -2584,35 +2606,26 @@ func requireRotationSuccessful(t *testing.T, repo1 *NotaryRepository,
 
 	repos := []*NotaryRepository{repo1, repo2}
 
-	if alreadyPublished {
-		repo3, _ := newRepoToTestRepo(t, repo1, true)
-		defer os.RemoveAll(repo2.baseDir)
-
-		// force a pull on repo3
-		_, err := repo3.GetTargetByName("latest")
-		require.NoError(t, err)
-
-		repos = append(repos, repo3)
-	}
-
 	oldKeyIDs := make(map[string][]string)
 	for role := range keysToRotate {
 		keyIDs := repo1.tufRepo.Root.Signed.Roles[role].KeyIDs
 		oldKeyIDs[role] = keyIDs
 	}
 
+	// Confirm no changelists get published
+	changesPre := getChanges(t, repo1)
+
 	// Do rotation
 	for role, serverManaged := range keysToRotate {
 		require.NoError(t, repo1.RotateKey(role, serverManaged))
 	}
 
-	// Publish
-	err := repo1.Publish()
-	require.NoError(t, err)
+	changesPost := getChanges(t, repo1)
+	require.Equal(t, changesPre, changesPost)
 
 	// Download data from remote and check that keys have changed
 	for _, repo := range repos {
-		_, err := repo.GetTargetByName("latest") // force a pull
+		_, err := repo.Update(true)
 		require.NoError(t, err)
 
 		for role, isRemoteKey := range keysToRotate {
@@ -2640,12 +2653,6 @@ func requireRotationSuccessful(t *testing.T, repo1 *NotaryRepository,
 				require.NotNil(t, key)
 			}
 		}
-
-		// Confirm changelist dir empty (on repo1, it should be empty after
-		// after publishing changes, on repo2, there should never have been
-		// any changelists)
-		changes := getChanges(t, repo)
-		require.Len(t, changes, 0, "wrong number of changelist files found")
 	}
 }
 
@@ -2661,11 +2668,16 @@ func TestRotateBeforePublishFromRemoteKeyToLocalKey(t *testing.T) {
 	defer os.RemoveAll(repo.baseDir)
 
 	// Adding a target will allow us to confirm the repository is still valid
-	// after rotating the keys.
+	// after rotating the keys when we publish (and that rotation doesn't publish
+	// non-key-rotation changes)
 	addTarget(t, repo, "latest", "../fixtures/intermediate-ca.crt")
 	requireRotationSuccessful(t, repo, map[string]bool{
 		data.CanonicalTargetsRole:  false,
-		data.CanonicalSnapshotRole: false}, false)
+		data.CanonicalSnapshotRole: false})
+
+	require.NoError(t, repo.Publish())
+	_, err := repo.GetTargetByName("latest")
+	require.NoError(t, err)
 }
 
 // Initialize a repo, locally signed snapshots
@@ -2713,12 +2725,13 @@ func testRotateKeySuccess(t *testing.T, serverManagesSnapshotInit bool,
 	// rotating the keys.
 	addTarget(t, repo, "latest", "../fixtures/intermediate-ca.crt")
 
+	requireRotationSuccessful(t, repo, keysToRotate)
+
 	// Publish
 	require.NoError(t, repo.Publish())
-
 	// Get root.json and capture targets + snapshot key IDs
-	repo.GetTargetByName("latest") // force a pull
-	requireRotationSuccessful(t, repo, keysToRotate, true)
+	_, err := repo.GetTargetByName("latest")
+	require.NoError(t, err)
 
 	var keysToExpectCreated []string
 	for role, serverManaged := range keysToRotate {
