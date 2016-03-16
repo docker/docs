@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
-	"net/http"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -36,9 +35,9 @@ var cmdKeyListTemplate = usageTemplate{
 }
 
 var cmdRotateKeyTemplate = usageTemplate{
-	Use:   "rotate [ GUN ]",
-	Short: "Rotate the signing (non-root) keys for the given Globally Unique Name.",
-	Long:  "Removes all the old signing (non-root) keys for the given Globally Unique Name, and generates new ones.  This only makes local changes - please use then `notary publish` to push the key rotation changes to the remote server.",
+	Use:   "rotate [ GUN ] [ key role ]",
+	Short: "Rotate a signing (non-root) key of the given type for the given Globally Unique Name and role.",
+	Long:  "Generates a new key for the given Globally Unique Name and role (one of \"snapshot\", \"targets\", or \"timestamp\").  If rotating to a server-managed key, a new key is requested from the server rather than generated.  If the generation or key request is successful, the key rotation is immediately published.  No other changes, even if they are staged, will be published.",
 }
 
 var cmdKeyGenerateRootKeyTemplate = usageTemplate{
@@ -125,13 +124,9 @@ func (k *keyCommander) GetCommand() *cobra.Command {
 
 	cmdRotateKey := cmdRotateKeyTemplate.ToCommand(k.keysRotate)
 	cmdRotateKey.Flags().BoolVarP(&k.rotateKeyServerManaged, "server-managed", "r",
-		false, "Signing and key management will be handled by the remote server. "+
-			"(no key will be generated or stored locally) "+
-			"Can only be used in conjunction with --key-type.")
-	cmdRotateKey.Flags().StringVarP(&k.rotateKeyRole, "key-type", "t", "",
-		`Key type to rotate.  Supported values: "targets", "snapshot". `+
-			`If not provided, both targets and snapshot keys will be rotated, `+
-			`and the new keys will be locally generated and stored.`)
+		false, "Signing and key management will be handled by the remote server "+
+			"(no key will be generated or stored locally). "+
+			"Required for timestamp role, optional for snapshot role")
 	cmd.AddCommand(cmdRotateKey)
 
 	return cmd
@@ -406,26 +401,9 @@ func (k *keyCommander) keysImport(cmd *cobra.Command, args []string) error {
 }
 
 func (k *keyCommander) keysRotate(cmd *cobra.Command, args []string) error {
-	if len(args) < 1 {
+	if len(args) < 2 {
 		cmd.Usage()
-		return fmt.Errorf("Must specify a GUN")
-	}
-	rotateKeyRole := strings.ToLower(k.rotateKeyRole)
-
-	var rolesToRotate []string
-	switch rotateKeyRole {
-	case "":
-		rolesToRotate = []string{data.CanonicalSnapshotRole, data.CanonicalTargetsRole}
-	case data.CanonicalSnapshotRole:
-		rolesToRotate = []string{data.CanonicalSnapshotRole}
-	case data.CanonicalTargetsRole:
-		rolesToRotate = []string{data.CanonicalTargetsRole}
-	default:
-		return fmt.Errorf("key rotation not supported for %s keys", k.rotateKeyRole)
-	}
-	if k.rotateKeyServerManaged && rotateKeyRole != data.CanonicalSnapshotRole {
-		return fmt.Errorf(
-			"remote signing/key management is only supported for the snapshot key")
+		return fmt.Errorf("Must specify a GUN and a key role to rotate")
 	}
 
 	config, err := k.configGetter()
@@ -434,27 +412,20 @@ func (k *keyCommander) keysRotate(cmd *cobra.Command, args []string) error {
 	}
 
 	gun := args[0]
-	var rt http.RoundTripper
-	if k.rotateKeyServerManaged {
-		// this does not actually push the changes, just creates the keys, but
-		// it creates a key remotely so it needs a transport
-		rt, err = getTransport(config, gun, false)
-		if err != nil {
-			return err
-		}
+	rotateKeyRole := args[1]
+
+	rt, err := getTransport(config, gun, false)
+	if err != nil {
+		return err
 	}
+
 	nRepo, err := notaryclient.NewNotaryRepository(
 		config.GetString("trust_dir"), gun, getRemoteTrustServer(config),
 		rt, k.getRetriever())
 	if err != nil {
 		return err
 	}
-	for _, role := range rolesToRotate {
-		if err := nRepo.RotateKey(role, k.rotateKeyServerManaged); err != nil {
-			return err
-		}
-	}
-	return nil
+	return nRepo.RotateKey(rotateKeyRole, k.rotateKeyServerManaged)
 }
 
 func removeKeyInteractively(keyStores []trustmanager.KeyStore, keyID string,

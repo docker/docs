@@ -90,13 +90,15 @@ subsection.
 In case of potential compromise, notary provides a CLI command for rotating keys. Currently, you can use the `notary key rotate` command to rotate the targets or snapshot keys.
 
 While the snapshot key is managed by the notary client by default, use the `notary key
-rotate -r` command to rotate the snapshot key to the server, such that the
+rotate snapshot -r` command to rotate the snapshot key to the server, such that the
 notary server will then sign snapshots. This is particularly useful when using
 delegations with a trusted collection, so that delegates will never need access to the
 snapshot key to push their updates to the collection.
 
 Note that new collections created by a Docker 1.11 Engine client will have the server manage the snapshot key by default.
 To reclaim control of the snapshot key on the client, use the `notary key rotate` command without the `-r` flag.
+
+The targets key must be locally managed - to rotate the targets key, for instance in case of compromise, use the `notary key rotate targets` command without the `-r` flag.s
 
 ### Use a Yubikey
 
@@ -129,11 +131,10 @@ their own targets to the collection, since the server can publish the valid
 snapshot with the delegation targets:
 
 ```
-$ notary key rotate example.com/collection -r --key-type=snapshot
+$ notary key rotate example.com/collection snapshot -r
 ```
 
-Here, `-r` specifies to rotate the key to the remote server, and `--key-type` (shorthand `-t`)
-specifies the role.
+Here, `-r` specifies to rotate the key to the remote server.
 
 When adding a delegation, your must acquire a x509 certificate with the public
 key of the user you wish to delegate to. The user who will assume this
@@ -205,7 +206,7 @@ In the preceding example, you add the target `delegation/path/target` to
 collection `example/collections` staged for next publish. The file
 `delegation_file.txt` is a target `delegation/path/target` using the delegation
 role `targets/releases`. This target's path is valid because it is prefixed by
-the delegation role's valid path.  
+the delegation role's valid path.
 
 The `notary list` and `notary remove` commands can also take the `--roles` flag
 to specify roles to list or remove targets from.  By default, this operates over
