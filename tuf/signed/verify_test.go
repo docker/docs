@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/docker/go/canonical/json"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 
 	"github.com/docker/notary/tuf/data"
 )
@@ -14,90 +14,90 @@ import (
 func TestRoleNoKeys(t *testing.T) {
 	cs := NewEd25519()
 	k, err := cs.Create("root", data.ED25519Key)
-	assert.NoError(t, err)
-	assert.NoError(t, err)
+	require.NoError(t, err)
+	require.NoError(t, err)
 	roleWithKeys := data.BaseRole{Name: "root", Keys: data.Keys{}, Threshold: 1}
 
 	meta := &data.SignedCommon{Type: "Root", Version: 1, Expires: data.DefaultExpires("root")}
 
 	b, err := json.MarshalCanonical(meta)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	s := &data.Signed{Signed: b}
 	Sign(cs, s, k)
 	err = Verify(s, roleWithKeys, 1)
-	assert.IsType(t, ErrRoleThreshold{}, err)
+	require.IsType(t, ErrRoleThreshold{}, err)
 }
 
 func TestNotEnoughSigs(t *testing.T) {
 	cs := NewEd25519()
 	k, err := cs.Create("root", data.ED25519Key)
-	assert.NoError(t, err)
-	assert.NoError(t, err)
+	require.NoError(t, err)
+	require.NoError(t, err)
 	roleWithKeys := data.BaseRole{Name: "root", Keys: data.Keys{k.ID(): k}, Threshold: 2}
 
 	meta := &data.SignedCommon{Type: "Root", Version: 1, Expires: data.DefaultExpires("root")}
 
 	b, err := json.MarshalCanonical(meta)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	s := &data.Signed{Signed: b}
 	Sign(cs, s, k)
 	err = Verify(s, roleWithKeys, 1)
-	assert.IsType(t, ErrRoleThreshold{}, err)
+	require.IsType(t, ErrRoleThreshold{}, err)
 }
 
 func TestMoreThanEnoughSigs(t *testing.T) {
 	cs := NewEd25519()
 	k1, err := cs.Create("root", data.ED25519Key)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	k2, err := cs.Create("root", data.ED25519Key)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	roleWithKeys := data.BaseRole{Name: "root", Keys: data.Keys{k1.ID(): k1, k2.ID(): k2}, Threshold: 1}
 
 	meta := &data.SignedCommon{Type: "Root", Version: 1, Expires: data.DefaultExpires("root")}
 
 	b, err := json.MarshalCanonical(meta)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	s := &data.Signed{Signed: b}
 	Sign(cs, s, k1, k2)
-	assert.Equal(t, 2, len(s.Signatures))
+	require.Equal(t, 2, len(s.Signatures))
 	err = Verify(s, roleWithKeys, 1)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 }
 
 func TestDuplicateSigs(t *testing.T) {
 	cs := NewEd25519()
 	k, err := cs.Create("root", data.ED25519Key)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	roleWithKeys := data.BaseRole{Name: "root", Keys: data.Keys{k.ID(): k}, Threshold: 2}
 
 	meta := &data.SignedCommon{Type: "Root", Version: 1, Expires: data.DefaultExpires("root")}
 
 	b, err := json.MarshalCanonical(meta)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	s := &data.Signed{Signed: b}
 	Sign(cs, s, k)
 	s.Signatures = append(s.Signatures, s.Signatures[0])
 	err = Verify(s, roleWithKeys, 1)
-	assert.IsType(t, ErrRoleThreshold{}, err)
+	require.IsType(t, ErrRoleThreshold{}, err)
 }
 
 func TestUnknownKeyBelowThreshold(t *testing.T) {
 	cs := NewEd25519()
 	k, err := cs.Create("root", data.ED25519Key)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	unknown, err := cs.Create("root", data.ED25519Key)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	roleWithKeys := data.BaseRole{Name: "root", Keys: data.Keys{k.ID(): k}, Threshold: 2}
 
 	meta := &data.SignedCommon{Type: "Root", Version: 1, Expires: data.DefaultExpires("root")}
 
 	b, err := json.MarshalCanonical(meta)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	s := &data.Signed{Signed: b}
 	Sign(cs, s, k, unknown)
 	s.Signatures = append(s.Signatures)
 	err = Verify(s, roleWithKeys, 1)
-	assert.IsType(t, ErrRoleThreshold{}, err)
+	require.IsType(t, ErrRoleThreshold{}, err)
 }
 
 func Test(t *testing.T) {
@@ -167,7 +167,7 @@ func Test(t *testing.T) {
 			meta := &data.SignedCommon{Type: run.typ, Version: run.ver, Expires: *run.exp}
 
 			b, err := json.MarshalCanonical(meta)
-			assert.NoError(t, err)
+			require.NoError(t, err)
 			s := &data.Signed{Signed: b}
 			Sign(cryptoService, s, k)
 			run.s = s
@@ -178,17 +178,17 @@ func Test(t *testing.T) {
 
 		err := Verify(run.s, run.roleData, minVer)
 		if e, ok := run.err.(ErrExpired); ok {
-			assertErrExpired(t, err, e)
+			requireErrExpired(t, err, e)
 		} else {
-			assert.Equal(t, run.err, err)
+			require.Equal(t, run.err, err)
 		}
 	}
 }
 
-func assertErrExpired(t *testing.T, err error, expected ErrExpired) {
+func requireErrExpired(t *testing.T, err error, expected ErrExpired) {
 	actual, ok := err.(ErrExpired)
 	if !ok {
 		t.Fatalf("expected err to have type ErrExpired, got %T", err)
 	}
-	assert.Equal(t, actual.Expired, expected.Expired)
+	require.Equal(t, actual.Expired, expected.Expired)
 }
