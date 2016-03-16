@@ -23,10 +23,6 @@ import (
 const (
 	jsonLogFormat = "json"
 	DebugAddress  = "localhost:8080"
-	// This is the generally recommended maximum age for Cache-Control headers
-	// (one year, in seconds, since one year is forever in terms of internet
-	// content)
-	maxMaxAge = 60 * 60 * 24 * 365
 )
 
 var (
@@ -34,11 +30,9 @@ var (
 	logFormat  string
 	configFile string
 	envPrefix  = "NOTARY_SERVER"
-	mainViper  = viper.New()
 )
 
 func init() {
-	utils.SetupViper(mainViper, envPrefix)
 	// Setup flags
 	flag.StringVar(&configFile, "config", "", "Path to configuration file")
 	flag.BoolVar(&debug, "debug", false, "Enable the debugging server on localhost:8080")
@@ -48,6 +42,64 @@ func init() {
 	if logFormat == jsonLogFormat {
 		logrus.SetFormatter(new(logrus.JSONFormatter))
 	}
+}
+
+func parseServerConfig(configFilePath string, hRegister healthRegister) (context.Context, server.Config, error) {
+	config := viper.New()
+	utils.SetupViper(config, envPrefix)
+
+	// parse viper config
+	if err := utils.ParseViper(config, configFilePath); err != nil {
+		return nil, server.Config{}, err
+	}
+
+	ctx := context.Background()
+
+	// default is error level
+	lvl, err := utils.ParseLogLevel(config, logrus.ErrorLevel)
+	if err != nil {
+		return nil, server.Config{}, err
+	}
+	logrus.SetLevel(lvl)
+
+	// parse bugsnag config
+	bugsnagConf, err := utils.ParseBugsnag(config)
+	if err != nil {
+		return ctx, server.Config{}, err
+	}
+	utils.SetUpBugsnag(bugsnagConf)
+
+	trust, keyAlgo, err := getTrustService(config, client.NewNotarySigner, hRegister)
+	if err != nil {
+		return nil, server.Config{}, err
+	}
+	ctx = context.WithValue(ctx, "keyAlgorithm", keyAlgo)
+
+	store, err := getStore(config, []string{utils.MySQLBackend, utils.MemoryBackend}, hRegister)
+	if err != nil {
+		return nil, server.Config{}, err
+	}
+	ctx = context.WithValue(ctx, "metaStore", store)
+
+	currentCache, consistentCache, err := getCacheConfig(config)
+	if err != nil {
+		return nil, server.Config{}, err
+	}
+
+	httpAddr, tlsConfig, err := getAddrAndTLSConfig(config)
+	if err != nil {
+		return nil, server.Config{}, err
+	}
+
+	return ctx, server.Config{
+		Addr:                         httpAddr,
+		TLSConfig:                    tlsConfig,
+		Trust:                        trust,
+		AuthMethod:                   config.GetString("auth.type"),
+		AuthOpts:                     config.Get("auth.options"),
+		CurrentCacheControlConfig:    currentCache,
+		ConsistentCacheControlConfig: consistentCache,
+	}, nil
 }
 
 func main() {
@@ -61,63 +113,13 @@ func main() {
 	// when the server starts print the version for debugging and issue logs later
 	logrus.Infof("Version: %s, Git commit: %s", version.NotaryVersion, version.GitCommit)
 
-	ctx := context.Background()
-
-	// parse viper config
-	if err := utils.ParseViper(mainViper, configFile); err != nil {
-		logrus.Fatal(err.Error())
-	}
-
-	// default is error level
-	lvl, err := utils.ParseLogLevel(mainViper, logrus.ErrorLevel)
-	if err != nil {
-		logrus.Fatal(err.Error())
-	}
-	logrus.SetLevel(lvl)
-
-	// parse bugsnag config
-	bugsnagConf, err := utils.ParseBugsnag(mainViper)
-	if err != nil {
-		logrus.Fatal(err.Error())
-	}
-	utils.SetUpBugsnag(bugsnagConf)
-
-	trust, keyAlgo, err := getTrustService(mainViper,
-		client.NewNotarySigner, health.RegisterPeriodicFunc)
-	if err != nil {
-		logrus.Fatal(err.Error())
-	}
-	ctx = context.WithValue(ctx, "keyAlgorithm", keyAlgo)
-
-	store, err := getStore(mainViper, []string{utils.MySQLBackend, utils.MemoryBackend})
-	if err != nil {
-		logrus.Fatal(err.Error())
-	}
-	ctx = context.WithValue(ctx, "metaStore", store)
-
-	currentCache, consistentCache, err := getCacheConfig(mainViper)
-	if err != nil {
-		logrus.Fatal(err.Error())
-	}
-
-	httpAddr, tlsConfig, err := getAddrAndTLSConfig(mainViper)
+	ctx, serverConfig, err := parseServerConfig(configFile, health.RegisterPeriodicFunc)
 	if err != nil {
 		logrus.Fatal(err.Error())
 	}
 
 	logrus.Info("Starting Server")
-	err = server.Run(
-		ctx,
-		server.Config{
-			Addr:                         httpAddr,
-			TLSConfig:                    tlsConfig,
-			Trust:                        trust,
-			AuthMethod:                   mainViper.GetString("auth.type"),
-			AuthOpts:                     mainViper.Get("auth.options"),
-			CurrentCacheControlConfig:    currentCache,
-			ConsistentCacheControlConfig: consistentCache,
-		},
-	)
+	err = server.Run(ctx, serverConfig)
 
 	logrus.Error(err.Error())
 	return
