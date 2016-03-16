@@ -332,11 +332,9 @@ func TestValidateRootWithPinnedCA(t *testing.T) {
 	)
 	assert.NoError(t, err)
 
-	// Execute our template
 	templ, _ := template.New("SignedRSARootTemplate").Parse(signedRSARootTemplate)
 	templ.Execute(&signedRootBytes, SignedRSARootTemplate{RootPem: validPEMEncodedRSARoot})
-
-	// Unmarshal our signedroot
+	// Unmarshal our signedRoot
 	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
 
 	// This call to ValidateRoot will fail because we have an invalid path for the CA
@@ -346,6 +344,72 @@ func TestValidateRootWithPinnedCA(t *testing.T) {
 	// This call to ValidateRoot will fail because we have no valid GUNs to use, and TOFUS is disabled
 	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{CA: map[string]string{"othergun": filepath.Join(tempBaseDir, "nonexistent")}, TOFU: false})
 	assert.Error(t, err)
+
+	// Write an invalid CA cert (not even a PEM) to the tempDir and ensure validation fails when using it
+	invalidCAFilepath := filepath.Join(tempBaseDir, "invalid.ca")
+	assert.NoError(t, ioutil.WriteFile(invalidCAFilepath, []byte("ABSOLUTELY NOT A PEM"), 0644))
+
+	// Using this invalid CA cert should fail on ValidateRoot
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{CA: map[string]string{"docker.com/notary": invalidCAFilepath}, TOFU: false})
+	assert.Error(t, err)
+
+	validCAFilepath := "../fixtures/root-ca.crt"
+
+	// If we pass an invalid Certs entry in addition to this valid CA entry, since Certs has priority for pinning we will fail
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string]string{"docker.com/notary": "invalidID"}, CA: map[string]string{"docker.com/notary": validCAFilepath}, TOFU: false})
+	assert.Error(t, err)
+
+	// Now construct a new root with a valid cert chain, such that signatures are correct over the 'notary-signer' GUN.  Pin the root-ca and validate
+	leafCert, err := trustmanager.LoadCertFromFile("../fixtures/notary-signer.crt")
+	assert.NoError(t, err)
+	pemLeafBytes := trustmanager.CertToPEM(leafCert)
+	newRootLeafKey := data.NewPublicKey(data.RSAx509Key, pemLeafBytes)
+
+	intermediateCert, err := trustmanager.LoadCertFromFile("../fixtures/intermediate-ca.crt")
+	assert.NoError(t, err)
+
+	pemChainBytes, err := trustmanager.CertChainToPEM([]*x509.Certificate{leafCert, intermediateCert})
+	assert.NoError(t, err)
+
+	newRootKey := data.NewPublicKey(data.RSAx509Key, pemChainBytes)
+
+	rootRole, err := data.NewRole(data.CanonicalRootRole, 1, []string{newRootKey.ID()}, nil)
+	assert.NoError(t, err)
+
+	testRoot, err := data.NewRoot(
+		map[string]data.PublicKey{newRootKey.ID(): newRootKey},
+		map[string]*data.RootRole{
+			data.CanonicalRootRole:      &rootRole.RootRole,
+			data.CanonicalTimestampRole: &rootRole.RootRole,
+			data.CanonicalTargetsRole:   &rootRole.RootRole,
+			data.CanonicalSnapshotRole:  &rootRole.RootRole},
+		false,
+	)
+	assert.NoError(t, err, "Failed to create new root")
+
+	keyReader, err := os.Open("../fixtures/notary-signer.key")
+	assert.NoError(t, err, "could not open key file")
+	pemBytes, err := ioutil.ReadAll(keyReader)
+	assert.NoError(t, err, "could not read key file")
+	privKey, err := trustmanager.ParsePEMPrivateKey(pemBytes, "")
+	assert.NoError(t, err)
+
+	store, err := trustmanager.NewKeyFileStore(tempBaseDir, passphraseRetriever)
+	assert.NoError(t, err)
+	cs := cryptoservice.NewCryptoService(store)
+
+	err = store.AddKey(trustmanager.KeyInfo{Role: data.CanonicalRootRole, Gun: "notary-signer"}, privKey)
+	assert.NoError(t, err)
+
+	newTestSignedRoot, err := testRoot.ToSigned()
+	assert.NoError(t, err)
+
+	err = signed.Sign(cs, newTestSignedRoot, newRootLeafKey)
+	assert.NoError(t, err)
+
+	// Check that we validate correctly against a pinned CA and provided bundle
+	err = ValidateRoot(certStore, newTestSignedRoot, "notary-signer", notary.TrustPinConfig{CA: map[string]string{"notary-signer": validCAFilepath}, TOFU: false})
+	assert.NoError(t, err)
 }
 
 // TestValidateSuccessfulRootRotation runs through a full root certificate rotation

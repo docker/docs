@@ -1,6 +1,7 @@
 package trustmanager
 
 import (
+	"bytes"
 	"crypto/ecdsa"
 	"crypto/elliptic"
 	"crypto/rand"
@@ -57,11 +58,22 @@ func GetCertFromURL(urlStr string) (*x509.Certificate, error) {
 	return cert, nil
 }
 
-// CertToPEM is an utility function returns a PEM encoded x509 Certificate
+// CertToPEM is a utility function returns a PEM encoded x509 Certificate
 func CertToPEM(cert *x509.Certificate) []byte {
 	pemCert := pem.EncodeToMemory(&pem.Block{Type: "CERTIFICATE", Bytes: cert.Raw})
 
 	return pemCert
+}
+
+// CertChainToPEM is a utility function returns a PEM encoded chain of x509 Certificates, in the order they are passed
+func CertChainToPEM(certChain []*x509.Certificate) ([]byte, error) {
+	var pemBytes bytes.Buffer
+	for _, cert := range certChain {
+		if err := pem.Encode(&pemBytes, &pem.Block{Type: "CERTIFICATE", Bytes: cert.Raw}); err != nil {
+			return nil, err
+		}
+	}
+	return pemBytes.Bytes(), nil
 }
 
 // LoadCertFromPEM returns the first certificate found in a bunch of bytes or error
