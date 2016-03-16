@@ -432,7 +432,6 @@ func TestRotateKeyBothKeys(t *testing.T) {
 			v.SetDefault("trust_dir", tempBaseDir)
 			v.SetDefault("remote_server.url", ts.URL)
 			v.Set("trust_pinning.tofu", true)
-			// won't need a remote server URL, since we are creating local keys
 			return v, nil
 		},
 		getRetriever: func() passphrase.Retriever { return ret },
