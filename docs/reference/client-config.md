@@ -37,8 +37,8 @@ JSON keys to learn more about the configuration section corresponding to that ke
     "tls_client_key": "./fixtures/secure.example.com.crt"
   }
   <a href="#trust-pinning-section-optional">"trust_pinning"</a>: {
-    "Certs": {
-      "GUN": "49cf5c6404a35fa41d5a5aa2ce539dfee0d7a2176d0da488914a38603b1f4292"
+    "certs": {
+      "docker.com/notary": "49cf5c6404a35fa41d5a5aa2ce539dfee0d7a2176d0da488914a38603b1f4292"
     }
   }
 }
@@ -139,20 +139,20 @@ will result in a failed bootstrapping of the repo.
 		<th>Description</th>
 	</tr>
 	<tr>
-		<td valign="top"><code>Certs</code></td>
+		<td valign="top"><code>certs</code></td>
 		<td valign="top">no</td>
 		<td valign="top"><p>Mapping of GUN to certificate IDs to pin to.
 		    Both are strings in the JSON object.</p></td>
 	</tr>
 	<tr>
-		<td valign="top"><code>CA</code></td>
+		<td valign="top"><code>ca</code></td>
 		<td valign="top">no</td>
 		<td valign="top"><p>Mapping of GUN prefixes to filepaths containing
 		    the root CA with which to verify the certificates in the root file.
 			The path is relative to the directory of the configuration file.</p></td>
 	</tr>
 	<tr>
-		<td valign="top"><code>TOFU</code></td>
+		<td valign="top"><code>tofu</code></td>
 		<td valign="top">no</td>
 		<td valign="top"><p>Boolean value determining whether to use trust
 		    on first use when bootstrapping validation on a collection's
