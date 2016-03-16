@@ -11,6 +11,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/docker/notary"
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/signer/client"
 	"github.com/docker/notary/tuf/data"
@@ -301,8 +302,16 @@ func TestGetTrustServiceTLSFailure(t *testing.T) {
 func TestGetStoreInvalid(t *testing.T) {
 	config := `{"storage": {"backend": "asdf", "db_url": "/tmp/1234"}}`
 
-	_, err := getStore(configure(config), []string{"mysql"})
+	var registerCalled = 0
+	var fakeRegister = func(_ string, _ func() error, _ time.Duration) {
+		registerCalled++
+	}
+
+	_, err := getStore(configure(config), []string{"mysql"}, fakeRegister)
 	assert.Error(t, err)
+
+	// no health function ever registered
+	assert.Equal(t, 0, registerCalled)
 }
 
 func TestGetStoreDBStore(t *testing.T) {
@@ -314,36 +323,74 @@ func TestGetStoreDBStore(t *testing.T) {
 	config := fmt.Sprintf(`{"storage": {"backend": "%s", "db_url": "%s"}}`,
 		utils.SqliteBackend, tmpFile.Name())
 
-	store, err := getStore(configure(config), []string{utils.SqliteBackend})
+	var registerCalled = 0
+	var fakeRegister = func(_ string, _ func() error, _ time.Duration) {
+		registerCalled++
+	}
+
+	store, err := getStore(configure(config), []string{utils.SqliteBackend}, fakeRegister)
 	assert.NoError(t, err)
 	_, ok := store.(*storage.SQLStorage)
 	assert.True(t, ok)
+
+	// health function registered
+	assert.Equal(t, 1, registerCalled)
 }
 
 func TestGetMemoryStore(t *testing.T) {
+	var registerCalled = 0
+	var fakeRegister = func(_ string, _ func() error, _ time.Duration) {
+		registerCalled++
+	}
+
 	config := fmt.Sprintf(`{"storage": {"backend": "%s"}}`, utils.MemoryBackend)
 	store, err := getStore(configure(config),
-		[]string{utils.MySQLBackend, utils.MemoryBackend})
+		[]string{utils.MySQLBackend, utils.MemoryBackend}, fakeRegister)
 	assert.NoError(t, err)
 	_, ok := store.(*storage.MemStorage)
 	assert.True(t, ok)
+
+	// no health function ever registered
+	assert.Equal(t, 0, registerCalled)
 }
 
 func TestGetCacheConfig(t *testing.T) {
-	valid := `{"caching": {"max_age": {"current_metadata": 0, "metadata_by_checksum": 31536000}}}`
+	defaults := `{}`
+	valid := `{"caching": {"max_age": {"current_metadata": 0, "consistent_metadata": 31536000}}}`
 	invalids := []string{
-		`{"caching": {"max_age": {"current_metadata": 0, "metadata_by_checksum": 31539000}}}`,
-		`{"caching": {"max_age": {"current_metadata": -1, "metadata_by_checksum": 300}}}`,
-		`{"caching": {"max_age": {"current_metadata": "hello", "metadata_by_checksum": 300}}}`,
+		`{"caching": {"max_age": {"current_metadata": 0, "consistent_metadata": 31539000}}}`,
+		`{"caching": {"max_age": {"current_metadata": -1, "consistent_metadata": 300}}}`,
+		`{"caching": {"max_age": {"current_metadata": "hello", "consistent_metadata": 300}}}`,
 	}
 
-	current, consistent, err := getCacheConfig(configure(valid))
+	current, consistent, err := getCacheConfig(configure(defaults))
 	assert.NoError(t, err)
-	assert.IsType(t, utils.NoCacheControl{}, current)
-	assert.IsType(t, utils.PublicCacheControl{}, consistent)
+	assert.Equal(t,
+		utils.PublicCacheControl{MaxAgeInSeconds: int(notary.CurrentMetadataCacheMaxAge.Seconds()),
+			MustReValidate: true}, current)
+	assert.Equal(t,
+		utils.PublicCacheControl{MaxAgeInSeconds: int(notary.ConsistentMetadataCacheMaxAge.Seconds())}, consistent)
+
+	current, consistent, err = getCacheConfig(configure(valid))
+	assert.NoError(t, err)
+	assert.Equal(t, utils.NoCacheControl{}, current)
+	assert.Equal(t, utils.PublicCacheControl{MaxAgeInSeconds: 31536000}, consistent)
 
 	for _, invalid := range invalids {
 		_, _, err := getCacheConfig(configure(invalid))
 		assert.Error(t, err)
 	}
+}
+
+// For sanity, make sure we can always parse the sample config
+func TestSampleConfig(t *testing.T) {
+	var registerCalled = 0
+	var fakeRegister = func(_ string, _ func() error, _ time.Duration) {
+		registerCalled++
+	}
+	_, _, err := parseServerConfig("../../fixtures/server-config.json", fakeRegister)
+	assert.NoError(t, err)
+
+	// once for the DB, once for the trust service
+	assert.Equal(t, registerCalled, 2)
 }
