@@ -8,6 +8,9 @@ machine:
   # Install many go versions
     - gvm install go1.6 -B --name=stable
 
+  services:
+    - docker
+
   environment:
   # Convenient shortcuts to "common" locations
     CHECKOUT: /home/ubuntu/$CIRCLE_PROJECT_REPONAME
@@ -70,7 +73,7 @@ test:
   override:
   # Test stable, and report
   # hacking this to be parallel
-    - case $CIRCLE_NODE_INDEX in 0) gvm use stable && NOTARY_BUILDTAGS=pkcs11 make ci ;; 1) gvm use stable && NOTARY_BUILDTAGS=none make ci ;; esac:
+    - case $CIRCLE_NODE_INDEX in 0) gvm use stable && NOTARY_BUILDTAGS=pkcs11 make ci ;; 1) gvm use stable && NOTARY_BUILDTAGS=none make ci ;; 2) gvm use stable && make integration ;; esac:
         parallel: true
         timeout: 600
         pwd: $BASE_STABLE

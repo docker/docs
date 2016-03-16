@@ -125,6 +125,9 @@ test-full: vet lint
 	@echo
 	go test -tags "${NOTARY_BUILDTAGS}" $(TESTOPTS) -v $(PKGS)
 
+integration:
+	.build/integrationtest.sh
+
 protos:
 	@protoc --go_out=plugins=grpc:. proto/*.proto
 
