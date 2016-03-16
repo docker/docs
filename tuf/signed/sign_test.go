@@ -9,7 +9,7 @@ import (
 	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 const (
@@ -157,11 +157,11 @@ func (mts *StrictMockCryptoService) ImportRootKey(r io.Reader) error {
 func TestBasicSign(t *testing.T) {
 	cs := NewEd25519()
 	key, err := cs.Create("root", data.ED25519Key)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	testData := data.Signed{}
 
 	err = Sign(cs, &testData, key)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	if len(testData.Signatures) != 1 {
 		t.Fatalf("Incorrect number of signatures: %d", len(testData.Signatures))
@@ -177,7 +177,7 @@ func TestBasicSign(t *testing.T) {
 func TestReSign(t *testing.T) {
 	cs := NewEd25519()
 	key, err := cs.Create("root", data.ED25519Key)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	testData := data.Signed{}
 
 	Sign(cs, &testData, key)
@@ -199,7 +199,7 @@ func TestMultiSign(t *testing.T) {
 	testData := data.Signed{}
 
 	key1, err := cs.Create("root", data.ED25519Key)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	Sign(cs, &testData, key1)
 
 	// reinitializing cs means it won't know about key1. We want
@@ -208,7 +208,7 @@ func TestMultiSign(t *testing.T) {
 	// for key2 is added
 	cs = NewEd25519()
 	key2, err := cs.Create("root", data.ED25519Key)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	Sign(
 		cs,
 		&testData,
@@ -228,7 +228,7 @@ func TestMultiSign(t *testing.T) {
 			t.Fatalf("Got a signature we didn't expect: %s", sig.KeyID)
 		}
 	}
-	assert.Equal(t, 2, count)
+	require.Equal(t, 2, count)
 
 }
 
@@ -251,22 +251,22 @@ func TestSignReturnsNoSigs(t *testing.T) {
 func TestSignWithX509(t *testing.T) {
 	// generate a key becase we need a cert
 	privKey, err := trustmanager.GenerateRSAKey(rand.Reader, 1024)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// make a RSA x509 key
 	cert, err := cryptoservice.GenerateTestingCertificate(privKey.CryptoSigner(), "test")
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	tufRSAx509Key := trustmanager.CertToKey(cert)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// test signing against a service that only recognizes a RSAKey (not
 	// RSAx509 key)
 	mockCryptoService := &StrictMockCryptoService{MockCryptoService{privKey}}
 	testData := data.Signed{}
 	err = Sign(mockCryptoService, &testData, tufRSAx509Key)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
-	assert.Len(t, testData.Signatures, 1)
-	assert.Equal(t, tufRSAx509Key.ID(), testData.Signatures[0].KeyID)
+	require.Len(t, testData.Signatures, 1)
+	require.Equal(t, tufRSAx509Key.ID(), testData.Signatures[0].KeyID)
 }
