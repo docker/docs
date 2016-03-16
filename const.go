@@ -42,6 +42,13 @@ const (
 	NotaryTargetsExpiry   = 3 * Year
 	NotarySnapshotExpiry  = 3 * Year
 	NotaryTimestampExpiry = 14 * Day
+
+	ConsistentMetadataCacheMaxAge = 30 * Day
+	CurrentMetadataCacheMaxAge    = 5 * time.Minute
+	// CacheMaxAgeLimit is the generally recommended maximum age for Cache-Control headers
+	// (one year, in seconds, since one year is forever in terms of internet
+	// content)
+	CacheMaxAgeLimit = 1 * Year
 )
 
 // NotaryDefaultExpiries is the construct used to configure the default expiry times of

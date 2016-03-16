@@ -59,6 +59,12 @@ learn more about the configuration section corresponding to that key:
       "release_stage": "production"
     }
   }
+  <a href="#caching-section-optional">"caching"</a>a>: {
+    "max_age": {
+      "current_metadata": 300,
+      "consistent_metadata": 31536000,
+    }
+  }
 }
 </code></pre>
 
@@ -283,6 +289,43 @@ authentication post login.)
 			<a href="https://github.com/docker/distribution/blob/master/docs/configuration.md#token">
 			the registry token configuration documentation</a>
 			for the parameter details.</td>
+	</tr>
+</table>
+
+## caching section (optional)
+
+Example:
+
+```json
+"caching": {
+  "max_age": {
+    "current_metadata": 300,
+    "consistent_metadata": 31536000,
+  }
+}
+```
+
+<table>
+	<tr>
+		<th>Parameter</th>
+		<th>Required</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td valign="top"><code>max_age</code></td>
+		<td valign="top">no</td>
+		<td valign="top">The max age, in seconds, for caching services to cache
+			the latest metadata for a role and the metadata by checksum for a
+			role.  This value will be set on the cache control headers for
+			GET-ting metadata.
+
+			Note that `must-revalidate` is also set on the cache control headers
+			for current metadata, as current metadata may change whenever new
+			metadata is signed into a repo.
+
+			Consistent metadata should never change, although it may be deleted,
+			so the max age can be a higher value.
+		</td>
 	</tr>
 </table>
 
