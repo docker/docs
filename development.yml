@@ -7,7 +7,7 @@ server:
     - signer:notarysigner
   environment:
     - SERVICE_NAME=notary_server
-  entrypoint: /bin/bash
+  entrypoint: /usr/bin/env sh
   command: -c "./migrations/migrate.sh && notary-server -config=fixtures/server-config.json"
 signer:
   build: .
@@ -16,7 +16,7 @@ signer:
     - mysql
   environment:
     - SERVICE_NAME=notary_signer
-  entrypoint: /bin/bash
+  entrypoint: /usr/bin/env sh
   command: -c "./migrations/migrate.sh && notary-signer -config=fixtures/signer-config.json"
 mysql:
   volumes:
