@@ -919,12 +919,7 @@ func (tr *Repo) SignTimestamp(expires time.Time) (*data.Signed, error) {
 }
 
 func (tr Repo) sign(signedData *data.Signed, role data.BaseRole) (*data.Signed, error) {
-	ks := role.ListKeys()
-	if len(ks) < 1 {
-		return nil, signed.ErrNoKeys{}
-	}
-	err := signed.Sign(tr.cryptoService, signedData, ks...)
-	if err != nil {
+	if err := signed.Sign(tr.cryptoService, signedData, role.ListKeys()...); err != nil {
 		return nil, err
 	}
 	return signedData, nil

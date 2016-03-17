@@ -297,10 +297,7 @@ func testValidateSuccessfulRootRotation(t *testing.T, keyAlg, rootKeyType string
 	signedTestRoot, err := testRoot.ToSigned()
 	assert.NoError(t, err)
 
-	err = signed.Sign(cs, signedTestRoot, replRootKey)
-	assert.NoError(t, err)
-
-	err = signed.Sign(cs, signedTestRoot, origRootKey)
+	err = signed.Sign(cs, signedTestRoot, replRootKey, origRootKey)
 	assert.NoError(t, err)
 
 	// This call to ValidateRoot will succeed since we are using a valid PEM
