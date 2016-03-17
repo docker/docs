@@ -126,9 +126,9 @@ var NotaryDefaultHashes = []string{notary.SHA256, notary.SHA512}
 // FileMeta contains the size and hashes for a metadata or target file. Custom
 // data can be optionally added.
 type FileMeta struct {
-	Length int64           `json:"length"`
-	Hashes Hashes          `json:"hashes"`
-	Custom json.RawMessage `json:"custom,omitempty"`
+	Length int64            `json:"length"`
+	Hashes Hashes           `json:"hashes"`
+	Custom *json.RawMessage `json:"custom,omitempty"`
 }
 
 // CheckHashes verifies all the checksums specified by the "hashes" of the payload.
