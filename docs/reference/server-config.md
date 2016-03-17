@@ -59,7 +59,7 @@ learn more about the configuration section corresponding to that key:
       "release_stage": "production"
     }
   }
-  <a href="#caching-section-optional">"caching"</a>a>: {
+  <a href="#caching-section-optional">"caching"</a>: {
     "max_age": {
       "current_metadata": 300,
       "consistent_metadata": 31536000,
