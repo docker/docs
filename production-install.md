@@ -188,7 +188,7 @@ On the controller node, install UCP:
 
         $ docker run --rm -it --name ucp -v /var/run/docker.sock:/var/run/docker.sock docker/ucp install -i
 
-    If you are using an external CA, include the `--external-ucp-ca` option at
+    If you are using server certs signed by an external CA, include the `--external-server-cert` option at
     the end of the command.
 
     The command pulls several images from Docker Hub, and prompts you for the

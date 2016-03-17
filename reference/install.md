@@ -32,7 +32,7 @@ ports:
 * 2376 (customizable using the `--swarm-port` option)
 
 You can optionally use an externally generated and signed certificate for the
-UCP controller by using the `--external-ucp-ca`. Create a storage volume named
+UCP controller by using the `--external-server-cert`. Create a storage volume named
 `ucp-controller-server-certs` with ca.pem, cert.pem, and key.pem in the root directory
 before running the install.
 
@@ -60,7 +60,7 @@ mounting the file at `/docker_subscription.lic` in the tool.
 | `--dns-search` `[--dns-search option --dns-search option]` | Set custom DNS search domains for the UCP infrastructure containers.                           |
 | `--disable-tracking`                                       | Disable anonymous tracking and analytics.                                                      |
 | `--disable-usage`                                          | Disable anonymous usage reporting.                                                             |
-| `--external-ucp-ca`                                        | Set up UCP with an external CA.                                                                |
+| `--external-server-cert`                                        | Set up UCP with an external CA.                                                                |
 | `--preserve-certs`                                         | Don't (re)generate certs on the host if existing ones are found.                               |
 | `--binpack`                                                | Set Swarm scheduler to binpack mode (default spread).                                          |
 | `--random`                                                 | Set Swarm scheduler to random mode (default spread).                                           |
