@@ -57,5 +57,5 @@ To enable high-availability, you must join at least one node with the
 | `--url`                                                    | The connection URL for the remote UCP controller [`$UCP_URL`]                                       |
 | `--fingerprint `                                           | The fingerprint of the UCP controller you trust [`$UCP_FINGERPRINT`]                                |
 | `--replica`                                                | Configure this node as a full Orca controller replica.                                              |
-| `--external-ucp-ca`                                        | (Replica only) Use externally signed certificates for the controller.                               |
+| `--external-server-cert`                                        | (Replica only) Use externally signed certificates for the controller.                               |
 | `--pull "missing"`                                         | Specify image pull behavior (`always`, when `missing`, or `never`).                                 |
