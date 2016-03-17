@@ -3,10 +3,15 @@ machine:
   pre:
   # Install gvm
     - bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/1.0.22/binscripts/gvm-installer)
+  # Upgrade docker
+    - sudo curl -L -o /usr/bin/docker 'https://s3-external-1.amazonaws.com/circle-downloads/docker-1.9.1-circleci'
+    - sudo chmod 0755 /usr/bin/docker
 
   post:
   # Install many go versions
     - gvm install go1.6 -B --name=stable
+  # upgrade compose
+    - sudo pip install --upgrade docker-compose
 
   services:
     - docker
@@ -80,6 +85,6 @@ test:
 
   post:
   # Report to codecov.io
-    - bash <(curl -s https://codecov.io/bash):
+    - case $CIRCLE_NODE_INDEX in 0) bash <(curl -s https://codecov.io/bash) ;; 1) bash <(curl -s https://codecov.io/bash) ;; esac:
         parallel: true
         pwd: $BASE_STABLE

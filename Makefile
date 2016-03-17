@@ -170,6 +170,9 @@ covmerge:
 clean-protos:
 	@rm proto/*.pb.go
 
+client: ${PREFIX}/bin/notary
+	@echo "+ $@"
+
 binaries: ${PREFIX}/bin/notary-server ${PREFIX}/bin/notary ${PREFIX}/bin/notary-signer
 	@echo "+ $@"
 

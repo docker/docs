@@ -2,20 +2,16 @@
 
 set -e
 
-RANDOMSTRING="$(cat /dev/urandom | env LC_CTYPE=C tr -dc 'a-zA-Z0-9' | fold -w 10 | head -n 1)"
-HOST="${REMOTE_SERVER_URL:-https://localhost:4443}"
+make client
 
-OPTS="-c cmd/notary/config.json -d /tmp/${RANDOMSTRING}"
-if [[ -n "${DOCKER_HOST}" ]]; then
-	if [[ "$(resolveip -s notary-server)" == *"${DOCKER_HOST}"* ]]; then
-		echo "This test is going to fail since the client doesn't have a trusted CA root for ${HOST}"
-		exit 1
-	fi
-	HOST="${REMOTE_SERVER_URL:-https://notary-server:4443}"
-	OPTS="$OPTS -s ${HOST}"
-fi
+set +e
+
+RANDOMSTRING="$(cat /dev/urandom | env LC_CTYPE=C tr -dc 'a-zA-Z0-9' | fold -w 10 | head -n 1)"
+HOST="${REMOTE_SERVER_URL:-https://notary-server:4443}"
 
 REPONAME="docker.com/notary/${RANDOMSTRING}"
+
+OPTS="-c cmd/notary/config.json -d /tmp/${RANDOMSTRING}"
 
 export NOTARY_ROOT_PASSPHRASE=ponies
 export NOTARY_TARGETS_PASSPHRASE=ponies
@@ -29,7 +25,7 @@ echo
 rm -rf "/tmp/${RANDOMSTRING}"
 
 iter=0
-until curl -k "${HOST}"
+until (curl -s -S -k "${HOST}")
 do
 	((iter++))
 	if (( iter > 30 )); then
@@ -40,9 +36,8 @@ do
 	sleep 1
 done
 
+set -e
 set -x
-
-make client
 
 bin/notary ${OPTS} init ${REPONAME}
 bin/notary ${OPTS} delegation add ${REPONAME} targets/releases fixtures/secure.example.com.crt --all-paths
