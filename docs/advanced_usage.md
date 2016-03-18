@@ -156,7 +156,7 @@ x509 cert `cert.pem` to the `targets/releases` delegation.
 For the `targets/releases` delegation role to sign content, the delegation user
 must possess the private key corresponding to this public key. This command
 restricts this delegation to only publish content under pathnames prefixed by
-`delegation/path`.  With the given path of "delegation/path", the targets/releases
+`delegation/path`.  With the given path of "delegation/path", the `targets/releases`
 role would be able to sign paths like "delegation/path/content.txt", "delegation/path_file.txt"
 and "delegation/path.txt".  You can add more paths in a comma-separated list under
 `--paths`, or pass the `--all-paths` flag to allow this delegation to publish
@@ -221,13 +221,29 @@ $ notary remove example/collections delegation/path/target --roles=targets/relea
 
 ## Use delegations with content trust
 
-Docker Engine 1.10 supports the usage of the `targets/releases` delegation,
-other delegation roles will be supported in a future release. By default, Engine
-1.10 with content trust enabled will attempt to retrieve images signed by the
-`targets/releases` role if it exists; if it does not exist, the Engine  will
-fall back to retrieving images signed by the default `targets` role.
+Docker Engine 1.10 and above supports the usage of the `targets/releases`
+delegation as the canonical source of a trusted image tag, if it exists.
 
-To use the `targets/releases` role for pushing and pulling images with content trust, follow the steps above to add and publish the delegation role with notary. When adding the delegation, the `--all-paths` flag should be used. By default, pushing with Docker Content Trust will attempt to add to whichever delegations exist directly under targets (ex: `targets/releases`, but not `targets/nested/delegation`).
+When running `docker pull` with Docker Content Trust on Docker Engine 1.10,
+Docker will attempt to search the `targets/releases` role for the signed image tag,
+and will fall back to the default `targets` role if it does not exist.  Please note
+that when searching the default `targets` role, Docker 1.10 may pick up on other
+non-targets/releases delegation roles' signed images if they exist for this tag.
+In Docker 1.11, this behavior is removed such that all `docker pull` commands with
+Docker Content Trust must pull tags only signed by the `targets/releases` delegation role
+or the `targets` base role.
+
+When running `docker push` with Docker Content Trust, Docker Engine 1.10 will
+attempt to sign and push with the `targets/releases` delegation role if it exists,
+otherwise falling back to the `targets` role.  In Docker 1.11, a `docker push` will
+instead attempt to sign and push with all delegation roles directly under targets
+(ex: `targets/role` but not `targets/nested/role`) that the user has signing keys for.
+If delegation roles exist but the user does not have signing keys, the push will fail.
+If no delegation roles exist, the push will attempt to sign with the base `targets` role.
+
+To use the `targets/releases` role for pushing and pulling images with content trust,
+follow the steps above to add and publish the delegation role with notary.
+When adding the delegation, the `--all-paths` flag should be used to allow signing all tags.
 
 # Files and state on disk
 
