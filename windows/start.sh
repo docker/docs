@@ -73,5 +73,5 @@ if [ $# -eq 0 ]; then
   exec "$BASH" --login -i
 else
   echo "Start shell with command"
-  exec "$BASH" -c "$1"
+  exec "$BASH" -c "$*"
 fi
