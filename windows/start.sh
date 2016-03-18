@@ -78,4 +78,10 @@ docker () {
 }
 export -f docker
 
-exec "${BASH}" --login -i
+if [ $# -eq 0 ]; then
+  echo "Start interactive shell"
+  exec "$BASH" --login -i
+else
+  echo "Start shell with command"
+  exec "$BASH" -c "$*"
+fi
