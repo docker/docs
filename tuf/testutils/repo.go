@@ -18,7 +18,7 @@ import (
 )
 
 func createKey(cs signed.CryptoService, gun, role string) (data.PublicKey, error) {
-	key, err := cs.Create(role, data.ECDSAKey)
+	key, err := cs.Create(role, gun, data.ECDSAKey)
 	if err != nil {
 		return nil, err
 	}
@@ -43,8 +43,7 @@ func createKey(cs signed.CryptoService, gun, role string) (data.PublicKey, error
 // and initializes a repo with no targets.  Delegations are only created
 // if delegation roles are passed in.
 func EmptyRepo(gun string, delegationRoles ...string) (*tuf.Repo, signed.CryptoService, error) {
-	cs := cryptoservice.NewCryptoService(
-		gun, trustmanager.NewKeyMemoryStore(passphrase.ConstantRetriever("")))
+	cs := cryptoservice.NewCryptoService(trustmanager.NewKeyMemoryStore(passphrase.ConstantRetriever("")))
 	r := tuf.NewRepo(cs)
 
 	baseRoles := map[string]data.BaseRole{}

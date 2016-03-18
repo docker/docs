@@ -681,7 +681,7 @@ func TestSwizzlerRotateKeyBaseRole(t *testing.T) {
 
 	theRole := data.CanonicalSnapshotRole
 	cs := signed.NewEd25519()
-	pubKey, err := cs.Create(theRole, data.ED25519Key)
+	pubKey, err := cs.Create(theRole, f.Gun, data.ED25519Key)
 	assert.NoError(t, err)
 
 	assert.NoError(t, f.RotateKey(theRole, pubKey))
@@ -713,7 +713,7 @@ func TestSwizzlerRotateKeyDelegationRole(t *testing.T) {
 
 	theRole := "targets/a/b"
 	cs := signed.NewEd25519()
-	pubKey, err := cs.Create(theRole, data.ED25519Key)
+	pubKey, err := cs.Create(theRole, f.Gun, data.ED25519Key)
 	assert.NoError(t, err)
 
 	assert.NoError(t, f.RotateKey(theRole, pubKey))

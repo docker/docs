@@ -1296,7 +1296,7 @@ func testUpdateRemoteKeyRotated(t *testing.T, targetsRole string) {
 	require.NoError(t, err)
 
 	cs := signed.NewEd25519()
-	pubKey, err := cs.Create(targetsRole, data.ED25519Key)
+	pubKey, err := cs.Create(targetsRole, repo.gun, data.ED25519Key)
 	require.NoError(t, err)
 
 	// bump the version

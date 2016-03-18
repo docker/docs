@@ -17,7 +17,7 @@ import (
 // Zips up the keys in the old repo, and assert that we can import it and use
 // said keys.  The 0.1 exported format is just a zip file of all the keys
 func TestImport0Dot1Zip(t *testing.T) {
-	ks, ret, gun := get0Dot1(t)
+	ks, ret, _ := get0Dot1(t)
 
 	zipFile, err := ioutil.TempFile("", "notary-test-zipFile")
 	defer os.RemoveAll(zipFile.Name())
@@ -27,7 +27,10 @@ func TestImport0Dot1Zip(t *testing.T) {
 	zipWriter.Close()
 	zipFile.Close()
 
-	origKeys := ks.ListKeys()
+	origKeys := make(map[string]string)
+	for keyID, keyInfo := range ks.ListKeys() {
+		origKeys[keyID] = keyInfo.Role
+	}
 	assert.Len(t, origKeys, 3)
 
 	// now import the zip file into a new cryptoservice
@@ -38,13 +41,13 @@ func TestImport0Dot1Zip(t *testing.T) {
 
 	ks, err = trustmanager.NewKeyFileStore(tempDir, ret)
 	assert.NoError(t, err)
-	cs := NewCryptoService(gun, ks)
+	cs := NewCryptoService(ks)
 
 	zipReader, err := zip.OpenReader(zipFile.Name())
 	assert.NoError(t, err)
 	defer zipReader.Close()
 
-	assert.NoError(t, cs.ImportKeysZip(zipReader.Reader))
+	assert.NoError(t, cs.ImportKeysZip(zipReader.Reader, passphrase.ConstantRetriever("randompass")))
 	assertHasKeys(t, cs, origKeys)
 }
 
@@ -89,11 +92,13 @@ func importExportedZip(t *testing.T, original *CryptoService,
 	zipFile, err := ioutil.TempFile("", "notary-test-zipFile")
 	defer os.RemoveAll(zipFile.Name())
 	if gun != "" {
-		original.ExportKeysByGUN(zipFile, gun, ret)
-		cs = NewCryptoService(gun, ks)
+		err = original.ExportKeysByGUN(zipFile, gun, ret)
+		assert.NoError(t, err)
+		cs = NewCryptoService(ks)
 	} else {
-		original.ExportAllKeys(zipFile, ret)
-		cs = NewCryptoService(original.gun, ks)
+		err = original.ExportAllKeys(zipFile, ret)
+		assert.NoError(t, err)
+		cs = NewCryptoService(ks)
 	}
 	zipFile.Close()
 
@@ -102,13 +107,13 @@ func importExportedZip(t *testing.T, original *CryptoService,
 	assert.NoError(t, err)
 	defer zipReader.Close()
 
-	assert.NoError(t, cs.ImportKeysZip(zipReader.Reader))
+	assert.NoError(t, cs.ImportKeysZip(zipReader.Reader, passphrase.ConstantRetriever("randompass")))
 	return cs, tempBaseDir
 }
 
 func TestImportExport0Dot1AllKeys(t *testing.T) {
-	ks, ret, gun := get0Dot1(t)
-	cs := NewCryptoService(gun, ks)
+	ks, ret, _ := get0Dot1(t)
+	cs := NewCryptoService(ks)
 
 	newCS, tempDir := importExportedZip(t, cs, ret, "")
 	defer os.RemoveAll(tempDir)
@@ -122,9 +127,9 @@ func TestImportExport0Dot1GUNKeys(t *testing.T) {
 	// remove root from expected key list, because root is not exported when
 	// we export by gun
 	expectedKeys := make(map[string]string)
-	for keyID, role := range ks.ListKeys() {
-		if role != data.CanonicalRootRole {
-			expectedKeys[keyID] = role
+	for keyID, keyInfo := range ks.ListKeys() {
+		if keyInfo.Role != data.CanonicalRootRole {
+			expectedKeys[keyID] = keyInfo.Role
 		}
 	}
 
@@ -135,11 +140,11 @@ func TestImportExport0Dot1GUNKeys(t *testing.T) {
 
 	otherKS, err := trustmanager.NewKeyFileStore(tempDir, ret)
 	assert.NoError(t, err)
-	cs := NewCryptoService("some/other/gun", otherKS, ks)
+	cs := NewCryptoService(otherKS, ks)
 
 	// create a keys that is not of the same GUN, and be sure it's in this
 	// CryptoService
-	otherPubKey, err := cs.Create(data.CanonicalTargetsRole, data.ECDSAKey)
+	otherPubKey, err := cs.Create(data.CanonicalTargetsRole, "some/other/gun", data.ECDSAKey)
 	assert.NoError(t, err)
 
 	k, _, err := cs.GetPrivateKey(otherPubKey.ID())

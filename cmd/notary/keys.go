@@ -142,7 +142,7 @@ func (k *keyCommander) keysList(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
-	ks, err := k.getKeyStores(config, true)
+	ks, err := k.getKeyStores(config, true, false)
 	if err != nil {
 		return err
 	}
@@ -183,13 +183,13 @@ func (k *keyCommander) keysGenerateRootKey(cmd *cobra.Command, args []string) er
 	if err != nil {
 		return err
 	}
-	ks, err := k.getKeyStores(config, true)
+	ks, err := k.getKeyStores(config, true, true)
 	if err != nil {
 		return err
 	}
-	cs := cryptoservice.NewCryptoService("", ks...)
+	cs := cryptoservice.NewCryptoService(ks...)
 
-	pubKey, err := cs.Create(data.CanonicalRootRole, algorithm)
+	pubKey, err := cs.Create(data.CanonicalRootRole, "", algorithm)
 	if err != nil {
 		return fmt.Errorf("Failed to create a new root key: %v", err)
 	}
@@ -209,13 +209,13 @@ func (k *keyCommander) keysBackup(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
-	ks, err := k.getKeyStores(config, false)
+	ks, err := k.getKeyStores(config, false, false)
 	if err != nil {
 		return err
 	}
 	exportFilename := args[0]
 
-	cs := cryptoservice.NewCryptoService("", ks...)
+	cs := cryptoservice.NewCryptoService(ks...)
 
 	exportFile, err := os.Create(exportFilename)
 	if err != nil {
@@ -258,31 +258,16 @@ func (k *keyCommander) keysExport(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
-	ks, err := k.getKeyStores(config, true)
+	ks, err := k.getKeyStores(config, true, false)
 	if err != nil {
 		return err
 	}
 
-	// Search for this key in all of our keystores, determine whether this key has a GUN
-	keyGun := ""
-	keyRole := ""
-	for _, store := range ks {
-		for keypath, role := range store.ListKeys() {
-			if filepath.Base(keypath) == keyID {
-				keyRole = role
-				if role == data.CanonicalRootRole {
-					continue
-				}
-				dirPath := filepath.Dir(keypath)
-				if dirPath != "." { // no gun
-					keyGun = dirPath
-				}
-				break
-			}
-		}
+	cs := cryptoservice.NewCryptoService(ks...)
+	keyInfo, err := cs.GetKeyInfo(keyID)
+	if err != nil {
+		return fmt.Errorf("Could not retrieve info for key %s", keyID)
 	}
-
-	cs := cryptoservice.NewCryptoService(keyGun, ks...)
 
 	exportFile, err := os.Create(exportFilename)
 	if err != nil {
@@ -294,12 +279,12 @@ func (k *keyCommander) keysExport(cmd *cobra.Command, args []string) error {
 		exportRetriever := k.getRetriever()
 		err = cs.ExportKeyReencrypt(exportFile, keyID, exportRetriever)
 	} else {
-		err = cs.ExportKey(exportFile, keyID, keyRole)
+		err = cs.ExportKey(exportFile, keyID, keyInfo.Role)
 	}
 	exportFile.Close()
 	if err != nil {
 		os.Remove(exportFilename)
-		return fmt.Errorf("Error exporting %s key: %v", keyRole, err)
+		return fmt.Errorf("Error exporting %s key: %v", keyInfo.Role, err)
 	}
 	return nil
 }
@@ -317,11 +302,11 @@ func (k *keyCommander) keysRestore(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
-	ks, err := k.getKeyStores(config, true)
+	ks, err := k.getKeyStores(config, true, false)
 	if err != nil {
 		return err
 	}
-	cs := cryptoservice.NewCryptoService("", ks...)
+	cs := cryptoservice.NewCryptoService(ks...)
 
 	zipReader, err := zip.OpenReader(importFilename)
 	if err != nil {
@@ -329,7 +314,7 @@ func (k *keyCommander) keysRestore(cmd *cobra.Command, args []string) error {
 	}
 	defer zipReader.Close()
 
-	err = cs.ImportKeysZip(zipReader.Reader)
+	err = cs.ImportKeysZip(zipReader.Reader, k.getRetriever())
 
 	if err != nil {
 		return fmt.Errorf("Error importing keys: %v", err)
@@ -348,7 +333,7 @@ func (k *keyCommander) keysImport(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
-	ks, err := k.getKeyStores(config, true)
+	ks, err := k.getKeyStores(config, true, false)
 	if err != nil {
 		return err
 	}
@@ -391,11 +376,25 @@ func (k *keyCommander) keysImport(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("Must specify GUN for %s key", importRole)
 	}
 
-	cs := cryptoservice.NewCryptoService(k.keysImportGUN, ks...)
-	err = cs.ImportRoleKey(pemBytes, importRole, k.getRetriever())
+	// Root keys must be encrypted
+	if importRole == data.CanonicalRootRole {
+		if err = cryptoservice.CheckRootKeyIsEncrypted(pemBytes); err != nil {
+			return err
+		}
+	}
 
+	cs := cryptoservice.NewCryptoService(ks...)
+	// Convert to a data.PrivateKey, potentially decrypting the key
+	privKey, err := trustmanager.ParsePEMPrivateKey(pemBytes, "")
 	if err != nil {
-		return fmt.Errorf("Error importing root key: %v", err)
+		privKey, _, err = trustmanager.GetPasswdDecryptBytes(k.getRetriever(), pemBytes, "", "imported "+importRole)
+		if err != nil {
+			return err
+		}
+	}
+	err = cs.AddKey(importRole, k.keysImportGUN, privKey)
+	if err != nil {
+		return fmt.Errorf("Error importing key: %v", err)
 	}
 	return nil
 }
@@ -435,10 +434,10 @@ func removeKeyInteractively(keyStores []trustmanager.KeyStore, keyID string,
 	var storesByIndex []trustmanager.KeyStore
 
 	for _, store := range keyStores {
-		for keypath, role := range store.ListKeys() {
+		for keypath, keyInfo := range store.ListKeys() {
 			if filepath.Base(keypath) == keyID {
 				foundKeys = append(foundKeys,
-					[]string{keypath, role, store.Name()})
+					[]string{keypath, keyInfo.Role, store.Name()})
 				storesByIndex = append(storesByIndex, store)
 			}
 		}
@@ -511,7 +510,7 @@ func (k *keyCommander) keyRemove(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
-	ks, err := k.getKeyStores(config, true)
+	ks, err := k.getKeyStores(config, true, false)
 	if err != nil {
 		return err
 	}
@@ -528,7 +527,7 @@ func (k *keyCommander) keyRemove(cmd *cobra.Command, args []string) error {
 	return err
 }
 
-// keyPassphraseChange changes the passphrase for a root key's private key based on ID
+// keyPassphraseChange changes the passphrase for a private key based on ID
 func (k *keyCommander) keyPassphraseChange(cmd *cobra.Command, args []string) error {
 	if len(args) < 1 {
 		cmd.Usage()
@@ -539,7 +538,7 @@ func (k *keyCommander) keyPassphraseChange(cmd *cobra.Command, args []string) er
 	if err != nil {
 		return err
 	}
-	ks, err := k.getKeyStores(config, true)
+	ks, err := k.getKeyStores(config, true, false)
 	if err != nil {
 		return err
 	}
@@ -551,30 +550,43 @@ func (k *keyCommander) keyPassphraseChange(cmd *cobra.Command, args []string) er
 		return fmt.Errorf("invalid key ID provided: %s", keyID)
 	}
 
-	// Find the key's GUN by ID, in case it is a non-root key
-	var keyGUN string
-	for _, store := range ks {
-		for keypath := range store.ListKeys() {
-			if filepath.Base(keypath) == keyID {
-				keyGUN = filepath.Dir(keypath)
-			}
+	// Find which keyStore we should replace the key password in, and replace if we find it
+	var foundKeyStore trustmanager.KeyStore
+	var privKey data.PrivateKey
+	var keyInfo trustmanager.KeyInfo
+	var cs *cryptoservice.CryptoService
+	for _, keyStore := range ks {
+		cs = cryptoservice.NewCryptoService(keyStore)
+		if privKey, _, err = cs.GetPrivateKey(keyID); err == nil {
+			foundKeyStore = keyStore
+			break
 		}
 	}
-	cs := cryptoservice.NewCryptoService(keyGUN, ks...)
-	privKey, role, err := cs.GetPrivateKey(keyID)
-	if err != nil {
+	if foundKeyStore == nil {
 		return fmt.Errorf("could not retrieve local key for key ID provided: %s", keyID)
 	}
-
 	// Must use a different passphrase retriever to avoid caching the
 	// unlocking passphrase and reusing that.
 	passChangeRetriever := k.getRetriever()
-	keyStore, err := trustmanager.NewKeyFileStore(config.GetString("trust_dir"), passChangeRetriever)
-	err = keyStore.AddKey(filepath.Join(keyGUN, keyID), role, privKey)
+	var addingKeyStore trustmanager.KeyStore
+	switch foundKeyStore.Name() {
+	case "yubikey":
+		addingKeyStore, err = getYubiKeyStore(nil, passChangeRetriever)
+		keyInfo = trustmanager.KeyInfo{Role: data.CanonicalRootRole}
+	default:
+		addingKeyStore, err = trustmanager.NewKeyFileStore(config.GetString("trust_dir"), passChangeRetriever)
+		if err != nil {
+			return err
+		}
+		keyInfo, err = foundKeyStore.GetKeyInfo(keyID)
+	}
 	if err != nil {
 		return err
 	}
-
+	err = addingKeyStore.AddKey(keyInfo, privKey)
+	if err != nil {
+		return err
+	}
 	cmd.Println("")
 	cmd.Printf("Successfully updated passphrase for key ID: %s", keyID)
 	cmd.Println("")
@@ -582,7 +594,7 @@ func (k *keyCommander) keyPassphraseChange(cmd *cobra.Command, args []string) er
 }
 
 func (k *keyCommander) getKeyStores(
-	config *viper.Viper, withHardware bool) ([]trustmanager.KeyStore, error) {
+	config *viper.Viper, withHardware, hardwareBackup bool) ([]trustmanager.KeyStore, error) {
 	retriever := k.getRetriever()
 
 	directory := config.GetString("trust_dir")
@@ -595,7 +607,12 @@ func (k *keyCommander) getKeyStores(
 	ks := []trustmanager.KeyStore{fileKeyStore}
 
 	if withHardware {
-		yubiStore, err := getYubiKeyStore(fileKeyStore, retriever)
+		var yubiStore trustmanager.KeyStore
+		if hardwareBackup {
+			yubiStore, err = getYubiKeyStore(fileKeyStore, retriever)
+		} else {
+			yubiStore, err = getYubiKeyStore(nil, retriever)
+		}
 		if err == nil && yubiStore != nil {
 			// Note that the order is important, since we want to prioritize
 			// the yubikey store

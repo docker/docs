@@ -171,7 +171,7 @@ func TestValidateRootRotation(t *testing.T) {
 	oldRootRole := repo.Root.Signed.Roles["root"]
 	oldRootKey := repo.Root.Signed.Keys[oldRootRole.KeyIDs[0]]
 
-	rootKey, err := crypto.Create("root", data.ED25519Key)
+	rootKey, err := crypto.Create("root", "", data.ED25519Key)
 	assert.NoError(t, err)
 	rootRole, err := data.NewRole("root", 1, []string{rootKey.ID()}, nil)
 	assert.NoError(t, err)
@@ -856,7 +856,7 @@ func TestValidateTargetsLoadParent(t *testing.T) {
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 
-	k, err := cs.Create("targets/level1", data.ED25519Key)
+	k, err := cs.Create("targets/level1", "docker.com/notary", data.ED25519Key)
 	assert.NoError(t, err)
 
 	err = baseRepo.UpdateDelegationKeys("targets/level1", []data.PublicKey{k}, []string{}, 1)
@@ -907,7 +907,7 @@ func TestValidateTargetsParentInUpdate(t *testing.T) {
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 
-	k, err := cs.Create("targets/level1", data.ED25519Key)
+	k, err := cs.Create("targets/level1", "docker.com/notary", data.ED25519Key)
 	assert.NoError(t, err)
 
 	err = baseRepo.UpdateDelegationKeys("targets/level1", []data.PublicKey{k}, []string{}, 1)
@@ -965,7 +965,7 @@ func TestValidateTargetsParentNotFound(t *testing.T) {
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 
-	k, err := cs.Create("targets/level1", data.ED25519Key)
+	k, err := cs.Create("targets/level1", "docker.com/notary", data.ED25519Key)
 	assert.NoError(t, err)
 
 	err = baseRepo.UpdateDelegationKeys("targets/level1", []data.PublicKey{k}, []string{}, 1)
@@ -1003,7 +1003,7 @@ func TestValidateTargetsRoleNotInParent(t *testing.T) {
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
 
-	level1Key, err := cs.Create("targets/level1", data.ED25519Key)
+	level1Key, err := cs.Create("targets/level1", "docker.com/notary", data.ED25519Key)
 	assert.NoError(t, err)
 	r, err := data.NewRole("targets/level1", 1, []string{level1Key.ID()}, []string{""})
 

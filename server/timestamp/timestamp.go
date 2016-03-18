@@ -24,7 +24,7 @@ func GetOrCreateTimestampKey(gun string, store storage.MetaStore, crypto signed.
 	}
 
 	if _, ok := err.(*storage.ErrNoKey); ok {
-		key, err := crypto.Create("timestamp", createAlgorithm)
+		key, err := crypto.Create("timestamp", gun, createAlgorithm)
 		if err != nil {
 			return nil, err
 		}

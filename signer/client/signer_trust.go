@@ -128,13 +128,18 @@ func NewNotarySigner(hostname string, port string, tlsConfig *tls.Config) *Notar
 }
 
 // Create creates a remote key and returns the PublicKey associated with the remote private key
-func (trust *NotarySigner) Create(role, algorithm string) (data.PublicKey, error) {
+func (trust *NotarySigner) Create(role, algorithm, gun string) (data.PublicKey, error) {
 	publicKey, err := trust.kmClient.CreateKey(context.Background(), &pb.Algorithm{Algorithm: algorithm})
 	if err != nil {
 		return nil, err
 	}
 	public := data.NewPublicKey(publicKey.KeyInfo.Algorithm.Algorithm, publicKey.PublicKey)
 	return public, nil
+}
+
+// AddKey adds a key
+func (trust *NotarySigner) AddKey(role, gun string, k data.PrivateKey) error {
+	return errors.New("Adding a key to NotarySigner is not supported")
 }
 
 // RemoveKey deletes a key
@@ -196,10 +201,4 @@ func (trust *NotarySigner) CheckHealth(timeout time.Duration) error {
 	}
 
 	return err
-}
-
-// ImportRootKey satisfies the CryptoService interface. It should not be implemented
-// for a NotarySigner.
-func (trust *NotarySigner) ImportRootKey(r io.Reader) error {
-	return errors.New("Importing a root key to NotarySigner is not supported")
 }
