@@ -43,7 +43,7 @@ func TestTargetsToSignedMarshalsSignedPortionWithCanonicalJSON(t *testing.T) {
 
 	// don't bother testing regular JSON because it might not be different
 
-	require.True(t, bytes.Equal(signedCanonical.Signed, castedCanonical),
+	require.True(t, bytes.Equal(*signedCanonical.Signed, castedCanonical),
 		"expected %v == %v", signedCanonical.Signed, castedCanonical)
 }
 

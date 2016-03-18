@@ -108,7 +108,7 @@ func (sp *SignedSnapshot) ToSigned() (*Signed, error) {
 	copy(sigs, sp.Signatures)
 	return &Signed{
 		Signatures: sigs,
-		Signed:     signed,
+		Signed:     &signed,
 	}, nil
 }
 
@@ -148,7 +148,7 @@ func (sp *SignedSnapshot) MarshalJSON() ([]byte, error) {
 // SnapshotFromSigned fully unpacks a Signed object into a SignedSnapshot
 func SnapshotFromSigned(s *Signed) (*SignedSnapshot, error) {
 	sp := Snapshot{}
-	if err := defaultSerializer.Unmarshal(s.Signed, &sp); err != nil {
+	if err := defaultSerializer.Unmarshal(*s.Signed, &sp); err != nil {
 		return nil, err
 	}
 	if err := isValidSnapshotStructure(sp); err != nil {

@@ -64,7 +64,7 @@ func TestHTTPStoreGetMeta(t *testing.T) {
 		t.Fatal(err)
 	}
 	var decoded map[string]interface{}
-	if err := json.Unmarshal(p.Signed, &decoded); err != nil {
+	if err := json.Unmarshal(*p.Signed, &decoded); err != nil {
 		t.Fatal(err)
 	}
 	msg, err := json.MarshalCanonical(decoded)
@@ -114,7 +114,7 @@ func TestHTTPStoreGetAllMeta(t *testing.T) {
 		t.Fatal(err)
 	}
 	var decoded map[string]interface{}
-	if err := json.Unmarshal(p.Signed, &decoded); err != nil {
+	if err := json.Unmarshal(*p.Signed, &decoded); err != nil {
 		t.Fatal(err)
 	}
 	msg, err := json.MarshalCanonical(decoded)
