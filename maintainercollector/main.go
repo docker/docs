@@ -69,6 +69,10 @@ func main() {
 		People: map[string]Person{},
 	}
 
+	// initialize Curators
+	projectMaintainers.Org["Curators"] = &Org{}
+	projectMaintainers.Org["Docs maintainers"] = &Org{}
+
 	// parse the MAINTAINERS file for each repo
 	for _, project := range projects {
 		maintainers, err := getMaintainers(project)
@@ -94,11 +98,11 @@ func main() {
 		projectMaintainers.Org[project] = p
 
 		if maintainers.Organization.DocsMaintainers != nil {
-			projectMaintainers.Org["Docs maintainers"] = maintainers.Organization.DocsMaintainers
+			projectMaintainers.Org["Docs maintainers"].People = append(projectMaintainers.Org["Docs maintainers"].People, maintainers.Organization.DocsMaintainers.People...)
 		}
 
 		if maintainers.Organization.Curators != nil {
-			projectMaintainers.Org["Curators"] = maintainers.Organization.Curators
+			projectMaintainers.Org["Curators"].People = append(projectMaintainers.Org["Curators"].People, maintainers.Organization.Curators.People...)
 		}
 
 		// iterate through the people and add them to compiled list
@@ -106,6 +110,9 @@ func main() {
 			projectMaintainers.People[strings.ToLower(nick)] = person
 		}
 	}
+
+	projectMaintainers.Org["Curators"].People = removeDuplicates(projectMaintainers.Org["Curators"].People)
+	projectMaintainers.Org["Docs maintainers"].People = removeDuplicates(projectMaintainers.Org["Docs maintainers"].People)
 
 	// encode the result to a file
 	buf := new(bytes.Buffer)
@@ -124,6 +131,18 @@ func main() {
 	}
 
 	logrus.Infof("Successfully wrote new combined MAINTAINERS file.")
+}
+
+func removeDuplicates(slice []string) []string {
+	seens := map[string]bool{}
+	uniqs := []string{}
+	for _, element := range slice {
+		if _, seen := seens[element]; !seen {
+			uniqs = append(uniqs, element)
+			seens[element] = true
+		}
+	}
+	return uniqs
 }
 
 func getMaintainers(project string) (maintainers MaintainersDepreciated, err error) {
