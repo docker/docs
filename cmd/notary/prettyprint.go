@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"io"
 	"math"
-	"path/filepath"
 	"sort"
 	"strings"
 	"time"
@@ -96,19 +95,12 @@ func prettyPrintKeys(keyStores []trustmanager.KeyStore, writer io.Writer) {
 	var info []keyInfo
 
 	for _, store := range keyStores {
-		for keyPath, role := range store.ListKeys() {
-			gun := ""
-			if role != data.CanonicalRootRole {
-				dirPath := filepath.Dir(keyPath)
-				if dirPath != "." { // no gun
-					gun = dirPath
-				}
-			}
+		for keyID, keyIDInfo := range store.ListKeys() {
 			info = append(info, keyInfo{
-				role:     role,
+				role:     keyIDInfo.Role,
 				location: store.Name(),
-				gun:      gun,
-				keyID:    filepath.Base(keyPath),
+				gun:      keyIDInfo.Gun,
+				keyID:    keyID,
 			})
 		}
 	}

@@ -120,7 +120,7 @@ func TestGetPrivateKeyAndSignWithExistingKey(t *testing.T) {
 
 	store := trustmanager.NewKeyMemoryStore(ret)
 
-	err = store.AddKey(key.ID(), "timestamp", key)
+	err = store.AddKey(trustmanager.KeyInfo{Role: data.CanonicalTimestampRole, Gun: "gun"}, key)
 	assert.NoError(t, err, "could not add key to store")
 
 	signer := setUpSigner(t, store)
@@ -169,7 +169,7 @@ func (c *StubClientFromServers) CheckHealth(ctx context.Context, v *pb.Void,
 }
 
 func setUpSigner(t *testing.T, store trustmanager.KeyStore) NotarySigner {
-	cryptoService := cryptoservice.NewCryptoService("", store)
+	cryptoService := cryptoservice.NewCryptoService(store)
 	cryptoServices := signer.CryptoServiceIndex{
 		data.ED25519Key: cryptoService,
 		data.RSAKey:     cryptoService,

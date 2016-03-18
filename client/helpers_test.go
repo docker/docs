@@ -186,7 +186,7 @@ func TestApplyTargetsDelegationCreateDelete(t *testing.T) {
 	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	require.NoError(t, err)
 
-	newKey, err := cs.Create("targets/level1", data.ED25519Key)
+	newKey, err := cs.Create("targets/level1", "docker.com/notary", data.ED25519Key)
 	require.NoError(t, err)
 
 	// create delegation
@@ -250,7 +250,7 @@ func TestApplyTargetsDelegationCreate2SharedKey(t *testing.T) {
 	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	require.NoError(t, err)
 
-	newKey, err := cs.Create("targets/level1", data.ED25519Key)
+	newKey, err := cs.Create("targets/level1", "docker.com/notary", data.ED25519Key)
 	require.NoError(t, err)
 
 	// create first delegation
@@ -353,7 +353,7 @@ func TestApplyTargetsDelegationCreateEdit(t *testing.T) {
 	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	require.NoError(t, err)
 
-	newKey, err := cs.Create("targets/level1", data.ED25519Key)
+	newKey, err := cs.Create("targets/level1", "docker.com/notary", data.ED25519Key)
 	require.NoError(t, err)
 
 	// create delegation
@@ -379,7 +379,7 @@ func TestApplyTargetsDelegationCreateEdit(t *testing.T) {
 	require.NoError(t, err)
 
 	// edit delegation
-	newKey2, err := cs.Create("targets/level1", data.ED25519Key)
+	newKey2, err := cs.Create("targets/level1", "docker.com/notary", data.ED25519Key)
 	require.NoError(t, err)
 
 	kl = data.KeyList{newKey2}
@@ -421,7 +421,7 @@ func TestApplyTargetsDelegationEditNonExisting(t *testing.T) {
 	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	require.NoError(t, err)
 
-	newKey, err := cs.Create("targets/level1", data.ED25519Key)
+	newKey, err := cs.Create("targets/level1", "docker.com/notary", data.ED25519Key)
 	require.NoError(t, err)
 
 	// create delegation
@@ -452,7 +452,7 @@ func TestApplyTargetsDelegationCreateAlreadyExisting(t *testing.T) {
 	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	require.NoError(t, err)
 
-	newKey, err := cs.Create("targets/level1", data.ED25519Key)
+	newKey, err := cs.Create("targets/level1", "docker.com/notary", data.ED25519Key)
 	require.NoError(t, err)
 
 	// create delegation
@@ -479,7 +479,7 @@ func TestApplyTargetsDelegationCreateAlreadyExisting(t *testing.T) {
 	// we have sufficient checks elsewhere we don't need to confirm that
 	// creating fresh works here via more requires.
 
-	extraKey, err := cs.Create("targets/level1", data.ED25519Key)
+	extraKey, err := cs.Create("targets/level1", "docker.com/notary", data.ED25519Key)
 	require.NoError(t, err)
 
 	// create delegation
@@ -514,7 +514,7 @@ func TestApplyTargetsDelegationAlreadyExistingMergePaths(t *testing.T) {
 	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	require.NoError(t, err)
 
-	newKey, err := cs.Create("targets/level1", data.ED25519Key)
+	newKey, err := cs.Create("targets/level1", "docker.com/notary", data.ED25519Key)
 	require.NoError(t, err)
 
 	// create delegation
@@ -570,7 +570,7 @@ func TestApplyTargetsDelegationInvalidRole(t *testing.T) {
 	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	require.NoError(t, err)
 
-	newKey, err := cs.Create("targets/level1", data.ED25519Key)
+	newKey, err := cs.Create("targets/level1", "docker.com/notary", data.ED25519Key)
 	require.NoError(t, err)
 
 	// create delegation
@@ -600,7 +600,7 @@ func TestApplyTargetsDelegationInvalidJSONContent(t *testing.T) {
 	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	require.NoError(t, err)
 
-	newKey, err := cs.Create("targets/level1", data.ED25519Key)
+	newKey, err := cs.Create("targets/level1", "docker.com/notary", data.ED25519Key)
 	require.NoError(t, err)
 
 	// create delegation
@@ -662,7 +662,7 @@ func TestApplyTargetsDelegationCreate2Deep(t *testing.T) {
 	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	require.NoError(t, err)
 
-	newKey, err := cs.Create("targets/level1", data.ED25519Key)
+	newKey, err := cs.Create("targets/level1", "docker.com/notary", data.ED25519Key)
 	require.NoError(t, err)
 
 	// create delegation
@@ -745,10 +745,10 @@ func TestApplyTargetsDelegationParentDoesntExist(t *testing.T) {
 
 	// make sure a key exists for the previous level, so it's not a missing
 	// key error, but we don't care about this key
-	_, err = cs.Create("targets/level1", data.ED25519Key)
+	_, err = cs.Create("targets/level1", "docker.com/notary", data.ED25519Key)
 	require.NoError(t, err)
 
-	newKey, err := cs.Create("targets/level1/level2", data.ED25519Key)
+	newKey, err := cs.Create("targets/level1/level2", "docker.com/notary", data.ED25519Key)
 	require.NoError(t, err)
 
 	// create delegation
@@ -779,7 +779,7 @@ func TestApplyChangelistCreatesDelegation(t *testing.T) {
 	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	require.NoError(t, err)
 
-	newKey, err := cs.Create("targets/level1", data.ED25519Key)
+	newKey, err := cs.Create("targets/level1", "docker.com/notary", data.ED25519Key)
 	require.NoError(t, err)
 
 	err = repo.UpdateDelegationKeys("targets/level1", []data.PublicKey{newKey}, []string{}, 1)
@@ -818,7 +818,7 @@ func TestApplyChangelistTargetsToMultipleRoles(t *testing.T) {
 	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	require.NoError(t, err)
 
-	newKey, err := cs.Create("targets/level1", data.ED25519Key)
+	newKey, err := cs.Create("targets/level1", "docker.com/notary", data.ED25519Key)
 	require.NoError(t, err)
 
 	err = repo.UpdateDelegationKeys("targets/level1", []data.PublicKey{newKey}, []string{}, 1)
@@ -937,7 +937,7 @@ func TestChangeTargetMetaFailsIfPrefixError(t *testing.T) {
 	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	require.NoError(t, err)
 
-	newKey, err := cs.Create("targets/level1", data.ED25519Key)
+	newKey, err := cs.Create("targets/level1", "docker.com/notary", data.ED25519Key)
 	require.NoError(t, err)
 
 	err = repo.UpdateDelegationKeys("targets/level1", []data.PublicKey{newKey}, []string{}, 1)

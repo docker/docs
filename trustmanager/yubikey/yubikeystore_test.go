@@ -60,7 +60,7 @@ func testAddKey(t *testing.T, store trustmanager.KeyStore) (data.PrivateKey, err
 	privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
 	assert.NoError(t, err)
 
-	err = store.AddKey(privKey.ID(), data.CanonicalRootRole, privKey)
+	err = store.AddKey(trustmanager.KeyInfo{Role: data.CanonicalRootRole, Gun: ""}, privKey)
 	return privKey, err
 }
 
@@ -108,7 +108,46 @@ func TestYubiAddKeysAndRetrieve(t *testing.T) {
 		for _, k := range keys {
 			r, ok := listedKeys[k]
 			assert.True(t, ok)
-			assert.Equal(t, data.CanonicalRootRole, r)
+			assert.Equal(t, data.CanonicalRootRole, r.Role)
+
+			_, _, err := store.GetKey(k)
+			assert.NoError(t, err)
+		}
+	}
+}
+
+// Test that we can successfully keys enough times to fill up all the slots in the Yubikey, even without a backup store
+func TestYubiAddKeysWithoutBackup(t *testing.T) {
+	if !YubikeyAccessible() {
+		t.Skip("Must have Yubikey access.")
+	}
+	clearAllKeys(t)
+
+	SetYubikeyKeyMode(KeymodeNone)
+	defer func() {
+		SetYubikeyKeyMode(KeymodeTouch | KeymodePinOnce)
+	}()
+
+	// create 4 keys on the original store
+	store, err := NewYubiKeyStore(nil, ret)
+	assert.NoError(t, err)
+	keys := addMaxKeys(t, store)
+
+	// create a new store, since we want to be sure the original store's cache
+	// is not masking any issues
+	cleanStore, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
+	assert.NoError(t, err)
+
+	// All 4 keys should be in the original store, in the clean store (which
+	// makes sure the keys are actually on the Yubikey and not on the original
+	// store's cache)
+	for _, store := range []trustmanager.KeyStore{store, cleanStore} {
+		listedKeys := store.ListKeys()
+		assert.Len(t, listedKeys, numSlots)
+		for _, k := range keys {
+			r, ok := listedKeys[k]
+			assert.True(t, ok)
+			assert.Equal(t, data.CanonicalRootRole, r.Role)
 
 			_, _, err := store.GetKey(k)
 			assert.NoError(t, err)
@@ -150,7 +189,7 @@ func TestYubiAddKeyFailureIfNoMoreSlots(t *testing.T) {
 		_, _, err := store.GetKey(badKey.ID())
 		assert.Error(t, err)
 		for k := range store.ListKeys() {
-			assert.NotEqual(t, badKey, k)
+			assert.NotEqual(t, badKey.ID(), k)
 		}
 	}
 }
@@ -215,7 +254,7 @@ type nonworkingBackup struct {
 }
 
 // AddKey stores the contents of a PEM-encoded private key as a PEM block
-func (s *nonworkingBackup) AddKey(name, alias string, privKey data.PrivateKey) error {
+func (s *nonworkingBackup) AddKey(keyInfo trustmanager.KeyInfo, privKey data.PrivateKey) error {
 	return errors.New("Nope!")
 }
 
@@ -271,7 +310,7 @@ func TestYubiAddDuplicateKeySucceedsButDoesNotBackup(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Len(t, cleanStore.ListKeys(), 1)
 
-	err = cleanStore.AddKey(key.ID(), "root", key)
+	err = cleanStore.AddKey(trustmanager.KeyInfo{Role: data.CanonicalRootRole, Gun: ""}, key)
 	assert.NoError(t, err)
 
 	// there should be just 1 key on the yubikey
@@ -317,116 +356,6 @@ func TestYubiRemoveKey(t *testing.T) {
 		_, _, err := store.GetKey(key.ID())
 		assert.Error(t, err)
 	}
-}
-
-// ImportKey imports a key as root without adding it to the backup store
-func TestYubiImportNewKey(t *testing.T) {
-	if !YubikeyAccessible() {
-		t.Skip("Must have Yubikey access.")
-	}
-	clearAllKeys(t)
-
-	SetYubikeyKeyMode(KeymodeNone)
-	defer func() {
-		SetYubikeyKeyMode(KeymodeTouch | KeymodePinOnce)
-	}()
-
-	backup := trustmanager.NewKeyMemoryStore(ret)
-	store, err := NewYubiKeyStore(backup, ret)
-	assert.NoError(t, err)
-
-	// generate key and import it
-	privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
-	assert.NoError(t, err)
-
-	pemBytes, err := trustmanager.EncryptPrivateKey(privKey, "root", "passphrase")
-	assert.NoError(t, err)
-
-	err = store.ImportKey(pemBytes, "root")
-	assert.NoError(t, err)
-
-	// key is not in backup store
-	_, _, err = backup.GetKey(privKey.ID())
-	assert.Error(t, err)
-
-	// create a new store, since we want to be sure the original store's cache
-	// is not masking any issues
-	cleanStore, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
-	assert.NoError(t, err)
-	for _, store := range []*YubiKeyStore{store, cleanStore} {
-		gottenKey, role, err := store.GetKey(privKey.ID())
-		assert.NoError(t, err)
-		assert.Equal(t, data.CanonicalRootRole, role)
-		assert.Equal(t, privKey.Public(), gottenKey.Public())
-	}
-}
-
-// Importing an existing key succeeds, but doesn't actually add the key, nor
-// does it write it to backup.
-func TestYubiImportExistingKey(t *testing.T) {
-	if !YubikeyAccessible() {
-		t.Skip("Must have Yubikey access.")
-	}
-	clearAllKeys(t)
-
-	SetYubikeyKeyMode(KeymodeNone)
-	defer func() {
-		SetYubikeyKeyMode(KeymodeTouch | KeymodePinOnce)
-	}()
-
-	store, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
-	assert.NoError(t, err)
-	key, err := testAddKey(t, store)
-
-	backup := trustmanager.NewKeyMemoryStore(ret)
-	newStore, err := NewYubiKeyStore(backup, ret)
-	assert.NoError(t, err)
-
-	// for sanity, ensure that the key is already in the Yubikey
-	k, _, err := newStore.GetKey(key.ID())
-	assert.NoError(t, err)
-	assert.NotNil(t, k)
-
-	// import the key, which should have already been added to the yubikey
-	pemBytes, err := trustmanager.EncryptPrivateKey(key, "root", "passphrase")
-	assert.NoError(t, err)
-	err = newStore.ImportKey(pemBytes, "root")
-	assert.NoError(t, err)
-
-	// key is not in backup store
-	_, _, err = backup.GetKey(key.ID())
-	assert.Error(t, err)
-}
-
-// Importing a key not as root fails, and it is not added to the backup store
-func TestYubiImportNonRootKey(t *testing.T) {
-	if !YubikeyAccessible() {
-		t.Skip("Must have Yubikey access.")
-	}
-	clearAllKeys(t)
-
-	SetYubikeyKeyMode(KeymodeNone)
-	defer func() {
-		SetYubikeyKeyMode(KeymodeTouch | KeymodePinOnce)
-	}()
-
-	backup := trustmanager.NewKeyMemoryStore(ret)
-	store, err := NewYubiKeyStore(backup, ret)
-	assert.NoError(t, err)
-
-	// generate key and import it
-	privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
-	assert.NoError(t, err)
-
-	pemBytes, err := trustmanager.EncryptPrivateKey(privKey, "root", "passphrase")
-	assert.NoError(t, err)
-
-	err = store.ImportKey(pemBytes, privKey.ID())
-	assert.Error(t, err)
-
-	// key is not in backup store
-	_, _, err = backup.GetKey(privKey.ID())
-	assert.Error(t, err)
 }
 
 // One cannot export from hardware - it will not export from the backup
@@ -519,7 +448,7 @@ type pkcs11Stubbable interface {
 var setupErrors = []string{"Initialize", "GetSlotList", "OpenSession"}
 
 // Create a new store, so that we avoid any cache issues, and list keys
-func cleanListKeys(t *testing.T) map[string]string {
+func cleanListKeys(t *testing.T) map[string]trustmanager.KeyInfo {
 	cleanStore, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
 	assert.NoError(t, err)
 	return cleanStore.ListKeys()
@@ -671,67 +600,6 @@ func TestYubiGetKeyCleansUpOnError(t *testing.T) {
 			"FindObjectsFinal",
 			"GetAttributeValue",
 		), true)
-}
-
-func TestYubiImportKeyCleansUpOnError(t *testing.T) {
-	if !YubikeyAccessible() {
-		t.Skip("Must have Yubikey access.")
-	}
-	clearAllKeys(t)
-
-	SetYubikeyKeyMode(KeymodeNone)
-	defer func() {
-		SetYubikeyKeyMode(KeymodeTouch | KeymodePinOnce)
-	}()
-
-	store, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
-	assert.NoError(t, err)
-
-	privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
-	assert.NoError(t, err)
-
-	pemBytes, err := trustmanager.EncryptPrivateKey(privKey, "root", "passphrase")
-	assert.NoError(t, err)
-
-	var _importkey = func() error { return store.ImportKey(pemBytes, "root") }
-
-	testYubiFunctionCleansUpOnLoginError(t, store, _importkey)
-	// all the PKCS11 functions ImportKey depends on that aren't the login/logout
-	testYubiFunctionCleansUpOnSpecifiedErrors(t, store, _importkey,
-		append(
-			setupErrors,
-			"FindObjectsInit",
-			"FindObjects",
-			"FindObjectsFinal",
-			"CreateObject",
-		), true)
-
-	// given that everything should have errored, there should be no keys on
-	// the yubikey
-	assert.Len(t, cleanListKeys(t), 0)
-
-	// Logout should not cause a function failure - it s a cleanup failure,
-	// which shouldn't break anything, and it should clean up after itself.
-	// The key should be added to both stores
-	testYubiFunctionCleansUpOnSpecifiedErrors(t, store, _importkey,
-		[]string{"Logout"}, false)
-
-	listedKeys := cleanListKeys(t)
-	assert.Len(t, listedKeys, 1)
-
-	// Currently, if GetAttributeValue fails, the function succeeds, because if
-	// we can't get the attribute value of an object, we don't know what slot
-	// it's in, we assume its occupied slot is free (hence this failure will
-	// cause the previous key to be overwritten).  This behavior may need to
-	// be revisited.
-	for k := range listedKeys {
-		err := store.RemoveKey(k)
-		assert.NoError(t, err)
-	}
-	testYubiFunctionCleansUpOnSpecifiedErrors(t, store, _importkey,
-		[]string{"GetAttributeValue"}, false)
-
-	assert.Len(t, cleanListKeys(t), 1)
 }
 
 func TestYubiRemoveKeyCleansUpOnError(t *testing.T) {

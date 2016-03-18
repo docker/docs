@@ -69,8 +69,7 @@ func setupServerHandler(metaStore storage.MetaStore) http.Handler {
 	l.Out = &b
 	ctx = ctxu.WithLogger(ctx, logrus.NewEntry(l))
 
-	cryptoService := cryptoservice.NewCryptoService(
-		"", trustmanager.NewKeyMemoryStore(passphrase.ConstantRetriever("pass")))
+	cryptoService := cryptoservice.NewCryptoService(trustmanager.NewKeyMemoryStore(passphrase.ConstantRetriever("pass")))
 	return server.RootHandler(nil, ctx, cryptoService, nil, nil)
 }
 
@@ -803,7 +802,7 @@ func assertNumKeys(t *testing.T, tempDir string, numRoot, numSigning int,
 		_, err := os.Stat(filepath.Join(
 			tempDir, "private", "root_keys", rootKeyID+".key"))
 		// os.IsExist checks to see if the error is because a file already
-		// exist, and hence doesn't actually the right funciton to use here
+		// exists, and hence it isn't actually the right function to use here
 		assert.Equal(t, rootOnDisk, !os.IsNotExist(err))
 
 		// this function is declared is in the build-tagged setup files
@@ -945,7 +944,7 @@ func TestClientKeyBackupAndRestore(t *testing.T) {
 	assert.NoError(t, err)
 	// all keys should be there, including root because the root key was backed up to disk,
 	// and export just backs up all the keys on disk
-	assertNumKeys(t, dirs[1], 1, 4, true)
+	assertNumKeys(t, dirs[1], 1, 4, !rootOnHardware())
 
 	// can list and publish to both repos using restored keys
 	for _, gun := range []string{"gun1", "gun2"} {
@@ -1060,6 +1059,39 @@ func TestClientKeyImportExportRootOnly(t *testing.T) {
 	assertNumKeys(t, tempDir, 1, 2, !rootOnHardware())
 	assertSuccessfullyPublish(
 		t, tempDir, server.URL, "gun", target, tempFile.Name())
+
+	// Now assert that bad root keys give an error
+	// Try importing an unencrypted root key:
+	privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
+	assert.NoError(t, err)
+	decryptedPEMBytes, err := trustmanager.KeyToPEM(privKey, data.CanonicalRootRole)
+	decryptedKeyFile, err := ioutil.TempFile("", "decryptedPem")
+	assert.NoError(t, err)
+	// close later, because we might need to write to it
+	defer os.Remove(decryptedKeyFile.Name())
+
+	nBytes, err := decryptedKeyFile.Write(decryptedPEMBytes)
+	assert.NoError(t, err)
+	decryptedKeyFile.Close()
+	assert.Equal(t, len(decryptedPEMBytes), nBytes)
+	// import the key
+	_, err = runCommand(t, tempDir, "key", "import", decryptedKeyFile.Name())
+	assert.Error(t, err)
+
+	// Now try importing an invalid PEM as a root key
+	invalidPEMBytes := []byte("this is not PEM")
+	invalidPEMFile, err := ioutil.TempFile("", "invalidPem")
+	assert.NoError(t, err)
+	// close later, because we might need to write to it
+	defer os.Remove(invalidPEMFile.Name())
+
+	nBytes, err = invalidPEMFile.Write(invalidPEMBytes)
+	assert.NoError(t, err)
+	invalidPEMFile.Close()
+	assert.Equal(t, len(invalidPEMBytes), nBytes)
+	// import the key
+	_, err = runCommand(t, tempDir, "key", "import", invalidPEMFile.Name())
+	assert.Error(t, err)
 }
 
 // Helper method to get the subdirectory for TUF keys
