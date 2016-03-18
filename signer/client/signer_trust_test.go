@@ -114,6 +114,18 @@ func TestGetPrivateKeyIfNoKey(t *testing.T) {
 	assert.Nil(t, privKey)
 }
 
+func TestCreatePrivateKey(t *testing.T) {
+	signer := setUpSigner(t, trustmanager.NewKeyMemoryStore(ret))
+	key, err := signer.Create(data.CanonicalSnapshotRole, "docker.com/notary", data.ECDSAKey)
+	assert.NoError(t, err)
+	assert.NotNil(t, key)
+	retrievedKey := signer.GetKey(key.ID())
+	assert.NotNil(t, retrievedKey)
+	assert.Equal(t, key.Public(), retrievedKey.Public())
+	assert.Equal(t, key.ID(), retrievedKey.ID())
+	assert.Equal(t, data.ECDSAKey, retrievedKey.Algorithm())
+}
+
 func TestGetPrivateKeyAndSignWithExistingKey(t *testing.T) {
 	key, err := trustmanager.GenerateECDSAKey(rand.Reader)
 	assert.NoError(t, err, "could not generate key")
