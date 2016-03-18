@@ -300,7 +300,7 @@ or feedback about project operations.
 
 [Org]
     [Org.Curators]
-        People = ["amitshukla", "thajeztah"]
+        People = ["programmerq", "thajeztah", "amitshukla"]
     [Org."Docs maintainers"]
         People = ["jamtur01", "moxiegirl", "sven", "thajeztah"]
     [Org.boot2docker]
@@ -312,7 +312,7 @@ or feedback about project operations.
     [Org.distribution]
         People = ["aaronlehmann", "dmcgowan", "dmp42", "richardscothern", "shykes", "stevvooe"]
     [Org.docker]
-        People = ["calavera", "coolljt0725", "cpuguy83", "crosbymichael", "duglin", "estesp", "icecrime", "jfrazelle", "lk4d4", "mhbauer", "runcom", "tianon", "tibor", "tonistiigi", "unclejack", "vbatts", "vdemeester"]
+        People = ["aaronlehmann", "calavera", "coolljt0725", "cpuguy83", "crosbymichael", "duglin", "estesp", "icecrime", "jhowardmsft", "jfrazelle", "lk4d4", "mhbauer", "runcom", "tianon", "tibor", "tonistiigi", "unclejack", "vbatts", "vdemeester"]
     [Org.docker-bench-security]
         People = ["diogomonica", "konstruktoid"]
     [Org.docker-py]
@@ -320,7 +320,7 @@ or feedback about project operations.
     [Org.dockercraft]
         People = ["aduermael", "davetucker", "gdevillele"]
     [Org.engine-api]
-        People = ["calavera", "dongluochen", "mhbauer"]
+        People = ["calavera", "dongluochen", "mhbauer", "vdemeester"]
     [Org.go-connections]
         People = ["calavera"]
     [Org.go-plugins-helpers]
@@ -509,6 +509,10 @@ or feedback about project operations.
         Name = "Jessie Frazelle"
         Email = "acidburn@docker.com"
         GitHub = "jfrazelle"
+    [People.jhowardmsft]
+        Name = "John Howard"
+        Email = "jhoward@microsoft.com"
+        GitHub = "jhowardmsft"
     [People.jimmyxian]
         Name = "Xian Chaobo"
         Email = "xianchaobo@huawei.com"
@@ -569,6 +573,10 @@ or feedback about project operations.
         Name = "Nishant Totla"
         Email = "nishanttotla@gmail.com"
         GitHub = "nishanttotla"
+    [People.programmerq]
+        Name = "Jeff Anderson"
+        Email = "jeff@docker.com"
+        GitHub = "programmerq"
     [People.richardscothern]
         Name = "Richard Scothern"
         Email = "richard.scothern@gmail.com"
@@ -605,10 +613,6 @@ or feedback about project operations.
         Name = "Sebastiaan van Stijn"
         Email = "github@gone.nl"
         GitHub = "thaJeztah"
-    [People.theadactyl]
-        Name = "Thea Lamkin"
-        Email = "thea@docker.com"
-        GitHub = "theadactyl"
     [People.tianon]
         Name = "Tianon Gravi"
         Email = "admwiggin@gmail.com"
