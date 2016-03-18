@@ -283,7 +283,6 @@ func TestClientDelegationsInteraction(t *testing.T) {
 	// list delegations - we should see two keys
 	output, err = runCommand(t, tempDir, "-s", server.URL, "delegation", "list", "gun")
 	assert.NoError(t, err)
-	assert.Contains(t, output, ",")
 	assert.Contains(t, output, "path")
 	assert.Contains(t, output, keyID)
 	assert.Contains(t, output, keyID2)
@@ -331,8 +330,8 @@ func TestClientDelegationsInteraction(t *testing.T) {
 	// list delegations - we should see two keys
 	output, err = runCommand(t, tempDir, "-s", server.URL, "delegation", "list", "gun")
 	assert.NoError(t, err)
-	assert.Contains(t, output, ",")
-	assert.Contains(t, output, "path1,path2")
+	assert.Contains(t, output, "path1")
+	assert.Contains(t, output, "path2")
 	assert.Contains(t, output, keyID)
 	assert.Contains(t, output, keyID2)
 
@@ -348,8 +347,11 @@ func TestClientDelegationsInteraction(t *testing.T) {
 	// list delegations - we should see two keys
 	output, err = runCommand(t, tempDir, "-s", server.URL, "delegation", "list", "gun")
 	assert.NoError(t, err)
-	assert.Contains(t, output, ",")
-	assert.Contains(t, output, "path1,path2,path3")
+	assert.Contains(t, output, "path1")
+	assert.Contains(t, output, "path2")
+	assert.Contains(t, output, "path3")
+	assert.Contains(t, output, keyID)
+	assert.Contains(t, output, keyID2)
 
 	// just remove two paths from this delegation
 	output, err = runCommand(t, tempDir, "delegation", "remove", "gun", "targets/delegation", "--paths", "path2,path3")
@@ -363,7 +365,6 @@ func TestClientDelegationsInteraction(t *testing.T) {
 	// list delegations - we should see the same two keys, and only path1
 	output, err = runCommand(t, tempDir, "-s", server.URL, "delegation", "list", "gun")
 	assert.NoError(t, err)
-	assert.Contains(t, output, ",")
 	assert.Contains(t, output, "path1")
 	assert.NotContains(t, output, "path2")
 	assert.NotContains(t, output, "path3")
@@ -382,7 +383,6 @@ func TestClientDelegationsInteraction(t *testing.T) {
 	// list delegations - we should see the same two keys, and no paths
 	output, err = runCommand(t, tempDir, "-s", server.URL, "delegation", "list", "gun")
 	assert.NoError(t, err)
-	assert.Contains(t, output, ",")
 	assert.NotContains(t, output, "path1")
 	assert.NotContains(t, output, "path2")
 	assert.NotContains(t, output, "path3")

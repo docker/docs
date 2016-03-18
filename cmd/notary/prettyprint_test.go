@@ -237,7 +237,7 @@ func TestPrettyPrintSortedRoles(t *testing.T) {
 		{Name: "targets/zebra", Paths: []string{"stripes", "black", "white"}, RootRole: data.RootRole{KeyIDs: []string{"101"}, Threshold: 1}},
 		{Name: "targets/aardvark/unicorn/pony", Paths: []string{"rainbows"}, RootRole: data.RootRole{KeyIDs: []string{"135"}, Threshold: 1}},
 		{Name: "targets/bee", Paths: []string{"honey"}, RootRole: data.RootRole{KeyIDs: []string{"246"}, Threshold: 1}},
-		{Name: "targets/bee/wasp", Paths: []string{"honey/sting"}, RootRole: data.RootRole{KeyIDs: []string{"246", "468"}, Threshold: 1}},
+		{Name: "targets/bee/wasp", Paths: []string{"honey/sting", "stuff"}, RootRole: data.RootRole{KeyIDs: []string{"246", "468"}, Threshold: 1}},
 	}
 
 	var b bytes.Buffer
@@ -248,8 +248,11 @@ func TestPrettyPrintSortedRoles(t *testing.T) {
 	expected := [][]string{
 		{"targets/aardvark/unicorn/pony", "rainbows", "135", "1"},
 		{"targets/bee", "honey", "246", "1"},
-		{"targets/bee/wasp", "honey/sting", "246,468", "1"},
-		{"targets/zebra", "black,stripes,white", "101", "1"},
+		{"targets/bee/wasp", "honey/sting", "246", "1"},
+		{"stuff", "468"}, // Extra keys and paths are printed to extra rows
+		{"targets/zebra", "black", "101", "1"},
+		{"stripes"},
+		{"white"},
 	}
 
 	lines := strings.Split(strings.TrimSpace(string(text)), "\n")

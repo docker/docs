@@ -183,7 +183,7 @@ func prettyPrintRoles(rs []*data.Role, writer io.Writer, roleType string) {
 		table.Append([]string{
 			r.Name,
 			prettyPrintPaths(r.Paths),
-			strings.Join(r.KeyIDs, ","),
+			strings.Join(r.KeyIDs, "\n"),
 			fmt.Sprintf("%v", r.Threshold),
 		})
 	}
@@ -202,7 +202,7 @@ func prettyPrintPaths(paths []string) string {
 		}
 		prettyPaths = append(prettyPaths, path)
 	}
-	return strings.Join(prettyPaths, ",")
+	return strings.Join(prettyPaths, "\n")
 }
 
 // --- pretty printing certs ---
