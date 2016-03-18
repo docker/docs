@@ -86,8 +86,8 @@ func ValidTUFType(typ, role string) bool {
 // used to verify signatures before fully unpacking, or to add signatures
 // before fully packing
 type Signed struct {
-	Signed     json.RawMessage `json:"signed"`
-	Signatures []Signature     `json:"signatures"`
+	Signed     *json.RawMessage `json:"signed"`
+	Signatures []Signature      `json:"signatures"`
 }
 
 // SignedCommon contains the fields common to the Signed component of all

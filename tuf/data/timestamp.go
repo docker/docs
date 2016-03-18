@@ -90,7 +90,7 @@ func (ts *SignedTimestamp) ToSigned() (*Signed, error) {
 	copy(sigs, ts.Signatures)
 	return &Signed{
 		Signatures: sigs,
-		Signed:     signed,
+		Signed:     &signed,
 	}, nil
 }
 
@@ -117,7 +117,7 @@ func (ts *SignedTimestamp) MarshalJSON() ([]byte, error) {
 // SignedTimestamp
 func TimestampFromSigned(s *Signed) (*SignedTimestamp, error) {
 	ts := Timestamp{}
-	if err := defaultSerializer.Unmarshal(s.Signed, &ts); err != nil {
+	if err := defaultSerializer.Unmarshal(*s.Signed, &ts); err != nil {
 		return nil, err
 	}
 	if err := isValidTimestampStructure(ts); err != nil {

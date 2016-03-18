@@ -485,7 +485,7 @@ func requireRepoHasExpectedMetadata(t *testing.T, repo *NotaryRepository,
 	// content for keys and roles
 	if role == data.CanonicalRootRole {
 		var decodedRoot data.Root
-		err := json.Unmarshal(decoded.Signed, &decodedRoot)
+		err := json.Unmarshal(*decoded.Signed, &decodedRoot)
 		require.NoError(t, err, "error parsing root.json signed section: %s", err)
 
 		require.Equal(t, "Root", decodedRoot.Type, "_type mismatch in root.json")
@@ -1505,7 +1505,7 @@ func testValidateRootKey(t *testing.T, rootType string) {
 	require.NoError(t, err, "error parsing TUF metadata file %s: %s", rootJSONFile, err)
 
 	var decodedRoot data.Root
-	err = json.Unmarshal(decoded.Signed, &decodedRoot)
+	err = json.Unmarshal(*decoded.Signed, &decodedRoot)
 	require.NoError(t, err, "error parsing root.json signed section: %s", err)
 
 	keyids := []string{}

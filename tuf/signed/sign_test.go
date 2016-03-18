@@ -5,6 +5,7 @@ import (
 	"encoding/pem"
 	"testing"
 
+	"github.com/docker/go/canonical/json"
 	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
@@ -147,7 +148,9 @@ func TestBasicSign(t *testing.T) {
 	cs := NewEd25519()
 	key, err := cs.Create(data.CanonicalRootRole, "", data.ED25519Key)
 	require.NoError(t, err)
-	testData := data.Signed{}
+	testData := data.Signed{
+		Signed: &json.RawMessage{},
+	}
 
 	err = Sign(cs, &testData, key)
 	require.NoError(t, err)
@@ -167,7 +170,9 @@ func TestReSign(t *testing.T) {
 	cs := NewEd25519()
 	key, err := cs.Create(data.CanonicalRootRole, "", data.ED25519Key)
 	require.NoError(t, err)
-	testData := data.Signed{}
+	testData := data.Signed{
+		Signed: &json.RawMessage{},
+	}
 
 	Sign(cs, &testData, key)
 	Sign(cs, &testData, key)
@@ -185,7 +190,9 @@ func TestReSign(t *testing.T) {
 // Should not remove signatures for valid keys that were not resigned with
 func TestMultiSign(t *testing.T) {
 	cs := NewEd25519()
-	testData := data.Signed{}
+	testData := data.Signed{
+		Signed: &json.RawMessage{},
+	}
 
 	key1, err := cs.Create(data.CanonicalRootRole, "", data.ED25519Key)
 	require.NoError(t, err)
@@ -224,7 +231,9 @@ func TestMultiSign(t *testing.T) {
 
 func TestSignReturnsNoSigs(t *testing.T) {
 	failingCryptoService := &FailingCryptoService{}
-	testData := data.Signed{}
+	testData := data.Signed{
+		Signed: &json.RawMessage{},
+	}
 
 	testKey, _ := pem.Decode([]byte(testKeyPEM1))
 	key := data.NewPublicKey(data.RSAKey, testKey.Bytes)
@@ -253,7 +262,9 @@ func TestSignWithX509(t *testing.T) {
 	// test signing against a service that only recognizes a RSAKey (not
 	// RSAx509 key)
 	mockCryptoService := &StrictMockCryptoService{MockCryptoService{privKey}}
-	testData := data.Signed{}
+	testData := data.Signed{
+		Signed: &json.RawMessage{},
+	}
 	err = Sign(mockCryptoService, &testData, tufRSAx509Key)
 	require.NoError(t, err)
 
@@ -263,7 +274,9 @@ func TestSignWithX509(t *testing.T) {
 
 func TestSignRemovesValidSigByInvalidKey(t *testing.T) {
 	cs := NewEd25519()
-	testData := data.Signed{}
+	testData := data.Signed{
+		Signed: &json.RawMessage{},
+	}
 
 	key1, err := cs.Create(data.CanonicalRootRole, "", data.ED25519Key)
 	require.NoError(t, err)
@@ -289,7 +302,9 @@ func TestSignRemovesValidSigByInvalidKey(t *testing.T) {
 
 func TestSignRemovesInvalidSig(t *testing.T) {
 	cs := NewEd25519()
-	testData := data.Signed{}
+	testData := data.Signed{
+		Signed: &json.RawMessage{},
+	}
 
 	key1, err := cs.Create(data.CanonicalRootRole, "", data.ED25519Key)
 	require.NoError(t, err)
@@ -304,7 +319,8 @@ func TestSignRemovesInvalidSig(t *testing.T) {
 	require.NoError(t, err)
 
 	// modify test data to invalidate key1 sig
-	testData.Signed = []byte{0xff}
+	raw := json.RawMessage([]byte{0xff})
+	testData.Signed = &raw
 	// should remove key1 sig because it's out of date
 	Sign(
 		cs,

@@ -22,7 +22,7 @@ func TestRoleNoKeys(t *testing.T) {
 
 	b, err := json.MarshalCanonical(meta)
 	require.NoError(t, err)
-	s := &data.Signed{Signed: b}
+	s := &data.Signed{Signed: (*json.RawMessage)(&b)}
 	Sign(cs, s, k)
 	err = Verify(s, roleWithKeys, 1)
 	require.IsType(t, ErrRoleThreshold{}, err)
@@ -39,7 +39,7 @@ func TestNotEnoughSigs(t *testing.T) {
 
 	b, err := json.MarshalCanonical(meta)
 	require.NoError(t, err)
-	s := &data.Signed{Signed: b}
+	s := &data.Signed{Signed: (*json.RawMessage)(&b)}
 	Sign(cs, s, k)
 	err = Verify(s, roleWithKeys, 1)
 	require.IsType(t, ErrRoleThreshold{}, err)
@@ -57,7 +57,7 @@ func TestMoreThanEnoughSigs(t *testing.T) {
 
 	b, err := json.MarshalCanonical(meta)
 	require.NoError(t, err)
-	s := &data.Signed{Signed: b}
+	s := &data.Signed{Signed: (*json.RawMessage)(&b)}
 	Sign(cs, s, k1, k2)
 	require.Equal(t, 2, len(s.Signatures))
 	err = Verify(s, roleWithKeys, 1)
@@ -74,7 +74,7 @@ func TestDuplicateSigs(t *testing.T) {
 
 	b, err := json.MarshalCanonical(meta)
 	require.NoError(t, err)
-	s := &data.Signed{Signed: b}
+	s := &data.Signed{Signed: (*json.RawMessage)(&b)}
 	Sign(cs, s, k)
 	s.Signatures = append(s.Signatures, s.Signatures[0])
 	err = Verify(s, roleWithKeys, 1)
@@ -93,7 +93,7 @@ func TestUnknownKeyBelowThreshold(t *testing.T) {
 
 	b, err := json.MarshalCanonical(meta)
 	require.NoError(t, err)
-	s := &data.Signed{Signed: b}
+	s := &data.Signed{Signed: (*json.RawMessage)(&b)}
 	Sign(cs, s, k, unknown)
 	s.Signatures = append(s.Signatures)
 	err = Verify(s, roleWithKeys, 1)
@@ -168,7 +168,7 @@ func Test(t *testing.T) {
 
 			b, err := json.MarshalCanonical(meta)
 			require.NoError(t, err)
-			s := &data.Signed{Signed: b}
+			s := &data.Signed{Signed: (*json.RawMessage)(&b)}
 			Sign(cryptoService, s, k)
 			run.s = s
 		}
