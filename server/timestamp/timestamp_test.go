@@ -77,7 +77,7 @@ func TestGetTimestampNoPreviousTimestamp(t *testing.T) {
 		}
 
 		// create a key to be used by GetOrCreateTimestamp
-		key, err := crypto.Create(data.CanonicalTimestampRole, data.ECDSAKey)
+		key, err := crypto.Create(data.CanonicalTimestampRole, "gun", data.ECDSAKey)
 		assert.NoError(t, err)
 		assert.NoError(t, store.SetKey("gun", data.CanonicalTimestampRole, key.Algorithm(), key.Public()))
 
