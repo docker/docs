@@ -240,34 +240,35 @@ func generateSnapshot(gun string, repo *tuf.Repo, store storage.MetaStore) (*sto
 func generateTimestamp(gun string, repo *tuf.Repo, store storage.MetaStore) (*storage.MetaUpdate, error) {
 	var prev *data.SignedTimestamp
 	_, currentJSON, err := store.GetCurrent(gun, data.CanonicalTimestampRole)
-	if err == nil {
+
+	switch err.(type) {
+	case nil:
 		prev = new(data.SignedTimestamp)
-		if err = json.Unmarshal(currentJSON, prev); err != nil {
+		if err := json.Unmarshal(currentJSON, prev); err != nil {
 			logrus.Error("Failed to unmarshal existing timestamp for GUN ", gun)
 			return nil, err
 		}
-	}
-
-	if _, ok := err.(storage.ErrNotFound); !ok && err != nil {
+	case storage.ErrNotFound:
+		break // this is the first timestamp ever for the repo
+	default:
 		return nil, err
 	}
 
 	metaUpdate, err := timestamp.NewTimestampUpdate(prev, repo)
-	if err != nil {
-		_, noSigs := err.(signed.ErrInsufficientSignatures)
-		_, noKeys := err.(signed.ErrNoKeys)
+
+	switch err.(type) {
+	case nil:
+		return metaUpdate, nil
+	case signed.ErrInsufficientSignatures, signed.ErrNoKeys:
 		// If we cannot sign the timestamp, then we don't have keys for the timestamp,
 		// and the client screwed up their root
-		if noSigs || noKeys {
-			return nil, validation.ErrBadRoot{
-				Msg: fmt.Sprintf("none of the following timestamp keys exist on the server: %s",
-					strings.Join(repo.Root.Signed.Roles[data.CanonicalTimestampRole].KeyIDs, ", ")),
-			}
+		return nil, validation.ErrBadRoot{
+			Msg: fmt.Sprintf("none of the following timestamp keys exist on the server: %s",
+				strings.Join(repo.Root.Signed.Roles[data.CanonicalTimestampRole].KeyIDs, ", ")),
 		}
-
+	default:
 		return nil, validation.ErrValidation{Msg: err.Error()}
 	}
-	return metaUpdate, nil
 }
 
 // loadAndValidateSnapshot validates that the given snapshot update is valid.  It also sets the new snapshot
@@ -438,25 +439,11 @@ func checkAgainstOldRoot(oldRoot []byte, newRootRole data.BaseRole, newSigned *d
 		return err
 	}
 
-	// if the set of keys has changed between the old root and new root, then a root
-	// rotation may have taken place
-	rotation := len(oldRootRole.Keys) != len(newRootRole.Keys)
-	if !rotation { // if the number of keys is the same, we need to check every key
-		for kid := range newRootRole.Keys {
-			if _, ok := oldRootRole.Keys[kid]; !ok {
-				// if there is any difference in keys, a key rotation may have
-				// occurred.
-				rotation = true
-			}
-		}
-	}
-
-	if rotation {
-		if err := signed.VerifyRoot(newSigned, oldRootRole.Threshold, oldRootRole.Keys); err != nil {
-			return validation.ErrBadRoot{Msg: fmt.Sprintf(
-				"rotation detected and new root was not signed with at least %d old keys",
-				oldRootRole.Threshold)}
-		}
+	// Always verify the new root against the old root
+	if err := signed.VerifyRoot(newSigned, oldRootRole.Threshold, oldRootRole.Keys); err != nil {
+		return validation.ErrBadRoot{Msg: fmt.Sprintf(
+			"rotation detected and new root was not signed with at least %d old keys",
+			oldRootRole.Threshold)}
 	}
 
 	return nil

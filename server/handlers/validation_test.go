@@ -3,7 +3,6 @@ package handlers
 import (
 	"bytes"
 	"encoding/json"
-	"path"
 	"reflect"
 	"testing"
 	"time"
@@ -52,10 +51,10 @@ func copyKeys(t *testing.T, from signed.CryptoService, roles ...string) signed.C
 		for _, keyID := range from.ListKeys(role) {
 			key, _, err := from.GetPrivateKey(keyID)
 			assert.NoError(t, err)
-			memKeyStore.AddKey(path.Base(keyID), role, key)
+			memKeyStore.AddKey(trustmanager.KeyInfo{Role: role}, key)
 		}
 	}
-	return cryptoservice.NewCryptoService("", memKeyStore)
+	return cryptoservice.NewCryptoService(memKeyStore)
 }
 
 // Returns a mapping of role name to `MetaUpdate` objects
@@ -303,6 +302,8 @@ func TestValidateOldRootCorrupt(t *testing.T) {
 	assert.IsType(t, &json.SyntaxError{}, err)
 }
 
+// We cannot validate a new root if the old root is corrupt, because there might
+// have been a root key rotation.
 func TestValidateOldRootCorruptRootRole(t *testing.T) {
 	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
@@ -333,6 +334,10 @@ func TestValidateOldRootCorruptRootRole(t *testing.T) {
 	assert.IsType(t, data.ErrInvalidRole{}, err)
 }
 
+// We cannot validate a new root if we cannot get the old root from the DB (
+// and cannot detect whether there was an old root or not), because there might
+// have been an old root and we can't determine if the new root represents a
+// root key rotation.
 func TestValidateRootGetCurrentRootBroken(t *testing.T) {
 	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
@@ -354,6 +359,7 @@ func TestValidateRootGetCurrentRootBroken(t *testing.T) {
 	assert.IsType(t, data.ErrNoSuchRole{}, err)
 }
 
+// A valid root rotation requires that the new root be signed with both old and new keys.
 func TestValidateRootRotation(t *testing.T) {
 	repo, crypto, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
@@ -400,7 +406,9 @@ func TestValidateRootRotation(t *testing.T) {
 	assert.NoError(t, err)
 }
 
-func TestInvalidRootRotation(t *testing.T) {
+// A root rotation must be signed with old and new root keys, otherwise the
+// new root fails to validate
+func TestRootRotationNotSignedWithOldKeys(t *testing.T) {
 	repo, crypto, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
 	store := storage.NewMemStorage()
@@ -412,7 +420,7 @@ func TestInvalidRootRotation(t *testing.T) {
 
 	store.UpdateCurrent("testGUN", root)
 
-	rootKey, err := crypto.Create("root", data.ED25519Key)
+	rootKey, err := crypto.Create("root", "testGUN", data.ED25519Key)
 	assert.NoError(t, err)
 	rootRole, err := data.NewRole("root", 1, []string{rootKey.ID()}, nil)
 	assert.NoError(t, err)
@@ -442,6 +450,7 @@ func TestInvalidRootRotation(t *testing.T) {
 	assert.Contains(t, err.Error(), "new root was not signed with at least 1 old keys")
 }
 
+// An update is not valid without the root metadata.
 func TestValidateNoRoot(t *testing.T) {
 	repo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	assert.NoError(t, err)
@@ -695,7 +704,7 @@ func TestValidateRootInvalidTimestampKey(t *testing.T) {
 	updates := []storage.MetaUpdate{root, targets, snapshot}
 
 	serverCrypto := signed.NewEd25519()
-	_, err = serverCrypto.Create(data.CanonicalTimestampRole, data.ED25519Key)
+	_, err = serverCrypto.Create(data.CanonicalTimestampRole, "testGUN", data.ED25519Key)
 	assert.NoError(t, err)
 
 	_, err = validateUpdate(serverCrypto, "testGUN", updates, store)

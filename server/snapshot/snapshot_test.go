@@ -138,7 +138,7 @@ func TestGetSnapshotNoPreviousSnapshot(t *testing.T) {
 		}
 
 		// create a key to be used by GetOrCreateSnapshot
-		key, err := crypto.Create(data.CanonicalSnapshotRole, data.ECDSAKey)
+		key, err := crypto.Create(data.CanonicalSnapshotRole, "gun", data.ECDSAKey)
 		assert.NoError(t, err)
 		assert.NoError(t, store.SetKey("gun", data.CanonicalSnapshotRole, key.Algorithm(), key.Public()))
 
