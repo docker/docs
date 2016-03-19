@@ -645,47 +645,25 @@ func (r *NotaryRepository) publish(cl changelist.Changelist) error {
 // This can also be unified with some cache reading tools from tuf/client.
 // This assumes that bootstrapRepo is only used by Publish() or RotateKey()
 func (r *NotaryRepository) bootstrapRepo() error {
-	tufRepo := tuf.NewRepo(r.CryptoService)
+	b := tuf.NewRepoBuilder(r.gun, r.CryptoService, r.trustPinning)
 
 	logrus.Debugf("Loading trusted collection.")
-	rootJSON, err := r.fileStore.GetMeta(data.CanonicalRootRole, -1)
-	if err != nil {
-		return err
-	}
-	root := &data.SignedRoot{}
-	err = json.Unmarshal(rootJSON, root)
-	if err != nil {
-		return err
-	}
-	err = tufRepo.SetRoot(root)
-	if err != nil {
-		return err
-	}
-	targetsJSON, err := r.fileStore.GetMeta(data.CanonicalTargetsRole, -1)
-	if err != nil {
-		return err
-	}
-	targets := &data.SignedTargets{}
-	err = json.Unmarshal(targetsJSON, targets)
-	if err != nil {
-		return err
-	}
-	tufRepo.SetTargets(data.CanonicalTargetsRole, targets)
 
-	snapshotJSON, err := r.fileStore.GetMeta(data.CanonicalSnapshotRole, -1)
-	if err == nil {
-		snapshot := &data.SignedSnapshot{}
-		err = json.Unmarshal(snapshotJSON, snapshot)
+	for _, role := range data.BaseRoles {
+		jsonBytes, err := r.fileStore.GetMeta(role, -1)
 		if err != nil {
+			if _, ok := err.(store.ErrMetaNotFound); ok &&
+				role == data.CanonicalSnapshotRole || role == data.CanonicalTimestampRole {
+				continue
+			}
 			return err
 		}
-		tufRepo.SetSnapshot(snapshot)
-	} else if _, ok := err.(store.ErrMetaNotFound); !ok {
-		return err
+		if err := b.Load(role, jsonBytes, 0, true); err != nil {
+			return err
+		}
 	}
 
-	r.tufRepo = tufRepo
-
+	r.tufRepo = b.GetRepo()
 	return nil
 }
 
