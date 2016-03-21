@@ -57,7 +57,7 @@ func NewKeyRethinkDBStore(passphraseRetriever passphrase.Retriever, defaultPassA
 
 // Name returns a user friendly name for the storage location
 func (s *KeyRethinkDBStore) Name() string {
-	return "database"
+	return "RethinkDB"
 }
 
 // AddKey stores the contents of a private key. Both role and gun are ignored,
@@ -74,7 +74,12 @@ func (s *KeyRethinkDBStore) AddKey(keyInfo trustmanager.KeyInfo, privKey data.Pr
 		return err
 	}
 
+	now := time.Now()
 	rethinkPrivKey := RethinkPrivateKey{
+		rethinkdb.Timing{
+			CreatedAt: now,
+			UpdatedAt: now,
+		},
 		KeyID:           privKey.ID(),
 		EncryptionAlg:   EncryptionAlg,
 		KeywrapAlg:      KeywrapAlg,
@@ -165,7 +170,7 @@ func (s *KeyRethinkDBStore) RemoveKey(keyID string) error {
 	dbPrivateKey := RethinkPrivateKey{KeyID: keyID}
 	_, err := gorethink.DB(dbPrivateKey.DatabaseName()).Table(dbPrivateKey.TableName()).Get(dbPrivateKey).Delete().RunWrite(s.session)
 	if err != nil {
-		return fmt.Errorf("Unable to delete private key from database")
+		return fmt.Errorf("unable to delete private key from database: %s", err.Error())
 	}
 
 	return nil
