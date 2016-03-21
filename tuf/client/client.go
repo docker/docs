@@ -331,7 +331,7 @@ func (c *Client) downloadSnapshot() error {
 	size := c.local.Timestamp.Signed.Meta[role].Length
 	expectedHashes := c.local.Timestamp.Signed.Meta[role].Hashes
 	if len(expectedHashes) == 0 {
-		return data.ErrMissingMeta{Role: "snapshot"}
+		return data.ErrMissingMeta{Role: data.CanonicalSnapshotRole}
 	}
 
 	var download bool
