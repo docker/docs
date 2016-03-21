@@ -82,9 +82,9 @@ func NewSnapshot(root *Signed, targets *Signed) (*SignedSnapshot, error) {
 	return &SignedSnapshot{
 		Signatures: make([]Signature, 0),
 		Signed: Snapshot{
-			Type:    TUFTypes["snapshot"],
+			Type:    TUFTypes[CanonicalSnapshotRole],
 			Version: 0,
-			Expires: DefaultExpires("snapshot"),
+			Expires: DefaultExpires(CanonicalSnapshotRole),
 			Meta: Files{
 				CanonicalRootRole:    rootMeta,
 				CanonicalTargetsRole: targetsMeta,

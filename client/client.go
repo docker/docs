@@ -683,7 +683,7 @@ func (r *NotaryRepository) bootstrapRepo() error {
 	}
 	tufRepo.SetTargets("targets", targets)
 
-	snapshotJSON, err := r.fileStore.GetMeta("snapshot", -1)
+	snapshotJSON, err := r.fileStore.GetMeta(data.CanonicalSnapshotRole, -1)
 	if err == nil {
 		snapshot := &data.SignedSnapshot{}
 		err = json.Unmarshal(snapshotJSON, snapshot)

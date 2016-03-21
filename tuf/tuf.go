@@ -781,7 +781,7 @@ func (tr *Repo) UpdateTimestamp(s *data.Signed) error {
 	if err != nil {
 		return err
 	}
-	tr.Timestamp.Signed.Meta["snapshot"] = meta
+	tr.Timestamp.Signed.Meta[data.CanonicalSnapshotRole] = meta
 	tr.Timestamp.Dirty = true
 	return nil
 }
