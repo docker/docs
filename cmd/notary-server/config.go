@@ -14,6 +14,7 @@ import (
 	"github.com/docker/notary/server"
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/signer/client"
+	"github.com/docker/notary/storage/rethinkdb"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/utils"
@@ -63,18 +64,27 @@ func grpcTLS(configuration *viper.Viper) (*tls.Config, error) {
 // parses the configuration and returns a backing store for the TUF files
 func getStore(configuration *viper.Viper, allowedBackends []string, hRegister healthRegister) (
 	storage.MetaStore, error) {
-
+	var (
+		store storage.MetaStore
+		err   error
+	)
 	storeConfig, err := utils.ParseStorage(configuration, allowedBackends)
 	if err != nil {
 		return nil, err
 	}
 	logrus.Infof("Using %s backend", storeConfig.Backend)
 
-	if storeConfig.Backend == utils.MemoryBackend {
+	switch storeConfig.Backend {
+	case notary.MemoryBackend:
 		return storage.NewMemStorage(), nil
+	case notary.MySQLBackend:
+		store, err = storage.NewSQLStorage(storeConfig.Backend, storeConfig.Source)
+	case notary.RethinkDBBackend:
+		backend := rethinkdb.Connection(storeConfig.CA, storeConfig.Source, storeConfig.Password)
+		store, err = storage.NewRethinkDBStorage(backend)
+	default:
+		err = fmt.Errorf("%s not a supported storage backend", storeConfig.Backend)
 	}
-
-	store, err := storage.NewSQLStorage(storeConfig.Backend, storeConfig.Source)
 	if err != nil {
 		return nil, fmt.Errorf("Error starting DB driver: %s", err.Error())
 	}
