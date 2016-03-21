@@ -230,7 +230,7 @@ func TestSwizzlerInvalidateMetadataSignatures(t *testing.T) {
 				require.NotEqual(t, origSigned.Signatures[i].Signature, newSigned.Signatures[i].Signature)
 				require.Equal(t, []byte("invalid signature"), newSigned.Signatures[i].Signature)
 			}
-			require.True(t, bytes.Equal(origSigned.Signed, newSigned.Signed))
+			require.True(t, bytes.Equal(*origSigned.Signed, *newSigned.Signed))
 		}
 	}
 }
@@ -448,7 +448,7 @@ func TestSwizzlerUpdateSnapshotHashesSpecifiedRoles(t *testing.T) {
 	origSigned, newSigned := &data.Signed{}, &data.Signed{}
 	require.NoError(t, json.Unmarshal(origMeta[data.CanonicalSnapshotRole], origSigned))
 	require.NoError(t, json.Unmarshal(newMeta, newSigned))
-	require.True(t, bytes.Equal(origSigned.Signed, newSigned.Signed))
+	require.True(t, bytes.Equal(*origSigned.Signed, *newSigned.Signed))
 
 	// change these 3 metadata items
 	f.InvalidateMetadataSignatures(data.CanonicalTargetsRole)
@@ -493,7 +493,7 @@ func TestSwizzlerUpdateSnapshotHashesNoSpecifiedRoles(t *testing.T) {
 	origSigned, newSigned := &data.Signed{}, &data.Signed{}
 	require.NoError(t, json.Unmarshal(origMeta[data.CanonicalSnapshotRole], origSigned))
 	require.NoError(t, json.Unmarshal(newMeta, newSigned))
-	require.True(t, bytes.Equal(origSigned.Signed, newSigned.Signed))
+	require.True(t, bytes.Equal(*origSigned.Signed, *newSigned.Signed))
 
 	// change these 2 metadata items
 	f.InvalidateMetadataSignatures(data.CanonicalTargetsRole)
@@ -539,7 +539,7 @@ func TestSwizzlerUpdateTimestamp(t *testing.T) {
 	origSigned, newSigned := &data.Signed{}, &data.Signed{}
 	require.NoError(t, json.Unmarshal(origMeta[data.CanonicalTimestampRole], origSigned))
 	require.NoError(t, json.Unmarshal(newMeta, newSigned))
-	require.True(t, bytes.Equal(origSigned.Signed, newSigned.Signed))
+	require.True(t, bytes.Equal(*origSigned.Signed, *newSigned.Signed))
 
 	// update snapshot
 	f.OffsetMetadataVersion(data.CanonicalSnapshotRole, 1)

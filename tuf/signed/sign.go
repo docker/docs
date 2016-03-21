@@ -55,7 +55,7 @@ func Sign(service CryptoService, s *data.Signed, keys ...data.PublicKey) error {
 
 	// Do signing and generate list of signatures
 	for keyID, pk := range privKeys {
-		sig, err := pk.Sign(rand.Reader, s.Signed, nil)
+		sig, err := pk.Sign(rand.Reader, *s.Signed, nil)
 		if err != nil {
 			logrus.Debugf("Failed to sign with key: %s. Reason: %v", keyID, err)
 			continue
@@ -90,7 +90,7 @@ func Sign(service CryptoService, s *data.Signed, keys ...data.PublicKey) error {
 			// key is no longer a valid signing key
 			continue
 		}
-		if err := VerifySignature(s.Signed, sig, k); err != nil {
+		if err := VerifySignature(*s.Signed, sig, k); err != nil {
 			// signature is no longer valid
 			continue
 		}
