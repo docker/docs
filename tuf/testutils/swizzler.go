@@ -39,7 +39,7 @@ func getPubKeys(cs signed.CryptoService, s *data.Signed, role string) ([]data.Pu
 		// if this is root metadata, we have to get the keys from the root because they
 		// are certs
 		root := &data.Root{}
-		if err := json.Unmarshal(s.Signed, root); err != nil {
+		if err := json.Unmarshal(*s.Signed, root); err != nil {
 			return nil, err
 		}
 		rootRole, ok := root.Roles[data.CanonicalRootRole]
@@ -172,7 +172,7 @@ func (m *MetadataSwizzler) SetInvalidSignedMeta(role string) error {
 	}
 
 	var unmarshalled map[string]interface{}
-	if err := json.Unmarshal(signedThing.Signed, &unmarshalled); err != nil {
+	if err := json.Unmarshal(*signedThing.Signed, &unmarshalled); err != nil {
 		return err
 	}
 
@@ -184,7 +184,7 @@ func (m *MetadataSwizzler) SetInvalidSignedMeta(role string) error {
 	if err != nil {
 		return err
 	}
-	signedThing.Signed = json.RawMessage(metaBytes)
+	signedThing.Signed = (*json.RawMessage)(&metaBytes)
 
 	metaBytes, err = serializeMetadata(m.CryptoService, signedThing, role, pubKeys...)
 	if err != nil {
@@ -205,7 +205,7 @@ func (m *MetadataSwizzler) SetInvalidMetadataType(role string) error {
 	}
 
 	var unmarshalled map[string]interface{}
-	if err := json.Unmarshal(signedThing.Signed, &unmarshalled); err != nil {
+	if err := json.Unmarshal(*signedThing.Signed, &unmarshalled); err != nil {
 		return err
 	}
 
@@ -215,7 +215,7 @@ func (m *MetadataSwizzler) SetInvalidMetadataType(role string) error {
 	if err != nil {
 		return err
 	}
-	signedThing.Signed = json.RawMessage(metaBytes)
+	signedThing.Signed = (*json.RawMessage)(&metaBytes)
 
 	pubKeys, err := getPubKeys(m.CryptoService, signedThing, role)
 	if err == nil {
@@ -289,7 +289,7 @@ func (m *MetadataSwizzler) OffsetMetadataVersion(role string, offset int) error 
 	}
 
 	var unmarshalled map[string]interface{}
-	if err := json.Unmarshal(signedThing.Signed, &unmarshalled); err != nil {
+	if err := json.Unmarshal(*signedThing.Signed, &unmarshalled); err != nil {
 		return err
 	}
 
@@ -303,7 +303,7 @@ func (m *MetadataSwizzler) OffsetMetadataVersion(role string, offset int) error 
 	if err != nil {
 		return err
 	}
-	signedThing.Signed = json.RawMessage(metaBytes)
+	signedThing.Signed = (*json.RawMessage)(&metaBytes)
 
 	pubKeys, err := getPubKeys(m.CryptoService, signedThing, role)
 	if err == nil {
@@ -325,7 +325,7 @@ func (m *MetadataSwizzler) ExpireMetadata(role string) error {
 	}
 
 	var unmarshalled map[string]interface{}
-	if err := json.Unmarshal(signedThing.Signed, &unmarshalled); err != nil {
+	if err := json.Unmarshal(*signedThing.Signed, &unmarshalled); err != nil {
 		return err
 	}
 
@@ -335,7 +335,7 @@ func (m *MetadataSwizzler) ExpireMetadata(role string) error {
 	if err != nil {
 		return err
 	}
-	signedThing.Signed = json.RawMessage(metaBytes)
+	signedThing.Signed = (*json.RawMessage)(&metaBytes)
 
 	pubKeys, err := getPubKeys(m.CryptoService, signedThing, role)
 	if err == nil {
@@ -605,7 +605,7 @@ func (m *MetadataSwizzler) MutateRoot(mutate func(*data.Root)) error {
 	}
 
 	var root data.Root
-	if err := json.Unmarshal(signedThing.Signed, &root); err != nil {
+	if err := json.Unmarshal(*signedThing.Signed, &root); err != nil {
 		return err
 	}
 
@@ -644,7 +644,7 @@ func (m *MetadataSwizzler) MutateTimestamp(mutate func(*data.Timestamp)) error {
 	}
 
 	var timestamp data.Timestamp
-	if err := json.Unmarshal(signedThing.Signed, &timestamp); err != nil {
+	if err := json.Unmarshal(*signedThing.Signed, &timestamp); err != nil {
 		return err
 	}
 
@@ -677,7 +677,7 @@ func (m *MetadataSwizzler) MutateSnapshot(mutate func(*data.Snapshot)) error {
 	}
 
 	var snapshot data.Snapshot
-	if err := json.Unmarshal(signedThing.Signed, &snapshot); err != nil {
+	if err := json.Unmarshal(*signedThing.Signed, &snapshot); err != nil {
 		return err
 	}
 
@@ -710,7 +710,7 @@ func (m *MetadataSwizzler) MutateTargets(mutate func(*data.Targets)) error {
 	}
 
 	var targets data.Targets
-	if err := json.Unmarshal(signedThing.Signed, &targets); err != nil {
+	if err := json.Unmarshal(*signedThing.Signed, &targets); err != nil {
 		return err
 	}
 

@@ -29,7 +29,7 @@ func VerifyRoot(s *data.Signed, minVersion int, keys map[string]data.PublicKey) 
 	}
 
 	var decoded map[string]interface{}
-	if err := json.Unmarshal(s.Signed, &decoded); err != nil {
+	if err := json.Unmarshal(*s.Signed, &decoded); err != nil {
 		return err
 	}
 	msg, err := json.MarshalCanonical(decoded)
@@ -73,7 +73,7 @@ func Verify(s *data.Signed, role data.BaseRole, minVersion int) error {
 
 func verifyMeta(s *data.Signed, role string, minVersion int) error {
 	sm := &data.SignedCommon{}
-	if err := json.Unmarshal(s.Signed, sm); err != nil {
+	if err := json.Unmarshal(*s.Signed, sm); err != nil {
 		return err
 	}
 	if !data.ValidTUFType(sm.Type, role) {
@@ -109,7 +109,7 @@ func VerifySignatures(s *data.Signed, roleData data.BaseRole) error {
 	// remarshal the signed part so we can verify the signature, since the signature has
 	// to be of a canonically marshalled signed object
 	var decoded map[string]interface{}
-	if err := json.Unmarshal(s.Signed, &decoded); err != nil {
+	if err := json.Unmarshal(*s.Signed, &decoded); err != nil {
 		return err
 	}
 	msg, err := json.MarshalCanonical(decoded)

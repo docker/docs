@@ -130,13 +130,14 @@ func CreateTimestamp(gun string, prev *data.SignedTimestamp, snapshot []byte, st
 	if prev != nil {
 		ts.Signed.Version = prev.Signed.Version + 1
 	}
-	sgndTs, err := json.MarshalCanonical(ts.Signed)
+	var sgndTs json.RawMessage
+	sgndTs, err = json.MarshalCanonical(ts.Signed)
 	if err != nil {
 		return nil, 0, err
 	}
 	out := &data.Signed{
 		Signatures: ts.Signatures,
-		Signed:     sgndTs,
+		Signed:     &sgndTs,
 	}
 	err = signed.Sign(cryptoService, out, key)
 	if err != nil {
