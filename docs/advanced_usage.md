@@ -228,8 +228,8 @@ When running `docker pull` with Docker Content Trust on Docker Engine 1.10,
 Docker will attempt to search the `targets/releases` role for the signed image tag,
 and will fall back to the default `targets` role if it does not exist.  Please note
 that when searching the default `targets` role, Docker 1.10 may pick up on other
-non-targets/releases delegation roles' signed images if they exist for this tag.
-In Docker 1.11, this behavior is removed such that all `docker pull` commands with
+non-`targets/releases` delegation roles' signed images if they exist for this tag.
+In Docker 1.11, this behavior is changed such that all `docker pull` commands with
 Docker Content Trust must pull tags only signed by the `targets/releases` delegation role
 or the `targets` base role.
 
