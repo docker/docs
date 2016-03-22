@@ -122,8 +122,13 @@ If the passphrase is incorrect, you will be prompted to enter the correct
 passphrase.
 
 
-| Environment Variable        | Description                             |
-| --------------------------- | --------------------------------------- |
-|`NOTARY_ROOT_PASSPHRASE`     | The root/offline key passphrase         |
-|`NOTARY_TARGETS_PASSPHRASE`  | The targets (an online) key passphrase  |
-|`NOTARY_SNAPSHOT_PASSPHRASE` | The snapshot (an online) key passphrase |
+| Environment Variable          | Description                               |
+| ----------------------------- | ----------------------------------------- |
+|`NOTARY_ROOT_PASSPHRASE`       | The root/offline key passphrase           |
+|`NOTARY_TARGETS_PASSPHRASE`    | The targets (an online) key passphrase    |
+|`NOTARY_SNAPSHOT_PASSPHRASE`   | The snapshot (an online) key passphrase   |
+|`NOTARY_DELEGATION_PASSPHRASE` | The delegation (an online) key passphrase |
+
+
+Please note that if provided, the passphrase in `NOTARY_DELEGATION_PASSPHRASE`
+will be attempted for all delegation roles that notary attempts to sign with.
