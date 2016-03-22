@@ -8,6 +8,7 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary/passphrase"
+	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/version"
 	homedir "github.com/mitchellh/go-homedir"
 	"github.com/spf13/cobra"
@@ -225,13 +226,18 @@ func askConfirm() bool {
 func getPassphraseRetriever() passphrase.Retriever {
 	baseRetriever := passphrase.PromptRetriever()
 	env := map[string]string{
-		"root":     os.Getenv("NOTARY_ROOT_PASSPHRASE"),
-		"targets":  os.Getenv("NOTARY_TARGETS_PASSPHRASE"),
-		"snapshot": os.Getenv("NOTARY_SNAPSHOT_PASSPHRASE"),
+		"root":       os.Getenv("NOTARY_ROOT_PASSPHRASE"),
+		"targets":    os.Getenv("NOTARY_TARGETS_PASSPHRASE"),
+		"snapshot":   os.Getenv("NOTARY_SNAPSHOT_PASSPHRASE"),
+		"delegation": os.Getenv("NOTARY_DELEGATION_PASSPHRASE"),
 	}
 
 	return func(keyName string, alias string, createNew bool, numAttempts int) (string, bool, error) {
 		if v := env[alias]; v != "" {
+			return v, numAttempts > 1, nil
+		}
+		// For delegation roles, we can also try the "delegation" alias if it is specified
+		if v := env["delegation"]; v != "" && data.IsDelegation(alias) {
 			return v, numAttempts > 1, nil
 		}
 		return baseRetriever(keyName, alias, createNew, numAttempts)
