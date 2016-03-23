@@ -46,14 +46,15 @@ func (g RethinkPrivateKey) DatabaseName() string {
 }
 
 // NewKeyRethinkDBStore returns a new KeyRethinkDBStore backed by a RethinkDB database
-func NewKeyRethinkDBStore(passphraseRetriever passphrase.Retriever, defaultPassAlias string, rethinkSession *gorethink.Session) (*KeyRethinkDBStore, error) {
+func NewKeyRethinkDBStore(passphraseRetriever passphrase.Retriever, defaultPassAlias string, rethinkSession *gorethink.Session) *KeyRethinkDBStore {
 	cachedKeys := make(map[string]data.PrivateKey)
 
 	return &KeyRethinkDBStore{
 		session:          rethinkSession,
 		defaultPassAlias: defaultPassAlias,
 		retriever:        passphraseRetriever,
-		cachedKeys:       cachedKeys}, nil
+		cachedKeys:       cachedKeys,
+	}
 }
 
 // Name returns a user friendly name for the storage location
