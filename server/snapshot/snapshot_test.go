@@ -2,15 +2,16 @@ package snapshot
 
 import (
 	"bytes"
-	"encoding/json"
 	"testing"
 	"time"
 
 	"github.com/stretchr/testify/assert"
 
+	"github.com/docker/go/canonical/json"
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
+	"github.com/docker/notary/tuf/testutils"
 )
 
 func TestSnapshotExpired(t *testing.T) {
@@ -114,102 +115,151 @@ func TestGetSnapshotKeyExistsOnSet(t *testing.T) {
 	assert.NotNil(t, k2, "Key should not be nil")
 }
 
-func TestGetSnapshotNotExists(t *testing.T) {
-	store := storage.NewMemStorage()
-	crypto := signed.NewEd25519()
-
-	_, _, err := GetOrCreateSnapshot("gun", store, crypto)
-	assert.Error(t, err)
-}
-
-func TestGetSnapshotCurrValid(t *testing.T) {
-	store := storage.NewMemStorage()
-	crypto := signed.NewEd25519()
-
-	_, err := GetOrCreateSnapshotKey("gun", store, crypto, data.ED25519Key)
-
-	newData := []byte{2}
-	currMeta, err := data.NewFileMeta(bytes.NewReader(newData), "sha256")
+// If there is no previous snapshot or the previous snapshot is corrupt, then
+// even if everything else is in place, getting the snapshot fails
+func TestGetSnapshotNoPreviousSnapshot(t *testing.T) {
+	repo, crypto, err := testutils.EmptyRepo("gun")
 	assert.NoError(t, err)
 
-	snapshot := &data.SignedSnapshot{
-		Signed: data.Snapshot{
-			Expires: data.DefaultExpires(data.CanonicalSnapshotRole),
-			Meta: data.Files{
-				data.CanonicalRootRole: currMeta,
-			},
-		},
+	rootJSON, err := json.Marshal(repo.Root)
+	assert.NoError(t, err)
+
+	for _, snapshotJSON := range [][]byte{nil, []byte("invalid JSON")} {
+		store := storage.NewMemStorage()
+
+		// so we know it's not a failure in getting root
+		assert.NoError(t,
+			store.UpdateCurrent("gun", storage.MetaUpdate{Role: data.CanonicalRootRole, Version: 0, Data: rootJSON}))
+
+		if snapshotJSON != nil {
+			assert.NoError(t,
+				store.UpdateCurrent("gun",
+					storage.MetaUpdate{Role: data.CanonicalSnapshotRole, Version: 0, Data: snapshotJSON}))
+		}
+
+		// create a key to be used by GetOrCreateSnapshot
+		key, err := crypto.Create(data.CanonicalSnapshotRole, "gun", data.ECDSAKey)
+		assert.NoError(t, err)
+		assert.NoError(t, store.SetKey("gun", data.CanonicalSnapshotRole, key.Algorithm(), key.Public()))
+
+		_, _, err = GetOrCreateSnapshot("gun", store, crypto)
+		assert.Error(t, err, "GetSnapshot should have failed")
+		if snapshotJSON == nil {
+			assert.IsType(t, storage.ErrNotFound{}, err)
+		} else {
+			assert.IsType(t, &json.SyntaxError{}, err)
+		}
 	}
-	snapJSON, _ := json.Marshal(snapshot)
-
-	// test when db is missing the role data
-	store.UpdateCurrent("gun", storage.MetaUpdate{Role: "snapshot", Version: 0, Data: snapJSON})
-	c1, result, err := GetOrCreateSnapshot("gun", store, crypto)
-	assert.NoError(t, err)
-	assert.True(t, bytes.Equal(snapJSON, result))
-
-	// test when db has the role data
-	store.UpdateCurrent("gun", storage.MetaUpdate{Role: "root", Version: 0, Data: newData})
-	c2, result, err := GetOrCreateSnapshot("gun", store, crypto)
-	assert.NoError(t, err)
-	assert.True(t, bytes.Equal(snapJSON, result))
-	assert.True(t, c1.Equal(*c2))
-
-	// test when db role data is corrupt
-	store.UpdateCurrent("gun", storage.MetaUpdate{Role: "root", Version: 1, Data: []byte{3}})
-	c2, result, err = GetOrCreateSnapshot("gun", store, crypto)
-	assert.NoError(t, err)
-	assert.True(t, bytes.Equal(snapJSON, result))
-	assert.True(t, c1.Equal(*c2))
 }
 
-func TestGetSnapshotCurrExpired(t *testing.T) {
+// If there WAS a pre-existing snapshot, and it is not expired, then just return it (it doesn't
+// load any other metadata that it doesn't need)
+func TestGetSnapshotReturnsPreviousSnapshotIfUnexpired(t *testing.T) {
 	store := storage.NewMemStorage()
-	crypto := signed.NewEd25519()
-
-	_, err := GetOrCreateSnapshotKey("gun", store, crypto, data.ED25519Key)
-
-	snapshot := &data.SignedSnapshot{}
-	snapJSON, _ := json.Marshal(snapshot)
-
-	store.UpdateCurrent("gun", storage.MetaUpdate{Role: "snapshot", Version: 0, Data: snapJSON})
-	c1, newJSON, err := GetOrCreateSnapshot("gun", store, crypto)
+	repo, crypto, err := testutils.EmptyRepo("gun")
 	assert.NoError(t, err)
-	assert.False(t, bytes.Equal(snapJSON, newJSON))
-	assert.True(t, c1.After(time.Now().Add(-1*time.Minute)))
+
+	snapshotJSON, err := json.Marshal(repo.Snapshot)
+	assert.NoError(t, err)
+
+	assert.NoError(t, store.UpdateCurrent("gun",
+		storage.MetaUpdate{Role: data.CanonicalSnapshotRole, Version: 0, Data: snapshotJSON}))
+
+	// test when db is missing the role data (no root)
+	_, gottenSnapshot, err := GetOrCreateSnapshot("gun", store, crypto)
+	assert.NoError(t, err, "GetSnapshot should not have failed")
+	assert.True(t, bytes.Equal(snapshotJSON, gottenSnapshot))
 }
 
-func TestGetSnapshotCurrCorrupt(t *testing.T) {
+func TestGetSnapshotOldSnapshotExpired(t *testing.T) {
 	store := storage.NewMemStorage()
-	crypto := signed.NewEd25519()
+	repo, crypto, err := testutils.EmptyRepo("gun")
+	assert.NoError(t, err)
 
-	_, err := GetOrCreateSnapshotKey("gun", store, crypto, data.ED25519Key)
+	rootJSON, err := json.Marshal(repo.Root)
+	assert.NoError(t, err)
 
-	snapshot := &data.SignedSnapshot{}
-	snapJSON, _ := json.Marshal(snapshot)
+	// create an expired snapshot
+	_, err = repo.SignSnapshot(time.Now().AddDate(-1, -1, -1))
+	assert.True(t, repo.Snapshot.Signed.Expires.Before(time.Now()))
+	assert.NoError(t, err)
+	snapshotJSON, err := json.Marshal(repo.Snapshot)
+	assert.NoError(t, err)
 
-	store.UpdateCurrent("gun", storage.MetaUpdate{Role: "snapshot", Version: 0, Data: snapJSON[1:]})
-	_, _, err = GetOrCreateSnapshot("gun", store, crypto)
-	assert.Error(t, err)
+	// set all the metadata
+	assert.NoError(t, store.UpdateCurrent("gun",
+		storage.MetaUpdate{Role: data.CanonicalRootRole, Version: 0, Data: rootJSON}))
+	assert.NoError(t, store.UpdateCurrent("gun",
+		storage.MetaUpdate{Role: data.CanonicalSnapshotRole, Version: 0, Data: snapshotJSON}))
+
+	_, gottenSnapshot, err := GetOrCreateSnapshot("gun", store, crypto)
+	assert.NoError(t, err, "GetSnapshot errored")
+
+	assert.False(t, bytes.Equal(snapshotJSON, gottenSnapshot),
+		"Snapshot was not regenerated when old one was expired")
+
+	signedMeta := &data.SignedMeta{}
+	assert.NoError(t, json.Unmarshal(gottenSnapshot, signedMeta))
+	// the new metadata is not expired
+	assert.True(t, signedMeta.Signed.Expires.After(time.Now()))
 }
 
-func TestCreateSnapshotNoKeyInStorage(t *testing.T) {
-	store := storage.NewMemStorage()
-	crypto := signed.NewEd25519()
+// If the root is missing or corrupt, no snapshot can be generated
+func TestCannotMakeNewSnapshotIfNoRoot(t *testing.T) {
+	repo, crypto, err := testutils.EmptyRepo("gun")
+	assert.NoError(t, err)
 
-	_, _, err := createSnapshot("gun", nil, store, crypto)
-	assert.Error(t, err)
+	// create an expired snapshot
+	_, err = repo.SignSnapshot(time.Now().AddDate(-1, -1, -1))
+	assert.True(t, repo.Snapshot.Signed.Expires.Before(time.Now()))
+	assert.NoError(t, err)
+	snapshotJSON, err := json.Marshal(repo.Snapshot)
+	assert.NoError(t, err)
+
+	for _, rootJSON := range [][]byte{nil, []byte("invalid JSON")} {
+		store := storage.NewMemStorage()
+
+		if rootJSON != nil {
+			assert.NoError(t, store.UpdateCurrent("gun",
+				storage.MetaUpdate{Role: data.CanonicalRootRole, Version: 0, Data: rootJSON}))
+		}
+		assert.NoError(t, store.UpdateCurrent("gun",
+			storage.MetaUpdate{Role: data.CanonicalSnapshotRole, Version: 1, Data: snapshotJSON}))
+
+		_, _, err := GetOrCreateSnapshot("gun", store, crypto)
+		assert.Error(t, err, "GetSnapshot errored")
+
+		if rootJSON == nil { // missing metadata
+			assert.IsType(t, storage.ErrNotFound{}, err)
+		} else {
+			assert.IsType(t, &json.SyntaxError{}, err)
+		}
+	}
 }
 
 func TestCreateSnapshotNoKeyInCrypto(t *testing.T) {
 	store := storage.NewMemStorage()
-	crypto := signed.NewEd25519()
+	repo, _, err := testutils.EmptyRepo("gun")
+	assert.NoError(t, err)
 
-	_, err := GetOrCreateSnapshotKey("gun", store, crypto, data.ED25519Key)
+	rootJSON, err := json.Marshal(repo.Root)
+	assert.NoError(t, err)
 
-	// reset crypto so the store has the key but crypto doesn't
-	crypto = signed.NewEd25519()
+	// create an expired snapshot
+	_, err = repo.SignSnapshot(time.Now().AddDate(-1, -1, -1))
+	assert.True(t, repo.Snapshot.Signed.Expires.Before(time.Now()))
+	assert.NoError(t, err)
+	snapshotJSON, err := json.Marshal(repo.Snapshot)
+	assert.NoError(t, err)
 
-	_, _, err = createSnapshot("gun", &data.SignedSnapshot{}, store, crypto)
+	// set all the metadata so we know the failure to sign is just because of the key
+	assert.NoError(t, store.UpdateCurrent("gun",
+		storage.MetaUpdate{Role: data.CanonicalRootRole, Version: 0, Data: rootJSON}))
+	assert.NoError(t, store.UpdateCurrent("gun",
+		storage.MetaUpdate{Role: data.CanonicalSnapshotRole, Version: 0, Data: snapshotJSON}))
+
+	// pass it a new cryptoservice without the key
+	_, _, err = GetOrCreateSnapshot("gun", store, signed.NewEd25519())
 	assert.Error(t, err)
+	assert.IsType(t, signed.ErrNoKeys{}, err)
 }
