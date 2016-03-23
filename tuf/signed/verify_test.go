@@ -76,7 +76,7 @@ func TestValidSigWithIncorrectKeyID(t *testing.T) {
 	b, err := json.MarshalCanonical(meta)
 	require.NoError(t, err)
 	s := &data.Signed{Signed: (*json.RawMessage)(&b)}
-	Sign(cs, s, []data.PublicKey{k1}, 1)
+	Sign(cs, s, []data.PublicKey{k1}, 1, nil)
 	require.Equal(t, 1, len(s.Signatures))
 	s.Signatures[0].KeyID = "invalidIDA"
 	err = Verify(s, roleWithKeys, 1)
