@@ -82,6 +82,29 @@ func setUpCryptoservices(configuration *viper.Viper, allowedBackends []string) (
 	case notary.MemoryBackend:
 		keyStore = trustmanager.NewKeyMemoryStore(
 			passphrase.ConstantRetriever("memory-db-ignore"))
+	case notary.RethinkDBBackend:
+		var sess *gorethink.Session
+		storeConfig, err := utils.ParseRethinkDBStorage(configuration)
+		if err != nil {
+			return nil, err
+		}
+		sess, err = rethinkdb.Connection(storeConfig.CA, storeConfig.Source, storeConfig.AuthKey)
+		if err == nil {
+			defaultAlias := configuration.GetString("storage.default_alias")
+			if defaultAlias == "" {
+				// backwards compatibility - support this environment variable
+				defaultAlias = configuration.GetString(defaultAliasEnv)
+			}
+
+			if defaultAlias == "" {
+				return nil, fmt.Errorf("must provide a default alias for the key DB")
+			}
+			logrus.Debug("Default Alias: ", defaultAlias)
+			s, err := keydbstore.NewKeyRethinkDBStore(passphraseRetriever, defaultAlias, sess)
+			keyStore = s
+			hRegister("DB operational", s.CheckHealth, time.Second*60)
+		}
+
 	case notary.MySQLBackend, notary.SQLiteBackend:
 		storeConfig, err := utils.ParseSQLStorage(configuration)
 		if err != nil {
