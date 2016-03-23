@@ -146,6 +146,12 @@ func (r SignedRoot) MarshalJSON() ([]byte, error) {
 // that it is a valid SignedRoot
 func RootFromSigned(s *Signed) (*SignedRoot, error) {
 	r := Root{}
+	if s.Signed == nil {
+		return nil, ErrInvalidMetadata{
+			role: CanonicalRootRole,
+			msg:  "root file contained an empty payload",
+		}
+	}
 	if err := defaultSerializer.Unmarshal(*s.Signed, &r); err != nil {
 		return nil, err
 	}
