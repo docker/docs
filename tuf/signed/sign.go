@@ -21,15 +21,17 @@ import (
 )
 
 // Sign takes a data.Signed and keys, calculates and adds at least
-// minPrimarySignature signatures using primaryKeys and any possible
-// signatures using optionalKeys to the data.Signed
+// minSignature signatures using primaryKeys the data.Signed.  It will also
+// clean up any signatures produced by a key not in the primaryKeys or
+// validSigningKeys list.
+// (validSigningKeys can be either a superset of or a completely disjoint set from
+// primaryKeys)
 // N.B. All public keys for a role should be passed so that this function
 //      can correctly clean up signatures that are no longer valid.
 func Sign(service CryptoService, s *data.Signed, primaryKeys []data.PublicKey,
-	minSignatures int, optionalKeys []data.PublicKey) error {
+	minSignatures int, validSigningKeys []data.PublicKey) error {
 
-	logrus.Debugf("sign called with %d/%d required + %d optional keys",
-		minSignatures, len(primaryKeys), len(optionalKeys))
+	logrus.Debugf("sign called with %d/%d required keys", minSignatures, len(primaryKeys))
 	signatures := make([]data.Signature, 0, len(s.Signatures)+1)
 	signingKeyIDs := make(map[string]struct{})
 	tufIDs := make(map[string]data.PublicKey)
@@ -55,28 +57,20 @@ func Sign(service CryptoService, s *data.Signed, primaryKeys []data.PublicKey,
 		privKeys[key.ID()] = k
 	}
 
+	// include the list of validSigningKeys
+	for _, key := range validSigningKeys {
+		if _, ok := tufIDs[key.ID()]; !ok {
+			tufIDs[key.ID()] = key
+		}
+	}
+
 	// Check to ensure we have enough signing keys
 	if len(privKeys) < minSignatures {
 		return ErrInsufficientSignatures{FoundKeys: len(privKeys),
 			NeededKeys: minSignatures, MissingKeyIDs: missingKeyIDs}
 	}
 
-	for _, key := range optionalKeys {
-		if _, ok := privKeys[key.ID()]; ok {
-			continue
-		}
-		tufIDs[key.ID()] = key
-		canonicalID, err := utils.CanonicalKeyID(key)
-		if err != nil {
-			return err
-		}
-		k, _, err := service.GetPrivateKey(canonicalID)
-		if err != nil {
-			continue
-		}
-		privKeys[key.ID()] = k
-	}
-
+	emptyStruct := struct{}{}
 	// Do signing and generate list of signatures
 	for keyID, pk := range privKeys {
 		sig, err := pk.Sign(rand.Reader, *s.Signed, nil)
@@ -84,7 +78,7 @@ func Sign(service CryptoService, s *data.Signed, primaryKeys []data.PublicKey,
 			logrus.Debugf("Failed to sign with key: %s. Reason: %v", keyID, err)
 			return err
 		}
-		signingKeyIDs[keyID] = struct{}{}
+		signingKeyIDs[keyID] = emptyStruct
 		signatures = append(signatures, data.Signature{
 			KeyID:     keyID,
 			Method:    pk.SignatureAlgorithm(),

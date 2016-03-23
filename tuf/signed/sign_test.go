@@ -240,19 +240,31 @@ func TestSignRemovesValidSigByInvalidKey(t *testing.T) {
 	key1, err := cs.Create(data.CanonicalRootRole, "", data.ED25519Key)
 	require.NoError(t, err)
 
-	Sign(cs, &testData, []data.PublicKey{key1}, 1, nil)
-	require.Len(t, testData.Signatures, 1)
-	require.Equal(t, key1.ID(), testData.Signatures[0].KeyID)
-
 	key2, err := cs.Create(data.CanonicalRootRole, "", data.ED25519Key)
 	require.NoError(t, err)
 
-	// should remove key1 sig even though it's valid. It no longer appears
-	// in the list of signing keys for the role
-	Sign(cs, &testData, []data.PublicKey{key2}, 1, nil)
+	require.NoError(t, Sign(cs, &testData, []data.PublicKey{key1, key2}, 1, nil))
+	require.Len(t, testData.Signatures, 2)
+	var signatureKeys []string
+	for _, sig := range testData.Signatures {
+		signatureKeys = append(signatureKeys, sig.KeyID)
+	}
+	require.Contains(t, signatureKeys, key1.ID())
+	require.Contains(t, signatureKeys, key2.ID())
 
-	require.Len(t, testData.Signatures, 1)
-	require.Equal(t, key2.ID(), testData.Signatures[0].KeyID)
+	key3, err := cs.Create(data.CanonicalRootRole, "", data.ED25519Key)
+	require.NoError(t, err)
+
+	// should remove key1 sig even though it's valid. It no longer appears
+	// in the list of signing keys or valid signing keys for the role
+	require.NoError(t, Sign(cs, &testData, []data.PublicKey{key3}, 1, []data.PublicKey{key2}))
+	require.Len(t, testData.Signatures, 2)
+	signatureKeys = nil
+	for _, sig := range testData.Signatures {
+		signatureKeys = append(signatureKeys, sig.KeyID)
+	}
+	require.Contains(t, signatureKeys, key2.ID())
+	require.Contains(t, signatureKeys, key3.ID())
 }
 
 func TestSignRemovesInvalidSig(t *testing.T) {
@@ -264,7 +276,7 @@ func TestSignRemovesInvalidSig(t *testing.T) {
 	key1, err := cs.Create(data.CanonicalRootRole, "", data.ED25519Key)
 	require.NoError(t, err)
 
-	Sign(cs, &testData, []data.PublicKey{key1}, 1, nil)
+	require.NoError(t, Sign(cs, &testData, []data.PublicKey{key1}, 1, nil))
 	require.Len(t, testData.Signatures, 1)
 	require.Equal(t, key1.ID(), testData.Signatures[0].KeyID)
 
@@ -321,42 +333,6 @@ func TestSignMinSignatures(t *testing.T) {
 	}
 }
 
-func TestSignOptionalKeys(t *testing.T) {
-	csA := NewEd25519()
-	keyA1, err := csA.Create("keyA", "", data.ED25519Key)
-	require.NoError(t, err)
-	keyA2, err := csA.Create("keyA", "", data.ED25519Key)
-	require.NoError(t, err)
-	// csB is only used to create public keys which are unavailable from csA.
-	csB := NewEd25519()
-	keyB, err := csB.Create("keyB", "", data.ED25519Key)
-	require.NoError(t, err)
-
-	// Both primary and optional keys are used.
-	testData := data.Signed{Signed: &json.RawMessage{}}
-	err = Sign(csA, &testData, []data.PublicKey{keyA1, keyB}, 1, []data.PublicKey{keyA2})
-	require.NoError(t, err)
-	require.Len(t, testData.Signatures, 2)
-
-	// Missing optional keys are not an error.
-	testData = data.Signed{Signed: &json.RawMessage{}}
-	err = Sign(csA, &testData, []data.PublicKey{keyA1}, 1, []data.PublicKey{keyB})
-	require.NoError(t, err)
-	require.Len(t, testData.Signatures, 1)
-
-	// minSignatures is only counting primary keys.
-	testData = data.Signed{Signed: &json.RawMessage{}}
-	err = Sign(csA, &testData, []data.PublicKey{keyA1, keyB}, 2, []data.PublicKey{keyA2})
-	require.Error(t, err)
-	if err2, ok := err.(ErrInsufficientSignatures); ok {
-		require.Equal(t, err2.FoundKeys, 1)
-		require.Equal(t, err2.NeededKeys, 2)
-	} else {
-		// We know this will fail if !ok
-		require.IsType(t, ErrInsufficientSignatures{}, err)
-	}
-}
-
 func TestSignFailingKeys(t *testing.T) {
 	privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
 	require.NoError(t, err)
@@ -364,11 +340,6 @@ func TestSignFailingKeys(t *testing.T) {
 
 	testData := data.Signed{Signed: &json.RawMessage{}}
 	err = Sign(cs, &testData, []data.PublicKey{privKey}, 1, nil)
-	require.Error(t, err)
-	require.IsType(t, FailingPrivateKeyErr{}, err)
-
-	testData = data.Signed{Signed: &json.RawMessage{}}
-	err = Sign(cs, &testData, []data.PublicKey{}, 0, []data.PublicKey{privKey})
 	require.Error(t, err)
 	require.IsType(t, FailingPrivateKeyErr{}, err)
 }

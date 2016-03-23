@@ -939,8 +939,12 @@ func (tr Repo) sign(signedData *data.Signed, role data.BaseRole, optionalKeyIDs 
 		}
 		optionalKeys = append(optionalKeys, k)
 	}
-	if err := signed.Sign(tr.cryptoService, signedData, role.ListKeys(), role.Threshold, optionalKeys); err != nil {
+	validKeys := append(role.ListKeys(), optionalKeys...)
+	if err := signed.Sign(tr.cryptoService, signedData, role.ListKeys(), role.Threshold, validKeys); err != nil {
 		return nil, err
 	}
+	// Attempt to sign with the optional keys, but ignore any errors, because these keys are optional
+	signed.Sign(tr.cryptoService, signedData, optionalKeys, 0, validKeys)
+
 	return signedData, nil
 }
