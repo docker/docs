@@ -21,10 +21,11 @@ const (
 )
 
 var (
-	debug      bool
-	logFormat  string
-	configFile string
-	envPrefix  = "NOTARY_SERVER"
+	debug       bool
+	logFormat   string
+	configFile  string
+	envPrefix   = "NOTARY_SERVER"
+	doBootstrap bool
 )
 
 func init() {
@@ -32,6 +33,7 @@ func init() {
 	flag.StringVar(&configFile, "config", "", "Path to configuration file")
 	flag.BoolVar(&debug, "debug", false, "Enable the debugging server on localhost:8080")
 	flag.StringVar(&logFormat, "logf", "json", "Set the format of the logs. Only 'json' and 'logfmt' are supported at the moment.")
+	flag.BoolVar(&doBootstrap, "bootstrap", false, "Do any necessary setup of configured backend storage services")
 
 	// this needs to be in init so that _ALL_ logs are in the correct format
 	if logFormat == jsonLogFormat {
@@ -55,8 +57,12 @@ func main() {
 		logrus.Fatal(err.Error())
 	}
 
-	logrus.Info("Starting Server")
-	err = server.Run(ctx, serverConfig)
+	if doBootstrap {
+		err = bootstrap(ctx)
+	} else {
+		logrus.Info("Starting Server")
+		err = server.Run(ctx, serverConfig)
+	}
 
 	logrus.Error(err.Error())
 	return

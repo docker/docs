@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"sync"
+	"time"
 
 	"github.com/dancannon/gorethink"
 	"github.com/docker/notary/passphrase"
@@ -39,7 +40,7 @@ func (g RethinkPrivateKey) TableName() string {
 	return "private_keys"
 }
 
-// TableName sets a specific table name for our RethinkPrivateKey
+// DatabaseName sets a specific table name for our RethinkPrivateKey
 func (g RethinkPrivateKey) DatabaseName() string {
 	return "notarysigner"
 }
@@ -76,7 +77,7 @@ func (s *KeyRethinkDBStore) AddKey(keyInfo trustmanager.KeyInfo, privKey data.Pr
 
 	now := time.Now()
 	rethinkPrivKey := RethinkPrivateKey{
-		rethinkdb.Timing{
+		Timing: rethinkdb.Timing{
 			CreatedAt: now,
 			UpdatedAt: now,
 		},
@@ -112,7 +113,7 @@ func (s *KeyRethinkDBStore) GetKey(name string) (data.PrivateKey, string, error)
 	}
 
 	// Retrieve the RethinkDB private key from the database
-	var dbPrivateKey RethinkPrivateKey
+	dbPrivateKey := RethinkPrivateKey{}
 	res, err := gorethink.DB(dbPrivateKey.DatabaseName()).Table(dbPrivateKey.TableName()).Get(RethinkPrivateKey{KeyID: name}).Run(s.session)
 	if err != nil {
 		return nil, "", trustmanager.ErrKeyNotFound{}
