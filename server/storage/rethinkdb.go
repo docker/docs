@@ -1,12 +1,16 @@
 package storage
 
 import (
+	"crypto/sha256"
+	"encoding/hex"
+	"fmt"
 	"time"
 
 	"github.com/dancannon/gorethink"
 	"github.com/docker/notary/storage/rethinkdb"
 )
 
+// RDBTUFFile is a tuf file record
 type RDBTUFFile struct {
 	rethinkdb.Timing
 	Gun     string `gorethink:"gun"`
@@ -16,14 +20,12 @@ type RDBTUFFile struct {
 	Data    []byte `gorethink:"data"`
 }
 
-func (_ RDBTufFile) TableName() string {
+// TableName returns the table name for the record type
+func (r RDBTUFFile) TableName() string {
 	return "tuf_files"
 }
 
-func (_ RDBTufFile) DatabaseName() string {
-	return "notaryserver"
-}
-
+// RDBKey is the public key record
 type RDBKey struct {
 	rethinkdb.Timing
 	Gun    string `gorethink:"gun"`
@@ -32,25 +34,22 @@ type RDBKey struct {
 	Public []byte `gorethink:"public"`
 }
 
-func (_ RDBKey) TableName() string {
+// TableName returns the table name for the record type
+func (r RDBKey) TableName() string {
 	return "tuf_keys"
-}
-
-func (_ RDBKey) DatabaseName() string {
-	return "notaryserver"
 }
 
 // RethinkDB implements a MetaStore against the Rethink Database
 type RethinkDB struct {
 	dbName string
-	rdb    *gorethink.Session
+	sess   *gorethink.Session
 }
 
 // NewRethinkDBStorage initializes a RethinkDB object
-func NewRethinkDBStorage(dbName string, sess *gorethink.Session) MetaStore {
+func NewRethinkDBStorage(dbName string, sess *gorethink.Session) RethinkDB {
 	return RethinkDB{
 		dbName: dbName,
-		rdb:    sess,
+		sess:   sess,
 	}
 }
 
@@ -137,7 +136,7 @@ func (rdb RethinkDB) UpdateMany(gun string, updates []MetaUpdate) error {
 // the latest version of the given GUN and role.  If there is no data for
 // the given GUN and role, an error is returned.
 func (rdb RethinkDB) GetCurrent(gun, role string) (created *time.Time, data []byte, err error) {
-	var file RDBTUFFile
+	file := RDBTUFFile{}
 	res, err := gorethink.DB(rdb.dbName).Table(file.TableName()).Get(
 		RDBTUFFile{
 			Gun:  gun,
@@ -147,14 +146,14 @@ func (rdb RethinkDB) GetCurrent(gun, role string) (created *time.Time, data []by
 		return nil, nil, err
 	}
 	defer res.Close()
-	err = res.One(&key)
+	err = res.One(&file)
 	return &file.CreatedAt, file.Data, err
 }
 
 // GetChecksum returns the given TUF role file and creation date for the
 // GUN with the provided checksum. If the given (gun, role, checksum) are
 // not found, it returns storage.ErrNotFound
-func (rdb RethinkDB) GetChecksum(gun, tufRole, checksum string) (created *time.Time, data []byte, err error) {
+func (rdb RethinkDB) GetChecksum(gun, role, checksum string) (created *time.Time, data []byte, err error) {
 	var file RDBTUFFile
 	res, err := gorethink.DB(rdb.dbName).Table(file.TableName()).Get(
 		RDBTUFFile{
@@ -166,7 +165,7 @@ func (rdb RethinkDB) GetChecksum(gun, tufRole, checksum string) (created *time.T
 		return nil, nil, err
 	}
 	defer res.Close()
-	err = res.One(&key)
+	err = res.One(&file)
 	return &file.CreatedAt, file.Data, err
 }
 
@@ -178,5 +177,18 @@ func (rdb RethinkDB) Delete(gun string) error {
 	if err != nil {
 		return fmt.Errorf("unable to delete %s from database: %s", gun, err.Error())
 	}
+	return nil
+}
+
+// Bootstrap sets up the database and tables
+func (rdb RethinkDB) Bootstrap() error {
+	return rethinkdb.SetupDB(rdb.sess, rdb.dbName, []rethinkdb.Table{
+		tufFiles,
+		keys,
+	})
+}
+
+// CheckHealth is currently a noop
+func (rdb RethinkDB) CheckHealth() error {
 	return nil
 }

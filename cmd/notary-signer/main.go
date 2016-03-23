@@ -17,6 +17,7 @@ import (
 	"google.golang.org/grpc/credentials"
 
 	"github.com/docker/distribution/health"
+	"github.com/docker/notary"
 	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/signer"
@@ -74,17 +75,18 @@ func passphraseRetriever(keyName, alias string, createNew bool, attempts int) (p
 // mapping
 func setUpCryptoservices(configuration *viper.Viper, allowedBackends []string) (
 	signer.CryptoServiceIndex, error) {
-
-	storeConfig, err := utils.ParseStorage(configuration, allowedBackends)
-	if err != nil {
-		return nil, err
-	}
+	backend := configuration.GetString("storage.backend")
 
 	var keyStore trustmanager.KeyStore
-	if storeConfig.Backend == utils.MemoryBackend {
+	switch backend {
+	case notary.MemoryBackend:
 		keyStore = trustmanager.NewKeyMemoryStore(
 			passphrase.ConstantRetriever("memory-db-ignore"))
-	} else {
+	case notary.MySQLBackend, notary.SQLiteBackend:
+		storeConfig, err := utils.ParseSQLStorage(configuration)
+		if err != nil {
+			return nil, err
+		}
 		defaultAlias := configuration.GetString("storage.default_alias")
 		if defaultAlias == "" {
 			// backwards compatibility - support this environment variable
@@ -207,7 +209,7 @@ func main() {
 
 	// setup the cryptoservices
 	cryptoServices, err := setUpCryptoservices(mainViper,
-		[]string{utils.MySQLBackend, utils.MemoryBackend})
+		[]string{notary.MySQLBackend, notary.MemoryBackend})
 	if err != nil {
 		logrus.Fatal(err.Error())
 	}
