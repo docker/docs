@@ -31,6 +31,18 @@ func SampleTUF(version int) TUFFile {
 	}
 }
 
+func SampleCustomTUF(role, gun string, data []byte, version int) TUFFile {
+	checksum := sha256.Sum256(data)
+	hexChecksum := hex.EncodeToString(checksum[:])
+	return TUFFile{
+		Gun:     gun,
+		Role:    role,
+		Version: version,
+		Sha256:  hexChecksum,
+		Data:    data,
+	}
+}
+
 func SampleUpdate(version int) MetaUpdate {
 	return MetaUpdate{
 		Role:    "root",
