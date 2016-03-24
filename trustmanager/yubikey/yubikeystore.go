@@ -812,15 +812,7 @@ func SetupHSMEnv(libraryPath string, libLoader pkcs11LibLoader) (
 
 	if err := p.Initialize(); err != nil {
 		defer finalizeAndDestroy(p)
-		// Sadly, if ykcs11's C_Initialize fails at all, it is likely with this
-		// error code; but because it is only discovering the slots and not interacting
-		// with individual tokens, assume that this is not a Yubikey failure, simply
-		// no slots are present.
-		message := fmt.Sprintf("found library %s, but initialize error %s", libraryPath, err.Error())
-		if err, ok := err.(pkcs11.Error); ok && err == pkcs11.CKR_FUNCTION_FAILED {
-			return nil, 0, errHSMNotPresent{err: message}
-		}
-		return nil, 0, errors.New(message)
+		return nil, 0, fmt.Errorf("found library %s, but initialize error %s", libraryPath, err.Error())
 	}
 
 	slots, err := p.GetSlotList(true)
