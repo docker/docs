@@ -330,7 +330,7 @@ func TestGetStoreDBStore(t *testing.T) {
 
 	store, err := getStore(configure(config), fakeRegister)
 	require.NoError(t, err)
-	_, ok := store.(storage.ConsistentMetaStorage)
+	_, ok := store.(storage.TufMetaStorage)
 	require.True(t, ok)
 
 	// health function registered
