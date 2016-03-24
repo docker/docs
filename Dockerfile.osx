@@ -26,19 +26,26 @@ RUN curl -fsSL -o /vbox.dmg http://download.virtualbox.org/virtualbox/$VBOX_VERS
 
 # Download the Docker parts
 
-ENV INSTALLER_VERSION 1.10.3
-ENV DOCKER_VERSION 1.10.3
-RUN curl -fsSL -o /docker https://get.docker.com/builds/Darwin/x86_64/docker-$DOCKER_VERSION
+ENV INSTALLER_VERSION 1.11.0-rc1
+ENV DOCKER_VERSION 1.11.0-rc1
+
+# Why '--strip-components 3'?  The client binary is in usr/local/bin/docker in
+# the tar archive.  If we extract directly, it will create a usr/local/bin
+# subdirectory (not what we want).  So we use --strip-components to remove the
+# `usr/local/bin` part and drop the bin in the current directory.
+RUN curl -fsSL -o dockerbins.tgz "https://test.docker.com/builds/Darwin/x86_64/docker-1.11.0-rc1.tgz" && \
+    tar xvf dockerbins.tgz usr/local/bin/docker --strip-components 3 && \
+    rm dockerbins.tgz
 
 RUN chmod +x /docker
 
 
-ENV DOCKER_MACHINE_VERSION 0.6.0
+ENV DOCKER_MACHINE_VERSION 0.7.0-rc1
 RUN curl -fsSL -o /docker-machine https://github.com/docker/machine/releases/download/v$DOCKER_MACHINE_VERSION/docker-machine-Darwin-x86_64
 
 RUN chmod +x /docker-machine
 
-ENV DOCKER_COMPOSE_VERSION 1.6.2
+ENV DOCKER_COMPOSE_VERSION 1.7.0-rc1
 RUN curl -fsSL -o /docker-compose https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-Darwin-x86_64
 RUN chmod +x /docker-compose
 
