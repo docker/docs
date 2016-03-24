@@ -37,7 +37,7 @@ func (err ErrRootRotationFail) Error() string {
 	return fmt.Sprintf("could not rotate trust to a new trusted root: %s", err.Reason)
 }
 
-func certIDs(certs []*x509.Certificate) string {
+func prettyFormatCertIDs(certs []*x509.Certificate) string {
 	ids := make([]string, 0, len(certs))
 	for _, cert := range certs {
 		id, err := trustmanager.FingerprintCert(cert)
@@ -106,7 +106,7 @@ func ValidateRoot(certStore trustmanager.X509Store, root *data.Signed, gun strin
 	// use them first to validate that this new root is valid.
 	if len(trustedCerts) != 0 {
 		logrus.Debugf("found %d valid root certificates for %s: %s", len(trustedCerts), gun,
-			certIDs(trustedCerts))
+			prettyFormatCertIDs(trustedCerts))
 		err = signed.VerifyRoot(root, 0, trustmanager.CertsToKeys(trustedCerts))
 		if err != nil {
 			logrus.Debugf("failed to verify TUF data for: %s, %v", gun, err)
@@ -162,7 +162,7 @@ func ValidateRoot(certStore trustmanager.X509Store, root *data.Signed, gun strin
 }
 
 // validRootLeafCerts returns a list of non-expired, non-sha1 certificates
-// found in root whoose Common-Names match the provided GUN. Note that this
+// found in root whose Common-Names match the provided GUN. Note that this
 // "validity" alone does not imply any measure of trust.
 func validRootLeafCerts(root *data.SignedRoot, gun string) ([]*x509.Certificate, error) {
 	// Get a list of all of the leaf certificates present in root
@@ -201,7 +201,7 @@ func validRootLeafCerts(root *data.SignedRoot, gun string) ([]*x509.Certificate,
 	}
 
 	logrus.Debugf("found %d valid leaf certificates for %s: %s", len(validLeafCerts), gun,
-		certIDs(validLeafCerts))
+		prettyFormatCertIDs(validLeafCerts))
 	return validLeafCerts, nil
 }
 
@@ -264,17 +264,11 @@ func parseAllCerts(signedRoot *data.SignedRoot) (map[string]*x509.Certificate, m
 	return leafCerts, intCerts
 }
 
-// certsToRemove returns all the certifificates from oldCerts that aren't present
-// in newCerts
+// certsToRemove returns all the certificates from oldCerts that aren't present
+// in newCerts.  Note that newCerts should never be empty, else this function will error.
+// We expect newCerts to come from validateRootLeafCerts, which does not return empty sets.
 func certsToRemove(oldCerts, newCerts []*x509.Certificate) (map[string]*x509.Certificate, error) {
 	certsToRemove := make(map[string]*x509.Certificate)
-
-	// We don't want to "rotate" certificates to an empty set, nor keep old certificates if the
-	// new root does not trust them.  newCerts should come from validRootLeafCerts, which refuses
-	// to return an empty set, so this should never happen - fail just to be sure.
-	if len(newCerts) == 0 {
-		return nil, &ErrRootRotationFail{Reason: "internal error, got no certificates to rotate to"}
-	}
 
 	// Populate a map with all the IDs from newCert
 	var newCertMap = make(map[string]struct{})
@@ -285,6 +279,14 @@ func certsToRemove(oldCerts, newCerts []*x509.Certificate) (map[string]*x509.Cer
 			continue
 		}
 		newCertMap[certID] = struct{}{}
+	}
+
+	// We don't want to "rotate" certificates to an empty set, nor keep old certificates if the
+	// new root does not trust them.  newCerts should come from validRootLeafCerts, which refuses
+	// to return an empty set, and they should all be fingerprintable, so this should never happen
+	// - fail just to be sure.
+	if len(newCertMap) == 0 {
+		return nil, &ErrRootRotationFail{Reason: "internal error, got no certificates to rotate to"}
 	}
 
 	// Iterate over all the old certificates and check to see if we should remove them
