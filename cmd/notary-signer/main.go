@@ -16,6 +16,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 
+	"github.com/dancannon/gorethink"
 	"github.com/docker/distribution/health"
 	"github.com/docker/notary"
 	"github.com/docker/notary/cryptoservice"
@@ -23,6 +24,7 @@ import (
 	"github.com/docker/notary/signer"
 	"github.com/docker/notary/signer/api"
 	"github.com/docker/notary/signer/keydbstore"
+	"github.com/docker/notary/storage/rethinkdb"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/utils"
@@ -42,10 +44,11 @@ const (
 )
 
 var (
-	debug      bool
-	logFormat  string
-	configFile string
-	mainViper  = viper.New()
+	debug       bool
+	logFormat   string
+	configFile  string
+	mainViper   = viper.New()
+	doBootstrap bool
 )
 
 func init() {
@@ -54,6 +57,7 @@ func init() {
 	flag.StringVar(&configFile, "config", "", "Path to configuration file")
 	flag.BoolVar(&debug, "debug", false, "show the version and exit")
 	flag.StringVar(&logFormat, "logf", "json", "Set the format of the logs. Only 'json' and 'logfmt' are supported at the moment.")
+	flag.BoolVar(&doBootstrap, "bootstrap", false, "Do any necessary setup of configured backend storage services")
 
 	// this needs to be in init so that _ALL_ logs are in the correct format
 	if logFormat == jsonLogFormat {
@@ -100,9 +104,9 @@ func setUpCryptoservices(configuration *viper.Viper, allowedBackends []string) (
 				return nil, fmt.Errorf("must provide a default alias for the key DB")
 			}
 			logrus.Debug("Default Alias: ", defaultAlias)
-			s, err := keydbstore.NewKeyRethinkDBStore(passphraseRetriever, defaultAlias, sess)
+			s := keydbstore.NewRethinkDBKeyStore(passphraseRetriever, defaultAlias, sess)
 			keyStore = s
-			hRegister("DB operational", s.CheckHealth, time.Second*60)
+			health.RegisterPeriodicFunc("DB operational", s.CheckHealth, time.Minute)
 		}
 
 	case notary.MySQLBackend, notary.SQLiteBackend:
@@ -128,8 +132,16 @@ func setUpCryptoservices(configuration *viper.Viper, allowedBackends []string) (
 		}
 
 		health.RegisterPeriodicFunc(
-			"DB operational", dbStore.HealthCheck, time.Second*60)
+			"DB operational", dbStore.HealthCheck, time.Minute)
 		keyStore = dbStore
+	}
+
+	if doBootstrap {
+		err := bootstrap(keyStore)
+		if err != nil {
+			logrus.Fatal(err.Error())
+		}
+		os.Exit(0)
 	}
 
 	cryptoService := cryptoservice.NewCryptoService(keyStore)
