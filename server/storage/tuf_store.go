@@ -10,14 +10,30 @@ import (
 	"github.com/docker/notary/tuf/data"
 )
 
-// ConsistentMetaStorage wraps a MetaStore in order to walk the TUF tree for GetCurrent in a consistent manner
-type ConsistentMetaStorage struct {
+// TufMetaStorage wraps a MetaStore in order to walk the TUF tree for GetCurrent in a consistent manner,
+// by always starting from a current timestamp and then looking up other data by hash
+type TufMetaStorage struct {
 	MetaStore
+	// cached metadata by checksum
+	cachedMeta map[string]*storedMeta
+}
+
+// NewTufMetaStorage instantiates a TufMetaStorage instance
+func NewTufMetaStorage(m MetaStore) *TufMetaStorage {
+	return &TufMetaStorage{
+		MetaStore:  m,
+		cachedMeta: make(map[string]*storedMeta),
+	}
+}
+
+type storedMeta struct {
+	data         []byte
+	createupdate *time.Time
 }
 
 // GetCurrent gets a specific TUF record, by walking from the current Timestamp to other metadata by checksum
-func (cms ConsistentMetaStorage) GetCurrent(gun, tufRole string) (*time.Time, []byte, error) {
-	timestampTime, timestampJSON, err := cms.MetaStore.GetCurrent(gun, data.CanonicalTimestampRole)
+func (tms TufMetaStorage) GetCurrent(gun, tufRole string) (*time.Time, []byte, error) {
+	timestampTime, timestampJSON, err := tms.MetaStore.GetCurrent(gun, data.CanonicalTimestampRole)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -41,10 +57,20 @@ func (cms ConsistentMetaStorage) GetCurrent(gun, tufRole string) (*time.Time, []
 	}
 	snapshotSha256Hex := hex.EncodeToString(snapshotSha256Bytes[:])
 
-	// Get the snapshot by checksum
-	snapshotTime, snapshotJSON, err := cms.GetChecksum(gun, data.CanonicalSnapshotRole, snapshotSha256Hex)
-	if err != nil {
-		return nil, nil, err
+	// Check the cache if we have our snapshot data
+	var snapshotTime *time.Time
+	var snapshotJSON []byte
+	if cachedSnapshotData, ok := tms.cachedMeta[snapshotSha256Hex]; ok {
+		snapshotTime = cachedSnapshotData.createupdate
+		snapshotJSON = cachedSnapshotData.data
+	} else {
+		// Get the snapshot from the underlying store by checksum if it isn't cached yet
+		snapshotTime, snapshotJSON, err = tms.GetChecksum(gun, data.CanonicalSnapshotRole, snapshotSha256Hex)
+		if err != nil {
+			return nil, nil, err
+		}
+		// cache for subsequent lookups
+		tms.cachedMeta[snapshotSha256Hex] = &storedMeta{data: snapshotJSON, createupdate: snapshotTime}
 	}
 	// If we wanted data for the snapshot role, we're done here
 	if tufRole == data.CanonicalSnapshotRole {
@@ -65,5 +91,16 @@ func (cms ConsistentMetaStorage) GetCurrent(gun, tufRole string) (*time.Time, []
 		return nil, nil, fmt.Errorf("could not retrieve latest %s sha256", tufRole)
 	}
 	roleSha256Hex := hex.EncodeToString(roleSha256Bytes[:])
-	return cms.MetaStore.GetChecksum(gun, tufRole, roleSha256Hex)
+	// check if we can retrieve this data from cache
+	if cachedRoleData, ok := tms.cachedMeta[roleSha256Hex]; ok {
+		return cachedRoleData.createupdate, cachedRoleData.data, nil
+	}
+
+	roleTime, roleJSON, err := tms.MetaStore.GetChecksum(gun, tufRole, roleSha256Hex)
+	if err != nil {
+		return nil, nil, err
+	}
+	// cache for subsequent lookups
+	tms.cachedMeta[roleSha256Hex] = &storedMeta{data: roleJSON, createupdate: roleTime}
+	return roleTime, roleJSON, nil
 }
