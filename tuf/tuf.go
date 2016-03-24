@@ -898,7 +898,6 @@ func (tr *Repo) getOldRootKeys(currentRootRole data.BaseRole) map[string]data.Pu
 		if err != nil {
 			continue
 		}
-
 		for _, keyID := range rootRole.KeyIDs {
 			if _, ok := currentRootRole.Keys[keyID]; ok {
 				continue
