@@ -20,18 +20,19 @@ import (
 	"github.com/docker/notary/tuf/utils"
 )
 
-// Sign takes a data.Signed and keys, calculates and adds at least
-// minSignature signatures using primaryKeys the data.Signed.  It will also
-// clean up any signatures produced by a key not in the primaryKeys or
-// validSigningKeys list.
-// (validSigningKeys can be either a superset of or a completely disjoint set from
-// primaryKeys)
-// N.B. All public keys for a role should be passed so that this function
-//      can correctly clean up signatures that are no longer valid.
-func Sign(service CryptoService, s *data.Signed, primaryKeys []data.PublicKey,
-	minSignatures int, validSigningKeys []data.PublicKey) error {
+// Sign takes a data.Signed and a cryptoservice containing private keys,
+// calculates and adds at least minSignature signatures using signingKeys the
+// data.Signed.  It will also clean up any signatures that are not in produced
+// by either a signingKey or an otherWhitelistedKey.
+// Note that in most cases, otherWhitelistedKeys should probably be null. They
+// are for keys you don't want to sign with, but you also don't want to remove
+// existing signatures by those keys.  For instance, if you want to call Sign
+// multiple times with different sets of signing keys without undoing removing
+// signatures produced by the previous call to Sign.
+func Sign(service CryptoService, s *data.Signed, signingKeys []data.PublicKey,
+	minSignatures int, otherWhitelistedKeys []data.PublicKey) error {
 
-	logrus.Debugf("sign called with %d/%d required keys", minSignatures, len(primaryKeys))
+	logrus.Debugf("sign called with %d/%d required keys", minSignatures, len(signingKeys))
 	signatures := make([]data.Signature, 0, len(s.Signatures)+1)
 	signingKeyIDs := make(map[string]struct{})
 	tufIDs := make(map[string]data.PublicKey)
@@ -40,7 +41,7 @@ func Sign(service CryptoService, s *data.Signed, primaryKeys []data.PublicKey,
 
 	// Get all the private key objects related to the public keys
 	missingKeyIDs := []string{}
-	for _, key := range primaryKeys {
+	for _, key := range signingKeys {
 		canonicalID, err := utils.CanonicalKeyID(key)
 		tufIDs[key.ID()] = key
 		if err != nil {
@@ -57,8 +58,8 @@ func Sign(service CryptoService, s *data.Signed, primaryKeys []data.PublicKey,
 		privKeys[key.ID()] = k
 	}
 
-	// include the list of validSigningKeys
-	for _, key := range validSigningKeys {
+	// include the list of otherWhitelistedKeys
+	for _, key := range otherWhitelistedKeys {
 		if _, ok := tufIDs[key.ID()]; !ok {
 			tufIDs[key.ID()] = key
 		}

@@ -64,6 +64,11 @@ type Repo struct {
 	Timestamp     *data.SignedTimestamp
 	cryptoService signed.CryptoService
 
+	// Because Repo is a mutable structure, these keep track of what the root
+	// role was when a root is set on the repo (as opposed to what it might be
+	// after things like AddBaseKeys and RemoveBaseKeys have been called on it).
+	// If we know what the original was, we'll if and how to handle root
+	// rotations.
 	originalRootRole data.BaseRole
 	rootRoleDirty    bool
 }
@@ -552,6 +557,8 @@ func (tr *Repo) InitTimestamp() error {
 func (tr *Repo) SetRoot(s *data.SignedRoot) error {
 	tr.Root = s
 	var err error
+	// originalRootRole is the root role prior to any mutations that might
+	// occur on tr.Root.
 	tr.originalRootRole, err = tr.Root.BuildBaseRole(data.CanonicalRootRole)
 	return err
 }

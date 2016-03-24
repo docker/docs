@@ -160,6 +160,24 @@ func NewTarget(targetName string, targetPath string) (*Target, error) {
 	return &Target{Name: targetName, Hashes: meta.Hashes, Length: meta.Length}, nil
 }
 
+func rootCertKey(gun string, privKey data.PrivateKey) (*x509.Certificate, data.PublicKey, error) {
+	// Hard-coded policy: the generated certificate expires in 10 years.
+	startTime := time.Now()
+	cert, err := cryptoservice.GenerateCertificate(
+		privKey, gun, startTime, startTime.Add(notary.Year*10))
+	if err != nil {
+		return nil, nil, err
+	}
+
+	x509PublicKey := trustmanager.CertToKey(cert)
+	if x509PublicKey == nil {
+		return nil, nil, fmt.Errorf(
+			"cannot use regenerated certificate: format %s", cert.PublicKeyAlgorithm)
+	}
+
+	return cert, x509PublicKey, nil
+}
+
 // Initialize creates a new repository by using rootKey as the root Key for the
 // TUF repository. The server must be reachable (and is asked to generate a
 // timestamp key and possibly other serverManagedRoles), but the created repository
@@ -198,30 +216,11 @@ func (r *NotaryRepository) Initialize(rootKeyID string, serverManagedRoles ...st
 		}
 	}
 
-	// Hard-coded policy: the generated certificate expires in 10 years.
-	startTime := time.Now()
-	rootCert, err := cryptoservice.GenerateCertificate(
-		privKey, r.gun, startTime, startTime.AddDate(10, 0, 0))
-
+	rootCert, rootKey, err := rootCertKey(r.gun, privKey)
 	if err != nil {
 		return err
 	}
 	r.CertStore.AddCert(rootCert)
-
-	// The root key gets stored in the TUF metadata X509 encoded, linking
-	// the tuf root.json to our X509 PKI.
-	// If the key is RSA, we store it as type RSAx509, if it is ECDSA we store it
-	// as ECDSAx509 to allow the gotuf verifiers to correctly decode the
-	// key on verification of signatures.
-	var rootKey data.PublicKey
-	switch privKey.Algorithm() {
-	case data.RSAKey:
-		rootKey = data.NewRSAx509PublicKey(trustmanager.CertToPEM(rootCert))
-	case data.ECDSAKey:
-		rootKey = data.NewECDSAx509PublicKey(trustmanager.CertToPEM(rootCert))
-	default:
-		return fmt.Errorf("invalid format for root key: %s", privKey.Algorithm())
-	}
 
 	var (
 		rootRole = data.NewBaseRole(
@@ -1010,13 +1009,13 @@ func (r *NotaryRepository) ListRootCerts() ([]*x509.Certificate, error) {
 
 // RotateRootCert generates a new certificate to replace oldCert and adds
 // a changelist entry to update the root role with this certificate replacement
-// shen r.Publish() is called.
+// when r.Publish() is called.
 func (r *NotaryRepository) RotateRootCert(oldCert *x509.Certificate) error {
 	oldCertX509PublicKey := trustmanager.CertToKey(oldCert)
 	if oldCertX509PublicKey == nil {
 		return fmt.Errorf("invalid format for root key: %s", oldCert.PublicKeyAlgorithm)
 	}
-	rootKeyID, err := trustmanager.X509PublicKeyID(oldCertX509PublicKey)
+	rootKeyID, err := utils.CanonicalKeyID(oldCertX509PublicKey)
 	if err != nil {
 		return err
 	}
@@ -1026,15 +1025,9 @@ func (r *NotaryRepository) RotateRootCert(oldCert *x509.Certificate) error {
 		return err
 	}
 
-	// Hard-coded policy: the generated certificate expires in 10 years.
-	startTime := time.Now()
-	newCert, err := cryptoservice.GenerateCertificate(privKey, r.gun, startTime, startTime.AddDate(10, 0, 0))
+	_, newCertX509PublicKey, err := rootCertKey(r.gun, privKey)
 	if err != nil {
 		return err
-	}
-	newCertX509PublicKey := trustmanager.CertToKey(newCert)
-	if newCertX509PublicKey == nil {
-		return fmt.Errorf("cannot use regenerated certificate?! format %s", newCert.PublicKeyAlgorithm)
 	}
 
 	cl, err := changelist.NewFileChangelist(filepath.Join(r.tufRepoPath, "changelist"))
