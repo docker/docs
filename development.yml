@@ -31,4 +31,4 @@ client:
   dockerfile: Dockerfile
   links:
     - server:notary-server
-  command: .build/testclient.sh
+  command: buildscripts/testclient.sh

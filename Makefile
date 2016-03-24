@@ -126,7 +126,7 @@ test-full: vet lint
 	go test -tags "${NOTARY_BUILDTAGS}" $(TESTOPTS) -v $(PKGS)
 
 integration:
-	.build/integrationtest.sh
+	buildscripts/integrationtest.sh
 
 protos:
 	@protoc --go_out=plugins=grpc:. proto/*.proto
@@ -195,7 +195,7 @@ shell: notary-dockerfile
 
 cross: notary-dockerfile
 	@rm -rf $(CURDIR)/cross
-	docker run --rm -v $(CURDIR)/cross:$(NOTARYDIR)/cross -e NOTARY_BUILDTAGS=$(NOTARY_BUILDTAGS) notary .build/cross.sh $(GOOSES)
+	docker run --rm -v $(CURDIR)/cross:$(NOTARYDIR)/cross -e NOTARY_BUILDTAGS=$(NOTARY_BUILDTAGS) notary buildscripts/cross.sh $(GOOSES)
 
 
 clean:
