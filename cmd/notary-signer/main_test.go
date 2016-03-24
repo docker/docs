@@ -12,7 +12,6 @@ import (
 	"github.com/docker/notary/signer"
 	"github.com/docker/notary/signer/keydbstore"
 	"github.com/docker/notary/tuf/data"
-	"github.com/docker/notary/utils"
 	"github.com/jinzhu/gorm"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/spf13/viper"
@@ -106,8 +105,8 @@ func TestSetupCryptoServicesDBStoreNoDefaultAlias(t *testing.T) {
 	_, err = setUpCryptoservices(
 		configure(fmt.Sprintf(
 			`{"storage": {"backend": "%s", "db_url": "%s"}}`,
-			notary.SqliteBackend, tmpFile.Name())),
-		[]string{notary.SqliteBackend})
+			notary.SQLiteBackend, tmpFile.Name())),
+		[]string{notary.SQLiteBackend})
 	require.Error(t, err)
 	require.Contains(t, err.Error(), "must provide a default alias for the key DB")
 }
@@ -137,8 +136,8 @@ func TestSetupCryptoServicesDBStoreSuccess(t *testing.T) {
 		configure(fmt.Sprintf(
 			`{"storage": {"backend": "%s", "db_url": "%s"},
 			"default_alias": "timestamp"}`,
-			notary.SqliteBackend, tmpFile.Name())),
-		[]string{notary.SqliteBackend})
+			notary.SQLiteBackend, tmpFile.Name())),
+		[]string{notary.SQLiteBackend})
 	require.NoError(t, err)
 	require.Len(t, cryptoServices, 2)
 
@@ -167,9 +166,9 @@ func TestSetupCryptoServicesMemoryStore(t *testing.T) {
 	config := configure(fmt.Sprintf(`{"storage": {"backend": "%s"}}`,
 		notary.MemoryBackend))
 	cryptoServices, err := setUpCryptoservices(config,
-		[]string{notary.SqliteBackend, notary.MemoryBackend})
+		[]string{notary.SQLiteBackend, notary.MemoryBackend})
 	require.NoError(t, err)
-	require.Len(t, cryptoServices, 2)
+	assert.Len(t, cryptoServices, 2)
 
 	edService, ok := cryptoServices[data.ED25519Key]
 	require.True(t, ok)

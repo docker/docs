@@ -14,17 +14,17 @@ import (
 	jose "github.com/dvsekhvalnov/jose2go"
 )
 
-// KeyRethinkDBStore persists and manages private keys on a RethinkDB database
-type KeyRethinkDBStore struct {
+// RethinkDBKeyStore persists and manages private keys on a RethinkDB database
+type RethinkDBKeyStore struct {
 	sync.Mutex
-	session          *gorethink.Session
+	sess             *gorethink.Session
 	defaultPassAlias string
 	retriever        passphrase.Retriever
 	cachedKeys       map[string]data.PrivateKey
 }
 
-// RethinkPrivateKey represents a PrivateKey in the rethink database
-type RethinkPrivateKey struct {
+// RDBPrivateKey represents a PrivateKey in the rethink database
+type RDBPrivateKey struct {
 	rethinkdb.Timing
 	KeyID           string `gorethink:"key_id"`
 	EncryptionAlg   string `gorethink:"encryption_alg"`
@@ -35,22 +35,17 @@ type RethinkPrivateKey struct {
 	Private         string `gorethink:"private"`
 }
 
-// TableName sets a specific table name for our RethinkPrivateKey
-func (g RethinkPrivateKey) TableName() string {
+// TableName sets a specific table name for our RDBPrivateKey
+func (g RDBPrivateKey) TableName() string {
 	return "private_keys"
 }
 
-// DatabaseName sets a specific table name for our RethinkPrivateKey
-func (g RethinkPrivateKey) DatabaseName() string {
-	return "notarysigner"
-}
-
-// NewKeyRethinkDBStore returns a new KeyRethinkDBStore backed by a RethinkDB database
-func NewKeyRethinkDBStore(passphraseRetriever passphrase.Retriever, defaultPassAlias string, rethinkSession *gorethink.Session) *KeyRethinkDBStore {
+// NewRethinkDBKeyStore returns a new RethinkDBKeyStore backed by a RethinkDB database
+func NewRethinkDBKeyStore(passphraseRetriever passphrase.Retriever, defaultPassAlias string, rethinkSession *gorethink.Session) *RethinkDBKeyStore {
 	cachedKeys := make(map[string]data.PrivateKey)
 
-	return &KeyRethinkDBStore{
-		session:          rethinkSession,
+	return &RethinkDBKeyStore{
+		sess:             rethinkSession,
 		defaultPassAlias: defaultPassAlias,
 		retriever:        passphraseRetriever,
 		cachedKeys:       cachedKeys,
@@ -58,15 +53,19 @@ func NewKeyRethinkDBStore(passphraseRetriever passphrase.Retriever, defaultPassA
 }
 
 // Name returns a user friendly name for the storage location
-func (s *KeyRethinkDBStore) Name() string {
+func (rdb *RethinkDBKeyStore) Name() string {
 	return "RethinkDB"
+}
+
+func (rdb RethinkDBKeyStore) dbName() string {
+	return "notarysigner"
 }
 
 // AddKey stores the contents of a private key. Both role and gun are ignored,
 // we always use Key IDs as name, and don't support aliases
-func (s *KeyRethinkDBStore) AddKey(keyInfo trustmanager.KeyInfo, privKey data.PrivateKey) error {
+func (rdb *RethinkDBKeyStore) AddKey(keyInfo trustmanager.KeyInfo, privKey data.PrivateKey) error {
 
-	passphrase, _, err := s.retriever(privKey.ID(), s.defaultPassAlias, false, 1)
+	passphrase, _, err := rdb.retriever(privKey.ID(), rdb.defaultPassAlias, false, 1)
 	if err != nil {
 		return err
 	}
@@ -77,7 +76,7 @@ func (s *KeyRethinkDBStore) AddKey(keyInfo trustmanager.KeyInfo, privKey data.Pr
 	}
 
 	now := time.Now()
-	rethinkPrivKey := RethinkPrivateKey{
+	rethinkPrivKey := RDBPrivateKey{
 		Timing: rethinkdb.Timing{
 			CreatedAt: now,
 			UpdatedAt: now,
@@ -85,37 +84,37 @@ func (s *KeyRethinkDBStore) AddKey(keyInfo trustmanager.KeyInfo, privKey data.Pr
 		KeyID:           privKey.ID(),
 		EncryptionAlg:   EncryptionAlg,
 		KeywrapAlg:      KeywrapAlg,
-		PassphraseAlias: s.defaultPassAlias,
+		PassphraseAlias: rdb.defaultPassAlias,
 		Algorithm:       privKey.Algorithm(),
 		Public:          string(privKey.Public()),
 		Private:         encryptedKey}
 
 	// Add encrypted private key to the database
-	_, err = gorethink.DB(rethinkPrivKey.DatabaseName()).Table(rethinkPrivKey.TableName()).Insert(rethinkPrivKey).RunWrite(s.session)
+	_, err = gorethink.DB(rdb.dbName()).Table(rethinkPrivKey.TableName()).Insert(rethinkPrivKey).RunWrite(rdb.sess)
 	if err != nil {
 		return fmt.Errorf("failed to add private key to database: %s", privKey.ID())
 	}
 
 	// Add the private key to our cache
-	s.Lock()
-	defer s.Unlock()
-	s.cachedKeys[privKey.ID()] = privKey
+	rdb.Lock()
+	defer rdb.Unlock()
+	rdb.cachedKeys[privKey.ID()] = privKey
 
 	return nil
 }
 
 // GetKey returns the PrivateKey given a KeyID
-func (s *KeyRethinkDBStore) GetKey(name string) (data.PrivateKey, string, error) {
-	s.Lock()
-	defer s.Unlock()
-	cachedKeyEntry, ok := s.cachedKeys[name]
+func (rdb *RethinkDBKeyStore) GetKey(name string) (data.PrivateKey, string, error) {
+	rdb.Lock()
+	defer rdb.Unlock()
+	cachedKeyEntry, ok := rdb.cachedKeys[name]
 	if ok {
 		return cachedKeyEntry, "", nil
 	}
 
 	// Retrieve the RethinkDB private key from the database
-	dbPrivateKey := RethinkPrivateKey{}
-	res, err := gorethink.DB(dbPrivateKey.DatabaseName()).Table(dbPrivateKey.TableName()).Get(RethinkPrivateKey{KeyID: name}).Run(s.session)
+	dbPrivateKey := RDBPrivateKey{}
+	res, err := gorethink.DB(rdb.dbName()).Table(dbPrivateKey.TableName()).Get(RDBPrivateKey{KeyID: name}).Run(rdb.sess)
 	if err != nil {
 		return nil, "", trustmanager.ErrKeyNotFound{}
 	}
@@ -127,7 +126,7 @@ func (s *KeyRethinkDBStore) GetKey(name string) (data.PrivateKey, string, error)
 	}
 
 	// Get the passphrase to use for this key
-	passphrase, _, err := s.retriever(dbPrivateKey.KeyID, dbPrivateKey.PassphraseAlias, false, 1)
+	passphrase, _, err := rdb.retriever(dbPrivateKey.KeyID, dbPrivateKey.PassphraseAlias, false, 1)
 	if err != nil {
 		return nil, "", err
 	}
@@ -146,31 +145,31 @@ func (s *KeyRethinkDBStore) GetKey(name string) (data.PrivateKey, string, error)
 	}
 
 	// Add the key to cache
-	s.cachedKeys[privKey.ID()] = privKey
+	rdb.cachedKeys[privKey.ID()] = privKey
 
 	return privKey, "", nil
 }
 
 // GetKeyInfo always returns empty and an error. This method is here to satisfy the KeyStore interface
-func (s *KeyRethinkDBStore) GetKeyInfo(name string) (trustmanager.KeyInfo, error) {
-	return trustmanager.KeyInfo{}, fmt.Errorf("GetKeyInfo currently not supported for KeyRethinkDBStore, as it does not track roles or GUNs")
+func (rdb RethinkDBKeyStore) GetKeyInfo(name string) (trustmanager.KeyInfo, error) {
+	return trustmanager.KeyInfo{}, fmt.Errorf("GetKeyInfo currently not supported for RethinkDBKeyStore, as it does not track roles or GUNs")
 }
 
 // ListKeys always returns nil. This method is here to satisfy the KeyStore interface
-func (s *KeyRethinkDBStore) ListKeys() map[string]trustmanager.KeyInfo {
+func (rdb RethinkDBKeyStore) ListKeys() map[string]trustmanager.KeyInfo {
 	return nil
 }
 
 // RemoveKey removes the key from the table
-func (s *KeyRethinkDBStore) RemoveKey(keyID string) error {
-	s.Lock()
-	defer s.Unlock()
+func (rdb RethinkDBKeyStore) RemoveKey(keyID string) error {
+	rdb.Lock()
+	defer rdb.Unlock()
 
-	delete(s.cachedKeys, keyID)
+	delete(rdb.cachedKeys, keyID)
 
 	// Delete the key from the database
-	dbPrivateKey := RethinkPrivateKey{KeyID: keyID}
-	_, err := gorethink.DB(dbPrivateKey.DatabaseName()).Table(dbPrivateKey.TableName()).Get(dbPrivateKey).Delete().RunWrite(s.session)
+	dbPrivateKey := RDBPrivateKey{KeyID: keyID}
+	_, err := gorethink.DB(rdb.dbName()).Table(dbPrivateKey.TableName()).Get(dbPrivateKey).Delete().RunWrite(rdb.sess)
 	if err != nil {
 		return fmt.Errorf("unable to delete private key from database: %s", err.Error())
 	}
@@ -179,10 +178,10 @@ func (s *KeyRethinkDBStore) RemoveKey(keyID string) error {
 }
 
 // RotateKeyPassphrase rotates the key-encryption-key
-func (s *KeyRethinkDBStore) RotateKeyPassphrase(name, newPassphraseAlias string) error {
+func (rdb RethinkDBKeyStore) RotateKeyPassphrase(name, newPassphraseAlias string) error {
 	// Retrieve the RethinkDB private key from the database
-	dbPrivateKey := RethinkPrivateKey{KeyID: name}
-	res, err := gorethink.DB(dbPrivateKey.DatabaseName()).Table(dbPrivateKey.TableName()).Get(dbPrivateKey).Run(s.session)
+	dbPrivateKey := RDBPrivateKey{KeyID: name}
+	res, err := gorethink.DB(rdb.dbName()).Table(dbPrivateKey.TableName()).Get(dbPrivateKey).Run(rdb.sess)
 	if err != nil {
 		return trustmanager.ErrKeyNotFound{}
 	}
@@ -194,7 +193,7 @@ func (s *KeyRethinkDBStore) RotateKeyPassphrase(name, newPassphraseAlias string)
 	}
 
 	// Get the current passphrase to use for this key
-	passphrase, _, err := s.retriever(dbPrivateKey.KeyID, dbPrivateKey.PassphraseAlias, false, 1)
+	passphrase, _, err := rdb.retriever(dbPrivateKey.KeyID, dbPrivateKey.PassphraseAlias, false, 1)
 	if err != nil {
 		return err
 	}
@@ -206,7 +205,7 @@ func (s *KeyRethinkDBStore) RotateKeyPassphrase(name, newPassphraseAlias string)
 	}
 
 	// Get the new passphrase to use for this key
-	newPassphrase, _, err := s.retriever(dbPrivateKey.KeyID, newPassphraseAlias, false, 1)
+	newPassphrase, _, err := rdb.retriever(dbPrivateKey.KeyID, newPassphraseAlias, false, 1)
 	if err != nil {
 		return err
 	}
@@ -220,7 +219,7 @@ func (s *KeyRethinkDBStore) RotateKeyPassphrase(name, newPassphraseAlias string)
 	// Update the database object
 	dbPrivateKey.Private = newEncryptedKey
 	dbPrivateKey.PassphraseAlias = newPassphraseAlias
-	if _, err := gorethink.DB(dbPrivateKey.DatabaseName()).Table(dbPrivateKey.TableName()).Get(RethinkPrivateKey{KeyID: name}).Update(dbPrivateKey).RunWrite(s.session); err != nil {
+	if _, err := gorethink.DB(rdb.dbName()).Table(dbPrivateKey.TableName()).Get(RDBPrivateKey{KeyID: name}).Update(dbPrivateKey).RunWrite(rdb.sess); err != nil {
 		return err
 	}
 
@@ -228,15 +227,22 @@ func (s *KeyRethinkDBStore) RotateKeyPassphrase(name, newPassphraseAlias string)
 }
 
 // ExportKey is currently unimplemented and will always return an error
-func (s *KeyRethinkDBStore) ExportKey(keyID string) ([]byte, error) {
-	return nil, errors.New("Exporting from a KeyRethinkDBStore is not supported.")
+func (rdb RethinkDBKeyStore) ExportKey(keyID string) ([]byte, error) {
+	return nil, errors.New("Exporting from a RethinkDBKeyStore is not supported.")
+}
+
+// Bootstrap sets up the database and tables
+func (rdb RethinkDBKeyStore) Bootstrap() error {
+	return rethinkdb.SetupDB(rdb.sess, rdb.dbName(), []rethinkdb.Table{
+		privateKeys,
+	})
 }
 
 // HealthCheck verifies that DB exists and is query-able
-func (s *KeyRethinkDBStore) HealthCheck() error {
+func (rdb RethinkDBKeyStore) CheckHealth() error {
 	var tableOk bool
-	dbPrivateKey := RethinkPrivateKey{}
-	res, err := gorethink.DB(dbPrivateKey.DatabaseName()).TableList().Contains(dbPrivateKey.TableName()).Run(s.session)
+	dbPrivateKey := RDBPrivateKey{}
+	res, err := gorethink.DB(rdb.dbName()).TableList().Contains(dbPrivateKey.TableName()).Run(rdb.sess)
 	if err != nil {
 		return err
 	}
