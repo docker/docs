@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"crypto/rand"
 	"crypto/sha256"
-	"crypto/x509"
 	"encoding/hex"
 	regJson "encoding/json"
 	"fmt"
@@ -3398,14 +3397,9 @@ func TestRotateRootCert(t *testing.T) {
 	// Rotate root certificate.
 	certs, err := authorRepo.ListRootCerts()
 	require.NoError(t, err)
-	var cert *x509.Certificate
 	require.Len(t, certs, 1)
-	// Just get the only certificate in there.
-	for _, c := range certs {
-		cert = c
-	}
 	logRepoTrustRoot(t, "original", authorRepo)
-	err = authorRepo.RotateRootCert(cert)
+	err = authorRepo.RotateRootCert(certs[0])
 	require.NoError(t, err)
 	logRepoTrustRoot(t, "post-rotate", authorRepo)
 
@@ -3457,7 +3451,9 @@ func TestRotateRootCert(t *testing.T) {
 	require.NoError(t, err)
 	logRepoTrustRoot(t, "author refresh 1", authorRepo)
 	require.Equal(t, newRootCertID, rootRoleCertID(t, authorRepo))
-	// verifyOnlyTrustedCertificate(t, authorRepo, newRootCertID)
+	// can't verify anything here, because the trusted certificates aren't
+	// rotated from the updated root
+
 	err = authorRepo.Update(false)
 	require.NoError(t, err)
 	logRepoTrustRoot(t, "author refresh 2", authorRepo)
