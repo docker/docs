@@ -82,7 +82,7 @@ func getStore(configuration *viper.Viper, hRegister healthRegister) (
 		}
 		var s *storage.SQLStorage
 		s, err = storage.NewSQLStorage(storeConfig.Backend, storeConfig.Source)
-		store = s
+		store = storage.ConsistentMetaStorage{s}
 		hRegister("DB operational", s.CheckHealth, time.Second*60)
 	case notary.RethinkDBBackend:
 		var sess *gorethink.Session
@@ -93,7 +93,7 @@ func getStore(configuration *viper.Viper, hRegister healthRegister) (
 		sess, err = rethinkdb.Connection(storeConfig.CA, storeConfig.Source, storeConfig.AuthKey)
 		if err == nil {
 			s := storage.NewRethinkDBStorage(storeConfig.DBName, sess)
-			store = s
+			store = storage.ConsistentMetaStorage{s}
 			hRegister("DB operational", s.CheckHealth, time.Second*60)
 		}
 	default:
