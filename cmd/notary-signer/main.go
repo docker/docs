@@ -24,6 +24,7 @@ import (
 	"github.com/docker/notary/signer"
 	"github.com/docker/notary/signer/api"
 	"github.com/docker/notary/signer/keydbstore"
+	"github.com/docker/notary/storage"
 	"github.com/docker/notary/storage/rethinkdb"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
@@ -281,4 +282,12 @@ func debugServer(addr string) {
 	if err := http.ListenAndServe(addr, nil); err != nil {
 		logrus.Fatalf("error listening on debug interface: %v", err)
 	}
+}
+
+func bootstrap(s trustmanager.KeyStore) error {
+	store, ok := s.(storage.Bootstrapper)
+	if !ok {
+		return fmt.Errorf("Store does not support bootstrapping.")
+	}
+	return store.Bootstrap()
 }
