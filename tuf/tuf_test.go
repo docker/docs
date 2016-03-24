@@ -775,6 +775,9 @@ func TestAddBaseKeysToRoot(t *testing.T) {
 		ed25519 := signed.NewEd25519()
 		repo := initRepo(t, ed25519)
 
+		origKeyIDs := ed25519.ListKeys(role)
+		require.Len(t, origKeyIDs, 1)
+
 		key, err := ed25519.Create(role, testGUN, data.ED25519Key)
 		require.NoError(t, err)
 
@@ -794,6 +797,77 @@ func TestAddBaseKeysToRoot(t *testing.T) {
 			require.True(t, repo.Targets[data.CanonicalTargetsRole].Dirty)
 		case data.CanonicalTimestampRole:
 			require.True(t, repo.Timestamp.Dirty)
+		case data.CanonicalRootRole:
+			require.True(t, repo.rootRoleDirty)
+			require.Len(t, repo.originalRootRole.Keys, 1)
+			require.Contains(t, repo.originalRootRole.ListKeyIDs(), origKeyIDs[0])
+		}
+	}
+}
+
+// removing one or more keys from a role marks root as dirty as well as the role
+func TestRemoveBaseKeysFromRoot(t *testing.T) {
+	for _, role := range data.BaseRoles {
+		ed25519 := signed.NewEd25519()
+		repo := initRepo(t, ed25519)
+
+		origKeyIDs := ed25519.ListKeys(role)
+		require.Len(t, origKeyIDs, 1)
+
+		require.Len(t, repo.Root.Signed.Roles[role].KeyIDs, 1)
+
+		require.NoError(t, repo.RemoveBaseKeys(role, origKeyIDs...))
+
+		require.Len(t, repo.Root.Signed.Roles[role].KeyIDs, 0)
+		require.True(t, repo.Root.Dirty)
+
+		switch role {
+		case data.CanonicalSnapshotRole:
+			require.True(t, repo.Snapshot.Dirty)
+		case data.CanonicalTargetsRole:
+			require.True(t, repo.Targets[data.CanonicalTargetsRole].Dirty)
+		case data.CanonicalTimestampRole:
+			require.True(t, repo.Timestamp.Dirty)
+		case data.CanonicalRootRole:
+			require.True(t, repo.rootRoleDirty)
+			require.Len(t, repo.originalRootRole.Keys, 1)
+			require.Contains(t, repo.originalRootRole.ListKeyIDs(), origKeyIDs[0])
+		}
+	}
+}
+
+// replacing keys in a role marks root as dirty as well as the role
+func TestReplaceBaseKeysInRoot(t *testing.T) {
+	for _, role := range data.BaseRoles {
+		ed25519 := signed.NewEd25519()
+		repo := initRepo(t, ed25519)
+
+		origKeyIDs := ed25519.ListKeys(role)
+		require.Len(t, origKeyIDs, 1)
+
+		key, err := ed25519.Create(role, testGUN, data.ED25519Key)
+		require.NoError(t, err)
+
+		require.Len(t, repo.Root.Signed.Roles[role].KeyIDs, 1)
+
+		require.NoError(t, repo.ReplaceBaseKeys(role, key))
+
+		_, ok := repo.Root.Signed.Keys[key.ID()]
+		require.True(t, ok)
+		require.Len(t, repo.Root.Signed.Roles[role].KeyIDs, 1)
+		require.True(t, repo.Root.Dirty)
+
+		switch role {
+		case data.CanonicalSnapshotRole:
+			require.True(t, repo.Snapshot.Dirty)
+		case data.CanonicalTargetsRole:
+			require.True(t, repo.Targets[data.CanonicalTargetsRole].Dirty)
+		case data.CanonicalTimestampRole:
+			require.True(t, repo.Timestamp.Dirty)
+		case data.CanonicalRootRole:
+			require.True(t, repo.rootRoleDirty)
+			require.Len(t, repo.originalRootRole.Keys, 1)
+			require.Contains(t, repo.originalRootRole.ListKeyIDs(), origKeyIDs[0])
 		}
 	}
 }
@@ -1161,7 +1235,7 @@ func TestSignRootOldKeyMissing(t *testing.T) {
 	require.Equal(t, 1, len(updatedRootKeyIDs))
 	require.Equal(t, newRootCertKey.ID(), updatedRootKeyIDs[0])
 
-	// Now forget all about the old certificate: drop it from the Root carried keys, and set up a new key DB
+	// Now forget all about the old certificate: drop it from the Root carried keys
 	delete(repo.Root.Signed.Keys, oldRootCertKey.ID())
 	repo2 := NewRepo(cs)
 	err = repo2.SetRoot(repo.Root)

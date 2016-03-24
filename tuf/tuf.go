@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"path"
+	"strconv"
 	"strings"
 	"time"
 
@@ -62,6 +63,9 @@ type Repo struct {
 	Snapshot      *data.SignedSnapshot
 	Timestamp     *data.SignedTimestamp
 	cryptoService signed.CryptoService
+
+	originalRootRole data.BaseRole
+	rootRoleDirty    bool
 }
 
 // NewRepo initializes a Repo instance with a CryptoService.
@@ -89,9 +93,13 @@ func (tr *Repo) AddBaseKeys(role string, keys ...data.PublicKey) error {
 	}
 	tr.Root.Dirty = true
 
-	// also, whichever role was switched out needs to be re-signed
-	// root has already been marked dirty
+	// also, whichever role was added to out needs to be re-signed
+	// root has already been marked dirty.  If the root keys themselves were
+	// changed, we want to mark the root role as dirty because we might have to
+	// do a root rotation
 	switch role {
+	case data.CanonicalRootRole:
+		tr.rootRoleDirty = true
 	case data.CanonicalSnapshotRole:
 		if tr.Snapshot != nil {
 			tr.Snapshot.Dirty = true
@@ -128,16 +136,41 @@ func (tr *Repo) RemoveBaseKeys(role string, keyIDs ...string) error {
 	}
 	var keep []string
 	toDelete := make(map[string]struct{})
+	emptyStruct := struct{}{}
 	// remove keys from specified role
 	for _, k := range keyIDs {
-		toDelete[k] = struct{}{}
-		for _, rk := range tr.Root.Signed.Roles[role].KeyIDs {
-			if k != rk {
-				keep = append(keep, rk)
-			}
+		toDelete[k] = emptyStruct
+	}
+
+	oldKeyIDs := tr.Root.Signed.Roles[role].KeyIDs
+	for _, rk := range oldKeyIDs {
+		if _, ok := toDelete[rk]; !ok {
+			keep = append(keep, rk)
 		}
 	}
+
 	tr.Root.Signed.Roles[role].KeyIDs = keep
+
+	// also, whichever role had keys removed needs to be re-signed
+	// root has already been marked dirty.  If the root keys themselves were
+	// changed, we want to mark the root role as dirty because we might have to
+	// do a root rotation
+	switch role {
+	case data.CanonicalRootRole:
+		tr.rootRoleDirty = true
+	case data.CanonicalSnapshotRole:
+		if tr.Snapshot != nil {
+			tr.Snapshot.Dirty = true
+		}
+	case data.CanonicalTargetsRole:
+		if target, ok := tr.Targets[data.CanonicalTargetsRole]; ok {
+			target.Dirty = true
+		}
+	case data.CanonicalTimestampRole:
+		if tr.Timestamp != nil {
+			tr.Timestamp.Dirty = true
+		}
+	}
 
 	// determine which keys are no longer in use by any roles
 	for roleName, r := range tr.Root.Signed.Roles {
@@ -461,8 +494,7 @@ func (tr *Repo) InitRoot(root, timestamp, snapshot, targets data.BaseRole, consi
 	if err != nil {
 		return err
 	}
-	tr.Root = r
-	return nil
+	return tr.SetRoot(r)
 }
 
 // InitTargets initializes an empty targets, and returns the new empty target
@@ -474,7 +506,7 @@ func (tr *Repo) InitTargets(role string) (*data.SignedTargets, error) {
 		}
 	}
 	targets := data.NewTargets()
-	tr.Targets[role] = targets
+	tr.SetTargets(role, targets)
 	return targets, nil
 }
 
@@ -499,8 +531,7 @@ func (tr *Repo) InitSnapshot() error {
 	if err != nil {
 		return err
 	}
-	tr.Snapshot = snapshot
-	return nil
+	return tr.SetSnapshot(snapshot)
 }
 
 // InitTimestamp initializes a timestamp based on the current snapshot
@@ -514,14 +545,15 @@ func (tr *Repo) InitTimestamp() error {
 		return err
 	}
 
-	tr.Timestamp = timestamp
-	return nil
+	return tr.SetTimestamp(timestamp)
 }
 
 // SetRoot sets the Repo.Root field to the SignedRoot object.
 func (tr *Repo) SetRoot(s *data.SignedRoot) error {
 	tr.Root = s
-	return nil
+	var err error
+	tr.originalRootRole, err = tr.Root.BuildBaseRole(data.CanonicalRootRole)
+	return err
 }
 
 // SetTimestamp parses the Signed object into a SignedTimestamp object
@@ -796,27 +828,92 @@ func (tr *Repo) UpdateTimestamp(s *data.Signed) error {
 func (tr *Repo) SignRoot(expires time.Time) (*data.Signed, error) {
 	logrus.Debug("signing root...")
 
-	oldKeyIDs := make([]string, 0, len(tr.Root.Signatures))
-	for _, oldSig := range tr.Root.Signatures {
-		oldKeyIDs = append(oldKeyIDs, oldSig.KeyID)
-	}
-
 	tr.Root.Signed.Expires = expires
 	tr.Root.Signed.Version++
+
 	root, err := tr.GetBaseRole(data.CanonicalRootRole)
 	if err != nil {
 		return nil, err
 	}
+
+	rolesToSignWith := []data.BaseRole{root}
+
+	optionalKeys := tr.getOldRootKeys(root)
+	// if the root role has changed, save this version's root role as a new
+	// versioned root role.  Also exclude the previous root role's keys
+	// from the map of optional keys, because the previous root role's keys are
+	// not optional
+	if tr.rootRoleDirty {
+		tr.saveRootRole()
+		for keyID := range tr.originalRootRole.Keys {
+			delete(optionalKeys, keyID)
+		}
+		rolesToSignWith = append(rolesToSignWith, tr.originalRootRole)
+	}
+
+	var optionalKeysList []data.PublicKey
+	for _, key := range optionalKeys {
+		optionalKeysList = append(optionalKeysList, key)
+	}
+
 	signed, err := tr.Root.ToSigned()
 	if err != nil {
 		return nil, err
 	}
-	signed, err = tr.sign(signed, root, oldKeyIDs)
+	signed, err = tr.sign(signed, rolesToSignWith, optionalKeysList)
 	if err != nil {
 		return nil, err
 	}
+
 	tr.Root.Signatures = signed.Signatures
 	return signed, nil
+}
+
+// build a map containing the old root keys, excluding all current root keys
+// We get these from (1) existing root.json signatures, because older
+// repositories that have already done root rotation may not necessarily
+// have older root roles, and (2) from saved older root roles
+func (tr *Repo) getOldRootKeys(currentRootRole data.BaseRole) map[string]data.PublicKey {
+	oldKeysMap := make(map[string]data.PublicKey)
+	for _, oldSig := range tr.Root.Signatures {
+		if _, ok := currentRootRole.Keys[oldSig.KeyID]; ok {
+			continue
+		}
+
+		if k, ok := tr.Root.Signed.Keys[oldSig.KeyID]; ok {
+			oldKeysMap[k.ID()] = k
+		}
+	}
+	// now go through the old roles
+	for roleName, rootRole := range tr.Root.Signed.Roles {
+		// ensure that the rolename matches our format
+		if data.ValidRole(roleName) {
+			continue
+		}
+		nameTokens := strings.Split(roleName, ".")
+		if len(nameTokens) != 2 || nameTokens[0] != data.CanonicalRootRole {
+			continue
+		}
+		_, err := strconv.Atoi(nameTokens[1])
+		if err != nil {
+			continue
+		}
+
+		for _, keyID := range rootRole.KeyIDs {
+			if _, ok := currentRootRole.Keys[keyID]; ok {
+				continue
+			}
+			if k, ok := tr.Root.Signed.Keys[keyID]; ok {
+				oldKeysMap[k.ID()] = k
+			}
+		}
+	}
+	return oldKeysMap
+}
+
+func (tr *Repo) saveRootRole() {
+	versionedRolename := fmt.Sprintf("%s.%v", data.CanonicalRootRole, tr.Root.Signed.Version)
+	tr.Root.Signed.Roles[versionedRolename] = tr.Root.Signed.Roles[data.CanonicalRootRole]
 }
 
 // SignTargets signs the targets file for the given top level or delegated targets role
@@ -850,7 +947,7 @@ func (tr *Repo) SignTargets(role string, expires time.Time) (*data.Signed, error
 		return nil, err
 	}
 
-	signed, err = tr.sign(signed, targets, nil)
+	signed, err = tr.sign(signed, []data.BaseRole{targets}, nil)
 	if err != nil {
 		logrus.Debug("errored signing ", role)
 		return nil, err
@@ -892,7 +989,7 @@ func (tr *Repo) SignSnapshot(expires time.Time) (*data.Signed, error) {
 	if err != nil {
 		return nil, err
 	}
-	signed, err = tr.sign(signed, snapshot, nil)
+	signed, err = tr.sign(signed, []data.BaseRole{snapshot}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -921,7 +1018,7 @@ func (tr *Repo) SignTimestamp(expires time.Time) (*data.Signed, error) {
 	if err != nil {
 		return nil, err
 	}
-	signed, err = tr.sign(signed, timestamp, nil)
+	signed, err = tr.sign(signed, []data.BaseRole{timestamp}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -930,18 +1027,14 @@ func (tr *Repo) SignTimestamp(expires time.Time) (*data.Signed, error) {
 	return signed, nil
 }
 
-func (tr Repo) sign(signedData *data.Signed, role data.BaseRole, optionalKeyIDs []string) (*data.Signed, error) {
-	optionalKeys := make([]data.PublicKey, 0, len(optionalKeyIDs))
-	for _, kid := range optionalKeyIDs {
-		k, ok := tr.Root.Signed.Keys[kid]
-		if !ok {
-			continue
+func (tr Repo) sign(signedData *data.Signed, roles []data.BaseRole, optionalKeys []data.PublicKey) (*data.Signed, error) {
+	validKeys := optionalKeys
+	for _, r := range roles {
+		roleKeys := r.ListKeys()
+		validKeys = append(roleKeys, validKeys...)
+		if err := signed.Sign(tr.cryptoService, signedData, roleKeys, r.Threshold, validKeys); err != nil {
+			return nil, err
 		}
-		optionalKeys = append(optionalKeys, k)
-	}
-	validKeys := append(role.ListKeys(), optionalKeys...)
-	if err := signed.Sign(tr.cryptoService, signedData, role.ListKeys(), role.Threshold, validKeys); err != nil {
-		return nil, err
 	}
 	// Attempt to sign with the optional keys, but ignore any errors, because these keys are optional
 	signed.Sign(tr.cryptoService, signedData, optionalKeys, 0, validKeys)
