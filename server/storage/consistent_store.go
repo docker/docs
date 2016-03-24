@@ -16,7 +16,7 @@ type ConsistentMetaStorage struct {
 }
 
 // GetCurrent gets a specific TUF record, by walking from the current Timestamp to other metadata by checksum
-func (cms *ConsistentMetaStorage) GetCurrent(gun, tufRole string) (*time.Time, []byte, error) {
+func (cms ConsistentMetaStorage) GetCurrent(gun, tufRole string) (*time.Time, []byte, error) {
 	timestampTime, timestampJSON, err := cms.MetaStore.GetCurrent(gun, data.CanonicalTimestampRole)
 	if err != nil {
 		return nil, nil, err
