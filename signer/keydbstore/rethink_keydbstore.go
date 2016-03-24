@@ -16,7 +16,7 @@ import (
 
 // RethinkDBKeyStore persists and manages private keys on a RethinkDB database
 type RethinkDBKeyStore struct {
-	sync.Mutex
+	lock             *sync.Mutex
 	sess             *gorethink.Session
 	defaultPassAlias string
 	retriever        passphrase.Retriever
@@ -33,6 +33,11 @@ type RDBPrivateKey struct {
 	PassphraseAlias string `gorethink:"passphrase_alias"`
 	Public          string `gorethink:"public"`
 	Private         string `gorethink:"private"`
+}
+
+var privateKeys = rethinkdb.Table{
+	Name:       RDBPrivateKey{}.TableName(),
+	PrimaryKey: RDBPrivateKey{}.KeyID,
 }
 
 // TableName sets a specific table name for our RDBPrivateKey
@@ -96,8 +101,8 @@ func (rdb *RethinkDBKeyStore) AddKey(keyInfo trustmanager.KeyInfo, privKey data.
 	}
 
 	// Add the private key to our cache
-	rdb.Lock()
-	defer rdb.Unlock()
+	rdb.lock.Lock()
+	defer rdb.lock.Unlock()
 	rdb.cachedKeys[privKey.ID()] = privKey
 
 	return nil
@@ -105,8 +110,8 @@ func (rdb *RethinkDBKeyStore) AddKey(keyInfo trustmanager.KeyInfo, privKey data.
 
 // GetKey returns the PrivateKey given a KeyID
 func (rdb *RethinkDBKeyStore) GetKey(name string) (data.PrivateKey, string, error) {
-	rdb.Lock()
-	defer rdb.Unlock()
+	rdb.lock.Lock()
+	defer rdb.lock.Unlock()
 	cachedKeyEntry, ok := rdb.cachedKeys[name]
 	if ok {
 		return cachedKeyEntry, "", nil
@@ -162,8 +167,8 @@ func (rdb RethinkDBKeyStore) ListKeys() map[string]trustmanager.KeyInfo {
 
 // RemoveKey removes the key from the table
 func (rdb RethinkDBKeyStore) RemoveKey(keyID string) error {
-	rdb.Lock()
-	defer rdb.Unlock()
+	rdb.lock.Lock()
+	defer rdb.lock.Unlock()
 
 	delete(rdb.cachedKeys, keyID)
 
@@ -238,7 +243,7 @@ func (rdb RethinkDBKeyStore) Bootstrap() error {
 	})
 }
 
-// HealthCheck verifies that DB exists and is query-able
+// CheckHealth verifies that DB exists and is query-able
 func (rdb RethinkDBKeyStore) CheckHealth() error {
 	var tableOk bool
 	dbPrivateKey := RDBPrivateKey{}
