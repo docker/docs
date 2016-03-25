@@ -44,6 +44,14 @@ This release addresses the following issues in Docker Trusted Registry 1.4.2.
 
     Also, when you upgrade CS Engine from 1.6 to 1.9 and the Trusted Registry admin server starts, it checks if it's running with links enabled. If that happens, the Trusted Registry restarts everything, creating the new network if necessary and removing the links, replacing them with a custom "dtr" network.
 
+* This version deprecates the search API exposed at the /api/v0/index/search
+endpoint. Starting on DTR 2.0 this API endpoint will no longer be available.
+
+* On DTR 2.0 the autocomplete API exposed at the /api/v0/index/autocomplete
+endpoint, will start returning a new result structure.
+
+* On DTR 2.0 all API endpoints that return UserAccess and RepoUserAccess objects
+are going to return objects with different properties.
 
 # Docker Trusted Registry 1.4.2
 (21 December 2015)
