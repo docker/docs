@@ -75,7 +75,7 @@ func (c *Client) update() error {
 		return err
 	}
 	// will always need top level targets at a minimum
-	err = c.downloadTargets("targets")
+	err = c.downloadTargets(data.CanonicalTargetsRole)
 	if err != nil {
 		logrus.Debugf("Client Update (Targets): %s", err.Error())
 		return err

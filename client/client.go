@@ -341,7 +341,7 @@ func addChange(cl *changelist.FileChangelist, c changelist.Change, roles ...stri
 
 // AddTarget creates new changelist entries to add a target to the given roles
 // in the repository when the changelist gets applied at publish time.
-// If roles are unspecified, the default role is "targets".
+// If roles are unspecified, the default role is "targets"
 func (r *NotaryRepository) AddTarget(target *Target, roles ...string) error {
 
 	cl, err := changelist.NewFileChangelist(filepath.Join(r.tufRepoPath, "changelist"))
@@ -672,7 +672,7 @@ func (r *NotaryRepository) bootstrapRepo() error {
 	if err != nil {
 		return err
 	}
-	targetsJSON, err := r.fileStore.GetMeta("targets", -1)
+	targetsJSON, err := r.fileStore.GetMeta(data.CanonicalTargetsRole, -1)
 	if err != nil {
 		return err
 	}
@@ -681,7 +681,7 @@ func (r *NotaryRepository) bootstrapRepo() error {
 	if err != nil {
 		return err
 	}
-	tufRepo.SetTargets("targets", targets)
+	tufRepo.SetTargets(data.CanonicalTargetsRole, targets)
 
 	snapshotJSON, err := r.fileStore.GetMeta(data.CanonicalSnapshotRole, -1)
 	if err == nil {
@@ -714,7 +714,7 @@ func (r *NotaryRepository) saveMetadata(ignoreSnapshot bool) error {
 
 	targetsToSave := make(map[string][]byte)
 	for t := range r.tufRepo.Targets {
-		signedTargets, err := r.tufRepo.SignTargets(t, data.DefaultExpires("targets"))
+		signedTargets, err := r.tufRepo.SignTargets(t, data.DefaultExpires(data.CanonicalTargetsRole))
 		if err != nil {
 			return err
 		}
