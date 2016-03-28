@@ -26,14 +26,14 @@ RUN curl -fsSL -o /vbox.dmg http://download.virtualbox.org/virtualbox/$VBOX_VERS
 
 # Download the Docker parts
 
-ENV INSTALLER_VERSION 1.11.0-rc1
-ENV DOCKER_VERSION 1.11.0-rc1
+ENV INSTALLER_VERSION 1.11.0-rc2
+ENV DOCKER_VERSION 1.11.0-rc2
 
 # Why '--strip-components 3'?  The client binary is in usr/local/bin/docker in
 # the tar archive.  If we extract directly, it will create a usr/local/bin
 # subdirectory (not what we want).  So we use --strip-components to remove the
 # `usr/local/bin` part and drop the bin in the current directory.
-RUN curl -fsSL -o dockerbins.tgz "https://test.docker.com/builds/Darwin/x86_64/docker-1.11.0-rc1.tgz" && \
+RUN curl -fsSL -o dockerbins.tgz "https://test.docker.com/builds/Darwin/x86_64/docker-${DOCKER_VERSION}.tgz" && \
     tar xvf dockerbins.tgz usr/local/bin/docker --strip-components 3 && \
     rm dockerbins.tgz
 

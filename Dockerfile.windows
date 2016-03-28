@@ -17,8 +17,8 @@ RUN cd innosetup && \
     wine "./innounp.exe" -e "is-unicode.exe"
 
 # installer components
-ENV INSTALLER_VERSION 1.11.0-rc1
-ENV DOCKER_VERSION 1.11.0-rc1
+ENV INSTALLER_VERSION 1.11.0-rc2
+ENV DOCKER_VERSION 1.11.0-rc2
 ENV DOCKER_MACHINE_VERSION 0.7.0-rc1
 ENV DOCKER_COMPOSE_VERSION 1.7.0-rc1
 ENV BOOT2DOCKER_ISO_VERSION $DOCKER_VERSION
@@ -32,7 +32,7 @@ RUN mkdir /bundle
 
 WORKDIR /bundle
 
-RUN curl -fsSL -o dockerbins.tgz "https://test.docker.com/builds/Windows/x86_64/docker-1.11.0-rc1.tgz" && \
+RUN curl -fsSL -o dockerbins.tgz "https://test.docker.com/builds/Windows/x86_64/docker-${DOCKER_VERSION}.tgz" && \
     tar xvf dockerbins.tgz usr/local/bin/docker.exe --strip-components 3 && \
     rm dockerbins.tgz
 
