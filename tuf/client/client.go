@@ -93,7 +93,7 @@ func (c Client) checkRoot() error {
 
 	expectedHashes := c.local.Snapshot.Signed.Meta[role].Hashes
 
-	raw, err := c.cache.GetMeta("root", size)
+	raw, err := c.cache.GetMeta(data.CanonicalRootRole, size)
 	if err != nil {
 		return err
 	}
