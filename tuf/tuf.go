@@ -854,7 +854,7 @@ func (tr *Repo) SignSnapshot(expires time.Time) (*data.Signed, error) {
 	if err != nil {
 		return nil, err
 	}
-	err = tr.UpdateSnapshot("root", signedRoot)
+	err = tr.UpdateSnapshot(data.CanonicalRootRole, signedRoot)
 	if err != nil {
 		return nil, err
 	}

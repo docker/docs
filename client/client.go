@@ -659,7 +659,7 @@ func (r *NotaryRepository) bootstrapRepo() error {
 	tufRepo := tuf.NewRepo(r.CryptoService)
 
 	logrus.Debugf("Loading trusted collection.")
-	rootJSON, err := r.fileStore.GetMeta("root", -1)
+	rootJSON, err := r.fileStore.GetMeta(data.CanonicalRootRole, -1)
 	if err != nil {
 		return err
 	}
@@ -791,7 +791,7 @@ func (r *NotaryRepository) bootstrapClient(checkInitialized bool) (*tufclient.Cl
 	// try to read root from cache first. We will trust this root
 	// until we detect a problem during update which will cause
 	// us to download a new root and perform a rotation.
-	rootJSON, cachedRootErr := r.fileStore.GetMeta("root", -1)
+	rootJSON, cachedRootErr := r.fileStore.GetMeta(data.CanonicalRootRole, -1)
 
 	if cachedRootErr == nil {
 		signedRoot, cachedRootErr = r.validateRoot(rootJSON)
@@ -806,7 +806,7 @@ func (r *NotaryRepository) bootstrapClient(checkInitialized bool) (*tufclient.Cl
 
 		// if remote store successfully set up, try and get root from remote
 		// We don't have any local data to determine the size of root, so try the maximum (though it is restricted at 100MB)
-		tmpJSON, err := remote.GetMeta("root", -1)
+		tmpJSON, err := remote.GetMeta(data.CanonicalRootRole, -1)
 		if err != nil {
 			// we didn't have a root in cache and were unable to load one from
 			// the server. Nothing we can do but error.
@@ -820,7 +820,7 @@ func (r *NotaryRepository) bootstrapClient(checkInitialized bool) (*tufclient.Cl
 				return nil, err
 			}
 
-			err = r.fileStore.SetMeta("root", tmpJSON)
+			err = r.fileStore.SetMeta(data.CanonicalRootRole, tmpJSON)
 			if err != nil {
 				// if we can't write cache we should still continue, just log error
 				logrus.Errorf("could not save root to cache: %s", err.Error())
