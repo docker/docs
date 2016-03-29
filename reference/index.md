@@ -1,8 +1,8 @@
 <!--[metadata]>
 +++
 title = "UCP tool reference"
-keywords= ["tool, reference, ucp"]
-description = "Run UCP commands"
+description = "Installs Docker Universal Control Plane."
+keywords= ["docker, ucp, install"]
 [menu.main]
 identifier = "ucp_ref"
 parent = "mn_ucp_installation"
@@ -10,39 +10,23 @@ weight=100
 +++
 <![end-metadata]-->
 
-# ucp tool Reference
+# UCP tool reference
 
+Installs Docker Universal Control Plane.
 
-```
-docker run --rm -it \
+## Usage
+
+```bash
+$ docker run --rm -it \
     --name ucp \
     -v /var/run/docker.sock:/var/run/docker.sock \
     docker/ucp \
-     command [arguments...]
+    command [arguments...]
 ```
-
-The UCP installation consists of using the Docker Engine CLI to run the `ucp`
-tool. The `ucp` tool is an image with subcommands to `install` a controller or
-`join` a node to a UCP controller. The general format of these commands are:
-
-| Docker client | `run` command with options | `ucp` image  | Subcommand with options |
-|:--------------|:---------------------------|:-------------|:------------------------|
-| `docker`      | `run --rm -it`             | `docker/ucp` | `install --help`        |
-| `docker`      | `run --rm -it`             | `docker/ucp` | `join --help`           |
-| `docker`      | `run --rm -it`             | `docker/ucp` | `uninstall --help`      |
-
-You can these two subcommands interactively by passing them the `-i`
-option or by passing command-line options. This installation guide's steps
-assume both are run interactively.
-
-To list all the possible subcommands, use:
-
-```
-$ docker run --rm -it docker/ucp  --help
-```
-
 
 ## Description
+
+Docker Universal Control Plane Tool
 
 This tool has commands to 'install' the UCP initial controller and
 'join' nodes to that controller.  The tool can also 'uninstall' the product.
@@ -50,31 +34,42 @@ This tool must run as a container with a well-known name and with the
 docker.sock volume mounted, which you can cut-and-paste from the usage
 example below.
 
-This tool generates TLS certificates and attempts to discover the local
-systems's hostname and primary IP addresses.  The tool may be unable to discover
-your externally visible fully qualified hostname.  You can use  the
-'--host-address' option to specify a hostname or primary IP address
-specifically.
+This tool will generate TLS certificates and will attempt to determine
+your hostname and primary IP addresses.  This may be overridden with the
+'--host-address' option.  The tool may not be able to discover your
+externally visible fully qualified hostname.  For proper certificate
+verification, you should pass one or more Subject Alternative Names with
+'--san' during 'install' and 'join' that matches the fully qualified
+hostname you intend to use to access the given system.
 
-For proper certificate verification, you should pass one or more subject
-alternative names (SANs) with '--san' during 'install' and 'join' that matches
-the fully qualified hostname you intend to use to access the given system.
+Many settings can be passed as flags or environment variables. When passing as
+an environment variable, use the 'docker run -e VARIABLE_NAME ...' syntax to
+pass the value from your shell, or 'docker run -e VARIABLE_NAME=value ...' to
+specify the value explicitly on the command line.
 
 Additional help is available for each command with the '--help' option.
 
 ## Options
-`--help`, `-h` Show help
-`--version`, `-v`	Print the version
 
-## Subcommands
+| Option          | Description       |
+|:----------------|:------------------|
+| `--help, h`     | Show help         |
+| `--version, -v` | Print the version |
 
-| Command                         | Description                                                                 |
-|:--------------------------------|:----------------------------------------------------------------------------|
-| [`install`](install.md)         | Install UCP on this engine.                                                 |
-| [`join`](join.md)               | Join this engine to an existing UCP.                                        |
-| [`upgrade`](upgrade.md)         | Upgrade the UCP components on this Engine.                                  |
-| [`images`](images.md)           | Verify the UCP images on this Engine.                                       |
-| [`uninstall`](uninstall.md)     | Uninstall UCP components from this Engine.                                  |
-| [`dump-certs`](dump-certs.md)   | Dump out the public certs for this UCP controller.                          |
-| [`fingerprint`](fingerprint.md) | Dump out the TLS fingerprint for the UCP controller running on this Engine. |
-| [`help`](help.md)               | Shows a list of commands or help for one command.                           |
+## Commands
+
+| Command            | Description                                                                |
+|:-------------------|:---------------------------------------------------------------------------|
+| `install`          | Install UCP on this engine                                                 |
+| `join`             | Join this engine to an existing UCP                                        |
+| `upgrade`          | Upgrade the UCP components on this engine                                  |
+| `images`           | Verify the UCP images on this engine                                       |
+| `uninstall`        | Uninstall UCP components from this engine                                  |
+| `dump-certs`       | Dump out the public certs for this UCP controller                          |
+| `fingerprint`      | Dump out the TLS fingerprint for the UCP controller running on this engine |
+| `id`               | Dump out the ID of the UCP components running on this engine               |
+| `engine-discovery` | Manage the engine discovery configuration                                  |
+| `backup`           | Stream a tar file to stdout containing all Orca data volumes               |
+| `restore`          | Stream a tar file on stdin containing all local UCP data volumes           |
+| `regen-certs`      | Regenerate keys and certificates for a UCP controller                      |
+| `help`             | Shows a list of commands or help for one command                           |
