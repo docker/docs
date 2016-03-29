@@ -64,8 +64,10 @@ func (root *rootHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		var authCtx context.Context
 		var err error
 		if authCtx, err = root.auth.Authorized(ctx, access...); err != nil {
-			if err, ok := err.(auth.Challenge); ok {
-				err.ServeHTTP(w, r)
+			if challenge, ok := err.(auth.Challenge); ok {
+				// Let the challenge write the response.
+				challenge.ServeHTTP(w, r)
+
 				w.WriteHeader(http.StatusUnauthorized)
 				return
 			}
