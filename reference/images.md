@@ -1,38 +1,40 @@
 +++
 title = "images"
-keywords= ["images, ucp"]
-description = "description"
+description = "Verify the UCP images on this Docker Engine."
+keywords= ["images, ucp, images"]
 [menu.main]
 identifier = "ucp_images"
 parent = "ucp_ref"
 +++
 
-# images
+# docker/ucp images
 
-Verify the UCP images on this engine.
+Verify the UCP images on this Docker Engine.
 
 ## Usage
 
 ```
 docker run --rm -it \
-     --name ucp \
-     -v /var/run/docker.sock:/var/run/docker.sock \
-     docker/ucp \
-     images [command options]
+  --name ucp \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  docker/ucp \
+  images [command options]
 ```
 
 ## Description
 
-Verifies all the required images used by UCP on the current engine. By default,
-this command pulls any missing images. Use the `--pull` argument to change
-behavior.
+This command will verify all the required images used by UCP on the current
+engine.
+By default, this will pull any missing images. Use the '--pull' argument
+to change behavior.
 
 ## Options
 
-| Option                | Description                                                                  |
-|:----------------------|:-----------------------------------------------------------------------------|
-| `--debug`, `-D`       | Enable debug.                                                                |
-| `--jsonlog`           | Produce json formatted output for easier parsing.                            |
-| `--interactive`, `-i` | Enable interactive mode. You are prompted to enter all required information. |
-| `--pull "missing"`    | Specify image pull behavior (`always`, when `missing`, or `never`).          |
-| `--list`              | Don`t do anything, just list the images used by UCP                          |
+| Option                | Description                                                            |
+|:----------------------|:-----------------------------------------------------------------------|
+| `--debug, -D`         | Enable debug                                                           |
+| `--jsonlog`           | Produce json formatted output for easier parsing                       |
+| `--registry-username` | Specify the username to pull required images with [$REGISTRY_USERNAME] |
+| `--registry-password` | Specify the password to pull required images with [$REGISTRY_PASSWORD] |
+| `--pull "missing"`    | Specify image pull behavior ('always', when 'missing', or 'never')     |
+| `--list`              | Don`t do anything, just list the images used by UCP                    |
