@@ -18,6 +18,9 @@ Framework](https://theupdateframework.github.io/).
 
 ## Architecture and components
 
+Notary clients pull metadata from one or more (remote) Notary services.  Some
+Notary clients will push metadata to one or more Notary services.
+
 A Notary service consists of a Notary server, which stores and updates the
 signed [TUF metadata files](
 https://github.com/theupdateframework/tuf/blob/develop/docs/tuf-spec.txt#L348)
@@ -133,7 +136,7 @@ operations with any key the Signer holds.
 
 - **Rollback, Freeze, Mix and Match** - The attacker can request that
     the Notary signer sign any arbitrary timestamp (and maybe snapshot) metadata
-    they want. Attackers can lauch a freeze attack, and, depending on whether
+    they want. Attackers can launch a freeze attack, and, depending on whether
     the snapshot key is available, a mix-and-match attack up to the expiration
     of the targets file.
 
@@ -165,6 +168,87 @@ keys in the HSM, but not to exfiltrate the private material.
   of an attacker are the same as of a Notary server compromise in terms of
   signing arbitrary metadata, with the important detail that in this particular
   case key rotations will be necessary to recover from the attack.
+
+### Notary client keys and credentials compromise
+
+In the event of a trust collection owner/administrator's keys being compromised,
+an attacker would be able to sign valid changes to the contents of that
+collection, and to any other collections that use the same key.
+
+They can then set up a mirrior to distribute this metadata, but they would not
+be able to distribute it via a Notary service unless they also have write-capable
+credentials for that service (e.g. the username/password of a user who could
+push updates into that service).
+
+A familiarity with [TUF (the update framework)](theupdateframework.github.io)
+would be helpful in understanding the different types of keys and roles
+mentioned below.
+
+Note that the descriptions below assume that the snapshot key is managed by the
+Notary service - otherwise, in addition to the keys below, the snapshot key would
+also have to be compromised in order to perform any of the attacks.
+
+#### Delegation key compromise
+
+A delegation key has the most limited capabilities of any client-managed key.
+It is used to sign targets into [specific delegation roles, which may have path
+restrictions](advanced-usage.md#work-with-delegation-roles), and can further
+delegate trust to other delegation roles.
+
+- **Limited Malicious Content, Rollback, Freeze, Mix and Match** - An attacker
+    can add malicious content, remove legitimate content from a collection, and
+    mix up the targets in a collection, but only within the particular delegation
+    roles that the key can sign for.  Depending on the restrictions on that role,
+    they may be restricted in what type of content they can modify.
+
+- **Limited Denial of Service** - An attacker may add or remove the capabilities
+    of other delegation keys, but only those with even less capabilities (e.g.
+    keys for even delegation roles directly below the current delegation role),
+    thus preventing holders of those keys from being able to modify content.
+
+Mitigation:  if a compromise is detected, a higher level key (either the targets
+key or another delegation key) holder must rotate the compromised key, using
+the new key, and push a clean set of targets.
+
+#### Targets key compromise
+
+A targets key, similarly to a delegation key, is used to sign targets into the
+targets role, which is the ancestor role of any delegation role.  It delegates
+trust to top level delegation roles.
+
+- **Malicious Content, Rollback, Freeze, Mix and Match** - An attacker
+    can add any malicious content, remove any legitimate content from a
+    collection, and mix up the targets in a collection.
+
+- **Limited Denial of Service** - An attacker may add or remove the capabilities
+    of any delegation keys by removing the capabilities of the keys in the top
+    level delegation roles, thus preventing holders of those keys from being
+    able to modify content.
+
+Mitigation:  if a compromise is detected, the root key holder must rotate the
+compromised key and, using the new key, push a clean set of targets.
+
+#### Root key compromise
+
+A root key is the root of all trust.  It specifies the top keys used to
+sign all the other top level metadata.
+
+- **Complete Key Compromise** An attacker can rotate all the top level keys,
+    including the root key, giving themselves complete control over all keys in
+    the repository.
+
+- **Malicious Content, Rollback, Freeze, Mix and Match** - With their
+    newly rotated keys, an attacker can add any malicious content, remove any
+    legitimate content from a collection, and mix up the targets in a collection.
+
+- **Denial of Service** - By rotating all keys including the root key,
+    an attacker removes the capabilities for any other key to sign for new data.
+
+Mitigation:  if a compromise is detected, the root key holder should contact
+whomever runs the notary service to manually reverse any malicious changes to
+the repository, and immediately rotate the root key.  This will create a fork
+of the repository history, and thus break existing clients who have downloaded
+any of the malicious changes.
 
 ## Related information
 
