@@ -11,10 +11,23 @@ weight=1
 
 # Getting started with Docker Notary
 
-This document describes basic use of Notary as a tool supporting content trust.
-For more advanced use cases, you must [run your own Notary
+This document describes basic use of the Notary CLI as a tool supporting Docker
+Content Trust. For more advanced use cases, you must [run your own Notary
 service](running_a_service.md) and should read the [use the Notary client for
 advanced users](advanced_usage.md) documentation.
+
+## What is Notary
+
+Notary is a tool for publishing and managing trusted collections of content.
+Publishers can digitally sign collections and consumers can verify integrity
+and origin of content. This ability is built on a straightforward key management
+and signing interface to create signed collections and configure trusted publishers.
+
+With Notary anyone can provide trust over arbitrary collections of data. Using
+[The Update Framework (TUF)](http://theupdateframework.com/) as the underlying
+security framework, it takes care of the operations necessary to create, manage
+and distribute the metadata necessary to ensure the integrity and freshness of
+your content.
 
 ## Install Notary
 
@@ -111,7 +124,7 @@ You can see a pending change by running `notary status` for the modified
 repository. The `status` subcommand is an offline operation and as such, does
 not require the `-s` flag, however it will silently ignore the flag if provided.
 Failing to provide the correct value for the `-d` flag may show the wrong
-(probably empty) change list:  
+(probably empty) change list:
 
 ```
 $ notary -d ~/.docker/trust status docker.io/library/alpine
