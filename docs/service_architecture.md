@@ -171,16 +171,25 @@ keys in the HSM, but not to exfiltrate the private material.
 
 ### Notary client keys and credentials compromise
 
-In the event of a trust collection owner/administrator's keys being compromised,
-an attacker would be able to sign valid changes to the contents of that
-collection, and to any other collections that use the same key.
+The severity of the compromise of a trust collection owner/administrator's key
+depends on which type of key in the key hierarchy is compromised:
 
-They can then set up a mirrior to distribute this metadata, but they would not
+<center><img src="images/key-hierarchy.svg" alt="TUF Key Hierarchy" style="max-width: 500px;"/></center>
+
+
+Also, the severity depends upon whether a combination of keys were compromised (e.g.
+the snapshot key and targets key, or just the targets key).
+
+In general, with the right combination of compromised keys, an attacker would be
+able to sign valid changes to the contents of that collection, and to any other
+collections that use the same keys.
+
+They can then set up a mirror to distribute this metadata, but they would not
 be able to distribute it via a Notary service unless they also have write-capable
 credentials for that service (e.g. the username/password of a user who could
 push updates into that service).
 
-A familiarity with [TUF (the update framework)](theupdateframework.github.io)
+Familiarity with [TUF (the update framework)](https://theupdateframework.github.io/)
 would be helpful in understanding the different types of keys and roles
 mentioned below.
 
@@ -192,7 +201,7 @@ also have to be compromised in order to perform any of the attacks.
 
 A delegation key has the most limited capabilities of any client-managed key.
 It is used to sign targets into [specific delegation roles, which may have path
-restrictions](advanced-usage.md#work-with-delegation-roles), and can further
+restrictions](advanced_usage.md#work-with-delegation-roles), and can further
 delegate trust to other delegation roles.
 
 - **Limited Malicious Content, Rollback, Freeze, Mix and Match** - An attacker
@@ -202,13 +211,14 @@ delegate trust to other delegation roles.
     they may be restricted in what type of content they can modify.
 
 - **Limited Denial of Service** - An attacker may add or remove the capabilities
-    of other delegation keys, but only those with even less capabilities (e.g.
-    keys for even delegation roles directly below the current delegation role),
+    of other delegation keys with even less capabilities, but only those below it
+    on the key hierarchy  (e.g. if `DelegationKey2` were compromised, it would
+    only be able to modify the capabilityes of `DelegationKey4` and `DelegationKey5`),
     thus preventing holders of those keys from being able to modify content.
 
 Mitigation:  if a compromise is detected, a higher level key (either the targets
-key or another delegation key) holder must rotate the compromised key, using
-the new key, and push a clean set of targets.
+key or another delegation key) holder must rotate the compromised key, and
+push a clean set of targets using the new key.
 
 #### Targets key compromise
 
@@ -226,12 +236,13 @@ trust to top level delegation roles.
     able to modify content.
 
 Mitigation:  if a compromise is detected, the root key holder must rotate the
-compromised key and, using the new key, push a clean set of targets.
+compromised key and push a clean set of targets using the new key.
 
 #### Root key compromise
 
 A root key is the root of all trust.  It specifies the top keys used to
-sign all the other top level metadata.
+sign all the other top level metadata (the root, the timestamp, the snapshot,
+and the targets keys).
 
 - **Complete Key Compromise** An attacker can rotate all the top level keys,
     including the root key, giving themselves complete control over all keys in
