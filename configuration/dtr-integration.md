@@ -1,15 +1,17 @@
 <!--[metadata]>
 +++
-title = "Integrate with Trusted Registry"
+aliases = [ "/ucp/dtr-integration/"]
+title = "Integrate with Docker Trusted Registry"
 description = "Integrate UCP with Docker Trusted Registry"
 keywords = ["trusted, registry, integrate, UCP, DTR"]
 [menu.main]
-parent="mn_ucp"
+parent="mn_ucp_configuration"
+weight=10
 +++
 <![end-metadata]-->
 
 
-# Integrate UCP with Docker Trusted Registry
+# Integrate with Docker Trusted Registry
 
 This page explains how to integrate Universal Control Plane (UCP) with the
 Docker Trusted Registry (DTR). Trusted Registry is a image storage and
@@ -132,7 +134,7 @@ Registry CA into your UCP.
 
     b. Upload the `dtr.pem` file you just created.
 
-      ![](images/dtr-integrate-2.png)
+      ![](../images/dtr-integrate-2.png)
 
 6. Press **Update Registry** to save your changes.
 
@@ -169,7 +171,7 @@ repository on the Trusted Registry.
 
 4. Create a private repository called `hello_world` under your username.
 
-    ![](images/dtr-integrate.png)
+    ![](../images/dtr-integrate.png)
 
 5. Press **Save**.
 
@@ -245,13 +247,13 @@ bundle.
 
 8. Log into the Trusted Registry and confirm your repository contains the image your pushed.
 
-    ![](images/dtr_tag.png)
+    ![](../images/dtr_tag.png)
 
 9. Log into UCP.
 
 10. Choose **Images** and search for `hello`.
 
-    ![](images/dtr_hello.png)
+    ![](../images/dtr_hello.png)
 
 11. Delete any `hello-world` or `hello_world` image.
 
@@ -261,7 +263,7 @@ bundle.
 
 13. Enter the name of your test image and press **Pull**.
 
-    ![](images/dtr_pull.png)
+    ![](../images/dtr_pull.png)
 
 
 ## Troubleshooting section

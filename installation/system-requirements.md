@@ -1,0 +1,58 @@
+<!--[metadata]>
++++
+title = "System requirements"
+description = "Learn about the system requirements for installing Docker Universal Control Plane."
+keywords = ["docker, ucp, architecture, requirements"]
+[menu.main]
+parent="mn_ucp_installation"
+identifier="ucp_system_requirements"
+weight=0
++++
+<![end-metadata]-->
+
+# UCP system requirements
+
+Docker Universal Control Plane can be installed on-premises or on the cloud.
+Before installing, be sure your infrastructure has these requirements.
+
+## Hardware and software requirements
+
+You can install UCP on-premises or on a cloud provider. To install UCP,
+all nodes must have:
+
+* 1.50 GB of RAM
+* 3.00 GB of available disk space
+* One of the supported operating systems installed:
+  * RHEL 7.0, 7.1
+  * Ubuntu 14.04 LTS
+  * CentOS 7.1
+  * SUSE Linux Enterprise 12
+* Linux kernel version 3.10 or higher
+* CS Docker Engine version 1.10 or higher
+
+
+## Ports used
+
+When installing UCP on a host, make sure the following ports are open:
+
+| Hosts              | Direction | Port                | Purpose                                                     |
+|:-------------------|:---------:|:--------------------|:------------------------------------------------------------|
+| controllers        |    in     | 443  (configurable) | Web app and CLI client access to UCP.                       |
+| controllers        |    in     | 2376 (configurable) | Swarm manager accepts requests from UCP controller.         |
+| controllers, nodes |    in     | 2375                | Heartbeat for nodes, to ensure they are running.            |
+| controllers, nodes |    in     | 12376               | Proxy for TLS, provides access to UCP, Swarm, and Engine.   |
+| controller         |    in     | 12379               | Internal node configuration, cluster configuration, and HA. |
+| controller         |    in     | 12380               | Internal node configuration, cluster configuration, and HA. |
+| controller         |    in     | 12381               | Proxy for TLS, provides access to UCP.                      |
+| controller         |    in     | 12382               | Manages TLS and requests from swarm manager.                |
+| controller         |    out    | 443                 | Send anonymous usage reports to Docker.                     |
+
+UCP collects anonymous usage metrics, to help us improve it. These metrics
+are entirely anonymous, don’t identify your company, users, applications,
+or any other sensitive information. You can disable this when installing
+or on the UCP settings screen.
+
+## Where to go next
+
+* [UCP architecture](../architecture.md)
+* [Plan a production installation](plan-production-install.md)

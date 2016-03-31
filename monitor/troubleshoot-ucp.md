@@ -1,14 +1,15 @@
 <!--[metadata]>
 +++
-title ="UCP Key/Value Store Backends"
+aliases = ["/ucp/kv_store/"]
+title ="Troubleshoot your cluster"
 keywords= ["ectd, key, value, store, ucp"]
 description="Docker Universal Control Plane"
 [menu.main]
-parent="mn_ucp"
+parent="mn_monitor_ucp"
 +++
 <![end-metadata]-->
 
-# UCP Key/Value Store Backend
+# Troubleshoot your cluster
 
 In this release, UCP leverages the [etcd](https://github.com/coreos/etcd/) KV
 store internally for node discovery and high availability. This use is specific
@@ -124,3 +125,8 @@ client certificates signed by the Swarm Root CA.  As admin account
 certificates are also signed by this Swarm Root CA, administrators can
 access the KV store using `curl` or other tools, provided the admin's
 certificate is used as the client certificate.
+
+## Where to go next
+
+* [Monitor your cluster](monitor-ucp.md)
+* [Get support](../support.md)

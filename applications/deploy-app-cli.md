@@ -1,16 +1,16 @@
 <!--[metadata]>
 +++
-title = "Deploy an application"
-description = "Deploy an application thru UCP"
+aliases = ["/ucp/deploy-application/"]
+title = "Deploy an app from the CLI"
+description = "Learn how to deploy containerized applications on a cluster, with Docker Universal Control Plane."
 keywords = ["deploy, application"]
 [menu.main]
-parent="mn_ucp"
-weight=-80
+parent="mn_ucp_applications"
 +++
 <![end-metadata]-->
 
 
-# Deploy an application onto UCP
+# Deploy an app from the CLI
 
 In this quickstart, you learn how to deploy multi-container applications onto UCP.
 While UCP is intended for deploying multi-container applications, the workflow
@@ -48,9 +48,7 @@ that require them, the team may need to create Docker container volumes and
 ensure they are of sufficient size.
 
 Once the team has developed a microservice application, they should test it
-locally at scale on a Swarm cluster. The Swarm documentation includes detailed
-documentation about [troubleshooting a microservice
-application](https://docs.docker.com/swarm/scale/05-troubleshoot/).
+locally at scale on a Swarm cluster.
 
 The output of application development should be a Docker Compose file and a set
 of images ready for deployment. These images can be stored in Docker Hub. If
@@ -61,16 +59,16 @@ must ensure store the images in an accessible registry account.
 
 ## Step 1. Before you begin
 
-This example requires that you have an installed UCP deployment and that you have
-<a href="/ucp/networking/" target="_blank">enabled container networking</a>
-on that installation. Take a moment to check this requirement.
+This example requires that you have an installed UCP deployment and that you
+have [enabled container networking](../configuration/multi-host-networking.md).
+Take a moment to check this requirement.
 
 When deploying an application to UCP, you work from a local environment using
 the UCP client bundle for your UCP user.  You should never deploy from the
 command-line while directly logged into a UCP node. The deploy on this page,
 requires that your local environment includes the following software:
 
-* <a href="https://git-scm.com/" target="_blank">Git</a>
+* [Git](https://git-scm.com/)
 * Docker Engine
 * Docker Compose
 
@@ -216,7 +214,7 @@ frontend that sends jobs to asynchronous background workers. The application's
 design can accommodate arbitrarily large scale. The diagram below shows the high
 level architecture of the application.
 
-![](images/app-architecture.jpg)
+![](../images/app-architecture.jpg)
 
 The application is fully dockerized with all services running inside of
 containers.
@@ -372,7 +370,7 @@ In this step, you deploy the application in UCP.
 
 8. Expand to the app to see which nodes the application containers are running in.
 
-    ![](images/votingapp_default.png)
+    ![](../images/votingapp_default.png)
 
 ## Step 5. Test the application
 
@@ -403,4 +401,4 @@ DNS name to the public IP address of the `votingapp_web-vote-app_1` node.
 
 3. Point your web browser to [http://votingapp.local](http://votingapp.local)
 
-    ![](images/vote-app-test.jpg)
+    ![](../images/vote-app-test.jpg)

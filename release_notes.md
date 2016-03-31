@@ -6,7 +6,7 @@ keywords = ["Docker, UCP", "Release notes", "Versions"]
 [menu.main]
 identifier="ucp_rnotes"
 parent="mn_ucp"
-weight="99"
+weight=110
 +++
 <![end-metadata]-->
 
@@ -133,5 +133,5 @@ use `ucp uninstall` command from version 1.0:
 
     docker run --rm -it --name ucp -v /var/run/docker.sock:/var/run/docker.sock docker/ucp:1.0.0 uninstall -i
 
-After uninstalling, you can [Install UCP for evaluation](evaluation-install.md),
-or [Install UCP for production](production-install.md).
+After uninstalling, you can [Install UCP on a sandbox](install-sandbox.md),
+or [Install UCP for production](installation/install-production.md).
