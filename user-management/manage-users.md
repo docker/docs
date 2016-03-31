@@ -1,10 +1,11 @@
 <!--[metadata]>
 +++
+aliases = [ "ucp/manage/monitor-manage-users/"]
 title = "Manage and authorize users"
 description = "Manage and authorize users"
 keywords = ["authorize, authentication, users, teams, UCP, Docker, objects"]
 [menu.main]
-parent="mn_manage_ucp"
+parent="mn_ucp_user_management"
 +++
 <![end-metadata]-->
 
@@ -17,7 +18,7 @@ and create permissions within UCP.  On this page, you learn to do both. You also
 learn about the features and systems of UCP that support user management and
 authorization.
 
-## Understand user authorization in UCP
+## Understand user authorization
 
 Users in UCP have two levels of authorization. They may have authorization to
 manage UCP and they have authorization to access the Docker objects and
@@ -38,12 +39,12 @@ container object, is possible through the use of teams.
 
 The possible permissions are:
 
-| Type               | Description                                                                                                  |
-|--------------------|--------------------------------------------------------------------------------------------------------------|
-| No Access          | Cannot access any resources.                                                                                 |
+| Type               | Description                                                                                               |
+|:-------------------|:----------------------------------------------------------------------------------------------------------|
+| No Access          | Cannot access any resources.                                                                              |
 | View Only          | Can view resources. This role grants the ability to view a container but not restart, kill, or remove it. |
 | Restricted Control | Can edit resources. This role grants the ability to create, restart, kill, and remove containers.         |
-| Full Control       | Can do anything possible to resources. This role grants full rights to all actions on containers.                         |
+| Full Control       | Can do anything possible to resources. This role grants full rights to all actions on containers.         |
 
 For containers only, you can extend the default access permissions with more
 granular, role-based permissions. Docker Engine allows container creators to
@@ -66,7 +67,7 @@ interactions on the command line via the client bundle.
 standard SSH and addressing the Swarm cluster directly. For this reason, You
 must be sure to secure network access to a cluster's nodes.   
 
-## Understand Restricted Control
+## Understand restricted control
 
 Containers run as services on your network. Without proper knowledge, users can
 launch a container with an insecure configuration. To reduce the risk of this
@@ -79,7 +80,7 @@ container. These users are can not `docker exec` into a container. Additionally,
 options:
 
 | Prevented Option     | Description                                                                                                                                                         |
-|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|:---------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `--privileged`       | A “privileged” container is given access to all devices.                                                                                                            |
 | `--cap-add`          | The ability to expand the kernel-level capabilities a user or process has in a  container.                                                                          |
 | host mounted volumes | Mount a volume from the host where the container is running.                                                                                                        |
@@ -88,7 +89,7 @@ options:
 
 Users that attempt to create containers with these options receive an error message.
 
-## Creating users through UCP
+## Creating users on UCP
 
 UCP offers two ways to create user accounts. You can manually create accounts
 one-at-a-time or you can import users as a group into a team via UCP's LDAP

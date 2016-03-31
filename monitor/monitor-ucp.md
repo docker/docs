@@ -1,15 +1,16 @@
 <!--[metadata]>
 +++
-title = "Monitor and troubleshoot UCP"
+aliases = [ "/ucp/manage/monitor-ucp/"]
+title = "Monitor your cluster"
 description = "Monitor your Docker Universal Control Plane installation, and learn how to troubleshoot it."
 keywords = ["Docker, UCP, troubleshoot"]
 [menu.main]
-parent="mn_manage_ucp"
+parent="mn_monitor_ucp"
 weight=-80
 +++
 <![end-metadata]-->
 
-# Monitor and troubleshoot your UCP installation
+# Monitor your cluster
 
 This article gives you an overview of how to monitor your Docker UCP
 installation. Here you'll also find the information you need to troubleshoot
@@ -23,7 +24,7 @@ Docker UCP has several components:
 * UCP replica nodes: replicas of the controller node, for high-availability,
 * UCP nodes: the nodes that run your own containers.
 
-[Learn more about the UCP architecture](../plan-production-install.md#ucp-architecture).
+[Learn more about the UCP architecture](../installation/plan-production-install.md#ucp-architecture).
 
 
 ## Check the cluster status
@@ -68,7 +69,7 @@ You can also check UCP status using the command line:
 
     UCP uses mutual TLS. So you need to have a client certificate bundle
     to interact with UCP from the command line.
-    [Learn how to get a client bundle](../production-install.md#set-8-set-up-certificates-for-the-cli).
+    [Learn how to get a client bundle](../installation/install-production.md#step-10-set-up-certificates-for-the-docker-cli).
 
     If you don't have a client bundle, you'll need to login into the
     host directly.
@@ -216,19 +217,8 @@ $ docker -H tcp://ec2-54-183-169-0.us-west-1.compute.amazonaws.com:12376 logs uc
 --- output snipped ---
 ```
 
-## Configure UCP logging
-
-You can configure UCP for sending logs to a remote logging service:
-
-1. Login into UCP with an administrator account
-2. Navigate to the **Settings** page
-3. Set the information about your logging server, and click
-**Enable Remote Logging**
-
-![](../images/settings-log.png)
-
 
 ## Where to go next
 
-* [Learn about the UCP architecture](../plan-production-install.md#ucp-architecture)
+* [Troubleshoot your cluster](troubleshoot-ucp.md)
 * [Get support](../support.md)
