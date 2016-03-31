@@ -1,11 +1,12 @@
 <!--[metadata]>
 +++
+aliases = [ "/ucp/production-install/"]
 title = "Install UCP for production"
 description = "Learn how to install Docker Universal Control Plane on production"
 keywords = ["Universal Control Plane, UCP, install"]
 [menu.main]
-parent="mn_ucp"
-weight=-85
+parent="mn_ucp_installation"
+weight=20
 +++
 <![end-metadata]-->
 
@@ -33,7 +34,6 @@ contains the following sections:
 - [Step 9: Add more nodes to the UCP cluster](#step-9-add-more-nodes-to-the-ucp-cluster)
 - [Step 10: Set up certificates for the Docker CLI](#step-10-set-up-certificates-for-the-docker-cli)
 - [Disable collection of usage metrics](#disable-collection-of-usage-metrics)
-- [Uninstall](#uninstall)
 - [Where to go next](#where-to-go-next)
 
 ## About these installation instructions
@@ -92,7 +92,7 @@ communicate. Configure your network to make sure these ports are open:
 | controller, replicas        |    out    | 80                  | send anonymous usage reports to Docker.                     |
 
 Some of the ports used, are customizable. Check the
-[UCP install command reference](reference/install.md) for more
+[UCP install command reference](../reference/install.md) for more
 information on this. This guide uses the default ports.
 
 ## Step 3: Install Docker CS Engine on each node
@@ -173,7 +173,7 @@ Be sure to have this information at hand before starting the installation.
 If you're installing UCP on a cloud provider such as AWS, make sure your
 instance has a public IP or hostname, as displayed below.
 
-![Controller public IP on AWS](images/ip_cloud_provider.png)
+![Controller public IP on AWS](../images/ip_cloud_provider.png)
 
 On the controller node, install UCP:
 
@@ -182,7 +182,7 @@ On the controller node, install UCP:
         $ docker run --rm -it docker/ucp install --help
 
     You can also find the documentation for these option on
-    the [UCP install command reference](reference/install.md).
+    the [UCP install command reference](../reference/install.md).
 
 2. Run the `ucp` command interactively.
 
@@ -205,11 +205,11 @@ license to your installation:
 1. Navigate to [Docker Hub](https://hub.docker.com/) to download your license.
 On the top-right menu, choose **Settings**.
 
-    ![Docker hub home page](images/docker-hub-settings.png)
+    ![Docker hub home page](../images/docker-hub-settings.png)
 
 2. Navigate to the **Licenses** tab.
 
-    ![Docker Hub licenses page](images/docker-hub-license.png)
+    ![Docker Hub licenses page](../images/docker-hub-license.png)
 
     Download the license by clicking on it.
 
@@ -218,7 +218,7 @@ On the top-right menu, choose **Settings**.
     In your browser, navigate to the IP of the node where you installed the
     UCP controller. In this example, it's `https://52.70.188.239`.
 
-    ![UCP login screen](images/login.png)
+    ![UCP login screen](../images/login.png)
 
     Your browser may warn that the connection to UCP is not secure. The warning
     appears because you are accessing UCP with HTTPS, but the certificates used
@@ -240,7 +240,7 @@ the installation.
     After logging in, you're redirected to the licensing page. Click the
     **Upload License** button, and choose your license file.
 
-    ![UCP Login screenshot](images/skip-this.png)
+    ![UCP Login screenshot](../images/skip-this.png)
 
 6. Check the **Dashboard** page.
 
@@ -248,7 +248,7 @@ the installation.
     should show that there's only a single node in your cluster:
     the controller node.
 
-    ![UCP dashboard screenshot](images/dashboard.png)
+    ![UCP dashboard screenshot](../images/dashboard.png)
 
 ## Step 8: Add controller replicas to the UCP cluster
 
@@ -267,7 +267,7 @@ to the cluster.
 
     Also, in UCP v1.0 the controller serves as root CA. During a controller
     failure, it might not be possible to add more nodes to the cluster.
-    [Learn more about high availability](understand_ha.md).
+    [Learn more about high availability](../high-availability/understand_ha.md).
 
 
 When adding replica nodes to your installation, you will be prompted for
@@ -286,7 +286,7 @@ Review the options available on the `ucp join` command.
     $ docker run --rm -it docker/ucp join --help
 
 You can also find the documentation for the `ucp join` command at
-the [UCP join command reference](reference/join.md) page.
+the [UCP join command reference](../reference/join.md) page.
 
 For each node that you want to turn into a controller replica:
 
@@ -315,7 +315,7 @@ For each node that you want to turn into a controller replica:
     The Dashboard page should now display your new replica nodes. In the
     bottom of the screen, you can see the health of the controller and replicas.
 
-      ![UCP nodes page](images/replica-nodes.png)
+      ![UCP nodes page](../images/replica-nodes.png)
 
 
 ## Step 9: Add more nodes to the UCP cluster
@@ -339,7 +339,7 @@ Review the options available on the `ucp join` command:
     $ docker run --rm -it docker/ucp join --help
 
 You can also find the documentation for the `ucp join` command on
-the [UCP join command reference](reference/join.md) page.
+the [UCP join command reference](../reference/join.md) page.
 
 For each node that you want to add to your UCP cluster:
 
@@ -363,7 +363,7 @@ For each node that you want to add to your UCP cluster:
 
     The nodes page should now display all the nodes of your cluster.
 
-    ![UCP nodes page](images/nodes-page.png)
+    ![UCP nodes page](../images/nodes-page.png)
 
 ## Step 10: Set up certificates for the Docker CLI
 
@@ -523,7 +523,7 @@ can use to interact with UCP with the CLI client.
     In the UCP web app, navigate to your **profile**, and click the **Add an
     Existing Public Key** button.
 
-    ![Add public key](images/add-pk.png)
+    ![Add public key](../images/add-pk.png)
 
     Set a name, and the contents of the `cert.pub` file.
 
@@ -556,41 +556,7 @@ To disable usage reporting:
 
 4. Click the **Update Usage Reporting** button, to save your changes.
 
-## Uninstall
-
-To uninstall Docker UCP, use the `ucp uninstall` command. This command only
-removes the UCP containers, and doesn't affect any other containers.
-When uninstalling UCP from a cluster, leave the UCP controller node for last.
-
-Review the options available on the `ucp uninstall` command.
-
-    $ docker run --rm -it docker/ucp uninstall --help
-
-You can also find the documentation for the `ucp uninstall` command at
-the [UCP uninstall command reference](reference/uninstall.md) page.
-
-To uninstall UCP from a node:
-
-1. Login into the node you want to remove UCP from
-
-2. Run the the following command:
-
-    ```
-    $ docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock --name ucp docker/ucp uninstall -i
-
-    INFO[0000] Removing UCP Containers
-    INFO[0001] Removing UCP images
-    INFO[0007] Removing UCP volumes
-    ```
-
-    After uninstalling UCP, you can remove the `docker/ucp` images that
-    were pulled from Docker Hub when installing UCP.
-
-3. Repeat steps 1 and 2 on each node of the cluster. Make sure to save
-the controller for last.
-
 ## Where to go next
 
-* Read more [about Docker UCP](https://www.docker.com/universal-control-plane)
-* Read more [about the Docker CLI client](http://docs.docker.com/reference/commandline/cli/)
-* Learn [about Docker Swarm](http://docs.docker.com/swarm/)
+* [UCP architecture](../architecture.md)
+* [UCP system requirements](system-requirements.md)

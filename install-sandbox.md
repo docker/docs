@@ -1,22 +1,25 @@
 <!--[metadata]>
 +++
-title = "Evaluation installation"
+aliases = ["/ucp/evaluation-install/"]
+title = "Evaluate UCP in a sandbox"
 description = "Evaluation installation"
 keywords = ["tbd, tbd"]
 [menu.main]
 parent="mn_ucp"
-weight=-100
+weight=10
 +++
 <![end-metadata]-->
 
 
-# Evaluation installation and quickstart
+# Evaluate UCP in a sandbox
 
 This page helps you to learn about Docker Universal Control Plane (UCP) at a
 high-level through installing and running UCP in your local, sandbox
 installation. The installation should be done on a Mac OS X or Windows system.
 If you are experienced with Linux or a technical DevOps user wanting a technical
-deep dive, please feel free to skip this evaluation and go directly to [Plan a production installation](plan-production-install.md) and then to [Install UCP for production](production-install.md).
+deep dive, please feel free to skip this evaluation and go directly to
+[Plan a production installation](installation/plan-production-install.md)
+and then to [Install UCP for production](installation/install-production.md).
 
 A UCP installation consists of an UCP controller and one or more hosts. These
 instructions use Docker Machine, Docker's provisioning tool, to create several
@@ -50,7 +53,7 @@ a Docker Swarm cluster. The UCP installation process by default secures the clus
 This example is intended as an introduction for non-technical users wanting to
 explore UCP for themselves. If you are a highly technical user intending to act as
 UCP administration operator, you may prefer to skip this and go straight to
-[Plan a production installation](plan-production-install.md).
+[Plan a production installation](installation/plan-production-install.md).
 
 >**Note**: The command examples in this page were tested for a Mac OSX environment.
 If you are in another, you may need to adjust the commands to use analogous
@@ -142,11 +145,11 @@ an image with subcommands to `install` a UCP controller or `join` a node to a
 UCP controller. The general format of these commands are:
 
 
-| Docker client | `run` command with options | `ucp` image | Subcommand with options |
-|---------------|----------------------------|--------------|-------------------------|
-| `docker` | `run --rm -it` | `docker/ucp` | `install --help` |
-| `docker` | `run --rm -it` | `docker/ucp` | `join --help` |
-| `docker` | `run --rm -it` | `docker/ucp` | `uninstall --help` |
+| Docker client | `run` command with options | `ucp` image  | Subcommand with options |
+|:--------------|:---------------------------|:-------------|:------------------------|
+| `docker`      | `run --rm -it`             | `docker/ucp` | `install --help`        |
+| `docker`      | `run --rm -it`             | `docker/ucp` | `join --help`           |
+| `docker`      | `run --rm -it`             | `docker/ucp` | `uninstall --help`      |
 
 You can these subcommands interactively by passing them the `-i` option or by
 passing command-line options. The `ucp` tool is designed to make UCP easier to
@@ -689,6 +692,5 @@ activities you can perform with UCP.
 
 ## Where to Go Next
 
-* [Plan a production installation](plan-production-install.md)
-* [Install UCP for production](production-install.md)
-* [Docker Machine overview](https://docs.docker.com/machine/)
+* [UCP architecture](architecture.md)
+* [UCP system requirements](installation/system-requirements.md)

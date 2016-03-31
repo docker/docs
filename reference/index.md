@@ -1,12 +1,14 @@
+<!--[metadata]>
 +++
 title = "UCP tool reference"
 keywords= ["tool, reference, ucp"]
 description = "Run UCP commands"
 [menu.main]
 identifier = "ucp_ref"
-parent = "mn_ucp"
-weight=90
+parent = "mn_ucp_installation"
+weight=100
 +++
+<![end-metadata]-->
 
 # ucp tool Reference
 

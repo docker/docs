@@ -1,10 +1,12 @@
 <!--[metadata]>
 +++
+aliases = [ "/ucp/networking/"]
 title ="Set up container networking"
 keywords= ["networking, kv, engine-discovery, ucp"]
 description="Docker Universal Control Plane"
 [menu.main]
-parent="mn_ucp"
+parent="mn_ucp_configuration"
+weight=0
 +++
 <![end-metadata]-->
 
@@ -61,7 +63,7 @@ nodes for network communication.
 
     A page listing the installed UCP nodes appears.
 
-    ![Nodes page](images/host_ip_address.png)
+    ![Nodes page](../images/host_ip_address.png)
 
 3. Use the **ADDRESS** field to record the host IP address for each node.
 
@@ -220,7 +222,7 @@ Error response from daemon: failed to parse pool request for address space "Glob
 If you attempt the same operation from UCP's web administration, you receive
 the same error.
 
-![Network error](images/network_gui_error.png)
+![Network error](../images/network_gui_error.png)
 
 If you have not configured multi-host networking using the `engine-discovery`
 command, the Docker client returns these errors. Check the Engine daemon
@@ -258,3 +260,8 @@ A ping requires that inbound ICMP requests are allowed on the controller.
         $ sudo /usr/bin/docker daemon -D --cluster-advertise eth0:12376 --cluster-store etcd://CONTROLLER_PUBLIC_IP_OR_DOMAIN:12379 --cluster-store-opt kv.cacertfile=/var/lib/docker/discovery_certs/ca.pem --cluster-store-opt kv.certfile=/var/lib/docker/discovery_certs/cert.pem --cluster-store-opt kv.keyfile=/var/lib/docker/discovery_certs/key.pem
 
 Remember, you'll need to restart the daemon each time you change the start options.
+
+## Where to go next
+
+* [Integrate with DTR](dtr-integration.md)
+* [Set up high availability](../high-availability/understand_ha.md)

@@ -1,11 +1,13 @@
 <!--[metadata]>
 +++
+aliases = [ "/ucp/upgrade-ucp/"]
 title = "Upgrade UCP"
-description = "Learn how to upgrade Docker Universal Control Plane with the minimal impact to your users."
+description = "Learn how to upgrade Docker Universal Control Plane with minimal impact to your users."
 keywords = ["Docker, UCP, upgrade, update"]
 [menu.main]
-parent="mn_ucp"
-weight=-81
+identifier="ucp_upgrade_installation"
+parent="mn_ucp_installation"
+weight=40
 +++
 <![end-metadata]-->
 
@@ -14,7 +16,7 @@ weight=-81
 This page guides you on upgrading Docker Universal Control Plane (UCP).
 
 Before upgrading to a new version of UCP, check the
-[release notes](release_notes.md) for the version you are upgrading to.
+[release notes](../release_notes.md) for the version you are upgrading to.
 There you'll find information about the new features, breaking changes, and
 other relevant information for upgrading to a particular version.
 
@@ -35,7 +37,7 @@ $ docker run --rm -it docker/ucp upgrade --help
 ```
 
 You can also find the documentation for the `upgrade` command on the
-[UCP upgrade command reference](reference/upgrade.md).
+[UCP upgrade command reference](../reference/upgrade.md).
 
 When you run the `upgrade` command, it:
 
@@ -46,7 +48,7 @@ When you run the `upgrade` command, it:
     to upgrade directly to the latest version. In that case, you'll need
     to upgrade to intermediate versions before upgrading to the latest version.
 
-    Check the [release notes](release_notes.md) to see if its possible to
+    Check the [release notes](../release_notes.md) to see if its possible to
     upgrade directly or not.
 
 3. Stops and removes the old UCP containers.
@@ -67,7 +69,7 @@ while a cluster that supports high-availability has multiple controller nodes.
 To check the number of controller nodes in your cluster, navigate to the **UCP
 web application**, and check the **Nodes** page.
 
-![Cluster replicas](images/multiple-replicas.png)
+![Cluster replicas](../images/multiple-replicas.png)
 
 In this example we have 3 controller nodes set up, which means that this
 cluster is set up for high-availability.
@@ -95,14 +97,14 @@ replica nodes):
     To download a client bundle, **login** with an administrator user,
     go to your **profile** and click the **Create a Client Bundle** button.
 
-    ![Create a client bundle](images/add-pk.png)
+    ![Create a client bundle](../images/add-pk.png)
 
 2. Make sure your cluster is healthy before starting the upgrade.
 
     Login into **UCP** and navigate to the **Nodes** page. Make sure all nodes
     are listed.
 
-    ![UCP nodes](images/cluster-nodes.png)
+    ![UCP nodes](../images/cluster-nodes.png)
 
     You can also use your client bundle for this. In the command line, navigate
     to the directory of the client bundle and run:
@@ -174,14 +176,14 @@ If your cluster is set up for high-availability (has several replica nodes):
     To download a client bundle, **login** with an administrator user,
     go to your **profile** and click the **Create a Client Bundle** button.
 
-    ![Create a client bundle](images/add-pk.png)
+    ![Create a client bundle](../images/add-pk.png)
 
 3. Make sure your cluster is healthy before starting the upgrade.
 
     Login into **UCP** and navigate to the **Nodes** page. Make sure all nodes
     are listed.
 
-    ![UCP nodes](images/cluster-nodes.png)
+    ![UCP nodes](../images/cluster-nodes.png)
 
     You can also use your client bundle for this. In the command line, navigate
     to the directory of the client bundle and run:
@@ -274,5 +276,5 @@ If your cluster is set up for high-availability (has several replica nodes):
 
 ## Where to go next
 
-* [Plan a production installation](plan-production-install.md)
+* [UCP release notes](../release_notes.md)
 * [Upgrade Docker Trusted Registry](https://docs.docker.com/docker-trusted-registry/install/upgrade/)
