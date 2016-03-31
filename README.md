@@ -1,8 +1,9 @@
-# Notary 
+# Notary
 [![Circle CI](https://circleci.com/gh/docker/notary/tree/master.svg?style=shield)](https://circleci.com/gh/docker/notary/tree/master) [![CodeCov](https://codecov.io/github/docker/notary/coverage.svg?branch=master)](https://codecov.io/github/docker/notary)
 
 The Notary project comprises a [server](cmd/notary-server) and a [client](cmd/notary) for running and interacting
-with trusted collections.
+with trusted collections.  Please see the [service architecture](docs/service_architecture.md) documentation
+for more information.
 
 
 Notary aims to make the internet more secure by making it easy for people to
@@ -30,6 +31,11 @@ Notary is based on [The Update Framework](http://theupdateframework.com/), a sec
 * **Use of Existing Distribution**: Notary's trust guarantees are not tied at all to particular distribution channels from which content is delivered. Therefore, trust can be added to any existing content delivery mechanism.
 * **Untrusted Mirrors and Transport**: All of the notary metadata can be mirrored and distributed via arbitrary channels.
 
+## Documentation
+
+Please have a look at [our docs on getting started](https://docs.docker.com/notary/getting_started/).  If you spot a
+typo or inconsistency, please submit a pull request!  The source for our documentation lives [in the `docs/` directory](docs).
+
 # Notary CLI
 
 Notary is a tool for publishing and managing trusted collections of content. Publishers can digitally sign collections and consumers can verify integrity and origin of content. This ability is built on a straightforward key management and signing interface to create signed collections and configure trusted publishers.
@@ -39,7 +45,7 @@ Lets try using notary.
 
 Prerequisites:
 
-- Requirements from the [Compiling Notary Server](#compiling-notary-server) section (such as go 1.5.1)
+- Requirements from the [Compiling Notary Server](#compiling-notary-server) section (such as go 1.6)
 - [docker and docker-compose](http://docs.docker.com/compose/install/)
 - [Notary server configuration](#configuring-notary-server)
 
@@ -126,7 +132,7 @@ OpenSSL example:
 
 Prerequisites:
 
-- Go = 1.5.1
+- Go = 1.6
 - [godep](https://github.com/tools/godep) installed
 - libtool development headers installed
 
