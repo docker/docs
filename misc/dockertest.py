@@ -58,6 +58,9 @@ NOTARY_CLIENT = "bin/notary -c cmd/notary/config.json"
 # Assumes the trust server will be run using compose
 TRUST_SERVER = "https://notary-server:4443"
 
+# simple dockerfile to test building with trust
+DOCKERFILE_FIXTURE = "FROM alpine:latest\nRUN sh"
+
 # ---- setup ----
 
 def download_docker(download_dir="/tmp"):
@@ -148,6 +151,7 @@ _DIGEST_REGEX = re.compile(r"\b[dD]igest: sha256:([0-9a-fA-F]+)\b")
 _SIZE_REGEX = re.compile(r"\bsize: ([0-9]+)\b")
 _PULL_A_REGEX = re.compile(
     r"Pull \(\d+ of \d+\): .+:(.+)@sha256:([0-9a-fA-F]+)")
+_BUILD_REGEX = re.compile(r"Successfully built ([0-9a-fA-F]+)")
 
 
 def clear_tuf():
@@ -271,6 +275,17 @@ def notary_list(fout, repo):
     return [line.strip().split() for line in lines[2:]]
 
 
+def test_build(fout, docker_version):
+    """
+    Build from a simple Dockerfile and ensure it works with DCT enabled
+    """
+    # build
+    output = run_cmd(
+        "{0} build - < {1}".format(DOCKERS[docker_version], DOCKERFILE_FIXTURE), fout)
+    build_result = _BUILD_REGEX.findall(output)
+    assert len(build_result) >= 0, "build did not succeed"
+
+
 def test_pull_a(fout, docker_version, image, expected_tags):
     """
     Pull -A on an image and ensure that all the expected tags are present
@@ -333,6 +348,16 @@ def test_push(tempdir, docker_version, image, tag="", allow_push_failure=False,
                 return_val["push"][ver] = "pull succeeded"
 
         return return_val
+
+
+def test_run(fout, docker_version):
+    """
+    Runs a simple alpine container to ensure it works with DCT enabled
+    """
+    # run
+    output = run_cmd(
+        "{0} run -it --rm alpine:latest echo SUCCESS".format(DOCKERS[docker_version]), fout)
+    assert "SUCCESS" in output, "run did not succeed"
 
 
 def test_docker_version(docker_version, repo_name="", do_after_first_push=None):
@@ -399,6 +424,22 @@ def test_docker_version(docker_version, repo_name="", do_after_first_push=None):
                 [info["sha"], info["size"], "targets"])
 
         result["list"] = "listed expected targets successfully"
+
+    with open(os.path.join(tempdir, "build"), 'wb') as fout:
+            try:
+                test_build(fout, ver)
+            except subprocess.CalledProcessError:
+                result[ver]["build"] = "failed"
+            else:
+                result[ver]["build"] = "success"
+
+    with open(os.path.join(tempdir, "run"), 'wb') as fout:
+            try:
+                test_run(fout, ver)
+            except subprocess.CalledProcessError:
+                result[ver]["run"] = "failed"
+            else:
+                result[ver]["run"] = "success"
 
     with open(os.path.join(tempdir, "result.json"), 'wb') as fout:
         json.dump(result, fout, indent=2)
