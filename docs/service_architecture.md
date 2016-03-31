@@ -12,9 +12,57 @@ weight=3
 
 # Understand the Notary service architecture
 
-On this page, you get an overview of the Notary service architecture. This
-document assumes a prior understanding of [The Update
-Framework](https://theupdateframework.github.io/).
+On this page, you get an overview of the Notary service architecture.
+
+## Brief overview of TUF keys and roles
+
+This document assumes familiarity with [The Update Framework](https://theupdateframework.github.io/),
+but here is a brief recap of the TUF roles and corresponding key hierarchy:
+
+<center><img src="images/key-hierarchy.svg" alt="TUF Key Hierarchy" width="400px"/></center>
+
+- The root key is the root of all trust.  It signs the
+[root metadata file](https://github.com/theupdateframework/tuf/blob/develop/docs/tuf-spec.txt#L489),
+which lists the IDs of the root, targets, snapshot, and timestamp public keys.
+Clients use these public keys to verify the signatures on all the metadata files
+in the repository.  This key is held by a collection owner, and should be kept offline
+and safe, more so than any other key.
+
+- The snapshot key signs the
+[snapshot metadata file](https://github.com/theupdateframework/tuf/blob/develop/docs/tuf-spec.txt#L604),
+which enumerates the filenames, sizes, and hashes of the root,
+targets, and delegation metadata files for the collection.  This file is used to
+verify the integrity of the other metadata files.  The snapshot key is held by
+either a collection owner/administrator, or held by the Notary service to facilitate
+[signing by multiple collaborators via delegation roles](advanced_usage#working-with-delegation-roles).
+
+- The timestamp key signs the
+[timestamp metadata file](https://github.com/theupdateframework/tuf/blob/develop/docs/tuf-spec.txt#L827),
+which provides freshness guarantees for the collection by having the shortest expiry time of any particular
+piece of metadata and by specifying the filename, size, and hash of the most recent
+snapshot for the collection.  It is used to verify the integrity of the snapshot
+file.  The timestamp key is held by the Notary service so the timestamp can be
+automatically re-generated when it is requested from the server, rather than
+require that a collection owner come online before each timestamp expiry.
+
+- The targets key signs the
+[targets metdata file](https://github.com/theupdateframework/tuf/blob/develop/docs/tuf-spec.txt#L678),
+which lists filenames in the collection, and their sizes and respective
+[hashes](https://en.wikipedia.org/wiki/Cryptographic_hash_function).
+This file is used to verify the integrity of some or all of the actual contents of the repository.
+It is also used to
+[delegate trust to other collaborators via delegation roles](advanced_usage#working-with-delegation-roles).
+The targets key is held by the collection owner or administrator.
+
+- Delegation keys sign
+[delegation metdata files](https://github.com/theupdateframework/tuf/blob/develop/docs/tuf-spec.txt#L678),
+which lists filenames in the collection, and their sizes and respective
+[hashes](https://en.wikipedia.org/wiki/Cryptographic_hash_function).
+These files is used to verify the integrity of some or all of the actual contents of the repository.
+They are is also used to
+[delegate trust to other collaborators via lower level delegation roles](advanced_usage#working-with-delegation-roles).
+Delegation keys are held by anyone from the collection owner or administrator to
+collection collaborators.
 
 ## Architecture and components
 
@@ -106,7 +154,9 @@ sever, and signer:
 
 ## Threat model
 
-Both the server and the signer are potential attack vectors. This section
+Both the server and the signer are potential attack vectors against all users
+of the Notary service.  Client keys are also a potential attack vector, but
+not necessarily against all collections at a time. This section
 discusses how our architecture is designed to deal with compromises.
 
 ### Notary server compromise
@@ -171,95 +221,158 @@ keys in the HSM, but not to exfiltrate the private material.
 
 ### Notary client keys and credentials compromise
 
-The severity of the compromise of a trust collection owner/administrator's key
-depends on which type of key in the key hierarchy is compromised:
+The security of keys held and administered by users depend measures taken by the
+users.  If the Notary Client CLI was used to create them, then they are password
+protected and the Notary CLI does not provide options to export them in
+plaintext.
 
-<center><img src="images/key-hierarchy.svg" alt="TUF Key Hierarchy" style="max-width: 500px;"/></center>
+It is up to the user to choose an appropriate password, and to protect their key
+from offline brute-force attacks.
 
+The severity of the compromise of a trust collection owner/administrator's
+decrypted key depends on the type and combination of keys that were compromised
+(e.g. the snapshot key and targets key, or just the targets key).
 
-Also, the severity depends upon whether a combination of keys were compromised (e.g.
-the snapshot key and targets key, or just the targets key).
+#### Possible attacks given the credentials compromised:
 
-In general, with the right combination of compromised keys, an attacker would be
-able to sign valid changes to the contents of that collection, and to any other
-collections that use the same keys.
+- **Decrypted Delegation Key, only**
 
-They can then set up a mirror to distribute this metadata, but they would not
-be able to distribute it via a Notary service unless they also have write-capable
-credentials for that service (e.g. the username/password of a user who could
-push updates into that service).
+  | Keys compromised | Malicious Content | Rollback, Freeze, Mix and Match | Denial of Service |
+  |------------------|-------------------|---------------------------------|-------------------|
+  | Delegation key   | no                | no                              | no                |
 
-Familiarity with [TUF (the update framework)](https://theupdateframework.github.io/)
-would be helpful in understanding the different types of keys and roles
-mentioned below.
+- **Decrypted Delegation Key + Notary Service write-capable credentials**
 
-Note that the descriptions below assume that the snapshot key is managed by the
-Notary service - otherwise, in addition to the keys below, the snapshot key would
-also have to be compromised in order to perform any of the attacks.
+  | Keys compromised | Malicious Content | Rollback, Freeze, Mix and Match | Denial of Service |
+  |------------------|-------------------|---------------------------------|-------------------|
+  | Delegation key   | limited, maybe*   | limited, maybe*                 | limited, maybe*   |
 
-#### Delegation key compromise
+  *If the Notary Service holds the snapshot key and the attacker has Notary Service
+  write credentials, then they have effective access to the snapshot and timestamp
+  keys because the server will generate and sign the snapshot and timestamp for them.
 
-A delegation key has the most limited capabilities of any client-managed key.
-It is used to sign targets into [specific delegation roles, which may have path
-restrictions](advanced_usage.md#work-with-delegation-roles), and can further
-delegate trust to other delegation roles.
+  An attacker can add malicious content, remove legitimate content from a collection, and
+  mix up the targets in a collection, but only within the particular delegation
+  roles that the key can sign for.  Depending on the restrictions on that role,
+  they may be restricted in what type of content they can modify.  They may also
+  add or remove the capabilities of other delegation keys below it on the key hierarchy
+  (e.g. if `DelegationKey2` in the above key hierarchy were compromised, it would only be
+  able to modify the capabilities of `DelegationKey4` and `DelegationKey5`).
 
-- **Limited Malicious Content, Rollback, Freeze, Mix and Match** - An attacker
-    can add malicious content, remove legitimate content from a collection, and
-    mix up the targets in a collection, but only within the particular delegation
-    roles that the key can sign for.  Depending on the restrictions on that role,
-    they may be restricted in what type of content they can modify.
+- **Decrypted Delegation Key + Decrypted Snapshot Key, only**
 
-- **Limited Denial of Service** - An attacker may add or remove the capabilities
-    of other delegation keys with even less capabilities, but only those below it
-    on the key hierarchy  (e.g. if `DelegationKey2` were compromised, it would
-    only be able to modify the capabilityes of `DelegationKey4` and `DelegationKey5`),
-    thus preventing holders of those keys from being able to modify content.
+  | Keys compromised | Malicious Content | Rollback, Freeze, Mix and Match | Denial of Service |
+  |------------------|-------------------|---------------------------------|-------------------|
+  | Delegation key <br/> Snapshot key  | no    | no                        | no                |
 
-Mitigation:  if a compromise is detected, a higher level key (either the targets
-key or another delegation key) holder must rotate the compromised key, and
-push a clean set of targets using the new key.
+  The attacker does not have access to the timestamp key, which is always held by the Notary
+  Service, and will be unable to set up a malicious mirror.
 
-#### Targets key compromise
+- **Decrypted Delegation Key + Decrypted Snapshot Key + Notary Service write-capable credentials**
 
-A targets key, similarly to a delegation key, is used to sign targets into the
-targets role, which is the ancestor role of any delegation role.  It delegates
-trust to top level delegation roles.
+  | Keys compromised | Malicious Content | Rollback, Freeze, Mix and Match | Denial of Service |
+  |------------------|-------------------|---------------------------------|-------------------|
+  | Delegation key <br/> Snapshot key  | limited   | limited               | limited           |
 
-- **Malicious Content, Rollback, Freeze, Mix and Match** - An attacker
-    can add any malicious content, remove any legitimate content from a
-    collection, and mix up the targets in a collection.
+  The Notary Service always holds the timestamp key.  If the attacker has Notary Service
+  write credentials, then they have effective access to the timestamp key because the server
+  will generate and sign the timestamp for them.
 
-- **Limited Denial of Service** - An attacker may add or remove the capabilities
-    of any delegation keys by removing the capabilities of the keys in the top
-    level delegation roles, thus preventing holders of those keys from being
-    able to modify content.
+  An attacker can add malicious content, remove legitimate content from a collection, and
+  mix up the targets in a collection, but only within the particular delegation
+  roles that the key can sign for.  Depending on the restrictions on that role,
+  they may be restricted in what type of content they can modify.  They may also
+  add or remove the capabilities of other delegation keys below it on the key hierarchy
+  (e.g. if `DelegationKey2` in the above key hierarchy were compromised, it would only be
+  able to modify the capabilities of `DelegationKey4` and `DelegationKey5`).
 
-Mitigation:  if a compromise is detected, the root key holder must rotate the
-compromised key and push a clean set of targets using the new key.
+- **Decrypted Targets Key, only**
 
-#### Root key compromise
+  | Keys compromised | Malicious Content | Rollback, Freeze, Mix and Match | Denial of Service |
+  |------------------|-------------------|---------------------------------|-------------------|
+  | Targets key      | no                | no                              | no                |
 
-A root key is the root of all trust.  It specifies the top keys used to
-sign all the other top level metadata (the root, the timestamp, the snapshot,
-and the targets keys).
+- **Decrypted Targets Key + Notary Service write-capable credentials**
 
-- **Complete Key Compromise** An attacker can rotate all the top level keys,
-    including the root key, giving themselves complete control over all keys in
-    the repository.
+  | Keys compromised | Malicious Content | Rollback, Freeze, Mix and Match | Denial of Service |
+  |------------------|-------------------|---------------------------------|-------------------|
+  | Targets key      | maybe*            | maybe*                          | limited, maybe*   |
 
-- **Malicious Content, Rollback, Freeze, Mix and Match** - With their
-    newly rotated keys, an attacker can add any malicious content, remove any
-    legitimate content from a collection, and mix up the targets in a collection.
+  *If the Notary Service holds the snapshot key and the attacker has Notary Service
+  write credentials, then they have effective access to the snapshot and timestamp
+  keys because the server will generate and sign the snapshot and timestamp for them.
 
-- **Denial of Service** - By rotating all keys including the root key,
-    an attacker removes the capabilities for any other key to sign for new data.
+  An attacker can add any malicious content, remove any legitimate content from a
+  collection, and mix up the targets in a collection.  They may also add or remove
+  the capabilities of any top level delegation key or role (e.g. `Delegation1`,
+  `Delegation2`, and `Delegation3` in the key hierarchy diagram).  If they remove
+  the roles entirely, they'd break the trust chain to the lower delegation roles
+  (e.g. `Delegation4`, `Delegation5`).
 
-Mitigation:  if a compromise is detected, the root key holder should contact
+- **Decrypted Targets Key + Decrypted Snapshot Key, only**
+
+  | Keys compromised | Malicious Content | Rollback, Freeze, Mix and Match | Denial of Service |
+  |------------------|-------------------|---------------------------------|-------------------|
+  | Targets key <br/> Snapshot key     | no    | no                        | no                |
+
+  The attacker does not have access to the timestamp key, which is always held by the Notary
+  Service, and will be unable to set up a malicious mirror.
+
+- **Decrypted Targets Key + Decrypted Snapshot Key + Notary Service write-capable credentials**
+
+  | Keys compromised | Malicious Content | Rollback, Freeze, Mix and Match | Denial of Service |
+  |------------------|-------------------|---------------------------------|-------------------|
+  | Targets key <br/> Snapshot key       | yes   | yes                     | limited           |
+
+  The Notary Service always holds the timestamp key.  If the attacker has Notary Service
+  write credentials, then they have effective access to the timestamp key because the server
+  will generate and sign the timestamp for them.
+
+  An attacker can add any malicious content, remove any legitimate content from a
+  collection, and mix up the targets in a collection.  They may also add or remove
+  the capabilities of any top level delegation key or role (e.g. `Delegation1`,
+  `Delegation2`, and `Delegation3` in the key hierarchy diagram).  If they remove
+  the roles entirely, they'd break the trust chain to the lower delegation roles
+  (e.g. `Delegation4`, `Delegation5`).
+
+- **Decrypted Root Key + none or any combination of decrypted keys, only**
+
+  | Keys compromised | Malicious Content | Rollback, Freeze, Mix and Match | Denial of Service |
+  |------------------|-------------------|---------------------------------|-------------------|
+  | All keys         | yes               | yes                             | yes               |
+
+  No other keys are needed, since the attacker can just any rotate or all of them to ones that they
+  generate.  With these keys, they can set up a mirror to serve malicious data - any malicious data
+  at all, given that they have acess to all the keys.
+
+- **Decrypted Root Key + none or any combination of decrypted keys + Notary Service write-capable credentials**
+
+  | Keys compromised | Malicious Content | Rollback, Freeze, Mix and Match | Denial of Service |
+  |------------------|-------------------|---------------------------------|-------------------|
+  | All keys         | yes               | yes                             | yes               |
+
+  *If the Notary Service holds the snapshot key and the attacker has Notary Service
+  write credentials, then they won't even have to rotate the snapshot and timestamp
+  keys because the server will generate and sign the snapshot and timestamp for them.
+
+#### Mitigations
+
+If a root key compromise is detected, the root key holder should contact
 whomever runs the notary service to manually reverse any malicious changes to
 the repository, and immediately rotate the root key.  This will create a fork
 of the repository history, and thus break existing clients who have downloaded
 any of the malicious changes.
+
+If a targets key compromise is detected, the root key holder
+must rotate the compromised key and push a clean set of targets using the new key.
+
+If a delegations key compromise is detected, a higher level key (e.g. if
+<code>Delegation4</code> were compromised, then <code>Delegation2</code>; if
+<code>Delegation2</code> were compromised, then the <code>Targets</code> key)
+holder must rotate the compromised key, and push a clean set of targets using the new key.
+
+If a Notary Service credential compromise is detected, the credentials should be
+changed immediately.
 
 ## Related information
 
