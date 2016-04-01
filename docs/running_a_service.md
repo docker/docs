@@ -21,7 +21,7 @@ and [Docker Compose](https://docs.docker.com/compose/overview/).
 
 The quickest way to spin up a full Notary service for testing and development
 purposes is to use the Docker compose file in the
-[Notary project](https://github.com/docker/notary).
+<a href="https://github.com/docker/notary" target="_blank">Notary project</a>.
 
 ```plain
 $ git clone https://github.com/docker/notary.git
@@ -75,9 +75,9 @@ the following command line arguments:
 - `-config=<config file>` - specify the path to the JSON configuration file.
 
 - `-debug` - Passing this flag enables the debugging server on `localhost:8080`.
-	The debugging server provides [pprof](https://golang.org/pkg/net/http/pprof/)
-	and [expvar](https://golang.org/pkg/expvar/) endpoints.  (Remember, this
-	is localhost with respect to the running container - this endpoint is not
+	The debugging server provides <a href="https://golang.org/pkg/net/http/pprof/" target="_blank">pprof</a>
+	and <a href="https://golang.org/pkg/expvar/" target="_blank">expvar</a> endpoints.
+	(Remember, this is localhost with respect to the running container - this endpoint is not
 	exposed from the container).
 
 	This option can also be set in the configuration file.

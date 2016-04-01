@@ -16,20 +16,21 @@ On this page, you get an overview of the Notary service architecture.
 
 ## Brief overview of TUF keys and roles
 
-This document assumes familiarity with [The Update Framework](https://theupdateframework.github.io/),
+This document assumes familiarity with
+<a href="https://www.theupdateframework.com/" target="_blank">The Update Framework</a>,
 but here is a brief recap of the TUF roles and corresponding key hierarchy:
 
 <center><img src="images/key-hierarchy.svg" alt="TUF Key Hierarchy" width="400px"/></center>
 
 - The root key is the root of all trust.  It signs the
-[root metadata file](https://github.com/theupdateframework/tuf/blob/develop/docs/tuf-spec.txt#L489),
+<a href="https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L489" target="_blank">root metadata file</a>,
 which lists the IDs of the root, targets, snapshot, and timestamp public keys.
 Clients use these public keys to verify the signatures on all the metadata files
 in the repository.  This key is held by a collection owner, and should be kept offline
 and safe, more so than any other key.
 
 - The snapshot key signs the
-[snapshot metadata file](https://github.com/theupdateframework/tuf/blob/develop/docs/tuf-spec.txt#L604),
+<a href="https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L604" target="_blank">snapshot metadata file</a>,
 which enumerates the filenames, sizes, and hashes of the root,
 targets, and delegation metadata files for the collection.  This file is used to
 verify the integrity of the other metadata files.  The snapshot key is held by
@@ -37,7 +38,7 @@ either a collection owner/administrator, or held by the Notary service to facili
 [signing by multiple collaborators via delegation roles](advanced_usage#working-with-delegation-roles).
 
 - The timestamp key signs the
-[timestamp metadata file](https://github.com/theupdateframework/tuf/blob/develop/docs/tuf-spec.txt#L827),
+<a href="https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L827" target="_blank">timestamp metadata file</a>,
 which provides freshness guarantees for the collection by having the shortest expiry time of any particular
 piece of metadata and by specifying the filename, size, and hash of the most recent
 snapshot for the collection.  It is used to verify the integrity of the snapshot
@@ -46,18 +47,18 @@ automatically re-generated when it is requested from the server, rather than
 require that a collection owner come online before each timestamp expiry.
 
 - The targets key signs the
-[targets metdata file](https://github.com/theupdateframework/tuf/blob/develop/docs/tuf-spec.txt#L678),
+<a href="https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L678" target="_blank">targets metdata file</a>,
 which lists filenames in the collection, and their sizes and respective
-[hashes](https://en.wikipedia.org/wiki/Cryptographic_hash_function).
+<a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function" target="_blank">hashes</a>.
 This file is used to verify the integrity of some or all of the actual contents of the repository.
 It is also used to
 [delegate trust to other collaborators via delegation roles](advanced_usage#working-with-delegation-roles).
 The targets key is held by the collection owner or administrator.
 
 - Delegation keys sign
-[delegation metdata files](https://github.com/theupdateframework/tuf/blob/develop/docs/tuf-spec.txt#L678),
+<a href="https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L678" target="_blank">delegation metdata files</a>,
 which lists filenames in the collection, and their sizes and respective
-[hashes](https://en.wikipedia.org/wiki/Cryptographic_hash_function).
+<a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function" target="_blank">hashes</a>.
 These files is used to verify the integrity of some or all of the actual contents of the repository.
 They are is also used to
 [delegate trust to other collaborators via lower level delegation roles](advanced_usage#working-with-delegation-roles).
@@ -70,8 +71,8 @@ Notary clients pull metadata from one or more (remote) Notary services.  Some
 Notary clients will push metadata to one or more Notary services.
 
 A Notary service consists of a Notary server, which stores and updates the
-signed [TUF metadata files](
-https://github.com/theupdateframework/tuf/blob/develop/docs/tuf-spec.txt#L348)
+signed
+<a href="https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L348">TUF metadata files</a>
 for multiple trusted collections in an associated database, and a Notary signer, which
 stores private keys for and signs metadata for the Notary server. The following
 diagram illustrates this architecture:
@@ -89,12 +90,9 @@ responsible for:
 The Notary signer is responsible for:
 
 - storing the private signing keys
-[wrapped](
-https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-31#section-4.4)
-and [encrypted](
-https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-31#section-4.8)
-using [Javascript Object Signing and Encryption](
-https://github.com/dvsekhvalnov/jose2go) in a database separate from the
+<a href="https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-31#section-4.4" target="_blank">wrapped</a>
+and <a href="https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-31#section-4.8" target="_blank">encrypted</a>
+using <a href="https://github.com/dvsekhvalnov/jose2go" target="_blank">Javascript Object Signing and Encryption</a> in a database separate from the
 Notary server database
 - performing signing operations with these keys whenever the Notary server requests
 
@@ -106,7 +104,7 @@ sever, and signer:
 ![Notary Service Sequence Diagram](images/metadata-sequence.svg)
 
 1. Notary server optionally supports authentication from clients using
-   [JWT](http://jwt.io/) tokens. This requires an authorization server that
+   <a href="http://jwt.io/" target="_blank">JWT</a> tokens. This requires an authorization server that
    manages access controls, and a cert bundle from this authorization server
    containing the public key it uses to sign tokens.
 

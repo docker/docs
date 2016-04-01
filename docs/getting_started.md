@@ -24,16 +24,17 @@ and origin of content. This ability is built on a straightforward key management
 and signing interface to create signed collections and configure trusted publishers.
 
 With Notary anyone can provide trust over arbitrary collections of data. Using
-[The Update Framework (TUF)](http://theupdateframework.com/) as the underlying
-security framework, Notary takes care of the operations necessary to create, manage
-and distribute the metadata necessary to ensure the integrity and freshness of
-your content.
+<a href="https://www.theupdateframework.com/" target="_blank">The Update Framework (TUF)</a>
+as the underlying security framework, Notary takes care of the operations necessary
+to create, manage and distribute the metadata necessary to ensure the integrity and
+freshness of your content.
 
 ## Install Notary
 
 You can download precompiled notary binary for 64 bit Linux or Mac OS X from the
-Notary repository's [releases page on
-GitHub](https://github.com/docker/notary/releases). Windows is not officially
+Notary repository's
+<a href="https://github.com/docker/notary/releases" target="_blank">releases page on
+GitHub</a>. Windows is not officially
 supported, but if you are a developer and Windows user, we would appreciate any
 insight you can provide regarding issues.
 

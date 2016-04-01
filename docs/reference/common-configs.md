@@ -54,9 +54,9 @@ below to configure it.
 
 The reporting section contains any configuration for useful for running the
 service, such as reporting errors. Currently, Notary only supports reporting errors
-to [Bugsnag](https://bugsnag.com).
+to <a href="https://bugsnag.com" target="_blank">Bugsnag</a>.
 
-See [bugsnag-go](https://github.com/bugsnag/bugsnag-go/) for more information
+See <a href="https://github.com/bugsnag/bugsnag-go/" target="_blank">bugsnag-go</a> for more information
 about these configuration parameters.
 
 ```json
