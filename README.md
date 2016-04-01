@@ -33,9 +33,9 @@ Notary is based on [The Update Framework](https://www.theupdateframework.com/), 
 
 ## Security
 
-Please see our [service architecture docs](docs/service_architecture.md#threat-model) for more information about our threat model.
+Please see our [service architecture docs](docs/service_architecture.md#threat-model) for more information about our threat model, which details the varying survivability and severities for key compromise as well as mitigations.
 
-Our last security audit was on July 31, 2015 by NCC ([results](TODO: link PDF if that's ok)):
+Our last security audit was on July 31, 2015 by NCC ([results](docs/resources/ncc_docker_notary_audit_2015_07_31.pdf)).
 
 Any security vulnerabilities can be reported to security@docker.com.
 

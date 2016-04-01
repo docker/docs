@@ -23,47 +23,47 @@ but here is a brief recap of the TUF roles and corresponding key hierarchy:
 <center><img src="images/key-hierarchy.svg" alt="TUF Key Hierarchy" width="400px"/></center>
 
 - The root key is the root of all trust. It signs the
-<a href="https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L489" target="_blank">root metadata file</a>,
-which lists the IDs of the root, targets, snapshot, and timestamp public keys.
-Clients use these public keys to verify the signatures on all the metadata files
-in the repository. This key is held by a collection owner, and should be kept offline
-and safe, more so than any other key.
+  <a href="https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L489" target="_blank">root metadata file</a>,
+  which lists the IDs of the root, targets, snapshot, and timestamp public keys.
+  Clients use these public keys to verify the signatures on all the metadata files
+  in the repository. This key is held by a collection owner, and should be kept offline
+  and safe, more so than any other key.
 
 - The snapshot key signs the
-<a href="https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L604" target="_blank">snapshot metadata file</a>,
-which enumerates the filenames, sizes, and hashes of the root,
-targets, and delegation metadata files for the collection. This file is used to
-verify the integrity of the other metadata files. The snapshot key is held by
-either a collection owner/administrator, or held by the Notary service to facilitate
-[signing by multiple collaborators via delegation roles](advanced_usage#working-with-delegation-roles).
+  <a href="https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L604" target="_blank">snapshot metadata file</a>,
+  which enumerates the filenames, sizes, and hashes of the root,
+  targets, and delegation metadata files for the collection. This file is used to
+  verify the integrity of the other metadata files. The snapshot key is held by
+  either a collection owner/administrator, or held by the Notary service to facilitate
+  [signing by multiple collaborators via delegation roles](advanced_usage.md#working-with-delegation-roles).
 
 - The timestamp key signs the
-<a href="https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L827" target="_blank">timestamp metadata file</a>,
-which provides freshness guarantees for the collection by having the shortest expiry time of any particular
-piece of metadata and by specifying the filename, size, and hash of the most recent
-snapshot for the collection. It is used to verify the integrity of the snapshot
-file. The timestamp key is held by the Notary service so the timestamp can be
-automatically re-generated when it is requested from the server, rather than
-require that a collection owner come online before each timestamp expiry.
+  <a href="https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L827" target="_blank">timestamp metadata file</a>,
+  which provides freshness guarantees for the collection by having the shortest expiry time of any particular
+  piece of metadata and by specifying the filename, size, and hash of the most recent
+  snapshot for the collection. It is used to verify the integrity of the snapshot
+  file. The timestamp key is held by the Notary service so the timestamp can be
+  automatically re-generated when it is requested from the server, rather than
+  require that a collection owner come online before each timestamp expiry.
 
 - The targets key signs the
-<a href="https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L678" target="_blank">targets metdata file</a>,
-which lists filenames in the collection, and their sizes and respective
-<a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function" target="_blank">hashes</a>.
-This file is used to verify the integrity of some or all of the actual contents of the repository.
-It is also used to
-[delegate trust to other collaborators via delegation roles](advanced_usage#working-with-delegation-roles).
-The targets key is held by the collection owner or administrator.
+  <a href="https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L678" target="_blank">targets metadata file</a>,
+  which lists filenames in the collection, and their sizes and respective
+  <a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function" target="_blank">hashes</a>.
+  This file is used to verify the integrity of some or all of the actual contents of the repository.
+  It is also used to
+  [delegate trust to other collaborators via delegation roles](advanced_usage.md#working-with-delegation-roles).
+  The targets key is held by the collection owner or administrator.
 
 - Delegation keys sign
-<a href="https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L678" target="_blank">delegation metdata files</a>,
-which lists filenames in the collection, and their sizes and respective
-<a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function" target="_blank">hashes</a>.
-These files is used to verify the integrity of some or all of the actual contents of the repository.
-They are is also used to
-[delegate trust to other collaborators via lower level delegation roles](advanced_usage#working-with-delegation-roles).
-Delegation keys are held by anyone from the collection owner or administrator to
-collection collaborators.
+  <a href="https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L678" target="_blank">delegation metadata files</a>,
+  which lists filenames in the collection, and their sizes and respective
+  <a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function" target="_blank">hashes</a>.
+  These files is used to verify the integrity of some or all of the actual contents of the repository.
+  They are is also used to [delegate trust to other collaborators via lower level delegation roles](
+  advanced_usage.md#working-with-delegation-roles).
+  Delegation keys are held by anyone from the collection owner or administrator to
+  collection collaborators.
 
 ## Architecture and components
 
@@ -90,16 +90,16 @@ responsible for:
 The Notary signer is responsible for:
 
 - storing the private signing keys
-<a href="https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-31#section-4.4" target="_blank">wrapped</a>
-and <a href="https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-31#section-4.8" target="_blank">encrypted</a>
-using <a href="https://github.com/dvsekhvalnov/jose2go" target="_blank">Javascript Object Signing and Encryption</a> in a database separate from the
-Notary server database
+  <a href="https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-31#section-4.4" target="_blank">wrapped</a>
+  and <a href="https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-31#section-4.8" target="_blank">encrypted</a>
+  using <a href="https://github.com/dvsekhvalnov/jose2go" target="_blank">Javascript Object Signing and Encryption</a> in a database separate from the
+  Notary server database
 - performing signing operations with these keys whenever the Notary server requests
 
 ## Example client-server-signer interaction
 
 The following diagram illustrates the interactions between the Notary client,
-sever, and signer:
+server, and signer:
 
 ![Notary Service Sequence Diagram](images/metadata-sequence.svg)
 
@@ -202,9 +202,10 @@ operations with any key the Signer holds.
 ### Notary signer compromise
 
 In the event of a Notary signer compromise, an attacker would have access to
-all the private keys stored in a database. If the keys are stored in an HSM,
-they would have the ability to sign arbitrary content with, and to delete, the
-keys in the HSM, but not to exfiltrate the private material.
+all the (timestamp and snapshot) private keys stored in a database.
+If the keys are stored in an HSM, they would have the ability to sign arbitrary
+content with, and to delete, the keys in the HSM, but not to exfiltrate the
+private material.
 
 - **Denial of Service** - An attacker could reject all Notary server requests
   and corrupt or delete keys from the database (or even delete keys from an
@@ -212,15 +213,16 @@ keys in the HSM, but not to exfiltrate the private material.
   timestamps or snapshots.
 
 - **Key Compromise** - If the Notary signer uses a database as its backend,
-  an attacker can exfiltrate all the private material. Note that the capabilities
-  of an attacker are the same as of a Notary server compromise in terms of
-  signing arbitrary metadata, with the important detail that in this particular
-  case key rotations will be necessary to recover from the attack.
+  an attacker can exfiltrate all the (timestamp and snapshot) private material.
+  Note that the capabilities of an attacker are the same as of a Notary server
+  compromise in terms of signing arbitrary metadata, with the important detail
+  that in this particular case key rotations will be necessary to recover from
+  the attack.
 
 ### Notary client keys and credentials compromise
 
-The security of keys held and administered by users depend measures taken by the
-users. If the Notary Client CLI was used to create them, then they are password
+The security of keys held and administered by users depends on measures taken by
+the users. If the Notary Client CLI was used to create them, then they are password
 protected and the Notary CLI does not provide options to export them in
 plaintext.
 
@@ -365,8 +367,8 @@ If a targets key compromise is detected, the root key holder
 must rotate the compromised key and push a clean set of targets using the new key.
 
 If a delegations key compromise is detected, a higher level key (e.g. if
-<code>Delegation4</code> were compromised, then <code>Delegation2</code>; if
-<code>Delegation2</code> were compromised, then the <code>Targets</code> key)
+`Delegation4` were compromised, then `Delegation2`; if
+`Delegation2` were compromised, then the `Targets` key)
 holder must rotate the compromised key, and push a clean set of targets using the new key.
 
 If a Notary Service credential compromise is detected, the credentials should be
