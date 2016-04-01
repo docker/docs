@@ -17,7 +17,7 @@ set -x
 
 cleanup
 
-docker-compose -f development.yml build ${BUILDOPTS}
+docker-compose -f development.yml build ${BUILDOPTS} --pull | tee
 docker-compose -f development.yml up --abort-on-container-exit
 
 trap cleanup SIGINT SIGTERM EXIT
