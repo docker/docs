@@ -196,30 +196,6 @@ def run_cmd(cmd, fileoutput):
         fileoutput.write("\n")
 
 
-def run_cmd_with_input(cmd, input, fileoutput):
-    """
-    Takes a string command and an input to pipe into the command execution, and returns the output even if it fails.
-    """
-    print("$ cat " + input + " | " + cmd)
-    fileoutput.write("$ cat {0} | {1}\n".format(input, cmd))
-    try:
-        ps = subprocess.Popen(['cat', input], stdout=subprocess.PIPE)
-        output = subprocess.check_output(cmd.split(), stdin=ps.stdout, stderr=subprocess.STDOUT,
-                                         env=_ENV)
-    except subprocess.CalledProcessError as ex:
-        print(ex.output)
-        fileoutput.write(ex.output)
-        raise
-    else:
-        if output:
-            print(output)
-            fileoutput.write(output)
-        return output
-    finally:
-        print()
-        fileoutput.write("\n")
-
-
 def rmi(fout, docker_version, image, tag):
     """
     Ensures that an image is no longer available locally to docker.
@@ -298,6 +274,7 @@ def test_build(fout, image, docker_version):
     """
     Build from a simple Dockerfile and ensure it works with DCT enabled
     """
+    clear_tuf()
     # build
     # simple dockerfile to test building with trust
     dockerfile = "FROM {0}:{1}\nRUN sh\n".format(image, docker_version)
@@ -305,8 +282,8 @@ def test_build(fout, image, docker_version):
     with open(tempdir_dockerfile, 'wb') as ftemp:
       ftemp.write(dockerfile)
 
-    output = run_cmd_with_input(
-        "{0} build -".format(DOCKERS[docker_version]), tempdir_dockerfile, fout)
+    output = run_cmd(
+        "{0} build {1}".format(DOCKERS[docker_version], _TEMPDIR), fout)
 
     build_result = _BUILD_REGEX.findall(output)
     assert len(build_result) >= 0, "build did not succeed"
@@ -380,6 +357,7 @@ def test_run(fout, image, docker_version):
     """
     Runs a simple alpine container to ensure it works with DCT enabled
     """
+    clear_tuf()
     # run
     output = run_cmd(
         "{0} run -it --rm {1}:{2} echo SUCCESS".format(DOCKERS[docker_version], image, docker_version), fout)
