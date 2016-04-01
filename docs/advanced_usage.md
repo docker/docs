@@ -158,9 +158,9 @@ x509 cert `cert.pem` to the `targets/releases` delegation.
 For the `targets/releases` delegation role to sign content, the delegation user
 must possess the private key corresponding to this public key. This command
 restricts this delegation to only publish content under pathnames prefixed by
-`delegation/path`.  With the given path of "delegation/path", the `targets/releases`
+`delegation/path`. With the given path of "delegation/path", the `targets/releases`
 role would be able to sign paths like "delegation/path/content.txt", "delegation/path_file.txt"
-and "delegation/path.txt".  You can add more paths in a comma-separated list under
+and "delegation/path.txt". You can add more paths in a comma-separated list under
 `--paths`, or pass the `--all-paths` flag to allow this delegation to publish
 content under any pathname.
 
@@ -174,9 +174,9 @@ $ notary delegation list example.com/collection
   targets/releases   delegation/path   729c7094a8210fd1e780e7b17b7bb55c9a28a48b871b07f65d97baf93898523a   1
 ```
 
-You can see the `targets/releases` with its paths and key IDs.  If you wish to modify these fields, you can do so with additional `notary delegation add` or `notary delegation remove` commands on this role.
+You can see the `targets/releases` with its paths and key IDs. If you wish to modify these fields, you can do so with additional `notary delegation add` or `notary delegation remove` commands on this role.
 
-A threshold of `1` indicates that only one of the keys specified in `KEY IDS` is required to publish to this delegation. Thresholds other than 1 are not currently supported.  To remove a delegation role entirely, or just individual keys and/or paths, use the `notary delegation remove` command:
+A threshold of `1` indicates that only one of the keys specified in `KEY IDS` is required to publish to this delegation. Thresholds other than 1 are not currently supported. To remove a delegation role entirely, or just individual keys and/or paths, use the `notary delegation remove` command:
 
 ```
 $ notary delegation remove example.com/user targets/releases
@@ -195,7 +195,7 @@ delete the role entirely.
 To add targets to a specified delegation role, we can use the `notary add`
 command with the `--roles` flag.
 
-You must have imported an appropriate delegation key for this role.  To do so,
+You must have imported an appropriate delegation key for this role. To do so,
 you can run `notary key import <KEY_FILE> --role user` with the private key PEM
 file, or drop the private key PEM in `private/tuf_keys` as `<KEY_ID>.key` with
 the `role` PEM header set to `user`.
@@ -211,7 +211,7 @@ role `targets/releases`. This target's path is valid because it is prefixed by
 the delegation role's valid path.
 
 The `notary list` and `notary remove` commands can also take the `--roles` flag
-to specify roles to list or remove targets from.  By default, this operates over
+to specify roles to list or remove targets from. By default, this operates over
 the base `targets` role.
 
 To remove this target from our delegation, use the `notary remove` command with
@@ -228,7 +228,7 @@ delegation as the canonical source of a trusted image tag, if it exists.
 
 When running `docker pull` with Docker Content Trust on Docker Engine 1.10,
 Docker will attempt to search the `targets/releases` role for the signed image tag,
-and will fall back to the default `targets` role if it does not exist.  Please note
+and will fall back to the default `targets` role if it does not exist. Please note
 that when searching the default `targets` role, Docker 1.10 may pick up on other
 non-`targets/releases` delegation roles' signed images if they exist for this tag.
 In Docker 1.11, this behavior is changed such that all `docker pull` commands with
@@ -237,7 +237,7 @@ or the `targets` base role.
 
 When running `docker push` with Docker Content Trust, Docker Engine 1.10 will
 attempt to sign and push with the `targets/releases` delegation role if it exists,
-otherwise falling back to the `targets` role.  In Docker 1.11, a `docker push` will
+otherwise falling back to the `targets` role. In Docker 1.11, a `docker push` will
 instead attempt to sign and push with all delegation roles directly under targets
 (ex: `targets/role` but not `targets/nested/role`) that the user has signing keys for.
 If delegation roles exist but the user does not have signing keys, the push will fail.
