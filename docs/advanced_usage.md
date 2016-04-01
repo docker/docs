@@ -102,14 +102,16 @@ The targets key must be locally managed - to rotate the targets key, for instanc
 
 ### Use a Yubikey
 
-Notary can be used with [Yubikey
-4](https://www.yubico.com/products/yubikey-hardware/yubikey4/) keys, via a PKCS11 interface when the Yubikey has CCID mode enabled.
+Notary can be used with
+<a href="https://www.yubico.com/products/yubikey-hardware/yubikey4/" target="_blank">Yubikey
+4</a> keys, via a PKCS11 interface when the Yubikey has CCID mode enabled.
 The Yubikey will be prioritized to store root keys, and will require user touch-input for signing.
 
 >**Note**: Yubikey support for signing docker images is only supported in the experimental branch.
 
-Yubikey support requires [Yubico PIV libraries (which are bundled with the PIV
-tools)](https://www.yubico.com/support/downloads) to be available in standard
+Yubikey support requires
+<a href="https://www.yubico.com/support/downloads" target="_blank">Yubico PIV libraries
+(which are bundled with the PIV tools)</a> to be available in standard
 library locations.
 
 ## Work with delegation roles
