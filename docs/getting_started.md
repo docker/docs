@@ -98,7 +98,7 @@ Notary library (the same one as Notary CLI) to request the mapping of tag
 to sha256 digest for the one tag you are interested in (or if you passed the
 `--all` flag, the client will use the list operation to efficiently retrieve all
 the mappings). Having validated the signatures on the trust data, the client
-will then instruct the Engine to do a "pull by digest".  During this pull, the
+will then instruct the Engine to do a "pull by digest". During this pull, the
 Engine uses the sha256 checksum as a content address to request and validate the
 image manifest from the Docker registry.
 
