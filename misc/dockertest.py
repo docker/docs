@@ -54,8 +54,8 @@ DEFAULT_DOCKER_CONFIG = os.path.expanduser("~/.docker")
 # the root of the notary repo after binaries are built
 NOTARY_CLIENT = "bin/notary -c cmd/notary/config.json"
 
-# Assumes the trust server will be run using compose
-TRUST_SERVER = "https://notary-server:4443"
+# Assumes the trust server will be run using compose if DOCKER_CONTENT_TRUST_SERVER is not specified
+TRUST_SERVER =  os.getenv('DOCKER_CONTENT_TRUST_SERVER', "https://notary-server:4443")
 
 # ---- setup ----
 
