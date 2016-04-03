@@ -102,15 +102,13 @@ func TestCheckHashes(t *testing.T) {
 	malicious256 := make(Hashes)
 	malicious256["sha256"] = []byte("malicious data")
 	err = CheckHashes(raw, malicious256)
-	require.Error(t, err)
-	require.Contains(t, err.Error(), "checksum mismatched")
+	require.IsType(t, ErrMismatchedChecksum{}, err)
 
 	// Expected to fail due to the failure of sha512
 	malicious512 := make(Hashes)
 	malicious512["sha512"] = []byte("malicious data")
 	err = CheckHashes(raw, malicious512)
-	require.Error(t, err)
-	require.Contains(t, err.Error(), "checksum mismatched")
+	require.IsType(t, ErrMismatchedChecksum{}, err)
 
 	// Expected to fail because of the failure of sha512
 	// even though the sha256 is OK.
@@ -120,8 +118,7 @@ func TestCheckHashes(t *testing.T) {
 	doubleFace["sha512"], err = hex.DecodeString("d13e2b60d74c2e6f4f449b5e536814edf9a4827f5a9f4f957fc92e77609b9c92")
 	require.NoError(t, err)
 	err = CheckHashes(raw, doubleFace)
-	require.Error(t, err)
-	require.Contains(t, err.Error(), "checksum mismatched")
+	require.IsType(t, ErrMismatchedChecksum{}, err)
 }
 
 func TestCheckValidHashStructures(t *testing.T) {
@@ -158,6 +155,5 @@ func TestCheckValidHashStructures(t *testing.T) {
 	// Should failed since the first '0' is missing.
 	hashes["sha256"], err = hex.DecodeString("1234567890a4f2307e49160fa242db6fb95f071ad81a198eeb7d770e61cd6d8")
 	err = CheckValidHashStructures(hashes)
-	require.Error(t, err)
-	require.Contains(t, err.Error(), "invalid")
+	require.IsType(t, ErrInvalidChecksum{}, err)
 }
