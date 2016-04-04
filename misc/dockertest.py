@@ -50,12 +50,17 @@ REPO_PREFIX = "docker_test"
 # Assumes default docker config dir
 DEFAULT_DOCKER_CONFIG = os.path.expanduser("~/.docker")
 
+# Assumes the trust server will be run using compose if DOCKER_CONTENT_TRUST_SERVER is not specified
+DEFAULT_NOTARY_SERVER = "https://notary-server:4443"
+TRUST_SERVER =  os.getenv('DOCKER_CONTENT_TRUST_SERVER', DEFAULT_NOTARY_SERVER)
+
 # Assumes the test will be run with `python misc/dockertest.py` from
 # the root of the notary repo after binaries are built
-NOTARY_CLIENT = "bin/notary -c cmd/notary/config.json"
-
-# Assumes the trust server will be run using compose if DOCKER_CONTENT_TRUST_SERVER is not specified
-TRUST_SERVER =  os.getenv('DOCKER_CONTENT_TRUST_SERVER', "https://notary-server:4443")
+# also overrides the notary server location if need be
+if TRUST_SERVER != DEFAULT_NOTARY_SERVER:
+    NOTARY_CLIENT = "bin/notary -s {0}".format(TRUST_SERVER)
+else:
+    NOTARY_CLIENT = "bin/notary -c cmd/notary/config.json"
 
 # ---- setup ----
 
@@ -100,7 +105,7 @@ def setup():
         shutil.copytree(defaulttlsdir, tlsdir)
 
     # make sure that the cert is in the right place for local notary
-    if TRUST_SERVER == "https://notary-server:4443":
+    if TRUST_SERVER == DEFAULT_NOTARY_SERVER:
         tlsdir = os.path.join(tlsdir, "notary-server:4443")
         if not os.path.isdir(tlsdir):
             try:
