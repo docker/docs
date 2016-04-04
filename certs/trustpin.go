@@ -3,7 +3,6 @@ package certs
 import (
 	"crypto/x509"
 	"fmt"
-	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/utils"
@@ -12,9 +11,10 @@ import (
 
 // TrustPinChecker handles logic for trust pinning for a gun, given a TrustPinConfig
 type TrustPinChecker struct {
-	mode   TrustPinMode
-	gun    string
-	config notary.TrustPinConfig
+	mode         TrustPinMode
+	gun          string
+	config       notary.TrustPinConfig
+	pinnedCAPool *x509.CertPool
 }
 
 // TrustPinMode is a type to distinguish possible trust pinning modes
@@ -30,12 +30,34 @@ const (
 func NewTrustPinChecker(trustPinConfig notary.TrustPinConfig, gun string) (TrustPinChecker, error) {
 	trustPinChecker := TrustPinChecker{config: trustPinConfig, gun: gun}
 	// Determine the mode, and if it's even valid
-	if trustPinConfig.TOFU {
-		trustPinChecker.mode = tofus
-	} else if _, ok := trustPinConfig.Certs[gun]; ok {
+	if _, ok := trustPinConfig.Certs[gun]; ok {
 		trustPinChecker.mode = certs
 	} else if utils.ContainsKeyPrefix(trustPinConfig.CA, gun) {
 		trustPinChecker.mode = ca
+		for caGunPrefix, caFilepath := range trustPinConfig.CA {
+			if strings.HasPrefix(gun, caGunPrefix) {
+				// Try to add the CA cert to our certificate store,
+				// and use it to validate certs in the root.json later
+				caCert, err := trustmanager.LoadCertFromFile(caFilepath)
+				if err != nil {
+					return TrustPinChecker{}, fmt.Errorf("could not load root cert from CA path")
+				}
+				if err = trustmanager.ValidateCertificate(caCert); err != nil {
+					return TrustPinChecker{}, fmt.Errorf("invalid CA cert provided")
+				}
+				// Now only consider certificates that are direct children from this CA cert, overwriting allValidCerts
+				caRootPool := x509.NewCertPool()
+				caRootPool.AddCert(caCert)
+				if err != nil {
+					return TrustPinChecker{}, fmt.Errorf("unable to initialize CA cert pool")
+				}
+				trustPinChecker.pinnedCAPool = caRootPool
+				return trustPinChecker, nil
+			}
+		}
+
+	} else if trustPinConfig.TOFU {
+		trustPinChecker.mode = tofus
 	} else {
 		return TrustPinChecker{}, fmt.Errorf("no trust pinning specified")
 	}
@@ -44,8 +66,6 @@ func NewTrustPinChecker(trustPinConfig notary.TrustPinConfig, gun string) (Trust
 
 func (t TrustPinChecker) checkCert(leafCert *x509.Certificate, intCerts []*x509.Certificate) bool {
 	switch t.mode {
-	case tofus:
-		return true
 	case certs:
 		certID, err := trustmanager.FingerprintCert(leafCert)
 		if err != nil {
@@ -53,37 +73,18 @@ func (t TrustPinChecker) checkCert(leafCert *x509.Certificate, intCerts []*x509.
 		}
 		return t.config.Certs[t.gun] == certID
 	case ca:
-		for caGunPrefix, caFilepath := range t.config.CA {
-			if strings.HasPrefix(t.gun, caGunPrefix) {
-				// Try to add the CA cert to our certificate store,
-				// and use it to validate certs in the root.json later
-				caCert, err := trustmanager.LoadCertFromFile(caFilepath)
-				if err != nil {
-					return false
-				}
-				if err = trustmanager.ValidateCertificate(caCert); err != nil {
-					return false
-				}
-				// Now only consider certificates that are direct children from this CA cert, overwriting allValidCerts
-				caRootPool := x509.NewCertPool()
-				caRootPool.AddCert(caCert)
-				if err != nil {
-					logrus.Debugf("error retrieving valid leaf certificates for: %s, %v", t.gun, err)
-					return false
-				}
-
-				// Use intermediate certificates included in the root TUF metadata for our validation
-				caIntPool := x509.NewCertPool()
-				for _, intCert := range intCerts {
-					caIntPool.AddCert(intCert)
-				}
-				// Attempt to find a valid certificate chain from the leaf cert to CA root
-				// Use this certificate if such a valid chain exists (possibly using intermediates)
-				if _, err = leafCert.Verify(x509.VerifyOptions{Roots: caRootPool, Intermediates: caIntPool}); err == nil {
-					return true
-				}
-			}
+		// Use intermediate certificates included in the root TUF metadata for our validation
+		caIntPool := x509.NewCertPool()
+		for _, intCert := range intCerts {
+			caIntPool.AddCert(intCert)
 		}
+		// Attempt to find a valid certificate chain from the leaf cert to CA root
+		// Use this certificate if such a valid chain exists (possibly using intermediates)
+		if _, err := leafCert.Verify(x509.VerifyOptions{Roots: t.pinnedCAPool, Intermediates: caIntPool}); err == nil {
+			return true
+		}
+	case tofus:
+		return true
 	}
 	return false
 }
