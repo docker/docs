@@ -8,21 +8,21 @@ import (
 	"testing"
 
 	"github.com/docker/notary/tuf/data"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func assertAskOnceForKey(t *testing.T, in, out *bytes.Buffer, retriever Retriever, password, role string) {
 	_, err := in.WriteString(password + "\n")
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	pass, giveUp, err := retriever("repo/0123456789abcdef", role, false, 0)
-	assert.NoError(t, err)
-	assert.False(t, giveUp)
-	assert.Equal(t, password, pass)
+	require.NoError(t, err)
+	require.False(t, giveUp)
+	require.Equal(t, password, pass)
 
 	text, err := ioutil.ReadAll(out)
-	assert.NoError(t, err)
-	assert.Equal(t, "Enter passphrase for "+role+" key with ID 0123456 (repo):",
+	require.NoError(t, err)
+	require.Equal(t, "Enter passphrase for "+role+" key with ID 0123456 (repo):",
 		strings.TrimSpace(string(text)))
 }
 
@@ -49,15 +49,15 @@ func TestGetPassphraseForCreatingDelegationKey(t *testing.T) {
 	retriever := PromptRetrieverWithInOut(&in, &out, nil)
 
 	_, err := in.WriteString("passphrase\npassphrase\n")
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	pass, giveUp, err := retriever("repo/0123456789abcdef", "targets/a", true, 0)
-	assert.NoError(t, err)
-	assert.False(t, giveUp)
-	assert.Equal(t, "passphrase", pass)
+	require.NoError(t, err)
+	require.False(t, giveUp)
+	require.Equal(t, "passphrase", pass)
 
 	text, err := ioutil.ReadAll(&out)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	lines := strings.Split(strings.TrimSpace(string(text)), "\n")
 
 	expectedText := []string{
@@ -65,7 +65,7 @@ func TestGetPassphraseForCreatingDelegationKey(t *testing.T) {
 		`Repeat passphrase for new targets/a key with ID 0123456 (repo):`,
 	}
 
-	assert.Equal(t, expectedText, lines)
+	require.Equal(t, expectedText, lines)
 }
 
 // PromptRetrieverWithInOut, if asked for root, targets, delegation, and
@@ -85,11 +85,11 @@ func TestGetRootTargetsDelegation(t *testing.T) {
 	// now ask for snapshot password, but it should already be cached, it
 	// won't ask and  no input necessary.
 	pass, giveUp, err := retriever("repo/0123456789abcdef", data.CanonicalSnapshotRole, false, 0)
-	assert.NoError(t, err)
-	assert.False(t, giveUp)
-	assert.Equal(t, "targetspassword", pass)
+	require.NoError(t, err)
+	require.False(t, giveUp)
+	require.Equal(t, "targetspassword", pass)
 
 	text, err := ioutil.ReadAll(&out)
-	assert.NoError(t, err)
-	assert.Empty(t, text)
+	require.NoError(t, err)
+	require.Empty(t, text)
 }
