@@ -12,7 +12,7 @@ import (
 	"github.com/docker/notary"
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/tuf/data"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 const cannedPassphrase = "passphrase"
@@ -40,42 +40,42 @@ func testAddKeyWithRole(t *testing.T, role, expectedSubdir string) {
 
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	assert.NoError(t, err, "failed to create a temporary directory")
+	require.NoError(t, err, "failed to create a temporary directory")
 	defer os.RemoveAll(tempBaseDir)
 	// Create our store
 	store, err := NewKeyFileStore(tempBaseDir, passphraseRetriever)
-	assert.NoError(t, err, "failed to create new key filestore")
+	require.NoError(t, err, "failed to create new key filestore")
 
 	privKey, err := GenerateECDSAKey(rand.Reader)
-	assert.NoError(t, err, "could not generate private key")
+	require.NoError(t, err, "could not generate private key")
 
 	// Since we're generating this manually we need to add the extension '.'
 	expectedFilePath := filepath.Join(tempBaseDir, notary.PrivDir, expectedSubdir, privKey.ID()+"."+testExt)
 
 	// Call the AddKey function
 	err = store.AddKey(KeyInfo{Role: role, Gun: gun}, privKey)
-	assert.NoError(t, err, "failed to add key to store")
+	require.NoError(t, err, "failed to add key to store")
 
 	// Check to see if file exists
 	b, err := ioutil.ReadFile(expectedFilePath)
-	assert.NoError(t, err, "expected file not found")
-	assert.Contains(t, string(b), "-----BEGIN EC PRIVATE KEY-----")
+	require.NoError(t, err, "expected file not found")
+	require.Contains(t, string(b), "-----BEGIN EC PRIVATE KEY-----")
 
 	// Check that we have the role and gun info for this key's ID
 	keyInfo, ok := store.keyInfoMap[privKey.ID()]
-	assert.True(t, ok)
-	assert.Equal(t, role, keyInfo.Role)
+	require.True(t, ok)
+	require.Equal(t, role, keyInfo.Role)
 	if role == data.CanonicalRootRole || data.IsDelegation(role) || !data.ValidRole(role) {
-		assert.Empty(t, keyInfo.Gun)
+		require.Empty(t, keyInfo.Gun)
 	} else {
-		assert.Equal(t, gun, keyInfo.Gun)
+		require.Equal(t, gun, keyInfo.Gun)
 	}
 }
 
 func TestKeyStoreInternalState(t *testing.T) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	assert.NoError(t, err, "failed to create a temporary directory")
+	require.NoError(t, err, "failed to create a temporary directory")
 	defer os.RemoveAll(tempBaseDir)
 
 	gun := "docker.com/notary"
@@ -87,11 +87,11 @@ func TestKeyStoreInternalState(t *testing.T) {
 	for _, role := range roles {
 		// generate a key for the role
 		privKey, err := GenerateECDSAKey(rand.Reader)
-		assert.NoError(t, err, "could not generate private key")
+		require.NoError(t, err, "could not generate private key")
 
 		// generate the correct PEM role header
 		privKeyPEM, err := KeyToPEM(privKey, role)
-		assert.NoError(t, err, "could not generate PEM")
+		require.NoError(t, err, "could not generate PEM")
 
 		// write the key file to the correct location
 		// Pretend our GUN is docker.com/notary
@@ -100,61 +100,61 @@ func TestKeyStoreInternalState(t *testing.T) {
 			keyPath = filepath.Join(keyPath, gun)
 		}
 		keyPath = filepath.Join(keyPath, privKey.ID())
-		assert.NoError(t, os.MkdirAll(filepath.Dir(keyPath), 0755))
-		assert.NoError(t, ioutil.WriteFile(keyPath+".key", privKeyPEM, 0755))
+		require.NoError(t, os.MkdirAll(filepath.Dir(keyPath), 0755))
+		require.NoError(t, ioutil.WriteFile(keyPath+".key", privKeyPEM, 0755))
 
 		roleToID[role] = privKey.ID()
 	}
 
 	store, err := NewKeyFileStore(tempBaseDir, passphraseRetriever)
-	assert.NoError(t, err)
-	assert.Len(t, store.keyInfoMap, 4)
+	require.NoError(t, err)
+	require.Len(t, store.keyInfoMap, 4)
 	for _, role := range roles {
 		keyID, _ := roleToID[role]
 		// make sure this keyID is the right length
-		assert.Len(t, keyID, notary.Sha256HexSize)
-		assert.Equal(t, role, store.keyInfoMap[keyID].Role)
+		require.Len(t, keyID, notary.Sha256HexSize)
+		require.Equal(t, role, store.keyInfoMap[keyID].Role)
 		// targets and snapshot keys should have a gun set, root and delegation keys should not
 		if role == data.CanonicalTargetsRole || role == data.CanonicalSnapshotRole {
-			assert.Equal(t, gun, store.keyInfoMap[keyID].Gun)
+			require.Equal(t, gun, store.keyInfoMap[keyID].Gun)
 		} else {
-			assert.Empty(t, store.keyInfoMap[keyID].Gun)
+			require.Empty(t, store.keyInfoMap[keyID].Gun)
 		}
 	}
 
 	// Try removing the targets key only by ID (no gun provided)
-	assert.NoError(t, store.RemoveKey(roleToID[data.CanonicalTargetsRole]))
+	require.NoError(t, store.RemoveKey(roleToID[data.CanonicalTargetsRole]))
 	// The key file itself should have been removed
 	_, err = os.Stat(filepath.Join(tempBaseDir, "private", "tuf_keys", gun, roleToID[data.CanonicalTargetsRole]+".key"))
-	assert.Error(t, err)
+	require.Error(t, err)
 	// The keyInfoMap should have also updated by deleting the key
 	_, ok := store.keyInfoMap[roleToID[data.CanonicalTargetsRole]]
-	assert.False(t, ok)
+	require.False(t, ok)
 
 	// Try removing the delegation key only by ID (no gun provided)
-	assert.NoError(t, store.RemoveKey(roleToID["targets/delegation"]))
+	require.NoError(t, store.RemoveKey(roleToID["targets/delegation"]))
 	// The key file itself should have been removed
 	_, err = os.Stat(filepath.Join(tempBaseDir, "private", "tuf_keys", roleToID["targets/delegation"]+".key"))
-	assert.Error(t, err)
+	require.Error(t, err)
 	// The keyInfoMap should have also updated
 	_, ok = store.keyInfoMap[roleToID["targets/delegation"]]
-	assert.False(t, ok)
+	require.False(t, ok)
 
 	// Try removing the root key only by ID (no gun provided)
-	assert.NoError(t, store.RemoveKey(roleToID[data.CanonicalRootRole]))
+	require.NoError(t, store.RemoveKey(roleToID[data.CanonicalRootRole]))
 	// The key file itself should have been removed
 	_, err = os.Stat(filepath.Join(tempBaseDir, "private", "root_keys", roleToID[data.CanonicalRootRole]+".key"))
-	assert.Error(t, err)
+	require.Error(t, err)
 	// The keyInfoMap should have also updated_
 	_, ok = store.keyInfoMap[roleToID[data.CanonicalRootRole]]
-	assert.False(t, ok)
+	require.False(t, ok)
 
 	// Generate a new targets key and add it with its gun, check that the map gets updated back
 	privKey, err := GenerateECDSAKey(rand.Reader)
-	assert.NoError(t, err, "could not generate private key")
-	assert.NoError(t, store.AddKey(KeyInfo{Role: data.CanonicalTargetsRole, Gun: gun}, privKey))
-	assert.Equal(t, gun, store.keyInfoMap[privKey.ID()].Gun)
-	assert.Equal(t, data.CanonicalTargetsRole, store.keyInfoMap[privKey.ID()].Role)
+	require.NoError(t, err, "could not generate private key")
+	require.NoError(t, store.AddKey(KeyInfo{Role: data.CanonicalTargetsRole, Gun: gun}, privKey))
+	require.Equal(t, gun, store.keyInfoMap[privKey.ID()].Gun)
+	require.Equal(t, data.CanonicalTargetsRole, store.keyInfoMap[privKey.ID()].Role)
 }
 
 func TestGet(t *testing.T) {
@@ -225,18 +225,18 @@ EMl3eFOJXjIch/wIesRSN+2dGOsl7neercjMh1i9RvpCwHDx/E0=
 
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	assert.NoError(t, err, "failed to create a temporary directory")
+	require.NoError(t, err, "failed to create a temporary directory")
 	defer os.RemoveAll(tempBaseDir)
 
 	// Since we're generating this manually we need to add the extension '.'
 	filePath := filepath.Join(tempBaseDir, notary.PrivDir, expectedSubdir, testName+"."+testExt)
 	os.MkdirAll(filepath.Dir(filePath), perms)
 	err = ioutil.WriteFile(filePath, testData, perms)
-	assert.NoError(t, err, "failed to write test file")
+	require.NoError(t, err, "failed to write test file")
 
 	// Create our store
 	store, err := NewKeyFileStore(tempBaseDir, emptyPassphraseRetriever)
-	assert.NoError(t, err, "failed to create new key filestore")
+	require.NoError(t, err, "failed to create new key filestore")
 
 	// Call the GetKey function
 	if gun != "" {
@@ -244,19 +244,19 @@ EMl3eFOJXjIch/wIesRSN+2dGOsl7neercjMh1i9RvpCwHDx/E0=
 	}
 	privKey, _, err := store.GetKey(testName)
 	if success {
-		assert.NoError(t, err, "failed to get %s key from store (it's in %s)", role, expectedSubdir)
+		require.NoError(t, err, "failed to get %s key from store (it's in %s)", role, expectedSubdir)
 
 		pemPrivKey, err := KeyToPEM(privKey, role)
-		assert.NoError(t, err, "failed to convert key to PEM")
-		assert.Equal(t, testData, pemPrivKey)
+		require.NoError(t, err, "failed to convert key to PEM")
+		require.Equal(t, testData, pemPrivKey)
 
 		// Test that we can get purely by the ID we provided to AddKey (without gun)
 		privKeyByID, _, err := store.GetKey("keyID")
-		assert.NoError(t, err)
-		assert.Equal(t, privKey, privKeyByID)
+		require.NoError(t, err)
+		require.Equal(t, privKey, privKeyByID)
 	} else {
-		assert.Error(t, err, "should not have succeeded getting key from store")
-		assert.Nil(t, privKey)
+		require.Error(t, err, "should not have succeeded getting key from store")
+		require.Nil(t, privKey)
 	}
 }
 
@@ -300,7 +300,7 @@ EMl3eFOJXjIch/wIesRSN+2dGOsl7neercjMh1i9RvpCwHDx/E0=
 
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	assert.NoError(t, err, "failed to create a temporary directory")
+	require.NoError(t, err, "failed to create a temporary directory")
 	defer os.RemoveAll(tempBaseDir)
 
 	// Since we're generating this manually we need to add the extension '.'
@@ -308,16 +308,16 @@ EMl3eFOJXjIch/wIesRSN+2dGOsl7neercjMh1i9RvpCwHDx/E0=
 
 	os.MkdirAll(filepath.Dir(filePath), perms)
 	err = ioutil.WriteFile(filePath, testData, perms)
-	assert.NoError(t, err, "failed to write test file")
+	require.NoError(t, err, "failed to write test file")
 
 	// Create our store
 	store, err := NewKeyFileStore(tempBaseDir, emptyPassphraseRetriever)
-	assert.NoError(t, err, "failed to create new key filestore")
+	require.NoError(t, err, "failed to create new key filestore")
 
 	// Call the GetKey function
 	_, role, err := store.GetKey(testName)
-	assert.NoError(t, err, "failed to get key from store")
-	assert.Equal(t, testAlias, role)
+	require.NoError(t, err, "failed to get key from store")
+	require.Equal(t, testAlias, role)
 }
 
 func TestListKeys(t *testing.T) {
@@ -326,51 +326,51 @@ func TestListKeys(t *testing.T) {
 
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	assert.NoError(t, err, "failed to create a temporary directory")
+	require.NoError(t, err, "failed to create a temporary directory")
 	defer os.RemoveAll(tempBaseDir)
 
 	// Create our store
 	store, err := NewKeyFileStore(tempBaseDir, passphraseRetriever)
-	assert.NoError(t, err, "failed to create new key filestore")
+	require.NoError(t, err, "failed to create new key filestore")
 
 	roles := append(data.BaseRoles, "targets/a", "invalidRoleName")
 
 	for i, role := range roles {
 		// Make a new key for each role
 		privKey, err := GenerateECDSAKey(rand.Reader)
-		assert.NoError(t, err, "could not generate private key")
+		require.NoError(t, err, "could not generate private key")
 
 		// Call the AddKey function
 		gun := filepath.Dir(testName)
 		err = store.AddKey(KeyInfo{Role: role, Gun: gun}, privKey)
-		assert.NoError(t, err, "failed to add key to store")
+		require.NoError(t, err, "failed to add key to store")
 
 		// Check to see if the keystore lists this key
 		keyMap := store.ListKeys()
 
 		// Expect to see exactly one key in the map
-		assert.Len(t, keyMap, i+1)
+		require.Len(t, keyMap, i+1)
 		// Expect to see privKeyID inside of the map
 		listedInfo, ok := keyMap[privKey.ID()]
-		assert.True(t, ok)
-		assert.Equal(t, role, listedInfo.Role)
+		require.True(t, ok)
+		require.Equal(t, role, listedInfo.Role)
 	}
 
 	// Write an invalid filename to the directory
 	filePath := filepath.Join(tempBaseDir, notary.PrivDir, notary.RootKeysSubdir, "fakekeyname.key")
 	err = ioutil.WriteFile(filePath, []byte("data"), perms)
-	assert.NoError(t, err, "failed to write test file")
+	require.NoError(t, err, "failed to write test file")
 
 	// Check to see if the keystore still lists two keys
 	keyMap := store.ListKeys()
-	assert.Len(t, keyMap, len(roles))
+	require.Len(t, keyMap, len(roles))
 
 	// Check that ListKeys() returns a copy of the state
 	// so modifying its returned information does not change the underlying store's keyInfo
 	for keyID := range keyMap {
 		delete(keyMap, keyID)
 		_, err = store.GetKeyInfo(keyID)
-		assert.NoError(t, err)
+		require.NoError(t, err)
 	}
 }
 
@@ -381,19 +381,19 @@ func TestAddGetKeyMemStore(t *testing.T) {
 	store := NewKeyMemoryStore(passphraseRetriever)
 
 	privKey, err := GenerateECDSAKey(rand.Reader)
-	assert.NoError(t, err, "could not generate private key")
+	require.NoError(t, err, "could not generate private key")
 
 	// Call the AddKey function
 	err = store.AddKey(KeyInfo{Role: testAlias, Gun: ""}, privKey)
-	assert.NoError(t, err, "failed to add key to store")
+	require.NoError(t, err, "failed to add key to store")
 
 	// Check to see if file exists
 	retrievedKey, retrievedAlias, err := store.GetKey(privKey.ID())
-	assert.NoError(t, err, "failed to get key from store")
+	require.NoError(t, err, "failed to get key from store")
 
-	assert.Equal(t, retrievedAlias, testAlias)
-	assert.Equal(t, retrievedKey.Public(), privKey.Public())
-	assert.Equal(t, retrievedKey.Private(), privKey.Private())
+	require.Equal(t, retrievedAlias, testAlias)
+	require.Equal(t, retrievedKey.Public(), privKey.Public())
+	require.Equal(t, retrievedKey.Private(), privKey.Private())
 }
 
 func TestAddGetKeyInfoMemStore(t *testing.T) {
@@ -403,43 +403,43 @@ func TestAddGetKeyInfoMemStore(t *testing.T) {
 	store := NewKeyMemoryStore(passphraseRetriever)
 
 	rootKey, err := GenerateECDSAKey(rand.Reader)
-	assert.NoError(t, err, "could not generate private key")
+	require.NoError(t, err, "could not generate private key")
 
 	// Call the AddKey function
 	err = store.AddKey(KeyInfo{Role: data.CanonicalRootRole, Gun: ""}, rootKey)
-	assert.NoError(t, err, "failed to add key to store")
+	require.NoError(t, err, "failed to add key to store")
 
 	// Get and validate key info
 	rootInfo, err := store.GetKeyInfo(rootKey.ID())
-	assert.NoError(t, err)
-	assert.Equal(t, data.CanonicalRootRole, rootInfo.Role)
-	assert.Equal(t, "", rootInfo.Gun)
+	require.NoError(t, err)
+	require.Equal(t, data.CanonicalRootRole, rootInfo.Role)
+	require.Equal(t, "", rootInfo.Gun)
 
 	targetsKey, err := GenerateECDSAKey(rand.Reader)
-	assert.NoError(t, err, "could not generate private key")
+	require.NoError(t, err, "could not generate private key")
 
 	// Call the AddKey function
 	err = store.AddKey(KeyInfo{Role: data.CanonicalTargetsRole, Gun: gun}, targetsKey)
-	assert.NoError(t, err, "failed to add key to store")
+	require.NoError(t, err, "failed to add key to store")
 
 	// Get and validate key info
 	targetsInfo, err := store.GetKeyInfo(targetsKey.ID())
-	assert.NoError(t, err)
-	assert.Equal(t, data.CanonicalTargetsRole, targetsInfo.Role)
-	assert.Equal(t, gun, targetsInfo.Gun)
+	require.NoError(t, err)
+	require.Equal(t, data.CanonicalTargetsRole, targetsInfo.Role)
+	require.Equal(t, gun, targetsInfo.Gun)
 
 	delgKey, err := GenerateECDSAKey(rand.Reader)
-	assert.NoError(t, err, "could not generate private key")
+	require.NoError(t, err, "could not generate private key")
 
 	// Call the AddKey function
 	err = store.AddKey(KeyInfo{Role: "targets/delegation", Gun: gun}, delgKey)
-	assert.NoError(t, err, "failed to add key to store")
+	require.NoError(t, err, "failed to add key to store")
 
 	// Get and validate key info
 	delgInfo, err := store.GetKeyInfo(delgKey.ID())
-	assert.NoError(t, err)
-	assert.Equal(t, "targets/delegation", delgInfo.Role)
-	assert.Equal(t, "", delgInfo.Gun)
+	require.NoError(t, err)
+	require.Equal(t, "targets/delegation", delgInfo.Role)
+	require.Equal(t, "", delgInfo.Gun)
 }
 
 func TestGetDecryptedWithTamperedCipherText(t *testing.T) {
@@ -448,38 +448,38 @@ func TestGetDecryptedWithTamperedCipherText(t *testing.T) {
 
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	assert.NoError(t, err, "failed to create a temporary directory")
+	require.NoError(t, err, "failed to create a temporary directory")
 	defer os.RemoveAll(tempBaseDir)
 
 	// Create our FileStore
 	store, err := NewKeyFileStore(tempBaseDir, passphraseRetriever)
-	assert.NoError(t, err, "failed to create new key filestore")
+	require.NoError(t, err, "failed to create new key filestore")
 
 	// Generate a new Private Key
 	privKey, err := GenerateECDSAKey(rand.Reader)
-	assert.NoError(t, err, "could not generate private key")
+	require.NoError(t, err, "could not generate private key")
 
 	// Call the AddEncryptedKey function
 	err = store.AddKey(KeyInfo{Role: testAlias, Gun: ""}, privKey)
-	assert.NoError(t, err, "failed to add key to store")
+	require.NoError(t, err, "failed to add key to store")
 
 	// Since we're generating this manually we need to add the extension '.'
 	expectedFilePath := filepath.Join(tempBaseDir, notary.PrivDir, notary.RootKeysSubdir, privKey.ID()+"."+testExt)
 
 	// Get file description, open file
 	fp, err := os.OpenFile(expectedFilePath, os.O_WRONLY, 0600)
-	assert.NoError(t, err, "expected file not found")
+	require.NoError(t, err, "expected file not found")
 
 	// Tamper the file
 	fp.WriteAt([]byte("a"), int64(1))
 
 	// Recreate the KeyFileStore to avoid caching
 	store, err = NewKeyFileStore(tempBaseDir, passphraseRetriever)
-	assert.NoError(t, err, "failed to create new key filestore")
+	require.NoError(t, err, "failed to create new key filestore")
 
 	// Try to decrypt the file
 	_, _, err = store.GetKey(privKey.ID())
-	assert.Error(t, err, "expected error while decrypting the content due to invalid cipher text")
+	require.Error(t, err, "expected error while decrypting the content due to invalid cipher text")
 }
 
 func TestGetDecryptedWithInvalidPassphrase(t *testing.T) {
@@ -498,15 +498,15 @@ func TestGetDecryptedWithInvalidPassphrase(t *testing.T) {
 
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	assert.NoError(t, err, "failed to create a temporary directory")
+	require.NoError(t, err, "failed to create a temporary directory")
 	defer os.RemoveAll(tempBaseDir)
 
 	// Test with KeyFileStore
 	fileStore, err := NewKeyFileStore(tempBaseDir, invalidPassphraseRetriever)
-	assert.NoError(t, err, "failed to create new key filestore")
+	require.NoError(t, err, "failed to create new key filestore")
 
 	newFileStore, err := NewKeyFileStore(tempBaseDir, invalidPassphraseRetriever)
-	assert.NoError(t, err, "failed to create new key filestore")
+	require.NoError(t, err, "failed to create new key filestore")
 
 	testGetDecryptedWithInvalidPassphrase(t, fileStore, newFileStore, ErrPasswordInvalid{})
 
@@ -525,15 +525,15 @@ func TestGetDecryptedWithConsistentlyInvalidPassphrase(t *testing.T) {
 
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	assert.NoError(t, err, "failed to create a temporary directory")
+	require.NoError(t, err, "failed to create a temporary directory")
 	defer os.RemoveAll(tempBaseDir)
 
 	// Test with KeyFileStore
 	fileStore, err := NewKeyFileStore(tempBaseDir, consistentlyInvalidPassphraseRetriever)
-	assert.NoError(t, err, "failed to create new key filestore")
+	require.NoError(t, err, "failed to create new key filestore")
 
 	newFileStore, err := NewKeyFileStore(tempBaseDir, consistentlyInvalidPassphraseRetriever)
-	assert.NoError(t, err, "failed to create new key filestore")
+	require.NoError(t, err, "failed to create new key filestore")
 
 	testGetDecryptedWithInvalidPassphrase(t, fileStore, newFileStore, ErrAttemptsExceeded{})
 
@@ -548,16 +548,16 @@ func testGetDecryptedWithInvalidPassphrase(t *testing.T, store KeyStore, newStor
 
 	// Generate a new random RSA Key
 	privKey, err := GenerateECDSAKey(rand.Reader)
-	assert.NoError(t, err, "could not generate private key")
+	require.NoError(t, err, "could not generate private key")
 
 	// Call the AddKey function
 	err = store.AddKey(KeyInfo{Role: testAlias, Gun: ""}, privKey)
-	assert.NoError(t, err, "failed to add key to store")
+	require.NoError(t, err, "failed to add key to store")
 
 	// Try to decrypt the file with an invalid passphrase
 	_, _, err = newStore.GetKey(privKey.ID())
-	assert.Error(t, err, "expected error while decrypting the content due to invalid passphrase")
-	assert.IsType(t, err, expectedFailureType)
+	require.Error(t, err, "expected error while decrypting the content due to invalid passphrase")
+	require.IsType(t, err, expectedFailureType)
 }
 
 func TestRemoveKey(t *testing.T) {
@@ -575,33 +575,33 @@ func testRemoveKeyWithRole(t *testing.T, role, expectedSubdir string) {
 
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	assert.NoError(t, err, "failed to create a temporary directory")
+	require.NoError(t, err, "failed to create a temporary directory")
 	defer os.RemoveAll(tempBaseDir)
 
 	// Create our store
 	store, err := NewKeyFileStore(tempBaseDir, passphraseRetriever)
-	assert.NoError(t, err, "failed to create new key filestore")
+	require.NoError(t, err, "failed to create new key filestore")
 
 	privKey, err := GenerateECDSAKey(rand.Reader)
-	assert.NoError(t, err, "could not generate private key")
+	require.NoError(t, err, "could not generate private key")
 
 	// Since we're generating this manually we need to add the extension '.'
 	expectedFilePath := filepath.Join(tempBaseDir, notary.PrivDir, expectedSubdir, privKey.ID()+"."+testExt)
 
 	err = store.AddKey(KeyInfo{Role: role, Gun: gun}, privKey)
-	assert.NoError(t, err, "failed to add key to store")
+	require.NoError(t, err, "failed to add key to store")
 
 	// Check to see if file exists
 	_, err = ioutil.ReadFile(expectedFilePath)
-	assert.NoError(t, err, "expected file not found")
+	require.NoError(t, err, "expected file not found")
 
 	// Call remove key
 	err = store.RemoveKey(privKey.ID())
-	assert.NoError(t, err, "unable to remove key")
+	require.NoError(t, err, "unable to remove key")
 
 	// Check to see if file still exists
 	_, err = ioutil.ReadFile(expectedFilePath)
-	assert.Error(t, err, "file should not exist")
+	require.Error(t, err, "file should not exist")
 }
 
 func TestKeysAreCached(t *testing.T) {
@@ -610,7 +610,7 @@ func TestKeysAreCached(t *testing.T) {
 
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	assert.NoError(t, err, "failed to create a temporary directory")
+	require.NoError(t, err, "failed to create a temporary directory")
 	defer os.RemoveAll(tempBaseDir)
 
 	var countingPassphraseRetriever passphrase.Retriever
@@ -623,61 +623,61 @@ func TestKeysAreCached(t *testing.T) {
 
 	// Create our store
 	store, err := NewKeyFileStore(tempBaseDir, countingPassphraseRetriever)
-	assert.NoError(t, err, "failed to create new key filestore")
+	require.NoError(t, err, "failed to create new key filestore")
 
 	privKey, err := GenerateECDSAKey(rand.Reader)
-	assert.NoError(t, err, "could not generate private key")
+	require.NoError(t, err, "could not generate private key")
 
 	// Call the AddKey function
 	err = store.AddKey(KeyInfo{Role: testAlias, Gun: gun}, privKey)
-	assert.NoError(t, err, "failed to add key to store")
+	require.NoError(t, err, "failed to add key to store")
 
-	assert.Equal(t, 1, numTimesCalled, "numTimesCalled should have been 1")
+	require.Equal(t, 1, numTimesCalled, "numTimesCalled should have been 1")
 
 	// Call the AddKey function
 	privKey2, _, err := store.GetKey(privKey.ID())
-	assert.NoError(t, err, "failed to add key to store")
+	require.NoError(t, err, "failed to add key to store")
 
-	assert.Equal(t, privKey.Public(), privKey2.Public(), "cachedPrivKey should be the same as the added privKey")
-	assert.Equal(t, privKey.Private(), privKey2.Private(), "cachedPrivKey should be the same as the added privKey")
-	assert.Equal(t, 1, numTimesCalled, "numTimesCalled should be 1 -- no additional call to passphraseRetriever")
+	require.Equal(t, privKey.Public(), privKey2.Public(), "cachedPrivKey should be the same as the added privKey")
+	require.Equal(t, privKey.Private(), privKey2.Private(), "cachedPrivKey should be the same as the added privKey")
+	require.Equal(t, 1, numTimesCalled, "numTimesCalled should be 1 -- no additional call to passphraseRetriever")
 
 	// Create a new store
 	store2, err := NewKeyFileStore(tempBaseDir, countingPassphraseRetriever)
-	assert.NoError(t, err, "failed to create new key filestore")
+	require.NoError(t, err, "failed to create new key filestore")
 
 	// Call the GetKey function
 	privKey3, _, err := store2.GetKey(privKey.ID())
-	assert.NoError(t, err, "failed to get key from store")
+	require.NoError(t, err, "failed to get key from store")
 
-	assert.Equal(t, privKey2.Private(), privKey3.Private(), "privkey from store1 should be the same as privkey from store2")
-	assert.Equal(t, privKey2.Public(), privKey3.Public(), "privkey from store1 should be the same as privkey from store2")
-	assert.Equal(t, 2, numTimesCalled, "numTimesCalled should be 2 -- one additional call to passphraseRetriever")
+	require.Equal(t, privKey2.Private(), privKey3.Private(), "privkey from store1 should be the same as privkey from store2")
+	require.Equal(t, privKey2.Public(), privKey3.Public(), "privkey from store1 should be the same as privkey from store2")
+	require.Equal(t, 2, numTimesCalled, "numTimesCalled should be 2 -- one additional call to passphraseRetriever")
 
 	// Call the GetKey function a bunch of times
 	for i := 0; i < 10; i++ {
 		_, _, err := store2.GetKey(privKey.ID())
-		assert.NoError(t, err, "failed to get key from store")
+		require.NoError(t, err, "failed to get key from store")
 	}
-	assert.Equal(t, 2, numTimesCalled, "numTimesCalled should be 2 -- no additional call to passphraseRetriever")
+	require.Equal(t, 2, numTimesCalled, "numTimesCalled should be 2 -- no additional call to passphraseRetriever")
 }
 
 // Exporting a key is successful (it is a valid key)
 func TestKeyFileStoreExportSuccess(t *testing.T) {
 	// Generate a new Private Key
 	privKey, err := GenerateECDSAKey(rand.Reader)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	defer os.RemoveAll(tempBaseDir)
 
 	// Create our FileStore and add the key
 	store, err := NewKeyFileStore(tempBaseDir, passphraseRetriever)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	err = store.AddKey(KeyInfo{Role: data.CanonicalRootRole, Gun: ""}, privKey)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	assertExportKeySuccess(t, store, privKey)
 }
@@ -686,28 +686,28 @@ func TestKeyFileStoreExportSuccess(t *testing.T) {
 func TestKeyFileStoreExportNonExistantFailure(t *testing.T) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	defer os.RemoveAll(tempBaseDir)
 
 	// Create empty FileStore
 	store, err := NewKeyFileStore(tempBaseDir, passphraseRetriever)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	_, err = store.ExportKey("12345")
-	assert.Error(t, err)
+	require.Error(t, err)
 }
 
 // Exporting a key is successful (it is a valid key)
 func TestKeyMemoryStoreExportSuccess(t *testing.T) {
 	// Generate a new Private Key
 	privKey, err := GenerateECDSAKey(rand.Reader)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// Create our MemoryStore and add key to it
 	store := NewKeyMemoryStore(passphraseRetriever)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	err = store.AddKey(KeyInfo{Role: data.CanonicalRootRole, Gun: ""}, privKey)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	assertExportKeySuccess(t, store, privKey)
 }
@@ -716,7 +716,7 @@ func TestKeyMemoryStoreExportSuccess(t *testing.T) {
 func TestKeyMemoryStoreExportNonExistantFailure(t *testing.T) {
 	store := NewKeyMemoryStore(passphraseRetriever)
 	_, err := store.ExportKey("12345")
-	assert.Error(t, err)
+	require.Error(t, err)
 }
 
 // Given a keystore and expected key that is in the store, export the key
@@ -726,10 +726,10 @@ func assertExportKeySuccess(
 	t *testing.T, s KeyStore, expectedKey data.PrivateKey) {
 
 	pemBytes, err := s.ExportKey(expectedKey.ID())
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	reparsedKey, err := ParsePEMPrivateKey(pemBytes, cannedPassphrase)
-	assert.NoError(t, err)
-	assert.Equal(t, expectedKey.Private(), reparsedKey.Private())
-	assert.Equal(t, expectedKey.Public(), reparsedKey.Public())
+	require.NoError(t, err)
+	require.Equal(t, expectedKey.Private(), reparsedKey.Private())
+	require.Equal(t, expectedKey.Public(), reparsedKey.Public())
 }

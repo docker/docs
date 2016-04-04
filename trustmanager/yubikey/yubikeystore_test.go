@@ -13,7 +13,7 @@ import (
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
 	"github.com/miekg/pkcs11"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 var ret = passphrase.ConstantRetriever("passphrase")
@@ -22,11 +22,11 @@ var ret = passphrase.ConstantRetriever("passphrase")
 // any cache
 func clearAllKeys(t *testing.T) {
 	store, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	for k := range store.ListKeys() {
 		err := store.RemoveKey(k)
-		assert.NoError(t, err)
+		require.NoError(t, err)
 	}
 }
 
@@ -37,7 +37,7 @@ func TestEnsurePrivateKeySizePassesThroughRightSizeArrays(t *testing.T) {
 	}
 
 	result := ensurePrivateKeySize(fullByteArray)
-	assert.True(t, reflect.DeepEqual(fullByteArray, result))
+	require.True(t, reflect.DeepEqual(fullByteArray, result))
 }
 
 // The pad32Byte helper function left zero-pads byte arrays that are less than
@@ -53,12 +53,12 @@ func TestEnsurePrivateKeySizePadsLessThanRequiredSizeArrays(t *testing.T) {
 		shortByteArray...)
 
 	result := ensurePrivateKeySize(shortByteArray)
-	assert.True(t, reflect.DeepEqual(expected, result))
+	require.True(t, reflect.DeepEqual(expected, result))
 }
 
 func testAddKey(t *testing.T, store trustmanager.KeyStore) (data.PrivateKey, error) {
 	privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	err = store.AddKey(trustmanager.KeyInfo{Role: data.CanonicalRootRole, Gun: ""}, privKey)
 	return privKey, err
@@ -69,7 +69,7 @@ func addMaxKeys(t *testing.T, store trustmanager.KeyStore) []string {
 	// create the maximum number of keys
 	for i := 0; i < numSlots; i++ {
 		privKey, err := testAddKey(t, store)
-		assert.NoError(t, err)
+		require.NoError(t, err)
 		keys = append(keys, privKey.ID())
 	}
 	return keys
@@ -91,27 +91,27 @@ func TestYubiAddKeysAndRetrieve(t *testing.T) {
 	// create 4 keys on the original store
 	backup := trustmanager.NewKeyMemoryStore(ret)
 	store, err := NewYubiKeyStore(backup, ret)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	keys := addMaxKeys(t, store)
 
 	// create a new store, since we want to be sure the original store's cache
 	// is not masking any issues
 	cleanStore, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// All 4 keys should be in the original store, in the clean store (which
 	// makes sure the keys are actually on the Yubikey and not on the original
 	// store's cache, and on the backup store)
 	for _, store := range []trustmanager.KeyStore{store, cleanStore, backup} {
 		listedKeys := store.ListKeys()
-		assert.Len(t, listedKeys, numSlots)
+		require.Len(t, listedKeys, numSlots)
 		for _, k := range keys {
 			r, ok := listedKeys[k]
-			assert.True(t, ok)
-			assert.Equal(t, data.CanonicalRootRole, r.Role)
+			require.True(t, ok)
+			require.Equal(t, data.CanonicalRootRole, r.Role)
 
 			_, _, err := store.GetKey(k)
-			assert.NoError(t, err)
+			require.NoError(t, err)
 		}
 	}
 }
@@ -130,27 +130,27 @@ func TestYubiAddKeysWithoutBackup(t *testing.T) {
 
 	// create 4 keys on the original store
 	store, err := NewYubiKeyStore(nil, ret)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	keys := addMaxKeys(t, store)
 
 	// create a new store, since we want to be sure the original store's cache
 	// is not masking any issues
 	cleanStore, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// All 4 keys should be in the original store, in the clean store (which
 	// makes sure the keys are actually on the Yubikey and not on the original
 	// store's cache)
 	for _, store := range []trustmanager.KeyStore{store, cleanStore} {
 		listedKeys := store.ListKeys()
-		assert.Len(t, listedKeys, numSlots)
+		require.Len(t, listedKeys, numSlots)
 		for _, k := range keys {
 			r, ok := listedKeys[k]
-			assert.True(t, ok)
-			assert.Equal(t, data.CanonicalRootRole, r.Role)
+			require.True(t, ok)
+			require.Equal(t, data.CanonicalRootRole, r.Role)
 
 			_, _, err := store.GetKey(k)
-			assert.NoError(t, err)
+			require.NoError(t, err)
 		}
 	}
 }
@@ -170,26 +170,26 @@ func TestYubiAddKeyFailureIfNoMoreSlots(t *testing.T) {
 	// create 4 keys on the original store
 	backup := trustmanager.NewKeyMemoryStore(ret)
 	store, err := NewYubiKeyStore(backup, ret)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	addMaxKeys(t, store)
 
 	// add another key - should fail because there are no more slots
 	badKey, err := testAddKey(t, store)
-	assert.Error(t, err)
+	require.Error(t, err)
 
 	// create a new store, since we want to be sure the original store's cache
 	// is not masking any issues
 	cleanStore, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// The key should not be in the original store, in the new clean store, or
 	// in teh backup store.
 	for _, store := range []trustmanager.KeyStore{store, cleanStore, backup} {
 		// the key that wasn't created should not appear in ListKeys or GetKey
 		_, _, err := store.GetKey(badKey.ID())
-		assert.Error(t, err)
+		require.Error(t, err)
 		for k := range store.ListKeys() {
-			assert.NotEqual(t, badKey.ID(), k)
+			require.NotEqual(t, badKey.ID(), k)
 		}
 	}
 }
@@ -210,21 +210,21 @@ func TestYubiAddKeyCanAddToMiddleSlot(t *testing.T) {
 	// create 4 keys on the original store
 	backup := trustmanager.NewKeyMemoryStore(ret)
 	store, err := NewYubiKeyStore(backup, ret)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	keys := addMaxKeys(t, store)
 
 	// delete one of the middle keys, and assert we can still create a new key
 	keyIDToDelete := keys[numSlots/2]
 	err = store.RemoveKey(keyIDToDelete)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	newKey, err := testAddKey(t, store)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// create a new store, since we want to be sure the original store's cache
 	// is not masking any issues
 	cleanStore, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// The new key should be in the original store, in the new clean store, and
 	// in the backup store.  The old key should not be in the original store,
@@ -232,19 +232,19 @@ func TestYubiAddKeyCanAddToMiddleSlot(t *testing.T) {
 	for _, store := range []trustmanager.KeyStore{store, cleanStore, backup} {
 		// new key should appear in all stores
 		gottenKey, _, err := store.GetKey(newKey.ID())
-		assert.NoError(t, err)
-		assert.Equal(t, gottenKey.ID(), newKey.ID())
+		require.NoError(t, err)
+		require.Equal(t, gottenKey.ID(), newKey.ID())
 
 		listedKeys := store.ListKeys()
 		_, ok := listedKeys[newKey.ID()]
-		assert.True(t, ok)
+		require.True(t, ok)
 
 		// old key should not be in the non-backup stores
 		if store != backup {
 			_, _, err := store.GetKey(keyIDToDelete)
-			assert.Error(t, err)
+			require.Error(t, err)
 			_, ok = listedKeys[keyIDToDelete]
-			assert.False(t, ok)
+			require.False(t, ok)
 		}
 	}
 }
@@ -276,14 +276,14 @@ func TestYubiAddKeyRollsBackIfCannotBackup(t *testing.T) {
 		KeyMemoryStore: *trustmanager.NewKeyMemoryStore(ret),
 	}
 	store, err := NewYubiKeyStore(backup, ret)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	_, err = testAddKey(t, store)
-	assert.Error(t, err)
-	assert.IsType(t, ErrBackupFailed{}, err)
+	require.Error(t, err)
+	require.IsType(t, ErrBackupFailed{}, err)
 
 	// there should be no keys on the yubikey
-	assert.Len(t, cleanListKeys(t), 0)
+	require.Len(t, cleanListKeys(t), 0)
 }
 
 // If, when adding a key to the Yubikey, and it already exists, we succeed
@@ -300,23 +300,23 @@ func TestYubiAddDuplicateKeySucceedsButDoesNotBackup(t *testing.T) {
 	}()
 
 	origStore, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	key, err := testAddKey(t, origStore)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	backup := trustmanager.NewKeyMemoryStore(ret)
 	cleanStore, err := NewYubiKeyStore(backup, ret)
-	assert.NoError(t, err)
-	assert.Len(t, cleanStore.ListKeys(), 1)
+	require.NoError(t, err)
+	require.Len(t, cleanStore.ListKeys(), 1)
 
 	err = cleanStore.AddKey(trustmanager.KeyInfo{Role: data.CanonicalRootRole, Gun: ""}, key)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// there should be just 1 key on the yubikey
-	assert.Len(t, cleanListKeys(t), 1)
+	require.Len(t, cleanListKeys(t), 1)
 	// nothing was added to the backup
-	assert.Len(t, backup.ListKeys(), 0)
+	require.Len(t, backup.ListKeys(), 0)
 }
 
 // RemoveKey removes a key from the yubikey, but not from the backup store.
@@ -333,28 +333,28 @@ func TestYubiRemoveKey(t *testing.T) {
 
 	backup := trustmanager.NewKeyMemoryStore(ret)
 	store, err := NewYubiKeyStore(backup, ret)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	key, err := testAddKey(t, store)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	err = store.RemoveKey(key.ID())
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// key remains in the backup store
 	backupKey, role, err := backup.GetKey(key.ID())
-	assert.NoError(t, err)
-	assert.Equal(t, data.CanonicalRootRole, role)
-	assert.Equal(t, key.ID(), backupKey.ID())
+	require.NoError(t, err)
+	require.Equal(t, data.CanonicalRootRole, role)
+	require.Equal(t, key.ID(), backupKey.ID())
 
 	// create a new store, since we want to be sure the original store's cache
 	// is not masking any issues
 	cleanStore, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// key is not in either the original store or the clean store
 	for _, store := range []*YubiKeyStore{store, cleanStore} {
 		_, _, err := store.GetKey(key.ID())
-		assert.Error(t, err)
+		require.Error(t, err)
 	}
 }
 
@@ -371,14 +371,14 @@ func TestYubiExportKeyFails(t *testing.T) {
 	}()
 
 	store, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	key, err := testAddKey(t, store)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	_, err = store.ExportKey(key.ID())
-	assert.Error(t, err)
-	assert.Equal(t, "Keys cannot be exported from a Yubikey.", err.Error())
+	require.Error(t, err)
+	require.Equal(t, "Keys cannot be exported from a Yubikey.", err.Error())
 }
 
 // If there are keys in the backup store but no keys in the Yubikey,
@@ -396,12 +396,12 @@ func TestYubiListAndGetKeysIgnoresBackup(t *testing.T) {
 
 	backup := trustmanager.NewKeyMemoryStore(ret)
 	key, err := testAddKey(t, backup)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	store, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
-	assert.Len(t, store.ListKeys(), 0)
+	require.Len(t, store.ListKeys(), 0)
 	_, _, err = store.GetKey(key.ID())
-	assert.Error(t, err)
+	require.Error(t, err)
 }
 
 // Get a YubiPrivateKey.  Check that it has the right algorithm, etc, and
@@ -419,24 +419,24 @@ func TestYubiKeyAndSign(t *testing.T) {
 	}()
 
 	store, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	ecdsaPrivateKey, err := testAddKey(t, store)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	yubiPrivateKey, _, err := store.GetKey(ecdsaPrivateKey.ID())
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
-	assert.Equal(t, data.ECDSAKey, yubiPrivateKey.Algorithm())
-	assert.Equal(t, data.ECDSASignature, yubiPrivateKey.SignatureAlgorithm())
-	assert.Equal(t, ecdsaPrivateKey.Public(), yubiPrivateKey.Public())
-	assert.Nil(t, yubiPrivateKey.Private())
+	require.Equal(t, data.ECDSAKey, yubiPrivateKey.Algorithm())
+	require.Equal(t, data.ECDSASignature, yubiPrivateKey.SignatureAlgorithm())
+	require.Equal(t, ecdsaPrivateKey.Public(), yubiPrivateKey.Public())
+	require.Nil(t, yubiPrivateKey.Private())
 
 	// The signature should be verified, but the importing the verifiers causes
 	// an import cycle.  A bigger refactor needs to be done to fix it.
 	msg := []byte("Hello there")
 	_, err = yubiPrivateKey.Sign(rand.Reader, msg, nil)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 }
 
 // ----- Negative tests that use stubbed pkcs11 for error injection -----
@@ -450,7 +450,7 @@ var setupErrors = []string{"Initialize", "GetSlotList", "OpenSession"}
 // Create a new store, so that we avoid any cache issues, and list keys
 func cleanListKeys(t *testing.T) map[string]trustmanager.KeyInfo {
 	cleanStore, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	return cleanStore.ListKeys()
 }
 
@@ -464,14 +464,14 @@ func testYubiFunctionCleansUpOnLoginError(t *testing.T, toStub pkcs11Stubbable,
 	})
 
 	err := functionUnderTest()
-	assert.Error(t, err)
+	require.Error(t, err)
 	// a lot of these functions wrap other errors
-	assert.Contains(t, err.Error(), trustmanager.ErrAttemptsExceeded{}.Error())
+	require.Contains(t, err.Error(), trustmanager.ErrAttemptsExceeded{}.Error())
 
 	// Set Up another time, to ensure we weren't left in a bad state
 	// by the previous runs
 	ctx, session, err := SetupHSMEnv(pkcs11Lib, defaultLoader)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	cleanup(ctx, session)
 }
 
@@ -490,19 +490,19 @@ func testYubiFunctionCleansUpOnSpecifiedErrors(t *testing.T,
 
 		err := functionUnderTest()
 		if functionShouldError {
-			assert.Error(t, err,
+			require.Error(t, err,
 				fmt.Sprintf("Didn't error when %s errored.", methodName))
 			// a lot of these functions wrap other errors
-			assert.Contains(t, err.Error(), errInjected{methodName}.Error())
+			require.Contains(t, err.Error(), errInjected{methodName}.Error())
 		} else {
-			assert.NoError(t, err)
+			require.NoError(t, err)
 		}
 	}
 
 	// Set Up another time, to ensure we weren't left in a bad state
 	// by the previous runs
 	ctx, session, err := SetupHSMEnv(pkcs11Lib, defaultLoader)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	cleanup(ctx, session)
 }
 
@@ -519,7 +519,7 @@ func TestYubiAddKeyCleansUpOnError(t *testing.T) {
 
 	backup := trustmanager.NewKeyMemoryStore(ret)
 	store, err := NewYubiKeyStore(backup, ret)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	var _addkey = func() error {
 		_, err := testAddKey(t, store)
@@ -539,8 +539,8 @@ func TestYubiAddKeyCleansUpOnError(t *testing.T) {
 
 	// given that everything should have errored, there should be no keys on
 	// the yubikey and no keys in backup
-	assert.Len(t, backup.ListKeys(), 0)
-	assert.Len(t, cleanListKeys(t), 0)
+	require.Len(t, backup.ListKeys(), 0)
+	require.Len(t, cleanListKeys(t), 0)
 
 	// Logout should not cause a function failure - it s a cleanup failure,
 	// which shouldn't break anything, and it should clean up after itself.
@@ -549,8 +549,8 @@ func TestYubiAddKeyCleansUpOnError(t *testing.T) {
 		[]string{"Logout"}, false)
 
 	listedKeys := cleanListKeys(t)
-	assert.Len(t, backup.ListKeys(), 1)
-	assert.Len(t, listedKeys, 1)
+	require.Len(t, backup.ListKeys(), 1)
+	require.Len(t, listedKeys, 1)
 
 	// Currently, if GetAttributeValue fails, the function succeeds, because if
 	// we can't get the attribute value of an object, we don't know what slot
@@ -562,11 +562,11 @@ func TestYubiAddKeyCleansUpOnError(t *testing.T) {
 
 	newListedKeys := cleanListKeys(t)
 	// because the original key got overwritten
-	assert.Len(t, backup.ListKeys(), 2)
-	assert.Len(t, newListedKeys, 1)
+	require.Len(t, backup.ListKeys(), 2)
+	require.Len(t, newListedKeys, 1)
 	for k := range newListedKeys {
 		_, ok := listedKeys[k]
-		assert.False(t, ok)
+		require.False(t, ok)
 	}
 }
 
@@ -582,9 +582,9 @@ func TestYubiGetKeyCleansUpOnError(t *testing.T) {
 	}()
 
 	store, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	key, err := testAddKey(t, store)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	var _getkey = func() error {
 		_, _, err := store.GetKey(key.ID())
@@ -614,9 +614,9 @@ func TestYubiRemoveKeyCleansUpOnError(t *testing.T) {
 	}()
 
 	store, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	key, err := testAddKey(t, store)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	var _removekey = func() error { return store.RemoveKey(key.ID()) }
 
@@ -635,14 +635,14 @@ func TestYubiRemoveKeyCleansUpOnError(t *testing.T) {
 
 	// given that everything should have errored, there should still be 1 key
 	// on the yubikey
-	assert.Len(t, cleanListKeys(t), 1)
+	require.Len(t, cleanListKeys(t), 1)
 
 	// this will not fail, but it should clean up after itself, and the key
 	// should be added to both stores
 	testYubiFunctionCleansUpOnSpecifiedErrors(t, store, _removekey,
 		[]string{"Logout"}, false)
 
-	assert.Len(t, cleanListKeys(t), 0)
+	require.Len(t, cleanListKeys(t), 0)
 }
 
 func TestYubiListKeyCleansUpOnError(t *testing.T) {
@@ -696,16 +696,16 @@ func TestYubiSignCleansUpOnError(t *testing.T) {
 	}()
 
 	store, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	key, err := testAddKey(t, store)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	privKey, _, err := store.GetKey(key.ID())
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	yubiPrivateKey, ok := privKey.(*YubiPrivateKey)
-	assert.True(t, ok)
+	require.True(t, ok)
 
 	var _sign = func() error {
 		_, err = yubiPrivateKey.Sign(rand.Reader, []byte("Hello there"), nil)
@@ -743,20 +743,20 @@ func TestYubiRetrySignUntilSuccess(t *testing.T) {
 	}()
 
 	store, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	key, err := testAddKey(t, store)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	message := []byte("Hello there")
 	goodSig, err := key.Sign(rand.Reader, message, nil)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	privKey, _, err := store.GetKey(key.ID())
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	yubiPrivateKey, ok := privKey.(*YubiPrivateKey)
-	assert.True(t, ok)
+	require.True(t, ok)
 
 	badSigner := &SignInvalidSigCtx{
 		Ctx:     *pkcs11.New(pkcs11Lib),
@@ -767,11 +767,11 @@ func TestYubiRetrySignUntilSuccess(t *testing.T) {
 	yubiPrivateKey.setLibLoader(func(string) IPKCS11Ctx { return badSigner })
 
 	sig, err := yubiPrivateKey.Sign(rand.Reader, message, nil)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	// because the SignInvalidSigCtx returns the good signature, we can just
 	// deep equal instead of verifying
-	assert.True(t, reflect.DeepEqual(goodSig, sig))
-	assert.Equal(t, 3, badSigner.signCalls)
+	require.True(t, reflect.DeepEqual(goodSig, sig))
+	require.Equal(t, 3, badSigner.signCalls)
 }
 
 // If Sign gives us an invalid signature, we retry until up to a maximum of 5
@@ -788,20 +788,20 @@ func TestYubiRetrySignUntilFail(t *testing.T) {
 	}()
 
 	store, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	key, err := testAddKey(t, store)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	message := []byte("Hello there")
 	goodSig, err := key.Sign(rand.Reader, message, nil)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	privKey, _, err := store.GetKey(key.ID())
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	yubiPrivateKey, ok := privKey.(*YubiPrivateKey)
-	assert.True(t, ok)
+	require.True(t, ok)
 
 	badSigner := &SignInvalidSigCtx{
 		Ctx:     *pkcs11.New(pkcs11Lib),
@@ -812,10 +812,10 @@ func TestYubiRetrySignUntilFail(t *testing.T) {
 	yubiPrivateKey.setLibLoader(func(string) IPKCS11Ctx { return badSigner })
 
 	_, err = yubiPrivateKey.Sign(rand.Reader, message, nil)
-	assert.Error(t, err)
+	require.Error(t, err)
 	// because the SignInvalidSigCtx returns the good signature, we can just
 	// deep equal instead of verifying
-	assert.Equal(t, sigAttempts, badSigner.signCalls)
+	require.Equal(t, sigAttempts, badSigner.signCalls)
 }
 
 // -----  Stubbed pkcs11 for testing error conditions ------
