@@ -18,7 +18,7 @@ import (
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 // --- tests for pretty printing keys ---
@@ -26,14 +26,14 @@ import (
 func TestTruncateWithEllipsis(t *testing.T) {
 	digits := "1234567890"
 	// do not truncate
-	assert.Equal(t, truncateWithEllipsis(digits, 10, true), digits)
-	assert.Equal(t, truncateWithEllipsis(digits, 10, false), digits)
-	assert.Equal(t, truncateWithEllipsis(digits, 11, true), digits)
-	assert.Equal(t, truncateWithEllipsis(digits, 11, false), digits)
+	require.Equal(t, truncateWithEllipsis(digits, 10, true), digits)
+	require.Equal(t, truncateWithEllipsis(digits, 10, false), digits)
+	require.Equal(t, truncateWithEllipsis(digits, 11, true), digits)
+	require.Equal(t, truncateWithEllipsis(digits, 11, false), digits)
 
 	// left and right truncate
-	assert.Equal(t, truncateWithEllipsis(digits, 8, true), "...67890")
-	assert.Equal(t, truncateWithEllipsis(digits, 8, false), "12345...")
+	require.Equal(t, truncateWithEllipsis(digits, 8, true), "...67890")
+	require.Equal(t, truncateWithEllipsis(digits, 8, false), "12345...")
 }
 
 func TestKeyInfoSorter(t *testing.T) {
@@ -54,7 +54,7 @@ func TestKeyInfoSorter(t *testing.T) {
 	}
 
 	sort.Sort(keyInfoSorter(jumbled))
-	assert.True(t, reflect.DeepEqual(expected, jumbled),
+	require.True(t, reflect.DeepEqual(expected, jumbled),
 		fmt.Sprintf("Expected %v, Got %v", expected, jumbled))
 }
 
@@ -75,11 +75,11 @@ func TestPrettyPrintZeroKeys(t *testing.T) {
 	var b bytes.Buffer
 	prettyPrintKeys([]trustmanager.KeyStore{emptyKeyStore}, &b)
 	text, err := ioutil.ReadAll(&b)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	lines := strings.Split(strings.TrimSpace(string(text)), "\n")
-	assert.Len(t, lines, 1)
-	assert.Equal(t, "No signing keys found.", lines[0])
+	require.Len(t, lines, 1)
+	require.Equal(t, "No signing keys found.", lines[0])
 }
 
 // Given a list of key stores, the keys should be pretty-printed with their
@@ -96,19 +96,19 @@ func TestPrettyPrintRootAndSigningKeys(t *testing.T) {
 	keys := make([]data.PrivateKey, 4)
 	for i := 0; i < 4; i++ {
 		key, err := trustmanager.GenerateED25519Key(rand.Reader)
-		assert.NoError(t, err)
+		require.NoError(t, err)
 		keys[i] = key
 	}
 
 	root := data.CanonicalRootRole
 
 	// add keys to the key stores
-	assert.NoError(t, keyStores[0].AddKey(trustmanager.KeyInfo{Role: root, Gun: ""}, keys[0]))
-	assert.NoError(t, keyStores[1].AddKey(trustmanager.KeyInfo{Role: root, Gun: ""}, keys[0]))
-	assert.NoError(t, keyStores[0].AddKey(trustmanager.KeyInfo{Role: data.CanonicalTargetsRole, Gun: strings.Repeat("/a", 30)}, keys[1]))
-	assert.NoError(t, keyStores[1].AddKey(trustmanager.KeyInfo{Role: data.CanonicalSnapshotRole, Gun: "short/gun"}, keys[1]))
-	assert.NoError(t, keyStores[0].AddKey(trustmanager.KeyInfo{Role: "targets/a", Gun: ""}, keys[3]))
-	assert.NoError(t, keyStores[0].AddKey(trustmanager.KeyInfo{Role: "invalidRole", Gun: ""}, keys[2]))
+	require.NoError(t, keyStores[0].AddKey(trustmanager.KeyInfo{Role: root, Gun: ""}, keys[0]))
+	require.NoError(t, keyStores[1].AddKey(trustmanager.KeyInfo{Role: root, Gun: ""}, keys[0]))
+	require.NoError(t, keyStores[0].AddKey(trustmanager.KeyInfo{Role: data.CanonicalTargetsRole, Gun: strings.Repeat("/a", 30)}, keys[1]))
+	require.NoError(t, keyStores[1].AddKey(trustmanager.KeyInfo{Role: data.CanonicalSnapshotRole, Gun: "short/gun"}, keys[1]))
+	require.NoError(t, keyStores[0].AddKey(trustmanager.KeyInfo{Role: "targets/a", Gun: ""}, keys[3]))
+	require.NoError(t, keyStores[0].AddKey(trustmanager.KeyInfo{Role: "invalidRole", Gun: ""}, keys[2]))
 
 	expected := [][]string{
 		// root always comes first
@@ -125,21 +125,21 @@ func TestPrettyPrintRootAndSigningKeys(t *testing.T) {
 	var b bytes.Buffer
 	prettyPrintKeys(keyStores, &b)
 	text, err := ioutil.ReadAll(&b)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	lines := strings.Split(strings.TrimSpace(string(text)), "\n")
-	assert.Len(t, lines, len(expected)+2)
+	require.Len(t, lines, len(expected)+2)
 
 	// starts with headers
-	assert.True(t, reflect.DeepEqual(strings.Fields(lines[0]),
+	require.True(t, reflect.DeepEqual(strings.Fields(lines[0]),
 		[]string{"ROLE", "GUN", "KEY", "ID", "LOCATION"}))
-	assert.Equal(t, "----", lines[1][:4])
+	require.Equal(t, "----", lines[1][:4])
 
 	for i, line := range lines[2:] {
 		// we are purposely not putting spaces in test data so easier to split
 		splitted := strings.Fields(line)
 		for j, v := range splitted {
-			assert.Equal(t, expected[i][j], strings.TrimSpace(v))
+			require.Equal(t, expected[i][j], strings.TrimSpace(v))
 		}
 	}
 }
@@ -152,11 +152,11 @@ func TestPrettyPrintZeroTargets(t *testing.T) {
 	var b bytes.Buffer
 	prettyPrintTargets([]*client.TargetWithRole{}, &b)
 	text, err := ioutil.ReadAll(&b)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	lines := strings.Split(strings.TrimSpace(string(text)), "\n")
-	assert.Len(t, lines, 1)
-	assert.Equal(t, "No targets present in this repository.", lines[0])
+	require.Len(t, lines, 1)
+	require.Equal(t, "No targets present in this repository.", lines[0])
 
 }
 
@@ -167,7 +167,7 @@ func TestPrettyPrintSortedTargets(t *testing.T) {
 	var err error
 	for i, letter := range []string{"a012", "b012", "c012"} {
 		hashes[i], err = hex.DecodeString(letter)
-		assert.NoError(t, err)
+		require.NoError(t, err)
 	}
 	unsorted := []*client.TargetWithRole{
 		{Target: client.Target{Name: "zebra", Hashes: data.Hashes{"sha256": hashes[0]}, Length: 8}, Role: "targets/b"},
@@ -179,7 +179,7 @@ func TestPrettyPrintSortedTargets(t *testing.T) {
 	var b bytes.Buffer
 	prettyPrintTargets(unsorted, &b)
 	text, err := ioutil.ReadAll(&b)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	expected := [][]string{
 		{"aardvark", "b012", "1", "targets"},
@@ -188,16 +188,16 @@ func TestPrettyPrintSortedTargets(t *testing.T) {
 	}
 
 	lines := strings.Split(strings.TrimSpace(string(text)), "\n")
-	assert.Len(t, lines, len(expected)+2)
+	require.Len(t, lines, len(expected)+2)
 
 	// starts with headers
-	assert.True(t, reflect.DeepEqual(strings.Fields(lines[0]), strings.Fields(
+	require.True(t, reflect.DeepEqual(strings.Fields(lines[0]), strings.Fields(
 		"NAME     DIGEST      SIZE (BYTES)   ROLE")))
-	assert.Equal(t, "----", lines[1][:4])
+	require.Equal(t, "----", lines[1][:4])
 
 	for i, line := range lines[2:] {
 		splitted := strings.Fields(line)
-		assert.Equal(t, expected[i], splitted)
+		require.Equal(t, expected[i], splitted)
 	}
 }
 
@@ -205,12 +205,12 @@ func TestPrettyPrintSortedTargets(t *testing.T) {
 
 func generateCertificate(t *testing.T, gun string, expireInHours int64) *x509.Certificate {
 	ecdsaPrivKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	startTime := time.Now()
 	endTime := startTime.Add(time.Hour * time.Duration(expireInHours))
 	cert, err := cryptoservice.GenerateCertificate(ecdsaPrivKey, gun, startTime, endTime)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	return cert
 }
 
@@ -222,11 +222,11 @@ func TestPrettyPrintZeroRoles(t *testing.T) {
 	var b bytes.Buffer
 	prettyPrintRoles([]*data.Role{}, &b, "delegations")
 	text, err := ioutil.ReadAll(&b)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	lines := strings.Split(strings.TrimSpace(string(text)), "\n")
-	assert.Len(t, lines, 1)
-	assert.Equal(t, "No delegations present in this repository.", lines[0])
+	require.Len(t, lines, 1)
+	require.Equal(t, "No delegations present in this repository.", lines[0])
 }
 
 // Roles are sorted by name, and the name, paths, and KeyIDs are printed.
@@ -243,7 +243,7 @@ func TestPrettyPrintSortedRoles(t *testing.T) {
 	var b bytes.Buffer
 	prettyPrintRoles(unsorted, &b, "delegations")
 	text, err := ioutil.ReadAll(&b)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	expected := [][]string{
 		{"targets/aardvark/unicorn/pony", "rainbows", "135", "1"},
@@ -256,16 +256,16 @@ func TestPrettyPrintSortedRoles(t *testing.T) {
 	}
 
 	lines := strings.Split(strings.TrimSpace(string(text)), "\n")
-	assert.Len(t, lines, len(expected)+2)
+	require.Len(t, lines, len(expected)+2)
 
 	// starts with headers
-	assert.True(t, reflect.DeepEqual(strings.Fields(lines[0]), strings.Fields(
+	require.True(t, reflect.DeepEqual(strings.Fields(lines[0]), strings.Fields(
 		"ROLE     PATHS      KEY IDS   THRESHOLD")))
-	assert.Equal(t, "----", lines[1][:4])
+	require.Equal(t, "----", lines[1][:4])
 
 	for i, line := range lines[2:] {
 		splitted := strings.Fields(line)
-		assert.Equal(t, expected[i], splitted)
+		require.Equal(t, expected[i], splitted)
 	}
 }
 
@@ -275,11 +275,11 @@ func TestPrettyPrintZeroCerts(t *testing.T) {
 	var b bytes.Buffer
 	prettyPrintCerts([]*x509.Certificate{}, &b)
 	text, err := ioutil.ReadAll(&b)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	lines := strings.Split(strings.TrimSpace(string(text)), "\n")
-	assert.Len(t, lines, 1)
-	assert.Equal(t, "No trusted root certificates present.", lines[0])
+	require.Len(t, lines, 1)
+	require.Equal(t, "No trusted root certificates present.", lines[0])
 }
 
 // Certificates are pretty-printed in table form sorted by gun and then expiry
@@ -294,7 +294,7 @@ func TestPrettyPrintSortedCerts(t *testing.T) {
 	var b bytes.Buffer
 	prettyPrintCerts(unsorted, &b)
 	text, err := ioutil.ReadAll(&b)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	expected := [][]string{
 		{"baklava", "9 days"},
@@ -304,17 +304,17 @@ func TestPrettyPrintSortedCerts(t *testing.T) {
 	}
 
 	lines := strings.Split(strings.TrimSpace(string(text)), "\n")
-	assert.Len(t, lines, len(expected)+2)
+	require.Len(t, lines, len(expected)+2)
 
 	// starts with headers
-	assert.True(t, reflect.DeepEqual(strings.Fields(lines[0]), strings.Fields(
+	require.True(t, reflect.DeepEqual(strings.Fields(lines[0]), strings.Fields(
 		"GUN     FINGERPRINT OF TRUSTED ROOT CERTIFICATE      EXPIRES IN")))
-	assert.Equal(t, "----", lines[1][:4])
+	require.Equal(t, "----", lines[1][:4])
 
 	for i, line := range lines[2:] {
 		splitted := strings.Fields(line)
-		assert.True(t, len(splitted) >= 3)
-		assert.Equal(t, expected[i][0], splitted[0])
-		assert.Equal(t, expected[i][1], strings.Join(splitted[2:], " "))
+		require.True(t, len(splitted) >= 3)
+		require.Equal(t, expected[i][0], splitted[0])
+		require.Equal(t, expected[i][1], strings.Join(splitted[2:], " "))
 	}
 }

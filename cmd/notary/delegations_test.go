@@ -11,7 +11,7 @@ import (
 	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/trustmanager"
 	"github.com/spf13/viper"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 var testTrustDir = "trust_dir"
@@ -33,10 +33,10 @@ func TestAddInvalidDelegationName(t *testing.T) {
 
 	// Setup certificate
 	tempFile, err := ioutil.TempFile("/tmp", "pemfile")
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	cert, _, err := generateValidTestCert()
 	_, err = tempFile.Write(trustmanager.CertToPEM(cert))
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	tempFile.Close()
 	defer os.Remove(tempFile.Name())
 
@@ -45,7 +45,7 @@ func TestAddInvalidDelegationName(t *testing.T) {
 
 	// Should error due to invalid delegation name (should be prefixed by "targets/")
 	err = commander.delegationAdd(commander.GetCommand(), []string{"gun", "INVALID_NAME", tempFile.Name()})
-	assert.Error(t, err)
+	require.Error(t, err)
 }
 
 func TestAddInvalidDelegationCert(t *testing.T) {
@@ -54,10 +54,10 @@ func TestAddInvalidDelegationCert(t *testing.T) {
 
 	// Setup certificate
 	tempFile, err := ioutil.TempFile("/tmp", "pemfile")
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	cert, _, err := generateExpiredTestCert()
 	_, err = tempFile.Write(trustmanager.CertToPEM(cert))
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	tempFile.Close()
 	defer os.Remove(tempFile.Name())
 
@@ -66,7 +66,7 @@ func TestAddInvalidDelegationCert(t *testing.T) {
 
 	// Should error due to expired cert
 	err = commander.delegationAdd(commander.GetCommand(), []string{"gun", "targets/delegation", tempFile.Name(), "--paths", "path"})
-	assert.Error(t, err)
+	require.Error(t, err)
 }
 
 func TestAddInvalidShortPubkeyCert(t *testing.T) {
@@ -75,10 +75,10 @@ func TestAddInvalidShortPubkeyCert(t *testing.T) {
 
 	// Setup certificate
 	tempFile, err := ioutil.TempFile("/tmp", "pemfile")
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	cert, _, err := generateShortRSAKeyTestCert()
 	_, err = tempFile.Write(trustmanager.CertToPEM(cert))
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	tempFile.Close()
 	defer os.Remove(tempFile.Name())
 
@@ -87,7 +87,7 @@ func TestAddInvalidShortPubkeyCert(t *testing.T) {
 
 	// Should error due to short RSA key
 	err = commander.delegationAdd(commander.GetCommand(), []string{"gun", "targets/delegation", tempFile.Name(), "--paths", "path"})
-	assert.Error(t, err)
+	require.Error(t, err)
 }
 
 func TestRemoveInvalidDelegationName(t *testing.T) {
@@ -99,7 +99,7 @@ func TestRemoveInvalidDelegationName(t *testing.T) {
 
 	// Should error due to invalid delegation name (should be prefixed by "targets/")
 	err := commander.delegationRemove(commander.GetCommand(), []string{"gun", "INVALID_NAME", "fake_key_id1", "fake_key_id2"})
-	assert.Error(t, err)
+	require.Error(t, err)
 }
 
 func TestRemoveAllInvalidDelegationName(t *testing.T) {
@@ -111,7 +111,7 @@ func TestRemoveAllInvalidDelegationName(t *testing.T) {
 
 	// Should error due to invalid delegation name (should be prefixed by "targets/")
 	err := commander.delegationRemove(commander.GetCommand(), []string{"gun", "INVALID_NAME"})
-	assert.Error(t, err)
+	require.Error(t, err)
 }
 
 func TestAddInvalidNumArgs(t *testing.T) {
@@ -120,7 +120,7 @@ func TestAddInvalidNumArgs(t *testing.T) {
 
 	// Should error due to invalid number of args (2 instead of 3)
 	err := commander.delegationAdd(commander.GetCommand(), []string{"not", "enough"})
-	assert.Error(t, err)
+	require.Error(t, err)
 }
 
 func TestListInvalidNumArgs(t *testing.T) {
@@ -129,7 +129,7 @@ func TestListInvalidNumArgs(t *testing.T) {
 
 	// Should error due to invalid number of args (0 instead of 1)
 	err := commander.delegationsList(commander.GetCommand(), []string{})
-	assert.Error(t, err)
+	require.Error(t, err)
 }
 
 func TestRemoveInvalidNumArgs(t *testing.T) {
@@ -138,7 +138,7 @@ func TestRemoveInvalidNumArgs(t *testing.T) {
 
 	// Should error due to invalid number of args (1 instead of 2)
 	err := commander.delegationRemove(commander.GetCommand(), []string{"notenough"})
-	assert.Error(t, err)
+	require.Error(t, err)
 }
 
 func generateValidTestCert() (*x509.Certificate, string, error) {
