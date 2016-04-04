@@ -94,8 +94,9 @@ func ValidateRoot(certStore trustmanager.X509Store, root *data.Signed, gun strin
 		return err
 	}
 
-	// Retrieve all the leaf certificates in root for which the CN matches the GUN
-	certsFromRoot, err := validRootLeafCerts(signedRoot, gun)
+	// Retrieve all the leaf and intermediate certificates in root for which the CN matches the GUN
+	allLeafCerts, allIntCerts := parseAllCerts(signedRoot)
+	certsFromRoot, err := validRootLeafCerts(allLeafCerts, gun)
 	if err != nil {
 		logrus.Debugf("error retrieving valid leaf certificates for: %s, %v", gun, err)
 		return &ErrValidationFail{Reason: "unable to retrieve valid leaf certificates"}
@@ -131,12 +132,11 @@ func ValidateRoot(certStore trustmanager.X509Store, root *data.Signed, gun strin
 
 		validPinnedCerts := []*x509.Certificate{}
 		for _, cert := range certsFromRoot {
-			_, intermediateCerts := parseAllCerts(signedRoot)
 			certID, err := trustmanager.FingerprintCert(cert)
 			if err != nil {
 				continue
 			}
-			if ok := trustPinChecker.checkCert(cert, intermediateCerts[certID]); !ok {
+			if ok := trustPinChecker.checkCert(cert, allIntCerts[certID]); !ok {
 				continue
 			}
 			validPinnedCerts = append(validPinnedCerts, cert)
@@ -198,9 +198,9 @@ func ValidateRoot(certStore trustmanager.X509Store, root *data.Signed, gun strin
 // validRootLeafCerts returns a list of non-expired, non-sha1 certificates
 // found in root whose Common-Names match the provided GUN. Note that this
 // "validity" alone does not imply any measure of trust.
-func validRootLeafCerts(root *data.SignedRoot, gun string) ([]*x509.Certificate, error) {
-	// Get a list of all of the leaf certificates present in root
-	allLeafCerts, _ := parseAllCerts(root)
+// validRootLeafCerts returns a list of non-expired, non-sha1 certificates whose
+// Common-Names match the provided GUN
+func validRootLeafCerts(allLeafCerts map[string]*x509.Certificate, gun string) ([]*x509.Certificate, error) {
 	var validLeafCerts []*x509.Certificate
 
 	// Go through every leaf certificate and check that the CN matches the gun
