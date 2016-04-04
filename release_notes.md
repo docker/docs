@@ -12,6 +12,12 @@ weight="99"
 
 # UCP Release Notes
 
+## Version 1.0.2
+
+**Security update**
+
+Fixes a security issue by which a non-admin user account can gain admin-level
+privileges via the UCP API.
 
 ## Version 1.0.1
 
