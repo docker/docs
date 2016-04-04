@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestNewX509FileStore(t *testing.T) {
@@ -27,38 +27,38 @@ func TestNewX509FileStore(t *testing.T) {
 // not overwrite any of the.
 func TestNewX509FileStoreLoadsExistingCerts(t *testing.T) {
 	tempDir, err := ioutil.TempDir("", "cert-test")
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	defer os.RemoveAll(tempDir)
 
 	certBytes, err := ioutil.ReadFile("../fixtures/root-ca.crt")
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	out, err := os.Create(filepath.Join(tempDir, "root-ca.crt"))
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// to distinguish it from the canonical format
 	distinguishingBytes := []byte{'\n', '\n', '\n', '\n', '\n', '\n'}
 	nBytes, err := out.Write(distinguishingBytes)
-	assert.NoError(t, err)
-	assert.Len(t, distinguishingBytes, nBytes)
+	require.NoError(t, err)
+	require.Len(t, distinguishingBytes, nBytes)
 
 	nBytes, err = out.Write(certBytes)
-	assert.NoError(t, err)
-	assert.Len(t, certBytes, nBytes)
+	require.NoError(t, err)
+	require.Len(t, certBytes, nBytes)
 
 	err = out.Close()
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	store, err := NewX509FileStore(tempDir)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	expectedCert, err := LoadCertFromFile("../fixtures/root-ca.crt")
-	assert.NoError(t, err)
-	assert.Equal(t, []*x509.Certificate{expectedCert}, store.GetCertificates())
+	require.NoError(t, err)
+	require.Equal(t, []*x509.Certificate{expectedCert}, store.GetCertificates())
 
 	outBytes, err := ioutil.ReadFile(filepath.Join(tempDir, "root-ca.crt"))
-	assert.NoError(t, err)
-	assert.Equal(t, distinguishingBytes, outBytes[:6], "original file overwritten")
-	assert.Equal(t, certBytes, outBytes[6:], "original file overwritten")
+	require.NoError(t, err)
+	require.Equal(t, distinguishingBytes, outBytes[:6], "original file overwritten")
+	require.Equal(t, certBytes, outBytes[6:], "original file overwritten")
 }
 
 func TestAddCertX509FileStore(t *testing.T) {
@@ -100,40 +100,39 @@ func TestAddCertX509FileStore(t *testing.T) {
 
 func TestAddCertFromFileX509FileStore(t *testing.T) {
 	tempDir, err := ioutil.TempDir("", "cert-test")
-	assert.NoError(t, err, "failed to create temporary directory")
+	require.NoError(t, err, "failed to create temporary directory")
 
 	store, err := NewX509FileStore(tempDir)
-	assert.NoError(t, err, "failed to load x509 filestore")
+	require.NoError(t, err, "failed to load x509 filestore")
 
 	err = store.AddCertFromFile("../fixtures/root-ca.crt")
-	assert.NoError(t, err, "failed to add certificate from file")
-	assert.Len(t, store.GetCertificates(), 1)
+	require.NoError(t, err, "failed to add certificate from file")
+	require.Len(t, store.GetCertificates(), 1)
 
 	// Now load the x509 filestore with the same path and expect the same result
 	newStore, err := NewX509FileStore(tempDir)
-	assert.NoError(t, err, "failed to load x509 filestore")
-	assert.Len(t, newStore.GetCertificates(), 1)
+	require.NoError(t, err, "failed to load x509 filestore")
+	require.Len(t, newStore.GetCertificates(), 1)
 
 	// Test that adding the same certificate returns an error
 	err = newStore.AddCert(newStore.GetCertificates()[0])
-	if assert.Error(t, err, "expected error when adding certificate twice") {
-		assert.Equal(t, err, &ErrCertExists{})
-	}
+	require.Error(t, err, "expected error when adding certificate twice")
+	require.Equal(t, err, &ErrCertExists{})
 }
 
 // TestNewX509FileStoreEmpty verifies the behavior of the Empty function
 func TestNewX509FileStoreEmpty(t *testing.T) {
 	tempDir, err := ioutil.TempDir("", "cert-test")
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	defer os.RemoveAll(tempDir)
 
 	store, err := NewX509FileStore(tempDir)
-	assert.NoError(t, err)
-	assert.True(t, store.Empty())
+	require.NoError(t, err)
+	require.True(t, store.Empty())
 
 	err = store.AddCertFromFile("../fixtures/root-ca.crt")
-	assert.NoError(t, err)
-	assert.False(t, store.Empty())
+	require.NoError(t, err)
+	require.False(t, store.Empty())
 }
 
 func TestAddCertFromPEMX509FileStore(t *testing.T) {

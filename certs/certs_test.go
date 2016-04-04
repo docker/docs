@@ -15,7 +15,7 @@ import (
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 type SignedRSARootTemplate struct {
@@ -35,82 +35,82 @@ const signedRSARootTemplate = `{"signed":{"_type":"Root","consistent_snapshot":f
 func TestCertsToRemove(t *testing.T) {
 	// Get a few certificates to test with
 	cert1, err := trustmanager.LoadCertFromFile("../fixtures/secure.example.com.crt")
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	cert1KeyID, err := trustmanager.FingerprintCert(cert1)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// Get intermediate certificate
 	cert2, err := trustmanager.LoadCertFromFile("../fixtures/self-signed_secure.example.com.crt")
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	cert2KeyID, err := trustmanager.FingerprintCert(cert2)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// Get leaf certificate
 	cert3, err := trustmanager.LoadCertFromFile("../fixtures/self-signed_docker.com-notary.crt")
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	cert3KeyID, err := trustmanager.FingerprintCert(cert3)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// Call CertsToRemove with only one old and one new
 	oldCerts := []*x509.Certificate{cert1}
 	newCerts := []*x509.Certificate{cert2}
 
 	certificates := certsToRemove(oldCerts, newCerts)
-	assert.Len(t, certificates, 1)
+	require.Len(t, certificates, 1)
 	_, ok := certificates[cert1KeyID]
-	assert.True(t, ok)
+	require.True(t, ok)
 
 	// Call CertsToRemove with two old and one new
 	oldCerts = []*x509.Certificate{cert1, cert2}
 	newCerts = []*x509.Certificate{cert3}
 
 	certificates = certsToRemove(oldCerts, newCerts)
-	assert.Len(t, certificates, 2)
+	require.Len(t, certificates, 2)
 	_, ok = certificates[cert1KeyID]
-	assert.True(t, ok)
+	require.True(t, ok)
 	_, ok = certificates[cert2KeyID]
-	assert.True(t, ok)
+	require.True(t, ok)
 	_, ok = certificates[cert3KeyID]
-	assert.False(t, ok)
+	require.False(t, ok)
 
 	// Call CertsToRemove with two new and one old
 	oldCerts = []*x509.Certificate{cert3}
 	newCerts = []*x509.Certificate{cert2, cert1}
 
 	certificates = certsToRemove(oldCerts, newCerts)
-	assert.Len(t, certificates, 1)
+	require.Len(t, certificates, 1)
 	_, ok = certificates[cert3KeyID]
-	assert.True(t, ok)
+	require.True(t, ok)
 	_, ok = certificates[cert1KeyID]
-	assert.False(t, ok)
+	require.False(t, ok)
 	_, ok = certificates[cert2KeyID]
-	assert.False(t, ok)
+	require.False(t, ok)
 
 	// Call CertsToRemove with three old certificates and no new
 	oldCerts = []*x509.Certificate{cert1, cert2, cert3}
 	newCerts = []*x509.Certificate{}
 
 	certificates = certsToRemove(oldCerts, newCerts)
-	assert.Len(t, certificates, 0)
+	require.Len(t, certificates, 0)
 	_, ok = certificates[cert1KeyID]
-	assert.False(t, ok)
+	require.False(t, ok)
 	_, ok = certificates[cert2KeyID]
-	assert.False(t, ok)
+	require.False(t, ok)
 	_, ok = certificates[cert3KeyID]
-	assert.False(t, ok)
+	require.False(t, ok)
 
 	// Call CertsToRemove with three new certificates and no old
 	oldCerts = []*x509.Certificate{}
 	newCerts = []*x509.Certificate{cert1, cert2, cert3}
 
 	certificates = certsToRemove(oldCerts, newCerts)
-	assert.Len(t, certificates, 0)
+	require.Len(t, certificates, 0)
 	_, ok = certificates[cert1KeyID]
-	assert.False(t, ok)
+	require.False(t, ok)
 	_, ok = certificates[cert2KeyID]
-	assert.False(t, ok)
+	require.False(t, ok)
 	_, ok = certificates[cert3KeyID]
-	assert.False(t, ok)
+	require.False(t, ok)
 
 }
 
@@ -121,7 +121,7 @@ func TestValidateRoot(t *testing.T) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+	require.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	// Create a X509Store
 	trustPath := filepath.Join(tempBaseDir, notary.TrustedCertsDir)
@@ -129,7 +129,7 @@ func TestValidateRoot(t *testing.T) {
 		trustPath,
 		trustmanager.FilterCertsExpiredSha1,
 	)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// Execute our template
 	templ, _ := template.New("SignedRSARootTemplate").Parse(signedRSARootTemplate)
@@ -141,14 +141,13 @@ func TestValidateRoot(t *testing.T) {
 	// This call to ValidateRoot will succeed since we are using a valid PEM
 	// encoded certificate, and have no other certificates for this CN
 	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary")
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// This call to ValidateRoot will fail since we are passing in a dnsName that
 	// doesn't match the CN of the certificate.
 	err = ValidateRoot(certStore, &testSignedRoot, "diogomonica.com/notary")
-	if assert.Error(t, err, "An error was expected") {
-		assert.Equal(t, err, &ErrValidationFail{Reason: "unable to retrieve valid leaf certificates"})
-	}
+	require.Error(t, err, "An error was expected")
+	require.Equal(t, err, &ErrValidationFail{Reason: "unable to retrieve valid leaf certificates"})
 
 	//
 	// This call to ValidateRoot will fail since we are passing an unparsable RootSigned
@@ -161,7 +160,7 @@ func TestValidateRoot(t *testing.T) {
 	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
 
 	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary")
-	assert.Error(t, err, "illegal base64 data at input byte")
+	require.Error(t, err, "illegal base64 data at input byte")
 
 	//
 	// This call to ValidateRoot will fail since we are passing an invalid PEM cert
@@ -174,9 +173,8 @@ func TestValidateRoot(t *testing.T) {
 	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
 
 	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary")
-	if assert.Error(t, err, "An error was expected") {
-		assert.Equal(t, err, &ErrValidationFail{Reason: "unable to retrieve valid leaf certificates"})
-	}
+	require.Error(t, err, "An error was expected")
+	require.Equal(t, err, &ErrValidationFail{Reason: "unable to retrieve valid leaf certificates"})
 
 	//
 	// This call to ValidateRoot will fail since we are passing only CA certificate
@@ -190,9 +188,8 @@ func TestValidateRoot(t *testing.T) {
 	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
 
 	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary")
-	if assert.Error(t, err, "An error was expected") {
-		assert.Equal(t, err, &ErrValidationFail{Reason: "unable to retrieve valid leaf certificates"})
-	}
+	require.Error(t, err, "An error was expected")
+	require.Equal(t, err, &ErrValidationFail{Reason: "unable to retrieve valid leaf certificates"})
 
 	//
 	// This call to ValidateRoot will succeed in getting to the TUF validation, since
@@ -209,9 +206,8 @@ func TestValidateRoot(t *testing.T) {
 	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
 
 	err = ValidateRoot(certStore, &testSignedRoot, "secure.example.com")
-	if assert.Error(t, err, "An error was expected") {
-		assert.Equal(t, err, &ErrValidationFail{Reason: "failed to validate integrity of roots"})
-	}
+	require.Error(t, err, "An error was expected")
+	require.Equal(t, err, &ErrValidationFail{Reason: "failed to validate integrity of roots"})
 }
 
 // TestValidateSuccessfulRootRotation runs through a full root certificate rotation
@@ -229,10 +225,10 @@ func TestValidateSuccessfulRootRotation(t *testing.T) {
 func filestoreWithTwoCerts(t *testing.T, gun, keyAlg string) (
 	string, trustmanager.X509Store, *cryptoservice.CryptoService, []*x509.Certificate) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+	require.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	fileKeyStore, err := trustmanager.NewKeyFileStore(tempBaseDir, passphraseRetriever)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	cryptoService := cryptoservice.NewCryptoService(fileKeyStore)
 
@@ -242,18 +238,18 @@ func filestoreWithTwoCerts(t *testing.T, gun, keyAlg string) (
 		trustPath,
 		trustmanager.FilterCertsExpiredSha1,
 	)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	certificates := make([]*x509.Certificate, 2)
 	for i := 0; i < 2; i++ {
 		pubKey, err := cryptoService.Create("root", gun, keyAlg)
-		assert.NoError(t, err)
+		require.NoError(t, err)
 
 		key, _, err := fileKeyStore.GetKey(pubKey.ID())
-		assert.NoError(t, err)
+		require.NoError(t, err)
 
 		cert, err := cryptoservice.GenerateTestingCertificate(key.CryptoSigner(), gun)
-		assert.NoError(t, err)
+		require.NoError(t, err)
 
 		certificates[i] = cert
 	}
@@ -281,7 +277,7 @@ func testValidateSuccessfulRootRotation(t *testing.T, keyAlg, rootKeyType string
 	replRootKey := data.NewPublicKey(rootKeyType, replRootPEMCert)
 
 	rootRole, err := data.NewRole(data.CanonicalRootRole, 1, []string{replRootKey.ID()}, nil)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	testRoot, err := data.NewRoot(
 		map[string]data.PublicKey{replRootKey.ID(): replRootKey},
@@ -292,23 +288,23 @@ func testValidateSuccessfulRootRotation(t *testing.T, keyAlg, rootKeyType string
 			data.CanonicalSnapshotRole:  &rootRole.RootRole},
 		false,
 	)
-	assert.NoError(t, err, "Failed to create new root")
+	require.NoError(t, err, "Failed to create new root")
 
 	signedTestRoot, err := testRoot.ToSigned()
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	err = signed.Sign(cs, signedTestRoot, replRootKey, origRootKey)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// This call to ValidateRoot will succeed since we are using a valid PEM
 	// encoded certificate, and have no other certificates for this CN
 	err = ValidateRoot(certStore, signedTestRoot, gun)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// Finally, validate the only trusted certificate that exists is the new one
 	certificates = certStore.GetCertificates()
-	assert.Len(t, certificates, 1)
-	assert.Equal(t, certificates[0], replRootCert)
+	require.Len(t, certificates, 1)
+	require.Equal(t, certificates[0], replRootCert)
 }
 
 // TestValidateRootRotationMissingOrigSig runs through a full root certificate rotation
@@ -340,32 +336,32 @@ func testValidateRootRotationMissingOrigSig(t *testing.T, keyAlg, rootKeyType st
 	replRootKey := data.NewPublicKey(rootKeyType, replRootPEMCert)
 
 	rootRole, err := data.NewRole(data.CanonicalRootRole, 1, []string{replRootKey.ID()}, nil)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	testRoot, err := data.NewRoot(
 		map[string]data.PublicKey{replRootKey.ID(): replRootKey},
 		map[string]*data.RootRole{data.CanonicalRootRole: &rootRole.RootRole},
 		false,
 	)
-	assert.NoError(t, err, "Failed to create new root")
+	require.NoError(t, err, "Failed to create new root")
 
 	signedTestRoot, err := testRoot.ToSigned()
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// We only sign with the new key, and not with the original one.
 	err = signed.Sign(cryptoService, signedTestRoot, replRootKey)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// This call to ValidateRoot will succeed since we are using a valid PEM
 	// encoded certificate, and have no other certificates for this CN
 	err = ValidateRoot(certStore, signedTestRoot, gun)
-	assert.Error(t, err, "insuficient signatures on root")
+	require.Error(t, err, "insuficient signatures on root")
 
 	// Finally, validate the only trusted certificate that exists is still
 	// the old one
 	certificates = certStore.GetCertificates()
-	assert.Len(t, certificates, 1)
-	assert.Equal(t, certificates[0], origRootCert)
+	require.Len(t, certificates, 1)
+	require.Equal(t, certificates[0], origRootCert)
 }
 
 // TestValidateRootRotationMissingNewSig runs through a full root certificate rotation
@@ -399,30 +395,30 @@ func testValidateRootRotationMissingNewSig(t *testing.T, keyAlg, rootKeyType str
 	replRootKey := data.NewPublicKey(rootKeyType, replRootPEMCert)
 
 	rootRole, err := data.NewRole(data.CanonicalRootRole, 1, []string{replRootKey.ID()}, nil)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	testRoot, err := data.NewRoot(
 		map[string]data.PublicKey{replRootKey.ID(): replRootKey},
 		map[string]*data.RootRole{data.CanonicalRootRole: &rootRole.RootRole},
 		false,
 	)
-	assert.NoError(t, err, "Failed to create new root")
+	require.NoError(t, err, "Failed to create new root")
 
 	signedTestRoot, err := testRoot.ToSigned()
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// We only sign with the old key, and not with the new one
 	err = signed.Sign(cryptoService, signedTestRoot, origRootKey)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// This call to ValidateRoot will succeed since we are using a valid PEM
 	// encoded certificate, and have no other certificates for this CN
 	err = ValidateRoot(certStore, signedTestRoot, gun)
-	assert.Error(t, err, "insuficient signatures on root")
+	require.Error(t, err, "insuficient signatures on root")
 
 	// Finally, validate the only trusted certificate that exists is still
 	// the old one
 	certificates = certStore.GetCertificates()
-	assert.Len(t, certificates, 1)
-	assert.Equal(t, certificates[0], origRootCert)
+	require.Len(t, certificates, 1)
+	require.Equal(t, certificates[0], origRootCert)
 }
