@@ -12,7 +12,7 @@ import (
 	"github.com/docker/notary/signer/api"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
@@ -73,25 +73,25 @@ func TestDeleteKeyHandlerReturnsNotFoundWithNonexistentKey(t *testing.T) {
 	keyID := &pb.KeyID{ID: fakeID}
 
 	ret, err := kmClient.DeleteKey(context.Background(), keyID)
-	assert.NotNil(t, err)
-	assert.Equal(t, grpc.Code(err), codes.NotFound)
-	assert.Nil(t, ret)
+	require.NotNil(t, err)
+	require.Equal(t, grpc.Code(err), codes.NotFound)
+	require.Nil(t, ret)
 }
 
 func TestCreateKeyHandlerCreatesKey(t *testing.T) {
 	publicKey, err := kmClient.CreateKey(context.Background(), &pb.Algorithm{Algorithm: data.ED25519Key})
-	assert.NotNil(t, publicKey)
-	assert.NotEmpty(t, publicKey.PublicKey)
-	assert.NotEmpty(t, publicKey.KeyInfo)
-	assert.Nil(t, err)
-	assert.Equal(t, grpc.Code(err), codes.OK)
+	require.NotNil(t, publicKey)
+	require.NotEmpty(t, publicKey.PublicKey)
+	require.NotEmpty(t, publicKey.KeyInfo)
+	require.Nil(t, err)
+	require.Equal(t, grpc.Code(err), codes.OK)
 }
 
 func TestDeleteKeyHandlerDeletesCreatedKey(t *testing.T) {
 	publicKey, err := kmClient.CreateKey(context.Background(), &pb.Algorithm{Algorithm: data.ED25519Key})
 	ret, err := kmClient.DeleteKey(context.Background(), publicKey.KeyInfo.KeyID)
-	assert.Nil(t, err)
-	assert.Equal(t, ret, void)
+	require.Nil(t, err)
+	require.Equal(t, ret, void)
 }
 
 func TestKeyInfoReturnsCreatedKeys(t *testing.T) {
@@ -100,19 +100,19 @@ func TestKeyInfoReturnsCreatedKeys(t *testing.T) {
 	returnedPublicKey, err := kmClient.GetKeyInfo(context.Background(), publicKey.KeyInfo.KeyID)
 	fmt.Println("returnedPublicKey ID: " + returnedPublicKey.GetKeyInfo().KeyID.ID)
 
-	assert.Nil(t, err)
-	assert.Equal(t, publicKey.KeyInfo, returnedPublicKey.KeyInfo)
-	assert.Equal(t, publicKey.PublicKey, returnedPublicKey.PublicKey)
+	require.Nil(t, err)
+	require.Equal(t, publicKey.KeyInfo, returnedPublicKey.KeyInfo)
+	require.Equal(t, publicKey.PublicKey, returnedPublicKey.PublicKey)
 }
 
 func TestCreateKeyCreatesNewKeys(t *testing.T) {
 	publicKey1, err := kmClient.CreateKey(context.Background(), &pb.Algorithm{Algorithm: data.ED25519Key})
-	assert.Nil(t, err)
+	require.Nil(t, err)
 	publicKey2, err := kmClient.CreateKey(context.Background(), &pb.Algorithm{Algorithm: data.ED25519Key})
-	assert.Nil(t, err)
-	assert.NotEqual(t, publicKey1, publicKey2)
-	assert.NotEqual(t, publicKey1.KeyInfo, publicKey2.KeyInfo)
-	assert.NotEqual(t, publicKey1.PublicKey, publicKey2.PublicKey)
+	require.Nil(t, err)
+	require.NotEqual(t, publicKey1, publicKey2)
+	require.NotEqual(t, publicKey1.KeyInfo, publicKey2.KeyInfo)
+	require.NotEqual(t, publicKey1.PublicKey, publicKey2.PublicKey)
 }
 
 func TestGetKeyInfoReturnsNotFoundOnNonexistKeys(t *testing.T) {
@@ -120,25 +120,25 @@ func TestGetKeyInfoReturnsNotFoundOnNonexistKeys(t *testing.T) {
 	keyID := &pb.KeyID{ID: fakeID}
 
 	ret, err := kmClient.GetKeyInfo(context.Background(), keyID)
-	assert.NotNil(t, err)
-	assert.Equal(t, grpc.Code(err), codes.NotFound)
-	assert.Nil(t, ret)
+	require.NotNil(t, err)
+	require.Equal(t, grpc.Code(err), codes.NotFound)
+	require.Nil(t, ret)
 }
 
 func TestCreatedKeysCanBeUsedToSign(t *testing.T) {
 	message := []byte{0, 0, 0, 0}
 
 	publicKey, err := kmClient.CreateKey(context.Background(), &pb.Algorithm{Algorithm: data.ED25519Key})
-	assert.Nil(t, err)
-	assert.NotNil(t, publicKey)
+	require.Nil(t, err)
+	require.NotNil(t, publicKey)
 
 	sr := &pb.SignatureRequest{Content: message, KeyID: publicKey.KeyInfo.KeyID}
-	assert.NotNil(t, sr)
+	require.NotNil(t, sr)
 	signature, err := sClient.Sign(context.Background(), sr)
-	assert.Nil(t, err)
-	assert.NotNil(t, signature)
-	assert.NotEmpty(t, signature.Content)
-	assert.Equal(t, publicKey.KeyInfo, signature.KeyInfo)
+	require.Nil(t, err)
+	require.NotNil(t, signature)
+	require.NotEmpty(t, signature.Content)
+	require.Equal(t, publicKey.KeyInfo, signature.KeyInfo)
 }
 
 func TestSignReturnsNotFoundOnNonexistKeys(t *testing.T) {
@@ -148,17 +148,17 @@ func TestSignReturnsNotFoundOnNonexistKeys(t *testing.T) {
 	sr := &pb.SignatureRequest{Content: message, KeyID: keyID}
 
 	ret, err := sClient.Sign(context.Background(), sr)
-	assert.NotNil(t, err)
-	assert.Equal(t, grpc.Code(err), codes.NotFound)
-	assert.Nil(t, ret)
+	require.NotNil(t, err)
+	require.Equal(t, grpc.Code(err), codes.NotFound)
+	require.Nil(t, ret)
 }
 
 func TestHealthChecksForServices(t *testing.T) {
 	sHealthStatus, err := sClient.CheckHealth(context.Background(), void)
-	assert.Nil(t, err)
-	assert.Equal(t, health, sHealthStatus.Status)
+	require.Nil(t, err)
+	require.Equal(t, health, sHealthStatus.Status)
 
 	kmHealthStatus, err := kmClient.CheckHealth(context.Background(), void)
-	assert.Nil(t, err)
-	assert.Equal(t, health, kmHealthStatus.Status)
+	require.Nil(t, err)
+	require.Equal(t, health, kmHealthStatus.Status)
 }

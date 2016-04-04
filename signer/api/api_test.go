@@ -15,7 +15,7 @@ import (
 	"github.com/docker/notary/signer/api"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 
 	pb "github.com/docker/notary/proto"
 )
@@ -50,12 +50,12 @@ func TestDeleteKeyHandlerReturns404WithNonexistentKey(t *testing.T) {
 	reader = strings.NewReader(string(requestJson))
 
 	request, err := http.NewRequest("POST", deleteKeyBaseURL, reader)
-	assert.Nil(t, err)
+	require.Nil(t, err)
 
 	res, err := http.DefaultClient.Do(request)
-	assert.Nil(t, err)
+	require.Nil(t, err)
 
-	assert.Equal(t, 404, res.StatusCode)
+	require.Equal(t, 404, res.StatusCode)
 }
 
 func TestDeleteKeyHandler(t *testing.T) {
@@ -64,18 +64,18 @@ func TestDeleteKeyHandler(t *testing.T) {
 	setup(signer.CryptoServiceIndex{data.ED25519Key: cryptoService, data.RSAKey: cryptoService, data.ECDSAKey: cryptoService})
 
 	tufKey, _ := cryptoService.Create("", "", data.ED25519Key)
-	assert.NotNil(t, tufKey)
+	require.NotNil(t, tufKey)
 
 	requestJson, _ := json.Marshal(&pb.KeyID{ID: tufKey.ID()})
 	reader = strings.NewReader(string(requestJson))
 
 	request, err := http.NewRequest("POST", deleteKeyBaseURL, reader)
-	assert.Nil(t, err)
+	require.Nil(t, err)
 
 	res, err := http.DefaultClient.Do(request)
-	assert.Nil(t, err)
+	require.Nil(t, err)
 
-	assert.Equal(t, 200, res.StatusCode)
+	require.Equal(t, 200, res.StatusCode)
 }
 
 func TestKeyInfoHandler(t *testing.T) {
@@ -84,25 +84,25 @@ func TestKeyInfoHandler(t *testing.T) {
 	setup(signer.CryptoServiceIndex{data.ED25519Key: cryptoService, data.RSAKey: cryptoService, data.ECDSAKey: cryptoService})
 
 	tufKey, _ := cryptoService.Create("", "", data.ED25519Key)
-	assert.NotNil(t, tufKey)
+	require.NotNil(t, tufKey)
 
 	keyInfoURL := fmt.Sprintf("%s/%s", keyInfoBaseURL, tufKey.ID())
 
 	request, err := http.NewRequest("GET", keyInfoURL, nil)
-	assert.Nil(t, err)
+	require.Nil(t, err)
 
 	res, err := http.DefaultClient.Do(request)
-	assert.Nil(t, err)
+	require.Nil(t, err)
 
 	jsonBlob, err := ioutil.ReadAll(res.Body)
-	assert.Nil(t, err)
+	require.Nil(t, err)
 
 	var pubKey *pb.PublicKey
 	err = json.Unmarshal(jsonBlob, &pubKey)
-	assert.Nil(t, err)
+	require.Nil(t, err)
 
-	assert.Equal(t, tufKey.ID(), pubKey.KeyInfo.KeyID.ID)
-	assert.Equal(t, 200, res.StatusCode)
+	require.Equal(t, tufKey.ID(), pubKey.KeyInfo.KeyID.ID)
+	require.Equal(t, 200, res.StatusCode)
 }
 
 func TestKeyInfoHandlerReturns404WithNonexistentKey(t *testing.T) {
@@ -116,12 +116,12 @@ func TestKeyInfoHandlerReturns404WithNonexistentKey(t *testing.T) {
 	keyInfoURL := fmt.Sprintf("%s/%s", keyInfoBaseURL, fakeID)
 
 	request, err := http.NewRequest("GET", keyInfoURL, nil)
-	assert.Nil(t, err)
+	require.Nil(t, err)
 
 	res, err := http.DefaultClient.Do(request)
-	assert.Nil(t, err)
+	require.Nil(t, err)
 
-	assert.Equal(t, 404, res.StatusCode)
+	require.Equal(t, 404, res.StatusCode)
 }
 
 func TestSoftwareCreateKeyHandler(t *testing.T) {
@@ -132,19 +132,19 @@ func TestSoftwareCreateKeyHandler(t *testing.T) {
 	createKeyURL := fmt.Sprintf("%s/%s", createKeyBaseURL, data.ED25519Key)
 
 	request, err := http.NewRequest("POST", createKeyURL, nil)
-	assert.Nil(t, err)
+	require.Nil(t, err)
 
 	res, err := http.DefaultClient.Do(request)
-	assert.Nil(t, err)
+	require.Nil(t, err)
 
-	assert.Equal(t, 200, res.StatusCode)
+	require.Equal(t, 200, res.StatusCode)
 
 	jsonBlob, err := ioutil.ReadAll(res.Body)
-	assert.Nil(t, err)
+	require.Nil(t, err)
 
 	var keyInfo *pb.PublicKey
 	err = json.Unmarshal(jsonBlob, &keyInfo)
-	assert.Nil(t, err)
+	require.Nil(t, err)
 }
 
 func TestSoftwareSignHandler(t *testing.T) {
@@ -153,7 +153,7 @@ func TestSoftwareSignHandler(t *testing.T) {
 	setup(signer.CryptoServiceIndex{data.ED25519Key: cryptoService, data.RSAKey: cryptoService, data.ECDSAKey: cryptoService})
 
 	tufKey, err := cryptoService.Create("", "", data.ED25519Key)
-	assert.Nil(t, err)
+	require.Nil(t, err)
 
 	sigRequest := &pb.SignatureRequest{KeyID: &pb.KeyID{ID: tufKey.ID()}, Content: make([]byte, 10)}
 	requestJson, _ := json.Marshal(sigRequest)
@@ -162,21 +162,21 @@ func TestSoftwareSignHandler(t *testing.T) {
 
 	request, err := http.NewRequest("POST", signBaseURL, reader)
 
-	assert.Nil(t, err)
+	require.Nil(t, err)
 
 	res, err := http.DefaultClient.Do(request)
-	assert.Nil(t, err)
+	require.Nil(t, err)
 
-	assert.Equal(t, 200, res.StatusCode)
+	require.Equal(t, 200, res.StatusCode)
 
 	jsonBlob, err := ioutil.ReadAll(res.Body)
-	assert.Nil(t, err)
+	require.Nil(t, err)
 
 	var sig *pb.Signature
 	err = json.Unmarshal(jsonBlob, &sig)
-	assert.Nil(t, err)
+	require.Nil(t, err)
 
-	assert.Equal(t, tufKey.ID(), sig.KeyInfo.KeyID.ID)
+	require.Equal(t, tufKey.ID(), sig.KeyInfo.KeyID.ID)
 }
 
 func TestSoftwareSignWithInvalidRequestHandler(t *testing.T) {
@@ -189,18 +189,18 @@ func TestSoftwareSignWithInvalidRequestHandler(t *testing.T) {
 
 	request, err := http.NewRequest("POST", signBaseURL, reader)
 
-	assert.Nil(t, err)
+	require.Nil(t, err)
 
 	res, err := http.DefaultClient.Do(request)
-	assert.Nil(t, err)
+	require.Nil(t, err)
 
 	jsonBlob, err := ioutil.ReadAll(res.Body)
-	assert.Nil(t, err)
+	require.Nil(t, err)
 
 	var sig *pb.Signature
 	err = json.Unmarshal(jsonBlob, &sig)
 
-	assert.Equal(t, 400, res.StatusCode)
+	require.Equal(t, 400, res.StatusCode)
 }
 
 func TestSignHandlerReturns404WithNonexistentKey(t *testing.T) {
@@ -218,12 +218,12 @@ func TestSignHandlerReturns404WithNonexistentKey(t *testing.T) {
 	reader = strings.NewReader(string(requestJson))
 
 	request, err := http.NewRequest("POST", signBaseURL, reader)
-	assert.Nil(t, err)
+	require.Nil(t, err)
 
 	res, err := http.DefaultClient.Do(request)
-	assert.Nil(t, err)
+	require.Nil(t, err)
 
-	assert.Equal(t, 404, res.StatusCode)
+	require.Equal(t, 404, res.StatusCode)
 }
 
 func TestCreateKeyHandlerWithInvalidAlgorithm(t *testing.T) {
@@ -235,16 +235,16 @@ func TestCreateKeyHandlerWithInvalidAlgorithm(t *testing.T) {
 	createKeyURL := fmt.Sprintf("%s/%s", createKeyBaseURL, "rbtree-algorithm")
 
 	request, err := http.NewRequest("POST", createKeyURL, nil)
-	assert.Nil(t, err)
+	require.Nil(t, err)
 
 	res, err := http.DefaultClient.Do(request)
-	assert.Nil(t, err)
+	require.Nil(t, err)
 
-	assert.Equal(t, http.StatusBadRequest, res.StatusCode)
+	require.Equal(t, http.StatusBadRequest, res.StatusCode)
 
 	body, err := ioutil.ReadAll(res.Body)
-	assert.Nil(t, err)
+	require.Nil(t, err)
 
-	// The body may contains some `\r\n`, so we use assert.Contains not assert.Equals
-	assert.Contains(t, string(body), "algorithm rbtree-algorithm not supported")
+	// The body may contains some `\r\n`, so we use require.Contains not require.Equals
+	require.Contains(t, string(body), "algorithm rbtree-algorithm not supported")
 }
