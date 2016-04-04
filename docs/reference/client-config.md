@@ -127,10 +127,16 @@ This section is optional, Notary will use TOFU over HTTPS by default and
 trust certificates in the downloaded root file.
 
 In this section, one can provide specific certificates to pin to, or a CA
-to pin to as a root of trust for a GUN.
+to pin to as a root of trust for a GUN.  Multiple sections can be specified,
+but the pinned certificates will take highest priority for validation, followed
+by the pinned CA, followed by TOFUS (TOFU over HTTPS).  The diagram below
+describes this validation flow:
 
-Only one trust pinning option can be used per GUN, and any validation failure
-will result in a failed bootstrapping of the repo.
+<center><img src="../images/trust-pinning-flow.png" alt="Trust pinning flow" width="400px"/></center>
+
+Only one trust pinning option will be used to validate a GUN even if multiple
+sections are specified, and any validation failure will result in a failed
+bootstrapping of the repo.
 
 <table>
 	<tr>

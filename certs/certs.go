@@ -123,9 +123,7 @@ func ValidateRoot(certStore trustmanager.X509Store, root *data.Signed, gun strin
 			return &ErrValidationFail{Reason: "failed to validate data with current trusted certificates"}
 		}
 	} else {
-		logrus.Debugf("found no currently valid root certificates for %s", gun)
-		logrus.Debugf("using trust_pinning config to bootstrap trust: %v", trustPinning)
-
+		logrus.Debugf("found no currently valid root certificates for %s, using trust_pinning config to bootstrap trust:", gun, trustPinning)
 		trustPinChecker, err := NewTrustPinChecker(trustPinning, gun)
 		if err != nil {
 			return &ErrValidationFail{Reason: err.Error()}
@@ -146,7 +144,7 @@ func ValidateRoot(certStore trustmanager.X509Store, root *data.Signed, gun strin
 		if len(validPinnedCerts) == 0 {
 			return &ErrValidationFail{Reason: "unable to match any certificates to trust_pinning config"}
 		}
-		allValidCerts = validPinnedCerts
+		certsFromRoot = validPinnedCerts
 	}
 
 	// Validate the integrity of the new root (does it have valid signatures)
