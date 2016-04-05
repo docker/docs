@@ -11,7 +11,7 @@ import (
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 // Zips up the keys in the old repo, and assert that we can import it and use
@@ -22,8 +22,8 @@ func TestImport0Dot1Zip(t *testing.T) {
 	zipFile, err := ioutil.TempFile("", "notary-test-zipFile")
 	defer os.RemoveAll(zipFile.Name())
 	zipWriter := zip.NewWriter(zipFile)
-	assert.NoError(t, err)
-	assert.NoError(t, addKeysToArchive(zipWriter, ks))
+	require.NoError(t, err)
+	require.NoError(t, addKeysToArchive(zipWriter, ks))
 	zipWriter.Close()
 	zipFile.Close()
 
@@ -31,23 +31,23 @@ func TestImport0Dot1Zip(t *testing.T) {
 	for keyID, keyInfo := range ks.ListKeys() {
 		origKeys[keyID] = keyInfo.Role
 	}
-	assert.Len(t, origKeys, 3)
+	require.Len(t, origKeys, 3)
 
 	// now import the zip file into a new cryptoservice
 
 	tempDir, err := ioutil.TempDir("", "notary-test-import")
 	defer os.RemoveAll(tempDir)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	ks, err = trustmanager.NewKeyFileStore(tempDir, ret)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	cs := NewCryptoService(ks)
 
 	zipReader, err := zip.OpenReader(zipFile.Name())
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	defer zipReader.Close()
 
-	assert.NoError(t, cs.ImportKeysZip(zipReader.Reader, passphrase.ConstantRetriever("randompass")))
+	require.NoError(t, cs.ImportKeysZip(zipReader.Reader, passphrase.ConstantRetriever("randompass")))
 	assertHasKeys(t, cs, origKeys)
 }
 
@@ -57,7 +57,7 @@ func get0Dot1(t *testing.T) (*trustmanager.KeyFileStore, passphrase.Retriever, s
 
 	// produce the zip file
 	ks, err := trustmanager.NewKeyFileStore("../fixtures/compatibility/notary0.1", ret)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	return ks, ret, gun
 }
@@ -66,12 +66,12 @@ func get0Dot1(t *testing.T) (*trustmanager.KeyFileStore, passphrase.Retriever, s
 // only those keys
 func assertHasKeys(t *testing.T, cs *CryptoService, expectedKeys map[string]string) {
 	keys := cs.ListAllKeys()
-	assert.Len(t, keys, len(expectedKeys))
+	require.Len(t, keys, len(expectedKeys))
 
 	for keyID, role := range keys {
 		expectedRole, ok := expectedKeys[keyID]
-		assert.True(t, ok)
-		assert.Equal(t, expectedRole, role)
+		require.True(t, ok)
+		require.Equal(t, expectedRole, role)
 	}
 }
 
@@ -82,10 +82,10 @@ func importExportedZip(t *testing.T, original *CryptoService,
 
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+	require.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	ks, err := trustmanager.NewKeyFileStore(tempBaseDir, ret)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	var cs *CryptoService
 
 	// export keys
@@ -93,21 +93,21 @@ func importExportedZip(t *testing.T, original *CryptoService,
 	defer os.RemoveAll(zipFile.Name())
 	if gun != "" {
 		err = original.ExportKeysByGUN(zipFile, gun, ret)
-		assert.NoError(t, err)
+		require.NoError(t, err)
 		cs = NewCryptoService(ks)
 	} else {
 		err = original.ExportAllKeys(zipFile, ret)
-		assert.NoError(t, err)
+		require.NoError(t, err)
 		cs = NewCryptoService(ks)
 	}
 	zipFile.Close()
 
 	// import keys into the cryptoservice now
 	zipReader, err := zip.OpenReader(zipFile.Name())
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	defer zipReader.Close()
 
-	assert.NoError(t, cs.ImportKeysZip(zipReader.Reader, passphrase.ConstantRetriever("randompass")))
+	require.NoError(t, cs.ImportKeysZip(zipReader.Reader, passphrase.ConstantRetriever("randompass")))
 	return cs, tempBaseDir
 }
 
@@ -136,20 +136,20 @@ func TestImportExport0Dot1GUNKeys(t *testing.T) {
 	// make some other temp directory to create new keys in
 	tempDir, err := ioutil.TempDir("", "notary-tests-keystore")
 	defer os.RemoveAll(tempDir)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	otherKS, err := trustmanager.NewKeyFileStore(tempDir, ret)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	cs := NewCryptoService(otherKS, ks)
 
 	// create a keys that is not of the same GUN, and be sure it's in this
 	// CryptoService
 	otherPubKey, err := cs.Create(data.CanonicalTargetsRole, "some/other/gun", data.ECDSAKey)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	k, _, err := cs.GetPrivateKey(otherPubKey.ID())
-	assert.NoError(t, err)
-	assert.NotNil(t, k)
+	require.NoError(t, err)
+	require.NotNil(t, k)
 
 	// export/import, and ensure that the other-gun key is not in the new
 	// CryptoService
@@ -159,5 +159,5 @@ func TestImportExport0Dot1GUNKeys(t *testing.T) {
 	assertHasKeys(t, newCS, expectedKeys)
 
 	_, _, err = newCS.GetPrivateKey(otherPubKey.ID())
-	assert.Error(t, err)
+	require.Error(t, err)
 }

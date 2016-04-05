@@ -8,30 +8,30 @@ import (
 
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestGenerateCertificate(t *testing.T) {
 	privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
-	assert.NoError(t, err, "could not generate key")
+	require.NoError(t, err, "could not generate key")
 
 	keyStore := trustmanager.NewKeyMemoryStore(passphraseRetriever)
 
 	err = keyStore.AddKey(trustmanager.KeyInfo{Role: data.CanonicalRootRole, Gun: ""}, privKey)
-	assert.NoError(t, err, "could not add key to store")
+	require.NoError(t, err, "could not add key to store")
 
 	// Check GenerateCertificate method
 	gun := "docker.com/notary"
 	startTime := time.Now()
 	cert, err := GenerateCertificate(privKey, gun, startTime, startTime.AddDate(10, 0, 0))
-	assert.NoError(t, err, "could not generate certificate")
+	require.NoError(t, err, "could not generate certificate")
 
 	// Check public key
 	ecdsaPrivateKey, err := x509.ParseECPrivateKey(privKey.Private())
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	ecdsaPublicKey := ecdsaPrivateKey.Public()
-	assert.Equal(t, ecdsaPublicKey, cert.PublicKey)
+	require.Equal(t, ecdsaPublicKey, cert.PublicKey)
 
 	// Check CommonName
-	assert.Equal(t, cert.Subject.CommonName, gun)
+	require.Equal(t, cert.Subject.CommonName, gun)
 }
