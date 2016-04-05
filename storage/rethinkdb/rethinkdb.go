@@ -18,8 +18,8 @@ type Timing struct {
 }
 
 // Connection sets up a RethinkDB connection to the host (`host:port` format)
-// using the CA .pem file provided at path `caFile` and the authKey
-func Connection(caFile, host, authKey string) (*gorethink.Session, error) {
+// using the CA .pem file provided at path `caFile`
+func Connection(caFile, host string) (*gorethink.Session, error) {
 	tlsOpts := tlsconfig.Options{
 		CAFile: caFile,
 	}
@@ -30,7 +30,6 @@ func Connection(caFile, host, authKey string) (*gorethink.Session, error) {
 	return gorethink.Connect(
 		gorethink.ConnectOpts{
 			Address:   host,
-			AuthKey:   authKey,
 			TLSConfig: t,
 		},
 	)

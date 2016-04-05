@@ -93,7 +93,7 @@ func setUpCryptoservices(configuration *viper.Viper, allowedBackends []string) (
 		if err != nil {
 			return nil, err
 		}
-		sess, err = rethinkdb.Connection(storeConfig.CA, storeConfig.Source, storeConfig.AuthKey)
+		sess, err = rethinkdb.Connection(storeConfig.CA, storeConfig.Source)
 		if err == nil {
 			defaultAlias := configuration.GetString("storage.default_alias")
 			if defaultAlias == "" {
