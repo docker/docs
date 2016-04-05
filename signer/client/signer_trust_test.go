@@ -18,7 +18,7 @@ import (
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	"golang.org/x/net/context"
 )
 
@@ -46,7 +46,7 @@ func (c StubGRPCConnection) State() grpc.ConnectivityState {
 func stubHealthFunction(t *testing.T, status map[string]string, err error) rpcHealthCheck {
 	return func(ctx context.Context, v *pb.Void, o ...grpc.CallOption) (*pb.HealthStatus, error) {
 		_, withDeadline := ctx.Deadline()
-		assert.True(t, withDeadline)
+		require.True(t, withDeadline)
 
 		return &pb.HealthStatus{Status: status}, err
 	}
@@ -68,7 +68,7 @@ func TestHealthCheckKMUnhealthy(t *testing.T) {
 	signer := makeSigner(
 		stubHealthFunction(t, map[string]string{"health": "not good"}, nil),
 		StubGRPCConnection{})
-	assert.Error(t, signer.CheckHealth(1*time.Second))
+	require.Error(t, signer.CheckHealth(1*time.Second))
 }
 
 // CheckHealth does not succeed if the health check to the KM server errors
@@ -76,7 +76,7 @@ func TestHealthCheckKMError(t *testing.T) {
 	signer := makeSigner(
 		stubHealthFunction(t, nil, errors.New("Something's wrong")),
 		StubGRPCConnection{})
-	assert.Error(t, signer.CheckHealth(1*time.Second))
+	require.Error(t, signer.CheckHealth(1*time.Second))
 }
 
 // CheckHealth does not succeed if the health check to the KM server times out
@@ -85,8 +85,8 @@ func TestHealthCheckKMTimeout(t *testing.T) {
 		stubHealthFunction(t, nil, grpc.Errorf(codes.DeadlineExceeded, "")),
 		StubGRPCConnection{})
 	err := signer.CheckHealth(1 * time.Second)
-	assert.Error(t, err)
-	assert.True(t, strings.Contains(err.Error(), "Timed out"))
+	require.Error(t, err)
+	require.True(t, strings.Contains(err.Error(), "Timed out"))
 }
 
 // CheckHealth succeeds if KM is healthy and reachable.
@@ -94,7 +94,7 @@ func TestHealthCheckKMHealthy(t *testing.T) {
 	signer := makeSigner(
 		stubHealthFunction(t, make(map[string]string), nil),
 		StubGRPCConnection{})
-	assert.NoError(t, signer.CheckHealth(1*time.Second))
+	require.NoError(t, signer.CheckHealth(1*time.Second))
 }
 
 // CheckHealth fails immediately if not connected to the server.
@@ -102,7 +102,7 @@ func TestHealthCheckConnectionDied(t *testing.T) {
 	signer := makeSigner(
 		stubHealthFunction(t, make(map[string]string), nil),
 		StubGRPCConnection{grpc.Connecting})
-	assert.Error(t, signer.CheckHealth(1*time.Second))
+	require.Error(t, signer.CheckHealth(1*time.Second))
 }
 
 var ret = passphrase.ConstantRetriever("pass")
@@ -110,44 +110,44 @@ var ret = passphrase.ConstantRetriever("pass")
 func TestGetPrivateKeyIfNoKey(t *testing.T) {
 	signer := setUpSigner(t, trustmanager.NewKeyMemoryStore(ret))
 	privKey, _, err := signer.GetPrivateKey("bogus key ID")
-	assert.NoError(t, err)
-	assert.Nil(t, privKey)
+	require.NoError(t, err)
+	require.Nil(t, privKey)
 }
 
 func TestCreatePrivateKey(t *testing.T) {
 	signer := setUpSigner(t, trustmanager.NewKeyMemoryStore(ret))
 	key, err := signer.Create(data.CanonicalSnapshotRole, "docker.com/notary", data.ECDSAKey)
-	assert.NoError(t, err)
-	assert.NotNil(t, key)
+	require.NoError(t, err)
+	require.NotNil(t, key)
 	retrievedKey := signer.GetKey(key.ID())
-	assert.NotNil(t, retrievedKey)
-	assert.Equal(t, key.Public(), retrievedKey.Public())
-	assert.Equal(t, key.ID(), retrievedKey.ID())
-	assert.Equal(t, data.ECDSAKey, retrievedKey.Algorithm())
+	require.NotNil(t, retrievedKey)
+	require.Equal(t, key.Public(), retrievedKey.Public())
+	require.Equal(t, key.ID(), retrievedKey.ID())
+	require.Equal(t, data.ECDSAKey, retrievedKey.Algorithm())
 }
 
 func TestGetPrivateKeyAndSignWithExistingKey(t *testing.T) {
 	key, err := trustmanager.GenerateECDSAKey(rand.Reader)
-	assert.NoError(t, err, "could not generate key")
+	require.NoError(t, err, "could not generate key")
 
 	store := trustmanager.NewKeyMemoryStore(ret)
 
 	err = store.AddKey(trustmanager.KeyInfo{Role: data.CanonicalTimestampRole, Gun: "gun"}, key)
-	assert.NoError(t, err, "could not add key to store")
+	require.NoError(t, err, "could not add key to store")
 
 	signer := setUpSigner(t, store)
 
 	privKey, _, err := signer.GetPrivateKey(key.ID())
-	assert.NoError(t, err)
-	assert.NotNil(t, privKey)
+	require.NoError(t, err)
+	require.NotNil(t, privKey)
 
 	msg := []byte("message!")
 	sig, err := privKey.Sign(rand.Reader, msg, nil)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	err = signed.Verifiers[data.ECDSASignature].Verify(
 		data.PublicKeyFromPrivate(key), sig, msg)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 }
 
 type StubClientFromServers struct {
