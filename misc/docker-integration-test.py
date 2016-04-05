@@ -65,9 +65,8 @@ def fake_vendor():
     # based on a tag or SHA, and we want to build based on what was vendored in
     dockerfile_addition = ("\n"
         "RUN set -x && "
-        "GOPATH=$(pwd)/vendor/src/github.com/docker/notary/Godeps/_workspace:$GOPATH "
+        "export GO15VENDOREXPERIMENT=1 && "
         "go build -o /usr/local/bin/notary-server github.com/docker/notary/cmd/notary-server &&"
-        "GOPATH=$(pwd)/vendor/src/github.com/docker/notary/Godeps/_workspace:$GOPATH "
         "go build -o /usr/local/bin/notary github.com/docker/notary/cmd/notary")
 
     with open(os.path.join(DOCKER_DIR, "Dockerfile")) as dockerfile:
