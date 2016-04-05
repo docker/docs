@@ -90,7 +90,7 @@ func getStore(configuration *viper.Viper, hRegister healthRegister) (
 		if err != nil {
 			return nil, err
 		}
-		sess, err = rethinkdb.Connection(storeConfig.CA, storeConfig.Source, storeConfig.AuthKey)
+		sess, err = rethinkdb.Connection(storeConfig.CA, storeConfig.Source)
 		if err == nil {
 			s := storage.NewRethinkDBStorage(storeConfig.DBName, sess)
 			store = *storage.NewTufMetaStorage(s)
