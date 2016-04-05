@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 
 # When run in the docker containers, the working directory
 # is the root of the repo.
@@ -10,8 +10,8 @@ case $SERVICE_NAME in
 		# have to poll for DB to come up
 		until migrate -path=migrations/server/mysql -url="mysql://server@tcp(mysql:3306)/notaryserver" version > /dev/null
 		do
-			((iter++))
-			if (( iter > 30 )); then
+			iter=$(( iter+1 ))
+			if [[ $iter -gt 30 ]]; then
 				echo "notaryserver database failed to come up within 30 seconds"
 				exit 1;
 			fi
@@ -35,8 +35,8 @@ case $SERVICE_NAME in
 		# have to poll for DB to come up
 		until migrate -path=migrations/signer/mysql -url="mysql://signer@tcp(mysql:3306)/notarysigner" version > /dev/null
 		do
-			((iter++))
-			if (( iter > 30 )); then
+			iter=$(( iter+1 ))
+			if [[ $iter -gt 30 ]]; then
 				echo "notarysigner database failed to come up within 30 seconds"
 				exit 1;
 			fi
@@ -44,7 +44,7 @@ case $SERVICE_NAME in
 			sleep 1
 		done
 		pre=$(migrate -path=migrations/signer/mysql -url="mysql://signer@tcp(mysql:3306)/notarysigner" version)
-		if migrate -path=migrations/signer/mysql -url="mysql://signer@tcp(mysql:3306)/notarysigner" up ; then 
+		if migrate -path=migrations/signer/mysql -url="mysql://signer@tcp(mysql:3306)/notarysigner" up ; then
 			post=$(migrate -path=migrations/signer/mysql -url="mysql://signer@tcp(mysql:3306)/notarysigner" version)
 			if [ "$pre" != "$post" ]; then
 				echo "notarysigner database migrated to latest version"
