@@ -34,7 +34,7 @@ ENV DOCKER_VERSION 1.11.0-rc3
 # subdirectory (not what we want).  So we use --strip-components to remove the
 # `usr/local/bin` part and drop the bin in the current directory.
 RUN curl -fsSL -o dockerbins.tgz "https://test.docker.com/builds/Darwin/x86_64/docker-${DOCKER_VERSION}.tgz" && \
-    tar xvf dockerbins.tgz usr/local/bin/docker --strip-components 3 && \
+    tar xvf dockerbins.tgz docker/docker --strip-components 1 && \
     rm dockerbins.tgz
 
 RUN chmod +x /docker
