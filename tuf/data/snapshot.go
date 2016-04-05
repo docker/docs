@@ -3,7 +3,6 @@ package data
 import (
 	"bytes"
 	"fmt"
-	"time"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/go/canonical/json"
@@ -19,10 +18,8 @@ type SignedSnapshot struct {
 
 // Snapshot is the Signed component of a snapshot.json
 type Snapshot struct {
-	Type    string    `json:"_type"`
-	Version int       `json:"version"`
-	Expires time.Time `json:"expires"`
-	Meta    Files     `json:"meta"`
+	SignedCommon
+	Meta Files `json:"meta"`
 }
 
 // isValidSnapshotStructure returns an error, or nil, depending on whether the content of the
@@ -82,9 +79,11 @@ func NewSnapshot(root *Signed, targets *Signed) (*SignedSnapshot, error) {
 	return &SignedSnapshot{
 		Signatures: make([]Signature, 0),
 		Signed: Snapshot{
-			Type:    TUFTypes[CanonicalSnapshotRole],
-			Version: 0,
-			Expires: DefaultExpires(CanonicalSnapshotRole),
+			SignedCommon: SignedCommon{
+				Type:    TUFTypes[CanonicalSnapshotRole],
+				Version: 0,
+				Expires: DefaultExpires(CanonicalSnapshotRole),
+			},
 			Meta: Files{
 				CanonicalRootRole:    rootMeta,
 				CanonicalTargetsRole: targetsMeta,

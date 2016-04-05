@@ -2,7 +2,6 @@ package data
 
 import (
 	"fmt"
-	"time"
 
 	"github.com/docker/go/canonical/json"
 )
@@ -16,9 +15,7 @@ type SignedRoot struct {
 
 // Root is the Signed component of a root.json
 type Root struct {
-	Type               string               `json:"_type"`
-	Version            int                  `json:"version"`
-	Expires            time.Time            `json:"expires"`
+	SignedCommon
 	Keys               Keys                 `json:"keys"`
 	Roles              map[string]*RootRole `json:"roles"`
 	ConsistentSnapshot bool                 `json:"consistent_snapshot"`
@@ -72,9 +69,11 @@ func NewRoot(keys map[string]PublicKey, roles map[string]*RootRole, consistent b
 	signedRoot := &SignedRoot{
 		Signatures: make([]Signature, 0),
 		Signed: Root{
-			Type:               TUFTypes[CanonicalRootRole],
-			Version:            0,
-			Expires:            DefaultExpires(CanonicalRootRole),
+			SignedCommon: SignedCommon{
+				Type:    TUFTypes[CanonicalRootRole],
+				Version: 0,
+				Expires: DefaultExpires(CanonicalRootRole),
+			},
 			Keys:               keys,
 			Roles:              roles,
 			ConsistentSnapshot: consistent,

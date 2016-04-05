@@ -17,7 +17,7 @@ func TestSnapshotExpired(t *testing.T) {
 	sn := &data.SignedSnapshot{
 		Signatures: nil,
 		Signed: data.Snapshot{
-			Expires: time.Now().AddDate(-1, 0, 0),
+			SignedCommon: data.SignedCommon{Expires: time.Now().AddDate(-1, 0, 0)},
 		},
 	}
 	require.True(t, snapshotExpired(sn), "Snapshot should have expired")
@@ -27,7 +27,7 @@ func TestSnapshotNotExpired(t *testing.T) {
 	sn := &data.SignedSnapshot{
 		Signatures: nil,
 		Signed: data.Snapshot{
-			Expires: time.Now().AddDate(1, 0, 0),
+			SignedCommon: data.SignedCommon{Expires: time.Now().AddDate(1, 0, 0)},
 		},
 	}
 	require.False(t, snapshotExpired(sn), "Snapshot should NOT have expired")
