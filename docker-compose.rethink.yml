@@ -5,7 +5,7 @@ services:
         context: .
         dockerfile: server.Dockerfile
       volumes:
-        - rdb-tls:/tls
+        - ./fixtures/rethinkdb:/tls
       networks:
         - rdb
       links:
@@ -26,7 +26,7 @@ services:
         context: .
         dockerfile: signer.Dockerfile
       volumes:
-        - rdb-tls:/tls
+        - ./fixtures/rethinkdb:/tls
       networks:
         - rdb
       links:
@@ -40,7 +40,7 @@ services:
     rdb-01:
       image: jlhawn/rethinkdb-tls
       volumes:
-        - rdb-tls:/tls
+        - ./fixtures/rethinkdb:/tls
         - rdb-01-data:/var/data
       networks:
         rdb:
@@ -52,7 +52,7 @@ services:
     rdb-02:
       image: jlhawn/rethinkdb-tls
       volumes:
-        - rdb-tls:/tls
+        - ./fixtures/rethinkdb:/tls
         - rdb-02-data:/var/data
       networks:
         rdb:
@@ -66,7 +66,7 @@ services:
       ports:
         - "8080:8080"
       volumes:
-        - rdb-tls:/tls
+        - ./fixtures/rethinkdb:/tls
       networks:
         rdb:
           aliases:
@@ -77,8 +77,6 @@ services:
         - rdb-01
         - rdb-02
 volumes:
-    rdb-tls:
-        external: true
     rdb-01-data:
         external: false
     rdb-02-data:
