@@ -15,7 +15,6 @@ import (
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/store"
-	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
@@ -587,7 +586,7 @@ func TestMissingSigningKey(t *testing.T) {
 func TestSwizzlerMutateRoot(t *testing.T) {
 	f, origMeta := createNewSwizzler(t)
 
-	assert.NoError(t, f.MutateRoot(func(r *data.Root) { r.Roles["hello"] = nil }))
+	require.NoError(t, f.MutateRoot(func(r *data.Root) { r.Roles["hello"] = nil }))
 
 	for role, metaBytes := range origMeta {
 		newMeta, err := f.MetadataCache.GetMeta(role, -1)
@@ -610,7 +609,7 @@ func TestSwizzlerMutateRoot(t *testing.T) {
 func TestSwizzlerMutateTimestamp(t *testing.T) {
 	f, origMeta := createNewSwizzler(t)
 
-	assert.NoError(t, f.MutateTimestamp(func(t *data.Timestamp) { t.Meta["hello"] = data.FileMeta{} }))
+	require.NoError(t, f.MutateTimestamp(func(t *data.Timestamp) { t.Meta["hello"] = data.FileMeta{} }))
 
 	for role, metaBytes := range origMeta {
 		newMeta, err := f.MetadataCache.GetMeta(role, -1)
@@ -633,7 +632,7 @@ func TestSwizzlerMutateTimestamp(t *testing.T) {
 func TestSwizzlerMutateSnapshot(t *testing.T) {
 	f, origMeta := createNewSwizzler(t)
 
-	assert.NoError(t, f.MutateSnapshot(func(s *data.Snapshot) { s.Meta["hello"] = data.FileMeta{} }))
+	require.NoError(t, f.MutateSnapshot(func(s *data.Snapshot) { s.Meta["hello"] = data.FileMeta{} }))
 
 	for role, metaBytes := range origMeta {
 		newMeta, err := f.MetadataCache.GetMeta(role, -1)
@@ -656,7 +655,7 @@ func TestSwizzlerMutateSnapshot(t *testing.T) {
 func TestSwizzlerMutateTargets(t *testing.T) {
 	f, origMeta := createNewSwizzler(t)
 
-	assert.NoError(t, f.MutateTargets(func(t *data.Targets) { t.Targets["hello"] = data.FileMeta{} }))
+	require.NoError(t, f.MutateTargets(func(t *data.Targets) { t.Targets["hello"] = data.FileMeta{} }))
 
 	for role, metaBytes := range origMeta {
 		newMeta, err := f.MetadataCache.GetMeta(role, -1)
@@ -682,9 +681,9 @@ func TestSwizzlerRotateKeyBaseRole(t *testing.T) {
 	theRole := data.CanonicalSnapshotRole
 	cs := signed.NewEd25519()
 	pubKey, err := cs.Create(theRole, f.Gun, data.ED25519Key)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
-	assert.NoError(t, f.RotateKey(theRole, pubKey))
+	require.NoError(t, f.RotateKey(theRole, pubKey))
 
 	for role, metaBytes := range origMeta {
 		newMeta, err := f.MetadataCache.GetMeta(role, -1)
@@ -714,9 +713,9 @@ func TestSwizzlerRotateKeyDelegationRole(t *testing.T) {
 	theRole := "targets/a/b"
 	cs := signed.NewEd25519()
 	pubKey, err := cs.Create(theRole, f.Gun, data.ED25519Key)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
-	assert.NoError(t, f.RotateKey(theRole, pubKey))
+	require.NoError(t, f.RotateKey(theRole, pubKey))
 
 	for role, metaBytes := range origMeta {
 		newMeta, err := f.MetadataCache.GetMeta(role, -1)
