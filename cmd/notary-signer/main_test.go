@@ -17,7 +17,7 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/spf13/viper"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 const (
@@ -50,8 +50,8 @@ func TestGetAddrAndTLSConfigInvalidTLS(t *testing.T) {
 	}
 	for _, configJSON := range invalids {
 		_, _, _, err := getAddrAndTLSConfig(configure(configJSON))
-		assert.Error(t, err)
-		assert.Contains(t, err.Error(), "unable to set up TLS")
+		require.Error(t, err)
+		require.Contains(t, err.Error(), "unable to set up TLS")
 	}
 }
 
@@ -64,8 +64,8 @@ func TestGetAddrAndTLSConfigNoGRPCAddr(t *testing.T) {
 			"tls_key_file": "%s"
 		}
 	}`, Cert, Key)))
-	assert.Error(t, err)
-	assert.Contains(t, err.Error(), "grpc listen address required for server")
+	require.Error(t, err)
+	require.Contains(t, err.Error(), "grpc listen address required for server")
 }
 
 // If an HTTP address is not provided, an error is returned.
@@ -77,8 +77,8 @@ func TestGetAddrAndTLSConfigNoHTTPAddr(t *testing.T) {
 			"tls_key_file": "%s"
 		}
 	}`, Cert, Key)))
-	assert.Error(t, err)
-	assert.Contains(t, err.Error(), "http listen address required for server")
+	require.Error(t, err)
+	require.Contains(t, err.Error(), "http listen address required for server")
 }
 
 // Success parsing a valid TLS config, HTTP address, and GRPC address.
@@ -91,16 +91,16 @@ func TestGetAddrAndTLSConfigSuccess(t *testing.T) {
 			"tls_key_file": "%s"
 		}
 	}`, Cert, Key)))
-	assert.NoError(t, err)
-	assert.Equal(t, ":2345", httpAddr)
-	assert.Equal(t, ":1234", grpcAddr)
-	assert.NotNil(t, tlsConf)
+	require.NoError(t, err)
+	require.Equal(t, ":2345", httpAddr)
+	require.Equal(t, ":1234", grpcAddr)
+	require.NotNil(t, tlsConf)
 }
 
 // If a default alias is not provided to a DB backend, an error is returned.
 func TestSetupCryptoServicesDBStoreNoDefaultAlias(t *testing.T) {
 	tmpFile, err := ioutil.TempFile("/tmp", "sqlite3")
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	tmpFile.Close()
 	defer os.Remove(tmpFile.Name())
 
@@ -109,8 +109,8 @@ func TestSetupCryptoServicesDBStoreNoDefaultAlias(t *testing.T) {
 			`{"storage": {"backend": "%s", "db_url": "%s"}}`,
 			utils.SqliteBackend, tmpFile.Name())),
 		[]string{utils.SqliteBackend})
-	assert.Error(t, err)
-	assert.Contains(t, err.Error(), "must provide a default alias for the key DB")
+	require.Error(t, err)
+	require.Contains(t, err.Error(), "must provide a default alias for the key DB")
 }
 
 // If a default alias *is* provided to a valid DB backend, a valid
@@ -119,20 +119,20 @@ func TestSetupCryptoServicesDBStoreNoDefaultAlias(t *testing.T) {
 // success/failure).
 func TestSetupCryptoServicesDBStoreSuccess(t *testing.T) {
 	tmpFile, err := ioutil.TempFile("/tmp", "sqlite3")
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	tmpFile.Close()
 	defer os.Remove(tmpFile.Name())
 
 	// Ensure that the private_key table exists
 	db, err := gorm.Open("sqlite3", tmpFile.Name())
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	var (
 		gormKey = keydbstore.GormPrivateKey{}
 		count   int
 	)
 	db.CreateTable(&gormKey)
 	db.Model(&gormKey).Count(&count)
-	assert.Equal(t, 0, count)
+	require.Equal(t, 0, count)
 
 	cryptoServices, err := setUpCryptoservices(
 		configure(fmt.Sprintf(
@@ -140,16 +140,16 @@ func TestSetupCryptoServicesDBStoreSuccess(t *testing.T) {
 			"default_alias": "timestamp"}`,
 			utils.SqliteBackend, tmpFile.Name())),
 		[]string{utils.SqliteBackend})
-	assert.NoError(t, err)
-	assert.Len(t, cryptoServices, 2)
+	require.NoError(t, err)
+	require.Len(t, cryptoServices, 2)
 
 	edService, ok := cryptoServices[data.ED25519Key]
-	assert.True(t, ok)
+	require.True(t, ok)
 
 	ecService, ok := cryptoServices[data.ECDSAKey]
-	assert.True(t, ok)
+	require.True(t, ok)
 
-	assert.Equal(t, edService, ecService)
+	require.Equal(t, edService, ecService)
 
 	// since the keystores are not exposed by CryptoService, try creating
 	// a key and seeing if it is in the sqlite DB.
@@ -157,9 +157,9 @@ func TestSetupCryptoServicesDBStoreSuccess(t *testing.T) {
 	defer os.Unsetenv("NOTARY_SIGNER_TIMESTAMP")
 
 	_, err = ecService.Create("timestamp", "", data.ECDSAKey)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	db.Model(&gormKey).Count(&count)
-	assert.Equal(t, 1, count)
+	require.Equal(t, 1, count)
 }
 
 // If a memory backend is specified, then a default alias is not needed, and
@@ -169,36 +169,36 @@ func TestSetupCryptoServicesMemoryStore(t *testing.T) {
 		utils.MemoryBackend))
 	cryptoServices, err := setUpCryptoservices(config,
 		[]string{utils.SqliteBackend, utils.MemoryBackend})
-	assert.NoError(t, err)
-	assert.Len(t, cryptoServices, 2)
+	require.NoError(t, err)
+	require.Len(t, cryptoServices, 2)
 
 	edService, ok := cryptoServices[data.ED25519Key]
-	assert.True(t, ok)
+	require.True(t, ok)
 
 	ecService, ok := cryptoServices[data.ECDSAKey]
-	assert.True(t, ok)
+	require.True(t, ok)
 
-	assert.Equal(t, edService, ecService)
+	require.Equal(t, edService, ecService)
 
 	// since the keystores are not exposed by CryptoService, try creating
 	// and getting the key
 	pubKey, err := ecService.Create("", "", data.ECDSAKey)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	privKey, _, err := ecService.GetPrivateKey(pubKey.ID())
-	assert.NoError(t, err)
-	assert.NotNil(t, privKey)
+	require.NoError(t, err)
+	require.NotNil(t, privKey)
 }
 
 func TestSetupHTTPServer(t *testing.T) {
 	httpServer := setupHTTPServer(":4443", nil, make(signer.CryptoServiceIndex))
-	assert.Equal(t, ":4443", httpServer.Addr)
-	assert.Nil(t, httpServer.TLSConfig)
+	require.Equal(t, ":4443", httpServer.Addr)
+	require.Nil(t, httpServer.TLSConfig)
 }
 
 func TestSetupGRPCServerInvalidAddress(t *testing.T) {
 	_, _, err := setupGRPCServer("nope", nil, make(signer.CryptoServiceIndex))
-	assert.Error(t, err)
-	assert.Contains(t, err.Error(), "grpc server failed to listen on nope")
+	require.Error(t, err)
+	require.Contains(t, err.Error(), "grpc server failed to listen on nope")
 }
 
 func TestSetupGRPCServerSuccess(t *testing.T) {
@@ -206,8 +206,8 @@ func TestSetupGRPCServerSuccess(t *testing.T) {
 	grpcServer, lis, err := setupGRPCServer(":7899", &tlsConf,
 		make(signer.CryptoServiceIndex))
 	defer lis.Close()
-	assert.NoError(t, err)
-	assert.Equal(t, "[::]:7899", lis.Addr().String())
-	assert.Equal(t, "tcp", lis.Addr().Network())
-	assert.NotNil(t, grpcServer)
+	require.NoError(t, err)
+	require.Equal(t, "[::]:7899", lis.Addr().String())
+	require.Equal(t, "tcp", lis.Addr().Network())
+	require.NotNil(t, grpcServer)
 }
