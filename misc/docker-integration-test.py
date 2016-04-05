@@ -66,9 +66,7 @@ def fake_vendor():
     dockerfile_addition = ("\n"
         "RUN set -x && "
         "export GO15VENDOREXPERIMENT=1 && "
-        "GOPATH=$(pwd)/vendor/src/github.com/docker/notary/vendor:$GOPATH "
         "go build -o /usr/local/bin/notary-server github.com/docker/notary/cmd/notary-server &&"
-        "GOPATH=$(pwd)/vendor/src/github.com/docker/notary/vendor:$GOPATH "
         "go build -o /usr/local/bin/notary github.com/docker/notary/cmd/notary")
 
     with open(os.path.join(DOCKER_DIR, "Dockerfile")) as dockerfile:
