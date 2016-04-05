@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 var plaintext = []byte("reallyimportant")
@@ -13,29 +13,29 @@ func TestRoundtrip(t *testing.T) {
 	passphrase := []byte("supersecret")
 
 	enc, err := Encrypt(plaintext, passphrase)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// successful decrypt
 	dec, err := Decrypt(enc, passphrase)
-	assert.NoError(t, err)
-	assert.Equal(t, dec, plaintext)
+	require.NoError(t, err)
+	require.Equal(t, dec, plaintext)
 
 	// wrong passphrase
 	passphrase[0] = 0
 	dec, err = Decrypt(enc, passphrase)
-	assert.Error(t, err)
-	assert.Nil(t, dec)
+	require.Error(t, err)
+	require.Nil(t, dec)
 }
 
 func TestTamperedRoundtrip(t *testing.T) {
 	passphrase := []byte("supersecret")
 
 	enc, err := Encrypt(plaintext, passphrase)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	data := &data{}
 	err = json.Unmarshal(enc, data)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	data.Ciphertext[0] = 0
 	data.Ciphertext[1] = 0
@@ -43,8 +43,8 @@ func TestTamperedRoundtrip(t *testing.T) {
 	enc, _ = json.Marshal(data)
 
 	dec, err := Decrypt(enc, passphrase)
-	assert.Error(t, err)
-	assert.Nil(t, dec)
+	require.Error(t, err)
+	require.Nil(t, dec)
 }
 
 func TestDecrypt(t *testing.T) {
@@ -52,6 +52,6 @@ func TestDecrypt(t *testing.T) {
 	passphrase := []byte("supersecret")
 
 	dec, err := Decrypt(enc, passphrase)
-	assert.NoError(t, err)
-	assert.Equal(t, dec, plaintext)
+	require.NoError(t, err)
+	require.Equal(t, dec, plaintext)
 }
