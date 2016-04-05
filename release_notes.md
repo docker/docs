@@ -12,12 +12,23 @@ weight="99"
 
 # UCP Release Notes
 
+## Version 1.0.3
+
+Fixes a bug introduced by version 1.0.2 that was causing problems when a user
+navigated to their profile page.
+
 ## Version 1.0.2
 
 **Security update**
 
 Fixes a security issue by which a non-admin user account can gain admin-level
 privileges via the UCP API.
+
+**Known issues**
+
+Non-admin users might have an error when navigating to their profile page. This
+happens when the user is part of a team that has a label applied to it.
+
 
 ## Version 1.0.1
 
