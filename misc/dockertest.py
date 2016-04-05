@@ -13,7 +13,7 @@ import re
 import shutil
 import subprocess
 from tempfile import mkdtemp
-from time import time
+from time import sleep, time
 import urllib
 from urlparse import urljoin
 
@@ -52,6 +52,11 @@ DEFAULT_DOCKER_CONFIG = os.path.expanduser("~/.docker")
 
 # Assumes the trust server will be run using compose if DOCKER_CONTENT_TRUST_SERVER is not specified
 DEFAULT_NOTARY_SERVER = "https://notary-server:4443"
+
+# please enter a custom trust server location if you do not wish to use a local
+# docker-compose instantiation.  If testing against Docker Hub's notary server or
+# another trust server, please also ensure that this script does not pick up incorrect TLS
+# certificates from ~/.notary/config.json by default
 TRUST_SERVER =  os.getenv('DOCKER_CONTENT_TRUST_SERVER', DEFAULT_NOTARY_SERVER)
 
 # Assumes the test will be run with `python misc/dockertest.py` from
@@ -253,6 +258,9 @@ def push(fout, docker_version, image, tag):
                      fout)
     sha = _DIGEST_REGEX.search(output).group(1)
     size = _SIZE_REGEX.search(output).group(1)
+
+    # sleep for 1s after pushing, just to let things propagate :)
+    time.sleep(1)
 
     # list
     targets = notary_list(fout, image)
