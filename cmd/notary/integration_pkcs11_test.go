@@ -9,7 +9,7 @@ import (
 	"github.com/docker/notary/trustmanager/yubikey"
 	"github.com/docker/notary/tuf/data"
 	"github.com/spf13/cobra"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 var _retriever passphrase.Retriever
@@ -47,10 +47,10 @@ var rootOnHardware = yubikey.YubikeyAccessible
 func setUp(t *testing.T) {
 	//we're just removing keys here, so nil is fine
 	s, err := yubikey.NewYubiKeyStore(nil, _retriever)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	for k := range s.ListKeys() {
 		err := s.RemoveKey(k)
-		assert.NoError(t, err)
+		require.NoError(t, err)
 	}
 }
 
@@ -62,10 +62,10 @@ func verifyRootKeyOnHardware(t *testing.T, rootKeyID string) {
 	if yubikey.YubikeyAccessible() {
 		// //we're just getting keys here, so nil is fine
 		s, err := yubikey.NewYubiKeyStore(nil, _retriever)
-		assert.NoError(t, err)
+		require.NoError(t, err)
 		privKey, role, err := s.GetKey(rootKeyID)
-		assert.NoError(t, err)
-		assert.NotNil(t, privKey)
-		assert.Equal(t, data.CanonicalRootRole, role)
+		require.NoError(t, err)
+		require.NotNil(t, privKey)
+		require.Equal(t, data.CanonicalRootRole, role)
 	}
 }

@@ -15,7 +15,6 @@ import (
 	"github.com/docker/go-connections/tlsconfig"
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/server/storage"
-	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
@@ -26,9 +25,9 @@ func TestNotaryConfigFileDefault(t *testing.T) {
 	}
 
 	config, err := commander.parseConfig()
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	configFileUsed := config.ConfigFileUsed()
-	assert.True(t, strings.HasSuffix(configFileUsed,
+	require.True(t, strings.HasSuffix(configFileUsed,
 		filepath.Join(".notary", "config.json")), "Unknown config file: %s", configFileUsed)
 }
 
@@ -50,8 +49,8 @@ func TestRemoteServerDefault(t *testing.T) {
 	cmd.Execute()
 
 	config, err := commander.parseConfig()
-	assert.NoError(t, err)
-	assert.Equal(t, "https://notary-server:4443", getRemoteTrustServer(config))
+	require.NoError(t, err)
+	require.Equal(t, "https://notary-server:4443", getRemoteTrustServer(config))
 }
 
 // providing a config file uses the config file's server url instead
@@ -72,8 +71,8 @@ func TestRemoteServerUsesConfigFile(t *testing.T) {
 	cmd.Execute()
 
 	config, err := commander.parseConfig()
-	assert.NoError(t, err)
-	assert.Equal(t, "https://myserver", getRemoteTrustServer(config))
+	require.NoError(t, err)
+	require.Equal(t, "https://myserver", getRemoteTrustServer(config))
 }
 
 // a command line flag overrides the config file's server url
@@ -94,8 +93,8 @@ func TestRemoteServerCommandLineFlagOverridesConfig(t *testing.T) {
 	cmd.Execute()
 
 	config, err := commander.parseConfig()
-	assert.NoError(t, err)
-	assert.Equal(t, "http://overridden", getRemoteTrustServer(config))
+	require.NoError(t, err)
+	require.Equal(t, "http://overridden", getRemoteTrustServer(config))
 }
 
 var exampleValidCommands = []string{
@@ -237,7 +236,7 @@ func TestConfigFileTLSCannotBeRelativeToCWD(t *testing.T) {
 		CAFile:     "../../fixtures/root-ca.crt",
 		ClientAuth: tls.RequireAndVerifyClientCert,
 	})
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	s.StartTLS()
 	defer s.Close()
 
@@ -259,11 +258,11 @@ func TestConfigFileTLSCannotBeRelativeToCWD(t *testing.T) {
 	cmd.SetArgs([]string{"-c", configFile, "-d", tempDir, "list", "repo"})
 	cmd.SetOutput(new(bytes.Buffer)) // eat the output
 	err = cmd.Execute()
-	assert.Error(t, err, "expected a failure due to TLS")
-	assert.Contains(t, err.Error(), "TLS", "should have been a TLS error")
+	require.Error(t, err, "expected a failure due to TLS")
+	require.Contains(t, err.Error(), "TLS", "should have been a TLS error")
 
 	// validate that we failed to connect and attempt any downloads at all
-	assert.Len(t, m.gotten, 0)
+	require.Len(t, m.gotten, 0)
 }
 
 // the config can provide all the TLS information necessary - the root ca file,
@@ -281,15 +280,15 @@ func TestConfigFileTLSCanBeRelativeToConfigOrAbsolute(t *testing.T) {
 		CAFile:     "../../fixtures/root-ca.crt",
 		ClientAuth: tls.RequireAndVerifyClientCert,
 	})
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	s.StartTLS()
 	defer s.Close()
 
 	tempDir, err := ioutil.TempDir("", "config-test")
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	defer os.RemoveAll(tempDir)
 	configFile, err := os.Create(filepath.Join(tempDir, "config.json"))
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	fmt.Fprintf(configFile, `{
 		"remote_server": {
 			"url": "%s",
@@ -303,8 +302,8 @@ func TestConfigFileTLSCanBeRelativeToConfigOrAbsolute(t *testing.T) {
 	// copy the certs to be relative to the config directory
 	for _, fname := range []string{"notary-server.crt", "notary-server.key", "root-ca.crt"} {
 		content, err := ioutil.ReadFile(filepath.Join("../../fixtures", fname))
-		assert.NoError(t, err)
-		assert.NoError(t, ioutil.WriteFile(filepath.Join(tempDir, fname), content, 0766))
+		require.NoError(t, err)
+		require.NoError(t, ioutil.WriteFile(filepath.Join(tempDir, fname), content, 0766))
 	}
 
 	// set a config file, so it doesn't check ~/.notary/config.json by default,
@@ -313,12 +312,12 @@ func TestConfigFileTLSCanBeRelativeToConfigOrAbsolute(t *testing.T) {
 	cmd.SetArgs([]string{"-c", configFile.Name(), "-d", tempDir, "list", "repo"})
 	cmd.SetOutput(new(bytes.Buffer)) // eat the output
 	err = cmd.Execute()
-	assert.Error(t, err, "there was no repository, so list should have failed")
-	assert.NotContains(t, err.Error(), "TLS", "there was no TLS error though!")
+	require.Error(t, err, "there was no repository, so list should have failed")
+	require.NotContains(t, err.Error(), "TLS", "there was no TLS error though!")
 
 	// validate that we actually managed to connect and attempted to download the root though
-	assert.Len(t, m.gotten, 1)
-	assert.Equal(t, m.gotten[0], "repo.root")
+	require.Len(t, m.gotten, 1)
+	require.Equal(t, m.gotten[0], "repo.root")
 }
 
 // Whatever TLS config is in the config file can be overridden by the command line
@@ -335,7 +334,7 @@ func TestConfigFileOverridenByCmdLineFlags(t *testing.T) {
 		CAFile:     "../../fixtures/root-ca.crt",
 		ClientAuth: tls.RequireAndVerifyClientCert,
 	})
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	s.StartTLS()
 	defer s.Close()
 
@@ -353,7 +352,7 @@ func TestConfigFileOverridenByCmdLineFlags(t *testing.T) {
 	// set a config file, so it doesn't check ~/.notary/config.json by default,
 	// and execute a random command so that the flags are parsed
 	cwd, err := os.Getwd()
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	cmd := NewNotaryCommand()
 	cmd.SetArgs([]string{
@@ -363,10 +362,10 @@ func TestConfigFileOverridenByCmdLineFlags(t *testing.T) {
 		"--tlskey", "../../fixtures/notary-server.key"})
 	cmd.SetOutput(new(bytes.Buffer)) // eat the output
 	err = cmd.Execute()
-	assert.Error(t, err, "there was no repository, so list should have failed")
-	assert.NotContains(t, err.Error(), "TLS", "there was no TLS error though!")
+	require.Error(t, err, "there was no repository, so list should have failed")
+	require.NotContains(t, err.Error(), "TLS", "there was no TLS error though!")
 
 	// validate that we actually managed to connect and attempted to download the root though
-	assert.Len(t, m.gotten, 1)
-	assert.Equal(t, m.gotten[0], "repo.root")
+	require.Len(t, m.gotten, 1)
+	require.Equal(t, m.gotten[0], "repo.root")
 }
