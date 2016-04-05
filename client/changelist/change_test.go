@@ -5,13 +5,13 @@ import (
 
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestTufDelegation(t *testing.T) {
 	cs := signed.NewEd25519()
 	key, err := cs.Create("targets/new_name", "gun", data.ED25519Key)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	kl := data.KeyList{key}
 	td := TufDelegation{
 		NewName:      "targets/new_name",
@@ -21,9 +21,9 @@ func TestTufDelegation(t *testing.T) {
 	}
 
 	r, err := td.ToNewRole("targets/old_name")
-	assert.NoError(t, err)
-	assert.Equal(t, td.NewName, r.Name)
-	assert.Len(t, r.KeyIDs, 1)
-	assert.Equal(t, kl[0].ID(), r.KeyIDs[0])
-	assert.Len(t, r.Paths, 1)
+	require.NoError(t, err)
+	require.Equal(t, td.NewName, r.Name)
+	require.Len(t, r.KeyIDs, 1)
+	require.Equal(t, kl[0].ID(), r.KeyIDs[0])
+	require.Len(t, r.Paths, 1)
 }
