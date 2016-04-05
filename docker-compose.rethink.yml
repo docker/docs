@@ -11,7 +11,6 @@ services:
       links:
         - rdb-proxy:rdb-proxy.rdb
         - signer
-        - signer:notarysigner
       environment:
         - SERVICE_NAME=notary_server
       ports:
@@ -28,7 +27,9 @@ services:
       volumes:
         - ./fixtures/rethinkdb:/tls
       networks:
-        - rdb
+        rdb:
+            aliases:
+                - notarysigner
       links:
         - rdb-proxy:rdb-proxy.rdb
       environment:
