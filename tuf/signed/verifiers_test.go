@@ -15,7 +15,7 @@ import (
 	"text/template"
 
 	"github.com/docker/notary/tuf/data"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 type KeyTemplate struct {
@@ -38,19 +38,19 @@ func TestRSAPSSVerifier(t *testing.T) {
 	templ.Execute(&jsonKey, KeyTemplate{KeyType: data.RSAKey})
 
 	testRSAKey, err := data.UnmarshalPrivateKey(jsonKey.Bytes())
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// Sign some data using RSAPSS
 	message := []byte("test data for signing")
 	hash := crypto.SHA256
 	hashed := sha256.Sum256(message)
 	signedData, err := rsaPSSSign(testRSAKey, hash, hashed[:])
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// Create and call Verify on the verifier
 	rsaVerifier := RSAPSSVerifier{}
 	err = rsaVerifier.Verify(testRSAKey, signedData, message)
-	assert.NoError(t, err, "expecting success but got error while verifying data using RSA PSS")
+	require.NoError(t, err, "expecting success but got error while verifying data using RSA PSS")
 }
 
 func TestRSAPSSx509Verifier(t *testing.T) {
@@ -63,7 +63,7 @@ func TestRSAPSSx509Verifier(t *testing.T) {
 	templ.Execute(&jsonKey, KeyTemplate{KeyType: data.RSAx509Key})
 
 	testRSAKey, err := data.UnmarshalPrivateKey(jsonKey.Bytes())
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// Valid signed message
 	signedData, _ := hex.DecodeString("3de02fa54cdba45c67860f058b7cff1ba264610dc3c5b466b7df027bc52068bdf2956fe438dba08b0b71daa0780a3037bf8f50a09d91ca81fa872bbdbbbff6ef17e04df8741ad5c2f2c3ea5de97d6ffaf4999c83fdfba4b6cb2443da11c7b7eea84123c2fdaf3319fa6342cbbdbd1aa25d1ac20aeee687e48cbf191cc8f68049230261469eeada33dec0af74287766bd984dd01820a7edfb8b0d030e2fcf00886c578b07eb905a2eebc81fd982a578e717c7ac773cab345950c71e1eaf81b70401e5bf3c67cdcb9068bf4b50ff0456b530b3cec5586827eb39b123f9d666a65f4b418a355438ed1753da8a27577ab9cd791d7b840c7e34ecc1290c46d98aa0dd73c0427f6ef8f63e36af42e9657520b8f56c9231ba7e0172dfc3456c63c54e9eae95d06bafe571e91afa1e42d4010e60dd5c441df112cc8474253eee7f1d6c5350039ffcd1f8b0bb013e4403c16fc5b40d6bd56b742ea1ed82c87880147db194b33b022077cc2e8d31ef3eada3e46683ad437ad8ef7ecbe03c29d7a53a9771e42cc4f9d782813c491186fde2cd1dfa408c4e21dd4c3ca1664e901772ffe1713e37b07c9287572114865a05e17cbe29d8622c6b033dcb43c9721d0943c58098607cc28bd58b3caf3dfc1f66d01ebfaf1aa5c2c5945c23af83fe114e587fa7bcbaea6bdccff3c0ad03ce3328f67af30168e225e5827ad9e94b4702de984e6dd775")
@@ -72,7 +72,7 @@ func TestRSAPSSx509Verifier(t *testing.T) {
 	// Create and call Verify on the verifier
 	rsaVerifier := RSAPSSVerifier{}
 	err = rsaVerifier.Verify(testRSAKey, signedData, message)
-	assert.NoError(t, err, "expecting success but got error while verifying data using RSAPSS and an X509 encoded Key")
+	require.NoError(t, err, "expecting success but got error while verifying data using RSAPSS and an X509 encoded Key")
 }
 
 func TestRSAPSSVerifierWithInvalidKeyType(t *testing.T) {
@@ -84,7 +84,7 @@ func TestRSAPSSVerifierWithInvalidKeyType(t *testing.T) {
 	templ.Execute(&jsonKey, KeyTemplate{KeyType: "rsa-invalid"})
 
 	testRSAKey, err := data.UnmarshalPrivateKey(jsonKey.Bytes())
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// Valid signed data with invalidRsaKeyJSON
 	signedData, _ := hex.DecodeString("2741a57a5ef89f841b4e0a6afbcd7940bc982cd919fbd11dfc21b5ccfe13855b9c401e3df22da5480cef2fa585d0f6dfc6c35592ed92a2a18001362c3a17f74da3906684f9d81c5846bf6a09e2ede6c009ae164f504e6184e666adb14eadf5f6e12e07ff9af9ad49bf1ea9bcfa3bebb2e33be7d4c0fabfe39534f98f1e3c4bff44f637cff3dae8288aea54d86476a3f1320adc39008eae24b991c1de20744a7967d2e685ac0bcc0bc725947f01c9192ffd3e9300eba4b7faa826e84478493fdf97c705dd331dd46072050d6c5e317c2d63df21694dbaf909ebf46ce0ff04f3979fe13723ae1a823c65f27e56efa19e88f9e7b8ee56eac34353b944067deded3a")
@@ -93,16 +93,16 @@ func TestRSAPSSVerifierWithInvalidKeyType(t *testing.T) {
 	// Create and call Verify on the verifier
 	rsaVerifier := RSAPSSVerifier{}
 	err = rsaVerifier.Verify(testRSAKey, signedData, message)
-	assert.Error(t, err, "invalid key type for RSAPSS verifier: rsa-invalid")
+	require.Error(t, err, "invalid key type for RSAPSS verifier: rsa-invalid")
 }
 
 func TestRSAPSSVerifierWithInvalidKeyLength(t *testing.T) {
 	key, err := rsa.GenerateKey(rand.Reader, 512)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	err = verifyPSS(key.Public(), nil, nil)
-	assert.Error(t, err)
-	assert.IsType(t, ErrInvalidKeyLength{}, err)
+	require.Error(t, err)
+	require.IsType(t, ErrInvalidKeyLength{}, err)
 }
 
 func TestRSAPSSVerifierWithInvalidKey(t *testing.T) {
@@ -114,7 +114,7 @@ func TestRSAPSSVerifierWithInvalidKey(t *testing.T) {
 	templ.Execute(&jsonKey, KeyTemplate{KeyType: "ecdsa"})
 
 	testRSAKey, err := data.UnmarshalPrivateKey(jsonKey.Bytes())
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// Valid signed data with invalidRsaKeyJSON
 	signedData, _ := hex.DecodeString("2741a57a5ef89f841b4e0a6afbcd7940bc982cd919fbd11dfc21b5ccfe13855b9c401e3df22da5480cef2fa585d0f6dfc6c35592ed92a2a18001362c3a17f74da3906684f9d81c5846bf6a09e2ede6c009ae164f504e6184e666adb14eadf5f6e12e07ff9af9ad49bf1ea9bcfa3bebb2e33be7d4c0fabfe39534f98f1e3c4bff44f637cff3dae8288aea54d86476a3f1320adc39008eae24b991c1de20744a7967d2e685ac0bcc0bc725947f01c9192ffd3e9300eba4b7faa826e84478493fdf97c705dd331dd46072050d6c5e317c2d63df21694dbaf909ebf46ce0ff04f3979fe13723ae1a823c65f27e56efa19e88f9e7b8ee56eac34353b944067deded3a")
@@ -123,7 +123,7 @@ func TestRSAPSSVerifierWithInvalidKey(t *testing.T) {
 	// Create and call Verify on the verifier
 	rsaVerifier := RSAPSSVerifier{}
 	err = rsaVerifier.Verify(testRSAKey, signedData, message)
-	assert.Error(t, err, "invalid key type for RSAPSS verifier: ecdsa")
+	require.Error(t, err, "invalid key type for RSAPSS verifier: ecdsa")
 }
 
 func TestRSAPSSVerifierWithInvalidSignature(t *testing.T) {
@@ -135,14 +135,14 @@ func TestRSAPSSVerifierWithInvalidSignature(t *testing.T) {
 	templ.Execute(&jsonKey, KeyTemplate{KeyType: data.RSAKey})
 
 	testRSAKey, err := data.UnmarshalPrivateKey(jsonKey.Bytes())
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// Sign some data using RSAPSS
 	message := []byte("test data for signing")
 	hash := crypto.SHA256
 	hashed := sha256.Sum256(message)
 	signedData, err := rsaPSSSign(testRSAKey, hash, hashed[:])
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// Modify the signature
 	signedData[0]++
@@ -150,7 +150,7 @@ func TestRSAPSSVerifierWithInvalidSignature(t *testing.T) {
 	// Create and call Verify on the verifier
 	rsaVerifier := RSAPSSVerifier{}
 	err = rsaVerifier.Verify(testRSAKey, signedData, message)
-	assert.Error(t, err, "signature verification failed")
+	require.Error(t, err, "signature verification failed")
 }
 
 func TestRSAPKCS1v15Verifier(t *testing.T) {
@@ -163,19 +163,19 @@ func TestRSAPKCS1v15Verifier(t *testing.T) {
 	templ.Execute(&jsonKey, KeyTemplate{KeyType: data.RSAKey})
 
 	testRSAKey, err := data.UnmarshalPrivateKey(jsonKey.Bytes())
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// Sign some data using RSAPKCS1v15
 	message := []byte("test data for signing")
 	hash := crypto.SHA256
 	hashed := sha256.Sum256(message)
 	signedData, err := rsaPKCS1v15Sign(testRSAKey, hash, hashed[:])
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// Create and call Verify on the verifier
 	rsaVerifier := RSAPKCS1v15Verifier{}
 	err = rsaVerifier.Verify(testRSAKey, signedData, message)
-	assert.NoError(t, err, "expecting success but got error while verifying data using RSAPKCS1v15")
+	require.NoError(t, err, "expecting success but got error while verifying data using RSAPKCS1v15")
 }
 
 func TestRSAPKCS1v15x509Verifier(t *testing.T) {
@@ -188,7 +188,7 @@ func TestRSAPKCS1v15x509Verifier(t *testing.T) {
 	templ.Execute(&jsonKey, KeyTemplate{KeyType: data.RSAx509Key})
 
 	testRSAKey, err := data.UnmarshalPrivateKey(jsonKey.Bytes())
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// Valid signed message
 	signedData, _ := hex.DecodeString("a19602f609646d57f3d0db930bbe491a997baf33f13191916713734ae778ddb4898ece2078741bb0c24d726514c6b4538c3665c374b0b8ec9ff234b45459633268224c9962756ad3684aca5f13a286657375e798ddcb857ed2707c900f097666b958df56b43b790357430c2e7a5c379ba9972c8b008363c144aac5c7e0fbfad83cf6855cf73baf8e3ad774e910ba6ac8dc4cce58fe19cffb7b0a1feaa73d23ebd2d59de2d7d9e98a809d73a310c5396df64ff7a22d735e661e39d37a6c4a013caa6005e91f597ea35db24e6c750d704d292a180128dcf72a818c53a96b0a83ba0414a3611097905262eb79a6ced1484af27c7da6809aa21ae7c6f05ae6568d5e5d9c170470213a30caf2340c3d52e7bd4056d22074daffee6e29d0a6fd3ca6dbd001831fb1e48573f3663b63e110cde19efaf56e49a835aeda82e4d7286de591376ecd03de36d402ec703f39f79b2f764f991d8950a119f2618f6d4e4618114900597a1e89ced609949410623a17b97095afe08babc4c295ade954f055ca01b7909f5585e98eb99bd916583476aa877d20da8f4fe35c0867e934f41c935d469664b80904a93f9f4d9432cabd9383e08559d6452f8e12b2d861412c450709ff874ad63c25a640605a41c4073f0eb4e16e1965abf8e088e210cbf9d3ca884ec2c13fc8a288cfcef2425d9607fcab01dab45c5c346671a9ae1d0e52c81379fa212c")
@@ -197,7 +197,7 @@ func TestRSAPKCS1v15x509Verifier(t *testing.T) {
 	// Create and call Verify on the verifier
 	rsaVerifier := RSAPKCS1v15Verifier{}
 	err = rsaVerifier.Verify(testRSAKey, signedData, message)
-	assert.NoError(t, err, "expecting success but got error while verifying data using RSAPKCS1v15 and an X509 encoded Key")
+	require.NoError(t, err, "expecting success but got error while verifying data using RSAPKCS1v15 and an X509 encoded Key")
 }
 
 func TestRSAPKCS1v15VerifierWithInvalidKeyType(t *testing.T) {
@@ -209,7 +209,7 @@ func TestRSAPKCS1v15VerifierWithInvalidKeyType(t *testing.T) {
 	templ.Execute(&jsonKey, KeyTemplate{KeyType: "rsa-invalid"})
 
 	testRSAKey, err := data.UnmarshalPrivateKey(jsonKey.Bytes())
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// Valid signed data with invalidRsaKeyJSON
 	signedData, _ := hex.DecodeString("2741a57a5ef89f841b4e0a6afbcd7940bc982cd919fbd11dfc21b5ccfe13855b9c401e3df22da5480cef2fa585d0f6dfc6c35592ed92a2a18001362c3a17f74da3906684f9d81c5846bf6a09e2ede6c009ae164f504e6184e666adb14eadf5f6e12e07ff9af9ad49bf1ea9bcfa3bebb2e33be7d4c0fabfe39534f98f1e3c4bff44f637cff3dae8288aea54d86476a3f1320adc39008eae24b991c1de20744a7967d2e685ac0bcc0bc725947f01c9192ffd3e9300eba4b7faa826e84478493fdf97c705dd331dd46072050d6c5e317c2d63df21694dbaf909ebf46ce0ff04f3979fe13723ae1a823c65f27e56efa19e88f9e7b8ee56eac34353b944067deded3a")
@@ -218,7 +218,7 @@ func TestRSAPKCS1v15VerifierWithInvalidKeyType(t *testing.T) {
 	// Create and call Verify on the verifier
 	rsaVerifier := RSAPKCS1v15Verifier{}
 	err = rsaVerifier.Verify(testRSAKey, signedData, message)
-	assert.Error(t, err, "invalid key type for RSAPKCS1v15 verifier: rsa-invalid")
+	require.Error(t, err, "invalid key type for RSAPKCS1v15 verifier: rsa-invalid")
 }
 
 func TestRSAPKCS1v15VerifierWithInvalidKey(t *testing.T) {
@@ -230,7 +230,7 @@ func TestRSAPKCS1v15VerifierWithInvalidKey(t *testing.T) {
 	templ.Execute(&jsonKey, KeyTemplate{KeyType: "ecdsa"})
 
 	testRSAKey, err := data.UnmarshalPrivateKey(jsonKey.Bytes())
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// Valid signed data with invalidRsaKeyJSON
 	signedData, _ := hex.DecodeString("2741a57a5ef89f841b4e0a6afbcd7940bc982cd919fbd11dfc21b5ccfe13855b9c401e3df22da5480cef2fa585d0f6dfc6c35592ed92a2a18001362c3a17f74da3906684f9d81c5846bf6a09e2ede6c009ae164f504e6184e666adb14eadf5f6e12e07ff9af9ad49bf1ea9bcfa3bebb2e33be7d4c0fabfe39534f98f1e3c4bff44f637cff3dae8288aea54d86476a3f1320adc39008eae24b991c1de20744a7967d2e685ac0bcc0bc725947f01c9192ffd3e9300eba4b7faa826e84478493fdf97c705dd331dd46072050d6c5e317c2d63df21694dbaf909ebf46ce0ff04f3979fe13723ae1a823c65f27e56efa19e88f9e7b8ee56eac34353b944067deded3a")
@@ -239,7 +239,7 @@ func TestRSAPKCS1v15VerifierWithInvalidKey(t *testing.T) {
 	// Create and call Verify on the verifier
 	rsaVerifier := RSAPKCS1v15Verifier{}
 	err = rsaVerifier.Verify(testRSAKey, signedData, message)
-	assert.Error(t, err, "invalid key type for RSAPKCS1v15 verifier: ecdsa")
+	require.Error(t, err, "invalid key type for RSAPKCS1v15 verifier: ecdsa")
 }
 
 func TestRSAPKCS1v15VerifierWithInvalidSignature(t *testing.T) {
@@ -251,14 +251,14 @@ func TestRSAPKCS1v15VerifierWithInvalidSignature(t *testing.T) {
 	templ.Execute(&jsonKey, KeyTemplate{KeyType: data.RSAKey})
 
 	testRSAKey, err := data.UnmarshalPrivateKey(jsonKey.Bytes())
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// Sign some data using RSAPKCS1v15
 	message := []byte("test data for signing")
 	hash := crypto.SHA256
 	hashed := sha256.Sum256(message)
 	signedData, err := rsaPKCS1v15Sign(testRSAKey, hash, hashed[:])
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// Modify the signature
 	signedData[0]++
@@ -266,7 +266,7 @@ func TestRSAPKCS1v15VerifierWithInvalidSignature(t *testing.T) {
 	// Create and call Verify on the verifier
 	rsaVerifier := RSAPKCS1v15Verifier{}
 	err = rsaVerifier.Verify(testRSAKey, signedData, message)
-	assert.Error(t, err, "signature verification failed")
+	require.Error(t, err, "signature verification failed")
 }
 
 func TestECDSAVerifier(t *testing.T) {
@@ -278,18 +278,18 @@ func TestECDSAVerifier(t *testing.T) {
 	templ.Execute(&jsonKey, KeyTemplate{KeyType: data.ECDSAKey})
 
 	testECDSAKey, err := data.UnmarshalPrivateKey(jsonKey.Bytes())
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// Sign some data using ECDSA
 	message := []byte("test data for signing")
 	hashed := sha256.Sum256(message)
 	signedData, err := ecdsaSign(testECDSAKey, hashed[:])
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// Create and call Verify on the verifier
 	ecdsaVerifier := ECDSAVerifier{}
 	err = ecdsaVerifier.Verify(testECDSAKey, signedData, message)
-	assert.NoError(t, err, "expecting success but got error while verifying data using ECDSA")
+	require.NoError(t, err, "expecting success but got error while verifying data using ECDSA")
 }
 
 func TestECDSAVerifierOtherCurves(t *testing.T) {
@@ -300,31 +300,31 @@ func TestECDSAVerifierOtherCurves(t *testing.T) {
 
 		// Get a DER-encoded representation of the PublicKey
 		ecdsaPubBytes, err := x509.MarshalPKIXPublicKey(&ecdsaPrivKey.PublicKey)
-		assert.NoError(t, err, "failed to marshal public key")
+		require.NoError(t, err, "failed to marshal public key")
 
 		// Get a DER-encoded representation of the PrivateKey
 		ecdsaPrivKeyBytes, err := x509.MarshalECPrivateKey(ecdsaPrivKey)
-		assert.NoError(t, err, "failed to marshal private key")
+		require.NoError(t, err, "failed to marshal private key")
 
 		testECDSAPubKey := data.NewECDSAPublicKey(ecdsaPubBytes)
 		testECDSAKey, err := data.NewECDSAPrivateKey(testECDSAPubKey, ecdsaPrivKeyBytes)
-		assert.NoError(t, err, "failed to read private key")
+		require.NoError(t, err, "failed to read private key")
 
 		// Sign some data using ECDSA
 		message := []byte("test data for signing")
 		hashed := sha256.Sum256(message)
 		signedData, err := ecdsaSign(testECDSAKey, hashed[:])
-		assert.NoError(t, err)
+		require.NoError(t, err)
 
 		// Create and call Verify on the verifier
 		ecdsaVerifier := ECDSAVerifier{}
 		err = ecdsaVerifier.Verify(testECDSAKey, signedData, message)
-		assert.NoError(t, err, "expecting success but got error while verifying data using ECDSA")
+		require.NoError(t, err, "expecting success but got error while verifying data using ECDSA")
 
 		// Make sure an invalid signature fails verification
 		signedData[0]++
 		err = ecdsaVerifier.Verify(testECDSAKey, signedData, message)
-		assert.Error(t, err, "expecting error but got success while verifying data using ECDSA")
+		require.Error(t, err, "expecting error but got success while verifying data using ECDSA")
 	}
 }
 
@@ -336,7 +336,7 @@ func TestECDSAx509Verifier(t *testing.T) {
 	templ.Execute(&jsonKey, KeyTemplate{KeyType: data.ECDSAx509Key})
 
 	testECDSAKey, err := data.UnmarshalPublicKey(jsonKey.Bytes())
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// Valid signature for message
 	signedData, _ := hex.DecodeString("b82e0ed5c5dddd74c8d3602bfd900c423511697c3cfe54e1d56b9c1df599695c53aa0caafcdc40df3ef496d78ccf67750ba9413f1ccbd8b0ef137f0da1ee9889")
@@ -345,7 +345,7 @@ func TestECDSAx509Verifier(t *testing.T) {
 	// Create and call Verify on the verifier
 	ecdsaVerifier := ECDSAVerifier{}
 	err = ecdsaVerifier.Verify(testECDSAKey, signedData, message)
-	assert.NoError(t, err, "expecting success but got error while verifying data using ECDSA and an x509 encoded key")
+	require.NoError(t, err, "expecting success but got error while verifying data using ECDSA and an x509 encoded key")
 }
 
 func TestECDSAVerifierWithInvalidKeyType(t *testing.T) {
@@ -357,7 +357,7 @@ func TestECDSAVerifierWithInvalidKeyType(t *testing.T) {
 	templ.Execute(&jsonKey, KeyTemplate{KeyType: "ecdsa-invalid"})
 
 	testECDSAKey, err := data.UnmarshalPrivateKey(jsonKey.Bytes())
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// Valid signature using invalidECDSAx509Key
 	signedData, _ := hex.DecodeString("7b1c45a4dd488a087db46ee459192d890d4f52352620cb84c2c10e0ce8a67fd6826936463a91ffdffab8e6f962da6fc3d3e5735412f7cd161a9fcf97ba1a7033")
@@ -366,7 +366,7 @@ func TestECDSAVerifierWithInvalidKeyType(t *testing.T) {
 	// Create and call Verify on the verifier
 	ecdsaVerifier := ECDSAVerifier{}
 	err = ecdsaVerifier.Verify(testECDSAKey, signedData, message)
-	assert.Error(t, err, "invalid key type for ECDSA verifier: ecdsa-invalid")
+	require.Error(t, err, "invalid key type for ECDSA verifier: ecdsa-invalid")
 }
 
 func TestECDSAVerifierWithInvalidKey(t *testing.T) {
@@ -378,7 +378,7 @@ func TestECDSAVerifierWithInvalidKey(t *testing.T) {
 	templ.Execute(&jsonKey, KeyTemplate{KeyType: "rsa"})
 
 	testECDSAKey, err := data.UnmarshalPrivateKey(jsonKey.Bytes())
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// Valid signature using invalidECDSAx509Key
 	signedData, _ := hex.DecodeString("7b1c45a4dd488a087db46ee459192d890d4f52352620cb84c2c10e0ce8a67fd6826936463a91ffdffab8e6f962da6fc3d3e5735412f7cd161a9fcf97ba1a7033")
@@ -387,7 +387,7 @@ func TestECDSAVerifierWithInvalidKey(t *testing.T) {
 	// Create and call Verify on the verifier
 	ecdsaVerifier := ECDSAVerifier{}
 	err = ecdsaVerifier.Verify(testECDSAKey, signedData, message)
-	assert.Error(t, err, "invalid key type for ECDSA verifier: rsa")
+	require.Error(t, err, "invalid key type for ECDSA verifier: rsa")
 }
 
 func TestECDSAVerifierWithInvalidSignature(t *testing.T) {
@@ -399,13 +399,13 @@ func TestECDSAVerifierWithInvalidSignature(t *testing.T) {
 	templ.Execute(&jsonKey, KeyTemplate{KeyType: data.ECDSAKey})
 
 	testECDSAKey, err := data.UnmarshalPrivateKey(jsonKey.Bytes())
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// Sign some data using ECDSA
 	message := []byte("test data for signing")
 	hashed := sha256.Sum256(message)
 	signedData, err := ecdsaSign(testECDSAKey, hashed[:])
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// Modify the signature
 	signedData[0]++
@@ -413,7 +413,7 @@ func TestECDSAVerifierWithInvalidSignature(t *testing.T) {
 	// Create and call Verify on the verifier
 	ecdsaVerifier := ECDSAVerifier{}
 	err = ecdsaVerifier.Verify(testECDSAKey, signedData, message)
-	assert.Error(t, err, "signature verification failed")
+	require.Error(t, err, "signature verification failed")
 
 }
 
@@ -421,16 +421,16 @@ func TestED25519VerifierInvalidKeyType(t *testing.T) {
 	key := data.NewPublicKey("bad_type", nil)
 	v := Ed25519Verifier{}
 	err := v.Verify(key, nil, nil)
-	assert.Error(t, err)
-	assert.IsType(t, ErrInvalidKeyType{}, err)
+	require.Error(t, err)
+	require.IsType(t, ErrInvalidKeyType{}, err)
 }
 
 func TestRSAPyCryptoVerifierInvalidKeyType(t *testing.T) {
 	key := data.NewPublicKey("bad_type", nil)
 	v := RSAPyCryptoVerifier{}
 	err := v.Verify(key, nil, nil)
-	assert.Error(t, err)
-	assert.IsType(t, ErrInvalidKeyType{}, err)
+	require.Error(t, err)
+	require.IsType(t, ErrInvalidKeyType{}, err)
 }
 
 func rsaPSSSign(privKey data.PrivateKey, hash crypto.Hash, hashed []byte) ([]byte, error) {

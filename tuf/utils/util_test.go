@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/docker/notary/tuf/data"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestFileMetaEqual(t *testing.T) {
@@ -19,7 +19,7 @@ func TestFileMetaEqual(t *testing.T) {
 		m := data.FileMeta{Length: length, Hashes: make(map[string][]byte, len(hashes))}
 		for typ, hash := range hashes {
 			v, err := hex.DecodeString(hash)
-			assert.NoError(t, err, "hash not in hex")
+			require.NoError(t, err, "hash not in hex")
 			m.Hashes[typ] = v
 		}
 		return m
@@ -51,7 +51,7 @@ func TestFileMetaEqual(t *testing.T) {
 		},
 	}
 	for _, run := range tests {
-		assert.Equal(t, FileMetaEqual(run.a, run.b), run.err(run), "Files not equivalent")
+		require.Equal(t, FileMetaEqual(run.a, run.b), run.err(run), "Files not equivalent")
 	}
 }
 
@@ -64,14 +64,14 @@ func TestNormalizeTarget(t *testing.T) {
 		"/with/./a/dot":       "/with/a/dot",
 		"/with/double/../dot": "/with/dot",
 	} {
-		assert.Equal(t, NormalizeTarget(before), after, "Path normalization did not output expected.")
+		require.Equal(t, NormalizeTarget(before), after, "Path normalization did not output expected.")
 	}
 }
 
 func TestHashedPaths(t *testing.T) {
 	hexBytes := func(s string) []byte {
 		v, err := hex.DecodeString(s)
-		assert.NoError(t, err, "String was not hex")
+		require.NoError(t, err, "String was not hex")
 		return v
 	}
 	hashes := data.Hashes{
@@ -80,7 +80,7 @@ func TestHashedPaths(t *testing.T) {
 	}
 	paths := HashedPaths("foo/bar.txt", hashes)
 	// cannot use DeepEquals as the returned order is non-deterministic
-	assert.Len(t, paths, 2, "Expected 2 paths")
+	require.Len(t, paths, 2, "Expected 2 paths")
 	expected := map[string]struct{}{"foo/abc123.bar.txt": {}, "foo/def456.bar.txt": {}}
 	for _, path := range paths {
 		if _, ok := expected[path]; !ok {
