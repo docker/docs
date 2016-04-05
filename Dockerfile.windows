@@ -32,9 +32,10 @@ RUN mkdir /bundle
 
 WORKDIR /bundle
 
-RUN curl -fsSL -o dockerbins.tgz "https://test.docker.com/builds/Windows/x86_64/docker-${DOCKER_VERSION}.tgz" && \
-    tar xvf dockerbins.tgz usr/local/bin/docker.exe --strip-components 3 && \
-    rm dockerbins.tgz
+RUN curl -fsSL -o dockerbins.zip "https://test.docker.com/builds/Windows/x86_64/docker-${DOCKER_VERSION}.zip" && \
+    unzip dockerbins.zip && \
+    mv docker/docker.exe . && \
+    rm -r docker/ dockerbins.zip
 
 RUN curl -fsSL -o docker-machine.exe "https://github.com/docker/machine/releases/download/v$DOCKER_MACHINE_VERSION/docker-machine-Windows-x86_64.exe"
 
