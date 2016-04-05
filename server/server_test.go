@@ -19,7 +19,7 @@ import (
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/testutils"
 	"github.com/docker/notary/utils"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	"golang.org/x/net/context"
 )
 
@@ -31,7 +31,7 @@ func TestRunBadAddr(t *testing.T) {
 			Trust: signed.NewEd25519(),
 		},
 	)
-	assert.Error(t, err, "Passed bad addr, Run should have failed")
+	require.Error(t, err, "Passed bad addr, Run should have failed")
 }
 
 func TestRunReservedPort(t *testing.T) {
@@ -45,9 +45,9 @@ func TestRunReservedPort(t *testing.T) {
 		},
 	)
 
-	assert.Error(t, err)
-	assert.IsType(t, &net.OpError{}, err)
-	assert.True(
+	require.Error(t, err)
+	require.IsType(t, &net.OpError{}, err)
+	require.True(
 		t,
 		strings.Contains(err.Error(), "bind: permission denied"),
 		"Received unexpected err: %s",
@@ -62,8 +62,8 @@ func TestMetricsEndpoint(t *testing.T) {
 	defer ts.Close()
 
 	res, err := http.Get(ts.URL + "/metrics")
-	assert.NoError(t, err)
-	assert.Equal(t, http.StatusOK, res.StatusCode)
+	require.NoError(t, err)
+	require.Equal(t, http.StatusOK, res.StatusCode)
 }
 
 // GetKeys supports only the timestamp and snapshot key endpoints
@@ -87,8 +87,8 @@ func TestGetKeysEndpoint(t *testing.T) {
 	for role, expectedStatus := range rolesToStatus {
 		res, err := http.Get(
 			fmt.Sprintf("%s/v2/gun/_trust/tuf/%s.key", ts.URL, role))
-		assert.NoError(t, err)
-		assert.Equal(t, expectedStatus, res.StatusCode)
+		require.NoError(t, err)
+		require.Equal(t, expectedStatus, res.StatusCode)
 	}
 }
 
@@ -107,7 +107,7 @@ func TestGetRoleByHash(t *testing.T) {
 		},
 	}
 	j, err := json.Marshal(&ts)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	store.UpdateCurrent("gun", storage.MetaUpdate{
 		Role:    data.CanonicalTimestampRole,
 		Version: 1,
@@ -127,7 +127,7 @@ func TestGetRoleByHash(t *testing.T) {
 		},
 	}
 	newTS, err := json.Marshal(&ts)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	store.UpdateCurrent("gun", storage.MetaUpdate{
 		Role:    data.CanonicalTimestampRole,
 		Version: 1,
@@ -150,8 +150,8 @@ func TestGetRoleByHash(t *testing.T) {
 		data.CanonicalTimestampRole,
 		checksum,
 	))
-	assert.NoError(t, err)
-	assert.Equal(t, http.StatusOK, res.StatusCode)
+	require.NoError(t, err)
+	require.Equal(t, http.StatusOK, res.StatusCode)
 	// if content is equal, checksums are guaranteed to be equal
 	verifyGetResponse(t, res, j)
 }
@@ -162,7 +162,7 @@ func TestGetRoleByHash(t *testing.T) {
 func TestGetCurrentRole(t *testing.T) {
 	store := storage.NewMemStorage()
 	metadata, _, err := testutils.NewRepoMetadata("gun")
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// need both the snapshot and the timestamp, because when getting the current
 	// timestamp the server checks to see if it's out of date (there's a new snapshot)
@@ -193,18 +193,18 @@ func TestGetCurrentRole(t *testing.T) {
 		serv.URL,
 		data.CanonicalTimestampRole,
 	))
-	assert.NoError(t, err)
-	assert.Equal(t, http.StatusOK, res.StatusCode)
+	require.NoError(t, err)
+	require.Equal(t, http.StatusOK, res.StatusCode)
 	verifyGetResponse(t, res, metadata[data.CanonicalTimestampRole])
 }
 
 // Verifies that the body is as expected  and that there are cache control headers
 func verifyGetResponse(t *testing.T, r *http.Response, expectedBytes []byte) {
 	body, err := ioutil.ReadAll(r.Body)
-	assert.NoError(t, err)
-	assert.True(t, bytes.Equal(expectedBytes, body))
+	require.NoError(t, err)
+	require.True(t, bytes.Equal(expectedBytes, body))
 
-	assert.NotEqual(t, "", r.Header.Get("Cache-Control"))
-	assert.NotEqual(t, "", r.Header.Get("Last-Modified"))
-	assert.Equal(t, "", r.Header.Get("Pragma"))
+	require.NotEqual(t, "", r.Header.Get("Cache-Control"))
+	require.NotEqual(t, "", r.Header.Get("Last-Modified"))
+	require.Equal(t, "", r.Header.Get("Pragma"))
 }
