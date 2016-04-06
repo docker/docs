@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math/rand"
 	"sort"
+	"testing"
 	"time"
 
 	"github.com/docker/go/canonical/json"
@@ -13,6 +14,7 @@ import (
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/utils"
 	fuzz "github.com/google/gofuzz"
+	"github.com/stretchr/testify/require"
 
 	tuf "github.com/docker/notary/tuf"
 	"github.com/docker/notary/tuf/signed"
@@ -50,6 +52,19 @@ func CreateKey(cs signed.CryptoService, gun, role, keyAlgorithm string) (data.Pu
 
 	}
 	return key, nil
+}
+
+// CopyKeys copies keys of a particular role to a new cryptoservice, and returns that cryptoservice
+func CopyKeys(t *testing.T, from signed.CryptoService, roles ...string) signed.CryptoService {
+	memKeyStore := trustmanager.NewKeyMemoryStore(passphrase.ConstantRetriever("pass"))
+	for _, role := range roles {
+		for _, keyID := range from.ListKeys(role) {
+			key, _, err := from.GetPrivateKey(keyID)
+			require.NoError(t, err)
+			memKeyStore.AddKey(trustmanager.KeyInfo{Role: role}, key)
+		}
+	}
+	return cryptoservice.NewCryptoService(memKeyStore)
 }
 
 // EmptyRepo creates an in memory crypto service

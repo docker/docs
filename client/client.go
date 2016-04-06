@@ -642,7 +642,6 @@ func (r *NotaryRepository) publish(cl changelist.Changelist) error {
 // a not yet published repo or a possibly obsolete local copy) into
 // r.tufRepo.  This attempts to load metadata for all roles.  Since server
 // snapshots are supported, if the snapshot metadata fails to load, that's ok.
-// This can also be unified with some cache reading tools from tuf/client.
 // This assumes that bootstrapRepo is only used by Publish() or RotateKey()
 func (r *NotaryRepository) bootstrapRepo() error {
 	b := tuf.NewRepoBuilder(r.gun, r.CryptoService, r.trustPinning)
@@ -653,6 +652,9 @@ func (r *NotaryRepository) bootstrapRepo() error {
 		jsonBytes, err := r.fileStore.GetMeta(role, -1)
 		if err != nil {
 			if _, ok := err.(store.ErrMetaNotFound); ok &&
+				// server snapshots are supported, and server timestamp management
+				// is required, so if either of these fail to load that's ok - especially
+				// if the repo is new
 				role == data.CanonicalSnapshotRole || role == data.CanonicalTimestampRole {
 				continue
 			}
@@ -767,7 +769,7 @@ func (r *NotaryRepository) Update(forWrite bool) error {
 // Returns a tufclient.Client for the remote server, which may not be actually
 // operational (if the URL is invalid but a root.json is cached).
 func (r *NotaryRepository) bootstrapClient(checkInitialized bool) (*tufclient.Client, error) {
-	version := 0
+	minVersion := 0
 	oldBuilder := tuf.NewRepoBuilder(r.gun, r.CryptoService, r.trustPinning)
 	var newBuilder tuf.RepoBuilder
 
@@ -776,16 +778,16 @@ func (r *NotaryRepository) bootstrapClient(checkInitialized bool) (*tufclient.Cl
 	// us to download a new root and perform a rotation.
 	if rootJSON, err := r.fileStore.GetMeta(data.CanonicalRootRole, -1); err == nil {
 		// if we can't load the cached root, fail hard because that is how we pin trust
-		if err := oldBuilder.Load(data.CanonicalRootRole, rootJSON, version, true); err != nil {
+		if err := oldBuilder.Load(data.CanonicalRootRole, rootJSON, minVersion, true); err != nil {
 			return nil, err
 		}
 
 		// use the old builder to bootstrap the new builder - we're just going to
 		// verify the same data again, but with this time we want to validate the expiry
-		version = oldBuilder.GetLoadedVersion(data.CanonicalRootRole)
+		minVersion = oldBuilder.GetLoadedVersion(data.CanonicalRootRole)
 		newBuilder = oldBuilder.BootstrapNewBuilder()
 		// ignore error - if there's an error, the root won't be loaded
-		newBuilder.Load(data.CanonicalRootRole, rootJSON, version, false)
+		newBuilder.Load(data.CanonicalRootRole, rootJSON, minVersion, false)
 	}
 
 	if newBuilder == nil {
@@ -810,7 +812,7 @@ func (r *NotaryRepository) bootstrapClient(checkInitialized bool) (*tufclient.Cl
 
 		if !newBuilder.IsLoaded(data.CanonicalRootRole) {
 			// we always want to use the downloaded root if we couldn't load from cache
-			if err := newBuilder.Load(data.CanonicalRootRole, tmpJSON, version, false); err != nil {
+			if err := newBuilder.Load(data.CanonicalRootRole, tmpJSON, minVersion, false); err != nil {
 				return nil, err
 			}
 

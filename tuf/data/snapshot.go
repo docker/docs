@@ -22,10 +22,10 @@ type Snapshot struct {
 	Meta Files `json:"meta"`
 }
 
-// isValidSnapshotStructure returns an error, or nil, depending on whether the content of the
+// IsValidSnapshotStructure returns an error, or nil, depending on whether the content of the
 // struct is valid for snapshot metadata.  This does not check signatures or expiry, just that
 // the metadata content is valid.
-func isValidSnapshotStructure(s Snapshot) error {
+func IsValidSnapshotStructure(s Snapshot) error {
 	expectedType := TUFTypes[CanonicalSnapshotRole]
 	if s.Type != expectedType {
 		return ErrInvalidMetadata{
@@ -157,7 +157,7 @@ func SnapshotFromSigned(s *Signed) (*SignedSnapshot, error) {
 	if err := defaultSerializer.Unmarshal(*s.Signed, &sp); err != nil {
 		return nil, err
 	}
-	if err := isValidSnapshotStructure(sp); err != nil {
+	if err := IsValidSnapshotStructure(sp); err != nil {
 		return nil, err
 	}
 	sigs := make([]Signature, len(s.Signatures))
