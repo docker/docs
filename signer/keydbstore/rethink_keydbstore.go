@@ -50,6 +50,7 @@ func NewRethinkDBKeyStore(passphraseRetriever passphrase.Retriever, defaultPassA
 	cachedKeys := make(map[string]data.PrivateKey)
 
 	return &RethinkDBKeyStore{
+		lock:             &sync.Mutex{},
 		sess:             rethinkSession,
 		defaultPassAlias: defaultPassAlias,
 		retriever:        passphraseRetriever,
