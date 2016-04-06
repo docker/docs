@@ -14,7 +14,7 @@ const (
 var (
 	tufFiles = rethinkdb.Table{
 		Name:       RDBTUFFile{}.TableName(),
-		PrimaryKey: []string{"gun", "role", "version"},
+		PrimaryKey: "gun_role_version",
 		SecondaryIndexes: map[string][]string{
 			rdbSha256Idx:        nil,
 			"gun":               nil,

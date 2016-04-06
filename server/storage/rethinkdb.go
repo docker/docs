@@ -13,11 +13,12 @@ import (
 // RDBTUFFile is a tuf file record
 type RDBTUFFile struct {
 	rethinkdb.Timing
-	Gun     string `gorethink:"gun"`
-	Role    string `gorethink:"role"`
-	Version int    `gorethink:"version"`
-	Sha256  string `gorethink:"sha256"`
-	Data    []byte `gorethink:"data"`
+	GunRoleVersion []interface{} `gorethink:"gun_role_version"`
+	Gun            string        `gorethink:"gun"`
+	Role           string        `gorethink:"role"`
+	Version        int           `gorethink:"version"`
+	Sha256         string        `gorethink:"sha256"`
+	Data           []byte        `gorethink:"data"`
 }
 
 // TableName returns the table name for the record type
@@ -99,11 +100,12 @@ func (rdb RethinkDB) UpdateCurrent(gun string, update MetaUpdate) error {
 			CreatedAt: now,
 			UpdatedAt: now,
 		},
-		Gun:     gun,
-		Role:    update.Role,
-		Version: update.Version,
-		Sha256:  hex.EncodeToString(checksum[:]),
-		Data:    update.Data,
+		GunRoleVersion: []interface{}{gun, update.Role, update.Version},
+		Gun:            gun,
+		Role:           update.Role,
+		Version:        update.Version,
+		Sha256:         hex.EncodeToString(checksum[:]),
+		Data:           update.Data,
 	}
 	_, err := gorethink.DB(rdb.dbName).Table(file.TableName()).Insert(
 		file,
