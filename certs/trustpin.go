@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"github.com/docker/notary"
 	"github.com/docker/notary/trustmanager"
-	"github.com/docker/notary/tuf/utils"
 	"strings"
 )
 
@@ -32,36 +31,35 @@ func NewTrustPinChecker(trustPinConfig notary.TrustPinConfig, gun string) (Trust
 	// Determine the mode, and if it's even valid
 	if _, ok := trustPinConfig.Certs[gun]; ok {
 		trustPinChecker.mode = certs
-	} else if utils.ContainsKeyPrefix(trustPinConfig.CA, gun) {
-		trustPinChecker.mode = ca
-		for caGunPrefix, caFilepath := range trustPinConfig.CA {
-			if strings.HasPrefix(gun, caGunPrefix) {
-				// Try to add the CA cert to our certificate store,
-				// and use it to validate certs in the root.json later
-				caCert, err := trustmanager.LoadCertFromFile(caFilepath)
-				if err != nil {
-					return TrustPinChecker{}, fmt.Errorf("could not load root cert from CA path")
-				}
-				if err = trustmanager.ValidateCertificate(caCert); err != nil {
-					return TrustPinChecker{}, fmt.Errorf("invalid CA cert provided")
-				}
-				// Now only consider certificates that are direct children from this CA cert, overwriting allValidCerts
-				caRootPool := x509.NewCertPool()
-				caRootPool.AddCert(caCert)
-				if err != nil {
-					return TrustPinChecker{}, fmt.Errorf("unable to initialize CA cert pool")
-				}
-				trustPinChecker.pinnedCAPool = caRootPool
-				return trustPinChecker, nil
-			}
-		}
-
-	} else if trustPinConfig.TOFU {
-		trustPinChecker.mode = tofus
-	} else {
-		return TrustPinChecker{}, fmt.Errorf("no trust pinning specified")
+		return trustPinChecker, nil
 	}
-	return trustPinChecker, nil
+
+	if caFilepath, err := trustPinChecker.getCAFilepathByPrefix(gun); err == nil {
+		trustPinChecker.mode = ca
+		// Try to add the CA certs from its bundle file to our certificate store,
+		// and use it to validate certs in the root.json later
+		caCerts, err := trustmanager.LoadCertBundleFromFile(caFilepath)
+		if err != nil {
+			return TrustPinChecker{}, fmt.Errorf("could not load root cert from CA path")
+		}
+		if err = trustmanager.ValidateCertificate(caCerts); err != nil {
+			return TrustPinChecker{}, fmt.Errorf("invalid CA cert provided")
+		}
+		// Now only consider certificates that are direct children from this CA cert, overwriting allValidCerts
+		caRootPool := x509.NewCertPool()
+		caRootPool.AddCert(caCerts)
+		if err != nil {
+			return TrustPinChecker{}, fmt.Errorf("unable to initialize CA cert pool")
+		}
+		trustPinChecker.pinnedCAPool = caRootPool
+		return trustPinChecker, nil
+	}
+
+	if trustPinConfig.TOFU {
+		trustPinChecker.mode = tofus
+		return trustPinChecker, nil
+	}
+	return TrustPinChecker{}, fmt.Errorf("invalid trust pinning specified")
 }
 
 func (t TrustPinChecker) checkCert(leafCert *x509.Certificate, intCerts []*x509.Certificate) bool {
@@ -87,4 +85,23 @@ func (t TrustPinChecker) checkCert(leafCert *x509.Certificate, intCerts []*x509.
 		return true
 	}
 	return false
+}
+
+// Will return the CA filepath corresponding to the most specific (longest) entry in the map that is still a prefix
+// of the provided gun.  Returns an error if no entry matches this GUN as a prefix.
+func (t TrustPinChecker) getCAFilepathByPrefix(gun string) (string, error) {
+	specificGUN := ""
+	specificCAFilepath := ""
+	foundCA := false
+	for gunPrefix, caFilepath := range t.config.CA {
+		if strings.HasPrefix(gun, gunPrefix) && len(gunPrefix) >= len(specificGUN) {
+			specificGUN = gunPrefix
+			specificCAFilepath = caFilepath
+			foundCA = true
+		}
+	}
+	if !foundCA {
+		return "", fmt.Errorf("could not find pinned CA for GUN: %s\n", gun)
+	}
+	return specificCAFilepath, nil
 }

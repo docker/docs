@@ -384,7 +384,7 @@ func TestConfigFileTrustPinning(t *testing.T) {
 		CAFile:     "../../fixtures/root-ca.crt",
 		ClientAuth: tls.RequireAndVerifyClientCert,
 	})
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	s.StartTLS()
 	defer s.Close()
 
@@ -406,7 +406,7 @@ func TestConfigFileTrustPinning(t *testing.T) {
 	// set a config file, so it doesn't check ~/.notary/config.json by default,
 	// and execute a random command so that the flags are parsed
 	cwd, err := os.Getwd()
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	cmd := commander.GetCommand()
 	cmd.SetArgs([]string{
@@ -416,17 +416,17 @@ func TestConfigFileTrustPinning(t *testing.T) {
 		"--tlskey", "../../fixtures/notary-server.key"})
 	cmd.SetOutput(new(bytes.Buffer)) // eat the output
 	err = cmd.Execute()
-	assert.Error(t, err, "there was no repository, so list should have failed")
-	assert.NotContains(t, err.Error(), "TLS", "there was no TLS error though!")
+	require.Error(t, err, "there was no repository, so list should have failed")
+	require.NotContains(t, err.Error(), "TLS", "there was no TLS error though!")
 
 	// Check that tofu was set correctly
 	config, err := commander.parseConfig()
-	assert.NoError(t, err)
-	assert.Equal(t, true, config.GetBool("trust_pinning.tofu"))
+	require.NoError(t, err)
+	require.Equal(t, true, config.GetBool("trust_pinning.tofu"))
 
 	// validate that we actually managed to connect and attempted to download the root though
-	assert.Len(t, m.gotten, 1)
-	assert.Equal(t, m.gotten[0], "repo.root")
+	require.Len(t, m.gotten, 1)
+	require.Equal(t, m.gotten[0], "repo.root")
 
 	tempDir2 := tempDirWithConfig(t, fmt.Sprintf(`{
 		"remote_server": {
@@ -447,15 +447,15 @@ func TestConfigFileTrustPinning(t *testing.T) {
 		"--tlskey", "../../fixtures/notary-server.key"})
 	cmd.SetOutput(new(bytes.Buffer)) // eat the output
 	err = cmd.Execute()
-	assert.Error(t, err, "there was no repository, so list should have failed")
-	assert.NotContains(t, err.Error(), "TLS", "there was no TLS error though!")
+	require.Error(t, err, "there was no repository, so list should have failed")
+	require.NotContains(t, err.Error(), "TLS", "there was no TLS error though!")
 
 	config, err = commander.parseConfig()
-	assert.NoError(t, err)
-	assert.Equal(t, false, config.GetBool("trust_pinning.tofu"))
+	require.NoError(t, err)
+	require.Equal(t, false, config.GetBool("trust_pinning.tofu"))
 
 	// Even though TOFUS will fail, we'll have successfully parsed the config and attempted to retrieve the root
-	assert.Len(t, m.gotten, 2)
+	require.Len(t, m.gotten, 2)
 
 	tempDir = tempDirWithConfig(t, fmt.Sprintf(`{
 		"remote_server": {
@@ -478,15 +478,15 @@ func TestConfigFileTrustPinning(t *testing.T) {
 		"--tlskey", "../../fixtures/notary-server.key"})
 	cmd.SetOutput(new(bytes.Buffer)) // eat the output
 	err = cmd.Execute()
-	assert.Error(t, err, "there was no repository, so list should have failed")
-	assert.NotContains(t, err.Error(), "TLS", "there was no TLS error though!")
+	require.Error(t, err, "there was no repository, so list should have failed")
+	require.NotContains(t, err.Error(), "TLS", "there was no TLS error though!")
 
 	config, err = commander.parseConfig()
-	assert.NoError(t, err)
-	assert.Equal(t, strings.Repeat("x", notary.Sha256HexSize), config.GetStringMap("trust_pinning.certs")["repo3"])
+	require.NoError(t, err)
+	require.Equal(t, strings.Repeat("x", notary.Sha256HexSize), config.GetStringMap("trust_pinning.certs")["repo3"])
 
 	// Even though specified certs will fail, we'll have successfully parsed the config and attempted to retrieve the root
-	assert.Len(t, m.gotten, 3)
+	require.Len(t, m.gotten, 3)
 
 	tempDir = tempDirWithConfig(t, fmt.Sprintf(`{
 		"remote_server": {
@@ -509,13 +509,13 @@ func TestConfigFileTrustPinning(t *testing.T) {
 		"--tlskey", "../../fixtures/notary-server.key"})
 	cmd.SetOutput(new(bytes.Buffer)) // eat the output
 	err = cmd.Execute()
-	assert.Error(t, err, "there was no repository, so list should have failed")
-	assert.NotContains(t, err.Error(), "TLS", "there was no TLS error though!")
+	require.Error(t, err, "there was no repository, so list should have failed")
+	require.NotContains(t, err.Error(), "TLS", "there was no TLS error though!")
 
 	config, err = commander.parseConfig()
-	assert.NoError(t, err)
-	assert.Equal(t, "root-ca.crt", config.GetStringMap("trust_pinning.ca")["repo4"])
+	require.NoError(t, err)
+	require.Equal(t, "root-ca.crt", config.GetStringMap("trust_pinning.ca")["repo4"])
 
 	// Even though specified ca will fail, we'll have successfully parsed the config and attempted to retrieve the root
-	assert.Len(t, m.gotten, 4)
+	require.Len(t, m.gotten, 4)
 }

@@ -67,16 +67,6 @@ func StrSliceContainsI(ss []string, s string) bool {
 	return false
 }
 
-// ContainsKeyPrefix checks if the given string map contains a key that prefixes the desired key
-func ContainsKeyPrefix(smap map[string]string, s string) bool {
-	for k := range smap {
-		if strings.HasPrefix(s, k) {
-			return true
-		}
-	}
-	return false
-}
-
 // FileExists returns true if a file (or dir) exists at the given path,
 // false otherwise
 func FileExists(path string) bool {

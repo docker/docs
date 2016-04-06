@@ -219,7 +219,7 @@ func TestValidateRootWithoutTOFUS(t *testing.T) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+	require.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	// Create a X509Store
 	trustPath := filepath.Join(tempBaseDir, notary.TrustedCertsDir)
@@ -227,7 +227,7 @@ func TestValidateRootWithoutTOFUS(t *testing.T) {
 		trustPath,
 		trustmanager.FilterCertsExpiredSha1,
 	)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// Execute our template
 	templ, _ := template.New("SignedRSARootTemplate").Parse(signedRSARootTemplate)
@@ -238,7 +238,7 @@ func TestValidateRootWithoutTOFUS(t *testing.T) {
 
 	// This call to ValidateRoot will fail since we are explicitly disabling TOFU and have no local certs
 	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{TOFU: false})
-	assert.Error(t, err)
+	require.Error(t, err)
 }
 
 func TestValidateRootWithPinnedCert(t *testing.T) {
@@ -248,7 +248,7 @@ func TestValidateRootWithPinnedCert(t *testing.T) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+	require.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	// Create a X509Store
 	trustPath := filepath.Join(tempBaseDir, notary.TrustedCertsDir)
@@ -256,7 +256,7 @@ func TestValidateRootWithPinnedCert(t *testing.T) {
 		trustPath,
 		trustmanager.FilterCertsExpiredSha1,
 	)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// Execute our template
 	templ, _ := template.New("SignedRSARootTemplate").Parse(signedRSARootTemplate)
@@ -267,7 +267,7 @@ func TestValidateRootWithPinnedCert(t *testing.T) {
 
 	// This call to ValidateRoot should succeed with the correct Cert ID (same as root public key ID)
 	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string]string{"docker.com/notary": rootPubKeyID}})
-	assert.NoError(t, err)
+	require.NoError(t, err)
 }
 
 func TestValidateRootFailuresWithPinnedCert(t *testing.T) {
@@ -277,7 +277,7 @@ func TestValidateRootFailuresWithPinnedCert(t *testing.T) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+	require.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	// Create a X509Store
 	trustPath := filepath.Join(tempBaseDir, notary.TrustedCertsDir)
@@ -285,7 +285,7 @@ func TestValidateRootFailuresWithPinnedCert(t *testing.T) {
 		trustPath,
 		trustmanager.FilterCertsExpiredSha1,
 	)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// Execute our template
 	templ, _ := template.New("SignedRSARootTemplate").Parse(signedRSARootTemplate)
@@ -296,23 +296,23 @@ func TestValidateRootFailuresWithPinnedCert(t *testing.T) {
 
 	// This call to ValidateRoot should fail due to an incorrect cert ID
 	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string]string{"docker.com/notary": "ABSOLUTELY NOT A CERT ID"}})
-	assert.Error(t, err)
+	require.Error(t, err)
 
 	// This call to ValidateRoot should fail due to an empty cert ID
 	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string]string{"docker.com/notary": ""}})
-	assert.Error(t, err)
+	require.Error(t, err)
 
 	// This call to ValidateRoot should fail due to an invalid GUN (even though the cert ID is correct), and TOFUS defaults to false
 	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string]string{"not_a_gun": rootPubKeyID}, TOFU: false})
-	assert.Error(t, err)
+	require.Error(t, err)
 
 	// This call to ValidateRoot should fail due to an invalid cert ID, even though it's a valid key ID for targets
 	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string]string{"docker.com/notary": targetsPubKeyID}})
-	assert.Error(t, err)
+	require.Error(t, err)
 
 	// This call to ValidateRoot should succeed because we fall through to TOFUS even though we have no matching GUNs under Certs
 	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string]string{"not_a_gun": rootPubKeyID}, TOFU: true})
-	assert.NoError(t, err)
+	require.NoError(t, err)
 }
 
 func TestValidateRootWithPinnedCA(t *testing.T) {
@@ -322,7 +322,7 @@ func TestValidateRootWithPinnedCA(t *testing.T) {
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	defer os.RemoveAll(tempBaseDir)
-	assert.NoError(t, err, "failed to create a temporary directory: %s", err)
+	require.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	// Create a X509Store
 	trustPath := filepath.Join(tempBaseDir, notary.TrustedCertsDir)
@@ -330,7 +330,7 @@ func TestValidateRootWithPinnedCA(t *testing.T) {
 		trustPath,
 		trustmanager.FilterCertsExpiredSha1,
 	)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	templ, _ := template.New("SignedRSARootTemplate").Parse(signedRSARootTemplate)
 	templ.Execute(&signedRootBytes, SignedRSARootTemplate{RootPem: validPEMEncodedRSARoot})
@@ -339,42 +339,42 @@ func TestValidateRootWithPinnedCA(t *testing.T) {
 
 	// This call to ValidateRoot will fail because we have an invalid path for the CA
 	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{CA: map[string]string{"docker.com/notary": filepath.Join(tempBaseDir, "nonexistent")}})
-	assert.Error(t, err)
+	require.Error(t, err)
 
 	// This call to ValidateRoot will fail because we have no valid GUNs to use, and TOFUS is disabled
 	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{CA: map[string]string{"othergun": filepath.Join(tempBaseDir, "nonexistent")}, TOFU: false})
-	assert.Error(t, err)
+	require.Error(t, err)
 
 	// Write an invalid CA cert (not even a PEM) to the tempDir and ensure validation fails when using it
 	invalidCAFilepath := filepath.Join(tempBaseDir, "invalid.ca")
-	assert.NoError(t, ioutil.WriteFile(invalidCAFilepath, []byte("ABSOLUTELY NOT A PEM"), 0644))
+	require.NoError(t, ioutil.WriteFile(invalidCAFilepath, []byte("ABSOLUTELY NOT A PEM"), 0644))
 
 	// Using this invalid CA cert should fail on ValidateRoot
 	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{CA: map[string]string{"docker.com/notary": invalidCAFilepath}, TOFU: false})
-	assert.Error(t, err)
+	require.Error(t, err)
 
 	validCAFilepath := "../fixtures/root-ca.crt"
 
 	// If we pass an invalid Certs entry in addition to this valid CA entry, since Certs has priority for pinning we will fail
 	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string]string{"docker.com/notary": "invalidID"}, CA: map[string]string{"docker.com/notary": validCAFilepath}, TOFU: false})
-	assert.Error(t, err)
+	require.Error(t, err)
 
 	// Now construct a new root with a valid cert chain, such that signatures are correct over the 'notary-signer' GUN.  Pin the root-ca and validate
 	leafCert, err := trustmanager.LoadCertFromFile("../fixtures/notary-signer.crt")
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	pemLeafBytes := trustmanager.CertToPEM(leafCert)
 	newRootLeafKey := data.NewPublicKey(data.RSAx509Key, pemLeafBytes)
 
 	intermediateCert, err := trustmanager.LoadCertFromFile("../fixtures/intermediate-ca.crt")
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	pemChainBytes, err := trustmanager.CertChainToPEM([]*x509.Certificate{leafCert, intermediateCert})
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	newRootKey := data.NewPublicKey(data.RSAx509Key, pemChainBytes)
 
 	rootRole, err := data.NewRole(data.CanonicalRootRole, 1, []string{newRootKey.ID()}, nil)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	testRoot, err := data.NewRoot(
 		map[string]data.PublicKey{newRootKey.ID(): newRootKey},
@@ -385,31 +385,31 @@ func TestValidateRootWithPinnedCA(t *testing.T) {
 			data.CanonicalSnapshotRole:  &rootRole.RootRole},
 		false,
 	)
-	assert.NoError(t, err, "Failed to create new root")
+	require.NoError(t, err, "Failed to create new root")
 
 	keyReader, err := os.Open("../fixtures/notary-signer.key")
-	assert.NoError(t, err, "could not open key file")
+	require.NoError(t, err, "could not open key file")
 	pemBytes, err := ioutil.ReadAll(keyReader)
-	assert.NoError(t, err, "could not read key file")
+	require.NoError(t, err, "could not read key file")
 	privKey, err := trustmanager.ParsePEMPrivateKey(pemBytes, "")
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	store, err := trustmanager.NewKeyFileStore(tempBaseDir, passphraseRetriever)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	cs := cryptoservice.NewCryptoService(store)
 
 	err = store.AddKey(trustmanager.KeyInfo{Role: data.CanonicalRootRole, Gun: "notary-signer"}, privKey)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	newTestSignedRoot, err := testRoot.ToSigned()
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	err = signed.Sign(cs, newTestSignedRoot, newRootLeafKey)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	// Check that we validate correctly against a pinned CA and provided bundle
 	err = ValidateRoot(certStore, newTestSignedRoot, "notary-signer", notary.TrustPinConfig{CA: map[string]string{"notary-signer": validCAFilepath}, TOFU: false})
-	assert.NoError(t, err)
+	require.NoError(t, err)
 }
 
 // TestValidateSuccessfulRootRotation runs through a full root certificate rotation
