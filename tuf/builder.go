@@ -4,10 +4,12 @@ import (
 	"fmt"
 
 	"github.com/docker/go/canonical/json"
+	"github.com/docker/notary"
 
 	"github.com/docker/notary/trustpinning"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
+	"github.com/docker/notary/tuf/utils"
 )
 
 // ErrBuildDone is returned when any functions are called on RepoBuilder, and it
@@ -34,6 +36,35 @@ func (e ErrInvalidBuilderInput) Error() string {
 	return e.msg
 }
 
+// ConsistentInfo is the consistent name and size of a role, or just the name
+// of the role and a -1 if no file metadata for the role is known
+type ConsistentInfo struct {
+	RoleName string
+	fileMeta data.FileMeta
+}
+
+// ChecksumKnown determines whether or not we know enough to provide a size and
+// consistent name
+func (c ConsistentInfo) ChecksumKnown() bool {
+	// empty hash, no size : this is the zero value
+	return len(c.fileMeta.Hashes) > 0 || c.fileMeta.Length != 0
+}
+
+// ConsistentName returns the consistent name (rolename.sha256) for the role
+// given this consistent information
+func (c ConsistentInfo) ConsistentName() string {
+	return utils.ConsistentName(c.RoleName, c.fileMeta.Hashes[notary.SHA256])
+}
+
+// Length returns the expected length of the role as per this consistent
+// information - if no checksum information is known, the size is -1.
+func (c ConsistentInfo) Length() int64 {
+	if c.ChecksumKnown() {
+		return c.fileMeta.Length
+	}
+	return -1
+}
+
 // RepoBuilder is an interface for an object which builds a tuf.Repo
 type RepoBuilder interface {
 	Load(roleName string, content []byte, minVersion int, allowExpired bool) error
@@ -41,8 +72,11 @@ type RepoBuilder interface {
 	GenerateTimestamp(prev *data.SignedTimestamp) ([]byte, int, error)
 	Finish() (*Repo, error)
 	BootstrapNewBuilder() RepoBuilder
+
+	// informative functions
 	IsLoaded(roleName string) bool
-	GetRepo() *Repo
+	GetLoadedVersion(roleName string) int
+	GetConsistentInfo(roleName string) ConsistentInfo
 }
 
 // NewRepoBuilder is the only way to get a pre-built RepoBuilder
@@ -71,11 +105,7 @@ type repoBuilder struct {
 
 	// needed for bootstrapping a builder to validate a new root
 	prevRoot     *data.SignedRoot
-	rootChecksum *data.Hashes
-}
-
-func (rb *repoBuilder) GetRepo() *Repo {
-	return rb.repo
+	rootChecksum *data.FileMeta
 }
 
 func (rb *repoBuilder) Finish() (*Repo, error) {
@@ -88,11 +118,11 @@ func (rb *repoBuilder) Finish() (*Repo, error) {
 }
 
 func (rb *repoBuilder) BootstrapNewBuilder() RepoBuilder {
-	var rootChecksum *data.Hashes
+	var rootChecksum *data.FileMeta
 
 	if rb.repo.Snapshot != nil {
-		hashes := rb.repo.Snapshot.Signed.Meta[data.CanonicalRootRole].Hashes
-		rootChecksum = &hashes
+		meta := rb.repo.Snapshot.Signed.Meta[data.CanonicalRootRole]
+		rootChecksum = &meta
 	}
 
 	return &repoBuilder{
@@ -162,6 +192,49 @@ func (rb *repoBuilder) IsLoaded(roleName string) bool {
 	default:
 		return rb.repo.Targets[roleName] != nil
 	}
+}
+
+// GetLoadedVersion returns the metadata version, if it is loaded, or -1 otherwise
+func (rb *repoBuilder) GetLoadedVersion(roleName string) int {
+	switch {
+	case roleName == data.CanonicalRootRole && rb.repo.Root != nil:
+		return rb.repo.Root.Signed.Version
+	case roleName == data.CanonicalSnapshotRole && rb.repo.Snapshot != nil:
+		return rb.repo.Snapshot.Signed.Version
+	case roleName == data.CanonicalTimestampRole && rb.repo.Timestamp != nil:
+		return rb.repo.Timestamp.Signed.Version
+	default:
+		if tgts, ok := rb.repo.Targets[roleName]; ok {
+			return tgts.Signed.Version
+		}
+	}
+
+	return -1
+}
+
+// GetConsistentInfo returns the consistent name and size of a role, if it is known,
+// otherwise just the rolename and a -1 for size
+func (rb *repoBuilder) GetConsistentInfo(roleName string) ConsistentInfo {
+	info := ConsistentInfo{RoleName: roleName} // starts out with unknown filemeta
+	switch roleName {
+	case data.CanonicalTimestampRole:
+		// we do not want to get a consistent timestamp, but we do want to
+		// limit its size
+		info.fileMeta.Length = notary.MaxTimestampSize
+	case data.CanonicalSnapshotRole:
+		if rb.repo.Timestamp != nil {
+			info.fileMeta = rb.repo.Timestamp.Signed.Meta[roleName]
+		}
+	case data.CanonicalRootRole:
+		if rb.rootChecksum != nil {
+			info.fileMeta = *rb.rootChecksum
+		}
+	default:
+		if rb.repo.Snapshot != nil {
+			info.fileMeta = rb.repo.Snapshot.Signed.Meta[roleName]
+		}
+	}
+	return info
 }
 
 func (rb *repoBuilder) GenerateSnapshot(prev *data.SignedSnapshot) ([]byte, int, error) {
@@ -461,7 +534,7 @@ func (rb *repoBuilder) validateCachedSnapshotChecksums(sn *data.SignedSnapshot) 
 func (rb *repoBuilder) validateChecksumFor(content []byte, roleName string) error {
 	// validate the bootstrap checksum for root, if provided
 	if roleName == data.CanonicalRootRole && rb.rootChecksum != nil {
-		if err := data.CheckHashes(content, roleName, *rb.rootChecksum); err != nil {
+		if err := data.CheckHashes(content, roleName, rb.rootChecksum.Hashes); err != nil {
 			return err
 		}
 	}
@@ -533,7 +606,7 @@ func (rb *repoBuilder) getChecksumsFor(role string) *data.Hashes {
 		hashes = rb.repo.Timestamp.Signed.Meta[data.CanonicalSnapshotRole].Hashes
 	default:
 		if rb.repo.Snapshot == nil {
-			return rb.rootChecksum
+			return nil
 		}
 		hashes = rb.repo.Snapshot.Signed.Meta[role].Hashes
 	}

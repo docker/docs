@@ -236,8 +236,11 @@ func TestUpdateReplacesCorruptOrMissingMetadata(t *testing.T) {
 			for _, forWrite := range []bool{true, false} {
 				require.NoError(t, messItUp(repoSwizzler, role), "could not fuzz %s (%s)", role, text)
 				err := repo.Update(forWrite)
-				// if this is a root role, we should error if it's corrupted or invalid data; missing metadata is ok
-				if role == data.CanonicalRootRole && expt.desc != "missing metadata" {
+				// If this is a root role, we should error if it's corrupted or invalid data;
+				// missing metadata is ok.
+				if role == data.CanonicalRootRole && expt.desc != "missing metadata" &&
+					expt.desc != "expired metadata" {
+
 					require.Error(t, err, "%s for %s: expected to error when bootstrapping root", text, role)
 					// revert our original metadata
 					for role := range origMeta {
@@ -1252,9 +1255,9 @@ func testUpdateLocalAndRemoteRootCorrupt(t *testing.T, forWrite bool, localExpt,
 	require.Error(t, err, "expected failure updating when %s", msg)
 
 	expectedErrs := serverExpt.expectErrs
-	// if the local root is corrupt or invalid, we won't even try to update and
-	// will fail with the local metadata error
-	if localExpt.desc != "missing metadata" {
+	// If the local root is corrupt or invalid, we won't even try to update and
+	// will fail with the local metadata error.  Missing or expired metadata is ok.
+	if localExpt.desc != "missing metadata" && localExpt.desc != "expired metadata" {
 		expectedErrs = localExpt.expectErrs
 	}
 
