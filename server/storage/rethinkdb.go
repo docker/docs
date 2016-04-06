@@ -59,9 +59,7 @@ func NewRethinkDBStorage(dbName string, sess *gorethink.Session) RethinkDB {
 func (rdb RethinkDB) GetKey(gun, role string) (cipher string, public []byte, err error) {
 	var key RDBKey
 	res, err := gorethink.DB(rdb.dbName).Table(key.TableName()).GetAllByIndex(
-		rdbGunRoleIdx,
-		gun,
-		role,
+		rdbGunRoleIdx, []string{gun, role},
 	).Run(rdb.sess)
 	if err != nil {
 		return "", nil, err
@@ -143,9 +141,7 @@ func (rdb RethinkDB) UpdateMany(gun string, updates []MetaUpdate) error {
 func (rdb RethinkDB) GetCurrent(gun, role string) (created *time.Time, data []byte, err error) {
 	file := RDBTUFFile{}
 	res, err := gorethink.DB(rdb.dbName).Table(file.TableName()).GetAllByIndex(
-		rdbGunRoleIdx,
-		gun,
-		role,
+		rdbGunRoleIdx, []string{gun, role},
 	).OrderBy(gorethink.Desc("version")).Run(rdb.sess)
 	if err != nil {
 		return nil, nil, err
@@ -167,10 +163,7 @@ func (rdb RethinkDB) GetCurrent(gun, role string) (created *time.Time, data []by
 func (rdb RethinkDB) GetChecksum(gun, role, checksum string) (created *time.Time, data []byte, err error) {
 	var file RDBTUFFile
 	res, err := gorethink.DB(rdb.dbName).Table(file.TableName()).GetAllByIndex(
-		rdbGunRoleSha256Idx,
-		gun,
-		role,
-		checksum,
+		rdbGunRoleSha256Idx, []string{gun, role, checksum},
 	).Run(rdb.sess)
 	if err != nil {
 		return nil, nil, err
@@ -190,8 +183,7 @@ func (rdb RethinkDB) GetChecksum(gun, role, checksum string) (created *time.Time
 // error if no metadata exists for the given GUN.
 func (rdb RethinkDB) Delete(gun string) error {
 	_, err := gorethink.DB(rdb.dbName).Table(RDBTUFFile{}.TableName()).GetAllByIndex(
-		"gun",
-		gun,
+		"gun", []string{gun},
 	).Delete().RunWrite(rdb.sess)
 	if err != nil {
 		return fmt.Errorf("unable to delete %s from database: %s", gun, err.Error())
