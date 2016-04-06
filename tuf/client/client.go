@@ -181,7 +181,8 @@ func (c Client) getTargetsFile(role data.DelegationRole, ci tuf.ConsistentInfo) 
 		return nil, err
 	}
 
-	// we know it unmarshals fine
+	// we know it unmarshals because if `tryLoadCacheThenRemote` didn't fail, then
+	// the raw has already been loaded into the builder
 	json.Unmarshal(raw, tgs)
 	return tgs.GetValidDelegations(role), nil
 }
