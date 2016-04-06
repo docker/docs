@@ -17,7 +17,7 @@ services:
         - "8080"
         - "4443:4443"
       entrypoint: /usr/bin/env sh
-      command: -c "./migrations/rethink_migrate.sh && notary-server -config=fixtures/server-config.rethink.json"
+      command: -c "sh migrations/rethink_migrate.sh && notary-server -config=fixtures/server-config.rethink.json"
       depends_on:
         - rdb-proxy
     signer:
@@ -35,7 +35,7 @@ services:
       environment:
         - SERVICE_NAME=notary_signer
       entrypoint: /usr/bin/env sh
-      command: -c "./migrations/rethink_migrate.sh && notary-signer -config=fixtures/signer-config.rethink.json"
+      command: -c "sh migrations/rethink_migrate.sh && notary-signer -config=fixtures/signer-config.rethink.json"
       depends_on:
         - rdb-proxy
     rdb-01:
