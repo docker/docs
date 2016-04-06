@@ -68,6 +68,9 @@ func (rdb RethinkDB) GetKey(gun, role string) (cipher string, public []byte, err
 	}
 	defer res.Close()
 	err = res.One(&key)
+	if err == gorethink.ErrEmptyResult {
+		return "", nil, &ErrNoKey{gun: gun}
+	}
 	return key.Cipher, key.Public, err
 }
 
