@@ -386,7 +386,7 @@ func (r *NotaryRepository) RemoveTarget(targetName string, roles ...string) erro
 // subtree and also the "targets/x" subtree, as we will defer parsing it until
 // we explicitly reach it in our iteration of the provided list of roles.
 func (r *NotaryRepository) ListTargets(roles ...string) ([]*TargetWithRole, error) {
-	_, err := r.Update(false)
+	err := r.Update(false)
 	if err != nil {
 		return nil, err
 	}
@@ -432,8 +432,7 @@ func (r *NotaryRepository) ListTargets(roles ...string) ([]*TargetWithRole, erro
 // will be returned
 // See the IMPORTANT section on ListTargets above. Those roles also apply here.
 func (r *NotaryRepository) GetTargetByName(name string, roles ...string) (*TargetWithRole, error) {
-	_, err := r.Update(false)
-	if err != nil {
+	if err := r.Update(false); err != nil {
 		return nil, err
 	}
 
@@ -460,9 +459,8 @@ func (r *NotaryRepository) GetTargetByName(name string, roles ...string) (*Targe
 			}
 			return nil
 		}
-		err = r.tufRepo.WalkTargets(name, role, getTargetVisitorFunc, skipRoles...)
 		// Check that we didn't error, and that we assigned to our target
-		if err == nil && foundTarget {
+		if err := r.tufRepo.WalkTargets(name, role, getTargetVisitorFunc, skipRoles...); err == nil && foundTarget {
 			return &TargetWithRole{Target: Target{Name: name, Hashes: resultMeta.Hashes, Length: resultMeta.Length}, Role: resultRoleName}, nil
 		}
 	}
@@ -491,8 +489,7 @@ type RoleWithSignatures struct {
 // This represents the latest metadata for each role in this repo
 func (r *NotaryRepository) ListRoles() ([]RoleWithSignatures, error) {
 	// Update to latest repo state
-	_, err := r.Update(false)
-	if err != nil {
+	if err := r.Update(false); err != nil {
 		return nil, err
 	}
 
@@ -552,8 +549,7 @@ func (r *NotaryRepository) Publish() error {
 func (r *NotaryRepository) publish(cl changelist.Changelist) error {
 	var initialPublish bool
 	// update first before publishing
-	_, err := r.Update(true)
-	if err != nil {
+	if err := r.Update(true); err != nil {
 		// If the remote is not aware of the repo, then this is being published
 		// for the first time.  Try to load from disk instead for publishing.
 		if _, ok := err.(ErrRepositoryNotExist); ok {
@@ -578,8 +574,7 @@ func (r *NotaryRepository) publish(cl changelist.Changelist) error {
 		}
 	}
 	// apply the changelist to the repo
-	err = applyChangelist(r.tufRepo, cl)
-	if err != nil {
+	if err := applyChangelist(r.tufRepo, cl); err != nil {
 		logrus.Debug("Error applying changelist")
 		return err
 	}
@@ -756,25 +751,24 @@ func (r *NotaryRepository) errRepositoryNotExist() error {
 
 // Update bootstraps a trust anchor (root.json) before updating all the
 // metadata from the repo.
-func (r *NotaryRepository) Update(forWrite bool) (*tufclient.Client, error) {
+func (r *NotaryRepository) Update(forWrite bool) error {
 	c, err := r.bootstrapClient(forWrite)
 	if err != nil {
 		if _, ok := err.(store.ErrMetaNotFound); ok {
-			return nil, r.errRepositoryNotExist()
+			return r.errRepositoryNotExist()
 		}
-		return nil, err
+		return err
 	}
-	err = c.Update()
-	if err != nil {
+	if err := c.Update(); err != nil {
 		// notFound.Resource may include a checksum so when the role is root,
 		// it will be root.json or root.<checksum>.json. Therefore best we can
 		// do it match a "root." prefix
 		if notFound, ok := err.(store.ErrMetaNotFound); ok && strings.HasPrefix(notFound.Resource, data.CanonicalRootRole+".") {
-			return nil, r.errRepositoryNotExist()
+			return r.errRepositoryNotExist()
 		}
-		return nil, err
+		return err
 	}
-	return c, nil
+	return nil
 }
 
 // bootstrapClient attempts to bootstrap a root.json to be used as the trust
