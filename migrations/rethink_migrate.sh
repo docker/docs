@@ -10,7 +10,7 @@ echo "trying to contact RethinkDB for 30 seconds before failing"
 case $SERVICE_NAME in
 	notary_server)
 		# have to poll for DB to come up
-		until notary-server -config=fixtures/server-config.rethink.json -bootstrap > /dev/null
+		until notary-server -config=fixtures/server-config.rethink.json -bootstrap 
 		do
 			((iter++))
 			if (( iter > 30 )); then

@@ -9,6 +9,9 @@ import (
 
 func bootstrap(ctx context.Context) error {
 	s := ctx.Value("metaStore")
+	if s == nil {
+		return fmt.Errorf("no store set during bootstrapping")
+	}
 	store, ok := s.(storage.Bootstrapper)
 	if !ok {
 		return fmt.Errorf("Store does not support bootstrapping.")
