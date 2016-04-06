@@ -11,6 +11,7 @@ import (
 	"github.com/docker/notary/storage/rethinkdb"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
+	"github.com/docker/notary/tuf/utils"
 	jose "github.com/dvsekhvalnov/jose2go"
 )
 
@@ -246,15 +247,15 @@ func (rdb RethinkDBKeyStore) Bootstrap() error {
 
 // CheckHealth verifies that DB exists and is query-able
 func (rdb RethinkDBKeyStore) CheckHealth() error {
-	var tableOk bool
+	var tables []string
 	dbPrivateKey := RDBPrivateKey{}
-	res, err := gorethink.DB(rdb.dbName()).TableList().Contains(dbPrivateKey.TableName()).Run(rdb.sess)
+	res, err := gorethink.DB(rdb.dbName()).TableList().Run(rdb.sess)
 	if err != nil {
 		return err
 	}
 	defer res.Close()
-	err = res.One(tableOk)
-	if err != nil || !tableOk {
+	err = res.All(&tables)
+	if err != nil || !utils.StrSliceContains(tables, dbPrivateKey.TableName()) {
 		return fmt.Errorf(
 			"Cannot access table: %s", dbPrivateKey.TableName())
 	}
