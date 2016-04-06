@@ -154,7 +154,9 @@ bootstrapping of the repo.
 		<td valign="top"><code>ca</code></td>
 		<td valign="top">no</td>
 		<td valign="top"><p>Mapping of GUN prefixes to filepaths containing
-		    the root CA with which to verify the certificates in the root file.
+		    the root CA file with which to verify the certificates in the root file.
+		    This file can contain multiple root certificates, bundled in separate
+		    PEM blocks.
 			The path is relative to the directory of the configuration file.</p></td>
 	</tr>
 	<tr>
