@@ -116,7 +116,7 @@ func (rdb RethinkDB) UpdateCurrent(gun string, update MetaUpdate) error {
 			Conflict: "error", // default but explicit for clarity of intent
 		},
 	).RunWrite(rdb.sess)
-	if gorethink.IsConflictErr(err) {
+	if err != nil && gorethink.IsConflictErr(err) {
 		return &ErrOldVersion{}
 	}
 	return err
@@ -155,6 +155,9 @@ func (rdb RethinkDB) GetCurrent(gun, role string) (created *time.Time, data []by
 		return nil, nil, ErrNotFound{}
 	}
 	err = res.One(&file)
+	if err == gorethink.ErrEmptyResult {
+		return nil, nil, ErrNotFound{}
+	}
 	return &file.CreatedAt, file.Data, err
 }
 
@@ -177,6 +180,9 @@ func (rdb RethinkDB) GetChecksum(gun, role, checksum string) (created *time.Time
 		return nil, nil, ErrNotFound{}
 	}
 	err = res.One(&file)
+	if err == gorethink.ErrEmptyResult {
+		return nil, nil, ErrNotFound{}
+	}
 	return &file.CreatedAt, file.Data, err
 }
 
