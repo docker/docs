@@ -1,7 +1,6 @@
 package client
 
 import (
-	"encoding/hex"
 	"encoding/json"
 
 	"github.com/Sirupsen/logrus"
@@ -9,22 +8,23 @@ import (
 	tuf "github.com/docker/notary/tuf"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/store"
-	"github.com/docker/notary/tuf/utils"
 )
 
 // Client is a usability wrapper around a raw TUF repo
 type Client struct {
-	remote  store.RemoteStore
-	cache   store.MetadataStore
-	builder tuf.RepoBuilder
+	remote     store.RemoteStore
+	cache      store.MetadataStore
+	oldBuilder tuf.RepoBuilder
+	newBuilder tuf.RepoBuilder
 }
 
 // NewClient initialized a Client with the given repo, remote source of content, and cache
-func NewClient(builder tuf.RepoBuilder, remote store.RemoteStore, cache store.MetadataStore) *Client {
+func NewClient(oldBuilder, newBuilder tuf.RepoBuilder, remote store.RemoteStore, cache store.MetadataStore) *Client {
 	return &Client{
-		builder: builder,
-		remote:  remote,
-		cache:   cache,
+		oldBuilder: oldBuilder,
+		newBuilder: newBuilder,
+		remote:     remote,
+		cache:      cache,
 	}
 }
 
@@ -44,10 +44,9 @@ func (c *Client) Update() (*tuf.Repo, error) {
 		logrus.Debug("Error occurred. Root will be downloaded and another update attempted")
 		logrus.Debug("Resetting the TUF builder...")
 
-		repoSoFar := c.builder.GetRepo()
-		c.builder = c.builder.BootstrapNewBuilder()
+		c.newBuilder = c.newBuilder.BootstrapNewBuilder()
 
-		if err := c.downloadRoot(repoSoFar.Snapshot); err != nil {
+		if err := c.downloadRoot(); err != nil {
 			logrus.Debug("Client Update (Root):", err)
 			return nil, err
 		}
@@ -58,7 +57,7 @@ func (c *Client) Update() (*tuf.Repo, error) {
 			return nil, err
 		}
 	}
-	return c.builder.Finish()
+	return c.newBuilder.Finish()
 }
 
 func (c *Client) update() error {
@@ -79,26 +78,23 @@ func (c *Client) update() error {
 }
 
 // downloadRoot is responsible for downloading the root.json
-func (c *Client) downloadRoot(prevSnapshot *data.SignedSnapshot) error {
+func (c *Client) downloadRoot() error {
 	role := data.CanonicalRootRole
+	consistentInfo := c.newBuilder.GetConsistentInfo(role)
 
 	// We can't read an exact size for the root metadata without risking getting stuck in the TUF update cycle
 	// since it's possible that downloading timestamp/snapshot metadata may fail due to a signature mismatch
-	if prevSnapshot == nil {
+	if !consistentInfo.ChecksumKnown() {
 		logrus.Debugf("Loading root with no expected checksum")
 
 		// get the cached root, if it exists, just for version checking
 		cachedRoot, _ := c.cache.GetMeta(role, -1)
 		// prefer to download a new root
-		_, remoteErr := c.tryLoadRemote(role, -1, nil, cachedRoot)
+		_, remoteErr := c.tryLoadRemote(consistentInfo, cachedRoot)
 		return remoteErr
 	}
 
-	size := prevSnapshot.Signed.Meta[role].Length
-	expectedSha256 := prevSnapshot.Signed.Meta[role].Hashes["sha256"]
-	logrus.Debugf("Loading root with expected checksum %s", hex.EncodeToString(expectedSha256))
-
-	_, err := c.tryLoadCacheThenRemote(role, size, expectedSha256)
+	_, err := c.tryLoadCacheThenRemote(consistentInfo)
 	return err
 }
 
@@ -108,11 +104,12 @@ func (c *Client) downloadRoot(prevSnapshot *data.SignedSnapshot) error {
 func (c *Client) downloadTimestamp() error {
 	logrus.Debug("Loading timestamp...")
 	role := data.CanonicalTimestampRole
+	consistentInfo := c.newBuilder.GetConsistentInfo(role)
 
 	// get the cached timestamp, if it exists
 	cachedTS, cachedErr := c.cache.GetMeta(role, notary.MaxTimestampSize)
 	// always get the remote timestamp, since it supercedes the local one
-	_, remoteErr := c.tryLoadRemote(role, notary.MaxTimestampSize, nil, cachedTS)
+	_, remoteErr := c.tryLoadRemote(consistentInfo, cachedTS)
 
 	switch {
 	case remoteErr == nil:
@@ -121,7 +118,7 @@ func (c *Client) downloadTimestamp() error {
 		logrus.Debug(remoteErr.Error())
 		logrus.Warn("Error while downloading remote metadata, using cached timestamp - this might not be the latest version available remotely")
 
-		err := c.builder.Load(role, cachedTS, 0, false)
+		err := c.newBuilder.Load(role, cachedTS, 0, false)
 		if err == nil {
 			logrus.Debug("successfully verified cached timestamp")
 		}
@@ -136,13 +133,9 @@ func (c *Client) downloadTimestamp() error {
 func (c *Client) downloadSnapshot() error {
 	logrus.Debug("Loading snapshot...")
 	role := data.CanonicalSnapshotRole
-	timestamp := c.builder.GetRepo().Timestamp
+	consistentInfo := c.newBuilder.GetConsistentInfo(role)
 
-	// we're expecting it's previously been vetted
-	size := timestamp.Signed.Meta[role].Length
-	expectedSha256 := timestamp.Signed.Meta[role].Hashes["sha256"]
-
-	_, err := c.tryLoadCacheThenRemote(role, size, expectedSha256)
+	_, err := c.tryLoadCacheThenRemote(consistentInfo)
 	return err
 }
 
@@ -158,7 +151,13 @@ func (c *Client) downloadTargets() error {
 		role := toDownload[0]
 		toDownload = toDownload[1:]
 
-		children, err := c.getTargetsFile(role)
+		consistentInfo := c.newBuilder.GetConsistentInfo(role.Name)
+		if !consistentInfo.ChecksumKnown() {
+			logrus.Debugf("skipping %s because there is no checksum for it", role.Name)
+			continue
+		}
+
+		children, err := c.getTargetsFile(role, consistentInfo)
 		if err != nil {
 			if _, ok := err.(data.ErrMissingMeta); ok && role.Name != data.CanonicalTargetsRole {
 				// if the role meta hasn't been published,
@@ -173,65 +172,57 @@ func (c *Client) downloadTargets() error {
 	return nil
 }
 
-func (c Client) getTargetsFile(role data.DelegationRole) ([]data.DelegationRole, error) {
+func (c Client) getTargetsFile(role data.DelegationRole, ci tuf.ConsistentInfo) ([]data.DelegationRole, error) {
 	logrus.Debugf("Loading %s...", role.Name)
 	tgs := &data.SignedTargets{}
 
-	// we're expecting it's previously been vetted
-	roleMeta, err := c.builder.GetRepo().Snapshot.GetMeta(role.Name)
-	if err != nil {
-		logrus.Debugf("skipping %s because there is no checksum for it")
-		return nil, err
-	}
-	expectedSha256 := roleMeta.Hashes["sha256"]
-	size := roleMeta.Length
-
-	raw, err := c.tryLoadCacheThenRemote(role.Name, size, expectedSha256)
+	raw, err := c.tryLoadCacheThenRemote(ci)
 	if err != nil {
 		return nil, err
 	}
 
+	// we know it unmarshals fine
 	json.Unmarshal(raw, tgs)
 	return tgs.GetValidDelegations(role), nil
 }
 
-func (c *Client) tryLoadCacheThenRemote(role string, size int64, expectedSha256 []byte) ([]byte, error) {
-	cachedTS, err := c.cache.GetMeta(role, size)
+func (c *Client) tryLoadCacheThenRemote(consistentInfo tuf.ConsistentInfo) ([]byte, error) {
+	cachedTS, err := c.cache.GetMeta(consistentInfo.RoleName, consistentInfo.Length())
 	if err != nil {
-		logrus.Debugf("no %s in cache, must download", role)
-		return c.tryLoadRemote(role, size, expectedSha256, nil)
+		logrus.Debugf("no %s in cache, must download", consistentInfo.RoleName)
+		return c.tryLoadRemote(consistentInfo, nil)
 	}
 
-	if err = c.builder.Load(role, cachedTS, 0, false); err == nil {
-		logrus.Debugf("successfully verified cached %s", role)
+	if err = c.newBuilder.Load(consistentInfo.RoleName, cachedTS, 0, false); err == nil {
+		logrus.Debugf("successfully verified cached %s", consistentInfo.RoleName)
 		return cachedTS, nil
 	}
 
-	logrus.Debugf("cached %s is invalid (must download): %s", role, err)
-	return c.tryLoadRemote(role, size, expectedSha256, cachedTS)
+	logrus.Debugf("cached %s is invalid (must download): %s", consistentInfo.RoleName, err)
+	return c.tryLoadRemote(consistentInfo, cachedTS)
 }
 
-func (c *Client) tryLoadRemote(role string, size int64, expectedSha256, old []byte) ([]byte, error) {
-	rolePath := utils.ConsistentName(role, expectedSha256)
-	raw, err := c.remote.GetMeta(rolePath, size)
+func (c *Client) tryLoadRemote(consistentInfo tuf.ConsistentInfo, old []byte) ([]byte, error) {
+	consistentName := consistentInfo.ConsistentName()
+	raw, err := c.remote.GetMeta(consistentName, consistentInfo.Length())
 	if err != nil {
-		logrus.Debugf("error downloading %s: %s", role, err)
+		logrus.Debugf("error downloading %s: %s", consistentName, err)
 		return old, err
 	}
-	minVersion := 0
-	if old != nil && len(old) > 0 {
-		oldSignedMeta := &data.SignedMeta{}
-		if readOldErr := json.Unmarshal(old, oldSignedMeta); readOldErr == nil {
-			minVersion = oldSignedMeta.Signed.Version
-		}
-	}
-	if err := c.builder.Load(role, raw, minVersion, false); err != nil {
-		logrus.Debugf("downloaded %s is invalid: %s", role, err)
+
+	// try to load the old data into the old builder - only use it to validate
+	// versions if it loads successfully.  If it errors, then the loaded version
+	// will be 0
+	c.oldBuilder.Load(consistentInfo.RoleName, old, 0, true)
+	minVersion := c.oldBuilder.GetLoadedVersion(consistentInfo.RoleName)
+
+	if err := c.newBuilder.Load(consistentInfo.RoleName, raw, minVersion, false); err != nil {
+		logrus.Debugf("downloaded %s is invalid: %s", consistentName, err)
 		return raw, err
 	}
-	logrus.Debugf("successfully verified downloaded %s", role)
-	if err := c.cache.SetMeta(role, raw); err != nil {
-		logrus.Debugf("Unable to write %s to cache: %s", role, err)
+	logrus.Debugf("successfully verified downloaded %s", consistentName)
+	if err := c.cache.SetMeta(consistentInfo.RoleName, raw); err != nil {
+		logrus.Debugf("Unable to write %s to cache: %s", consistentInfo.RoleName, err)
 	}
 	return raw, nil
 }
