@@ -120,7 +120,7 @@ func (rdb *RethinkDBKeyStore) GetKey(name string) (data.PrivateKey, string, erro
 
 	// Retrieve the RethinkDB private key from the database
 	dbPrivateKey := RDBPrivateKey{}
-	res, err := gorethink.DB(rdb.dbName()).Table(dbPrivateKey.TableName()).Get(RDBPrivateKey{KeyID: name}).Run(rdb.sess)
+	res, err := gorethink.DB(rdb.dbName()).Table(dbPrivateKey.TableName()).Filter(gorethink.Row.Field("key_id").Eq(name)).Run(rdb.sess)
 	if err != nil {
 		return nil, "", trustmanager.ErrKeyNotFound{}
 	}
@@ -175,7 +175,7 @@ func (rdb RethinkDBKeyStore) RemoveKey(keyID string) error {
 
 	// Delete the key from the database
 	dbPrivateKey := RDBPrivateKey{KeyID: keyID}
-	_, err := gorethink.DB(rdb.dbName()).Table(dbPrivateKey.TableName()).Get(dbPrivateKey).Delete().RunWrite(rdb.sess)
+	_, err := gorethink.DB(rdb.dbName()).Table(dbPrivateKey.TableName()).Filter(gorethink.Row.Field("key_id").Eq(keyID)).Delete().RunWrite(rdb.sess)
 	if err != nil {
 		return fmt.Errorf("unable to delete private key from database: %s", err.Error())
 	}
