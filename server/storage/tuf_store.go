@@ -106,6 +106,7 @@ func (tms TufMetaStorage) GetCurrent(gun, tufRole string) (*time.Time, []byte, e
 	return roleTime, roleJSON, nil
 }
 
+// Bootstrap the store with tables if possible
 func (tms TufMetaStorage) Bootstrap() error {
 	if s, ok := tms.MetaStore.(storage.Bootstrapper); ok {
 		return s.Bootstrap()
