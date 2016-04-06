@@ -7,6 +7,7 @@ import (
 
 	"github.com/docker/go/canonical/json"
 	"github.com/docker/notary"
+	"github.com/docker/notary/storage"
 	"github.com/docker/notary/tuf/data"
 )
 
@@ -103,4 +104,11 @@ func (tms TufMetaStorage) GetCurrent(gun, tufRole string) (*time.Time, []byte, e
 	// cache for subsequent lookups
 	tms.cachedMeta[roleSha256Hex] = &storedMeta{data: roleJSON, createupdate: roleTime}
 	return roleTime, roleJSON, nil
+}
+
+func (tms TufMetaStorage) Bootstrap() error {
+	if s, ok := tms.MetaStore.(storage.Bootstrapper); ok {
+		return s.Bootstrap()
+	}
+	return fmt.Errorf("store does not support bootstrapping")
 }
