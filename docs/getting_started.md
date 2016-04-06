@@ -11,16 +11,30 @@ weight=1
 
 # Getting started with Docker Notary
 
-This document describes basic use of Notary as a tool supporting content trust.
-For more advanced use cases, you must [run your own Notary
+This document describes basic use of the Notary CLI as a tool supporting Docker
+Content Trust. For more advanced use cases, you must [run your own Notary
 service](running_a_service.md) and should read the [use the Notary client for
 advanced users](advanced_usage.md) documentation.
+
+## What is Notary
+
+Notary is a tool for publishing and managing trusted collections of content.
+Publishers can digitally sign collections and consumers can verify integrity
+and origin of content. This ability is built on a straightforward key management
+and signing interface to create signed collections and configure trusted publishers.
+
+With Notary anyone can provide trust over arbitrary collections of data. Using
+<a href="https://www.theupdateframework.com/" target="_blank">The Update Framework (TUF)</a>
+as the underlying security framework, Notary takes care of the operations necessary
+to create, manage and distribute the metadata necessary to ensure the integrity and
+freshness of your content.
 
 ## Install Notary
 
 You can download precompiled notary binary for 64 bit Linux or Mac OS X from the
-Notary repository's [releases page on
-GitHub](https://github.com/docker/notary/releases). Windows is not officially
+Notary repository's
+<a href="https://github.com/docker/notary/releases" target="_blank">releases page on
+GitHub</a>. Windows is not officially
 supported, but if you are a developer and Windows user, we would appreciate any
 insight you can provide regarding issues.
 
@@ -84,7 +98,7 @@ Notary library (the same one as Notary CLI) to request the mapping of tag
 to sha256 digest for the one tag you are interested in (or if you passed the
 `--all` flag, the client will use the list operation to efficiently retrieve all
 the mappings). Having validated the signatures on the trust data, the client
-will then instruct the Engine to do a "pull by digest".  During this pull, the
+will then instruct the Engine to do a "pull by digest". During this pull, the
 Engine uses the sha256 checksum as a content address to request and validate the
 image manifest from the Docker registry.
 
@@ -111,7 +125,7 @@ You can see a pending change by running `notary status` for the modified
 repository. The `status` subcommand is an offline operation and as such, does
 not require the `-s` flag, however it will silently ignore the flag if provided.
 Failing to provide the correct value for the `-d` flag may show the wrong
-(probably empty) change list:  
+(probably empty) change list:
 
 ```
 $ notary -d ~/.docker/trust status docker.io/library/alpine
