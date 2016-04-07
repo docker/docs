@@ -11,9 +11,7 @@ RUN apt-get update && apt-get install -y \
 	--no-install-recommends \
 	&& rm -rf /var/lib/apt/lists/*
 
-RUN go get golang.org/x/tools/cmd/vet \
-	&& go get golang.org/x/tools/cmd/cover \
-	&& go get github.com/tools/godep
+RUN go get golang.org/x/tools/cmd/cover
 
 # Configure the container for OSX cross compilation
 ENV OSX_SDK MacOSX10.11.sdk
