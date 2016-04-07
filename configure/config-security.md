@@ -226,6 +226,5 @@ Then restart the Docker daemon with `sudo /etc/init.d/docker restart`.
 
 ## See also
 
-* To continue to configure for your environment, see the overview
-[configuration instructions](configuration.md).
-* To use Docker Trusted Registry, see the [User guide](../userguide.md).
+* [Configure authentication](config-auth.md)
+* [Configure storage options](config-storage.md)

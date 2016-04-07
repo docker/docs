@@ -1,12 +1,14 @@
+<!--[metadata]>
 +++
+aliases = ["/docker-trusted-registry/release-notes/"]
 title = "Trusted Registry release notes"
 description = "Docker Trusted Registry release notes "
 keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry, release notes, Docker Trusted Registry"]
 [menu.main]
-parent="workw_dtr"
-weight=100
+parent="dtr_menu_release_notes"
+weight=20
 +++
-
+<![end-metadata]-->
 
 # Docker Trusted Registry release notes
 
@@ -62,7 +64,7 @@ Release notes contain the following sections:
 * Fixed or updated with this release
 
 ## Additional storage backend
-This release introduces using Openstack Swift as a storage backend. Refer to the [configuration documentation](configure/configuration.md) for details on the Swift driver.  
+This release introduces using Openstack Swift as a storage backend. Refer to the [configuration documentation](../configure/config-storage.md) for details on the Swift driver.  
 
 ## Fixed or updated with this release
 This release addresses the following issues in Docker Trusted Registry 1.4.1.
@@ -127,17 +129,17 @@ documentation.
 
 * Image deletion and garbage collection
 
-  * You can now delete an image in the registry's image index. This step of marking an unwanted image is called a soft delete. Refer to the [documentation](soft-garbage.md).
+  * You can now delete an image in the registry's image index. This step of marking an unwanted image is called a soft delete.
 
-  * Administrators can use the dashboard or API to configure a task to regularly reclaim the disk space taken up by deleted images. Refer to the [documentation](soft-garbage.md).
+  * Administrators can use the dashboard or API to configure a task to regularly reclaim the disk space taken up by deleted images.
 
 * Repositories, Account Management, and interactive API UIs
 
-  * Set up, and manage user accounts, teams, organizations, and repositories from either APIs or through the Trusted Registry user interface. Refer to either the API documentation or the [documentation](accounts.md) for performing tasks in the UI.
+  * Set up, and manage user accounts, teams, organizations, and repositories from either APIs or through the Trusted Registry user interface.
 
   * Search, browse, and discover images created by other users through either APIs or through the Trusted Registry UI.
 
-  * Users, depending on their roles, can access account information through the Trusted Registry UI. Refer to the [documentation](accounts.md) for details.
+  * Users, depending on their roles, can access account information through the Trusted Registry UI.
 
   * View new API documentation through the Trusted Registry UI. You can also view this [documentation](https://docs.docker.com/docker-trusted-registry/) from Docker, Inc. docs section.
 
@@ -149,7 +151,7 @@ documentation.
 
 * Different repository behavior. A repository must first exist before you can push an image to it. This means you must explicitly create (or have it performed for you if you don't have the correct permissions) a repository. This behavior is different than how you would perform this in a free and open-source software registry.
 
-* New experimental feature. Docker Trusted Registry now integrates with Docker Content Trust using Notary. This is an experimental feature that is available with this release. See the [configuration documentation](configure/configuration.md).
+* New experimental feature. Docker Trusted Registry now integrates with Docker Content Trust using Notary. This is an experimental feature that is available with this release.
 
 ### Fixed with this release
 This release corrects the following issues in Docker Trusted Registry 1.3.3.

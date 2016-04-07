@@ -1,47 +1,13 @@
+<!--[metadata]>
 +++
-title = "User guide"
-description = "Documentation describing basic use of Docker Trusted Registry"
-keywords = ["docker, documentation, about, technology, hub, push, pull, user interface, account management, enterprise"]
+title = "Push and pull images"
+description = "Learn how to push and pull images from your repositories on Docker Trusted Registry."
+keywords = ["docker, registry, management, repository"]
 [menu.main]
-parent="workw_dtr"
-weight=4
+parent="dtr_menu_repos_and_images"
+weight=10
 +++
-
-
-# Docker Trusted Registry User's Guide
-
-This guide explains tasks and functions that a Docker Trusted Registry
-user can do, such as pushing or pulling images, or viewing organizations. For tasks Docker Trusted Registry
-administrators need to accomplish, such as configuring or monitoring Docker Trusted Registry,
-go to the [Administrator's Guide](adminguide.md).
-
-Task you can do:
-
-* View organizations, repositories, and team members through the Trusted Registry user interface.
-* Create repositories if you have read-write permissions.
-* Tag an image so that it can later be removed from the Trusted Registry repository. See the [documentation](soft-garbage.md) for deleting an image.
-* Push tags
-* Pull tags
-* Search the API documentation on the Trusted Registry user interface including using the reindex and search APIs.
-
-## View repos, teams, and members in the user interface
-
-Depending on your permissions, you can use the Trusted Registry user interface to do the following:
-
-* View the organizations and teams that you belong to.
-* View the repositories within each organization that you belong to.
-
-For specifics on this feature, see the [account management](accounts.md) documentation.
-
-## Create a repository
-
-If you have read-write permissions, you can create a repository. You will need to create one if you have installed the Trusted Registry and you want to test your installation by pushing an image to a repository.
-
-1. In the Trusted Registry UI, navigate to Repositories and click New repository.
-
-![Repo screen</admin/settings#http>](images/repo.png)
-
-2. Enter a name, select visibility, and click Save.
+<![end-metadata]-->
 
 ## Push and pull overview
 
@@ -57,7 +23,7 @@ Docker registry. You use the `docker pull` command to retrieve images and the
 `docker push` command to add an image. To learn more about Docker images, see
 [User Guide: Working with Docker Images](https://docs.docker.com/engine/userguide/dockerimages/). For a step-by-step
 example of the entire process, see the
-[Quick Start: Basic Workflow Guide](quick-start.md).
+[Quickstart guide](../quick-start.md).
 
 > **Note**: If your Docker Trusted Registry instance has authentication enabled, you will need to
 >use your command line to `docker login <dtr-hostname>` (for example `docker login
@@ -122,39 +88,32 @@ To retrieve an image from the Trusted Registry and then run Docker to build the
 container, add
 the needed info to `docker run`:
 
-        $ docker run dtr.yourdomain.com/yourusername/hello-mine
-        latest: Pulling from dtr.yourdomain.com/yourusername/hello-mine
-        511136ea3c5a: Pull complete
-        31cbccb51277: Pull complete
-        e45a5af57b00: Already exists
-        Digest: sha256:45f0de377f861694517a1440c74aa32eecc3295ea803261d62f950b1b757bed1
-        Status: Downloaded newer image for dtr.yourdomain.com/demouser/hello-mine:latest
+```bash
+$ docker run dtr.yourdomain.com/yourusername/hello-mine
+
+latest: Pulling from dtr.yourdomain.com/yourusername/hello-mine
+511136ea3c5a: Pull complete
+31cbccb51277: Pull complete
+e45a5af57b00: Already exists
+Digest: sha256:45f0de377f861694517a1440c74aa32eecc3295ea803261d62f950b1b757bed1
+Status: Downloaded newer image for dtr.yourdomain.com/demouser/hello-mine:latest
+```
 
 If you don't specify a version, by default the `latest` version of an
 image is pulled.
 
 If you run `docker images` after this, then you see a `hello-mine` image.
 
-        $ docker images
-        REPOSITORY                           TAG     IMAGE ID      CREATED       VIRTUAL SIZE
-        dtr.yourdomain.com/yourusername/hello-mine  latest  e45a5af57b00  3 months ago  910 B
+```bash
+$ docker images
+REPOSITORY                                  TAG     IMAGE ID      CREATED       VIRTUAL SIZE
+dtr.yourdomain.com/yourusername/hello-mine  latest  e45a5af57b00  3 months ago  910 B
+```
+
 
 To pull an image without building the container, use `docker pull` and specify
 your Docker Trusted Registry by adding it to the command:
 
-     $ docker pull dtr.yourdomain.com/yourusername/hello-mine
-
-
-## Next steps
-
-For information on administering the Trusted Registry, see the
-[administrator's tasks ](adminguide.md) documentation.
-
-
-<!--TODO:
-
-* mention that image aliases that are not in the same repository are not updated - either on push or pull
-* but that multiple tags in one repo are pushed if you don't specify the `:tag` (ie, `imagename` does not always mean `imagename:latest`)
-* show what happens for non-latest, and when there are more than one tag in a repo
-* explain the fully-qualified repo/image name
- -->
+```bash
+$ docker pull dtr.yourdomain.com/yourusername/hello-mine
+```

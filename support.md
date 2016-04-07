@@ -1,23 +1,22 @@
-
+<!--[metadata]>
 +++
-title = "Support"
-description = "Commercial Support"
-keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry,  support"]
+title = "Get support"
+description="Your Docker subscription gives you access to prioritized support. You can file tickets via email, your the support portal."
+keywords = ["Docker, support", "help"]
 [menu.main]
 parent="workw_dtr"
-weight=99
+weight=110
 +++
+<![end-metadata]-->
 
+# Get support
 
+Your Docker Data Center, or Docker Trusted Registry subscription gives you
+access to prioritized support. The service levels depend on your subscription.
 
-# How to get Commercial Support
+If you need help, you can file a ticket via:
 
-Purchasing a Docker Trusted Registry License or Commercial Support subscription
-means your questions and issues about Docker Trusted Registry will receive
-prioritized support. You can file a ticket through
-[email](mailto:support@docker.com) from your company email address, or visit our
-[support site](https://support.docker.com). In either case, you'll need to
-verify your email address, and then you can communicate with the support team
-either by email or web interface.
+* [Email](mailto:support@docker.com)
+* [Docker support page](https://support.docker.com/)
 
-**The availability of support depends on your [support subscription](https://www.docker.com/enterprise/support/)**
+Be sure to use your company email when filing tickets.

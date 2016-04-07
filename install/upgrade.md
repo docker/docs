@@ -1,10 +1,14 @@
+<!--[metadata]>
 +++
-title = "Upgrade Trusted Registry and the CS Engine"
-description = "Upgrade Trusted Registry and the CS Engine"
-keywords = ["docker, documentation, about, technology, hub, upgrade, enterprise, pin, patch, migrate, Docker Trusted Registry, Docker commercially supported Engine"]
+title = "Upgrade"
+description = "Learn how to upgrade your Docker Trusted Registry."
+keywords = ["docker, dtr, upgrade, install"]
 [menu.main]
 parent="workw_dtr_install"
+identifier="dtr_upgrade"
+weight=40
 +++
+<![end-metadata]-->
 
 
 # Upgrade the Trusted Registry and the CS Engine
@@ -421,9 +425,5 @@ steps depending on your type of system.
 
 ## See also
 
-* To configure for your environment, see the
-[configuration instructions](../configure/configuration.md).
-* To use Docker Trusted Registry, see [the User guide](../userguide.md).
-* See [installing the CS Engine](install-csengine.md).
-* To make administrative changes, see [the Admin guide](../adminguide.md).
-* To see previous changes, go to the [release notes](../release-notes.md).
+* [Install DTR](install-dtr.md)
+* [Install DTR offline](install-dtr-offline.md)

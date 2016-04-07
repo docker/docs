@@ -1,13 +1,16 @@
+<!--[metadata]>
 +++
-title = "Account and repository management"
-description = "Account and repository management"
-keywords = ["docker, documentation, about, technology, hub, user interface, account management, accounts, teams, enterprise"]
+aliases = ["/docker-trusted-registry/accounts/"]
+title = "Permission levels"
+description = "Learn about the permission levels available on Docker Trusted Registry."
+keywords = ["docker, registry, security, permissions, users"]
 [menu.main]
-parent="workw_dtr"
-weight=10
+parent="dtr_menu_user_management"
+identifier="dtr_permission_levels"
 +++
+<![end-metadata]-->
 
-# Account and repository management introduction
+# DTR permission levels
 
 Administrators assign permissions to control users level of access to the
 Trusted Registry. To access repositories, these users are grouped into teams and
@@ -107,95 +110,3 @@ You must first create a repository before pushing an image to it. Otherwise you 
 The push refers to a repository [my.dtr.host/user1/myimage] (len: 1) 1d073211c498: Image push failed
 unauthorized: access to the requested resource is not authorized
 ```
-
-## Manage repositories, organizations, and teams
-
-This section provides workflows for you to manage your users using the Trusted Registry’s repositories.
-
-
-### Create an organization
-
-1. From the Trusted Registry dashboard, click the Organizations submenu.
-
-2. Click New organization. The Organization details screen displays.
-
-3. Enter a unique name for your organization and save.
-
-
-### Add teams to your organization
-
-1. From the Trusted Registry dashboard, click the Organizations submenu.
-
-2. Find your organization and select it. The Organization details screen displays.
-
-3. Select the submenu Teams.
-
-4. By default, the `owners` team box displays where you can add members who will have full admin access to that repository.
-
-5. Click New team and enter the required fields.
-
-6. Click Add members to select members to the team. Save your work.
-
-At this point, you have created an organization and populated it with at least
-one team. Next, you will either create or associate a repository to that
-organization.
-
-
-### Create a new repository for the team or organization
-
-1. From the Organization details screen, click the desired organization.
-
-2. If you click New repository, follow the steps to create a new repository that is associated to the organization.
-
-3. To associate that repo to a team, click the Teams subtab, then click the targeted team.
-
-4. Click Add repository and select a permission set from the drop down menu.  
-
-5. You can either create a new repository or find an existing repository to associate to the team.
-
-
-### Create a new repository
-
-1. From the Trusted Registry dashboard, click the Repositories submenu.
-
-2. Click New repository. The Repositories details screen displays.
-
-3. Select an account type and enter a repository name.
-
-4. Determine visibility. By default, the repository is public.
-
-5. (Optional) Enter a description.
-
-6. Save your work.
-
-From the Repository submenu, you can:
-
-* View, search, and filter the list of your repositories.
-* Create either public or private repositories.
-* Select a repository and edit it.
-* Drill down to see details and teams that are associated with it.  
-
-### View repository details
-
-1. From the Trusted Registry dashboard, navigate to the Repositories menu.
-
-2. Find a repository that contains images in it.
-
-3. Click the submenu to see either details, tags, or settings.
-
-The **Details** screen contains a brief description, a longer README, and the permissions associated with it.
-
-The **Tag** screen contains the list of image tags. If you wanted to delete an image for garbage collection, click the garbage can icon beside it.
-
-![Repositories page</repositories>](images/accounts-long-tag.png)
-
-The **Settings** screen is where you edit the details screen.
-
-## See also
-
-* To configure for your environment, see the
-[Configuration instructions](configure/configuration.md).
-* To administer the Trusted Registry, see the [Admin guide ](adminguide.md).
-* To use Docker Trusted Registry, see the [User guide](userguide.md).
-* To upgrade, see the [Upgrade guide](install/upgrade.md).
-* To see previous changes, see the [release notes](release-notes.md).

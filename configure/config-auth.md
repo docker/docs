@@ -27,7 +27,7 @@ There are three authentication methods:
 
 ![Auth settings page</admin/settings#auth>](../images/admin-settings-auth.png)
 
-> **Note**: If you have issues logging into the Docker Trusted Registry admin web interface after changing the authentication settings, you may need to use the [emergency access to the Docker Trusted Registry admin web interface](../adminguide.md#emergency-access-to-the-trusted-registry).
+> **Note**: If you have issues logging into the Docker Trusted Registry admin web interface after changing the authentication settings, you may need to [troubleshoot DTR](../monitor-troubleshoot/troubleshoot.md).
 
 ## No authentication (None)
 
@@ -134,6 +134,5 @@ configuration is working.
 
 ## See also
 
-* To continue to configure for your environment, see the overview
-[configuration instructions](configuration.md).
-* To use Docker Trusted Registry, see the [User guide](../userguide.md).
+* [Configure DTR](config-general.md)
+* [Troubleshoot DTR](../monitor-troubleshoot/troubleshoot.md)

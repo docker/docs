@@ -1,13 +1,19 @@
+<!--[metadata]>
 +++
-title = "Manually install Trusted Registry"
-description = "Manually install Trusted Registry"
-keywords = ["docker, documentation, about, technology, understanding, enterprise, hub,  registry"]
+aliases = [ "/docker-trusted-registry/install/dtr-ami-byol-launch/",
+            "/docker-trusted-registry/install/dtr-ami-bds-launch/",
+            "/docker-trusted-registry/install/dtr-vhd-azure/"]
+title = "Install Docker Trusted Registry"
+description = "Learn how to install Docker Trusted Registry for production."
+keywords = ["docker, dtr, registry, install"]
 [menu.main]
 parent="workw_dtr_install"
+weight=20
 +++
+<![end-metadata]-->
 
 
-# Manually install Trusted Registry
+# Install Docker Trusted Registry
 
 This document describes the process of obtaining, installing, and securing
 Docker Trusted Registry. You can use these instructions if you are installing Trusted Registry on a physical or cloud infrastructure.
@@ -166,8 +172,10 @@ more information, see the [configuration documentation](../configure/configurati
 
 You have your Trusted Registry configured with a "Domain Name" and your
 client Docker daemons configured with the required security settings. But
-before you can test your setup by pushing an image, you need to create a repository first. Follow the instructions for [Using Docker
-Trusted Registry to Push and pull images](../userguide.md) to create a repository and to push and pull images.
+before you can test your setup by pushing an image, you need to create a
+repository first. Follow the instructions for
+[Using Docker Trusted Registry to Push and pull images](../repos-and-images/push-and-pull-images.md)
+to create a repository and to push and pull images.
 
 ## Docker Trusted Registry web interface and registry authentication
 
@@ -180,8 +188,5 @@ See [Docker Trusted Registry Authentication settings](../configure/configuration
 
 ## See also
 
-* To configure for your environment, see the
-[configuration instructions](../configure/configuration.md).
-* To use Docker Trusted Registry, see [the User guide](../userguide.md).
-* To make administrative changes, see [the Admin guide](../adminguide.md).
-* To see previous changes, see [the release notes](../release-notes.md).
+* [Install DTR offline](install-dtr-offline.md)
+* [Install CS Docker Engine](install-csengine.md)

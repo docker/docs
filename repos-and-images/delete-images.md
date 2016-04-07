@@ -1,14 +1,17 @@
+<!--[metadata]>
 +++
-title = "Remove an image and garbage collection"
-description = "Remove an image and garbage collection"
-keywords = ["docker, documentation, about, technology, hub, registry, soft deletion, cron job, garbage collection, enterprise"]
+aliases = ["/docker-trusted-registry/soft-garbage/"]
+title = "Delete images"
+description = "Learn how to delete images from your repositories on Docker Trusted Registry."
+keywords = ["docker, registry, management, repository, delete, image"]
 [menu.main]
-parent="workw_dtr"
-weight=12
+parent="dtr_menu_repos_and_images"
+weight=20
 +++
+<![end-metadata]-->
 
 
-# Overview
+# Delete images
 
 This document describes the two-step process of removing an image from the
 Trusted Registry. This process is first performed by developers wanting to
@@ -25,14 +28,14 @@ purposefully delete one of those manifests and the image layers referenced by
 that manifest become orphaned, then they can be removed during the garbage
 collection job. In the following diagram, _both_ manifests point to the first layer, #2543d8.
 
-![Garbage collection illustration</soft-garbage/>](images/gc1.png)
+![](../images/gc1.png)
 
 Since many developers may use a base image for future images, it is possible
 that there will be image layers that will  never be deleted. There might be other
 manifests that point to layers of the base image which could still be used by
 others as seen in the second diagram.
 
-![Garbage collection illustration</soft-garbage/>](images/gc3.png)
+![](../images/gc3.png)
 
 ## Prerequisites
 You need an image to remove.
@@ -53,13 +56,13 @@ You can perform a soft deletion, either from the UI or from the command line.
 
 From the Trusted Registry dashboard, navigate to Repositories > Tags. Click the trash can next to the images you want to remove. They are now marked for the garbage collection job.
 
-![Soft deletion of a tag in the UIn</soft-garbage/>](images/tag-removal.png)
+![](../images/tag-removal.png)
 
 
 If you prefer to not use the UI, then you can open a Trusted Registry command line and type:
 
-```
-curl -u <username>:<password> -X DELETE https://<DTR HOST>/api/v0/repositories/<namespace>/<reponame>/manifests/<reference>
+```bash
+$ curl -u <username>:<password> -X DELETE https://<DTR HOST>/api/v0/repositories/<namespace>/<reponame>/manifests/<reference>
 ```
 
 You can only delete one image at a time and you must also be authenticated as a
@@ -82,10 +85,10 @@ immediately, they can type in a Trusted Registry CLI:
 
 However, it is more common to set up the garbage collection cron job to be performed routinely as seen in the following example:
 
-```
-    curl -u <username>:<password> -H 'Content-Type: application/json' -X POST https://<DTR
-    HOST>/api/v0/admin/settings/registry/garbageCollection/schedule -d '{"schedule":
-    "<schedule>"}'
+```bash
+$ curl -u <username>:<password> -H 'Content-Type: application/json' -X POST https://<DTR
+HOST>/api/v0/admin/settings/registry/garbageCollection/schedule -d '{"schedule":
+"<schedule>"}'
 ```
 
 Trusted Registry administrators can also set the cron job through the Trusted
@@ -116,18 +119,9 @@ get an error message.
 
 See your results by running the following example in a Trusted Registry CLI:
 
-```
-curl -u <username>:<password> https://<DTR
+```bash
+$ curl -u <username>:<password> https://<DTR
 HOST>/api/v0/admin/settings/registry/garbageCollection/lastSavings
 ```
 
 The results are also displayed in the Trusted Registry UI by navigating to Settings > Garbage collection.
-
-### See also
-
-* See the [administrator guide](adminguide.md) if you are an administrator
-responsible for running and maintaining Docker Trusted Registry.
-
-* See [configuration](configure/configuration.md) to find out details about
-setting up and configuring Docker Trusted Registry for your particular
-environment.

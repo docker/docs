@@ -18,9 +18,9 @@ view configuration options. Configuring is grouped by the following:
 * [General settings](config-general.md) (ports, proxies, and Notary)
 * [Security settings](config-security.md)
 * [Storage settings](config-storage.md)
-* [License](../license.md)
+* [License](../install/license.md)
 * [Authentication settings](config-auth.md) (including LDAP)
-* [Garbage collection](../soft-garbage.md)
+* [Garbage collection](../repos-and-images/delete-images.md)
 * Updates
 * Docker daemon (this is set from the Trusted Registry CLI and not the UI)
 
@@ -70,12 +70,8 @@ Both the Trusted Registry and the Docker daemon collect and store log messages. 
 
 `docker daemon --log-opt max-size 100m max-file=1`
 
-To learn about Trusted Registry logs, view the [Logs tab](../adminguide.md) in the admin guide documentation.
 
 ## See also
 
-* To use Docker Trusted Registry, see the [User guide](../userguide.md).
-* View [admin tasks](../adminguide.md).
-* To upgrade, see the [Upgrade guide](../install/upgrade.md).
-* To see previous changes and fixes, refer to the [release notes](../release-notes.md).
-* For information on getting support for Docker Trusted Registry, go to [Support information](../support.md).
+* [Monitor DTR](../monitor-troubleshoot/monitor.md)
+* [Troubleshoot DTR](../monitor-troubleshoot/troubleshoot.md)

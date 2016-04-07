@@ -93,6 +93,5 @@ the Trusted Registry interface.
 
 ## See also
 
-* To continue to configure for your environment, see the overview
-[configuration instructions](configuration.md).
-* To use Docker Trusted Registry, see the [User guide](../userguide.md).
+* [Configure authentication](config-auth.md)
+* [Configure storage settings](config-storage.md)

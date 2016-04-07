@@ -1,12 +1,14 @@
+<!--[metadata]>
 +++
+aliases = ["/docker-trusted-registry/cse-prior-release-notes/"]
 title = "Prior CS Engine release notes"
 description = "Archived release notes for commercially supported Docker Engine"
 keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry,release, commercially supported Docker Engine"]
 [menu.main]
-parent="workw_dtr"
-weight=103
+parent="dtr_menu_release_notes"
+weight=10
 +++
-
+<![end-metadata]-->
 
 # CS Engine release notes archive
 

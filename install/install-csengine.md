@@ -1,10 +1,14 @@
+<!--[metadata]>
 +++
-title = "Manually Install the CS Docker Engine"
-description = "Install instructions for the commercially supported Docker Engine"
-keywords = ["docker, documentation, about, technology, enterprise, hub, commercially supported Docker Engine, CS Engine, registry, pin, patch, migrate"]
+aliases = [ "/docker-trusted-registry/install/engine-ami-launch/"]
+title = "Install Docker CS Engine"
+description = "Learn how to install the comercially supported version of Docker Engine."
+keywords = ["docker, engine, dtr, install"]
 [menu.main]
 parent="workw_dtr_install"
+weight=10
 +++
+<![end-metadata]-->
 
 
 # Manually Install the CS Docker Engine

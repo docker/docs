@@ -1,12 +1,14 @@
+<!--[metadata]>
 +++
+aliases = ["/docker-trusted-registry/prior-release-notes/"]
 title = "Prior Trusted Registry release notes"
 description = "Archived release notes for Docker Trusted Registry"
 keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry, Docker Trusted Registry, release"]
 [menu.main]
-parent="workw_dtr"
-weight=101
+parent="dtr_menu_release_notes"
+weight=30
 +++
-
+<![end-metadata]-->
 
 # Docker Trusted Registry release notes archive
 
@@ -81,11 +83,11 @@ Trusted Registry. See below for specifics.
 
 ### New Features
 
-* New, more granular, [roles for users](configure/configuration.md#authentication). Docker Trusted Registry users can now be assigned different levels of access
+* New, more granular, [roles for users](../user-management/permission-levels.md). Docker Trusted Registry users can now be assigned different levels of access
 (admin, r/w, r/o) to the repositories. **Important:** Existing Docker Trusted
 Registry users should make sure to see the note [below](#dhe-1-0-upgrade-warning) regarding migrating users before upgrading.
 * A new storage status indicator for storage space. The dashboard now shows used and available storage space for supported storage drivers.
-* A new [diagnostics tool](adminguide.md#client-docker-daemon-diagnostics) gathers and bundles Docker Trusted Registry logs, system information, container
+* A new diagnostics tool gathers and bundles Docker Trusted Registry logs, system information, container
 information, and other configuration settings for use by Docker support or as a
 backup.
 * Performance and reliability improvements to the S3 storage backend.

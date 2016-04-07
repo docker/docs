@@ -1,11 +1,12 @@
 <!--[metadata]>
 +++
+aliases = ["/docker-trusted-registry/cse-release-notes/"]
 title = "CS Engine release notes"
 description = "Commercially supported Docker Engine release notes"
 keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry, Commercially Supported Docker Engine, release notes"]
 [menu.main]
-parent="workw_dtr"
-weight=102
+parent="dtr_menu_release_notes"
+weight=0
 +++
 <![end-metadata]-->
 
@@ -59,7 +60,7 @@ incorrectly propagated as the source address of a connection.
 ## CS Engine 1.9.1-cs2
 (4 December 2015)
 
-Starting with this release, upgrading minor versions, for example, from 1.9.0 to 1.9.1, is faster and easier. See the [upgrade](install/upgrade.md) documentation for details.
+Starting with this release, upgrading minor versions, for example, from 1.9.0 to 1.9.1, is faster and easier. See the [upgrade](../install/upgrade.md) documentation for details.
 
 You can refer to the detailed list of all changes since the release of CS Engine
 1.9.0

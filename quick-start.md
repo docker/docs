@@ -1,14 +1,15 @@
-
+<!--[metadata]>
 +++
-title = "Quick-start: Basic Workflow"
+title = "Quickstart"
 description = "Brief tutorial on the basics of Docker Trusted Registry user workflow"
-keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry, image,  repository"]
+keywords = ["docker, dtr, registry, repository, quickstart"]
 [menu.main]
 parent="workw_dtr"
-weight=2
+weight=10
 +++
+<![end-metadata]-->
 
-# Docker Trusted Registry Quick Start guide: Basic User Workflow
+# Docker Trusted Registry quickstart
 
 This Quick Start Guide gives you a hands-on look at the basics of using
 Docker Trusted Registry, Docker's on-premises image storage application.
@@ -44,9 +45,7 @@ You should be able to complete this guide in about thirty minutes.
 ## Pulling the official Jenkins image
 
 > **Note:** This guide assumes you are familiar with basic Docker concepts such
-> as images, containers, and registries. If you need to learn more about Docker
-> fundamentals, please consult the
-> [Docker user guide](http://docs.docker.com/userguide/).
+> as images, containers, and registries.
 
 First, you will retrieve a copy of the official Jenkins image from the Docker Hub. By default, if
 Docker can't find an image locally, it will attempt to pull the image from the
@@ -322,8 +321,3 @@ HTTPS access, your new plugin was added and is ready for use, and HTTP access
 has been disabled. At this point, any member of your team can use `docker pull`
 to access the image from your Docker Trusted Registry instance, allowing them to access a
 configured, secured Jenkins instance that can run on any infrastructure.
-
-## Next Steps
-
-For more information on using Docker Trusted Registry, take a look at the
-[User's Guide](userguide.md).
