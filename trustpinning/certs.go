@@ -1,4 +1,4 @@
-package certs
+package trustpinning
 
 import (
 	"crypto/x509"

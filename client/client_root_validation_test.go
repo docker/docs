@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/docker/notary/certs"
+	"github.com/docker/notary/trustpinning"
 	"github.com/docker/notary/tuf/data"
 	"github.com/stretchr/testify/require"
 )
@@ -72,7 +72,7 @@ func validateRootSuccessfully(t *testing.T, rootType string) {
 	// in the store for the dnsName docker.com/notary, so TOFUS doesn't apply
 	_, err = repo.ListTargets(data.CanonicalTargetsRole)
 	require.Error(t, err, "An error was expected")
-	require.Equal(t, err, &certs.ErrValidationFail{
+	require.Equal(t, err, &trustpinning.ErrValidationFail{
 		Reason: "failed to validate data with current trusted certificates",
 	})
 }
