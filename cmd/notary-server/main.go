@@ -10,13 +10,8 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/distribution/health"
-	"github.com/docker/notary/signer/client"
-	"golang.org/x/net/context"
-
 	"github.com/docker/notary/server"
-	"github.com/docker/notary/utils"
 	"github.com/docker/notary/version"
-	"github.com/spf13/viper"
 )
 
 // DebugAddress is the debug server address to listen on
@@ -42,64 +37,6 @@ func init() {
 	if logFormat == jsonLogFormat {
 		logrus.SetFormatter(new(logrus.JSONFormatter))
 	}
-}
-
-func parseServerConfig(configFilePath string, hRegister healthRegister) (context.Context, server.Config, error) {
-	config := viper.New()
-	utils.SetupViper(config, envPrefix)
-
-	// parse viper config
-	if err := utils.ParseViper(config, configFilePath); err != nil {
-		return nil, server.Config{}, err
-	}
-
-	ctx := context.Background()
-
-	// default is error level
-	lvl, err := utils.ParseLogLevel(config, logrus.ErrorLevel)
-	if err != nil {
-		return nil, server.Config{}, err
-	}
-	logrus.SetLevel(lvl)
-
-	// parse bugsnag config
-	bugsnagConf, err := utils.ParseBugsnag(config)
-	if err != nil {
-		return ctx, server.Config{}, err
-	}
-	utils.SetUpBugsnag(bugsnagConf)
-
-	trust, keyAlgo, err := getTrustService(config, client.NewNotarySigner, hRegister)
-	if err != nil {
-		return nil, server.Config{}, err
-	}
-	ctx = context.WithValue(ctx, "keyAlgorithm", keyAlgo)
-
-	store, err := getStore(config, []string{utils.MySQLBackend, utils.MemoryBackend}, hRegister)
-	if err != nil {
-		return nil, server.Config{}, err
-	}
-	ctx = context.WithValue(ctx, "metaStore", store)
-
-	currentCache, consistentCache, err := getCacheConfig(config)
-	if err != nil {
-		return nil, server.Config{}, err
-	}
-
-	httpAddr, tlsConfig, err := getAddrAndTLSConfig(config)
-	if err != nil {
-		return nil, server.Config{}, err
-	}
-
-	return ctx, server.Config{
-		Addr:                         httpAddr,
-		TLSConfig:                    tlsConfig,
-		Trust:                        trust,
-		AuthMethod:                   config.GetString("auth.type"),
-		AuthOpts:                     config.Get("auth.options"),
-		CurrentCacheControlConfig:    currentCache,
-		ConsistentCacheControlConfig: consistentCache,
-	}, nil
 }
 
 func main() {
