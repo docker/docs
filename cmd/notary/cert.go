@@ -25,12 +25,6 @@ var cmdCertListTemplate = usageTemplate{
 	Long:  "Lists root certificates known to notary.",
 }
 
-var cmdCertRotateTemplate = &usageTemplate{
-	Use:   "rotate [ GUN ]",
-	Short: "Rotate certificates for a role.",
-	Long:  "Generates new certificates for the given role (without replacing the root key).",
-}
-
 var cmdCertRemoveTemplate = usageTemplate{
 	Use:   "remove [ certID ]",
 	Short: "Removes the certificate with the given cert ID.",
@@ -50,7 +44,6 @@ type certCommander struct {
 func (c *certCommander) GetCommand() *cobra.Command {
 	cmd := cmdCertTemplate.ToCommand(nil)
 	cmd.AddCommand(cmdCertListTemplate.ToCommand(c.certList))
-	cmd.AddCommand(cmdCertRotateTemplate.ToCommand(c.certRotate))
 
 	cmdCertRemove := cmdCertRemoveTemplate.ToCommand(c.certRemove)
 	cmdCertRemove.Flags().StringVarP(
@@ -163,51 +156,6 @@ func (c *certCommander) certRemove(cmd *cobra.Command, args []string) error {
 			}
 		}
 	}
-	return nil
-}
-
-// certRotate replaces a certificate with a new version
-func (c *certCommander) certRotate(cmd *cobra.Command, args []string) error {
-	if len(args) != 1 {
-		cmd.Usage()
-		return fmt.Errorf("Must specify a GUN")
-	}
-
-	gun := args[0]
-	config, err := c.configGetter()
-	if err != nil {
-		return err
-	}
-
-	rt, err := getTransport(config, gun, false)
-	if err != nil {
-		return err
-	}
-	nRepo, err := notaryclient.NewNotaryRepository(config.GetString("trust_dir"), gun, getRemoteTrustServer(config), rt, c.retriever)
-	if err != nil {
-		return err
-	}
-
-	certs, err := nRepo.ListRootCerts()
-	if err != nil {
-		return err
-	}
-
-	for _, cert := range certs {
-		err := nRepo.RotateRootCert(cert)
-		if err != nil {
-			id, err := trustmanager.FingerprintCert(cert)
-			if err != nil {
-				return fmt.Errorf("Could not fingerprint certificate: %v", err)
-			}
-			return fmt.Errorf("Error rotating certificate %s: %s", id, err)
-		}
-	}
-
-	cmd.Printf(
-		"Rotation of the following certificates into repository \"%s\" staged for next publish.\n",
-		gun)
-	prettyPrintCerts(certs, cmd.Out())
 	return nil
 }
 
