@@ -11,6 +11,7 @@ import (
 	_ "github.com/docker/distribution/registry/auth/token"
 	"github.com/docker/go-connections/tlsconfig"
 	"github.com/docker/notary"
+	"github.com/docker/notary/server"
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/signer/client"
 	"github.com/docker/notary/tuf/data"
@@ -18,6 +19,7 @@ import (
 	"github.com/docker/notary/utils"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/spf13/viper"
+	"golang.org/x/net/context"
 )
 
 // get the address for the HTTP server, and parses the optional TLS
@@ -167,4 +169,62 @@ func getCacheConfig(configuration *viper.Viper) (current, consistent utils.Cache
 	current = cccs[currentOpt]
 	consistent = cccs[consistentOpt]
 	return
+}
+
+func parseServerConfig(configFilePath string, hRegister healthRegister) (context.Context, server.Config, error) {
+	config := viper.New()
+	utils.SetupViper(config, envPrefix)
+
+	// parse viper config
+	if err := utils.ParseViper(config, configFilePath); err != nil {
+		return nil, server.Config{}, err
+	}
+
+	ctx := context.Background()
+
+	// default is error level
+	lvl, err := utils.ParseLogLevel(config, logrus.ErrorLevel)
+	if err != nil {
+		return nil, server.Config{}, err
+	}
+	logrus.SetLevel(lvl)
+
+	// parse bugsnag config
+	bugsnagConf, err := utils.ParseBugsnag(config)
+	if err != nil {
+		return ctx, server.Config{}, err
+	}
+	utils.SetUpBugsnag(bugsnagConf)
+
+	trust, keyAlgo, err := getTrustService(config, client.NewNotarySigner, hRegister)
+	if err != nil {
+		return nil, server.Config{}, err
+	}
+	ctx = context.WithValue(ctx, "keyAlgorithm", keyAlgo)
+
+	store, err := getStore(config, []string{utils.MySQLBackend, utils.MemoryBackend}, hRegister)
+	if err != nil {
+		return nil, server.Config{}, err
+	}
+	ctx = context.WithValue(ctx, "metaStore", store)
+
+	currentCache, consistentCache, err := getCacheConfig(config)
+	if err != nil {
+		return nil, server.Config{}, err
+	}
+
+	httpAddr, tlsConfig, err := getAddrAndTLSConfig(config)
+	if err != nil {
+		return nil, server.Config{}, err
+	}
+
+	return ctx, server.Config{
+		Addr:                         httpAddr,
+		TLSConfig:                    tlsConfig,
+		Trust:                        trust,
+		AuthMethod:                   config.GetString("auth.type"),
+		AuthOpts:                     config.Get("auth.options"),
+		CurrentCacheControlConfig:    currentCache,
+		ConsistentCacheControlConfig: consistentCache,
+	}, nil
 }
