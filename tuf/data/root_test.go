@@ -27,9 +27,11 @@ func (e errorSerializer) Unmarshal([]byte, interface{}) error {
 func validRootTemplate() *SignedRoot {
 	return &SignedRoot{
 		Signed: Root{
-			Type:    "Root",
-			Version: 1,
-			Expires: time.Now(),
+			SignedCommon: SignedCommon{
+				Type:    TUFTypes[CanonicalRootRole],
+				Version: 1,
+				Expires: time.Now(),
+			},
 			Keys: Keys{
 				"key1":  NewPublicKey(RSAKey, []byte("key1")),
 				"key2":  NewPublicKey(RSAKey, []byte("key2")),
@@ -52,7 +54,8 @@ func validRootTemplate() *SignedRoot {
 }
 
 func TestRootToSignedMarshalsSignedPortionWithCanonicalJSON(t *testing.T) {
-	r := SignedRoot{Signed: Root{Type: "root", Version: 2, Expires: time.Now()}}
+	r := SignedRoot{Signed: Root{SignedCommon: SignedCommon{
+		Type: TUFTypes[CanonicalRootRole], Version: 2, Expires: time.Now()}}}
 	signedCanonical, err := r.ToSigned()
 	require.NoError(t, err)
 
@@ -69,7 +72,8 @@ func TestRootToSignedMarshalsSignedPortionWithCanonicalJSON(t *testing.T) {
 
 func TestRootToSignCopiesSignatures(t *testing.T) {
 	r := SignedRoot{
-		Signed: Root{Type: "root", Version: 2, Expires: time.Now()},
+		Signed: Root{SignedCommon: SignedCommon{
+			Type: TUFTypes[CanonicalRootRole], Version: 2, Expires: time.Now()}},
 		Signatures: []Signature{
 			{KeyID: "key1", Method: "method1", Signature: []byte("hello")},
 		},
@@ -89,7 +93,8 @@ func TestRootToSignedMarshallingErrorsPropagated(t *testing.T) {
 	setDefaultSerializer(errorSerializer{})
 	defer setDefaultSerializer(canonicalJSON{})
 	r := SignedRoot{
-		Signed: Root{Type: "root", Version: 2, Expires: time.Now()},
+		Signed: Root{SignedCommon: SignedCommon{
+			Type: TUFTypes[CanonicalRootRole], Version: 2, Expires: time.Now()}},
 	}
 	_, err := r.ToSigned()
 	require.EqualError(t, err, "bad")
@@ -97,7 +102,7 @@ func TestRootToSignedMarshallingErrorsPropagated(t *testing.T) {
 
 func TestRootMarshalJSONMarshalsSignedWithRegularJSON(t *testing.T) {
 	r := SignedRoot{
-		Signed: Root{Type: "root", Version: 2, Expires: time.Now()},
+		Signed: Root{SignedCommon: SignedCommon{Type: "root", Version: 2, Expires: time.Now()}},
 		Signatures: []Signature{
 			{KeyID: "key1", Method: "method1", Signature: []byte("hello")},
 			{KeyID: "key2", Method: "method2", Signature: []byte("there")},
@@ -122,7 +127,8 @@ func TestRootMarshalJSONMarshallingErrorsPropagated(t *testing.T) {
 	setDefaultSerializer(errorSerializer{})
 	defer setDefaultSerializer(canonicalJSON{})
 	r := SignedRoot{
-		Signed: Root{Type: "root", Version: 2, Expires: time.Now()},
+		Signed: Root{SignedCommon: SignedCommon{
+			Type: TUFTypes[CanonicalRootRole], Version: 2, Expires: time.Now()}},
 	}
 	_, err := r.MarshalJSON()
 	require.EqualError(t, err, "bad")
