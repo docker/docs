@@ -101,9 +101,11 @@ func TestGetRoleByHash(t *testing.T) {
 	ts := data.SignedTimestamp{
 		Signatures: make([]data.Signature, 0),
 		Signed: data.Timestamp{
-			Type:    data.TUFTypes[data.CanonicalTimestampRole],
-			Version: 1,
-			Expires: data.DefaultExpires(data.CanonicalTimestampRole),
+			SignedCommon: data.SignedCommon{
+				Type:    data.TUFTypes[data.CanonicalTimestampRole],
+				Version: 1,
+				Expires: data.DefaultExpires(data.CanonicalTimestampRole),
+			},
 		},
 	}
 	j, err := json.Marshal(&ts)
@@ -121,9 +123,11 @@ func TestGetRoleByHash(t *testing.T) {
 	ts = data.SignedTimestamp{
 		Signatures: make([]data.Signature, 0),
 		Signed: data.Timestamp{
-			Type:    data.TUFTypes[data.CanonicalTimestampRole],
-			Version: 2,
-			Expires: data.DefaultExpires(data.CanonicalTimestampRole),
+			SignedCommon: data.SignedCommon{
+				Type:    data.TUFTypes[data.CanonicalTimestampRole],
+				Version: 2,
+				Expires: data.DefaultExpires(data.CanonicalTimestampRole),
+			},
 		},
 	}
 	newTS, err := json.Marshal(&ts)
