@@ -266,7 +266,14 @@ func TestValidateRootWithPinnedCert(t *testing.T) {
 	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
 
 	// This call to ValidateRoot should succeed with the correct Cert ID (same as root public key ID)
-	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string]string{"docker.com/notary": rootPubKeyID}})
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string][]string{"docker.com/notary": {rootPubKeyID}}})
+	require.NoError(t, err)
+
+	// purge the cert store to check another valid certs trust pinning
+	certStore.RemoveAll()
+
+	// This call to ValidateRoot should also succeed with the correct Cert ID (same as root public key ID), even though we passed an extra bad one
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string][]string{"docker.com/notary": {rootPubKeyID, "invalidID"}}})
 	require.NoError(t, err)
 }
 
@@ -295,23 +302,23 @@ func TestValidateRootFailuresWithPinnedCert(t *testing.T) {
 	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
 
 	// This call to ValidateRoot should fail due to an incorrect cert ID
-	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string]string{"docker.com/notary": "ABSOLUTELY NOT A CERT ID"}})
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string][]string{"docker.com/notary": {"ABSOLUTELY NOT A CERT ID"}}})
 	require.Error(t, err)
 
 	// This call to ValidateRoot should fail due to an empty cert ID
-	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string]string{"docker.com/notary": ""}})
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string][]string{"docker.com/notary": {""}}})
 	require.Error(t, err)
 
 	// This call to ValidateRoot should fail due to an invalid GUN (even though the cert ID is correct), and TOFUS defaults to false
-	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string]string{"not_a_gun": rootPubKeyID}, TOFU: false})
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string][]string{"not_a_gun": {rootPubKeyID}}, TOFU: false})
 	require.Error(t, err)
 
 	// This call to ValidateRoot should fail due to an invalid cert ID, even though it's a valid key ID for targets
-	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string]string{"docker.com/notary": targetsPubKeyID}})
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string][]string{"docker.com/notary": {targetsPubKeyID}}})
 	require.Error(t, err)
 
 	// This call to ValidateRoot should succeed because we fall through to TOFUS even though we have no matching GUNs under Certs
-	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string]string{"not_a_gun": rootPubKeyID}, TOFU: true})
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string][]string{"not_a_gun": {rootPubKeyID}}, TOFU: true})
 	require.NoError(t, err)
 }
 
@@ -356,7 +363,7 @@ func TestValidateRootWithPinnedCA(t *testing.T) {
 	validCAFilepath := "../fixtures/root-ca.crt"
 
 	// If we pass an invalid Certs entry in addition to this valid CA entry, since Certs has priority for pinning we will fail
-	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string]string{"docker.com/notary": "invalidID"}, CA: map[string]string{"docker.com/notary": validCAFilepath}, TOFU: false})
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string][]string{"docker.com/notary": {"invalidID"}}, CA: map[string]string{"docker.com/notary": validCAFilepath}, TOFU: false})
 	require.Error(t, err)
 
 	// Now construct a new root with a valid cert chain, such that signatures are correct over the 'notary-signer' GUN.  Pin the root-ca and validate

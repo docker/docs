@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/docker/notary"
 	"github.com/docker/notary/trustmanager"
+	"github.com/docker/notary/tuf/utils"
 	"strings"
 )
 
@@ -46,9 +47,13 @@ func NewTrustPinChecker(trustPinConfig notary.TrustPinConfig, gun string) (Trust
 		caRootPool := x509.NewCertPool()
 		for _, caCert := range caCerts {
 			if err = trustmanager.ValidateCertificate(caCert); err != nil {
-				return TrustPinChecker{}, fmt.Errorf("invalid CA cert provided")
+				continue
 			}
 			caRootPool.AddCert(caCert)
+		}
+		// If we didn't have any valid CA certs, error out
+		if len(caRootPool.Subjects()) == 0 {
+			return TrustPinChecker{}, fmt.Errorf("invalid CA certs provided")
 		}
 		trustPinChecker.pinnedCAPool = caRootPool
 		return trustPinChecker, nil
@@ -68,7 +73,7 @@ func (t TrustPinChecker) checkCert(leafCert *x509.Certificate, intCerts []*x509.
 		if err != nil {
 			return false
 		}
-		return t.config.Certs[t.gun] == certID
+		return utils.StrSliceContains(t.config.Certs[t.gun], certID)
 	case ca:
 		// Use intermediate certificates included in the root TUF metadata for our validation
 		caIntPool := x509.NewCertPool()
