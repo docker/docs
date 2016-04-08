@@ -463,7 +463,7 @@ func TestConfigFileTrustPinning(t *testing.T) {
 		},
 		"trust_pinning": {
 		    "certs": {
-		        "repo3": "%s"
+		        "repo3": ["%s"]
 		    }
 		 }
 	}`, s.URL, strings.Repeat("x", notary.Sha256HexSize)))
@@ -483,7 +483,7 @@ func TestConfigFileTrustPinning(t *testing.T) {
 
 	config, err = commander.parseConfig()
 	require.NoError(t, err)
-	require.Equal(t, strings.Repeat("x", notary.Sha256HexSize), config.GetStringMap("trust_pinning.certs")["repo3"])
+	require.Equal(t, []interface{}{strings.Repeat("x", notary.Sha256HexSize)}, config.GetStringMap("trust_pinning.certs")["repo3"])
 
 	// Even though specified certs will fail, we'll have successfully parsed the config and attempted to retrieve the root
 	require.Len(t, m.gotten, 3)

@@ -549,9 +549,17 @@ func getRemoteTrustServer(config *viper.Viper) string {
 }
 
 func getTrustPinning(config *viper.Viper) notary.TrustPinConfig {
+	// Need to parse out Certs section from config
+	certMap := config.GetStringMap("trust_pinning.certs")
+	resultCertMap := make(map[string][]string)
+	for gun, certSlice := range certMap {
+		if castedCertSlice, ok := certSlice.([]string); ok {
+			resultCertMap[gun] = castedCertSlice
+		}
+	}
 	return notary.TrustPinConfig{
 		TOFU:  config.GetBool("trust_pinning.tofu"),
 		CA:    config.GetStringMapString("trust_pinning.ca"),
-		Certs: config.GetStringMapString("trust_pinning.certs"),
+		Certs: resultCertMap,
 	}
 }

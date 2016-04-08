@@ -69,6 +69,6 @@ var NotaryDefaultExpiries = map[string]time.Duration{
 // This struct represents the preferred way to bootstrap trust for this repository
 type TrustPinConfig struct {
 	CA    map[string]string
-	Certs map[string]string
+	Certs map[string][]string
 	TOFU  bool
 }
