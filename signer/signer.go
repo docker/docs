@@ -1,6 +1,8 @@
 package signer
 
 import (
+	"crypto/tls"
+
 	pb "github.com/docker/notary/proto"
 	"github.com/docker/notary/tuf/signed"
 )
@@ -32,4 +34,12 @@ type KeyManager interface {
 // Signer is the interface that allows the signing service to return signatures
 type Signer interface {
 	Sign(request *pb.SignatureRequest) (*pb.Signature, error)
+}
+
+// Config tells how to configure a notary-signer
+type Config struct {
+	HTTPAddr       string
+	GRPCAddr       string
+	TLSConfig      *tls.Config
+	CryptoServices CryptoServiceIndex
 }
