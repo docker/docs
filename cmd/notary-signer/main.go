@@ -284,7 +284,7 @@ func debugServer(addr string) {
 	}
 }
 
-func bootstrap(s trustmanager.KeyStore) error {
+func bootstrap(s interface{}) error {
 	store, ok := s.(storage.Bootstrapper)
 	if !ok {
 		return fmt.Errorf("Store does not support bootstrapping.")
