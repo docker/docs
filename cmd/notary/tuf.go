@@ -16,9 +16,9 @@ import (
 	"github.com/docker/distribution/registry/client/transport"
 	"github.com/docker/docker/pkg/term"
 	"github.com/docker/go-connections/tlsconfig"
-	"github.com/docker/notary"
 	notaryclient "github.com/docker/notary/client"
 	"github.com/docker/notary/passphrase"
+	"github.com/docker/notary/trustpinning"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/utils"
 	"github.com/spf13/cobra"
@@ -117,10 +117,15 @@ func (t *tufCommander) tufAdd(cmd *cobra.Command, args []string) error {
 	targetName := args[1]
 	targetPath := args[2]
 
+	trustPin, err := getTrustPinning(config)
+	if err != nil {
+		return err
+	}
+
 	// no online operations are performed by add so the transport argument
 	// should be nil
 	nRepo, err := notaryclient.NewNotaryRepository(
-		config.GetString("trust_dir"), gun, getRemoteTrustServer(config), nil, t.retriever, getTrustPinning(config))
+		config.GetString("trust_dir"), gun, getRemoteTrustServer(config), nil, t.retriever, trustPin)
 	if err != nil {
 		return err
 	}
@@ -156,8 +161,13 @@ func (t *tufCommander) tufInit(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
+	trustPin, err := getTrustPinning(config)
+	if err != nil {
+		return err
+	}
+
 	nRepo, err := notaryclient.NewNotaryRepository(
-		config.GetString("trust_dir"), gun, getRemoteTrustServer(config), rt, t.retriever, getTrustPinning(config))
+		config.GetString("trust_dir"), gun, getRemoteTrustServer(config), rt, t.retriever, trustPin)
 	if err != nil {
 		return err
 	}
@@ -201,8 +211,13 @@ func (t *tufCommander) tufList(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
+	trustPin, err := getTrustPinning(config)
+	if err != nil {
+		return err
+	}
+
 	nRepo, err := notaryclient.NewNotaryRepository(
-		config.GetString("trust_dir"), gun, getRemoteTrustServer(config), rt, t.retriever, getTrustPinning(config))
+		config.GetString("trust_dir"), gun, getRemoteTrustServer(config), rt, t.retriever, trustPin)
 	if err != nil {
 		return err
 	}
@@ -236,8 +251,13 @@ func (t *tufCommander) tufLookup(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
+	trustPin, err := getTrustPinning(config)
+	if err != nil {
+		return err
+	}
+
 	nRepo, err := notaryclient.NewNotaryRepository(
-		config.GetString("trust_dir"), gun, getRemoteTrustServer(config), rt, t.retriever, getTrustPinning(config))
+		config.GetString("trust_dir"), gun, getRemoteTrustServer(config), rt, t.retriever, trustPin)
 	if err != nil {
 		return err
 	}
@@ -263,8 +283,13 @@ func (t *tufCommander) tufStatus(cmd *cobra.Command, args []string) error {
 	}
 	gun := args[0]
 
+	trustPin, err := getTrustPinning(config)
+	if err != nil {
+		return err
+	}
+
 	nRepo, err := notaryclient.NewNotaryRepository(
-		config.GetString("trust_dir"), gun, getRemoteTrustServer(config), nil, t.retriever, getTrustPinning(config))
+		config.GetString("trust_dir"), gun, getRemoteTrustServer(config), nil, t.retriever, trustPin)
 	if err != nil {
 		return err
 	}
@@ -307,8 +332,13 @@ func (t *tufCommander) tufPublish(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
+	trustPin, err := getTrustPinning(config)
+	if err != nil {
+		return err
+	}
+
 	nRepo, err := notaryclient.NewNotaryRepository(
-		config.GetString("trust_dir"), gun, getRemoteTrustServer(config), rt, t.retriever, getTrustPinning(config))
+		config.GetString("trust_dir"), gun, getRemoteTrustServer(config), rt, t.retriever, trustPin)
 	if err != nil {
 		return err
 	}
@@ -331,10 +361,15 @@ func (t *tufCommander) tufRemove(cmd *cobra.Command, args []string) error {
 	gun := args[0]
 	targetName := args[1]
 
+	trustPin, err := getTrustPinning(config)
+	if err != nil {
+		return err
+	}
+
 	// no online operation are performed by remove so the transport argument
 	// should be nil.
 	repo, err := notaryclient.NewNotaryRepository(
-		config.GetString("trust_dir"), gun, getRemoteTrustServer(config), nil, t.retriever, getTrustPinning(config))
+		config.GetString("trust_dir"), gun, getRemoteTrustServer(config), nil, t.retriever, trustPin)
 	if err != nil {
 		return err
 	}
@@ -372,8 +407,13 @@ func (t *tufCommander) tufVerify(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
+	trustPin, err := getTrustPinning(config)
+	if err != nil {
+		return err
+	}
+
 	nRepo, err := notaryclient.NewNotaryRepository(
-		config.GetString("trust_dir"), gun, getRemoteTrustServer(config), rt, t.retriever, getTrustPinning(config))
+		config.GetString("trust_dir"), gun, getRemoteTrustServer(config), rt, t.retriever, trustPin)
 	if err != nil {
 		return err
 	}
@@ -548,18 +588,29 @@ func getRemoteTrustServer(config *viper.Viper) string {
 	return defaultServerURL
 }
 
-func getTrustPinning(config *viper.Viper) notary.TrustPinConfig {
+func getTrustPinning(config *viper.Viper) (trustpinning.TrustPinConfig, error) {
+	var ok bool
 	// Need to parse out Certs section from config
 	certMap := config.GetStringMap("trust_pinning.certs")
 	resultCertMap := make(map[string][]string)
 	for gun, certSlice := range certMap {
-		if castedCertSlice, ok := certSlice.([]string); ok {
-			resultCertMap[gun] = castedCertSlice
+		var castedCertSlice []interface{}
+		if castedCertSlice, ok = certSlice.([]interface{}); !ok {
+			return trustpinning.TrustPinConfig{}, fmt.Errorf("invalid format for trust_pinning.certs")
 		}
+		certsForGun := make([]string, len(castedCertSlice))
+		for idx, certIDInterface := range castedCertSlice {
+			if certID, ok := certIDInterface.(string); ok {
+				certsForGun[idx] = certID
+			} else {
+				return trustpinning.TrustPinConfig{}, fmt.Errorf("invalid format for trust_pinning.certs")
+			}
+		}
+		resultCertMap[gun] = certsForGun
 	}
-	return notary.TrustPinConfig{
-		TOFU:  config.GetBool("trust_pinning.tofu"),
-		CA:    config.GetStringMapString("trust_pinning.ca"),
-		Certs: resultCertMap,
-	}
+	return trustpinning.TrustPinConfig{
+		DisableTOFU: config.GetBool("trust_pinning.disable_tofu"),
+		CA:          config.GetStringMapString("trust_pinning.ca"),
+		Certs:       resultCertMap,
+	}, nil
 }

@@ -373,149 +373,105 @@ func TestConfigFileOverridenByCmdLineFlags(t *testing.T) {
 
 // the config can specify trust pinning settings for TOFUs, as well as pinned Certs or CA
 func TestConfigFileTrustPinning(t *testing.T) {
-	// Set up server that with a self signed cert
 	var err error
-	// add a handler for getting the root
-	m := &recordingMetaStore{MemStorage: *storage.NewMemStorage()}
-	s := httptest.NewUnstartedServer(setupServerHandler(m))
-	s.TLS, err = tlsconfig.Server(tlsconfig.Options{
-		CertFile:   "../../fixtures/notary-server.crt",
-		KeyFile:    "../../fixtures/notary-server.key",
-		CAFile:     "../../fixtures/root-ca.crt",
-		ClientAuth: tls.RequireAndVerifyClientCert,
-	})
-	require.NoError(t, err)
-	s.StartTLS()
-	defer s.Close()
 
+	tempDir := tempDirWithConfig(t, `{
+        "trust_pinning": {
+            "disable_tofu": false
+         }
+	}`)
+	defer os.RemoveAll(tempDir)
 	commander := &notaryCommander{
 		getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+		configFile:   filepath.Join(tempDir, "config.json"),
 	}
-
-	tempDir := tempDirWithConfig(t, fmt.Sprintf(`{
-		"remote_server": {
-			"url": "%s"
-		},
-		"trust_pinning": {
-		    "tofu": true
-		 }
-	}`, s.URL))
-	defer os.RemoveAll(tempDir)
-	configFile := filepath.Join(tempDir, "config.json")
-
-	// set a config file, so it doesn't check ~/.notary/config.json by default,
-	// and execute a random command so that the flags are parsed
-	cwd, err := os.Getwd()
-	require.NoError(t, err)
-
-	cmd := commander.GetCommand()
-	cmd.SetArgs([]string{
-		"-c", configFile, "-d", tempDir, "list", "repo",
-		"--tlscacert", "../../fixtures/root-ca.crt",
-		"--tlscert", filepath.Clean(filepath.Join(cwd, "../../fixtures/notary-server.crt")),
-		"--tlskey", "../../fixtures/notary-server.key"})
-	cmd.SetOutput(new(bytes.Buffer)) // eat the output
-	err = cmd.Execute()
-	require.Error(t, err, "there was no repository, so list should have failed")
-	require.NotContains(t, err.Error(), "TLS", "there was no TLS error though!")
 
 	// Check that tofu was set correctly
 	config, err := commander.parseConfig()
 	require.NoError(t, err)
-	require.Equal(t, true, config.GetBool("trust_pinning.tofu"))
+	require.Equal(t, false, config.GetBool("trust_pinning.disable_tofu"))
+	trustPin, err := getTrustPinning(config)
+	require.NoError(t, err)
+	require.Equal(t, false, trustPin.DisableTOFU)
 
-	// validate that we actually managed to connect and attempted to download the root though
-	require.Len(t, m.gotten, 1)
-	require.Equal(t, m.gotten[0], "repo.root")
-
-	tempDir2 := tempDirWithConfig(t, fmt.Sprintf(`{
+	tempDir = tempDirWithConfig(t, `{
 		"remote_server": {
 			"url": "%s"
 		},
 		"trust_pinning": {
-		    "tofu": false
-		 }
-	}`, s.URL))
+		    "disable_tofu": true
+		}
+	}`)
 	defer os.RemoveAll(tempDir)
-	configFile = filepath.Join(tempDir2, "config.json")
+	commander = &notaryCommander{
+		getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+		configFile:   filepath.Join(tempDir, "config.json"),
+	}
 
-	cmd = commander.GetCommand()
-	cmd.SetArgs([]string{
-		"-c", configFile, "-d", tempDir2, "list", "repo2",
-		"--tlscacert", "../../fixtures/root-ca.crt",
-		"--tlscert", filepath.Clean(filepath.Join(cwd, "../../fixtures/notary-server.crt")),
-		"--tlskey", "../../fixtures/notary-server.key"})
-	cmd.SetOutput(new(bytes.Buffer)) // eat the output
-	err = cmd.Execute()
-	require.Error(t, err, "there was no repository, so list should have failed")
-	require.NotContains(t, err.Error(), "TLS", "there was no TLS error though!")
-
+	// Check that tofu was correctly disabled
 	config, err = commander.parseConfig()
 	require.NoError(t, err)
-	require.Equal(t, false, config.GetBool("trust_pinning.tofu"))
-
-	// Even though TOFUS will fail, we'll have successfully parsed the config and attempted to retrieve the root
-	require.Len(t, m.gotten, 2)
+	require.Equal(t, true, config.GetBool("trust_pinning.disable_tofu"))
+	trustPin, err = getTrustPinning(config)
+	require.NoError(t, err)
+	require.Equal(t, true, trustPin.DisableTOFU)
 
 	tempDir = tempDirWithConfig(t, fmt.Sprintf(`{
-		"remote_server": {
-			"url": "%s"
-		},
 		"trust_pinning": {
 		    "certs": {
 		        "repo3": ["%s"]
 		    }
 		 }
-	}`, s.URL, strings.Repeat("x", notary.Sha256HexSize)))
+	}`, strings.Repeat("x", notary.Sha256HexSize)))
 	defer os.RemoveAll(tempDir)
-	configFile = filepath.Join(tempDir, "config.json")
-
-	cmd = commander.GetCommand()
-	cmd.SetArgs([]string{
-		"-c", configFile, "-d", tempDir, "list", "repo3",
-		"--tlscacert", "../../fixtures/root-ca.crt",
-		"--tlscert", filepath.Clean(filepath.Join(cwd, "../../fixtures/notary-server.crt")),
-		"--tlskey", "../../fixtures/notary-server.key"})
-	cmd.SetOutput(new(bytes.Buffer)) // eat the output
-	err = cmd.Execute()
-	require.Error(t, err, "there was no repository, so list should have failed")
-	require.NotContains(t, err.Error(), "TLS", "there was no TLS error though!")
+	commander = &notaryCommander{
+		getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+		configFile:   filepath.Join(tempDir, "config.json"),
+	}
 
 	config, err = commander.parseConfig()
 	require.NoError(t, err)
 	require.Equal(t, []interface{}{strings.Repeat("x", notary.Sha256HexSize)}, config.GetStringMap("trust_pinning.certs")["repo3"])
+	trustPin, err = getTrustPinning(config)
+	require.NoError(t, err)
+	require.Equal(t, strings.Repeat("x", notary.Sha256HexSize), trustPin.Certs["repo3"][0])
 
-	// Even though specified certs will fail, we'll have successfully parsed the config and attempted to retrieve the root
-	require.Len(t, m.gotten, 3)
+	// Check that an invalid cert ID pinning format fails
+	tempDir = tempDirWithConfig(t, fmt.Sprintf(`{
+		"trust_pinning": {
+		    "certs": {
+		        "repo3": "%s"
+		    }
+		 }
+	}`, strings.Repeat("x", notary.Sha256HexSize)))
+	defer os.RemoveAll(tempDir)
+	commander = &notaryCommander{
+		getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+		configFile:   filepath.Join(tempDir, "config.json"),
+	}
+
+	config, err = commander.parseConfig()
+	require.NoError(t, err)
+	trustPin, err = getTrustPinning(config)
+	require.Error(t, err)
 
 	tempDir = tempDirWithConfig(t, fmt.Sprintf(`{
-		"remote_server": {
-			"url": "%s"
-		},
 		"trust_pinning": {
 		    "ca": {
 		        "repo4": "%s"
 		    }
 		 }
-	}`, s.URL, "root-ca.crt"))
+	}`, "root-ca.crt"))
 	defer os.RemoveAll(tempDir)
-	configFile = filepath.Join(tempDir, "config.json")
-
-	cmd = commander.GetCommand()
-	cmd.SetArgs([]string{
-		"-c", configFile, "-d", tempDir, "list", "repo4",
-		"--tlscacert", "../../fixtures/root-ca.crt",
-		"--tlscert", filepath.Clean(filepath.Join(cwd, "../../fixtures/notary-server.crt")),
-		"--tlskey", "../../fixtures/notary-server.key"})
-	cmd.SetOutput(new(bytes.Buffer)) // eat the output
-	err = cmd.Execute()
-	require.Error(t, err, "there was no repository, so list should have failed")
-	require.NotContains(t, err.Error(), "TLS", "there was no TLS error though!")
+	commander = &notaryCommander{
+		getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+		configFile:   filepath.Join(tempDir, "config.json"),
+	}
 
 	config, err = commander.parseConfig()
 	require.NoError(t, err)
 	require.Equal(t, "root-ca.crt", config.GetStringMap("trust_pinning.ca")["repo4"])
-
-	// Even though specified ca will fail, we'll have successfully parsed the config and attempted to retrieve the root
-	require.Len(t, m.gotten, 4)
+	trustPin, err = getTrustPinning(config)
+	require.NoError(t, err)
+	require.Equal(t, "root-ca.crt", trustPin.CA["repo4"])
 }

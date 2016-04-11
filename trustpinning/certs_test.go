@@ -16,6 +16,7 @@ import (
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/stretchr/testify/require"
+	"time"
 )
 
 type SignedRSARootTemplate struct {
@@ -142,12 +143,12 @@ func TestValidateRoot(t *testing.T) {
 
 	// This call to ValidateRoot will succeed since we are using a valid PEM
 	// encoded certificate, and have no other certificates for this CN
-	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{TOFU: true})
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", TrustPinConfig{})
 	require.NoError(t, err)
 
 	// This call to ValidateRoot will fail since we are passing in a dnsName that
 	// doesn't match the CN of the certificate.
-	err = ValidateRoot(certStore, &testSignedRoot, "diogomonica.com/notary", notary.TrustPinConfig{TOFU: true})
+	err = ValidateRoot(certStore, &testSignedRoot, "diogomonica.com/notary", TrustPinConfig{})
 	require.Error(t, err, "An error was expected")
 	require.Equal(t, err, &ErrValidationFail{Reason: "unable to retrieve valid leaf certificates"})
 
@@ -161,7 +162,7 @@ func TestValidateRoot(t *testing.T) {
 	// Unmarshal our signedroot
 	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
 
-	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{TOFU: true})
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", TrustPinConfig{})
 	require.Error(t, err, "illegal base64 data at input byte")
 
 	//
@@ -174,7 +175,7 @@ func TestValidateRoot(t *testing.T) {
 	// Unmarshal our signedroot
 	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
 
-	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{TOFU: true})
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", TrustPinConfig{})
 	require.Error(t, err, "An error was expected")
 	require.Equal(t, err, &ErrValidationFail{Reason: "unable to retrieve valid leaf certificates"})
 
@@ -189,7 +190,7 @@ func TestValidateRoot(t *testing.T) {
 	// Unmarshal our signedroot
 	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
 
-	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{TOFU: true})
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", TrustPinConfig{})
 	require.Error(t, err, "An error was expected")
 	require.Equal(t, err, &ErrValidationFail{Reason: "unable to retrieve valid leaf certificates"})
 
@@ -207,7 +208,7 @@ func TestValidateRoot(t *testing.T) {
 	// Unmarshal our signedroot
 	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
 
-	err = ValidateRoot(certStore, &testSignedRoot, "secure.example.com", notary.TrustPinConfig{TOFU: true})
+	err = ValidateRoot(certStore, &testSignedRoot, "secure.example.com", TrustPinConfig{})
 	require.Error(t, err, "An error was expected")
 	require.Equal(t, err, &ErrValidationFail{Reason: "failed to validate integrity of roots"})
 }
@@ -237,7 +238,7 @@ func TestValidateRootWithoutTOFUS(t *testing.T) {
 	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
 
 	// This call to ValidateRoot will fail since we are explicitly disabling TOFU and have no local certs
-	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{TOFU: false})
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", TrustPinConfig{DisableTOFU: true})
 	require.Error(t, err)
 }
 
@@ -266,14 +267,14 @@ func TestValidateRootWithPinnedCert(t *testing.T) {
 	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
 
 	// This call to ValidateRoot should succeed with the correct Cert ID (same as root public key ID)
-	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string][]string{"docker.com/notary": {rootPubKeyID}}})
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", TrustPinConfig{Certs: map[string][]string{"docker.com/notary": {rootPubKeyID}}, DisableTOFU: true})
 	require.NoError(t, err)
 
 	// purge the cert store to check another valid certs trust pinning
 	certStore.RemoveAll()
 
 	// This call to ValidateRoot should also succeed with the correct Cert ID (same as root public key ID), even though we passed an extra bad one
-	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string][]string{"docker.com/notary": {rootPubKeyID, "invalidID"}}})
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", TrustPinConfig{Certs: map[string][]string{"docker.com/notary": {rootPubKeyID, "invalidID"}}, DisableTOFU: true})
 	require.NoError(t, err)
 }
 
@@ -302,23 +303,23 @@ func TestValidateRootFailuresWithPinnedCert(t *testing.T) {
 	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
 
 	// This call to ValidateRoot should fail due to an incorrect cert ID
-	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string][]string{"docker.com/notary": {"ABSOLUTELY NOT A CERT ID"}}})
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", TrustPinConfig{Certs: map[string][]string{"docker.com/notary": {"ABSOLUTELY NOT A CERT ID"}}, DisableTOFU: true})
 	require.Error(t, err)
 
 	// This call to ValidateRoot should fail due to an empty cert ID
-	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string][]string{"docker.com/notary": {""}}})
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", TrustPinConfig{Certs: map[string][]string{"docker.com/notary": {""}}, DisableTOFU: true})
 	require.Error(t, err)
 
-	// This call to ValidateRoot should fail due to an invalid GUN (even though the cert ID is correct), and TOFUS defaults to false
-	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string][]string{"not_a_gun": {rootPubKeyID}}, TOFU: false})
+	// This call to ValidateRoot should fail due to an invalid GUN (even though the cert ID is correct), and TOFUS is set to false
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", TrustPinConfig{Certs: map[string][]string{"not_a_gun": {rootPubKeyID}}, DisableTOFU: true})
 	require.Error(t, err)
 
 	// This call to ValidateRoot should fail due to an invalid cert ID, even though it's a valid key ID for targets
-	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string][]string{"docker.com/notary": {targetsPubKeyID}}})
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", TrustPinConfig{Certs: map[string][]string{"docker.com/notary": {targetsPubKeyID}}, DisableTOFU: true})
 	require.Error(t, err)
 
-	// This call to ValidateRoot should succeed because we fall through to TOFUS even though we have no matching GUNs under Certs
-	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string][]string{"not_a_gun": {rootPubKeyID}}, TOFU: true})
+	// This call to ValidateRoot should succeed because we fall through to TOFUS because we have no matching GUNs under Certs
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", TrustPinConfig{Certs: map[string][]string{"not_a_gun": {rootPubKeyID}}, DisableTOFU: false})
 	require.NoError(t, err)
 }
 
@@ -345,25 +346,30 @@ func TestValidateRootWithPinnedCA(t *testing.T) {
 	json.Unmarshal(signedRootBytes.Bytes(), &testSignedRoot)
 
 	// This call to ValidateRoot will fail because we have an invalid path for the CA
-	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{CA: map[string]string{"docker.com/notary": filepath.Join(tempBaseDir, "nonexistent")}})
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", TrustPinConfig{CA: map[string]string{"docker.com/notary": filepath.Join(tempBaseDir, "nonexistent")}})
 	require.Error(t, err)
 
 	// This call to ValidateRoot will fail because we have no valid GUNs to use, and TOFUS is disabled
-	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{CA: map[string]string{"othergun": filepath.Join(tempBaseDir, "nonexistent")}, TOFU: false})
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", TrustPinConfig{CA: map[string]string{"othergun": filepath.Join(tempBaseDir, "nonexistent")}, DisableTOFU: true})
 	require.Error(t, err)
+
+	// This call to ValidateRoot will succeed because we have no valid GUNs to use and we fall back to enabled TOFUS
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", TrustPinConfig{CA: map[string]string{"othergun": filepath.Join(tempBaseDir, "nonexistent")}, DisableTOFU: false})
+	require.NoError(t, err)
+	require.NoError(t, certStore.RemoveAll())
 
 	// Write an invalid CA cert (not even a PEM) to the tempDir and ensure validation fails when using it
 	invalidCAFilepath := filepath.Join(tempBaseDir, "invalid.ca")
 	require.NoError(t, ioutil.WriteFile(invalidCAFilepath, []byte("ABSOLUTELY NOT A PEM"), 0644))
 
 	// Using this invalid CA cert should fail on ValidateRoot
-	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{CA: map[string]string{"docker.com/notary": invalidCAFilepath}, TOFU: false})
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", TrustPinConfig{CA: map[string]string{"docker.com/notary": invalidCAFilepath}, DisableTOFU: true})
 	require.Error(t, err)
 
 	validCAFilepath := "../fixtures/root-ca.crt"
 
 	// If we pass an invalid Certs entry in addition to this valid CA entry, since Certs has priority for pinning we will fail
-	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", notary.TrustPinConfig{Certs: map[string][]string{"docker.com/notary": {"invalidID"}}, CA: map[string]string{"docker.com/notary": validCAFilepath}, TOFU: false})
+	err = ValidateRoot(certStore, &testSignedRoot, "docker.com/notary", TrustPinConfig{Certs: map[string][]string{"docker.com/notary": {"invalidID"}}, CA: map[string]string{"docker.com/notary": validCAFilepath}, DisableTOFU: true})
 	require.Error(t, err)
 
 	// Now construct a new root with a valid cert chain, such that signatures are correct over the 'notary-signer' GUN.  Pin the root-ca and validate
@@ -411,12 +417,63 @@ func TestValidateRootWithPinnedCA(t *testing.T) {
 	newTestSignedRoot, err := testRoot.ToSigned()
 	require.NoError(t, err)
 
-	err = signed.Sign(cs, newTestSignedRoot, newRootLeafKey)
+	err = signed.Sign(cs, newTestSignedRoot, []data.PublicKey{newRootLeafKey}, 1, nil)
 	require.NoError(t, err)
 
 	// Check that we validate correctly against a pinned CA and provided bundle
-	err = ValidateRoot(certStore, newTestSignedRoot, "notary-signer", notary.TrustPinConfig{CA: map[string]string{"notary-signer": validCAFilepath}, TOFU: false})
+	err = ValidateRoot(certStore, newTestSignedRoot, "notary-signer", TrustPinConfig{CA: map[string]string{"notary-signer": validCAFilepath}, DisableTOFU: true})
 	require.NoError(t, err)
+
+	// Add an expired CA for the same gun to our previous pinned bundle, ensure that we still validate correctly
+	certStore.RemoveAll()
+	goodRootCABundle, err := trustmanager.LoadCertBundleFromFile(validCAFilepath)
+	require.NoError(t, err)
+	memKeyStore := trustmanager.NewKeyMemoryStore(passphraseRetriever)
+	cryptoService := cryptoservice.NewCryptoService(memKeyStore)
+	testPubKey, err := cryptoService.Create("root", "notary-signer", data.ECDSAKey)
+	require.NoError(t, err)
+	testPrivKey, _, err := memKeyStore.GetKey(testPubKey.ID())
+	require.NoError(t, err)
+	expiredCert, err := generateExpiredTestingCertificate(testPrivKey, "notary-signer")
+	require.NoError(t, err)
+	bundleWithExpiredCert, err := trustmanager.CertChainToPEM(append(goodRootCABundle, expiredCert))
+	require.NoError(t, err)
+	bundleWithExpiredCertPath := filepath.Join(tempBaseDir, "bundle_with_expired_cert.pem")
+	require.NoError(t, ioutil.WriteFile(bundleWithExpiredCertPath, bundleWithExpiredCert, 0644))
+
+	// Check that we validate correctly against a pinned CA and provided bundle
+	err = ValidateRoot(certStore, newTestSignedRoot, "notary-signer", TrustPinConfig{CA: map[string]string{"notary-signer": bundleWithExpiredCertPath}, DisableTOFU: true})
+	require.NoError(t, err)
+
+	certStore.RemoveAll()
+	testPubKey2, err := cryptoService.Create("root", "notary-signer", data.ECDSAKey)
+	require.NoError(t, err)
+	testPrivKey2, _, err := memKeyStore.GetKey(testPubKey2.ID())
+	require.NoError(t, err)
+	expiredCert2, err := generateExpiredTestingCertificate(testPrivKey2, "notary-signer")
+	require.NoError(t, err)
+	allExpiredCertBundle, err := trustmanager.CertChainToPEM([]*x509.Certificate{expiredCert, expiredCert2})
+	require.NoError(t, err)
+	allExpiredCertPath := filepath.Join(tempBaseDir, "all_expired_cert.pem")
+	require.NoError(t, ioutil.WriteFile(allExpiredCertPath, allExpiredCertBundle, 0644))
+	// Now only use expired certs in the bundle, we should fail
+	err = ValidateRoot(certStore, newTestSignedRoot, "notary-signer", TrustPinConfig{CA: map[string]string{"notary-signer": allExpiredCertPath}, DisableTOFU: true})
+	require.Error(t, err)
+
+	// Add a CA cert for a that won't validate against the root leaf certificate
+	certStore.RemoveAll()
+	testPubKey3, err := cryptoService.Create("root", "notary-signer", data.ECDSAKey)
+	require.NoError(t, err)
+	testPrivKey3, _, err := memKeyStore.GetKey(testPubKey3.ID())
+	require.NoError(t, err)
+	validCert, err := cryptoservice.GenerateCertificate(testPrivKey3, "notary-signer", time.Now(), time.Now().AddDate(1, 0, 0))
+	require.NoError(t, err)
+	bundleWithWrongCert, err := trustmanager.CertChainToPEM([]*x509.Certificate{validCert})
+	require.NoError(t, err)
+	bundleWithWrongCertPath := filepath.Join(tempBaseDir, "bundle_with_expired_cert.pem")
+	require.NoError(t, ioutil.WriteFile(bundleWithWrongCertPath, bundleWithWrongCert, 0644))
+	err = ValidateRoot(certStore, newTestSignedRoot, "notary-signer", TrustPinConfig{CA: map[string]string{"notary-signer": bundleWithWrongCertPath}, DisableTOFU: true})
+	require.Error(t, err)
 }
 
 // TestValidateSuccessfulRootRotation runs through a full root certificate rotation
@@ -457,7 +514,7 @@ func filestoreWithTwoCerts(t *testing.T, gun, keyAlg string) (
 		key, _, err := fileKeyStore.GetKey(pubKey.ID())
 		require.NoError(t, err)
 
-		cert, err := cryptoservice.GenerateTestingCertificate(key.CryptoSigner(), gun)
+		cert, err := generateTestingCertificate(key, gun)
 		require.NoError(t, err)
 
 		certificates[i] = cert
@@ -507,7 +564,7 @@ func testValidateSuccessfulRootRotation(t *testing.T, keyAlg, rootKeyType string
 
 	// This call to ValidateRoot will succeed since we are using a valid PEM
 	// encoded certificate, and have no other certificates for this CN
-	err = ValidateRoot(certStore, signedTestRoot, gun, notary.TrustPinConfig{TOFU: true})
+	err = ValidateRoot(certStore, signedTestRoot, gun, TrustPinConfig{})
 	require.NoError(t, err)
 
 	// Finally, validate the only trusted certificate that exists is the new one
@@ -568,7 +625,7 @@ func testValidateRootRotationMissingOrigSig(t *testing.T, keyAlg, rootKeyType st
 
 	// This call to ValidateRoot will succeed since we are using a valid PEM
 	// encoded certificate, and have no other certificates for this CN
-	err = ValidateRoot(certStore, signedTestRoot, gun, notary.TrustPinConfig{TOFU: true})
+	err = ValidateRoot(certStore, signedTestRoot, gun, TrustPinConfig{})
 	require.Error(t, err, "insuficient signatures on root")
 
 	// Finally, validate the only trusted certificate that exists is still
@@ -632,7 +689,7 @@ func testValidateRootRotationMissingNewSig(t *testing.T, keyAlg, rootKeyType str
 
 	// This call to ValidateRoot will succeed since we are using a valid PEM
 	// encoded certificate, and have no other certificates for this CN
-	err = ValidateRoot(certStore, signedTestRoot, gun, notary.TrustPinConfig{TOFU: true})
+	err = ValidateRoot(certStore, signedTestRoot, gun, TrustPinConfig{})
 	require.Error(t, err, "insuficient signatures on root")
 
 	// Finally, validate the only trusted certificate that exists is still
@@ -640,4 +697,14 @@ func testValidateRootRotationMissingNewSig(t *testing.T, keyAlg, rootKeyType str
 	certificates = certStore.GetCertificates()
 	require.Len(t, certificates, 1)
 	require.Equal(t, certificates[0], origRootCert)
+}
+
+func generateTestingCertificate(rootKey data.PrivateKey, gun string) (*x509.Certificate, error) {
+	startTime := time.Now()
+	return cryptoservice.GenerateCertificate(rootKey, gun, startTime, startTime.AddDate(10, 0, 0))
+}
+
+func generateExpiredTestingCertificate(rootKey data.PrivateKey, gun string) (*x509.Certificate, error) {
+	startTime := time.Now().AddDate(-10, 0, 0)
+	return cryptoservice.GenerateCertificate(rootKey, gun, startTime, startTime.AddDate(1, 0, 0))
 }

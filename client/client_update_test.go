@@ -14,7 +14,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/docker/notary"
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/trustpinning"
 	"github.com/docker/notary/tuf/client"
@@ -32,7 +31,7 @@ func newBlankRepo(t *testing.T, url string) *NotaryRepository {
 	require.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	repo, err := NewNotaryRepository(tempBaseDir, "docker.com/notary", url,
-		http.DefaultTransport, passphrase.ConstantRetriever("pass"), notary.TrustPinConfig{TOFU: true})
+		http.DefaultTransport, passphrase.ConstantRetriever("pass"), trustpinning.TrustPinConfig{})
 	require.NoError(t, err)
 	return repo
 }
