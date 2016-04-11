@@ -19,7 +19,7 @@ GO_EXC = go
 NOTARYDIR := /go/src/github.com/docker/notary
 
 # check to be sure pkcs11 lib is always imported with a build tag
-GO_LIST_PKCS11 := $(shell go list -e -f '{{join .Deps "\n"}}' ./... | grep -v /vendor/ | xargs go list -e -f '{{if not .Standard}}{{.ImportPath}}{{end}}' | grep -q pkcs11)
+GO_LIST_PKCS11 := $(shell go list -tags "${NOTARY_BUILDTAGS}" -e -f '{{join .Deps "\n"}}' ./... | grep -v /vendor/ | xargs go list -e -f '{{if not .Standard}}{{.ImportPath}}{{end}}' | grep -q pkcs11)
 ifeq ($(GO_LIST_PKCS11),)
 $(info pkcs11 import was not found anywhere without a build tag, yay)
 else
@@ -33,7 +33,7 @@ _space := $(empty) $(empty)
 COVERDIR=.cover
 COVERPROFILE?=$(COVERDIR)/cover.out
 COVERMODE=count
-PKGS ?= $(shell go list ./... | grep -v /vendor/ | tr '\n' ' ')
+PKGS ?= $(shell go list -tags "${NOTARY_BUILDTAGS}" ./... | grep -v /vendor/ | tr '\n' ' ')
 
 GO_VERSION = $(shell go version | awk '{print $$3}')
 
@@ -93,7 +93,7 @@ fmt:
 
 lint:
 	@echo "+ $@"
-	@test -z "$$(golint ./... | grep -v .pb. | grep -v vendor/ | tee /dev/stderr)"
+	@test -z "$$(golint -tags "${NOTARY_BUILDTAGS}" ./... | grep -v .pb. | grep -v vendor/ | tee /dev/stderr)"
 
 # Requires that the following:
 # go get -u github.com/client9/misspell/cmd/misspell

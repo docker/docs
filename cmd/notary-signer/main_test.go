@@ -1,5 +1,3 @@
-// +build pkcs11
-
 package main
 
 import (
