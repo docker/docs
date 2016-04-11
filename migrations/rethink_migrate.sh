@@ -12,8 +12,8 @@ case $SERVICE_NAME in
 		# have to poll for DB to come up
 		until notary-server -config=fixtures/server-config.rethink.json -bootstrap 
 		do
-			((iter++))
-			if (( iter > 30 )); then
+			iter=$(( iter+1 ))
+			if [[ $iter -gt 30 ]]; then
 				echo "RethinkDB failed to come up within 30 seconds"
 				exit 1;
 			fi
@@ -25,8 +25,8 @@ case $SERVICE_NAME in
 		# have to poll for DB to come up
 		until notary-signer -config=fixtures/signer-config.rethink.json -bootstrap 
 		do
-			((iter++))
-			if (( iter > 30 )); then
+			iter=$(( iter+1 ))
+			if [[ $iter -gt 30 ]]; then
 				echo "RethinkDB failed to come up within 30 seconds"
 				exit 1;
 			fi
