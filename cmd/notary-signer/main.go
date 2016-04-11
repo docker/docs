@@ -1,5 +1,3 @@
-// +build pkcs11
-
 package main
 
 import (
@@ -143,9 +141,9 @@ func setupGRPCServer(grpcAddr string, tlsConfig *tls.Config,
 }
 
 func setupHTTPServer(httpAddr string, tlsConfig *tls.Config,
-	cryptoServices signer.CryptoServiceIndex) http.Server {
+	cryptoServices signer.CryptoServiceIndex) *http.Server {
 
-	return http.Server{
+	return &http.Server{
 		Addr:      httpAddr,
 		Handler:   api.Handlers(cryptoServices),
 		TLSConfig: tlsConfig,
