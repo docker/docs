@@ -59,8 +59,8 @@ but here is a brief recap of the TUF roles and corresponding key hierarchy:
   <a href="https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L678" target="_blank">delegation metadata files</a>,
   which lists filenames in the collection, and their sizes and respective
   <a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function" target="_blank">hashes</a>.
-  These files is used to verify the integrity of some or all of the actual contents of the repository.
-  They are is also used to [delegate trust to other collaborators via lower level delegation roles](
+  These files are used to verify the integrity of some or all of the actual contents of the repository.
+  They are also used to [delegate trust to other collaborators via lower level delegation roles](
   advanced_usage.md#working-with-delegation-roles).
   Delegation keys are held by anyone from the collection owner or administrator to
   collection collaborators.
