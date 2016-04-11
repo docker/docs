@@ -130,7 +130,7 @@ func Test0Dot1RepoFormat(t *testing.T) {
 	// and we can download the snapshot
 	require.NoError(t, repo.RotateKey(data.CanonicalSnapshotRole, true))
 	require.NoError(t, repo.Publish())
-	_, err = repo.Update(false)
+	err = repo.Update(false)
 	require.NoError(t, err)
 }
 
@@ -155,6 +155,6 @@ func TestDownloading0Dot1RepoFormat(t *testing.T) {
 		passphrase.ConstantRetriever(passwd))
 	require.NoError(t, err, "error creating repo: %s", err)
 
-	_, err = repo.Update(true)
+	err = repo.Update(true)
 	require.NoError(t, err, "error updating repo: %s", err)
 }
