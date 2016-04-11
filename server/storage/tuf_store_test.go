@@ -13,12 +13,12 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-// SetupTUFSQLite creates a sqlite database for testing, wrapped by a TufMetaStorage
-func SetupTUFSQLite(t *testing.T, dbDir string) (*gorm.DB, *TufMetaStorage) {
+// SetupTUFSQLite creates a sqlite database for testing, wrapped by a TUFMetaStorage
+func SetupTUFSQLite(t *testing.T, dbDir string) (*gorm.DB, *TUFMetaStorage) {
 	dbStore, err := NewSQLStorage("sqlite3", dbDir+"test_db")
 	require.NoError(t, err)
 
-	consistentDBStore := NewTufMetaStorage(dbStore)
+	consistentDBStore := NewTUFMetaStorage(dbStore)
 
 	embeddedDB := dbStore.DB
 	// Create the DB tables

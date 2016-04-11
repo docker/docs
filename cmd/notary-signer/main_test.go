@@ -11,7 +11,9 @@ import (
 	"github.com/docker/notary"
 	"github.com/docker/notary/signer"
 	"github.com/docker/notary/signer/keydbstore"
+	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
+	"github.com/docker/notary/tuf/testutils"
 	"github.com/jinzhu/gorm"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/spf13/viper"
@@ -168,7 +170,7 @@ func TestSetupCryptoServicesMemoryStore(t *testing.T) {
 	cryptoServices, err := setUpCryptoservices(config,
 		[]string{notary.SQLiteBackend, notary.MemoryBackend})
 	require.NoError(t, err)
-	assert.Len(t, cryptoServices, 2)
+	require.Len(t, cryptoServices, 2)
 
 	edService, ok := cryptoServices[data.ED25519Key]
 	require.True(t, ok)
@@ -208,4 +210,14 @@ func TestSetupGRPCServerSuccess(t *testing.T) {
 	require.Equal(t, "[::]:7899", lis.Addr().String())
 	require.Equal(t, "tcp", lis.Addr().Network())
 	require.NotNil(t, grpcServer)
+}
+
+func TestBootstrap(t *testing.T) {
+	var ks trustmanager.KeyStore
+	err := bootstrap(ks)
+	require.Error(t, err)
+	tb := &testutils.TestBootstrapper{}
+	err = bootstrap(tb)
+	require.NoError(t, err)
+	require.True(t, tb.Booted)
 }

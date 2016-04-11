@@ -11,17 +11,17 @@ import (
 	"github.com/docker/notary/tuf/data"
 )
 
-// TufMetaStorage wraps a MetaStore in order to walk the TUF tree for GetCurrent in a consistent manner,
+// TUFMetaStorage wraps a MetaStore in order to walk the TUF tree for GetCurrent in a consistent manner,
 // by always starting from a current timestamp and then looking up other data by hash
-type TufMetaStorage struct {
+type TUFMetaStorage struct {
 	MetaStore
 	// cached metadata by checksum
 	cachedMeta map[string]*storedMeta
 }
 
-// NewTufMetaStorage instantiates a TufMetaStorage instance
-func NewTufMetaStorage(m MetaStore) *TufMetaStorage {
-	return &TufMetaStorage{
+// NewTUFMetaStorage instantiates a TUFMetaStorage instance
+func NewTUFMetaStorage(m MetaStore) *TUFMetaStorage {
+	return &TUFMetaStorage{
 		MetaStore:  m,
 		cachedMeta: make(map[string]*storedMeta),
 	}
@@ -33,7 +33,7 @@ type storedMeta struct {
 }
 
 // GetCurrent gets a specific TUF record, by walking from the current Timestamp to other metadata by checksum
-func (tms TufMetaStorage) GetCurrent(gun, tufRole string) (*time.Time, []byte, error) {
+func (tms TUFMetaStorage) GetCurrent(gun, tufRole string) (*time.Time, []byte, error) {
 	timestampTime, timestampJSON, err := tms.MetaStore.GetCurrent(gun, data.CanonicalTimestampRole)
 	if err != nil {
 		return nil, nil, err
@@ -107,7 +107,7 @@ func (tms TufMetaStorage) GetCurrent(gun, tufRole string) (*time.Time, []byte, e
 }
 
 // Bootstrap the store with tables if possible
-func (tms TufMetaStorage) Bootstrap() error {
+func (tms TUFMetaStorage) Bootstrap() error {
 	if s, ok := tms.MetaStore.(storage.Bootstrapper); ok {
 		return s.Bootstrap()
 	}
