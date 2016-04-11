@@ -44,23 +44,19 @@ func TestTUFSQLGetCurrent(t *testing.T) {
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
 	gormDB, tufDBStore := SetupTUFSQLite(t, tempBaseDir)
 	defer os.RemoveAll(tempBaseDir)
+	defer gormDB.Close()
 
-	_, byt, err := tufDBStore.GetCurrent("testGUN", data.CanonicalRootRole)
-	require.Nil(t, byt)
-	require.Error(t, err, "There should be an error Getting an empty table")
-	require.IsType(t, ErrNotFound{}, err, "Should get a not found error")
+	ConsistentEmptyGetCurrentTest(t, tufDBStore)
 
+	// put an arbitrary piece of data in the database
 	tuf := SampleTUF(1)
 	query := gormDB.Create(&tuf)
 	require.NoError(t, query.Error, "Creating a row in an empty DB failed.")
 
-	_, byt, err = tufDBStore.GetCurrent("testGUN", data.CanonicalRootRole)
-	require.Nil(t, byt)
-	require.Error(t, err, "There should be an error because there is no timestamp or snapshot to use on GetCurrent")
+	ConsistentMissingTSAndSnapGetCurrentTest(t, tufDBStore)
 
 	// Note that get by checksum succeeds, since it does not try to walk timestamp/snapshot
-	_, _, err = tufDBStore.GetChecksum("testGUN", data.CanonicalRootRole, tuf.Sha256)
-	require.NoError(t, err, "There should no error for GetChecksum")
+	GetChecksumFoundTest(t, tufDBStore, tuf)
 
 	// Now setup a valid tuf repo and use it to ensure we walk correctly
 	validTUFRepo, _, err := testutils.EmptyRepo("testGUN")
@@ -92,36 +88,19 @@ func TestTUFSQLGetCurrent(t *testing.T) {
 	require.NoError(t, query.Error, "Creating a row for root in DB failed.")
 
 	// GetCurrent on all of these roles should succeed
-	_, byt, err = tufDBStore.GetCurrent("testGUN", data.CanonicalTimestampRole)
-	require.NoError(t, err)
-	require.Equal(t, tsTUF.Data, byt)
-
-	_, byt, err = tufDBStore.GetCurrent("testGUN", data.CanonicalSnapshotRole)
-	require.NoError(t, err)
-	require.Equal(t, snapTUF.Data, byt)
-
-	_, byt, err = tufDBStore.GetCurrent("testGUN", data.CanonicalTargetsRole)
-	require.NoError(t, err)
-	require.Equal(t, targetsTUF.Data, byt)
-
-	// This case is particularly interesting because a higher version root role exists, but we should get our consistent version
-	_, byt, err = tufDBStore.GetCurrent("testGUN", data.CanonicalRootRole)
-	require.NoError(t, err)
-	require.Equal(t, rootTUF.Data, byt)
+	ConsistentGetCurrentFoundTest(t, tufDBStore, tsTUF)
+	ConsistentGetCurrentFoundTest(t, tufDBStore, snapTUF)
+	ConsistentGetCurrentFoundTest(t, tufDBStore, targetsTUF)
+	ConsistentGetCurrentFoundTest(t, tufDBStore, rootTUF)
 
 	// Delete snapshot
 	query = gormDB.Delete(&snapTUF)
 	require.NoError(t, query.Error, "Deleting a row for snapshot in DB failed.")
 
 	// GetCurrent snapshot lookup should still succeed because of caching
-	_, byt, err = tufDBStore.GetCurrent("testGUN", data.CanonicalSnapshotRole)
-	require.NoError(t, err)
-	require.Equal(t, snapTUF.Data, byt)
+	ConsistentGetCurrentFoundTest(t, tufDBStore, snapTUF)
 
-	// targets lookup on GetCurrent should also still succeed because of caching
-	_, byt, err = tufDBStore.GetCurrent("testGUN", data.CanonicalTargetsRole)
-	require.NoError(t, err)
-	require.Equal(t, targetsTUF.Data, byt)
-
-	gormDB.Close()
+	// targets and root lookup on GetCurrent should also still succeed because of caching
+	ConsistentGetCurrentFoundTest(t, tufDBStore, targetsTUF)
+	ConsistentGetCurrentFoundTest(t, tufDBStore, rootTUF)
 }
