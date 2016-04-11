@@ -8,7 +8,6 @@ import (
 	"time"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/docker/notary"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
@@ -87,7 +86,7 @@ We shall call this: TOFUS.
 
 Validation failure at any step will result in an ErrValidationFailed error.
 */
-func ValidateRoot(certStore trustmanager.X509Store, root *data.Signed, gun string, trustPinning notary.TrustPinConfig) error {
+func ValidateRoot(certStore trustmanager.X509Store, root *data.Signed, gun string, trustPinning TrustPinConfig) error {
 	logrus.Debugf("entered ValidateRoot with dns: %s", gun)
 	signedRoot, err := data.RootFromSigned(root)
 	if err != nil {
@@ -125,7 +124,7 @@ func ValidateRoot(certStore trustmanager.X509Store, root *data.Signed, gun strin
 		}
 	} else {
 		logrus.Debugf("found no currently valid root certificates for %s, using trust_pinning config to bootstrap trust:", gun, trustPinning)
-		trustPinChecker, err := NewTrustPinChecker(trustPinning, gun)
+		trustPinCheckFunc, err := NewTrustPinChecker(trustPinning, gun)
 		if err != nil {
 			return &ErrValidationFail{Reason: err.Error()}
 		}
@@ -136,7 +135,7 @@ func ValidateRoot(certStore trustmanager.X509Store, root *data.Signed, gun strin
 			if err != nil {
 				continue
 			}
-			if ok := trustPinChecker.checkCert(cert, allIntCerts[certID]); !ok {
+			if ok := trustPinCheckFunc(cert, allIntCerts[certID]); !ok {
 				continue
 			}
 			validPinnedCerts = append(validPinnedCerts, cert)
@@ -198,8 +197,6 @@ func ValidateRoot(certStore trustmanager.X509Store, root *data.Signed, gun strin
 // validRootLeafCerts returns a list of non-expired, non-sha1 certificates
 // found in root whose Common-Names match the provided GUN. Note that this
 // "validity" alone does not imply any measure of trust.
-// validRootLeafCerts returns a list of non-expired, non-sha1 certificates whose
-// Common-Names match the provided GUN
 func validRootLeafCerts(allLeafCerts map[string]*x509.Certificate, gun string) ([]*x509.Certificate, error) {
 	var validLeafCerts []*x509.Certificate
 

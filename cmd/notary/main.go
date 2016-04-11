@@ -109,10 +109,6 @@ func (n *notaryCommander) parseConfig() (*viper.Viper, error) {
 		}
 	}
 
-	// If the user didn't pass in a value for trust_pinning.tofu, enable TOFUs by default
-	if config.Get("trust_pinning.tofu") == nil {
-		config.SetDefault("trust_pinning.tofu", true)
-	}
 	// At this point we either have the default value or the one set by the config.
 	// Either way, some command-line flags have precedence and overwrites the value
 	if n.trustDir != "" {

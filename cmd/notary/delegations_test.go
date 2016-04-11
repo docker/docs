@@ -21,7 +21,6 @@ func setup() *delegationCommander {
 		configGetter: func() (*viper.Viper, error) {
 			mainViper := viper.New()
 			mainViper.Set("trust_dir", testTrustDir)
-			mainViper.Set("trust_pinning.tofu", true)
 			return mainViper, nil
 		},
 		retriever: nil,

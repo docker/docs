@@ -38,7 +38,7 @@ JSON keys to learn more about the configuration section corresponding to that ke
   }
   <a href="#trust-pinning-section-optional">"trust_pinning"</a>: {
     "certs": {
-      "docker.com/notary": "49cf5c6404a35fa41d5a5aa2ce539dfee0d7a2176d0da488914a38603b1f4292"
+      "docker.com/notary": ["49cf5c6404a35fa41d5a5aa2ce539dfee0d7a2176d0da488914a38603b1f4292"]
     }
   }
 }
@@ -160,11 +160,11 @@ bootstrapping of the repo.
 			The path is relative to the directory of the configuration file.</p></td>
 	</tr>
 	<tr>
-		<td valign="top"><code>tofu</code></td>
+		<td valign="top"><code>disable_tofu</code></td>
 		<td valign="top">no</td>
 		<td valign="top"><p>Boolean value determining whether to use trust
 		    on first use when bootstrapping validation on a collection's
-		    root file.  This is true by default.</p></td>
+		    root file.  This keeps TOFUs on by default.</p></td>
 	</tr>
 </table>
 

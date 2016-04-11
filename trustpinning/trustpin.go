@@ -3,47 +3,46 @@ package trustpinning
 import (
 	"crypto/x509"
 	"fmt"
-	"github.com/docker/notary"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/utils"
 	"strings"
 )
 
-// TrustPinChecker handles logic for trust pinning for a gun, given a TrustPinConfig
-type TrustPinChecker struct {
-	mode         TrustPinMode
-	gun          string
-	config       notary.TrustPinConfig
-	pinnedCAPool *x509.CertPool
+// TrustPinConfig represents the configuration under the trust_pinning section of the config file
+// This struct represents the preferred way to bootstrap trust for this repository
+type TrustPinConfig struct {
+	CA          map[string]string
+	Certs       map[string][]string
+	DisableTOFU bool
 }
 
-// TrustPinMode is a type to distinguish possible trust pinning modes
-type TrustPinMode string
+type trustPinChecker struct {
+	gun           string
+	config        TrustPinConfig
+	pinnedCAPool  *x509.CertPool
+	pinnedCertIDs []string
+}
 
-const (
-	tofus TrustPinMode = "tofu"
-	ca    TrustPinMode = "ca"
-	certs TrustPinMode = "certs"
-)
+// CertChecker is a function type that will be used to check leaf certs against pinned trust
+type CertChecker func(leafCert *x509.Certificate, intCerts []*x509.Certificate) bool
 
-// NewTrustPinChecker returns a new TrustPinChecker from a TrustPinConfig for a GUN
-func NewTrustPinChecker(trustPinConfig notary.TrustPinConfig, gun string) (TrustPinChecker, error) {
-	trustPinChecker := TrustPinChecker{config: trustPinConfig, gun: gun}
+// NewTrustPinChecker returns a new certChecker function from a TrustPinConfig for a GUN
+func NewTrustPinChecker(trustPinConfig TrustPinConfig, gun string) (CertChecker, error) {
+	t := trustPinChecker{gun: gun, config: trustPinConfig}
 	// Determine the mode, and if it's even valid
-	if _, ok := trustPinConfig.Certs[gun]; ok {
-		trustPinChecker.mode = certs
-		return trustPinChecker, nil
+	if pinnedCerts, ok := trustPinConfig.Certs[gun]; ok {
+		t.pinnedCertIDs = pinnedCerts
+		return t.certsCheck, nil
 	}
 
-	if caFilepath, err := trustPinChecker.getCAFilepathByPrefix(gun); err == nil {
-		trustPinChecker.mode = ca
+	if caFilepath, err := getPinnedCAFilepathByPrefix(gun, trustPinConfig); err == nil {
 		// Try to add the CA certs from its bundle file to our certificate store,
 		// and use it to validate certs in the root.json later
 		caCerts, err := trustmanager.LoadCertBundleFromFile(caFilepath)
 		if err != nil {
-			return TrustPinChecker{}, fmt.Errorf("could not load root cert from CA path")
+			return nil, fmt.Errorf("could not load root cert from CA path")
 		}
-		// Now only consider certificates that are direct children from this CA cert, overwriting allValidCerts
+		// Now only consider certificates that are direct children from this CA cert chain
 		caRootPool := x509.NewCertPool()
 		for _, caCert := range caCerts {
 			if err = trustmanager.ValidateCertificate(caCert); err != nil {
@@ -53,51 +52,51 @@ func NewTrustPinChecker(trustPinConfig notary.TrustPinConfig, gun string) (Trust
 		}
 		// If we didn't have any valid CA certs, error out
 		if len(caRootPool.Subjects()) == 0 {
-			return TrustPinChecker{}, fmt.Errorf("invalid CA certs provided")
+			return nil, fmt.Errorf("invalid CA certs provided")
 		}
-		trustPinChecker.pinnedCAPool = caRootPool
-		return trustPinChecker, nil
+		t.pinnedCAPool = caRootPool
+		return t.caCheck, nil
 	}
 
-	if trustPinConfig.TOFU {
-		trustPinChecker.mode = tofus
-		return trustPinChecker, nil
+	if !trustPinConfig.DisableTOFU {
+		return t.tofusCheck, nil
 	}
-	return TrustPinChecker{}, fmt.Errorf("invalid trust pinning specified")
+	return nil, fmt.Errorf("invalid trust pinning specified")
 }
 
-func (t TrustPinChecker) checkCert(leafCert *x509.Certificate, intCerts []*x509.Certificate) bool {
-	switch t.mode {
-	case certs:
-		certID, err := trustmanager.FingerprintCert(leafCert)
-		if err != nil {
-			return false
-		}
-		return utils.StrSliceContains(t.config.Certs[t.gun], certID)
-	case ca:
-		// Use intermediate certificates included in the root TUF metadata for our validation
-		caIntPool := x509.NewCertPool()
-		for _, intCert := range intCerts {
-			caIntPool.AddCert(intCert)
-		}
-		// Attempt to find a valid certificate chain from the leaf cert to CA root
-		// Use this certificate if such a valid chain exists (possibly using intermediates)
-		if _, err := leafCert.Verify(x509.VerifyOptions{Roots: t.pinnedCAPool, Intermediates: caIntPool}); err == nil {
-			return true
-		}
-	case tofus:
+func (t trustPinChecker) certsCheck(leafCert *x509.Certificate, intCerts []*x509.Certificate) bool {
+	certID, err := trustmanager.FingerprintCert(leafCert)
+	if err != nil {
+		return false
+	}
+	return utils.StrSliceContains(t.pinnedCertIDs, certID)
+}
+
+func (t trustPinChecker) caCheck(leafCert *x509.Certificate, intCerts []*x509.Certificate) bool {
+	// Use intermediate certificates included in the root TUF metadata for our validation
+	caIntPool := x509.NewCertPool()
+	for _, intCert := range intCerts {
+		caIntPool.AddCert(intCert)
+	}
+	// Attempt to find a valid certificate chain from the leaf cert to CA root
+	// Use this certificate if such a valid chain exists (possibly using intermediates)
+	if _, err := leafCert.Verify(x509.VerifyOptions{Roots: t.pinnedCAPool, Intermediates: caIntPool}); err == nil {
 		return true
 	}
 	return false
 }
 
+func (t trustPinChecker) tofusCheck(leafCert *x509.Certificate, intCerts []*x509.Certificate) bool {
+	return true
+}
+
 // Will return the CA filepath corresponding to the most specific (longest) entry in the map that is still a prefix
 // of the provided gun.  Returns an error if no entry matches this GUN as a prefix.
-func (t TrustPinChecker) getCAFilepathByPrefix(gun string) (string, error) {
+func getPinnedCAFilepathByPrefix(gun string, t TrustPinConfig) (string, error) {
 	specificGUN := ""
 	specificCAFilepath := ""
 	foundCA := false
-	for gunPrefix, caFilepath := range t.config.CA {
+	for gunPrefix, caFilepath := range t.CA {
 		if strings.HasPrefix(gun, gunPrefix) && len(gunPrefix) >= len(specificGUN) {
 			specificGUN = gunPrefix
 			specificCAFilepath = caFilepath

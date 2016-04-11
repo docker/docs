@@ -22,6 +22,7 @@ import (
 	"github.com/docker/notary/server"
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/trustmanager"
+	"github.com/docker/notary/trustpinning"
 	"github.com/docker/notary/tuf/data"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -249,11 +250,7 @@ func TestRotateKeyInvalidRoles(t *testing.T) {
 	for _, role := range invalids {
 		for _, serverManaged := range []bool{true, false} {
 			k := &keyCommander{
-				configGetter: func() (*viper.Viper, error) {
-					v := viper.New()
-					v.Set("trust_pinning.tofu", true)
-					return v, nil
-				},
+				configGetter:           func() (*viper.Viper, error) { return viper.New(), nil },
 				getRetriever:           func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
 				rotateKeyRole:          role,
 				rotateKeyServerManaged: serverManaged,
@@ -274,11 +271,7 @@ func TestRotateKeyInvalidRoles(t *testing.T) {
 func TestRotateKeyTargetCannotBeServerManaged(t *testing.T) {
 	setUp(t)
 	k := &keyCommander{
-		configGetter: func() (*viper.Viper, error) {
-			v := viper.New()
-			v.Set("trust_pinning.tofu", true)
-			return v, nil
-		},
+		configGetter:           func() (*viper.Viper, error) { return viper.New(), nil },
 		getRetriever:           func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
 		rotateKeyRole:          data.CanonicalTargetsRole,
 		rotateKeyServerManaged: true,
@@ -292,11 +285,7 @@ func TestRotateKeyTargetCannotBeServerManaged(t *testing.T) {
 func TestRotateKeyTimestampCannotBeLocallyManaged(t *testing.T) {
 	setUp(t)
 	k := &keyCommander{
-		configGetter: func() (*viper.Viper, error) {
-			v := viper.New()
-			v.Set("trust_pinning.tofu", true)
-			return v, nil
-		},
+		configGetter:           func() (*viper.Viper, error) { return viper.New(), nil },
 		getRetriever:           func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
 		rotateKeyRole:          data.CanonicalTimestampRole,
 		rotateKeyServerManaged: false,
@@ -341,7 +330,7 @@ func setUpRepo(t *testing.T, tempBaseDir, gun string, ret passphrase.Retriever) 
 	ts := httptest.NewServer(server.RootHandler(nil, ctx, cryptoService, nil, nil))
 
 	repo, err := client.NewNotaryRepository(
-		tempBaseDir, gun, ts.URL, http.DefaultTransport, ret, notary.TrustPinConfig{TOFU: true})
+		tempBaseDir, gun, ts.URL, http.DefaultTransport, ret, trustpinning.TrustPinConfig{})
 	require.NoError(t, err, "error creating repo: %s", err)
 
 	rootPubKey, err := repo.CryptoService.Create("root", "", data.ECDSAKey)
@@ -376,7 +365,6 @@ func TestRotateKeyRemoteServerManagesKey(t *testing.T) {
 				v := viper.New()
 				v.SetDefault("trust_dir", tempBaseDir)
 				v.SetDefault("remote_server.url", ts.URL)
-				v.SetDefault("trust_pinning.tofu", true)
 				return v, nil
 			},
 			getRetriever:           func() passphrase.Retriever { return ret },
@@ -384,7 +372,7 @@ func TestRotateKeyRemoteServerManagesKey(t *testing.T) {
 		}
 		require.NoError(t, k.keysRotate(&cobra.Command{}, []string{gun, role, "-r"}))
 
-		repo, err := client.NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport, ret, notary.TrustPinConfig{TOFU: true})
+		repo, err := client.NewNotaryRepository(tempBaseDir, gun, ts.URL, http.DefaultTransport, ret, trustpinning.TrustPinConfig{})
 		require.NoError(t, err, "error creating repo: %s", err)
 
 		cl, err := repo.GetChangelist()
@@ -431,7 +419,6 @@ func TestRotateKeyBothKeys(t *testing.T) {
 			v := viper.New()
 			v.SetDefault("trust_dir", tempBaseDir)
 			v.SetDefault("remote_server.url", ts.URL)
-			v.Set("trust_pinning.tofu", true)
 			return v, nil
 		},
 		getRetriever: func() passphrase.Retriever { return ret },
@@ -439,7 +426,7 @@ func TestRotateKeyBothKeys(t *testing.T) {
 	require.NoError(t, k.keysRotate(&cobra.Command{}, []string{gun, data.CanonicalTargetsRole}))
 	require.NoError(t, k.keysRotate(&cobra.Command{}, []string{gun, data.CanonicalSnapshotRole}))
 
-	repo, err := client.NewNotaryRepository(tempBaseDir, gun, ts.URL, nil, ret, notary.TrustPinConfig{TOFU: true})
+	repo, err := client.NewNotaryRepository(tempBaseDir, gun, ts.URL, nil, ret, trustpinning.TrustPinConfig{})
 	require.NoError(t, err, "error creating repo: %s", err)
 
 	cl, err := repo.GetChangelist()

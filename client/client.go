@@ -88,14 +88,14 @@ type NotaryRepository struct {
 	tufRepo       *tuf.Repo
 	roundTrip     http.RoundTripper
 	CertStore     trustmanager.X509Store
-	trustPinning  notary.TrustPinConfig
+	trustPinning  trustpinning.TrustPinConfig
 }
 
 // repositoryFromKeystores is a helper function for NewNotaryRepository that
 // takes some basic NotaryRepository parameters as well as keystores (in order
 // of usage preference), and returns a NotaryRepository.
 func repositoryFromKeystores(baseDir, gun, baseURL string, rt http.RoundTripper,
-	keyStores []trustmanager.KeyStore, trustPin notary.TrustPinConfig) (*NotaryRepository, error) {
+	keyStores []trustmanager.KeyStore, trustPin trustpinning.TrustPinConfig) (*NotaryRepository, error) {
 
 	certPath := filepath.Join(baseDir, notary.TrustedCertsDir)
 	certStore, err := trustmanager.NewX509FilteredFileStore(
