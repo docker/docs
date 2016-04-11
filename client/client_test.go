@@ -2588,7 +2588,7 @@ func requireRotationSuccessful(t *testing.T, repo1 *NotaryRepository, keysToRota
 
 	// Download data from remote and check that keys have changed
 	for _, repo := range repos {
-		_, err := repo.Update(true)
+		err := repo.Update(true)
 		require.NoError(t, err)
 
 		for role, isRemoteKey := range keysToRotate {

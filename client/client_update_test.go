@@ -106,7 +106,7 @@ func TestUpdateSucceedsEvenIfCannotWriteNewRepo(t *testing.T) {
 	for role := range serverMeta {
 		repo := newBlankRepo(t, ts.URL)
 		repo.fileStore = &unwritableStore{MetadataStore: repo.fileStore, roleToNotWrite: role}
-		_, err := repo.Update(false)
+		err := repo.Update(false)
 
 		if role == data.CanonicalRootRole {
 			require.Error(t, err) // because checkRoot loads root from cache to check hashes
@@ -146,7 +146,7 @@ func TestUpdateSucceedsEvenIfCannotWriteExistingRepo(t *testing.T) {
 	repo := newBlankRepo(t, ts.URL)
 	defer os.RemoveAll(repo.baseDir)
 
-	_, err := repo.Update(false)
+	err := repo.Update(false)
 	require.NoError(t, err)
 
 	origFileStore := repo.fileStore
@@ -158,7 +158,7 @@ func TestUpdateSucceedsEvenIfCannotWriteExistingRepo(t *testing.T) {
 
 			// update fileStore
 			repo.fileStore = &unwritableStore{MetadataStore: origFileStore, roleToNotWrite: role}
-			_, err := repo.Update(forWrite)
+			err := repo.Update(forWrite)
 
 			if role == data.CanonicalRootRole {
 				require.Error(t, err) // because checkRoot loads root from cache to check hashes
@@ -222,7 +222,7 @@ func TestUpdateReplacesCorruptOrMissingMetadata(t *testing.T) {
 	repo := newBlankRepo(t, ts.URL)
 	defer os.RemoveAll(repo.baseDir)
 
-	_, err = repo.Update(false) // ensure we have all metadata to start with
+	err = repo.Update(false) // ensure we have all metadata to start with
 	require.NoError(t, err)
 
 	// we want to swizzle the local cache, not the server, so create a new one
@@ -234,7 +234,7 @@ func TestUpdateReplacesCorruptOrMissingMetadata(t *testing.T) {
 			text, messItUp := expt.desc, expt.swizzle
 			for _, forWrite := range []bool{true, false} {
 				require.NoError(t, messItUp(repoSwizzler, role), "could not fuzz %s (%s)", role, text)
-				_, err := repo.Update(forWrite)
+				err := repo.Update(forWrite)
 				require.NoError(t, err)
 				for r, expected := range serverMeta {
 					actual, err := repo.fileStore.GetMeta(r, -1)
@@ -266,7 +266,7 @@ func TestUpdateFailsIfServerRootKeyChangedWithoutMultiSign(t *testing.T) {
 	repo := newBlankRepo(t, ts.URL)
 	defer os.RemoveAll(repo.baseDir)
 
-	_, err := repo.Update(false) // ensure we have all metadata to start with
+	err := repo.Update(false) // ensure we have all metadata to start with
 	require.NoError(t, err)
 
 	// rotate the server's root.json root key so that they no longer match trust anchors
@@ -289,14 +289,14 @@ func TestUpdateFailsIfServerRootKeyChangedWithoutMultiSign(t *testing.T) {
 
 			if _, ok := err.(store.ErrMetaNotFound); ok { // one of the ways to mess up is to delete metadata
 
-				_, err = repo.Update(forWrite)
+				err = repo.Update(forWrite)
 				require.Error(t, err) // the new server has a different root key, update fails
 
 			} else {
 
 				require.NoError(t, err)
 
-				_, err = repo.Update(forWrite)
+				err = repo.Update(forWrite)
 				require.Error(t, err) // the new server has a different root, update fails
 
 				// we can't test that all the metadata is the same, because we probably would
@@ -615,7 +615,7 @@ func testUpdateRemoteNon200Error(t *testing.T, opts updateOpts, errExpected inte
 	defer os.RemoveAll(repo.baseDir)
 
 	if opts.localCache {
-		_, err := repo.Update(false) // acquire local cache
+		err := repo.Update(false) // acquire local cache
 		require.NoError(t, err)
 	}
 
@@ -625,7 +625,7 @@ func testUpdateRemoteNon200Error(t *testing.T, opts updateOpts, errExpected inte
 
 	require.NoError(t, serverSwizzler.RemoveMetadata(opts.role), "failed to remove %s", opts.role)
 
-	_, err := repo.Update(opts.forWrite)
+	err := repo.Update(opts.forWrite)
 	if errExpected == nil {
 		require.NoError(t, err, "expected no failure updating when %s is %v (forWrite: %v)",
 			opts.role, opts.notFoundCode, opts.forWrite)
@@ -727,7 +727,7 @@ func testUpdateRemoteFileChecksumWrong(t *testing.T, opts updateOpts, errExpecte
 	defer os.RemoveAll(repo.baseDir)
 
 	if opts.localCache {
-		_, err := repo.Update(false) // acquire local cache
+		err := repo.Update(false) // acquire local cache
 		require.NoError(t, err)
 	}
 
@@ -737,7 +737,7 @@ func testUpdateRemoteFileChecksumWrong(t *testing.T, opts updateOpts, errExpecte
 
 	require.NoError(t, serverSwizzler.AddExtraSpace(opts.role), "failed to checksum-corrupt to %s", opts.role)
 
-	_, err := repo.Update(opts.forWrite)
+	err := repo.Update(opts.forWrite)
 	if !errExpected {
 		require.NoError(t, err, "expected no failure updating when %s has the wrong checksum (forWrite: %v)",
 			opts.role, opts.forWrite)
@@ -1141,7 +1141,7 @@ func testUpdateRemoteCorruptValidChecksum(t *testing.T, opts updateOpts, expt sw
 	defer os.RemoveAll(repo.baseDir)
 
 	if opts.localCache {
-		_, err := repo.Update(false)
+		err := repo.Update(false)
 		require.NoError(t, err)
 	}
 
@@ -1175,7 +1175,7 @@ func testUpdateRemoteCorruptValidChecksum(t *testing.T, opts updateOpts, expt sw
 			}
 		}
 	}
-	_, err := repo.Update(opts.forWrite)
+	err := repo.Update(opts.forWrite)
 	if shouldErr {
 		require.Error(t, err, "expected failure updating when %s", msg)
 
@@ -1230,7 +1230,7 @@ func testUpdateLocalAndRemoteRootCorrupt(t *testing.T, forWrite bool, localExpt,
 	defer os.RemoveAll(repo.baseDir)
 
 	// get local cache
-	_, err := repo.Update(false)
+	err := repo.Update(false)
 	require.NoError(t, err)
 	repoSwizzler := &testutils.MetadataSwizzler{
 		Gun:           serverSwizzler.Gun,
@@ -1253,7 +1253,7 @@ func testUpdateLocalAndRemoteRootCorrupt(t *testing.T, forWrite bool, localExpt,
 	msg := fmt.Sprintf("swizzling root locally to return <%v> and remotely to return: <%v> (forWrite: %v)",
 		localExpt.desc, serverExpt.desc, forWrite)
 
-	_, err = repo.Update(forWrite)
+	err = repo.Update(forWrite)
 	require.Error(t, err, "expected failure updating when %s", msg)
 
 	errType := reflect.TypeOf(err)
@@ -1292,7 +1292,7 @@ func testUpdateRemoteKeyRotated(t *testing.T, targetsRole string) {
 	defer os.RemoveAll(repo.baseDir)
 
 	// get local cache
-	_, err := repo.Update(false)
+	err := repo.Update(false)
 	require.NoError(t, err)
 
 	cs := signed.NewEd25519()
@@ -1316,7 +1316,7 @@ func testUpdateRemoteKeyRotated(t *testing.T, targetsRole string) {
 
 	msg := fmt.Sprintf("swizzling %s remotely to rotate key (forWrite: false)", targetsRole)
 
-	_, err = repo.Update(false)
+	err = repo.Update(false)
 	require.Error(t, err, "expected failure updating when %s", msg)
 	require.IsType(t, signed.ErrRoleThreshold{}, err, "expected ErrRoleThreshold when %s: got %s",
 		msg, reflect.TypeOf(err))
