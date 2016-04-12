@@ -2,7 +2,6 @@ package main
 
 import (
 	"crypto/tls"
-	"errors"
 	_ "expvar"
 	"flag"
 	"fmt"
@@ -10,7 +9,6 @@ import (
 	"net"
 	"net/http"
 	"os"
-	"strings"
 	"time"
 
 	"google.golang.org/grpc"
@@ -64,16 +62,6 @@ func init() {
 	if logFormat == jsonLogFormat {
 		logrus.SetFormatter(new(logrus.JSONFormatter))
 	}
-}
-
-func passphraseRetriever(keyName, alias string, createNew bool, attempts int) (passphrase string, giveup bool, err error) {
-	passphrase = mainViper.GetString(strings.ToUpper(alias))
-
-	if passphrase == "" {
-		return "", false, errors.New("expected env variable to not be empty: " + alias)
-	}
-
-	return passphrase, false, nil
 }
 
 // Reads the configuration file for storage setup, and sets up the cryptoservice
