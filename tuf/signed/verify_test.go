@@ -64,6 +64,25 @@ func TestMoreThanEnoughSigs(t *testing.T) {
 	require.NoError(t, err)
 }
 
+func TestValidSigWithIncorrectKeyID(t *testing.T) {
+	cs := NewEd25519()
+	k1, err := cs.Create("root", "", data.ED25519Key)
+	require.NoError(t, err)
+	roleWithKeys := data.BaseRole{Name: "root", Keys: data.Keys{"invalidIDA": k1}, Threshold: 1}
+
+	meta := &data.SignedCommon{Type: "Root", Version: 1, Expires: data.DefaultExpires("root")}
+
+	b, err := json.MarshalCanonical(meta)
+	require.NoError(t, err)
+	s := &data.Signed{Signed: (*json.RawMessage)(&b)}
+	Sign(cs, s, k1)
+	require.Equal(t, 1, len(s.Signatures))
+	s.Signatures[0].KeyID = "invalidIDA"
+	err = Verify(s, roleWithKeys, 1)
+	require.Error(t, err)
+	require.IsType(t, ErrInvalidKeyID{}, err)
+}
+
 func TestDuplicateSigs(t *testing.T) {
 	cs := NewEd25519()
 	k, err := cs.Create("root", "", data.ED25519Key)
