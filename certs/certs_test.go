@@ -340,7 +340,12 @@ func testValidateRootRotationMissingOrigSig(t *testing.T, keyAlg, rootKeyType st
 
 	testRoot, err := data.NewRoot(
 		map[string]data.PublicKey{replRootKey.ID(): replRootKey},
-		map[string]*data.RootRole{data.CanonicalRootRole: &rootRole.RootRole},
+		map[string]*data.RootRole{
+			data.CanonicalRootRole:      &rootRole.RootRole,
+			data.CanonicalTargetsRole:   &rootRole.RootRole,
+			data.CanonicalSnapshotRole:  &rootRole.RootRole,
+			data.CanonicalTimestampRole: &rootRole.RootRole,
+		},
 		false,
 	)
 	require.NoError(t, err, "Failed to create new root")
@@ -399,7 +404,12 @@ func testValidateRootRotationMissingNewSig(t *testing.T, keyAlg, rootKeyType str
 
 	testRoot, err := data.NewRoot(
 		map[string]data.PublicKey{replRootKey.ID(): replRootKey},
-		map[string]*data.RootRole{data.CanonicalRootRole: &rootRole.RootRole},
+		map[string]*data.RootRole{
+			data.CanonicalRootRole:      &rootRole.RootRole,
+			data.CanonicalTargetsRole:   &rootRole.RootRole,
+			data.CanonicalSnapshotRole:  &rootRole.RootRole,
+			data.CanonicalTimestampRole: &rootRole.RootRole,
+		},
 		false,
 	)
 	require.NoError(t, err, "Failed to create new root")
