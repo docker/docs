@@ -8,6 +8,11 @@ function cleanup {
 	fi
 }
 
+function cleanupAndExit {
+    cleanup
+    rm /test_output/SUCCESS
+}
+
 if [[ -z "${CIRCLECI}" ]]; then
 	BUILDOPTS="--force-rm"
 fi
@@ -17,7 +22,8 @@ set -x
 
 cleanup
 
+docker-compose -f development.yml config
 docker-compose -f development.yml build ${BUILDOPTS} --pull | tee
 docker-compose -f development.yml up --abort-on-container-exit
 
-trap cleanup SIGINT SIGTERM EXIT
+trap cleanupAndExit SIGINT SIGTERM EXIT
