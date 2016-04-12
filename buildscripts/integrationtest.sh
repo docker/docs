@@ -13,8 +13,10 @@ function cleanupAndExit {
     # Check for existence of SUCCESS
     ls test_output/SUCCESS
     exitCode=$?
-    # Clean up test_output dir and exit
-    rm -rf test_output
+    # Clean up test_output dir (if not in CircleCI) and exit
+    if [[ -z "${CIRCLECI}" ]]; then
+        rm -rf test_output
+    fi
     exit $exitCode
 }
 
