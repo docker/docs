@@ -21,7 +21,7 @@ var ret = passphrase.ConstantRetriever("passphrase")
 // create a new store for clearing out keys, because we don't want to pollute
 // any cache
 func clearAllKeys(t *testing.T) {
-	store, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
+	store, err := NewYubiStore(trustmanager.NewKeyMemoryStore(ret), ret)
 	require.NoError(t, err)
 
 	for k := range store.ListKeys() {
@@ -78,7 +78,7 @@ func addMaxKeys(t *testing.T, store trustmanager.KeyStore) []string {
 // We can add keys enough times to fill up all the slots in the Yubikey.
 // They are backed up, and we can then list them and get the keys.
 func TestYubiAddKeysAndRetrieve(t *testing.T) {
-	if !YubikeyAccessible() {
+	if !IsAccessible() {
 		t.Skip("Must have Yubikey access.")
 	}
 	clearAllKeys(t)
@@ -90,13 +90,13 @@ func TestYubiAddKeysAndRetrieve(t *testing.T) {
 
 	// create 4 keys on the original store
 	backup := trustmanager.NewKeyMemoryStore(ret)
-	store, err := NewYubiKeyStore(backup, ret)
+	store, err := NewYubiStore(backup, ret)
 	require.NoError(t, err)
 	keys := addMaxKeys(t, store)
 
 	// create a new store, since we want to be sure the original store's cache
 	// is not masking any issues
-	cleanStore, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
+	cleanStore, err := NewYubiStore(trustmanager.NewKeyMemoryStore(ret), ret)
 	require.NoError(t, err)
 
 	// All 4 keys should be in the original store, in the clean store (which
@@ -118,7 +118,7 @@ func TestYubiAddKeysAndRetrieve(t *testing.T) {
 
 // Test that we can successfully keys enough times to fill up all the slots in the Yubikey, even without a backup store
 func TestYubiAddKeysWithoutBackup(t *testing.T) {
-	if !YubikeyAccessible() {
+	if !IsAccessible() {
 		t.Skip("Must have Yubikey access.")
 	}
 	clearAllKeys(t)
@@ -129,13 +129,13 @@ func TestYubiAddKeysWithoutBackup(t *testing.T) {
 	}()
 
 	// create 4 keys on the original store
-	store, err := NewYubiKeyStore(nil, ret)
+	store, err := NewYubiStore(nil, ret)
 	require.NoError(t, err)
 	keys := addMaxKeys(t, store)
 
 	// create a new store, since we want to be sure the original store's cache
 	// is not masking any issues
-	cleanStore, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
+	cleanStore, err := NewYubiStore(trustmanager.NewKeyMemoryStore(ret), ret)
 	require.NoError(t, err)
 
 	// All 4 keys should be in the original store, in the clean store (which
@@ -157,7 +157,7 @@ func TestYubiAddKeysWithoutBackup(t *testing.T) {
 
 // We can't add a key if there are no more slots
 func TestYubiAddKeyFailureIfNoMoreSlots(t *testing.T) {
-	if !YubikeyAccessible() {
+	if !IsAccessible() {
 		t.Skip("Must have Yubikey access.")
 	}
 	clearAllKeys(t)
@@ -169,7 +169,7 @@ func TestYubiAddKeyFailureIfNoMoreSlots(t *testing.T) {
 
 	// create 4 keys on the original store
 	backup := trustmanager.NewKeyMemoryStore(ret)
-	store, err := NewYubiKeyStore(backup, ret)
+	store, err := NewYubiStore(backup, ret)
 	require.NoError(t, err)
 	addMaxKeys(t, store)
 
@@ -179,7 +179,7 @@ func TestYubiAddKeyFailureIfNoMoreSlots(t *testing.T) {
 
 	// create a new store, since we want to be sure the original store's cache
 	// is not masking any issues
-	cleanStore, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
+	cleanStore, err := NewYubiStore(trustmanager.NewKeyMemoryStore(ret), ret)
 	require.NoError(t, err)
 
 	// The key should not be in the original store, in the new clean store, or
@@ -197,7 +197,7 @@ func TestYubiAddKeyFailureIfNoMoreSlots(t *testing.T) {
 // If some random key in the middle was removed, adding a key will work (keys
 // do not have to be deleted/added in order)
 func TestYubiAddKeyCanAddToMiddleSlot(t *testing.T) {
-	if !YubikeyAccessible() {
+	if !IsAccessible() {
 		t.Skip("Must have Yubikey access.")
 	}
 	clearAllKeys(t)
@@ -209,7 +209,7 @@ func TestYubiAddKeyCanAddToMiddleSlot(t *testing.T) {
 
 	// create 4 keys on the original store
 	backup := trustmanager.NewKeyMemoryStore(ret)
-	store, err := NewYubiKeyStore(backup, ret)
+	store, err := NewYubiStore(backup, ret)
 	require.NoError(t, err)
 	keys := addMaxKeys(t, store)
 
@@ -223,7 +223,7 @@ func TestYubiAddKeyCanAddToMiddleSlot(t *testing.T) {
 
 	// create a new store, since we want to be sure the original store's cache
 	// is not masking any issues
-	cleanStore, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
+	cleanStore, err := NewYubiStore(trustmanager.NewKeyMemoryStore(ret), ret)
 	require.NoError(t, err)
 
 	// The new key should be in the original store, in the new clean store, and
@@ -262,7 +262,7 @@ func (s *nonworkingBackup) AddKey(keyInfo trustmanager.KeyInfo, privKey data.Pri
 // be removed from the Yubikey too because otherwise there is no way for
 // the user to later get a backup of the key.
 func TestYubiAddKeyRollsBackIfCannotBackup(t *testing.T) {
-	if !YubikeyAccessible() {
+	if !IsAccessible() {
 		t.Skip("Must have Yubikey access.")
 	}
 	clearAllKeys(t)
@@ -275,7 +275,7 @@ func TestYubiAddKeyRollsBackIfCannotBackup(t *testing.T) {
 	backup := &nonworkingBackup{
 		KeyMemoryStore: *trustmanager.NewKeyMemoryStore(ret),
 	}
-	store, err := NewYubiKeyStore(backup, ret)
+	store, err := NewYubiStore(backup, ret)
 	require.NoError(t, err)
 
 	_, err = testAddKey(t, store)
@@ -289,7 +289,7 @@ func TestYubiAddKeyRollsBackIfCannotBackup(t *testing.T) {
 // If, when adding a key to the Yubikey, and it already exists, we succeed
 // without adding it to the backup store.
 func TestYubiAddDuplicateKeySucceedsButDoesNotBackup(t *testing.T) {
-	if !YubikeyAccessible() {
+	if !IsAccessible() {
 		t.Skip("Must have Yubikey access.")
 	}
 	clearAllKeys(t)
@@ -299,14 +299,14 @@ func TestYubiAddDuplicateKeySucceedsButDoesNotBackup(t *testing.T) {
 		SetYubikeyKeyMode(KeymodeTouch | KeymodePinOnce)
 	}()
 
-	origStore, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
+	origStore, err := NewYubiStore(trustmanager.NewKeyMemoryStore(ret), ret)
 	require.NoError(t, err)
 
 	key, err := testAddKey(t, origStore)
 	require.NoError(t, err)
 
 	backup := trustmanager.NewKeyMemoryStore(ret)
-	cleanStore, err := NewYubiKeyStore(backup, ret)
+	cleanStore, err := NewYubiStore(backup, ret)
 	require.NoError(t, err)
 	require.Len(t, cleanStore.ListKeys(), 1)
 
@@ -321,7 +321,7 @@ func TestYubiAddDuplicateKeySucceedsButDoesNotBackup(t *testing.T) {
 
 // RemoveKey removes a key from the yubikey, but not from the backup store.
 func TestYubiRemoveKey(t *testing.T) {
-	if !YubikeyAccessible() {
+	if !IsAccessible() {
 		t.Skip("Must have Yubikey access.")
 	}
 	clearAllKeys(t)
@@ -332,7 +332,7 @@ func TestYubiRemoveKey(t *testing.T) {
 	}()
 
 	backup := trustmanager.NewKeyMemoryStore(ret)
-	store, err := NewYubiKeyStore(backup, ret)
+	store, err := NewYubiStore(backup, ret)
 	require.NoError(t, err)
 
 	key, err := testAddKey(t, store)
@@ -348,11 +348,11 @@ func TestYubiRemoveKey(t *testing.T) {
 
 	// create a new store, since we want to be sure the original store's cache
 	// is not masking any issues
-	cleanStore, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
+	cleanStore, err := NewYubiStore(trustmanager.NewKeyMemoryStore(ret), ret)
 	require.NoError(t, err)
 
 	// key is not in either the original store or the clean store
-	for _, store := range []*YubiKeyStore{store, cleanStore} {
+	for _, store := range []*YubiStore{store, cleanStore} {
 		_, _, err := store.GetKey(key.ID())
 		require.Error(t, err)
 	}
@@ -360,7 +360,7 @@ func TestYubiRemoveKey(t *testing.T) {
 
 // One cannot export from hardware - it will not export from the backup
 func TestYubiExportKeyFails(t *testing.T) {
-	if !YubikeyAccessible() {
+	if !IsAccessible() {
 		t.Skip("Must have Yubikey access.")
 	}
 	clearAllKeys(t)
@@ -370,7 +370,7 @@ func TestYubiExportKeyFails(t *testing.T) {
 		SetYubikeyKeyMode(KeymodeTouch | KeymodePinOnce)
 	}()
 
-	store, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
+	store, err := NewYubiStore(trustmanager.NewKeyMemoryStore(ret), ret)
 	require.NoError(t, err)
 
 	key, err := testAddKey(t, store)
@@ -384,7 +384,7 @@ func TestYubiExportKeyFails(t *testing.T) {
 // If there are keys in the backup store but no keys in the Yubikey,
 // listing and getting cannot access the keys in the backup store
 func TestYubiListAndGetKeysIgnoresBackup(t *testing.T) {
-	if !YubikeyAccessible() {
+	if !IsAccessible() {
 		t.Skip("Must have Yubikey access.")
 	}
 	clearAllKeys(t)
@@ -398,7 +398,7 @@ func TestYubiListAndGetKeysIgnoresBackup(t *testing.T) {
 	key, err := testAddKey(t, backup)
 	require.NoError(t, err)
 
-	store, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
+	store, err := NewYubiStore(trustmanager.NewKeyMemoryStore(ret), ret)
 	require.Len(t, store.ListKeys(), 0)
 	_, _, err = store.GetKey(key.ID())
 	require.Error(t, err)
@@ -408,7 +408,7 @@ func TestYubiListAndGetKeysIgnoresBackup(t *testing.T) {
 // specifically that you cannot get the private bytes out.  Assume we can
 // sign something.
 func TestYubiKeyAndSign(t *testing.T) {
-	if !YubikeyAccessible() {
+	if !IsAccessible() {
 		t.Skip("Must have Yubikey access.")
 	}
 	clearAllKeys(t)
@@ -418,7 +418,7 @@ func TestYubiKeyAndSign(t *testing.T) {
 		SetYubikeyKeyMode(KeymodeTouch | KeymodePinOnce)
 	}()
 
-	store, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
+	store, err := NewYubiStore(trustmanager.NewKeyMemoryStore(ret), ret)
 	require.NoError(t, err)
 
 	ecdsaPrivateKey, err := testAddKey(t, store)
@@ -449,7 +449,7 @@ var setupErrors = []string{"Initialize", "GetSlotList", "OpenSession"}
 
 // Create a new store, so that we avoid any cache issues, and list keys
 func cleanListKeys(t *testing.T) map[string]trustmanager.KeyInfo {
-	cleanStore, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
+	cleanStore, err := NewYubiStore(trustmanager.NewKeyMemoryStore(ret), ret)
 	require.NoError(t, err)
 	return cleanStore.ListKeys()
 }
@@ -507,7 +507,7 @@ func testYubiFunctionCleansUpOnSpecifiedErrors(t *testing.T,
 }
 
 func TestYubiAddKeyCleansUpOnError(t *testing.T) {
-	if !YubikeyAccessible() {
+	if !IsAccessible() {
 		t.Skip("Must have Yubikey access.")
 	}
 	clearAllKeys(t)
@@ -518,7 +518,7 @@ func TestYubiAddKeyCleansUpOnError(t *testing.T) {
 	}()
 
 	backup := trustmanager.NewKeyMemoryStore(ret)
-	store, err := NewYubiKeyStore(backup, ret)
+	store, err := NewYubiStore(backup, ret)
 	require.NoError(t, err)
 
 	var _addkey = func() error {
@@ -571,7 +571,7 @@ func TestYubiAddKeyCleansUpOnError(t *testing.T) {
 }
 
 func TestYubiGetKeyCleansUpOnError(t *testing.T) {
-	if !YubikeyAccessible() {
+	if !IsAccessible() {
 		t.Skip("Must have Yubikey access.")
 	}
 	clearAllKeys(t)
@@ -581,7 +581,7 @@ func TestYubiGetKeyCleansUpOnError(t *testing.T) {
 		SetYubikeyKeyMode(KeymodeTouch | KeymodePinOnce)
 	}()
 
-	store, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
+	store, err := NewYubiStore(trustmanager.NewKeyMemoryStore(ret), ret)
 	require.NoError(t, err)
 	key, err := testAddKey(t, store)
 	require.NoError(t, err)
@@ -603,7 +603,7 @@ func TestYubiGetKeyCleansUpOnError(t *testing.T) {
 }
 
 func TestYubiRemoveKeyCleansUpOnError(t *testing.T) {
-	if !YubikeyAccessible() {
+	if !IsAccessible() {
 		t.Skip("Must have Yubikey access.")
 	}
 	clearAllKeys(t)
@@ -613,7 +613,7 @@ func TestYubiRemoveKeyCleansUpOnError(t *testing.T) {
 		SetYubikeyKeyMode(KeymodeTouch | KeymodePinOnce)
 	}()
 
-	store, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
+	store, err := NewYubiStore(trustmanager.NewKeyMemoryStore(ret), ret)
 	require.NoError(t, err)
 	key, err := testAddKey(t, store)
 	require.NoError(t, err)
@@ -646,7 +646,7 @@ func TestYubiRemoveKeyCleansUpOnError(t *testing.T) {
 }
 
 func TestYubiListKeyCleansUpOnError(t *testing.T) {
-	if !YubikeyAccessible() {
+	if !IsAccessible() {
 		t.Skip("Must have Yubikey access.")
 	}
 	clearAllKeys(t)
@@ -656,9 +656,9 @@ func TestYubiListKeyCleansUpOnError(t *testing.T) {
 		SetYubikeyKeyMode(KeymodeTouch | KeymodePinOnce)
 	}()
 
-	// Do not call NewYubiKeyStore, because it list keys immediately to
+	// Do not call NewYubiStore, because it list keys immediately to
 	// build the cache.
-	store := &YubiKeyStore{
+	store := &YubiStore{
 		passRetriever: ret,
 		keys:          make(map[string]yubiSlot),
 		backupStore:   trustmanager.NewKeyMemoryStore(ret),
@@ -685,7 +685,7 @@ func TestYubiListKeyCleansUpOnError(t *testing.T) {
 // export key fails anyway, don't bother testing
 
 func TestYubiSignCleansUpOnError(t *testing.T) {
-	if !YubikeyAccessible() {
+	if !IsAccessible() {
 		t.Skip("Must have Yubikey access.")
 	}
 	clearAllKeys(t)
@@ -695,7 +695,7 @@ func TestYubiSignCleansUpOnError(t *testing.T) {
 		SetYubikeyKeyMode(KeymodeTouch | KeymodePinOnce)
 	}()
 
-	store, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
+	store, err := NewYubiStore(trustmanager.NewKeyMemoryStore(ret), ret)
 	require.NoError(t, err)
 
 	key, err := testAddKey(t, store)
@@ -732,7 +732,7 @@ func TestYubiSignCleansUpOnError(t *testing.T) {
 // If Sign gives us an invalid signature, we retry until successful up to
 // a maximum of 5 times.
 func TestYubiRetrySignUntilSuccess(t *testing.T) {
-	if !YubikeyAccessible() {
+	if !IsAccessible() {
 		t.Skip("Must have Yubikey access.")
 	}
 	clearAllKeys(t)
@@ -742,7 +742,7 @@ func TestYubiRetrySignUntilSuccess(t *testing.T) {
 		SetYubikeyKeyMode(KeymodeTouch | KeymodePinOnce)
 	}()
 
-	store, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
+	store, err := NewYubiStore(trustmanager.NewKeyMemoryStore(ret), ret)
 	require.NoError(t, err)
 
 	key, err := testAddKey(t, store)
@@ -777,7 +777,7 @@ func TestYubiRetrySignUntilSuccess(t *testing.T) {
 // If Sign gives us an invalid signature, we retry until up to a maximum of 5
 // times, and if it's still invalid, fail.
 func TestYubiRetrySignUntilFail(t *testing.T) {
-	if !YubikeyAccessible() {
+	if !IsAccessible() {
 		t.Skip("Must have Yubikey access.")
 	}
 	clearAllKeys(t)
@@ -787,7 +787,7 @@ func TestYubiRetrySignUntilFail(t *testing.T) {
 		SetYubikeyKeyMode(KeymodeTouch | KeymodePinOnce)
 	}()
 
-	store, err := NewYubiKeyStore(trustmanager.NewKeyMemoryStore(ret), ret)
+	store, err := NewYubiStore(trustmanager.NewKeyMemoryStore(ret), ret)
 	require.NoError(t, err)
 
 	key, err := testAddKey(t, store)

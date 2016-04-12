@@ -46,8 +46,8 @@ func TestDeleteKeyHandlerReturns404WithNonexistentKey(t *testing.T) {
 	fakeID := "c62e6d68851cef1f7e55a9d56e3b0c05f3359f16838cad43600f0554e7d3b54d"
 
 	keyID := &pb.KeyID{ID: fakeID}
-	requestJson, _ := json.Marshal(keyID)
-	reader = strings.NewReader(string(requestJson))
+	requestJSON, _ := json.Marshal(keyID)
+	reader = strings.NewReader(string(requestJSON))
 
 	request, err := http.NewRequest("POST", deleteKeyBaseURL, reader)
 	require.Nil(t, err)
@@ -66,8 +66,8 @@ func TestDeleteKeyHandler(t *testing.T) {
 	tufKey, _ := cryptoService.Create("", "", data.ED25519Key)
 	require.NotNil(t, tufKey)
 
-	requestJson, _ := json.Marshal(&pb.KeyID{ID: tufKey.ID()})
-	reader = strings.NewReader(string(requestJson))
+	requestJSON, _ := json.Marshal(&pb.KeyID{ID: tufKey.ID()})
+	reader = strings.NewReader(string(requestJSON))
 
 	request, err := http.NewRequest("POST", deleteKeyBaseURL, reader)
 	require.Nil(t, err)
@@ -156,9 +156,9 @@ func TestSoftwareSignHandler(t *testing.T) {
 	require.Nil(t, err)
 
 	sigRequest := &pb.SignatureRequest{KeyID: &pb.KeyID{ID: tufKey.ID()}, Content: make([]byte, 10)}
-	requestJson, _ := json.Marshal(sigRequest)
+	requestJSON, _ := json.Marshal(sigRequest)
 
-	reader = strings.NewReader(string(requestJson))
+	reader = strings.NewReader(string(requestJSON))
 
 	request, err := http.NewRequest("POST", signBaseURL, reader)
 
@@ -184,8 +184,8 @@ func TestSoftwareSignWithInvalidRequestHandler(t *testing.T) {
 	cryptoService := cryptoservice.NewCryptoService(keyStore)
 	setup(signer.CryptoServiceIndex{data.ED25519Key: cryptoService, data.RSAKey: cryptoService, data.ECDSAKey: cryptoService})
 
-	requestJson := "{\"blob\":\"7d16f1d0b95310a7bc557747fc4f20fcd41c1c5095ae42f189df0717e7d7f4a0a2b55debce630f43c4ac099769c612965e3fda3cd4c0078ee6a460f14fa19307\"}"
-	reader = strings.NewReader(requestJson)
+	requestJSON := "{\"blob\":\"7d16f1d0b95310a7bc557747fc4f20fcd41c1c5095ae42f189df0717e7d7f4a0a2b55debce630f43c4ac099769c612965e3fda3cd4c0078ee6a460f14fa19307\"}"
+	reader = strings.NewReader(requestJSON)
 
 	request, err := http.NewRequest("POST", signBaseURL, reader)
 
@@ -213,9 +213,9 @@ func TestSignHandlerReturns404WithNonexistentKey(t *testing.T) {
 	cryptoService.Create("", "", data.ED25519Key)
 
 	sigRequest := &pb.SignatureRequest{KeyID: &pb.KeyID{ID: fakeID}, Content: make([]byte, 10)}
-	requestJson, _ := json.Marshal(sigRequest)
+	requestJSON, _ := json.Marshal(sigRequest)
 
-	reader = strings.NewReader(string(requestJson))
+	reader = strings.NewReader(string(requestJSON))
 
 	request, err := http.NewRequest("POST", signBaseURL, reader)
 	require.Nil(t, err)
