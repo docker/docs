@@ -12,6 +12,13 @@ weight="99"
 
 # UCP Release Notes
 
+## Version 1.0.4
+
+**Security update**
+
+Fixes a security issue by which a user can can obtain unauthorized access to
+UCP via LDAP authentication.
+
 ## Version 1.0.3
 
 Fixes a bug introduced by version 1.0.2 that was causing problems when a user
