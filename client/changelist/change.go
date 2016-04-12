@@ -38,10 +38,8 @@ type TufChange struct {
 // TufRootData represents a modification of the keys associated
 // with a role that appears in the root.json
 type TufRootData struct {
-	ReplaceKeys data.KeyList `json:"keys"`
-	AddKeys     data.KeyList `json:"add_keys, omitempty"`
-	RemoveKeys  []string     `json:"remove_keys,omitempty"`
-	RoleName    string       `json:"role"`
+	Keys     data.KeyList `json:"keys"`
+	RoleName string       `json:"role"`
 }
 
 // NewTufChange initializes a tufChange object

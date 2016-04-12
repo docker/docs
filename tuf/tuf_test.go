@@ -1301,6 +1301,7 @@ func TestSignRootOldRootRolesAndOldSigs(t *testing.T) {
 
 	// bump root version and also add the above keys and extra roles to root
 	repo.Root.Signed.Version = 6
+	oldExpiry := repo.Root.Signed.Expires
 	// add every key to the root's key list except 1
 	for i, key := range rootCertKeys {
 		if i != 1 {
@@ -1341,8 +1342,9 @@ func TestSignRootOldRootRolesAndOldSigs(t *testing.T) {
 		require.NoError(t, cs.AddKey(data.CanonicalRootRole, gun, privKey))
 	}
 	// we haven't saved any unsaved roles because there was an error signing,
-	// nor have we bumped the version
+	// nor have we bumped the version or altered the expiry
 	require.Equal(t, 6, repo.Root.Signed.Version)
+	require.Equal(t, oldExpiry, repo.Root.Signed.Expires)
 	require.Len(t, repo.Root.Signed.Roles, lenRootRoles)
 
 	// remove all the keys we don't need and demonstrate we can still sign
@@ -1373,6 +1375,7 @@ func TestSignRootOldRootRolesAndOldSigs(t *testing.T) {
 	// bumped version, 2 new roles, but one overwrote the previous root.7, so one additional role
 	require.Equal(t, 7, repo.Root.Signed.Version)
 	require.Len(t, repo.Root.Signed.Roles, lenRootRoles+1)
+	require.True(t, oldExpiry.Before(repo.Root.Signed.Expires))
 	lenRootRoles = len(repo.Root.Signed.Roles)
 
 	// remove the optional key
@@ -1380,13 +1383,15 @@ func TestSignRootOldRootRolesAndOldSigs(t *testing.T) {
 
 	// SignRoot will still succeed even if the key that wasn't in a root isn't
 	// available
+	oldExpiry = repo.Root.Signed.Expires
 	signedObj, err = repo.SignRoot(data.DefaultExpires(data.CanonicalRootRole))
 	require.NoError(t, err)
 	verifySignatureList(t, signedObj, expectedSigningKeys[1:]...)
 
 	// no additional roles were added
 	require.Len(t, repo.Root.Signed.Roles, lenRootRoles)
-	require.Equal(t, 8, repo.Root.Signed.Version) // bumped version
+	require.Equal(t, 8, repo.Root.Signed.Version)               // bumped version
+	require.True(t, oldExpiry.Before(repo.Root.Signed.Expires)) // expiry updated
 
 	// now rotate a non-root key
 	newTargetsKey, err := cs.Create(data.CanonicalTargetsRole, gun, data.ECDSAKey)
@@ -1394,11 +1399,13 @@ func TestSignRootOldRootRolesAndOldSigs(t *testing.T) {
 	require.NoError(t, repo.ReplaceBaseKeys(data.CanonicalTargetsRole, newTargetsKey))
 
 	// we still sign with all old roles no additional roles were added
+	oldExpiry = repo.Root.Signed.Expires
 	signedObj, err = repo.SignRoot(data.DefaultExpires(data.CanonicalRootRole))
 	require.NoError(t, err)
 	verifySignatureList(t, signedObj, expectedSigningKeys[1:]...)
 	require.Len(t, repo.Root.Signed.Roles, lenRootRoles)
-	require.Equal(t, 9, repo.Root.Signed.Version) // bumped version
+	require.Equal(t, 9, repo.Root.Signed.Version)               // bumped version
+	require.True(t, oldExpiry.Before(repo.Root.Signed.Expires)) // expiry updated
 
 	// rotating a targets key again, if we are missing the previous root's keys, signing will fail
 	newTargetsKey, err = cs.Create(data.CanonicalTargetsRole, gun, data.ECDSAKey)
@@ -1407,6 +1414,7 @@ func TestSignRootOldRootRolesAndOldSigs(t *testing.T) {
 
 	require.NoError(t, cs.RemoveKey(rootPrivKeys[6].ID()))
 
+	oldExpiry = repo.Root.Signed.Expires
 	_, err = repo.SignRoot(data.DefaultExpires(data.CanonicalRootRole))
 	require.Error(t, err)
 	require.IsType(t, signed.ErrInsufficientSignatures{}, err)
@@ -1415,4 +1423,5 @@ func TestSignRootOldRootRolesAndOldSigs(t *testing.T) {
 	// no additional roles were saved, version has not changed
 	require.Len(t, repo.Root.Signed.Roles, lenRootRoles)
 	require.Equal(t, 9, repo.Root.Signed.Version) // version has not changed
+	require.Equal(t, oldExpiry, repo.Root.Signed.Expires)
 }
