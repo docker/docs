@@ -127,7 +127,7 @@ func VerifySignatures(s *data.Signed, roleData data.BaseRole) error {
 		}
 		// Check that the signature key ID actually matches the content ID of the key
 		if key.ID() != sig.KeyID {
-			return ErrInvalidKeyType{}
+			return ErrInvalidKeyID{}
 		}
 		if err := VerifySignature(msg, sig, key); err != nil {
 			logrus.Debugf("continuing b/c %s", err.Error())
