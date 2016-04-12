@@ -45,3 +45,6 @@ bin/notary ${OPTS} add ${REPONAME} readmetarget README.md
 bin/notary ${OPTS} publish ${REPONAME}
 bin/notary ${OPTS} delegation list ${REPONAME} | grep targets/releases
 cat README.md | bin/notary ${OPTS} verify $REPONAME readmetarget > /test_output/SUCCESS
+
+# Make this file accessible for CI
+chmod 777 /test_output/SUCCESS
