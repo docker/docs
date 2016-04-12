@@ -40,16 +40,13 @@ dependencies:
       cp -R "$CHECKOUT" "$BASE_STABLE"
 
   override:
-  # Install dependencies for every copied clone/go version
-    - gvm use stable && go get github.com/tools/godep:
-        pwd: $BASE_STABLE
-
-  post:
-  # For the stable go version, additionally install linting and misspell tools
+   # don't use circleci's default dependency installation step of `go get -d -u ./...`
+   # since we already vendor everything; additionally install linting and misspell tools
     - >
       gvm use stable &&
       go get github.com/golang/lint/golint &&
       go get -u github.com/client9/misspell/cmd/misspell
+
 test:
   pre:
   # Output the go versions we are going to test
