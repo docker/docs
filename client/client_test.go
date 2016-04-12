@@ -494,7 +494,7 @@ func requireRepoHasExpectedMetadata(t *testing.T, repo *NotaryRepository,
 		// each of root, targets, snapshot, timestamp
 		require.Len(t, decodedRoot.Keys, len(data.BaseRoles),
 			"wrong number of keys in root.json")
-		require.Len(t, decodedRoot.Roles, len(data.BaseRoles),
+		require.True(t, len(decodedRoot.Roles) >= len(data.BaseRoles),
 			"wrong number of roles in root.json")
 
 		for _, role := range data.BaseRoles {

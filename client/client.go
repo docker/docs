@@ -514,9 +514,8 @@ func (r *NotaryRepository) ListRoles() ([]RoleWithSignatures, error) {
 		case data.CanonicalTimestampRole:
 			roleWithSig.Signatures = r.tufRepo.Timestamp.Signatures
 		default:
-			// If the role isn't a delegation, we should error -- this is only possible if we have invalid state
 			if !data.IsDelegation(role.Name) {
-				return nil, data.ErrInvalidRole{Role: role.Name, Reason: "invalid role name"}
+				continue
 			}
 			if _, ok := r.tufRepo.Targets[role.Name]; ok {
 				// We'll only find a signature if we've published any targets with this delegation

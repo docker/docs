@@ -599,8 +599,8 @@ func TestSwizzlerMutateRoot(t *testing.T) {
 			origSigned, newSigned := &data.SignedRoot{}, &data.SignedRoot{}
 			require.NoError(t, json.Unmarshal(metaBytes, origSigned))
 			require.NoError(t, json.Unmarshal(newMeta, newSigned))
-			require.Len(t, origSigned.Signed.Roles, 4)
-			require.Len(t, newSigned.Signed.Roles, 5)
+			require.Len(t, origSigned.Signed.Roles, 5)
+			require.Len(t, newSigned.Signed.Roles, 6)
 		}
 	}
 }

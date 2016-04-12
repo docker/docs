@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"path"
+	"sort"
 	"strconv"
 	"strings"
 	"time"
@@ -70,7 +71,6 @@ type Repo struct {
 	// If we know what the original was, we'll if and how to handle root
 	// rotations.
 	originalRootRole data.BaseRole
-	rootRoleDirty    bool
 }
 
 // NewRepo initializes a Repo instance with a CryptoService.
@@ -99,12 +99,8 @@ func (tr *Repo) AddBaseKeys(role string, keys ...data.PublicKey) error {
 	tr.Root.Dirty = true
 
 	// also, whichever role was added to out needs to be re-signed
-	// root has already been marked dirty.  If the root keys themselves were
-	// changed, we want to mark the root role as dirty because we might have to
-	// do a root rotation
+	// root has already been marked dirty.
 	switch role {
-	case data.CanonicalRootRole:
-		tr.rootRoleDirty = true
 	case data.CanonicalSnapshotRole:
 		if tr.Snapshot != nil {
 			tr.Snapshot.Dirty = true
@@ -157,12 +153,8 @@ func (tr *Repo) RemoveBaseKeys(role string, keyIDs ...string) error {
 	tr.Root.Signed.Roles[role].KeyIDs = keep
 
 	// also, whichever role had keys removed needs to be re-signed
-	// root has already been marked dirty.  If the root keys themselves were
-	// changed, we want to mark the root role as dirty because we might have to
-	// do a root rotation
+	// root has already been marked dirty.
 	switch role {
-	case data.CanonicalRootRole:
-		tr.rootRoleDirty = true
 	case data.CanonicalSnapshotRole:
 		if tr.Snapshot != nil {
 			tr.Snapshot.Dirty = true
@@ -499,7 +491,9 @@ func (tr *Repo) InitRoot(root, timestamp, snapshot, targets data.BaseRole, consi
 	if err != nil {
 		return err
 	}
-	return tr.SetRoot(r)
+	tr.Root = r
+	tr.originalRootRole = root
+	return nil
 }
 
 // InitTargets initializes an empty targets, and returns the new empty target
@@ -511,7 +505,7 @@ func (tr *Repo) InitTargets(role string) (*data.SignedTargets, error) {
 		}
 	}
 	targets := data.NewTargets()
-	tr.SetTargets(role, targets)
+	tr.Targets[role] = targets
 	return targets, nil
 }
 
@@ -536,7 +530,8 @@ func (tr *Repo) InitSnapshot() error {
 	if err != nil {
 		return err
 	}
-	return tr.SetSnapshot(snapshot)
+	tr.Snapshot = snapshot
+	return nil
 }
 
 // InitTimestamp initializes a timestamp based on the current snapshot
@@ -550,7 +545,8 @@ func (tr *Repo) InitTimestamp() error {
 		return err
 	}
 
-	return tr.SetTimestamp(timestamp)
+	tr.Timestamp = timestamp
+	return nil
 }
 
 // SetRoot sets the Repo.Root field to the SignedRoot object.
@@ -828,72 +824,93 @@ func (tr *Repo) UpdateTimestamp(s *data.Signed) error {
 	return nil
 }
 
+type versionedRootRole struct {
+	data.BaseRole
+	version int
+}
+
+type versionedRootRoles []versionedRootRole
+
+func (v versionedRootRoles) Len() int           { return len(v) }
+func (v versionedRootRoles) Swap(i, j int)      { v[i], v[j] = v[j], v[i] }
+func (v versionedRootRoles) Less(i, j int) bool { return v[i].version < v[j].version }
+
 // SignRoot signs the root, using all keys from the "root" role (i.e. currently trusted)
 // as well as available keys used to sign the previous version, if the public part is
 // carried in tr.Root.Keys and the private key is available (i.e. probably previously
 // trusted keys, to allow rollover).
 func (tr *Repo) SignRoot(expires time.Time) (*data.Signed, error) {
 	logrus.Debug("signing root...")
-
-	tr.Root.Signed.Expires = expires
-	tr.Root.Signed.Version++
-
-	root, err := tr.GetBaseRole(data.CanonicalRootRole)
+	currRoot, err := tr.GetBaseRole(data.CanonicalRootRole)
 	if err != nil {
 		return nil, err
 	}
 
-	rolesToSignWith := []data.BaseRole{root}
+	oldRootRoles, origRoles := tr.getOldRootRoles()
 
-	optionalKeys := tr.getOldRootKeys(root)
-	// if the root role has changed, save this version's root role as a new
-	// versioned root role.  Also exclude the previous root role's keys
-	// from the map of optional keys, because the previous root role's keys are
-	// not optional
-	if tr.rootRoleDirty {
-		tr.saveRootRole()
-		for keyID := range tr.originalRootRole.Keys {
-			delete(optionalKeys, keyID)
+	var latestSavedRole data.BaseRole
+	rolesToSignWith := make([]data.BaseRole, 0, len(oldRootRoles))
+
+	if len(oldRootRoles) > 0 {
+		sort.Sort(oldRootRoles)
+		for _, vRole := range oldRootRoles {
+			rolesToSignWith = append(rolesToSignWith, vRole.BaseRole)
 		}
-		rolesToSignWith = append(rolesToSignWith, tr.originalRootRole)
+		latest := rolesToSignWith[len(rolesToSignWith)-1]
+		latestSavedRole = data.BaseRole{
+			Name:      data.CanonicalRootRole,
+			Threshold: latest.Threshold,
+			Keys:      latest.Keys,
+		}
 	}
 
-	var optionalKeysList []data.PublicKey
-	for _, key := range optionalKeys {
-		optionalKeysList = append(optionalKeysList, key)
+	// if the root role has changed and original role had not been saved as a previous role, save it now
+	if !tr.originalRootRole.Equals(currRoot) && !tr.originalRootRole.Equals(latestSavedRole) {
+		tr.saveOldRootRole(tr.originalRootRole, tr.Root.Signed.Version)
+		rolesToSignWith = append(rolesToSignWith, tr.originalRootRole)
+		latestSavedRole = tr.originalRootRole
+	}
+
+	origVersion := tr.Root.Signed.Expires
+	tr.Root.Signed.Expires = expires
+	tr.Root.Signed.Version++
+
+	// if the current role doesn't match with the latest saved role, save it
+	if !currRoot.Equals(latestSavedRole) {
+		tr.saveOldRootRole(currRoot, tr.Root.Signed.Version)
+		rolesToSignWith = append(rolesToSignWith, currRoot)
 	}
 
 	signed, err := tr.Root.ToSigned()
 	if err != nil {
+		tr.Root.Signed.Expires = origVersion
+		tr.Root.Signed.Version--
+		tr.Root.Signed.Roles = origRoles
 		return nil, err
 	}
-	signed, err = tr.sign(signed, rolesToSignWith, optionalKeysList)
+	signed, err = tr.sign(signed, rolesToSignWith, tr.getOptionalRootKeys(rolesToSignWith))
 	if err != nil {
+		tr.Root.Signed.Expires = origVersion
+		tr.Root.Signed.Version--
+		tr.Root.Signed.Roles = origRoles
 		return nil, err
 	}
 
 	tr.Root.Signatures = signed.Signatures
+	tr.originalRootRole = currRoot
 	return signed, nil
 }
 
-// build a map containing the old root keys, excluding all current root keys
-// We get these from (1) existing root.json signatures, because older
-// repositories that have already done root rotation may not necessarily
-// have older root roles, and (2) from saved older root roles
-func (tr *Repo) getOldRootKeys(currentRootRole data.BaseRole) map[string]data.PublicKey {
-	oldKeysMap := make(map[string]data.PublicKey)
-	for _, oldSig := range tr.Root.Signatures {
-		if _, ok := currentRootRole.Keys[oldSig.KeyID]; ok {
-			continue
-		}
+// get all the saved previous roles <= the current root version
+func (tr *Repo) getOldRootRoles() (versionedRootRoles, map[string]*data.RootRole) {
+	oldRootRoles := make(versionedRootRoles, 0, len(tr.Root.Signed.Roles))
+	oldRoles := make(map[string]*data.RootRole)
 
-		if k, ok := tr.Root.Signed.Keys[oldSig.KeyID]; ok {
-			oldKeysMap[k.ID()] = k
-		}
-	}
 	// now go through the old roles
-	for roleName, rootRole := range tr.Root.Signed.Roles {
-		// ensure that the rolename matches our format
+	for roleName, r := range tr.Root.Signed.Roles {
+		oldRoles[roleName] = r
+		// ensure that the rolename matches our format and that the version is
+		// not too high
 		if data.ValidRole(roleName) {
 			continue
 		}
@@ -901,25 +918,51 @@ func (tr *Repo) getOldRootKeys(currentRootRole data.BaseRole) map[string]data.Pu
 		if len(nameTokens) != 2 || nameTokens[0] != data.CanonicalRootRole {
 			continue
 		}
-		_, err := strconv.Atoi(nameTokens[1])
+		version, err := strconv.Atoi(nameTokens[1])
+		if err != nil || version > tr.Root.Signed.Version {
+			continue
+		}
+
+		// ignore invalid roles, which shouldn't happen
+		oldRole, err := tr.Root.BuildBaseRole(roleName)
 		if err != nil {
 			continue
 		}
-		for _, keyID := range rootRole.KeyIDs {
-			if _, ok := currentRootRole.Keys[keyID]; ok {
-				continue
-			}
-			if k, ok := tr.Root.Signed.Keys[keyID]; ok {
-				oldKeysMap[k.ID()] = k
-			}
-		}
+
+		oldRootRoles = append(oldRootRoles, versionedRootRole{BaseRole: oldRole, version: version})
 	}
-	return oldKeysMap
+
+	return oldRootRoles, oldRoles
 }
 
-func (tr *Repo) saveRootRole() {
-	versionedRolename := fmt.Sprintf("%s.%v", data.CanonicalRootRole, tr.Root.Signed.Version)
-	tr.Root.Signed.Roles[versionedRolename] = tr.Root.Signed.Roles[data.CanonicalRootRole]
+// gets any extra optional root keys from the existing root.json signatures
+// (because older repositories that have already done root rotation may not
+// necessarily have older root roles)
+func (tr *Repo) getOptionalRootKeys(signingRoles []data.BaseRole) []data.PublicKey {
+	oldKeysMap := make(map[string]data.PublicKey)
+	for _, oldSig := range tr.Root.Signatures {
+		if k, ok := tr.Root.Signed.Keys[oldSig.KeyID]; ok {
+			oldKeysMap[k.ID()] = k
+		}
+	}
+	for _, role := range signingRoles {
+		for keyID := range role.Keys {
+			delete(oldKeysMap, keyID)
+		}
+	}
+
+	oldKeys := make([]data.PublicKey, 0, len(oldKeysMap))
+	for _, key := range oldKeysMap {
+		oldKeys = append(oldKeys, key)
+	}
+
+	return oldKeys
+}
+
+func (tr *Repo) saveOldRootRole(role data.BaseRole, version int) {
+	versionName := fmt.Sprintf("%s.%v", data.CanonicalRootRole, version)
+	tr.Root.Signed.Roles[versionName] = &data.RootRole{
+		KeyIDs: role.ListKeyIDs(), Threshold: role.Threshold}
 }
 
 // SignTargets signs the targets file for the given top level or delegated targets role
