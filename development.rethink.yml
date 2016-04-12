@@ -78,6 +78,10 @@ services:
         - rdb-01
         - rdb-02
     client:
+      volumes:
+        - ./test_output:/test_output
+      networks:
+        - rdb
       build:
         context: .
         dockerfile: Dockerfile
