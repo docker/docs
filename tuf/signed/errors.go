@@ -51,6 +51,13 @@ func (e ErrInvalidKeyType) Error() string {
 	return "key type is not valid for signature"
 }
 
+// ErrInvalidKeyID indicates the specified key ID was incorrect for its associated data
+type ErrInvalidKeyID struct{}
+
+func (e ErrInvalidKeyID) Error() string {
+	return "key ID is not valid for key content"
+}
+
 // ErrInvalidKeyLength indicates that while we may support the cipher, the provided
 // key length is not specifically supported, i.e. we support RSA, but not 1024 bit keys
 type ErrInvalidKeyLength struct {
