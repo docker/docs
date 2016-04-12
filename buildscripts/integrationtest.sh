@@ -10,7 +10,12 @@ function cleanup {
 
 function cleanupAndExit {
     cleanup
-    rm /test_output/SUCCESS
+    # Check for existence of SUCCESS
+    ls test_output/SUCCESS
+    exitCode=$?
+    # Clean up test_output dir and exit
+    rm -rf test_output
+    exit $exitCode
 }
 
 if [[ -z "${CIRCLECI}" ]]; then
