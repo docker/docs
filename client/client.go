@@ -885,25 +885,19 @@ func (r *NotaryRepository) validateRoot(rootJSON []byte) (*data.SignedRoot, erro
 // creates and adds one new key or delegates managing the key to the server.
 // These changes are staged in a changelist until publish is called.
 func (r *NotaryRepository) RotateKey(role string, serverManagesKey bool) error {
+	// We currently support remotely managing timestamp and snapshot keys
+	canBeRemoteKey := role == data.CanonicalTimestampRole || role == data.CanonicalSnapshotRole
+	// And locally managing root, targets, and snapshot keys
+	canBeLocalKey := (role == data.CanonicalSnapshotRole || role == data.CanonicalTargetsRole ||
+		role == data.CanonicalRootRole)
+
 	switch {
-	// We currently support locally or remotely managing snapshot keys...
-	case role == data.CanonicalSnapshotRole:
-		break
-
-	// locally managing targets keys only
-	case role == data.CanonicalTargetsRole && !serverManagesKey:
-		break
-	case role == data.CanonicalTargetsRole && serverManagesKey:
-		return ErrInvalidRemoteRole{Role: data.CanonicalTargetsRole}
-
-	// and remotely managing timestamp keys only
-	case role == data.CanonicalTimestampRole && serverManagesKey:
-		break
-	case role == data.CanonicalTimestampRole && !serverManagesKey:
-		return ErrInvalidLocalRole{Role: data.CanonicalTimestampRole}
-
-	default:
+	case !data.ValidRole(role) || data.IsDelegation(role):
 		return fmt.Errorf("notary does not currently permit rotating the %s key", role)
+	case serverManagesKey && !canBeRemoteKey:
+		return ErrInvalidRemoteRole{Role: role}
+	case !serverManagesKey && !canBeLocalKey:
+		return ErrInvalidLocalRole{Role: role}
 	}
 
 	var (
@@ -924,6 +918,18 @@ func (r *NotaryRepository) RotateKey(role string, serverManagesKey bool) error {
 		return fmt.Errorf(errFmtMsg, err)
 	}
 
+	// if this is a root role, generate a root cert for the public key
+	if role == data.CanonicalRootRole {
+		privKey, _, err := r.CryptoService.GetPrivateKey(pubKey.ID())
+		if err != nil {
+			return err
+		}
+		_, pubKey, err = rootCertKey(r.gun, privKey)
+		if err != nil {
+			return err
+		}
+	}
+
 	cl := changelist.NewMemChangelist()
 	if err := r.rootFileKeyChange(cl, role, changelist.ActionCreate, pubKey); err != nil {
 		return err
@@ -935,8 +941,8 @@ func (r *NotaryRepository) rootFileKeyChange(cl changelist.Changelist, role, act
 	kl := make(data.KeyList, 0, 1)
 	kl = append(kl, key)
 	meta := changelist.TufRootData{
-		RoleName:    role,
-		ReplaceKeys: kl,
+		RoleName: role,
+		Keys:     kl,
 	}
 	metaJSON, err := json.Marshal(meta)
 	if err != nil {
@@ -975,87 +981,4 @@ func (r *NotaryRepository) DeleteTrustData() error {
 		}
 	}
 	return nil
-}
-
-// ListRootCerts returns current trusted root certificates.
-// (In particular, not old certificates which we have already
-// rotated from but are still using for signing to allow rollover,
-// even if they are still trusted locally.)
-func (r *NotaryRepository) ListRootCerts() ([]*x509.Certificate, error) {
-	if err := r.Update(false); err != nil {
-		return nil, err
-	}
-
-	keyIDs := r.tufRepo.Root.Signed.Roles[data.CanonicalRootRole].KeyIDs
-	certs := make([]*x509.Certificate, 0, len(keyIDs))
-	for _, keyID := range keyIDs {
-		// r.tufRepo contains all data from root.json, which may include irrelevant
-		// certificates.  This is handled by certs.ValidateRoot, which adds
-		// only the real trusted certificates into the store.  So, this lookup by ID is not
-		// just a dumb way to not parse the certificate, the handling of ErrNoCertificatesFound
-		// ensures we only get the intersection of (certificates in current root.json) with
-		// (locally trusted certificates). The rotation code in certs.ValidateRoot ensures
-		// that we locally store a copy of all relevant certificates.
-		cert, err := r.CertStore.GetCertificateByCertID(keyID)
-		if err == nil {
-			certs = append(certs, cert)
-		} else if _, ok := err.(*trustmanager.ErrNoCertificatesFound); !ok {
-			return nil, err
-		}
-	}
-	return certs, nil
-}
-
-// RotateRootCert generates a new certificate to replace oldCert and adds
-// a changelist entry to update the root role with this certificate replacement
-// when r.Publish() is called.
-func (r *NotaryRepository) RotateRootCert(oldCert *x509.Certificate) error {
-	oldCertX509PublicKey := trustmanager.CertToKey(oldCert)
-	if oldCertX509PublicKey == nil {
-		return fmt.Errorf("invalid format for root key: %s", oldCert.PublicKeyAlgorithm)
-	}
-	rootKeyID, err := utils.CanonicalKeyID(oldCertX509PublicKey)
-	if err != nil {
-		return err
-	}
-
-	privKey, _, err := r.CryptoService.GetPrivateKey(rootKeyID)
-	if err != nil {
-		return err
-	}
-
-	_, newCertX509PublicKey, err := rootCertKey(r.gun, privKey)
-	if err != nil {
-		return err
-	}
-
-	cl, err := changelist.NewFileChangelist(filepath.Join(r.tufRepoPath, "changelist"))
-	if err != nil {
-		return err
-	}
-	defer cl.Close()
-
-	// Not changelist.ActionCreate/ReplaceKeys, which would drop other certificates.
-	meta := changelist.TufRootData{
-		RoleName:   data.CanonicalRootRole,
-		AddKeys:    []data.PublicKey{newCertX509PublicKey},
-		RemoveKeys: []string{oldCertX509PublicKey.ID()},
-	}
-	metaJSON, err := json.Marshal(meta)
-	if err != nil {
-		return err
-	}
-	c := changelist.NewTufChange(
-		changelist.ActionUpdate,
-		changelist.ScopeRoot,
-		changelist.TypeRootRole,
-		data.CanonicalRootRole,
-		metaJSON,
-	)
-	return cl.Add(c)
-
-	// Note that we don't need to worry about updating r.CertStore (and synchronizing
-	// this with the r.Publish() call; after we push the new root.json to the server,
-	// calls to r.Update() will cause this client to rotate certificates in r.CertStore
-	// just as other clients do.
 }

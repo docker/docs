@@ -180,21 +180,7 @@ func applyRootRoleChange(repo *tuf.Repo, c changelist.Change) error {
 		if err != nil {
 			return err
 		}
-		err = repo.ReplaceBaseKeys(d.RoleName, d.ReplaceKeys...)
-		if err != nil {
-			return err
-		}
-	case changelist.ActionUpdate:
-		d := &changelist.TufRootData{}
-		err := json.Unmarshal(c.Content(), d)
-		if err != nil {
-			return err
-		}
-		err = repo.AddBaseKeys(d.RoleName, d.AddKeys...)
-		if err != nil {
-			return err
-		}
-		err = repo.RemoveBaseKeys(d.RoleName, d.RemoveKeys...)
+		err = repo.ReplaceBaseKeys(d.RoleName, d.Keys...)
 		if err != nil {
 			return err
 		}

@@ -98,7 +98,7 @@ func (tr *Repo) AddBaseKeys(role string, keys ...data.PublicKey) error {
 	}
 	tr.Root.Dirty = true
 
-	// also, whichever role was added to out needs to be re-signed
+	// also, whichever role was switched out needs to be re-signed
 	// root has already been marked dirty.
 	switch role {
 	case data.CanonicalSnapshotRole:
@@ -838,7 +838,8 @@ func (v versionedRootRoles) Less(i, j int) bool { return v[i].version < v[j].ver
 // SignRoot signs the root, using all keys from the "root" role (i.e. currently trusted)
 // as well as available keys used to sign the previous version, if the public part is
 // carried in tr.Root.Keys and the private key is available (i.e. probably previously
-// trusted keys, to allow rollover).
+// trusted keys, to allow rollover).  If there are any errors, attempt to put root
+// back to the way it was (so version won't be incremented, for instance).
 func (tr *Repo) SignRoot(expires time.Time) (*data.Signed, error) {
 	logrus.Debug("signing root...")
 	currRoot, err := tr.GetBaseRole(data.CanonicalRootRole)
