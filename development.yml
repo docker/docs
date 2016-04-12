@@ -27,6 +27,8 @@ mysql:
     - MYSQL_ALLOW_EMPTY_PASSWORD="true"
   command: mysqld --innodb_file_per_table
 client:
+  volumes:
+    - ./test_output:/test_output
   build: .
   dockerfile: Dockerfile
   links:
