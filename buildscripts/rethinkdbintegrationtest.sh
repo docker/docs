@@ -8,6 +8,18 @@ function cleanup {
 	fi
 }
 
+function cleanupAndExit {
+    cleanup
+    # Check for existence of SUCCESS
+    ls test_output/SUCCESS
+    exitCode=$?
+    # Clean up test_output dir (if not in CircleCI) and exit
+    if [[ -z "${CIRCLECI}" ]]; then
+        rm -rf test_output
+    fi
+    exit $exitCode
+}
+
 if [[ -z "${CIRCLECI}" ]]; then
 	BUILDOPTS="--force-rm"
 fi
@@ -17,7 +29,8 @@ set -x
 
 cleanup
 
+docker-compose -f development.rethink.yml config
 docker-compose -f development.rethink.yml build ${BUILDOPTS} --pull | tee
 docker-compose -f development.rethink.yml up --abort-on-container-exit
 
-trap cleanup SIGINT SIGTERM EXIT
+trap cleanupAndExit SIGINT SIGTERM EXIT
