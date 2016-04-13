@@ -123,9 +123,10 @@ func ValidateRoot(certStore trustmanager.X509Store, root *data.Signed, gun strin
 		return &ErrValidationFail{Reason: "failed to validate integrity of roots"}
 	}
 
-	// Getting here means A) we had trusted certificates and both the
-	// old and new validated this root; or B) we had no trusted certificates but
-	// the new set of certificates has integrity (self-signed)
+	// Getting here means:
+	// A) we had trusted certificates and both the old and new validated this root.
+	// or
+	// B) we had no trusted certificates but the new set of certificates has integrity (self-signed).
 	logrus.Debugf("entering root certificate rotation for: %s", gun)
 
 	// Do root certificate rotation: we trust only the certs present in the new root
