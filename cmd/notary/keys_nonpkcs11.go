@@ -9,6 +9,6 @@ import (
 	"github.com/docker/notary/trustmanager"
 )
 
-func getYubiKeyStore(fileKeyStore trustmanager.KeyStore, ret passphrase.Retriever) (trustmanager.KeyStore, error) {
+func getYubiStore(fileKeyStore trustmanager.KeyStore, ret passphrase.Retriever) (trustmanager.KeyStore, error) {
 	return nil, errors.New("Not built with hardware support")
 }
