@@ -21,7 +21,7 @@ RUN set -x \
 	&& git clone https://github.com/tpoechtrager/osxcross.git $OSXCROSS_PATH \
 	&& ( cd $OSXCROSS_PATH && git checkout -q $OSX_CROSS_COMMIT) \
 	&& curl -sSL https://s3.dockerproject.org/darwin/v2/${OSX_SDK}.tar.xz -o "${OSXCROSS_PATH}/tarballs/${OSX_SDK}.tar.xz" \
-	&& UNATTENDED=yes OSX_VERSION_MIN=10.6 ${OSXCROSS_PATH}/build.sh
+	&& UNATTENDED=yes OSX_VERSION_MIN=10.6 ${OSXCROSS_PATH}/build.sh > /dev/null
 ENV PATH /osxcross/target/bin:$PATH
 
 ENV NOTARYDIR /go/src/github.com/docker/notary
