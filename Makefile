@@ -98,7 +98,7 @@ fmt:
 
 lint:
 	@echo "+ $@"
-	@test -z "$$(golint -tags "${NOTARY_BUILDTAGS}" ./... | grep -v .pb. | grep -v vendor/ | tee /dev/stderr)"
+	@test -z "$(shell find . -type f -name "*.go" -not -path "./vendor/*" -not -name "*.pb.*" -exec golint {} \; | tee /dev/stderr)"
 
 # Requires that the following:
 # go get -u github.com/client9/misspell/cmd/misspell

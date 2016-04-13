@@ -8,6 +8,6 @@ import (
 	"github.com/docker/notary/trustmanager/yubikey"
 )
 
-func getYubiKeyStore(fileKeyStore trustmanager.KeyStore, ret passphrase.Retriever) (trustmanager.KeyStore, error) {
-	return yubikey.NewYubiKeyStore(fileKeyStore, ret)
+func getYubiStore(fileKeyStore trustmanager.KeyStore, ret passphrase.Retriever) (trustmanager.KeyStore, error) {
+	return yubikey.NewYubiStore(fileKeyStore, ret)
 }
