@@ -103,6 +103,17 @@ func (err ErrBackupFailed) Error() string {
 	return fmt.Sprintf("Failed to backup private key to: %s", err.err)
 }
 
+// An error indicating that the HSM is not present (as opposed to failing),
+// i.e. that we can confidently claim that the key is not stored in the HSM
+// without notifying the user about a missing or failing HSM.
+type errHSMNotPresent struct {
+	err string
+}
+
+func (err errHSMNotPresent) Error() string {
+	return err.err
+}
+
 type yubiSlot struct {
 	role   string
 	slotID []byte
@@ -706,13 +717,16 @@ func (s *YubiKeyStore) GetKey(keyID string) (data.PrivateKey, string, error) {
 	ctx, session, err := SetupHSMEnv(pkcs11Lib, s.libLoader)
 	if err != nil {
 		logrus.Debugf("Failed to initialize PKCS11 environment: %s", err.Error())
+		if _, ok := err.(errHSMNotPresent); ok {
+			err = trustmanager.ErrKeyNotFound{KeyID: keyID}
+		}
 		return nil, "", err
 	}
 	defer cleanup(ctx, session)
 
 	key, ok := s.keys[keyID]
 	if !ok {
-		return nil, "", errors.New("no matching keys found inside of yubikey")
+		return nil, "", trustmanager.ErrKeyNotFound{KeyID: keyID}
 	}
 
 	pubKey, alias, err := getECDSAKey(ctx, session, key.slotID)
@@ -788,7 +802,7 @@ func SetupHSMEnv(libraryPath string, libLoader pkcs11LibLoader) (
 	IPKCS11Ctx, pkcs11.SessionHandle, error) {
 
 	if libraryPath == "" {
-		return nil, 0, fmt.Errorf("no library found.")
+		return nil, 0, errHSMNotPresent{err: "no library found."}
 	}
 	p := libLoader(libraryPath)
 
@@ -798,8 +812,7 @@ func SetupHSMEnv(libraryPath string, libLoader pkcs11LibLoader) (
 
 	if err := p.Initialize(); err != nil {
 		defer finalizeAndDestroy(p)
-		return nil, 0, fmt.Errorf(
-			"found library %s, but initialize error %s", libraryPath, err.Error())
+		return nil, 0, fmt.Errorf("found library %s, but initialize error %s", libraryPath, err.Error())
 	}
 
 	slots, err := p.GetSlotList(true)

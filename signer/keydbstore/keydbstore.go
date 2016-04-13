@@ -117,7 +117,7 @@ func (s *KeyDBStore) GetKey(name string) (data.PrivateKey, string, error) {
 	// Retrieve the GORM private key from the database
 	dbPrivateKey := GormPrivateKey{}
 	if s.db.Where(&GormPrivateKey{KeyID: name}).First(&dbPrivateKey).RecordNotFound() {
-		return nil, "", trustmanager.ErrKeyNotFound{}
+		return nil, "", trustmanager.ErrKeyNotFound{KeyID: name}
 	}
 
 	// Get the passphrase to use for this key
@@ -165,7 +165,7 @@ func (s *KeyDBStore) RemoveKey(keyID string) error {
 	// Retrieve the GORM private key from the database
 	dbPrivateKey := GormPrivateKey{}
 	if s.db.Where(&GormPrivateKey{KeyID: keyID}).First(&dbPrivateKey).RecordNotFound() {
-		return trustmanager.ErrKeyNotFound{}
+		return trustmanager.ErrKeyNotFound{KeyID: keyID}
 	}
 
 	// Delete the key from the database
@@ -179,7 +179,7 @@ func (s *KeyDBStore) RotateKeyPassphrase(name, newPassphraseAlias string) error 
 	// Retrieve the GORM private key from the database
 	dbPrivateKey := GormPrivateKey{}
 	if s.db.Where(&GormPrivateKey{KeyID: name}).First(&dbPrivateKey).RecordNotFound() {
-		return trustmanager.ErrKeyNotFound{}
+		return trustmanager.ErrKeyNotFound{KeyID: name}
 	}
 
 	// Get the current passphrase to use for this key

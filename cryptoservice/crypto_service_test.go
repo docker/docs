@@ -97,7 +97,7 @@ func (c CryptoServiceTester) TestGetNonexistentKey(t *testing.T) {
 	_, _, err := cryptoService.GetPrivateKey("boguskeyid")
 	require.Error(t, err)
 	// The underlying error has been correctly propagated.
-	_, ok := err.(*trustmanager.ErrKeyNotFound)
+	_, ok := err.(trustmanager.ErrKeyNotFound)
 	require.True(t, ok)
 }
 
