@@ -13,7 +13,7 @@ import re
 import shutil
 import subprocess
 from tempfile import mkdtemp
-from time import time
+from time import sleep, time
 import urllib
 from urlparse import urljoin
 
@@ -27,14 +27,13 @@ DOCKERS = {
     "1.8": "docker-1.8.3",
     "1.9": "docker-1.9.1",
     "1.10": "docker",
-    "1.10.2": "docker-1.10.2.RC1",
 }
 
 # delete any of these if you want to specify the docker binaries yourself
 DOWNLOAD_DOCKERS = {
     "1.8": ("https://get.docker.com", "docker-1.8.3"),
     "1.9": ("https://get.docker.com", "docker-1.9.1"),
-    "1.10": ("https://get.docker.com", "docker-1.10.1")
+    "1.10": ("https://get.docker.com", "docker-1.10.3")
 }
 
 # please replace with private registry if you want to test against a private
@@ -51,12 +50,22 @@ REPO_PREFIX = "docker_test"
 # Assumes default docker config dir
 DEFAULT_DOCKER_CONFIG = os.path.expanduser("~/.docker")
 
+# Assumes the trust server will be run using compose if DOCKER_CONTENT_TRUST_SERVER is not specified
+DEFAULT_NOTARY_SERVER = "https://notary-server:4443"
+
+# please enter a custom trust server location if you do not wish to use a local
+# docker-compose instantiation.  If testing against Docker Hub's notary server or
+# another trust server, please also ensure that this script does not pick up incorrect TLS
+# certificates from ~/.notary/config.json by default
+TRUST_SERVER =  os.getenv('DOCKER_CONTENT_TRUST_SERVER', DEFAULT_NOTARY_SERVER)
+
 # Assumes the test will be run with `python misc/dockertest.py` from
 # the root of the notary repo after binaries are built
-NOTARY_CLIENT = "bin/notary -c cmd/notary/config.json"
-
-# Assumes the trust server will be run using compose
-TRUST_SERVER = "https://notary-server:4443"
+# also overrides the notary server location if need be
+if TRUST_SERVER != DEFAULT_NOTARY_SERVER:
+    NOTARY_CLIENT = "bin/notary -s {0}".format(TRUST_SERVER)
+else:
+    NOTARY_CLIENT = "bin/notary -c cmd/notary/config.json"
 
 # ---- setup ----
 
@@ -101,7 +110,7 @@ def setup():
         shutil.copytree(defaulttlsdir, tlsdir)
 
     # make sure that the cert is in the right place for local notary
-    if TRUST_SERVER == "https://notary-server:4443":
+    if TRUST_SERVER == DEFAULT_NOTARY_SERVER:
         tlsdir = os.path.join(tlsdir, "notary-server:4443")
         if not os.path.isdir(tlsdir):
             try:
@@ -119,7 +128,6 @@ def setup():
 _TEMPDIR = mkdtemp(prefix="docker-version-test")
 _TEMP_DOCKER_CONFIG_DIR = os.path.join(_TEMPDIR, "docker-config-dir")
 _TRUST_DIR = os.path.join(_TEMP_DOCKER_CONFIG_DIR, "trust")
-
 
 _ENV = os.environ.copy()
 _ENV.update({
@@ -148,6 +156,7 @@ _DIGEST_REGEX = re.compile(r"\b[dD]igest: sha256:([0-9a-fA-F]+)\b")
 _SIZE_REGEX = re.compile(r"\bsize: ([0-9]+)\b")
 _PULL_A_REGEX = re.compile(
     r"Pull \(\d+ of \d+\): .+:(.+)@sha256:([0-9a-fA-F]+)")
+_BUILD_REGEX = re.compile(r"Successfully built ([0-9a-fA-F]+)")
 
 
 def clear_tuf():
@@ -250,6 +259,9 @@ def push(fout, docker_version, image, tag):
     sha = _DIGEST_REGEX.search(output).group(1)
     size = _SIZE_REGEX.search(output).group(1)
 
+    # sleep for 1s after pushing, just to let things propagate :)
+    time.sleep(1)
+
     # list
     targets = notary_list(fout, image)
     for target in targets:
@@ -269,6 +281,25 @@ def notary_list(fout, repo):
     lines = output.strip().split("\n")
     assert len(lines) >= 3, "not enough targets"
     return [line.strip().split() for line in lines[2:]]
+
+
+def test_build(fout, image, docker_version):
+    """
+    Build from a simple Dockerfile and ensure it works with DCT enabled
+    """
+    clear_tuf()
+    # build
+    # simple dockerfile to test building with trust
+    dockerfile = "FROM {0}:{1}\nRUN sh\n".format(image, docker_version)
+    tempdir_dockerfile = os.path.join(_TEMPDIR, "Dockerfile")
+    with open(tempdir_dockerfile, 'wb') as ftemp:
+      ftemp.write(dockerfile)
+
+    output = run_cmd(
+        "{0} build {1}".format(DOCKERS[docker_version], _TEMPDIR), fout)
+
+    build_result = _BUILD_REGEX.findall(output)
+    assert len(build_result) >= 0, "build did not succeed"
 
 
 def test_pull_a(fout, docker_version, image, expected_tags):
@@ -333,6 +364,17 @@ def test_push(tempdir, docker_version, image, tag="", allow_push_failure=False,
                 return_val["push"][ver] = "pull succeeded"
 
         return return_val
+
+
+def test_run(fout, image, docker_version):
+    """
+    Runs a simple alpine container to ensure it works with DCT enabled
+    """
+    clear_tuf()
+    # run
+    output = run_cmd(
+        "{0} run -it --rm {1}:{2} echo SUCCESS".format(DOCKERS[docker_version], image, docker_version), fout)
+    assert "SUCCESS" in output, "run did not succeed"
 
 
 def test_docker_version(docker_version, repo_name="", do_after_first_push=None):
@@ -400,6 +442,22 @@ def test_docker_version(docker_version, repo_name="", do_after_first_push=None):
 
         result["list"] = "listed expected targets successfully"
 
+    with open(os.path.join(tempdir, "build"), 'wb') as fout:
+            try:
+                test_build(fout, image, docker_version)
+            except subprocess.CalledProcessError:
+                result[docker_version]["build"] = "failed"
+            else:
+                result[docker_version]["build"] = "success"
+
+    with open(os.path.join(tempdir, "run"), 'wb') as fout:
+            try:
+                test_run(fout, image, docker_version)
+            except subprocess.CalledProcessError:
+                result[docker_version]["run"] = "failed"
+            else:
+                result[docker_version]["run"] = "success"
+
     with open(os.path.join(tempdir, "result.json"), 'wb') as fout:
         json.dump(result, fout, indent=2)
 
@@ -411,7 +469,7 @@ def rotate_to_server_snapshot(fout, image):
     Uses the notary client to rotate the snapshot key to be server-managed.
     """
     run_cmd(
-        "{0} -d {1} key rotate {2} -t snapshot -r".format(
+        "{0} -d {1} key rotate {2} snapshot -r".format(
             NOTARY_CLIENT, _TRUST_DIR, image),
         fout)
     run_cmd(
