@@ -106,18 +106,18 @@ func (s *KeyDBStore) AddKey(keyInfo trustmanager.KeyInfo, privKey data.PrivateKe
 }
 
 // GetKey returns the PrivateKey given a KeyID
-func (s *KeyDBStore) GetKey(name string) (data.PrivateKey, string, error) {
+func (s *KeyDBStore) GetKey(keyID string) (data.PrivateKey, string, error) {
 	s.Lock()
 	defer s.Unlock()
-	cachedKeyEntry, ok := s.cachedKeys[name]
+	cachedKeyEntry, ok := s.cachedKeys[keyID]
 	if ok {
 		return cachedKeyEntry, "", nil
 	}
 
 	// Retrieve the GORM private key from the database
 	dbPrivateKey := GormPrivateKey{}
-	if s.db.Where(&GormPrivateKey{KeyID: name}).First(&dbPrivateKey).RecordNotFound() {
-		return nil, "", trustmanager.ErrKeyNotFound{KeyID: name}
+	if s.db.Where(&GormPrivateKey{KeyID: keyID}).First(&dbPrivateKey).RecordNotFound() {
+		return nil, "", trustmanager.ErrKeyNotFound{KeyID: keyID}
 	}
 
 	// Get the passphrase to use for this key
@@ -146,7 +146,7 @@ func (s *KeyDBStore) GetKey(name string) (data.PrivateKey, string, error) {
 }
 
 // GetKeyInfo returns the PrivateKey's role and gun in a KeyInfo given a KeyID
-func (s *KeyDBStore) GetKeyInfo(name string) (trustmanager.KeyInfo, error) {
+func (s *KeyDBStore) GetKeyInfo(keyID string) (trustmanager.KeyInfo, error) {
 	return trustmanager.KeyInfo{}, fmt.Errorf("GetKeyInfo currently not supported for KeyDBStore, as it does not track roles or GUNs")
 }
 
@@ -175,11 +175,11 @@ func (s *KeyDBStore) RemoveKey(keyID string) error {
 }
 
 // RotateKeyPassphrase rotates the key-encryption-key
-func (s *KeyDBStore) RotateKeyPassphrase(name, newPassphraseAlias string) error {
+func (s *KeyDBStore) RotateKeyPassphrase(keyID, newPassphraseAlias string) error {
 	// Retrieve the GORM private key from the database
 	dbPrivateKey := GormPrivateKey{}
-	if s.db.Where(&GormPrivateKey{KeyID: name}).First(&dbPrivateKey).RecordNotFound() {
-		return trustmanager.ErrKeyNotFound{KeyID: name}
+	if s.db.Where(&GormPrivateKey{KeyID: keyID}).First(&dbPrivateKey).RecordNotFound() {
+		return trustmanager.ErrKeyNotFound{KeyID: keyID}
 	}
 
 	// Get the current passphrase to use for this key
