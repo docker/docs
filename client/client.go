@@ -160,7 +160,10 @@ func NewTarget(targetName string, targetPath string) (*Target, error) {
 }
 
 // Initialize creates a new repository by using rootKey as the root Key for the
-// TUF repository.
+// TUF repository. The server must be reachable (and is asked to generate a
+// timestamp key and possibly other serverManagedRoles), but the created repository
+// result is only stored on local disk, not published to the server. To do that,
+// use r.Publish() eventually.
 func (r *NotaryRepository) Initialize(rootKeyID string, serverManagedRoles ...string) error {
 	privKey, _, err := r.CryptoService.GetPrivateKey(rootKeyID)
 	if err != nil {
@@ -645,9 +648,10 @@ func (r *NotaryRepository) publish(cl changelist.Changelist) error {
 	return remote.SetMultiMeta(updatedFiles)
 }
 
-// bootstrapRepo loads the repository from the local file system.  This attempts
-// to load metadata for all roles.  Since server snapshots are supported,
-// if the snapshot metadata fails to load, that's ok.
+// bootstrapRepo loads the repository from the local file system (i.e.
+// a not yet published repo or a possibly obsolete local copy) into
+// r.tufRepo.  This attempts to load metadata for all roles.  Since server
+// snapshots are supported, if the snapshot metadata fails to load, that's ok.
 // This can also be unified with some cache reading tools from tuf/client.
 // This assumes that bootstrapRepo is only used by Publish() or RotateKey()
 func (r *NotaryRepository) bootstrapRepo() error {
@@ -695,6 +699,8 @@ func (r *NotaryRepository) bootstrapRepo() error {
 	return nil
 }
 
+// saveMetadata saves contents of r.tufRepo onto the local disk, creating
+// signatures as necessary, possibly prompting for passphrases.
 func (r *NotaryRepository) saveMetadata(ignoreSnapshot bool) error {
 	logrus.Debugf("Saving changes to Trusted Collection.")
 
@@ -776,6 +782,20 @@ func (r *NotaryRepository) Update(forWrite bool) error {
 // we should always attempt to contact the server to determine if the repository
 // is initialized or not. If set to true, we will always attempt to download
 // and return an error if the remote repository errors.
+//
+// Partially populates r.tufRepo with this root metadata (only; use
+// tufclient.Client.Update to load the rest).
+//
+// As another side effect, r.CertManager's list of trusted certificates
+// is updated with data from the loaded root.json.
+//
+// Fails if the remote server is reachable and does not know the repo
+// (i.e. before the first r.Publish()), in which case the error is
+// store.ErrMetaNotFound, or if the root metadata (from whichever source is used)
+// is not trusted.
+//
+// Returns a tufclient.Client for the remote server, which may not be actually
+// operational (if the URL is invalid but a root.json is cached).
 func (r *NotaryRepository) bootstrapClient(checkInitialized bool) (*tufclient.Client, error) {
 	var (
 		rootJSON   []byte
