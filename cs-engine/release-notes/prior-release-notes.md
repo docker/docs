@@ -5,7 +5,7 @@ title = "Prior CS Engine release notes"
 description = "Archived release notes for commercially supported Docker Engine"
 keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry,release, commercially supported Docker Engine"]
 [menu.main]
-parent="dtr_menu_release_notes"
+parent="menu_csengine_release_notes"
 weight=10
 +++
 <![end-metadata]-->

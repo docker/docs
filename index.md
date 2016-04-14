@@ -22,4 +22,4 @@ The following documentation for Docker Trusted Registry is available:
 * [High-availability](high-availability/high-availability.md)
 * [User management](user-management/permission-levels.md)
 * [Repositories and images](repos-and-images/create-repo.md)
-* [Release notes](release-notes/cse-release-notes.md)
+* [Release notes](release-notes/release-notes.md)

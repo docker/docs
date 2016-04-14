@@ -5,6 +5,7 @@ description = "Brief tutorial on the basics of Docker Trusted Registry user work
 keywords = ["docker, dtr, registry, repository, quickstart"]
 [menu.main]
 parent="workw_dtr"
+identifier="dtr_quickstart"
 weight=10
 +++
 <![end-metadata]-->

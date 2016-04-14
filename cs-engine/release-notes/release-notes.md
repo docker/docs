@@ -5,7 +5,7 @@ title = "CS Engine release notes"
 description = "Commercially supported Docker Engine release notes"
 keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry, Commercially Supported Docker Engine, release notes"]
 [menu.main]
-parent="dtr_menu_release_notes"
+parent="menu_csengine_release_notes"
 weight=0
 +++
 <![end-metadata]-->
@@ -24,7 +24,7 @@ cannot be adopted as quickly for consistency and compatibility reasons.
 #### Prior versions
 
 These notes refer to the current and immediately prior releases of the
-CS Engine. For notes on older versions, see the [CS Engine prior release notes archive](cse-prior-release-notes.md).
+CS Engine. For notes on older versions, see the [CS Engine prior release notes archive](prior-release-notes.md).
 
 ## CS Engine 1.10.2-cs1
 (22 February 2016)
@@ -60,7 +60,7 @@ incorrectly propagated as the source address of a connection.
 ## CS Engine 1.9.1-cs2
 (4 December 2015)
 
-Starting with this release, upgrading minor versions, for example, from 1.9.0 to 1.9.1, is faster and easier. See the [upgrade](../install/upgrade.md) documentation for details.
+Starting with this release, upgrading minor versions, for example, from 1.9.0 to 1.9.1, is faster and easier.
 
 You can refer to the detailed list of all changes since the release of CS Engine
 1.9.0

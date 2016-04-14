@@ -189,4 +189,4 @@ See [Docker Trusted Registry Authentication settings](../configure/configuration
 ## See also
 
 * [Install DTR offline](install-dtr-offline.md)
-* [Install CS Docker Engine](install-csengine.md)
+* [Upgrade DTR](upgrade.md)

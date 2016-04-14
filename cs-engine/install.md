@@ -1,17 +1,18 @@
 <!--[metadata]>
 +++
-aliases = [ "/docker-trusted-registry/install/engine-ami-launch/"]
-title = "Install Docker CS Engine"
-description = "Learn how to install the comercially supported version of Docker Engine."
+aliases = [ "/docker-trusted-registry/install/engine-ami-launch/",
+            "/docker-trusted-registry/install/install-csengine/"]
+title = "Install CS Docker Engine"
+description = "Learn how to install the commercially supported version of Docker Engine."
 keywords = ["docker, engine, dtr, install"]
 [menu.main]
-parent="workw_dtr_install"
-weight=10
+parent="menu_csengine"
+weight=0
 +++
 <![end-metadata]-->
 
 
-# Manually Install the CS Docker Engine
+# Install CS Docker Engine
 
 This document describes the process of installing the commercially supported
 Docker Engine (CS Engine). Installing the CS Engine is a prerequisite for
@@ -232,8 +233,3 @@ to the `docker` group.
     ```
 
 8. Log out and log back in to have your new permissions take effect.
-
-
-## Next step
-
-You are ready to install [Docker Trusted Registry](install-dtr.md).

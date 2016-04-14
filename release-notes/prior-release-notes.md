@@ -6,7 +6,7 @@ description = "Archived release notes for Docker Trusted Registry"
 keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry, Docker Trusted Registry, release"]
 [menu.main]
 parent="dtr_menu_release_notes"
-weight=30
+weight=10
 +++
 <![end-metadata]-->
 
