@@ -387,7 +387,7 @@ func TestValidateRootRotation(t *testing.T) {
 
 	r, err = repo.SignRoot(data.DefaultExpires(data.CanonicalRootRole))
 	require.NoError(t, err)
-	err = signed.Sign(crypto, r, rootKey, oldRootKey)
+	err = signed.Sign(crypto, r, []data.PublicKey{rootKey, oldRootKey}, 2, nil)
 	require.NoError(t, err)
 
 	rt, err := data.RootFromSigned(r)
@@ -430,7 +430,7 @@ func TestRootRotationNotSignedWithOldKeys(t *testing.T) {
 
 	r, err = repo.SignRoot(data.DefaultExpires(data.CanonicalRootRole))
 	require.NoError(t, err)
-	err = signed.Sign(crypto, r, rootKey)
+	err = signed.Sign(crypto, r, []data.PublicKey{rootKey}, 1, nil)
 	require.NoError(t, err)
 
 	rt, err := data.RootFromSigned(r)
@@ -716,6 +716,10 @@ func TestValidateRootInvalidTimestampKey(t *testing.T) {
 func TestValidateRootInvalidTimestampThreshold(t *testing.T) {
 	oldRepo, cs, err := testutils.EmptyRepo("docker.com/notary")
 	require.NoError(t, err)
+
+	tsKey2, err := cs.Create("timestamp2", "", data.ED25519Key)
+	require.NoError(t, err)
+	oldRepo.AddBaseKeys(data.CanonicalTimestampRole, tsKey2)
 	tsRole, ok := oldRepo.Root.Signed.Roles[data.CanonicalTimestampRole]
 	require.True(t, ok)
 	tsRole.Threshold = 2

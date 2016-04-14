@@ -2,6 +2,7 @@ package client
 
 import (
 	"bytes"
+	"crypto/x509"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -159,6 +160,24 @@ func NewTarget(targetName string, targetPath string) (*Target, error) {
 	return &Target{Name: targetName, Hashes: meta.Hashes, Length: meta.Length}, nil
 }
 
+func rootCertKey(gun string, privKey data.PrivateKey) (*x509.Certificate, data.PublicKey, error) {
+	// Hard-coded policy: the generated certificate expires in 10 years.
+	startTime := time.Now()
+	cert, err := cryptoservice.GenerateCertificate(
+		privKey, gun, startTime, startTime.Add(notary.Year*10))
+	if err != nil {
+		return nil, nil, err
+	}
+
+	x509PublicKey := trustmanager.CertToKey(cert)
+	if x509PublicKey == nil {
+		return nil, nil, fmt.Errorf(
+			"cannot use regenerated certificate: format %s", cert.PublicKeyAlgorithm)
+	}
+
+	return cert, x509PublicKey, nil
+}
+
 // Initialize creates a new repository by using rootKey as the root Key for the
 // TUF repository. The server must be reachable (and is asked to generate a
 // timestamp key and possibly other serverManagedRoles), but the created repository
@@ -197,30 +216,11 @@ func (r *NotaryRepository) Initialize(rootKeyID string, serverManagedRoles ...st
 		}
 	}
 
-	// Hard-coded policy: the generated certificate expires in 10 years.
-	startTime := time.Now()
-	rootCert, err := cryptoservice.GenerateCertificate(
-		privKey, r.gun, startTime, startTime.AddDate(10, 0, 0))
-
+	rootCert, rootKey, err := rootCertKey(r.gun, privKey)
 	if err != nil {
 		return err
 	}
 	r.CertStore.AddCert(rootCert)
-
-	// The root key gets stored in the TUF metadata X509 encoded, linking
-	// the tuf root.json to our X509 PKI.
-	// If the key is RSA, we store it as type RSAx509, if it is ECDSA we store it
-	// as ECDSAx509 to allow the gotuf verifiers to correctly decode the
-	// key on verification of signatures.
-	var rootKey data.PublicKey
-	switch privKey.Algorithm() {
-	case data.RSAKey:
-		rootKey = data.NewRSAx509PublicKey(trustmanager.CertToPEM(rootCert))
-	case data.ECDSAKey:
-		rootKey = data.NewECDSAx509PublicKey(trustmanager.CertToPEM(rootCert))
-	default:
-		return fmt.Errorf("invalid format for root key: %s", privKey.Algorithm())
-	}
 
 	var (
 		rootRole = data.NewBaseRole(
@@ -514,9 +514,8 @@ func (r *NotaryRepository) ListRoles() ([]RoleWithSignatures, error) {
 		case data.CanonicalTimestampRole:
 			roleWithSig.Signatures = r.tufRepo.Timestamp.Signatures
 		default:
-			// If the role isn't a delegation, we should error -- this is only possible if we have invalid state
 			if !data.IsDelegation(role.Name) {
-				return nil, data.ErrInvalidRole{Role: role.Name, Reason: "invalid role name"}
+				continue
 			}
 			if _, ok := r.tufRepo.Targets[role.Name]; ok {
 				// We'll only find a signature if we've published any targets with this delegation
@@ -629,7 +628,7 @@ func (r *NotaryRepository) publish(cl changelist.Changelist) error {
 	if err == nil {
 		// Only update the snapshot if we've successfully signed it.
 		updatedFiles[data.CanonicalSnapshotRole] = snapshotJSON
-	} else if _, ok := err.(signed.ErrNoKeys); ok {
+	} else if signErr, ok := err.(signed.ErrInsufficientSignatures); ok && signErr.FoundKeys == 0 {
 		// If signing fails due to us not having the snapshot key, then
 		// assume the server is going to sign, and do not include any snapshot
 		// data.
@@ -886,25 +885,19 @@ func (r *NotaryRepository) validateRoot(rootJSON []byte) (*data.SignedRoot, erro
 // creates and adds one new key or delegates managing the key to the server.
 // These changes are staged in a changelist until publish is called.
 func (r *NotaryRepository) RotateKey(role string, serverManagesKey bool) error {
+	// We currently support remotely managing timestamp and snapshot keys
+	canBeRemoteKey := role == data.CanonicalTimestampRole || role == data.CanonicalSnapshotRole
+	// And locally managing root, targets, and snapshot keys
+	canBeLocalKey := (role == data.CanonicalSnapshotRole || role == data.CanonicalTargetsRole ||
+		role == data.CanonicalRootRole)
+
 	switch {
-	// We currently support locally or remotely managing snapshot keys...
-	case role == data.CanonicalSnapshotRole:
-		break
-
-	// locally managing targets keys only
-	case role == data.CanonicalTargetsRole && !serverManagesKey:
-		break
-	case role == data.CanonicalTargetsRole && serverManagesKey:
-		return ErrInvalidRemoteRole{Role: data.CanonicalTargetsRole}
-
-	// and remotely managing timestamp keys only
-	case role == data.CanonicalTimestampRole && serverManagesKey:
-		break
-	case role == data.CanonicalTimestampRole && !serverManagesKey:
-		return ErrInvalidLocalRole{Role: data.CanonicalTimestampRole}
-
-	default:
+	case !data.ValidRole(role) || data.IsDelegation(role):
 		return fmt.Errorf("notary does not currently permit rotating the %s key", role)
+	case serverManagesKey && !canBeRemoteKey:
+		return ErrInvalidRemoteRole{Role: role}
+	case !serverManagesKey && !canBeLocalKey:
+		return ErrInvalidLocalRole{Role: role}
 	}
 
 	var (
@@ -923,6 +916,18 @@ func (r *NotaryRepository) RotateKey(role string, serverManagesKey bool) error {
 
 	if err != nil {
 		return fmt.Errorf(errFmtMsg, err)
+	}
+
+	// if this is a root role, generate a root cert for the public key
+	if role == data.CanonicalRootRole {
+		privKey, _, err := r.CryptoService.GetPrivateKey(pubKey.ID())
+		if err != nil {
+			return err
+		}
+		_, pubKey, err = rootCertKey(r.gun, privKey)
+		if err != nil {
+			return err
+		}
 	}
 
 	cl := changelist.NewMemChangelist()

@@ -258,5 +258,5 @@ func TestCreateTimestampNoKeyInCrypto(t *testing.T) {
 	// pass it a new cryptoservice without the key
 	_, _, err = GetOrCreateTimestamp("gun", store, signed.NewEd25519())
 	require.Error(t, err)
-	require.IsType(t, signed.ErrNoKeys{}, err)
+	require.IsType(t, signed.ErrInsufficientSignatures{}, err)
 }
