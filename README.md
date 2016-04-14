@@ -42,7 +42,7 @@ Any security vulnerabilities can be reported to security@docker.com.
 # Getting started with the Notary CLI
 
 Please get the Notary Client CLI binary from [the official releases page](https://github.com/docker/notary/releases) or you can [build one yourself](#building-notary).
-The version of Notary server and signer should be greater than or equal to Notary CLI's version to ensure feature compatibility, and all official releases are associated with GitHub tags.
+The version of Notary server and signer should be greater than or equal to Notary CLI's version to ensure feature compatibility (ex: CLI version 0.2, server/signer version >= 0.2), and all official releases are associated with GitHub tags.
 
 To use the Notary CLI with Docker hub images, please have a look at our
 [getting started docs](docs/getting_started.md).
