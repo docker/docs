@@ -842,12 +842,23 @@ func (v versionedRootRoles) Less(i, j int) bool { return v[i].version < v[j].ver
 // back to the way it was (so version won't be incremented, for instance).
 func (tr *Repo) SignRoot(expires time.Time) (*data.Signed, error) {
 	logrus.Debug("signing root...")
+
+	// duplicate root and attempt to modify it rather than the existing root
+	rootBytes, err := tr.Root.MarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	tempRoot := data.SignedRoot{}
+	if err := json.Unmarshal(rootBytes, &tempRoot); err != nil {
+		return nil, err
+	}
+
 	currRoot, err := tr.GetBaseRole(data.CanonicalRootRole)
 	if err != nil {
 		return nil, err
 	}
 
-	oldRootRoles, origRoles := tr.getOldRootRoles()
+	oldRootRoles := tr.getOldRootRoles()
 
 	var latestSavedRole data.BaseRole
 	rolesToSignWith := make([]data.BaseRole, 0, len(oldRootRoles))
@@ -867,49 +878,48 @@ func (tr *Repo) SignRoot(expires time.Time) (*data.Signed, error) {
 
 	// if the root role has changed and original role had not been saved as a previous role, save it now
 	if !tr.originalRootRole.Equals(currRoot) && !tr.originalRootRole.Equals(latestSavedRole) {
-		tr.saveOldRootRole(tr.originalRootRole, tr.Root.Signed.Version)
 		rolesToSignWith = append(rolesToSignWith, tr.originalRootRole)
 		latestSavedRole = tr.originalRootRole
+
+		versionName := oldRootVersionName(tempRoot.Signed.Version)
+		tempRoot.Signed.Roles[versionName] = &data.RootRole{
+			KeyIDs: latestSavedRole.ListKeyIDs(), Threshold: latestSavedRole.Threshold}
+
 	}
 
-	origVersion := tr.Root.Signed.Expires
-	tr.Root.Signed.Expires = expires
-	tr.Root.Signed.Version++
+	tempRoot.Signed.Expires = expires
+	tempRoot.Signed.Version++
 
 	// if the current role doesn't match with the latest saved role, save it
 	if !currRoot.Equals(latestSavedRole) {
-		tr.saveOldRootRole(currRoot, tr.Root.Signed.Version)
 		rolesToSignWith = append(rolesToSignWith, currRoot)
+
+		versionName := oldRootVersionName(tempRoot.Signed.Version)
+		tempRoot.Signed.Roles[versionName] = &data.RootRole{
+			KeyIDs: currRoot.ListKeyIDs(), Threshold: currRoot.Threshold}
 	}
 
-	signed, err := tr.Root.ToSigned()
+	signed, err := tempRoot.ToSigned()
 	if err != nil {
-		tr.Root.Signed.Expires = origVersion
-		tr.Root.Signed.Version--
-		tr.Root.Signed.Roles = origRoles
 		return nil, err
 	}
 	signed, err = tr.sign(signed, rolesToSignWith, tr.getOptionalRootKeys(rolesToSignWith))
 	if err != nil {
-		tr.Root.Signed.Expires = origVersion
-		tr.Root.Signed.Version--
-		tr.Root.Signed.Roles = origRoles
 		return nil, err
 	}
 
+	tr.Root = &tempRoot
 	tr.Root.Signatures = signed.Signatures
 	tr.originalRootRole = currRoot
 	return signed, nil
 }
 
 // get all the saved previous roles <= the current root version
-func (tr *Repo) getOldRootRoles() (versionedRootRoles, map[string]*data.RootRole) {
+func (tr *Repo) getOldRootRoles() versionedRootRoles {
 	oldRootRoles := make(versionedRootRoles, 0, len(tr.Root.Signed.Roles))
-	oldRoles := make(map[string]*data.RootRole)
 
 	// now go through the old roles
-	for roleName, r := range tr.Root.Signed.Roles {
-		oldRoles[roleName] = r
+	for roleName := range tr.Root.Signed.Roles {
 		// ensure that the rolename matches our format and that the version is
 		// not too high
 		if data.ValidRole(roleName) {
@@ -933,7 +943,7 @@ func (tr *Repo) getOldRootRoles() (versionedRootRoles, map[string]*data.RootRole
 		oldRootRoles = append(oldRootRoles, versionedRootRole{BaseRole: oldRole, version: version})
 	}
 
-	return oldRootRoles, oldRoles
+	return oldRootRoles
 }
 
 // gets any extra optional root keys from the existing root.json signatures
@@ -960,10 +970,8 @@ func (tr *Repo) getOptionalRootKeys(signingRoles []data.BaseRole) []data.PublicK
 	return oldKeys
 }
 
-func (tr *Repo) saveOldRootRole(role data.BaseRole, version int) {
-	versionName := fmt.Sprintf("%s.%v", data.CanonicalRootRole, version)
-	tr.Root.Signed.Roles[versionName] = &data.RootRole{
-		KeyIDs: role.ListKeyIDs(), Threshold: role.Threshold}
+func oldRootVersionName(version int) string {
+	return fmt.Sprintf("%s.%v", data.CanonicalRootRole, version)
 }
 
 // SignTargets signs the targets file for the given top level or delegated targets role
