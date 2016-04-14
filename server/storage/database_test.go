@@ -19,16 +19,7 @@ import (
 // SampleTUF returns a sample TUFFile with the given Version (ID will have
 // to be set independently)
 func SampleTUF(version int) TUFFile {
-	data := []byte("1")
-	checksum := sha256.Sum256(data)
-	hexChecksum := hex.EncodeToString(checksum[:])
-	return TUFFile{
-		Gun:     "testGUN",
-		Role:    "root",
-		Version: version,
-		Sha256:  hexChecksum,
-		Data:    []byte("1"),
-	}
+	return SampleCustomTUF(data.CanonicalRootRole, "testGUN", []byte("1"), version)
 }
 
 func SampleCustomTUF(role, gun string, data []byte, version int) TUFFile {

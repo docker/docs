@@ -93,39 +93,26 @@ func setUpCryptoservices(configuration *viper.Viper, allowedBackends []string) (
 		if err != nil {
 			return nil, err
 		}
-		sess, err = rethinkdb.Connection(storeConfig.CA, storeConfig.Source)
-		if err == nil {
-			defaultAlias := configuration.GetString("storage.default_alias")
-			if defaultAlias == "" {
-				// backwards compatibility - support this environment variable
-				defaultAlias = configuration.GetString(defaultAliasEnv)
-			}
-
-			if defaultAlias == "" {
-				return nil, fmt.Errorf("must provide a default alias for the key DB")
-			}
-			logrus.Debug("Default Alias: ", defaultAlias)
-			s := keydbstore.NewRethinkDBKeyStore(passphraseRetriever, defaultAlias, sess)
-			keyStore = s
-			health.RegisterPeriodicFunc("DB operational", s.CheckHealth, time.Minute)
+		defaultAlias, err := getDefaultAlias(configuration)
+		if err != nil {
+			return nil, err
 		}
-
+		sess, err = rethinkdb.Connection(storeConfig.CA, storeConfig.Source)
+		if err != nil {
+			return nil, err
+		}
+		s := keydbstore.NewRethinkDBKeyStore(passphraseRetriever, defaultAlias, sess)
+		health.RegisterPeriodicFunc("DB operational", s.CheckHealth, time.Minute)
+		keyStore = s
 	case notary.MySQLBackend, notary.SQLiteBackend:
 		storeConfig, err := utils.ParseSQLStorage(configuration)
 		if err != nil {
 			return nil, err
 		}
-		defaultAlias := configuration.GetString("storage.default_alias")
-		if defaultAlias == "" {
-			// backwards compatibility - support this environment variable
-			defaultAlias = configuration.GetString(defaultAliasEnv)
+		defaultAlias, err := getDefaultAlias(configuration)
+		if err != nil {
+			return nil, err
 		}
-
-		if defaultAlias == "" {
-			return nil, fmt.Errorf("must provide a default alias for the key DB")
-		}
-		logrus.Debug("Default Alias: ", defaultAlias)
-
 		dbStore, err := keydbstore.NewKeyDBStore(
 			passphraseRetriever, defaultAlias, storeConfig.Backend, storeConfig.Source)
 		if err != nil {
@@ -150,6 +137,20 @@ func setUpCryptoservices(configuration *viper.Viper, allowedBackends []string) (
 	cryptoServices[data.ED25519Key] = cryptoService
 	cryptoServices[data.ECDSAKey] = cryptoService
 	return cryptoServices, nil
+}
+
+func getDefaultAlias(configuration *viper.Viper) (string, error) {
+	defaultAlias := configuration.GetString("storage.default_alias")
+	if defaultAlias == "" {
+		// backwards compatibility - support this environment variable
+		defaultAlias = configuration.GetString(defaultAliasEnv)
+	}
+
+	if defaultAlias == "" {
+		return "", fmt.Errorf("must provide a default alias for the key DB")
+	}
+	logrus.Debug("Default Alias: ", defaultAlias)
+	return defaultAlias, nil
 }
 
 // set up the GRPC server

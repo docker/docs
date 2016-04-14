@@ -113,6 +113,23 @@ func TestSetupCryptoServicesDBStoreNoDefaultAlias(t *testing.T) {
 	require.Contains(t, err.Error(), "must provide a default alias for the key DB")
 }
 
+// If a default alias is not provided to a rethinkdb backend, an error is returned.
+func TestSetupCryptoServicesRethinkDBStoreNoDefaultAlias(t *testing.T) {
+	_, err := setUpCryptoservices(
+		configure(fmt.Sprintf(
+			`{"storage": {
+				"backend": "%s",
+				"db_url": "host:port",
+				"tls_ca_file": "/tls/ca.pem",
+				"database": "rethinkdbtest"
+				}
+			}`,
+			notary.RethinkDBBackend)),
+		[]string{notary.RethinkDBBackend})
+	require.Error(t, err)
+	require.Contains(t, err.Error(), "must provide a default alias for the key DB")
+}
+
 // If a default alias *is* provided to a valid DB backend, a valid
 // CryptoService is returned.  (This depends on ParseStorage, which is tested
 // separately, so this doesn't test all the possible cases of storage
