@@ -189,4 +189,4 @@ See [Docker Trusted Registry Authentication settings](../configure/configuration
 ## See also
 
 * [Install DTR offline](install-dtr-offline.md)
-* [Upgrade DTR](upgrade.md)
+* [Upgrade DTR](upgrade/upgrade-major.md)

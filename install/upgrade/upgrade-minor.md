@@ -1,17 +1,19 @@
 <!--[metadata]>
 +++
-title = "Upgrade"
-description = "Learn how to upgrade your Docker Trusted Registry."
+draft=true
+title = "# Upgrade to a new minor version"
+description = "Learn how to upgrade your Docker Trusted Registry to a new minor version or patch release."
 keywords = ["docker, dtr, upgrade, install"]
 [menu.main]
-parent="workw_dtr_install"
-identifier="dtr_upgrade"
-weight=40
+parent="menu_dtr_upgrade"
+identifier="dtr_upgrade_minor"
+weight=0
 +++
 <![end-metadata]-->
 
 
-# Upgrade the Trusted Registry and the CS Engine
+# Upgrade to a new minor version
+
 
 This document describes the steps to upgrade Docker Trusted Registry and the
 commercially supported Engine (CS Engine). When you first install, the general
