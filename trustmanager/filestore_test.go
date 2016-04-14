@@ -282,7 +282,7 @@ func TestCreateDirectory(t *testing.T) {
 	dirPath := filepath.Join(tempBaseDir, testDir)
 
 	// Call createDirectory
-	CreateDirectory(dirPath)
+	createDirectory(dirPath, visible)
 
 	// Check to see if file exists
 	fi, err := os.Stat(dirPath)
@@ -306,7 +306,7 @@ func TestCreatePrivateDirectory(t *testing.T) {
 	dirPath := filepath.Join(tempBaseDir, testDir)
 
 	// Call createDirectory
-	CreatePrivateDirectory(dirPath)
+	createDirectory(dirPath, private)
 
 	// Check to see if file exists
 	fi, err := os.Stat(dirPath)
@@ -366,7 +366,7 @@ func TestFileStoreConsistency(t *testing.T) {
 	file2Path := "path/file2"
 	file3Path := "long/path/file3"
 
-	for _, s := range []LimitedFileStore{s, s2} {
+	for _, s := range []Storage{s, s2} {
 		s.Add(file1Path, file1Data)
 		s.Add(file2Path, file2Data)
 		s.Add(file3Path, file3Data)
