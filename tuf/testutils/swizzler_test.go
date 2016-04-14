@@ -599,8 +599,11 @@ func TestSwizzlerMutateRoot(t *testing.T) {
 			origSigned, newSigned := &data.SignedRoot{}, &data.SignedRoot{}
 			require.NoError(t, json.Unmarshal(metaBytes, origSigned))
 			require.NoError(t, json.Unmarshal(newMeta, newSigned))
-			require.Len(t, origSigned.Signed.Roles, 4)
-			require.Len(t, newSigned.Signed.Roles, 5)
+			// it may not exactly equal 4 or 5 because if the metadata was
+			// produced by calling SignedRoot, it could have saved a previous
+			// root role
+			require.True(t, len(origSigned.Signed.Roles) >= 4)
+			require.True(t, len(newSigned.Signed.Roles) >= 5)
 		}
 	}
 }

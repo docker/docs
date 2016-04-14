@@ -164,3 +164,25 @@ func TestValidRoleFunction(t *testing.T) {
 
 	require.False(t, ValidRole(path.Join("role")))
 }
+
+func TestBaseRoleEquals(t *testing.T) {
+	fakeKeyHello := NewRSAPublicKey([]byte("hello"))
+	fakeKeyThere := NewRSAPublicKey([]byte("there"))
+
+	keys := map[string]PublicKey{"hello": fakeKeyHello, "there": fakeKeyThere}
+	baseRole := BaseRole{Name: "name", Threshold: 1, Keys: keys}
+
+	require.True(t, BaseRole{}.Equals(BaseRole{}))
+	require.True(t, baseRole.Equals(BaseRole{Name: "name", Threshold: 1, Keys: keys}))
+	require.False(t, baseRole.Equals(BaseRole{}))
+	require.False(t, baseRole.Equals(BaseRole{Name: "notName", Threshold: 1, Keys: keys}))
+	require.False(t, baseRole.Equals(BaseRole{Name: "name", Threshold: 2, Keys: keys}))
+	require.False(t, baseRole.Equals(BaseRole{Name: "name", Threshold: 1,
+		Keys: map[string]PublicKey{"hello": fakeKeyThere, "there": fakeKeyHello}}))
+	require.False(t, baseRole.Equals(BaseRole{Name: "name", Threshold: 1,
+		Keys: map[string]PublicKey{"hello": fakeKeyHello, "there": fakeKeyHello}}))
+	require.False(t, baseRole.Equals(BaseRole{Name: "name", Threshold: 1,
+		Keys: map[string]PublicKey{"hello": fakeKeyHello}}))
+	require.False(t, baseRole.Equals(BaseRole{Name: "name", Threshold: 1,
+		Keys: map[string]PublicKey{"hello": fakeKeyHello, "there": fakeKeyThere, "again": fakeKeyHello}}))
+}

@@ -8,7 +8,11 @@ import (
 	"path"
 	"path/filepath"
 	"testing"
+	"time"
 
+	"github.com/docker/notary/cryptoservice"
+	"github.com/docker/notary/passphrase"
+	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/stretchr/testify/require"
@@ -19,6 +23,10 @@ var testGUN = "gun"
 func initRepo(t *testing.T, cryptoService signed.CryptoService) *Repo {
 	rootKey, err := cryptoService.Create("root", testGUN, data.ED25519Key)
 	require.NoError(t, err)
+	return initRepoWithRoot(t, cryptoService, rootKey)
+}
+
+func initRepoWithRoot(t *testing.T, cryptoService signed.CryptoService, rootKey data.PublicKey) *Repo {
 	targetsKey, err := cryptoService.Create("targets", testGUN, data.ED25519Key)
 	require.NoError(t, err)
 	snapshotKey, err := cryptoService.Create("snapshot", testGUN, data.ED25519Key)
@@ -103,6 +111,17 @@ func TestInitRepo(t *testing.T) {
 	ed25519 := signed.NewEd25519()
 	repo := initRepo(t, ed25519)
 	writeRepo(t, "/tmp/tufrepo", repo)
+	// after signing a new repo, the first version's root is saved
+	currRoot, err := repo.GetBaseRole(data.CanonicalRootRole)
+	require.NoError(t, err)
+	// can't use getBaseRole bcause it's not a valid real role
+	savedRoot, err := repo.Root.BuildBaseRole("root.1")
+	require.Equal(t, "root.1", savedRoot.Name)
+
+	// we can't compare the roots if the names are different
+	savedRoot.Name = data.CanonicalRootRole
+	require.NoError(t, err)
+	require.True(t, currRoot.Equals(savedRoot))
 }
 
 func TestUpdateDelegations(t *testing.T) {
@@ -767,6 +786,9 @@ func TestAddBaseKeysToRoot(t *testing.T) {
 		ed25519 := signed.NewEd25519()
 		repo := initRepo(t, ed25519)
 
+		origKeyIDs := ed25519.ListKeys(role)
+		require.Len(t, origKeyIDs, 1)
+
 		key, err := ed25519.Create(role, testGUN, data.ED25519Key)
 		require.NoError(t, err)
 
@@ -786,6 +808,75 @@ func TestAddBaseKeysToRoot(t *testing.T) {
 			require.True(t, repo.Targets[data.CanonicalTargetsRole].Dirty)
 		case data.CanonicalTimestampRole:
 			require.True(t, repo.Timestamp.Dirty)
+		case data.CanonicalRootRole:
+			require.NoError(t, err)
+			require.Len(t, repo.originalRootRole.Keys, 1)
+			require.Contains(t, repo.originalRootRole.ListKeyIDs(), origKeyIDs[0])
+		}
+	}
+}
+
+// removing one or more keys from a role marks root as dirty as well as the role
+func TestRemoveBaseKeysFromRoot(t *testing.T) {
+	for _, role := range data.BaseRoles {
+		ed25519 := signed.NewEd25519()
+		repo := initRepo(t, ed25519)
+
+		origKeyIDs := ed25519.ListKeys(role)
+		require.Len(t, origKeyIDs, 1)
+
+		require.Len(t, repo.Root.Signed.Roles[role].KeyIDs, 1)
+
+		require.NoError(t, repo.RemoveBaseKeys(role, origKeyIDs...))
+
+		require.Len(t, repo.Root.Signed.Roles[role].KeyIDs, 0)
+		require.True(t, repo.Root.Dirty)
+
+		switch role {
+		case data.CanonicalSnapshotRole:
+			require.True(t, repo.Snapshot.Dirty)
+		case data.CanonicalTargetsRole:
+			require.True(t, repo.Targets[data.CanonicalTargetsRole].Dirty)
+		case data.CanonicalTimestampRole:
+			require.True(t, repo.Timestamp.Dirty)
+		case data.CanonicalRootRole:
+			require.Len(t, repo.originalRootRole.Keys, 1)
+			require.Contains(t, repo.originalRootRole.ListKeyIDs(), origKeyIDs[0])
+		}
+	}
+}
+
+// replacing keys in a role marks root as dirty as well as the role
+func TestReplaceBaseKeysInRoot(t *testing.T) {
+	for _, role := range data.BaseRoles {
+		ed25519 := signed.NewEd25519()
+		repo := initRepo(t, ed25519)
+
+		origKeyIDs := ed25519.ListKeys(role)
+		require.Len(t, origKeyIDs, 1)
+
+		key, err := ed25519.Create(role, testGUN, data.ED25519Key)
+		require.NoError(t, err)
+
+		require.Len(t, repo.Root.Signed.Roles[role].KeyIDs, 1)
+
+		require.NoError(t, repo.ReplaceBaseKeys(role, key))
+
+		_, ok := repo.Root.Signed.Keys[key.ID()]
+		require.True(t, ok)
+		require.Len(t, repo.Root.Signed.Roles[role].KeyIDs, 1)
+		require.True(t, repo.Root.Dirty)
+
+		switch role {
+		case data.CanonicalSnapshotRole:
+			require.True(t, repo.Snapshot.Dirty)
+		case data.CanonicalTargetsRole:
+			require.True(t, repo.Targets[data.CanonicalTargetsRole].Dirty)
+		case data.CanonicalTimestampRole:
+			require.True(t, repo.Timestamp.Dirty)
+		case data.CanonicalRootRole:
+			require.Len(t, repo.originalRootRole.Keys, 1)
+			require.Contains(t, repo.originalRootRole.ListKeyIDs(), origKeyIDs[0])
 		}
 	}
 }
@@ -1041,4 +1132,296 @@ func TestGetDelegationRoleKeyMissing(t *testing.T) {
 	_, err := repo.GetDelegationRole("targets/missing_key")
 	require.Error(t, err)
 	require.IsType(t, data.ErrInvalidRole{}, err)
+}
+
+func verifySignatureList(t *testing.T, signed *data.Signed, expectedKeys ...data.PublicKey) {
+	require.Equal(t, len(expectedKeys), len(signed.Signatures))
+	usedKeys := make(map[string]struct{}, len(signed.Signatures))
+	for _, sig := range signed.Signatures {
+		usedKeys[sig.KeyID] = struct{}{}
+	}
+	for _, key := range expectedKeys {
+		_, ok := usedKeys[key.ID()]
+		require.True(t, ok)
+		verifyRootSignatureAgainstKey(t, signed, key)
+	}
+}
+
+func verifyRootSignatureAgainstKey(t *testing.T, signedRoot *data.Signed, key data.PublicKey) error {
+	roleWithKeys := data.BaseRole{Name: data.CanonicalRootRole, Keys: data.Keys{key.ID(): key}, Threshold: 1}
+	return signed.VerifySignatures(signedRoot, roleWithKeys)
+}
+
+func TestSignRootOldKeyCertExists(t *testing.T) {
+	gun := "docker/test-sign-root"
+	referenceTime := time.Now()
+
+	cs := cryptoservice.NewCryptoService(trustmanager.NewKeyMemoryStore(
+		passphrase.ConstantRetriever("password")))
+
+	rootPublicKey, err := cs.Create(data.CanonicalRootRole, gun, data.ECDSAKey)
+	require.NoError(t, err)
+	rootPrivateKey, _, err := cs.GetPrivateKey(rootPublicKey.ID())
+	require.NoError(t, err)
+	oldRootCert, err := cryptoservice.GenerateCertificate(rootPrivateKey, gun, referenceTime.AddDate(-9, 0, 0),
+		referenceTime.AddDate(1, 0, 0))
+	require.NoError(t, err)
+	oldRootCertKey := trustmanager.CertToKey(oldRootCert)
+
+	repo := initRepoWithRoot(t, cs, oldRootCertKey)
+
+	// Create a first signature, using the old key.
+	signedRoot, err := repo.SignRoot(data.DefaultExpires(data.CanonicalRootRole))
+	require.NoError(t, err)
+	verifySignatureList(t, signedRoot, oldRootCertKey)
+	err = verifyRootSignatureAgainstKey(t, signedRoot, oldRootCertKey)
+	require.NoError(t, err)
+
+	// Create a new certificate
+	newRootCert, err := cryptoservice.GenerateCertificate(rootPrivateKey, gun, referenceTime, referenceTime.AddDate(10, 0, 0))
+	require.NoError(t, err)
+	newRootCertKey := trustmanager.CertToKey(newRootCert)
+	require.NotEqual(t, oldRootCertKey.ID(), newRootCertKey.ID())
+
+	// Only trust the new certificate
+	err = repo.ReplaceBaseKeys(data.CanonicalRootRole, newRootCertKey)
+	require.NoError(t, err)
+	updatedRootRole, err := repo.GetBaseRole(data.CanonicalRootRole)
+	require.NoError(t, err)
+	updatedRootKeyIDs := updatedRootRole.ListKeyIDs()
+	require.Equal(t, 1, len(updatedRootKeyIDs))
+	require.Equal(t, newRootCertKey.ID(), updatedRootKeyIDs[0])
+
+	// Create a second signature
+	signedRoot, err = repo.SignRoot(data.DefaultExpires(data.CanonicalRootRole))
+	require.NoError(t, err)
+	verifySignatureList(t, signedRoot, oldRootCertKey, newRootCertKey)
+
+	// Verify that the signature can be verified when trusting the old certificate
+	err = verifyRootSignatureAgainstKey(t, signedRoot, oldRootCertKey)
+	require.NoError(t, err)
+	// Verify that the signature can be verified when trusting the new certificate
+	err = verifyRootSignatureAgainstKey(t, signedRoot, newRootCertKey)
+	require.NoError(t, err)
+}
+
+func TestSignRootOldKeyCertMissing(t *testing.T) {
+	gun := "docker/test-sign-root"
+	referenceTime := time.Now()
+
+	cs := cryptoservice.NewCryptoService(trustmanager.NewKeyMemoryStore(
+		passphrase.ConstantRetriever("password")))
+
+	rootPublicKey, err := cs.Create(data.CanonicalRootRole, gun, data.ECDSAKey)
+	require.NoError(t, err)
+	rootPrivateKey, _, err := cs.GetPrivateKey(rootPublicKey.ID())
+	require.NoError(t, err)
+	oldRootCert, err := cryptoservice.GenerateCertificate(rootPrivateKey, gun, referenceTime.AddDate(-9, 0, 0),
+		referenceTime.AddDate(1, 0, 0))
+	require.NoError(t, err)
+	oldRootCertKey := trustmanager.CertToKey(oldRootCert)
+
+	repo := initRepoWithRoot(t, cs, oldRootCertKey)
+
+	// Create a first signature, using the old key.
+	signedRoot, err := repo.SignRoot(data.DefaultExpires(data.CanonicalRootRole))
+	require.NoError(t, err)
+	verifySignatureList(t, signedRoot, oldRootCertKey)
+	err = verifyRootSignatureAgainstKey(t, signedRoot, oldRootCertKey)
+	require.NoError(t, err)
+
+	// Create a new certificate
+	newRootCert, err := cryptoservice.GenerateCertificate(rootPrivateKey, gun, referenceTime, referenceTime.AddDate(10, 0, 0))
+	require.NoError(t, err)
+	newRootCertKey := trustmanager.CertToKey(newRootCert)
+	require.NotEqual(t, oldRootCertKey.ID(), newRootCertKey.ID())
+
+	// Only trust the new certificate
+	err = repo.ReplaceBaseKeys(data.CanonicalRootRole, newRootCertKey)
+	require.NoError(t, err)
+	updatedRootRole, err := repo.GetBaseRole(data.CanonicalRootRole)
+	require.NoError(t, err)
+	updatedRootKeyIDs := updatedRootRole.ListKeyIDs()
+	require.Equal(t, 1, len(updatedRootKeyIDs))
+	require.Equal(t, newRootCertKey.ID(), updatedRootKeyIDs[0])
+
+	// Now forget all about the old certificate: drop it from the Root carried keys
+	delete(repo.Root.Signed.Keys, oldRootCertKey.ID())
+	repo2 := NewRepo(cs)
+	err = repo2.SetRoot(repo.Root)
+	require.NoError(t, err)
+
+	// Create a second signature
+	signedRoot, err = repo2.SignRoot(data.DefaultExpires(data.CanonicalRootRole))
+	require.NoError(t, err)
+	verifySignatureList(t, signedRoot, newRootCertKey) // Without oldRootCertKey
+
+	// Verify that the signature can be verified when trusting the new certificate
+	err = verifyRootSignatureAgainstKey(t, signedRoot, newRootCertKey)
+	require.NoError(t, err)
+	err = verifyRootSignatureAgainstKey(t, signedRoot, oldRootCertKey)
+	require.Error(t, err)
+}
+
+// SignRoot signs with all old roles with valid keys, and also optionally any old
+// signatures we have keys for even if they aren't in an old root.  It ignores any
+// root role whose version is higher than the current version.  If signing fails,
+// it reverts back.
+func TestSignRootOldRootRolesAndOldSigs(t *testing.T) {
+	gun := "docker/test-sign-root"
+	referenceTime := time.Now()
+
+	cs := cryptoservice.NewCryptoService(trustmanager.NewKeyMemoryStore(
+		passphrase.ConstantRetriever("password")))
+
+	rootCertKeys := make([]data.PublicKey, 9)
+	rootPrivKeys := make([]data.PrivateKey, cap(rootCertKeys))
+	for i := 0; i < cap(rootCertKeys); i++ {
+		rootPublicKey, err := cs.Create(data.CanonicalRootRole, gun, data.ECDSAKey)
+		require.NoError(t, err)
+		rootPrivateKey, _, err := cs.GetPrivateKey(rootPublicKey.ID())
+		require.NoError(t, err)
+		rootCert, err := cryptoservice.GenerateCertificate(rootPrivateKey, gun, referenceTime.AddDate(-9, 0, 0),
+			referenceTime.AddDate(1, 0, 0))
+		require.NoError(t, err)
+		rootCertKeys[i] = trustmanager.CertToKey(rootCert)
+		rootPrivKeys[i] = rootPrivateKey
+	}
+
+	repo := initRepoWithRoot(t, cs, rootCertKeys[6])
+	// sign with key 0, which represents the key for the a version of the root we
+	// no longer have a record of
+	signedObj, err := repo.Root.ToSigned()
+	require.NoError(t, err)
+	signedObj, err = repo.sign(signedObj, nil, []data.PublicKey{rootCertKeys[0]})
+	require.NoError(t, err)
+	// should be signed with key 0
+	verifySignatureList(t, signedObj, rootCertKeys[0])
+	repo.Root.Signatures = signedObj.Signatures
+
+	// bump root version and also add the above keys and extra roles to root
+	repo.Root.Signed.Version = 6
+	oldExpiry := repo.Root.Signed.Expires
+	// add every key to the root's key list except 1
+	for i, key := range rootCertKeys {
+		if i != 1 {
+			repo.Root.Signed.Keys[key.ID()] = key
+		}
+	}
+	// invalid root role because key not included in the key map - valid root version name
+	repo.Root.Signed.Roles["root.1"] = &data.RootRole{KeyIDs: []string{rootCertKeys[1].ID()}, Threshold: 1}
+	// invalid root versions names, but valid roles
+	repo.Root.Signed.Roles["2.root"] = &data.RootRole{KeyIDs: []string{rootCertKeys[2].ID()}, Threshold: 1}
+	repo.Root.Signed.Roles["root3"] = &data.RootRole{KeyIDs: []string{rootCertKeys[3].ID()}, Threshold: 1}
+	repo.Root.Signed.Roles["root.4a"] = &data.RootRole{KeyIDs: []string{rootCertKeys[4].ID()}, Threshold: 1}
+	// valid old root role and version
+	repo.Root.Signed.Roles["root.5"] = &data.RootRole{KeyIDs: []string{rootCertKeys[5].ID()}, Threshold: 1}
+	// higher than current root version, so invalid name, but valid root role
+	repo.Root.Signed.Roles["root.7"] = &data.RootRole{KeyIDs: []string{rootCertKeys[7].ID()}, Threshold: 1}
+
+	lenRootRoles := len(repo.Root.Signed.Roles)
+
+	// rotate the current key to key 8
+	require.NoError(t, repo.ReplaceBaseKeys(data.CanonicalRootRole, rootCertKeys[8]))
+
+	requiredKeys := []data.PrivateKey{
+		rootPrivKeys[5], // we need an old valid root role - this was specified in root5
+		rootPrivKeys[6], // we need the previous valid key prior to root rotation
+		rootPrivKeys[8], // we need the new root key we've rotated to
+	}
+
+	for _, privKey := range requiredKeys {
+		// if we can't sign with a previous root, we fail
+		require.NoError(t, cs.RemoveKey(privKey.ID()))
+		_, err = repo.SignRoot(data.DefaultExpires(data.CanonicalRootRole))
+		require.Error(t, err)
+		require.IsType(t, signed.ErrInsufficientSignatures{}, err)
+		require.Contains(t, err.Error(), "signing keys not available")
+
+		// add back for next test
+		require.NoError(t, cs.AddKey(data.CanonicalRootRole, gun, privKey))
+	}
+	// we haven't saved any unsaved roles because there was an error signing,
+	// nor have we bumped the version or altered the expiry
+	require.Equal(t, 6, repo.Root.Signed.Version)
+	require.Equal(t, oldExpiry, repo.Root.Signed.Expires)
+	require.Len(t, repo.Root.Signed.Roles, lenRootRoles)
+
+	// remove all the keys we don't need and demonstrate we can still sign
+	for _, index := range []int{1, 2, 3, 4, 7} {
+		require.NoError(t, cs.RemoveKey(rootPrivKeys[index].ID()))
+	}
+
+	// SignRoot will sign with all the old keys based on old root roles as well
+	// as any old signatures
+	signedObj, err = repo.SignRoot(data.DefaultExpires(data.CanonicalRootRole))
+	require.NoError(t, err)
+	expectedSigningKeys := []data.PublicKey{
+		rootCertKeys[0], // old signature key, not in any role
+		rootCertKeys[5], // root.5 key which is valid
+		rootCertKeys[6], // previous key before rotation,
+		rootCertKeys[8], //  newly rotated key
+	}
+	verifySignatureList(t, signedObj, expectedSigningKeys...)
+	// verify that we saved the previous root, since it wasn't in the list of old roots,
+	// and the new root (which overwrote an invalid root)
+	require.NotNil(t, repo.Root.Signed.Roles["root.6"])
+	require.Equal(t, data.RootRole{KeyIDs: []string{rootCertKeys[6].ID()}, Threshold: 1},
+		*repo.Root.Signed.Roles["root.6"])
+	require.NotNil(t, repo.Root.Signed.Roles["root.7"])
+	require.Equal(t, data.RootRole{KeyIDs: []string{rootCertKeys[8].ID()}, Threshold: 1},
+		*repo.Root.Signed.Roles["root.7"])
+
+	// bumped version, 2 new roles, but one overwrote the previous root.7, so one additional role
+	require.Equal(t, 7, repo.Root.Signed.Version)
+	require.Len(t, repo.Root.Signed.Roles, lenRootRoles+1)
+	require.True(t, oldExpiry.Before(repo.Root.Signed.Expires))
+	lenRootRoles = len(repo.Root.Signed.Roles)
+
+	// remove the optional key
+	require.NoError(t, cs.RemoveKey(rootPrivKeys[0].ID()))
+
+	// SignRoot will still succeed even if the key that wasn't in a root isn't
+	// available
+	oldExpiry = repo.Root.Signed.Expires
+	signedObj, err = repo.SignRoot(data.DefaultExpires(data.CanonicalRootRole))
+	require.NoError(t, err)
+	verifySignatureList(t, signedObj, expectedSigningKeys[1:]...)
+
+	// no additional roles were added
+	require.Len(t, repo.Root.Signed.Roles, lenRootRoles)
+	require.Equal(t, 8, repo.Root.Signed.Version)               // bumped version
+	require.True(t, oldExpiry.Before(repo.Root.Signed.Expires)) // expiry updated
+
+	// now rotate a non-root key
+	newTargetsKey, err := cs.Create(data.CanonicalTargetsRole, gun, data.ECDSAKey)
+	require.NoError(t, err)
+	require.NoError(t, repo.ReplaceBaseKeys(data.CanonicalTargetsRole, newTargetsKey))
+
+	// we still sign with all old roles no additional roles were added
+	oldExpiry = repo.Root.Signed.Expires
+	signedObj, err = repo.SignRoot(data.DefaultExpires(data.CanonicalRootRole))
+	require.NoError(t, err)
+	verifySignatureList(t, signedObj, expectedSigningKeys[1:]...)
+	require.Len(t, repo.Root.Signed.Roles, lenRootRoles)
+	require.Equal(t, 9, repo.Root.Signed.Version)               // bumped version
+	require.True(t, oldExpiry.Before(repo.Root.Signed.Expires)) // expiry updated
+
+	// rotating a targets key again, if we are missing the previous root's keys, signing will fail
+	newTargetsKey, err = cs.Create(data.CanonicalTargetsRole, gun, data.ECDSAKey)
+	require.NoError(t, err)
+	require.NoError(t, repo.ReplaceBaseKeys(data.CanonicalTargetsRole, newTargetsKey))
+
+	require.NoError(t, cs.RemoveKey(rootPrivKeys[6].ID()))
+
+	oldExpiry = repo.Root.Signed.Expires
+	_, err = repo.SignRoot(data.DefaultExpires(data.CanonicalRootRole))
+	require.Error(t, err)
+	require.IsType(t, signed.ErrInsufficientSignatures{}, err)
+	require.Contains(t, err.Error(), "signing keys not available")
+
+	// no additional roles were saved, version has not changed
+	require.Len(t, repo.Root.Signed.Roles, lenRootRoles)
+	require.Equal(t, 9, repo.Root.Signed.Version) // version has not changed
+	require.Equal(t, oldExpiry, repo.Root.Signed.Expires)
 }

@@ -239,11 +239,10 @@ func TestRemoveMultikeysRemoveOnlyChosenKey(t *testing.T) {
 	}
 }
 
-// Non-roles, root, and delegation keys can't be rotated with the command line
+// Non-roles and delegation keys can't be rotated with the command line
 func TestRotateKeyInvalidRoles(t *testing.T) {
 	setUp(t)
 	invalids := []string{
-		data.CanonicalRootRole,
 		"notevenARole",
 		"targets/a",
 	}

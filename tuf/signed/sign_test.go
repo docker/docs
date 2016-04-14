@@ -1,8 +1,10 @@
 package signed
 
 import (
+	"crypto"
 	"crypto/rand"
 	"encoding/pem"
+	"io"
 	"testing"
 
 	"github.com/docker/go/canonical/json"
@@ -15,6 +17,22 @@ import (
 const (
 	testKeyPEM1 = "-----BEGIN PUBLIC KEY-----\nMIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAnKuXZeefa2LmgxaL5NsM\nzKOHNe+x/nL6ik+lDBCTV6OdcwAhHQS+PONGhrChIUVR6Vth3hUCrreLzPO73Oo5\nVSCuRJ53UronENl6lsa5mFKP8StYLvIDITNvkoT3j52BJIjyNUK9UKY9As2TNqDf\nBEPIRp28ev/NViwGOEkBu2UAbwCIdnDXm8JQErCZA0Ydm7PKGgjLbFsFGrVzqXHK\n6pdzJXlhr9yap3UpgQ/iO9JtoEYB2EXsnSrPc9JRjR30bNHHtnVql3fvinXrAEwq\n3xmN4p+R4VGzfdQN+8Kl/IPjqWB535twhFYEG/B7Ze8IwbygBjK3co/KnOPqMUrM\nBI8ztvPiogz+MvXb8WvarZ6TMTh8ifZI96r7zzqyzjR1hJulEy3IsMGvz8XS2J0X\n7sXoaqszEtXdq5ef5zKVxkiyIQZcbPgmpHLq4MgfdryuVVc/RPASoRIXG4lKaTJj\n1ANMFPxDQpHudCLxwCzjCb+sVa20HBRPTnzo8LSZkI6jAgMBAAE=\n-----END PUBLIC KEY-----"
 )
+
+type FailingPrivateKeyErr struct {
+}
+
+func (err FailingPrivateKeyErr) Error() string {
+	return "FailingPrivateKey.Sign failed"
+}
+
+// A data.PrivateKey which fails signing with a recognizable error.
+type FailingPrivateKey struct {
+	data.PrivateKey
+}
+
+func (fpk FailingPrivateKey) Sign(rand io.Reader, msg []byte, opts crypto.SignerOpts) (signature []byte, err error) {
+	return nil, FailingPrivateKeyErr{}
+}
 
 // A CryptoService which does not contain any keys.
 type FailingCryptoService struct {
@@ -101,7 +119,7 @@ func TestBasicSign(t *testing.T) {
 		Signed: &json.RawMessage{},
 	}
 
-	err = Sign(cs, &testData, key)
+	err = Sign(cs, &testData, []data.PublicKey{key}, 1, nil)
 	require.NoError(t, err)
 
 	if len(testData.Signatures) != 1 {
@@ -123,8 +141,8 @@ func TestReSign(t *testing.T) {
 		Signed: &json.RawMessage{},
 	}
 
-	Sign(cs, &testData, key)
-	Sign(cs, &testData, key)
+	Sign(cs, &testData, []data.PublicKey{key}, 1, nil)
+	Sign(cs, &testData, []data.PublicKey{key}, 1, nil)
 
 	if len(testData.Signatures) != 1 {
 		t.Fatalf("Incorrect number of signatures: %d", len(testData.Signatures))
@@ -146,7 +164,7 @@ func TestMultiSign(t *testing.T) {
 	key1, err := cs.Create(data.CanonicalRootRole, "", data.ED25519Key)
 	require.NoError(t, err)
 
-	Sign(cs, &testData, key1)
+	require.NoError(t, Sign(cs, &testData, []data.PublicKey{key1}, 1, nil))
 
 	// reinitializing cs means it won't know about key1. We want
 	// to attempt to sign passing both key1 and key2, while expecting
@@ -156,26 +174,18 @@ func TestMultiSign(t *testing.T) {
 	key2, err := cs.Create(data.CanonicalRootRole, "", data.ED25519Key)
 	require.NoError(t, err)
 
-	Sign(
+	err = Sign(
 		cs,
 		&testData,
-		key1,
-		key2,
+		[]data.PublicKey{key2},
+		1,
+		[]data.PublicKey{key1},
 	)
+	require.NoError(t, err)
 
-	if len(testData.Signatures) != 2 {
-		t.Fatalf("Incorrect number of signatures: %d", len(testData.Signatures))
-	}
-
-	keyIDs := map[string]struct{}{key1.ID(): {}, key2.ID(): {}}
-	count := 0
-	for _, sig := range testData.Signatures {
-		count++
-		if _, ok := keyIDs[sig.KeyID]; !ok {
-			t.Fatalf("Got a signature we didn't expect: %s", sig.KeyID)
-		}
-	}
-	require.Equal(t, 2, count)
+	require.Len(t, testData.Signatures, 2)
+	require.Equal(t, key2.ID(), testData.Signatures[0].KeyID)
+	require.Equal(t, key1.ID(), testData.Signatures[1].KeyID)
 }
 
 func TestSignReturnsNoSigs(t *testing.T) {
@@ -186,11 +196,10 @@ func TestSignReturnsNoSigs(t *testing.T) {
 
 	testKey, _ := pem.Decode([]byte(testKeyPEM1))
 	key := data.NewPublicKey(data.RSAKey, testKey.Bytes)
-	err := Sign(failingCryptoService, &testData, key)
+	err := Sign(failingCryptoService, &testData, []data.PublicKey{key}, 1, nil)
 
-	if err == nil {
-		t.Fatalf("Expected failure due to no signature being returned by the crypto service")
-	}
+	require.Error(t, err)
+	require.IsType(t, ErrInsufficientSignatures{}, err)
 	if len(testData.Signatures) != 0 {
 		t.Fatalf("Incorrect number of signatures, expected 0: %d", len(testData.Signatures))
 	}
@@ -214,7 +223,8 @@ func TestSignWithX509(t *testing.T) {
 	testData := data.Signed{
 		Signed: &json.RawMessage{},
 	}
-	err = Sign(mockCryptoService, &testData, tufRSAx509Key)
+
+	err = Sign(mockCryptoService, &testData, []data.PublicKey{tufRSAx509Key}, 1, nil)
 	require.NoError(t, err)
 
 	require.Len(t, testData.Signatures, 1)
@@ -230,23 +240,31 @@ func TestSignRemovesValidSigByInvalidKey(t *testing.T) {
 	key1, err := cs.Create(data.CanonicalRootRole, "", data.ED25519Key)
 	require.NoError(t, err)
 
-	Sign(cs, &testData, key1)
-	require.Len(t, testData.Signatures, 1)
-	require.Equal(t, key1.ID(), testData.Signatures[0].KeyID)
-
 	key2, err := cs.Create(data.CanonicalRootRole, "", data.ED25519Key)
 	require.NoError(t, err)
 
-	// should remove key1 sig even though it's valid. It no longer appears
-	// in the list of signing keys for the role
-	Sign(
-		cs,
-		&testData,
-		key2,
-	)
+	require.NoError(t, Sign(cs, &testData, []data.PublicKey{key1, key2}, 1, nil))
+	require.Len(t, testData.Signatures, 2)
+	var signatureKeys []string
+	for _, sig := range testData.Signatures {
+		signatureKeys = append(signatureKeys, sig.KeyID)
+	}
+	require.Contains(t, signatureKeys, key1.ID())
+	require.Contains(t, signatureKeys, key2.ID())
 
-	require.Len(t, testData.Signatures, 1)
-	require.Equal(t, key2.ID(), testData.Signatures[0].KeyID)
+	key3, err := cs.Create(data.CanonicalRootRole, "", data.ED25519Key)
+	require.NoError(t, err)
+
+	// should remove key1 sig even though it's valid. It no longer appears
+	// in the list of signing keys or valid signing keys for the role
+	require.NoError(t, Sign(cs, &testData, []data.PublicKey{key3}, 1, []data.PublicKey{key2}))
+	require.Len(t, testData.Signatures, 2)
+	signatureKeys = nil
+	for _, sig := range testData.Signatures {
+		signatureKeys = append(signatureKeys, sig.KeyID)
+	}
+	require.Contains(t, signatureKeys, key2.ID())
+	require.Contains(t, signatureKeys, key3.ID())
 }
 
 func TestSignRemovesInvalidSig(t *testing.T) {
@@ -258,7 +276,7 @@ func TestSignRemovesInvalidSig(t *testing.T) {
 	key1, err := cs.Create(data.CanonicalRootRole, "", data.ED25519Key)
 	require.NoError(t, err)
 
-	Sign(cs, &testData, key1)
+	require.NoError(t, Sign(cs, &testData, []data.PublicKey{key1}, 1, nil))
 	require.Len(t, testData.Signatures, 1)
 	require.Equal(t, key1.ID(), testData.Signatures[0].KeyID)
 
@@ -271,13 +289,57 @@ func TestSignRemovesInvalidSig(t *testing.T) {
 	raw := json.RawMessage([]byte{0xff})
 	testData.Signed = &raw
 	// should remove key1 sig because it's out of date
-	Sign(
-		cs,
-		&testData,
-		key1,
-		key2,
-	)
+	Sign(cs, &testData, []data.PublicKey{key1, key2}, 1, nil)
 
 	require.Len(t, testData.Signatures, 1)
 	require.Equal(t, key2.ID(), testData.Signatures[0].KeyID)
+}
+
+func TestSignMinSignatures(t *testing.T) {
+	csA := NewEd25519()
+	keyA1, err := csA.Create("keyA", "", data.ED25519Key)
+	require.NoError(t, err)
+	keyA2, err := csA.Create("keyA", "", data.ED25519Key)
+	require.NoError(t, err)
+	// csB is only used to create public keys which are unavailable from csA.
+	csB := NewEd25519()
+	keyB, err := csB.Create("keyB", "", data.ED25519Key)
+	require.NoError(t, err)
+
+	allKeys := []data.PublicKey{keyA1, keyA2, keyB}
+
+	// 2 available keys, threshold 1: 2 signatures created nevertheless
+	testData := data.Signed{Signed: &json.RawMessage{}}
+	err = Sign(csA, &testData, allKeys, 1, nil)
+	require.NoError(t, err)
+	require.Len(t, testData.Signatures, 2)
+
+	// 2 available keys, threshold 2
+	testData = data.Signed{Signed: &json.RawMessage{}}
+	err = Sign(csA, &testData, allKeys, 2, nil)
+	require.NoError(t, err)
+	require.Len(t, testData.Signatures, 2)
+
+	// 2 available keys, threshold 3
+	testData = data.Signed{Signed: &json.RawMessage{}}
+	err = Sign(csA, &testData, allKeys, 3, nil)
+	require.Error(t, err)
+	if err2, ok := err.(ErrInsufficientSignatures); ok {
+		require.Equal(t, err2.FoundKeys, 2)
+		require.Equal(t, err2.NeededKeys, 3)
+	} else {
+		// We know this will fail if !ok
+		require.IsType(t, ErrInsufficientSignatures{}, err)
+	}
+}
+
+func TestSignFailingKeys(t *testing.T) {
+	privKey, err := trustmanager.GenerateECDSAKey(rand.Reader)
+	require.NoError(t, err)
+	cs := &MockCryptoService{FailingPrivateKey{privKey}}
+
+	testData := data.Signed{Signed: &json.RawMessage{}}
+	err = Sign(cs, &testData, []data.PublicKey{privKey}, 1, nil)
+	require.Error(t, err)
+	require.IsType(t, FailingPrivateKeyErr{}, err)
 }

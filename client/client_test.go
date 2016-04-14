@@ -494,7 +494,7 @@ func requireRepoHasExpectedMetadata(t *testing.T, repo *NotaryRepository,
 		// each of root, targets, snapshot, timestamp
 		require.Len(t, decodedRoot.Keys, len(data.BaseRoles),
 			"wrong number of keys in root.json")
-		require.Len(t, decodedRoot.Roles, len(data.BaseRoles),
+		require.True(t, len(decodedRoot.Roles) >= len(data.BaseRoles),
 			"wrong number of roles in root.json")
 
 		for _, role := range data.BaseRoles {
@@ -2510,36 +2510,38 @@ func TestPublishSucceedsDespiteDelegationCorrupt(t *testing.T) {
 
 // Rotate invalid roles, or attempt to delegate target signing to the server
 func TestRotateKeyInvalidRole(t *testing.T) {
-	ts, _, _ := simpleTestServer(t)
+	ts := fullTestServer(t)
 	defer ts.Close()
 
 	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
 	defer os.RemoveAll(repo.baseDir)
 
-	// the equivalent of: remotely rotating the root key
-	// (RotateKey("root", true)), locally rotating the root key (RotateKey("root", false)),
-	// locally rotating the timestamp key (RotateKey("timestamp", false)),
-	// and remotely rotating the targets key (RotateKey(targets, true)), all of which should
-	// fail
-	for _, role := range data.BaseRoles {
-		if role == data.CanonicalSnapshotRole {
-			continue
-		}
-		for _, serverManagesKey := range []bool{true, false} {
-			// we support local rotation of the targets key and remote rotation of the
-			// timestamp key
-			if role == data.CanonicalTargetsRole && !serverManagesKey {
-				continue
-			}
-			if role == data.CanonicalTimestampRole && serverManagesKey {
-				continue
-			}
-			err := repo.RotateKey(role, serverManagesKey)
-			require.Error(t, err,
-				"Rotating a %s key with server-managing the key as %v should fail",
-				role, serverManagesKey)
-		}
-	}
+	// create a delegation
+	pubKey, err := repo.CryptoService.Create("targets/releases", "docker.com/notary", data.ECDSAKey)
+	require.NoError(t, err)
+	require.NoError(t, repo.AddDelegation("targets/releases", []data.PublicKey{pubKey}, []string{""}))
+	require.NoError(t, repo.Publish())
+	require.NoError(t, repo.Update(false))
+
+	// rotating a root key to the server fails
+	require.Error(t, repo.RotateKey(data.CanonicalRootRole, true),
+		"Rotating a root key with server-managing the key should fail")
+
+	// rotating a targets key to the server fails
+	require.Error(t, repo.RotateKey(data.CanonicalTargetsRole, true),
+		"Rotating a targets key with server-managing the key should fail")
+
+	// rotating a timestamp key locally fails
+	require.Error(t, repo.RotateKey(data.CanonicalTimestampRole, false),
+		"Rotating a timestamp key locally should fail")
+
+	// rotating a delegation key fails
+	require.Error(t, repo.RotateKey("targets/releases", false),
+		"Rotating a delegation key should fail")
+
+	// rotating a not a real role key fails
+	require.Error(t, repo.RotateKey("nope", false),
+		"Rotating a non-real role key should fail")
 }
 
 // If remotely rotating key fails, the failure is propagated
@@ -2560,19 +2562,19 @@ func TestRemoteRotationError(t *testing.T) {
 // Rotates the keys.  After the rotation, downloading the latest metadata
 // and require that the keys have changed
 func requireRotationSuccessful(t *testing.T, repo1 *NotaryRepository, keysToRotate map[string]bool) {
-	// Create 2 new repos:  1 will download repo data before the publish,
-	// and one only downloads after the publish. This reflects a client
-	// that has some previous trust data (but is not the publisher), and a
-	// completely new client being able to read the rotated trust data.
+	// Create a new repo that is used to download the data after the rotation
 	repo2, _ := newRepoToTestRepo(t, repo1, true)
 	defer os.RemoveAll(repo2.baseDir)
 
 	repos := []*NotaryRepository{repo1, repo2}
 
-	oldKeyIDs := make(map[string][]string)
-	for role := range keysToRotate {
-		keyIDs := repo1.tufRepo.Root.Signed.Roles[role].KeyIDs
-		oldKeyIDs[role] = keyIDs
+	oldRoles := make(map[string]data.BaseRole)
+	for roleName := range keysToRotate {
+		baseRole, err := repo1.tufRepo.GetBaseRole(roleName)
+		require.NoError(t, err)
+		require.Len(t, baseRole.Keys, 1)
+
+		oldRoles[roleName] = baseRole
 	}
 
 	// Confirm no changelists get published
@@ -2591,29 +2593,48 @@ func requireRotationSuccessful(t *testing.T, repo1 *NotaryRepository, keysToRota
 		err := repo.Update(true)
 		require.NoError(t, err)
 
-		for role, isRemoteKey := range keysToRotate {
-			keyIDs := repo.tufRepo.Root.Signed.Roles[role].KeyIDs
-			require.Len(t, keyIDs, 1)
+		for roleName, isRemoteKey := range keysToRotate {
+			baseRole, err := repo1.tufRepo.GetBaseRole(roleName)
+			require.NoError(t, err)
+			require.Len(t, baseRole.Keys, 1)
 
-			// the new key is not the same as any of the old keys, and the
-			// old keys have been removed not just from the TUF file, but
-			// from the cryptoservice
-			for _, oldKeyID := range oldKeyIDs[role] {
-				require.NotEqual(t, oldKeyID, keyIDs[0])
-				_, _, err := repo.CryptoService.GetPrivateKey(oldKeyID)
-				require.Error(t, err)
+			// in the new key is not the same as any of the old keys
+			for oldKeyID, oldPubKey := range oldRoles[roleName].Keys {
+				_, ok := baseRole.Keys[oldKeyID]
+				require.False(t, ok)
+
+				// in the old repo, the old keys have been removed not just from
+				// the TUF file, but from the cryptoservice (unless it's a root
+				// key, in which case it should NOT be removed)
+				if repo == repo1 {
+					canonicalID, err := utils.CanonicalKeyID(oldPubKey)
+					require.NoError(t, err)
+
+					_, _, err = repo.CryptoService.GetPrivateKey(canonicalID)
+					switch roleName {
+					case data.CanonicalRootRole:
+						require.NoError(t, err)
+					default:
+						require.Error(t, err)
+					}
+				}
 			}
 
 			// On the old repo, the new key is present in the cryptoservice, or
-			// not present if remote.  On the new repo, no keys are ever in the
-			// cryptoservice
-			key, _, err := repo.CryptoService.GetPrivateKey(keyIDs[0])
-			if repo != repo1 || isRemoteKey {
-				require.Error(t, err)
-				require.Nil(t, key)
-			} else {
+			// not present if remote.
+			if repo == repo1 {
+				pubKey := baseRole.ListKeys()[0]
+				canonicalID, err := utils.CanonicalKeyID(pubKey)
 				require.NoError(t, err)
-				require.NotNil(t, key)
+
+				key, _, err := repo.CryptoService.GetPrivateKey(canonicalID)
+				if isRemoteKey {
+					require.Error(t, err)
+					require.Nil(t, key)
+				} else {
+					require.NoError(t, err)
+					require.NotNil(t, key)
+				}
 			}
 		}
 	}
@@ -2635,6 +2656,7 @@ func TestRotateBeforePublishFromRemoteKeyToLocalKey(t *testing.T) {
 	// non-key-rotation changes)
 	addTarget(t, repo, "latest", "../fixtures/intermediate-ca.crt")
 	requireRotationSuccessful(t, repo, map[string]bool{
+		data.CanonicalRootRole:     false,
 		data.CanonicalTargetsRole:  false,
 		data.CanonicalSnapshotRole: false})
 
@@ -2648,11 +2670,12 @@ func TestRotateBeforePublishFromRemoteKeyToLocalKey(t *testing.T) {
 // Rotate keys
 // Download the latest metadata and require that the keys have changed.
 func TestRotateKeyAfterPublishNoServerManagementChange(t *testing.T) {
-	// rotate a single target key
+	testRotateKeySuccess(t, false, map[string]bool{data.CanonicalRootRole: false})
 	testRotateKeySuccess(t, false, map[string]bool{data.CanonicalTargetsRole: false})
 	testRotateKeySuccess(t, false, map[string]bool{data.CanonicalSnapshotRole: false})
-	// rotate two at once before publishing
+	// rotate multiple keys at once before publishing
 	testRotateKeySuccess(t, false, map[string]bool{
+		data.CanonicalRootRole:     false,
 		data.CanonicalSnapshotRole: false,
 		data.CanonicalTargetsRole:  false})
 }
@@ -2666,11 +2689,13 @@ func TestRotateKeyAfterPublishServerManagementChange(t *testing.T) {
 	testRotateKeySuccess(t, false, map[string]bool{
 		data.CanonicalSnapshotRole: true,
 		data.CanonicalTargetsRole:  false,
+		data.CanonicalRootRole:     false,
 	})
 	// reclaim snapshot key management from the server
 	testRotateKeySuccess(t, true, map[string]bool{
 		data.CanonicalSnapshotRole: false,
 		data.CanonicalTargetsRole:  false,
+		data.CanonicalRootRole:     false,
 	})
 }
 
@@ -2702,6 +2727,130 @@ func testRotateKeySuccess(t *testing.T, serverManagesSnapshotInit bool,
 			keysToExpectCreated = append(keysToExpectCreated, role)
 		}
 	}
+}
+
+func logRepoTrustRoot(t *testing.T, prefix string, repo *NotaryRepository) {
+	logrus.Debugf("==== %s", prefix)
+	root := repo.tufRepo.Root
+	logrus.Debugf("Root signatures:")
+	for _, s := range root.Signatures {
+		logrus.Debugf("\t%s", s.KeyID)
+	}
+	logrus.Debugf("Valid root keys:")
+	for _, k := range root.Signed.Roles[data.CanonicalRootRole].KeyIDs {
+		logrus.Debugf("\t%s", k)
+	}
+	logrus.Debugf("All trusted certs:")
+	certs, err := repo.CertStore.GetCertificatesByCN(repo.gun)
+	require.NoError(t, err)
+	for _, cert := range certs {
+		id, err := trustmanager.FingerprintCert(cert)
+		require.NoError(t, err)
+		logrus.Debugf("\t%s", id)
+	}
+}
+
+// ID of the (only) certificate trusted by the root role metadata
+func rootRoleCertID(t *testing.T, repo *NotaryRepository) string {
+	rootKeys := repo.tufRepo.Root.Signed.Roles[data.CanonicalRootRole].KeyIDs
+	require.Len(t, rootKeys, 1)
+	return rootKeys[0]
+}
+
+func verifyOnlyTrustedCertificate(t *testing.T, repo *NotaryRepository, certID string) {
+	certs, err := repo.CertStore.GetCertificatesByCN(repo.gun)
+	require.NoError(t, err)
+	require.Len(t, certs, 1)
+	id, err := trustmanager.FingerprintCert(certs[0])
+	require.NoError(t, err)
+	require.Equal(t, certID, id)
+}
+
+func TestRotateRootKey(t *testing.T) {
+	ts := fullTestServer(t)
+	defer ts.Close()
+
+	// Set up author's view of the repo and publish first version.
+	authorRepo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
+	defer os.RemoveAll(authorRepo.baseDir)
+	err := authorRepo.Publish()
+	require.NoError(t, err)
+	oldRootCertID := rootRoleCertID(t, authorRepo)
+	oldRootRole, err := authorRepo.tufRepo.GetBaseRole(data.CanonicalRootRole)
+	require.NoError(t, err)
+	oldCanonicalKeyID, err := utils.CanonicalKeyID(oldRootRole.Keys[oldRootCertID])
+	require.NoError(t, err)
+
+	// Initialize an user, using the original root cert and key.
+	userRepo, _ := newRepoToTestRepo(t, authorRepo, true)
+	defer os.RemoveAll(userRepo.baseDir)
+	err = userRepo.Update(false)
+	require.NoError(t, err)
+
+	// Rotate root certificate and key.
+	logRepoTrustRoot(t, "original", authorRepo)
+	err = authorRepo.RotateKey(data.CanonicalRootRole, false)
+	require.NoError(t, err)
+	logRepoTrustRoot(t, "post-rotate", authorRepo)
+
+	require.NoError(t, authorRepo.Update(false))
+	newRootRole, err := authorRepo.tufRepo.GetBaseRole(data.CanonicalRootRole)
+	require.False(t, newRootRole.Equals(oldRootRole))
+	// not only is the root cert different, but the private key is too
+	newRootCertID := rootRoleCertID(t, authorRepo)
+	require.NotEqual(t, oldRootCertID, newRootCertID)
+	newCanonicalKeyID, err := utils.CanonicalKeyID(newRootRole.Keys[newRootCertID])
+	require.NoError(t, err)
+	require.NotEqual(t, oldCanonicalKeyID, newCanonicalKeyID)
+
+	// Set up a target to verify the repo is actually usable.
+	_, err = userRepo.GetTargetByName("current")
+	require.Error(t, err)
+	addTarget(t, authorRepo, "current", "../fixtures/intermediate-ca.crt")
+
+	// NotaryRepository.Update's handling of certificate rotation is weird:
+	//
+	// On every run, NotaryRepository.bootstrapClient rotates the trusted certificates
+	// based on CACHED root data.
+	// Then the client calls Repo.Update, which fetches a new timestmap,
+	// notices an updated root.json, validates it and stores it into the cache.
+	//
+	// So, the locally trusted certificates are rotated only on the SECOND call of
+	// NotaryRepository.Update after the rotation is pushed to the server.
+	//
+	// This would be nice to fix eventually (breaking down the NotaryRepository.Update
+	// / Repo.Update separation which causes this), but for now, just ensure that the
+	// second update does result in updated certificates.
+
+	// Publish the target, which does an update and pulls down the latest metadata, and
+	// should update the cert store now
+	logRepoTrustRoot(t, "pre-publish", authorRepo)
+	err = authorRepo.Publish()
+	require.NoError(t, err)
+	logRepoTrustRoot(t, "post-publish", authorRepo)
+	verifyOnlyTrustedCertificate(t, authorRepo, newRootCertID)
+
+	// Verify the user can use the rotated repo, and see the added target.
+	_, err = userRepo.GetTargetByName("current")
+	require.NoError(t, err)
+	logRepoTrustRoot(t, "client", userRepo)
+
+	// Verify that clients initialized post-rotation can use the repo, and use
+	// the new certificate immediately.
+	freshUserRepo, _ := newRepoToTestRepo(t, authorRepo, true)
+	defer os.RemoveAll(freshUserRepo.baseDir)
+	_, err = freshUserRepo.GetTargetByName("current")
+	require.NoError(t, err)
+	require.Equal(t, newRootCertID, rootRoleCertID(t, freshUserRepo))
+	verifyOnlyTrustedCertificate(t, freshUserRepo, newRootCertID)
+	logRepoTrustRoot(t, "fresh client", freshUserRepo)
+
+	// Verify that the user initialized with the original certificate eventually
+	// rotates to the new certificate.
+	err = userRepo.Update(false)
+	require.NoError(t, err)
+	logRepoTrustRoot(t, "user refresh 1", userRepo)
+	require.Equal(t, newRootCertID, rootRoleCertID(t, userRepo))
 }
 
 // If there is no local cache, notary operations return the remote error code
