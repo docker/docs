@@ -117,3 +117,9 @@ Where:
 * `--username, --password` are the credentials of a UCP admin user,
 * `--host` is the IP address of UCP,
 * `--dtr-host` is the IP address of the host where DTR is going to be installed.
+
+
+## Where to go next
+
+* [Set up high availability](high-availability.md)
+* [DTR architecture](../architecture.md)

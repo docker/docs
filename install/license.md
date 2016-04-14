@@ -13,15 +13,21 @@ weight=31
 
 # License DTR
 
-After installing Docker Trusted Registry, you need to license your installation.
-If you just want to try DTR, you can
-[get a trial license](https://www.docker.com/pricing).
+By default, you don't need to license your Docker Trusted Registry. When
+installing DTR, it automatically starts using the same license file used on
+your Docker Universal Control Plane cluster.
+
+However, there are some situations when you have to manually license your
+DTR installation.:
+
+* During an upgrade to a new major version;
+* When your current license expires.
 
 
 ## Download your license
 
-When your license is issued, you can download it on Docker Hub. On Docker Hub,
-navigate to your profile settings. Then click the
+When your new license is issued, you can download it on **Docker Hub**. Navigate
+to your **Profile settings**, and click the
 [Licenses tab](https://hub.docker.com/account/licenses/).
 
 ![](../images/get-license-2.png)
@@ -30,9 +36,15 @@ navigate to your profile settings. Then click the
 ## License your installation
 
 Once you've downloaded the license file, you can apply it to your DTR
-installation. On your browser, navigate to DTR, and then go to the **settings
+installation. Navigate to the **DTR web app**, and then go to the **Settings
 page**.
 
-<!-- TODO: add screenshot -->
+![](../images/license-1.png)
 
-**Upload the new license**, and click **save** for the changes to take effect.
+Click the **Apply new license** button, and upload your new license file.
+
+
+## Where to go next
+
+* [Install DTR](install-dtr.md)
+* [Install DTR offline](install-dtr-offline.md)

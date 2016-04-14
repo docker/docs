@@ -15,25 +15,26 @@ weight=0
 Before you can push images to your Docker Trusted Registry, you need to
 create a repository for them.
 
-To create a new repository:
+To create a new repository, navigate to the **DTR web application**, and click
+the **New repository** button.
 
-1. In your browser navigate to the **Docker Trusted Registry web application**.
+![](../images/create-repo-1.png)
 
-2. Navigate to the **Repositories** page. <!-- TODO: add sreenshot -->
+Add a **name and description** for the repository, and choose whether your
+repository is public or private:
 
-3. Click **New repository**. <!-- TODO: add sreenshot -->
-
-
-4. Add a **name and description** for the repository.
-<!-- TODO: add sreenshot -->
-
-5. Choose whether your repository is public or private:
-
-  * Private repositories are visible to all users, but can only be changed by
+  * Public repositories are visible to all users, but can only be changed by
   users granted with permission to write them.
   * Private repositories can only be seen by users that have been granted
   permissions to that repository.
 
-6. Click **Create** to create the repository.
+![](../images/create-repo-2.png)
 
-Now you can push your images to this repository.
+Click **Save** to create the repository. Now you can push your images to this
+repository.
+
+
+## Where to go next
+
+* [Push and pull images](push-and-pull-images.md)
+* [Delete images](delete-images.md)

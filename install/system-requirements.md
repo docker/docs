@@ -49,3 +49,8 @@ DTR collects anonymous usage metrics, to help us improve it. These metrics
 are entirely anonymous, don’t identify your company, users, applications,
 or any other sensitive information. You can disable this on the DTR settings
 page.
+
+## Where to go next
+
+* [DTR architecture](../architecture.md)
+* [Install DTR](install-dtr.md)

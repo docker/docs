@@ -6,6 +6,6 @@ keywords = ["docker, dtr, release notes, upgrade"]
 [menu.main]
 parent="workw_dtr"
 identifier="dtr_menu_release_notes"
-weight=120
+weight=110
 +++
 <![end-metadata]-->

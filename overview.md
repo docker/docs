@@ -16,12 +16,12 @@ Docker Trusted Registry (DTR) is the enterprise-grade image storage solution
 from Docker. You install it behind your firewall so that you can securely store
 and manage the Docker images you use in your applications.
 
-<!--  TODO: add screenshot -->
-
 ## Image management
 
 Docker UCP can be installed on-premises, or on a virtual private cloud.
 And with it, you can store your Docker images securely, behind your firewall.
+
+![](images/overview-1.png)
 
 You can use DTR as part of your Continuous Integration (CI), and Continuous
 Delivery (CD) processes, to build, run, and ship your applications.
@@ -35,4 +35,10 @@ and Active Directory. It also supports Role Based Access Control (RBAC).
 This allows you to implement fine-grain access control policies, on who has
 access to your Docker images.
 
-<!--  TODO: add screenshot -->
+![](images/overview-2.png)
+
+
+## Where to go next
+
+* [DTR architecture](architecture.md)
+* [Install DTR](install/install-dtr.md)

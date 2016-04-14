@@ -23,13 +23,13 @@ using the Commercially Supported Docker Engine.
 
 When you install DTR on a node, the following containers are started:
 
-| Name          | Description                                                                                                                                |
-|:--------------|:-------------------------------------------------------------------------------------------------------------------------------------------|
-| dtr-api       | Executes the DTR business logic. It serves the DTR web application, and API.                                                               |
-| dtr-etcd      | A key-value store for persisting DTR configuration settings. Don't use it in your applications, since it's for internal use only.          |
-| dtr-nginx     | Receives http and https requests and proxies them to other DTR components. It listens on ports 80 and 443 of the host where it is running. |
-| dtr-registry  | Implements the functionality for pulling and pushing Docker images. It also handles how images are stored.                                 |
-| dtr-rethinkdb | A database for persisting repository metadata. Don't use it in your applications, since it's for internal use only.                        |
+| Name          | Description                                                                                                                       |
+|:--------------|:----------------------------------------------------------------------------------------------------------------------------------|
+| dtr-nginx     | Receives http and https requests and proxies them to other DTR components. By default it listens to ports 80 and 443 of the host. |
+| dtr-api       | Executes the DTR business logic. It serves the DTR web application, and API.                                                      |
+| dtr-registry  | Implements the functionality for pulling and pushing Docker images. It also handles how images are stored.                        |
+| dtr-etcd      | A key-value store for persisting DTR configuration settings. Don't use it in your applications, since it's for internal use only. |
+| dtr-rethinkdb | A database for persisting repository metadata. Don't use it in your applications, since it's for internal use only.               |
 
 
 ## Networks
@@ -37,11 +37,15 @@ When you install DTR on a node, the following containers are started:
 To allow containers to communicate, when installing DTR the following networks
 are created:
 
-| Name   | Type    | Description                                                                                                                                                                                          |
-|:-------|:--------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| dtr-br | bridge  | Allows containers in the same node to communicate with each other in a secure way.                                                                                                                   |
-| dtr-ol | overlay | Allows containers in different nodes to communicate. This network is used in high-availability installations, to allow etcd and RethinkDB containers to replicate their data across different nodes. |
+| Name   | Type    | Description                                                                                                                                                                           |
+|:-------|:--------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| dtr-br | bridge  | Allows containers on the same node to communicate with each other in a secure way.                                                                                                    |
+| dtr-ol | overlay | Allows containers running on different nodes to communicate. This network is used in high-availability installations, to allow Etcd and RethinkDB containers to replicate their data. |
 
+The communication between all DTR components is secured using TLS. Also, when
+installing DTR, two Certificate Authorities (CAs) are created. These CAs are
+used to create the certificates used by Etcd and RethinkDB when communicating
+across nodes.
 
 ## Volumes
 
@@ -61,25 +65,24 @@ the default volume driver and flags.
 
 By default, Docker Trusted Registry stores images on the filesystem of the host
 where it is running.
-You can also configure DTR for using these cloud storage backends:
+
+You can also configure DTR to using these cloud storage backends:
 
 * Amazon S3
 * OpenStack Swift
 * Microsoft Azure
 
+For highly available installations, configure DTR to use a cloud storage
+backend or a network filesystem like NFS.
+
 
 ## High-availability support
-For load balancing and high-availability, you can create multiple replicas of
-DTR. In that case, you’ll have multiple nodes, each running the
-same set of containers.
 
-<!--TODO: add diagram with 3 controllers -->
+For load balancing and high-availability, you can install multiple replicas of
+DTR, and join them to create a cluster.
+[Learn more about high availability](high-availability/high-availability.md).
 
-![](images/architecture-2.png)
+## Where to go next
 
-Notice that:
-
-* You can load balance user requests between the controller nodes.
-When you make a change to the configuration of one controller node, that
-configuration is replicated to the other controllers.
-* For high-availability, you should set up 3, 5, or 7 controller nodes.
+* [System requirements](install/system-requirements.md)
+* [Install DTR](install/install-dtr.md)
