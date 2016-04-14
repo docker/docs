@@ -49,7 +49,9 @@ $ openssl s_client -connect <docker host>:4443 -CAfile fixtures/root-ca.crt -no_
 
 To connect using the Notary Client CLI, please see [Getting Started](getting_started.md)
 documentation. Please note that the version of Notary server and signer
-should be greater than or equal to that of the Notary Client CLI to ensure feature compatibility.
+should be greater than or equal to that of the Notary Client CLI to ensure feature compatibility,
+i.e. if you are using Notary Client CLI 0.2, ensure you are using a server and signer tagged with
+an equal or higher version than 0.2 from the <a href="https://github.com/docker/notary/releases">releases page</a>.
 
 The self-signed certificate's subject name and subject alternative names are
 `notary-server`, `notaryserver`, and `localhost`, so if your Docker host is not

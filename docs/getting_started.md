@@ -66,7 +66,7 @@ tell the client which repository server it should communicate with.
 The official Docker Hub Notary servers are located at
 `https://notary.docker.io`. If you would like to use your own Notary server,
 it is important to use the same or a newer <a href="https://github.com/docker/notary/releases">Notary version</a>
-as the client for feature compatibility.
+as the client for feature compatibility (ex: client version 0.2, server/signer version >= 0.2).
 Additionally, Notary stores your own signing keys,
 and a cache of previously downloaded trust metadata in a directory, provided
 with the `-d` flag. When interacting with Docker Hub repositories, you must
