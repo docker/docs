@@ -173,7 +173,7 @@ func TestParseInvalidStorageBackend(t *testing.T) {
 }
 
 // If there is no DB url for non-memory backends, an error is returned.
-func TestParseInvalidStorageNoDBSource(t *testing.T) {
+func TestParseInvalidSQLStorageNoDBSource(t *testing.T) {
 	invalids := []string{
 		`{"storage": {"backend": "%s"}}`,
 		`{"storage": {"backend": "%s", "db_url": ""}}`,
@@ -206,6 +206,67 @@ func TestParseSQLStorageDBStore(t *testing.T) {
 	store, err := ParseSQLStorage(config)
 	require.NoError(t, err)
 	require.Equal(t, expected, *store)
+}
+
+// ParseRethinkDBStorage will reject non rethink databases
+func TestParseRethinkStorageDBStoreInvalidBackend(t *testing.T) {
+	config := configure(`{
+		"storage": {
+			"backend": "mysql",
+			"db_url": "username:password@tcp(hostname:1234)/dbname",
+			"tls_ca_file": "/tls/ca.pem",
+			"database": "rethinkdbtest"
+		}
+	}`)
+
+	_, err := ParseRethinkDBStorage(config)
+	require.Error(t, err)
+	require.Contains(t, err.Error(), "not a supported RethinkDB backend")
+}
+
+// ParseRethinkDBStorage will require a db_url for rethink databases
+func TestParseRethinkStorageDBStoreEmptyDBUrl(t *testing.T) {
+	config := configure(`{
+		"storage": {
+			"backend": "rethinkdb",
+			"tls_ca_file": "/tls/ca.pem",
+			"database": "rethinkdbtest"
+		}
+	}`)
+
+	_, err := ParseRethinkDBStorage(config)
+	require.Error(t, err)
+	require.Contains(t, err.Error(), "must provide a non-empty host:port")
+}
+
+// ParseRethinkDBStorage will require a dbname for rethink databases
+func TestParseRethinkStorageDBStoreEmptyDBName(t *testing.T) {
+	config := configure(`{
+		"storage": {
+			"backend": "rethinkdb",
+			"db_url": "username:password@tcp(hostname:1234)/dbname",
+			"tls_ca_file": "/tls/ca.pem"
+		}
+	}`)
+
+	_, err := ParseRethinkDBStorage(config)
+	require.Error(t, err)
+	require.Contains(t, err.Error(), "requires a specific database to connect to")
+}
+
+// ParseRethinkDBStorage will require a CA cert for rethink databases
+func TestParseRethinkStorageDBStoreEmptyCA(t *testing.T) {
+	config := configure(`{
+		"storage": {
+			"backend": "rethinkdb",
+			"db_url": "username:password@tcp(hostname:1234)/dbname",
+			"database": "rethinkdbtest"
+		}
+	}`)
+
+	_, err := ParseRethinkDBStorage(config)
+	require.Error(t, err)
+	require.Contains(t, err.Error(), "cowardly refusal to connect to rethinkdb without a CA cert")
 }
 
 func TestParseSQLStorageWithEnvironmentVariables(t *testing.T) {

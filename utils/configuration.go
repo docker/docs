@@ -26,9 +26,8 @@ type Storage struct {
 // RethinkDBStorage is configuration about a RethinkDB backend service
 type RethinkDBStorage struct {
 	Storage
-	CA      string
-	AuthKey string
-	DBName  string
+	CA     string
+	DBName string
 }
 
 // GetPathRelativeToConfig gets a configuration key which is a path, and if
@@ -117,9 +116,8 @@ func ParseRethinkDBStorage(configuration *viper.Viper) (*RethinkDBStorage, error
 			Backend: configuration.GetString("storage.backend"),
 			Source:  configuration.GetString("storage.db_url"),
 		},
-		CA:      configuration.GetString("storage.tls_ca_file"),
-		AuthKey: configuration.GetString("storage.auth_key"),
-		DBName:  configuration.GetString("storage.database"),
+		CA:     configuration.GetString("storage.tls_ca_file"),
+		DBName: configuration.GetString("storage.database"),
 	}
 
 	switch {
@@ -136,11 +134,6 @@ func ParseRethinkDBStorage(configuration *viper.Viper) (*RethinkDBStorage, error
 	case store.CA == "":
 		return nil, fmt.Errorf(
 			"cowardly refusal to connect to %s without a CA cert",
-			store.Backend,
-		)
-	case store.AuthKey == "":
-		return nil, fmt.Errorf(
-			"cowardly refusal to connect to %s without an AuthKey",
 			store.Backend,
 		)
 	case store.DBName == "":

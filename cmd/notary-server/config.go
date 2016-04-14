@@ -80,9 +80,12 @@ func getStore(configuration *viper.Viper, hRegister healthRegister) (
 		if err != nil {
 			return nil, err
 		}
-		s, err := storage.NewSQLStorage(storeConfig.Backend, storeConfig.Source)
-		store = *storage.NewTUFMetaStorage(s)
-		hRegister("DB operational", s.CheckHealth, time.Second*60)
+		var s *storage.SQLStorage
+		s, err = storage.NewSQLStorage(storeConfig.Backend, storeConfig.Source)
+		if err == nil {
+			store = *storage.NewTUFMetaStorage(s)
+			hRegister("DB operational", s.CheckHealth, time.Second*60)
+		}
 	case notary.RethinkDBBackend:
 		var sess *gorethink.Session
 		storeConfig, err := utils.ParseRethinkDBStorage(configuration)

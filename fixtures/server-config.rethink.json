@@ -18,7 +18,6 @@
 	},
 	"storage": {
 		"backend": "rethinkdb",
-		"auth_key": "devauthkey",
 		"db_url": "rdb-proxy.rdb",
 		"database": "notaryserver",
 		"tls_ca_file": "/tls/ca.pem"
