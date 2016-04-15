@@ -800,7 +800,7 @@ var waysToMessUpServer = []swizzleExpectations{
 		swizzle: (*testutils.MetadataSwizzler).ExpireMetadata},
 
 	{desc: "lower metadata version", expectErrs: []interface{}{
-		&trustpinning.ErrValidationFail{}, signed.ErrLowVersion{}},
+		&trustpinning.ErrValidationFail{}, signed.ErrLowVersion{}, data.ErrInvalidMetadata{}},
 		swizzle: func(s *testutils.MetadataSwizzler, role string) error {
 			return s.OffsetMetadataVersion(role, -3)
 		}},
@@ -851,13 +851,6 @@ func TestUpdateRootRemoteCorruptedNoLocalCache(t *testing.T) {
 	}
 
 	for _, testData := range waysToMessUpServerRoot() {
-		if testData.desc == "insufficient signatures" {
-			// Currently if we download the root during the bootstrap phase,
-			// we don't check for enough signatures to meet the threshold.  We
-			// are also not entirely sure if we want to support threshold.
-			continue
-		}
-
 		testUpdateRemoteCorruptValidChecksum(t, updateOpts{
 			forWrite: false,
 			role:     data.CanonicalRootRole,
@@ -1207,12 +1200,6 @@ func TestUpdateLocalAndRemoteRootCorrupt(t *testing.T) {
 				// TODO: bug right now where if the local metadata is invalid, we just download a
 				// new version - we verify the signatures and everything, but don't check the version
 				// against the previous if we can
-				continue
-			}
-			if serverExpt.desc == "insufficient signatures" {
-				// Currently if we download the root during the bootstrap phase,
-				// we don't check for enough signatures to meet the threshold.
-				// We are also not sure if we want to support thresholds.
 				continue
 			}
 			testUpdateLocalAndRemoteRootCorrupt(t, true, localExpt, serverExpt)
