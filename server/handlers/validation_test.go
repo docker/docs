@@ -517,48 +517,81 @@ func TestValidateRootRotationMultipleKeysThreshold1(t *testing.T) {
 	require.NoError(t, err)
 }
 
-// A root rotation must be signed with old and new root keys, otherwise the
-// new root fails to validate
-func TestRootRotationNotSignedWithOldKeys(t *testing.T) {
+// A root rotation must be signed with old and new root keys such that it satisfies
+// the old and new roles, otherwise the new root fails to validate
+func TestRootRotationNotSignedWithOldKeysForOldRole(t *testing.T) {
 	repo, crypto, err := testutils.EmptyRepo("docker.com/notary")
 	require.NoError(t, err)
 	store := storage.NewMemStorage()
+	serverCrypto := copyKeys(t, crypto, data.CanonicalTimestampRole)
+
+	oldRootKeyID := repo.Root.Signed.Roles[data.CanonicalRootRole].KeyIDs[0]
+
+	// make the original root have 2 keys with a threshold of 2
+	pairedRootKeys := make([]data.PublicKey, 2)
+	for i := 0; i < len(pairedRootKeys); i++ {
+		pairedRootKeys[i], err = crypto.Create("root", "", data.ED25519Key)
+		require.NoError(t, err)
+	}
+	require.NoError(t, repo.ReplaceBaseKeys(data.CanonicalRootRole, pairedRootKeys...))
+	repo.Root.Signed.Roles[data.CanonicalRootRole].Threshold = 2
 
 	r, tg, sn, ts, err := testutils.Sign(repo)
 	require.NoError(t, err)
+	require.Len(t, r.Signatures, 3)
 	root, targets, snapshot, timestamp, err := getUpdates(r, tg, sn, ts)
 	require.NoError(t, err)
 
-	store.UpdateCurrent("testGUN", root)
+	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
+	require.NoError(t, store.UpdateMany("testGUN", updates))
 
-	rootKey, err := crypto.Create("root", "testGUN", data.ED25519Key)
+	finalRootKey, err := crypto.Create("root", "testGUN", data.ED25519Key)
 	require.NoError(t, err)
-	rootRole, err := data.NewRole("root", 1, []string{rootKey.ID()}, nil)
-	require.NoError(t, err)
-
-	repo.Root.Signed.Roles["root"] = &rootRole.RootRole
-	repo.Root.Signed.Keys[rootKey.ID()] = rootKey
+	repo.Root.Signed.Roles[data.CanonicalRootRole].Threshold = 1
+	require.NoError(t, repo.ReplaceBaseKeys(data.CanonicalRootRole, finalRootKey))
 
 	r, err = repo.SignRoot(data.DefaultExpires(data.CanonicalRootRole))
 	require.NoError(t, err)
-	err = signed.Sign(crypto, r, []data.PublicKey{rootKey}, 1, nil)
-	require.NoError(t, err)
+	origSigs := r.Signatures
 
-	rt, err := data.RootFromSigned(r)
-	require.NoError(t, err)
-	repo.SetRoot(rt)
+	// make sure it's signed with only one of the previous keys and the new key
+	sigs := make([]data.Signature, 0, 2)
+	for _, sig := range origSigs {
+		if sig.KeyID == pairedRootKeys[0].ID() || sig.KeyID == finalRootKey.ID() {
+			sigs = append(sigs, sig)
+		}
+	}
+	require.Len(t, sigs, 2)
+	repo.Root.Signatures = sigs
+	r.Signatures = sigs
 
 	sn, err = repo.SignSnapshot(data.DefaultExpires(data.CanonicalSnapshotRole))
 	require.NoError(t, err)
 	root, targets, snapshot, timestamp, err = getUpdates(r, tg, sn, ts)
 	require.NoError(t, err)
 
-	updates := []storage.MetaUpdate{root, targets, snapshot, timestamp}
-
-	serverCrypto := copyKeys(t, crypto, data.CanonicalTimestampRole)
-	_, err = validateUpdate(serverCrypto, "testGUN", updates, store)
+	_, err = validateUpdate(serverCrypto, "testGUN", []storage.MetaUpdate{root, snapshot}, store)
 	require.Error(t, err)
-	require.Contains(t, err.Error(), "new root was not signed with at least 1 old keys")
+	require.Contains(t, err.Error(), "new root was not signed with at least 2 old keys")
+
+	// now sign with both of the pair and the new one
+	sigs = make([]data.Signature, 0, 3)
+	for _, sig := range origSigs {
+		if sig.KeyID != oldRootKeyID {
+			sigs = append(sigs, sig)
+		}
+	}
+	require.Len(t, sigs, 3)
+	repo.Root.Signatures = sigs
+	r.Signatures = sigs
+
+	sn, err = repo.SignSnapshot(data.DefaultExpires(data.CanonicalSnapshotRole))
+	require.NoError(t, err)
+	root, targets, snapshot, timestamp, err = getUpdates(r, tg, sn, ts)
+	require.NoError(t, err)
+
+	_, err = validateUpdate(serverCrypto, "testGUN", []storage.MetaUpdate{root, snapshot}, store)
+	require.NoError(t, err)
 }
 
 // An update is not valid without the root metadata.
