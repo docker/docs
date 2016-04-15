@@ -171,6 +171,7 @@ func (n *notaryCommander) GetCommand() *cobra.Command {
 	cmdKeyGenerator := &keyCommander{
 		configGetter: n.parseConfig,
 		getRetriever: n.getRetriever,
+		input:        os.Stdin,
 	}
 
 	cmdDelegationGenerator := &delegationCommander{
