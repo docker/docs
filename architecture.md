@@ -12,22 +12,26 @@ weight=20
 
 # UCP architecture
 
-Docker Universal Control Plane (UCP) helps you manage your container cluster
-from a single place.
-
 UCP is a containerized application, so the first step to install UCP is
 installing the Commercially Supported (CS) Docker Engine on all the nodes that
 are going to be part of the cluster.
 
 ![](images/architecture-1.png)
 
-After CS Docker Engine is installed, you can install UCP, and join as many
-nodes you want to the cluster.
+After CS Docker Engine is installed, you install UCP, and join as many
+nodes as you want to the cluster.
 
 ![](images/architecture-2.png)
 
+## Architecture
 
-## UCP controller node
+A UCP cluster has two types of nodes:
+
+* Controller: manages the cluster and persists the cluster configurations.
+* Node: run your containers.
+
+
+### UCP controller node
 
 When you install Docker UCP on a node, the following containers are started.
 ![](images/architecture-3.png)
@@ -42,7 +46,7 @@ When you install Docker UCP on a node, the following containers are started.
 | ucp-cluster-root-ca | A certificate authority to sign the certificates used when joining new nodes, and on administrator client bundles.                                         |
 | ucp-client-root-ca  | A certificate authority to sign user bundles. Only used when UCP is installed without an external root CA.                                                 |
 
-## UCP node
+### UCP node
 
 When you join a node to a Docker UCP cluster, the following containers are
 started.
@@ -86,3 +90,8 @@ Notice that:
 When you make a change to the configuration of one controller node, that
 configuration is replicated to the other controllers.
 * For high-availability, you should set up 3, 5, or 7 controller nodes.
+
+## Where to go next
+
+* [System requirements](installation/system-requirements.md)
+* [Plan a production installation](installation/plan-production-install.md)
