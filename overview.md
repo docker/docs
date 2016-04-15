@@ -15,7 +15,7 @@ Docker Universal Control Plane (UCP) is the enterprise-grade cluster management
 solution from Docker. You install it behind your firewall, and it helps you
 manage your whole cluster from a single place.
 
-![](images/replica-nodes.png)
+![](images/overview-1.png)
 
 ## Centralized cluster management
 
@@ -23,7 +23,7 @@ Docker UCP can be installed on-premises, or on a virtual private cloud.
 And with it, you can manage thousands of nodes as if they were a single one.
 You can monitor and manage your cluster using a graphical UI.
 
-![](images/container-detail-2.png)
+![](images/overview-2.png)
 
 Since UCP exposes the standard Docker API, you can continue using the tools
 you already know, to manage a whole cluster.
@@ -59,6 +59,8 @@ manage apps, containers, networks, images, and volumes, in a transparent way.
 Docker UCP has its own built-in authentication mechanism, and supports LDAP
 and Active Directory. It also supports Role Based Access Control (RBAC).
 This ensures that only authorized users can access and make changes to cluster.
+
+![](images/overview-3.png)
 
 Docker UCP also integrates with Docker Trusted Registry and Docker Content
 Trust. This allows you to keep your images stored behind your firewall,
