@@ -2,7 +2,6 @@ package main
 
 import (
 	"archive/zip"
-	"bufio"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -433,21 +432,12 @@ func (k *keyCommander) keysRotate(cmd *cobra.Command, args []string) error {
 	}
 
 	if rotateKeyRole == data.CanonicalRootRole {
-		fmt.Fprintln(cmd.Out(),
-			"Warning: you are about to rotate your root key.\n"+
-				"You will still need your old key to sign future root changes\n"+
-				"so that clients who may not be behind can update.\n"+
-				"Are you sure you want to proceed?  [y/N]  ")
+		cmd.Println("Warning: you are about to rotate your root key.\n" +
+			"You will still need your old key to sign future root changes\n" +
+			"so that clients who may not be behind can update.\n" +
+			"Are you sure you want to proceed?  (yes/no)  ")
 
-		readIn := bufio.NewReader(k.input)
-
-		result, err := readIn.ReadBytes('\n')
-		if err != nil {
-			return err
-		}
-		yesno := strings.ToLower(strings.TrimSpace(string(result)))
-
-		if yesno != "yes" && yesno != "y" {
+		if !askConfirm(k.input) {
 			fmt.Fprintln(cmd.Out(), "\nAborting action.")
 			return nil
 		}
@@ -476,8 +466,6 @@ func removeKeyInteractively(keyStores []trustmanager.KeyStore, keyID string,
 		return fmt.Errorf("No key with ID %s found.", keyID)
 	}
 
-	readIn := bufio.NewReader(in)
-
 	if len(foundKeys) > 1 {
 		for {
 			// ask the user for which key to delete
@@ -486,11 +474,11 @@ func removeKeyInteractively(keyStores []trustmanager.KeyStore, keyID string,
 				fmt.Fprintf(out, "\t%d. %s: %s (%s)\n", i+1, info[0], info[1], info[2])
 			}
 			fmt.Fprint(out, "Which would you like to delete?  Please enter a number:  ")
-			result, err := readIn.ReadBytes('\n')
-			if err != nil {
+			var result string
+			if _, err := fmt.Fscanln(in, &result); err != nil {
 				return err
 			}
-			index, err := strconv.Atoi(strings.TrimSpace(string(result)))
+			index, err := strconv.Atoi(strings.TrimSpace(result))
 
 			if err != nil || index > len(foundKeys) || index < 1 {
 				fmt.Fprintf(out, "\nInvalid choice: %s\n", string(result))
@@ -506,21 +494,14 @@ func removeKeyInteractively(keyStores []trustmanager.KeyStore, keyID string,
 	keyDescription := fmt.Sprintf("%s (role %s) from %s", foundKeys[0][0],
 		foundKeys[0][1], foundKeys[0][2])
 
-	fmt.Fprintf(out, "Are you sure you want to remove %s?  [Y/n]  ",
+	fmt.Fprintf(out, "Are you sure you want to remove %s?  (yes/no)  ",
 		keyDescription)
-	result, err := readIn.ReadBytes('\n')
-	if err != nil {
-		return err
-	}
-	yesno := strings.ToLower(strings.TrimSpace(string(result)))
-
-	if !strings.HasPrefix("yes", yesno) && yesno != "" {
+	if !askConfirm(in) {
 		fmt.Fprintln(out, "\nAborting action.")
 		return nil
 	}
 
-	err = storesByIndex[0].RemoveKey(foundKeys[0][0])
-	if err != nil {
+	if err := storesByIndex[0].RemoveKey(foundKeys[0][0]); err != nil {
 		return err
 	}
 
