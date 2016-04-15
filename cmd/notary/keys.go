@@ -94,6 +94,8 @@ type keyCommander struct {
 	keysImportRole             string
 	rotateKeyRole              string
 	rotateKeyServerManaged     bool
+
+	input io.Reader
 }
 
 func (k *keyCommander) GetCommand() *cobra.Command {
@@ -429,6 +431,28 @@ func (k *keyCommander) keysRotate(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
+
+	if rotateKeyRole == data.CanonicalRootRole {
+		fmt.Fprintln(cmd.Out(),
+			"Warning: you are about to rotate your root key.\n"+
+				"You will still need your old key to sign future root changes\n"+
+				"so that clients who may not be behind can update.\n"+
+				"Are you sure you want to proceed?  [y/N]  ")
+
+		readIn := bufio.NewReader(k.input)
+
+		result, err := readIn.ReadBytes('\n')
+		if err != nil {
+			return err
+		}
+		yesno := strings.ToLower(strings.TrimSpace(string(result)))
+
+		if yesno != "yes" && yesno != "y" {
+			fmt.Fprintln(cmd.Out(), "\nAborting action.")
+			return nil
+		}
+	}
+
 	return nRepo.RotateKey(rotateKeyRole, k.rotateKeyServerManaged)
 }
 
@@ -526,8 +550,7 @@ func (k *keyCommander) keyRemove(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("invalid key ID provided: %s", keyID)
 	}
 	cmd.Println("")
-	err = removeKeyInteractively(ks, keyID, os.Stdin,
-		cmd.Out())
+	err = removeKeyInteractively(ks, keyID, k.input, cmd.Out())
 	cmd.Println("")
 	return err
 }
