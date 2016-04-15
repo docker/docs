@@ -218,3 +218,11 @@ func TestRootFromSignedValidatesRoleType(t *testing.T) {
 	require.NoError(t, err)
 	require.Equal(t, "Root", sRoot.Signed.Type)
 }
+
+// The version cannot be negative
+func TestRootFromSignedValidatesVersion(t *testing.T) {
+	root := validRootTemplate()
+	root.Signed.Version = -1
+	_, err := rootToSignedAndBack(t, root)
+	require.IsType(t, ErrInvalidMetadata{}, err)
+}

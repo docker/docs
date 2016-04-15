@@ -93,6 +93,11 @@ func ValidateRoot(certStore trustmanager.X509Store, root *data.Signed, gun strin
 		return err
 	}
 
+	rootRole, err := signedRoot.BuildBaseRole(data.CanonicalRootRole)
+	if err != nil {
+		return err
+	}
+
 	// Retrieve all the leaf and intermediate certificates in root for which the CN matches the GUN
 	allLeafCerts, allIntCerts := parseAllCerts(signedRoot)
 	certsFromRoot, err := validRootLeafCerts(allLeafCerts, gun)
@@ -117,7 +122,8 @@ func ValidateRoot(certStore trustmanager.X509Store, root *data.Signed, gun strin
 	if len(trustedCerts) != 0 {
 		logrus.Debugf("found %d valid root certificates for %s: %s", len(trustedCerts), gun,
 			prettyFormatCertIDs(trustedCerts))
-		err = signed.VerifyRoot(root, 0, trustmanager.CertsToKeys(trustedCerts, allIntCerts))
+		err = signed.VerifySignatures(
+			root, data.BaseRole{Keys: trustmanager.CertsToKeys(trustedCerts, allIntCerts), Threshold: 1})
 		if err != nil {
 			logrus.Debugf("failed to verify TUF data for: %s, %v", gun, err)
 			return &ErrValidationFail{Reason: "failed to validate data with current trusted certificates"}
@@ -149,7 +155,8 @@ func ValidateRoot(certStore trustmanager.X509Store, root *data.Signed, gun strin
 	// Validate the integrity of the new root (does it have valid signatures)
 	// Note that certsFromRoot is guaranteed to be unchanged only if we had prior cert data for this GUN or enabled TOFUS
 	// If we attempted to pin a certain certificate or CA, certsFromRoot could have been pruned accordingly
-	err = signed.VerifyRoot(root, 0, trustmanager.CertsToKeys(certsFromRoot, allIntCerts))
+	err = signed.VerifySignatures(root, data.BaseRole{
+		Keys: trustmanager.CertsToKeys(certsFromRoot, allIntCerts), Threshold: rootRole.Threshold})
 	if err != nil {
 		logrus.Debugf("failed to verify TUF data for: %s, %v", gun, err)
 		return &ErrValidationFail{Reason: "failed to validate integrity of roots"}
