@@ -337,6 +337,26 @@ func TestGetStoreDBStore(t *testing.T) {
 	require.Equal(t, 1, registerCalled)
 }
 
+func TestGetStoreRethinkDBStoreConnectionFails(t *testing.T) {
+	config := fmt.Sprintf(
+		`{"storage": {
+			"backend": "%s",
+			"db_url": "host:port",
+			"tls_ca_file": "/tls/ca.pem",
+			"database": "rethinkdbtest"
+			}
+		}`,
+		notary.RethinkDBBackend)
+
+	var registerCalled = 0
+	var fakeRegister = func(_ string, _ func() error, _ time.Duration) {
+		registerCalled++
+	}
+
+	_, err := getStore(configure(config), fakeRegister)
+	require.Error(t, err)
+}
+
 func TestGetMemoryStore(t *testing.T) {
 	var registerCalled = 0
 	var fakeRegister = func(_ string, _ func() error, _ time.Duration) {

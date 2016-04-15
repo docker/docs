@@ -46,17 +46,21 @@ func TestTUFSQLGetCurrent(t *testing.T) {
 	defer os.RemoveAll(tempBaseDir)
 	defer gormDB.Close()
 
-	ConsistentEmptyGetCurrentTest(t, tufDBStore)
+	initialRootTufFile := SampleTUF(1)
 
-	// put an arbitrary piece of data in the database
-	tuf := SampleTUF(1)
-	query := gormDB.Create(&tuf)
+	ConsistentEmptyGetCurrentTest(t, tufDBStore, initialRootTufFile)
+
+	// put an initial piece of root metadata data in the database,
+	// there isn't enough state to retrieve it since we require a timestamp and snapshot in our walk
+
+	query := gormDB.Create(&initialRootTufFile)
 	require.NoError(t, query.Error, "Creating a row in an empty DB failed.")
 
-	ConsistentMissingTSAndSnapGetCurrentTest(t, tufDBStore)
+	ConsistentMissingTSAndSnapGetCurrentTest(t, tufDBStore, initialRootTufFile)
 
 	// Note that get by checksum succeeds, since it does not try to walk timestamp/snapshot
-	GetChecksumFoundTest(t, tufDBStore, tuf)
+	_, _, err = tufDBStore.GetChecksum("testGUN", "root", initialRootTufFile.Sha256)
+	require.NoError(t, err)
 
 	// Now setup a valid tuf repo and use it to ensure we walk correctly
 	validTUFRepo, _, err := testutils.EmptyRepo("testGUN")
@@ -103,4 +107,55 @@ func TestTUFSQLGetCurrent(t *testing.T) {
 	// targets and root lookup on GetCurrent should also still succeed because of caching
 	ConsistentGetCurrentFoundTest(t, tufDBStore, targetsTUF)
 	ConsistentGetCurrentFoundTest(t, tufDBStore, rootTUF)
+
+	// add another orphaned root, but ensure that we still get the previous root
+	// since the new root isn't in a timestamp/snapshot chain
+	orphanedRootTUF := SampleCustomTUF(data.CanonicalRootRole, "testGUN", []byte("orphanedRoot"), 9000)
+	query = gormDB.Create(&orphanedRootTUF)
+	require.NoError(t, query.Error, "Creating a row for root in DB failed.")
+	// a GetCurrent for this gun and root gets us the previous root, which is linked in timestamp and snapshot
+	ConsistentGetCurrentFoundTest(t, tufDBStore, rootTUF)
+	// the orphaned root fails on a GetCurrent even though it's in the underlying store
+	ConsistentTSAndSnapGetDifferentCurrentTest(t, tufDBStore, orphanedRootTUF)
+}
+
+func ConsistentGetCurrentFoundTest(t *testing.T, s *TUFMetaStorage, rec TUFFile) {
+	_, byt, err := s.GetCurrent(rec.Gun, rec.Role)
+	require.NoError(t, err)
+	require.Equal(t, rec.Data, byt)
+}
+
+// Checks that both the walking metastore and underlying metastore do not contain the tuf file
+func ConsistentEmptyGetCurrentTest(t *testing.T, s *TUFMetaStorage, rec TUFFile) {
+	_, byt, err := s.GetCurrent(rec.Gun, rec.Role)
+	require.Nil(t, byt)
+	require.Error(t, err, "There should be an error getting an empty table")
+	require.IsType(t, ErrNotFound{}, err, "Should get a not found error")
+
+	_, byt, err = s.MetaStore.GetCurrent(rec.Gun, rec.Role)
+	require.Nil(t, byt)
+	require.Error(t, err, "There should be an error getting an empty table")
+	require.IsType(t, ErrNotFound{}, err, "Should get a not found error")
+}
+
+// Check that we can't get the "current" specified role because we can't walk from timestamp --> snapshot --> role
+// Also checks that the role metadata still exists in the underlying store
+func ConsistentMissingTSAndSnapGetCurrentTest(t *testing.T, s *TUFMetaStorage, rec TUFFile) {
+	_, byt, err := s.GetCurrent(rec.Gun, rec.Role)
+	require.Nil(t, byt)
+	require.Error(t, err, "There should be an error because there is no timestamp or snapshot to use on GetCurrent")
+	_, byt, err = s.MetaStore.GetCurrent(rec.Gun, rec.Role)
+	require.Equal(t, rec.Data, byt)
+	require.NoError(t, err)
+}
+
+// Check that we can get the "current" specified role but it is different from the provided TUF file because
+// the most valid walk from timestamp --> snapshot --> role gets a different
+func ConsistentTSAndSnapGetDifferentCurrentTest(t *testing.T, s *TUFMetaStorage, rec TUFFile) {
+	_, byt, err := s.GetCurrent(rec.Gun, rec.Role)
+	require.NotEqual(t, rec.Data, byt)
+	require.NoError(t, err)
+	_, byt, err = s.MetaStore.GetCurrent(rec.Gun, rec.Role)
+	require.Equal(t, rec.Data, byt)
+	require.NoError(t, err)
 }
