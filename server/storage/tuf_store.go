@@ -106,6 +106,20 @@ func (tms TUFMetaStorage) GetCurrent(gun, tufRole string) (*time.Time, []byte, e
 	return roleTime, roleJSON, nil
 }
 
+// GetChecksum gets a specific TUF record by checksum, also checking the internal cache
+func (tms TUFMetaStorage) GetChecksum(gun, tufRole, checksum string) (*time.Time, []byte, error) {
+	if cachedRoleData, ok := tms.cachedMeta[checksum]; ok {
+		return cachedRoleData.createupdate, cachedRoleData.data, nil
+	}
+	roleTime, roleJSON, err := tms.MetaStore.GetChecksum(gun, tufRole, checksum)
+	if err != nil {
+		return nil, nil, err
+	}
+	// cache for subsequent lookups
+	tms.cachedMeta[checksum] = &storedMeta{data: roleJSON, createupdate: roleTime}
+	return roleTime, roleJSON, nil
+}
+
 // Bootstrap the store with tables if possible
 func (tms TUFMetaStorage) Bootstrap() error {
 	if s, ok := tms.MetaStore.(storage.Bootstrapper); ok {

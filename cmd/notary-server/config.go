@@ -65,10 +65,7 @@ func grpcTLS(configuration *viper.Viper) (*tls.Config, error) {
 // parses the configuration and returns a backing store for the TUF files
 func getStore(configuration *viper.Viper, hRegister healthRegister) (
 	storage.MetaStore, error) {
-	var (
-		store storage.MetaStore
-		err   error
-	)
+	var store storage.MetaStore
 	backend := configuration.GetString("storage.backend")
 	logrus.Infof("Using %s backend", backend)
 
@@ -82,10 +79,11 @@ func getStore(configuration *viper.Viper, hRegister healthRegister) (
 		}
 		var s *storage.SQLStorage
 		s, err = storage.NewSQLStorage(storeConfig.Backend, storeConfig.Source)
-		if err == nil {
-			store = *storage.NewTUFMetaStorage(s)
-			hRegister("DB operational", s.CheckHealth, time.Second*60)
+		if err != nil {
+			return nil, fmt.Errorf("Error starting %s driver: %s", backend, err.Error())
 		}
+		store = *storage.NewTUFMetaStorage(s)
+		hRegister("DB operational", s.CheckHealth, time.Second*60)
 	case notary.RethinkDBBackend:
 		var sess *gorethink.Session
 		storeConfig, err := utils.ParseRethinkDBStorage(configuration)
@@ -93,16 +91,14 @@ func getStore(configuration *viper.Viper, hRegister healthRegister) (
 			return nil, err
 		}
 		sess, err = rethinkdb.Connection(storeConfig.CA, storeConfig.Source)
-		if err == nil {
-			s := storage.NewRethinkDBStorage(storeConfig.DBName, sess)
-			store = *storage.NewTUFMetaStorage(s)
-			hRegister("DB operational", s.CheckHealth, time.Second*60)
+		if err != nil {
+			return nil, fmt.Errorf("Error starting %s driver: %s", backend, err.Error())
 		}
+		s := storage.NewRethinkDBStorage(storeConfig.DBName, sess)
+		store = *storage.NewTUFMetaStorage(s)
+		hRegister("DB operational", s.CheckHealth, time.Second*60)
 	default:
-		err = fmt.Errorf("%s not a supported storage backend", backend)
-	}
-	if err != nil {
-		return nil, fmt.Errorf("Error starting %s driver: %s", backend, err.Error())
+		return nil, fmt.Errorf("%s not a supported storage backend", backend)
 	}
 	return store, nil
 }

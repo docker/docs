@@ -16,7 +16,7 @@ func makeDB(session *gorethink.Session, name string) error {
 
 		return err
 	}
-
+	// Note: Wait() not supported by RethinkDB 2.3+
 	resp, err := gorethink.DB(name).Wait().Run(session)
 	if resp != nil {
 		resp.Close()
@@ -40,6 +40,7 @@ func (t Table) term(dbName string) gorethink.Term {
 }
 
 func (t Table) wait(session *gorethink.Session, dbName string) error {
+	// Note: Wait() not supported by RethinkDB 2.3+
 	resp, err := t.term(dbName).Wait().Run(session)
 
 	if resp != nil {
