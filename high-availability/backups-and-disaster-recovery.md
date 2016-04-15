@@ -64,7 +64,7 @@ As an example, to create a backup of a DTR node, you can use:
 
 ```bash
 $ docker run -it --rm docker/dtr backup \
-  --insecure-tls --pod-id 8b6174866010 \
+  --insecure-tls --replica-id 8b6174866010 \
   --username admin --password password \
   --host 192.168.10.100 > /tmp/backup.tar
 ```
@@ -72,7 +72,7 @@ $ docker run -it --rm docker/dtr backup \
 Where:
 
 * `--insecure-tls` allows connecting to UCP without TLS,
-* `--pod-id` specifies the DTR pod to backup,
+* `--replica-id` specifies the DTR replica to backup,
 * `--username, --password` are the credentials of a UCP admin user,
 * `--host` is the IP address of UCP.
 
