@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"os"
 
 	notaryclient "github.com/docker/notary/client"
 	"github.com/docker/notary/passphrase"
@@ -159,7 +160,7 @@ func (d *delegationCommander) delegationRemove(cmd *cobra.Command, args []string
 		cmd.Println("\nAre you sure you want to remove all data for this delegation? (yes/no)")
 		// Ask for confirmation before force removing delegation
 		if !d.forceYes {
-			confirmed := askConfirm()
+			confirmed := askConfirm(os.Stdin)
 			if !confirmed {
 				fatalf("Aborting action.")
 			}

@@ -3,6 +3,7 @@ package main
 import (
 	"crypto/x509"
 	"fmt"
+	"os"
 	"path/filepath"
 
 	"github.com/docker/notary"
@@ -129,7 +130,7 @@ func (c *certCommander) certRemove(cmd *cobra.Command, args []string) error {
 
 	// Ask for confirmation before removing certificates, unless -y is provided
 	if !c.certRemoveYes {
-		confirmed := askConfirm()
+		confirmed := askConfirm(os.Stdin)
 		if !confirmed {
 			return fmt.Errorf("Aborting action.")
 		}

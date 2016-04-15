@@ -74,10 +74,10 @@ func TestRemoveOneKeyAbort(t *testing.T) {
 }
 
 // If there is one key, asking to remove it will ask for confirmation.  Passing
-// 'yes'/'y'/'' response will continue the deletion.
+// 'yes'/'y' response will continue the deletion.
 func TestRemoveOneKeyConfirm(t *testing.T) {
 	setUp(t)
-	yesses := []string{"yes", " Y ", "yE", "   ", ""}
+	yesses := []string{"yes", " Y "}
 
 	for _, yesAnswer := range yesses {
 		store := trustmanager.NewKeyMemoryStore(ret)
@@ -108,7 +108,7 @@ func TestRemoveOneKeyConfirm(t *testing.T) {
 // invalid.
 func TestRemoveMultikeysInvalidInput(t *testing.T) {
 	setUp(t)
-	in := bytes.NewBuffer([]byte("nota number\n9999\n-3\n0"))
+	in := bytes.NewBuffer([]byte("notanumber\n9999\n-3\n0"))
 
 	key, err := trustmanager.GenerateED25519Key(rand.Reader)
 	require.NoError(t, err)
@@ -149,7 +149,7 @@ func TestRemoveMultikeysInvalidInput(t *testing.T) {
 		}
 	}
 	require.Equal(t, rootCount, targetCount)
-	require.Equal(t, 4, rootCount) // for each of the 4 invalid inputs
+	require.Equal(t, 5, rootCount) // original + 1 for each of the 4 invalid inputs
 }
 
 // If there is more than one key, removeKeyInteractively will ask which key to
