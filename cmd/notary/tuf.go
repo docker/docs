@@ -171,9 +171,7 @@ func (t *tufCommander) tufAddByHash(cmd *cobra.Command, args []string) error {
 
 	// Manually construct the target with the given byte size and hashes
 	target := &notaryclient.Target{Name: targetName, Hashes: targetHash, Length: targetInt64Len}
-	if err != nil {
-		return err
-	}
+
 	// If roles is empty, we default to adding to targets
 	if err = nRepo.AddTarget(target, t.roles...); err != nil {
 		return err
