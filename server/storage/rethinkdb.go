@@ -140,7 +140,7 @@ func (rdb RethinkDB) UpdateMany(gun string, updates []MetaUpdate) error {
 // the given GUN and role, an error is returned.
 func (rdb RethinkDB) GetCurrent(gun, role string) (created *time.Time, data []byte, err error) {
 	file := RDBTUFFile{}
-	res, err := gorethink.DB(rdb.dbName).Table(file.TableName()).GetAllByIndex(
+	res, err := gorethink.DB(rdb.dbName).Table(file.TableName(), gorethink.TableOpts{ReadMode: "majority"}).GetAllByIndex(
 		rdbGunRoleIdx, []string{gun, role},
 	).OrderBy(gorethink.Desc("version")).Run(rdb.sess)
 	if err != nil {
@@ -162,7 +162,7 @@ func (rdb RethinkDB) GetCurrent(gun, role string) (created *time.Time, data []by
 // not found, it returns storage.ErrNotFound
 func (rdb RethinkDB) GetChecksum(gun, role, checksum string) (created *time.Time, data []byte, err error) {
 	var file RDBTUFFile
-	res, err := gorethink.DB(rdb.dbName).Table(file.TableName()).GetAllByIndex(
+	res, err := gorethink.DB(rdb.dbName).Table(file.TableName(), gorethink.TableOpts{ReadMode: "majority"}).GetAllByIndex(
 		rdbGunRoleSha256Idx, []string{gun, role, checksum},
 	).Run(rdb.sess)
 	if err != nil {
