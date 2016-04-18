@@ -33,6 +33,7 @@ type Table struct {
 	// on the field matching the key. Otherwise, it is a compound index
 	// on the list of fields in the corrensponding slice value.
 	SecondaryIndexes map[string][]string
+	Config           map[string]string
 }
 
 func (t Table) term(dbName string) gorethink.Term {
@@ -75,6 +76,14 @@ func (t Table) create(session *gorethink.Session, dbName string, numReplicas uin
 		return fmt.Errorf("unable to wait for table to be ready after reconfiguring replication: %s", err)
 	}
 
+	if _, err := t.term(dbName).Config().Update(t.Config).RunWrite(session); err != nil {
+		return fmt.Errorf("unable to configure table linearizability: %s", err)
+	}
+
+	if err := t.wait(session, dbName); err != nil {
+		return fmt.Errorf("unable to wait for table to be ready after configuring linearizability: %s", err)
+	}
+
 	for indexName, fieldNames := range t.SecondaryIndexes {
 		if len(fieldNames) == 0 {
 			// The field name is the index name.
@@ -112,7 +121,7 @@ func (t Table) create(session *gorethink.Session, dbName string, numReplicas uin
 	return nil
 }
 
-// SetupDB hadles creating the database and creating all tables and indexes.
+// SetupDB handles creating the database and creating all tables and indexes.
 func SetupDB(session *gorethink.Session, dbName string, tables []Table) error {
 	if err := makeDB(session, dbName); err != nil {
 		return fmt.Errorf("unable to create database: %s", err)

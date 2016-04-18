@@ -21,6 +21,10 @@ var (
 			rdbGunRoleIdx:       {"gun", "role"},
 			rdbGunRoleSha256Idx: {"gun", "role", "sha256"},
 		},
+		// this configuration guarantees linearizability of individual atomic operations on individual documents
+		Config: map[string]string{
+			"write_acks": "majority",
+		},
 	}
 
 	keys = rethinkdb.Table{
