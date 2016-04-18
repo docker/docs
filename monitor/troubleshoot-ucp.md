@@ -11,22 +11,26 @@ parent="mn_monitor_ucp"
 
 # Troubleshoot your cluster
 
-In this release, UCP leverages the [etcd](https://github.com/coreos/etcd/) KV
-store internally for node discovery and high availability. This use is specific
-to UCP. The services you deploy on UCP can use whichever key-store is
-appropriate for the service.
+Docker UCP persists configuration data on an [etcd](https://coreos.com/etcd/)
+key-value store. This key-value store is replicated on all controller nodes of
+the UCP cluster. The key-value store is for internal use only, and should not
+be used by other applications.
 
-Under normal circumstances, you should not have to access the KV store
-directly.  To mitigate unforeseen problems or change advanced settings,
-you may be required by Docker support or your SE to change configuration
-values or data in the store.
+This article shows how you can access the key-value store, for
+troubleshooting configuration problems in your cluster.
 
-The following example demonstrates basic `curl` usage assuming you
-have set up your environment with the downloaded ucp bundle.
+## Using the REST API
 
-The example below uses the [jq](https://stedolan.github.io/jq/) tool to
-pretty print the resulting json.  This can be omitted for raw json output.
+In this example we'll be using `curl` for making requests to the key-value
+store REST API, and `jq` to process the responses.
 
+You can install these tools on a Ubuntu distribution by running:
+
+```bash
+$ sudo apt-get update && apt-get install curl jq
+```
+
+To access the cluster configurations, run:
 
 ```bash
 export KV_URL="https://$(echo $DOCKER_HOST | cut -f3 -d/ | cut -f1 -d:):12379"
@@ -38,25 +42,25 @@ curl -s \
     ${KV_URL}/v2/keys | jq "."
 ```
 
-
-You can browse the UCP keys under `/v2/keys/ucp/` and swarm under
-`/v2/keys/swarm` as well as modify by `POST`ing updated values to
-workaround problems.  Further documentation for the etcd API is available
-at https://github.com/coreos/etcd/blob/master/Documentation/api.md
+To learn more about the key-value store API, check the
+[etcd official documentation](https://coreos.com/etcd/docs/latest/api.html).
 
 
-### Troubleshooting with etcdctl
+## Using a CLI client
 
-The `ucp-kv` container(s) running on the primary controller (and replicas in an
-HA configuration) contain the `etcdctl` binary, which can be accessed using
-`docker exec`.  The examples (and their output) using the tool to perform
-various tasks on the `etcd` cluster.
+The containers running the key-value store, include `etcdctl`, a command line
+client for etcd. You can run it using the `docker exec` command.
+
+The example below assumes you have the Docker CLI client pointing to the Docker
+Engine of a UCP controller. If you are running the example below through UCP,
+you should specify the node-specific container name.
 
 These commands assume you are running directly against the Docker Engine in
 question.  If you are running these commands through UCP, you should specify the
 node specific container name.
 
-Check the health of the etcd cluster (on failure it will exit with an error code, and no output)
+Check the health of the etcd cluster. On failure the command exits with an
+error code, and no output:
 
 ```bash
 docker exec -it ucp-kv etcdctl \
@@ -72,7 +76,7 @@ member ca3c1bb18f1b30bf is healthy: got healthy result from https://192.168.122.
 cluster is healthy
 ```
 
-List the current members of the cluster
+List the current members of the cluster:
 
 ```bash
 docker exec -it ucp-kv etcdctl \
@@ -87,7 +91,7 @@ c5a24cfdb4263e72: name=orca-kv-192.168.122.196 peerURLs=https://192.168.122.196:
 ca3c1bb18f1b30bf: name=orca-kv-192.168.122.223 peerURLs=https://192.168.122.223:12380 clientURLs=https://192.168.122.223:12379
 ```
 
-Remove a failed member (use the list above first to get the ID)
+Remove a failed member:
 
 ```bash
 docker exec -it ucp-kv etcdctl \
@@ -100,7 +104,7 @@ docker exec -it ucp-kv etcdctl \
 Removed member c5a24cfdb4263e72 from cluster
 ```
 
-Show the current value of a key
+Show the current value of a key:
 
 ```bash
 docker exec -it ucp-kv etcdctl \
@@ -115,16 +119,6 @@ docker exec -it ucp-kv etcdctl \
 /docker/nodes/192.168.122.223:12376
 ```
 
-
-### Learn about the certificates
-
-The store is configured with mutual TLS to prevent unauthorized access.
-
-All components in the system that require access to the KV store use
-client certificates signed by the Swarm Root CA.  As admin account
-certificates are also signed by this Swarm Root CA, administrators can
-access the KV store using `curl` or other tools, provided the admin's
-certificate is used as the client certificate.
 
 ## Where to go next
 
