@@ -264,4 +264,4 @@ Remember, you'll need to restart the daemon each time you change the start optio
 ## Where to go next
 
 * [Integrate with DTR](dtr-integration.md)
-* [Set up high availability](../high-availability/understand_ha.md)
+* [Set up high availability](../high-availability/set-up-high-availability.md)
