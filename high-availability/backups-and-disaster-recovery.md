@@ -12,7 +12,8 @@ weight=10
 # Backups and disaster recovery
 
 When you decide to start using Docker Universal Control Plane on a production
-setting, you should [configure it for high availability](understand_ha.md).
+setting, you should
+[configure it for high availability](set-up-high-availability.md).
 
 The next step is creating a backup policy and disaster recovery plan.
 
@@ -20,10 +21,10 @@ The next step is creating a backup policy and disaster recovery plan.
 
 Docker UCP nodes persist data using [named volumes](../architecture.md):
 
-* **Controller nodes** persist cluster configurations, certificates, and keys
+* Controller nodes persist cluster configurations, certificates, and keys
 used to issue certificates and user bundles. This data is replicated on every
 controller node in the cluster.
-* **Nodes** are stateless. They only store certificates for mutual TLS, that
+* Nodes are stateless. They only store certificates for mutual TLS, that
 can be regenerated.
 
 As part of your backup policy you should regularly create backups of the
@@ -86,3 +87,8 @@ Enter passphrase: secret
 ./ucp-cluster-root-ca/
 # output snipped
 ```
+
+## Where to go next
+
+* [Set up high availability](set-up-high-availability.md)
+* [UCP architecture](../architecture.md)

@@ -5,7 +5,7 @@ description = "Learn how to uninstall a Docker Universal Control Plane cluster."
 keywords = ["docker, ucp, uninstall"]
 [menu.main]
 parent="mn_ucp_installation"
-weight=50
+weight=60
 +++
 <![end-metadata]-->
 
@@ -30,14 +30,19 @@ To uninstall Docker UCP from a cluster, you should:
 
 ## Example
 
-The following example illustrates an interactive uninstall.
+In this example we’ll be running the uninstall command interactively, so that
+the command prompts for the necessary configuration values.
+You can also use flags to pass values to the uninstall command.
 
 1. Run the uninstall command.
 
-    ```
-    $ docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock --name ucp docker/ucp uninstall -i
+    ```bash
+    $ docker run --rm -it \
+      -v /var/run/docker.sock:/var/run/docker.sock
+      --name ucp \
+      docker/ucp uninstall -i
 
-    INFO[0000] We're about to uninstall the local components for UCP ID: FEY4:M46O:7OUS:QQA4:HLR3:4HRD:IUTH:LC2W:QPRE:BLYH:UWEM:3TYV
+    INFO[0000] Were about to uninstall the local components for UCP ID: FEY4:M46O:7OUS:QQA4:HLR3:4HRD:IUTH:LC2W:QPRE:BLYH:UWEM:3TYV
     Do you want proceed with the uninstall? (y/n): y
 
     INFO[0000] Removing UCP Containers
@@ -54,13 +59,13 @@ The following example illustrates an interactive uninstall.
     docker/ucp          latest              788bdcfde423        8 days ago          8.239 MB
     ```
 
-3. Remove the `ucp` image from the node.
+    The uninstall command removes all UCP-related images except the
+    `docker/ucp` image.
 
-    Because the `ucp` tool is running during the installation, it can't remove
-    its own image. If you want to free up that space, delete the ucp image.
+3. Remove the `docker/ucp` image.
 
     ```
-    $ docker rmi docker/ucp:latest
+    $ docker rmi docker/ucp
 
     Untagged: docker/ucp:latest
     Deleted: sha256:788bdcfde423b6226b90ac98e6f233b15c0c527779177d7017a4e17db31404c9
@@ -68,4 +73,5 @@ The following example illustrates an interactive uninstall.
     Deleted: sha256:93743d5df2362466e2fe116a677ec6a4b0091bd09e889abfc9109047fcfcdebf
     ```
 
-4. Return to the UCP web application to confirm the node is removed.
+4. Go to the UCP web application, and confirm the node was removed from the
+cluster.

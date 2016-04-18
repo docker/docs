@@ -63,18 +63,18 @@ started.
 
 Docker UCP uses these named volumes for persisting data:
 
-| Volume name                 | Location on host (/var/lib/docker/volumes/) | Description                                                                                                    |
-|:----------------------------|:--------------------------------------------|:---------------------------------------------------------------------------------------------------------------|
-| ucp-client-root-ca          | ucp-client-root-ca/_data                    | The certificate and key for the UCP root CA. Do not create this volume if you are using your own certificates. |
-| ucp-cluster-root-ca         | ucp-cluster-root-ca/_data                   | The certificate and key for the Swarm root CA.                                                                 |
-| ucp-controller-client-certs | ucp-controller-client-certs/_data           | The UCP Controller Swarm client certificates for the current node.                                             |
-| ucp-controller-server-certs | ucp-controller-server-certs/_data           | The controller certificates for the UCP controllers web server.                                                |
-| ucp-kv                      | ucp-kv/_data                                | Key value store persistence.                                                                                   |
-| ucp-kv-certs                | ucp-kv-certs/_data                          | The Swarm KV client certificates for the current node (repeated on every node in the cluster).                 |
-| ucp-node-certs              | ucp-node-certs/_data                        | The Swarm certificates for the current node (repeated on every node in the cluster).                           |
+| Node       | Volume name                 | Location on host (/var/lib/docker/volumes/) | Description                                                                                                    |
+|:-----------|:----------------------------|:--------------------------------------------|:---------------------------------------------------------------------------------------------------------------|
+| all        | ucp-client-root-ca          | ucp-client-root-ca/_data                    | The certificate and key for the UCP root CA. Do not create this volume if you are using your own certificates. |
+| all        | ucp-cluster-root-ca         | ucp-cluster-root-ca/_data                   | The certificate and key for the Swarm root CA.                                                                 |
+| all        | ucp-controller-client-certs | ucp-controller-client-certs/_data           | The UCP Controller Swarm client certificates for the current node.                                             |
+| all        | ucp-controller-server-certs | ucp-controller-server-certs/_data           | The controller certificates for the UCP controllers web server.                                                |
+| controller | ucp-kv                      | ucp-kv/_data                                | Key value store persistence.                                                                                   |
+| all        | ucp-kv-certs                | ucp-kv-certs/_data                          | The Swarm KV client certificates for the current node (repeated on every node in the cluster).                 |
+| all        | ucp-node-certs              | ucp-node-certs/_data                        | The Swarm certificates for the current node (repeated on every node in the cluster).                           |
 
 
-If you don’t create these volumes, when installing UCP, they are created with
+If you don’t create these volumes before when installing UCP, they are created with
 the default volume driver and flags.
 
 ## High-availability support

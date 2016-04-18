@@ -7,7 +7,7 @@ keywords = ["Docker, UCP, upgrade, update"]
 [menu.main]
 identifier="ucp_upgrade_installation"
 parent="mn_ucp_installation"
-weight=40
+weight=50
 +++
 <![end-metadata]-->
 
@@ -28,16 +28,12 @@ to misconfigurations that are difficult to troubleshoot.
 ## The UCP upgrade command
 
 To upgrade a UCP installation, you run the `ucp upgrade` command on each node
-of the cluster.
-
-You can check the options available on the upgrade command by running:
+of the cluster. To find what are available, check the
+[reference documentation](../reference/upgrade.md), or run:
 
 ```bash
 $ docker run --rm -it docker/ucp upgrade --help
 ```
-
-You can also find the documentation for the `upgrade` command on the
-[UCP upgrade command reference](../reference/upgrade.md).
 
 When you run the `upgrade` command, it:
 
