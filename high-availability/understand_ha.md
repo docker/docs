@@ -102,34 +102,6 @@ If an external load balancer is not used, system administrators should note the
 IP/hostname of the primary and all controller replicas. In this way, an
 administrator can access them when needed.
 
-## Backup policy
-
-UCP configurations are stored using a key-value store that is replicated across
-the controller and replica nodes. This makes the cluster tolerant to failures.
-
-The data of the key-value store and the certificates used for TLS are persisted
-using volumes. [These volumes](../architecture.md#volumes)
-are created when installing UCP on a node, and when joining nodes to a cluster.
-
-On UCP version 1.0, the CAs present in the controller node are not replicated
-on other nodes:
-
-* Swarm CA:
-    * Used for admin cert bundle generation,
-    * Used for adding hosts to the cluster.
-* UCP CA:
-    * Used for user bundle generation,
-    * Used to sign certs for new replica nodes.
-
-If the controller node fails, replica nodes will keep the system state and
-still be able to handle user requests. However during a controller node failure
-it's not possible to:
-
-* Download new certificate bundles for admin and non-admin users. Existing bundles will still work,
-* Add more nodes to the cluster. Existing nodes will continue to operate.
-
-You should keep a backup of these volumes, so that you can restore the CAs used
-in the controller node, in case of failure.
 
 
 ## Where to go next
