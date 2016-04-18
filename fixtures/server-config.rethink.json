@@ -20,6 +20,6 @@
 		"backend": "rethinkdb",
 		"db_url": "rdb-proxy.rdb",
 		"database": "notaryserver",
-		"tls_ca_file": "/tls/ca.pem"
+		"tls_ca_file": "./rethinkdb/ca.pem"
 	}
 }
