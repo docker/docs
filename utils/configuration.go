@@ -116,7 +116,7 @@ func ParseRethinkDBStorage(configuration *viper.Viper) (*RethinkDBStorage, error
 			Backend: configuration.GetString("storage.backend"),
 			Source:  configuration.GetString("storage.db_url"),
 		},
-		CA:     configuration.GetString("storage.tls_ca_file"),
+		CA:     GetPathRelativeToConfig(configuration, "storage.tls_ca_file"),
 		DBName: configuration.GetString("storage.database"),
 	}
 
