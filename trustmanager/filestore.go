@@ -64,24 +64,6 @@ func (f *SimpleFileStore) Remove(name string) error {
 	return os.Remove(filePath)
 }
 
-// RemoveDir removes the directory identified by name
-func (f *SimpleFileStore) RemoveDir(name string) error {
-	dirPath := filepath.Join(f.baseDir, name)
-
-	// Check to see if directory exists
-	fi, err := os.Stat(dirPath)
-	if err != nil {
-		return err
-	}
-
-	// Check to see if it is a directory
-	if !fi.IsDir() {
-		return fmt.Errorf("directory not found: %s", name)
-	}
-
-	return os.RemoveAll(dirPath)
-}
-
 // Get returns the data given a file name
 func (f *SimpleFileStore) Get(name string) ([]byte, error) {
 	filePath, err := f.GetPath(name)
@@ -110,12 +92,6 @@ func (f *SimpleFileStore) GetPath(name string) (string, error) {
 // ListFiles lists all the files inside of a store
 func (f *SimpleFileStore) ListFiles() []string {
 	return f.list(f.baseDir)
-}
-
-// ListDir lists all the files inside of a directory identified by a name
-func (f *SimpleFileStore) ListDir(name string) []string {
-	fullPath := filepath.Join(f.baseDir, name)
-	return f.list(fullPath)
 }
 
 // list lists all the files in a directory given a full path. Ignores symlinks.

@@ -74,39 +74,6 @@ func TestRemoveFile(t *testing.T) {
 	require.Error(t, err)
 }
 
-func TestRemoveDir(t *testing.T) {
-	testName := "docker.com/diogomonica/"
-	testExt := ".key"
-	perms := os.FileMode(0700)
-
-	// Temporary directory where test files will be created
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	require.NoError(t, err)
-	defer os.RemoveAll(tempBaseDir)
-
-	// Since we're generating this manually we need to add the extension '.'
-	expectedFilePath := filepath.Join(tempBaseDir, testName+testExt)
-
-	_, err = generateRandomFile(expectedFilePath, perms)
-	require.NoError(t, err)
-
-	// Create our SimpleFileStore
-	store := &SimpleFileStore{
-		baseDir: tempBaseDir,
-		fileExt: testExt,
-		perms:   perms,
-	}
-
-	// Call the RemoveDir function
-	err = store.RemoveDir(testName)
-	require.NoError(t, err)
-
-	expectedDirectory := filepath.Dir(expectedFilePath)
-	// Check to see if file exists
-	_, err = os.Stat(expectedDirectory)
-	require.Error(t, err)
-}
-
 func TestListFiles(t *testing.T) {
 	testName := "docker.com/notary/certificate"
 	testExt := "crt"
@@ -137,42 +104,6 @@ func TestListFiles(t *testing.T) {
 	// Call the List function. Expect 10 files
 	files := store.ListFiles()
 	require.Len(t, files, 10)
-}
-
-func TestListDir(t *testing.T) {
-	testName := "docker.com/notary/certificate"
-	testExt := "crt"
-	perms := os.FileMode(0755)
-
-	// Temporary directory where test files will be created
-	tempBaseDir, err := ioutil.TempDir("", "notary-test-")
-	require.NoError(t, err)
-	defer os.RemoveAll(tempBaseDir)
-
-	var expectedFilePath string
-	// Create 10 randomfiles
-	for i := 1; i <= 10; i++ {
-		// Since we're generating this manually we need to add the extension '.'
-		fileName := fmt.Sprintf("%s-%s.%s", testName, strconv.Itoa(i), testExt)
-		expectedFilePath = filepath.Join(tempBaseDir, fileName)
-		_, err = generateRandomFile(expectedFilePath, perms)
-		require.NoError(t, err)
-	}
-
-	// Create our SimpleFileStore
-	store := &SimpleFileStore{
-		baseDir: tempBaseDir,
-		fileExt: testExt,
-		perms:   perms,
-	}
-
-	// Call the ListDir function
-	files := store.ListDir("docker.com/")
-	require.Len(t, files, 10)
-	files = store.ListDir("docker.com/notary")
-	require.Len(t, files, 10)
-	files = store.ListDir("fakedocker.com/")
-	require.Len(t, files, 0)
 }
 
 func TestGetPath(t *testing.T) {
