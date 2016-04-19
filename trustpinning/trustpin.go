@@ -65,11 +65,19 @@ func NewTrustPinChecker(trustPinConfig TrustPinConfig, gun string) (CertChecker,
 }
 
 func (t trustPinChecker) certsCheck(leafCert *x509.Certificate, intCerts []*x509.Certificate) bool {
-	certID, err := trustmanager.FingerprintCert(leafCert)
+	// reconstruct the leaf + intermediate cert chain, which is bundled as {leaf, intermediates...},
+	// in order to get the matching id in the root file
+	leafCertID, err := trustmanager.FingerprintCert(leafCert)
 	if err != nil {
 		return false
 	}
-	return utils.StrSliceContains(t.pinnedCertIDs, certID)
+	rootKeys := trustmanager.CertsToKeys([]*x509.Certificate{leafCert}, map[string][]*x509.Certificate{leafCertID: intCerts})
+	for keyID := range rootKeys {
+		if utils.StrSliceContains(t.pinnedCertIDs, keyID) {
+			return true
+		}
+	}
+	return false
 }
 
 func (t trustPinChecker) caCheck(leafCert *x509.Certificate, intCerts []*x509.Certificate) bool {
