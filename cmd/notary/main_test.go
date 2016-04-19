@@ -13,6 +13,7 @@ import (
 	"time"
 
 	"github.com/docker/go-connections/tlsconfig"
+	"github.com/docker/notary"
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/server/storage"
 	"github.com/stretchr/testify/require"
@@ -368,4 +369,109 @@ func TestConfigFileOverridenByCmdLineFlags(t *testing.T) {
 	// validate that we actually managed to connect and attempted to download the root though
 	require.Len(t, m.gotten, 1)
 	require.Equal(t, m.gotten[0], "repo.root")
+}
+
+// the config can specify trust pinning settings for TOFUs, as well as pinned Certs or CA
+func TestConfigFileTrustPinning(t *testing.T) {
+	var err error
+
+	tempDir := tempDirWithConfig(t, `{
+        "trust_pinning": {
+            "disable_tofu": false
+         }
+	}`)
+	defer os.RemoveAll(tempDir)
+	commander := &notaryCommander{
+		getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+		configFile:   filepath.Join(tempDir, "config.json"),
+	}
+
+	// Check that tofu was set correctly
+	config, err := commander.parseConfig()
+	require.NoError(t, err)
+	require.Equal(t, false, config.GetBool("trust_pinning.disable_tofu"))
+	trustPin, err := getTrustPinning(config)
+	require.NoError(t, err)
+	require.Equal(t, false, trustPin.DisableTOFU)
+
+	tempDir = tempDirWithConfig(t, `{
+		"remote_server": {
+			"url": "%s"
+		},
+		"trust_pinning": {
+		    "disable_tofu": true
+		}
+	}`)
+	defer os.RemoveAll(tempDir)
+	commander = &notaryCommander{
+		getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+		configFile:   filepath.Join(tempDir, "config.json"),
+	}
+
+	// Check that tofu was correctly disabled
+	config, err = commander.parseConfig()
+	require.NoError(t, err)
+	require.Equal(t, true, config.GetBool("trust_pinning.disable_tofu"))
+	trustPin, err = getTrustPinning(config)
+	require.NoError(t, err)
+	require.Equal(t, true, trustPin.DisableTOFU)
+
+	tempDir = tempDirWithConfig(t, fmt.Sprintf(`{
+		"trust_pinning": {
+		    "certs": {
+		        "repo3": ["%s"]
+		    }
+		 }
+	}`, strings.Repeat("x", notary.Sha256HexSize)))
+	defer os.RemoveAll(tempDir)
+	commander = &notaryCommander{
+		getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+		configFile:   filepath.Join(tempDir, "config.json"),
+	}
+
+	config, err = commander.parseConfig()
+	require.NoError(t, err)
+	require.Equal(t, []interface{}{strings.Repeat("x", notary.Sha256HexSize)}, config.GetStringMap("trust_pinning.certs")["repo3"])
+	trustPin, err = getTrustPinning(config)
+	require.NoError(t, err)
+	require.Equal(t, strings.Repeat("x", notary.Sha256HexSize), trustPin.Certs["repo3"][0])
+
+	// Check that an invalid cert ID pinning format fails
+	tempDir = tempDirWithConfig(t, fmt.Sprintf(`{
+		"trust_pinning": {
+		    "certs": {
+		        "repo3": "%s"
+		    }
+		 }
+	}`, strings.Repeat("x", notary.Sha256HexSize)))
+	defer os.RemoveAll(tempDir)
+	commander = &notaryCommander{
+		getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+		configFile:   filepath.Join(tempDir, "config.json"),
+	}
+
+	config, err = commander.parseConfig()
+	require.NoError(t, err)
+	trustPin, err = getTrustPinning(config)
+	require.Error(t, err)
+
+	tempDir = tempDirWithConfig(t, fmt.Sprintf(`{
+		"trust_pinning": {
+		    "ca": {
+		        "repo4": "%s"
+		    }
+		 }
+	}`, "root-ca.crt"))
+	defer os.RemoveAll(tempDir)
+	commander = &notaryCommander{
+		getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+		configFile:   filepath.Join(tempDir, "config.json"),
+	}
+
+	config, err = commander.parseConfig()
+	require.NoError(t, err)
+	require.Equal(t, "root-ca.crt", config.GetStringMap("trust_pinning.ca")["repo4"])
+	trustPin, err = getTrustPinning(config)
+	require.NoError(t, err)
+	require.Equal(t, "root-ca.crt", trustPin.CA["repo4"])
 }
