@@ -432,9 +432,11 @@ func (k *keyCommander) keysRotate(cmd *cobra.Command, args []string) error {
 	}
 
 	if rotateKeyRole == data.CanonicalRootRole {
-		cmd.Println("Warning: you are about to rotate your root key.\n" +
-			"You will still need your old key to sign future root changes\n" +
-			"so that clients who may not be behind can update.\n" +
+		cmd.Print("Warning: you are about to rotate your root key.\n\n" +
+			"You must use your old key to sign this root rotation. We recommend that\n" +
+			"you sign all your future root changes with this key as well, so that\n" +
+			"clients can have a smoother update process. Please do not delete\n" +
+			"this key after rotating.\n\n" +
 			"Are you sure you want to proceed?  (yes/no)  ")
 
 		if !askConfirm(k.input) {
