@@ -20,7 +20,7 @@ This document assumes familiarity with
 <a href="https://www.theupdateframework.com/" target="_blank">The Update Framework</a>,
 but here is a brief recap of the TUF roles and corresponding key hierarchy:
 
-<center><img src="images/key-hierarchy.svg" alt="TUF Key Hierarchy" width="400px"/></center>
+<center><img src="https://cdn.rawgit.com/docker/notary/09f81717080f53276e6881ece57cbbbf91b8e2a7/docs/images/key-hierarchy.svg" alt="TUF Key Hierarchy" width="400px"/></center>
 
 - The root key is the root of all trust. It signs the
   <a href="https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L489" target="_blank">root metadata file</a>,
@@ -77,7 +77,7 @@ for multiple trusted collections in an associated database, and a Notary signer,
 stores private keys for and signs metadata for the Notary server. The following
 diagram illustrates this architecture:
 
-![Notary Service Architecture Diagram](images/service-architecture.svg)
+![Notary Service Architecture Diagram](https://cdn.rawgit.com/docker/notary/09f81717080f53276e6881ece57cbbbf91b8e2a7/docs/images/service-architecture.svg)
 
 Root, targets, and (sometimes) snapshot metadata are generated and signed by
 clients, who upload the metadata to the Notary server. The server is
@@ -101,20 +101,20 @@ The Notary signer is responsible for:
 The following diagram illustrates the interactions between the Notary client,
 server, and signer:
 
-![Notary Service Sequence Diagram](images/metadata-sequence.svg)
+![Notary Service Sequence Diagram](https://cdn.rawgit.com/docker/notary/09f81717080f53276e6881ece57cbbbf91b8e2a7/docs/images/metadata-sequence.svg)
 
 1. Notary server optionally supports authentication from clients using
    <a href="http://jwt.io/" target="_blank">JWT</a> tokens. This requires an authorization server that
    manages access controls, and a cert bundle from this authorization server
    containing the public key it uses to sign tokens.
 
-   If token authentication is enabled on Notary server, then any connecting
-   client that does not have a token will be redirected to the authorization
-   server.
+    If token authentication is enabled on Notary server, then any connecting
+    client that does not have a token will be redirected to the authorization
+    server.
 
-   Please see the docs for [Docker Registry v2 authentication](
-   https://github.com/docker/distribution/blob/master/docs/spec/auth/token.md)
-   for more information.
+    Please see the docs for [Docker Registry v2 authentication](
+    https://github.com/docker/distribution/blob/master/docs/spec/auth/token.md)
+    for more information.
 
 2. The client will log in to the authorization server via basic auth over HTTPS,
    obtain a bearer token, and then present the token to Notary server on future
@@ -137,17 +137,17 @@ server, and signer:
    database. The generated timestamp and snapshot metadata certify that the
    metadata files the client uploaded are the most recent for that trusted collection.
 
-   Finally, Notary server will notify the client that their upload was successful.
+    Finally, Notary server will notify the client that their upload was successful.
 
 7. The client can now immediately download the latest metadata from the server,
    using the still-valid bearer token to connect. Notary server only needs to
    obtain the metadata from the database, since none of the metadata has expired.
 
-   In the case that the timestamp has expired, Notary server would go through
-   the entire sequence where it generates a new timestamp, request Notary signer
-   for a signature, stores the newly signed timestamp in the database. It then
-   sends this new timestamp, along with the rest of the stored metadata, to the
-   requesting client.
+    In the case that the timestamp has expired, Notary server would go through
+    the entire sequence where it generates a new timestamp, request Notary signer
+    for a signature, stores the newly signed timestamp in the database. It then
+    sends this new timestamp, along with the rest of the stored metadata, to the
+    requesting client.
 
 
 ## Threat model
