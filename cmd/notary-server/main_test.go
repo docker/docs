@@ -307,7 +307,7 @@ func TestGetStoreInvalid(t *testing.T) {
 		registerCalled++
 	}
 
-	_, err := getStore(configure(config), []string{"mysql"}, fakeRegister)
+	_, err := getStore(configure(config), fakeRegister)
 	require.Error(t, err)
 
 	// no health function ever registered
@@ -321,20 +321,40 @@ func TestGetStoreDBStore(t *testing.T) {
 	defer os.Remove(tmpFile.Name())
 
 	config := fmt.Sprintf(`{"storage": {"backend": "%s", "db_url": "%s"}}`,
-		utils.SqliteBackend, tmpFile.Name())
+		notary.SQLiteBackend, tmpFile.Name())
 
 	var registerCalled = 0
 	var fakeRegister = func(_ string, _ func() error, _ time.Duration) {
 		registerCalled++
 	}
 
-	store, err := getStore(configure(config), []string{utils.SqliteBackend}, fakeRegister)
+	store, err := getStore(configure(config), fakeRegister)
 	require.NoError(t, err)
-	_, ok := store.(*storage.SQLStorage)
+	_, ok := store.(storage.TUFMetaStorage)
 	require.True(t, ok)
 
 	// health function registered
 	require.Equal(t, 1, registerCalled)
+}
+
+func TestGetStoreRethinkDBStoreConnectionFails(t *testing.T) {
+	config := fmt.Sprintf(
+		`{"storage": {
+			"backend": "%s",
+			"db_url": "host:port",
+			"tls_ca_file": "/tls/ca.pem",
+			"database": "rethinkdbtest"
+			}
+		}`,
+		notary.RethinkDBBackend)
+
+	var registerCalled = 0
+	var fakeRegister = func(_ string, _ func() error, _ time.Duration) {
+		registerCalled++
+	}
+
+	_, err := getStore(configure(config), fakeRegister)
+	require.Error(t, err)
 }
 
 func TestGetMemoryStore(t *testing.T) {
@@ -343,9 +363,8 @@ func TestGetMemoryStore(t *testing.T) {
 		registerCalled++
 	}
 
-	config := fmt.Sprintf(`{"storage": {"backend": "%s"}}`, utils.MemoryBackend)
-	store, err := getStore(configure(config),
-		[]string{utils.MySQLBackend, utils.MemoryBackend}, fakeRegister)
+	config := fmt.Sprintf(`{"storage": {"backend": "%s"}}`, notary.MemoryBackend)
+	store, err := getStore(configure(config), fakeRegister)
 	require.NoError(t, err)
 	_, ok := store.(*storage.MemStorage)
 	require.True(t, ok)

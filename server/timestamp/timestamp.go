@@ -1,9 +1,11 @@
 package timestamp
 
 import (
+	"encoding/hex"
 	"time"
 
 	"github.com/docker/go/canonical/json"
+	"github.com/docker/notary"
 	"github.com/docker/notary/tuf"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
@@ -50,8 +52,12 @@ func GetOrCreateTimestampKey(gun string, store storage.MetaStore, crypto signed.
 // GetOrCreateTimestamp returns the current timestamp for the gun. This may mean
 // a new timestamp is generated either because none exists, or because the current
 // one has expired. Once generated, the timestamp is saved in the store.
+// Additionally, if we had to generate a new snapshot for this timestamp,
+// it is also saved in the store
 func GetOrCreateTimestamp(gun string, store storage.MetaStore, cryptoService signed.CryptoService) (
 	*time.Time, []byte, error) {
+
+	updates := []storage.MetaUpdate{}
 
 	lastModified, timestampJSON, err := store.GetCurrent(gun, data.CanonicalTimestampRole)
 	if err != nil {
@@ -64,29 +70,49 @@ func GetOrCreateTimestamp(gun string, store storage.MetaStore, cryptoService sig
 		logrus.Error("Failed to unmarshal existing timestamp")
 		return nil, nil, err
 	}
-
-	_, snapshot, err := snapshot.GetOrCreateSnapshot(gun, store, cryptoService)
+	snapChecksums, err := prev.GetSnapshot()
+	if err != nil || snapChecksums == nil {
+		return nil, nil, err
+	}
+	snapshotSha256Bytes, ok := snapChecksums.Hashes[notary.SHA256]
+	if !ok {
+		return nil, nil, data.ErrMissingMeta{Role: data.CanonicalSnapshotRole}
+	}
+	snapshotSha256Hex := hex.EncodeToString(snapshotSha256Bytes[:])
+	snapshotTime, snapshot, err := snapshot.GetOrCreateSnapshot(gun, snapshotSha256Hex, store, cryptoService)
 	if err != nil {
 		logrus.Debug("Previous timestamp, but no valid snapshot for GUN ", gun)
 		return nil, nil, err
+	}
+	snapshotRole := &data.SignedSnapshot{}
+	if err := json.Unmarshal(snapshot, snapshotRole); err != nil {
+		logrus.Error("Failed to unmarshal retrieved snapshot")
+		return nil, nil, err
+	}
+
+	// If the snapshot was generated, we should write it with the timestamp
+	if snapshotTime == nil {
+		updates = append(updates, storage.MetaUpdate{Role: data.CanonicalSnapshotRole, Version: snapshotRole.Signed.Version, Data: snapshot})
 	}
 
 	if !timestampExpired(prev) && !snapshotExpired(prev, snapshot) {
 		return lastModified, timestampJSON, nil
 	}
 
-	update, err := createTimestamp(gun, prev, snapshot, store, cryptoService)
+	tsUpdate, err := createTimestamp(gun, prev, snapshot, store, cryptoService)
 	if err != nil {
 		logrus.Error("Failed to create a new timestamp")
 		return nil, nil, err
 	}
+	updates = append(updates, *tsUpdate)
 
 	c := time.Now()
 
-	if err = store.UpdateCurrent(gun, *update); err != nil {
+	// Write the timestamp, and potentially snapshot
+	if err = store.UpdateMany(gun, updates); err != nil {
 		return nil, nil, err
 	}
-	return &c, update.Data, nil
+	return &c, tsUpdate.Data, nil
 }
 
 // timestampExpired compares the current time to the expiry time of the timestamp

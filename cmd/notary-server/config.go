@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/dancannon/gorethink"
 	_ "github.com/docker/distribution/registry/auth/htpasswd"
 	_ "github.com/docker/distribution/registry/auth/token"
 	"github.com/docker/go-connections/tlsconfig"
@@ -14,6 +15,7 @@ import (
 	"github.com/docker/notary/server"
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/signer/client"
+	"github.com/docker/notary/storage/rethinkdb"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/utils"
@@ -61,25 +63,42 @@ func grpcTLS(configuration *viper.Viper) (*tls.Config, error) {
 }
 
 // parses the configuration and returns a backing store for the TUF files
-func getStore(configuration *viper.Viper, allowedBackends []string, hRegister healthRegister) (
+func getStore(configuration *viper.Viper, hRegister healthRegister) (
 	storage.MetaStore, error) {
+	var store storage.MetaStore
+	backend := configuration.GetString("storage.backend")
+	logrus.Infof("Using %s backend", backend)
 
-	storeConfig, err := utils.ParseStorage(configuration, allowedBackends)
-	if err != nil {
-		return nil, err
-	}
-	logrus.Infof("Using %s backend", storeConfig.Backend)
-
-	if storeConfig.Backend == utils.MemoryBackend {
+	switch backend {
+	case notary.MemoryBackend:
 		return storage.NewMemStorage(), nil
+	case notary.MySQLBackend, notary.SQLiteBackend:
+		storeConfig, err := utils.ParseSQLStorage(configuration)
+		if err != nil {
+			return nil, err
+		}
+		s, err := storage.NewSQLStorage(storeConfig.Backend, storeConfig.Source)
+		if err != nil {
+			return nil, fmt.Errorf("Error starting %s driver: %s", backend, err.Error())
+		}
+		store = *storage.NewTUFMetaStorage(s)
+		hRegister("DB operational", s.CheckHealth, time.Minute)
+	case notary.RethinkDBBackend:
+		var sess *gorethink.Session
+		storeConfig, err := utils.ParseRethinkDBStorage(configuration)
+		if err != nil {
+			return nil, err
+		}
+		sess, err = rethinkdb.Connection(storeConfig.CA, storeConfig.Source)
+		if err != nil {
+			return nil, fmt.Errorf("Error starting %s driver: %s", backend, err.Error())
+		}
+		s := storage.NewRethinkDBStorage(storeConfig.DBName, sess)
+		store = *storage.NewTUFMetaStorage(s)
+		hRegister("DB operational", s.CheckHealth, time.Minute)
+	default:
+		return nil, fmt.Errorf("%s is not a supported storage backend", backend)
 	}
-
-	store, err := storage.NewSQLStorage(storeConfig.Backend, storeConfig.Source)
-	if err != nil {
-		return nil, fmt.Errorf("Error starting DB driver: %s", err.Error())
-	}
-	hRegister(
-		"DB operational", store.CheckHealth, time.Second*60)
 	return store, nil
 }
 
@@ -202,7 +221,7 @@ func parseServerConfig(configFilePath string, hRegister healthRegister) (context
 	}
 	ctx = context.WithValue(ctx, "keyAlgorithm", keyAlgo)
 
-	store, err := getStore(config, []string{utils.MySQLBackend, utils.MemoryBackend}, hRegister)
+	store, err := getStore(config, hRegister)
 	if err != nil {
 		return nil, server.Config{}, err
 	}

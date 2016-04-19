@@ -150,42 +150,6 @@ func TestGetTimestampOldTimestampExpired(t *testing.T) {
 	require.True(t, signedMeta.Signed.Expires.After(time.Now()))
 }
 
-// In practice this might happen if the snapshot is expired, for instance, and
-// is re-signed.
-func TestGetTimestampIfNewSnapshot(t *testing.T) {
-	store := storage.NewMemStorage()
-	repo, crypto, err := testutils.EmptyRepo("gun")
-
-	rootJSON, err := json.Marshal(repo.Root)
-	require.NoError(t, err)
-	timestampJSON, err := json.Marshal(repo.Timestamp)
-	require.NoError(t, err)
-	snapJSON, err := json.Marshal(repo.Snapshot)
-	require.NoError(t, err)
-
-	// set all the metadata
-	require.NoError(t, store.UpdateCurrent("gun",
-		storage.MetaUpdate{Role: data.CanonicalRootRole, Version: 0, Data: rootJSON}))
-	require.NoError(t, store.UpdateCurrent("gun",
-		storage.MetaUpdate{Role: data.CanonicalSnapshotRole, Version: 0, Data: snapJSON}))
-	require.NoError(t, store.UpdateCurrent("gun",
-		storage.MetaUpdate{Role: data.CanonicalTimestampRole, Version: 0, Data: timestampJSON}))
-
-	c1, ts1, err := GetOrCreateTimestamp("gun", store, crypto)
-	require.Nil(t, err, "GetTimestamp errored")
-
-	// update the snapshot to a new version
-	repo.Snapshot.Signed.Version++
-	snapJSON, err = json.Marshal(repo.Snapshot)
-	require.NoError(t, err)
-	store.UpdateCurrent("gun", storage.MetaUpdate{Role: "snapshot", Version: 1, Data: snapJSON})
-
-	c2, ts2, err := GetOrCreateTimestamp("gun", store, crypto)
-	require.NoError(t, err, "GetTimestamp errored")
-	require.NotEqual(t, ts1, ts2, "Timestamp was not regenerated when snapshot changed")
-	require.True(t, c1.Before(*c2), "Timestamp modification time incorrect")
-}
-
 // If the root or snapshot is missing or corrupt, no timestamp can be generated
 func TestCannotMakeNewTimestampIfNoRootOrSnapshot(t *testing.T) {
 	repo, crypto, err := testutils.EmptyRepo("gun")
@@ -203,14 +167,30 @@ func TestCannotMakeNewTimestampIfNoRootOrSnapshot(t *testing.T) {
 	timestampJSON, err := json.Marshal(repo.Timestamp)
 	require.NoError(t, err)
 
-	invalids := []map[string][]byte{
-		{data.CanonicalRootRole: rootJSON, data.CanonicalSnapshotRole: []byte("invalid JSON")},
-		{data.CanonicalRootRole: []byte("invalid JSON"), data.CanonicalSnapshotRole: snapJSON},
-		{data.CanonicalRootRole: rootJSON},
-		{data.CanonicalSnapshotRole: snapJSON},
+	invalids := []struct {
+		test map[string][]byte
+		err  error
+	}{
+		{
+			test: map[string][]byte{data.CanonicalRootRole: rootJSON, data.CanonicalSnapshotRole: []byte("invalid JSON")},
+			err:  storage.ErrNotFound{},
+		},
+		{
+			test: map[string][]byte{data.CanonicalRootRole: []byte("invalid JSON"), data.CanonicalSnapshotRole: snapJSON},
+			err:  &json.SyntaxError{},
+		},
+		{
+			test: map[string][]byte{data.CanonicalRootRole: rootJSON},
+			err:  storage.ErrNotFound{},
+		},
+		{
+			test: map[string][]byte{data.CanonicalSnapshotRole: snapJSON},
+			err:  storage.ErrNotFound{},
+		},
 	}
 
-	for _, dataToSet := range invalids {
+	for _, test := range invalids {
+		dataToSet := test.test
 		store := storage.NewMemStorage()
 		for roleName, jsonBytes := range dataToSet {
 			require.NoError(t, store.UpdateCurrent("gun",
@@ -221,12 +201,7 @@ func TestCannotMakeNewTimestampIfNoRootOrSnapshot(t *testing.T) {
 
 		_, _, err := GetOrCreateTimestamp("gun", store, crypto)
 		require.Error(t, err, "GetTimestamp errored")
-
-		if len(dataToSet) == 1 { // missing metadata
-			require.IsType(t, storage.ErrNotFound{}, err)
-		} else {
-			require.IsType(t, &json.SyntaxError{}, err)
-		}
+		require.IsType(t, test.err, err)
 	}
 }
 

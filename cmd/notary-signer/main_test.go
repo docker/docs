@@ -8,10 +8,12 @@ import (
 	"os"
 	"testing"
 
+	"github.com/docker/notary"
 	"github.com/docker/notary/signer"
 	"github.com/docker/notary/signer/keydbstore"
+	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
-	"github.com/docker/notary/utils"
+	"github.com/docker/notary/tuf/testutils"
 	"github.com/jinzhu/gorm"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/spf13/viper"
@@ -105,10 +107,45 @@ func TestSetupCryptoServicesDBStoreNoDefaultAlias(t *testing.T) {
 	_, err = setUpCryptoservices(
 		configure(fmt.Sprintf(
 			`{"storage": {"backend": "%s", "db_url": "%s"}}`,
-			utils.SqliteBackend, tmpFile.Name())),
-		[]string{utils.SqliteBackend})
+			notary.SQLiteBackend, tmpFile.Name())),
+		[]string{notary.SQLiteBackend})
 	require.Error(t, err)
 	require.Contains(t, err.Error(), "must provide a default alias for the key DB")
+}
+
+// If a default alias is not provided to a rethinkdb backend, an error is returned.
+func TestSetupCryptoServicesRethinkDBStoreNoDefaultAlias(t *testing.T) {
+	_, err := setUpCryptoservices(
+		configure(fmt.Sprintf(
+			`{"storage": {
+				"backend": "%s",
+				"db_url": "host:port",
+				"tls_ca_file": "/tls/ca.pem",
+				"database": "rethinkdbtest"
+				}
+			}`,
+			notary.RethinkDBBackend)),
+		[]string{notary.RethinkDBBackend})
+	require.Error(t, err)
+	require.Contains(t, err.Error(), "must provide a default alias for the key DB")
+}
+
+func TestSetupCryptoServicesRethinkDBStoreConnectionFails(t *testing.T) {
+	// We don't have a rethink instance up, so the Connection() call will fail
+	_, err := setUpCryptoservices(
+		configure(fmt.Sprintf(
+			`{"storage": {
+				"backend": "%s",
+				"db_url": "host:port",
+				"tls_ca_file": "../../fixtures/root-ca.crt",
+				"database": "rethinkdbtest"
+				},
+				"default_alias": "timestamp"
+			}`,
+			notary.RethinkDBBackend)),
+		[]string{notary.RethinkDBBackend})
+	require.Error(t, err)
+	require.Contains(t, err.Error(), "no connections were made when creating the session")
 }
 
 // If a default alias *is* provided to a valid DB backend, a valid
@@ -136,8 +173,8 @@ func TestSetupCryptoServicesDBStoreSuccess(t *testing.T) {
 		configure(fmt.Sprintf(
 			`{"storage": {"backend": "%s", "db_url": "%s"},
 			"default_alias": "timestamp"}`,
-			utils.SqliteBackend, tmpFile.Name())),
-		[]string{utils.SqliteBackend})
+			notary.SQLiteBackend, tmpFile.Name())),
+		[]string{notary.SQLiteBackend})
 	require.NoError(t, err)
 	require.Len(t, cryptoServices, 2)
 
@@ -164,9 +201,9 @@ func TestSetupCryptoServicesDBStoreSuccess(t *testing.T) {
 // a valid CryptoService is returned.
 func TestSetupCryptoServicesMemoryStore(t *testing.T) {
 	config := configure(fmt.Sprintf(`{"storage": {"backend": "%s"}}`,
-		utils.MemoryBackend))
+		notary.MemoryBackend))
 	cryptoServices, err := setUpCryptoservices(config,
-		[]string{utils.SqliteBackend, utils.MemoryBackend})
+		[]string{notary.SQLiteBackend, notary.MemoryBackend})
 	require.NoError(t, err)
 	require.Len(t, cryptoServices, 2)
 
@@ -208,4 +245,14 @@ func TestSetupGRPCServerSuccess(t *testing.T) {
 	require.Equal(t, "[::]:7899", lis.Addr().String())
 	require.Equal(t, "tcp", lis.Addr().Network())
 	require.NotNil(t, grpcServer)
+}
+
+func TestBootstrap(t *testing.T) {
+	var ks trustmanager.KeyStore
+	err := bootstrap(ks)
+	require.Error(t, err)
+	tb := &testutils.TestBootstrapper{}
+	err = bootstrap(tb)
+	require.NoError(t, err)
+	require.True(t, tb.Booted)
 }
