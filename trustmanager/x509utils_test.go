@@ -30,8 +30,8 @@ func TestCertsToKeys(t *testing.T) {
 	// Get our certList with Leaf Cert and Intermediate
 	certList := []*x509.Certificate{leafCert, intermediateCA, rootCA}
 
-	// Call CertsToKEys
-	keys := CertsToKeys(certList)
+	// Call CertsToKeys
+	keys := CertsToKeys(certList, make(map[string][]*x509.Certificate))
 	require.NotNil(t, keys)
 	require.Len(t, keys, 3)
 
@@ -44,6 +44,13 @@ func TestCertsToKeys(t *testing.T) {
 	newKeys = GetIntermediateCerts(certList)
 	require.NotNil(t, newKeys)
 	require.Len(t, newKeys, 2)
+
+	// Try calling CertToKeys on a junk leaf cert that won't fingerprint
+	emptyCert := x509.Certificate{}
+	// Also try changing the pre-existing leaf cert into an invalid algorithm
+	leafCert.PublicKeyAlgorithm = x509.DSA
+	keys = CertsToKeys([]*x509.Certificate{&emptyCert, leafCert}, make(map[string][]*x509.Certificate))
+	require.Empty(t, keys)
 }
 
 func TestNewCertificate(t *testing.T) {

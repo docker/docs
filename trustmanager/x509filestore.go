@@ -246,7 +246,7 @@ func (s *X509FileStore) GetCertificatesByCN(cn string) ([]*x509.Certificate, err
 // as part of the roots list. This never allows the use of system roots, returning
 // an error if there are no root CAs.
 func (s *X509FileStore) GetVerifyOptions(dnsName string) (x509.VerifyOptions, error) {
-	// If we have no Certificates loaded return error (we don't want to rever to using
+	// If we have no Certificates loaded return error (we don't want to revert to using
 	// system CAs).
 	if len(s.fingerprintMap) == 0 {
 		return x509.VerifyOptions{}, errors.New("no root CAs available")

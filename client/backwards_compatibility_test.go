@@ -13,6 +13,7 @@ import (
 	"time"
 
 	"github.com/docker/notary/passphrase"
+	"github.com/docker/notary/trustpinning"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/store"
 	"github.com/stretchr/testify/require"
@@ -90,7 +91,7 @@ func Test0Dot1RepoFormat(t *testing.T) {
 	defer ts.Close()
 
 	repo, err := NewNotaryRepository(tmpDir, gun, ts.URL, http.DefaultTransport,
-		passphrase.ConstantRetriever(passwd))
+		passphrase.ConstantRetriever(passwd), trustpinning.TrustPinConfig{})
 	require.NoError(t, err, "error creating repo: %s", err)
 
 	// targets should have 1 target, and it should be readable offline
@@ -152,7 +153,7 @@ func TestDownloading0Dot1RepoFormat(t *testing.T) {
 	defer os.RemoveAll(repoDir)
 
 	repo, err := NewNotaryRepository(repoDir, gun, ts.URL, http.DefaultTransport,
-		passphrase.ConstantRetriever(passwd))
+		passphrase.ConstantRetriever(passwd), trustpinning.TrustPinConfig{})
 	require.NoError(t, err, "error creating repo: %s", err)
 
 	err = repo.Update(true)

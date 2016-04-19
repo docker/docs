@@ -15,10 +15,10 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary"
-	"github.com/docker/notary/certs"
 	"github.com/docker/notary/client/changelist"
 	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/trustmanager"
+	"github.com/docker/notary/trustpinning"
 	"github.com/docker/notary/tuf"
 	tufclient "github.com/docker/notary/tuf/client"
 	"github.com/docker/notary/tuf/data"
@@ -88,13 +88,14 @@ type NotaryRepository struct {
 	tufRepo       *tuf.Repo
 	roundTrip     http.RoundTripper
 	CertStore     trustmanager.X509Store
+	trustPinning  trustpinning.TrustPinConfig
 }
 
 // repositoryFromKeystores is a helper function for NewNotaryRepository that
 // takes some basic NotaryRepository parameters as well as keystores (in order
 // of usage preference), and returns a NotaryRepository.
 func repositoryFromKeystores(baseDir, gun, baseURL string, rt http.RoundTripper,
-	keyStores []trustmanager.KeyStore) (*NotaryRepository, error) {
+	keyStores []trustmanager.KeyStore, trustPin trustpinning.TrustPinConfig) (*NotaryRepository, error) {
 
 	certPath := filepath.Join(baseDir, notary.TrustedCertsDir)
 	certStore, err := trustmanager.NewX509FilteredFileStore(
@@ -115,6 +116,7 @@ func repositoryFromKeystores(baseDir, gun, baseURL string, rt http.RoundTripper,
 		CryptoService: cryptoService,
 		roundTrip:     rt,
 		CertStore:     certStore,
+		trustPinning:  trustPin,
 	}
 
 	fileStore, err := store.NewFilesystemStore(
@@ -873,7 +875,7 @@ func (r *NotaryRepository) validateRoot(rootJSON []byte) (*data.SignedRoot, erro
 		return nil, err
 	}
 
-	err = certs.ValidateRoot(r.CertStore, root, r.gun)
+	err = trustpinning.ValidateRoot(r.CertStore, root, r.gun, r.trustPinning)
 	if err != nil {
 		return nil, err
 	}

@@ -1,6 +1,7 @@
 package trustmanager
 
 import (
+	"bytes"
 	"crypto/ecdsa"
 	"crypto/elliptic"
 	"crypto/rand"
@@ -57,11 +58,22 @@ func GetCertFromURL(urlStr string) (*x509.Certificate, error) {
 	return cert, nil
 }
 
-// CertToPEM is an utility function returns a PEM encoded x509 Certificate
+// CertToPEM is a utility function returns a PEM encoded x509 Certificate
 func CertToPEM(cert *x509.Certificate) []byte {
 	pemCert := pem.EncodeToMemory(&pem.Block{Type: "CERTIFICATE", Bytes: cert.Raw})
 
 	return pemCert
+}
+
+// CertChainToPEM is a utility function returns a PEM encoded chain of x509 Certificates, in the order they are passed
+func CertChainToPEM(certChain []*x509.Certificate) ([]byte, error) {
+	var pemBytes bytes.Buffer
+	for _, cert := range certChain {
+		if err := pem.Encode(&pemBytes, &pem.Block{Type: "CERTIFICATE", Bytes: cert.Raw}); err != nil {
+			return nil, err
+		}
+	}
+	return pemBytes.Bytes(), nil
 }
 
 // LoadCertFromPEM returns the first certificate found in a bunch of bytes or error
@@ -544,12 +556,34 @@ func CertToKey(cert *x509.Certificate) data.PublicKey {
 	}
 }
 
-// CertsToKeys transforms each of the input certificates into it's corresponding
+// CertsToKeys transforms each of the input certificate chains into its corresponding
 // PublicKey
-func CertsToKeys(certs []*x509.Certificate) map[string]data.PublicKey {
+func CertsToKeys(leafCerts []*x509.Certificate, intCerts map[string][]*x509.Certificate) map[string]data.PublicKey {
 	keys := make(map[string]data.PublicKey)
-	for _, cert := range certs {
-		newKey := CertToKey(cert)
+	for _, leafCert := range leafCerts {
+		certBundle := []*x509.Certificate{leafCert}
+		certID, err := FingerprintCert(leafCert)
+		if err != nil {
+			continue
+		}
+		if intCertsForLeafs, ok := intCerts[certID]; ok {
+			certBundle = append(certBundle, intCertsForLeafs...)
+		}
+		certChainPEM, err := CertChainToPEM(certBundle)
+		if err != nil {
+			continue
+		}
+		var newKey data.PublicKey
+		// Use the leaf cert's public key algorithm for typing
+		switch leafCert.PublicKeyAlgorithm {
+		case x509.RSA:
+			newKey = data.NewRSAx509PublicKey(certChainPEM)
+		case x509.ECDSA:
+			newKey = data.NewECDSAx509PublicKey(certChainPEM)
+		default:
+			logrus.Debugf("Unknown key type parsed from certificate: %v", leafCert.PublicKeyAlgorithm)
+			continue
+		}
 		keys[newKey.ID()] = newKey
 	}
 	return keys
@@ -581,6 +615,7 @@ func NewCertificate(gun string, startTime, endTime time.Time) (*x509.Certificate
 // X509PublicKeyID returns a public key ID as a string, given a
 // data.PublicKey that contains an X509 Certificate
 func X509PublicKeyID(certPubKey data.PublicKey) (string, error) {
+	// Note that this only loads the first certificate from the public key
 	cert, err := LoadCertFromPEM(certPubKey.Public())
 	if err != nil {
 		return "", err

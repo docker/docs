@@ -6,6 +6,7 @@ import (
 	"encoding/pem"
 	"io"
 	"testing"
+	"time"
 
 	"github.com/docker/go/canonical/json"
 	"github.com/docker/notary/cryptoservice"
@@ -211,7 +212,7 @@ func TestSignWithX509(t *testing.T) {
 	require.NoError(t, err)
 
 	// make a RSA x509 key
-	cert, err := cryptoservice.GenerateTestingCertificate(privKey.CryptoSigner(), "test")
+	cert, err := cryptoservice.GenerateCertificate(privKey, "test", time.Now(), time.Now().AddDate(10, 0, 0))
 	require.NoError(t, err)
 
 	tufRSAx509Key := trustmanager.CertToKey(cert)

@@ -36,6 +36,11 @@ JSON keys to learn more about the configuration section corresponding to that ke
     "tls_client_cert": "./fixtures/secure.example.com.crt",
     "tls_client_key": "./fixtures/secure.example.com.crt"
   }
+  <a href="#trust-pinning-section-optional">"trust_pinning"</a>: {
+    "certs": {
+      "docker.com/notary": ["49cf5c6404a35fa41d5a5aa2ce539dfee0d7a2176d0da488914a38603b1f4292"]
+    }
+  }
 }
 </code></pre>
 
@@ -110,6 +115,56 @@ Remote server example:
 			<p>This configuration option can overridden with the command line flag
 			`--tlskey`, which would specify a path relative to the current working
 			directory where the Notary client is invoked.</p></td>
+	</tr>
+</table>
+
+## trust_pinning section (optional)
+
+The `trust_pinning` specifies how to bootstrap trust for the root of a
+Notary client's trusted collection.
+
+This section is optional, Notary will use TOFU over HTTPS by default and
+trust certificates in the downloaded root file.
+
+In this section, one can provide specific certificates to pin to, or a CA
+to pin to as a root of trust for a GUN.  Multiple sections can be specified,
+but the pinned certificates will take highest priority for validation, followed
+by the pinned CA, followed by TOFUS (TOFU over HTTPS).  The diagram below
+describes this validation flow:
+
+<center><img src="../images/trust-pinning-flow.png" alt="Trust pinning flow" width="400px"/></center>
+
+Only one trust pinning option will be used to validate a GUN even if multiple
+sections are specified, and any validation failure will result in a failed
+bootstrapping of the repo.
+
+<table>
+	<tr>
+		<th>Parameter</th>
+		<th>Required</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td valign="top"><code>certs</code></td>
+		<td valign="top">no</td>
+		<td valign="top"><p>Mapping of GUN to certificate IDs to pin to.
+		    Both are strings in the JSON object.</p></td>
+	</tr>
+	<tr>
+		<td valign="top"><code>ca</code></td>
+		<td valign="top">no</td>
+		<td valign="top"><p>Mapping of GUN prefixes to filepaths containing
+		    the root CA file with which to verify the certificates in the root file.
+		    This file can contain multiple root certificates, bundled in separate
+		    PEM blocks.
+			The path is relative to the directory of the configuration file.</p></td>
+	</tr>
+	<tr>
+		<td valign="top"><code>disable_tofu</code></td>
+		<td valign="top">no</td>
+		<td valign="top"><p>Boolean value determining whether to use trust
+		    on first use when bootstrapping validation on a collection's
+		    root file.  This keeps TOFUs on by default.</p></td>
 	</tr>
 </table>
 

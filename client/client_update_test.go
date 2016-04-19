@@ -14,8 +14,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/docker/notary/certs"
 	"github.com/docker/notary/passphrase"
+	"github.com/docker/notary/trustpinning"
 	"github.com/docker/notary/tuf/client"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
@@ -31,7 +31,7 @@ func newBlankRepo(t *testing.T, url string) *NotaryRepository {
 	require.NoError(t, err, "failed to create a temporary directory: %s", err)
 
 	repo, err := NewNotaryRepository(tempBaseDir, "docker.com/notary", url,
-		http.DefaultTransport, passphrase.ConstantRetriever("pass"))
+		http.DefaultTransport, passphrase.ConstantRetriever("pass"), trustpinning.TrustPinConfig{})
 	require.NoError(t, err)
 	return repo
 }
@@ -784,29 +784,29 @@ var waysToMessUpServer = []swizzleExpectations{
 	// for everything else, the errors come from tuf/signed
 
 	{desc: "invalid SignedMeta Type", expectErrs: []interface{}{
-		&certs.ErrValidationFail{}, signed.ErrWrongType, data.ErrInvalidMetadata{}},
+		&trustpinning.ErrValidationFail{}, signed.ErrWrongType, data.ErrInvalidMetadata{}},
 		swizzle: (*testutils.MetadataSwizzler).SetInvalidMetadataType},
 
 	{desc: "invalid signatures", expectErrs: []interface{}{
-		&certs.ErrValidationFail{}, signed.ErrRoleThreshold{}},
+		&trustpinning.ErrValidationFail{}, signed.ErrRoleThreshold{}},
 		swizzle: (*testutils.MetadataSwizzler).InvalidateMetadataSignatures},
 
 	{desc: "meta signed by wrong key", expectErrs: []interface{}{
-		&certs.ErrValidationFail{}, signed.ErrRoleThreshold{}},
+		&trustpinning.ErrValidationFail{}, signed.ErrRoleThreshold{}},
 		swizzle: (*testutils.MetadataSwizzler).SignMetadataWithInvalidKey},
 
 	{desc: "expired metadata", expectErrs: []interface{}{
-		&certs.ErrValidationFail{}, signed.ErrExpired{}},
+		&trustpinning.ErrValidationFail{}, signed.ErrExpired{}},
 		swizzle: (*testutils.MetadataSwizzler).ExpireMetadata},
 
 	{desc: "lower metadata version", expectErrs: []interface{}{
-		&certs.ErrValidationFail{}, signed.ErrLowVersion{}},
+		&trustpinning.ErrValidationFail{}, signed.ErrLowVersion{}},
 		swizzle: func(s *testutils.MetadataSwizzler, role string) error {
 			return s.OffsetMetadataVersion(role, -3)
 		}},
 
 	{desc: "insufficient signatures", expectErrs: []interface{}{
-		&certs.ErrValidationFail{}, signed.ErrRoleThreshold{}},
+		&trustpinning.ErrValidationFail{}, signed.ErrRoleThreshold{}},
 		swizzle: func(s *testutils.MetadataSwizzler, role string) error {
 			return s.SetThreshold(role, 2)
 		}},
@@ -824,7 +824,7 @@ func waysToMessUpServerRoot() []swizzleExpectations {
 				swizzleExpectations{
 					desc: fmt.Sprintf("no %s keys", roleName),
 					expectErrs: []interface{}{
-						&certs.ErrValidationFail{}, signed.ErrRoleThreshold{}},
+						&trustpinning.ErrValidationFail{}, signed.ErrRoleThreshold{}},
 					swizzle: func(s *testutils.MetadataSwizzler, role string) error {
 						return s.MutateRoot(func(r *data.Root) {
 							r.Roles[roleName].KeyIDs = []string{}
