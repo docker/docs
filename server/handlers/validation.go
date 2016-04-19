@@ -417,7 +417,7 @@ func validateRoot(gun string, oldRoot, newRoot []byte) (
 		}
 	}
 
-	if err := signed.VerifyRoot(parsedNewSigned, newRootRole.Threshold, newRootRole.Keys); err != nil {
+	if err := signed.VerifySignatures(parsedNewSigned, newRootRole); err != nil {
 		return nil, validation.ErrBadRoot{Msg: err.Error()}
 	}
 
@@ -440,7 +440,7 @@ func checkAgainstOldRoot(oldRoot []byte, newRootRole data.BaseRole, newSigned *d
 	}
 
 	// Always verify the new root against the old root
-	if err := signed.VerifyRoot(newSigned, oldRootRole.Threshold, oldRootRole.Keys); err != nil {
+	if err := signed.VerifySignatures(newSigned, oldRootRole); err != nil {
 		return validation.ErrBadRoot{Msg: fmt.Sprintf(
 			"rotation detected and new root was not signed with at least %d old keys",
 			oldRootRole.Threshold)}

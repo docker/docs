@@ -194,6 +194,14 @@ func TestSnapshotFromSignedValidatesRoleType(t *testing.T) {
 	require.Equal(t, TUFTypes[CanonicalSnapshotRole], sSnapshot.Signed.Type)
 }
 
+// The version cannot be negative
+func TestSnapshotFromSignedValidatesVersion(t *testing.T) {
+	sn := validSnapshotTemplate()
+	sn.Signed.Version = -1
+	_, err := snapshotToSignedAndBack(t, sn)
+	require.IsType(t, ErrInvalidMetadata{}, err)
+}
+
 // GetMeta returns the checksum, or an error if it is missing.
 func TestSnapshotGetMeta(t *testing.T) {
 	ts := validSnapshotTemplate()

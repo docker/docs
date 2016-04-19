@@ -17,7 +17,9 @@ import (
 	"github.com/docker/notary/tuf/signed"
 )
 
-func createKey(cs signed.CryptoService, gun, role string) (data.PublicKey, error) {
+// CreateKey creates a new key inside the cryptoservice for the given role and gun,
+// returning the public key.  If the role is a root role, create an x509 key.
+func CreateKey(cs signed.CryptoService, gun, role string) (data.PublicKey, error) {
 	key, err := cs.Create(role, gun, data.ECDSAKey)
 	if err != nil {
 		return nil, err
@@ -48,7 +50,7 @@ func EmptyRepo(gun string, delegationRoles ...string) (*tuf.Repo, signed.CryptoS
 
 	baseRoles := map[string]data.BaseRole{}
 	for _, role := range data.BaseRoles {
-		key, err := createKey(cs, gun, role)
+		key, err := CreateKey(cs, gun, role)
 		if err != nil {
 			return nil, nil, err
 		}
@@ -75,7 +77,7 @@ func EmptyRepo(gun string, delegationRoles ...string) (*tuf.Repo, signed.CryptoS
 	sort.Strings(delegationRoles)
 	for _, delgName := range delegationRoles {
 		// create a delegations key and a delegation in the tuf repo
-		delgKey, err := createKey(cs, gun, delgName)
+		delgKey, err := CreateKey(cs, gun, delgName)
 		if err != nil {
 			return nil, nil, err
 		}

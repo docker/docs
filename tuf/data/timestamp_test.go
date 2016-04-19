@@ -194,6 +194,14 @@ func TestTimestampFromSignedValidatesRoleType(t *testing.T) {
 	require.Equal(t, tsType, sTimestamp.Signed.Type)
 }
 
+// The version cannot be negative
+func TestTimestampFromSignedValidatesVersion(t *testing.T) {
+	ts := validTimestampTemplate()
+	ts.Signed.Version = -1
+	_, err := timestampToSignedAndBack(t, ts)
+	require.IsType(t, ErrInvalidMetadata{}, err)
+}
+
 // GetSnapshot returns the snapshot checksum, or an error if it is missing.
 func TestTimestampGetSnapshot(t *testing.T) {
 	ts := validTimestampTemplate()

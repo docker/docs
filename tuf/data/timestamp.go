@@ -31,6 +31,11 @@ func isValidTimestampStructure(t Timestamp) error {
 			role: CanonicalTimestampRole, msg: fmt.Sprintf("expected type %s, not %s", expectedType, t.Type)}
 	}
 
+	if t.Version < 0 {
+		return ErrInvalidMetadata{
+			role: CanonicalTimestampRole, msg: "version cannot be negative"}
+	}
+
 	// Meta is a map of FileMeta, so if the role isn't in the map it returns
 	// an empty FileMeta, which has an empty map, and you can check on keys
 	// from an empty map.

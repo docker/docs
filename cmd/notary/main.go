@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"os"
 	"path/filepath"
 	"strings"
@@ -171,6 +172,7 @@ func (n *notaryCommander) GetCommand() *cobra.Command {
 	cmdKeyGenerator := &keyCommander{
 		configGetter: n.parseConfig,
 		getRetriever: n.getRetriever,
+		input:        os.Stdin,
 	}
 
 	cmdDelegationGenerator := &delegationCommander{
@@ -211,10 +213,9 @@ func fatalf(format string, args ...interface{}) {
 	os.Exit(1)
 }
 
-func askConfirm() bool {
+func askConfirm(input io.Reader) bool {
 	var res string
-	_, err := fmt.Scanln(&res)
-	if err != nil {
+	if _, err := fmt.Fscanln(input, &res); err != nil {
 		return false
 	}
 	if strings.EqualFold(res, "y") || strings.EqualFold(res, "yes") {
