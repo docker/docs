@@ -2,6 +2,8 @@ package snapshot
 
 import (
 	"bytes"
+	"crypto/sha256"
+	"encoding/hex"
 	"testing"
 	"time"
 
@@ -141,7 +143,10 @@ func TestGetSnapshotNoPreviousSnapshot(t *testing.T) {
 		require.NoError(t, err)
 		require.NoError(t, store.SetKey("gun", data.CanonicalSnapshotRole, key.Algorithm(), key.Public()))
 
-		_, _, err = GetOrCreateSnapshot("gun", store, crypto)
+		hashBytes := sha256.Sum256(snapshotJSON)
+		hashHex := hex.EncodeToString(hashBytes[:])
+
+		_, _, err = GetOrCreateSnapshot("gun", hashHex, store, crypto)
 		require.Error(t, err, "GetSnapshot should have failed")
 		if snapshotJSON == nil {
 			require.IsType(t, storage.ErrNotFound{}, err)
@@ -164,8 +169,11 @@ func TestGetSnapshotReturnsPreviousSnapshotIfUnexpired(t *testing.T) {
 	require.NoError(t, store.UpdateCurrent("gun",
 		storage.MetaUpdate{Role: data.CanonicalSnapshotRole, Version: 0, Data: snapshotJSON}))
 
+	hashBytes := sha256.Sum256(snapshotJSON)
+	hashHex := hex.EncodeToString(hashBytes[:])
+
 	// test when db is missing the role data (no root)
-	_, gottenSnapshot, err := GetOrCreateSnapshot("gun", store, crypto)
+	_, gottenSnapshot, err := GetOrCreateSnapshot("gun", hashHex, store, crypto)
 	require.NoError(t, err, "GetSnapshot should not have failed")
 	require.True(t, bytes.Equal(snapshotJSON, gottenSnapshot))
 }
@@ -191,7 +199,10 @@ func TestGetSnapshotOldSnapshotExpired(t *testing.T) {
 	require.NoError(t, store.UpdateCurrent("gun",
 		storage.MetaUpdate{Role: data.CanonicalSnapshotRole, Version: 0, Data: snapshotJSON}))
 
-	_, gottenSnapshot, err := GetOrCreateSnapshot("gun", store, crypto)
+	hashBytes := sha256.Sum256(snapshotJSON)
+	hashHex := hex.EncodeToString(hashBytes[:])
+
+	_, gottenSnapshot, err := GetOrCreateSnapshot("gun", hashHex, store, crypto)
 	require.NoError(t, err, "GetSnapshot errored")
 
 	require.False(t, bytes.Equal(snapshotJSON, gottenSnapshot),
@@ -225,7 +236,10 @@ func TestCannotMakeNewSnapshotIfNoRoot(t *testing.T) {
 		require.NoError(t, store.UpdateCurrent("gun",
 			storage.MetaUpdate{Role: data.CanonicalSnapshotRole, Version: 1, Data: snapshotJSON}))
 
-		_, _, err := GetOrCreateSnapshot("gun", store, crypto)
+		hashBytes := sha256.Sum256(snapshotJSON)
+		hashHex := hex.EncodeToString(hashBytes[:])
+
+		_, _, err := GetOrCreateSnapshot("gun", hashHex, store, crypto)
 		require.Error(t, err, "GetSnapshot errored")
 
 		if rootJSON == nil { // missing metadata
@@ -257,8 +271,11 @@ func TestCreateSnapshotNoKeyInCrypto(t *testing.T) {
 	require.NoError(t, store.UpdateCurrent("gun",
 		storage.MetaUpdate{Role: data.CanonicalSnapshotRole, Version: 0, Data: snapshotJSON}))
 
+	hashBytes := sha256.Sum256(snapshotJSON)
+	hashHex := hex.EncodeToString(hashBytes[:])
+
 	// pass it a new cryptoservice without the key
-	_, _, err = GetOrCreateSnapshot("gun", store, signed.NewEd25519())
+	_, _, err = GetOrCreateSnapshot("gun", hashHex, store, signed.NewEd25519())
 	require.Error(t, err)
 	require.IsType(t, signed.ErrInsufficientSignatures{}, err)
 }
