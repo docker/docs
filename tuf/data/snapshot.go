@@ -32,6 +32,11 @@ func isValidSnapshotStructure(s Snapshot) error {
 			role: CanonicalSnapshotRole, msg: fmt.Sprintf("expected type %s, not %s", expectedType, s.Type)}
 	}
 
+	if s.Version < 0 {
+		return ErrInvalidMetadata{
+			role: CanonicalSnapshotRole, msg: "version cannot be negative"}
+	}
+
 	for _, role := range []string{CanonicalRootRole, CanonicalTargetsRole} {
 		// Meta is a map of FileMeta, so if the role isn't in the map it returns
 		// an empty FileMeta, which has an empty map, and you can check on keys

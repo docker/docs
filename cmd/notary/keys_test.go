@@ -74,10 +74,10 @@ func TestRemoveOneKeyAbort(t *testing.T) {
 }
 
 // If there is one key, asking to remove it will ask for confirmation.  Passing
-// 'yes'/'y'/'' response will continue the deletion.
+// 'yes'/'y' response will continue the deletion.
 func TestRemoveOneKeyConfirm(t *testing.T) {
 	setUp(t)
-	yesses := []string{"yes", " Y ", "yE", "   ", ""}
+	yesses := []string{"yes", " Y "}
 
 	for _, yesAnswer := range yesses {
 		store := trustmanager.NewKeyMemoryStore(ret)
@@ -108,7 +108,7 @@ func TestRemoveOneKeyConfirm(t *testing.T) {
 // invalid.
 func TestRemoveMultikeysInvalidInput(t *testing.T) {
 	setUp(t)
-	in := bytes.NewBuffer([]byte("nota number\n9999\n-3\n0"))
+	in := bytes.NewBuffer([]byte("notanumber\n9999\n-3\n0"))
 
 	key, err := trustmanager.GenerateED25519Key(rand.Reader)
 	require.NoError(t, err)
@@ -149,7 +149,7 @@ func TestRemoveMultikeysInvalidInput(t *testing.T) {
 		}
 	}
 	require.Equal(t, rootCount, targetCount)
-	require.Equal(t, 4, rootCount) // for each of the 4 invalid inputs
+	require.Equal(t, 5, rootCount) // original + 1 for each of the 4 invalid inputs
 }
 
 // If there is more than one key, removeKeyInteractively will ask which key to
@@ -457,6 +457,46 @@ func TestRotateKeyBothKeys(t *testing.T) {
 	require.True(t, found[data.CanonicalTargetsRole], "targets key was not created")
 	require.True(t, found[data.CanonicalSnapshotRole], "snapshot key was not created")
 	require.True(t, found[data.CanonicalRootRole], "root key was removed somehow")
+}
+
+// RotateKey when rotating a root requires extra confirmation
+func TestRotateKeyRootIsInteractive(t *testing.T) {
+	setUp(t)
+	// Temporary directory where test files will be created
+	tempBaseDir, err := ioutil.TempDir("/tmp", "notary-test-")
+	defer os.RemoveAll(tempBaseDir)
+	require.NoError(t, err, "failed to create a temporary directory: %s", err)
+	gun := "docker.com/notary"
+
+	ret := passphrase.ConstantRetriever("pass")
+
+	ts, _ := setUpRepo(t, tempBaseDir, gun, ret)
+	defer ts.Close()
+
+	k := &keyCommander{
+		configGetter: func() (*viper.Viper, error) {
+			v := viper.New()
+			v.SetDefault("trust_dir", tempBaseDir)
+			v.SetDefault("remote_server.url", ts.URL)
+			return v, nil
+		},
+		getRetriever: func() passphrase.Retriever { return ret },
+		input:        bytes.NewBuffer([]byte("\n")),
+	}
+	c := &cobra.Command{}
+	out := bytes.NewBuffer(make([]byte, 0, 10))
+	c.SetOutput(out)
+
+	require.NoError(t, k.keysRotate(c, []string{gun, data.CanonicalRootRole}))
+
+	require.Contains(t, out.String(), "Aborting action")
+
+	repo, err := client.NewNotaryRepository(tempBaseDir, gun, ts.URL, nil, ret, trustpinning.TrustPinConfig{})
+	require.NoError(t, err, "error creating repo: %s", err)
+
+	// There should still just be one root key (and one targets and one snapshot)
+	allKeys := repo.CryptoService.ListAllKeys()
+	require.Len(t, allKeys, 3)
 }
 
 func TestChangeKeyPassphraseInvalidID(t *testing.T) {

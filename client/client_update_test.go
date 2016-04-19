@@ -800,7 +800,7 @@ var waysToMessUpServer = []swizzleExpectations{
 		swizzle: (*testutils.MetadataSwizzler).ExpireMetadata},
 
 	{desc: "lower metadata version", expectErrs: []interface{}{
-		&trustpinning.ErrValidationFail{}, signed.ErrLowVersion{}},
+		&trustpinning.ErrValidationFail{}, signed.ErrLowVersion{}, data.ErrInvalidMetadata{}},
 		swizzle: func(s *testutils.MetadataSwizzler, role string) error {
 			return s.OffsetMetadataVersion(role, -3)
 		}},
@@ -851,13 +851,6 @@ func TestUpdateRootRemoteCorruptedNoLocalCache(t *testing.T) {
 	}
 
 	for _, testData := range waysToMessUpServerRoot() {
-		if testData.desc == "insufficient signatures" {
-			// Currently if we download the root during the bootstrap phase,
-			// we don't check for enough signatures to meet the threshold.  We
-			// are also not entirely sure if we want to support threshold.
-			continue
-		}
-
 		testUpdateRemoteCorruptValidChecksum(t, updateOpts{
 			forWrite: false,
 			role:     data.CanonicalRootRole,
@@ -1209,12 +1202,6 @@ func TestUpdateLocalAndRemoteRootCorrupt(t *testing.T) {
 				// against the previous if we can
 				continue
 			}
-			if serverExpt.desc == "insufficient signatures" {
-				// Currently if we download the root during the bootstrap phase,
-				// we don't check for enough signatures to meet the threshold.
-				// We are also not sure if we want to support thresholds.
-				continue
-			}
 			testUpdateLocalAndRemoteRootCorrupt(t, true, localExpt, serverExpt)
 			testUpdateLocalAndRemoteRootCorrupt(t, false, localExpt, serverExpt)
 		}
@@ -1320,4 +1307,124 @@ func testUpdateRemoteKeyRotated(t *testing.T, targetsRole string) {
 	require.Error(t, err, "expected failure updating when %s", msg)
 	require.IsType(t, signed.ErrRoleThreshold{}, err, "expected ErrRoleThreshold when %s: got %s",
 		msg, reflect.TypeOf(err))
+}
+
+// A valid root rotation only cares about the immediately previous old root keys,
+// whether or not there are old root roles, and cares that the role is satisfied
+// (for instance if the old role has 2 keys, either of which can sign, then it
+// doesn't matter which key signs the rotation)
+func TestValidateRootRotationWithOldRole(t *testing.T) {
+	// start with a repo with a root with 2 keys, optionally signing 1
+	_, serverSwizzler := newServerSwizzler(t)
+	ts := readOnlyServer(t, serverSwizzler.MetadataCache, http.StatusNotFound, "docker.com/notary")
+	defer ts.Close()
+
+	repo := newBlankRepo(t, ts.URL)
+	defer os.RemoveAll(repo.baseDir)
+
+	// update the root metadata to have 3 keys and threshold 2, and then sign
+	// only with two of the keys
+	rootBytes, err := serverSwizzler.MetadataCache.GetMeta(data.CanonicalRootRole, -1)
+	require.NoError(t, err)
+	signedRoot := data.SignedRoot{}
+	require.NoError(t, json.Unmarshal(rootBytes, &signedRoot))
+
+	// save the old role to prove that it is not needed for client updates
+	oldVersion := fmt.Sprintf("%v.%v", data.CanonicalRootRole, signedRoot.Signed.Version)
+	signedRoot.Signed.Roles[oldVersion] = &data.RootRole{
+		Threshold: 1,
+		KeyIDs:    signedRoot.Signed.Roles[data.CanonicalRootRole].KeyIDs,
+	}
+
+	threeKeys := make([]data.PublicKey, 3)
+	keyIDs := make([]string, len(threeKeys))
+	for i := 0; i < len(threeKeys); i++ {
+		threeKeys[i], err = testutils.CreateKey(
+			serverSwizzler.CryptoService, "docker.com/notary", data.CanonicalRootRole)
+		require.NoError(t, err)
+		keyIDs[i] = threeKeys[i].ID()
+		signedRoot.Signed.Keys[keyIDs[i]] = threeKeys[i]
+	}
+	signedRoot.Signed.Version++
+	signedRoot.Signed.Roles[data.CanonicalRootRole].KeyIDs = keyIDs
+	signedRoot.Signed.Roles[data.CanonicalRootRole].Threshold = 2
+
+	signedObj, err := signedRoot.ToSigned()
+	require.NoError(t, err)
+	// sign with the first two keys
+	require.NoError(t, signed.Sign(serverSwizzler.CryptoService, signedObj, threeKeys[:2], 2, nil))
+	rootBytes, err = json.Marshal(signedObj)
+	require.NoError(t, err)
+	require.NoError(t, serverSwizzler.MetadataCache.SetMeta(data.CanonicalRootRole, rootBytes))
+
+	// update the hashes on both snapshot and timestamp
+	require.NoError(t, serverSwizzler.UpdateSnapshotHashes())
+	require.NoError(t, serverSwizzler.UpdateTimestampHash())
+
+	// Updating success
+	require.NoError(t, repo.Update(false))
+
+	// replace the first key with a different key and change the threshold back to 1
+	replacementKey, err := testutils.CreateKey(
+		serverSwizzler.CryptoService, "docker.com/notary", data.CanonicalRootRole)
+	require.NoError(t, err)
+	signedRoot.Signed.Version++
+	signedRoot.Signed.Keys[replacementKey.ID()] = replacementKey
+	signedRoot.Signed.Roles[data.CanonicalRootRole].KeyIDs = append(keyIDs[1:], replacementKey.ID())
+	signedRoot.Signed.Roles[data.CanonicalRootRole].Threshold = 1
+
+	// signing with just the second key will not satisfy the first role, because that one
+	// has a threshold of 2, although it will satisfy the new role
+	signedObj, err = signedRoot.ToSigned()
+	require.NoError(t, err)
+	require.NoError(t, signed.Sign(
+		serverSwizzler.CryptoService, signedObj, threeKeys[1:2], 1, nil))
+	rootBytes, err = json.Marshal(signedObj)
+	require.NoError(t, err)
+	require.NoError(t, serverSwizzler.MetadataCache.SetMeta(data.CanonicalRootRole, rootBytes))
+
+	// update the hashes on both snapshot and timestamp
+	require.NoError(t, serverSwizzler.UpdateSnapshotHashes())
+	require.NoError(t, serverSwizzler.UpdateTimestampHash())
+
+	// Updating failure
+	require.Error(t, repo.Update(false))
+
+	// sign with the second and third keys, which satisfies both the old and new role
+	require.NoError(t, signed.Sign(
+		serverSwizzler.CryptoService, signedObj, threeKeys[1:], 2, nil))
+	rootBytes, err = json.Marshal(signedObj)
+	require.NoError(t, err)
+	require.NoError(t, serverSwizzler.MetadataCache.SetMeta(data.CanonicalRootRole, rootBytes))
+
+	// update the hashes on both snapshot and timestamp
+	require.NoError(t, serverSwizzler.UpdateSnapshotHashes())
+	require.NoError(t, serverSwizzler.UpdateTimestampHash())
+
+	// Updating success
+	require.NoError(t, repo.Update(false))
+
+	// Update snapshot key and sign with ONLY the replacement key,
+	// which satisfies only the latest root role, and none of the previous
+	signedRoot.Signed.Version++
+	snapKey, err := testutils.CreateKey(
+		serverSwizzler.CryptoService, "docker.com/notary", data.CanonicalSnapshotRole)
+	require.NoError(t, err)
+	signedRoot.Signed.Keys[snapKey.ID()] = snapKey
+	signedRoot.Signed.Roles[data.CanonicalSnapshotRole].KeyIDs = []string{snapKey.ID()}
+
+	signedObj, err = signedRoot.ToSigned()
+	require.NoError(t, err)
+	require.NoError(t, signed.Sign(
+		serverSwizzler.CryptoService, signedObj, []data.PublicKey{replacementKey}, 1, nil))
+	rootBytes, err = json.Marshal(signedObj)
+	require.NoError(t, err)
+	require.NoError(t, serverSwizzler.MetadataCache.SetMeta(data.CanonicalRootRole, rootBytes))
+
+	// update the hashes on both snapshot and timestamp
+	require.NoError(t, serverSwizzler.UpdateSnapshotHashes())
+	require.NoError(t, serverSwizzler.UpdateTimestampHash())
+
+	// Updating success
+	require.NoError(t, repo.Update(false))
 }

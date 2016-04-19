@@ -19,6 +19,28 @@ func TestUpdateCurrent(t *testing.T) {
 	require.Equal(t, []byte("test"), v.data, "Data was incorrect")
 }
 
+func TestUpdateMany(t *testing.T) {
+	s := NewMemStorage()
+	require.NoError(t, s.UpdateMany("gun", []MetaUpdate{
+		{"role1", 1, []byte("test1")},
+		{"role2", 1, []byte("test2")},
+	}))
+
+	_, d, err := s.GetCurrent("gun", "role1")
+	require.Nil(t, err, "Expected error to be nil")
+	require.Equal(t, []byte("test1"), d, "Data was incorrect")
+
+	_, d, err = s.GetCurrent("gun", "role2")
+	require.Nil(t, err, "Expected error to be nil")
+	require.Equal(t, []byte("test2"), d, "Data was incorrect")
+
+	// updating even one with an equal version fails
+	require.IsType(t, &ErrOldVersion{}, s.UpdateMany("gun", []MetaUpdate{
+		{"role1", 1, []byte("test1")},
+		{"role2", 2, []byte("test2")},
+	}))
+}
+
 func TestGetCurrent(t *testing.T) {
 	s := NewMemStorage()
 

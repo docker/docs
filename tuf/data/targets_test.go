@@ -227,3 +227,13 @@ func TestTargetsFromSignedValidatesRoleName(t *testing.T) {
 		require.IsType(t, ErrInvalidRole{}, err)
 	}
 }
+
+// The version cannot be negative
+func TestTargetsFromSignedValidatesVersion(t *testing.T) {
+	tg := validTargetsTemplate()
+	tg.Signed.Version = -1
+	s, err := tg.ToSigned()
+	require.NoError(t, err)
+	_, err = TargetsFromSigned(s, "targets/a")
+	require.IsType(t, ErrInvalidMetadata{}, err)
+}
