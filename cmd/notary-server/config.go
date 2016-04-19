@@ -77,13 +77,12 @@ func getStore(configuration *viper.Viper, hRegister healthRegister) (
 		if err != nil {
 			return nil, err
 		}
-		var s *storage.SQLStorage
-		s, err = storage.NewSQLStorage(storeConfig.Backend, storeConfig.Source)
+		s, err := storage.NewSQLStorage(storeConfig.Backend, storeConfig.Source)
 		if err != nil {
 			return nil, fmt.Errorf("Error starting %s driver: %s", backend, err.Error())
 		}
 		store = *storage.NewTUFMetaStorage(s)
-		hRegister("DB operational", s.CheckHealth, time.Second*60)
+		hRegister("DB operational", s.CheckHealth, time.Minute)
 	case notary.RethinkDBBackend:
 		var sess *gorethink.Session
 		storeConfig, err := utils.ParseRethinkDBStorage(configuration)
@@ -96,9 +95,9 @@ func getStore(configuration *viper.Viper, hRegister healthRegister) (
 		}
 		s := storage.NewRethinkDBStorage(storeConfig.DBName, sess)
 		store = *storage.NewTUFMetaStorage(s)
-		hRegister("DB operational", s.CheckHealth, time.Second*60)
+		hRegister("DB operational", s.CheckHealth, time.Minute)
 	default:
-		return nil, fmt.Errorf("%s not a supported storage backend", backend)
+		return nil, fmt.Errorf("%s is not a supported storage backend", backend)
 	}
 	return store, nil
 }
