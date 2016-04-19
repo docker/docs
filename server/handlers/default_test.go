@@ -241,11 +241,18 @@ func TestGetHandlerSnapshot(t *testing.T) {
 
 	ctx := getContext(handlerState{store: metaStore, crypto: crypto})
 
+	// Need to create a timestamp and snapshot
 	sn, err := repo.SignSnapshot(data.DefaultExpires("snapshot"))
 	snJSON, err := json.Marshal(sn)
 	require.NoError(t, err)
 	metaStore.UpdateCurrent(
 		"gun", storage.MetaUpdate{Role: "snapshot", Version: 1, Data: snJSON})
+
+	ts, err := repo.SignTimestamp(data.DefaultExpires("timestamp"))
+	tsJSON, err := json.Marshal(ts)
+	require.NoError(t, err)
+	metaStore.UpdateCurrent(
+		"gun", storage.MetaUpdate{Role: "timestamp", Version: 1, Data: tsJSON})
 
 	req := &http.Request{
 		Body: ioutil.NopCloser(bytes.NewBuffer(nil)),

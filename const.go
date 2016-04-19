@@ -49,6 +49,11 @@ const (
 	// (one year, in seconds, since one year is forever in terms of internet
 	// content)
 	CacheMaxAgeLimit = 1 * Year
+
+	MySQLBackend     = "mysql"
+	MemoryBackend    = "memory"
+	SQLiteBackend    = "sqlite3"
+	RethinkDBBackend = "rethinkdb"
 )
 
 // NotaryDefaultExpiries is the construct used to configure the default expiry times of

@@ -44,13 +44,15 @@ func GetOrCreateSnapshotKey(gun string, store storage.KeyStore, crypto signed.Cr
 	return nil, err
 }
 
-// GetOrCreateSnapshot either returns the exisiting latest snapshot, or uses
-// whatever the most recent snapshot is to create the next one, only updating
-// the expiry time and version.
-func GetOrCreateSnapshot(gun string, store storage.MetaStore, cryptoService signed.CryptoService) (
+// GetOrCreateSnapshot either returns the existing latest snapshot, or uses
+// whatever the most recent snapshot is to generate the next one, only updating
+// the expiry time and version.  Note that this function does not write generated
+// snapshots to the underlying data store, and will either return the latest snapshot time
+// or nil as the time modified
+func GetOrCreateSnapshot(gun, checksum string, store storage.MetaStore, cryptoService signed.CryptoService) (
 	*time.Time, []byte, error) {
 
-	lastModified, currentJSON, err := store.GetCurrent(gun, data.CanonicalSnapshotRole)
+	lastModified, currentJSON, err := store.GetChecksum(gun, data.CanonicalSnapshotRole, checksum)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -85,13 +87,7 @@ func GetOrCreateSnapshot(gun string, store storage.MetaStore, cryptoService sign
 		logrus.Error("Failed to create a new snapshot")
 		return nil, nil, err
 	}
-
-	c := time.Now()
-	if err = store.UpdateCurrent(gun, *snapshotUpdate); err != nil {
-		return nil, nil, err
-	}
-
-	return &c, snapshotUpdate.Data, nil
+	return nil, snapshotUpdate.Data, nil
 }
 
 // snapshotExpired simply checks if the snapshot is past its expiry time

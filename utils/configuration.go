@@ -13,19 +13,21 @@ import (
 	"github.com/bugsnag/bugsnag-go"
 	"github.com/docker/go-connections/tlsconfig"
 	"github.com/spf13/viper"
-)
 
-// Specifies the list of recognized backends
-const (
-	MemoryBackend = "memory"
-	MySQLBackend  = "mysql"
-	SqliteBackend = "sqlite3"
+	"github.com/docker/notary"
 )
 
 // Storage is a configuration about what storage backend a server should use
 type Storage struct {
 	Backend string
 	Source  string
+}
+
+// RethinkDBStorage is configuration about a RethinkDB backend service
+type RethinkDBStorage struct {
+	Storage
+	CA     string
+	DBName string
 }
 
 // GetPathRelativeToConfig gets a configuration key which is a path, and if
@@ -81,37 +83,66 @@ func ParseLogLevel(configuration *viper.Viper, defaultLevel logrus.Level) (
 	return logrus.ParseLevel(logStr)
 }
 
-// ParseStorage tries to parse out Storage from a Viper.  If backend and
+// ParseSQLStorage tries to parse out Storage from a Viper.  If backend and
 // URL are not provided, returns a nil pointer.  Storage is required (if
 // a backend is not provided, an error will be returned.)
-func ParseStorage(configuration *viper.Viper, allowedBackends []string) (*Storage, error) {
+func ParseSQLStorage(configuration *viper.Viper) (*Storage, error) {
 	store := Storage{
 		Backend: configuration.GetString("storage.backend"),
 		Source:  configuration.GetString("storage.db_url"),
 	}
 
-	supported := false
-	store.Backend = strings.ToLower(store.Backend)
-	for _, backend := range allowedBackends {
-		if backend == store.Backend {
-			supported = true
-			break
-		}
+	switch {
+	case store.Backend != notary.MySQLBackend && store.Backend != notary.SQLiteBackend:
+		return nil, fmt.Errorf(
+			"%s is not a supported SQL backend driver",
+			store.Backend,
+		)
+	case store.Source == "":
+		return nil, fmt.Errorf(
+			"must provide a non-empty database source for %s",
+			store.Backend,
+		)
+	}
+	return &store, nil
+}
+
+// ParseRethinkDBStorage tries to parse out Storage from a Viper.  If backend and
+// URL are not provided, returns a nil pointer.  Storage is required (if
+// a backend is not provided, an error will be returned.)
+func ParseRethinkDBStorage(configuration *viper.Viper) (*RethinkDBStorage, error) {
+	store := RethinkDBStorage{
+		Storage: Storage{
+			Backend: configuration.GetString("storage.backend"),
+			Source:  configuration.GetString("storage.db_url"),
+		},
+		CA:     GetPathRelativeToConfig(configuration, "storage.tls_ca_file"),
+		DBName: configuration.GetString("storage.database"),
 	}
 
-	if !supported {
+	switch {
+	case store.Backend != notary.RethinkDBBackend:
 		return nil, fmt.Errorf(
-			"must specify one of these supported backends: %s",
-			strings.Join(allowedBackends, ", "))
+			"%s is not a supported RethinkDB backend driver",
+			store.Backend,
+		)
+	case store.Source == "":
+		return nil, fmt.Errorf(
+			"must provide a non-empty host:port for %s",
+			store.Backend,
+		)
+	case store.CA == "":
+		return nil, fmt.Errorf(
+			"cowardly refusal to connect to %s without a CA cert",
+			store.Backend,
+		)
+	case store.DBName == "":
+		return nil, fmt.Errorf(
+			"%s requires a specific database to connect to",
+			store.Backend,
+		)
 	}
 
-	if store.Backend == MemoryBackend {
-		return &Storage{Backend: MemoryBackend}, nil
-	}
-	if store.Source == "" {
-		return nil, fmt.Errorf(
-			"must provide a non-empty database source for %s", store.Backend)
-	}
 	return &store, nil
 }
 

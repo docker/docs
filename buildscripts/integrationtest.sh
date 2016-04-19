@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
+composeFile="$1"
+
 function cleanup {
-	docker-compose -f development.yml stop
+	docker-compose -f $composeFile stop
 	# if we're in CircleCI, we cannot remove any containers
 	if [[ -z "${CIRCLECI}" ]]; then
-		docker-compose -f development.yml rm -f
+		docker-compose -f $composeFile rm -f
 	fi
 }
 
@@ -29,8 +31,8 @@ set -x
 
 cleanup
 
-docker-compose -f development.yml config
-docker-compose -f development.yml build ${BUILDOPTS} --pull | tee
-docker-compose -f development.yml up --abort-on-container-exit
+docker-compose -f $composeFile config
+docker-compose -f $composeFile build ${BUILDOPTS} --pull | tee
+docker-compose -f $composeFile up --abort-on-container-exit
 
 trap cleanupAndExit SIGINT SIGTERM EXIT

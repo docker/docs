@@ -11,6 +11,7 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	"github.com/bugsnag/bugsnag-go"
+	"github.com/docker/notary"
 	"github.com/docker/notary/trustmanager"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/require"
@@ -164,25 +165,23 @@ func TestParseInvalidStorageBackend(t *testing.T) {
 		`{}`,
 	}
 	for _, configJSON := range invalids {
-		_, err := ParseStorage(configure(configJSON),
-			[]string{MySQLBackend, SqliteBackend})
+		_, err := ParseSQLStorage(configure(configJSON))
 		require.Error(t, err, fmt.Sprintf("'%s' should be an error", configJSON))
 		require.Contains(t, err.Error(),
-			"must specify one of these supported backends: mysql, sqlite3")
+			"is not a supported SQL backend driver")
 	}
 }
 
 // If there is no DB url for non-memory backends, an error is returned.
-func TestParseInvalidStorageNoDBSource(t *testing.T) {
+func TestParseInvalidSQLStorageNoDBSource(t *testing.T) {
 	invalids := []string{
 		`{"storage": {"backend": "%s"}}`,
 		`{"storage": {"backend": "%s", "db_url": ""}}`,
 	}
-	for _, backend := range []string{MySQLBackend, SqliteBackend} {
+	for _, backend := range []string{notary.MySQLBackend, notary.SQLiteBackend} {
 		for _, configJSONFmt := range invalids {
 			configJSON := fmt.Sprintf(configJSONFmt, backend)
-			_, err := ParseStorage(configure(configJSON),
-				[]string{MySQLBackend, SqliteBackend})
+			_, err := ParseSQLStorage(configure(configJSON))
 			require.Error(t, err, fmt.Sprintf("'%s' should be an error", configJSON))
 			require.Contains(t, err.Error(),
 				fmt.Sprintf("must provide a non-empty database source for %s", backend))
@@ -190,22 +189,11 @@ func TestParseInvalidStorageNoDBSource(t *testing.T) {
 	}
 }
 
-// If a memory storage backend is specified, no DB URL is necessary for a
-// successful storage parse.
-func TestParseStorageMemoryStore(t *testing.T) {
-	config := configure(`{"storage": {"backend": "MEMORY"}}`)
-	expected := Storage{Backend: MemoryBackend}
-
-	store, err := ParseStorage(config, []string{MySQLBackend, MemoryBackend})
-	require.NoError(t, err)
-	require.Equal(t, expected, *store)
-}
-
 // A supported backend with DB source will be successfully parsed.
-func TestParseStorageDBStore(t *testing.T) {
+func TestParseSQLStorageDBStore(t *testing.T) {
 	config := configure(`{
 		"storage": {
-			"backend": "MySQL",
+			"backend": "mysql",
 			"db_url": "username:passord@tcp(hostname:1234)/dbname"
 		}
 	}`)
@@ -215,19 +203,80 @@ func TestParseStorageDBStore(t *testing.T) {
 		Source:  "username:passord@tcp(hostname:1234)/dbname",
 	}
 
-	store, err := ParseStorage(config, []string{"mysql"})
+	store, err := ParseSQLStorage(config)
 	require.NoError(t, err)
 	require.Equal(t, expected, *store)
 }
 
-func TestParseStorageWithEnvironmentVariables(t *testing.T) {
+// ParseRethinkDBStorage will reject non rethink databases
+func TestParseRethinkStorageDBStoreInvalidBackend(t *testing.T) {
+	config := configure(`{
+		"storage": {
+			"backend": "mysql",
+			"db_url": "username:password@tcp(hostname:1234)/dbname",
+			"tls_ca_file": "/tls/ca.pem",
+			"database": "rethinkdbtest"
+		}
+	}`)
+
+	_, err := ParseRethinkDBStorage(config)
+	require.Error(t, err)
+	require.Contains(t, err.Error(), "not a supported RethinkDB backend")
+}
+
+// ParseRethinkDBStorage will require a db_url for rethink databases
+func TestParseRethinkStorageDBStoreEmptyDBUrl(t *testing.T) {
+	config := configure(`{
+		"storage": {
+			"backend": "rethinkdb",
+			"tls_ca_file": "/tls/ca.pem",
+			"database": "rethinkdbtest"
+		}
+	}`)
+
+	_, err := ParseRethinkDBStorage(config)
+	require.Error(t, err)
+	require.Contains(t, err.Error(), "must provide a non-empty host:port")
+}
+
+// ParseRethinkDBStorage will require a dbname for rethink databases
+func TestParseRethinkStorageDBStoreEmptyDBName(t *testing.T) {
+	config := configure(`{
+		"storage": {
+			"backend": "rethinkdb",
+			"db_url": "username:password@tcp(hostname:1234)/dbname",
+			"tls_ca_file": "/tls/ca.pem"
+		}
+	}`)
+
+	_, err := ParseRethinkDBStorage(config)
+	require.Error(t, err)
+	require.Contains(t, err.Error(), "requires a specific database to connect to")
+}
+
+// ParseRethinkDBStorage will require a CA cert for rethink databases
+func TestParseRethinkStorageDBStoreEmptyCA(t *testing.T) {
+	config := configure(`{
+		"storage": {
+			"backend": "rethinkdb",
+			"db_url": "username:password@tcp(hostname:1234)/dbname",
+			"database": "rethinkdbtest"
+		}
+	}`)
+
+	_, err := ParseRethinkDBStorage(config)
+	require.Error(t, err)
+	require.Contains(t, err.Error(), "cowardly refusal to connect to rethinkdb without a CA cert")
+}
+
+func TestParseSQLStorageWithEnvironmentVariables(t *testing.T) {
 	config := configure(`{
 		"storage": {
 			"db_url": "username:passord@tcp(hostname:1234)/dbname"
 		}
 	}`)
 
-	vars := map[string]string{"STORAGE_BACKEND": "MySQL"}
+	vars := map[string]string{"STORAGE_BACKEND": "mysql"}
 	setupEnvironmentVariables(t, vars)
 	defer cleanupEnvironmentVariables(t, vars)
 
@@ -236,7 +285,7 @@ func TestParseStorageWithEnvironmentVariables(t *testing.T) {
 		Source:  "username:passord@tcp(hostname:1234)/dbname",
 	}
 
-	store, err := ParseStorage(config, []string{"mysql"})
+	store, err := ParseSQLStorage(config)
 	require.NoError(t, err)
 	require.Equal(t, expected, *store)
 }

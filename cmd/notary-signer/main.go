@@ -16,12 +16,16 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 
+	"github.com/dancannon/gorethink"
 	"github.com/docker/distribution/health"
+	"github.com/docker/notary"
 	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/signer"
 	"github.com/docker/notary/signer/api"
 	"github.com/docker/notary/signer/keydbstore"
+	"github.com/docker/notary/storage"
+	"github.com/docker/notary/storage/rethinkdb"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/utils"
@@ -41,10 +45,11 @@ const (
 )
 
 var (
-	debug      bool
-	logFormat  string
-	configFile string
-	mainViper  = viper.New()
+	debug       bool
+	logFormat   string
+	configFile  string
+	mainViper   = viper.New()
+	doBootstrap bool
 )
 
 func init() {
@@ -53,6 +58,7 @@ func init() {
 	flag.StringVar(&configFile, "config", "", "Path to configuration file")
 	flag.BoolVar(&debug, "debug", false, "show the version and exit")
 	flag.StringVar(&logFormat, "logf", "json", "Set the format of the logs. Only 'json' and 'logfmt' are supported at the moment.")
+	flag.BoolVar(&doBootstrap, "bootstrap", false, "Do any necessary setup of configured backend storage services")
 
 	// this needs to be in init so that _ALL_ logs are in the correct format
 	if logFormat == jsonLogFormat {
@@ -74,28 +80,39 @@ func passphraseRetriever(keyName, alias string, createNew bool, attempts int) (p
 // mapping
 func setUpCryptoservices(configuration *viper.Viper, allowedBackends []string) (
 	signer.CryptoServiceIndex, error) {
-
-	storeConfig, err := utils.ParseStorage(configuration, allowedBackends)
-	if err != nil {
-		return nil, err
-	}
+	backend := configuration.GetString("storage.backend")
 
 	var keyStore trustmanager.KeyStore
-	if storeConfig.Backend == utils.MemoryBackend {
+	switch backend {
+	case notary.MemoryBackend:
 		keyStore = trustmanager.NewKeyMemoryStore(
 			passphrase.ConstantRetriever("memory-db-ignore"))
-	} else {
-		defaultAlias := configuration.GetString("storage.default_alias")
-		if defaultAlias == "" {
-			// backwards compatibility - support this environment variable
-			defaultAlias = configuration.GetString(defaultAliasEnv)
+	case notary.RethinkDBBackend:
+		var sess *gorethink.Session
+		storeConfig, err := utils.ParseRethinkDBStorage(configuration)
+		if err != nil {
+			return nil, err
 		}
-
-		if defaultAlias == "" {
-			return nil, fmt.Errorf("must provide a default alias for the key DB")
+		defaultAlias, err := getDefaultAlias(configuration)
+		if err != nil {
+			return nil, err
 		}
-		logrus.Debug("Default Alias: ", defaultAlias)
-
+		sess, err = rethinkdb.Connection(storeConfig.CA, storeConfig.Source)
+		if err != nil {
+			return nil, err
+		}
+		s := keydbstore.NewRethinkDBKeyStore(passphraseRetriever, defaultAlias, sess)
+		health.RegisterPeriodicFunc("DB operational", s.CheckHealth, time.Minute)
+		keyStore = s
+	case notary.MySQLBackend, notary.SQLiteBackend:
+		storeConfig, err := utils.ParseSQLStorage(configuration)
+		if err != nil {
+			return nil, err
+		}
+		defaultAlias, err := getDefaultAlias(configuration)
+		if err != nil {
+			return nil, err
+		}
 		dbStore, err := keydbstore.NewKeyDBStore(
 			passphraseRetriever, defaultAlias, storeConfig.Backend, storeConfig.Source)
 		if err != nil {
@@ -103,8 +120,16 @@ func setUpCryptoservices(configuration *viper.Viper, allowedBackends []string) (
 		}
 
 		health.RegisterPeriodicFunc(
-			"DB operational", dbStore.HealthCheck, time.Second*60)
+			"DB operational", dbStore.HealthCheck, time.Minute)
 		keyStore = dbStore
+	}
+
+	if doBootstrap {
+		err := bootstrap(keyStore)
+		if err != nil {
+			logrus.Fatal(err.Error())
+		}
+		os.Exit(0)
 	}
 
 	cryptoService := cryptoservice.NewCryptoService(keyStore)
@@ -112,6 +137,20 @@ func setUpCryptoservices(configuration *viper.Viper, allowedBackends []string) (
 	cryptoServices[data.ED25519Key] = cryptoService
 	cryptoServices[data.ECDSAKey] = cryptoService
 	return cryptoServices, nil
+}
+
+func getDefaultAlias(configuration *viper.Viper) (string, error) {
+	defaultAlias := configuration.GetString("storage.default_alias")
+	if defaultAlias == "" {
+		// backwards compatibility - support this environment variable
+		defaultAlias = configuration.GetString(defaultAliasEnv)
+	}
+
+	if defaultAlias == "" {
+		return "", fmt.Errorf("must provide a default alias for the key DB")
+	}
+	logrus.Debug("Default Alias: ", defaultAlias)
+	return defaultAlias, nil
 }
 
 // set up the GRPC server
@@ -207,7 +246,7 @@ func main() {
 
 	// setup the cryptoservices
 	cryptoServices, err := setUpCryptoservices(mainViper,
-		[]string{utils.MySQLBackend, utils.MemoryBackend})
+		[]string{notary.MySQLBackend, notary.MemoryBackend})
 	if err != nil {
 		logrus.Fatal(err.Error())
 	}
@@ -244,4 +283,12 @@ func debugServer(addr string) {
 	if err := http.ListenAndServe(addr, nil); err != nil {
 		logrus.Fatalf("error listening on debug interface: %v", err)
 	}
+}
+
+func bootstrap(s interface{}) error {
+	store, ok := s.(storage.Bootstrapper)
+	if !ok {
+		return fmt.Errorf("Store does not support bootstrapping.")
+	}
+	return store.Bootstrap()
 }
