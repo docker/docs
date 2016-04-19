@@ -2,12 +2,14 @@ package main
 
 import (
 	"bufio"
+	"encoding/hex"
 	"fmt"
 	"io/ioutil"
 	"net"
 	"net/http"
 	"net/url"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 
@@ -16,6 +18,7 @@ import (
 	"github.com/docker/distribution/registry/client/transport"
 	"github.com/docker/docker/pkg/term"
 	"github.com/docker/go-connections/tlsconfig"
+	"github.com/docker/notary"
 	notaryclient "github.com/docker/notary/client"
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/trustpinning"
@@ -35,6 +38,12 @@ var cmdTufAddTemplate = usageTemplate{
 	Use:   "add [ GUN ] <target> <file>",
 	Short: "Adds the file as a target to the trusted collection.",
 	Long:  "Adds the file as a target to the local trusted collection identified by the Globally Unique Name. This is an offline operation.  Please then use `publish` to push the changes to the remote trusted collection.",
+}
+
+var cmdTufAddHashTemplate = usageTemplate{
+	Use:   "addhash [ GUN ] <target> <byte size> <hashes>",
+	Short: "Adds the byte size and hash(es) as a target to the trusted collection.",
+	Long:  "Adds the specified byte size and hash(es) as a target to the local trusted collection identified by the Globally Unique Name. This is an offline operation.  Please then use `publish` to push the changes to the remote trusted collection.",
 }
 
 var cmdTufRemoveTemplate = usageTemplate{
@@ -79,7 +88,9 @@ type tufCommander struct {
 	retriever    passphrase.Retriever
 
 	// these are for command line parsing - no need to set
-	roles []string
+	roles  []string
+	sha256 string
+	sha512 string
 }
 
 func (t *tufCommander) AddToCommand(cmd *cobra.Command) {
@@ -101,6 +112,84 @@ func (t *tufCommander) AddToCommand(cmd *cobra.Command) {
 	cmdTufRemove := cmdTufRemoveTemplate.ToCommand(t.tufRemove)
 	cmdTufRemove.Flags().StringSliceVarP(&t.roles, "roles", "r", nil, "Delegation roles to remove this target from")
 	cmd.AddCommand(cmdTufRemove)
+
+	cmdTufAddHash := cmdTufAddHashTemplate.ToCommand(t.tufAddByHash)
+	cmdTufAddHash.Flags().StringSliceVarP(&t.roles, "roles", "r", nil, "Delegation roles to add this target to")
+	cmdTufAddHash.Flags().StringVar(&t.sha256, notary.SHA256, "", "hex encoded sha256 of the target to add")
+	cmdTufAddHash.Flags().StringVar(&t.sha512, notary.SHA512, "", "hex encoded sha512 of the target to add")
+	cmd.AddCommand(cmdTufAddHash)
+}
+
+func (t *tufCommander) tufAddByHash(cmd *cobra.Command, args []string) error {
+	if len(args) < 3 || t.sha256 == "" && t.sha512 == "" {
+		cmd.Usage()
+		return fmt.Errorf("Must specify a GUN, target, byte size of target data, and at least one hash")
+	}
+	config, err := t.configGetter()
+	if err != nil {
+		return err
+	}
+
+	gun := args[0]
+	targetName := args[1]
+	targetSize := args[2]
+
+	targetInt64Len, err := strconv.ParseInt(targetSize, 0, 64)
+	if err != nil {
+		return err
+	}
+
+	trustPin, err := getTrustPinning(config)
+	if err != nil {
+		return err
+	}
+
+	// no online operations are performed by add so the transport argument
+	// should be nil
+	nRepo, err := notaryclient.NewNotaryRepository(
+		config.GetString("trust_dir"), gun, getRemoteTrustServer(config), nil, t.retriever, trustPin)
+	if err != nil {
+		return err
+	}
+
+	targetHash := data.Hashes{}
+	if t.sha256 != "" {
+		if len(t.sha256) != notary.Sha256HexSize {
+			return fmt.Errorf("invalid sha256 hex contents provided")
+		}
+		sha256Hash, err := hex.DecodeString(t.sha256)
+		if err != nil {
+			return err
+		}
+		targetHash[notary.SHA256] = sha256Hash
+	}
+	if t.sha512 != "" {
+		if len(t.sha512) != notary.Sha512HexSize {
+			return fmt.Errorf("invalid sha512 hex contents provided")
+		}
+		sha512Hash, err := hex.DecodeString(t.sha512)
+		if err != nil {
+			return err
+		}
+		targetHash[notary.SHA512] = sha512Hash
+	}
+
+	// Manually construct the target with the given byte size and hashes
+	target := &notaryclient.Target{Name: targetName, Hashes: targetHash, Length: targetInt64Len}
+
+	// If roles is empty, we default to adding to targets
+	if err = nRepo.AddTarget(target, t.roles...); err != nil {
+		return err
+	}
+	// Include the hash algorithms we're using for pretty printing
+	hashesUsed := []string{}
+	for hashName := range targetHash {
+		hashesUsed = append(hashesUsed, hashName)
+	}
+	cmd.Printf(
+		"Addition of target \"%s\" by %s hash to repository \"%s\" staged for next publish.\n",
+		targetName, strings.Join(hashesUsed, ", "), gun)
+	return nil
 }
 
 func (t *tufCommander) tufAdd(cmd *cobra.Command, args []string) error {
