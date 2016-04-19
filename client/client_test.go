@@ -864,6 +864,22 @@ func testErrorWritingChangefiles(t *testing.T, writeChangeFile func(*NotaryRepos
 	require.IsType(t, &os.PathError{}, err)
 }
 
+// Ensures that AddTarget errors on invalid target input (no hashes)
+func TestAddTargetWithInvalidTarget(t *testing.T) {
+	ts, _, _ := simpleTestServer(t)
+	defer ts.Close()
+
+	repo, _ := initializeRepo(t, data.ECDSAKey, "docker.com/notary", ts.URL, false)
+	defer os.RemoveAll(repo.baseDir)
+
+	target, err := NewTarget("latest", "../fixtures/intermediate-ca.crt")
+	require.NoError(t, err, "error creating target")
+
+	// Clear the hashes
+	target.Hashes = data.Hashes{}
+	require.Error(t, repo.AddTarget(target, data.CanonicalTargetsRole))
+}
+
 // TestAddTargetErrorWritingChanges expects errors writing a change to file
 // to be propagated.
 func TestAddTargetErrorWritingChanges(t *testing.T) {
