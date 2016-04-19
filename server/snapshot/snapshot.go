@@ -49,10 +49,10 @@ func GetOrCreateSnapshotKey(gun string, store storage.KeyStore, crypto signed.Cr
 // the expiry time and version.  Note that this function does not write generated
 // snapshots to the underlying data store, and will either return the latest snapshot time
 // or nil as the time modified
-func GetOrCreateSnapshot(gun string, store storage.MetaStore, cryptoService signed.CryptoService) (
+func GetOrCreateSnapshot(gun, checksum string, store storage.MetaStore, cryptoService signed.CryptoService) (
 	*time.Time, []byte, error) {
 
-	lastModified, currentJSON, err := store.GetCurrent(gun, data.CanonicalSnapshotRole)
+	lastModified, currentJSON, err := store.GetChecksum(gun, data.CanonicalSnapshotRole, checksum)
 	if err != nil {
 		return nil, nil, err
 	}
