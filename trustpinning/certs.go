@@ -123,7 +123,7 @@ func ValidateRoot(certStore trustmanager.X509Store, root *data.Signed, gun strin
 			return &ErrValidationFail{Reason: "failed to validate data with current trusted certificates"}
 		}
 	} else {
-		logrus.Debugf("found no currently valid root certificates for %s, using trust_pinning config to bootstrap trust:", gun, trustPinning)
+		logrus.Debugf("found no currently valid root certificates for %s, using trust_pinning config to bootstrap trust", gun)
 		trustPinCheckFunc, err := NewTrustPinChecker(trustPinning, gun)
 		if err != nil {
 			return &ErrValidationFail{Reason: err.Error()}
@@ -273,6 +273,11 @@ func parseAllCerts(signedRoot *data.SignedRoot) (map[string]*x509.Certificate, m
 		// If we got no leaf certificates or we got more than one, fail
 		if len(leafCertList) != 1 {
 			logrus.Debugf("invalid chain due to leaf certificate missing or too many leaf certificates for keyID: %s", keyID)
+			continue
+		}
+		// If we found a leaf certificate, assert that the cert bundle started with a leaf
+		if decodedCerts[0].IsCA {
+			logrus.Debugf("invalid chain due to leaf certificate not being first certificate for keyID: %s", keyID)
 			continue
 		}
 

@@ -202,10 +202,11 @@ func TestValidateRoot(t *testing.T) {
 	require.Equal(t, err, &ErrValidationFail{Reason: "unable to retrieve valid leaf certificates"})
 
 	//
-	// This call to ValidateRoot will succeed in getting to the TUF validation, since
+	// This call to ValidateRoot could succeed in getting to the TUF validation, since
 	// we are using a valid PEM encoded certificate chain of intermediate + leaf cert
 	// that are signed by a trusted root authority and the leaf cert has a correct CN.
-	// It will, however, fail to validate, because it has an invalid TUF signature
+	// It will, however, fail to validate, because the leaf cert does not precede the
+	// intermediate in the certificate bundle
 	//
 	// Execute our template deleting the old buffer first
 	signedRootBytes.Reset()
@@ -217,7 +218,7 @@ func TestValidateRoot(t *testing.T) {
 
 	err = ValidateRoot(certStore, &testSignedRoot, "secure.example.com", TrustPinConfig{})
 	require.Error(t, err, "An error was expected")
-	require.Equal(t, err, &ErrValidationFail{Reason: "failed to validate integrity of roots"})
+	require.Equal(t, err, &ErrValidationFail{Reason: "unable to retrieve valid leaf certificates"})
 }
 
 func TestValidateRootWithoutTOFUS(t *testing.T) {
