@@ -349,6 +349,9 @@ func addChange(cl *changelist.FileChangelist, c changelist.Change, roles ...stri
 // If roles are unspecified, the default role is "targets"
 func (r *NotaryRepository) AddTarget(target *Target, roles ...string) error {
 
+	if len(target.Hashes) == 0 {
+		return fmt.Errorf("no hashes specified for target \"%s\"", target.Name)
+	}
 	cl, err := changelist.NewFileChangelist(filepath.Join(r.tufRepoPath, "changelist"))
 	if err != nil {
 		return err
