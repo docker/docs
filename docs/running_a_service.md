@@ -225,7 +225,7 @@ independently. The database may also be scaled independently but this is left as
 and exercise for experienced DBAs and Operations teams. A typical deployment will
 look like the below diagram:
 
-![Notary server Deployment Diagram](images/service-deployment.svg)
+![Notary server Deployment Diagram](https://cdn.rawgit.com/docker/notary/09f81717080f53276e6881ece57cbbbf91b8e2a7/docs/images/service-deployment.svg)
 
 In the diagram, a load balancer routes external traffic to a cluster of Notary server
 instances. These may make requests to Notary signer instances if either a) signing
