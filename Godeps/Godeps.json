@@ -1,6 +1,6 @@
 {
 	"ImportPath": "github.com/docker/notary",
-	"GoVersion": "go1.6",
+	"GoVersion": "go1.6.1",
 	"Packages": [
 		"./..."
 	],
