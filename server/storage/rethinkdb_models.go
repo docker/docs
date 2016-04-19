@@ -16,10 +16,11 @@ var (
 		Name:       RDBTUFFile{}.TableName(),
 		PrimaryKey: "gun_role_version",
 		SecondaryIndexes: map[string][]string{
-			rdbSha256Idx:        nil,
-			"gun":               nil,
-			rdbGunRoleIdx:       {"gun", "role"},
-			rdbGunRoleSha256Idx: {"gun", "role", "sha256"},
+			rdbSha256Idx:         nil,
+			"gun":                nil,
+			"timestamp_checksum": nil,
+			rdbGunRoleIdx:        {"gun", "role"},
+			rdbGunRoleSha256Idx:  {"gun", "role", "sha256"},
 		},
 		// this configuration guarantees linearizability of individual atomic operations on individual documents
 		Config: map[string]string{

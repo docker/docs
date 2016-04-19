@@ -5,8 +5,11 @@ import (
 
 	"golang.org/x/net/context"
 
+	"encoding/hex"
+	"encoding/json"
+	"fmt"
+	"github.com/docker/notary"
 	"github.com/docker/notary/server/errors"
-	"github.com/docker/notary/server/snapshot"
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/server/timestamp"
 	"github.com/docker/notary/tuf/data"
@@ -61,12 +64,10 @@ func getMaybeServerSigned(ctx context.Context, store storage.MetaStore, gun, rol
 		out          []byte
 		err          error
 	)
-	switch role {
-	case data.CanonicalSnapshotRole:
-		lastModified, out, err = snapshot.GetOrCreateSnapshot(gun, store, cryptoService)
-	case data.CanonicalTimestampRole:
-		lastModified, out, err = timestamp.GetOrCreateTimestamp(gun, store, cryptoService)
+	if role != data.CanonicalTimestampRole && role != data.CanonicalSnapshotRole {
+		return nil, nil, fmt.Errorf("role %s cannot be server signed", role)
 	}
+	lastModified, out, err = timestamp.GetOrCreateTimestamp(gun, store, cryptoService)
 	if err != nil {
 		switch err.(type) {
 		case *storage.ErrNoKey, storage.ErrNotFound:
@@ -74,6 +75,23 @@ func getMaybeServerSigned(ctx context.Context, store storage.MetaStore, gun, rol
 		default:
 			return nil, nil, errors.ErrUnknown.WithDetail(err)
 		}
+	}
+
+	// If we wanted the snapshot, get it by checksum from the timestamp data
+	if role == data.CanonicalSnapshotRole {
+		ts := new(data.SignedTimestamp)
+		if err := json.Unmarshal(out, ts); err != nil {
+			return nil, nil, err
+		}
+		snapshotChecksums, err := ts.GetSnapshot()
+		if err != nil || snapshotChecksums == nil {
+			return nil, nil, fmt.Errorf("could not retrieve latest snapshot checksum")
+		}
+		if snapshotSha256Bytes, ok := snapshotChecksums.Hashes[notary.SHA256]; ok {
+			snapshotSha256Hex := hex.EncodeToString(snapshotSha256Bytes[:])
+			return store.GetChecksum(gun, role, snapshotSha256Hex)
+		}
+		return nil, nil, fmt.Errorf("could not retrieve sha256 snapshot checksum")
 	}
 
 	return lastModified, out, nil

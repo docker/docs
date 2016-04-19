@@ -4,10 +4,12 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"fmt"
+	"sort"
 	"time"
 
 	"github.com/dancannon/gorethink"
 	"github.com/docker/notary/storage/rethinkdb"
+	"github.com/docker/notary/tuf/data"
 )
 
 // RDBTUFFile is a tuf file record
@@ -19,6 +21,7 @@ type RDBTUFFile struct {
 	Version        int           `gorethink:"version"`
 	Sha256         string        `gorethink:"sha256"`
 	Data           []byte        `gorethink:"data"`
+	TSchecksum     string        `gorethink:"timestamp_checksum"`
 }
 
 // TableName returns the table name for the record type
@@ -120,15 +123,71 @@ func (rdb RethinkDB) UpdateCurrent(gun string, update MetaUpdate) error {
 	return err
 }
 
+// UpdateCurrentWithTSChecksum adds new metadata version for the given GUN with an associated
+// checksum for the timestamp it belongs to, to afford us transaction-like functionality
+func (rdb RethinkDB) UpdateCurrentWithTSChecksum(gun, tsChecksum string, update MetaUpdate) error {
+	now := time.Now()
+	checksum := sha256.Sum256(update.Data)
+	file := RDBTUFFile{
+		Timing: rethinkdb.Timing{
+			CreatedAt: now,
+			UpdatedAt: now,
+		},
+		GunRoleVersion: []interface{}{gun, update.Role, update.Version},
+		Gun:            gun,
+		Role:           update.Role,
+		Version:        update.Version,
+		Sha256:         hex.EncodeToString(checksum[:]),
+		TSchecksum:     tsChecksum,
+		Data:           update.Data,
+	}
+	_, err := gorethink.DB(rdb.dbName).Table(file.TableName()).Insert(
+		file,
+		gorethink.InsertOpts{
+			Conflict: "error", // default but explicit for clarity of intent
+		},
+	).RunWrite(rdb.sess)
+	if err != nil && gorethink.IsConflictErr(err) {
+		return &ErrOldVersion{}
+	}
+	return err
+}
+
+// Used for sorting updates alphabetically by role name, such that timestamp is always last:
+// Ordering: root, snapshot, targets, targets/* (delegations), timestamp
+type updateSorter []MetaUpdate
+
+func (u updateSorter) Len() int      { return len(u) }
+func (u updateSorter) Swap(i, j int) { u[i], u[j] = u[j], u[i] }
+func (u updateSorter) Less(i, j int) bool {
+	return u[i].Role < u[j].Role
+}
+
 // UpdateMany adds multiple new metadata for the given GUN. RethinkDB does
 // not support transactions, therefore we will attempt to insert the timestamp
-// first as this represents a published version of the repo. If this is successful,
-// we will insert the remaining roles (in any order). If any of those roles
-// errors on insert, we will do a best effort rollback, at a minimum attempting
-// to delete the timestamp so nobody pulls a broken repo.
+// last as this represents a published version of the repo.  However, we will
+// insert all other role data in alphabetical order first, and also include the
+// associated timestamp checksum so that we can easily roll back this pseudotransaction
 func (rdb RethinkDB) UpdateMany(gun string, updates []MetaUpdate) error {
+	// find the timestamp first and save its checksum
+	// then apply the updates in alphabetic role order with the timestamp last
+	// if there are any failures, we roll back in the same alphabetic order
+	var tsChecksum string
 	for _, up := range updates {
-		if err := rdb.UpdateCurrent(gun, up); err != nil {
+		if up.Role == data.CanonicalTimestampRole {
+			tsChecksumBytes := sha256.Sum256(up.Data)
+			tsChecksum = hex.EncodeToString(tsChecksumBytes[:])
+			break
+		}
+	}
+
+	// alphabetize the updates by Role name
+	sort.Stable(updateSorter(updates))
+
+	for _, up := range updates {
+		if err := rdb.UpdateCurrentWithTSChecksum(gun, tsChecksum, up); err != nil {
+			// roll back with best-effort deletion, and then error out
+			rdb.deleteByTSChecksum(tsChecksum)
 			return err
 		}
 	}
@@ -187,6 +246,18 @@ func (rdb RethinkDB) Delete(gun string) error {
 	).Delete().RunWrite(rdb.sess)
 	if err != nil {
 		return fmt.Errorf("unable to delete %s from database: %s", gun, err.Error())
+	}
+	return nil
+}
+
+// deleteByTSChecksum removes all metadata by a timestamp checksum, used for rolling back a "transaction"
+// from a call to rethinkdb's UpdateMany
+func (rdb RethinkDB) deleteByTSChecksum(tsChecksum string) error {
+	_, err := gorethink.DB(rdb.dbName).Table(RDBTUFFile{}.TableName()).GetAllByIndex(
+		"timestamp_checksum", []string{tsChecksum},
+	).Delete().RunWrite(rdb.sess)
+	if err != nil {
+		return fmt.Errorf("unable to delete timestamp checksum data: %s from database: %s", tsChecksum, err.Error())
 	}
 	return nil
 }
