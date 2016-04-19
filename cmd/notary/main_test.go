@@ -98,6 +98,55 @@ func TestRemoteServerCommandLineFlagOverridesConfig(t *testing.T) {
 	require.Equal(t, "http://overridden", getRemoteTrustServer(config))
 }
 
+// invalid commands for `notary addhash`
+func TestInvalidAddHashCommands(t *testing.T) {
+	tempDir := tempDirWithConfig(t, `{"remote_server": {"url": "https://myserver"}}`)
+	defer os.RemoveAll(tempDir)
+	configFile := filepath.Join(tempDir, "config.json")
+
+	b := new(bytes.Buffer)
+	cmd := NewNotaryCommand()
+	cmd.SetOutput(b)
+
+	// No hashes given
+	cmd.SetArgs(append([]string{"-c", configFile, "-d", tempDir}, "addhash", "gun", "test", "10"))
+	err := cmd.Execute()
+	require.Error(t, err)
+	require.Contains(t, err.Error(), "Must specify a GUN, target, byte size of target data, and at least one hash")
+
+	// Invalid byte size given
+	cmd = NewNotaryCommand()
+	cmd.SetArgs(append([]string{"-c", configFile, "-d", tempDir}, "addhash", "gun", "test", "sizeNotAnInt", "--sha256", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"))
+	err = cmd.Execute()
+	require.Error(t, err)
+
+	// Invalid sha256 size given
+	cmd = NewNotaryCommand()
+	cmd.SetArgs(append([]string{"-c", configFile, "-d", tempDir}, "addhash", "gun", "test", "1", "--sha256", "a"))
+	err = cmd.Execute()
+	require.Error(t, err)
+	require.Contains(t, err.Error(), "invalid sha256 hex contents provided")
+
+	// Invalid sha256 hex given
+	cmd = NewNotaryCommand()
+	cmd.SetArgs(append([]string{"-c", configFile, "-d", tempDir}, "addhash", "gun", "test", "1", "--sha256", "***aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa***"))
+	err = cmd.Execute()
+	require.Error(t, err)
+
+	// Invalid sha512 size given
+	cmd = NewNotaryCommand()
+	cmd.SetArgs(append([]string{"-c", configFile, "-d", tempDir}, "addhash", "gun", "test", "1", "--sha512", "a"))
+	err = cmd.Execute()
+	require.Error(t, err)
+	require.Contains(t, err.Error(), "invalid sha512 hex contents provided")
+
+	// Invalid sha512 hex given
+	cmd = NewNotaryCommand()
+	cmd.SetArgs(append([]string{"-c", configFile, "-d", tempDir}, "addhash", "gun", "test", "1", "--sha512", "***aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa******aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa***"))
+	err = cmd.Execute()
+	require.Error(t, err)
+}
+
 var exampleValidCommands = []string{
 	"init repo",
 	"list repo",
