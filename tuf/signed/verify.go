@@ -36,7 +36,6 @@ func VerifyRoot(s *data.Signed, minVersion int, keys map[string]data.PublicKey) 
 	if err != nil {
 		return err
 	}
-
 	for _, sig := range s.Signatures {
 		// method lookup is consistent due to Unmarshal JSON doing lower case for us.
 		method := sig.Method
@@ -45,7 +44,6 @@ func VerifyRoot(s *data.Signed, minVersion int, keys map[string]data.PublicKey) 
 			logrus.Debugf("continuing b/c signing method is not supported for verify root: %s\n", sig.Method)
 			continue
 		}
-
 		key, ok := keys[sig.KeyID]
 		if !ok {
 			logrus.Debugf("continuing b/c signing key isn't present in keys: %s\n", sig.KeyID)

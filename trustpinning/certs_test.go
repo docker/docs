@@ -409,19 +409,19 @@ func TestValidateRootWithPinnerCertAndIntermediates(t *testing.T) {
 				otherKey.ID():     otherKey,
 			},
 			Roles: map[string]*data.RootRole{
-				"root": &data.RootRole{
+				"root": {
 					KeyIDs:    []string{ecdsax509Key.ID()},
 					Threshold: 1,
 				},
-				"targets": &data.RootRole{
+				"targets": {
 					KeyIDs:    []string{otherKey.ID()},
 					Threshold: 1,
 				},
-				"snapshot": &data.RootRole{
+				"snapshot": {
 					KeyIDs:    []string{otherKey.ID()},
 					Threshold: 1,
 				},
-				"timestamp": &data.RootRole{
+				"timestamp": {
 					KeyIDs:    []string{otherKey.ID()},
 					Threshold: 1,
 				},
@@ -557,8 +557,6 @@ func TestValidateRootWithPinnedCA(t *testing.T) {
 	// Now construct a new root with a valid cert chain, such that signatures are correct over the 'notary-signer' GUN.  Pin the root-ca and validate
 	leafCert, err := trustmanager.LoadCertFromFile("../fixtures/notary-signer.crt")
 	require.NoError(t, err)
-	pemLeafBytes := trustmanager.CertToPEM(leafCert)
-	newRootLeafKey := data.NewPublicKey(data.RSAx509Key, pemLeafBytes)
 
 	intermediateCert, err := trustmanager.LoadCertFromFile("../fixtures/intermediate-ca.crt")
 	require.NoError(t, err)
@@ -599,7 +597,7 @@ func TestValidateRootWithPinnedCA(t *testing.T) {
 	newTestSignedRoot, err := testRoot.ToSigned()
 	require.NoError(t, err)
 
-	err = signed.Sign(cs, newTestSignedRoot, []data.PublicKey{newRootLeafKey}, 1, nil)
+	err = signed.Sign(cs, newTestSignedRoot, []data.PublicKey{newRootKey}, 1, nil)
 	require.NoError(t, err)
 
 	// Check that we validate correctly against a pinned CA and provided bundle
