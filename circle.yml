@@ -9,7 +9,7 @@ machine:
 
   post:
   # Install many go versions
-    - gvm install go1.6 -B --name=stable
+    - gvm install go1.6.1 -B --name=stable
   # upgrade compose
     - sudo pip install --upgrade docker-compose
 
