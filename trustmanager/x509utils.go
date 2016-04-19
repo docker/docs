@@ -236,20 +236,19 @@ func ParsePEMPrivateKey(pemBytes []byte, passphrase string) (data.PrivateKey, er
 		return nil, errors.New("no valid private key found")
 	}
 
+	var privKeyBytes []byte
+	var err error
+	if x509.IsEncryptedPEMBlock(block) {
+		privKeyBytes, err = x509.DecryptPEMBlock(block, []byte(passphrase))
+		if err != nil {
+			return nil, errors.New("could not decrypt private key")
+		}
+	} else {
+		privKeyBytes = block.Bytes
+	}
+
 	switch block.Type {
 	case "RSA PRIVATE KEY":
-		var privKeyBytes []byte
-		var err error
-
-		if x509.IsEncryptedPEMBlock(block) {
-			privKeyBytes, err = x509.DecryptPEMBlock(block, []byte(passphrase))
-			if err != nil {
-				return nil, errors.New("could not decrypt private key")
-			}
-		} else {
-			privKeyBytes = block.Bytes
-		}
-
 		rsaPrivKey, err := x509.ParsePKCS1PrivateKey(privKeyBytes)
 		if err != nil {
 			return nil, fmt.Errorf("could not parse DER encoded key: %v", err)
@@ -262,18 +261,6 @@ func ParsePEMPrivateKey(pemBytes []byte, passphrase string) (data.PrivateKey, er
 
 		return tufRSAPrivateKey, nil
 	case "EC PRIVATE KEY":
-		var privKeyBytes []byte
-		var err error
-
-		if x509.IsEncryptedPEMBlock(block) {
-			privKeyBytes, err = x509.DecryptPEMBlock(block, []byte(passphrase))
-			if err != nil {
-				return nil, errors.New("could not decrypt private key")
-			}
-		} else {
-			privKeyBytes = block.Bytes
-		}
-
 		ecdsaPrivKey, err := x509.ParseECPrivateKey(privKeyBytes)
 		if err != nil {
 			return nil, fmt.Errorf("could not parse DER encoded private key: %v", err)
@@ -289,18 +276,6 @@ func ParsePEMPrivateKey(pemBytes []byte, passphrase string) (data.PrivateKey, er
 		// We serialize ED25519 keys by concatenating the private key
 		// to the public key and encoding with PEM. See the
 		// ED25519ToPrivateKey function.
-		var privKeyBytes []byte
-		var err error
-
-		if x509.IsEncryptedPEMBlock(block) {
-			privKeyBytes, err = x509.DecryptPEMBlock(block, []byte(passphrase))
-			if err != nil {
-				return nil, errors.New("could not decrypt private key")
-			}
-		} else {
-			privKeyBytes = block.Bytes
-		}
-
 		tufECDSAPrivateKey, err := ED25519ToPrivateKey(privKeyBytes)
 		if err != nil {
 			return nil, fmt.Errorf("could not convert ecdsa.PrivateKey to data.PrivateKey: %v", err)
