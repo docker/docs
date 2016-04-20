@@ -1,7 +1,6 @@
 package main
 
 import (
-	"crypto/tls"
 	_ "expvar"
 	"flag"
 	"fmt"
@@ -45,25 +44,6 @@ func init() {
 	if logFormat == jsonLogFormat {
 		logrus.SetFormatter(new(logrus.JSONFormatter))
 	}
-}
-
-func getAddrAndTLSConfig(configuration *viper.Viper) (string, string, *tls.Config, error) {
-	tlsConfig, err := utils.ParseServerTLS(configuration, true)
-	if err != nil {
-		return "", "", nil, fmt.Errorf("unable to set up TLS: %s", err.Error())
-	}
-
-	grpcAddr := configuration.GetString("server.grpc_addr")
-	if grpcAddr == "" {
-		return "", "", nil, fmt.Errorf("grpc listen address required for server")
-	}
-
-	httpAddr := configuration.GetString("server.http_addr")
-	if httpAddr == "" {
-		return "", "", nil, fmt.Errorf("http listen address required for server")
-	}
-
-	return httpAddr, grpcAddr, tlsConfig, nil
 }
 
 func main() {
