@@ -21,33 +21,6 @@ var (
 	ErrWrongType    = errors.New("tuf: meta file has wrong type")
 )
 
-// Verify checks the signatures and metadata (expiry, version) for the signed role
-// data
-func Verify(s *data.Signed, role data.BaseRole, minVersion int) error {
-	if err := verifyMeta(s, role.Name, minVersion); err != nil {
-		return err
-	}
-	return VerifySignatures(s, role)
-}
-
-func verifyMeta(s *data.Signed, role string, minVersion int) error {
-	sm := &data.SignedCommon{}
-	if err := json.Unmarshal(*s.Signed, sm); err != nil {
-		return err
-	}
-	if !data.ValidTUFType(sm.Type, role) {
-		return ErrWrongType
-	}
-	if err := VerifyExpiry(sm, role); err != nil {
-		return err
-	}
-	if err := VerifyVersion(sm, minVersion); err != nil {
-		return err
-	}
-
-	return nil
-}
-
 // IsExpired checks if the given time passed before the present time
 func IsExpired(t time.Time) bool {
 	return t.Before(time.Now())
@@ -65,7 +38,7 @@ func VerifyExpiry(s *data.SignedCommon, role string) error {
 // VerifyVersion returns ErrLowVersion if the metadata version is lower than the min version
 func VerifyVersion(s *data.SignedCommon, minVersion int) error {
 	if s.Version < minVersion {
-		return ErrLowVersion{s.Version, minVersion}
+		return ErrLowVersion{Actual: s.Version, Current: minVersion}
 	}
 	return nil
 }
