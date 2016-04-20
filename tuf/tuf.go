@@ -549,37 +549,6 @@ func (tr *Repo) InitTimestamp() error {
 	return nil
 }
 
-// SetRoot sets the Repo.Root field to the SignedRoot object.
-func (tr *Repo) SetRoot(s *data.SignedRoot) error {
-	tr.Root = s
-	var err error
-	// originalRootRole is the root role prior to any mutations that might
-	// occur on tr.Root.
-	tr.originalRootRole, err = tr.Root.BuildBaseRole(data.CanonicalRootRole)
-	return err
-}
-
-// SetTimestamp parses the Signed object into a SignedTimestamp object
-// and sets the Repo.Timestamp field.
-func (tr *Repo) SetTimestamp(s *data.SignedTimestamp) error {
-	tr.Timestamp = s
-	return nil
-}
-
-// SetSnapshot parses the Signed object into a SignedSnapshots object
-// and sets the Repo.Snapshot field.
-func (tr *Repo) SetSnapshot(s *data.SignedSnapshot) error {
-	tr.Snapshot = s
-	return nil
-}
-
-// SetTargets sets the SignedTargets object agaist the role in the
-// Repo.Targets map.
-func (tr *Repo) SetTargets(role string, s *data.SignedTargets) error {
-	tr.Targets[role] = s
-	return nil
-}
-
 // TargetMeta returns the FileMeta entry for the given path in the
 // targets file associated with the given role. This may be nil if
 // the target isn't found in the targets file.
