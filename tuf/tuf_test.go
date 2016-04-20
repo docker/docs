@@ -1248,8 +1248,8 @@ func TestSignRootOldKeyCertMissing(t *testing.T) {
 	// Now forget all about the old certificate: drop it from the Root carried keys
 	delete(repo.Root.Signed.Keys, oldRootCertKey.ID())
 	repo2 := NewRepo(cs)
-	err = repo2.SetRoot(repo.Root)
-	require.NoError(t, err)
+	repo2.Root = repo.Root
+	repo2.originalRootRole = updatedRootRole
 
 	// Create a second signature
 	signedRoot, err = repo2.SignRoot(data.DefaultExpires(data.CanonicalRootRole))

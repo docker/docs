@@ -254,7 +254,7 @@ func (rb *repoBuilder) GenerateSnapshot(prev *data.SignedSnapshot) ([]byte, int,
 			return nil, 0, err
 		}
 	} else {
-		rb.repo.SetSnapshot(prev)
+		rb.repo.Snapshot = prev
 	}
 
 	sgnd, err := rb.repo.SignSnapshot(data.DefaultExpires(data.CanonicalSnapshotRole))
@@ -310,7 +310,7 @@ func (rb *repoBuilder) GenerateTimestamp(prev *data.SignedTimestamp) ([]byte, in
 			return nil, 0, err
 		}
 	} else {
-		rb.repo.SetTimestamp(prev)
+		rb.repo.Timestamp = prev
 	}
 
 	sgnd, err := rb.repo.SignTimestamp(data.DefaultExpires(data.CanonicalTimestampRole))
@@ -371,7 +371,13 @@ func (rb *repoBuilder) loadRoot(content []byte, minVersion int, allowExpired boo
 		}
 	}
 
-	rb.repo.SetRoot(signedRoot)
+	rootRole, err := signedRoot.BuildBaseRole(data.CanonicalRootRole)
+	if err != nil { // this should never happen since the root has been validated
+		return err
+	}
+
+	rb.repo.Root = signedRoot
+	rb.repo.originalRootRole = rootRole
 	return nil
 }
 
@@ -403,7 +409,7 @@ func (rb *repoBuilder) loadTimestamp(content []byte, minVersion int, allowExpire
 		}
 	}
 
-	rb.repo.SetTimestamp(signedTimestamp)
+	rb.repo.Timestamp = signedTimestamp
 	return rb.validateCachedTimestampChecksums(signedTimestamp)
 }
 
@@ -435,7 +441,7 @@ func (rb *repoBuilder) loadSnapshot(content []byte, minVersion int, allowExpired
 		}
 	}
 
-	rb.repo.SetSnapshot(signedSnapshot)
+	rb.repo.Snapshot = signedSnapshot
 	return rb.validateCachedSnapshotChecksums(signedSnapshot)
 }
 
@@ -467,7 +473,7 @@ func (rb *repoBuilder) loadTargets(content []byte, minVersion int, allowExpired 
 		}
 	}
 
-	rb.repo.SetTargets(roleName, signedTargets)
+	rb.repo.Targets[roleName] = signedTargets
 	return nil
 }
 
@@ -497,7 +503,7 @@ func (rb *repoBuilder) loadDelegation(roleName string, content []byte, minVersio
 		}
 	}
 
-	rb.repo.SetTargets(roleName, signedTargets)
+	rb.repo.Targets[roleName] = signedTargets
 	return nil
 }
 
