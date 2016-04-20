@@ -98,7 +98,7 @@ func (c Client) checkRoot() error {
 		return err
 	}
 
-	if err := data.CheckHashes(raw, expectedHashes); err != nil {
+	if err := data.CheckHashes(raw, role, expectedHashes); err != nil {
 		return fmt.Errorf("Cached root hashes did not match snapshot root hashes")
 	}
 
@@ -160,7 +160,7 @@ func (c *Client) downloadRoot() error {
 		logrus.Debug("didn't find a cached root, must download")
 		download = true
 	} else {
-		if err := data.CheckHashes(cachedRoot, expectedHashes); err != nil {
+		if err := data.CheckHashes(cachedRoot, role, expectedHashes); err != nil {
 			logrus.Debug("cached root's hash didn't match expected, must download")
 			download = true
 		}
@@ -343,7 +343,7 @@ func (c *Client) downloadSnapshot() error {
 		download = true
 	} else {
 		// file may have been tampered with on disk. Always check the hash!
-		if err := data.CheckHashes(raw, expectedHashes); err != nil {
+		if err := data.CheckHashes(raw, role, expectedHashes); err != nil {
 			logrus.Debug("hash of snapshot in cache did not match expected hash, must download")
 			download = true
 		}
@@ -454,8 +454,8 @@ func (c *Client) downloadSigned(role string, size int64, expectedHashes data.Has
 	}
 
 	if expectedHashes != nil {
-		if err := data.CheckHashes(raw, expectedHashes); err != nil {
-			return nil, nil, ErrChecksumMismatch{role: role}
+		if err := data.CheckHashes(raw, role, expectedHashes); err != nil {
+			return nil, nil, data.ErrMismatchedChecksum{}
 		}
 	}
 
@@ -488,7 +488,7 @@ func (c Client) getTargetsFile(role string, snapshotMeta data.Files, consistent 
 		download = true
 	} else {
 		// file may have been tampered with on disk. Always check the hash!
-		if err := data.CheckHashes(raw, expectedHashes); err != nil {
+		if err := data.CheckHashes(raw, role, expectedHashes); err != nil {
 			download = true
 		}
 

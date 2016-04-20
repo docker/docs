@@ -16,7 +16,6 @@ import (
 
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/trustpinning"
-	"github.com/docker/notary/tuf/client"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/store"
@@ -753,7 +752,7 @@ func testUpdateRemoteFileChecksumWrong(t *testing.T, opts updateOpts, errExpecte
 		if opts.role == data.CanonicalTimestampRole {
 			_, rightError = err.(store.ErrMaliciousServer)
 		} else {
-			_, isErrChecksum := err.(client.ErrChecksumMismatch)
+			_, isErrChecksum := err.(data.ErrMismatchedChecksum)
 			_, isErrMaliciousServer := err.(store.ErrMaliciousServer)
 			rightError = isErrChecksum || isErrMaliciousServer
 		}
@@ -924,7 +923,7 @@ func waysToMessUpServerNonRootPerRole(t *testing.T) map[string][]swizzleExpectat
 	}
 	perRoleSwizzling[data.CanonicalTargetsRole] = []swizzleExpectations{{
 		desc:       fmt.Sprintf("target missing delegations data"),
-		expectErrs: []interface{}{client.ErrChecksumMismatch{}},
+		expectErrs: []interface{}{data.ErrMismatchedChecksum{}},
 		swizzle: func(s *testutils.MetadataSwizzler, role string) error {
 			return s.MutateTargets(func(tg *data.Targets) {
 				tg.Delegations.Roles = tg.Delegations.Roles[1:]

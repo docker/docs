@@ -259,7 +259,7 @@ func TestChecksumMismatch(t *testing.T) {
 	remoteStorage.SetMeta("targets", orig)
 
 	_, _, err = client.downloadSigned("targets", int64(len(orig)), origHashes)
-	require.IsType(t, ErrChecksumMismatch{}, err)
+	require.IsType(t, data.ErrMismatchedChecksum{}, err)
 }
 
 func TestChecksumMatch(t *testing.T) {
@@ -300,7 +300,7 @@ func TestSizeMismatchLong(t *testing.T) {
 	_, _, err = client.downloadSigned("targets", l, origHashes)
 	// size just limits the data received, the error is caught
 	// either during checksum verification or during json deserialization
-	require.IsType(t, ErrChecksumMismatch{}, err)
+	require.IsType(t, data.ErrMismatchedChecksum{}, err)
 }
 
 func TestSizeMismatchShort(t *testing.T) {
@@ -322,7 +322,7 @@ func TestSizeMismatchShort(t *testing.T) {
 	_, _, err = client.downloadSigned("targets", l, origHashes)
 	// size just limits the data received, the error is caught
 	// either during checksum verification or during json deserialization
-	require.IsType(t, ErrChecksumMismatch{}, err)
+	require.IsType(t, data.ErrMismatchedChecksum{}, err)
 }
 
 func TestDownloadTargetsHappy(t *testing.T) {
@@ -500,7 +500,7 @@ func TestDownloadTargetChecksumMismatch(t *testing.T) {
 	repo.Snapshot = &snap
 
 	err = client.downloadTargets("targets")
-	require.IsType(t, ErrChecksumMismatch{}, err)
+	require.IsType(t, data.ErrMismatchedChecksum{}, err)
 }
 
 // TestDownloadTargetsNoChecksum: it's never valid to download any targets
@@ -615,7 +615,7 @@ func TestUpdateDownloadRootBadChecksum(t *testing.T) {
 	require.NoError(t, err)
 
 	err = client.downloadRoot()
-	require.IsType(t, ErrChecksumMismatch{}, err)
+	require.IsType(t, data.ErrMismatchedChecksum{}, err)
 }
 
 func TestUpdateDownloadRootChecksumNotFound(t *testing.T) {
