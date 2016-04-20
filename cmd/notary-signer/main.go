@@ -8,30 +8,23 @@ import (
 	"os"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/docker/notary"
-	"github.com/docker/notary/utils"
 	"github.com/docker/notary/version"
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/spf13/viper"
 )
 
 const (
-	jsonLogFormat   = "json"
-	debugAddr       = "localhost:8080"
-	envPrefix       = "NOTARY_SIGNER"
-	defaultAliasEnv = "DEFAULT_ALIAS"
+	jsonLogFormat = "json"
+	debugAddr     = "localhost:8080"
 )
 
 var (
 	debug       bool
 	logFormat   string
 	configFile  string
-	mainViper   = viper.New()
 	doBootstrap bool
 )
 
 func init() {
-	utils.SetupViper(mainViper, envPrefix)
 	// Setup flags
 	flag.StringVar(&configFile, "config", "", "Path to configuration file")
 	flag.BoolVar(&debug, "debug", false, "show the version and exit")
@@ -55,48 +48,21 @@ func main() {
 	// when the signer starts print the version for debugging and issue logs later
 	logrus.Infof("Version: %s, Git commit: %s", version.NotaryVersion, version.GitCommit)
 
-	// parse viper config
-	if err := utils.ParseViper(mainViper, configFile); err != nil {
-		logrus.Fatal(err.Error())
-	}
-
-	// default is error level
-	lvl, err := utils.ParseLogLevel(mainViper, logrus.ErrorLevel)
-	if err != nil {
-		logrus.Fatal(err.Error())
-	}
-	logrus.SetLevel(lvl)
-
-	// parse bugsnag config
-	bugsnagConf, err := utils.ParseBugsnag(mainViper)
-	if err != nil {
-		logrus.Fatal(err.Error())
-	}
-	utils.SetUpBugsnag(bugsnagConf)
-
-	// parse server config
-	httpAddr, grpcAddr, tlsConfig, err := getAddrAndTLSConfig(mainViper)
+	signerConfig, err := parseSignerConfig(configFile)
 	if err != nil {
 		logrus.Fatal(err.Error())
 	}
 
-	// setup the cryptoservices
-	cryptoServices, err := setUpCryptoservices(mainViper,
-		[]string{notary.MySQLBackend, notary.MemoryBackend})
+	grpcServer, lis, err := setupGRPCServer(signerConfig.GRPCAddr, signerConfig.TLSConfig, signerConfig.CryptoServices)
 	if err != nil {
 		logrus.Fatal(err.Error())
 	}
 
-	grpcServer, lis, err := setupGRPCServer(grpcAddr, tlsConfig, cryptoServices)
-	if err != nil {
-		logrus.Fatal(err.Error())
-	}
-
-	httpServer := setupHTTPServer(httpAddr, tlsConfig, cryptoServices)
+	httpServer := setupHTTPServer(signerConfig.HTTPAddr, signerConfig.TLSConfig, signerConfig.CryptoServices)
 
 	if debug {
-		log.Println("RPC server listening on", grpcAddr)
-		log.Println("HTTP server listening on", httpAddr)
+		log.Println("RPC server listening on", signerConfig.GRPCAddr)
+		log.Println("HTTP server listening on", signerConfig.HTTPAddr)
 	}
 
 	go grpcServer.Serve(lis)

@@ -31,8 +31,62 @@ import (
 	"github.com/spf13/viper"
 )
 
+const (
+	envPrefix       = "NOTARY_SIGNER"
+	defaultAliasEnv = "DEFAULT_ALIAS"
+)
+
+func parseSignerConfig(configFilePath string) (signer.Config, error) {
+	config := viper.New()
+	utils.SetupViper(config, envPrefix)
+
+	// parse viper config
+	if err := utils.ParseViper(config, configFilePath); err != nil {
+		return signer.Config{}, err
+	}
+
+	// default is error level
+	lvl, err := utils.ParseLogLevel(config, logrus.ErrorLevel)
+	if err != nil {
+		return signer.Config{}, err
+	}
+	logrus.SetLevel(lvl)
+
+	// parse bugsnag config
+	bugsnagConf, err := utils.ParseBugsnag(config)
+	if err != nil {
+		return signer.Config{}, err
+	}
+	utils.SetUpBugsnag(bugsnagConf)
+
+	// parse server config
+	httpAddr, grpcAddr, tlsConfig, err := getAddrAndTLSConfig(config)
+	if err != nil {
+		return signer.Config{}, err
+	}
+
+	// setup the cryptoservices
+	cryptoServices, err := setUpCryptoservices(config, []string{notary.MySQLBackend, notary.MemoryBackend})
+	if err != nil {
+		return signer.Config{}, err
+	}
+
+	return signer.Config{
+		HTTPAddr:       httpAddr,
+		GRPCAddr:       grpcAddr,
+		TLSConfig:      tlsConfig,
+		CryptoServices: cryptoServices,
+	}, nil
+}
+
+func getEnv(env string) string {
+	v := viper.New()
+	utils.SetupViper(v, envPrefix)
+	return v.GetString(strings.ToUpper(env))
+}
+
 func passphraseRetriever(keyName, alias string, createNew bool, attempts int) (passphrase string, giveup bool, err error) {
-	passphrase = mainViper.GetString(strings.ToUpper(alias))
+	passphrase = getEnv(alias)
 
 	if passphrase == "" {
 		return "", false, errors.New("expected env variable to not be empty: " + alias)
