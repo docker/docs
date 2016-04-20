@@ -23,6 +23,7 @@ import (
 	"github.com/docker/notary/signer"
 	"github.com/docker/notary/signer/api"
 	"github.com/docker/notary/signer/keydbstore"
+	"github.com/docker/notary/storage"
 	"github.com/docker/notary/storage/rethinkdb"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
@@ -170,4 +171,12 @@ func getAddrAndTLSConfig(configuration *viper.Viper) (string, string, *tls.Confi
 	}
 
 	return httpAddr, grpcAddr, tlsConfig, nil
+}
+
+func bootstrap(s interface{}) error {
+	store, ok := s.(storage.Bootstrapper)
+	if !ok {
+		return fmt.Errorf("Store does not support bootstrapping.")
+	}
+	return store.Bootstrap()
 }

@@ -3,14 +3,12 @@ package main
 import (
 	_ "expvar"
 	"flag"
-	"fmt"
 	"log"
 	"net/http"
 	"os"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary"
-	"github.com/docker/notary/storage"
 	"github.com/docker/notary/utils"
 	"github.com/docker/notary/version"
 	_ "github.com/go-sql-driver/mysql"
@@ -121,12 +119,4 @@ func debugServer(addr string) {
 	if err := http.ListenAndServe(addr, nil); err != nil {
 		logrus.Fatalf("error listening on debug interface: %v", err)
 	}
-}
-
-func bootstrap(s interface{}) error {
-	store, ok := s.(storage.Bootstrapper)
-	if !ok {
-		return fmt.Errorf("Store does not support bootstrapping.")
-	}
-	return store.Bootstrap()
 }
