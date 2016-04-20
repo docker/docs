@@ -6,25 +6,16 @@ import (
 	"flag"
 	"fmt"
 	"log"
-	"net"
 	"net/http"
 	"os"
 
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials"
-
-	"github.com/docker/distribution/health"
+	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary"
-	"github.com/docker/notary/signer"
-	"github.com/docker/notary/signer/api"
 	"github.com/docker/notary/storage"
 	"github.com/docker/notary/utils"
 	"github.com/docker/notary/version"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/spf13/viper"
-
-	"github.com/Sirupsen/logrus"
-	pb "github.com/docker/notary/proto"
 )
 
 const (
@@ -53,42 +44,6 @@ func init() {
 	// this needs to be in init so that _ALL_ logs are in the correct format
 	if logFormat == jsonLogFormat {
 		logrus.SetFormatter(new(logrus.JSONFormatter))
-	}
-}
-
-// set up the GRPC server
-func setupGRPCServer(grpcAddr string, tlsConfig *tls.Config,
-	cryptoServices signer.CryptoServiceIndex) (*grpc.Server, net.Listener, error) {
-
-	//RPC server setup
-	kms := &api.KeyManagementServer{CryptoServices: cryptoServices,
-		HealthChecker: health.CheckStatus}
-	ss := &api.SignerServer{CryptoServices: cryptoServices,
-		HealthChecker: health.CheckStatus}
-
-	lis, err := net.Listen("tcp", grpcAddr)
-	if err != nil {
-		return nil, nil, fmt.Errorf("grpc server failed to listen on %s: %v",
-			grpcAddr, err)
-	}
-
-	creds := credentials.NewTLS(tlsConfig)
-	opts := []grpc.ServerOption{grpc.Creds(creds)}
-	grpcServer := grpc.NewServer(opts...)
-
-	pb.RegisterKeyManagementServer(grpcServer, kms)
-	pb.RegisterSignerServer(grpcServer, ss)
-
-	return grpcServer, lis, nil
-}
-
-func setupHTTPServer(httpAddr string, tlsConfig *tls.Config,
-	cryptoServices signer.CryptoServiceIndex) *http.Server {
-
-	return &http.Server{
-		Addr:      httpAddr,
-		Handler:   api.Handlers(cryptoServices),
-		TLSConfig: tlsConfig,
 	}
 }
 
