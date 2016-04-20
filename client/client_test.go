@@ -1936,11 +1936,7 @@ func testPublishBadMetadata(t *testing.T, roleName string, repo *NotaryRepositor
 		require.NoError(t, err)
 	} else {
 		require.Error(t, err)
-		if roleName == data.CanonicalRootRole && publishFirst {
-			require.IsType(t, &trustpinning.ErrValidationFail{}, err)
-		} else {
-			require.IsType(t, &regJson.SyntaxError{}, err)
-		}
+		require.IsType(t, &regJson.SyntaxError{}, err)
 	}
 
 	// make an unreadable file by creating a directory instead of a file

@@ -381,8 +381,7 @@ func (r *NotaryRepository) RemoveTarget(targetName string, roles ...string) erro
 // subtree and also the "targets/x" subtree, as we will defer parsing it until
 // we explicitly reach it in our iteration of the provided list of roles.
 func (r *NotaryRepository) ListTargets(roles ...string) ([]*TargetWithRole, error) {
-	err := r.Update(false)
-	if err != nil {
+	if err := r.Update(false); err != nil {
 		return nil, err
 	}
 
@@ -749,14 +748,20 @@ func (r *NotaryRepository) errRepositoryNotExist() error {
 // Update bootstraps a trust anchor (root.json) before updating all the
 // metadata from the repo.
 func (r *NotaryRepository) Update(forWrite bool) error {
-	c, err := r.bootstrapClient(forWrite)
+	b, err := r.bootstrapClient(forWrite)
 	if err != nil {
 		if _, ok := err.(store.ErrMetaNotFound); ok {
 			return r.errRepositoryNotExist()
 		}
 		return err
 	}
-	if err := c.Update(); err != nil {
+	remote, remoteErr := getRemoteStore(r.baseURL, r.gun, r.roundTrip)
+	if remoteErr != nil {
+		logrus.Error(remoteErr)
+	}
+	c := tufclient.NewClient(b, remote, r.fileStore)
+	repo, err := c.Update()
+	if err != nil {
 		// notFound.Resource may include a checksum so when the role is root,
 		// it will be root.json or root.<checksum>.json. Therefore best we can
 		// do it match a "root." prefix
@@ -765,6 +770,7 @@ func (r *NotaryRepository) Update(forWrite bool) error {
 		}
 		return err
 	}
+	r.tufRepo = repo
 	return nil
 }
 
@@ -784,19 +790,20 @@ func (r *NotaryRepository) Update(forWrite bool) error {
 //
 // Returns a tufclient.Client for the remote server, which may not be actually
 // operational (if the URL is invalid but a root.json is cached).
-func (r *NotaryRepository) bootstrapClient(checkInitialized bool) (*tufclient.Client, error) {
-	var (
-		rootJSON   []byte
-		err        error
-		signedRoot *data.SignedRoot
-	)
+func (r *NotaryRepository) bootstrapClient(checkInitialized bool) (tuf.RepoBuilder, error) {
+	version := 0
+	b := tuf.NewRepoBuilder(r.gun, r.CryptoService, r.trustPinning)
+
 	// try to read root from cache first. We will trust this root
 	// until we detect a problem during update which will cause
 	// us to download a new root and perform a rotation.
 	rootJSON, cachedRootErr := r.fileStore.GetMeta(data.CanonicalRootRole, -1)
 
 	if cachedRootErr == nil {
-		signedRoot, cachedRootErr = r.validateRoot(rootJSON, false)
+		// if we can't load the cached root, fail hard because that is how we pin trust
+		if err := b.Load(data.CanonicalRootRole, rootJSON, version, false); err != nil {
+			return nil, err
+		}
 	}
 
 	remote, remoteErr := getRemoteStore(r.baseURL, r.gun, r.roundTrip)
@@ -815,10 +822,9 @@ func (r *NotaryRepository) bootstrapClient(checkInitialized bool) (*tufclient.Cl
 			return nil, err
 		}
 		if cachedRootErr != nil {
-			// we always want to use the downloaded root if there was a cache
+			// we always want to use the downloaded root if there was a cache get
 			// error.
-			signedRoot, err = r.validateRoot(tmpJSON, true)
-			if err != nil {
+			if err := b.Load(data.CanonicalRootRole, tmpJSON, version, false); err != nil {
 				return nil, err
 			}
 
@@ -830,58 +836,11 @@ func (r *NotaryRepository) bootstrapClient(checkInitialized bool) (*tufclient.Cl
 		}
 	}
 
-	r.tufRepo = tuf.NewRepo(r.CryptoService)
-
-	if signedRoot == nil {
+	if !b.IsLoaded(data.CanonicalRootRole) {
 		return nil, ErrRepoNotInitialized{}
 	}
 
-	err = r.tufRepo.SetRoot(signedRoot)
-	if err != nil {
-		return nil, err
-	}
-
-	return tufclient.NewClient(
-		r.tufRepo,
-		remote,
-		r.fileStore,
-	), nil
-}
-
-// validateRoot MUST only be used during bootstrapping. It will only validate
-// signatures of the root based on known keys, not expiry or other metadata.
-// This is so that an out of date root can be loaded to be used in a rotation
-// should the TUF update process detect a problem.
-func (r *NotaryRepository) validateRoot(rootJSON []byte, fromRemote bool) (*data.SignedRoot, error) {
-	// can't just unmarshal into SignedRoot because validate root
-	// needs the root.Signed field to still be []byte for signature
-	// validation
-	root := &data.Signed{}
-	err := json.Unmarshal(rootJSON, root)
-	if err != nil {
-		return nil, err
-	}
-
-	// If we're downloading a root from a remote source, attempt to load a local root
-	// to ensure that we consider old roots when validating this new one
-	var prevRoot *data.SignedRoot
-	if fromRemote {
-		prevRootJSON, err := r.fileStore.GetMeta(data.CanonicalRootRole, -1)
-		// A previous root exists, so we attempt to use it
-		// If for some reason we can't extract it (ex: it's corrupted), we should error client-side to be conservative
-		if err == nil {
-			prevSignedRoot := &data.Signed{}
-			err = json.Unmarshal(prevRootJSON, prevSignedRoot)
-			if err != nil {
-				return nil, &trustpinning.ErrValidationFail{fmt.Sprintf("unable to unmarshal previously trusted root from disk: %v", err)}
-			}
-			prevRoot, err = data.RootFromSigned(prevSignedRoot)
-			if err != nil {
-				return nil, &trustpinning.ErrValidationFail{fmt.Sprintf("error loading previously trusted root into valid role format: %v", err)}
-			}
-		}
-	}
-	return trustpinning.ValidateRoot(prevRoot, root, r.gun, r.trustPinning)
+	return b, nil
 }
 
 // RotateKey removes all existing keys associated with the role, and either
