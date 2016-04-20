@@ -1,8 +1,9 @@
 package tuf
 
 import (
-	"encoding/json"
 	"fmt"
+
+	"github.com/docker/go/canonical/json"
 
 	"github.com/docker/notary/trustpinning"
 	"github.com/docker/notary/tuf/data"
@@ -36,6 +37,8 @@ func (e ErrInvalidBuilderInput) Error() string {
 // RepoBuilder is an interface for an object which builds a tuf.Repo
 type RepoBuilder interface {
 	Load(roleName string, content []byte, minVersion int, allowExpired bool) error
+	GenerateSnapshot(prev *data.SignedSnapshot) ([]byte, int, error)
+	GenerateTimestamp(prev *data.SignedTimestamp) ([]byte, int, error)
 	Finish() (*Repo, error)
 	BootstrapNewBuilder() RepoBuilder
 	IsLoaded(roleName string) bool
@@ -161,6 +164,113 @@ func (rb *repoBuilder) IsLoaded(roleName string) bool {
 	}
 }
 
+func (rb *repoBuilder) GenerateSnapshot(prev *data.SignedSnapshot) ([]byte, int, error) {
+	if rb.IsLoaded(data.CanonicalSnapshotRole) {
+		return nil, 0, ErrInvalidBuilderInput{msg: "snapshot has already been loaded"}
+	}
+	if rb.IsLoaded(data.CanonicalTimestampRole) {
+		return nil, 0, ErrInvalidBuilderInput{msg: "Cannot generate snapshot if timestamp has already been loaded"}
+	}
+	if err := rb.checkPrereqsLoaded([]string{data.CanonicalRootRole}); err != nil {
+		return nil, 0, err
+	}
+
+	if prev == nil {
+		if err := rb.repo.InitSnapshot(); err != nil {
+			rb.repo.Snapshot = nil
+			return nil, 0, err
+		}
+	} else {
+		rb.repo.SetSnapshot(prev)
+	}
+
+	sgnd, err := rb.repo.SignSnapshot(data.DefaultExpires(data.CanonicalSnapshotRole))
+	if err != nil {
+		rb.repo.Snapshot = nil
+		return nil, 0, err
+	}
+
+	// verify that we have enough signatures to pass the threshold
+	snapRole, err := rb.repo.GetBaseRole(data.CanonicalSnapshotRole)
+	if err != nil { // this should never happen, since it's already been validated
+		rb.repo.Snapshot = nil
+		return nil, 0, err
+	}
+
+	if len(sgnd.Signatures) < snapRole.Threshold {
+		rb.repo.Snapshot = nil
+		return nil, 0, signed.ErrRoleThreshold{}
+	}
+
+	sgndJSON, err := json.Marshal(sgnd)
+	if err != nil {
+		rb.repo.Snapshot = nil
+		return nil, 0, err
+	}
+
+	// since the snapshot was generated using the root and targets data that
+	// that have been loaded, remove all of them from rb.loadedNotChecksummed
+	for tgtName := range rb.repo.Targets {
+		delete(rb.loadedNotChecksummed, tgtName)
+	}
+	delete(rb.loadedNotChecksummed, data.CanonicalRootRole)
+
+	// cache the snapshot bytes so we can validate hte checksum in case a timestamp
+	// is loaded later (which should not happen, because that's almost certain
+	// to be an automatic failure)
+	rb.loadedNotChecksummed[data.CanonicalSnapshotRole] = sgndJSON
+
+	return sgndJSON, rb.repo.Snapshot.Signed.Version, nil
+}
+
+func (rb *repoBuilder) GenerateTimestamp(prev *data.SignedTimestamp) ([]byte, int, error) {
+	if rb.IsLoaded(data.CanonicalTimestampRole) {
+		return nil, 0, ErrInvalidBuilderInput{msg: "timestamp has already been loaded"}
+	}
+	if err := rb.checkPrereqsLoaded([]string{data.CanonicalRootRole, data.CanonicalSnapshotRole}); err != nil {
+		return nil, 0, err
+	}
+
+	if prev == nil {
+		if err := rb.repo.InitTimestamp(); err != nil {
+			rb.repo.Timestamp = nil
+			return nil, 0, err
+		}
+	} else {
+		rb.repo.SetTimestamp(prev)
+	}
+
+	sgnd, err := rb.repo.SignTimestamp(data.DefaultExpires(data.CanonicalTimestampRole))
+	if err != nil {
+		rb.repo.Timestamp = nil
+		return nil, 0, err
+	}
+
+	// verify that we have enough signatures to pass the threshold
+	tsRole, err := rb.repo.GetBaseRole(data.CanonicalTimestampRole)
+	if err != nil { // this should never happen, since it's already been validated
+		rb.repo.Timestamp = nil
+		return nil, 0, err
+	}
+
+	if len(sgnd.Signatures) < tsRole.Threshold {
+		rb.repo.Timestamp = nil
+		return nil, 0, signed.ErrRoleThreshold{}
+	}
+
+	sgndJSON, err := json.Marshal(sgnd)
+	if err != nil {
+		rb.repo.Timestamp = nil
+		return nil, 0, err
+	}
+
+	// since the timestamp was generated using the snapshot that has been loaded,
+	// remove it from rb.loadedNotChecksummed
+	delete(rb.loadedNotChecksummed, data.CanonicalSnapshotRole)
+
+	return sgndJSON, rb.repo.Timestamp.Signed.Version, nil
+}
+
 // loadRoot loads a root if one has not been loaded
 func (rb *repoBuilder) loadRoot(content []byte, minVersion int, allowExpired bool) error {
 	roleName := data.CanonicalRootRole
@@ -169,7 +279,6 @@ func (rb *repoBuilder) loadRoot(content []byte, minVersion int, allowExpired boo
 	if err != nil {
 		return err
 	}
-
 	// ValidateRoot validates against the previous root's role, as well as validates that the root
 	// itself is self-consistent with its own signatures and thresholds.
 	// This assumes that ValidateRoot calls data.RootFromSigned, which validates

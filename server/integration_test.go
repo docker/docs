@@ -29,7 +29,7 @@ func TestValidationErrorFormat(t *testing.T) {
 	defer server.Close()
 
 	client, err := store.NewHTTPStore(
-		fmt.Sprintf("%s/v2/gun/_trust/tuf/", server.URL),
+		fmt.Sprintf("%s/v2/docker.com/notary/_trust/tuf/", server.URL),
 		"",
 		"json",
 		"key",
