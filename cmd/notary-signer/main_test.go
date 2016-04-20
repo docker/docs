@@ -256,3 +256,27 @@ func TestBootstrap(t *testing.T) {
 	require.NoError(t, err)
 	require.True(t, tb.Booted)
 }
+
+func TestGetEnv(t *testing.T) {
+	os.Setenv("NOTARY_SIGNER_TIMESTAMP", "password")
+	defer os.Unsetenv("NOTARY_SIGNER_TIMESTAMP")
+
+	require.Equal(t, "password", getEnv("timestamp"))
+}
+
+func TestPassphraseRetrieverInvalid(t *testing.T) {
+	_, _, err := passphraseRetriever("fakeKey", "fakeAlias", false, 1)
+	require.Error(t, err)
+}
+
+// For sanity, make sure we can always parse the sample config
+func TestSampleConfig(t *testing.T) {
+	// We need to provide a default alias for the key DB.
+	//
+	// Generally it will be done during the building process
+	// if using signer.Dockerfile.
+	os.Setenv("NOTARY_SIGNER_DEFAULT_ALIAS", "timestamp_1")
+	defer os.Unsetenv("NOTARY_SIGNER_DEFAULT_ALIAS")
+	_, err := parseSignerConfig("../../fixtures/signer-config-local.json")
+	require.NoError(t, err)
+}

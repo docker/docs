@@ -1,59 +1,30 @@
 package main
 
 import (
-	"crypto/tls"
-	"errors"
 	_ "expvar"
 	"flag"
-	"fmt"
 	"log"
-	"net"
 	"net/http"
 	"os"
-	"strings"
-	"time"
-
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials"
-
-	"github.com/dancannon/gorethink"
-	"github.com/docker/distribution/health"
-	"github.com/docker/notary"
-	"github.com/docker/notary/cryptoservice"
-	"github.com/docker/notary/passphrase"
-	"github.com/docker/notary/signer"
-	"github.com/docker/notary/signer/api"
-	"github.com/docker/notary/signer/keydbstore"
-	"github.com/docker/notary/storage"
-	"github.com/docker/notary/storage/rethinkdb"
-	"github.com/docker/notary/trustmanager"
-	"github.com/docker/notary/tuf/data"
-	"github.com/docker/notary/utils"
-	"github.com/docker/notary/version"
-	_ "github.com/go-sql-driver/mysql"
-	"github.com/spf13/viper"
 
 	"github.com/Sirupsen/logrus"
-	pb "github.com/docker/notary/proto"
+	"github.com/docker/notary/version"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 const (
-	jsonLogFormat   = "json"
-	debugAddr       = "localhost:8080"
-	envPrefix       = "NOTARY_SIGNER"
-	defaultAliasEnv = "DEFAULT_ALIAS"
+	jsonLogFormat = "json"
+	debugAddr     = "localhost:8080"
 )
 
 var (
 	debug       bool
 	logFormat   string
 	configFile  string
-	mainViper   = viper.New()
 	doBootstrap bool
 )
 
 func init() {
-	utils.SetupViper(mainViper, envPrefix)
 	// Setup flags
 	flag.StringVar(&configFile, "config", "", "Path to configuration file")
 	flag.BoolVar(&debug, "debug", false, "show the version and exit")
@@ -64,148 +35,6 @@ func init() {
 	if logFormat == jsonLogFormat {
 		logrus.SetFormatter(new(logrus.JSONFormatter))
 	}
-}
-
-func passphraseRetriever(keyName, alias string, createNew bool, attempts int) (passphrase string, giveup bool, err error) {
-	passphrase = mainViper.GetString(strings.ToUpper(alias))
-
-	if passphrase == "" {
-		return "", false, errors.New("expected env variable to not be empty: " + alias)
-	}
-
-	return passphrase, false, nil
-}
-
-// Reads the configuration file for storage setup, and sets up the cryptoservice
-// mapping
-func setUpCryptoservices(configuration *viper.Viper, allowedBackends []string) (
-	signer.CryptoServiceIndex, error) {
-	backend := configuration.GetString("storage.backend")
-
-	var keyStore trustmanager.KeyStore
-	switch backend {
-	case notary.MemoryBackend:
-		keyStore = trustmanager.NewKeyMemoryStore(
-			passphrase.ConstantRetriever("memory-db-ignore"))
-	case notary.RethinkDBBackend:
-		var sess *gorethink.Session
-		storeConfig, err := utils.ParseRethinkDBStorage(configuration)
-		if err != nil {
-			return nil, err
-		}
-		defaultAlias, err := getDefaultAlias(configuration)
-		if err != nil {
-			return nil, err
-		}
-		sess, err = rethinkdb.Connection(storeConfig.CA, storeConfig.Source)
-		if err != nil {
-			return nil, err
-		}
-		s := keydbstore.NewRethinkDBKeyStore(passphraseRetriever, defaultAlias, sess)
-		health.RegisterPeriodicFunc("DB operational", s.CheckHealth, time.Minute)
-		keyStore = s
-	case notary.MySQLBackend, notary.SQLiteBackend:
-		storeConfig, err := utils.ParseSQLStorage(configuration)
-		if err != nil {
-			return nil, err
-		}
-		defaultAlias, err := getDefaultAlias(configuration)
-		if err != nil {
-			return nil, err
-		}
-		dbStore, err := keydbstore.NewKeyDBStore(
-			passphraseRetriever, defaultAlias, storeConfig.Backend, storeConfig.Source)
-		if err != nil {
-			return nil, fmt.Errorf("failed to create a new keydbstore: %v", err)
-		}
-
-		health.RegisterPeriodicFunc(
-			"DB operational", dbStore.HealthCheck, time.Minute)
-		keyStore = dbStore
-	}
-
-	if doBootstrap {
-		err := bootstrap(keyStore)
-		if err != nil {
-			logrus.Fatal(err.Error())
-		}
-		os.Exit(0)
-	}
-
-	cryptoService := cryptoservice.NewCryptoService(keyStore)
-	cryptoServices := make(signer.CryptoServiceIndex)
-	cryptoServices[data.ED25519Key] = cryptoService
-	cryptoServices[data.ECDSAKey] = cryptoService
-	return cryptoServices, nil
-}
-
-func getDefaultAlias(configuration *viper.Viper) (string, error) {
-	defaultAlias := configuration.GetString("storage.default_alias")
-	if defaultAlias == "" {
-		// backwards compatibility - support this environment variable
-		defaultAlias = configuration.GetString(defaultAliasEnv)
-	}
-
-	if defaultAlias == "" {
-		return "", fmt.Errorf("must provide a default alias for the key DB")
-	}
-	logrus.Debug("Default Alias: ", defaultAlias)
-	return defaultAlias, nil
-}
-
-// set up the GRPC server
-func setupGRPCServer(grpcAddr string, tlsConfig *tls.Config,
-	cryptoServices signer.CryptoServiceIndex) (*grpc.Server, net.Listener, error) {
-
-	//RPC server setup
-	kms := &api.KeyManagementServer{CryptoServices: cryptoServices,
-		HealthChecker: health.CheckStatus}
-	ss := &api.SignerServer{CryptoServices: cryptoServices,
-		HealthChecker: health.CheckStatus}
-
-	lis, err := net.Listen("tcp", grpcAddr)
-	if err != nil {
-		return nil, nil, fmt.Errorf("grpc server failed to listen on %s: %v",
-			grpcAddr, err)
-	}
-
-	creds := credentials.NewTLS(tlsConfig)
-	opts := []grpc.ServerOption{grpc.Creds(creds)}
-	grpcServer := grpc.NewServer(opts...)
-
-	pb.RegisterKeyManagementServer(grpcServer, kms)
-	pb.RegisterSignerServer(grpcServer, ss)
-
-	return grpcServer, lis, nil
-}
-
-func setupHTTPServer(httpAddr string, tlsConfig *tls.Config,
-	cryptoServices signer.CryptoServiceIndex) *http.Server {
-
-	return &http.Server{
-		Addr:      httpAddr,
-		Handler:   api.Handlers(cryptoServices),
-		TLSConfig: tlsConfig,
-	}
-}
-
-func getAddrAndTLSConfig(configuration *viper.Viper) (string, string, *tls.Config, error) {
-	tlsConfig, err := utils.ParseServerTLS(configuration, true)
-	if err != nil {
-		return "", "", nil, fmt.Errorf("unable to set up TLS: %s", err.Error())
-	}
-
-	grpcAddr := configuration.GetString("server.grpc_addr")
-	if grpcAddr == "" {
-		return "", "", nil, fmt.Errorf("grpc listen address required for server")
-	}
-
-	httpAddr := configuration.GetString("server.http_addr")
-	if httpAddr == "" {
-		return "", "", nil, fmt.Errorf("http listen address required for server")
-	}
-
-	return httpAddr, grpcAddr, tlsConfig, nil
 }
 
 func main() {
@@ -219,48 +48,21 @@ func main() {
 	// when the signer starts print the version for debugging and issue logs later
 	logrus.Infof("Version: %s, Git commit: %s", version.NotaryVersion, version.GitCommit)
 
-	// parse viper config
-	if err := utils.ParseViper(mainViper, configFile); err != nil {
-		logrus.Fatal(err.Error())
-	}
-
-	// default is error level
-	lvl, err := utils.ParseLogLevel(mainViper, logrus.ErrorLevel)
-	if err != nil {
-		logrus.Fatal(err.Error())
-	}
-	logrus.SetLevel(lvl)
-
-	// parse bugsnag config
-	bugsnagConf, err := utils.ParseBugsnag(mainViper)
-	if err != nil {
-		logrus.Fatal(err.Error())
-	}
-	utils.SetUpBugsnag(bugsnagConf)
-
-	// parse server config
-	httpAddr, grpcAddr, tlsConfig, err := getAddrAndTLSConfig(mainViper)
+	signerConfig, err := parseSignerConfig(configFile)
 	if err != nil {
 		logrus.Fatal(err.Error())
 	}
 
-	// setup the cryptoservices
-	cryptoServices, err := setUpCryptoservices(mainViper,
-		[]string{notary.MySQLBackend, notary.MemoryBackend})
+	grpcServer, lis, err := setupGRPCServer(signerConfig.GRPCAddr, signerConfig.TLSConfig, signerConfig.CryptoServices)
 	if err != nil {
 		logrus.Fatal(err.Error())
 	}
 
-	grpcServer, lis, err := setupGRPCServer(grpcAddr, tlsConfig, cryptoServices)
-	if err != nil {
-		logrus.Fatal(err.Error())
-	}
-
-	httpServer := setupHTTPServer(httpAddr, tlsConfig, cryptoServices)
+	httpServer := setupHTTPServer(signerConfig.HTTPAddr, signerConfig.TLSConfig, signerConfig.CryptoServices)
 
 	if debug {
-		log.Println("RPC server listening on", grpcAddr)
-		log.Println("HTTP server listening on", httpAddr)
+		log.Println("RPC server listening on", signerConfig.GRPCAddr)
+		log.Println("HTTP server listening on", signerConfig.HTTPAddr)
 	}
 
 	go grpcServer.Serve(lis)
@@ -283,12 +85,4 @@ func debugServer(addr string) {
 	if err := http.ListenAndServe(addr, nil); err != nil {
 		logrus.Fatalf("error listening on debug interface: %v", err)
 	}
-}
-
-func bootstrap(s interface{}) error {
-	store, ok := s.(storage.Bootstrapper)
-	if !ok {
-		return fmt.Errorf("Store does not support bootstrapping.")
-	}
-	return store.Bootstrap()
 }
