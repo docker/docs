@@ -98,6 +98,7 @@ func ValidateRoot(prevRoot *data.SignedRoot, root *data.Signed, gun string, trus
 	// Retrieve all the leaf and intermediate certificates in root for which the CN matches the GUN
 	allLeafCerts, allIntCerts := parseAllCerts(signedRoot)
 	certsFromRoot, err := validRootLeafCerts(allLeafCerts, gun, true)
+
 	if err != nil {
 		logrus.Debugf("error retrieving valid leaf certificates for: %s, %v", gun, err)
 		return nil, &ErrValidationFail{Reason: "unable to retrieve valid leaf certificates"}
