@@ -1318,7 +1318,8 @@ func signSerializeAndUpdateRoot(t *testing.T, signedRoot data.SignedRoot,
 
 	signedObj, err := signedRoot.ToSigned()
 	require.NoError(t, err)
-	// sign with the first two keys
+
+	// sign with the provided keys, and require all the keys have signed
 	require.NoError(t, signed.Sign(serverSwizzler.CryptoService, signedObj, keys, len(keys), nil))
 	rootBytes, err := json.Marshal(signedObj)
 	require.NoError(t, err)
@@ -1371,6 +1372,7 @@ func TestValidateRootRotationWithOldRole(t *testing.T) {
 	signedRoot.Signed.Version++
 	signedRoot.Signed.Roles[data.CanonicalRootRole].KeyIDs = keyIDs
 	signedRoot.Signed.Roles[data.CanonicalRootRole].Threshold = 2
+	// sign with the first two keys only
 	signSerializeAndUpdateRoot(t, signedRoot, serverSwizzler, threeKeys[:2])
 
 	// Load this root for the first time with 3 keys
