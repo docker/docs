@@ -10,10 +10,12 @@ import (
 	"os"
 	"path"
 	"reflect"
+	"strconv"
 	"strings"
 	"testing"
 	"time"
 
+	"github.com/docker/notary"
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/trustpinning"
 	"github.com/docker/notary/tuf/data"
@@ -1308,6 +1310,25 @@ func testUpdateRemoteKeyRotated(t *testing.T, targetsRole string) {
 		msg, reflect.TypeOf(err))
 }
 
+// Helper function that takes a signedRoot, and signs it with the provided keys and only these keys.
+// Then serializes this to bytes and updates the swizzler with it, and updates the snapshot and
+// timestamp too so that the update won't fail due to a checksum mismatch.
+func signSerializeAndUpdateRoot(t *testing.T, signedRoot data.SignedRoot,
+	serverSwizzler *testutils.MetadataSwizzler, keys []data.PublicKey) {
+
+	signedObj, err := signedRoot.ToSigned()
+	require.NoError(t, err)
+	// sign with the first two keys
+	require.NoError(t, signed.Sign(serverSwizzler.CryptoService, signedObj, keys, len(keys), nil))
+	rootBytes, err := json.Marshal(signedObj)
+	require.NoError(t, err)
+	require.NoError(t, serverSwizzler.MetadataCache.SetMeta(data.CanonicalRootRole, rootBytes))
+
+	// update the hashes on both snapshot and timestamp
+	require.NoError(t, serverSwizzler.UpdateSnapshotHashes())
+	require.NoError(t, serverSwizzler.UpdateTimestampHash())
+}
+
 // A valid root rotation only cares about the immediately previous old root keys,
 // whether or not there are old root roles, and cares that the role is satisfied
 // (for instance if the old role has 2 keys, either of which can sign, then it
@@ -1321,8 +1342,11 @@ func TestValidateRootRotationWithOldRole(t *testing.T) {
 	repo := newBlankRepo(t, ts.URL)
 	defer os.RemoveAll(repo.baseDir)
 
-	// update the root metadata to have 3 keys and threshold 2, and then sign
-	// only with two of the keys
+	// --- setup so that the root starts with a role with 3 keys, and threshold of 2
+	// --- signed by the first two keys (also, the original role which has 1 original
+	// --- key is saved, but doesn't matter at all for rotation if we're already on
+	// --- the root metadata with the 3 keys)
+
 	rootBytes, err := serverSwizzler.MetadataCache.GetMeta(data.CanonicalRootRole, -1)
 	require.NoError(t, err)
 	signedRoot := data.SignedRoot{}
@@ -1347,23 +1371,14 @@ func TestValidateRootRotationWithOldRole(t *testing.T) {
 	signedRoot.Signed.Version++
 	signedRoot.Signed.Roles[data.CanonicalRootRole].KeyIDs = keyIDs
 	signedRoot.Signed.Roles[data.CanonicalRootRole].Threshold = 2
+	signSerializeAndUpdateRoot(t, signedRoot, serverSwizzler, threeKeys[:2])
 
-	signedObj, err := signedRoot.ToSigned()
-	require.NoError(t, err)
-	// sign with the first two keys
-	require.NoError(t, signed.Sign(serverSwizzler.CryptoService, signedObj, threeKeys[:2], 2, nil))
-	rootBytes, err = json.Marshal(signedObj)
-	require.NoError(t, err)
-	require.NoError(t, serverSwizzler.MetadataCache.SetMeta(data.CanonicalRootRole, rootBytes))
-
-	// update the hashes on both snapshot and timestamp
-	require.NoError(t, serverSwizzler.UpdateSnapshotHashes())
-	require.NoError(t, serverSwizzler.UpdateTimestampHash())
-
-	// Updating success
+	// Load this root for the first time with 3 keys
 	require.NoError(t, repo.Update(false))
 
-	// replace the first key with a different key and change the threshold back to 1
+	// --- First root rotation: replace the first key with a different key and change the
+	// --- threshold back to 1
+
 	replacementKey, err := testutils.CreateKey(
 		serverSwizzler.CryptoService, "docker.com/notary", data.CanonicalRootRole)
 	require.NoError(t, err)
@@ -1372,39 +1387,21 @@ func TestValidateRootRotationWithOldRole(t *testing.T) {
 	signedRoot.Signed.Roles[data.CanonicalRootRole].KeyIDs = append(keyIDs[1:], replacementKey.ID())
 	signedRoot.Signed.Roles[data.CanonicalRootRole].Threshold = 1
 
-	// signing with just the second key will not satisfy the first role, because that one
-	// has a threshold of 2, although it will satisfy the new role
-	signedObj, err = signedRoot.ToSigned()
-	require.NoError(t, err)
-	require.NoError(t, signed.Sign(
-		serverSwizzler.CryptoService, signedObj, threeKeys[1:2], 1, nil))
-	rootBytes, err = json.Marshal(signedObj)
-	require.NoError(t, err)
-	require.NoError(t, serverSwizzler.MetadataCache.SetMeta(data.CanonicalRootRole, rootBytes))
-
-	// update the hashes on both snapshot and timestamp
-	require.NoError(t, serverSwizzler.UpdateSnapshotHashes())
-	require.NoError(t, serverSwizzler.UpdateTimestampHash())
-
-	// Updating failure
+	// --- If the current role is satisfied but the previous one is not, root rotation
+	// --- will fail.  (signing with just the second key will not satisfy the first role,
+	// --- because that one has a threshold of 2, although it will satisfy the new role)
+	signSerializeAndUpdateRoot(t, signedRoot, serverSwizzler, threeKeys[1:2])
 	require.Error(t, repo.Update(false))
 
-	// sign with the second and third keys, which satisfies both the old and new role
-	require.NoError(t, signed.Sign(
-		serverSwizzler.CryptoService, signedObj, threeKeys[1:], 2, nil))
-	rootBytes, err = json.Marshal(signedObj)
-	require.NoError(t, err)
-	require.NoError(t, serverSwizzler.MetadataCache.SetMeta(data.CanonicalRootRole, rootBytes))
-
-	// update the hashes on both snapshot and timestamp
-	require.NoError(t, serverSwizzler.UpdateSnapshotHashes())
-	require.NoError(t, serverSwizzler.UpdateTimestampHash())
-
-	// Updating success
+	// --- If both the current and previous roles are satisfied, then the root rotation
+	// --- will succeed (signing with the second and third keys will satisfies both)
+	signSerializeAndUpdateRoot(t, signedRoot, serverSwizzler, threeKeys[1:])
 	require.NoError(t, repo.Update(false))
 
-	// Update snapshot key and sign with ONLY the replacement key,
-	// which satisfies only the latest root role, and none of the previous
+	// --- Older roles do not have to be satisfied in order to validate if the update
+	// --- does not involve a root rotation (replacing the snapshot key is not a root
+	// --- rotation, and signing with just the replacement key will satisfy ONLY the
+	// --- latest root role)
 	signedRoot.Signed.Version++
 	snapKey, err := testutils.CreateKey(
 		serverSwizzler.CryptoService, "docker.com/notary", data.CanonicalSnapshotRole)
@@ -1412,18 +1409,167 @@ func TestValidateRootRotationWithOldRole(t *testing.T) {
 	signedRoot.Signed.Keys[snapKey.ID()] = snapKey
 	signedRoot.Signed.Roles[data.CanonicalSnapshotRole].KeyIDs = []string{snapKey.ID()}
 
-	signedObj, err = signedRoot.ToSigned()
-	require.NoError(t, err)
-	require.NoError(t, signed.Sign(
-		serverSwizzler.CryptoService, signedObj, []data.PublicKey{replacementKey}, 1, nil))
-	rootBytes, err = json.Marshal(signedObj)
-	require.NoError(t, err)
-	require.NoError(t, serverSwizzler.MetadataCache.SetMeta(data.CanonicalRootRole, rootBytes))
-
-	// update the hashes on both snapshot and timestamp
-	require.NoError(t, serverSwizzler.UpdateSnapshotHashes())
-	require.NoError(t, serverSwizzler.UpdateTimestampHash())
-
-	// Updating success
+	signSerializeAndUpdateRoot(t, signedRoot, serverSwizzler, []data.PublicKey{replacementKey})
 	require.NoError(t, repo.Update(false))
+
+	// --- Second root rotation: if only the previous role is satisfied but not the new role,
+	// --- then the root rotation will fail (if we rotate to the only valid signing key being
+	// --- threeKeys[0], signing with just the replacement key will satisfy ONLY the
+	// --- previous root role)
+	signedRoot.Signed.Version++
+	signedRoot.Signed.Roles[data.CanonicalRootRole].KeyIDs = []string{keyIDs[0]}
+
+	signSerializeAndUpdateRoot(t, signedRoot, serverSwizzler, []data.PublicKey{replacementKey})
+	require.Error(t, repo.Update(false))
+
+	// again, signing with both will succeed
+	signSerializeAndUpdateRoot(t, signedRoot, serverSwizzler, []data.PublicKey{replacementKey, threeKeys[0]})
+	require.NoError(t, repo.Update(false))
+}
+
+// TestDownloadTargetsLarge: Check that we can download very large targets metadata files,
+// which may be caused by adding a large number of targets.
+// This test is slow, so it will not run in short mode.
+func TestDownloadTargetsLarge(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode")
+	}
+	numTargets := 75000
+
+	tufRepo, cs, err := testutils.EmptyRepo("docker.com/notary")
+	require.NoError(t, err)
+	fMeta, err := data.NewFileMeta(bytes.NewBuffer([]byte("hello")), notary.SHA256)
+	require.NoError(t, err)
+
+	// Add a ton of target files to the targets role to make this targets metadata huge
+	// 75,000 targets results in > 5MB (~6.5MB on recent runs)
+	for i := 0; i < numTargets; i++ {
+		_, err = tufRepo.AddTargets(data.CanonicalTargetsRole, data.Files{strconv.Itoa(i): fMeta})
+		require.NoError(t, err)
+	}
+
+	serverMeta, err := testutils.SignAndSerialize(tufRepo)
+	require.NoError(t, err)
+
+	serverSwizzler := testutils.NewMetadataSwizzler("docker.com/notary", serverMeta, cs)
+	require.NoError(t, err)
+
+	ts := readOnlyServer(t, serverSwizzler.MetadataCache, http.StatusNotFound, "docker.com/notary")
+	defer ts.Close()
+
+	notaryRepo := newBlankRepo(t, ts.URL)
+	defer os.RemoveAll(notaryRepo.baseDir)
+
+	tgts, err := notaryRepo.ListTargets()
+	require.NoError(t, err)
+	require.Len(t, tgts, numTargets)
+}
+
+func TestDownloadTargetsDeep(t *testing.T) {
+	delegations := []string{
+		// left subtree
+		"targets/level1",
+		"targets/level1/a",
+		"targets/level1/a/i",
+		"targets/level1/a/i/0",
+		"targets/level1/a/ii",
+		"targets/level1/a/iii",
+		// right subtree
+		"targets/level2",
+		"targets/level2/b",
+		"targets/level2/b/i",
+		"targets/level2/b/i/0",
+		"targets/level2/b/i/1",
+	}
+
+	serverMeta, cs, err := testutils.NewRepoMetadata("docker.com/notary", delegations...)
+	require.NoError(t, err)
+
+	serverSwizzler := testutils.NewMetadataSwizzler("docker.com/notary", serverMeta, cs)
+	require.NoError(t, err)
+
+	ts := readOnlyServer(t, serverSwizzler.MetadataCache, http.StatusNotFound, "docker.com/notary")
+	defer ts.Close()
+
+	repo := newBlankRepo(t, ts.URL)
+	defer os.RemoveAll(repo.baseDir)
+
+	roles, err := repo.ListRoles()
+	require.NoError(t, err)
+
+	// 4 base roles + all the delegation roles
+	require.Len(t, roles, len(delegations)+4)
+	// downloaded all of the delegations except for the two lowest level ones, which
+	// should have no metadata because there are no targets
+	for _, r := range roles {
+		if _, ok := serverMeta[r.Name]; ok {
+			require.Len(t, r.Signatures, 1, r.Name, "should have 1 signature because there was metadata")
+		} else {
+			require.Len(t, r.Signatures, 0, r.Name,
+				"should have no signatures because no metadata should have been downloaded")
+		}
+	}
+}
+
+// TestDownloadSnapshotLargeDelegationsMany: Check that we can download very large
+// snapshot metadata files, which may be caused by adding a large number of delegations,
+// as well as a large number of delegations.
+// This test is very slow, so it will not run in short mode.
+func TestDownloadSnapshotLargeDelegationsMany(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode")
+	}
+
+	numSnapsnotMeta := 75000
+
+	fMeta, err := data.NewFileMeta(bytes.NewBuffer([]byte("hello")), notary.SHA256)
+	require.NoError(t, err)
+
+	tufRepo, cs, err := testutils.EmptyRepo("docker.com/notary")
+	require.NoError(t, err)
+
+	delgKey, err := cs.Create("docker.com/notary", "delegation", data.ECDSAKey)
+	require.NoError(t, err)
+
+	// Add a ton of empty delegation roles to targets to make snapshot data huge
+	// This can also be done by adding legitimate delegations but it will be much slower
+	// 75,000 delegation roles results in > 5MB (~7.3MB on recent runs)
+	for i := 0; i < numSnapsnotMeta; i++ {
+		roleName := fmt.Sprintf("targets/%d", i)
+		// for a tiny fraction of the delegations,  make sure role is added, so the meta is downloaded
+		if i%1000 == 0 {
+			require.NoError(t, tufRepo.UpdateDelegationKeys(roleName, data.KeyList{delgKey}, nil, 1))
+			_, err := tufRepo.InitTargets(roleName) // make sure metadata is created
+			require.NoError(t, err)
+		} else {
+			tufRepo.Snapshot.AddMeta(roleName, fMeta)
+		}
+	}
+
+	serverMeta, err := testutils.SignAndSerialize(tufRepo)
+	require.NoError(t, err)
+
+	serverSwizzler := testutils.NewMetadataSwizzler("docker.com/notary", serverMeta, cs)
+	require.NoError(t, err)
+
+	ts := readOnlyServer(t, serverSwizzler.MetadataCache, http.StatusNotFound, "docker.com/notary")
+	defer ts.Close()
+
+	notaryRepo := newBlankRepo(t, ts.URL)
+	defer os.RemoveAll(notaryRepo.baseDir)
+
+	roles, err := notaryRepo.ListRoles()
+	require.NoError(t, err)
+
+	// all the roles have server meta this time
+	require.Len(t, roles, len(serverMeta))
+
+	// downloaded all of the delegations except for the two lowest level ones, which
+	// should have no metadata because there are no targets
+	for _, r := range roles {
+		require.Len(t, r.Signatures, 1, r.Name, "should have 1 signature because there was metadata")
+	}
+
+	// the snapshot downloaded has numSnapsnotMeta items + one for root and one for targets
+	require.Len(t, notaryRepo.tufRepo.Snapshot.Signed.Meta, numSnapsnotMeta+2)
 }
