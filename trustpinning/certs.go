@@ -86,7 +86,7 @@ We shall call this: TOFUS.
 
 Validation failure at any step will result in an ErrValidationFailed error.
 */
-func ValidateRoot(certStore trustmanager.X509Store, root *data.Signed, gun string, trustPinning TrustPinConfig) error {
+func ValidateRoot(prevRoot *data.SignedRoot, root *data.Signed, gun string, trustPinning TrustPinConfig) error {
 	logrus.Debugf("entered ValidateRoot with dns: %s", gun)
 	signedRoot, err := data.RootFromSigned(root)
 	if err != nil {
@@ -100,30 +100,23 @@ func ValidateRoot(certStore trustmanager.X509Store, root *data.Signed, gun strin
 
 	// Retrieve all the leaf and intermediate certificates in root for which the CN matches the GUN
 	allLeafCerts, allIntCerts := parseAllCerts(signedRoot)
-	certsFromRoot, err := validRootLeafCerts(allLeafCerts, gun)
+	certsFromRoot, err := validRootLeafCerts(allLeafCerts, gun, true)
 	if err != nil {
 		logrus.Debugf("error retrieving valid leaf certificates for: %s, %v", gun, err)
 		return &ErrValidationFail{Reason: "unable to retrieve valid leaf certificates"}
 	}
 
-	// Retrieve all the trusted certificates that match this gun
-	trustedCerts, err := certStore.GetCertificatesByCN(gun)
-	if err != nil {
-		// If the error that we get back is different than ErrNoCertificatesFound
-		// we couldn't check if there are any certificates with this CN already
-		// trusted. Let's take the conservative approach and return a failed validation
-		if _, ok := err.(*trustmanager.ErrNoCertificatesFound); !ok {
-			logrus.Debugf("error retrieving trusted certificates for: %s, %v", gun, err)
-			return &ErrValidationFail{Reason: "unable to retrieve trusted certificates"}
-		}
-	}
+	// Retrieve all the trusted certificates from our previous root
+	// Note that we do not validate expiries here since our originally trusted root might have expired certs
+	allTrustedLeafCerts, allTrustedIntCerts := parseAllCerts(prevRoot)
+	trustedLeafCerts, err := validRootLeafCerts(allTrustedLeafCerts, gun, false)
 	// If we have certificates that match this specific GUN, let's make sure to
 	// use them first to validate that this new root is valid.
-	if len(trustedCerts) != 0 {
-		logrus.Debugf("found %d valid root certificates for %s: %s", len(trustedCerts), gun,
-			prettyFormatCertIDs(trustedCerts))
+	if len(trustedLeafCerts) != 0 {
+		logrus.Debugf("found %d valid root leaf certificates for %s: %s", len(trustedLeafCerts), gun,
+			prettyFormatCertIDs(trustedLeafCerts))
 		err = signed.VerifySignatures(
-			root, data.BaseRole{Keys: trustmanager.CertsToKeys(trustedCerts, allIntCerts), Threshold: 1})
+			root, data.BaseRole{Keys: trustmanager.CertsToKeys(trustedLeafCerts, allTrustedIntCerts), Threshold: 1})
 		if err != nil {
 			logrus.Debugf("failed to verify TUF data for: %s, %v", gun, err)
 			return &ErrValidationFail{Reason: "failed to validate data with current trusted certificates"}
@@ -162,49 +155,14 @@ func ValidateRoot(certStore trustmanager.X509Store, root *data.Signed, gun strin
 		return &ErrValidationFail{Reason: "failed to validate integrity of roots"}
 	}
 
-	// Getting here means:
-	// A) we had trusted certificates and both the old and new validated this root.
-	// or
-	// B) we had no trusted certificates but the new set of certificates has integrity (self-signed).
-	logrus.Debugf("entering root certificate rotation for: %s", gun)
-
-	// Do root certificate rotation: we trust only the certs present in the new root
-	// First we add all the new certificates (even if they already exist)
-	for _, cert := range certsFromRoot {
-		err := certStore.AddCert(cert)
-		if err != nil {
-			// If the error is already exists we don't fail the rotation
-			if _, ok := err.(*trustmanager.ErrCertExists); ok {
-				logrus.Debugf("ignoring certificate addition to: %s", gun)
-				continue
-			}
-			logrus.Debugf("error adding new trusted certificate for: %s, %v", gun, err)
-		}
-	}
-
-	// Now we delete old certificates that aren't present in the new root
-	oldCertsToRemove, err := certsToRemove(trustedCerts, certsFromRoot)
-	if err != nil {
-		logrus.Debugf("inconsistency when removing old certificates: %v", err)
-		return err
-	}
-	for certID, cert := range oldCertsToRemove {
-		logrus.Debugf("removing certificate with certID: %s", certID)
-		err = certStore.RemoveCert(cert)
-		if err != nil {
-			logrus.Debugf("failed to remove trusted certificate with keyID: %s, %v", certID, err)
-			return &ErrRootRotationFail{Reason: "failed to rotate root keys"}
-		}
-	}
-
 	logrus.Debugf("Root validation succeeded for %s", gun)
 	return nil
 }
 
-// validRootLeafCerts returns a list of non-expired, non-sha1 certificates
+// validRootLeafCerts returns a list of possibly (if checkExpiry is true) non-expired, non-sha1 certificates
 // found in root whose Common-Names match the provided GUN. Note that this
 // "validity" alone does not imply any measure of trust.
-func validRootLeafCerts(allLeafCerts map[string]*x509.Certificate, gun string) ([]*x509.Certificate, error) {
+func validRootLeafCerts(allLeafCerts map[string]*x509.Certificate, gun string, checkExpiry bool) ([]*x509.Certificate, error) {
 	var validLeafCerts []*x509.Certificate
 
 	// Go through every leaf certificate and check that the CN matches the gun
@@ -215,8 +173,8 @@ func validRootLeafCerts(allLeafCerts map[string]*x509.Certificate, gun string) (
 				cert.Subject.CommonName, gun)
 			continue
 		}
-		// Make sure the certificate is not expired
-		if time.Now().After(cert.NotAfter) {
+		// Make sure the certificate is not expired if checkExpiry is true
+		if checkExpiry && time.Now().After(cert.NotAfter) {
 			logrus.Debugf("error leaf certificate is expired")
 			continue
 		}
@@ -246,6 +204,10 @@ func validRootLeafCerts(allLeafCerts map[string]*x509.Certificate, gun string) (
 // parseAllCerts returns two maps, one with all of the leafCertificates and one
 // with all the intermediate certificates found in signedRoot
 func parseAllCerts(signedRoot *data.SignedRoot) (map[string]*x509.Certificate, map[string][]*x509.Certificate) {
+	if signedRoot == nil {
+		return nil, nil
+	}
+
 	leafCerts := make(map[string]*x509.Certificate)
 	intCerts := make(map[string][]*x509.Certificate)
 

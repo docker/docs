@@ -812,7 +812,7 @@ func (r *NotaryRepository) bootstrapClient(checkInitialized bool) (*tufclient.Cl
 	rootJSON, cachedRootErr := r.fileStore.GetMeta(data.CanonicalRootRole, -1)
 
 	if cachedRootErr == nil {
-		signedRoot, cachedRootErr = r.validateRoot(rootJSON)
+		signedRoot, cachedRootErr = r.validateRoot(rootJSON, false)
 	}
 
 	remote, remoteErr := getRemoteStore(r.baseURL, r.gun, r.roundTrip)
@@ -833,7 +833,7 @@ func (r *NotaryRepository) bootstrapClient(checkInitialized bool) (*tufclient.Cl
 		if cachedRootErr != nil {
 			// we always want to use the downloaded root if there was a cache
 			// error.
-			signedRoot, err = r.validateRoot(tmpJSON)
+			signedRoot, err = r.validateRoot(tmpJSON, true)
 			if err != nil {
 				return nil, err
 			}
@@ -868,7 +868,7 @@ func (r *NotaryRepository) bootstrapClient(checkInitialized bool) (*tufclient.Cl
 // signatures of the root based on known keys, not expiry or other metadata.
 // This is so that an out of date root can be loaded to be used in a rotation
 // should the TUF update process detect a problem.
-func (r *NotaryRepository) validateRoot(rootJSON []byte) (*data.SignedRoot, error) {
+func (r *NotaryRepository) validateRoot(rootJSON []byte, fromRemote bool) (*data.SignedRoot, error) {
 	// can't just unmarshal into SignedRoot because validate root
 	// needs the root.Signed field to still be []byte for signature
 	// validation
@@ -878,7 +878,25 @@ func (r *NotaryRepository) validateRoot(rootJSON []byte) (*data.SignedRoot, erro
 		return nil, err
 	}
 
-	err = trustpinning.ValidateRoot(r.CertStore, root, r.gun, r.trustPinning)
+	// If we're downloading a root from a remote source, attempt to load a local root
+	// to ensure that we consider old roots when validating this new one
+	var prevRoot *data.SignedRoot
+	if fromRemote {
+		prevRootJSON, err := r.fileStore.GetMeta(data.CanonicalRootRole, -1)
+		if err == nil {
+			prevSignedRoot := &data.Signed{}
+			err = json.Unmarshal(prevRootJSON, prevSignedRoot)
+			if err == nil {
+				prevRoot, err = data.RootFromSigned(prevSignedRoot)
+			}
+		}
+	}
+	// If we had any errors while trying to retrieve the previous root, just set it to nil
+	if err != nil {
+		prevRoot = nil
+	}
+
+	err = trustpinning.ValidateRoot(prevRoot, root, r.gun, r.trustPinning)
 	if err != nil {
 		return nil, err
 	}
