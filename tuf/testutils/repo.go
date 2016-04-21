@@ -99,40 +99,10 @@ func NewRepoMetadata(gun string, delegationRoles ...string) (map[string][]byte, 
 		return nil, nil, err
 	}
 
-	meta := make(map[string][]byte)
-
-	for _, delgName := range delegationRoles {
-		// is there metadata yet?  if empty, it may not be created
-		if _, ok := tufRepo.Targets[delgName]; ok {
-			signedThing, err := tufRepo.SignTargets(delgName, data.DefaultExpires("targets"))
-			if err != nil {
-				return nil, nil, err
-			}
-			metaBytes, err := json.MarshalCanonical(signedThing)
-			if err != nil {
-				return nil, nil, err
-			}
-
-			meta[delgName] = metaBytes
-		}
-	}
-
-	// these need to be generated after the delegations are created and signed so
-	// the snapshot will have the delegation metadata
-	rs, tgs, ss, ts, err := Sign(tufRepo)
+	meta, err := SignAndSerialize(tufRepo)
 	if err != nil {
 		return nil, nil, err
 	}
-
-	rf, tgf, sf, tf, err := Serialize(rs, tgs, ss, ts)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	meta[data.CanonicalRootRole] = rf
-	meta[data.CanonicalSnapshotRole] = sf
-	meta[data.CanonicalTargetsRole] = tgf
-	meta[data.CanonicalTimestampRole] = tf
 
 	return meta, cs, nil
 }
@@ -172,6 +142,48 @@ func RandomByteSlice(maxSize int) []byte {
 		content[i] = byte(r.Int63() & 0xff)
 	}
 	return content
+}
+
+// SignAndSerialize calls Sign and then Serialize to get the repo metadata out
+func SignAndSerialize(tufRepo *tuf.Repo) (map[string][]byte, error) {
+	meta := make(map[string][]byte)
+
+	for delgName := range tufRepo.Targets {
+		// we'll sign targets later
+		if delgName == data.CanonicalTargetsRole {
+			continue
+		}
+
+		signedThing, err := tufRepo.SignTargets(delgName, data.DefaultExpires("targets"))
+		if err != nil {
+			return nil, err
+		}
+		metaBytes, err := json.MarshalCanonical(signedThing)
+		if err != nil {
+			return nil, err
+		}
+
+		meta[delgName] = metaBytes
+	}
+
+	// these need to be generated after the delegations are created and signed so
+	// the snapshot will have the delegation metadata
+	rs, tgs, ss, ts, err := Sign(tufRepo)
+	if err != nil {
+		return nil, err
+	}
+
+	rf, tgf, sf, tf, err := Serialize(rs, tgs, ss, ts)
+	if err != nil {
+		return nil, err
+	}
+
+	meta[data.CanonicalRootRole] = rf
+	meta[data.CanonicalSnapshotRole] = sf
+	meta[data.CanonicalTargetsRole] = tgf
+	meta[data.CanonicalTimestampRole] = tf
+
+	return meta, nil
 }
 
 // Sign signs all top level roles in a repo in the appropriate order
