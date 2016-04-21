@@ -106,8 +106,7 @@ Notary can be used with
 <a href="https://www.yubico.com/products/yubikey-hardware/yubikey4/" target="_blank">Yubikey
 4</a> keys, via a PKCS11 interface when the Yubikey has CCID mode enabled.
 The Yubikey will be prioritized to store root keys, and will require user touch-input for signing.
-
->**Note**: Yubikey support for signing docker images is only supported in the experimental branch.
+Note that Yubikey support is included with the Docker Engine 1.11 client for use with Docker Content Trust.
 
 Yubikey support requires
 <a href="https://www.yubico.com/support/downloads" target="_blank">Yubico PIV libraries
