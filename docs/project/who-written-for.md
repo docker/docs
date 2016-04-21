@@ -48,16 +48,18 @@ Enough said.
 
 This is written for the distracted, the overworked, the sloppy reader with fair
 `git` skills and a failing memory for the GitHub GUI. The guide attempts to
-explain how to use the Docker environment as precisely, predictably, and
-procedurally as possible.
+explain how to use the Docker Engine development environment as precisely,
+predictably, and procedurally as possible.
 
-Users who are new to the Docker development environment should start by setting
-up their environment. Then, they should try a simple code change. After that,
-you should find something to work on or propose at totally new change.
+Users who are new to Engine development should start by setting up their
+environment. Then, they should try a simple code change. After that, you should
+find something to work on or propose at totally new change.
 
 If you are a programming prodigy, you still may find this documentation useful.
 Please feel free to skim past information you find obvious or boring.
 
 ## How to get started
 
-Start by [getting the software you need to contribute](software-required.md).
+Start by getting the software you require. If you are on Mac or Linux, go to
+[get the required osftware for Linux or OS X](software-required.md). If you are
+on Windows, see [get the required software for Windows](software-req-win.md).
