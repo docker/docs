@@ -21,7 +21,7 @@ contribution that changes how Docker behaves and that change needs
 documentation. For these reasons, you also need to know how to build, view, and
 test the Docker documentation.
 
-In this section, you run tests in the `dry-run-test` branch of your Docker
+This section describes tests you can run in the `dry-run-test` branch of your Docker
 fork. If you have followed along in this guide, you already have this branch.
 If you don't have this branch, you can create it or simply use another of your
 branches.
@@ -52,11 +52,12 @@ there is a lot of information available to you on the Web. For now, you should
 understand that, the Docker maintainers may ask you to write a new test or
 change an existing one.
 
-### Run tests on your local host
+## Run tests on your local host
 
-Before submitting any code change, you should run the entire Docker test suite.
-The `Makefile` contains a target for the entire test suite. The target's name
-is simply `test`. The `Makefile` contains several targets for testing:
+Before submitting a pull request with a code change, you should run the entire
+Docker Engine test suite.  The `Makefile` contains a target for the entire test suite.
+The target's name is simply `test`. The `Makefile` contains several targets for
+testing:
 
 <style type="text/css">
 .monospaced {font-family: Monaco, Consolas, "Lucida Console", monospace !important;}
@@ -68,7 +69,7 @@ is simply `test`. The `Makefile` contains several targets for testing:
   </tr>
   <tr>
     <td class="monospaced">test</td>
-    <td>Run all the tests.</td>
+    <td>Run the unit, integration and docker-py tests.</td>
   </tr>
   <tr>
     <td class="monospaced">test-unit</td>
@@ -84,21 +85,28 @@ is simply `test`. The `Makefile` contains several targets for testing:
   </tr>
 </table>
 
-Run the entire test suite on your current repository:
+Running the entire test suite on your current repository can take a half an hour
+or more. To run the test suite, do the following:
 
 1. Open a terminal on your local host.
 
 2. Change to the root your Docker repository.
 
-        $ cd docker-fork
+    ```bash
+    $ cd docker-fork
+    ```
 
 3. Make sure you are in your development branch.
 
-        $ git checkout dry-run-test
+    ```bash
+    $ git checkout dry-run-test
+    ```
 
 4. Run the `make test` command.
 
-        $ make test
+    ```bash
+    $ make test
+    ```
 
     This command does several things, it creates a container temporarily for
     testing. Inside that container, the `make`:
@@ -113,43 +121,43 @@ Run the entire test suite on your current repository:
     value on the basis of your host performance. When they complete
     successfully, you see the output concludes with something like this:
 
+    ```bash
+    PASS: docker_cli_pull_test.go:133: DockerHubPullSuite.TestPullClientDisconnect	1.127s
+    PASS: docker_cli_pull_test.go:16: DockerHubPullSuite.TestPullFromCentralRegistry	1.049s
+    PASS: docker_cli_pull_test.go:65: DockerHubPullSuite.TestPullFromCentralRegistryImplicitRefParts	9.795s
+    PASS: docker_cli_pull_test.go:42: DockerHubPullSuite.TestPullNonExistingImage	2.158s
+    PASS: docker_cli_pull_test.go:92: DockerHubPullSuite.TestPullScratchNotAllowed	0.044s
+    OK: 918 passed, 13 skipped
+    PASS
+    coverage: 72.9% of statements
+    ok  	github.com/docker/docker/integration-cli	1638.553s
+    ---> Making bundle: .integration-daemon-stop (in bundles/1.9.0-dev/test-integration-cli)
+    ++++ cat bundles/1.9.0-dev/test-integration-cli/docker.pid
+    +++ kill 9453
+    +++ /etc/init.d/apparmor stop
+     * Clearing AppArmor profiles cache
+       ...done.
+    All profile caches have been cleared, but no profiles have been unloaded.
+    Unloading profiles will leave already running processes permanently
+    unconfined, which can lead to unexpected situations.
 
-        PASS: docker_cli_pull_test.go:133: DockerHubPullSuite.TestPullClientDisconnect	1.127s
-        PASS: docker_cli_pull_test.go:16: DockerHubPullSuite.TestPullFromCentralRegistry	1.049s
-        PASS: docker_cli_pull_test.go:65: DockerHubPullSuite.TestPullFromCentralRegistryImplicitRefParts	9.795s
-        PASS: docker_cli_pull_test.go:42: DockerHubPullSuite.TestPullNonExistingImage	2.158s
-        PASS: docker_cli_pull_test.go:92: DockerHubPullSuite.TestPullScratchNotAllowed	0.044s
-        OK: 918 passed, 13 skipped
-        PASS
-        coverage: 72.9% of statements
-        ok  	github.com/docker/docker/integration-cli	1638.553s
-        ---> Making bundle: .integration-daemon-stop (in bundles/1.9.0-dev/test-integration-cli)
-        ++++ cat bundles/1.9.0-dev/test-integration-cli/docker.pid
-        +++ kill 9453
-        +++ /etc/init.d/apparmor stop
-         * Clearing AppArmor profiles cache
-           ...done.
-        All profile caches have been cleared, but no profiles have been unloaded.
-        Unloading profiles will leave already running processes permanently
-        unconfined, which can lead to unexpected situations.
+    To set a process to complain mode, use the command line tool
+    'aa-complain'. To really tear down all profiles, run the init script
+    with the 'teardown' option."
 
-        To set a process to complain mode, use the command line tool
-        'aa-complain'. To really tear down all profiles, run the init script
-        with the 'teardown' option."
+    ---> Making bundle: test-docker-py (in bundles/1.9.0-dev/test-docker-py)
+    ---> Making bundle: .integration-daemon-start (in bundles/1.9.0-dev/test-docker-py)
+    +++ /etc/init.d/apparmor start
+     * Starting AppArmor profiles
+    Skipping profile in /etc/apparmor.d/disable: usr.sbin.rsyslogd
+       ...done.
+    +++ exec docker daemon --debug --host unix:///go/src/github.com/docker/docker/bundles/1.9.0-dev/test-docker-py/docker.sock --storage-driver overlay --exec-driver native --pidfile bundles/1.9.0-dev/test-docker-py/docker.pid --userland-proxy=true
+    ..............s..............s......................................
+    ----------------------------------------------------------------------
+    Ran 68 tests in 79.135s
+    ```
 
-        ---> Making bundle: test-docker-py (in bundles/1.9.0-dev/test-docker-py)
-        ---> Making bundle: .integration-daemon-start (in bundles/1.9.0-dev/test-docker-py)
-        +++ /etc/init.d/apparmor start
-         * Starting AppArmor profiles
-        Skipping profile in /etc/apparmor.d/disable: usr.sbin.rsyslogd
-           ...done.
-        +++ exec docker daemon --debug --host unix:///go/src/github.com/docker/docker/bundles/1.9.0-dev/test-docker-py/docker.sock --storage-driver overlay --exec-driver native --pidfile bundles/1.9.0-dev/test-docker-py/docker.pid --userland-proxy=true
-        ..............s..............s......................................
-        ----------------------------------------------------------------------
-        Ran 68 tests in 79.135s
-
-
-### Run test targets inside the development container
+## Run  targets inside a development container
 
 If you are working inside a Docker development container, you use the
 `hack/make.sh` script to run tests. The `hack/make.sh` script doesn't
@@ -165,27 +173,30 @@ Try this now.
     If you are following along with this guide, you should have a
     `dry-run-test` image.
 
-        $ docker run --privileged --rm -ti -v `pwd`:/go/src/github.com/docker/docker dry-run-test /bin/bash
+    ```bash
+    $ docker run --privileged --rm -ti -v `pwd`:/go/src/github.com/docker/docker dry-run-test /bin/bash
+    ```
 
 3. Run the tests using the `hack/make.sh` script.
 
-        root@5f8630b873fe:/go/src/github.com/docker/docker# hack/make.sh dynbinary binary cross test-unit test-integration-cli test-docker-py
+    ```bash
+    root@5f8630b873fe:/go/src/github.com/docker/docker# hack/make.sh dynbinary binary cross test-unit test-integration-cli test-docker-py
+    ```
 
     The tests run just as they did within your local host.
 
+    Of course, you can also run a subset of these targets too. For example, to run
+    just the unit tests:
 
-Of course, you can also run a subset of these targets too. For example, to run
-just the unit tests:
-
+    ```bash
     root@5f8630b873fe:/go/src/github.com/docker/docker# hack/make.sh dynbinary binary cross test-unit
+    ```
 
-Most test targets require that you build these precursor targets first:
-`dynbinary binary cross`
+    Most test targets require that you build these precursor targets first:
+    `dynbinary binary cross`
 
 
-## Running individual or multiple named tests
-
-### Unit tests
+## Run unit tests
 
 We use golang standard [testing](https://golang.org/pkg/testing/)
 package or [gocheck](https://labix.org/gocheck) for our unit tests.
@@ -206,7 +217,7 @@ On unit tests, it's better to use `TESTFLAGS` in combination with
 
     $ TESTDIRS='opts' TESTFLAGS='-test.run ^TestValidateIPAddress$' make test-unit
 
-### Integration tests
+## Run integration tests
 
 We use [gocheck](https://labix.org/gocheck) for our integration-cli tests.
 You can use the `TESTFLAGS` environment variable to run a single test. The
@@ -219,7 +230,7 @@ To run the same test inside your Docker development container, you do this:
 
     root@5f8630b873fe:/go/src/github.com/docker/docker# TESTFLAGS='-check.f TestBuild*' hack/make.sh binary test-integration-cli
 
-## Testing the Windows binary against a Linux daemon
+## Test the Windows binary against a Linux daemon
 
 This explains how to test the Windows binary on a Windows machine set up as a
 development environment.  The tests will be run against a docker daemon

@@ -26,7 +26,7 @@ you must have:
 is `D:\` you'll need to substitute that in where appropriate in these
 instructions.
 
-### Get a GitHub account
+## Task 1. Get a GitHub account
 
 To contribute to the Docker project, you will need a <a
 href="https://github.com" target="_blank">GitHub account</a>. A free account is
@@ -35,7 +35,7 @@ fine. All the Docker project repositories are public and visible to everyone.
 You should also have some experience using both the GitHub application and `git`
 on the command line.
 
-## Install Git for Windows
+## Task 2. Install Git for Windows
 
 Git for Windows includes several tools including msysGit, which is a build
 environment. The environment contains the tools you need for development such as
@@ -55,7 +55,7 @@ Git and a Git Bash shell.
 
 5. Click **Finish** when you are done.
 
-## Installing TDM-GCC
+## Task 3. Install TDM-GCC
 
 TDM-GCC is a compiler suite for Windows. You'll use this suite to compile the
 Docker Go code as you develop.
@@ -78,7 +78,7 @@ Docker Go code as you develop.
 6. Click **Finish** when you are done.
 
 
-## Installing MinGW (tar and xz)
+## Task 4. Install MinGW (tar and xz)
 
 MinGW is a minimalist port of the GNU Compiler Collection (GCC). In this
 procedure, you first download and install the MinGW installation manager. Then,
@@ -124,7 +124,7 @@ you use the manager to install the `tar` and `xz` tools from the collection.
 12. Close the dialog and the MinGW Installation Manager.
 
 
-## Set up your environment variables
+## Task 5. Set up your environment variables
 
 You'll need to add the compiler to your `Path` environment variable.
 
@@ -196,7 +196,7 @@ In this section, you install the Go language. Then, you build the source so that
 
 	Compiling the source also adds a number of variables to your Windows environment.
 
-## Get the Docker repository
+## Task 6. Get the Docker repository
 
 In this step, you start a Git `bash` terminal and get the Docker source code
 from GitHub.
