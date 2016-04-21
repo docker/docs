@@ -199,8 +199,11 @@ func (rb *repoBuilder) GetConsistentInfo(roleName string) ConsistentInfo {
 			info.fileMeta = rb.repo.Timestamp.Signed.Meta[roleName]
 		}
 	case data.CanonicalRootRole:
-		if rb.bootstrappedRootChecksum != nil {
+		switch {
+		case rb.bootstrappedRootChecksum != nil:
 			info.fileMeta = *rb.bootstrappedRootChecksum
+		case rb.repo.Snapshot != nil:
+			info.fileMeta = rb.repo.Snapshot.Signed.Meta[roleName]
 		}
 	default:
 		if rb.repo.Snapshot != nil {
