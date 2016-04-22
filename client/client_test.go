@@ -2789,22 +2789,8 @@ func TestRotateRootKey(t *testing.T) {
 	require.Error(t, err)
 	addTarget(t, authorRepo, "current", "../fixtures/intermediate-ca.crt")
 
-	// NotaryRepository.Update's handling of certificate rotation is weird:
-	//
-	// On every run, NotaryRepository.bootstrapClient rotates the trusted certificates
-	// based on CACHED root data.
-	// Then the client calls Repo.Update, which fetches a new timestmap,
-	// notices an updated root.json, validates it and stores it into the cache.
-	//
-	// So, the locally trusted certificates are rotated only on the SECOND call of
-	// NotaryRepository.Update after the rotation is pushed to the server.
-	//
-	// This would be nice to fix eventually (breaking down the NotaryRepository.Update
-	// / Repo.Update separation which causes this), but for now, just ensure that the
-	// second update does result in updated certificates.
-
 	// Publish the target, which does an update and pulls down the latest metadata, and
-	// should update the cert store now
+	// should update the trusted root
 	logRepoTrustRoot(t, "pre-publish", authorRepo)
 	err = authorRepo.Publish()
 	require.NoError(t, err)
