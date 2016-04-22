@@ -467,6 +467,7 @@ func TestValidateRootWithPinnedCA(t *testing.T) {
 			data.CanonicalSnapshotRole:  &rootRole.RootRole},
 		false,
 	)
+	testRoot.Signed.Version = 1
 	require.NoError(t, err, "Failed to create new root")
 
 	keyReader, err := os.Open("../fixtures/notary-signer.key")
@@ -581,6 +582,7 @@ func testValidateSuccessfulRootRotation(t *testing.T, keyAlg, rootKeyType string
 		},
 		false,
 	)
+	origTestRoot.Signed.Version = 1
 	require.NoError(t, err, "Failed to create new root")
 
 	signedOrigTestRoot, err := origTestRoot.ToSigned()
@@ -607,6 +609,7 @@ func testValidateSuccessfulRootRotation(t *testing.T, keyAlg, rootKeyType string
 			data.CanonicalSnapshotRole:  &rootRole.RootRole},
 		false,
 	)
+	testRoot.Signed.Version = 1
 	require.NoError(t, err, "Failed to create new root")
 
 	signedTestRoot, err := testRoot.ToSigned()
@@ -659,6 +662,7 @@ func testValidateRootRotationMissingOrigSig(t *testing.T, keyAlg, rootKeyType st
 		},
 		false,
 	)
+	origTestRoot.Signed.Version = 1
 	require.NoError(t, err, "Failed to create new root")
 
 	signedOrigTestRoot, err := origTestRoot.ToSigned()
@@ -734,6 +738,7 @@ func testValidateRootRotationMissingNewSig(t *testing.T, keyAlg, rootKeyType str
 		},
 		false,
 	)
+	origTestRoot.Signed.Version = 1
 	require.NoError(t, err, "Failed to create new root")
 
 	signedOrigTestRoot, err := origTestRoot.ToSigned()

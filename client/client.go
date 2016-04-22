@@ -660,7 +660,7 @@ func (r *NotaryRepository) bootstrapRepo() error {
 			}
 			return err
 		}
-		if err := b.Load(role, jsonBytes, 0, true); err != nil {
+		if err := b.Load(role, jsonBytes, 1, true); err != nil {
 			return err
 		}
 	}
@@ -769,7 +769,7 @@ func (r *NotaryRepository) Update(forWrite bool) error {
 // Returns a tufclient.Client for the remote server, which may not be actually
 // operational (if the URL is invalid but a root.json is cached).
 func (r *NotaryRepository) bootstrapClient(checkInitialized bool) (*tufclient.Client, error) {
-	minVersion := 0
+	minVersion := 1
 	oldBuilder := tuf.NewRepoBuilder(r.gun, r.CryptoService, r.trustPinning)
 	var newBuilder tuf.RepoBuilder
 

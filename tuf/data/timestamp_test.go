@@ -200,6 +200,14 @@ func TestTimestampFromSignedValidatesVersion(t *testing.T) {
 	ts.Signed.Version = -1
 	_, err := timestampToSignedAndBack(t, ts)
 	require.IsType(t, ErrInvalidMetadata{}, err)
+
+	ts.Signed.Version = 0
+	_, err = timestampToSignedAndBack(t, ts)
+	require.IsType(t, ErrInvalidMetadata{}, err)
+
+	ts.Signed.Version = 1
+	_, err = timestampToSignedAndBack(t, ts)
+	require.NoError(t, err)
 }
 
 // GetSnapshot returns the snapshot checksum, or an error if it is missing.

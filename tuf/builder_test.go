@@ -40,7 +40,7 @@ func getSampleMeta(t *testing.T) (map[string][]byte, string) {
 func TestBuilderLoadsValidRolesOnly(t *testing.T) {
 	meta, gun := getSampleMeta(t)
 	builder := tuf.NewRepoBuilder(gun, nil, trustpinning.TrustPinConfig{})
-	err := builder.Load("NotRoot", meta[data.CanonicalRootRole], 0, false)
+	err := builder.Load("NotRoot", meta[data.CanonicalRootRole], 1, false)
 	require.Error(t, err)
 	require.IsType(t, tuf.ErrInvalidBuilderInput{}, err)
 	require.Contains(t, err.Error(), "is an invalid role")
@@ -52,17 +52,17 @@ func TestBuilderOnlyAcceptsRootFirstWhenLoading(t *testing.T) {
 
 	for roleName, content := range meta {
 		if roleName != data.CanonicalRootRole {
-			err := builder.Load(roleName, content, 0, true)
+			err := builder.Load(roleName, content, 1, true)
 			require.Error(t, err)
 			require.IsType(t, tuf.ErrInvalidBuilderInput{}, err)
 			require.Contains(t, err.Error(), "root must be loaded first")
 			require.False(t, builder.IsLoaded(roleName))
-			require.Equal(t, 0, builder.GetLoadedVersion(roleName))
+			require.Equal(t, 1, builder.GetLoadedVersion(roleName))
 		}
 	}
 
 	// we can load the root
-	require.NoError(t, builder.Load(data.CanonicalRootRole, meta[data.CanonicalRootRole], 0, false))
+	require.NoError(t, builder.Load(data.CanonicalRootRole, meta[data.CanonicalRootRole], 1, false))
 	require.True(t, builder.IsLoaded(data.CanonicalRootRole))
 }
 
@@ -71,31 +71,31 @@ func TestBuilderOnlyAcceptsDelegationsAfterParent(t *testing.T) {
 	builder := tuf.NewRepoBuilder(gun, nil, trustpinning.TrustPinConfig{})
 
 	// load the root
-	require.NoError(t, builder.Load(data.CanonicalRootRole, meta[data.CanonicalRootRole], 0, false))
+	require.NoError(t, builder.Load(data.CanonicalRootRole, meta[data.CanonicalRootRole], 1, false))
 
 	// delegations can't be loaded without target
 	for _, delgName := range []string{"targets/a", "targets/a/b"} {
-		err := builder.Load(delgName, meta[delgName], 0, false)
+		err := builder.Load(delgName, meta[delgName], 1, false)
 		require.Error(t, err)
 		require.IsType(t, tuf.ErrInvalidBuilderInput{}, err)
 		require.Contains(t, err.Error(), "targets must be loaded first")
 		require.False(t, builder.IsLoaded(delgName))
-		require.Equal(t, 0, builder.GetLoadedVersion(delgName))
+		require.Equal(t, 1, builder.GetLoadedVersion(delgName))
 	}
 
 	// load the targets
-	require.NoError(t, builder.Load(data.CanonicalTargetsRole, meta[data.CanonicalTargetsRole], 0, false))
+	require.NoError(t, builder.Load(data.CanonicalTargetsRole, meta[data.CanonicalTargetsRole], 1, false))
 
 	// targets/a/b can't be loaded because targets/a isn't loaded
-	err := builder.Load("targets/a/b", meta["targets/a/b"], 0, false)
+	err := builder.Load("targets/a/b", meta["targets/a/b"], 1, false)
 	require.Error(t, err)
 	require.IsType(t, data.ErrInvalidRole{}, err)
 
 	// targets/a can be loaded now though because targets is loaded
-	require.NoError(t, builder.Load("targets/a", meta["targets/a"], 0, false))
+	require.NoError(t, builder.Load("targets/a", meta["targets/a"], 1, false))
 
 	// and now targets/a/b can be loaded because targets/a is loaded
-	require.NoError(t, builder.Load("targets/a/b", meta["targets/a/b"], 0, false))
+	require.NoError(t, builder.Load("targets/a/b", meta["targets/a/b"], 1, false))
 }
 
 func TestBuilderAcceptRoleOnce(t *testing.T) {
@@ -104,12 +104,12 @@ func TestBuilderAcceptRoleOnce(t *testing.T) {
 
 	for _, roleName := range append(data.BaseRoles, "targets/a", "targets/a/b") {
 		// first time loading is ok
-		require.NoError(t, builder.Load(roleName, meta[roleName], 0, false))
+		require.NoError(t, builder.Load(roleName, meta[roleName], 1, false))
 		require.True(t, builder.IsLoaded(roleName))
 		require.Equal(t, 1, builder.GetLoadedVersion(roleName))
 
 		// second time loading is not
-		err := builder.Load(roleName, meta[roleName], 0, false)
+		err := builder.Load(roleName, meta[roleName], 1, false)
 		require.Error(t, err)
 		require.IsType(t, tuf.ErrInvalidBuilderInput{}, err)
 		require.Contains(t, err.Error(), "has already been loaded")
@@ -124,14 +124,14 @@ func TestBuilderStopsAcceptingOrProducingDataOnceDone(t *testing.T) {
 	builder := tuf.NewRepoBuilder(gun, nil, trustpinning.TrustPinConfig{})
 
 	for _, roleName := range data.BaseRoles {
-		require.NoError(t, builder.Load(roleName, meta[roleName], 0, false))
+		require.NoError(t, builder.Load(roleName, meta[roleName], 1, false))
 		require.True(t, builder.IsLoaded(roleName))
 	}
 
 	_, err := builder.Finish()
 	require.NoError(t, err)
 
-	err = builder.Load("targets/a", meta["targets/a"], 0, false)
+	err = builder.Load("targets/a", meta["targets/a"], 1, false)
 	require.Error(t, err)
 	require.Equal(t, tuf.ErrBuildDone, err)
 
@@ -200,7 +200,7 @@ func TestGenerateSnapshotInvalidOperations(t *testing.T) {
 		// --- we can't generate a snapshot if the targets isn't loaded and we have no previous snapshot,
 		// --- but if we have a previous snapshot with a valid targets, we're good even if no snapshot
 		// --- is loaded
-		require.NoError(t, builder.Load(data.CanonicalRootRole, meta[data.CanonicalRootRole], 0, false))
+		require.NoError(t, builder.Load(data.CanonicalRootRole, meta[data.CanonicalRootRole], 1, false))
 		_, _, err = builder.GenerateSnapshot(prevSnapshot)
 		if prevSnapshot == nil {
 			require.IsType(t, tuf.ErrInvalidBuilderInput{}, err)
@@ -212,11 +212,11 @@ func TestGenerateSnapshotInvalidOperations(t *testing.T) {
 
 		// --- we can't generate a snapshot if we've loaded the timestamp already
 		builder = tuf.NewRepoBuilder(gun, newCS, trustpinning.TrustPinConfig{})
-		require.NoError(t, builder.Load(data.CanonicalRootRole, meta[data.CanonicalRootRole], 0, false))
+		require.NoError(t, builder.Load(data.CanonicalRootRole, meta[data.CanonicalRootRole], 1, false))
 		if prevSnapshot == nil {
-			require.NoError(t, builder.Load(data.CanonicalTargetsRole, meta[data.CanonicalTargetsRole], 0, false))
+			require.NoError(t, builder.Load(data.CanonicalTargetsRole, meta[data.CanonicalTargetsRole], 1, false))
 		}
-		require.NoError(t, builder.Load(data.CanonicalTimestampRole, meta[data.CanonicalTimestampRole], 0, false))
+		require.NoError(t, builder.Load(data.CanonicalTimestampRole, meta[data.CanonicalTimestampRole], 1, false))
 
 		_, _, err = builder.GenerateSnapshot(prevSnapshot)
 		require.IsType(t, tuf.ErrInvalidBuilderInput{}, err)
@@ -225,11 +225,11 @@ func TestGenerateSnapshotInvalidOperations(t *testing.T) {
 
 		// --- we cannot generate a snapshot if we've already loaded a snapshot
 		builder = tuf.NewRepoBuilder(gun, newCS, trustpinning.TrustPinConfig{})
-		require.NoError(t, builder.Load(data.CanonicalRootRole, meta[data.CanonicalRootRole], 0, false))
+		require.NoError(t, builder.Load(data.CanonicalRootRole, meta[data.CanonicalRootRole], 1, false))
 		if prevSnapshot == nil {
-			require.NoError(t, builder.Load(data.CanonicalTargetsRole, meta[data.CanonicalTargetsRole], 0, false))
+			require.NoError(t, builder.Load(data.CanonicalTargetsRole, meta[data.CanonicalTargetsRole], 1, false))
 		}
-		require.NoError(t, builder.Load(data.CanonicalSnapshotRole, meta[data.CanonicalSnapshotRole], 0, false))
+		require.NoError(t, builder.Load(data.CanonicalSnapshotRole, meta[data.CanonicalSnapshotRole], 1, false))
 
 		_, _, err = builder.GenerateSnapshot(prevSnapshot)
 		require.IsType(t, tuf.ErrInvalidBuilderInput{}, err)
@@ -239,9 +239,9 @@ func TestGenerateSnapshotInvalidOperations(t *testing.T) {
 		for i := 0; i < len(snapKeys); i++ {
 			require.NoError(t, newCS.RemoveKey(snapKeys[i].ID()))
 			builder = tuf.NewRepoBuilder(gun, newCS, trustpinning.TrustPinConfig{})
-			require.NoError(t, builder.Load(data.CanonicalRootRole, meta[data.CanonicalRootRole], 0, false))
+			require.NoError(t, builder.Load(data.CanonicalRootRole, meta[data.CanonicalRootRole], 1, false))
 			if prevSnapshot == nil {
-				require.NoError(t, builder.Load(data.CanonicalTargetsRole, meta[data.CanonicalTargetsRole], 0, false))
+				require.NoError(t, builder.Load(data.CanonicalTargetsRole, meta[data.CanonicalTargetsRole], 1, false))
 			}
 
 			_, _, err = builder.GenerateSnapshot(prevSnapshot)
@@ -251,9 +251,9 @@ func TestGenerateSnapshotInvalidOperations(t *testing.T) {
 
 		// --- we cannot generate a snapshot if we don't have a cryptoservice
 		builder = tuf.NewRepoBuilder(gun, nil, trustpinning.TrustPinConfig{})
-		require.NoError(t, builder.Load(data.CanonicalRootRole, meta[data.CanonicalRootRole], 0, false))
+		require.NoError(t, builder.Load(data.CanonicalRootRole, meta[data.CanonicalRootRole], 1, false))
 		if prevSnapshot == nil {
-			require.NoError(t, builder.Load(data.CanonicalTargetsRole, meta[data.CanonicalTargetsRole], 0, false))
+			require.NoError(t, builder.Load(data.CanonicalTargetsRole, meta[data.CanonicalTargetsRole], 1, false))
 		}
 
 		_, _, err = builder.GenerateSnapshot(prevSnapshot)
@@ -265,8 +265,8 @@ func TestGenerateSnapshotInvalidOperations(t *testing.T) {
 	// --- we can't generate a snapshot if we're given an invalid previous snapshot (for instance, an empty one),
 	// --- even if we have a targets loaded
 	builder := tuf.NewRepoBuilder(gun, cs, trustpinning.TrustPinConfig{})
-	require.NoError(t, builder.Load(data.CanonicalRootRole, meta[data.CanonicalRootRole], 0, false))
-	require.NoError(t, builder.Load(data.CanonicalTargetsRole, meta[data.CanonicalTargetsRole], 0, false))
+	require.NoError(t, builder.Load(data.CanonicalRootRole, meta[data.CanonicalRootRole], 1, false))
+	require.NoError(t, builder.Load(data.CanonicalTargetsRole, meta[data.CanonicalTargetsRole], 1, false))
 
 	_, _, err = builder.GenerateSnapshot(&data.SignedSnapshot{})
 	require.IsType(t, data.ErrInvalidMetadata{}, err)
@@ -302,7 +302,7 @@ func TestGenerateTimestampInvalidOperations(t *testing.T) {
 
 		// --- we can't generate a timestamp if the snapshot isn't loaded, no matter if we have a previous
 		// --- timestamp or not
-		require.NoError(t, builder.Load(data.CanonicalRootRole, meta[data.CanonicalRootRole], 0, false))
+		require.NoError(t, builder.Load(data.CanonicalRootRole, meta[data.CanonicalRootRole], 1, false))
 		_, _, err = builder.GenerateTimestamp(prevTimestamp)
 		require.IsType(t, tuf.ErrInvalidBuilderInput{}, err)
 		require.Contains(t, err.Error(), "snapshot must be loaded first")
@@ -310,9 +310,9 @@ func TestGenerateTimestampInvalidOperations(t *testing.T) {
 
 		// --- we can't generate a timestamp if we've loaded the timestamp already
 		builder = tuf.NewRepoBuilder(gun, cs, trustpinning.TrustPinConfig{})
-		require.NoError(t, builder.Load(data.CanonicalRootRole, meta[data.CanonicalRootRole], 0, false))
-		require.NoError(t, builder.Load(data.CanonicalSnapshotRole, meta[data.CanonicalSnapshotRole], 0, false))
-		require.NoError(t, builder.Load(data.CanonicalTimestampRole, meta[data.CanonicalTimestampRole], 0, false))
+		require.NoError(t, builder.Load(data.CanonicalRootRole, meta[data.CanonicalRootRole], 1, false))
+		require.NoError(t, builder.Load(data.CanonicalSnapshotRole, meta[data.CanonicalSnapshotRole], 1, false))
+		require.NoError(t, builder.Load(data.CanonicalTimestampRole, meta[data.CanonicalTimestampRole], 1, false))
 
 		_, _, err = builder.GenerateTimestamp(prevTimestamp)
 		require.IsType(t, tuf.ErrInvalidBuilderInput{}, err)
@@ -322,8 +322,8 @@ func TestGenerateTimestampInvalidOperations(t *testing.T) {
 		for i := 0; i < len(tsKeys); i++ {
 			require.NoError(t, cs.RemoveKey(tsKeys[i].ID()))
 			builder = tuf.NewRepoBuilder(gun, cs, trustpinning.TrustPinConfig{})
-			require.NoError(t, builder.Load(data.CanonicalRootRole, meta[data.CanonicalRootRole], 0, false))
-			require.NoError(t, builder.Load(data.CanonicalSnapshotRole, meta[data.CanonicalSnapshotRole], 0, false))
+			require.NoError(t, builder.Load(data.CanonicalRootRole, meta[data.CanonicalRootRole], 1, false))
+			require.NoError(t, builder.Load(data.CanonicalSnapshotRole, meta[data.CanonicalSnapshotRole], 1, false))
 
 			_, _, err = builder.GenerateTimestamp(prevTimestamp)
 			require.IsType(t, signed.ErrInsufficientSignatures{}, err)
@@ -332,8 +332,8 @@ func TestGenerateTimestampInvalidOperations(t *testing.T) {
 
 		// --- we cannot generate a timestamp if we don't have a cryptoservice
 		builder = tuf.NewRepoBuilder(gun, nil, trustpinning.TrustPinConfig{})
-		require.NoError(t, builder.Load(data.CanonicalRootRole, meta[data.CanonicalRootRole], 0, false))
-		require.NoError(t, builder.Load(data.CanonicalSnapshotRole, meta[data.CanonicalSnapshotRole], 0, false))
+		require.NoError(t, builder.Load(data.CanonicalRootRole, meta[data.CanonicalRootRole], 1, false))
+		require.NoError(t, builder.Load(data.CanonicalSnapshotRole, meta[data.CanonicalSnapshotRole], 1, false))
 
 		_, _, err = builder.GenerateTimestamp(prevTimestamp)
 		require.IsType(t, tuf.ErrInvalidBuilderInput{}, err)
@@ -344,8 +344,8 @@ func TestGenerateTimestampInvalidOperations(t *testing.T) {
 	// --- we can't generate a timsetamp if we're given an invalid previous timestamp (for instance, an empty one),
 	// --- even if we have a snapshot loaded
 	builder := tuf.NewRepoBuilder(gun, cs, trustpinning.TrustPinConfig{})
-	require.NoError(t, builder.Load(data.CanonicalRootRole, meta[data.CanonicalRootRole], 0, false))
-	require.NoError(t, builder.Load(data.CanonicalSnapshotRole, meta[data.CanonicalSnapshotRole], 0, false))
+	require.NoError(t, builder.Load(data.CanonicalRootRole, meta[data.CanonicalRootRole], 1, false))
+	require.NoError(t, builder.Load(data.CanonicalSnapshotRole, meta[data.CanonicalSnapshotRole], 1, false))
 
 	_, _, err = builder.GenerateTimestamp(&data.SignedTimestamp{})
 	require.IsType(t, data.ErrInvalidMetadata{}, err)
@@ -369,11 +369,11 @@ func TestGetConsistentInfo(t *testing.T) {
 	meta, err := testutils.SignAndSerialize(repo)
 	require.NoError(t, err)
 
-	builder := tuf.NewRepoBuilder(nil, gun, nil, trustpinning.TrustPinConfig{})
+	builder := tuf.NewRepoBuilder(gun, nil, trustpinning.TrustPinConfig{})
 	// if neither snapshot nor timestamp are loaded, no matter how much other data is loaded, consistent info
 	// is empty except for timestamp: timestamps have no checksums, and the length is always -1
 	for _, roleToLoad := range []string{data.CanonicalRootRole, data.CanonicalTargetsRole} {
-		require.NoError(t, builder.Load(roleToLoad, meta[roleToLoad], 0, false))
+		require.NoError(t, builder.Load(roleToLoad, meta[roleToLoad], 1, false))
 		for _, checkName := range append(data.BaseRoles, extraMeta...) {
 			ci := builder.GetConsistentInfo(checkName)
 			require.Equal(t, checkName, ci.ConsistentName())
@@ -391,7 +391,7 @@ func TestGetConsistentInfo(t *testing.T) {
 	}
 
 	// once timestamp is loaded, we can get the consistent info for snapshot but nothing else
-	require.NoError(t, builder.Load(data.CanonicalTimestampRole, meta[data.CanonicalTimestampRole], 0, false))
+	require.NoError(t, builder.Load(data.CanonicalTimestampRole, meta[data.CanonicalTimestampRole], 1, false))
 	for _, checkName := range append(data.BaseRoles, extraMeta...) {
 		ci := builder.GetConsistentInfo(checkName)
 
@@ -416,7 +416,7 @@ func TestGetConsistentInfo(t *testing.T) {
 	}
 
 	// once the snapshot is loaded, we can get real consistent info for all loaded roles
-	require.NoError(t, builder.Load(data.CanonicalSnapshotRole, meta[data.CanonicalSnapshotRole], 0, false))
+	require.NoError(t, builder.Load(data.CanonicalSnapshotRole, meta[data.CanonicalSnapshotRole], 1, false))
 	for _, checkName := range data.BaseRoles {
 		ci := builder.GetConsistentInfo(checkName)
 		require.True(t, ci.ChecksumKnown(), "%s's checksum is not known", checkName)
@@ -508,35 +508,35 @@ func TestTimestampPreAndPostChecksumming(t *testing.T) {
 	snapJSON := append(meta[data.CanonicalSnapshotRole], ' ')
 
 	// --- load timestamp first
-	builder := tuf.NewRepoBuilder(nil, gun, nil, trustpinning.TrustPinConfig{})
-	require.NoError(t, builder.Load(data.CanonicalRootRole, meta[data.CanonicalRootRole], 0, false))
+	builder := tuf.NewRepoBuilder(gun, nil, trustpinning.TrustPinConfig{})
+	require.NoError(t, builder.Load(data.CanonicalRootRole, meta[data.CanonicalRootRole], 1, false))
 	// timestamp doesn't fail, even though its checksum for root is wrong according to timestamp
-	require.NoError(t, builder.Load(data.CanonicalTimestampRole, meta[data.CanonicalTimestampRole], 0, false))
+	require.NoError(t, builder.Load(data.CanonicalTimestampRole, meta[data.CanonicalTimestampRole], 1, false))
 	// loading the snapshot in fails, because of the checksum the timestamp has
-	err = builder.Load(data.CanonicalSnapshotRole, snapJSON, 0, false)
+	err = builder.Load(data.CanonicalSnapshotRole, snapJSON, 1, false)
 	require.Error(t, err)
 	require.IsType(t, data.ErrMismatchedChecksum{}, err)
 	require.True(t, builder.IsLoaded(data.CanonicalTimestampRole))
 	require.False(t, builder.IsLoaded(data.CanonicalSnapshotRole))
 	// all the other metadata can be loaded in, even though the checksums are wrong according to timestamp
 	for _, roleName := range []string{data.CanonicalTargetsRole, "targets/other"} {
-		require.NoError(t, builder.Load(roleName, meta[roleName], 0, false))
+		require.NoError(t, builder.Load(roleName, meta[roleName], 1, false))
 	}
 
 	// --- load snapshot first
-	builder = tuf.NewRepoBuilder(nil, gun, nil, trustpinning.TrustPinConfig{})
+	builder = tuf.NewRepoBuilder(gun, nil, trustpinning.TrustPinConfig{})
 	for _, roleName := range append(data.BaseRoles, "targets/other") {
 		switch roleName {
 		case data.CanonicalTimestampRole:
 			continue
 		case data.CanonicalSnapshotRole:
-			require.NoError(t, builder.Load(roleName, snapJSON, 0, false))
+			require.NoError(t, builder.Load(roleName, snapJSON, 1, false))
 		default:
-			require.NoError(t, builder.Load(roleName, meta[roleName], 0, false))
+			require.NoError(t, builder.Load(roleName, meta[roleName], 1, false))
 		}
 	}
 	// timestamp fails because the snapshot checksum is wrong
-	err = builder.Load(data.CanonicalTimestampRole, meta[data.CanonicalTimestampRole], 0, false)
+	err = builder.Load(data.CanonicalTimestampRole, meta[data.CanonicalTimestampRole], 1, false)
 	require.Error(t, err)
 	checksumErr, ok := err.(data.ErrMismatchedChecksum)
 	require.True(t, ok)
@@ -587,13 +587,13 @@ func TestSnapshotLoadedFirstChecksumsOthers(t *testing.T) {
 	gun := "docker.com/notary"
 	meta := setupSnapshotChecksumming(t, gun)
 	// --- load root then snapshot
-	builder := tuf.NewRepoBuilder(nil, gun, nil, trustpinning.TrustPinConfig{})
-	require.NoError(t, builder.Load(data.CanonicalRootRole, meta[data.CanonicalRootRole], 0, false))
-	require.NoError(t, builder.Load(data.CanonicalSnapshotRole, meta[data.CanonicalSnapshotRole], 0, false))
+	builder := tuf.NewRepoBuilder(gun, nil, trustpinning.TrustPinConfig{})
+	require.NoError(t, builder.Load(data.CanonicalRootRole, meta[data.CanonicalRootRole], 1, false))
+	require.NoError(t, builder.Load(data.CanonicalSnapshotRole, meta[data.CanonicalSnapshotRole], 1, false))
 
 	// loading timestamp is fine, even though the timestamp metadata has the wrong checksum because
 	// we don't check timestamp checksums
-	require.NoError(t, builder.Load(data.CanonicalTimestampRole, meta[data.CanonicalTimestampRole], 0, false))
+	require.NoError(t, builder.Load(data.CanonicalTimestampRole, meta[data.CanonicalTimestampRole], 1, false))
 
 	// loading the other roles' metadata with a space will fail because of a checksum failure (builder
 	// checks right away if the snapshot is loaded) - in the case of targets/other/other, which should
@@ -608,10 +608,10 @@ func TestSnapshotLoadedFirstChecksumsOthers(t *testing.T) {
 		require.False(t, builder.IsLoaded(roleNameToLoad))
 
 		// now load it for real (since we need targets loaded before trying to load "targets/other")
-		require.NoError(t, builder.Load(roleNameToLoad, meta[roleNameToLoad], 0, false))
+		require.NoError(t, builder.Load(roleNameToLoad, meta[roleNameToLoad], 1, false))
 	}
 	// loading the non-existent role wil fail
-	err := builder.Load("targets/other/other", meta["targets/other/other"], 0, false)
+	err := builder.Load("targets/other/other", meta["targets/other/other"], 1, false)
 	require.Error(t, err)
 	require.IsType(t, data.ErrMissingMeta{}, err)
 	require.False(t, builder.IsLoaded("targets/other/other"))
@@ -627,7 +627,7 @@ func TestSnapshotLoadedAfterChecksumsOthersRetroactively(t *testing.T) {
 	// --- load all the other metadata first, but with an extra space at the end which should
 	// --- validate fine, except for the checksum.
 	for _, roleNameToPermute := range append(data.BaseRoles, "targets/other") {
-		builder := tuf.NewRepoBuilder(nil, gun, nil, trustpinning.TrustPinConfig{})
+		builder := tuf.NewRepoBuilder(gun, nil, trustpinning.TrustPinConfig{})
 		if roleNameToPermute == data.CanonicalSnapshotRole {
 			continue
 		}
@@ -641,12 +641,12 @@ func TestSnapshotLoadedAfterChecksumsOthersRetroactively(t *testing.T) {
 				// having a space added at the end should not affect any validity check except checksum
 				require.NoError(t, builder.Load(roleNameToLoad, append(meta[roleNameToLoad], ' '), 0, false))
 			default:
-				require.NoError(t, builder.Load(roleNameToLoad, meta[roleNameToLoad], 0, false))
+				require.NoError(t, builder.Load(roleNameToLoad, meta[roleNameToLoad], 1, false))
 			}
 			require.True(t, builder.IsLoaded(roleNameToLoad))
 		}
 		// now load the snapshot - it should fail with the checksum failure for the permuted role
-		err := builder.Load(data.CanonicalSnapshotRole, meta[data.CanonicalSnapshotRole], 0, false)
+		err := builder.Load(data.CanonicalSnapshotRole, meta[data.CanonicalSnapshotRole], 1, false)
 		switch roleNameToPermute {
 		case data.CanonicalTimestampRole:
 			require.NoError(t, err) // we don't check the timestamp's checksum
@@ -662,14 +662,14 @@ func TestSnapshotLoadedAfterChecksumsOthersRetroactively(t *testing.T) {
 	// load all the metadata as is without alteration (so they should validate all checksums)
 	// but also load the metadata that is not contained in the snapshot.  Then when the snapshot
 	// is loaded it will fail validation, because it doesn't have target/other/other's checksum
-	builder := tuf.NewRepoBuilder(nil, gun, nil, trustpinning.TrustPinConfig{})
+	builder := tuf.NewRepoBuilder(gun, nil, trustpinning.TrustPinConfig{})
 	for _, roleNameToLoad := range append(data.BaseRoles, "targets/other", "targets/other/other") {
 		if roleNameToLoad == data.CanonicalSnapshotRole {
 			continue
 		}
-		require.NoError(t, builder.Load(roleNameToLoad, meta[roleNameToLoad], 0, false))
+		require.NoError(t, builder.Load(roleNameToLoad, meta[roleNameToLoad], 1, false))
 	}
-	err := builder.Load(data.CanonicalSnapshotRole, meta[data.CanonicalSnapshotRole], 0, false)
+	err := builder.Load(data.CanonicalSnapshotRole, meta[data.CanonicalSnapshotRole], 1, false)
 	require.Error(t, err)
 	require.IsType(t, data.ErrMissingMeta{}, err)
 }

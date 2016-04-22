@@ -118,7 +118,7 @@ func (c *Client) downloadTimestamp() error {
 		logrus.Debug(remoteErr.Error())
 		logrus.Warn("Error while downloading remote metadata, using cached timestamp - this might not be the latest version available remotely")
 
-		err := c.newBuilder.Load(role, cachedTS, 0, false)
+		err := c.newBuilder.Load(role, cachedTS, 1, false)
 		if err == nil {
 			logrus.Debug("successfully verified cached timestamp")
 		}
@@ -194,7 +194,7 @@ func (c *Client) tryLoadCacheThenRemote(consistentInfo tuf.ConsistentInfo) ([]by
 		return c.tryLoadRemote(consistentInfo, nil)
 	}
 
-	if err = c.newBuilder.Load(consistentInfo.RoleName, cachedTS, 0, false); err == nil {
+	if err = c.newBuilder.Load(consistentInfo.RoleName, cachedTS, 1, false); err == nil {
 		logrus.Debugf("successfully verified cached %s", consistentInfo.RoleName)
 		return cachedTS, nil
 	}
@@ -213,8 +213,8 @@ func (c *Client) tryLoadRemote(consistentInfo tuf.ConsistentInfo, old []byte) ([
 
 	// try to load the old data into the old builder - only use it to validate
 	// versions if it loads successfully.  If it errors, then the loaded version
-	// will be 0
-	c.oldBuilder.Load(consistentInfo.RoleName, old, 0, true)
+	// will be 1
+	c.oldBuilder.Load(consistentInfo.RoleName, old, 1, true)
 	minVersion := c.oldBuilder.GetLoadedVersion(consistentInfo.RoleName)
 
 	if err := c.newBuilder.Load(consistentInfo.RoleName, raw, minVersion, false); err != nil {

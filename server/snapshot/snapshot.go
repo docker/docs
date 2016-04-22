@@ -76,7 +76,7 @@ func GetOrCreateSnapshot(gun, checksum string, store storage.MetaStore, cryptoSe
 		logrus.Debug("Previous snapshot, but no root for GUN ", gun)
 		return nil, nil, err
 	}
-	if err := builder.Load(data.CanonicalRootRole, rootJSON, 0, false); err != nil {
+	if err := builder.Load(data.CanonicalRootRole, rootJSON, 1, false); err != nil {
 		logrus.Debug("Could not load valid previous root for GUN ", gun)
 		return nil, nil, err
 	}
