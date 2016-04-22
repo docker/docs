@@ -14,8 +14,6 @@ import (
 	"io"
 	"io/ioutil"
 	"math/big"
-	"net/http"
-	"net/url"
 	"time"
 
 	"github.com/Sirupsen/logrus"
@@ -24,39 +22,8 @@ import (
 	"github.com/docker/notary/tuf/data"
 )
 
-// GetCertFromURL tries to get a X509 certificate given a HTTPS URL
-func GetCertFromURL(urlStr string) (*x509.Certificate, error) {
-	url, err := url.Parse(urlStr)
-	if err != nil {
-		return nil, err
-	}
-
-	// Check if we are adding via HTTPS
-	if url.Scheme != "https" {
-		return nil, errors.New("only HTTPS URLs allowed")
-	}
-
-	// Download the certificate and write to directory
-	resp, err := http.Get(url.String())
-	if err != nil {
-		return nil, err
-	}
-
-	// Copy the content to certBytes
-	defer resp.Body.Close()
-	certBytes, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return nil, err
-	}
-
-	// Try to extract the first valid PEM certificate from the bytes
-	cert, err := LoadCertFromPEM(certBytes)
-	if err != nil {
-		return nil, err
-	}
-
-	return cert, nil
-}
+// CertID is a simple string type for identifying x509 certificates
+type CertID string
 
 // CertToPEM is a utility function returns a PEM encoded x509 Certificate
 func CertToPEM(cert *x509.Certificate) []byte {
@@ -125,33 +92,6 @@ func fingerprintCert(cert *x509.Certificate) (CertID, error) {
 	}
 
 	return CertID(tufKey.ID()), nil
-}
-
-// loadCertsFromDir receives a store AddCertFromFile for each certificate found
-func loadCertsFromDir(s *X509FileStore) error {
-	for _, f := range s.fileStore.ListFiles() {
-		// ListFiles returns relative paths
-		data, err := s.fileStore.Get(f)
-		if err != nil {
-			// the filestore told us it had a file that it then couldn't serve.
-			// this is a serious problem so error immediately
-			return err
-		}
-		err = s.AddCertFromPEM(data)
-		if err != nil {
-			if _, ok := err.(*ErrCertValidation); ok {
-				logrus.Debugf("ignoring certificate, did not pass validation: %s", f)
-				continue
-			}
-			if _, ok := err.(*ErrCertExists); ok {
-				logrus.Debugf("ignoring certificate, already exists in the store: %s", f)
-				continue
-			}
-
-			return err
-		}
-	}
-	return nil
 }
 
 // LoadCertFromFile loads the first certificate from the file provided. The
@@ -609,15 +549,4 @@ func X509PublicKeyID(certPubKey data.PublicKey) (string, error) {
 	}
 
 	return key.ID(), nil
-}
-
-// FilterCertsExpiredSha1 can be used as the filter function to cert store
-// initializers to filter out all expired or SHA-1 certificate that we
-// shouldn't load.
-func FilterCertsExpiredSha1(cert *x509.Certificate) bool {
-	return !cert.IsCA &&
-		time.Now().Before(cert.NotAfter) &&
-		cert.SignatureAlgorithm != x509.SHA1WithRSA &&
-		cert.SignatureAlgorithm != x509.DSAWithSHA1 &&
-		cert.SignatureAlgorithm != x509.ECDSAWithSHA1
 }
