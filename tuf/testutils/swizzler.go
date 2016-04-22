@@ -269,7 +269,7 @@ func (m *MetadataSwizzler) SignMetadataWithInvalidKey(role string) error {
 
 	// create an invalid key, but not in the existing CryptoService
 	cs := cryptoservice.NewCryptoService(trustmanager.NewKeyMemoryStore(passphrase.ConstantRetriever("")))
-	key, err := CreateKey(cs, m.Gun, role)
+	key, err := CreateKey(cs, m.Gun, role, data.ECDSAKey)
 	if err != nil {
 		return err
 	}
@@ -466,7 +466,7 @@ func (m *MetadataSwizzler) RotateKey(role string, key data.PublicKey) error {
 // ChangeRootKey swaps out the root key with a new key, and re-signs the metadata
 // with the new key
 func (m *MetadataSwizzler) ChangeRootKey() error {
-	key, err := CreateKey(m.CryptoService, m.Gun, data.CanonicalRootRole)
+	key, err := CreateKey(m.CryptoService, m.Gun, data.CanonicalRootRole, data.ECDSAKey)
 	if err != nil {
 		return err
 	}

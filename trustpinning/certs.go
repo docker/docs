@@ -53,8 +53,9 @@ func prettyFormatCertIDs(certs []*x509.Certificate) string {
 ValidateRoot receives a new root, validates its correctness and attempts to
 do root key rotation if needed.
 
-First we list the current trusted certificates we have for a particular GUN. If
-that list is non-empty means that we've already seen this repository before, and
+First we check if we have any trusted certificates for a particular GUN in
+a previous root, if we have one. If the previous root is not nil and we find
+certificates for this GUN, we've already seen this repository before, and
 have a list of trusted certificates for it. In this case, we use this list of
 certificates to attempt to validate this root file.
 
@@ -86,16 +87,16 @@ We shall call this: TOFUS.
 
 Validation failure at any step will result in an ErrValidationFailed error.
 */
-func ValidateRoot(prevRoot *data.SignedRoot, root *data.Signed, gun string, trustPinning TrustPinConfig) error {
+func ValidateRoot(prevRoot *data.SignedRoot, root *data.Signed, gun string, trustPinning TrustPinConfig) (*data.SignedRoot, error) {
 	logrus.Debugf("entered ValidateRoot with dns: %s", gun)
 	signedRoot, err := data.RootFromSigned(root)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	rootRole, err := signedRoot.BuildBaseRole(data.CanonicalRootRole)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	// Retrieve all the leaf and intermediate certificates in root for which the CN matches the GUN
@@ -103,29 +104,38 @@ func ValidateRoot(prevRoot *data.SignedRoot, root *data.Signed, gun string, trus
 	certsFromRoot, err := validRootLeafCerts(allLeafCerts, gun, true)
 	if err != nil {
 		logrus.Debugf("error retrieving valid leaf certificates for: %s, %v", gun, err)
-		return &ErrValidationFail{Reason: "unable to retrieve valid leaf certificates"}
+		return nil, &ErrValidationFail{Reason: "unable to retrieve valid leaf certificates"}
 	}
 
-	// Retrieve all the trusted certificates from our previous root
-	// Note that we do not validate expiries here since our originally trusted root might have expired certs
-	allTrustedLeafCerts, allTrustedIntCerts := parseAllCerts(prevRoot)
-	trustedLeafCerts, err := validRootLeafCerts(allTrustedLeafCerts, gun, false)
-	// If we have certificates that match this specific GUN, let's make sure to
-	// use them first to validate that this new root is valid.
-	if len(trustedLeafCerts) != 0 {
+	// If we have a previous root, let's try to use it to validate that this new root is valid.
+	if prevRoot != nil {
+		// Retrieve all the trusted certificates from our previous root
+		// Note that we do not validate expiries here since our originally trusted root might have expired certs
+		allTrustedLeafCerts, allTrustedIntCerts := parseAllCerts(prevRoot)
+		trustedLeafCerts, err := validRootLeafCerts(allTrustedLeafCerts, gun, false)
+
+		// Use the certificates we found in the previous root for the GUN to verify its signatures
+		// This could potentially be an empty set, in which case we will fail to verify
 		logrus.Debugf("found %d valid root leaf certificates for %s: %s", len(trustedLeafCerts), gun,
 			prettyFormatCertIDs(trustedLeafCerts))
+
+		// Extract the previous root's threshold for signature verification
+		prevRootRoleData, ok := prevRoot.Signed.Roles[data.CanonicalRootRole]
+		if !ok {
+			return nil, &ErrValidationFail{Reason: "could not retrieve previous root role data"}
+		}
+
 		err = signed.VerifySignatures(
-			root, data.BaseRole{Keys: trustmanager.CertsToKeys(trustedLeafCerts, allTrustedIntCerts), Threshold: 1})
+			root, data.BaseRole{Keys: trustmanager.CertsToKeys(trustedLeafCerts, allTrustedIntCerts), Threshold: prevRootRoleData.Threshold})
 		if err != nil {
 			logrus.Debugf("failed to verify TUF data for: %s, %v", gun, err)
-			return &ErrValidationFail{Reason: "failed to validate data with current trusted certificates"}
+			return nil, &ErrValidationFail{Reason: "failed to validate data with current trusted certificates"}
 		}
 	} else {
 		logrus.Debugf("found no currently valid root certificates for %s, using trust_pinning config to bootstrap trust", gun)
 		trustPinCheckFunc, err := NewTrustPinChecker(trustPinning, gun)
 		if err != nil {
-			return &ErrValidationFail{Reason: err.Error()}
+			return nil, &ErrValidationFail{Reason: err.Error()}
 		}
 
 		validPinnedCerts := []*x509.Certificate{}
@@ -140,7 +150,7 @@ func ValidateRoot(prevRoot *data.SignedRoot, root *data.Signed, gun string, trus
 			validPinnedCerts = append(validPinnedCerts, cert)
 		}
 		if len(validPinnedCerts) == 0 {
-			return &ErrValidationFail{Reason: "unable to match any certificates to trust_pinning config"}
+			return nil, &ErrValidationFail{Reason: "unable to match any certificates to trust_pinning config"}
 		}
 		certsFromRoot = validPinnedCerts
 	}
@@ -152,11 +162,11 @@ func ValidateRoot(prevRoot *data.SignedRoot, root *data.Signed, gun string, trus
 		Keys: trustmanager.CertsToKeys(certsFromRoot, allIntCerts), Threshold: rootRole.Threshold})
 	if err != nil {
 		logrus.Debugf("failed to verify TUF data for: %s, %v", gun, err)
-		return &ErrValidationFail{Reason: "failed to validate integrity of roots"}
+		return nil, &ErrValidationFail{Reason: "failed to validate integrity of roots"}
 	}
 
 	logrus.Debugf("Root validation succeeded for %s", gun)
-	return nil
+	return signedRoot, nil
 }
 
 // validRootLeafCerts returns a list of possibly (if checkExpiry is true) non-expired, non-sha1 certificates
