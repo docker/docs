@@ -19,8 +19,8 @@ import (
 
 // CreateKey creates a new key inside the cryptoservice for the given role and gun,
 // returning the public key.  If the role is a root role, create an x509 key.
-func CreateKey(cs signed.CryptoService, gun, role string) (data.PublicKey, error) {
-	key, err := cs.Create(role, gun, data.ECDSAKey)
+func CreateKey(cs signed.CryptoService, gun, role, keyAlgorithm string) (data.PublicKey, error) {
+	key, err := cs.Create(role, gun, keyAlgorithm)
 	if err != nil {
 		return nil, err
 	}
@@ -36,7 +36,13 @@ func CreateKey(cs signed.CryptoService, gun, role string) (data.PublicKey, error
 		if err != nil {
 			return nil, err
 		}
-		key = data.NewECDSAx509PublicKey(trustmanager.CertToPEM(cert))
+		// Keep the x509 key type consistent with the key's algorithm
+		if keyAlgorithm == data.RSAKey {
+			key = data.NewRSAx509PublicKey(trustmanager.CertToPEM(cert))
+		} else {
+			key = data.NewECDSAx509PublicKey(trustmanager.CertToPEM(cert))
+		}
+
 	}
 	return key, nil
 }
@@ -50,7 +56,7 @@ func EmptyRepo(gun string, delegationRoles ...string) (*tuf.Repo, signed.CryptoS
 
 	baseRoles := map[string]data.BaseRole{}
 	for _, role := range data.BaseRoles {
-		key, err := CreateKey(cs, gun, role)
+		key, err := CreateKey(cs, gun, role, data.ECDSAKey)
 		if err != nil {
 			return nil, nil, err
 		}
@@ -77,7 +83,7 @@ func EmptyRepo(gun string, delegationRoles ...string) (*tuf.Repo, signed.CryptoS
 	sort.Strings(delegationRoles)
 	for _, delgName := range delegationRoles {
 		// create a delegations key and a delegation in the tuf repo
-		delgKey, err := CreateKey(cs, gun, delgName)
+		delgKey, err := CreateKey(cs, gun, delgName, data.ECDSAKey)
 		if err != nil {
 			return nil, nil, err
 		}

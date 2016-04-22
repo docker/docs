@@ -1374,7 +1374,7 @@ func TestValidateRootRotationWithOldRole(t *testing.T) {
 	keyIDs := make([]string, len(threeKeys))
 	for i := 0; i < len(threeKeys); i++ {
 		threeKeys[i], err = testutils.CreateKey(
-			serverSwizzler.CryptoService, "docker.com/notary", data.CanonicalRootRole)
+			serverSwizzler.CryptoService, "docker.com/notary", data.CanonicalRootRole, data.ECDSAKey)
 		require.NoError(t, err)
 		keyIDs[i] = threeKeys[i].ID()
 		signedRoot.Signed.Keys[keyIDs[i]] = threeKeys[i]
@@ -1392,7 +1392,7 @@ func TestValidateRootRotationWithOldRole(t *testing.T) {
 	// --- threshold back to 1
 
 	replacementKey, err := testutils.CreateKey(
-		serverSwizzler.CryptoService, "docker.com/notary", data.CanonicalRootRole)
+		serverSwizzler.CryptoService, "docker.com/notary", data.CanonicalRootRole, data.ECDSAKey)
 	require.NoError(t, err)
 	signedRoot.Signed.Version++
 	signedRoot.Signed.Keys[replacementKey.ID()] = replacementKey
@@ -1416,7 +1416,7 @@ func TestValidateRootRotationWithOldRole(t *testing.T) {
 	// --- latest root role)
 	signedRoot.Signed.Version++
 	snapKey, err := testutils.CreateKey(
-		serverSwizzler.CryptoService, "docker.com/notary", data.CanonicalSnapshotRole)
+		serverSwizzler.CryptoService, "docker.com/notary", data.CanonicalSnapshotRole, data.ECDSAKey)
 	require.NoError(t, err)
 	signedRoot.Signed.Keys[snapKey.ID()] = snapKey
 	signedRoot.Signed.Roles[data.CanonicalSnapshotRole].KeyIDs = []string{snapKey.ID()}

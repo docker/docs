@@ -881,12 +881,7 @@ func (r *NotaryRepository) validateRoot(rootJSON []byte, fromRemote bool) (*data
 			}
 		}
 	}
-	err = trustpinning.ValidateRoot(prevRoot, root, r.gun, r.trustPinning)
-	if err != nil {
-		return nil, err
-	}
-
-	return data.RootFromSigned(root)
+	return trustpinning.ValidateRoot(prevRoot, root, r.gun, r.trustPinning)
 }
 
 // RotateKey removes all existing keys associated with the role, and either
