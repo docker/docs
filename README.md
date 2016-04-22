@@ -91,8 +91,7 @@ Run `make binaries`, which creates the Notary Client CLI binary at `bin/notary`.
 Note that `make binaries` assumes a standard Go directory structure, in which
 Notary is checked out to the `src` directory in your `GOPATH`. For example:
 ```
-GOPATH=$(<path to go/>)
-go/
+$GOPATH/
     src/
         github.com/
             docker/
