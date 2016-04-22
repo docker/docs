@@ -33,11 +33,6 @@ func validateRootSuccessfully(t *testing.T, rootType string) {
 	err := repo.tufRepo.InitTimestamp()
 	require.NoError(t, err, "error creating repository: %s", err)
 
-	// Initialize is supposed to have created new certificate for this repository
-	// Lets check for it and store it for later use
-	allCerts := repo.CertStore.GetCertificates()
-	require.Len(t, allCerts, 1)
-
 	fakeServerData(t, repo, mux, keys)
 
 	//

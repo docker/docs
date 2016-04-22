@@ -1911,17 +1911,15 @@ func TestPublishRootCorrupt(t *testing.T) {
 	defer os.RemoveAll(repo.baseDir)
 	testPublishBadMetadata(t, data.CanonicalRootRole, repo, false, false)
 
-	// publish first - publish should still succeed if root corrupt since the
-	// remote root is signed with the same key.
+	// publish first - publish should still fail if the local root is corrupt since
+	// we can't determine whether remote root is signed with the same key.
 	repo, _ = initializeRepo(t, data.ECDSAKey, "docker.com/notary2", ts.URL, false)
 	defer os.RemoveAll(repo.baseDir)
-	testPublishBadMetadata(t, data.CanonicalRootRole, repo, true, true)
+	testPublishBadMetadata(t, data.CanonicalRootRole, repo, true, false)
 }
 
 // When publishing snapshot, root, or target, if the repo hasn't been published
-// before, if the metadata is corrupt, it can't be published.  If it has been
-// published already, then the corrupt metadata can just be re-downloaded, so
-// publishing is successful.
+// before, if the metadata is corrupt, it can't be published.
 func testPublishBadMetadata(t *testing.T, roleName string, repo *NotaryRepository,
 	publishFirst, succeeds bool) {
 
@@ -1938,7 +1936,11 @@ func testPublishBadMetadata(t *testing.T, roleName string, repo *NotaryRepositor
 		require.NoError(t, err)
 	} else {
 		require.Error(t, err)
-		require.IsType(t, &regJson.SyntaxError{}, err)
+		if roleName == data.CanonicalRootRole && publishFirst {
+			require.IsType(t, &trustpinning.ErrValidationFail{}, err)
+		} else {
+			require.IsType(t, &regJson.SyntaxError{}, err)
+		}
 	}
 
 	// make an unreadable file by creating a directory instead of a file
@@ -1950,7 +1952,7 @@ func testPublishBadMetadata(t *testing.T, roleName string, repo *NotaryRepositor
 	defer os.RemoveAll(path)
 
 	err = repo.Publish()
-	if succeeds {
+	if succeeds || publishFirst {
 		require.NoError(t, err)
 	} else {
 		require.Error(t, err)
