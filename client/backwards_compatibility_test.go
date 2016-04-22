@@ -29,10 +29,6 @@ func requireValidFixture(t *testing.T, notaryRepo *NotaryRepository) {
 	for _, targetObj := range notaryRepo.tufRepo.Targets {
 		require.True(t, targetObj.Signed.Expires.After(tenYearsInFuture))
 	}
-
-	for _, cert := range notaryRepo.CertStore.GetCertificates() {
-		require.True(t, cert.NotAfter.After(tenYearsInFuture))
-	}
 }
 
 // recursively copies the contents of one directory into another - ignores

@@ -208,8 +208,9 @@ var waysToMessUpLocalMetadata = []swizzleExpectations{
 	// actively sabotage and break their own local repo (particularly the root.json)
 }
 
-// If a repo has corrupt metadata (in that the hash doesn't match the snapshot) or
-// missing metadata, an update will replace all of it
+// If a repo has missing metadata, an update will replace all of it
+// If a repo has corrupt metadata for root, the update will fail
+// For other roles, corrupt metadata will be replaced
 func TestUpdateReplacesCorruptOrMissingMetadata(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping test in short mode")
@@ -230,104 +231,115 @@ func TestUpdateReplacesCorruptOrMissingMetadata(t *testing.T) {
 	repoSwizzler := testutils.NewMetadataSwizzler("docker.com/notary", serverMeta, cs)
 	repoSwizzler.MetadataCache = repo.fileStore
 
+	origMeta := testutils.CopyRepoMetadata(serverMeta)
+
 	for _, role := range repoSwizzler.Roles {
 		for _, expt := range waysToMessUpLocalMetadata {
 			text, messItUp := expt.desc, expt.swizzle
 			for _, forWrite := range []bool{true, false} {
 				require.NoError(t, messItUp(repoSwizzler, role), "could not fuzz %s (%s)", role, text)
 				err := repo.Update(forWrite)
-				require.NoError(t, err)
-				for r, expected := range serverMeta {
-					actual, err := repo.fileStore.GetMeta(r, -1)
-					require.NoError(t, err, "problem getting repo metadata for %s", role)
-					require.True(t, bytes.Equal(expected, actual),
-						"%s for %s: expected to recover after update", text, role)
+				// if this is a root role, we should error if it's corrupted data
+				if role == data.CanonicalRootRole && expt.desc == "invalid JSON" {
+					require.Error(t, err)
+					// revert our original metadata
+					for role := range origMeta {
+						require.NoError(t, repo.fileStore.SetMeta(role, origMeta[role]))
+					}
+				} else {
+					require.NoError(t, err)
+					for r, expected := range serverMeta {
+						actual, err := repo.fileStore.GetMeta(r, -1)
+						require.NoError(t, err, "problem getting repo metadata for %s", role)
+						require.True(t, bytes.Equal(expected, actual),
+							"%s for %s: expected to recover after update", text, role)
+					}
 				}
 			}
 		}
 	}
 }
 
-// TODO(riyazdf): this test goes against the new root pinning because the certstore
-// no longer exists, so roots on the local filestore must be correct.
-// TODO(riyazdf): break this test up to only test valid rejections, not associated
-// with rotations -- such as expired metadata, etc.
-//// If a repo has an invalid root (signed by wrong key, expired, invalid version,
-//// invalid number of signatures, etc.), the repo will just get the new root from
-//// the server, whether or not the update is for writing (forced update), but
-//// it will refuse to update if the root key has changed and the new root is
-//// not signed by the old and new key
-//func TestUpdateFailsIfServerRootKeyChangedWithoutMultiSign(t *testing.T) {
-//	if testing.Short() {
-//		t.Skip("skipping test in short mode")
-//	}
-//
-//	serverMeta, serverSwizzler := newServerSwizzler(t)
-//	origMeta := testutils.CopyRepoMetadata(serverMeta)
-//
-//	ts := readOnlyServer(t, serverSwizzler.MetadataCache, http.StatusNotFound, "docker.com/notary")
-//	defer ts.Close()
-//
-//	repo := newBlankRepo(t, ts.URL)
-//	defer os.RemoveAll(repo.baseDir)
-//
-//	err := repo.Update(false) // ensure we have all metadata to start with
-//	require.NoError(t, err)
-//
-//	// rotate the server's root.json root key so that they no longer match trust anchors
-//	require.NoError(t, serverSwizzler.ChangeRootKey())
-//	// bump versions, update snapshot and timestamp too so it will not fail on a hash
-//	bumpVersions(t, serverSwizzler, 1)
-//
-//	// we want to swizzle the local cache, not the server, so create a new one
-//	repoSwizzler := &testutils.MetadataSwizzler{
-//		MetadataCache: repo.fileStore,
-//		CryptoService: serverSwizzler.CryptoService,
-//		Roles:         serverSwizzler.Roles,
-//	}
-//
-//	for _, expt := range waysToMessUpLocalMetadata {
-//		text, messItUp := expt.desc, expt.swizzle
-//		for _, forWrite := range []bool{true, false} {
-//			require.NoError(t, messItUp(repoSwizzler, data.CanonicalRootRole), "could not fuzz root (%s)", text)
-//			messedUpMeta, err := repo.fileStore.GetMeta(data.CanonicalRootRole, -1)
-//
-//			if _, ok := err.(store.ErrMetaNotFound); ok { // one of the ways to mess up is to delete metadata
-//
-//				err = repo.Update(forWrite)
-//				require.Error(t, err) // the new server has a different root key, update fails
-//
-//			} else {
-//
-//				require.NoError(t, err)
-//
-//				err = repo.Update(forWrite)
-//				require.Error(t, err) // the new server has a different root, update fails
-//
-//				// we can't test that all the metadata is the same, because we probably would
-//				// have downloaded a new timestamp and maybe snapshot.  But the root should be the
-//				// same because it has failed to update.
-//				for role, expected := range origMeta {
-//					if role != data.CanonicalTimestampRole && role != data.CanonicalSnapshotRole {
-//						actual, err := repo.fileStore.GetMeta(role, -1)
-//						require.NoError(t, err, "problem getting repo metadata for %s", role)
-//
-//						if role == data.CanonicalRootRole {
-//							expected = messedUpMeta
-//						}
-//						require.True(t, bytes.Equal(expected, actual),
-//							"%s for %s: expected to not have updated", text, role)
-//					}
-//				}
-//
-//			}
-//
-//			// revert our original root metadata
-//			require.NoError(t,
-//				repo.fileStore.SetMeta(data.CanonicalRootRole, origMeta[data.CanonicalRootRole]))
-//		}
-//	}
-//}
+// If a repo has an invalid root (signed by wrong key, expired, invalid version,
+// invalid number of signatures, etc.), the repo will just get the new root from
+// the server, whether or not the update is for writing (forced update), but
+// it will refuse to update if the root key has changed and the new root is
+// not signed by the old and new key
+func TestUpdateFailsIfServerRootKeyChangedWithoutMultiSign(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode")
+	}
+
+	serverMeta, serverSwizzler := newServerSwizzler(t)
+	origMeta := testutils.CopyRepoMetadata(serverMeta)
+
+	ts := readOnlyServer(t, serverSwizzler.MetadataCache, http.StatusNotFound, "docker.com/notary")
+	defer ts.Close()
+
+	repo := newBlankRepo(t, ts.URL)
+	defer os.RemoveAll(repo.baseDir)
+
+	err := repo.Update(false) // ensure we have all metadata to start with
+	require.NoError(t, err)
+
+	// rotate the server's root.json root key so that they no longer match trust anchors
+	require.NoError(t, serverSwizzler.ChangeRootKey())
+	// bump versions, update snapshot and timestamp too so it will not fail on a hash
+	bumpVersions(t, serverSwizzler, 1)
+
+	// we want to swizzle the local cache, not the server, so create a new one
+	repoSwizzler := &testutils.MetadataSwizzler{
+		MetadataCache: repo.fileStore,
+		CryptoService: serverSwizzler.CryptoService,
+		Roles:         serverSwizzler.Roles,
+	}
+
+	for _, expt := range waysToMessUpLocalMetadata {
+		text, messItUp := expt.desc, expt.swizzle
+		for _, forWrite := range []bool{true, false} {
+			require.NoError(t, messItUp(repoSwizzler, data.CanonicalRootRole), "could not fuzz root (%s)", text)
+			messedUpMeta, err := repo.fileStore.GetMeta(data.CanonicalRootRole, -1)
+
+			if _, ok := err.(store.ErrMetaNotFound); ok { // one of the ways to mess up is to delete metadata
+
+				err = repo.Update(forWrite)
+				// the new server has a different root key, but we don't have any way of pinning against a previous root
+				require.NoError(t, err)
+				// revert our original metadata
+				for role := range origMeta {
+					require.NoError(t, repo.fileStore.SetMeta(role, origMeta[role]))
+				}
+			} else {
+
+				require.NoError(t, err)
+
+				err = repo.Update(forWrite)
+				require.Error(t, err) // the new server has a different root, update fails
+
+				// we can't test that all the metadata is the same, because we probably would
+				// have downloaded a new timestamp and maybe snapshot.  But the root should be the
+				// same because it has failed to update.
+				for role, expected := range origMeta {
+					if role != data.CanonicalTimestampRole && role != data.CanonicalSnapshotRole {
+						actual, err := repo.fileStore.GetMeta(role, -1)
+						require.NoError(t, err, "problem getting repo metadata for %s", role)
+
+						if role == data.CanonicalRootRole {
+							expected = messedUpMeta
+						}
+						require.True(t, bytes.Equal(expected, actual),
+							"%s for %s: expected to not have updated -- swizzle method %s", text, role, expt.desc)
+					}
+				}
+
+			}
+
+			// revert our original root metadata
+			require.NoError(t,
+				repo.fileStore.SetMeta(data.CanonicalRootRole, origMeta[data.CanonicalRootRole]))
+		}
+	}
+}
 
 type updateOpts struct {
 	notFoundCode     int    // what code to return when the cache doesn't have the metadata
@@ -774,15 +786,15 @@ func testUpdateRemoteFileChecksumWrong(t *testing.T, opts updateOpts, errExpecte
 // this does not include delete, which is tested separately so we can try to get
 // 404s and 503s
 var waysToMessUpServer = []swizzleExpectations{
-	{desc: "invalid JSON", expectErrs: []interface{}{&json.SyntaxError{}},
+	{desc: "invalid JSON", expectErrs: []interface{}{&trustpinning.ErrValidationFail{}, &json.SyntaxError{}},
 		swizzle: (*testutils.MetadataSwizzler).SetInvalidJSON},
 
-	{desc: "an invalid Signed", expectErrs: []interface{}{&json.UnmarshalTypeError{}},
+	{desc: "an invalid Signed", expectErrs: []interface{}{&trustpinning.ErrValidationFail{}, &json.UnmarshalTypeError{}},
 		swizzle: (*testutils.MetadataSwizzler).SetInvalidSigned},
 
 	{desc: "an invalid SignedMeta",
 		// it depends which field gets unmarshalled first
-		expectErrs: []interface{}{&json.UnmarshalTypeError{}, &time.ParseError{}},
+		expectErrs: []interface{}{&trustpinning.ErrValidationFail{}, &json.UnmarshalTypeError{}, &time.ParseError{}},
 		swizzle:    (*testutils.MetadataSwizzler).SetInvalidSignedMeta},
 
 	// for the errors below, when we bootstrap root, we get cert.ErrValidationFail failures
@@ -1201,12 +1213,6 @@ func TestUpdateLocalAndRemoteRootCorrupt(t *testing.T) {
 	}
 	for _, localExpt := range waysToMessUpLocalMetadata {
 		for _, serverExpt := range waysToMessUpServer {
-			if localExpt.desc == "expired metadata" && serverExpt.desc == "lower metadata version" {
-				// TODO: bug right now where if the local metadata is invalid, we just download a
-				// new version - we verify the signatures and everything, but don't check the version
-				// against the previous if we can
-				continue
-			}
 			testUpdateLocalAndRemoteRootCorrupt(t, true, localExpt, serverExpt)
 			testUpdateLocalAndRemoteRootCorrupt(t, false, localExpt, serverExpt)
 		}

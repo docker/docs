@@ -568,12 +568,41 @@ func testValidateSuccessfulRootRotation(t *testing.T, keyAlg, rootKeyType string
 	origRootCert := certificates[0]
 	replRootCert := certificates[1]
 
-	// We need the PEM representation of the replacement key to put it into the TUF data
+	// Set up the previous root prior to rotating
+	// We need the PEM representation of the original key to put it into the TUF data
 	origRootPEMCert := trustmanager.CertToPEM(origRootCert)
-	replRootPEMCert := trustmanager.CertToPEM(replRootCert)
 
 	// Tuf key with PEM-encoded x509 certificate
 	origRootKey := data.NewPublicKey(rootKeyType, origRootPEMCert)
+
+	origRootRole, err := data.NewRole(data.CanonicalRootRole, 1, []string{origRootKey.ID()}, nil)
+	require.NoError(t, err)
+
+	origTestRoot, err := data.NewRoot(
+		map[string]data.PublicKey{origRootKey.ID(): origRootKey},
+		map[string]*data.RootRole{
+			data.CanonicalRootRole:      &origRootRole.RootRole,
+			data.CanonicalTargetsRole:   &origRootRole.RootRole,
+			data.CanonicalSnapshotRole:  &origRootRole.RootRole,
+			data.CanonicalTimestampRole: &origRootRole.RootRole,
+		},
+		false,
+	)
+	require.NoError(t, err, "Failed to create new root")
+
+	signedOrigTestRoot, err := origTestRoot.ToSigned()
+	require.NoError(t, err)
+
+	// We only sign with the new key, and not with the original one.
+	err = signed.Sign(cs, signedOrigTestRoot, []data.PublicKey{origRootKey}, 1, nil)
+	require.NoError(t, err)
+	prevRoot, err := data.RootFromSigned(signedOrigTestRoot)
+	require.NoError(t, err)
+
+	// We need the PEM representation of the replacement key to put it into the TUF data
+	replRootPEMCert := trustmanager.CertToPEM(replRootCert)
+
+	// Tuf key with PEM-encoded x509 certificate
 	replRootKey := data.NewPublicKey(rootKeyType, replRootPEMCert)
 
 	rootRole, err := data.NewRole(data.CanonicalRootRole, 1, []string{replRootKey.ID()}, nil)
@@ -598,7 +627,7 @@ func testValidateSuccessfulRootRotation(t *testing.T, keyAlg, rootKeyType string
 
 	// This call to ValidateRoot will succeed since we are using a valid PEM
 	// encoded certificate, and have no other certificates for this CN
-	err = ValidateRoot(nil, signedTestRoot, gun, TrustPinConfig{})
+	err = ValidateRoot(prevRoot, signedTestRoot, gun, TrustPinConfig{})
 	require.NoError(t, err)
 }
 

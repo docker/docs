@@ -2,7 +2,6 @@ package client
 
 import (
 	"bytes"
-	"crypto/x509"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -87,7 +86,6 @@ type NotaryRepository struct {
 	CryptoService signed.CryptoService
 	tufRepo       *tuf.Repo
 	roundTrip     http.RoundTripper
-	CertStore     trustmanager.X509Store
 	trustPinning  trustpinning.TrustPinConfig
 }
 
@@ -96,15 +94,6 @@ type NotaryRepository struct {
 // of usage preference), and returns a NotaryRepository.
 func repositoryFromKeystores(baseDir, gun, baseURL string, rt http.RoundTripper,
 	keyStores []trustmanager.KeyStore, trustPin trustpinning.TrustPinConfig) (*NotaryRepository, error) {
-
-	certPath := filepath.Join(baseDir, notary.TrustedCertsDir)
-	certStore, err := trustmanager.NewX509FilteredFileStore(
-		certPath,
-		trustmanager.FilterCertsExpiredSha1,
-	)
-	if err != nil {
-		return nil, err
-	}
 
 	cryptoService := cryptoservice.NewCryptoService(keyStores...)
 
@@ -115,7 +104,6 @@ func repositoryFromKeystores(baseDir, gun, baseURL string, rt http.RoundTripper,
 		tufRepoPath:   filepath.Join(baseDir, tufDir, filepath.FromSlash(gun)),
 		CryptoService: cryptoService,
 		roundTrip:     rt,
-		CertStore:     certStore,
 		trustPinning:  trustPin,
 	}
 
@@ -162,22 +150,22 @@ func NewTarget(targetName string, targetPath string) (*Target, error) {
 	return &Target{Name: targetName, Hashes: meta.Hashes, Length: meta.Length}, nil
 }
 
-func rootCertKey(gun string, privKey data.PrivateKey) (*x509.Certificate, data.PublicKey, error) {
+func rootCertKey(gun string, privKey data.PrivateKey) (data.PublicKey, error) {
 	// Hard-coded policy: the generated certificate expires in 10 years.
 	startTime := time.Now()
 	cert, err := cryptoservice.GenerateCertificate(
 		privKey, gun, startTime, startTime.Add(notary.Year*10))
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
 
 	x509PublicKey := trustmanager.CertToKey(cert)
 	if x509PublicKey == nil {
-		return nil, nil, fmt.Errorf(
+		return nil, fmt.Errorf(
 			"cannot use regenerated certificate: format %s", cert.PublicKeyAlgorithm)
 	}
 
-	return cert, x509PublicKey, nil
+	return x509PublicKey, nil
 }
 
 // Initialize creates a new repository by using rootKey as the root Key for the
@@ -218,11 +206,10 @@ func (r *NotaryRepository) Initialize(rootKeyID string, serverManagedRoles ...st
 		}
 	}
 
-	rootCert, rootKey, err := rootCertKey(r.gun, privKey)
+	rootKey, err := rootCertKey(r.gun, privKey)
 	if err != nil {
 		return err
 	}
-	r.CertStore.AddCert(rootCert)
 
 	var (
 		rootRole = data.NewBaseRole(
@@ -790,9 +777,6 @@ func (r *NotaryRepository) Update(forWrite bool) error {
 // Partially populates r.tufRepo with this root metadata (only; use
 // tufclient.Client.Update to load the rest).
 //
-// As another side effect, r.CertManager's list of trusted certificates
-// is updated with data from the loaded root.json.
-//
 // Fails if the remote server is reachable and does not know the repo
 // (i.e. before the first r.Publish()), in which case the error is
 // store.ErrMetaNotFound, or if the root metadata (from whichever source is used)
@@ -883,19 +867,20 @@ func (r *NotaryRepository) validateRoot(rootJSON []byte, fromRemote bool) (*data
 	var prevRoot *data.SignedRoot
 	if fromRemote {
 		prevRootJSON, err := r.fileStore.GetMeta(data.CanonicalRootRole, -1)
+		// A previous root exists, so we attempt to use it
+		// If for some reason we can't extract it (ex: it's corrupted), we should error client-side to be conservative
 		if err == nil {
 			prevSignedRoot := &data.Signed{}
 			err = json.Unmarshal(prevRootJSON, prevSignedRoot)
-			if err == nil {
-				prevRoot, err = data.RootFromSigned(prevSignedRoot)
+			if err != nil {
+				return nil, &trustpinning.ErrValidationFail{fmt.Sprintf("unable to unmarshal previously trusted root from disk: %v", err)}
+			}
+			prevRoot, err = data.RootFromSigned(prevSignedRoot)
+			if err != nil {
+				return nil, &trustpinning.ErrValidationFail{fmt.Sprintf("error loading previously trusted root into valid role format: %v", err)}
 			}
 		}
 	}
-	// If we had any errors while trying to retrieve the previous root, just set it to nil
-	if err != nil {
-		prevRoot = nil
-	}
-
 	err = trustpinning.ValidateRoot(prevRoot, root, r.gun, r.trustPinning)
 	if err != nil {
 		return nil, err
@@ -947,7 +932,7 @@ func (r *NotaryRepository) RotateKey(role string, serverManagesKey bool) error {
 		if err != nil {
 			return err
 		}
-		_, pubKey, err = rootCertKey(r.gun, privKey)
+		pubKey, err = rootCertKey(r.gun, privKey)
 		if err != nil {
 			return err
 		}
@@ -982,26 +967,12 @@ func (r *NotaryRepository) rootFileKeyChange(cl changelist.Changelist, role, act
 	return cl.Add(c)
 }
 
-// DeleteTrustData removes the trust data stored for this repo in the TUF cache and certificate store on the client side
+// DeleteTrustData removes the trust data stored for this repo in the TUF cache on the client side
 func (r *NotaryRepository) DeleteTrustData() error {
 	// Clear TUF files and cache
 	if err := r.fileStore.RemoveAll(); err != nil {
 		return fmt.Errorf("error clearing TUF repo data: %v", err)
 	}
 	r.tufRepo = tuf.NewRepo(nil)
-	// Clear certificates
-	certificates, err := r.CertStore.GetCertificatesByCN(r.gun)
-	if err != nil {
-		// If there were no certificates to delete, we're done
-		if _, ok := err.(*trustmanager.ErrNoCertificatesFound); ok {
-			return nil
-		}
-		return fmt.Errorf("error retrieving certificates for %s: %v", r.gun, err)
-	}
-	for _, cert := range certificates {
-		if err := r.CertStore.RemoveCert(cert); err != nil {
-			return fmt.Errorf("error removing certificate: %v: %v", cert, err)
-		}
-	}
 	return nil
 }
