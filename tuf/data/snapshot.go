@@ -32,9 +32,9 @@ func IsValidSnapshotStructure(s Snapshot) error {
 			role: CanonicalSnapshotRole, msg: fmt.Sprintf("expected type %s, not %s", expectedType, s.Type)}
 	}
 
-	if s.Version < 0 {
+	if s.Version < 1 {
 		return ErrInvalidMetadata{
-			role: CanonicalSnapshotRole, msg: "version cannot be negative"}
+			role: CanonicalSnapshotRole, msg: "version cannot be less than one"}
 	}
 
 	for _, role := range []string{CanonicalRootRole, CanonicalTargetsRole} {

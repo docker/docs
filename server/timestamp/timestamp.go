@@ -144,13 +144,13 @@ func createTimestamp(gun string, prev *data.SignedTimestamp, snapshot []byte, st
 		logrus.Debug("Previous timestamp, but no root for GUN ", gun)
 		return nil, err
 	}
-	if err := builder.Load(data.CanonicalRootRole, root, 0, false); err != nil {
+	if err := builder.Load(data.CanonicalRootRole, root, 1, false); err != nil {
 		logrus.Debug("Could not load valid previous root for GUN ", gun)
 		return nil, err
 	}
 
 	// load snapshot so we can include it in timestamp
-	if err := builder.Load(data.CanonicalSnapshotRole, snapshot, 0, false); err != nil {
+	if err := builder.Load(data.CanonicalSnapshotRole, snapshot, 1, false); err != nil {
 		logrus.Debug("Could not load valid previous snapshot for GUN ", gun)
 		return nil, err
 	}

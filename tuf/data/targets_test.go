@@ -236,4 +236,16 @@ func TestTargetsFromSignedValidatesVersion(t *testing.T) {
 	require.NoError(t, err)
 	_, err = TargetsFromSigned(s, "targets/a")
 	require.IsType(t, ErrInvalidMetadata{}, err)
+
+	tg.Signed.Version = 0
+	s, err = tg.ToSigned()
+	require.NoError(t, err)
+	_, err = TargetsFromSigned(s, "targets/a")
+	require.IsType(t, ErrInvalidMetadata{}, err)
+
+	tg.Signed.Version = 1
+	s, err = tg.ToSigned()
+	require.NoError(t, err)
+	_, err = TargetsFromSigned(s, "targets/a")
+	require.NoError(t, err)
 }

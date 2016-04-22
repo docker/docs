@@ -166,7 +166,8 @@ func (rb *repoBuilder) IsLoaded(roleName string) bool {
 	}
 }
 
-// GetLoadedVersion returns the metadata version, if it is loaded, or 0 otherwise
+// GetLoadedVersion returns the metadata version, if it is loaded, or 1 (the
+// minimum valid version number) otherwise
 func (rb *repoBuilder) GetLoadedVersion(roleName string) int {
 	switch {
 	case roleName == data.CanonicalRootRole && rb.repo.Root != nil:
@@ -181,7 +182,7 @@ func (rb *repoBuilder) GetLoadedVersion(roleName string) int {
 		}
 	}
 
-	return 0
+	return 1
 }
 
 // GetConsistentInfo returns the consistent name and size of a role, if it is known,
