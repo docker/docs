@@ -23,13 +23,14 @@ And with it, you can store your Docker images securely, behind your firewall.
 
 ![](images/overview-1.png)
 
-You can use DTR as part of your Continuous Integration (CI), and Continuous
-Delivery (CD) processes, to build, run, and ship your applications.
+You can use DTR as part of your continuous integration, and continuous
+delivery processes to build, run, and ship your applications.
 
 
 ## Built-in security and access control
 
-Docker UCP has its own built-in authentication mechanism, and supports LDAP
+DTR uses the same authentication mechanism as Docker Universal Control Plane.
+It has a built-in authentication mechanism, and also integrates with LDAP
 and Active Directory. It also supports Role Based Access Control (RBAC).
 
 This allows you to implement fine-grain access control policies, on who has

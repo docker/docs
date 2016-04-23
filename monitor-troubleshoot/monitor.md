@@ -13,8 +13,8 @@ weight=0
 
 Docker Trusted Registry is a Dockerized application. To monitor it, you can
 use the same tools and techniques you're already using to monitor other
-containerized applications. One way to monitor DTR is using the monitoring
-capabilities of Docker Universal Control Plane.
+containerized applications running on your cluster. One way to monitor
+DTR is using the monitoring capabilities of Docker Universal Control Plane.
 
 In your browser, log in to **Docker Universal Control Plane** (UCP), and
 navigate to the **Applications** page.
@@ -30,6 +30,13 @@ running. **Click on a container** to see its details, like configurations,
 resources, and logs.
 
 ![](../images/monitor-2.png)
+
+
+## Health checks
+
+When configuring your load balancer, you can use the `/load_balancer_status`
+endpoint exposed on each DTR replica. This allows you to check if the replica
+is healthy and whether it should remain on the load balancing pool or not.
 
 
 ## Where to go next

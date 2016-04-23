@@ -18,26 +18,19 @@ Before installing, be sure your infrastructure has these requirements.
 
 ## Software requirements
 
-To install DTR, all nodes must have:
+To install DTR on a node, that node node must be part of a Docker Universal
+Control Plane 1.1 cluster.
 
 <!-- TODO check these
 * x.x GB of RAM
 * x.x GB of available disk space
 -->
 
-* One of the supported operating systems installed:
-  * RHEL 7.0, 7.1
-  * Ubuntu 14.04 LTS
-  * CentOS 7.1
-  * SUSE Linux Enterprise 12
-* Linux kernel version 3.10 or higher
-* CS Docker Engine version 1.10 or higher
-* Docker Universal Control Plane 1.1 or higher
-
 
 ## Ports used
 
-When installing DTR on a host, make sure the following ports are open:
+When installing DTR on a node, make sure the following ports are open on that
+node:
 
 | Direction | Port | Purpose                                                                          |
 |:---------:|:-----|:---------------------------------------------------------------------------------|

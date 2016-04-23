@@ -24,10 +24,10 @@ installation. Finally, you decommission your 1.4.3 by uninstalling it.
 ## Step 1. Install DTR 2.0
 
 The first step in upgrading to DTR 2.0 is doing a fresh installation of DTR 2.0.
-This can be done on the same host were DTR 1.4.3 is already running or on a
-new host.
+This can be done on the same node where DTR 1.4.3 is already running or on a
+new node.
 
-If you decide to install the new DTR on the same host, you'll need
+If you decide to install the new DTR on the same node, you'll need
 to install it on a port other than 443, since DTR 1.4.3 is already using it.
 Use these instructions to install DTR 2.0:
 
@@ -44,7 +44,7 @@ configurations, accounts, and repository metadata from one installation to
 another.
 
 For this, you can use the `docker/dtr migrate` command. This command
-migrates configurations, accounts, and repository metadata, it doesn't affect
+migrates configurations, accounts, and repository metadata. It doesn't migrate
 the images that are on the storage backend used by DTR 1.4.3.
 
 To find what options are available on the migrate command, check the reference

@@ -12,10 +12,9 @@ weight=20
 
 # DTR architecture
 
-Docker Trusted Registry (DTR) is a Dockerized application that runs
-using the Commercially Supported Docker Engine.
+Docker Trusted Registry (DTR) is a Dockerized application that on a Docker
+Universal Control Plane cluster.
 
-<!-- TODO: add architecture diagram -->
 ![](images/architecture-1.png)
 
 
@@ -23,13 +22,13 @@ using the Commercially Supported Docker Engine.
 
 When you install DTR on a node, the following containers are started:
 
-| Name          | Description                                                                                                                       |
-|:--------------|:----------------------------------------------------------------------------------------------------------------------------------|
-| dtr-nginx     | Receives http and https requests and proxies them to other DTR components. By default it listens to ports 80 and 443 of the host. |
-| dtr-api       | Executes the DTR business logic. It serves the DTR web application, and API.                                                      |
-| dtr-registry  | Implements the functionality for pulling and pushing Docker images. It also handles how images are stored.                        |
-| dtr-etcd      | A key-value store for persisting DTR configuration settings. Don't use it in your applications, since it's for internal use only. |
-| dtr-rethinkdb | A database for persisting repository metadata. Don't use it in your applications, since it's for internal use only.               |
+| Name                             | Description                                                                                                                       |
+|:---------------------------------|:----------------------------------------------------------------------------------------------------------------------------------|
+| dtr-nginx-&lt;replica_id&gt;     | Receives http and https requests and proxies them to other DTR components. By default it listens to ports 80 and 443 of the host. |
+| dtr-api-&lt;replica_id&gt;       | Executes the DTR business logic. It serves the DTR web application, and API.                                                      |
+| dtr-registry-&lt;replica_id&gt;  | Implements the functionality for pulling and pushing Docker images. It also handles how images are stored.                        |
+| dtr-etcd-&lt;replica_id&gt;      | A key-value store for persisting DTR configuration settings. Don't use it in your applications, since it's for internal use only. |
+| dtr-rethinkdb-&lt;replica_id&gt; | A database for persisting repository metadata. Don't use it in your applications, since it's for internal use only.               |
 
 
 ## Networks
@@ -51,12 +50,12 @@ across nodes.
 
 DTR uses these named volumes for persisting data:
 
-| Volume name  | Location on host (/var/lib/docker/volumes/) | Description                                                                                                  |
-|:-------------|:--------------------------------------------|:-------------------------------------------------------------------------------------------------------------|
-| dtr-ca       | dtr-ca/_data                                | The volume where the private keys and certificates are stored so that containers can use TLS to communicate. |
-| dtr-etcd     | dtr-etcd/_data                              | The volume used by etcd to persist DTR configurations.                                                       |
-| dtr-registry | dtr-registry/_data                          | The volume where images are stored, if DTR is configured to store images on the local filesystem.            |
-| dtr-rethink  | dtr-rethink/_data                           | The volume used by RethinkDB to persist DTR data, like users and repositories.                               |
+| Volume name                     | Location on host (/var/lib/docker/volumes/) | Description                                                                                                  |
+|:--------------------------------|:--------------------------------------------|:-------------------------------------------------------------------------------------------------------------|
+| dtr-ca-&lt;replica_id&gt;       | dtr-ca/_data                                | The volume where the private keys and certificates are stored so that containers can use TLS to communicate. |
+| dtr-etcd-&lt;replica_id&gt;     | dtr-etcd/_data                              | The volume used by etcd to persist DTR configurations.                                                       |
+| dtr-registry-&lt;replica_id&gt; | dtr-registry/_data                          | The volume where images are stored, if DTR is configured to store images on the local filesystem.            |
+| dtr-rethink-&lt;replica_id&gt;  | dtr-rethink/_data                           | The volume used by RethinkDB to persist DTR data, like users and repositories.                               |
 
 If you don’t create these volumes, when installing DTR they are created with
 the default volume driver and flags.

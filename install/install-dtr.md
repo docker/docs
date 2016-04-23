@@ -125,7 +125,7 @@ To add replicas:
 
 4. Follow steps 1 to 3, to add more replicas to the DTR cluster.
 
-    When configuring your DTR cluster for high-availability, you should have
+    When configuring your DTR cluster for high-availability, you should install
     3, 5, or 7 replicas.
     [Learn more about high availability](../high-availability/high-availability.md)
 

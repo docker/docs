@@ -20,24 +20,25 @@ The next step is creating a backup policy and disaster recovery plan.
 
 ## DTR data persistency
 
-Docker Trusted Registry persists four kinds of data:
+Docker Trusted Registry persists:
 
 * Configurations: the cluster configurations are stored on a key-value store
-that is replicated through all DTR nodes.
-* Image and repository metadata: the information about the repositories and
-images deployed. This information is replicated through all DTR nodes.
-* Docker images: By default images are stored on the host of the filesystem
-where DTR is installed.
+that is replicated through all DTR replicas.
+* Repository metadata: the information about the repositories and
+images deployed. This information is replicated through all DTR replicas.
 * Certificates and keys: the certificates, public keys, and private keys that
 are used for mutual TLS communication.
 
-This data is persisted on the host machine using named volumes.
+This data is persisted on the host where DTR is running, using named volumes.
 [Learn more about DTR named volumes](../architecture.md).
+
+DTR also persists Docker images on the filesystem of the host running DTR, or
+on a cloud provider, depending on the way DTR is configured.
 
 ## Backup DTR data
 
-To perform a backup of a DTR node, use the `docker/dtr backup`
-command. This command creates a backup of DTR:
+To perform a backup of a DTR node, use the `docker/dtr backup` command. This
+command creates a backup of DTR:
 
 * Configurations,
 * Repository metadata,
@@ -63,18 +64,23 @@ $ docker run --rm -it docker/dtr backup --help
 As an example, to create a backup of a DTR node, you can use:
 
 ```bash
+# Get the certificates used by UCP
+$ curl https://$UCP_HOST/ca > ucp-ca.pem
+
+# Create the backup
 $ docker run -it --rm docker/dtr backup \
-  --insecure-tls --replica-id 8b6174866010 \
-  --username admin --password password \
-  --host 192.168.10.100 > /tmp/backup.tar
+  --ucp-ca "$(cat ucp-ca.pem)" \
+  --replica-id 8b6174866010 \
+  --username $UCP_ADMIN --password $UCP_PASSWORD \
+  --host $UCP_HOST > /tmp/backup.tar
 ```
 
 Where:
 
-* `--insecure-tls` allows connecting to UCP without TLS,
-* `--replica-id` specifies the DTR replica to backup,
-* `--username, --password` are the credentials of a UCP admin user,
-* `--host` is the IP address of UCP.
+* --ucp-ca is the certificate used by UCP,
+* --replica-id is the name of the replica to backup,
+* --username, and --password are the credentials of a UCP administrator,
+* --host is the address of UCP.
 
 ## Restore DTR data
 
@@ -100,23 +106,28 @@ To learn about the options available on the restore command, you can
 $ docker run --rm -it docker/trusted-registry restore --help
 ```
 
-As an example, to install DTR on the host at 192.168.10.101, and restore its
+As an example, to install DTR on the host at 192.168.10.100, and restore its
 state from an existing backup:
 
 ```bash
-$ docker run -i --rm -v /var/run/docker.sock:/var/run/docker.sock \
+# Get the certificates used by UCP
+$ curl https://$UCP_HOST/ca > ucp-ca.pem
+
+# Install and restore configurations from an existing backup
+$ docker run -i --rm \
+  -v /var/run/docker.sock:/var/run/docker.sock \
   docker/dtr restore \
-  --insecure-tls \
-  --username admin --password password \
-  --host 192.168.10.100 --dtr-host 192.168.10.101 < /tmp/backup.tar
+  --ucp-ca "$(cat ucp-ca.pem)" \  
+  --username $UCP_ADMIN --password $UCP_PASSWORD \
+  --host $UCP_HOST --dtr-host 192.168.10.100 < /tmp/backup.tar
 ```
 
 Where:
 
-* `--insecure-tls` allows connecting to UCP without TLS,
-* `--username, --password` are the credentials of a UCP admin user,
-* `--host` is the IP address of UCP,
-* `--dtr-host` is the IP address of the host where DTR is going to be installed.
+* --ucp-ca is the certificate used by UCP,
+* --username, and --password are the credentials of a UCP administrator,
+* --host is the address of UCP,
+* --dtr-host is the host to where DTR will be installed.
 
 
 ## Where to go next

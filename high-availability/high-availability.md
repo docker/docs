@@ -19,7 +19,9 @@ Replicas are single instances of DTR that can be joined together to form a
 cluster.
 When joining new replicas to the cluster, you'll be creating new DTR instances
 that are running the same set of services. Any change to the state of an
-instance, is replicated across all other instances.
+instance is replicated across all other instances.
+
+![](../images/high-availability-1.png)
 
 Having a DTR cluster with multiple replicas, allows you to:
 
@@ -67,9 +69,8 @@ To have have high-availability on UCP and DTR, you need a minimum of:
 * 3 dedicated nodes to install DTR with high availability,
 * As many nodes as you want for running your containers and applications.
 
-<!-- TODO: add diagram to illustrate this -->
 
-![](../images/architecture-3.png)
+![](../images/high-availability-2.png)
 
 ## Load balancing
 
