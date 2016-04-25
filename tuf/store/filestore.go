@@ -49,7 +49,7 @@ func (f *FilesystemStore) GetMeta(name string, size int64) ([]byte, error) {
 		}
 		return nil, err
 	}
-	if size == -1 {
+	if size == MaxSize {
 		size = notary.MaxDownloadSize
 	}
 	// Only return up to size bytes
