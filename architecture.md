@@ -41,7 +41,10 @@ When you install Docker UCP on a node, the following containers are started.
 | ucp-proxy           | A TLS proxy. It allows secure access to the local Docker Engine.                                                                                           |
 | ucp-controller      | The UCP application. It uses the key-value store for persisting configurations.                                                                            |
 | ucp-swarm-manager   | Provides the clustering capabilities. It uses the key-value store for leader election, and keeping track of cluster members.                               |
-| ucp-swarm-join      | Heartbeat to record on the key-value store that this node is alive. If the node goes down, this heartbeat stops, and the node is dropped from the cluster. |
+| ucp-swarm-join      | Heartbeat to record on the key-value store that this node is alive. If the node goes down, this heartbeat stops, and the node is removed from the cluster. |
+| ucp-auth-api        | The centralized API for identity and authentication used by UCP and DTR.                                                                                   |
+| ucp-auth-worker     | Performs scheduled LDAP synchronizations and cleans data on the ucp-auth-store.                                                                            |
+| ucp-auth-store      | Stores authentication configurations, and data for users, organizations and teams.                                                                         |
 | ucp-kv              | Used to store the UCP configurations. Don't use it in your applications, since it's for internal use only.                                                 |
 | ucp-cluster-root-ca | A certificate authority to sign the certificates used when joining new nodes, and on administrator client bundles.                                         |
 | ucp-client-root-ca  | A certificate authority to sign user bundles. Only used when UCP is installed without an external root CA.                                                 |
@@ -78,18 +81,10 @@ If you don’t create these volumes before when installing UCP, they are created
 the default volume driver and flags.
 
 ## High-availability support
-For load balancing and high-availability, you can add more controller nodes
-to a UCP cluster. In that case, you’ll have multiple nodes, each running the
-same set of containers.
 
-<!--TODO: add diagram with 3 controllers -->
-
-Notice that:
-
-* You can load balance user requests between the controller nodes.
-When you make a change to the configuration of one controller node, that
-configuration is replicated to the other controllers.
-* For high-availability, you should set up 3, 5, or 7 controller nodes.
+For load balancing and high-availability, you can install multiple controller
+nodes and join them to create a cluster.
+[Learn more about high availability](high-availability/set-up-high-availability.md).
 
 ## Where to go next
 
