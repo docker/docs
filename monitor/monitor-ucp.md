@@ -6,7 +6,7 @@ description = "Monitor your Docker Universal Control Plane installation, and lea
 keywords = ["Docker, UCP, troubleshoot"]
 [menu.main]
 parent="mn_monitor_ucp"
-weight=-80
+weight=0
 +++
 <![end-metadata]-->
 
