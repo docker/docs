@@ -27,7 +27,7 @@ var (
 func init() {
 	// Setup flags
 	flag.StringVar(&configFile, "config", "", "Path to configuration file")
-	flag.BoolVar(&debug, "debug", false, "show the version and exit")
+	flag.BoolVar(&debug, "debug", false, "Show the version and exit")
 	flag.StringVar(&logFormat, "logf", "json", "Set the format of the logs. Only 'json' and 'logfmt' are supported at the moment.")
 	flag.BoolVar(&doBootstrap, "bootstrap", false, "Do any necessary setup of configured backend storage services")
 
