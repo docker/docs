@@ -1,151 +1,66 @@
 <!--[metadata]>
 +++
-aliases = ["/ucp/kv_store/"]
 title ="Troubleshoot your cluster"
-keywords= ["ectd, key, value, store, ucp"]
-description="Docker Universal Control Plane"
+keywords= ["docker, ucp, troubleshoot"]
+description="Learn how to troubleshoot your Docker Universal Control Plane cluster."
 [menu.main]
 parent="mn_monitor_ucp"
+weight=10
 +++
 <![end-metadata]-->
 
 # Troubleshoot your cluster
 
-Docker UCP persists configuration data on an [etcd](https://coreos.com/etcd/)
-key-value store. This key-value store is replicated on all controller nodes of
-the UCP cluster. The key-value store is for internal use only, and should not
-be used by other applications.
+If you detect problems in your UCP cluster, you can start your troubleshooting
+session by checking the logs of the
+[individual UCP components](../architecture.md). Only administrator users can
+see information about UCP system containers.
 
-This article shows how you can access the key-value store, for
-troubleshooting configuration problems in your cluster.
+## Check the logs from the UI
 
-## Using the REST API
+To see the logs of the UCP system containers, navigate to the **Containers**
+page of UCP. By default the UCP system containers are hidden. Click the
+**Show all containers** option for the UCP system containers to be listed as
+well.
 
-In this example we'll be using `curl` for making requests to the key-value
-store REST API, and `jq` to process the responses.
+![](../images/troubleshoot-ucp-1.png)
 
-You can install these tools on a Ubuntu distribution by running:
-
-```bash
-$ sudo apt-get update && apt-get install curl jq
-```
-
-To access the cluster configurations, run:
-
-```bash
-export KV_URL="https://$(echo $DOCKER_HOST | cut -f3 -d/ | cut -f1 -d:):12379"
-
-curl -s \
-    --cert ${DOCKER_CERT_PATH}/cert.pem \
-    --key ${DOCKER_CERT_PATH}/key.pem \
-    --cacert ${DOCKER_CERT_PATH}/ca.pem \
-    ${KV_URL}/v2/keys | jq "."
-```
-
-To learn more about the key-value store API, check the
-[etcd official documentation](https://coreos.com/etcd/docs/latest/api.html).
+You can click on a container to see more details like its configurations and
+logs.
 
 
-## Using a CLI client
+## Check the logs from the CLI
 
-The containers running the key-value store, include `etcdctl`, a command line
-client for etcd. You can run it using the `docker exec` command.
+You can also check the logs of UCP system containers from the CLI. This is
+specially useful if the UCP web application is not working.
 
-The example below assumes you have the Docker CLI client pointing to the Docker
-Engine of a UCP controller. If you are running the example below through UCP,
-you should specify the node-specific container name.
+1. Get a client certificate bundle.
 
-These commands assume you are running directly against the Docker Engine in
-question.  If you are running these commands through UCP, you should specify the
-node specific container name.
+    When using the Docker CLI client you need to authenticate using client
+    certificates.
+    [Learn how to use client certificates](../access-ucp/cli-based-access.md).
 
-Check the health of the etcd cluster. On failure the command exits with an
-error code, and no output:
+    If your client certificate bundle is for a non-admin user, you won't have
+    permissions to see the UCP system containers.
 
-```bash
-docker exec -it ucp-kv etcdctl \
-        --endpoint https://127.0.0.1:2379 \
-        --ca-file /etc/docker/ssl/ca.pem \
-        --cert-file /etc/docker/ssl/cert.pem \
-        --key-file /etc/docker/ssl/key.pem \
-        cluster-health
+2. Check the logs of UCP system containers.
 
-member 16c9ae1872e8b1f0 is healthy: got healthy result from https://192.168.122.64:12379
-member c5a24cfdb4263e72 is healthy: got healthy result from https://192.168.122.196:12379
-member ca3c1bb18f1b30bf is healthy: got healthy result from https://192.168.122.223:12379
-cluster is healthy
-```
+    ```bash
+    # By default system containers are not displayed. Use the -a flag to display them
+    $ docker ps -a
 
-List the current members of the cluster:
+    CONTAINER ID    IMAGE                             COMMAND                  CREATED         STATUS           PORTS                            NAMES
+    922503c2102a    docker/ucp-controller:1.1.0-rc2   "/bin/controller serv"   4 hours ago     Up 30 minutes    192.168.10.100:444->8080/tcp     ucp/ucp-controller
+    1b6d429f1bd5    docker/ucp-swarm:1.1.0-rc2        "/swarm join --discov"   4 hours ago     Up 4 hours       2375/tcp                         ucp/ucp-swarm-join
 
-```bash
-docker exec -it ucp-kv etcdctl \
-        --endpoint https://127.0.0.1:2379 \
-        --ca-file /etc/docker/ssl/ca.pem \
-        --cert-file /etc/docker/ssl/cert.pem \
-        --key-file /etc/docker/ssl/key.pem \
-        member list
+    # See the logs of the ucp/ucp-controller container
+    $ docker logs ucp/ucp-controller
 
-16c9ae1872e8b1f0: name=orca-kv-192.168.122.64 peerURLs=https://192.168.122.64:12380 clientURLs=https://192.168.122.64:12379
-c5a24cfdb4263e72: name=orca-kv-192.168.122.196 peerURLs=https://192.168.122.196:12380 clientURLs=https://192.168.122.196:12379
-ca3c1bb18f1b30bf: name=orca-kv-192.168.122.223 peerURLs=https://192.168.122.223:12380 clientURLs=https://192.168.122.223:12379
-```
-
-#### Remove a failed member
-
-Use the list above first to get the ID.
-
-```bash
-docker exec -it ucp-kv etcdctl \
-        --endpoint https://127.0.0.1:2379 \
-        --ca-file /etc/docker/ssl/ca.pem \
-        --cert-file /etc/docker/ssl/cert.pem \
-        --key-file /etc/docker/ssl/key.pem \
-        member remove c5a24cfdb4263e72
-
-Removed member c5a24cfdb4263e72 from cluster
-```
-
-Also remove the following keys, where `$MEMBERIP` is replaced with the IP
-address of the member to be removed:
-
-```
-/orca/v1/config/clusterca_$MEMBERIP:12381
-/orca/v1/config/clientca_$MEMBERIP:12382
-```
-
-Using `curl`:
-
-```bash
-curl -s -X DELETE \
-    --cert ${DOCKER_CERT_PATH}/cert.pem \
-    --key ${DOCKER_CERT_PATH}/key.pem \
-    --cacert ${DOCKER_CERT_PATH}/ca.pem \
-    ${KV_URL}/v2/keys/orca/v1/config/clusterca_$MEMBERIP:12381
-curl -s -X DELETE \
-    --cert ${DOCKER_CERT_PATH}/cert.pem \
-    --key ${DOCKER_CERT_PATH}/key.pem \
-    --cacert ${DOCKER_CERT_PATH}/ca.pem \
-    ${KV_URL}/v2/keys/orca/v1/config/clientca_$MEMBERIP:12382
-```
-
-#### Show the current value of a key
-
-```bash
-docker exec -it ucp-kv etcdctl \
-        --endpoint https://127.0.0.1:2379 \
-        --ca-file /etc/docker/ssl/ca.pem \
-        --cert-file /etc/docker/ssl/cert.pem \
-        --key-file /etc/docker/ssl/key.pem \
-        ls /docker/nodes
-
-/docker/nodes/192.168.122.196:12376
-/docker/nodes/192.168.122.64:12376
-/docker/nodes/192.168.122.223:12376
-```
-
+    {"level":"info","license_key":"PUagrRqOXhMH02UgxWYiKtg0kErLY8oLZf1GO4Pw8M6B","msg":"/v1.22/containers/ucp/ucp-controller/json","remote_addr":"192.168.10.1:59546","tags":["api","v1.22","get"],"time":"2016-04-25T23:49:27Z","type":"api","username":"dave.lauper"}
+    {"level":"info","license_key":"PUagrRqOXhMH02UgxWYiKtg0kErLY8oLZf1GO4Pw8M6B","msg":"/v1.22/containers/ucp/ucp-controller/logs","remote_addr":"192.168.10.1:59546","tags":["api","v1.22","get"],"time":"2016-04-25T23:49:27Z","type":"api","username":"dave.lauper"}
+    ```
 
 ## Where to go next
 
 * [Monitor your cluster](monitor-ucp.md)
-* [Get support](../support.md)
+* [Troubleshoot cluster configurations](troubleshoot-configurations.md)

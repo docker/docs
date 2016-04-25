@@ -55,10 +55,12 @@ Docker UCP does not include a load-balancer. You can configure your own
 load-balancer to balance user requests across all controller replicas.
 [Learn more about the UCP reference architecture](https://www.docker.com/sites/default/files/RA_UCP%20Load%20Balancing-Feb%202016_0.pdf).
 
-Since Docker UCP uses mutual TLS, make sure you configure your load-balancer to:
+Since Docker UCP uses mutual TLS, make sure you configure your load balancer to:
 
 * Load-balance TCP traffic on ports 80 and 443,
-* Not terminate HTTPS connections.
+* Not terminate HTTPS connections,
+* Use the `/_ping` endpoint on each UCP controller, to check if the controller
+is healthy and if it should remain on the load balancing pool or not.
 
 
 ## Where to go next
