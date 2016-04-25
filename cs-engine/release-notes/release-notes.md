@@ -26,6 +26,25 @@ cannot be adopted as quickly for consistency and compatibility reasons.
 These notes refer to the current and immediately prior releases of the
 CS Engine. For notes on older versions, see the [CS Engine prior release notes archive](prior-release-notes.md).
 
+## CS Engine 1.10.3-cs3
+(25 April 2016)
+
+This release addresses the following issue:
+
+A vulnerability in the Go standard runtime libraries allowed a maliciously crafted client certificate to be used to cause an infinite loop in a TLS server. This can lead to a Denial of Service against the Docker Engine if it is deployed such that it uses TLS client certificate authentication. This vulnerability has been fixed in this release. We consider this a low-impact issue, due to complexity of attack. Customers should consider upgrading if their deployed Docker Engines are exposed to potentially malicious network attackers.
+
+This issue is resolved by using Go runtime v1.5.4 which was released to address this vulnerability
+
+* https://github.com/docker/docker/pull/21977
+* https://github.com/docker/docker/pull/21987
+
+## CS Engine 1.10.3-cs2
+(18 March 2016)
+
+Bug fix release picking up changes from Docker 1.10.3 release.
+
+Refer to the [detailed list](https://github.com/docker/docker/releases/tag/v1.10.3) of all changes since the release of CS Engine 1.10.2-cs1
+
 ## CS Engine 1.10.2-cs1
 (22 February 2016)
 
