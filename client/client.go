@@ -418,12 +418,12 @@ func (r *NotaryRepository) ListTargets(roles ...string) ([]*TargetWithRole, erro
 	return targetList, nil
 }
 
-// GetTargetByName returns a target given a name. If no roles are passed
+// GetTargetByName returns a target by the given name. If no roles are passed
 // it uses the targets role and does a search of the entire delegation
 // graph, finding the first entry in a breadth first search of the delegations.
 // If roles are passed, they should be passed in descending priority and
 // the target entry found in the subtree of the highest priority role
-// will be returned
+// will be returned.
 // See the IMPORTANT section on ListTargets above. Those roles also apply here.
 func (r *NotaryRepository) GetTargetByName(name string, roles ...string) (*TargetWithRole, error) {
 	if err := r.Update(false); err != nil {
