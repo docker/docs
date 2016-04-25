@@ -27,7 +27,7 @@ but here is a brief recap of the TUF roles and corresponding key hierarchy:
   which lists the IDs of the root, targets, snapshot, and timestamp public keys.
   Clients use these public keys to verify the signatures on all the metadata files
   in the repository. This key is held by a collection owner, and should be kept offline
-  and safe, more so than any other key.
+  and safe, more so than any other keys.
 
 - The snapshot key signs the
   <a href="https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L604" target="_blank">snapshot metadata file</a>,
