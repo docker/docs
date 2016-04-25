@@ -129,7 +129,7 @@ func ValidateRoot(prevRoot *data.SignedRoot, root *data.Signed, gun string, trus
 			root, data.BaseRole{Keys: trustmanager.CertsToKeys(trustedLeafCerts, allTrustedIntCerts), Threshold: prevRootRoleData.Threshold})
 		if err != nil {
 			logrus.Debugf("failed to verify TUF data for: %s, %v", gun, err)
-			return nil, &ErrValidationFail{Reason: "failed to validate data with current trusted certificates"}
+			return nil, &ErrRootRotationFail{Reason: "failed to validate data with current trusted certificates"}
 		}
 	} else {
 		logrus.Debugf("found no currently valid root certificates for %s, using trust_pinning config to bootstrap trust", gun)

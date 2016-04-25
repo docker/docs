@@ -805,11 +805,11 @@ var waysToMessUpServer = []swizzleExpectations{
 		swizzle: (*testutils.MetadataSwizzler).SetInvalidMetadataType},
 
 	{desc: "invalid signatures", expectErrs: []interface{}{
-		&trustpinning.ErrValidationFail{}, signed.ErrRoleThreshold{}},
+		&trustpinning.ErrValidationFail{}, signed.ErrRoleThreshold{}, &trustpinning.ErrRootRotationFail{}},
 		swizzle: (*testutils.MetadataSwizzler).InvalidateMetadataSignatures},
 
 	{desc: "meta signed by wrong key", expectErrs: []interface{}{
-		&trustpinning.ErrValidationFail{}, signed.ErrRoleThreshold{}},
+		&trustpinning.ErrValidationFail{}, signed.ErrRoleThreshold{}, &trustpinning.ErrRootRotationFail{}},
 		swizzle: (*testutils.MetadataSwizzler).SignMetadataWithInvalidKey},
 
 	{desc: "expired metadata", expectErrs: []interface{}{
