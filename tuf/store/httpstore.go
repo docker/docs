@@ -158,7 +158,7 @@ func (s HTTPStore) GetMeta(name string, size int64) ([]byte, error) {
 		logrus.Debugf("received HTTP status %d when requesting %s.", resp.StatusCode, name)
 		return nil, err
 	}
-	if size == -1 {
+	if size == MaxSize {
 		size = notary.MaxDownloadSize
 	}
 	if resp.ContentLength > size {

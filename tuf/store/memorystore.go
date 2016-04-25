@@ -45,7 +45,7 @@ type MemoryStore struct {
 func (m *MemoryStore) GetMeta(name string, size int64) ([]byte, error) {
 	d, ok := m.meta[name]
 	if ok {
-		if size == -1 {
+		if size == MaxSize {
 			size = notary.MaxDownloadSize
 		}
 		if int64(len(d)) < size {
