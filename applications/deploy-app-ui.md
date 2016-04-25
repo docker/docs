@@ -24,8 +24,7 @@ There, click the **Compose Application** button, to deploy a new application.
 
 ![](../images/deploy-app-ui-1.png)
 
-The application WordPress application we're going to deploy is composed of
-two services:
+The WordPress application we're going to deploy is composed of two services:
 
 * wordpress: The container that runs Apache, PHP, and WordPress.
 * db: A MariaDB database used for data persistence.
@@ -54,7 +53,7 @@ the 'Upload an existing docker-compose.yml' link.
 
 Click the **Create** button, to create the WordPress application.
 
-Docker UCP deployed the WordPress application to the cluster. You can
+Once UCP deploys the WordPress application, you can
 **click on the wordpress_wordpress_1** container, to see its details.
 
 ![](../images/deploy-app-ui-3.png)
@@ -73,8 +72,9 @@ just deployed.
 
 ## Limitations
 
-There are some limitations when deploying application on the UI. The following
-Docker Compose keywords are not supported:
+There are some limitations when deploying application on the UI. You can't
+reference any external files, so the following Docker Compose keywords are not
+supported:
 
 * build
 * dockerfile
@@ -85,6 +85,8 @@ Docker Compose keywords are not supported:
 To overcome these limitations, you can
 [deploy your apps from the CLI](deploy-app-cli.md).
 
+Also, UCP doesn't store the compose file used to deploy the application. You can
+use your version control system to persist that file.
 
 ## Where to go next
 

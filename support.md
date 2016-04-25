@@ -25,9 +25,6 @@ Be sure to use your company email when filing tickets.
 
 Docker Support engineers may ask you to provide a UCP support dump. For this:
 
-1. Log into UCP with an administrator account
+1. Log into UCP with an administrator account.
 
 2. On the top-right menu, **click your username**, and choose **Support Dump**.
-
-UCP downloads the `docker-support-<datestamp>-<timestap>.zip`, that you can
-send to support.
