@@ -308,11 +308,11 @@ or feedback about project operations.
     [Org.compose]
         People = ["aanand", "bfirsh", "dnephin", "mnowster"]
     [Org.containerd]
-        People = ["crosbymichael"]
+        People = ["crosbymichael", "tonistiigi", "mlaventure"]
     [Org.distribution]
         People = ["aaronlehmann", "dmcgowan", "dmp42", "richardscothern", "shykes", "stevvooe"]
     [Org.docker]
-        People = ["aaronlehmann", "calavera", "coolljt0725", "cpuguy83", "crosbymichael", "duglin", "estesp", "icecrime", "jhowardmsft", "jfrazelle", "lk4d4", "mhbauer", "runcom", "tianon", "tibor", "tonistiigi", "unclejack", "vbatts", "vdemeester"]
+        People = ["aaronlehmann", "calavera", "coolljt0725", "cpuguy83", "crosbymichael", "duglin", "estesp", "icecrime", "jhowardmsft", "lk4d4", "mavenugo", "mhbauer", "runcom", "tianon", "tibor", "tonistiigi", "unclejack", "vdemeester"]
     [Org.docker-bench-security]
         People = ["diogomonica", "konstruktoid"]
     [Org.docker-py]
@@ -320,7 +320,7 @@ or feedback about project operations.
     [Org.dockercraft]
         People = ["aduermael", "davetucker", "gdevillele"]
     [Org.engine-api]
-        People = ["calavera", "dongluochen", "mhbauer", "vdemeester"]
+        People = ["aaronlehmann", "calavera", "coolljt0725", "cpuguy83", "crosbymichael", "dnephin", "dongluochen", "duglin", "estesp", "icecrime", "jhowardmsft", "lk4d4", "mavenugo", "mhbauer", "runcom", "stevvooe", "thajeztah", "tianon", "tibor", "tonistiigi", "unclejack", "vdemeester", "vieux"]
     [Org.go-connections]
         People = ["calavera"]
     [Org.go-plugins-helpers]
@@ -545,6 +545,10 @@ or feedback about project operations.
         Name = "Morgan Bauer"
         Email = "mbauer@us.ibm.com"
         GitHub = "mhbauer"
+    [People.mlaventure]
+        Name = "Kenfe-Mickaël Laventure"
+        Email = "mickael.laventure@docker.com"
+        GitHub = "mlaventure"
     [People.mnowster]
         Name = "Mazz Mosley"
         Email = "mazz@houseofmnowster.com"
