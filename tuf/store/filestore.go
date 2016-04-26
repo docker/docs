@@ -39,7 +39,7 @@ func (f *FilesystemStore) getPath(name string) string {
 }
 
 // GetMeta returns the meta for the given name (a role) up to size bytes
-// If size is -1, this corresponds to "infinite," but we cut off at the
+// If size is "MaxSize", this corresponds to "infinite," but we cut off at a
 // predefined threshold "notary.MaxDownloadSize".
 func (f *FilesystemStore) GetMeta(name string, size int64) ([]byte, error) {
 	meta, err := ioutil.ReadFile(f.getPath(name))

@@ -89,7 +89,7 @@ func serializeMetadata(cs signed.CryptoService, s *data.Signed, role string,
 
 // gets a Signed from the metadata store
 func signedFromStore(cache store.MetadataStore, role string) (*data.Signed, error) {
-	b, err := cache.GetMeta(role, -1)
+	b, err := cache.GetMeta(role, store.MaxSize)
 	if err != nil {
 		return nil, err
 	}
@@ -122,7 +122,7 @@ func NewMetadataSwizzler(gun string, initialMetadata map[string][]byte,
 
 // SetInvalidJSON corrupts metadata into something that is no longer valid JSON
 func (m *MetadataSwizzler) SetInvalidJSON(role string) error {
-	metaBytes, err := m.MetadataCache.GetMeta(role, -1)
+	metaBytes, err := m.MetadataCache.GetMeta(role, store.MaxSize)
 	if err != nil {
 		return err
 	}
@@ -133,7 +133,7 @@ func (m *MetadataSwizzler) SetInvalidJSON(role string) error {
 // JSON bytes, which should not affect serialization, but will change the checksum
 // of the file.
 func (m *MetadataSwizzler) AddExtraSpace(role string) error {
-	metaBytes, err := m.MetadataCache.GetMeta(role, -1)
+	metaBytes, err := m.MetadataCache.GetMeta(role, store.MaxSize)
 	if err != nil {
 		return err
 	}
@@ -357,7 +357,7 @@ func (m *MetadataSwizzler) SetThreshold(role string, newThreshold int) error {
 		roleSpecifier = path.Dir(role)
 	}
 
-	b, err := m.MetadataCache.GetMeta(roleSpecifier, -1)
+	b, err := m.MetadataCache.GetMeta(roleSpecifier, store.MaxSize)
 	if err != nil {
 		return err
 	}
@@ -413,7 +413,7 @@ func (m *MetadataSwizzler) RotateKey(role string, key data.PublicKey) error {
 		roleSpecifier = path.Dir(role)
 	}
 
-	b, err := m.MetadataCache.GetMeta(roleSpecifier, -1)
+	b, err := m.MetadataCache.GetMeta(roleSpecifier, store.MaxSize)
 	if err != nil {
 		return err
 	}
@@ -471,7 +471,7 @@ func (m *MetadataSwizzler) ChangeRootKey() error {
 		return err
 	}
 
-	b, err := m.MetadataCache.GetMeta(data.CanonicalRootRole, -1)
+	b, err := m.MetadataCache.GetMeta(data.CanonicalRootRole, store.MaxSize)
 	if err != nil {
 		return err
 	}
@@ -509,7 +509,7 @@ func (m *MetadataSwizzler) UpdateSnapshotHashes(roles ...string) error {
 		snapshotSigned *data.Signed
 		err            error
 	)
-	if metaBytes, err = m.MetadataCache.GetMeta(data.CanonicalSnapshotRole, -1); err != nil {
+	if metaBytes, err = m.MetadataCache.GetMeta(data.CanonicalSnapshotRole, store.MaxSize); err != nil {
 		return err
 	}
 
@@ -525,7 +525,7 @@ func (m *MetadataSwizzler) UpdateSnapshotHashes(roles ...string) error {
 
 	for _, role := range roles {
 		if role != data.CanonicalSnapshotRole && role != data.CanonicalTimestampRole {
-			if metaBytes, err = m.MetadataCache.GetMeta(role, -1); err != nil {
+			if metaBytes, err = m.MetadataCache.GetMeta(role, store.MaxSize); err != nil {
 				return err
 			}
 
@@ -561,7 +561,7 @@ func (m *MetadataSwizzler) UpdateTimestampHash() error {
 		timestampSigned *data.Signed
 		err             error
 	)
-	if metaBytes, err = m.MetadataCache.GetMeta(data.CanonicalTimestampRole, -1); err != nil {
+	if metaBytes, err = m.MetadataCache.GetMeta(data.CanonicalTimestampRole, store.MaxSize); err != nil {
 		return err
 	}
 	// we can't just create a new timestamp, because then the expiry would be
@@ -570,7 +570,7 @@ func (m *MetadataSwizzler) UpdateTimestampHash() error {
 		return err
 	}
 
-	if metaBytes, err = m.MetadataCache.GetMeta(data.CanonicalSnapshotRole, -1); err != nil {
+	if metaBytes, err = m.MetadataCache.GetMeta(data.CanonicalSnapshotRole, store.MaxSize); err != nil {
 		return err
 	}
 
