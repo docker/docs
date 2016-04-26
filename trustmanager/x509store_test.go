@@ -133,6 +133,6 @@ func TestVerifyLeafWithNoLeaf(t *testing.T) {
 	// Try to find a valid chain for cert
 	err = Verify(store, "secure.example.com", certList)
 	if err == nil {
-		t.Fatalf("expected error due to no leafs provided")
+		t.Fatalf("expected error due to no leaves provided")
 	}
 }
