@@ -95,7 +95,7 @@ func TestHTTPStoreGetAllMeta(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	j, err := store.GetMeta("root", MaxSize)
+	j, err := store.GetMeta("root", NoSizeLimit)
 	if err != nil {
 		t.Fatal(err)
 	}

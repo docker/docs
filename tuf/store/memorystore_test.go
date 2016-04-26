@@ -63,8 +63,8 @@ func TestMemoryStoreGetMetaSize(t *testing.T) {
 	require.NoError(t, err)
 	require.Equal(t, []byte{}, meta)
 
-	// we can get the whole thing by passing MaxSize (-1)
-	meta, err = s.GetMeta("content", MaxSize)
+	// we can get the whole thing by passing NoSizeLimit (-1)
+	meta, err = s.GetMeta("content", NoSizeLimit)
 	require.NoError(t, err)
 	require.Equal(t, content, meta)
 

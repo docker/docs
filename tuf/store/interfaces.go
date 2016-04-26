@@ -1,7 +1,7 @@
 package store
 
-// MaxSize is represented as -1 for arguments to GetMeta
-const MaxSize int64 = -1
+// NoSizeLimit is represented as -1 for arguments to GetMeta
+const NoSizeLimit int64 = -1
 
 // MetadataStore must be implemented by anything that intends to interact
 // with a store of TUF files
