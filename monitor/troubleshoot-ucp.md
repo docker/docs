@@ -91,7 +91,9 @@ c5a24cfdb4263e72: name=orca-kv-192.168.122.196 peerURLs=https://192.168.122.196:
 ca3c1bb18f1b30bf: name=orca-kv-192.168.122.223 peerURLs=https://192.168.122.223:12380 clientURLs=https://192.168.122.223:12379
 ```
 
-Remove a failed member:
+#### Remove a failed member
+
+Use the list above first to get the ID.
 
 ```bash
 docker exec -it ucp-kv etcdctl \
@@ -104,7 +106,30 @@ docker exec -it ucp-kv etcdctl \
 Removed member c5a24cfdb4263e72 from cluster
 ```
 
-Show the current value of a key:
+Also remove the following keys, where `$MEMBERIP` is replaced with the IP
+address of the member to be removed:
+
+```
+/orca/v1/config/clusterca_$MEMBERIP:12381
+/orca/v1/config/clientca_$MEMBERIP:12382
+```
+
+Using `curl`:
+
+```bash
+curl -s -X DELETE \
+    --cert ${DOCKER_CERT_PATH}/cert.pem \
+    --key ${DOCKER_CERT_PATH}/key.pem \
+    --cacert ${DOCKER_CERT_PATH}/ca.pem \
+    ${KV_URL}/v2/keys/orca/v1/config/clusterca_$MEMBERIP:12381
+curl -s -X DELETE \
+    --cert ${DOCKER_CERT_PATH}/cert.pem \
+    --key ${DOCKER_CERT_PATH}/key.pem \
+    --cacert ${DOCKER_CERT_PATH}/ca.pem \
+    ${KV_URL}/v2/keys/orca/v1/config/clientca_$MEMBERIP:12382
+```
+
+#### Show the current value of a key
 
 ```bash
 docker exec -it ucp-kv etcdctl \
