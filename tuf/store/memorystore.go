@@ -39,9 +39,10 @@ type MemoryStore struct {
 }
 
 // GetMeta returns up to size bytes of data references by name.
-// If size is -1, this corresponds to "infinite," but we cut off at 100MB
-// as we will always know the size for everything but a timestamp and
-// sometimes a root, neither of which should be exceptionally large
+// If size is "MaxSize", this corresponds to "infinite," but we cut off at a
+// predefined threshold "notary.MaxDownloadSize", as we will always know the
+// size for everything but a timestamp and sometimes a root,
+// neither of which should be exceptionally large
 func (m *MemoryStore) GetMeta(name string, size int64) ([]byte, error) {
 	d, ok := m.meta[name]
 	if ok {
