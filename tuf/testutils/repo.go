@@ -1,6 +1,7 @@
 package testutils
 
 import (
+	"fmt"
 	"math/rand"
 	"sort"
 	"time"
@@ -37,10 +38,14 @@ func CreateKey(cs signed.CryptoService, gun, role, keyAlgorithm string) (data.Pu
 			return nil, err
 		}
 		// Keep the x509 key type consistent with the key's algorithm
-		if keyAlgorithm == data.RSAKey {
+		switch keyAlgorithm {
+		case data.RSAKey:
 			key = data.NewRSAx509PublicKey(trustmanager.CertToPEM(cert))
-		} else {
+		case data.ECDSAKey:
 			key = data.NewECDSAx509PublicKey(trustmanager.CertToPEM(cert))
+		default:
+			// This should be impossible because of the Create() call above, but just in case
+			return nil, fmt.Errorf("invalid key algorithm type")
 		}
 
 	}
