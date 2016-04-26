@@ -39,7 +39,7 @@ func (err ErrRootRotationFail) Error() string {
 
 func prettyFormatCertIDs(certs map[string]*x509.Certificate) string {
 	ids := make([]string, 0, len(certs))
-	for id, _ := range certs {
+	for id := range certs {
 		ids = append(ids, id)
 	}
 	return strings.Join(ids, ", ")

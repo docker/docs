@@ -785,6 +785,7 @@ func generateExpiredTestingCertificate(rootKey data.PrivateKey, gun string) (*x5
 	return cryptoservice.GenerateCertificate(rootKey, gun, startTime, startTime.AddDate(1, 0, 0))
 }
 
+// Helper function for explicitly generating key IDs and unexported fields for equality testing
 func generateRootKeyIDs(r *data.SignedRoot) {
 	for _, keyID := range r.Signed.Roles[data.CanonicalRootRole].KeyIDs {
 		if k, ok := r.Signed.Keys[keyID]; ok {
