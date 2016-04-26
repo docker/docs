@@ -649,7 +649,7 @@ func (r *NotaryRepository) bootstrapRepo() error {
 	logrus.Debugf("Loading trusted collection.")
 
 	for _, role := range data.BaseRoles {
-		jsonBytes, err := r.fileStore.GetMeta(role, store.MaxSize)
+		jsonBytes, err := r.fileStore.GetMeta(role, store.NoSizeLimit)
 		if err != nil {
 			if _, ok := err.(store.ErrMetaNotFound); ok &&
 				// server snapshots are supported, and server timestamp management
@@ -781,7 +781,7 @@ func (r *NotaryRepository) bootstrapClient(checkInitialized bool) (*tufclient.Cl
 	// during update which will cause us to download a new root and perform a rotation.
 	// If we have an old root, and it's valid, then we overwrite the newBuilder to be one
 	// preloaded with the old root or one which uses the old root for trust bootstrapping.
-	if rootJSON, err := r.fileStore.GetMeta(data.CanonicalRootRole, store.MaxSize); err == nil {
+	if rootJSON, err := r.fileStore.GetMeta(data.CanonicalRootRole, store.NoSizeLimit); err == nil {
 		// if we can't load the cached root, fail hard because that is how we pin trust
 		if err := oldBuilder.Load(data.CanonicalRootRole, rootJSON, minVersion, true); err != nil {
 			return nil, err
@@ -808,7 +808,7 @@ func (r *NotaryRepository) bootstrapClient(checkInitialized bool) (*tufclient.Cl
 
 		// if remote store successfully set up, try and get root from remote
 		// We don't have any local data to determine the size of root, so try the maximum (though it is restricted at 100MB)
-		tmpJSON, err := remote.GetMeta(data.CanonicalRootRole, store.MaxSize)
+		tmpJSON, err := remote.GetMeta(data.CanonicalRootRole, store.NoSizeLimit)
 		if err != nil {
 			// we didn't have a root in cache and were unable to load one from
 			// the server. Nothing we can do but error.

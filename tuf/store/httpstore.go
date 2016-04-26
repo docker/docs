@@ -139,7 +139,7 @@ func translateStatusToError(resp *http.Response, resource string) error {
 // GetMeta downloads the named meta file with the given size. A short body
 // is acceptable because in the case of timestamp.json, the size is a cap,
 // not an exact length.
-// If size is "MaxSize", this corresponds to "infinite," but we cut off at a
+// If size is "NoSizeLimit", this corresponds to "infinite," but we cut off at a
 // predefined threshold "notary.MaxDownloadSize".
 func (s HTTPStore) GetMeta(name string, size int64) ([]byte, error) {
 	url, err := s.buildMetaURL(name)
@@ -159,7 +159,7 @@ func (s HTTPStore) GetMeta(name string, size int64) ([]byte, error) {
 		logrus.Debugf("received HTTP status %d when requesting %s.", resp.StatusCode, name)
 		return nil, err
 	}
-	if size == MaxSize {
+	if size == NoSizeLimit {
 		size = notary.MaxDownloadSize
 	}
 	if resp.ContentLength > size {

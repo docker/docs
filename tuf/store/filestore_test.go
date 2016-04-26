@@ -85,8 +85,8 @@ func TestGetMeta(t *testing.T) {
 
 	require.Equal(t, testContent, content, "Content read from file was corrupted.")
 
-	// Check that MaxSize size reads everything
-	content, err = s.GetMeta("testMeta", MaxSize)
+	// Check that NoSizeLimit size reads everything
+	content, err = s.GetMeta("testMeta", NoSizeLimit)
 	require.Nil(t, err, "GetMeta returned unexpected error: %v", err)
 
 	require.Equal(t, testContent, content, "Content read from file was corrupted.")
