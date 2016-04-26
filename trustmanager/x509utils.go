@@ -541,8 +541,8 @@ func CertsToKeys(leafCerts []*x509.Certificate, intCerts map[string][]*x509.Cert
 		if err != nil {
 			continue
 		}
-		if intCertsForLeafs, ok := intCerts[certID]; ok {
-			certBundle = append(certBundle, intCertsForLeafs...)
+		if intCertsForLeaves, ok := intCerts[certID]; ok {
+			certBundle = append(certBundle, intCertsForLeaves...)
 		}
 		certChainPEM, err := CertChainToPEM(certBundle)
 		if err != nil {
