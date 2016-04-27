@@ -164,8 +164,6 @@ var exampleValidCommands = []string{
 	"key import backup.pem",
 	"key remove e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
 	"key passwd e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-	"cert list",
-	"cert remove e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
 	"delegation list repo",
 	"delegation add repo targets/releases path/to/pem/file.pem",
 	"delegation remove repo targets/releases",
@@ -205,8 +203,8 @@ func TestInsufficientArgumentsReturnsErrorAndPrintsUsage(t *testing.T) {
 		cmd.SetOutput(b)
 
 		arglist := strings.Fields(args)
-		if args == "key list" || args == "cert list" || args == "key generate rsa" {
-			// in these case, "key" or "cert" or "key generate" are valid commands, so add an arg to them instead
+		if args == "key list" || args == "key generate rsa" {
+			// in these case, "key" or "key generate" are valid commands, so add an arg to them instead
 			arglist = append(arglist, "extraArg")
 		} else {
 			arglist = arglist[:len(arglist)-1]
@@ -240,8 +238,8 @@ func TestBareCommandPrintsUsageAndNoError(t *testing.T) {
 	// usage is printed
 	require.Contains(t, b.String(), "Usage:", "expected usage when running `notary`")
 
-	// notary key, notary cert, and notary delegation
-	for _, bareCommand := range []string{"key", "cert", "delegation"} {
+	// notary key and notary delegation
+	for _, bareCommand := range []string{"key", "delegation"} {
 		b := new(bytes.Buffer)
 		cmd := NewNotaryCommand()
 		cmd.SetOutput(b)
