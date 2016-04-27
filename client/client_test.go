@@ -425,26 +425,6 @@ func requireRepoHasExpectedKeys(t *testing.T, repo *NotaryRepository,
 		"there should be no timestamp key because the server manages it")
 }
 
-// This creates a new certificate store in the repo's base directory and
-// makes sure the repo has the right certificates
-func requireRepoHasExpectedCerts(t *testing.T, repo *NotaryRepository) {
-	// The repo should have a certificate store and have created certs using
-	// it, so create a new store, and check that the certs do exist and
-	// are valid
-	trustPath := filepath.Join(repo.baseDir, notary.TrustedCertsDir)
-	certStore, err := trustmanager.NewX509FilteredFileStore(
-		trustPath,
-		trustmanager.FilterCertsExpiredSha1,
-	)
-	require.NoError(t, err)
-	certificates := certStore.GetCertificates()
-	require.Len(t, certificates, 1, "unexpected number of trusted certificates")
-
-	certID, err := trustmanager.FingerprintCert(certificates[0])
-	require.NoError(t, err, "unable to fingerprint the trusted certificate")
-	require.NotEqual(t, certID, "")
-}
-
 // Sanity check the TUF metadata files. Verify that it exists for a particular
 // role, the JSON is well-formed, and the signatures exist.
 // For the root.json file, also check that the root, snapshot, and
@@ -515,7 +495,6 @@ func testInitRepoMetadata(t *testing.T, rootType string, serverManagesSnapshot b
 	defer os.RemoveAll(repo.baseDir)
 
 	requireRepoHasExpectedKeys(t, repo, rootKeyID, !serverManagesSnapshot)
-	requireRepoHasExpectedCerts(t, repo)
 	requireRepoHasExpectedMetadata(t, repo, data.CanonicalRootRole, true)
 	requireRepoHasExpectedMetadata(t, repo, data.CanonicalTargetsRole, true)
 	requireRepoHasExpectedMetadata(t, repo, data.CanonicalSnapshotRole,
@@ -1932,17 +1911,15 @@ func TestPublishRootCorrupt(t *testing.T) {
 	defer os.RemoveAll(repo.baseDir)
 	testPublishBadMetadata(t, data.CanonicalRootRole, repo, false, false)
 
-	// publish first - publish should still succeed if root corrupt since the
-	// remote root is signed with the same key.
+	// publish first - publish should still fail if the local root is corrupt since
+	// we can't determine whether remote root is signed with the same key.
 	repo, _ = initializeRepo(t, data.ECDSAKey, "docker.com/notary2", ts.URL, false)
 	defer os.RemoveAll(repo.baseDir)
-	testPublishBadMetadata(t, data.CanonicalRootRole, repo, true, true)
+	testPublishBadMetadata(t, data.CanonicalRootRole, repo, true, false)
 }
 
 // When publishing snapshot, root, or target, if the repo hasn't been published
-// before, if the metadata is corrupt, it can't be published.  If it has been
-// published already, then the corrupt metadata can just be re-downloaded, so
-// publishing is successful.
+// before, if the metadata is corrupt, it can't be published.
 func testPublishBadMetadata(t *testing.T, roleName string, repo *NotaryRepository,
 	publishFirst, succeeds bool) {
 
@@ -1959,7 +1936,11 @@ func testPublishBadMetadata(t *testing.T, roleName string, repo *NotaryRepositor
 		require.NoError(t, err)
 	} else {
 		require.Error(t, err)
-		require.IsType(t, &regJson.SyntaxError{}, err)
+		if roleName == data.CanonicalRootRole && publishFirst {
+			require.IsType(t, &trustpinning.ErrValidationFail{}, err)
+		} else {
+			require.IsType(t, &regJson.SyntaxError{}, err)
+		}
 	}
 
 	// make an unreadable file by creating a directory instead of a file
@@ -1971,7 +1952,7 @@ func testPublishBadMetadata(t *testing.T, roleName string, repo *NotaryRepositor
 	defer os.RemoveAll(path)
 
 	err = repo.Publish()
-	if succeeds {
+	if succeeds || publishFirst {
 		require.NoError(t, err)
 	} else {
 		require.Error(t, err)
@@ -2757,14 +2738,6 @@ func logRepoTrustRoot(t *testing.T, prefix string, repo *NotaryRepository) {
 	for _, k := range root.Signed.Roles[data.CanonicalRootRole].KeyIDs {
 		logrus.Debugf("\t%s", k)
 	}
-	logrus.Debugf("All trusted certs:")
-	certs, err := repo.CertStore.GetCertificatesByCN(repo.gun)
-	require.NoError(t, err)
-	for _, cert := range certs {
-		id, err := trustmanager.FingerprintCert(cert)
-		require.NoError(t, err)
-		logrus.Debugf("\t%s", id)
-	}
 }
 
 // ID of the (only) certificate trusted by the root role metadata
@@ -2772,15 +2745,6 @@ func rootRoleCertID(t *testing.T, repo *NotaryRepository) string {
 	rootKeys := repo.tufRepo.Root.Signed.Roles[data.CanonicalRootRole].KeyIDs
 	require.Len(t, rootKeys, 1)
 	return rootKeys[0]
-}
-
-func verifyOnlyTrustedCertificate(t *testing.T, repo *NotaryRepository, certID string) {
-	certs, err := repo.CertStore.GetCertificatesByCN(repo.gun)
-	require.NoError(t, err)
-	require.Len(t, certs, 1)
-	id, err := trustmanager.FingerprintCert(certs[0])
-	require.NoError(t, err)
-	require.Equal(t, certID, id)
 }
 
 func TestRotateRootKey(t *testing.T) {
@@ -2825,27 +2789,12 @@ func TestRotateRootKey(t *testing.T) {
 	require.Error(t, err)
 	addTarget(t, authorRepo, "current", "../fixtures/intermediate-ca.crt")
 
-	// NotaryRepository.Update's handling of certificate rotation is weird:
-	//
-	// On every run, NotaryRepository.bootstrapClient rotates the trusted certificates
-	// based on CACHED root data.
-	// Then the client calls Repo.Update, which fetches a new timestmap,
-	// notices an updated root.json, validates it and stores it into the cache.
-	//
-	// So, the locally trusted certificates are rotated only on the SECOND call of
-	// NotaryRepository.Update after the rotation is pushed to the server.
-	//
-	// This would be nice to fix eventually (breaking down the NotaryRepository.Update
-	// / Repo.Update separation which causes this), but for now, just ensure that the
-	// second update does result in updated certificates.
-
 	// Publish the target, which does an update and pulls down the latest metadata, and
-	// should update the cert store now
+	// should update the trusted root
 	logRepoTrustRoot(t, "pre-publish", authorRepo)
 	err = authorRepo.Publish()
 	require.NoError(t, err)
 	logRepoTrustRoot(t, "post-publish", authorRepo)
-	verifyOnlyTrustedCertificate(t, authorRepo, newRootCertID)
 
 	// Verify the user can use the rotated repo, and see the added target.
 	_, err = userRepo.GetTargetByName("current")
@@ -2859,7 +2808,6 @@ func TestRotateRootKey(t *testing.T) {
 	_, err = freshUserRepo.GetTargetByName("current")
 	require.NoError(t, err)
 	require.Equal(t, newRootCertID, rootRoleCertID(t, freshUserRepo))
-	verifyOnlyTrustedCertificate(t, freshUserRepo, newRootCertID)
 	logRepoTrustRoot(t, "fresh client", freshUserRepo)
 
 	// Verify that the user initialized with the original certificate eventually
@@ -3307,7 +3255,6 @@ func TestDeleteRepo(t *testing.T) {
 
 	// Assert initialization was successful before we delete
 	requireRepoHasExpectedKeys(t, repo, rootKeyID, true)
-	requireRepoHasExpectedCerts(t, repo)
 	requireRepoHasExpectedMetadata(t, repo, data.CanonicalRootRole, true)
 	requireRepoHasExpectedMetadata(t, repo, data.CanonicalTargetsRole, true)
 	requireRepoHasExpectedMetadata(t, repo, data.CanonicalSnapshotRole, true)
@@ -3321,12 +3268,6 @@ func TestDeleteRepo(t *testing.T) {
 	requireRepoHasExpectedMetadata(t, repo, data.CanonicalTargetsRole, false)
 	requireRepoHasExpectedMetadata(t, repo, data.CanonicalSnapshotRole, false)
 	requireRepoHasExpectedMetadata(t, repo, data.CanonicalTimestampRole, false)
-
-	// Assert no certs for this repo exist locally
-	_, err = repo.CertStore.GetCertificatesByCN(gun)
-	require.Error(t, err)
-	require.IsType(t, &trustmanager.ErrNoCertificatesFound{}, err)
-	require.NotNil(t, err)
 
 	// Assert keys for this repo exist locally
 	requireRepoHasExpectedKeys(t, repo, rootKeyID, true)
@@ -3352,7 +3293,6 @@ func TestDeleteRepoBadFilestore(t *testing.T) {
 
 	// Assert initialization was successful before we delete
 	requireRepoHasExpectedKeys(t, repo, rootKeyID, true)
-	requireRepoHasExpectedCerts(t, repo)
 	requireRepoHasExpectedMetadata(t, repo, data.CanonicalRootRole, true)
 	requireRepoHasExpectedMetadata(t, repo, data.CanonicalTargetsRole, true)
 	requireRepoHasExpectedMetadata(t, repo, data.CanonicalSnapshotRole, true)
@@ -3363,50 +3303,6 @@ func TestDeleteRepoBadFilestore(t *testing.T) {
 	// Delete all client trust data for repo, require an error on the filestore removal
 	err := repo.DeleteTrustData()
 	require.Error(t, err)
-}
-
-// TestDeleteRepoNoCerts tests that local repo data is deleted successfully without an error even when we do not have certificates
-func TestDeleteRepoNoCerts(t *testing.T) {
-	gun := "docker.com/notary"
-
-	ts, _, _ := simpleTestServer(t)
-	defer ts.Close()
-
-	repo, rootKeyID := initializeRepo(t, data.ECDSAKey, gun, ts.URL, false)
-	defer os.RemoveAll(repo.baseDir)
-
-	// Assert initialization was successful before we delete
-	requireRepoHasExpectedKeys(t, repo, rootKeyID, true)
-	requireRepoHasExpectedCerts(t, repo)
-	requireRepoHasExpectedMetadata(t, repo, data.CanonicalRootRole, true)
-	requireRepoHasExpectedMetadata(t, repo, data.CanonicalTargetsRole, true)
-	requireRepoHasExpectedMetadata(t, repo, data.CanonicalSnapshotRole, true)
-
-	// Delete the certificate store contents and require it has been fully deleted
-	repo.CertStore.RemoveAll()
-	_, err := repo.CertStore.GetCertificatesByCN(gun)
-	require.Error(t, err)
-	require.IsType(t, &trustmanager.ErrNoCertificatesFound{}, err)
-	require.NotNil(t, err)
-
-	// Delete all client trust data for repo
-	err = repo.DeleteTrustData()
-	require.NoError(t, err)
-
-	// Assert no metadata for this repo exists locally
-	requireRepoHasExpectedMetadata(t, repo, data.CanonicalRootRole, false)
-	requireRepoHasExpectedMetadata(t, repo, data.CanonicalTargetsRole, false)
-	requireRepoHasExpectedMetadata(t, repo, data.CanonicalSnapshotRole, false)
-	requireRepoHasExpectedMetadata(t, repo, data.CanonicalTimestampRole, false)
-
-	// Assert no certs for this repo exist locally
-	_, err = repo.CertStore.GetCertificatesByCN(gun)
-	require.Error(t, err)
-	require.IsType(t, &trustmanager.ErrNoCertificatesFound{}, err)
-	require.NotNil(t, err)
-
-	// Assert keys for this repo exist locally
-	requireRepoHasExpectedKeys(t, repo, rootKeyID, true)
 }
 
 // Test that we get a correct list of roles with keys and signatures
