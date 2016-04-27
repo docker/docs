@@ -26,8 +26,8 @@ RUN curl -fsSL -o /vbox.dmg http://download.virtualbox.org/virtualbox/$VBOX_VERS
 
 # Download the Docker parts
 
-ENV INSTALLER_VERSION 1.11.0
-ENV DOCKER_VERSION 1.11.0
+ENV INSTALLER_VERSION 1.11.1
+ENV DOCKER_VERSION 1.11.1
 
 # Why '--strip-components 3'?  The client binary is in usr/local/bin/docker in
 # the tar archive.  If we extract directly, it will create a usr/local/bin
