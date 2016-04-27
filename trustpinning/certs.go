@@ -37,13 +37,9 @@ func (err ErrRootRotationFail) Error() string {
 	return fmt.Sprintf("could not rotate trust to a new trusted root: %s", err.Reason)
 }
 
-func prettyFormatCertIDs(certs []*x509.Certificate) string {
+func prettyFormatCertIDs(certs map[string]*x509.Certificate) string {
 	ids := make([]string, 0, len(certs))
-	for _, cert := range certs {
-		id, err := trustmanager.FingerprintCert(cert)
-		if err != nil {
-			id = fmt.Sprintf("[Error %s]", err)
-		}
+	for id, _ := range certs {
 		ids = append(ids, id)
 	}
 	return strings.Join(ids, ", ")
@@ -138,16 +134,12 @@ func ValidateRoot(prevRoot *data.SignedRoot, root *data.Signed, gun string, trus
 			return nil, &ErrValidationFail{Reason: err.Error()}
 		}
 
-		validPinnedCerts := []*x509.Certificate{}
-		for _, cert := range certsFromRoot {
-			certID, err := trustmanager.FingerprintCert(cert)
-			if err != nil {
+		validPinnedCerts := map[string]*x509.Certificate{}
+		for id, cert := range certsFromRoot {
+			if ok := trustPinCheckFunc(cert, allIntCerts[id]); !ok {
 				continue
 			}
-			if ok := trustPinCheckFunc(cert, allIntCerts[certID]); !ok {
-				continue
-			}
-			validPinnedCerts = append(validPinnedCerts, cert)
+			validPinnedCerts[id] = cert
 		}
 		if len(validPinnedCerts) == 0 {
 			return nil, &ErrValidationFail{Reason: "unable to match any certificates to trust_pinning config"}
@@ -172,11 +164,11 @@ func ValidateRoot(prevRoot *data.SignedRoot, root *data.Signed, gun string, trus
 // validRootLeafCerts returns a list of possibly (if checkExpiry is true) non-expired, non-sha1 certificates
 // found in root whose Common-Names match the provided GUN. Note that this
 // "validity" alone does not imply any measure of trust.
-func validRootLeafCerts(allLeafCerts map[string]*x509.Certificate, gun string, checkExpiry bool) ([]*x509.Certificate, error) {
-	var validLeafCerts []*x509.Certificate
+func validRootLeafCerts(allLeafCerts map[string]*x509.Certificate, gun string, checkExpiry bool) (map[string]*x509.Certificate, error) {
+	validLeafCerts := make(map[string]*x509.Certificate)
 
 	// Go through every leaf certificate and check that the CN matches the gun
-	for _, cert := range allLeafCerts {
+	for id, cert := range allLeafCerts {
 		// Validate that this leaf certificate has a CN that matches the exact gun
 		if cert.Subject.CommonName != gun {
 			logrus.Debugf("error leaf certificate CN: %s doesn't match the given GUN: %s",
@@ -198,7 +190,7 @@ func validRootLeafCerts(allLeafCerts map[string]*x509.Certificate, gun string, c
 			continue
 		}
 
-		validLeafCerts = append(validLeafCerts, cert)
+		validLeafCerts[id] = cert
 	}
 
 	if len(validLeafCerts) < 1 {
@@ -222,7 +214,7 @@ func parseAllCerts(signedRoot *data.SignedRoot) (map[string]*x509.Certificate, m
 	intCerts := make(map[string][]*x509.Certificate)
 
 	// Before we loop through all root keys available, make sure any exist
-	rootRoles, ok := signedRoot.Signed.Roles["root"]
+	rootRoles, ok := signedRoot.Signed.Roles[data.CanonicalRootRole]
 	if !ok {
 		logrus.Debugf("tried to parse certificates from invalid root signed data")
 		return nil, nil
@@ -262,18 +254,13 @@ func parseAllCerts(signedRoot *data.SignedRoot) (map[string]*x509.Certificate, m
 
 		// Get the ID of the leaf certificate
 		leafCert := leafCertList[0]
-		leafID, err := trustmanager.FingerprintCert(leafCert)
-		if err != nil {
-			logrus.Debugf("error while fingerprinting root certificate with keyID: %s, %v", keyID, err)
-			continue
-		}
 
 		// Store the leaf cert in the map
-		leafCerts[leafID] = leafCert
+		leafCerts[key.ID()] = leafCert
 
 		// Get all the remainder certificates marked as a CA to be used as intermediates
 		intermediateCerts := trustmanager.GetIntermediateCerts(decodedCerts)
-		intCerts[leafID] = intermediateCerts
+		intCerts[key.ID()] = intermediateCerts
 	}
 
 	return leafCerts, intCerts
