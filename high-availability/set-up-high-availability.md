@@ -3,9 +3,10 @@
 aliases = [ "/ucp/understand_ha/"]
 title ="Set up high availability"
 description="Docker Universal Control plane has support for high availability. Learn how to set up your installation to ensure it tolerates failures."
-keywords= ["replica, controller, availability, high, ucp"]
+keywords= ["docker, ucp, high-availability, replica"]
 [menu.main]
 parent="mn_ucp_high_availability"
+weight=0
 +++
 <![end-metadata]-->
 
