@@ -22,9 +22,6 @@ import (
 	"github.com/docker/notary/tuf/data"
 )
 
-// CertID is a simple string type for identifying x509 certificates
-type CertID string
-
 // CertToPEM is a utility function returns a PEM encoded x509 Certificate
 func CertToPEM(cert *x509.Certificate) []byte {
 	pemCert := pem.EncodeToMemory(&pem.Block{Type: "CERTIFICATE", Bytes: cert.Raw})
@@ -65,33 +62,6 @@ func LoadCertFromPEM(pemBytes []byte) (*x509.Certificate, error) {
 	}
 
 	return nil, errors.New("no certificates found in PEM data")
-}
-
-// FingerprintCert returns a TUF compliant fingerprint for a X509 Certificate
-func FingerprintCert(cert *x509.Certificate) (string, error) {
-	certID, err := fingerprintCert(cert)
-	if err != nil {
-		return "", err
-	}
-
-	return string(certID), nil
-}
-
-func fingerprintCert(cert *x509.Certificate) (CertID, error) {
-	block := pem.Block{Type: "CERTIFICATE", Bytes: cert.Raw}
-	pemdata := pem.EncodeToMemory(&block)
-
-	var tufKey data.PublicKey
-	switch cert.PublicKeyAlgorithm {
-	case x509.RSA:
-		tufKey = data.NewRSAx509PublicKey(pemdata)
-	case x509.ECDSA:
-		tufKey = data.NewECDSAx509PublicKey(pemdata)
-	default:
-		return "", fmt.Errorf("got Unknown key type while fingerprinting certificate")
-	}
-
-	return CertID(tufKey.ID()), nil
 }
 
 // LoadCertFromFile loads the first certificate from the file provided. The
@@ -473,35 +443,37 @@ func CertToKey(cert *x509.Certificate) data.PublicKey {
 
 // CertsToKeys transforms each of the input certificate chains into its corresponding
 // PublicKey
-func CertsToKeys(leafCerts []*x509.Certificate, intCerts map[string][]*x509.Certificate) map[string]data.PublicKey {
+func CertsToKeys(leafCerts map[string]*x509.Certificate, intCerts map[string][]*x509.Certificate) map[string]data.PublicKey {
 	keys := make(map[string]data.PublicKey)
-	for _, leafCert := range leafCerts {
-		certBundle := []*x509.Certificate{leafCert}
-		certID, err := FingerprintCert(leafCert)
-		if err != nil {
-			continue
+	for id, leafCert := range leafCerts {
+		if key, err := CertBundleToKey(leafCert, intCerts[id]); err == nil {
+			keys[key.ID()] = key
 		}
-		if intCertsForLeaves, ok := intCerts[certID]; ok {
-			certBundle = append(certBundle, intCertsForLeaves...)
-		}
-		certChainPEM, err := CertChainToPEM(certBundle)
-		if err != nil {
-			continue
-		}
-		var newKey data.PublicKey
-		// Use the leaf cert's public key algorithm for typing
-		switch leafCert.PublicKeyAlgorithm {
-		case x509.RSA:
-			newKey = data.NewRSAx509PublicKey(certChainPEM)
-		case x509.ECDSA:
-			newKey = data.NewECDSAx509PublicKey(certChainPEM)
-		default:
-			logrus.Debugf("Unknown key type parsed from certificate: %v", leafCert.PublicKeyAlgorithm)
-			continue
-		}
-		keys[newKey.ID()] = newKey
 	}
 	return keys
+}
+
+// CertBundleToKey creates a TUF key from a leaf certs and a list of
+// intermediates
+func CertBundleToKey(leafCert *x509.Certificate, intCerts []*x509.Certificate) (data.PublicKey, error) {
+	certBundle := []*x509.Certificate{leafCert}
+	certBundle = append(certBundle, intCerts...)
+	certChainPEM, err := CertChainToPEM(certBundle)
+	if err != nil {
+		return nil, err
+	}
+	var newKey data.PublicKey
+	// Use the leaf cert's public key algorithm for typing
+	switch leafCert.PublicKeyAlgorithm {
+	case x509.RSA:
+		newKey = data.NewRSAx509PublicKey(certChainPEM)
+	case x509.ECDSA:
+		newKey = data.NewECDSAx509PublicKey(certChainPEM)
+	default:
+		logrus.Debugf("Unknown key type parsed from certificate: %v", leafCert.PublicKeyAlgorithm)
+		return nil, x509.ErrUnsupportedAlgorithm
+	}
+	return newKey, nil
 }
 
 // NewCertificate returns an X509 Certificate following a template, given a GUN and validity interval.
