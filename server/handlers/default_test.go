@@ -334,7 +334,7 @@ func TestAtomicUpdateValidationFailurePropagated(t *testing.T) {
 	repo, cs, err := testutils.EmptyRepo(gun)
 	require.NoError(t, err)
 
-	state := handlerState{store: metaStore, crypto: copyKeys(t, cs, data.CanonicalTimestampRole)}
+	state := handlerState{store: metaStore, crypto: testutils.CopyKeys(t, cs, data.CanonicalTimestampRole)}
 
 	r, tg, sn, ts, err := testutils.Sign(repo)
 	require.NoError(t, err)
@@ -376,7 +376,7 @@ func TestAtomicUpdateNonValidationFailureNotPropagated(t *testing.T) {
 	repo, cs, err := testutils.EmptyRepo(gun)
 	require.NoError(t, err)
 
-	state := handlerState{store: &failStore{*metaStore}, crypto: copyKeys(t, cs, data.CanonicalTimestampRole)}
+	state := handlerState{store: &failStore{*metaStore}, crypto: testutils.CopyKeys(t, cs, data.CanonicalTimestampRole)}
 
 	r, tg, sn, ts, err := testutils.Sign(repo)
 	require.NoError(t, err)
@@ -418,7 +418,7 @@ func TestAtomicUpdateVersionErrorPropagated(t *testing.T) {
 	require.NoError(t, err)
 
 	state := handlerState{
-		store: &invalidVersionStore{*metaStore}, crypto: copyKeys(t, cs, data.CanonicalTimestampRole)}
+		store: &invalidVersionStore{*metaStore}, crypto: testutils.CopyKeys(t, cs, data.CanonicalTimestampRole)}
 
 	r, tg, sn, ts, err := testutils.Sign(repo)
 	require.NoError(t, err)

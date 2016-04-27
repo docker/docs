@@ -2,7 +2,6 @@ package client
 
 import (
 	"bytes"
-	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -15,6 +14,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/docker/go/canonical/json"
 	"github.com/docker/notary"
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/trustpinning"
@@ -108,13 +108,7 @@ func TestUpdateSucceedsEvenIfCannotWriteNewRepo(t *testing.T) {
 		repo := newBlankRepo(t, ts.URL)
 		repo.fileStore = &unwritableStore{MetadataStore: repo.fileStore, roleToNotWrite: role}
 		err := repo.Update(false)
-
-		if role == data.CanonicalRootRole {
-			require.Error(t, err) // because checkRoot loads root from cache to check hashes
-			continue
-		} else {
-			require.NoError(t, err)
-		}
+		require.NoError(t, err)
 
 		for r, expected := range serverMeta {
 			actual, err := repo.fileStore.GetMeta(r, -1)
@@ -161,10 +155,6 @@ func TestUpdateSucceedsEvenIfCannotWriteExistingRepo(t *testing.T) {
 			repo.fileStore = &unwritableStore{MetadataStore: origFileStore, roleToNotWrite: role}
 			err := repo.Update(forWrite)
 
-			if role == data.CanonicalRootRole {
-				require.Error(t, err) // because checkRoot loads root from cache to check hashes
-				continue
-			}
 			require.NoError(t, err)
 
 			for r, expected := range serverMeta {
@@ -189,19 +179,26 @@ type swizzleExpectations struct {
 	expectErrs []interface{}
 }
 
+// the errors here are only relevant for root - we bail if the root is corrupt, but
+// other metadata will be replaced
 var waysToMessUpLocalMetadata = []swizzleExpectations{
 	// for instance if the metadata got truncated or otherwise block corrupted
-	{desc: "invalid JSON", swizzle: (*testutils.MetadataSwizzler).SetInvalidJSON},
+	{desc: "invalid JSON", swizzle: (*testutils.MetadataSwizzler).SetInvalidJSON,
+		expectErrs: []interface{}{&json.SyntaxError{}}},
 	// if the metadata was accidentally deleted
-	{desc: "missing metadata", swizzle: (*testutils.MetadataSwizzler).RemoveMetadata},
+	{desc: "missing metadata", swizzle: (*testutils.MetadataSwizzler).RemoveMetadata,
+		expectErrs: []interface{}{store.ErrMetaNotFound{}, ErrRepoNotInitialized{}, ErrRepositoryNotExist{}}},
 	// if the signature was invalid - maybe the user tried to modify something manually
 	// that they forgot (add a key, or something)
 	{desc: "signed with right key but wrong hash",
-		swizzle: (*testutils.MetadataSwizzler).InvalidateMetadataSignatures},
+		swizzle:    (*testutils.MetadataSwizzler).InvalidateMetadataSignatures,
+		expectErrs: []interface{}{&trustpinning.ErrValidationFail{}, signed.ErrRoleThreshold{}}},
 	// if the user copied the wrong root.json over it by accident or something
-	{desc: "signed with wrong key", swizzle: (*testutils.MetadataSwizzler).SignMetadataWithInvalidKey},
+	{desc: "signed with wrong key", swizzle: (*testutils.MetadataSwizzler).SignMetadataWithInvalidKey,
+		expectErrs: []interface{}{&trustpinning.ErrValidationFail{}, signed.ErrRoleThreshold{}}},
 	// self explanatory
-	{desc: "expired metadata", swizzle: (*testutils.MetadataSwizzler).ExpireMetadata},
+	{desc: "expired metadata", swizzle: (*testutils.MetadataSwizzler).ExpireMetadata,
+		expectErrs: []interface{}{signed.ErrExpired{}}},
 
 	// Not trying any of the other repoSwizzler methods, because those involve modifying
 	// and re-serializing, and that means a user has the root and other keys and was trying to
@@ -239,9 +236,12 @@ func TestUpdateReplacesCorruptOrMissingMetadata(t *testing.T) {
 			for _, forWrite := range []bool{true, false} {
 				require.NoError(t, messItUp(repoSwizzler, role), "could not fuzz %s (%s)", role, text)
 				err := repo.Update(forWrite)
-				// if this is a root role, we should error if it's corrupted data
-				if role == data.CanonicalRootRole && expt.desc == "invalid JSON" {
-					require.Error(t, err)
+				// If this is a root role, we should error if it's corrupted or invalid data;
+				// missing metadata is ok.
+				if role == data.CanonicalRootRole && expt.desc != "missing metadata" &&
+					expt.desc != "expired metadata" {
+
+					require.Error(t, err, "%s for %s: expected to error when bootstrapping root", text, role)
 					// revert our original metadata
 					for role := range origMeta {
 						require.NoError(t, repo.fileStore.SetMeta(role, origMeta[role]))
@@ -774,9 +774,9 @@ func testUpdateRemoteFileChecksumWrong(t *testing.T, opts updateOpts, errExpecte
 			_, isErrMaliciousServer := err.(store.ErrMaliciousServer)
 			rightError = isErrChecksum || isErrMaliciousServer
 		}
-		require.True(t, rightError, err,
+		require.True(t, rightError,
 			"wrong update error (%v) when %s has the wrong checksum (forWrite: %v)",
-			err, opts.role, opts.forWrite)
+			reflect.TypeOf(err), opts.role, opts.forWrite)
 	}
 }
 
@@ -1254,10 +1254,18 @@ func testUpdateLocalAndRemoteRootCorrupt(t *testing.T, forWrite bool, localExpt,
 	err = repo.Update(forWrite)
 	require.Error(t, err, "expected failure updating when %s", msg)
 
+	expectedErrs := serverExpt.expectErrs
+	// If the local root is corrupt or invalid, we won't even try to update and
+	// will fail with the local metadata error.  Missing or expired metadata is ok.
+	if localExpt.desc != "missing metadata" && localExpt.desc != "expired metadata" {
+		expectedErrs = localExpt.expectErrs
+	}
+
 	errType := reflect.TypeOf(err)
 	isExpectedType := false
 	var expectedTypes []string
-	for _, expectErr := range serverExpt.expectErrs {
+
+	for _, expectErr := range expectedErrs {
 		expectedType := reflect.TypeOf(expectErr)
 		isExpectedType = isExpectedType || errType == expectedType
 		expectedTypes = append(expectedTypes, expectedType.String())
@@ -1281,7 +1289,7 @@ func TestUpdateRemoteKeyRotated(t *testing.T) {
 	}
 }
 
-func testUpdateRemoteKeyRotated(t *testing.T, targetsRole string) {
+func testUpdateRemoteKeyRotated(t *testing.T, role string) {
 	_, serverSwizzler := newServerSwizzler(t)
 	ts := readOnlyServer(t, serverSwizzler.MetadataCache, http.StatusNotFound, "docker.com/notary")
 	defer ts.Close()
@@ -1294,30 +1302,38 @@ func testUpdateRemoteKeyRotated(t *testing.T, targetsRole string) {
 	require.NoError(t, err)
 
 	cs := signed.NewEd25519()
-	pubKey, err := cs.Create(targetsRole, repo.gun, data.ED25519Key)
+	pubKey, err := cs.Create(role, repo.gun, data.ED25519Key)
 	require.NoError(t, err)
 
 	// bump the version
-	bumpRole := path.Dir(targetsRole)
-	if !data.IsDelegation(targetsRole) {
+	bumpRole := path.Dir(role)
+	if !data.IsDelegation(role) {
 		bumpRole = data.CanonicalRootRole
 	}
 	require.NoError(t, serverSwizzler.OffsetMetadataVersion(bumpRole, 1),
 		"failed to swizzle remote %s to bump version", bumpRole)
 	// now change the key
-	require.NoError(t, serverSwizzler.RotateKey(targetsRole, pubKey),
-		"failed to swizzle remote %s to rotate key", targetsRole)
+	require.NoError(t, serverSwizzler.RotateKey(role, pubKey),
+		"failed to swizzle remote %s to rotate key", role)
 
 	// update the hashes on both snapshot and timestamp
 	require.NoError(t, serverSwizzler.UpdateSnapshotHashes())
 	require.NoError(t, serverSwizzler.UpdateTimestampHash())
 
-	msg := fmt.Sprintf("swizzling %s remotely to rotate key (forWrite: false)", targetsRole)
+	msg := fmt.Sprintf("swizzling %s remotely to rotate key (forWrite: false)", role)
 
 	err = repo.Update(false)
 	require.Error(t, err, "expected failure updating when %s", msg)
-	require.IsType(t, signed.ErrRoleThreshold{}, err, "expected ErrRoleThreshold when %s: got %s",
-		msg, reflect.TypeOf(err))
+	switch role {
+	case data.CanonicalRootRole:
+		require.IsType(t, &trustpinning.ErrValidationFail{}, err,
+			"expected trustpinning.ErrValidationFail when %s: got %s",
+			msg, reflect.TypeOf(err))
+	default:
+		require.IsType(t, signed.ErrRoleThreshold{}, err,
+			"expected ErrRoleThreshold when %s: got %s",
+			msg, reflect.TypeOf(err))
+	}
 }
 
 // Helper function that takes a signedRoot, and signs it with the provided keys and only these keys.
@@ -1584,4 +1600,33 @@ func TestDownloadSnapshotLargeDelegationsMany(t *testing.T) {
 
 	// the snapshot downloaded has numSnapsnotMeta items + one for root and one for targets
 	require.Len(t, notaryRepo.tufRepo.Snapshot.Signed.Meta, numSnapsnotMeta+2)
+}
+
+// If we have a root on disk, use it as the source of trust pinning rather than the trust pinning
+// config
+func TestRootOnDiskTrustPinning(t *testing.T) {
+	meta, serverSwizzler := newServerSwizzler(t)
+
+	ts := readOnlyServer(t, serverSwizzler.MetadataCache, http.StatusNotFound, "docker.com/notary")
+	defer ts.Close()
+
+	restrictiveTrustPinning := trustpinning.TrustPinConfig{DisableTOFU: true}
+
+	// for sanity, ensure that without a root on disk, we can't download a new root
+	repo := newBlankRepo(t, ts.URL)
+	defer os.RemoveAll(repo.baseDir)
+	repo.trustPinning = restrictiveTrustPinning
+
+	err := repo.Update(false)
+	require.Error(t, err)
+	require.IsType(t, &trustpinning.ErrValidationFail{}, err)
+
+	// show that if we have a root on disk, we can update
+	repo = newBlankRepo(t, ts.URL)
+	defer os.RemoveAll(repo.baseDir)
+	repo.trustPinning = restrictiveTrustPinning
+	// put root on disk
+	require.NoError(t, repo.fileStore.SetMeta(data.CanonicalRootRole, meta[data.CanonicalRootRole]))
+
+	require.NoError(t, repo.Update(false))
 }

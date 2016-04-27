@@ -200,6 +200,14 @@ func TestSnapshotFromSignedValidatesVersion(t *testing.T) {
 	sn.Signed.Version = -1
 	_, err := snapshotToSignedAndBack(t, sn)
 	require.IsType(t, ErrInvalidMetadata{}, err)
+
+	sn.Signed.Version = 0
+	_, err = snapshotToSignedAndBack(t, sn)
+	require.IsType(t, ErrInvalidMetadata{}, err)
+
+	sn.Signed.Version = 1
+	_, err = snapshotToSignedAndBack(t, sn)
+	require.NoError(t, err)
 }
 
 // GetMeta returns the checksum, or an error if it is missing.
