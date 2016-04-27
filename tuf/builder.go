@@ -369,7 +369,7 @@ func (rb *repoBuilder) GenerateTimestamp(prev *data.SignedTimestamp) ([]byte, in
 		return nil, 0, err
 	}
 
-	// The snapshot should have been loaded (and not checksumemd, since a timestamp
+	// The snapshot should have been loaded (and not checksummed, since a timestamp
 	// cannot have been loaded), so it is awaiting checksumming. Since this
 	// timestamp was generated using the snapshot awaiting checksumming, we can
 	// remove it from rb.loadedNotChecksummed. There should be no other items
@@ -445,7 +445,7 @@ func (rb *repoBuilder) loadTimestamp(content []byte, minVersion int, allowExpire
 		}
 	}
 
-	if err := rb.validateCachedTimestampChecksums(signedTimestamp); err != nil {
+	if err := rb.validateChecksumsFromTimestamp(signedTimestamp); err != nil {
 		return err
 	}
 
@@ -488,7 +488,7 @@ func (rb *repoBuilder) loadSnapshot(content []byte, minVersion int, allowExpired
 	rootMeta := signedSnapshot.Signed.Meta[data.CanonicalRootRole]
 	rb.nextRootChecksum = &rootMeta
 
-	if err := rb.validateCachedSnapshotChecksums(signedSnapshot); err != nil {
+	if err := rb.validateChecksumsFromSnapshot(signedSnapshot); err != nil {
 		return err
 	}
 
@@ -558,7 +558,7 @@ func (rb *repoBuilder) loadDelegation(roleName string, content []byte, minVersio
 	return nil
 }
 
-func (rb *repoBuilder) validateCachedTimestampChecksums(ts *data.SignedTimestamp) error {
+func (rb *repoBuilder) validateChecksumsFromTimestamp(ts *data.SignedTimestamp) error {
 	sn, ok := rb.loadedNotChecksummed[data.CanonicalSnapshotRole]
 	if ok {
 		// by this point, the SignedTimestamp has been validated so it must have a snapshot hash
@@ -571,7 +571,7 @@ func (rb *repoBuilder) validateCachedTimestampChecksums(ts *data.SignedTimestamp
 	return nil
 }
 
-func (rb *repoBuilder) validateCachedSnapshotChecksums(sn *data.SignedSnapshot) error {
+func (rb *repoBuilder) validateChecksumsFromSnapshot(sn *data.SignedSnapshot) error {
 	var goodRoles []string
 	for roleName, loadedBytes := range rb.loadedNotChecksummed {
 		switch roleName {

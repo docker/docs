@@ -770,28 +770,33 @@ func (r *NotaryRepository) Update(forWrite bool) error {
 // operational (if the URL is invalid but a root.json is cached).
 func (r *NotaryRepository) bootstrapClient(checkInitialized bool) (*tufclient.Client, error) {
 	minVersion := 1
-	oldBuilder := tuf.NewRepoBuilder(r.gun, r.CryptoService, r.trustPinning)
-	var newBuilder tuf.RepoBuilder
+	// the old root on disk should not be validated against any trust pinning configuration
+	// because if we have an old root, it itself is the thing that pins trust
+	oldBuilder := tuf.NewRepoBuilder(r.gun, r.CryptoService, trustpinning.TrustPinConfig{})
 
-	// try to read root from cache first. We will trust this root
-	// until we detect a problem during update which will cause
-	// us to download a new root and perform a rotation.
+	// by default, we want to use the trust pinning configuration on any new root that we download
+	newBuilder := tuf.NewRepoBuilder(r.gun, r.CryptoService, r.trustPinning)
+
+	// Try to read root from cache first. We will trust this root until we detect a problem
+	// during update which will cause us to download a new root and perform a rotation.
+	// If we have an old root, and it's valid, then we overwrite the newBuilder to be one
+	// preloaded with the old root or one which uses the old root for trust bootstrapping.
 	if rootJSON, err := r.fileStore.GetMeta(data.CanonicalRootRole, -1); err == nil {
 		// if we can't load the cached root, fail hard because that is how we pin trust
 		if err := oldBuilder.Load(data.CanonicalRootRole, rootJSON, minVersion, true); err != nil {
 			return nil, err
 		}
 
-		// use the old builder to bootstrap the new builder - we're just going to
-		// verify the same data again, but with this time we want to validate the expiry
-		minVersion = oldBuilder.GetLoadedVersion(data.CanonicalRootRole)
-		newBuilder = oldBuilder.BootstrapNewBuilder()
-		// ignore error - if there's an error, the root won't be loaded
-		newBuilder.Load(data.CanonicalRootRole, rootJSON, minVersion, false)
-	}
+		// again, the root on disk is the source of trust pinning, so use an empty trust
+		// pinning configuration
+		newBuilder = tuf.NewRepoBuilder(r.gun, r.CryptoService, trustpinning.TrustPinConfig{})
 
-	if newBuilder == nil {
-		newBuilder = tuf.NewRepoBuilder(r.gun, r.CryptoService, r.trustPinning)
+		if err := newBuilder.Load(data.CanonicalRootRole, rootJSON, minVersion, false); err != nil {
+			// Ok, the old root is expired - we want to download a new one.  But we want to use the
+			// old root to verify the new root, so bootstrap a new builder with the old builder
+			minVersion = oldBuilder.GetLoadedVersion(data.CanonicalRootRole)
+			newBuilder = oldBuilder.BootstrapNewBuilder()
+		}
 	}
 
 	remote, remoteErr := getRemoteStore(r.baseURL, r.gun, r.roundTrip)
@@ -824,6 +829,8 @@ func (r *NotaryRepository) bootstrapClient(checkInitialized bool) (*tufclient.Cl
 		}
 	}
 
+	// We can only get here if remoteErr != nil (hence we don't download any new root),
+	// and there was no root on disk
 	if !newBuilder.IsLoaded(data.CanonicalRootRole) {
 		return nil, ErrRepoNotInitialized{}
 	}

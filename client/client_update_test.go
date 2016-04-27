@@ -1601,3 +1601,32 @@ func TestDownloadSnapshotLargeDelegationsMany(t *testing.T) {
 	// the snapshot downloaded has numSnapsnotMeta items + one for root and one for targets
 	require.Len(t, notaryRepo.tufRepo.Snapshot.Signed.Meta, numSnapsnotMeta+2)
 }
+
+// If we have a root on disk, use it as the source of trust pinning rather than the trust pinning
+// config
+func TestRootOnDiskTrustPinning(t *testing.T) {
+	meta, serverSwizzler := newServerSwizzler(t)
+
+	ts := readOnlyServer(t, serverSwizzler.MetadataCache, http.StatusNotFound, "docker.com/notary")
+	defer ts.Close()
+
+	restrictiveTrustPinning := trustpinning.TrustPinConfig{DisableTOFU: true}
+
+	// for sanity, ensure that without a root on disk, we can't download a new root
+	repo := newBlankRepo(t, ts.URL)
+	defer os.RemoveAll(repo.baseDir)
+	repo.trustPinning = restrictiveTrustPinning
+
+	err := repo.Update(false)
+	require.Error(t, err)
+	require.IsType(t, &trustpinning.ErrValidationFail{}, err)
+
+	// show that if we have a root on disk, we can update
+	repo = newBlankRepo(t, ts.URL)
+	defer os.RemoveAll(repo.baseDir)
+	repo.trustPinning = restrictiveTrustPinning
+	// put root on disk
+	require.NoError(t, repo.fileStore.SetMeta(data.CanonicalRootRole, meta[data.CanonicalRootRole]))
+
+	require.NoError(t, repo.Update(false))
+}
