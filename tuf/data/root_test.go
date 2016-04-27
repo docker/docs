@@ -225,4 +225,12 @@ func TestRootFromSignedValidatesVersion(t *testing.T) {
 	root.Signed.Version = -1
 	_, err := rootToSignedAndBack(t, root)
 	require.IsType(t, ErrInvalidMetadata{}, err)
+
+	root.Signed.Version = 0
+	_, err = rootToSignedAndBack(t, root)
+	require.IsType(t, ErrInvalidMetadata{}, err)
+
+	root.Signed.Version = 1
+	_, err = rootToSignedAndBack(t, root)
+	require.NoError(t, err)
 }

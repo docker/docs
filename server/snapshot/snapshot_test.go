@@ -122,7 +122,9 @@ func TestGetSnapshotNoPreviousSnapshot(t *testing.T) {
 	repo, crypto, err := testutils.EmptyRepo("gun")
 	require.NoError(t, err)
 
-	rootJSON, err := json.Marshal(repo.Root)
+	sgnd, err := repo.SignRoot(data.DefaultExpires(data.CanonicalRootRole))
+	require.NoError(t, err)
+	rootJSON, err := json.Marshal(sgnd)
 	require.NoError(t, err)
 
 	for _, snapshotJSON := range [][]byte{nil, []byte("invalid JSON")} {
@@ -163,7 +165,10 @@ func TestGetSnapshotReturnsPreviousSnapshotIfUnexpired(t *testing.T) {
 	repo, crypto, err := testutils.EmptyRepo("gun")
 	require.NoError(t, err)
 
-	snapshotJSON, err := json.Marshal(repo.Snapshot)
+	// create an expired snapshot
+	sgnd, err := repo.SignSnapshot(data.DefaultExpires(data.CanonicalSnapshotRole))
+	require.NoError(t, err)
+	snapshotJSON, err := json.Marshal(sgnd)
 	require.NoError(t, err)
 
 	require.NoError(t, store.UpdateCurrent("gun",
@@ -183,14 +188,16 @@ func TestGetSnapshotOldSnapshotExpired(t *testing.T) {
 	repo, crypto, err := testutils.EmptyRepo("gun")
 	require.NoError(t, err)
 
-	rootJSON, err := json.Marshal(repo.Root)
+	sgnd, err := repo.SignRoot(data.DefaultExpires(data.CanonicalRootRole))
+	require.NoError(t, err)
+	rootJSON, err := json.Marshal(sgnd)
 	require.NoError(t, err)
 
 	// create an expired snapshot
-	_, err = repo.SignSnapshot(time.Now().AddDate(-1, -1, -1))
+	sgnd, err = repo.SignSnapshot(time.Now().AddDate(-1, -1, -1))
 	require.True(t, repo.Snapshot.Signed.Expires.Before(time.Now()))
 	require.NoError(t, err)
-	snapshotJSON, err := json.Marshal(repo.Snapshot)
+	snapshotJSON, err := json.Marshal(sgnd)
 	require.NoError(t, err)
 
 	// set all the metadata
@@ -255,14 +262,16 @@ func TestCreateSnapshotNoKeyInCrypto(t *testing.T) {
 	repo, _, err := testutils.EmptyRepo("gun")
 	require.NoError(t, err)
 
-	rootJSON, err := json.Marshal(repo.Root)
+	sgnd, err := repo.SignRoot(data.DefaultExpires(data.CanonicalRootRole))
+	require.NoError(t, err)
+	rootJSON, err := json.Marshal(sgnd)
 	require.NoError(t, err)
 
 	// create an expired snapshot
-	_, err = repo.SignSnapshot(time.Now().AddDate(-1, -1, -1))
+	sgnd, err = repo.SignSnapshot(time.Now().AddDate(-1, -1, -1))
 	require.True(t, repo.Snapshot.Signed.Expires.Before(time.Now()))
 	require.NoError(t, err)
-	snapshotJSON, err := json.Marshal(repo.Snapshot)
+	snapshotJSON, err := json.Marshal(sgnd)
 	require.NoError(t, err)
 
 	// set all the metadata so we know the failure to sign is just because of the key

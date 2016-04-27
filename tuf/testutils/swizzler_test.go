@@ -11,7 +11,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/docker/notary/tuf"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/docker/notary/tuf/store"
@@ -387,8 +386,6 @@ func TestSwizzlerChangeRootKey(t *testing.T) {
 	err := f.ChangeRootKey()
 	require.NoError(t, err)
 
-	tufRepo := tuf.NewRepo(f.CryptoService)
-
 	// we want to test these in a specific order
 	roles := []string{data.CanonicalRootRole, data.CanonicalTargetsRole, data.CanonicalSnapshotRole,
 		data.CanonicalTimestampRole, "targets/a", "targets/a/b"}
@@ -408,25 +405,23 @@ func TestSwizzlerChangeRootKey(t *testing.T) {
 
 			require.NotEqual(t, len(origRoot.Signed.Keys), len(newRoot.Signed.Keys))
 
-			var rootRole data.Role
 			for r, origRole := range origRoot.Signed.Roles {
 				newRole := newRoot.Signed.Roles[r]
 				require.Len(t, origRole.KeyIDs, 1)
 				require.Len(t, newRole.KeyIDs, 1)
 				if r == data.CanonicalRootRole {
 					require.NotEqual(t, origRole.KeyIDs[0], newRole.KeyIDs[0])
-					rootRole = data.Role{RootRole: *newRole, Name: data.CanonicalRootRole}
 				} else {
 					require.Equal(t, origRole.KeyIDs[0], newRole.KeyIDs[0])
 				}
 			}
 
-			require.NoError(t, tufRepo.SetRoot(newRoot))
+			rootRole, err := newRoot.BuildBaseRole(data.CanonicalRootRole)
+			require.NoError(t, err)
 			signedThing, err := newRoot.ToSigned()
 			require.NoError(t, err)
-			newKey := newRoot.Signed.Keys[rootRole.KeyIDs[0]]
-			require.NoError(t, signed.Verify(signedThing,
-				data.BaseRole{Name: data.CanonicalRootRole, Keys: map[string]data.PublicKey{newKey.ID(): newKey}, Threshold: 1}, 1))
+			require.NoError(t, signed.VerifySignatures(signedThing, rootRole))
+			require.NoError(t, signed.VerifyVersion(&(newRoot.Signed.SignedCommon), 1))
 		default:
 			require.True(t, bytes.Equal(origMeta, newMeta), "bytes have changed for role %s", role)
 		}
