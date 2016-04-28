@@ -37,12 +37,7 @@ $ docker run --rm -it docker/dtr --help
 
 To install DTR:
 
-1. Make your Docker CLI client point to UCP.
-
-    Download a client certificate bundle from UCP, and use it to configure
-    your Docker CLI client to run the docker commands on the UCP cluster.
-
-2. Run the following command to install DTR:
+1. Run the following command on any Docker daemon to install DTR:
 
     ```bash
     $ docker run -it --rm \
@@ -53,7 +48,7 @@ To install DTR:
     prompts for the necessary configuration values.
     You can also use flags to pass values to the install command.
 
-3. Check that DTR is running.
+2. Check that DTR is running.
 
     In your browser, navigate to the the Docker **Universal Control Plane**
     web UI, and navigate to the **Applications** screen. DTR should be listed

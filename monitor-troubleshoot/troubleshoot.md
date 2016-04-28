@@ -12,81 +12,61 @@ weight=10
 
 # Troubleshoot DTR
 
+## Overlay networking
 
-## Emergency access to the Trusted Registry
-
-If your authenticated or public access to the Trusted Registry UI has stopped
-working, but your Trusted Registry admin container is still running, you can add
-an
-[ambassador container](https://docs.docker.com/articles/ambassador_pattern_linking/)
-to get temporary unsecure access to it.
-
-For Trusted Registry version 1.4.3, run the following command in a Trusted Registry CLI:
+High availability in DTR depends on having overlay networking working in UCP.
+To manually test that overlay networking is working in UCP run the following
+commands on two different UCP machines.
 
 ```
-docker run --rm -it --net dtr -p 9999:80 svendowideit/ambassador dockertrustedregistry_admin_server_1 80
-```
-However, if you are running a version prior to it,  1.4.2 or earlier, then continue to run this command:
-
-```
-$ docker run --rm -it --link docker_trusted_registry_admin_server:admin -p 9999:80 svendowideit/ambassador
+docker run -it --rm --net dtr-ol --name overlay-test1 --entrypoint sh docker/dtr
+docker run -it --rm --net dtr-ol --name overlay-test2 --entrypoint ping docker/dtr -c 3 overlay-test1
 ```
 
-Either command gives you access on port `9999` on your Trusted Registry server
-`http://<dtr-host-ip>:9999`. This guide assumes that you are a member of the `docker` group, or you  have root privileges. Otherwise, you may need to add `sudo` to the previous example command.
+You can create new new overlay network for this test with `docker network create -d overaly network-name`.
+You can also use any images that contain `sh` and `ping` for this test.
 
-### SSH access to host
+If the second command succeeds, overlay networking is working.
 
-As an extra measure of safety, ensure you have SSH access to the Trusted
-Registry host before you start using it.
+## DTR doesn't come up after a Docker restart
 
-If you are hosting Trusted Registry on an EC2 host launched from the AWS
-Marketplace AMI, note that the user is `ec2-user`:
-`/path/to/private_key/id_rsa ec2-user@<dtr-dns-entry>`.
+This is a known issue with Docker restart policies when DTR is running on the same
+machine as a UCP controller. If this happens, you can simply restart the DTR replica
+from the UCP UI under "Applications". The best workaround right now is to not run
+DTR on the same node as a UCP controller.
 
+## Etcd refuses to start after a Docker restart
 
-## Client Docker Daemon diagnostics
-
-To debug client Docker daemon communication issues with the Trusted Registry,
-Docker also provides a diagnostics tool to be run on the client Docker daemon.
-
-> **Warning:** These diagnostics files may contain secrets that you need to remove before passing on, such as raw container log files, Azure storage credentials, or passwords that may be sent to non-Docker Trusted Registry containers using the `docker run -e PASSWORD=asdf` environment variable options.
-
-If you supply an administrator username and password, then the `diagnostics`
-tool also downloads additional logs and configuration data from the remote
-Trusted Registry server. Download and run this tool using the following command:
+If you see the following log message in etcd's logs after a DTR restart it means that
+your DTR replicas are on machines that don't have their clocks synchronized. Etcd requires
+synchronized clocks to function correctly.
 
 ```
-$ wget https://dhe.mycompany.com/admin/bin/diagnostics && chmod +x diagnostics
-$ sudo ./diagnostics dhe.mycompany.com > enduserDiagnostics.zip DTR
-administrator password (provide empty string if there is no admin server
-authentication):
-WARN  [1.1.0-alpha-001472_g8a9ddb4] Encountered errors running diagnostics
-errors=[Failed to copy DTR Adminserver's exported settings into ZIP output:
-"Failed to read next tar header: \"archive/tar: invalid tar header\"" Failed to
-copy logs from DTR Adminserver into ZIP output: "Failed to read next tar header:
-\"archive/tar: invalid tar header\"" error running "sestatus": "exit status 127"
-error running "dmidecode": "exit status 127"]
+2016-04-27 17:56:34.086748 W | rafthttp: the clock difference against peer aa4fdaf4c562342d is too high [8.484795885s > 1s]
 ```
 
-The zip file contains the following information:
+## Accessing the RethinkDB Admin UI
 
-- your local Docker host's `ca-certificates.crt`
-- `containers/`: the first 20 running, stopped and paused containers `docker inspect`
-  information and log files.
-- `dockerEngine/`: the local Docker daemon's `info` and `version` output
-- `dockerState/`: the local Docker daemon's container states, image states, log file, and daemon configuration file
-- `dtr/`: Remote Docker Trusted Registry services information. This directory will only be populated if the user enters a Docker Trusted Registry "admin" username and password.
-- - `dtr/logs/`: the remote Docker Trusted Registry container log files. This directory will only be populated if the user enters a Docker Trusted Registry "admin" username and password.
-- - `dtr/exportedSettings/`: the Docker Trusted Registry manager container's log files and a backup of the `/usr/local/etc/dtr` Docker Trusted Registry configuration directory. See the [export settings section](#export-settings) for more details.
-- `sysinfo/`: local Host information
-- `errors.txt`: errors and warnings encountered while running diagnostics
+ > Warning: This command will expose your database to the internet with no authentication. Use with caution.
 
-### Starting and stopping the Trusted Registry
+Run this on the UCP node that has a DTR replica with the given replica id:
 
-If you need to stop and/or start the Trusted Registry (for example, upgrading, or troubleshooting), use the following commands:
+```
+docker run --rm -it --net dtr-br -p 9999:8080 svendowideit/ambassador dtr-rethinkdb-$REPLICA_ID 8080
+```
 
-`sudo bash -c "$(docker run docker/trusted-registry stop)"`
+Options to make this more secure:
 
+* Use `-p 127.0.0.1:9999:8080` to expose the admin UI only to localhost
+* Use an SSH tunnel in combination with exposing the port only to localhost
+* Use a firewall to limit which IPs are allowed to connect
+* Use a second proxy with TLS and basic auth to provide secure access over the Internet
 
-`sudo bash -c "$(docker run docker/trusted-registry start)"`
+## Accessing etcd directly
+
+You can execute etcd commands on a UCP node hosting a DTR replica using etcdctl
+via the following docker command:
+
+```
+docker run --rm -v dtr-ca-$REPLICA_ID:/ca --net dtr-br -it --entrypoint /etcdctl docker/dtr-etcd:v2.2.4 --endpoint https://dtr-etcd-$REPLICA_ID.dtr-br:2379 --ca-file /ca/etcd/cert.pem --key-file /ca/etcd-client/key.pem --cert-file /ca/etcd-client/cert.pem
+```

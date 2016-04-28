@@ -38,6 +38,8 @@ node:
 |    in     | 443  | Web app and API client access to DTR.                                            |
 |    out    | 443  | Check if new versions are available, and send anonymous usage reports to Docker. |
 
+The inbound ports are configurable.
+
 DTR collects anonymous usage metrics, to help us improve it. These metrics
 are entirely anonymous, don’t identify your company, users, applications,
 or any other sensitive information. You can disable this on the DTR settings
