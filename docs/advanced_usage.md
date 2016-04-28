@@ -98,7 +98,7 @@ snapshot key to push their updates to the collection.
 Note that new collections created by a Docker 1.11 Engine client will have the server manage the snapshot key by default.
 To reclaim control of the snapshot key on the client, use the `notary key rotate` command without the `-r` flag.
 
-The targets key must be locally managed - to rotate the targets key, for instance in case of compromise, use the `notary key rotate targets` command without the `-r` flag.s
+The targets key must be locally managed - to rotate the targets key, for instance in case of compromise, use the `notary key rotate targets` command without the `-r` flag.
 
 ### Use a Yubikey
 
@@ -249,7 +249,7 @@ When adding the delegation, the `--all-paths` flag should be used to allow signi
 # Files and state on disk
 
 Notary stores state in its `trust_dir` directory, which is `~/.notary` by
-default or usually `~/.docker/trust` when enabling  content trust. Within this
+default or usually `~/.docker/trust` when enabling docker content trust. Within this
 directory, `trusted_certificates` stores certificates for bootstrapping trust in
 a collection, `tuf` stores TUF metadata and changelists to be applied to a GUN,
 and `private` stores private keys.
