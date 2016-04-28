@@ -112,12 +112,19 @@ To install UCP:
 Now that your UCP controller is installed, you need to license it.
 [Learn how to license your installation](license.md).
 
-## Step 6: Add controller replicas to the UCP cluster
+## Step 6: Backup the controller CAs
 
 Docker UCP has support for high-availability. For an highly available
 installation, you add more controller nodes to the UCP cluster. The controller
 nodes are replicas of each other.
 [Learn more about high-availability](../high-availability/set-up-high-availability.md).
+
+When configuring UCP for high-availability, you need to ensure the CAs running
+on each UCP controller node are interchangeable. This is done by using the same
+certificates and keys for every CA on the cluster.
+[Learn how to replicate the CAs for high availability](../high-availability/replicate-cas.md).
+
+## Step 7: Add controller replicas to the UCP cluster
 
 To add more controller nodes to the cluster, use the
 `docker/ucp join --replica` command. To find what commands and options are
@@ -155,7 +162,7 @@ For each node that you want to install as a controller replica:
     ![UCP nodes page](../images/replica-nodes.png)
 
 
-## Step 7: Add more nodes to the UCP cluster
+## Step 8: Add more nodes to the UCP cluster
 
 Now you can add additional nodes to your UCP cluster. These are the nodes that
 will be running your containers.
@@ -180,7 +187,7 @@ For each node that you want to add to your UCP cluster:
 
     ![UCP nodes page](../images/nodes-page.png)
 
-## Step 8. Download an admin user bundle
+## Step 9. Download an admin user bundle
 
 To validate that your cluster is correctly configured, you should try accessing
 the cluster with the Docker CLI client. For this, you'll need to get a client
