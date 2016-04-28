@@ -18,7 +18,7 @@ whether that node has access to the internet or not.
 The only difference when installing DTR on an offline node, is that instead
 of pulling the DTR images from Docker Hub, you use a computer that is connected
 to the internet to download a single package with all DTR images. Then you
-copy that package to the node where you’ll install DTR.
+copy that package to the nodes where you’ll install DTR.
 
 1. Get the DTR package.
 
@@ -51,7 +51,9 @@ copy that package to the node where you’ll install DTR.
 4. Install DTR.
 
     Now that the offline node has all the images needed to install UCP,
-    you can [install DTR that machine](install-dtr.md).
+    you can [install DTR that machine](install-dtr.md). Make sure to
+    also copy the images to any other nodes you want to install DTR
+    replicas onto.
 
 
 ## Where to go next

@@ -60,20 +60,14 @@ To start the migration, on the host running DTR 1.4.3, run:
 # Get the certificates used by UCP
 $ curl https://$UCP_HOST/ca > ucpca.crt
 
-# Get the certificates used by DTR 2.0
-$ docker run -it --rm \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  docker/dtr dump-certs \
-  --host $UCP_HOST --ucp-ca "$(cat ucpca.crt)" \
-  --pod-id $DTR_POD_ID > dtrca.crt
+# Get the certificates used by DTR 2.0 from the settings page
 
 # Migrate configurations, accounts, and repository metadata
 docker run -it --rm \
   -v /var/run/docker.sock:/var/run/docker.sock \
   docker/dtr migrate \
-  --host $UCP_HOST --ucp-ca "$(cat ucpca.crt)" \
-  --dtr-host https://$DTR_HOST --dtr-ca "$(cat dtrca.crt)" \
-  --pod-id $DTR_POD_ID
+  --ucp-url $UCP_HOST --ucp-ca "$(cat ucpca.crt)" \
+  --dtr-load-balancer https://$DTR_HOST --dtr-ca "$(cat dtrca.crt)"
 ```
 
 ## Step 3. Test your installation
@@ -83,17 +77,20 @@ properly configured.
 In your browser navigate to the DTR **Settings page**, and check that DTR 2.0:
 
 * Is correctly licensed,
-* Has the correct domain name configured,
 * The storage backend is correctly configured,
 * User authentication is correctly configured.
+
+You need to manually transfer the following settings:
+* Domain name
+* Certificates
 
 You should also validate that you can now push and pull images to DTR 2.0.
 
 ## Step 4. Decommission DTR 1.4.3
 
-Once you've fully tested your new installation, you can uninstall DTR 1.4.3.
-
-<!-- TODO: include instructions on how to uninstall -->
+Once you've fully tested your new installation, you can uninstall DTR 1.4.3
+by deleting `/usr/local/etc/dtr` and `/var/local/dtr` and removing all dtr
+containers.
 
 ## Where to go next
 

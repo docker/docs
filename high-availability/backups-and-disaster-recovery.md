@@ -71,16 +71,16 @@ $ curl https://$UCP_HOST/ca > ucp-ca.pem
 $ docker run -it --rm docker/dtr backup \
   --ucp-ca "$(cat ucp-ca.pem)" \
   --replica-id 8b6174866010 \
-  --username $UCP_ADMIN --password $UCP_PASSWORD \
-  --host $UCP_HOST > /tmp/backup.tar
+  --ucp-username $UCP_ADMIN --ucp-password $UCP_PASSWORD \
+  --ucp-url $UCP_HOST > /tmp/backup.tar
 ```
 
 Where:
 
 * --ucp-ca is the certificate used by UCP,
 * --replica-id is the name of the replica to backup,
-* --username, and --password are the credentials of a UCP administrator,
-* --host is the address of UCP.
+* --ucp-username, and --ucp-password are the credentials of a UCP administrator,
+* --ucp-url is the address of UCP.
 
 ## Restore DTR data
 
@@ -118,16 +118,16 @@ $ docker run -i --rm \
   -v /var/run/docker.sock:/var/run/docker.sock \
   docker/dtr restore \
   --ucp-ca "$(cat ucp-ca.pem)" \  
-  --username $UCP_ADMIN --password $UCP_PASSWORD \
-  --host $UCP_HOST --dtr-host 192.168.10.100 < /tmp/backup.tar
+  --ucp-username $UCP_ADMIN --ucp-password $UCP_PASSWORD \
+  --ucp-url $UCP_HOST --dtr-load-balancer 192.168.10.100 < /tmp/backup.tar
 ```
 
 Where:
 
 * --ucp-ca is the certificate used by UCP,
-* --username, and --password are the credentials of a UCP administrator,
-* --host is the address of UCP,
-* --dtr-host is the host to where DTR will be installed.
+* --ucp-username, and --ucp-password are the credentials of a UCP administrator,
+* --ucp-url is the address of UCP,
+* --dtr-load-balancer is the host to where DTR will be installed.
 
 
 ## Where to go next
