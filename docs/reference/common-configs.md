@@ -20,8 +20,9 @@ Notary [server](server-config.md) or [signer](signer-config.md).
 
 ## logging section (optional)
 
-The logging section sets the log level of the server.  If it is not provided
-or invalid, the signer defaults to an ERROR logging level.
+The logging section sets the log level of the server.  If it is not provided,
+the signer/server defaults to an ERROR logging level.  However if an explicit
+value was provided, it must be a valid value.
 
 Example:
 
