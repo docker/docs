@@ -26,6 +26,13 @@ cannot be adopted as quickly for consistency and compatibility reasons.
 These notes refer to the current and immediately prior releases of the
 CS Engine. For notes on older versions, see the [CS Engine prior release notes archive](prior-release-notes.md).
 
+## CS Engine 1.11.1-cs1
+(27 April 2016)
+
+In this release the CS Engine is supported on RHEL 7.2 OS
+
+Refer to the [detailed list](https://github.com/docker/docker/releases) of all changes since the release of CS Engine 1.10.3-cs3
+
 ## CS Engine 1.10.3-cs3
 (25 April 2016)
 
