@@ -19,10 +19,6 @@ The first step in installing UCP, is ensuring your
 infrastructure has all the [requirements UCP needs to run](system-requirements).
 Once that is done, use these instructions to install UCP.
 
-These installation instructions were written using Ubuntu 14.0.3 running on
-Amazon AWS, with Elastic IPs configured for all the hosts. If you're installing
-UCP on another operating system, the commands and paths might be different.
-
 ## Step 1: Install CS Docker on all nodes
 
 UCP requires you to install Docker CS Engine 1.10 or above on all nodes of
@@ -33,11 +29,13 @@ Engine.
 
 ## Step 2: Customize named volumes
 
+This step is optional.
+
 Docker UCP uses [named volumes](../architecture.md) to persist data. If you want
 to customize the volume drivers and flags of these volumes, you can create the
 volumes before installing UCP.
 
-This step is optional. If the volumes don't exist, when installing UCP they are
+If the volumes don't exist, when installing UCP they are
 created with the default volume driver and flags.
 
 
