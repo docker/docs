@@ -66,7 +66,7 @@ func readOnlyServer(t *testing.T, cache store.MetadataStore, notFoundStatus int,
 	m := mux.NewRouter()
 	handler := func(w http.ResponseWriter, r *http.Request) {
 		vars := mux.Vars(r)
-		metaBytes, err := cache.GetMeta(vars["role"], -1)
+		metaBytes, err := cache.GetMeta(vars["role"], store.NoSizeLimit)
 		if _, ok := err.(store.ErrMetaNotFound); ok {
 			w.WriteHeader(notFoundStatus)
 		} else {
@@ -111,7 +111,7 @@ func TestUpdateSucceedsEvenIfCannotWriteNewRepo(t *testing.T) {
 		require.NoError(t, err)
 
 		for r, expected := range serverMeta {
-			actual, err := repo.fileStore.GetMeta(r, -1)
+			actual, err := repo.fileStore.GetMeta(r, store.NoSizeLimit)
 			if r == role {
 				require.Error(t, err)
 				require.IsType(t, store.ErrMetaNotFound{}, err,
@@ -158,7 +158,7 @@ func TestUpdateSucceedsEvenIfCannotWriteExistingRepo(t *testing.T) {
 			require.NoError(t, err)
 
 			for r, expected := range serverMeta {
-				actual, err := repo.fileStore.GetMeta(r, -1)
+				actual, err := repo.fileStore.GetMeta(r, store.NoSizeLimit)
 				require.NoError(t, err, "problem getting repo metadata for %s", r)
 				if role == r {
 					require.False(t, bytes.Equal(expected, actual),
@@ -249,7 +249,7 @@ func TestUpdateReplacesCorruptOrMissingMetadata(t *testing.T) {
 				} else {
 					require.NoError(t, err)
 					for r, expected := range serverMeta {
-						actual, err := repo.fileStore.GetMeta(r, -1)
+						actual, err := repo.fileStore.GetMeta(r, store.NoSizeLimit)
 						require.NoError(t, err, "problem getting repo metadata for %s", role)
 						require.True(t, bytes.Equal(expected, actual),
 							"%s for %s: expected to recover after update", text, role)
@@ -298,7 +298,7 @@ func TestUpdateFailsIfServerRootKeyChangedWithoutMultiSign(t *testing.T) {
 		text, messItUp := expt.desc, expt.swizzle
 		for _, forWrite := range []bool{true, false} {
 			require.NoError(t, messItUp(repoSwizzler, data.CanonicalRootRole), "could not fuzz root (%s)", text)
-			messedUpMeta, err := repo.fileStore.GetMeta(data.CanonicalRootRole, -1)
+			messedUpMeta, err := repo.fileStore.GetMeta(data.CanonicalRootRole, store.NoSizeLimit)
 
 			if _, ok := err.(store.ErrMetaNotFound); ok { // one of the ways to mess up is to delete metadata
 
@@ -321,7 +321,7 @@ func TestUpdateFailsIfServerRootKeyChangedWithoutMultiSign(t *testing.T) {
 				// same because it has failed to update.
 				for role, expected := range origMeta {
 					if role != data.CanonicalTimestampRole && role != data.CanonicalSnapshotRole {
-						actual, err := repo.fileStore.GetMeta(role, -1)
+						actual, err := repo.fileStore.GetMeta(role, store.NoSizeLimit)
 						require.NoError(t, err, "problem getting repo metadata for %s", role)
 
 						if role == data.CanonicalRootRole {
@@ -967,7 +967,7 @@ func waysToMessUpServerNonRootPerRole(t *testing.T) map[string][]swizzleExpectat
 					keyIDs = append(keyIDs, k)
 				}
 				// add the keys from root too
-				rootMeta, err := s.MetadataCache.GetMeta(data.CanonicalRootRole, -1)
+				rootMeta, err := s.MetadataCache.GetMeta(data.CanonicalRootRole, store.NoSizeLimit)
 				require.NoError(t, err)
 
 				signedRoot := &data.SignedRoot{}
@@ -1374,7 +1374,7 @@ func TestValidateRootRotationWithOldRole(t *testing.T) {
 	// --- key is saved, but doesn't matter at all for rotation if we're already on
 	// --- the root metadata with the 3 keys)
 
-	rootBytes, err := serverSwizzler.MetadataCache.GetMeta(data.CanonicalRootRole, -1)
+	rootBytes, err := serverSwizzler.MetadataCache.GetMeta(data.CanonicalRootRole, store.NoSizeLimit)
 	require.NoError(t, err)
 	signedRoot := data.SignedRoot{}
 	require.NoError(t, json.Unmarshal(rootBytes, &signedRoot))
