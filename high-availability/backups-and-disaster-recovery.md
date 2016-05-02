@@ -20,13 +20,7 @@ The next step is creating a backup policy and disaster recovery plan.
 
 ## Backup policy
 
-Docker UCP nodes persist data using [named volumes](../architecture.md):
-
-* Controller nodes persist cluster configurations, certificates, and keys
-used to issue certificates and user bundles. This data is replicated on every
-controller node in the cluster.
-* Nodes are stateless. They only store certificates for mutual TLS, that
-can be regenerated.
+Docker UCP nodes persist data using [named volumes](../architecture.md).
 
 As part of your backup policy you should regularly create backups of the
 controller nodes. Since the nodes used for running user containers don't
@@ -46,19 +40,7 @@ To have minimal impact on your business, you should:
 * Configure UCP for high availability. This allows load-balancing user requests
 across multiple UCP controller nodes.
 
-## Backup UCP data
-
-To learn about the options available on the `docker/ucp backup` command, you can
-check the reference documentation, or run:
-
-```bash
-$ docker run --rm docker/ucp backup --help
-```
-
-When creating a backup, the resulting tar archive contains sensitive information
-like private keys. To ensure this information is kept private you should run
-the backup command with the `--passphrase` option. This encrypts
-the backup with a passphrase of your choice.
+## Backup command
 
 The example below shows how to create a backup of a UCP controller node:
 
@@ -67,14 +49,6 @@ The example below shows how to create a backup of a UCP controller node:
 $ docker run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
   docker/ucp --interactive --passphrase "secret" > /tmp/backup.tar
-
-Do you want proceed with the backup? (y/n):
-$ y
-
-INFO[0000] Temporarily Stopping local UCP containers to ensure a consistent backup
-INFO[0000] Beginning backup
-INFO[0001] Backup completed successfully
-INFO[0002] Resuming stopped UCP containers
 
 # Decrypt the backup and list its contents
 $ gpg --decrypt /tmp/backup.tar | tar --list
@@ -88,6 +62,35 @@ Enter passphrase: secret
 ./ucp-cluster-root-ca/
 # output snipped
 ```
+
+## Restore command
+
+The example below shows how to restore a UCP controller node from an existing
+backup:
+
+```bash
+$ docker run --rm -i --name ucp \
+  -v /var/run/docker.sock:/var/run/docker.sock  \
+  docker/ucp restore -i < backup.tar
+```
+
+
+## Restore your cluster
+
+Configuring UCP to have multiple controller nodes allows you tolerate a certain
+amount of node failures. If multiple nodes fail at the same time, causing the
+cluster to go down, you can use an existing backup to recover.
+
+As an example, if you have a cluster with three controller nodes, A, B, and C,
+and your most recent backup was of node A:
+
+1. Stop controllers B and C with the `stop` command,
+2. Restore controller A,
+3. Uninstall UCP from controllers B and C,
+4. Join nodes B and C to the cluster.
+
+You should now have your cluster up and running.
+
 
 ## Where to go next
 

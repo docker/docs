@@ -9,3 +9,9 @@ parent="mn_ucp"
 weight=70
 +++
 <![end-metadata]-->
+
+# Manage users in UCP
+
+This section includes the following topics:
+
+* [Manage users](manage-users.md)

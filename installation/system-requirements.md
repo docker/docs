@@ -30,22 +30,30 @@ all nodes must have:
 * Linux kernel version 3.10 or higher
 * CS Docker Engine version 1.10 or higher
 
+For highly-available installations, you also need a way to transfer files
+between hosts.
 
 ## Ports used
 
 When installing UCP on a host, make sure the following ports are open:
 
-| Hosts              | Direction | Port                | Purpose                                                     |
-|:-------------------|:---------:|:--------------------|:------------------------------------------------------------|
-| controllers        |    in     | 443  (configurable) | Web app and CLI client access to UCP.                       |
-| controllers        |    in     | 2376 (configurable) | Swarm manager accepts requests from UCP controller.         |
-| controllers, nodes |    in     | 2375                | Heartbeat for nodes, to ensure they are running.            |
-| controllers, nodes |    in     | 12376               | Proxy for TLS, provides access to UCP, Swarm, and Engine.   |
-| controller         |    in     | 12379               | Internal node configuration, cluster configuration, and HA. |
-| controller         |    in     | 12380               | Internal node configuration, cluster configuration, and HA. |
-| controller         |    in     | 12381               | Proxy for TLS, provides access to UCP.                      |
-| controller         |    in     | 12382               | Manages TLS and requests from swarm manager.                |
-| controller         |    out    | 443                 | Send anonymous usage reports to Docker.                     |
+| Hosts              | Direction | Port                | Purpose                                                                    |
+|:-------------------|:---------:|:--------------------|:---------------------------------------------------------------------------|
+| controllers        |    in     | 443  (configurable) | Web app and CLI client access to UCP.                                      |
+| controller         |    out    | 443                 | Send anonymous usage reports to Docker.                                    |
+| controllers, nodes |    in     | 2375                | Heartbeat for nodes, to ensure they are running.                           |
+| controllers        |    in     | 2376 (configurable) | Swarm manager accepts requests from UCP controller.                        |
+| controllers, nodes |  in, out  | 4789                | Overlay networking.                                                        |
+| controllers, nodes |  in, out  | 7946                | Overlay networking.                                                        |
+| controllers, nodes |    in     | 12376               | Proxy for TLS, provides access to UCP, Swarm, and Engine.                  |
+| controller         |    in     | 12379               | Internal node configuration, cluster configuration, and HA.                |
+| controller         |    in     | 12380               | Internal node configuration, cluster configuration, and HA.                |
+| controller         |    in     | 12381               | Proxy for TLS, provides access to UCP.                                     |
+| controller         |    in     | 12382               | Manages TLS and requests from swarm manager.                               |
+| controller         |    in     | 12383               | Used by the authentication storage backend.                                |
+| controller         |    in     | 12384               | Used by authentication storage backend for replication across controllers. |
+| controller         |    in     | 12385               | The port where the authentication API is exposed.                          |
+| controller         |    in     | 12386               | Used by the authentication worker.                                         |
 
 UCP collects anonymous usage metrics, to help us improve it. These metrics
 are entirely anonymous, don’t identify your company, users, applications,
