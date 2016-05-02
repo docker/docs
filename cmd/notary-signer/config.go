@@ -27,6 +27,7 @@ import (
 	"github.com/docker/notary/storage/rethinkdb"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
+	tufutils "github.com/docker/notary/tuf/utils"
 	"github.com/docker/notary/utils"
 	"github.com/spf13/viper"
 )
@@ -66,7 +67,7 @@ func parseSignerConfig(configFilePath string) (signer.Config, error) {
 	}
 
 	// setup the cryptoservices
-	cryptoServices, err := setUpCryptoservices(config, []string{notary.MySQLBackend, notary.MemoryBackend})
+	cryptoServices, err := setUpCryptoservices(config, []string{notary.MySQLBackend, notary.MemoryBackend, notary.RethinkDBBackend})
 	if err != nil {
 		return signer.Config{}, err
 	}
@@ -101,6 +102,10 @@ func setUpCryptoservices(configuration *viper.Viper, allowedBackends []string) (
 	signer.CryptoServiceIndex, error) {
 	backend := configuration.GetString("storage.backend")
 
+	if !tufutils.StrSliceContains(allowedBackends, backend) {
+		return nil, fmt.Errorf("%s is not an allowed backend, must be one of: %s", backend, allowedBackends)
+	}
+
 	var keyStore trustmanager.KeyStore
 	switch backend {
 	case notary.MemoryBackend:
@@ -120,7 +125,7 @@ func setUpCryptoservices(configuration *viper.Viper, allowedBackends []string) (
 		if err != nil {
 			return nil, err
 		}
-		s := keydbstore.NewRethinkDBKeyStore(passphraseRetriever, defaultAlias, sess)
+		s := keydbstore.NewRethinkDBKeyStore(storeConfig.DBName, passphraseRetriever, defaultAlias, sess)
 		health.RegisterPeriodicFunc("DB operational", s.CheckHealth, time.Minute)
 		keyStore = s
 	case notary.MySQLBackend, notary.SQLiteBackend:
