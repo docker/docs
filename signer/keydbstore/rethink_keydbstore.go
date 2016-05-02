@@ -19,6 +19,7 @@ import (
 type RethinkDBKeyStore struct {
 	lock             *sync.Mutex
 	sess             *gorethink.Session
+	dbName           string
 	defaultPassAlias string
 	retriever        passphrase.Retriever
 	cachedKeys       map[string]data.PrivateKey
@@ -47,13 +48,14 @@ func (g RDBPrivateKey) TableName() string {
 }
 
 // NewRethinkDBKeyStore returns a new RethinkDBKeyStore backed by a RethinkDB database
-func NewRethinkDBKeyStore(passphraseRetriever passphrase.Retriever, defaultPassAlias string, rethinkSession *gorethink.Session) *RethinkDBKeyStore {
+func NewRethinkDBKeyStore(dbName string, passphraseRetriever passphrase.Retriever, defaultPassAlias string, rethinkSession *gorethink.Session) *RethinkDBKeyStore {
 	cachedKeys := make(map[string]data.PrivateKey)
 
 	return &RethinkDBKeyStore{
 		lock:             &sync.Mutex{},
 		sess:             rethinkSession,
 		defaultPassAlias: defaultPassAlias,
+		dbName:           dbName,
 		retriever:        passphraseRetriever,
 		cachedKeys:       cachedKeys,
 	}
@@ -62,10 +64,6 @@ func NewRethinkDBKeyStore(passphraseRetriever passphrase.Retriever, defaultPassA
 // Name returns a user friendly name for the storage location
 func (rdb *RethinkDBKeyStore) Name() string {
 	return "RethinkDB"
-}
-
-func (rdb RethinkDBKeyStore) dbName() string {
-	return "notarysigner"
 }
 
 // AddKey stores the contents of a private key. Both role and gun are ignored,
@@ -97,7 +95,7 @@ func (rdb *RethinkDBKeyStore) AddKey(keyInfo trustmanager.KeyInfo, privKey data.
 		Private:         encryptedKey}
 
 	// Add encrypted private key to the database
-	_, err = gorethink.DB(rdb.dbName()).Table(rethinkPrivKey.TableName()).Insert(rethinkPrivKey).RunWrite(rdb.sess)
+	_, err = gorethink.DB(rdb.dbName).Table(rethinkPrivKey.TableName()).Insert(rethinkPrivKey).RunWrite(rdb.sess)
 	if err != nil {
 		return fmt.Errorf("failed to add private key to database: %s", privKey.ID())
 	}
@@ -121,7 +119,7 @@ func (rdb *RethinkDBKeyStore) GetKey(name string) (data.PrivateKey, string, erro
 
 	// Retrieve the RethinkDB private key from the database
 	dbPrivateKey := RDBPrivateKey{}
-	res, err := gorethink.DB(rdb.dbName()).Table(dbPrivateKey.TableName()).Filter(gorethink.Row.Field("key_id").Eq(name)).Run(rdb.sess)
+	res, err := gorethink.DB(rdb.dbName).Table(dbPrivateKey.TableName()).Filter(gorethink.Row.Field("key_id").Eq(name)).Run(rdb.sess)
 	if err != nil {
 		return nil, "", trustmanager.ErrKeyNotFound{}
 	}
@@ -176,7 +174,7 @@ func (rdb RethinkDBKeyStore) RemoveKey(keyID string) error {
 
 	// Delete the key from the database
 	dbPrivateKey := RDBPrivateKey{KeyID: keyID}
-	_, err := gorethink.DB(rdb.dbName()).Table(dbPrivateKey.TableName()).Filter(gorethink.Row.Field("key_id").Eq(keyID)).Delete().RunWrite(rdb.sess)
+	_, err := gorethink.DB(rdb.dbName).Table(dbPrivateKey.TableName()).Filter(gorethink.Row.Field("key_id").Eq(keyID)).Delete().RunWrite(rdb.sess)
 	if err != nil {
 		return fmt.Errorf("unable to delete private key from database: %s", err.Error())
 	}
@@ -188,7 +186,7 @@ func (rdb RethinkDBKeyStore) RemoveKey(keyID string) error {
 func (rdb RethinkDBKeyStore) RotateKeyPassphrase(name, newPassphraseAlias string) error {
 	// Retrieve the RethinkDB private key from the database
 	dbPrivateKey := RDBPrivateKey{KeyID: name}
-	res, err := gorethink.DB(rdb.dbName()).Table(dbPrivateKey.TableName()).Get(dbPrivateKey).Run(rdb.sess)
+	res, err := gorethink.DB(rdb.dbName).Table(dbPrivateKey.TableName()).Get(dbPrivateKey).Run(rdb.sess)
 	if err != nil {
 		return trustmanager.ErrKeyNotFound{}
 	}
@@ -226,7 +224,7 @@ func (rdb RethinkDBKeyStore) RotateKeyPassphrase(name, newPassphraseAlias string
 	// Update the database object
 	dbPrivateKey.Private = newEncryptedKey
 	dbPrivateKey.PassphraseAlias = newPassphraseAlias
-	if _, err := gorethink.DB(rdb.dbName()).Table(dbPrivateKey.TableName()).Get(RDBPrivateKey{KeyID: name}).Update(dbPrivateKey).RunWrite(rdb.sess); err != nil {
+	if _, err := gorethink.DB(rdb.dbName).Table(dbPrivateKey.TableName()).Get(RDBPrivateKey{KeyID: name}).Update(dbPrivateKey).RunWrite(rdb.sess); err != nil {
 		return err
 	}
 
@@ -240,7 +238,7 @@ func (rdb RethinkDBKeyStore) ExportKey(keyID string) ([]byte, error) {
 
 // Bootstrap sets up the database and tables
 func (rdb RethinkDBKeyStore) Bootstrap() error {
-	return rethinkdb.SetupDB(rdb.sess, rdb.dbName(), []rethinkdb.Table{
+	return rethinkdb.SetupDB(rdb.sess, rdb.dbName, []rethinkdb.Table{
 		privateKeys,
 	})
 }
@@ -249,7 +247,7 @@ func (rdb RethinkDBKeyStore) Bootstrap() error {
 func (rdb RethinkDBKeyStore) CheckHealth() error {
 	var tables []string
 	dbPrivateKey := RDBPrivateKey{}
-	res, err := gorethink.DB(rdb.dbName()).TableList().Run(rdb.sess)
+	res, err := gorethink.DB(rdb.dbName).TableList().Run(rdb.sess)
 	if err != nil {
 		return err
 	}
