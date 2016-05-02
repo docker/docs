@@ -16,11 +16,13 @@ weight=20
 Docker Universal Control Plane (UCP) is a containerized application that can be
 installed on-premises or on a cloud infrastructure.
 
+## Step 1: Validate the system requirements
+
 The first step in installing UCP, is ensuring your
 infrastructure has all the [requirements UCP needs to run](system-requirements).
-Once that is done, use these instructions to install UCP.
 
-## Step 1: Install CS Docker on all nodes
+
+## Step 2: Install CS Docker on all nodes
 
 UCP requires you to install Docker CS Engine 1.10 or above on all nodes of
 your UCP cluster.
@@ -28,7 +30,7 @@ your UCP cluster.
 For each node that you want to add to the UCP cluster, install the CS Docker
 Engine.
 
-## Step 2: Customize named volumes
+## Step 3: Customize named volumes
 
 This step is optional.
 
@@ -40,7 +42,9 @@ If the volumes don't exist, when installing UCP they are
 created with the default volume driver and flags.
 
 
-## Step 3: Customize the CA used
+## Step 4: Customize the CA used
+
+This step is optional.
 
 The UCP cluster uses TLS to secure all communications. Two Certificate
 Authorities (CA) are used for this:
@@ -69,15 +73,11 @@ If you want to use your own certificates:
     | key.pem  | Your UCP controller private key.                               |
 
 
-## Step 4: Install the UCP controller
+## Step 5: Install the UCP controller
 
 To install UCP you use the `docker/ucp` image. This image has commands to
 install, configure, and backup UCP. To find what commands and options are
-available, check the [reference documentation](../reference/install.md), or run:
-
-```bash
-$ docker run --rm -it docker/ucp --help
-```
+available, check the [reference documentation](../reference/install.md).
 
 To install UCP:
 
@@ -91,47 +91,59 @@ To install UCP:
 
     ```bash
     $ docker run --rm -it --name ucp \
-      -v /var/run/docker.sock:/var/run/docker.sock
-      docker/ucp install -i
+      -v /var/run/docker.sock:/var/run/docker.sock \
+      docker/ucp install -i \
+      --host-address <$UCP_PUBLIC_IP>
     ```
 
-    If you are using server certificates signed by an external CA, include
-    the `--external-server-cert` option at the end of the command.
+    Where:
+
+    * i, specify to run the install command interactively,
+    * host-address, is the public IP where users or a load balancer can access
+    UCP,
+    * Also, include the `--external-server-cert` flag if you're using server
+    certificates signed by an external CA.
+
+    </br>
+    When installing Docker UCP, overlay networking is automatically configured
+    for you. If you are running Docker CS Engine 1.10, or have custom
+    configurations on your Docker CS Engine, you need to restart the Docker
+    daemon at this point.
+
 
 3. Check that the UCP web application is running.
 
     In your browser, navigate to the address where you've installed UCP.
-    If you're not using your own certificates, your browser warns that UCP is
+    If you're not using an external CA, your browser warns that UCP is
     an unsafe site.
 
     ![](../images/login.png)
 
-## Step 5: License your installation
+## Step 6: License your installation
 
 Now that your UCP controller is installed, you need to license it.
 [Learn how to license your installation](license.md).
 
-## Step 6: Backup the controller CAs
+## Step 7: Backup the controller CAs
 
-Docker UCP has support for high-availability. For an highly available
-installation, you add more controller nodes to the UCP cluster. The controller
-nodes are replicas of each other.
+This step is optional.
+
+For an highly available installation, you can add more controller nodes to
+the UCP cluster. The controller nodes are replicas of each other.
 [Learn more about high-availability](../high-availability/set-up-high-availability.md).
 
-When configuring UCP for high-availability, you need to ensure the CAs running
-on each UCP controller node are interchangeable. This is done by using the same
-certificates and keys for every CA on the cluster.
+For this, you need to make the CAs on each controller node, use the same
+root certificates and keys.
 [Learn how to replicate the CAs for high availability](../high-availability/replicate-cas.md).
 
-## Step 7: Add controller replicas to the UCP cluster
 
-To add more controller nodes to the cluster, use the
-`docker/ucp join --replica` command. To find what commands and options are
-available, check the [reference documentation](../reference/join.md), or run:
+## Step 8: Add controller replicas to the UCP cluster
 
-```bash
-$ docker run --rm -it docker/ucp join --help
-```
+This step is optional.
+
+For an highly available installation, you can add more controller nodes to
+the UCP cluster. For that, use the `docker/ucp join --replica` command.
+[Learn more about the join command](../reference/join.md).
 
 For each node that you want to install as a controller replica:
 
@@ -146,13 +158,13 @@ For each node that you want to install as a controller replica:
     ```bash
     $ docker run --rm -it --name ucp \
       -v /var/run/docker.sock:/var/run/docker.sock \
-      docker/ucp join -i --replica
+      docker/ucp join -i \
+      --replica
     ```
 
 3. Repeat steps 1 and 2 on the other nodes you want to set up as replicas.
+Make sure you set up 3, 5, or 7 controllers.
 
-    For high availability, make sure to set up 3, 5, or 7 controller nodes.
-    [Learn more about high-availability](../high-availability/set-up-high-availability.md).
 
 4. Check the cluster state.
 
@@ -161,7 +173,7 @@ For each node that you want to install as a controller replica:
     ![UCP nodes page](../images/replica-nodes.png)
 
 
-## Step 8: Add more nodes to the UCP cluster
+## Step 9: Add more nodes to the UCP cluster
 
 Now you can add additional nodes to your UCP cluster. These are the nodes that
 will be running your containers.
@@ -186,7 +198,7 @@ For each node that you want to add to your UCP cluster:
 
     ![UCP nodes page](../images/nodes-page.png)
 
-## Step 9. Download an admin user bundle
+## Step 10. Download a client certificate bundle
 
 To validate that your cluster is correctly configured, you should try accessing
 the cluster with the Docker CLI client. For this, you'll need to get a client

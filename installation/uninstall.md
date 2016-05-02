@@ -18,16 +18,17 @@ Plane from a node. This command only removes the UCP containers, and doesn’t
 affect any other containers.
 
 To see what options are available in the uninstall command, check the
-[uninstall command reference](../reference/uninstall.md), or run:
-
-```bash
-$ docker run --rm -it docker/ucp uninstall --help
-```
+[uninstall command reference](../reference/uninstall.md).
 
 To uninstall Docker UCP from a cluster, you should:
 
 1. Uninstall UCP from every node joined in the cluster,
 2. Uninstall UCP from every controller node, one at a time.
+
+When you install UCP, your Docker Engine is automatically configured for
+multi-host networking. When uninstalling, you need to delete or update the
+`/etc/docker/daemon.json` file and restart the Docker daemon on each node.
+
 
 ## Example
 
@@ -74,5 +75,19 @@ You can also use flags to pass values to the uninstall command.
     Deleted: sha256:93743d5df2362466e2fe116a677ec6a4b0091bd09e889abfc9109047fcfcdebf
     ```
 
-4. Go to the UCP web application, and confirm the node was removed from the
+4. Delete the engine-discovery configuration
+
+    ```bash
+    $ sudo rm /etc/docker/daemon.json
+    ```
+
+5. Restart the Docker daemon
+
+    As an example, on a Ubuntu host
+
+    ```bash
+    $ sudo service docker restart
+    ```
+
+6. Go to the UCP web application, and confirm the node was removed from the
 cluster.

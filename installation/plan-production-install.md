@@ -17,38 +17,83 @@ Docker Universal Control Plane can be installed on-premises, or
 on a virtual private cloud. If you've never used Docker UCP before,
 you should start by [installing it on a sandbox](../install-sandbox.md).
 
-To secure your data, Docker UCP is automatically set up to use mutual TLS on
-all communications. Before you install UCP, make sure you know:
+This article explains what you need to consider before deploying
+Docker Universal Control Plane.
 
-* The fully qualified domain names (FQDN) of the hosts where you'll install UCP,
-* Their Subject Alternative Names (SANs).
+## System requirements
 
-## Fully-qualified domain names
+Before installing UCP, you should make sure all nodes of your cluster
+comply with the [system requirements](system-requirements.md).
 
-When installing Docker UCP, the installer tries to find the fully-qualified
-domain names (FQDN) of your hosts.
+## Hostname strategy
 
-If the installer can't detect this automatically, or if you want to use a
-different FQDN or IP address,  use the `--host-address` option when installing.
-This option allows you to specify the IP or hostname that UCP is going to use
-to reach that host.
+Docker UCP requires the Docker CS Engine to run. Before installing Docker CS
+Engine on the cluster nodes, you should plan for a common naming strategy.
 
-If you're installing UCP on a cloud provider such as AWS or Digital Ocean,
-you might need to create a private network for you UCP installation. In that
-case, make sure all nodes of the cluster can communicate using their private
-IPs.
+Decide if you want to use short hostnames like `engine01` or Fully Qualified
+Domain Names (FQDN) likes `engine01.docker.vm`. Independently of your choice,
+ensure your naming strategy is consistent across the cluster, since UCP uses
+the hostnames.
+
+As an example, if your cluster has 4 hosts you can name them:
+
+```bash
+engine01.docker.vm
+engine02.docker.vm
+engine03.docker.vm
+engine04.docker.vm
+```
+
+## Load balancing strategy
+
+UCP Docker UCP does not include a load-balancer. You can configure your own
+load-balancer to balance user requests across all controller nodes.
+
+If you plan on using a load balancer, you need to decide whether you are going
+to add the nodes to the load balancer using their IP address, or their FQDN.
+Independently of what you choose, it should be consistent across the  nodes.
+
+After that, you should take note of all IPs or FQDNs before starting the
+installation.
+
+## Load balancing UCP and DTR
+
+By default, both UCP and DTR use port 443. If you plan on deploying UCP and DTR,
+your load balancer needs to distinguish traffic between the two by IP address
+or port number.
+
+* If you want to configure your load balancer to listen on port 443:
+    * Use one load balancer for UCP, and another for DTR,
+    * Use the same load balancer with multiple virtual IPs.
+* Configure your load balancer to expose UCP or DTR on a port other than 443.
 
 
-## Subject alternative names (SANs)
+## Using external CAs
 
-When joining new nodes to the cluster, UCP creates leaf certificates for that
-node. Those certificates are then used by for communicating over mutual TLS
-with other members of the cluster.
+You can customize UCP to use certificates signed by an external Certificate
+Authority. If you decide to use your own CAs take in considerat that:
 
-You can specify the subject alternative names (SANs) to be used in the
-certificate. If you are installing UCP interactively you'll be prompted for
-this. You can also use the `--san` option when installing and joining nodes
-to the cluster.
+* During the installation you need to copy the ca.pem, cert.pem, and key.pem
+files across all controller hosts,
+* The ca.pem is the root CA public certificate
+* The cert.pem is the server cert plus any intermediate CA public certificates,
+* The cert.pem should have SANs for all addresses used to reach UCP,
+* The key.pem is the server private key,
+
+You can have a certificate for each controller, with a common SAN. As an
+example, on a three node cluster you can have:
+
+* engine01.docker.vm with SAN ducp.docker.vm
+* engine02.docker.vm with SAN ducp.docker.vm
+* engine03.docker.vm with SAN ducp.docker.vm
+
+## File transfer across hosts
+
+Make sure you can transfer file between the hosts on the cluster. You will
+need to replicate CAs across controller nodes.
+
+For this, you can tools like `scp` or `rsync`, or configure the hosts to use
+a network file system.
 
 
 ## Where to go next
