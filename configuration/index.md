@@ -9,3 +9,11 @@ identifier="mn_ucp_configuration"
 weight=50
 +++
 <![end-metadata]-->
+
+# UCP configuration
+
+This section includes the following topics:
+
+* [Set up container networking](multi-host-networking.md)
+* [Integrate with Docker Trusted Registry](dtr-integration.md)
+* [Configure UCP logging](configure-logs.md)

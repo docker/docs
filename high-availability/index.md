@@ -9,3 +9,11 @@ identifier="mn_ucp_high_availability"
 weight=60
 +++
 <![end-metadata]-->
+
+# Configure UCP for high availability
+
+This section includes the following topics:
+
+* [Set up high availability](set-up-high-availability.md)
+* [Replicate CAs for high availability](replicate-cas.md)
+* [Backups and disaster recovery](backups-and-disaster-recovery.md)
