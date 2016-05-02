@@ -33,13 +33,6 @@ resources, and logs.
 ![](../images/monitor-2.png)
 
 
-## Health checks
-
-When configuring your load balancer, you can use the `/load_balancer_status`
-endpoint exposed on each DTR replica. This allows you to check if the replica
-is healthy and whether it should remain on the load balancing pool or not.
-
-
 ## Where to go next
 
 * [Troubleshoot DTR](troubleshoot.md)

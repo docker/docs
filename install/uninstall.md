@@ -51,6 +51,7 @@ ucp-url (Specify the UCP host using the host[:port] format): $UCP_HOST
 ```
 
 Where:
+
 * existing-replica-id: is the id of any healthy DTR replica of that cluster,
 * replica-id: is the id of the DTR replica you want to remove,
 * ucp-username and ucp-password: are the username and password of a UCP administrator.

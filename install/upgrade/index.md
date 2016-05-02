@@ -10,3 +10,9 @@ identifier="menu_dtr_upgrade"
 weight=40
 +++
 <![end-metadata]-->
+
+# Upgrade DTR
+
+This section includes the following topics:
+
+* [Upgrade DTR](upgrade-major.md)

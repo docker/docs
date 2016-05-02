@@ -9,3 +9,9 @@ identifier="dtr_menu_user_management"
 weight=80
 +++
 <![end-metadata]-->
+
+# DTR user management
+
+This section includes the following topics:
+
+* [Permission levels](permission-levels.md)

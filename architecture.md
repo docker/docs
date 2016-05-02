@@ -12,7 +12,7 @@ weight=20
 
 # DTR architecture
 
-Docker Trusted Registry (DTR) is a Dockerized application that on a Docker
+Docker Trusted Registry (DTR) is a Dockerized application that runs on a Docker
 Universal Control Plane cluster.
 
 ![](images/architecture-1.png)

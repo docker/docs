@@ -9,8 +9,10 @@ weight=-66
 +++
 <![end-metadata]-->
 
-# CS Docker Engine
+# Docker CS Engine
+
+This section includes the following topics:
 
 * [Install CS Docker Engine](install.md)
-* [Upgrade CS Docker Engine](upgrade.md)
+* [Upgrade](upgrade.md)
 * [Release notes](release-notes/release-notes.md)

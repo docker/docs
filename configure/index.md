@@ -10,18 +10,12 @@ weight=50
 +++
 <![end-metadata]-->
 
-# Configure Docker Trusted Registry
+# Configure DTR
 
-To start, navigate to the Trusted Registry user interface (UI) > Settings, to
-view configuration options. Configuring is grouped by the following:
+This section includes the following topics:
 
-* General Settings (for example, ports and proxies)
-* Security settings
-* Storage settings
-* License
-* Authentication settings
-* Garbage collection
-* Updates
-* Docker daemon (this is set from the Trusted Registry CLI and not the UI)
-
-See the [configuration overview](configuration.md) to get started.
+* [Configuration overview](configuration.md)
+* [Configure general settings](config-general.md)
+* [Security configuration](config-security.md)
+* [Storage configuration](config-storage.md)
+* [Auth configuration](config-auth.md)

@@ -10,7 +10,7 @@ weight=100
 +++
 <![end-metadata]-->
 
-# CS Docker Engine release notes
+# Docker CS Engine release notes
 
 * [Release notes](release-notes.md)
 * [Prior release notes](prior-release-notes.md)
