@@ -12,8 +12,6 @@ weight=4
 
 This document describes the security settings you need to configure.
 
-![Security settings page</admin/settings#security>](../images/admin-settings-security.png)
-
 * *SSL Certificate*: Used to enter the hash (string) from the SSL Certificate.
 This cert must be accompanied by its private key, entered below.
 * *SSL Private Key*: The hash from the private key associated with the provided

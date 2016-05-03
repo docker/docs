@@ -12,8 +12,6 @@ weight=3
 
 This document describes the general settings you need to configure including using Trusted Content through setting up your Notary server.
 
-![Domain and Ports page</admin/settings#http>](../images/admin-settings.png)
-
 ## Configure your domain name and port settings
 
 Each setting on this page is explained in the Docker Trusted Registry UI.

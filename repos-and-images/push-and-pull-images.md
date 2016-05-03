@@ -78,6 +78,8 @@ Once an image is tagged, you can push it to Docker Trusted Registry with:
 >     simply place the CA certificate at
 >     /etc/docker/certs.d/dtr.yourdomain.com/ca.crt
 
+[Learn how to configure Docker Engine to fix this](../configure/config-security.md)
+
 ## Pull images
 
 You can retrieve an image with the

@@ -26,8 +26,6 @@ There are three authentication methods:
 * [Managed](#managed-authentication)
 * [LDAP](#ldap-authentication)
 
-![Auth settings page</admin/settings#auth>](../images/admin-settings-auth.png)
-
 > **Note**: If you have issues logging into the Docker Trusted Registry admin web interface after changing the authentication settings, you may need to [troubleshoot DTR](../monitor-troubleshoot/troubleshoot.md).
 
 ## No authentication (None)
@@ -102,7 +100,6 @@ server for the user's login-name. On OpenLDAP, it's generally `uid`, and on
 Microsoft Active Directory servers, it's `sAMAccountName`. The `ldapsearch`
 output should allow you to confirm which setting you need.
 
-![LDAP authentication settings page</admin/settings#auth>](../images/admin-settings-authentication-ldap.png)
 
 ### LDAP Configuration options
 

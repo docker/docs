@@ -158,8 +158,6 @@ YAML file (which is discussed further in this document.)
 3. Enter your configuration settings. If you're not sure what a particular parameter does, then find your driver from the following headings so that you can see a detailed explanation.
 4. Click Save. The Trusted Registry restarts so that your changes take effect.
 
-![Storage settings page</admin/settings#storage>](../images/admin-settings-storage.png)
-
 >**Note**: Changing your storage backend requires you to restart the Trusted Registry.
 
 See the [Registry configuration](http://docs.docker.com/registry/configuration/)

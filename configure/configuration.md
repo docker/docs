@@ -25,7 +25,6 @@ view configuration options. Configuring is grouped by the following:
 * Updates
 * Docker daemon (this is set from the Trusted Registry CLI and not the UI)
 
-![General settings page</configuration/settings#http>](../images/dashboard-settings-general.png)
 
 Saving changes you've made to settings will restart various services, as follows:
 

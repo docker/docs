@@ -27,7 +27,7 @@ copy that package to the nodes where you’ll install DTR.
     images. As an example, to download UCP 2.0, run:
 
     ```bash
-    $ wget https://packages.docker.com/dtr/2.0/dtr-2.0.0.tar
+    $ wget https://packages.docker.com/caas/ucp-1.1.0_dtr-2.0.0.tar.gz
     ```
 
 2. Transfer the package to the offline node.
@@ -37,7 +37,7 @@ copy that package to the nodes where you’ll install DTR.
     for this.
 
     ```bash
-    $ scp ./dtr-2.0.0.tar user@dtr-node:/tmp
+    $ scp ./ucp-1.1.0_dtr-2.0.0.tar.gz user@dtr-node:/tmp
     ```
 
 3. Load the DTR images.
@@ -46,7 +46,7 @@ copy that package to the nodes where you’ll install DTR.
     the `docker load` command, to load the images from the .tar file.
 
     ```bash
-    $ docker load < /tmp/dtr-2.0.0.tar
+    $ docker load < /tmp/ucp-1.1.0_dtr-2.0.0.tar.gz
     ```
 
 4. Install DTR.
