@@ -6,6 +6,7 @@ description = "Learn how to license your Docker Trusted Registry installation."
 keywords = ["docker, dtr, install, license"]
 [menu.main]
 parent="workw_dtr_install"
+identifier="dtr_license"
 weight=31
 +++
 <![end-metadata]-->

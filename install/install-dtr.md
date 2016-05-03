@@ -8,6 +8,7 @@ description = "Learn how to install Docker Trusted Registry for production."
 keywords = ["docker, dtr, registry, install"]
 [menu.main]
 parent="workw_dtr_install"
+identifier="dtr_install_production"
 weight=20
 +++
 <![end-metadata]-->

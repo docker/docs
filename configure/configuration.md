@@ -4,6 +4,7 @@ description = "Configuration overview for Docker Trusted Registry"
 keywords = ["docker, documentation, about, technology, understanding, enterprise, hub,  registry"]
 [menu.main]
 parent="workw_dtr_configure"
+identifier="dtr_configuration"
 weight=2
 +++
 

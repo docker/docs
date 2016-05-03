@@ -6,6 +6,7 @@ description = "Commercially supported Docker Engine release notes"
 keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry, Commercially Supported Docker Engine, release notes"]
 [menu.main]
 parent="menu_csengine_release_notes"
+identifier="csengine_release_notes"
 weight=0
 +++
 <![end-metadata]-->

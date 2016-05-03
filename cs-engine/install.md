@@ -7,6 +7,7 @@ description = "Learn how to install the commercially supported version of Docker
 keywords = ["docker, engine, dtr, install"]
 [menu.main]
 parent="menu_csengine"
+identifier="csengine_install"
 weight=0
 +++
 <![end-metadata]-->

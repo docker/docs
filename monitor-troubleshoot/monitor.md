@@ -5,6 +5,7 @@ description = "Learn how to monitor your DTR installation."
 keywords = ["docker, registry, monitor, troubleshoot"]
 [menu.main]
 parent="dtr_menu_monitor_troubleshoot"
+identifier="dtr_monitor"
 weight=0
 +++
 <![end-metadata]-->

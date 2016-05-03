@@ -5,6 +5,7 @@ description = "Learn how to push and pull images from your repositories on Docke
 keywords = ["docker, registry, management, repository"]
 [menu.main]
 parent="dtr_menu_repos_and_images"
+identifier="dtr_push_pull_images"
 weight=10
 +++
 <![end-metadata]-->

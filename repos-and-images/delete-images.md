@@ -6,6 +6,7 @@ description = "Learn how to delete images from your repositories on Docker Trust
 keywords = ["docker, registry, management, repository, delete, image"]
 [menu.main]
 parent="dtr_menu_repos_and_images"
+identifier="dtr_delete_images"
 weight=20
 +++
 <![end-metadata]-->

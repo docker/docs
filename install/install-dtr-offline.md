@@ -5,6 +5,7 @@ description = "Learn how to install Docker Trusted Registry on a machine with no
 keywords = ["docker, registry, install, offline"]
 [menu.main]
 parent="workw_dtr_install"
+identifier="dtr_install_offline"
 weight=30
 +++
 <![end-metadata]-->

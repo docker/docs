@@ -4,6 +4,7 @@ description = "Configure general settings for Docker Trusted Registry"
 keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, general, domain name, HTTP, HTTPS ports, Notary, registry"]
 [menu.main]
 parent="workw_dtr_configure"
+identifier="dtr_configure_general"
 weight=3
 +++
 
