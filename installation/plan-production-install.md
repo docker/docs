@@ -71,7 +71,7 @@ or port number.
 ## Using external CAs
 
 You can customize UCP to use certificates signed by an external Certificate
-Authority. If you decide to use your own CAs take in considerat that:
+Authority. If you decide to use your own CAs take in consideration that:
 
 * During the installation you need to copy the ca.pem, cert.pem, and key.pem
 files across all controller hosts,
