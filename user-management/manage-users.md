@@ -6,6 +6,7 @@ description = "Manage and authorize users"
 keywords = ["authorize, authentication, users, teams, UCP, Docker, objects"]
 [menu.main]
 parent="mn_ucp_user_management"
+identifier="ucp_manage_users"
 +++
 <![end-metadata]-->
 

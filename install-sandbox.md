@@ -6,6 +6,7 @@ description = "Evaluation installation"
 keywords = ["tbd, tbd"]
 [menu.main]
 parent="mn_ucp"
+identifier="ucp_evaluate_sandbox"
 weight=10
 +++
 <![end-metadata]-->

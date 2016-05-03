@@ -6,6 +6,7 @@ description = "Learn how to install Docker Universal Control Plane on production
 keywords = ["Universal Control Plane, UCP, install"]
 [menu.main]
 parent="mn_ucp_installation"
+identifier="ucp_install_production"
 weight=20
 +++
 <![end-metadata]-->

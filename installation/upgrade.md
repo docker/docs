@@ -5,8 +5,8 @@ title = "Upgrade UCP"
 description = "Learn how to upgrade Docker Universal Control Plane with minimal impact to your users."
 keywords = ["Docker, UCP, upgrade, update"]
 [menu.main]
-identifier="ucp_upgrade_installation"
 parent="mn_ucp_installation"
+identifier="ucp_upgrade_installation"
 weight=50
 +++
 <![end-metadata]-->

@@ -6,6 +6,7 @@ keywords= ["fingerprint, ucp"]
 keywords= ["tool, reference, ucp"]
 
 parent = "ucp_ref"
+identifier="ucp_ref_fingerprint"
 +++
 
 # docker/ucp fingerprint

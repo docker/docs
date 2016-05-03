@@ -6,6 +6,7 @@ description = "Learn about the Docker Universal Control Plane architecture, and 
 keywords = ["docker, ucp, install, checklist"]
 [menu.main]
 parent="mn_ucp_installation"
+identifier="ucp_plan_production_install"
 weight=10
 +++
 <![end-metadata]-->

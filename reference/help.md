@@ -3,8 +3,8 @@ title = "help"
 description = "Shows a list of available commands for Docker Universal Control Plane."
 keywords= ["help, ucp"]
 [menu.main]
-identifier="ucp_help"
 parent = "ucp_ref"
+identifier="ucp_ref_help"
 +++
 
 # docker/ucp help

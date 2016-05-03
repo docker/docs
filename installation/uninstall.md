@@ -5,6 +5,7 @@ description = "Learn how to uninstall a Docker Universal Control Plane cluster."
 keywords = ["docker, ucp, uninstall"]
 [menu.main]
 parent="mn_ucp_installation"
+identifier="ucp_uninstall"
 weight=60
 +++
 <![end-metadata]-->

@@ -6,6 +6,7 @@ description = "Learn how to deploy containerized applications on a cluster, with
 keywords = ["deploy, application"]
 [menu.main]
 parent="mn_ucp_applications"
+identifier="ucp_deploy_cli"
 weight=10
 +++
 <![end-metadata]-->

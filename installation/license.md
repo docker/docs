@@ -5,6 +5,7 @@ description = "Learn how to license your Docker Universal Control Plane installa
 keywords = ["Universal Control Plane, UCP, install, license"]
 [menu.main]
 parent="mn_ucp_installation"
+identifier="ucp_license"
 weight=40
 +++
 <![end-metadata]-->

@@ -3,8 +3,8 @@ title = "install"
 description = "Install Docker Universal Control Plane."
 keywords= ["install, ucp"]
 [menu.main]
-identifier = "ucp_install"
 parent = "ucp_ref"
+identifier = "ucp_ref_install"
 +++
 
 # docker/ucp install

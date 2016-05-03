@@ -6,6 +6,7 @@ keywords= ["ectd, key, value, store, ucp"]
 description="Learn how to troubleshoot your Docker Universal Control Plane cluster."
 [menu.main]
 parent="mn_monitor_ucp"
+identifier="ucp_troubleshoot_configurations"
 weight=20
 +++
 <![end-metadata]-->
