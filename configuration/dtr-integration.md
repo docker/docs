@@ -6,6 +6,7 @@ description = "Integrate UCP with Docker Trusted Registry"
 keywords = ["trusted, registry, integrate, UCP, DTR"]
 [menu.main]
 parent="mn_ucp_configuration"
+identifier="ucp_integrate_dtr"
 weight=10
 +++
 <![end-metadata]-->

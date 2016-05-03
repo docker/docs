@@ -6,6 +6,7 @@ keywords= ["networking, kv, engine-discovery, ucp"]
 description="Docker Universal Control Plane"
 [menu.main]
 parent="mn_ucp_configuration"
+identifier="ucp_configure_networking"
 weight=0
 +++
 <![end-metadata]-->

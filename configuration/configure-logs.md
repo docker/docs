@@ -5,6 +5,7 @@ description = "Learn how to configure Docker Universal Control Plane to store yo
 keywords = ["docker, ucp, integrate, logs"]
 [menu.main]
 parent="mn_ucp_configuration"
+identifier="ucp_configure_logs"
 weight=20
 +++
 <![end-metadata]-->

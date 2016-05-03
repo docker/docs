@@ -4,6 +4,7 @@ keywords= ["dump-certs, ucp"]
 description = "Dump out public certificates"
 [menu.main]
 parent ="ucp_ref"
+identifier="ucp_ref_dump_certs"
 +++
 
 # docker/ucp dump-certs

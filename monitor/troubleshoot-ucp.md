@@ -5,6 +5,7 @@ keywords= ["docker, ucp, troubleshoot"]
 description="Learn how to troubleshoot your Docker Universal Control Plane cluster."
 [menu.main]
 parent="mn_monitor_ucp"
+identifier="ucp_troubleshoot_cluster"
 weight=10
 +++
 <![end-metadata]-->

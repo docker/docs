@@ -5,6 +5,7 @@ description="Docker Universal Control plane has support for high availability. L
 keywords= ["replica, controller, availability, high, ucp"]
 [menu.main]
 parent="mn_ucp_high_availability"
+identifier="ucp_replicate_cas"
 weight=10
 +++
 <![end-metadata]-->
