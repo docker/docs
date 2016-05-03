@@ -5,7 +5,7 @@ description = "Docker Trusted Registry"
 keywords = ["docker, documentation, about, technology, understanding, enterprise, hub,  registry"]
 [menu.main]
 identifier="workw_dtr"
-weight=-65
+weight=-63
 +++
 <![end-metadata]-->
 
