@@ -21,39 +21,39 @@ computer that is connected to the internet to download a single package with
 all the images. Then you copy that package to the host where you’ll install UCP.
 
 
-## Step 1. Download UCP
+1. Get the UCP package.
 
-Use a computer with internet access to download a single package with all UCP
-images. As an example, to download UCP 1.1, run:
+    Use a computer with internet access to download a single package with all UCP
+    images. As an example, to download UCP 1.1, run:
 
-```bash
-$ wget https://packages.docker.com/ucp/1.0/ucp-1.1.tar
-```
+    ```bash
+    $ wget https://packages.docker.com/caas/ucp-1.1.0_dtr-2.0.0.tar.gz
+    ```
 
-## Step 2. Transfer UCP
+2. Transfer the package to the offline node.
 
-Now that you have the UCP package in your machine, you can transfer it to the
-host where you'll be installing Docker UCP. You can use the Secure Copy command
-for this:
+    Now that you have the UCP package in your machine, you can transfer it to the
+    host where you'll be installing Docker UCP. You can use the Secure Copy command
+    for this:
 
-```bash
-$ scp ./ucp-1.1.tar user@ucp-host:/tmp
-```
+    ```bash
+    $ scp ./ucp-1.1.0_dtr-2.0.0.tar.gz user@ucp-host:/tmp
+    ```
 
-## Step 3. Load the UCP images
+3. Load the UCP images.
 
-Once the UCP package is transferred to the host, you can use the `docker load`
-command, to load the images from the tar archive. On the host were you are
-going to install UCP, run:
+    Once the UCP package is transferred to the host, you can use the `docker load`
+    command, to load the images from the tar archive. On the host were you are
+    going to install UCP, run:
 
-```bash
-$ docker load < /tmp/ucp-1.1.tar
-```
+    ```bash
+    $ docker load < /tmp/ucp-1.1.0_dtr-2.0.0.tar.gz
+    ```
 
-## Step 4. Install Docker UCP
+4. Install Docker UCP.
 
-Now that the offline host has all the images needed to install UCP,
-you can [install Docker UCP that machine](install-production.md).
+    Now that the offline host has all the images needed to install UCP,
+    you can [install Docker UCP that machine](install-production.md).
 
 
 ## Where to go next
