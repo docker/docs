@@ -14,6 +14,8 @@ weight=110
 
 ## Version 1.1.0
 
+(4 May 2016)
+
 **Features**
 
 * Core
