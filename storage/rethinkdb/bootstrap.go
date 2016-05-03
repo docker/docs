@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/dancannon/gorethink"
+	"github.com/Sirupsen/logrus"
+	"gopkg.in/dancannon/gorethink.v2"
 )
 
 func makeDB(session *gorethink.Session, name string) error {
@@ -16,7 +17,6 @@ func makeDB(session *gorethink.Session, name string) error {
 
 		return err
 	}
-	// Note: Wait() not supported by RethinkDB 2.3+
 	resp, err := gorethink.DB(name).Wait().Run(session)
 	if resp != nil {
 		resp.Close()
@@ -41,7 +41,6 @@ func (t Table) term(dbName string) gorethink.Term {
 }
 
 func (t Table) wait(session *gorethink.Session, dbName string) error {
-	// Note: Wait() not supported by RethinkDB 2.3+
 	resp, err := t.term(dbName).Wait().Run(session)
 
 	if resp != nil {
@@ -58,6 +57,7 @@ func (t Table) create(session *gorethink.Session, dbName string, numReplicas uin
 	}
 
 	if _, err := gorethink.DB(dbName).TableCreate(t.Name, createOpts).RunWrite(session); err != nil {
+		logrus.Debugf("error when creating database: %s", err)
 		if !strings.Contains(err.Error(), "already exists") {
 			return fmt.Errorf("unable to run table creation: %s", err)
 		}
@@ -66,6 +66,10 @@ func (t Table) create(session *gorethink.Session, dbName string, numReplicas uin
 	reconfigureOpts := gorethink.ReconfigureOpts{
 		Shards:   1,
 		Replicas: numReplicas,
+	}
+
+	if err := t.wait(session, dbName); err != nil {
+		return fmt.Errorf("unable to wait for table to be ready after creation: %s", err)
 	}
 
 	if _, err := t.term(dbName).Reconfigure(reconfigureOpts).RunWrite(session); err != nil {

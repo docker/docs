@@ -7,9 +7,9 @@ import (
 	"sort"
 	"time"
 
-	"github.com/dancannon/gorethink"
 	"github.com/docker/notary/storage/rethinkdb"
 	"github.com/docker/notary/tuf/data"
+	"gopkg.in/dancannon/gorethink.v2"
 )
 
 // RDBTUFFile is a tuf file record

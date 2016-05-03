@@ -6,13 +6,13 @@ import (
 	"sync"
 	"time"
 
-	"github.com/dancannon/gorethink"
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/storage/rethinkdb"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/utils"
 	jose "github.com/dvsekhvalnov/jose2go"
+	"gopkg.in/dancannon/gorethink.v2"
 )
 
 // RethinkDBKeyStore persists and manages private keys on a RethinkDB database
