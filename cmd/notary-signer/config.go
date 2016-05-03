@@ -14,7 +14,6 @@ import (
 	"google.golang.org/grpc/credentials"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/dancannon/gorethink"
 	"github.com/docker/distribution/health"
 	"github.com/docker/notary"
 	"github.com/docker/notary/cryptoservice"
@@ -29,6 +28,7 @@ import (
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/utils"
 	"github.com/spf13/viper"
+	"gopkg.in/dancannon/gorethink.v2"
 )
 
 const (

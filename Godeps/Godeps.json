@@ -1,6 +1,7 @@
 {
 	"ImportPath": "github.com/docker/notary",
-	"GoVersion": "go1.6.1",
+	"GoVersion": "go1.6",
+	"GodepVersion": "v62",
 	"Packages": [
 		"./..."
 	],
@@ -180,24 +181,24 @@
 			"Rev": "71acacd42f85e5e82f70a55327789582a5200a90"
 		},
 		{
-			"ImportPath": "github.com/dancannon/gorethink",
-			"Comment": "v1.4.0",
-			"Rev": "ef48c048b4f1f4d923de4197e78c1b206c14fa4c"
+			"ImportPath": "gopkg.in/dancannon/gorethink.v2",
+			"Comment": "v2.0.0",
+			"Rev": "ad28ba0b1cbf0aa5bbae1ea71941564cc08abfe4"
 		},
 		{
-			"ImportPath": "github.com/dancannon/gorethink/encoding",
-			"Comment": "v1.4.0",
-			"Rev": "ef48c048b4f1f4d923de4197e78c1b206c14fa4c"
+			"ImportPath": "gopkg.in/dancannon/gorethink.v2/encoding",
+			"Comment": "v2.0.0",
+			"Rev": "ad28ba0b1cbf0aa5bbae1ea71941564cc08abfe4"
 		},
 		{
-			"ImportPath": "github.com/dancannon/gorethink/ql2",
-			"Comment": "v1.4.0",
-			"Rev": "ef48c048b4f1f4d923de4197e78c1b206c14fa4c"
+			"ImportPath": "gopkg.in/dancannon/gorethink.v2/ql2",
+			"Comment": "v2.0.0",
+			"Rev": "ad28ba0b1cbf0aa5bbae1ea71941564cc08abfe4"
 		},
 		{
-			"ImportPath": "github.com/dancannon/gorethink/types",
-			"Comment": "v1.4.0",
-			"Rev": "ef48c048b4f1f4d923de4197e78c1b206c14fa4c"
+			"ImportPath": "gopkg.in/dancannon/gorethink.v2/types",
+			"Comment": "v2.0.0",
+			"Rev": "ad28ba0b1cbf0aa5bbae1ea71941564cc08abfe4"
 		},
 		{
 			"ImportPath": "github.com/denisenkom/go-mssqldb",
