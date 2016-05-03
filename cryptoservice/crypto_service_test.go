@@ -15,6 +15,7 @@ import (
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
+	"github.com/docker/notary/tuf/testutils/interfaces"
 )
 
 var algoToSigType = map[string]data.SigAlgorithm{
@@ -399,4 +400,12 @@ func TestCryptoServiceWithNonEmptyGUN(t *testing.T) {
 
 func TestCryptoServiceWithEmptyGUN(t *testing.T) {
 	testCryptoService(t, "")
+}
+
+// CryptoSigner conforms to the signed.CryptoService interface behavior
+func TestCryptoSignerInterfaceBehavior(t *testing.T) {
+	cs := NewCryptoService(trustmanager.NewKeyMemoryStore(passphraseRetriever))
+	interfaces.EmptyCryptoServiceInterfaceNormalBehaviorTests(t, cs)
+	interfaces.CreateKeyCryptoServiceInterfaceNormalBehaviorTests(t, cs, data.ECDSAKey)
+	interfaces.AddKeyCryptoServiceInterfaceNormalBehaviorTests(t, cs, data.ECDSAKey)
 }

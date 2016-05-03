@@ -18,6 +18,7 @@ import (
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
+	"github.com/docker/notary/tuf/testutils/interfaces"
 	"github.com/stretchr/testify/require"
 	"golang.org/x/net/context"
 )
@@ -148,6 +149,14 @@ func TestGetPrivateKeyAndSignWithExistingKey(t *testing.T) {
 	err = signed.Verifiers[data.ECDSASignature].Verify(
 		data.PublicKeyFromPrivate(key), sig, msg)
 	require.NoError(t, err)
+}
+
+// Signer conforms to the signed.CryptoService interface behavior
+func TestCryptoSignerInterfaceBehavior(t *testing.T) {
+	signer := setUpSigner(t, trustmanager.NewKeyMemoryStore(ret))
+	interfaces.EmptyCryptoServiceInterfaceNormalBehaviorTests(t, &signer)
+	interfaces.CreateKeyCryptoServiceInterfaceNormalBehaviorTests(t, &signer, data.ECDSAKey)
+	// can't test AddKey, because the signer does not support adding keys
 }
 
 type StubClientFromServers struct {
