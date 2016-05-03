@@ -5,6 +5,7 @@ description = "Learn how to access Docker Universal Control Plane from the web b
 keywords = ["docker, ucp, web, administration"]
 [menu.main]
 parent="mn_ucp_access"
+identifier="ucp_web_access"
 weight=0
 +++
 <![end-metadata]-->

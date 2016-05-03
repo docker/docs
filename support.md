@@ -5,6 +5,7 @@ description="Your Docker subscription gives you access to prioritized support. Y
 keywords = ["Docker, support", "help"]
 [menu.main]
 parent="mn_ucp"
+identifier="ucp_support"
 weight=100
 +++
 <![end-metadata]-->

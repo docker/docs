@@ -5,6 +5,7 @@ description = "Learn how to access Docker Universal Control Plane from the CLI."
 keywords = ["docker, ucp, cli, administration"]
 [menu.main]
 parent="mn_ucp_access"
+identifier="ucp_cli_access"
 weight=10
 +++
 <![end-metadata]-->

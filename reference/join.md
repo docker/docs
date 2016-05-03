@@ -3,8 +3,8 @@ title = "join"
 keywords= ["join, ucp"]
 description = "Joins a node to an existing Docker Universal Control Plane cluster."
 [menu.main]
-identifier = "ucp_join"
 parent = "ucp_ref"
+identifier = "ucp_ref_join"
 +++
 
 # docker/ucp join

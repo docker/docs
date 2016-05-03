@@ -3,8 +3,8 @@ title = "upgrade"
 description = "Upgrade Docker Universal Control Plane."
 keywords= ["docker, ucp, upgrade "]
 [menu.main]
-identifier = "ucp_upgrade"
 parent = "ucp_ref"
+identifier = "ucp_ref_upgrade"
 +++
 
 # docker/ucp upgrade
