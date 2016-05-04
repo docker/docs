@@ -89,7 +89,12 @@ func getStore(configuration *viper.Viper, hRegister healthRegister) (
 		if err != nil {
 			return nil, err
 		}
-		sess, err = rethinkdb.Connection(storeConfig.CA, storeConfig.Source)
+		tlsOpts := tlsconfig.Options{
+			CAFile:   storeConfig.CA,
+			CertFile: storeConfig.Cert,
+			KeyFile:  storeConfig.Key,
+		}
+		sess, err = rethinkdb.Connection(tlsOpts, storeConfig.Source)
 		if err != nil {
 			return nil, fmt.Errorf("Error starting %s driver: %s", backend, err.Error())
 		}
