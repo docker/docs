@@ -62,8 +62,8 @@ func (s *KeyManagementServer) DeleteKey(ctx context.Context, keyID *pb.KeyID) (*
 	logger := ctxu.GetLogger(ctx)
 
 	if err != nil {
-		logger.Errorf("DeleteKey: key %s not found", keyID.ID)
-		return nil, grpc.Errorf(codes.NotFound, "key %s not found", keyID.ID)
+		logger.Debugf("DeleteKey: key %s not found", keyID.ID)
+		return &pb.Void{}, nil
 	}
 
 	err = service.RemoveKey(keyID.ID)
@@ -71,8 +71,8 @@ func (s *KeyManagementServer) DeleteKey(ctx context.Context, keyID *pb.KeyID) (*
 	if err != nil {
 		switch err {
 		case keys.ErrInvalidKeyID:
-			logger.Errorf("DeleteKey: key %s not found", keyID.ID)
-			return nil, grpc.Errorf(codes.NotFound, "key %s not found", keyID.ID)
+			logger.Debugf("DeleteKey: key %s not found", keyID.ID)
+			return &pb.Void{}, nil
 		default:
 			logger.Error("DeleteKey: deleted key ", keyID.ID)
 			return nil, grpc.Errorf(codes.Internal, "Key deletion for KeyID %s failed", keyID.ID)

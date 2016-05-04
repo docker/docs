@@ -405,7 +405,15 @@ func TestCryptoServiceWithEmptyGUN(t *testing.T) {
 // CryptoSigner conforms to the signed.CryptoService interface behavior
 func TestCryptoSignerInterfaceBehavior(t *testing.T) {
 	cs := NewCryptoService(trustmanager.NewKeyMemoryStore(passphraseRetriever))
-	interfaces.EmptyCryptoServiceInterfaceNormalBehaviorTests(t, cs)
-	interfaces.CreateKeyCryptoServiceInterfaceNormalBehaviorTests(t, cs, data.ECDSAKey)
-	interfaces.AddKeyCryptoServiceInterfaceNormalBehaviorTests(t, cs, data.ECDSAKey)
+	interfaces.EmptyCryptoServiceInterfaceBehaviorTests(t, cs)
+	interfaces.CreateGetKeyCryptoServiceInterfaceBehaviorTests(t, cs, data.ECDSAKey, true)
+
+	cs = NewCryptoService(trustmanager.NewKeyMemoryStore(passphraseRetriever))
+	interfaces.CreateListKeyCryptoServiceInterfaceBehaviorTests(t, cs, data.ECDSAKey)
+
+	cs = NewCryptoService(trustmanager.NewKeyMemoryStore(passphraseRetriever))
+	interfaces.AddGetKeyCryptoServiceInterfaceBehaviorTests(t, cs, data.ECDSAKey)
+
+	cs = NewCryptoService(trustmanager.NewKeyMemoryStore(passphraseRetriever))
+	interfaces.AddListKeyCryptoServiceInterfaceBehaviorTests(t, cs, data.ECDSAKey)
 }
