@@ -15,7 +15,7 @@ Work through this page to configure Git and a repository you'll use throughout
 the Contributor Guide. The work you do further in the guide, depends on the work
 you do here.
 
-## Fork and clone the Docker code
+## Task 1. Fork and clone the Docker code
 
 Before contributing, you first fork the Docker code repository. A fork copies
 a repository at a particular point in time. GitHub tracks for you where a fork
@@ -55,40 +55,52 @@ target="_blank">docker/docker repository</a>.
 
 5. Open a terminal window on your local host and change to your home directory.
 
-        $ cd ~
+    ```bash
+    $ cd ~
+    ```
 
     In Windows, you'll work in your Docker Quickstart Terminal window instead of
     Powershell or a `cmd` window.
 
 6. Create a `repos` directory.
 
-        $ mkdir repos
+    ```bash
+    $ mkdir repos
+    ```
 
 7. Change into your `repos` directory.
 
-        $ cd repos
+    ```bash
+    $ cd repos
+    ```
 
 8. Clone the fork to your local host into a repository called `docker-fork`.
 
-        $ git clone https://github.com/moxiegirl/docker.git docker-fork
+    ```bash
+    $ git clone https://github.com/moxiegirl/docker.git docker-fork
+    ```
 
     Naming your local repo `docker-fork` should help make these instructions
     easier to follow; experienced coders don't typically change the name.
 
 9. Change directory into your new `docker-fork` directory.
 
-        $ cd docker-fork
+    ```bash
+    $ cd docker-fork
+    ```
 
     Take a moment to familiarize yourself with the repository's contents. List
     the contents.
 
-##  Set your signature and an upstream remote
+##  Task 2. Set your signature and an upstream remote
 
 When you contribute to Docker, you must certify you agree with the
 <a href="http://developercertificate.org/" target="_blank">Developer Certificate of Origin</a>.
 You indicate your agreement by signing your `git` commits like this:
 
-    Signed-off-by: Pat Smith <pat.smith@email.com>
+```
+Signed-off-by: Pat Smith <pat.smith@email.com>
+```
 
 To create a signature, you configure your username and email address in Git.
 You can set these globally or locally on just your `docker-fork` repository.
@@ -105,45 +117,57 @@ To configure your username, email, and add a remote:
 
 1. Change to the root of your `docker-fork` repository.
 
-        $ cd docker-fork
+    ```bash
+    $ cd docker-fork
+    ```
 
 2. Set your `user.name` for the repository.
 
-        $ git config --local user.name "FirstName LastName"
+    ```bash
+    $ git config --local user.name "FirstName LastName"
+    ```
 
 3. Set your `user.email` for the repository.
 
-        $ git config --local user.email "emailname@mycompany.com"
+    ```bash
+    $ git config --local user.email "emailname@mycompany.com"
+    ```
 
 4. Set your local repo to track changes upstream, on the `docker` repository.
 
-        $ git remote add upstream https://github.com/docker/docker.git
+    ```bash
+    $ git remote add upstream https://github.com/docker/docker.git
+    ```
 
 5. Check the result in your `git` configuration.
 
-        $ git config --local -l
-        core.repositoryformatversion=0
-        core.filemode=true
-        core.bare=false
-        core.logallrefupdates=true
-        remote.origin.url=https://github.com/moxiegirl/docker.git
-        remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
-        branch.master.remote=origin
-        branch.master.merge=refs/heads/master
-        user.name=Mary Anthony
-        user.email=mary@docker.com
-        remote.upstream.url=https://github.com/docker/docker.git
-        remote.upstream.fetch=+refs/heads/*:refs/remotes/upstream/*
+    ```bash
+    $ git config --local -l
+    core.repositoryformatversion=0
+    core.filemode=true
+    core.bare=false
+    core.logallrefupdates=true
+    remote.origin.url=https://github.com/moxiegirl/docker.git
+    remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+    branch.master.remote=origin
+    branch.master.merge=refs/heads/master
+    user.name=Mary Anthony
+    user.email=mary@docker.com
+    remote.upstream.url=https://github.com/docker/docker.git
+    remote.upstream.fetch=+refs/heads/*:refs/remotes/upstream/*
+    ```
 
 	To list just the remotes use:
 
-        $ git remote -v
-        origin	https://github.com/moxiegirl/docker.git (fetch)
-        origin	https://github.com/moxiegirl/docker.git (push)
-        upstream	https://github.com/docker/docker.git (fetch)
-        upstream	https://github.com/docker/docker.git (push)
+    ```bash
+    $ git remote -v
+    origin	https://github.com/moxiegirl/docker.git (fetch)
+    origin	https://github.com/moxiegirl/docker.git (push)
+    upstream	https://github.com/docker/docker.git (fetch)
+    upstream	https://github.com/docker/docker.git (push)
+    ```
 
-## Create and push a branch
+## Task 3. Create and push a branch
 
 As you change code in your fork, make your changes on a repository branch.
 The branch name should reflect what you are working on. In this section, you
@@ -155,26 +179,34 @@ the branch to your fork on GitHub:
 
 1. Open a terminal and go to the root of your `docker-fork`.
 
-        $ cd docker-fork
+    ```bash
+    $ cd docker-fork
+    ```
 
 2. Create a `dry-run-test` branch.
 
-        $ git checkout -b dry-run-test
+    ```bash
+    $ git checkout -b dry-run-test
+    ```
 
     This command creates the branch and switches the repository to it.
 
 3. Verify you are in your new branch.
 
-        $ git branch
-        * dry-run-test
-          master
+    ```bash
+    $ git branch
+    * dry-run-test
+      master
+    ```
 
     The current branch has an * (asterisk) marker. So, these results shows you
     are on the right branch.
 
 4. Create a `TEST.md` file in the repository's root.
 
-        $ touch TEST.md
+    ```bash
+    $ touch TEST.md
+    ```
 
 5. Edit the file and add your email and location.
 
@@ -186,30 +218,36 @@ the branch to your fork on GitHub:
 
 7. Check the status of your branch.
 
-        $ git status
-        On branch dry-run-test
-        Untracked files:
-          (use "git add <file>..." to include in what will be committed)
+    ```bash
+    $ git status
+    On branch dry-run-test
+    Untracked files:
+      (use "git add <file>..." to include in what will be committed)
 
-            TEST.md
+        TEST.md
 
-        nothing added to commit but untracked files present (use "git add" to track)
+    nothing added to commit but untracked files present (use "git add" to track)
+    ```
 
 	You've only changed the one file. It is untracked so far by git.
 
 8. Add your file.
 
-        $ git add TEST.md
+    ```bash
+    $ git add TEST.md
+    ```
 
     That is the only _staged_ file. Stage is fancy word for work that Git is
     tracking.
 
 9. Sign and commit your change.
 
-        $ git commit -s -m "Making a dry run test."
-        [dry-run-test 6e728fb] Making a dry run test
-         1 file changed, 1 insertion(+)
-         create mode 100644 TEST.md
+    ```
+    $ git commit -s -m "Making a dry run test."
+    [dry-run-test 6e728fb] Making a dry run test
+     1 file changed, 1 insertion(+)
+     create mode 100644 TEST.md
+    ```
 
     Commit messages should have a short summary sentence of no more than 50
     characters. Optionally, you can also include a more detailed explanation
@@ -218,20 +256,24 @@ the branch to your fork on GitHub:
 
 8. Push your changes to GitHub.
 
-        $ git push --set-upstream origin dry-run-test
-        Username for 'https://github.com': moxiegirl
-        Password for 'https://moxiegirl@github.com':
+    ```bash
+    $ git push --set-upstream origin dry-run-test
+    Username for 'https://github.com': moxiegirl
+    Password for 'https://moxiegirl@github.com':
+    ```
 
     Git prompts you for your GitHub username and password. Then, the command
     returns a result.
 
-        Counting objects: 13, done.
-        Compressing objects: 100% (2/2), done.
-        Writing objects: 100% (3/3), 320 bytes | 0 bytes/s, done.
-        Total 3 (delta 1), reused 0 (delta 0)
-        To https://github.com/moxiegirl/docker.git
-         * [new branch]      dry-run-test -> dry-run-test
-        Branch dry-run-test set up to track remote branch dry-run-test from origin.
+    ```bash
+    Counting objects: 13, done.
+    Compressing objects: 100% (2/2), done.
+    Writing objects: 100% (3/3), 320 bytes | 0 bytes/s, done.
+    Total 3 (delta 1), reused 0 (delta 0)
+    To https://github.com/moxiegirl/docker.git
+     * [new branch]      dry-run-test -> dry-run-test
+    Branch dry-run-test set up to track remote branch dry-run-test from origin.
+    ```
 
 9. Open your browser to GitHub.
 
