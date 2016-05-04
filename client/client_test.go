@@ -1840,6 +1840,9 @@ func testPublishNoOneHasSnapshotKey(t *testing.T, rootType string) {
 		repo.CryptoService.RemoveKey(keyID)
 	}
 
+	// ensure that the cryptoservice no longer has any snapshot keys
+	require.Len(t, repo.CryptoService.ListKeys(data.CanonicalSnapshotRole), 0)
+
 	// Publish something
 	addTarget(t, repo, "v1", "../fixtures/intermediate-ca.crt")
 	err := repo.Publish()

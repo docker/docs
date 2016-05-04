@@ -68,14 +68,12 @@ func init() {
 	sClient = pb.NewSignerClient(conn)
 }
 
-func TestDeleteKeyHandlerReturnsNotFoundWithNonexistentKey(t *testing.T) {
+func TestDeleteKeyHandlerReturnsNilWithNonexistentKey(t *testing.T) {
 	fakeID := "c62e6d68851cef1f7e55a9d56e3b0c05f3359f16838cad43600f0554e7d3b54d"
 	keyID := &pb.KeyID{ID: fakeID}
 
-	ret, err := kmClient.DeleteKey(context.Background(), keyID)
-	require.NotNil(t, err)
-	require.Equal(t, grpc.Code(err), codes.NotFound)
-	require.Nil(t, ret)
+	_, err := kmClient.DeleteKey(context.Background(), keyID)
+	require.NoError(t, err)
 }
 
 func TestCreateKeyHandlerCreatesKey(t *testing.T) {
