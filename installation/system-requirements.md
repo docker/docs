@@ -23,7 +23,7 @@ all nodes must have:
 * 1.50 GB of RAM
 * 3.00 GB of available disk space
 * One of the supported operating systems installed:
-  * RHEL 7.0, 7.1
+  * RHEL 7.0, 7.1, or 7.2
   * Ubuntu 14.04 LTS
   * CentOS 7.1
   * SUSE Linux Enterprise 12
