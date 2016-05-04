@@ -48,7 +48,8 @@ The example below shows how to create a backup of a UCP controller node:
 # Create a backup, encrypt it, and store it on /tmp/backup.tar
 $ docker run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  docker/ucp --interactive --passphrase "secret" > /tmp/backup.tar
+  docker/ucp backup --interactive \
+  --passphrase "secret" > /tmp/backup.tar
 
 # Decrypt the backup and list its contents
 $ gpg --decrypt /tmp/backup.tar | tar --list
@@ -87,7 +88,7 @@ and your most recent backup was of node A:
 1. Stop controllers B and C with the `stop` command,
 2. Restore controller A,
 3. Uninstall UCP from controllers B and C,
-4. Join nodes B and C to the cluster.
+4. Join nodes B and C as replica controllers to the cluster.
 
 You should now have your cluster up and running.
 

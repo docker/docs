@@ -20,40 +20,53 @@ weight=110
 
 * Core
   * Added new commands to the docker/ucp image: backup, restore, id,
-  regen-certs, restart, stop
-  * UCP and DTR are now using a unified authentication service
+  regen-certs, restart, stop,
+  * UCP and DTR are now using a unified authentication service,
   * Users and teams created in UCP are displayed in DTR under the 'Datacenter'
-  organization
-  * When installing UCP, multi-host networking is Automatically configured
-  * All controllers joined to the cluster now have replicated CAs
+  organization,
+  * When installing UCP, multi-host networking is Automatically configured,
+  * All controllers joined to the cluster now have replicated CAs,
   * All UCP components were compiled the Go 1.5.4 and 1.6 to address Go security
-  vulnerabilities
+  vulnerabilities.
 ​
 * UI
-  * Now you can deploy apps from the UI using a docker-compse.yml file
+  * Now you can deploy apps from the UI using a docker-compse.yml file,
   * There's a new setting to prevent users from deploying containers to the UCP
-  controller nodes
-  * Improved usability of LDAP configuration settings
-  * Images page no longer shows the sha256 id of each image ID
-  * User profiles now display default permissions
-  * Improved feedback when creating users and teams with invalid characters
-  * Added horizontal scrollbar to wide pages
+  controller nodes,
+  * Improved usability of LDAP configuration settings,
+  * Images page no longer shows the sha256 id of each image ID,
+  * User profiles now display default permissions,
+  * Improved feedback when creating users and teams with invalid characters,
+  * Added horizontal scrollbar to wide pages.
 
 **Bug Fixes**
 
-* Improved messages when installing UCP on a host with firewall rules
-* Images page no longer shows images generated from intermediate builds
-* Images page no longer hangs when pulling an image
-* Scaling a container from the UI now preserves parameters like 'net' and 'privileged'
-* Fixed `docker ps --filter` to filter containers correctly
+* Improved messages when installing UCP on a host with firewall rules,
+* Images page no longer shows images generated from intermediate builds,
+* Images page no longer hangs when pulling an image,
+* Scaling a container from the UI now preserves parameters like 'net' and
+'privileged',
+* Fixed `docker ps --filter` to filter containers correctly.
 
 
 **Misc**
 
-* You no longer need to install UCP with --swarm-experimental to use swarm container rescheduling
-* All UCP containers now have the 'com.docker.ucp.version' label with their upstream version or UCP version
-* When running docker/ucp in interactive mode, the parameters and environment variables passed to the command are displayed
-* Renamed 'external-ucp-ca' flag to 'external-server-cert' for clarity. The first is deprecated but still available
+* You no longer need to install UCP with --swarm-experimental to use swarm
+container rescheduling,
+* All UCP containers now have the 'com.docker.ucp.version' label with their
+upstream version or UCP version,
+* When running docker/ucp in interactive mode, the parameters and environment
+variables passed to the command are displayed,
+* Renamed 'external-ucp-ca' flag to 'external-server-cert' for clarity.
+The first is deprecated but still available.
+
+**Known issues**
+
+* When joining replicas to the cluster, you may be prompted to restart the
+Docker daemon on that node. For a faster installation, only restart the Docker
+daemon after joining all replicas.
+* When deploying applications from the UI, using the `host` network option
+might cause errors. If this happens, deploy the application from the CLI.
 
 **Component Versions**
 
@@ -65,6 +78,9 @@ UCP 1.1.0 uses:
 * etcd 2.2.5
 * RethinkDB 2.3.0
 ​
+**Upgrading**
+
+[Learn how to upgrade to the latest version](installation/upgrade.md)
 
 ## Version 1.0.4
 
