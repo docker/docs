@@ -52,46 +52,56 @@ For this, you can use the `docker/dtr migrate` command. This command
 migrates configurations, accounts, and repository metadata. It doesn't migrate
 the images that are on the storage backend used by DTR 1.4.3.
 
-To find what options are available on the migrate command, check the reference
-documentation, or run:
+To start the migration:
 
-```bash
-$ docker run --rm -it docker/dtr migrate --help
-```
+1. Log into the host running DTR 1.4.3 using ssh.
 
-To start the migration, on the host running DTR 1.4.3, run:
+2. Use the docker/dtr migrate command.
 
-```bash
-# Get the certificates used by UCP
-$ curl https://$UCP_HOST/ca > ucpca.crt
+    When you run the docker/dtr migrate command, Docker pulls the necessary
+    images from Docker Hub. If the the host where DTR 1.4.3 is not connected
+    to the internet, you need to
+    [download the images to the host](../install-dtr-offline.md).
 
-# Get the certificates used by DTR 2.0 from the settings page
+    Then run the migrate command:
 
-# Migrate configurations, accounts, and repository metadata
-docker run -it --rm \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  docker/dtr migrate \
-  --ucp-url $UCP_HOST --ucp-ca "$(cat ucpca.crt)" \
-  --dtr-load-balancer https://$DTR_HOST --dtr-ca "$(cat dtrca.crt)"
-```
+    ```bash
+    # Get the certificates used by UCP
+    $ curl https://$UCP_HOST/ca > ucpca.crt
 
-## Step 4. Test your installation
+    # Migrate configurations, accounts, and repository metadata
+    docker run -it --rm \
+      -v /var/run/docker.sock:/var/run/docker.sock \
+      docker/dtr migrate \
+      --ucp-url $UCP_HOST --ucp-ca "$(cat ucpca.crt)" \
+      --dtr-load-balancer https://$DTR_HOST \
+      --dtr-ca "$(cat dtrca.crt)"
+    ```
+
+## Step 4. Validate your configurations
 
 After the migration finishes, test your DTR 2.0 installation to make sure it is
 properly configured.
-In your browser navigate to the DTR **Settings page**, and check that DTR 2.0:
+In your browser navigate to the DTR 2.0 **Settings page**, and check that DTR:
 
 * Is correctly licensed,
 * The storage backend is correctly configured,
-* User authentication is correctly configured.
+* The user authentication method is correctly configured.
 
-You need to manually transfer the following settings:
-* Domain name
-* Certificates
+You need to manually configure the following settings:
 
-You should also validate that you can now push and pull images to DTR 2.0.
+* Domain name,
+* Certificates.
 
-## Step 5. join replicas to your cluster
+You can find the certificates of DTR 1.4.3 under `/usr/local/etc/dtr/ssl`. 
+
+## Step 5. Test your installation
+
+Now that you have a working installation of DTR 2.0, you should test that you
+can push and pull images to it.
+[Learn how to push and pull images](../../repos-and-images/push-and-pull-images.md).
+
+## Step 6. Join replicas to your cluster
 
 This step is optional.
 
@@ -149,7 +159,7 @@ replicas:
     3, 5, or 7 replicas.
     [Learn more about high availability](../../high-availability/high-availability.md)
 
-## Step 6. Decommission DTR 1.4.3
+## Step 7. Decommission DTR 1.4.3
 
 Once you've fully tested your new installation, you can uninstall DTR 1.4.3
 by deleting `/usr/local/etc/dtr` and `/var/local/dtr` and removing all dtr
