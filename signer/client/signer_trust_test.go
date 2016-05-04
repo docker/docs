@@ -18,6 +18,7 @@ import (
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
+	"github.com/docker/notary/tuf/testutils/interfaces"
 	"github.com/stretchr/testify/require"
 	"golang.org/x/net/context"
 )
@@ -107,25 +108,6 @@ func TestHealthCheckConnectionDied(t *testing.T) {
 
 var ret = passphrase.ConstantRetriever("pass")
 
-func TestGetPrivateKeyIfNoKey(t *testing.T) {
-	signer := setUpSigner(t, trustmanager.NewKeyMemoryStore(ret))
-	privKey, _, err := signer.GetPrivateKey("bogus key ID")
-	require.NoError(t, err)
-	require.Nil(t, privKey)
-}
-
-func TestCreatePrivateKey(t *testing.T) {
-	signer := setUpSigner(t, trustmanager.NewKeyMemoryStore(ret))
-	key, err := signer.Create(data.CanonicalSnapshotRole, "docker.com/notary", data.ECDSAKey)
-	require.NoError(t, err)
-	require.NotNil(t, key)
-	retrievedKey := signer.GetKey(key.ID())
-	require.NotNil(t, retrievedKey)
-	require.Equal(t, key.Public(), retrievedKey.Public())
-	require.Equal(t, key.ID(), retrievedKey.ID())
-	require.Equal(t, data.ECDSAKey, retrievedKey.Algorithm())
-}
-
 func TestGetPrivateKeyAndSignWithExistingKey(t *testing.T) {
 	key, err := trustmanager.GenerateECDSAKey(rand.Reader)
 	require.NoError(t, err, "could not generate key")
@@ -148,6 +130,16 @@ func TestGetPrivateKeyAndSignWithExistingKey(t *testing.T) {
 	err = signed.Verifiers[data.ECDSASignature].Verify(
 		data.PublicKeyFromPrivate(key), sig, msg)
 	require.NoError(t, err)
+}
+
+// Signer conforms to the signed.CryptoService interface behavior
+func TestCryptoSignerInterfaceBehavior(t *testing.T) {
+	signer := setUpSigner(t, trustmanager.NewKeyMemoryStore(ret))
+	interfaces.EmptyCryptoServiceInterfaceBehaviorTests(t, &signer)
+	interfaces.CreateGetKeyCryptoServiceInterfaceBehaviorTests(t, &signer, data.ECDSAKey, false)
+	// can't test AddKey, because the signer does not support adding keys, and can't test listing
+	// keys because the signer doesn't support listing keys.  Signer also doesn't support tracking
+	// roles
 }
 
 type StubClientFromServers struct {
