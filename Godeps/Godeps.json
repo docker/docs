@@ -479,7 +479,7 @@
 		},
 		{
 			"ImportPath": "github.com/miekg/pkcs11",
-			"Rev": "df8ae6ca730422dba20c768ff38ef7d79077a59f"
+			"Rev": "ba39b9c6300b7e0be41b115330145ef8afdff7d6"
 		},
 		{
 			"ImportPath": "github.com/mitchellh/go-homedir",
