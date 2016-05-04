@@ -74,7 +74,7 @@ UCP 1.1.0 uses:
 
 * cfssl 1.2.0
 * Docker Compose 1.7.0
-* Docker Swarm: 1.2.0
+* Docker Swarm: 1.1.3
 * etcd 2.2.5
 * RethinkDB 2.3.0
 ​
