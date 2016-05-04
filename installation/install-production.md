@@ -114,8 +114,10 @@ To install UCP:
 3. Check that the UCP web application is running.
 
     In your browser, navigate to the address where you've installed UCP.
+
     If you're not using an external CA, your browser warns that UCP is
-    an unsafe site.
+    an unsafe site. This happens because you're accessing UCP using HTTPS
+    but the certificates used by UCP are not trusted by your browser.
 
     ![](../images/login.png)
 
@@ -162,11 +164,15 @@ For each node that you want to install as a controller replica:
       --replica
     ```
 
-3. Repeat steps 1 and 2 on the other nodes you want to set up as replicas.
+3. Since UCP configures your Docker Engine for multi-host networking, it might
+prompt you to restart the Docker daemon. To make the installation faster, join
+all replica nodes first, and only then restart the Docker daemon on those nodes.
+
+4. Repeat steps 1 and 2 on the other nodes you want to set up as replicas.
 Make sure you set up 3, 5, or 7 controllers.
 
 
-4. Check the cluster state.
+5. Check the cluster state.
 
     The Dashboard page of UCP should list all your controller nodes.
 
