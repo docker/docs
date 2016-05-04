@@ -27,7 +27,9 @@ type Storage struct {
 type RethinkDBStorage struct {
 	Storage
 	CA     string
+	Cert   string
 	DBName string
+	Key    string
 }
 
 // GetPathRelativeToConfig gets a configuration key which is a path, and if
@@ -117,6 +119,8 @@ func ParseRethinkDBStorage(configuration *viper.Viper) (*RethinkDBStorage, error
 			Source:  configuration.GetString("storage.db_url"),
 		},
 		CA:     GetPathRelativeToConfig(configuration, "storage.tls_ca_file"),
+		Cert:   GetPathRelativeToConfig(configuration, "storage.client_cert_file"),
+		Key:    GetPathRelativeToConfig(configuration, "storage.client_key_file"),
 		DBName: configuration.GetString("storage.database"),
 	}
 
@@ -134,6 +138,11 @@ func ParseRethinkDBStorage(configuration *viper.Viper) (*RethinkDBStorage, error
 	case store.CA == "":
 		return nil, fmt.Errorf(
 			"cowardly refusal to connect to %s without a CA cert",
+			store.Backend,
+		)
+	case store.Cert == "" || store.Key == "":
+		return nil, fmt.Errorf(
+			"cowardly refusal to connect to %s without a client cert and key",
 			store.Backend,
 		)
 	case store.DBName == "":

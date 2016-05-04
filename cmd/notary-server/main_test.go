@@ -343,6 +343,8 @@ func TestGetStoreRethinkDBStoreConnectionFails(t *testing.T) {
 			"backend": "%s",
 			"db_url": "host:port",
 			"tls_ca_file": "/tls/ca.pem",
+			"client_cert_file": "/tls/cert.pem",
+			"client_key_file": "/tls/key.pem",
 			"database": "rethinkdbtest"
 			}
 		}`,
