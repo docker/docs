@@ -228,6 +228,15 @@ func TestSetupCryptoServicesMemoryStore(t *testing.T) {
 	require.NotNil(t, privKey)
 }
 
+func TestSetupCryptoServicesInvalidStore(t *testing.T) {
+	config := configure(fmt.Sprintf(`{"storage": {"backend": "%s"}}`,
+		"invalid_backend"))
+	_, err := setUpCryptoservices(config,
+		[]string{notary.SQLiteBackend, notary.MemoryBackend, notary.RethinkDBBackend})
+	require.Error(t, err)
+	require.Equal(t, err.Error(), fmt.Sprintf("%s is not an allowed backend, must be one of: %s", "invalid_backend", []string{notary.SQLiteBackend, notary.MemoryBackend, notary.RethinkDBBackend}))
+}
+
 func TestSetupHTTPServer(t *testing.T) {
 	httpServer := setupHTTPServer(":4443", nil, make(signer.CryptoServiceIndex))
 	require.Equal(t, ":4443", httpServer.Addr)
