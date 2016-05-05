@@ -3,8 +3,8 @@ package rethinkdb
 import (
 	"time"
 
-	"github.com/dancannon/gorethink"
 	"github.com/docker/go-connections/tlsconfig"
+	"gopkg.in/dancannon/gorethink.v2"
 )
 
 var session *gorethink.Session
