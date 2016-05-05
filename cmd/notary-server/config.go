@@ -7,7 +7,6 @@ import (
 	"time"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/dancannon/gorethink"
 	_ "github.com/docker/distribution/registry/auth/htpasswd"
 	_ "github.com/docker/distribution/registry/auth/token"
 	"github.com/docker/go-connections/tlsconfig"
@@ -22,6 +21,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/spf13/viper"
 	"golang.org/x/net/context"
+	"gopkg.in/dancannon/gorethink.v2"
 )
 
 // get the address for the HTTP server, and parses the optional TLS
