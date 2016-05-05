@@ -19,15 +19,26 @@ weight=110
 **Features**
 
 * Core
-  * Added new commands to the docker/ucp image: backup, restore, id,
-  regen-certs, restart, stop,
   * UCP and DTR are now using a unified authentication service,
   * Users and teams created in UCP are displayed in DTR under the 'Datacenter'
   organization,
-  * When installing UCP, multi-host networking is Automatically configured,
-  * All controllers joined to the cluster now have replicated CAs,
-  * All UCP components were compiled the Go 1.5.4 and 1.6 to address Go security
-  vulnerabilities.
+  * All controllers joined to the cluster now have replicated CAs. For this,
+  you need to copy the root key material to controllers joined to the cluster,
+  * All UCP components were compiled with Go 1.5.4 and 1.6 to address a
+  security vulnerability in Go,
+  * When joining nodes to the cluster, UCP automatically runs
+  'engine-discovery' to configure the Docker Engine for multi-host networking,
+  * If you're using Docker Engine 1.11 with default configurations, when joining
+  new nodes to the cluster multi-host networking is automatically configured
+  without needing to restart the Docker daemon.
+
+* docker/dtr image
+  * Added the 'backup' command to create backups of controller nodes,
+  * Added the 'restore' command, to restore a controller node from a backup,
+  * Added the 'regen-certs' command, to regenerate keys and certificates used on
+  a controller node. You can use this for changing the SANS on the certificates
+  or in case a CA is compromised,
+  * Added the 'stop' and 'restart' commands, to stop and start UCP containers.
 ​
 * UI
   * Now you can deploy apps from the UI using a docker-compse.yml file,
@@ -62,6 +73,10 @@ The first is deprecated but still available.
 
 **Known issues**
 
+* After upgrading to version `1.1.0`, if you join new nodes to the cluster,
+a success message is displayed, but that node will not be part of the
+cluster. As a workaround, join new controller nodes before upgrading, or
+perform a fresh installation of UCP 1.1.0.
 * When joining replicas to the cluster, you may be prompted to restart the
 Docker daemon on that node. For a faster installation, only restart the Docker
 daemon after joining all replicas.
