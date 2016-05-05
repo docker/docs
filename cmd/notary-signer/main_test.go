@@ -121,6 +121,8 @@ func TestSetupCryptoServicesRethinkDBStoreNoDefaultAlias(t *testing.T) {
 				"backend": "%s",
 				"db_url": "host:port",
 				"tls_ca_file": "/tls/ca.pem",
+				"client_cert_file": "/tls/cert.pem",
+				"client_key_file": "/tls/key.pem",
 				"database": "rethinkdbtest"
 				}
 			}`,
@@ -137,7 +139,9 @@ func TestSetupCryptoServicesRethinkDBStoreConnectionFails(t *testing.T) {
 			`{"storage": {
 				"backend": "%s",
 				"db_url": "host:port",
-				"tls_ca_file": "../../fixtures/root-ca.crt",
+				"tls_ca_file": "../../fixtures/rethinkdb/ca.pem",
+				"client_cert_file": "../../fixtures/rethinkdb/cert.pem",
+				"client_key_file": "../../fixtures/rethinkdb/key.pem",
 				"database": "rethinkdbtest"
 				},
 				"default_alias": "timestamp"

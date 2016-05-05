@@ -19,10 +19,7 @@ type Timing struct {
 
 // Connection sets up a RethinkDB connection to the host (`host:port` format)
 // using the CA .pem file provided at path `caFile`
-func Connection(caFile, host string) (*gorethink.Session, error) {
-	tlsOpts := tlsconfig.Options{
-		CAFile: caFile,
-	}
+func Connection(tlsOpts tlsconfig.Options, host string) (*gorethink.Session, error) {
 	t, err := tlsconfig.Client(tlsOpts)
 	if err != nil {
 		return nil, err

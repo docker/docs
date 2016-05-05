@@ -16,6 +16,7 @@ import (
 	"github.com/Sirupsen/logrus"
 	"github.com/dancannon/gorethink"
 	"github.com/docker/distribution/health"
+	"github.com/docker/go-connections/tlsconfig"
 	"github.com/docker/notary"
 	"github.com/docker/notary/cryptoservice"
 	"github.com/docker/notary/passphrase"
@@ -116,7 +117,12 @@ func setUpCryptoservices(configuration *viper.Viper, allowedBackends []string) (
 		if err != nil {
 			return nil, err
 		}
-		sess, err = rethinkdb.Connection(storeConfig.CA, storeConfig.Source)
+		tlsOpts := tlsconfig.Options{
+			CAFile:   storeConfig.CA,
+			CertFile: storeConfig.Cert,
+			KeyFile:  storeConfig.Key,
+		}
+		sess, err = rethinkdb.Connection(tlsOpts, storeConfig.Source)
 		if err != nil {
 			return nil, err
 		}
