@@ -78,6 +78,7 @@ UCP 1.1.0 uses:
 * etcd 2.2.5
 * RethinkDB 2.3.0
 ​
+
 **Upgrading**
 
 [Learn how to upgrade to the latest version](installation/upgrade.md)
