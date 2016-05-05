@@ -215,6 +215,8 @@ func TestParseRethinkStorageDBStoreInvalidBackend(t *testing.T) {
 			"backend": "mysql",
 			"db_url": "username:password@tcp(hostname:1234)/dbname",
 			"tls_ca_file": "/tls/ca.pem",
+			"client_cert_file": "/tls/cert.pem",
+			"client_key_file": "/tls/key.pem",
 			"database": "rethinkdbtest"
 		}
 	}`)
@@ -230,6 +232,8 @@ func TestParseRethinkStorageDBStoreEmptyDBUrl(t *testing.T) {
 		"storage": {
 			"backend": "rethinkdb",
 			"tls_ca_file": "/tls/ca.pem",
+			"client_cert_file": "/tls/cert.pem",
+			"client_key_file": "/tls/key.pem",
 			"database": "rethinkdbtest"
 		}
 	}`)
@@ -245,7 +249,9 @@ func TestParseRethinkStorageDBStoreEmptyDBName(t *testing.T) {
 		"storage": {
 			"backend": "rethinkdb",
 			"db_url": "username:password@tcp(hostname:1234)/dbname",
-			"tls_ca_file": "/tls/ca.pem"
+			"tls_ca_file": "/tls/ca.pem",
+			"client_cert_file": "/tls/cert.pem",
+			"client_key_file": "/tls/key.pem"
 		}
 	}`)
 
@@ -260,13 +266,31 @@ func TestParseRethinkStorageDBStoreEmptyCA(t *testing.T) {
 		"storage": {
 			"backend": "rethinkdb",
 			"db_url": "username:password@tcp(hostname:1234)/dbname",
-			"database": "rethinkdbtest"
+			"database": "rethinkdbtest",
+			"client_cert_file": "/tls/cert.pem",
+			"client_key_file": "/tls/key.pem"
 		}
 	}`)
 
 	_, err := ParseRethinkDBStorage(config)
 	require.Error(t, err)
 	require.Contains(t, err.Error(), "cowardly refusal to connect to rethinkdb without a CA cert")
+}
+
+// ParseRethinkDBStorage will require a client cert and key to connect to rethink databases
+func TestParseRethinkStorageDBStoreEmptyCertAndKey(t *testing.T) {
+	config := configure(`{
+		"storage": {
+			"backend": "rethinkdb",
+			"db_url": "username:password@tcp(hostname:1234)/dbname",
+			"database": "rethinkdbtest",
+			"tls_ca_file": "/tls/ca.pem"
+		}
+	}`)
+
+	_, err := ParseRethinkDBStorage(config)
+	require.Error(t, err)
+	require.Contains(t, err.Error(), "cowardly refusal to connect to rethinkdb without a client cert")
 }
 
 func TestParseSQLStorageWithEnvironmentVariables(t *testing.T) {
