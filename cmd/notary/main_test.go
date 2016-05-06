@@ -16,6 +16,7 @@ import (
 	"github.com/docker/notary"
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/server/storage"
+	"github.com/docker/notary/tuf/data"
 	"github.com/stretchr/testify/require"
 )
 
@@ -522,4 +523,41 @@ func TestConfigFileTrustPinning(t *testing.T) {
 	trustPin, err = getTrustPinning(config)
 	require.NoError(t, err)
 	require.Equal(t, "root-ca.crt", trustPin.CA["repo4"])
+}
+
+func TestPassphraseRetrieverCaching(t *testing.T) {
+	// Set up passphrase environment vars
+	require.NoError(t, os.Setenv("NOTARY_ROOT_PASSPHRASE", "root_passphrase"))
+	require.NoError(t, os.Setenv("NOTARY_TARGETS_PASSPHRASE", "targets_passphrase"))
+	require.NoError(t, os.Setenv("NOTARY_SNAPSHOT_PASSPHRASE", "snapshot_passphrase"))
+	require.NoError(t, os.Setenv("NOTARY_DELEGATION_PASSPHRASE", "delegation_passphrase"))
+
+	defer os.Clearenv()
+	// Check the caching
+	retriever := getPassphraseRetriever()
+	passphrase, giveup, err := retriever("key", data.CanonicalRootRole, false, 0)
+	require.NoError(t, err)
+	require.False(t, giveup)
+	require.Equal(t, passphrase, "root_passphrase")
+
+	passphrase, giveup, err = retriever("key", data.CanonicalTargetsRole, false, 0)
+	require.NoError(t, err)
+	require.False(t, giveup)
+	require.Equal(t, passphrase, "targets_passphrase")
+
+	passphrase, giveup, err = retriever("key", data.CanonicalSnapshotRole, false, 0)
+	require.NoError(t, err)
+	require.False(t, giveup)
+	require.Equal(t, passphrase, "snapshot_passphrase")
+
+	passphrase, giveup, err = retriever("key", "targets/releases", false, 0)
+	require.NoError(t, err)
+	require.False(t, giveup)
+	require.Equal(t, passphrase, "delegation_passphrase")
+
+	// We don't require a targets/ prefix in PEM headers for delegation keys
+	passphrase, giveup, err = retriever("key", "user", false, 0)
+	require.NoError(t, err)
+	require.False(t, giveup)
+	require.Equal(t, passphrase, "delegation_passphrase")
 }
