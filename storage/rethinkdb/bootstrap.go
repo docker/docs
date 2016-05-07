@@ -3,10 +3,14 @@ package rethinkdb
 import (
 	"fmt"
 	"strings"
+	"time"
 
 	"github.com/Sirupsen/logrus"
 	"gopkg.in/dancannon/gorethink.v2"
 )
+
+// Wait for 60 seconds maximum on Wait() calls for rethink
+var timeoutOpt = gorethink.WaitOpts{Timeout: time.Minute.Seconds()}
 
 func makeDB(session *gorethink.Session, name string) error {
 	_, err := gorethink.DBCreate(name).RunWrite(session)
@@ -17,7 +21,7 @@ func makeDB(session *gorethink.Session, name string) error {
 
 		return err
 	}
-	resp, err := gorethink.DB(name).Wait().Run(session)
+	resp, err := gorethink.DB(name).Wait(timeoutOpt).Run(session)
 	if resp != nil {
 		resp.Close()
 	}
@@ -41,7 +45,7 @@ func (t Table) term(dbName string) gorethink.Term {
 }
 
 func (t Table) wait(session *gorethink.Session, dbName string) error {
-	resp, err := t.term(dbName).Wait().Run(session)
+	resp, err := t.term(dbName).Wait(timeoutOpt).Run(session)
 
 	if resp != nil {
 		resp.Close()
