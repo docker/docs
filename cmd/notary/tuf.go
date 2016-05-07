@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"encoding/hex"
 	"fmt"
-	"io/ioutil"
 	"net"
 	"net/http"
 	"net/url"
@@ -491,21 +490,9 @@ func (t *tufCommander) tufVerify(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	var payload []byte
-	if t.input != "" {
-		// Reads from the given file
-		//
-		// Please be noticed that ReadFile will cut off the size if it was over 1e9.
-		// Thus, if the size of the file exceeds 1GB, the over part will not be
-		// loaded into the buffer.
-		if payload, err = ioutil.ReadFile(t.input); err != nil {
-			return err
-		}
-	} else {
-		// Reads all of the data on STDIN
-		if payload, err = ioutil.ReadAll(os.Stdin); err != nil {
-			return fmt.Errorf("Error reading content from STDIN: %v", err)
-		}
+	payload, err := getPayload(t)
+	if err != nil {
+		return err
 	}
 
 	gun := args[0]
@@ -536,21 +523,7 @@ func (t *tufCommander) tufVerify(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("data not present in the trusted collection, %v", err)
 	}
 
-	// We only get here when everythings goes well, since the flag "quiet" was
-	// provided, we output nothing but just return.
-	if t.quiet {
-		return nil
-	}
-
-	if t.output != "" {
-		if err := ioutil.WriteFile(t.output, payload, 0644); err != nil {
-			return err
-		}
-	} else {
-		_, _ = os.Stdout.Write(payload)
-	}
-
-	return nil
+	return feedback(t, payload)
 }
 
 type passwordStore struct {
