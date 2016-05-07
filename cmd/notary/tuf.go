@@ -94,6 +94,7 @@ type tufCommander struct {
 
 	input  string
 	output string
+	quiet  bool
 }
 
 func (t *tufCommander) AddToCommand(cmd *cobra.Command) {
@@ -124,6 +125,7 @@ func (t *tufCommander) AddToCommand(cmd *cobra.Command) {
 	cmdTufVerify := cmdTufVerifyTemplate.ToCommand(t.tufVerify)
 	cmdTufVerify.Flags().StringVarP(&t.input, "input", "i", "", "Read from a file, instead of STDIN")
 	cmdTufVerify.Flags().StringVarP(&t.output, "output", "o", "", "Write to a file, instead of STDOUT")
+	cmdTufVerify.Flags().BoolVarP(&t.quiet, "quiet", "q", false, "No output except for errors")
 	cmd.AddCommand(cmdTufVerify)
 }
 
@@ -532,6 +534,12 @@ func (t *tufCommander) tufVerify(cmd *cobra.Command, args []string) error {
 
 	if err := data.CheckHashes(payload, targetName, target.Hashes); err != nil {
 		return fmt.Errorf("data not present in the trusted collection, %v", err)
+	}
+
+	// We only get here when everythings goes well, since the flag "quiet" was
+	// provided, we output nothing but just return.
+	if t.quiet {
+		return nil
 	}
 
 	if t.output != "" {
