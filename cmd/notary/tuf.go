@@ -92,7 +92,8 @@ type tufCommander struct {
 	sha256 string
 	sha512 string
 
-	input string
+	input  string
+	output string
 }
 
 func (t *tufCommander) AddToCommand(cmd *cobra.Command) {
@@ -122,6 +123,7 @@ func (t *tufCommander) AddToCommand(cmd *cobra.Command) {
 
 	cmdTufVerify := cmdTufVerifyTemplate.ToCommand(t.tufVerify)
 	cmdTufVerify.Flags().StringVarP(&t.input, "input", "i", "", "Read from a file, instead of STDIN")
+	cmdTufVerify.Flags().StringVarP(&t.output, "output", "o", "", "Write to a file, instead of STDOUT")
 	cmd.AddCommand(cmdTufVerify)
 }
 
@@ -532,7 +534,14 @@ func (t *tufCommander) tufVerify(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("data not present in the trusted collection, %v", err)
 	}
 
-	_, _ = os.Stdout.Write(payload)
+	if t.output != "" {
+		if err := ioutil.WriteFile(t.output, payload, 0644); err != nil {
+			return err
+		}
+	} else {
+		_, _ = os.Stdout.Write(payload)
+	}
+
 	return nil
 }
 
