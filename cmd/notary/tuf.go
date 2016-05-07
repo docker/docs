@@ -91,6 +91,8 @@ type tufCommander struct {
 	roles  []string
 	sha256 string
 	sha512 string
+
+	input string
 }
 
 func (t *tufCommander) AddToCommand(cmd *cobra.Command) {
@@ -98,7 +100,6 @@ func (t *tufCommander) AddToCommand(cmd *cobra.Command) {
 	cmd.AddCommand(cmdTufStatusTemplate.ToCommand(t.tufStatus))
 	cmd.AddCommand(cmdTufPublishTemplate.ToCommand(t.tufPublish))
 	cmd.AddCommand(cmdTufLookupTemplate.ToCommand(t.tufLookup))
-	cmd.AddCommand(cmdTufVerifyTemplate.ToCommand(t.tufVerify))
 
 	cmdTufList := cmdTufListTemplate.ToCommand(t.tufList)
 	cmdTufList.Flags().StringSliceVarP(
@@ -118,6 +119,10 @@ func (t *tufCommander) AddToCommand(cmd *cobra.Command) {
 	cmdTufAddHash.Flags().StringVar(&t.sha256, notary.SHA256, "", "hex encoded sha256 of the target to add")
 	cmdTufAddHash.Flags().StringVar(&t.sha512, notary.SHA512, "", "hex encoded sha512 of the target to add")
 	cmd.AddCommand(cmdTufAddHash)
+
+	cmdTufVerify := cmdTufVerifyTemplate.ToCommand(t.tufVerify)
+	cmdTufVerify.Flags().StringVarP(&t.input, "input", "i", "", "Read from a file, instead of STDIN")
+	cmd.AddCommand(cmdTufVerify)
 }
 
 func (t *tufCommander) tufAddByHash(cmd *cobra.Command, args []string) error {
@@ -482,10 +487,21 @@ func (t *tufCommander) tufVerify(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	// Reads all of the data on STDIN
-	payload, err := ioutil.ReadAll(os.Stdin)
-	if err != nil {
-		return fmt.Errorf("Error reading content from STDIN: %v", err)
+	var payload []byte
+	if t.input != "" {
+		// Reads from the given file
+		//
+		// Please be noticed that ReadFile will cut off the size if it was over 1e9.
+		// Thus, if the size of the file exceeds 1GB, the over part will not be
+		// loaded into the buffer.
+		if payload, err = ioutil.ReadFile(t.input); err != nil {
+			return err
+		}
+	} else {
+		// Reads all of the data on STDIN
+		if payload, err = ioutil.ReadAll(os.Stdin); err != nil {
+			return fmt.Errorf("Error reading content from STDIN: %v", err)
+		}
 	}
 
 	gun := args[0]
