@@ -51,7 +51,21 @@ command line on any UCP node and do the following:
 $ docker network create -d overlay my-custom-network
 ```
 
-## Get each node host IP address
+## Automatic Configuration
+
+As of UCP 1.1 and Docker Engine 1.11, discovery is automatically configured
+when a node is installed or joined to the UCP cluster. Depending on your
+engine's configuration, this may require a restart to take effect. The output
+of the install and join operations will inform you if automatic configuration
+succeeded or if configuration was attempted but a restart will be required.
+
+If you are running Docker Engine 1.10, proceed to the manual configuration.
+
+## Manual Configuration
+
+Some setups will require manually setting up engine configuration.
+
+### Get each node host IP address
 
 To continue with this procedure, you need to know the host address values you
 used on each controller or node. This is the address used with the `install` or
@@ -71,7 +85,7 @@ nodes for network communication.
     Make sure you do not include the port number, just the IP address.
 
 
-## Enable the networking feature
+### Enable the networking feature
 
 If you followed the prerequisites, you should have a list of the host-address
 values you used with `install` to create the controller, the replicas, and
@@ -193,7 +207,7 @@ To enable the networking feature, do the following.
 9. After enabling networking on the controllers and replicas, repeat steps 2-6 on
 the remaining nodes in the cluster.
 
-## Adding new nodes and replicas
+### Adding new nodes and replicas
 
 Once your UCP installation is up and running, you may need to add a new worker
 node or a new replica node. If you add a new worker node, you must run
