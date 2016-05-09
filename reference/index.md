@@ -69,7 +69,7 @@ Additional help is available for each command with the '--help' option.
 | `fingerprint`      | Dump out the TLS fingerprint for the UCP controller running on this engine |
 | `id`               | Dump out the ID of the UCP components running on this engine               |
 | `engine-discovery` | Manage the engine discovery configuration                                  |
-| `backup`           | Stream a tar file to stdout containing all Orca data volumes               |
+| `backup`           | Stream a tar file to stdout containing all UCP data volumes                |
 | `restore`          | Stream a tar file on stdin containing all local UCP data volumes           |
 | `regen-certs`      | Regenerate keys and certificates for a UCP controller                      |
 | `help`             | Shows a list of commands or help for one command                           |
