@@ -20,14 +20,11 @@ affect any other containers.
 To see what options are available in the uninstall command, check the
 [uninstall command reference](../reference/uninstall.md).
 
-To uninstall Docker UCP from a cluster, you should:
+To uninstall Docker UCP from a cluster, you need to:
 
 1. Uninstall UCP from every node joined in the cluster,
-2. Uninstall UCP from every controller node, one at a time.
-
-When you install UCP, your Docker Engine is automatically configured for
-multi-host networking. When uninstalling, you need to delete or update the
-`/etc/docker/daemon.json` file and restart the Docker daemon on each node.
+2. Uninstall UCP from every controller node, one at a time,
+3. Restart the Docker engine on all the nodes.
 
 
 ## Example
@@ -64,7 +61,7 @@ You can also use flags to pass values to the uninstall command.
     The uninstall command removes all UCP-related images except the
     `docker/ucp` image.
 
-3. Remove the `docker/ucp` image.
+3. Remove the docker/ucp image.
 
     ```
     $ docker rmi docker/ucp
@@ -75,19 +72,20 @@ You can also use flags to pass values to the uninstall command.
     Deleted: sha256:93743d5df2362466e2fe116a677ec6a4b0091bd09e889abfc9109047fcfcdebf
     ```
 
-4. Delete the engine-discovery configuration
+5. Restart the Docker daemon.
 
-    ```bash
-    $ sudo rm /etc/docker/daemon.json
-    ```
+    When you install or join a node, UCP configures the Docker engine on that
+    node for multi-host networking. When uninstalling, the configuration is
+    reverted to its original state, but you need to restart the Docker engine
+    for the configurations to take effect.
 
-5. Restart the Docker daemon
-
-    As an example, on a Ubuntu host
+    As an example, to restart the Docker engine on a Ubuntu distribution:
 
     ```bash
     $ sudo service docker restart
     ```
 
-6. Go to the UCP web application, and confirm the node was removed from the
-cluster.
+6. Confirm the node was removed from the cluster.
+
+    In the UCP web application, confirm the node is no longer listed. It
+    might take a few minutes for UCP to stop listing that node.
