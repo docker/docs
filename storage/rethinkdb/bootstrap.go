@@ -18,14 +18,7 @@ func makeDB(session *gorethink.Session, name string) error {
 		if strings.Contains(err.Error(), "already exists") {
 			return nil
 		}
-
-		return err
 	}
-	resp, err := gorethink.DB(name).Wait(timeoutOpt).Run(session)
-	if resp != nil {
-		resp.Close()
-	}
-
 	return err
 }
 
