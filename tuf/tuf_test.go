@@ -881,8 +881,8 @@ func TestReplaceBaseKeysInRoot(t *testing.T) {
 
 		switch role {
 		case data.CanonicalRootRole:
-			// root role changed, so the old role and the new role should have been saved
-			require.Len(t, repo.Root.Signed.Roles, origNumRoles+2)
+			// root role changed, so the old role should have been saved
+			require.Len(t, repo.Root.Signed.Roles, origNumRoles+1)
 		default:
 			// number of roles should not have changed
 			require.Len(t, repo.Root.Signed.Roles, origNumRoles)
@@ -1325,8 +1325,8 @@ func TestSignRootOldRootRolesAndOldSigs(t *testing.T) {
 	repo.Root.Signed.Roles["root.4a"] = &data.RootRole{KeyIDs: []string{rootCertKeys[4].ID()}, Threshold: 1}
 	// valid old root role and version
 	repo.Root.Signed.Roles["root.5"] = &data.RootRole{KeyIDs: []string{rootCertKeys[5].ID()}, Threshold: 1}
-	// higher than current root version, so invalid name, but valid root role
-	repo.Root.Signed.Roles["root.7"] = &data.RootRole{KeyIDs: []string{rootCertKeys[7].ID()}, Threshold: 1}
+	// greater or equal to the current root version, so invalid name, but valid root role
+	repo.Root.Signed.Roles["root.6"] = &data.RootRole{KeyIDs: []string{rootCertKeys[7].ID()}, Threshold: 1}
 
 	lenRootRoles := len(repo.Root.Signed.Roles)
 
@@ -1372,18 +1372,18 @@ func TestSignRootOldRootRolesAndOldSigs(t *testing.T) {
 		rootCertKeys[8], //  newly rotated key
 	}
 	verifySignatureList(t, signedObj, expectedSigningKeys...)
-	// verify that we saved the previous root, since it wasn't in the list of old roots,
-	// and the new root (which overwrote an invalid root)
+	// verify that we saved the previous root (which overwrote an invalid saved root),
+	// since it wasn't in the list of old valid roots, and we didn't save the newest
+	// role
 	require.NotNil(t, repo.Root.Signed.Roles["root.6"])
 	require.Equal(t, data.RootRole{KeyIDs: []string{rootCertKeys[6].ID()}, Threshold: 1},
 		*repo.Root.Signed.Roles["root.6"])
-	require.NotNil(t, repo.Root.Signed.Roles["root.7"])
-	require.Equal(t, data.RootRole{KeyIDs: []string{rootCertKeys[8].ID()}, Threshold: 1},
-		*repo.Root.Signed.Roles["root.7"])
+	require.Nil(t, repo.Root.Signed.Roles["root.7"])
 
-	// bumped version, 2 new roles, but one overwrote the previous root.7, so one additional role
+	// bumped version, 1 new roles, but one overwrote the previous root.6, so actually no
+	// additional roles
 	require.Equal(t, 7, repo.Root.Signed.Version)
-	require.Len(t, repo.Root.Signed.Roles, lenRootRoles+1)
+	require.Len(t, repo.Root.Signed.Roles, lenRootRoles)
 	require.True(t, oldExpiry.Before(repo.Root.Signed.Expires))
 	lenRootRoles = len(repo.Root.Signed.Roles)
 
