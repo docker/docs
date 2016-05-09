@@ -14,8 +14,8 @@ weight=20
 # Troubleshoot cluster configurations
 
 Docker UCP persists configuration data on an [etcd](https://coreos.com/etcd/)
-key-value store. This key-value store is replicated on all controller nodes of
-the UCP cluster. The key-value store is for internal use only, and should not
+key-value store that is replicated on all controller nodes of
+the UCP cluster. This key-value store is for internal use only, and should not
 be used by other applications.
 
 This article shows how you can access the key-value store, for
@@ -61,8 +61,7 @@ These commands assume you are running directly against the Docker Engine in
 question.  If you are running these commands through UCP, you should specify the
 node specific container name.
 
-Check the health of the etcd cluster. On failure the command exits with an
-error code, and no output:
+### Check the health of the etcd cluster
 
 ```bash
 docker exec -it ucp-kv etcdctl \
@@ -78,7 +77,25 @@ member ca3c1bb18f1b30bf is healthy: got healthy result from https://192.168.122.
 cluster is healthy
 ```
 
-List the current members of the cluster:
+On failure the command exits with an error code, and no output.
+
+### Show the current value of a key
+
+```bash
+docker exec -it ucp-kv etcdctl \
+        --endpoint https://127.0.0.1:2379 \
+        --ca-file /etc/docker/ssl/ca.pem \
+        --cert-file /etc/docker/ssl/cert.pem \
+        --key-file /etc/docker/ssl/key.pem \
+        ls /docker/nodes
+
+/docker/nodes/192.168.122.196:12376
+/docker/nodes/192.168.122.64:12376
+/docker/nodes/192.168.122.223:12376
+```
+
+
+### List the current members of the cluster
 
 ```bash
 docker exec -it ucp-kv etcdctl \
@@ -93,7 +110,11 @@ c5a24cfdb4263e72: name=orca-kv-192.168.122.196 peerURLs=https://192.168.122.196:
 ca3c1bb18f1b30bf: name=orca-kv-192.168.122.223 peerURLs=https://192.168.122.223:12380 clientURLs=https://192.168.122.223:12379
 ```
 
-Remove a failed member:
+### Remove a failed member
+
+As long as your cluster is still functional and has not lost quorum
+(more than (n/2)-1 nodes failed) you can use the following command to
+remove the failed members.
 
 ```bash
 docker exec -it ucp-kv etcdctl \
@@ -106,20 +127,10 @@ docker exec -it ucp-kv etcdctl \
 Removed member c5a24cfdb4263e72 from cluster
 ```
 
-Show the current value of a key:
-
-```bash
-docker exec -it ucp-kv etcdctl \
-        --endpoint https://127.0.0.1:2379 \
-        --ca-file /etc/docker/ssl/ca.pem \
-        --cert-file /etc/docker/ssl/cert.pem \
-        --key-file /etc/docker/ssl/key.pem \
-        ls /docker/nodes
-
-/docker/nodes/192.168.122.196:12376
-/docker/nodes/192.168.122.64:12376
-/docker/nodes/192.168.122.223:12376
-```
+If your cluser has lost too many members, etcd refuses to remove
+members using this tool. Instead you must use the UCP backup and restore
+functionality to reset your cluster to a single controller node cluster.
+[Learn more about backups and disaster recovery](../high-availability/backups-and-disaster-recovery.md).
 
 
 ## Where to go next
