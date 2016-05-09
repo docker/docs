@@ -24,7 +24,7 @@ docker run --rm -i \
 ## Description
 
 This utility will dump out a tar file containing all the contents of the
-volumes used by Orca on this node.  This can be used to make periodic
+volumes used by UCP on this node.  This can be used to make periodic
 backups suitable for use in the 'restore' command.
 
 When backing up an HA cluster, take backups of all controllers one at
