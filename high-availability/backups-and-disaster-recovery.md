@@ -72,7 +72,7 @@ backup:
 ```bash
 $ docker run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock  \
-  docker/ucp restore -i < backup.tar
+  docker/ucp restore < backup.tar
 ```
 
 
