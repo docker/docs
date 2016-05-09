@@ -845,7 +845,15 @@ func (tr *Repo) SignRoot(expires time.Time) (*data.Signed, error) {
 		}
 	}
 
-	// if the root role has changed and original role had not been saved as a previous role, save it now
+	// If the root role (root keys or root threshold) has changed, save the
+	// previous role under the role name "root.<n>", such that the "n" is the
+	// latest root.json version for which previous root role was valid.
+	// Also, guard against re-saving the previous role if the latest
+	// saved role is the same (which should not happen).
+	// n   = root.json version of the originalRootRole (previous role)
+	// n+1 = root.json version of the currRoot (current role)
+	// n-m = root.json version of latestSavedRole (not necessarily n-1, because the
+	//       last root rotation could have happened several root.json versions ago
 	if !tr.originalRootRole.Equals(currRoot) && !tr.originalRootRole.Equals(latestSavedRole) {
 		rolesToSignWith = append(rolesToSignWith, tr.originalRootRole)
 		latestSavedRole = tr.originalRootRole
@@ -853,20 +861,11 @@ func (tr *Repo) SignRoot(expires time.Time) (*data.Signed, error) {
 		versionName := oldRootVersionName(tempRoot.Signed.Version)
 		tempRoot.Signed.Roles[versionName] = &data.RootRole{
 			KeyIDs: latestSavedRole.ListKeyIDs(), Threshold: latestSavedRole.Threshold}
-
 	}
 
 	tempRoot.Signed.Expires = expires
 	tempRoot.Signed.Version++
-
-	// if the current role doesn't match with the latest saved role, save it
-	if !currRoot.Equals(latestSavedRole) {
-		rolesToSignWith = append(rolesToSignWith, currRoot)
-
-		versionName := oldRootVersionName(tempRoot.Signed.Version)
-		tempRoot.Signed.Roles[versionName] = &data.RootRole{
-			KeyIDs: currRoot.ListKeyIDs(), Threshold: currRoot.Threshold}
-	}
+	rolesToSignWith = append(rolesToSignWith, currRoot)
 
 	signed, err := tempRoot.ToSigned()
 	if err != nil {
@@ -883,7 +882,7 @@ func (tr *Repo) SignRoot(expires time.Time) (*data.Signed, error) {
 	return signed, nil
 }
 
-// get all the saved previous roles <= the current root version
+// get all the saved previous roles < the current root version
 func (tr *Repo) getOldRootRoles() versionedRootRoles {
 	oldRootRoles := make(versionedRootRoles, 0, len(tr.Root.Signed.Roles))
 
@@ -899,7 +898,7 @@ func (tr *Repo) getOldRootRoles() versionedRootRoles {
 			continue
 		}
 		version, err := strconv.Atoi(nameTokens[1])
-		if err != nil || version > tr.Root.Signed.Version {
+		if err != nil || version >= tr.Root.Signed.Version {
 			continue
 		}
 
