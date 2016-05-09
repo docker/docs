@@ -111,17 +111,12 @@ func TestInitRepo(t *testing.T) {
 	ed25519 := signed.NewEd25519()
 	repo := initRepo(t, ed25519)
 	writeRepo(t, "/tmp/tufrepo", repo)
-	// after signing a new repo, the first version's root is saved
-	currRoot, err := repo.GetBaseRole(data.CanonicalRootRole)
-	require.NoError(t, err)
-	// can't use getBaseRole bcause it's not a valid real role
-	savedRoot, err := repo.Root.BuildBaseRole("root.1")
-	require.Equal(t, "root.1", savedRoot.Name)
+	// after signing a new repo, there are only 4 roles: the 4 base roles
+	require.Len(t, repo.Root.Signed.Roles, 4)
 
-	// we can't compare the roots if the names are different
-	savedRoot.Name = data.CanonicalRootRole
-	require.NoError(t, err)
-	require.True(t, currRoot.Equals(savedRoot))
+	// can't use getBaseRole because it's not a valid real role
+	_, err := repo.Root.BuildBaseRole("root.1")
+	require.Error(t, err)
 }
 
 func TestUpdateDelegations(t *testing.T) {
@@ -877,6 +872,20 @@ func TestReplaceBaseKeysInRoot(t *testing.T) {
 		case data.CanonicalRootRole:
 			require.Len(t, repo.originalRootRole.Keys, 1)
 			require.Contains(t, repo.originalRootRole.ListKeyIDs(), origKeyIDs[0])
+		}
+
+		origNumRoles := len(repo.Root.Signed.Roles)
+		// sign the root and assert the number of roles after
+		_, err = repo.SignRoot(data.DefaultExpires(data.CanonicalRootRole))
+		require.NoError(t, err)
+
+		switch role {
+		case data.CanonicalRootRole:
+			// root role changed, so the old role and the new role should have been saved
+			require.Len(t, repo.Root.Signed.Roles, origNumRoles+2)
+		default:
+			// number of roles should not have changed
+			require.Len(t, repo.Root.Signed.Roles, origNumRoles)
 		}
 	}
 }

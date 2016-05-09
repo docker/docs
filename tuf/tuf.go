@@ -859,14 +859,13 @@ func (tr *Repo) SignRoot(expires time.Time) (*data.Signed, error) {
 	tempRoot.Signed.Expires = expires
 	tempRoot.Signed.Version++
 
-	// if the current role doesn't match with the latest saved role, save it
-	if !currRoot.Equals(latestSavedRole) {
-		rolesToSignWith = append(rolesToSignWith, currRoot)
-
+	// if the root role has changed, save the current role too
+	if !tr.originalRootRole.Equals(currRoot) {
 		versionName := oldRootVersionName(tempRoot.Signed.Version)
 		tempRoot.Signed.Roles[versionName] = &data.RootRole{
 			KeyIDs: currRoot.ListKeyIDs(), Threshold: currRoot.Threshold}
 	}
+	rolesToSignWith = append(rolesToSignWith, currRoot)
 
 	signed, err := tempRoot.ToSigned()
 	if err != nil {
