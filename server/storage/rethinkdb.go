@@ -262,12 +262,15 @@ func (rdb RethinkDB) deleteByTSChecksum(tsChecksum string) error {
 	return nil
 }
 
-// Bootstrap sets up the database and tables
+// Bootstrap sets up the database and tables, also creating the notary server user with appropriate db permission
 func (rdb RethinkDB) Bootstrap() error {
-	return rethinkdb.SetupDB(rdb.sess, rdb.dbName, []rethinkdb.Table{
+	if err := rethinkdb.SetupDB(rdb.sess, rdb.dbName, []rethinkdb.Table{
 		tufFiles,
 		keys,
-	})
+	}); err != nil {
+		return err
+	}
+	return rethinkdb.CreateAndGrantDBUser(rdb.sess, rdb.dbName, "server", "")
 }
 
 // CheckHealth is currently a noop
