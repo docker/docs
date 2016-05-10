@@ -58,12 +58,15 @@ learn more about the configuration section corresponding to that key:
       "api_key": "c9d60ae4c7e70c4b6c4ebd3e8056d2b8",
       "release_stage": "production"
     }
-  }
+  },
   <a href="#caching-section-optional">"caching"</a>: {
     "max_age": {
       "current_metadata": 300,
       "consistent_metadata": 31536000,
     }
+  },
+  <a href="#repositories-section-optional">"repositories"</a>: {
+    "gun_prefixes": ["docker.io/", "my-own-registry.com/"]
   }
 }
 </code></pre>
@@ -325,6 +328,33 @@ Example:
 
 			Consistent metadata should never change, although it may be deleted,
 			so the max age can be a higher value.
+		</td>
+	</tr>
+</table>
+
+## repositories section (optional)
+
+Example:
+
+```json
+"repositories": {
+  "gun_prefixes": ["docker.io/", "my-own-registry.com/"]
+}
+```
+
+<table>
+	<tr>
+		<th>Parameter</th>
+		<th>Required</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td valign="top"><code>gun_prefixes</code></td>
+		<td valign="top">no</td>
+		<td valign="top">A list of GUN prefixes that will be accepted by this
+			server.  POST operations on an image beginning with any other prefix
+			will be rejected with a 400, and GET/DELETE operations will be rejected
+			with a 404.
 		</td>
 	</tr>
 </table>
