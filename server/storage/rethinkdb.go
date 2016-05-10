@@ -7,7 +7,6 @@ import (
 	"sort"
 	"time"
 
-	"github.com/docker/notary"
 	"github.com/docker/notary/storage/rethinkdb"
 	"github.com/docker/notary/tuf/data"
 	"gopkg.in/dancannon/gorethink.v2"
@@ -46,15 +45,19 @@ func (r RDBKey) TableName() string {
 
 // RethinkDB implements a MetaStore against the Rethink Database
 type RethinkDB struct {
-	dbName string
-	sess   *gorethink.Session
+	dbName   string
+	sess     *gorethink.Session
+	user     string
+	password string
 }
 
 // NewRethinkDBStorage initializes a RethinkDB object
-func NewRethinkDBStorage(dbName string, sess *gorethink.Session) RethinkDB {
+func NewRethinkDBStorage(dbName, user, password string, sess *gorethink.Session) RethinkDB {
 	return RethinkDB{
-		dbName: dbName,
-		sess:   sess,
+		dbName:   dbName,
+		sess:     sess,
+		user:     user,
+		password: password,
 	}
 }
 
@@ -271,7 +274,7 @@ func (rdb RethinkDB) Bootstrap() error {
 	}); err != nil {
 		return err
 	}
-	return rethinkdb.CreateAndGrantDBUser(rdb.sess, rdb.dbName, notary.NotaryServerUser, "")
+	return rethinkdb.CreateAndGrantDBUser(rdb.sess, rdb.dbName, rdb.user, rdb.password)
 }
 
 // CheckHealth is currently a noop

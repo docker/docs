@@ -36,7 +36,7 @@ func AdminConnection(tlsOpts tlsconfig.Options, host string) (*gorethink.Session
 
 // UserConnection sets up a user RethinkDB connection to the host (`host:port` format)
 // using the CA .pem file provided at path `caFile`, using the provided username.
-func UserConnection(tlsOpts tlsconfig.Options, host, username string) (*gorethink.Session, error) {
+func UserConnection(tlsOpts tlsconfig.Options, host, username, password string) (*gorethink.Session, error) {
 	logrus.Debugf("attempting to connect user %s to host %s", username, host)
 	t, err := tlsconfig.Client(tlsOpts)
 	if err != nil {
@@ -47,6 +47,7 @@ func UserConnection(tlsOpts tlsconfig.Options, host, username string) (*gorethin
 			Address:   host,
 			TLSConfig: t,
 			Username:  username,
+			Password:  password,
 		},
 	)
 }

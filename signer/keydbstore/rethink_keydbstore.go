@@ -6,7 +6,6 @@ import (
 	"sync"
 	"time"
 
-	"github.com/docker/notary"
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/storage/rethinkdb"
 	"github.com/docker/notary/trustmanager"
@@ -24,6 +23,8 @@ type RethinkDBKeyStore struct {
 	defaultPassAlias string
 	retriever        passphrase.Retriever
 	cachedKeys       map[string]data.PrivateKey
+	user             string
+	password         string
 }
 
 // RDBPrivateKey represents a PrivateKey in the rethink database
@@ -49,7 +50,7 @@ func (g RDBPrivateKey) TableName() string {
 }
 
 // NewRethinkDBKeyStore returns a new RethinkDBKeyStore backed by a RethinkDB database
-func NewRethinkDBKeyStore(dbName string, passphraseRetriever passphrase.Retriever, defaultPassAlias string, rethinkSession *gorethink.Session) *RethinkDBKeyStore {
+func NewRethinkDBKeyStore(dbName, username, password string, passphraseRetriever passphrase.Retriever, defaultPassAlias string, rethinkSession *gorethink.Session) *RethinkDBKeyStore {
 	cachedKeys := make(map[string]data.PrivateKey)
 
 	return &RethinkDBKeyStore{
@@ -59,6 +60,8 @@ func NewRethinkDBKeyStore(dbName string, passphraseRetriever passphrase.Retrieve
 		dbName:           dbName,
 		retriever:        passphraseRetriever,
 		cachedKeys:       cachedKeys,
+		user:             username,
+		password:         password,
 	}
 }
 
@@ -244,7 +247,7 @@ func (rdb RethinkDBKeyStore) Bootstrap() error {
 	}); err != nil {
 		return err
 	}
-	return rethinkdb.CreateAndGrantDBUser(rdb.sess, rdb.dbName, notary.NotarySignerUser, "")
+	return rethinkdb.CreateAndGrantDBUser(rdb.sess, rdb.dbName, rdb.user, rdb.password)
 }
 
 // CheckHealth verifies that DB exists and is query-able
