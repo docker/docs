@@ -540,13 +540,15 @@ func (ps passwordStore) Basic(u *url.URL) (string, string) {
 
 	username := strings.TrimSpace(string(userIn))
 
-	state, err := term.SaveState(0)
-	if err != nil {
-		logrus.Errorf("error saving terminal state, cannot retrieve password: %s", err)
-		return "", ""
+	if term.IsTerminal(0) {
+		state, err := term.SaveState(0)
+		if err != nil {
+			logrus.Errorf("error saving terminal state, cannot retrieve password: %s", err)
+			return "", ""
+		}
+		term.DisableEcho(0, state)
+		defer term.RestoreTerminal(0, state)
 	}
-	term.DisableEcho(0, state)
-	defer term.RestoreTerminal(0, state)
 
 	fmt.Fprintf(os.Stdout, "Enter password: ")
 
