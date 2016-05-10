@@ -217,7 +217,8 @@ func TestParseRethinkStorageDBStoreInvalidBackend(t *testing.T) {
 			"tls_ca_file": "/tls/ca.pem",
 			"client_cert_file": "/tls/cert.pem",
 			"client_key_file": "/tls/key.pem",
-			"database": "rethinkdbtest"
+			"database": "rethinkdbtest",
+			"username": "user"
 		}
 	}`)
 
@@ -234,7 +235,9 @@ func TestParseRethinkStorageDBStoreEmptyDBUrl(t *testing.T) {
 			"tls_ca_file": "/tls/ca.pem",
 			"client_cert_file": "/tls/cert.pem",
 			"client_key_file": "/tls/key.pem",
-			"database": "rethinkdbtest"
+			"database": "rethinkdbtest",
+			"username": "user",
+			"password": "password"
 		}
 	}`)
 
@@ -251,7 +254,8 @@ func TestParseRethinkStorageDBStoreEmptyDBName(t *testing.T) {
 			"db_url": "username:password@tcp(hostname:1234)/dbname",
 			"tls_ca_file": "/tls/ca.pem",
 			"client_cert_file": "/tls/cert.pem",
-			"client_key_file": "/tls/key.pem"
+			"client_key_file": "/tls/key.pem",
+			"username": "user"
 		}
 	}`)
 
@@ -268,7 +272,8 @@ func TestParseRethinkStorageDBStoreEmptyCA(t *testing.T) {
 			"db_url": "username:password@tcp(hostname:1234)/dbname",
 			"database": "rethinkdbtest",
 			"client_cert_file": "/tls/cert.pem",
-			"client_key_file": "/tls/key.pem"
+			"client_key_file": "/tls/key.pem",
+			"username": "user"
 		}
 	}`)
 
@@ -284,13 +289,32 @@ func TestParseRethinkStorageDBStoreEmptyCertAndKey(t *testing.T) {
 			"backend": "rethinkdb",
 			"db_url": "username:password@tcp(hostname:1234)/dbname",
 			"database": "rethinkdbtest",
-			"tls_ca_file": "/tls/ca.pem"
+			"tls_ca_file": "/tls/ca.pem",
+			"username": "user"
 		}
 	}`)
 
 	_, err := ParseRethinkDBStorage(config)
 	require.Error(t, err)
 	require.Contains(t, err.Error(), "cowardly refusal to connect to rethinkdb without a client cert")
+}
+
+// ParseRethinkDBStorage will require a username to connect to the database after bootstrapping
+func TestParseRethinkStorageDBStoreEmptyUsername(t *testing.T) {
+	config := configure(`{
+		"storage": {
+			"backend": "rethinkdb",
+			"db_url": "username:password@tcp(hostname:1234)/dbname",
+			"database": "rethinkdbtest",
+			"client_cert_file": "/tls/cert.pem",
+			"client_key_file": "/tls/key.pem",
+			"tls_ca_file": "/tls/ca.pem"
+		}
+	}`)
+
+	_, err := ParseRethinkDBStorage(config)
+	require.Error(t, err)
+	require.Contains(t, err.Error(), "requires a username to connect to the db")
 }
 
 func TestParseSQLStorageWithEnvironmentVariables(t *testing.T) {
