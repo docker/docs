@@ -236,11 +236,15 @@ func (rdb RethinkDBKeyStore) ExportKey(keyID string) ([]byte, error) {
 	return nil, errors.New("Exporting from a RethinkDBKeyStore is not supported.")
 }
 
-// Bootstrap sets up the database and tables
+// Bootstrap sets up the database and tables, also creating the notary signer user with appropriate db permission
 func (rdb RethinkDBKeyStore) Bootstrap() error {
-	return rethinkdb.SetupDB(rdb.sess, rdb.dbName, []rethinkdb.Table{
+	if err := rethinkdb.SetupDB(rdb.sess, rdb.dbName, []rethinkdb.Table{
 		privateKeys,
-	})
+	}); err != nil {
+		return err
+	}
+
+	return rethinkdb.CreateAndGrantDBUser(rdb.sess, rdb.dbName, "signer", "")
 }
 
 // CheckHealth verifies that DB exists and is query-able
