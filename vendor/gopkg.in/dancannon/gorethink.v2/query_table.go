@@ -152,6 +152,8 @@ type ChangesOpts struct {
 	Squash              interface{} `gorethink:"squash,omitempty"`
 	IncludeInitial      interface{} `gorethink:"include_initial,omitempty"`
 	IncludeStates       interface{} `gorethink:"include_states,omitempty"`
+	IncludeOffsets      interface{} `gorethink:"include_offsets,omitempty"`
+	IncludeTypes        interface{} `gorethink:"include_types,omitempty"`
 	ChangefeedQueueSize interface{} `gorethink:"changefeed_queue_size,omitempty"`
 }
 

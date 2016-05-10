@@ -56,6 +56,10 @@ const (
 	MemoryBackend    = "memory"
 	SQLiteBackend    = "sqlite3"
 	RethinkDBBackend = "rethinkdb"
+
+	// Users for the notaryserver and notarysigner databases, respectively
+	NotaryServerUser = "server"
+	NotarySignerUser = "signer"
 )
 
 // NotaryDefaultExpiries is the construct used to configure the default expiry times of

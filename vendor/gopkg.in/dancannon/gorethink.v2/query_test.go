@@ -65,3 +65,17 @@ func (s *RethinkSuite) TestQueryRunRawTime(c *test.C) {
 	c.Assert(response["$reql_type$"], test.NotNil)
 	c.Assert(response["$reql_type$"], test.Equals, "TIME")
 }
+
+func (s *RethinkSuite) TestQueryRunNil(c *test.C) {
+	res, err := Expr("Test").Run(nil)
+	c.Assert(res, test.IsNil)
+	c.Assert(err, test.NotNil)
+	c.Assert(err, test.Equals, ErrConnectionClosed)
+}
+
+func (s *RethinkSuite) TestQueryRunNotConnected(c *test.C) {
+	res, err := Expr("Test").Run(&Session{})
+	c.Assert(res, test.IsNil)
+	c.Assert(err, test.NotNil)
+	c.Assert(err, test.Equals, ErrConnectionClosed)
+}

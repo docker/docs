@@ -3,6 +3,7 @@ package rethinkdb
 import (
 	"time"
 
+	"github.com/Sirupsen/logrus"
 	"github.com/docker/go-connections/tlsconfig"
 	"gopkg.in/dancannon/gorethink.v2"
 )
@@ -17,9 +18,10 @@ type Timing struct {
 	DeletedAt time.Time `gorethink:"deleted_at"`
 }
 
-// Connection sets up a RethinkDB connection to the host (`host:port` format)
+// AdminConnection sets up an admin RethinkDB connection to the host (`host:port` format)
 // using the CA .pem file provided at path `caFile`
-func Connection(tlsOpts tlsconfig.Options, host string) (*gorethink.Session, error) {
+func AdminConnection(tlsOpts tlsconfig.Options, host string) (*gorethink.Session, error) {
+	logrus.Debugf("attempting to connect admin to host %s", host)
 	t, err := tlsconfig.Client(tlsOpts)
 	if err != nil {
 		return nil, err
@@ -28,6 +30,23 @@ func Connection(tlsOpts tlsconfig.Options, host string) (*gorethink.Session, err
 		gorethink.ConnectOpts{
 			Address:   host,
 			TLSConfig: t,
+		},
+	)
+}
+
+// UserConnection sets up a user RethinkDB connection to the host (`host:port` format)
+// using the CA .pem file provided at path `caFile`, using the provided username.
+func UserConnection(tlsOpts tlsconfig.Options, host, username string) (*gorethink.Session, error) {
+	logrus.Debugf("attempting to connect user %s to host %s", username, host)
+	t, err := tlsconfig.Client(tlsOpts)
+	if err != nil {
+		return nil, err
+	}
+	return gorethink.Connect(
+		gorethink.ConnectOpts{
+			Address:   host,
+			TLSConfig: t,
+			Username:  username,
 		},
 	)
 }

@@ -242,6 +242,10 @@ func (t Term) Run(s *Session, optArgs ...RunOpts) (*Cursor, error) {
 		opts = optArgs[0].toMap()
 	}
 
+	if s == nil || !s.IsConnected() {
+		return nil, ErrConnectionClosed
+	}
+
 	q, err := s.newQuery(t, opts)
 	if err != nil {
 		return nil, err

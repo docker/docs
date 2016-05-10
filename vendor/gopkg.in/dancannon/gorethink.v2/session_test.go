@@ -129,3 +129,25 @@ func (s *RethinkSuite) TestSessionConnectDatabase(c *test.C) {
 	c.Assert(err, test.NotNil)
 	c.Assert(err.Error(), test.Equals, "gorethink: Database `test2` does not exist. in: \nr.Table(\"test2\")")
 }
+
+func (s *RethinkSuite) TestSessionConnectUsername(c *test.C) {
+	session, err := Connect(ConnectOpts{
+		Address: url,
+	})
+	c.Assert(err, test.IsNil)
+
+	DB("rethinkdb").Table("users").Insert(map[string]string{
+		"id":       "gorethink_test",
+		"password": "password",
+	}).Exec(session)
+
+	session, err = Connect(ConnectOpts{
+		Address:  url,
+		Username: "gorethink_test",
+		Password: "password",
+	})
+	c.Assert(err, test.IsNil)
+
+	_, err = Expr("Hello World").Run(session)
+	c.Assert(err, test.IsNil)
+}

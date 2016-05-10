@@ -2,6 +2,22 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## v2.0.2 - 2016-04-18
+
+### Fixed
+ - Fixed issue which prevented anonymous `time.Time` values from being encoded when used in a struct.
+ - Fixed panic when attempting to run a query with a nil session
+
+## v2.0.1 - 2016-04-14
+
+### Added
+ - Added `UnionWithOpts` term which allows `Union` to be called with optional arguments (such as `Interleave`)
+ - Added `IncludeOffsets` and `IncludeTypes` optional arguments to `ChangesOpts`
+ - Added `Conflict` optional argument to `InsertOpts`
+
+### Fixed
+ - Fixed error when connecting to database as non-admin user, please note that `DiscoverHosts` will not work with user authentication at this time due to the fact that RethinkDB restricts access to the required system tables.
+
 ## v2.0.0 - 2016-04-13
 
 ### Changed
