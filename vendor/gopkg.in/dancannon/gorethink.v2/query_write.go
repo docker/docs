@@ -30,6 +30,7 @@ type UpdateOpts struct {
 	Durability    interface{} `gorethink:"durability,omitempty"`
 	ReturnChanges interface{} `gorethink:"return_changes,omitempty"`
 	NotAtomic     interface{} `gorethink:"non_atomic,omitempty"`
+	Conflict      interface{} `gorethink:"conflict,omitempty"`
 }
 
 func (o *UpdateOpts) toMap() map[string]interface{} {

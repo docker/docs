@@ -7,6 +7,7 @@ import (
 	"sort"
 	"time"
 
+	"github.com/docker/notary"
 	"github.com/docker/notary/storage/rethinkdb"
 	"github.com/docker/notary/tuf/data"
 	"gopkg.in/dancannon/gorethink.v2"
@@ -270,7 +271,7 @@ func (rdb RethinkDB) Bootstrap() error {
 	}); err != nil {
 		return err
 	}
-	return rethinkdb.CreateAndGrantDBUser(rdb.sess, rdb.dbName, "server", "")
+	return rethinkdb.CreateAndGrantDBUser(rdb.sess, rdb.dbName, notary.NotaryServerUser, "")
 }
 
 // CheckHealth is currently a noop

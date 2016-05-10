@@ -6,6 +6,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/docker/notary"
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/storage/rethinkdb"
 	"github.com/docker/notary/trustmanager"
@@ -243,8 +244,7 @@ func (rdb RethinkDBKeyStore) Bootstrap() error {
 	}); err != nil {
 		return err
 	}
-
-	return rethinkdb.CreateAndGrantDBUser(rdb.sess, rdb.dbName, "signer", "")
+	return rethinkdb.CreateAndGrantDBUser(rdb.sess, rdb.dbName, notary.NotarySignerUser, "")
 }
 
 // CheckHealth verifies that DB exists and is query-able

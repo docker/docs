@@ -110,6 +110,8 @@ func (c *Connection) Query(q Query) (*Response, *Cursor, error) {
 	// Add token if query is a START/NOREPLY_WAIT
 	if q.Type == p.Query_START || q.Type == p.Query_NOREPLY_WAIT || q.Type == p.Query_SERVER_INFO {
 		q.Token = c.nextToken()
+	}
+	if q.Type == p.Query_START || q.Type == p.Query_NOREPLY_WAIT {
 		if c.opts.Database != "" {
 			var err error
 			q.Opts["db"], err = DB(c.opts.Database).build()

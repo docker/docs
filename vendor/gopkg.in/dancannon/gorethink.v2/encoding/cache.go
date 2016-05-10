@@ -6,6 +6,7 @@ import (
 	"reflect"
 	"sort"
 	"sync"
+	"time"
 )
 
 // A field represents a single field found in a struct.
@@ -131,7 +132,7 @@ func typeFields(t reflect.Type) []field {
 				}
 
 				// Record found field and index sequence.
-				if name != "" || !sf.Anonymous || ft.Kind() != reflect.Struct {
+				if name != "" || !sf.Anonymous || ft.Kind() != reflect.Struct || isPseudoType(ft) {
 					tagged := name != ""
 					if name == "" {
 						name = sf.Name
@@ -198,6 +199,10 @@ func typeFields(t reflect.Type) []field {
 	sort.Sort(byIndex(fields))
 
 	return fields
+}
+
+func isPseudoType(t reflect.Type) bool {
+	return t == reflect.TypeOf(time.Time{})
 }
 
 // dominantField looks through the fields, all of which are known to
