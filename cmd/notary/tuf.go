@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"encoding/hex"
 	"fmt"
-	"io/ioutil"
 	"net"
 	"net/http"
 	"net/url"
@@ -91,6 +90,10 @@ type tufCommander struct {
 	roles  []string
 	sha256 string
 	sha512 string
+
+	input  string
+	output string
+	quiet  bool
 }
 
 func (t *tufCommander) AddToCommand(cmd *cobra.Command) {
@@ -98,7 +101,6 @@ func (t *tufCommander) AddToCommand(cmd *cobra.Command) {
 	cmd.AddCommand(cmdTufStatusTemplate.ToCommand(t.tufStatus))
 	cmd.AddCommand(cmdTufPublishTemplate.ToCommand(t.tufPublish))
 	cmd.AddCommand(cmdTufLookupTemplate.ToCommand(t.tufLookup))
-	cmd.AddCommand(cmdTufVerifyTemplate.ToCommand(t.tufVerify))
 
 	cmdTufList := cmdTufListTemplate.ToCommand(t.tufList)
 	cmdTufList.Flags().StringSliceVarP(
@@ -118,6 +120,12 @@ func (t *tufCommander) AddToCommand(cmd *cobra.Command) {
 	cmdTufAddHash.Flags().StringVar(&t.sha256, notary.SHA256, "", "hex encoded sha256 of the target to add")
 	cmdTufAddHash.Flags().StringVar(&t.sha512, notary.SHA512, "", "hex encoded sha512 of the target to add")
 	cmd.AddCommand(cmdTufAddHash)
+
+	cmdTufVerify := cmdTufVerifyTemplate.ToCommand(t.tufVerify)
+	cmdTufVerify.Flags().StringVarP(&t.input, "input", "i", "", "Read from a file, instead of STDIN")
+	cmdTufVerify.Flags().StringVarP(&t.output, "output", "o", "", "Write to a file, instead of STDOUT")
+	cmdTufVerify.Flags().BoolVarP(&t.quiet, "quiet", "q", false, "No output except for errors")
+	cmd.AddCommand(cmdTufVerify)
 }
 
 func (t *tufCommander) tufAddByHash(cmd *cobra.Command, args []string) error {
@@ -482,10 +490,9 @@ func (t *tufCommander) tufVerify(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	// Reads all of the data on STDIN
-	payload, err := ioutil.ReadAll(os.Stdin)
+	payload, err := getPayload(t)
 	if err != nil {
-		return fmt.Errorf("Error reading content from STDIN: %v", err)
+		return err
 	}
 
 	gun := args[0]
@@ -516,8 +523,7 @@ func (t *tufCommander) tufVerify(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("data not present in the trusted collection, %v", err)
 	}
 
-	_, _ = os.Stdout.Write(payload)
-	return nil
+	return feedback(t, payload)
 }
 
 type passwordStore struct {
