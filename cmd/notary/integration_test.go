@@ -73,7 +73,7 @@ func setupServerHandler(metaStore storage.MetaStore) http.Handler {
 	ctx = ctxu.WithLogger(ctx, logrus.NewEntry(l))
 
 	cryptoService := cryptoservice.NewCryptoService(trustmanager.NewKeyMemoryStore(passphrase.ConstantRetriever("pass")))
-	return server.RootHandler(nil, ctx, cryptoService, nil, nil)
+	return server.RootHandler(nil, ctx, cryptoService, nil, nil, nil)
 }
 
 // makes a testing notary-server
