@@ -83,8 +83,14 @@ var (
 	ErrNoKeyAlgorithm = errcode.Register(errGroup, errcode.ErrorDescriptor{
 		Value:          "NO_KEYALGORITHM",
 		Message:        "The server does not have a key algorithm configured.",
-		Description:    "No key algorihtm has been configured for the server and it has been asked to perform an operation that requires generation.",
+		Description:    "No key algorithm has been configured for the server and it has been asked to perform an operation that requires generation.",
 		HTTPStatusCode: http.StatusInternalServerError,
+	})
+	ErrInvalidGUN = errcode.Register(errGroup, errcode.ErrorDescriptor{
+		Value:          "INVALID_GUN",
+		Message:        "The server does not support actions on images of this name.",
+		Description:    "The server does not support actions on images of this name",
+		HTTPStatusCode: http.StatusBadRequest,
 	})
 	ErrUnknown = errcode.ErrorCodeUnknown
 )

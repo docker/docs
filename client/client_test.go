@@ -140,7 +140,7 @@ func fullTestServer(t *testing.T) *httptest.Server {
 	ctx = ctxu.WithLogger(ctx, logrus.NewEntry(l))
 
 	cryptoService := cryptoservice.NewCryptoService(trustmanager.NewKeyMemoryStore(passphraseRetriever))
-	return httptest.NewServer(server.RootHandler(nil, ctx, cryptoService, nil, nil))
+	return httptest.NewServer(server.RootHandler(nil, ctx, cryptoService, nil, nil, nil))
 }
 
 // server that returns some particular error code all the time

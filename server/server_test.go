@@ -14,10 +14,13 @@ import (
 	"testing"
 
 	_ "github.com/docker/distribution/registry/auth/silly"
+	"github.com/docker/notary"
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
+	"github.com/docker/notary/tuf/store"
 	"github.com/docker/notary/tuf/testutils"
+	tufutils "github.com/docker/notary/tuf/utils"
 	"github.com/docker/notary/utils"
 	"github.com/stretchr/testify/require"
 	"golang.org/x/net/context"
@@ -55,9 +58,98 @@ func TestRunReservedPort(t *testing.T) {
 	)
 }
 
+func TestRepoPrefixMatches(t *testing.T) {
+	gun := "docker.io/notary"
+	meta, cs, err := testutils.NewRepoMetadata(gun)
+	require.NoError(t, err)
+
+	ctx := context.WithValue(context.Background(), "metaStore", storage.NewMemStorage())
+	ctx = context.WithValue(ctx, "keyAlgorithm", data.ED25519Key)
+
+	snChecksumBytes := sha256.Sum256(meta[data.CanonicalSnapshotRole])
+
+	// successful gets
+	handler := RootHandler(nil, ctx, cs, nil, nil, []string{"docker.io"})
+	ts := httptest.NewServer(handler)
+
+	url := fmt.Sprintf("%s/v2/%s/_trust/tuf/", ts.URL, gun)
+	uploader, err := store.NewHTTPStore(url, "", "json", "key", http.DefaultTransport)
+	require.NoError(t, err)
+
+	// uploading is cool
+	require.NoError(t, uploader.SetMultiMeta(meta))
+	// getting is cool
+	_, err = uploader.GetMeta(data.CanonicalSnapshotRole, notary.MaxDownloadSize)
+	require.NoError(t, err)
+
+	_, err = uploader.GetMeta(
+		tufutils.ConsistentName(data.CanonicalSnapshotRole, snChecksumBytes[:]), notary.MaxDownloadSize)
+	require.NoError(t, err)
+
+	_, err = uploader.GetKey(data.CanonicalTimestampRole)
+	require.NoError(t, err)
+
+	// the httpstore doesn't actually delete all, so we do it manually
+	req, err := http.NewRequest("DELETE", url, nil)
+	require.NoError(t, err)
+	res, err := http.DefaultTransport.RoundTrip(req)
+	require.NoError(t, err)
+	defer res.Body.Close()
+	require.Equal(t, http.StatusOK, res.StatusCode)
+}
+
+func TestRepoPrefixDoesNotMatch(t *testing.T) {
+	gun := "docker.io/notary"
+	meta, cs, err := testutils.NewRepoMetadata(gun)
+	require.NoError(t, err)
+	s := storage.NewMemStorage()
+
+	ctx := context.WithValue(context.Background(), "metaStore", s)
+	ctx = context.WithValue(ctx, "keyAlgorithm", data.ED25519Key)
+
+	snChecksumBytes := sha256.Sum256(meta[data.CanonicalSnapshotRole])
+
+	// successful gets
+	handler := RootHandler(nil, ctx, cs, nil, nil, []string{"nope"})
+	ts := httptest.NewServer(handler)
+
+	url := fmt.Sprintf("%s/v2/%s/_trust/tuf/", ts.URL, gun)
+	uploader, err := store.NewHTTPStore(url, "", "json", "key", http.DefaultTransport)
+	require.NoError(t, err)
+
+	require.Error(t, uploader.SetMultiMeta(meta))
+
+	// update the storage so we don't fail just because the metadata is missing
+	for _, roleName := range data.BaseRoles {
+		require.NoError(t, s.UpdateCurrent(gun, storage.MetaUpdate{
+			Role:    roleName,
+			Data:    meta[roleName],
+			Version: 1,
+		}))
+	}
+
+	_, err = uploader.GetMeta(data.CanonicalSnapshotRole, notary.MaxDownloadSize)
+	require.Error(t, err)
+
+	_, err = uploader.GetMeta(
+		tufutils.ConsistentName(data.CanonicalSnapshotRole, snChecksumBytes[:]), notary.MaxDownloadSize)
+	require.Error(t, err)
+
+	_, err = uploader.GetKey(data.CanonicalTimestampRole)
+	require.Error(t, err)
+
+	// the httpstore doesn't actually delete all, so we do it manually
+	req, err := http.NewRequest("DELETE", url, nil)
+	require.NoError(t, err)
+	res, err := http.DefaultTransport.RoundTrip(req)
+	require.NoError(t, err)
+	defer res.Body.Close()
+	require.Equal(t, http.StatusNotFound, res.StatusCode)
+}
+
 func TestMetricsEndpoint(t *testing.T) {
 	handler := RootHandler(nil, context.Background(), signed.NewEd25519(),
-		nil, nil)
+		nil, nil, nil)
 	ts := httptest.NewServer(handler)
 	defer ts.Close()
 
@@ -72,7 +164,7 @@ func TestGetKeysEndpoint(t *testing.T) {
 		context.Background(), "metaStore", storage.NewMemStorage())
 	ctx = context.WithValue(ctx, "keyAlgorithm", data.ED25519Key)
 
-	handler := RootHandler(nil, ctx, signed.NewEd25519(), nil, nil)
+	handler := RootHandler(nil, ctx, signed.NewEd25519(), nil, nil, nil)
 	ts := httptest.NewServer(handler)
 	defer ts.Close()
 
@@ -144,7 +236,7 @@ func TestGetRoleByHash(t *testing.T) {
 	ctx = context.WithValue(ctx, "keyAlgorithm", data.ED25519Key)
 
 	ccc := utils.NewCacheControlConfig(10, false)
-	handler := RootHandler(nil, ctx, signed.NewEd25519(), ccc, ccc)
+	handler := RootHandler(nil, ctx, signed.NewEd25519(), ccc, ccc, nil)
 	serv := httptest.NewServer(handler)
 	defer serv.Close()
 
@@ -188,7 +280,7 @@ func TestGetCurrentRole(t *testing.T) {
 	ctx = context.WithValue(ctx, "keyAlgorithm", data.ED25519Key)
 
 	ccc := utils.NewCacheControlConfig(10, false)
-	handler := RootHandler(nil, ctx, signed.NewEd25519(), ccc, ccc)
+	handler := RootHandler(nil, ctx, signed.NewEd25519(), ccc, ccc, nil)
 	serv := httptest.NewServer(handler)
 	defer serv.Close()
 
