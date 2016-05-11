@@ -3,7 +3,9 @@ package main
 import (
 	"crypto/tls"
 	"fmt"
+	"path"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/Sirupsen/logrus"
@@ -21,8 +23,20 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/spf13/viper"
 	"golang.org/x/net/context"
-	"gopkg.in/dancannon/gorethink.v2"
+	gorethink "gopkg.in/dancannon/gorethink.v2"
 )
+
+// gets the required gun prefixes accepted by this server
+func getRequiredGunPrefixes(configuration *viper.Viper) ([]string, error) {
+	prefixes := configuration.GetStringSlice("repositories.gun_prefixes")
+	for _, prefix := range prefixes {
+		p := path.Clean(strings.TrimSpace(prefix))
+		if p+"/" != prefix || strings.HasPrefix(p, "/") || strings.HasPrefix(p, "..") {
+			return nil, fmt.Errorf("Invalid GUN prefix %s", prefix)
+		}
+	}
+	return prefixes, nil
+}
 
 // get the address for the HTTP server, and parses the optional TLS
 // configuration for the server - if no TLS configuration is specified,
@@ -217,6 +231,11 @@ func parseServerConfig(configFilePath string, hRegister healthRegister) (context
 	}
 	logrus.SetLevel(lvl)
 
+	prefixes, err := getRequiredGunPrefixes(config)
+	if err != nil {
+		return nil, server.Config{}, err
+	}
+
 	// parse bugsnag config
 	bugsnagConf, err := utils.ParseBugsnag(config)
 	if err != nil {
@@ -252,6 +271,7 @@ func parseServerConfig(configFilePath string, hRegister healthRegister) (context
 		Trust:                        trust,
 		AuthMethod:                   config.GetString("auth.type"),
 		AuthOpts:                     config.Get("auth.options"),
+		RepoPrefixes:                 prefixes,
 		CurrentCacheControlConfig:    currentCache,
 		ConsistentCacheControlConfig: consistentCache,
 	}, nil
