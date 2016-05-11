@@ -66,11 +66,11 @@ If you want to use your own certificates:
 
 3. Add the following files to the volume top-level directory:
 
-    | File     | Description                                                    |
-    |:---------|:---------------------------------------------------------------|
-    | ca.pem   | Your Root CA Certificate chain, including any intermediaries.  |
-    | cert.pem | Your signed UCP controller certificate.                        |
-    | key.pem  | Your UCP controller private key.                               |
+    | File     | Description                                                                                   |
+    |:---------|:----------------------------------------------------------------------------------------------|
+    | ca.pem   | Your certificate chain, including the root and any intermediate certificates, in that order.  |
+    | cert.pem | Your signed UCP controller certificate.                                                       |
+    | key.pem  | Your UCP controller private key.                                                              |
 
 
 ## Step 5: Install the UCP controller
