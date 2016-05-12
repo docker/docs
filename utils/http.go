@@ -15,14 +15,14 @@ import (
 	"golang.org/x/net/context"
 )
 
-// contextHandler defines an alterate HTTP handler interface which takes in
+// ContextHandler defines an alterate HTTP handler interface which takes in
 // a context for authorization and returns an HTTP application error.
-type contextHandler func(ctx context.Context, w http.ResponseWriter, r *http.Request) error
+type ContextHandler func(ctx context.Context, w http.ResponseWriter, r *http.Request) error
 
 // rootHandler is an implementation of an HTTP request handler which handles
 // authorization and calling out to the defined alternate http handler.
 type rootHandler struct {
-	handler contextHandler
+	handler ContextHandler
 	auth    auth.AccessController
 	actions []string
 	context context.Context
@@ -34,8 +34,8 @@ type rootHandler struct {
 // Context creator and authorizer.  The returned factory allows creating
 // new rootHandlers from the alternate http handler contextHandler and
 // a scope.
-func RootHandlerFactory(auth auth.AccessController, ctx context.Context, trust signed.CryptoService) func(contextHandler, ...string) *rootHandler {
-	return func(handler contextHandler, actions ...string) *rootHandler {
+func RootHandlerFactory(auth auth.AccessController, ctx context.Context, trust signed.CryptoService) func(ContextHandler, ...string) *rootHandler {
+	return func(handler ContextHandler, actions ...string) *rootHandler {
 		return &rootHandler{
 			handler: handler,
 			auth:    auth,
