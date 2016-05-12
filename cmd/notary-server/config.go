@@ -32,7 +32,7 @@ func getRequiredGunPrefixes(configuration *viper.Viper) ([]string, error) {
 	for _, prefix := range prefixes {
 		p := path.Clean(strings.TrimSpace(prefix))
 		if p+"/" != prefix || strings.HasPrefix(p, "/") || strings.HasPrefix(p, "..") {
-			return nil, fmt.Errorf("Invalid GUN prefix %s", prefix)
+			return nil, fmt.Errorf("invalid GUN prefix %s", prefix)
 		}
 	}
 	return prefixes, nil
