@@ -11,6 +11,14 @@ weight=99
 
 # Changelog
 
+## v0.3
+#### 5/11/2016
+Implements root key and certificate rotation, as well as trust pinning configurations to specify known good key IDs and CAs to replace TOFU.
+Additional improvements and fixes to notary internals, and RethinkDB support.
+
+> Detailed release notes can be found here:
+<a href="https://github.com/docker/notary/releases/tag/v0.3.0" target="_blank">v0.3 release notes</a>.
+
 ## v0.2
 #### 2/24/2016
 Adds support for
