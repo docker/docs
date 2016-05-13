@@ -222,28 +222,23 @@ func (c *Cluster) connectNodes(hosts []Host) {
 		}
 		defer conn.Close()
 
-		q, err := newQuery(
-			DB("rethinkdb").Table("server_status"),
-			map[string]interface{}{},
-			c.opts,
-		)
-		if err != nil {
-			Log.Warnf("Error building query: %s", err)
-			continue
-		}
-
-		_, cursor, err := conn.Query(q)
-		if err != nil {
-			Log.Warnf("Error fetching cluster status: %s", err)
-			continue
-		}
-
-		// TODO: connect to seed hosts using `.Server()` to get server ID. Need
-		// some way of making this backwards compatible
-
-		// TODO: AFTER try to discover hosts
-
 		if c.opts.DiscoverHosts {
+			q, err := newQuery(
+				DB("rethinkdb").Table("server_status"),
+				map[string]interface{}{},
+				c.opts,
+			)
+			if err != nil {
+				Log.Warnf("Error building query: %s", err)
+				continue
+			}
+
+			_, cursor, err := conn.Query(q)
+			if err != nil {
+				Log.Warnf("Error fetching cluster status: %s", err)
+				continue
+			}
+
 			var results []nodeStatus
 			err = cursor.All(&results)
 			if err != nil {
@@ -265,7 +260,13 @@ func (c *Cluster) connectNodes(hosts []Host) {
 				}
 			}
 		} else {
-			node, err := c.connectNode(host.String(), []Host{host})
+			svrRsp, err := conn.Server()
+			if err != nil {
+				Log.Warnf("Error fetching server ID: %s", err)
+				continue
+			}
+
+			node, err := c.connectNode(svrRsp.ID, []Host{host})
 			if err == nil {
 				if _, ok := nodeSet[node.ID]; !ok {
 					Log.WithFields(logrus.Fields{

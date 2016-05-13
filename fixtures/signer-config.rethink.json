@@ -15,6 +15,8 @@
 		"database": "notarysigner",
 		"tls_ca_file": "./rethinkdb/ca.pem",
 		"client_key_file": "./rethinkdb/key.pem",
-		"client_cert_file": "./rethinkdb/cert.pem"
+		"client_cert_file": "./rethinkdb/cert.pem",
+		"username": "signer",
+		"password": "signerpass"
 	}
 }

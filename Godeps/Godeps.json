@@ -182,23 +182,23 @@
 		},
 		{
 			"ImportPath": "gopkg.in/dancannon/gorethink.v2",
-			"Comment": "v2.0.0",
-			"Rev": "ad28ba0b1cbf0aa5bbae1ea71941564cc08abfe4"
+			"Comment": "v2.0.2",
+			"Rev": "3742792da4bc279ccd6d807f24687009cbeda860"
 		},
 		{
 			"ImportPath": "gopkg.in/dancannon/gorethink.v2/encoding",
-			"Comment": "v2.0.0",
-			"Rev": "ad28ba0b1cbf0aa5bbae1ea71941564cc08abfe4"
+			"Comment": "v2.0.2",
+			"Rev": "3742792da4bc279ccd6d807f24687009cbeda860"
 		},
 		{
 			"ImportPath": "gopkg.in/dancannon/gorethink.v2/ql2",
-			"Comment": "v2.0.0",
-			"Rev": "ad28ba0b1cbf0aa5bbae1ea71941564cc08abfe4"
+			"Comment": "v2.0.2",
+			"Rev": "3742792da4bc279ccd6d807f24687009cbeda860"
 		},
 		{
 			"ImportPath": "gopkg.in/dancannon/gorethink.v2/types",
-			"Comment": "v2.0.0",
-			"Rev": "ad28ba0b1cbf0aa5bbae1ea71941564cc08abfe4"
+			"Comment": "v2.0.2",
+			"Rev": "3742792da4bc279ccd6d807f24687009cbeda860"
 		},
 		{
 			"ImportPath": "github.com/denisenkom/go-mssqldb",
