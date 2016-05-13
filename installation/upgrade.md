@@ -152,6 +152,7 @@ replica nodes):
     2. Make sure that node is healthy, using the instructions
     in [step 4](#no-ha-step-4).
 
+6. Make sure to flush your browser's cache prior to to running the upgraded UCP in the UI.
 
 ### My cluster is set for high-availability
 
@@ -269,6 +270,7 @@ If your cluster is set up for high-availability (has several replica nodes):
     2. Make sure the node is healthy, using the instructions
     in [step 7](#ha-step-7).
 
+11. Make sure to flush your browser's cache prior to to running the upgraded UCP in the UI.
 
 ## Where to go next
 
