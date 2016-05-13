@@ -28,7 +28,7 @@ $ docker run --rm -it docker/dtr remove --help
 ```
 
 To remove a replica safely, you must tell the bootstrapper about one healthy replica
-using the `--exsting-replica-id` flag and the replica to remove with the
+using the `--existing-replica-id` flag and the replica to remove with the
 `--replica-id` flag. It uses the healthy replica to safely inform your DTR cluster
 that the replica is about to be removed before it performs the actual removal.
 
