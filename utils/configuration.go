@@ -26,10 +26,12 @@ type Storage struct {
 // RethinkDBStorage is configuration about a RethinkDB backend service
 type RethinkDBStorage struct {
 	Storage
-	CA     string
-	Cert   string
-	DBName string
-	Key    string
+	CA       string
+	Cert     string
+	DBName   string
+	Key      string
+	Username string
+	Password string
 }
 
 // GetPathRelativeToConfig gets a configuration key which is a path, and if
@@ -118,10 +120,12 @@ func ParseRethinkDBStorage(configuration *viper.Viper) (*RethinkDBStorage, error
 			Backend: configuration.GetString("storage.backend"),
 			Source:  configuration.GetString("storage.db_url"),
 		},
-		CA:     GetPathRelativeToConfig(configuration, "storage.tls_ca_file"),
-		Cert:   GetPathRelativeToConfig(configuration, "storage.client_cert_file"),
-		Key:    GetPathRelativeToConfig(configuration, "storage.client_key_file"),
-		DBName: configuration.GetString("storage.database"),
+		CA:       GetPathRelativeToConfig(configuration, "storage.tls_ca_file"),
+		Cert:     GetPathRelativeToConfig(configuration, "storage.client_cert_file"),
+		Key:      GetPathRelativeToConfig(configuration, "storage.client_key_file"),
+		DBName:   configuration.GetString("storage.database"),
+		Username: configuration.GetString("storage.username"),
+		Password: configuration.GetString("storage.password"),
 	}
 
 	switch {
@@ -148,6 +152,11 @@ func ParseRethinkDBStorage(configuration *viper.Viper) (*RethinkDBStorage, error
 	case store.DBName == "":
 		return nil, fmt.Errorf(
 			"%s requires a specific database to connect to",
+			store.Backend,
+		)
+	case store.Username == "":
+		return nil, fmt.Errorf(
+			"%s requires a username to connect to the db",
 			store.Backend,
 		)
 	}

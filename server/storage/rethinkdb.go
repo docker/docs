@@ -45,15 +45,19 @@ func (r RDBKey) TableName() string {
 
 // RethinkDB implements a MetaStore against the Rethink Database
 type RethinkDB struct {
-	dbName string
-	sess   *gorethink.Session
+	dbName   string
+	sess     *gorethink.Session
+	user     string
+	password string
 }
 
 // NewRethinkDBStorage initializes a RethinkDB object
-func NewRethinkDBStorage(dbName string, sess *gorethink.Session) RethinkDB {
+func NewRethinkDBStorage(dbName, user, password string, sess *gorethink.Session) RethinkDB {
 	return RethinkDB{
-		dbName: dbName,
-		sess:   sess,
+		dbName:   dbName,
+		sess:     sess,
+		user:     user,
+		password: password,
 	}
 }
 
@@ -262,12 +266,15 @@ func (rdb RethinkDB) deleteByTSChecksum(tsChecksum string) error {
 	return nil
 }
 
-// Bootstrap sets up the database and tables
+// Bootstrap sets up the database and tables, also creating the notary server user with appropriate db permission
 func (rdb RethinkDB) Bootstrap() error {
-	return rethinkdb.SetupDB(rdb.sess, rdb.dbName, []rethinkdb.Table{
+	if err := rethinkdb.SetupDB(rdb.sess, rdb.dbName, []rethinkdb.Table{
 		tufFiles,
 		keys,
-	})
+	}); err != nil {
+		return err
+	}
+	return rethinkdb.CreateAndGrantDBUser(rdb.sess, rdb.dbName, rdb.user, rdb.password)
 }
 
 // CheckHealth is currently a noop

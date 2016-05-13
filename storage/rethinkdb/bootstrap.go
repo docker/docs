@@ -146,3 +146,31 @@ func SetupDB(session *gorethink.Session, dbName string, tables []Table) error {
 
 	return nil
 }
+
+// CreateAndGrantDBUser handles creating a rethink user and granting it permissions to the provided db.
+func CreateAndGrantDBUser(session *gorethink.Session, dbName, username, password string) error {
+	var err error
+	logrus.Debugf("creating user %s for db %s", username, dbName)
+	// If the password is empty, pass false to the password parameter
+	if password == "" {
+		err = gorethink.DB("rethinkdb").Table("users").Insert(map[string]interface{}{
+			"id":       username,
+			"password": false,
+		}).Exec(session)
+	} else {
+		err = gorethink.DB("rethinkdb").Table("users").Insert(map[string]string{
+			"id":       username,
+			"password": password,
+		}).Exec(session)
+	}
+
+	if err != nil {
+		return fmt.Errorf("unable to add user %s to rethinkdb users table: %s", username, err)
+	}
+
+	// Grant read and write permission
+	return gorethink.DB(dbName).Grant(username, map[string]bool{
+		"read":  true,
+		"write": true,
+	}).Exec(session)
+}

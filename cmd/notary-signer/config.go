@@ -127,11 +127,15 @@ func setUpCryptoservices(configuration *viper.Viper, allowedBackends []string) (
 			CertFile: storeConfig.Cert,
 			KeyFile:  storeConfig.Key,
 		}
-		sess, err = rethinkdb.Connection(tlsOpts, storeConfig.Source)
-		if err != nil {
-			return nil, err
+		if doBootstrap {
+			sess, err = rethinkdb.AdminConnection(tlsOpts, storeConfig.Source)
+		} else {
+			sess, err = rethinkdb.UserConnection(tlsOpts, storeConfig.Source, storeConfig.Username, storeConfig.Password)
 		}
-		s := keydbstore.NewRethinkDBKeyStore(storeConfig.DBName, passphraseRetriever, defaultAlias, sess)
+		if err != nil {
+			return nil, fmt.Errorf("Error starting %s driver: %s", backend, err.Error())
+		}
+		s := keydbstore.NewRethinkDBKeyStore(storeConfig.DBName, storeConfig.Username, storeConfig.Password, passphraseRetriever, defaultAlias, sess)
 		health.RegisterPeriodicFunc("DB operational", s.CheckHealth, time.Minute)
 		keyStore = s
 	case notary.MySQLBackend, notary.SQLiteBackend:

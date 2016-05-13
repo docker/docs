@@ -94,11 +94,15 @@ func getStore(configuration *viper.Viper, hRegister healthRegister) (
 			CertFile: storeConfig.Cert,
 			KeyFile:  storeConfig.Key,
 		}
-		sess, err = rethinkdb.Connection(tlsOpts, storeConfig.Source)
+		if doBootstrap {
+			sess, err = rethinkdb.AdminConnection(tlsOpts, storeConfig.Source)
+		} else {
+			sess, err = rethinkdb.UserConnection(tlsOpts, storeConfig.Source, storeConfig.Username, storeConfig.Password)
+		}
 		if err != nil {
 			return nil, fmt.Errorf("Error starting %s driver: %s", backend, err.Error())
 		}
-		s := storage.NewRethinkDBStorage(storeConfig.DBName, sess)
+		s := storage.NewRethinkDBStorage(storeConfig.DBName, storeConfig.Username, storeConfig.Password, sess)
 		store = *storage.NewTUFMetaStorage(s)
 		hRegister("DB operational", s.CheckHealth, time.Minute)
 	default:
