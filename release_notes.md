@@ -62,8 +62,6 @@ weight=110
 
 **Misc**
 
-* You no longer need to install UCP with --swarm-experimental to use swarm
-container rescheduling,
 * All UCP containers now have the 'com.docker.ucp.version' label with their
 upstream version or UCP version,
 * When running docker/ucp in interactive mode, the parameters and environment
@@ -77,6 +75,8 @@ The first is deprecated but still available.
 a success message is displayed, but that node will not be part of the
 cluster. As a workaround, join new controller nodes before upgrading, or
 perform a fresh installation of UCP 1.1.0.
+* If you have an active login session in UCP and do an upgrade, you should force
+refresh the browser or you may run into UI errors.
 * When joining replicas to the cluster, you may be prompted to restart the
 Docker daemon on that node. For a faster installation, only restart the Docker
 daemon after joining all replicas.
