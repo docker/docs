@@ -244,3 +244,31 @@ func AdjustLogLevel(increment bool) error {
 	logrus.SetLevel(lvl)
 	return nil
 }
+
+// ReloadConfiguration reads and parse the configuration in the host and do some verification.
+func ReloadConfiguration(oldConfig *viper.Viper, configFile string, envPrefix string, reload func(*viper.Viper)) error {
+	logrus.Infof("Got signal to reload configuration, reloading from: %s", configFile)
+
+	// parse a viper as the new Config
+	newConfig := viper.New()
+	SetupViper(newConfig, envPrefix)
+	if err := ParseViper(newConfig, configFile); err != nil {
+		return err
+	}
+
+	// To check if there was anything wrong
+	if err := validateConfiguration(oldConfig, newConfig); err != nil {
+		return err
+	}
+
+	reload(newConfig)
+	return nil
+}
+
+// Reserved for future use, we can use it to validate some specific configs when necessary.
+// For example:
+// - to check if there are conflicts.
+// - to do some sanity check maybe.
+func validateConfiguration(oldConfig, newConfig *viper.Viper) error {
+	return nil
+}
