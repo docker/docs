@@ -6,6 +6,9 @@ import (
 	"path"
 	"strconv"
 	"strings"
+	"os"
+	"os/signal"
+	"syscall"
 	"time"
 
 	"github.com/Sirupsen/logrus"
@@ -225,6 +228,7 @@ func parseServerConfig(configFilePath string, hRegister healthRegister) (context
 	}
 
 	ctx := context.Background()
+	ctx = context.WithValue(ctx, "config", config)
 
 	// default is error level
 	lvl, err := utils.ParseLogLevel(config, logrus.ErrorLevel)
@@ -277,4 +281,38 @@ func parseServerConfig(configFilePath string, hRegister healthRegister) (context
 		CurrentCacheControlConfig:    currentCache,
 		ConsistentCacheControlConfig: consistentCache,
 	}, nil
+}
+
+func setupConfigReloadTrap(oldConfig *viper.Viper, configFile string, envPrefix string) {
+	c := make(chan os.Signal, 1)
+	signal.Notify(c, notary.NotarySupportedSignals...)
+	go func() {
+		for {
+			reloadConfig(<-c, configFile, oldConfig, envPrefix)
+		}
+	}()
+}
+
+// reloadConfig was designed to do all the dirty work that needed to reload
+// the config for notary-server and make the entrance-ReloadConfiguration()
+// for hot configuration reload do some generic things.
+func reloadConfig(sig os.Signal, configFile string, oldConfig *viper.Viper, envPrefix string) {
+	reload := func(config *viper.Viper) {
+		switch sig {
+		case syscall.SIGUSR1:
+			if err := utils.AdjustLogLevel(true); err != nil {
+				fmt.Println("Increase log level failed, will use the old one, error: ", err)
+				return
+			}
+		case syscall.SIGUSR2:
+			if err := utils.AdjustLogLevel(false); err != nil {
+				fmt.Println("Decrease log level failed, will use the old one, error: ", err)
+				return
+			}
+		}
+
+		fmt.Println("Successfully setting log level to ", logrus.GetLevel())
+	}
+
+	utils.ReloadConfiguration(oldConfig, configFile, envPrefix, reload)
 }
