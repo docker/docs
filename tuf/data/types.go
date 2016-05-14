@@ -163,7 +163,7 @@ func CheckHashes(payload []byte, name string, hashes Hashes) error {
 
 // CompareMultiHashes verifies that the two Hashes passed in can represent the same data.
 // This means that both maps must have at least one key defined for which they map, and no conflicts.
-// Note that we only check supported hashes, like in CheckHashes
+// Note that we check the intersection of map keys, which adds support for non-default hash algorithms in notary
 func CompareMultiHashes(hashes1, hashes2 Hashes) error {
 	// First check if the two hash structures are valid
 	if err := CheckValidHashStructures(hashes1); err != nil {
@@ -174,11 +174,7 @@ func CompareMultiHashes(hashes1, hashes2 Hashes) error {
 	}
 	// Check if they have at least one matching hash, and no conflicts
 	cnt := 0
-	for _, hashAlg := range NotaryDefaultHashes {
-		hash1, ok := hashes1[hashAlg]
-		if !ok {
-			continue
-		}
+	for hashAlg, hash1 := range hashes1 {
 
 		hash2, ok := hashes2[hashAlg]
 		if !ok {
@@ -193,7 +189,7 @@ func CompareMultiHashes(hashes1, hashes2 Hashes) error {
 	}
 
 	if cnt == 0 {
-		return fmt.Errorf("at least one supported and matching hash needed")
+		return fmt.Errorf("at least one matching hash needed")
 	}
 
 	return nil

@@ -187,8 +187,8 @@ func TestCompareMultiHashes(t *testing.T) {
 	err = CompareMultiHashes(hashes1, hashes2)
 	require.Error(t, err)
 
-	// Expected to fail even though the checksum of sha384 is valid,
-	// because we haven't provided a supported hash algorithm yet (ex: sha256).
+	// Expected to pass even though the checksum of sha384 isn't a default "supported" hash algorithm valid,
+	// because we haven't provided a supported hash algorithm yet (ex: sha256) for the Hashes map to be considered valid
 	hashes1["sha384"], err = hex.DecodeString("64becc3c23843942b1040ffd4743d1368d988ddf046d17d448a6e199c02c3044b425a680112b399d4dbe9b35b7ccc989")
 	hashes2["sha384"], err = hex.DecodeString("64becc3c23843942b1040ffd4743d1368d988ddf046d17d448a6e199c02c3044b425a680112b399d4dbe9b35b7ccc989")
 	err = CompareMultiHashes(hashes1, hashes2)
@@ -200,11 +200,12 @@ func TestCompareMultiHashes(t *testing.T) {
 	err = CompareMultiHashes(hashes1, hashes2)
 	require.NoError(t, err)
 
-	// Because the sha384 algorithm isn't supported, it's treated as an extra key that won't be checked
-	// So even if it doesn't match, that's fine as long as all supported keys match
+	// Because the sha384 algorithm isn't a "default hash algorithm", it's still found in the intersection of keys
+	// so this check will fail
 	hashes2["sha384"], err = hex.DecodeString(strings.Repeat("a", 96))
 	err = CompareMultiHashes(hashes1, hashes2)
-	require.NoError(t, err)
+	require.Error(t, err)
+	delete(hashes2, "sha384")
 
 	// only add a sha512 to hashes1, but comparison will still succeed because there's no mismatch and we have the sha256 match
 	hashes1["sha512"], err = hex.DecodeString("795d9e95db099464b6730844f28effddb010b0d5abae5d5892a6ee04deacb09c9e622f89e816458b5a1a81761278d7d3a6a7c269d9707eff8858b16c51de0315")
