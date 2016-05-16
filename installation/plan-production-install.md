@@ -25,6 +25,7 @@ Docker Universal Control Plane.
 Before installing UCP, you should make sure all nodes of your cluster
 comply with the [system requirements](system-requirements.md).
 
+
 ## Hostname strategy
 
 Docker UCP requires the Docker CS Engine to run. Before installing Docker CS
@@ -43,6 +44,12 @@ engine02.docker.vm
 engine03.docker.vm
 engine04.docker.vm
 ```
+
+## Static IP addresses
+
+Docker UCP requires each node on the cluster to have a static IP address.
+Before installing UCP, ensure your network and nodes are configured to support
+this.
 
 ## Load balancing strategy
 
