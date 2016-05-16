@@ -27,6 +27,13 @@ cannot be adopted as quickly for consistency and compatibility reasons.
 These notes refer to the current and immediately prior releases of the
 CS Engine. For notes on older versions, see the [CS Engine prior release notes archive](prior-release-notes.md).
 
+## CS Engine 1.11.1-cs2
+(17 May 2016)
+
+This release fixes the following issue which prevented DTR containers to be automatically restarted on a docker daemon restart:
+
+https://github.com/docker/docker/issues/22486
+
 ## CS Engine 1.11.1-cs1
 (27 April 2016)
 
