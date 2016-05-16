@@ -14,19 +14,12 @@ weight=10
 
 # Deploy an app from the CLI
 
-In this quickstart, you learn how to deploy multi-container applications onto UCP.
+In this quickstart, you'll learn how to deploy multi-container applications
+with UCP.
 While UCP is intended for deploying multi-container applications, the workflow
 for developing them begins outside of the UCP installation. This page explains
 the recommended workflow for developing applications. Then, it shows you
 step-by-step how to deploy the fully developed application.
-
-The sample is written for a novice network administrator. You should have a
-basic skills on Linux systems and `ssh` experience. Some knowledge of Git is
-also useful but not strictly required.
-
->**Note**: The command examples in this page were tested for a Mac OSX environment.
-If you are in another, you may need to adjust the commands to use analogous
-commands for you environment.
 
 ## Understand the development workflow
 
@@ -61,9 +54,7 @@ must ensure store the images in an accessible registry account.
 
 ## Step 1. Before you begin
 
-This example requires that you have an installed UCP deployment and that you
-have [enabled container networking](../configuration/multi-host-networking.md).
-Take a moment to check this requirement.
+This example requires that you have UCP deployed.
 
 When deploying an application to UCP, you work from a local environment using
 the UCP client bundle for your UCP user.  You should never deploy from the
