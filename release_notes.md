@@ -12,76 +12,139 @@ weight=110
 
 # UCP Release Notes
 
-## Version 1.1.0
+**Upgrading**
 
-(4 May 2016)
+[Learn how to upgrade to the latest version](installation/upgrade.md)
+
+## Version 1.1.1
 
 **Features**
 
 * Core
-  * UCP and DTR are now using a unified authentication service,
-  * Users and teams created in UCP are displayed in DTR under the 'Datacenter'
-  organization,
-  * All controllers joined to the cluster now have replicated CAs. For this,
-  you need to copy the root key material to controllers joined to the cluster,
-  * All UCP components were compiled with Go 1.5.4 and 1.6 to address a
-  security vulnerability in Go,
-  * When joining nodes to the cluster, UCP automatically runs
-  'engine-discovery' to configure the Docker Engine for multi-host networking,
-  * If you're using Docker Engine 1.11 with default configurations, when joining
-  new nodes to the cluster multi-host networking is automatically configured
-  without needing to restart the Docker daemon.
+  * Upgraded Swarm to 1.2.2
+  * added `passwd` command to docker/ucp-auth image which allows admins to 
+  reset their passwords. Note for security purposes it is NOT recommended to 
+  give users access to host machines running UCP controllers.
 
-* docker/dtr image
-  * Added the 'backup' command to create backups of controller nodes,
-  * Added the 'restore' command, to restore a controller node from a backup,
-  * Added the 'regen-certs' command, to regenerate keys and certificates used on
-  a controller node. You can use this for changing the SANS on the certificates
-  or in case a CA is compromised,
-  * Added the 'stop' and 'restart' commands, to stop and start UCP containers.
-​
+* docker/ucp image
+  * Added `--kv-timeout` flag to `install` command which configures election 
+  timeout latency of UCP key-value store (e.g. for cross-availability zones or 
+  data centers). More info: https://coreos.com/etcd/docs/latest/tuning.html
+  * Added `--insecure-fingerprint` flag to `join` command which bypasses TLS
+  verification when adding new nodes. Note for security purposes this is NOT 
+  recommended for normal UCP deployments.
+
 * UI
-  * Now you can deploy apps from the UI using a docker-compse.yml file,
-  * There's a new setting to prevent users from deploying containers to the UCP
-  controller nodes,
-  * Improved usability of LDAP configuration settings,
-  * Images page no longer shows the sha256 id of each image ID,
-  * User profiles now display default permissions,
-  * Improved feedback when creating users and teams with invalid characters,
-  * Added horizontal scrollbar to wide pages.
+  * Can now enter private registry credentials when using "Pull image" in UI.
+  * Added disable account checkbox in "Edit User" screen to facilitate easier 
+  switching from managed auth to LDAP auth and vice-versa.
+  * Added checkbox for de-anonymizing usage reports.
+  * Now displays an error when "Pull image" in UI fails.
+  * New UI options to show/hide columns and filter system/stopped containers.
 
 **Bug Fixes**
 
-* Improved messages when installing UCP on a host with firewall rules,
-* Images page no longer shows images generated from intermediate builds,
-* Images page no longer hangs when pulling an image,
+* Fixes a known issue from UCP 1.1.0 where the cluster fails to join additional 
+nodes after upgrading from an older version of UCP.
+* Upgrading from UCP 1.0.x now correctly preserves users/teams/orgs.
+* Upgrading from UCP 1.0.x now puts correct version labels on containers
+* Errors reported by UCP k-v store are now more informative.
+* Restore command now ensures backup is uncorrupted, UCP cluster is healthy and 
+is running the same or later UCP version in order to proceed successfully.
+* LDAP domain names are now case-insensitive for easier syncing.
+* Fixes error by which user could get unintended "access denied" message 
+when deploying a container in UI due to cached permission labels
+
+**Misc**
+
+* It is no longer necessary to add `--swarm-experimental` flag at installation
+in order to enable container rescheduling as this Swarm feature is now GA.
+* UCP now recommends a minimum of 2 GB of RAM per host (up from 1.5 GB).
+* During installation, UCP now warns you to only restart the Docker Engine 
+after joining all controller nodes to the cluster (known issue in v1.1.0)
+
+**Known Issues**
+
+* When running on Docker Engines prior to 1.11.1-cs2, containers with 
+`restart=always` on overlay networks may not resume properly when the daemon
+is restarted on a UCP controller node. It is highly recommended to upgrade your
+Engines, particularly when using overlay networks or running UCP and DTR in HA 
+configuration on the same nodes.
+* When attempting to restore a v1.1.0 backup on a new cluster installed with 
+the `fresh-install` flag, the restore operation process may fail due to 
+engine-discovery configuration issues. It is recommended to take a new set of 
+backups after upgrading to v1.1.1.
+
+## Version 1.1.0
+
+**Features**
+
+* Core
+  * UCP and DTR are now using a unified authentication service
+  * Users and teams created in UCP are displayed in DTR under the 'Datacenter'
+  organization
+  * All controllers joined to the cluster now have replicated CAs. For this,
+  you need to copy the root key material to controllers joined to the cluster,
+  * All UCP components were compiled with Go 1.5.4 and 1.6 to address a
+  security vulnerability in Go
+  * When joining nodes to the cluster, UCP automatically runs
+  'engine-discovery' to configure the Docker Engine for multi-host networking
+  * If you're using Docker Engine 1.11 with default configurations, when joining
+  new nodes to the cluster multi-host networking is automatically configured
+  without needing to restart the Docker daemon
+
+* docker/ucp image
+  * Added the 'backup' command to create backups of controller nodes
+  * Added the 'restore' command, to restore a controller node from a backup
+  * Added the 'regen-certs' command, to regenerate keys and certificates used on
+  a controller node. You can use this for changing the SANS on the certificates
+  or in case a CA is compromised
+  * Added the 'stop' and 'restart' commands, to stop and start UCP containers
+​
+* UI
+  * Now you can deploy apps from the UI using a docker-compse.yml file
+  * There's a new setting to prevent users from deploying containers to the UCP
+  controller nodes
+  * Improved usability of LDAP configuration settings
+  * Images page no longer shows the sha256 id of each image ID
+  * User profiles now display default permissions
+  * Improved feedback when creating users and teams with invalid characters
+  * Added horizontal scrollbar to wide pages
+
+**Bug Fixes**
+
+* Improved messages when installing UCP on a host with firewall rules
+* Images page no longer shows images generated from intermediate builds
+* Images page no longer hangs when pulling an image
 * Scaling a container from the UI now preserves parameters like 'net' and
-'privileged',
-* Fixed `docker ps --filter` to filter containers correctly.
+'privileged'
+* Fixed `docker ps --filter` to filter containers correctly
 
 
 **Misc**
 
 * All UCP containers now have the 'com.docker.ucp.version' label with their
-upstream version or UCP version,
+upstream version or UCP version
 * When running docker/ucp in interactive mode, the parameters and environment
-variables passed to the command are displayed,
+variables passed to the command are displayed
 * Renamed 'external-ucp-ca' flag to 'external-server-cert' for clarity.
-The first is deprecated but still available.
+The former name is deprecated but still available
+* Since UCP now makes use of overlay networking, make sure ports 4789 and 7946
+are open when deploying your cluster.
 
-**Known issues**
+**Known Issues**
 
 * After upgrading to version `1.1.0`, if you join new nodes to the cluster,
 a success message is displayed, but that node will not be part of the
 cluster. As a workaround, join new controller nodes before upgrading, or
-perform a fresh installation of UCP 1.1.0.
+perform a fresh installation of UCP 1.1.0
 * If you have an active login session in UCP and do an upgrade, you should force
-refresh the browser or you may run into UI errors.
+refresh the browser or you may run into UI errors
 * When joining replicas to the cluster, you may be prompted to restart the
 Docker daemon on that node. For a faster installation, only restart the Docker
-daemon after joining all replicas.
+daemon after joining all replicas
 * When deploying applications from the UI, using the `host` network option
-might cause errors. If this happens, deploy the application from the CLI.
+might cause errors. If this happens, deploy the application from the CLI
 
 **Component Versions**
 
@@ -92,11 +155,6 @@ UCP 1.1.0 uses:
 * Docker Swarm: 1.1.3
 * etcd 2.2.5
 * RethinkDB 2.3.0
-​
-
-**Upgrading**
-
-[Learn how to upgrade to the latest version](installation/upgrade.md)
 
 ## Version 1.0.4
 
@@ -117,7 +175,7 @@ navigated to their profile page.
 Fixes a security issue by which a non-admin user account can gain admin-level
 privileges via the UCP API.
 
-**Known issues**
+**Known Issues**
 
 Non-admin users might have an error when navigating to their profile page. This
 happens when the user is part of a team that has a label applied to it.
