@@ -22,6 +22,7 @@ all nodes must have:
 
 * 2.00 GB of RAM
 * 3.00 GB of available disk space
+* A static IP address
 * One of the supported operating systems installed:
   * RHEL 7.0, 7.1, or 7.2
   * Ubuntu 14.04 LTS
@@ -37,14 +38,14 @@ between hosts.
 
 When installing UCP on a host, make sure the following ports are open:
 
-| Hosts              | Direction | Port                | Purpose                                                                    |
-|:-------------------|:---------:|:--------------------|:---------------------------------------------------------------------------|
+| Hosts              | Direction | Port                    | Purpose                                                                    |
+|:-------------------|:---------:|:------------------------|:---------------------------------------------------------------------------|
 | controllers        |    in     | TCP 443  (configurable) | Web app and CLI client access to UCP.                                      |
 | controller         |    out    | TCP 443                 | Send anonymous usage reports to Docker.                                    |
 | controllers, nodes |    in     | TCP 2375                | Heartbeat for nodes, to ensure they are running.                           |
 | controllers        |    in     | TCP 2376 (configurable) | Swarm manager accepts requests from UCP controller.                        |
 | controllers, nodes |  in, out  | UDP 4789                | Overlay networking.                                                        |
-| controllers, nodes |  in, out  | TCP + UDP 7946                | Overlay networking.                                                        |
+| controllers, nodes |  in, out  | TCP + UDP 7946          | Overlay networking.                                                        |
 | controllers, nodes |    in     | TCP 12376               | Proxy for TLS, provides access to UCP, Swarm, and Engine.                  |
 | controller         |    in     | TCP 12379               | Internal node configuration, cluster configuration, and HA.                |
 | controller         |    in     | TCP 12380               | Internal node configuration, cluster configuration, and HA.                |
