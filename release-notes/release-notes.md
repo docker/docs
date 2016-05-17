@@ -13,8 +13,11 @@ weight=0
 
 # Docker Trusted Registry release notes
 
-This document describes the latest changes, additions, known issues, and fixes
-for the Docker Trusted Registry.
+Here you can learn about new features, bug fixes, breaking changes and
+known issues for each DTR version.
+
+You can then use [the upgrade instructions](../install/upgrade/upgrade-major.md),
+to upgrade your installation to the latest release.
 
 ## Version 2.0
 
