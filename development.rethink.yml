@@ -96,8 +96,7 @@ services:
         dockerfile: Dockerfile
       links:
         - server:notary-server
-      entrypoint: /usr/bin/env bash
-      command: -c "make client && buildscripts/testclient.sh && make clean"
+      command: buildscripts/testclient.sh
 volumes:
     rdb-01-data:
         external: false

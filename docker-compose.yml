@@ -22,8 +22,6 @@ mysql:
     - ./notarymysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     - notary_data:/var/lib/mysql
   image: mariadb:10.1.10
-  ports:
-    - "3306:3306"
   environment:
     - TERM=dumb
     - MYSQL_ALLOW_EMPTY_PASSWORD="true"
