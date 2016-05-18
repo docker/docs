@@ -34,6 +34,7 @@ var (
 		"boot2docker",
 		"compose",
 		"containerd",
+		"datakit",
 		"distribution",
 		"docker",
 		"docker-bench-security",
@@ -43,6 +44,7 @@ var (
 		"go-connections",
 		"go-plugins-helpers",
 		"go-units",
+		"hyperkit",
 		"kitematic",
 		"leadership",
 		"leeroy",
@@ -57,6 +59,7 @@ var (
 		"swarm",
 		"toolbox",
 		"v1.10-migrator",
+		"vpnkit",
 	}
 )
 
