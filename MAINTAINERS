@@ -309,6 +309,8 @@ or feedback about project operations.
         People = ["aanand", "bfirsh", "dnephin", "mnowster"]
     [Org.containerd]
         People = ["crosbymichael", "tonistiigi", "mlaventure"]
+    [Org.datakit]
+        People = ["samoht", "talex5"]
     [Org.distribution]
         People = ["aaronlehmann", "dmcgowan", "dmp42", "richardscothern", "shykes", "stevvooe"]
     [Org.docker]
@@ -327,6 +329,8 @@ or feedback about project operations.
         People = ["calavera", "dave-tucker", "runcom"]
     [Org.go-units]
         People = ["calavera"]
+    [Org.hyperkit]
+        People = ["avsm", "djs55", "dsheets", "gdevillele", "ijc25", "justincormack", "magnuss", "rneugeba", "samoht"]
     [Org.kitematic]
         People = ["elesant", "frenchben", "jeffdm", "mchiang0610"]
     [Org.leadership]
@@ -355,6 +359,8 @@ or feedback about project operations.
         People = ["jeffdm", "lisean106", "mchiang0610"]
     [Org."v1.10-migrator"]
         People = ["tonistiigi"]
+    [Org.vpnkit]
+        People = ["avsm", "djs55", "samoht", "yomimono"]
 
 [People]
     [People.aanand]
@@ -385,6 +391,10 @@ or feedback about project operations.
         Name = "Amit Shukla"
         Email = "amit.shukla@docker.com"
         GitHub = "amitshukla"
+    [People.avsm]
+        Name = "Anil Madhavapeddy"
+        Email = "anil@recoil.org"
+        GitHub = "avsm"
     [People.bfirsh]
         Name = "Ben Firshman"
         Email = "ben@firshman.co.uk"
@@ -437,6 +447,10 @@ or feedback about project operations.
         Name = "Diogo Monica"
         Email = "diogo@docker.com"
         GitHub = "diogomonica"
+    [People.djs55]
+        Name = "David Scott"
+        Email = "dave.scott@docker.com"
+        GitHub = "djs55"
     [People.dmcgowan]
         Name = "Derek McGowan"
         Email = "derek@docker.com"
@@ -453,6 +467,10 @@ or feedback about project operations.
         Name = "Dongluo Chen"
         Email = "dong@docker.com"
         GitHub = "dongluochen"
+    [People.dsheets]
+        Name = "David Sheets"
+        Email = "dsheets@docker.com"
+        GitHub = "dsheets"
     [People.duglin]
         Name = "Doug Davis"
         Email = "dug@us.ibm.com"
@@ -493,6 +511,10 @@ or feedback about project operations.
         Name = "Arnaud Porterie"
         Email = "arnaud@docker.com"
         GitHub = "icecrime"
+    [People.ijc25]
+        Name = "Ian Campbell"
+        Email = "ian.campbell@docker.com"
+        GitHub = "ijc25"
     [People.jamtur01]
         Name = "James Turnbull"
         Email = "james@lovedthanlost.net"
@@ -517,6 +539,10 @@ or feedback about project operations.
         Name = "Xian Chaobo"
         Email = "xianchaobo@huawei.com"
         GitHub = "jimmyxian"
+    [People.justincormack]
+        Name = "Justin Cormack"
+        Email = "justin.cormack@docker.com"
+        GitHub = "justincormack"
     [People.konstruktoid]
         Name = "Thomas Sjögren"
         Email = "thomas.sjogren@outlook.com"
@@ -529,6 +555,10 @@ or feedback about project operations.
         Name = "Alexandr Morozov"
         Email = "lk4d4@docker.com"
         GitHub = "LK4D4"
+    [People.magnuss]
+        Name = "Magnus Skjegstad"
+        Email = "magnus@skjegstad.com"
+        GitHub = "MagnusS"
     [People.mavenugo]
         Name = "Madhu Venugopal"
         Email = "madhu@docker.com"
@@ -589,10 +619,18 @@ or feedback about project operations.
         Name = "Riyaz Faizullabhoy"
         Email = "riyaz@docker.com"
         GitHub = "riyazdf"
+    [People.rneugeba]
+        Name = "Rolf Neugebauer"
+        Email = "rolf.neugebauer@docker.com"
+        GitHub = "rneugeba"
     [People.runcom]
         Name = "Antonio Murdaca"
         Email = "runcom@redhat.com"
         GitHub = "runcom"
+    [People.samoht]
+        Name = "Thomas Gazagnaire"
+        Email = "thomas@gazagnaire.org"
+        GitHub = "samoht"
     [People.sanimej]
         Name = "Santhosh Manohar"
         Email = "santhosh@docker.com"
@@ -613,6 +651,10 @@ or feedback about project operations.
         Name = "Sven Dowideit"
         Email = "SvenDowideit@home.org.au"
         GitHub = "SvenDowideit"
+    [People.talex5]
+        Name = "Thomas Leonard"
+        Email = "thomas.leonard@docker.com"
+        GitHub = "talex5"
     [People.thajeztah]
         Name = "Sebastiaan van Stijn"
         Email = "github@gone.nl"
@@ -649,3 +691,7 @@ or feedback about project operations.
         Name = "Vishnu Kannan"
         Email = "vishnuk@google.com"
         GitHub = "vishh"
+    [People.yomimono]
+        Name = "Mindy Preston"
+        Email = "mindy.preston@docker.com"
+        GitHub = "yomimono"
