@@ -13,6 +13,7 @@ COPY . /go/src/${NOTARYPKG}
 
 WORKDIR /go/src/${NOTARYPKG}
 
+ENV SERVICE_NAME=notary_server
 EXPOSE 4443
 
 # Install notary-server
