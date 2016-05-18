@@ -52,7 +52,7 @@ services:
         rdb:
           aliases:
             - rdb-02.rdb
-      command: "--bind all --no-http-admin --server-name rdb_02 --canonical-address rdb-02.rdb --directory /var/data/rethinkdb --join rdb-01:29015 --driver-tls-ca /tls/ca.pem --driver-tls-key /tls/key.pem --driver-tls-cert /tls/cert.pem --cluster-tls-key /tls/key.pem --cluster-tls-cert /tls/cert.pem --cluster-tls-ca /tls/ca.pem"
+      command: "--bind all --no-http-admin --server-name rdb_02 --canonical-address rdb-02.rdb --directory /var/data/rethinkdb --join rdb-01 --driver-tls-ca /tls/ca.pem --driver-tls-key /tls/key.pem --driver-tls-cert /tls/cert.pem --cluster-tls-key /tls/key.pem --cluster-tls-cert /tls/cert.pem --cluster-tls-ca /tls/ca.pem"
       depends_on:
         - rdb-01
     rdb-03:
@@ -64,7 +64,7 @@ services:
         rdb:
           aliases:
             - rdb-03.rdb
-      command: "--bind all --no-http-admin --server-name rdb_03 --canonical-address rdb-03.rdb --directory /var/data/rethinkdb --join rdb-02:29015 --driver-tls-ca /tls/ca.pem --driver-tls-key /tls/key.pem --driver-tls-cert /tls/cert.pem --cluster-tls-key /tls/key.pem --cluster-tls-cert /tls/cert.pem --cluster-tls-ca /tls/ca.pem"
+      command: "--bind all --no-http-admin --server-name rdb_03 --canonical-address rdb-03.rdb --directory /var/data/rethinkdb --join rdb-02 --driver-tls-ca /tls/ca.pem --driver-tls-key /tls/key.pem --driver-tls-cert /tls/cert.pem --cluster-tls-key /tls/key.pem --cluster-tls-cert /tls/cert.pem --cluster-tls-ca /tls/ca.pem"
       depends_on:
         - rdb-01
         - rdb-02
@@ -79,7 +79,7 @@ services:
           aliases:
             - rdb-proxy
             - rdb-proxy.rdp
-      command: "proxy --bind all --join rdb-03:29015 --driver-tls-ca /tls/ca.pem --driver-tls-key /tls/key.pem --driver-tls-cert /tls/cert.pem --cluster-tls-key /tls/key.pem --cluster-tls-cert /tls/cert.pem --cluster-tls-ca /tls/ca.pem"
+      command: "proxy --bind all --join rdb-03 --driver-tls-ca /tls/ca.pem --driver-tls-key /tls/key.pem --driver-tls-cert /tls/cert.pem --cluster-tls-key /tls/key.pem --cluster-tls-cert /tls/cert.pem --cluster-tls-ca /tls/ca.pem"
       depends_on:
         - rdb-01
         - rdb-02
