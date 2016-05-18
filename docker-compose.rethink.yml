@@ -12,7 +12,6 @@ services:
         - rdb-proxy:rdb-proxy.rdb
         - signer
       ports:
-        - "8080"
         - "4443:4443"
       entrypoint: /usr/bin/env sh
       command: -c "sh migrations/rethink_migrate.sh && notary-server -config=fixtures/server-config.rethink.json"
@@ -42,10 +41,8 @@ services:
       networks:
         rdb:
           aliases:
-            - rdb
-            - rdb.rdb
             - rdb-01.rdb
-      command: "--bind all --no-http-admin --server-name rdb_01 --canonical-address rdb-01.rdb --directory /var/data/rethinkdb --join rdb.rdb --driver-tls-ca /tls/ca.pem --driver-tls-key /tls/key.pem --driver-tls-cert /tls/cert.pem --cluster-tls-key /tls/key.pem --cluster-tls-cert /tls/cert.pem --cluster-tls-ca /tls/ca.pem"
+      command: "--bind all --no-http-admin --server-name rdb_01 --canonical-address rdb-01.rdb --directory /var/data/rethinkdb --driver-tls-ca /tls/ca.pem --driver-tls-key /tls/key.pem --driver-tls-cert /tls/cert.pem --cluster-tls-key /tls/key.pem --cluster-tls-cert /tls/cert.pem --cluster-tls-ca /tls/ca.pem"
     rdb-02:
       image: jlhawn/rethinkdb:2.3.0
       volumes:
@@ -54,10 +51,10 @@ services:
       networks:
         rdb:
           aliases:
-            - rdb
-            - rdb.rdb
             - rdb-02.rdb
-      command: "--bind all --no-http-admin --server-name rdb_02 --canonical-address rdb-02.rdb --directory /var/data/rethinkdb --join rdb.rdb --driver-tls-ca /tls/ca.pem --driver-tls-key /tls/key.pem --driver-tls-cert /tls/cert.pem --cluster-tls-key /tls/key.pem --cluster-tls-cert /tls/cert.pem --cluster-tls-ca /tls/ca.pem"
+      command: "--bind all --no-http-admin --server-name rdb_02 --canonical-address rdb-02.rdb --directory /var/data/rethinkdb --join rdb-01:29015 --driver-tls-ca /tls/ca.pem --driver-tls-key /tls/key.pem --driver-tls-cert /tls/cert.pem --cluster-tls-key /tls/key.pem --cluster-tls-cert /tls/cert.pem --cluster-tls-ca /tls/ca.pem"
+      depends_on:
+        - rdb-01
     rdb-03:
       image: jlhawn/rethinkdb:2.3.0
       volumes:
@@ -66,10 +63,11 @@ services:
       networks:
         rdb:
           aliases:
-            - rdb
-            - rdb.rdb
             - rdb-03.rdb
-      command: "--bind all --no-http-admin --server-name rdb_03 --canonical-address rdb-03.rdb --directory /var/data/rethinkdb --join rdb.rdb --driver-tls-ca /tls/ca.pem --driver-tls-key /tls/key.pem --driver-tls-cert /tls/cert.pem --cluster-tls-key /tls/key.pem --cluster-tls-cert /tls/cert.pem --cluster-tls-ca /tls/ca.pem"
+      command: "--bind all --no-http-admin --server-name rdb_03 --canonical-address rdb-03.rdb --directory /var/data/rethinkdb --join rdb-02:29015 --driver-tls-ca /tls/ca.pem --driver-tls-key /tls/key.pem --driver-tls-cert /tls/cert.pem --cluster-tls-key /tls/key.pem --cluster-tls-cert /tls/cert.pem --cluster-tls-ca /tls/ca.pem"
+      depends_on:
+        - rdb-01
+        - rdb-02
     rdb-proxy:
       image: jlhawn/rethinkdb:2.3.0
       ports:
@@ -81,7 +79,7 @@ services:
           aliases:
             - rdb-proxy
             - rdb-proxy.rdp
-      command: "proxy --bind all --join rdb.rdb --driver-tls-ca /tls/ca.pem --driver-tls-key /tls/key.pem --driver-tls-cert /tls/cert.pem --cluster-tls-key /tls/key.pem --cluster-tls-cert /tls/cert.pem --cluster-tls-ca /tls/ca.pem"
+      command: "proxy --bind all --join rdb-03:29015 --driver-tls-ca /tls/ca.pem --driver-tls-key /tls/key.pem --driver-tls-cert /tls/cert.pem --cluster-tls-key /tls/key.pem --cluster-tls-cert /tls/cert.pem --cluster-tls-ca /tls/ca.pem"
       depends_on:
         - rdb-01
         - rdb-02
