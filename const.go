@@ -72,4 +72,9 @@ var NotaryDefaultExpiries = map[string]time.Duration{
 // NotarySupportedSignals contains the signals we would like to capture:
 // - SIGUSR1, indicates a increment of the log level.
 // - SIGUSR2, indicates a decrement of the log level.
-var NotarySupportedSignals = []os.Signal{syscall.SIGUSR1, syscall.SIGUSR2}
+// - SIGHUP,  indicates a reloading of the configuration.
+var NotarySupportedSignals = []os.Signal{
+	syscall.SIGUSR1,
+	syscall.SIGUSR2,
+	syscall.SIGHUP,
+}
