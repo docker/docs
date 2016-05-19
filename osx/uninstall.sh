@@ -28,4 +28,10 @@ rm -f /usr/local/bin/docker-compose
 echo "Removing boot2docker.iso"
 rm -rf /usr/local/share/boot2docker
 
+echo "Forget packages"
+pkgutil --forget io.docker.pkg.docker
+pkgutil --forget io.docker.pkg.dockercompose
+pkgutil --forget io.docker.pkg.dockermachine
+pkgutil --forget io.boot2dockeriso.pkg.boot2dockeriso
+
 echo "All Done!"
