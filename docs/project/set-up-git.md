@@ -195,7 +195,7 @@ the branch to your fork on GitHub:
 
     ```bash
     $ git branch
-    * dry-run-test
+    \* dry-run-test
       master
     ```
 
@@ -271,7 +271,7 @@ the branch to your fork on GitHub:
     Writing objects: 100% (3/3), 320 bytes | 0 bytes/s, done.
     Total 3 (delta 1), reused 0 (delta 0)
     To https://github.com/moxiegirl/docker.git
-     * [new branch]      dry-run-test -> dry-run-test
+     \* [new branch]      dry-run-test -> dry-run-test
     Branch dry-run-test set up to track remote branch dry-run-test from origin.
     ```
 
