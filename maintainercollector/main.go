@@ -42,6 +42,7 @@ var (
 		"dockercraft",
 		"engine-api",
 		"go-connections",
+		"go-p9p",
 		"go-plugins-helpers",
 		"go-units",
 		"hyperkit",
