@@ -3,6 +3,7 @@ package data
 import (
 	"bytes"
 	"encoding/hex"
+	"strings"
 	"testing"
 
 	"github.com/docker/go/canonical/json"
@@ -175,4 +176,54 @@ func TestCheckValidHashStructures(t *testing.T) {
 	hashes["sha256"], err = hex.DecodeString("1234567890a4f2307e49160fa242db6fb95f071ad81a198eeb7d770e61cd6d8")
 	err = CheckValidHashStructures(hashes)
 	require.IsType(t, ErrInvalidChecksum{}, err)
+}
+
+func TestCompareMultiHashes(t *testing.T) {
+	var err error
+	hashes1 := make(Hashes)
+	hashes2 := make(Hashes)
+
+	// Expected to fail since there are no checksums at all
+	err = CompareMultiHashes(hashes1, hashes2)
+	require.Error(t, err)
+
+	// Expected to pass even though the checksum of sha384 isn't a default "supported" hash algorithm valid,
+	// because we haven't provided a supported hash algorithm yet (ex: sha256) for the Hashes map to be considered valid
+	hashes1["sha384"], err = hex.DecodeString("64becc3c23843942b1040ffd4743d1368d988ddf046d17d448a6e199c02c3044b425a680112b399d4dbe9b35b7ccc989")
+	hashes2["sha384"], err = hex.DecodeString("64becc3c23843942b1040ffd4743d1368d988ddf046d17d448a6e199c02c3044b425a680112b399d4dbe9b35b7ccc989")
+	err = CompareMultiHashes(hashes1, hashes2)
+	require.Error(t, err)
+
+	// Now both have a matching sha256, so this will pass
+	hashes1["sha256"], err = hex.DecodeString("766af0ef090a4f2307e49160fa242db6fb95f071ad81a198eeb7d770e61cd6d8")
+	hashes2["sha256"], err = hex.DecodeString("766af0ef090a4f2307e49160fa242db6fb95f071ad81a198eeb7d770e61cd6d8")
+	err = CompareMultiHashes(hashes1, hashes2)
+	require.NoError(t, err)
+
+	// Because the sha384 algorithm isn't a "default hash algorithm", it's still found in the intersection of keys
+	// so this check will fail
+	hashes2["sha384"], err = hex.DecodeString(strings.Repeat("a", 96))
+	err = CompareMultiHashes(hashes1, hashes2)
+	require.Error(t, err)
+	delete(hashes2, "sha384")
+
+	// only add a sha512 to hashes1, but comparison will still succeed because there's no mismatch and we have the sha256 match
+	hashes1["sha512"], err = hex.DecodeString("795d9e95db099464b6730844f28effddb010b0d5abae5d5892a6ee04deacb09c9e622f89e816458b5a1a81761278d7d3a6a7c269d9707eff8858b16c51de0315")
+	err = CompareMultiHashes(hashes1, hashes2)
+	require.NoError(t, err)
+
+	// remove sha256 from hashes1, comparison will fail now because there are no matches
+	delete(hashes1, "sha256")
+	err = CompareMultiHashes(hashes1, hashes2)
+	require.Error(t, err)
+
+	// add sha512 to hashes2, comparison will now pass because both have matching sha512s
+	hashes2["sha512"], err = hex.DecodeString("795d9e95db099464b6730844f28effddb010b0d5abae5d5892a6ee04deacb09c9e622f89e816458b5a1a81761278d7d3a6a7c269d9707eff8858b16c51de0315")
+	err = CompareMultiHashes(hashes1, hashes2)
+	require.NoError(t, err)
+
+	// change the sha512 for hashes2, comparison will now fail
+	hashes2["sha512"], err = hex.DecodeString(strings.Repeat("a", notary.Sha512HexSize))
+	err = CompareMultiHashes(hashes1, hashes2)
+	require.Error(t, err)
 }
