@@ -486,11 +486,13 @@ func (r *NotaryRepository) GetAllTargetMetadataByName(name string) ([]*TargetWit
 	}
 
 	// Check that we didn't error, and that we found the target at least once
-	if err := r.tufRepo.WalkTargets(name, "", getAllTargetInfoByNameVisitorFunc); err == nil && len(targetInfo) > 0 {
-		return targetInfo, nil
+	if err := r.tufRepo.WalkTargets(name, "", getAllTargetInfoByNameVisitorFunc); err != nil {
+		return nil, err
 	}
-	return nil, fmt.Errorf("No trust data for %s", name)
-
+	if len(targetInfo) == 0 {
+		return nil, fmt.Errorf("No trust data for %s", name)
+	}
+	return targetInfo, nil
 }
 
 // GetChangelist returns the list of the repository's unpublished changes
