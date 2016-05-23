@@ -10,7 +10,7 @@ import (
 )
 
 // Wait for 60 seconds maximum on Wait() calls for rethink
-var timeoutOpt = gorethink.WaitOpts{Timeout: time.Minute.Seconds()}
+var timeoutOpt = gorethink.WaitOpts{WaitFor: "all_replicas_ready", Timeout: time.Minute.Seconds()}
 
 func makeDB(session *gorethink.Session, name string) error {
 	_, err := gorethink.DBCreate(name).RunWrite(session)
