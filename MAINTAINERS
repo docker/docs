@@ -325,6 +325,8 @@ or feedback about project operations.
         People = ["aaronlehmann", "calavera", "coolljt0725", "cpuguy83", "crosbymichael", "dnephin", "dongluochen", "duglin", "estesp", "icecrime", "jhowardmsft", "lk4d4", "mavenugo", "mhbauer", "runcom", "stevvooe", "thajeztah", "tianon", "tibor", "tonistiigi", "unclejack", "vdemeester", "vieux"]
     [Org.go-connections]
         People = ["calavera"]
+    [Org.go-p9p]
+        People = ["aduermael", "djs55", "frenchben", "justincormack", "stevvooe"]
     [Org.go-plugins-helpers]
         People = ["calavera", "dave-tucker", "runcom"]
     [Org.go-units]
@@ -497,7 +499,7 @@ or feedback about project operations.
         GitHub = "estesp"
     [People.frenchben]
         Name = "Ben French"
-        Email = "me@frenchben.com"
+        Email = "frenchben@docker.com"
         GitHub = "FrenchBen"
     [People.gdevillele]
         Name = "Gaetan de Villele"
