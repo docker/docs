@@ -5,8 +5,6 @@ server:
     - mysql
     - signer
     - signer:notarysigner
-  environment:
-    - SERVICE_NAME=notary_server
   ports:
     - "8080"
     - "4443:4443"
@@ -17,8 +15,6 @@ signer:
   dockerfile: signer.Dockerfile
   links:
     - mysql
-  environment:
-    - SERVICE_NAME=notary_signer
   entrypoint: /usr/bin/env sh
   command: -c "./migrations/migrate.sh && notary-signer -config=fixtures/signer-config.json"
 mysql:
