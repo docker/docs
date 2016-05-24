@@ -3,10 +3,11 @@
 composeFile="$1"
 
 function cleanup {
-	docker-compose -f $composeFile stop
+    rm -f bin/notary
+	docker-compose -f $composeFile kill
 	# if we're in CircleCI, we cannot remove any containers
 	if [[ -z "${CIRCLECI}" ]]; then
-		docker-compose -f $composeFile rm -f
+		docker-compose -f $composeFile down -v --remove-orphans
 	fi
 }
 
