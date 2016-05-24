@@ -356,7 +356,7 @@ or feedback about project operations.
     [Org.spdystream]
         People = ["dmcgowan"]
     [Org.swarm]
-        People = ["abronan", "aluzzardi", "chanwit", "dongluochen", "jimmyxian", "mhbauer", "nishanttotla", "vieux"]
+        People = ["abronan", "allencloud", "aluzzardi", "chanwit", "dongluochen", "jimmyxian", "mhbauer", "nishanttotla", "vieux"]
     [Org.toolbox]
         People = ["jeffdm", "lisean106", "mchiang0610"]
     [Org."v1.10-migrator"]
@@ -385,6 +385,10 @@ or feedback about project operations.
         Name = "Adrien Duermael"
         Email = "adrien@docker.com"
         GitHub = "aduermael"
+    [People.allencloud]
+        Name = "Allen Sun"
+        Email = "allen.sun@daocloud.io"
+        GitHub = "allencloud"
     [People.aluzzardi]
         Name = "Andrea Luzzardi"
         Email = "al@docker.com"
