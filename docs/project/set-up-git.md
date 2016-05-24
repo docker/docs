@@ -193,11 +193,9 @@ the branch to your fork on GitHub:
 
 3. Verify you are in your new branch.
 
-    ```bash
-    $ git branch
-    * dry-run-test
-      master
-    ```
+        $ git branch
+        * dry-run-test
+          master
 
     The current branch has an * (asterisk) marker. So, these results shows you
     are on the right branch.
@@ -265,15 +263,13 @@ the branch to your fork on GitHub:
     Git prompts you for your GitHub username and password. Then, the command
     returns a result.
 
-    ```bash
-    Counting objects: 13, done.
-    Compressing objects: 100% (2/2), done.
-    Writing objects: 100% (3/3), 320 bytes | 0 bytes/s, done.
-    Total 3 (delta 1), reused 0 (delta 0)
-    To https://github.com/moxiegirl/docker.git
-     * [new branch]      dry-run-test -> dry-run-test
-    Branch dry-run-test set up to track remote branch dry-run-test from origin.
-    ```
+        Counting objects: 13, done.
+        Compressing objects: 100% (2/2), done.
+        Writing objects: 100% (3/3), 320 bytes | 0 bytes/s, done.
+        Total 3 (delta 1), reused 0 (delta 0)
+        To https://github.com/moxiegirl/docker.git
+         * [new branch]      dry-run-test -> dry-run-test
+        Branch dry-run-test set up to track remote branch dry-run-test from origin.
 
 9. Open your browser to GitHub.
 
