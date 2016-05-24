@@ -403,6 +403,32 @@ func TestGetCacheConfig(t *testing.T) {
 	}
 }
 
+func TestGetGUNPRefixes(t *testing.T) {
+	valids := map[string][]string{
+		`{}`: nil,
+		`{"repositories": {"gun_prefixes": []}}`:         nil,
+		`{"repositories": {}}`:                           nil,
+		`{"repositories": {"gun_prefixes": ["hello/"]}}`: {"hello/"},
+	}
+	invalids := []string{
+		`{"repositories": {"gun_prefixes": " / "}}`,
+		`{"repositories": {"gun_prefixes": "nope"}}`,
+		`{"repositories": {"gun_prefixes": ["nope"]}}`,
+		`{"repositories": {"gun_prefixes": ["/nope/"]}}`,
+		`{"repositories": {"gun_prefixes": ["../nope/"]}}`,
+	}
+
+	for valid, expected := range valids {
+		prefixes, err := getRequiredGunPrefixes(configure(valid))
+		require.NoError(t, err)
+		require.Equal(t, expected, prefixes)
+	}
+	for _, invalid := range invalids {
+		_, err := getRequiredGunPrefixes(configure(invalid))
+		require.Error(t, err, "expected error with %s", invalid)
+	}
+}
+
 // For sanity, make sure we can always parse the sample config
 func TestSampleConfig(t *testing.T) {
 	var registerCalled = 0
