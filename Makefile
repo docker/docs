@@ -139,6 +139,7 @@ test-full: vet lint
 
 integration:
 	buildscripts/integrationtest.sh development.yml
+	buildscripts/integrationtest.sh development.rethink.yml
 
 protos:
 	@protoc --go_out=plugins=grpc:. proto/*.proto
