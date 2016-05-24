@@ -327,7 +327,7 @@ func setUpRepo(t *testing.T, tempBaseDir, gun string, ret passphrase.Retriever) 
 	ctx = ctxu.WithLogger(ctx, logrus.NewEntry(l))
 
 	cryptoService := cryptoservice.NewCryptoService(trustmanager.NewKeyMemoryStore(ret))
-	ts := httptest.NewServer(server.RootHandler(nil, ctx, cryptoService, nil, nil))
+	ts := httptest.NewServer(server.RootHandler(nil, ctx, cryptoService, nil, nil, nil))
 
 	repo, err := client.NewNotaryRepository(
 		tempBaseDir, gun, ts.URL, http.DefaultTransport, ret, trustpinning.TrustPinConfig{})
