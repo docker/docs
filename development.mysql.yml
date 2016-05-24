@@ -10,8 +10,6 @@ services:
       srv:
         aliases:
           - notary-server
-    environment:
-      - GODEBUG=netdns=cgo
     entrypoint: /usr/bin/env sh
     command: -c "./migrations/migrate.sh && notary-server -config=fixtures/server-config.json"
     depends_on:
@@ -26,8 +24,6 @@ services:
       sig:
         aliases:
           - notarysigner
-    environment:
-      - GODEBUG=netdns=cgo
     entrypoint: /usr/bin/env sh
     command: -c "./migrations/migrate.sh && notary-signer -config=fixtures/signer-config.json"
     depends_on:
@@ -46,8 +42,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    environment:
-      - GODEBUG=netdns=cgo
     command: buildscripts/testclient.sh
     volumes:
       - ./test_output:/test_output
