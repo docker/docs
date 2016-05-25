@@ -1,7 +1,6 @@
 {
 	"ImportPath": "github.com/docker/notary",
 	"GoVersion": "go1.6",
-	"GodepVersion": "v62",
 	"Packages": [
 		"./..."
 	],
@@ -181,103 +180,93 @@
 			"Rev": "71acacd42f85e5e82f70a55327789582a5200a90"
 		},
 		{
-			"ImportPath": "gopkg.in/dancannon/gorethink.v2",
-			"Comment": "v2.0.2",
-			"Rev": "3742792da4bc279ccd6d807f24687009cbeda860"
-		},
-		{
-			"ImportPath": "gopkg.in/dancannon/gorethink.v2/encoding",
-			"Comment": "v2.0.2",
-			"Rev": "3742792da4bc279ccd6d807f24687009cbeda860"
-		},
-		{
-			"ImportPath": "gopkg.in/dancannon/gorethink.v2/ql2",
-			"Comment": "v2.0.2",
-			"Rev": "3742792da4bc279ccd6d807f24687009cbeda860"
-		},
-		{
-			"ImportPath": "gopkg.in/dancannon/gorethink.v2/types",
-			"Comment": "v2.0.2",
-			"Rev": "3742792da4bc279ccd6d807f24687009cbeda860"
-		},
-		{
 			"ImportPath": "github.com/denisenkom/go-mssqldb",
 			"Rev": "6e7f3d73dade2e5566f87d18c3a1d00d2ce33421"
 		},
 		{
+			"ImportPath": "github.com/docker/distribution",
+			"Comment": "v2.2.1-20-gc56d49b",
+			"Rev": "c56d49b111aea675a81d411c2db1acfac6179de9"
+		},
+		{
 			"ImportPath": "github.com/docker/distribution/context",
-			"Comment": "v2.0.0-353-gfed58bd",
-			"Rev": "fed58bd2d3c096055c0e69c2fb86c9a4965d1b8b"
+			"Comment": "v2.2.1-20-gc56d49b",
+			"Rev": "c56d49b111aea675a81d411c2db1acfac6179de9"
 		},
 		{
 			"ImportPath": "github.com/docker/distribution/digest",
-			"Comment": "v2.0.0-353-gfed58bd",
-			"Rev": "fed58bd2d3c096055c0e69c2fb86c9a4965d1b8b"
+			"Comment": "v2.2.1-20-gc56d49b",
+			"Rev": "c56d49b111aea675a81d411c2db1acfac6179de9"
 		},
 		{
 			"ImportPath": "github.com/docker/distribution/health",
-			"Comment": "v2.0.0-353-gfed58bd",
-			"Rev": "fed58bd2d3c096055c0e69c2fb86c9a4965d1b8b"
+			"Comment": "v2.2.1-20-gc56d49b",
+			"Rev": "c56d49b111aea675a81d411c2db1acfac6179de9"
 		},
 		{
-			"ImportPath": "github.com/docker/distribution/health/api",
-			"Comment": "v2.0.0-353-gfed58bd",
-			"Rev": "fed58bd2d3c096055c0e69c2fb86c9a4965d1b8b"
-		},
-		{
-			"ImportPath": "github.com/docker/distribution/health/checks",
-			"Comment": "v2.0.0-353-gfed58bd",
-			"Rev": "fed58bd2d3c096055c0e69c2fb86c9a4965d1b8b"
+			"ImportPath": "github.com/docker/distribution/reference",
+			"Comment": "v2.2.1-20-gc56d49b",
+			"Rev": "c56d49b111aea675a81d411c2db1acfac6179de9"
 		},
 		{
 			"ImportPath": "github.com/docker/distribution/registry/api/errcode",
-			"Comment": "v2.0.0-353-gfed58bd",
-			"Rev": "fed58bd2d3c096055c0e69c2fb86c9a4965d1b8b"
+			"Comment": "v2.2.1-20-gc56d49b",
+			"Rev": "c56d49b111aea675a81d411c2db1acfac6179de9"
 		},
 		{
 			"ImportPath": "github.com/docker/distribution/registry/api/v2",
-			"Comment": "v2.0.0-353-gfed58bd",
-			"Rev": "fed58bd2d3c096055c0e69c2fb86c9a4965d1b8b"
+			"Comment": "v2.2.1-20-gc56d49b",
+			"Rev": "c56d49b111aea675a81d411c2db1acfac6179de9"
 		},
 		{
 			"ImportPath": "github.com/docker/distribution/registry/auth",
-			"Comment": "v2.0.0-353-gfed58bd",
-			"Rev": "fed58bd2d3c096055c0e69c2fb86c9a4965d1b8b"
+			"Comment": "v2.2.1-20-gc56d49b",
+			"Rev": "c56d49b111aea675a81d411c2db1acfac6179de9"
 		},
 		{
 			"ImportPath": "github.com/docker/distribution/registry/auth/htpasswd",
-			"Comment": "v2.0.0-353-gfed58bd",
-			"Rev": "fed58bd2d3c096055c0e69c2fb86c9a4965d1b8b"
+			"Comment": "v2.2.1-20-gc56d49b",
+			"Rev": "c56d49b111aea675a81d411c2db1acfac6179de9"
 		},
 		{
 			"ImportPath": "github.com/docker/distribution/registry/auth/silly",
-			"Comment": "v2.0.0-353-gfed58bd",
-			"Rev": "fed58bd2d3c096055c0e69c2fb86c9a4965d1b8b"
+			"Comment": "v2.2.1-20-gc56d49b",
+			"Rev": "c56d49b111aea675a81d411c2db1acfac6179de9"
 		},
 		{
 			"ImportPath": "github.com/docker/distribution/registry/auth/token",
-			"Comment": "v2.0.0-353-gfed58bd",
-			"Rev": "fed58bd2d3c096055c0e69c2fb86c9a4965d1b8b"
+			"Comment": "v2.2.1-20-gc56d49b",
+			"Rev": "c56d49b111aea675a81d411c2db1acfac6179de9"
+		},
+		{
+			"ImportPath": "github.com/docker/distribution/registry/client",
+			"Comment": "v2.2.1-20-gc56d49b",
+			"Rev": "c56d49b111aea675a81d411c2db1acfac6179de9"
 		},
 		{
 			"ImportPath": "github.com/docker/distribution/registry/client/auth",
-			"Comment": "v2.0.0-353-gfed58bd",
-			"Rev": "fed58bd2d3c096055c0e69c2fb86c9a4965d1b8b"
+			"Comment": "v2.2.1-20-gc56d49b",
+			"Rev": "c56d49b111aea675a81d411c2db1acfac6179de9"
 		},
 		{
 			"ImportPath": "github.com/docker/distribution/registry/client/transport",
-			"Comment": "v2.0.0-353-gfed58bd",
-			"Rev": "fed58bd2d3c096055c0e69c2fb86c9a4965d1b8b"
+			"Comment": "v2.2.1-20-gc56d49b",
+			"Rev": "c56d49b111aea675a81d411c2db1acfac6179de9"
 		},
 		{
-			"ImportPath": "github.com/docker/distribution/testutil",
-			"Comment": "v2.0.0-353-gfed58bd",
-			"Rev": "fed58bd2d3c096055c0e69c2fb86c9a4965d1b8b"
+			"ImportPath": "github.com/docker/distribution/registry/storage/cache",
+			"Comment": "v2.2.1-20-gc56d49b",
+			"Rev": "c56d49b111aea675a81d411c2db1acfac6179de9"
+		},
+		{
+			"ImportPath": "github.com/docker/distribution/registry/storage/cache/memory",
+			"Comment": "v2.2.1-20-gc56d49b",
+			"Rev": "c56d49b111aea675a81d411c2db1acfac6179de9"
 		},
 		{
 			"ImportPath": "github.com/docker/distribution/uuid",
-			"Comment": "v2.0.0-353-gfed58bd",
-			"Rev": "fed58bd2d3c096055c0e69c2fb86c9a4965d1b8b"
+			"Comment": "v2.2.1-20-gc56d49b",
+			"Rev": "c56d49b111aea675a81d411c2db1acfac6179de9"
 		},
 		{
 			"ImportPath": "github.com/docker/docker/pkg/tarsum",
@@ -908,6 +897,26 @@
 		{
 			"ImportPath": "gopkg.in/check.v1",
 			"Rev": "4f90aeace3a26ad7021961c297b22c42160c7b25"
+		},
+		{
+			"ImportPath": "gopkg.in/dancannon/gorethink.v2",
+			"Comment": "v2.0.2",
+			"Rev": "3742792da4bc279ccd6d807f24687009cbeda860"
+		},
+		{
+			"ImportPath": "gopkg.in/dancannon/gorethink.v2/encoding",
+			"Comment": "v2.0.2",
+			"Rev": "3742792da4bc279ccd6d807f24687009cbeda860"
+		},
+		{
+			"ImportPath": "gopkg.in/dancannon/gorethink.v2/ql2",
+			"Comment": "v2.0.2",
+			"Rev": "3742792da4bc279ccd6d807f24687009cbeda860"
+		},
+		{
+			"ImportPath": "gopkg.in/dancannon/gorethink.v2/types",
+			"Comment": "v2.0.2",
+			"Rev": "3742792da4bc279ccd6d807f24687009cbeda860"
 		},
 		{
 			"ImportPath": "gopkg.in/fatih/pool.v2",

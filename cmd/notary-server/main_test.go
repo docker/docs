@@ -11,6 +11,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/docker/distribution/health"
 	"github.com/docker/notary"
 	"github.com/docker/notary/server/storage"
 	"github.com/docker/notary/signer/client"
@@ -95,6 +96,13 @@ func TestGetAddrAndTLSConfigWithClientTLS(t *testing.T) {
 	require.NotNil(t, tlsConf.ClientCAs)
 }
 
+func fakeRegisterer(callCount *int) healthRegister {
+	return func(_ string, _ time.Duration, _ health.CheckFunc) {
+		(*callCount)++
+	}
+
+}
+
 // If neither "remote" nor "local" is passed for "trust_service.type", an
 // error is returned.
 func TestGetInvalidTrustService(t *testing.T) {
@@ -103,13 +111,10 @@ func TestGetInvalidTrustService(t *testing.T) {
 		`{}`,
 	}
 	var registerCalled = 0
-	var fakeRegister = func(_ string, _ func() error, _ time.Duration) {
-		registerCalled++
-	}
 
 	for _, config := range invalids {
 		_, _, err := getTrustService(configure(config),
-			client.NewNotarySigner, fakeRegister)
+			client.NewNotarySigner, fakeRegisterer(&registerCalled))
 		require.Error(t, err)
 		require.Contains(t, err.Error(),
 			"must specify either a \"local\" or \"remote\" type for trust_service")
@@ -125,12 +130,9 @@ func TestGetLocalTrustService(t *testing.T) {
 	localConfig := `{"trust_service": {"type": "local", "key_algorithm": "meh"}}`
 
 	var registerCalled = 0
-	var fakeRegister = func(_ string, _ func() error, _ time.Duration) {
-		registerCalled++
-	}
 
 	trust, algo, err := getTrustService(configure(localConfig),
-		client.NewNotarySigner, fakeRegister)
+		client.NewNotarySigner, fakeRegisterer(&registerCalled))
 	require.NoError(t, err)
 	require.IsType(t, &signed.Ed25519{}, trust)
 	require.Equal(t, data.ED25519Key, algo)
@@ -157,13 +159,10 @@ func TestGetTrustServiceInvalidKeyAlgorithm(t *testing.T) {
 		fmt.Sprintf(configTemplate, "random"),
 	}
 	var registerCalled = 0
-	var fakeRegister = func(_ string, _ func() error, _ time.Duration) {
-		registerCalled++
-	}
 
 	for _, config := range badKeyAlgos {
 		_, _, err := getTrustService(configure(config),
-			client.NewNotarySigner, fakeRegister)
+			client.NewNotarySigner, fakeRegisterer(&registerCalled))
 		require.Error(t, err)
 		require.Contains(t, err.Error(), "invalid key algorithm")
 	}
@@ -191,15 +190,12 @@ func TestGetTrustServiceTLSMissingCertOrKey(t *testing.T) {
 		fmt.Sprintf(`"tls_client_key": "%s"`, Key),
 	}
 	var registerCalled = 0
-	var fakeRegister = func(_ string, _ func() error, _ time.Duration) {
-		registerCalled++
-	}
 
 	for _, clientTLSConfig := range configs {
 		jsonConfig := fmt.Sprintf(trustTLSConfigTemplate, clientTLSConfig)
 		config := configure(jsonConfig)
 		_, _, err := getTrustService(config, client.NewNotarySigner,
-			fakeRegister)
+			fakeRegisterer(&registerCalled))
 		require.Error(t, err)
 		require.True(t,
 			strings.Contains(err.Error(), "either pass both client key and cert, or neither"))
@@ -220,9 +216,6 @@ func TestGetTrustServiceNoTLSConfig(t *testing.T) {
 		}
 	}`
 	var registerCalled = 0
-	var fakeRegister = func(_ string, _ func() error, _ time.Duration) {
-		registerCalled++
-	}
 
 	var tlsConfig *tls.Config
 	var fakeNewSigner = func(_, _ string, c *tls.Config) *client.NotarySigner {
@@ -231,7 +224,7 @@ func TestGetTrustServiceNoTLSConfig(t *testing.T) {
 	}
 
 	trust, algo, err := getTrustService(configure(config),
-		fakeNewSigner, fakeRegister)
+		fakeNewSigner, fakeRegisterer(&registerCalled))
 	require.NoError(t, err)
 	require.IsType(t, &client.NotarySigner{}, trust)
 	require.Equal(t, "ecdsa", algo)
@@ -252,9 +245,6 @@ func TestGetTrustServiceTLSSuccess(t *testing.T) {
 		Cert, Key)
 
 	var registerCalled = 0
-	var fakeRegister = func(_ string, _ func() error, _ time.Duration) {
-		registerCalled++
-	}
 
 	var tlsConfig *tls.Config
 	var fakeNewSigner = func(_, _ string, c *tls.Config) *client.NotarySigner {
@@ -264,7 +254,7 @@ func TestGetTrustServiceTLSSuccess(t *testing.T) {
 
 	trust, algo, err := getTrustService(
 		configure(fmt.Sprintf(trustTLSConfigTemplate, tlspart)),
-		fakeNewSigner, fakeRegister)
+		fakeNewSigner, fakeRegisterer(&registerCalled))
 	require.NoError(t, err)
 	require.IsType(t, &client.NotarySigner{}, trust)
 	require.Equal(t, "ecdsa", algo)
@@ -282,13 +272,10 @@ func TestGetTrustServiceTLSFailure(t *testing.T) {
 		Key)
 
 	var registerCalled = 0
-	var fakeRegister = func(_ string, _ func() error, _ time.Duration) {
-		registerCalled++
-	}
 
 	_, _, err := getTrustService(
 		configure(fmt.Sprintf(trustTLSConfigTemplate, tlspart)),
-		client.NewNotarySigner, fakeRegister)
+		client.NewNotarySigner, fakeRegisterer(&registerCalled))
 
 	require.Error(t, err)
 	require.True(t, strings.Contains(err.Error(),
@@ -303,11 +290,8 @@ func TestGetStoreInvalid(t *testing.T) {
 	config := `{"storage": {"backend": "asdf", "db_url": "/tmp/1234"}}`
 
 	var registerCalled = 0
-	var fakeRegister = func(_ string, _ func() error, _ time.Duration) {
-		registerCalled++
-	}
 
-	_, err := getStore(configure(config), fakeRegister)
+	_, err := getStore(configure(config), fakeRegisterer(&registerCalled))
 	require.Error(t, err)
 
 	// no health function ever registered
@@ -324,11 +308,8 @@ func TestGetStoreDBStore(t *testing.T) {
 		notary.SQLiteBackend, tmpFile.Name())
 
 	var registerCalled = 0
-	var fakeRegister = func(_ string, _ func() error, _ time.Duration) {
-		registerCalled++
-	}
 
-	store, err := getStore(configure(config), fakeRegister)
+	store, err := getStore(configure(config), fakeRegisterer(&registerCalled))
 	require.NoError(t, err)
 	_, ok := store.(storage.TUFMetaStorage)
 	require.True(t, ok)
@@ -351,22 +332,16 @@ func TestGetStoreRethinkDBStoreConnectionFails(t *testing.T) {
 		notary.RethinkDBBackend)
 
 	var registerCalled = 0
-	var fakeRegister = func(_ string, _ func() error, _ time.Duration) {
-		registerCalled++
-	}
 
-	_, err := getStore(configure(config), fakeRegister)
+	_, err := getStore(configure(config), fakeRegisterer(&registerCalled))
 	require.Error(t, err)
 }
 
 func TestGetMemoryStore(t *testing.T) {
 	var registerCalled = 0
-	var fakeRegister = func(_ string, _ func() error, _ time.Duration) {
-		registerCalled++
-	}
 
 	config := fmt.Sprintf(`{"storage": {"backend": "%s"}}`, notary.MemoryBackend)
-	store, err := getStore(configure(config), fakeRegister)
+	store, err := getStore(configure(config), fakeRegisterer(&registerCalled))
 	require.NoError(t, err)
 	_, ok := store.(*storage.MemStorage)
 	require.True(t, ok)
@@ -432,10 +407,7 @@ func TestGetGUNPRefixes(t *testing.T) {
 // For sanity, make sure we can always parse the sample config
 func TestSampleConfig(t *testing.T) {
 	var registerCalled = 0
-	var fakeRegister = func(_ string, _ func() error, _ time.Duration) {
-		registerCalled++
-	}
-	_, _, err := parseServerConfig("../../fixtures/server-config.json", fakeRegister)
+	_, _, err := parseServerConfig("../../fixtures/server-config.json", fakeRegisterer(&registerCalled))
 	require.NoError(t, err)
 
 	// once for the DB, once for the trust service

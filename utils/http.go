@@ -8,7 +8,6 @@ import (
 	"github.com/Sirupsen/logrus"
 	ctxu "github.com/docker/distribution/context"
 	"github.com/docker/distribution/registry/api/errcode"
-	"github.com/docker/distribution/registry/api/v2"
 	"github.com/docker/distribution/registry/auth"
 	"github.com/docker/notary/tuf/signed"
 	"github.com/gorilla/mux"
@@ -50,8 +49,9 @@ func RootHandlerFactory(auth auth.AccessController, ctx context.Context, trust s
 func (root *rootHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	ctx := ctxu.WithRequest(root.context, r)
+	log := ctxu.GetRequestLogger(ctx)
 	ctx, w = ctxu.WithResponseWriter(ctx, w)
-	ctx = ctxu.WithLogger(ctx, ctxu.GetRequestLogger(ctx))
+	ctx = ctxu.WithLogger(ctx, log)
 	ctx = context.WithValue(ctx, "repo", vars["imageName"])
 	ctx = context.WithValue(ctx, "cryptoService", root.trust)
 
@@ -66,12 +66,14 @@ func (root *rootHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		if authCtx, err = root.auth.Authorized(ctx, access...); err != nil {
 			if challenge, ok := err.(auth.Challenge); ok {
 				// Let the challenge write the response.
-				challenge.ServeHTTP(w, r)
+				challenge.SetHeaders(w)
 
-				w.WriteHeader(http.StatusUnauthorized)
+				if err := errcode.ServeJSON(w, errcode.ErrorCodeUnauthorized.WithDetail(access)); err != nil {
+					log.Errorf("failed to serve challenge response: %s", err.Error())
+				}
 				return
 			}
-			errcode.ServeJSON(w, v2.ErrorCodeUnauthorized)
+			errcode.ServeJSON(w, errcode.ErrorCodeUnauthorized)
 			return
 		}
 		ctx = authCtx
