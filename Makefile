@@ -137,9 +137,9 @@ test-full: vet lint
 	@echo
 	go test -tags "${NOTARY_BUILDTAGS}" $(TESTOPTS) -v $(PKGS)
 
+integration: TESTDB = mysql
 integration:
-	buildscripts/integrationtest.sh development.yml
-	buildscripts/integrationtest.sh development.rethink.yml
+	buildscripts/integrationtest.sh development.$(TESTDB).yml
 
 protos:
 	@protoc --go_out=plugins=grpc:. proto/*.proto
