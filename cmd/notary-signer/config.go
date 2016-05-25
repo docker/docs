@@ -136,7 +136,7 @@ func setUpCryptoservices(configuration *viper.Viper, allowedBackends []string) (
 			return nil, fmt.Errorf("Error starting %s driver: %s", backend, err.Error())
 		}
 		s := keydbstore.NewRethinkDBKeyStore(storeConfig.DBName, storeConfig.Username, storeConfig.Password, passphraseRetriever, defaultAlias, sess)
-		health.RegisterPeriodicFunc("DB operational", s.CheckHealth, time.Minute)
+		health.RegisterPeriodicFunc("DB operational", time.Minute, s.CheckHealth)
 		keyStore = s
 	case notary.MySQLBackend, notary.SQLiteBackend:
 		storeConfig, err := utils.ParseSQLStorage(configuration)
@@ -154,7 +154,7 @@ func setUpCryptoservices(configuration *viper.Viper, allowedBackends []string) (
 		}
 
 		health.RegisterPeriodicFunc(
-			"DB operational", dbStore.HealthCheck, time.Minute)
+			"DB operational", time.Minute, dbStore.HealthCheck)
 		keyStore = dbStore
 	}
 

@@ -1,21 +1,14 @@
 package digest
 
 import (
-	"bytes"
 	"fmt"
 	"hash"
 	"io"
-	"io/ioutil"
 	"regexp"
 	"strings"
-
-	"github.com/docker/docker/pkg/tarsum"
 )
 
 const (
-	// DigestTarSumV1EmptyTar is the digest for the empty tar file.
-	DigestTarSumV1EmptyTar = "tarsum.v1+sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-
 	// DigestSha256EmptyTar is the canonical sha256 digest of empty data
 	DigestSha256EmptyTar = "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 )
@@ -28,11 +21,6 @@ const (
 // The following is an example of the contents of Digest types:
 //
 // 	sha256:7173b809ca12ec5dee4506cd86be934c4596dd234ee82c0662eac04a8c2c71dc
-//
-// More important for this code base, this type is compatible with tarsum
-// digests. For example, the following would be a valid Digest:
-//
-// 	tarsum+sha256:e58fcf7418d4390dec8e8fb69d88c06ec07039d651fedd3aa72af9972e7d046b
 //
 // This allows to abstract the digest behind this type and work only in those
 // terms.
@@ -58,6 +46,9 @@ var (
 	// ErrDigestInvalidFormat returned when digest format invalid.
 	ErrDigestInvalidFormat = fmt.Errorf("invalid checksum digest format")
 
+	// ErrDigestInvalidLength returned when digest has invalid length.
+	ErrDigestInvalidLength = fmt.Errorf("invalid checksum digest length")
+
 	// ErrDigestUnsupported returned when the digest algorithm is unsupported.
 	ErrDigestUnsupported = fmt.Errorf("unsupported digest algorithm")
 )
@@ -70,52 +61,32 @@ func ParseDigest(s string) (Digest, error) {
 	return d, d.Validate()
 }
 
-// FromReader returns the most valid digest for the underlying content.
+// FromReader returns the most valid digest for the underlying content using
+// the canonical digest algorithm.
 func FromReader(rd io.Reader) (Digest, error) {
-	digester := Canonical.New()
-
-	if _, err := io.Copy(digester.Hash(), rd); err != nil {
-		return "", err
-	}
-
-	return digester.Digest(), nil
-}
-
-// FromTarArchive produces a tarsum digest from reader rd.
-func FromTarArchive(rd io.Reader) (Digest, error) {
-	ts, err := tarsum.NewTarSum(rd, true, tarsum.Version1)
-	if err != nil {
-		return "", err
-	}
-
-	if _, err := io.Copy(ioutil.Discard, ts); err != nil {
-		return "", err
-	}
-
-	d, err := ParseDigest(ts.Sum(nil))
-	if err != nil {
-		return "", err
-	}
-
-	return d, nil
+	return Canonical.FromReader(rd)
 }
 
 // FromBytes digests the input and returns a Digest.
-func FromBytes(p []byte) (Digest, error) {
-	return FromReader(bytes.NewReader(p))
+func FromBytes(p []byte) Digest {
+	digester := Canonical.New()
+
+	if _, err := digester.Hash().Write(p); err != nil {
+		// Writes to a Hash should never fail. None of the existing
+		// hash implementations in the stdlib or hashes vendored
+		// here can return errors from Write. Having a panic in this
+		// condition instead of having FromBytes return an error value
+		// avoids unnecessary error handling paths in all callers.
+		panic("write to hash function returned error: " + err.Error())
+	}
+
+	return digester.Digest()
 }
 
 // Validate checks that the contents of d is a valid digest, returning an
 // error if not.
 func (d Digest) Validate() error {
 	s := string(d)
-	// Common case will be tarsum
-	_, err := ParseTarSum(s)
-	if err == nil {
-		return nil
-	}
-
-	// Continue on for general parser
 
 	if !DigestRegexpAnchored.MatchString(s) {
 		return ErrDigestInvalidFormat
@@ -131,8 +102,11 @@ func (d Digest) Validate() error {
 		return ErrDigestInvalidFormat
 	}
 
-	switch Algorithm(s[:i]) {
+	switch algorithm := Algorithm(s[:i]); algorithm {
 	case SHA256, SHA384, SHA512:
+		if algorithm.Size()*2 != len(s[i+1:]) {
+			return ErrDigestInvalidLength
+		}
 		break
 	default:
 		return ErrDigestUnsupported
