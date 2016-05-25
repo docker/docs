@@ -21,7 +21,9 @@
 // 			if ctx, err := accessController.Authorized(ctx, access); err != nil {
 //				if challenge, ok := err.(auth.Challenge) {
 //					// Let the challenge write the response.
-//					challenge.ServeHTTP(w, r)
+//					challenge.SetHeaders(w)
+//					w.WriteHeader(http.StatusUnauthorized)
+//					return
 //				} else {
 //					// Some other error.
 //				}
@@ -34,7 +36,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"golang.org/x/net/context"
+	"github.com/docker/distribution/context"
 )
 
 // UserInfo carries information about
@@ -61,12 +63,12 @@ type Access struct {
 // header values based on the error.
 type Challenge interface {
 	error
-	// ServeHTTP prepares the request to conduct the appropriate challenge
-	// response by adding the appropriate HTTP challenge header on the response
-	// message. Callers are expected to set the appropriate HTTP status code
-	// (e.g. 401) themselves. Because no body is written, users may write a
-	// custom body after calling ServeHTTP.
-	ServeHTTP(w http.ResponseWriter, r *http.Request)
+
+	// SetHeaders prepares the request to conduct a challenge response by
+	// adding the an HTTP challenge header on the response message. Callers
+	// are expected to set the appropriate HTTP status code (e.g. 401)
+	// themselves.
+	SetHeaders(w http.ResponseWriter)
 }
 
 // AccessController controls access to registry resources based on a request

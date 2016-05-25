@@ -3,6 +3,7 @@ package digest
 import (
 	"crypto"
 	"hash"
+	"io"
 )
 
 // Algorithm identifies and implementation of a digester by an identifier.
@@ -12,10 +13,9 @@ type Algorithm string
 
 // supported digest types
 const (
-	SHA256         Algorithm = "sha256"           // sha256 with hex encoding
-	SHA384         Algorithm = "sha384"           // sha384 with hex encoding
-	SHA512         Algorithm = "sha512"           // sha512 with hex encoding
-	TarsumV1SHA256 Algorithm = "tarsum+v1+sha256" // supported tarsum version, verification only
+	SHA256 Algorithm = "sha256" // sha256 with hex encoding
+	SHA384 Algorithm = "sha384" // sha384 with hex encoding
+	SHA512 Algorithm = "sha512" // sha512 with hex encoding
 
 	// Canonical is the primary digest algorithm used with the distribution
 	// project. Other digests may be used but this one is the primary storage
@@ -49,6 +49,31 @@ func (a Algorithm) Available() bool {
 	return h.Available()
 }
 
+func (a Algorithm) String() string {
+	return string(a)
+}
+
+// Size returns number of bytes returned by the hash.
+func (a Algorithm) Size() int {
+	h, ok := algorithms[a]
+	if !ok {
+		return 0
+	}
+	return h.Size()
+}
+
+// Set implemented to allow use of Algorithm as a command line flag.
+func (a *Algorithm) Set(value string) error {
+	if value == "" {
+		*a = Canonical
+	} else {
+		// just do a type conversion, support is queried with Available.
+		*a = Algorithm(value)
+	}
+
+	return nil
+}
+
 // New returns a new digester for the specified algorithm. If the algorithm
 // does not have a digester implementation, nil will be returned. This can be
 // checked by calling Available before calling New.
@@ -67,6 +92,17 @@ func (a Algorithm) Hash() hash.Hash {
 	}
 
 	return algorithms[a].New()
+}
+
+// FromReader returns the digest of the reader using the algorithm.
+func (a Algorithm) FromReader(rd io.Reader) (Digest, error) {
+	digester := a.New()
+
+	if _, err := io.Copy(digester.Hash(), rd); err != nil {
+		return "", err
+	}
+
+	return digester.Digest(), nil
 }
 
 // TODO(stevvooe): Allow resolution of verifiers using the digest type and
