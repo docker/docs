@@ -2,6 +2,7 @@
 
 set -e
 
+make clean
 make client
 
 set +e
