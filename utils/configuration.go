@@ -8,8 +8,8 @@ import (
 	"path/filepath"
 	"strings"
 
+	bugsnag_hook "github.com/Shopify/logrus-bugsnag"
 	"github.com/Sirupsen/logrus"
-	bugsnag_hook "github.com/Sirupsen/logrus/hooks/bugsnag"
 	"github.com/bugsnag/bugsnag-go"
 	"github.com/docker/go-connections/tlsconfig"
 	"github.com/spf13/viper"
