@@ -8,9 +8,11 @@ import (
 	"os"
 	"reflect"
 	"strings"
+	"syscall"
 	"testing"
 	"time"
 
+	"github.com/Sirupsen/logrus"
 	"github.com/docker/distribution/health"
 	"github.com/docker/notary"
 	"github.com/docker/notary/server/storage"
@@ -412,4 +414,35 @@ func TestSampleConfig(t *testing.T) {
 
 	// once for the DB, once for the trust service
 	require.Equal(t, registerCalled, 2)
+}
+
+func TestReloadConfig(t *testing.T) {
+	f, err := os.Create("/tmp/testReloadConfig.json")
+	defer os.Remove(f.Name())
+	require.NoError(t, err)
+
+	f.WriteString(`{"logging": {"level": "info"}}`)
+
+	v := viper.New()
+	utils.SetupViper(v, "envPrefix")
+	//v.SetConfigType("json")
+	err = utils.ParseViper(v, f.Name())
+	require.NoError(t, err)
+
+	// Info + SIGUSR1 -> Debug
+	reloadConfig(syscall.SIGUSR1, f.Name(), v, "envPrefix")
+	require.Equal(t, logrus.GetLevel(), logrus.DebugLevel)
+
+	// Debug + SIGUSR1 -> Debug
+	reloadConfig(syscall.SIGUSR1, f.Name(), v, "envPrefix")
+	require.Equal(t, logrus.GetLevel(), logrus.DebugLevel)
+
+	// Debug + SIGUSR2-> Info
+	reloadConfig(syscall.SIGUSR2, f.Name(), v, "envPrefix")
+	require.Equal(t, logrus.GetLevel(), logrus.InfoLevel)
+
+	// SIGHUP + x -> x
+	f.WriteAt([]byte(`{"logging": {"level": "error"}}`), 0)
+	reloadConfig(syscall.SIGHUP, f.Name(), v, "envPrefix")
+	require.Equal(t, logrus.GetLevel(), logrus.ErrorLevel)
 }

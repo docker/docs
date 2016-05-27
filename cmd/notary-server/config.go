@@ -3,11 +3,11 @@ package main
 import (
 	"crypto/tls"
 	"fmt"
+	"os"
+	"os/signal"
 	"path"
 	"strconv"
 	"strings"
-	"os"
-	"os/signal"
 	"syscall"
 	"time"
 
