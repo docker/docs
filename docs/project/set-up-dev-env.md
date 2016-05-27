@@ -57,7 +57,7 @@ To remove unnecessary artifacts:
     ```
 
     This command uses `docker ps` to list all containers (`-a` flag) by numeric
-    IDs (`-q` flag). Then, the `docker fm` command removes the resulting list.
+    IDs (`-q` flag). Then, the `docker rm` command removes the resulting list.
     If you have running but unused containers, stop and then remove them with
     the `docker stop` and `docker rm` commands.
 
