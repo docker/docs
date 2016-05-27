@@ -77,8 +77,8 @@ easier for clients to automatically use the correct Notary server.
 
     To configure your Docker client to be able to push signed images to Docker
     Trusted Registry refer to the CLI Reference's [Environment Variables
-    Section](https://docs.docker.com/engine/reference/commandline/cli.md#environment-variables) and
-    [Notary Section](https://docs.docker.com/engine/reference/commandline/cli.md#Notary).
+    Section](/engine/reference/commandline/cli.md#environment-variables) and
+    [Notary Section](/engine/reference/commandline/cli.md#notary).
 
     This requires you to set the `DOCKER_CONTENT_TRUST` variable and configure
     your system to trust Docker Trusted Registry's TLS certificate if it doesn't
