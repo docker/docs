@@ -190,9 +190,8 @@ on the command line using this command:
 
       /msg NickServ identify <password>
 
-With Webchat if you forget or lose your password see <a
-href="https://freenode.net/faq.shtml#sendpass" target="_blank">the FAQ on
-freenode.net</a> to learn how to recover it.
+With Webchat if you forget or lose your password you'll need to join the
+`#freenode` channel and request them to reset it for you.
 
 ### Join a Docker Channel
 
