@@ -1,17 +1,17 @@
 <!--[metadata]>
 +++
 aliases = ["/docker-trusted-registry/install/upgrade/"]
-title = "Upgrade to DTR 2.0"
+title = "Upgrade from 1.4.3"
 description = "Learn how to upgrade your Docker Trusted Registry to the latest major release."
 keywords = ["docker, dtr, upgrade, install"]
 [menu.main]
-parent="workw_dtr_install"
+parent="menu_dtr_upgrade"
 identifier="dtr_upgrade_major"
-weight=40
+weight=0
 +++
 <![end-metadata]-->
 
-# Upgrade to DTR 2.0
+# Upgrade from DTR 1.4.3
 
 The first step in upgrading to Docker Trusted Registry (DTR) 2.0, is ensuring
 you are running DTR 1.4.3. If that's not the case, start by upgrading your
@@ -93,7 +93,7 @@ You need to manually configure the following settings:
 * Domain name,
 * Certificates.
 
-You can find the certificates of DTR 1.4.3 under `/usr/local/etc/dtr/ssl`. 
+You can find the certificates of DTR 1.4.3 under `/usr/local/etc/dtr/ssl`.
 
 ## Step 5. Test your installation
 
@@ -167,5 +167,5 @@ containers.
 
 ## Where to go next
 
-* [Install DTR offline](../install-dtr-offline.md)
+* [Upgrade to DTR 2.x](upgrade-minor.md)
 * [Monitor DTR](../../monitor-troubleshoot/monitor.md)
