@@ -20,7 +20,7 @@ contribute mentoring if you have good knowledge of:
 * using Git, Go, GitHub, IRC, or other common tools
 
 Also, choose mentoring if you like to be happy. Studies show that <a
-href="http://goo.gl/HSz8UT" target="_blank">helping others</a> is a great way to
+href="http://www.huffingtonpost.com/2013/09/03/five-minute-favor-adam-rifkin_n_3805090.html" target="_blank">helping others</a> is a great way to
 boost your own well being.
 
 
@@ -34,8 +34,8 @@ target="_blank">Docker Community Forum</a>
 *  <a href="http://stackoverflow.com/search?tab=newest&q=docker"
 target="_blank">StackOverflow</a>
 
-You can also check the <a href="http://goo.gl/Kv8EdU" target="_blank">list of
-open user questions</a> on the Docker Engine project.
+You can also check the <a href="https://github.com/docker/docker/issues?q=is%3Aopen+is%3Aissue+label%3Akind%2Fquestion+-label%3Astatus%2Fclaimed+-label%3Astatus%2Fassigned+no%3Aassignee" target="_blank">list of
+open user questions</a> on the Docker project.
 
 
 ## Docker contributors
