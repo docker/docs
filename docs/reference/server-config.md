@@ -19,6 +19,8 @@ A configuration file is required by Notary server, and the path to the
 configuration file must be specified using the `-config` option on the command
 line.
 
+Notary server also allows you to [hot-reload](server-config.md#hot-configuration-reload) the configuration without having to restart.
+
 Here is a full server configuration file example; please click on the top level JSON keys to
 learn more about the configuration section corresponding to that key:
 
@@ -358,6 +360,30 @@ Example:
 		</td>
 	</tr>
 </table>
+
+## Hot configuration reload
+We don't support to hot reload everything at present. What we support for now is:
+- increase logging level by signal `SIGUSR1`
+- decrease logging level by signal `SIGUSR2`
+- hot reload logging level from the config file by signal `SIGHUP`
+
+Example:
+
+To increase logging level
+```
+$ kill -s SIGUSR1 `ps aux | grep "notary-server -config" | grep -v "grep" | awk '{print $2}'`
+```
+
+To decrease logging level
+```
+$ kill -s SIGUSR2 `ps aux | grep "notary-server -config" | grep -v "grep" | awk '{print $2}'`
+```
+
+To reset logging level
+```
+$ #edit the config file and then
+$ kill -s SIGHUP `ps aux | grep "notary-server -config" | grep -v "grep" | awk '{print $2}'`
+```
 
 ## Related information
 
