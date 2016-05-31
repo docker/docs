@@ -38,6 +38,7 @@ var (
 		"distribution",
 		"docker",
 		"docker-bench-security",
+		"docker-credential-helpers",
 		"docker-py",
 		"dockercraft",
 		"engine-api",
