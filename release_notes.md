@@ -28,13 +28,16 @@ upgrade your installation to the latest release.
   passwd` command for this.
 
 * docker/ucp image
-  * It's now possible to configure the heartbeat interval and election timeout
-  of the UCP key-value store with the `docker/ucp install --kv-timeout` option.
-  This is useful when running UCP across multiple regions.
+  * It's now possible to configure the election timeout of the UCP key-value store
+  with the `docker/ucp install --kv-timeout` option. This is useful when running
+  UCP across multiple regions. Note that the heartbeat interval will be 1/10th of
+  the specified election timeout value.
   [Learn more](https://coreos.com/etcd/docs/latest/tuning.html)
   * It's now possible to skip TLS verification when joining new nodes to the
   cluster, using the `docker/ucp join --insecure-fingerprint` option. However, to 
   ensure your cluster is secure, don't use this option for normal UCP deployments.
+  * The restore operation now supports `--interactive, -i` flags, which require a
+  backup file to be mounted in `/backup.tar` instead of streamed through `stdin`.
 
 * UI
   * When pulling images on the UCP UI, you can now provide login credentials for
@@ -61,11 +64,15 @@ preserved.
 * The restore command now ensures the backup is not corrupt, that the UCP
 cluster is healthy and is running the same or later version of UCP before
 restoring.
+* The restore command now works correctly on a freshly installed instance of
+UCP, assuming the same host IP and a correct backup file.
 * LDAP domain names are now case-insensitive for easier syncing.
 * Fixed an issue that caused LDAP syncs to run every minute, after upgrading
 UCP from an older version to 1.1.0.
 * Fixed error by which user could get an "access denied" message when deploying
 a container from the UI due to cached permission labels.
+* Fixed issue where environment variables were not being passed to new containers 
+when "Allow users to deploy containers on UCP controllers" setting was disabled.
 
 **Misc**
 
