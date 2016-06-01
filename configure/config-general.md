@@ -52,7 +52,7 @@ Notary](/engine/security/trust/deploying_notary.md). You can deploy a Notary
 server on the same machine as the Trusted Registry. If you do this, you can
 connect to the Notary server directly using the IP address of the `docker0`
 interface. The interface's address is typically `172.17.42.1`. Read more about
-[Docker Networking](https://docs.docker.com/engine/userguide/networking/index.md) to learn about the
+[Docker Networking](/engine/userguide/networking/index.md) to learn about the
 `docker0` interface. You can also connect using the machine's external IP
 address and port combination provided you expose the proper port.  
 
