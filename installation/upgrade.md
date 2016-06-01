@@ -199,4 +199,4 @@ If your cluster is set up for high-availability (has several controller nodes):
 ## Where to go next
 
 * [UCP release notes](../release_notes.md)
-* [Upgrade Docker Trusted Registry](https://docs.docker.com/docker-trusted-registry/install/upgrade/)
+* [Upgrade Docker Trusted Registry](/docker-trusted-registry/install/upgrade/index.md)

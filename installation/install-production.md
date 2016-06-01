@@ -19,7 +19,7 @@ installed on-premises or on a cloud infrastructure.
 ## Step 1: Validate the system requirements
 
 The first step in installing UCP, is ensuring your
-infrastructure has all the [requirements UCP needs to run](system-requirements).
+infrastructure has all the [requirements UCP needs to run](system-requirements.md).
 
 
 ## Step 2: Install CS Docker on all nodes

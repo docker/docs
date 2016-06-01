@@ -392,6 +392,6 @@ DNS name to the public IP address of the `votingapp_web-vote-app_1` node.
         Reply from 54.183.164.230: bytes=32 time=163ms TTL=42
         Reply from 54.183.164.230: bytes=32 time=169ms TTL=42
 
-3. Point your web browser to [http://votingapp.local](http://votingapp.local)
+3. Point your web browser to `http://votingapp.local`.
 
     ![](../images/vote-app-test.jpg)

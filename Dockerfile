@@ -1,5 +1,5 @@
 FROM docs/base:oss
-MAINTAINER Mary Anthony <mary@docker.com> (@moxiegirl)
+MAINTAINER Docker Docs <docs@docker.com>
 
 ENV PROJECT=ucp
 # to get the git info for this repo
