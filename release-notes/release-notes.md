@@ -27,6 +27,10 @@ to upgrade your installation to the latest release.
 this timeout the garbage collection job stops. The job is then resumed on the
 next scheduled interval.
 
+* docker/dtr image
+  * Added the `docker/dtr upgrade` command, to upgrade an installation.
+  * Renamed the `--dtr-load-balancer` flag to `--dtr-external-url`.
+
 **Deprecated features**
 
 *  The user authentication settings page is deprecated and will be removed in a
@@ -69,7 +73,7 @@ future release. Configure user authentication in UCP.
   * With more than 150k users, the search API is now responsive.
   * When UCP and DTR are running on the same host, restarting the host now
   restarts DTR containers. For this to work you need to use CS Engine
-  1.11.1-cs2 and UCP 1.1.1.
+  1.11.1-cs2 and UCP 1.1.1, or newer versions.
   * It's no longer possible to delete the default 'docker-datacenter'
   organization.
 
