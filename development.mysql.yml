@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: server.Dockerfile
     networks:
-      rdb:
+      mdb:
       sig:
       srv:
         aliases:
@@ -20,7 +20,7 @@ services:
       context: .
       dockerfile: signer.Dockerfile
     networks:
-      rdb:
+      mdb:
       sig:
         aliases:
           - notarysigner
@@ -30,7 +30,7 @@ services:
       - mysql
   mysql:
     networks:
-      - rdb
+      - mdb
     volumes:
       - ./notarymysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     image: mariadb:10.1.10
@@ -53,7 +53,7 @@ volumes:
   notary_data:
     external: false
 networks:
-  rdb:
+  mdb:
     external: false
   sig:
     external: false

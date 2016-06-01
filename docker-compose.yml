@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: server.Dockerfile
     networks:
-      - rdb
+      - mdb
       - sig
     ports:
       - "8080"
@@ -20,7 +20,7 @@ services:
       context: .
       dockerfile: signer.Dockerfile
     networks:
-      rdb:
+      mdb:
       sig:
         aliases:
           - notarysigner
@@ -30,7 +30,7 @@ services:
       - mysql
   mysql:
     networks:
-      - rdb
+      - mdb
     volumes:
       - ./notarymysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
       - notary_data:/var/lib/mysql
@@ -43,7 +43,7 @@ volumes:
   notary_data:
     external: false
 networks:
-  rdb:
+  mdb:
     external: false
   sig:
     external: false
