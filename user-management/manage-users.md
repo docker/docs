@@ -191,5 +191,5 @@ To add **Permissions** to a team, do the following:
 ## Related information
 
 To learn how to apply labels, see the how to [Apply custom
-metadata](https://docs.docker.com/engine/userguide/labels-custom-metadata/)
+metadata](/engine/userguide/labels-custom-metadata.md)
 Engine documentation.
