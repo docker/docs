@@ -25,13 +25,13 @@ Use these instructions to install DTR.
 ## Step 1. Validate the system requirements
 
 The first step in installing DTR, is ensuring your
-infrastructure has all the [requirements DTR needs to run](system-requirements).
+infrastructure has all the [requirements DTR needs to run](system-requirements.md).
 
 ## Step 2. Install UCP
 
 Since DTR requires a Docker Universal Control Plane (UCP) cluster
 to run, you need to install UCP first.
-[Learn how to install UCP](http://docs.docker.com/ucp/installation/install-production/).
+[Learn how to install UCP](https://docs.docker.com/ucp/installation/install-production/).
 
 
 ## Step 3. Install DTR

@@ -22,7 +22,7 @@ development environments.
 Pushing and pulling images with Trusted Registry works similarly like any other
 Docker registry. You use the `docker pull` command to retrieve images and the
 `docker push` command to add an image. To learn more about Docker images, see
-[User Guide: Working with Docker Images](https://docs.docker.com/engine/userguide/dockerimages/). For a step-by-step
+[User Guide: Working with Docker Images](/engine/userguide/containers/dockerimages.md). For a step-by-step
 example of the entire process, see the
 [Quickstart guide](../quick-start.md).
 
@@ -49,7 +49,7 @@ example of the entire process, see the
 ## Push images
 
 You push an image up to a Docker Trusted Registry repository by using the
-[`docker push` command](https://docs.docker.com/reference/commandline/push).
+[`docker push` command](/engine/reference/commandline/push.md).
 
 You can add a `tag` to your image so that you can more easily identify it
 among other variants and so that it refers to your Docker Trusted Registry server.
@@ -83,9 +83,9 @@ Once an image is tagged, you can push it to Docker Trusted Registry with:
 ## Pull images
 
 You can retrieve an image with the
-[`docker pull` command](https://docs.docker.com/reference/commandline/run),
+[`docker pull` command](/engine/reference/commandline/run.md),
 or you can retrieve an image and run Docker to build the container with the
-[`docker run`command](https://docs.docker.com/reference/commandline/run).
+[`docker run`command](/engine/reference/commandline/run.md).
 
 To retrieve an image from the Trusted Registry and then run Docker to build the
 container, add

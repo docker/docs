@@ -160,10 +160,10 @@ YAML file (which is discussed further in this document.)
 
 >**Note**: Changing your storage backend requires you to restart the Trusted Registry.
 
-See the [Registry configuration](http://docs.docker.com/registry/configuration/)
+See the [Registry configuration](/registry/configuration.md)
 documentation for the full options specific to each driver. Storage drivers can
 be customized through the [Docker Registry storage driver
-API](http://docs.docker.com/registry/storagedrivers/#storage-driver-api).
+API](/registry/storage-drivers/index.md#storage-driver-api).
 
 
 ### Filesystem settings
@@ -191,7 +191,7 @@ region, chunksize, and prefix.
 
 If the previous quick setup options are not sufficient to configure your
 Registry options, you can upload a YAML file. The schema of this file is
-identical to that used by the [Registry](http://docs.docker.com/registry/configuration/).
+identical to that used by the [Registry](/registry/configuration.md).
 
 There are several benefits to using a YAML file as it can provide an
 additional level of granularity in defining your storage backend. Advantages
@@ -207,7 +207,7 @@ include:
 2. Select Download to get the text based file. It contains a minimum amount
 of information and you're going to need additional data based on your driver and
 business requirements.
-3. Go [here](http://docs.docker.com/registry/configuration/#list-of-configuration-options") to see the open source YAML file. Copy the sections you need and paste into your `storage.yml` file. Note that some settings may contradict others, so
+3. Go [here](/registry/configuration.md#list-of-configuration-options") to see the open source YAML file. Copy the sections you need and paste into your `storage.yml` file. Note that some settings may contradict others, so
 ensure your choices make sense.
 4. Save the YAML file and return to the UI.
 5. On the Storage screen, upload the file, review your changes, and click Save.

@@ -39,7 +39,7 @@ See the [configuration overview](configuration.md) to manually create an admin a
 
 ## Managed authentication
 
-With `Managed` authentication, the Trusted Registry admin can manually control users' access by setting username/password pairs. The admin can then [use the API](http://docs.docker.com/apidocs/v1.3.3/) to give these users global "admin", "read-write" or "read-only" privileges while assigning them organization, team, or user repository access. Note that you can **only** set the global role of `Admin - all repositories` though the UI for the admin. The global roles for `Read-write - all repositories` and `Read-only - all repositories` have been deprecated.
+With `Managed` authentication, the Trusted Registry admin can manually control users' access by setting username/password pairs. The admin can then [use the API](https://docs.docker.com/apidocs/v1.3.3/) to give these users global "admin", "read-write" or "read-only" privileges while assigning them organization, team, or user repository access. Note that you can **only** set the global role of `Admin - all repositories` though the UI for the admin. The global roles for `Read-write - all repositories` and `Read-only - all repositories` have been deprecated.
 
 When you create users and assign their roles through the API, you do not need
 to assign those users roles using the Trusted Registry admin UI.

@@ -138,7 +138,7 @@ documentation.
 
   * Users, depending on their roles, can access account information through the Trusted Registry UI.
 
-  * View new API documentation through the Trusted Registry UI. You can also view this [documentation](https://docs.docker.com/docker-trusted-registry/) from Docker, Inc. docs section.
+  * View new API documentation through the Trusted Registry UI. You can also view this [documentation](/docker-trusted-registry/overview.md) from Docker, Inc. docs section.
 
 * New APIs
 
@@ -260,7 +260,7 @@ This release addresses a few bugs and issues in Docker Trusted Registry 1.2.0 an
 
 * A completely new user-interface for the Admin application brings Docker Trusted Registry in line with other Docker products and provides greater ease-of-use.
 
-* A new Accounts & Repos API provides new fine-grained role-based access control down to the per-repo level. See the [API's documentation](http://docs.docker.com/apidocs/v1.3.3/) for more information.
+* A new Accounts & Repos API provides new fine-grained role-based access control down to the per-repo level. See the [API's documentation](https://docs.docker.com/apidocs/v1.3.3/) for more information.
 
 * Improvements to the handling of configuration changes so that fewer restarts are required.
 

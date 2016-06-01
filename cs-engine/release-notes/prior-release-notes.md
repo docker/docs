@@ -27,7 +27,7 @@ fully manageable on its own lifecycle. You can also use plugins to extend
 network functionality.
 
 * Docker, Inc. now provides support for the in-box Overlay (for cross-host networking) and Bridge network plugins. You can find more information about how
-to manage networks and using network plugins in the [documentation](https://docs.docker.com/engine/userguide/networking/dockernetworks/).
+to manage networks and using network plugins in the [documentation](/engine/userguide/networking/dockernetworks.md).
 
 * Volume Management and Plugins. Volumes also become discrete, manageable objects in Docker. Volumes can be listed, created, deleted, and inspected.
 Similar to networks, they have their own managed lifecycle outside of the
@@ -271,5 +271,5 @@ Because this addition is preventative, no CVE-ID is requested.
 ## CS Engine 1.6.0-cs2
 (23 Apr 2015)
 
-First release, see the [Docker Engine 1.6.0 Release notes](http://docs.docker.com/v1.6/release-notes/)
+First release, see the [Docker Engine 1.6.0 Release notes](https://docs.docker.com/v1.6/release-notes/)
   for more details.

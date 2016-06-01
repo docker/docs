@@ -52,7 +52,7 @@ First, you will retrieve a copy of the official Jenkins image from the Docker Hu
 Docker can't find an image locally, it will attempt to pull the image from the
 Docker Hub. From the CLI of a machine running the Docker Engine on your network, use
 the
-[`docker pull`](https://docs.docker.com/reference/commandline/pull)
+[`docker pull`](/engine/reference/commandline/pull.md)
 command to pull the public Jenkins image.
 
     $ docker pull jenkins
@@ -61,7 +61,7 @@ command to pull the public Jenkins image.
 > you are a member of the `docker` group or have root privileges. Otherwise, you
 > may need to add `sudo` to the example commands below.
 
-Docker will start the process of pulling the image from the Hub. Once it has completed, the Jenkins image should be visible in the output of a [`docker images`](https://docs.docker.com/reference/commandline/images) command, which lists your available images:
+Docker will start the process of pulling the image from the Hub. Once it has completed, the Jenkins image should be visible in the output of a [`docker images`](/engine/reference/commandline/images.md) command, which lists your available images:
 
     $ docker images
     REPOSITORY  TAG     IMAGE ID      CREATED      VIRTUAL SIZE
@@ -119,7 +119,7 @@ image, you need to:
 ### Creating a Dockerfile
 
 In the same directory as the `plugins` file and the private key and certificate,
-create a new [`Dockerfile`](https://docs.docker.com/reference/builder/) with the
+create a new [`Dockerfile`](/engine/reference/builder.md) with the
 following contents:
 
     FROM jenkins
@@ -167,7 +167,7 @@ the image being built.
 Now that the `Dockerfile`, the `plugins` file, and the files required for HTTPS
 operation are created in your current working directory, you can build your
 custom image using the
-[`docker build` command](https://docs.docker.com/reference/commandline/build):
+[`docker build` command](/engine/reference/commandline/build.md):
 
     docker build -t dtr.yourdomain.com/ci-infrastructure/jnkns-img .
 
@@ -217,7 +217,7 @@ image pulled earlier:
 >     request failed with status: 401 Unauthorized
 
 Now that you’ve created the custom image, it can be pushed to Docker Trusted Registry using the
-[`docker push` command](https://docs.docker.com/reference/commandline/push):
+[`docker push` command](/engine/reference/commandline/push.md):
 
     $ docker push dtr.yourdomain.com/ci-infrastructure/jnkns-img
     511136ea3c5a: Image successfully pushed
@@ -237,7 +237,7 @@ Docker host that has access to Docker Trusted Registry.
 
 ## Pulling from Docker Trusted Registry
 To pull the `jnkns-img` image from Docker Trusted Registry, run the
-[`docker pull`](https://docs.docker.com/reference/commandline/pull)
+[`docker pull`](/engine/reference/commandline/pull.md)
 command from any Docker Host that has access to your Docker Trusted Registry instance:
 
     $ docker pull dtr.yourdomain.com/ci-infrastructure/jnkns-img
@@ -264,7 +264,7 @@ in the output of the `docker images` command:
 
 Now that you’ve successfully pulled the customized Jenkins image from Docker Trusted Registry, you
 can create a container from it with the
-[`docker run` command](https://docs.docker.com/reference/commandline/run):
+[`docker run` command](/engine/reference/commandline/run.md):
 
 
     $ docker run -p 1973:1973 --name jenkins01 dtr.yourdomain.com/ci-infrastructure/jnkns-img
@@ -287,7 +287,7 @@ can create a container from it with the
 > your environment.
 
 You can view the newly launched a container, called `jenkins01`, using the
-[`docker ps` command](https://docs.docker.com/reference/commandline/ps):
+[`docker ps` command](/engine/reference/commandline/ps.md):
 
     $ docker ps
     CONTAINER ID     IMAGE     COMMAND     CREATED      STATUS  ...PORTS     NAMES
