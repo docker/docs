@@ -317,6 +317,8 @@ or feedback about project operations.
         People = ["aaronlehmann", "calavera", "coolljt0725", "cpuguy83", "crosbymichael", "duglin", "estesp", "icecrime", "jhowardmsft", "justincormack", "lk4d4", "mavenugo", "mhbauer", "runcom", "tianon", "tibor", "tonistiigi", "unclejack", "vdemeester"]
     [Org.docker-bench-security]
         People = ["diogomonica", "konstruktoid"]
+    [Org.docker-credential-helpers]
+        People = ["aaronlehmann", "calavera", "coolljt0725", "cpuguy83", "crosbymichael", "dnephin", "dongluochen", "duglin", "estesp", "icecrime", "jhowardmsft", "lk4d4", "mavenugo", "mhbauer", "runcom", "stevvooe", "thajeztah", "tianon", "tibor", "tonistiigi", "unclejack", "vdemeester", "vieux"]
     [Org.docker-py]
         People = ["aanand", "dnephin", "mnowster", "mpetazzoni", "shin-"]
     [Org.dockercraft]
@@ -342,7 +344,7 @@ or feedback about project operations.
     [Org.libchan]
         People = ["dmcgowan", "shykes"]
     [Org.libcompose]
-        People = ["aanand", "aduermael", "dnephin", "ibuildthecloud", "gdevillele", "vdemeester"]
+        People = ["aanand", "aduermael", "dnephin", "ibuildthecloud", "joshwget", "gdevillele", "vdemeester"]
     [Org.libkv]
         People = ["abronan", "aluzzardi", "sanimej", "vieux"]
     [Org.libnetwork]
@@ -545,6 +547,10 @@ or feedback about project operations.
         Name = "Xian Chaobo"
         Email = "xianchaobo@huawei.com"
         GitHub = "jimmyxian"
+    [People.joshwget]
+        Name = "Josh Curl"
+        Email = "josh@rancher.com"
+        GitHub = "joshwget"
     [People.justincormack]
         Name = "Justin Cormack"
         Email = "justin.cormack@docker.com"
