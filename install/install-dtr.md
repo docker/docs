@@ -57,8 +57,8 @@ To install DTR:
     $ docker run -it --rm \
       docker/dtr install \
       --ucp-url $UCP_URL \
-      --ucp-node $UCP_NODE \
-      --dtr-load-balancer $DTR_PUBLIC_IP \
+      --ucp-node $NODE_HOSTNAME \
+      --dtr-external-url $DTR_PUBLIC_IP \
       --ucp-username $USER --ucp-password $PASSWORD \
       --ucp-ca "$(cat ucp-ca.pem)"
     ```
@@ -66,10 +66,10 @@ To install DTR:
     Where:
 
     * ucp-url, is the URL of the UCP controller,
-    * ucp-node, is the node on the ucp cluster where DTR will be installed,
-    * dtr-load-balancer, is the public IP or domain name where DTR can be reached,
+    * ucp-node, is the hostname of the UCP node where DTR will be installed,
+    * dtr-external-url, is the public IP or domain name where DTR can be reached,
     * ucp-username, and ucp-password are the credentials of a UCP administrator,
-    * ucp-ca, is the certificate used by UCP.
+    * ucp-ca, is the certificate authority used by UCP.
 
 
 3. Check that DTR is running.

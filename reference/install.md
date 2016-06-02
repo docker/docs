@@ -44,8 +44,9 @@ the 'join' command.
 | `--log-protocol`           | The protocol for sending container logs: tcp, udp or internal. Default: internal [$LOG_PROTOCOL] |
 | `--log-host`               | Endpoint to send logs to, required if --log-protocol is tcp or udp [$LOG_HOST]                   |
 | `--log-level`              | Log level for container logs. Default: INFO [$LOG_LEVEL]                                         |
-| `--dtr-load-balancer`      | Specify the domain name and port for the DTR load balancer [$DTR_LOAD_BALANCER]                  |
+| `--dtr-external-url`       | Specify the domain name and port for the DTR load balancer [$DTR_LOAD_BALANCER]                  |
 | `--ucp-insecure-tls`       | Disable TLS verification for UCP [$UCP_INSECURE_TLS]                                             |
 | `--ucp-ca`                 | Use a PEM-encoded TLS CA certificate for UCP [$UCP_CA]                                           |
 | `--ucp-node`               | Specify the host to install Docker Trusted Registry [$UCP_NODE]                                  |
 | `--replica-id`             | Specify the replica Id. Must be unique per replica, leave blank for random [$DTR_REPLICA_ID]     |
+| `--unsafe`                 | Enable this flag to skip safety checks when installing or joining [$DTR_UNSAFE]                  |

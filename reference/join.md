@@ -37,9 +37,11 @@ the cluster.
 | `--debug`                  | Enable debug mode, provides additional logging [$DEBUG]                                      |
 | `--hub-username`           | Specify the Docker Hub username for pulling images [$HUB_USERNAME]                           |
 | `--hub-password`           | Specify the Docker Hub password for pulling images [$HUB_PASSWORD]                           |
+| `--ucp-insecure-tls`       | Disable TLS verification for UCP [$UCP_INSECURE_TLS]                                         |
 | `--ucp-ca`                 | Use a PEM-encoded TLS CA certificate for UCP [$UCP_CA]                                       |
 | `--ucp-node`               | Specify the host to install Docker Trusted Registry [$UCP_NODE]                              |
 | `--replica-id`             | Specify the replica Id. Must be unique per replica, leave blank for random [$DTR_REPLICA_ID] |
+| `--unsafe`                 | Enable this flag to skip safety checks when installing or joining [$DTR_UNSAFE]              |
 | `--existing-replica-id`    | ID of an existing replica in a cluster [$DTR_EXISTING_REPLICA_ID]                            |
 | `--replica-http-port "0"`  | Specify the public HTTP port for the DTR replica [$REPLICA_HTTP_PORT]                        |
 | `--replica-https-port "0"` | Specify the public HTTPS port for the DTR replica [$REPLICA_HTTPS_PORT]                      |

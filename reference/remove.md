@@ -35,5 +35,7 @@ DTR containers, and deletes all DTR volumes.
 | `--hub-password`        | Specify the Docker Hub password for pulling images [$HUB_PASSWORD]                           |
 | `--ucp-insecure-tls`    | Disable TLS verification for UCP [$UCP_INSECURE_TLS]                                         |
 | `--ucp-ca`              | Use a PEM-encoded TLS CA certificate for UCP [$UCP_CA]                                       |
+| `--ucp-node`            | Specify the host to install Docker Trusted Registry [$UCP_NODE]                              |
+| `--force-remove`        | Force removal of replica even if it will break your cluster's state [$DTR_CONFIG_ONLY]       |
 | `--replica-id`          | Specify the replica Id. Must be unique per replica, leave blank for random [$DTR_REPLICA_ID] |
 | `--existing-replica-id` | ID of an existing replica in a cluster [$DTR_EXISTING_REPLICA_ID]                            |
