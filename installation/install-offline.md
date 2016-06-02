@@ -27,7 +27,7 @@ all the images. Then you copy that package to the host where you’ll install UC
     images. As an example, to download UCP 1.1, run:
 
     ```bash
-    $ wget https://packages.docker.com/caas/ucp-1.1.0_dtr-2.0.0.tar.gz
+    $ wget https://packages.docker.com/caas/ucp-1.1.1_dtr-2.0.1.tar.gz
     ```
 
 2. Transfer the package to the offline node.
@@ -37,23 +37,25 @@ all the images. Then you copy that package to the host where you’ll install UC
     for this:
 
     ```bash
-    $ scp ./ucp-1.1.0_dtr-2.0.0.tar.gz user@ucp-host:/tmp
+    $ scp ucp-1.1.1_dtr-2.0.1.tar.gz $USER@$UCP_HOST:/tmp
     ```
 
-3. Load the UCP images.
+3. Login into the host where you transferred the images.
 
-    Once the UCP package is transferred to the host, you can use the `docker load`
-    command, to load the images from the tar archive. On the host were you are
-    going to install UCP, run:
+4. Load the UCP images.
+
+    Once the UCP package is transferred to the host, you can use the
+    `docker load` command, to load the images from the tar archive. On the host
+    were you are going to install UCP, run:
 
     ```bash
-    $ docker load < /tmp/ucp-1.1.0_dtr-2.0.0.tar.gz
+    $ docker load < /tmp/ucp-1.1.1_dtr-2.0.1.tar.gz
     ```
 
-4. Install Docker UCP.
+5. Install Docker UCP.
 
     Now that the offline host has all the images needed to install UCP,
-    you can [install Docker UCP that machine](install-production.md).
+    you can [install Docker UCP that host](install-production.md).
 
 
 ## Where to go next
