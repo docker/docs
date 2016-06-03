@@ -1,6 +1,6 @@
 <!--[metadata]>
 +++
-aliases = [ "ucp/manage/monitor-manage-users/"]
+aliases = [ "/ucp/manage/monitor-manage-users/"]
 title = "Manage and authorize users"
 description = "Manage and authorize users"
 keywords = ["authorize, authentication, users, teams, UCP, Docker, objects"]
