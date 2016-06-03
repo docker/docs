@@ -19,7 +19,6 @@ import (
 	"github.com/docker/go-connections/tlsconfig"
 	"github.com/docker/notary"
 	notaryclient "github.com/docker/notary/client"
-	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/trustpinning"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/utils"
@@ -84,7 +83,7 @@ var cmdTufVerifyTemplate = usageTemplate{
 type tufCommander struct {
 	// these need to be set
 	configGetter func() (*viper.Viper, error)
-	retriever    passphrase.Retriever
+	retriever    notary.PassRetriever
 
 	// these are for command line parsing - no need to set
 	roles  []string

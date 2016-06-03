@@ -23,7 +23,7 @@ import (
 // the default location for the config file is in ~/.notary/config.json - even if it doesn't exist.
 func TestNotaryConfigFileDefault(t *testing.T) {
 	commander := &notaryCommander{
-		getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+		getRetriever: func() notary.PassRetriever { return passphrase.ConstantRetriever("pass") },
 	}
 
 	config, err := commander.parseConfig()
@@ -40,7 +40,7 @@ func TestRemoteServerDefault(t *testing.T) {
 	configFile := filepath.Join(tempDir, "config.json")
 
 	commander := &notaryCommander{
-		getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+		getRetriever: func() notary.PassRetriever { return passphrase.ConstantRetriever("pass") },
 	}
 
 	// set a blank config file, so it doesn't check ~/.notary/config.json by default
@@ -62,7 +62,7 @@ func TestRemoteServerUsesConfigFile(t *testing.T) {
 	configFile := filepath.Join(tempDir, "config.json")
 
 	commander := &notaryCommander{
-		getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+		getRetriever: func() notary.PassRetriever { return passphrase.ConstantRetriever("pass") },
 	}
 
 	// set a config file, so it doesn't check ~/.notary/config.json by default,
@@ -84,7 +84,7 @@ func TestRemoteServerCommandLineFlagOverridesConfig(t *testing.T) {
 	configFile := filepath.Join(tempDir, "config.json")
 
 	commander := &notaryCommander{
-		getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+		getRetriever: func() notary.PassRetriever { return passphrase.ConstantRetriever("pass") },
 	}
 
 	// set a config file, so it doesn't check ~/.notary/config.json by default,
@@ -431,7 +431,7 @@ func TestConfigFileTrustPinning(t *testing.T) {
 	}`)
 	defer os.RemoveAll(tempDir)
 	commander := &notaryCommander{
-		getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+		getRetriever: func() notary.PassRetriever { return passphrase.ConstantRetriever("pass") },
 		configFile:   filepath.Join(tempDir, "config.json"),
 	}
 
@@ -453,7 +453,7 @@ func TestConfigFileTrustPinning(t *testing.T) {
 	}`)
 	defer os.RemoveAll(tempDir)
 	commander = &notaryCommander{
-		getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+		getRetriever: func() notary.PassRetriever { return passphrase.ConstantRetriever("pass") },
 		configFile:   filepath.Join(tempDir, "config.json"),
 	}
 
@@ -474,7 +474,7 @@ func TestConfigFileTrustPinning(t *testing.T) {
 	}`, strings.Repeat("x", notary.Sha256HexSize)))
 	defer os.RemoveAll(tempDir)
 	commander = &notaryCommander{
-		getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+		getRetriever: func() notary.PassRetriever { return passphrase.ConstantRetriever("pass") },
 		configFile:   filepath.Join(tempDir, "config.json"),
 	}
 
@@ -495,7 +495,7 @@ func TestConfigFileTrustPinning(t *testing.T) {
 	}`, strings.Repeat("x", notary.Sha256HexSize)))
 	defer os.RemoveAll(tempDir)
 	commander = &notaryCommander{
-		getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+		getRetriever: func() notary.PassRetriever { return passphrase.ConstantRetriever("pass") },
 		configFile:   filepath.Join(tempDir, "config.json"),
 	}
 
@@ -513,7 +513,7 @@ func TestConfigFileTrustPinning(t *testing.T) {
 	}`, "root-ca.crt"))
 	defer os.RemoveAll(tempDir)
 	commander = &notaryCommander{
-		getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+		getRetriever: func() notary.PassRetriever { return passphrase.ConstantRetriever("pass") },
 		configFile:   filepath.Join(tempDir, "config.json"),
 	}
 

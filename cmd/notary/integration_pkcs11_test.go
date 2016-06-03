@@ -5,6 +5,7 @@ package main
 import (
 	"testing"
 
+	"github.com/docker/notary"
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/trustmanager/yubikey"
 	"github.com/docker/notary/tuf/data"
@@ -12,7 +13,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-var _retriever passphrase.Retriever
+var _retriever notary.PassRetriever
 
 func init() {
 	yubikey.SetYubikeyKeyMode(yubikey.KeymodeNone)
@@ -35,7 +36,7 @@ func init() {
 
 	NewNotaryCommand = func() *cobra.Command {
 		commander := &notaryCommander{
-			getRetriever: func() passphrase.Retriever { return _retriever },
+			getRetriever: func() notary.PassRetriever { return _retriever },
 		}
 		return commander.GetCommand()
 	}

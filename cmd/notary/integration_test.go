@@ -1138,7 +1138,7 @@ func exportRoot(t *testing.T, exportTo string) string {
 	// export does not require a password
 	oldNewCommand := NewNotaryCommand
 	NewNotaryCommand = func() *cobra.Command {
-		commander := &notaryCommander{getRetriever: func() passphrase.Retriever { return nil }}
+		commander := &notaryCommander{getRetriever: func() notary.PassRetriever { return nil }}
 		return commander.GetCommand()
 	}
 	defer func() { // but import will, later
