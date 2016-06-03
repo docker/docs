@@ -10,7 +10,6 @@ import (
 	"testing"
 
 	"github.com/docker/notary"
-	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/tuf/data"
 	"github.com/stretchr/testify/require"
 )
@@ -613,7 +612,7 @@ func TestKeysAreCached(t *testing.T) {
 	require.NoError(t, err, "failed to create a temporary directory")
 	defer os.RemoveAll(tempBaseDir)
 
-	var countingPassphraseRetriever passphrase.Retriever
+	var countingPassphraseRetriever notary.PassRetriever
 
 	numTimesCalled := 0
 	countingPassphraseRetriever = func(keyId, alias string, createNew bool, attempts int) (passphrase string, giveup bool, err error) {

@@ -8,6 +8,7 @@ import (
 	"os"
 	"testing"
 
+	"github.com/docker/notary"
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
@@ -51,7 +52,7 @@ func TestImport0Dot1Zip(t *testing.T) {
 	assertHasKeys(t, cs, origKeys)
 }
 
-func get0Dot1(t *testing.T) (*trustmanager.KeyFileStore, passphrase.Retriever, string) {
+func get0Dot1(t *testing.T) (*trustmanager.KeyFileStore, notary.PassRetriever, string) {
 	gun := "docker.com/notary0.1/samplerepo"
 	ret := passphrase.ConstantRetriever("randompass")
 
@@ -78,7 +79,7 @@ func assertHasKeys(t *testing.T, cs *CryptoService, expectedKeys map[string]stri
 // Export all the keys of a cryptoservice to a zipfile, and import it into a
 // new cryptoService, and return that new cryptoService
 func importExportedZip(t *testing.T, original *CryptoService,
-	ret passphrase.Retriever, gun string) (*CryptoService, string) {
+	ret notary.PassRetriever, gun string) (*CryptoService, string) {
 
 	// Temporary directory where test files will be created
 	tempBaseDir, err := ioutil.TempDir("", "notary-test-")

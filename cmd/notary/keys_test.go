@@ -251,7 +251,7 @@ func TestRotateKeyInvalidRoles(t *testing.T) {
 		for _, serverManaged := range []bool{true, false} {
 			k := &keyCommander{
 				configGetter:           func() (*viper.Viper, error) { return viper.New(), nil },
-				getRetriever:           func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+				getRetriever:           func() notary.PassRetriever { return passphrase.ConstantRetriever("pass") },
 				rotateKeyRole:          role,
 				rotateKeyServerManaged: serverManaged,
 			}
@@ -272,7 +272,7 @@ func TestRotateKeyTargetCannotBeServerManaged(t *testing.T) {
 	setUp(t)
 	k := &keyCommander{
 		configGetter:           func() (*viper.Viper, error) { return viper.New(), nil },
-		getRetriever:           func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+		getRetriever:           func() notary.PassRetriever { return passphrase.ConstantRetriever("pass") },
 		rotateKeyRole:          data.CanonicalTargetsRole,
 		rotateKeyServerManaged: true,
 	}
@@ -286,7 +286,7 @@ func TestRotateKeyTimestampCannotBeLocallyManaged(t *testing.T) {
 	setUp(t)
 	k := &keyCommander{
 		configGetter:           func() (*viper.Viper, error) { return viper.New(), nil },
-		getRetriever:           func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+		getRetriever:           func() notary.PassRetriever { return passphrase.ConstantRetriever("pass") },
 		rotateKeyRole:          data.CanonicalTimestampRole,
 		rotateKeyServerManaged: false,
 	}
@@ -300,7 +300,7 @@ func TestRotateKeyNoGUN(t *testing.T) {
 	setUp(t)
 	k := &keyCommander{
 		configGetter:  func() (*viper.Viper, error) { return viper.New(), nil },
-		getRetriever:  func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+		getRetriever:  func() notary.PassRetriever { return passphrase.ConstantRetriever("pass") },
 		rotateKeyRole: data.CanonicalTargetsRole,
 	}
 	err := k.keysRotate(&cobra.Command{}, []string{})
@@ -309,7 +309,7 @@ func TestRotateKeyNoGUN(t *testing.T) {
 }
 
 // initialize a repo with keys, so they can be rotated
-func setUpRepo(t *testing.T, tempBaseDir, gun string, ret passphrase.Retriever) (
+func setUpRepo(t *testing.T, tempBaseDir, gun string, ret notary.PassRetriever) (
 	*httptest.Server, map[string]string) {
 
 	// Set up server
@@ -367,7 +367,7 @@ func TestRotateKeyRemoteServerManagesKey(t *testing.T) {
 				v.SetDefault("remote_server.url", ts.URL)
 				return v, nil
 			},
-			getRetriever:           func() passphrase.Retriever { return ret },
+			getRetriever:           func() notary.PassRetriever { return ret },
 			rotateKeyServerManaged: true,
 		}
 		require.NoError(t, k.keysRotate(&cobra.Command{}, []string{gun, role, "-r"}))
@@ -421,7 +421,7 @@ func TestRotateKeyBothKeys(t *testing.T) {
 			v.SetDefault("remote_server.url", ts.URL)
 			return v, nil
 		},
-		getRetriever: func() passphrase.Retriever { return ret },
+		getRetriever: func() notary.PassRetriever { return ret },
 	}
 	require.NoError(t, k.keysRotate(&cobra.Command{}, []string{gun, data.CanonicalTargetsRole}))
 	require.NoError(t, k.keysRotate(&cobra.Command{}, []string{gun, data.CanonicalSnapshotRole}))
@@ -480,7 +480,7 @@ func TestRotateKeyRootIsInteractive(t *testing.T) {
 			v.SetDefault("remote_server.url", ts.URL)
 			return v, nil
 		},
-		getRetriever: func() passphrase.Retriever { return ret },
+		getRetriever: func() notary.PassRetriever { return ret },
 		input:        bytes.NewBuffer([]byte("\n")),
 	}
 	c := &cobra.Command{}
@@ -503,7 +503,7 @@ func TestChangeKeyPassphraseInvalidID(t *testing.T) {
 	setUp(t)
 	k := &keyCommander{
 		configGetter: func() (*viper.Viper, error) { return viper.New(), nil },
-		getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+		getRetriever: func() notary.PassRetriever { return passphrase.ConstantRetriever("pass") },
 	}
 	err := k.keyPassphraseChange(&cobra.Command{}, []string{"too_short"})
 	require.Error(t, err)
@@ -514,7 +514,7 @@ func TestChangeKeyPassphraseInvalidNumArgs(t *testing.T) {
 	setUp(t)
 	k := &keyCommander{
 		configGetter: func() (*viper.Viper, error) { return viper.New(), nil },
-		getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+		getRetriever: func() notary.PassRetriever { return passphrase.ConstantRetriever("pass") },
 	}
 	err := k.keyPassphraseChange(&cobra.Command{}, []string{})
 	require.Error(t, err)
@@ -525,7 +525,7 @@ func TestChangeKeyPassphraseNonexistentID(t *testing.T) {
 	setUp(t)
 	k := &keyCommander{
 		configGetter: func() (*viper.Viper, error) { return viper.New(), nil },
-		getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+		getRetriever: func() notary.PassRetriever { return passphrase.ConstantRetriever("pass") },
 	}
 	// Valid ID size, but does not exist as a key ID
 	err := k.keyPassphraseChange(&cobra.Command{}, []string{strings.Repeat("x", notary.Sha256HexSize)})
@@ -537,7 +537,7 @@ func TestKeyImportMismatchingRoles(t *testing.T) {
 	setUp(t)
 	k := &keyCommander{
 		configGetter:   func() (*viper.Viper, error) { return viper.New(), nil },
-		getRetriever:   func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+		getRetriever:   func() notary.PassRetriever { return passphrase.ConstantRetriever("pass") },
 		keysImportRole: "targets",
 	}
 	tempFileName := generateTempTestKeyFile(t, "snapshot")
@@ -552,7 +552,7 @@ func TestKeyImportNoGUNForTargetsPEM(t *testing.T) {
 	setUp(t)
 	k := &keyCommander{
 		configGetter: func() (*viper.Viper, error) { return viper.New(), nil },
-		getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+		getRetriever: func() notary.PassRetriever { return passphrase.ConstantRetriever("pass") },
 	}
 	tempFileName := generateTempTestKeyFile(t, "targets")
 	defer os.Remove(tempFileName)
@@ -566,7 +566,7 @@ func TestKeyImportNoGUNForSnapshotPEM(t *testing.T) {
 	setUp(t)
 	k := &keyCommander{
 		configGetter: func() (*viper.Viper, error) { return viper.New(), nil },
-		getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+		getRetriever: func() notary.PassRetriever { return passphrase.ConstantRetriever("pass") },
 	}
 	tempFileName := generateTempTestKeyFile(t, "snapshot")
 	defer os.Remove(tempFileName)
@@ -580,7 +580,7 @@ func TestKeyImportNoGUNForTargetsFlag(t *testing.T) {
 	setUp(t)
 	k := &keyCommander{
 		configGetter:   func() (*viper.Viper, error) { return viper.New(), nil },
-		getRetriever:   func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+		getRetriever:   func() notary.PassRetriever { return passphrase.ConstantRetriever("pass") },
 		keysImportRole: "targets",
 	}
 	tempFileName := generateTempTestKeyFile(t, "")
@@ -595,7 +595,7 @@ func TestKeyImportNoGUNForSnapshotFlag(t *testing.T) {
 	setUp(t)
 	k := &keyCommander{
 		configGetter:   func() (*viper.Viper, error) { return viper.New(), nil },
-		getRetriever:   func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+		getRetriever:   func() notary.PassRetriever { return passphrase.ConstantRetriever("pass") },
 		keysImportRole: "snapshot",
 	}
 	tempFileName := generateTempTestKeyFile(t, "")
@@ -610,7 +610,7 @@ func TestKeyImportNoRole(t *testing.T) {
 	setUp(t)
 	k := &keyCommander{
 		configGetter: func() (*viper.Viper, error) { return viper.New(), nil },
-		getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever("pass") },
+		getRetriever: func() notary.PassRetriever { return passphrase.ConstantRetriever("pass") },
 	}
 	tempFileName := generateTempTestKeyFile(t, "")
 	defer os.Remove(tempFileName)
