@@ -43,6 +43,7 @@ var (
 		"dockercraft",
 		"engine-api",
 		"go-connections",
+		"go-events",
 		"go-p9p",
 		"go-plugins-helpers",
 		"go-units",
