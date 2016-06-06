@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN useradd -ms /bin/bash notary \
 	&& pip install codecov \
-	&& go get golang.org/x/tools/cmd/cover github.com/golang/lint/golint
+	&& go get golang.org/x/tools/cmd/cover github.com/golang/lint/golint github.com/client9/misspell/cmd/misspell
 
 # Configure the container for OSX cross compilation
 ENV OSX_SDK MacOSX10.11.sdk
