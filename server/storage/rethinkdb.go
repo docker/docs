@@ -269,8 +269,8 @@ func (rdb RethinkDB) deleteByTSChecksum(tsChecksum string) error {
 // Bootstrap sets up the database and tables, also creating the notary server user with appropriate db permission
 func (rdb RethinkDB) Bootstrap() error {
 	if err := rethinkdb.SetupDB(rdb.sess, rdb.dbName, []rethinkdb.Table{
-		tufFiles,
-		keys,
+		TufFilesRethinkTable,
+		PubKeysRethinkTable,
 	}); err != nil {
 		return err
 	}
