@@ -60,6 +60,7 @@ var (
 		"notary",
 		"spdystream",
 		"swarm",
+		"swarm-frontends",
 		"toolbox",
 		"v1.10-migrator",
 		"vpnkit",
