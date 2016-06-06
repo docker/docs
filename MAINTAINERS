@@ -361,6 +361,8 @@ or feedback about project operations.
         People = ["dmcgowan"]
     [Org.swarm]
         People = ["abronan", "allencloud", "aluzzardi", "chanwit", "dongluochen", "jimmyxian", "mhbauer", "nishanttotla", "vieux"]
+    [Org.swarm-frontends]
+        People = ["abronan", "amitshukla", "samalba"]
     [Org.toolbox]
         People = ["jeffdm", "lisean106", "mchiang0610"]
     [Org."v1.10-migrator"]
@@ -641,6 +643,10 @@ or feedback about project operations.
         Name = "Antonio Murdaca"
         Email = "runcom@redhat.com"
         GitHub = "runcom"
+    [People.samalba]
+        Name = "Sam Alba"
+        Email = "sam.alba@docker.com"
+        GitHub = "samalba"
     [People.samoht]
         Name = "Thomas Gazagnaire"
         Email = "thomas@gazagnaire.org"
