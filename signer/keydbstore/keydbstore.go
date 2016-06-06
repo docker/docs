@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/docker/notary/passphrase"
+	"github.com/docker/notary"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
 	jose "github.com/dvsekhvalnov/jose2go"
@@ -23,7 +23,7 @@ type KeyDBStore struct {
 	sync.Mutex
 	db               gorm.DB
 	defaultPassAlias string
-	retriever        passphrase.Retriever
+	retriever        notary.PassRetriever
 	cachedKeys       map[string]data.PrivateKey
 }
 
@@ -45,7 +45,7 @@ func (g GormPrivateKey) TableName() string {
 }
 
 // NewKeyDBStore returns a new KeyDBStore backed by a SQL database
-func NewKeyDBStore(passphraseRetriever passphrase.Retriever, defaultPassAlias string,
+func NewKeyDBStore(passphraseRetriever notary.PassRetriever, defaultPassAlias string,
 	dbDialect string, dbArgs ...interface{}) (*KeyDBStore, error) {
 	cachedKeys := make(map[string]data.PrivateKey)
 

@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/docker/notary/passphrase"
+	"github.com/docker/notary"
 	"github.com/docker/notary/storage/rethinkdb"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
@@ -21,7 +21,7 @@ type RethinkDBKeyStore struct {
 	sess             *gorethink.Session
 	dbName           string
 	defaultPassAlias string
-	retriever        passphrase.Retriever
+	retriever        notary.PassRetriever
 	cachedKeys       map[string]data.PrivateKey
 	user             string
 	password         string
@@ -50,7 +50,7 @@ func (g RDBPrivateKey) TableName() string {
 }
 
 // NewRethinkDBKeyStore returns a new RethinkDBKeyStore backed by a RethinkDB database
-func NewRethinkDBKeyStore(dbName, username, password string, passphraseRetriever passphrase.Retriever, defaultPassAlias string, rethinkSession *gorethink.Session) *RethinkDBKeyStore {
+func NewRethinkDBKeyStore(dbName, username, password string, passphraseRetriever notary.PassRetriever, defaultPassAlias string, rethinkSession *gorethink.Session) *RethinkDBKeyStore {
 	cachedKeys := make(map[string]data.PrivateKey)
 
 	return &RethinkDBKeyStore{

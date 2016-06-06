@@ -11,7 +11,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/docker/notary/passphrase"
+	"github.com/docker/notary"
 	"github.com/docker/notary/trustmanager"
 )
 
@@ -61,7 +61,7 @@ func (cs *CryptoService) ExportKey(dest io.Writer, keyID, role string) error {
 
 // ExportKeyReencrypt exports the specified private key to an io.Writer in
 // PEM format. The key is reencrypted with a new passphrase.
-func (cs *CryptoService) ExportKeyReencrypt(dest io.Writer, keyID string, newPassphraseRetriever passphrase.Retriever) error {
+func (cs *CryptoService) ExportKeyReencrypt(dest io.Writer, keyID string, newPassphraseRetriever notary.PassRetriever) error {
 	privateKey, _, err := cs.GetPrivateKey(keyID)
 	if err != nil {
 		return err
@@ -102,7 +102,7 @@ func (cs *CryptoService) ExportKeyReencrypt(dest io.Writer, keyID string, newPas
 
 // ExportAllKeys exports all keys to an io.Writer in zip format.
 // newPassphraseRetriever will be used to obtain passphrases to use to encrypt the existing keys.
-func (cs *CryptoService) ExportAllKeys(dest io.Writer, newPassphraseRetriever passphrase.Retriever) error {
+func (cs *CryptoService) ExportAllKeys(dest io.Writer, newPassphraseRetriever notary.PassRetriever) error {
 	tempBaseDir, err := ioutil.TempDir("", "notary-key-export-")
 	defer os.RemoveAll(tempBaseDir)
 
@@ -132,7 +132,7 @@ func (cs *CryptoService) ExportAllKeys(dest io.Writer, newPassphraseRetriever pa
 // ImportKeysZip imports keys from a zip file provided as an zip.Reader. The
 // keys in the root_keys directory are left encrypted, but the other keys are
 // decrypted with the specified passphrase.
-func (cs *CryptoService) ImportKeysZip(zipReader zip.Reader, retriever passphrase.Retriever) error {
+func (cs *CryptoService) ImportKeysZip(zipReader zip.Reader, retriever notary.PassRetriever) error {
 	// Temporarily store the keys in maps, so we can bail early if there's
 	// an error (for example, wrong passphrase), without leaving the key
 	// store in an inconsistent state
@@ -187,7 +187,7 @@ func (cs *CryptoService) ImportKeysZip(zipReader zip.Reader, retriever passphras
 // ExportKeysByGUN exports all keys associated with a specified GUN to an
 // io.Writer in zip format. passphraseRetriever is used to select new passphrases to use to
 // encrypt the keys.
-func (cs *CryptoService) ExportKeysByGUN(dest io.Writer, gun string, passphraseRetriever passphrase.Retriever) error {
+func (cs *CryptoService) ExportKeysByGUN(dest io.Writer, gun string, passphraseRetriever notary.PassRetriever) error {
 	tempBaseDir, err := ioutil.TempDir("", "notary-key-export-")
 	defer os.RemoveAll(tempBaseDir)
 

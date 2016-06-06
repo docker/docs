@@ -6,8 +6,8 @@ import (
 	"net"
 	"testing"
 
+	"github.com/docker/notary"
 	"github.com/docker/notary/cryptoservice"
-	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/signer"
 	"github.com/docker/notary/signer/api"
 	"github.com/docker/notary/trustmanager"
@@ -25,7 +25,7 @@ var (
 	sClient    pb.SignerClient
 	grpcServer *grpc.Server
 	void       *pb.Void
-	pr         passphrase.Retriever
+	pr         notary.PassRetriever
 	health     = map[string]string{
 		"db":    "ok",
 		"other": "not ok",

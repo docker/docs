@@ -5,6 +5,7 @@ package main
 import (
 	"testing"
 
+	"github.com/docker/notary"
 	"github.com/docker/notary/passphrase"
 	"github.com/spf13/cobra"
 )
@@ -12,7 +13,7 @@ import (
 func init() {
 	NewNotaryCommand = func() *cobra.Command {
 		commander := &notaryCommander{
-			getRetriever: func() passphrase.Retriever { return passphrase.ConstantRetriever(testPassphrase) },
+			getRetriever: func() notary.PassRetriever { return passphrase.ConstantRetriever(testPassphrase) },
 		}
 		return commander.GetCommand()
 	}
