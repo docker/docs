@@ -12,7 +12,6 @@ import (
 
 	notaryclient "github.com/docker/notary/client"
 	"github.com/docker/notary/cryptoservice"
-	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/trustmanager"
 
 	"github.com/docker/notary"
@@ -84,7 +83,7 @@ var cmdKeyPasswdTemplate = usageTemplate{
 type keyCommander struct {
 	// these need to be set
 	configGetter func() (*viper.Viper, error)
-	getRetriever func() passphrase.Retriever
+	getRetriever func() notary.PassRetriever
 
 	// these are for command line parsing - no need to set
 	keysExportChangePassphrase bool

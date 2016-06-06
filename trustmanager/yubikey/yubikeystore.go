@@ -17,7 +17,7 @@ import (
 	"time"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/docker/notary/passphrase"
+	"github.com/docker/notary"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
 	"github.com/docker/notary/tuf/signed"
@@ -132,7 +132,7 @@ type yubiSlot struct {
 // YubiPrivateKey represents a private key inside of a yubikey
 type YubiPrivateKey struct {
 	data.ECDSAPublicKey
-	passRetriever passphrase.Retriever
+	passRetriever notary.PassRetriever
 	slot          []byte
 	libLoader     pkcs11LibLoader
 }
@@ -145,7 +145,7 @@ type yubikeySigner struct {
 // NewYubiPrivateKey returns a YubiPrivateKey, which implements the data.PrivateKey
 // interface except that the private material is inacessible
 func NewYubiPrivateKey(slot []byte, pubKey data.ECDSAPublicKey,
-	passRetriever passphrase.Retriever) *YubiPrivateKey {
+	passRetriever notary.PassRetriever) *YubiPrivateKey {
 
 	return &YubiPrivateKey{
 		ECDSAPublicKey: pubKey,
@@ -228,7 +228,7 @@ func addECDSAKey(
 	session pkcs11.SessionHandle,
 	privKey data.PrivateKey,
 	pkcs11KeyID []byte,
-	passRetriever passphrase.Retriever,
+	passRetriever notary.PassRetriever,
 	role string,
 ) error {
 	logrus.Debugf("Attempting to add key to yubikey with ID: %s", privKey.ID())
@@ -345,7 +345,7 @@ func getECDSAKey(ctx IPKCS11Ctx, session pkcs11.SessionHandle, pkcs11KeyID []byt
 }
 
 // sign returns a signature for a given signature request
-func sign(ctx IPKCS11Ctx, session pkcs11.SessionHandle, pkcs11KeyID []byte, passRetriever passphrase.Retriever, payload []byte) ([]byte, error) {
+func sign(ctx IPKCS11Ctx, session pkcs11.SessionHandle, pkcs11KeyID []byte, passRetriever notary.PassRetriever, payload []byte) ([]byte, error) {
 	err := login(ctx, session, passRetriever, pkcs11.CKU_USER, UserPin)
 	if err != nil {
 		return nil, fmt.Errorf("error logging in: %v", err)
@@ -404,7 +404,7 @@ func sign(ctx IPKCS11Ctx, session pkcs11.SessionHandle, pkcs11KeyID []byte, pass
 	return sig[:], nil
 }
 
-func yubiRemoveKey(ctx IPKCS11Ctx, session pkcs11.SessionHandle, pkcs11KeyID []byte, passRetriever passphrase.Retriever, keyID string) error {
+func yubiRemoveKey(ctx IPKCS11Ctx, session pkcs11.SessionHandle, pkcs11KeyID []byte, passRetriever notary.PassRetriever, keyID string) error {
 	err := login(ctx, session, passRetriever, pkcs11.CKU_SO, SOUserPin)
 	if err != nil {
 		return err
@@ -615,7 +615,7 @@ func getNextEmptySlot(ctx IPKCS11Ctx, session pkcs11.SessionHandle) ([]byte, err
 
 // YubiStore is a KeyStore for private keys inside a Yubikey
 type YubiStore struct {
-	passRetriever passphrase.Retriever
+	passRetriever notary.PassRetriever
 	keys          map[string]yubiSlot
 	backupStore   trustmanager.KeyStore
 	libLoader     pkcs11LibLoader
@@ -623,7 +623,7 @@ type YubiStore struct {
 
 // NewYubiStore returns a YubiStore, given a backup key store to write any
 // generated keys to (usually a KeyFileStore)
-func NewYubiStore(backupStore trustmanager.KeyStore, passphraseRetriever passphrase.Retriever) (
+func NewYubiStore(backupStore trustmanager.KeyStore, passphraseRetriever notary.PassRetriever) (
 	*YubiStore, error) {
 
 	s := &YubiStore{
@@ -874,7 +874,7 @@ func IsAccessible() bool {
 	return true
 }
 
-func login(ctx IPKCS11Ctx, session pkcs11.SessionHandle, passRetriever passphrase.Retriever, userFlag uint, defaultPassw string) error {
+func login(ctx IPKCS11Ctx, session pkcs11.SessionHandle, passRetriever notary.PassRetriever, userFlag uint, defaultPassw string) error {
 	// try default password
 	err := ctx.Login(session, userFlag, defaultPassw)
 	if err == nil {

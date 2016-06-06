@@ -9,7 +9,6 @@ import (
 
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/notary"
-	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/tuf/data"
 )
 
@@ -19,7 +18,7 @@ type keyInfoMap map[string]KeyInfo
 type KeyFileStore struct {
 	sync.Mutex
 	SimpleFileStore
-	passphrase.Retriever
+	notary.PassRetriever
 	cachedKeys map[string]*cachedKey
 	keyInfoMap
 }
@@ -28,7 +27,7 @@ type KeyFileStore struct {
 type KeyMemoryStore struct {
 	sync.Mutex
 	MemoryFileStore
-	passphrase.Retriever
+	notary.PassRetriever
 	cachedKeys map[string]*cachedKey
 	keyInfoMap
 }
@@ -42,7 +41,7 @@ type KeyInfo struct {
 
 // NewKeyFileStore returns a new KeyFileStore creating a private directory to
 // hold the keys.
-func NewKeyFileStore(baseDir string, passphraseRetriever passphrase.Retriever) (*KeyFileStore, error) {
+func NewKeyFileStore(baseDir string, passphraseRetriever notary.PassRetriever) (*KeyFileStore, error) {
 	baseDir = filepath.Join(baseDir, notary.PrivDir)
 	fileStore, err := NewPrivateSimpleFileStore(baseDir, keyExtension)
 	if err != nil {
@@ -52,9 +51,9 @@ func NewKeyFileStore(baseDir string, passphraseRetriever passphrase.Retriever) (
 	keyInfoMap := make(keyInfoMap)
 
 	keyStore := &KeyFileStore{SimpleFileStore: *fileStore,
-		Retriever:  passphraseRetriever,
-		cachedKeys: cachedKeys,
-		keyInfoMap: keyInfoMap,
+		PassRetriever: passphraseRetriever,
+		cachedKeys:    cachedKeys,
+		keyInfoMap:    keyInfoMap,
 	}
 
 	// Load this keystore's ID --> gun/role map
@@ -151,7 +150,7 @@ func (s *KeyFileStore) AddKey(keyInfo KeyInfo, privKey data.PrivateKey) error {
 	if keyInfo.Role == data.CanonicalRootRole || data.IsDelegation(keyInfo.Role) || !data.ValidRole(keyInfo.Role) {
 		keyInfo.Gun = ""
 	}
-	err := addKey(s, s.Retriever, s.cachedKeys, filepath.Join(keyInfo.Gun, privKey.ID()), keyInfo.Role, privKey)
+	err := addKey(s, s.PassRetriever, s.cachedKeys, filepath.Join(keyInfo.Gun, privKey.ID()), keyInfo.Role, privKey)
 	if err != nil {
 		return err
 	}
@@ -167,7 +166,7 @@ func (s *KeyFileStore) GetKey(name string) (data.PrivateKey, string, error) {
 	if keyInfo, ok := s.keyInfoMap[name]; ok {
 		name = filepath.Join(keyInfo.Gun, name)
 	}
-	return getKey(s, s.Retriever, s.cachedKeys, name)
+	return getKey(s, s.PassRetriever, s.cachedKeys, name)
 }
 
 // ListKeys returns a list of unique PublicKeys present on the KeyFileStore, by returning a copy of the keyInfoMap
@@ -205,16 +204,16 @@ func (s *KeyFileStore) ExportKey(keyID string) ([]byte, error) {
 }
 
 // NewKeyMemoryStore returns a new KeyMemoryStore which holds keys in memory
-func NewKeyMemoryStore(passphraseRetriever passphrase.Retriever) *KeyMemoryStore {
+func NewKeyMemoryStore(passphraseRetriever notary.PassRetriever) *KeyMemoryStore {
 	memStore := NewMemoryFileStore()
 	cachedKeys := make(map[string]*cachedKey)
 
 	keyInfoMap := make(keyInfoMap)
 
 	keyStore := &KeyMemoryStore{MemoryFileStore: *memStore,
-		Retriever:  passphraseRetriever,
-		cachedKeys: cachedKeys,
-		keyInfoMap: keyInfoMap,
+		PassRetriever: passphraseRetriever,
+		cachedKeys:    cachedKeys,
+		keyInfoMap:    keyInfoMap,
 	}
 
 	// Load this keystore's ID --> gun/role map
@@ -235,7 +234,7 @@ func (s *KeyMemoryStore) AddKey(keyInfo KeyInfo, privKey data.PrivateKey) error 
 	if keyInfo.Role == data.CanonicalRootRole || data.IsDelegation(keyInfo.Role) || !data.ValidRole(keyInfo.Role) {
 		keyInfo.Gun = ""
 	}
-	err := addKey(s, s.Retriever, s.cachedKeys, filepath.Join(keyInfo.Gun, privKey.ID()), keyInfo.Role, privKey)
+	err := addKey(s, s.PassRetriever, s.cachedKeys, filepath.Join(keyInfo.Gun, privKey.ID()), keyInfo.Role, privKey)
 	if err != nil {
 		return err
 	}
@@ -251,7 +250,7 @@ func (s *KeyMemoryStore) GetKey(name string) (data.PrivateKey, string, error) {
 	if keyInfo, ok := s.keyInfoMap[name]; ok {
 		name = filepath.Join(keyInfo.Gun, name)
 	}
-	return getKey(s, s.Retriever, s.cachedKeys, name)
+	return getKey(s, s.PassRetriever, s.cachedKeys, name)
 }
 
 // ListKeys returns a list of unique PublicKeys present on the KeyFileStore, by returning a copy of the keyInfoMap
@@ -309,7 +308,7 @@ func KeyInfoFromPEM(pemBytes []byte, filename string) (string, KeyInfo, error) {
 	return keyID, KeyInfo{Gun: gun, Role: role}, nil
 }
 
-func addKey(s Storage, passphraseRetriever passphrase.Retriever, cachedKeys map[string]*cachedKey, name, role string, privKey data.PrivateKey) error {
+func addKey(s Storage, passphraseRetriever notary.PassRetriever, cachedKeys map[string]*cachedKey, name, role string, privKey data.PrivateKey) error {
 
 	var (
 		chosenPassphrase string
@@ -365,7 +364,7 @@ func getKeyRole(s Storage, keyID string) (string, bool, error) {
 }
 
 // GetKey returns the PrivateKey given a KeyID
-func getKey(s Storage, passphraseRetriever passphrase.Retriever, cachedKeys map[string]*cachedKey, name string) (data.PrivateKey, string, error) {
+func getKey(s Storage, passphraseRetriever notary.PassRetriever, cachedKeys map[string]*cachedKey, name string) (data.PrivateKey, string, error) {
 	cachedKeyEntry, ok := cachedKeys[name]
 	if ok {
 		return cachedKeyEntry.key, cachedKeyEntry.alias, nil
@@ -439,7 +438,7 @@ func getRawKey(s Storage, name string) ([]byte, string, error) {
 
 // GetPasswdDecryptBytes gets the password to decrypt the given pem bytes.
 // Returns the password and private key
-func GetPasswdDecryptBytes(passphraseRetriever passphrase.Retriever, pemBytes []byte, name, alias string) (data.PrivateKey, string, error) {
+func GetPasswdDecryptBytes(passphraseRetriever notary.PassRetriever, pemBytes []byte, name, alias string) (data.PrivateKey, string, error) {
 	var (
 		passwd  string
 		retErr  error

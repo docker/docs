@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/docker/notary"
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/version"
 	homedir "github.com/mitchellh/go-homedir"
@@ -55,7 +56,7 @@ func pathRelativeToCwd(path string) string {
 
 type notaryCommander struct {
 	// this needs to be set
-	getRetriever func() passphrase.Retriever
+	getRetriever func() notary.PassRetriever
 
 	// these are for command line parsing - no need to set
 	debug             bool
@@ -217,7 +218,7 @@ func askConfirm(input io.Reader) bool {
 	return false
 }
 
-func getPassphraseRetriever() passphrase.Retriever {
+func getPassphraseRetriever() notary.PassRetriever {
 	baseRetriever := passphrase.PromptRetriever()
 	env := map[string]string{
 		"root":       os.Getenv("NOTARY_ROOT_PASSPHRASE"),

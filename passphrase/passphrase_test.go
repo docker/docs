@@ -7,11 +7,12 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/docker/notary"
 	"github.com/docker/notary/tuf/data"
 	"github.com/stretchr/testify/require"
 )
 
-func assertAskOnceForKey(t *testing.T, in, out *bytes.Buffer, retriever Retriever, password, role string) {
+func assertAskOnceForKey(t *testing.T, in, out *bytes.Buffer, retriever notary.PassRetriever, password, role string) {
 	_, err := in.WriteString(password + "\n")
 	require.NoError(t, err)
 

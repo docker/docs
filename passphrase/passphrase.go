@@ -8,18 +8,12 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"path/filepath"
 	"strings"
 
-	"path/filepath"
-
 	"github.com/docker/docker/pkg/term"
+	"github.com/docker/notary"
 )
-
-// Retriever is a callback function that should retrieve a passphrase
-// for a given named key. If it should be treated as new passphrase (e.g. with
-// confirmation), createNew will be true. Attempts is passed in so that implementers
-// decide how many chances to give to a human, for example.
-type Retriever func(keyName, alias string, createNew bool, attempts int) (passphrase string, giveup bool, err error)
 
 const (
 	idBytesToDisplay            = 7
@@ -51,7 +45,7 @@ var (
 // PromptRetriever returns a new Retriever which will provide a prompt on stdin
 // and stdout to retrieve a passphrase. The passphrase will be cached such that
 // subsequent prompts will produce the same passphrase.
-func PromptRetriever() Retriever {
+func PromptRetriever() notary.PassRetriever {
 	return PromptRetrieverWithInOut(os.Stdin, os.Stdout, nil)
 }
 
@@ -60,7 +54,7 @@ func PromptRetriever() Retriever {
 // such that subsequent prompts will produce the same passphrase.
 // aliasMap can be used to specify display names for TUF key aliases. If aliasMap
 // is nil, a sensible default will be used.
-func PromptRetrieverWithInOut(in io.Reader, out io.Writer, aliasMap map[string]string) Retriever {
+func PromptRetrieverWithInOut(in io.Reader, out io.Writer, aliasMap map[string]string) notary.PassRetriever {
 	userEnteredTargetsSnapshotsPass := false
 	targetsSnapshotsPass := ""
 	userEnteredRootsPass := false
@@ -194,7 +188,7 @@ func PromptRetrieverWithInOut(in io.Reader, out io.Writer, aliasMap map[string]s
 
 // ConstantRetriever returns a new Retriever which will return a constant string
 // as a passphrase.
-func ConstantRetriever(constantPassphrase string) Retriever {
+func ConstantRetriever(constantPassphrase string) notary.PassRetriever {
 	return func(k, a string, c bool, n int) (string, bool, error) {
 		return constantPassphrase, false, nil
 	}
