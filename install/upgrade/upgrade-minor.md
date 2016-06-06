@@ -44,7 +44,13 @@ To upgrade DTR you use the `docker/dtr upgrade` command.
     You can find the DTR replica Ids on the **Applications** page of Docker
     Universal Control Plane.
 
-3. Run the upgrade command.
+3. Pull the latest docker/dtr image.
+
+    ```bash
+    $ docker pull docker/dtr
+    ```
+
+4. Run the upgrade command.
 
     The upgrade command upgrades all DTR replicas that are part of your cluster:
 
