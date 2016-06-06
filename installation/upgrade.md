@@ -86,7 +86,13 @@ replica nodes):
 
 2. Log into the controller node using ssh.
 
-3. Upgrade the controller node.
+3. Pull the latest docker/ucp image.
+
+    ```bash
+    $ docker pull docker/ucp
+    ```
+
+4. Upgrade the controller node.
 
     ```bash
     $ docker run --rm -it \
@@ -105,18 +111,18 @@ replica nodes):
       # INFO[0004] Success!  Please log in to the UCP console to verify your system before proceeding to upgrade additional nodes.
     ```
 
-4. Delete your browser cache.
+5. Delete your browser cache.
 
     Your browser can continue serving cached pages from the older version of
     UCP. To avoid errors on the UCP UI, ensure you delete the browser cache.
 
-5. Make sure the controller node is healthy.
+6. Make sure the controller node is healthy.
 
     In your browser, navigate to the **UCP web app**, to make
     sure the controller is running. Navigate to the **Nodes** page,
     to make sure the node is healthy.
 
-6. Upgrade all other nodes in the cluster using steps 2-5.
+7. Upgrade all other nodes in the cluster using steps 2-5.
 
 ### My cluster is set for high-availability
 
@@ -161,7 +167,13 @@ If your cluster is set up for high-availability (has several controller nodes):
 
 5. Log into the controller node using ssh.
 
-6. Upgrade the controller node.
+6. Pull the latest docker/ucp image.
+
+    ```bash
+    $ docker pull docker/ucp
+    ```
+
+7. Upgrade the controller node.
 
     ```bash
     $ docker run --rm -it \
@@ -180,21 +192,21 @@ If your cluster is set up for high-availability (has several controller nodes):
       # INFO[0004] Success!  Please log in to the UCP console to verify your system before proceeding to upgrade additional nodes.
     ```
 
-7. Delete your browser cache.
+8. Delete your browser cache.
 
     Your browser can continue serving cached pages from the older version of
     UCP. To avoid errors on the UCP UI, ensure you delete the browser cache.
 
-8. Make sure the controller node is healthy.
+9. Make sure the controller node is healthy.
 
     In your browser, navigate to the **UCP web app**. In the **Nodes** page
     confirm that the controller is running, and the cluster is healthy.
 
-9. Add the controller node back to the load balancing pool.
+10. Add the controller node back to the load balancing pool.
 
-10. Upgrade other controller nodes one at a time, using steps 4-9.
+11. Upgrade other controller nodes one at a time, using steps 4-9.
 
-11. Upgrade other nodes in the cluster, using steps 5-8.
+12. Upgrade other nodes in the cluster, using steps 5-9.
 
 ## Where to go next
 
