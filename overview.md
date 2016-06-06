@@ -19,8 +19,9 @@ and manage the Docker images you use in your applications.
 
 ## Image management
 
-Docker UCP can be installed on-premises, or on a virtual private cloud.
-And with it, you can store your Docker images securely, behind your firewall.
+Docker Trusted Registry can be installed on-premises, or on a virtual private
+cloud. And with it, you can store your Docker images securely, behind your
+firewall.
 
 ![](images/overview-1.png)
 
