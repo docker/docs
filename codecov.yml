@@ -9,6 +9,7 @@ coverage:
     project:
       default:
         target: auto
+        threshold: "0.05%"
     # patch would give us the code coverage of the diff only
     patch: false
     # changes tells us if there are unexpected code coverage changes in other files
