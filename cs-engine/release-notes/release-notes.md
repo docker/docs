@@ -27,6 +27,26 @@ cannot be adopted as quickly for consistency and compatibility reasons.
 These notes refer to the current and immediately prior releases of the
 CS Engine. For notes on older versions, see the [CS Engine prior release notes archive](prior-release-notes.md).
 
+## CS Engine 1.11.2-cs3
+(7 Jun 2016)
+
+This release addresses the following issues:
+
+* Fix potential panic when running `docker build`
+[#23032](https://github.com/docker/docker/pull/23032)
+* Fix interpretation of `--user` parameter
+[#22998](https://github.com/docker/docker/pull/22998)
+* Fix a bug preventing container statistics from being correctly reported
+[#22955](https://github.com/docker/docker/pull/22955)
+* Fix an issue preventing containers from being restarted after daemon restart
+[#22947](https://github.com/docker/docker/pull/22947)
+* Fix a possible deadlock on image deletion and container attach
+[#22918](https://github.com/docker/docker/pull/22918)
+* Fix an issue causing `docker ps` to hange when using devicemapper
+[#22168](https://github.com/docker/docker/pull/22168)
+* Fix a bug preventing to `docker exec` into a container when using
+devicemapper [#22168](https://github.com/docker/docker/pull/22168)
+
 ## CS Engine 1.11.1-cs2
 (17 May 2016)
 
