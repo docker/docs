@@ -15,7 +15,7 @@ Docker Trusted Registry (DTR) is the enterprise-grade image storage solution
 from Docker. You install it behind your firewall so that you can securely store
 and manage the Docker images you use in your applications.
 
-The UCP documentation includes the following topics:
+The DTR documentation includes the following topics:
 
 * [Docker Trusted Registry overview](overview.md)
 * [Quickstart](quick-start.md)
