@@ -32,19 +32,15 @@ Engine.
 
 ## Step 3: Customize named volumes
 
-This step is optional.
-
 Docker UCP uses [named volumes](../architecture.md) to persist data. If you want
 to customize the volume drivers and flags of these volumes, you can create the
 volumes before installing UCP.
 
-If the volumes don't exist, when installing UCP they are
-created with the default volume driver and flags.
+If the volumes don't exist, when installing UCP they are created with the
+default volume driver and flags.
 
 
 ## Step 4: Customize the CA used
-
-This step is optional.
 
 The UCP cluster uses TLS to secure all communications. Two Certificate
 Authorities (CA) are used for this:
@@ -128,16 +124,26 @@ Now that your UCP controller is installed, you need to license it.
 
 ## Step 7: Backup the controller CAs
 
-This step is optional.
-
 For an highly available installation, you can add more controller nodes to
 the UCP cluster. The controller nodes are replicas of each other.
 [Learn more about high-availability](../high-availability/set-up-high-availability.md).
 
-For this, you need to make the CAs on each controller node, use the same
+For this, you need to make the CAs on each controller node use the same
 root certificates and keys.
 [Learn how to replicate the CAs for high availability](../high-availability/replicate-cas.md).
 
+This requires creating a backup of the controller for the purposes of
+replicating the root CA. Your backup command might look like this:
+
+```bash
+$ docker run --rm -i --name ucp \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    docker/ucp backup --root-ca-only --interactive \
+    --passphrase "secret" > /tmp/backup.tar
+```
+
+`--passphrase` encrypts the backup with the provided passphrase; this is
+optional but recommended for security purposes.
 
 ## Step 8: Add controller replicas to the UCP cluster
 
@@ -149,19 +155,22 @@ the UCP cluster. For that, use the `docker/ucp join --replica` command.
 
 For each node that you want to install as a controller replica:
 
-1. Log into that node.
+1. Log into that node using ssh.
 
-2. Use the join command with the replica option:
+2. Make sure you transfer the backup.tar from the previous step to this node.
+
+3. Use the join command with the replica option:
 
     In this example we'll be running the join command interactively, so that
-    the command prompts for the necessary configuration values.
-    You can also use flags to pass values to the install command.
+    the command prompts for the necessary configuration values. We'll also
+    be passing the backup.tar file from the previous step in order to ensure
+    that the CAs are replicated to the new controller node.
 
     ```bash
     $ docker run --rm -it --name ucp \
       -v /var/run/docker.sock:/var/run/docker.sock \
-      docker/ucp join -i \
-      --replica
+      -v $BACKUP_PATH/backup.tar:/backup.tar \
+      docker/ucp join -i --replica
     ```
 
 3. Since UCP configures your Docker Engine for multi-host networking, it might
