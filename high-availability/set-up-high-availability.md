@@ -50,6 +50,12 @@ decreases. Don't leave that replica offline for long.
 degradation, as changes to configurations need to be replicated across all
 replicas.
 
+## Replicating CAs
+
+When configuring UCP for high-availability, you need to ensure the CAs running
+on each UCP controller node are interchangeable. This is done by transferring
+root certificates and keys for the CAs to each controller node on the cluster. 
+[Learn how to replicate CAs for high availability](replicate-cas.md)
 
 ## Load-balancing on UCP
 

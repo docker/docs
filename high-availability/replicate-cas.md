@@ -54,19 +54,24 @@ every controller node:
 ## Backup the certificates and keys
 
 To create a backup of the root certificates and keys used by the CAs, use the
-backup command. Notice that this command stops the UCP containers, so you
-should use it outside business peak hours.
+backup command. Notice that this command temporarily stops the UCP CA
+containers, so you should use it outside business peak hours.
+
+Log into the node using ssh, and run:
 
 ```bash
 $ docker run --rm -i --name ucp \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    docker/ucp backup --root-ca-only --passphrase "secret" > /tmp/backup.tar
+    docker/ucp backup --root-ca-only --interactive \
+    --passphrase "secret" > /tmp/backup.tar
 ```
 
 Where:
 
-* root-ca-only, specifies to only backup the CA certificates and keys,
-* passphrase, encrypts the backup with a given passphrase
+* `root-ca-only` specifies to only backup the CA certificates and keys.
+* `interactive` makes the command prompt for any information it needs.
+* `passphrase` encrypts the backup with a given passphrase.
+* `> backup.tar` streams the backup output to a file.
 
 ## Restore the certificate and keys
 
@@ -74,18 +79,21 @@ Once you have a backup archive of the certificates and keys used by the CAs
 of a controller node, you can use it to make CAs in other controller nodes
 use the same certificate and private key.
 
-You can use the restore command for this:
+Log into the node using ssh, and run:
 
 ```bash
 $ docker run --rm -i --name ucp \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    docker/ucp restore --root-ca-only --passphrase "secret" < /tmp/backup.tar
+    docker/ucp restore --root-ca-only --interactive \
+    --passphrase "secret" < /tmp/backup.tar
 ```
 
 Where:
 
-* root-ca-only, specifies to only restore the volumes used by the CAs,
-* passphrase, specifies the passphrase to decrypt the backup archive.
+* `root-ca-only` specifies to only restore the volumes used by the CAs.
+* `interactive` makes the command prompt for any information it needs.
+* `passphrase` specifies the passphrase to decrypt the backup archive.
+* `< backup.tar`, reads input from the backup.tar file.
 
 ## Where to go next
 
