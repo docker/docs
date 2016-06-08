@@ -302,7 +302,7 @@ or feedback about project operations.
     [Org.Curators]
         People = ["programmerq", "thajeztah", "amitshukla"]
     [Org."Docs maintainers"]
-        People = ["jamtur01", "moxiegirl", "sven", "thajeztah"]
+        People = ["jamtur01", "moxiegirl", "sven", "thajeztah", "sfsmithcha"]
     [Org.boot2docker]
         People = ["ehazlett", "tianon"]
     [Org.compose]
@@ -363,6 +363,8 @@ or feedback about project operations.
         People = ["abronan", "allencloud", "aluzzardi", "chanwit", "dongluochen", "jimmyxian", "mhbauer", "nishanttotla", "vieux"]
     [Org.swarm-frontends]
         People = ["abronan", "amitshukla", "samalba"]
+    [Org.swarmkit]
+        People = ["aaronlehmann", "abronan", "aluzzardi", "amitshukla", "diogomonica", "dongluochen", "lk4d4", "mrjana", "nishanttotla", "stevvooe", "tonistiigi", "vieux"]
     [Org.toolbox]
         People = ["jeffdm", "lisean106", "mchiang0610"]
     [Org."v1.10-migrator"]
@@ -568,9 +570,9 @@ or feedback about project operations.
         Email = "sean@docker.com"
         GitHub = "lisean106"
     [People.lk4d4]
-        Name = "Alexandr Morozov"
+        Name = "Alexander Morozov"
         Email = "lk4d4@docker.com"
-        GitHub = "LK4D4"
+        GitHub = "lk4d4"
     [People.magnuss]
         Name = "Magnus Skjegstad"
         Email = "magnus@skjegstad.com"
