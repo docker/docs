@@ -39,7 +39,8 @@ type RDBPrivateKey struct {
 	Private         string `gorethink:"private"`
 }
 
-var privateKeys = rethinkdb.Table{
+// PrivateKeysRethinkTable is the table definition for notary signer's key information
+var PrivateKeysRethinkTable = rethinkdb.Table{
 	Name:       RDBPrivateKey{}.TableName(),
 	PrimaryKey: RDBPrivateKey{}.KeyID,
 }
@@ -243,7 +244,7 @@ func (rdb RethinkDBKeyStore) ExportKey(keyID string) ([]byte, error) {
 // Bootstrap sets up the database and tables, also creating the notary signer user with appropriate db permission
 func (rdb RethinkDBKeyStore) Bootstrap() error {
 	if err := rethinkdb.SetupDB(rdb.sess, rdb.dbName, []rethinkdb.Table{
-		privateKeys,
+		PrivateKeysRethinkTable,
 	}); err != nil {
 		return err
 	}
