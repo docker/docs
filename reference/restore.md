@@ -47,3 +47,4 @@ must be provided.
 | `--id`           | The ID of the UCP instance to backup                                                                   |
 | `--root-ca-only` | Restore only the root CA certificates and keys on this controller node (leaving all other data intact) |
 | `--passphrase`   | Decrypt the tar file with the provided passphrase [$UCP_PASSPHRASE]                                    |
+| `--interactive, -i` | Enable interactive mode. You will be prompted to enter all required information.                    |

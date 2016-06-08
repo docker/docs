@@ -49,3 +49,4 @@ built-in PGP compatible encryption.
 | `--id`           | The ID of the UCP instance to backup                                    |
 | `--root-ca-only` | Backup only the root CA certificates and keys from this controller node |
 | `--passphrase`   | Encrypt the tar file with the provided passphrase [$UCP_PASSPHRASE]     |
+| `--interactive, -i` | Enable interactive mode. You will be prompted to enter all required information. |
