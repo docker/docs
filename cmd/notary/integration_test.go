@@ -83,7 +83,7 @@ func setupServer() *httptest.Server {
 
 // Initializes a repo, adds a target, publishes the target, lists the target,
 // verifies the target, and then removes the target.
-func TestClientTufInteraction(t *testing.T) {
+func TestClientTUFInteraction(t *testing.T) {
 	// -- setup --
 	setUp(t)
 
@@ -156,7 +156,7 @@ func TestClientTufInteraction(t *testing.T) {
 
 // Initializes a repo, adds a target, publishes the target by hash, lists the target,
 // verifies the target, and then removes the target.
-func TestClientTufAddByHashInteraction(t *testing.T) {
+func TestClientTUFAddByHashInteraction(t *testing.T) {
 	// -- setup --
 	setUp(t)
 

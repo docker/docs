@@ -49,9 +49,9 @@ func getFileNames(dirName string) ([]os.FileInfo, error) {
 	return fileInfos, nil
 }
 
-// Read a JSON formatted file from disk; convert to TufChange struct
-func unmarshalFile(dirname string, f os.FileInfo) (*TufChange, error) {
-	c := &TufChange{}
+// Read a JSON formatted file from disk; convert to TUFChange struct
+func unmarshalFile(dirname string, f os.FileInfo) (*TUFChange, error) {
+	c := &TUFChange{}
 	raw, err := ioutil.ReadFile(path.Join(dirname, f.Name()))
 	if err != nil {
 		return c, err
