@@ -102,7 +102,7 @@ func EmptyRepo(gun string, delegationRoles ...string) (*tuf.Repo, signed.CryptoS
 	// first
 	sort.Strings(delegationRoles)
 	for _, delgName := range delegationRoles {
-		// create a delegations key and a delegation in the tuf repo
+		// create a delegations key and a delegation in the TUF repo
 		delgKey, err := CreateKey(cs, gun, delgName, data.ECDSAKey)
 		if err != nil {
 			return nil, nil, err

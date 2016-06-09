@@ -1,4 +1,4 @@
-// This makes sure that the server is compatible with the tuf httpstore.
+// This makes sure that the server is compatible with the TUF httpstore.
 
 package server
 

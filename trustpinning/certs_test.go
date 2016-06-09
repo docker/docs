@@ -565,7 +565,7 @@ func testValidateSuccessfulRootRotation(t *testing.T, keyAlg, rootKeyType string
 	memKeyStore := trustmanager.NewKeyMemoryStore(passphraseRetriever)
 	cs := cryptoservice.NewCryptoService(memKeyStore)
 
-	// Tuf key with PEM-encoded x509 certificate
+	// TUF key with PEM-encoded x509 certificate
 	origRootKey, err := testutils.CreateKey(cs, gun, data.CanonicalRootRole, keyAlg)
 	require.NoError(t, err)
 
@@ -593,7 +593,7 @@ func testValidateSuccessfulRootRotation(t *testing.T, keyAlg, rootKeyType string
 	prevRoot, err := data.RootFromSigned(signedOrigTestRoot)
 	require.NoError(t, err)
 
-	// Tuf key with PEM-encoded x509 certificate
+	// TUF key with PEM-encoded x509 certificate
 	replRootKey, err := testutils.CreateKey(cs, gun, data.CanonicalRootRole, keyAlg)
 	require.NoError(t, err)
 
@@ -645,7 +645,7 @@ func testValidateRootRotationMissingOrigSig(t *testing.T, keyAlg, rootKeyType st
 	memKeyStore := trustmanager.NewKeyMemoryStore(passphraseRetriever)
 	cs := cryptoservice.NewCryptoService(memKeyStore)
 
-	// Tuf key with PEM-encoded x509 certificate
+	// TUF key with PEM-encoded x509 certificate
 	origRootKey, err := testutils.CreateKey(cs, gun, data.CanonicalRootRole, keyAlg)
 	require.NoError(t, err)
 
@@ -673,7 +673,7 @@ func testValidateRootRotationMissingOrigSig(t *testing.T, keyAlg, rootKeyType st
 	prevRoot, err := data.RootFromSigned(signedOrigTestRoot)
 	require.NoError(t, err)
 
-	// Tuf key with PEM-encoded x509 certificate
+	// TUF key with PEM-encoded x509 certificate
 	replRootKey, err := testutils.CreateKey(cs, gun, data.CanonicalRootRole, keyAlg)
 	require.NoError(t, err)
 
@@ -721,7 +721,7 @@ func testValidateRootRotationMissingNewSig(t *testing.T, keyAlg, rootKeyType str
 	memKeyStore := trustmanager.NewKeyMemoryStore(passphraseRetriever)
 	cs := cryptoservice.NewCryptoService(memKeyStore)
 
-	// Tuf key with PEM-encoded x509 certificate
+	// TUF key with PEM-encoded x509 certificate
 	origRootKey, err := testutils.CreateKey(cs, gun, data.CanonicalRootRole, keyAlg)
 	require.NoError(t, err)
 
@@ -749,7 +749,7 @@ func testValidateRootRotationMissingNewSig(t *testing.T, keyAlg, rootKeyType str
 	prevRoot, err := data.RootFromSigned(signedOrigTestRoot)
 	require.NoError(t, err)
 
-	// Tuf key with PEM-encoded x509 certificate
+	// TUF key with PEM-encoded x509 certificate
 	replRootKey, err := testutils.CreateKey(cs, gun, data.CanonicalRootRole, keyAlg)
 	require.NoError(t, err)
 
