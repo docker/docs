@@ -121,7 +121,7 @@ func repositoryFromKeystores(baseDir, gun, baseURL string, rt http.RoundTripper,
 }
 
 // Target represents a simplified version of the data TUF operates on, so external
-// applications don't have to depend on tuf data types.
+// applications don't have to depend on TUF data types.
 type Target struct {
 	Name   string      // the name of the target
 	Hashes data.Hashes // the hash of the target
@@ -605,7 +605,7 @@ func (r *NotaryRepository) publish(cl changelist.Changelist) error {
 		return err
 	}
 
-	// these are the tuf files we will need to update, serialized as JSON before
+	// these are the TUF files we will need to update, serialized as JSON before
 	// we send anything to remote
 	updatedFiles := make(map[string][]byte)
 

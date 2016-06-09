@@ -12,7 +12,7 @@ import (
 	"gopkg.in/dancannon/gorethink.v2"
 )
 
-// RDBTUFFile is a tuf file record
+// RDBTUFFile is a TUF file record
 type RDBTUFFile struct {
 	rethinkdb.Timing
 	GunRoleVersion []interface{} `gorethink:"gun_role_version"`
@@ -269,7 +269,7 @@ func (rdb RethinkDB) deleteByTSChecksum(tsChecksum string) error {
 // Bootstrap sets up the database and tables, also creating the notary server user with appropriate db permission
 func (rdb RethinkDB) Bootstrap() error {
 	if err := rethinkdb.SetupDB(rdb.sess, rdb.dbName, []rethinkdb.Table{
-		TufFilesRethinkTable,
+		TUFFilesRethinkTable,
 		PubKeysRethinkTable,
 	}); err != nil {
 		return err

@@ -42,7 +42,7 @@ type TufRootData struct {
 	RoleName string       `json:"role"`
 }
 
-// NewTufChange initializes a tufChange object
+// NewTufChange initializes a TufChange object
 func NewTufChange(action string, role, changeType, changePath string, content []byte) *TufChange {
 	return &TufChange{
 		Actn:       action,

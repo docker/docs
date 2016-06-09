@@ -214,7 +214,7 @@ func getRemoteKey(url, gun, role string, rt http.RoundTripper) (data.PublicKey, 
 	return pubKey, nil
 }
 
-// signs and serializes the metadata for a canonical role in a tuf repo to JSON
+// signs and serializes the metadata for a canonical role in a TUF repo to JSON
 func serializeCanonicalRole(tufRepo *tuf.Repo, role string) (out []byte, err error) {
 	var s *data.Signed
 	switch {
