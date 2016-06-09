@@ -314,7 +314,7 @@ func addChange(cl *changelist.FileChangelist, c changelist.Change, roles ...stri
 			}
 		}
 
-		changes = append(changes, changelist.NewTufChange(
+		changes = append(changes, changelist.NewTUFChange(
 			c.Action(),
 			role,
 			c.Type(),
@@ -352,7 +352,7 @@ func (r *NotaryRepository) AddTarget(target *Target, roles ...string) error {
 		return err
 	}
 
-	template := changelist.NewTufChange(
+	template := changelist.NewTUFChange(
 		changelist.ActionCreate, "", changelist.TypeTargetsTarget,
 		target.Name, metaJSON)
 	return addChange(cl, template, roles...)
@@ -368,7 +368,7 @@ func (r *NotaryRepository) RemoveTarget(targetName string, roles ...string) erro
 		return err
 	}
 	logrus.Debugf("Removing target \"%s\"", targetName)
-	template := changelist.NewTufChange(changelist.ActionDelete, "",
+	template := changelist.NewTUFChange(changelist.ActionDelete, "",
 		changelist.TypeTargetsTarget, targetName, nil)
 	return addChange(cl, template, roles...)
 }
@@ -930,7 +930,7 @@ func (r *NotaryRepository) RotateKey(role string, serverManagesKey bool) error {
 func (r *NotaryRepository) rootFileKeyChange(cl changelist.Changelist, role, action string, key data.PublicKey) error {
 	kl := make(data.KeyList, 0, 1)
 	kl = append(kl, key)
-	meta := changelist.TufRootData{
+	meta := changelist.TUFRootData{
 		RoleName: role,
 		Keys:     kl,
 	}
@@ -939,7 +939,7 @@ func (r *NotaryRepository) rootFileKeyChange(cl changelist.Changelist, role, act
 		return err
 	}
 
-	c := changelist.NewTufChange(
+	c := changelist.NewTUFChange(
 		action,
 		changelist.ScopeRoot,
 		changelist.TypeRootRole,

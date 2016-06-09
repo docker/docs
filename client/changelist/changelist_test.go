@@ -9,7 +9,7 @@ import (
 func TestMemChangelist(t *testing.T) {
 	cl := memChangelist{}
 
-	c := NewTufChange(ActionCreate, "targets", "target", "test/targ", []byte{1})
+	c := NewTUFChange(ActionCreate, "targets", "target", "test/targ", []byte{1})
 
 	err := cl.Add(c)
 	require.Nil(t, err, "Non-nil error while adding change")
@@ -36,13 +36,13 @@ func TestMemChangeIterator(t *testing.T) {
 	require.Nil(t, err, "Non-nil error from NewIterator")
 	require.False(t, it.HasNext(), "HasNext returns false for empty ChangeList")
 
-	c1 := NewTufChange(ActionCreate, "t1", "target1", "test/targ1", []byte{1})
+	c1 := NewTUFChange(ActionCreate, "t1", "target1", "test/targ1", []byte{1})
 	cl.Add(c1)
 
-	c2 := NewTufChange(ActionUpdate, "t2", "target2", "test/targ2", []byte{2})
+	c2 := NewTUFChange(ActionUpdate, "t2", "target2", "test/targ2", []byte{2})
 	cl.Add(c2)
 
-	c3 := NewTufChange(ActionUpdate, "t3", "target3", "test/targ3", []byte{3})
+	c3 := NewTUFChange(ActionUpdate, "t3", "target3", "test/targ3", []byte{3})
 	cl.Add(c3)
 
 	cs := cl.List()

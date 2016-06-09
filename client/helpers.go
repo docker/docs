@@ -73,7 +73,7 @@ func applyTargetsChange(repo *tuf.Repo, c changelist.Change) error {
 func changeTargetsDelegation(repo *tuf.Repo, c changelist.Change) error {
 	switch c.Action() {
 	case changelist.ActionCreate:
-		td := changelist.TufDelegation{}
+		td := changelist.TUFDelegation{}
 		err := json.Unmarshal(c.Content(), &td)
 		if err != nil {
 			return err
@@ -87,7 +87,7 @@ func changeTargetsDelegation(repo *tuf.Repo, c changelist.Change) error {
 		}
 		return repo.UpdateDelegationPaths(c.Scope(), td.AddPaths, []string{}, false)
 	case changelist.ActionUpdate:
-		td := changelist.TufDelegation{}
+		td := changelist.TUFDelegation{}
 		err := json.Unmarshal(c.Content(), &td)
 		if err != nil {
 			return err
@@ -175,7 +175,7 @@ func applyRootRoleChange(repo *tuf.Repo, c changelist.Change) error {
 	switch c.Action() {
 	case changelist.ActionCreate:
 		// replaces all keys for a role
-		d := &changelist.TufRootData{}
+		d := &changelist.TUFRootData{}
 		err := json.Unmarshal(c.Content(), d)
 		if err != nil {
 			return err

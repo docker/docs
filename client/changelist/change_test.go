@@ -8,12 +8,12 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestTufDelegation(t *testing.T) {
+func TestTUFDelegation(t *testing.T) {
 	cs := signed.NewEd25519()
 	key, err := cs.Create("targets/new_name", "gun", data.ED25519Key)
 	require.NoError(t, err)
 	kl := data.KeyList{key}
-	td := TufDelegation{
+	td := TUFDelegation{
 		NewName:      "targets/new_name",
 		NewThreshold: 1,
 		AddKeys:      kl,
