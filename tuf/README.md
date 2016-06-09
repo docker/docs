@@ -12,7 +12,7 @@ from Docker should be considered the official CLI to be used with this implement
 
 - [X] Add Targets to existing repo
 - [X] Sign metadata files
-- [X] Refactor TufRepo to take care of signing ~~and verification~~
+- [X] Refactor TUFRepo to take care of signing ~~and verification~~
 - [ ] Ensure consistent capitalization in naming (TUF\_\_\_ vs Tuf\_\_\_)
 - [X] Make caching of metadata files smarter - PR #5
 - [ ] ~~Add configuration for CLI commands. Order of configuration priority from most to least: flags, config file, defaults~~ Notary should be the official CLI

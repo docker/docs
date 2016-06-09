@@ -408,7 +408,7 @@ func removeKey(s Storage, cachedKeys map[string]*cachedKey, name string) error {
 	return nil
 }
 
-// Assumes 2 subdirectories, 1 containing root keys and 1 containing tuf keys
+// Assumes 2 subdirectories, 1 containing root keys and 1 containing TUF keys
 func getSubdir(alias string) string {
 	if alias == data.CanonicalRootRole {
 		return notary.RootKeysSubdir

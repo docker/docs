@@ -207,7 +207,7 @@ func createRepoAndKey(t *testing.T, rootType, tempBaseDir, gun, url string) (
 
 // creates a new notary repository with the same gun and url as the previous
 // repo, in order to eliminate caches (for instance, cryptoservice cache)
-// if a new directory is to be created, it also eliminates the tuf metadata
+// if a new directory is to be created, it also eliminates the TUF metadata
 // cache
 func newRepoToTestRepo(t *testing.T, existingRepo *NotaryRepository, newDir bool) (
 	*NotaryRepository, *passRoleRecorder) {

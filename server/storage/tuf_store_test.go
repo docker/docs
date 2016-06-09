@@ -46,23 +46,23 @@ func TestTUFSQLGetCurrent(t *testing.T) {
 	defer os.RemoveAll(tempBaseDir)
 	defer gormDB.Close()
 
-	initialRootTufFile := SampleTUF(1)
+	initialRootTUFFile := SampleTUF(1)
 
-	ConsistentEmptyGetCurrentTest(t, tufDBStore, initialRootTufFile)
+	ConsistentEmptyGetCurrentTest(t, tufDBStore, initialRootTUFFile)
 
 	// put an initial piece of root metadata data in the database,
 	// there isn't enough state to retrieve it since we require a timestamp and snapshot in our walk
 
-	query := gormDB.Create(&initialRootTufFile)
+	query := gormDB.Create(&initialRootTUFFile)
 	require.NoError(t, query.Error, "Creating a row in an empty DB failed.")
 
-	ConsistentMissingTSAndSnapGetCurrentTest(t, tufDBStore, initialRootTufFile)
+	ConsistentMissingTSAndSnapGetCurrentTest(t, tufDBStore, initialRootTUFFile)
 
 	// Note that get by checksum succeeds, since it does not try to walk timestamp/snapshot
-	_, _, err = tufDBStore.GetChecksum("testGUN", "root", initialRootTufFile.Sha256)
+	_, _, err = tufDBStore.GetChecksum("testGUN", "root", initialRootTUFFile.Sha256)
 	require.NoError(t, err)
 
-	// Now setup a valid tuf repo and use it to ensure we walk correctly
+	// Now setup a valid TUF repo and use it to ensure we walk correctly
 	validTUFRepo, _, err := testutils.EmptyRepo("testGUN")
 	require.NoError(t, err)
 
@@ -125,7 +125,7 @@ func ConsistentGetCurrentFoundTest(t *testing.T, s *TUFMetaStorage, rec TUFFile)
 	require.Equal(t, rec.Data, byt)
 }
 
-// Checks that both the walking metastore and underlying metastore do not contain the tuf file
+// Checks that both the walking metastore and underlying metastore do not contain the TUF file
 func ConsistentEmptyGetCurrentTest(t *testing.T, s *TUFMetaStorage, rec TUFFile) {
 	_, byt, err := s.GetCurrent(rec.Gun, rec.Role)
 	require.Nil(t, byt)
