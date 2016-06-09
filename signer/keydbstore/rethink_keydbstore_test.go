@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestRDBTUFFileMarshalling(t *testing.T) {
+func TestRDBPrivateKeyJSONUnmarshalling(t *testing.T) {
 	created := time.Now().AddDate(-1, -1, -1)
 	updated := time.Now().AddDate(0, -5, 0)
 	deleted := time.Time{}
@@ -60,4 +60,26 @@ func TestRDBTUFFileMarshalling(t *testing.T) {
 		Private:         "Hello world private",
 	}
 	require.Equal(t, expected, unmarshalled)
+}
+
+func TestRDBPrivateKeyJSONUnmarshallingFailure(t *testing.T) {
+	validTimeMarshalled, err := json.Marshal(time.Now())
+	require.NoError(t, err)
+
+	invalid := fmt.Sprintf(`
+			{
+				"created_at": "not a time",
+				"updated_at": %s,
+				"deleted_at": %s,
+				"key_id": "56ee4a23129fc22c6cb4b4ba5f78d730c91ab6def514e80d807c947bb21f0d63",
+				"encryption_alg": "A256GCM",
+				"keywrap_alg": "PBES2-HS256+A128KW",
+				"algorithm": "ecdsa",
+				"passphrase_alias": "timestamp_1",
+				"public": "Hello world public",
+				"private": "Hello world private"
+			}`, validTimeMarshalled, validTimeMarshalled)
+
+	_, err = PrivateKeysRethinkTable.JSONUnmarshaller([]byte(invalid))
+	require.Error(t, err)
 }
