@@ -175,7 +175,7 @@ func TestRSAX509PublickeyID(t *testing.T) {
 
 	privKey, err := ParsePEMPrivateKey(fileBytes, "")
 	require.NoError(t, err)
-	expectedTufID := privKey.ID()
+	expectedTUFID := privKey.ID()
 
 	cert, err := LoadCertFromFile("../fixtures/notary-server.crt")
 	require.NoError(t, err)
@@ -183,13 +183,13 @@ func TestRSAX509PublickeyID(t *testing.T) {
 	rsaKeyBytes, err := x509.MarshalPKIXPublicKey(cert.PublicKey)
 	require.NoError(t, err)
 
-	sameWayTufID := data.NewPublicKey(data.RSAKey, rsaKeyBytes).ID()
+	sameWayTUFID := data.NewPublicKey(data.RSAKey, rsaKeyBytes).ID()
 
-	actualTufKey := CertToKey(cert)
-	actualTufID, err := X509PublicKeyID(actualTufKey)
+	actualTUFKey := CertToKey(cert)
+	actualTUFID, err := X509PublicKeyID(actualTUFKey)
 
-	require.Equal(t, sameWayTufID, actualTufID)
-	require.Equal(t, expectedTufID, actualTufID)
+	require.Equal(t, sameWayTUFID, actualTUFID)
+	require.Equal(t, expectedTUFID, actualTUFID)
 }
 
 // X509PublickeyID returns the public key ID of an ECDSA X509 key rather than

@@ -26,55 +26,55 @@ import (
 	"github.com/spf13/viper"
 )
 
-var cmdTufListTemplate = usageTemplate{
+var cmdTUFListTemplate = usageTemplate{
 	Use:   "list [ GUN ]",
 	Short: "Lists targets for a remote trusted collection.",
 	Long:  "Lists all targets for a remote trusted collection identified by the Globally Unique Name. This is an online operation.",
 }
 
-var cmdTufAddTemplate = usageTemplate{
+var cmdTUFAddTemplate = usageTemplate{
 	Use:   "add [ GUN ] <target> <file>",
 	Short: "Adds the file as a target to the trusted collection.",
 	Long:  "Adds the file as a target to the local trusted collection identified by the Globally Unique Name. This is an offline operation.  Please then use `publish` to push the changes to the remote trusted collection.",
 }
 
-var cmdTufAddHashTemplate = usageTemplate{
+var cmdTUFAddHashTemplate = usageTemplate{
 	Use:   "addhash [ GUN ] <target> <byte size> <hashes>",
 	Short: "Adds the byte size and hash(es) as a target to the trusted collection.",
 	Long:  "Adds the specified byte size and hash(es) as a target to the local trusted collection identified by the Globally Unique Name. This is an offline operation.  Please then use `publish` to push the changes to the remote trusted collection.",
 }
 
-var cmdTufRemoveTemplate = usageTemplate{
+var cmdTUFRemoveTemplate = usageTemplate{
 	Use:   "remove [ GUN ] <target>",
 	Short: "Removes a target from a trusted collection.",
 	Long:  "Removes a target from the local trusted collection identified by the Globally Unique Name. This is an offline operation.  Please then use `publish` to push the changes to the remote trusted collection.",
 }
 
-var cmdTufInitTemplate = usageTemplate{
+var cmdTUFInitTemplate = usageTemplate{
 	Use:   "init [ GUN ]",
 	Short: "Initializes a local trusted collection.",
 	Long:  "Initializes a local trusted collection identified by the Globally Unique Name. This is an online operation.",
 }
 
-var cmdTufLookupTemplate = usageTemplate{
+var cmdTUFLookupTemplate = usageTemplate{
 	Use:   "lookup [ GUN ] <target>",
 	Short: "Looks up a specific target in a remote trusted collection.",
 	Long:  "Looks up a specific target in a remote trusted collection identified by the Globally Unique Name.",
 }
 
-var cmdTufPublishTemplate = usageTemplate{
+var cmdTUFPublishTemplate = usageTemplate{
 	Use:   "publish [ GUN ]",
 	Short: "Publishes the local trusted collection.",
 	Long:  "Publishes the local trusted collection identified by the Globally Unique Name, sending the local changes to a remote trusted server.",
 }
 
-var cmdTufStatusTemplate = usageTemplate{
+var cmdTUFStatusTemplate = usageTemplate{
 	Use:   "status [ GUN ]",
 	Short: "Displays status of unpublished changes to the local trusted collection.",
 	Long:  "Displays status of unpublished changes to the local trusted collection identified by the Globally Unique Name.",
 }
 
-var cmdTufVerifyTemplate = usageTemplate{
+var cmdTUFVerifyTemplate = usageTemplate{
 	Use:   "verify [ GUN ] <target>",
 	Short: "Verifies if the content is included in the remote trusted collection",
 	Long:  "Verifies if the data passed in STDIN is included in the remote trusted collection identified by the Global Unique Name.",
@@ -96,35 +96,35 @@ type tufCommander struct {
 }
 
 func (t *tufCommander) AddToCommand(cmd *cobra.Command) {
-	cmd.AddCommand(cmdTufInitTemplate.ToCommand(t.tufInit))
-	cmd.AddCommand(cmdTufStatusTemplate.ToCommand(t.tufStatus))
-	cmd.AddCommand(cmdTufPublishTemplate.ToCommand(t.tufPublish))
-	cmd.AddCommand(cmdTufLookupTemplate.ToCommand(t.tufLookup))
+	cmd.AddCommand(cmdTUFInitTemplate.ToCommand(t.tufInit))
+	cmd.AddCommand(cmdTUFStatusTemplate.ToCommand(t.tufStatus))
+	cmd.AddCommand(cmdTUFPublishTemplate.ToCommand(t.tufPublish))
+	cmd.AddCommand(cmdTUFLookupTemplate.ToCommand(t.tufLookup))
 
-	cmdTufList := cmdTufListTemplate.ToCommand(t.tufList)
-	cmdTufList.Flags().StringSliceVarP(
+	cmdTUFList := cmdTUFListTemplate.ToCommand(t.tufList)
+	cmdTUFList.Flags().StringSliceVarP(
 		&t.roles, "roles", "r", nil, "Delegation roles to list targets for (will shadow targets role)")
-	cmd.AddCommand(cmdTufList)
+	cmd.AddCommand(cmdTUFList)
 
-	cmdTufAdd := cmdTufAddTemplate.ToCommand(t.tufAdd)
-	cmdTufAdd.Flags().StringSliceVarP(&t.roles, "roles", "r", nil, "Delegation roles to add this target to")
-	cmd.AddCommand(cmdTufAdd)
+	cmdTUFAdd := cmdTUFAddTemplate.ToCommand(t.tufAdd)
+	cmdTUFAdd.Flags().StringSliceVarP(&t.roles, "roles", "r", nil, "Delegation roles to add this target to")
+	cmd.AddCommand(cmdTUFAdd)
 
-	cmdTufRemove := cmdTufRemoveTemplate.ToCommand(t.tufRemove)
-	cmdTufRemove.Flags().StringSliceVarP(&t.roles, "roles", "r", nil, "Delegation roles to remove this target from")
-	cmd.AddCommand(cmdTufRemove)
+	cmdTUFRemove := cmdTUFRemoveTemplate.ToCommand(t.tufRemove)
+	cmdTUFRemove.Flags().StringSliceVarP(&t.roles, "roles", "r", nil, "Delegation roles to remove this target from")
+	cmd.AddCommand(cmdTUFRemove)
 
-	cmdTufAddHash := cmdTufAddHashTemplate.ToCommand(t.tufAddByHash)
-	cmdTufAddHash.Flags().StringSliceVarP(&t.roles, "roles", "r", nil, "Delegation roles to add this target to")
-	cmdTufAddHash.Flags().StringVar(&t.sha256, notary.SHA256, "", "hex encoded sha256 of the target to add")
-	cmdTufAddHash.Flags().StringVar(&t.sha512, notary.SHA512, "", "hex encoded sha512 of the target to add")
-	cmd.AddCommand(cmdTufAddHash)
+	cmdTUFAddHash := cmdTUFAddHashTemplate.ToCommand(t.tufAddByHash)
+	cmdTUFAddHash.Flags().StringSliceVarP(&t.roles, "roles", "r", nil, "Delegation roles to add this target to")
+	cmdTUFAddHash.Flags().StringVar(&t.sha256, notary.SHA256, "", "hex encoded sha256 of the target to add")
+	cmdTUFAddHash.Flags().StringVar(&t.sha512, notary.SHA512, "", "hex encoded sha512 of the target to add")
+	cmd.AddCommand(cmdTUFAddHash)
 
-	cmdTufVerify := cmdTufVerifyTemplate.ToCommand(t.tufVerify)
-	cmdTufVerify.Flags().StringVarP(&t.input, "input", "i", "", "Read from a file, instead of STDIN")
-	cmdTufVerify.Flags().StringVarP(&t.output, "output", "o", "", "Write to a file, instead of STDOUT")
-	cmdTufVerify.Flags().BoolVarP(&t.quiet, "quiet", "q", false, "No output except for errors")
-	cmd.AddCommand(cmdTufVerify)
+	cmdTUFVerify := cmdTUFVerifyTemplate.ToCommand(t.tufVerify)
+	cmdTUFVerify.Flags().StringVarP(&t.input, "input", "i", "", "Read from a file, instead of STDIN")
+	cmdTUFVerify.Flags().StringVarP(&t.output, "output", "o", "", "Write to a file, instead of STDOUT")
+	cmdTUFVerify.Flags().BoolVarP(&t.quiet, "quiet", "q", false, "No output except for errors")
+	cmd.AddCommand(cmdTUFVerify)
 }
 
 func (t *tufCommander) tufAddByHash(cmd *cobra.Command, args []string) error {

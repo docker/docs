@@ -26,7 +26,7 @@ func TestApplyTargetsChange(t *testing.T) {
 	fjson, err := json.Marshal(f)
 	require.NoError(t, err)
 
-	addChange := &changelist.TufChange{
+	addChange := &changelist.TUFChange{
 		Actn:       changelist.ActionCreate,
 		Role:       changelist.ScopeTargets,
 		ChangeType: "target",
@@ -37,7 +37,7 @@ func TestApplyTargetsChange(t *testing.T) {
 	require.NoError(t, err)
 	require.NotNil(t, repo.Targets["targets"].Signed.Targets["latest"])
 
-	removeChange := &changelist.TufChange{
+	removeChange := &changelist.TUFChange{
 		Actn:       changelist.ActionDelete,
 		Role:       changelist.ScopeTargets,
 		ChangeType: "target",
@@ -67,14 +67,14 @@ func TestApplyAddTargetTwice(t *testing.T) {
 	require.NoError(t, err)
 
 	cl := changelist.NewMemChangelist()
-	require.NoError(t, cl.Add(&changelist.TufChange{
+	require.NoError(t, cl.Add(&changelist.TUFChange{
 		Actn:       changelist.ActionCreate,
 		Role:       changelist.ScopeTargets,
 		ChangeType: "target",
 		ChangePath: "latest",
 		Data:       fjson,
 	}))
-	require.NoError(t, cl.Add(&changelist.TufChange{
+	require.NoError(t, cl.Add(&changelist.TUFChange{
 		Actn:       changelist.ActionCreate,
 		Role:       changelist.ScopeTargets,
 		ChangeType: "target",
@@ -86,7 +86,7 @@ func TestApplyAddTargetTwice(t *testing.T) {
 	require.Len(t, repo.Targets["targets"].Signed.Targets, 1)
 	require.NotEmpty(t, repo.Targets["targets"].Signed.Targets["latest"])
 
-	require.NoError(t, applyTargetsChange(repo, &changelist.TufChange{
+	require.NoError(t, applyTargetsChange(repo, &changelist.TUFChange{
 		Actn:       changelist.ActionCreate,
 		Role:       changelist.ScopeTargets,
 		ChangeType: "target",
@@ -113,7 +113,7 @@ func TestApplyChangelist(t *testing.T) {
 	require.NoError(t, err)
 
 	cl := changelist.NewMemChangelist()
-	addChange := &changelist.TufChange{
+	addChange := &changelist.TUFChange{
 		Actn:       changelist.ActionCreate,
 		Role:       changelist.ScopeTargets,
 		ChangeType: "target",
@@ -127,7 +127,7 @@ func TestApplyChangelist(t *testing.T) {
 
 	cl.Clear("")
 
-	removeChange := &changelist.TufChange{
+	removeChange := &changelist.TUFChange{
 		Actn:       changelist.ActionDelete,
 		Role:       changelist.ScopeTargets,
 		ChangeType: "target",
@@ -157,7 +157,7 @@ func TestApplyChangelistMulti(t *testing.T) {
 	require.NoError(t, err)
 
 	cl := changelist.NewMemChangelist()
-	addChange := &changelist.TufChange{
+	addChange := &changelist.TUFChange{
 		Actn:       changelist.ActionCreate,
 		Role:       changelist.ScopeTargets,
 		ChangeType: "target",
@@ -165,7 +165,7 @@ func TestApplyChangelistMulti(t *testing.T) {
 		Data:       fjson,
 	}
 
-	removeChange := &changelist.TufChange{
+	removeChange := &changelist.TUFChange{
 		Actn:       changelist.ActionDelete,
 		Role:       changelist.ScopeTargets,
 		ChangeType: "target",
@@ -191,7 +191,7 @@ func TestApplyTargetsDelegationCreateDelete(t *testing.T) {
 
 	// create delegation
 	kl := data.KeyList{newKey}
-	td := &changelist.TufDelegation{
+	td := &changelist.TUFDelegation{
 		NewThreshold: 1,
 		AddKeys:      kl,
 		AddPaths:     []string{"level1"},
@@ -200,7 +200,7 @@ func TestApplyTargetsDelegationCreateDelete(t *testing.T) {
 	tdJSON, err := json.Marshal(td)
 	require.NoError(t, err)
 
-	ch := changelist.NewTufChange(
+	ch := changelist.NewTUFChange(
 		changelist.ActionCreate,
 		"targets/level1",
 		changelist.TypeTargetsDelegation,
@@ -225,13 +225,13 @@ func TestApplyTargetsDelegationCreateDelete(t *testing.T) {
 	require.Equal(t, "level1", role.Paths[0])
 
 	// delete delegation
-	td = &changelist.TufDelegation{
+	td = &changelist.TUFDelegation{
 		RemoveKeys: []string{newKey.ID()},
 	}
 
 	tdJSON, err = json.Marshal(td)
 	require.NoError(t, err)
-	ch = changelist.NewTufChange(
+	ch = changelist.NewTUFChange(
 		changelist.ActionDelete,
 		"targets/level1",
 		changelist.TypeTargetsDelegation,
@@ -255,7 +255,7 @@ func TestApplyTargetsDelegationCreate2SharedKey(t *testing.T) {
 
 	// create first delegation
 	kl := data.KeyList{newKey}
-	td := &changelist.TufDelegation{
+	td := &changelist.TUFDelegation{
 		NewThreshold: 1,
 		AddKeys:      kl,
 		AddPaths:     []string{"level1"},
@@ -264,7 +264,7 @@ func TestApplyTargetsDelegationCreate2SharedKey(t *testing.T) {
 	tdJSON, err := json.Marshal(td)
 	require.NoError(t, err)
 
-	ch := changelist.NewTufChange(
+	ch := changelist.NewTUFChange(
 		changelist.ActionCreate,
 		"targets/level1",
 		changelist.TypeTargetsDelegation,
@@ -277,7 +277,7 @@ func TestApplyTargetsDelegationCreate2SharedKey(t *testing.T) {
 
 	// create second delegation
 	kl = data.KeyList{newKey}
-	td = &changelist.TufDelegation{
+	td = &changelist.TUFDelegation{
 		NewThreshold: 1,
 		AddKeys:      kl,
 		AddPaths:     []string{"level2"},
@@ -286,7 +286,7 @@ func TestApplyTargetsDelegationCreate2SharedKey(t *testing.T) {
 	tdJSON, err = json.Marshal(td)
 	require.NoError(t, err)
 
-	ch = changelist.NewTufChange(
+	ch = changelist.NewTUFChange(
 		changelist.ActionCreate,
 		"targets/level2",
 		changelist.TypeTargetsDelegation,
@@ -314,12 +314,12 @@ func TestApplyTargetsDelegationCreate2SharedKey(t *testing.T) {
 	require.Equal(t, "level2", role2.Paths[0])
 
 	// delete one delegation, ensure shared key remains
-	td = &changelist.TufDelegation{
+	td = &changelist.TUFDelegation{
 		RemoveKeys: []string{newKey.ID()},
 	}
 	tdJSON, err = json.Marshal(td)
 	require.NoError(t, err)
-	ch = changelist.NewTufChange(
+	ch = changelist.NewTUFChange(
 		changelist.ActionDelete,
 		"targets/level1",
 		changelist.TypeTargetsDelegation,
@@ -334,7 +334,7 @@ func TestApplyTargetsDelegationCreate2SharedKey(t *testing.T) {
 	require.Len(t, tgts.Signed.Delegations.Keys, 1)
 
 	// delete other delegation, ensure key cleaned up
-	ch = changelist.NewTufChange(
+	ch = changelist.NewTUFChange(
 		changelist.ActionDelete,
 		"targets/level2",
 		changelist.TypeTargetsDelegation,
@@ -358,7 +358,7 @@ func TestApplyTargetsDelegationCreateEdit(t *testing.T) {
 
 	// create delegation
 	kl := data.KeyList{newKey}
-	td := &changelist.TufDelegation{
+	td := &changelist.TUFDelegation{
 		NewThreshold: 1,
 		AddKeys:      kl,
 		AddPaths:     []string{"level1"},
@@ -367,7 +367,7 @@ func TestApplyTargetsDelegationCreateEdit(t *testing.T) {
 	tdJSON, err := json.Marshal(td)
 	require.NoError(t, err)
 
-	ch := changelist.NewTufChange(
+	ch := changelist.NewTUFChange(
 		changelist.ActionCreate,
 		"targets/level1",
 		changelist.TypeTargetsDelegation,
@@ -383,7 +383,7 @@ func TestApplyTargetsDelegationCreateEdit(t *testing.T) {
 	require.NoError(t, err)
 
 	kl = data.KeyList{newKey2}
-	td = &changelist.TufDelegation{
+	td = &changelist.TUFDelegation{
 		NewThreshold: 1,
 		AddKeys:      kl,
 		RemoveKeys:   []string{newKey.ID()},
@@ -392,7 +392,7 @@ func TestApplyTargetsDelegationCreateEdit(t *testing.T) {
 	tdJSON, err = json.Marshal(td)
 	require.NoError(t, err)
 
-	ch = changelist.NewTufChange(
+	ch = changelist.NewTUFChange(
 		changelist.ActionUpdate,
 		"targets/level1",
 		changelist.TypeTargetsDelegation,
@@ -426,7 +426,7 @@ func TestApplyTargetsDelegationEditNonExisting(t *testing.T) {
 
 	// create delegation
 	kl := data.KeyList{newKey}
-	td := &changelist.TufDelegation{
+	td := &changelist.TUFDelegation{
 		NewThreshold: 1,
 		AddKeys:      kl,
 		AddPaths:     []string{"level1"},
@@ -435,7 +435,7 @@ func TestApplyTargetsDelegationEditNonExisting(t *testing.T) {
 	tdJSON, err := json.Marshal(td)
 	require.NoError(t, err)
 
-	ch := changelist.NewTufChange(
+	ch := changelist.NewTUFChange(
 		changelist.ActionUpdate,
 		"targets/level1",
 		changelist.TypeTargetsDelegation,
@@ -457,7 +457,7 @@ func TestApplyTargetsDelegationCreateAlreadyExisting(t *testing.T) {
 
 	// create delegation
 	kl := data.KeyList{newKey}
-	td := &changelist.TufDelegation{
+	td := &changelist.TUFDelegation{
 		NewThreshold: 1,
 		AddKeys:      kl,
 		AddPaths:     []string{"level1"},
@@ -466,7 +466,7 @@ func TestApplyTargetsDelegationCreateAlreadyExisting(t *testing.T) {
 	tdJSON, err := json.Marshal(td)
 	require.NoError(t, err)
 
-	ch := changelist.NewTufChange(
+	ch := changelist.NewTUFChange(
 		changelist.ActionCreate,
 		"targets/level1",
 		changelist.TypeTargetsDelegation,
@@ -484,7 +484,7 @@ func TestApplyTargetsDelegationCreateAlreadyExisting(t *testing.T) {
 
 	// create delegation
 	kl = data.KeyList{extraKey}
-	td = &changelist.TufDelegation{
+	td = &changelist.TUFDelegation{
 		NewThreshold: 1,
 		AddKeys:      kl,
 		AddPaths:     []string{"level1"},
@@ -493,7 +493,7 @@ func TestApplyTargetsDelegationCreateAlreadyExisting(t *testing.T) {
 	tdJSON, err = json.Marshal(td)
 	require.NoError(t, err)
 
-	ch = changelist.NewTufChange(
+	ch = changelist.NewTUFChange(
 		changelist.ActionCreate,
 		"targets/level1",
 		changelist.TypeTargetsDelegation,
@@ -519,7 +519,7 @@ func TestApplyTargetsDelegationAlreadyExistingMergePaths(t *testing.T) {
 
 	// create delegation
 	kl := data.KeyList{newKey}
-	td := &changelist.TufDelegation{
+	td := &changelist.TUFDelegation{
 		NewThreshold: 1,
 		AddKeys:      kl,
 		AddPaths:     []string{"level1"},
@@ -528,7 +528,7 @@ func TestApplyTargetsDelegationAlreadyExistingMergePaths(t *testing.T) {
 	tdJSON, err := json.Marshal(td)
 	require.NoError(t, err)
 
-	ch := changelist.NewTufChange(
+	ch := changelist.NewTUFChange(
 		changelist.ActionCreate,
 		"targets/level1",
 		changelist.TypeTargetsDelegation,
@@ -547,7 +547,7 @@ func TestApplyTargetsDelegationAlreadyExistingMergePaths(t *testing.T) {
 	tdJSON, err = json.Marshal(td)
 	require.NoError(t, err)
 
-	ch = changelist.NewTufChange(
+	ch = changelist.NewTUFChange(
 		changelist.ActionCreate,
 		"targets/level1",
 		changelist.TypeTargetsDelegation,
@@ -575,7 +575,7 @@ func TestApplyTargetsDelegationInvalidRole(t *testing.T) {
 
 	// create delegation
 	kl := data.KeyList{newKey}
-	td := &changelist.TufDelegation{
+	td := &changelist.TUFDelegation{
 		NewThreshold: 1,
 		AddKeys:      kl,
 		AddPaths:     []string{"level1"},
@@ -584,7 +584,7 @@ func TestApplyTargetsDelegationInvalidRole(t *testing.T) {
 	tdJSON, err := json.Marshal(td)
 	require.NoError(t, err)
 
-	ch := changelist.NewTufChange(
+	ch := changelist.NewTUFChange(
 		changelist.ActionCreate,
 		"bad role",
 		changelist.TypeTargetsDelegation,
@@ -605,7 +605,7 @@ func TestApplyTargetsDelegationInvalidJSONContent(t *testing.T) {
 
 	// create delegation
 	kl := data.KeyList{newKey}
-	td := &changelist.TufDelegation{
+	td := &changelist.TUFDelegation{
 		NewThreshold: 1,
 		AddKeys:      kl,
 		AddPaths:     []string{"level1"},
@@ -614,7 +614,7 @@ func TestApplyTargetsDelegationInvalidJSONContent(t *testing.T) {
 	tdJSON, err := json.Marshal(td)
 	require.NoError(t, err)
 
-	ch := changelist.NewTufChange(
+	ch := changelist.NewTUFChange(
 		changelist.ActionCreate,
 		"targets/level1",
 		changelist.TypeTargetsDelegation,
@@ -630,7 +630,7 @@ func TestApplyTargetsDelegationInvalidAction(t *testing.T) {
 	repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	require.NoError(t, err)
 
-	ch := changelist.NewTufChange(
+	ch := changelist.NewTUFChange(
 		"bad action",
 		"targets/level1",
 		changelist.TypeTargetsDelegation,
@@ -646,7 +646,7 @@ func TestApplyTargetsChangeInvalidType(t *testing.T) {
 	repo, _, err := testutils.EmptyRepo("docker.com/notary")
 	require.NoError(t, err)
 
-	ch := changelist.NewTufChange(
+	ch := changelist.NewTUFChange(
 		changelist.ActionCreate,
 		"targets/level1",
 		"badType",
@@ -667,7 +667,7 @@ func TestApplyTargetsDelegationCreate2Deep(t *testing.T) {
 
 	// create delegation
 	kl := data.KeyList{newKey}
-	td := &changelist.TufDelegation{
+	td := &changelist.TUFDelegation{
 		NewThreshold: 1,
 		AddKeys:      kl,
 		AddPaths:     []string{"level1"},
@@ -676,7 +676,7 @@ func TestApplyTargetsDelegationCreate2Deep(t *testing.T) {
 	tdJSON, err := json.Marshal(td)
 	require.NoError(t, err)
 
-	ch := changelist.NewTufChange(
+	ch := changelist.NewTUFChange(
 		changelist.ActionCreate,
 		"targets/level1",
 		changelist.TypeTargetsDelegation,
@@ -704,7 +704,7 @@ func TestApplyTargetsDelegationCreate2Deep(t *testing.T) {
 	// operation
 	repo.InitTargets("targets/level1")
 
-	td = &changelist.TufDelegation{
+	td = &changelist.TUFDelegation{
 		NewThreshold: 1,
 		AddKeys:      kl,
 		AddPaths:     []string{"level1/level2"},
@@ -713,7 +713,7 @@ func TestApplyTargetsDelegationCreate2Deep(t *testing.T) {
 	tdJSON, err = json.Marshal(td)
 	require.NoError(t, err)
 
-	ch = changelist.NewTufChange(
+	ch = changelist.NewTUFChange(
 		changelist.ActionCreate,
 		"targets/level1/level2",
 		changelist.TypeTargetsDelegation,
@@ -753,7 +753,7 @@ func TestApplyTargetsDelegationParentDoesntExist(t *testing.T) {
 
 	// create delegation
 	kl := data.KeyList{newKey}
-	td := &changelist.TufDelegation{
+	td := &changelist.TUFDelegation{
 		NewThreshold: 1,
 		AddKeys:      kl,
 	}
@@ -761,7 +761,7 @@ func TestApplyTargetsDelegationParentDoesntExist(t *testing.T) {
 	tdJSON, err := json.Marshal(td)
 	require.NoError(t, err)
 
-	ch := changelist.NewTufChange(
+	ch := changelist.NewTUFChange(
 		changelist.ActionCreate,
 		"targets/level1/level2",
 		changelist.TypeTargetsDelegation,
@@ -798,7 +798,7 @@ func TestApplyChangelistCreatesDelegation(t *testing.T) {
 	require.NoError(t, err)
 
 	cl := changelist.NewMemChangelist()
-	require.NoError(t, cl.Add(&changelist.TufChange{
+	require.NoError(t, cl.Add(&changelist.TUFChange{
 		Actn:       changelist.ActionCreate,
 		Role:       "targets/level1",
 		ChangeType: "target",
@@ -842,14 +842,14 @@ func TestApplyChangelistTargetsToMultipleRoles(t *testing.T) {
 	require.NoError(t, err)
 
 	cl := changelist.NewMemChangelist()
-	require.NoError(t, cl.Add(&changelist.TufChange{
+	require.NoError(t, cl.Add(&changelist.TUFChange{
 		Actn:       changelist.ActionCreate,
 		Role:       "targets/level1",
 		ChangeType: "target",
 		ChangePath: "latest",
 		Data:       fjson,
 	}))
-	require.NoError(t, cl.Add(&changelist.TufChange{
+	require.NoError(t, cl.Add(&changelist.TUFChange{
 		Actn:       changelist.ActionDelete,
 		Role:       "targets/level2",
 		ChangeType: "target",
@@ -880,7 +880,7 @@ func TestApplyChangelistTargetsFailsNonexistentRole(t *testing.T) {
 	require.NoError(t, err)
 
 	cl := changelist.NewMemChangelist()
-	require.NoError(t, cl.Add(&changelist.TufChange{
+	require.NoError(t, cl.Add(&changelist.TUFChange{
 		Actn:       changelist.ActionCreate,
 		Role:       "targets/level1/level2/level3/level4",
 		ChangeType: "target",
@@ -893,7 +893,7 @@ func TestApplyChangelistTargetsFailsNonexistentRole(t *testing.T) {
 
 	// now try a delete and assert the same error
 	cl = changelist.NewMemChangelist()
-	require.NoError(t, cl.Add(&changelist.TufChange{
+	require.NoError(t, cl.Add(&changelist.TUFChange{
 		Actn:       changelist.ActionDelete,
 		Role:       "targets/level1/level2/level3/level4",
 		ChangeType: "target",
@@ -921,7 +921,7 @@ func TestChangeTargetMetaFailsInvalidRole(t *testing.T) {
 	fjson, err := json.Marshal(f)
 	require.NoError(t, err)
 
-	err = changeTargetMeta(repo, &changelist.TufChange{
+	err = changeTargetMeta(repo, &changelist.TUFChange{
 		Actn:       changelist.ActionCreate,
 		Role:       "ruhroh",
 		ChangeType: "target",
@@ -955,7 +955,7 @@ func TestChangeTargetMetaFailsIfPrefixError(t *testing.T) {
 	fjson, err := json.Marshal(f)
 	require.NoError(t, err)
 
-	err = changeTargetMeta(repo, &changelist.TufChange{
+	err = changeTargetMeta(repo, &changelist.TUFChange{
 		Actn:       changelist.ActionCreate,
 		Role:       "targets/level1",
 		ChangeType: "target",

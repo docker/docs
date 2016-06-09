@@ -2414,7 +2414,7 @@ func TestPublishRemoveDelegationKeyFromDelegationRole(t *testing.T) {
 	// note there is no removekeyfromdelegation yet, so here's a hack to do so
 	newKey, err := ownerRepo.CryptoService.Create("targets/a", ownerRepo.gun, data.ECDSAKey)
 	require.NoError(t, err)
-	tdJSON, err := json.Marshal(&changelist.TufDelegation{
+	tdJSON, err := json.Marshal(&changelist.TUFDelegation{
 		NewThreshold: 1,
 		AddKeys:      data.KeyList([]data.PublicKey{newKey}),
 		RemoveKeys:   []string{aKey.ID()},
@@ -2422,7 +2422,7 @@ func TestPublishRemoveDelegationKeyFromDelegationRole(t *testing.T) {
 	require.NoError(t, err)
 
 	cl, err := changelist.NewFileChangelist(filepath.Join(ownerRepo.tufRepoPath, "changelist"))
-	require.NoError(t, cl.Add(changelist.NewTufChange(
+	require.NoError(t, cl.Add(changelist.NewTUFChange(
 		changelist.ActionUpdate,
 		"targets/a",
 		changelist.TypeTargetsDelegation,
@@ -3048,7 +3048,7 @@ func TestFullAddDelegationChangefileApplicable(t *testing.T) {
 	delegationName := "targets/a"
 
 	// manually create the changelist object to load multiple keys
-	tdJSON, err := json.Marshal(&changelist.TufDelegation{
+	tdJSON, err := json.Marshal(&changelist.TUFDelegation{
 		NewThreshold: notary.MinThreshold,
 		AddKeys:      data.KeyList([]data.PublicKey{rootPubKey, key2}),
 		AddPaths:     []string{"abc", "123", "xyz"},
@@ -3098,7 +3098,7 @@ func TestFullRemoveDelegationChangefileApplicable(t *testing.T) {
 	require.Len(t, targetRole.Signed.Delegations.Keys, 2)
 
 	// manually create the changelist object to load multiple keys
-	tdJSON, err := json.Marshal(&changelist.TufDelegation{
+	tdJSON, err := json.Marshal(&changelist.TUFDelegation{
 		RemoveKeys:  []string{key2CanonicalID},
 		RemovePaths: []string{"abc", "123"},
 	})

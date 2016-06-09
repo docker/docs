@@ -145,7 +145,7 @@ func RootHandler(ac auth.AccessController, ctx context.Context, trust signed.Cry
 	r.Methods("GET").Path("/v2/").Handler(authWrapper(handlers.MainHandler))
 
 	r.Methods("POST").Path("/v2/{imageName:.*}/_trust/tuf/").Handler(createHandler(_serverEndpoint{
-		OperationName:       "UpdateTuf",
+		OperationName:       "UpdateTUF",
 		ErrorIfGUNInvalid:   invalidGUNErr,
 		ServerHandler:       handlers.AtomicUpdateHandler,
 		PermissionsRequired: []string{"push", "pull"},
@@ -174,7 +174,7 @@ func RootHandler(ac auth.AccessController, ctx context.Context, trust signed.Cry
 		PermissionsRequired: []string{"push", "pull"},
 	}))
 	r.Methods("DELETE").Path("/v2/{imageName:.*}/_trust/tuf/").Handler(createHandler(_serverEndpoint{
-		OperationName:       "DeleteTuf",
+		OperationName:       "DeleteTUF",
 		ErrorIfGUNInvalid:   notFoundError,
 		ServerHandler:       handlers.DeleteHandler,
 		PermissionsRequired: []string{"push", "pull"},
