@@ -27,6 +27,7 @@ var (
 		Config: map[string]string{
 			"write_acks": "majority",
 		},
+		JSONUnmarshaller: rdbTUFFileFromJSON,
 	}
 
 	// PubKeysRethinkTable is the table definition of notary server's public key information for TUF roles
@@ -36,5 +37,6 @@ var (
 		SecondaryIndexes: map[string][]string{
 			rdbGunRoleIdx: {"gun", "role"},
 		},
+		JSONUnmarshaller: rdbKeyFromJSON,
 	}
 )
