@@ -31,6 +31,9 @@ type Table struct {
 	// on the list of fields in the corrensponding slice value.
 	SecondaryIndexes map[string][]string
 	Config           map[string]string
+	//JSONUnmarshaller takes a byte slice representing JSON data and knows how
+	//to unmarshal them into a model representing this table
+	JSONUnmarshaller func([]byte) (interface{}, error)
 }
 
 func (t Table) term(dbName string) gorethink.Term {
