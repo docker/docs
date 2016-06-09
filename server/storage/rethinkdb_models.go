@@ -12,7 +12,7 @@ const (
 )
 
 var (
-	// TufFilesRethinkTable is the table definition of notary server's TUF metadata files
+	// TUFFilesRethinkTable is the table definition of notary server's TUF metadata files
 	TUFFilesRethinkTable = rethinkdb.Table{
 		Name:       RDBTUFFile{}.TableName(),
 		PrimaryKey: "gun_role_version",
