@@ -50,7 +50,7 @@ func (r *NotaryRepository) AddDelegationRoleAndKeys(name string, delegationKeys 
 		name, notary.MinThreshold, len(delegationKeys))
 
 	// Defaulting to threshold of 1, since we don't allow for larger thresholds at the moment.
-	tdJSON, err := json.Marshal(&changelist.TufDelegation{
+	tdJSON, err := json.Marshal(&changelist.TUFDelegation{
 		NewThreshold: notary.MinThreshold,
 		AddKeys:      data.KeyList(delegationKeys),
 	})
@@ -78,7 +78,7 @@ func (r *NotaryRepository) AddDelegationPaths(name string, paths []string) error
 
 	logrus.Debugf(`Adding %s paths to delegation %s\n`, paths, name)
 
-	tdJSON, err := json.Marshal(&changelist.TufDelegation{
+	tdJSON, err := json.Marshal(&changelist.TUFDelegation{
 		AddPaths: paths,
 	})
 	if err != nil {
@@ -141,7 +141,7 @@ func (r *NotaryRepository) RemoveDelegationPaths(name string, paths []string) er
 
 	logrus.Debugf(`Removing %s paths from delegation "%s"\n`, paths, name)
 
-	tdJSON, err := json.Marshal(&changelist.TufDelegation{
+	tdJSON, err := json.Marshal(&changelist.TUFDelegation{
 		RemovePaths: paths,
 	})
 	if err != nil {
@@ -169,7 +169,7 @@ func (r *NotaryRepository) RemoveDelegationKeys(name string, keyIDs []string) er
 
 	logrus.Debugf(`Removing %s keys from delegation "%s"\n`, keyIDs, name)
 
-	tdJSON, err := json.Marshal(&changelist.TufDelegation{
+	tdJSON, err := json.Marshal(&changelist.TUFDelegation{
 		RemoveKeys: keyIDs,
 	})
 	if err != nil {
@@ -195,7 +195,7 @@ func (r *NotaryRepository) ClearDelegationPaths(name string) error {
 
 	logrus.Debugf(`Removing all paths from delegation "%s"\n`, name)
 
-	tdJSON, err := json.Marshal(&changelist.TufDelegation{
+	tdJSON, err := json.Marshal(&changelist.TUFDelegation{
 		ClearAllPaths: true,
 	})
 	if err != nil {
@@ -206,8 +206,8 @@ func (r *NotaryRepository) ClearDelegationPaths(name string) error {
 	return addChange(cl, template, name)
 }
 
-func newUpdateDelegationChange(name string, content []byte) *changelist.TufChange {
-	return changelist.NewTufChange(
+func newUpdateDelegationChange(name string, content []byte) *changelist.TUFChange {
+	return changelist.NewTUFChange(
 		changelist.ActionUpdate,
 		name,
 		changelist.TypeTargetsDelegation,
@@ -216,8 +216,8 @@ func newUpdateDelegationChange(name string, content []byte) *changelist.TufChang
 	)
 }
 
-func newCreateDelegationChange(name string, content []byte) *changelist.TufChange {
-	return changelist.NewTufChange(
+func newCreateDelegationChange(name string, content []byte) *changelist.TUFChange {
+	return changelist.NewTUFChange(
 		changelist.ActionCreate,
 		name,
 		changelist.TypeTargetsDelegation,
@@ -226,8 +226,8 @@ func newCreateDelegationChange(name string, content []byte) *changelist.TufChang
 	)
 }
 
-func newDeleteDelegationChange(name string, content []byte) *changelist.TufChange {
-	return changelist.NewTufChange(
+func newDeleteDelegationChange(name string, content []byte) *changelist.TUFChange {
+	return changelist.NewTUFChange(
 		changelist.ActionDelete,
 		name,
 		changelist.TypeTargetsDelegation,
