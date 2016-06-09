@@ -46,13 +46,16 @@ func AtomicUpdateHandler(ctx context.Context, w http.ResponseWriter, r *http.Req
 func atomicUpdateHandler(ctx context.Context, w http.ResponseWriter, r *http.Request, vars map[string]string) error {
 	gun := vars["imageName"]
 	s := ctx.Value("metaStore")
+	logger := ctxu.GetLoggerWithField(ctx, gun, "gun")
 	store, ok := s.(storage.MetaStore)
 	if !ok {
+		logger.Error("500 POST unable to retrieve storage")
 		return errors.ErrNoStorage.WithDetail(nil)
 	}
 	cryptoServiceVal := ctx.Value("cryptoService")
 	cryptoService, ok := cryptoServiceVal.(signed.CryptoService)
 	if !ok {
+		logger.Error("500 POST unable to retrieve signing service")
 		return errors.ErrNoCryptoService.WithDetail(nil)
 	}
 
@@ -102,6 +105,7 @@ func atomicUpdateHandler(ctx context.Context, w http.ResponseWriter, r *http.Req
 			return errors.ErrOldVersion.WithDetail(err)
 		}
 		// More generic storage update error, possibly due to attempted rollback
+		logger.Errorf("500 POST error applying update request: %v", err)
 		return errors.ErrUpdating.WithDetail(nil)
 	}
 	return nil
