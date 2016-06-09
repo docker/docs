@@ -425,7 +425,6 @@ func TestReloadConfig(t *testing.T) {
 
 	v := viper.New()
 	utils.SetupViper(v, "envPrefix")
-	//v.SetConfigType("json")
 	err = utils.ParseViper(v, f.Name())
 	require.NoError(t, err)
 

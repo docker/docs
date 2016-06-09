@@ -363,9 +363,9 @@ Example:
 
 ## Hot configuration reload
 We don't support to hot reload everything at present. What we support for now is:
-- increase logging level by signal `SIGUSR1`
-- decrease logging level by signal `SIGUSR2`
-- hot reload logging level from the config file by signal `SIGHUP`
+- increase logging level by signaling `SIGUSR1`
+- decrease logging level by signaling `SIGUSR2`
+- hot reload logging level from the config file by signaling `SIGHUP`
 
 Example:
 

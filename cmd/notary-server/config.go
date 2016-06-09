@@ -301,19 +301,19 @@ func reloadConfig(sig os.Signal, configFile string, oldConfig *viper.Viper, envP
 		switch sig {
 		case syscall.SIGUSR1:
 			if err := utils.AdjustLogLevel(true); err != nil {
-				fmt.Println("Increase log level failed, will use the old one, error: ", err)
+				fmt.Printf("Attempt to increase log level failed, will remain at %s level, error: %s", logrus.GetLevel(), err)
 				return
 			}
 		case syscall.SIGUSR2:
 			if err := utils.AdjustLogLevel(false); err != nil {
-				fmt.Println("Decrease log level failed, will use the old one, error: ", err)
+				fmt.Printf("Attempt to decrease log level failed, will remain at %s level, error: %s", logrus.GetLevel(), err)
 				return
 			}
 		case syscall.SIGHUP:
 			// We use SIGHUP to allow people to reset the logging level as their wish.
 			lvl, err := utils.ParseLogLevel(config, logrus.ErrorLevel)
 			if err != nil {
-				fmt.Println("Parse log level failed, will use the old one, error: ", err)
+				fmt.Printf("Attempt to reset log level failed, will remain at %s level, error: %s", logrus.GetLevel(), err)
 				return
 			}
 			logrus.SetLevel(lvl)
