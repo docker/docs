@@ -463,13 +463,13 @@ func (r *NotaryRepository) GetTargetByName(name string, roles ...string) (*Targe
 }
 
 // GetAllTargetMetadataByName searches the entire delegation role tree to find the specified target by name for all
-// roles, and returns a list of TargetWithRole structs for each time it finds the specified target.
-func (r *NotaryRepository) GetAllTargetMetadataByName(name string) ([]*TargetWithRole, error) {
+// roles, and returns a map of role strings to Target structs for each time it finds the specified target.
+func (r *NotaryRepository) GetAllTargetMetadataByName(name string) (map[string]Target, error) {
 	if err := r.Update(false); err != nil {
 		return nil, err
 	}
 
-	var targetInfo []*TargetWithRole
+	targetInfoMap := make(map[string]Target)
 
 	// Define a visitor function to find the specified target
 	getAllTargetInfoByNameVisitorFunc := func(tgt *data.SignedTargets, validRole data.DelegationRole) interface{} {
@@ -479,7 +479,7 @@ func (r *NotaryRepository) GetAllTargetMetadataByName(name string) ([]*TargetWit
 		// We found the target and validated path compatibility in our walk,
 		// so add it to our list
 		if resultMeta, foundTarget := tgt.Signed.Targets[name]; foundTarget {
-			targetInfo = append(targetInfo, &TargetWithRole{Target: Target{Name: name, Hashes: resultMeta.Hashes, Length: resultMeta.Length}, Role: validRole.Name})
+			targetInfoMap[validRole.Name] = Target{Name: name, Hashes: resultMeta.Hashes, Length: resultMeta.Length}
 		}
 		// continue walking to all child roles
 		return nil
@@ -489,10 +489,10 @@ func (r *NotaryRepository) GetAllTargetMetadataByName(name string) ([]*TargetWit
 	if err := r.tufRepo.WalkTargets(name, "", getAllTargetInfoByNameVisitorFunc); err != nil {
 		return nil, err
 	}
-	if len(targetInfo) == 0 {
+	if len(targetInfoMap) == 0 {
 		return nil, fmt.Errorf("No trust data for %s", name)
 	}
-	return targetInfo, nil
+	return targetInfoMap, nil
 }
 
 // GetChangelist returns the list of the repository's unpublished changes
