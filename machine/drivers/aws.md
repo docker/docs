@@ -20,7 +20,7 @@ to authenticate with AWS:
 1.  EC2 Instance Role
 
 For more information, see the [AWS SDK for Go Developer's Guide](http://docs.aws.amazon.com/sdk-for-go/v1/developerguide/configuring-sdk.html).
- 
+
 ### Command line flags
 
 The first way to specify credentials is with the flags `--amazonec2-access-key` and `--amazonec2-secret-key` on the command line:
@@ -59,7 +59,14 @@ assigned to the instance if they are configured.
 
 -   `--amazonec2-access-key`: Your access key ID for the Amazon Web Services API.
 -   `--amazonec2-ami`: The AMI ID of the instance to use.
--   `--amazonec2-block-duration-minutes`: AWS spot instance duration in minutes (60, 120, 180, 240, 300, or 360).
+-   `--amazonec2-region`: The region to use when launching the instance.
+-   `--amazonec2-vpc-id`: Your VPC ID to launch the instance in.
+-   `--amazonec2-zone`: The AWS zone to launch the instance in (i.e. one of a,b,c,d,e).
+-   `--amazonec2-subnet-id`: AWS VPC subnet id.
+-   `--amazonec2-security-group`: AWS VPC security group name.
+-   `--amazonec2-tags`: AWS extra tag key-value pairs (comma-separated, e.g. key1,value1,key2,value2).
+-   `--amazonec2-instance-type`: The instance type to run.
+-   `--amazonec2-keypair-name`: AWS keypair to use; requires --amazonec2-ssh-keypath
 -   `--amazonec2-device-name`: The root device name of the instance.
 -   `--amazonec2-endpoint`: Optional endpoint URL (hostname only or fully qualified URI)
 -   `--amazonec2-iam-instance-profile`: The AWS IAM role name to be used as the instance profile.
@@ -109,6 +116,7 @@ assigned to the instance if they are configured.
 | `--amazonec2-security-group`             | `AWS_SECURITY_GROUP`    | `docker-machine` |
 | `--amazonec2-tags`                       | `AWS_TAGS`              | -                |
 | `--amazonec2-instance-type`              | `AWS_INSTANCE_TYPE`     | `t2.micro`       |
+| `--amazonec2-keypair-name`               | `AWS_KEYPAIR_NAME`      | -                |
 | `--amazonec2-device-name`                | `AWS_DEVICE_NAME`       | `/dev/sda1`      |
 | `--amazonec2-root-size`                  | `AWS_ROOT_SIZE`         | `16`             |
 | `--amazonec2-volume-type`                | `AWS_VOLUME_TYPE`       | `gp2`            |
