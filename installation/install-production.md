@@ -27,8 +27,8 @@ infrastructure has all the [requirements UCP needs to run](system-requirements.m
 UCP requires you to install Docker CS Engine 1.10 or above on all nodes of
 your UCP cluster.
 
-For each node that you want to add to the UCP cluster, install the CS Docker
-Engine.
+[Install CS Docker Engine](https://docs.docker.com/docker-trusted-registry/cs-engine/install/)
+on each host that you want to be part of the UCP cluster.
 
 ## Step 3: Customize named volumes
 
