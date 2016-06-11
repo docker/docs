@@ -45,7 +45,8 @@ To install DTR:
 
     Having a UCP client bundle allows you to run Docker commands on a UCP
     cluster.
-    Download a UCP client bundle and set up your CLI client to use it.
+    [Download a UCP client bundle](https://docs.docker.com/ucp/access-ucp/cli-based-access/)
+    and set up your CLI client to use it.
 
 2. Run the following command to install DTR.
 
