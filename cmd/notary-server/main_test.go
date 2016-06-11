@@ -416,8 +416,8 @@ func TestSampleConfig(t *testing.T) {
 	require.Equal(t, registerCalled, 2)
 }
 
-func TestReloadConfig(t *testing.T) {
-	f, err := os.Create("/tmp/testReloadConfig.json")
+func TestSignalHandle(t *testing.T) {
+	f, err := os.Create("/tmp/testSignalHandle.json")
 	defer os.Remove(f.Name())
 	require.NoError(t, err)
 
@@ -429,19 +429,14 @@ func TestReloadConfig(t *testing.T) {
 	require.NoError(t, err)
 
 	// Info + SIGUSR1 -> Debug
-	reloadConfig(syscall.SIGUSR1, f.Name(), v, "envPrefix")
+	signalHandle(syscall.SIGUSR1)
 	require.Equal(t, logrus.GetLevel(), logrus.DebugLevel)
 
 	// Debug + SIGUSR1 -> Debug
-	reloadConfig(syscall.SIGUSR1, f.Name(), v, "envPrefix")
+	signalHandle(syscall.SIGUSR1)
 	require.Equal(t, logrus.GetLevel(), logrus.DebugLevel)
 
 	// Debug + SIGUSR2-> Info
-	reloadConfig(syscall.SIGUSR2, f.Name(), v, "envPrefix")
+	signalHandle(syscall.SIGUSR2)
 	require.Equal(t, logrus.GetLevel(), logrus.InfoLevel)
-
-	// SIGHUP + x -> x
-	f.WriteAt([]byte(`{"logging": {"level": "error"}}`), 0)
-	reloadConfig(syscall.SIGHUP, f.Name(), v, "envPrefix")
-	require.Equal(t, logrus.GetLevel(), logrus.ErrorLevel)
 }

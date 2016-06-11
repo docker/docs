@@ -12,7 +12,6 @@ import (
 	"github.com/docker/distribution/health"
 	"github.com/docker/notary/server"
 	"github.com/docker/notary/version"
-	"github.com/spf13/viper"
 )
 
 // DebugAddress is the debug server address to listen on
@@ -58,11 +57,7 @@ func main() {
 		logrus.Fatal(err.Error())
 	}
 
-	config, ok := ctx.Value("config").(*viper.Viper)
-	if !ok {
-		logrus.Fatalf("parse config failed")
-	}
-	setupConfigReloadTrap(config, configFile, envPrefix)
+	setupSignalTrap()
 
 	if doBootstrap {
 		err = bootstrap(ctx)
