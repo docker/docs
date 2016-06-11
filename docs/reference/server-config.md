@@ -19,7 +19,7 @@ A configuration file is required by Notary server, and the path to the
 configuration file must be specified using the `-config` option on the command
 line.
 
-Notary server also allows you to [hot-reload](server-config.md#hot-configuration-reload) the configuration without having to restart.
+Notary server also allows you to [increase/decrease](server-config.md#hot-logging-level-reload) the logging level without having to restart.
 
 Here is a full server configuration file example; please click on the top level JSON keys to
 learn more about the configuration section corresponding to that key:
@@ -361,11 +361,10 @@ Example:
 	</tr>
 </table>
 
-## Hot configuration reload
-We don't support to hot reload everything at present. What we support for now is:
+## Hot logging level reload
+We don't support to completely reload the whole configuration yet at present. What we support for now is:
 - increase logging level by signaling `SIGUSR1`
 - decrease logging level by signaling `SIGUSR2`
-- hot reload logging level from the config file by signaling `SIGHUP`
 
 Example:
 

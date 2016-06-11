@@ -283,44 +283,30 @@ func parseServerConfig(configFilePath string, hRegister healthRegister) (context
 	}, nil
 }
 
-func setupConfigReloadTrap(oldConfig *viper.Viper, configFile string, envPrefix string) {
+func setupSignalTrap() {
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, notary.NotarySupportedSignals...)
 	go func() {
 		for {
-			reloadConfig(<-c, configFile, oldConfig, envPrefix)
+			signalHandle(<-c)
 		}
 	}()
 }
 
-// reloadConfig was designed to do all the dirty work that needed to reload
-// the config for notary-server and make the entrance-ReloadConfiguration()
-// for hot configuration reload do some generic things.
-func reloadConfig(sig os.Signal, configFile string, oldConfig *viper.Viper, envPrefix string) {
-	reload := func(config *viper.Viper) {
-		switch sig {
-		case syscall.SIGUSR1:
-			if err := utils.AdjustLogLevel(true); err != nil {
-				fmt.Printf("Attempt to increase log level failed, will remain at %s level, error: %s", logrus.GetLevel(), err)
-				return
-			}
-		case syscall.SIGUSR2:
-			if err := utils.AdjustLogLevel(false); err != nil {
-				fmt.Printf("Attempt to decrease log level failed, will remain at %s level, error: %s", logrus.GetLevel(), err)
-				return
-			}
-		case syscall.SIGHUP:
-			// We use SIGHUP to allow people to reset the logging level as their wish.
-			lvl, err := utils.ParseLogLevel(config, logrus.ErrorLevel)
-			if err != nil {
-				fmt.Printf("Attempt to reset log level failed, will remain at %s level, error: %s", logrus.GetLevel(), err)
-				return
-			}
-			logrus.SetLevel(lvl)
+// signalHandle will increase/descrease the logging level via the signal we get.
+func signalHandle(sig os.Signal) {
+	switch sig {
+	case syscall.SIGUSR1:
+		if err := utils.AdjustLogLevel(true); err != nil {
+			fmt.Printf("Attempt to increase log level failed, will remain at %s level, error: %s", logrus.GetLevel(), err)
+			return
 		}
-
-		fmt.Println("Successfully setting log level to ", logrus.GetLevel())
+	case syscall.SIGUSR2:
+		if err := utils.AdjustLogLevel(false); err != nil {
+			fmt.Printf("Attempt to decrease log level failed, will remain at %s level, error: %s", logrus.GetLevel(), err)
+			return
+		}
 	}
 
-	utils.ReloadConfiguration(oldConfig, configFile, envPrefix, reload)
+	fmt.Println("Successfully setting log level to ", logrus.GetLevel())
 }
