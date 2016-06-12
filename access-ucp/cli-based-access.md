@@ -16,7 +16,7 @@ Docker UCP secures your cluster with role-based access control, so that only
 authorized users can perform changes to the cluster.
 
 For this reason, when running docker commands on a UCP node, you need to
-authenticate your request using client certificates. When trying yo run docker
+authenticate your request using client certificates. When trying to run docker
 commands without a valid certificate, you get an authentication error:
 
 ```bash
