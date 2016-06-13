@@ -41,7 +41,7 @@ insight you can provide regarding issues.
 ## Understand Notary naming
 
 Notary uses Globally Unique Names (GUNs) to identify trust collections. To
-enable Notary to run in a multi-tenant fashion, you must use use this format
+enable Notary to run in a multi-tenant fashion, you must use this format
 when interacting with Docker Hub through the Notary client. When specifying
 Docker image names for the Notary client, the GUN format is:
 
