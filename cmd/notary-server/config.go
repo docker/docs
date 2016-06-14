@@ -228,7 +228,6 @@ func parseServerConfig(configFilePath string, hRegister healthRegister) (context
 	}
 
 	ctx := context.Background()
-	ctx = context.WithValue(ctx, "config", config)
 
 	// default is error level
 	lvl, err := utils.ParseLogLevel(config, logrus.ErrorLevel)
@@ -293,7 +292,7 @@ func setupSignalTrap() {
 	}()
 }
 
-// signalHandle will increase/descrease the logging level via the signal we get.
+// signalHandle will increase/decrease the logging level via the signal we get.
 func signalHandle(sig os.Signal) {
 	switch sig {
 	case syscall.SIGUSR1:
