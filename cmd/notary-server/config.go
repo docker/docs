@@ -297,12 +297,12 @@ func signalHandle(sig os.Signal) {
 	switch sig {
 	case syscall.SIGUSR1:
 		if err := utils.AdjustLogLevel(true); err != nil {
-			fmt.Printf("Attempt to increase log level failed, will remain at %s level, error: %s", logrus.GetLevel(), err)
+			fmt.Printf("Attempt to increase log level failed, will remain at %s level, error: %s\n", logrus.GetLevel(), err)
 			return
 		}
 	case syscall.SIGUSR2:
 		if err := utils.AdjustLogLevel(false); err != nil {
-			fmt.Printf("Attempt to decrease log level failed, will remain at %s level, error: %s", logrus.GetLevel(), err)
+			fmt.Printf("Attempt to decrease log level failed, will remain at %s level, error: %s\n", logrus.GetLevel(), err)
 			return
 		}
 	}
