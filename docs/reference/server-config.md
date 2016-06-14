@@ -362,7 +362,7 @@ Example:
 </table>
 
 ## Hot logging level reload
-We don't support to completely reload the whole configuration yet at present. What we support for now is:
+We don't support completely reloading notary configuration files yet at present. What we support for now is:
 - increase logging level by signaling `SIGUSR1`
 - decrease logging level by signaling `SIGUSR2`
 
@@ -376,12 +376,6 @@ $ kill -s SIGUSR1 `ps aux | grep "notary-server -config" | grep -v "grep" | awk 
 To decrease logging level
 ```
 $ kill -s SIGUSR2 `ps aux | grep "notary-server -config" | grep -v "grep" | awk '{print $2}'`
-```
-
-To reset logging level
-```
-$ #edit the config file and then
-$ kill -s SIGHUP `ps aux | grep "notary-server -config" | grep -v "grep" | awk '{print $2}'`
 ```
 
 ## Related information
