@@ -22,7 +22,7 @@ development environments.
 Pushing and pulling images with Trusted Registry works similarly like any other
 Docker registry. You use the `docker pull` command to retrieve images and the
 `docker push` command to add an image. To learn more about Docker images, see
-[User Guide: Working with Docker Images](/engine/userguide/containers/dockerimages.md). For a step-by-step
+[User Guide: Working with Docker Images](/engine/tutorials/dockerimages.md). For a step-by-step
 example of the entire process, see the
 [Quickstart guide](../quick-start.md).
 
