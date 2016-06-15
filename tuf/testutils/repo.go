@@ -12,8 +12,6 @@ import (
 	"github.com/docker/notary/passphrase"
 	"github.com/docker/notary/trustmanager"
 	"github.com/docker/notary/tuf/data"
-	"github.com/docker/notary/tuf/utils"
-	fuzz "github.com/google/gofuzz"
 	"github.com/stretchr/testify/require"
 
 	tuf "github.com/docker/notary/tuf"
@@ -140,23 +138,6 @@ func CopyRepoMetadata(from map[string][]byte) map[string][]byte {
 		copied[roleName] = metaBytes
 	}
 	return copied
-}
-
-// AddTarget generates a fake target and adds it to a repo.
-func AddTarget(role string, r *tuf.Repo) (name string, meta data.FileMeta, content []byte, err error) {
-	randness := fuzz.Continue{}
-	content = RandomByteSlice(1024)
-	name = randness.RandString()
-	t := data.FileMeta{
-		Length: int64(len(content)),
-		Hashes: data.Hashes{
-			"sha256": utils.DoHash("sha256", content),
-			"sha512": utils.DoHash("sha512", content),
-		},
-	}
-	files := data.Files{name: t}
-	_, err = r.AddTargets(role, files)
-	return
 }
 
 // RandomByteSlice generates some random data to be used for testing only
