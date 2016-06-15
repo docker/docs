@@ -32,7 +32,7 @@ RUN mkdir /bundle
 
 WORKDIR /bundle
 
-RUN curl -fsSL -o dockerbins.zip "https://get.docker.com/builds/Windows/x86_64/docker-${DOCKER_VERSION}.zip" && \
+RUN curl -fsSL -o dockerbins.zip "https://test.docker.com/builds/Windows/x86_64/docker-${DOCKER_VERSION}.zip" && \
     unzip dockerbins.zip && \
     mv docker/docker.exe . && \
     rm -r docker/ dockerbins.zip
