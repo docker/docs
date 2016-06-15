@@ -5,7 +5,7 @@ description = "Documentation that provides an overview of Toolbox"
 keywords = ["docker, documentation, about, technology, kitematic, gui, toolbox"]
 [menu.main]
 parent="workw_toolbox"
-weight=1
+weight=-10
 +++
 <![end-metadata]-->
 
@@ -33,13 +33,20 @@ Toolbox includes these Docker tools:
 
 ## Ready to get started?
 
-<a href="https://www.docker.com/products/docker-toolbox" target="_blank">Download Docker Toolbox</a> from the product page.
+Go to the <a href="https://www.docker.com/products/docker-toolbox" target="_blank">Docker Toolbox</a> product page and download Toolbox for Mac or Windows.
+
+Choose the install instructions for your platform, and follow the steps:
+
+* [Install Docker Toolbox on Mac OS X](toolbox_install_mac.md)
+
+* [Install Docker Toolbox for Windows](toolbox_install_windows.md)
+
 
 ## Next Steps
 
-* <a href="https://docs.docker.com/mac/">Get Started with Docker for Mac OS X</a>
+* Try out the examples in the [Getting Started](/engine/getstarted/index.md) tutorial.
 
-* <a href="https://docs.docker.com/windows/">Get Started with Docker for Windows</a>
+* Dig in deeper with [more tutorials and examples](/engine/tutorials/index.md) on building images, runnning containers, networking, managing data, and storing images on Docker Hub.
 
 * <a href="https://docs.docker.com/kitematic/userguide/">Learn about Kitematic</a>
 
