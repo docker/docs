@@ -612,7 +612,7 @@ func (r *NotaryRepository) publish(cl changelist.Changelist) error {
 	// check if our root file is nearing expiry or dirty. Resign if it is.  If
 	// root is not dirty but we are publishing for the first time, then just
 	// publish the existing root we have.
-	if nearExpiry(r.tufRepo.Root) || r.tufRepo.Root.Dirty {
+	if nearExpiry(r.tufRepo.Root.Signed.SignedCommon) || r.tufRepo.Root.Dirty {
 		rootJSON, err := serializeCanonicalRole(r.tufRepo, data.CanonicalRootRole)
 		if err != nil {
 			return err
@@ -781,7 +781,10 @@ func (r *NotaryRepository) Update(forWrite bool) error {
 		}
 		return err
 	}
+	// we can be assured if we are at this stage that the repo we built is good
+	// no need to test the following function call for an error as it will always be fine should the repo be good- it is!
 	r.tufRepo = repo
+	warnRolesNearExpiry(repo)
 	return nil
 }
 
