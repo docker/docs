@@ -5,7 +5,6 @@ description = "Documentation that provides an overview of Docker Toolbox and ins
 keywords = ["docker, documentation, about, technology, docker toolbox, gui"]
 [menu.main]
 identifier="workw_toolbox"
-weight=2
 +++
 <![end-metadata]-->
 
