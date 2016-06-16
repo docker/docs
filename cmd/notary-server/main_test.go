@@ -8,9 +8,11 @@ import (
 	"os"
 	"reflect"
 	"strings"
+	"syscall"
 	"testing"
 	"time"
 
+	"github.com/Sirupsen/logrus"
 	"github.com/docker/distribution/health"
 	"github.com/docker/notary"
 	"github.com/docker/notary/server/storage"
@@ -412,4 +414,29 @@ func TestSampleConfig(t *testing.T) {
 
 	// once for the DB, once for the trust service
 	require.Equal(t, registerCalled, 2)
+}
+
+func TestSignalHandle(t *testing.T) {
+	f, err := os.Create("/tmp/testSignalHandle.json")
+	defer os.Remove(f.Name())
+	require.NoError(t, err)
+
+	f.WriteString(`{"logging": {"level": "info"}}`)
+
+	v := viper.New()
+	utils.SetupViper(v, "envPrefix")
+	err = utils.ParseViper(v, f.Name())
+	require.NoError(t, err)
+
+	// Info + SIGUSR1 -> Debug
+	signalHandle(syscall.SIGUSR1)
+	require.Equal(t, logrus.GetLevel(), logrus.DebugLevel)
+
+	// Debug + SIGUSR1 -> Debug
+	signalHandle(syscall.SIGUSR1)
+	require.Equal(t, logrus.GetLevel(), logrus.DebugLevel)
+
+	// Debug + SIGUSR2-> Info
+	signalHandle(syscall.SIGUSR2)
+	require.Equal(t, logrus.GetLevel(), logrus.InfoLevel)
 }

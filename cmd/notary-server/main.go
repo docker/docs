@@ -57,6 +57,8 @@ func main() {
 		logrus.Fatal(err.Error())
 	}
 
+	setupSignalTrap()
+
 	if doBootstrap {
 		err = bootstrap(ctx)
 	} else {

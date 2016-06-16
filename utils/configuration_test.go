@@ -485,3 +485,74 @@ func TestParseViperWithValidFile(t *testing.T) {
 
 	require.Equal(t, "debug", v.GetString("logging.level"))
 }
+
+func TestAdjustLogLevel(t *testing.T) {
+
+	// To indicate increment or decrement the logging level
+	optIncrement := true
+	optDecrement := false
+
+	// Debug is the highest level for now, so we expected a error here
+	logrus.SetLevel(logrus.DebugLevel)
+	err := AdjustLogLevel(optIncrement)
+	require.Error(t, err)
+	// Debug -> Info
+	logrus.SetLevel(logrus.DebugLevel)
+	err = AdjustLogLevel(optDecrement)
+	require.NoError(t, err)
+	require.Equal(t, logrus.InfoLevel, logrus.GetLevel())
+
+	// Info -> Debug
+	logrus.SetLevel(logrus.InfoLevel)
+	err = AdjustLogLevel(optIncrement)
+	require.NoError(t, err)
+	require.Equal(t, logrus.DebugLevel, logrus.GetLevel())
+	// Info -> Warn
+	logrus.SetLevel(logrus.InfoLevel)
+	err = AdjustLogLevel(optDecrement)
+	require.NoError(t, err)
+	require.Equal(t, logrus.WarnLevel, logrus.GetLevel())
+
+	// Warn -> Info
+	logrus.SetLevel(logrus.WarnLevel)
+	err = AdjustLogLevel(optIncrement)
+	require.NoError(t, err)
+	require.Equal(t, logrus.InfoLevel, logrus.GetLevel())
+	// Warn -> Error
+	logrus.SetLevel(logrus.WarnLevel)
+	err = AdjustLogLevel(optDecrement)
+	require.NoError(t, err)
+	require.Equal(t, logrus.ErrorLevel, logrus.GetLevel())
+
+	// Error -> Warn
+	logrus.SetLevel(logrus.ErrorLevel)
+	err = AdjustLogLevel(optIncrement)
+	require.NoError(t, err)
+	require.Equal(t, logrus.WarnLevel, logrus.GetLevel())
+	// Error -> Fatal
+	logrus.SetLevel(logrus.ErrorLevel)
+	err = AdjustLogLevel(optDecrement)
+	require.NoError(t, err)
+	require.Equal(t, logrus.FatalLevel, logrus.GetLevel())
+
+	// Fatal -> Error
+	logrus.SetLevel(logrus.FatalLevel)
+	err = AdjustLogLevel(optIncrement)
+	require.NoError(t, err)
+	require.Equal(t, logrus.ErrorLevel, logrus.GetLevel())
+	// Fatal -> Panic
+	logrus.SetLevel(logrus.FatalLevel)
+	err = AdjustLogLevel(optDecrement)
+	require.NoError(t, err)
+	require.Equal(t, logrus.PanicLevel, logrus.GetLevel())
+
+	// Panic -> Fatal
+	logrus.SetLevel(logrus.PanicLevel)
+	err = AdjustLogLevel(optIncrement)
+	require.NoError(t, err)
+	require.Equal(t, logrus.FatalLevel, logrus.GetLevel())
+	// Panic is the lowest level for now, so we expected a error here
+	logrus.SetLevel(logrus.PanicLevel)
+	err = AdjustLogLevel(optDecrement)
+	require.Error(t, err)
+}
