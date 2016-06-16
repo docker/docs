@@ -25,6 +25,6 @@ The UCP documentation includes the following topics:
 * [Configuration](configuration/multi-host-networking.md)
 * [Monitor and troubleshoot](monitor/monitor-ucp.md)
 * [High availability](high-availability/set-up-high-availability.md)
-* [User management](user-management/manage-users.md)
+* [User management](user-management/authentication-and-authorization.md)
 * [Applications](applications/deploy-app-ui.md)
 * [Release notes](release_notes.md)
