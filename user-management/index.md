@@ -14,4 +14,7 @@ weight=70
 
 This section includes the following topics:
 
-* [Manage users](manage-users.md)
+* [Authentication and authorization](authentication-and-authorization.md)
+* [Create and manage users](create-and-manage-users.md)
+* [Create and manage teams](create-and-manage-teams.md)
+* [Permission levels](permission-levels.md)
