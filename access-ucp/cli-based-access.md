@@ -19,7 +19,7 @@ For this reason, when running docker commands on a UCP node, you need to
 authenticate your request using client certificates. When trying to run docker
 commands without a valid certificate, you get an authentication error:
 
-```bash
+```markdown
 $ docker ps
 
 An error occurred trying to connect: Get https://ucp:443/v1.22/containers/json: x509: certificate signed by unknown authority (possibly because of "crypto/rsa: verification error" when trying to verify candidate authority certificate "UCP Client Root CA")
@@ -64,7 +64,7 @@ certificates as part of the request to the Docker Engine. You can now use the
 `docker info` command to see if the certificates are being sent to the Docker
 Engine.
 
-```bash
+```markdown
 $ docker info
 
 Containers: 11
