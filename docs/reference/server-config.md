@@ -19,6 +19,8 @@ A configuration file is required by Notary server, and the path to the
 configuration file must be specified using the `-config` option on the command
 line.
 
+Notary server also allows you to [increase/decrease](server-config.md#hot-logging-level-reload) the logging level without having to restart.
+
 Here is a full server configuration file example; please click on the top level JSON keys to
 learn more about the configuration section corresponding to that key:
 
@@ -358,6 +360,42 @@ Example:
 		</td>
 	</tr>
 </table>
+
+## Hot logging level reload
+We don't support completely reloading notary configuration files yet at present. What we support for now is:
+- increase logging level by signaling `SIGUSR1`
+- decrease logging level by signaling `SIGUSR2`
+
+Example:
+
+To increase logging level
+```
+$ kill -s SIGUSR1 PID
+
+or
+
+$ docker exec -i CONTAINER_ID kill -s SIGUSR1 PID
+```
+
+To decrease logging level
+```
+$ kill -s SIGUSR2 PID
+
+or
+
+$ docker exec -i CONTAINER_ID kill -s SIGUSR2 PID
+```
+PID is the process id of `notary-server` and it may not the PID 1 process if you are running
+the container with some kind of wrapper startup script or something.
+
+You can get the PID of `notary-server` through
+```
+$ docker exec CONTAINER_ID ps aux
+
+or
+
+$ ps aux | grep "notary-server -config" | grep -v "grep"
+```
 
 ## Related information
 

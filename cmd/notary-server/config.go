@@ -3,9 +3,12 @@ package main
 import (
 	"crypto/tls"
 	"fmt"
+	"os"
+	"os/signal"
 	"path"
 	"strconv"
 	"strings"
+	"syscall"
 	"time"
 
 	"github.com/Sirupsen/logrus"
@@ -277,4 +280,32 @@ func parseServerConfig(configFilePath string, hRegister healthRegister) (context
 		CurrentCacheControlConfig:    currentCache,
 		ConsistentCacheControlConfig: consistentCache,
 	}, nil
+}
+
+func setupSignalTrap() {
+	c := make(chan os.Signal, 1)
+	signal.Notify(c, notary.NotarySupportedSignals...)
+	go func() {
+		for {
+			signalHandle(<-c)
+		}
+	}()
+}
+
+// signalHandle will increase/decrease the logging level via the signal we get.
+func signalHandle(sig os.Signal) {
+	switch sig {
+	case syscall.SIGUSR1:
+		if err := utils.AdjustLogLevel(true); err != nil {
+			fmt.Printf("Attempt to increase log level failed, will remain at %s level, error: %s\n", logrus.GetLevel(), err)
+			return
+		}
+	case syscall.SIGUSR2:
+		if err := utils.AdjustLogLevel(false); err != nil {
+			fmt.Printf("Attempt to decrease log level failed, will remain at %s level, error: %s\n", logrus.GetLevel(), err)
+			return
+		}
+	}
+
+	fmt.Println("Successfully setting log level to ", logrus.GetLevel())
 }

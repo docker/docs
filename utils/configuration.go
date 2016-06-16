@@ -222,3 +222,25 @@ func ParseViper(v *viper.Viper, configFile string) error {
 	}
 	return nil
 }
+
+// AdjustLogLevel increases/decreases the log level, return error if the operation is invaild.
+func AdjustLogLevel(increment bool) error {
+	lvl := logrus.GetLevel()
+
+	// The log level seems not possible, in the foreseeable future,
+	// out of range [Panic, Debug]
+	if increment {
+		if lvl == logrus.DebugLevel {
+			return fmt.Errorf("log level can not be set higher than %s", "Debug")
+		}
+		lvl++
+	} else {
+		if lvl == logrus.PanicLevel {
+			return fmt.Errorf("log level can not be set lower than %s", "Panic")
+		}
+		lvl--
+	}
+
+	logrus.SetLevel(lvl)
+	return nil
+}
