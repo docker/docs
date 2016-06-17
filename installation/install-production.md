@@ -16,6 +16,8 @@ weight=20
 Docker Universal Control Plane (UCP) is a containerized application that can be
 installed on-premises or on a cloud infrastructure.
 
+If you're installing Docker Datacenter on Azure, [follow this guide](https://success.docker.com/?cid=ddc-on-azure).
+
 ## Step 1: Validate the system requirements
 
 The first step in installing UCP, is ensuring your
