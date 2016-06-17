@@ -21,12 +21,6 @@ Before installing, be sure your infrastructure has these requirements.
 To install DTR on a node, that node node must be part of a Docker Universal
 Control Plane 1.1 cluster.
 
-<!-- TODO check these
-* x.x GB of RAM
-* x.x GB of available disk space
--->
-
-
 ## Ports used
 
 When installing DTR on a node, make sure the following ports are open on that
@@ -44,6 +38,16 @@ DTR collects anonymous usage metrics, to help us improve it. These metrics
 are entirely anonymous, don’t identify your company, users, applications,
 or any other sensitive information. You can disable this on the DTR settings
 page.
+
+## Compatibility and maintenance lifecycle
+
+Docker Datacenter is a software subscription that includes 3 products:
+
+* CS Docker Engine,
+* Docker Trusted Registry,
+* Docker Universal Control Plane.
+
+[Learn more about the maintenance lifecycle for these products](http://success.docker.com/Get_Help/Compatibility_Matrix_and_Maintenance_Lifecycle).
 
 ## Where to go next
 
