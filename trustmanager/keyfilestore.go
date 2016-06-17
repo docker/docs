@@ -210,10 +210,11 @@ func NewKeyMemoryStore(passphraseRetriever notary.PassRetriever) *KeyMemoryStore
 
 	keyInfoMap := make(keyInfoMap)
 
-	keyStore := &KeyMemoryStore{MemoryFileStore: *memStore,
-		PassRetriever: passphraseRetriever,
-		cachedKeys:    cachedKeys,
-		keyInfoMap:    keyInfoMap,
+	keyStore := &KeyMemoryStore{
+		MemoryFileStore: *memStore,
+		PassRetriever:   passphraseRetriever,
+		cachedKeys:      cachedKeys,
+		keyInfoMap:      keyInfoMap,
 	}
 
 	// Load this keystore's ID --> gun/role map
