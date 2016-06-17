@@ -61,6 +61,16 @@ are entirely anonymous, don’t identify your company, users, applications,
 or any other sensitive information. You can disable this when installing
 or on the UCP settings screen.
 
+## Compatibility and maintenance lifecycle
+
+Docker Datacenter is a software subscription that includes 3 products:
+
+* CS Docker Engine,
+* Docker Trusted Registry,
+* Docker Universal Control Plane.
+
+[Learn more about the maintenance lifecycle for these products](http://success.docker.com/Get_Help/Compatibility_Matrix_and_Maintenance_Lifecycle).
+
 ## Where to go next
 
 * [UCP architecture](../architecture.md)
