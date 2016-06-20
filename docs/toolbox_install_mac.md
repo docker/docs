@@ -133,7 +133,7 @@ Virtual Box VM, it maintains its configuration between uses.
 
     If you aren't familiar with a terminal window, here are some quick tips.
 
-    {{< figure src="/tutimg/terminal.png" >}}
+    ![Terminal](images/terminal.png)
 
     The prompt is traditionally a `$` dollar sign. You type commands into the
     *command line* which is the area after the prompt. Your cursor is indicated
