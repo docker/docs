@@ -1,15 +1,11 @@
 package trustmanager
 
-import (
-	"os"
-	"sync"
-)
+import "os"
 
-// MemoryFileStore is an implementation of Storage that keeps
-// the contents in memory.
+// MemoryFileStore is an implementation of Storage that keeps the contents in
+// memory. It is not thread-safe and should be used by a higher-level interface
+// that provides locking.
 type MemoryFileStore struct {
-	sync.Mutex
-
 	files map[string][]byte
 }
 
@@ -22,18 +18,12 @@ func NewMemoryFileStore() *MemoryFileStore {
 
 // Add writes data to a file with a given name
 func (f *MemoryFileStore) Add(name string, data []byte) error {
-	f.Lock()
-	defer f.Unlock()
-
 	f.files[name] = data
 	return nil
 }
 
 // Remove removes a file identified by name
 func (f *MemoryFileStore) Remove(name string) error {
-	f.Lock()
-	defer f.Unlock()
-
 	if _, present := f.files[name]; !present {
 		return os.ErrNotExist
 	}
@@ -44,9 +34,6 @@ func (f *MemoryFileStore) Remove(name string) error {
 
 // Get returns the data given a file name
 func (f *MemoryFileStore) Get(name string) ([]byte, error) {
-	f.Lock()
-	defer f.Unlock()
-
 	fileData, present := f.files[name]
 	if !present {
 		return nil, os.ErrNotExist
