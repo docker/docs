@@ -32,12 +32,16 @@ You can install these tools on a Ubuntu distribution by running:
 $ sudo apt-get update && apt-get install curl jq
 ```
 
-To access the cluster configurations, run:
+1. Use a client bundle to authenticate your requests.
+[Learn more](../access-ucp/cli-based-access.md).
+
+2. Use the REST API to access the cluster configurations.
 
 ```bash
-export KV_URL="https://$(echo $DOCKER_HOST | cut -f3 -d/ | cut -f1 -d:):12379"
+# $DOCKER_HOST and $DOCKER_CERT_PATH are set when using the client bundle
+$ export KV_URL="https://$(echo $DOCKER_HOST | cut -f3 -d/ | cut -f1 -d:):12379"
 
-curl -s \
+$ curl -s \
     --cert ${DOCKER_CERT_PATH}/cert.pem \
     --key ${DOCKER_CERT_PATH}/key.pem \
     --cacert ${DOCKER_CERT_PATH}/ca.pem \
@@ -53,18 +57,12 @@ To learn more about the key-value store API, check the
 The containers running the key-value store, include `etcdctl`, a command line
 client for etcd. You can run it using the `docker exec` command.
 
-The example below assumes you have the Docker CLI client pointing to the Docker
-Engine of a UCP controller. If you are running the example below through UCP,
-you should specify the node-specific container name.
-
-These commands assume you are running directly against the Docker Engine in
-question.  If you are running these commands through UCP, you should specify the
-node specific container name.
+The examples below assume you are logged in with ssh into a UCP controller node.
 
 ### Check the health of the etcd cluster
 
 ```bash
-docker exec -it ucp-kv etcdctl \
+$ docker exec -it ucp-kv etcdctl \
         --endpoint https://127.0.0.1:2379 \
         --ca-file /etc/docker/ssl/ca.pem \
         --cert-file /etc/docker/ssl/cert.pem \
@@ -82,7 +80,7 @@ On failure the command exits with an error code, and no output.
 ### Show the current value of a key
 
 ```bash
-docker exec -it ucp-kv etcdctl \
+$ docker exec -it ucp-kv etcdctl \
         --endpoint https://127.0.0.1:2379 \
         --ca-file /etc/docker/ssl/ca.pem \
         --cert-file /etc/docker/ssl/cert.pem \
@@ -98,7 +96,7 @@ docker exec -it ucp-kv etcdctl \
 ### List the current members of the cluster
 
 ```bash
-docker exec -it ucp-kv etcdctl \
+$ docker exec -it ucp-kv etcdctl \
         --endpoint https://127.0.0.1:2379 \
         --ca-file /etc/docker/ssl/ca.pem \
         --cert-file /etc/docker/ssl/cert.pem \
@@ -117,7 +115,7 @@ As long as your cluster is still functional and has not lost quorum
 remove the failed members.
 
 ```bash
-docker exec -it ucp-kv etcdctl \
+$ docker exec -it ucp-kv etcdctl \
         --endpoint https://127.0.0.1:2379 \
         --ca-file /etc/docker/ssl/ca.pem \
         --cert-file /etc/docker/ssl/cert.pem \

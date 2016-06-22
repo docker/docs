@@ -45,7 +45,7 @@ When you run the upgrade command, it:
 3. Stops and removes the old UCP containers.
 
     This doesn't affect other running containers. Also, existing cluster
-    configurations are not affected, since they are persisted on volumes.
+    configurations are not affected, since they are persisted in volumes.
 
 4. Deploys the new UCP containers to the node.
 
@@ -58,7 +58,7 @@ A cluster that is not set for high-availability, has only one controller node,
 while a cluster that supports high-availability has multiple controller nodes.
 
 To check the number of controller nodes in your cluster, navigate to the **UCP
-web application**, and check the **Nodes** page.
+web UI**, and check the **Nodes** page.
 
 ![Cluster replicas](../images/multiple-replicas.png)
 
@@ -86,10 +86,10 @@ replica nodes):
 
 2. Log into the controller node using ssh.
 
-3. Pull the latest docker/ucp image.
+3. Pull the docker/ucp image for the version you want to upgrade to.
 
     ```bash
-    $ docker pull docker/ucp
+    $ docker pull docker/ucp:$UCP_VERSION
     ```
 
 4. Upgrade the controller node.
@@ -98,7 +98,7 @@ replica nodes):
     $ docker run --rm -it \
       --name ucp \
       -v /var/run/docker.sock:/var/run/docker.sock \
-      docker/ucp upgrade -i
+      docker/ucp:$UCP_VERSION upgrade -i
 
       # INFO[0000] We're about to upgrade the local components for UCP ID: KRIJ:UEYA:AGTD:6BBO:AHS7:QSPA:ZFAM:X7KW:GNXR:4MWQ:UDPU:MRGR
       Do you want proceed with the upgrade? (y/n): y
@@ -167,10 +167,10 @@ If your cluster is set up for high-availability (has several controller nodes):
 
 5. Log into the controller node using ssh.
 
-6. Pull the latest docker/ucp image.
+6. Pull the docker/ucp image for the version you want to upgrade to.
 
     ```bash
-    $ docker pull docker/ucp
+    $ docker pull docker/ucp:$UCP_VERSION
     ```
 
 7. Upgrade the controller node.
@@ -179,7 +179,7 @@ If your cluster is set up for high-availability (has several controller nodes):
     $ docker run --rm -it \
       --name ucp \
       -v /var/run/docker.sock:/var/run/docker.sock \
-      docker/ucp upgrade -i
+      docker/ucp:$UCP_VERSION upgrade -i
 
       # INFO[0000] We're about to upgrade the local components for UCP ID: KRIJ:UEYA:AGTD:6BBO:AHS7:QSPA:ZFAM:X7KW:GNXR:4MWQ:UDPU:MRGR
       Do you want proceed with the upgrade? (y/n): y
