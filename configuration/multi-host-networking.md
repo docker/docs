@@ -108,7 +108,7 @@ To enable the networking feature, do the following.
 
 1. Log into the host running the UCP controller.
 
-2. Review the `discovery-engine` help.
+2. Review the `engine-discovery` help.
 
     ```bash
     $ docker run --rm docker/ucp engine-discovery --help
@@ -116,7 +116,7 @@ To enable the networking feature, do the following.
 
 3. Leave the UCP processes running.
 
-4. Run the `discovery-engine` command.  
+4. Run the `engine-discovery` command.  
 
     The command syntax is:
 

@@ -40,8 +40,7 @@ When installing UCP on a host, make sure the following ports are open:
 
 | Hosts              | Direction | Port                    | Purpose                                                                    |
 |:-------------------|:---------:|:------------------------|:---------------------------------------------------------------------------|
-| controllers        |    in     | TCP 443  (configurable) | Web app and CLI client access to UCP.                                      |
-| controller         |    out    | TCP 443                 | Send anonymous usage reports to Docker.                                    |
+| controllers, nodes |    in     | TCP 443  (configurable) | Web app and CLI client access to UCP.                                      |
 | controllers, nodes |    in     | TCP 2375                | Heartbeat for nodes, to ensure they are running.                           |
 | controllers        |    in     | TCP 2376 (configurable) | Swarm manager accepts requests from UCP controller.                        |
 | controllers, nodes |  in, out  | UDP 4789                | Overlay networking.                                                        |
@@ -55,11 +54,6 @@ When installing UCP on a host, make sure the following ports are open:
 | controller         |    in     | TCP 12384               | Used by authentication storage backend for replication across controllers. |
 | controller         |    in     | TCP 12385               | The port where the authentication API is exposed.                          |
 | controller         |    in     | TCP 12386               | Used by the authentication worker.                                         |
-
-UCP collects anonymous usage metrics, to help us improve it. These metrics
-are entirely anonymous, don’t identify your company, users, applications,
-or any other sensitive information. You can disable this when installing
-or on the UCP settings screen.
 
 ## Compatibility and maintenance lifecycle
 

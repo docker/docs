@@ -42,7 +42,7 @@ If the volumes don't exist, when installing UCP they are created with the
 default volume driver and flags.
 
 
-## Step 4: Customize the CA used
+## Step 4: Customize the server certificates
 
 The UCP cluster uses TLS to secure all communications. Two Certificate
 Authorities (CA) are used for this:
@@ -128,24 +128,25 @@ Now that your UCP controller is installed, you need to license it.
 
 For an highly available installation, you can add more controller nodes to
 the UCP cluster. The controller nodes are replicas of each other.
-[Learn more about high-availability](../high-availability/set-up-high-availability.md).
 
 For this, you need to make the CAs on each controller node use the same
 root certificates and keys.
-[Learn how to replicate the CAs for high availability](../high-availability/replicate-cas.md).
 
-This requires creating a backup of the controller for the purposes of
-replicating the root CA. Your backup command might look like this:
+To create a backup of the CAs used on the controller node:
 
-```bash
-$ docker run --rm -i --name ucp \
-    -v /var/run/docker.sock:/var/run/docker.sock \
-    docker/ucp backup --root-ca-only --interactive \
-    --passphrase "secret" > /tmp/backup.tar
-```
+1. Log into the controller node using ssh.
+2. Run the docker/ucp backup command.
 
-`--passphrase` encrypts the backup with the provided passphrase; this is
-optional but recommended for security purposes.
+    ```bash
+    $ docker run --rm -i --name ucp \
+        -v /var/run/docker.sock:/var/run/docker.sock \
+        docker/ucp backup \
+        --interactive \
+        --root-ca-only \
+        --passphrase "secret" > /tmp/backup.tar
+    ```
+
+[Learn more about the backup command](../high-availability/replicate-cas.md).
 
 ## Step 8: Add controller replicas to the UCP cluster
 
@@ -172,25 +173,52 @@ For each node that you want to install as a controller replica:
     $ docker run --rm -it --name ucp \
       -v /var/run/docker.sock:/var/run/docker.sock \
       -v $BACKUP_PATH/backup.tar:/backup.tar \
-      docker/ucp join -i --replica
+      docker/ucp join \
+      --interactive \
+      --replica \
+      --passphrase "secret"
     ```
 
-3. Since UCP configures your Docker Engine for multi-host networking, it might
+4. Since UCP configures your Docker Engine for multi-host networking, it might
 prompt you to restart the Docker daemon. To make the installation faster, join
 all replica nodes first, and only then restart the Docker daemon on those nodes.
 
-4. Repeat steps 1 and 2 on the other nodes you want to set up as replicas.
+5. Repeat steps 1 and 2 on the other nodes you want to set up as replicas.
 Make sure you set up 3, 5, or 7 controllers.
 
 
-5. Check the cluster state.
+6. Check the cluster state.
 
     The Dashboard page of UCP should list all your controller nodes.
 
     ![UCP nodes page](../images/replica-nodes.png)
 
+## Step 9: Ensure controllers know about each other
 
-## Step 9: Add more nodes to the UCP cluster
+Internally, each controller node has a key-value store that keeps track of
+the controllers that are part of the cluster.
+When you installed and joined replica controllers, the Docker daemon on that
+host was configured to use that key-value store.
+
+To make the cluster fault-tolerant and be able to recover faster with less
+downtime, you need to configure the Docker daemon on each controller node to
+know about the key-value store that is running on the other nodes.
+
+For each controller node:
+
+1. Log into that node using ssh.
+
+2. Run the engine-discovery command.
+
+    ```bash
+    $ docker run --rm -it \
+        --name ucp \
+        -v /var/run/docker.sock:/var/run/docker.sock \
+        docker/ucp engine-discovery \
+        --update
+    ```
+
+## Step 10: Add more nodes to the UCP cluster
 
 Now you can add additional nodes to your UCP cluster. These are the nodes that
 will be running your containers.
@@ -215,7 +243,7 @@ For each node that you want to add to your UCP cluster:
 
     ![UCP nodes page](../images/nodes-page.png)
 
-## Step 10. Download a client certificate bundle
+## Step 11. Download a client certificate bundle
 
 To validate that your cluster is correctly configured, you should try accessing
 the cluster with the Docker CLI client. For this, you'll need to get a client

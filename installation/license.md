@@ -13,14 +13,12 @@ weight=40
 # License UCP
 
 After installing Docker Universal Control Plane, you need to license your
-installation. If you just want to try UCP, you can
-[get a trial license](https://www.docker.com/pricing).
+installation. Here's how to do it.
 
 ## Download your license
 
-When your license is issued, you can download it on Docker Hub. On Docker Hub,
-navigate to your profile settings. Then click the
-[Licenses tab](https://hub.docker.com/account/licenses/).
+Go to [Docker Store](https://store.docker.com/bundles/docker-datacenter) and
+download your UCP license or get a free trial license.
 
 ![](../images/license-ucp-1.png)
 
@@ -28,7 +26,7 @@ navigate to your profile settings. Then click the
 ## License your installation
 
 Once you've downloaded the license file, you can apply it to your UCP
-installation. On your browser, navigate to UCP, and then go to the **Settings
+installation. Navigate to the **UCP web UI**, and then go to the **Settings
 page**.
 
 On the **License** page you can upload the new license.
