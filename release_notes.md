@@ -24,7 +24,7 @@ upgrade your installation to the latest release.
 
 * Core
   * Upgraded Docker Swarm to version 1.2.3.
-  * An administrator can now reset their password. Use the `docker/ucp-auth 
+  * An administrator can now reset their password. Use the `docker/ucp-auth
   passwd` command for this.
 
 * docker/ucp image
@@ -34,7 +34,7 @@ upgrade your installation to the latest release.
   the specified election timeout value.
   [Learn more](https://coreos.com/etcd/docs/latest/tuning.html)
   * It's now possible to skip TLS verification when joining new nodes to the
-  cluster, using the `docker/ucp join --insecure-fingerprint` option. However, to 
+  cluster, using the `docker/ucp join --insecure-fingerprint` option. However, to
   ensure your cluster is secure, don't use this option for normal UCP deployments.
   * The restore operation now supports `--interactive, -i` flags, which require a
   backup file to be mounted in `/backup.tar` instead of streamed through `stdin`.
@@ -71,7 +71,7 @@ UCP, assuming the same host IP and a correct backup file.
 UCP from an older version to 1.1.0.
 * Fixed error by which user could get an "access denied" message when deploying
 a container from the UI due to cached permission labels.
-* Fixed issue where environment variables were not being passed to new containers 
+* Fixed issue where environment variables were not being passed to new containers
 when "Allow users to deploy containers on UCP controllers" setting was disabled.
 
 **Misc**
@@ -92,6 +92,8 @@ when running UCP and DTR on the same nodes, and with high-availability.
 * When attempting to restore a v1.1.0 backup on a new cluster installed with
 the `fresh-install` flag, the restore operation may fail due to engine-discovery
 configuration issues. You should create new backups after upgrading to v1.1.1.
+* UCP fails to install in machines where the hostname has more than 41
+characters. This will be fixed in a future release.
 
 ## Version 1.1.0
 
