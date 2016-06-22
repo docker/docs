@@ -7,7 +7,7 @@ description="Docker Universal Control Plane"
 [menu.main]
 parent="mn_ucp_configuration"
 identifier="ucp_configure_networking"
-weight=0
+weight=40
 +++
 <![end-metadata]-->
 
