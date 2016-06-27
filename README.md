@@ -9,10 +9,12 @@ Machine, Kitematic, and VirtualBox.
 
 ## Installation and documentation
 
-Documentation for Mac [is available
-here](https://docs.docker.com/mac/started/).
+Documentation for Mac [is available here](https://docs.docker.com/mac/started/).
 
-Documentation for Windows [is available here](https://docs.docker.com/windows/started/). *Note:* Some Windows computers may not have VT-X enabled by default. It is required for VirtualBox. To enable VT-X, please see the guide [here.](http://www.howtogeek.com/213795/how-to-enable-intel-vt-x-in-your-computers-bios-or-uefi-firmware).
+Documentation for Windows [is available here](https://docs.docker.com/windows/started/). 
+
+*Note:* Some Windows and Mac computers may not have VT-X enabled by default. It is required for VirtualBox. To check if VT-X is enabled on Windows follow this guide [here](http://amiduos.com/support/knowledge-base/article/how-can-i-get-to-know-my-processor-supports-virtualization-technology). To enable VT-X on Windows, please see the guide [here](http://www.howtogeek.com/213795/how-to-enable-intel-vt-x-in-your-computers-bios-or-uefi-firmware). To enable VT-X on Intel-based Macs, refer to this Apple guide [here](https://support.apple.com/en-us/HT203296).
+Also note that if the Virtual Machine was created before enabling VT-X it can be necessary to remove and reinstall the VM for Docker Toolbox to work.
 
 Toolbox is currently unavailable for Linux; To get started with Docker on Linux, please follow the Linux [Getting Started Guide](https://docs.docker.com/linux/started/).
 
