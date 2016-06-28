@@ -35,7 +35,7 @@ To verify your machine meets these requirements, do the following:
     If you aren't using a supported version, you could consider upgrading your
     operating system.
 
-    If you have a newer system, specifically 64bit Windows 10 Pro, with Enterprise and Education (1511 November update, Build 10586 or later), consider using [Docker for Windows](https://docs.docker.com/docker-for-windows) instead. It runs natively on the Windows, so there is no need for a pre-configured Docker QuickStart shell. It also uses Hyper-V for virtualization, so the instructions below for checking virtualization will be out of date for newer Windows systems. Full install prerequisites are provided in the Docker for Windows topic in [What to know before you install]https://docs.docker.com//docker-for-windows#what-to-know-before-you-install).
+    If you have a newer system, specifically 64bit Windows 10 Pro, with Enterprise and Education (1511 November update, Build 10586 or later), consider using [Docker for Windows](https://docs.docker.com/docker-for-windows) instead. It runs natively on the Windows, so there is no need for a pre-configured Docker QuickStart shell. It also uses Hyper-V for virtualization, so the instructions below for checking virtualization will be out of date for newer Windows systems. Full install prerequisites are provided in the Docker for Windows topic in [What to know before you install](https://docs.docker.com/docker-for-windows/#what-to-know-before-you-install).
 
 2. Make sure your Windows system supports Hardware Virtualization Technology and that virtualization is enabled.
 
@@ -74,7 +74,7 @@ If you have a previous version of VirtualBox installed, do not reinstall it with
 If you have Virtual Box running, you must shut it down before running the
 installer.
 
-1. Go to the <a href="https://www.docker.com/toolbox" targe="_blank">Docker Toolbox</a> page.
+1. Go to the <a href="https://www.docker.com/toolbox" target="_blank">Docker Toolbox</a> page.
 
 2. Click the installer link to download.
 
