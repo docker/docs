@@ -62,20 +62,12 @@ commands for you environment.
 
 ## Step 2. Verify the prerequisites
 
-Because Docker Engine and UCP both rely on Linux-specific features, you can't
-run natively in Mac or Windows. Instead, you must install the Docker Toolbox
-application. The application installs a VirtualBox Virtual Machine (VM), the
-Docker Engine itself, and the Docker Toolbox management tool. These tools enable
-you to run Engine CLI commands from your Mac OS X or Windows shell.
+This example requires that you have:
 
-Your Mac must be running OS X 10.8 "Mountain Lion" or higher to perform this
-procedure. To check your Mac OS X version, see <a href="https://docs.docker.com/mac/step_one/" target="_blank">the Docker Engine getting started on Mac</a>.
+* Docker Engine
+* Docker Machine
 
-On Windows, your machine must have a 64-bit operating system running
-Windows 7 or higher. Additionally, you must make sure that virtualization is
-enabled on your machine. For information on how to check for virtualization, see <a href="https://docs.docker.com/windows/step_one/" target="_blank">the Docker Engine getting started on Windows</a>.
-
-If you haven't already done so, make you have installed Docker Toolbox on your local <a href="https://docs.docker.com/engine/installation/mac/" target="_blank">Mac OS X</a> or <a href="https://docs.docker.com/engine/installation/windows/" target="_blank">Windows machine</a>.  After a successful installation, continue to the next step.
+If you don't have those components, start by [installing them](/toolbox/overview.md).
 
 ## Step 3. Provision hosts with Engine
 
