@@ -61,55 +61,9 @@ the UCP client bundle for your UCP user.  You should never deploy from the
 command-line while directly logged into a UCP node. The deploy on this page,
 requires that your local environment includes the following software:
 
-* [Git](https://git-scm.com/)
 * Docker Engine
 * Docker Compose
-
-While not always the case, the expectation is your local environment is a
-Windows or Mac machine. If your personal machine is a Linux machine that Docker
-Engine supports, such a configuration works too.  
-
-### Windows or Mac prerequisites
-
-Because Docker Engine and UCP both rely on Linux-specific features, you can't
-run natively in Mac or Windows. Instead, you must install the Docker Toolbox
-application. Docker Toolbox installs:
-
-* Docker Machine for running `docker-machine` commands
-* Docker Engine for running the `docker` commands
-* Docker Compose for running the `docker-compose` commands
-* Kitematic, the Docker GUI
-* a Quickstart shell preconfigured for a Engine command-line environment
-* Oracle VirtualBox
-
-These tools enable you to run Engine CLI commands from your Mac OS X or Windows
-shell.
-
-Your Mac must be running OS X 10.8 "Mountain Lion" or higher to install Toolbox.
-To check your Mac OS X version, see <a
-href="https://docs.docker.com/mac/step_one/" target="_blank">the Docker Engine
-getting started on Mac</a>.
-
-On Windows, your machine must have a 64-bit operating system running Windows 7 or
-higher. Additionally, you must make sure that virtualization is enabled on your
-machine. For information on how to check for virtualization, see <a
-href="https://docs.docker.com/windows/step_one/" target="_blank">the Docker
-Engine getting started on Windows</a>.
-
-If you haven't already done so, make you have installed Docker Toolbox on your
-local <a href="https://docs.docker.com/engine/installation/mac/"
-target="_blank">Mac OS X</a> or <a
-href="https://docs.docker.com/engine/installation/windows/"
-target="_blank">Windows machine</a>.  After a successful installation, continue
-to the next step.
-
-### About a Linux environment
-
-If your local environment is Linux, make sure you have installed the <a
-href="https://docs.docker.com/engine/installation" target="_blank">correct
-Docker Engine for your Linux OS</a>. Also, make sure you have installed <a
-href="http://docs-stage.docker.com/compose/install/" target="_blank">Docker
-Compose</a>.
+* Git
 
 ## Step 2. Get the client bundle and configure a shell
 
