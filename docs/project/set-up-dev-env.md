@@ -165,7 +165,8 @@ can take over 15 minutes to complete.
 7. Copy the binary to the container's `/usr/bin` directory.
 
     ```bash
-    root@a8b2885ab900:/go/src/github.com/docker/docker# cp bundles/1.12.0-dev/binary/docker* /usr/bin
+    root@a8b2885ab900:/go/src/github.com/docker/docker# cp bundles/1.12.0-dev/binary-client/docker* /usr/bin
+    root@a8b2885ab900:/go/src/github.com/docker/docker# cp bundles/1.12.0-dev/binary-daemon/docker* /usr/bin
     ```
 
 8. Start the Engine daemon running in the background.
