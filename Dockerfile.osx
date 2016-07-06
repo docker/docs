@@ -18,16 +18,16 @@ RUN curl -fsSL https://github.com/mackyle/xar/archive/xar-1.6.1.tar.gz | tar xvz
 	./autogen.sh && ./configure && \
 	make && make install
 
-ENV VBOX_VERSION 5.0.20
-ENV VBOX_REV 106931
+ENV VBOX_VERSION 5.0.24
+ENV VBOX_REV 108355
 
 RUN curl -fsSL -o /vbox.dmg http://download.virtualbox.org/virtualbox/$VBOX_VERSION/VirtualBox-$VBOX_VERSION-$VBOX_REV-OSX.dmg \
 	&& echo "$(curl -fsSL 'http://download.virtualbox.org/virtualbox/'"$VBOX_VERSION"'/SHA256SUMS' | awk '$2 ~ /-OSX.dmg$/ { print $1 }') */vbox.dmg" | sha256sum -c -
 
 # Download the Docker parts
 
-ENV INSTALLER_VERSION 1.12.0-rc2
-ENV DOCKER_VERSION 1.12.0-rc2
+ENV INSTALLER_VERSION 1.12.0-rc3
+ENV DOCKER_VERSION 1.12.0-rc3
 
 # Why '--strip-components 3'?  The client binary is in usr/local/bin/docker in
 # the tar archive.  If we extract directly, it will create a usr/local/bin
@@ -40,7 +40,7 @@ RUN curl -fsSL -o dockerbins.tgz "https://test.docker.com/builds/Darwin/x86_64/d
 RUN chmod +x /docker
 
 
-ENV DOCKER_MACHINE_VERSION 0.8.0-rc1
+ENV DOCKER_MACHINE_VERSION 0.8.0-rc2
 RUN curl -fsSL -o /docker-machine https://github.com/docker/machine/releases/download/v$DOCKER_MACHINE_VERSION/docker-machine-Darwin-x86_64
 
 RUN chmod +x /docker-machine
