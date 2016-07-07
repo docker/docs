@@ -19,6 +19,31 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](../install/upgrade/upgrade-major.md),
 to upgrade your installation to the latest release.
 
+## Version 2.0.2
+
+July 6, 2016
+
+**docker/dtr image**
+
+* Added the `docker/dtr images` command that lists all images needed for installing DTR.
+* Added the `--extra-envs` flag to the install and join commands, that allows to specify
+swarm constraints to the DTR containers.
+
+**Misc**
+
+* General improvements to the garbage collection settings screen.
+* Deleting a repository is now faster.
+* Upgraded the RethinkDB used internally to version 2.3.4, for improved security.
+* Upgraded the Nginx used internally to version 1.8.1, for improved security.
+
+**Bug fixes**
+
+* Fixed problem that caused the last run time for the garbage collection job to
+be wrong.
+* When creating users and organizations, the 'Save & create another' button now
+works as expected.
+* In the Users screen, the organizations each user belongs to is now listed.
+
 ## Version 2.0.1
 
 **New features**
@@ -102,9 +127,9 @@ future release. Configure user authentication in UCP.
   are routed through the proxy. If the Docker Notary is not reachable through
   the proxy, you need to add the Notary server url to the NO_PROXY settings.
 
-## Version 2.0
+## Version 2.0.0
 
-(4 May 2016)
+4 May 2016
 
 **Features**
 
