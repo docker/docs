@@ -210,7 +210,7 @@ can take over 15 minutes to complete.
 
 12. Open another terminal on your local host.
 
-13. List the container runninng your development container.
+13. List the container running your development container.
 
     ```bash
     ubuntu@ubuntu1404:~$ docker ps
