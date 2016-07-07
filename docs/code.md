@@ -1,5 +1,8 @@
 <!--[metadata]>
 +++
+aliases = [
+"/contributing/contributing"
+]
 title = "Quickstart contribution"
 description = "Contribute code"
 keywords = ["governance, board, members, profiles"]
@@ -56,7 +59,7 @@ issue</a>.
 	If you change or add code or docs to a project, you should test your changes
 	as you work. This page explains <a
 	href="http://docs.docker.com/project/test-and-docs/" target="_blank">how to
-	test in our development environment</a>.  
+	test in our development environment</a>.
 
 	Also, remember to always **sign your commits** as you work! To sign your
 	commits, include the `-s` flag in your commit like this:
