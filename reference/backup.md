@@ -16,8 +16,8 @@ Backup a DTR cluster to a tar file and stream it to stdout
 ## Usage
 
 ```bash
-$ docker run -it --rm docker/dtr \
- backup [command options] > backupt.tar
+$ docker run -i --rm docker/dtr \
+ backup [command options] > backup.tar
 ```
 
 ## Description

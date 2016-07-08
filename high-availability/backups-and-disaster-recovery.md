@@ -51,36 +51,45 @@ implement a separate backup policy for the Docker images, taking in
 consideration whether your DTR installation is configured to store images on the
 filesystem or using a cloud provider.
 
+The backup command also doesn't create a backup of the users and organizations.
+That data is managed by UCP, so when you create a UCP backup you're creating
+a backup of the users and organizations metadata.
+
 When creating a backup, the resulting .tar file contains sensitive information
 like private keys. You should ensure the backups are stored securely.
 
-To learn about the options available on the backup command, you can
-[check the reference documentation](../reference/backup.md), or run:
-
-```bash
-$ docker run --rm -it docker/dtr backup --help
-```
+You can check the
+[reference documentation](../reference/backup.md), for the
+backup command to learn about all the available flags.
 
 As an example, to create a backup of a DTR node, you can use:
 
 ```bash
 # Get the certificates used by UCP
-$ curl https://$UCP_HOST/ca > ucp-ca.pem
+$ curl https://<ucp-url>/ca > ucp-ca.pem
 
 # Create the backup
-$ docker run -it --rm docker/dtr backup \
+$ docker run -i --rm docker/dtr backup \
+  --ucp-url <ucp-url> \
   --ucp-ca "$(cat ucp-ca.pem)" \
-  --replica-id 8b6174866010 \
-  --ucp-username $UCP_ADMIN --ucp-password $UCP_PASSWORD \
-  --ucp-url $UCP_HOST > /tmp/backup.tar
+  --existing-replica-id <replica-id> \
+  --ucp-username <ucp-admin> \
+  --ucp-password <ucp-password> > /tmp/backup.tar
 ```
 
 Where:
 
-* --ucp-ca is the certificate used by UCP,
-* --replica-id is the name of the replica to backup,
-* --ucp-username, and --ucp-password are the credentials of a UCP administrator,
-* --ucp-url is the address of UCP.
+* `--ucp-url` is the address of UCP,
+* `--ucp-ca` is the UCP certificate authority,
+* `--existing-replica-id` is the id of the replica to backup,
+* `--ucp-username`, and `--ucp-password` are the credentials of a UCP administrator.
+
+To validate that the backup was correctly performed, you can print the contents
+of the tar file created:
+
+```bash
+$ tar -tf /tmp/backup.tar
+```
 
 ## Restore DTR data
 
@@ -99,35 +108,34 @@ restore procedure for the Docker images stored in your registry, taking in
 consideration whether your DTR installation is configured to store images on
 the filesystem or using a cloud provider.
 
-To learn about the options available on the restore command, you can
-[check the reference documentation](../reference/restore.md), or run:
+You can check the
+[reference documentation](../reference/backup.md), for the
+backup command to learn about all the available flags.
 
-```bash
-$ docker run --rm -it docker/trusted-registry restore --help
-```
 
-As an example, to install DTR on the host at 192.168.10.100, and restore its
+As an example, to install DTR on the host and restore its
 state from an existing backup:
 
 ```bash
 # Get the certificates used by UCP
-$ curl https://$UCP_HOST/ca > ucp-ca.pem
+$ curl https://<ucp-url>/ca > ucp-ca.pem
 
 # Install and restore configurations from an existing backup
 $ docker run -i --rm \
-  -v /var/run/docker.sock:/var/run/docker.sock \
   docker/dtr restore \
+  --ucp-url <ucp-url> \
   --ucp-ca "$(cat ucp-ca.pem)" \  
-  --ucp-username $UCP_ADMIN --ucp-password $UCP_PASSWORD \
-  --ucp-url $UCP_HOST --dtr-load-balancer 192.168.10.100 < /tmp/backup.tar
+  --ucp-username <ucp-admin> \
+  --ucp-password <ucp-password> \
+  --dtr-load-balancer <dtr-domain-name> < /tmp/backup.tar
 ```
 
 Where:
 
-* --ucp-ca is the certificate used by UCP,
-* --ucp-username, and --ucp-password are the credentials of a UCP administrator,
-* --ucp-url is the address of UCP,
-* --dtr-load-balancer is the host to where DTR will be installed.
+* `--ucp-url` is the address of UCP,
+* `--ucp-ca` is the UCP certificate authority,
+* `--ucp-username`, and `--ucp-password` are the credentials of a UCP administrator,
+* `--dtr-load-balancer` is the domain name or ip where DTR can be reached.
 
 
 ## Where to go next
