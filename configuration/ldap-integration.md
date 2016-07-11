@@ -6,7 +6,7 @@ description="Learn how to integrate UCP with an LDAP service, so that you can ma
 [menu.main]
 parent="mn_ucp_configuration"
 identifier="ucp_ldap_integration"
-weight=20
+weight=30
 +++
 <![end-metadata]-->
 
