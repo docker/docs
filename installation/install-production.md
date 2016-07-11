@@ -62,7 +62,7 @@ If you want to use your own certificates:
 
 2. Create a volume with the name `ucp-controller-server-certs`.
 
-3. Add the following files to the volume top-level directory:
+3. Add the following files to `/var/lib/docker/volumes/ucp-controller-server-certs/_data/`:
 
     | File     | Description                                                                       |
     |:---------|:----------------------------------------------------------------------------------|
