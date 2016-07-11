@@ -6,7 +6,7 @@ keywords = ["docker, ucp, integrate, logs"]
 [menu.main]
 parent="mn_ucp_configuration"
 identifier="ucp_configure_logs"
-weight=0
+weight=10
 +++
 <![end-metadata]-->
 
