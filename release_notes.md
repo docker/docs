@@ -18,6 +18,52 @@ known issues for each UCP version.
 You can then use [the upgrade instructions](installation/upgrade.md), to
 upgrade your installation to the latest release.
 
+## Version 1.1.2
+
+NOTE: UCP 1.1.2 supports Engine 1.12 but not using the new swarm mode. It will 
+ create a "classic" Swarm 1.2.3 cluster on top of Engine 1.12 based nodes.
+
+**Features**
+
+* Core
+  * Upgraded etcd to version 2.3.6
+  * Upgraded rethinkDB to version 2.3.4
+  * Support dumps (`dsinfo`) now provide more comprehensive information about the 
+  UCP deployment for technical support sessions
+
+* docker/ucp image
+  * It's now possible to generate a support dump directly from the CLI using the 
+  `support` command
+  * It's now possible to tune how often UCP's key-value store takes snapshots using the 
+  `docker/ucp install --kv-snapshot-count` option. This can be used in conjunction 
+  with `--kv-timeout` to tune the key-value store and the resulting performance 
+  of the cluster based on your local environment. 
+  [Learn more about tuning the key-value store](https://github.com/coreos/etcd/blob/master/Documentation/v2/tuning.md#snapshots)
+
+* UI
+  * The dashboard will now notify admin users when an update for UCP is available.
+  * It's now possible to see which specific controllers need to have root CAs 
+  inserted in order to achieve full HA.
+  * It's now possible to filter images on the `Images` tab.
+
+**Bug Fixes**
+
+* Fixed an issue in which UCP failed to install in machines where the hostname has 
+more than 41 characters.
+* Fixed an issue in which `ping` requests caused a memory leak in the 
+`ucp-controller` and `ucp-kv` containers
+* When installing in the CLI, UCP now displays the specified `ADMIN_USERNAME` 
+variable rather than just "admin". 
+* Fixed an issue where container owner label permissions took priority over access 
+label permissions when displaying a list of containers.
+* Fixed an issue in which upgrading to UCP caused a user to still see an older 
+version in the UI.
+
+**Known Issues**
+
+* This version of UCP will not install on Engine 1.12 swarm-mode based clusters, 
+nor is it compatible with swarm-mode based APIs (e.g. `docker service`).
+
 ## Version 1.1.1
 
 **Features**
@@ -87,13 +133,13 @@ after joining all controller nodes to the cluster.
 * When using UCP with a Docker Engine prior to 1.11.1-cs2, containers with a
 restart policy set to `restart=always` and using an overlay network, may not
 resume properly when the Docker daemon is restarted. Upgrade the Docker Engine
-on your nodes to version 1.11.1-cs2 to fix this. This is specially important
+on your nodes to version 1.11.1-cs2 to fix this. This is especially important
 when running UCP and DTR on the same nodes, and with high-availability.
 * When attempting to restore a v1.1.0 backup on a new cluster installed with
 the `fresh-install` flag, the restore operation may fail due to engine-discovery
 configuration issues. You should create new backups after upgrading to v1.1.1.
 * UCP fails to install in machines where the hostname has more than 41
-characters. This will be fixed in a future release.
+characters. This will be fixed in a future release. (Fixed in UCP 1.1.2)
 
 ## Version 1.1.0
 
@@ -251,7 +297,8 @@ containers
     * Use mutual TLS in CFSSL
     * Improved access control for Docker Engine proxy
     * Added support for custom server certificates and user bundles
-    * Users can now launch "private" containers if default permission is Restricted Control or greater
+    * Users can now launch "private" containers if default permission is 
+    Restricted Control or greater
 
 * UI
     * Pages for Containers, Images, and Applications are now consistent
@@ -273,7 +320,8 @@ containers
 
 * UCP now uses a vendored UCP Swarm image
 * Removed timestamps from controller logs
-* Switched from 'Full Control' to 'Restricted Control' for managing non-container resources
+* Switched from 'Full Control' to 'Restricted Control' for managing non-container 
+resources
 
 **Known issues**
 
