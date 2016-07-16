@@ -300,9 +300,9 @@ or feedback about project operations.
 
 [Org]
     [Org.Curators]
-        People = ["programmerq", "thajeztah", "amitshukla"]
+        People = ["mgoelzer", "programmerq", "thajeztah", "amitshukla"]
     [Org."Docs maintainers"]
-        People = ["jamtur01", "moxiegirl", "sven", "thajeztah", "sfsmithcha"]
+        People = ["jamtur01", "moxiegirl", "sfsmithcha", "sven", "thajeztah"]
     [Org.boot2docker]
         People = ["ehazlett", "tianon"]
     [Org.compose]
@@ -314,7 +314,7 @@ or feedback about project operations.
     [Org.distribution]
         People = ["aaronlehmann", "dmcgowan", "dmp42", "richardscothern", "shykes", "stevvooe"]
     [Org.docker]
-        People = ["aaronlehmann", "calavera", "coolljt0725", "cpuguy83", "crosbymichael", "duglin", "estesp", "icecrime", "jhowardmsft", "justincormack", "lk4d4", "mavenugo", "mhbauer", "runcom", "tianon", "tibor", "tonistiigi", "unclejack", "vdemeester"]
+        People = ["aaronlehmann", "aluzzardi", "calavera", "coolljt0725", "cpuguy83", "crosbymichael", "dnephin", "duglin", "estesp", "icecrime", "jhowardmsft", "justincormack", "lk4d4", "mavenugo", "mhbauer", "mlaventure", "runcom", "stevvooe", "tianon", "tibor", "tonistiigi", "unclejack", "vdemeester", "vieux"]
     [Org.docker-bench-security]
         People = ["diogomonica", "konstruktoid"]
     [Org.docker-credential-helpers]
@@ -413,10 +413,6 @@ or feedback about project operations.
         Name = "Ben Firshman"
         Email = "ben@firshman.co.uk"
         GitHub = "bfirsh"
-    [People.brianbland]
-        Name = "Brian Bland"
-        Email = "brian.bland@docker.com"
-        GitHub = "BrianBland"
     [People.calavera]
         Name = "David Calavera"
         Email = "david.calavera@gmail.com"
@@ -589,6 +585,10 @@ or feedback about project operations.
         Name = "Michael Chiang"
         Email = "mchiang@docker.com"
         GitHub = "mchiang0610"
+    [People.mgoelzer]
+        Name = "Mike Goelzer"
+        Email = "mike.goelzer@docker.com"
+        GitHub = "mgoelzer"
     [People.mhbauer]
         Name = "Morgan Bauer"
         Email = "mbauer@us.ibm.com"
@@ -657,6 +657,10 @@ or feedback about project operations.
         Name = "Santhosh Manohar"
         Email = "santhosh@docker.com"
         GitHub = "sanimej"
+    [People.sfsmithcha]
+        Name = "Charles Smith"
+        Email = "charles.smith@docker.com"
+        GitHub = "sfsmithcha"
     [People.shin-]
         Name = "Joffrey F"
         Email = "joffrey@docker.com"
