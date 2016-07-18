@@ -51,8 +51,8 @@ will be retrieved from that backup. Add the following volume mount:
 | `--fresh-install`                                          | Destroy any existing state and start fresh.                                                       |
 | `--san` `[--san option --san option]`                      | Additional Subject Alternative Names for certs (e.g. `--san foo1.bar.com --san foo2.bar.com`).    |
 | `--host-address`                                           | Specify the visible IP/hostname for this node. (override automatic detection) [$UCP_HOST_ADDRESS] |
-| `--swarm-port "2376"`                                      | Select what port to run the local Swarm manager on.                                               |
-| `--controller-port "443"`                                  | Select what port to run the local Controller on.                                                  |
+| `--swarm-port "2376"`                                      | Select what port to run the local Swarm manager on (default: 2376)                                |
+| `--controller-port "443"`                                  | Select what port to run the local Controller on (default: 443)                                    |
 | `--dns` `[--dns option --dns option]`                      | Set custom DNS servers for the UCP infrastructure containers.                                     |
 | `--dns-opt` `[--dns-opt option --dns-opt option]`          | Set DNS options for the UCP infrastructure containers.                                            |
 | `--dns-search` `[--dns-search option --dns-search option]` | Set custom DNS search domains for the UCP infrastructure containers.                              |
@@ -62,6 +62,6 @@ will be retrieved from that backup. Add the following volume mount:
 | `--fingerprint`                                            | The fingerprint of the UCP controller you trust [$UCP_FINGERPRINT]                                |
 | `--replica`                                                | Configure this node to be a UCP controller replica.                                               |
 | `--external-server-cert`                                   | (Replica only) Use externally signed certificates for the controller.                             |
-| `--pull "missing"`                                         | Specify image pull behavior ('always', when 'missing', or 'never').                               |
+| `--pull "missing"`                                         | Specify image pull behavior ('always', when 'missing', or 'never') (default: "missing")           |
 | `--passphrase`                                             | Decrypt the Root CA tar file with the provided passphrase [$UCP_PASSPHRASE]                       |
 | `--skip-engine-discovery`                                  | Do not configure engine for clustering                                                            |
