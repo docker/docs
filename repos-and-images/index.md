@@ -14,6 +14,7 @@ weight=90
 
 This section includes the following topics:
 
-* [Create a repository](create-repo.md)
-* [Push and pull images](push-and-pull-images.md)
-* [Delete images](delete-images.md)
+* [Configure your Docker Engine](configure-docker-engine.md)
+* [Pull an image](pull-an-image.md)
+* [Push an image](push-an-image.md)
+* [Delete an image](delete-an-image.md)
