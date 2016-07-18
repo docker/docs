@@ -66,6 +66,7 @@ Additional help is available for each command with the '--help' option.
 | `images`           | Verify the UCP images on this engine                                       |
 | `uninstall`        | Uninstall UCP components from this engine                                  |
 | `dump-certs`       | Dump out the public certs for this UCP controller                          |
+| `support`          | Generate a support dump for this engine                                    |
 | `fingerprint`      | Dump out the TLS fingerprint for the UCP controller running on this engine |
 | `id`               | Dump out the ID of the UCP components running on this engine               |
 | `engine-discovery` | Manage the engine discovery configuration                                  |
