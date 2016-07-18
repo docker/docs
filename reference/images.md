@@ -30,11 +30,11 @@ to change behavior.
 
 ## Options
 
-| Option                | Description                                                            |
-|:----------------------|:-----------------------------------------------------------------------|
-| `--debug, -D`         | Enable debug                                                           |
-| `--jsonlog`           | Produce json formatted output for easier parsing                       |
-| `--registry-username` | Specify the username to pull required images with [$REGISTRY_USERNAME] |
-| `--registry-password` | Specify the password to pull required images with [$REGISTRY_PASSWORD] |
-| `--pull "missing"`    | Specify image pull behavior ('always', when 'missing', or 'never')     |
-| `--list`              | Don`t do anything, just list the images used by UCP                    |
+| Option                | Description                                                                             |
+|:----------------------|:----------------------------------------------------------------------------------------|
+| `--debug, -D`         | Enable debug                                                                            |
+| `--jsonlog`           | Produce json formatted output for easier parsing                                        |
+| `--registry-username` | Specify the username to pull required images with [$REGISTRY_USERNAME]                  |
+| `--registry-password` | Specify the password to pull required images with [$REGISTRY_PASSWORD]                  |
+| `--pull "missing"`    | Specify image pull behavior ('always', when 'missing', or 'never') (default: "missing") |
+| `--list`              | Don`t do anything, just list the images used by UCP                                     |

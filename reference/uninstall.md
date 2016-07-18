@@ -28,13 +28,14 @@ engine in your cluster.
 
 ## Options
 
-| Option                | Description                                                                 |
-|:----------------------|:----------------------------------------------------------------------------|
-| `--debug`, `-D`       | Enable debug                                                                |
-| `--jsonlog`           | Produce json formatted output for easier parsing                            |
-| `--interactive`, `-i` | Enable interactive mode.,You are prompted to enter all required information |
-| `--registry-username` | Specify the username to pull required images with [$REGISTRY_USERNAME]      |
-| `--registry-password` | Specify the password to pull required images with [$REGISTRY_PASSWORD]      |
-| `--id`                | The ID of the UCP instance to uninstall                                     |
-| `--preserve-certs`    | Don't delete the certs on the host                                          |
-| `--preserve-images`   | Don't delete images on the host                                             |
+| Option                | Description                                                                             |
+|:----------------------|:----------------------------------------------------------------------------------------|
+| `--debug`, `-D`       | Enable debug                                                                            |
+| `--jsonlog`           | Produce json formatted output for easier parsing                                        |
+| `--interactive`, `-i` | Enable interactive mode.,You are prompted to enter all required information             |
+| `--pull`              | Specify image pull behavior ('always', when 'missing', or 'never') (default: "missing") |
+| `--registry-username` | Specify the username to pull required images with [$REGISTRY_USERNAME]                  |
+| `--registry-password` | Specify the password to pull required images with [$REGISTRY_PASSWORD]                  |
+| `--id`                | The ID of the UCP instance to uninstall                                                 |
+| `--preserve-certs`    | Don't delete the certs on the host                                                      |
+| `--preserve-images`   | Don't delete images on the host                                                         |
