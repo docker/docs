@@ -37,7 +37,7 @@ copy that package to the nodes where you’ll install DTR.
     for this.
 
     ```bash
-    $ scp ucp-1.1.1_dtr-2.0.1.tar.gz $USER@$DTR_HOST:/tmp
+    $ scp ucp-1.1.2_dtr-2.0.2.tar.gz $USER@$DTR_HOST:/tmp
     ```
 
 3. Login into the host where you transferred the images.
@@ -48,7 +48,7 @@ copy that package to the nodes where you’ll install DTR.
     the `docker load` command, to load the images from the .tar file.
 
     ```bash
-    $ docker load < /tmp/ucp-1.1.1_dtr-2.0.1.tar.gz
+    $ docker load < /tmp/ucp-1.1.2_dtr-2.0.2.tar.gz
     ```
 
 5. Install DTR.
