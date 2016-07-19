@@ -37,7 +37,7 @@ all the images. Then you copy that package to the host where you’ll install UC
     for this:
 
     ```bash
-    $ scp ucp-1.1.1_dtr-2.0.1.tar.gz $USER@$UCP_HOST:/tmp
+    $ scp ucp-1.1.2_dtr-2.0.2.tar.gz $USER@$UCP_HOST:/tmp
     ```
 
 3. Login into the host where you transferred the images.
@@ -49,7 +49,7 @@ all the images. Then you copy that package to the host where you’ll install UC
     were you are going to install UCP, run:
 
     ```bash
-    $ docker load < /tmp/ucp-1.1.1_dtr-2.0.1.tar.gz
+    $ docker load < ucp-1.1.2_dtr-2.0.2.tar.gz
     ```
 
 5. Install Docker UCP.
