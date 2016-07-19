@@ -27,7 +27,7 @@ all the images. Then you copy that package to the host where you’ll install UC
     images. As an example, to download UCP 1.1, run:
 
     ```bash
-    $ wget https://packages.docker.com/caas/ucp-1.1.1_dtr-2.0.2.tar.gz
+    $ wget https://packages.docker.com/caas/ucp-1.1.2_dtr-2.0.2.tar.gz
     ```
 
 2. Transfer the package to the offline node.
