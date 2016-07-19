@@ -105,5 +105,5 @@ $ curl -k -H "Authorization: Bearer $AUTHTOKEN" https://<ucp-ip>/api/clientbundl
 
 ## Where to go next
 
-* [Deploy an app from the UI](../applications/deploy-app-cli.md)
-* [Deploy an app from the CLI](../applications/deploy-app-ui.md)
+* [Deploy an app from the UI](../applications/deploy-app-ui.md)
+* [Deploy an app from the CLI](../applications/deploy-app-cli.md)
