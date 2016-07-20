@@ -18,5 +18,5 @@ This section includes the following topics:
 * [Install Docker Trusted Registry](install-dtr.md)
 * [Install offline](install-dtr-offline.md)
 * [License DTR](license.md)
-* [Upgrade to DTR 2.0](upgrade/upgrade-major.md)
+* [Upgrade DTR](upgrade/upgrade-minor.md)
 * [Uninstall](uninstall.md)

@@ -103,7 +103,7 @@ After installing DTR, you should configure:
 
 Now that you have a working installation of DTR, you should test that you can
 push and pull images to it.
-[Learn how to push and pull images](../repos-and-images/push-and-pull-images.md).
+[Learn how to push and pull images](../repos-and-images/configure-docker-engine.md).
 
 ## Step 6. Join replicas to the cluster
 

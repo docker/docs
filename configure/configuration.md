@@ -21,9 +21,7 @@ view configuration options. Configuring is grouped by the following:
 * [Storage settings](config-storage.md)
 * [License](../install/license.md)
 * [Authentication settings](config-auth.md) (including LDAP)
-* [Garbage collection](../repos-and-images/delete-images.md)
 * Updates
-* Docker daemon (this is set from the Trusted Registry CLI and not the UI)
 
 
 Saving changes you've made to settings will restart various services, as follows:

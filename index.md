@@ -26,5 +26,5 @@ The DTR documentation includes the following topics:
 * [Monitor and troubleshoot](monitor-troubleshoot/monitor.md)
 * [High-availability](high-availability/high-availability.md)
 * [User management](user-management/permission-levels.md)
-* [Repositories and images](repos-and-images/create-repo.md)
+* [Repositories and images](repos-and-images/configure-docker-engine.md)
 * [Release notes](release-notes/release-notes.md)
