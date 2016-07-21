@@ -71,5 +71,5 @@ Both the Trusted Registry and the Docker daemon collect and store log messages. 
 
 ## See also
 
-* [Monitor DTR](../monitor-troubleshoot/monitor.md)
+* [Monitor DTR](../monitor-troubleshoot/index.md)
 * [Troubleshoot DTR](../monitor-troubleshoot/troubleshoot.md)

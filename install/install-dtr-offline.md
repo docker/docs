@@ -4,7 +4,7 @@ title = "Install offline"
 description = "Learn how to install Docker Trusted Registry on a machine with no internet access."
 keywords = ["docker, registry, install, offline"]
 [menu.main]
-parent="workw_dtr_install"
+parent="dtr-menu-install"
 identifier="dtr_install_offline"
 weight=30
 +++
@@ -54,7 +54,7 @@ copy that package to the nodes where you’ll install DTR.
 5. Install DTR.
 
     Now that the offline node has all the images needed to install UCP,
-    you can [install DTR that host](install-dtr.md). Make sure to
+    you can [install DTR that host](index.md). Make sure to
     also copy the images to any other nodes you want to install DTR
     replicas onto.
 
@@ -62,4 +62,4 @@ copy that package to the nodes where you’ll install DTR.
 ## Where to go next
 
 * [DTR architecture](../architecture.md)
-* [Install DTR](install-dtr.md)
+* [Install DTR](index.md)

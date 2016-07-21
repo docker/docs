@@ -138,7 +138,7 @@ documentation.
 
   * Users, depending on their roles, can access account information through the Trusted Registry UI.
 
-  * View new API documentation through the Trusted Registry UI. You can also view this [documentation](/docker-trusted-registry/overview.md) from Docker, Inc. docs section.
+  * View new API documentation through the Trusted Registry UI. You can also view this [documentation](/docker-trusted-registry/index.md) from Docker, Inc. docs section.
 
 * New APIs
 
@@ -288,7 +288,7 @@ Trusted Registry. See below for specifics.
 
 **New Features**
 
-* New, more granular, [roles for users](../user-management/permission-levels.md). Docker Trusted Registry users can now be assigned different levels of access
+* New, more granular, [roles for users](../user-management/index.md). Docker Trusted Registry users can now be assigned different levels of access
 (admin, r/w, r/o) to the repositories. **Important:** Existing Docker Trusted
 Registry users should make sure to see the note [below](#dhe-1-0-upgrade-warning) regarding migrating users before upgrading.
 * A new storage status indicator for storage space. The dashboard now shows used and available storage space for supported storage drivers.

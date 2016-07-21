@@ -4,7 +4,7 @@ title = "System requirements"
 description = "Learn about the system requirements for installing Docker Trusted Registry."
 keywords = ["docker, DTR, architecture, requirements"]
 [menu.main]
-parent="workw_dtr_install"
+parent="dtr-menu-install"
 identifier="dtr_system_requirements"
 weight=0
 +++
@@ -52,4 +52,4 @@ Docker Datacenter is a software subscription that includes 3 products:
 ## Where to go next
 
 * [DTR architecture](../architecture.md)
-* [Install DTR](install-dtr.md)
+* [Install DTR](index.md)

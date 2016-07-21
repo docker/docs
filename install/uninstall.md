@@ -4,7 +4,7 @@ title = "Uninstall"
 description = "Learn how to uninstall your Docker Trusted Registry installation."
 keywords = ["docker, dtr, install, uninstall"]
 [menu.main]
-parent="workw_dtr_install"
+parent="dtr-menu-install"
 identifier="dtr_uninstall"
 weight=50
 +++
@@ -63,5 +63,5 @@ Now you can confirm on Docker Universal Control Plane that the DTR replica
 
 ## Where to go next
 
-* [Install DTR](install-dtr.md)
+* [Install DTR](index.md)
 * [Install DTR offline](install-dtr-offline.md)

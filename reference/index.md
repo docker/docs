@@ -1,16 +1,16 @@
 <!--[metadata]>
 +++
-title = "DTR tool reference"
-description = "Learn about the options available on the docker/trusted-registry image."
+title = "Overview"
+description = "Learn about the options available on the docker/dtr image."
 keywords = ["docker, dtr, install, uninstall, configure"]
 [menu.main]
-parent="workw_dtr_install"
-identifier="dtr_menu_reference"
-weight=60
+parent="dtr_menu_reference"
+identifier="dtr_reference_overview"
+weight=0
 +++
 <![end-metadata]-->
 
-# DTR tool reference
+# docker/dtr image overview
 
 This tool has commands to install, configure, and backup Docker
 Trusted Registry (DTR). It also allows uninstalling DTR.

@@ -79,9 +79,9 @@ backend or a network filesystem like NFS.
 
 For load balancing and high-availability, you can install multiple replicas of
 DTR, and join them to create a cluster.
-[Learn more about high availability](high-availability/high-availability.md).
+[Learn more about high availability](high-availability/index.md).
 
 ## Where to go next
 
 * [System requirements](install/system-requirements.md)
-* [Install DTR](install/install-dtr.md)
+* [Install DTR](install/index.md)

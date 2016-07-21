@@ -1,5 +1,6 @@
 <!--[metadata]>
 +++
+aliases = ["/docker-trusted-registry/quick-start/"]
 title = "Pull an image"
 description = "Learn how to pull an image from Docker Trusted Registry."
 keywords = ["docker, registry, images, pull"]
@@ -35,4 +36,4 @@ $ docker pull dtr.company.org/dave.lauper/golang:1.7
 ## Where to go next
 
 * [Push an image to DTR](push-an-image.md)
-* [Configure your Docker Engine](configure-docker-engine.md)
+* [Configure your Docker Engine](index.md)

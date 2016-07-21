@@ -36,10 +36,10 @@ If you decide to install the new DTR on the same node, you'll need
 to install it on a port other than 443, since DTR 1.4.3 is already using it.
 Use these instructions to install DTR 2.0:
 
-* [Release notes](../../release-notes/release-notes.md)
+* [Release notes](../../release-notes/index.md)
 * [System requirements](../system-requirements.md)
 * [DTR architecture](../../architecture.md)
-* [Install DTR 2.0](../install-dtr.md)
+* [Install DTR 2.0](../index.md)
 
 
 ## Step 3. Migrate metadata
@@ -99,13 +99,13 @@ You can find the certificates of DTR 1.4.3 under `/usr/local/etc/dtr/ssl`.
 
 Now that you have a working installation of DTR 2.0, you should test that you
 can push and pull images to it.
-[Learn how to push and pull images](../../repos-and-images/configure-docker-engine.md).
+[Learn how to push and pull images](../../repos-and-images/pull-an-image.md).
 
 ## Step 6. Join replicas to your cluster
 
 This step is optional.
 
-To set up DTR for [high availability](../../high-availability/high-availability.md),
+To set up DTR for [high availability](../../high-availability/index.md),
 you can add more replicas to your DTR cluster. Adding more replicas allows you
 to load-balance requests across all replicas, and keep DTR working if a
 replica fails.
@@ -157,7 +157,7 @@ replicas:
 
     When configuring your DTR cluster for high-availability, you should install
     3, 5, or 7 replicas.
-    [Learn more about high availability](../../high-availability/high-availability.md)
+    [Learn more about high availability](../../high-availability/index.md)
 
 ## Step 7. Decommission DTR 1.4.3
 
@@ -167,5 +167,5 @@ containers.
 
 ## Where to go next
 
-* [Upgrade to DTR 2.x](upgrade-minor.md)
-* [Monitor DTR](../../monitor-troubleshoot/monitor.md)
+* [Upgrade to DTR 2.x](index.md)
+* [Monitor DTR](../../monitor-troubleshoot/index.md)

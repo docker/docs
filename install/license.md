@@ -5,7 +5,7 @@ title = "License DTR"
 description = "Learn how to license your Docker Trusted Registry installation."
 keywords = ["docker, dtr, install, license"]
 [menu.main]
-parent="workw_dtr_install"
+parent="dtr-menu-install"
 identifier="dtr_license"
 weight=31
 +++
@@ -46,5 +46,5 @@ Click the **Apply new license** button, and upload your new license file.
 
 ## Where to go next
 
-* [Install DTR](install-dtr.md)
+* [Install DTR](index.md)
 * [Install DTR offline](install-dtr-offline.md)
