@@ -48,7 +48,7 @@ and community of the Docker Project.
 * Michael Crosby
 * Steve Francia
 * Stephen Day
-* Arnaud Poterie
+* Arnaud Porterie
 
 ## Individual Contributors
 
@@ -64,7 +64,7 @@ and community of the Docker Project.
 * Ahmet Alp Balkan (Microsoft)
 * Rohit Jnagal (Google)
 
-## User
+## Users
 
 * Nicola Paolucci (Atlassian)
 * Burke Libbey (Shopify)
