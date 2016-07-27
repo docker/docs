@@ -20,16 +20,12 @@ Before installing, be sure your infrastructure has these requirements.
 You can install UCP on-premises or on a cloud provider. To install UCP,
 all nodes must have:
 
+* Linux kernel version 3.10 or higher
+* CS Docker Engine version 1.10 or higher. Learn about the
+[operating systems supported by CS Docker Engine](https://docs.docker.com/cs-engine/install/).
 * 2.00 GB of RAM
 * 3.00 GB of available disk space
 * A static IP address
-* One of the supported operating systems installed:
-  * RHEL 7.0, 7.1, or 7.2
-  * Ubuntu 14.04 LTS
-  * CentOS 7.1
-  * SUSE Linux Enterprise 12
-* Linux kernel version 3.10 or higher
-* CS Docker Engine version 1.10 or higher
 
 For highly-available installations, you also need a way to transfer files
 between hosts.
