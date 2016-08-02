@@ -143,7 +143,7 @@ type yubikeySigner struct {
 }
 
 // NewYubiPrivateKey returns a YubiPrivateKey, which implements the data.PrivateKey
-// interface except that the private material is inacessible
+// interface except that the private material is inaccessible
 func NewYubiPrivateKey(slot []byte, pubKey data.ECDSAPublicKey,
 	passRetriever notary.PassRetriever) *YubiPrivateKey {
 
