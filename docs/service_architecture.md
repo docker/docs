@@ -344,7 +344,7 @@ decrypted key depends on the type and combination of keys that were compromised
 
   No other keys are needed, since the attacker can just any rotate or all of them to ones that they
   generate. With these keys, they can set up a mirror to serve malicious data - any malicious data
-  at all, given that they have acess to all the keys.
+  at all, given that they have access to all the keys.
 
 - **Decrypted Root Key + none or any combination of decrypted keys + Notary Service write-capable credentials**
 
