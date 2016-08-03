@@ -53,12 +53,12 @@ this.
 
 ## Load balancing strategy
 
-UCP Docker UCP does not include a load-balancer. You can configure your own
-load-balancer to balance user requests across all controller nodes.
+Docker UCP does not include a load balancer. You can configure your own
+load balancer to balance user requests across all controller nodes.
 
 If you plan on using a load balancer, you need to decide whether you are going
 to add the nodes to the load balancer using their IP address, or their FQDN.
-Independently of what you choose, it should be consistent across the  nodes.
+Independently of what you choose, it should be consistent across nodes.
 
 After that, you should take note of all IPs or FQDNs before starting the
 installation.
@@ -78,13 +78,15 @@ or port number.
 ## Using external CAs
 
 You can customize UCP to use certificates signed by an external Certificate
-Authority. If you decide to use your own CAs take in consideration that:
+Authority. If you decide to use your own CA you may choose to do so
+during installation time by taking in consideration that:
 
-* During the installation you need to copy the ca.pem, cert.pem, and key.pem
-files across all controller hosts,
+* During the installation you may need to copy the ca.pem, cert.pem, and key.pem
+files across all controller hosts, if the certificates are different for each
+node. 
 * The ca.pem is the root CA public certificate
 * The cert.pem is the server cert plus any intermediate CA public certificates,
-* The cert.pem should have SANs for all addresses used to reach UCP,
+* The cert.pem should have SANs for all addresses used to reach the UCP controller,
 * The key.pem is the server private key,
 
 You can have a certificate for each controller, with a common SAN. As an
@@ -94,14 +96,14 @@ example, on a three node cluster you can have:
 * engine02.docker.vm with SAN ducp.docker.vm
 * engine03.docker.vm with SAN ducp.docker.vm
 
-## File transfer across hosts
+Alternatively, you can also install UCP with a single externally-signed
+certificate for all controllers rather than one for each controller node. 
+In that case, the certificate files will automatically be copied to any new
+controller nodes joining the cluster or being promoted into controllers.
 
-Make sure you can transfer file between the hosts on the cluster. You will
-need to replicate CAs across controller nodes.
-
-For this, you can tools like `scp` or `rsync`, or configure the hosts to use
-a network file system.
-
+Finally, switching your UCP installation to use a single externally-signed certificate
+is a process that can be performed after installation by an Admin user through
+the UCP UI.
 
 ## Where to go next
 

@@ -26,7 +26,7 @@ infrastructure has all the [requirements UCP needs to run](system-requirements.m
 
 ## Step 2: Install CS Docker on all nodes
 
-UCP requires you to install Docker CS Engine 1.10 or above on all nodes of
+UCP requires you to install Docker CS Engine 1.12.0 or above on all nodes of
 your UCP cluster.
 
 [Install CS Docker Engine](https://docs.docker.com/docker-trusted-registry/cs-engine/install/)
@@ -38,7 +38,7 @@ Docker UCP uses [named volumes](../architecture.md) to persist data. If you want
 to customize the volume drivers and flags of these volumes, you can create the
 volumes before installing UCP.
 
-If the volumes don't exist, when installing UCP they are created with the
+If the volumes don't exist, they are created when installing UCP with the
 default volume driver and flags.
 
 
@@ -48,7 +48,8 @@ The UCP cluster uses TLS to secure all communications. Two Certificate
 Authorities (CA) are used for this:
 
 * Cluster root CA: generates certificates for new nodes joining the cluster and
-admin user bundles.
+admin user bundles. The Cluster root CA is also used as an external CA in the
+underlying Docker Engine Swarm Mode cluster.
 * Client root CA: generates non-admin user bundles.
 
 You can customize UCP to use certificates signed by an external Certificate
@@ -58,7 +59,7 @@ browsers and client tools already trust.
 
 If you want to use your own certificates:
 
-1. Log into the host where you intend to instal UCP.
+1. Log into the host where you intend to iniate the UCP install from.
 
 2. Create a volume with the name `ucp-controller-server-certs`.
 
@@ -71,15 +72,19 @@ If you want to use your own certificates:
     | key.pem  | Your UCP controller private key.                                                  |
 
 
-## Step 5: Install the UCP controller
+## Step 5: Install UCP 
 
 To install UCP you use the `docker/ucp` image. This image has commands to
-install, configure, and backup UCP. To find what commands and options are
+install, configure, backup and restore UCP. To find what commands and options are
 available, check the [reference documentation](../reference/install.md).
 
-To install UCP:
+UCP can be either installed on top of an existing Docker Swarm Mode cluster, or
+from scratch. In both cases, UCP controllers are installed on top of Swarm Mode
+managers.
 
-1. Log in to the machine where you want to install UCP.
+To install UCP on an existing swarm-mode cluster:
+
+1. Log in to a shell session on one of the cluster's manager nodes 
 
 2. Use the `docker/ucp install` command to install UCP.
 
@@ -91,22 +96,25 @@ To install UCP:
     $ docker run --rm -it --name ucp \
       -v /var/run/docker.sock:/var/run/docker.sock \
       docker/ucp install -i \
-      --host-address <$UCP_PUBLIC_IP>
     ```
 
     Where:
 
     * i, specify to run the install command interactively,
-    * host-address, is the public IP where users or a load balancer can access
-    UCP,
-    * Also, include the `--external-server-cert` flag if you're using server
-    certificates signed by an external CA.
+    * Also, include the `--external-server-cert` flag if you want to configure
+      UCP to user server certificates signed by an external CA during
+	  installation. You can always configure this setting at a later stage.
+	* If you're not using `--external-server-cert` at install time, you may need
+	  to provide a `--san` flag to add any FQDNs or Load Balancer IP addresses
+	  for your controller nodes to UCP's self-signed certificates. 
+	* If you're not using `--external-server-cert` and  wish to specify different SANs 
+	for each controller node in your cluster, you can manually
+	specify SANs as a comma-separated list in the node label `com.docker.ucp.SANs` of your
+	swarm-mode manager nodes using `docker node update`. You can also change SANs on a 
+	per-node basis through the UI at `Admin Settings>Certificates`.
 
-    </br>
-    When installing Docker UCP, overlay networking is automatically configured
-    for you. If you are running Docker CS Engine 1.10, or have custom
-    configurations on your Docker CS Engine, you need to restart the Docker
-    daemon at this point.
+	When this command completes, UCP will be installed in every node of your
+	original Swarm Mode cluster. 
 
 
 3. Check that the UCP web application is running.
@@ -119,131 +127,57 @@ To install UCP:
 
     ![](../images/login.png)
 
+To install UCP from scratch:
+
+1. Log in to a shell session on a node which will become a UCP controller
+
+2. Use the `docker/ucp install` command to install UCP on the current node. 
+	You may use the `--host-address` flag to specify the IP address where all
+	nodes in the cluster will be able to reach this controller, as well as all
+	the flags mentioned in the previous section.
+
+3. When the UCP installation completes, use `docker swarm join-token worker` and
+   `docker swarm join-token manager` to obtain the commands with which you may
+	join workers and managers in the cluster. Manager nodes will automatically become 
+	UCP	controllers after they join the cluster.
+
+4. Check that the UCP web application is running and inspect the join process.
+    In your browser, navigate to the address where you've installed UCP.
+	Log in as an admin user and navigate to Resources>Nodes. UCP is being
+	installed on any nodes that appear to be down and you can view the
+	installation logs for a given node by selecting the node and going to the
+	`Agent Logs` page. You can also observe the status of the installation with
+	a UCP admin client bundle through the `docker node ls` CLI command.
+
+## Step 6: Add more nodes - Remove nodes
+
+To add more nodes to your UCP cluster:
+
+1. Obtain a join token for manager or worker nodes with the 
+	`docker swarm join-token manager` and `docker swarm join-token worker`
+	commands respectively.
+
+2. Run the corresponding `docker swarm join` command on the new node that you
+   wish to join to the cluster.
+
+3. Wait for the node to be listed as `Ready` in the UCP UI or through `docker
+   node ls` when using an admin client bundle
+
+
+To remove nodes from your UCP cluster:
+
+1. Remove the node from the User Interface
+
+OR
+
+1. Perform a `docker node rm` through a UCP admin bundle
+
 ## Step 6: License your installation
 
-Now that your UCP controller is installed, you need to license it.
+Before accessing the UCP Beta UI, you need to license your installation first.
 [Learn how to license your installation](license.md).
 
-## Step 7: Backup the controller CAs
-
-For an highly available installation, you can add more controller nodes to
-the UCP cluster. The controller nodes are replicas of each other.
-
-For this, you need to make the CAs on each controller node use the same
-root certificates and keys.
-
-To create a backup of the CAs used on the controller node:
-
-1. Log into the controller node using ssh.
-2. Run the docker/ucp backup command.
-
-    ```bash
-    $ docker run --rm -i --name ucp \
-        -v /var/run/docker.sock:/var/run/docker.sock \
-        docker/ucp backup \
-        --interactive \
-        --root-ca-only \
-        --passphrase "secret" > /tmp/backup.tar
-    ```
-
-[Learn more about the backup command](../high-availability/replicate-cas.md).
-
-## Step 8: Add controller replicas to the UCP cluster
-
-This step is optional.
-
-For an highly available installation, you can add more controller nodes to
-the UCP cluster. For that, use the `docker/ucp join --replica` command.
-[Learn more about the join command](../reference/join.md).
-
-For each node that you want to install as a controller replica:
-
-1. Log into that node using ssh.
-
-2. Make sure you transfer the backup.tar from the previous step to this node.
-
-3. Use the join command with the replica option:
-
-    In this example we'll be running the join command interactively, so that
-    the command prompts for the necessary configuration values. We'll also
-    be passing the backup.tar file from the previous step in order to ensure
-    that the CAs are replicated to the new controller node.
-
-    ```bash
-    $ docker run --rm -it --name ucp \
-      -v /var/run/docker.sock:/var/run/docker.sock \
-      -v $BACKUP_PATH/backup.tar:/backup.tar \
-      docker/ucp join \
-      --interactive \
-      --replica \
-      --passphrase "secret"
-    ```
-
-4. Since UCP configures your Docker Engine for multi-host networking, it might
-prompt you to restart the Docker daemon. To make the installation faster, join
-all replica nodes first, and only then restart the Docker daemon on those nodes.
-
-5. Repeat steps 1 and 2 on the other nodes you want to set up as replicas.
-Make sure you set up 3, 5, or 7 controllers.
-
-
-6. Check the cluster state.
-
-    The Dashboard page of UCP should list all your controller nodes.
-
-    ![UCP nodes page](../images/replica-nodes.png)
-
-## Step 9: Ensure controllers know about each other
-
-Internally, each controller node has a key-value store that keeps track of
-the controllers that are part of the cluster.
-When you installed and joined replica controllers, the Docker daemon on that
-host was configured to use that key-value store.
-
-To make the cluster fault-tolerant and be able to recover faster with less
-downtime, you need to configure the Docker daemon on each controller node to
-know about the key-value store that is running on the other nodes.
-
-For each controller node:
-
-1. Log into that node using ssh.
-
-2. Run the engine-discovery command.
-
-    ```bash
-    $ docker run --rm -it \
-        --name ucp \
-        -v /var/run/docker.sock:/var/run/docker.sock \
-        docker/ucp engine-discovery \
-        --update
-    ```
-
-## Step 10: Add more nodes to the UCP cluster
-
-Now you can add additional nodes to your UCP cluster. These are the nodes that
-will be running your containers.
-
-For each node that you want to add to your UCP cluster:
-
-1. Log into that node.
-
-2. Use the join command, to join the node to the cluster:
-
-    ```bash
-    $ docker run --rm -it --name ucp \
-      -v /var/run/docker.sock:/var/run/docker.sock \
-      docker/ucp join -i
-    ```
-
-3. Repeat steps 1 and 2 on the other nodes you want to add to your UCP cluster.
-
-4. Check the cluster state.
-
-    The Dashboard page of UCP should list all your controller nodes.
-
-    ![UCP nodes page](../images/nodes-page.png)
-
-## Step 11. Download a client certificate bundle
+## Step 7. Download a client certificate bundle
 
 To validate that your cluster is correctly configured, you should try accessing
 the cluster with the Docker CLI client. For this, you'll need to get a client
