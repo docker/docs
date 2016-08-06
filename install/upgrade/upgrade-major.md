@@ -52,6 +52,16 @@ For this, you can use the `docker/dtr migrate` command. This command
 migrates configurations, accounts, and repository metadata. It doesn't migrate
 the images that are on the storage backend used by DTR 1.4.3.
 
+Before running the migration, get the DTR 2.0 CA certificate used for the `--dtr-ca` parameter:
+
+1. Log into the **DTR 2.0 web UI**, and navigate to the **Settings** screen.
+
+2. In the **Domain** section, click the **Show TLS settings** link.
+
+3. Copy the content of the **TLS CA** field.
+
+    ![](../../images/dtr-integration-1.png)
+
 To start the migration:
 
 1. Log into the host running DTR 1.4.3 using ssh.
@@ -74,7 +84,7 @@ To start the migration:
       -v /var/run/docker.sock:/var/run/docker.sock \
       docker/dtr migrate \
       --ucp-url $UCP_HOST --ucp-ca "$(cat ucpca.crt)" \
-      --dtr-load-balancer https://$DTR_HOST \
+      --dtr-external-url $DTR_HOST \
       --dtr-ca "$(cat dtrca.crt)"
     ```
 
@@ -95,13 +105,45 @@ You need to manually configure the following settings:
 
 You can find the certificates of DTR 1.4.3 under `/usr/local/etc/dtr/ssl`.
 
-## Step 5. Test your installation
+## Step 5. Transfer image data to DTR 2.0
+
+If utilizing local filesystem storage, the image data is not copied during by
+the migrate command and should be transferred manually.
+
+To transfer the images:
+
+1. Log into the host running DTR 2.0 using ssh.
+
+2. Get the filesystem volume path DTR 2.0 stores images:
+
+    ```bash
+    $ docker volume inspect --format '{{ .Mountpoint }}' $(docker volume ls -q | grep dtr-registry)
+    ```
+
+    The path returned will be similar to: `/var/lib/docker/volumes/dtr-registry-fa61225dc006/_data`
+
+3. Log into the host running DTR 1.4.3 using ssh.
+
+4. Copy the image data:
+
+    ```bash
+    $ scp -r /var/local/dtr/image-storage/local/* $DTR_HOST:$DTR_2_FS_VOLUME_PATH
+    ```
+
+    For example:
+
+    ```bash
+    $ scp -r /var/local/dtr/image-storage/local/* \
+      dtr2:/var/lib/docker/volumes/dtr-registry-4fb637dbbecc/_data/
+    ```
+
+## Step 6. Test your installation
 
 Now that you have a working installation of DTR 2.0, you should test that you
 can push and pull images to it.
 [Learn how to push and pull images](../../repos-and-images/pull-an-image.md).
 
-## Step 6. Join replicas to your cluster
+## Step 7. Join replicas to your cluster
 
 This step is optional.
 
@@ -159,7 +201,7 @@ replicas:
     3, 5, or 7 replicas.
     [Learn more about high availability](../../high-availability/index.md)
 
-## Step 7. Decommission DTR 1.4.3
+## Step 8. Decommission DTR 1.4.3
 
 Once you've fully tested your new installation, you can uninstall DTR 1.4.3
 by deleting `/usr/local/etc/dtr` and `/var/local/dtr` and removing all dtr
