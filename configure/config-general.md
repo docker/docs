@@ -50,5 +50,4 @@ already.
 
 ## See also
 
-* [Configure authentication](config-auth.md)
 * [Configure storage settings](config-storage.md)

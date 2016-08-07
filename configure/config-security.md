@@ -225,5 +225,4 @@ Then restart the Docker daemon with `sudo /etc/init.d/docker restart`.
 
 ## See also
 
-* [Configure authentication](config-auth.md)
 * [Configure storage options](config-storage.md)

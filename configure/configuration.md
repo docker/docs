@@ -20,7 +20,6 @@ view configuration options. Configuring is grouped by the following:
 * [Security settings](config-security.md)
 * [Storage settings](config-storage.md)
 * [License](../install/license.md)
-* [Authentication settings](config-auth.md) (including LDAP)
 * Updates
 
 
@@ -30,37 +29,6 @@ Saving changes you've made to settings will restart various services, as follows
  * License change: full Docker Trusted Registry restart
  * SSL change: Nginx reload
  * Storage config: only registries restart
- * Authentication config: no restart
-
-However, your first configuration task is to create a system administrator account.
-
-## Get started by creating your admin account
-
-When you have finished installing Docker Trusted Registry for the first time, you are unable to do anything until you create a system administrator account. Create it using the authentication method (either Managed or LDAP) that you intend to use in order to manage the Trusted Registry.
-
-### Create an admin using managed mode
-
-1. Navigate to the Trusted Registry dashboard > Settings > Auth.
-2. Select Managed from the Authentication Method drop-down form.
-3. Fill out the forms for Username, Password, and ensure to select under Global role, Admin - all repositories.
-4. Save your work.
-
-### Create an admin using LDAP mode
-
-If you create an admin using the LDAP mode, then you will need to create a filter and then sync your data.
-
-1. Navigate to the Trusted Registry dashboard > Settings > Auth.
-2. Select LDAP from the Authentication Method drop-down form.
-3. Enter a new Admin Password. This password is also the admin recovery password.
-4. At a minimum, enter your information in the following fields and save.
-
-    * LDAP Server URL
-    * Use StartTLS (you can leave this unchecked)
-    * User Base DN
-    * User Login Attribute
-    * Search User DN
-    * Search User Password
-    * LDAP Sync Interval
 
 ## Docker daemon logs
 
