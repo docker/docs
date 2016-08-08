@@ -28,13 +28,14 @@ comply with the [system requirements](system-requirements.md).
 
 ## Hostname strategy
 
-Docker UCP requires the Docker CS Engine to run. Before installing Docker CS
-Engine on the cluster nodes, you should plan for a common naming strategy.
+Docker UCP requires CS Docker Engine to run. Before installing the commercially
+supported Docker Engine on your cluster nodes, you should plan for a common
+hostname strategy.
 
 Decide if you want to use short hostnames like `engine01` or Fully Qualified
 Domain Names (FQDN) likes `engine01.docker.vm`. Independently of your choice,
-ensure your naming strategy is consistent across the cluster, since UCP uses
-the hostnames.
+ensure your naming strategy is consistent across the cluster, since Docker
+Engine and UCP use hostnames.
 
 As an example, if your cluster has 4 hosts you can name them:
 
@@ -78,16 +79,14 @@ or port number.
 ## Using external CAs
 
 You can customize UCP to use certificates signed by an external Certificate
-Authority. If you decide to use your own CA you may choose to do so
-during installation time by taking in consideration that:
+Authority. When using your own certificates, take in consideration that you
+need to have a certificate bundle that has:
 
-* During the installation you may need to copy the ca.pem, cert.pem, and key.pem
-files across all controller hosts, if the certificates are different for each
-node. 
-* The ca.pem is the root CA public certificate
-* The cert.pem is the server cert plus any intermediate CA public certificates,
-* The cert.pem should have SANs for all addresses used to reach the UCP controller,
-* The key.pem is the server private key,
+* A ca.pem file with the root CA public certificate,
+* A cert.pem file with the server certificate and any intermediate CA public
+certificates. This certificate should also have SANs for all addresses used to
+reach the UCP controller,
+* A key.pem file with server private key.
 
 You can have a certificate for each controller, with a common SAN. As an
 example, on a three node cluster you can have:
@@ -96,14 +95,11 @@ example, on a three node cluster you can have:
 * engine02.docker.vm with SAN ducp.docker.vm
 * engine03.docker.vm with SAN ducp.docker.vm
 
+
 Alternatively, you can also install UCP with a single externally-signed
-certificate for all controllers rather than one for each controller node. 
+certificate for all controllers rather than one for each controller node.
 In that case, the certificate files will automatically be copied to any new
 controller nodes joining the cluster or being promoted into controllers.
-
-Finally, switching your UCP installation to use a single externally-signed certificate
-is a process that can be performed after installation by an Admin user through
-the UCP UI.
 
 ## Where to go next
 

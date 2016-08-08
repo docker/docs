@@ -12,55 +12,42 @@ weight=0
 
 # Use externally-signed certificates
 
-Docker Universal Control Plane uses TLS to encrypt the traffic between users
-and your cluster. By default this is done using self-signed certificates.
-Since self-signed certificates are not trusted by web browsers, when users
-access the UCP web UI, their browsers display a security warning. To avoid this,
-you can configure UCP to use externally signed certificates.
+By default the UCP web UI is exposed using HTTPS, to ensure all
+communications between clients and the cluster are encrypted. Since UCP
+controllers use self-signed certificates for this, when a client accesses
+UCP their browsers won't trust this certificate, so the browser displays a
+warning message.
 
-This can be done while
-[installing the UCP cluster](../installation/install-production.md) by
-providing the externally signed certificates during the installation.
-If you install UCP without providing externally signed certificates, then
-self-signed certificates are used by default. These certificates can be replaced
-at any time.
+You can configure UCP to use your own certificates, so that it is automatically
+trusted by your users' browser and client tools.
 
-Since client certificate bundles are signed and verified with the UCP server
-certificates, if you replace the UCP server certificates, users have to
-download new client certificate bundles to be able to run Docker commands on
-the cluster.
+To ensure minimal impact to your business, you should plan for this change to
+happen outside business peak hours. Your applications will continue
+running normally, but UCP will be unresponsive while the controller containers
+are restarted.
 
-## Replace existing certificates
+## Replace the server certificates
 
-To replace the server certificates used by UCP, for each controller node:
+To configure UCP to use your own certificates and keys, go to the
+**UCP web UI**, navigate to the **Admin Settings** page,
+and click **Certificates**.
 
-1. Login into the node with ssh.
-2. In the directory where you have the keys and certificates to use, run:
+![](../images/use-externally-signed-certs-1.png)
 
-    ```bash
-    # Create a container that attaches to the same volume where certificates are stored
-    $ docker create --name replace-certs -v ucp-controller-server-certs:/data busybox
+Upload your certificates and keys:
 
-    # Copy your keys and certificates to the container's volumes
-    $ docker cp cert.pem replace-certs:/data/cert.pem
-    $ docker cp ca.pem replace-certs:/data/ca.pem
-    $ docker cp key.pem replace-certs:/data/key.pem
+* A ca.pem file with the root CA public certificate.
+* A cert.pem file with the server certificate and any intermediate CA public
+certificates. This certificate should also have SANs for all addresses used to
+reach the UCP controller, including load balancers.
+* A key.pem file with server private key.
 
-    # Remove the container, since you won't need it any longer
-    $ docker rm replace-certs
-    ```
+Finally, click **Update** for the changes to take effect.
 
-3. Restart the `ucp-controller` container.
+After replacing the certificates your users won't be able to authenticate
+with their old client certificate bundles. Ask your users to go to the UCP
+web UI and [get new client certificate bundles](../access-ucp/cli-based-access.md).
 
-    To avoid downtime, don't restart all the `ucp-controller` containers of
-    your cluster at the same time.
+## Where to go next
 
-    ```bash
-    $ docker restart ucp-controller
-    ```
-
-4. Let your users know.
-
-    After replacing the certificates your users won't be able to authenticate
-    with their old client certificate bundles. Ask your users to go to the UCP
-    web UI and [get new client certificate bundles](../access-ucp/cli-based-access.md).
+* [Access UCP from the CLI](../access-ucp/cli-based-access.md)
