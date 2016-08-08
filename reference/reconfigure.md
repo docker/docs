@@ -22,7 +22,8 @@ $ docker run -it --rm docker/dtr \
 
 ## Description
 
-This command performs changes to DTR configurations.
+This command changes specified configurations for DTR and leaves
+existing configurations in its original state.
 
 WARNING: DTR is restarted for the new configurations to take
 effect. To have no down time, configure your DTR for high-availability.
