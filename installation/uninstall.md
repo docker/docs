@@ -10,43 +10,36 @@ weight=60
 +++
 <![end-metadata]-->
 
-
 # Uninstall UCP
 
-Use the docker/ucp uninstall command, to uninstall Docker Universal Control
-Plane from a node. This command only removes the UCP containers, and doesn’t
-affect any other containers.
+Use the docker/ucp `uninstall-cluster` command to uninstall Docker Universal Control
+Plane from your swarm cluster. This command only removes the UCP services,
+containers and doesn’t affect any other services or containers. Your swarm
+cluster will be left intact.
 
-To see what options are available in the uninstall command, check the
-[uninstall command reference](../reference/uninstall.md).
-
-To uninstall Docker UCP from a cluster, you need to:
-
-1. Uninstall UCP from every node joined in the cluster,
-2. Uninstall UCP from every controller node, one at a time,
-3. Restart the Docker engine on all the nodes.
-
+To remove an individual node from UCP, and keep UCP intact, see the
+documentation on joining nodes.
 
 ## Example
 
-In this example we’ll be running the uninstall command interactively, so that
+In this example we’ll be running the `uninstall-cluster` command interactively, so that
 the command prompts for the necessary configuration values.
-You can also use flags to pass values to the uninstall command.
+You can also use flags to pass values to the `uninstall-cluster` command.
 
-1. Run the uninstall command.
+1. Run the `uninstall-cluster` command.
 
     ```bash
     $ docker run --rm -it \
       -v /var/run/docker.sock:/var/run/docker.sock
       --name ucp \
-      docker/ucp uninstall -i
+      docker/ucp `uninstall-cluster` -i
 
-    INFO[0000] Were about to uninstall the local components for UCP ID: FEY4:M46O:7OUS:QQA4:HLR3:4HRD:IUTH:LC2W:QPRE:BLYH:UWEM:3TYV
+    time="2016-08-09T20:36:36Z" level=info msg="Your engine version 1.12.0, build 8eab29e (4.4.16-boot2docker) is compatible" 
+    time="2016-08-09T20:36:36Z" level=info msg="We're about to uninstall the local components for UCP ID: ZB6V:R3ZR:VMMJ:WM7B:M3US:VHMS:HZZ6:SHEL:RGXF:BHAE:2FPV:K7WH" 
     Do you want proceed with the uninstall? (y/n): y
-
-    INFO[0000] Removing UCP Containers
-    INFO[0000] Removing UCP images
-    INFO[0005] Removing UCP volumes
+    time="2016-08-09T20:36:38Z" level=info msg="Uninstalling UCP on each node..." 
+    time="2016-08-09T20:36:56Z" level=info msg="UCP has been removed from this cluster successfully." 
+    time="2016-08-09T20:36:58Z" level=info msg="Removing UCP Services" 
     ```
 
 2. List the images remaining on the node.
@@ -71,21 +64,3 @@ You can also use flags to pass values to the uninstall command.
     Deleted: sha256:dee84053b25f9b3edffb734c842a70313021063cc78d9158c63de109e1b3cb72
     Deleted: sha256:93743d5df2362466e2fe116a677ec6a4b0091bd09e889abfc9109047fcfcdebf
     ```
-
-5. Restart the Docker daemon.
-
-    When you install or join a node, UCP configures the Docker engine on that
-    node for multi-host networking. When uninstalling, the configuration is
-    reverted to its original state, but you need to restart the Docker engine
-    for the configurations to take effect.
-
-    As an example, to restart the Docker engine on a Ubuntu distribution:
-
-    ```bash
-    $ sudo service docker restart
-    ```
-
-6. Confirm the node was removed from the cluster.
-
-    In the UCP web application, confirm the node is no longer listed. It
-    might take a few minutes for UCP to stop listing that node.
