@@ -6,7 +6,7 @@ keywords = ["docker, ucp, uninstall"]
 [menu.main]
 parent="mn_ucp_installation"
 identifier="ucp_uninstall"
-weight=60
+weight=70
 +++
 <![end-metadata]-->
 

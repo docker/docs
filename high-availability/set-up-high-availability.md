@@ -14,64 +14,56 @@ weight=0
 
 # Set up high availability
 
-Docker Universal Control Plane is designed for high availability (HA).
+Docker Universal Control Plane is designed for high availability (HA). You can
+join multiple manager nodes to the cluster, so that if one manager node fails,
+another can automatically take its place without impact to the cluster.
 
-When setting up a UCP cluster, you can add additional nodes to serve as
-replicas of the controller. In that case, you’ll have multiple nodes, each
-running the same set of containers.
-[Learn more about the UCP architecture](../architecture.md).
+Having multiple manager nodes in your cluster, allows you to:
 
-Adding replica nodes to your cluster allows you to:
-
-* Handle controller node failures,
-* Load-balance user requests across the controller and replica nodes.
-
+* Handle manager node failures,
+* Load-balance user requests across all manager nodes.
 
 ## Size your deployment
 
 To make the cluster tolerant to more failures, add additional replica nodes to
-your cluster:
+your cluster.
 
-| Controller and replicas | Failures tolerated |
-|:-----------------------:|:------------------:|
-|            1            |         0          |
-|            3            |         1          |
-|            5            |         2          |
-|            7            |         3          |
+| Manager nodes | Failures tolerated |
+|:-------------:|:------------------:|
+|       1       |         0          |
+|       3       |         1          |
+|       5       |         2          |
+|       7       |         3          |
 
 
-When sizing your cluster, follow these rules of thumb:
+For production-grade deployments, follow these rules of thumb:
 
-* Don't create a cluster with just one replica. Your cluster won't tolerate any
-failures, and it's possible that you experience performance degradation.
-* When a replica fails, the number of failures tolerated by your cluster
-decreases. Don't leave that replica offline for long.
-* Adding too many replicas to the cluster might also lead to performance
+* When a manager node fails, the number of failures tolerated by your cluster
+decreases. Don't leave that node offline for too long.
+* You should distribute your manager nodes across different availability zones.
+This way your cluster can continue working even if an entire availability zone
+goes down.
+* Adding many manager nodes to the cluster might lead to performance
 degradation, as changes to configurations need to be replicated across all
-replicas.
+manager nodes. The maximum advisable is having 7 manager nodes.
 
-## Replicating CAs
-
-When configuring UCP for high-availability, you need to ensure the CAs running
-on each UCP controller node are interchangeable. This is done by transferring
-root certificates and keys for the CAs to each controller node on the cluster. 
-[Learn how to replicate CAs for high availability](replicate-cas.md)
+After provisioning the new nodes, you can
+[add them to the cluster](../installation/scale-your-cluster.md).
 
 ## Load-balancing on UCP
 
-Docker UCP does not include a load-balancer. You can configure your own
-load-balancer to balance user requests across all controller replicas.
+Docker UCP does not include a load balancer. You can configure your own
+load balancer to balance user requests across all manager nodes.
 [Learn more about the UCP reference architecture](https://www.docker.com/sites/default/files/RA_UCP%20Load%20Balancing-Feb%202016_0.pdf).
 
 Since Docker UCP uses mutual TLS, make sure you configure your load balancer to:
 
 * Load-balance TCP traffic on ports 80 and 443,
 * Not terminate HTTPS connections,
-* Use the `/_ping` endpoint on each UCP controller, to check if the controller
+* Use the `/_ping` endpoint on each manager node, to check if the node
 is healthy and if it should remain on the load balancing pool or not.
-
 
 ## Where to go next
 
 * [UCP architecture](../architecture.md)
-* [Install UCP for production](../installation/install-production.md)
+* [Scale your cluster](../installation/scale-your-cluster.md)
