@@ -19,6 +19,13 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](../install/upgrade/upgrade-major.md),
 to upgrade your installation to the latest release.
 
+## Version 2.0.3
+
+August 11, 2016
+
+**Bug fixes**
+* You can now add descriptions to the repositories using markdown
+
 ## Version 2.0.2
 
 July 6, 2016
