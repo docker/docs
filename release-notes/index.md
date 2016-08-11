@@ -24,6 +24,7 @@ to upgrade your installation to the latest release.
 August 11, 2016
 
 **Bug fixes**
+
 * You can now add descriptions to the repositories using markdown
 
 ## Version 2.0.2
