@@ -23,11 +23,11 @@ copy that package to the nodes where you’ll install DTR.
 
 1. Get the DTR package.
 
-    Use a computer with internet access to download a single package with all DTR
-    images. As an example, to download UCP 2.0, run:
+    Use a computer with internet access to download a single package with all
+    Docker Datacenter components:
 
     ```bash
-    $ wget https://packages.docker.com/caas/ucp-1.1.2_dtr-2.0.2.tar.gz
+    $ wget https://packages.docker.com/caas/ucp-1.1.2_dtr-2.0.3.tar.gz -O docker-datacenter.tar.gz
     ```
 
 2. Transfer the package to the offline node.
@@ -37,7 +37,7 @@ copy that package to the nodes where you’ll install DTR.
     for this.
 
     ```bash
-    $ scp ucp-1.1.2_dtr-2.0.2.tar.gz $USER@$DTR_HOST:/tmp
+    $ scp docker-datacenter.tag.gz $USER@$DTR_HOST:/tmp
     ```
 
 3. Login into the host where you transferred the images.
@@ -48,7 +48,7 @@ copy that package to the nodes where you’ll install DTR.
     the `docker load` command, to load the images from the .tar file.
 
     ```bash
-    $ docker load < /tmp/ucp-1.1.2_dtr-2.0.2.tar.gz
+    $ docker load < /tmp/docker-datacenter.tar.gz
     ```
 
 5. Install DTR.
