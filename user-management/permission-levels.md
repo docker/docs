@@ -46,8 +46,8 @@ users can see the containers they deploy in the cluster.
 
 ## Team permission levels
 
-Teams allow you to define fine-grain permissions to containers that have the
-label `com.docker.ucp.access.label` applied to them.
+Teams allow you to define fine-grain permissions to services, containers, and
+networks that have the label `com.docker.ucp.access.label` applied to them.
 
 There are four permission levels:
 

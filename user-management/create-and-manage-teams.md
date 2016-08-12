@@ -13,8 +13,8 @@ weight=20
 # Create and manage teams
 
 You can extend the user's default permissions by granting them fine-grain
-permissions over containers. You do this by adding the user to a team.
-A team defines the permissions users have for containers that have the label
+permissions over resources. You do this by adding the user to a team.
+A team defines the permissions users have for resources that have the label
 `com.docker.ucp.access.label` applied to them.
 
 To create a new team, go to the **UCP web UI**, and navigate to the
@@ -51,22 +51,22 @@ from the team the next time UCP synchronizes with the LDAP server.
 
 To manage the permissions of the team, click the **Permissions** tab.
 Here you can specify a list of labels and the permission level users will have
-for containers with those labels.
+for resources with those labels.
 
 ![](../images/create-and-manage-teams-4.png)
 
 In the example above, members of the 'Operations' team have permissions to
-create and edit containers that have the labels
+create and edit resources that have the labels
 `com.docker.ucp.access.label=crm` or `com.docker.ucp.access.label=billing`.
 
 There are four permission levels available:
 
-| Team permission level | Description                                                                                                                                          |
-|:----------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| `No Access`           | The user can't view containers with this label.                                                                                                      |
-| `View Only`           | The user can view but can't create containers with this label.                                                                                       |
-| `Restricted Control`  | The user can view and create containers with this label. The user can't run `docker exec`, or containers that require privileged access to the host. |
-| `Full Control`        | The user can view and create containers with this label, without any restriction.                                                                    |
+| Team permission level | Description                                                                                                                                       |
+|:----------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------|
+| `No Access`           | The user can't view resources with this label.                                                                                                    |
+| `View Only`           | The user can view but can't create resources with this label.                                                                                     |
+| `Restricted Control`  | The user can view and create resources with this label. The user can't run `docker exec`, or services that require privileged access to the host. |
+| `Full Control`        | The user can view and create resources with this label, without any restriction.                                                                  |
 
 ## Where to go next
 

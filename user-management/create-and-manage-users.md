@@ -29,15 +29,16 @@ Check the 'Is a UCP admin' option, if you want to grant permissions for the
 user to change cluster configurations. Also, assign the user with a default
 permission level.
 
-Default permissions specify the permission a user has to create and edit
-resources in the cluster. There are four permission levels:
+Default permissions specify the permission a user has for resources that don't
+have the `com.docker.access.label` label applied to them. There are four
+permission levels:
 
-| Default permission level | Description                                                                                                                                                                                                  |
-|:-------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `No Access`              | The user can't view any resource, like volumes, networks, images, or containers.                                                                                                                             |
-| `View Only`              | The user can view volumes, networks and images, but can't create any containers.                                                                                                                             |
-| `Restricted Control`     | The user can view and edit volumes, networks, and images. They can create containers, but can't see other users containers, run `docker exec`, or run containers that require privileged access to the host. |
-| `Full Control`           | The user can view and edit volumes, networks, and images, They can create containers without any restriction, but can't see other users containers.                                                          |
+| Default permission level | Description                                                                                                                                                                                     |
+|:-------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `No Access`              | The user can't view resource, like services, images, networks, and volumes.                                                                                                                     |
+| `View Only`              | The user can view images and volumes, but can't create services.                                                                                                                                |
+| `Restricted Control`     | The user can view and edit volumes and networks. They can create services, but can't see other users services, run `docker exec`, or run containers that require privileged access to the host. |
+| `Full Control`           | The user can view and edit volumes and networks. They can create containers without any restriction, but can't see other users containers.                                                      |
 
 [Learn more about the UCP permission levels](permission-levels.md). Finally,
 click the **Create User** button, to create the user.
