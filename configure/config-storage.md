@@ -214,5 +214,4 @@ ensure your choices make sense.
 
 ## See also
 
-* [Configure authentication](config-auth.md)
 * [Configure security settings](config-security.md)

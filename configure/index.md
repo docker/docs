@@ -18,4 +18,3 @@ This section includes the following topics:
 * [Configure general settings](config-general.md)
 * [Security configuration](config-security.md)
 * [Storage configuration](config-storage.md)
-* [Auth configuration](config-auth.md)
