@@ -14,7 +14,7 @@ weight=110
 
 Here you can learn about new features, bug fixes, breaking changes and
 known issues for each UCP version.
-You can then use [the upgrade instructions](installation/upgrade.md), to
+You can then use [the upgrade instructions](installation/upgrade-major.md), to
 upgrade your installation to the latest release.
 
 ## Version 1.1.2
