@@ -9,7 +9,7 @@ identifier = "ucp_ref_uninstall"
 
 # docker/ucp uninstall
 
-Uninstall UCP components from this Docker Engine.
+The uninstall command is no longer used.
 
 ## Usage
 
@@ -23,8 +23,9 @@ docker run --rm -it \
 
 ## Description
 
-When uninstalling UCP, you must run the 'uninstall' command against every
-engine in your cluster.
+The uninstall command is no longer used. To remove a node from the UCP cluster,
+run the 'docker swarm leave' and 'docker node rm' commands. To remove the UCP
+components but preserve the swarm cluster, use the 'uninstall-cluster' command.
 
 ## Options
 
@@ -36,6 +37,3 @@ engine in your cluster.
 | `--pull`              | Specify image pull behavior ('always', when 'missing', or 'never') (default: "missing") |
 | `--registry-username` | Specify the username to pull required images with [$REGISTRY_USERNAME]                  |
 | `--registry-password` | Specify the password to pull required images with [$REGISTRY_PASSWORD]                  |
-| `--id`                | The ID of the UCP instance to uninstall                                                 |
-| `--preserve-certs`    | Don't delete the certs on the host                                                      |
-| `--preserve-images`   | Don't delete images on the host                                                         |

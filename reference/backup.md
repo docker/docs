@@ -9,7 +9,7 @@ parent = "ucp_ref"
 
 # docker/ucp id
 
-Stream a tar file to stdout containing all UCP data volumes.
+Stream a tar file to stdout containing all UCP data volumes
 
 ## Usage
 
@@ -42,11 +42,11 @@ built-in PGP compatible encryption.
 
 ## Options
 
-| Option           | Description                                                             |
-|:-----------------|:------------------------------------------------------------------------|
-| `--debug, -D`    | Enable debug mode                                                       |
-| `--jsonlog`      | Produce json formatted output for easier parsing                        |
-| `--id`           | The ID of the UCP instance to backup                                    |
-| `--root-ca-only` | Backup only the root CA certificates and keys from this controller node |
-| `--passphrase`   | Encrypt the tar file with the provided passphrase [$UCP_PASSPHRASE]     |
+| Option              | Description                                                                      |
+|:--------------------|:---------------------------------------------------------------------------------|
+| `--debug, -D`       | Enable debug mode                                                                |
+| `--jsonlog`         | Produce json formatted output for easier parsing                                 |
 | `--interactive, -i` | Enable interactive mode. You will be prompted to enter all required information. |
+| `--id`              | The ID of the UCP instance to backup                                             |
+| `--root-ca-only`    | Backup only the root CA certificates and keys from this controller node          |
+| `--passphrase`      | Encrypt the tar file with the provided passphrase [$UCP_PASSPHRASE]              |
