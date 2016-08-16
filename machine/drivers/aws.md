@@ -64,6 +64,7 @@ assigned to the instance if they are configured.
 -   `--amazonec2-zone`: The AWS zone to launch the instance in (i.e. one of a,b,c,d,e).
 -   `--amazonec2-subnet-id`: AWS VPC subnet id.
 -   `--amazonec2-security-group`: AWS VPC security group name.
+-   `--amazonec2-open-port`: Make additional port number(s) accessible from the Internet.
 -   `--amazonec2-tags`: AWS extra tag key-value pairs (comma-separated, e.g. key1,value1,key2,value2).
 -   `--amazonec2-instance-type`: The instance type to run.
 -   `--amazonec2-keypair-name`: AWS keypair to use; requires --amazonec2-ssh-keypath
@@ -114,6 +115,7 @@ assigned to the instance if they are configured.
 | `--amazonec2-zone`                       | `AWS_ZONE`              | `a`              |
 | `--amazonec2-subnet-id`                  | `AWS_SUBNET_ID`         | -                |
 | `--amazonec2-security-group`             | `AWS_SECURITY_GROUP`    | `docker-machine` |
+| `--amazonec2-open-port`                  | -                       | -                |
 | `--amazonec2-tags`                       | `AWS_TAGS`              | -                |
 | `--amazonec2-instance-type`              | `AWS_INSTANCE_TYPE`     | `t2.micro`       |
 | `--amazonec2-keypair-name`               | `AWS_KEYPAIR_NAME`      | -                |
@@ -161,7 +163,8 @@ Note that a security group will be created and associated to the host. This secu
 -   swarm (3376/tcp), only if the node is a swarm master
 
 If you specify a security group yourself using the `--amazonec2-security-group` flag, the above ports will be checked and opened and the security group modified.
-If you want more ports to be opened, like application specific ports, use the AWS console and modify the configuration manually.
+If you want more ports to be opened, like application specific ports, you can use the `--amazonec2-open-port` flag to
+pass a list of port numbers to be opened or use the aws console and modify the configuration manually.
 
 ## VPC ID
 
