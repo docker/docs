@@ -20,6 +20,13 @@ BLUE='\033[1;34m'
 GREEN='\033[0;32m'
 NC='\033[0m'
 
+#clear all_proxy if not socks address
+if  [[ $ALL_PROXY != socks* ]]; then
+  unset ALL_PROXY
+fi
+if  [[ $all_proxy != socks* ]]; then
+  unset all_proxy
+fi
 
 if [ ! -f "${DOCKER_MACHINE}" ]; then
   echo "Docker Machine is not installed. Please re-run the Toolbox Installer and try again."

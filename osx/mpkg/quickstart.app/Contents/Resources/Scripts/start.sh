@@ -11,6 +11,14 @@ NC='\033[0m'
 unset DYLD_LIBRARY_PATH
 unset LD_LIBRARY_PATH
 
+#clear all_proxy if not socks address
+if  [[ $ALL_PROXY != socks* ]]; then
+  unset ALL_PROXY
+fi
+if  [[ $all_proxy != socks* ]]; then
+  unset all_proxy
+fi
+
 clear
 
 if [ ! -f "${DOCKER_MACHINE}" ]; then
