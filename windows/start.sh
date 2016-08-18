@@ -68,7 +68,7 @@ if [ "${VM_STATUS}" != "Running" ]; then
 fi
 
 STEP="Setting env"
-eval "$(${DOCKER_MACHINE} env --shell=bash ${VM})"
+eval "$(${DOCKER_MACHINE} env --shell=bash --no-proxy ${VM})"
 
 STEP="Finalize"
 clear

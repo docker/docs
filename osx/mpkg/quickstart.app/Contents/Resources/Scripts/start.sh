@@ -56,7 +56,7 @@ if [ "${VM_STATUS}" != "Running" ]; then
   yes | "${DOCKER_MACHINE}" regenerate-certs "${VM}"
 fi
 
-eval "$(${DOCKER_MACHINE} env --shell=bash ${VM})"
+eval "$(${DOCKER_MACHINE} env --shell=bash --no-proxy ${VM})"
 
 clear
 cat << EOF
