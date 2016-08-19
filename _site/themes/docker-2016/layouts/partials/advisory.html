@@ -1,0 +1,17 @@
+{{ $advisories := .Site.Data.advisories }}
+{{ if isset $.Params "advisory" }}
+	<p class="advisory bg-warning">
+		<strong>Advisory</strong>:
+		{{ index $advisories.texts $.Params.advisory | default $.Params.advisory | markdownify }}
+	</p>
+{{ else }}
+	{{ $url := .RelPermalink }}
+	{{ range $key, $value := $advisories.paths }}
+		{{ if hasPrefix $url $key }}
+		<p class="advisory bg-warning advisory-{{ $value }}">
+			<strong>Advisory</strong>:
+			{{ index $advisories.texts $value | default $value | markdownify }}
+		</p>
+		{{ end }}
+	{{ end }}
+{{ end }}

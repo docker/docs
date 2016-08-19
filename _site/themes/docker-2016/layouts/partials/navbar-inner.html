@@ -1,0 +1,15 @@
+{{ $thispage := .thispage }}
+<ul class="nav-sub">
+{{ range .menu }}
+{{ if .HasChildren }}
+    <li class="leaf {{ if $thispage.HasMenuCurrent "main" . }} active{{end}} {{ if $thispage.HasMenuCurrent "main" . }} menu-open {{else}} menu-closed {{end}} ">
+        <a href="" class="expand-menu {{ if $thispage.HasMenuCurrent "main" . }} active{{end}}"><span class="menu-icon" aria-hidden="true"></span> {{ .Pre }} {{ .Name }}</a>
+        {{ partial "navbar-inner.html" (dict "menu" .Children "thispage" $thispage) }}
+    </li>
+{{ else }}
+    <li class="leaf {{ if $thispage.HasMenuCurrent "main" . }} active{{end}}">
+        <a href="{{ .URL }}" class="{{ if $thispage.IsMenuCurrent "main" . }} active currentPage{{end}}"> {{ .Name }} </a>
+    </li>
+{{ end }}
+{{ end }}
+</ul>

@@ -1,0 +1,2477 @@
+/*==================== New Home Page ===================*/
+@font-face {
+	font-family: 'Geomanist';
+	src: url('../fonts/geomanist/hinted-Geomanist-Black.eot');
+	src: url('../fonts/geomanist/hinted-Geomanist-Black.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/geomanist/hinted-Geomanist-Black.woff2') format('woff2'),
+		url('../fonts/geomanist/hinted-Geomanist-Black.woff') format('woff'),
+		url('../fonts/geomanist/hinted-Geomanist-Black.ttf') format('truetype'),
+		url('../fonts/geomanist/hinted-Geomanist-Black.svg#Geomanist-Black') format('svg');
+	font-weight: 900;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Geomanist Book';
+	src: url('../fonts/geomanist/hinted-Geomanist-Book.eot');
+	src: url('../fonts/geomanist/hinted-Geomanist-Book.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/geomanist/hinted-Geomanist-Book.woff2') format('woff2'),
+		url('../fonts/geomanist/hinted-Geomanist-Book.woff') format('woff'),
+		url('../fonts/geomanist/hinted-Geomanist-Book.ttf') format('truetype'),
+		url('../fonts/geomanist/hinted-Geomanist-Book.svg#Geomanist-Book') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Geomanist Ultra';
+	src: url('../fonts/geomanist/hinted-Geomanist-Ultra.eot');
+	src: url('../fonts/geomanist/hinted-Geomanist-Ultra.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/geomanist/hinted-Geomanist-Ultra.woff2') format('woff2'),
+		url('../fonts/geomanist/hinted-Geomanist-Ultra.woff') format('woff'),
+		url('../fonts/geomanist/hinted-Geomanist-Ultra.ttf') format('truetype'),
+		url('../fonts/geomanist/hinted-Geomanist-Ultra.svg#Geomanist-Ultra') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Geomanist';
+	src: url('../fonts/geomanist/hinted-Geomanist-Thin.eot');
+	src: url('../fonts/geomanist/hinted-Geomanist-Thin.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/geomanist/hinted-Geomanist-Thin.woff2') format('woff2'),
+		url('../fonts/geomanist/hinted-Geomanist-Thin.woff') format('woff'),
+		url('../fonts/geomanist/hinted-Geomanist-Thin.ttf') format('truetype'),
+		url('../fonts/geomanist/hinted-Geomanist-Thin.svg#Geomanist-Thin') format('svg');
+	font-weight: 100;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Geomanist';
+	src: url('../fonts/geomanist/hinted-Geomanist-Light.eot');
+	src: url('../fonts/geomanist/hinted-Geomanist-Light.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/geomanist/hinted-Geomanist-Light.woff2') format('woff2'),
+		url('../fonts/geomanist/hinted-Geomanist-Light.woff') format('woff'),
+		url('../fonts/geomanist/hinted-Geomanist-Light.ttf') format('truetype'),
+		url('../fonts/geomanist/hinted-Geomanist-Light.svg#Geomanist-Light') format('svg');
+	font-weight: 300;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Geomanist';
+	src: url('../fonts/geomanist/hinted-Geomanist-Regular.eot');
+	src: url('../fonts/geomanist/hinted-Geomanist-Regular.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/geomanist/hinted-Geomanist-Regular.woff2') format('woff2'),
+		url('../fonts/geomanist/hinted-Geomanist-Regular.woff') format('woff'),
+		url('../fonts/geomanist/hinted-Geomanist-Regular.ttf') format('truetype'),
+		url('../fonts/geomanist/hinted-Geomanist-Regular.svg#Geomanist-Regular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Geomanist';
+	src: url('../fonts/geomanist/hinted-Geomanist-ExtraLight.eot');
+	src: url('../fonts/geomanist/hinted-Geomanist-ExtraLight.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/geomanist/hinted-Geomanist-ExtraLight.woff2') format('woff2'),
+		url('../fonts/geomanist/hinted-Geomanist-ExtraLight.woff') format('woff'),
+		url('../fonts/geomanist/hinted-Geomanist-ExtraLight.ttf') format('truetype'),
+		url('../fonts/geomanist/hinted-Geomanist-ExtraLight.svg#Geomanist-ExtraLight') format('svg');
+	font-weight: 200;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Geomanist';
+	src: url('../fonts/geomanist/hinted-Geomanist-Medium.eot');
+	src: url('../fonts/geomanist/hinted-Geomanist-Medium.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/geomanist/hinted-Geomanist-Medium.woff2') format('woff2'),
+		url('../fonts/geomanist/hinted-Geomanist-Medium.woff') format('woff'),
+		url('../fonts/geomanist/hinted-Geomanist-Medium.ttf') format('truetype'),
+		url('../fonts/geomanist/hinted-Geomanist-Medium.svg#Geomanist-Medium') format('svg');
+	font-weight: 500;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Geomanist';
+	src: url('../fonts/geomanist/hinted-Geomanist-Bold.eot');
+	src: url('../fonts/geomanist/hinted-Geomanist-Bold.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/geomanist/hinted-Geomanist-Bold.woff2') format('woff2'),
+		url('../fonts/geomanist/hinted-Geomanist-Bold.woff') format('woff'),
+		url('../fonts/geomanist/hinted-Geomanist-Bold.ttf') format('truetype'),
+		url('../fonts/geomanist/hinted-Geomanist-Bold.svg#Geomanist-Bold') format('svg');
+	font-weight: bold;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Comfortaa';
+	src: url('../fonts/comfortaa/hinted-Comfortaa.eot');
+	src: url('../fonts/comfortaa/hinted-Comfortaa.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/comfortaa/hinted-Comfortaa.woff2') format('woff2'),
+		url('../fonts/comfortaa/hinted-Comfortaa.woff') format('woff'),
+		url('../fonts/comfortaa/hinted-Comfortaa.ttf') format('truetype'),
+		url('../fonts/comfortaa/hinted-Comfortaa.svg#Comfortaa') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Comfortaa';
+	src: url('../fonts/comfortaa/hinted-Comfortaa-Light.eot');
+	src: url('../fonts/comfortaa/hinted-Comfortaa-Light.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/comfortaa/hinted-Comfortaa-Light.woff2') format('woff2'),
+		url('../fonts/comfortaa/hinted-Comfortaa-Light.woff') format('woff'),
+		url('../fonts/comfortaa/hinted-Comfortaa-Light.ttf') format('truetype'),
+		url('../fonts/comfortaa/hinted-Comfortaa-Light.svg#Comfortaa-Light') format('svg');
+	font-weight: 300;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Comfortaa';
+	src: url('../fonts/comfortaa/hinted-Comfortaa-Bold.eot');
+	src: url('../fonts/comfortaa/hinted-Comfortaa-Bold.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/comfortaa/hinted-Comfortaa-Bold.woff2') format('woff2'),
+		url('../fonts/comfortaa/hinted-Comfortaa-Bold.woff') format('woff'),
+		url('../fonts/comfortaa/hinted-Comfortaa-Bold.ttf') format('truetype'),
+		url('../fonts/comfortaa/hinted-Comfortaa-Bold.svg#Comfortaa-Bold') format('svg');
+	font-weight: bold;
+	font-style: normal;
+}
+.is_not_retina .dockercon16 .retina{
+	display:none!important;
+}
+.is_retina .dockercon16 .image_simple{
+	display:none!important;
+}
+.is_not_retina .dockercon16 .image_simple{
+	display:block!important;
+}
+.is_retina .dockercon16 .retina{
+	display:block!important;
+}
+.row {
+    max-width: inherit;
+    width: inherit;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+/* SVEN SAYS NO
+body h1,body h2,body h3,body h4,body h5,body h6, a.button, a.btn{
+	font-family: 'Geomanist Book', sans-serif;
+}
+*/
+body, body p{
+	font-family: 'Geomanist', sans-serif;
+	font-weight:normal;
+}
+/* SVEN SAYS NO
+span, label, ul, li{
+	font-family: 'Geomanist', sans-serif;
+	font-weight:normal;
+}
+body .dockercon16 h1,body .dockercon16 h4,body .dockercon16 h5,body .dockercon16 h6{
+	font-family: 'Geomanist Book', sans-serif;
+}
+body .dockercon16 h2 {
+    font-family: 'Geomanist Light', sans-serif;
+}
+body .dockercon16 h3 {
+   font-family: 'Geomanist Regular', sans-serif;
+}
+body .dockercon16, body .dockercon16 p{
+	font-family: 'Geomanist', sans-serif;
+	font-weight:normal;
+}
+*/
+a.button {
+    margin-left: 10px;
+}
+body .dockercon16 section.section {
+    padding: 120px 0;
+}
+section.GenericDev .items.displaytable {
+    display: table;
+    width: 100%;
+    margin: auto;
+}
+section.GenericDev .items.displaytable li {
+    float: none;
+    display: table-cell;
+    width: 0%;
+}
+.dockercon16 section.bluebackground.section h2{
+font-size:22px;
+color: #E1F7FF;
+text-transform:uppercase;
+line-height: 1.4;
+margin-bottom: 8px;
+}
+.dockercon16 section.bluebackground.section h2.marginBottom40{
+margin-bottom: 40px;
+}
+.dockercon16 section.bluebackground.section .container>p{
+font-size:14px; 
+color: #E0F6FE;
+margin-bottom: 30px;
+    line-height: 1.6;
+}
+.dockercon16 section.bluebackground.section .container>img{
+    margin: auto;
+    display: block;
+    margin-bottom: 30px;
+}
+.dockercon16 section.bluebackground.GenericDev .items>li h3{
+font-size:18px; 
+color: #E1F7FF;
+text-transform: uppercase;
+text-align: left;
+}
+.dockercon16 section.bluebackground.GenericDev .items>li span.sub_title{
+font-size:14px; 
+color: rgba(255,255,255,0.7);
+text-transform: uppercase;
+text-align: left;
+display: block;
+font-family: 'Geomanist', sans-serif;
+font-weight: 400;
+}
+.dockercon16 section.bluebackground.GenericDev .items>li p{
+font-size:14px; 
+color: #E0F6FE;
+padding-bottom: 20px;
+margin-bottom: 0px;
+text-align: left;
+}
+.dockercon16 section.whitebackground.section h2{
+font-size:22px;
+color: #155A74;
+text-transform:uppercase;
+line-height: 1.4;
+margin-bottom: 8px;
+}
+.dockercon16 section.whitebackground.section h2.marginBottom40{
+margin-bottom: 40px;
+}
+.dockercon16 section.whitebackground.section .container>p{
+font-size:14px; 
+color: #496B81;
+margin-bottom: 30px;
+    line-height: 1.6;
+}
+.dockercon16 section.whitebackground.section .container>img{
+    margin: auto;
+    display: block;
+    margin-bottom: 30px;
+}
+.dockercon16 section.whitebackground.GenericDev .items>li h3{
+font-size:18px; 
+color: #155A74;
+text-transform: uppercase;
+text-align: left;
+}
+.dockercon16 section.whitebackground.GenericDev .items>li span.sub_title{
+font-size:14px; 
+color: #BFBFBF;
+text-transform: uppercase;
+text-align: left;
+display: block;
+font-family: 'Geomanist', sans-serif;
+font-weight: 400;
+}
+.dockercon16 section.whitebackground.GenericDev .items>li p{
+font-size:14px; 
+color: #496B81;
+padding-bottom: 20px;
+margin-bottom: 0px;
+text-align: left;
+}
+.dockercon16 section.GenericDev .items>li ul{
+
+}
+.dockercon16 section.GenericDev .items>li ul li{
+	font-size: 14px;
+    color: #ffffff;
+    line-height: 28px;
+    margin-bottom: 4px;
+	font-weight: normal;
+} 
+/************************* for Button only ************************************/
+.dockercon16 section.section a.button,.dockercon16 section.title_section a.button{
+	font-family: 'Geomanist Book', sans-serif;
+    font-size: 14px;
+	border-radius: 0;	
+}
+.dockercon16 section.section a.button.orange-btn {
+    background-color: transparent;
+    color: #fff;
+	padding: 15px 50px 13px 50px;
+    border: 1px solid #fff;
+}
+.dockercon16 section.section a.button.orange-btn:hover {
+  background: RGBA(255, 255, 255, 0.25);
+}
+.dockercon16 section.whitebackground.section a.button.orange-btn {
+	background-color: transparent;
+	color: #0081AA;
+	padding: 15px 50px 13px 50px;
+	border:1px solid #0081AA;
+}
+.dockercon16 section.whitebackground.section a.button.orange-btn:hover {
+    background-color: rgba(34, 148, 202, 0.12);
+} 
+.dockercon16 section.section a.button.white-btn{
+	background: RGBA(255, 255, 255, 0.25);
+	color: #fff;
+	padding: 15px 70px 13px 70px;
+	border: 1px solid #fff;
+}
+.dockercon16 section.section a.button.white-btn:hover {
+    background: transparent;
+}
+.dockercon16 section.title_section a.button.white-btn{
+	background-color: #fff;
+    color: #1DA4C9;
+    border: 0;
+	padding: 14px 70px 12px 70px;
+}
+.dockercon16 section.title_section a.button.white-btn:hover {
+  background: rgba(255, 255, 255, 0.83);
+}
+.dockercon16 section.title_section a.button.white-border-btn {
+	background-color: transparent;
+	color: #E6F9FF;
+	padding: 13px 70px 11px 70px;
+	border:1px solid #fff;
+}
+.dockercon16 section.title_section a.button.white-border-btn:hover {
+  background: RGBA(255, 255, 255, 0.25);
+  color: #fff;
+}
+.dockercon16 section.section a.button.darkblue-btn,.dockercon16 section.title_section a.button.darkblue-btn {
+	background-color: #2294ca;
+	color: #ffffff;
+    border: 0;
+	padding: 16px 60px 14px 60px;
+}
+.dockercon16 section.section a.button.darkblue-btn:hover, .dockercon16 section.title_section a.button.darkblue-btn:hover {
+    background: #235363;
+}
+.dockercon16 section.section a.button.darkblue-border-btn, .dockercon16 section.title_section a.button.darkblue-border-btn {
+	background-color: transparent;
+	color: #0081AA;
+	padding: 15px 40px 13px 40px;
+	border:1px solid #0081AA;
+} 
+.dockercon16 section.section a.button.darkblue-border-btn:hover, .dockercon16 section.title_section a.button.darkblue-border-btn:hover {
+    background-color: rgba(34, 148, 202, 0.12);
+} 
+.dockercon16 section.section a.button.lightblue-btn,.dockercon16 section.title_section a.button.lightblue-btn {
+	background-color: #22CAFF;
+	color: #ffffff;
+    border: 0;
+	padding: 16px 60px 14px 60px;
+}
+.dockercon16 section.section a.button.lightblue-btn:hover,.dockercon16 section.title_section a.button.lightblue-btn:hover {
+	background-color: #459db9;
+}
+.dockercon16 section.section a.button.lightblue-border-btn, .dockercon16 section.title_section a.button.lightblue-border-btn {
+	background-color: transparent;
+	color: #099BD1;
+	padding: 15px 40px 13px 40px;
+	border:1px solid #099BD1;
+}
+.dockercon16 section.section a.button.lightblue-border-btn:hover, .dockercon16 section.title_section a.button.lightblue-border-btn:hover {
+    background-color: rgba(9,155,209,0.12);
+}
+.dockercon16 section.section a.button+a.button,.dockercon16 section.title_section a.button+a.button {
+	margin-left:20px;
+}
+.dockercon16 section.GenericDev .items.media li {
+	position: relative;
+	margin-bottom: 0;
+	padding: 20px 10px 20px;
+}
+.dockercon16 section.GenericDev .items.media li a.button{
+	font-size: 12px;
+    padding: 6px 30px;
+	min-width: 160px;
+}
+.dockercon16 section.GenericDev .items.media li a.button+a.button{
+    display: table;
+    margin-top: 10px;
+    margin-left: 0;
+}
+.dockercon16 section.GenericDev .items.media.widthcol4 li a.button{
+	font-size: 12px;
+    padding: 5px 20px;
+	min-width: 140px;
+}
+.dockercon16 section.GenericDev .items.media li .media_image {
+	float: left;
+    position: absolute;
+    left: 10px;
+    text-align: left;
+}
+.dockercon16 section.GenericDev .items.media li .media_content {
+	float: left;
+    text-align: left;
+}
+.dockercon16 section.GenericDev .items.media li .media_content img{
+	margin-bottom:20px;
+}
+.dockercon16 section.GenericDev .items.media li .media_content h3 {
+    margin-top: 0px;
+	margin-bottom: 8px;
+}
+section.docker_use_cases_home_section .items li, section.customer_and_news_section .items li, section.projects_items_section .items li, section.partner_program_technology_section .items li{
+	height: inherit!important;
+}
+section.bgblue1.section {
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#7db9e8+0,4686b7+100,4686b7+100 */
+background: #4686b7; /* Old browsers */
+background: -moz-linear-gradient(top,  #4686b7 0%, #499dcf 100%, #4686b7 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #4686b7 0%,#499dcf 100%,#4686b7 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #4686b7 0%,#499dcf 100%,#4686b7 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4686b7', endColorstr='#499dcf',GradientType=0 ); /* IE6-9 */
+}
+section.bgblue2.section {
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#7db9e8+0,4686b7+100,4686b7+100 */
+background: #4686b7; /* Old browsers */
+background: -moz-linear-gradient(top,  #4686b7 0%, #499dcf 100%, #4686b7 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #4686b7 0%,#499dcf 100%,#4686b7 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #4686b7 0%,#499dcf 100%,#4686b7 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4686b7', endColorstr='#499dcf',GradientType=0 ); /* IE6-9 */
+}
+section.bgblue3.section {
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#7db9e8+0,4686b7+100,4686b7+100 */
+background: #4686b7; /* Old browsers */
+background: -moz-linear-gradient(top,  #4686b7 0%, #499dcf 100%, #4686b7 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #4686b7 0%,#499dcf 100%,#4686b7 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #4686b7 0%,#499dcf 100%,#4686b7 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4686b7', endColorstr='#499dcf',GradientType=0 ); /* IE6-9 */
+}
+section.bgblue4.section {
+     background: #285a8c;
+     background: -moz-linear-gradient(top, #1488C6 0%, #124b77 100%, #124b77 100%);
+     background: -webkit-linear-gradient(top, #1488C6 0%,#124b77 100%,#124b77 100%);
+     background: linear-gradient(to top, #1488C6 0%,#124b77 100%,#124b77 100%);
+     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1488C6', endColorstr='#124b77',GradientType=0 );
+}
+section.bgblue5.section {
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#5ba2db+0,4686b7+100,4abfea+100 */
+background: #5ba2db; /* Old browsers */
+background: -moz-linear-gradient(top,  #5ba2db 0%, #4bbfe9 100%, #5ba2db 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #5ba2db 0%,#4bbfe9 100%,#5ba2db 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #5ba2db 0%,#4bbfe9 100%,#5ba2db 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5ba2db', endColorstr='#4bbfe9',GradientType=0 ); /* IE6-9 */
+}
+section.bgblue3.section {
+    background: #4686b7;
+    background: -moz-linear-gradient(top, #00577B 0%, #0F8AB4 100%, #00577B 100%);
+    background: -webkit-linear-gradient(top, #00577B 0%,#0F8AB4 100%,#0F8AB4 100%);
+    background: linear-gradient(to bottom, #00577B 0%,#0F8AB4 100%,#0F8AB4 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00577B', endColorstr='#0F8AB4',GradientType=0 );
+}
+section.bgblue4.section {
+     background: #285a8c;
+     background: -moz-linear-gradient(top, #1488C6 0%, #124b77 100%, #124b77 100%);
+     background: -webkit-linear-gradient(top, #1488C6 0%,#124b77 100%,#124b77 100%);
+     background: linear-gradient(to top, #1488C6 0%,#124b77 100%,#124b77 100%);
+     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1488C6', endColorstr='#124b77',GradientType=0 );
+}
+section.bgblue5.section {
+    background: #5ba2db;
+    background: linear-gradient(to bottom, #004D7B 0%,#1488C6 100%,#1488C6 100%);
+    background: -moz-linear-gradient(top, #004D7B 0%, #1488C6 100%, #1488C6 100%);
+    background: -webkit-linear-gradient(top, #004D7B 0%,#1488C6 100%,#1488C6 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#004D7B', endColorstr='#1488C6',GradientType=0 );
+}
+section.bottom_cta_section.blue,section.bottom_cta_section.bgblue5{
+    background: #5ba2db;
+    background: linear-gradient(to bottom, #054B62 0%,#06131e 100%,#213c51 100%);
+    background: -moz-linear-gradient(top, #054B62 0%, #06131e 100%, #213c51 100%);
+    background: -webkit-linear-gradient(top, #054B62 0%,#06131e 100%,#213c51 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#054B62', endColorstr='#06131e',GradientType=0 );
+	
+	
+	
+	
+}
+footer.main_footer {
+	background: #001829;
+}
+div.moby_footer {
+    height: 12px;
+	position:relative;
+}
+footer.main_footer {
+    border-top: 10px solid #ffd601;
+    outline: 13px solid #9ce2c0;
+}
+div.moby_footer .bar{
+	position:absolute;
+	background-image: url(../images/footer_moby_bar.png);
+	width: 100%;
+    height: 17px;
+    top: -5px;
+}
+div.moby_footer .moby{
+	position:absolute;
+	background-image: url(../images/footer_moby_icon.png);
+    background-repeat: no-repeat;
+    width: 142px;
+    height: 103px;
+    right: 65px;
+    top: -65px;
+}
+i.footer_mobypadding{
+	padding-top: 50px;
+    display: block; 
+}
+header.main-header {
+	margin: 0;
+	position:absolute;
+	width:100%;
+	padding: 0;
+	background-image: linear-gradient(0deg, #15A4D7 0%, #1488C6 100%);
+	height: 100px;
+}
+header.main-header::after {
+  content: "";
+  background-image: url(../images/banner_image_24515.png);
+  background-size: cover;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+}
+header.main-header.backgroundimage::after {
+  content: "";
+  opacity: 1;
+}
+header .top-right-bg {
+    background-size: 100% 45px;
+    opacity: 1;
+    width: 40%;
+    height: 45px;
+    position: absolute;
+    z-index: 0;
+    top: 0px;
+	left: 60%;
+}
+header .nav-global{
+	list-style: none;
+    float: right;
+    margin-bottom: 0;
+	height: 45px;
+    overflow: hidden;
+}
+header .nav-global li a{
+	font-family: 'Geomanist Book', sans-serif;
+	font-size: 12px;
+    color: #fff;
+    text-transform: uppercase;
+    padding: 12px 12px;
+}
+header .nav-global li a:hover{
+	background-color: rgba(0, 0, 0, 0.2);
+	color: #fff;
+}
+.main-header div>.nav-main>li>ul {
+    transition: all ease-in .2s;
+	opacity: 0;
+	visibility: hidden;
+	display: block;
+}
+.main-header div>.nav-main>li:hover>ul {
+	opacity: 1;
+	visibility: visible;
+}
+.main-header div>.nav-main>li>a{
+	transition: all ease-in .2s;
+	font-size: 16px;
+}
+.main-header div>.nav-main>li>ul a{
+    transition: all ease-in .2s;
+}
+.main-header div>.nav-main>li.double-navstyle>ul {
+	width: 410px;
+    margin-left: -225px;
+}
+.main-header div>.nav-main>li.double-navstyle>ul li.navleft {
+    float: left;
+    clear: left;
+    width: 160px;
+}
+.main-header div>.nav-main>li.double-navstyle>ul>li {
+    width: 250px;
+    display: inline-block;
+	float: right;
+	margin-bottom: 20px!important;
+}
+.main-header div>.nav-main>li.double-navstyle>ul>li>a {
+	color: #22caff;
+	text-transform:uppercase;
+}
+.main-header div>.nav-main>li.double-navstyle.secondlast>ul {
+	margin-left: -275px;
+}
+.main-header div>.nav-main>li.double-navstyle.secondlast>ul:before {
+    margin-left: 82px;
+}
+.main-header div>.nav-main>li.last>ul {
+	left: auto;
+    right: 0px;
+}
+.main-header div>.nav-main>li.last>ul:before {
+    margin-left: 40px;
+}
+footer.main_footer{
+font-family: 'Geomanist', sans-serif!important;
+color: #fff;
+padding:60px 0 0 0;
+font-weight:normal;
+}
+footer.main_footer .top_footer{
+margin-bottom:100px;
+}
+footer.main_footer h6{
+font-family: 'Geomanist', sans-serif!important;
+color: #fff;
+font-size: 16px;
+font-weight:normal;
+}
+footer.main_footer ul{
+    font-size: 12px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+footer.main_footer ul li{
+
+}
+footer.main_footer ul li a{
+	color: #fff;
+}
+footer.main_footer p{
+    font-size: 12px;
+}
+
+footer.main_footer .social-icons {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+	display: table;
+    flex-direction: row;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+	max-width: 380px;
+    margin-right: 20px;
+	margin-top: 12px;
+}
+footer.main_footer .social-icons>li {
+
+	    flex-grow: 1;
+}
+footer.main_footer .social-icons li a {
+	text-align: left;
+    text-indent: -9999px;
+    display: block;
+    width: 28px;
+    height: 28px;
+    background-image: url(../images/social_icons_24518.png);
+    background-repeat: no-repeat;
+}
+						
+footer.main_footer .social-icons li.facebook a {
+    background-position: -0px 0px;
+}
+footer.main_footer .social-icons li.google a {
+	background-position: -50px 0px;
+}
+footer.main_footer .social-icons li.github a {
+    background-position: -95px 0px;
+}
+footer.main_footer .social-icons li.linkedin a {
+    background-position: -142px 0px;
+}
+footer.main_footer .social-icons li.youtube a {
+	background-position: -190px 0px;
+    width: 52px;
+}
+footer.main_footer .social-icons li.reddit a {
+    background-position: -260px 0px;
+    width: 36px;
+}
+footer.main_footer .social-icons li.twitter a {
+	background-position: -315px 0px;
+    width: 32px;
+}
+footer.main_footer .social-icons li.slideshare a {
+	background-position: -362px 0px;
+}
+
+footer.main_footer div.newsletter{
+	max-width:360px;
+	margin-right:20px;
+}
+footer.main_footer div.newsletter form .mktoFormRow {
+    float: left;
+    width: 65%;
+}
+footer.main_footer div.newsletter form .mktoButtonRow {
+    width: 35%
+}
+footer.main_footer div.newsletter form #Email {
+	font-family: 'Geomanist Book', sans-serif;
+	width: 100% !important;
+	font-size: 12px;
+    padding: 0;
+    border-radius: 0;
+    background-color: transparent;
+    border: 0;
+    border-bottom: 1px solid #5B7080;
+    color: #ffffff;
+	height: 31px;
+}
+.main_footer div.newsletter form .mktoButtonRow button {
+	font-family: 'Geomanist Book', sans-serif;
+    font-size: 12px !important;
+    border-radius: 0;
+	padding: 8px !important;
+	width: 100%;
+	float: left;
+	border: none !important;
+	background: #FFC176!important;
+    color: #3F1B02 !important;
+	background: #2294CA!important;
+    color: #fff!important;
+
+}
+.main_footer div.newsletter form .mktoButtonRow button:hover {
+	background: #FFC176!important;
+	color: #3F1B02;
+	background: #2294CA!important;
+    color: #fff!important;
+}
+.main_footer div.newsletter form .mktoOffset,
+.main_footer div.newsletter form .mktoGutter,
+.main_footer div.newsletter form label {
+    display: none;
+}
+.main_footer div.newsletter form {
+    font-size: 12px !important;
+    width: 100% !important;
+}
+.main_footer div.newsletter form .mktoFormCol,
+.main_footer div.newsletter form .mktoFieldWrap {
+    width: 100% !important;
+	margin:0 !important;
+}
+.main_footer div.newsletter form .mktoSimple {
+    margin: 0 !important;
+}
+
+.main_footer .footer-nav {
+
+}
+.main_footer .footer-nav>p {
+    margin-bottom: 12px;
+	display: inline-block;
+}
+.main_footer .footer-nav .primary-footer-sub-nav{
+	float:right;
+	margin-bottom: 20px;
+}
+.main_footer .footer-nav .primary-footer-sub-nav ul li{
+	margin-left:30px;
+}
+.main_footer .bottom_footer .footer-copyright {
+	border-top: 1px solid #5C7787;
+    padding: 12px 0 50px 0;
+}
+.dockercon16 section.map_section {
+    padding:0;
+	margin:0;
+}
+.dockercon16 section.title_section {
+    background-image: url(../images/banner_image_24515.png);
+	background-size: cover;
+	margin-bottom: 0px!important;
+}
+.dockercon16 section.title_section .dockercon16_padding {
+	padding-top:101px;
+}
+.dockercon16 section .dockercon16_padding {
+	padding-top:101px;
+}
+.dockercon16 section.title_section.darkblue h1 {
+	font-family: 'Geomanist Light', sans-serif;
+    margin-bottom: 25px;
+	font-size:30px;
+    color: #e1f7ff;
+    margin-top: 20px;
+	text-transform: uppercase;
+}
+.dockercon16 section.title_section.darkblue h3{
+	color: #e1f7ff;
+}
+.dockercon16 section.title_section.darkblue h4{
+    color: #e1f7ff;
+    font-size: 20px;
+	margin-bottom: 20px;
+}
+.dockercon16 section.title_section.darkblue p {
+	font-family: 'Geomanist', sans-serif;
+	font-size:14px;
+    color: #e1f7ff;
+	font-weight:normal;
+	margin-bottom: 30px;
+}
+.region.region-hero-sub .nav-sub .removetab-menu-item {
+    display: none;
+}
+/** global navigation elements **/
+.dockercon16 div.heronav_section{
+	height: 52px;
+    background-color: #003E52;
+}
+.dockercon16 div.heronav_section ul{
+    display: block;
+    margin: auto;
+    text-align: center;
+}
+.dockercon16 div.heronav_section ul li{
+	margin: 0px 3px;
+    font-size: 14px;
+	font-family: 'Geomanist Book', sans-serif;
+}
+.dockercon16 div.heronav_section ul li a{
+	padding: 14px 40px 10px 40px;
+}
+.dockercon16 div.heronav_section ul li.active {
+    background-color: #628191;
+}
+.dockercon16 div.heronav_section ul li:hover {
+    background-color: #628191;
+}
+.dockercon16 section.section .video_container{
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    margin: auto; 
+}
+.dockercon16 section.section .video_container a.play_btn{
+	position: absolute;
+    content: 'play';
+    display: block;
+    width: 90px;
+    height: 90px;
+    text-align: left;
+    text-indent: -9999px;
+    background-image: url(../images/video_icon_2453.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    top: 50%;
+    left: 50%;
+    margin-top: -45px;
+    margin-left: -45px;
+}
+section.dockercon_quotes_section{
+    padding: 80px 0;
+}
+section.dockercon_quotes_section .quotes_icon{
+	background-image: url(../images/quote_icon_2452.png);
+    width: 52px;
+    height: 52px;
+    margin: auto;
+    margin-top: -20px;
+	margin-left: 50px;
+    background-size: 110%;
+    background-repeat: no-repeat;
+    display: block;
+
+    float: left;
+}
+section.dockercon_quotes_section .quotes_slider{
+    max-width: 700px;
+    margin: auto;
+	position: relative;
+	color:#ffffff;
+	font-size:20px;
+	margin-bottom: 50px;
+}
+section.dockercon_quotes_section .flex-control-nav {
+    width: 100%;
+    position: absolute;
+    bottom: -80px;
+}
+section.dockercon_quotes_section .quotes_slider .slides{}
+section.dockercon_quotes_section .quotes_slider .slides li{}
+section.dockercon_quotes_section .quotes_slider .slides li p{
+	font-size:20px;
+	color:#ffffff;
+	text-align:center;
+}
+section.dockercon_quotes_section .quotes_slider .slides li .author{
+	font-family: 'Geomanist Book', sans-serif;
+	font-size:20px;
+	float: left;
+    padding-left: 70%;
+}
+section.dockercon_quotes_section .quotes_slider .slides li .author_position{
+	font-family: 'Geomanist Book', sans-serif;
+	font-size:12px;
+    float: left;
+    padding-left: 70%;
+    clear: both;
+    line-height: 12px;
+}
+section.dockercon_quotes_section .quotes_slider .flex-control-paging li{
+    margin-top: 20px;
+}
+section.dockercon_quotes_section .quotes_slider .flex-control-paging li a{
+	background: #72DDFF;
+}
+section.dockercon_quotes_section .quotes_slider .flex-control-paging li a:hover{
+	background: #FFFFFF;
+}
+section.dockercon_quotes_section .quotes_slider .flex-control-paging li a.flex-active{
+	background: #FFFFFF;
+}
+/* ========== Start Home  ========== */
+.node-type-front-page .dockercon16 section.title_section.darkblue {
+	padding-bottom: 0;
+    position: relative;
+}
+.node-type-front-page .dockercon16 section.title_section.darkblue h1 {
+	font-family: 'Geomanist', sans-serif;
+	font-weight: 300;
+	font-style: normal;
+	font-size:64px;
+	color:#FFFFFF;
+	margin-bottom: 10px;
+}
+.node-type-front-page .dockercon16 section.title_section.darkblue p {
+	font-size: 18px;
+    color: #FFFFFF;
+    max-width: 340px;
+}
+.node-type-front-page .dockercon16 section.title_section.darkblue img.moby {
+	z-index: 2;
+    position: relative;
+}
+.node-type-front-page .dockercon16 section.title_section.darkblue a.button {
+	color:#FFFFFF;
+	width: 270px;
+	margin-top: 0px;
+	background-color: rgba(0, 78, 103, 0.61);
+	padding: 16px 40px 14px 40px;
+	margin-left: 0;
+}
+.node-type-front-page .dockercon16 section.title_section.darkblue a.button:hover {
+    background: rgba(0, 0, 0, 0.6);
+    text-decoration: none;
+    border: none;
+	padding: 16px 40px 14px 40px;
+	color: #fff;
+}
+div.dockercon_registation_section img.dcon_icon{
+    position: absolute;
+    bottom: 0;
+}
+div.dockercon_registation_section img.dcon_logo{
+	padding-left: 50px;
+    margin-top: 10px;
+    float: left;
+}
+div.dockercon_registation_section a.register_link.video{
+	background-image:url(../images/dcon_video_play.png);
+    background-repeat: no-repeat;
+    background-position: right 0 top 15px;
+    padding: 20px;
+    padding-right: 40px;
+    margin-top: -8px;
+    background-size: 26px;
+}
+div.dockercon_registation_section a.register_link{
+	font-family: 'Geomanist Book', sans-serif;
+    padding-left: 20px;
+    color: #fff;
+    font-size: 14px;
+    float: left;
+    margin-top: 14px;
+}
+div.dockercon_registation_section{
+	background-image: url(../images/doc_bar_12311.png);
+	background-size: 100% 52px;
+    background-repeat: no-repeat;
+    position: absolute;
+    background-color: rgba(84,189,192,0.4);
+    width: 100%;
+    height: 52px;
+    text-align: left;
+    bottom: 0;
+	position:static;
+}
+.dockercon16 section.customer_and_news_section.section {
+	background-color:#003E52;
+	padding: 50px 0!important;
+}
+.dockercon16 section.customer_and_news_section.section.GenericDev .items.media li a.button{
+	border: 1px solid #72B8D6;
+    background-color: transparent;
+    color: #fff;
+	text-decoration: none;
+	padding: 5px 60px;
+}
+.dockercon16 section.customer_and_news_section.section.GenericDev .items.media li a.button:hover {
+    background: rgba(255, 255, 255, 0.11);
+}
+section.the_docker_solution_section.section {
+	background-color:#ffffff;
+}
+section.the_docker_solution_section img {
+	margin: auto;
+    margin-bottom: 40px;
+    display: block;
+}
+
+section.customer_and_news_section .items.media li .media_image h3 {
+margin-bottom: 20px;
+}
+section.customer_and_news_section .items.media li .media_image {
+	width: 50px;
+}
+section.customer_and_news_section .items.media li .media_content {
+    padding-left: 65px;
+}
+section.docker_solution_section .items.media li .media_image {
+	width: 50px;
+}
+section.docker_solution_section .items.media li .media_content {
+    padding-left: 65px;
+}
+section.docker_use_cases_home_section .items.media li .media_image {
+	width: 50px;
+}
+section.docker_use_cases_home_section .items.media li .media_content {
+    padding-left: 65px;
+}
+section.docker_footer_image_section {
+	padding: 100px 0;
+}
+section.docker_footer_image_section h2 {
+	padding: 50px 0 100px 0;
+}
+/* ========== Start dockercon_registation_section  ========== */
+
+div.dockercon_registation_section img.dcon_logo {
+    padding-left: 40px;
+}
+div.dockercon_registation_section .cross-btn {
+    color: #fff;
+    font-size: 14px;
+    float: left;
+    height: 43px;
+    width: 260px;
+    overflow: hidden;
+    position: relative;
+    font-family: 'Geomanist Book', sans-serif;
+}
+div.dockercon_registation_section .cross-btn:before {
+}
+div.dockercon_registation_section .cross-btn:after {
+    content: ' ';
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 2;
+    display: block;
+    border-bottom: 10px solid #003e52;
+    border-left: 260px solid transparent;
+    border-right: 0px solid transparent;
+}
+div.dockercon_registation_section .cross-btn > a:hover,
+div.dockercon_registation_section .cross-btn > a:focus,
+div.dockercon_registation_section .cross-btn > a:active,
+div.dockercon_registation_section .cross-btn > a:visited {
+	outline: none;
+	border: none;
+	text-decoration: none;
+}
+div.dockercon_registation_section .cross-btn > a {
+    color: inherit;
+    display: inline-block;
+    background-color: #6cd7d0;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 10px;
+    margin-left: 20px;
+    position: relative;
+	text-decoration:none;
+}
+div.dockercon_registation_section .cross-btn > a:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    top: -2px;
+    left: -10px;
+    width: 20px;
+    height: 50px;
+    background-color: #6cd7d0;
+    transform: rotate(380deg);
+    transform-origin: center left;
+    z-index: 0;
+}
+div.dockercon_registation_section .cross-btn > a:after {
+    content: ' ';
+    display: block;
+    position: absolute;
+    top: -2px;
+    right: -110px;
+    width: 120px;
+    height: 40px;
+    background-color: #6cd7d0;
+    transform: rotate(380deg);
+    transform-origin: center left;
+    z-index: 0;
+}
+div.dockercon_registation_section .cross-btn > a > span {
+	position: relative;
+    z-index: 1;
+}
+div.dockercon_registation_section .cross-btn > a > span > i {
+    background-image: url(/sites/all/themes/docker/assets/images/dcon_video_play.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+/* ========== End dockercon_registation_section  ========== */
+/* ========== End Home  ========== */
+/* ========== Start Careers  ========== */
+section.career_overview_section .side_image{
+	margin-bottom:25px;
+}
+section.career_overview_section.GenericDev .items>li{
+	padding:0;
+	padding-right:50px;
+}
+section.career_overview_section.section .video_container a.play_btn{
+	background-image: url(../images/video_icon_2453-2.png);
+}
+section.career_overview_section.section.GenericDev .items>li h3{
+	margin-top: 0;
+}
+section.career_logos_section{
+	display:none;
+}
+section.career_logos_section .items {
+	margin-bottom:0;
+}
+section.career_logos_section .items li {
+	margin-bottom: 0px;
+	padding: 2px;
+}
+section.career_logos_section .items li .helper{
+	background-color:#FAFAFA;
+    display: block;
+	padding: 60px 15px;
+}
+section.career_logos_section .items li img{}
+section.career_docker_culture_section{}
+section.career_docker_culture_section.GenericDev .container {
+    overflow: hidden;
+}
+section.career_docker_culture_section.GenericDev .items {
+    margin-left: -40px;
+    margin-right: -40px; 
+}
+section.career_docker_culture_section.GenericDev .items>li {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+section.career_job_openings_section.GenericDev .items.media li{
+    padding: 20px 80px 20px 80px;
+}
+section.career_job_openings_section.GenericDev .items.media li .media_image{
+	left: 80px;
+}
+section.career_job_openings_section .items li h3 {
+    margin-bottom: 0;
+}
+section.career_job_openings_section .items li span {
+    font-size:14px;
+	color: #E1F7FF;
+	line-height: 20px;
+    display: block;
+}
+
+section.career_job_openings_section .items li a {
+text-decoration:none;
+}
+section.career_job_openings_section .items li .fa {
+	font-size: 50px;
+    color: #fff;
+}
+section.career_job_openings_section .items li .fa-business-development:before {
+	content: "";
+	background-image: url(../images/business-development-icon.png);
+	background-repeat: no-repeat;
+	background-size: 50px;
+	height: 50px;
+    width: 50px;
+    display: block;
+    margin-top: 8px;
+}
+section.career_job_openings_section .items li .fa-business-operations:before {
+	content: "";
+	background-image: url(../images/business-operations-icon.png);
+	background-repeat: no-repeat;
+	background-size: 60px;
+	height: 60px;
+    width: 60px;
+    display: block;
+    margin-top: -4px;
+}
+section.career_job_openings_section .items.media li .media_image{
+	width: 60px;
+}
+section.career_job_openings_section .items.media li .media_content{
+	padding-left: 70px;
+}
+.jobs_section .jobs li a{
+
+}
+.jobs_section .jobs li span{
+	
+}
+.jobs_section img{
+	margin-bottom:50px;
+}
+/* ========== End Careers  ========== */
+/* ========== Start Enterprise  ========== */
+section.enterprise_why_docker_section .items.media li .media_image{
+	width: 50px;
+}
+section.enterprise_why_docker_section .items.media li .media_content{
+	padding-left: 65px;
+}
+
+section.deploy_docker_solution_section ul.items{
+	max-width: 700px;
+    margin: auto;
+}
+section.subscription_docker_solution_section .items.media li .media_image{
+	width: 50px;
+}
+section.subscription_docker_solution_section .items.media li .media_content{
+	padding-left: 65px;
+}
+/* ========== End Enterprise  ========== */
+/* ========== Start Products  ========== */
+section.whatisdocker_overview_section.GenericDev .container{
+overflow:hidden;
+}
+section.whatisdocker_overview_section.GenericDev .items.media{
+	margin-left: -40px;
+    margin-right: -40px;
+}
+section.whatisdocker_overview_section.GenericDev .items.media li{
+	padding-left: 40px;
+    padding-right: 40px;
+}
+section.build_better_section.GenericDev .container{
+overflow:hidden;
+}
+section.build_better_section.GenericDev .items.media{
+	margin-left: -40px;
+    margin-right: -40px;
+}
+section.build_better_section.GenericDev .items.media li{
+	padding-left: 40px;
+    padding-right: 40px;
+}
+section.whatisdocker_easily_share_section.GenericDev .container{
+overflow:hidden;
+}
+section.whatisdocker_easily_share_section.GenericDev .items.media{
+	margin-left: -40px;
+    margin-right: -40px;
+}
+section.whatisdocker_easily_share_section.GenericDev .items.media li{
+	padding-left: 40px;
+    padding-right: 40px;
+}
+section.whatisdocker_faster_section.GenericDev .container{
+overflow:hidden;
+}
+section.whatisdocker_faster_section.GenericDev .items.media{
+	margin-left: -40px;
+    margin-right: -40px;
+}
+section.whatisdocker_faster_section.GenericDev .items.media li{
+	padding-left: 40px;
+    padding-right: 40px;
+}
+section.docker_vs_vm_section .items.media .media_content img{
+    margin-bottom: 20px;
+}
+section.docker_product_section.GenericDev .container{
+overflow:hidden;
+}
+section.docker_product_section.GenericDev .items.media{
+	margin-left: -40px;
+    margin-right: -40px;
+}
+section.docker_product_section.GenericDev .items.media li{
+	padding-left: 40px;
+    padding-right: 40px;
+}
+section.docker_product_section .items.media li .media_image{
+	width: 50px;
+	left: 40px!important;
+}
+section.docker_product_section .items.media li .media_content{
+	padding-left: 65px;
+}
+section.docker_product_section .button_table {
+	display: table;
+}
+section.docker_product_section .button_table_cell {
+	display: table-cell;
+    vertical-align: middle;
+}
+section.docker_product_section .button_table_cell a.button{
+	display:block;
+	max-width:220px;
+	margin-left:auto!important;
+	margin-right:auto!important;
+}
+/* ========== End Products  ========== */
+/* ========== Start Product editions  ========== */
+section.product_editions_overview_section.GenericDev .container{
+overflow:hidden;
+}
+section.product_editions_overview_section.GenericDev .items.media{
+	margin-left: -40px;
+    margin-right: -40px;
+}
+section.product_editions_overview_section.GenericDev .items.media li{
+	padding-left: 40px;
+    padding-right: 40px;
+}
+section.product_editions_overview_section .items.media li .media_image{
+	width: 80px;
+	left: 40px!important;
+}
+section.product_editions_overview_section .items.media li .media_content{
+	padding-left: 100px;
+}
+section.docker_product_editions_section.section{
+	padding:100px 0;
+}
+section.docker_product_editions_section .items.media li{
+	min-height: 200px;
+	display:table;
+	padding:0!important;
+}
+section.docker_product_editions_section .items.media li .media_image{
+	width: 260px;
+	text-align: center!important; 
+    top: 20px;
+}
+section.docker_product_editions_section .items.media li .media_content{
+	padding-left: 260px;
+	display: table-cell;
+    vertical-align: middle;
+	float:none!important;
+}
+section.docker_product_editions_section .button_table {
+	display: table;
+}
+section.docker_product_editions_section .button_table_cell {
+	display: table-cell;
+    vertical-align: middle;
+}
+section.docker_product_editions_section .button_table_cell a.button{
+	display:block;
+	max-width:250px;
+	margin-left:auto!important;
+	margin-right:auto!important;
+}
+/* ========== End Product editions  ========== */
+/* ========== Start Projects  ========== */
+section.projects_items_section.GenericDev .container{
+overflow:hidden;
+}
+section.projects_items_section.GenericDev .items.media{
+	margin-left: -20px;
+    margin-right: -20px;
+}
+section.projects_items_section.GenericDev .items.media li{
+	padding-left: 20px;
+    padding-right: 20px;
+}
+section.projects_items_section .items.media li .media_image{
+	width: 50px;
+	left: 20px!important;
+}
+section.projects_items_section .items.media li .media_image+.media_content{
+	padding-left: 65px;
+}
+.node-type-projects section.bottom_cta_section.section a.button {
+	display: block;
+    margin: auto!important;
+    margin-bottom: 10px!important;
+}
+/* ========== End Projects ========== */
+/* ========== Start Pricing  ========== */
+.pricing-image{
+	padding-top:30px;
+}
+section.plans_section.section{
+	background-color: #fff;
+}
+section.plans_section .plans_tabs{
+	display:none;
+}
+.dockercon_breakline{
+	background-image: url(../images/pricing_breakline.svg);
+	height: 25px;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    background-position: center;
+}
+section.pricing_our_customers_section .items{
+	padding-top:50px;
+}
+section.pricing_our_customers_section .items li {
+    margin-bottom: 0px;
+    padding: 2px;
+}
+section.pricing_our_customers_section .items li .helper {
+    background-color: #FAFAFA;
+    display: block;
+    padding: 60px 15px;
+}
+section.faqs_section .faqs-group{
+	padding-top:50px;
+}
+section.faqs_section .faq h3{
+	font-family: 'Geomanist', sans-serif;
+    font-weight: 400;
+    color: #5A7E93;
+}
+section.faqs_section .faq .clickme{
+	font-size: 14px;
+	color: #5A7E93;
+    top: 4px;
+}
+section.faqs_section .faq .faq-body,section.faqs_section .faq .faq-body p,section.faqs_section .faq .faq-body li {
+    color: #5A7E93;
+    font-size: 13px;
+}
+section.faqs_section .faq {
+    padding: 12px 0;
+}
+section.faqs_section .cta_button {
+   padding:50px 0 0 0;
+   display: block;
+    clear: both;
+}
+section.plans_section .plan_tab_content .col-md-4{
+	border-right: 1px solid #D7D7D7;
+}
+section.plans_section .plan_tab_content .col-md-4:last-of-type{
+	border-right: none;
+}
+section.plans_section .plans .server_plan_box{
+	border: none;
+}
+section.plans_section .plans .server_plan_box:hover {
+	background-color: transparent;
+	box-shadow: none;
+}
+section.plans_section .plans .server_plan_box h3 {
+    font-size: 22px;
+    color: #407997;
+	margin-bottom: 20px;
+}
+section.plans_section .plans .server_plan_box p {
+	padding-bottom: 30px;
+}
+section.pricing_overview_section.GenericDev .container{
+overflow:hidden;
+}
+section.pricing_overview_section.GenericDev .items.media{
+	margin-left: -20px;
+    margin-right: -20px;
+}
+section.pricing_overview_section.GenericDev .items.media li{
+	padding-left: 20px;
+    padding-right: 20px;
+}
+section.pricing_overview_section .items.media li .media_image{
+	width: 50px;
+	left: 20px!important;
+}
+section.pricing_overview_section .items.media li .media_content{
+	padding-left: 65px;
+}
+section.pricing_overview_section.GenericDev .items.media li a.button {
+    padding: 6px 60px;
+}
+/* ========== End Pricing ========== */
+/* ========== Start sidebarnav ========== */
+div.sidebarnav_section.affix {
+    position: fixed;
+    z-index: 9999;
+	top: 0;
+}
+div.sidebarnav_section.affix ul {
+    margin: 0 0 1.5rem 0;
+}
+.sidebarnav_section {
+	position: absolute;
+    left: 0;
+}
+.sidebarnav_section ul{
+	list-style: none;
+    padding: 0;
+    margin: -25px 0 1.5rem 0;
+    position: absolute;
+    left: 0;
+    background-color: #0081aa;
+    padding: 0;
+    width: 270px;
+	width: 100%;
+	text-align: left;
+    overflow: hidden;
+	display:block;
+}
+.sidebarnav_section ul li{
+	display: block;
+    margin: 0;
+}
+.sidebarnav_section ul li a{
+	color: #fff;
+    font-size: 14px;
+    font-family: 'Geomanist Book', sans-serif;
+    display: block;
+    width: 100%;
+    padding: 10px 10px 10px 50px;
+    line-height: 15px;
+	border-radius: 0;
+}
+.sidebarnav_section ul li a:hover,.sidebarnav_section ul li a.active{
+    border-bottom: none;
+    background-color: #4fa8c4;
+    text-decoration: none;
+	    color: #ffffff;
+}
+.floatleft{
+	float: right;
+}
+.padding_50_0{
+	padding: 50px 0;
+}
+iframe{
+	max-width: 100%;
+}
+/* ========== End sidebarnav ========== */
+/* ========== End Company ========== */
+section.company_overview_section.section  {
+	padding-top:20px!important;
+	padding-bottom:40px!important;
+	overflow:hidden;
+}
+section.company_overview_section.GenericDev .items.media{
+	margin-left: -30px;
+    margin-right: -30px;
+}
+section.company_overview_section.GenericDev .items.media li{
+	padding-left: 30px;
+    padding-right: 30px;
+}
+section.company_about_section.section.GenericDev .items li.item{
+	
+}
+section.company_about_section.section.GenericDev .items li.item span{
+	display: block;
+    color: #49C7EE;
+    font-size: 22px;
+    font-weight: 400;
+    margin-top: 12px;
+    line-height: 28px;
+}
+section.company_about_section.section.GenericDev .items li.item h3{
+	    text-align: center;
+    margin: 0;
+    font-size: 14px;
+    text-transform: capitalize;
+    font-family: 'Geomanist', sans-serif;
+    font-weight: 400;
+}
+section.company_milestones_section.section p{
+    color: #496B81;
+}
+
+.timeline ul {
+    max-width: 800px;
+}
+.timeline li {
+    text-align: left;
+	padding-left: 30px;
+}
+.timeline li p{
+   font-size: 14px;
+	line-height: 18px;
+}
+.timeline li.featured{
+    padding-right: 30px;
+	padding-left: 0;
+}
+.timeline li.featured>div{
+	padding: 6px 18px;
+    border-radius: 0;
+}
+.timeline li.featured>div h5{
+	margin: 0;
+    font-size: 14px;
+    font-family: 'Geomanist', sans-serif;
+    font-weight: 400;
+	line-height: 18px;
+}
+.timeline li.featured>div iframe{
+	width: 100%;
+    margin-top: 20px;
+}
+.timeline li.featured::before {
+    top: 6px;
+}
+.timeline li.featured>div::after {
+    top: 10px;
+	right: -5px;
+    border-width: 5px 0 5px 5px;
+}
+.timeline li.featured>div::before {
+content: '';
+    position: absolute;
+    right: -0;
+    top: 10px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 5px 5px 5px 0;
+    border-color: transparent transparent transparent transparent;
+}
+.timeline li.featured.acquisition>div::before{
+	border-color: transparent #22b8eb transparent transparent;
+}
+.timeline li.featured.acquisition>div::after{
+	border-color: transparent transparent transparent #22b8eb;
+}
+.timeline li.featured.acquisition>div{
+	background: #0081AA;
+}
+/* ========== End Company ========== */
+/* ========== Start government ========== */
+section.government_overview_section.GenericDev .container{
+overflow:hidden;
+}
+section.government_overview_section.GenericDev .items.media{
+	margin-left: -20px;
+    margin-right: -20px;
+}
+section.government_overview_section.GenericDev .items.media li{
+	padding-left: 20px;
+    padding-right: 20px;
+}
+section.government_overview_section .items.media li .media_image{
+	width: 70px;
+	left: 20px!important;
+}
+section.government_overview_section .items.media li .media_content{
+	padding-left: 90px;
+}
+.node-type-government section.dockercon_quotes_section .quotes_slider{
+	    max-width: 900px;
+}
+section.government_get_started_section.GenericDev .container{
+overflow:hidden;
+}
+section.government_get_started_section.GenericDev .items.media{
+	margin-left: -40px;
+    margin-right: -40px;
+}
+section.government_get_started_section.GenericDev .items.media li{
+	padding-left: 40px;
+    padding-right: 40px;
+}
+.dockercon16 section.customer_spotlight_section.section .video_container a.play_btn{
+    width: 100px;
+    height: 100px;
+    background-image: url(../images/video_icon_2454.png);
+}
+section.government_partners_section .government_partners_tabs ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+section.government_partners_section .government_partners_tabs ul li {
+    display: inline-block;
+    font-size: 62px;
+    position: relative;
+    width: 100%;
+    height: 110px;
+    max-width: 33%;
+    padding: 10px 0px;
+    padding-bottom: 0;
+}
+section.government_partners_section .government_partners_tabs ul li:after {
+    
+}
+section.government_partners_section .government_partners_tabs ul li a {
+    display: table;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+section.government_partners_section .government_partners_tabs ul li .helper {
+    width: 100%;
+    height: 100%;
+    padding: 15px 15px;
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+    background-color: rgba(250, 250, 250, 0.72);
+}
+section.government_partners_section .government_partners_tabs ul li.current .helper {
+    background-color: #FAFAFA;
+}
+section.government_partners_section .government_partners_tabs ul li.current:after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -20px;
+    margin-left: -10px;
+    border: 10px solid transparent;
+    border-top-width: 10px;
+    border-top-color: #FAFAFA;
+}
+section.government_partners_section .government_partners_tabs ul li .helper img {
+	max-height: 60px;
+    margin: auto;
+    max-width: 180px;
+}
+section.government_partners_section .government_partners_content {
+    margin-top: 50px;
+    display: none;
+}
+section.government_partners_section .government_partners_content h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+section.government_partners_section .government_partners_content p {
+    font-size: 14px;
+    color: #E0F6FE;
+    margin-bottom: 30px;
+}
+section.government_available_on_section.section  {
+	padding-bottom:0!important;
+}
+section.government_available_on_section  .items {
+	margin-bottom:0;
+}
+section.government_available_on_section  .items li {
+	margin-bottom: 0px;
+	padding: 2px;
+	display: table;
+}
+section.government_available_on_section  .items li .helper{
+	background-color:#FAFAFA;
+    display: block;
+	padding: 30px 15px;
+	height: 100%;
+    display: table-cell;
+    vertical-align: middle;
+}
+section.government_available_on_section  .items li .helper img{
+	max-width:240px;
+	max-height: 170px;
+}
+section.government_resources_section.GenericDev .container{
+overflow:hidden;
+}
+section.government_resources_section.GenericDev .items.media{
+	margin-left: -15px;
+    margin-right: -15px;
+}
+section.government_resources_section.GenericDev .items.media li{
+	padding-left: 15px;
+    padding-right: 15px;
+}
+section.government_resources_section  .items.media li .media_image{
+	width: 50px;
+	left: 15px!important;
+}
+section.government_resources_section  .items.media li .media_content{
+	padding-left: 60px;
+}
+section.government_resources_section.section.GenericDev  .items.media li .media_content h3{
+	margin-bottom: 0px;
+}
+section.government_other_resources_section .GenericDev .container{
+overflow:hidden;
+}
+section.government_other_resources_section .GenericDev .items.media{
+	margin-left: -15px;
+    margin-right: -15px;
+}
+section.government_other_resources_section .GenericDev .items.media li{
+	padding-left: 15px;
+    padding-right: 15px;
+}
+section.government_other_resources_section   .items.media li .media_image{
+	width: 50px;
+	left: 15px!important;
+}
+section.government_other_resources_section   .items.media li .media_content{
+	padding-left: 63px;
+	display: table;
+    height: 50px;
+}
+section.government_other_resources_section   .items.media li .media_content a{
+    display: table-cell;
+    vertical-align: middle;
+    height: 100%;
+	text-decoration: none;
+}
+section.government_other_resources_section   .items.media li .media_content h3{
+margin-bottom:0;
+}
+section.government_other_resources_section   .items.media li .media_image img{
+	max-width: 50px;
+	max-height: 50px;
+}
+/* ========== End Government ========== */
+/* ========== Start News And Press ========== */
+section.feature_news_section.section {
+padding: 30px 0!important;
+}
+section.feature_news_section.section .items.media li .media_content {
+   float: none;
+    text-align: center;
+    max-width: 350px;
+    margin: auto;
+}
+section.feature_news_section.section .items.media li .media_content img{
+	max-width: 180px;
+    max-height: 40px;
+}
+section.feature_news_section.section .items.media li .media_content h3{
+    font-size: 14px;
+    text-transform: capitalize;
+    text-align: center;
+    color: #5BC6EC;
+}
+section.press_news_section.section div h2 {
+    text-align:left;
+}
+div.media_kit_section {
+    text-align:left;
+	margin-bottom: 30px;
+}
+div.press_releases_section {
+    text-align:left;
+}
+div.press_releases_section ul {
+	list-style: none;
+    padding: 0;
+    margin: 0;
+}
+div.press_releases_section ul li{
+	margin-bottom:20px;
+}
+div.press_releases_section ul li .press-item .date{
+	font-family: 'Geomanist Book', sans-serif;
+    font-weight: 100;
+    color: #BFBFBF;
+	font-size: 14px;
+}
+div.press_releases_section ul li .press-item h3,div.press_releases_section ul li .press-item a{
+	font-size: 14px;
+    color: #5BC6EC;
+	font-family: 'Geomanist', sans-serif;
+	font-weight: 400;
+	margin: 0;
+}
+div.news_section .scoopit-fulltheme-scoop-title h3{
+	font-size: 18px;
+    color: #155A74;
+    text-transform: uppercase;
+    text-align: left;
+	margin: 0;
+}
+div.news_section .scoopit-fulltheme-scoop-title h3 a{
+    color: #155A74;
+}
+div.news_section .scoopit-fulltheme-scoop-wrapper{
+margin-bottom:80px;
+}
+div.news_section .scoopit-fulltheme-scoop-source{
+    font-family: 'Geomanist Book', sans-serif;
+    font-weight: 100;
+    color: #BFBFBF;
+    font-size: 14px;
+	margin-bottom:10px;
+}
+div.news_section .scoopit-fulltheme-scoop-source a{
+	text-transform:uppercase;
+    color: #5BC6EC;
+}
+div.news_section .scoopit-fulltheme-scoop-content,div.news_section .scoopit-fulltheme-scoop-content p{
+	font-size: 14px;
+    color: #496B81;
+    padding-bottom: 20px;
+    margin-bottom: 0px;
+    text-align: left;
+}
+div.news_section .scoopit-fulltheme-scoop-image{
+	overflow: hidden;
+    text-align: center;
+}
+div.news_section .scoopit-fulltheme-scoop-image img{
+	height: 150px;
+    max-width: inherit;
+    text-align: center;
+    margin: auto;
+}
+div.news_section .scoopit-fulltheme-scoop-image img#postImage_None{
+	opacity: 0;
+}
+div.news_section .paginator, div.news_section .paginator tbody{
+	border: none;
+}
+div.news_section .paginator td{
+	color: #496B81;
+}
+div.news_section .paginator td a{
+	color: #5BC6EC;
+}
+.node-type-news div.press_section{
+padding:60px 0;
+}
+.node-type-news div.press_section p, .node-type-news div.press_section li{
+	font-size: 14px;
+    color: #496B81;
+    line-height: 1.6;
+}
+/* ========== End News And Press ========== */
+/* ========== Start Resources ========== */
+section.feature_resources_section h2 {
+	text-align:left;
+}
+section.feature_resources_section .resources_link a {
+    padding-right: 20px;
+    font-size: 14px;
+    color: #496B81;
+    padding-bottom: 10px;
+    margin-bottom: 0px;
+    text-align: left;
+}
+section.feature_resources_section .resources_link span {
+	padding-right: 20px;
+    font-size: 14px;
+    color: #496B81;
+    padding-bottom: 0;
+    margin-bottom: 0px;
+    text-align: left;
+}
+/* ========== End Resources ========== */
+/* ========== End Use cases ========== */
+section.use_case_item_section.section{
+	padding:100px 0;
+}
+section.use_case_item_section .items.media li{
+	min-height: 200px;
+	display:table;
+	padding:0!important;
+}
+section.use_case_item_section .items.media li .media_image{
+	width: 50px;
+	text-align: center!important; 
+    top: 0px;
+}
+section.use_case_item_section .items.media li .media_content{
+	padding-left: 65px;
+	display: table-cell;
+    vertical-align: middle;
+	float:none!important;
+	padding-right: 90px;
+}
+section.use_case_item_section .button_table {
+	display: table;
+}
+section.use_case_item_section .button_table_cell {
+	display: table-cell;
+    vertical-align: middle;
+}
+section.use_case_item_section .button_table_cell a.button{
+	display:block;
+	max-width:250px;
+	margin-left:auto!important;
+	margin-right:auto!important;
+}
+section.use_case_item_section .quote_container {
+
+}
+section.use_case_item_section .quote_container .quotes_icon {
+    background-image: url(../images/quote_icon_2452.png);
+    width: 60px;
+    height: 60px;
+    margin: auto;
+    margin-top: -20px;
+    margin-left: 0;
+    background-size: 110%;
+    background-repeat: no-repeat;
+    display: block;
+    float: left;
+    position: absolute;
+    left: 0;
+}
+section.use_case_item_section.GenericDev .items>li .quote_container p {
+    font-size: 20px;
+    color: #ffffff;
+}
+section.use_case_item_section .quote_container .author {
+    font-family: 'Geomanist Book', sans-serif;
+    font-size: 20px;
+    float: left;
+    padding-left: 60%;
+	color: #ffffff;
+}
+section.use_case_item_section .quote_container .author_position {
+    font-family: 'Geomanist Book', sans-serif;
+    font-size: 12px;
+    float: left;
+    padding-left: 61%;
+    clear: both;
+    line-height: 12px;
+	color: #ffffff;
+}
+/* ========== End Use cases ========== */
+/* ========== Start Partner Program ========== */
+section.partner_program_overview_section.GenericDev .container{
+overflow:hidden;
+}
+section.partner_program_overview_section.GenericDev .items.media{
+	margin-left: -40px;
+    margin-right: -40px;
+}
+section.partner_program_overview_section.GenericDev .items.media li{
+	padding-left: 40px;
+    padding-right: 40px;
+}
+section.partner_program_overview_section .items.media li .media_image{
+	width: 50px;
+	left: 40px!important;
+}
+section.partner_program_overview_section .items.media li .media_content{
+	padding-left: 65px;
+}
+section.partner_program_benefits_section.GenericDev .container{
+overflow:hidden;
+}
+section.partner_program_benefits_section.GenericDev .items.media{
+	margin-left: -20px;
+    margin-right: -20px;
+}
+section.partner_program_benefits_section.GenericDev .items.media li{
+	padding-left: 20px;
+    padding-right: 20px;
+}
+section.partner_program_benefits_section .items.media li .media_image{
+	width: 50px;
+	left: 20px!important;
+}
+section.partner_program_benefits_section .items.media li .media_content{
+	padding-left: 65px;
+}
+section.partner_program_benefits_section .program_benefits_footer p{
+	font-size: 14px;
+    color: #E0F6FE;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+section.partner_program_benefits_section p small{
+	font-size: 100%;
+}
+section.partner_program_authorized_section img, section.partner_program_technology_section img{
+	margin-bottom:30px;
+}
+section.partner_program_technology_section p a{
+	color: #E0F6FE;
+}
+section.become_partner_portal_section.section{
+	text-align: left;
+    padding: 20px!important;
+}
+section.become_partner_portal_section.section p{
+font-size: 14px;
+    color: #496B81;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+section.become_partner_portal_section a.button{
+    min-width: 280px;
+}
+/* ========== End Partner Program ========== */
+/* ========== Start customers ========== */
+section.feature_customer_section.GenericDev .container{
+overflow:hidden;
+}
+section.feature_customer_section.GenericDev .items.media{
+	margin-left: -40px;
+    margin-right: -40px;
+}
+section.feature_customer_section.GenericDev .items.media li{
+	padding-left: 40px;
+    padding-right: 40px;
+}
+section.feature_customer_section.GenericDev .video_container img{
+	width: 100%;
+}
+section.customers_logos_section .items {
+	margin-bottom:0;
+}
+section.customers_logos_section .items li {
+	margin-bottom: 0px;
+	padding: 2px;
+}
+section.customers_logos_section .items li a {
+    display: table;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+section.customers_logos_section .items li .helper{
+	background-color:#FAFAFA;
+    display: block;
+	padding: 60px 15px;
+	height: 100%;
+    width: 100%;
+	text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+	position: relative;
+}
+section.customers_logos_section .items li .helper .vcenter{
+	position: absolute;
+    display: table;
+    width: 100%;
+    cursor: pointer;
+    left: 0;
+    top: 0;
+    padding: 0px 10px;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    margin: auto;
+    font-size: 22px;
+    color: #fff;
+    text-transform: uppercase;
+	opacity: 0;
+}
+section.customers_logos_section .items li  .helper img{
+	max-width: 180px;
+    max-height: 100px;
+}
+section.customers_logos_section .items li .helper:hover{
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #29bbec;
+}
+section.customers_logos_section .items li .helper:hover .vcenter{
+    opacity: 1;
+}
+section.customers_logos_section .items li .helper:hover img{
+	opacity: 0;
+}
+.node-type-customers-page section.dockercon_quotes_section .quotes_slider {
+    max-width: 900px;
+}
+.node-type-customers-page section.dockercon_quotes_section .quotes_slider .slides li .author_position{
+font-family: 'Geomanist Book', sans-serif;
+font-size: 20px;
+float: left;
+padding-left: 70%;
+}
+/* ========== End customers ========== */
+/* ========== livedockercon  ========== */
+section.livedockercon_section{
+	background-image: url(../images/livedocker_bg_image.png)!important;
+	background-size: cover!important;
+}
+.dockercon16 section.livedockercon_section.section h2{
+	text-transform: capitalize;
+    text-align: left;
+}
+section.livedockercon_section .left{
+	text-align: left;
+    max-width: 748px;
+}
+section.livedockercon_section .left .video_container img{
+	box-shadow: 0px 6px 30px #000;
+	width: 100%;
+}
+section.livedockercon_section.section .left .video_container a.play_btn{
+	background-image: url(../images/video_icon_2453-1.png);
+}
+section.livedockercon_section .left .keynote{
+	font-size: 13px;
+    color: #fff;
+    margin-top: 30px;
+    display: block;
+}
+section.livedockercon_section .left iframe{
+	
+}
+section.livedockercon_section .right{
+	margin-top: 10%;
+	text-align: left;
+}
+section.livedockercon_section.section .right a.button.darkblue-btn{
+	margin: 0;
+    padding: 23px 15px;
+    width: 300px;
+    text-align: left;
+	padding-left: 130px;
+    position: relative;
+    font-size: 12px;
+	max-width: 100%;
+}
+section.livedockercon_section.section .right a.button.darkblue-btn i{
+	background-repeat: no-repeat;
+    background-size: 100px 34px;
+    width: 100px;
+    height: 34px;
+    left: 15px;
+	top: 12px;
+    position: absolute;
+}
+section.livedockercon_section .right span{
+	display: block;
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.51);
+    margin-bottom: 50px;
+	margin-top: 5px;
+}
+i.livedockercon_apple {
+    background-image: url(../images/livedockercon_apple_icon.png);
+}
+i.livedockercon_win {
+    background-image: url(../images/livedockercon_win_icon.png);
+	top: 14px!important;
+}
+/* ========== End livedockercon ========== */
+/* ========== Start pricing ========== */
+.pricing-tables{
+	float:left;
+	padding: 0;
+	position: relative;
+	width: 100%;
+	margin-left: 0px;
+    margin-right: 0px;
+	margin-top: 50px;
+	margin-bottom: 60px;
+}
+.pricing-tables > li{
+    padding: 30px;
+    border: 1px solid #CCC;
+    border-radius: 0px;
+    float: left;
+	background-color: #fff;
+    list-style: none;
+    text-align: center;
+    width: 33.33%;
+	height: auto;
+	position: relative;
+    z-index: 1;
+}
+.pricing-tables > li .plan-name {
+    margin-bottom: 20px;
+}
+.pricing-tables > li .plan-name h3 {
+	font-size: 22px;
+    color: #407997;
+	text-transform: uppercase;
+}
+.pricing-tables > li .plan-name h3 > strong {
+	display: block;
+    margin-top: 5px;
+}
+.pricing-tables > li .plan-description {
+	font-size: 14px;
+    color: #515656;
+    line-height: 20px;
+	margin-bottom: 10px;
+}
+.pricing-tables > li .plan-description p {
+	font-size: inherit;
+    color: inherit;
+    line-height: inherit;
+    margin: 0;
+}
+.pricing-tables > li .starting-prices {
+	font-size: 16px;
+    color: #407997;
+    font-family: 'Geomanist Book', sans-serif;
+    display: block;
+	margin-bottom: 15px;
+}
+.pricing-tables > li .starting-prices p {
+    margin: 0;
+    color: inherit;
+	font-size: inherit;
+	font-family: inherit;
+    line-height: inherit;
+}
+.pricing-tables > li .plan-button { }
+.pricing-tables > li .plan-button a {
+	display: block;
+    margin: 5px auto !important;
+	padding: 15px 15px !important;
+    max-width: 190px;
+    float: none;
+}
+.pricing-tables > li .plan-button a+a {
+    margin-top: 30px !important;
+}
+.pricing-tables > li .feature-list {
+	padding: 0 10px;
+    line-height: normal;
+    margin-bottom: 20px;
+}
+.pricing-tables > li .feature-list ul {
+	padding: 20px 0px 10px 0px;
+    margin: 20px 0px 0px 0px;
+    list-style: none;
+}
+.pricing-tables > li .feature-list ul li { 
+    font-size: 14px;
+    color: #515656;
+    font-weight: 400;
+    position: relative;
+	margin-bottom: 20px;
+}
+.pricing_cloud_section .pricing-tables > li .feature-list ul li { 
+	margin-bottom: 0px;
+}
+.pricing-tables .note {
+    margin-top: 50px;
+	display: block;
+    font-size: 12px;
+    line-height: 18px;
+    color: #5A7E93;
+}
+.pricing-tables > li .feature-list ul li>span {
+	display: block;
+}
+.pricing-tables > li .feature-list ul li strong {
+    color: #5A7E93;
+    font-weight: 500;
+}
+.pricing-tables > li .feature-list ul li i.tickFree {
+    background-image: url(../images/plan_box_tick.png);
+    height: 12px;
+    width: 10px;
+    display: inline-block;
+    margin-right: 5px;
+}
+.pricing-tables > li.standard {
+    /* z-index: 2;
+	box-shadow: 0px 0px 10px 6px #ddd; */
+	border-right: 0;
+    border-left: 0;
+}
+.livedockercon_section .left .video-wrapper {
+	position: relative;
+}
+.livedockercon_section .left .video_container {
+    z-index: 2;
+}
+.livedockercon_section .left iframe {
+	display:none;
+	opacity:0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+/* ========== End pricing ========== */
+/* ========== Start Products ========== */
+.node-type-product .dockercon16 section.GenericDev h3,.node-type-product .dockercon16 section.GenericDev p{
+text-align: center!important; 
+}
+.node-type-product .dockercon16 section.product_features_product_section.GenericDev .items>li h3,.node-type-product .dockercon16 section.product_features_product_section.GenericDev .items>li p{
+text-align: left!important;
+}
+.node-type-product .dockercon16 section.product_features_product_section.GenericDev .items>li .button{
+margin: auto!important;
+}
+.node-type-product .dockercon16 section.product_overview_product_section.GenericDev h3{
+    font-size: 18px;
+    color: #155A74;
+    text-transform: uppercase;
+    text-align: left;
+	margin-top: 0px;
+    margin-bottom: 8px;
+}
+.node-type-product .dockercon16 section.product_overview_product_section.GenericDev .row p{
+	font-size: 14px;
+    color: #496B81;
+    padding-bottom: 20px;
+    margin-bottom: 0px;
+    text-align: left;
+}
+.node-type-product .dockercon16 section.product_overview_product_section.GenericDev .lab1,.node-type-product .dockercon16 section.product_overview_product_section.GenericDev .lab2{
+    margin-bottom: 50px;
+}
+.dockercon16 section.toolbox_overview_section.GenericDev .items>li ul li{
+	font-size: 14px;
+    color: #496B81;		
+}
+/* ========== End Products ========== */

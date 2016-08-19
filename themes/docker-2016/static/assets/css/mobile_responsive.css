@@ -1,0 +1,241 @@
+/* ========== Start Responsive Sytling ========== */
+@media screen and (max-width:1199px) {
+.node-type-front-page .dockercon16 section.title_section.darkblue a.button{
+	margin-bottom: 70px;
+}
+}
+@media screen and (max-width:991px) {
+section.section {
+    padding: 80px 0;
+}
+.main-header div>.nav-main>li {
+    margin-left: 16px;
+}
+div.dockercon_registation_section .cross-btn > a{
+	border: 0;
+    background: transparent;
+}
+div.dockercon_registation_section .cross-btn:after{
+	border: 0;
+    background: transparent;
+}
+div.dockercon_registation_section .cross-btn > a:after{
+	    border: 0;
+    background: transparent;
+}
+div.dockercon_registation_section .cross-btn > a:before{
+	    border: 0;
+    background: transparent;
+}
+.pricing-tables > li {
+	width: 50%;
+}
+.pricing-tables > li.standard {
+	border-right: 1px solid #CCC;
+}
+.main-header .logo, .main-header .logo_safari {
+	margin-left: 50px;
+	margin-top: 16px;
+}
+.main_footer .footer-nav .primary-footer-sub-nav {
+	float: left;
+}
+.main_footer .footer-nav .primary-footer-sub-nav ul li {
+	margin-left: 0px;
+	margin-right: 30px;
+}
+section.use_case_item_section .items.media li .media_content {
+    padding-right: 30px;
+}
+.dockercon16 section.use_case_item_section.section .button_table a.button {
+    padding: 15px 20px 13px 20px;
+} 
+section.government_partners_section .government_partners_tabs ul li{
+	max-width: 32%;
+}
+section.government_other_resources_section.GenericDev .items.displaytable li {
+	float: left;
+    display: block;
+    width: 50%;
+}
+section.government_partners_section .government_partners_tabs ul li .helper img{
+    max-width: 100%;	
+}
+section.dockercon_quotes_section .quotes_icon {
+    margin-left: 0px;
+}
+section.career_job_openings_section.GenericDev .items.media li {
+    padding: 20px 30px 20px 30px;
+}
+section.career_job_openings_section.GenericDev .items.media li .media_image {
+    left: 30px;
+}
+section.career_overview_section.GenericDev .items>li {
+    padding: 0;
+    padding-right: 0;
+}
+}
+@media screen and (max-width:940px) {
+header .top-right-bg {
+    display: none;
+}
+}
+@media screen and (max-width:767px) {
+section.section {
+    padding: 60px 0;
+}
+section.GenericDev .items>li {
+    padding: 20px 10px 20px;
+}
+.dockercon16 div.heronav_section ul li a {
+    padding: 14px 30px 10px 30px;
+}
+.dockercon16 section.section a.button, .dockercon16 section.title_section a.button {
+    margin-right: 10px;
+    margin-left: 10px;
+}.dockercon16 section.section a.button+a.button, .dockercon16 section.title_section a.button+a.button {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+.sm-margin-top-40 {
+	margin-top:40px;
+}
+footer.main_footer .top_footer {
+	margin-bottom: 50px;
+}
+footer.main_footer div.newsletter {
+	max-width: none;
+	margin-right: auto;
+}
+footer.main_footer .social-icons {
+	max-width: none;
+	margin-right: auto;
+}
+.node-type-front-page .dockercon16 section.title_section.darkblue img.moby {
+    margin-bottom: 40px;
+}
+div.dockercon_registation_section {
+    background-size: 200% 52px;
+}
+.dockercon16 section.title_section .dockercon16_padding {
+    padding-top: 50px;
+}
+.dockercon16 section .dockercon16_padding {
+	padding-top:50px;
+}
+.dockercon16 section.use_case_item_section.section .button_table a.button {
+	margin-top:30px;
+} 
+section.feature_customer_section.GenericDev .items.media>li{
+	width: 100%;
+}
+section.dockercon_quotes_section .quotes_icon {
+    margin-left: 0;
+}
+.sidebarnav_section ul{
+	margin: 0px 0px 1.5rem;
+}
+.dockercon16 .row .sidebarnav_section+.floatleft,.dockercon16 .docker_captian_about_section .text-left{
+	margin-top: 140px;
+}
+.dockercon16 .row .sidebarnav_section+.floatleft>.row{
+	padding: 0 15px;
+}
+.dockercon16 .docker_captian_about_section{
+    padding: 0 15px;
+}
+.dockercon16 .event-search {
+    padding: 0 15px;	
+}
+.path-aws .dockercon16 .row .sidebarnav_section+.floatleft, .path-hpe .dockercon16 .row .sidebarnav_section+.floatleft, .path-IBM .dockercon16 .row .sidebarnav_section+.floatleft, .path-partner-portal .dockercon16 .row .sidebarnav_section+.floatleft , .path-microsoft .dockercon16 .row .sidebarnav_section+.floatleft, .path-find-partner .dockercon16 .row .sidebarnav_section+.floatleft {
+    margin-top: 175px;
+}
+.path-resources .dockercon16 .row .sidebarnav_section+.floatleft, .path-section-products .dockercon16 .row .sidebarnav_section+.floatleft {
+    margin-top: 280px;
+} 
+div.dockercon_registation_section .cross-btn {
+    width: inherit;
+}
+section.title_section.darkblue img {
+    max-height: 250px;
+}
+.dockercon16 section.title_section .textalign-left a.button, .dockercon16 section.title_section .textalign-left a.button+a.button {
+    margin: 20px 0;
+}
+section.docker_product_section.GenericDev .items.media {
+    margin-left: -20px;
+    margin-right: -20px;
+}
+section.docker_product_section.GenericDev .items.media li {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+section.docker_product_section .items.media li .media_image {
+    left: 25px!important;
+} 
+section.toolbox_overview_section .items>li a.button {
+    margin: 10px 00px;
+}
+}
+@media screen and (max-width:680px) {
+	.pricing-tables > li {
+		width: 100%;
+	}
+}
+@media screen and (max-width:600px) {
+.dockercon16 section.title_section a.button,.dockercon16 section.title_section a.button+a.button{
+	display: block;
+    max-width: 300px;
+    margin: 20px auto;
+}
+.dockercon16 div.heronav_section ul {
+	display: block;
+	clear: none;
+	float: none;
+}
+.dockercon16 div.heronav_section ul li {
+	float: none;
+	display: inline-block;
+}
+.dockercon16 div.heronav_section ul li a {
+    padding: 14px 20px 10px 20px;
+}
+section.use_case_item_section .quote_container .author {
+    padding-left: 40%;
+}
+section.use_case_item_section .quote_container .author_position {
+	padding-left: 40%;
+}
+section.dockercon_quotes_section .quotes_slider .slides li .author{
+    padding-left: 40%;
+}
+section.dockercon_quotes_section .quotes_slider .slides li .author_position {
+	padding-left: 40%;
+}
+section.customers_logos_section .items>li{
+	width: 50%;
+}
+section.customers_logos_section .items>li a{
+    min-height: 250px;
+}
+section.government_other_resources_section.GenericDev .items.displaytable li {
+    width: 100%;
+}
+}
+@media screen and (max-width:500px) {
+
+}
+@media screen and (max-width:480px) {
+section.customers_logos_section .items>li{
+	width: 100%;
+}
+}
+@media screen and (max-width:400px) {
+section.included_product_section a.button {
+    width: 90%;
+}
+section.product_features_product_section .items li a.button {
+    min-width: inherit;
+}
+} 
+/* ========== End Responsive Sytling ========== */

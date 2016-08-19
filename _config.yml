@@ -1,0 +1,19 @@
+name: Docker
+markdown: kramdown
+kramdown:
+  input: GFM
+  html_to_native: true
+  hard_wrap: false
+  syntax_highlighter: rouge
+baseurl: /
+incremental: true
+
+safe: false
+lsi: false
+
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: "docs"
