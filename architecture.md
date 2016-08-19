@@ -22,13 +22,16 @@ Universal Control Plane cluster.
 
 When you install DTR on a node, the following containers are started:
 
-| Name                             | Description                                                                                                                       |
-|:---------------------------------|:----------------------------------------------------------------------------------------------------------------------------------|
-| dtr-nginx-&lt;replica_id&gt;     | Receives http and https requests and proxies them to other DTR components. By default it listens to ports 80 and 443 of the host. |
-| dtr-api-&lt;replica_id&gt;       | Executes the DTR business logic. It serves the DTR web application, and API.                                                      |
-| dtr-registry-&lt;replica_id&gt;  | Implements the functionality for pulling and pushing Docker images. It also handles how images are stored.                        |
-| dtr-etcd-&lt;replica_id&gt;      | A key-value store for persisting DTR configuration settings. Don't use it in your applications, since it's for internal use only. |
-| dtr-rethinkdb-&lt;replica_id&gt; | A database for persisting repository metadata. Don't use it in your applications, since it's for internal use only.               |
+| Name                                | Description                                                                                                                       |
+|:------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------|
+| dtr-nginx-&lt;replica_id&gt;        | Receives http and https requests and proxies them to other DTR components. By default it listens to ports 80 and 443 of the host. |
+| dtr-api-&lt;replica_id&gt;          | Executes the DTR business logic. It serves the DTR web application, and API.                                                      |
+| dtr-registry-&lt;replica_id&gt;     | Implements the functionality for pulling and pushing Docker images. It also handles how images are stored.                        |
+| dtr-etcd-&lt;replica_id&gt;         | A key-value store for persisting DTR configuration settings. Don't use it in your applications, since it's for internal use only. |
+| dtr-jobrunner-&lt;replica_id&gt;    | Runs cleanup jobs in the background. It is not exposed to DTR, and is for internal use only.               |
+| dtr-rethinkdb-&lt;replica_id&gt;    | A database for persisting repository metadata. Don't use it in your applications, since it's for internal use only.               |
+| dtr-notary-server-&lt;replica_id&gt; | Receives, validates, and serves content trust metadata, and is consulted when pushing or pulling to DTR with content trust enabled.         |
+| dtr-notary-signer-&lt;replica_id&gt; | Performs server-side timestamp and snapshot signing for content trust metadata.  Is not exposed to DTR, and is for internal use only.     |
 
 
 ## Networks
@@ -56,6 +59,7 @@ DTR uses these named volumes for persisting data:
 | dtr-etcd-&lt;replica_id&gt;     | dtr-etcd/_data                              | The volume used by etcd to persist DTR configurations.                                                       |
 | dtr-registry-&lt;replica_id&gt; | dtr-registry/_data                          | The volume where images are stored, if DTR is configured to store images on the local filesystem.            |
 | dtr-rethink-&lt;replica_id&gt;  | dtr-rethink/_data                           | The volume used by RethinkDB to persist DTR data, like users and repositories.                               |
+| dtr-notary-&lt;replica_id&gt;   | dtr-notary/_data                            | The volume where the Notary private TLS keys and certificates are stored so that the Notary containers can use TLS to communicate. |
 
 If you don’t create these volumes, when installing DTR they are created with
 the default volume driver and flags.
