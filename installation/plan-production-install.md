@@ -51,6 +51,14 @@ Docker UCP requires each node on the cluster to have a static IP address.
 Before installing UCP, ensure your network and nodes are configured to support
 this.
 
+## Time Synchronization
+
+In distributed systems such as Docker UCP, time synchronization is critical
+to ensure proper operation. As a best practice to ensure consistency between
+then engines in a UCP cluster, all engines should regularly synchronize time
+with a NTP server. If a server's clock is skewed, unexpected behavior may
+cause poor performance or even failures.
+
 ## Load balancing strategy
 
 UCP Docker UCP does not include a load-balancer. You can configure your own
