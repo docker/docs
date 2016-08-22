@@ -17,7 +17,7 @@ title: Welcome to the Docker Documentation
 <ul class="items widthcol3 media">
 <li>
 	<div class="media_image">
-		<a href="/docker-for-mac/"><img src="/assets/images/icon-apple@2X.png" alt="Docker for Mac"></a>
+		<a href="/docker-for-mac/"><img src="/images/icon-apple@2X.png" alt="Docker for Mac"></a>
 	</div>
 	<div class="media_content">
 	<div data-mh="mh_docker_projects">
@@ -28,7 +28,7 @@ title: Welcome to the Docker Documentation
 </li>
 <li>
 	<div class="media_image">
-		<a href="/docker-for-windows/"><img src="/assets/images/icon-windows@2X.png" alt="Docker for Windows"></a>
+		<a href="/docker-for-windows/"><img src="/images/icon-windows@2X.png" alt="Docker for Windows"></a>
 	</div>
 	<div class="media_content">
 	<div data-mh="mh_docker_projects">
@@ -39,7 +39,7 @@ title: Welcome to the Docker Documentation
 </li>
 <li>
 	<div class="media_image">
-		<a href="/engine/installation/linux/"><img src="/assets/images/icon-linux@2X.png" alt="Docker for Linux"></a>
+		<a href="/engine/installation/linux/"><img src="/images/icon-linux@2X.png" alt="Docker for Linux"></a>
 	</div>
 	<div class="media_content">
 	<div data-mh="mh_docker_projects">
@@ -52,7 +52,7 @@ title: Welcome to the Docker Documentation
 <ul class="items widthcol media">
 <li>
 <div class="media_image">
-	<a href="/engine/installation/"><img src="/assets/images/icon-engine@2X.png" alt="Docker Engine"></a>
+	<a href="/engine/installation/"><img src="/images/icon-engine@2X.png" alt="Docker Engine"></a>
 </div>
 	<div class="media_content">
 	<div data-mh="mh_docker_projects">
@@ -68,7 +68,7 @@ title: Welcome to the Docker Documentation
 <ul class="items widthcol2 media">
 <li>
 <div class="media_image">
-	<a href="/docker-hub/overview/"><img src="/assets/images/icon-hub@2X.png" alt="Docker Hub"></a>
+	<a href="/docker-hub/overview/"><img src="/images/icon-hub@2X.png" alt="Docker Hub"></a>
 </div>
 	<div class="media_content">
 	<div data-mh="mh_docker_projects">
@@ -80,7 +80,7 @@ title: Welcome to the Docker Documentation
 </li>
 <li>
 <div class="media_image">
-	<a href="/docker-cloud/overview/"><img src="/assets/images/icon-cloud@2X.png" alt="Docker Cloud"></a>
+	<a href="/docker-cloud/overview/"><img src="/images/icon-cloud@2X.png" alt="Docker Cloud"></a>
 </div>
 	<div class="media_content">
 	<div data-mh="mh_docker_projects">
@@ -92,7 +92,7 @@ title: Welcome to the Docker Documentation
 </li>
 <li>
 <div class="media_image">
-	<a href="/docker-trusted-registry/"><img src="/assets/images/icon-registry@2X.png" alt="Docker Trusted Registry"></a>
+	<a href="/docker-trusted-registry/"><img src="/images/icon-registry@2X.png" alt="Docker Trusted Registry"></a>
 </div>
 	<div class="media_content">
 	<div data-mh="mh_docker_projects">
@@ -104,7 +104,7 @@ title: Welcome to the Docker Documentation
 </li>
 <li>
 <div class="media_image">
-	<a href="/ucp/overview/"><img src="/assets/images/icon-ucp@2X.png" alt="Docker Universal Control Plane"></a>
+	<a href="/ucp/overview/"><img src="/images/icon-ucp@2X.png" alt="Docker Universal Control Plane"></a>
 </div>
 	<div class="media_content">
 	<div data-mh="mh_docker_projects">
@@ -117,7 +117,7 @@ title: Welcome to the Docker Documentation
 </li>
 <li>
 <div class="media_image">
-	<a href="/machine/install-machine/"><img src="/assets/images/icon-machine@2X.png" alt="Docker Machine"></a>
+	<a href="/machine/install-machine/"><img src="/images/icon-machine@2X.png" alt="Docker Machine"></a>
 </div>
 	<div class="media_content">
 	<div data-mh="mh_docker_projects">
@@ -130,7 +130,7 @@ title: Welcome to the Docker Documentation
 </li>
 <li>
 <div class="media_image">
-	<a href="/compose/overview/"><img src="/assets/images/icon-compose@2X.png" alt="Docker Compose"></a>
+	<a href="/compose/overview/"><img src="/images/icon-compose@2X.png" alt="Docker Compose"></a>
 </div>
 	<div class="media_content">
 	<div data-mh="mh_docker_projects">
@@ -145,7 +145,7 @@ title: Welcome to the Docker Documentation
 <ul class="media">
 <li>
 <div class="media_image">
-	<a href="mailto:feedback@docker.com?subject=Docker%20Feedback"><img src="/assets/images/chat.png" alt="chat icon"></a>
+	<a href="mailto:feedback@docker.com?subject=Docker%20Feedback"><img src="/images/chat.png" alt="chat icon"></a>
 </div>
 	<div class="media_content">
 	<div data-mh="mh_docker_projects">
