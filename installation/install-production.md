@@ -30,7 +30,7 @@ UCP is a containerized application that requires CS Docker Engine 1.12.0 or
 above to run.
 
 So on each host that you want to be part of the UCP cluster,
-[install CS Docker Engine 1.12.0 or above](https://docs.docker.com/docker-trusted-registry/cs-engine/install/). In the case where you are creating a VM template with CS Engine already installed, make sure that `/etc/docker/key.json` is not included in the image. You can do this by simply removing `/etc/docker/key.json` and restarting Docker on each node.
+[install CS Docker Engine 1.12.0 or above](https://docs.docker.com/docker-trusted-registry/cs-engine/install/). In the case where you are creating a VM template with CS Engine already installed, make sure that `/etc/docker/key.json` is not included in the image. You can do this by simply removing `/etc/docker/key.json`. You can then restart Docker on each node, which will generate new `/etc/docker/key.json` files.
 
 
 ## Step 3: Customize named volumes
