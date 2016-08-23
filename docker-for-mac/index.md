@@ -126,9 +126,10 @@ Run these commands to test if your versions of `docker`, `docker-compose`, and `
 
 1. Open a command-line terminal, and run some Docker commands to verify that Docker is working as expected.
 
-	Some good commands to try are `docker version` to check that you have the latest release installed, and `docker ps` and `docker run hello-world` to verify that Docker is running.
+	Some good commands to try are `docker version` to check that you have the latest release installed, and  `docker run hello-world` to verify that Docker is running. The `hello-world` container runs in the foreground. When it finishes, it stops automatically.
 
-2. For something more adventurous, start a Dockerized web server.
+2. For something more adventurous, start a Dockerized web server. This starts a container that
+   keeps running in the background until you stop it.
 
 	```shell
 	docker run -d -p 80:80 --name webserver nginx
@@ -142,11 +143,31 @@ Run these commands to test if your versions of `docker`, `docker-compose`, and `
 
 	>**Note**: Early beta releases used `docker` as the hostname to build the URL. Now, ports are exposed on the private IP addresses of the VM and forwarded to `localhost` with no other host name set. See also, [Release Notes](release-notes.md) for Beta 9.
 
-3. Run `docker ps` while your web server is running to see details on the webserver container.
+3. Run `docker ps` to see details on the webserver container and any other running containers. To see
+   stopped containers as well, use `docker ps -a`. To see only stopped containers, use `docker ps -f "status=exited"`.
 
 			CONTAINER ID        IMAGE                COMMAND                  CREATED              STATUS              PORTS                              NAMES
 			56f433965490        nginx                "nginx -g 'daemon off"   About a minute ago   Up About a minute   0.0.0.0:80->80/tcp, 443/tcp   webserver
 
+4. To stop a container which runs in the background, use `docker stop <container_id>` or `docker stop <name>`, after finding the container using the `docker ps` command.
+
+		```shell
+		docker stop 56f433965490
+		```
+
+5. To start or restart a container which you have started and stopped before, use the command
+   `docker start <name>`.
+
+		```shell
+		docker start webserver
+		```
+
+6. To completely remove a stopped container, use the `docker rm <container_id>` or
+   `docker rm <name>` command.
+
+   ```shell
+   docker rm webserver
+   ```
 **Want more example applictions?** - For more example walkthroughs that include setting up  services and databases in Docker Compose, see [Example Applications](examples.md).
 
 ## Preferences
