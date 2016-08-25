@@ -17,3 +17,65 @@ defaults:
       path: ""
     values:
       layout: "docs"
+
+menu:
+  - main:
+      name: "Component Projects"
+      identifier: "mn_components"
+      weight: 8
+  - main:
+    name: "About"
+    identifier: "mn_about"
+    weight: 9
+  - main:
+    name:  "Docs archive"
+    identifier:  "mn_versions"
+    weight:  10
+  - main:
+    name:  "Version 1.11"
+    identifier:  "smn_eleven"
+    parent:  "mn_versions"
+    url:  "http://docs.docker.com/v1.11/"
+    weight:  -11
+  - main:
+    name:  "Version 1.10"
+    identifier:  "smn_ten"
+    parent:  "mn_versions"
+    url:  "http://docs.docker.com/v1.10/"
+    weight:  -10
+  - main:
+    name:  "Version 1.9"
+    identifier:  "smn_nineteen"
+    parent:  "mn_versions"
+    url:  "http://docs.docker.com/v1.9/"
+    weight:  -9
+  - main:
+    name:  "Version 1.8"
+    identifier:  "smn_eightteen"
+    parent:  "mn_versions"
+    url:  "http://docs.docker.com/v1.8/"
+    weight:  -8
+  - main:
+    name:  "Version 1.7"
+    identifier:  "smn_seventeen"
+    parent:  "mn_versions"
+    url:  "http://docs.docker.com/v1.7/"
+    weight:  -7
+  - main:
+    name:  "Version 1.6"
+    identifier:  "smn_sixteen"
+    parent:  "mn_versions"
+    url:  "http://docs.docker.com/v1.6/"
+    weight:  -6
+  - main:
+    name:  "Version 1.5"
+    identifier:  "smn_fifteen"
+    parent:  "mn_versions"
+    url:  "http://docs.docker.com/v1.5/"
+    weight:  -5
+  - main:
+    name:  "Version 1.4"
+    identifier:  "smn_fourteen"
+    parent:  "mn_versions"
+    url:  "http://docs.docker.com/v1.4/"
+    weight:  -4
