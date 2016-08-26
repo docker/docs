@@ -3,9 +3,11 @@ description: Home page for Docker's documentation
 keywords:
 - Docker, documentation, manual, guide, reference, api
 title: Welcome to the Docker Documentation
+layout: docs
 ---
+<section class="section projects_items_section GenericDev" style="margin-top:-150px; margin-bottom:-150px">
 
-# Welcome to the Docker Documentation
+<h1 style="text-align:center">Welcome to the Docker Documentation</h1>
 
 <span class="search-banner">
   <form class="search-form form-inline ng-pristine ng-valid" action="/search/">
@@ -13,6 +15,7 @@ title: Welcome to the Docker Documentation
     <button type="submit" class="search-submit btn btn-default">Search</button>
   </form>
 </span>
+
 
 <ul class="items widthcol3 media">
 <li>
@@ -160,3 +163,4 @@ title: Welcome to the Docker Documentation
 
 </li>
 </ul>
+</section>

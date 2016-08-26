@@ -11,13 +11,6 @@ incremental: true
 safe: false
 lsi: false
 
-defaults:
-  -
-    scope:
-      path: ""
-    values:
-      layout: "docs"
-
 menu:
   - main:
       name: "Component Projects"

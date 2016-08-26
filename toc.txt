@@ -1,6 +1,3 @@
----
-layout: null
----
 {
 {% for main in site.menu %}"main {{ forloop.index }}": {
   "title": {{ main.name | jsonify }},
