@@ -17,6 +17,49 @@ known issues for each UCP version.
 You can then use [the upgrade instructions](installation/upgrade.md), to
 upgrade your installation to the latest release.
 
+
+## Version 1.1.3
+
+Note: UCP 1.1.3 supports Docker Engine 1.12 but does not use the built-in
+orchestration capabilities provided by the Docker Engine on swarm mode. When 
+installing this UCP version on a Docker Engine 1.12 host, UCP creates a cluster 
+using Docker Swarm 1.2.5.
+
+**Security Update**
+
+Fixes a security issue by which a malicious user with limited privileges can 
+perform unauthorized actions on the cluster via the API. 
+
+**Features**
+
+* Core
+  * Upgraded Docker Swarm to 1.2.5
+  * Non-admin users no longer have the ability to edit or delete UCP/DTR volumes
+	and networks.
+  * The Pull Image, Delete Image, Create Volume, Delete Volume, Create Network
+    and Delete Network operations are now inaccessible to users with View Only
+	default permissions or lower.
+
+**Bug Fixes**
+
+* Improved system performance when large numbers of overlay networks are deployed 
+  on the cluster.
+* Fixed an issue which affected container rescheduling on clusters with overlay
+  networks.
+* Fixed an issue which affected synchronizing organization owners (admins) in
+  LDAP when migrating from DTR 1.4.3 to 2.0.x
+* Fixed an issue where UCP/DTR integration config was not loaded when UCP 
+  controller was restarted.
+* Fixed an issue in the GUI where the sidebar does not display when first 
+  logging into UCP.
+* Fixed an issue where volumes created through the UCP GUI did not correctly
+  populate the labels field.
+
+**Known Issues**
+
+* This version of UCP cannot be installed on Engine 1.12 host with swarm mode 
+enabled, and is not compatible with swarm-mode based APIs, e.g. `docker service`.
+
 ## Version 1.1.2
 
 Note: UCP 1.1.2 supports Docker Engine 1.12 but doesn't use the new clustering
