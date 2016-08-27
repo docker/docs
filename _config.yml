@@ -7,9 +7,19 @@ kramdown:
   syntax_highlighter: rouge
 baseurl: /
 incremental: true
-
+permalink: pretty
 safe: false
 lsi: false
+
+gems:
+  - jekyll-redirect-from
+
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: docs
 
 menu:
   - main:
