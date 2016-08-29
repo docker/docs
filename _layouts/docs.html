@@ -1,6 +1,22 @@
+{% if page.path contains "index.md" %}
+{% capture basehref %}{{ page.url }}{% endcapture %}
+{% else %}
+{% assign crumbs = page.url | split: '/' %}
+{% assign stoppingpoint = crumbs | size | minus: 1 %}
+{% assign output = "" %}
+{% for crumb in crumbs %}
+{% if forloop.index == stoppingpoint %}
+{% capture basehref %}{{basehref}}{{ crumb }}/{% endcapture %}
+{% break %}
+{% else %}
+{% capture basehref %}{{basehref}}{{ crumb }}/{% endcapture %}
+{% endif %}
+{% endfor %}
+{% endif %}
 <!DOCTYPE html>
 <html class="js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms no-csstransforms3d csstransitions fontface no-generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths retina-display is_not_retina chrome version webkit" lang="en">
 <head>
+<base href="{{ basehref }}"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style type="text/css">
 @charset "UTF-8";
