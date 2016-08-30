@@ -66,3 +66,14 @@ Enjoy working with Compose faster and with less typos!
 - [Get started with WordPress](wordpress.md)
 - [Command line reference](./reference/index.md)
 - [Compose file reference](compose-file.md)
+
+<script language="javascript">
+console.log("Domain: " + window.location.hostname);
+var x = document.links.length;
+for (i = 0; i < x; i++) {
+  console.log(document.links[i].href);
+  var thisHREF = document.links[i].href;
+  thisHREF = thisHREF.replace(".md","/").replace("/index/","/");
+  document.links[i].setAttribute('href', thisHREF);
+}
+</script>

@@ -194,6 +194,14 @@ ng\:form {
               <section class="section" id="DocumentationText">
               {{ content }}
 			       </section>
+						 <script language="javascript">
+						 var x = document.links.length;
+						 for (i = 0; i < x; i++) {
+						   var thisHREF = document.links[i].href;
+						   if (thisHREF.indexOf(window.location.hostname) > -1) thisHREF = thisHREF.replace(".md","/").replace("/index/","/");
+						   document.links[i].setAttribute('href', thisHREF);
+						 }
+						 </script>
             </div>
           </div>
         </div>

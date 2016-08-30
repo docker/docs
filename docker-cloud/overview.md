@@ -7,6 +7,7 @@ menu:
     parent: docker-cloud
     weight: -100
 title: Docker Cloud Overview
+permalink: /docker-cloud/overview.md
 ---
 
 # What is Docker Cloud?
