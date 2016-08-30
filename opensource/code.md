@@ -1,4 +1,3 @@
-<!--[metadata]>
 ---
 aliases:
 - /contributing/contributing
@@ -11,7 +10,6 @@ menu:
     weight: -3
 title: Quickstart contribution
 ---
-<![end-metadata]-->
 
 # Quickstart code or doc contribution
 
