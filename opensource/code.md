@@ -1,3 +1,4 @@
+<!-- Hide front-matter 
 ---
 aliases:
 - /contributing/contributing
@@ -10,6 +11,7 @@ menu:
     weight: -3
 title: Quickstart contribution
 ---
+-->
 
 # Quickstart code or doc contribution
 
