@@ -1,6 +1,7 @@
 jQuery(document).ready(function(){
     $('.expand-menu').on('click touchstart', function(elem) {
 //      menu = elem.currentTarget.nextElementSibling
+      console.log("menu.js firing!")
       menu = elem.currentTarget.parentElement
       if (menu.classList.contains("menu-closed")) {
         menu.classList.remove("menu-closed")
