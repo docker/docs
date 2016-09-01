@@ -7027,14 +7027,8 @@ small {
     line-height: inherit
 }
 code {
-    background-color: eee;
-    border-color: #aaa;
-    border-style: solid;
-    border-width: 1px;
-    color: #333;
     font-family: Consolas, "Liberation Mono", Courier, monospace;
     font-weight: normal;
-    padding: 0.125rem 0.3125rem 0.0625rem
 }
 ul,
 ol,
