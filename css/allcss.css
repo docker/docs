@@ -7027,8 +7027,8 @@ small {
     line-height: inherit
 }
 code {
-    background-color: #ffe0c0;
-    border-color: #ffcb94;
+    background-color: eee;
+    border-color: #aaa;
     border-style: solid;
     border-width: 1px;
     color: #333;
