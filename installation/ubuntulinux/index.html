@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  
+  <meta name="docker_version" content="1.4.1">
+  <meta name="docker_git_branch" content="master">
+  <meta name="docker_git_commit" content="3c097c2">
+  <meta name="docker_build_date" content="Wed Jan 28 04:30:29 UTC 2015">
+
+  <meta name="description" content="Instructions for installing Docker on Ubuntu.">
+  <meta name="keywords" content="Docker, Docker documentation, requirements, virtualbox, installation, ubuntu">
+  
+  <link rel="canonical" href="/installation/ubuntulinux/">
+  <link href="/css/bootstrap-custom.css" rel="stylesheet">
+  <link href="/css/main.css" rel="stylesheet">
+  <link href="/css/prettify-1.0.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/dockerfile_tutorial.css">
+  <link href="/tipuesearch/tipuesearch.css" rel="stylesheet">
+  <link href="/css/docs.css" rel="stylesheet">
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <title>Ubuntu - Docker Documentation</title>
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+  <![endif]-->
+  
+  <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-6096819-11', 'docker.com');
+  ga('require', 'linkid', 'linkid.js');
+  ga('send', 'pageview', {
+   'page': location.pathname + location.search  + location.hash,
+  });
+  </script>
+  
+</head>
+<body>
+
+<div id="topmostnav" class="topmostnav_loggedout navbar navbar-static-top public">
+  <div class="container">
+    <a href="http://www.docker.com/" title="Homepage">
+      <div class="brand logo"><img src="/img/nav/docker-logo-loggedout.png"> </div>
+    </a>
+    <ul class="nav">
+      <li class=""><a href="http://www.docker.com/whatisdocker/" title="What is Docker">What is Docker?</a></li>
+      <li class=""><a href="http://www.docker.com/resources/usecases/" title="Use Cases">Use Cases</a></li>
+      <li class=""><a href="http://www.docker.com/tryit/" title="Try It!">Try It!</a></li>
+      <li class="active"><a href="https://docs.docker.com" title="Install &amp; Docs">Install &amp; Docs</a></li>
+      <li><a href="https://registry.hub.docker.com" title="Browse">Browse</a></li>
+    </ul>
+    <div id="usernav" class="pull-right">
+      <a href="https://hub.docker.com/account/login" class="btn nav-button2" title="Lg In">Log In</a>
+      <a href="https://hub.docker.com/account/signup" class="btn nav-button1" title="Sign Up">Sign Up</a>
+    </div>
+  </div>
+</div>
+<div id="topmostnav" class="topmostnav_loggedin navbar navbar-static-top">
+  <div class="container">
+    <a href="http://www.docker.com/" title="Docker Docs Home"><div class="brand logo"><img src="/img/nav/docker-logo-loggedin.png"> </div></a>
+     <form id="search_box_header" class="navbar-index-search pull-right" action="https://registry.hub.docker.com/search">
+      <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" class="search-query ui-autocomplete-input" placeholder="Search..." name="q" value="" autocomplete="off">
+    </form>
+    <ul class="nav">
+      <li><a href="https://registry.hub.docker.com" title="Browse Repos">Browse Repos</a></li>
+      <li class="active"><a href="http://docs.docker.com" title="Documentation">Documentation</a></li>
+      <li><a href="http://www.docker.com/community/participate/" title="Community">Community</a></li>
+      <li><a href="http://www.docker.com/resources/help/" title="Help">Help</a></li>
+    </ul>
+    <div id="usernav" class="pull-right">
+      <ul class="nav user">
+        <li class="dropdown">
+          <a id="logged-in-header-username" class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <img class="profile" src="" alt="profile picture">
+          </a>
+          <ul class="dropdown-menu pull-right">
+            <li><a href="https://hub.docker.com/">View Profile</a></li>
+            <li><a href="https://hub.docker.com/account/settings/">Settings</a></li>
+            <li><a href="https://hub.docker.com/repos/">My Repositories</a></li>
+            <li><a href="https://hub.docker.com/plans/billing-info">Billing</a></li>
+            <li><a href="https://hub.docker.com/account/logout/?next=/">Log out</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id="wrap">
+  <nav id="nav_menu" class="clearfix navbar navbar-default navbar-static-top affix" role="navigation">
+  <div id="docsnav">
+    <ul id="main-nav" class="pull-left">
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/">About</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/">Docker</a>
+          </li>
+        
+          <li >
+            <a href="/release-notes/">Release Notes</a>
+          </li>
+        
+          <li >
+            <a href="/introduction/understanding-docker/">Understanding Docker</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left active">
+        
+        <a href="/installation/mac/">Installation</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/installation/mac/">Mac OS X</a>
+          </li>
+        
+          <li class="active">
+            <a href="/installation/ubuntulinux/">Ubuntu</a>
+          </li>
+        
+          <li >
+            <a href="/installation/rhel/">Red Hat Enterprise Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/oracle/">Oracle Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/centos/">CentOS</a>
+          </li>
+        
+          <li >
+            <a href="/installation/debian/">Debian</a>
+          </li>
+        
+          <li >
+            <a href="/installation/gentoolinux/">Gentoo</a>
+          </li>
+        
+          <li >
+            <a href="/installation/google/">Google Cloud Platform</a>
+          </li>
+        
+          <li >
+            <a href="/installation/rackspace/">Rackspace Cloud</a>
+          </li>
+        
+          <li >
+            <a href="/installation/amazon/">Amazon EC2</a>
+          </li>
+        
+          <li >
+            <a href="/installation/softlayer/">IBM Softlayer</a>
+          </li>
+        
+          <li >
+            <a href="/installation/archlinux/">Arch Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/frugalware/">FrugalWare</a>
+          </li>
+        
+          <li >
+            <a href="/installation/fedora/">Fedora</a>
+          </li>
+        
+          <li >
+            <a href="/installation/SUSE/">SUSE</a>
+          </li>
+        
+          <li >
+            <a href="/installation/cruxlinux/">CRUX Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/windows/">Microsoft Windows</a>
+          </li>
+        
+          <li >
+            <a href="/installation/binaries/">Binaries</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/userguide/">User Guide</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/userguide/">The Docker User Guide</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerhub/">Getting Started with Docker Hub</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerizing/">Dockerizing Applications</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/usingdocker/">Working with Containers</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerimages/">Working with Docker Images</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerlinks/">Linking containers together</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockervolumes/">Managing data in containers</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerrepos/">Working with Docker Hub</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/docker-hub/">Docker Hub</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/docker-hub/">Docker Hub</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/accounts/">Accounts</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/repos/">Repositories</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/builds/">Automated Builds</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/official_repos/">Official Repo Guidelines</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/examples/nodejs_web_app/">Examples</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/examples/nodejs_web_app/">Dockerizing a Node.js web application</a>
+          </li>
+        
+          <li >
+            <a href="/examples/mongodb/">Dockerizing MongoDB</a>
+          </li>
+        
+          <li >
+            <a href="/examples/running_redis_service/">Dockerizing a Redis service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/postgresql_service/">Dockerizing a PostgreSQL service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/running_riak_service/">Dockerizing a Riak service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/running_ssh_service/">Dockerizing an SSH service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/couchdb_data_volumes/">Dockerizing a CouchDB service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/apt-cacher-ng/">Dockerizing an Apt-Cacher-ng service</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/articles/basics/">Articles</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/articles/basics/">Docker basics</a>
+          </li>
+        
+          <li >
+            <a href="/articles/networking/">Advanced networking</a>
+          </li>
+        
+          <li >
+            <a href="/articles/security/">Security</a>
+          </li>
+        
+          <li >
+            <a href="/articles/https/">Running Docker with HTTPS</a>
+          </li>
+        
+          <li >
+            <a href="/articles/registry_mirror/">Run a local registry mirror</a>
+          </li>
+        
+          <li >
+            <a href="/articles/host_integration/">Automatically starting containers</a>
+          </li>
+        
+          <li >
+            <a href="/articles/baseimages/">Creating a base image</a>
+          </li>
+        
+          <li >
+            <a href="/articles/dockerfile_best-practices/">Best practices for writing Dockerfiles</a>
+          </li>
+        
+          <li >
+            <a href="/articles/certificates/">Using certificates for repository client verification</a>
+          </li>
+        
+          <li >
+            <a href="/articles/using_supervisord/">Using Supervisor</a>
+          </li>
+        
+          <li >
+            <a href="/articles/cfengine_process_management/">Process management with CFEngine</a>
+          </li>
+        
+          <li >
+            <a href="/articles/puppet/">Using Puppet</a>
+          </li>
+        
+          <li >
+            <a href="/articles/chef/">Using Chef</a>
+          </li>
+        
+          <li >
+            <a href="/articles/dsc/">Using PowerShell DSC</a>
+          </li>
+        
+          <li >
+            <a href="/articles/ambassador_pattern_linking/">Cross-Host linking using ambassador containers</a>
+          </li>
+        
+          <li >
+            <a href="/articles/runmetrics/">Runtime metrics</a>
+          </li>
+        
+          <li >
+            <a href="/articles/b2d_volume_resize/">Increasing a Boot2Docker volume</a>
+          </li>
+        
+          <li >
+            <a href="/articles/systemd/">Controlling and configuring Docker using Systemd</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/reference/commandline/cli/">Reference</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/reference/commandline/cli/">Command line</a>
+          </li>
+        
+          <li >
+            <a href="/reference/builder/">Dockerfile</a>
+          </li>
+        
+          <li >
+            <a href="/faq/">FAQ</a>
+          </li>
+        
+          <li >
+            <a href="/reference/run/">Run Reference</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker-io_api/">Docker Hub API</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/registry_api/">Docker Registry API</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/registry_api_client_libraries/">Docker Registry API Client Libraries</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/hub_registry_spec/">Docker Hub and Registry Spec</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api/">Docker Remote API</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.16/">Docker Remote API v1.16</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.15/">Docker Remote API v1.15</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.14/">Docker Remote API v1.14</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.13/">Docker Remote API v1.13</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.12/">Docker Remote API v1.12</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.11/">Docker Remote API v1.11</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/remote_api_client_libraries/">Docker Remote API Client Libraries</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_io_accounts_api/">Docker Hub Accounts API</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/contributing/contributing/">Contribute</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/contributing/contributing/">Contributing</a>
+          </li>
+        
+          <li >
+            <a href="/contributing/devenvironment/">Development environment</a>
+          </li>
+        
+          <li >
+            <a href="/contributing/docs_style-guide/">Documentation style guide</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+    </ul>
+    <form id="nav_search" class="pull-right" action="/jsearch/">
+      <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+      <input name="q" id="tipue_search_input" type="text" class="search_input search-query ui-autocomplete-input" placeholder="Search the Docs" autocomplete="off">
+    </form>
+  </div>
+</nav>
+  <div id="content" class="container">
+    <div class="row">
+
+      <div class="span3" id="leftnav">
+        <div id="toc_table">
+          <ul class="nav nav-tabs nav-stacked">
+            
+  
+    <li class=""><a href="#ubuntu-trusty-1404-lts-64-bit">Ubuntu Trusty 14.04 (LTS) (64-bit)</a></li>
+    
+      <h3><a href="#ubuntu-maintained-package-installation">Ubuntu-maintained Package Installation</a></h3>
+    
+      <h3><a href="#docker-maintained-package-installation">Docker-maintained Package Installation</a></h3>
+    
+  
+    <li class=""><a href="#ubuntu-precise-1204-lts-64-bit">Ubuntu Precise 12.04 (LTS) (64-bit)</a></li>
+    
+      <h3><a href="#dependencies">Dependencies</a></h3>
+    
+      <h3><a href="#installation">Installation</a></h3>
+    
+  
+    <li class=""><a href="#ubuntu-raring-1304-and-saucy-1310-64-bit">Ubuntu Raring 13.04 and Saucy 13.10 (64 bit)</a></li>
+    
+      <h3><a href="#dependencies_1">Dependencies</a></h3>
+    
+      <h3><a href="#installation_1">Installation</a></h3>
+    
+      <h3><a href="#upgrade">Upgrade</a></h3>
+    
+  
+    <li class=""><a href="#giving-non-root-access">Giving non-root access</a></li>
+    
+  
+    <li class=""><a href="#memory-and-swap-accounting">Memory and Swap Accounting</a></li>
+    
+  
+    <li class=""><a href="#troubleshooting">Troubleshooting</a></li>
+    
+  
+    <li class=""><a href="#docker-and-ufw">Docker and UFW</a></li>
+    
+  
+    <li class=""><a href="#docker-and-local-dns-server-warnings">Docker and local DNS server warnings</a></li>
+    
+  
+    <li class=""><a href="#mirrors">Mirrors</a></li>
+    
+      <h3><a href="#yandex">Yandex</a></h3>
+    
+  
+
+          </ul>
+        </div>
+      </div>
+      <div class="span9 content-body">
+
+        
+
+        <div id="versionnav" class="span3 pull-right">
+          <ul class="nav version pull-right">
+            <li class="dropdown">
+              <a id="document-version-number" class="dropdown-toggle" data-toggle="dropdown" href="#">
+		      Version v1.4
+              </a>
+              <ul id="documentation-version-list" class="dropdown-menu pull-right">
+
+		<li role="presentation" class="divider"></li>
+		<li> <a class="home-link3 tertiary-nav" href="https://github.com/docker/docker/blob/master/docs/sources/installation/ubuntulinux.md" >Edit on GitHub</a></li>
+
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <h1 id="ubuntu">Ubuntu</h1>
+<p>Docker is supported on the following versions of Ubuntu:</p>
+<ul>
+<li><a href="#ubuntu-trusty-1404-lts-64-bit"><em>Ubuntu Trusty 14.04 (LTS) (64-bit)</em></a></li>
+<li><a href="#ubuntu-precise-1204-lts-64-bit"><em>Ubuntu Precise 12.04 (LTS) (64-bit)</em></a></li>
+<li><a href="#ubuntu-raring-1304-and-saucy-1310-64-bit"><em>Ubuntu Raring 13.04 and Saucy 13.10 (64
+   bit)</em></a></li>
+</ul>
+<p>Please read <a href="#docker-and-ufw"><em>Docker and UFW</em></a>, if you plan to use <a href="https://help.ubuntu.com/community/UFW">UFW
+(Uncomplicated Firewall)</a></p>
+<h2 id="ubuntu-trusty-1404-lts-64-bit">Ubuntu Trusty 14.04 (LTS) (64-bit)</h2>
+<p>Ubuntu Trusty comes with a 3.13.0 Linux kernel, and a <code>docker.io</code> package which
+installs Docker 1.0.1 and all its prerequisites from Ubuntu's repository.</p>
+<blockquote>
+<p><strong>Note</strong>:
+Ubuntu (and Debian) contain a much older KDE3/GNOME2 package called <code>docker</code>, so the
+Ubuntu-maintained package and executable are named <code>docker.io</code>.</p>
+</blockquote>
+<h3 id="ubuntu-maintained-package-installation">Ubuntu-maintained Package Installation</h3>
+<p>To install the latest Ubuntu package (this is <strong>not</strong> the most recent Docker release):</p>
+<pre class="prettyprint well"><code>$ sudo apt-get update
+$ sudo apt-get install docker.io
+</code></pre>
+<p>Then, to enable tab-completion of Docker commands in BASH, either restart BASH or:</p>
+<pre class="prettyprint well"><code>$ source /etc/bash_completion.d/docker.io
+</code></pre>
+<blockquote>
+<p><strong>Note</strong>:
+Since the Ubuntu package is quite dated at this point, you may want to use
+the following section to install the most recent release of Docker.
+If you install the Docker version, you do not need to install <code>docker.io</code> from Ubuntu.</p>
+</blockquote>
+<h3 id="docker-maintained-package-installation">Docker-maintained Package Installation</h3>
+<p>If you'd like to try the latest version of Docker:</p>
+<p>First, check that your APT system can deal with <code>https</code>
+URLs: the file <code>/usr/lib/apt/methods/https</code>
+should exist. If it doesn't, you need to install the package
+<code>apt-transport-https</code>.</p>
+<pre class="prettyprint well"><code>[ -e /usr/lib/apt/methods/https ] || {
+  apt-get update
+  apt-get install apt-transport-https
+}
+</code></pre>
+<p>Then, add the Docker repository key to your local keychain.</p>
+<pre class="prettyprint well"><code>$ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 36A1D7869245C8950F966E92D8576A8BA88D21E9
+</code></pre>
+<p>Add the Docker repository to your apt sources list, update and install
+the <code>lxc-docker</code> package.</p>
+<p><em>You may receive a warning that the package isn't trusted. Answer yes to
+continue installation.</em></p>
+<pre class="prettyprint well"><code>$ sudo sh -c "echo deb https://get.docker.com/ubuntu docker main\
+&gt; /etc/apt/sources.list.d/docker.list"
+$ sudo apt-get update
+$ sudo apt-get install lxc-docker
+</code></pre>
+<blockquote>
+<p><strong>Note</strong>:</p>
+<p>There is also a simple <code>curl</code> script available to help with this process.</p>
+<pre class="prettyprint well"><code>$ curl -sSL https://get.docker.com/ubuntu/ | sudo sh
+</code></pre>
+</blockquote>
+<p>To verify that everything has worked as expected:</p>
+<pre class="prettyprint well"><code>$ sudo docker run -i -t ubuntu /bin/bash
+</code></pre>
+<p>Which should download the <code>ubuntu</code> image, and then start <code>bash</code> in a container.</p>
+<h2 id="ubuntu-precise-1204-lts-64-bit">Ubuntu Precise 12.04 (LTS) (64-bit)</h2>
+<p>This installation path should work at all times.</p>
+<h3 id="dependencies">Dependencies</h3>
+<p><strong>Linux kernel 3.8</strong></p>
+<p>Due to a bug in LXC, Docker works best on the 3.8 kernel. Precise comes
+with a 3.2 kernel, so we need to upgrade it. The kernel you'll install
+when following these steps comes with AUFS built in. We also include the
+generic headers to enable packages that depend on them, like ZFS and the
+VirtualBox guest additions. If you didn't install the headers for your
+"precise" kernel, then you can skip these headers for the "raring"
+kernel. But it is safer to include them if you're not sure.</p>
+<p>Please read the installation instructions for backported kernels at
+Ubuntu.org to understand why you also need to install the Xorg packages
+when running Docker on a machine with a graphical environment like Unity.
+<a href="https://wiki.ubuntu.com/Kernel/LTSEnablementStack">LTS Enablement Stack</a> refer to note 5 under
+each version.</p>
+<pre class="prettyprint well"><code># install the backported kernel
+$ sudo apt-get update
+$ sudo apt-get install linux-image-generic-lts-raring linux-headers-generic-lts-raring
+
+# install the backported kernel and xorg if using Unity/Xorg
+$ sudo apt-get install --install-recommends linux-generic-lts-raring xserver-xorg-lts-raring libgl1-mesa-glx-lts-raring
+
+# reboot
+$ sudo reboot
+</code></pre>
+<h3 id="installation">Installation</h3>
+<blockquote>
+<p><strong>Warning</strong>: 
+These instructions have changed for 0.6. If you are upgrading from an
+earlier version, you will need to follow them again.</p>
+</blockquote>
+<p>Docker is available as a Debian package, which makes installation easy.
+<strong>See the</strong> <a href="#mirrors"><em>Mirrors</em></a> <strong>section below if you are not
+in the United States.</strong> Other sources of the Debian packages may be
+faster for you to install.</p>
+<p>First, check that your APT system can deal with <code>https</code>
+URLs: the file <code>/usr/lib/apt/methods/https</code>
+should exist. If it doesn't, you need to install the package
+<code>apt-transport-https</code>.</p>
+<pre class="prettyprint well"><code>[ -e /usr/lib/apt/methods/https ] || {
+  apt-get update
+  apt-get install apt-transport-https
+}
+</code></pre>
+<p>Then, add the Docker repository key to your local keychain.</p>
+<pre class="prettyprint well"><code>$ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 36A1D7869245C8950F966E92D8576A8BA88D21E9
+</code></pre>
+<p>Add the Docker repository to your apt sources list, update and install
+the <code>lxc-docker</code> package.</p>
+<p><em>You may receive a warning that the package isn't trusted. Answer yes to
+continue installation.</em></p>
+<pre class="prettyprint well"><code>$ sudo sh -c "echo deb https://get.docker.com/ubuntu docker main\
+&gt; /etc/apt/sources.list.d/docker.list"
+$ sudo apt-get update
+$ sudo apt-get install lxc-docker
+</code></pre>
+<blockquote>
+<p><strong>Note</strong>:</p>
+<p>There is also a simple <code>curl</code> script available to help with this process.</p>
+<pre class="prettyprint well"><code>$ curl -sSL https://get.docker.com/ubuntu/ | sudo sh
+</code></pre>
+</blockquote>
+<p>Now verify that the installation has worked by downloading the
+<code>ubuntu</code> image and launching a container.</p>
+<pre class="prettyprint well"><code>$ sudo docker run -i -t ubuntu /bin/bash
+</code></pre>
+<p>Type <code>exit</code> to exit</p>
+<p><strong>Done!</strong>, continue with the <a href="/userguide/">User Guide</a>.</p>
+<h2 id="ubuntu-raring-1304-and-saucy-1310-64-bit">Ubuntu Raring 13.04 and Saucy 13.10 (64 bit)</h2>
+<p>These instructions cover both Ubuntu Raring 13.04 and Saucy 13.10.</p>
+<h3 id="dependencies_1">Dependencies</h3>
+<p><strong>Optional AUFS filesystem support</strong></p>
+<p>Ubuntu Raring already comes with the 3.8 kernel, so we don't need to
+install it. However, not all systems have AUFS filesystem support
+enabled. AUFS support is optional as of version 0.7, but it's still
+available as a driver and we recommend using it if you can.</p>
+<p>To make sure AUFS is installed, run the following commands:</p>
+<pre class="prettyprint well"><code>$ sudo apt-get update
+$ sudo apt-get install linux-image-extra-`uname -r`
+</code></pre>
+<h3 id="installation_1">Installation</h3>
+<p>Docker is available as a Debian package, which makes installation easy.</p>
+<blockquote>
+<p><strong>Warning</strong>: 
+Please note that these instructions have changed for 0.6. If you are
+upgrading from an earlier version, you will need to follow them again.</p>
+</blockquote>
+<p>First add the Docker repository key to your local keychain.</p>
+<pre class="prettyprint well"><code>$ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 36A1D7869245C8950F966E92D8576A8BA88D21E9
+</code></pre>
+<p>Add the Docker repository to your apt sources list, update and install
+the <code>lxc-docker</code> package.</p>
+<pre class="prettyprint well"><code>$ sudo sh -c "echo deb http://get.docker.com/ubuntu docker main\
+&gt; /etc/apt/sources.list.d/docker.list"
+$ sudo apt-get update
+$ sudo apt-get install lxc-docker
+</code></pre>
+<p>Now verify that the installation has worked by downloading the
+<code>ubuntu</code> image and launching a container.</p>
+<pre class="prettyprint well"><code>$ sudo docker run -i -t ubuntu /bin/bash
+</code></pre>
+<p>Type <code>exit</code> to exit</p>
+<p><strong>Done!</strong>, now continue with the <a href="/userguide/">User Guide</a>.</p>
+<h3 id="upgrade">Upgrade</h3>
+<p>To install the latest version of Docker, use the standard
+<code>apt-get</code> method:</p>
+<pre class="prettyprint well"><code># update your sources list
+$ sudo apt-get update
+
+# install the latest
+$ sudo apt-get install lxc-docker
+</code></pre>
+<h2 id="giving-non-root-access">Giving non-root access</h2>
+<p>The <code>docker</code> daemon always runs as the <code>root</code> user, and since Docker
+version 0.5.2, the <code>docker</code> daemon binds to a Unix socket instead of a
+TCP port. By default that Unix socket is owned by the user <code>root</code>, and
+so, by default, you can access it with <code>sudo</code>.</p>
+<p>Starting in version 0.5.3, if you (or your Docker installer) create a
+Unix group called <code>docker</code> and add users to it, then the <code>docker</code> daemon
+will make the ownership of the Unix socket read/writable by the <code>docker</code>
+group when the daemon starts. The <code>docker</code> daemon must always run as the
+<code>root</code> user, but if you run the <code>docker</code> client as a user in the
+<code>docker</code> group then you don't need to add <code>sudo</code> to all the client
+commands.  From Docker 0.9.0 you can use the <code>-G</code> flag to specify an
+alternative group.</p>
+<blockquote>
+<p><strong>Warning</strong>: 
+The <code>docker</code> group (or the group specified with the <code>-G</code> flag) is
+<code>root</code>-equivalent; see <a href="/articles/security/#docker-daemon-attack-surface"><em>Docker Daemon Attack Surface</em></a> for details.</p>
+</blockquote>
+<p><strong>Example:</strong></p>
+<pre class="prettyprint well"><code># Add the docker group if it doesn't already exist.
+$ sudo groupadd docker
+
+# Add the connected user "${USER}" to the docker group.
+# Change the user name to match your preferred user.
+# You may have to logout and log back in again for
+# this to take effect.
+$ sudo gpasswd -a ${USER} docker
+
+# Restart the Docker daemon.
+# If you are in Ubuntu 14.04, use docker.io instead of docker
+$ sudo service docker restart
+</code></pre>
+<h2 id="memory-and-swap-accounting">Memory and Swap Accounting</h2>
+<p>If you want to enable memory and swap accounting, you must add the
+following command-line parameters to your kernel:</p>
+<pre class="prettyprint well"><code>cgroup_enable=memory swapaccount=1
+</code></pre>
+<p>On systems using GRUB (which is the default for Ubuntu), you can add
+those parameters by editing <code>/etc/default/grub</code> and
+extending <code>GRUB_CMDLINE_LINUX</code>. Look for the
+following line:</p>
+<pre class="prettyprint well"><code>GRUB_CMDLINE_LINUX=""
+</code></pre>
+<p>And replace it by the following one:</p>
+<pre class="prettyprint well"><code>GRUB_CMDLINE_LINUX="cgroup_enable=memory swapaccount=1"
+</code></pre>
+<p>Then run <code>sudo update-grub</code>, and reboot.</p>
+<p>These parameters will help you get rid of the following warnings:</p>
+<pre class="prettyprint well"><code>WARNING: Your kernel does not support cgroup swap limit.
+WARNING: Your kernel does not support swap limit capabilities. Limitation discarded.
+</code></pre>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<p>On Linux Mint, the <code>cgroup-lite</code> and <code>apparmor</code> packages are not
+installed by default. Before Docker will work correctly, you will need
+to install this via:</p>
+<pre class="prettyprint well"><code>$ sudo apt-get update &amp;&amp; sudo apt-get install cgroup-lite apparmor
+</code></pre>
+<h2 id="docker-and-ufw">Docker and UFW</h2>
+<p>Docker uses a bridge to manage container networking. By default, UFW
+drops all forwarding traffic. As a result you will need to enable UFW
+forwarding:</p>
+<pre class="prettyprint well"><code>$ sudo nano /etc/default/ufw
+
+# Change:
+# DEFAULT_FORWARD_POLICY="DROP"
+# to
+DEFAULT_FORWARD_POLICY="ACCEPT"
+</code></pre>
+<p>Then reload UFW:</p>
+<pre class="prettyprint well"><code>$ sudo ufw reload
+</code></pre>
+<p>UFW's default set of rules denies all incoming traffic. If you want to
+be able to reach your containers from another host then you should allow
+incoming connections on the Docker port (default 2375):</p>
+<pre class="prettyprint well"><code>$ sudo ufw allow 2375/tcp
+</code></pre>
+<h2 id="docker-and-local-dns-server-warnings">Docker and local DNS server warnings</h2>
+<p>Systems which are running Ubuntu or an Ubuntu derivative on the desktop
+will use 127.0.0.1 as the default nameserver in /etc/resolv.conf.
+NetworkManager sets up dnsmasq to use the real DNS servers of the
+connection and sets up nameserver 127.0.0.1 in /etc/resolv.conf.</p>
+<p>When starting containers on these desktop machines, users will see a
+warning:</p>
+<pre class="prettyprint well"><code>WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+</code></pre>
+<p>This warning is shown because the containers can't use the local DNS
+nameserver and Docker will default to using an external nameserver.</p>
+<p>This can be worked around by specifying a DNS server to be used by the
+Docker daemon for the containers:</p>
+<pre class="prettyprint well"><code>$ sudo nano /etc/default/docker
+---
+# Add:
+DOCKER_OPTS="--dns 8.8.8.8"
+# 8.8.8.8 could be replaced with a local DNS server, such as 192.168.1.1
+# multiple DNS servers can be specified: --dns 8.8.8.8 --dns 192.168.1.1
+</code></pre>
+<p>The Docker daemon has to be restarted:</p>
+<pre class="prettyprint well"><code>$ sudo restart docker
+</code></pre>
+<blockquote>
+<p><strong>Warning</strong>: 
+If you're doing this on a laptop which connects to various networks,
+make sure to choose a public DNS server.</p>
+</blockquote>
+<p>An alternative solution involves disabling dnsmasq in NetworkManager by
+following these steps:</p>
+<pre class="prettyprint well"><code>$ sudo nano /etc/NetworkManager/NetworkManager.conf
+----
+# Change:
+dns=dnsmasq
+# to
+#dns=dnsmasq
+</code></pre>
+<p>NetworkManager and Docker need to be restarted afterwards:</p>
+<pre class="prettyprint well"><code>$ sudo restart network-manager
+$ sudo restart docker
+</code></pre>
+<blockquote>
+<p><strong>Warning</strong>: This might make DNS resolution slower on some networks.</p>
+</blockquote>
+<h2 id="mirrors">Mirrors</h2>
+<p>You should <code>ping get.docker.com</code> and compare the
+latency to the following mirrors, and pick whichever one is best for
+you.</p>
+<h3 id="yandex">Yandex</h3>
+<p><a href="http://yandex.ru/">Yandex</a> in Russia is mirroring the Docker Debian
+packages, updating every 6 hours.
+Substitute <code>http://mirror.yandex.ru/mirrors/docker/</code> for
+<code>http://get.docker.com/ubuntu</code> in the instructions above.
+For example:</p>
+<pre class="prettyprint well"><code>$ sudo sh -c "echo deb http://mirror.yandex.ru/mirrors/docker/ docker main\
+&gt; /etc/apt/sources.list.d/docker.list"
+$ sudo apt-get update
+$ sudo apt-get install lxc-docker
+</code></pre>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="push-footer"></div>
+
+</div>
+
+
+
+<div id="footer-container" class="container">
+  <div id="footer" class="grey-body">
+    <div class="row">
+      <div class="span2">
+        <span class="footer-title">Community</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/community/events/">Events</a></li>
+          <li><a class="primary-button" href="http://posts.docker.com">Friends' Posts</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/community/meetups/">Meetups</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/community/governance/">Governance</a></li>
+          <li><a class="primary-button" href="http://forums.docker.com">Forums</a></li>
+          <li><a class="primary-button" href="http://botbot.me/freenode/docker">IRC</a></li>
+          <li><a class="primary-button" href="https://github.com/docker/docker">GitHub</a></li>
+          <li><a class="primary-button" href="http://stackoverflow.com/search?q=docker">Stackoverflow</a></li>
+          <li><a class="primary-button" href="http://www.cafepress.com/docker">Swag</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <span class="footer-title">Enterprise</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/enterprise/support/">Support</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/enterprise/education/">Education</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/enterprise/services/">Services</a></li>
+        </ul>
+        <span class="footer-title">Partner Solutions</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/partners/find/">Find a Partner</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/partners/program/">Partner Program</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/partners/learn/">Learn More</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <span class="footer-title">Resources</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://docs.docker.com">Documentation</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/help/">Help</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/usecases/">Use Cases</a></li>
+          <li><a class="primary-button" href="http://www.docker.com/tryit/">Online Tutorial</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/howtobuy/">How To Buy</a></li>
+          <li><a class="primary-button" href="http://status.docker.com">Status</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/security/">Security</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <span class="footer-title">Company</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/company/aboutus/">About Us</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/team/">Team</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/news/">News</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/press/">Press</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/careers/">Careers</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/contact/">Contact</a></li>
+        </ul>
+      </div>
+      <div class="span3">
+        <span class="footer-title">Connect</span>
+        <div class="search">
+          <span>Subscribe to our newsletter</span>
+          <form action="https://www.docker.com/subscribe_newsletter/" method="post">
+            <input type='hidden' name='csrfmiddlewaretoken' value='aWL78QXQkY8DSKNYh6cl08p5eTLl7sOa' />
+            <tr><th><label for="id_email">Email:</label></th><td><input class="form-control" id="id_email" name="email" placeholder="Enter your email" type="text" /></td></tr>
+            
+            <button type="submit"><i class="icon-arrow-right"></i> </button>
+          </form>
+        </div>
+        <ul class="unstyled social">
+          <li><a title="Docker on Twitter" class="primary-button blog" href="http://blog.docker.com">Blog</a></li>
+          <li><a title="Docker on Twitter" class="primary-button twitter" href="http://twitter.com/docker">Twitter</a></li>
+          <li><a title="Docker on Google+" class="primary-button googleplus" href="https://plus.google.com/u/0/communities/108146856671494713993">Google+</a></li>
+          <li><a title="Docker on Facebook" class="primary-button facebook" href="https://www.facebook.com/docker.run">Facebook</a></li>
+          <li><a title="Docker on Youtube" class="primary-button youtube" href="http://www.youtube.com/user/dockerrun">YouTube</a></li>
+        </ul>
+        <ul class="unstyled social">
+          <li><a title="Docker on SlideShare" class="primary-button slideshare" href="http://www.slideshare.net/Docker">Slideshare</a></li>
+          <li>
+             <a title="Docker on LinkedIn" class="primary-button" href="https://www.linkedin.com/company/docker">
+                 <span class="linkedin"></span>
+                 LinkedIn
+             </a>
+          </li>
+          <li>
+              <a title="Docker on GitHub" class="primary-button" href="https://github.com/docker/">
+                  <span class="github"></span>
+                  GitHub
+              </a>
+          </li>
+          <li>
+              <a title="Docker on Reddit" class="primary-button" href="http://www.reddit.com/r/docker">
+                  <span class="reddit"></span>
+                  Reddit
+              </a>
+          </li>
+          <li>
+              <a title="Docker on AngelList" class="primary-button" href="https://angel.co/docker-inc-1">
+                  <span class="angellist"></span>
+                  AngelList
+              </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="span6 pagination-right copyright">
+        <span>&copy; 2014-2015 Docker, Inc.</span>
+      </div>
+      <div class="span6 pagination-left copyright">
+        <a href="http://www.docker.com/legal/terms_of_service">Terms</a> &middot;
+        <a href="http://www.docker.com/legal/privacy_policy">Privacy</a> &middot;
+        <a href="http://www.docker.com/legal/trademark_guidelines">Trademarks</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/js/jquery-1.10.2.min.js"></script>
+<script src="/js/jquery.cookie.js" ></script>
+<script src="/js/jquery-scrolltofixed-min.js"></script>
+<script src="/js/bootstrap-3.0.3.min.js"></script>
+<script src="/js/prettify-1.0.min.js"></script>
+<script src="/js/dockerfile_tutorial.js"></script>
+<script src="/js/dockerfile_tutorial_level.js"></script>
+<script src="/js/base.js"></script>
+<script src="/tipuesearch/tipuesearch_set.js"></script>
+<script src="/tipuesearch/tipuesearch.min.js"></script>
+<script type="text/javascript">
+piAId = '45082';
+piCId = '1482';
+
+(function() {
+  function async_load(){
+    var s = document.createElement('script'); s.type = 'text/javascript';
+    s.src = ('https:' == document.location.protocol ? 'https://pi' : 'http://cdn') + '.pardot.com/pd.js';
+    var c = document.getElementsByTagName('script')[0]; c.parentNode.insertBefore(s, c);
+  }
+  if(window.attachEvent) { window.attachEvent('onload', async_load); }
+  else { window.addEventListener('load', async_load, false); }
+})();
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#content').css("min-height", $(window).height() - 553 );
+    // if the URL contains a version string, update the version picker to reflect that
+    version = document.location.pathname.match(/^\/(v\d\.\d)\/.*/)
+    if (version && version[1]) {
+        $('#document-version-number')[0].text = 'Version '+version[1];
+    } else {
+        $('#document-version-number')[0].text = $('#document-version-number')[0].text + " (Latest)"
+    }
+    // load the complete versions list
+    $.get("/versions.html_fragment", function( data ) {
+    	$('#documentation-version-list').prepend(data);
+	//remove any "/v1.1/" bits from front, so we can add the path to the version selection dropdown.
+	path = document.location.pathname.replace(/^\/v\d\.\d/, "");
+	$('#documentation-version-list a.version').each(function(i, e) {
+		e.href = e.href+path;
+		$(e).removeClass()
+	});
+    });
+
+  })
+  var userName = getCookie('docker_sso_username');
+  if (userName) {
+    $('.topmostnav_loggedout').hide();
+    $('.topmostnav_loggedin').show();
+    $('#logged-in-header-username').text(userName);
+  } else {
+    $('.topmostnav_loggedout').show();
+    $('.topmostnav_loggedin').hide();
+  }
+</script>
+</body>
+</html>

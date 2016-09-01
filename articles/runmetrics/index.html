@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  
+  <meta name="docker_version" content="1.4.1">
+  <meta name="docker_git_branch" content="master">
+  <meta name="docker_git_commit" content="3c097c2">
+  <meta name="docker_build_date" content="Wed Jan 28 04:30:29 UTC 2015">
+
+  <meta name="description" content="Measure the behavior of running containers">
+  <meta name="keywords" content="docker, metrics, CPU, memory, disk, IO, run, runtime">
+  
+  <link rel="canonical" href="/articles/runmetrics/">
+  <link href="/css/bootstrap-custom.css" rel="stylesheet">
+  <link href="/css/main.css" rel="stylesheet">
+  <link href="/css/prettify-1.0.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/dockerfile_tutorial.css">
+  <link href="/tipuesearch/tipuesearch.css" rel="stylesheet">
+  <link href="/css/docs.css" rel="stylesheet">
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <title>Runtime metrics - Docker Documentation</title>
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+  <![endif]-->
+  
+  <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-6096819-11', 'docker.com');
+  ga('require', 'linkid', 'linkid.js');
+  ga('send', 'pageview', {
+   'page': location.pathname + location.search  + location.hash,
+  });
+  </script>
+  
+</head>
+<body>
+
+<div id="topmostnav" class="topmostnav_loggedout navbar navbar-static-top public">
+  <div class="container">
+    <a href="http://www.docker.com/" title="Homepage">
+      <div class="brand logo"><img src="/img/nav/docker-logo-loggedout.png"> </div>
+    </a>
+    <ul class="nav">
+      <li class=""><a href="http://www.docker.com/whatisdocker/" title="What is Docker">What is Docker?</a></li>
+      <li class=""><a href="http://www.docker.com/resources/usecases/" title="Use Cases">Use Cases</a></li>
+      <li class=""><a href="http://www.docker.com/tryit/" title="Try It!">Try It!</a></li>
+      <li class="active"><a href="https://docs.docker.com" title="Install &amp; Docs">Install &amp; Docs</a></li>
+      <li><a href="https://registry.hub.docker.com" title="Browse">Browse</a></li>
+    </ul>
+    <div id="usernav" class="pull-right">
+      <a href="https://hub.docker.com/account/login" class="btn nav-button2" title="Lg In">Log In</a>
+      <a href="https://hub.docker.com/account/signup" class="btn nav-button1" title="Sign Up">Sign Up</a>
+    </div>
+  </div>
+</div>
+<div id="topmostnav" class="topmostnav_loggedin navbar navbar-static-top">
+  <div class="container">
+    <a href="http://www.docker.com/" title="Docker Docs Home"><div class="brand logo"><img src="/img/nav/docker-logo-loggedin.png"> </div></a>
+     <form id="search_box_header" class="navbar-index-search pull-right" action="https://registry.hub.docker.com/search">
+      <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" class="search-query ui-autocomplete-input" placeholder="Search..." name="q" value="" autocomplete="off">
+    </form>
+    <ul class="nav">
+      <li><a href="https://registry.hub.docker.com" title="Browse Repos">Browse Repos</a></li>
+      <li class="active"><a href="http://docs.docker.com" title="Documentation">Documentation</a></li>
+      <li><a href="http://www.docker.com/community/participate/" title="Community">Community</a></li>
+      <li><a href="http://www.docker.com/resources/help/" title="Help">Help</a></li>
+    </ul>
+    <div id="usernav" class="pull-right">
+      <ul class="nav user">
+        <li class="dropdown">
+          <a id="logged-in-header-username" class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <img class="profile" src="" alt="profile picture">
+          </a>
+          <ul class="dropdown-menu pull-right">
+            <li><a href="https://hub.docker.com/">View Profile</a></li>
+            <li><a href="https://hub.docker.com/account/settings/">Settings</a></li>
+            <li><a href="https://hub.docker.com/repos/">My Repositories</a></li>
+            <li><a href="https://hub.docker.com/plans/billing-info">Billing</a></li>
+            <li><a href="https://hub.docker.com/account/logout/?next=/">Log out</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id="wrap">
+  <nav id="nav_menu" class="clearfix navbar navbar-default navbar-static-top affix" role="navigation">
+  <div id="docsnav">
+    <ul id="main-nav" class="pull-left">
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/">About</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/">Docker</a>
+          </li>
+        
+          <li >
+            <a href="/release-notes/">Release Notes</a>
+          </li>
+        
+          <li >
+            <a href="/introduction/understanding-docker/">Understanding Docker</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/installation/mac/">Installation</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/installation/mac/">Mac OS X</a>
+          </li>
+        
+          <li >
+            <a href="/installation/ubuntulinux/">Ubuntu</a>
+          </li>
+        
+          <li >
+            <a href="/installation/rhel/">Red Hat Enterprise Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/oracle/">Oracle Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/centos/">CentOS</a>
+          </li>
+        
+          <li >
+            <a href="/installation/debian/">Debian</a>
+          </li>
+        
+          <li >
+            <a href="/installation/gentoolinux/">Gentoo</a>
+          </li>
+        
+          <li >
+            <a href="/installation/google/">Google Cloud Platform</a>
+          </li>
+        
+          <li >
+            <a href="/installation/rackspace/">Rackspace Cloud</a>
+          </li>
+        
+          <li >
+            <a href="/installation/amazon/">Amazon EC2</a>
+          </li>
+        
+          <li >
+            <a href="/installation/softlayer/">IBM Softlayer</a>
+          </li>
+        
+          <li >
+            <a href="/installation/archlinux/">Arch Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/frugalware/">FrugalWare</a>
+          </li>
+        
+          <li >
+            <a href="/installation/fedora/">Fedora</a>
+          </li>
+        
+          <li >
+            <a href="/installation/SUSE/">SUSE</a>
+          </li>
+        
+          <li >
+            <a href="/installation/cruxlinux/">CRUX Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/windows/">Microsoft Windows</a>
+          </li>
+        
+          <li >
+            <a href="/installation/binaries/">Binaries</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/userguide/">User Guide</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/userguide/">The Docker User Guide</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerhub/">Getting Started with Docker Hub</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerizing/">Dockerizing Applications</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/usingdocker/">Working with Containers</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerimages/">Working with Docker Images</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerlinks/">Linking containers together</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockervolumes/">Managing data in containers</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerrepos/">Working with Docker Hub</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/docker-hub/">Docker Hub</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/docker-hub/">Docker Hub</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/accounts/">Accounts</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/repos/">Repositories</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/builds/">Automated Builds</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/official_repos/">Official Repo Guidelines</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/examples/nodejs_web_app/">Examples</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/examples/nodejs_web_app/">Dockerizing a Node.js web application</a>
+          </li>
+        
+          <li >
+            <a href="/examples/mongodb/">Dockerizing MongoDB</a>
+          </li>
+        
+          <li >
+            <a href="/examples/running_redis_service/">Dockerizing a Redis service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/postgresql_service/">Dockerizing a PostgreSQL service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/running_riak_service/">Dockerizing a Riak service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/running_ssh_service/">Dockerizing an SSH service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/couchdb_data_volumes/">Dockerizing a CouchDB service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/apt-cacher-ng/">Dockerizing an Apt-Cacher-ng service</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left active">
+        
+        <a href="/articles/basics/">Articles</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/articles/basics/">Docker basics</a>
+          </li>
+        
+          <li >
+            <a href="/articles/networking/">Advanced networking</a>
+          </li>
+        
+          <li >
+            <a href="/articles/security/">Security</a>
+          </li>
+        
+          <li >
+            <a href="/articles/https/">Running Docker with HTTPS</a>
+          </li>
+        
+          <li >
+            <a href="/articles/registry_mirror/">Run a local registry mirror</a>
+          </li>
+        
+          <li >
+            <a href="/articles/host_integration/">Automatically starting containers</a>
+          </li>
+        
+          <li >
+            <a href="/articles/baseimages/">Creating a base image</a>
+          </li>
+        
+          <li >
+            <a href="/articles/dockerfile_best-practices/">Best practices for writing Dockerfiles</a>
+          </li>
+        
+          <li >
+            <a href="/articles/certificates/">Using certificates for repository client verification</a>
+          </li>
+        
+          <li >
+            <a href="/articles/using_supervisord/">Using Supervisor</a>
+          </li>
+        
+          <li >
+            <a href="/articles/cfengine_process_management/">Process management with CFEngine</a>
+          </li>
+        
+          <li >
+            <a href="/articles/puppet/">Using Puppet</a>
+          </li>
+        
+          <li >
+            <a href="/articles/chef/">Using Chef</a>
+          </li>
+        
+          <li >
+            <a href="/articles/dsc/">Using PowerShell DSC</a>
+          </li>
+        
+          <li >
+            <a href="/articles/ambassador_pattern_linking/">Cross-Host linking using ambassador containers</a>
+          </li>
+        
+          <li class="active">
+            <a href="/articles/runmetrics/">Runtime metrics</a>
+          </li>
+        
+          <li >
+            <a href="/articles/b2d_volume_resize/">Increasing a Boot2Docker volume</a>
+          </li>
+        
+          <li >
+            <a href="/articles/systemd/">Controlling and configuring Docker using Systemd</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/reference/commandline/cli/">Reference</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/reference/commandline/cli/">Command line</a>
+          </li>
+        
+          <li >
+            <a href="/reference/builder/">Dockerfile</a>
+          </li>
+        
+          <li >
+            <a href="/faq/">FAQ</a>
+          </li>
+        
+          <li >
+            <a href="/reference/run/">Run Reference</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker-io_api/">Docker Hub API</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/registry_api/">Docker Registry API</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/registry_api_client_libraries/">Docker Registry API Client Libraries</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/hub_registry_spec/">Docker Hub and Registry Spec</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api/">Docker Remote API</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.16/">Docker Remote API v1.16</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.15/">Docker Remote API v1.15</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.14/">Docker Remote API v1.14</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.13/">Docker Remote API v1.13</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.12/">Docker Remote API v1.12</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.11/">Docker Remote API v1.11</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/remote_api_client_libraries/">Docker Remote API Client Libraries</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_io_accounts_api/">Docker Hub Accounts API</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/contributing/contributing/">Contribute</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/contributing/contributing/">Contributing</a>
+          </li>
+        
+          <li >
+            <a href="/contributing/devenvironment/">Development environment</a>
+          </li>
+        
+          <li >
+            <a href="/contributing/docs_style-guide/">Documentation style guide</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+    </ul>
+    <form id="nav_search" class="pull-right" action="/jsearch/">
+      <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+      <input name="q" id="tipue_search_input" type="text" class="search_input search-query ui-autocomplete-input" placeholder="Search the Docs" autocomplete="off">
+    </form>
+  </div>
+</nav>
+  <div id="content" class="container">
+    <div class="row">
+
+      <div class="span3" id="leftnav">
+        <div id="toc_table">
+          <ul class="nav nav-tabs nav-stacked">
+            
+  
+    <li class=""><a href="#control-groups">Control Groups</a></li>
+    
+  
+    <li class=""><a href="#enumerating-cgroups">Enumerating Cgroups</a></li>
+    
+  
+    <li class=""><a href="#finding-the-cgroup-for-a-given-container">Finding the Cgroup for a Given Container</a></li>
+    
+  
+    <li class=""><a href="#metrics-from-cgroups-memory-cpu-block-io">Metrics from Cgroups: Memory, CPU, Block IO</a></li>
+    
+      <h3><a href="#memory-metrics-memorystat">Memory Metrics: memory.stat</a></h3>
+    
+      <h3><a href="#cpu-metrics-cpuacctstat">CPU metrics: cpuacct.stat</a></h3>
+    
+      <h3><a href="#block-io-metrics">Block I/O metrics</a></h3>
+    
+  
+    <li class=""><a href="#network-metrics">Network Metrics</a></li>
+    
+      <h3><a href="#iptables">IPtables</a></h3>
+    
+      <h3><a href="#interface-level-counters">Interface-level counters</a></h3>
+    
+  
+    <li class=""><a href="#tips-for-high-performance-metric-collection">Tips for high-performance metric collection</a></li>
+    
+  
+    <li class=""><a href="#collecting-metrics-when-a-container-exits">Collecting metrics when a container exits</a></li>
+    
+  
+
+          </ul>
+        </div>
+      </div>
+      <div class="span9 content-body">
+
+        
+
+        <div id="versionnav" class="span3 pull-right">
+          <ul class="nav version pull-right">
+            <li class="dropdown">
+              <a id="document-version-number" class="dropdown-toggle" data-toggle="dropdown" href="#">
+		      Version v1.4
+              </a>
+              <ul id="documentation-version-list" class="dropdown-menu pull-right">
+
+		<li role="presentation" class="divider"></li>
+		<li> <a class="home-link3 tertiary-nav" href="https://github.com/docker/docker/blob/master/docs/sources/articles/runmetrics.md" >Edit on GitHub</a></li>
+
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <h1 id="runtime-metrics">Runtime Metrics</h1>
+<p>Linux Containers rely on <a href="https://www.kernel.org/doc/Documentation/cgroups/cgroups.txt">control groups</a>
+which not only track groups of processes, but also expose metrics about
+CPU, memory, and block I/O usage. You can access those metrics and
+obtain network usage metrics as well. This is relevant for "pure" LXC
+containers, as well as for Docker containers.</p>
+<h2 id="control-groups">Control Groups</h2>
+<p>Control groups are exposed through a pseudo-filesystem. In recent
+distros, you should find this filesystem under <code>/sys/fs/cgroup</code>. Under
+that directory, you will see multiple sub-directories, called devices,
+freezer, blkio, etc.; each sub-directory actually corresponds to a different
+cgroup hierarchy.</p>
+<p>On older systems, the control groups might be mounted on <code>/cgroup</code>, without
+distinct hierarchies. In that case, instead of seeing the sub-directories,
+you will see a bunch of files in that directory, and possibly some directories
+corresponding to existing containers.</p>
+<p>To figure out where your control groups are mounted, you can run:</p>
+<pre class="prettyprint well"><code>$ grep cgroup /proc/mounts
+</code></pre>
+<h2 id="enumerating-cgroups">Enumerating Cgroups</h2>
+<p>You can look into <code>/proc/cgroups</code> to see the different control group subsystems
+known to the system, the hierarchy they belong to, and how many groups they contain.</p>
+<p>You can also look at <code>/proc/&lt;pid&gt;/cgroup</code> to see which control groups a process
+belongs to. The control group will be shown as a path relative to the root of
+the hierarchy mountpoint; e.g., <code>/</code> means “this process has not been assigned into
+a particular group”, while <code>/lxc/pumpkin</code> means that the process is likely to be
+a member of a container named <code>pumpkin</code>.</p>
+<h2 id="finding-the-cgroup-for-a-given-container">Finding the Cgroup for a Given Container</h2>
+<p>For each container, one cgroup will be created in each hierarchy. On
+older systems with older versions of the LXC userland tools, the name of
+the cgroup will be the name of the container. With more recent versions
+of the LXC tools, the cgroup will be <code>lxc/&lt;container_name&gt;.</code></p>
+<p>For Docker containers using cgroups, the container name will be the full
+ID or long ID of the container. If a container shows up as ae836c95b4c3
+in <code>docker ps</code>, its long ID might be something like
+<code>ae836c95b4c3c9e9179e0e91015512da89fdec91612f63cebae57df9a5444c79</code>. You can
+look it up with <code>docker inspect</code> or <code>docker ps --no-trunc</code>.</p>
+<p>Putting everything together to look at the memory metrics for a Docker
+container, take a look at <code>/sys/fs/cgroup/memory/lxc/&lt;longid&gt;/</code>.</p>
+<h2 id="metrics-from-cgroups-memory-cpu-block-io">Metrics from Cgroups: Memory, CPU, Block IO</h2>
+<p>For each subsystem (memory, CPU, and block I/O), you will find one or
+more pseudo-files containing statistics.</p>
+<h3 id="memory-metrics-memorystat">Memory Metrics: <code>memory.stat</code></h3>
+<p>Memory metrics are found in the "memory" cgroup. Note that the memory
+control group adds a little overhead, because it does very fine-grained
+accounting of the memory usage on your host. Therefore, many distros
+chose to not enable it by default. Generally, to enable it, all you have
+to do is to add some kernel command-line parameters:
+<code>cgroup_enable=memory swapaccount=1</code>.</p>
+<p>The metrics are in the pseudo-file <code>memory.stat</code>.
+Here is what it will look like:</p>
+<pre class="prettyprint well"><code>cache 11492564992
+rss 1930993664
+mapped_file 306728960
+pgpgin 406632648
+pgpgout 403355412
+swap 0
+pgfault 728281223
+pgmajfault 1724
+inactive_anon 46608384
+active_anon 1884520448
+inactive_file 7003344896
+active_file 4489052160
+unevictable 32768
+hierarchical_memory_limit 9223372036854775807
+hierarchical_memsw_limit 9223372036854775807
+total_cache 11492564992
+total_rss 1930993664
+total_mapped_file 306728960
+total_pgpgin 406632648
+total_pgpgout 403355412
+total_swap 0
+total_pgfault 728281223
+total_pgmajfault 1724
+total_inactive_anon 46608384
+total_active_anon 1884520448
+total_inactive_file 7003344896
+total_active_file 4489052160
+total_unevictable 32768
+</code></pre>
+<p>The first half (without the <code>total_</code> prefix) contains statistics relevant
+to the processes within the cgroup, excluding sub-cgroups. The second half
+(with the <code>total_</code> prefix) includes sub-cgroups as well.</p>
+<p>Some metrics are "gauges", i.e., values that can increase or decrease
+(e.g., swap, the amount of swap space used by the members of the cgroup).
+Some others are "counters", i.e., values that can only go up, because
+they represent occurrences of a specific event (e.g., pgfault, which
+indicates the number of page faults which happened since the creation of
+the cgroup; this number can never decrease).</p>
+<ul>
+<li>
+<p><strong>cache:</strong><br />
+   the amount of memory used by the processes of this control group
+   that can be associated precisely with a block on a block device.
+   When you read from and write to files on disk, this amount will
+   increase. This will be the case if you use "conventional" I/O
+   (<code>open</code>, <code>read</code>,
+   <code>write</code> syscalls) as well as mapped files (with
+   <code>mmap</code>). It also accounts for the memory used by
+   <code>tmpfs</code> mounts, though the reasons are unclear.</p>
+</li>
+<li>
+<p><strong>rss:</strong><br />
+   the amount of memory that <em>doesn't</em> correspond to anything on disk:
+   stacks, heaps, and anonymous memory maps.</p>
+</li>
+<li>
+<p><strong>mapped_file:</strong><br />
+   indicates the amount of memory mapped by the processes in the
+   control group. It doesn't give you information about <em>how much</em>
+   memory is used; it rather tells you <em>how</em> it is used.</p>
+</li>
+<li>
+<p><strong>pgfault and pgmajfault:</strong><br />
+   indicate the number of times that a process of the cgroup triggered
+   a "page fault" and a "major fault", respectively. A page fault
+   happens when a process accesses a part of its virtual memory space
+   which is nonexistent or protected. The former can happen if the
+   process is buggy and tries to access an invalid address (it will
+   then be sent a <code>SIGSEGV</code> signal, typically
+   killing it with the famous <code>Segmentation fault</code>
+   message). The latter can happen when the process reads from a memory
+   zone which has been swapped out, or which corresponds to a mapped
+   file: in that case, the kernel will load the page from disk, and let
+   the CPU complete the memory access. It can also happen when the
+   process writes to a copy-on-write memory zone: likewise, the kernel
+   will preempt the process, duplicate the memory page, and resume the
+   write operation on the process` own copy of the page. "Major" faults
+   happen when the kernel actually has to read the data from disk. When
+   it just has to duplicate an existing page, or allocate an empty
+   page, it's a regular (or "minor") fault.</p>
+</li>
+<li>
+<p><strong>swap:</strong><br />
+   the amount of swap currently used by the processes in this cgroup.</p>
+</li>
+<li>
+<p><strong>active_anon and inactive_anon:</strong><br />
+   the amount of <em>anonymous</em> memory that has been identified has
+   respectively <em>active</em> and <em>inactive</em> by the kernel. "Anonymous"
+   memory is the memory that is <em>not</em> linked to disk pages. In other
+   words, that's the equivalent of the rss counter described above. In
+   fact, the very definition of the rss counter is <strong>active_anon</strong> +
+   <strong>inactive_anon</strong> - <strong>tmpfs</strong> (where tmpfs is the amount of memory
+   used up by <code>tmpfs</code> filesystems mounted by this
+   control group). Now, what's the difference between "active" and
+   "inactive"? Pages are initially "active"; and at regular intervals,
+   the kernel sweeps over the memory, and tags some pages as
+   "inactive". Whenever they are accessed again, they are immediately
+   retagged "active". When the kernel is almost out of memory, and time
+   comes to swap out to disk, the kernel will swap "inactive" pages.</p>
+</li>
+<li>
+<p><strong>active_file and inactive_file:</strong><br />
+   cache memory, with <em>active</em> and <em>inactive</em> similar to the <em>anon</em>
+   memory above. The exact formula is cache = <strong>active_file</strong> +
+   <strong>inactive_file</strong> + <strong>tmpfs</strong>. The exact rules used by the kernel
+   to move memory pages between active and inactive sets are different
+   from the ones used for anonymous memory, but the general principle
+   is the same. Note that when the kernel needs to reclaim memory, it
+   is cheaper to reclaim a clean (=non modified) page from this pool,
+   since it can be reclaimed immediately (while anonymous pages and
+   dirty/modified pages have to be written to disk first).</p>
+</li>
+<li>
+<p><strong>unevictable:</strong><br />
+   the amount of memory that cannot be reclaimed; generally, it will
+   account for memory that has been "locked" with <code>mlock</code>.
+   It is often used by crypto frameworks to make sure that
+   secret keys and other sensitive material never gets swapped out to
+   disk.</p>
+</li>
+<li>
+<p><strong>memory and memsw limits:</strong><br />
+   These are not really metrics, but a reminder of the limits applied
+   to this cgroup. The first one indicates the maximum amount of
+   physical memory that can be used by the processes of this control
+   group; the second one indicates the maximum amount of RAM+swap.</p>
+</li>
+</ul>
+<p>Accounting for memory in the page cache is very complex. If two
+processes in different control groups both read the same file
+(ultimately relying on the same blocks on disk), the corresponding
+memory charge will be split between the control groups. It's nice, but
+it also means that when a cgroup is terminated, it could increase the
+memory usage of another cgroup, because they are not splitting the cost
+anymore for those memory pages.</p>
+<h3 id="cpu-metrics-cpuacctstat">CPU metrics: <code>cpuacct.stat</code></h3>
+<p>Now that we've covered memory metrics, everything else will look very
+simple in comparison. CPU metrics will be found in the
+<code>cpuacct</code> controller.</p>
+<p>For each container, you will find a pseudo-file <code>cpuacct.stat</code>,
+containing the CPU usage accumulated by the processes of the container,
+broken down between <code>user</code> and <code>system</code> time. If you're not familiar
+with the distinction, <code>user</code> is the time during which the processes were
+in direct control of the CPU (i.e., executing process code), and <code>system</code>
+is the time during which the CPU was executing system calls on behalf of
+those processes.</p>
+<p>Those times are expressed in ticks of 1/100th of a second. Actually,
+they are expressed in "user jiffies". There are <code>USER_HZ</code>
+<em>"jiffies"</em> per second, and on x86 systems,
+<code>USER_HZ</code> is 100. This used to map exactly to the
+number of scheduler "ticks" per second; but with the advent of higher
+frequency scheduling, as well as <a href="http://lwn.net/Articles/549580/">tickless kernels</a>, the number of kernel ticks
+wasn't relevant anymore. It stuck around anyway, mainly for legacy and
+compatibility reasons.</p>
+<h3 id="block-io-metrics">Block I/O metrics</h3>
+<p>Block I/O is accounted in the <code>blkio</code> controller.
+Different metrics are scattered across different files. While you can
+find in-depth details in the <a href="https://www.kernel.org/doc/Documentation/cgroups/blkio-controller.txt">blkio-controller</a>
+file in the kernel documentation, here is a short list of the most
+relevant ones:</p>
+<ul>
+<li>
+<p><strong>blkio.sectors:</strong><br />
+   contain the number of 512-bytes sectors read and written by the
+   processes member of the cgroup, device by device. Reads and writes
+   are merged in a single counter.</p>
+</li>
+<li>
+<p><strong>blkio.io_service_bytes:</strong><br />
+   indicates the number of bytes read and written by the cgroup. It has
+   4 counters per device, because for each device, it differentiates
+   between synchronous vs. asynchronous I/O, and reads vs. writes.</p>
+</li>
+<li>
+<p><strong>blkio.io_serviced:</strong><br />
+   the number of I/O operations performed, regardless of their size. It
+   also has 4 counters per device.</p>
+</li>
+<li>
+<p><strong>blkio.io_queued:</strong><br />
+   indicates the number of I/O operations currently queued for this
+   cgroup. In other words, if the cgroup isn't doing any I/O, this will
+   be zero. Note that the opposite is not true. In other words, if
+   there is no I/O queued, it does not mean that the cgroup is idle
+   (I/O-wise). It could be doing purely synchronous reads on an
+   otherwise quiescent device, which is therefore able to handle them
+   immediately, without queuing. Also, while it is helpful to figure
+   out which cgroup is putting stress on the I/O subsystem, keep in
+   mind that is is a relative quantity. Even if a process group does
+   not perform more I/O, its queue size can increase just because the
+   device load increases because of other devices.</p>
+</li>
+</ul>
+<h2 id="network-metrics">Network Metrics</h2>
+<p>Network metrics are not exposed directly by control groups. There is a
+good explanation for that: network interfaces exist within the context
+of <em>network namespaces</em>. The kernel could probably accumulate metrics
+about packets and bytes sent and received by a group of processes, but
+those metrics wouldn't be very useful. You want per-interface metrics
+(because traffic happening on the local <code>lo</code>
+interface doesn't really count). But since processes in a single cgroup
+can belong to multiple network namespaces, those metrics would be harder
+to interpret: multiple network namespaces means multiple <code>lo</code>
+interfaces, potentially multiple <code>eth0</code>
+interfaces, etc.; so this is why there is no easy way to gather network
+metrics with control groups.</p>
+<p>Instead we can gather network metrics from other sources:</p>
+<h3 id="iptables">IPtables</h3>
+<p>IPtables (or rather, the netfilter framework for which iptables is just
+an interface) can do some serious accounting.</p>
+<p>For instance, you can setup a rule to account for the outbound HTTP
+traffic on a web server:</p>
+<pre class="prettyprint well"><code>$ iptables -I OUTPUT -p tcp --sport 80
+</code></pre>
+<p>There is no <code>-j</code> or <code>-g</code> flag,
+so the rule will just count matched packets and go to the following
+rule.</p>
+<p>Later, you can check the values of the counters, with:</p>
+<pre class="prettyprint well"><code>$ iptables -nxvL OUTPUT
+</code></pre>
+<p>Technically, <code>-n</code> is not required, but it will
+prevent iptables from doing DNS reverse lookups, which are probably
+useless in this scenario.</p>
+<p>Counters include packets and bytes. If you want to setup metrics for
+container traffic like this, you could execute a <code>for</code>
+loop to add two <code>iptables</code> rules per
+container IP address (one in each direction), in the <code>FORWARD</code>
+chain. This will only meter traffic going through the NAT
+layer; you will also have to add traffic going through the userland
+proxy.</p>
+<p>Then, you will need to check those counters on a regular basis. If you
+happen to use <code>collectd</code>, there is a <a href="https://collectd.org/wiki/index.php/Plugin:IPTables">nice plugin</a>
+to automate iptables counters collection.</p>
+<h3 id="interface-level-counters">Interface-level counters</h3>
+<p>Since each container has a virtual Ethernet interface, you might want to
+check directly the TX and RX counters of this interface. You will notice
+that each container is associated to a virtual Ethernet interface in
+your host, with a name like <code>vethKk8Zqi</code>. Figuring
+out which interface corresponds to which container is, unfortunately,
+difficult.</p>
+<p>But for now, the best way is to check the metrics <em>from within the
+containers</em>. To accomplish this, you can run an executable from the host
+environment within the network namespace of a container using <strong>ip-netns
+magic</strong>.</p>
+<p>The <code>ip-netns exec</code> command will let you execute any
+program (present in the host system) within any network namespace
+visible to the current process. This means that your host will be able
+to enter the network namespace of your containers, but your containers
+won't be able to access the host, nor their sibling containers.
+Containers will be able to “see” and affect their sub-containers,
+though.</p>
+<p>The exact format of the command is:</p>
+<pre class="prettyprint well"><code>$ ip netns exec &lt;nsname&gt; &lt;command...&gt;
+</code></pre>
+<p>For example:</p>
+<pre class="prettyprint well"><code>$ ip netns exec mycontainer netstat -i
+</code></pre>
+<p><code>ip netns</code> finds the "mycontainer" container by
+using namespaces pseudo-files. Each process belongs to one network
+namespace, one PID namespace, one <code>mnt</code> namespace,
+etc., and those namespaces are materialized under
+<code>/proc/&lt;pid&gt;/ns/</code>. For example, the network
+namespace of PID 42 is materialized by the pseudo-file
+<code>/proc/42/ns/net</code>.</p>
+<p>When you run <code>ip netns exec mycontainer ...</code>, it
+expects <code>/var/run/netns/mycontainer</code> to be one of
+those pseudo-files. (Symlinks are accepted.)</p>
+<p>In other words, to execute a command within the network namespace of a
+container, we need to:</p>
+<ul>
+<li>Find out the PID of any process within the container that we want to investigate;</li>
+<li>Create a symlink from <code>/var/run/netns/&lt;somename&gt;</code> to <code>/proc/&lt;thepid&gt;/ns/net</code></li>
+<li>Execute <code>ip netns exec &lt;somename&gt; ....</code></li>
+</ul>
+<p>Please review <a href="#enumerating-cgroups"><em>Enumerating Cgroups</em></a> to learn how to find
+the cgroup of a process running in the container of which you want to
+measure network usage. From there, you can examine the pseudo-file named
+<code>tasks</code>, which contains the PIDs that are in the
+control group (i.e., in the container). Pick any one of them.</p>
+<p>Putting everything together, if the "short ID" of a container is held in
+the environment variable <code>$CID</code>, then you can do this:</p>
+<pre class="prettyprint well"><code>$ TASKS=/sys/fs/cgroup/devices/$CID*/tasks
+$ PID=$(head -n 1 $TASKS)
+$ mkdir -p /var/run/netns
+$ ln -sf /proc/$PID/ns/net /var/run/netns/$CID
+$ ip netns exec $CID netstat -i
+</code></pre>
+<h2 id="tips-for-high-performance-metric-collection">Tips for high-performance metric collection</h2>
+<p>Note that running a new process each time you want to update metrics is
+(relatively) expensive. If you want to collect metrics at high
+resolutions, and/or over a large number of containers (think 1000
+containers on a single host), you do not want to fork a new process each
+time.</p>
+<p>Here is how to collect metrics from a single process. You will have to
+write your metric collector in C (or any language that lets you do
+low-level system calls). You need to use a special system call,
+<code>setns()</code>, which lets the current process enter any
+arbitrary namespace. It requires, however, an open file descriptor to
+the namespace pseudo-file (remember: that's the pseudo-file in
+<code>/proc/&lt;pid&gt;/ns/net</code>).</p>
+<p>However, there is a catch: you must not keep this file descriptor open.
+If you do, when the last process of the control group exits, the
+namespace will not be destroyed, and its network resources (like the
+virtual interface of the container) will stay around for ever (or until
+you close that file descriptor).</p>
+<p>The right approach would be to keep track of the first PID of each
+container, and re-open the namespace pseudo-file each time.</p>
+<h2 id="collecting-metrics-when-a-container-exits">Collecting metrics when a container exits</h2>
+<p>Sometimes, you do not care about real time metric collection, but when a
+container exits, you want to know how much CPU, memory, etc. it has
+used.</p>
+<p>Docker makes this difficult because it relies on <code>lxc-start</code>, which
+carefully cleans up after itself, but it is still possible. It is
+usually easier to collect metrics at regular intervals (e.g., every
+minute, with the collectd LXC plugin) and rely on that instead.</p>
+<p>But, if you'd still like to gather the stats when a container stops,
+here is how:</p>
+<p>For each container, start a collection process, and move it to the
+control groups that you want to monitor by writing its PID to the tasks
+file of the cgroup. The collection process should periodically re-read
+the tasks file to check if it's the last process of the control group.
+(If you also want to collect network statistics as explained in the
+previous section, you should also move the process to the appropriate
+network namespace.)</p>
+<p>When the container exits, <code>lxc-start</code> will try to
+delete the control groups. It will fail, since the control group is
+still in use; but that's fine. You process should now detect that it is
+the only one remaining in the group. Now is the right time to collect
+all the metrics you need!</p>
+<p>Finally, your process should move itself back to the root control group,
+and remove the container control group. To remove a control group, just
+<code>rmdir</code> its directory. It's counter-intuitive to
+<code>rmdir</code> a directory as it still contains files; but
+remember that this is a pseudo-filesystem, so usual rules don't apply.
+After the cleanup is done, the collection process can exit safely.</p>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="push-footer"></div>
+
+</div>
+
+
+
+<div id="footer-container" class="container">
+  <div id="footer" class="grey-body">
+    <div class="row">
+      <div class="span2">
+        <span class="footer-title">Community</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/community/events/">Events</a></li>
+          <li><a class="primary-button" href="http://posts.docker.com">Friends' Posts</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/community/meetups/">Meetups</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/community/governance/">Governance</a></li>
+          <li><a class="primary-button" href="http://forums.docker.com">Forums</a></li>
+          <li><a class="primary-button" href="http://botbot.me/freenode/docker">IRC</a></li>
+          <li><a class="primary-button" href="https://github.com/docker/docker">GitHub</a></li>
+          <li><a class="primary-button" href="http://stackoverflow.com/search?q=docker">Stackoverflow</a></li>
+          <li><a class="primary-button" href="http://www.cafepress.com/docker">Swag</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <span class="footer-title">Enterprise</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/enterprise/support/">Support</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/enterprise/education/">Education</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/enterprise/services/">Services</a></li>
+        </ul>
+        <span class="footer-title">Partner Solutions</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/partners/find/">Find a Partner</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/partners/program/">Partner Program</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/partners/learn/">Learn More</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <span class="footer-title">Resources</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://docs.docker.com">Documentation</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/help/">Help</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/usecases/">Use Cases</a></li>
+          <li><a class="primary-button" href="http://www.docker.com/tryit/">Online Tutorial</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/howtobuy/">How To Buy</a></li>
+          <li><a class="primary-button" href="http://status.docker.com">Status</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/security/">Security</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <span class="footer-title">Company</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/company/aboutus/">About Us</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/team/">Team</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/news/">News</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/press/">Press</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/careers/">Careers</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/contact/">Contact</a></li>
+        </ul>
+      </div>
+      <div class="span3">
+        <span class="footer-title">Connect</span>
+        <div class="search">
+          <span>Subscribe to our newsletter</span>
+          <form action="https://www.docker.com/subscribe_newsletter/" method="post">
+            <input type='hidden' name='csrfmiddlewaretoken' value='aWL78QXQkY8DSKNYh6cl08p5eTLl7sOa' />
+            <tr><th><label for="id_email">Email:</label></th><td><input class="form-control" id="id_email" name="email" placeholder="Enter your email" type="text" /></td></tr>
+            
+            <button type="submit"><i class="icon-arrow-right"></i> </button>
+          </form>
+        </div>
+        <ul class="unstyled social">
+          <li><a title="Docker on Twitter" class="primary-button blog" href="http://blog.docker.com">Blog</a></li>
+          <li><a title="Docker on Twitter" class="primary-button twitter" href="http://twitter.com/docker">Twitter</a></li>
+          <li><a title="Docker on Google+" class="primary-button googleplus" href="https://plus.google.com/u/0/communities/108146856671494713993">Google+</a></li>
+          <li><a title="Docker on Facebook" class="primary-button facebook" href="https://www.facebook.com/docker.run">Facebook</a></li>
+          <li><a title="Docker on Youtube" class="primary-button youtube" href="http://www.youtube.com/user/dockerrun">YouTube</a></li>
+        </ul>
+        <ul class="unstyled social">
+          <li><a title="Docker on SlideShare" class="primary-button slideshare" href="http://www.slideshare.net/Docker">Slideshare</a></li>
+          <li>
+             <a title="Docker on LinkedIn" class="primary-button" href="https://www.linkedin.com/company/docker">
+                 <span class="linkedin"></span>
+                 LinkedIn
+             </a>
+          </li>
+          <li>
+              <a title="Docker on GitHub" class="primary-button" href="https://github.com/docker/">
+                  <span class="github"></span>
+                  GitHub
+              </a>
+          </li>
+          <li>
+              <a title="Docker on Reddit" class="primary-button" href="http://www.reddit.com/r/docker">
+                  <span class="reddit"></span>
+                  Reddit
+              </a>
+          </li>
+          <li>
+              <a title="Docker on AngelList" class="primary-button" href="https://angel.co/docker-inc-1">
+                  <span class="angellist"></span>
+                  AngelList
+              </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="span6 pagination-right copyright">
+        <span>&copy; 2014-2015 Docker, Inc.</span>
+      </div>
+      <div class="span6 pagination-left copyright">
+        <a href="http://www.docker.com/legal/terms_of_service">Terms</a> &middot;
+        <a href="http://www.docker.com/legal/privacy_policy">Privacy</a> &middot;
+        <a href="http://www.docker.com/legal/trademark_guidelines">Trademarks</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/js/jquery-1.10.2.min.js"></script>
+<script src="/js/jquery.cookie.js" ></script>
+<script src="/js/jquery-scrolltofixed-min.js"></script>
+<script src="/js/bootstrap-3.0.3.min.js"></script>
+<script src="/js/prettify-1.0.min.js"></script>
+<script src="/js/dockerfile_tutorial.js"></script>
+<script src="/js/dockerfile_tutorial_level.js"></script>
+<script src="/js/base.js"></script>
+<script src="/tipuesearch/tipuesearch_set.js"></script>
+<script src="/tipuesearch/tipuesearch.min.js"></script>
+<script type="text/javascript">
+piAId = '45082';
+piCId = '1482';
+
+(function() {
+  function async_load(){
+    var s = document.createElement('script'); s.type = 'text/javascript';
+    s.src = ('https:' == document.location.protocol ? 'https://pi' : 'http://cdn') + '.pardot.com/pd.js';
+    var c = document.getElementsByTagName('script')[0]; c.parentNode.insertBefore(s, c);
+  }
+  if(window.attachEvent) { window.attachEvent('onload', async_load); }
+  else { window.addEventListener('load', async_load, false); }
+})();
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#content').css("min-height", $(window).height() - 553 );
+    // if the URL contains a version string, update the version picker to reflect that
+    version = document.location.pathname.match(/^\/(v\d\.\d)\/.*/)
+    if (version && version[1]) {
+        $('#document-version-number')[0].text = 'Version '+version[1];
+    } else {
+        $('#document-version-number')[0].text = $('#document-version-number')[0].text + " (Latest)"
+    }
+    // load the complete versions list
+    $.get("/versions.html_fragment", function( data ) {
+    	$('#documentation-version-list').prepend(data);
+	//remove any "/v1.1/" bits from front, so we can add the path to the version selection dropdown.
+	path = document.location.pathname.replace(/^\/v\d\.\d/, "");
+	$('#documentation-version-list a.version').each(function(i, e) {
+		e.href = e.href+path;
+		$(e).removeClass()
+	});
+    });
+
+  })
+  var userName = getCookie('docker_sso_username');
+  if (userName) {
+    $('.topmostnav_loggedout').hide();
+    $('.topmostnav_loggedin').show();
+    $('#logged-in-header-username').text(userName);
+  } else {
+    $('.topmostnav_loggedout').show();
+    $('.topmostnav_loggedin').hide();
+  }
+</script>
+</body>
+</html>

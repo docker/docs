@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  
+  <meta name="docker_version" content="1.4.1">
+  <meta name="docker_git_branch" content="master">
+  <meta name="docker_git_commit" content="3c097c2">
+  <meta name="docker_build_date" content="Wed Jan 28 04:30:29 UTC 2015">
+
+  <meta name="description" content="Docker networking">
+  <meta name="keywords" content="network, networking, bridge, docker, documentation">
+  
+  <link rel="canonical" href="/articles/networking/">
+  <link href="/css/bootstrap-custom.css" rel="stylesheet">
+  <link href="/css/main.css" rel="stylesheet">
+  <link href="/css/prettify-1.0.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/dockerfile_tutorial.css">
+  <link href="/tipuesearch/tipuesearch.css" rel="stylesheet">
+  <link href="/css/docs.css" rel="stylesheet">
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <title>Advanced networking - Docker Documentation</title>
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+  <![endif]-->
+  
+  <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-6096819-11', 'docker.com');
+  ga('require', 'linkid', 'linkid.js');
+  ga('send', 'pageview', {
+   'page': location.pathname + location.search  + location.hash,
+  });
+  </script>
+  
+</head>
+<body>
+
+<div id="topmostnav" class="topmostnav_loggedout navbar navbar-static-top public">
+  <div class="container">
+    <a href="http://www.docker.com/" title="Homepage">
+      <div class="brand logo"><img src="/img/nav/docker-logo-loggedout.png"> </div>
+    </a>
+    <ul class="nav">
+      <li class=""><a href="http://www.docker.com/whatisdocker/" title="What is Docker">What is Docker?</a></li>
+      <li class=""><a href="http://www.docker.com/resources/usecases/" title="Use Cases">Use Cases</a></li>
+      <li class=""><a href="http://www.docker.com/tryit/" title="Try It!">Try It!</a></li>
+      <li class="active"><a href="https://docs.docker.com" title="Install &amp; Docs">Install &amp; Docs</a></li>
+      <li><a href="https://registry.hub.docker.com" title="Browse">Browse</a></li>
+    </ul>
+    <div id="usernav" class="pull-right">
+      <a href="https://hub.docker.com/account/login" class="btn nav-button2" title="Lg In">Log In</a>
+      <a href="https://hub.docker.com/account/signup" class="btn nav-button1" title="Sign Up">Sign Up</a>
+    </div>
+  </div>
+</div>
+<div id="topmostnav" class="topmostnav_loggedin navbar navbar-static-top">
+  <div class="container">
+    <a href="http://www.docker.com/" title="Docker Docs Home"><div class="brand logo"><img src="/img/nav/docker-logo-loggedin.png"> </div></a>
+     <form id="search_box_header" class="navbar-index-search pull-right" action="https://registry.hub.docker.com/search">
+      <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" class="search-query ui-autocomplete-input" placeholder="Search..." name="q" value="" autocomplete="off">
+    </form>
+    <ul class="nav">
+      <li><a href="https://registry.hub.docker.com" title="Browse Repos">Browse Repos</a></li>
+      <li class="active"><a href="http://docs.docker.com" title="Documentation">Documentation</a></li>
+      <li><a href="http://www.docker.com/community/participate/" title="Community">Community</a></li>
+      <li><a href="http://www.docker.com/resources/help/" title="Help">Help</a></li>
+    </ul>
+    <div id="usernav" class="pull-right">
+      <ul class="nav user">
+        <li class="dropdown">
+          <a id="logged-in-header-username" class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <img class="profile" src="" alt="profile picture">
+          </a>
+          <ul class="dropdown-menu pull-right">
+            <li><a href="https://hub.docker.com/">View Profile</a></li>
+            <li><a href="https://hub.docker.com/account/settings/">Settings</a></li>
+            <li><a href="https://hub.docker.com/repos/">My Repositories</a></li>
+            <li><a href="https://hub.docker.com/plans/billing-info">Billing</a></li>
+            <li><a href="https://hub.docker.com/account/logout/?next=/">Log out</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id="wrap">
+  <nav id="nav_menu" class="clearfix navbar navbar-default navbar-static-top affix" role="navigation">
+  <div id="docsnav">
+    <ul id="main-nav" class="pull-left">
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/">About</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/">Docker</a>
+          </li>
+        
+          <li >
+            <a href="/release-notes/">Release Notes</a>
+          </li>
+        
+          <li >
+            <a href="/introduction/understanding-docker/">Understanding Docker</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/installation/mac/">Installation</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/installation/mac/">Mac OS X</a>
+          </li>
+        
+          <li >
+            <a href="/installation/ubuntulinux/">Ubuntu</a>
+          </li>
+        
+          <li >
+            <a href="/installation/rhel/">Red Hat Enterprise Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/oracle/">Oracle Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/centos/">CentOS</a>
+          </li>
+        
+          <li >
+            <a href="/installation/debian/">Debian</a>
+          </li>
+        
+          <li >
+            <a href="/installation/gentoolinux/">Gentoo</a>
+          </li>
+        
+          <li >
+            <a href="/installation/google/">Google Cloud Platform</a>
+          </li>
+        
+          <li >
+            <a href="/installation/rackspace/">Rackspace Cloud</a>
+          </li>
+        
+          <li >
+            <a href="/installation/amazon/">Amazon EC2</a>
+          </li>
+        
+          <li >
+            <a href="/installation/softlayer/">IBM Softlayer</a>
+          </li>
+        
+          <li >
+            <a href="/installation/archlinux/">Arch Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/frugalware/">FrugalWare</a>
+          </li>
+        
+          <li >
+            <a href="/installation/fedora/">Fedora</a>
+          </li>
+        
+          <li >
+            <a href="/installation/SUSE/">SUSE</a>
+          </li>
+        
+          <li >
+            <a href="/installation/cruxlinux/">CRUX Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/windows/">Microsoft Windows</a>
+          </li>
+        
+          <li >
+            <a href="/installation/binaries/">Binaries</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/userguide/">User Guide</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/userguide/">The Docker User Guide</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerhub/">Getting Started with Docker Hub</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerizing/">Dockerizing Applications</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/usingdocker/">Working with Containers</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerimages/">Working with Docker Images</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerlinks/">Linking containers together</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockervolumes/">Managing data in containers</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerrepos/">Working with Docker Hub</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/docker-hub/">Docker Hub</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/docker-hub/">Docker Hub</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/accounts/">Accounts</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/repos/">Repositories</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/builds/">Automated Builds</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/official_repos/">Official Repo Guidelines</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/examples/nodejs_web_app/">Examples</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/examples/nodejs_web_app/">Dockerizing a Node.js web application</a>
+          </li>
+        
+          <li >
+            <a href="/examples/mongodb/">Dockerizing MongoDB</a>
+          </li>
+        
+          <li >
+            <a href="/examples/running_redis_service/">Dockerizing a Redis service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/postgresql_service/">Dockerizing a PostgreSQL service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/running_riak_service/">Dockerizing a Riak service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/running_ssh_service/">Dockerizing an SSH service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/couchdb_data_volumes/">Dockerizing a CouchDB service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/apt-cacher-ng/">Dockerizing an Apt-Cacher-ng service</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left active">
+        
+        <a href="/articles/basics/">Articles</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/articles/basics/">Docker basics</a>
+          </li>
+        
+          <li class="active">
+            <a href="/articles/networking/">Advanced networking</a>
+          </li>
+        
+          <li >
+            <a href="/articles/security/">Security</a>
+          </li>
+        
+          <li >
+            <a href="/articles/https/">Running Docker with HTTPS</a>
+          </li>
+        
+          <li >
+            <a href="/articles/registry_mirror/">Run a local registry mirror</a>
+          </li>
+        
+          <li >
+            <a href="/articles/host_integration/">Automatically starting containers</a>
+          </li>
+        
+          <li >
+            <a href="/articles/baseimages/">Creating a base image</a>
+          </li>
+        
+          <li >
+            <a href="/articles/dockerfile_best-practices/">Best practices for writing Dockerfiles</a>
+          </li>
+        
+          <li >
+            <a href="/articles/certificates/">Using certificates for repository client verification</a>
+          </li>
+        
+          <li >
+            <a href="/articles/using_supervisord/">Using Supervisor</a>
+          </li>
+        
+          <li >
+            <a href="/articles/cfengine_process_management/">Process management with CFEngine</a>
+          </li>
+        
+          <li >
+            <a href="/articles/puppet/">Using Puppet</a>
+          </li>
+        
+          <li >
+            <a href="/articles/chef/">Using Chef</a>
+          </li>
+        
+          <li >
+            <a href="/articles/dsc/">Using PowerShell DSC</a>
+          </li>
+        
+          <li >
+            <a href="/articles/ambassador_pattern_linking/">Cross-Host linking using ambassador containers</a>
+          </li>
+        
+          <li >
+            <a href="/articles/runmetrics/">Runtime metrics</a>
+          </li>
+        
+          <li >
+            <a href="/articles/b2d_volume_resize/">Increasing a Boot2Docker volume</a>
+          </li>
+        
+          <li >
+            <a href="/articles/systemd/">Controlling and configuring Docker using Systemd</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/reference/commandline/cli/">Reference</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/reference/commandline/cli/">Command line</a>
+          </li>
+        
+          <li >
+            <a href="/reference/builder/">Dockerfile</a>
+          </li>
+        
+          <li >
+            <a href="/faq/">FAQ</a>
+          </li>
+        
+          <li >
+            <a href="/reference/run/">Run Reference</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker-io_api/">Docker Hub API</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/registry_api/">Docker Registry API</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/registry_api_client_libraries/">Docker Registry API Client Libraries</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/hub_registry_spec/">Docker Hub and Registry Spec</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api/">Docker Remote API</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.16/">Docker Remote API v1.16</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.15/">Docker Remote API v1.15</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.14/">Docker Remote API v1.14</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.13/">Docker Remote API v1.13</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.12/">Docker Remote API v1.12</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.11/">Docker Remote API v1.11</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/remote_api_client_libraries/">Docker Remote API Client Libraries</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_io_accounts_api/">Docker Hub Accounts API</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/contributing/contributing/">Contribute</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/contributing/contributing/">Contributing</a>
+          </li>
+        
+          <li >
+            <a href="/contributing/devenvironment/">Development environment</a>
+          </li>
+        
+          <li >
+            <a href="/contributing/docs_style-guide/">Documentation style guide</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+    </ul>
+    <form id="nav_search" class="pull-right" action="/jsearch/">
+      <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+      <input name="q" id="tipue_search_input" type="text" class="search_input search-query ui-autocomplete-input" placeholder="Search the Docs" autocomplete="off">
+    </form>
+  </div>
+</nav>
+  <div id="content" class="container">
+    <div class="row">
+
+      <div class="span3" id="leftnav">
+        <div id="toc_table">
+          <ul class="nav nav-tabs nav-stacked">
+            
+  
+    <li class=""><a href="#tldr">TL;DR</a></li>
+    
+  
+    <li class=""><a href="#quick-guide-to-the-options">Quick Guide to the Options</a></li>
+    
+  
+    <li class=""><a href="#configuring-dns">Configuring DNS</a></li>
+    
+  
+    <li class=""><a href="#communication-between-containers-and-the-wider-world">Communication between containers and the wider world</a></li>
+    
+  
+    <li class=""><a href="#communication-between-containers">Communication between containers</a></li>
+    
+  
+    <li class=""><a href="#binding-container-ports-to-the-host">Binding container ports to the host</a></li>
+    
+  
+    <li class=""><a href="#customizing-docker0">Customizing docker0</a></li>
+    
+  
+    <li class=""><a href="#building-your-own-bridge">Building your own bridge</a></li>
+    
+  
+    <li class=""><a href="#how-docker-networks-a-container">How Docker networks a container</a></li>
+    
+  
+    <li class=""><a href="#tools-and-examples">Tools and Examples</a></li>
+    
+  
+    <li class=""><a href="#building-a-point-to-point-connection">Building a point-to-point connection</a></li>
+    
+  
+    <li class=""><a href="#editing-networking-config-files">Editing networking config files</a></li>
+    
+  
+
+          </ul>
+        </div>
+      </div>
+      <div class="span9 content-body">
+
+        
+
+        <div id="versionnav" class="span3 pull-right">
+          <ul class="nav version pull-right">
+            <li class="dropdown">
+              <a id="document-version-number" class="dropdown-toggle" data-toggle="dropdown" href="#">
+		      Version v1.4
+              </a>
+              <ul id="documentation-version-list" class="dropdown-menu pull-right">
+
+		<li role="presentation" class="divider"></li>
+		<li> <a class="home-link3 tertiary-nav" href="https://github.com/docker/docker/blob/master/docs/sources/articles/networking.md" >Edit on GitHub</a></li>
+
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <h1 id="network-configuration">Network Configuration</h1>
+<h2 id="tldr">TL;DR</h2>
+<p>When Docker starts, it creates a virtual interface named <code>docker0</code> on
+the host machine.  It randomly chooses an address and subnet from the
+private range defined by <a href="http://tools.ietf.org/html/rfc1918">RFC 1918</a>
+that are not in use on the host machine, and assigns it to <code>docker0</code>.
+Docker made the choice <code>172.17.42.1/16</code> when I started it a few minutes
+ago, for example — a 16-bit netmask providing 65,534 addresses for the
+host machine and its containers. The MAC address is generated using the
+IP address allocated to the container to avoid ARP collisions, using a
+range from <code>02:42:ac:11:00:00</code> to <code>02:42:ac:11:ff:ff</code>.</p>
+<blockquote>
+<p><strong>Note:</strong>
+This document discusses advanced networking configuration
+and options for Docker. In most cases you won't need this information.
+If you're looking to get started with a simpler explanation of Docker
+networking and an introduction to the concept of container linking see
+the <a href="/userguide/dockerlinks/">Docker User Guide</a>.</p>
+</blockquote>
+<p>But <code>docker0</code> is no ordinary interface.  It is a virtual <em>Ethernet
+bridge</em> that automatically forwards packets between any other network
+interfaces that are attached to it.  This lets containers communicate
+both with the host machine and with each other.  Every time Docker
+creates a container, it creates a pair of “peer” interfaces that are
+like opposite ends of a pipe — a packet sent on one will be received on
+the other.  It gives one of the peers to the container to become its
+<code>eth0</code> interface and keeps the other peer, with a unique name like
+<code>vethAQI2QT</code>, out in the namespace of the host machine.  By binding
+every <code>veth*</code> interface to the <code>docker0</code> bridge, Docker creates a
+virtual subnet shared between the host machine and every Docker
+container.</p>
+<p>The remaining sections of this document explain all of the ways that you
+can use Docker options and — in advanced cases — raw Linux networking
+commands to tweak, supplement, or entirely replace Docker's default
+networking configuration.</p>
+<h2 id="quick-guide-to-the-options">Quick Guide to the Options</h2>
+<p>Here is a quick list of the networking-related Docker command-line
+options, in case it helps you find the section below that you are
+looking for.</p>
+<p>Some networking command-line options can only be supplied to the Docker
+server when it starts up, and cannot be changed once it is running:</p>
+<ul>
+<li>
+<p><code>-b BRIDGE</code> or <code>--bridge=BRIDGE</code> — see
+    <a href="#bridge-building">Building your own bridge</a></p>
+</li>
+<li>
+<p><code>--bip=CIDR</code> — see
+    <a href="#docker0">Customizing docker0</a></p>
+</li>
+<li>
+<p><code>--fixed-cidr</code> — see
+    <a href="#docker0">Customizing docker0</a></p>
+</li>
+<li>
+<p><code>-H SOCKET...</code> or <code>--host=SOCKET...</code> —
+    This might sound like it would affect container networking,
+    but it actually faces in the other direction:
+    it tells the Docker server over what channels
+    it should be willing to receive commands
+    like “run container” and “stop container.”</p>
+</li>
+<li>
+<p><code>--icc=true|false</code> — see
+    <a href="#between-containers">Communication between containers</a></p>
+</li>
+<li>
+<p><code>--ip=IP_ADDRESS</code> — see
+    <a href="#binding-ports">Binding container ports</a></p>
+</li>
+<li>
+<p><code>--ip-forward=true|false</code> — see
+    <a href="#between-containers">Communication between containers</a></p>
+</li>
+<li>
+<p><code>--iptables=true|false</code> — see
+    <a href="#between-containers">Communication between containers</a></p>
+</li>
+<li>
+<p><code>--mtu=BYTES</code> — see
+    <a href="#docker0">Customizing docker0</a></p>
+</li>
+</ul>
+<p>There are two networking options that can be supplied either at startup
+or when <code>docker run</code> is invoked.  When provided at startup, set the
+default value that <code>docker run</code> will later use if the options are not
+specified:</p>
+<ul>
+<li>
+<p><code>--dns=IP_ADDRESS...</code> — see
+    <a href="#dns">Configuring DNS</a></p>
+</li>
+<li>
+<p><code>--dns-search=DOMAIN...</code> — see
+    <a href="#dns">Configuring DNS</a></p>
+</li>
+</ul>
+<p>Finally, several networking options can only be provided when calling
+<code>docker run</code> because they specify something specific to one container:</p>
+<ul>
+<li>
+<p><code>-h HOSTNAME</code> or <code>--hostname=HOSTNAME</code> — see
+    <a href="#dns">Configuring DNS</a> and
+    <a href="#container-networking">How Docker networks a container</a></p>
+</li>
+<li>
+<p><code>--link=CONTAINER_NAME:ALIAS</code> — see
+    <a href="#dns">Configuring DNS</a> and
+    <a href="#between-containers">Communication between containers</a></p>
+</li>
+<li>
+<p><code>--net=bridge|none|container:NAME_or_ID|host</code> — see
+    <a href="#container-networking">How Docker networks a container</a></p>
+</li>
+<li>
+<p><code>--mac-address=MACADDRESS...</code> — see
+    <a href="#container-networking">How Docker networks a container</a></p>
+</li>
+<li>
+<p><code>-p SPEC</code> or <code>--publish=SPEC</code> — see
+    <a href="#binding-ports">Binding container ports</a></p>
+</li>
+<li>
+<p><code>-P</code> or <code>--publish-all=true|false</code> — see
+    <a href="#binding-ports">Binding container ports</a></p>
+</li>
+</ul>
+<p>The following sections tackle all of the above topics in an order that
+moves roughly from simplest to most complex.</p>
+<h2 id="configuring-dns">Configuring DNS</h2>
+<p><a name="dns"></a></p>
+<p>How can Docker supply each container with a hostname and DNS
+configuration, without having to build a custom image with the hostname
+written inside?  Its trick is to overlay three crucial <code>/etc</code> files
+inside the container with virtual files where it can write fresh
+information.  You can see this by running <code>mount</code> inside a container:</p>
+<pre class="prettyprint well"><code>$$ mount
+...
+/dev/disk/by-uuid/1fec...ebdf on /etc/hostname type ext4 ...
+/dev/disk/by-uuid/1fec...ebdf on /etc/hosts type ext4 ...
+tmpfs on /etc/resolv.conf type tmpfs ...
+...
+</code></pre>
+<p>This arrangement allows Docker to do clever things like keep
+<code>resolv.conf</code> up to date across all containers when the host machine
+receives new configuration over DHCP later.  The exact details of how
+Docker maintains these files inside the container can change from one
+Docker version to the next, so you should leave the files themselves
+alone and use the following Docker options instead.</p>
+<p>Four different options affect container domain name services.</p>
+<ul>
+<li>
+<p><code>-h HOSTNAME</code> or <code>--hostname=HOSTNAME</code> — sets the hostname by which
+    the container knows itself.  This is written into <code>/etc/hostname</code>,
+    into <code>/etc/hosts</code> as the name of the container's host-facing IP
+    address, and is the name that <code>/bin/bash</code> inside the container will
+    display inside its prompt.  But the hostname is not easy to see from
+    outside the container.  It will not appear in <code>docker ps</code> nor in the
+    <code>/etc/hosts</code> file of any other container.</p>
+</li>
+<li>
+<p><code>--link=CONTAINER_NAME:ALIAS</code> — using this option as you <code>run</code> a
+    container gives the new container's <code>/etc/hosts</code> an extra entry
+    named <code>ALIAS</code> that points to the IP address of the container named
+    <code>CONTAINER_NAME</code>.  This lets processes inside the new container
+    connect to the hostname <code>ALIAS</code> without having to know its IP.  The
+    <code>--link=</code> option is discussed in more detail below, in the section
+    <a href="#between-containers">Communication between containers</a>. Because
+    Docker may assign a different IP address to the linked containers
+    on restart, Docker updates the <code>ALIAS</code> entry in the <code>/etc/hosts</code> file
+    of the recipient containers.</p>
+</li>
+<li>
+<p><code>--dns=IP_ADDRESS...</code> — sets the IP addresses added as <code>server</code>
+    lines to the container's <code>/etc/resolv.conf</code> file.  Processes in the
+    container, when confronted with a hostname not in <code>/etc/hosts</code>, will
+    connect to these IP addresses on port 53 looking for name resolution
+    services.</p>
+</li>
+<li>
+<p><code>--dns-search=DOMAIN...</code> — sets the domain names that are searched
+    when a bare unqualified hostname is used inside of the container, by
+    writing <code>search</code> lines into the container's <code>/etc/resolv.conf</code>.
+    When a container process attempts to access <code>host</code> and the search
+    domain <code>example.com</code> is set, for instance, the DNS logic will not
+    only look up <code>host</code> but also <code>host.example.com</code>.
+    Use <code>--dns-search=.</code> if you don't wish to set the search domain.</p>
+</li>
+</ul>
+<p>Note that Docker, in the absence of either of the last two options
+above, will make <code>/etc/resolv.conf</code> inside of each container look like
+the <code>/etc/resolv.conf</code> of the host machine where the <code>docker</code> daemon is
+running.  The options then modify this default configuration.</p>
+<h2 id="communication-between-containers-and-the-wider-world">Communication between containers and the wider world</h2>
+<p><a name="the-world"></a></p>
+<p>Whether a container can talk to the world is governed by one main factor.</p>
+<p>Is the host machine willing to forward IP packets?  This is governed
+by the <code>ip_forward</code> system parameter.  Packets can only pass between
+containers if this parameter is <code>1</code>.  Usually you will simply leave
+the Docker server at its default setting <code>--ip-forward=true</code> and
+Docker will go set <code>ip_forward</code> to <code>1</code> for you when the server
+starts up.  To check the setting or turn it on manually:</p>
+<pre class="prettyprint well"><code># Usually not necessary: turning on forwarding,
+# on the host where your Docker server is running
+
+$ cat /proc/sys/net/ipv4/ip_forward
+0
+$ sudo echo 1 &gt; /proc/sys/net/ipv4/ip_forward
+$ cat /proc/sys/net/ipv4/ip_forward
+1
+</code></pre>
+<p>Many using Docker will want <code>ip_forward</code> to be on, to at
+least make communication <em>possible</em> between containers and
+the wider world.</p>
+<p>May also be needed for inter-container communication if you are
+in a multiple bridge setup.</p>
+<h2 id="communication-between-containers">Communication between containers</h2>
+<p><a name="between-containers"></a></p>
+<p>Whether two containers can communicate is governed, at the operating
+system level, by two factors.</p>
+<ol>
+<li>
+<p>Does the network topology even connect the containers' network
+    interfaces?  By default Docker will attach all containers to a
+    single <code>docker0</code> bridge, providing a path for packets to travel
+    between them.  See the later sections of this document for other
+    possible topologies.</p>
+</li>
+<li>
+<p>Do your <code>iptables</code> allow this particular connection to be made?
+    Docker will never make changes to your system <code>iptables</code> rules if
+    you set <code>--iptables=false</code> when the daemon starts.  Otherwise the
+    Docker server will add a default rule to the <code>FORWARD</code> chain with a
+    blanket <code>ACCEPT</code> policy if you retain the default <code>--icc=true</code>, or
+    else will set the policy to <code>DROP</code> if <code>--icc=false</code>.</p>
+</li>
+</ol>
+<p>It is a strategic question whether to leave <code>--icc=true</code> or change it to
+<code>--icc=false</code> (on Ubuntu, by editing the <code>DOCKER_OPTS</code> variable in
+<code>/etc/default/docker</code> and restarting the Docker server) so that
+<code>iptables</code> will protect other containers — and the main host — from
+having arbitrary ports probed or accessed by a container that gets
+compromised.</p>
+<p>If you choose the most secure setting of <code>--icc=false</code>, then how can
+containers communicate in those cases where you <em>want</em> them to provide
+each other services?</p>
+<p>The answer is the <code>--link=CONTAINER_NAME:ALIAS</code> option, which was
+mentioned in the previous section because of its effect upon name
+services.  If the Docker daemon is running with both <code>--icc=false</code> and
+<code>--iptables=true</code> then, when it sees <code>docker run</code> invoked with the
+<code>--link=</code> option, the Docker server will insert a pair of <code>iptables</code>
+<code>ACCEPT</code> rules so that the new container can connect to the ports
+exposed by the other container — the ports that it mentioned in the
+<code>EXPOSE</code> lines of its <code>Dockerfile</code>.  Docker has more documentation on
+this subject — see the <a href="/userguide/dockerlinks">linking Docker containers</a>
+page for further details.</p>
+<blockquote>
+<p><strong>Note</strong>:
+The value <code>CONTAINER_NAME</code> in <code>--link=</code> must either be an
+auto-assigned Docker name like <code>stupefied_pare</code> or else the name you
+assigned with <code>--name=</code> when you ran <code>docker run</code>.  It cannot be a
+hostname, which Docker will not recognize in the context of the
+<code>--link=</code> option.</p>
+</blockquote>
+<p>You can run the <code>iptables</code> command on your Docker host to see whether
+the <code>FORWARD</code> chain has a default policy of <code>ACCEPT</code> or <code>DROP</code>:</p>
+<pre class="prettyprint well"><code># When --icc=false, you should see a DROP rule:
+
+$ sudo iptables -L -n
+...
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination
+DROP       all  --  0.0.0.0/0            0.0.0.0/0
+...
+
+# When a --link= has been created under --icc=false,
+# you should see port-specific ACCEPT rules overriding
+# the subsequent DROP policy for all other packets:
+
+$ sudo iptables -L -n
+...
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination
+ACCEPT     tcp  --  172.17.0.2           172.17.0.3           tcp spt:80
+ACCEPT     tcp  --  172.17.0.3           172.17.0.2           tcp dpt:80
+DROP       all  --  0.0.0.0/0            0.0.0.0/0
+</code></pre>
+<blockquote>
+<p><strong>Note</strong>:
+Docker is careful that its host-wide <code>iptables</code> rules fully expose
+containers to each other's raw IP addresses, so connections from one
+container to another should always appear to be originating from the
+first container's own IP address.</p>
+</blockquote>
+<h2 id="binding-container-ports-to-the-host">Binding container ports to the host</h2>
+<p><a name="binding-ports"></a></p>
+<p>By default Docker containers can make connections to the outside world,
+but the outside world cannot connect to containers.  Each outgoing
+connection will appear to originate from one of the host machine's own
+IP addresses thanks to an <code>iptables</code> masquerading rule on the host
+machine that the Docker server creates when it starts:</p>
+<pre class="prettyprint well"><code># You can see that the Docker server creates a
+# masquerade rule that let containers connect
+# to IP addresses in the outside world:
+
+$ sudo iptables -t nat -L -n
+...
+Chain POSTROUTING (policy ACCEPT)
+target     prot opt source               destination
+MASQUERADE  all  --  172.17.0.0/16       !172.17.0.0/16
+...
+</code></pre>
+<p>But if you want containers to accept incoming connections, you will need
+to provide special options when invoking <code>docker run</code>.  These options
+are covered in more detail in the <a href="/userguide/dockerlinks">Docker User Guide</a>
+page.  There are two approaches.</p>
+<p>First, you can supply <code>-P</code> or <code>--publish-all=true|false</code> to <code>docker run</code>
+which is a blanket operation that identifies every port with an <code>EXPOSE</code>
+line in the image's <code>Dockerfile</code> and maps it to a host port somewhere in
+the range 49153–65535.  This tends to be a bit inconvenient, since you
+then have to run other <code>docker</code> sub-commands to learn which external
+port a given service was mapped to.</p>
+<p>More convenient is the <code>-p SPEC</code> or <code>--publish=SPEC</code> option which lets
+you be explicit about exactly which external port on the Docker server —
+which can be any port at all, not just those in the 49153-65535 block —
+you want mapped to which port in the container.</p>
+<p>Either way, you should be able to peek at what Docker has accomplished
+in your network stack by examining your NAT tables.</p>
+<pre class="prettyprint well"><code># What your NAT rules might look like when Docker
+# is finished setting up a -P forward:
+
+$ iptables -t nat -L -n
+...
+Chain DOCKER (2 references)
+target     prot opt source               destination
+DNAT       tcp  --  0.0.0.0/0            0.0.0.0/0            tcp dpt:49153 to:172.17.0.2:80
+
+# What your NAT rules might look like when Docker
+# is finished setting up a -p 80:80 forward:
+
+Chain DOCKER (2 references)
+target     prot opt source               destination
+DNAT       tcp  --  0.0.0.0/0            0.0.0.0/0            tcp dpt:80 to:172.17.0.2:80
+</code></pre>
+<p>You can see that Docker has exposed these container ports on <code>0.0.0.0</code>,
+the wildcard IP address that will match any possible incoming port on
+the host machine.  If you want to be more restrictive and only allow
+container services to be contacted through a specific external interface
+on the host machine, you have two choices.  When you invoke <code>docker run</code>
+you can use either <code>-p IP:host_port:container_port</code> or <code>-p IP::port</code> to
+specify the external interface for one particular binding.</p>
+<p>Or if you always want Docker port forwards to bind to one specific IP
+address, you can edit your system-wide Docker server settings (on
+Ubuntu, by editing <code>DOCKER_OPTS</code> in <code>/etc/default/docker</code>) and add the
+option <code>--ip=IP_ADDRESS</code>.  Remember to restart your Docker server after
+editing this setting.</p>
+<p>Again, this topic is covered without all of these low-level networking
+details in the <a href="/userguide/dockerlinks/">Docker User Guide</a> document if you
+would like to use that as your port redirection reference instead.</p>
+<h2 id="customizing-docker0">Customizing docker0</h2>
+<p><a name="docker0"></a></p>
+<p>By default, the Docker server creates and configures the host system's
+<code>docker0</code> interface as an <em>Ethernet bridge</em> inside the Linux kernel that
+can pass packets back and forth between other physical or virtual
+network interfaces so that they behave as a single Ethernet network.</p>
+<p>Docker configures <code>docker0</code> with an IP address, netmask and IP
+allocation range. The host machine can both receive and send packets to
+containers connected to the bridge, and gives it an MTU — the <em>maximum
+transmission unit</em> or largest packet length that the interface will
+allow — of either 1,500 bytes or else a more specific value copied from
+the Docker host's interface that supports its default route.  These
+options are configurable at server startup:</p>
+<ul>
+<li>
+<p><code>--bip=CIDR</code> — supply a specific IP address and netmask for the
+    <code>docker0</code> bridge, using standard CIDR notation like
+    <code>192.168.1.5/24</code>.</p>
+</li>
+<li>
+<p><code>--fixed-cidr=CIDR</code> — restrict the IP range from the <code>docker0</code> subnet,
+    using the standard CIDR notation like <code>172.167.1.0/28</code>. This range must
+    be and IPv4 range for fixed IPs (ex: 10.20.0.0/16) and must be a subset
+    of the bridge IP range (<code>docker0</code> or set using <code>--bridge</code>). For example
+    with <code>--fixed-cidr=192.168.1.0/25</code>, IPs for your containers will be chosen
+    from the first half of <code>192.168.1.0/24</code> subnet.</p>
+</li>
+<li>
+<p><code>--mtu=BYTES</code> — override the maximum packet length on <code>docker0</code>.</p>
+</li>
+</ul>
+<p>On Ubuntu you would add these to the <code>DOCKER_OPTS</code> setting in
+<code>/etc/default/docker</code> on your Docker host and restarting the Docker
+service.</p>
+<p>Once you have one or more containers up and running, you can confirm
+that Docker has properly connected them to the <code>docker0</code> bridge by
+running the <code>brctl</code> command on the host machine and looking at the
+<code>interfaces</code> column of the output.  Here is a host with two different
+containers connected:</p>
+<pre class="prettyprint well"><code># Display bridge info
+
+$ sudo brctl show
+bridge name     bridge id               STP enabled     interfaces
+docker0         8000.3a1d7362b4ee       no              veth65f9
+                                                        vethdda6
+</code></pre>
+<p>If the <code>brctl</code> command is not installed on your Docker host, then on
+Ubuntu you should be able to run <code>sudo apt-get install bridge-utils</code> to
+install it.</p>
+<p>Finally, the <code>docker0</code> Ethernet bridge settings are used every time you
+create a new container.  Docker selects a free IP address from the range
+available on the bridge each time you <code>docker run</code> a new container, and
+configures the container's <code>eth0</code> interface with that IP address and the
+bridge's netmask.  The Docker host's own IP address on the bridge is
+used as the default gateway by which each container reaches the rest of
+the Internet.</p>
+<pre class="prettyprint well"><code># The network, as seen from a container
+
+$ sudo docker run -i -t --rm base /bin/bash
+
+$$ ip addr show eth0
+24: eth0: &lt;BROADCAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 32:6f:e0:35:57:91 brd ff:ff:ff:ff:ff:ff
+    inet 172.17.0.3/16 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::306f:e0ff:fe35:5791/64 scope link
+       valid_lft forever preferred_lft forever
+
+$$ ip route
+default via 172.17.42.1 dev eth0
+172.17.0.0/16 dev eth0  proto kernel  scope link  src 172.17.0.3
+
+$$ exit
+</code></pre>
+<p>Remember that the Docker host will not be willing to forward container
+packets out on to the Internet unless its <code>ip_forward</code> system setting is
+<code>1</code> — see the section above on <a href="#between-containers">Communication between
+containers</a> for details.</p>
+<h2 id="building-your-own-bridge">Building your own bridge</h2>
+<p><a name="bridge-building"></a></p>
+<p>If you want to take Docker out of the business of creating its own
+Ethernet bridge entirely, you can set up your own bridge before starting
+Docker and use <code>-b BRIDGE</code> or <code>--bridge=BRIDGE</code> to tell Docker to use
+your bridge instead.  If you already have Docker up and running with its
+old <code>docker0</code> still configured, you will probably want to begin by
+stopping the service and removing the interface:</p>
+<pre class="prettyprint well"><code># Stopping Docker and removing docker0
+
+$ sudo service docker stop
+$ sudo ip link set dev docker0 down
+$ sudo brctl delbr docker0
+$ sudo iptables -t nat -F POSTROUTING
+</code></pre>
+<p>Then, before starting the Docker service, create your own bridge and
+give it whatever configuration you want.  Here we will create a simple
+enough bridge that we really could just have used the options in the
+previous section to customize <code>docker0</code>, but it will be enough to
+illustrate the technique.</p>
+<pre class="prettyprint well"><code># Create our own bridge
+
+$ sudo brctl addbr bridge0
+$ sudo ip addr add 192.168.5.1/24 dev bridge0
+$ sudo ip link set dev bridge0 up
+
+# Confirming that our bridge is up and running
+
+$ ip addr show bridge0
+4: bridge0: &lt;BROADCAST,MULTICAST&gt; mtu 1500 qdisc noop state UP group default
+    link/ether 66:38:d0:0d:76:18 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.5.1/24 scope global bridge0
+       valid_lft forever preferred_lft forever
+
+# Tell Docker about it and restart (on Ubuntu)
+
+$ echo 'DOCKER_OPTS="-b=bridge0"' &gt;&gt; /etc/default/docker
+$ sudo service docker start
+
+# Confirming new outgoing NAT masquerade is set up
+
+$ sudo iptables -t nat -L -n
+...
+Chain POSTROUTING (policy ACCEPT)
+target     prot opt source               destination
+MASQUERADE  all  --  192.168.5.0/24      0.0.0.0/0
+</code></pre>
+<p>The result should be that the Docker server starts successfully and is
+now prepared to bind containers to the new bridge.  After pausing to
+verify the bridge's configuration, try creating a container — you will
+see that its IP address is in your new IP address range, which Docker
+will have auto-detected.</p>
+<p>Just as we learned in the previous section, you can use the <code>brctl show</code>
+command to see Docker add and remove interfaces from the bridge as you
+start and stop containers, and can run <code>ip addr</code> and <code>ip route</code> inside a
+container to see that it has been given an address in the bridge's IP
+address range and has been told to use the Docker host's IP address on
+the bridge as its default gateway to the rest of the Internet.</p>
+<h2 id="how-docker-networks-a-container">How Docker networks a container</h2>
+<p><a name="container-networking"></a></p>
+<p>While Docker is under active development and continues to tweak and
+improve its network configuration logic, the shell commands in this
+section are rough equivalents to the steps that Docker takes when
+configuring networking for each new container.</p>
+<p>Let's review a few basics.</p>
+<p>To communicate using the Internet Protocol (IP), a machine needs access
+to at least one network interface at which packets can be sent and
+received, and a routing table that defines the range of IP addresses
+reachable through that interface.  Network interfaces do not have to be
+physical devices.  In fact, the <code>lo</code> loopback interface available on
+every Linux machine (and inside each Docker container) is entirely
+virtual — the Linux kernel simply copies loopback packets directly from
+the sender's memory into the receiver's memory.</p>
+<p>Docker uses special virtual interfaces to let containers communicate
+with the host machine — pairs of virtual interfaces called “peers” that
+are linked inside of the host machine's kernel so that packets can
+travel between them.  They are simple to create, as we will see in a
+moment.</p>
+<p>The steps with which Docker configures a container are:</p>
+<ol>
+<li>
+<p>Create a pair of peer virtual interfaces.</p>
+</li>
+<li>
+<p>Give one of them a unique name like <code>veth65f9</code>, keep it inside of
+    the main Docker host, and bind it to <code>docker0</code> or whatever bridge
+    Docker is supposed to be using.</p>
+</li>
+<li>
+<p>Toss the other interface over the wall into the new container (which
+    will already have been provided with an <code>lo</code> interface) and rename
+    it to the much prettier name <code>eth0</code> since, inside of the container's
+    separate and unique network interface namespace, there are no
+    physical interfaces with which this name could collide.</p>
+</li>
+<li>
+<p>Set the interface's MAC address according to the <code>--mac-address</code>
+    parameter or generate a random one.</p>
+</li>
+<li>
+<p>Give the container's <code>eth0</code> a new IP address from within the
+    bridge's range of network addresses, and set its default route to
+    the IP address that the Docker host owns on the bridge. If available
+    the IP address is generated from the MAC address. This prevents ARP
+    cache invalidation problems, when a new container comes up with an
+    IP used in the past by another container with another MAC.</p>
+</li>
+</ol>
+<p>With these steps complete, the container now possesses an <code>eth0</code>
+(virtual) network card and will find itself able to communicate with
+other containers and the rest of the Internet.</p>
+<p>You can opt out of the above process for a particular container by
+giving the <code>--net=</code> option to <code>docker run</code>, which takes four possible
+values.</p>
+<ul>
+<li>
+<p><code>--net=bridge</code> — The default action, that connects the container to
+    the Docker bridge as described above.</p>
+</li>
+<li>
+<p><code>--net=host</code> — Tells Docker to skip placing the container inside of
+    a separate network stack.  In essence, this choice tells Docker to
+    <strong>not containerize the container's networking</strong>!  While container
+    processes will still be confined to their own filesystem and process
+    list and resource limits, a quick <code>ip addr</code> command will show you
+    that, network-wise, they live “outside” in the main Docker host and
+    have full access to its network interfaces.  Note that this does
+    <strong>not</strong> let the container reconfigure the host network stack — that
+    would require <code>--privileged=true</code> — but it does let container
+    processes open low-numbered ports like any other root process.
+    It also allows the container to access local network services
+    like D-bus.  This can lead to processes in the container being
+    able to do unexpected things like
+    <a href="https://github.com/docker/docker/issues/6401">restart your computer</a>.
+    You should use this option with caution.</p>
+</li>
+<li>
+<p><code>--net=container:NAME_or_ID</code> — Tells Docker to put this container's
+    processes inside of the network stack that has already been created
+    inside of another container.  The new container's processes will be
+    confined to their own filesystem and process list and resource
+    limits, but will share the same IP address and port numbers as the
+    first container, and processes on the two containers will be able to
+    connect to each other over the loopback interface.</p>
+</li>
+<li>
+<p><code>--net=none</code> — Tells Docker to put the container inside of its own
+    network stack but not to take any steps to configure its network,
+    leaving you free to build any of the custom configurations explored
+    in the last few sections of this document.</p>
+</li>
+</ul>
+<p>To get an idea of the steps that are necessary if you use <code>--net=none</code>
+as described in that last bullet point, here are the commands that you
+would run to reach roughly the same configuration as if you had let
+Docker do all of the configuration:</p>
+<pre class="prettyprint well"><code># At one shell, start a container and
+# leave its shell idle and running
+
+$ sudo docker run -i -t --rm --net=none base /bin/bash
+root@63f36fc01b5f:/#
+
+# At another shell, learn the container process ID
+# and create its namespace entry in /var/run/netns/
+# for the "ip netns" command we will be using below
+
+$ sudo docker inspect -f '{{.State.Pid}}' 63f36fc01b5f
+2778
+$ pid=2778
+$ sudo mkdir -p /var/run/netns
+$ sudo ln -s /proc/$pid/ns/net /var/run/netns/$pid
+
+# Check the bridge's IP address and netmask
+
+$ ip addr show docker0
+21: docker0: ...
+inet 172.17.42.1/16 scope global docker0
+...
+
+# Create a pair of "peer" interfaces A and B,
+# bind the A end to the bridge, and bring it up
+
+$ sudo ip link add A type veth peer name B
+$ sudo brctl addif docker0 A
+$ sudo ip link set A up
+
+# Place B inside the container's network namespace,
+# rename to eth0, and activate it with a free IP
+
+$ sudo ip link set B netns $pid
+$ sudo ip netns exec $pid ip link set dev B name eth0
+$ sudo ip netns exec $pid ip link set eth0 address 12:34:56:78:9a:bc
+$ sudo ip netns exec $pid ip link set eth0 up
+$ sudo ip netns exec $pid ip addr add 172.17.42.99/16 dev eth0
+$ sudo ip netns exec $pid ip route add default via 172.17.42.1
+</code></pre>
+<p>At this point your container should be able to perform networking
+operations as usual.</p>
+<p>When you finally exit the shell and Docker cleans up the container, the
+network namespace is destroyed along with our virtual <code>eth0</code> — whose
+destruction in turn destroys interface <code>A</code> out in the Docker host and
+automatically un-registers it from the <code>docker0</code> bridge.  So everything
+gets cleaned up without our having to run any extra commands!  Well,
+almost everything:</p>
+<pre class="prettyprint well"><code># Clean up dangling symlinks in /var/run/netns
+
+find -L /var/run/netns -type l -delete
+</code></pre>
+<p>Also note that while the script above used modern <code>ip</code> command instead
+of old deprecated wrappers like <code>ipconfig</code> and <code>route</code>, these older
+commands would also have worked inside of our container.  The <code>ip addr</code>
+command can be typed as <code>ip a</code> if you are in a hurry.</p>
+<p>Finally, note the importance of the <code>ip netns exec</code> command, which let
+us reach inside and configure a network namespace as root.  The same
+commands would not have worked if run inside of the container, because
+part of safe containerization is that Docker strips container processes
+of the right to configure their own networks.  Using <code>ip netns exec</code> is
+what let us finish up the configuration without having to take the
+dangerous step of running the container itself with <code>--privileged=true</code>.</p>
+<h2 id="tools-and-examples">Tools and Examples</h2>
+<p>Before diving into the following sections on custom network topologies,
+you might be interested in glancing at a few external tools or examples
+of the same kinds of configuration.  Here are two:</p>
+<ul>
+<li>
+<p>Jérôme Petazzoni has created a <code>pipework</code> shell script to help you
+    connect together containers in arbitrarily complex scenarios:
+    <a href="https://github.com/jpetazzo/pipework">https://github.com/jpetazzo/pipework</a></p>
+</li>
+<li>
+<p>Brandon Rhodes has created a whole network topology of Docker
+    containers for the next edition of Foundations of Python Network
+    Programming that includes routing, NAT'd firewalls, and servers that
+    offer HTTP, SMTP, POP, IMAP, Telnet, SSH, and FTP:
+    <a href="https://github.com/brandon-rhodes/fopnp/tree/m/playground">https://github.com/brandon-rhodes/fopnp/tree/m/playground</a></p>
+</li>
+</ul>
+<p>Both tools use networking commands very much like the ones you saw in
+the previous section, and will see in the following sections.</p>
+<h2 id="building-a-point-to-point-connection">Building a point-to-point connection</h2>
+<p><a name="point-to-point"></a></p>
+<p>By default, Docker attaches all containers to the virtual subnet
+implemented by <code>docker0</code>.  You can create containers that are each
+connected to some different virtual subnet by creating your own bridge
+as shown in <a href="#bridge-building">Building your own bridge</a>, starting each
+container with <code>docker run --net=none</code>, and then attaching the
+containers to your bridge with the shell commands shown in <a href="#container-networking">How Docker
+networks a container</a>.</p>
+<p>But sometimes you want two particular containers to be able to
+communicate directly without the added complexity of both being bound to
+a host-wide Ethernet bridge.</p>
+<p>The solution is simple: when you create your pair of peer interfaces,
+simply throw <em>both</em> of them into containers, and configure them as
+classic point-to-point links.  The two containers will then be able to
+communicate directly (provided you manage to tell each container the
+other's IP address, of course).  You might adjust the instructions of
+the previous section to go something like this:</p>
+<pre class="prettyprint well"><code># Start up two containers in two terminal windows
+
+$ sudo docker run -i -t --rm --net=none base /bin/bash
+root@1f1f4c1f931a:/#
+
+$ sudo docker run -i -t --rm --net=none base /bin/bash
+root@12e343489d2f:/#
+
+# Learn the container process IDs
+# and create their namespace entries
+
+$ sudo docker inspect -f '{{.State.Pid}}' 1f1f4c1f931a
+2989
+$ sudo docker inspect -f '{{.State.Pid}}' 12e343489d2f
+3004
+$ sudo mkdir -p /var/run/netns
+$ sudo ln -s /proc/2989/ns/net /var/run/netns/2989
+$ sudo ln -s /proc/3004/ns/net /var/run/netns/3004
+
+# Create the "peer" interfaces and hand them out
+
+$ sudo ip link add A type veth peer name B
+
+$ sudo ip link set A netns 2989
+$ sudo ip netns exec 2989 ip addr add 10.1.1.1/32 dev A
+$ sudo ip netns exec 2989 ip link set A up
+$ sudo ip netns exec 2989 ip route add 10.1.1.2/32 dev A
+
+$ sudo ip link set B netns 3004
+$ sudo ip netns exec 3004 ip addr add 10.1.1.2/32 dev B
+$ sudo ip netns exec 3004 ip link set B up
+$ sudo ip netns exec 3004 ip route add 10.1.1.1/32 dev B
+</code></pre>
+<p>The two containers should now be able to ping each other and make
+connections successfully.  Point-to-point links like this do not depend
+on a subnet nor a netmask, but on the bare assertion made by <code>ip route</code>
+that some other single IP address is connected to a particular network
+interface.</p>
+<p>Note that point-to-point links can be safely combined with other kinds
+of network connectivity — there is no need to start the containers with
+<code>--net=none</code> if you want point-to-point links to be an addition to the
+container's normal networking instead of a replacement.</p>
+<p>A final permutation of this pattern is to create the point-to-point link
+between the Docker host and one container, which would allow the host to
+communicate with that one container on some single IP address and thus
+communicate “out-of-band” of the bridge that connects the other, more
+usual containers.  But unless you have very specific networking needs
+that drive you to such a solution, it is probably far preferable to use
+<code>--icc=false</code> to lock down inter-container communication, as we explored
+earlier.</p>
+<h2 id="editing-networking-config-files">Editing networking config files</h2>
+<p>Starting with Docker v.1.2.0, you can now edit <code>/etc/hosts</code>, <code>/etc/hostname</code>
+and <code>/etc/resolve.conf</code> in a running container. This is useful if you need
+to install bind or other services that might override one of those files.</p>
+<p>Note, however, that changes to these files will not be saved by
+<code>docker commit</code>, nor will they be saved during <code>docker run</code>.
+That means they won't be saved in the image, nor will they persist when a
+container is restarted; they will only "stick" in a running container.</p>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="push-footer"></div>
+
+</div>
+
+
+
+<div id="footer-container" class="container">
+  <div id="footer" class="grey-body">
+    <div class="row">
+      <div class="span2">
+        <span class="footer-title">Community</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/community/events/">Events</a></li>
+          <li><a class="primary-button" href="http://posts.docker.com">Friends' Posts</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/community/meetups/">Meetups</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/community/governance/">Governance</a></li>
+          <li><a class="primary-button" href="http://forums.docker.com">Forums</a></li>
+          <li><a class="primary-button" href="http://botbot.me/freenode/docker">IRC</a></li>
+          <li><a class="primary-button" href="https://github.com/docker/docker">GitHub</a></li>
+          <li><a class="primary-button" href="http://stackoverflow.com/search?q=docker">Stackoverflow</a></li>
+          <li><a class="primary-button" href="http://www.cafepress.com/docker">Swag</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <span class="footer-title">Enterprise</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/enterprise/support/">Support</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/enterprise/education/">Education</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/enterprise/services/">Services</a></li>
+        </ul>
+        <span class="footer-title">Partner Solutions</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/partners/find/">Find a Partner</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/partners/program/">Partner Program</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/partners/learn/">Learn More</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <span class="footer-title">Resources</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://docs.docker.com">Documentation</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/help/">Help</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/usecases/">Use Cases</a></li>
+          <li><a class="primary-button" href="http://www.docker.com/tryit/">Online Tutorial</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/howtobuy/">How To Buy</a></li>
+          <li><a class="primary-button" href="http://status.docker.com">Status</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/security/">Security</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <span class="footer-title">Company</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/company/aboutus/">About Us</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/team/">Team</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/news/">News</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/press/">Press</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/careers/">Careers</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/contact/">Contact</a></li>
+        </ul>
+      </div>
+      <div class="span3">
+        <span class="footer-title">Connect</span>
+        <div class="search">
+          <span>Subscribe to our newsletter</span>
+          <form action="https://www.docker.com/subscribe_newsletter/" method="post">
+            <input type='hidden' name='csrfmiddlewaretoken' value='aWL78QXQkY8DSKNYh6cl08p5eTLl7sOa' />
+            <tr><th><label for="id_email">Email:</label></th><td><input class="form-control" id="id_email" name="email" placeholder="Enter your email" type="text" /></td></tr>
+            
+            <button type="submit"><i class="icon-arrow-right"></i> </button>
+          </form>
+        </div>
+        <ul class="unstyled social">
+          <li><a title="Docker on Twitter" class="primary-button blog" href="http://blog.docker.com">Blog</a></li>
+          <li><a title="Docker on Twitter" class="primary-button twitter" href="http://twitter.com/docker">Twitter</a></li>
+          <li><a title="Docker on Google+" class="primary-button googleplus" href="https://plus.google.com/u/0/communities/108146856671494713993">Google+</a></li>
+          <li><a title="Docker on Facebook" class="primary-button facebook" href="https://www.facebook.com/docker.run">Facebook</a></li>
+          <li><a title="Docker on Youtube" class="primary-button youtube" href="http://www.youtube.com/user/dockerrun">YouTube</a></li>
+        </ul>
+        <ul class="unstyled social">
+          <li><a title="Docker on SlideShare" class="primary-button slideshare" href="http://www.slideshare.net/Docker">Slideshare</a></li>
+          <li>
+             <a title="Docker on LinkedIn" class="primary-button" href="https://www.linkedin.com/company/docker">
+                 <span class="linkedin"></span>
+                 LinkedIn
+             </a>
+          </li>
+          <li>
+              <a title="Docker on GitHub" class="primary-button" href="https://github.com/docker/">
+                  <span class="github"></span>
+                  GitHub
+              </a>
+          </li>
+          <li>
+              <a title="Docker on Reddit" class="primary-button" href="http://www.reddit.com/r/docker">
+                  <span class="reddit"></span>
+                  Reddit
+              </a>
+          </li>
+          <li>
+              <a title="Docker on AngelList" class="primary-button" href="https://angel.co/docker-inc-1">
+                  <span class="angellist"></span>
+                  AngelList
+              </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="span6 pagination-right copyright">
+        <span>&copy; 2014-2015 Docker, Inc.</span>
+      </div>
+      <div class="span6 pagination-left copyright">
+        <a href="http://www.docker.com/legal/terms_of_service">Terms</a> &middot;
+        <a href="http://www.docker.com/legal/privacy_policy">Privacy</a> &middot;
+        <a href="http://www.docker.com/legal/trademark_guidelines">Trademarks</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/js/jquery-1.10.2.min.js"></script>
+<script src="/js/jquery.cookie.js" ></script>
+<script src="/js/jquery-scrolltofixed-min.js"></script>
+<script src="/js/bootstrap-3.0.3.min.js"></script>
+<script src="/js/prettify-1.0.min.js"></script>
+<script src="/js/dockerfile_tutorial.js"></script>
+<script src="/js/dockerfile_tutorial_level.js"></script>
+<script src="/js/base.js"></script>
+<script src="/tipuesearch/tipuesearch_set.js"></script>
+<script src="/tipuesearch/tipuesearch.min.js"></script>
+<script type="text/javascript">
+piAId = '45082';
+piCId = '1482';
+
+(function() {
+  function async_load(){
+    var s = document.createElement('script'); s.type = 'text/javascript';
+    s.src = ('https:' == document.location.protocol ? 'https://pi' : 'http://cdn') + '.pardot.com/pd.js';
+    var c = document.getElementsByTagName('script')[0]; c.parentNode.insertBefore(s, c);
+  }
+  if(window.attachEvent) { window.attachEvent('onload', async_load); }
+  else { window.addEventListener('load', async_load, false); }
+})();
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#content').css("min-height", $(window).height() - 553 );
+    // if the URL contains a version string, update the version picker to reflect that
+    version = document.location.pathname.match(/^\/(v\d\.\d)\/.*/)
+    if (version && version[1]) {
+        $('#document-version-number')[0].text = 'Version '+version[1];
+    } else {
+        $('#document-version-number')[0].text = $('#document-version-number')[0].text + " (Latest)"
+    }
+    // load the complete versions list
+    $.get("/versions.html_fragment", function( data ) {
+    	$('#documentation-version-list').prepend(data);
+	//remove any "/v1.1/" bits from front, so we can add the path to the version selection dropdown.
+	path = document.location.pathname.replace(/^\/v\d\.\d/, "");
+	$('#documentation-version-list a.version').each(function(i, e) {
+		e.href = e.href+path;
+		$(e).removeClass()
+	});
+    });
+
+  })
+  var userName = getCookie('docker_sso_username');
+  if (userName) {
+    $('.topmostnav_loggedout').hide();
+    $('.topmostnav_loggedin').show();
+    $('#logged-in-header-username').text(userName);
+  } else {
+    $('.topmostnav_loggedout').show();
+    $('.topmostnav_loggedin').hide();
+  }
+</script>
+</body>
+</html>

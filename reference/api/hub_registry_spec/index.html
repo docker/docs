@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  
+  <meta name="docker_version" content="1.4.1">
+  <meta name="docker_git_branch" content="master">
+  <meta name="docker_git_commit" content="3c097c2">
+  <meta name="docker_build_date" content="Wed Jan 28 04:30:29 UTC 2015">
+
+  <meta name="description" content="Documentation for docker Registry and Registry API">
+  <meta name="keywords" content="docker, registry, api, hub">
+  
+  <link rel="canonical" href="/reference/api/hub_registry_spec/">
+  <link href="/css/bootstrap-custom.css" rel="stylesheet">
+  <link href="/css/main.css" rel="stylesheet">
+  <link href="/css/prettify-1.0.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/dockerfile_tutorial.css">
+  <link href="/tipuesearch/tipuesearch.css" rel="stylesheet">
+  <link href="/css/docs.css" rel="stylesheet">
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <title>Docker Hub and Registry Spec - Docker Documentation</title>
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+  <![endif]-->
+  
+  <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-6096819-11', 'docker.com');
+  ga('require', 'linkid', 'linkid.js');
+  ga('send', 'pageview', {
+   'page': location.pathname + location.search  + location.hash,
+  });
+  </script>
+  
+</head>
+<body>
+
+<div id="topmostnav" class="topmostnav_loggedout navbar navbar-static-top public">
+  <div class="container">
+    <a href="http://www.docker.com/" title="Homepage">
+      <div class="brand logo"><img src="/img/nav/docker-logo-loggedout.png"> </div>
+    </a>
+    <ul class="nav">
+      <li class=""><a href="http://www.docker.com/whatisdocker/" title="What is Docker">What is Docker?</a></li>
+      <li class=""><a href="http://www.docker.com/resources/usecases/" title="Use Cases">Use Cases</a></li>
+      <li class=""><a href="http://www.docker.com/tryit/" title="Try It!">Try It!</a></li>
+      <li class="active"><a href="https://docs.docker.com" title="Install &amp; Docs">Install &amp; Docs</a></li>
+      <li><a href="https://registry.hub.docker.com" title="Browse">Browse</a></li>
+    </ul>
+    <div id="usernav" class="pull-right">
+      <a href="https://hub.docker.com/account/login" class="btn nav-button2" title="Lg In">Log In</a>
+      <a href="https://hub.docker.com/account/signup" class="btn nav-button1" title="Sign Up">Sign Up</a>
+    </div>
+  </div>
+</div>
+<div id="topmostnav" class="topmostnav_loggedin navbar navbar-static-top">
+  <div class="container">
+    <a href="http://www.docker.com/" title="Docker Docs Home"><div class="brand logo"><img src="/img/nav/docker-logo-loggedin.png"> </div></a>
+     <form id="search_box_header" class="navbar-index-search pull-right" action="https://registry.hub.docker.com/search">
+      <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" class="search-query ui-autocomplete-input" placeholder="Search..." name="q" value="" autocomplete="off">
+    </form>
+    <ul class="nav">
+      <li><a href="https://registry.hub.docker.com" title="Browse Repos">Browse Repos</a></li>
+      <li class="active"><a href="http://docs.docker.com" title="Documentation">Documentation</a></li>
+      <li><a href="http://www.docker.com/community/participate/" title="Community">Community</a></li>
+      <li><a href="http://www.docker.com/resources/help/" title="Help">Help</a></li>
+    </ul>
+    <div id="usernav" class="pull-right">
+      <ul class="nav user">
+        <li class="dropdown">
+          <a id="logged-in-header-username" class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <img class="profile" src="" alt="profile picture">
+          </a>
+          <ul class="dropdown-menu pull-right">
+            <li><a href="https://hub.docker.com/">View Profile</a></li>
+            <li><a href="https://hub.docker.com/account/settings/">Settings</a></li>
+            <li><a href="https://hub.docker.com/repos/">My Repositories</a></li>
+            <li><a href="https://hub.docker.com/plans/billing-info">Billing</a></li>
+            <li><a href="https://hub.docker.com/account/logout/?next=/">Log out</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id="wrap">
+  <nav id="nav_menu" class="clearfix navbar navbar-default navbar-static-top affix" role="navigation">
+  <div id="docsnav">
+    <ul id="main-nav" class="pull-left">
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/">About</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/">Docker</a>
+          </li>
+        
+          <li >
+            <a href="/release-notes/">Release Notes</a>
+          </li>
+        
+          <li >
+            <a href="/introduction/understanding-docker/">Understanding Docker</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/installation/mac/">Installation</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/installation/mac/">Mac OS X</a>
+          </li>
+        
+          <li >
+            <a href="/installation/ubuntulinux/">Ubuntu</a>
+          </li>
+        
+          <li >
+            <a href="/installation/rhel/">Red Hat Enterprise Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/oracle/">Oracle Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/centos/">CentOS</a>
+          </li>
+        
+          <li >
+            <a href="/installation/debian/">Debian</a>
+          </li>
+        
+          <li >
+            <a href="/installation/gentoolinux/">Gentoo</a>
+          </li>
+        
+          <li >
+            <a href="/installation/google/">Google Cloud Platform</a>
+          </li>
+        
+          <li >
+            <a href="/installation/rackspace/">Rackspace Cloud</a>
+          </li>
+        
+          <li >
+            <a href="/installation/amazon/">Amazon EC2</a>
+          </li>
+        
+          <li >
+            <a href="/installation/softlayer/">IBM Softlayer</a>
+          </li>
+        
+          <li >
+            <a href="/installation/archlinux/">Arch Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/frugalware/">FrugalWare</a>
+          </li>
+        
+          <li >
+            <a href="/installation/fedora/">Fedora</a>
+          </li>
+        
+          <li >
+            <a href="/installation/SUSE/">SUSE</a>
+          </li>
+        
+          <li >
+            <a href="/installation/cruxlinux/">CRUX Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/windows/">Microsoft Windows</a>
+          </li>
+        
+          <li >
+            <a href="/installation/binaries/">Binaries</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/userguide/">User Guide</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/userguide/">The Docker User Guide</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerhub/">Getting Started with Docker Hub</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerizing/">Dockerizing Applications</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/usingdocker/">Working with Containers</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerimages/">Working with Docker Images</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerlinks/">Linking containers together</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockervolumes/">Managing data in containers</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerrepos/">Working with Docker Hub</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/docker-hub/">Docker Hub</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/docker-hub/">Docker Hub</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/accounts/">Accounts</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/repos/">Repositories</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/builds/">Automated Builds</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/official_repos/">Official Repo Guidelines</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/examples/nodejs_web_app/">Examples</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/examples/nodejs_web_app/">Dockerizing a Node.js web application</a>
+          </li>
+        
+          <li >
+            <a href="/examples/mongodb/">Dockerizing MongoDB</a>
+          </li>
+        
+          <li >
+            <a href="/examples/running_redis_service/">Dockerizing a Redis service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/postgresql_service/">Dockerizing a PostgreSQL service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/running_riak_service/">Dockerizing a Riak service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/running_ssh_service/">Dockerizing an SSH service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/couchdb_data_volumes/">Dockerizing a CouchDB service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/apt-cacher-ng/">Dockerizing an Apt-Cacher-ng service</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/articles/basics/">Articles</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/articles/basics/">Docker basics</a>
+          </li>
+        
+          <li >
+            <a href="/articles/networking/">Advanced networking</a>
+          </li>
+        
+          <li >
+            <a href="/articles/security/">Security</a>
+          </li>
+        
+          <li >
+            <a href="/articles/https/">Running Docker with HTTPS</a>
+          </li>
+        
+          <li >
+            <a href="/articles/registry_mirror/">Run a local registry mirror</a>
+          </li>
+        
+          <li >
+            <a href="/articles/host_integration/">Automatically starting containers</a>
+          </li>
+        
+          <li >
+            <a href="/articles/baseimages/">Creating a base image</a>
+          </li>
+        
+          <li >
+            <a href="/articles/dockerfile_best-practices/">Best practices for writing Dockerfiles</a>
+          </li>
+        
+          <li >
+            <a href="/articles/certificates/">Using certificates for repository client verification</a>
+          </li>
+        
+          <li >
+            <a href="/articles/using_supervisord/">Using Supervisor</a>
+          </li>
+        
+          <li >
+            <a href="/articles/cfengine_process_management/">Process management with CFEngine</a>
+          </li>
+        
+          <li >
+            <a href="/articles/puppet/">Using Puppet</a>
+          </li>
+        
+          <li >
+            <a href="/articles/chef/">Using Chef</a>
+          </li>
+        
+          <li >
+            <a href="/articles/dsc/">Using PowerShell DSC</a>
+          </li>
+        
+          <li >
+            <a href="/articles/ambassador_pattern_linking/">Cross-Host linking using ambassador containers</a>
+          </li>
+        
+          <li >
+            <a href="/articles/runmetrics/">Runtime metrics</a>
+          </li>
+        
+          <li >
+            <a href="/articles/b2d_volume_resize/">Increasing a Boot2Docker volume</a>
+          </li>
+        
+          <li >
+            <a href="/articles/systemd/">Controlling and configuring Docker using Systemd</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left active">
+        
+        <a href="/reference/commandline/cli/">Reference</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/reference/commandline/cli/">Command line</a>
+          </li>
+        
+          <li >
+            <a href="/reference/builder/">Dockerfile</a>
+          </li>
+        
+          <li >
+            <a href="/faq/">FAQ</a>
+          </li>
+        
+          <li >
+            <a href="/reference/run/">Run Reference</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker-io_api/">Docker Hub API</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/registry_api/">Docker Registry API</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/registry_api_client_libraries/">Docker Registry API Client Libraries</a>
+          </li>
+        
+          <li class="active">
+            <a href="/reference/api/hub_registry_spec/">Docker Hub and Registry Spec</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api/">Docker Remote API</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.16/">Docker Remote API v1.16</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.15/">Docker Remote API v1.15</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.14/">Docker Remote API v1.14</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.13/">Docker Remote API v1.13</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.12/">Docker Remote API v1.12</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.11/">Docker Remote API v1.11</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/remote_api_client_libraries/">Docker Remote API Client Libraries</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_io_accounts_api/">Docker Hub Accounts API</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/contributing/contributing/">Contribute</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/contributing/contributing/">Contributing</a>
+          </li>
+        
+          <li >
+            <a href="/contributing/devenvironment/">Development environment</a>
+          </li>
+        
+          <li >
+            <a href="/contributing/docs_style-guide/">Documentation style guide</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+    </ul>
+    <form id="nav_search" class="pull-right" action="/jsearch/">
+      <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+      <input name="q" id="tipue_search_input" type="text" class="search_input search-query ui-autocomplete-input" placeholder="Search the Docs" autocomplete="off">
+    </form>
+  </div>
+</nav>
+  <div id="content" class="container">
+    <div class="row">
+
+      <div class="span3" id="leftnav">
+        <div id="toc_table">
+          <ul class="nav nav-tabs nav-stacked">
+            
+  
+    <li class=""><a href="#the-three-roles">The three roles</a></li>
+    
+      <h3><a href="#docker-hub">Docker Hub</a></h3>
+    
+      <h3><a href="#registry">Registry</a></h3>
+    
+      <h3><a href="#docker">Docker</a></h3>
+    
+  
+    <li class=""><a href="#workflow">Workflow</a></li>
+    
+      <h3><a href="#pull">Pull</a></h3>
+    
+      <h3><a href="#push">Push</a></h3>
+    
+      <h3><a href="#delete">Delete</a></h3>
+    
+  
+    <li class=""><a href="#how-to-use-the-registry-in-standalone-mode">How to use the Registry in standalone mode</a></li>
+    
+      <h3><a href="#without-a-docker-hub">Without a Docker Hub</a></h3>
+    
+      <h3><a href="#with-a-docker-hub">With a Docker Hub</a></h3>
+    
+  
+    <li class=""><a href="#the-api">The API</a></li>
+    
+      <h3><a href="#images">Images</a></h3>
+    
+      <h3><a href="#users">Users</a></h3>
+    
+      <h3><a href="#create-a-user-docker-hub">Create a user (Docker Hub)</a></h3>
+    
+      <h3><a href="#update-a-user-docker-hub">Update a user (Docker Hub)</a></h3>
+    
+      <h3><a href="#login-docker-hub">Login (Docker Hub)</a></h3>
+    
+      <h3><a href="#tags-registry">Tags (Registry)</a></h3>
+    
+      <h3><a href="#get-all-tags">Get all tags:</a></h3>
+    
+      <h3><a href="#44-images-docker-hub">4.4 Images (Docker Hub)</a></h3>
+    
+      <h3><a href="#addupdate-the-images">Add/update the images:</a></h3>
+    
+      <h3><a href="#repositories">Repositories</a></h3>
+    
+      <h3><a href="#remove-a-repository-registry">Remove a Repository (Registry)</a></h3>
+    
+      <h3><a href="#remove-a-repository-docker-hub">Remove a Repository (Docker Hub)</a></h3>
+    
+  
+    <li class=""><a href="#chaining-registries">Chaining Registries</a></li>
+    
+  
+    <li class=""><a href="#authentication-authorization">Authentication &amp; Authorization</a></li>
+    
+      <h3><a href="#on-the-docker-hub">On the Docker Hub</a></h3>
+    
+      <h3><a href="#62-on-the-registry">6.2 On the Registry</a></h3>
+    
+  
+    <li class=""><a href="#document-version">Document Version</a></li>
+    
+  
+
+          </ul>
+        </div>
+      </div>
+      <div class="span9 content-body">
+
+        
+
+        <div id="versionnav" class="span3 pull-right">
+          <ul class="nav version pull-right">
+            <li class="dropdown">
+              <a id="document-version-number" class="dropdown-toggle" data-toggle="dropdown" href="#">
+		      Version v1.4
+              </a>
+              <ul id="documentation-version-list" class="dropdown-menu pull-right">
+
+		<li role="presentation" class="divider"></li>
+		<li> <a class="home-link3 tertiary-nav" href="https://github.com/docker/docker/blob/master/docs/sources/reference/api/hub_registry_spec.md" >Edit on GitHub</a></li>
+
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <h1 id="the-docker-hub-and-the-registry-spec">The Docker Hub and the Registry spec</h1>
+<h2 id="the-three-roles">The three roles</h2>
+<p>There are three major components playing a role in the Docker ecosystem.</p>
+<h3 id="docker-hub">Docker Hub</h3>
+<p>The Docker Hub is responsible for centralizing information about:</p>
+<ul>
+<li>User accounts</li>
+<li>Checksums of the images</li>
+<li>Public namespaces</li>
+</ul>
+<p>The Docker Hub has different components:</p>
+<ul>
+<li>Web UI</li>
+<li>Meta-data store (comments, stars, list public repositories)</li>
+<li>Authentication service</li>
+<li>Tokenization</li>
+</ul>
+<p>The Docker Hub is authoritative for that information.</p>
+<p>There is only one instance of the Docker Hub, run and
+managed by Docker Inc.</p>
+<h3 id="registry">Registry</h3>
+<p>The registry has the following characteristics:</p>
+<ul>
+<li>It stores the images and the graph for a set of repositories</li>
+<li>It does not have user accounts data</li>
+<li>It has no notion of user accounts or authorization</li>
+<li>It delegates authentication and authorization to the Docker Hub Auth
+   service using tokens</li>
+<li>It supports different storage backends (S3, cloud files, local FS)</li>
+<li>It doesn't have a local database</li>
+<li><a href="https://github.com/docker/docker-registry">Source Code</a></li>
+</ul>
+<p>We expect that there will be multiple registries out there. To help you
+grasp the context, here are some examples of registries:</p>
+<ul>
+<li><strong>sponsor registry</strong>: such a registry is provided by a third-party
+   hosting infrastructure as a convenience for their customers and the
+   Docker community as a whole. Its costs are supported by the third
+   party, but the management and operation of the registry are
+   supported by Docker, Inc. It features read/write access, and delegates
+   authentication and authorization to the Docker Hub.</li>
+<li><strong>mirror registry</strong>: such a registry is provided by a third-party
+   hosting infrastructure but is targeted at their customers only. Some
+   mechanism (unspecified to date) ensures that public images are
+   pulled from a sponsor registry to the mirror registry, to make sure
+   that the customers of the third-party provider can <code>docker pull</code>
+   those images locally.</li>
+<li><strong>vendor registry</strong>: such a registry is provided by a software
+   vendor who wants to distribute docker images. It would be operated
+   and managed by the vendor. Only users authorized by the vendor would
+   be able to get write access. Some images would be public (accessible
+   for anyone), others private (accessible only for authorized users).
+   Authentication and authorization would be delegated to the Docker Hub.
+   The goal of vendor registries is to let someone do <code>docker pull
+   basho/riak1.3</code> and automatically push from the vendor registry
+   (instead of a sponsor registry); i.e., vendors get all the convenience of a
+   sponsor registry, while retaining control on the asset distribution.</li>
+<li><strong>private registry</strong>: such a registry is located behind a firewall,
+   or protected by an additional security layer (HTTP authorization,
+   SSL client-side certificates, IP address authorization...). The
+   registry is operated by a private entity, outside of Docker's
+   control. It can optionally delegate additional authorization to the
+   Docker Hub, but it is not mandatory.</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> The latter implies that while HTTP is the protocol
+of choice for a registry, multiple schemes are possible (and
+in some cases, trivial):</p>
+<ul>
+<li>HTTP with GET (and PUT for read-write registries);</li>
+<li>local mount point;</li>
+<li>remote docker addressed through SSH.</li>
+</ul>
+</blockquote>
+<p>The latter would only require two new commands in Docker, e.g.,
+<code>registryget</code> and <code>registryput</code>,
+wrapping access to the local filesystem (and optionally doing
+consistency checks). Authentication and authorization are then delegated
+to SSH (e.g., with public keys).</p>
+<h3 id="docker">Docker</h3>
+<p>On top of being a runtime for LXC, Docker is the Registry client. It
+supports:</p>
+<ul>
+<li>Push / Pull on the registry</li>
+<li>Client authentication on the Docker Hub</li>
+</ul>
+<h2 id="workflow">Workflow</h2>
+<h3 id="pull">Pull</h3>
+<p><img alt="" src="/static_files/docker_pull_chart.png" /></p>
+<ol>
+<li>Contact the Docker Hub to know where I should download “samalba/busybox”</li>
+<li>Docker Hub replies: a. <code>samalba/busybox</code> is on Registry A b. here are the
+    checksums for <code>samalba/busybox</code> (for all layers) c. token</li>
+<li>Contact Registry A to receive the layers for <code>samalba/busybox</code> (all of
+    them to the base image). Registry A is authoritative for “samalba/busybox”
+    but keeps a copy of all inherited layers and serve them all from the same
+    location.</li>
+<li>registry contacts Docker Hub to verify if token/user is allowed to download images</li>
+<li>Docker Hub returns true/false lettings registry know if it should proceed or error
+    out</li>
+<li>Get the payload for all layers</li>
+</ol>
+<p>It's possible to run:</p>
+<pre class="prettyprint well"><code>$ sudo docker pull https://&lt;registry&gt;/repositories/samalba/busybox
+</code></pre>
+<p>In this case, Docker bypasses the Docker Hub. However the security is not
+guaranteed (in case Registry A is corrupted) because there won't be any
+checksum checks.</p>
+<p>Currently registry redirects to s3 urls for downloads, going forward all
+downloads need to be streamed through the registry. The Registry will
+then abstract the calls to S3 by a top-level class which implements
+sub-classes for S3 and local storage.</p>
+<p>Token is only returned when the <code>X-Docker-Token</code>
+header is sent with request.</p>
+<p>Basic Auth is required to pull private repos. Basic auth isn't required
+for pulling public repos, but if one is provided, it needs to be valid
+and for an active account.</p>
+<p><strong>API (pulling repository foo/bar):</strong></p>
+<ol>
+<li>(Docker -&gt; Docker Hub) GET /v1/repositories/foo/bar/images:</li>
+</ol>
+<p><strong>Headers</strong>:</p>
+<pre class="prettyprint well"><code>    Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+    X-Docker-Token: true
+</code></pre>
+<p><strong>Action</strong>:</p>
+<pre class="prettyprint well"><code>    (looking up the foo/bar in db and gets images and checksums
+    for that repo (all if no tag is specified, if tag, only
+    checksums for those tags) see part 4.4.1)
+</code></pre>
+<ol>
+<li>(Docker Hub -&gt; Docker) HTTP 200 OK</li>
+</ol>
+<p><strong>Headers</strong>:</p>
+<pre class="prettyprint well"><code>    Authorization: Token
+    signature=123abc,repository=”foo/bar”,access=write
+    X-Docker-Endpoints: registry.docker.io [,registry2.docker.io]
+</code></pre>
+<p><strong>Body</strong>:</p>
+<pre class="prettyprint well"><code>    Jsonified checksums (see part 4.4.1)
+</code></pre>
+<ol>
+<li>(Docker -&gt; Registry) GET /v1/repositories/foo/bar/tags/latest</li>
+</ol>
+<p><strong>Headers</strong>:</p>
+<pre class="prettyprint well"><code>    Authorization: Token
+    signature=123abc,repository=”foo/bar”,access=write
+</code></pre>
+<ol>
+<li>(Registry -&gt; Docker Hub) GET /v1/repositories/foo/bar/images</li>
+</ol>
+<p><strong>Headers</strong>:</p>
+<pre class="prettyprint well"><code>    Authorization: Token
+    signature=123abc,repository=”foo/bar”,access=read
+</code></pre>
+<p><strong>Body</strong>:</p>
+<pre class="prettyprint well"><code>    &lt;ids and checksums in payload&gt;
+</code></pre>
+<p><strong>Action</strong>:</p>
+<pre class="prettyprint well"><code>    (Lookup token see if they have access to pull.)
+
+    If good:
+    HTTP 200 OK Docker Hub will invalidate the token
+
+    If bad:
+    HTTP 401 Unauthorized
+</code></pre>
+<ol>
+<li>(Docker -&gt; Registry) GET /v1/images/928374982374/ancestry</li>
+</ol>
+<p><strong>Action</strong>:</p>
+<pre class="prettyprint well"><code>    (for each image id returned in the registry, fetch /json + /layer)
+</code></pre>
+<blockquote>
+<p><strong>Note</strong>:
+If someone makes a second request, then we will always give a new token,
+never reuse tokens.</p>
+</blockquote>
+<h3 id="push">Push</h3>
+<p><img alt="" src="/static_files/docker_push_chart.png" /></p>
+<ol>
+<li>Contact the Docker Hub to allocate the repository name “samalba/busybox”
+    (authentication required with user credentials)</li>
+<li>If authentication works and namespace available, “samalba/busybox”
+    is allocated and a temporary token is returned (namespace is marked
+    as initialized in Docker Hub)</li>
+<li>Push the image on the registry (along with the token)</li>
+<li>Registry A contacts the Docker Hub to verify the token (token must
+    corresponds to the repository name)</li>
+<li>Docker Hub validates the token. Registry A starts reading the stream
+    pushed by docker and store the repository (with its images)</li>
+<li>docker contacts the Docker Hub to give checksums for upload images</li>
+</ol>
+<blockquote>
+<p><strong>Note:</strong>
+<strong>It's possible not to use the Docker Hub at all!</strong> In this case, a deployed
+version of the Registry is deployed to store and serve images. Those
+images are not authenticated and the security is not guaranteed.</p>
+<p><strong>Note:</strong>
+<strong>Docker Hub can be replaced!</strong> For a private Registry deployed, a custom
+Docker Hub can be used to serve and validate token according to different
+policies.</p>
+</blockquote>
+<p>Docker computes the checksums and submit them to the Docker Hub at the end of
+the push. When a repository name does not have checksums on the Docker Hub,
+it means that the push is in progress (since checksums are submitted at
+the end).</p>
+<p><strong>API (pushing repos foo/bar):</strong></p>
+<ol>
+<li>(Docker -&gt; Docker Hub) PUT /v1/repositories/foo/bar/</li>
+</ol>
+<p><strong>Headers</strong>:</p>
+<pre class="prettyprint well"><code>    Authorization: Basic sdkjfskdjfhsdkjfh== X-Docker-Token:
+    true
+</code></pre>
+<p><strong>Action</strong>:</p>
+<ul>
+<li>in Docker Hub, we allocated a new repository, and set to
+  initialized</li>
+</ul>
+<p><strong>Body</strong>:</p>
+<p>(The body contains the list of images that are going to be
+pushed, with empty checksums. The checksums will be set at
+the end of the push):</p>
+<pre class="prettyprint well"><code>    [{“id”: “9e89cc6f0bc3c38722009fe6857087b486531f9a779a0c17e3ed29dae8f12c4f”}]
+</code></pre>
+<ol>
+<li>(Docker Hub -&gt; Docker) 200 Created</li>
+</ol>
+<p><strong>Headers</strong>:</p>
+<pre class="prettyprint well"><code>    WWW-Authenticate: Token
+    signature=123abc,repository=”foo/bar”,access=write
+    X-Docker-Endpoints: registry.docker.io [, registry2.docker.io]
+</code></pre>
+<ol>
+<li>(Docker -&gt; Registry) PUT /v1/images/98765432_parent/json</li>
+</ol>
+<p><strong>Headers</strong>:</p>
+<pre class="prettyprint well"><code>    Authorization: Token
+    signature=123abc,repository=”foo/bar”,access=write
+</code></pre>
+<ol>
+<li>(Registry-&gt;Docker Hub) GET /v1/repositories/foo/bar/images</li>
+</ol>
+<p><strong>Headers</strong>:</p>
+<pre class="prettyprint well"><code>    Authorization: Token
+    signature=123abc,repository=”foo/bar”,access=write
+</code></pre>
+<p><strong>Action</strong>:</p>
+<ul>
+<li>Docker Hub:
+  will invalidate the token.</li>
+<li>
+<p>Registry:
+  grants a session (if token is approved) and fetches
+  the images id</p>
+</li>
+<li>
+<p>(Docker -&gt; Registry) PUT /v1/images/98765432_parent/json</p>
+</li>
+</ul>
+<p><strong>Headers</strong>:</p>
+<pre class="prettyprint well"><code>    Authorization: Token
+    signature=123abc,repository=”foo/bar”,access=write
+    Cookie: (Cookie provided by the Registry)
+</code></pre>
+<ol>
+<li>(Docker -&gt; Registry) PUT /v1/images/98765432/json</li>
+</ol>
+<p><strong>Headers</strong>:</p>
+<pre class="prettyprint well"><code>    Cookie: (Cookie provided by the Registry)
+</code></pre>
+<ol>
+<li>(Docker -&gt; Registry) PUT /v1/images/98765432_parent/layer</li>
+</ol>
+<p><strong>Headers</strong>:</p>
+<pre class="prettyprint well"><code>    Cookie: (Cookie provided by the Registry)
+</code></pre>
+<ol>
+<li>(Docker -&gt; Registry) PUT /v1/images/98765432/layer</li>
+</ol>
+<p><strong>Headers</strong>:</p>
+<pre class="prettyprint well"><code>    X-Docker-Checksum: sha256:436745873465fdjkhdfjkgh
+</code></pre>
+<ol>
+<li>(Docker -&gt; Registry) PUT /v1/repositories/foo/bar/tags/latest</li>
+</ol>
+<p><strong>Headers</strong>:</p>
+<pre class="prettyprint well"><code>    Cookie: (Cookie provided by the Registry)
+</code></pre>
+<p><strong>Body</strong>:</p>
+<pre class="prettyprint well"><code>    “98765432”
+</code></pre>
+<ol>
+<li>(Docker -&gt; Docker Hub) PUT /v1/repositories/foo/bar/images</li>
+</ol>
+<p><strong>Headers</strong>:</p>
+<pre class="prettyprint well"><code>    Authorization: Basic 123oislifjsldfj== X-Docker-Endpoints:
+    registry1.docker.io (no validation on this right now)
+</code></pre>
+<p><strong>Body</strong>:</p>
+<pre class="prettyprint well"><code>    (The image, id`s, tags and checksums)
+    [{“id”:
+    “9e89cc6f0bc3c38722009fe6857087b486531f9a779a0c17e3ed29dae8f12c4f”,
+    “checksum”:
+    “b486531f9a779a0c17e3ed29dae8f12c4f9e89cc6f0bc3c38722009fe6857087”}]
+</code></pre>
+<p><strong>Return</strong>:</p>
+<pre class="prettyprint well"><code>    HTTP 204
+</code></pre>
+<blockquote>
+<p><strong>Note:</strong> If push fails and they need to start again, what happens in the Docker Hub,
+there will already be a record for the namespace/name, but it will be
+initialized. Should we allow it, or mark as name already used? One edge
+case could be if someone pushes the same thing at the same time with two
+different shells.</p>
+</blockquote>
+<p>If it's a retry on the Registry, Docker has a cookie (provided by the
+registry after token validation). So the Docker Hub won't have to provide a
+new token.</p>
+<h3 id="delete">Delete</h3>
+<p>If you need to delete something from the Docker Hub or registry, we need a
+nice clean way to do that. Here is the workflow.</p>
+<ol>
+<li>Docker contacts the Docker Hub to request a delete of a repository
+    <code>samalba/busybox</code> (authentication required with user credentials)</li>
+<li>If authentication works and repository is valid, <code>samalba/busybox</code>
+    is marked as deleted and a temporary token is returned</li>
+<li>Send a delete request to the registry for the repository (along with
+    the token)</li>
+<li>Registry A contacts the Docker Hub to verify the token (token must
+    corresponds to the repository name)</li>
+<li>Docker Hub validates the token. Registry A deletes the repository and
+    everything associated to it.</li>
+<li>docker contacts the Docker Hub to let it know it was removed from the
+    registry, the Docker Hub removes all records from the database.</li>
+</ol>
+<blockquote>
+<p><strong>Note</strong>:
+The Docker client should present an "Are you sure?" prompt to confirm
+the deletion before starting the process. Once it starts it can't be
+undone.</p>
+</blockquote>
+<p><strong>API (deleting repository foo/bar):</strong></p>
+<ol>
+<li>(Docker -&gt; Docker Hub) DELETE /v1/repositories/foo/bar/</li>
+</ol>
+<p><strong>Headers</strong>:</p>
+<pre class="prettyprint well"><code>    Authorization: Basic sdkjfskdjfhsdkjfh== X-Docker-Token:
+    true
+</code></pre>
+<p><strong>Action</strong>:</p>
+<ul>
+<li>in Docker Hub, we make sure it is a valid repository, and set
+  to deleted (logically)</li>
+</ul>
+<p><strong>Body</strong>:</p>
+<pre class="prettyprint well"><code>    Empty
+</code></pre>
+<ol>
+<li>(Docker Hub -&gt; Docker) 202 Accepted</li>
+</ol>
+<p><strong>Headers</strong>:</p>
+<pre class="prettyprint well"><code>    WWW-Authenticate: Token
+    signature=123abc,repository=”foo/bar”,access=delete
+    X-Docker-Endpoints: registry.docker.io [, registry2.docker.io]
+    # list of endpoints where this repo lives.
+</code></pre>
+<ol>
+<li>(Docker -&gt; Registry) DELETE /v1/repositories/foo/bar/</li>
+</ol>
+<p><strong>Headers</strong>:</p>
+<pre class="prettyprint well"><code>    Authorization: Token
+    signature=123abc,repository=”foo/bar”,access=delete
+</code></pre>
+<ol>
+<li>(Registry-&gt;Docker Hub) PUT /v1/repositories/foo/bar/auth</li>
+</ol>
+<p><strong>Headers</strong>:</p>
+<pre class="prettyprint well"><code>    Authorization: Token
+    signature=123abc,repository=”foo/bar”,access=delete
+</code></pre>
+<p><strong>Action</strong>:</p>
+<ul>
+<li>Docker Hub:
+  will invalidate the token.</li>
+<li>
+<p>Registry:
+  deletes the repository (if token is approved)</p>
+</li>
+<li>
+<p>(Registry -&gt; Docker) 200 OK</p>
+<pre class="prettyprint well"><code>200 If success 403 if forbidden 400 if bad request 404
+if repository isn't found
+</code></pre>
+</li>
+<li>
+<p>(Docker -&gt; Docker Hub) DELETE /v1/repositories/foo/bar/</p>
+</li>
+</ul>
+<p><strong>Headers</strong>:</p>
+<pre class="prettyprint well"><code>    Authorization: Basic 123oislifjsldfj== X-Docker-Endpoints:
+    registry-1.docker.io (no validation on this right now)
+</code></pre>
+<p><strong>Body</strong>:</p>
+<pre class="prettyprint well"><code>    Empty
+</code></pre>
+<p><strong>Return</strong>:</p>
+<pre class="prettyprint well"><code>    HTTP 200
+</code></pre>
+<h2 id="how-to-use-the-registry-in-standalone-mode">How to use the Registry in standalone mode</h2>
+<p>The Docker Hub has two main purposes (along with its fancy social features):</p>
+<ul>
+<li>
+<p>Resolve short names (to avoid passing absolute URLs all the time):</p>
+<p>username/projectname -&gt;
+https://registry.docker.io/users/<username>/repositories/<projectname>/
+team/projectname -&gt;
+https://registry.docker.io/team/<team>/repositories/<projectname>/</p>
+</li>
+<li>
+<p>Authenticate a user as a repos owner (for a central referenced
+    repository)</p>
+</li>
+</ul>
+<h3 id="without-a-docker-hub">Without a Docker Hub</h3>
+<p>Using the Registry without the Docker Hub can be useful to store the images
+on a private network without having to rely on an external entity
+controlled by Docker Inc.</p>
+<p>In this case, the registry will be launched in a special mode
+(-standalone? ne? -no-index?). In this mode, the only thing which changes is
+that Registry will never contact the Docker Hub to verify a token. It will be
+the Registry owner responsibility to authenticate the user who pushes
+(or even pulls) an image using any mechanism (HTTP auth, IP based,
+etc...).</p>
+<p>In this scenario, the Registry is responsible for the security in case
+of data corruption since the checksums are not delivered by a trusted
+entity.</p>
+<p>As hinted previously, a standalone registry can also be implemented by
+any HTTP server handling GET/PUT requests (or even only GET requests if
+no write access is necessary).</p>
+<h3 id="with-a-docker-hub">With a Docker Hub</h3>
+<p>The Docker Hub data needed by the Registry are simple:</p>
+<ul>
+<li>Serve the checksums</li>
+<li>Provide and authorize a Token</li>
+</ul>
+<p>In the scenario of a Registry running on a private network with the need
+of centralizing and authorizing, it's easy to use a custom Docker Hub.</p>
+<p>The only challenge will be to tell Docker to contact (and trust) this
+custom Docker Hub. Docker will be configurable at some point to use a
+specific Docker Hub, it'll be the private entity responsibility (basically
+the organization who uses Docker in a private environment) to maintain
+the Docker Hub and the Docker's configuration among its consumers.</p>
+<h2 id="the-api">The API</h2>
+<p>The first version of the api is available here:
+<a href="https://github.com/jpetazzo/docker/blob/acd51ecea8f5d3c02b00a08176171c59442df8b3/docs/images-repositories-push-pull.md">https://github.com/jpetazzo/docker/blob/acd51ecea8f5d3c02b00a08176171c59442df8b3/docs/images-repositories-push-pull.md</a></p>
+<h3 id="images">Images</h3>
+<p>The format returned in the images is not defined here (for layer and
+JSON), basically because Registry stores exactly the same kind of
+information as Docker uses to manage them.</p>
+<p>The format of ancestry is a line-separated list of image ids, in age
+order, i.e. the image's parent is on the last line, the parent of the
+parent on the next-to-last line, etc.; if the image has no parent, the
+file is empty.</p>
+<pre class="prettyprint well"><code>GET /v1/images/&lt;image_id&gt;/layer
+PUT /v1/images/&lt;image_id&gt;/layer
+GET /v1/images/&lt;image_id&gt;/json
+PUT /v1/images/&lt;image_id&gt;/json
+GET /v1/images/&lt;image_id&gt;/ancestry
+PUT /v1/images/&lt;image_id&gt;/ancestry
+</code></pre>
+<h3 id="users">Users</h3>
+<h3 id="create-a-user-docker-hub">Create a user (Docker Hub)</h3>
+<pre class="prettyprint well"><code>POST /v1/users:
+</code></pre>
+<p><strong>Body</strong>:</p>
+<pre class="prettyprint well"><code>{"email": "[sam@docker.com](mailto:sam%40docker.com)",
+"password": "toto42", "username": "foobar"`}
+</code></pre>
+<p><strong>Validation</strong>:</p>
+<ul>
+<li><strong>username</strong>: min 4 character, max 30 characters, must match the
+  regular expression [a-z0-9_].</li>
+<li><strong>password</strong>: min 5 characters</li>
+</ul>
+<p><strong>Valid</strong>:</p>
+<pre class="prettyprint well"><code> return HTTP 201
+</code></pre>
+<p>Errors: HTTP 400 (we should create error codes for possible errors) -
+invalid json - missing field - wrong format (username, password, email,
+etc) - forbidden name - name already exists</p>
+<blockquote>
+<p><strong>Note</strong>:
+A user account will be valid only if the email has been validated (a
+validation link is sent to the email address).</p>
+</blockquote>
+<h3 id="update-a-user-docker-hub">Update a user (Docker Hub)</h3>
+<pre class="prettyprint well"><code>PUT /v1/users/&lt;username&gt;
+</code></pre>
+<p><strong>Body</strong>:</p>
+<pre class="prettyprint well"><code>{"password": "toto"}
+</code></pre>
+<blockquote>
+<p><strong>Note</strong>:
+We can also update email address, if they do, they will need to reverify
+their new email address.</p>
+</blockquote>
+<h3 id="login-docker-hub">Login (Docker Hub)</h3>
+<p>Does nothing else but asking for a user authentication. Can be used to
+validate credentials. HTTP Basic Auth for now, maybe change in future.</p>
+<p>GET /v1/users</p>
+<p><strong>Return</strong>:
+- Valid: HTTP 200
+- Invalid login: HTTP 401
+- Account inactive: HTTP 403 Account is not Active</p>
+<h3 id="tags-registry">Tags (Registry)</h3>
+<p>The Registry does not know anything about users. Even though
+repositories are under usernames, it's just a namespace for the
+registry. Allowing us to implement organizations or different namespaces
+per user later, without modifying the Registry's API.</p>
+<p>The following naming restrictions apply:</p>
+<ul>
+<li>Namespaces must match the same regular expression as usernames (See
+    4.2.1.)</li>
+<li>Repository names must match the regular expression [a-zA-Z0-9-_.]</li>
+</ul>
+<h3 id="get-all-tags">Get all tags:</h3>
+<pre class="prettyprint well"><code>GET /v1/repositories/&lt;namespace&gt;/&lt;repository_name&gt;/tags
+
+**Return**: HTTP 200
+[
+    {
+        "layer": "9e89cc6f",
+        "name": "latest"
+    },
+    {
+        "layer": "b486531f",
+        "name": "0.1.1",
+    }
+]
+</code></pre>
+<p><strong>4.3.2 Read the content of a tag (resolve the image id):</strong></p>
+<pre class="prettyprint well"><code>GET /v1/repositories/&lt;namespace&gt;/&lt;repo_name&gt;/tags/&lt;tag&gt;
+</code></pre>
+<p><strong>Return</strong>:</p>
+<pre class="prettyprint well"><code>"9e89cc6f0bc3c38722009fe6857087b486531f9a779a0c17e3ed29dae8f12c4f"
+</code></pre>
+<p><strong>4.3.3 Delete a tag (registry):</strong></p>
+<pre class="prettyprint well"><code>DELETE /v1/repositories/&lt;namespace&gt;/&lt;repo_name&gt;/tags/&lt;tag&gt;
+</code></pre>
+<h3 id="44-images-docker-hub">4.4 Images (Docker Hub)</h3>
+<p>For the Docker Hub to “resolve” the repository name to a Registry location,
+it uses the X-Docker-Endpoints header. In other terms, this requests
+always add a <code>X-Docker-Endpoints</code> to indicate the
+location of the registry which hosts this repository.</p>
+<p><strong>4.4.1 Get the images:</strong></p>
+<pre class="prettyprint well"><code>GET /v1/repositories/&lt;namespace&gt;/&lt;repo_name&gt;/images
+
+**Return**: HTTP 200
+[{“id”:
+“9e89cc6f0bc3c38722009fe6857087b486531f9a779a0c17e3ed29dae8f12c4f”,
+“checksum”:
+“[md5:b486531f9a779a0c17e3ed29dae8f12c4f9e89cc6f0bc3c38722009fe6857087](md5:b486531f9a779a0c17e3ed29dae8f12c4f9e89cc6f0bc3c38722009fe6857087)”}]
+</code></pre>
+<h3 id="addupdate-the-images">Add/update the images:</h3>
+<p>You always add images, you never remove them.</p>
+<pre class="prettyprint well"><code>PUT /v1/repositories/&lt;namespace&gt;/&lt;repo_name&gt;/images
+</code></pre>
+<p><strong>Body</strong>:</p>
+<pre class="prettyprint well"><code>[ {“id”:
+“9e89cc6f0bc3c38722009fe6857087b486531f9a779a0c17e3ed29dae8f12c4f”,
+“checksum”:
+“sha256:b486531f9a779a0c17e3ed29dae8f12c4f9e89cc6f0bc3c38722009fe6857087”}
+]
+</code></pre>
+<p><strong>Return</strong>:</p>
+<pre class="prettyprint well"><code>204
+</code></pre>
+<h3 id="repositories">Repositories</h3>
+<h3 id="remove-a-repository-registry">Remove a Repository (Registry)</h3>
+<p>DELETE /v1/repositories/<namespace>/<repo_name></p>
+<p>Return 200 OK</p>
+<h3 id="remove-a-repository-docker-hub">Remove a Repository (Docker Hub)</h3>
+<p>This starts the delete process. see 2.3 for more details.</p>
+<p>DELETE /v1/repositories/<namespace>/<repo_name></p>
+<p>Return 202 OK</p>
+<h2 id="chaining-registries">Chaining Registries</h2>
+<p>It's possible to chain Registries server for several reasons:</p>
+<ul>
+<li>Load balancing</li>
+<li>Delegate the next request to another server</li>
+</ul>
+<p>When a Registry is a reference for a repository, it should host the
+entire images chain in order to avoid breaking the chain during the
+download.</p>
+<p>The Docker Hub and Registry use this mechanism to redirect on one or the
+other.</p>
+<p>Example with an image download:</p>
+<p>On every request, a special header can be returned:</p>
+<pre class="prettyprint well"><code>X-Docker-Endpoints: server1,server2
+</code></pre>
+<p>On the next request, the client will always pick a server from this
+list.</p>
+<h2 id="authentication-authorization">Authentication &amp; Authorization</h2>
+<h3 id="on-the-docker-hub">On the Docker Hub</h3>
+<p>The Docker Hub supports both “Basic” and “Token” challenges. Usually when
+there is a <code>401 Unauthorized</code>, the Docker Hub replies
+this:</p>
+<pre class="prettyprint well"><code>401 Unauthorized
+WWW-Authenticate: Basic realm="auth required",Token
+</code></pre>
+<p>You have 3 options:</p>
+<ol>
+<li>Provide user credentials and ask for a token</li>
+</ol>
+<p><strong>Header</strong>:</p>
+<pre class="prettyprint well"><code>    Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+    X-Docker-Token: true
+</code></pre>
+<p>In this case, along with the 200 response, you'll get a new token
+(if user auth is ok): If authorization isn't correct you get a 401
+response. If account isn't active you will get a 403 response.</p>
+<p><strong>Response</strong>:</p>
+<pre class="prettyprint well"><code>    200 OK
+    X-Docker-Token: Token
+    signature=123abc,repository=”foo/bar”,access=read
+</code></pre>
+<ol>
+<li>Provide user credentials only</li>
+</ol>
+<p><strong>Header</strong>:</p>
+<pre class="prettyprint well"><code>    Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+</code></pre>
+<ol>
+<li>Provide Token</li>
+</ol>
+<p><strong>Header</strong>:</p>
+<pre class="prettyprint well"><code>    Authorization: Token
+    signature=123abc,repository=”foo/bar”,access=read
+</code></pre>
+<h3 id="62-on-the-registry">6.2 On the Registry</h3>
+<p>The Registry only supports the Token challenge:</p>
+<pre class="prettyprint well"><code>401 Unauthorized
+WWW-Authenticate: Token
+</code></pre>
+<p>The only way is to provide a token on <code>401 Unauthorized</code>
+responses:</p>
+<pre class="prettyprint well"><code>Authorization: Token signature=123abc,repository="foo/bar",access=read
+</code></pre>
+<p>Usually, the Registry provides a Cookie when a Token verification
+succeeded. Every time the Registry passes a Cookie, you have to pass it
+back the same cookie.:</p>
+<pre class="prettyprint well"><code>200 OK
+Set-Cookie: session="wD/J7LqL5ctqw8haL10vgfhrb2Q=?foo=UydiYXInCnAxCi4=&amp;timestamp=RjEzNjYzMTQ5NDcuNDc0NjQzCi4="; Path=/; HttpOnly
+</code></pre>
+<p>Next request:</p>
+<pre class="prettyprint well"><code>GET /(...)
+Cookie: session="wD/J7LqL5ctqw8haL10vgfhrb2Q=?foo=UydiYXInCnAxCi4=&amp;timestamp=RjEzNjYzMTQ5NDcuNDc0NjQzCi4="
+</code></pre>
+<h2 id="document-version">Document Version</h2>
+<ul>
+<li>1.0 : May 6th 2013 : initial release</li>
+<li>1.1 : June 1st 2013 : Added Delete Repository and way to handle new
+    source namespace.</li>
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="push-footer"></div>
+
+</div>
+
+
+
+<div id="footer-container" class="container">
+  <div id="footer" class="grey-body">
+    <div class="row">
+      <div class="span2">
+        <span class="footer-title">Community</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/community/events/">Events</a></li>
+          <li><a class="primary-button" href="http://posts.docker.com">Friends' Posts</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/community/meetups/">Meetups</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/community/governance/">Governance</a></li>
+          <li><a class="primary-button" href="http://forums.docker.com">Forums</a></li>
+          <li><a class="primary-button" href="http://botbot.me/freenode/docker">IRC</a></li>
+          <li><a class="primary-button" href="https://github.com/docker/docker">GitHub</a></li>
+          <li><a class="primary-button" href="http://stackoverflow.com/search?q=docker">Stackoverflow</a></li>
+          <li><a class="primary-button" href="http://www.cafepress.com/docker">Swag</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <span class="footer-title">Enterprise</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/enterprise/support/">Support</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/enterprise/education/">Education</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/enterprise/services/">Services</a></li>
+        </ul>
+        <span class="footer-title">Partner Solutions</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/partners/find/">Find a Partner</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/partners/program/">Partner Program</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/partners/learn/">Learn More</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <span class="footer-title">Resources</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://docs.docker.com">Documentation</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/help/">Help</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/usecases/">Use Cases</a></li>
+          <li><a class="primary-button" href="http://www.docker.com/tryit/">Online Tutorial</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/howtobuy/">How To Buy</a></li>
+          <li><a class="primary-button" href="http://status.docker.com">Status</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/security/">Security</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <span class="footer-title">Company</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/company/aboutus/">About Us</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/team/">Team</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/news/">News</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/press/">Press</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/careers/">Careers</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/contact/">Contact</a></li>
+        </ul>
+      </div>
+      <div class="span3">
+        <span class="footer-title">Connect</span>
+        <div class="search">
+          <span>Subscribe to our newsletter</span>
+          <form action="https://www.docker.com/subscribe_newsletter/" method="post">
+            <input type='hidden' name='csrfmiddlewaretoken' value='aWL78QXQkY8DSKNYh6cl08p5eTLl7sOa' />
+            <tr><th><label for="id_email">Email:</label></th><td><input class="form-control" id="id_email" name="email" placeholder="Enter your email" type="text" /></td></tr>
+            
+            <button type="submit"><i class="icon-arrow-right"></i> </button>
+          </form>
+        </div>
+        <ul class="unstyled social">
+          <li><a title="Docker on Twitter" class="primary-button blog" href="http://blog.docker.com">Blog</a></li>
+          <li><a title="Docker on Twitter" class="primary-button twitter" href="http://twitter.com/docker">Twitter</a></li>
+          <li><a title="Docker on Google+" class="primary-button googleplus" href="https://plus.google.com/u/0/communities/108146856671494713993">Google+</a></li>
+          <li><a title="Docker on Facebook" class="primary-button facebook" href="https://www.facebook.com/docker.run">Facebook</a></li>
+          <li><a title="Docker on Youtube" class="primary-button youtube" href="http://www.youtube.com/user/dockerrun">YouTube</a></li>
+        </ul>
+        <ul class="unstyled social">
+          <li><a title="Docker on SlideShare" class="primary-button slideshare" href="http://www.slideshare.net/Docker">Slideshare</a></li>
+          <li>
+             <a title="Docker on LinkedIn" class="primary-button" href="https://www.linkedin.com/company/docker">
+                 <span class="linkedin"></span>
+                 LinkedIn
+             </a>
+          </li>
+          <li>
+              <a title="Docker on GitHub" class="primary-button" href="https://github.com/docker/">
+                  <span class="github"></span>
+                  GitHub
+              </a>
+          </li>
+          <li>
+              <a title="Docker on Reddit" class="primary-button" href="http://www.reddit.com/r/docker">
+                  <span class="reddit"></span>
+                  Reddit
+              </a>
+          </li>
+          <li>
+              <a title="Docker on AngelList" class="primary-button" href="https://angel.co/docker-inc-1">
+                  <span class="angellist"></span>
+                  AngelList
+              </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="span6 pagination-right copyright">
+        <span>&copy; 2014-2015 Docker, Inc.</span>
+      </div>
+      <div class="span6 pagination-left copyright">
+        <a href="http://www.docker.com/legal/terms_of_service">Terms</a> &middot;
+        <a href="http://www.docker.com/legal/privacy_policy">Privacy</a> &middot;
+        <a href="http://www.docker.com/legal/trademark_guidelines">Trademarks</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/js/jquery-1.10.2.min.js"></script>
+<script src="/js/jquery.cookie.js" ></script>
+<script src="/js/jquery-scrolltofixed-min.js"></script>
+<script src="/js/bootstrap-3.0.3.min.js"></script>
+<script src="/js/prettify-1.0.min.js"></script>
+<script src="/js/dockerfile_tutorial.js"></script>
+<script src="/js/dockerfile_tutorial_level.js"></script>
+<script src="/js/base.js"></script>
+<script src="/tipuesearch/tipuesearch_set.js"></script>
+<script src="/tipuesearch/tipuesearch.min.js"></script>
+<script type="text/javascript">
+piAId = '45082';
+piCId = '1482';
+
+(function() {
+  function async_load(){
+    var s = document.createElement('script'); s.type = 'text/javascript';
+    s.src = ('https:' == document.location.protocol ? 'https://pi' : 'http://cdn') + '.pardot.com/pd.js';
+    var c = document.getElementsByTagName('script')[0]; c.parentNode.insertBefore(s, c);
+  }
+  if(window.attachEvent) { window.attachEvent('onload', async_load); }
+  else { window.addEventListener('load', async_load, false); }
+})();
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#content').css("min-height", $(window).height() - 553 );
+    // if the URL contains a version string, update the version picker to reflect that
+    version = document.location.pathname.match(/^\/(v\d\.\d)\/.*/)
+    if (version && version[1]) {
+        $('#document-version-number')[0].text = 'Version '+version[1];
+    } else {
+        $('#document-version-number')[0].text = $('#document-version-number')[0].text + " (Latest)"
+    }
+    // load the complete versions list
+    $.get("/versions.html_fragment", function( data ) {
+    	$('#documentation-version-list').prepend(data);
+	//remove any "/v1.1/" bits from front, so we can add the path to the version selection dropdown.
+	path = document.location.pathname.replace(/^\/v\d\.\d/, "");
+	$('#documentation-version-list a.version').each(function(i, e) {
+		e.href = e.href+path;
+		$(e).removeClass()
+	});
+    });
+
+  })
+  var userName = getCookie('docker_sso_username');
+  if (userName) {
+    $('.topmostnav_loggedout').hide();
+    $('.topmostnav_loggedin').show();
+    $('#logged-in-header-username').text(userName);
+  } else {
+    $('.topmostnav_loggedout').show();
+    $('.topmostnav_loggedin').hide();
+  }
+</script>
+</body>
+</html>
