@@ -1,0 +1,1537 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://docs.docker.com/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/apidocs/v1.3.3/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/apidocs/v1.3.3/o2c/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/apidocs/v1.4.0/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/apidocs/v1.4.0/o2c/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/compose/README/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/registry/spec/implementations/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/registry/spec/manifest-v2-1/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/userguide/storagedriver/aufs-driver/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/misc/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/docker-trusted-registry/accounts/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/docker-trusted-registry/adminguide/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/opensource/workflow/advanced-contributing/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/registry/storage-drivers/oss/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/logging/awslogs/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/installation/amazon/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/drivers/aws/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/examples/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/userguide/labels-custom-metadata/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/registry/apache/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/registry/nginx/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/docker-hub/builds/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/docker-hub/github/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/docker-hub/bitbucket/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/articles/host_integration/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/security/trust/trust_automation/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/articles/dockerfile_best-practices/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/userguide/networking/default_network/binding/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/opensource/governance/board-profiles/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/userguide/storagedriver/btrfs-driver/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/registry/building/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/userguide/networking/default_network/build-bridges/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/linux/step_four/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/mac/step_four/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/windows/step_four/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/userguide/dockerimages/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/registry/storage-drivers/rados/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/opensource/governance/conduct-code/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/opensource/workflow/coding-style/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/compose/completion/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/completion/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/compose/reference/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/compose/env/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/compose/compose-file/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/docker-trusted-registry/configuration/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/opensource/project/set-up-git/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/userguide/networking/default_network/configure-dns/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/logging/overview/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/registry/configuration/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/articles/configuring/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/security/trust/content_trust/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/opensource/kitematic/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/opensource/workflow/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/articles/systemd/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/mac/step_five/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/windows/step_five/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/linux/step_five/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/articles/baseimages/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/opensource/kitematic/create_pr/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/opensource/workflow/create-pr/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/swarm/install-manual/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/kitematic/rethinkdb-dev-database/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/userguide/networking/default_network/custom-docker0/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/userguide/networking/default_network/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/security/trust/deploying_notary/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/registry/deploying/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/opensource/kitematic/work_issue/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/drivers/digital-ocean/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/compose/install/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/misc/deprecated/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/glossary/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/opensource/governance/dgab-info/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/api/docker-io_api/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/install-machine/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/registry/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/release-notes/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/swarm/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/swarm/install-w-machine/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/swarm/api/swarm-api/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/swarm/networking/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/swarm/scheduler/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/swarm/discovery/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/swarm/scheduler/filter/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/swarm/scheduler/strategy/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/userguide/networking/dockernetworks/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/extend/plugins_network/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/run/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/articles/security/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/userguide/storagedriver/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/builder/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/examples/mongodb/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/examples/postgresql_service/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/examples/couchdb_data_volumes/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/examples/nodejs_web_app/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/examples/running_redis_service/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/examples/running_riak_service/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/examples/running_ssh_service/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/examples/apt-cacher-ng/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/drivers/os-base/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/drivers/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/extend/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/extend/plugins/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/compose/extends/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/misc/faq/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/opensource/FAQ/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/registry/storage-drivers/filesystem/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/linux/step_three/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/mac/step_three/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/windows/step_three/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/opensource/kitematic/find_issue/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/opensource/workflow/find-an-issue/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/logging/fluentd/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/compose/faq/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/kitematic/faq/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/registry/storage-drivers/gcs/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/drivers/generic/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/linux/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/mac/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/windows/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/opensource/kitematic/get_started/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/get-started/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/userguide/networking/get-started-overlay/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/opensource/project/software-required/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/compose/gettingstarted/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/registry/help/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/drivers/gce/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/opensource/governance/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/registry/spec/api/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/userguide/dockerizing/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/swarm/multi-manager-setup/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/drivers/soft-layer/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/userguide/networking/default_network/ipv6/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/userguide/image_management/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/registry/storage-drivers/inmemory/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/linux/step_one/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/docker-trusted-registry/install/engine-ami-launch/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/docker-trusted-registry/install/dtr-ami-byol-launch/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/windows/step_one/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/mac/step_one/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/docker-trusted-registry/install/dtr-ami-bds-launch/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/docker-trusted-registry/install/dtr-vhd-azure/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/docker-trusted-registry/install/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/installation/binaries/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/installation/archlinux/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/installation/cruxlinux/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/installation/centos/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/installation/debian/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/installation/fedora/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/installation/frugalware/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/installation/gentoolinux/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/installation/google/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/installation/softlayer/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/installation/mac/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/installation/azure/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/installation/oracle/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/installation/rackspace/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/installation/rhel/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/installation/ubuntulinux/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/installation/windows/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/installation/SUSE/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/docker-hub/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/compose/reference/overview/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/installation/joyent/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/kitematic/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/kitematic/userguide/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/kitematic/known-issues/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/linux/last_page/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/mac/last_page/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/windows/last_page/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/userguide/networking/default_network/dockerlinks/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/articles/ambassador_pattern_linking/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/logging/log_tags/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/logging/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/userguide/dockervolumes/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/security/trust/trust_key_mng/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/docker-trusted-registry/install/install-csengine/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/docker-trusted-registry/install/install-dtr/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/drivers/azure/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/registry/storage-drivers/azure/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/drivers/hyper-v/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/migrate-to-machine/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/registry/mirror/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/userguide/networking/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/userguide/networkingcontainers/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/compose/networking/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/docker-hub/official_repos/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/opensource/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/drivers/openstack/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/drivers/virtualbox/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/opensource/ways/meetups/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/opensource/ways/issues/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/opensource/ways/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/userguide/storagedriver/overlayfs-driver/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/docker-trusted-registry/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/compose/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/opensource/workflow/review-pr/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/security/trust/trust_sandbox/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/extend/plugin_api/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/articles/dsc/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/docker-trusted-registry/prior-release-notes/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/articles/cfengine_process_management/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/articles/https/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/docker-trusted-registry/quick-start/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/compose/django/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/compose/rails/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/compose/wordpress/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/userguide/basics/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/opensource/code/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/opensource/project/who-written-for/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/drivers/rackspace/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/registry/recipes/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/docker-trusted-registry/release-notes/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/api/docker_remote_api/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/api/remote_api_client_libraries/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/api/docker_remote_api_v1.14/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/api/docker_remote_api_v1.15/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/api/docker_remote_api_v1.16/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/api/docker_remote_api_v1.17/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/api/docker_remote_api_v1.18/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/api/docker_remote_api_v1.19/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/api/docker_remote_api_v1.20/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/docker-trusted-registry/soft-garbage/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/docker-hub/repos/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/articles/registry_mirror/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/userguide/usingdocker/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/opensource/project/test-and-docs/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/registry/osx-setup-guide/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/articles/runmetrics/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/registry/storage-drivers/s3/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/userguide/storagedriver/selectadriver/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/kitematic/minecraft-server/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/kitematic/nginx-web-server/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/opensource/project/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/opensource/kitematic/set_up_dev/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/opensource/project/software-req-win/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/registry/storagedrivers/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/userguide/dockerrepos/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/opensource/doc-style/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/reference/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/docker-trusted-registry/support/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/opensource/ways/community/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/installation/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/registry/storage-drivers/swift/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/linux/step_six/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/mac/step_six/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/windows/step_six/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/docker-hub/orgs/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/registry/insecure/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/opensource/ways/test/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/api/hub_registry_spec/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/userguide/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/registry/spec/auth/jwt/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/registry/spec/auth/token/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/docker-trusted-registry/license/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/userguide/networking/default_network/container-communication/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/opensource/workflow/make-a-contribution/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/linux/step_two/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/mac/step_two/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/windows/step_two/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/userguide/storagedriver/imagesandcontainers/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/introduction/understanding-docker/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/registry/introduction/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/docker-trusted-registry/install/upgrade/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/cli/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/security/trust/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/docker-trusted-registry/userguide/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/articles/chef/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/compose/production/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/get-started-cloud/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/articles/puppet/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/articles/using_supervisord/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/articles/certificates/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/drivers/vm-fusion/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/drivers/vm-cloud/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/drivers/vsphere/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/extend/plugins_volume/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/docker-hub/webhooks/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/opensource/get-help/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/opensource/kitematic/next_steps/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/opensource/workflow/work-issue/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/opensource/project/set-up-dev-env/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/userguide/networking/work-with-networks/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/registry/notifications/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/docker-hub/accounts/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/userguide/storagedriver/zfs-driver/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/reference/active/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/attach/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/compose/reference/build/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/build/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/commit/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/reference/config/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/cp/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/create/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/reference/create/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/daemon/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/diff/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/compose/reference/docker-compose/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/api/docker_io_accounts_api/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/reference/env/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/events/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/exec/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/drivers/exoscale/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/export/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/compose/reference/help/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/reference/help/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/history/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/images/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/import/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/info/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/inspect/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/reference/inspect/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/reference/ip/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/logging/journald/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/compose/reference/kill/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/kill/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/reference/kill/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/load/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/login/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/logout/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/compose/reference/logs/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/logs/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/reference/ls/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/network_connect/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/network_create/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/network_disconnect/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/network_inspect/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/network_ls/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/network_rm/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/compose/reference/pause/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/pause/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/compose/reference/port/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/port/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/compose/reference/ps/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/ps/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/compose/reference/pull/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/pull/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/push/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/reference/regenerate-certs/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/rename/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/compose/reference/restart/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/restart/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/reference/restart/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/compose/reference/rm/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/rm/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/reference/rm/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/rmi/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/compose/reference/run/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/run/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/save/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/compose/reference/scale/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/reference/scp/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/search/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/reference/ssh/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/compose/reference/start/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/start/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/reference/start/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/stats/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/reference/status/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/compose/reference/stop/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/stop/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/reference/stop/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/tag/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/top/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/compose/reference/unpause/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/unpause/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/compose/reference/up/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/reference/upgrade/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/machine/reference/url/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/version/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/volume_create/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/volume_inspect/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/volume_ls/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/volume_rm/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/engine/reference/commandline/wait/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/apidocs/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/apidocs/overview/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/apidocs/v1.3.3/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docs.docker.com/apidocs/v1.4.0/</loc>
+  </url>
+  
+</urlset>

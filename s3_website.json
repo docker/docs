@@ -1,0 +1,54 @@
+{
+  "ErrorDocument": {
+    "Key": "404.html"
+  },
+  "IndexDocument": {
+    "Suffix": "index.html"
+  },
+  "RoutingRules": [
+    { "Condition": { "KeyPrefixEquals": "articles/networking" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "engine/userguide/networking" } },
+    { "Condition": { "KeyPrefixEquals": "article-img/" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "engine/article-img/" } },
+    { "Condition": { "KeyPrefixEquals": "articles/" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "engine/articles/" } },
+    { "Condition": { "KeyPrefixEquals": "examples/" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "engine/examples/" } },
+    { "Condition": { "KeyPrefixEquals": "extend/" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "engine/extend/" } },
+    { "Condition": { "KeyPrefixEquals": "installation/" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "engine/installation/" } },
+    { "Condition": { "KeyPrefixEquals": "introduction/" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "engine/introduction/" } },
+    { "Condition": { "KeyPrefixEquals": "misc/" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "engine/misc/" } },
+    { "Condition": { "KeyPrefixEquals": "project/" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "opensource/project/" } },
+    { "Condition": { "KeyPrefixEquals": "reference/" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "engine/reference/" } },
+    { "Condition": { "KeyPrefixEquals": "security/" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "engine/security/" } },
+    { "Condition": { "KeyPrefixEquals": "static_files/" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "engine/static_files/" } },
+    { "Condition": { "KeyPrefixEquals": "userguide/" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "engine/userguide/" } },
+
+    { "Condition": { "KeyPrefixEquals": "en/latest/installation/" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "engine/installation/" } },
+
+    { "Condition": { "KeyPrefixEquals": "docker-hub-enterprise/install/" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "docker-trusted-registry/install/" } },
+    { "Condition": { "KeyPrefixEquals": "docker-io/builds/" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "docker-hub/builds/" } },
+    { "Condition": { "KeyPrefixEquals": "docker-trusted-registry/license/install-csengine.md" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "docker-trusted-registry/install/install-csengine/" } },
+    { "Condition": { "KeyPrefixEquals": "engine/articles/basics/" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "engine/userguide/basics/" } },
+    { "Condition": { "KeyPrefixEquals": "engine/project/set-up-git/" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "opensource/project/set-up-git/" } },
+    { "Condition": { "KeyPrefixEquals": "engine/reference/articles/basics.md" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "engine/userguide/basics/" } },
+    { "Condition": { "KeyPrefixEquals": "engine/userguide/dockerlinks/" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "engine/userguide/networking/default_network/dockerlinks/" } },
+    { "Condition": { "KeyPrefixEquals": "installation/" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "engine/installation/" } },
+    { "Condition": { "KeyPrefixEquals": "networking/" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "engine/userguide/networking/" } },
+    { "Condition": { "KeyPrefixEquals": "opensource/project/advanced-contributing/" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "opensource/workflow/advanced-contributing/" } },
+    { "Condition": { "KeyPrefixEquals": "opensource/project/create-pr/" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "opensource/workflow/create-pr/" } },
+    { "Condition": { "KeyPrefixEquals": "opensource/project/find-an-issue/" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "opensource/workflow/find-an-issue/" } },
+    { "Condition": { "KeyPrefixEquals": "opensource/project/get-help/" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "opensource/get-help/" } },
+    { "Condition": { "KeyPrefixEquals": "opensource/project/make-a-contribution/" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "opensource/workflow/make-a-contribution/" } },
+    { "Condition": { "KeyPrefixEquals": "opensource/project/review-pr/" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "opensource/workflow/review-pr/" } },
+    { "Condition": { "KeyPrefixEquals": "opensource/project/work-issue/" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "opensource/workflow/work-issue/" } },
+    { "Condition": { "KeyPrefixEquals": "opensource/workflow/doc-style/" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "opensource/doc-style/" } },
+    { "Condition": { "KeyPrefixEquals": "opensource/workflow/get-help/" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "opensource/get-help/" } },
+    { "Condition": { "KeyPrefixEquals": "opensource/workflow/set-up-dev-env/" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "opensource/project/set-up-dev-env/" } },
+    { "Condition": { "KeyPrefixEquals": "opensource/workflow/set-up-git/" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "opensource/project/set-up-git/" } },
+    { "Condition": { "KeyPrefixEquals": "opensource/workflow/test-and-docs/" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "opensource/project/test-and-docs/" } },
+    { "Condition": { "KeyPrefixEquals": "userguide/" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "engine/userguide/" } },
+
+    { "Condition": { "KeyPrefixEquals": "docker-trusted-registry/adminguide/upgrade.md" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "docker-trusted-registry/install/upgrade/" } },
+    { "Condition": { "KeyPrefixEquals": "docker-trusted-registry/quick-start/install.md" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "docker-trusted-registry/install/" } },
+    { "Condition": { "KeyPrefixEquals": "docker-trusted-registry/adminguide/docker-trusted-registry/install.md" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "docker-trusted-registry/install/" } },
+
+    { "Condition": { "KeyPrefixEquals": "svendowideit" }, "Redirect": { "HostName": "$S3HOSTNAME", "ReplaceKeyPrefixWith": "examples/apt-cacher-ng/" } }
+  ]
+}

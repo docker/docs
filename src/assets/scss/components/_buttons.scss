@@ -1,0 +1,8 @@
+.button {
+	border-radius: $global-radius;
+}
+
+.button.white {
+	color: $primary-color;
+	background: #fff;
+}

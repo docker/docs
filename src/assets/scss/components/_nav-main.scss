@@ -1,0 +1,47 @@
+.nav-main {
+	@include inline-list;
+	float: right;
+	margin-bottom: 0;
+	overflow: visible;
+	@media #{$small-only} {display: none;}
+	@media #{$medium-only} {display: none;}
+	> li {
+		position: relative;
+		ul {
+			position: absolute;
+			margin: 0;
+			list-style: none;
+			border: 1px solid #ddd;
+			min-width: 175px;
+			transition: all .5s ease;
+			border-radius: $global-radius;
+			overflow: hidden;
+			float: left;
+			display: none;
+			a {
+				display: block;
+				font-size: rem-calc(13);
+				background: #fff;
+				border-bottom: 1px solid #ddd;
+				padding: 6px 8px;
+				&:hover {background: #fafafa;}
+				&:last-child {
+					border-bottom: 0 solid #ddd;
+				}
+			}
+		}
+		&:hover ul {
+			display: block;
+		}
+	}
+	a {
+		font-size: rem-calc(17);
+		font-weight: 500;
+		color: #394d54;
+		@extend %primary-transition;
+		@media only screen and (min-width: 1150px) {
+			padding: 0 rem-calc(5);
+		}
+		&:hover {color: $primary-color;}
+	}
+}

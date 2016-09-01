@@ -1,0 +1,6 @@
+.product-features {
+  @include block-grid(1);
+  @media #{$medium-up} {
+    @include block-grid(2);
+  }
+}

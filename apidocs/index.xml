@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Apidocs on Docker Docs</title>
+    <link>http://docs.docker.com/apidocs/</link>
+    <description>Recent content in Apidocs on Docker Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://docs.docker.com/apidocs/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title></title>
+      <link>http://docs.docker.com/apidocs/v1.3.3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs.docker.com/apidocs/v1.3.3/</guid>
+      <description>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset=&#34;UTF-8&#34;&gt;
+  &lt;title&gt;Docker Trusted Registry API Documentation&lt;/title&gt;
+
+    &lt;link href=&#39;custom/custom.css&#39; media=&#39;screen&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&gt;
+    &lt;link href=&#39;css/typography.css&#39; media=&#39;screen&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&gt;
+    &lt;link href=&#39;css/reset.css&#39; media=&#39;screen&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&gt;
+    &lt;link href=&#39;css/screen.css&#39; media=&#39;screen&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&gt;
+    &lt;link href=&#39;css/reset.css&#39; media=&#39;print&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&gt;
+    &lt;link href=&#39;css/print.css&#39; media=&#39;print&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&gt;
+
+    &lt;script src=&#39;lib/jquery-1.8.0.min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;lib/jquery.slideto.min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;lib/jquery.wiggle.min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;lib/jquery.ba-bbq.min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;lib/handlebars-2.0.0.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;lib/underscore-min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;lib/backbone-min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;swagger-ui.min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;lib/highlight.7.3.pack.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;lib/marked.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;lib/swagger-oauth.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;main.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body class=&#34;swagger-section&#34;&gt;
+    &lt;div id=&#34;swagger-ui-container&#34; class=&#34;swagger-ui-wrap&#34;&gt;&lt;/div&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://docs.docker.com/apidocs/v1.3.3/o2c/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs.docker.com/apidocs/v1.3.3/o2c/</guid>
+      <description>&lt;script&gt;
+var qp = null;
+if(window.location.hash) {
+  qp = location.hash.substring(1);
+}
+else {
+  qp = location.search.substring(1);
+}
+qp = qp ? JSON.parse(&#39;{&#34;&#39; + qp.replace(/&amp;/g, &#39;&#34;,&#34;&#39;).replace(/=/g,&#39;&#34;:&#34;&#39;) + &#39;&#34;}&#39;,
+  function(key, value) {
+    return key===&#34;&#34;?value:decodeURIComponent(value) }
+  ):{}
+
+if (window.opener.swaggerUi.tokenUrl)
+    window.opener.processOAuthCode(qp);
+else
+    window.opener.onOAuthComplete(qp);
+
+window.close();
+&lt;/script&gt;</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://docs.docker.com/apidocs/v1.4.0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs.docker.com/apidocs/v1.4.0/</guid>
+      <description>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset=&#34;UTF-8&#34;&gt;
+  &lt;title&gt;Docker Trusted Registry API Documentation&lt;/title&gt;
+
+    &lt;link href=&#39;custom/custom.css&#39; media=&#39;screen&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&gt;
+    &lt;link href=&#39;css/typography.css&#39; media=&#39;screen&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&gt;
+    &lt;link href=&#39;css/reset.css&#39; media=&#39;screen&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&gt;
+    &lt;link href=&#39;css/screen.css&#39; media=&#39;screen&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&gt;
+    &lt;link href=&#39;css/reset.css&#39; media=&#39;print&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&gt;
+    &lt;link href=&#39;css/print.css&#39; media=&#39;print&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&gt;
+
+    &lt;script src=&#39;lib/jquery-1.8.0.min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;lib/jquery.slideto.min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;lib/jquery.wiggle.min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;lib/jquery.ba-bbq.min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;lib/handlebars-2.0.0.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;lib/underscore-min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;lib/backbone-min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;swagger-ui.min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;lib/highlight.7.3.pack.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;lib/marked.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;lib/swagger-oauth.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;main.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body class=&#34;swagger-section&#34;&gt;
+    &lt;div id=&#34;swagger-ui-container&#34; class=&#34;swagger-ui-wrap&#34;&gt;&lt;/div&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://docs.docker.com/apidocs/v1.4.0/o2c/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs.docker.com/apidocs/v1.4.0/o2c/</guid>
+      <description>&lt;script&gt;
+var qp = null;
+if(window.location.hash) {
+  qp = location.hash.substring(1);
+}
+else {
+  qp = location.search.substring(1);
+}
+qp = qp ? JSON.parse(&#39;{&#34;&#39; + qp.replace(/&amp;/g, &#39;&#34;,&#34;&#39;).replace(/=/g,&#39;&#34;:&#34;&#39;) + &#39;&#34;}&#39;,
+  function(key, value) {
+    return key===&#34;&#34;?value:decodeURIComponent(value) }
+  ):{}
+
+if (window.opener.swaggerUi.tokenUrl)
+    window.opener.processOAuthCode(qp);
+else
+    window.opener.onOAuthComplete(qp);
+
+window.close();
+&lt;/script&gt;</description>
+    </item>
+    
+    <item>
+      <title>DTR APIs</title>
+      <link>http://docs.docker.com/apidocs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs.docker.com/apidocs/</guid>
+      <description>
+
+&lt;h1 id=&#34;dtr-apis&#34;&gt;DTR APIs&lt;/h1&gt;
+
+&lt;p&gt;Please see the &lt;a href=&#34;../apidocs/overview/&#34;&gt;Overview&lt;/a&gt; page.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Overview</title>
+      <link>http://docs.docker.com/apidocs/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs.docker.com/apidocs/overview/</guid>
+      <description>
+
+&lt;h1 id=&#34;trusted-registry-api-overview&#34;&gt;Trusted Registry API Overview&lt;/h1&gt;
+
+&lt;p&gt;Docker Trusted Registry has API documentation built into the user interface. To access it click on your username in the top right corner and then select &amp;ldquo;API docs&amp;rdquo; from the menu.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../apidocs/menu.png&#34; alt=&#34;menu screenshot&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This built in API documentation also serves as an easy way to execute commands against your DTR instance. You can simply click &amp;ldquo;Try it out!&amp;rdquo; buttons to execute commands with the permissions of the user you care logged in as. If you don&amp;rsquo;t have the right permissions to run one of the commands you may see a &lt;code&gt;NOT_AUTHENTICATED&lt;/code&gt; error code like the one below.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../apidocs/notauth.png&#34; alt=&#34;not authorized screenshot&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Alternatively you can use the menu on the left to browse through the documentation
+for any API version.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>v1.3.3 API</title>
+      <link>http://docs.docker.com/apidocs/v1.3.3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs.docker.com/apidocs/v1.3.3/</guid>
+      <description>&lt;div class=&#34;swagger-section&#34;&gt;
+&lt;div id=&#34;swagger-ui-container&#34; class=&#34;swagger-ui-wrap&#34;&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;link href=&#39;custom/custom.css&#39; media=&#39;screen&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&gt;
+&lt;link href=&#39;css/typography.css&#39; media=&#39;screen&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&gt;
+&lt;link href=&#39;css/reset.css&#39; media=&#39;screen&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&gt;
+&lt;link href=&#39;css/screen.css&#39; media=&#39;screen&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&gt;
+&lt;link href=&#39;css/reset.css&#39; media=&#39;print&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&gt;
+&lt;link href=&#39;css/print.css&#39; media=&#39;print&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;script src=&#39;lib/jquery-1.8.0.min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+&lt;script src=&#39;lib/jquery.slideto.min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+&lt;script src=&#39;lib/jquery.wiggle.min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+&lt;script src=&#39;lib/jquery.ba-bbq.min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+&lt;script src=&#39;lib/handlebars-2.0.0.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+&lt;script src=&#39;lib/underscore-min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+&lt;script src=&#39;lib/backbone-min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+&lt;script src=&#39;swagger-ui.min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+&lt;script src=&#39;lib/highlight.7.3.pack.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+&lt;script src=&#39;lib/marked.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+&lt;script src=&#39;lib/swagger-oauth.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+&lt;script src=&#39;main.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+&lt;/div&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>v1.4.0 API</title>
+      <link>http://docs.docker.com/apidocs/v1.4.0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs.docker.com/apidocs/v1.4.0/</guid>
+      <description>&lt;div class=&#34;swagger-section&#34;&gt;
+&lt;div id=&#34;swagger-ui-container&#34; class=&#34;swagger-ui-wrap&#34;&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;link href=&#39;custom/custom.css&#39; media=&#39;screen&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&gt;
+&lt;link href=&#39;css/typography.css&#39; media=&#39;screen&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&gt;
+&lt;link href=&#39;css/reset.css&#39; media=&#39;screen&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&gt;
+&lt;link href=&#39;css/screen.css&#39; media=&#39;screen&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&gt;
+&lt;link href=&#39;css/reset.css&#39; media=&#39;print&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&gt;
+&lt;link href=&#39;css/print.css&#39; media=&#39;print&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;script src=&#39;lib/jquery-1.8.0.min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+&lt;script src=&#39;lib/jquery.slideto.min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+&lt;script src=&#39;lib/jquery.wiggle.min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+&lt;script src=&#39;lib/jquery.ba-bbq.min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+&lt;script src=&#39;lib/handlebars-2.0.0.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+&lt;script src=&#39;lib/underscore-min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+&lt;script src=&#39;lib/backbone-min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+&lt;script src=&#39;swagger-ui.min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+&lt;script src=&#39;lib/highlight.7.3.pack.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+&lt;script src=&#39;lib/marked.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+&lt;script src=&#39;lib/swagger-oauth.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+&lt;script src=&#39;main.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+&lt;/div&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

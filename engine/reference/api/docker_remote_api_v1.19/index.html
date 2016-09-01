@@ -1,0 +1,4820 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="API Documentation for Docker">
+    <meta name="keywords" content="[API, Docker, rcli, REST,  documentation]">
+    <title>Remote API v1.19 </title>
+    <link rel="shortcut icon" href="../../../../images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="../../../../dist/assets/css/app.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.6/animate.min.css">
+    <link rel="stylesheet" href="../../../../css/custom.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="../../../../dist/assets/js/modernizr.js"></script>
+</head>
+<body>
+  <div class="off-canvas-wrap" data-offcanvas>
+    <div class="inner-wrap">
+
+      <a class="left-off-canvas-toggle" href="#" >
+        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="35px" height="35px" viewBox="0 0 35 35" enable-background="new 0 0 35 35" xml:space="preserve">
+          <path fill="#3597D4" d="M30.583,9.328c0,0.752-0.539,1.362-1.203,1.362H5.113c-0.664,0-1.203-0.61-1.203-1.362l0,0
+          c0-0.752,0.539-1.362,1.203-1.362H29.38C30.045,7.966,30.583,8.576,30.583,9.328L30.583,9.328z"/>
+          <path fill="#3597D4" d="M30.583,17.09c0,0.752-0.539,1.362-1.203,1.362H5.113c-0.664,0-1.203-0.61-1.203-1.362l0,0
+          c0-0.752,0.539-1.362,1.203-1.362H29.38C30.045,15.728,30.583,16.338,30.583,17.09L30.583,17.09z"/>
+          <path fill="#3597D4" d="M30.583,24.387c0,0.752-0.539,1.362-1.203,1.362H5.113c-0.664,0-1.203-0.61-1.203-1.362l0,0
+          c0-0.752,0.539-1.362,1.203-1.362H29.38C30.045,23.025,30.583,23.635,30.583,24.387L30.583,24.387z"/>
+        </svg>
+      </a>
+      <a class="button secondary small get-started-cta">Get Started</a>
+      <header class="main-header">
+        <div class="row">
+          <div class="large-3 columns">
+            <a href="../../../../"><img class="logo" src="../../../../dist/assets/images/logo.png"></a>
+          </div>
+          <div class="large-9 columns">
+            <ul class="nav-global">
+              <li><a href="https://www.docker.com/support">Support</a></li>
+              <li><a href="https://training.docker.com/">Training</a></li>
+              <li><a href="https://docs.docker.com/">Docs</a></li>
+              <li><a href="http://blog.docker.com/">Blog</a></li>
+              <li><a href="https://hub.docker.com/">Docker Hub</a></li>
+              <li><a class="button" href="../../../../mac/started/">Get Started</a></li>
+            </ul>
+            <ul class="nav-main">
+              <li><a href="https://www.docker.com/products">Products</a>
+                <ul>
+                  <li><a href="https://www.docker.com/pricing">Pricing</a></li>
+                  <li><a href="https://www.docker.com/whatisdocker">What is Docker?</a></li>
+                </ul>
+              </li>
+              <li><a href="https://www.docker.com/customers">Customers</a></li>
+              <li><a href="https://www.docker.com/community">Community</a>
+                <ul>
+                  <li><a href="https://www.docker.com/community/meetups">Meetups</a></li>
+                  <li><a href="https://www.docker.com/community/events">Events</a></li>
+                  <li><a href="https://forums.docker.com">Forums</a></li>
+                  <li><a href="http://www.scoop.it/t/docker-by-docker">Community News</a></li>
+                </ul>
+              </li>
+              <li><a href="https://www.docker.com/partners">Partners</a>
+                <ul>
+                  <li><a href="https://www.docker.com/partners/partner-programs">Partner Programs</a></li>
+                </ul>
+              </li>
+              <li><a href="https://www.docker.com/company">Company</a>
+                <ul>
+                  <li><a href="https://www.docker.com/news-and-press">News &amp; Press</a></li>
+                  <li><a href="https://www.docker.com/work-docker">Work at Docker</a></li>
+                  <li><a href="https://www.docker.com/company/management">Management</a></li>
+                  <li><a href="https://www.docker.com/company/contact">Contact</a></li>
+                </ul>
+              </li>
+              <li><a href="https://www.docker.com/open-source">Open Source</a>
+                <ul>
+                  <li><a href="https://www.docker.com/contribute">Contribute</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </header>
+
+      
+      <aside class="left-off-canvas-menu">
+        <ul class="off-canvas-list">
+          <li class="has-submenu"><a href="#">Products</a>
+            <ul class="left-submenu">
+              <li class="back"><a href="#">Back</a></li>
+              <li><a href="#">Pricing</a></li>
+              <li><a href="#">What Is Docker</a></li>
+              <li><a href="#">Products</a></li>
+              <li><a href="#">Docker Engine</a></li>
+              <li><a href="#">Docker Hub</a></li>
+              <li><a href="#">Docker Registry</a></li>
+              <li><a href="#">Docker Machine</a></li>
+              <li><a href="#">Docker Swarm</a></li>
+              <li><a href="#">Docker Compose</a></li>
+              <li><a href="#">Kitematic</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Customers</a></li>
+          <li class="has-submenu"><a href="#">Community</a>
+            <ul class="left-submenu">
+              <li class="back"><a href="#">Back</a></li>
+              <li><a href="#">Community</a></li>
+              <li><a href="#">Meetups</a></li>
+              <li><a href="https://www.docker.com/community/events">Events</a></li>
+              <li><a href="#">Forum</a></li>
+              <li><a href="#">Scoop.it</a></li>
+            </ul>
+          </li>
+          <li class="has-submenu"><a href="#">Partners</a>
+            <ul class="left-submenu">
+              <li class="back"><a href="#">Back</a></li>
+              <li><a href="#">Partners</a></li>
+              <li><a href="https://www.docker.com/partners/partner-programs">Partners Programs</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Company</a></li>
+          <li class="has-submenu"><a href="#">Open Source</a>
+            <ul class="left-submenu">
+              <li class="back"><a href="#">Back</a></li>
+              <li><a href="#">Open Source</a></li>
+              <li><a href="#">Contribute</a></li>
+              <li><a href="#">Governance</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="nav-global-off-canvas">
+          <li><a href="#">Support</a></li>
+          <li><a href="#">Training</a></li>
+          <li><a href="#">Docs</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Sign in</a></li>
+          <li><a href="#">Sign up</a></li>
+        </ul>
+      </aside>
+      
+      <a class="exit-off-canvas"></a>
+
+<div id="docs" class="row">
+    <div class="large-3 columns">
+        <section id="multiple" data-accordion-group>
+  
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Install</button>
+          <div data-content>
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Engine</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../../engine/installation/mac/" class=""> Installation on Mac OS X</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/installation/windows/" class=""> Installation on Windows</a>
+                      
+                      
+                    
+                      
+                        <article data-accordion>
+                          <button data-control> Linux</button>
+                          <div data-content>
+                            
+                                <a data-link href="../../../../engine/installation/ubuntulinux/" class=""> Installation on Ubuntu </a>
+                            
+                                <a data-link href="../../../../engine/installation/rhel/" class=""> Installation on Red Hat Enterprise Linux</a>
+                            
+                                <a data-link href="../../../../engine/installation/centos/" class=""> Installation on CentOS</a>
+                            
+                                <a data-link href="../../../../engine/installation/fedora/" class=""> Installation on Fedora</a>
+                            
+                                <a data-link href="../../../../engine/installation/debian/" class=""> Installation on Debian</a>
+                            
+                                <a data-link href="../../../../engine/installation/archlinux/" class=""> Installation on Arch Linux</a>
+                            
+                                <a data-link href="../../../../engine/installation/cruxlinux/" class=""> Installation on CRUX Linux</a>
+                            
+                                <a data-link href="../../../../engine/installation/frugalware/" class=""> Installation on FrugalWare</a>
+                            
+                                <a data-link href="../../../../engine/installation/gentoolinux/" class=""> Installation on Gentoo</a>
+                            
+                                <a data-link href="../../../../engine/installation/oracle/" class=""> Installation on Oracle Linux</a>
+                            
+                                <a data-link href="../../../../engine/installation/SUSE/" class=""> Installation on openSUSE and SUSE Linux Enterprise</a>
+                            
+                           </div>
+                         </article> 
+                      
+                      
+                    
+                      
+                        <article data-accordion>
+                          <button data-control> Cloud</button>
+                          <div data-content>
+                            
+                                <a data-link href="../../../../engine/installation/amazon/" class=""> Amazon EC2 Installation</a>
+                            
+                                <a data-link href="../../../../engine/installation/google/" class=""> Installation on Google Cloud Platform</a>
+                            
+                                <a data-link href="../../../../engine/installation/softlayer/" class=""> Installation on IBM SoftLayer </a>
+                            
+                                <a data-link href="../../../../engine/installation/azure/" class=""> Installation on Microsoft Azure platform</a>
+                            
+                                <a data-link href="../../../../engine/installation/rackspace/" class=""> Installation on Rackspace Cloud</a>
+                            
+                                <a data-link href="../../../../engine/installation/joyent/" class=""> Joyent Triton Elastic Container Service</a>
+                            
+                           </div>
+                         </article> 
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/installation/binaries/" class=""> Installation from binaries</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <a data-link href="../../../../kitematic/" class=""> Kitematic</a>
+              
+            
+              
+                <a data-link href="../../../../machine/install-machine/" class=""> Docker Machine</a>
+              
+            
+              
+                <a data-link href="../../../../compose/install/" class=""> Docker Compose</a>
+              
+            
+              
+                <a data-link href="../../../../swarm/install-w-machine/" class=""> Docker Swarm</a>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Docker Fundamentals</button>
+          <div data-content>
+            
+              
+                <a data-link href="../../../../engine/userguide/basics/" class=""> Quickstart containers</a>
+              
+            
+              
+                <a data-link href="../../../../engine/userguide/" class=""> The Docker user guide</a>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Work with Docker Images</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../../engine/articles/dockerfile_best-practices/" class=""> Best practices for writing Dockerfiles</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/articles/baseimages/" class=""> Create a base image</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Work with Docker Containers</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../../engine/userguide/dockerizing/" class=""> Hello world in a container</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/userguide/usingdocker/" class=""> Run a simple application</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/userguide/dockerimages/" class=""> Build your own images</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/userguide/networkingcontainers/" class=""> Networking containers</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/userguide/dockervolumes/" class=""> Manage data in containers</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/userguide/dockerrepos/" class=""> Store images on Docker Hub</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker on Windows &amp; OSX</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../../engine/articles/dsc/" class=""> PowerShell DSC Usage</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Use the Kitematic GUI</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../../kitematic/userguide/" class=""> Kitematic User Guide: Intro &amp; Overview</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../kitematic/nginx-web-server/" class=""> Set up an Nginx web server</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../kitematic/minecraft-server/" class=""> Set up a Minecraft Server</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../kitematic/rethinkdb-dev-database/" class=""> Creating a Local RethinkDB Database for Development</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../kitematic/known-issues/" class=""> Known Issues</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Use Docker</button>
+          <div data-content>
+            
+              
+                <a data-link href="../../../../engine/misc/" class=""> About Docker</a>
+              
+            
+              
+                <a data-link href="../../../../engine/userguide/labels-custom-metadata/" class=""> Apply custom metadata</a>
+              
+            
+              
+                <a data-link href="../../../../engine/misc/deprecated/" class=""> Docker Deprecated Features</a>
+              
+            
+              
+                <a data-link href="../../../../engine/introduction/understanding-docker/" class=""> Understand the architecture</a>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Provision &amp; set up Docker hosts</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../../machine/" class=""> Overview of Docker Machine</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../machine/get-started/" class=""> Get started with Docker Machine and a local VM</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../machine/get-started-cloud/" class=""> Using Docker Machine with a cloud provider</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../machine/migrate-to-machine/" class=""> Migrate from Boot2Docker to Docker Machine</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Create multi-container applications</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../../compose/" class=""> Overview of Docker Compose</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../compose/production/" class=""> Using Compose in production</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../compose/extends/" class=""> Extending services in Compose</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../compose/gettingstarted/" class=""> Getting Started</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../compose/django/" class=""> Quickstart Guide: Compose and Django</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../compose/rails/" class=""> Quickstart Guide: Compose and Rails</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../compose/networking/" class=""> Networking in Compose</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../compose/wordpress/" class=""> Quickstart Guide: Compose and WordPress</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../compose/faq/" class=""> Frequently Asked Questions</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../compose/completion/" class=""> Command-line Completion</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Cluster Docker containers</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../../swarm/" class=""> Docker Swarm</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../swarm/scheduler/" class=""> Docker Swarm Scheduling</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../swarm/install-manual/" class=""> Create a swarm for development</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../swarm/multi-manager-setup/" class=""> High availability in Docker Swarm</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../swarm/networking/" class=""> Docker Swarm Networking</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../swarm/discovery/" class=""> Docker Swarm discovery</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../swarm/scheduler/filter/" class=""> Docker Swarm filters</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../swarm/scheduler/strategy/" class=""> Docker Swarm strategies</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Administrate Docker</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../../engine/articles/host_integration/" class=""> Automatically start containers</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/articles/security/" class=""> Docker security</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/articles/configuring/" class=""> Configuring and running Docker</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/articles/runmetrics/" class=""> Runtime metrics</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/articles/https/" class=""> Protect the Docker daemon socket</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/articles/ambassador_pattern_linking/" class=""> Link via an ambassador container</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/articles/systemd/" class=""> Control and configure Docker with systemd</a>
+                      
+                      
+                    
+                      
+                        <article data-accordion>
+                          <button data-control> Logging</button>
+                          <div data-content>
+                            
+                                <a data-link href="../../../../engine/reference/logging/overview/" class=""> Configuring Logging Drivers</a>
+                            
+                                <a data-link href="../../../../engine/reference/logging/awslogs/" class=""> Amazon CloudWatch Logs logging driver</a>
+                            
+                                <a data-link href="../../../../engine/reference/logging/log_tags/" class=""> Log tags for logging driver</a>
+                            
+                                <a data-link href="../../../../engine/reference/logging/fluentd/" class=""> Fluentd logging driver</a>
+                            
+                                <a data-link href="../../../../engine/reference/logging/journald/" class=""> journald logging driver</a>
+                            
+                           </div>
+                         </article> 
+                      
+                      
+                    
+                      
+                        <article data-accordion>
+                          <button data-control> Applications and Services</button>
+                          <div data-content>
+                            
+                                <a data-link href="../../../../engine/examples/running_riak_service/" class=""> Dockerizing a Riak service</a>
+                            
+                                <a data-link href="../../../../engine/examples/running_ssh_service/" class=""> Dockerizing an SSH service</a>
+                            
+                           </div>
+                         </article> 
+                      
+                      
+                    
+                      
+                        <article data-accordion>
+                          <button data-control> Integrate with Third-party Tools</button>
+                          <div data-content>
+                            
+                                <a data-link href="../../../../engine/articles/cfengine_process_management/" class=""> Process management with CFEngine</a>
+                            
+                                <a data-link href="../../../../engine/articles/chef/" class=""> Using Chef</a>
+                            
+                                <a data-link href="../../../../engine/articles/puppet/" class=""> Using Puppet</a>
+                            
+                                <a data-link href="../../../../engine/articles/using_supervisord/" class=""> Using Supervisor with Docker</a>
+                            
+                           </div>
+                         </article> 
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker storage drivers</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../../engine/userguide/storagedriver/imagesandcontainers/" class=""> Understand images, containers, and storage drivers</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/userguide/storagedriver/selectadriver/" class=""> Select a storage driver</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/userguide/storagedriver/aufs-driver/" class=""> AUFS storage driver in practice</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/userguide/storagedriver/btrfs-driver/" class=""> Btrfs storage in practice</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/userguide/storagedriver/device-mapper-driver/" class=""> Device mapper storage in practice</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/userguide/storagedriver/overlayfs-driver/" class=""> OverlayFS storage in practice</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/userguide/storagedriver/zfs-driver/" class=""> ZFS storage in practice</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Network configuration</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../../engine/userguide/networking/dockernetworks/" class=""> Docker container networking</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/userguide/networking/work-with-networks/" class=""> Work with network commands</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/userguide/networking/get-started-overlay/" class=""> Get started with multi-host networking</a>
+                      
+                      
+                    
+                      
+                        <article data-accordion>
+                          <button data-control> Default bridge network</button>
+                          <div data-content>
+                            
+                                <a data-link href="../../../../engine/userguide/networking/default_network/dockerlinks/" class=""> Legacy container links</a>
+                            
+                                <a data-link href="../../../../engine/userguide/networking/default_network/binding/" class=""> Bind container ports to the host</a>
+                            
+                                <a data-link href="../../../../engine/userguide/networking/default_network/build-bridges/" class=""> Build your own bridge</a>
+                            
+                                <a data-link href="../../../../engine/userguide/networking/default_network/configure-dns/" class=""> Configure container DNS</a>
+                            
+                                <a data-link href="../../../../engine/userguide/networking/default_network/custom-docker0/" class=""> Customize the docker0 bridge</a>
+                            
+                                <a data-link href="../../../../engine/userguide/networking/default_network/container-communication/" class=""> Understand container communication</a>
+                            
+                                <a data-link href="../../../../engine/userguide/networking/default_network/ipv6/" class=""> IPv6 with Docker</a>
+                            
+                           </div>
+                         </article> 
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Applied Docker</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../../engine/examples/mongodb/" class=""> Dockerizing MongoDB</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/examples/postgresql_service/" class=""> Dockerizing PostgreSQL</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/examples/couchdb_data_volumes/" class=""> Dockerizing a CouchDB service</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/examples/nodejs_web_app/" class=""> Dockerizing a Node.js web app</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/examples/running_redis_service/" class=""> Dockerizing a Redis service</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/examples/apt-cacher-ng/" class=""> Dockerizing an apt-cacher-ng service</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Manage image repositories</button>
+          <div data-content>
+            
+              
+                <a data-link href="../../../../engine/userguide/image_management/" class=""> Image management</a>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Hub</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../../docker-hub/" class=""> Introducing Docker Hub</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../docker-hub/accounts/" class=""> Your Docker Hub account</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../docker-hub/repos/" class=""> Repositories on Docker Hub</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../docker-hub/builds/" class=""> Automated Builds</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../docker-hub/webhooks/" class=""> Webhooks for automated builds</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../docker-hub/bitbucket/" class=""> Automated Builds with Bitbucket</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../docker-hub/github/" class=""> Automated Builds from GitHub</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../docker-hub/orgs/" class=""> Teams &amp; Organizations</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../docker-hub/official_repos/" class=""> Official Repositories on Docker Hub</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Trusted Registry</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../../docker-trusted-registry/" class=""> Overview</a>
+                      
+                      
+                    
+                      
+                        <article data-accordion>
+                          <button data-control> Installation</button>
+                          <div data-content>
+                            
+                                <a data-link href="../../../../docker-trusted-registry/install/dtr-ami-byol-launch/" class=""> Install Docker Subscription for AWS (BYOL))</a>
+                            
+                                <a data-link href="../../../../docker-trusted-registry/install/engine-ami-launch/" class=""> Install Docker Engine for AWS AMI (BDS)</a>
+                            
+                                <a data-link href="../../../../docker-trusted-registry/install/dtr-ami-bds-launch/" class=""> Install Trusted Registry for AWS AMI (BDS)</a>
+                            
+                                <a data-link href="../../../../docker-trusted-registry/install/dtr-vhd-azure/" class=""> Install on Microsoft Azure</a>
+                            
+                                <a data-link href="../../../../docker-trusted-registry/install/install-csengine/" class=""> Manually Install the CS Docker Engine</a>
+                            
+                                <a data-link href="../../../../docker-trusted-registry/install/install-dtr/" class=""> Manually install Trusted Registry</a>
+                            
+                                <a data-link href="../../../../docker-trusted-registry/install/upgrade/" class=""> Upgrade Trusted Registry and the CS Engine</a>
+                            
+                           </div>
+                         </article> 
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../docker-trusted-registry/quick-start/" class=""> Quick-start: Basic Workflow</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../docker-trusted-registry/userguide/" class=""> User guide</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../docker-trusted-registry/adminguide/" class=""> Admin tasks</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../docker-trusted-registry/configuration/" class=""> Configuration options</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../docker-trusted-registry/license/" class=""> Trusted Registry License</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../docker-trusted-registry/accounts/" class=""> Account and repository management</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../docker-trusted-registry/soft-garbage/" class=""> Remove an image and garbage collection</a>
+                      
+                      
+                    
+                      
+                        <article data-accordion>
+                          <button data-control> DTR APIs</button>
+                          <div data-content>
+                            
+                                <a data-link href="../../../../apidocs/v1.3.3/" class=""> v1.3.3 API</a>
+                            
+                                <a data-link href="../../../../apidocs/v1.4.0/" class=""> v1.4.0 API</a>
+                            
+                           </div>
+                         </article> 
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../docker-trusted-registry/support/" class=""> Support</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../docker-trusted-registry/release-notes/" class=""> Release notes</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../docker-trusted-registry/prior-release-notes/" class=""> Prior release notes archive</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Registry</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../../registry/" class=""> Docker Registry</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../registry/introduction/" class=""> Understanding the Registry</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../registry/deploying/" class=""> Deploying a registry server</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../registry/configuration/" class=""> Configuring a registry</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../registry/notifications/" class=""> Working with notifications</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../registry/help/" class=""> Getting help</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Use trusted images</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../../engine/security/trust/content_trust/" class=""> Content trust in Docker</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/security/trust/trust_automation/" class=""> Automation with content trust</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/security/trust/deploying_notary/" class=""> Deploying Notary</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/security/trust/trust_key_mng/" class=""> Manage keys for content trust</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/security/trust/trust_sandbox/" class=""> Play in a content trust sandbox</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <a data-link href="../../../../engine/articles/certificates/" class=""> Using certificates for repository client verification</a>
+              
+            
+              
+                <a data-link href="../../../../engine/articles/registry_mirror/" class=""> Run a local registry mirror</a>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Extend Docker</button>
+          <div data-content>
+            
+              
+                <a data-link href="../../../../engine/extend/plugins/" class=""> Extending Docker with plugins</a>
+              
+            
+              
+                <a data-link href="../../../../engine/extend/plugins_network/" class=""> Docker network driver plugins</a>
+              
+            
+              
+                <a data-link href="../../../../engine/extend/plugins_volume/" class=""> Volume plugins</a>
+              
+            
+              
+                <a data-link href="../../../../engine/extend/plugin_api/" class=""> Plugins API</a>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Command and API references</button>
+          <div data-content>
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Engine Commands</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/cli/" class=""> Use the Docker command line</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/daemon/" class=""> daemon</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/attach/" class=""> attach</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/build/" class=""> build</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/commit/" class=""> commit</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/cp/" class=""> cp</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/create/" class=""> create</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/diff/" class=""> diff</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/events/" class=""> events</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/exec/" class=""> exec</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/export/" class=""> export</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/history/" class=""> history</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/images/" class=""> images</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/import/" class=""> import</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/info/" class=""> info</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/inspect/" class=""> inspect</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/kill/" class=""> kill</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/load/" class=""> load</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/login/" class=""> login</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/logout/" class=""> logout</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/logs/" class=""> logs</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/network_connect/" class=""> network connect</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/network_create/" class=""> network create</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/network_disconnect/" class=""> network disconnect</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/network_inspect/" class=""> network inspect</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/network_ls/" class=""> network ls</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/network_rm/" class=""> network rm</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/pause/" class=""> pause</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/port/" class=""> port</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/ps/" class=""> ps</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/pull/" class=""> pull</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/push/" class=""> push</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/rename/" class=""> rename</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/restart/" class=""> restart</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/rm/" class=""> rm</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/rmi/" class=""> rmi</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/run/" class=""> run</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/save/" class=""> save</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/search/" class=""> search</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/start/" class=""> start</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/stats/" class=""> stats</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/stop/" class=""> stop</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/tag/" class=""> tag</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/top/" class=""> top</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/unpause/" class=""> unpause</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/version/" class=""> version</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/volume_create/" class=""> volume create</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/volume_inspect/" class=""> volume inspect</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/volume_ls/" class=""> volume ls</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/volume_rm/" class=""> volume rm</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/commandline/wait/" class=""> wait</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <a data-link href="../../../../engine/reference/run/" class=""> Docker run reference</a>
+              
+            
+              
+                <a data-link href="../../../../engine/reference/builder/" class=""> Dockerfile reference</a>
+              
+            
+              
+                <a data-link href="../../../../engine/reference/api/remote_api_client_libraries/" class=""> Remote API client libraries</a>
+              
+            
+              
+                <a data-link href="../../../../engine/reference/api/docker_io_accounts_api/" class=""> docker.io accounts API</a>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Remote API</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../../engine/reference/api/docker_remote_api/" class=""> Remote API</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/api/docker_remote_api_v1.21/" class=""> Remote API v1.21</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/api/docker_remote_api_v1.20/" class=""> Remote API v1.20</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/api/docker_remote_api_v1.19/" class=" active"> Remote API v1.19</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/api/docker_remote_api_v1.18/" class=""> Remote API v1.18</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/api/docker_remote_api_v1.17/" class=""> Remote API v1.17</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/api/docker_remote_api_v1.16/" class=""> Remote API v1.16</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/api/docker_remote_api_v1.15/" class=""> Remote API v1.15</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/api/docker_remote_api_v1.14/" class=""> Remote API v1.14</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../engine/reference/api/docker-io_api/" class=""> Docker Hub API</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Hub</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../../engine/reference/api/hub_registry_spec/" class=""> The Docker Hub and the Registry v1</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Compose Reference</button>
+                  <div data-content>
+                    
+                      
+                        <article data-accordion>
+                          <button data-control> Compose CLI reference</button>
+                          <div data-content>
+                            
+                                <a data-link href="../../../../compose/reference/overview/" class=""> Introduction to the CLI</a>
+                            
+                                <a data-link href="../../../../compose/reference/docker-compose/" class=""> docker-compose</a>
+                            
+                                <a data-link href="../../../../compose/reference/build/" class=""> build</a>
+                            
+                                <a data-link href="../../../../compose/reference/help/" class=""> help</a>
+                            
+                                <a data-link href="../../../../compose/reference/kill/" class=""> kill</a>
+                            
+                                <a data-link href="../../../../compose/reference/logs/" class=""> logs</a>
+                            
+                                <a data-link href="../../../../compose/reference/pause/" class=""> pause</a>
+                            
+                                <a data-link href="../../../../compose/reference/port/" class=""> port</a>
+                            
+                                <a data-link href="../../../../compose/reference/ps/" class=""> ps</a>
+                            
+                                <a data-link href="../../../../compose/reference/pull/" class=""> pull</a>
+                            
+                                <a data-link href="../../../../compose/reference/restart/" class=""> restart</a>
+                            
+                                <a data-link href="../../../../compose/reference/rm/" class=""> rm</a>
+                            
+                                <a data-link href="../../../../compose/reference/run/" class=""> run</a>
+                            
+                                <a data-link href="../../../../compose/reference/scale/" class=""> scale</a>
+                            
+                                <a data-link href="../../../../compose/reference/start/" class=""> start</a>
+                            
+                                <a data-link href="../../../../compose/reference/stop/" class=""> stop</a>
+                            
+                                <a data-link href="../../../../compose/reference/unpause/" class=""> unpause</a>
+                            
+                                <a data-link href="../../../../compose/reference/up/" class=""> up</a>
+                            
+                           </div>
+                         </article> 
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../compose/compose-file/" class=""> Compose file reference</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../compose/env/" class=""> Compose environment variables reference</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Machine Reference</button>
+                  <div data-content>
+                    
+                      
+                        <article data-accordion>
+                          <button data-control> Drivers</button>
+                          <div data-content>
+                            
+                                <a data-link href="../../../../machine/drivers/os-base/" class=""> Driver options and operating system defaults</a>
+                            
+                                <a data-link href="../../../../machine/drivers/aws/" class=""> Amazon Web Services</a>
+                            
+                                <a data-link href="../../../../machine/drivers/digital-ocean/" class=""> Digital Ocean</a>
+                            
+                                <a data-link href="../../../../machine/drivers/generic/" class=""> Generic</a>
+                            
+                                <a data-link href="../../../../machine/drivers/gce/" class=""> Google Compute Engine</a>
+                            
+                                <a data-link href="../../../../machine/drivers/soft-layer/" class=""> IBM Softlayer</a>
+                            
+                                <a data-link href="../../../../machine/drivers/azure/" class=""> Microsoft Azure</a>
+                            
+                                <a data-link href="../../../../machine/drivers/hyper-v/" class=""> Microsoft Hyper-V</a>
+                            
+                                <a data-link href="../../../../machine/drivers/openstack/" class=""> OpenStack</a>
+                            
+                                <a data-link href="../../../../machine/drivers/virtualbox/" class=""> Oracle VirtualBox</a>
+                            
+                                <a data-link href="../../../../machine/drivers/rackspace/" class=""> Rackspace</a>
+                            
+                                <a data-link href="../../../../machine/drivers/vm-fusion/" class=""> VMware Fusion</a>
+                            
+                                <a data-link href="../../../../machine/drivers/vm-cloud/" class=""> VMware vCloud Air</a>
+                            
+                                <a data-link href="../../../../machine/drivers/vsphere/" class=""> VMware vSphere</a>
+                            
+                                <a data-link href="../../../../machine/drivers/exoscale/" class=""> exoscale</a>
+                            
+                           </div>
+                         </article> 
+                      
+                      
+                    
+                      
+                        <article data-accordion>
+                          <button data-control> Subcommands</button>
+                          <div data-content>
+                            
+                                <a data-link href="../../../../machine/reference/active/" class=""> active</a>
+                            
+                                <a data-link href="../../../../machine/reference/config/" class=""> config</a>
+                            
+                                <a data-link href="../../../../machine/reference/create/" class=""> create</a>
+                            
+                                <a data-link href="../../../../machine/reference/env/" class=""> env</a>
+                            
+                                <a data-link href="../../../../machine/reference/help/" class=""> help</a>
+                            
+                                <a data-link href="../../../../machine/reference/inspect/" class=""> inspect</a>
+                            
+                                <a data-link href="../../../../machine/reference/ip/" class=""> ip</a>
+                            
+                                <a data-link href="../../../../machine/reference/kill/" class=""> kill</a>
+                            
+                                <a data-link href="../../../../machine/reference/ls/" class=""> ls</a>
+                            
+                                <a data-link href="../../../../machine/reference/regenerate-certs/" class=""> regenerate-certs</a>
+                            
+                                <a data-link href="../../../../machine/reference/restart/" class=""> restart</a>
+                            
+                                <a data-link href="../../../../machine/reference/rm/" class=""> rm</a>
+                            
+                                <a data-link href="../../../../machine/reference/scp/" class=""> scp</a>
+                            
+                                <a data-link href="../../../../machine/reference/ssh/" class=""> ssh</a>
+                            
+                                <a data-link href="../../../../machine/reference/start/" class=""> start</a>
+                            
+                                <a data-link href="../../../../machine/reference/status/" class=""> status</a>
+                            
+                                <a data-link href="../../../../machine/reference/stop/" class=""> stop</a>
+                            
+                                <a data-link href="../../../../machine/reference/upgrade/" class=""> upgrade</a>
+                            
+                                <a data-link href="../../../../machine/reference/url/" class=""> url</a>
+                            
+                           </div>
+                         </article> 
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Swarm Reference</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../../swarm/api/swarm-api/" class=""> Docker Swarm API</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Registry Reference</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../../registry/spec/api/" class=""> HTTP API V2</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../registry/storagedrivers/" class=""> Storage Drivers</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../registry/spec/auth/jwt/" class=""> Token Authentication Implementation</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../registry/spec/auth/token/" class=""> Token Authentication Specification</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Open Source at Docker</button>
+          <div data-content>
+            
+              
+                <a data-link href="../../../../opensource/code/" class=""> Quickstart contribution</a>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Set up for Engine Development</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../../opensource/project/who-written-for/" class=""> README first</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../opensource/project/software-required/" class=""> Get the required software</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../opensource/project/software-req-win/" class=""> Set up for development on Windows</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../opensource/project/set-up-git/" class=""> Configure Git for contributing</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../opensource/project/set-up-dev-env/" class=""> Work with a development container</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../opensource/project/test-and-docs/" class=""> Run tests and test documentation</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Contribution workflow</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../../opensource/workflow/make-a-contribution/" class=""> Understand how to contribute</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../opensource/workflow/find-an-issue/" class=""> Find and claim an issue</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../opensource/workflow/work-issue/" class=""> Work on your issue</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../opensource/workflow/review-pr/" class=""> Participate in the PR review</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../opensource/workflow/advanced-contributing/" class=""> Advanced contributing</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../opensource/workflow/coding-style/" class=""> Coding style checklist</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Other ways to contribute</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../../opensource/ways/meetups/" class=""> Organize a Docker Meetup</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../opensource/ways/issues/" class=""> Organize our issues</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../opensource/ways/community/" class=""> Support the community</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../opensource/ways/test/" class=""> Testing contributions</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Contribute to Kitematic</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../../opensource/kitematic/get_started/" class=""> Get started</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../opensource/kitematic/find_issue/" class=""> Find an issue</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../opensource/kitematic/set_up_dev/" class=""> Set up for Kitematic development</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../opensource/kitematic/work_issue/" class=""> Develop in Kitematic (work on an issue)</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../opensource/kitematic/create_pr/" class=""> Create a pull request (PR)</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../opensource/kitematic/next_steps/" class=""> Where to learn more</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Governance</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../../opensource/governance/dgab-info/" class=""> Docker Governance Advisory Board</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../opensource/governance/board-profiles/" class=""> Board member profiles</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../../opensource/governance/conduct-code/" class=""> Code of conduct</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <a data-link href="../../../../opensource/FAQ/" class=""> FAQ for contributors</a>
+              
+            
+              
+                <a data-link href="../../../../opensource/get-help/" class=""> Where to chat or get help</a>
+              
+            
+              
+                <a data-link href="../../../../opensource/doc-style/" class=""> Style guide for Docker documentation</a>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> About</button>
+          <div data-content>
+            
+              
+                <a data-link href="../../../../release-notes/" class=""> Docker Release Notes</a>
+              
+            
+              
+                <a data-link href="../../../../engine/misc/faq/" class=""> FAQ</a>
+              
+            
+              
+                <a data-link href="../../../../engine/reference/glossary/" class=""> Docker Glossary</a>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Docs archive</button>
+          <div data-content>
+            
+              
+                <a data-link href="https://docs.docker.com/v1.8/" class=""> Version 1.8</a>
+              
+            
+              
+                <a data-link href="https://docs.docker.com/v1.7/" class=""> Version 1.7</a>
+              
+            
+              
+                <a data-link href="https://docs.docker.com/v1.6/" class=""> Version 1.6</a>
+              
+            
+              
+                <a data-link href="https://docs.docker.com/v1.5/" class=""> Version 1.5</a>
+              
+            
+              
+                <a data-link href="https://docs.docker.com/v1.4/" class=""> Version 1.4</a>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+</section>
+
+<script>
+$(document).ready(function () {
+  var $activeLink = $('#multiple [data-link].active');
+  var $accordions = $activeLink.parents('article[data-accordion]');
+  $($accordions.get().reverse()).each(function (index, accordion) {
+    var $accordion = $(accordion);
+    var $content = $accordion.find('[data-content]');
+    $accordion.addClass('open');
+    $content.css({'max-height': '100%'});
+  });
+});
+</script>
+
+    </div>
+    <div class="large-6 columns">
+      <section id="main">
+        <article id="content">
+          
+
+<h1 id="docker-remote-api-v1-19">Docker Remote API v1.19</h1>
+
+<h2 id="1-brief-introduction">1. Brief introduction</h2>
+
+<ul>
+<li>The Remote API has replaced <code>rcli</code>.</li>
+<li>The daemon listens on <code>unix:///var/run/docker.sock</code> but you can
+<a href="../../../../engine/userguide/basics/#bind-docker-to-another-host-port-or-a-unix-socket">Bind Docker to another host/port or a Unix socket</a>.</li>
+<li>The API tends to be REST. However, for some complex commands, like <code>attach</code>
+or <code>pull</code>, the HTTP connection is hijacked to transport <code>stdout</code>,
+<code>stdin</code> and <code>stderr</code>.</li>
+<li>When the client API version is newer than the daemon&rsquo;s, these calls return an HTTP
+<code>400 Bad Request</code> error message.</li>
+</ul>
+
+<h1 id="2-endpoints">2. Endpoints</h1>
+
+<h2 id="2-1-containers">2.1 Containers</h2>
+
+<h3 id="list-containers">List containers</h3>
+
+<p><code>GET /containers/json</code></p>
+
+<p>List containers</p>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>GET /containers/json?all=1&amp;before=8dfafdbc3a40&amp;size=1 HTTP/1.1
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 200 OK
+Content-Type: application/json
+
+[
+     {
+             &quot;Id&quot;: &quot;8dfafdbc3a40&quot;,
+             &quot;Names&quot;:[&quot;/boring_feynman&quot;],
+             &quot;Image&quot;: &quot;ubuntu:latest&quot;,
+             &quot;Command&quot;: &quot;echo 1&quot;,
+             &quot;Created&quot;: 1367854155,
+             &quot;Status&quot;: &quot;Exit 0&quot;,
+             &quot;Ports&quot;: [{&quot;PrivatePort&quot;: 2222, &quot;PublicPort&quot;: 3333, &quot;Type&quot;: &quot;tcp&quot;}],
+             &quot;Labels&quot;: {
+                     &quot;com.example.vendor&quot;: &quot;Acme&quot;,
+                     &quot;com.example.license&quot;: &quot;GPL&quot;,
+                     &quot;com.example.version&quot;: &quot;1.0&quot;
+             },
+             &quot;SizeRw&quot;: 12288,
+             &quot;SizeRootFs&quot;: 0
+     },
+     {
+             &quot;Id&quot;: &quot;9cd87474be90&quot;,
+             &quot;Names&quot;:[&quot;/coolName&quot;],
+             &quot;Image&quot;: &quot;ubuntu:latest&quot;,
+             &quot;Command&quot;: &quot;echo 222222&quot;,
+             &quot;Created&quot;: 1367854155,
+             &quot;Status&quot;: &quot;Exit 0&quot;,
+             &quot;Ports&quot;: [],
+             &quot;Labels&quot;: {},
+             &quot;SizeRw&quot;: 12288,
+             &quot;SizeRootFs&quot;: 0
+     },
+     {
+             &quot;Id&quot;: &quot;3176a2479c92&quot;,
+             &quot;Names&quot;:[&quot;/sleepy_dog&quot;],
+             &quot;Image&quot;: &quot;ubuntu:latest&quot;,
+             &quot;Command&quot;: &quot;echo 3333333333333333&quot;,
+             &quot;Created&quot;: 1367854154,
+             &quot;Status&quot;: &quot;Exit 0&quot;,
+             &quot;Ports&quot;:[],
+             &quot;Labels&quot;: {},
+             &quot;SizeRw&quot;:12288,
+             &quot;SizeRootFs&quot;:0
+     },
+     {
+             &quot;Id&quot;: &quot;4cb07b47f9fb&quot;,
+             &quot;Names&quot;:[&quot;/running_cat&quot;],
+             &quot;Image&quot;: &quot;ubuntu:latest&quot;,
+             &quot;Command&quot;: &quot;echo 444444444444444444444444444444444&quot;,
+             &quot;Created&quot;: 1367854152,
+             &quot;Status&quot;: &quot;Exit 0&quot;,
+             &quot;Ports&quot;: [],
+             &quot;Labels&quot;: {},
+             &quot;SizeRw&quot;: 12288,
+             &quot;SizeRootFs&quot;: 0
+     }
+]
+</code></pre>
+
+<p>Query Parameters:</p>
+
+<ul>
+<li><strong>all</strong> – 1/True/true or 0/False/false, Show all containers.
+    Only running containers are shown by default (i.e., this defaults to false)</li>
+<li><strong>limit</strong> – Show <code>limit</code> last created
+    containers, include non-running ones.</li>
+<li><strong>since</strong> – Show only containers created since Id, include
+    non-running ones.</li>
+<li><strong>before</strong> – Show only containers created before Id, include
+    non-running ones.</li>
+<li><strong>size</strong> – 1/True/true or 0/False/false, Show the containers
+    sizes</li>
+<li><strong>filters</strong> - a JSON encoded value of the filters (a <code>map[string][]string</code>) to process on the containers list. Available filters:
+
+<ul>
+<li><code>exited=&lt;int&gt;</code>; &ndash; containers with exit code of  <code>&lt;int&gt;</code> ;</li>
+<li><code>status=</code>(<code>restarting</code>|<code>running</code>|<code>paused</code>|<code>exited</code>)</li>
+<li><code>label=key</code> or <code>label=&quot;key=value&quot;</code> of a container label</li>
+</ul></li>
+</ul>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>400</strong> – bad parameter</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+
+<h3 id="create-a-container">Create a container</h3>
+
+<p><code>POST /containers/create</code></p>
+
+<p>Create a container</p>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>POST /containers/create HTTP/1.1
+Content-Type: application/json
+
+{
+       &quot;Hostname&quot;: &quot;&quot;,
+       &quot;Domainname&quot;: &quot;&quot;,
+       &quot;User&quot;: &quot;&quot;,
+       &quot;AttachStdin&quot;: false,
+       &quot;AttachStdout&quot;: true,
+       &quot;AttachStderr&quot;: true,
+       &quot;Tty&quot;: false,
+       &quot;OpenStdin&quot;: false,
+       &quot;StdinOnce&quot;: false,
+       &quot;Env&quot;: [
+               &quot;FOO=bar&quot;,
+               &quot;BAZ=quux&quot;
+       ],
+       &quot;Cmd&quot;: [
+               &quot;date&quot;
+       ],
+       &quot;Entrypoint&quot;: &quot;&quot;,
+       &quot;Image&quot;: &quot;ubuntu&quot;,
+       &quot;Labels&quot;: {
+               &quot;com.example.vendor&quot;: &quot;Acme&quot;,
+               &quot;com.example.license&quot;: &quot;GPL&quot;,
+               &quot;com.example.version&quot;: &quot;1.0&quot;
+       },
+       &quot;Volumes&quot;: {
+               &quot;/tmp&quot;: {}
+       },
+       &quot;WorkingDir&quot;: &quot;&quot;,
+       &quot;NetworkDisabled&quot;: false,
+       &quot;MacAddress&quot;: &quot;12:34:56:78:9a:bc&quot;,
+       &quot;ExposedPorts&quot;: {
+               &quot;22/tcp&quot;: {}
+       },
+       &quot;HostConfig&quot;: {
+         &quot;Binds&quot;: [&quot;/tmp:/tmp&quot;],
+         &quot;Links&quot;: [&quot;redis3:redis&quot;],
+         &quot;LxcConf&quot;: {&quot;lxc.utsname&quot;:&quot;docker&quot;},
+         &quot;Memory&quot;: 0,
+         &quot;MemorySwap&quot;: 0,
+         &quot;CpuShares&quot;: 512,
+         &quot;CpuPeriod&quot;: 100000,
+         &quot;CpuQuota&quot;: 50000,
+         &quot;CpusetCpus&quot;: &quot;0,1&quot;,
+         &quot;CpusetMems&quot;: &quot;0,1&quot;,
+         &quot;BlkioWeight&quot;: 300,
+         &quot;OomKillDisable&quot;: false,
+         &quot;PortBindings&quot;: { &quot;22/tcp&quot;: [{ &quot;HostPort&quot;: &quot;11022&quot; }] },
+         &quot;PublishAllPorts&quot;: false,
+         &quot;Privileged&quot;: false,
+         &quot;ReadonlyRootfs&quot;: false,
+         &quot;Dns&quot;: [&quot;8.8.8.8&quot;],
+         &quot;DnsSearch&quot;: [&quot;&quot;],
+         &quot;ExtraHosts&quot;: null,
+         &quot;VolumesFrom&quot;: [&quot;parent&quot;, &quot;other:ro&quot;],
+         &quot;CapAdd&quot;: [&quot;NET_ADMIN&quot;],
+         &quot;CapDrop&quot;: [&quot;MKNOD&quot;],
+         &quot;RestartPolicy&quot;: { &quot;Name&quot;: &quot;&quot;, &quot;MaximumRetryCount&quot;: 0 },
+         &quot;NetworkMode&quot;: &quot;bridge&quot;,
+         &quot;Devices&quot;: [],
+         &quot;Ulimits&quot;: [{}],
+         &quot;LogConfig&quot;: { &quot;Type&quot;: &quot;json-file&quot;, &quot;Config&quot;: {} },
+         &quot;SecurityOpt&quot;: [&quot;&quot;],
+         &quot;CgroupParent&quot;: &quot;&quot;
+      }
+  }
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>  HTTP/1.1 201 Created
+  Content-Type: application/json
+
+  {
+       &quot;Id&quot;:&quot;e90e34656806&quot;,
+       &quot;Warnings&quot;:[]
+  }
+</code></pre>
+
+<p>Json Parameters:</p>
+
+<ul>
+<li><strong>Hostname</strong> - A string value containing the hostname to use for the
+  container.</li>
+<li><strong>Domainname</strong> - A string value containing the domain name to use
+  for the container.</li>
+<li><strong>User</strong> - A string value specifying the user inside the container.</li>
+<li><strong>Memory</strong> - Memory limit in bytes.</li>
+<li><strong>MemorySwap</strong>- Total memory limit (memory + swap); set <code>-1</code> to disable swap
+  You must use this with <code>memory</code> and make the swap value larger than <code>memory</code>.</li>
+<li><strong>CpuShares</strong> - An integer value containing the container&rsquo;s CPU Shares
+  (ie. the relative weight vs other containers).</li>
+<li><strong>CpuPeriod</strong> - The length of a CPU period in microseconds.</li>
+<li><strong>CpuQuota</strong> - Microseconds of CPU time that the container can get in a CPU period.</li>
+<li><strong>Cpuset</strong> - Deprecated please don&rsquo;t use. Use <code>CpusetCpus</code> instead.</li>
+<li><strong>CpusetCpus</strong> - String value containing the <code>cgroups CpusetCpus</code> to use.</li>
+<li><strong>CpusetMems</strong> - Memory nodes (MEMs) in which to allow execution (0-3, 0,1). Only effective on NUMA systems.</li>
+<li><strong>BlkioWeight</strong> - Block IO weight (relative weight) accepts a weight value between 10 and 1000.</li>
+<li><strong>OomKillDisable</strong> - Boolean value, whether to disable OOM Killer for the container or not.</li>
+<li><strong>AttachStdin</strong> - Boolean value, attaches to <code>stdin</code>.</li>
+<li><strong>AttachStdout</strong> - Boolean value, attaches to <code>stdout</code>.</li>
+<li><strong>AttachStderr</strong> - Boolean value, attaches to <code>stderr</code>.</li>
+<li><strong>Tty</strong> - Boolean value, Attach standard streams to a <code>tty</code>, including <code>stdin</code> if it is not closed.</li>
+<li><strong>OpenStdin</strong> - Boolean value, opens stdin,</li>
+<li><strong>StdinOnce</strong> - Boolean value, close <code>stdin</code> after the 1 attached client disconnects.</li>
+<li><strong>Env</strong> - A list of environment variables in the form of <code>[&quot;VAR=value&quot;[,&quot;VAR2=value2&quot;]]</code></li>
+<li><strong>Labels</strong> - Adds a map of labels to a container. To specify a map: <code>{&quot;key&quot;:&quot;value&quot;[,&quot;key2&quot;:&quot;value2&quot;]}</code></li>
+<li><strong>Cmd</strong> - Command to run specified as a string or an array of strings.</li>
+<li><strong>Entrypoint</strong> - Set the entry point for the container as a string or an array
+  of strings.</li>
+<li><strong>Image</strong> - A string specifying the image name to use for the container.</li>
+<li><strong>Volumes</strong> – An object mapping mount point paths (strings) inside the
+  container to empty objects.</li>
+<li><strong>WorkingDir</strong> - A string specifying the working directory for commands to
+  run in.</li>
+<li><strong>NetworkDisabled</strong> - Boolean value, when true disables networking for the
+  container</li>
+<li><strong>ExposedPorts</strong> - An object mapping ports to an empty object in the form of:
+  <code>&quot;ExposedPorts&quot;: { &quot;&lt;port&gt;/&lt;tcp|udp&gt;: {}&quot; }</code></li>
+<li><strong>HostConfig</strong>
+
+<ul>
+<li><strong>Binds</strong> – A list of volume bindings for this container. Each volume binding is a string in one of these forms:
+
+<ul>
+<li><code>container_path</code> to create a new volume for the container</li>
+<li><code>host_path:container_path</code> to bind-mount a host path into the container</li>
+<li><code>host_path:container_path:ro</code> to make the bind-mount read-only inside the container.</li>
+</ul></li>
+<li><strong>Links</strong> - A list of links for the container. Each link entry should be
+  in the form of <code>container_name:alias</code>.</li>
+<li><strong>LxcConf</strong> - LXC specific configurations. These configurations only
+  work when using the <code>lxc</code> execution driver.</li>
+<li><strong>PortBindings</strong> - A map of exposed container ports and the host port they
+  should map to. A JSON object in the form
+  <code>{ &lt;port&gt;/&lt;protocol&gt;: [{ &quot;HostPort&quot;: &quot;&lt;port&gt;&quot; }] }</code>
+  Take note that <code>port</code> is specified as a string and not an integer value.</li>
+<li><strong>PublishAllPorts</strong> - Allocates a random host port for all of a container&rsquo;s
+  exposed ports. Specified as a boolean value.</li>
+<li><strong>Privileged</strong> - Gives the container full access to the host. Specified as
+  a boolean value.</li>
+<li><strong>ReadonlyRootfs</strong> - Mount the container&rsquo;s root filesystem as read only.
+  Specified as a boolean value.</li>
+<li><strong>Dns</strong> - A list of DNS servers for the container to use.</li>
+<li><strong>DnsSearch</strong> - A list of DNS search domains</li>
+<li><strong>ExtraHosts</strong> - A list of hostnames/IP mappings to add to the
+container&rsquo;s <code>/etc/hosts</code> file. Specified in the form <code>[&quot;hostname:IP&quot;]</code>.</li>
+<li><strong>VolumesFrom</strong> - A list of volumes to inherit from another container.
+  Specified in the form <code>&lt;container name&gt;[:&lt;ro|rw&gt;]</code></li>
+<li><strong>CapAdd</strong> - A list of kernel capabilities to add to the container.</li>
+<li><strong>Capdrop</strong> - A list of kernel capabilities to drop from the container.</li>
+<li><strong>RestartPolicy</strong> – The behavior to apply when the container exits.  The
+    value is an object with a <code>Name</code> property of either <code>&quot;always&quot;</code> to
+    always restart or <code>&quot;on-failure&quot;</code> to restart only when the container
+    exit code is non-zero.  If <code>on-failure</code> is used, <code>MaximumRetryCount</code>
+    controls the number of times to retry before giving up.
+    The default is not to restart. (optional)
+    An ever increasing delay (double the previous delay, starting at 100mS)
+    is added before each restart to prevent flooding the server.</li>
+<li><strong>NetworkMode</strong> - Sets the networking mode for the container. Supported
+  values are: <code>bridge</code>, <code>host</code>, and <code>container:&lt;name|id&gt;</code></li>
+<li><strong>Devices</strong> - A list of devices to add to the container specified as a JSON object in the
+form
+  <code>{ &quot;PathOnHost&quot;: &quot;/dev/deviceName&quot;, &quot;PathInContainer&quot;: &quot;/dev/deviceName&quot;, &quot;CgroupPermissions&quot;: &quot;mrw&quot;}</code></li>
+<li><strong>Ulimits</strong> - A list of ulimits to set in the container, specified as
+  <code>{ &quot;Name&quot;: &lt;name&gt;, &quot;Soft&quot;: &lt;soft limit&gt;, &quot;Hard&quot;: &lt;hard limit&gt; }</code>, for example:
+  <code>Ulimits: { &quot;Name&quot;: &quot;nofile&quot;, &quot;Soft&quot;: 1024, &quot;Hard&quot;: 2048 }</code></li>
+<li><strong>SecurityOpt</strong>: A list of string values to customize labels for MLS
+systems, such as SELinux.</li>
+<li><strong>LogConfig</strong> - Log configuration for the container, specified as a JSON object in the form
+  <code>{ &quot;Type&quot;: &quot;&lt;driver_name&gt;&quot;, &quot;Config&quot;: {&quot;key1&quot;: &quot;val1&quot;}}</code>.
+  Available types: <code>json-file</code>, <code>syslog</code>, <code>journald</code>, <code>none</code>.
+  <code>syslog</code> available options are: <code>address</code>.</li>
+<li><strong>CgroupParent</strong> - Path to cgroups under which the cgroup for the container will be created. If the path is not absolute, the path is considered to be relative to the cgroups path of the init process. Cgroups will be created if they do not already exist.</li>
+</ul></li>
+</ul>
+
+<p>Query Parameters:</p>
+
+<ul>
+<li><strong>name</strong> – Assign the specified name to the container. Must
+match <code>/?[a-zA-Z0-9_-]+</code>.</li>
+</ul>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>201</strong> – no error</li>
+<li><strong>404</strong> – no such container</li>
+<li><strong>406</strong> – impossible to attach (container not running)</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+
+<h3 id="inspect-a-container">Inspect a container</h3>
+
+<p><code>GET /containers/(id)/json</code></p>
+
+<p>Return low-level information on the container <code>id</code></p>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>  GET /containers/4fa6e0f0c678/json HTTP/1.1
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+    &quot;AppArmorProfile&quot;: &quot;&quot;,
+    &quot;Args&quot;: [
+        &quot;-c&quot;,
+        &quot;exit 9&quot;
+    ],
+    &quot;Config&quot;: {
+        &quot;AttachStderr&quot;: true,
+        &quot;AttachStdin&quot;: false,
+        &quot;AttachStdout&quot;: true,
+        &quot;Cmd&quot;: [
+            &quot;/bin/sh&quot;,
+            &quot;-c&quot;,
+            &quot;exit 9&quot;
+        ],
+        &quot;Domainname&quot;: &quot;&quot;,
+        &quot;Entrypoint&quot;: null,
+        &quot;Env&quot;: [
+            &quot;PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin&quot;
+        ],
+        &quot;ExposedPorts&quot;: null,
+        &quot;Hostname&quot;: &quot;ba033ac44011&quot;,
+        &quot;Image&quot;: &quot;ubuntu&quot;,
+        &quot;Labels&quot;: {
+            &quot;com.example.vendor&quot;: &quot;Acme&quot;,
+            &quot;com.example.license&quot;: &quot;GPL&quot;,
+            &quot;com.example.version&quot;: &quot;1.0&quot;
+        },
+        &quot;MacAddress&quot;: &quot;&quot;,
+        &quot;NetworkDisabled&quot;: false,
+        &quot;OnBuild&quot;: null,
+        &quot;OpenStdin&quot;: false,
+        &quot;PortSpecs&quot;: null,
+        &quot;StdinOnce&quot;: false,
+        &quot;Tty&quot;: false,
+        &quot;User&quot;: &quot;&quot;,
+        &quot;Volumes&quot;: null,
+        &quot;WorkingDir&quot;: &quot;&quot;
+    },
+    &quot;Created&quot;: &quot;2015-01-06T15:47:31.485331387Z&quot;,
+    &quot;Driver&quot;: &quot;devicemapper&quot;,
+    &quot;ExecDriver&quot;: &quot;native-0.2&quot;,
+    &quot;ExecIDs&quot;: null,
+    &quot;HostConfig&quot;: {
+        &quot;Binds&quot;: null,
+        &quot;BlkioWeight&quot;: 0,
+        &quot;CapAdd&quot;: null,
+        &quot;CapDrop&quot;: null,
+        &quot;ContainerIDFile&quot;: &quot;&quot;,
+        &quot;CpusetCpus&quot;: &quot;&quot;,
+        &quot;CpusetMems&quot;: &quot;&quot;,
+        &quot;CpuShares&quot;: 0,
+        &quot;CpuPeriod&quot;: 100000,
+        &quot;Devices&quot;: [],
+        &quot;Dns&quot;: null,
+        &quot;DnsSearch&quot;: null,
+        &quot;ExtraHosts&quot;: null,
+        &quot;IpcMode&quot;: &quot;&quot;,
+        &quot;Links&quot;: null,
+        &quot;LxcConf&quot;: [],
+        &quot;Memory&quot;: 0,
+        &quot;MemorySwap&quot;: 0,
+        &quot;OomKillDisable&quot;: false,
+        &quot;NetworkMode&quot;: &quot;bridge&quot;,
+        &quot;PortBindings&quot;: {},
+        &quot;Privileged&quot;: false,
+        &quot;ReadonlyRootfs&quot;: false,
+        &quot;PublishAllPorts&quot;: false,
+        &quot;RestartPolicy&quot;: {
+            &quot;MaximumRetryCount&quot;: 2,
+            &quot;Name&quot;: &quot;on-failure&quot;
+        },
+        &quot;LogConfig&quot;: {
+            &quot;Config&quot;: null,
+            &quot;Type&quot;: &quot;json-file&quot;
+        },
+        &quot;SecurityOpt&quot;: null,
+        &quot;VolumesFrom&quot;: null,
+        &quot;Ulimits&quot;: [{}]
+    },
+    &quot;HostnamePath&quot;: &quot;/var/lib/docker/containers/ba033ac4401106a3b513bc9d639eee123ad78ca3616b921167cd74b20e25ed39/hostname&quot;,
+    &quot;HostsPath&quot;: &quot;/var/lib/docker/containers/ba033ac4401106a3b513bc9d639eee123ad78ca3616b921167cd74b20e25ed39/hosts&quot;,
+    &quot;LogPath&quot;: &quot;/var/lib/docker/containers/1eb5fabf5a03807136561b3c00adcd2992b535d624d5e18b6cdc6a6844d9767b/1eb5fabf5a03807136561b3c00adcd2992b535d624d5e18b6cdc6a6844d9767b-json.log&quot;,
+    &quot;Id&quot;: &quot;ba033ac4401106a3b513bc9d639eee123ad78ca3616b921167cd74b20e25ed39&quot;,
+    &quot;Image&quot;: &quot;04c5d3b7b0656168630d3ba35d8889bd0e9caafcaeb3004d2bfbc47e7c5d35d2&quot;,
+    &quot;MountLabel&quot;: &quot;&quot;,
+    &quot;Name&quot;: &quot;/boring_euclid&quot;,
+    &quot;NetworkSettings&quot;: {
+        &quot;Bridge&quot;: &quot;&quot;,
+        &quot;Gateway&quot;: &quot;&quot;,
+        &quot;IPAddress&quot;: &quot;&quot;,
+        &quot;IPPrefixLen&quot;: 0,
+        &quot;MacAddress&quot;: &quot;&quot;,
+        &quot;PortMapping&quot;: null,
+        &quot;Ports&quot;: null
+    },
+    &quot;Path&quot;: &quot;/bin/sh&quot;,
+    &quot;ProcessLabel&quot;: &quot;&quot;,
+    &quot;ResolvConfPath&quot;: &quot;/var/lib/docker/containers/ba033ac4401106a3b513bc9d639eee123ad78ca3616b921167cd74b20e25ed39/resolv.conf&quot;,
+    &quot;RestartCount&quot;: 1,
+    &quot;State&quot;: {
+        &quot;Error&quot;: &quot;&quot;,
+        &quot;ExitCode&quot;: 9,
+        &quot;FinishedAt&quot;: &quot;2015-01-06T15:47:32.080254511Z&quot;,
+        &quot;OOMKilled&quot;: false,
+        &quot;Paused&quot;: false,
+        &quot;Pid&quot;: 0,
+        &quot;Restarting&quot;: false,
+        &quot;Running&quot;: false,
+        &quot;StartedAt&quot;: &quot;2015-01-06T15:47:32.072697474Z&quot;
+    },
+    &quot;Volumes&quot;: {},
+    &quot;VolumesRW&quot;: {}
+}
+</code></pre>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>404</strong> – no such container</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+
+<h3 id="list-processes-running-inside-a-container">List processes running inside a container</h3>
+
+<p><code>GET /containers/(id)/top</code></p>
+
+<p>List processes running inside the container <code>id</code></p>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>GET /containers/4fa6e0f0c678/top HTTP/1.1
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+     &quot;Titles&quot;: [
+             &quot;USER&quot;,
+             &quot;PID&quot;,
+             &quot;%CPU&quot;,
+             &quot;%MEM&quot;,
+             &quot;VSZ&quot;,
+             &quot;RSS&quot;,
+             &quot;TTY&quot;,
+             &quot;STAT&quot;,
+             &quot;START&quot;,
+             &quot;TIME&quot;,
+             &quot;COMMAND&quot;
+             ],
+     &quot;Processes&quot;: [
+             [&quot;root&quot;,&quot;20147&quot;,&quot;0.0&quot;,&quot;0.1&quot;,&quot;18060&quot;,&quot;1864&quot;,&quot;pts/4&quot;,&quot;S&quot;,&quot;10:06&quot;,&quot;0:00&quot;,&quot;bash&quot;],
+             [&quot;root&quot;,&quot;20271&quot;,&quot;0.0&quot;,&quot;0.0&quot;,&quot;4312&quot;,&quot;352&quot;,&quot;pts/4&quot;,&quot;S+&quot;,&quot;10:07&quot;,&quot;0:00&quot;,&quot;sleep&quot;,&quot;10&quot;]
+     ]
+}
+</code></pre>
+
+<p>Query Parameters:</p>
+
+<ul>
+<li><strong>ps_args</strong> – ps arguments to use (e.g., aux)</li>
+</ul>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>404</strong> – no such container</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+
+<h3 id="get-container-logs">Get container logs</h3>
+
+<p><code>GET /containers/(id)/logs</code></p>
+
+<p>Get <code>stdout</code> and <code>stderr</code> logs from the container <code>id</code></p>
+
+<blockquote>
+<p><strong>Note</strong>:
+This endpoint works only for containers with the <code>json-file</code> or <code>journald</code> logging drivers.</p>
+</blockquote>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code> GET /containers/4fa6e0f0c678/logs?stderr=1&amp;stdout=1&amp;timestamps=1&amp;follow=1&amp;tail=10&amp;since=1428990821 HTTP/1.1
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code> HTTP/1.1 101 UPGRADED
+ Content-Type: application/vnd.docker.raw-stream
+ Connection: Upgrade
+ Upgrade: tcp
+
+ {{ STREAM }}
+</code></pre>
+
+<p>Query Parameters:</p>
+
+<ul>
+<li><strong>follow</strong> – 1/True/true or 0/False/false, return stream. Default <code>false</code>.</li>
+<li><strong>stdout</strong> – 1/True/true or 0/False/false, show <code>stdout</code> log. Default <code>false</code>.</li>
+<li><strong>stderr</strong> – 1/True/true or 0/False/false, show <code>stderr</code> log. Default <code>false</code>.</li>
+<li><strong>since</strong> – UNIX timestamp (integer) to filter logs. Specifying a timestamp
+will only output log-entries since that timestamp. Default: 0 (unfiltered)</li>
+<li><strong>timestamps</strong> – 1/True/true or 0/False/false, print timestamps for
+    every log line. Default <code>false</code>.</li>
+<li><strong>tail</strong> – Output specified number of lines at the end of logs: <code>all</code> or <code>&lt;number&gt;</code>. Default all.</li>
+</ul>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>101</strong> – no error, hints proxy about hijacking</li>
+<li><strong>200</strong> – no error, no upgrade header found</li>
+<li><strong>404</strong> – no such container</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+
+<h3 id="inspect-changes-on-a-container-s-filesystem">Inspect changes on a container&rsquo;s filesystem</h3>
+
+<p><code>GET /containers/(id)/changes</code></p>
+
+<p>Inspect changes on container <code>id</code>&rsquo;s filesystem</p>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>GET /containers/4fa6e0f0c678/changes HTTP/1.1
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 200 OK
+Content-Type: application/json
+
+[
+     {
+             &quot;Path&quot;: &quot;/dev&quot;,
+             &quot;Kind&quot;: 0
+     },
+     {
+             &quot;Path&quot;: &quot;/dev/kmsg&quot;,
+             &quot;Kind&quot;: 1
+     },
+     {
+             &quot;Path&quot;: &quot;/test&quot;,
+             &quot;Kind&quot;: 1
+     }
+]
+</code></pre>
+
+<p>Values for <code>Kind</code>:</p>
+
+<ul>
+<li><code>0</code>: Modify</li>
+<li><code>1</code>: Add</li>
+<li><code>2</code>: Delete</li>
+</ul>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>404</strong> – no such container</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+
+<h3 id="export-a-container">Export a container</h3>
+
+<p><code>GET /containers/(id)/export</code></p>
+
+<p>Export the contents of container <code>id</code></p>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>GET /containers/4fa6e0f0c678/export HTTP/1.1
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 200 OK
+Content-Type: application/octet-stream
+
+{{ TAR STREAM }}
+</code></pre>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>404</strong> – no such container</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+
+<h3 id="get-container-stats-based-on-resource-usage">Get container stats based on resource usage</h3>
+
+<p><code>GET /containers/(id)/stats</code></p>
+
+<p>This endpoint returns a live stream of a container&rsquo;s resource usage statistics.</p>
+
+<blockquote>
+<p><strong>Note</strong>: this functionality currently only works when using the <em>libcontainer</em> exec-driver.</p>
+</blockquote>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>GET /containers/redis1/stats HTTP/1.1
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>  HTTP/1.1 200 OK
+  Content-Type: application/json
+
+  {
+     &quot;read&quot; : &quot;2015-01-08T22:57:31.547920715Z&quot;,
+     &quot;network&quot; : {
+        &quot;rx_dropped&quot; : 0,
+        &quot;rx_bytes&quot; : 648,
+        &quot;rx_errors&quot; : 0,
+        &quot;tx_packets&quot; : 8,
+        &quot;tx_dropped&quot; : 0,
+        &quot;rx_packets&quot; : 8,
+        &quot;tx_errors&quot; : 0,
+        &quot;tx_bytes&quot; : 648
+     },
+     &quot;memory_stats&quot; : {
+        &quot;stats&quot; : {
+           &quot;total_pgmajfault&quot; : 0,
+           &quot;cache&quot; : 0,
+           &quot;mapped_file&quot; : 0,
+           &quot;total_inactive_file&quot; : 0,
+           &quot;pgpgout&quot; : 414,
+           &quot;rss&quot; : 6537216,
+           &quot;total_mapped_file&quot; : 0,
+           &quot;writeback&quot; : 0,
+           &quot;unevictable&quot; : 0,
+           &quot;pgpgin&quot; : 477,
+           &quot;total_unevictable&quot; : 0,
+           &quot;pgmajfault&quot; : 0,
+           &quot;total_rss&quot; : 6537216,
+           &quot;total_rss_huge&quot; : 6291456,
+           &quot;total_writeback&quot; : 0,
+           &quot;total_inactive_anon&quot; : 0,
+           &quot;rss_huge&quot; : 6291456,
+           &quot;hierarchical_memory_limit&quot; : 67108864,
+           &quot;total_pgfault&quot; : 964,
+           &quot;total_active_file&quot; : 0,
+           &quot;active_anon&quot; : 6537216,
+           &quot;total_active_anon&quot; : 6537216,
+           &quot;total_pgpgout&quot; : 414,
+           &quot;total_cache&quot; : 0,
+           &quot;inactive_anon&quot; : 0,
+           &quot;active_file&quot; : 0,
+           &quot;pgfault&quot; : 964,
+           &quot;inactive_file&quot; : 0,
+           &quot;total_pgpgin&quot; : 477
+        },
+        &quot;max_usage&quot; : 6651904,
+        &quot;usage&quot; : 6537216,
+        &quot;failcnt&quot; : 0,
+        &quot;limit&quot; : 67108864
+     },
+     &quot;blkio_stats&quot; : {},
+     &quot;cpu_stats&quot; : {
+        &quot;cpu_usage&quot; : {
+           &quot;percpu_usage&quot; : [
+              16970827,
+              1839451,
+              7107380,
+              10571290
+           ],
+           &quot;usage_in_usermode&quot; : 10000000,
+           &quot;total_usage&quot; : 36488948,
+           &quot;usage_in_kernelmode&quot; : 20000000
+        },
+        &quot;system_cpu_usage&quot; : 20091722000000000,
+        &quot;throttling_data&quot; : {}
+     }
+  }
+</code></pre>
+
+<p>Query Parameters:</p>
+
+<ul>
+<li><strong>stream</strong> – 1/True/true or 0/False/false, pull stats once then disconnect. Default <code>true</code>.</li>
+</ul>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>404</strong> – no such container</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+
+<h3 id="resize-a-container-tty">Resize a container TTY</h3>
+
+<p><code>POST /containers/(id)/resize?h=&lt;height&gt;&amp;w=&lt;width&gt;</code></p>
+
+<p>Resize the TTY for container with  <code>id</code>. You must restart the container for the resize to take effect.</p>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>  POST /containers/4fa6e0f0c678/resize?h=40&amp;w=80 HTTP/1.1
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>  HTTP/1.1 200 OK
+  Content-Length: 0
+  Content-Type: text/plain; charset=utf-8
+</code></pre>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>404</strong> – No such container</li>
+<li><strong>500</strong> – Cannot resize container</li>
+</ul>
+
+<h3 id="start-a-container">Start a container</h3>
+
+<p><code>POST /containers/(id)/start</code></p>
+
+<p>Start the container <code>id</code></p>
+
+<blockquote>
+<p><strong>Note</strong>:
+For backwards compatibility, this endpoint accepts a <code>HostConfig</code> as JSON-encoded request body.
+See <a href="#create-a-container">create a container</a> for details.</p>
+</blockquote>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code> POST /containers/(id)/start HTTP/1.1
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code> HTTP/1.1 204 No Content
+</code></pre>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>204</strong> – no error</li>
+<li><strong>304</strong> – container already started</li>
+<li><strong>404</strong> – no such container</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+
+<h3 id="stop-a-container">Stop a container</h3>
+
+<p><code>POST /containers/(id)/stop</code></p>
+
+<p>Stop the container <code>id</code></p>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>POST /containers/e90e34656806/stop?t=5 HTTP/1.1
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 204 No Content
+</code></pre>
+
+<p>Query Parameters:</p>
+
+<ul>
+<li><strong>t</strong> – number of seconds to wait before killing the container</li>
+</ul>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>204</strong> – no error</li>
+<li><strong>304</strong> – container already stopped</li>
+<li><strong>404</strong> – no such container</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+
+<h3 id="restart-a-container">Restart a container</h3>
+
+<p><code>POST /containers/(id)/restart</code></p>
+
+<p>Restart the container <code>id</code></p>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>POST /containers/e90e34656806/restart?t=5 HTTP/1.1
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 204 No Content
+</code></pre>
+
+<p>Query Parameters:</p>
+
+<ul>
+<li><strong>t</strong> – number of seconds to wait before killing the container</li>
+</ul>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>204</strong> – no error</li>
+<li><strong>404</strong> – no such container</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+
+<h3 id="kill-a-container">Kill a container</h3>
+
+<p><code>POST /containers/(id)/kill</code></p>
+
+<p>Kill the container <code>id</code></p>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>POST /containers/e90e34656806/kill HTTP/1.1
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 204 No Content
+</code></pre>
+
+<p>Query Parameters</p>
+
+<ul>
+<li><strong>signal</strong> - Signal to send to the container: integer or string like <code>SIGINT</code>.
+    When not set, <code>SIGKILL</code> is assumed and the call waits for the container to exit.</li>
+</ul>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>204</strong> – no error</li>
+<li><strong>404</strong> – no such container</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+
+<h3 id="rename-a-container">Rename a container</h3>
+
+<p><code>POST /containers/(id)/rename</code></p>
+
+<p>Rename the container <code>id</code> to a <code>new_name</code></p>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>POST /containers/e90e34656806/rename?name=new_name HTTP/1.1
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 204 No Content
+</code></pre>
+
+<p>Query Parameters:</p>
+
+<ul>
+<li><strong>name</strong> – new name for the container</li>
+</ul>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>204</strong> – no error</li>
+<li><strong>404</strong> – no such container</li>
+<li><strong>409</strong> - conflict name already assigned</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+
+<h3 id="pause-a-container">Pause a container</h3>
+
+<p><code>POST /containers/(id)/pause</code></p>
+
+<p>Pause the container <code>id</code></p>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>POST /containers/e90e34656806/pause HTTP/1.1
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 204 No Content
+</code></pre>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>204</strong> – no error</li>
+<li><strong>404</strong> – no such container</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+
+<h3 id="unpause-a-container">Unpause a container</h3>
+
+<p><code>POST /containers/(id)/unpause</code></p>
+
+<p>Unpause the container <code>id</code></p>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>POST /containers/e90e34656806/unpause HTTP/1.1
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 204 No Content
+</code></pre>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>204</strong> – no error</li>
+<li><strong>404</strong> – no such container</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+
+<h3 id="attach-to-a-container">Attach to a container</h3>
+
+<p><code>POST /containers/(id)/attach</code></p>
+
+<p>Attach to the container <code>id</code></p>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>POST /containers/16253994b7c4/attach?logs=1&amp;stream=0&amp;stdout=1 HTTP/1.1
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 101 UPGRADED
+Content-Type: application/vnd.docker.raw-stream
+Connection: Upgrade
+Upgrade: tcp
+
+{{ STREAM }}
+</code></pre>
+
+<p>Query Parameters:</p>
+
+<ul>
+<li><strong>logs</strong> – 1/True/true or 0/False/false, return logs. Default <code>false</code>.</li>
+<li><strong>stream</strong> – 1/True/true or 0/False/false, return stream.
+    Default <code>false</code>.</li>
+<li><strong>stdin</strong> – 1/True/true or 0/False/false, if <code>stream=true</code>, attach
+    to <code>stdin</code>. Default <code>false</code>.</li>
+<li><strong>stdout</strong> – 1/True/true or 0/False/false, if <code>logs=true</code>, return
+    <code>stdout</code> log, if <code>stream=true</code>, attach to <code>stdout</code>. Default <code>false</code>.</li>
+<li><strong>stderr</strong> – 1/True/true or 0/False/false, if <code>logs=true</code>, return
+    <code>stderr</code> log, if <code>stream=true</code>, attach to <code>stderr</code>. Default <code>false</code>.</li>
+</ul>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>101</strong> – no error, hints proxy about hijacking</li>
+<li><strong>200</strong> – no error, no upgrade header found</li>
+<li><strong>400</strong> – bad parameter</li>
+<li><strong>404</strong> – no such container</li>
+
+<li><p><strong>500</strong> – server error</p>
+
+<p><strong>Stream details</strong>:</p>
+
+<p>When using the TTY setting is enabled in
+<a href="#create-a-container"><code>POST /containers/create</code>
+</a>,
+the stream is the raw data from the process PTY and client&rsquo;s <code>stdin</code>.
+When the TTY is disabled, then the stream is multiplexed to separate
+<code>stdout</code> and <code>stderr</code>.</p>
+
+<p>The format is a <strong>Header</strong> and a <strong>Payload</strong> (frame).</p>
+
+<p><strong>HEADER</strong></p>
+
+<p>The header contains the information which the stream writes (<code>stdout</code> or
+<code>stderr</code>). It also contains the size of the associated frame encoded in the
+last four bytes (<code>uint32</code>).</p>
+
+<p>It is encoded on the first eight bytes like this:</p>
+
+<pre><code>header := [8]byte{STREAM_TYPE, 0, 0, 0, SIZE1, SIZE2, SIZE3, SIZE4}
+</code></pre>
+
+<p><code>STREAM_TYPE</code> can be:</p></li>
+
+<li><p>0: <code>stdin</code> (is written on <code>stdout</code>)</p></li>
+
+<li><p>1: <code>stdout</code></p></li>
+
+<li><p>2: <code>stderr</code></p>
+
+<p><code>SIZE1, SIZE2, SIZE3, SIZE4</code> are the four bytes of
+the <code>uint32</code> size encoded as big endian.</p>
+
+<p><strong>PAYLOAD</strong></p>
+
+<p>The payload is the raw stream.</p>
+
+<p><strong>IMPLEMENTATION</strong></p>
+
+<p>The simplest way to implement the Attach protocol is the following:</p>
+
+<ol>
+<li>Read eight bytes.</li>
+<li>Choose <code>stdout</code> or <code>stderr</code> depending on the first byte.</li>
+<li>Extract the frame size from the last four bytes.</li>
+<li>Read the extracted size and output it on the correct output.</li>
+<li>Goto 1.</li>
+</ol></li>
+</ul>
+
+<h3 id="attach-to-a-container-websocket">Attach to a container (websocket)</h3>
+
+<p><code>GET /containers/(id)/attach/ws</code></p>
+
+<p>Attach to the container <code>id</code> via websocket</p>
+
+<p>Implements websocket protocol handshake according to <a href="http://tools.ietf.org/html/rfc6455">RFC 6455</a></p>
+
+<p><strong>Example request</strong></p>
+
+<pre><code>GET /containers/e90e34656806/attach/ws?logs=0&amp;stream=1&amp;stdin=1&amp;stdout=1&amp;stderr=1 HTTP/1.1
+</code></pre>
+
+<p><strong>Example response</strong></p>
+
+<pre><code>{{ STREAM }}
+</code></pre>
+
+<p>Query Parameters:</p>
+
+<ul>
+<li><strong>logs</strong> – 1/True/true or 0/False/false, return logs. Default <code>false</code>.</li>
+<li><strong>stream</strong> – 1/True/true or 0/False/false, return stream.
+    Default <code>false</code>.</li>
+<li><strong>stdin</strong> – 1/True/true or 0/False/false, if <code>stream=true</code>, attach
+    to <code>stdin</code>. Default <code>false</code>.</li>
+<li><strong>stdout</strong> – 1/True/true or 0/False/false, if <code>logs=true</code>, return
+    <code>stdout</code> log, if <code>stream=true</code>, attach to <code>stdout</code>. Default <code>false</code>.</li>
+<li><strong>stderr</strong> – 1/True/true or 0/False/false, if <code>logs=true</code>, return
+    <code>stderr</code> log, if <code>stream=true</code>, attach to <code>stderr</code>. Default <code>false</code>.</li>
+</ul>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>400</strong> – bad parameter</li>
+<li><strong>404</strong> – no such container</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+
+<h3 id="wait-a-container">Wait a container</h3>
+
+<p><code>POST /containers/(id)/wait</code></p>
+
+<p>Block until container <code>id</code> stops, then returns the exit code</p>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>POST /containers/16253994b7c4/wait HTTP/1.1
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 200 OK
+Content-Type: application/json
+
+{&quot;StatusCode&quot;: 0}
+</code></pre>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>404</strong> – no such container</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+
+<h3 id="remove-a-container">Remove a container</h3>
+
+<p><code>DELETE /containers/(id)</code></p>
+
+<p>Remove the container <code>id</code> from the filesystem</p>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>DELETE /containers/16253994b7c4?v=1 HTTP/1.1
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 204 No Content
+</code></pre>
+
+<p>Query Parameters:</p>
+
+<ul>
+<li><strong>v</strong> – 1/True/true or 0/False/false, Remove the volumes
+    associated to the container. Default <code>false</code>.</li>
+<li><strong>force</strong> - 1/True/true or 0/False/false, Kill then remove the container.
+    Default <code>false</code>.</li>
+</ul>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>204</strong> – no error</li>
+<li><strong>400</strong> – bad parameter</li>
+<li><strong>404</strong> – no such container</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+
+<h3 id="copy-files-or-folders-from-a-container">Copy files or folders from a container</h3>
+
+<p><code>POST /containers/(id)/copy</code></p>
+
+<p>Copy files or folders of container <code>id</code></p>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>POST /containers/4fa6e0f0c678/copy HTTP/1.1
+Content-Type: application/json
+
+{
+     &quot;Resource&quot;: &quot;test.txt&quot;
+}
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 200 OK
+Content-Type: application/x-tar
+
+{{ TAR STREAM }}
+</code></pre>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>404</strong> – no such container</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+
+<h2 id="2-2-images">2.2 Images</h2>
+
+<h3 id="list-images">List Images</h3>
+
+<p><code>GET /images/json</code></p>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>GET /images/json?all=0 HTTP/1.1
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 200 OK
+Content-Type: application/json
+
+[
+  {
+     &quot;RepoTags&quot;: [
+       &quot;ubuntu:12.04&quot;,
+       &quot;ubuntu:precise&quot;,
+       &quot;ubuntu:latest&quot;
+     ],
+     &quot;Id&quot;: &quot;8dbd9e392a964056420e5d58ca5cc376ef18e2de93b5cc90e868a1bbc8318c1c&quot;,
+     &quot;Created&quot;: 1365714795,
+     &quot;Size&quot;: 131506275,
+     &quot;VirtualSize&quot;: 131506275,
+     &quot;Labels&quot;: {}
+  },
+  {
+     &quot;RepoTags&quot;: [
+       &quot;ubuntu:12.10&quot;,
+       &quot;ubuntu:quantal&quot;
+     ],
+     &quot;ParentId&quot;: &quot;27cf784147099545&quot;,
+     &quot;Id&quot;: &quot;b750fe79269d2ec9a3c593ef05b4332b1d1a02a62b4accb2c21d589ff2f5f2dc&quot;,
+     &quot;Created&quot;: 1364102658,
+     &quot;Size&quot;: 24653,
+     &quot;VirtualSize&quot;: 180116135,
+     &quot;Labels&quot;: {
+        &quot;com.example.version&quot;: &quot;v1&quot;
+     }
+  }
+]
+</code></pre>
+
+<p><strong>Example request, with digest information</strong>:</p>
+
+<pre><code>GET /images/json?digests=1 HTTP/1.1
+</code></pre>
+
+<p><strong>Example response, with digest information</strong>:</p>
+
+<pre><code>HTTP/1.1 200 OK
+Content-Type: application/json
+
+[
+  {
+    &quot;Created&quot;: 1420064636,
+    &quot;Id&quot;: &quot;4986bf8c15363d1c5d15512d5266f8777bfba4974ac56e3270e7760f6f0a8125&quot;,
+    &quot;ParentId&quot;: &quot;ea13149945cb6b1e746bf28032f02e9b5a793523481a0a18645fc77ad53c4ea2&quot;,
+    &quot;RepoDigests&quot;: [
+      &quot;localhost:5000/test/busybox@sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf&quot;
+    ],
+    &quot;RepoTags&quot;: [
+      &quot;localhost:5000/test/busybox:latest&quot;,
+      &quot;playdate:latest&quot;
+    ],
+    &quot;Size&quot;: 0,
+    &quot;VirtualSize&quot;: 2429728,
+    &quot;Labels&quot;: {}
+  }
+]
+</code></pre>
+
+<p>The response shows a single image <code>Id</code> associated with two repositories
+(<code>RepoTags</code>): <code>localhost:5000/test/busybox</code>: and <code>playdate</code>. A caller can use
+either of the <code>RepoTags</code> values <code>localhost:5000/test/busybox:latest</code> or
+<code>playdate:latest</code> to reference the image.</p>
+
+<p>You can also use <code>RepoDigests</code> values to reference an image. In this response,
+the array has only one reference and that is to the
+<code>localhost:5000/test/busybox</code> repository; the <code>playdate</code> repository has no
+digest. You can reference this digest using the value:
+<code>localhost:5000/test/busybox@sha256:cbbf2f9a99b47fc460d...</code></p>
+
+<p>See the <code>docker run</code> and <code>docker build</code> commands for examples of digest and tag
+references on the command line.</p>
+
+<p>Query Parameters:</p>
+
+<ul>
+<li><strong>all</strong> – 1/True/true or 0/False/false, default false</li>
+<li><strong>filters</strong> – a JSON encoded value of the filters (a map[string][]string) to process on the images list. Available filters:
+
+<ul>
+<li><code>dangling=true</code></li>
+<li><code>label=key</code> or <code>label=&quot;key=value&quot;</code> of an image label</li>
+</ul></li>
+<li><strong>filter</strong> - only return images with the specified name</li>
+</ul>
+
+<h3 id="build-image-from-a-dockerfile">Build image from a Dockerfile</h3>
+
+<p><code>POST /build</code></p>
+
+<p>Build an image from a Dockerfile</p>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>POST /build HTTP/1.1
+
+{{ TAR STREAM }}
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 200 OK
+Content-Type: application/json
+
+{&quot;stream&quot;: &quot;Step 1...&quot;}
+{&quot;stream&quot;: &quot;...&quot;}
+{&quot;error&quot;: &quot;Error...&quot;, &quot;errorDetail&quot;: {&quot;code&quot;: 123, &quot;message&quot;: &quot;Error...&quot;}}
+</code></pre>
+
+<p>The input stream must be a <code>tar</code> archive compressed with one of the
+following algorithms: <code>identity</code> (no compression), <code>gzip</code>, <code>bzip2</code>, <code>xz</code>.</p>
+
+<p>The archive must include a build instructions file, typically called
+<code>Dockerfile</code> at the archive&rsquo;s root. The <code>dockerfile</code> parameter may be
+used to specify a different build instructions file. To do this, its value must be
+the path to the alternate build instructions file to use.</p>
+
+<p>The archive may include any number of other files,
+which are accessible in the build context (See the <a href="../../../../engine/reference/builder/#dockerbuilder"><em>ADD build
+command</em></a>).</p>
+
+<p>The build is canceled if the client drops the connection by quitting
+or being killed.</p>
+
+<p>Query Parameters:</p>
+
+<ul>
+<li><strong>dockerfile</strong> - Path within the build context to the <code>Dockerfile</code>. This is
+    ignored if <code>remote</code> is specified and points to an external <code>Dockerfile</code>.</li>
+<li><strong>t</strong> – Repository name (and optionally a tag) to be applied to
+    the resulting image in case of success.</li>
+<li><strong>remote</strong> – A Git repository URI or HTTP/HTTPS context URI. If the
+    URI points to a single text file, the file&rsquo;s contents are placed into
+    a file called <code>Dockerfile</code> and the image is built from that file. If
+    the URI points to a tarball, the file is downloaded by the daemon and
+    the contents therein used as the context for the build. If the URI
+    points to a tarball and the <code>dockerfile</code> parameter is also specified,
+    there must be a file with the corresponding path inside the tarball.</li>
+<li><strong>q</strong> – Suppress verbose build output.</li>
+<li><strong>nocache</strong> – Do not use the cache when building the image.</li>
+<li><strong>pull</strong> - Attempt to pull the image even if an older image exists locally.</li>
+<li><strong>rm</strong> - Remove intermediate containers after a successful build (default behavior).</li>
+<li><strong>forcerm</strong> - Always remove intermediate containers (includes <code>rm</code>).</li>
+<li><strong>memory</strong> - Set memory limit for build.</li>
+<li><strong>memswap</strong> - Total memory (memory + swap), <code>-1</code> to disable swap.</li>
+<li><strong>cpushares</strong> - CPU shares (relative weight).</li>
+<li><strong>cpusetcpus</strong> - CPUs in which to allow execution (e.g., <code>0-3</code>, <code>0,1</code>).</li>
+<li><strong>cpuperiod</strong> - The length of a CPU period in microseconds.</li>
+
+<li><p><strong>cpuquota</strong> - Microseconds of CPU time that the container can get in a CPU period.</p>
+
+<p>Request Headers:</p></li>
+
+<li><p><strong>Content-type</strong> – Set to <code>&quot;application/tar&quot;</code>.</p></li>
+
+<li><p><strong>X-Registry-Config</strong> – base64-encoded ConfigFile object</p></li>
+</ul>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+
+<h3 id="create-an-image">Create an image</h3>
+
+<p><code>POST /images/create</code></p>
+
+<p>Create an image either by pulling it from the registry or by importing it</p>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>POST /images/create?fromImage=ubuntu HTTP/1.1
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 200 OK
+Content-Type: application/json
+
+{&quot;status&quot;: &quot;Pulling...&quot;}
+{&quot;status&quot;: &quot;Pulling&quot;, &quot;progress&quot;: &quot;1 B/ 100 B&quot;, &quot;progressDetail&quot;: {&quot;current&quot;: 1, &quot;total&quot;: 100}}
+{&quot;error&quot;: &quot;Invalid...&quot;}
+...
+</code></pre>
+
+<p>When using this endpoint to pull an image from the registry, the
+<code>X-Registry-Auth</code> header can be used to include
+a base64-encoded AuthConfig object.</p>
+
+<p>Query Parameters:</p>
+
+<ul>
+<li><strong>fromImage</strong> – Name of the image to pull.</li>
+<li><strong>fromSrc</strong> – Source to import.  The value may be a URL from which the image
+    can be retrieved or <code>-</code> to read the image from the request body.</li>
+<li><strong>repo</strong> – Repository name.</li>
+<li><strong>tag</strong> – Tag.</li>
+
+<li><p><strong>registry</strong> – The registry to pull from.</p>
+
+<p>Request Headers:</p></li>
+
+<li><p><strong>X-Registry-Auth</strong> – base64-encoded AuthConfig object</p></li>
+</ul>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+
+<h3 id="inspect-an-image">Inspect an image</h3>
+
+<p><code>GET /images/(name)/json</code></p>
+
+<p>Return low-level information on the image <code>name</code></p>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>GET /images/ubuntu/json HTTP/1.1
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+     &quot;Created&quot;: &quot;2013-03-23T22:24:18.818426-07:00&quot;,
+     &quot;Container&quot;: &quot;3d67245a8d72ecf13f33dffac9f79dcdf70f75acb84d308770391510e0c23ad0&quot;,
+     &quot;ContainerConfig&quot;:
+             {
+                     &quot;Hostname&quot;: &quot;&quot;,
+                     &quot;User&quot;: &quot;&quot;,
+                     &quot;AttachStdin&quot;: false,
+                     &quot;AttachStdout&quot;: false,
+                     &quot;AttachStderr&quot;: false,
+                     &quot;PortSpecs&quot;: null,
+                     &quot;Tty&quot;: true,
+                     &quot;OpenStdin&quot;: true,
+                     &quot;StdinOnce&quot;: false,
+                     &quot;Env&quot;: null,
+                     &quot;Cmd&quot;: [&quot;/bin/bash&quot;],
+                     &quot;Dns&quot;: null,
+                     &quot;Image&quot;: &quot;ubuntu&quot;,
+                     &quot;Labels&quot;: {
+                         &quot;com.example.vendor&quot;: &quot;Acme&quot;,
+                         &quot;com.example.license&quot;: &quot;GPL&quot;,
+                         &quot;com.example.version&quot;: &quot;1.0&quot;
+                     },
+                     &quot;Volumes&quot;: null,
+                     &quot;VolumesFrom&quot;: &quot;&quot;,
+                     &quot;WorkingDir&quot;: &quot;&quot;
+             },
+     &quot;Id&quot;: &quot;b750fe79269d2ec9a3c593ef05b4332b1d1a02a62b4accb2c21d589ff2f5f2dc&quot;,
+     &quot;Parent&quot;: &quot;27cf784147099545&quot;,
+     &quot;Size&quot;: 6824592
+}
+</code></pre>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>404</strong> – no such image</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+
+<h3 id="get-the-history-of-an-image">Get the history of an image</h3>
+
+<p><code>GET /images/(name)/history</code></p>
+
+<p>Return the history of the image <code>name</code></p>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>GET /images/ubuntu/history HTTP/1.1
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 200 OK
+Content-Type: application/json
+
+[    
+    {    
+        &quot;Id&quot;: &quot;3db9c44f45209632d6050b35958829c3a2aa256d81b9a7be45b362ff85c54710&quot;,
+        &quot;Created&quot;: 1398108230,
+        &quot;CreatedBy&quot;: &quot;/bin/sh -c #(nop) ADD file:eb15dbd63394e063b805a3c32ca7bf0266ef64676d5a6fab4801f2e81e2a5148 in /&quot;,
+        &quot;Tags&quot;: [
+            &quot;ubuntu:lucid&quot;,
+            &quot;ubuntu:10.04&quot;
+        ],   
+        &quot;Size&quot;: 182964289,
+        &quot;Comment&quot;: &quot;&quot;
+    },   
+    {    
+        &quot;Id&quot;: &quot;6cfa4d1f33fb861d4d114f43b25abd0ac737509268065cdfd69d544a59c85ab8&quot;,
+        &quot;Created&quot;: 1398108222,
+        &quot;CreatedBy&quot;: &quot;/bin/sh -c #(nop) MAINTAINER Tianon Gravi &lt;admwiggin@gmail.com&gt; - mkimage-debootstrap.sh -i iproute,iputils-ping,ubuntu-minimal -t lucid.tar.xz lucid http://archive.ubuntu.com/ubuntu/&quot;,
+        &quot;Tags&quot;: null,
+        &quot;Size&quot;: 0,
+        &quot;Comment&quot;: &quot;&quot;
+    },   
+    {    
+        &quot;Id&quot;: &quot;511136ea3c5a64f264b78b5433614aec563103b4d4702f3ba7d4d2698e22c158&quot;,
+        &quot;Created&quot;: 1371157430,
+        &quot;CreatedBy&quot;: &quot;&quot;,
+        &quot;Tags&quot;: [
+            &quot;scratch12:latest&quot;,
+            &quot;scratch:latest&quot;
+        ],   
+        &quot;Size&quot;: 0,
+        &quot;Comment&quot;: &quot;Imported from -&quot;
+    }    
+]
+</code></pre>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>404</strong> – no such image</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+
+<h3 id="push-an-image-on-the-registry">Push an image on the registry</h3>
+
+<p><code>POST /images/(name)/push</code></p>
+
+<p>Push the image <code>name</code> on the registry</p>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>POST /images/test/push HTTP/1.1
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 200 OK
+Content-Type: application/json
+
+{&quot;status&quot;: &quot;Pushing...&quot;}
+{&quot;status&quot;: &quot;Pushing&quot;, &quot;progress&quot;: &quot;1/? (n/a)&quot;, &quot;progressDetail&quot;: {&quot;current&quot;: 1}}}
+{&quot;error&quot;: &quot;Invalid...&quot;}
+...
+</code></pre>
+
+<p>If you wish to push an image on to a private registry, that image must already have a tag
+into a repository which references that registry <code>hostname</code> and <code>port</code>.  This repository name should
+then be used in the URL. This duplicates the command line&rsquo;s flow.</p>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>POST /images/registry.acme.com:5000/test/push HTTP/1.1
+</code></pre>
+
+<p>Query Parameters:</p>
+
+<ul>
+<li><strong>tag</strong> – The tag to associate with the image on the registry. This is optional.</li>
+</ul>
+
+<p>Request Headers:</p>
+
+<ul>
+<li><strong>X-Registry-Auth</strong> – Include a base64-encoded AuthConfig.
+    object.</li>
+</ul>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>404</strong> – no such image</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+
+<h3 id="tag-an-image-into-a-repository">Tag an image into a repository</h3>
+
+<p><code>POST /images/(name)/tag</code></p>
+
+<p>Tag the image <code>name</code> into a repository</p>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>POST /images/test/tag?repo=myrepo&amp;force=0&amp;tag=v42 HTTP/1.1
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 201 OK
+</code></pre>
+
+<p>Query Parameters:</p>
+
+<ul>
+<li><strong>repo</strong> – The repository to tag in</li>
+<li><strong>force</strong> – 1/True/true or 0/False/false, default false</li>
+<li><strong>tag</strong> - The new tag name</li>
+</ul>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>201</strong> – no error</li>
+<li><strong>400</strong> – bad parameter</li>
+<li><strong>404</strong> – no such image</li>
+<li><strong>409</strong> – conflict</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+
+<h3 id="remove-an-image">Remove an image</h3>
+
+<p><code>DELETE /images/(name)</code></p>
+
+<p>Remove the image <code>name</code> from the filesystem</p>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>DELETE /images/test HTTP/1.1
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 200 OK
+Content-type: application/json
+
+[
+ {&quot;Untagged&quot;: &quot;3e2f21a89f&quot;},
+ {&quot;Deleted&quot;: &quot;3e2f21a89f&quot;},
+ {&quot;Deleted&quot;: &quot;53b4f83ac9&quot;}
+]
+</code></pre>
+
+<p>Query Parameters:</p>
+
+<ul>
+<li><strong>force</strong> – 1/True/true or 0/False/false, default false</li>
+<li><strong>noprune</strong> – 1/True/true or 0/False/false, default false</li>
+</ul>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>404</strong> – no such image</li>
+<li><strong>409</strong> – conflict</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+
+<h3 id="search-images">Search images</h3>
+
+<p><code>GET /images/search</code></p>
+
+<p>Search for an image on <a href="https://hub.docker.com">Docker Hub</a>. This API
+returns both <code>is_trusted</code> and <code>is_automated</code> images. Currently, they
+are considered identical. In the future, the <code>is_trusted</code> property will
+be deprecated and replaced by the <code>is_automated</code> property.</p>
+
+<blockquote>
+<p><strong>Note</strong>:
+The response keys have changed from API v1.6 to reflect the JSON
+sent by the registry server to the docker daemon&rsquo;s request.</p>
+</blockquote>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>GET /images/search?term=sshd HTTP/1.1
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 200 OK
+Content-Type: application/json
+
+    [
+            {
+                &quot;star_count&quot;: 12,
+                &quot;is_official&quot;: false,
+                &quot;name&quot;: &quot;wma55/u1210sshd&quot;,
+                &quot;is_trusted&quot;: false,
+                &quot;is_automated&quot;: false,
+                &quot;description&quot;: &quot;&quot;,
+            },
+            {
+                &quot;star_count&quot;: 10,
+                &quot;is_official&quot;: false,
+                &quot;name&quot;: &quot;jdswinbank/sshd&quot;,
+                &quot;is_trusted&quot;: false,
+                &quot;is_automated&quot;: false,
+                &quot;description&quot;: &quot;&quot;,
+            },
+            {
+                &quot;star_count&quot;: 18,
+                &quot;is_official&quot;: false,
+                &quot;name&quot;: &quot;vgauthier/sshd&quot;,
+                &quot;is_trusted&quot;: false,
+                &quot;is_automated&quot;: false,
+                &quot;description&quot;: &quot;&quot;,
+            }
+    ...
+    ]
+</code></pre>
+
+<p>Query Parameters:</p>
+
+<ul>
+<li><strong>term</strong> – term to search</li>
+</ul>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+
+<h2 id="2-3-misc">2.3 Misc</h2>
+
+<h3 id="check-auth-configuration">Check auth configuration</h3>
+
+<p><code>POST /auth</code></p>
+
+<p>Get the default username and email</p>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>POST /auth HTTP/1.1
+Content-Type: application/json
+
+{
+     &quot;username&quot;:&quot; hannibal&quot;,
+     &quot;password: &quot;xxxx&quot;,
+     &quot;email&quot;: &quot;hannibal@a-team.com&quot;,
+     &quot;serveraddress&quot;: &quot;https://index.docker.io/v1/&quot;
+}
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 200 OK
+</code></pre>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>204</strong> – no error</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+
+<h3 id="display-system-wide-information">Display system-wide information</h3>
+
+<p><code>GET /info</code></p>
+
+<p>Display system-wide information</p>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>GET /info HTTP/1.1
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+    &quot;Containers&quot;: 11,
+    &quot;CpuCfsPeriod&quot;: true,
+    &quot;CpuCfsQuota&quot;: true,
+    &quot;Debug&quot;: false,
+    &quot;DockerRootDir&quot;: &quot;/var/lib/docker&quot;,
+    &quot;Driver&quot;: &quot;btrfs&quot;,
+    &quot;DriverStatus&quot;: [[&quot;&quot;]],
+    &quot;ExecutionDriver&quot;: &quot;native-0.1&quot;,
+    &quot;ExperimentalBuild&quot;: false,
+    &quot;HttpProxy&quot;: &quot;http://test:test@localhost:8080&quot;,
+    &quot;HttpsProxy&quot;: &quot;https://test:test@localhost:8080&quot;,
+    &quot;ID&quot;: &quot;7TRN:IPZB:QYBB:VPBQ:UMPP:KARE:6ZNR:XE6T:7EWV:PKF4:ZOJD:TPYS&quot;,
+    &quot;IPv4Forwarding&quot;: true,
+    &quot;Images&quot;: 16,
+    &quot;IndexServerAddress&quot;: &quot;https://index.docker.io/v1/&quot;,
+    &quot;InitPath&quot;: &quot;/usr/bin/docker&quot;,
+    &quot;InitSha1&quot;: &quot;&quot;,
+    &quot;KernelVersion&quot;: &quot;3.12.0-1-amd64&quot;,
+    &quot;Labels&quot;: [
+        &quot;storage=ssd&quot;
+    ],
+    &quot;MemTotal&quot;: 2099236864,
+    &quot;MemoryLimit&quot;: true,
+    &quot;NCPU&quot;: 1,
+    &quot;NEventsListener&quot;: 0,
+    &quot;NFd&quot;: 11,
+    &quot;NGoroutines&quot;: 21,
+    &quot;Name&quot;: &quot;prod-server-42&quot;,
+    &quot;NoProxy&quot;: &quot;9.81.1.160&quot;,
+    &quot;OomKillDisable&quot;: true,
+    &quot;OperatingSystem&quot;: &quot;Boot2Docker&quot;,
+    &quot;RegistryConfig&quot;: {
+        &quot;IndexConfigs&quot;: {
+            &quot;docker.io&quot;: {
+                &quot;Mirrors&quot;: null,
+                &quot;Name&quot;: &quot;docker.io&quot;,
+                &quot;Official&quot;: true,
+                &quot;Secure&quot;: true
+            }
+        },
+        &quot;InsecureRegistryCIDRs&quot;: [
+            &quot;127.0.0.0/8&quot;
+        ]
+    },
+    &quot;SwapLimit&quot;: false,
+    &quot;SystemTime&quot;: &quot;2015-03-10T11:11:23.730591467-07:00&quot;
+}
+</code></pre>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+
+<h3 id="show-the-docker-version-information">Show the docker version information</h3>
+
+<p><code>GET /version</code></p>
+
+<p>Show the docker version information</p>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>GET /version HTTP/1.1
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+     &quot;Version&quot;: &quot;1.5.0&quot;,
+     &quot;Os&quot;: &quot;linux&quot;,
+     &quot;KernelVersion&quot;: &quot;3.18.5-tinycore64&quot;,
+     &quot;GoVersion&quot;: &quot;go1.4.1&quot;,
+     &quot;GitCommit&quot;: &quot;a8a31ef&quot;,
+     &quot;Arch&quot;: &quot;amd64&quot;,
+     &quot;ApiVersion&quot;: &quot;1.19&quot;
+}
+</code></pre>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+
+<h3 id="ping-the-docker-server">Ping the docker server</h3>
+
+<p><code>GET /_ping</code></p>
+
+<p>Ping the docker server</p>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>GET /_ping HTTP/1.1
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 200 OK
+Content-Type: text/plain
+
+OK
+</code></pre>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>200</strong> - no error</li>
+<li><strong>500</strong> - server error</li>
+</ul>
+
+<h3 id="create-a-new-image-from-a-container-s-changes">Create a new image from a container&rsquo;s changes</h3>
+
+<p><code>POST /commit</code></p>
+
+<p>Create a new image from a container&rsquo;s changes</p>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>POST /commit?container=44c004db4b17&amp;comment=message&amp;repo=myrepo HTTP/1.1
+Content-Type: application/json
+
+{
+     &quot;Hostname&quot;: &quot;&quot;,
+     &quot;Domainname&quot;: &quot;&quot;,
+     &quot;User&quot;: &quot;&quot;,
+     &quot;AttachStdin&quot;: false,
+     &quot;AttachStdout&quot;: true,
+     &quot;AttachStderr&quot;: true,
+     &quot;PortSpecs&quot;: null,
+     &quot;Tty&quot;: false,
+     &quot;OpenStdin&quot;: false,
+     &quot;StdinOnce&quot;: false,
+     &quot;Env&quot;: null,
+     &quot;Cmd&quot;: [
+             &quot;date&quot;
+     ],
+     &quot;Volumes&quot;: {
+             &quot;/tmp&quot;: {}
+     },
+     &quot;Labels&quot;: {
+             &quot;key1&quot;: &quot;value1&quot;,
+             &quot;key2&quot;: &quot;value2&quot;
+      },
+     &quot;WorkingDir&quot;: &quot;&quot;,
+     &quot;NetworkDisabled&quot;: false,
+     &quot;ExposedPorts&quot;: {
+             &quot;22/tcp&quot;: {}
+     }
+}
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 201 Created
+Content-Type: application/json
+
+{&quot;Id&quot;: &quot;596069db4bf5&quot;}
+</code></pre>
+
+<p>Json Parameters:</p>
+
+<ul>
+<li><strong>config</strong> - the container&rsquo;s configuration</li>
+</ul>
+
+<p>Query Parameters:</p>
+
+<ul>
+<li><strong>container</strong> – source container</li>
+<li><strong>repo</strong> – repository</li>
+<li><strong>tag</strong> – tag</li>
+<li><strong>comment</strong> – commit message</li>
+<li><strong>author</strong> – author (e.g., &ldquo;John Hannibal Smith
+&lt;<a href="mailto:hannibal%40a-team.com">hannibal@a-team.com</a>&gt;&ldquo;)</li>
+</ul>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>201</strong> – no error</li>
+<li><strong>404</strong> – no such container</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+
+<h3 id="monitor-docker-s-events">Monitor Docker&rsquo;s events</h3>
+
+<p><code>GET /events</code></p>
+
+<p>Get container events from docker, either in real time via streaming, or via
+polling (using since).</p>
+
+<p>Docker containers report the following events:</p>
+
+<pre><code>attach, commit, copy, create, destroy, die, exec_create, exec_start, export, kill, oom, pause, rename, resize, restart, start, stop, top, unpause
+</code></pre>
+
+<p>and Docker images report:</p>
+
+<pre><code>untag, delete
+</code></pre>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>GET /events?since=1374067924
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 200 OK
+Content-Type: application/json
+
+{&quot;status&quot;: &quot;create&quot;, &quot;id&quot;: &quot;dfdf82bd3881&quot;,&quot;from&quot;: &quot;ubuntu:latest&quot;, &quot;time&quot;:1374067924}
+{&quot;status&quot;: &quot;start&quot;, &quot;id&quot;: &quot;dfdf82bd3881&quot;,&quot;from&quot;: &quot;ubuntu:latest&quot;, &quot;time&quot;:1374067924}
+{&quot;status&quot;: &quot;stop&quot;, &quot;id&quot;: &quot;dfdf82bd3881&quot;,&quot;from&quot;: &quot;ubuntu:latest&quot;, &quot;time&quot;:1374067966}
+{&quot;status&quot;: &quot;destroy&quot;, &quot;id&quot;: &quot;dfdf82bd3881&quot;,&quot;from&quot;: &quot;ubuntu:latest&quot;, &quot;time&quot;:1374067970}
+</code></pre>
+
+<p>Query Parameters:</p>
+
+<ul>
+<li><strong>since</strong> – Timestamp used for polling</li>
+<li><strong>until</strong> – Timestamp used for polling</li>
+<li><strong>filters</strong> – A json encoded value of the filters (a map[string][]string) to process on the event list. Available filters:
+
+<ul>
+<li><code>event=&lt;string&gt;</code>; &ndash; event to filter</li>
+<li><code>image=&lt;string&gt;</code>; &ndash; image to filter</li>
+<li><code>container=&lt;string&gt;</code>; &ndash; container to filter</li>
+</ul></li>
+</ul>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+
+<h3 id="get-a-tarball-containing-all-images-in-a-repository">Get a tarball containing all images in a repository</h3>
+
+<p><code>GET /images/(name)/get</code></p>
+
+<p>Get a tarball containing all images and metadata for the repository specified
+by <code>name</code>.</p>
+
+<p>If <code>name</code> is a specific name and tag (e.g. ubuntu:latest), then only that image
+(and its parents) are returned. If <code>name</code> is an image ID, similarly only that
+image (and its parents) are returned, but with the exclusion of the
+&lsquo;repositories&rsquo; file in the tarball, as there were no image names referenced.</p>
+
+<p>See the <a href="#image-tarball-format">image tarball format</a> for more details.</p>
+
+<p><strong>Example request</strong></p>
+
+<pre><code>GET /images/ubuntu/get
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 200 OK
+Content-Type: application/x-tar
+
+Binary data stream
+</code></pre>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+
+<h3 id="get-a-tarball-containing-all-images">Get a tarball containing all images.</h3>
+
+<p><code>GET /images/get</code></p>
+
+<p>Get a tarball containing all images and metadata for one or more repositories.</p>
+
+<p>For each value of the <code>names</code> parameter: if it is a specific name and tag (e.g.
+<code>ubuntu:latest</code>), then only that image (and its parents) are returned; if it is
+an image ID, similarly only that image (and its parents) are returned and there
+would be no names referenced in the &lsquo;repositories&rsquo; file for this image ID.</p>
+
+<p>See the <a href="#image-tarball-format">image tarball format</a> for more details.</p>
+
+<p><strong>Example request</strong></p>
+
+<pre><code>GET /images/get?names=myname%2Fmyapp%3Alatest&amp;names=busybox
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 200 OK
+Content-Type: application/x-tar
+
+Binary data stream
+</code></pre>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+
+<h3 id="load-a-tarball-with-a-set-of-images-and-tags-into-docker">Load a tarball with a set of images and tags into docker</h3>
+
+<p><code>POST /images/load</code></p>
+
+<p>Load a set of images and tags into a Docker repository.
+See the <a href="#image-tarball-format">image tarball format</a> for more details.</p>
+
+<p><strong>Example request</strong></p>
+
+<pre><code>POST /images/load
+
+Tarball in body
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 200 OK
+</code></pre>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+
+<h3 id="image-tarball-format">Image tarball format</h3>
+
+<p>An image tarball contains one directory per image layer (named using its long ID),
+each containing these files:</p>
+
+<ul>
+<li><code>VERSION</code>: currently <code>1.0</code> - the file format version</li>
+<li><code>json</code>: detailed layer information, similar to <code>docker inspect layer_id</code></li>
+<li><code>layer.tar</code>: A tarfile containing the filesystem changes in this layer</li>
+</ul>
+
+<p>The <code>layer.tar</code> file contains <code>aufs</code> style <code>.wh..wh.aufs</code> files and directories
+for storing attribute changes and deletions.</p>
+
+<p>If the tarball defines a repository, the tarball should also include a <code>repositories</code> file at
+the root that contains a list of repository and tag names mapped to layer IDs.</p>
+
+<pre><code>{&quot;hello-world&quot;:
+    {&quot;latest&quot;: &quot;565a9d68a73f6706862bfe8409a7f659776d4d60a8d096eb4a3cbce6999cc2a1&quot;}
+}
+</code></pre>
+
+<h3 id="exec-create">Exec Create</h3>
+
+<p><code>POST /containers/(id)/exec</code></p>
+
+<p>Sets up an exec instance in a running container <code>id</code></p>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>POST /containers/e90e34656806/exec HTTP/1.1
+Content-Type: application/json
+
+  {
+   &quot;AttachStdin&quot;: false,
+   &quot;AttachStdout&quot;: true,
+   &quot;AttachStderr&quot;: true,
+   &quot;Tty&quot;: false,
+   &quot;Cmd&quot;: [
+                 &quot;date&quot;
+         ],
+  }
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 201 OK
+Content-Type: application/json
+
+{
+     &quot;Id&quot;: &quot;f90e34656806&quot;,
+     &quot;Warnings&quot;:[]
+}
+</code></pre>
+
+<p>Json Parameters:</p>
+
+<ul>
+<li><strong>AttachStdin</strong> - Boolean value, attaches to <code>stdin</code> of the <code>exec</code> command.</li>
+<li><strong>AttachStdout</strong> - Boolean value, attaches to <code>stdout</code> of the <code>exec</code> command.</li>
+<li><strong>AttachStderr</strong> - Boolean value, attaches to <code>stderr</code> of the <code>exec</code> command.</li>
+<li><strong>Tty</strong> - Boolean value to allocate a pseudo-TTY.</li>
+<li><strong>Cmd</strong> - Command to run specified as a string or an array of strings.</li>
+</ul>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>201</strong> – no error</li>
+<li><strong>404</strong> – no such container</li>
+</ul>
+
+<h3 id="exec-start">Exec Start</h3>
+
+<p><code>POST /exec/(id)/start</code></p>
+
+<p>Starts a previously set up <code>exec</code> instance <code>id</code>. If <code>detach</code> is true, this API
+returns after starting the <code>exec</code> command. Otherwise, this API sets up an
+interactive session with the <code>exec</code> command.</p>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>POST /exec/e90e34656806/start HTTP/1.1
+Content-Type: application/json
+
+{
+ &quot;Detach&quot;: false,
+ &quot;Tty&quot;: false,
+}
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 201 OK
+Content-Type: application/json
+
+{{ STREAM }}
+</code></pre>
+
+<p>Json Parameters:</p>
+
+<ul>
+<li><strong>Detach</strong> - Detach from the <code>exec</code> command.</li>
+<li><strong>Tty</strong> - Boolean value to allocate a pseudo-TTY.</li>
+</ul>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>200</strong> – no error</li>
+
+<li><p><strong>404</strong> – no such exec instance</p>
+
+<p><strong>Stream details</strong>:
+Similar to the stream behavior of <code>POST /container/(id)/attach</code> API</p></li>
+</ul>
+
+<h3 id="exec-resize">Exec Resize</h3>
+
+<p><code>POST /exec/(id)/resize</code></p>
+
+<p>Resizes the <code>tty</code> session used by the <code>exec</code> command <code>id</code>.
+This API is valid only if <code>tty</code> was specified as part of creating and starting the <code>exec</code> command.</p>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>POST /exec/e90e34656806/resize HTTP/1.1
+Content-Type: text/plain
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 201 OK
+Content-Type: text/plain
+</code></pre>
+
+<p>Query Parameters:</p>
+
+<ul>
+<li><strong>h</strong> – height of <code>tty</code> session</li>
+<li><strong>w</strong> – width</li>
+</ul>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>201</strong> – no error</li>
+<li><strong>404</strong> – no such exec instance</li>
+</ul>
+
+<h3 id="exec-inspect">Exec Inspect</h3>
+
+<p><code>GET /exec/(id)/json</code></p>
+
+<p>Return low-level information about the <code>exec</code> command <code>id</code>.</p>
+
+<p><strong>Example request</strong>:</p>
+
+<pre><code>GET /exec/11fb006128e8ceb3942e7c58d77750f24210e35f879dd204ac975c184b820b39/json HTTP/1.1
+</code></pre>
+
+<p><strong>Example response</strong>:</p>
+
+<pre><code>HTTP/1.1 200 OK
+Content-Type: plain/text
+
+{
+  &quot;ID&quot; : &quot;11fb006128e8ceb3942e7c58d77750f24210e35f879dd204ac975c184b820b39&quot;,
+  &quot;Running&quot; : false,
+  &quot;ExitCode&quot; : 2,
+  &quot;ProcessConfig&quot; : {
+    &quot;privileged&quot; : false,
+    &quot;user&quot; : &quot;&quot;,
+    &quot;tty&quot; : false,
+    &quot;entrypoint&quot; : &quot;sh&quot;,
+    &quot;arguments&quot; : [
+      &quot;-c&quot;,
+      &quot;exit 2&quot;
+    ]
+  },
+  &quot;OpenStdin&quot; : false,
+  &quot;OpenStderr&quot; : false,
+  &quot;OpenStdout&quot; : false,
+  &quot;Container&quot; : {
+    &quot;State&quot; : {
+      &quot;Running&quot; : true,
+      &quot;Paused&quot; : false,
+      &quot;Restarting&quot; : false,
+      &quot;OOMKilled&quot; : false,
+      &quot;Pid&quot; : 3650,
+      &quot;ExitCode&quot; : 0,
+      &quot;Error&quot; : &quot;&quot;,
+      &quot;StartedAt&quot; : &quot;2014-11-17T22:26:03.717657531Z&quot;,
+      &quot;FinishedAt&quot; : &quot;0001-01-01T00:00:00Z&quot;
+    },
+    &quot;ID&quot; : &quot;8f177a186b977fb451136e0fdf182abff5599a08b3c7f6ef0d36a55aaf89634c&quot;,
+    &quot;Created&quot; : &quot;2014-11-17T22:26:03.626304998Z&quot;,
+    &quot;Path&quot; : &quot;date&quot;,
+    &quot;Args&quot; : [],
+    &quot;Config&quot; : {
+      &quot;Hostname&quot; : &quot;8f177a186b97&quot;,
+      &quot;Domainname&quot; : &quot;&quot;,
+      &quot;User&quot; : &quot;&quot;,
+      &quot;AttachStdin&quot; : false,
+      &quot;AttachStdout&quot; : false,
+      &quot;AttachStderr&quot; : false,
+      &quot;PortSpecs&quot;: null,
+      &quot;ExposedPorts&quot; : null,
+      &quot;Tty&quot; : false,
+      &quot;OpenStdin&quot; : false,
+      &quot;StdinOnce&quot; : false,
+      &quot;Env&quot; : [ &quot;PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin&quot; ],
+      &quot;Cmd&quot; : [
+        &quot;date&quot;
+      ],
+      &quot;Image&quot; : &quot;ubuntu&quot;,
+      &quot;Volumes&quot; : null,
+      &quot;WorkingDir&quot; : &quot;&quot;,
+      &quot;Entrypoint&quot; : null,
+      &quot;NetworkDisabled&quot; : false,
+      &quot;MacAddress&quot; : &quot;&quot;,
+      &quot;OnBuild&quot; : null,
+      &quot;SecurityOpt&quot; : null
+    },
+    &quot;Image&quot; : &quot;5506de2b643be1e6febbf3b8a240760c6843244c41e12aa2f60ccbb7153d17f5&quot;,
+    &quot;NetworkSettings&quot; : {
+      &quot;IPAddress&quot; : &quot;172.17.0.2&quot;,
+      &quot;IPPrefixLen&quot; : 16,
+      &quot;MacAddress&quot; : &quot;02:42:ac:11:00:02&quot;,
+      &quot;Gateway&quot; : &quot;172.17.42.1&quot;,
+      &quot;Bridge&quot; : &quot;docker0&quot;,
+      &quot;PortMapping&quot; : null,
+      &quot;Ports&quot; : {}
+    },
+    &quot;ResolvConfPath&quot; : &quot;/var/lib/docker/containers/8f177a186b977fb451136e0fdf182abff5599a08b3c7f6ef0d36a55aaf89634c/resolv.conf&quot;,
+    &quot;HostnamePath&quot; : &quot;/var/lib/docker/containers/8f177a186b977fb451136e0fdf182abff5599a08b3c7f6ef0d36a55aaf89634c/hostname&quot;,
+    &quot;HostsPath&quot; : &quot;/var/lib/docker/containers/8f177a186b977fb451136e0fdf182abff5599a08b3c7f6ef0d36a55aaf89634c/hosts&quot;,
+    &quot;LogPath&quot;: &quot;/var/lib/docker/containers/1eb5fabf5a03807136561b3c00adcd2992b535d624d5e18b6cdc6a6844d9767b/1eb5fabf5a03807136561b3c00adcd2992b535d624d5e18b6cdc6a6844d9767b-json.log&quot;,
+    &quot;Name&quot; : &quot;/test&quot;,
+    &quot;Driver&quot; : &quot;aufs&quot;,
+    &quot;ExecDriver&quot; : &quot;native-0.2&quot;,
+    &quot;MountLabel&quot; : &quot;&quot;,
+    &quot;ProcessLabel&quot; : &quot;&quot;,
+    &quot;AppArmorProfile&quot; : &quot;&quot;,
+    &quot;RestartCount&quot; : 0,
+    &quot;Volumes&quot; : {},
+    &quot;VolumesRW&quot; : {}
+  }
+}
+</code></pre>
+
+<p>Status Codes:</p>
+
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>404</strong> – no such exec instance</li>
+<li><strong>500</strong> - server error</li>
+</ul>
+
+<h1 id="3-going-further">3. Going further</h1>
+
+<h2 id="3-1-inside-docker-run">3.1 Inside <code>docker run</code></h2>
+
+<p>As an example, the <code>docker run</code> command line makes the following API calls:</p>
+
+<ul>
+<li><p>Create the container</p></li>
+
+<li><p>If the status code is 404, it means the image doesn&rsquo;t exist:</p>
+
+<ul>
+<li>Try to pull it.</li>
+<li>Then, retry to create the container.</li>
+</ul></li>
+
+<li><p>Start the container.</p></li>
+
+<li><p>If you are not in detached mode:</p></li>
+
+<li><p>Attach to the container, using <code>logs=1</code> (to have <code>stdout</code> and
+  <code>stderr</code> from the container&rsquo;s start) and <code>stream=1</code></p></li>
+
+<li><p>If in detached mode or only <code>stdin</code> is attached, display the container&rsquo;s id.</p></li>
+</ul>
+
+<h2 id="3-2-hijacking">3.2 Hijacking</h2>
+
+<p>In this version of the API, <code>/attach</code>, uses hijacking to transport <code>stdin</code>,
+<code>stdout</code>, and <code>stderr</code> on the same socket.</p>
+
+<p>To hint potential proxies about connection hijacking, Docker client sends
+connection upgrade headers similarly to websocket.</p>
+
+<pre><code>Upgrade: tcp
+Connection: Upgrade
+</code></pre>
+
+<p>When Docker daemon detects the <code>Upgrade</code> header, it switches its status code
+from <strong>200 OK</strong> to <strong>101 UPGRADED</strong> and resends the same headers.</p>
+
+<h2 id="3-3-cors-requests">3.3 CORS Requests</h2>
+
+<p>To set cross origin requests to the remote api please give values to
+<code>--api-cors-header</code> when running Docker in daemon mode. Set * (asterisk) allows all,
+default or blank means CORS disabled</p>
+
+<pre><code>$ docker -d -H=&quot;192.168.1.9:2375&quot; --api-cors-header=&quot;http://foo.bar&quot;
+</code></pre>
+
+        </article>
+		  </section>
+    </div>
+    <div id="toc" class="large-3 columns toc compact">
+     On this page:
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#docker-remote-api-v1-19">Docker Remote API v1.19</a>
+<ul>
+<li><a href="#1-brief-introduction">1. Brief introduction</a></li>
+</ul></li>
+<li><a href="#2-endpoints">2. Endpoints</a>
+<ul>
+<li><a href="#2-1-containers">2.1 Containers</a>
+<ul>
+<li><a href="#list-containers">List containers</a></li>
+<li><a href="#create-a-container">Create a container</a></li>
+<li><a href="#inspect-a-container">Inspect a container</a></li>
+<li><a href="#list-processes-running-inside-a-container">List processes running inside a container</a></li>
+<li><a href="#get-container-logs">Get container logs</a></li>
+<li><a href="#inspect-changes-on-a-container-s-filesystem">Inspect changes on a container&rsquo;s filesystem</a></li>
+<li><a href="#export-a-container">Export a container</a></li>
+<li><a href="#get-container-stats-based-on-resource-usage">Get container stats based on resource usage</a></li>
+<li><a href="#resize-a-container-tty">Resize a container TTY</a></li>
+<li><a href="#start-a-container">Start a container</a></li>
+<li><a href="#stop-a-container">Stop a container</a></li>
+<li><a href="#restart-a-container">Restart a container</a></li>
+<li><a href="#kill-a-container">Kill a container</a></li>
+<li><a href="#rename-a-container">Rename a container</a></li>
+<li><a href="#pause-a-container">Pause a container</a></li>
+<li><a href="#unpause-a-container">Unpause a container</a></li>
+<li><a href="#attach-to-a-container">Attach to a container</a></li>
+<li><a href="#attach-to-a-container-websocket">Attach to a container (websocket)</a></li>
+<li><a href="#wait-a-container">Wait a container</a></li>
+<li><a href="#remove-a-container">Remove a container</a></li>
+<li><a href="#copy-files-or-folders-from-a-container">Copy files or folders from a container</a></li>
+</ul></li>
+<li><a href="#2-2-images">2.2 Images</a>
+<ul>
+<li><a href="#list-images">List Images</a></li>
+<li><a href="#build-image-from-a-dockerfile">Build image from a Dockerfile</a></li>
+<li><a href="#create-an-image">Create an image</a></li>
+<li><a href="#inspect-an-image">Inspect an image</a></li>
+<li><a href="#get-the-history-of-an-image">Get the history of an image</a></li>
+<li><a href="#push-an-image-on-the-registry">Push an image on the registry</a></li>
+<li><a href="#tag-an-image-into-a-repository">Tag an image into a repository</a></li>
+<li><a href="#remove-an-image">Remove an image</a></li>
+<li><a href="#search-images">Search images</a></li>
+</ul></li>
+<li><a href="#2-3-misc">2.3 Misc</a>
+<ul>
+<li><a href="#check-auth-configuration">Check auth configuration</a></li>
+<li><a href="#display-system-wide-information">Display system-wide information</a></li>
+<li><a href="#show-the-docker-version-information">Show the docker version information</a></li>
+<li><a href="#ping-the-docker-server">Ping the docker server</a></li>
+<li><a href="#create-a-new-image-from-a-container-s-changes">Create a new image from a container&rsquo;s changes</a></li>
+<li><a href="#monitor-docker-s-events">Monitor Docker&rsquo;s events</a></li>
+<li><a href="#get-a-tarball-containing-all-images-in-a-repository">Get a tarball containing all images in a repository</a></li>
+<li><a href="#get-a-tarball-containing-all-images">Get a tarball containing all images.</a></li>
+<li><a href="#load-a-tarball-with-a-set-of-images-and-tags-into-docker">Load a tarball with a set of images and tags into docker</a></li>
+<li><a href="#image-tarball-format">Image tarball format</a></li>
+<li><a href="#exec-create">Exec Create</a></li>
+<li><a href="#exec-start">Exec Start</a></li>
+<li><a href="#exec-resize">Exec Resize</a></li>
+<li><a href="#exec-inspect">Exec Inspect</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#3-going-further">3. Going further</a>
+<ul>
+<li><a href="#3-1-inside-docker-run">3.1 Inside <code>docker run</code></a></li>
+<li><a href="#3-2-hijacking">3.2 Hijacking</a></li>
+<li><a href="#3-3-cors-requests">3.3 CORS Requests</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+</div>
+
+<footer class="main-footer">
+  <div class="row">
+  </div>
+  <div class="row">
+  </div>
+  <div id="buildinfo">
+    Dec 22, 2015 at 5:49am (PST)
+{
+    "docker/apidocs": {
+        "ref": "master",
+        "repos": [
+            "git@github.com:docker/dhe-deploy.git"
+        ],
+        "sha": "9ac9c4a4180ae73873aa10d0282b7b811e720598"
+    },
+    "docker/compose": {
+        "ref": "docs",
+        "repos": [
+            "git@github.com:docker/compose.git"
+        ],
+        "sha": "8f48fa47472bbabf7e9181872501db2e53dc1879"
+    },
+    "docker/docker-hub": {
+        "ref": "master",
+        "repos": [
+            "git@github.com:docker/hub2-demo.git"
+        ],
+        "sha": "1c056349073e4e6f7cb48bea14f921ed07b9a874"
+    },
+    "docker/docker-trusted-registry": {
+        "ref": "master",
+        "repos": [
+            "git@github.com:docker/dhe-deploy.git"
+        ],
+        "sha": "9ac9c4a4180ae73873aa10d0282b7b811e720598"
+    },
+    "docker/docs-base": {
+        "ref": "hugo-github-linking",
+        "repos": [
+            "git@github.com:docker/docs-base.git"
+        ],
+        "sha": "4983ebade4340e4ecd78b7c61fff3caed1f47cde"
+    },
+    "docker/engine": {
+        "ref": "docs",
+        "repos": [
+            "git@github.com:docker/docker.git"
+        ],
+        "sha": "d001fd763ae6710f3385fe77186ba0cdc9bb8ee8"
+    },
+    "docker/machine": {
+        "ref": "docs",
+        "repos": [
+            "git@github.com:docker/machine.git"
+        ],
+        "sha": "6643d0e53ed8f7a15391425d8336d6734bc9a097"
+    },
+    "docker/opensource": {
+        "ref": "master",
+        "repos": [
+            "git@github.com:docker/opensource.git"
+        ],
+        "sha": "b4cb02bf89772563ec664c87805a21f27f841cb2"
+    },
+    "docker/registry": {
+        "ref": "docs",
+        "repos": [
+            "git@github.com:docker/distribution.git"
+        ],
+        "sha": "8e367cc7378d0ef798a71bc7f5dfb081a0e80890"
+    },
+    "docker/swarm": {
+        "ref": "docs",
+        "repos": [
+            "git@github.com:docker/swarm.git"
+        ],
+        "sha": "30e381a29ad0f1917bc0ce444cc33354057b0668"
+    },
+    "docker/tutorials": {
+        "ref": "master",
+        "repos": [
+            "git@github.com:docker/tutorials.git"
+        ],
+        "sha": "a7ea64f0fa0e160e3810abec6d80d16aec77dee3"
+    },
+    "docs.docker.com": {
+        "ref": "refs/heads/dtr-1.4.5-release",
+        "repos": [
+            "git@github.com:moxiegirl/docs.docker.com.git",
+            "git@github.com:docker/docs.docker.com.git"
+        ],
+        "sha": "74fd1a668b79e6177b7d2b927764975685d57a11"
+    },
+    "kitematic/kitematic": {
+        "ref": "master",
+        "repos": [
+            "git@github.com:kitematic/kitematic.git"
+        ],
+        "sha": "a8b5b4f2de826fb39e960da00a63d2748ef185a6"
+    }
+}   </div>
+</footer>
+<link rel="stylesheet" href="../../../../highlight/styles/github.css">
+<script src="../../../../highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script src="../../../../dist/assets/js/all.js"></script>
+<script>
+  $( 'nav li:has(ul)' ).doubleTapToGo();
+</script>
+<script>
+
+;(function ( $, window, document, undefined ) {
+
+    var pluginName = 'accordion',
+        defaults = {
+            transitionSpeed: 300,
+            transitionEasing: 'ease',
+            controlElement: '[data-control]',
+            contentElement: '[data-content]',
+            groupElement: '[data-accordion-group]',
+            singleOpen: true
+        };
+
+    function Accordion(element, options) {
+        this.element = element;
+        this.options = $.extend({}, defaults, options);
+        this._defaults = defaults;
+        this._name = pluginName;
+        this.init();
+    }
+
+    Accordion.prototype.init = function () {
+        var self = this,
+            opts = self.options;
+
+        var $accordion = $(self.element),
+            $controls = $accordion.find('> ' + opts.controlElement),
+            $content =  $accordion.find('> ' + opts.contentElement);
+
+        var accordionParentsQty = $accordion.parents('[data-accordion]').length,
+            accordionHasParent = accordionParentsQty > 0;
+
+        var closedCSS = { 'max-height': 0, 'overflow': 'hidden' };
+
+        var CSStransitions = supportsTransitions();
+
+        function debounce(func, threshold, execAsap) {
+            var timeout;
+
+            return function debounced() {
+                var obj = this,
+                    args = arguments;
+
+                function delayed() {
+                    if (!execAsap) func.apply(obj, args);
+                    timeout = null;
+                };
+
+                if (timeout) clearTimeout(timeout);
+                else if (execAsap) func.apply(obj, args);
+
+                timeout = setTimeout(delayed, threshold || 100);
+            };
+        }
+
+        function supportsTransitions() {
+            var b = document.body || document.documentElement,
+                s = b.style,
+                p = 'transition';
+
+            if (typeof s[p] == 'string') {
+                return true;
+            }
+
+            var v = ['Moz', 'webkit', 'Webkit', 'Khtml', 'O', 'ms'];
+
+            p = 'Transition';
+
+            for (var i=0; i<v.length; i++) {
+                if (typeof s[v[i] + p] == 'string') {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        function requestAnimFrame(cb) {
+            if(window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame) {
+                return  requestAnimationFrame(cb) ||
+                        webkitRequestAnimationFrame(cb) ||
+                        mozRequestAnimationFrame(cb);
+            } else {
+                return setTimeout(cb, 1000 / 60);
+            }
+        }
+
+        function toggleTransition($el, remove) {
+            if(!remove) {
+                $content.css({
+                    '-webkit-transition': 'max-height ' + opts.transitionSpeed + 'ms ' + opts.transitionEasing,
+                    'transition': 'max-height ' + opts.transitionSpeed + 'ms ' + opts.transitionEasing
+                });
+            } else {
+                $content.css({
+                    '-webkit-transition': '',
+                    'transition': ''
+                });
+            }
+        }
+
+        function calculateHeight($el) {
+            var height = 0;
+
+            $el.children().each(function() {
+                height = height + $(this).outerHeight(true);
+            });
+
+            $el.data('oHeight', height);
+        }
+
+        function updateParentHeight($parentAccordion, $currentAccordion, qty, operation) {
+            var $content = $parentAccordion.filter('.open').find('> [data-content]'),
+                $childs = $content.find('[data-accordion].open > [data-content]'),
+                $matched;
+
+            if(!opts.singleOpen) {
+                $childs = $childs.not($currentAccordion.siblings('[data-accordion].open').find('> [data-content]'));
+            }
+
+            $matched = $content.add($childs);
+
+            if($parentAccordion.hasClass('open')) {
+                $matched.each(function() {
+                    var currentHeight = $(this).data('oHeight');
+
+                    switch (operation) {
+                        case '+':
+                            $(this).data('oHeight', currentHeight + qty);
+                            break;
+                        case '-':
+                            $(this).data('oHeight', currentHeight - qty);
+                            break;
+                        default:
+                            throw 'updateParentHeight method needs an operation';
+                    }
+
+                    $(this).css('max-height', $(this).data('oHeight'));
+                });
+            }
+        }
+
+        function refreshHeight($accordion) {
+            if($accordion.hasClass('open')) {
+                var $content = $accordion.find('> [data-content]'),
+                    $childs = $content.find('[data-accordion].open > [data-content]'),
+                    $matched = $content.add($childs);
+
+                calculateHeight($matched);
+
+                $matched.css('max-height', $matched.data('oHeight'));
+            }
+        }
+
+        function closeAccordion($accordion, $content) {
+            $accordion.trigger('accordion.close');
+            
+            if(CSStransitions) {
+                if(accordionHasParent) {
+                    var $parentAccordions = $accordion.parents('[data-accordion]');
+
+                    updateParentHeight($parentAccordions, $accordion, $content.data('oHeight'), '-');
+                }
+
+                $content.css(closedCSS);
+
+                $accordion.removeClass('open');
+            } else {
+                $content.css('max-height', $content.data('oHeight'));
+
+                $content.animate(closedCSS, opts.transitionSpeed);
+
+                $accordion.removeClass('open');
+            }
+        }
+
+        function openAccordion($accordion, $content) {
+            $accordion.trigger('accordion.open');
+            if(CSStransitions) {
+                toggleTransition($content);
+
+                if(accordionHasParent) {
+                    var $parentAccordions = $accordion.parents('[data-accordion]');
+
+                    updateParentHeight($parentAccordions, $accordion, $content.data('oHeight'), '+');
+                }
+
+                requestAnimFrame(function() {
+                    $content.css('max-height', $content.data('oHeight'));
+                });
+
+                $accordion.addClass('open');
+            } else {
+                $content.animate({
+                    'max-height': $content.data('oHeight')
+                }, opts.transitionSpeed, function() {
+                    $content.css({'max-height': 'none'});
+                });
+
+                $accordion.addClass('open');
+            }
+        }
+
+        function closeSiblingAccordions($accordion) {
+            var $accordionGroup = $accordion.closest(opts.groupElement);
+
+            var $siblings = $accordion.siblings('[data-accordion]').filter('.open'),
+                $siblingsChildren = $siblings.find('[data-accordion]').filter('.open');
+
+            var $otherAccordions = $siblings.add($siblingsChildren);
+
+            $otherAccordions.each(function() {
+                var $accordion = $(this),
+                    $content = $accordion.find(opts.contentElement);
+
+                closeAccordion($accordion, $content);
+            });
+
+            $otherAccordions.removeClass('open');
+        }
+
+        function toggleAccordion() {
+            var isAccordionGroup = (opts.singleOpen) ? $accordion.parents(opts.groupElement).length > 0 : false;
+
+            calculateHeight($content);
+
+            if(isAccordionGroup) {
+                closeSiblingAccordions($accordion);
+            }
+
+            if($accordion.hasClass('open')) {
+                closeAccordion($accordion, $content);
+            } else {
+                openAccordion($accordion, $content);
+            }
+        }
+
+        function addEventListeners() {
+            $controls.on('click', toggleAccordion);
+            
+            $controls.on('accordion.toggle', function() {
+                if(opts.singleOpen && $controls.length > 1) {
+                    return false;
+                }
+                
+                toggleAccordion();
+            });
+
+            $(window).on('resize', debounce(function() {
+                refreshHeight($accordion);
+            }));
+        }
+
+        function setup() {
+            $content.each(function() {
+                var $curr = $(this);
+
+                if($curr.css('max-height') != 0) {
+                    if(!$curr.closest('[data-accordion]').hasClass('open')) {
+                        $curr.css({ 'max-height': 0, 'overflow': 'hidden' });
+                    } else {
+                        toggleTransition($curr);
+                        calculateHeight($curr);
+
+                        $curr.css('max-height', $curr.data('oHeight'));
+                    }
+                }
+            });
+
+
+            if(!$accordion.attr('data-accordion')) {
+                $accordion.attr('data-accordion', '');
+                $accordion.find(opts.controlElement).attr('data-control', '');
+                $accordion.find(opts.contentElement).attr('data-content', '');
+            }
+        }
+
+        setup();
+        addEventListeners();
+    };
+
+    $.fn[pluginName] = function ( options ) {
+        return this.each(function () {
+            if (!$.data(this, 'plugin_' + pluginName)) {
+                $.data(this, 'plugin_' + pluginName,
+                new Accordion( this, options ));
+            }
+        });
+    }
+
+})( jQuery, window, document );
+
+$(document).ready(function() {
+  $('#multiple [data-accordion]').accordion({
+    singleOpen: false
+  });
+});
+
+</script>
+
+
+  <noscript>
+  <iframe src="//www.googletagmanager.com/ns.html?id=GTM-PSVHG8"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+<script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-PSVHG8');
+</script>
+

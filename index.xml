@@ -1,0 +1,1848 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Docker Docs</title>
+    <link>http://docs.docker.com/</link>
+    <description>Recent content on Docker Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://docs.docker.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title></title>
+      <link>http://docs.docker.com/apidocs/v1.3.3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs.docker.com/apidocs/v1.3.3/</guid>
+      <description>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset=&#34;UTF-8&#34;&gt;
+  &lt;title&gt;Docker Trusted Registry API Documentation&lt;/title&gt;
+
+    &lt;link href=&#39;custom/custom.css&#39; media=&#39;screen&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&gt;
+    &lt;link href=&#39;css/typography.css&#39; media=&#39;screen&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&gt;
+    &lt;link href=&#39;css/reset.css&#39; media=&#39;screen&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&gt;
+    &lt;link href=&#39;css/screen.css&#39; media=&#39;screen&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&gt;
+    &lt;link href=&#39;css/reset.css&#39; media=&#39;print&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&gt;
+    &lt;link href=&#39;css/print.css&#39; media=&#39;print&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&gt;
+
+    &lt;script src=&#39;lib/jquery-1.8.0.min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;lib/jquery.slideto.min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;lib/jquery.wiggle.min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;lib/jquery.ba-bbq.min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;lib/handlebars-2.0.0.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;lib/underscore-min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;lib/backbone-min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;swagger-ui.min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;lib/highlight.7.3.pack.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;lib/marked.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;lib/swagger-oauth.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;main.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body class=&#34;swagger-section&#34;&gt;
+    &lt;div id=&#34;swagger-ui-container&#34; class=&#34;swagger-ui-wrap&#34;&gt;&lt;/div&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://docs.docker.com/apidocs/v1.3.3/o2c/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs.docker.com/apidocs/v1.3.3/o2c/</guid>
+      <description>&lt;script&gt;
+var qp = null;
+if(window.location.hash) {
+  qp = location.hash.substring(1);
+}
+else {
+  qp = location.search.substring(1);
+}
+qp = qp ? JSON.parse(&#39;{&#34;&#39; + qp.replace(/&amp;/g, &#39;&#34;,&#34;&#39;).replace(/=/g,&#39;&#34;:&#34;&#39;) + &#39;&#34;}&#39;,
+  function(key, value) {
+    return key===&#34;&#34;?value:decodeURIComponent(value) }
+  ):{}
+
+if (window.opener.swaggerUi.tokenUrl)
+    window.opener.processOAuthCode(qp);
+else
+    window.opener.onOAuthComplete(qp);
+
+window.close();
+&lt;/script&gt;</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://docs.docker.com/apidocs/v1.4.0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs.docker.com/apidocs/v1.4.0/</guid>
+      <description>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset=&#34;UTF-8&#34;&gt;
+  &lt;title&gt;Docker Trusted Registry API Documentation&lt;/title&gt;
+
+    &lt;link href=&#39;custom/custom.css&#39; media=&#39;screen&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&gt;
+    &lt;link href=&#39;css/typography.css&#39; media=&#39;screen&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&gt;
+    &lt;link href=&#39;css/reset.css&#39; media=&#39;screen&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&gt;
+    &lt;link href=&#39;css/screen.css&#39; media=&#39;screen&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&gt;
+    &lt;link href=&#39;css/reset.css&#39; media=&#39;print&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&gt;
+    &lt;link href=&#39;css/print.css&#39; media=&#39;print&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;/&gt;
+
+    &lt;script src=&#39;lib/jquery-1.8.0.min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;lib/jquery.slideto.min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;lib/jquery.wiggle.min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;lib/jquery.ba-bbq.min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;lib/handlebars-2.0.0.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;lib/underscore-min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;lib/backbone-min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;swagger-ui.min.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;lib/highlight.7.3.pack.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;lib/marked.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;lib/swagger-oauth.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;main.js&#39; type=&#39;text/javascript&#39;&gt;&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body class=&#34;swagger-section&#34;&gt;
+    &lt;div id=&#34;swagger-ui-container&#34; class=&#34;swagger-ui-wrap&#34;&gt;&lt;/div&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://docs.docker.com/apidocs/v1.4.0/o2c/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs.docker.com/apidocs/v1.4.0/o2c/</guid>
+      <description>&lt;script&gt;
+var qp = null;
+if(window.location.hash) {
+  qp = location.hash.substring(1);
+}
+else {
+  qp = location.search.substring(1);
+}
+qp = qp ? JSON.parse(&#39;{&#34;&#39; + qp.replace(/&amp;/g, &#39;&#34;,&#34;&#39;).replace(/=/g,&#39;&#34;:&#34;&#39;) + &#39;&#34;}&#39;,
+  function(key, value) {
+    return key===&#34;&#34;?value:decodeURIComponent(value) }
+  ):{}
+
+if (window.opener.swaggerUi.tokenUrl)
+    window.opener.processOAuthCode(qp);
+else
+    window.opener.onOAuthComplete(qp);
+
+window.close();
+&lt;/script&gt;</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://docs.docker.com/compose/README/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs.docker.com/compose/README/</guid>
+      <description>
+
+&lt;h1 id=&#34;contributing-to-the-docker-compose-documentation&#34;&gt;Contributing to the Docker Compose documentation&lt;/h1&gt;
+
+&lt;p&gt;The documentation in this directory is part of the &lt;a href=&#34;https://docs.docker.com&#34;&gt;https://docs.docker.com&lt;/a&gt; website.  Docker uses &lt;a href=&#34;http://gohugo.io/overview/introduction/&#34;&gt;the Hugo static generator&lt;/a&gt; to convert project Markdown files to a static HTML site.&lt;/p&gt;
+
+&lt;p&gt;You don&amp;rsquo;t need to be a Hugo expert to contribute to the compose documentation. If you are familiar with Markdown, you can modify the content in the &lt;code&gt;docs&lt;/code&gt; files.&lt;/p&gt;
+
+&lt;p&gt;If you want to add a new file or change the location of the document in the menu, you do need to know a little more.&lt;/p&gt;
+
+&lt;h2 id=&#34;documentation-contributing-workflow&#34;&gt;Documentation contributing workflow&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Edit a Markdown file in the tree.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Save your changes.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make sure you are in the &lt;code&gt;docs&lt;/code&gt; subdirectory.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Build the documentation.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ make docs
+ ---&amp;gt; ffcf3f6c4e97
+Removing intermediate container a676414185e8
+Successfully built ffcf3f6c4e97
+docker run --rm -it  -e AWS_S3_BUCKET -e NOCACHE -p 8000:8000 -e DOCKERHOST &amp;quot;docs-base:test-tooling&amp;quot; hugo server --port=8000 --baseUrl=192.168.59.103 --bind=0.0.0.0
+ERROR: 2015/06/13 MenuEntry&#39;s .Url is deprecated and will be removed in Hugo 0.15. Use .URL instead.
+0 of 4 drafts rendered
+0 future content
+12 pages created
+0 paginator pages created
+0 tags created
+0 categories created
+in 55 ms
+Serving pages from /docs/public
+Web Server is available at http://0.0.0.0:8000/
+Press Ctrl+C to stop
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Open the available server in your browser.&lt;/p&gt;
+
+&lt;p&gt;The documentation server has the complete menu but only the Docker Compose
+documentation resolves.  You can&amp;rsquo;t access the other project docs from this
+localized build.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;tips-on-hugo-metadata-and-menu-positioning&#34;&gt;Tips on Hugo metadata and menu positioning&lt;/h2&gt;
+
+&lt;p&gt;The top of each Docker Compose documentation file contains TOML metadata. The metadata is commented out to prevent it from appearing in GitHub.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;!--[metadata]&amp;gt;
++++
+title = &amp;quot;Extending services in Compose&amp;quot;
+description = &amp;quot;How to use Docker Compose&#39;s extends keyword to share configuration between files and projects&amp;quot;
+keywords = [&amp;quot;fig, composition, compose, docker, orchestration, documentation, docs&amp;quot;]
+[menu.main]
+parent=&amp;quot;smn_workw_compose&amp;quot;
+weight=2
++++
+&amp;lt;![end-metadata]--&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The metadata alone has this structure:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;+++
+title = &amp;quot;Extending services in Compose&amp;quot;
+description = &amp;quot;How to use Docker Compose&#39;s extends keyword to share configuration between files and projects&amp;quot;
+keywords = [&amp;quot;fig, composition, compose, docker, orchestration, documentation, docs&amp;quot;]
+[menu.main]
+parent=&amp;quot;smn_workw_compose&amp;quot;
+weight=2
++++
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;[menu.main]&lt;/code&gt; section refers to navigation defined &lt;a href=&#34;https://github.com/docker/docs-base/blob/hugo/config.toml&#34;&gt;in the main Docker menu&lt;/a&gt;. This metadata says &lt;em&gt;add a menu item called&lt;/em&gt; Extending services in Compose &lt;em&gt;to the menu with the&lt;/em&gt; &lt;code&gt;smn_workdw_compose&lt;/code&gt; &lt;em&gt;identifier&lt;/em&gt;.  If you locate the menu in the configuration, you&amp;rsquo;ll find &lt;em&gt;Create multi-container applications&lt;/em&gt; is the menu title.&lt;/p&gt;
+
+&lt;p&gt;You can move an article in the tree by specifying a new parent. You can shift the location of the item by changing its weight.  Higher numbers are heavier and shift the item to the bottom of menu. Low or no numbers shift it up.&lt;/p&gt;
+
+&lt;h2 id=&#34;other-key-documentation-repositories&#34;&gt;Other key documentation repositories&lt;/h2&gt;
+
+&lt;p&gt;The &lt;code&gt;docker/docs-base&lt;/code&gt; repository contains &lt;a href=&#34;https://github.com/docker/docs-base&#34;&gt;the Hugo theme and menu configuration&lt;/a&gt;. If you open the &lt;code&gt;Dockerfile&lt;/code&gt; you&amp;rsquo;ll see the &lt;code&gt;make docs&lt;/code&gt; relies on this as a base image for building the Compose documentation.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;docker/docs.docker.com&lt;/code&gt; repository contains &lt;a href=&#34;https://github.com/docker/docs.docker.com&#34;&gt;build system for building the Docker documentation site&lt;/a&gt;. Fork this repository to build the entire documentation site.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://docs.docker.com/registry/spec/implementations/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs.docker.com/registry/spec/implementations/</guid>
+      <description>
+
+&lt;h1 id=&#34;distribution-api-implementations&#34;&gt;Distribution API Implementations&lt;/h1&gt;
+
+&lt;p&gt;This is a list of known implementations of the Distribution API spec.&lt;/p&gt;
+
+&lt;h2 id=&#34;docker-distribution-registry-https-github-com-docker-distribution&#34;&gt;&lt;a href=&#34;https://github.com/docker/distribution&#34;&gt;Docker Distribution Registry&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Docker distribution is the reference implementation of the distribution API
+specification. It aims to fully implement the entire specification.&lt;/p&gt;
+
+&lt;h3 id=&#34;releases&#34;&gt;Releases&lt;/h3&gt;
+
+&lt;h4 id=&#34;2-0-1-in-development&#34;&gt;2.0.1 (&lt;em&gt;in development&lt;/em&gt;)&lt;/h4&gt;
+
+&lt;p&gt;Implements API 2.0.1&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Known Issues&lt;/em&gt;
+ - No resumable push support
+ - Content ranges ignored
+ - Blob upload status will always return a starting range of 0&lt;/p&gt;
+
+&lt;h4 id=&#34;2-0-0&#34;&gt;2.0.0&lt;/h4&gt;
+
+&lt;p&gt;Implements API 2.0.0&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Known Issues&lt;/em&gt;
+ - No resumable push support
+ - No PATCH implementation for blob upload
+ - Content ranges ignored&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://docs.docker.com/registry/spec/manifest-v2-1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs.docker.com/registry/spec/manifest-v2-1/</guid>
+      <description>
+
+&lt;h1 id=&#34;image-manifest-version-2-schema-1&#34;&gt;Image Manifest Version 2, Schema 1&lt;/h1&gt;
+
+&lt;p&gt;This document outlines the format of of the V2 image manifest. The image
+manifest described herein was introduced in the Docker daemon in the &lt;a href=&#34;https://github.com/docker/docker/commit/9f482a66ab37ec396ac61ed0c00d59122ac07453&#34;&gt;v1.3.0
+release&lt;/a&gt;.
+It is a provisional manifest to provide a compatibility with the &lt;a href=&#34;https://github.com/docker/docker/blob/master/image/spec/v1.md&#34;&gt;V1 Image
+format&lt;/a&gt;, as the
+requirements are defined for the &lt;a href=&#34;https://github.com/docker/distribution/pull/62&#34;&gt;V2 Schema 2
+image&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Image manifests describe the various constituents of a docker image.  Image
+manifests can be serialized to JSON format with the following media types:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Manifest Type&lt;/th&gt;
+&lt;th&gt;Media Type&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;manifest&lt;/td&gt;
+&lt;td&gt;&amp;ldquo;application/vnd.docker.distribution.manifest.v1+json&amp;rdquo;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;signed manifest&lt;/td&gt;
+&lt;td&gt;&amp;ldquo;application/vnd.docker.distribution.manifest.v1+prettyjws&amp;rdquo;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;em&gt;Note that &amp;ldquo;application/json&amp;rdquo; will also be accepted for schema 1.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;References:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/docker/docker/issues/9015&#34;&gt;Proposal: JSON Registry API V2.1&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/docker/docker/issues/8093&#34;&gt;Proposal: Provenance step 1 - Transform images for validation and verification&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;manifest-field-descriptions&#34;&gt;&lt;em&gt;Manifest&lt;/em&gt; Field Descriptions&lt;/h2&gt;
+
+&lt;p&gt;Manifest provides the base accessible fields for working with V2 image format
+ in the registry.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;name&lt;/code&gt;&lt;/strong&gt; &lt;em&gt;string&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;name is the name of the image&amp;rsquo;s repository&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;tag&lt;/code&gt;&lt;/strong&gt; &lt;em&gt;string&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;tag is the tag of the image&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;architecture&lt;/code&gt;&lt;/strong&gt; &lt;em&gt;string&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;architecture is the host architecture on which this image is intended to
+   run.  This is for information purposes and not currently used by the engine&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;fsLayers&lt;/code&gt;&lt;/strong&gt; &lt;em&gt;array&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;fsLayers is a list of filesystem layer blob sums contained in this image.&lt;/p&gt;
+
+&lt;p&gt;An fsLayer is a struct consisting of the following fields
+      - &lt;strong&gt;&lt;code&gt;blobSum&lt;/code&gt;&lt;/strong&gt; &lt;em&gt;digest.Digest&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  blobSum is the digest of the referenced filesystem image layer.  A 
+  digest can be a tarsum or sha256 hash.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;history&lt;/code&gt;&lt;/strong&gt; &lt;em&gt;array&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;history is a list of unstructured historical data for v1 compatibility. It
+   contains ID of the image layer and ID of the layer&amp;rsquo;s parent layers.&lt;/p&gt;
+
+&lt;p&gt;history is a struct consisting of the following fields
+   - &lt;strong&gt;&lt;code&gt;v1Compatibility&lt;/code&gt;&lt;/strong&gt; string&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  V1Compatibility is the raw V1 compatibility information. This will 
+  contain the JSON object describing the V1 of this image.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;schemaVersion&lt;/code&gt;&lt;/strong&gt; &lt;em&gt;int&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;SchemaVersion is the image manifest schema that this image follows.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:the length of &lt;code&gt;history&lt;/code&gt; must be equal to the length of &lt;code&gt;fsLayers&lt;/code&gt; and
+entries in each are correlated by index.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;signed-manifests&#34;&gt;Signed Manifests&lt;/h2&gt;
+
+&lt;p&gt;Signed manifests provides an envelope for a signed image manifest.  A signed
+manifest consists of an image manifest along with an additional field
+containing the signature of the manifest.&lt;/p&gt;
+
+&lt;p&gt;The docker client can verify signed manifests and displays a message to the user.&lt;/p&gt;
+
+&lt;h3 id=&#34;signing-manifests&#34;&gt;Signing Manifests&lt;/h3&gt;
+
+&lt;p&gt;Image manifests can be signed in two different ways: with a &lt;em&gt;libtrust&lt;/em&gt; private
+ key or an x509 certificate chain.  When signing with an x509 certificate chain,
+ the public key of the first element in the chain must be the public key
+ corresponding with the sign key.&lt;/p&gt;
+
+&lt;h3 id=&#34;signed-manifest-field-description&#34;&gt;Signed Manifest Field Description&lt;/h3&gt;
+
+&lt;p&gt;Signed manifests include an image manifest and a list of signatures generated
+by &lt;em&gt;libtrust&lt;/em&gt;.  A signature consists of the following fields:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;header&lt;/code&gt;&lt;/strong&gt; &lt;em&gt;&lt;a href=&#34;http://tools.ietf.org/html/draft-ietf-jose-json-web-signature-31#section-2&#34;&gt;JOSE&lt;/a&gt;&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;A &lt;a href=&#34;http://self-issued.info/docs/draft-ietf-jose-json-web-signature.html&#34;&gt;JSON Web Signature&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;signature&lt;/code&gt;&lt;/strong&gt; &lt;em&gt;string&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;A signature for the image manifest, signed by a &lt;em&gt;libtrust&lt;/em&gt; private key&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;protected&lt;/code&gt;&lt;/strong&gt; &lt;em&gt;string&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;The signed protected header&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;example-manifest&#34;&gt;Example Manifest&lt;/h2&gt;
+
+&lt;p&gt;&lt;em&gt;Example showing the official &amp;lsquo;hello-world&amp;rsquo; image manifest.&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+   &amp;quot;name&amp;quot;: &amp;quot;hello-world&amp;quot;,
+   &amp;quot;tag&amp;quot;: &amp;quot;latest&amp;quot;,
+   &amp;quot;architecture&amp;quot;: &amp;quot;amd64&amp;quot;,
+   &amp;quot;fsLayers&amp;quot;: [
+      {
+         &amp;quot;blobSum&amp;quot;: &amp;quot;sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef&amp;quot;
+      },
+      {
+         &amp;quot;blobSum&amp;quot;: &amp;quot;sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef&amp;quot;
+      },
+      {
+         &amp;quot;blobSum&amp;quot;: &amp;quot;sha256:cc8567d70002e957612902a8e985ea129d831ebe04057d88fb644857caa45d11&amp;quot;
+      },
+      {
+         &amp;quot;blobSum&amp;quot;: &amp;quot;sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef&amp;quot;
+      }
+   ],
+   &amp;quot;history&amp;quot;: [
+      {
+         &amp;quot;v1Compatibility&amp;quot;: &amp;quot;{\&amp;quot;id\&amp;quot;:\&amp;quot;e45a5af57b00862e5ef5782a9925979a02ba2b12dff832fd0991335f4a11e5c5\&amp;quot;,\&amp;quot;parent\&amp;quot;:\&amp;quot;31cbccb51277105ba3ae35ce33c22b69c9e3f1002e76e4c736a2e8ebff9d7b5d\&amp;quot;,\&amp;quot;created\&amp;quot;:\&amp;quot;2014-12-31T22:57:59.178729048Z\&amp;quot;,\&amp;quot;container\&amp;quot;:\&amp;quot;27b45f8fb11795b52e9605b686159729b0d9ca92f76d40fb4f05a62e19c46b4f\&amp;quot;,\&amp;quot;container_config\&amp;quot;:{\&amp;quot;Hostname\&amp;quot;:\&amp;quot;8ce6509d66e2\&amp;quot;,\&amp;quot;Domainname\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;User\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;Memory\&amp;quot;:0,\&amp;quot;MemorySwap\&amp;quot;:0,\&amp;quot;CpuShares\&amp;quot;:0,\&amp;quot;Cpuset\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;AttachStdin\&amp;quot;:false,\&amp;quot;AttachStdout\&amp;quot;:false,\&amp;quot;AttachStderr\&amp;quot;:false,\&amp;quot;PortSpecs\&amp;quot;:null,\&amp;quot;ExposedPorts\&amp;quot;:null,\&amp;quot;Tty\&amp;quot;:false,\&amp;quot;OpenStdin\&amp;quot;:false,\&amp;quot;StdinOnce\&amp;quot;:false,\&amp;quot;Env\&amp;quot;:[\&amp;quot;PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\&amp;quot;],\&amp;quot;Cmd\&amp;quot;:[\&amp;quot;/bin/sh\&amp;quot;,\&amp;quot;-c\&amp;quot;,\&amp;quot;#(nop) CMD [/hello]\&amp;quot;],\&amp;quot;Image\&amp;quot;:\&amp;quot;31cbccb51277105ba3ae35ce33c22b69c9e3f1002e76e4c736a2e8ebff9d7b5d\&amp;quot;,\&amp;quot;Volumes\&amp;quot;:null,\&amp;quot;WorkingDir\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;Entrypoint\&amp;quot;:null,\&amp;quot;NetworkDisabled\&amp;quot;:false,\&amp;quot;MacAddress\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;OnBuild\&amp;quot;:[],\&amp;quot;SecurityOpt\&amp;quot;:null,\&amp;quot;Labels\&amp;quot;:null},\&amp;quot;docker_version\&amp;quot;:\&amp;quot;1.4.1\&amp;quot;,\&amp;quot;config\&amp;quot;:{\&amp;quot;Hostname\&amp;quot;:\&amp;quot;8ce6509d66e2\&amp;quot;,\&amp;quot;Domainname\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;User\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;Memory\&amp;quot;:0,\&amp;quot;MemorySwap\&amp;quot;:0,\&amp;quot;CpuShares\&amp;quot;:0,\&amp;quot;Cpuset\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;AttachStdin\&amp;quot;:false,\&amp;quot;AttachStdout\&amp;quot;:false,\&amp;quot;AttachStderr\&amp;quot;:false,\&amp;quot;PortSpecs\&amp;quot;:null,\&amp;quot;ExposedPorts\&amp;quot;:null,\&amp;quot;Tty\&amp;quot;:false,\&amp;quot;OpenStdin\&amp;quot;:false,\&amp;quot;StdinOnce\&amp;quot;:false,\&amp;quot;Env\&amp;quot;:[\&amp;quot;PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\&amp;quot;],\&amp;quot;Cmd\&amp;quot;:[\&amp;quot;/hello\&amp;quot;],\&amp;quot;Image\&amp;quot;:\&amp;quot;31cbccb51277105ba3ae35ce33c22b69c9e3f1002e76e4c736a2e8ebff9d7b5d\&amp;quot;,\&amp;quot;Volumes\&amp;quot;:null,\&amp;quot;WorkingDir\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;Entrypoint\&amp;quot;:null,\&amp;quot;NetworkDisabled\&amp;quot;:false,\&amp;quot;MacAddress\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;OnBuild\&amp;quot;:[],\&amp;quot;SecurityOpt\&amp;quot;:null,\&amp;quot;Labels\&amp;quot;:null},\&amp;quot;architecture\&amp;quot;:\&amp;quot;amd64\&amp;quot;,\&amp;quot;os\&amp;quot;:\&amp;quot;linux\&amp;quot;,\&amp;quot;Size\&amp;quot;:0}\n&amp;quot;
+      },
+      {
+         &amp;quot;v1Compatibility&amp;quot;: &amp;quot;{\&amp;quot;id\&amp;quot;:\&amp;quot;e45a5af57b00862e5ef5782a9925979a02ba2b12dff832fd0991335f4a11e5c5\&amp;quot;,\&amp;quot;parent\&amp;quot;:\&amp;quot;31cbccb51277105ba3ae35ce33c22b69c9e3f1002e76e4c736a2e8ebff9d7b5d\&amp;quot;,\&amp;quot;created\&amp;quot;:\&amp;quot;2014-12-31T22:57:59.178729048Z\&amp;quot;,\&amp;quot;container\&amp;quot;:\&amp;quot;27b45f8fb11795b52e9605b686159729b0d9ca92f76d40fb4f05a62e19c46b4f\&amp;quot;,\&amp;quot;container_config\&amp;quot;:{\&amp;quot;Hostname\&amp;quot;:\&amp;quot;8ce6509d66e2\&amp;quot;,\&amp;quot;Domainname\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;User\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;Memory\&amp;quot;:0,\&amp;quot;MemorySwap\&amp;quot;:0,\&amp;quot;CpuShares\&amp;quot;:0,\&amp;quot;Cpuset\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;AttachStdin\&amp;quot;:false,\&amp;quot;AttachStdout\&amp;quot;:false,\&amp;quot;AttachStderr\&amp;quot;:false,\&amp;quot;PortSpecs\&amp;quot;:null,\&amp;quot;ExposedPorts\&amp;quot;:null,\&amp;quot;Tty\&amp;quot;:false,\&amp;quot;OpenStdin\&amp;quot;:false,\&amp;quot;StdinOnce\&amp;quot;:false,\&amp;quot;Env\&amp;quot;:[\&amp;quot;PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\&amp;quot;],\&amp;quot;Cmd\&amp;quot;:[\&amp;quot;/bin/sh\&amp;quot;,\&amp;quot;-c\&amp;quot;,\&amp;quot;#(nop) CMD [/hello]\&amp;quot;],\&amp;quot;Image\&amp;quot;:\&amp;quot;31cbccb51277105ba3ae35ce33c22b69c9e3f1002e76e4c736a2e8ebff9d7b5d\&amp;quot;,\&amp;quot;Volumes\&amp;quot;:null,\&amp;quot;WorkingDir\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;Entrypoint\&amp;quot;:null,\&amp;quot;NetworkDisabled\&amp;quot;:false,\&amp;quot;MacAddress\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;OnBuild\&amp;quot;:[],\&amp;quot;SecurityOpt\&amp;quot;:null,\&amp;quot;Labels\&amp;quot;:null},\&amp;quot;docker_version\&amp;quot;:\&amp;quot;1.4.1\&amp;quot;,\&amp;quot;config\&amp;quot;:{\&amp;quot;Hostname\&amp;quot;:\&amp;quot;8ce6509d66e2\&amp;quot;,\&amp;quot;Domainname\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;User\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;Memory\&amp;quot;:0,\&amp;quot;MemorySwap\&amp;quot;:0,\&amp;quot;CpuShares\&amp;quot;:0,\&amp;quot;Cpuset\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;AttachStdin\&amp;quot;:false,\&amp;quot;AttachStdout\&amp;quot;:false,\&amp;quot;AttachStderr\&amp;quot;:false,\&amp;quot;PortSpecs\&amp;quot;:null,\&amp;quot;ExposedPorts\&amp;quot;:null,\&amp;quot;Tty\&amp;quot;:false,\&amp;quot;OpenStdin\&amp;quot;:false,\&amp;quot;StdinOnce\&amp;quot;:false,\&amp;quot;Env\&amp;quot;:[\&amp;quot;PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\&amp;quot;],\&amp;quot;Cmd\&amp;quot;:[\&amp;quot;/hello\&amp;quot;],\&amp;quot;Image\&amp;quot;:\&amp;quot;31cbccb51277105ba3ae35ce33c22b69c9e3f1002e76e4c736a2e8ebff9d7b5d\&amp;quot;,\&amp;quot;Volumes\&amp;quot;:null,\&amp;quot;WorkingDir\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;Entrypoint\&amp;quot;:null,\&amp;quot;NetworkDisabled\&amp;quot;:false,\&amp;quot;MacAddress\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;OnBuild\&amp;quot;:[],\&amp;quot;SecurityOpt\&amp;quot;:null,\&amp;quot;Labels\&amp;quot;:null},\&amp;quot;architecture\&amp;quot;:\&amp;quot;amd64\&amp;quot;,\&amp;quot;os\&amp;quot;:\&amp;quot;linux\&amp;quot;,\&amp;quot;Size\&amp;quot;:0}\n&amp;quot;
+      },
+   ],
+   &amp;quot;schemaVersion&amp;quot;: 1,
+   &amp;quot;signatures&amp;quot;: [
+      {
+         &amp;quot;header&amp;quot;: {
+            &amp;quot;jwk&amp;quot;: {
+               &amp;quot;crv&amp;quot;: &amp;quot;P-256&amp;quot;,
+               &amp;quot;kid&amp;quot;: &amp;quot;OD6I:6DRK:JXEJ:KBM4:255X:NSAA:MUSF:E4VM:ZI6W:CUN2:L4Z6:LSF4&amp;quot;,
+               &amp;quot;kty&amp;quot;: &amp;quot;EC&amp;quot;,
+               &amp;quot;x&amp;quot;: &amp;quot;3gAwX48IQ5oaYQAYSxor6rYYc_6yjuLCjtQ9LUakg4A&amp;quot;,
+               &amp;quot;y&amp;quot;: &amp;quot;t72ge6kIA1XOjqjVoEOiPPAURltJFBMGDSQvEGVB010&amp;quot;
+            },
+            &amp;quot;alg&amp;quot;: &amp;quot;ES256&amp;quot;
+         },
+         &amp;quot;signature&amp;quot;: &amp;quot;XREm0L8WNn27Ga_iE_vRnTxVMhhYY0Zst_FfkKopg6gWSoTOZTuW4rK0fg_IqnKkEKlbD83tD46LKEGi5aIVFg&amp;quot;,
+         &amp;quot;protected&amp;quot;: &amp;quot;eyJmb3JtYXRMZW5ndGgiOjY2MjgsImZvcm1hdFRhaWwiOiJDbjAiLCJ0aW1lIjoiMjAxNS0wNC0wOFQxODo1Mjo1OVoifQ&amp;quot;
+      }
+   ]
+}
+   
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>AUFS storage driver in practice</title>
+      <link>http://docs.docker.com/engine/userguide/storagedriver/aufs-driver/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs.docker.com/engine/userguide/storagedriver/aufs-driver/</guid>
+      <description>
+
+&lt;h1 id=&#34;docker-and-aufs-in-practice&#34;&gt;Docker and AUFS in practice&lt;/h1&gt;
+
+&lt;p&gt;AUFS was the first storage driver in use with Docker. As a result, it has a long and close history with Docker, is very stable, has a lot of real-world deployments, and has strong community support.  AUFS has several features that make it a good choice for Docker. These features enable:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Fast container startup times.&lt;/li&gt;
+&lt;li&gt;Efficient use of storage.&lt;/li&gt;
+&lt;li&gt;Efficient use of memory.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Despite its capabilities and long history with Docker, some Linux distributions do not support AUFS. This is usually because AUFS is not included in the mainline (upstream) Linux kernel.&lt;/p&gt;
+
+&lt;p&gt;The following sections examine some AUFS features and how they relate to Docker.&lt;/p&gt;
+
+&lt;h2 id=&#34;image-layering-and-sharing-with-aufs&#34;&gt;Image layering and sharing with AUFS&lt;/h2&gt;
+
+&lt;p&gt;AUFS is a &lt;em&gt;unification filesystem&lt;/em&gt;. This means that it takes multiple directories on a single Linux host, stacks them on top of each other, and provides a single unified view. To achieve this, AUFS uses &lt;em&gt;union mount&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;AUFS stacks multiple directories and exposes them as a unified view through a single mount point. All of the directories in the stack, as well as the union mount point, must all exist on the same Linux host. AUFS refers to each directory that it stacks as a &lt;em&gt;branch&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Within Docker, AUFS union mounts enable image layering. The AUFS storage driver implements Docker image layers using this union mount system. AUFS branches correspond to Docker image layers. The diagram below shows a Docker container based on the &lt;code&gt;ubuntu:latest&lt;/code&gt; image.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./engine/userguide/storagedriver/images/aufs_layers.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This diagram shows the relationship between the Docker image layers and the AUFS branches (directories) in &lt;code&gt;/var/lib/docker/aufs&lt;/code&gt;. Each image layer  and the container layer correspond to an AUFS branch (directory) in the Docker host&amp;rsquo;s local storage area. The union mount point gives the unified view of all layers.&lt;/p&gt;
+
+&lt;p&gt;AUFS also supports the copy-on-write technology (CoW). Not all storage drivers do.&lt;/p&gt;
+
+&lt;h2 id=&#34;container-reads-and-writes-with-aufs&#34;&gt;Container reads and writes with AUFS&lt;/h2&gt;
+
+&lt;p&gt;Docker leverages AUFS CoW technology to enable image sharing and minimize the use of disk space. AUFS works at the file level. This means that all AUFS CoW operations copy entire files - even if only a small part of the file is being modified. This behavior can have a noticeable impact on container performance, especially if the files being copied are large, below a lot of image layers, or the CoW operation must search a deep directory tree.&lt;/p&gt;
+
+&lt;p&gt;Consider, for example, an application running in a container needs to add a single new value to a large key-value store (file). If this is the first time the file is modified it does not yet exist in the container&amp;rsquo;s top writable layer. So, the CoW must &lt;em&gt;copy up&lt;/em&gt; the file from the underlying image. The AUFS storage driver searches each image layer for the file. The search order is from top to bottom. When it is found, the entire file is &lt;em&gt;copied up&lt;/em&gt; to the container&amp;rsquo;s top writable layer. From there, it can be opened and modified.&lt;/p&gt;
+
+&lt;p&gt;Larger files obviously take longer to &lt;em&gt;copy up&lt;/em&gt; than smaller files, and files that exist in lower image layers take longer to locate than those in higher layers. However, a &lt;em&gt;copy up&lt;/em&gt; operation only occurs once per file on any given container. Subsequent reads and writes happen against the file&amp;rsquo;s copy already &lt;em&gt;copied-up&lt;/em&gt; to the container&amp;rsquo;s top layer.&lt;/p&gt;
+
+&lt;h2 id=&#34;deleting-files-with-the-aufs-storage-driver&#34;&gt;Deleting files with the AUFS storage driver&lt;/h2&gt;
+
+&lt;p&gt;The AUFS storage driver deletes a file from a container by placing a &lt;em&gt;whiteout
+file&lt;/em&gt; in the container&amp;rsquo;s top layer. The whiteout file effectively obscures the
+existence of the file in image&amp;rsquo;s lower, read-only layers.  The simplified
+diagram below shows a container based on an image with three image layers.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./engine/userguide/storagedriver/images/aufs_delete.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;file3&lt;/code&gt; was deleted from the container. So, the AUFS storage driver  placed
+a whiteout file in the container&amp;rsquo;s top layer. This whiteout file effectively
+&amp;ldquo;deletes&amp;rdquo;  &lt;code&gt;file3&lt;/code&gt; from the container by obscuring any of the original file&amp;rsquo;s
+existence in the image&amp;rsquo;s read-only base layer. Of course, the image could have
+been in any of the other layers instead or in addition depending on how the
+layers are built.&lt;/p&gt;
+
+&lt;h2 id=&#34;configure-docker-with-aufs&#34;&gt;Configure Docker with AUFS&lt;/h2&gt;
+
+&lt;p&gt;You can only use the AUFS storage driver on Linux systems with AUFS installed. Use the following command to determine if your system supports AUFS.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ grep aufs /proc/filesystems
+nodev   aufs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This output indicates the system supports AUFS.  Once you&amp;rsquo;ve verified your
+system supports AUFS, you can must instruct the Docker daemon to use it. You do
+this from the command line with the &lt;code&gt;docker daemon&lt;/code&gt; command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ sudo docker daemon --storage-driver=aufs &amp;amp;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Alternatively, you can edit the Docker config file and add the
+&lt;code&gt;--storage-driver=aufs&lt;/code&gt; option to the &lt;code&gt;DOCKER_OPTS&lt;/code&gt; line.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# Use DOCKER_OPTS to modify the daemon startup options.
+DOCKER_OPTS=&amp;quot;--storage-driver=aufs&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once your daemon is running, verify the storage driver with the &lt;code&gt;docker info&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ sudo docker info
+Containers: 1
+Images: 4
+Storage Driver: aufs
+ Root Dir: /var/lib/docker/aufs
+ Backing Filesystem: extfs
+ Dirs: 6
+ Dirperm1 Supported: false
+Execution Driver: native-0.2
+...output truncated...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The output above shows that the Docker daemon is running the AUFS storage driver on top of an existing ext4 backing filesystem.&lt;/p&gt;
+
+&lt;h2 id=&#34;local-storage-and-aufs&#34;&gt;Local storage and AUFS&lt;/h2&gt;
+
+&lt;p&gt;As the &lt;code&gt;docker daemon&lt;/code&gt; runs with the AUFS driver, the driver stores images and containers on within the Docker host&amp;rsquo;s local storage area in the &lt;code&gt;/var/lib/docker/aufs&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;h3 id=&#34;images&#34;&gt;Images&lt;/h3&gt;
+
+&lt;p&gt;Image layers and their contents are stored under
+&lt;code&gt;/var/lib/docker/aufs/mnt/diff/&amp;lt;image-id&amp;gt;&lt;/code&gt; directory. The contents of an image
+layer in this location includes all the files and directories belonging in that
+image layer.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;/var/lib/docker/aufs/layers/&lt;/code&gt; directory contains metadata about how image
+layers are stacked. This directory contains one file for every image or
+container layer on the Docker host. Inside each file are the image layers names
+that exist below it. The diagram below shows an image with 4 layers.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./engine/userguide/storagedriver/images/aufs_metadata.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Inspecting the contents of the file relating to the top layer of the image
+shows the three image layers below it. They are listed in the order they are
+stacked.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ cat /var/lib/docker/aufs/layers/91e54dfb11794fad694460162bf0cb0a4fa710cfa3f60979c177d920813e267c
+
+d74508fb6632491cea586a1fd7d748dfc5274cd6fdfedee309ecdcbc2bf5cb82
+
+c22013c8472965aa5b62559f2b540cd440716ef149756e7b958a1b2aba421e87
+
+d3a1f33e8a5a513092f01bb7eb1c2abf4d711e5105390a3fe1ae2248cfde1391
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The base layer in an image has no image layers below it, so its file is empty.&lt;/p&gt;
+
+&lt;h3 id=&#34;containers&#34;&gt;Containers&lt;/h3&gt;
+
+&lt;p&gt;Running containers are mounted at locations in the
+&lt;code&gt;/var/lib/docker/aufs/mnt/&amp;lt;container-id&amp;gt;&lt;/code&gt; directory. This is the AUFS union
+mount point that exposes the container and all underlying image layers as a
+single unified view. If a container is not running, its directory still exists
+but is empty. This is because containers are only mounted when they are running.&lt;/p&gt;
+
+&lt;p&gt;Container metadata and various config files that are placed into the running
+container are stored in &lt;code&gt;/var/lib/containers/&amp;lt;container-id&amp;gt;&lt;/code&gt;. Files in this
+directory exist for all containers on the system, including ones that are
+stopped. However, when a container is running the container&amp;rsquo;s log files are also
+in this directory.&lt;/p&gt;
+
+&lt;p&gt;A container&amp;rsquo;s thin writable layer is stored under
+&lt;code&gt;/var/lib/docker/aufs/diff/&amp;lt;container-id&amp;gt;&lt;/code&gt;. This directory is stacked by AUFS as
+the containers top writable layer and is where all changes to the container are
+stored. The directory exists even if the container is stopped. This means that
+restarting a container will not lose changes made to it. Once a container is
+deleted this directory is deleted.&lt;/p&gt;
+
+&lt;p&gt;Information about which image layers are stacked below a container&amp;rsquo;s top
+writable layer is stored in the following file
+&lt;code&gt;/var/lib/docker/aufs/layers/&amp;lt;container-id&amp;gt;&lt;/code&gt;. The command below shows that the
+container with ID &lt;code&gt;b41a6e5a508d&lt;/code&gt; has 4 image layers below it:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ cat /var/lib/docker/aufs/layers/b41a6e5a508dfa02607199dfe51ed9345a675c977f2cafe8ef3e4b0b5773404e-init
+91e54dfb11794fad694460162bf0cb0a4fa710cfa3f60979c177d920813e267c
+d74508fb6632491cea586a1fd7d748dfc5274cd6fdfedee309ecdcbc2bf5cb82
+c22013c8472965aa5b62559f2b540cd440716ef149756e7b958a1b2aba421e87
+d3a1f33e8a5a513092f01bb7eb1c2abf4d711e5105390a3fe1ae2248cfde1391
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The image layers are shown in order. In the output above, the layer starting
+with image ID &amp;ldquo;d3a1&amp;hellip;&amp;rdquo; is the image&amp;rsquo;s base  layer. The image layer starting
+with &amp;ldquo;91e5&amp;hellip;&amp;rdquo; is the image&amp;rsquo;s topmost layer.&lt;/p&gt;
+
+&lt;h2 id=&#34;aufs-and-docker-performance&#34;&gt;AUFS and Docker performance&lt;/h2&gt;
+
+&lt;p&gt;To summarize some of the performance related aspects already mentioned:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;The AUFS storage driver is a good choice for PaaS and other similar use-cases where container density is important. This is because AUFS efficiently shares images between multiple running containers, enabling fast container start times and minimal use of disk space.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The underlying mechanics of how AUFS shares files between image layers and containers uses the systems page cache very efficiently.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The AUFS storage driver can introduce significant latencies into container write performance. This is because the first time a container writes to any file, the file has be located and copied into the containers top writable layer. These latencies increase and are compounded when these files exist below many image layers and the files themselves are large.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;One final point. Data volumes provide the best and most predictable performance.
+This is because they bypass the storage driver and do not incur any of the
+potential overheads introduced by thin provisioning and copy-on-write. For this
+reason, you may want to place heavy write workloads on data volumes.&lt;/p&gt;
+
+&lt;h2 id=&#34;related-information&#34;&gt;Related information&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;./engine/userguide/storagedriver/imagesandcontainers/&#34;&gt;Understand images, containers, and storage drivers&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./engine/userguide/storagedriver/selectadriver/&#34;&gt;Select a storage driver&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./engine/userguide/storagedriver/btrfs-driver/&#34;&gt;Btrfs storage driver in practice&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./engine/userguide/storagedriver/device-mapper-driver/&#34;&gt;Device Mapper storage driver in practice&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>About Docker</title>
+      <link>http://docs.docker.com/engine/misc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs.docker.com/engine/misc/</guid>
+      <description>
+
+&lt;h1 id=&#34;about-docker&#34;&gt;About Docker&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;Develop, Ship and Run Any Application, Anywhere&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.docker.com&#34;&gt;&lt;strong&gt;Docker&lt;/strong&gt;&lt;/a&gt; is a platform for developers and sysadmins
+to develop, ship, and run applications.  Docker lets you quickly assemble
+applications from components and eliminates the friction that can come when
+shipping code. Docker lets you get your code tested and deployed into production
+as fast as possible.&lt;/p&gt;
+
+&lt;p&gt;Docker consists of:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The Docker Engine - our lightweight and powerful open source container
+virtualization technology combined with a work flow for building
+and containerizing your applications.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt; - our SaaS service for
+sharing and managing your application stacks.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;why-docker&#34;&gt;Why Docker?&lt;/h2&gt;
+
+&lt;p&gt;&lt;em&gt;Faster delivery of your applications&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;We want your environment to work better. Docker containers,
+  and the work flow that comes with them, help your developers,
+  sysadmins, QA folks, and release engineers work together to get your code
+  into production and make it useful. We&amp;rsquo;ve created a standard
+  container format that lets developers care about their applications
+  inside containers while sysadmins and operators can work on running the
+  container in your deployment. This separation of duties streamlines and
+  simplifies the management and deployment of code.&lt;/li&gt;
+&lt;li&gt;We make it easy to build new containers, enable rapid iteration of
+  your applications, and increase the visibility of changes. This
+  helps everyone in your organization understand how an application works
+  and how it is built.&lt;/li&gt;
+&lt;li&gt;Docker containers are lightweight and fast! Containers have
+  sub-second launch times, reducing the cycle
+  time of development, testing, and deployment.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Deploy and scale more easily&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Docker containers run (almost) everywhere. You can deploy
+  containers on desktops, physical servers, virtual machines, into
+  data centers, and up to public and private clouds.&lt;/li&gt;
+&lt;li&gt;Since Docker runs on so many platforms, it&amp;rsquo;s easy to move your
+  applications around. You can easily move an application from a
+  testing environment into the cloud and back whenever you need.&lt;/li&gt;
+&lt;li&gt;Docker&amp;rsquo;s lightweight containers also make scaling up and
+  down fast and easy. You can quickly launch more containers when
+  needed and then shut them down easily when they&amp;rsquo;re no longer needed.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Get higher density and run more workloads&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Docker containers don&amp;rsquo;t need a hypervisor, so you can pack more of
+  them onto your hosts. This means you get more value out of every
+  server and can potentially reduce what you spend on equipment and
+  licenses.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Faster deployment makes for easier management&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;As Docker speeds up your work flow, it gets easier to make lots
+  of small changes instead of huge, big bang updates. Smaller
+  changes mean reduced risk and more uptime.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;about-this-guide&#34;&gt;About this guide&lt;/h2&gt;
+
+&lt;p&gt;The &lt;a href=&#34;./engine/introduction/understanding-docker/&#34;&gt;Understanding Docker section&lt;/a&gt; will help you:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;See how Docker works at a high level&lt;/li&gt;
+&lt;li&gt;Understand the architecture of Docker&lt;/li&gt;
+&lt;li&gt;Discover Docker&amp;rsquo;s features;&lt;/li&gt;
+&lt;li&gt;See how Docker compares to virtual machines&lt;/li&gt;
+&lt;li&gt;See some common use cases.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;installation-guides&#34;&gt;Installation guides&lt;/h3&gt;
+
+&lt;p&gt;The &lt;a href=&#34;./engine/installation/&#34;&gt;installation section&lt;/a&gt; will show you how to install Docker
+on a variety of platforms.&lt;/p&gt;
+
+&lt;h3 id=&#34;docker-user-guide&#34;&gt;Docker user guide&lt;/h3&gt;
+
+&lt;p&gt;To learn about Docker in more detail and to answer questions about usage and
+implementation, check out the &lt;a href=&#34;./engine/userguide/&#34;&gt;Docker User Guide&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;release-notes&#34;&gt;Release notes&lt;/h2&gt;
+
+&lt;p&gt;A summary of the changes in each release in the current series can now be found
+on the separate &lt;a href=&#34;https://docs.docker.com/release-notes&#34;&gt;Release Notes page&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;feature-deprecation-policy&#34;&gt;Feature Deprecation Policy&lt;/h2&gt;
+
+&lt;p&gt;As changes are made to Docker there may be times when existing features
+will need to be removed or replaced with newer features. Before an existing
+feature is removed it will be labeled as &amp;ldquo;deprecated&amp;rdquo; within the documentation
+and will remain in Docker for, usually, at least 2 releases. After that time
+it may be removed.&lt;/p&gt;
+
+&lt;p&gt;Users are expected to take note of the list of deprecated features each
+release and plan their migration away from those features, and (if applicable)
+towards the replacement features as soon as possible.&lt;/p&gt;
+
+&lt;p&gt;The complete list of deprecated features can be found on the
+&lt;a href=&#34;./engine/misc/deprecated/&#34;&gt;Deprecated Features page&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;licensing&#34;&gt;Licensing&lt;/h2&gt;
+
+&lt;p&gt;Docker is licensed under the Apache License, Version 2.0. See
+&lt;a href=&#34;https://github.com/docker/docker/blob/master/LICENSE&#34;&gt;LICENSE&lt;/a&gt; for the full
+license text.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Account and repository management</title>
+      <link>http://docs.docker.com/docker-trusted-registry/accounts/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs.docker.com/docker-trusted-registry/accounts/</guid>
+      <description>
+
+&lt;h1 id=&#34;account-and-repository-management&#34;&gt;Account and repository management&lt;/h1&gt;
+
+&lt;p&gt;This section explains the relationship between users, organizations, teams, and
+repositories and gives examples of potential workflows you might use. It also
+describes the various actions you can perform surrounding account and repository
+management through the Docker Trusted Registry (Trusted Registry) user interface
+(UI).&lt;/p&gt;
+
+&lt;p&gt;There are three scopes with which you can manage permissions:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;organizations&lt;/li&gt;
+&lt;li&gt;teams&lt;/li&gt;
+&lt;li&gt;repositories&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;What you see and do depends on your role and permissions. Use the UI to see, and
+with the correct permissions do the following:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;manage repositories&lt;/li&gt;
+&lt;li&gt;manage organizations&lt;/li&gt;
+&lt;li&gt;create and view teams&lt;/li&gt;
+&lt;li&gt;assign members to teams&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;: as a organization owner in the organization-owned repository
+Animals repo, you might create multiple teams in your organization. You manage
+the teams access. You give Team Alpha permissions so they can modify,
+delete, and push tags. Team Beta can only view, browse, and pull tags.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;You can perform many functions in the UI as you can from the command line
+interface (CLI) or API. To see what you can do from the CLI or API, refer to the
+API documentation accessed from the Trusted Registry UI.&lt;/p&gt;
+
+&lt;h2 id=&#34;accounts&#34;&gt;Accounts&lt;/h2&gt;
+
+&lt;p&gt;Docker defines two types of accounts: users and organizations.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Users are individuals, and can be called members in the context of a team or organization.&lt;/li&gt;
+&lt;li&gt;An organization is a group of members.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Both accounts are defined by a namespace containing two component names in the
+form of account-name/repository-name. There is no limit to how many you can have
+of each type of account.&lt;/p&gt;
+
+&lt;h3 id=&#34;user-accounts&#34;&gt;User accounts&lt;/h3&gt;
+
+&lt;p&gt;A user (member):&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;can belong to an organization.&lt;/li&gt;
+&lt;li&gt;be a part of a team that is a part of that organization.&lt;/li&gt;
+&lt;li&gt;belong to more than one team, in more than one organization, and have differing roles within those teams.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;So in team A, they can have admin permissions so they can help manage their
+group, while in team B, those users only have read permission.&lt;/p&gt;
+
+&lt;p&gt;User can also create repositories under their own name and share those
+repositories with other users. They confer permissions to other users on a
+per-repository basis. The following table depicts the combination of users and possible permissions:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Permissions/Roles&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;sys admin&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;org admin&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;org member&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;team member&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;user&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;orgs: create, edit, delete&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;x&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;orgs: view public repos, teams, members&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;x&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;x&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;x&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;orgs: view public repos only&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;x&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;x&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;x&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;x&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;x&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;teams: create, edit, delete&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;x&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;x&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;teams: view public  repos, members&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;x&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;x&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;x&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;x&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;teams: set repo permissions&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;x&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;x&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&#34;organization-accounts&#34;&gt;Organization accounts&lt;/h3&gt;
+
+&lt;p&gt;System administrators can also create an organization account, with its own
+namespace of repositories. Comprised of one or more teams, they can be managed
+by anyone in an initial &amp;ldquo;owners&amp;rdquo; team, which is created by default.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Organization owners&lt;/strong&gt; have the highest level of permissions within the
+organization. They can manage all teams and repositories and create, modify,
+or delete teams.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Organization members&lt;/strong&gt; must be a member of one or more teams within the
+organization.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;All organization members can see teams and their members. However, they are not
+visible to users outside that organization.&lt;/p&gt;
+
+&lt;h3 id=&#34;teams&#34;&gt;Teams&lt;/h3&gt;
+
+&lt;p&gt;Teams are configured in two ways:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;as a list of users managed by an organization owner, or&lt;/li&gt;
+&lt;li&gt;through LDAP system integration which can then be periodically synced&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The organization owner, other than the system administrator, is the only person
+who can create, modify, or delete those teams that belong to that organization.&lt;/p&gt;
+
+&lt;p&gt;Teams, like users, can also be granted permissions to their repositories as seen in the following table:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Repository access&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;read&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;read-write&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;admin&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;view/ browse&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;x&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;x&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;x&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;pull&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;x&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;x&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;x&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;push&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;x&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;x&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;edit/delete tags&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;x&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;x&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;edit the description&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;x&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;make public or private&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;x&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;manage user access&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;x&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;These permissions are additive. This means you cannot override a team level
+permission to prevent access to a specific repository. If a team has read-write
+access to the entire namespace of repositories, then granting that team
+&amp;lsquo;read-only&amp;rsquo; access to a specific repository will not reduce their access to that
+repository, as the team will still have read-write access to that repository
+through its namespace access.&lt;/p&gt;
+
+&lt;h2 id=&#34;repositories&#34;&gt;Repositories&lt;/h2&gt;
+
+&lt;p&gt;Any user can create and share public or private repositories. Users that are
+designated as org admins (or the Trusted Registry admin) can create and manage
+repositories that teams can belong to. One team might have read-write
+permissions, while another team could only have read-only permissions. A third
+team that is outside that organization (and repository) may not even be able to
+even see that repository. This is based on account permissions.&lt;/p&gt;
+
+&lt;p&gt;A repository must first exist before users can push an image to it. If they
+tried to push an image without designating a repository through the CLI, they
+see the following error message:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;% docker push my.dtr.host/user1/myimage
+The push refers to a repository [my.dtr.host/user1/myimage] (len: 1)
+1d073211c498: Image push failed
+unauthorized: access to the requested resource is not authorized
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A public repository:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;is visible to all accounts in the system&lt;/li&gt;
+&lt;li&gt;can only be written to by accounts granted explicit write access&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;A private repository:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;cannot be discovered by any account unless having explicit read access to it&lt;/li&gt;
+&lt;li&gt;can be created by users and organizations&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;working-with-repositories-organizations-and-teams&#34;&gt;Working with repositories, organizations, and teams&lt;/h3&gt;
+
+&lt;p&gt;From the Trusted Registry dashboard, click the Repositories submenu.&lt;/p&gt;
+
+&lt;p&gt;From the Repository submenu, you can:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;view, search, and filter the list of your repositories&lt;/li&gt;
+&lt;li&gt;create either public or private repositories&lt;/li&gt;
+&lt;li&gt;select a repository and edit it&lt;/li&gt;
+&lt;li&gt;drill down to see details, teams that are associated with it, and settings.&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;There are submenus which you can see additional information:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Details&lt;/strong&gt; screen: see any permissions or tags&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Teams&lt;/strong&gt; screen: see teams and associated members. Select a team to see what repositories they are associated with and what permissions they have. This takes you to the Organization screen where you set a team&amp;rsquo;s permissions on that page or select the team to delete it.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;From the Organizations submenu, you can:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;create a new organization&lt;/li&gt;
+&lt;li&gt;view, delete, or edit an existing organization&lt;/li&gt;
+&lt;li&gt;add teams to it&lt;/li&gt;
+&lt;li&gt;view  and add members to the team&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;see-also&#34;&gt;See also&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;To configure for your environment, see the
+&lt;a href=&#34;./docker-trusted-registry/configuration/&#34;&gt;Configuration instructions&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;To administer the Trusted Registry, see the &lt;a href=&#34;./docker-trusted-registry/adminguide/&#34;&gt;Admin guide &lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;To use Docker Trusted Registry, see the &lt;a href=&#34;./docker-trusted-registry/userguide/&#34;&gt;User guide&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;To upgrade, see the &lt;a href=&#34;./docker-trusted-registry/install/upgrade/&#34;&gt;Upgrade guide&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;To see previous changes, see the &lt;a href=&#34;./docker-trusted-registry/release-notes/&#34;&gt;release notes&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!---
+\\Todo:
+---&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Admin tasks</title>
+      <link>http://docs.docker.com/docker-trusted-registry/adminguide/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs.docker.com/docker-trusted-registry/adminguide/</guid>
+      <description>
+
+&lt;h1 id=&#34;docker-trusted-registry-administrator-tasks&#34;&gt;Docker Trusted Registry Administrator tasks&lt;/h1&gt;
+
+&lt;p&gt;This document explains the tasks and functions an administrator of Docker
+Trusted Registry needs to understand such as reporting, logging, system
+management, performance metrics, optimizing the Trusted Registry file size, and
+deleting containers. For tasks Docker Trusted Registry users need to accomplish,
+such as pushing and pulling images, go to the &lt;a href=&#34;./docker-trusted-registry/userguide/&#34;&gt;User&amp;rsquo;s Guide&lt;/a&gt;. For
+using the Trusted Registry user interface (UI) to view, manage, or assign
+permissions regarding repositories, organizations, and teams, go to the
+&lt;a href=&#34;./docker-trusted-registry/accounts/&#34;&gt;Account management&lt;/a&gt; documentation.&lt;/p&gt;
+
+&lt;h2 id=&#34;reporting-dashboard&#34;&gt;Reporting Dashboard&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;./docker-trusted-registry/assets/admin-metrics.png&#34; alt=&#34;Docker Trusted Registry Dashboard&amp;lt;/admin/metrics/&amp;gt;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The Docker Trusted Registry Dashboard displays &amp;ldquo;hardware&amp;rdquo; resource utilization
+and network traffic metrics for the Docker Trusted Registry host as well as for
+each of its contained services. The CPU and RAM usage meters at the top indicate
+overall resource usage for the host, while detailed time-series charts are
+provided below for each container providing a Docker Trusted Registry service.&lt;/p&gt;
+
+&lt;p&gt;In addition, if your registry is using a filesystem storage driver, you can view
+a usage meter indicating used and available space on the storage volume.
+Third-party storage back-ends are not supported. If you are using one, this
+meter is not displayed.&lt;/p&gt;
+
+&lt;p&gt;You can mouse-over the charts or meters to see detailed data points.&lt;/p&gt;
+
+&lt;p&gt;Clicking a service name, such as Load Balancer or Admin Server, displays the
+network, CPU, and memory (RAM) utilization data for the specified service. See
+the following for a &lt;a href=&#34;#services&#34;&gt;detailed explanation of the available services&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;settings-tab&#34;&gt;Settings tab&lt;/h3&gt;
+
+&lt;p&gt;Use the settings tab to configure your Trusted Registry. It is further
+sub-catagorized into the following sub-headings:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;General&lt;/strong&gt;, including Notary settings&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Security&lt;/strong&gt;, SSL certificates and SSL private key&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Storage&lt;/strong&gt;, where you can set an optional storage back-end&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;License&lt;/strong&gt;, where you apply your license&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Garbage collection&lt;/strong&gt;, set up cron job&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Auth&lt;/strong&gt;, authentication method settings: managed or LDAP&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Updates&lt;/strong&gt;, where you upgrade your registry&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Refer to the &lt;a href=&#34;./docker-trusted-registry/configuration/&#34;&gt;configuration documentation&lt;/a&gt; for details.&lt;/p&gt;
+
+&lt;h3 id=&#34;repositories-tab&#34;&gt;Repositories tab&lt;/h3&gt;
+
+&lt;p&gt;Use this tab to create or view repositories that are either public or private.
+For details on how account management works, see the &lt;a href=&#34;./docker-trusted-registry/accounts/&#34;&gt;account management documentation&lt;/a&gt;. Note that at this time, more functionality is accessed through the APIs. View the API documentation for details.&lt;/p&gt;
+
+&lt;h3 id=&#34;organization-tab&#34;&gt;Organization tab&lt;/h3&gt;
+
+&lt;p&gt;Use this tab to create or view organizations. For details on how account
+management works, see the &lt;a href=&#34;./docker-trusted-registry/accounts/&#34;&gt;account management documentation&lt;/a&gt;. Note that at this time, more functionality is accessed through the APIs. View
+the API documentation for details.&lt;/p&gt;
+
+&lt;h3 id=&#34;logs-tab&#34;&gt;Logs tab&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;./docker-trusted-registry/assets/admin-logs.png&#34; alt=&#34;System Logs page&amp;lt;/admin/logs/&amp;gt;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Use this tab to view the logs from your Docker Trusted Registry&amp;rsquo;s containers.
+Based on the  filter, see log sections for each service. Older or newer logs can
+be loaded by scrolling up or down. See the following for a detailed
+&lt;a href=&#34;#services&#34;&gt;explanation of the available services&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The Trusted Registry&amp;rsquo;s log files are located on the host in
+&lt;code&gt;/usr/local/etc/dtr/logs/&lt;/code&gt;. They are limited to a maximum size of 64mb. They are
+rotated every two weeks, when the aggregator sends logs to the collection
+server, or they are rotated if a logfile would exceed 64mb without rotation. Log
+files are named &lt;code&gt;&amp;lt;component name&amp;gt;-&amp;lt;timestamp at rotation&amp;gt;&lt;/code&gt;, where the &amp;ldquo;component
+name&amp;rdquo; is the service it provides, for example &lt;code&gt;manager&lt;/code&gt; or &lt;code&gt;admin-server&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;usage-statistics-and-crash-reports&#34;&gt;Usage statistics and crash reports&lt;/h3&gt;
+
+&lt;p&gt;During normal use, the Trusted Registry generates usage statistics and crash
+reports. This information is collected by Docker, Inc. to help prioritize
+features, fix bugs, and improve our products. Specifically, Docker, Inc.
+collects the following information:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Error logs&lt;/li&gt;
+&lt;li&gt;Crash logs&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;emergency-access-to-docker-trusted-registry&#34;&gt;Emergency access to Docker Trusted Registry&lt;/h2&gt;
+
+&lt;p&gt;If your authenticated or public access to the Trusted Registry UI has stopped
+working, but your Trusted Registry admin container is still running, you can add
+an
+&lt;a href=&#34;https://docs.docker.com/articles/ambassador_pattern_linking/&#34;&gt;ambassador container&lt;/a&gt;
+to get temporary unsecure access to it by running:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run --rm -it --link docker_trusted_registry_admin_server:admin -p 9999:80 svendowideit/ambassador
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; This guide assumes that you are a member of the &lt;code&gt;docker&lt;/code&gt; group, &amp;gt; or
+have root privileges. Otherwise, you may need to add &lt;code&gt;sudo&lt;/code&gt; to the previous
+example command. &amp;gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This gives you access on port &lt;code&gt;9999&lt;/code&gt; on your Trusted Registry server -
+&lt;code&gt;http://&amp;lt;dtr-host-ip&amp;gt;:9999&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;ssh-access-to-host&#34;&gt;SSH Access to host&lt;/h3&gt;
+
+&lt;p&gt;As an extra measure of safety, ensure you have SSH access to the Trusted
+Registry host before you start using it.&lt;/p&gt;
+
+&lt;p&gt;If you are hosting Trusted Registry on an EC2 host launched from the AWS
+Marketplace AMI, note that the user is &lt;code&gt;ec2-user&lt;/code&gt;:
+&lt;code&gt;/path/to/private_key/id_rsa ec2-user@&amp;lt;dtr-dns-entry&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;services&#34;&gt;Services&lt;/h2&gt;
+
+&lt;p&gt;The Trusted Registry runs several Docker services which are essential to its reliability and usability. The following services are included; you can see their details by
+viewing the &lt;a href=&#34;#dashboard&#34;&gt;Trusted Registry Dashboard&lt;/a&gt; and &lt;a href=&#34;#logs&#34;&gt;Logs&lt;/a&gt; pages:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;admin_server&lt;/code&gt;: Used for displaying system health, performing upgrades,
+configuring settings, and viewing logs.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;load_balancer&lt;/code&gt;: Used for maintaining high availability by distributing load
+to each image storage service (&lt;code&gt;image_storage_X&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;log_aggregator&lt;/code&gt;: A microservice used for aggregating logs from each of the
+other services. Handles log persistence and rotation on disk.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;image_storage_X&lt;/code&gt;: Stores Docker images using the &lt;a href=&#34;http://docs.docker.com/registry/spec/api/&#34;&gt;Docker Registry HTTP API V2&lt;/a&gt;. Typically,
+multiple image storage services are used in order to provide greater uptime and
+faster, more efficient resource utilization.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;postgres&lt;/code&gt;: A database service used to host authentication (LDAP) data and other datasets as needed by Docker Trusted Registry.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;docker-trusted-registry-system-management&#34;&gt;Docker Trusted Registry system management&lt;/h2&gt;
+
+&lt;p&gt;The &lt;code&gt;docker/trusted-registry&lt;/code&gt; image is used to control the Trusted Registry
+system. This image uses the Docker socket to orchestrate the multiple services
+that comprise the Trusted Registry.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; $ sudo bash -c &amp;quot;$(sudo docker run docker/trusted-registry [COMMAND])&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Supported commands are: &lt;code&gt;install&lt;/code&gt;, &lt;code&gt;start&lt;/code&gt;, &lt;code&gt;stop&lt;/code&gt;, &lt;code&gt;restart&lt;/code&gt;, &lt;code&gt;pull&lt;/code&gt;, &lt;code&gt;info&lt;/code&gt;,
+&lt;code&gt;export-settings&lt;/code&gt;, &lt;code&gt;diagnostics&lt;/code&gt;, &lt;code&gt;status&lt;/code&gt;, &lt;code&gt;upgrade&lt;/code&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: &lt;code&gt;sudo&lt;/code&gt; is needed for &lt;code&gt;docker/trusted-registry&lt;/code&gt; commands to
+ensure that the Bash script is run with full access to the Docker host.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;install&#34;&gt;&lt;code&gt;install&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;Install Docker Trusted Registry.&lt;/p&gt;
+
+&lt;h3 id=&#34;start&#34;&gt;&lt;code&gt;start&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;Start Docker Trusted Registry containers that are not running.&lt;/p&gt;
+
+&lt;h3 id=&#34;stop&#34;&gt;&lt;code&gt;stop&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;Stop Docker Trusted Registry containers that are running.&lt;/p&gt;
+
+&lt;h3 id=&#34;restart&#34;&gt;&lt;code&gt;restart&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;Stop and then start the Docker Trusted Registry containers.&lt;/p&gt;
+
+&lt;h3 id=&#34;status&#34;&gt;&lt;code&gt;status&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;Display the current running status of only the Docker Trusted Registry containers.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo bash -c &amp;quot;$(docker run docker/trusted-registry status)&amp;quot;
+INFO  [1.1.0-alpha-001472_g8a9ddb4] Attempting to connect to docker engine dockerHost=&amp;quot;unix:///var/run/docker.sock&amp;quot;
+INFO  [1.1.0-alpha-001472_g8a9ddb4] Running status command
+docker_trusted_registry_load_balancer
+    Daemon [default (unix:///var/run/docker.sock)]
+        Id: 4d6abd5c39acda25e3d3ccf7cc2acf00f32c7786a7e86fb56daf7fd67584ce9f
+        Created: 2015-06-16 21:52:53+00:00
+        Status: Up 4 minutes
+        Image: docker/trusted-registry-nginx:1.1.0-alpha-001472_g8a9ddb4
+        Ports:
+            tcp://0.0.0.0:443 -&amp;gt; 443
+            tcp://0.0.0.0:80 -&amp;gt; 80
+        Command:
+            nginxWatcher
+        Linked To:
+            None
+
+docker_trusted_registry_auth_server
+    Daemon [default (unix:///var/run/docker.sock)]
+        Id: 22d5c1cf988338638dd810bc8111295f71713e81338d16298028122d33eed64a
+        Created: 2015-06-16 21:52:46+00:00
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;info&#34;&gt;&lt;code&gt;info&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;Display the version and info for the Docker daemon, and version and image ID&amp;rsquo;s
+of Docker Trusted Registry.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo bash -c &amp;quot;$(docker run docker/trusted-registry info)&amp;quot;
+INFO  [1.1.0-alpha-001472_g8a9ddb4] Attempting to connect to docker engine dockerHost=&amp;quot;unix:///var/run/docker.sock&amp;quot;
+{
+  &amp;quot;DockerEngine&amp;quot;: {
+    &amp;quot;Version&amp;quot;: {
+      &amp;quot;ApiVersion&amp;quot;: &amp;quot;1.20&amp;quot;,
+      &amp;quot;Arch&amp;quot;: &amp;quot;amd64&amp;quot;,
+      &amp;quot;GitCommit&amp;quot;: &amp;quot;55bdb51&amp;quot;,
+      &amp;quot;GoVersion&amp;quot;: &amp;quot;go1.4.2&amp;quot;,
+      &amp;quot;KernelVersion&amp;quot;: &amp;quot;3.16.0-4-amd64&amp;quot;,
+      &amp;quot;Os&amp;quot;: &amp;quot;linux&amp;quot;,
+      &amp;quot;Version&amp;quot;: &amp;quot;1.6.0&amp;quot;
+    },
+    &amp;quot;Info&amp;quot;: {
+      &amp;quot;ID&amp;quot;: &amp;quot;QUMM:6SGD:6ZK4:TLJD:LTX7:64Z5:WP4Y:NE3N:TY7P:Y2RR:KVGO:IWRX&amp;quot;,
+      &amp;quot;Containers&amp;quot;: 15,
+      &amp;quot;Driver&amp;quot;: &amp;quot;btrfs&amp;quot;,
+      &amp;quot;DriverStatus&amp;quot;: [],
+      &amp;quot;ExecutionDriver&amp;quot;: &amp;quot;native-0.2&amp;quot;,
+      &amp;quot;Images&amp;quot;: 2793,
+      &amp;quot;KernelVersion&amp;quot;: &amp;quot;3.16.0-4-amd64&amp;quot;,
+      &amp;quot;OperatingSystem&amp;quot;: &amp;quot;Debian GNU/Linux stretch/sid&amp;quot;,
+      &amp;quot;NCPU&amp;quot;: 4,
+      &amp;quot;MemTotal&amp;quot;: 12305711104,
+      &amp;quot;Name&amp;quot;: &amp;quot;t440s&amp;quot;,
+      &amp;quot;Labels&amp;quot;: null,
+      &amp;quot;Debug&amp;quot;: true,
+      &amp;quot;NFd&amp;quot;: 43,
+      &amp;quot;NGoroutines&amp;quot;: 85,
+      &amp;quot;SystemTime&amp;quot;: &amp;quot;2015-06-17T04:24:54.634746915+10:00&amp;quot;,
+      &amp;quot;NEventsListener&amp;quot;: 1,
+      &amp;quot;InitPath&amp;quot;: &amp;quot;/usr/bin/docker&amp;quot;,
+      &amp;quot;InitSha1&amp;quot;: &amp;quot;&amp;quot;,
+      &amp;quot;IndexServerAddress&amp;quot;: &amp;quot;https://index.docker.io/v1/&amp;quot;,
+      &amp;quot;MemoryLimit&amp;quot;: false,
+      &amp;quot;SwapLimit&amp;quot;: false,
+      &amp;quot;IPv4Forwarding&amp;quot;: true,
+      &amp;quot;DockerRootDir&amp;quot;: &amp;quot;/data/docker&amp;quot;,
+      &amp;quot;HttpProxy&amp;quot;: &amp;quot;&amp;quot;,
+      &amp;quot;HttpsProxy&amp;quot;: &amp;quot;&amp;quot;,
+      &amp;quot;NoProxy&amp;quot;: &amp;quot;&amp;quot;
+    }
+  },
+  &amp;quot;DTR&amp;quot;: {
+    &amp;quot;Version&amp;quot;: &amp;quot;1.1.0-alpha-001472_g8a9ddb4&amp;quot;,
+    &amp;quot;GitSHA&amp;quot;: &amp;quot;8a9ddb4595c3&amp;quot;,
+    &amp;quot;StorageDriver&amp;quot;: &amp;quot;filesystem&amp;quot;,
+    &amp;quot;AuthDriver&amp;quot;: &amp;quot;dtr&amp;quot;,
+    &amp;quot;ImageIDs&amp;quot;: {
+      &amp;quot;Garant&amp;quot;: &amp;quot;59bc135c362ad7e44743800b037061976210a9cc6aec323c3ea6eb93ebb513ca&amp;quot;,
+      &amp;quot;Registry&amp;quot;: &amp;quot;6aba58d8bbe71b14edd538a20ac98e1279577bbef461ca25fd2794dcb017c1dc&amp;quot;,
+      &amp;quot;AdminServer&amp;quot;: &amp;quot;af4dfb1f386e3e07b612f5f59f08166ce499ef1dfc619d499a42c53c5e424acf&amp;quot;,
+      &amp;quot;Manager&amp;quot;: &amp;quot;3abc65af8385e63d61af40a1393438d0d720e6bf2a60c1b15b7a17a2a0d8965b&amp;quot;,
+      &amp;quot;LogAggregator&amp;quot;: &amp;quot;01da5d7ef561a251c0c63b860a95d55b602cc70347192ef34acd3b1c5bcd317f&amp;quot;,
+      &amp;quot;Nginx&amp;quot;: &amp;quot;631537f98c8876050fae00106c8db424d03e408b27cc14b5eb1fc11abbaba03b&amp;quot;
+    },
+    &amp;quot;LicenseKeyID&amp;quot;: &amp;quot;2Y6QPUBxoYEms6pIysneyum6SZY_QxE9v4zLF8i1wBNZ&amp;quot;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;diagnostics&#34;&gt;&lt;code&gt;diagnostics&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;The &lt;code&gt;diagnostics&lt;/code&gt; command is used to extract configuration and run time data
+about your containers for support purposes.&lt;/p&gt;
+
+&lt;p&gt;The output includes the &lt;code&gt;docker inspect&lt;/code&gt; output for all
+containers, running and not, so check the resulting files for passwords
+and other proprietary information before sending it.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;$ sudo bash -c &amp;quot;$(docker run docker/trusted-registry diagnostics)&amp;quot; &amp;gt; diagnostics.zip&lt;/code&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; These diagnostics files may contain secrets that you need to remove
+before passing on - such as raw container log files, Azure storage credentials, or passwords that may be
+sent to non-Docker Trusted Registry containers using the &lt;code&gt;docker run -e PASSWORD=asdf&lt;/code&gt; environment variable
+options.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Stream to STDOUT a zip file containing CSDE and Docker Trusted Registry
+configuration, state, and log files to help the Docker Enterprise support team:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;your Docker host&amp;rsquo;s &lt;code&gt;ca-certificates.crt&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;containers/&lt;/code&gt;: the first 20 running, stopped and paused containers &lt;code&gt;docker inspect&lt;/code&gt;
+information and log files.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;dockerEngine/&lt;/code&gt;: the Docker daemon&amp;rsquo;s &lt;code&gt;info&lt;/code&gt; and &lt;code&gt;version&lt;/code&gt; output&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;dockerState/&lt;/code&gt;: the Docker daemon&amp;rsquo;s container states, image states, daemon log file, and daemon configuration file&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;dtrlogs/&lt;/code&gt;: the Docker Trusted Registry container log files&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;manager/&lt;/code&gt;: the Docker Trusted Registry &lt;code&gt;/usr/local/etc/dtr&lt;/code&gt; configuration directory and manager &lt;code&gt;info&lt;/code&gt; output. See the &lt;a href=&#34;#export-settings&#34;&gt;export settings section&lt;/a&gt; for more details.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sysinfo/&lt;/code&gt;: Host information&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;errors.txt&lt;/code&gt;: errors and warnings encountered while running diagnostics&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;export-settings&#34;&gt;&lt;code&gt;export-settings&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;Export the Trusted Registry configuration files for backup or diagnostics use.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;$ sudo bash -c &amp;quot;$(docker run docker/trusted-registry export-settings)&amp;quot; &amp;gt; export-settings.tar.gz&lt;/code&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; These diagnostics files may contain secrets that you need to remove
+before passing on - such as Azure storage credentials.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Stream to STDOUT a gzipped tar file containing the Trusted Registry
+configuration files from &lt;code&gt;/usr/local/etc/dtr/&lt;/code&gt;:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;garant.yml&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;generatedConfigs/nginx.conf&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;generatedConfigs/stacker.yml&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;hub.yml&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;license.json&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ssl/server.pem&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;storage.yml&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;client-docker-daemon-diagnostics&#34;&gt;Client Docker Daemon diagnostics&lt;/h2&gt;
+
+&lt;p&gt;To debug client Docker daemon communication issues with the Trusted Registry,
+Docker also provides a diagnostics tool to be run on the client Docker daemon.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; These diagnostics files may contain secrets that you need to remove
+before passing on - such as raw container log files, Azure storage credentials, or passwords that may be
+sent to non-Docker Trusted Registry containers using the &lt;code&gt;docker run -e PASSWORD=asdf&lt;/code&gt; environment variable
+options.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;You can download and run this tool using the following command:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; If you supply an administrator username and password, then the
+&lt;code&gt;diagnostics&lt;/code&gt; tool will also download some logs and configuration data
+from the remote Docker Trusted Registry server.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code&gt;$ wget https://dhe.mycompany.com/admin/bin/diagnostics &amp;amp;&amp;amp; chmod +x diagnostics
+$ sudo ./diagnostics dhe.mycompany.com &amp;gt; enduserDiagnostics.zip DTR
+administrator password (provide empty string if there is no admin server
+authentication):
+WARN  [1.1.0-alpha-001472_g8a9ddb4] Encountered errors running diagnostics
+errors=[Failed to copy DTR Adminserver&#39;s exported settings into ZIP output:
+&amp;quot;Failed to read next tar header: \&amp;quot;archive/tar: invalid tar header\&amp;quot;&amp;quot; Failed to
+copy logs from DTR Adminserver into ZIP output: &amp;quot;Failed to read next tar header:
+\&amp;quot;archive/tar: invalid tar header\&amp;quot;&amp;quot; error running &amp;quot;sestatus&amp;quot;: &amp;quot;exit status 127&amp;quot;
+error running &amp;quot;dmidecode&amp;quot;: &amp;quot;exit status 127&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The zip file will contain the following information:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;your local Docker host&amp;rsquo;s &lt;code&gt;ca-certificates.crt&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;containers/&lt;/code&gt;: the first 20 running, stopped and paused containers &lt;code&gt;docker inspect&lt;/code&gt;
+information and log files.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;dockerEngine/&lt;/code&gt;: the local Docker daemon&amp;rsquo;s &lt;code&gt;info&lt;/code&gt; and &lt;code&gt;version&lt;/code&gt; output&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;dockerState/&lt;/code&gt;: the local Docker daemon&amp;rsquo;s container states, image states, log file, and daemon configuration file&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;dtr/&lt;/code&gt;: Remote Docker Trusted Registry services information. This directory will only be populated if the user enters a Docker Trusted Registry &amp;ldquo;admin&amp;rdquo; username and password.&lt;/li&gt;
+&lt;li&gt;- &lt;code&gt;dtr/logs/&lt;/code&gt;: the remote Docker Trusted Registry container log files. This directory will only be populated if the user enters a Docker Trusted Registry &amp;ldquo;admin&amp;rdquo; username and password.&lt;/li&gt;
+&lt;li&gt;- &lt;code&gt;dtr/exportedSettings/&lt;/code&gt;: the Docker Trusted Registry manager container&amp;rsquo;s log files and a backup of the &lt;code&gt;/usr/local/etc/dtr&lt;/code&gt; Docker Trusted Registry configuration directory. See the &lt;a href=&#34;#export-settings&#34;&gt;export settings section&lt;/a&gt; for more details.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sysinfo/&lt;/code&gt;: local Host information&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;errors.txt&lt;/code&gt;: errors and warnings encountered while running diagnostics&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;starting-and-stopping-docker-trusted-registry&#34;&gt;Starting and stopping Docker Trusted Registry&lt;/h3&gt;
+
+&lt;p&gt;If you need to stop and/or start the Trusted Registry (for example, upgrading, or troubleshooting), use the following commands:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;sudo bash -c &amp;quot;$(docker run docker/trusted-registry stop)&amp;quot;&lt;/code&gt;
+&lt;code&gt;sudo bash -c &amp;quot;$(docker run docker/trusted-registry start)&amp;quot;&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;see-also&#34;&gt;See also&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;To configure for your environment, see the
+&lt;a href=&#34;./docker-trusted-registry/configuration/&#34;&gt;Configuration instructions&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;To use Docker Trusted Registry, see the &lt;a href=&#34;./docker-trusted-registry/userguide/&#34;&gt;User guide&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;To upgrade, see the &lt;a href=&#34;./docker-trusted-registry/install/upgrade/&#34;&gt;Upgrade guide&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;To see previous changes, see the &lt;a href=&#34;./docker-trusted-registry/release-notes/&#34;&gt;release notes&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Advanced contributing</title>
+      <link>http://docs.docker.com/opensource/workflow/advanced-contributing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs.docker.com/opensource/workflow/advanced-contributing/</guid>
+      <description>
+
+&lt;h1 id=&#34;advanced-contributing&#34;&gt;Advanced contributing&lt;/h1&gt;
+
+&lt;p&gt;In this section, you learn about the more advanced contributions you can make.
+They are advanced because they have a more involved workflow or require greater
+programming experience. Don&amp;rsquo;t be scared off though, if you like to stretch and
+challenge yourself, this is the place for you.&lt;/p&gt;
+
+&lt;p&gt;This section gives generalized instructions for advanced contributions. You&amp;rsquo;ll
+read about the workflow but there are not specific descriptions of commands.
+Your goal should be to understand the processes described.&lt;/p&gt;
+
+&lt;p&gt;At this point, you should have read and worked through the earlier parts of
+the project contributor guide. You should also have
+&lt;a href=&#34;../make-a-contribution/&#34; target=&#34;_blank&#34;&gt; made at least one project contribution&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;refactor-or-cleanup-proposal&#34;&gt;Refactor or cleanup proposal&lt;/h2&gt;
+
+&lt;p&gt;A refactor or cleanup proposal changes Docker&amp;rsquo;s internal structure without
+altering the external behavior. To make this type of proposal:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Fork &lt;code&gt;docker/docker&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make your changes in a feature branch.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Sync and rebase with &lt;code&gt;master&lt;/code&gt; as you work.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Run the full test suite.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Submit your code through a pull request (PR).&lt;/p&gt;
+
+&lt;p&gt;The PR&amp;rsquo;s title should have the format:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Cleanup:&lt;/strong&gt; &lt;em&gt;short title&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;If your changes required logic changes, note that in your request.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Work through Docker&amp;rsquo;s review process until merge.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;design-proposal&#34;&gt;Design proposal&lt;/h2&gt;
+
+&lt;p&gt;A design proposal solves a problem or adds a feature to the Docker software.
+The process for submitting design proposals requires two pull requests, one
+for the design and one for the implementation.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./opensource/workflow/images/proposal.png&#34; alt=&#34;Simple process&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The important thing to notice is that both the design pull request and the
+implementation pull request go through a review. In other words, there is
+considerable time commitment in a design proposal; so, you might want to pair
+with someone on design work.&lt;/p&gt;
+
+&lt;p&gt;The following provides greater detail on the process:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Come up with an idea.&lt;/p&gt;
+
+&lt;p&gt;Ideas usually come from limitations users feel working with a product. So,
+take some time to really use Docker. Try it on different platforms; explore
+how it works with different web applications. Go to some community events
+and find out what other users want.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Review existing issues and proposals to make sure no other user is proposing a similar idea.&lt;/p&gt;
+
+&lt;p&gt;The design proposals are &lt;a
+href=&#34;https://github.com/docker/docker/pulls?q=is%3Aopen+is%3Apr+label%
+3Akind%2Fproposal&#34; target=&#34;_blank&#34;&gt;all online in our GitHub pull requests&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Talk to the community about your idea.&lt;/p&gt;
+
+&lt;p&gt;We have lots of &lt;a href=&#34;../../get-help/&#34; target=&#34;_blank&#34;&gt;community forums&lt;/a&gt;
+where you can get feedback on your idea. Float your idea in a forum or two
+to get some commentary going on it.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Fork &lt;code&gt;docker/docker&lt;/code&gt; and clone the repo to your local host.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create a new Markdown file in the area you wish to change.&lt;/p&gt;
+
+&lt;p&gt;For example, if you want to redesign our daemon create a new file under the
+&lt;code&gt;daemon/&lt;/code&gt; folder.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Name the file descriptively, for example &lt;code&gt;redesign-daemon-proposal.md&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Write a proposal for your change into the file.&lt;/p&gt;
+
+&lt;p&gt;This is a Markdown file that describes your idea. Your proposal
+should include information like:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Why is this change needed or what are the use cases?&lt;/li&gt;
+&lt;li&gt;What are the requirements this change should meet?&lt;/li&gt;
+&lt;li&gt;What are some ways to design/implement this feature?&lt;/li&gt;
+&lt;li&gt;Which design/implementation do you think is best and why?&lt;/li&gt;
+&lt;li&gt;What are the risks or limitations of your proposal?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This is your chance to convince people your idea is sound.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Submit your proposal in a pull request to &lt;code&gt;docker/docker&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The title should have the format:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Proposal:&lt;/strong&gt; &lt;em&gt;short title&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;The body of the pull request should include a brief summary of your change
+and then say something like &amp;ldquo;&lt;em&gt;See the file for a complete description&lt;/em&gt;&amp;rdquo;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Refine your proposal through review.&lt;/p&gt;
+
+&lt;p&gt;The maintainers and the community review your proposal. You&amp;rsquo;ll need to
+answer questions and sometimes explain or defend your approach. This is
+chance for everyone to both teach and learn.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Pull request accepted.&lt;/p&gt;
+
+&lt;p&gt;Your request may also be rejected. Not every idea is a good fit for Docker.
+Let&amp;rsquo;s assume though your proposal succeeded.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Implement your idea.&lt;/p&gt;
+
+&lt;p&gt;Implementation uses all the standard practices of any contribution.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;fork &lt;code&gt;docker/docker&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;create a feature branch&lt;/li&gt;
+&lt;li&gt;sync frequently back to master&lt;/li&gt;
+&lt;li&gt;test as you go and full test before a PR&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you run into issues, the community is there to help.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;When you have a complete implementation, submit a pull request back to &lt;code&gt;docker/docker&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Review and iterate on your code.&lt;/p&gt;
+
+&lt;p&gt;If you are making a large code change, you can expect greater scrutiny
+during this phase.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Acceptance and merge!&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;about-the-advanced-process&#34;&gt;About the advanced process&lt;/h2&gt;
+
+&lt;p&gt;Docker is a large project. Our core team gets a great many design proposals.
+Design proposal discussions can span days, weeks, and longer. The number of comments can reach the 100s.
+In that situation, following the discussion flow and the decisions reached is crucial.&lt;/p&gt;
+
+&lt;p&gt;Making a pull request with a design proposal simplifies this process:
+* you can leave comments on specific design proposal line
+* replies around line are easy to track
+* as a proposal changes and is updated, pages reset as line items resolve
+* GitHub maintains the entire history&lt;/p&gt;
+
+&lt;p&gt;While proposals in pull requests do not end up merged into a master repository, they provide a convenient tool for managing the design process.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Aliyun OSS storage driver</title>
+      <link>http://docs.docker.com/registry/storage-drivers/oss/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs.docker.com/registry/storage-drivers/oss/</guid>
+      <description>
+
+&lt;h1 id=&#34;aliyun-oss-storage-driver&#34;&gt;Aliyun OSS storage driver&lt;/h1&gt;
+
+&lt;p&gt;An implementation of the &lt;code&gt;storagedriver.StorageDriver&lt;/code&gt; interface which uses &lt;a href=&#34;http://www.aliyun.com/product/oss&#34;&gt;Aliyun OSS&lt;/a&gt; for object storage.&lt;/p&gt;
+
+&lt;h2 id=&#34;parameters&#34;&gt;Parameters&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;accesskeyid&lt;/code&gt;: Your access key ID.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;accesskeysecret&lt;/code&gt;: Your access key secret.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;region&lt;/code&gt;: The name of the OSS region in which you would like to store objects (for example &lt;code&gt;oss-cn-beijing&lt;/code&gt;). For a list of regions, you can look at &lt;a href=&#34;http://docs.aliyun.com/#/oss/product-documentation/domain-region&#34;&gt;http://docs.aliyun.com/#/oss/product-documentation/domain-region&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;endpoint&lt;/code&gt;: (optional) By default, the endpoint shoulb be &lt;code&gt;&amp;lt;bucket&amp;gt;.&amp;lt;region&amp;gt;.aliyuncs.com&lt;/code&gt; or &lt;code&gt;&amp;lt;bucket&amp;gt;.&amp;lt;region&amp;gt;-internal.aliyuncs.com&lt;/code&gt; (when internal=true). You can change the default endpoint via changing this value.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;internal&lt;/code&gt;: (optional) Using internal endpoint or the public endpoint for OSS access. The default is false. For a list of regions, you can look at &lt;a href=&#34;http://docs.aliyun.com/#/oss/product-documentation/domain-region&#34;&gt;http://docs.aliyun.com/#/oss/product-documentation/domain-region&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;bucket&lt;/code&gt;: The name of your OSS bucket where you wish to store objects (needs to already be created prior to driver initialization).&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;encrypt&lt;/code&gt;: (optional) Whether you would like your data encrypted on the server side (defaults to false if not specified).&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;secure&lt;/code&gt;: (optional) Whether you would like to transfer data to the bucket over ssl or not. Defaults to false if not specified.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;chunksize&lt;/code&gt;: (optional) The default part size for multipart uploads (performed by WriteStream) to OSS. The default is 10 MB. Keep in mind that the minimum part size for OSS is 5MB. You might experience better performance for larger chunk sizes depending on the speed of your connection to OSS.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;rootdirectory&lt;/code&gt;: (optional) The root directory tree in which all registry files will be stored. Defaults to the empty string (bucket root).&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Amazon CloudWatch Logs logging driver</title>
+      <link>http://docs.docker.com/engine/reference/logging/awslogs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs.docker.com/engine/reference/logging/awslogs/</guid>
+      <description>
+
+&lt;h1 id=&#34;amazon-cloudwatch-logs-logging-driver&#34;&gt;Amazon CloudWatch Logs logging driver&lt;/h1&gt;
+
+&lt;p&gt;The &lt;code&gt;awslogs&lt;/code&gt; logging driver sends container logs to
+&lt;a href=&#34;https://aws.amazon.com/cloudwatch/details/#log-monitoring&#34;&gt;Amazon CloudWatch Logs&lt;/a&gt;.
+Log entries can be retrieved through the &lt;a href=&#34;https://console.aws.amazon.com/cloudwatch/home#logs:&#34;&gt;AWS Management
+Console&lt;/a&gt; or the &lt;a href=&#34;http://docs.aws.amazon.com/cli/latest/reference/logs/index.html&#34;&gt;AWS SDKs
+and Command Line Tools&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;usage&#34;&gt;Usage&lt;/h2&gt;
+
+&lt;p&gt;You can configure the default logging driver by passing the &lt;code&gt;--log-driver&lt;/code&gt;
+option to the Docker daemon:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker daemon --log-driver=awslogs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can set the logging driver for a specific container by using the
+&lt;code&gt;--log-driver&lt;/code&gt; option to &lt;code&gt;docker run&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker run --log-driver=awslogs ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;amazon-cloudwatch-logs-options&#34;&gt;Amazon CloudWatch Logs options&lt;/h2&gt;
+
+&lt;p&gt;You can use the &lt;code&gt;--log-opt NAME=VALUE&lt;/code&gt; flag to specify Amazon CloudWatch Logs logging driver options.&lt;/p&gt;
+
+&lt;h3 id=&#34;awslogs-region&#34;&gt;awslogs-region&lt;/h3&gt;
+
+&lt;p&gt;You must specify a region for the &lt;code&gt;awslogs&lt;/code&gt; logging driver. You can specify the
+region with either the &lt;code&gt;awslogs-region&lt;/code&gt; log option or &lt;code&gt;AWS_REGION&lt;/code&gt; environment
+variable:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker run --log-driver=awslogs --log-opt awslogs-region=us-east-1 ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;awslogs-group&#34;&gt;awslogs-group&lt;/h3&gt;
+
+&lt;p&gt;You must specify a
+&lt;a href=&#34;http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatchLogs.html&#34;&gt;log group&lt;/a&gt;
+for the &lt;code&gt;awslogs&lt;/code&gt; logging driver.  You can specify the log group with the
+&lt;code&gt;awslogs-group&lt;/code&gt; log option:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker run --log-driver=awslogs --log-opt awslogs-region=us-east-1 --log-opt awslogs-group=myLogGroup ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;awslogs-stream&#34;&gt;awslogs-stream&lt;/h3&gt;
+
+&lt;p&gt;To configure which
+&lt;a href=&#34;http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatchLogs.html&#34;&gt;log stream&lt;/a&gt;
+should be used, you can specify the &lt;code&gt;awslogs-stream&lt;/code&gt; log option.  If not
+specified, the container ID is used as the log stream.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+Log streams within a given log group should only be used by one container
+at a time.  Using the same log stream for multiple containers concurrently
+can cause reduced logging performance.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;credentials&#34;&gt;Credentials&lt;/h2&gt;
+
+&lt;p&gt;You must provide AWS credentials to the Docker daemon to use the &lt;code&gt;awslogs&lt;/code&gt;
+logging driver. You can provide these credentials with the &lt;code&gt;AWS_ACCESS_KEY_ID&lt;/code&gt;,
+&lt;code&gt;AWS_SECRET_ACCESS_KEY&lt;/code&gt;, and &lt;code&gt;AWS_SESSION_TOKEN&lt;/code&gt; environment variables, the
+default AWS shared credentials file (&lt;code&gt;~/.aws/credentials&lt;/code&gt; of the root user), or
+(if you are running the Docker daemon on an Amazon EC2 instance) the Amazon EC2
+instance profile.&lt;/p&gt;
+
+&lt;p&gt;Credentials must have a policy applied that allows the &lt;code&gt;logs:CreateLogStream&lt;/code&gt;
+and &lt;code&gt;logs:PutLogEvents&lt;/code&gt; actions, as shown in the following example.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+  &amp;quot;Version&amp;quot;: &amp;quot;2012-10-17&amp;quot;,
+  &amp;quot;Statement&amp;quot;: [
+    {
+      &amp;quot;Action&amp;quot;: [
+        &amp;quot;logs:CreateLogStream&amp;quot;,
+        &amp;quot;logs:PutLogEvents&amp;quot;
+      ],
+      &amp;quot;Effect&amp;quot;: &amp;quot;Allow&amp;quot;,
+      &amp;quot;Resource&amp;quot;: &amp;quot;*&amp;quot;
+    }
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Amazon EC2 Installation</title>
+      <link>http://docs.docker.com/engine/installation/amazon/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs.docker.com/engine/installation/amazon/</guid>
+      <description>
+
+&lt;h2 id=&#34;amazon-ec2&#34;&gt;Amazon EC2&lt;/h2&gt;
+
+&lt;p&gt;You can install Docker on any AWS EC2 Amazon Machine Image (AMI) which runs an
+operating system that Docker supports. Amazon&amp;rsquo;s website includes specific
+instructions for &lt;a href=&#34;http://docs.aws.amazon.com/AmazonECS/latest/developerguide/docker-basics.html#install_docker&#34;&gt;installing on Amazon
+Linux&lt;/a&gt;. To install on
+another AMI, follow the instructions for its specific operating
+system in this installation guide.&lt;/p&gt;
+
+&lt;p&gt;For detailed information on Amazon AWS support for Docker, refer to &lt;a href=&#34;http://docs.aws.amazon.com/AmazonECS/latest/developerguide/docker-basics.html&#34;&gt;Amazon&amp;rsquo;s
+documentation&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

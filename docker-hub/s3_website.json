@@ -1,0 +1,8 @@
+{
+  "ErrorDocument": {
+    "Key": "jsearch/index.html"
+  },
+  "IndexDocument": {
+    "Suffix": "index.html"
+  }
+}

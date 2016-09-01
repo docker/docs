@@ -1,0 +1,14 @@
+.benefits {
+	padding: 2rem 0;
+	@media #{$medium-up} {
+		padding: 5rem 0;
+	}
+	@media #{$small-only} {
+		.row {
+			padding-bottom: 2rem;
+		}
+		img {
+			margin-bottom: 1rem;
+		}
+	}
+}

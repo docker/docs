@@ -1,0 +1,41 @@
+<div class="medium-4 columns">
+  <h5>1. Write your Docker file</h5>
+  <div class="terminal-window">
+    <section class="terminal terminal-small">
+      <div class="terminal-data">
+        <span class="green">WORKDIR</span> <span class="gray"> /code<br>
+        <span class="green">ADD</span> <span class="gray"> requirements.txt /code/<br>
+        <span class="green">RUN</span> <span class="gray"> pip install -r requirements.txt<br>
+        <span class="green">ADD</span> <span class="gray"> . /code<br>
+        <span class="green">CMD</span> <span class="gray"> python app.py
+      </div>
+    </section>
+  </div>
+</div>
+<div class="medium-4 columns">
+  <h5>2. Write your docker-compose.yml file</h5>
+  <div class="terminal-window">
+    <section class="terminal terminal-small">
+      <div class="terminal-data">
+        web:<br>
+        &nbsp;&nbsp;<span class="gray">build: .<br>
+        &nbsp;&nbsp;links:<br>
+        &nbsp;&nbsp;- db<br>
+        &nbsp;&nbsp;ports:<br>
+        &nbsp;&nbsp;- "8000:8000"</span><br>
+        db:<br>
+        &nbsp;&nbsp;<span class="gray">image: postgres</span>
+      </div>
+    </section>
+  </div>
+</div>
+<div class="medium-4 columns">
+  <h5>3. Run your app</h5>
+  <div class="terminal-window">
+    <section class="terminal terminal-small">
+      <div class="terminal-data">
+        $ docker-compose up<br>
+      </div>
+    </section>
+  </div>
+</div>
