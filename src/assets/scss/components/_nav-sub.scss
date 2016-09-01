@@ -1,0 +1,23 @@
+.nav-sub {
+	@include inline-list;
+	display: inline-block;
+	margin-bottom: -6px;
+	margin-left: -10px;
+	@media #{$small-only} {display: none;}
+	li {margin-left: 10px;}
+	a {
+		font-size: rem-calc(15);
+		font-weight: 100;
+		color: #fff;
+		padding: rem-calc(10) rem-calc(20);
+		background: darken($primary-color, 15%);
+		border-radius: $global-radius $global-radius 0 0; 
+		@extend %primary-transition;
+		&:hover {background: darken($primary-color, 35%);}
+		&.is-active {
+			background: #fff;
+			color: darken($primary-color, 15%);
+		}
+		@media #{$medium-only} {font-size: rem-calc(13);}
+	}
+}

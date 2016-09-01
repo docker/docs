@@ -1,0 +1,3143 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Composes on Docker Docs</title>
+    <link>https://docs.docker.com/v1.10/compose/</link>
+    <description>Recent content in Composes on Docker Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="https://docs.docker.com/v1.10/compose/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>CLI Environment Variables</title>
+      <link>https://docs.docker.com/v1.10/compose/reference/envvars/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/compose/reference/envvars/</guid>
+      <description>
+
+&lt;h1 id=&#34;cli-environment-variables&#34;&gt;CLI Environment Variables&lt;/h1&gt;
+
+&lt;p&gt;Several environment variables are available for you to configure the Docker Compose command-line behaviour.&lt;/p&gt;
+
+&lt;p&gt;Variables starting with &lt;code&gt;DOCKER_&lt;/code&gt; are the same as those used to configure the
+Docker command-line client. If you&amp;rsquo;re using &lt;code&gt;docker-machine&lt;/code&gt;, then the &lt;code&gt;eval &amp;quot;$(docker-machine env my-docker-vm)&amp;quot;&lt;/code&gt; command should set them to their correct values. (In this example, &lt;code&gt;my-docker-vm&lt;/code&gt; is the name of a machine you created.)&lt;/p&gt;
+
+&lt;h2 id=&#34;compose-project-name&#34;&gt;COMPOSE_PROJECT_NAME&lt;/h2&gt;
+
+&lt;p&gt;Sets the project name. This value is prepended along with the service name to the container container on start up. For example, if you project name is &lt;code&gt;myapp&lt;/code&gt; and it includes two services &lt;code&gt;db&lt;/code&gt; and &lt;code&gt;web&lt;/code&gt; then compose starts containers named  &lt;code&gt;myapp_db_1&lt;/code&gt; and &lt;code&gt;myapp_web_1&lt;/code&gt; respectively.&lt;/p&gt;
+
+&lt;p&gt;Setting this is optional. If you do not set this, the &lt;code&gt;COMPOSE_PROJECT_NAME&lt;/code&gt;
+defaults to the &lt;code&gt;basename&lt;/code&gt; of the project directory. See also the &lt;code&gt;-p&lt;/code&gt;
+&lt;a href=&#34;../v1.10/compose/reference/overview/&#34;&gt;command-line option&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;compose-file&#34;&gt;COMPOSE_FILE&lt;/h2&gt;
+
+&lt;p&gt;Specify the file containing the compose configuration. If not provided,
+Compose looks for a file named  &lt;code&gt;docker-compose.yml&lt;/code&gt; in the current directory
+and then each parent directory in succession until a file by that name is
+found. See also the &lt;code&gt;-f&lt;/code&gt; &lt;a href=&#34;../v1.10/compose/reference/overview/&#34;&gt;command-line option&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;compose-api-version&#34;&gt;COMPOSE_API_VERSION&lt;/h2&gt;
+
+&lt;p&gt;The Docker API only supports requests from clients which report a specific
+version. If you receive a &lt;code&gt;client and server don&#39;t have same version error&lt;/code&gt; using
+&lt;code&gt;docker-compose&lt;/code&gt;, you can workaround this error by setting this environment
+variable. Set the version value to match the server version.&lt;/p&gt;
+
+&lt;p&gt;Setting this variable is intended as a workaround for situations where you need
+to run temporarily with a mismatch between the client and server version. For
+example, if you can upgrade the client but need to wait to upgrade the server.&lt;/p&gt;
+
+&lt;p&gt;Running with this variable set and a known mismatch does prevent some Docker
+features from working properly. The exact features that fail would depend on the
+Docker client and server versions. For this reason, running with this variable
+set is only intended as a workaround and it is not officially supported.&lt;/p&gt;
+
+&lt;p&gt;If you run into problems running with this set, resolve the mismatch through
+upgrade and remove this setting to see if your problems resolve before notifying
+support.&lt;/p&gt;
+
+&lt;h2 id=&#34;docker-host&#34;&gt;DOCKER_HOST&lt;/h2&gt;
+
+&lt;p&gt;Sets the URL of the &lt;code&gt;docker&lt;/code&gt; daemon. As with the Docker client, defaults to &lt;code&gt;unix:///var/run/docker.sock&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;docker-tls-verify&#34;&gt;DOCKER_TLS_VERIFY&lt;/h2&gt;
+
+&lt;p&gt;When set to anything other than an empty string, enables TLS communication with
+the &lt;code&gt;docker&lt;/code&gt; daemon.&lt;/p&gt;
+
+&lt;h2 id=&#34;docker-cert-path&#34;&gt;DOCKER_CERT_PATH&lt;/h2&gt;
+
+&lt;p&gt;Configures the path to the &lt;code&gt;ca.pem&lt;/code&gt;, &lt;code&gt;cert.pem&lt;/code&gt;, and &lt;code&gt;key.pem&lt;/code&gt; files used for TLS verification. Defaults to &lt;code&gt;~/.docker&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;compose-http-timeout&#34;&gt;COMPOSE_HTTP_TIMEOUT&lt;/h2&gt;
+
+&lt;p&gt;Configures the time (in seconds) a request to the Docker daemon is allowed to hang before Compose considers
+it failed. Defaults to 60 seconds.&lt;/p&gt;
+
+&lt;h2 id=&#34;related-information&#34;&gt;Related Information&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/&#34;&gt;User guide&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/install/&#34;&gt;Installing Compose&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/compose-file/&#34;&gt;Compose file reference&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Command-line Completion</title>
+      <link>https://docs.docker.com/v1.10/compose/completion/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/compose/completion/</guid>
+      <description>
+
+&lt;h1 id=&#34;command-line-completion&#34;&gt;Command-line Completion&lt;/h1&gt;
+
+&lt;p&gt;Compose comes with &lt;a href=&#34;http://en.wikipedia.org/wiki/Command-line_completion&#34;&gt;command completion&lt;/a&gt;
+for the bash and zsh shell.&lt;/p&gt;
+
+&lt;h2 id=&#34;installing-command-completion&#34;&gt;Installing Command Completion&lt;/h2&gt;
+
+&lt;h3 id=&#34;bash&#34;&gt;Bash&lt;/h3&gt;
+
+&lt;p&gt;Make sure bash completion is installed. If you use a current Linux in a non-minimal installation, bash completion should be available.
+On a Mac, install with &lt;code&gt;brew install bash-completion&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Place the completion script in &lt;code&gt;/etc/bash_completion.d/&lt;/code&gt; (&lt;code&gt;/usr/local/etc/bash_completion.d/&lt;/code&gt; on a Mac), using e.g.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; curl -L https://raw.githubusercontent.com/docker/compose/$(docker-compose version --short)/contrib/completion/bash/docker-compose &amp;gt; /etc/bash_completion.d/docker-compose
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Completion will be available upon next login.&lt;/p&gt;
+
+&lt;h3 id=&#34;zsh&#34;&gt;Zsh&lt;/h3&gt;
+
+&lt;p&gt;Place the completion script in your &lt;code&gt;/path/to/zsh/completion&lt;/code&gt;, using e.g. &lt;code&gt;~/.zsh/completion/&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mkdir -p ~/.zsh/completion
+curl -L https://raw.githubusercontent.com/docker/compose/$(docker-compose version --short)/contrib/completion/zsh/_docker-compose &amp;gt; ~/.zsh/completion/_docker-compose
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Include the directory in your &lt;code&gt;$fpath&lt;/code&gt;, e.g. by adding in &lt;code&gt;~/.zshrc&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;fpath=(~/.zsh/completion $fpath)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Make sure &lt;code&gt;compinit&lt;/code&gt; is loaded or do it by adding in &lt;code&gt;~/.zshrc&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;autoload -Uz compinit &amp;amp;&amp;amp; compinit -i
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then reload your shell&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;exec $SHELL -l
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;available-completions&#34;&gt;Available completions&lt;/h2&gt;
+
+&lt;p&gt;Depending on what you typed on the command line so far, it will complete&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;available docker-compose commands&lt;/li&gt;
+&lt;li&gt;options that are available for a particular command&lt;/li&gt;
+&lt;li&gt;service names that make sense in a given context (e.g. services with running or stopped instances or services based on images vs. services based on Dockerfiles). For &lt;code&gt;docker-compose scale&lt;/code&gt;, completed service names will automatically have &amp;ldquo;=&amp;rdquo; appended.&lt;/li&gt;
+&lt;li&gt;arguments for selected options, e.g. &lt;code&gt;docker-compose kill -s&lt;/code&gt; will complete some signals like SIGHUP and SIGUSR1.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Enjoy working with Compose faster and with less typos!&lt;/p&gt;
+
+&lt;h2 id=&#34;compose-documentation&#34;&gt;Compose documentation&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/&#34;&gt;User guide&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/install/&#34;&gt;Installing Compose&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/django/&#34;&gt;Get started with Django&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/rails/&#34;&gt;Get started with Rails&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/wordpress/&#34;&gt;Get started with WordPress&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/reference/&#34;&gt;Command line reference&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/compose-file/&#34;&gt;Compose file reference&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Command-line Reference</title>
+      <link>https://docs.docker.com/v1.10/compose/reference/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/compose/reference/</guid>
+      <description>
+
+&lt;h2 id=&#34;compose-command-line-reference&#34;&gt;Compose command-line reference&lt;/h2&gt;
+
+&lt;p&gt;The following pages describe the usage information for the &lt;a href=&#34;../v1.10/compose/reference/overview/&#34;&gt;docker-compose&lt;/a&gt; subcommands. You can also see this information by running &lt;code&gt;docker-compose [SUBCOMMAND] --help&lt;/code&gt; from the command line.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/reference/overview/&#34;&gt;docker-compose&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/reference/build/&#34;&gt;build&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/reference/config/&#34;&gt;config&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/reference/create/&#34;&gt;create&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/reference/down/&#34;&gt;down&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/reference/events/&#34;&gt;events&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/reference/help/&#34;&gt;help&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/reference/kill/&#34;&gt;kill&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/reference/logs/&#34;&gt;logs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/reference/pause/&#34;&gt;pause&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/reference/port/&#34;&gt;port&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/reference/ps/&#34;&gt;ps&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/reference/pull/&#34;&gt;pull&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/reference/restart/&#34;&gt;restart&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/reference/rm/&#34;&gt;rm&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/reference/run/&#34;&gt;run&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/reference/scale/&#34;&gt;scale&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/reference/start/&#34;&gt;start&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/reference/stop/&#34;&gt;stop&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/reference/unpause/&#34;&gt;unpause&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/reference/up/&#34;&gt;up&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/reference/envvars/&#34;&gt;CLI environment variables&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/reference/overview/&#34;&gt;docker-compose Command&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Compose File Reference</title>
+      <link>https://docs.docker.com/v1.10/compose/compose-file/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/compose/compose-file/</guid>
+      <description>
+
+&lt;h1 id=&#34;compose-file-reference&#34;&gt;Compose file reference&lt;/h1&gt;
+
+&lt;p&gt;The Compose file is a &lt;a href=&#34;http://yaml.org/&#34;&gt;YAML&lt;/a&gt; file defining
+&lt;a href=&#34;#service-configuration-reference&#34;&gt;services&lt;/a&gt;,
+&lt;a href=&#34;#network-configuration-reference&#34;&gt;networks&lt;/a&gt; and
+&lt;a href=&#34;#volume-configuration-reference&#34;&gt;volumes&lt;/a&gt;.
+The default path for a Compose file is &lt;code&gt;./docker-compose.yml&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;A service definition contains configuration which will be applied to each
+container started for that service, much like passing command-line parameters to
+&lt;code&gt;docker run&lt;/code&gt;. Likewise, network and volume definitions are analogous to
+&lt;code&gt;docker network create&lt;/code&gt; and &lt;code&gt;docker volume create&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;As with &lt;code&gt;docker run&lt;/code&gt;, options specified in the Dockerfile (e.g., &lt;code&gt;CMD&lt;/code&gt;,
+&lt;code&gt;EXPOSE&lt;/code&gt;, &lt;code&gt;VOLUME&lt;/code&gt;, &lt;code&gt;ENV&lt;/code&gt;) are respected by default - you don&amp;rsquo;t need to
+specify them again in &lt;code&gt;docker-compose.yml&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;You can use environment variables in configuration values with a Bash-like
+&lt;code&gt;${VARIABLE}&lt;/code&gt; syntax - see &lt;a href=&#34;#variable-substitution&#34;&gt;variable substitution&lt;/a&gt; for
+full details.&lt;/p&gt;
+
+&lt;h2 id=&#34;service-configuration-reference&#34;&gt;Service configuration reference&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; There are two versions of the Compose file format – version 1 (the
+legacy format, which does not support volumes or networks) and version 2 (the
+most up-to-date). For more information, see the &lt;a href=&#34;#versioning&#34;&gt;Versioning&lt;/a&gt;
+section.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This section contains a list of all configuration options supported by a service
+definition.&lt;/p&gt;
+
+&lt;h3 id=&#34;build&#34;&gt;build&lt;/h3&gt;
+
+&lt;p&gt;Configuration options that are applied at build time.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;build&lt;/code&gt; can be specified either as a string containing a path to the build
+context, or an object with the path specified under &lt;a href=&#34;#context&#34;&gt;context&lt;/a&gt; and
+optionally &lt;a href=&#34;#dockerfile&#34;&gt;dockerfile&lt;/a&gt; and &lt;a href=&#34;#args&#34;&gt;args&lt;/a&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;build: ./dir
+
+build:
+  context: ./dir
+  dockerfile: Dockerfile-alternate
+  args:
+    buildno: 1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you specify &lt;code&gt;image&lt;/code&gt; as well as &lt;code&gt;build&lt;/code&gt;, then Compose tags the built image
+with the tag specified in &lt;code&gt;image&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;build: ./dir
+image: webapp
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will result in an image tagged &lt;code&gt;webapp&lt;/code&gt;, built from &lt;code&gt;./dir&lt;/code&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: In the &lt;a href=&#34;#version-1&#34;&gt;version 1 file format&lt;/a&gt;, &lt;code&gt;build&lt;/code&gt; is different in
+two ways:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Only the string form (&lt;code&gt;build: .&lt;/code&gt;) is allowed - not the object form.&lt;/li&gt;
+&lt;li&gt;Using &lt;code&gt;build&lt;/code&gt; together with &lt;code&gt;image&lt;/code&gt; is not allowed. Attempting to do so
+results in an error.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&#34;context&#34;&gt;context&lt;/h4&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;#version-2&#34;&gt;Version 2 file format&lt;/a&gt; only. In version 1, just use
+&lt;a href=&#34;#build&#34;&gt;build&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Either a path to a directory containing a Dockerfile, or a url to a git repository.&lt;/p&gt;
+
+&lt;p&gt;When the value supplied is a relative path, it is interpreted as relative to the
+location of the Compose file. This directory is also the build context that is
+sent to the Docker daemon.&lt;/p&gt;
+
+&lt;p&gt;Compose will build and tag it with a generated name, and use that image thereafter.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;build:
+  context: ./dir
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;dockerfile&#34;&gt;dockerfile&lt;/h4&gt;
+
+&lt;p&gt;Alternate Dockerfile.&lt;/p&gt;
+
+&lt;p&gt;Compose will use an alternate file to build with. A build path must also be
+specified.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;build:
+  context: .
+  dockerfile: Dockerfile-alternate
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: In the &lt;a href=&#34;#version-1&#34;&gt;version 1 file format&lt;/a&gt;, &lt;code&gt;dockerfile&lt;/code&gt; is
+different in two ways:&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;It appears alongside &lt;code&gt;build&lt;/code&gt;, not as a sub-option:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;build: .
+dockerfile: Dockerfile-alternate
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Using &lt;code&gt;dockerfile&lt;/code&gt; together with &lt;code&gt;image&lt;/code&gt; is not allowed. Attempting to do so results in an error.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;args&#34;&gt;args&lt;/h4&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;#version-2&#34;&gt;Version 2 file format&lt;/a&gt; only.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Add build arguments. You can use either an array or a dictionary. Any
+boolean values; true, false, yes, no, need to be enclosed in quotes to ensure
+they are not converted to True or False by the YML parser.&lt;/p&gt;
+
+&lt;p&gt;Build arguments with only a key are resolved to their environment value on the
+machine Compose is running on.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;build:
+  args:
+    buildno: 1
+    user: someuser
+
+build:
+  args:
+    - buildno=1
+    - user=someuser
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;cap-add-cap-drop&#34;&gt;cap_add, cap_drop&lt;/h3&gt;
+
+&lt;p&gt;Add or drop container capabilities.
+See &lt;code&gt;man 7 capabilities&lt;/code&gt; for a full list.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cap_add:
+  - ALL
+
+cap_drop:
+  - NET_ADMIN
+  - SYS_ADMIN
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;command&#34;&gt;command&lt;/h3&gt;
+
+&lt;p&gt;Override the default command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;command: bundle exec thin -p 3000
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The command can also be a list, in a manner similar to &lt;a href=&#34;https://docs.docker.com/engine/reference/builder/#cmd&#34;&gt;dockerfile&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;command: [bundle, exec, thin, -p, 3000]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;cgroup-parent&#34;&gt;cgroup_parent&lt;/h3&gt;
+
+&lt;p&gt;Specify an optional parent cgroup for the container.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cgroup_parent: m-executor-abcd
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;container-name&#34;&gt;container_name&lt;/h3&gt;
+
+&lt;p&gt;Specify a custom container name, rather than a generated default name.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;container_name: my-web-container
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Because Docker container names must be unique, you cannot scale a service
+beyond 1 container if you have specified a custom name. Attempting to do so
+results in an error.&lt;/p&gt;
+
+&lt;h3 id=&#34;devices&#34;&gt;devices&lt;/h3&gt;
+
+&lt;p&gt;List of device mappings.  Uses the same format as the &lt;code&gt;--device&lt;/code&gt; docker
+client create option.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;devices:
+  - &amp;quot;/dev/ttyUSB0:/dev/ttyUSB0&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;depends-on&#34;&gt;depends_on&lt;/h3&gt;
+
+&lt;p&gt;Express dependency between services, which has two effects:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;docker-compose up&lt;/code&gt; will start services in dependency order. In the following
+example, &lt;code&gt;db&lt;/code&gt; and &lt;code&gt;redis&lt;/code&gt; will be started before &lt;code&gt;web&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;docker-compose up SERVICE&lt;/code&gt; will automatically include &lt;code&gt;SERVICE&lt;/code&gt;&amp;rsquo;s
+dependencies. In the following example, &lt;code&gt;docker-compose up web&lt;/code&gt; will also
+create and start &lt;code&gt;db&lt;/code&gt; and &lt;code&gt;redis&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Simple example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;version: &#39;2&#39;
+services:
+  web:
+    build: .
+    depends_on:
+      - db
+      - redis
+  redis:
+    image: redis
+  db:
+    image: postgres
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; &lt;code&gt;depends_on&lt;/code&gt; will not wait for &lt;code&gt;db&lt;/code&gt; and &lt;code&gt;redis&lt;/code&gt; to be &amp;ldquo;ready&amp;rdquo; before
+starting &lt;code&gt;web&lt;/code&gt; - only until they have been started. If you need to wait
+for a service to be ready, see &lt;a href=&#34;../v1.10/compose/startup-order/&#34;&gt;Controlling startup order&lt;/a&gt;
+for more on this problem and strategies for solving it.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;dns&#34;&gt;dns&lt;/h3&gt;
+
+&lt;p&gt;Custom DNS servers. Can be a single value or a list.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;dns: 8.8.8.8
+dns:
+  - 8.8.8.8
+  - 9.9.9.9
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;dns-search&#34;&gt;dns_search&lt;/h3&gt;
+
+&lt;p&gt;Custom DNS search domains. Can be a single value or a list.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;dns_search: example.com
+dns_search:
+  - dc1.example.com
+  - dc2.example.com
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;entrypoint&#34;&gt;entrypoint&lt;/h3&gt;
+
+&lt;p&gt;Override the default entrypoint.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;entrypoint: /code/entrypoint.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The entrypoint can also be a list, in a manner similar to &lt;a href=&#34;https://docs.docker.com/engine/reference/builder/#entrypoint&#34;&gt;dockerfile&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;entrypoint:
+    - php
+    - -d
+    - zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20100525/xdebug.so
+    - -d
+    - memory_limit=-1
+    - vendor/bin/phpunit
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;env-file&#34;&gt;env_file&lt;/h3&gt;
+
+&lt;p&gt;Add environment variables from a file. Can be a single value or a list.&lt;/p&gt;
+
+&lt;p&gt;If you have specified a Compose file with &lt;code&gt;docker-compose -f FILE&lt;/code&gt;, paths in
+&lt;code&gt;env_file&lt;/code&gt; are relative to the directory that file is in.&lt;/p&gt;
+
+&lt;p&gt;Environment variables specified in &lt;code&gt;environment&lt;/code&gt; override these values.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;env_file: .env
+
+env_file:
+  - ./common.env
+  - ./apps/web.env
+  - /opt/secrets.env
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Compose expects each line in an env file to be in &lt;code&gt;VAR=VAL&lt;/code&gt; format. Lines
+beginning with &lt;code&gt;#&lt;/code&gt; (i.e. comments) are ignored, as are blank lines.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Set Rails/Rack environment
+RACK_ENV=development
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;environment&#34;&gt;environment&lt;/h3&gt;
+
+&lt;p&gt;Add environment variables. You can use either an array or a dictionary. Any
+boolean values; true, false, yes no, need to be enclosed in quotes to ensure
+they are not converted to True or False by the YML parser.&lt;/p&gt;
+
+&lt;p&gt;Environment variables with only a key are resolved to their values on the
+machine Compose is running on, which can be helpful for secret or host-specific values.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;environment:
+  RACK_ENV: development
+  SHOW: &#39;true&#39;
+  SESSION_SECRET:
+
+environment:
+  - RACK_ENV=development
+  - SHOW=true
+  - SESSION_SECRET
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;expose&#34;&gt;expose&lt;/h3&gt;
+
+&lt;p&gt;Expose ports without publishing them to the host machine - they&amp;rsquo;ll only be
+accessible to linked services. Only the internal port can be specified.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;expose:
+ - &amp;quot;3000&amp;quot;
+ - &amp;quot;8000&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;extends&#34;&gt;extends&lt;/h3&gt;
+
+&lt;p&gt;Extend another service, in the current file or another, optionally overriding
+configuration.&lt;/p&gt;
+
+&lt;p&gt;You can use &lt;code&gt;extends&lt;/code&gt; on any service together with other configuration keys.
+The &lt;code&gt;extends&lt;/code&gt; value must be a dictionary defined with a required &lt;code&gt;service&lt;/code&gt;
+and an optional &lt;code&gt;file&lt;/code&gt; key.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;extends:
+  file: common.yml
+  service: webapp
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;service&lt;/code&gt; the name of the service being extended, for example
+&lt;code&gt;web&lt;/code&gt; or &lt;code&gt;database&lt;/code&gt;. The &lt;code&gt;file&lt;/code&gt; is the location of a Compose configuration
+file defining that service.&lt;/p&gt;
+
+&lt;p&gt;If you omit the &lt;code&gt;file&lt;/code&gt; Compose looks for the service configuration in the
+current file. The &lt;code&gt;file&lt;/code&gt; value can be an absolute or relative path. If you
+specify a relative path, Compose treats it as relative to the location of the
+current file.&lt;/p&gt;
+
+&lt;p&gt;You can extend a service that itself extends another. You can extend
+indefinitely. Compose does not support circular references and &lt;code&gt;docker-compose&lt;/code&gt;
+returns an error if it encounters one.&lt;/p&gt;
+
+&lt;p&gt;For more on &lt;code&gt;extends&lt;/code&gt;, see the
+&lt;a href=&#34;../v1.10/compose/extends/#extending-services&#34;&gt;the extends documentation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;external-links&#34;&gt;external_links&lt;/h3&gt;
+
+&lt;p&gt;Link to containers started outside this &lt;code&gt;docker-compose.yml&lt;/code&gt; or even outside
+of Compose, especially for containers that provide shared or common services.
+&lt;code&gt;external_links&lt;/code&gt; follow semantics similar to &lt;code&gt;links&lt;/code&gt; when specifying both the
+container name and the link alias (&lt;code&gt;CONTAINER:ALIAS&lt;/code&gt;).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;external_links:
+ - redis_1
+ - project_db_1:mysql
+ - project_db_1:postgresql
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; If you&amp;rsquo;re using the &lt;a href=&#34;#version-2&#34;&gt;version 2 file format&lt;/a&gt;, the
+externally-created containers must be connected to at least one of the same
+networks as the service which is linking to them.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;extra-hosts&#34;&gt;extra_hosts&lt;/h3&gt;
+
+&lt;p&gt;Add hostname mappings. Use the same values as the docker client &lt;code&gt;--add-host&lt;/code&gt; parameter.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;extra_hosts:
+ - &amp;quot;somehost:162.242.195.82&amp;quot;
+ - &amp;quot;otherhost:50.31.209.229&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;An entry with the ip address and hostname will be created in &lt;code&gt;/etc/hosts&lt;/code&gt; inside containers for this service, e.g:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;162.242.195.82  somehost
+50.31.209.229   otherhost
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;image&#34;&gt;image&lt;/h3&gt;
+
+&lt;p&gt;Specify the image to start the container from. Can either be a repository/tag or
+a partial image ID.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;image: redis
+image: ubuntu:14.04
+image: tutum/influxdb
+image: example-registry.com:4000/postgresql
+image: a4bc65fd
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If the image does not exist, Compose attempts to pull it, unless you have also
+specified &lt;a href=&#34;#build&#34;&gt;build&lt;/a&gt;, in which case it builds it using the specified
+options and tags it with the specified tag.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: In the &lt;a href=&#34;#version-1&#34;&gt;version 1 file format&lt;/a&gt;, using &lt;code&gt;build&lt;/code&gt; together
+with &lt;code&gt;image&lt;/code&gt; is not allowed. Attempting to do so results in an error.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;labels&#34;&gt;labels&lt;/h3&gt;
+
+&lt;p&gt;Add metadata to containers using &lt;a href=&#34;https://docs.docker.com/engine/userguide/labels-custom-metadata/&#34;&gt;Docker labels&lt;/a&gt;. You can use either an array or a dictionary.&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s recommended that you use reverse-DNS notation to prevent your labels from conflicting with those used by other software.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;labels:
+  com.example.description: &amp;quot;Accounting webapp&amp;quot;
+  com.example.department: &amp;quot;Finance&amp;quot;
+  com.example.label-with-empty-value: &amp;quot;&amp;quot;
+
+labels:
+  - &amp;quot;com.example.description=Accounting webapp&amp;quot;
+  - &amp;quot;com.example.department=Finance&amp;quot;
+  - &amp;quot;com.example.label-with-empty-value&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;links&#34;&gt;links&lt;/h3&gt;
+
+&lt;p&gt;Link to containers in another service. Either specify both the service name and
+a link alias (&lt;code&gt;SERVICE:ALIAS&lt;/code&gt;), or just the service name.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;web:
+  links:
+   - db
+   - db:database
+   - redis
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Containers for the linked service will be reachable at a hostname identical to
+the alias, or the service name if no alias was specified.&lt;/p&gt;
+
+&lt;p&gt;Links also express dependency between services in the same way as
+&lt;a href=&#34;#depends-on&#34;&gt;depends_on&lt;/a&gt;, so they determine the order of service startup.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; If you define both links and &lt;a href=&#34;#networks&#34;&gt;networks&lt;/a&gt;, services with
+links between them must share at least one network in common in order to
+communicate.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;logging&#34;&gt;logging&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;#version-2&#34;&gt;Version 2 file format&lt;/a&gt; only. In version 1, use
+&lt;a href=&#34;#log_driver&#34;&gt;log_driver&lt;/a&gt; and &lt;a href=&#34;#log_opt&#34;&gt;log_opt&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Logging configuration for the service.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;logging:
+  driver: syslog
+  options:
+    syslog-address: &amp;quot;tcp://192.168.0.42:123&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;driver&lt;/code&gt;  name specifies a logging driver for the service&amp;rsquo;s
+containers, as with the &lt;code&gt;--log-driver&lt;/code&gt; option for docker run
+(&lt;a href=&#34;https://docs.docker.com/engine/reference/logging/overview/&#34;&gt;documented here&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;The default value is json-file.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;driver: &amp;quot;json-file&amp;quot;
+driver: &amp;quot;syslog&amp;quot;
+driver: &amp;quot;none&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Only the &lt;code&gt;json-file&lt;/code&gt; driver makes the logs available directly from
+&lt;code&gt;docker-compose up&lt;/code&gt; and &lt;code&gt;docker-compose logs&lt;/code&gt;. Using any other driver will not
+print any logs.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Specify logging options for the logging driver with the &lt;code&gt;options&lt;/code&gt; key, as with the &lt;code&gt;--log-opt&lt;/code&gt; option for &lt;code&gt;docker run&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Logging options are key-value pairs. An example of &lt;code&gt;syslog&lt;/code&gt; options:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;driver: &amp;quot;syslog&amp;quot;
+options:
+  syslog-address: &amp;quot;tcp://192.168.0.42:123&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;log-driver&#34;&gt;log_driver&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;#version-1&#34;&gt;Version 1 file format&lt;/a&gt; only. In version 2, use
+&lt;a href=&#34;#logging&#34;&gt;logging&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Specify a log driver. The default is &lt;code&gt;json-file&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;log_driver: syslog
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;log-opt&#34;&gt;log_opt&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;#version-1&#34;&gt;Version 1 file format&lt;/a&gt; only. In version 2, use
+&lt;a href=&#34;#logging&#34;&gt;logging&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Specify logging options as key-value pairs. An example of &lt;code&gt;syslog&lt;/code&gt; options:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;log_opt:
+  syslog-address: &amp;quot;tcp://192.168.0.42:123&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;net&#34;&gt;net&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;#version-1&#34;&gt;Version 1 file format&lt;/a&gt; only. In version 2, use
+&lt;a href=&#34;#network_mode&#34;&gt;network_mode&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Network mode. Use the same values as the docker client &lt;code&gt;--net&lt;/code&gt; parameter.
+The &lt;code&gt;container:...&lt;/code&gt; form can take a service name instead of a container name or
+id.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;net: &amp;quot;bridge&amp;quot;
+net: &amp;quot;host&amp;quot;
+net: &amp;quot;none&amp;quot;
+net: &amp;quot;container:[service name or container name/id]&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;network-mode&#34;&gt;network_mode&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;#version-2&#34;&gt;Version 2 file format&lt;/a&gt; only. In version 1, use &lt;a href=&#34;#net&#34;&gt;net&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Network mode. Use the same values as the docker client &lt;code&gt;--net&lt;/code&gt; parameter, plus
+the special form &lt;code&gt;service:[service name]&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;network_mode: &amp;quot;bridge&amp;quot;
+network_mode: &amp;quot;host&amp;quot;
+network_mode: &amp;quot;none&amp;quot;
+network_mode: &amp;quot;service:[service name]&amp;quot;
+network_mode: &amp;quot;container:[container name/id]&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;networks&#34;&gt;networks&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;#version-2&#34;&gt;Version 2 file format&lt;/a&gt; only. In version 1, use &lt;a href=&#34;#net&#34;&gt;net&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Networks to join, referencing entries under the
+&lt;a href=&#34;#network-configuration-reference&#34;&gt;top-level &lt;code&gt;networks&lt;/code&gt; key&lt;/a&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;networks:
+  - some-network
+  - other-network
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;aliases&#34;&gt;aliases&lt;/h4&gt;
+
+&lt;p&gt;Aliases (alternative hostnames) for this service on the network. Other containers on the same network can use either the service name or this alias to connect to one of the service&amp;rsquo;s containers.&lt;/p&gt;
+
+&lt;p&gt;Since &lt;code&gt;aliases&lt;/code&gt; is network-scoped, the same service can have different aliases on different networks.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: A network-wide alias can be shared by multiple containers, and even by multiple services. If it is, then exactly which container the name will resolve to is not guaranteed.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The general format is shown here.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;networks:
+  some-network:
+    aliases:
+      - alias1
+      - alias3
+  other-network:
+    aliases:
+      - alias2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In the example below, three services are provided (&lt;code&gt;web&lt;/code&gt;, &lt;code&gt;worker&lt;/code&gt;, and &lt;code&gt;db&lt;/code&gt;), along with two networks (&lt;code&gt;new&lt;/code&gt; and &lt;code&gt;legacy&lt;/code&gt;). The &lt;code&gt;db&lt;/code&gt; service is reachable at the hostname &lt;code&gt;db&lt;/code&gt; or &lt;code&gt;database&lt;/code&gt; on the &lt;code&gt;new&lt;/code&gt; network, and at &lt;code&gt;db&lt;/code&gt; or &lt;code&gt;mysql&lt;/code&gt; on the &lt;code&gt;legacy&lt;/code&gt; network.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;version: 2
+
+services:
+  web:
+    build: ./web
+    networks:
+      - new
+
+  worker:
+    build: ./worker
+    networks:
+    - legacy
+
+  db:
+    image: mysql
+    networks:
+      new:
+        aliases:
+          - database
+      legacy:
+        aliases:
+          - mysql
+
+networks:
+  new:
+  legacy:
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;pid&#34;&gt;pid&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;pid: &amp;quot;host&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Sets the PID mode to the host PID mode.  This turns on sharing between
+container and the host operating system the PID address space.  Containers
+launched with this flag will be able to access and manipulate other
+containers in the bare-metal machine&amp;rsquo;s namespace and vise-versa.&lt;/p&gt;
+
+&lt;h3 id=&#34;ports&#34;&gt;ports&lt;/h3&gt;
+
+&lt;p&gt;Expose ports. Either specify both ports (&lt;code&gt;HOST:CONTAINER&lt;/code&gt;), or just the container
+port (a random host port will be chosen).&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; When mapping ports in the &lt;code&gt;HOST:CONTAINER&lt;/code&gt; format, you may experience
+erroneous results when using a container port lower than 60, because YAML will
+parse numbers in the format &lt;code&gt;xx:yy&lt;/code&gt; as sexagesimal (base 60). For this reason,
+we recommend always explicitly specifying your port mappings as strings.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code&gt;ports:
+ - &amp;quot;3000&amp;quot;
+ - &amp;quot;3000-3005&amp;quot;
+ - &amp;quot;8000:8000&amp;quot;
+ - &amp;quot;9090-9091:8080-8081&amp;quot;
+ - &amp;quot;49100:22&amp;quot;
+ - &amp;quot;127.0.0.1:8001:8001&amp;quot;
+ - &amp;quot;127.0.0.1:5000-5010:5000-5010&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;security-opt&#34;&gt;security_opt&lt;/h3&gt;
+
+&lt;p&gt;Override the default labeling scheme for each container.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;security_opt:
+  - label:user:USER
+  - label:role:ROLE
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;stop-signal&#34;&gt;stop_signal&lt;/h3&gt;
+
+&lt;p&gt;Sets an alternative signal to stop the container. By default &lt;code&gt;stop&lt;/code&gt; uses
+SIGTERM. Setting an alternative signal using &lt;code&gt;stop_signal&lt;/code&gt; will cause
+&lt;code&gt;stop&lt;/code&gt; to send that signal instead.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;stop_signal: SIGUSR1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;ulimits&#34;&gt;ulimits&lt;/h3&gt;
+
+&lt;p&gt;Override the default ulimits for a container. You can either specify a single
+limit as an integer or soft/hard limits as a mapping.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ulimits:
+  nproc: 65535
+  nofile:
+    soft: 20000
+    hard: 40000
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;volumes-volume-driver&#34;&gt;volumes, volume_driver&lt;/h3&gt;
+
+&lt;p&gt;Mount paths or named volumes, optionally specifying a path on the host machine
+(&lt;code&gt;HOST:CONTAINER&lt;/code&gt;), or an access mode (&lt;code&gt;HOST:CONTAINER:ro&lt;/code&gt;).
+For &lt;a href=&#34;#version-2&#34;&gt;version 2 files&lt;/a&gt;, named volumes need to be specified with the
+&lt;a href=&#34;#volume-configuration-reference&#34;&gt;top-level &lt;code&gt;volumes&lt;/code&gt; key&lt;/a&gt;.
+When using &lt;a href=&#34;#version-1&#34;&gt;version 1&lt;/a&gt;, the Docker Engine will create the named
+volume automatically if it doesn&amp;rsquo;t exist.&lt;/p&gt;
+
+&lt;p&gt;You can mount a relative path on the host, which will expand relative to
+the directory of the Compose configuration file being used. Relative paths
+should always begin with &lt;code&gt;.&lt;/code&gt; or &lt;code&gt;..&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;volumes:
+  # Just specify a path and let the Engine create a volume
+  - /var/lib/mysql
+
+  # Specify an absolute path mapping
+  - /opt/data:/var/lib/mysql
+
+  # Path on the host, relative to the Compose file
+  - ./cache:/tmp/cache
+
+  # User-relative path
+  - ~/configs:/etc/configs/:ro
+
+  # Named volume
+  - datavolume:/var/lib/mysql
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you do not use a host path, you may specify a &lt;code&gt;volume_driver&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;volume_driver: mydriver
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note that for &lt;a href=&#34;#version-2&#34;&gt;version 2 files&lt;/a&gt;, this driver
+will not apply to named volumes (you should use the &lt;code&gt;driver&lt;/code&gt; option when
+&lt;a href=&#34;#volume-configuration-reference&#34;&gt;declaring the volume&lt;/a&gt; instead).
+For &lt;a href=&#34;#version-1&#34;&gt;version 1&lt;/a&gt;, both named volumes and container volumes will
+use the specified driver.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Note: No path expansion will be done if you have also specified a
+&lt;code&gt;volume_driver&lt;/code&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;See &lt;a href=&#34;https://docs.docker.com/engine/userguide/dockervolumes/&#34;&gt;Docker Volumes&lt;/a&gt; and
+&lt;a href=&#34;https://docs.docker.com/engine/extend/plugins_volume/&#34;&gt;Volume Plugins&lt;/a&gt; for more
+information.&lt;/p&gt;
+
+&lt;h3 id=&#34;volumes-from&#34;&gt;volumes_from&lt;/h3&gt;
+
+&lt;p&gt;Mount all of the volumes from another service or container, optionally
+specifying read-only access(&lt;code&gt;ro&lt;/code&gt;) or read-write(&lt;code&gt;rw&lt;/code&gt;).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;volumes_from:
+ - service_name
+ - service_name:ro
+ - container:container_name
+ - container:container_name:rw
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; The &lt;code&gt;container:...&lt;/code&gt; formats are only supported in the
+&lt;a href=&#34;#version-2&#34;&gt;version 2 file format&lt;/a&gt;. In &lt;a href=&#34;#version-1&#34;&gt;version 1&lt;/a&gt;, you can use
+container names without marking them as such:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;- service_name
+- service_name:ro
+- container_name
+- container_name:rw
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;cpu-shares-cpu-quota-cpuset-domainname-hostname-ipc-mac-address-mem-limit-memswap-limit-privileged-read-only-restart-stdin-open-tty-user-working-dir&#34;&gt;cpu_shares, cpu_quota, cpuset, domainname, hostname, ipc, mac_address, mem_limit, memswap_limit, privileged, read_only, restart, stdin_open, tty, user, working_dir&lt;/h3&gt;
+
+&lt;p&gt;Each of these is a single value, analogous to its
+&lt;a href=&#34;https://docs.docker.com/engine/reference/run/&#34;&gt;docker run&lt;/a&gt; counterpart.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cpu_shares: 73
+cpu_quota: 50000
+cpuset: 0,1
+
+user: postgresql
+working_dir: /code
+
+domainname: foo.com
+hostname: foo
+ipc: host
+mac_address: 02:42:ac:11:65:43
+
+mem_limit: 1000000000
+memswap_limit: 2000000000
+privileged: true
+
+restart: always
+
+read_only: true
+stdin_open: true
+tty: true
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;volume-configuration-reference&#34;&gt;Volume configuration reference&lt;/h2&gt;
+
+&lt;p&gt;While it is possible to declare volumes on the fly as part of the service
+declaration, this section allows you to create named volumes that can be
+reused across multiple services (without relying on &lt;code&gt;volumes_from&lt;/code&gt;), and are
+easily retrieved and inspected using the docker command line or API.
+See the &lt;a href=&#34;../v1.10/engine/reference/commandline/volume_create/&#34;&gt;docker volume&lt;/a&gt;
+subcommand documentation for more information.&lt;/p&gt;
+
+&lt;h3 id=&#34;driver&#34;&gt;driver&lt;/h3&gt;
+
+&lt;p&gt;Specify which volume driver should be used for this volume. Defaults to
+&lt;code&gt;local&lt;/code&gt;. The Docker Engine will return an error if the driver is not available.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; driver: foobar
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;driver-opts&#34;&gt;driver_opts&lt;/h3&gt;
+
+&lt;p&gt;Specify a list of options as key-value pairs to pass to the driver for this
+volume. Those options are driver-dependent - consult the driver&amp;rsquo;s
+documentation for more information. Optional.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; driver_opts:
+   foo: &amp;quot;bar&amp;quot;
+   baz: 1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;external&#34;&gt;external&lt;/h2&gt;
+
+&lt;p&gt;If set to &lt;code&gt;true&lt;/code&gt;, specifies that this volume has been created outside of
+Compose. &lt;code&gt;docker-compose up&lt;/code&gt; will not attempt to create it, and will raise
+an error if it doesn&amp;rsquo;t exist.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;external&lt;/code&gt; cannot be used in conjunction with other volume configuration keys
+(&lt;code&gt;driver&lt;/code&gt;, &lt;code&gt;driver_opts&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;In the example below, instead of attemping to create a volume called
+&lt;code&gt;[projectname]_data&lt;/code&gt;, Compose will look for an existing volume simply
+called &lt;code&gt;data&lt;/code&gt; and mount it into the &lt;code&gt;db&lt;/code&gt; service&amp;rsquo;s containers.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;version: &#39;2&#39;
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - data:/var/lib/postgres/data
+
+volumes:
+  data:
+    external: true
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can also specify the name of the volume separately from the name used to
+refer to it within the Compose file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;volumes
+  data:
+    external:
+      name: actual-name-of-volume
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;network-configuration-reference&#34;&gt;Network configuration reference&lt;/h2&gt;
+
+&lt;p&gt;The top-level &lt;code&gt;networks&lt;/code&gt; key lets you specify networks to be created. For a full
+explanation of Compose&amp;rsquo;s use of Docker networking features, see the
+&lt;a href=&#34;../v1.10/compose/networking/&#34;&gt;Networking guide&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;driver-1&#34;&gt;driver&lt;/h3&gt;
+
+&lt;p&gt;Specify which driver should be used for this network.&lt;/p&gt;
+
+&lt;p&gt;The default driver depends on how the Docker Engine you&amp;rsquo;re using is configured,
+but in most instances it will be &lt;code&gt;bridge&lt;/code&gt; on a single host and &lt;code&gt;overlay&lt;/code&gt; on a
+Swarm.&lt;/p&gt;
+
+&lt;p&gt;The Docker Engine will return an error if the driver is not available.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;driver: overlay
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;driver-opts-1&#34;&gt;driver_opts&lt;/h3&gt;
+
+&lt;p&gt;Specify a list of options as key-value pairs to pass to the driver for this
+network. Those options are driver-dependent - consult the driver&amp;rsquo;s
+documentation for more information. Optional.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  driver_opts:
+    foo: &amp;quot;bar&amp;quot;
+    baz: 1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;ipam&#34;&gt;ipam&lt;/h3&gt;
+
+&lt;p&gt;Specify custom IPAM config. This is an object with several properties, each of
+which is optional:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;driver&lt;/code&gt;: Custom IPAM driver, instead of the default.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;config&lt;/code&gt;: A list with zero or more config blocks, each containing any of
+the following keys:
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;subnet&lt;/code&gt;: Subnet in CIDR format that represents a network segment&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ip_range&lt;/code&gt;: Range of IPs from which to allocate container IPs&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;gateway&lt;/code&gt;: IPv4 or IPv6 gateway for the master subnet&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;aux_addresses&lt;/code&gt;: Auxiliary IPv4 or IPv6 addresses used by Network driver,
+as a mapping from hostname to IP&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;A full example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ipam:
+  driver: default
+  config:
+    - subnet: 172.28.0.0/16
+      ip_range: 172.28.5.0/24
+      gateway: 172.28.5.254
+      aux_addresses:
+        host1: 172.28.1.5
+        host2: 172.28.1.6
+        host3: 172.28.1.7
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;external-1&#34;&gt;external&lt;/h3&gt;
+
+&lt;p&gt;If set to &lt;code&gt;true&lt;/code&gt;, specifies that this network has been created outside of
+Compose. &lt;code&gt;docker-compose up&lt;/code&gt; will not attempt to create it, and will raise
+an error if it doesn&amp;rsquo;t exist.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;external&lt;/code&gt; cannot be used in conjunction with other network configuration keys
+(&lt;code&gt;driver&lt;/code&gt;, &lt;code&gt;driver_opts&lt;/code&gt;, &lt;code&gt;ipam&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;In the example below, &lt;code&gt;proxy&lt;/code&gt; is the gateway to the outside world. Instead of
+attemping to create a network called &lt;code&gt;[projectname]_outside&lt;/code&gt;, Compose will
+look for an existing network simply called &lt;code&gt;outside&lt;/code&gt; and connect the &lt;code&gt;proxy&lt;/code&gt;
+service&amp;rsquo;s containers to it.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;version: &#39;2&#39;
+
+services:
+  proxy:
+    build: ./proxy
+    networks:
+      - outside
+      - default
+  app:
+    build: ./app
+    networks:
+      - default
+
+networks:
+  outside:
+    external: true
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can also specify the name of the network separately from the name used to
+refer to it within the Compose file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;networks:
+  outside:
+    external:
+      name: actual-name-of-network
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;versioning&#34;&gt;Versioning&lt;/h2&gt;
+
+&lt;p&gt;There are two versions of the Compose file format:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Version 1, the legacy format. This is specified by omitting a &lt;code&gt;version&lt;/code&gt; key at
+the root of the YAML.&lt;/li&gt;
+&lt;li&gt;Version 2, the recommended format. This is specified with a &lt;code&gt;version: &#39;2&#39;&lt;/code&gt; entry
+at the root of the YAML.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;To move your project from version 1 to 2, see the &lt;a href=&#34;#upgrading&#34;&gt;Upgrading&lt;/a&gt;
+section.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; If you&amp;rsquo;re using
+&lt;a href=&#34;../v1.10/compose/extends/#different-environments&#34;&gt;multiple Compose files&lt;/a&gt; or
+&lt;a href=&#34;../v1.10/compose/extends/#extending-services&#34;&gt;extending services&lt;/a&gt;, each file must be of the
+same version - you cannot mix version 1 and 2 in a single project.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Several things differ depending on which version you use:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The structure and permitted configuration keys&lt;/li&gt;
+&lt;li&gt;The minimum Docker Engine version you must be running&lt;/li&gt;
+&lt;li&gt;Compose&amp;rsquo;s behaviour with regards to networking&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These differences are explained below.&lt;/p&gt;
+
+&lt;h3 id=&#34;version-1&#34;&gt;Version 1&lt;/h3&gt;
+
+&lt;p&gt;Compose files that do not declare a version are considered &amp;ldquo;version 1&amp;rdquo;. In
+those files, all the &lt;a href=&#34;#service-configuration-reference&#34;&gt;services&lt;/a&gt; are declared
+at the root of the document.&lt;/p&gt;
+
+&lt;p&gt;Version 1 is supported by &lt;strong&gt;Compose up to 1.6.x&lt;/strong&gt;. It will be deprecated in a
+future Compose release.&lt;/p&gt;
+
+&lt;p&gt;Version 1 files cannot declare named
+&lt;a href=&#34;#volume-configuration-reference&#34;&gt;volumes&lt;/a&gt;, &lt;a href=&#34;../v1.10/compose/networking/&#34;&gt;networks&lt;/a&gt; or
+&lt;a href=&#34;#args&#34;&gt;build arguments&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;web:
+  build: .
+  ports:
+   - &amp;quot;5000:5000&amp;quot;
+  volumes:
+   - .:/code
+  links:
+   - redis
+redis:
+  image: redis
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;version-2&#34;&gt;Version 2&lt;/h3&gt;
+
+&lt;p&gt;Compose files using the version 2 syntax must indicate the version number at
+the root of the document. All &lt;a href=&#34;#service-configuration-reference&#34;&gt;services&lt;/a&gt;
+must be declared under the &lt;code&gt;services&lt;/code&gt; key.&lt;/p&gt;
+
+&lt;p&gt;Version 2 files are supported by &lt;strong&gt;Compose 1.6.0+&lt;/strong&gt; and require a Docker Engine
+of version &lt;strong&gt;1.10.0+&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Named &lt;a href=&#34;#volume-configuration-reference&#34;&gt;volumes&lt;/a&gt; can be declared under the
+&lt;code&gt;volumes&lt;/code&gt; key, and &lt;a href=&#34;#network-configuration-reference&#34;&gt;networks&lt;/a&gt; can be declared
+under the &lt;code&gt;networks&lt;/code&gt; key.&lt;/p&gt;
+
+&lt;p&gt;Simple example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;version: &#39;2&#39;
+services:
+  web:
+    build: .
+    ports:
+     - &amp;quot;5000:5000&amp;quot;
+    volumes:
+     - .:/code
+  redis:
+    image: redis
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A more extended example, defining volumes and networks:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;version: &#39;2&#39;
+services:
+  web:
+    build: .
+    ports:
+     - &amp;quot;5000:5000&amp;quot;
+    volumes:
+     - .:/code
+    networks:
+      - front-tier
+      - back-tier
+  redis:
+    image: redis
+    volumes:
+      - redis-data:/var/lib/redis
+    networks:
+      - back-tier
+volumes:
+  redis-data:
+    driver: local
+networks:
+  front-tier:
+    driver: bridge
+  back-tier:
+    driver: bridge
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;upgrading&#34;&gt;Upgrading&lt;/h3&gt;
+
+&lt;p&gt;In the majority of cases, moving from version 1 to 2 is a very simple process:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Indent the whole file by one level and put a &lt;code&gt;services:&lt;/code&gt; key at the top.&lt;/li&gt;
+&lt;li&gt;Add a &lt;code&gt;version: &#39;2&#39;&lt;/code&gt; line at the top of the file.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;It&amp;rsquo;s more complicated if you&amp;rsquo;re using particular configuration features:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;dockerfile&lt;/code&gt;: This now lives under the &lt;code&gt;build&lt;/code&gt; key:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;build:
+  context: .
+  dockerfile: Dockerfile-alternate
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;log_driver&lt;/code&gt;, &lt;code&gt;log_opt&lt;/code&gt;: These now live under the &lt;code&gt;logging&lt;/code&gt; key:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;logging:
+  driver: syslog
+  options:
+    syslog-address: &amp;quot;tcp://192.168.0.42:123&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;links&lt;/code&gt; with environment variables: As documented in the
+&lt;a href=&#34;../v1.10/compose/link-env-deprecated/&#34;&gt;environment variables reference&lt;/a&gt;, environment variables
+created by
+links have been deprecated for some time. In the new Docker network system,
+they have been removed. You should either connect directly to the
+appropriate hostname or set the relevant environment variable yourself,
+using the link hostname:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;web:
+  links:
+    - db
+  environment:
+    - DB_PORT=tcp://db:5432
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;external_links&lt;/code&gt;: Compose uses Docker networks when running version 2
+projects, so links behave slightly differently. In particular, two
+containers must be connected to at least one network in common in order to
+communicate, even if explicitly linked together.&lt;/p&gt;
+
+&lt;p&gt;Either connect the external container to your app&amp;rsquo;s
+&lt;a href=&#34;../v1.10/compose/networking/&#34;&gt;default network&lt;/a&gt;, or connect both the external container and
+your service&amp;rsquo;s containers to an
+&lt;a href=&#34;../v1.10/compose/networking/#using-a-pre-existing-network&#34;&gt;external network&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;net&lt;/code&gt;: This is now replaced by &lt;a href=&#34;#network_mode&#34;&gt;network_mode&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;net: host    -&amp;gt;  network_mode: host
+net: bridge  -&amp;gt;  network_mode: bridge
+net: none    -&amp;gt;  network_mode: none
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you&amp;rsquo;re using &lt;code&gt;net: &amp;quot;container:[service name]&amp;quot;&lt;/code&gt;, you must now use
+&lt;code&gt;network_mode: &amp;quot;service:[service name]&amp;quot;&lt;/code&gt; instead.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;net: &amp;quot;container:web&amp;quot;  -&amp;gt;  network_mode: &amp;quot;service:web&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you&amp;rsquo;re using &lt;code&gt;net: &amp;quot;container:[container name/id]&amp;quot;&lt;/code&gt;, the value does not
+need to change.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;net: &amp;quot;container:cont-name&amp;quot;  -&amp;gt;  network_mode: &amp;quot;container:cont-name&amp;quot;
+net: &amp;quot;container:abc12345&amp;quot;   -&amp;gt;  network_mode: &amp;quot;container:abc12345&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;volumes&lt;/code&gt; with named volumes: these must now be explicitly declared in a
+top-level &lt;code&gt;volumes&lt;/code&gt; section of your Compose file. If a service mounts a
+named volume called &lt;code&gt;data&lt;/code&gt;, you must declare a &lt;code&gt;data&lt;/code&gt; volume in your
+top-level &lt;code&gt;volumes&lt;/code&gt; section. The whole file might look like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;version: &#39;2&#39;
+services:
+  db:
+    image: postgres
+    volumes:
+      - data:/var/lib/postgresql/data
+volumes:
+  data: {}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;By default, Compose creates a volume whose name is prefixed with your
+project name. If you want it to just be called &lt;code&gt;data&lt;/code&gt;, declared it as
+external:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;volumes:
+  data:
+    external: true
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;variable-substitution&#34;&gt;Variable substitution&lt;/h2&gt;
+
+&lt;p&gt;Your configuration options can contain environment variables. Compose uses the
+variable values from the shell environment in which &lt;code&gt;docker-compose&lt;/code&gt; is run. For
+example, suppose the shell contains &lt;code&gt;POSTGRES_VERSION=9.3&lt;/code&gt; and you supply this
+configuration:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;db:
+  image: &amp;quot;postgres:${POSTGRES_VERSION}&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When you run &lt;code&gt;docker-compose up&lt;/code&gt; with this configuration, Compose looks for the
+&lt;code&gt;POSTGRES_VERSION&lt;/code&gt; environment variable in the shell and substitutes its value
+in. For this example, Compose resolves the &lt;code&gt;image&lt;/code&gt; to &lt;code&gt;postgres:9.3&lt;/code&gt; before
+running the configuration.&lt;/p&gt;
+
+&lt;p&gt;If an environment variable is not set, Compose substitutes with an empty
+string. In the example above, if &lt;code&gt;POSTGRES_VERSION&lt;/code&gt; is not set, the value for
+the &lt;code&gt;image&lt;/code&gt; option is &lt;code&gt;postgres:&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Both &lt;code&gt;$VARIABLE&lt;/code&gt; and &lt;code&gt;${VARIABLE}&lt;/code&gt; syntax are supported. Extended shell-style
+features, such as &lt;code&gt;${VARIABLE-default}&lt;/code&gt; and &lt;code&gt;${VARIABLE/foo/bar}&lt;/code&gt;, are not
+supported.&lt;/p&gt;
+
+&lt;p&gt;You can use a &lt;code&gt;$$&lt;/code&gt; (double-dollar sign) when your configuration needs a literal
+dollar sign. This also prevents Compose from interpolating a value, so a &lt;code&gt;$$&lt;/code&gt;
+allows you to refer to environment variables that you don&amp;rsquo;t want processed by
+Compose.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;web:
+  build: .
+  command: &amp;quot;$$VAR_NOT_INTERPOLATED_BY_COMPOSE&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you forget and use a single dollar sign (&lt;code&gt;$&lt;/code&gt;), Compose interprets the value as an environment variable and will warn you:&lt;/p&gt;
+
+&lt;p&gt;The VAR_NOT_INTERPOLATED_BY_COMPOSE is not set. Substituting an empty string.&lt;/p&gt;
+
+&lt;h2 id=&#34;compose-documentation&#34;&gt;Compose documentation&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/&#34;&gt;User guide&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/install/&#34;&gt;Installing Compose&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/django/&#34;&gt;Get started with Django&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/rails/&#34;&gt;Get started with Rails&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/wordpress/&#34;&gt;Get started with WordPress&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/reference/&#34;&gt;Command line reference&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Controlling startup order</title>
+      <link>https://docs.docker.com/v1.10/compose/startup-order/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/compose/startup-order/</guid>
+      <description>
+
+&lt;h1 id=&#34;controlling-startup-order-in-compose&#34;&gt;Controlling startup order in Compose&lt;/h1&gt;
+
+&lt;p&gt;You can control the order of service startup with the
+&lt;a href=&#34;../v1.10/compose/compose-file/#depends-on&#34;&gt;depends_on&lt;/a&gt; option. Compose always starts
+containers in dependency order, where dependencies are determined by
+&lt;code&gt;depends_on&lt;/code&gt;, &lt;code&gt;links&lt;/code&gt;, &lt;code&gt;volumes_from&lt;/code&gt; and &lt;code&gt;network_mode: &amp;quot;service:...&amp;quot;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;However, Compose will not wait until a container is &amp;ldquo;ready&amp;rdquo; (whatever that means
+for your particular application) - only until it&amp;rsquo;s running. There&amp;rsquo;s a good
+reason for this.&lt;/p&gt;
+
+&lt;p&gt;The problem of waiting for a database (for example) to be ready is really just
+a subset of a much larger problem of distributed systems. In production, your
+database could become unavailable or move hosts at any time. Your application
+needs to be resilient to these types of failures.&lt;/p&gt;
+
+&lt;p&gt;To handle this, your application should attempt to re-establish a connection to
+the database after a failure. If the application retries the connection,
+it should eventually be able to connect to the database.&lt;/p&gt;
+
+&lt;p&gt;The best solution is to perform this check in your application code, both at
+startup and whenever a connection is lost for any reason. However, if you don&amp;rsquo;t
+need this level of resilience, you can work around the problem with a wrapper
+script:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Use a tool such as &lt;a href=&#34;https://github.com/vishnubob/wait-for-it&#34;&gt;wait-for-it&lt;/a&gt;
+or &lt;a href=&#34;https://github.com/jwilder/dockerize&#34;&gt;dockerize&lt;/a&gt;. These are small
+wrapper scripts which you can include in your application&amp;rsquo;s image and will
+poll a given host and port until it&amp;rsquo;s accepting TCP connections.&lt;/p&gt;
+
+&lt;p&gt;Supposing your application&amp;rsquo;s image has a &lt;code&gt;CMD&lt;/code&gt; set in its Dockerfile, you
+can wrap it by setting the entrypoint in &lt;code&gt;docker-compose.yml&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;version: &amp;quot;2&amp;quot;
+services:
+  web:
+    build: .
+    ports:
+      - &amp;quot;80:8000&amp;quot;
+    depends_on:
+      - &amp;quot;db&amp;quot;
+    entrypoint: ./wait-for-it.sh db:5432
+  db:
+    image: postgres
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Write your own wrapper script to perform a more application-specific health
+check. For example, you might want to wait until Postgres is definitely
+ready to accept commands:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/bin/bash
+
+set -e
+
+host=&amp;quot;$1&amp;quot;
+shift
+cmd=&amp;quot;$@&amp;quot;
+
+until psql -h &amp;quot;$host&amp;quot; -U &amp;quot;postgres&amp;quot; -c &#39;\l&#39;; do
+  &amp;gt;&amp;amp;2 echo &amp;quot;Postgres is unavailable - sleeping&amp;quot;
+  sleep 1
+done
+
+&amp;gt;&amp;amp;2 echo &amp;quot;Postgres is up - executing command&amp;quot;
+exec $cmd
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can use this as a wrapper script as in the previous example, by setting
+&lt;code&gt;entrypoint: ./wait-for-postgres.sh db&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;compose-documentation&#34;&gt;Compose documentation&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/install/&#34;&gt;Installing Compose&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/django/&#34;&gt;Get started with Django&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/rails/&#34;&gt;Get started with Rails&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/wordpress/&#34;&gt;Get started with WordPress&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/reference/&#34;&gt;Command line reference&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/compose-file/&#34;&gt;Compose file reference&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Docker Compose</title>
+      <link>https://docs.docker.com/v1.10/compose/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/compose/</guid>
+      <description>
+
+&lt;h1 id=&#34;docker-compose&#34;&gt;Docker Compose&lt;/h1&gt;
+
+&lt;p&gt;Compose is a tool for defining and running multi-container Docker applications. To learn more about Compose refer to the following documentation:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/overview/&#34;&gt;Compose Overview&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/install/&#34;&gt;Install Compose&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/gettingstarted/&#34;&gt;Getting Started&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/django/&#34;&gt;Get started with Django&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/rails/&#34;&gt;Get started with Rails&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/wordpress/&#34;&gt;Get started with WordPress&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/faq/&#34;&gt;Frequently asked questions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/reference/&#34;&gt;Command line reference&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/compose-file/&#34;&gt;Compose file reference&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;To see a detailed list of changes for past and current releases of Docker
+Compose, please refer to the
+&lt;a href=&#34;https://github.com/docker/compose/blob/master/CHANGELOG.md&#34;&gt;CHANGELOG&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Extending Services in Compose</title>
+      <link>https://docs.docker.com/v1.10/compose/extends/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/compose/extends/</guid>
+      <description>
+
+&lt;h1 id=&#34;extending-services-and-compose-files&#34;&gt;Extending services and Compose files&lt;/h1&gt;
+
+&lt;p&gt;Compose supports two methods of sharing common configuration:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Extending an entire Compose file by
+&lt;a href=&#34;#multiple-compose-files&#34;&gt;using multiple Compose files&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Extending individual services with &lt;a href=&#34;#extending-services&#34;&gt;the &lt;code&gt;extends&lt;/code&gt; field&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;multiple-compose-files&#34;&gt;Multiple Compose files&lt;/h2&gt;
+
+&lt;p&gt;Using multiple Compose files enables you to customize a Compose application
+for different environments or different workflows.&lt;/p&gt;
+
+&lt;h3 id=&#34;understanding-multiple-compose-files&#34;&gt;Understanding multiple Compose files&lt;/h3&gt;
+
+&lt;p&gt;By default, Compose reads two files, a &lt;code&gt;docker-compose.yml&lt;/code&gt; and an optional
+&lt;code&gt;docker-compose.override.yml&lt;/code&gt; file. By convention, the &lt;code&gt;docker-compose.yml&lt;/code&gt;
+contains your base configuration. The override file, as its name implies, can
+contain configuration overrides for existing services or entirely new
+services.&lt;/p&gt;
+
+&lt;p&gt;If a service is defined in both files Compose merges the configurations using
+the rules described in &lt;a href=&#34;#adding-and-overriding-configuration&#34;&gt;Adding and overriding
+configuration&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;To use multiple override files, or an override file with a different name, you
+can use the &lt;code&gt;-f&lt;/code&gt; option to specify the list of files. Compose merges files in
+the order they&amp;rsquo;re specified on the command line. See the &lt;a href=&#34;../v1.10/compose/reference/overview/&#34;&gt;&lt;code&gt;docker-compose&lt;/code&gt;
+command reference&lt;/a&gt; for more information about
+using &lt;code&gt;-f&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;When you use multiple configuration files, you must make sure all paths in the
+files are relative to the base Compose file (the first Compose file specified
+with &lt;code&gt;-f&lt;/code&gt;). This is required because override files need not be valid
+Compose files. Override files can contain small fragments of configuration.
+Tracking which fragment of a service is relative to which path is difficult and
+confusing, so to keep paths easier to understand, all paths must be defined
+relative to the base file.&lt;/p&gt;
+
+&lt;h3 id=&#34;example-use-case&#34;&gt;Example use case&lt;/h3&gt;
+
+&lt;p&gt;In this section are two common use cases for multiple compose files: changing a
+Compose app for different environments, and running administrative tasks
+against a Compose app.&lt;/p&gt;
+
+&lt;h4 id=&#34;different-environments&#34;&gt;Different environments&lt;/h4&gt;
+
+&lt;p&gt;A common use case for multiple files is changing a development Compose app
+for a production-like environment (which may be production, staging or CI).
+To support these differences, you can split your Compose configuration into
+a few different files:&lt;/p&gt;
+
+&lt;p&gt;Start with a base file that defines the canonical configuration for the
+services.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;docker-compose.yml&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;web:
+  image: example/my_web_app:latest
+  links:
+    - db
+    - cache
+
+db:
+  image: postgres:latest
+
+cache:
+  image: redis:latest
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In this example the development configuration exposes some ports to the
+host, mounts our code as a volume, and builds the web image.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;docker-compose.override.yml&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;web:
+  build: .
+  volumes:
+    - &#39;.:/code&#39;
+  ports:
+    - 8883:80
+  environment:
+    DEBUG: &#39;true&#39;
+
+db:
+  command: &#39;-d&#39;
+  ports:
+    - 5432:5432
+
+cache:
+  ports:
+    - 6379:6379
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When you run &lt;code&gt;docker-compose up&lt;/code&gt; it reads the overrides automatically.&lt;/p&gt;
+
+&lt;p&gt;Now, it would be nice to use this Compose app in a production environment. So,
+create another override file (which might be stored in a different git
+repo or managed by a different team).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;docker-compose.prod.yml&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;web:
+  ports:
+    - 80:80
+  environment:
+    PRODUCTION: &#39;true&#39;
+
+cache:
+  environment:
+    TTL: &#39;500&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To deploy with this production Compose file you can run&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This deploys all three services using the configuration in
+&lt;code&gt;docker-compose.yml&lt;/code&gt; and &lt;code&gt;docker-compose.prod.yml&lt;/code&gt; (but not the
+dev configuration in &lt;code&gt;docker-compose.override.yml&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;See &lt;a href=&#34;../v1.10/compose/production/&#34;&gt;production&lt;/a&gt; for more information about Compose in
+production.&lt;/p&gt;
+
+&lt;h4 id=&#34;administrative-tasks&#34;&gt;Administrative tasks&lt;/h4&gt;
+
+&lt;p&gt;Another common use case is running adhoc or administrative tasks against one
+or more services in a Compose app. This example demonstrates running a
+database backup.&lt;/p&gt;
+
+&lt;p&gt;Start with a &lt;strong&gt;docker-compose.yml&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;web:
+  image: example/my_web_app:latest
+  links:
+    - db
+
+db:
+  image: postgres:latest
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In a &lt;strong&gt;docker-compose.admin.yml&lt;/strong&gt; add a new service to run the database
+export or backup.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;dbadmin:
+  build: database_admin/
+  links:
+    - db
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To start a normal environment run &lt;code&gt;docker-compose up -d&lt;/code&gt;. To run a database
+backup, include the &lt;code&gt;docker-compose.admin.yml&lt;/code&gt; as well.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker-compose -f docker-compose.yml -f docker-compose.admin.yml \
+    run dbadmin db-backup
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;extending-services&#34;&gt;Extending services&lt;/h2&gt;
+
+&lt;p&gt;Docker Compose&amp;rsquo;s &lt;code&gt;extends&lt;/code&gt; keyword enables sharing of common configurations
+among different files, or even different projects entirely. Extending services
+is useful if you have several services that reuse a common set of configuration
+options. Using &lt;code&gt;extends&lt;/code&gt; you can define a common set of service options in one
+place and refer to it from anywhere.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; &lt;code&gt;links&lt;/code&gt;, &lt;code&gt;volumes_from&lt;/code&gt;, and &lt;code&gt;depends_on&lt;/code&gt; are never shared between
+services using &amp;gt;&lt;code&gt;extends&lt;/code&gt;. These exceptions exist to avoid
+implicit dependencies&amp;mdash;you always define &lt;code&gt;links&lt;/code&gt; and &lt;code&gt;volumes_from&lt;/code&gt;
+locally. This ensures dependencies between services are clearly visible when
+reading the current file. Defining these locally also ensures changes to the
+referenced file don&amp;rsquo;t result in breakage.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;understand-the-extends-configuration&#34;&gt;Understand the extends configuration&lt;/h3&gt;
+
+&lt;p&gt;When defining any service in &lt;code&gt;docker-compose.yml&lt;/code&gt;, you can declare that you are
+extending another service like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;web:
+  extends:
+    file: common-services.yml
+    service: webapp
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This instructs Compose to re-use the configuration for the &lt;code&gt;webapp&lt;/code&gt; service
+defined in the &lt;code&gt;common-services.yml&lt;/code&gt; file. Suppose that &lt;code&gt;common-services.yml&lt;/code&gt;
+looks like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;webapp:
+  build: .
+  ports:
+    - &amp;quot;8000:8000&amp;quot;
+  volumes:
+    - &amp;quot;/data&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In this case, you&amp;rsquo;ll get exactly the same result as if you wrote
+&lt;code&gt;docker-compose.yml&lt;/code&gt; with the same &lt;code&gt;build&lt;/code&gt;, &lt;code&gt;ports&lt;/code&gt; and &lt;code&gt;volumes&lt;/code&gt; configuration
+values defined directly under &lt;code&gt;web&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;You can go further and define (or re-define) configuration locally in
+&lt;code&gt;docker-compose.yml&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;web:
+  extends:
+    file: common-services.yml
+    service: webapp
+  environment:
+    - DEBUG=1
+  cpu_shares: 5
+
+important_web:
+  extends: web
+  cpu_shares: 10
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can also write other services and link your &lt;code&gt;web&lt;/code&gt; service to them:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;web:
+  extends:
+    file: common-services.yml
+    service: webapp
+  environment:
+    - DEBUG=1
+  cpu_shares: 5
+  links:
+    - db
+db:
+  image: postgres
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;example-use-case-1&#34;&gt;Example use case&lt;/h3&gt;
+
+&lt;p&gt;Extending an individual service is useful when you have multiple services that
+have a common configuration.  The example below is a Compose app with
+two services: a web application and a queue worker. Both services use the same
+codebase and share many configuration options.&lt;/p&gt;
+
+&lt;p&gt;In a &lt;strong&gt;common.yml&lt;/strong&gt; we define the common configuration:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;app:
+  build: .
+  environment:
+    CONFIG_FILE_PATH: /code/config
+    API_KEY: xxxyyy
+  cpu_shares: 5
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In a &lt;strong&gt;docker-compose.yml&lt;/strong&gt; we define the concrete services which use the
+common configuration:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;webapp:
+  extends:
+    file: common.yml
+    service: app
+  command: /code/run_web_app
+  ports:
+    - 8080:8080
+  links:
+    - queue
+    - db
+
+queue_worker:
+  extends:
+    file: common.yml
+    service: app
+  command: /code/run_worker
+  links:
+    - queue
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;adding-and-overriding-configuration&#34;&gt;Adding and overriding configuration&lt;/h2&gt;
+
+&lt;p&gt;Compose copies configurations from the original service over to the local one.
+If a configuration option is defined in both the original service the local
+service, the local value &lt;em&gt;replaces&lt;/em&gt; or &lt;em&gt;extends&lt;/em&gt; the original value.&lt;/p&gt;
+
+&lt;p&gt;For single-value options like &lt;code&gt;image&lt;/code&gt;, &lt;code&gt;command&lt;/code&gt; or &lt;code&gt;mem_limit&lt;/code&gt;, the new value
+replaces the old value.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# original service
+command: python app.py
+
+# local service
+command: python otherapp.py
+
+# result
+command: python otherapp.py
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; In the case of &lt;code&gt;build&lt;/code&gt; and &lt;code&gt;image&lt;/code&gt;, when using
+&lt;a href=&#34;../v1.10/compose/compose-file/#version-1&#34;&gt;version 1 of the Compose file format&lt;/a&gt;, using one
+option in the local service causes Compose to discard the other option if it
+was defined in the original service.&lt;/p&gt;
+
+&lt;p&gt;For example, if the original service defines &lt;code&gt;image: webapp&lt;/code&gt; and the
+local service defines &lt;code&gt;build: .&lt;/code&gt; then the resulting service will have
+&lt;code&gt;build: .&lt;/code&gt; and no &lt;code&gt;image&lt;/code&gt; option.&lt;/p&gt;
+
+&lt;p&gt;This is because &lt;code&gt;build&lt;/code&gt; and &lt;code&gt;image&lt;/code&gt; cannot be used together in a version 1
+file.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;For the &lt;strong&gt;multi-value options&lt;/strong&gt; &lt;code&gt;ports&lt;/code&gt;, &lt;code&gt;expose&lt;/code&gt;, &lt;code&gt;external_links&lt;/code&gt;, &lt;code&gt;dns&lt;/code&gt; and
+&lt;code&gt;dns_search&lt;/code&gt;, Compose concatenates both sets of values:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# original service
+expose:
+  - &amp;quot;3000&amp;quot;
+
+# local service
+expose:
+  - &amp;quot;4000&amp;quot;
+  - &amp;quot;5000&amp;quot;
+
+# result
+expose:
+  - &amp;quot;3000&amp;quot;
+  - &amp;quot;4000&amp;quot;
+  - &amp;quot;5000&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In the case of &lt;code&gt;environment&lt;/code&gt;, &lt;code&gt;labels&lt;/code&gt;, &lt;code&gt;volumes&lt;/code&gt; and &lt;code&gt;devices&lt;/code&gt;, Compose
+&amp;ldquo;merges&amp;rdquo; entries together with locally-defined values taking precedence:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# original service
+environment:
+  - FOO=original
+  - BAR=original
+
+# local service
+environment:
+  - BAR=local
+  - BAZ=local
+
+# result
+environment:
+  - FOO=original
+  - BAR=local
+  - BAZ=local
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;compose-documentation&#34;&gt;Compose documentation&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/&#34;&gt;User guide&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/install/&#34;&gt;Installing Compose&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/gettingstarted/&#34;&gt;Getting Started&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/django/&#34;&gt;Get started with Django&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/rails/&#34;&gt;Get started with Rails&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/wordpress/&#34;&gt;Get started with WordPress&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/reference/&#34;&gt;Command line reference&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/compose-file/&#34;&gt;Compose file reference&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Frequently Asked Questions</title>
+      <link>https://docs.docker.com/v1.10/compose/faq/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/compose/faq/</guid>
+      <description>
+
+&lt;h1 id=&#34;frequently-asked-questions&#34;&gt;Frequently asked questions&lt;/h1&gt;
+
+&lt;p&gt;If you don’t see your question here, feel free to drop by &lt;code&gt;#docker-compose&lt;/code&gt; on
+freenode IRC and ask the community.&lt;/p&gt;
+
+&lt;h2 id=&#34;can-i-control-service-startup-order&#34;&gt;Can I control service startup order?&lt;/h2&gt;
+
+&lt;p&gt;Yes - see &lt;a href=&#34;../v1.10/compose/startup-order/&#34;&gt;Controlling startup order&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;why-do-my-services-take-10-seconds-to-recreate-or-stop&#34;&gt;Why do my services take 10 seconds to recreate or stop?&lt;/h2&gt;
+
+&lt;p&gt;Compose stop attempts to stop a container by sending a &lt;code&gt;SIGTERM&lt;/code&gt;. It then waits
+for a &lt;a href=&#34;../v1.10/compose/reference/stop/&#34;&gt;default timeout of 10 seconds&lt;/a&gt;.  After the timeout,
+a &lt;code&gt;SIGKILL&lt;/code&gt; is sent to the container to forcefully kill it.  If you
+are waiting for this timeout, it means that your containers aren&amp;rsquo;t shutting down
+when they receive the &lt;code&gt;SIGTERM&lt;/code&gt; signal.&lt;/p&gt;
+
+&lt;p&gt;There has already been a lot written about this problem of
+&lt;a href=&#34;https://medium.com/@gchudnov/trapping-signals-in-docker-containers-7a57fdda7d86&#34;&gt;processes handling signals&lt;/a&gt;
+in containers.&lt;/p&gt;
+
+&lt;p&gt;To fix this problem, try the following:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Make sure you&amp;rsquo;re using the JSON form of &lt;code&gt;CMD&lt;/code&gt; and &lt;code&gt;ENTRYPOINT&lt;/code&gt;
+in your Dockerfile.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For example use &lt;code&gt;[&amp;quot;program&amp;quot;, &amp;quot;arg1&amp;quot;, &amp;quot;arg2&amp;quot;]&lt;/code&gt; not &lt;code&gt;&amp;quot;program arg1 arg2&amp;quot;&lt;/code&gt;.
+  Using the string form causes Docker to run your process using &lt;code&gt;bash&lt;/code&gt; which
+  doesn&amp;rsquo;t handle signals properly. Compose always uses the JSON form, so don&amp;rsquo;t
+  worry if you override the command or entrypoint in your Compose file.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;If you are able, modify the application that you&amp;rsquo;re running to
+add an explicit signal handler for &lt;code&gt;SIGTERM&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Set the &lt;code&gt;stop_signal&lt;/code&gt; to a signal which the application knows how to handle:&lt;/p&gt;
+
+&lt;p&gt;web:
+    build: .
+    stop_signal: SIGINT&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;If you can&amp;rsquo;t modify the application, wrap the application in a lightweight init
+system (like &lt;a href=&#34;http://skarnet.org/software/s6/&#34;&gt;s6&lt;/a&gt;) or a signal proxy (like
+&lt;a href=&#34;https://github.com/Yelp/dumb-init&#34;&gt;dumb-init&lt;/a&gt; or
+&lt;a href=&#34;https://github.com/krallin/tini&#34;&gt;tini&lt;/a&gt;).  Either of these wrappers take care of
+handling &lt;code&gt;SIGTERM&lt;/code&gt; properly.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;how-do-i-run-multiple-copies-of-a-compose-file-on-the-same-host&#34;&gt;How do I run multiple copies of a Compose file on the same host?&lt;/h2&gt;
+
+&lt;p&gt;Compose uses the project name to create unique identifiers for all of a
+project&amp;rsquo;s  containers and other resources. To run multiple copies of a project,
+set a custom project name using the &lt;a href=&#34;../v1.10/compose/reference/overview/&#34;&gt;&lt;code&gt;-p&lt;/code&gt; command line
+option&lt;/a&gt; or the &lt;a href=&#34;../v1.10/compose/reference/envvars/#compose-project-name&#34;&gt;&lt;code&gt;COMPOSE_PROJECT_NAME&lt;/code&gt;
+environment variable&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;what-s-the-difference-between-up-run-and-start&#34;&gt;What&amp;rsquo;s the difference between &lt;code&gt;up&lt;/code&gt;, &lt;code&gt;run&lt;/code&gt;, and &lt;code&gt;start&lt;/code&gt;?&lt;/h2&gt;
+
+&lt;p&gt;Typically, you want &lt;code&gt;docker-compose up&lt;/code&gt;. Use &lt;code&gt;up&lt;/code&gt; to start or restart all the
+services defined in a &lt;code&gt;docker-compose.yml&lt;/code&gt;. In the default &amp;ldquo;attached&amp;rdquo;
+mode, you&amp;rsquo;ll see all the logs from all the containers. In &amp;ldquo;detached&amp;rdquo; mode (&lt;code&gt;-d&lt;/code&gt;),
+Compose exits after starting the containers, but the containers continue to run
+in the background.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;docker-compose run&lt;/code&gt; command is for running &amp;ldquo;one-off&amp;rdquo; or &amp;ldquo;adhoc&amp;rdquo; tasks. It
+requires the service name you want to run and only starts containers for services
+that the running service depends on. Use &lt;code&gt;run&lt;/code&gt; to run tests or perform
+an administrative task such as removing or adding data to a data volume
+container. The &lt;code&gt;run&lt;/code&gt; command acts like &lt;code&gt;docker run -ti&lt;/code&gt; in that it opens an
+interactive terminal to the container and returns an exit status matching the
+exit status of the process in the container.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;docker-compose start&lt;/code&gt; command is useful only to restart containers
+that were previously created, but were stopped. It never creates new
+containers.&lt;/p&gt;
+
+&lt;h2 id=&#34;can-i-use-json-instead-of-yaml-for-my-compose-file&#34;&gt;Can I use json instead of yaml for my Compose file?&lt;/h2&gt;
+
+&lt;p&gt;Yes. &lt;a href=&#34;http://stackoverflow.com/a/1729545/444646&#34;&gt;Yaml is a superset of json&lt;/a&gt; so
+any JSON file should be valid Yaml.  To use a JSON file with Compose,
+specify the filename to use, for example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;docker-compose -f docker-compose.json up
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;should-i-include-my-code-with-copy-add-or-a-volume&#34;&gt;Should I include my code with &lt;code&gt;COPY&lt;/code&gt;/&lt;code&gt;ADD&lt;/code&gt; or a volume?&lt;/h2&gt;
+
+&lt;p&gt;You can add your code to the image using &lt;code&gt;COPY&lt;/code&gt; or &lt;code&gt;ADD&lt;/code&gt; directive in a
+&lt;code&gt;Dockerfile&lt;/code&gt;.  This is useful if you need to relocate your code along with the
+Docker image, for example when you&amp;rsquo;re sending code to another environment
+(production, CI, etc).&lt;/p&gt;
+
+&lt;p&gt;You should use a &lt;code&gt;volume&lt;/code&gt; if you want to make changes to your code and see them
+reflected immediately, for example when you&amp;rsquo;re developing code and your server
+supports hot code reloading or live-reload.&lt;/p&gt;
+
+&lt;p&gt;There may be cases where you&amp;rsquo;ll want to use both. You can have the image
+include the code using a &lt;code&gt;COPY&lt;/code&gt;, and use a &lt;code&gt;volume&lt;/code&gt; in your Compose file to
+include the code from the host during development. The volume overrides
+the directory contents of the image.&lt;/p&gt;
+
+&lt;h2 id=&#34;where-can-i-find-example-compose-files&#34;&gt;Where can I find example compose files?&lt;/h2&gt;
+
+&lt;p&gt;There are &lt;a href=&#34;https://github.com/search?q=in%3Apath+docker-compose.yml+extension%3Ayml&amp;amp;type=Code&#34;&gt;many examples of Compose files on
+github&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;compose-documentation&#34;&gt;Compose documentation&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/install/&#34;&gt;Installing Compose&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/django/&#34;&gt;Get started with Django&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/rails/&#34;&gt;Get started with Rails&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/wordpress/&#34;&gt;Get started with WordPress&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/reference/&#34;&gt;Command line reference&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/compose-file/&#34;&gt;Compose file reference&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Getting Started</title>
+      <link>https://docs.docker.com/v1.10/compose/gettingstarted/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/compose/gettingstarted/</guid>
+      <description>
+
+&lt;h1 id=&#34;getting-started&#34;&gt;Getting Started&lt;/h1&gt;
+
+&lt;p&gt;On this page you build a simple Python web application running on Docker Compose. The
+application uses the Flask framework and increments a value in Redis. While the
+sample uses Python, the concepts demonstrated here should be understandable even
+if you&amp;rsquo;re not familiar with it.&lt;/p&gt;
+
+&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
+
+&lt;p&gt;Make sure you have already
+&lt;a href=&#34;../v1.10/compose/install/&#34;&gt;installed both Docker Engine and Docker Compose&lt;/a&gt;. You
+don&amp;rsquo;t need to install Python, it is provided by a Docker image.&lt;/p&gt;
+
+&lt;h2 id=&#34;step-1-setup&#34;&gt;Step 1: Setup&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Create a directory for the project:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ mkdir composetest
+$ cd composetest
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;With your favorite text editor create a file called &lt;code&gt;app.py&lt;/code&gt; in your project
+directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;from flask import Flask
+from redis import Redis
+
+app = Flask(__name__)
+redis = Redis(host=&#39;redis&#39;, port=6379)
+
+@app.route(&#39;/&#39;)
+def hello():
+    redis.incr(&#39;hits&#39;)
+    return &#39;Hello World! I have been seen %s times.&#39; % redis.get(&#39;hits&#39;)
+
+if __name__ == &amp;quot;__main__&amp;quot;:
+    app.run(host=&amp;quot;0.0.0.0&amp;quot;, debug=True)
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create another file called &lt;code&gt;requirements.txt&lt;/code&gt; in your project directory and
+add the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;flask
+redis
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;These define the applications dependencies.&lt;/p&gt;
+
+&lt;h2 id=&#34;step-2-create-a-docker-image&#34;&gt;Step 2: Create a Docker image&lt;/h2&gt;
+
+&lt;p&gt;In this step, you build a new Docker image. The image contains all the
+dependencies the Python application requires, including Python itself.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;In your project directory create a file named &lt;code&gt;Dockerfile&lt;/code&gt; and add the
+following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;FROM python:2.7
+ADD . /code
+WORKDIR /code
+RUN pip install -r requirements.txt
+CMD python app.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This tells Docker to:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Build an image starting with the Python 2.7 image.&lt;/li&gt;
+&lt;li&gt;Add the current directory &lt;code&gt;.&lt;/code&gt; into the path &lt;code&gt;/code&lt;/code&gt; in the image.&lt;/li&gt;
+&lt;li&gt;Set the working directory to &lt;code&gt;/code&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Install the Python dependencies.&lt;/li&gt;
+&lt;li&gt;Set the default command for the container to &lt;code&gt;python app.py&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For more information on how to write Dockerfiles, see the &lt;a href=&#34;https://docs.docker.com/engine/userguide/dockerimages/#building-an-image-from-a-dockerfile&#34;&gt;Docker user guide&lt;/a&gt; and the &lt;a href=&#34;http://docs.docker.com/reference/builder/&#34;&gt;Dockerfile reference&lt;/a&gt;.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Build the image.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker build -t web .
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This command builds an image named &lt;code&gt;web&lt;/code&gt; from the contents of the current
+  directory. The command automatically locates the &lt;code&gt;Dockerfile&lt;/code&gt;, &lt;code&gt;app.py&lt;/code&gt;, and
+  &lt;code&gt;requirements.txt&lt;/code&gt; files.&lt;/p&gt;
+
+&lt;h2 id=&#34;step-3-define-services&#34;&gt;Step 3: Define services&lt;/h2&gt;
+
+&lt;p&gt;Define a set of services using &lt;code&gt;docker-compose.yml&lt;/code&gt;:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Create a file called docker-compose.yml in your project directory and add
+the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;version: &#39;2&#39;
+services:
+  web:
+    build: .
+    ports:
+     - &amp;quot;5000:5000&amp;quot;
+    volumes:
+     - .:/code
+    depends_on:
+     - redis
+  redis:
+    image: redis
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This Compose file defines two services, &lt;code&gt;web&lt;/code&gt; and &lt;code&gt;redis&lt;/code&gt;. The web service:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Builds from the &lt;code&gt;Dockerfile&lt;/code&gt; in the current directory.&lt;/li&gt;
+&lt;li&gt;Forwards the exposed port 5000 on the container to port 5000 on the host machine.&lt;/li&gt;
+&lt;li&gt;Mounts the project directory on the host to &lt;code&gt;/code&lt;/code&gt; inside the container allowing you to modify the code without having to rebuild the image.&lt;/li&gt;
+&lt;li&gt;Links the web service to the Redis service.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The &lt;code&gt;redis&lt;/code&gt; service uses the latest public &lt;a href=&#34;https://registry.hub.docker.com/_/redis/&#34;&gt;Redis&lt;/a&gt; image pulled from the Docker Hub registry.&lt;/p&gt;
+
+&lt;h2 id=&#34;step-4-build-and-run-your-app-with-compose&#34;&gt;Step 4: Build and run your app with Compose&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;From your project directory, start up your application.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-compose up
+Pulling image redis...
+Building web...
+Starting composetest_redis_1...
+Starting composetest_web_1...
+redis_1 | [8] 02 Jan 18:43:35.576 # Server started, Redis version 2.8.3
+web_1   |  * Running on http://0.0.0.0:5000/
+web_1   |  * Restarting with stat
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Compose pulls a Redis image, builds an image for your code, and start the
+   services you defined.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Enter &lt;code&gt;http://0.0.0.0:5000/&lt;/code&gt; in a browser to see the application running.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;If you&amp;rsquo;re using Docker on Linux natively, then the web app should now be
+   listening on port 5000 on your Docker daemon host. If &lt;a href=&#34;http://0.0.0.0:5000&#34;&gt;http://0.0.0.0:5000&lt;/a&gt;
+   doesn&amp;rsquo;t resolve, you can also try &lt;a href=&#34;http://localhost:5000&#34;&gt;http://localhost:5000&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you&amp;rsquo;re using Docker Machine on a Mac, use &lt;code&gt;docker-machine ip MACHINE_VM&lt;/code&gt; to get
+   the IP address of your Docker host. Then, &lt;code&gt;open http://MACHINE_VM_IP:5000&lt;/code&gt; in a
+   browser.&lt;/p&gt;
+
+&lt;p&gt;You should see a message in your browser saying:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;Hello World! I have been seen 1 times.&lt;/code&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Refresh the page.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The number should increment.&lt;/p&gt;
+
+&lt;h2 id=&#34;step-5-experiment-with-some-other-commands&#34;&gt;Step 5: Experiment with some other commands&lt;/h2&gt;
+
+&lt;p&gt;If you want to run your services in the background, you can pass the &lt;code&gt;-d&lt;/code&gt; flag
+(for &amp;ldquo;detached&amp;rdquo; mode) to &lt;code&gt;docker-compose up&lt;/code&gt; and use &lt;code&gt;docker-compose ps&lt;/code&gt; to
+see what is currently running:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    $ docker-compose up -d
+    Starting composetest_redis_1...
+    Starting composetest_web_1...
+    $ docker-compose ps
+    Name                 Command            State       Ports
+    -------------------------------------------------------------------
+    composetest_redis_1   /usr/local/bin/run         Up
+    composetest_web_1     /bin/sh -c python app.py   Up      5000-&amp;gt;5000/tcp
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;docker-compose run&lt;/code&gt; command allows you to run one-off commands for your
+services. For example, to see what environment variables are available to the
+&lt;code&gt;web&lt;/code&gt; service:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    $ docker-compose run web env
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;See &lt;code&gt;docker-compose --help&lt;/code&gt; to see other available commands. You can also install &lt;a href=&#34;../v1.10/compose/completion/&#34;&gt;command completion&lt;/a&gt; for the bash and zsh shell, which will also show you available commands.&lt;/p&gt;
+
+&lt;p&gt;If you started Compose with &lt;code&gt;docker-compose up -d&lt;/code&gt;, you&amp;rsquo;ll probably want to stop
+your services once you&amp;rsquo;ve finished with them:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    $ docker-compose stop
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;At this point, you have seen the basics of how Compose works.&lt;/p&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Next, try the quick start guide for &lt;a href=&#34;../v1.10/compose/django/&#34;&gt;Django&lt;/a&gt;,
+&lt;a href=&#34;../v1.10/compose/rails/&#34;&gt;Rails&lt;/a&gt;, or &lt;a href=&#34;../v1.10/compose/wordpress/&#34;&gt;WordPress&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/reference/&#34;&gt;Explore the full list of Compose commands&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/compose-file/&#34;&gt;Compose configuration file reference&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Install Compose</title>
+      <link>https://docs.docker.com/v1.10/compose/install/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/compose/install/</guid>
+      <description>
+
+&lt;h1 id=&#34;install-docker-compose&#34;&gt;Install Docker Compose&lt;/h1&gt;
+
+&lt;p&gt;You can run Compose on OS X and 64-bit Linux.  It is currently not supported on
+the Windows operating system. To install Compose, you&amp;rsquo;ll need to install Docker
+first.&lt;/p&gt;
+
+&lt;p&gt;To install Compose, do the following:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Install Docker Engine version 1.7.1 or greater:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://docs.docker.com/engine/installation/mac/&#34; target=&#34;_blank&#34;&gt;Mac OS X installation&lt;/a&gt; (Toolbox installation includes both Engine and Compose)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://docs.docker.com/engine/installation/ubuntulinux/&#34; target=&#34;_blank&#34;&gt;Ubuntu installation&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://docs.docker.com/engine/installation/&#34; target=&#34;_blank&#34;&gt;other system installations&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Mac OS X users are done installing. Others should continue to the next step.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Go to the &lt;a href=&#34;https://github.com/docker/compose/releases&#34; target=&#34;_blank&#34;&gt;Compose repository release page on GitHub&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Follow the instructions from the release page and run the &lt;code&gt;curl&lt;/code&gt; command,
+which the release page specifies, in your terminal.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Note: If you get a &amp;ldquo;Permission denied&amp;rdquo; error, your &lt;code&gt;/usr/local/bin&lt;/code&gt; directory
+ probably isn&amp;rsquo;t writable and you&amp;rsquo;ll need to install Compose as the superuser. Run
+ &lt;code&gt;sudo -i&lt;/code&gt;, then the two commands below, then &lt;code&gt;exit&lt;/code&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The following is an example command illustrating the format:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl -L https://github.com/docker/compose/releases/download/1.6.2/docker-compose-`uname -s`-`uname -m` &amp;gt; /usr/local/bin/docker-compose
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you have problems installing with &lt;code&gt;curl&lt;/code&gt;, see
+ &lt;a href=&#34;#alternative-install-options&#34;&gt;Alternative Install Options&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Apply executable permissions to the binary:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ chmod +x /usr/local/bin/docker-compose
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Optionally, install &lt;a href=&#34;../v1.10/compose/completion/&#34;&gt;command completion&lt;/a&gt; for the
+&lt;code&gt;bash&lt;/code&gt; and &lt;code&gt;zsh&lt;/code&gt; shell.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Test the installation.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-compose --version
+docker-compose version: 1.6.2
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;alternative-install-options&#34;&gt;Alternative install options&lt;/h2&gt;
+
+&lt;h3 id=&#34;install-using-pip&#34;&gt;Install using pip&lt;/h3&gt;
+
+&lt;p&gt;Compose can be installed from &lt;a href=&#34;https://pypi.python.org/pypi/docker-compose&#34;&gt;pypi&lt;/a&gt;
+using &lt;code&gt;pip&lt;/code&gt;.  If you install using &lt;code&gt;pip&lt;/code&gt; it is highly recommended that you use a
+&lt;a href=&#34;https://virtualenv.pypa.io/en/latest/&#34;&gt;virtualenv&lt;/a&gt; because many operating systems
+have python system packages that conflict with docker-compose dependencies. See
+the &lt;a href=&#34;http://docs.python-guide.org/en/latest/dev/virtualenvs/&#34;&gt;virtualenv tutorial&lt;/a&gt;
+to get started.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ pip install docker-compose
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; pip version 6.0 or greater is required&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;install-as-a-container&#34;&gt;Install as a container&lt;/h3&gt;
+
+&lt;p&gt;Compose can also be run inside a container, from a small bash script wrapper.
+To install compose as a container run:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ curl -L https://github.com/docker/compose/releases/download/1.6.2/run.sh &amp;gt; /usr/local/bin/docker-compose
+$ chmod +x /usr/local/bin/docker-compose
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;master-builds&#34;&gt;Master builds&lt;/h2&gt;
+
+&lt;p&gt;If you&amp;rsquo;re interested in trying out a pre-release build you can download a
+binary from &lt;a href=&#34;https://dl.bintray.com/docker-compose/master/&#34;&gt;https://dl.bintray.com/docker-compose/master/&lt;/a&gt;. Pre-release
+builds allow you to try out new features before they are released, but may
+be less stable.&lt;/p&gt;
+
+&lt;h2 id=&#34;upgrading&#34;&gt;Upgrading&lt;/h2&gt;
+
+&lt;p&gt;If you&amp;rsquo;re upgrading from Compose 1.2 or earlier, you&amp;rsquo;ll need to remove or migrate
+your existing containers after upgrading Compose. This is because, as of version
+1.3, Compose uses Docker labels to keep track of containers, and so they need to
+be recreated with labels added.&lt;/p&gt;
+
+&lt;p&gt;If Compose detects containers that were created without labels, it will refuse
+to run so that you don&amp;rsquo;t end up with two sets of them. If you want to keep using
+your existing containers (for example, because they have data volumes you want
+to preserve) you can use compose 1.5.x to migrate them with the following command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-compose migrate-to-labels
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Alternatively, if you&amp;rsquo;re not worried about keeping them, you can remove them.
+Compose will just create new ones.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker rm -f -v myapp_web_1 myapp_db_1 ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;uninstallation&#34;&gt;Uninstallation&lt;/h2&gt;
+
+&lt;p&gt;To uninstall Docker Compose if you installed using &lt;code&gt;curl&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ rm /usr/local/bin/docker-compose
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To uninstall Docker Compose if you installed using &lt;code&gt;pip&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ pip uninstall docker-compose
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: If you get a &amp;ldquo;Permission denied&amp;rdquo; error using either of the above
+methods, you probably do not have the proper permissions to remove
+&lt;code&gt;docker-compose&lt;/code&gt;.  To force the removal, prepend &lt;code&gt;sudo&lt;/code&gt; to either of the above
+commands and run again.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/&#34;&gt;User guide&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/gettingstarted/&#34;&gt;Getting Started&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/django/&#34;&gt;Get started with Django&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/rails/&#34;&gt;Get started with Rails&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/wordpress/&#34;&gt;Get started with WordPress&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/reference/&#34;&gt;Command line reference&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/compose-file/&#34;&gt;Compose file reference&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Link Environment Variables</title>
+      <link>https://docs.docker.com/v1.10/compose/link-env-deprecated/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/compose/link-env-deprecated/</guid>
+      <description>
+
+&lt;h1 id=&#34;link-environment-variables-reference&#34;&gt;Link environment variables reference&lt;/h1&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Environment variables are no longer the recommended method for connecting to linked services. Instead, you should use the link name (by default, the name of the linked service) as the hostname to connect to. See the &lt;a href=&#34;../v1.10/compose/compose-file/#links&#34;&gt;docker-compose.yml documentation&lt;/a&gt; for details.&lt;/p&gt;
+
+&lt;p&gt;Environment variables will only be populated if you&amp;rsquo;re using the &lt;a href=&#34;../v1.10/compose/compose-file/#versioning&#34;&gt;legacy version 1 Compose file format&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Compose uses &lt;a href=&#34;https://docs.docker.com/engine/userguide/networking/default_network/dockerlinks/&#34;&gt;Docker links&lt;/a&gt; to expose services&amp;rsquo; containers to one another. Each linked container injects a set of environment variables, each of which begins with the uppercase name of the container.&lt;/p&gt;
+
+&lt;p&gt;To see what environment variables are available to a service, run &lt;code&gt;docker-compose run SERVICE env&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;&lt;i&gt;name&lt;/i&gt;_PORT&lt;/b&gt;&lt;br&gt;
+Full URL, e.g. &lt;code&gt;DB_PORT=tcp://172.17.0.5:5432&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;&lt;i&gt;name&lt;/i&gt;_PORT_&lt;i&gt;num&lt;/i&gt;_&lt;i&gt;protocol&lt;/i&gt;&lt;/b&gt;&lt;br&gt;
+Full URL, e.g. &lt;code&gt;DB_PORT_5432_TCP=tcp://172.17.0.5:5432&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;&lt;i&gt;name&lt;/i&gt;_PORT_&lt;i&gt;num&lt;/i&gt;_&lt;i&gt;protocol&lt;/i&gt;_ADDR&lt;/b&gt;&lt;br&gt;
+Container&amp;rsquo;s IP address, e.g. &lt;code&gt;DB_PORT_5432_TCP_ADDR=172.17.0.5&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;&lt;i&gt;name&lt;/i&gt;_PORT_&lt;i&gt;num&lt;/i&gt;_&lt;i&gt;protocol&lt;/i&gt;_PORT&lt;/b&gt;&lt;br&gt;
+Exposed port number, e.g. &lt;code&gt;DB_PORT_5432_TCP_PORT=5432&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;&lt;i&gt;name&lt;/i&gt;_PORT_&lt;i&gt;num&lt;/i&gt;_&lt;i&gt;protocol&lt;/i&gt;_PROTO&lt;/b&gt;&lt;br&gt;
+Protocol (tcp or udp), e.g. &lt;code&gt;DB_PORT_5432_TCP_PROTO=tcp&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;&lt;i&gt;name&lt;/i&gt;_NAME&lt;/b&gt;&lt;br&gt;
+Fully qualified container name, e.g. &lt;code&gt;DB_1_NAME=/myapp_web_1/myapp_db_1&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;related-information&#34;&gt;Related Information&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/&#34;&gt;User guide&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/install/&#34;&gt;Installing Compose&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/reference/&#34;&gt;Command line reference&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/compose-file/&#34;&gt;Compose file reference&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Networking in Compose</title>
+      <link>https://docs.docker.com/v1.10/compose/networking/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/compose/networking/</guid>
+      <description>
+
+&lt;h1 id=&#34;networking-in-compose&#34;&gt;Networking in Compose&lt;/h1&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; This document only applies if you&amp;rsquo;re using &lt;a href=&#34;../v1.10/compose/compose-file/#versioning&#34;&gt;version 2 of the Compose file format&lt;/a&gt;. Networking features are not supported for version 1 (legacy) Compose files.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;By default Compose sets up a single
+&lt;a href=&#34;../v1.10/engine/reference/commandline/network_create/&#34;&gt;network&lt;/a&gt; for your app. Each
+container for a service joins the default network and is both &lt;em&gt;reachable&lt;/em&gt; by
+other containers on that network, and &lt;em&gt;discoverable&lt;/em&gt; by them at a hostname
+identical to the container name.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Your app&amp;rsquo;s network is given a name based on the &amp;ldquo;project name&amp;rdquo;,
+which is based on the name of the directory it lives in. You can override the
+project name with either the &lt;a href=&#34;../v1.10/compose/reference/overview/&#34;&gt;&lt;code&gt;--project-name&lt;/code&gt;
+flag&lt;/a&gt; or the &lt;a href=&#34;../v1.10/compose/reference/envvars/#compose-project-name&#34;&gt;&lt;code&gt;COMPOSE_PROJECT_NAME&lt;/code&gt; environment
+variable&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;For example, suppose your app is in a directory called &lt;code&gt;myapp&lt;/code&gt;, and your &lt;code&gt;docker-compose.yml&lt;/code&gt; looks like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;version: &#39;2&#39;
+
+services:
+  web:
+    build: .
+    ports:
+      - &amp;quot;8000:8000&amp;quot;
+  db:
+    image: postgres
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When you run &lt;code&gt;docker-compose up&lt;/code&gt;, the following happens:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;A network called &lt;code&gt;myapp_default&lt;/code&gt; is created.&lt;/li&gt;
+&lt;li&gt;A container is created using &lt;code&gt;web&lt;/code&gt;&amp;rsquo;s configuration. It joins the network
+&lt;code&gt;myapp_default&lt;/code&gt; under the name &lt;code&gt;web&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;A container is created using &lt;code&gt;db&lt;/code&gt;&amp;rsquo;s configuration. It joins the network
+&lt;code&gt;myapp_default&lt;/code&gt; under the name &lt;code&gt;db&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Each container can now look up the hostname &lt;code&gt;web&lt;/code&gt; or &lt;code&gt;db&lt;/code&gt; and
+get back the appropriate container&amp;rsquo;s IP address. For example, &lt;code&gt;web&lt;/code&gt;&amp;rsquo;s
+application code could connect to the URL &lt;code&gt;postgres://db:5432&lt;/code&gt; and start
+using the Postgres database.&lt;/p&gt;
+
+&lt;p&gt;Because &lt;code&gt;web&lt;/code&gt; explicitly maps a port, it&amp;rsquo;s also accessible from the outside world via port 8000 on your Docker host&amp;rsquo;s network interface.&lt;/p&gt;
+
+&lt;h2 id=&#34;updating-containers&#34;&gt;Updating containers&lt;/h2&gt;
+
+&lt;p&gt;If you make a configuration change to a service and run &lt;code&gt;docker-compose up&lt;/code&gt; to update it, the old container will be removed and the new one will join the network under a different IP address but the same name. Running containers will be able to look up that name and connect to the new address, but the old address will stop working.&lt;/p&gt;
+
+&lt;p&gt;If any containers have connections open to the old container, they will be closed. It is a container&amp;rsquo;s responsibility to detect this condition, look up the name again and reconnect.&lt;/p&gt;
+
+&lt;h2 id=&#34;links&#34;&gt;Links&lt;/h2&gt;
+
+&lt;p&gt;Links allow you to define extra aliases by which a service is reachable from another service. They are not required to enable services to communicate - by default, any service can reach any other service at that service&amp;rsquo;s name. In the following example, &lt;code&gt;db&lt;/code&gt; is reachable from &lt;code&gt;web&lt;/code&gt; at the hostnames &lt;code&gt;db&lt;/code&gt; and &lt;code&gt;database&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;version: &#39;2&#39;
+services:
+  web:
+    build: .
+    links:
+      - &amp;quot;db:database&amp;quot;
+  db:
+    image: postgres
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;See the &lt;a href=&#34;../v1.10/compose/compose-file/#links&#34;&gt;links reference&lt;/a&gt; for more information.&lt;/p&gt;
+
+&lt;h2 id=&#34;multi-host-networking&#34;&gt;Multi-host networking&lt;/h2&gt;
+
+&lt;p&gt;When &lt;a href=&#34;../v1.10/compose/swarm/&#34;&gt;deploying a Compose application to a Swarm cluster&lt;/a&gt;, you can make use of the built-in &lt;code&gt;overlay&lt;/code&gt; driver to enable multi-host communication between containers with no changes to your Compose file or application code.&lt;/p&gt;
+
+&lt;p&gt;Consult the &lt;a href=&#34;../v1.10/engine/userguide/networking/get-started-overlay/&#34;&gt;Getting started with multi-host networking&lt;/a&gt; to see how to set up a Swarm cluster. The cluster will use the &lt;code&gt;overlay&lt;/code&gt; driver by default, but you can specify it explicitly if you prefer - see below for how to do this.&lt;/p&gt;
+
+&lt;h2 id=&#34;specifying-custom-networks&#34;&gt;Specifying custom networks&lt;/h2&gt;
+
+&lt;p&gt;Instead of just using the default app network, you can specify your own networks with the top-level &lt;code&gt;networks&lt;/code&gt; key. This lets you create more complex topologies and specify &lt;a href=&#34;../v1.10/engine/extend/plugins_network/&#34;&gt;custom network drivers&lt;/a&gt; and options. You can also use it to connect services to externally-created networks which aren&amp;rsquo;t managed by Compose.&lt;/p&gt;
+
+&lt;p&gt;Each service can specify what networks to connect to with the &lt;em&gt;service-level&lt;/em&gt; &lt;code&gt;networks&lt;/code&gt; key, which is a list of names referencing entries under the &lt;em&gt;top-level&lt;/em&gt; &lt;code&gt;networks&lt;/code&gt; key.&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s an example Compose file defining two custom networks. The &lt;code&gt;proxy&lt;/code&gt; service is isolated from the &lt;code&gt;db&lt;/code&gt; service, because they do not share a network in common - only &lt;code&gt;app&lt;/code&gt; can talk to both.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;version: &#39;2&#39;
+
+services:
+  proxy:
+    build: ./proxy
+    networks:
+      - front
+  app:
+    build: ./app
+    networks:
+      - front
+      - back
+  db:
+    image: postgres
+    networks:
+      - back
+
+networks:
+  front:
+    # Use a custom driver
+    driver: custom-driver-1
+  back:
+    # Use a custom driver which takes special options
+    driver: custom-driver-2
+    driver_opts:
+      foo: &amp;quot;1&amp;quot;
+      bar: &amp;quot;2&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For full details of the network configuration options available, see the following references:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/compose-file/#network-configuration-reference&#34;&gt;Top-level &lt;code&gt;networks&lt;/code&gt; key&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/compose-file/#networks&#34;&gt;Service-level &lt;code&gt;networks&lt;/code&gt; key&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;configuring-the-default-network&#34;&gt;Configuring the default network&lt;/h2&gt;
+
+&lt;p&gt;Instead of (or as well as) specifying your own networks, you can also change the settings of the app-wide default network by defining an entry under &lt;code&gt;networks&lt;/code&gt; named &lt;code&gt;default&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;version: &#39;2&#39;
+
+services:
+  web:
+    build: .
+    ports:
+      - &amp;quot;8000:8000&amp;quot;
+  db:
+    image: postgres
+
+networks:
+  default:
+    # Use a custom driver
+    driver: custom-driver-1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;using-a-pre-existing-network&#34;&gt;Using a pre-existing network&lt;/h2&gt;
+
+&lt;p&gt;If you want your containers to join a pre-existing network, use the &lt;a href=&#34;../v1.10/compose/compose-file/#network-configuration-reference&#34;&gt;&lt;code&gt;external&lt;/code&gt; option&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;networks:
+  default:
+    external:
+      name: my-pre-existing-network
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Instead of attemping to create a network called &lt;code&gt;[projectname]_default&lt;/code&gt;, Compose will look for a network called &lt;code&gt;my-pre-existing-network&lt;/code&gt; and connect your app&amp;rsquo;s containers to it.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Overview of Docker Compose</title>
+      <link>https://docs.docker.com/v1.10/compose/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/compose/overview/</guid>
+      <description>
+
+&lt;h1 id=&#34;overview-of-docker-compose&#34;&gt;Overview of Docker Compose&lt;/h1&gt;
+
+&lt;p&gt;Compose is a tool for defining and running multi-container Docker applications.
+With Compose, you use a Compose file to configure your application&amp;rsquo;s services.
+Then, using a single command, you create and start all the services
+from your configuration. To learn more about all the features of Compose
+see &lt;a href=&#34;#features&#34;&gt;the list of features&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Compose is great for development, testing, and staging environments, as well as
+CI workflows. You can learn more about each case in
+&lt;a href=&#34;#common-use-cases&#34;&gt;Common Use Cases&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Using Compose is basically a three-step process.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Define your app&amp;rsquo;s environment with a &lt;code&gt;Dockerfile&lt;/code&gt; so it can be reproduced
+anywhere.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Define the services that make up your app in &lt;code&gt;docker-compose.yml&lt;/code&gt;
+so they can be run together in an isolated environment.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Lastly, run
+&lt;code&gt;docker-compose up&lt;/code&gt; and Compose will start and run your entire app.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;A &lt;code&gt;docker-compose.yml&lt;/code&gt; looks like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;version: &#39;2&#39;
+services:
+  web:
+    build: .
+    ports:
+    - &amp;quot;5000:5000&amp;quot;
+    volumes:
+    - .:/code
+    - logvolume01:/var/log
+    links:
+    - redis
+    redis:
+      image: redis
+    volumes:
+      logvolume01: {}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For more information about the Compose file, see the
+&lt;a href=&#34;../v1.10/compose/compose-file/&#34;&gt;Compose file reference&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Compose has commands for managing the whole lifecycle of your application:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Start, stop and rebuild services&lt;/li&gt;
+&lt;li&gt;View the status of running services&lt;/li&gt;
+&lt;li&gt;Stream the log output of running services&lt;/li&gt;
+&lt;li&gt;Run a one-off command on a service&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;compose-documentation&#34;&gt;Compose documentation&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/install/&#34;&gt;Installing Compose&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/gettingstarted/&#34;&gt;Getting Started&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/django/&#34;&gt;Get started with Django&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/rails/&#34;&gt;Get started with Rails&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/wordpress/&#34;&gt;Get started with WordPress&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/faq/&#34;&gt;Frequently asked questions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/reference/&#34;&gt;Command line reference&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/compose-file/&#34;&gt;Compose file reference&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;features&#34;&gt;Features&lt;/h2&gt;
+
+&lt;p&gt;The features of Compose that make it effective are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#Multiple-isolated-environments-on-a-single-host&#34;&gt;Multiple isolated environments on a single host&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#preserve-volume-data-when-containers-are-created&#34;&gt;Preserve volume data when containers are created&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#only-recreate-containers-that-have-changed&#34;&gt;Only recreate containers that have changed&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#variables-and-moving-a-composition-between-environments&#34;&gt;Variables and moving a composition between environments&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;multiple-isolated-environments-on-a-single-host&#34;&gt;Multiple isolated environments on a single host&lt;/h3&gt;
+
+&lt;p&gt;Compose uses a project name to isolate environments from each other. You can make use of this project name in several different contexts:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;on a dev host, to create multiple copies of a single environment (e.g., you want to run a stable copy for each feature branch of a project)&lt;/li&gt;
+&lt;li&gt;on a CI server, to keep builds from interfering with each other, you can set
+the project name to a unique build number&lt;/li&gt;
+&lt;li&gt;on a shared host or dev host, to prevent different projects, which may use the
+same service names, from interfering with each other&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The default project name is the basename of the project directory. You can set
+a custom project name by using the
+&lt;a href=&#34;../v1.10/compose/reference/overview/&#34;&gt;&lt;code&gt;-p&lt;/code&gt; command line option&lt;/a&gt; or the
+&lt;a href=&#34;../v1.10/compose/reference/envvars/#compose-project-name&#34;&gt;&lt;code&gt;COMPOSE_PROJECT_NAME&lt;/code&gt; environment variable&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;preserve-volume-data-when-containers-are-created&#34;&gt;Preserve volume data when containers are created&lt;/h3&gt;
+
+&lt;p&gt;Compose preserves all volumes used by your services. When &lt;code&gt;docker-compose up&lt;/code&gt;
+runs, if it finds any containers from previous runs, it copies the volumes from
+the old container to the new container. This process ensures that any data
+you&amp;rsquo;ve created in volumes isn&amp;rsquo;t lost.&lt;/p&gt;
+
+&lt;h3 id=&#34;only-recreate-containers-that-have-changed&#34;&gt;Only recreate containers that have changed&lt;/h3&gt;
+
+&lt;p&gt;Compose caches the configuration used to create a container. When you
+restart a service that has not changed, Compose re-uses the existing
+containers. Re-using containers means that you can make changes to your
+environment very quickly.&lt;/p&gt;
+
+&lt;h3 id=&#34;variables-and-moving-a-composition-between-environments&#34;&gt;Variables and moving a composition between environments&lt;/h3&gt;
+
+&lt;p&gt;Compose supports variables in the Compose file. You can use these variables
+to customize your composition for different environments, or different users.
+See &lt;a href=&#34;../v1.10/compose/compose-file/#variable-substitution&#34;&gt;Variable substitution&lt;/a&gt; for more
+details.&lt;/p&gt;
+
+&lt;p&gt;You can extend a Compose file using the &lt;code&gt;extends&lt;/code&gt; field or by creating multiple
+Compose files. See &lt;a href=&#34;../v1.10/compose/extends/&#34;&gt;extends&lt;/a&gt; for more details.&lt;/p&gt;
+
+&lt;h2 id=&#34;common-use-cases&#34;&gt;Common Use Cases&lt;/h2&gt;
+
+&lt;p&gt;Compose can be used in many different ways. Some common use cases are outlined
+below.&lt;/p&gt;
+
+&lt;h3 id=&#34;development-environments&#34;&gt;Development environments&lt;/h3&gt;
+
+&lt;p&gt;When you&amp;rsquo;re developing software, the ability to run an application in an
+isolated environment and interact with it is crucial.  The Compose command
+line tool can be used to create the environment and interact with it.&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href=&#34;../v1.10/compose/compose-file/&#34;&gt;Compose file&lt;/a&gt; provides a way to document and configure
+all of the application&amp;rsquo;s service dependencies (databases, queues, caches,
+web service APIs, etc). Using the Compose command line tool you can create
+and start one or more containers for each dependency with a single command
+(&lt;code&gt;docker-compose up&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Together, these features provide a convenient way for developers to get
+started on a project.  Compose can reduce a multi-page &amp;ldquo;developer getting
+started guide&amp;rdquo; to a single machine readable Compose file and a few commands.&lt;/p&gt;
+
+&lt;h3 id=&#34;automated-testing-environments&#34;&gt;Automated testing environments&lt;/h3&gt;
+
+&lt;p&gt;An important part of any Continuous Deployment or Continuous Integration process
+is the automated test suite. Automated end-to-end testing requires an
+environment in which to run tests. Compose provides a convenient way to create
+and destroy isolated testing environments for your test suite. By defining the full environment in a &lt;a href=&#34;../v1.10/compose/compose-file/&#34;&gt;Compose file&lt;/a&gt; you can create and destroy these environments in just a few commands:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-compose up -d
+$ ./run_tests
+$ docker-compose down
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;single-host-deployments&#34;&gt;Single host deployments&lt;/h3&gt;
+
+&lt;p&gt;Compose has traditionally been focused on development and testing workflows,
+but with each release we&amp;rsquo;re making progress on more production-oriented features. You can use Compose to deploy to a remote Docker Engine. The Docker Engine may be a single instance provisioned with
+&lt;a href=&#34;https://docs.docker.com/machine/&#34;&gt;Docker Machine&lt;/a&gt; or an entire
+&lt;a href=&#34;https://docs.docker.com/swarm/&#34;&gt;Docker Swarm&lt;/a&gt; cluster.&lt;/p&gt;
+
+&lt;p&gt;For details on using production-oriented features, see
+&lt;a href=&#34;../v1.10/compose/production/&#34;&gt;compose in production&lt;/a&gt; in this documentation.&lt;/p&gt;
+
+&lt;h2 id=&#34;release-notes&#34;&gt;Release Notes&lt;/h2&gt;
+
+&lt;p&gt;To see a detailed list of changes for past and current releases of Docker
+Compose, please refer to the
+&lt;a href=&#34;https://github.com/docker/compose/blob/master/CHANGELOG.md&#34;&gt;CHANGELOG&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;getting-help&#34;&gt;Getting help&lt;/h2&gt;
+
+&lt;p&gt;Docker Compose is under active development. If you need help, would like to
+contribute, or simply want to talk about the project with like-minded
+individuals, we have a number of open channels for communication.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;To report bugs or file feature requests: please use the &lt;a href=&#34;https://github.com/docker/compose/issues&#34;&gt;issue tracker on Github&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;To talk about the project with people in real time: please join the
+&lt;code&gt;#docker-compose&lt;/code&gt; channel on freenode IRC.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;To contribute code or documentation changes: please submit a &lt;a href=&#34;https://github.com/docker/compose/pulls&#34;&gt;pull request on Github&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For more information and resources, please visit the &lt;a href=&#34;https://docs.docker.com/opensource/get-help/&#34;&gt;Getting Help project page&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Overview of docker-compose CLI</title>
+      <link>https://docs.docker.com/v1.10/compose/reference/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/compose/reference/overview/</guid>
+      <description>
+
+&lt;h1 id=&#34;overview-of-docker-compose-cli&#34;&gt;Overview of docker-compose CLI&lt;/h1&gt;
+
+&lt;p&gt;This page provides the usage information for the &lt;code&gt;docker-compose&lt;/code&gt; Command.
+You can also see this information by running &lt;code&gt;docker-compose --help&lt;/code&gt; from the
+command line.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Define and run multi-container applications with Docker.
+
+Usage:
+  docker-compose [-f=&amp;lt;arg&amp;gt;...] [options] [COMMAND] [ARGS...]
+  docker-compose -h|--help
+
+Options:
+  -f, --file FILE           Specify an alternate compose file (default: docker-compose.yml)
+  -p, --project-name NAME   Specify an alternate project name (default: directory name)
+  --verbose                 Show more output
+  -v, --version             Print version and exit
+
+Commands:
+  build              Build or rebuild services
+  config             Validate and view the compose file
+  create             Create services
+  down               Stop and remove containers, networks, images, and volumes
+  events             Receive real time events from containers
+  help               Get help on a command
+  kill               Kill containers
+  logs               View output from containers
+  pause              Pause services
+  port               Print the public port for a port binding
+  ps                 List containers
+  pull               Pulls service images
+  restart            Restart services
+  rm                 Remove stopped containers
+  run                Run a one-off command
+  scale              Set number of containers for a service
+  start              Start services
+  stop               Stop services
+  unpause            Unpause services
+  up                 Create and start containers
+  version            Show the Docker-Compose version information
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The Docker Compose binary. You use this command to build and manage multiple
+services in Docker containers.&lt;/p&gt;
+
+&lt;p&gt;Use the &lt;code&gt;-f&lt;/code&gt; flag to specify the location of a Compose configuration file. You
+can supply multiple &lt;code&gt;-f&lt;/code&gt; configuration files. When you supply multiple files,
+Compose combines them into a single configuration. Compose builds the
+configuration in the order you supply the files. Subsequent files override and
+add to their successors.&lt;/p&gt;
+
+&lt;p&gt;For example, consider this command line:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-compose -f docker-compose.yml -f docker-compose.admin.yml run backup_db`
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;docker-compose.yml&lt;/code&gt; file might specify a &lt;code&gt;webapp&lt;/code&gt; service.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;webapp:
+  image: examples/web
+  ports:
+    - &amp;quot;8000:8000&amp;quot;
+  volumes:
+    - &amp;quot;/data&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If the &lt;code&gt;docker-compose.admin.yml&lt;/code&gt; also specifies this same service, any matching
+fields will override the previous file. New values, add to the &lt;code&gt;webapp&lt;/code&gt; service
+configuration.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;webapp:
+  build: .
+  environment:
+    - DEBUG=1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Use a &lt;code&gt;-f&lt;/code&gt; with &lt;code&gt;-&lt;/code&gt; (dash) as the filename to read the configuration from
+stdin. When stdin is used all paths in the configuration are
+relative to the current working directory.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;-f&lt;/code&gt; flag is optional. If you don&amp;rsquo;t provide this flag on the command line,
+Compose traverses the working directory and its parent directories looking for a
+&lt;code&gt;docker-compose.yml&lt;/code&gt; and a &lt;code&gt;docker-compose.override.yml&lt;/code&gt; file. You must
+supply at least the &lt;code&gt;docker-compose.yml&lt;/code&gt; file. If both files are present on the
+same directory level, Compose combines the two files into a single configuration.
+The configuration in the &lt;code&gt;docker-compose.override.yml&lt;/code&gt; file is applied over and
+in addition to the values in the &lt;code&gt;docker-compose.yml&lt;/code&gt; file.&lt;/p&gt;
+
+&lt;p&gt;See also the &lt;code&gt;COMPOSE_FILE&lt;/code&gt; &lt;a href=&#34;../v1.10/compose/reference/envvars/#compose-file&#34;&gt;environment variable&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Each configuration has a project name. If you supply a &lt;code&gt;-p&lt;/code&gt; flag, you can
+specify a project name. If you don&amp;rsquo;t specify the flag, Compose uses the current
+directory name. See also the &lt;code&gt;COMPOSE_PROJECT_NAME&lt;/code&gt; &lt;a href=&#34;../v1.10/compose/reference/envvars/#compose-project-name&#34;&gt;environment variable&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/reference/envvars/&#34;&gt;CLI environment variables&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Quickstart: Compose and Django</title>
+      <link>https://docs.docker.com/v1.10/compose/django/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/compose/django/</guid>
+      <description>
+
+&lt;h1 id=&#34;quickstart-docker-compose-and-django&#34;&gt;Quickstart: Docker Compose and Django&lt;/h1&gt;
+
+&lt;p&gt;This quick-start guide demonstrates how to use Docker Compose to set up and run a simple Django/PostgreSQL app. Before starting, you&amp;rsquo;ll need to have
+&lt;a href=&#34;../v1.10/compose/install/&#34;&gt;Compose installed&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;define-the-project-components&#34;&gt;Define the project components&lt;/h2&gt;
+
+&lt;p&gt;For this project, you need to create a Dockerfile, a Python dependencies file,
+and a &lt;code&gt;docker-compose.yml&lt;/code&gt; file.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Create an empty project directory.&lt;/p&gt;
+
+&lt;p&gt;You can name the directory something easy for you to remember. This directory is the context for your application image. The directory should only contain resources to build that image.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create a new file called &lt;code&gt;Dockerfile&lt;/code&gt; in your project directory.&lt;/p&gt;
+
+&lt;p&gt;The Dockerfile defines an application&amp;rsquo;s image content via one or more build
+commands that configure that image. Once built, you can run the image in a
+container.  For more information on &lt;code&gt;Dockerfiles&lt;/code&gt;, see the &lt;a href=&#34;https://docs.docker.com/engine/userguide/dockerimages/#building-an-image-from-a-dockerfile&#34;&gt;Docker user
+guide&lt;/a&gt;
+and the &lt;a href=&#34;https://docs.docker.com/engine/reference/builder/&#34;&gt;Dockerfile reference&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Add the following content to the &lt;code&gt;Dockerfile&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;FROM python:2.7
+ENV PYTHONUNBUFFERED 1
+RUN mkdir /code
+WORKDIR /code
+ADD requirements.txt /code/
+RUN pip install -r requirements.txt
+ADD . /code/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This &lt;code&gt;Dockerfile&lt;/code&gt; starts with a Python 2.7 base image. The base image is
+modified by adding a new &lt;code&gt;code&lt;/code&gt; directory. The base image is further modified
+by installing the Python requirements defined in the &lt;code&gt;requirements.txt&lt;/code&gt; file.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Save and close the &lt;code&gt;Dockerfile&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create a &lt;code&gt;requirements.txt&lt;/code&gt; in your project directory.&lt;/p&gt;
+
+&lt;p&gt;This file is used by the &lt;code&gt;RUN pip install -r requirements.txt&lt;/code&gt; command in your &lt;code&gt;Dockerfile&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Add the required software in the file.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Django
+psycopg2
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Save and close the &lt;code&gt;requirements.txt&lt;/code&gt; file.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create a file called &lt;code&gt;docker-compose.yml&lt;/code&gt; in your project directory.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;docker-compose.yml&lt;/code&gt; file describes the services that make your app. In
+this example those services are a web server and database.  The compose file
+also describes which Docker images these services use, how they link
+together, any volumes they might need mounted inside the containers.
+Finally, the &lt;code&gt;docker-compose.yml&lt;/code&gt; file describes which ports these services
+expose. See the &lt;a href=&#34;../v1.10/compose/compose-file/&#34;&gt;&lt;code&gt;docker-compose.yml&lt;/code&gt; reference&lt;/a&gt; for more
+information on how this file works.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Add the following configuration to the file.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;version: &#39;2&#39;
+services:
+  db:
+    image: postgres
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - &amp;quot;8000:8000&amp;quot;
+    depends_on:
+      - db
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This file defines two services: The &lt;code&gt;db&lt;/code&gt; service and the &lt;code&gt;web&lt;/code&gt; service.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Save and close the &lt;code&gt;docker-compose.yml&lt;/code&gt; file.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;create-a-django-project&#34;&gt;Create a Django project&lt;/h2&gt;
+
+&lt;p&gt;In this step, you create a Django started project by building the image from the build context defined in the previous procedure.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Change to the root of your project directory.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create the Django project using the &lt;code&gt;docker-compose&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-compose run web django-admin.py startproject composeexample .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This instructs Compose to run &lt;code&gt;django-admin.py startproject composeeexample&lt;/code&gt;
+in a container, using the &lt;code&gt;web&lt;/code&gt; service&amp;rsquo;s image and configuration. Because
+the &lt;code&gt;web&lt;/code&gt; image doesn&amp;rsquo;t exist yet, Compose builds it from the current
+directory, as specified by the &lt;code&gt;build: .&lt;/code&gt; line in &lt;code&gt;docker-compose.yml&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Once the &lt;code&gt;web&lt;/code&gt; service image is built, Compose runs it and executes the
+&lt;code&gt;django-admin.py startproject&lt;/code&gt; command in the container. This command
+instructs Django to create a set of files and directories representing a
+Django project.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;After the &lt;code&gt;docker-compose&lt;/code&gt; command completes, list the contents of your project.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ls -l
+drwxr-xr-x 2 root   root   composeexample
+-rw-rw-r-- 1 user   user   docker-compose.yml
+-rw-rw-r-- 1 user   user   Dockerfile
+-rwxr-xr-x 1 root   root   manage.py
+-rw-rw-r-- 1 user   user   requirements.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;If you are running Docker on Linux, the files &lt;code&gt;django-admin&lt;/code&gt; created are owned
+  by root. This happens because the container runs as the root user. Change the
+  ownership of the the new files.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;      sudo chown -R $USER:$USER .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you are running Docker on Mac or Windows, you should already have ownership
+  of all files, including those generated by &lt;code&gt;django-admin&lt;/code&gt;. List the files just
+  verify this.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    $ ls -l
+    total 32
+    -rw-r--r--  1 user  staff  145 Feb 13 23:00 Dockerfile
+    drwxr-xr-x  6 user  staff  204 Feb 13 23:07 composeexample
+    -rw-r--r--  1 user  staff  159 Feb 13 23:02 docker-compose.yml
+    -rwxr-xr-x  1 user  staff  257 Feb 13 23:07 manage.py
+    -rw-r--r--  1 user  staff   16 Feb 13 23:01 requirements.txt
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;connect-the-database&#34;&gt;Connect the database&lt;/h2&gt;
+
+&lt;p&gt;In this section, you set up the database connection for Django.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;In your project directory, edit the &lt;code&gt;composeexample/settings.py&lt;/code&gt; file.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Replace the &lt;code&gt;DATABASES = ...&lt;/code&gt; with the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;DATABASES = {
+    &#39;default&#39;: {
+        &#39;ENGINE&#39;: &#39;django.db.backends.postgresql_psycopg2&#39;,
+        &#39;NAME&#39;: &#39;postgres&#39;,
+        &#39;USER&#39;: &#39;postgres&#39;,
+        &#39;HOST&#39;: &#39;db&#39;,
+        &#39;PORT&#39;: 5432,
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;These settings are determined by the
+&lt;a href=&#34;https://hub.docker.com/_/postgres/&#34;&gt;postgres&lt;/a&gt; Docker image
+specified in &lt;code&gt;docker-compose.yml&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Save and close the file.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Run the &lt;code&gt;docker-compose up&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-compose up
+Starting composepractice_db_1...
+Starting composepractice_web_1...
+Attaching to composepractice_db_1, composepractice_web_1
+...
+db_1  | PostgreSQL init process complete; ready for start up.
+...
+db_1  | LOG:  database system is ready to accept connections
+db_1  | LOG:  autovacuum launcher started
+..
+web_1 | Django version 1.8.4, using settings &#39;composeexample.settings&#39;
+web_1 | Starting development server at http://0.0.0.0:8000/
+web_1 | Quit the server with CONTROL-C.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;At this point, your Django app should be running at port &lt;code&gt;8000&lt;/code&gt; on your
+Docker host. If you are using a Docker Machine VM, you can use the
+&lt;code&gt;docker-machine ip MACHINE_NAME&lt;/code&gt; to get the IP address.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../compose/images/django-it-worked.png&#34; alt=&#34;Django example&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;more-compose-documentation&#34;&gt;More Compose documentation&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/&#34;&gt;User guide&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/install/&#34;&gt;Installing Compose&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/gettingstarted/&#34;&gt;Getting Started&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/rails/&#34;&gt;Get started with Rails&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/wordpress/&#34;&gt;Get started with WordPress&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/reference/&#34;&gt;Command line reference&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/compose/compose-file/&#34;&gt;Compose file reference&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

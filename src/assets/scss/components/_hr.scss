@@ -1,0 +1,33 @@
+hr {
+	// width: 90%;
+	@media #{$medium-up} {
+		margin: rem-calc(50) auto;
+	}
+	@media #{$large-up} {
+		max-width: ($row-width - $column-gutter);
+	}
+}
+hr.moby {
+	position: relative;
+	padding: 0;
+	margin: rem-calc(25) auto;
+	border: none;
+	height: 1px;
+	background: #ddd;
+	@media #{$medium-up} {
+		margin: rem-calc(50) auto;
+	}
+	&::after {
+		content:'';
+		position: absolute;
+		top: -26px;
+		left:50%;
+		margin-left: -26px;
+		height: 52px;
+		width: 52px;
+		background: url('../images/moby-tiny.svg') no-repeat;
+	}
+}
+hr.dark-bg {
+	border-color: lighten($docker-gray, 10%);
+}

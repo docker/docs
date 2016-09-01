@@ -1,0 +1,2441 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Engines on Docker Docs</title>
+    <link>https://docs.docker.com/v1.10/engine/</link>
+    <description>Recent content in Engines on Docker Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="https://docs.docker.com/v1.10/engine/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>API Reference</title>
+      <link>https://docs.docker.com/v1.10/engine/reference/api/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/engine/reference/api/</guid>
+      <description>
+
+&lt;h1 id=&#34;api-reference&#34;&gt;API Reference&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/engine/reference/api/docker_remote_api/&#34;&gt;Docker Remote API&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/engine/reference/api/remote_api_client_libraries/&#34;&gt;Docker Remote API client libraries&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>AUFS storage driver in practice</title>
+      <link>https://docs.docker.com/v1.10/engine/userguide/storagedriver/aufs-driver/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/engine/userguide/storagedriver/aufs-driver/</guid>
+      <description>
+
+&lt;h1 id=&#34;docker-and-aufs-in-practice&#34;&gt;Docker and AUFS in practice&lt;/h1&gt;
+
+&lt;p&gt;AUFS was the first storage driver in use with Docker. As a result, it has a
+long and close history with Docker, is very stable, has a lot of real-world
+deployments, and has strong community support. AUFS has several features that
+make it a good choice for Docker. These features enable:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Fast container startup times.&lt;/li&gt;
+&lt;li&gt;Efficient use of storage.&lt;/li&gt;
+&lt;li&gt;Efficient use of memory.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Despite its capabilities and long history with Docker, some Linux distributions
+ do not support AUFS. This is usually because AUFS is not included in the
+mainline (upstream) Linux kernel.&lt;/p&gt;
+
+&lt;p&gt;The following sections examine some AUFS features and how they relate to
+Docker.&lt;/p&gt;
+
+&lt;h2 id=&#34;image-layering-and-sharing-with-aufs&#34;&gt;Image layering and sharing with AUFS&lt;/h2&gt;
+
+&lt;p&gt;AUFS is a &lt;em&gt;unification filesystem&lt;/em&gt;. This means that it takes multiple
+directories on a single Linux host, stacks them on top of each other, and
+provides a single unified view. To achieve this, AUFS uses a &lt;em&gt;union mount&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;AUFS stacks multiple directories and exposes them as a unified view through a
+single mount point. All of the directories in the stack, as well as the union
+mount point, must all exist on the same Linux host. AUFS refers to each
+directory that it stacks as a &lt;em&gt;branch&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Within Docker, AUFS union mounts enable image layering. The AUFS storage driver
+ implements Docker image layers using this union mount system. AUFS branches
+correspond to Docker image layers. The diagram below shows a Docker container
+based on the &lt;code&gt;ubuntu:latest&lt;/code&gt; image.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../engine/userguide/storagedriver/images/aufs_layers.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This diagram shows that each image layer, and the container layer, is
+represented in the Docker hosts filesystem as a directory under
+&lt;code&gt;/var/lib/docker/&lt;/code&gt;. The union mount point provides the unified view of all
+layers. As of Docker 1.10, image layer IDs do not correspond to the names of
+the directories that contain their data.&lt;/p&gt;
+
+&lt;p&gt;AUFS also supports the copy-on-write technology (CoW). Not all storage drivers
+do.&lt;/p&gt;
+
+&lt;h2 id=&#34;container-reads-and-writes-with-aufs&#34;&gt;Container reads and writes with AUFS&lt;/h2&gt;
+
+&lt;p&gt;Docker leverages AUFS CoW technology to enable image sharing and minimize the
+use of disk space. AUFS works at the file level. This means that all AUFS CoW
+operations copy entire files - even if only a small part of the file is being
+modified. This behavior can have a noticeable impact on container performance,
+ especially if the files being copied are large, below a lot of image layers,
+or the CoW operation must search a deep directory tree.&lt;/p&gt;
+
+&lt;p&gt;Consider, for example, an application running in a container needs to add a
+single new value to a large key-value store (file). If this is the first time
+the file is modified, it does not yet exist in the container&amp;rsquo;s top writable
+layer. So, the CoW must &lt;em&gt;copy up&lt;/em&gt; the file from the underlying image. The AUFS
+storage driver searches each image layer for the file. The search order is from
+ top to bottom. When it is found, the entire file is &lt;em&gt;copied up&lt;/em&gt; to the
+container&amp;rsquo;s top writable layer. From there, it can be opened and modified.&lt;/p&gt;
+
+&lt;p&gt;Larger files obviously take longer to &lt;em&gt;copy up&lt;/em&gt; than smaller files, and files
+that exist in lower image layers take longer to locate than those in higher
+layers. However, a &lt;em&gt;copy up&lt;/em&gt; operation only occurs once per file on any given
+container. Subsequent reads and writes happen against the file&amp;rsquo;s copy already
+&lt;em&gt;copied-up&lt;/em&gt; to the container&amp;rsquo;s top layer.&lt;/p&gt;
+
+&lt;h2 id=&#34;deleting-files-with-the-aufs-storage-driver&#34;&gt;Deleting files with the AUFS storage driver&lt;/h2&gt;
+
+&lt;p&gt;The AUFS storage driver deletes a file from a container by placing a &lt;em&gt;whiteout
+file&lt;/em&gt; in the container&amp;rsquo;s top layer. The whiteout file effectively obscures the
+existence of the file in the read-only image layers below. The simplified
+diagram below shows a container based on an image with three image layers.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../engine/userguide/storagedriver/images/aufs_delete.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;file3&lt;/code&gt; was deleted from the container. So, the AUFS storage driver  placed
+a whiteout file in the container&amp;rsquo;s top layer. This whiteout file effectively
+&amp;ldquo;deletes&amp;rdquo; &lt;code&gt;file3&lt;/code&gt; from the container by obscuring any of the original file&amp;rsquo;s
+existence in the image&amp;rsquo;s read-only layers. This works the same no matter which
+of the image&amp;rsquo;s read-only layers the file exists in.&lt;/p&gt;
+
+&lt;h2 id=&#34;configure-docker-with-aufs&#34;&gt;Configure Docker with AUFS&lt;/h2&gt;
+
+&lt;p&gt;You can only use the AUFS storage driver on Linux systems with AUFS installed.
+Use the following command to determine if your system supports AUFS.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ grep aufs /proc/filesystems
+nodev   aufs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This output indicates the system supports AUFS. Once you&amp;rsquo;ve verified your
+system supports AUFS, you can must instruct the Docker daemon to use it. You do
+this from the command line with the &lt;code&gt;docker daemon&lt;/code&gt; command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo docker daemon --storage-driver=aufs &amp;amp;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Alternatively, you can edit the Docker config file and add the
+&lt;code&gt;--storage-driver=aufs&lt;/code&gt; option to the &lt;code&gt;DOCKER_OPTS&lt;/code&gt; line.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Use DOCKER_OPTS to modify the daemon startup options.
+DOCKER_OPTS=&amp;quot;--storage-driver=aufs&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once your daemon is running, verify the storage driver with the &lt;code&gt;docker info&lt;/code&gt;
+command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo docker info
+Containers: 1
+Images: 4
+Storage Driver: aufs
+ Root Dir: /var/lib/docker/aufs
+ Backing Filesystem: extfs
+ Dirs: 6
+ Dirperm1 Supported: false
+Execution Driver: native-0.2
+...output truncated...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The output above shows that the Docker daemon is running the AUFS storage
+driver on top of an existing &lt;code&gt;ext4&lt;/code&gt; backing filesystem.&lt;/p&gt;
+
+&lt;h2 id=&#34;local-storage-and-aufs&#34;&gt;Local storage and AUFS&lt;/h2&gt;
+
+&lt;p&gt;As the &lt;code&gt;docker daemon&lt;/code&gt; runs with the AUFS driver, the driver stores images and
+containers within the Docker host&amp;rsquo;s local storage area under
+&lt;code&gt;/var/lib/docker/aufs/&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;images&#34;&gt;Images&lt;/h3&gt;
+
+&lt;p&gt;Image layers and their contents are stored under
+&lt;code&gt;/var/lib/docker/aufs/diff/&lt;/code&gt;. With Docker 1.10 and higher, image layer IDs do
+not correspond to directory names.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;/var/lib/docker/aufs/layers/&lt;/code&gt; directory contains metadata about how image
+layers are stacked. This directory contains one file for every image or
+container layer on the Docker host (though file names no longer match image
+layer IDs). Inside each file are the names of the directories that exist below
+it in the stack&lt;/p&gt;
+
+&lt;p&gt;The command below shows the contents of a metadata file in
+&lt;code&gt;/var/lib/docker/aufs/layers/&lt;/code&gt; that lists the three directories that are
+stacked below it in the union mount. Remember, these directory names do no map
+to image layer IDs with Docker 1.10 and higher.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cat /var/lib/docker/aufs/layers/91e54dfb11794fad694460162bf0cb0a4fa710cfa3f60979c177d920813e267c
+d74508fb6632491cea586a1fd7d748dfc5274cd6fdfedee309ecdcbc2bf5cb82
+c22013c8472965aa5b62559f2b540cd440716ef149756e7b958a1b2aba421e87
+d3a1f33e8a5a513092f01bb7eb1c2abf4d711e5105390a3fe1ae2248cfde1391
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The base layer in an image has no image layers below it, so its file is empty.&lt;/p&gt;
+
+&lt;h3 id=&#34;containers&#34;&gt;Containers&lt;/h3&gt;
+
+&lt;p&gt;Running containers are mounted below &lt;code&gt;/var/lib/docker/aufs/mnt/&amp;lt;container-id&amp;gt;&lt;/code&gt;.
+ This is where the AUFS union mount point that exposes the container and all
+underlying image layers as a single unified view exists. If a container is not
+running, it still has a directory here but it is empty. This is because AUFS
+only mounts a container when it is running. With Docker 1.10 and higher,
+ container IDs no longer correspond to directory names under
+&lt;code&gt;/var/lib/docker/aufs/mnt/&amp;lt;container-id&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Container metadata and various config files that are placed into the running
+container are stored in &lt;code&gt;/var/lib/docker/containers/&amp;lt;container-id&amp;gt;&lt;/code&gt;. Files in
+this directory exist for all containers on the system, including ones that are
+stopped. However, when a container is running the container&amp;rsquo;s log files are
+also in this directory.&lt;/p&gt;
+
+&lt;p&gt;A container&amp;rsquo;s thin writable layer is stored in a directory under
+&lt;code&gt;/var/lib/docker/aufs/diff/&lt;/code&gt;. With Docker 1.10 and higher, container IDs no
+longer correspond to directory names. However, the containers thin writable
+layer still exists under here and is stacked by AUFS as the top writable layer
+and is where all changes to the container are stored. The directory exists even
+ if the container is stopped. This means that restarting a container will not
+lose changes made to it. Once a container is deleted, it&amp;rsquo;s thin writable layer
+in this directory is deleted.&lt;/p&gt;
+
+&lt;h2 id=&#34;aufs-and-docker-performance&#34;&gt;AUFS and Docker performance&lt;/h2&gt;
+
+&lt;p&gt;To summarize some of the performance related aspects already mentioned:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;The AUFS storage driver is a good choice for PaaS and other similar use-cases
+where container density is important. This is because AUFS efficiently shares
+images between multiple running containers, enabling fast container start times
+and minimal use of disk space.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The underlying mechanics of how AUFS shares files between image layers and
+containers uses the systems page cache very efficiently.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The AUFS storage driver can introduce significant latencies into container
+write performance. This is because the first time a container writes to any
+file, the file has be located and copied into the containers top writable
+layer. These latencies increase and are compounded when these files exist below
+many image layers and the files themselves are large.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;One final point. Data volumes provide the best and most predictable
+performance. This is because they bypass the storage driver and do not incur
+any of the potential overheads introduced by thin provisioning and
+copy-on-write. For this reason, you may want to place heavy write workloads on
+data volumes.&lt;/p&gt;
+
+&lt;h2 id=&#34;related-information&#34;&gt;Related information&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/engine/userguide/storagedriver/imagesandcontainers/&#34;&gt;Understand images, containers, and storage drivers&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/engine/userguide/storagedriver/selectadriver/&#34;&gt;Select a storage driver&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/engine/userguide/storagedriver/btrfs-driver/&#34;&gt;Btrfs storage driver in practice&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/engine/userguide/storagedriver/device-mapper-driver/&#34;&gt;Device Mapper storage driver in practice&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Access authorization plugin</title>
+      <link>https://docs.docker.com/v1.10/engine/extend/authorization/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/engine/extend/authorization/</guid>
+      <description>
+
+&lt;h1 id=&#34;create-an-authorization-plugin&#34;&gt;Create an authorization plugin&lt;/h1&gt;
+
+&lt;p&gt;Docker&amp;rsquo;s out-of-the-box authorization model is all or nothing. Any user with
+permission to access the Docker daemon can run any Docker client command. The
+same is true for callers using Docker&amp;rsquo;s remote API to contact the daemon. If you
+require greater access control, you can create authorization plugins and add
+them to your Docker daemon configuration. Using an authorization plugin, a
+Docker administrator can configure granular access policies for managing access
+to Docker daemon.&lt;/p&gt;
+
+&lt;p&gt;Anyone with the appropriate skills can develop an authorization plugin. These
+skills, at their most basic, are knowledge of Docker, understanding of REST, and
+sound programming knowledge. This document describes the architecture, state,
+and methods information available to an authorization plugin developer.&lt;/p&gt;
+
+&lt;h2 id=&#34;basic-principles&#34;&gt;Basic principles&lt;/h2&gt;
+
+&lt;p&gt;Docker&amp;rsquo;s &lt;a href=&#34;../v1.10/engine/extend/plugin_api/&#34;&gt;plugin infrastructure&lt;/a&gt; enables
+extending Docker by loading, removing and communicating with
+third-party components using a generic API. The access authorization subsystem
+was built using this mechanism.&lt;/p&gt;
+
+&lt;p&gt;Using this subsystem, you don&amp;rsquo;t need to rebuild the Docker daemon to add an
+authorization plugin.  You can add a plugin to an installed Docker daemon. You do
+need to restart the Docker daemon to add a new plugin.&lt;/p&gt;
+
+&lt;p&gt;An authorization plugin approves or denies requests to the Docker daemon based
+on both the current authentication context and the command context. The
+authentication context contains all user details and the authentication method.
+The command context contains all the relevant request data.&lt;/p&gt;
+
+&lt;p&gt;Authorization plugins must follow the rules described in &lt;a href=&#34;../v1.10/engine/extend/plugin_api/&#34;&gt;Docker Plugin API&lt;/a&gt;.
+Each plugin must reside within directories described under the
+&lt;a href=&#34;../v1.10/engine/extend/plugin_api/#plugin-discovery&#34;&gt;Plugin discovery&lt;/a&gt; section.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: the abbreviations &lt;code&gt;AuthZ&lt;/code&gt; and &lt;code&gt;AuthN&lt;/code&gt; mean authorization and authentication
+respectively.&lt;/p&gt;
+
+&lt;h2 id=&#34;basic-architecture&#34;&gt;Basic architecture&lt;/h2&gt;
+
+&lt;p&gt;You are responsible for registering your plugin as part of the Docker daemon
+startup. You can install multiple plugins and chain them together. This chain
+can be ordered. Each request to the daemon passes in order through the chain.
+Only when all the plugins grant access to the resource, is the access granted.&lt;/p&gt;
+
+&lt;p&gt;When an HTTP request is made to the Docker daemon through the CLI or via the
+remote API, the authentication subsystem passes the request to the installed
+authentication plugin(s). The request contains the user (caller) and command
+context. The plugin is responsible for deciding whether to allow or deny the
+request.&lt;/p&gt;
+
+&lt;p&gt;The sequence diagrams below depict an allow and deny authorization flow:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../engine/extend/images/authz_allow.png&#34; alt=&#34;Authorization Allow flow&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../engine/extend/images/authz_deny.png&#34; alt=&#34;Authorization Deny flow&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Each request sent to the plugin includes the authenticated user, the HTTP
+headers, and the request/response body. Only the user name and the
+authentication method used are passed to the plugin. Most importantly, no user
+credentials or tokens are passed. Finally, not all request/response bodies
+are sent to the authorization plugin. Only those request/response bodies where
+the &lt;code&gt;Content-Type&lt;/code&gt; is either &lt;code&gt;text/*&lt;/code&gt; or &lt;code&gt;application/json&lt;/code&gt; are sent.&lt;/p&gt;
+
+&lt;p&gt;For commands that can potentially hijack the HTTP connection (&lt;code&gt;HTTP
+Upgrade&lt;/code&gt;), such as &lt;code&gt;exec&lt;/code&gt;, the authorization plugin is only called for the
+initial HTTP requests. Once the plugin approves the command, authorization is
+not applied to the rest of the flow. Specifically, the streaming data is not
+passed to the authorization plugins. For commands that return chunked HTTP
+response, such as &lt;code&gt;logs&lt;/code&gt; and &lt;code&gt;events&lt;/code&gt;, only the HTTP request is sent to the
+authorization plugins.&lt;/p&gt;
+
+&lt;p&gt;During request/response processing, some authorization flows might
+need to do additional queries to the Docker daemon. To complete such flows,
+plugins can call the daemon API similar to a regular user. To enable these
+additional queries, the plugin must provide the means for an administrator to
+configure proper authentication and security policies.&lt;/p&gt;
+
+&lt;h2 id=&#34;docker-client-flows&#34;&gt;Docker client flows&lt;/h2&gt;
+
+&lt;p&gt;To enable and configure the authorization plugin, the plugin developer must
+support the Docker client interactions detailed in this section.&lt;/p&gt;
+
+&lt;h3 id=&#34;setting-up-docker-daemon&#34;&gt;Setting up Docker daemon&lt;/h3&gt;
+
+&lt;p&gt;Enable the authorization plugin with a dedicated command line flag in the
+&lt;code&gt;--authorization-plugin=PLUGIN_ID&lt;/code&gt; format. The flag supplies a &lt;code&gt;PLUGIN_ID&lt;/code&gt;
+value. This value can be the plugin’s socket or a path to a specification file.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ docker daemon --authorization-plugin=plugin1 --authorization-plugin=plugin2,...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Docker&amp;rsquo;s authorization subsystem supports multiple &lt;code&gt;--authorization-plugin&lt;/code&gt; parameters.&lt;/p&gt;
+
+&lt;h3 id=&#34;calling-authorized-command-allow&#34;&gt;Calling authorized command (allow)&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ docker pull centos
+...
+f1b10cd84249: Pull complete
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;calling-unauthorized-command-deny&#34;&gt;Calling unauthorized command (deny)&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ docker pull centos
+...
+docker: Error response from daemon: authorization denied by plugin PLUGIN_NAME: volumes are not allowed.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;error-from-plugins&#34;&gt;Error from plugins&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ docker pull centos
+...
+docker: Error response from daemon: plugin PLUGIN_NAME failed with error: AuthZPlugin.AuthZReq: Cannot connect to the Docker daemon. Is the docker daemon running on this host?.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;api-schema-and-implementation&#34;&gt;API schema and implementation&lt;/h2&gt;
+
+&lt;p&gt;In addition to Docker&amp;rsquo;s standard plugin registration method, each plugin
+should implement the following two methods:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;/AuthzPlugin.AuthZReq&lt;/code&gt; This authorize request method is called before the Docker daemon processes the client request.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;/AuthzPlugin.AuthZRes&lt;/code&gt; This authorize response method is called before the response is returned from Docker daemon to the client.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;authzplugin-authzreq&#34;&gt;/AuthzPlugin.AuthZReq&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;Request&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
+    &amp;quot;User&amp;quot;:              &amp;quot;The user identification&amp;quot;,
+    &amp;quot;UserAuthNMethod&amp;quot;:   &amp;quot;The authentication method used&amp;quot;,
+    &amp;quot;RequestMethod&amp;quot;:     &amp;quot;The HTTP method&amp;quot;,
+    &amp;quot;RequestUri&amp;quot;:        &amp;quot;The HTTP request URI&amp;quot;,
+    &amp;quot;RequestBody&amp;quot;:       &amp;quot;Byte array containing the raw HTTP request body&amp;quot;,
+    &amp;quot;RequestHeader&amp;quot;:     &amp;quot;Byte array containing the raw HTTP request header as a map[string][]string &amp;quot;,
+    &amp;quot;RequestStatusCode&amp;quot;: &amp;quot;Request status code&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Response&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
+    &amp;quot;Allow&amp;quot;: &amp;quot;Determined whether the user is allowed or not&amp;quot;,
+    &amp;quot;Msg&amp;quot;:   &amp;quot;The authorization message&amp;quot;,
+    &amp;quot;Err&amp;quot;:   &amp;quot;The error message if things go wrong&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;authzplugin-authzres&#34;&gt;/AuthzPlugin.AuthZRes&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;Request&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
+    &amp;quot;User&amp;quot;:              &amp;quot;The user identification&amp;quot;,
+    &amp;quot;UserAuthNMethod&amp;quot;:   &amp;quot;The authentication method used&amp;quot;,
+    &amp;quot;RequestMethod&amp;quot;:     &amp;quot;The HTTP method&amp;quot;,
+    &amp;quot;RequestUri&amp;quot;:        &amp;quot;The HTTP request URI&amp;quot;,
+    &amp;quot;RequestBody&amp;quot;:       &amp;quot;Byte array containing the raw HTTP request body&amp;quot;,
+    &amp;quot;RequestHeader&amp;quot;:     &amp;quot;Byte array containing the raw HTTP request header as a map[string][]string&amp;quot;,
+    &amp;quot;RequestStatusCode&amp;quot;: &amp;quot;Request status code&amp;quot;,
+    &amp;quot;ResponseBody&amp;quot;:      &amp;quot;Byte array containing the raw HTTP response body&amp;quot;,
+    &amp;quot;ResponseHeader&amp;quot;:    &amp;quot;Byte array containing the raw HTTP response header as a map[string][]string&amp;quot;,
+    &amp;quot;ResponseStatusCode&amp;quot;:&amp;quot;Response status code&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Response&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
+   &amp;quot;Allow&amp;quot;:              &amp;quot;Determined whether the user is allowed or not&amp;quot;,
+   &amp;quot;Msg&amp;quot;:                &amp;quot;The authorization message&amp;quot;,
+   &amp;quot;Err&amp;quot;:                &amp;quot;The error message if things go wrong&amp;quot;,
+   &amp;quot;ModifiedBody&amp;quot;:       &amp;quot;Byte array containing a modified body of the raw HTTP body (or nil if no changes required)&amp;quot;,
+   &amp;quot;ModifiedHeader&amp;quot;:     &amp;quot;Byte array containing a modified header of the HTTP response (or nil if no changes required)&amp;quot;,
+   &amp;quot;ModifiedStatusCode&amp;quot;: &amp;quot;int containing the modified version of the status code (or 0 if not change is required)&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The modified response enables the authorization plugin to manipulate the content
+of the HTTP response. In case of more than one plugin, each subsequent plugin
+receives a response (optionally) modified by a previous plugin.&lt;/p&gt;
+
+&lt;h3 id=&#34;request-authorization&#34;&gt;Request authorization&lt;/h3&gt;
+
+&lt;p&gt;Each plugin must support two request authorization messages formats, one from the daemon to the plugin and then from the plugin to the daemon. The tables below detail the content expected in each message.&lt;/p&gt;
+
+&lt;h4 id=&#34;daemon-plugin&#34;&gt;Daemon -&amp;gt; Plugin&lt;/h4&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;User&lt;/td&gt;
+&lt;td&gt;string&lt;/td&gt;
+&lt;td&gt;The user identification&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Authentication method&lt;/td&gt;
+&lt;td&gt;string&lt;/td&gt;
+&lt;td&gt;The authentication method used&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Request method&lt;/td&gt;
+&lt;td&gt;enum&lt;/td&gt;
+&lt;td&gt;The HTTP method (GET/DELETE/POST)&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Request URI&lt;/td&gt;
+&lt;td&gt;string&lt;/td&gt;
+&lt;td&gt;The HTTP request URI including API version (e.g., v.1.17/containers/json)&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Request headers&lt;/td&gt;
+&lt;td&gt;map[string]string&lt;/td&gt;
+&lt;td&gt;Request headers as key value pairs (without the authorization header)&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Request body&lt;/td&gt;
+&lt;td&gt;[]byte&lt;/td&gt;
+&lt;td&gt;Raw request body&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h4 id=&#34;plugin-daemon&#34;&gt;Plugin -&amp;gt; Daemon&lt;/h4&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Allow&lt;/td&gt;
+&lt;td&gt;bool&lt;/td&gt;
+&lt;td&gt;Boolean value indicating whether the request is allowed or denied&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Msg&lt;/td&gt;
+&lt;td&gt;string&lt;/td&gt;
+&lt;td&gt;Authorization message (will be returned to the client in case the access is denied)&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Err&lt;/td&gt;
+&lt;td&gt;string&lt;/td&gt;
+&lt;td&gt;Error message (will be returned to the client in case the plugin encounter an error. The string value supplied may appear in logs, so should not include confidential information)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&#34;response-authorization&#34;&gt;Response authorization&lt;/h3&gt;
+
+&lt;p&gt;The plugin must support two authorization messages formats, one from the daemon to the plugin and then from the plugin to the daemon. The tables below detail the content expected in each message.&lt;/p&gt;
+
+&lt;h4 id=&#34;daemon-plugin-1&#34;&gt;Daemon -&amp;gt; Plugin&lt;/h4&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;User&lt;/td&gt;
+&lt;td&gt;string&lt;/td&gt;
+&lt;td&gt;The user identification&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Authentication method&lt;/td&gt;
+&lt;td&gt;string&lt;/td&gt;
+&lt;td&gt;The authentication method used&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Request method&lt;/td&gt;
+&lt;td&gt;string&lt;/td&gt;
+&lt;td&gt;The HTTP method (GET/DELETE/POST)&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Request URI&lt;/td&gt;
+&lt;td&gt;string&lt;/td&gt;
+&lt;td&gt;The HTTP request URI including API version (e.g., v.1.17/containers/json)&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Request headers&lt;/td&gt;
+&lt;td&gt;map[string]string&lt;/td&gt;
+&lt;td&gt;Request headers as key value pairs (without the authorization header)&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Request body&lt;/td&gt;
+&lt;td&gt;[]byte&lt;/td&gt;
+&lt;td&gt;Raw request body&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Response status code&lt;/td&gt;
+&lt;td&gt;int&lt;/td&gt;
+&lt;td&gt;Status code from the docker daemon&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Response headers&lt;/td&gt;
+&lt;td&gt;map[string]string&lt;/td&gt;
+&lt;td&gt;Response headers as key value pairs&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Response body&lt;/td&gt;
+&lt;td&gt;[]byte&lt;/td&gt;
+&lt;td&gt;Raw docker daemon response body&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h4 id=&#34;plugin-daemon-1&#34;&gt;Plugin -&amp;gt; Daemon&lt;/h4&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Allow&lt;/td&gt;
+&lt;td&gt;bool&lt;/td&gt;
+&lt;td&gt;Boolean value indicating whether the response is allowed or denied&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Msg&lt;/td&gt;
+&lt;td&gt;string&lt;/td&gt;
+&lt;td&gt;Authorization message (will be returned to the client in case the access is denied)&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Err&lt;/td&gt;
+&lt;td&gt;string&lt;/td&gt;
+&lt;td&gt;Error message (will be returned to the client in case the plugin encounter an error. The string value supplied may appear in logs, so should not include confidential information)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Administrate</title>
+      <link>https://docs.docker.com/v1.10/engine/admin/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/engine/admin/</guid>
+      <description>&lt;p&gt;&amp;lt;![end-metadata]--&amp;gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Amazon CloudWatch Logs logging driver</title>
+      <link>https://docs.docker.com/v1.10/engine/admin/logging/awslogs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/engine/admin/logging/awslogs/</guid>
+      <description>
+
+&lt;h1 id=&#34;amazon-cloudwatch-logs-logging-driver&#34;&gt;Amazon CloudWatch Logs logging driver&lt;/h1&gt;
+
+&lt;p&gt;The &lt;code&gt;awslogs&lt;/code&gt; logging driver sends container logs to
+&lt;a href=&#34;https://aws.amazon.com/cloudwatch/details/#log-monitoring&#34;&gt;Amazon CloudWatch Logs&lt;/a&gt;.
+Log entries can be retrieved through the &lt;a href=&#34;https://console.aws.amazon.com/cloudwatch/home#logs:&#34;&gt;AWS Management
+Console&lt;/a&gt; or the &lt;a href=&#34;http://docs.aws.amazon.com/cli/latest/reference/logs/index.html&#34;&gt;AWS SDKs
+and Command Line Tools&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;usage&#34;&gt;Usage&lt;/h2&gt;
+
+&lt;p&gt;You can configure the default logging driver by passing the &lt;code&gt;--log-driver&lt;/code&gt;
+option to the Docker daemon:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker daemon --log-driver=awslogs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can set the logging driver for a specific container by using the
+&lt;code&gt;--log-driver&lt;/code&gt; option to &lt;code&gt;docker run&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker run --log-driver=awslogs ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;amazon-cloudwatch-logs-options&#34;&gt;Amazon CloudWatch Logs options&lt;/h2&gt;
+
+&lt;p&gt;You can use the &lt;code&gt;--log-opt NAME=VALUE&lt;/code&gt; flag to specify Amazon CloudWatch Logs logging driver options.&lt;/p&gt;
+
+&lt;h3 id=&#34;awslogs-region&#34;&gt;awslogs-region&lt;/h3&gt;
+
+&lt;p&gt;The &lt;code&gt;awslogs&lt;/code&gt; logging driver sends your Docker logs to a specific region. Use
+the &lt;code&gt;awslogs-region&lt;/code&gt; log option or the &lt;code&gt;AWS_REGION&lt;/code&gt; environment variable to set
+the region.  By default, if your Docker daemon is running on an EC2 instance
+and no region is set, the driver uses the instance&amp;rsquo;s region.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker run --log-driver=awslogs --log-opt awslogs-region=us-east-1 ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;awslogs-group&#34;&gt;awslogs-group&lt;/h3&gt;
+
+&lt;p&gt;You must specify a
+&lt;a href=&#34;http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatchLogs.html&#34;&gt;log group&lt;/a&gt;
+for the &lt;code&gt;awslogs&lt;/code&gt; logging driver.  You can specify the log group with the
+&lt;code&gt;awslogs-group&lt;/code&gt; log option:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker run --log-driver=awslogs --log-opt awslogs-region=us-east-1 --log-opt awslogs-group=myLogGroup ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;awslogs-stream&#34;&gt;awslogs-stream&lt;/h3&gt;
+
+&lt;p&gt;To configure which
+&lt;a href=&#34;http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatchLogs.html&#34;&gt;log stream&lt;/a&gt;
+should be used, you can specify the &lt;code&gt;awslogs-stream&lt;/code&gt; log option.  If not
+specified, the container ID is used as the log stream.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+Log streams within a given log group should only be used by one container
+at a time.  Using the same log stream for multiple containers concurrently
+can cause reduced logging performance.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;credentials&#34;&gt;Credentials&lt;/h2&gt;
+
+&lt;p&gt;You must provide AWS credentials to the Docker daemon to use the &lt;code&gt;awslogs&lt;/code&gt;
+logging driver. You can provide these credentials with the &lt;code&gt;AWS_ACCESS_KEY_ID&lt;/code&gt;,
+&lt;code&gt;AWS_SECRET_ACCESS_KEY&lt;/code&gt;, and &lt;code&gt;AWS_SESSION_TOKEN&lt;/code&gt; environment variables, the
+default AWS shared credentials file (&lt;code&gt;~/.aws/credentials&lt;/code&gt; of the root user), or
+(if you are running the Docker daemon on an Amazon EC2 instance) the Amazon EC2
+instance profile.&lt;/p&gt;
+
+&lt;p&gt;Credentials must have a policy applied that allows the &lt;code&gt;logs:CreateLogStream&lt;/code&gt;
+and &lt;code&gt;logs:PutLogEvents&lt;/code&gt; actions, as shown in the following example.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+  &amp;quot;Version&amp;quot;: &amp;quot;2012-10-17&amp;quot;,
+  &amp;quot;Statement&amp;quot;: [
+    {
+      &amp;quot;Action&amp;quot;: [
+        &amp;quot;logs:CreateLogStream&amp;quot;,
+        &amp;quot;logs:PutLogEvents&amp;quot;
+      ],
+      &amp;quot;Effect&amp;quot;: &amp;quot;Allow&amp;quot;,
+      &amp;quot;Resource&amp;quot;: &amp;quot;*&amp;quot;
+    }
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>AppArmor security profiles for Docker</title>
+      <link>https://docs.docker.com/v1.10/engine/security/apparmor/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/engine/security/apparmor/</guid>
+      <description>
+
+&lt;h1 id=&#34;apparmor-security-profiles-for-docker&#34;&gt;AppArmor security profiles for Docker&lt;/h1&gt;
+
+&lt;p&gt;AppArmor (Application Armor) is a Linux security module that protects an
+operating system and its applications from security threats. To use it, a system
+administrator associates an AppArmor security profile with each program. Docker
+expects to find an AppArmor policy loaded and enforced.&lt;/p&gt;
+
+&lt;p&gt;Docker automatically loads container profiles. The Docker binary installs
+a &lt;code&gt;docker-default&lt;/code&gt; profile in the &lt;code&gt;/etc/apparmor.d/docker&lt;/code&gt; file. This profile
+is used on containers, &lt;em&gt;not&lt;/em&gt; on the Docker Daemon.&lt;/p&gt;
+
+&lt;p&gt;A profile for the Docker Engine Daemon exists but it is not currently installed
+with the deb packages. If you are interested in the source for the Daemon
+profile, it is located in
+&lt;a href=&#34;https://github.com/docker/docker/tree/master/contrib/apparmor&#34;&gt;contrib/apparmor&lt;/a&gt;
+in the Docker Engine source repository.&lt;/p&gt;
+
+&lt;h2 id=&#34;understand-the-policies&#34;&gt;Understand the policies&lt;/h2&gt;
+
+&lt;p&gt;The &lt;code&gt;docker-default&lt;/code&gt; profile is the default for running containers. It is
+moderately protective while providing wide application compatibility. The
+profile is the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;tunables/global&amp;gt;
+
+
+profile docker-default flags=(attach_disconnected,mediate_deleted) {
+
+  #include &amp;lt;abstractions/base&amp;gt;
+
+
+  network,
+  capability,
+  file,
+  umount,
+
+  deny @{PROC}/{*,**^[0-9*],sys/kernel/shm*} wkx,
+  deny @{PROC}/sysrq-trigger rwklx,
+  deny @{PROC}/mem rwklx,
+  deny @{PROC}/kmem rwklx,
+  deny @{PROC}/kcore rwklx,
+
+  deny mount,
+
+  deny /sys/[^f]*/** wklx,
+  deny /sys/f[^s]*/** wklx,
+  deny /sys/fs/[^c]*/** wklx,
+  deny /sys/fs/c[^g]*/** wklx,
+  deny /sys/fs/cg[^r]*/** wklx,
+  deny /sys/firmware/efi/efivars/** rwklx,
+  deny /sys/kernel/security/** rwklx,
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When you run a container, it uses the &lt;code&gt;docker-default&lt;/code&gt; policy unless you
+override it with the &lt;code&gt;security-opt&lt;/code&gt; option. For example, the following
+explicitly specifies the default policy:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ docker run --rm -it --security-opt apparmor:docker-default hello-world
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;loading-and-unloading-profiles&#34;&gt;Loading and Unloading Profiles&lt;/h2&gt;
+
+&lt;p&gt;To load a new profile into AppArmor, for use with containers:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ apparmor_parser -r -W /path/to/your_profile
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then you can run the custom profile with &lt;code&gt;--security-opt&lt;/code&gt; like so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ docker run --rm -it --security-opt apparmor:your_profile hello-world
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To unload a profile from AppArmor:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# stop apparmor
+$ /etc/init.d/apparmor stop
+# unload the profile
+$ apparmor_parser -R /path/to/profile
+# start apparmor
+$ /etc/init.d/apparmor start
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;debugging-apparmor&#34;&gt;Debugging AppArmor&lt;/h2&gt;
+
+&lt;h3 id=&#34;using-dmesg&#34;&gt;Using &lt;code&gt;dmesg&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;Here are some helpful tips for debugging any problems you might be facing with
+regard to AppArmor.&lt;/p&gt;
+
+&lt;p&gt;AppArmor sends quite verbose messaging to &lt;code&gt;dmesg&lt;/code&gt;. Usually an AppArmor line
+will look like the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[ 5442.864673] audit: type=1400 audit(1453830992.845:37): apparmor=&amp;quot;ALLOWED&amp;quot; operation=&amp;quot;open&amp;quot; profile=&amp;quot;/usr/bin/docker&amp;quot; name=&amp;quot;/home/jessie/docker/man/man1/docker-attach.1&amp;quot; pid=10923 comm=&amp;quot;docker&amp;quot; requested_mask=&amp;quot;r&amp;quot; denied_mask=&amp;quot;r&amp;quot; fsuid=1000 ouid=0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In the above example, the you can see &lt;code&gt;profile=/usr/bin/docker&lt;/code&gt;. This means the
+user has the &lt;code&gt;docker-engine&lt;/code&gt; (Docker Engine Daemon) profile loaded.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; On version of Ubuntu &amp;gt; 14.04 this is all fine and well, but Trusty
+users might run into some issues when trying to &lt;code&gt;docker exec&lt;/code&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Let&amp;rsquo;s look at another log line:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[ 3256.689120] type=1400 audit(1405454041.341:73): apparmor=&amp;quot;DENIED&amp;quot; operation=&amp;quot;ptrace&amp;quot; profile=&amp;quot;docker-default&amp;quot; pid=17651 comm=&amp;quot;docker&amp;quot; requested_mask=&amp;quot;receive&amp;quot; denied_mask=&amp;quot;receive&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This time the profile is &lt;code&gt;docker-default&lt;/code&gt;, which is run on containers by
+default unless in &lt;code&gt;privileged&lt;/code&gt; mode. It is telling us, that apparmor has denied
+&lt;code&gt;ptrace&lt;/code&gt; in the container. This is great.&lt;/p&gt;
+
+&lt;h3 id=&#34;using-aa-status&#34;&gt;Using &lt;code&gt;aa-status&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;If you need to check which profiles are loaded you can use &lt;code&gt;aa-status&lt;/code&gt;. The
+output looks like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ sudo aa-status
+apparmor module is loaded.
+14 profiles are loaded.
+1 profiles are in enforce mode.
+   docker-default
+13 profiles are in complain mode.
+   /usr/bin/docker
+   /usr/bin/docker///bin/cat
+   /usr/bin/docker///bin/ps
+   /usr/bin/docker///sbin/apparmor_parser
+   /usr/bin/docker///sbin/auplink
+   /usr/bin/docker///sbin/blkid
+   /usr/bin/docker///sbin/iptables
+   /usr/bin/docker///sbin/mke2fs
+   /usr/bin/docker///sbin/modprobe
+   /usr/bin/docker///sbin/tune2fs
+   /usr/bin/docker///sbin/xtables-multi
+   /usr/bin/docker///sbin/zfs
+   /usr/bin/docker///usr/bin/xz
+38 processes have profiles defined.
+37 processes are in enforce mode.
+   docker-default (6044)
+   ...
+   docker-default (31899)
+1 processes are in complain mode.
+   /usr/bin/docker (29756)
+0 processes are unconfined but have a profile defined.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In the above output you can tell that the &lt;code&gt;docker-default&lt;/code&gt; profile running on
+various container PIDs is in &lt;code&gt;enforce&lt;/code&gt; mode. This means AppArmor will actively
+block and audit in &lt;code&gt;dmesg&lt;/code&gt; anything outside the bounds of the &lt;code&gt;docker-default&lt;/code&gt;
+profile.&lt;/p&gt;
+
+&lt;p&gt;The output above also shows the &lt;code&gt;/usr/bin/docker&lt;/code&gt; (Docker Engine Daemon)
+profile is running in &lt;code&gt;complain&lt;/code&gt; mode. This means AppArmor will &lt;em&gt;only&lt;/em&gt; log to
+&lt;code&gt;dmesg&lt;/code&gt; activity outside the bounds of the profile. (Except in the case of
+Ubuntu Trusty, where we have seen some interesting behaviors being enforced.)&lt;/p&gt;
+
+&lt;h2 id=&#34;contributing-to-apparmor-code-in-docker&#34;&gt;Contributing to AppArmor code in Docker&lt;/h2&gt;
+
+&lt;p&gt;Advanced users and package managers can find a profile for &lt;code&gt;/usr/bin/docker&lt;/code&gt;
+(Docker Engine Daemon) underneath
+&lt;a href=&#34;https://github.com/docker/docker/tree/master/contrib/apparmor&#34;&gt;contrib/apparmor&lt;/a&gt;
+in the Docker Engine source repository.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;docker-default&lt;/code&gt; profile for containers lives in
+&lt;a href=&#34;https://github.com/docker/docker/tree/master/profiles/apparmor&#34;&gt;profiles/apparmor&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Applied Docker</title>
+      <link>https://docs.docker.com/v1.10/engine/articles/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/engine/articles/</guid>
+      <description>&lt;p&gt;&amp;lt;![end-metadata]--&amp;gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Apply custom metadata</title>
+      <link>https://docs.docker.com/v1.10/engine/userguide/labels-custom-metadata/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/engine/userguide/labels-custom-metadata/</guid>
+      <description>
+
+&lt;h1 id=&#34;apply-custom-metadata&#34;&gt;Apply custom metadata&lt;/h1&gt;
+
+&lt;p&gt;You can apply metadata to your images, containers, or daemons via
+labels. Labels serve a wide range of uses, such as adding notes or licensing
+information to an image, or to identify a host.&lt;/p&gt;
+
+&lt;p&gt;A label is a &lt;code&gt;&amp;lt;key&amp;gt;&lt;/code&gt; / &lt;code&gt;&amp;lt;value&amp;gt;&lt;/code&gt; pair. Docker stores the label values as
+&lt;em&gt;strings&lt;/em&gt;. You can specify multiple labels but each &lt;code&gt;&amp;lt;key&amp;gt;&lt;/code&gt; must be
+unique or the value will be overwritten. If you specify the same &lt;code&gt;key&lt;/code&gt; several
+times but with different values, newer labels overwrite previous labels. Docker
+uses the last &lt;code&gt;key=value&lt;/code&gt; you supply.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Support for daemon-labels was added in Docker 1.4.1. Labels on
+containers and images are new in Docker 1.6.0&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;label-keys-namespaces&#34;&gt;Label keys (namespaces)&lt;/h2&gt;
+
+&lt;p&gt;Docker puts no hard restrictions on the &lt;code&gt;key&lt;/code&gt; used for a label. However, using
+simple keys can easily lead to conflicts. For example, you have chosen to
+categorize your images by CPU architecture using &amp;ldquo;architecture&amp;rdquo; labels in
+your Dockerfiles:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;LABEL architecture=&amp;quot;amd64&amp;quot;
+
+LABEL architecture=&amp;quot;ARMv7&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Another user may apply the same label based on a building&amp;rsquo;s &amp;ldquo;architecture&amp;rdquo;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;LABEL architecture=&amp;quot;Art Nouveau&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To prevent naming conflicts, Docker recommends using namespaces to label keys
+using reverse domain notation. Use the following guidelines to name your keys:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;All (third-party) tools should prefix their keys with the
+reverse DNS notation of a domain controlled by the author. For
+example, &lt;code&gt;com.example.some-label&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The &lt;code&gt;com.docker.*&lt;/code&gt;, &lt;code&gt;io.docker.*&lt;/code&gt; and &lt;code&gt;org.dockerproject.*&lt;/code&gt; namespaces are
+reserved for Docker&amp;rsquo;s internal use.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Keys should only consist of lower-cased alphanumeric characters,
+dots and dashes (for example, &lt;code&gt;[a-z0-9-.]&lt;/code&gt;).&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Keys should start &lt;em&gt;and&lt;/em&gt; end with an alpha numeric character.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Keys may not contain consecutive dots or dashes.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Keys &lt;em&gt;without&lt;/em&gt; namespace (dots) are reserved for CLI use. This allows end-
+users to add metadata to their containers and images without having to type
+cumbersome namespaces on the command-line.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These are simply guidelines and Docker does not &lt;em&gt;enforce&lt;/em&gt; them. However, for
+the benefit of the community, you &lt;em&gt;should&lt;/em&gt; use namespaces for your label keys.&lt;/p&gt;
+
+&lt;h2 id=&#34;store-structured-data-in-labels&#34;&gt;Store structured data in labels&lt;/h2&gt;
+
+&lt;p&gt;Label values can contain any data type as long as it can be represented as a
+string. For example, consider this JSON document:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+    &amp;quot;Description&amp;quot;: &amp;quot;A containerized foobar&amp;quot;,
+    &amp;quot;Usage&amp;quot;: &amp;quot;docker run --rm example/foobar [args]&amp;quot;,
+    &amp;quot;License&amp;quot;: &amp;quot;GPL&amp;quot;,
+    &amp;quot;Version&amp;quot;: &amp;quot;0.0.1-beta&amp;quot;,
+    &amp;quot;aBoolean&amp;quot;: true,
+    &amp;quot;aNumber&amp;quot; : 0.01234,
+    &amp;quot;aNestedArray&amp;quot;: [&amp;quot;a&amp;quot;, &amp;quot;b&amp;quot;, &amp;quot;c&amp;quot;]
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can store this struct in a label by serializing it to a string first:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;LABEL com.example.image-specs=&amp;quot;{\&amp;quot;Description\&amp;quot;:\&amp;quot;A containerized foobar\&amp;quot;,\&amp;quot;Usage\&amp;quot;:\&amp;quot;docker run --rm example\\/foobar [args]\&amp;quot;,\&amp;quot;License\&amp;quot;:\&amp;quot;GPL\&amp;quot;,\&amp;quot;Version\&amp;quot;:\&amp;quot;0.0.1-beta\&amp;quot;,\&amp;quot;aBoolean\&amp;quot;:true,\&amp;quot;aNumber\&amp;quot;:0.01234,\&amp;quot;aNestedArray\&amp;quot;:[\&amp;quot;a\&amp;quot;,\&amp;quot;b\&amp;quot;,\&amp;quot;c\&amp;quot;]}&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;While it is &lt;em&gt;possible&lt;/em&gt; to store structured data in label values, Docker treats
+this data as a &amp;lsquo;regular&amp;rsquo; string. This means that Docker doesn&amp;rsquo;t offer ways to
+query (filter) based on nested properties. If your tool needs to filter on
+nested properties, the tool itself needs to implement this functionality.&lt;/p&gt;
+
+&lt;h2 id=&#34;add-labels-to-images&#34;&gt;Add labels to images&lt;/h2&gt;
+
+&lt;p&gt;To add labels to an image, use the &lt;code&gt;LABEL&lt;/code&gt; instruction in your Dockerfile:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;LABEL [&amp;lt;namespace&amp;gt;.]&amp;lt;key&amp;gt;=&amp;lt;value&amp;gt; ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;LABEL&lt;/code&gt; instruction adds a label to your image. A &lt;code&gt;LABEL&lt;/code&gt; consists of a &lt;code&gt;&amp;lt;key&amp;gt;&lt;/code&gt;
+and a &lt;code&gt;&amp;lt;value&amp;gt;&lt;/code&gt;.
+Use an empty string for labels  that don&amp;rsquo;t have a &lt;code&gt;&amp;lt;value&amp;gt;&lt;/code&gt;,
+Use surrounding quotes or backslashes for labels that contain
+white space characters in the &lt;code&gt;&amp;lt;value&amp;gt;&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;LABEL vendor=ACME\ Incorporated
+LABEL com.example.version.is-beta=
+LABEL com.example.version.is-production=&amp;quot;&amp;quot;
+LABEL com.example.version=&amp;quot;0.0.1-beta&amp;quot;
+LABEL com.example.release-date=&amp;quot;2015-02-12&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;LABEL&lt;/code&gt; instruction also supports setting multiple &lt;code&gt;&amp;lt;key&amp;gt;&lt;/code&gt; / &lt;code&gt;&amp;lt;value&amp;gt;&lt;/code&gt; pairs
+in a single instruction:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;LABEL com.example.version=&amp;quot;0.0.1-beta&amp;quot; com.example.release-date=&amp;quot;2015-02-12&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Long lines can be split up by using a backslash (&lt;code&gt;\&lt;/code&gt;) as continuation marker:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;LABEL vendor=ACME\ Incorporated \
+      com.example.is-beta= \
+      com.example.is-production=&amp;quot;&amp;quot; \
+      com.example.version=&amp;quot;0.0.1-beta&amp;quot; \
+      com.example.release-date=&amp;quot;2015-02-12&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Docker recommends you add multiple labels in a single &lt;code&gt;LABEL&lt;/code&gt; instruction. Using
+individual instructions for each label can result in an inefficient image. This
+is because each &lt;code&gt;LABEL&lt;/code&gt; instruction in a Dockerfile produces a new IMAGE layer.&lt;/p&gt;
+
+&lt;p&gt;You can view the labels via the &lt;code&gt;docker inspect&lt;/code&gt; command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker inspect 4fa6e0f0c678
+
+...
+&amp;quot;Labels&amp;quot;: {
+    &amp;quot;vendor&amp;quot;: &amp;quot;ACME Incorporated&amp;quot;,
+    &amp;quot;com.example.is-beta&amp;quot;: &amp;quot;&amp;quot;,
+    &amp;quot;com.example.is-production&amp;quot;: &amp;quot;&amp;quot;,
+    &amp;quot;com.example.version&amp;quot;: &amp;quot;0.0.1-beta&amp;quot;,
+    &amp;quot;com.example.release-date&amp;quot;: &amp;quot;2015-02-12&amp;quot;
+}
+...
+
+# Inspect labels on container
+$ docker inspect -f &amp;quot;{{json .Config.Labels }}&amp;quot; 4fa6e0f0c678
+
+{&amp;quot;Vendor&amp;quot;:&amp;quot;ACME Incorporated&amp;quot;,&amp;quot;com.example.is-beta&amp;quot;:&amp;quot;&amp;quot;, &amp;quot;com.example.is-production&amp;quot;:&amp;quot;&amp;quot;, &amp;quot;com.example.version&amp;quot;:&amp;quot;0.0.1-beta&amp;quot;,&amp;quot;com.example.release-date&amp;quot;:&amp;quot;2015-02-12&amp;quot;}
+
+# Inspect labels on images
+$ docker inspect -f &amp;quot;{{json .ContainerConfig.Labels }}&amp;quot; myimage
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;query-labels&#34;&gt;Query labels&lt;/h2&gt;
+
+&lt;p&gt;Besides storing metadata, you can filter images and containers by label. To list all
+running containers that have the &lt;code&gt;com.example.is-beta&lt;/code&gt; label:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# List all running containers that have a `com.example.is-beta` label
+$ docker ps --filter &amp;quot;label=com.example.is-beta&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;List all running containers with the label &lt;code&gt;color&lt;/code&gt; that have a value &lt;code&gt;blue&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker ps --filter &amp;quot;label=color=blue&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;List all images with the label &lt;code&gt;vendor&lt;/code&gt; that have the value &lt;code&gt;ACME&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker images --filter &amp;quot;label=vendor=ACME&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;container-labels&#34;&gt;Container labels&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;docker run \
+   -d \
+   --label com.example.group=&amp;quot;webservers&amp;quot; \
+   --label com.example.environment=&amp;quot;production&amp;quot; \
+   busybox \
+   top
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Please refer to the &lt;a href=&#34;#query-labels&#34;&gt;Query labels&lt;/a&gt; section above for information
+on how to query labels set on a container.&lt;/p&gt;
+
+&lt;h2 id=&#34;daemon-labels&#34;&gt;Daemon labels&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;docker daemon \
+  --dns 8.8.8.8 \
+  --dns 8.8.4.4 \
+  -H unix:///var/run/docker.sock \
+  --label com.example.environment=&amp;quot;production&amp;quot; \
+  --label com.example.storage=&amp;quot;ssd&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;These labels appear as part of the &lt;code&gt;docker info&lt;/code&gt; output for the daemon:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker -D info
+Containers: 12
+ Running: 5
+ Paused: 2
+ Stopped: 5
+Images: 672
+Server Version: 1.9.0
+Storage Driver: aufs
+ Root Dir: /var/lib/docker/aufs
+ Backing Filesystem: extfs
+ Dirs: 697
+ Dirperm1 Supported: true
+Execution Driver: native-0.2
+Logging Driver: json-file
+Kernel Version: 3.19.0-22-generic
+Operating System: Ubuntu 15.04
+CPUs: 24
+Total Memory: 62.86 GiB
+Name: docker
+ID: I54V:OLXT:HVMM:TPKO:JPHQ:CQCD:JNLC:O3BZ:4ZVJ:43XJ:PFHZ:6N2S
+Debug mode (server): true
+ File Descriptors: 59
+ Goroutines: 159
+ System Time: 2015-09-23T14:04:20.699842089+08:00
+ EventsListeners: 0
+ Init SHA1:
+ Init Path: /usr/bin/docker
+ Docker Root Dir: /var/lib/docker
+ Http Proxy: http://test:test@localhost:8080
+ Https Proxy: https://test:test@localhost:8080
+WARNING: No swap limit support
+Username: svendowideit
+Registry: [https://index.docker.io/v1/]
+Labels:
+ com.example.environment=production
+ com.example.storage=ssd
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Automatically start containers</title>
+      <link>https://docs.docker.com/v1.10/engine/admin/host_integration/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/engine/admin/host_integration/</guid>
+      <description>
+
+&lt;h1 id=&#34;automatically-start-containers&#34;&gt;Automatically start containers&lt;/h1&gt;
+
+&lt;p&gt;As of Docker 1.2,
+&lt;a href=&#34;../v1.10/engine/reference/run/#restart-policies-restart&#34;&gt;restart policies&lt;/a&gt; are the
+built-in Docker mechanism for restarting containers when they exit. If set,
+restart policies will be used when the Docker daemon starts up, as typically
+happens after a system boot. Restart policies will ensure that linked containers
+are started in the correct order.&lt;/p&gt;
+
+&lt;p&gt;If restart policies don&amp;rsquo;t suit your needs (i.e., you have non-Docker processes
+that depend on Docker containers), you can use a process manager like
+&lt;a href=&#34;http://upstart.ubuntu.com/&#34;&gt;upstart&lt;/a&gt;,
+&lt;a href=&#34;http://freedesktop.org/wiki/Software/systemd/&#34;&gt;systemd&lt;/a&gt; or
+&lt;a href=&#34;http://supervisord.org/&#34;&gt;supervisor&lt;/a&gt; instead.&lt;/p&gt;
+
+&lt;h2 id=&#34;using-a-process-manager&#34;&gt;Using a process manager&lt;/h2&gt;
+
+&lt;p&gt;Docker does not set any restart policies by default, but be aware that they will
+conflict with most process managers. So don&amp;rsquo;t set restart policies if you are
+using a process manager.&lt;/p&gt;
+
+&lt;p&gt;When you have finished setting up your image and are happy with your
+running container, you can then attach a process manager to manage it.
+When you run &lt;code&gt;docker start -a&lt;/code&gt;, Docker will automatically attach to the
+running container, or start it if needed and forward all signals so that
+the process manager can detect when a container stops and correctly
+restart it.&lt;/p&gt;
+
+&lt;p&gt;Here are a few sample scripts for systemd and upstart to integrate with
+Docker.&lt;/p&gt;
+
+&lt;h2 id=&#34;examples&#34;&gt;Examples&lt;/h2&gt;
+
+&lt;p&gt;The examples below show configuration files for two popular process managers,
+upstart and systemd. In these examples, we&amp;rsquo;ll assume that we have already
+created a container to run Redis with &lt;code&gt;--name=redis_server&lt;/code&gt;. These files define
+a new service that will be started after the docker daemon service has started.&lt;/p&gt;
+
+&lt;h3 id=&#34;upstart&#34;&gt;upstart&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;description &amp;quot;Redis container&amp;quot;
+author &amp;quot;Me&amp;quot;
+start on filesystem and started docker
+stop on runlevel [!2345]
+respawn
+script
+  /usr/bin/docker start -a redis_server
+end script
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;systemd&#34;&gt;systemd&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;[Unit]
+Description=Redis container
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/docker start -a redis_server
+ExecStop=/usr/bin/docker stop -t 2 redis_server
+
+[Install]
+WantedBy=local.target
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you need to pass options to the redis container (such as &lt;code&gt;--env&lt;/code&gt;),
+then you&amp;rsquo;ll need to use &lt;code&gt;docker run&lt;/code&gt; rather than &lt;code&gt;docker start&lt;/code&gt;. This will
+create a new container every time the service is started, which will be stopped
+and removed when the service is stopped.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[Service]
+...
+ExecStart=/usr/bin/docker run --env foo=bar --name redis_server redis
+ExecStop=/usr/bin/docker stop -t 2 redis_server ; /usr/bin/docker rm -f redis_server
+...
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Automation with content trust</title>
+      <link>https://docs.docker.com/v1.10/engine/security/trust/trust_automation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/engine/security/trust/trust_automation/</guid>
+      <description>
+
+&lt;h1 id=&#34;automation-with-content-trust&#34;&gt;Automation with content trust&lt;/h1&gt;
+
+&lt;p&gt;Your automation systems that pull or build images can also work with trust. Any automation environment must set &lt;code&gt;DOCKER_TRUST_ENABLED&lt;/code&gt; either manually or in in a scripted fashion before processing images.&lt;/p&gt;
+
+&lt;h2 id=&#34;bypass-requests-for-passphrases&#34;&gt;Bypass requests for passphrases&lt;/h2&gt;
+
+&lt;p&gt;To allow tools to wrap docker and push trusted content, there are two
+environment variables that allow you to provide the passphrases without an
+expect script, or typing them in:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;DOCKER_CONTENT_TRUST_ROOT_PASSPHRASE&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Docker attempts to use the contents of these environment variables as passphrase
+for the keys. For example, an image publisher can export the repository &lt;code&gt;target&lt;/code&gt;
+and &lt;code&gt;snapshot&lt;/code&gt; passphrases:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$  export DOCKER_CONTENT_TRUST_ROOT_PASSPHRASE=&amp;quot;u7pEQcGoebUHm6LHe6&amp;quot;
+$  export DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE=&amp;quot;l7pEQcTKJjUHm6Lpe4&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then, when pushing a new tag the Docker client does not request these values but signs automatically:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$  docker push docker/trusttest:latest
+The push refers to a repository [docker.io/docker/trusttest] (len: 1)
+a9539b34a6ab: Image already exists
+b3dbab3810fc: Image already exists
+latest: digest: sha256:d149ab53f871 size: 3355
+Signing and pushing trust metadata
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;building-with-content-trust&#34;&gt;Building with content trust&lt;/h2&gt;
+
+&lt;p&gt;You can also build with content trust. Before running the &lt;code&gt;docker build&lt;/code&gt; command, you should set the environment variable &lt;code&gt;DOCKER_CONTENT_TRUST&lt;/code&gt; either manually or in in a scripted fashion. Consider the simple Dockerfile below.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-Dockerfile&#34;&gt;FROM docker/trusttest:latest
+RUN echo
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;FROM&lt;/code&gt; tag is pulling a signed image. You cannot build an image that has a
+&lt;code&gt;FROM&lt;/code&gt; that is not either present locally or signed. Given that content trust
+data exists for the tag &lt;code&gt;latest&lt;/code&gt;, the following build should succeed:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$  docker build -t docker/trusttest:testing .
+Using default tag: latest
+latest: Pulling from docker/trusttest
+
+b3dbab3810fc: Pull complete
+a9539b34a6ab: Pull complete
+Digest: sha256:d149ab53f871
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If content trust is enabled, building from a Dockerfile that relies on tag without trust data, causes the build command to fail:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$  docker build -t docker/trusttest:testing .
+unable to process Dockerfile: No trust data for notrust
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;related-information&#34;&gt;Related information&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/engine/security/trust/content_trust/&#34;&gt;Content trust in Docker&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/engine/security/trust/trust_key_mng/&#34;&gt;Manage keys for content trust&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/engine/security/trust/trust_sandbox/&#34;&gt;Play in a content trust sandbox&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Best practices for writing Dockerfiles</title>
+      <link>https://docs.docker.com/v1.10/engine/userguide/eng-image/dockerfile_best-practices/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/engine/userguide/eng-image/dockerfile_best-practices/</guid>
+      <description>
+
+&lt;h1 id=&#34;best-practices-for-writing-dockerfiles&#34;&gt;Best practices for writing Dockerfiles&lt;/h1&gt;
+
+&lt;p&gt;Docker can build images automatically by reading the instructions from a
+&lt;code&gt;Dockerfile&lt;/code&gt;, a text file that contains all the commands, in order, needed to
+build a given image. &lt;code&gt;Dockerfile&lt;/code&gt;s adhere to a specific format and use a
+specific set of instructions. You can learn the basics on the
+&lt;a href=&#34;../v1.10/engine/reference/builder/&#34;&gt;Dockerfile Reference&lt;/a&gt; page. If
+you’re new to writing &lt;code&gt;Dockerfile&lt;/code&gt;s, you should start there.&lt;/p&gt;
+
+&lt;p&gt;This document covers the best practices and methods recommended by Docker,
+Inc. and the Docker community for creating easy-to-use, effective
+&lt;code&gt;Dockerfile&lt;/code&gt;s. We strongly suggest you follow these recommendations (in fact,
+if you’re creating an Official Image, you &lt;em&gt;must&lt;/em&gt; adhere to these practices).&lt;/p&gt;
+
+&lt;p&gt;You can see many of these practices and recommendations in action in the &lt;a href=&#34;https://github.com/docker-library/buildpack-deps/blob/master/jessie/Dockerfile&#34;&gt;buildpack-deps &lt;code&gt;Dockerfile&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Note: for more detailed explanations of any of the Dockerfile commands
+mentioned here, visit the &lt;a href=&#34;../v1.10/engine/reference/builder/&#34;&gt;Dockerfile Reference&lt;/a&gt; page.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;general-guidelines-and-recommendations&#34;&gt;General guidelines and recommendations&lt;/h2&gt;
+
+&lt;h3 id=&#34;containers-should-be-ephemeral&#34;&gt;Containers should be ephemeral&lt;/h3&gt;
+
+&lt;p&gt;The container produced by the image your &lt;code&gt;Dockerfile&lt;/code&gt; defines should be as
+ephemeral as possible. By “ephemeral,” we mean that it can be stopped and
+destroyed and a new one built and put in place with an absolute minimum of
+set-up and configuration.&lt;/p&gt;
+
+&lt;h3 id=&#34;use-a-dockerignore-file&#34;&gt;Use a .dockerignore file&lt;/h3&gt;
+
+&lt;p&gt;In most cases, it&amp;rsquo;s best to put each Dockerfile in an empty directory. Then,
+add to that directory only the files needed for building the Dockerfile. To
+increase the build&amp;rsquo;s performance, you can exclude files and directories by
+adding a &lt;code&gt;.dockerignore&lt;/code&gt; file to that directory as well. This file supports
+exclusion patterns similar to &lt;code&gt;.gitignore&lt;/code&gt; files. For information on creating one,
+see the &lt;a href=&#34;../v1.10/engine/reference/builder/#dockerignore-file&#34;&gt;.dockerignore file&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;avoid-installing-unnecessary-packages&#34;&gt;Avoid installing unnecessary packages&lt;/h3&gt;
+
+&lt;p&gt;In order to reduce complexity, dependencies, file sizes, and build times, you
+should avoid installing extra or unnecessary packages just because they
+might be “nice to have.” For example, you don’t need to include a text editor
+in a database image.&lt;/p&gt;
+
+&lt;h3 id=&#34;run-only-one-process-per-container&#34;&gt;Run only one process per container&lt;/h3&gt;
+
+&lt;p&gt;In almost all cases, you should only run a single process in a single
+container. Decoupling applications into multiple containers makes it much
+easier to scale horizontally and reuse containers. If that service depends on
+another service, make use of &lt;a href=&#34;../v1.10/engine/userguide/networking/default_network/dockerlinks/&#34;&gt;container linking&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;minimize-the-number-of-layers&#34;&gt;Minimize the number of layers&lt;/h3&gt;
+
+&lt;p&gt;You need to find the balance between readability (and thus long-term
+maintainability) of the &lt;code&gt;Dockerfile&lt;/code&gt; and minimizing the number of layers it
+uses. Be strategic and cautious about the number of layers you use.&lt;/p&gt;
+
+&lt;h3 id=&#34;sort-multi-line-arguments&#34;&gt;Sort multi-line arguments&lt;/h3&gt;
+
+&lt;p&gt;Whenever possible, ease later changes by sorting multi-line arguments
+alphanumerically. This will help you avoid duplication of packages and make the
+list much easier to update. This also makes PRs a lot easier to read and
+review. Adding a space before a backslash (&lt;code&gt;\&lt;/code&gt;) helps as well.&lt;/p&gt;
+
+&lt;p&gt;Here’s an example from the &lt;a href=&#34;https://github.com/docker-library/buildpack-deps&#34;&gt;&lt;code&gt;buildpack-deps&lt;/code&gt; image&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;RUN apt-get update &amp;amp;&amp;amp; apt-get install -y \
+  bzr \
+  cvs \
+  git \
+  mercurial \
+  subversion
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;build-cache&#34;&gt;Build cache&lt;/h3&gt;
+
+&lt;p&gt;During the process of building an image Docker will step through the
+instructions in your &lt;code&gt;Dockerfile&lt;/code&gt; executing each in the order specified.
+As each instruction is examined Docker will look for an existing image in its
+cache that it can reuse, rather than creating a new (duplicate) image.
+If you do not want to use the cache at all you can use the &lt;code&gt;--no-cache=true&lt;/code&gt;
+option on the &lt;code&gt;docker build&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;p&gt;However, if you do let Docker use its cache then it is very important to
+understand when it will, and will not, find a matching image. The basic rules
+that Docker will follow are outlined below:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Starting with a base image that is already in the cache, the next
+instruction is compared against all child images derived from that base
+image to see if one of them was built using the exact same instruction. If
+not, the cache is invalidated.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;In most cases simply comparing the instruction in the &lt;code&gt;Dockerfile&lt;/code&gt; with one
+of the child images is sufficient.  However, certain instructions require
+a little more examination and explanation.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;For the &lt;code&gt;ADD&lt;/code&gt; and &lt;code&gt;COPY&lt;/code&gt; instructions, the contents of the file(s)
+in the image are examined and a checksum is calculated for each file.
+The last-modified and last-accessed times of the file(s) are not considered in
+these checksums. During the cache lookup, the checksum is compared against the
+checksum in the existing images. If anything has changed in the file(s), such
+as the contents and metadata, then the cache is invalidated.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Aside from the &lt;code&gt;ADD&lt;/code&gt; and &lt;code&gt;COPY&lt;/code&gt; commands, cache checking will not look at the
+files in the container to determine a cache match. For example, when processing
+a &lt;code&gt;RUN apt-get -y update&lt;/code&gt; command the files updated in the container
+will not be examined to determine if a cache hit exists.  In that case just
+the command string itself will be used to find a match.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Once the cache is invalidated, all subsequent &lt;code&gt;Dockerfile&lt;/code&gt; commands will
+generate new images and the cache will not be used.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-dockerfile-instructions&#34;&gt;The Dockerfile instructions&lt;/h2&gt;
+
+&lt;p&gt;Below you&amp;rsquo;ll find recommendations for the best way to write the
+various instructions available for use in a &lt;code&gt;Dockerfile&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;from&#34;&gt;FROM&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;../v1.10/engine/reference/builder/#from&#34;&gt;Dockerfile reference for the FROM instruction&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Whenever possible, use current Official Repositories as the basis for your
+image. We recommend the &lt;a href=&#34;https://registry.hub.docker.com/_/debian/&#34;&gt;Debian image&lt;/a&gt;
+since it’s very tightly controlled and kept extremely minimal (currently under
+100 mb), while still being a full distribution.&lt;/p&gt;
+
+&lt;h3 id=&#34;run&#34;&gt;RUN&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;../v1.10/engine/reference/builder/#run&#34;&gt;Dockerfile reference for the RUN instruction&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;As always, to make your &lt;code&gt;Dockerfile&lt;/code&gt; more readable, understandable, and
+maintainable, split long or complex &lt;code&gt;RUN&lt;/code&gt; statements on multiple lines separated
+with backslashes.&lt;/p&gt;
+
+&lt;h3 id=&#34;apt-get&#34;&gt;apt-get&lt;/h3&gt;
+
+&lt;p&gt;Probably the most common use-case for &lt;code&gt;RUN&lt;/code&gt; is an application of &lt;code&gt;apt-get&lt;/code&gt;. The
+&lt;code&gt;RUN apt-get&lt;/code&gt; command, because it installs packages, has several gotchas to look
+out for.&lt;/p&gt;
+
+&lt;p&gt;You should avoid &lt;code&gt;RUN apt-get upgrade&lt;/code&gt; or &lt;code&gt;dist-upgrade&lt;/code&gt;, as many of the
+“essential” packages from the base images won&amp;rsquo;t upgrade inside an unprivileged
+container. If a package contained in the base image is out-of-date, you should
+contact its maintainers.
+If you know there’s a particular package, &lt;code&gt;foo&lt;/code&gt;, that needs to be updated, use
+&lt;code&gt;apt-get install -y foo&lt;/code&gt; to update automatically.&lt;/p&gt;
+
+&lt;p&gt;Always combine  &lt;code&gt;RUN apt-get update&lt;/code&gt; with &lt;code&gt;apt-get install&lt;/code&gt; in the same &lt;code&gt;RUN&lt;/code&gt;
+statement, for example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    RUN apt-get update &amp;amp;&amp;amp; apt-get install -y \
+        package-bar \
+        package-baz \
+        package-foo
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Using &lt;code&gt;apt-get update&lt;/code&gt; alone in a &lt;code&gt;RUN&lt;/code&gt; statement causes caching issues and
+subsequent &lt;code&gt;apt-get install&lt;/code&gt; instructions fail.
+For example, say you have a Dockerfile:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    FROM ubuntu:14.04
+    RUN apt-get update
+    RUN apt-get install -y curl
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After building the image, all layers are in the Docker cache. Suppose you later
+modify &lt;code&gt;apt-get install&lt;/code&gt; by adding extra package:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    FROM ubuntu:14.04
+    RUN apt-get update
+    RUN apt-get install -y curl nginx
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Docker sees the initial and modified instructions as identical and reuses the
+cache from previous steps. As a result the &lt;code&gt;apt-get update&lt;/code&gt; is &lt;em&gt;NOT&lt;/em&gt; executed
+because the build uses the cached version. Because the &lt;code&gt;apt-get update&lt;/code&gt; is not
+run, your build can potentially get an outdated version of the &lt;code&gt;curl&lt;/code&gt; and &lt;code&gt;nginx&lt;/code&gt;
+packages.&lt;/p&gt;
+
+&lt;p&gt;Using  &lt;code&gt;RUN apt-get update &amp;amp;&amp;amp; apt-get install -y&lt;/code&gt; ensures your Dockerfile
+installs the latest package versions with no further coding or manual
+intervention. This technique is known as &amp;ldquo;cache busting&amp;rdquo;. You can also achieve
+cache-busting by specifying a package version. This is known as version pinning,
+for example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    RUN apt-get update &amp;amp;&amp;amp; apt-get install -y \
+        package-bar \
+        package-baz \
+        package-foo=1.3.*
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Version pinning forces the build to retrieve a particular version regardless of
+what’s in the cache. This technique can also reduce failures due to unanticipated changes
+in required packages.&lt;/p&gt;
+
+&lt;p&gt;Below is a well-formed &lt;code&gt;RUN&lt;/code&gt; instruction that demonstrates all the &lt;code&gt;apt-get&lt;/code&gt;
+recommendations.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;RUN apt-get update &amp;amp;&amp;amp; apt-get install -y \
+    aufs-tools \
+    automake \
+    build-essential \
+    curl \
+    dpkg-sig \
+    libcap-dev \
+    libsqlite3-dev \
+    mercurial \
+    reprepro \
+    ruby1.9.1 \
+    ruby1.9.1-dev \
+    s3cmd=1.1.* \
+ &amp;amp;&amp;amp; rm -rf /var/lib/apt/lists/*
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;s3cmd&lt;/code&gt; instructions specifies a version &lt;code&gt;1.1.0*&lt;/code&gt;. If the image previously
+used an older version, specifying the new one causes a cache bust of &lt;code&gt;apt-get
+update&lt;/code&gt; and ensure the installation of the new version. Listing packages on
+each line can also prevent mistakes in package duplication.&lt;/p&gt;
+
+&lt;p&gt;In addition, cleaning up the apt cache and removing &lt;code&gt;/var/lib/apt/lists&lt;/code&gt; helps
+keep the image size down. Since the &lt;code&gt;RUN&lt;/code&gt; statement starts with
+&lt;code&gt;apt-get update&lt;/code&gt;, the package cache will always be refreshed prior to
+&lt;code&gt;apt-get install&lt;/code&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The official Debian and Ubuntu images &lt;a href=&#34;https://github.com/docker/docker/blob/03e2923e42446dbb830c654d0eec323a0b4ef02a/contrib/mkimage/debootstrap#L82-L105&#34;&gt;automatically run &lt;code&gt;apt-get clean&lt;/code&gt;&lt;/a&gt;,
+so explicit invocation is not required.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;cmd&#34;&gt;CMD&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;../v1.10/engine/reference/builder/#cmd&#34;&gt;Dockerfile reference for the CMD instruction&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;CMD&lt;/code&gt; instruction should be used to run the software contained by your
+image, along with any arguments. &lt;code&gt;CMD&lt;/code&gt; should almost always be used in the
+form of &lt;code&gt;CMD [“executable”, “param1”, “param2”…]&lt;/code&gt;. Thus, if the image is for a
+service (Apache, Rails, etc.), you would run something like
+&lt;code&gt;CMD [&amp;quot;apache2&amp;quot;,&amp;quot;-DFOREGROUND&amp;quot;]&lt;/code&gt;. Indeed, this form of the instruction is
+recommended for any service-based image.&lt;/p&gt;
+
+&lt;p&gt;In most other cases, &lt;code&gt;CMD&lt;/code&gt; should be given an interactive shell (bash, python,
+perl, etc), for example, &lt;code&gt;CMD [&amp;quot;perl&amp;quot;, &amp;quot;-de0&amp;quot;]&lt;/code&gt;, &lt;code&gt;CMD [&amp;quot;python&amp;quot;]&lt;/code&gt;, or
+&lt;code&gt;CMD [“php”, “-a”]&lt;/code&gt;. Using this form means that when you execute something like
+&lt;code&gt;docker run -it python&lt;/code&gt;, you’ll get dropped into a usable shell, ready to go.
+&lt;code&gt;CMD&lt;/code&gt; should rarely be used in the manner of &lt;code&gt;CMD [“param”, “param”]&lt;/code&gt; in
+conjunction with &lt;a href=&#34;../v1.10/engine/reference/builder/#entrypoint&#34;&gt;&lt;code&gt;ENTRYPOINT&lt;/code&gt;&lt;/a&gt;, unless
+you and your expected users are already quite familiar with how &lt;code&gt;ENTRYPOINT&lt;/code&gt;
+works.&lt;/p&gt;
+
+&lt;h3 id=&#34;expose&#34;&gt;EXPOSE&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;../v1.10/engine/reference/builder/#expose&#34;&gt;Dockerfile reference for the EXPOSE instruction&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;EXPOSE&lt;/code&gt; instruction indicates the ports on which a container will listen
+for connections. Consequently, you should use the common, traditional port for
+your application. For example, an image containing the Apache web server would
+use &lt;code&gt;EXPOSE 80&lt;/code&gt;, while an image containing MongoDB would use &lt;code&gt;EXPOSE 27017&lt;/code&gt; and
+so on.&lt;/p&gt;
+
+&lt;p&gt;For external access, your users can execute &lt;code&gt;docker run&lt;/code&gt; with a flag indicating
+how to map the specified port to the port of their choice.
+For container linking, Docker provides environment variables for the path from
+the recipient container back to the source (ie, &lt;code&gt;MYSQL_PORT_3306_TCP&lt;/code&gt;).&lt;/p&gt;
+
+&lt;h3 id=&#34;env&#34;&gt;ENV&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;../v1.10/engine/reference/builder/#env&#34;&gt;Dockerfile reference for the ENV instruction&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;In order to make new software easier to run, you can use &lt;code&gt;ENV&lt;/code&gt; to update the
+&lt;code&gt;PATH&lt;/code&gt; environment variable for the software your container installs. For
+example, &lt;code&gt;ENV PATH /usr/local/nginx/bin:$PATH&lt;/code&gt; will ensure that &lt;code&gt;CMD [“nginx”]&lt;/code&gt;
+just works.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;ENV&lt;/code&gt; instruction is also useful for providing required environment
+variables specific to services you wish to containerize, such as Postgres’s
+&lt;code&gt;PGDATA&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Lastly, &lt;code&gt;ENV&lt;/code&gt; can also be used to set commonly used version numbers so that
+version bumps are easier to maintain, as seen in the following example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ENV PG_MAJOR 9.3
+ENV PG_VERSION 9.3.4
+RUN curl -SL http://example.com/postgres-$PG_VERSION.tar.xz | tar -xJC /usr/src/postgress &amp;amp;&amp;amp; …
+ENV PATH /usr/local/postgres-$PG_MAJOR/bin:$PATH
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Similar to having constant variables in a program (as opposed to hard-coding
+values), this approach lets you change a single &lt;code&gt;ENV&lt;/code&gt; instruction to
+auto-magically bump the version of the software in your container.&lt;/p&gt;
+
+&lt;h3 id=&#34;add-or-copy&#34;&gt;ADD or COPY&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;../v1.10/engine/reference/builder/#add&#34;&gt;Dockerfile reference for the ADD instruction&lt;/a&gt;&lt;br/&gt;
+&lt;a href=&#34;../v1.10/engine/reference/builder/#copy&#34;&gt;Dockerfile reference for the COPY instruction&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Although &lt;code&gt;ADD&lt;/code&gt; and &lt;code&gt;COPY&lt;/code&gt; are functionally similar, generally speaking, &lt;code&gt;COPY&lt;/code&gt;
+is preferred. That’s because it’s more transparent than &lt;code&gt;ADD&lt;/code&gt;. &lt;code&gt;COPY&lt;/code&gt; only
+supports the basic copying of local files into the container, while &lt;code&gt;ADD&lt;/code&gt; has
+some features (like local-only tar extraction and remote URL support) that are
+not immediately obvious. Consequently, the best use for &lt;code&gt;ADD&lt;/code&gt; is local tar file
+auto-extraction into the image, as in &lt;code&gt;ADD rootfs.tar.xz /&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you have multiple &lt;code&gt;Dockerfile&lt;/code&gt; steps that use different files from your
+context, &lt;code&gt;COPY&lt;/code&gt; them individually, rather than all at once. This will ensure that
+each step&amp;rsquo;s build cache is only invalidated (forcing the step to be re-run) if the
+specifically required files change.&lt;/p&gt;
+
+&lt;p&gt;For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;COPY requirements.txt /tmp/
+RUN pip install --requirement /tmp/requirements.txt
+COPY . /tmp/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Results in fewer cache invalidations for the &lt;code&gt;RUN&lt;/code&gt; step, than if you put the
+&lt;code&gt;COPY . /tmp/&lt;/code&gt; before it.&lt;/p&gt;
+
+&lt;p&gt;Because image size matters, using &lt;code&gt;ADD&lt;/code&gt; to fetch packages from remote URLs is
+strongly discouraged; you should use &lt;code&gt;curl&lt;/code&gt; or &lt;code&gt;wget&lt;/code&gt; instead. That way you can
+delete the files you no longer need after they&amp;rsquo;ve been extracted and you won&amp;rsquo;t
+have to add another layer in your image. For example, you should avoid doing
+things like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ADD http://example.com/big.tar.xz /usr/src/things/
+RUN tar -xJf /usr/src/things/big.tar.xz -C /usr/src/things
+RUN make -C /usr/src/things all
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And instead, do something like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;RUN mkdir -p /usr/src/things \
+    &amp;amp;&amp;amp; curl -SL http://example.com/big.tar.xz \
+    | tar -xJC /usr/src/things \
+    &amp;amp;&amp;amp; make -C /usr/src/things all
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For other items (files, directories) that do not require &lt;code&gt;ADD&lt;/code&gt;’s tar
+auto-extraction capability, you should always use &lt;code&gt;COPY&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;entrypoint&#34;&gt;ENTRYPOINT&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;../v1.10/engine/reference/builder/#entrypoint&#34;&gt;Dockerfile reference for the ENTRYPOINT instruction&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The best use for &lt;code&gt;ENTRYPOINT&lt;/code&gt; is to set the image&amp;rsquo;s main command, allowing that
+image to be run as though it was that command (and then use &lt;code&gt;CMD&lt;/code&gt; as the
+default flags).&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s start with an example of an image for the command line tool &lt;code&gt;s3cmd&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ENTRYPOINT [&amp;quot;s3cmd&amp;quot;]
+CMD [&amp;quot;--help&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now the image can be run like this to show the command&amp;rsquo;s help:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run s3cmd
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Or using the right parameters to execute a command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run s3cmd ls s3://mybucket
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is useful because the image name can double as a reference to the binary as
+shown in the command above.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;ENTRYPOINT&lt;/code&gt; instruction can also be used in combination with a helper
+script, allowing it to function in a similar way to the command above, even
+when starting the tool may require more than one step.&lt;/p&gt;
+
+&lt;p&gt;For example, the &lt;a href=&#34;https://registry.hub.docker.com/_/postgres/&#34;&gt;Postgres Official Image&lt;/a&gt;
+uses the following script as its &lt;code&gt;ENTRYPOINT&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#!/bin/bash
+set -e
+
+if [ &amp;quot;$1&amp;quot; = &#39;postgres&#39; ]; then
+    chown -R postgres &amp;quot;$PGDATA&amp;quot;
+
+    if [ -z &amp;quot;$(ls -A &amp;quot;$PGDATA&amp;quot;)&amp;quot; ]; then
+        gosu postgres initdb
+    fi
+
+    exec gosu postgres &amp;quot;$@&amp;quot;
+fi
+
+exec &amp;quot;$@&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:
+This script uses &lt;a href=&#34;http://wiki.bash-hackers.org/commands/builtin/exec&#34;&gt;the &lt;code&gt;exec&lt;/code&gt; Bash command&lt;/a&gt;
+so that the final running application becomes the container&amp;rsquo;s PID 1. This allows
+the application to receive any Unix signals sent to the container.
+See the &lt;a href=&#34;../v1.10/engine/reference/builder/#entrypoint&#34;&gt;&lt;code&gt;ENTRYPOINT&lt;/code&gt;&lt;/a&gt;
+help for more details.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The helper script is copied into the container and run via &lt;code&gt;ENTRYPOINT&lt;/code&gt; on
+container start:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;COPY ./docker-entrypoint.sh /
+ENTRYPOINT [&amp;quot;/docker-entrypoint.sh&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This script allows the user to interact with Postgres in several ways.&lt;/p&gt;
+
+&lt;p&gt;It can simply start Postgres:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run postgres
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Or, it can be used to run Postgres and pass parameters to the server:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run postgres postgres --help
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Lastly, it could also be used to start a totally different tool, such as Bash:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run --rm -it postgres bash
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;volume&#34;&gt;VOLUME&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;../v1.10/engine/reference/builder/#volume&#34;&gt;Dockerfile reference for the VOLUME instruction&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;VOLUME&lt;/code&gt; instruction should be used to expose any database storage area,
+configuration storage, or files/folders created by your docker container. You
+are strongly encouraged to use &lt;code&gt;VOLUME&lt;/code&gt; for any mutable and/or user-serviceable
+parts of your image.&lt;/p&gt;
+
+&lt;h3 id=&#34;user&#34;&gt;USER&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;../v1.10/engine/reference/builder/#user&#34;&gt;Dockerfile reference for the USER instruction&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;If a service can run without privileges, use &lt;code&gt;USER&lt;/code&gt; to change to a non-root
+user. Start by creating the user and group in the &lt;code&gt;Dockerfile&lt;/code&gt; with something
+like &lt;code&gt;RUN groupadd -r postgres &amp;amp;&amp;amp; useradd -r -g postgres postgres&lt;/code&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Users and groups in an image get a non-deterministic
+UID/GID in that the “next” UID/GID gets assigned regardless of image
+rebuilds. So, if it’s critical, you should assign an explicit UID/GID.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;You should avoid installing or using &lt;code&gt;sudo&lt;/code&gt; since it has unpredictable TTY and
+signal-forwarding behavior that can cause more problems than it solves. If
+you absolutely need functionality similar to &lt;code&gt;sudo&lt;/code&gt; (e.g., initializing the
+daemon as root but running it as non-root), you may be able to use
+&lt;a href=&#34;https://github.com/tianon/gosu&#34;&gt;“gosu”&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Lastly, to reduce layers and complexity, avoid switching &lt;code&gt;USER&lt;/code&gt; back
+and forth frequently.&lt;/p&gt;
+
+&lt;h3 id=&#34;workdir&#34;&gt;WORKDIR&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;../v1.10/engine/reference/builder/#workdir&#34;&gt;Dockerfile reference for the WORKDIR instruction&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;For clarity and reliability, you should always use absolute paths for your
+&lt;code&gt;WORKDIR&lt;/code&gt;. Also, you should use &lt;code&gt;WORKDIR&lt;/code&gt; instead of  proliferating
+instructions like &lt;code&gt;RUN cd … &amp;amp;&amp;amp; do-something&lt;/code&gt;, which are hard to read,
+troubleshoot, and maintain.&lt;/p&gt;
+
+&lt;h3 id=&#34;onbuild&#34;&gt;ONBUILD&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;../v1.10/engine/reference/builder/#onbuild&#34;&gt;Dockerfile reference for the ONBUILD instruction&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;An &lt;code&gt;ONBUILD&lt;/code&gt; command executes after the current &lt;code&gt;Dockerfile&lt;/code&gt; build completes.
+&lt;code&gt;ONBUILD&lt;/code&gt; executes in any child image derived &lt;code&gt;FROM&lt;/code&gt; the current image.  Think
+of the &lt;code&gt;ONBUILD&lt;/code&gt; command as an instruction the parent &lt;code&gt;Dockerfile&lt;/code&gt; gives
+to the child &lt;code&gt;Dockerfile&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;A Docker build executes &lt;code&gt;ONBUILD&lt;/code&gt; commands before any command in a child
+&lt;code&gt;Dockerfile&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;ONBUILD&lt;/code&gt; is useful for images that are going to be built &lt;code&gt;FROM&lt;/code&gt; a given
+image. For example, you would use &lt;code&gt;ONBUILD&lt;/code&gt; for a language stack image that
+builds arbitrary user software written in that language within the
+&lt;code&gt;Dockerfile&lt;/code&gt;, as you can see in &lt;a href=&#34;https://github.com/docker-library/ruby/blob/master/2.1/onbuild/Dockerfile&#34;&gt;Ruby’s &lt;code&gt;ONBUILD&lt;/code&gt; variants&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Images built from &lt;code&gt;ONBUILD&lt;/code&gt; should get a separate tag, for example:
+&lt;code&gt;ruby:1.9-onbuild&lt;/code&gt; or &lt;code&gt;ruby:2.0-onbuild&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Be careful when putting &lt;code&gt;ADD&lt;/code&gt; or &lt;code&gt;COPY&lt;/code&gt; in &lt;code&gt;ONBUILD&lt;/code&gt;. The “onbuild” image will
+fail catastrophically if the new build&amp;rsquo;s context is missing the resource being
+added. Adding a separate tag, as recommended above, will help mitigate this by
+allowing the &lt;code&gt;Dockerfile&lt;/code&gt; author to make a choice.&lt;/p&gt;
+
+&lt;h2 id=&#34;examples-for-official-repositories&#34;&gt;Examples for Official Repositories&lt;/h2&gt;
+
+&lt;p&gt;These Official Repositories have exemplary &lt;code&gt;Dockerfile&lt;/code&gt;s:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://registry.hub.docker.com/_/golang/&#34;&gt;Go&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://registry.hub.docker.com/_/perl/&#34;&gt;Perl&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://registry.hub.docker.com/_/hylang/&#34;&gt;Hy&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://registry.hub.docker.com/_/rails&#34;&gt;Rails&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;additional-resources&#34;&gt;Additional resources:&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/engine/reference/builder/&#34;&gt;Dockerfile Reference&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/engine/userguide/eng-image/baseimages/&#34;&gt;More about Base Images&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.docker.com/docker-hub/builds/&#34;&gt;More about Automated Builds&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.docker.com/docker-hub/official_repos/&#34;&gt;Guidelines for Creating Official
+Repositories&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Bind container ports to the host</title>
+      <link>https://docs.docker.com/v1.10/engine/userguide/networking/default_network/binding/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/engine/userguide/networking/default_network/binding/</guid>
+      <description>
+
+&lt;h1 id=&#34;bind-container-ports-to-the-host&#34;&gt;Bind container ports to the host&lt;/h1&gt;
+
+&lt;p&gt;The information in this section explains binding container ports within the Docker default bridge. This is a &lt;code&gt;bridge&lt;/code&gt; network named &lt;code&gt;bridge&lt;/code&gt; created automatically when you install Docker.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The &lt;a href=&#34;../v1.10/engine/userguide/networking/dockernetworks/&#34;&gt;Docker networks feature&lt;/a&gt; allows you to
+create user-defined networks in addition to the default bridge network.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;By default Docker containers can make connections to the outside world, but the
+outside world cannot connect to containers. Each outgoing connection will
+appear to originate from one of the host machine&amp;rsquo;s own IP addresses thanks to an
+&lt;code&gt;iptables&lt;/code&gt; masquerading rule on the host machine that the Docker server creates
+when it starts:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo iptables -t nat -L -n
+...
+Chain POSTROUTING (policy ACCEPT)
+target     prot opt source               destination
+MASQUERADE  all  --  172.17.0.0/16       0.0.0.0/0
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The Docker server creates a masquerade rule that let containers connect to IP
+addresses in the outside world.&lt;/p&gt;
+
+&lt;p&gt;If you want containers to accept incoming connections, you will need to provide
+special options when invoking &lt;code&gt;docker run&lt;/code&gt;. There are two approaches.&lt;/p&gt;
+
+&lt;p&gt;First, you can supply &lt;code&gt;-P&lt;/code&gt; or &lt;code&gt;--publish-all=true|false&lt;/code&gt; to &lt;code&gt;docker run&lt;/code&gt; which
+is a blanket operation that identifies every port with an &lt;code&gt;EXPOSE&lt;/code&gt; line in the
+image&amp;rsquo;s &lt;code&gt;Dockerfile&lt;/code&gt; or &lt;code&gt;--expose &amp;lt;port&amp;gt;&lt;/code&gt; commandline flag and maps it to a host
+port somewhere within an &lt;em&gt;ephemeral port range&lt;/em&gt;. The &lt;code&gt;docker port&lt;/code&gt; command then
+needs to be used to inspect created mapping. The &lt;em&gt;ephemeral port range&lt;/em&gt; is
+configured by &lt;code&gt;/proc/sys/net/ipv4/ip_local_port_range&lt;/code&gt; kernel parameter,
+typically ranging from 32768 to 61000.&lt;/p&gt;
+
+&lt;p&gt;Mapping can be specified explicitly using &lt;code&gt;-p SPEC&lt;/code&gt; or &lt;code&gt;--publish=SPEC&lt;/code&gt; option.
+It allows you to particularize which port on docker server - which can be any
+port at all, not just one within the &lt;em&gt;ephemeral port range&lt;/em&gt; -- you want mapped
+to which port in the container.&lt;/p&gt;
+
+&lt;p&gt;Either way, you should be able to peek at what Docker has accomplished in your
+network stack by examining your NAT tables.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# What your NAT rules might look like when Docker
+# is finished setting up a -P forward:
+
+$ iptables -t nat -L -n
+...
+Chain DOCKER (2 references)
+target     prot opt source               destination
+DNAT       tcp  --  0.0.0.0/0            0.0.0.0/0            tcp dpt:49153 to:172.17.0.2:80
+
+# What your NAT rules might look like when Docker
+# is finished setting up a -p 80:80 forward:
+
+Chain DOCKER (2 references)
+target     prot opt source               destination
+DNAT       tcp  --  0.0.0.0/0            0.0.0.0/0            tcp dpt:80 to:172.17.0.2:80
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can see that Docker has exposed these container ports on &lt;code&gt;0.0.0.0&lt;/code&gt;, the
+wildcard IP address that will match any possible incoming port on the host
+machine. If you want to be more restrictive and only allow container services to
+be contacted through a specific external interface on the host machine, you have
+two choices. When you invoke &lt;code&gt;docker run&lt;/code&gt; you can use either &lt;code&gt;-p
+IP:host_port:container_port&lt;/code&gt; or &lt;code&gt;-p IP::port&lt;/code&gt; to specify the external interface
+for one particular binding.&lt;/p&gt;
+
+&lt;p&gt;Or if you always want Docker port forwards to bind to one specific IP address,
+you can edit your system-wide Docker server settings and add the option
+&lt;code&gt;--ip=IP_ADDRESS&lt;/code&gt;. Remember to restart your Docker server after editing this
+setting.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: With hairpin NAT enabled (&lt;code&gt;--userland-proxy=false&lt;/code&gt;), containers port
+exposure is achieved purely through iptables rules, and no attempt to bind the
+exposed port is ever made. This means that nothing prevents shadowing a
+previously listening service outside of Docker through exposing the same port
+for a container. In such conflicting situation, Docker created iptables rules
+will take precedence and route to the container.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The &lt;code&gt;--userland-proxy&lt;/code&gt; parameter, true by default, provides a userland
+implementation for inter-container and outside-to-container communication. When
+disabled, Docker uses both an additional &lt;code&gt;MASQUERADE&lt;/code&gt; iptable rule and the
+&lt;code&gt;net.ipv4.route_localnet&lt;/code&gt; kernel parameter which allow the host machine to
+connect to a local container exposed port through the commonly used loopback
+address: this alternative is preferred for performance reasons.&lt;/p&gt;
+
+&lt;h2 id=&#34;related-information&#34;&gt;Related information&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/engine/userguide/networking/dockernetworks/&#34;&gt;Understand Docker container networks&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/engine/userguide/networking/work-with-networks/&#34;&gt;Work with network commands&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/engine/userguide/networking/default_network/dockerlinks/&#34;&gt;Legacy container links&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Breaking changes</title>
+      <link>https://docs.docker.com/v1.10/engine/breaking_changes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/engine/breaking_changes/</guid>
+      <description>
+
+&lt;h1 id=&#34;breaking-changes-and-incompatibilities&#34;&gt;Breaking changes and incompatibilities&lt;/h1&gt;
+
+&lt;p&gt;Every Engine release strives to be backward compatible with its predecessors.
+In all cases, the policy is that feature removal is communicated two releases
+in advance and documented as part of the &lt;a href=&#34;../v1.10/engine/deprecated/&#34;&gt;deprecated features&lt;/a&gt;
+page.&lt;/p&gt;
+
+&lt;p&gt;Unfortunately, Docker is a fast moving project, and newly introduced features
+may sometime introduce breaking changes and/or incompatibilities. This page
+documents these by Engine version.&lt;/p&gt;
+
+&lt;h1 id=&#34;engine-1-10&#34;&gt;Engine 1.10&lt;/h1&gt;
+
+&lt;p&gt;There were two breaking changes in the 1.10 release.&lt;/p&gt;
+
+&lt;h2 id=&#34;registry&#34;&gt;Registry&lt;/h2&gt;
+
+&lt;p&gt;Registry 2.3 includes improvements to the image manifest that have caused a
+breaking change. Images pushed by Engine 1.10 to a Registry 2.3 cannot be
+pulled by digest by older Engine versions. A &lt;code&gt;docker pull&lt;/code&gt; that encounters this
+situation returns the following error:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; Error response from daemon: unsupported schema version 2 for tag TAGNAME
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Docker Content Trust heavily relies on pull by digest. As a result, images
+pushed from the Engine 1.10 CLI to a 2.3 Registry cannot be pulled by older
+Engine CLIs (&amp;lt; 1.10) with Docker Content Trust enabled.&lt;/p&gt;
+
+&lt;p&gt;If you are using an older Registry version (&amp;lt; 2.3), this problem does not occur
+with any version of the Engine CLI; push, pull, with and without content trust
+work as you would expect.&lt;/p&gt;
+
+&lt;h2 id=&#34;docker-content-trust&#34;&gt;Docker Content Trust&lt;/h2&gt;
+
+&lt;p&gt;Engine older than the current 1.10 cannot pull images from repositories that
+have enabled key delegation. Key delegation is a feature which requires a
+manual action to enable.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Btrfs storage in practice</title>
+      <link>https://docs.docker.com/v1.10/engine/userguide/storagedriver/btrfs-driver/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/engine/userguide/storagedriver/btrfs-driver/</guid>
+      <description>
+
+&lt;h1 id=&#34;docker-and-btrfs-in-practice&#34;&gt;Docker and Btrfs in practice&lt;/h1&gt;
+
+&lt;p&gt;Btrfs is a next generation copy-on-write filesystem that supports many advanced
+storage technologies that make it a good fit for Docker. Btrfs is included in
+the mainline Linux kernel and its on-disk-format is now considered stable.
+However, many of its features are still under heavy development and users
+should consider it a fast-moving target.&lt;/p&gt;
+
+&lt;p&gt;Docker&amp;rsquo;s &lt;code&gt;btrfs&lt;/code&gt; storage driver leverages many Btrfs features for image and
+container management. Among these features are thin provisioning,
+copy-on-write, and snapshotting.&lt;/p&gt;
+
+&lt;p&gt;This article refers to Docker&amp;rsquo;s Btrfs storage driver as &lt;code&gt;btrfs&lt;/code&gt; and the overall
+ Btrfs Filesystem as Btrfs.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The &lt;a href=&#34;https://www.docker.com/compatibility-maintenance&#34;&gt;Commercially Supported Docker Engine (CS-Engine)&lt;/a&gt; does not currently support the &lt;code&gt;btrfs&lt;/code&gt; storage driver.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;the-future-of-btrfs&#34;&gt;The future of Btrfs&lt;/h2&gt;
+
+&lt;p&gt;Btrfs has been long hailed as the future of Linux filesystems. With full
+support in the mainline Linux kernel, a stable on-disk-format, and active
+development with a focus on stability, this is now becoming more of a reality.&lt;/p&gt;
+
+&lt;p&gt;As far as Docker on the Linux platform goes, many people see the &lt;code&gt;btrfs&lt;/code&gt;
+storage driver as a potential long-term replacement for the &lt;code&gt;devicemapper&lt;/code&gt;
+storage driver. However, at the time of writing, the &lt;code&gt;devicemapper&lt;/code&gt; storage
+driver should be considered safer, more stable, and more &lt;em&gt;production ready&lt;/em&gt;.
+You should only consider the &lt;code&gt;btrfs&lt;/code&gt; driver for production deployments if you
+understand it well and have existing experience with Btrfs.&lt;/p&gt;
+
+&lt;h2 id=&#34;image-layering-and-sharing-with-btrfs&#34;&gt;Image layering and sharing with Btrfs&lt;/h2&gt;
+
+&lt;p&gt;Docker leverages Btrfs &lt;em&gt;subvolumes&lt;/em&gt; and &lt;em&gt;snapshots&lt;/em&gt; for managing the on-disk
+components of image and container layers.  Btrfs subvolumes look and feel like
+a normal Unix filesystem. As such, they can have their own internal directory
+structure that hooks into the wider Unix filesystem.&lt;/p&gt;
+
+&lt;p&gt;Subvolumes are natively copy-on-write and have space allocated to them
+on-demand from an underlying storage pool. They can also be nested and snapped.
+ The diagram blow shows 4 subvolumes. &amp;lsquo;Subvolume 2&amp;rsquo; and &amp;lsquo;Subvolume 3&amp;rsquo; are
+nested, whereas &amp;lsquo;Subvolume 4&amp;rsquo; shows its own internal directory tree.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../engine/userguide/storagedriver/images/btfs_subvolume.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Snapshots are a point-in-time read-write copy of an entire subvolume. They
+exist directly below the subvolume they were created from. You can create
+snapshots of snapshots as shown in the diagram below.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../engine/userguide/storagedriver/images/btfs_snapshots.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Btfs allocates space to subvolumes and snapshots on demand from an underlying
+pool of storage. The unit of allocation is referred to as a &lt;em&gt;chunk&lt;/em&gt;, and
+&lt;em&gt;chunks&lt;/em&gt; are normally ~1GB in size.&lt;/p&gt;
+
+&lt;p&gt;Snapshots are first-class citizens in a Btrfs filesystem. This means that they
+look, feel, and operate just like regular subvolumes. The technology required
+to create them is built directly into the Btrfs filesystem thanks to its
+native copy-on-write design. This means that Btrfs snapshots are space
+efficient with little or no performance overhead. The diagram below shows a
+subvolume and its snapshot sharing the same data.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../engine/userguide/storagedriver/images/btfs_pool.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Docker&amp;rsquo;s &lt;code&gt;btrfs&lt;/code&gt; storage driver stores every image layer and container in its
+own Btrfs subvolume or snapshot. The base layer of an image is stored as a
+subvolume whereas child image layers and containers are stored as snapshots.
+This is shown in the diagram below.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../engine/userguide/storagedriver/images/btfs_container_layer.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The high level process for creating images and containers on Docker hosts
+running the &lt;code&gt;btrfs&lt;/code&gt; driver is as follows:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;The image&amp;rsquo;s base layer is stored in a Btrfs &lt;em&gt;subvolume&lt;/em&gt; under
+&lt;code&gt;/var/lib/docker/btrfs/subvolumes&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Subsequent image layers are stored as a Btrfs &lt;em&gt;snapshot&lt;/em&gt; of the parent
+layer&amp;rsquo;s subvolume or snapshot.&lt;/p&gt;
+
+&lt;p&gt;The diagram below shows a three-layer image. The base layer is a subvolume.
+Layer 1 is a snapshot of the base layer&amp;rsquo;s subvolume. Layer 2 is a snapshot of
+Layer 1&amp;rsquo;s snapshot.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../engine/userguide/storagedriver/images/btfs_constructs.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;As of Docker 1.10, image layer IDs no longer correspond to directory names
+under &lt;code&gt;/var/lib/docker/&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;image-and-container-on-disk-constructs&#34;&gt;Image and container on-disk constructs&lt;/h2&gt;
+
+&lt;p&gt;Image layers and containers are visible in the Docker host&amp;rsquo;s filesystem at
+&lt;code&gt;/var/lib/docker/btrfs/subvolumes/&lt;/code&gt;. However, as previously stated, directory
+names no longer correspond to image layer IDs. That said, directories for
+containers are present even for containers with a stopped status. This is
+because the &lt;code&gt;btrfs&lt;/code&gt; storage driver mounts a default, top-level subvolume at
+&lt;code&gt;/var/lib/docker/subvolumes&lt;/code&gt;. All other subvolumes and snapshots exist below
+that as Btrfs filesystem objects and not as individual mounts.&lt;/p&gt;
+
+&lt;p&gt;Because Btrfs works at the filesystem level and not the block level, each image
+and container layer can be browsed in the filesystem using normal Unix
+commands. The example below shows a truncated output of an &lt;code&gt;ls -l&lt;/code&gt; command an
+image layer:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ls -l /var/lib/docker/btrfs/subvolumes/0a17decee4139b0de68478f149cc16346f5e711c5ae3bb969895f22dd6723751/
+total 0
+drwxr-xr-x 1 root root 1372 Oct  9 08:39 bin
+drwxr-xr-x 1 root root    0 Apr 10  2014 boot
+drwxr-xr-x 1 root root  882 Oct  9 08:38 dev
+drwxr-xr-x 1 root root 2040 Oct 12 17:27 etc
+drwxr-xr-x 1 root root    0 Apr 10  2014 home
+...output truncated...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;container-reads-and-writes-with-btrfs&#34;&gt;Container reads and writes with Btrfs&lt;/h2&gt;
+
+&lt;p&gt;A container is a space-efficient snapshot of an image. Metadata in the snapshot
+points to the actual data blocks in the storage pool. This is the same as with
+a subvolume. Therefore, reads performed against a snapshot are essentially the
+same as reads performed against a subvolume. As a result, no performance
+overhead is incurred from the Btrfs driver.&lt;/p&gt;
+
+&lt;p&gt;Writing a new file to a container invokes an allocate-on-demand operation to
+allocate new data block to the container&amp;rsquo;s snapshot. The file is then written to
+this new space. The allocate-on-demand operation is native to all writes with
+Btrfs and is the same as writing new data to a subvolume. As a result, writing
+new files to a container&amp;rsquo;s snapshot operate at native Btrfs speeds.&lt;/p&gt;
+
+&lt;p&gt;Updating an existing file in a container causes a copy-on-write operation
+(technically &lt;em&gt;redirect-on-write&lt;/em&gt;). The driver leaves the original data and
+allocates new space to the snapshot. The updated data is written to this new
+space. Then, the driver updates the filesystem metadata in the snapshot to
+point to this new data. The original data is preserved in-place for subvolumes
+and snapshots further up the tree. This behavior is native to copy-on-write
+filesystems like Btrfs and incurs very little overhead.&lt;/p&gt;
+
+&lt;p&gt;With Btfs, writing and updating lots of small files can result in slow
+performance. More on this later.&lt;/p&gt;
+
+&lt;h2 id=&#34;configuring-docker-with-btrfs&#34;&gt;Configuring Docker with Btrfs&lt;/h2&gt;
+
+&lt;p&gt;The &lt;code&gt;btrfs&lt;/code&gt; storage driver only operates on a Docker host where
+&lt;code&gt;/var/lib/docker&lt;/code&gt; is mounted as a Btrfs filesystem. The following procedure
+shows  how to configure Btrfs on Ubuntu 14.04 LTS.&lt;/p&gt;
+
+&lt;h3 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h3&gt;
+
+&lt;p&gt;If you have already used the Docker daemon on your Docker host and have images
+you want to keep, &lt;code&gt;push&lt;/code&gt; them to Docker Hub or your private Docker Trusted
+Registry before attempting this procedure.&lt;/p&gt;
+
+&lt;p&gt;Stop the Docker daemon. Then, ensure that you have a spare block device at
+&lt;code&gt;/dev/xvdb&lt;/code&gt;. The device identifier may be different in your environment and you
+ should substitute your own values throughout the procedure.&lt;/p&gt;
+
+&lt;p&gt;The procedure also assumes your kernel has the appropriate Btrfs modules
+loaded. To verify this, use the following command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cat /proc/filesystems | grep btrfs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;configure-btrfs-on-ubuntu-14-04-lts&#34;&gt;Configure Btrfs on Ubuntu 14.04 LTS&lt;/h3&gt;
+
+&lt;p&gt;Assuming your system meets the prerequisites, do the following:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Install the &amp;ldquo;btrfs-tools&amp;rdquo; package.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo apt-get install btrfs-tools
+Reading package lists... Done
+Building dependency tree
+&amp;lt;output truncated&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create the Btrfs storage pool.&lt;/p&gt;
+
+&lt;p&gt;Btrfs storage pools are created with the &lt;code&gt;mkfs.btrfs&lt;/code&gt; command. Passing
+multiple devices to the &lt;code&gt;mkfs.btrfs&lt;/code&gt; command creates a pool across all of those
+devices. Here you create a pool with a single device at &lt;code&gt;/dev/xvdb&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo mkfs.btrfs -f /dev/xvdb
+WARNING! - Btrfs v3.12 IS EXPERIMENTAL
+WARNING! - see http://btrfs.wiki.kernel.org before using
+
+Turning ON incompat feature &#39;extref&#39;: increased hardlink limit per file to 65536
+fs created label (null) on /dev/xvdb
+    nodesize 16384 leafsize 16384 sectorsize 4096 size 4.00GiB
+Btrfs v3.12
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Be sure to substitute &lt;code&gt;/dev/xvdb&lt;/code&gt; with the appropriate device(s) on your
+system.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Warning&lt;/strong&gt;: Take note of the warning about Btrfs being experimental. As
+noted earlier, Btrfs is not currently recommended for production deployments
+unless you already have extensive experience.&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;If it does not already exist, create a directory for the Docker host&amp;rsquo;s local
+storage area at &lt;code&gt;/var/lib/docker&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo mkdir /var/lib/docker
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Configure the system to automatically mount the Btrfs filesystem each time the system boots.&lt;/p&gt;
+
+&lt;p&gt;a. Obtain the Btrfs filesystem&amp;rsquo;s UUID.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo blkid /dev/xvdb
+/dev/xvdb: UUID=&amp;quot;a0ed851e-158b-4120-8416-c9b072c8cf47&amp;quot; UUID_SUB=&amp;quot;c3927a64-4454-4eef-95c2-a7d44ac0cf27&amp;quot; TYPE=&amp;quot;btrfs&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;b. Create an &lt;code&gt;/etc/fstab&lt;/code&gt; entry to automatically mount &lt;code&gt;/var/lib/docker&lt;/code&gt;
+each time the system boots. Either of the following lines will work, just
+remember to substitute the UUID value with the value obtained from the previous
+command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/dev/xvdb /var/lib/docker btrfs defaults 0 0
+UUID=&amp;quot;a0ed851e-158b-4120-8416-c9b072c8cf47&amp;quot; /var/lib/docker btrfs defaults 0 0
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Mount the new filesystem and verify the operation.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo mount -a
+$ mount
+/dev/xvda1 on / type ext4 (rw,discard)
+&amp;lt;output truncated&amp;gt;
+/dev/xvdb on /var/lib/docker type btrfs (rw)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The last line in the output above shows the &lt;code&gt;/dev/xvdb&lt;/code&gt; mounted at
+&lt;code&gt;/var/lib/docker&lt;/code&gt; as Btrfs.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Now that you have a Btrfs filesystem mounted at &lt;code&gt;/var/lib/docker&lt;/code&gt;, the daemon
+should automatically load with the &lt;code&gt;btrfs&lt;/code&gt; storage driver.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Start the Docker daemon.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo service docker start
+docker start/running, process 2315
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The procedure for starting the Docker daemon may differ depending on the
+Linux distribution you are using.&lt;/p&gt;
+
+&lt;p&gt;You can force the the Docker daemon to start with the &lt;code&gt;btrfs&lt;/code&gt; storage
+driver by either passing the &lt;code&gt;--storage-driver=btrfs&lt;/code&gt; flag to the &lt;code&gt;docker 
+daemon&lt;/code&gt; at startup, or adding it to the &lt;code&gt;DOCKER_OPTS&lt;/code&gt; line to the Docker config
+file.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Verify the storage driver with the &lt;code&gt;docker info&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo docker info
+Containers: 0
+Images: 0
+Storage Driver: btrfs
+[...]
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Your Docker host is now configured to use the &lt;code&gt;btrfs&lt;/code&gt; storage driver.&lt;/p&gt;
+
+&lt;h2 id=&#34;btrfs-and-docker-performance&#34;&gt;Btrfs and Docker performance&lt;/h2&gt;
+
+&lt;p&gt;There are several factors that influence Docker&amp;rsquo;s performance under the &lt;code&gt;btrfs&lt;/code&gt;
+ storage driver.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Page caching&lt;/strong&gt;. Btrfs does not support page cache sharing. This means that
+&lt;em&gt;n&lt;/em&gt; containers accessing the same file require &lt;em&gt;n&lt;/em&gt; copies to be cached. As a
+result, the &lt;code&gt;btrfs&lt;/code&gt; driver may not be the best choice for PaaS and other high
+density container use cases.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Small writes&lt;/strong&gt;. Containers performing lots of small writes (including
+Docker hosts that start and stop many containers) can lead to poor use of Btrfs
+chunks. This can ultimately lead to out-of-space conditions on your Docker
+host and stop it working. This is currently a major drawback to using current
+versions of Btrfs.&lt;/p&gt;
+
+&lt;p&gt;If you use the &lt;code&gt;btrfs&lt;/code&gt; storage driver, closely monitor the free space on
+your Btrfs filesystem using the &lt;code&gt;btrfs filesys show&lt;/code&gt; command. Do not trust the
+output of normal Unix commands such as &lt;code&gt;df&lt;/code&gt;; always use the Btrfs native
+commands.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Sequential writes&lt;/strong&gt;. Btrfs writes data to disk via journaling technique.
+This can impact sequential writes, where performance can be up to half.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Fragmentation&lt;/strong&gt;. Fragmentation is a natural byproduct of copy-on-write
+filesystems like Btrfs. Many small random writes can compound this issue. It
+can manifest as CPU spikes on Docker hosts using SSD media and head thrashing
+on Docker hosts using spinning media. Both of these result in poor performance.&lt;/p&gt;
+
+&lt;p&gt;Recent versions of Btrfs allow you to specify &lt;code&gt;autodefrag&lt;/code&gt; as a mount
+option. This mode attempts to detect random writes and defragment them. You
+should perform your own tests before enabling this option on your Docker hosts.
+Some tests have shown this option has a negative performance impact on Docker
+hosts performing lots of small writes (including systems that start and stop
+many containers).&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Solid State Devices (SSD)&lt;/strong&gt;. Btrfs has native optimizations for SSD media.
+To enable these, mount with the &lt;code&gt;-o ssd&lt;/code&gt; mount option. These optimizations
+include enhanced SSD write performance by avoiding things like &lt;em&gt;seek
+optimizations&lt;/em&gt; that have no use on SSD media.&lt;/p&gt;
+
+&lt;p&gt;Btfs also supports the TRIM/Discard primitives. However, mounting with the
+&lt;code&gt;-o discard&lt;/code&gt; mount option can cause performance issues. Therefore, it is
+recommended you perform your own tests before using this option.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Use Data Volumes&lt;/strong&gt;. Data volumes provide the best and most predictable
+performance. This is because they bypass the storage driver and do not incur
+any of the potential overheads introduced by thin provisioning and
+copy-on-write. For this reason, you should place heavy write workloads on data
+volumes.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;related-information&#34;&gt;Related Information&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/engine/userguide/storagedriver/imagesandcontainers/&#34;&gt;Understand images, containers, and storage drivers&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/engine/userguide/storagedriver/selectadriver/&#34;&gt;Select a storage driver&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/engine/userguide/storagedriver/aufs-driver/&#34;&gt;AUFS storage driver in practice&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/engine/userguide/storagedriver/device-mapper-driver/&#34;&gt;Device Mapper storage driver in practice&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Build your own bridge</title>
+      <link>https://docs.docker.com/v1.10/engine/userguide/networking/default_network/build-bridges/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/engine/userguide/networking/default_network/build-bridges/</guid>
+      <description>
+
+&lt;h1 id=&#34;build-your-own-bridge&#34;&gt;Build your own bridge&lt;/h1&gt;
+
+&lt;p&gt;This section explains how to build your own bridge to replace the Docker default
+bridge. This is a &lt;code&gt;bridge&lt;/code&gt; network named &lt;code&gt;bridge&lt;/code&gt; created automatically when you
+install Docker.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The &lt;a href=&#34;../v1.10/engine/userguide/networking/dockernetworks/&#34;&gt;Docker networks feature&lt;/a&gt; allows you to
+create user-defined networks in addition to the default bridge network.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;You can set up your own bridge before starting Docker and use &lt;code&gt;-b BRIDGE&lt;/code&gt; or
+&lt;code&gt;--bridge=BRIDGE&lt;/code&gt; to tell Docker to use your bridge instead. If you already
+have Docker up and running with its default &lt;code&gt;docker0&lt;/code&gt; still configured,
+you can directly create your bridge and restart Docker with it or want to begin by
+stopping the service and removing the interface:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Stopping Docker and removing docker0
+
+$ sudo service docker stop
+$ sudo ip link set dev docker0 down
+$ sudo brctl delbr docker0
+$ sudo iptables -t nat -F POSTROUTING
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then, before starting the Docker service, create your own bridge and give it
+whatever configuration you want. Here we will create a simple enough bridge
+that we really could just have used the options in the previous section to
+customize &lt;code&gt;docker0&lt;/code&gt;, but it will be enough to illustrate the technique.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Create our own bridge
+
+$ sudo brctl addbr bridge0
+$ sudo ip addr add 192.168.5.1/24 dev bridge0
+$ sudo ip link set dev bridge0 up
+
+# Confirming that our bridge is up and running
+
+$ ip addr show bridge0
+4: bridge0: &amp;lt;BROADCAST,MULTICAST&amp;gt; mtu 1500 qdisc noop state UP group default
+    link/ether 66:38:d0:0d:76:18 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.5.1/24 scope global bridge0
+       valid_lft forever preferred_lft forever
+
+# Tell Docker about it and restart (on Ubuntu)
+
+$ echo &#39;DOCKER_OPTS=&amp;quot;-b=bridge0&amp;quot;&#39; &amp;gt;&amp;gt; /etc/default/docker
+$ sudo service docker start
+
+# Confirming new outgoing NAT masquerade is set up
+
+$ sudo iptables -t nat -L -n
+...
+Chain POSTROUTING (policy ACCEPT)
+target     prot opt source               destination
+MASQUERADE  all  --  192.168.5.0/24      0.0.0.0/0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The result should be that the Docker server starts successfully and is now
+prepared to bind containers to the new bridge. After pausing to verify the
+bridge&amp;rsquo;s configuration, try creating a container -- you will see that its IP
+address is in your new IP address range, which Docker will have auto-detected.&lt;/p&gt;
+
+&lt;p&gt;You can use the &lt;code&gt;brctl show&lt;/code&gt; command to see Docker add and remove interfaces
+from the bridge as you start and stop containers, and can run &lt;code&gt;ip addr&lt;/code&gt; and &lt;code&gt;ip
+route&lt;/code&gt; inside a container to see that it has been given an address in the
+bridge&amp;rsquo;s IP address range and has been told to use the Docker host&amp;rsquo;s IP address
+on the bridge as its default gateway to the rest of the Internet.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

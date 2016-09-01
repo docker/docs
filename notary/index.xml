@@ -1,0 +1,1663 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Notaries on Docker Docs</title>
+    <link>https://docs.docker.com/v1.10/notary/</link>
+    <description>Recent content in Notaries on Docker Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="https://docs.docker.com/v1.10/notary/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Client Configuration</title>
+      <link>https://docs.docker.com/v1.10/notary/reference/client-config/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/notary/reference/client-config/</guid>
+      <description>
+
+&lt;h1 id=&#34;notary-client-configuration-file&#34;&gt;Notary client configuration file&lt;/h1&gt;
+
+&lt;p&gt;This document is for power users of the &lt;a href=&#34;../v1.10/notary/advanced_usage/&#34;&gt;Notary client&lt;/a&gt;
+who want to facilitate CLI interaction or specify custom options.&lt;/p&gt;
+
+&lt;p&gt;The configuration file for Notary client normally resides at &lt;code&gt;~/.notary/config.json&lt;/code&gt;,
+but the path to a different configuration file can be specified using the
+&lt;code&gt;-c&lt;/code&gt; or &lt;code&gt;--configFile&lt;/code&gt; command line flag.&lt;/p&gt;
+
+&lt;h2 id=&#34;overview-of-the-file&#34;&gt;Overview of the file&lt;/h2&gt;
+
+&lt;p&gt;In addition to the configuration file format, please see the optional password
+&lt;a href=&#34;#environment-variables-optional&#34;&gt;environment variables&lt;/a&gt; that the Notary client
+can take for ease of use.&lt;/p&gt;
+
+&lt;p&gt;Here is a full client configuration file example; please click on the top level
+JSON keys to learn more about the configuration section corresponding to that key:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
+  &lt;a href=&#34;#trust-dir-section-optional&#34;&gt;&#34;trust_dir&#34;&lt;/a&gt; : &#34;~/.docker/trust&#34;,
+  &lt;a href=&#34;#remote-server-section-optional&#34;&gt;&#34;remote_server&#34;&lt;/a&gt;: {
+    &#34;url&#34;: &#34;https://my-notary-server.my-private-registry.com&#34;,
+    &#34;root-ca&#34;: &#34;./fixtures/root-ca.crt&#34;,
+    &#34;tls_client_cert&#34;: &#34;./fixtures/secure.example.com.crt&#34;,
+    &#34;tls_client_key&#34;: &#34;./fixtures/secure.example.com.crt&#34;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;trust-dir-section-optional&#34;&gt;trust_dir section (optional)&lt;/h2&gt;
+
+&lt;p&gt;The &lt;code&gt;trust_dir&lt;/code&gt; specifies the location (as an absolute path or a path
+relative to the directory of the configuration file) where the TUF metadata
+and private keys will be stored.&lt;/p&gt;
+
+&lt;p&gt;This is normally defaults to &lt;code&gt;~/.notary&lt;/code&gt;, but specifying &lt;code&gt;~/.docker/trust&lt;/code&gt;
+facilitates interoperability with content trust.&lt;/p&gt;
+
+&lt;p&gt;Note that this option can be overridden with the command line flag &lt;code&gt;--trustDir&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;remote-server-section-optional&#34;&gt;remote_server section (optional)&lt;/h2&gt;
+
+&lt;p&gt;The &lt;code&gt;remote_server&lt;/code&gt; specifies how to connect to a Notary server to download
+metadata updates and publish metadata changes.&lt;/p&gt;
+
+&lt;p&gt;Remote server example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;&amp;quot;remote_server&amp;quot;: {
+  &amp;quot;url&amp;quot;: &amp;quot;https://my-notary-server.my-private-registry.com&amp;quot;,
+  &amp;quot;root-ca&amp;quot;: &amp;quot;./fixtures/root-ca.crt&amp;quot;,
+  &amp;quot;tls_client_cert&amp;quot;: &amp;quot;./fixtures/secure.example.com.crt&amp;quot;,
+  &amp;quot;tls_client_key&amp;quot;: &amp;quot;./fixtures/secure.example.com.crt&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th&gt;Parameter&lt;/th&gt;
+        &lt;th&gt;Required&lt;/th&gt;
+        &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td valign=&#34;top&#34;&gt;&lt;code&gt;url&lt;/code&gt;&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;no&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;URL of the Notary server: defaults to https://notary.docker.io
+            This configuration option can be overridden with the command line flag
+            `-s` or `--server`.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td valign=&#34;top&#34;&gt;&lt;code&gt;root-ca&lt;/code&gt;&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;no&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;&lt;p&gt;The path to the file containing the root CA with which to verify
+            the TLS certificate of the Notary server, for example if it is self-signed.
+            The path is relative to the directory of the configuration file.&lt;/p&gt;
+            &lt;p&gt;This configuration option can overridden with the command line flag
+            `--tlscacert`, which would specify a path relative to the current working
+            directory where the Notary client is invoked.&lt;/p&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td valign=&#34;top&#34;&gt;&lt;code&gt;tls_client_cert&lt;/code&gt;&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;no&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;&lt;p&gt;The path to the client certificate to use for mutual TLS with
+            the Notary server.  Must be provided along with &lt;code&gt;tls_client_key&lt;/code&gt;
+            or not provided at all.  The path is relative to the directory of the
+            configuration file.&lt;/p&gt;
+            &lt;p&gt;This configuration option can overridden with the command line flag
+            `--tlscert`, which would specify a path relative to the current working
+            directory where the Notary client is invoked.&lt;/p&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td valign=&#34;top&#34;&gt;&lt;code&gt;tls_client_key&lt;/code&gt;&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;no&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;&lt;p&gt;The path to the client key to use for mutual TLS with
+            the Notary server. Must be provided along with &lt;code&gt;tls_client_cert&lt;/code&gt;
+            or not provided at all.  The path is relative to the directory of the
+            configuration file.&lt;/p&gt;
+            &lt;p&gt;This configuration option can overridden with the command line flag
+            `--tlskey`, which would specify a path relative to the current working
+            directory where the Notary client is invoked.&lt;/p&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&#34;environment-variables-optional&#34;&gt;Environment variables (optional)&lt;/h2&gt;
+
+&lt;p&gt;The following environment variables containing signing key passphrases can
+be used to facilitate &lt;a href=&#34;../v1.10/notary/advanced_usage/&#34;&gt;Notary client CLI interaction&lt;/a&gt;.
+If provided, these passwords will be used initially to sign TUF metadata.
+If the passphrase is incorrect, you will be prompted to enter the correct
+passphrase.&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Environment Variable&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;NOTARY_ROOT_PASSPHRASE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The root/offline key passphrase&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;NOTARY_TARGETS_PASSPHRASE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The targets (an online) key passphrase&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;NOTARY_SNAPSHOT_PASSPHRASE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The snapshot (an online) key passphrase&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Common Server and Signer Configurations</title>
+      <link>https://docs.docker.com/v1.10/notary/reference/common-configs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/notary/reference/common-configs/</guid>
+      <description>
+
+&lt;h1 id=&#34;configure-sections-common-to-notary-server-and-signer&#34;&gt;Configure sections common to Notary server and signer&lt;/h1&gt;
+
+&lt;p&gt;The logging and bug reporting configuration options for both Notary server and
+Notary signer have the same keys and format. The following sections provide
+further detail.&lt;/p&gt;
+
+&lt;p&gt;For full specific configuration information, see the configuration files for the
+Notary &lt;a href=&#34;../v1.10/notary/reference/server-config/&#34;&gt;server&lt;/a&gt; or &lt;a href=&#34;../v1.10/notary/reference/signer-config/&#34;&gt;signer&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;logging-section-optional&#34;&gt;logging section (optional)&lt;/h2&gt;
+
+&lt;p&gt;The logging section sets the log level of the server.  If it is not provided
+or invalid, the signer defaults to an ERROR logging level.&lt;/p&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;&amp;quot;logging&amp;quot;: {
+  &amp;quot;level&amp;quot;: &amp;quot;debug&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note that this entire section is optional.  However, if you would like to
+specify a different log level, then you need the required parameters
+below to configure it.&lt;/p&gt;
+
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th&gt;Parameter&lt;/th&gt;
+        &lt;th&gt;Required&lt;/th&gt;
+        &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td valign=&#34;top&#34;&gt;&lt;code&gt;level&lt;/code&gt;&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;yes&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;One of &lt;code&gt;&#34;debug&#34;&lt;/code&gt;, &lt;code&gt;&#34;info&#34;&lt;/code&gt;,
+            &lt;code&gt;&#34;warning&#34;&lt;/code&gt;, &lt;code&gt;&#34;error&#34;&lt;/code&gt;, &lt;code&gt;&#34;fatal&#34;&lt;/code&gt;,
+            or &lt;code&gt;&#34;panic&#34;&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&#34;reporting-section-optional&#34;&gt;reporting section (optional)&lt;/h2&gt;
+
+&lt;p&gt;The reporting section contains any configuration for useful for running the
+service, such as reporting errors. Currently, Notary only supports reporting errors
+to &lt;a href=&#34;https://bugsnag.com&#34;&gt;Bugsnag&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;See &lt;a href=&#34;https://github.com/bugsnag/bugsnag-go/&#34;&gt;bugsnag-go&lt;/a&gt; for more information
+about these configuration parameters.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;&amp;quot;reporting&amp;quot;: {
+  &amp;quot;bugsnag&amp;quot;: {
+    &amp;quot;api_key&amp;quot;: &amp;quot;c9d60ae4c7e70c4b6c4ebd3e8056d2b8&amp;quot;,
+    &amp;quot;release_stage&amp;quot;: &amp;quot;production&amp;quot;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note that this entire section is optional.  If you want to report errors to
+Bugsnag, then you need to include a &lt;code&gt;bugsnag&lt;/code&gt; subsection, along with the
+required parameters below, to configure it.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Bugsnag reporting:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th&gt;Parameter&lt;/th&gt;
+        &lt;th&gt;Required&lt;/th&gt;
+        &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td valign=&#34;top&#34;&gt;&lt;code&gt;api_key&lt;/code&gt;&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;yes&lt;/td&gt;
+        &lt;td&gt;The BugSnag API key to use to report errors.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td valign=&#34;top&#34;&gt;&lt;code&gt;release_stage&lt;/code&gt;&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;yes&lt;/td&gt;
+        &lt;td&gt;The current release stage, such as &lt;code&gt;&#34;production&#34;&lt;/code&gt;.  You can
+            use this value to filter errors in the Bugsnag dashboard.&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&#34;related-information&#34;&gt;Related information&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/notary/reference/server-config/&#34;&gt;Notary Server Configuration File&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/notary/reference/signer-config/&#34;&gt;Notary Signer Configuration File&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Docker Notary</title>
+      <link>https://docs.docker.com/v1.10/notary/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/notary/</guid>
+      <description>
+
+&lt;h1 id=&#34;list-of-notary-documentation&#34;&gt;List of Notary Documentation&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/notary/getting_started/&#34;&gt;Getting Started&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/notary/advanced_usage/&#34;&gt;Advanced Usage&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/notary/service_architecture/&#34;&gt;Service Architecture&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/notary/running_a_service/&#34;&gt;Running a Service&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/notary/reference/&#34;&gt;Configuration files&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/notary/changelog/&#34;&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Getting started with Notary</title>
+      <link>https://docs.docker.com/v1.10/notary/getting_started/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/notary/getting_started/</guid>
+      <description>
+
+&lt;h1 id=&#34;getting-started-with-docker-notary&#34;&gt;Getting started with Docker Notary&lt;/h1&gt;
+
+&lt;p&gt;This document describes basic use of Notary as a tool supporting content trust.
+For more advanced use cases, you must &lt;a href=&#34;../v1.10/notary/running_a_service/&#34;&gt;run your own Notary
+service&lt;/a&gt; and should read the &lt;a href=&#34;../v1.10/notary/advanced_usage/&#34;&gt;use the Notary client for
+advanced users&lt;/a&gt; documentation.&lt;/p&gt;
+
+&lt;h2 id=&#34;install-notary&#34;&gt;Install Notary&lt;/h2&gt;
+
+&lt;p&gt;You can download precompiled notary binary for 64 bit Linux or Mac OS X from the
+Notary repository&amp;rsquo;s &lt;a href=&#34;https://github.com/docker/notary/releases&#34;&gt;releases page on
+GitHub&lt;/a&gt;. Windows is not officially
+supported, but if you are a developer and Windows user, we would appreciate any
+insight you can provide regarding issues.&lt;/p&gt;
+
+&lt;h2 id=&#34;understand-notary-naming&#34;&gt;Understand Notary naming&lt;/h2&gt;
+
+&lt;p&gt;Notary uses Globally Unique Names (GUNs) to identify trust collections. To
+enable Notary to run in a multi-tenant fashion, you must use use this format
+when interacting with Docker Hub through the Notary client. When specifying
+Docker image names for the Notary client, the GUN format is:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;For official images (identifiable by the &amp;ldquo;Official Repository&amp;rdquo; moniker), the
+image name as displayed on Docker Hub, prefixed with &lt;code&gt;docker.io/library/&lt;/code&gt;. For
+example, if you would normally type &lt;code&gt;docker pull ubuntu&lt;/code&gt; you must enter &lt;code&gt;notary
+&amp;lt;cmd&amp;gt; docker.io/library/ubuntu&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;For all other images, the image name as displayed on Docker Hub, prefixed by &lt;code&gt;docker.io&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The Docker Engine client takes care of these name expansions for you so do not
+change the names you use with the Engine client or API. This is a requirement
+only when interacting with the same Docker Hub repositories through the Notary
+client.&lt;/p&gt;
+
+&lt;h2 id=&#34;inspect-a-docker-hub-repository&#34;&gt;Inspect a Docker Hub repository&lt;/h2&gt;
+
+&lt;p&gt;The most basic operation is listing the available signed tags in a repository.
+The Notary client used in isolation does not know where the trust repositories
+are located. So, you must provide the &lt;code&gt;-s&lt;/code&gt; (or long form &lt;code&gt;--server&lt;/code&gt;) flag to
+tell the client which repository server it should communicate with.&lt;/p&gt;
+
+&lt;p&gt;The official Docker Hub Notary servers are located at
+&lt;code&gt;https://notary.docker.io&lt;/code&gt;. Additionally, Notary stores your own signing keys,
+and a cache of previously downloaded trust metadata in a directory, provided
+with the &lt;code&gt;-d&lt;/code&gt; flag. When interacting with Docker Hub repositories, you must
+instruct the client to use the associated trust directory, which by default is
+found at &lt;code&gt;.docker/trust&lt;/code&gt; within the calling user&amp;rsquo;s home directory (failing to
+use this directory may result in errors when publishing updates to your trust
+data):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ notary -s https://notary.docker.io -d ~/.docker/trust list docker.io/library/alpine
+   NAME                                 DIGEST                                SIZE (BYTES)    ROLE
+------------------------------------------------------------------------------------------------------
+  2.6      e9cec9aec697d8b9d450edd32860ecd363f2f3174c8338beb5f809422d182c63   1374           targets
+  2.7      9f08005dff552038f0ad2f46b8e65ff3d25641747d3912e3ea8da6785046561a   1374           targets
+  3.1      e876b57b2444813cd474523b9c74aacacc238230b288a22bccece9caf2862197   1374           targets
+  3.2      4a8c62881c6237b4c1434125661cddf09434d37c6ef26bf26bfaef0b8c5e2f05   1374           targets
+  3.3      2d4f890b7eddb390285e3afea9be98a078c2acd2fb311da8c9048e3d1e4864d3   1374           targets
+  edge     878c1b1d668830f01c2b1622ebf1656e32ce830850775d26a387b2f11f541239   1374           targets
+  latest   24a36bbc059b1345b7e8be0df20f1b23caa3602e85d42fff7ecd9d0bd255de56   1377           targets
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The output shows us the names of the tags available, the hex encoded sha256
+digest of the image manifest associated with that tag, the size of the manifest,
+and the Notary role that signed this tag into the repository. The &amp;ldquo;targets&amp;rdquo; role
+is the most common role in a simple repository. When a repository has (or
+expects) to have collaborators, you may see other &amp;ldquo;delegated&amp;rdquo; roles listed as
+signers, based on the choice of the administrator as to how they organize their
+collaborators.&lt;/p&gt;
+
+&lt;p&gt;When you run a &lt;code&gt;docker pull&lt;/code&gt; command, Docker Engine is using an integrated
+Notary library (the same one as Notary CLI) to request the mapping of tag
+to sha256 digest for the one tag you are interested in (or if you passed the
+&lt;code&gt;--all&lt;/code&gt; flag, the client will use the list operation to efficiently retrieve all
+the mappings). Having validated the signatures on the trust data, the client
+will then instruct the Engine to do a &amp;ldquo;pull by digest&amp;rdquo;.  During this pull, the
+Engine uses the sha256 checksum as a content address to request and validate the
+image manifest from the Docker registry.&lt;/p&gt;
+
+&lt;h2 id=&#34;delete-a-tag&#34;&gt;Delete a tag&lt;/h2&gt;
+
+&lt;p&gt;Notary generates and stores signing keys on the host it&amp;rsquo;s running on. This means
+that the Docker Hub cannot delete tags from the trust data, they must be deleted
+using the Notary client. You can do this with the &lt;code&gt;notary remove&lt;/code&gt; command.
+Again, you must direct it to speak to the correct Notary server (N.B. neither
+you nor the author has permissions to delete tags from the official alpine
+repository, the output below is for demonstration only):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ notary -s https://notary.docker.io -d ~/.docker/trust remove docker.io/library/alpine 2.6
+Removal of 2.6 from docker.io/library/alpine staged for next publish.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In the preceding example, the output message indicates that only the removal was
+staged. When performing any write operations they are staged into a change list.
+This list is applied to the latest version of the trust repository the next time
+a &lt;code&gt;notary publish&lt;/code&gt; is run for that repository.&lt;/p&gt;
+
+&lt;p&gt;You can see a pending change by running &lt;code&gt;notary status&lt;/code&gt; for the modified
+repository. The &lt;code&gt;status&lt;/code&gt; subcommand is an offline operation and as such, does
+not require the &lt;code&gt;-s&lt;/code&gt; flag, however it will silently ignore the flag if provided.
+Failing to provide the correct value for the &lt;code&gt;-d&lt;/code&gt; flag may show the wrong
+(probably empty) change list:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ notary -d ~/.docker/trust status docker.io/library/alpine
+Unpublished changes for docker.io/library/alpine:
+
+action    scope     type        path
+----------------------------------------------------
+delete    targets   target      2.6
+$ notary -s https://notary.docker.io publish docker.io/library/alpine
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;configure-the-client&#34;&gt;Configure the client&lt;/h2&gt;
+
+&lt;p&gt;It is verbose and tedious to always have to provide the &lt;code&gt;-s&lt;/code&gt; and &lt;code&gt;-d&lt;/code&gt; flags
+manually to most commands. A simple way to create preconfigured versions of the
+Notary command is via aliases. Add the following to your &lt;code&gt;.bashrc&lt;/code&gt; or
+equivalent:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;alias dockernotary=&amp;quot;notary -s https://notary.docker.io -d ~/.docker/trust&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;More advanced methods of configuration, and additional options, can be found in
+the &lt;a href=&#34;../v1.10/notary/reference/&#34;&gt;configuration doc&lt;/a&gt; and by running &lt;code&gt;notary --help&lt;/code&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Notary Changelog</title>
+      <link>https://docs.docker.com/v1.10/notary/changelog/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/notary/changelog/</guid>
+      <description>
+
+&lt;h1 id=&#34;changelog&#34;&gt;Changelog&lt;/h1&gt;
+
+&lt;h2 id=&#34;v0-2&#34;&gt;v0.2&lt;/h2&gt;
+
+&lt;h4 id=&#34;2-24-2016&#34;&gt;2/24/2016&lt;/h4&gt;
+
+&lt;p&gt;Adds support for &lt;a href=&#34;https://github.com/theupdateframework/tuf/blob/develop/docs/tuf-spec.txt#L387&#34;&gt;delegation roles&lt;/a&gt; in TUF.
+Delegations allow for easier key management amongst collaborators in a notary trusted collection, and fine-grained permissions on what content each delegate is allowed to modify and sign.
+This version also supports managing the snapshot key on notary server, which should be used when enabling delegations on a trusted collection.
+Moreover, this version also adds more key management functionality to the notary CLI, and changes the docker-compose development configuration to use the official MariaDB image.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Detailed release notes can be found here: &lt;a href=&#34;https://github.com/docker/notary/releases/tag/v0.2.0&#34;&gt;v0.2 release notes&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;v0-1&#34;&gt;v0.1&lt;/h2&gt;
+
+&lt;h4 id=&#34;11-15-2015&#34;&gt;11/15/2015&lt;/h4&gt;
+
+&lt;p&gt;Initial notary non-alpha release.
+Implements The Update Framework (TUF) with root, targets, snapshot, and timestamp roles to sign and verify content of a trusted collection.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Detailed release notes can be found here: &lt;a href=&#34;https://github.com/docker/notary/releases/tag/v0.1&#34;&gt;v0.1 release notes&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Notary Configuration</title>
+      <link>https://docs.docker.com/v1.10/notary/reference/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/notary/reference/</guid>
+      <description>
+
+&lt;h1 id=&#34;notary-configuration-files&#34;&gt;Notary configuration files&lt;/h1&gt;
+
+&lt;p&gt;This document is for power users of the &lt;a href=&#34;../v1.10/notary/advanced_usage/&#34;&gt;notary client&lt;/a&gt;,
+or for those who are &lt;a href=&#34;../v1.10/notary/running_a_service/&#34;&gt;running their own service&lt;/a&gt; who
+want to facilitate CLI interaction or specify custom options.&lt;/p&gt;
+
+&lt;p&gt;You can configure the following aspects of Notary:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/notary/reference/client-config/&#34;&gt;Notary Client Configuration File&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/notary/reference/server-config/&#34;&gt;Notary Server Configuration File&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/notary/reference/signer-config/&#34;&gt;Notary Signer Configuration File&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/notary/reference/common-configs/&#34;&gt;Configuration sections common to the Notary Server and Signer&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Running a Notary service</title>
+      <link>https://docs.docker.com/v1.10/notary/running_a_service/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/notary/running_a_service/</guid>
+      <description>
+
+&lt;h1 id=&#34;run-a-notary-service&#34;&gt;Run a Notary service&lt;/h1&gt;
+
+&lt;p&gt;This document is for anyone who wants to run their own Notary
+service (such as those who want to use Notary with a
+private Docker registry). Running a Notary service requires that you are already
+familiar with using &lt;a href=&#34;https://docs.docker.com/engine/userguide/&#34;&gt;Docker Engine&lt;/a&gt;
+and &lt;a href=&#34;https://docs.docker.com/compose/overview/&#34;&gt;Docker Compose&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;run-a-service-for-testing-or-development&#34;&gt;Run a service for testing or development&lt;/h2&gt;
+
+&lt;p&gt;The quickest way to spin up a full Notary service for testing and development
+purposes is to use the Docker compose file in the
+&lt;a href=&#34;https://github.com/docker/notary&#34;&gt;Notary project&lt;/a&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-plain&#34;&gt;$ git clone https://github.com/docker/notary.git
+$ cd notary
+$ docker-compose up
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will build the development Notary server and Notary signer images, and
+start up containers for the Notary server, Notary signer, and the MySQL
+database that both of them share.  The MySQL data is stored in a volume.&lt;/p&gt;
+
+&lt;p&gt;Notary server and Notary signer communicate over mutually authenticated TLS
+(using the self-signed testing certs in the repository), and Notary server
+listens for HTTPS traffic on port 4443.&lt;/p&gt;
+
+&lt;p&gt;By default, this development Notary server container runs with the testing
+self-signed TLS certificates. In order to be able to successfully connect to
+it, you will have to use the root CA file in &lt;code&gt;fixtures/root-ca.crt&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;For example, to connect using OpenSSL:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ openssl s_client -connect &amp;lt;docker host&amp;gt;:4443 -CAfile fixtures/root-ca.crt -no_ssl3 -no_ssl2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To connect using the Notary Client CLI, please see &lt;a href=&#34;../v1.10/notary/getting_started/&#34;&gt;Getting Started&lt;/a&gt;
+documentation.&lt;/p&gt;
+
+&lt;p&gt;The self-signed certificate&amp;rsquo;s subject name and subject alternative names are
+&lt;code&gt;notary-server&lt;/code&gt;, &lt;code&gt;notaryserver&lt;/code&gt;, and &lt;code&gt;localhost&lt;/code&gt;, so if your Docker host is not
+on localhost (for example if you are using Docker Machine), you&amp;rsquo;ll need to
+update your hosts file such that the name &lt;code&gt;notary-server&lt;/code&gt; is associated with
+the IP address of your Docker host.&lt;/p&gt;
+
+&lt;h2 id=&#34;advanced-configuration-options&#34;&gt;Advanced configuration options&lt;/h2&gt;
+
+&lt;p&gt;Both the Notary server and the Notary signer take
+&lt;a href=&#34;../v1.10/notary/reference/&#34;&gt;JSON configuration files&lt;/a&gt;. Pre-built images, such as
+the &lt;a href=&#34;#run-a-service-for-testing-or-development&#34;&gt;development images above&lt;/a&gt;
+provide these configuration files for you with some sane defaults.&lt;/p&gt;
+
+&lt;p&gt;However, for running in production, or if you just want to change those defaults
+on your development service, you probably want to change those defaults.&lt;/p&gt;
+
+&lt;h3 id=&#34;running-with-different-command-line-arguments&#34;&gt;Running with different command line arguments&lt;/h3&gt;
+
+&lt;p&gt;You can override the &lt;code&gt;docker run&lt;/code&gt; command for the image if you want to pass
+different command line options.  Both Notary server and Notary signer take
+the following command line arguments:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;-config=&amp;lt;config file&amp;gt;&lt;/code&gt; - specify the path to the JSON configuration file.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;-debug&lt;/code&gt; - Passing this flag enables the debugging server on &lt;code&gt;localhost:8080&lt;/code&gt;.
+The debugging server provides &lt;a href=&#34;https://golang.org/pkg/net/http/pprof/&#34;&gt;pprof&lt;/a&gt;
+and &lt;a href=&#34;https://golang.org/pkg/expvar/&#34;&gt;expvar&lt;/a&gt; endpoints.  (Remember, this
+is localhost with respect to the running container - this endpoint is not
+exposed from the container).&lt;/p&gt;
+
+&lt;p&gt;This option can also be set in the configuration file.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;-logf=&amp;lt;format&amp;gt;&lt;/code&gt; - This flag sets the output format for the logs. Possible
+formats are &amp;ldquo;json&amp;rdquo; and &amp;ldquo;logfmt&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;This option cannot be set in the configuration file, since some log
+messages are produced on startup before the configuration file has been
+read.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;specifying-your-own-configuration-files&#34;&gt;Specifying your own configuration files&lt;/h3&gt;
+
+&lt;p&gt;You can run the images with your own configuration files entirely.
+You just need to mount your configuration directory, and then pass the
+path to that configuration file as an argument to the &lt;code&gt;docker run&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;h3 id=&#34;overriding-configuration-file-parameters-using-environment-variables&#34;&gt;Overriding configuration file parameters using environment variables&lt;/h3&gt;
+
+&lt;p&gt;You can also override the parameters of the configuration by
+setting environment variables of the form &lt;code&gt;NOTARY_SERVER_&amp;lt;var&amp;gt;&lt;/code&gt; or
+&lt;code&gt;NOTARY_SIGNER_&amp;lt;var&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;var&lt;/code&gt; is the ALL-CAPS, &lt;code&gt;&amp;quot;_&amp;quot;&lt;/code&gt;-delimited path of keys from the top level of the
+configuration JSON.&lt;/p&gt;
+
+&lt;p&gt;For instance, if you wanted to override the storage URL of the Notary server
+configuration:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;&amp;quot;storage&amp;quot;: {
+  &amp;quot;backend&amp;quot;: &amp;quot;mysql&amp;quot;,
+  &amp;quot;db_url&amp;quot;: &amp;quot;dockercondemo:dockercondemo@tcp(notary-mysql)/dockercondemo&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You would need to set the environment variable &lt;code&gt;NOTARY_SERVER_STORAGE_DB_URL&lt;/code&gt;,
+because the &lt;code&gt;db_url&lt;/code&gt; is in the &lt;code&gt;storage&lt;/code&gt; section of the Notary server
+configuration JSON.&lt;/p&gt;
+
+&lt;p&gt;Note that you cannot override a key whose value is another map.
+For instance, setting
+&lt;code&gt;NOTARY_SERVER_STORAGE=&#39;{&amp;quot;storage&amp;quot;: {&amp;quot;backend&amp;quot;: &amp;quot;memory&amp;quot;}}&#39;&lt;/code&gt; will not
+set in-memory storage.  It just fails to parse.  You can only override keys
+whose values are strings or numbers.&lt;/p&gt;
+
+&lt;p&gt;For example, let&amp;rsquo;s say that you wanted to run a single Notary server instance:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;with your own TLS cert and keys&lt;/li&gt;
+&lt;li&gt;with a local, in-memory signer service rather than using Notary signer,&lt;/li&gt;
+&lt;li&gt;using a local, in-memory TUF metadata store rather than using MySQL&lt;/li&gt;
+&lt;li&gt;produce JSON-formatted logs&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;One way to do this would be:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Generate your own TLS certificate and key as &lt;code&gt;server.crt&lt;/code&gt; and &lt;code&gt;server.key&lt;/code&gt;,
+and put them in the directory &lt;code&gt;/tmp/server-configdir&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Write the following configuration file to &lt;code&gt;/tmp/server-configdir/config.json&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+  &amp;quot;server&amp;quot;: {
+    &amp;quot;http_addr&amp;quot;: &amp;quot;:4443&amp;quot;,
+    &amp;quot;tls_key_file&amp;quot;: &amp;quot;./server.key&amp;quot;,
+    &amp;quot;tls_cert_file&amp;quot;: &amp;quot;./server.crt&amp;quot;
+  },
+  &amp;quot;trust_service&amp;quot;: {
+    &amp;quot;type&amp;quot;: &amp;quot;remote&amp;quot;,
+    &amp;quot;hostname&amp;quot;: &amp;quot;notarysigner&amp;quot;,
+    &amp;quot;port&amp;quot;: &amp;quot;7899&amp;quot;,
+    &amp;quot;tls_ca_file&amp;quot;: &amp;quot;./root-ca.crt&amp;quot;,
+    &amp;quot;key_algorithm&amp;quot;: &amp;quot;ecdsa&amp;quot;,
+    &amp;quot;tls_client_cert&amp;quot;: &amp;quot;./notary-server.crt&amp;quot;,
+    &amp;quot;tls_client_key&amp;quot;: &amp;quot;./notary-server.key&amp;quot;
+  },
+  &amp;quot;storage&amp;quot;: {
+    &amp;quot;backend&amp;quot;: &amp;quot;mysql&amp;quot;,
+    &amp;quot;db_url&amp;quot;: &amp;quot;server@tcp(mysql:3306)/notaryserver?parseTime=True&amp;quot;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note that we are including a remote trust service and a database storage
+type in order to demonstrate how environment variables can override
+configuration parameters.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Run the following command (assuming you&amp;rsquo;ve already built or pulled a Notary server docker image):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run \
+    -p &amp;quot;4443:4443&amp;quot; \
+    -v /tmp/server-configdir:/etc/docker/notary-server/ \
+    -e NOTARY_SERVER_TRUST_SERVICE_TYPE=local \
+    -e NOTARY_SERVER_STORAGE_BACKEND=memory \
+    -e NOTARY_SERVER_LOGGING_LEVEL=debug \
+    notary_server \
+        -config=/etc/docker/notary-server/config.json \
+        -logf=json
+{&amp;quot;level&amp;quot;:&amp;quot;info&amp;quot;,&amp;quot;msg&amp;quot;:&amp;quot;Version: 0.2, Git commit: 619f8cf&amp;quot;,&amp;quot;time&amp;quot;:&amp;quot;2016-02-25T00:53:59Z&amp;quot;}
+{&amp;quot;level&amp;quot;:&amp;quot;info&amp;quot;,&amp;quot;msg&amp;quot;:&amp;quot;Using local signing service, which requires ED25519. Ignoring all other trust_service parameters, including keyAlgorithm&amp;quot;,&amp;quot;time&amp;quot;:&amp;quot;2016-02-25T00:53:59Z&amp;quot;}
+{&amp;quot;level&amp;quot;:&amp;quot;info&amp;quot;,&amp;quot;msg&amp;quot;:&amp;quot;Using memory backend&amp;quot;,&amp;quot;time&amp;quot;:&amp;quot;2016-02-25T00:53:59Z&amp;quot;}
+{&amp;quot;level&amp;quot;:&amp;quot;info&amp;quot;,&amp;quot;msg&amp;quot;:&amp;quot;Starting Server&amp;quot;,&amp;quot;time&amp;quot;:&amp;quot;2016-02-25T00:53:59Z&amp;quot;}
+{&amp;quot;level&amp;quot;:&amp;quot;info&amp;quot;,&amp;quot;msg&amp;quot;:&amp;quot;Enabling TLS&amp;quot;,&amp;quot;time&amp;quot;:&amp;quot;2016-02-25T00:53:59Z&amp;quot;}
+{&amp;quot;level&amp;quot;:&amp;quot;info&amp;quot;,&amp;quot;msg&amp;quot;:&amp;quot;Starting on :4443&amp;quot;,&amp;quot;time&amp;quot;:&amp;quot;2016-02-25T00:53:59Z&amp;quot;}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;You can do the same using &lt;a href=&#34;https://docs.docker.com/compose/overview/&#34;&gt;Docker
+Compose&lt;/a&gt; by setting volumes,
+environment variables, and overriding the default command for the Notary server
+containers in the Compose file.&lt;/p&gt;
+
+&lt;h2 id=&#34;recommendations-for-deploying-in-production&#34;&gt;Recommendations for deploying in production&lt;/h2&gt;
+
+&lt;p&gt;When moving from development to production there are a number of considerations
+that must be made to ensure security and scalability.&lt;/p&gt;
+
+&lt;h3 id=&#34;certificates&#34;&gt;Certificates&lt;/h3&gt;
+
+&lt;p&gt;The Notary repository includes sample certificates in the fixtures directory.
+When you initialize a development service using the provided docker-compose.yml
+file, these sample certificates are used to create a more production like
+environment.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;You must acquire &lt;em&gt;your&lt;/em&gt; &lt;em&gt;own&lt;/em&gt; &lt;em&gt;certificates&lt;/em&gt; to use in a production deployment.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The sample private key files in the Notary repository are obviously public knowledge
+and using them in a production deployment is highly insecure.&lt;/p&gt;
+
+&lt;h3 id=&#34;databases&#34;&gt;Databases&lt;/h3&gt;
+
+&lt;p&gt;The server and signer each require a database. These should be separate databases
+with different users. The users should be limited in their permissions. We recommend
+giving the following MySQL (or equivalent) permissions to the users restricted to
+only their own databases:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Notary server database user: &lt;code&gt;SELECT, INSERT, UPDATE, DELETE&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Notary signer database user: &lt;code&gt;SELECT, INSERT, DELETE&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;high-availability&#34;&gt;High Availability&lt;/h3&gt;
+
+&lt;p&gt;Most production users will want to increase availability by running multiple instances
+of both the server and signer applications. These can be scaled arbitrarily and
+independently. The database may also be scaled independently but this is left as
+and exercise for experienced DBAs and Operations teams. A typical deployment will
+look like the below diagram:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../notary/images/service-deployment.svg&#34; alt=&#34;Notary server Deployment Diagram&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In the diagram, a load balancer routes external traffic to a cluster of Notary server
+instances. These may make requests to Notary signer instaces if either a) signing
+is required, or b) key generation is required. The requests from a Notary server
+to a Notary signer cluster are router via an internal load balancer.&lt;/p&gt;
+
+&lt;p&gt;Notary can be used with a CDN or other caching system. All GET requests for JSON
+files may be cached indefinitely &lt;strong&gt;except&lt;/strong&gt; URLs matching:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;*/root.json&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;*/timestamp.json&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;All other requests for JSON files include sha256 checksums of the file being requested
+and are therefore immutable. Requests for JSON files make up the vast majority of
+all notary requests. Requests for anything other than a GET of a JSON file should
+not be cached.&lt;/p&gt;
+
+&lt;h2 id=&#34;related-information&#34;&gt;Related information&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/notary/service_architecture/&#34;&gt;Notary service architecture&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/notary/reference/&#34;&gt;Notary configuration files&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Server Configuration</title>
+      <link>https://docs.docker.com/v1.10/notary/reference/server-config/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/notary/reference/server-config/</guid>
+      <description>
+
+&lt;h1 id=&#34;notary-server-configuration-file&#34;&gt;Notary server configuration file&lt;/h1&gt;
+
+&lt;p&gt;This document is for those who are &lt;a href=&#34;../v1.10/notary/running_a_service/&#34;&gt;running their own Notary service&lt;/a&gt; who
+want to specify custom options.&lt;/p&gt;
+
+&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+
+&lt;p&gt;A configuration file is required by Notary server, and the path to the
+configuration file must be specified using the &lt;code&gt;-config&lt;/code&gt; option on the command
+line.&lt;/p&gt;
+
+&lt;p&gt;Here is a full server configuration file example; please click on the top level JSON keys to
+learn more about the configuration section corresponding to that key:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
+  &lt;a href=&#34;#server-section-required&#34;&gt;&#34;server&#34;&lt;/a&gt;: {
+    &#34;http_addr&#34;: &#34;:4443&#34;,
+    &#34;tls_key_file&#34;: &#34;./fixtures/notary-server.key&#34;,
+    &#34;tls_cert_file&#34;: &#34;./fixtures/notary-server.crt&#34;
+  },
+  &lt;a href=&#34;#trust-service-section-required&#34;&gt;&#34;trust_service&#34;&lt;/a&gt;: {
+    &#34;type&#34;: &#34;remote&#34;,
+    &#34;hostname&#34;: &#34;notarysigner&#34;,
+    &#34;port&#34;: &#34;7899&#34;,
+    &#34;key_algorithm&#34;: &#34;ecdsa&#34;,
+    &#34;tls_ca_file&#34;: &#34;./fixtures/root-ca.crt&#34;,
+    &#34;tls_client_cert&#34;: &#34;./fixtures/notary-server.crt&#34;,
+    &#34;tls_client_key&#34;: &#34;./fixtures/notary-server.key&#34;
+  },
+  &lt;a href=&#34;#storage-section-required&#34;&gt;&#34;storage&#34;&lt;/a&gt;: {
+    &#34;backend&#34;: &#34;mysql&#34;,
+    &#34;db_url&#34;: &#34;user:pass@tcp(notarymysql:3306)/databasename?parseTime=true&#34;
+  },
+  &lt;a href=&#34;#auth-section-optional&#34;&gt;&#34;auth&#34;&lt;/a&gt;: {
+    &#34;type&#34;: &#34;token&#34;,
+    &#34;options&#34;: {
+      &#34;realm&#34;: &#34;https://auth.docker.io/token&#34;,
+      &#34;service&#34;: &#34;notary-server&#34;,
+      &#34;issuer&#34;: &#34;auth.docker.io&#34;,
+      &#34;rootcertbundle&#34;: &#34;/path/to/auth.docker.io/cert&#34;
+    }
+  },
+  &lt;a href=&#34;../common-configs/#logging-section-optional&#34;&gt;&#34;logging&#34;&lt;/a&gt;: {
+    &#34;level&#34;: &#34;debug&#34;
+  },
+  &lt;a href=&#34;../common-configs/#reporting-section-optional&#34;&gt;&#34;reporting&#34;&lt;/a&gt;: {
+    &#34;bugsnag&#34;: {
+      &#34;api_key&#34;: &#34;c9d60ae4c7e70c4b6c4ebd3e8056d2b8&#34;,
+      &#34;release_stage&#34;: &#34;production&#34;
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;server-section-required&#34;&gt;server section (required)&lt;/h2&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;&amp;quot;server&amp;quot;: {
+  &amp;quot;http_addr&amp;quot;: &amp;quot;:4443&amp;quot;,
+  &amp;quot;tls_key_file&amp;quot;: &amp;quot;./fixtures/notary-server.key&amp;quot;,
+  &amp;quot;tls_cert_file&amp;quot;: &amp;quot;./fixtures/notary-server.crt&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th&gt;Parameter&lt;/th&gt;
+        &lt;th&gt;Required&lt;/th&gt;
+        &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td valign=&#34;top&#34;&gt;&lt;code&gt;http_addr&lt;/code&gt;&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;yes&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;The TCP address (IP and port) to listen on.  Examples:
+            &lt;ul&gt;
+            &lt;li&gt;&lt;code&gt;&#34;:4443&#34;&lt;/code&gt; means listen on port 4443 on all IPs (and
+                hence all interfaces, such as those listed when you run
+                &lt;code&gt;ifconfig&lt;/code&gt;)&lt;/li&gt;
+            &lt;li&gt;&lt;code&gt;&#34;127.0.0.1:4443&#34;&lt;/code&gt; means listen on port 4443 on
+                localhost only.  That means that the server will not be
+                accessible except locally (via SSH tunnel, or just on a local
+                terminal)&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td valign=&#34;top&#34;&gt;&lt;code&gt;tls_key_file&lt;/code&gt;&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;no&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;The path to the private key to use for
+            HTTPS.  Must be provided together with &lt;code&gt;tls_cert_file&lt;/code&gt;,
+            or not at all. If neither are provided, the server will use HTTP
+            instead of HTTPS. The path is relative to the directory of the
+            configuration file.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td valign=&#34;top&#34;&gt;&lt;code&gt;tls_cert_file&lt;/code&gt;&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;no&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;The path to the certificate to use for HTTPS.
+            Must be provided together with &lt;code&gt;tls_key_file&lt;/code&gt;, or not
+            at all. If neither are provided, the server will use HTTP instead
+            of HTTPS. The path is relative to the directory of the
+            configuration file.&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&#34;trust-service-section-required&#34;&gt;trust_service section (required)&lt;/h2&gt;
+
+&lt;p&gt;This section configures either a remote trust service, such as
+&lt;a href=&#34;../v1.10/notary/reference/signer-config/&#34;&gt;Notary signer&lt;/a&gt; or a local in-memory
+ED25519 trust service.&lt;/p&gt;
+
+&lt;p&gt;Remote trust service example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;&amp;quot;trust_service&amp;quot;: {
+  &amp;quot;type&amp;quot;: &amp;quot;remote&amp;quot;,
+  &amp;quot;hostname&amp;quot;: &amp;quot;notarysigner&amp;quot;,
+  &amp;quot;port&amp;quot;: &amp;quot;7899&amp;quot;,
+  &amp;quot;key_algorithm&amp;quot;: &amp;quot;ecdsa&amp;quot;,
+  &amp;quot;tls_ca_file&amp;quot;: &amp;quot;./fixtures/root-ca.crt&amp;quot;,
+  &amp;quot;tls_client_cert&amp;quot;: &amp;quot;./fixtures/notary-server.crt&amp;quot;,
+  &amp;quot;tls_client_key&amp;quot;: &amp;quot;./fixtures/notary-server.key&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Local trust service example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;&amp;quot;trust_service&amp;quot;: {
+  &amp;quot;type&amp;quot;: &amp;quot;local&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th&gt;Parameter&lt;/th&gt;
+        &lt;th&gt;Required&lt;/th&gt;
+        &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td valign=&#34;top&#34;&gt;&lt;code&gt;type&lt;/code&gt;&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;yes&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;Must be &lt;code&gt;&#34;remote&#34;&lt;/code&gt; or &lt;code&gt;&#34;local&#34;&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td valign=&#34;top&#34;&gt;&lt;code&gt;hostname&lt;/code&gt;&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;yes if remote&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;The hostname of the remote trust service&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td valign=&#34;top&#34;&gt;&lt;code&gt;port&lt;/code&gt;&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;yes if remote&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;The GRPC port of the remote trust service&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td valign=&#34;top&#34;&gt;&lt;code&gt;key_algorithm&lt;/code&gt;&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;yes if remote&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;Algorithm to use to generate keys stored on the
+            signing service.  Valid values are &lt;code&gt;&#34;ecdsa&#34;&lt;/code&gt;,
+            &lt;code&gt;&#34;rsa&#34;&lt;/code&gt;, and &lt;code&gt;&#34;ed25519&#34;&lt;/code&gt;.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td valign=&#34;top&#34;&gt;&lt;code&gt;tls_ca_file&lt;/code&gt;&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;no&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;The path to the root CA that signed the TLS
+            certificate of the remote service. This parameter must be
+            provided if said root CA is not in the system&#39;s default trust
+            roots. The path is relative to the directory of the configuration file.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td valign=&#34;top&#34;&gt;&lt;code&gt;tls_client_key&lt;/code&gt;&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;no&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;The path to the private key to use for TLS mutual
+            authentication. This must be provided together with
+            &lt;code&gt;tls_client_cert&lt;/code&gt; or not at all. The path is relative
+            to the directory of the configuration file.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td valign=&#34;top&#34;&gt;&lt;code&gt;tls_client_cert&lt;/code&gt;&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;no&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;The path to the certificate to use for TLS mutual
+            authentication. This must be provided together with
+            &lt;code&gt;tls_client_key&lt;/code&gt; or not at all. The path is relative
+            to the directory of the configuration file.&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&#34;storage-section-required&#34;&gt;storage section (required)&lt;/h2&gt;
+
+&lt;p&gt;The storage section specifies which storage backend the server should use to
+store TUF metadata.  Only MySQL or an in-memory store is supported.&lt;/p&gt;
+
+&lt;p&gt;DB storage example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;&amp;quot;storage&amp;quot;: {
+  &amp;quot;backend&amp;quot;: &amp;quot;mysql&amp;quot;,
+  &amp;quot;db_url&amp;quot;: &amp;quot;user:pass@tcp(notarymysql:3306)/databasename?parseTime=true&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th&gt;Parameter&lt;/th&gt;
+        &lt;th&gt;Required&lt;/th&gt;
+        &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td valign=&#34;top&#34;&gt;&lt;code&gt;backend&lt;/code&gt;&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;yes&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;Must be &lt;code&gt;&#34;mysql&#34;&lt;/code&gt; or &lt;code&gt;&#34;memory&#34;&lt;/code&gt;.
+            If &lt;code&gt;&#34;memory&#34;&lt;/code&gt; is selected, the &lt;code&gt;db_url&lt;/code&gt;
+            is ignored.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td valign=&#34;top&#34;&gt;&lt;code&gt;db_url&lt;/code&gt;&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;yes if not &lt;code&gt;memory&lt;/code&gt;&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;The &lt;a href=&#34;https://github.com/go-sql-driver/mysql&#34;&gt;
+            the Data Source Name used to access the DB.&lt;/a&gt;
+            (note: please include &lt;code&gt;parseTime=true&lt;/code&gt; as part of the the DSN)&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&#34;auth-section-optional&#34;&gt;auth section (optional)&lt;/h2&gt;
+
+&lt;p&gt;This sections specifies the authentication options for the server.
+Currently, we only support token authentication.&lt;/p&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;&amp;quot;auth&amp;quot;: {
+  &amp;quot;type&amp;quot;: &amp;quot;token&amp;quot;,
+  &amp;quot;options&amp;quot;: {
+    &amp;quot;realm&amp;quot;: &amp;quot;https://auth.docker.io&amp;quot;,
+    &amp;quot;service&amp;quot;: &amp;quot;notary-server&amp;quot;,
+    &amp;quot;issuer&amp;quot;: &amp;quot;auth.docker.io&amp;quot;,
+    &amp;quot;rootcertbundle&amp;quot;: &amp;quot;/path/to/auth.docker.io/cert&amp;quot;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note that this entire section is optional.  However, if you would like
+authentication for your server, then you need the required parameters below to
+configure it.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Token authentication:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This is an implementation of the same authentication used by version 2 of the
+&lt;a href=&#34;https://github.com/docker/distribution&#34;&gt;Docker registry&lt;/a&gt;.  (JWT token-based
+authentication post login.)&lt;/p&gt;
+
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th&gt;Parameter&lt;/th&gt;
+        &lt;th&gt;Required&lt;/th&gt;
+        &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td valign=&#34;top&#34;&gt;&lt;code&gt;type&lt;/code&gt;&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;yes&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;Must be &lt;code&gt;&#34;token&#34;&lt;/code&gt;; all other values will result in no
+            authentication (and the rest of the parameters will be ignored)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td valign=&#34;top&#34;&gt;&lt;code&gt;options&lt;/code&gt;&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;yes&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;The options for token auth.  Please see
+            &lt;a href=&#34;https://github.com/docker/distribution/blob/master/docs/configuration.md#token&#34;&gt;
+            the registry token configuration documentation&lt;/a&gt;
+            for the parameter details.&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&#34;related-information&#34;&gt;Related information&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/notary/reference/signer-config/&#34;&gt;Notary Signer Configuration File&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/notary/reference/common-configs/&#34;&gt;Configuration sections common to the Notary Server and Signer&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Signer Configuration</title>
+      <link>https://docs.docker.com/v1.10/notary/reference/signer-config/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/notary/reference/signer-config/</guid>
+      <description>
+
+&lt;h1 id=&#34;notary-signer-configuration-file&#34;&gt;Notary signer configuration file&lt;/h1&gt;
+
+&lt;p&gt;This document is for those who are &lt;a href=&#34;../v1.10/notary/running_a_service/&#34;&gt;running their own Notary service&lt;/a&gt; who
+want to specify custom options.&lt;/p&gt;
+
+&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+
+&lt;p&gt;Notary signer &lt;a href=&#34;#environment-variables-required-if-using-mysql&#34;&gt;requires environment variables&lt;/a&gt;
+to encrypt private keys at rest. It also requires a configuration file, the path to which is
+specified on the command line using the &lt;code&gt;-config&lt;/code&gt; flag.&lt;/p&gt;
+
+&lt;p&gt;Here is a full signer configuration file example; please click on the top level JSON keys to
+learn more about the configuration section corresponding to that key:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
+  &lt;a href=&#34;#server-section-required&#34;&gt;&#34;server&#34;&lt;/a&gt;: {
+    &#34;http_addr&#34;: &#34;:4444&#34;,
+    &#34;grpc_addr&#34;: &#34;:7899&#34;,
+    &#34;tls_cert_file&#34;: &#34;./fixtures/notary-signer.crt&#34;,
+    &#34;tls_key_file&#34;: &#34;./fixtures/notary-signer.key&#34;,
+    &#34;client_ca_file&#34;: &#34;./fixtures/notary-server.crt&#34;
+  },
+  &lt;a href=&#34;../common-configs/#logging-section-optional&#34;&gt;&#34;logging&#34;&lt;/a&gt;: {
+    &#34;level&#34;: 2
+  },
+  &lt;a href=&#34;#storage-section-required&#34;&gt;&#34;storage&#34;&lt;/a&gt;: {
+    &#34;backend&#34;: &#34;mysql&#34;,
+    &#34;db_url&#34;: &#34;user:pass@tcp(notarymysql:3306)/databasename?parseTime=true&#34;,
+    &#34;default_alias&#34;: &#34;passwordalias1&#34;
+  },
+  &lt;a href=&#34;../common-configs/#reporting-section-optional&#34;&gt;&#34;reporting&#34;&lt;/a&gt;: {
+    &#34;bugsnag&#34;: {
+      &#34;api_key&#34;: &#34;c9d60ae4c7e70c4b6c4ebd3e8056d2b8&#34;,
+      &#34;release_stage&#34;: &#34;production&#34;
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;server-section-required&#34;&gt;server section (required)&lt;/h2&gt;
+
+&lt;p&gt;&amp;ldquo;server&amp;rdquo; in this case refers to Notary signer&amp;rsquo;s HTTP/GRPC server, not
+&amp;ldquo;Notary server&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;&amp;quot;server&amp;quot;: {
+  &amp;quot;http_addr&amp;quot;: &amp;quot;:4444&amp;quot;,
+  &amp;quot;grpc_addr&amp;quot;: &amp;quot;:7899&amp;quot;,
+  &amp;quot;tls_cert_file&amp;quot;: &amp;quot;./fixtures/notary-signer.crt&amp;quot;,
+  &amp;quot;tls_key_file&amp;quot;: &amp;quot;./fixtures/notary-signer.key&amp;quot;,
+  &amp;quot;client_ca_file&amp;quot;: &amp;quot;./fixtures/notary-server.crt&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th&gt;Parameter&lt;/th&gt;
+        &lt;th&gt;Required&lt;/th&gt;
+        &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td valign=&#34;top&#34;&gt;&lt;code&gt;http_addr&lt;/code&gt;&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;yes&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;The TCP address (IP and port) to listen for HTTP
+            traffic on.  Examples:
+            &lt;ul&gt;
+            &lt;li&gt;&lt;code&gt;&#34;:4444&#34;&lt;/code&gt; means listen on port 4444 on all IPs (and
+                hence all interfaces, such as those listed when you run
+                &lt;code&gt;ifconfig&lt;/code&gt;)&lt;/li&gt;
+            &lt;li&gt;&lt;code&gt;&#34;127.0.0.1:4444&#34;&lt;/code&gt; means listen on port 4444 on
+                localhost only.  That means that the server will not be
+                accessible except locally (via SSH tunnel, or just on a local
+                terminal)&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td valign=&#34;top&#34;&gt;&lt;code&gt;grpc_addr&lt;/code&gt;&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;yes&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;The TCP address (IP and port) to listen for GRPC
+            traffic.  Examples:
+            &lt;ul&gt;
+            &lt;li&gt;&lt;code&gt;&#34;:7899&#34;&lt;/code&gt; means listen on port 7899 on all IPs (and
+                hence all interfaces, such as those listed when you run
+                &lt;code&gt;ifconfig&lt;/code&gt;)&lt;/li&gt;
+            &lt;li&gt;&lt;code&gt;&#34;127.0.0.1:7899&#34;&lt;/code&gt; means listen on port 7899 on
+                localhost only.  That means that the server will not be
+                accessible except locally (via SSH tunnel, or just on a local
+                terminal)&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td valign=&#34;top&#34;&gt;&lt;code&gt;tls_key_file&lt;/code&gt;&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;yes&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;The path to the private key to use for
+            HTTPS. The path is relative to the directory of the
+            configuration file.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td valign=&#34;top&#34;&gt;&lt;code&gt;tls_cert_file&lt;/code&gt;&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;yes&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;The path to the certificate to use for
+            HTTPS. The path is relative to the directory of the
+            configuration file.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td valign=&#34;top&#34;&gt;&lt;code&gt;client_ca_file&lt;/code&gt;&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;no&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;The root certificate to trust for
+            mutual authentication. If provided, any clients connecting to
+            Notary signer will have to have a client certificate signed by
+            this root. If not provided, mutual authentication will not be
+            required. The path is relative to the directory of the
+            configuration file.&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&#34;storage-section-required&#34;&gt;storage section (required)&lt;/h2&gt;
+
+&lt;p&gt;This is used to store encrypted private keys.  We only support MySQL or an
+in-memory store, currently.&lt;/p&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;&amp;quot;storage&amp;quot;: {
+  &amp;quot;backend&amp;quot;: &amp;quot;mysql&amp;quot;,
+  &amp;quot;db_url&amp;quot;: &amp;quot;user:pass@tcp(notarymysql:3306)/databasename?parseTime=true&amp;quot;,
+  &amp;quot;default_alias&amp;quot;: &amp;quot;passwordalias1&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th&gt;Parameter&lt;/th&gt;
+        &lt;th&gt;Required&lt;/th&gt;
+        &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td valign=&#34;top&#34;&gt;&lt;code&gt;backend&lt;/code&gt;&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;yes&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;Must be &lt;code&gt;&#34;mysql&#34;&lt;/code&gt; or &lt;code&gt;&#34;memory&#34;&lt;/code&gt;.
+            If &lt;code&gt;&#34;memory&#34;&lt;/code&gt; is selected, the &lt;code&gt;db_url&lt;/code&gt;
+            is ignored.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td valign=&#34;top&#34;&gt;&lt;code&gt;db_url&lt;/code&gt;&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;yes if not &lt;code&gt;memory&lt;/code&gt;&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;The &lt;a href=&#34;https://github.com/go-sql-driver/mysql&#34;&gt;
+            the Data Source Name used to access the DB.&lt;/a&gt;
+            (note: please include &lt;code&gt;parseTime=true&lt;/code&gt; as part of the the DSN)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td valign=&#34;top&#34;&gt;&lt;code&gt;default_alias&lt;/code&gt;&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;yes if not &lt;code&gt;memory&lt;/code&gt;&lt;/td&gt;
+        &lt;td valign=&#34;top&#34;&gt;This parameter specifies the alias of the current
+            password used to encrypt the private keys in the DB.  All new
+            private keys will be encrypted using this password, which
+            must also be provided as the environment variable
+            &lt;code&gt;NOTARY_SIGNER_&amp;lt;DEFAULT_ALIAS_VALUE&amp;gt;&lt;/code&gt;.
+            Please see the &lt;a href=&#34;#environment-variables-required-if-using-mysql&#34;&gt;environment variable&lt;/a&gt;
+            section for more information.&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&#34;environment-variables-required-if-using-mysql&#34;&gt;Environment variables (required if using MySQL)&lt;/h2&gt;
+
+&lt;p&gt;Notary signer stores the private keys in encrypted form.
+The alias of the passphrase used to encrypt the keys is also stored.  In order
+to encrypt the keys for storage and decrypt the keys for signing, the
+passphrase must be passed in as an environment variable.&lt;/p&gt;
+
+&lt;p&gt;For example, the configuration above specifies the default password alias to be
+&lt;code&gt;passwordalias1&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;If this configuration is used, then you must:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;export NOTARY_SIGNER_PASSWORDALIAS1=mypassword&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;so that that Notary signer knows to encrypt all keys with the passphrase
+&lt;code&gt;mypassword&lt;/code&gt;, and to decrypt any private key stored with password alias
+&lt;code&gt;passwordalias1&lt;/code&gt; with the passphrase &lt;code&gt;mypassword&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Older passwords may also be provided as environment variables.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s say that you wanted to change the password that is used to create new
+keys (rotating the passphrase and re-encrypting all the private keys is not
+supported yet).&lt;/p&gt;
+
+&lt;p&gt;You could change the config to look like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;&amp;quot;storage&amp;quot;: {
+  &amp;quot;backend&amp;quot;: &amp;quot;mysql&amp;quot;,
+  &amp;quot;db_url&amp;quot;: &amp;quot;user:pass@tcp(notarymysql:3306)/databasename?parseTime=true&amp;quot;,
+  &amp;quot;default_alias&amp;quot;: &amp;quot;passwordalias2&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then you can set:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;export NOTARY_SIGNER_PASSWORDALIAS1=mypassword
+export NOTARY_SIGNER_PASSWORDALIAS2=mynewfancypassword
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That way, all new keys will be encrypted and decrypted using the passphrase
+&lt;code&gt;mynewfancypassword&lt;/code&gt;, but old keys that were encrypted using the passphrase
+&lt;code&gt;mypassword&lt;/code&gt; can still be decrypted.&lt;/p&gt;
+
+&lt;p&gt;The environment variables for the older passwords are optional, but Notary
+Signer will not be able to decrypt older keys if they are not provided, and
+attempts to sign data using those keys will fail.&lt;/p&gt;
+
+&lt;h2 id=&#34;related-information&#34;&gt;Related information&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/notary/reference/server-config/&#34;&gt;Notary Server Configuration File&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/notary/reference/common-configs/&#34;&gt;Configuration sections common to the Notary server and signer&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Understand the service architecture</title>
+      <link>https://docs.docker.com/v1.10/notary/service_architecture/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/notary/service_architecture/</guid>
+      <description>
+
+&lt;h1 id=&#34;understand-the-notary-service-architecture&#34;&gt;Understand the Notary service architecture&lt;/h1&gt;
+
+&lt;p&gt;On this page, you get an overview of the Notary service architecture. This
+document assumes a prior understanding of &lt;a href=&#34;https://theupdateframework.github.io/&#34;&gt;The Update
+Framework&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;architecture-and-components&#34;&gt;Architecture and components&lt;/h2&gt;
+
+&lt;p&gt;A Notary service consists of a Notary server, which stores and updates the
+signed &lt;a href=&#34;https://github.com/theupdateframework/tuf/blob/develop/docs/tuf-spec.txt#L348&#34;&gt;TUF metadata files&lt;/a&gt;
+for multiple trusted collections in an associated database, and a Notary signer, which
+stores private keys for and signs metadata for the Notary server. The following
+diagram illustrates this architecture:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../notary/images/service-architecture.svg&#34; alt=&#34;Notary Service Architecture Diagram&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Root, targets, and (sometimes) snapshot metadata are generated and signed by
+clients, who upload the metadata to the Notary server. The server is
+responsible for:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ensuring that any uploaded metadata is valid, signed, and self-consistent&lt;/li&gt;
+&lt;li&gt;generating the timestamp (and sometimes snapshot) metadata&lt;/li&gt;
+&lt;li&gt;storing and serving to clients the latest valid metadata for any trusted collection&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The Notary signer is responsible for:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;storing the private signing keys
+&lt;a href=&#34;https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-31#section-4.4&#34;&gt;wrapped&lt;/a&gt;
+and &lt;a href=&#34;https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-31#section-4.8&#34;&gt;encrypted&lt;/a&gt;
+using &lt;a href=&#34;https://github.com/dvsekhvalnov/jose2go&#34;&gt;Javascript Object Signing and Encryption&lt;/a&gt; in a database separate from the
+Notary server database&lt;/li&gt;
+&lt;li&gt;performing signing operations with these keys whenever the Notary server requests&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;example-client-server-signer-interaction&#34;&gt;Example client-server-signer interaction&lt;/h2&gt;
+
+&lt;p&gt;The following diagram illustrates the interactions between the Notary client,
+sever, and signer:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../notary/images/metadata-sequence.svg&#34; alt=&#34;Notary Service Sequence Diagram&#34; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Notary server optionally supports authentication from clients using
+&lt;a href=&#34;http://jwt.io/&#34;&gt;JWT&lt;/a&gt; tokens. This requires an authorization server that
+manages access controls, and a cert bundle from this authorization server
+containing the public key it uses to sign tokens.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;If token authentication is enabled on Notary server, then any connecting
+   client that does not have a token will be redirected to the authorization
+   server.&lt;/p&gt;
+
+&lt;p&gt;Please see the docs for &lt;a href=&#34;https://github.com/docker/distribution/blob/master/docs/spec/auth/token.md&#34;&gt;Docker Registry v2 authentication&lt;/a&gt;
+   for more information.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;The client will log in to the authorization server via basic auth over HTTPS,
+obtain a bearer token, and then present the token to Notary server on future
+requests.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;When clients uploads new metadata files, Notary server checks them against
+any previous versions for conflicts, and verifies the signatures, checksums,
+and validity of the uploaded metadata.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Once all the uploaded metadata has been validated, Notary server
+generates the timestamp (and maybe snapshot) metadata. It sends this
+generated metadata to the Notary signer to be signed.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Notary signer retrieves the necessary encrypted private keys from its database
+if available, decrypts the keys, and uses them to sign the metadata. If
+successful, it sends the signatures back to Notary server.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Notary server is the source of truth for the state of a trusted collection of
+data, storing both client-uploaded and server-generated metadata in the TUF
+database. The generated timestamp and snapshot metadata certify that the
+metadata files the client uploaded are the most recent for that trusted collection.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Finally, Notary server will notify the client that their upload was successful.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;The client can now immediately download the latest metadata from the server,
+using the still-valid bearer token to connect. Notary server only needs to
+obtain the metadata from the database, since none of the metadata has expired.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;In the case that the timestamp has expired, Notary server would go through
+   the entire sequence where it generates a new timestamp, request Notary signer
+   for a signature, stores the newly signed timestamp in the database. It then
+   sends this new timestamp, along with the rest of the stored metadata, to the
+   requesting client.&lt;/p&gt;
+
+&lt;h2 id=&#34;threat-model&#34;&gt;Threat model&lt;/h2&gt;
+
+&lt;p&gt;Both the server and the signer are potential attack vectors. This section
+discusses how our architecture is designed to deal with compromises.&lt;/p&gt;
+
+&lt;h3 id=&#34;notary-server-compromise&#34;&gt;Notary server compromise&lt;/h3&gt;
+
+&lt;p&gt;In the event of a Notary server compromise, an attacker would have direct access to
+the metadata stored in the database as well as well as access to the credentials
+used to communicate with Notary signer, and therefore, access to arbitrary signing
+operations with any key the Signer holds.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Denial of Service&lt;/strong&gt; - An attacker could reject client requests and corrupt
+or delete metadata from the database, thus preventing clients from being
+able to download or upload metadata.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Malicious Content&lt;/strong&gt; - An attacker can create, store, and serve arbitrary
+metadata content for one or more trusted collections. However, they do not have
+access to any client-side keys, such as root, targets, and potentially the
+snapshot keys for the existing trusted collections.&lt;/p&gt;
+
+&lt;p&gt;Only clients who have never seen the trusted collections, and who do not have any
+form of pinned trust, can be tricked into downloading and
+trusting the malicious content for these trusted collections.&lt;/p&gt;
+
+&lt;p&gt;Clients that have previously interacted with any trusted collection, or that have
+their trust pinned to a specific certificate for the collections will immediately
+detect that the content is malicious and would not trust any root, targets,
+or (maybe) snapshot metadata for these collections.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Rollback, Freeze, Mix and Match&lt;/strong&gt; - The attacker can request that
+the Notary signer sign any arbitrary timestamp (and maybe snapshot) metadata
+they want. Attackers can lauch a freeze attack, and, depending on whether
+the snapshot key is available, a mix-and-match attack up to the expiration
+of the targets file.&lt;/p&gt;
+
+&lt;p&gt;Clients both with and without pinned trust would be vulnerable to these
+attacks, so long as the attacker ensures that the version number of their
+malicious metadata is higher than the version number of the most recent
+good metadata that any client may have.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Note that the timestamp and snapshot keys cannot be compromised in a server-only
+ compromise, so a key rotation would not be necessary.  Once the Server
+ compromise is mitigated, an attacker will not be
+ able to generate valid timestamp or snapshot metadata and serve them on a
+ malicious mirror, for example.&lt;/p&gt;
+
+&lt;h3 id=&#34;notary-signer-compromise&#34;&gt;Notary signer compromise&lt;/h3&gt;
+
+&lt;p&gt;In the event of a Notary signer compromise, an attacker would have access to
+all the private keys stored in a database. If the keys are stored in an HSM,
+they would have the ability to sign arbitrary content with, and to delete, the
+keys in the HSM, but not to exfiltrate the private material.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Denial of Service&lt;/strong&gt; - An attacker could reject all Notary server requests
+and corrupt or delete keys from the database (or even delete keys from an
+HSM), and thus prevent Notary servers from being able to sign generated
+timestamps or snapshots.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Key Compromise&lt;/strong&gt; - If the Notary signer uses a database as its backend,
+an attacker can exfiltrate all the private material.  Note that the capabilities
+of an attacker are the same as of a Notary server compromise in terms of
+signing arbitrary metadata, with the important detail that in this particular
+case key rotations will be necessary to recover from the attack.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;related-information&#34;&gt;Related information&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/notary/running_a_service/&#34;&gt;Run a Notary service&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/notary/reference/&#34;&gt;Notary configuration files&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Use the Notary client</title>
+      <link>https://docs.docker.com/v1.10/notary/advanced_usage/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/notary/advanced_usage/</guid>
+      <description>
+
+&lt;h1 id=&#34;use-the-notary-client-for-advanced-users&#34;&gt;Use the Notary client for advanced users&lt;/h1&gt;
+
+&lt;p&gt;This page explains advanced uses of Notary client for users who are running
+their own Notary service. Make sure you have first read and understood how to
+&lt;a href=&#34;../v1.10/notary/running_a_service/&#34;&gt;run your own Notary service&lt;/a&gt; before continuing.&lt;/p&gt;
+
+&lt;h4 id=&#34;an-important-note-about-the-examples&#34;&gt;An important note about the examples&lt;/h4&gt;
+
+&lt;p&gt;This document&amp;rsquo;s command examples omit the &lt;code&gt;-s&lt;/code&gt; and &lt;code&gt;-d&lt;/code&gt; flags. If you do not
+know what these options do, please read the &lt;a href=&#34;../v1.10/notary/getting_started/&#34;&gt;Getting
+Started&lt;/a&gt; docs or run &lt;code&gt;notary --help&lt;/code&gt; before continuing. Once
+you understand what these flags do, you must provide your own values for these
+options while following this document. You can also configure these options, see
+&lt;a href=&#34;../v1.10/notary/reference/&#34;&gt;advanced configuration options&lt;/a&gt; for more information.&lt;/p&gt;
+
+&lt;h2 id=&#34;initialize-a-trusted-collection-a&#34;&gt;Initialize a Trusted Collection&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Before adding and signing content to a collection, you must first initialize that collection.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ notary init example.com/collection
+
+No root keys found. Generating a new root key...
+You are about to create a new root signing key passphrase. This passphrase
+will be used to protect the most sensitive key in your signing system. Please
+choose a long, complex passphrase and be careful to keep the password and the
+key file itself secure and backed up. It is highly recommended that you use a
+password manager to generate the passphrase and keep it safe. There will be no
+way to recover this key. You can find the key in your config directory.
+Enter passphrase for new root key with ID 1f54328:
+Repeat passphrase for new root key with ID 1f54328:
+Enter passphrase for new targets key with ID 1df39fc (example.com/collection):
+Repeat passphrase for new targets key with ID 1df39fc (example.com/collection):
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Initializing a trusted collection will generate the following items; all keys use
+asymmetric algorithms, but there is no requirement that they all use the &lt;em&gt;same&lt;/em&gt;
+algorithm:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;If no root key is found, an initial root key will be generated. This key will be used as the default root of trust for all your trusted collections.&lt;/li&gt;
+&lt;li&gt;A targets key and a snapshot key. The same password is used to encrypt both of these as the security profile of them (when both held by the author of the trusted collection) is identical. This is why you will not be asked for a snapshot key password.&lt;/li&gt;
+&lt;li&gt;A timestamp key. This is generated by the server on a request from the client, returning just the public key. The server holds the private key and will sign timestamps on behalf of the user.&lt;/li&gt;
+&lt;li&gt;Stub signed notary metadata. This stages the base version of the trust metadata for the collection. It will be finalized when it is published to the server.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;add-and-remove-targets&#34;&gt;Add and remove Targets&lt;/h2&gt;
+
+&lt;p&gt;It&amp;rsquo;s simple to add targets to a trusted collection with notary CLI:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ notary add example.com/collection v1 my_file.txt
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The above command adds the local file &lt;code&gt;my_file.txt&lt;/code&gt; (this file must exist relative to the current working directory) under the target name &lt;code&gt;v1&lt;/code&gt; to the &lt;code&gt;example.com/collection&lt;/code&gt; collection we set up. The contents of the local file are not actually added to the collection - a &amp;ldquo;target&amp;rdquo; consists of the
+file path and one or more checksums of the contents.&lt;/p&gt;
+
+&lt;p&gt;Note that this is an offline command, and we must run a &lt;code&gt;notary publish example.com/collection&lt;/code&gt; for the add to take effect.&lt;/p&gt;
+
+&lt;p&gt;To remove targets, we use the &lt;code&gt;notary remove&lt;/code&gt; command, specifying the GUN and target name.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ notary remove example.com/collection v1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Removing a target is also an offline command that requires a &lt;code&gt;notary publish example.com/collection&lt;/code&gt; to take effect.&lt;/p&gt;
+
+&lt;h2 id=&#34;manage-keys&#34;&gt;Manage keys&lt;/h2&gt;
+
+&lt;p&gt;By default, the notary client is responsible for managing the private keys for
+root, targets, snapshot roles. All of these keys are generated by default when
+initializing a new trusted collection. The keys are located in the notary &lt;code&gt;trust_dir&lt;/code&gt;
+directory. In addition, if delegation roles exist, those roles&amp;rsquo; keys are to also
+managed by the notary client.&lt;/p&gt;
+
+&lt;p&gt;The notary server is always responsible for managing the timestamp key. However,
+it is possible for the notary server to manage the snapshot key, if the snapshot
+key is rotated from the notary client to server, as described in the following
+subsection.&lt;/p&gt;
+
+&lt;h3 id=&#34;rotate-keys&#34;&gt;Rotate keys&lt;/h3&gt;
+
+&lt;p&gt;In case of potential compromise, notary provides a CLI command for rotating keys. Currently, you can use the &lt;code&gt;notary key rotate&lt;/code&gt; command to rotate the targets or snapshot keys.&lt;/p&gt;
+
+&lt;p&gt;While the snapshot key is managed by the notary client by default, use the &lt;code&gt;notary key
+rotate -r&lt;/code&gt; command to rotate the snapshot key to the server, such that the
+notary server will then sign snapshots. This is particularly useful when using
+delegations with a trusted collection, so that delegates will never need access to the
+snapshot key to push their updates to the collection.&lt;/p&gt;
+
+&lt;h3 id=&#34;use-a-yubikey&#34;&gt;Use a Yubikey&lt;/h3&gt;
+
+&lt;p&gt;Notary can be used with &lt;a href=&#34;https://www.yubico.com/products/yubikey-hardware/yubikey4/&#34;&gt;Yubikey
+4&lt;/a&gt; keys, via a PKCS11 interface when the Yubikey has CCID mode enabled.
+The Yubikey will be prioritized to store root keys, and will require user touch-input for signing.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: Yubikey support for signing docker images is only supported in the experimental branch.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Yubikey support requires &lt;a href=&#34;https://www.yubico.com/support/downloads&#34;&gt;Yubico PIV libraries (which are bundled with the PIV
+tools)&lt;/a&gt; to be available in standard
+library locations.&lt;/p&gt;
+
+&lt;h2 id=&#34;work-with-delegation-roles&#34;&gt;Work with delegation roles&lt;/h2&gt;
+
+&lt;p&gt;Delegation roles simplify collaborator workflows in notary trusted collections, and
+also allow for fine-grained permissions within a collection&amp;rsquo;s contents across
+delegations. In essence, delegation roles are restricted versions of the targets
+role that are only allowed to sign targets within certain filepaths.&lt;/p&gt;
+
+&lt;p&gt;A delegation role is given its own keys, such that each collaborator can keep
+his own private key without the administrator having to share the
+targets key or allow a collaborator write access to all targets of the
+collection.&lt;/p&gt;
+
+&lt;p&gt;Before adding any delegations, you should rotate the snapshot key to the server.
+This is such that delegation roles will not require the snapshot key to publish
+their own targets to the collection, since the server can publish the valid
+snapshot with the delegation targets:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ notary key rotate example.com/collection -r --key-type=snapshot
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here, &lt;code&gt;-r&lt;/code&gt; specifies to rotate the key to the remote server, and &lt;code&gt;--key-type&lt;/code&gt; (shorthand &lt;code&gt;-t&lt;/code&gt;)
+specifies the role.&lt;/p&gt;
+
+&lt;p&gt;When adding a delegation, your must acquire a x509 certificate with the public
+key of the user you wish to delegate to. The user who will assume this
+delegation role must hold the private key to sign content with notary.&lt;/p&gt;
+
+&lt;p&gt;Once you&amp;rsquo;ve acquired the delegate&amp;rsquo;s x509 certificate, you can add a delegation
+for this user:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ notary delegation add example.com/collection targets/releases cert.pem --paths=&amp;quot;delegation/path&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The preceding example illustrates a request to add the delegation
+&lt;code&gt;targets/releases&lt;/code&gt; to the GUN &lt;code&gt;example.com/collection&lt;/code&gt;. The delegation name must
+be prefixed by &lt;code&gt;targets/&lt;/code&gt; to be valid, since all delegations are restricted
+versions of the target role. The command adds the public key contained in the
+x509 cert &lt;code&gt;cert.pem&lt;/code&gt; to the &lt;code&gt;targets/releases&lt;/code&gt; delegation.&lt;/p&gt;
+
+&lt;p&gt;For the &lt;code&gt;targets/releases&lt;/code&gt; delegation role to sign content, the delegation user
+must possess the private key corresponding to this public key. This command
+restricts this delegation to only publish content under pathnames prefixed by
+&lt;code&gt;delegation/path&lt;/code&gt;.  With the given path of &amp;ldquo;delegation/path&amp;rdquo;, the targets/releases
+role would be able to sign paths like &amp;ldquo;delegation/path/content.txt&amp;rdquo;, &amp;ldquo;delegation/path_file.txt&amp;rdquo;
+and &amp;ldquo;delegation/path.txt&amp;rdquo;.  You can add more paths in a comma-separated list under
+&lt;code&gt;--paths&lt;/code&gt;, or pass the &lt;code&gt;--all-paths&lt;/code&gt; flag to allow this delegation to publish
+content under any pathname.&lt;/p&gt;
+
+&lt;p&gt;After publishing, you can view delegations using a list command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ notary delegation list example.com/collection
+
+      ROLE               PATHS                                   KEY IDS                                THRESHOLD
+---------------------------------------------------------------------------------------------------------------
+  targets/releases   delegation/path   729c7094a8210fd1e780e7b17b7bb55c9a28a48b871b07f65d97baf93898523a   1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can see the &lt;code&gt;targets/releases&lt;/code&gt; with its paths and key IDs.  If you wish to modify these fields, you can do so with additional &lt;code&gt;notary delegation add&lt;/code&gt; or &lt;code&gt;notary delegation remove&lt;/code&gt; commands on this role.&lt;/p&gt;
+
+&lt;p&gt;A threshold of &lt;code&gt;1&lt;/code&gt; indicates that only one of the keys specified in &lt;code&gt;KEY IDS&lt;/code&gt; is required to publish to this delegation. Thresholds other than 1 are not currently supported.  To remove a delegation role entirely, or just individual keys and/or paths, use the &lt;code&gt;notary delegation remove&lt;/code&gt; command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ notary delegation remove example.com/user targets/releases
+
+Are you sure you want to remove all data for this delegation? (yes/no)
+yes
+
+Forced removal (including all keys and paths) of delegation role targets/releases to repository &amp;quot;example.com/user&amp;quot; staged for next publish.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can remove individual keys and/or paths by passing keys as arguments, and/or
+paths under the &lt;code&gt;--paths&lt;/code&gt; flag. Use &lt;code&gt;--all-paths&lt;/code&gt; to clear all paths for this
+role. If you specify all key IDs currently in the delegation role, you will
+delete the role entirely.&lt;/p&gt;
+
+&lt;p&gt;To add targets to a specified delegation role, we can use the &lt;code&gt;notary add&lt;/code&gt;
+command with the &lt;code&gt;--roles&lt;/code&gt; flag.&lt;/p&gt;
+
+&lt;p&gt;You must have imported an appropriate delegation key for this role.  To do so,
+you can run &lt;code&gt;notary key import &amp;lt;KEY_FILE&amp;gt; --role user&lt;/code&gt; with the private key PEM
+file, or drop the private key PEM in &lt;code&gt;private/tuf_keys&lt;/code&gt; as &lt;code&gt;&amp;lt;KEY_ID&amp;gt;.key&lt;/code&gt; with
+the &lt;code&gt;role&lt;/code&gt; PEM header set to &lt;code&gt;user&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ notary add example/collections delegation/path/target delegation_file.txt --roles=targets/releases
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In the preceding example, you add the target &lt;code&gt;delegation/path/target&lt;/code&gt; to
+collection &lt;code&gt;example/collections&lt;/code&gt; staged for next publish. The file
+&lt;code&gt;delegation_file.txt&lt;/code&gt; is a target &lt;code&gt;delegation/path/target&lt;/code&gt; using the delegation
+role &lt;code&gt;targets/releases&lt;/code&gt;. This target&amp;rsquo;s path is valid because it is prefixed by
+the delegation role&amp;rsquo;s valid path.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;notary list&lt;/code&gt; and &lt;code&gt;notary remove&lt;/code&gt; commands can also take the &lt;code&gt;--roles&lt;/code&gt; flag
+to specify roles to list or remove targets from.  By default, this operates over
+the base &lt;code&gt;targets&lt;/code&gt; role.&lt;/p&gt;
+
+&lt;p&gt;To remove this target from our delegation, use the &lt;code&gt;notary remove&lt;/code&gt; command with
+the same flag:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ notary remove example/collections delegation/path/target --roles=targets/releases
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;use-delegations-with-content-trust&#34;&gt;Use delegations with content trust&lt;/h2&gt;
+
+&lt;p&gt;Docker Engine 1.10 supports the usage of the &lt;code&gt;targets/releases&lt;/code&gt; delegation,
+other delegation roles will be supported in a future release. By default, Engine
+1.10 with content trust enabled will attempt to retrieve images signed by the
+&lt;code&gt;targets/releases&lt;/code&gt; role if it exists; if it does not exist, the Engine  will
+fall back to retrieving images signed by the default &lt;code&gt;targets&lt;/code&gt; role.&lt;/p&gt;
+
+&lt;p&gt;To use the &lt;code&gt;targets/releases&lt;/code&gt; role for pushing and pulling images with content trust, follow the steps above to add and publish the delegation role with notary. When adding the delegation, the &lt;code&gt;--all-paths&lt;/code&gt; flag should be used. By default, pushing with Docker Content Trust will attempt to add to the &lt;code&gt;targets/releases&lt;/code&gt; role and will fallback to &lt;code&gt;targets&lt;/code&gt; &lt;em&gt;only&lt;/em&gt; if the delegation does not exist.&lt;/p&gt;
+
+&lt;h1 id=&#34;files-and-state-on-disk&#34;&gt;Files and state on disk&lt;/h1&gt;
+
+&lt;p&gt;Notary stores state in its &lt;code&gt;trust_dir&lt;/code&gt; directory, which is &lt;code&gt;~/.notary&lt;/code&gt; by
+default or usually &lt;code&gt;~/.docker/trust&lt;/code&gt; when enabling  content trust. Within this
+directory, &lt;code&gt;trusted_certificates&lt;/code&gt; stores certificates for bootstrapping trust in
+a collection, &lt;code&gt;tuf&lt;/code&gt; stores TUF metadata and changelists to be applied to a GUN,
+and &lt;code&gt;private&lt;/code&gt; stores private keys.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;root_keys&lt;/code&gt; subdirectory within &lt;code&gt;private&lt;/code&gt; stores root private keys, while
+&lt;code&gt;tuf_keys&lt;/code&gt; stores targets, snapshots, and delegations private keys.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,1092 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Docker-clouds on Docker Docs</title>
+    <link>https://docs.docker.com/v1.10/docker-cloud/</link>
+    <description>Recent content in Docker-clouds on Docker Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="https://docs.docker.com/v1.10/docker-cloud/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>This should not appear in the menu</title>
+      <link>https://docs.docker.com/v1.10/docker-cloud/getting-started/deploy-first-service/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/docker-cloud/getting-started/deploy-first-service/</guid>
+      <description>
+
+&lt;h1 id=&#34;deploy-a-service&#34;&gt;Deploy a service&lt;/h1&gt;
+
+&lt;p&gt;Once you&amp;rsquo;ve deployed a &lt;a href=&#34;../v1.10/docker-cloud/getting-started/your_first_node/&#34;&gt;Node cluster&lt;/a&gt; you can start deploying &lt;strong&gt;Services&lt;/strong&gt;!&lt;/p&gt;
+
+&lt;h2 id=&#34;what-is-a-service-you-may-be-wondering&#34;&gt;What is a Service you may be wondering?&lt;/h2&gt;
+
+&lt;p&gt;Services are logical groups of containers from the same image. Services make it simple to scale your application across different nodes. Simply drag a slider to increase or decrease the availability, performance, and redundancy of your application.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Let&amp;rsquo;s get started!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;From the &lt;strong&gt;Service dashboard&lt;/strong&gt; click on &lt;strong&gt;Launch your first service&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-cloud/getting-started/images/Launch_your_first_service.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Choose the &lt;strong&gt;Image&lt;/strong&gt; you want to deploy. You can choose from one of our &lt;strong&gt;Jumpstart&lt;/strong&gt; images to help get you started, or you can search thepublic &lt;strong&gt;Docker Hub&lt;/strong&gt; images. If you have a &lt;strong&gt;Private image&lt;/strong&gt; with Docker Cloud, Docker, or another third party you can find them under the &lt;strong&gt;Private images&lt;/strong&gt; tab. Remember you get a&lt;strong&gt; private repository&lt;/strong&gt; with Docker Cloud!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-cloud/getting-started/images/Deploy_Jumpstart.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You&amp;rsquo;ll be taken to the &lt;strong&gt;Service wizard&lt;/strong&gt; where you can change the &lt;strong&gt;Service name&lt;/strong&gt;, choose the &lt;strong&gt;Image tag&lt;/strong&gt;,&lt;strong&gt;number of containers&lt;/strong&gt;, &lt;strong&gt;Run command&lt;/strong&gt;, &lt;strong&gt;Entrypoint&lt;/strong&gt;, and access &lt;strong&gt;Advanced options&lt;/strong&gt; and set any &lt;strong&gt;Environment variables&lt;/strong&gt; necessary. Clicking &lt;strong&gt;Launch service&lt;/strong&gt; will automatically deploy the containers of your service to
+the node with the least number of containers. We&amp;rsquo;re currently working on our deployment algorithm and giving you even more customization over how you deploy your applications and services.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-cloud/getting-started/images/Service_configuration.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Once you&amp;rsquo;ve deployed your service, if it&amp;rsquo;s a web application, you can visit your app by clicking on the &lt;strong&gt;Web domain&lt;/strong&gt;. Here you can also see the container &lt;strong&gt;Endpoints&lt;/strong&gt;, &lt;strong&gt;Links&lt;/strong&gt;, &lt;strong&gt;Logs&lt;/strong&gt;, &lt;strong&gt;Environment variables&lt;/strong&gt;, and &lt;strong&gt;Monitoring data&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-cloud/getting-started/images/Monitoring_logging_etc.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Congratulations! You&amp;rsquo;ve officially launched your first service! Head over to our &lt;a href=&#34;../v1.10/docker-cloud/feature-reference/&#34;&gt;Features&lt;/a&gt; section to see what you can do with Docker Cloud.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Autodestroy</title>
+      <link>https://docs.docker.com/v1.10/docker-cloud/feature-reference/auto-destroy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/docker-cloud/feature-reference/auto-destroy/</guid>
+      <description>
+
+&lt;h1 id=&#34;autodestroy&#34;&gt;Autodestroy&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;Autodestroy&lt;/strong&gt; is a Docker Cloud feature that when enabled on a service, will automatically terminate containers when they stop (destroying all data within the container). This is useful for one-off actions which store results in a external system. It can be set with the following values:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;OFF&lt;/code&gt;: if the container stops, regardless of the exit code, Docker Cloud
+will not terminate it and will leave it in &lt;strong&gt;Stopped&lt;/strong&gt; state.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ON_SUCCESS&lt;/code&gt;: if the container stops with an exit code equals to 0, Docker Cloud will automatically terminate it. Otherwise, it will
+leave it in &lt;strong&gt;Stopped&lt;/strong&gt; state.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ALWAYS&lt;/code&gt;: if the container stops, regardless of the exit code,
+Docker Cloud will automatically terminate it.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If &lt;strong&gt;Autorestart&lt;/strong&gt; is activated, Docker Cloud will evaluate whether to try restarting the container or not before evaluating &lt;strong&gt;Autodestroy&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;launching-a-service-with-autodestroy&#34;&gt;Launching a Service with Autodestroy&lt;/h2&gt;
+
+&lt;h3 id=&#34;using-the-api&#34;&gt;Using the API&lt;/h3&gt;
+
+&lt;p&gt;You can enable autodestroy when launching a service through the API:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;POST /api/app/v1/service/ HTTP/1.1
+{
+	 &amp;quot;autodestroy&amp;quot;: &amp;quot;ALWAYS&amp;quot;,
+	 [...]
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If not provided, it will have a default value of &lt;code&gt;OFF&lt;/code&gt;. Check our &lt;a href=&#34;../v1.10/apidocs/docker-cloud/&#34;&gt;API documentation&lt;/a&gt; for more information.&lt;/p&gt;
+
+&lt;h3 id=&#34;using-the-cli&#34;&gt;Using the CLI&lt;/h3&gt;
+
+&lt;p&gt;You can enable autodestroy when launching a service using the CLI:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-cloud service run --autodestroy ALWAYS [...]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If not provided, it will have a default value of &lt;code&gt;OFF&lt;/code&gt;. Check our &lt;a href=&#34;../v1.10/apidocs/docker-cloud/&#34;&gt;CLI documentation&lt;/a&gt; for more information.&lt;/p&gt;
+
+&lt;h3 id=&#34;using-the-web-interface&#34;&gt;Using the web interface&lt;/h3&gt;
+
+&lt;p&gt;Activating the &lt;strong&gt;Autodestroy&lt;/strong&gt; setting on the &lt;strong&gt;Service configuration&lt;/strong&gt; step of the &lt;strong&gt;Launch new service&lt;/strong&gt; wizard sets the autodestroy setting to &lt;code&gt;ALWAYS&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-cloud/feature-reference/images/autodestroy.gif&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The default value is to be *deactivated* which will set it to &lt;code&gt;OFF&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;activating-autodestroy-to-an-already-deployed-service&#34;&gt;Activating autodestroy to an already deployed service&lt;/h2&gt;
+
+&lt;h3 id=&#34;using-the-api-1&#34;&gt;Using the API&lt;/h3&gt;
+
+&lt;p&gt;You can set the &lt;strong&gt;Autodestroy&lt;/strong&gt; option after the service has been
+deployed through the API:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;PATCH /api/app/v1/service/(uuid)/ HTTP/1.1
+{
+	&amp;quot;autodestroy&amp;quot;: &amp;quot;ALWAYS&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Check our &lt;a href=&#34;../v1.10/apidocs/docker-cloud/&#34;&gt;API documentation&lt;/a&gt; for more information.&lt;/p&gt;
+
+&lt;h3 id=&#34;using-the-cli-1&#34;&gt;Using the CLI&lt;/h3&gt;
+
+&lt;p&gt;You can set the &lt;strong&gt;Autodestroy&lt;/strong&gt; option after the service has been deployed using the CLI:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-cloud service set --autodestroy ALWAYS (name or uuid)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Check our &lt;a href=&#34;../v1.10/apidocs/docker-cloud/&#34;&gt;API documentation&lt;/a&gt; for more information.&lt;/p&gt;
+
+&lt;h3 id=&#34;using-the-web-interface-1&#34;&gt;Using the web interface&lt;/h3&gt;
+
+&lt;p&gt;You can also activate or deactivate the &lt;strong&gt;Autodestroy&lt;/strong&gt; setting to a service
+after it has been deployed editing the service.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Automated builds</title>
+      <link>https://docs.docker.com/v1.10/docker-cloud/feature-reference/automated-build/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/docker-cloud/feature-reference/automated-build/</guid>
+      <description>
+
+&lt;h1 id=&#34;automated-builds&#34;&gt;Automated builds&lt;/h1&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: Docker Cloud&amp;rsquo;s Build functionality is in BETA.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Docker Cloud can automatically build images from your GitHub repositories so you can automatically push them to your Docker repositories. To do this, you will:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;#link-your-github-account&#34;&gt;Link your GitHub account&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Create a &lt;a href=&#34;#create-a-new-repository-in-docker-cloud&#34;&gt;new repository&lt;/a&gt;, edit an &lt;a href=&#34;#edit-an-existing-repository-in-docker-cloud&#34;&gt;existing repository&lt;/a&gt;, &lt;strong&gt;or&lt;/strong&gt; link to a repository in an &lt;a href=&#34;#link-to-a-repository-from-a-third-party-registry&#34;&gt;external registry&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Edit the repository to &lt;a href=&#34;#configure-automated-build-settings&#34;&gt;configure the automated build settings&lt;/a&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&#34;build-on-push-to-source&#34;&gt;Build on push to source&lt;/h4&gt;
+
+&lt;p&gt;When you set up autobuilds, you list the tags of the images that you want to build in the build settings. Then a &lt;em&gt;git push&lt;/em&gt; to a branch that is a source of an image tag triggers a new build. You can also push pre-built images to these repositories, even if you have configured automatic builds.&lt;/p&gt;
+
+&lt;h4 id=&#34;build-location-and-builder-nodes&#34;&gt;Build location and builder nodes&lt;/h4&gt;
+
+&lt;p&gt;The build process runs inside containers which run either on your nodes, or on Docker Cloud hosted infrastructure.&lt;/p&gt;
+
+&lt;p&gt;When running on your nodes, build containers are deployed using an &amp;ldquo;emptiest node&amp;rdquo; strategy. You can run the build on specific nodes by adding the &lt;code&gt;builder&lt;/code&gt; node tag to them. You can also limit the number of concurrent builds (including &lt;code&gt;autotest&lt;/code&gt; builds) on a specific node by using a &lt;code&gt;builder=n&lt;/code&gt; tag, where the &lt;code&gt;n&lt;/code&gt; is the number of builds to allow. For example a node tagged with &lt;code&gt;builder=5&lt;/code&gt; only allows up to five concurrent builds or autotest-builds at the same time.&lt;/p&gt;
+
+&lt;h4 id=&#34;push-built-images&#34;&gt;Push built images&lt;/h4&gt;
+
+&lt;p&gt;Builds that are configured using the &lt;code&gt;autobuild&lt;/code&gt; feature push a built image to Docker Cloud, or back to the third-party registry. If you have automated tests configured, these run after building but before pushing to the registry to allow for a continuous integration workflow. Automated tests do not push images to the registry on their own. &lt;a href=&#34;../v1.10/docker-cloud/feature-reference/automated-testing/&#34;&gt;Learn more about image testing here.&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;link-your-github-account&#34;&gt;Link your GitHub account&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;From Docker Cloud, click your avatar on the top right corner.&lt;/li&gt;
+&lt;li&gt;Select &lt;strong&gt;Account info&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;From the Account page, click &lt;strong&gt;Source Providers&lt;/strong&gt; from the left menu.
+&lt;img src=&#34;../docker-cloud/feature-reference/images/source-providers.png&#34; alt=&#34;&#34; /&gt;&lt;/li&gt;
+&lt;li&gt;Click &lt;strong&gt;Link account&lt;/strong&gt; to open a GitHub authorization dialog.&lt;/li&gt;
+&lt;li&gt;Click &lt;strong&gt;Authorize application&lt;/strong&gt; when prompted.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;create-a-new-repository-in-docker-cloud&#34;&gt;Create a new repository in Docker Cloud&lt;/h2&gt;
+
+&lt;p&gt;If you don&amp;rsquo;t yet have a repository in Docker Cloud, you will need to create one.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Click &lt;strong&gt;Repositories&lt;/strong&gt; in the top menu.&lt;/li&gt;
+&lt;li&gt;Click &lt;strong&gt;Create your first repository&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;Enter a &lt;strong&gt;name&lt;/strong&gt; and an optional &lt;strong&gt;description&lt;/strong&gt;, and click &lt;strong&gt;Create&lt;/strong&gt;.
+&lt;img src=&#34;../docker-cloud/feature-reference/images/create-repository.png&#34; alt=&#34;&#34; /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Once you create a repository, you can either configure automated builds from the UI, or push to it manually using the &lt;code&gt;docker&lt;/code&gt; or the &lt;code&gt;docker-cloud&lt;/code&gt; CLI.&lt;/p&gt;
+
+&lt;p&gt;Continue to &lt;a href=&#34;#configure-automated-build-settings&#34;&gt;Configure automated build settings&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;edit-an-existing-repository-in-docker-cloud&#34;&gt;Edit an existing repository in Docker Cloud&lt;/h2&gt;
+
+&lt;p&gt;If you already have a repository in Docker Cloud that you want to build, select it and edit the repository settings.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Click &lt;strong&gt;Repositories&lt;/strong&gt; in the top menu.&lt;/li&gt;
+&lt;li&gt;Click the existing repository that you want to build.&lt;/li&gt;
+&lt;li&gt;From the repository details page, click &lt;strong&gt;Edit repository&lt;/strong&gt; to view and configure the build settings. Skip to &lt;a href=&#34;#configure-automated-build-settings&#34;&gt;Configure automated build settings&lt;/a&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;link-to-a-repository-from-a-third-party-registry&#34;&gt;Link to a repository from a third party registry&lt;/h2&gt;
+
+&lt;p&gt;You can also automatically build from repositories hosted on a third party registry.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Click &lt;strong&gt;Repositories&lt;/strong&gt; in the top menu.&lt;/li&gt;
+&lt;li&gt;Click &lt;strong&gt;Add from third party registry&lt;/strong&gt;.&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Enter the name of the repository that you want to add.&lt;/p&gt;
+
+&lt;p&gt;For example, &lt;code&gt;registry.com/namespace/reponame&lt;/code&gt; where &lt;code&gt;registry.com&lt;/code&gt; is the hostname of the registry.
+&lt;img src=&#34;../docker-cloud/feature-reference/images/third-party-images-modal.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Enter credentials for the registry.&lt;/p&gt;
+
+&lt;p&gt;These credentials must have &lt;strong&gt;push&lt;/strong&gt; permission. Providing &lt;strong&gt;read-only&lt;/strong&gt; credentials will allow you to deploy the repository to your nodes, but not to automatically build it.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;configure-automated-build-settings&#34;&gt;Configure automated build settings&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;From the &lt;strong&gt;Repository&lt;/strong&gt; page, click into a repository to view its details.&lt;/li&gt;
+&lt;li&gt;Click &lt;strong&gt;Edit&lt;/strong&gt; to view and configure the repository&amp;rsquo;s build settings.
+&lt;img src=&#34;../docker-cloud/feature-reference/images/edit-repository.png&#34; alt=&#34;&#34; /&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Choose where to run your build process.&lt;/p&gt;
+
+&lt;p&gt;You can either run the process on your own infrastructure (on your own nodes), or use the hosted build service on Docker Cloud&amp;rsquo;s infrastructure. This hosted build service is currently free while it is in Beta.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Select the source &lt;strong&gt;GitHub repository&lt;/strong&gt; to build the repository from.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Select one or more tags to build.&lt;/p&gt;
+
+&lt;p&gt;For each tag, specify a source branch, and optionally a path to the Dockerfile relative to the GitHub repository root.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; Only branches listed in the build settings are built, tested, and pushed. Other branches will be built and tested, but not pushed.&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click &lt;strong&gt;Save&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;A webhook is automatically added to your GitHub repository to notify Docker Cloud on every push. Only pushes to branches that are set as the source for one or more tags will trigger a build.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;check-your-active-builds&#34;&gt;Check your active builds&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;To view active builds, go to the repository view and click &lt;strong&gt;Timeline&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;The Timeline displays the pending, in progress, successful and failed builds for any tag of the repository.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click to expand a timeline entry to check the build logs.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;You can cancel pending builds and builds in progress by clicking the &lt;strong&gt;Cancel&lt;/strong&gt; button.
+&lt;img src=&#34;../docker-cloud/feature-reference/images/cancel-build.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;what-s-next&#34;&gt;What&amp;rsquo;s Next?&lt;/h2&gt;
+
+&lt;h3 id=&#34;autoredeploy-services-on-successful-build&#34;&gt;Autoredeploy services on successful build&lt;/h3&gt;
+
+&lt;p&gt;Once a build succeeds, you can configure your services to
+automatically redeploy with each new version. &lt;a href=&#34;../v1.10/docker-cloud/feature-reference/auto-redeploy/&#34;&gt;Learn more about autoredeploy&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;add-automated-tests&#34;&gt;Add automated tests&lt;/h3&gt;
+
+&lt;p&gt;To test your code before the image is pushed, you can use
+Docker Cloud&amp;rsquo;s &lt;a href=&#34;../v1.10/docker-cloud/feature-reference/automated-testing/&#34;&gt;automated testing&lt;/a&gt; feature which
+integrates seamlessly with autobuild and autoredeploy.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: While the Autotest feature builds an image for testing purposes, it does not push the resulting image to  Docker Cloud or the external registry.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;learn-about-docker-cloud-builder&#34;&gt;Learn about Docker Cloud Builder&lt;/h3&gt;
+
+&lt;p&gt;Automated builds are powered by Docker&amp;rsquo;s open source &lt;a href=&#34;https://hub.docker.com/r/dockercloud/builder/&#34; target =&#34;_blank&#34;&gt;dockercloud/builder&lt;/a&gt; image. You can use this image yourself to do local builds or tests.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Automated repository tests</title>
+      <link>https://docs.docker.com/v1.10/docker-cloud/feature-reference/automated-testing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/docker-cloud/feature-reference/automated-testing/</guid>
+      <description>
+
+&lt;h1 id=&#34;automated-repository-tests&#34;&gt;Automated repository tests&lt;/h1&gt;
+
+&lt;p&gt;Docker Cloud can automatically test your GitHub repositories using containers. For this, you need to specify a &lt;code&gt;docker-compose.test.yml&lt;/code&gt; file in the root of your repository which defines a &lt;code&gt;sut&lt;/code&gt; service with the test to be run.&lt;/p&gt;
+
+&lt;p&gt;For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yml&#34;&gt;sut:
+  build: .
+  command: run_tests.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This builds the repository and runs the &lt;code&gt;run_tests.sh&lt;/code&gt; file inside a container using the built image.&lt;/p&gt;
+
+&lt;p&gt;You can define any number of linked services in this file. The only requirement is that &lt;code&gt;sut&lt;/code&gt; is defined. Its return code determines if tests passed or not: tests &lt;strong&gt;pass&lt;/strong&gt; if the &lt;code&gt;sut&lt;/code&gt; service returns &lt;code&gt;0&lt;/code&gt;, and &lt;strong&gt;fail&lt;/strong&gt; otherwise.&lt;/p&gt;
+
+&lt;h2 id=&#34;enabling-automated-tests-on-a-repository&#34;&gt;Enabling automated tests on a repository&lt;/h2&gt;
+
+&lt;p&gt;To enable testing on a GitHub repository, you must first create a repository in Docker Cloud associated with it. &lt;a href=&#34;../v1.10/docker-cloud/feature-reference/automated-build/&#34;&gt;Learn more&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;By default, every automated build runs any tests defined in the &lt;code&gt;test.yml&lt;/code&gt; file(s) before pushing the built image to the repository. You can also enable optional &lt;strong&gt;automated tests&lt;/strong&gt; on the repository. &lt;code&gt;Automated tests&lt;/code&gt; runs a test build for all commits and optionally for all pull requests, but does not automatically push the built image. The following options are available:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Off&lt;/code&gt;: no addtional tests. Test commits only to branches that are using autobuild to build and push images.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Source Repository&lt;/code&gt;: test commits to all branches of the source GitHub repository, regardless of their autobuild setting.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Source Repository &amp;amp; External Pull Requests&lt;/code&gt;: tests commits to all branches of the source GitHub repository, including any pull requests opened against it.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: Only branches that are configured to use Autobuild will push images to the Docker repository, regardless of the Autotest settings.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;checking-your-test-results&#34;&gt;Checking your test results&lt;/h2&gt;
+
+&lt;p&gt;In the repository view, click &lt;strong&gt;Timeline&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;From this tab you can see any pending, in progress, successful and failed builds and test runs for the repository. You can click any timeline entry to view the logs for each test run.&lt;/p&gt;
+
+&lt;h2 id=&#34;advanced-options&#34;&gt;Advanced options&lt;/h2&gt;
+
+&lt;p&gt;Testing is performed using our open source &lt;a href=&#34;https://hub.docker.com/r/dockercloud/builder/&#34; target =&#34;_blank&#34;&gt;dockercloud/builder&lt;/a&gt;. The following options are available to customize your tests:&lt;/p&gt;
+
+&lt;h3 id=&#34;available-environment-variables-for-testing&#34;&gt;Available environment variables for testing&lt;/h3&gt;
+
+&lt;p&gt;The following environment variables are available when executing the &lt;code&gt;docker-compose.test.yml&lt;/code&gt; file; and during the execution of hooks:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;GIT_BRANCH&lt;/code&gt; which contains the name of the branch that is currently being tested&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;GIT_TAG&lt;/code&gt; which contains the commit hash being tested&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;GIT_SHA1&lt;/code&gt; which contains the commit hash of the tag being tested&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;IMAGE_NAME&lt;/code&gt; which contains the name of the Docker repository being built (not defined for automated tests triggered outside of an automated build)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You can use the above environment variables by setting them in your &lt;code&gt;sut&lt;/code&gt; service:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yml&#34;&gt;sut:
+  build: .
+  command: run_tests.sh
+  environment:
+    - GIT_BRANCH
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;using-private-repositories-in-your-tests&#34;&gt;Using private repositories in your tests&lt;/h3&gt;
+
+&lt;p&gt;If you are using a private repository, you must add it to your repositories with appropriate credentials first. Docker Cloud gives the build container the appropriate Docker credentials to pull private repositories as part of your tests.&lt;/p&gt;
+
+&lt;h3 id=&#34;multiple-docker-compose-test-files&#34;&gt;Multiple Docker Compose test files&lt;/h3&gt;
+
+&lt;p&gt;You can define more than one &lt;code&gt;docker-compose.test.yml&lt;/code&gt; file if needed. Any file that ends in &lt;code&gt;.test.yml&lt;/code&gt; is used for testing. Tests run sequentially.&lt;/p&gt;
+
+&lt;h3 id=&#34;custom-hooks&#34;&gt;Custom hooks&lt;/h3&gt;
+
+&lt;p&gt;If you need to run custom commands between phases of the build process, you can define hooks. The following hooks are available:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;hooks/post_checkout&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;hooks/pre_build&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;hooks/post_build&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;hooks/pre_test&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;hooks/post_test&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;hooks/pre_push&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;hooks/post_push&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Create files in your code repository with those names and place them in a folder called &lt;code&gt;hooks&lt;/code&gt;. The builder executes them before and after each step.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Automatic Container Restart</title>
+      <link>https://docs.docker.com/v1.10/docker-cloud/feature-reference/autorestart/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/docker-cloud/feature-reference/autorestart/</guid>
+      <description>
+
+&lt;h1 id=&#34;automatically-restart-a-container&#34;&gt;Automatically restart a container&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;Autorestart&lt;/strong&gt; is a service-level setting that will automatically start your containers whenever they stop or crash. It has the following options:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;OFF&lt;/code&gt;: if the container stops, regardless of the exit code, it won&amp;rsquo;t be autorestarted and will stay in &lt;strong&gt;Stopped&lt;/strong&gt; state.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ON_FAILURE&lt;/code&gt;: if the container stops with an exit code different from 0, it will be autorestarted.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ALWAYS&lt;/code&gt;: if the container stops, regardless of the exit code, it will be autorestarted.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Please note that &lt;strong&gt;Autorestart&lt;/strong&gt; is incompatible with &lt;strong&gt;Autodestroy&lt;/strong&gt; in the following scenario:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;If &lt;strong&gt;Autorestart&lt;/strong&gt; is set to &lt;code&gt;ALWAYS&lt;/code&gt;, &lt;strong&gt;Autodestroy&lt;/strong&gt; has to be &lt;code&gt;OFF&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The &lt;strong&gt;Autorestart&lt;/strong&gt; feature is implemented using Docker&amp;rsquo;s &lt;code&gt;--autorestart&lt;/code&gt; flag, so the Docker daemon will try to restart the container indefinitely until it succeeds using an incremental back-off algorithm.&lt;/p&gt;
+
+&lt;p&gt;If the Docker daemon in the node is restarted (because it has been upgraded, or because the underlying node has been restarted), only containers launched within a service with &lt;strong&gt;Autorestart&lt;/strong&gt; set to &lt;code&gt;ALWAYS&lt;/code&gt; will be started automatically.&lt;/p&gt;
+
+&lt;h2 id=&#34;launching-a-service-with-autorestart&#34;&gt;Launching a Service with Autorestart&lt;/h2&gt;
+
+&lt;h3 id=&#34;using-the-api&#34;&gt;Using the API&lt;/h3&gt;
+
+&lt;p&gt;You can specify the &lt;strong&gt;Autorestart&lt;/strong&gt; option when launching
+a service through the API:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;POST /api/app/v1/service/ HTTP/1.1
+{
+	&amp;quot;autorestart&amp;quot;: &amp;quot;ON_FAILURE&amp;quot;,
+	[...]
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If not provided, it will have a default value of &lt;code&gt;OFF&lt;/code&gt;. Check our &lt;a href=&#34;../v1.10/apidocs/docker-cloud/&#34;&gt;API documentation&lt;/a&gt; for more information.&lt;/p&gt;
+
+&lt;h3 id=&#34;using-the-cli&#34;&gt;Using the CLI&lt;/h3&gt;
+
+&lt;p&gt;You can specify the &lt;strong&gt;Autorestart&lt;/strong&gt; option when launching a service using the CLI:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-cloud service run --autorestart ON_FAILURE [...]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If not provided, it will have a default value of &lt;code&gt;OFF&lt;/code&gt;. Check our &lt;a href=&#34;../v1.10/apidocs/docker-cloud/&#34;&gt;API documentation&lt;/a&gt; for more information.&lt;/p&gt;
+
+&lt;h3 id=&#34;using-the-web-interface&#34;&gt;Using the web interface&lt;/h3&gt;
+
+&lt;p&gt;At the moment, activating the &lt;strong&gt;Autorestart&lt;/strong&gt; setting on the &lt;strong&gt;Service configuration&lt;/strong&gt; step of the &lt;strong&gt;Launch new service &lt;/strong&gt; wizard sets the &lt;strong&gt;autorestart&lt;/strong&gt; settings to &lt;code&gt;ALWAYS&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-cloud/feature-reference/images/autorestart.gif&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The default value is to be *deactivated* which will set the option to &lt;code&gt;OFF&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;activating-crash-recovery-to-an-already-deployed-service&#34;&gt;Activating Crash Recovery to an already deployed service&lt;/h2&gt;
+
+&lt;h3 id=&#34;using-the-api-1&#34;&gt;Using the API&lt;/h3&gt;
+
+&lt;p&gt;You can set the &lt;strong&gt;Autorestart&lt;/strong&gt; option after the service has been deployed through the API:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;PATCH /api/app/v1/service/(uuid)/ HTTP/1.1
+{
+	&amp;quot;autorestart&amp;quot;: &amp;quot;ALWAYS&amp;quot;,
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Check our &lt;a href=&#34;../v1.10/apidocs/docker-cloud/&#34;&gt;API documentation&lt;/a&gt; for more information.&lt;/p&gt;
+
+&lt;h3 id=&#34;using-the-cli-1&#34;&gt;Using the CLI&lt;/h3&gt;
+
+&lt;p&gt;You can set the &lt;strong&gt;Autorestart&lt;/strong&gt; option after the application has been deployed using the CLI:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-cloud service set --autorestart ALWAYS (name or uuid)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Check our &lt;a href=&#34;../v1.10/apidocs/docker-cloud/&#34;&gt;API documentation&lt;/a&gt; for more information.&lt;/p&gt;
+
+&lt;h3 id=&#34;using-the-web-interface-1&#34;&gt;Using the web interface&lt;/h3&gt;
+
+&lt;p&gt;You can also activate or deactivate &lt;strong&gt;Autorestart&lt;/strong&gt; to a service after it has been deployed editing the service.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Autoredeploy</title>
+      <link>https://docs.docker.com/v1.10/docker-cloud/feature-reference/auto-redeploy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/docker-cloud/feature-reference/auto-redeploy/</guid>
+      <description>
+
+&lt;h1 id=&#34;autoredeploy&#34;&gt;Autoredeploy&lt;/h1&gt;
+
+&lt;p&gt;Docker Cloud&amp;rsquo;s &lt;strong&gt;Autoredeploy&lt;/strong&gt; feature allows a service that uses an image stored in Docker Hub to automatically redeploy whenever a new image is pushed or built.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; To enable autoredeploy on an image stored in a third party registry, you will need to use &lt;a href=&#34;../v1.10/docker-cloud/feature-reference/triggers/&#34;&gt;redeploy triggers&lt;/a&gt; instead.&lt;/p&gt;
+
+&lt;h2 id=&#34;launching-a-service-with-autoredeploy&#34;&gt;Launching a service with autoredeploy&lt;/h2&gt;
+
+&lt;h3 id=&#34;using-the-web-interface&#34;&gt;Using the web interface&lt;/h3&gt;
+
+&lt;p&gt;You can enable &lt;strong&gt;autoredeploy&lt;/strong&gt; setting on the &lt;strong&gt;Service configuration&lt;/strong&gt; step of the &lt;strong&gt;Launch new service&lt;/strong&gt; wizard.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-cloud/feature-reference/images/service-wizard-autoredeploy.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;By default, autoredeploy is &lt;em&gt;deactivated&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;using-the-cli&#34;&gt;Using the CLI&lt;/h3&gt;
+
+&lt;p&gt;You can enable &lt;strong&gt;autoredeploy&lt;/strong&gt; when launching a service using the CLI:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-cloud service run --autoredeploy [...]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;By default, autoredeploy is set to &lt;code&gt;false&lt;/code&gt;. Use the command above and specify &lt;code&gt;true&lt;/code&gt; to enable it. Check our &lt;a href=&#34;../v1.10/apidocs/docker-cloud/&#34;&gt;API documentation&lt;/a&gt; for more information.&lt;/p&gt;
+
+&lt;h3 id=&#34;using-the-api&#34;&gt;Using the API&lt;/h3&gt;
+
+&lt;p&gt;You can enable &lt;strong&gt;autoredeploy&lt;/strong&gt; when launching a service through the API:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;POST /api/app/v1/service/ HTTP/1.1
+{
+	 &amp;quot;autoredeploy&amp;quot;: true,
+	 [...]
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If not otherwise specified, it will have a default value of &lt;code&gt;false&lt;/code&gt;. Check our &lt;a href=&#34;../v1.10/apidocs/docker-cloud/&#34;&gt;API documentation&lt;/a&gt; for more information.&lt;/p&gt;
+
+&lt;h2 id=&#34;enabling-autoredeploy-to-an-already-deployed-service&#34;&gt;Enabling autoredeploy to an already deployed service&lt;/h2&gt;
+
+&lt;h3 id=&#34;using-the-web-interface-1&#34;&gt;Using the web interface&lt;/h3&gt;
+
+&lt;p&gt;You can activate or deactivate &lt;strong&gt;autoredeploy&lt;/strong&gt; on a service even after it has been deployed. Click into the service detail page, then click &lt;strong&gt;Edit&lt;/strong&gt;. Change the &lt;strong&gt;autoredeploy&lt;/strong&gt; setting on the form to &lt;code&gt;true&lt;/code&gt;, and click &lt;strong&gt;Save&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;using-the-cli-1&#34;&gt;Using the CLI&lt;/h3&gt;
+
+&lt;p&gt;You can set the &lt;strong&gt;autoredeploy&lt;/strong&gt; option after the service has been deployed using the CLI:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-cloud service set --autoredeploy (name or uuid)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Check our &lt;a href=&#34;../v1.10/apidocs/docker-cloud/&#34;&gt;API documentation&lt;/a&gt; for more information.&lt;/p&gt;
+
+&lt;h3 id=&#34;using-the-api-1&#34;&gt;Using the API&lt;/h3&gt;
+
+&lt;p&gt;You can set the &lt;strong&gt;autoredeploy&lt;/strong&gt; option after the service has been deployed through the API:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;PATCH /api/app/v1/service/(uuid)/ HTTP/1.1
+{
+	&amp;quot;autoredeploy&amp;quot;: true
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Check our &lt;a href=&#34;../v1.10/apidocs/docker-cloud/&#34;&gt;API documentation&lt;/a&gt; for more information.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Back up data volumes</title>
+      <link>https://docs.docker.com/v1.10/docker-cloud/tutorials/download-volume-data/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/docker-cloud/tutorials/download-volume-data/</guid>
+      <description>
+
+&lt;h1 id=&#34;back-up-data-volumes&#34;&gt;Back up data volumes&lt;/h1&gt;
+
+&lt;p&gt;If you want to backup your data volumes that are attached to running containers in Docker Cloud, you can perform the following steps:&lt;/p&gt;
+
+&lt;h2 id=&#34;downloading-volume-data-locally-using-the-cli&#34;&gt;Downloading volume data locally using the CLI&lt;/h2&gt;
+
+&lt;p&gt;Run a SSH service that mounts the volumes of the service you want to backup (replacing &lt;code&gt;mysql&lt;/code&gt; with the actual service name):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-cloud service run -n downloader -p 22:2222 -e AUTHORIZED_KEYS=&amp;quot;$(cat ~/.ssh/id_rsa.pub)&amp;quot; --volumes-from mysql ubuntu
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Run &lt;code&gt;scp&lt;/code&gt; to download the files of the data volume (replacing &lt;code&gt;downloader-1.uuid.cont.dockerapp.io&lt;/code&gt; with your container FQDN and &lt;code&gt;/var/lib/mysql&lt;/code&gt; with the path yu want to download):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ scp -r -P 2222 root@downloader-1.uuid.cont.dockerapp.io:/var/lib/mysql .
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Create a proxy or load balancer</title>
+      <link>https://docs.docker.com/v1.10/docker-cloud/tutorials/load-balance-hello-world/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/docker-cloud/tutorials/load-balance-hello-world/</guid>
+      <description>
+
+&lt;h1 id=&#34;create-a-proxy-or-load-balancer&#34;&gt;Create a proxy or load balancer&lt;/h1&gt;
+
+&lt;p&gt;In order to load balance a web service that is deployed to multiple
+containers we&amp;rsquo;re going to need a proxy or load balancer. We&amp;rsquo;ll show you
+how to accomplish this using our &lt;strong&gt;dockercloud/hello-world&lt;/strong&gt; as a sample web
+service and our &lt;strong&gt;Jumpstart&lt;/strong&gt; image &lt;strong&gt;dockercloud/haproxy&lt;/strong&gt; to load balance the
+traffic. Traffic will be distributed across 8 containers in a node
+cluster containing 4 nodes. We&amp;rsquo;ll choose 4 x 512MB droplets from Digital
+Ocean for each of our nodes.&lt;/p&gt;
+
+&lt;h2 id=&#34;creating-a-node-cluster&#34;&gt;Creating a Node Cluster&lt;/h2&gt;
+
+&lt;p&gt;Let&amp;rsquo;s start off by deploying the node cluster of 4 nodes. Go to the
+&lt;strong&gt;Nodes&lt;/strong&gt; tab and click on &lt;strong&gt;Launch new node cluster.&lt;/strong&gt;Choose the &lt;strong&gt;node
+cluster name&lt;/strong&gt;, &lt;strong&gt;region, type/size&lt;/strong&gt; and &lt;strong&gt;4&lt;/strong&gt; as the total &lt;strong&gt;Number of
+nodes&lt;/strong&gt;. If you have not linked your DigitalOcean credentials
+yet, &lt;a href=&#34;../v1.10/docker-cloud/getting-started/link-do/&#34;&gt;click here for more info on how to do
+this.&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-cloud/tutorials/images/load-balance-web-node-wizard.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click the &lt;strong&gt;Launch node cluster&lt;/strong&gt; button. This operation may take up to
+10 minutes while the nodes are provisioned, this a great time to grab a
+coffee.&lt;/p&gt;
+
+&lt;p&gt;Once the node cluster is deployed successfully, with all 4 nodes we&amp;rsquo;re
+ready to proceed and launch our web service.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-cloud/tutorials/images/load-balance-web-four-nodes.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;launching-the-web-service&#34;&gt;Launching the Web Service&lt;/h2&gt;
+
+&lt;p&gt;Click on the &lt;strong&gt;green popup message&lt;/strong&gt; that shows up, or click on the &lt;strong&gt;Services&lt;/strong&gt; tab. And then on the &lt;strong&gt;Create
+service&lt;/strong&gt; button. From &lt;em&gt;Jumpstarts &amp;gt; Miscellaneous&lt;/em&gt; select the image &lt;strong&gt;dockercloud/hello-world&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-cloud/tutorials/images/load-balance-web-hello-world-jumpstart.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You&amp;rsquo;ll be taken to the Service configuration step of the wizard. Configure your service as per the screenshot below. Make sure to change the &lt;em&gt;deployment strategy&lt;/em&gt; to &lt;strong&gt;High Availability&lt;/strong&gt;, increase the &lt;em&gt;number of containers&lt;/em&gt; to &lt;strong&gt;8&lt;/strong&gt;, and add the &lt;em&gt;tag&lt;/em&gt; &lt;strong&gt;web&lt;/strong&gt; to ensure this service gets deployed to the right nodes.&lt;/p&gt;
+
+&lt;p&gt;Lastly, because we will want to access these containers from the web, publicly, we must &lt;strong&gt;publish port 80&lt;/strong&gt;. Click on the table and check the &lt;strong&gt;Published&lt;/strong&gt; checkbox.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-cloud/tutorials/images/load-balance-web-wizard.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click on &lt;strong&gt;Create and deploy&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;After a short wait you&amp;rsquo;ll be taken to the &lt;strong&gt;Service View &amp;gt; Timeline.&lt;/strong&gt; Click on the &lt;strong&gt;Containers&lt;/strong&gt; tab to see how your containers are quickly getting created and started.  &lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-cloud/tutorials/images/load-balance-web-containers-start.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;testing-the-web-service&#34;&gt;Testing the Web Service&lt;/h2&gt;
+
+&lt;p&gt;After at least one of your containers is in &lt;strong&gt;Running&lt;/strong&gt; status, you can click on the &lt;strong&gt;Endpoints&lt;/strong&gt; tab. Here you&amp;rsquo;ll see a list of all the endpoints publicly available for this service.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-cloud/tutorials/images/load-balance-web-endpoints.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click on the URL (it should look something like
+&lt;a href=&#34;http://web-1.username.cont.dockerapp.io:49154&#34;&gt;http://web-1.username.cont.dockerapp.io:49154&lt;/a&gt; ). This will
+open a new tab on your web browser where you&amp;rsquo;ll see
+&lt;strong&gt;dockercloud/hello-world&lt;/strong&gt;&amp;rsquo;s web page. &lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-cloud/tutorials/images/load-balance-web-hostname-1.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;If you followed the same steps, but for another container in
+&lt;strong&gt;hello-world&lt;/strong&gt; web service you&amp;rsquo;ll see that the hostname would change to match the container name (web-2, web-3, etc.).&lt;/p&gt;
+
+&lt;h2 id=&#34;launching-the-load-balancer&#34;&gt;Launching the Load Balancer&lt;/h2&gt;
+
+&lt;p&gt;Now that we&amp;rsquo;ve been able to verify the web service is working fine, go
+back to the &lt;strong&gt;Services&lt;/strong&gt; tab and click on &lt;strong&gt;Launch new service&lt;/strong&gt; again.
+This time around we&amp;rsquo;re going to be launching a &lt;strong&gt;load balancer&lt;/strong&gt;that
+will be listening on &lt;strong&gt;port 80&lt;/strong&gt; and balancing the traffic across the 8
+containers that are running our web service. &lt;/p&gt;
+
+&lt;p&gt;The load balancer is one of the &lt;strong&gt;Jumpstart&lt;/strong&gt; images that Docker Cloud
+provides. You can find it in &lt;strong&gt;Jumpstarts &amp;gt; Proxies &amp;gt;
+dockercloud/haproxy.&lt;/strong&gt; Select the image and move on to the &lt;strong&gt;Service
+Configuration Screen.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-cloud/tutorials/images/load-balance-web-haproxy.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We name the service &lt;em&gt;lb&lt;/em&gt;, leave the tag, deployment startegy and number of containers with their default values. Then click on the ports table, check the &lt;em&gt;Published&lt;/em&gt; checkbox and click the word &lt;em&gt;dynamic&lt;/em&gt; to &lt;strong&gt;modify the Node port from 80&lt;/strong&gt;. Screen should look like the screenshot below. Then click on the blue button that reads &lt;strong&gt;Next:
+environment variables.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-cloud/tutorials/images/load-balance-web-lb-conf.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;configuring-the-web-lb-balancer&#34;&gt;Configuring the web-lb Balancer &lt;/h2&gt;
+
+&lt;p&gt;Ok, here&amp;rsquo;s where things start getting interesting. First thing we need
+to do is assign this service an API Role. You can &lt;a href=&#34;../v1.10/docker-cloud/feature-reference/api-roles/&#34;&gt;read more about API Roles here&lt;/a&gt;.
+Doing this will pass a &lt;em&gt;DOCKERCLOUD_AUTH&lt;/em&gt; environment variable to your
+service&amp;rsquo;s containers that will allow them to query Docker Cloud&amp;rsquo;s API on your
+behalf. &lt;strong&gt;dockercloud/haproxy&lt;/strong&gt; uses this to query the API on the status and
+&lt;strong&gt;number of web containers&lt;/strong&gt; that are part of the &lt;strong&gt;web service&lt;/strong&gt; we
+launched earlier.&lt;strong&gt;HAproxy&lt;/strong&gt; uses this information to update its
+configuration dynamically as your web service scales. &lt;/p&gt;
+
+&lt;p&gt;Then we need to link our load balancing service with the web service
+&lt;em&gt;web&lt;/em&gt;. To do that select *web* (name may be different if you didn&amp;rsquo;t name your service &lt;em&gt;web&lt;/em&gt;) from the drop down list
+of &lt;em&gt;Link services&lt;/em&gt; and click on the blue button &lt;strong&gt;+ Add. &lt;/strong&gt;*&lt;/p&gt;
+
+&lt;p&gt;The link will appear in the table underneath. And your screen will look
+like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-cloud/tutorials/images/load-balance-web-lb-envvar.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You&amp;rsquo;ll also notice that a lot of new environment variables are passed to
+the new service we&amp;rsquo;re about to launch. You can read more about
+that &lt;a href=&#34;../v1.10/docker-cloud/feature-reference/service-links/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Click &lt;strong&gt;Create and deploy.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;testing-the-load-balanced-web-service&#34;&gt;Testing the load-balanced Web Service&lt;/h2&gt;
+
+&lt;p&gt;After launching the &lt;strong&gt;HAproxy&lt;/strong&gt; image you are automatically taken to the
+&lt;strong&gt;Service view &amp;gt; Timeline.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Once again, click on the the &lt;strong&gt;endpoints&lt;/strong&gt; tab after the container &lt;strong&gt;lb-1&lt;/strong&gt; is &lt;strong&gt;Running&lt;/strong&gt;. Unlike with the web service, you&amp;rsquo;ll see that this time the HTTP URL for the load balancer is mapped to port 80. &lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-cloud/tutorials/images/load-balance-web-lb-endpoint.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click on the URL to open up a new tab on your browser. You&amp;rsquo;ll see the
+same webpage you saw earlier when checking the web service. This time
+around though, try refreshing your web browser. With each refresh, you
+should see the hostname change as your requests are load-balanced to different containers. &lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-cloud/tutorials/images/load-balance-web-lb.gif&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Each container running the web service gets a different hostname (container_name-#). The fact that with each refresh the hostname displayed changes means that our load balancer is working as expected. Each request is being load balanced to different containers! Note: if the hostname is not changing for you, try clearing your browser&amp;rsquo;s cache or trying from a different web browser. &lt;/p&gt;
+
+&lt;p&gt;Congratulations you have deployed your first load balanced web service
+using Docker Cloud!&lt;/p&gt;
+
+&lt;h2 id=&#34;bonus-points-load-balancing-the-load-balancer-using-dns&#34;&gt;Bonus points: load balancing the load balancer (using DNS)&lt;/h2&gt;
+
+&lt;p&gt;Now you may be asking, what if I scale the &lt;em&gt;lb&lt;/em&gt; service to 2 or more containers?&lt;/p&gt;
+
+&lt;p&gt;Docker Cloud automatically assigns a DNS endpoint to all services that resolves to all of the containers of that service. You can use that DNS endpoint to load balance your load balancer.&lt;/p&gt;
+
+&lt;p&gt;You can try it by pointing your web browser to &lt;em&gt;servicename.username.svc.dockerapp.io&lt;/em&gt; or  using &lt;em&gt;dig&lt;/em&gt; or &lt;em&gt;nslookup&lt;/em&gt; to see how the service endpoint resolves.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Data management with Volumes</title>
+      <link>https://docs.docker.com/v1.10/docker-cloud/tutorials/python/12_data_management_with_volumes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/docker-cloud/tutorials/python/12_data_management_with_volumes/</guid>
+      <description>
+
+&lt;h1 id=&#34;data-management-with-volumes&#34;&gt;Data management with Volumes&lt;/h1&gt;
+
+&lt;p&gt;Because of how you set up Redis in the previous step, if you were to redeploy the service or if the container were to crash, the data would be lost. But what if you want the data to persist beyond the life of a container? Or what if you want to share data from one container to another? Volumes let you do just that.&lt;/p&gt;
+
+&lt;h3 id=&#34;data-persistence&#34;&gt;Data persistence&lt;/h3&gt;
+
+&lt;p&gt;In order to persist, data in Docker Cloud must be stored in a volume that is either defined on the image (for example in the Dockerfile), or that is specified when you create a new service in Docker Cloud. Learn more about volumes in Docker Cloud &lt;a href=&#34;../v1.10/docker-cloud/feature-reference/volumes/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;test-for-lack-of-persistence&#34;&gt;Test for lack of persistence&lt;/h4&gt;
+
+&lt;p&gt;If you redeploy the Redis service you created earlier, you&amp;rsquo;ll see that the counter is lost. Try that by executing the following command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ docker-cloud service redeploy redis
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Wait until the new container is running again:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-cloud container ps --service redis
+NAME     UUID      STATUS        IMAGE                RUN COMMAND      EXIT CODE  DEPLOYED        PORTS
+redis-1  5ddc0d66  ✘ Terminated  redis:staging        /run.sh                  0  15 minutes ago  6379/tcp
+redis-1  3eff67a9  ⚙ Starting    redis:staging        /run.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once the container is running. Try curling or visiting the web endpoint again:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    $ curl lb-1.$DOCKER_ID_USER.cont.dockerapp.io:80
+    &amp;lt;h3&amp;gt;Hello Python users!!&amp;lt;/h3&amp;gt;&amp;lt;b&amp;gt;Hostname:&amp;lt;/b&amp;gt; web-1&amp;lt;br/&amp;gt;&amp;lt;b&amp;gt;Visits:&amp;lt;/b&amp;gt; 1%
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The Redis cache service redeployment caused the counter to reset.&lt;/p&gt;
+
+&lt;h4 id=&#34;enabling-persistence&#34;&gt;Enabling persistence&lt;/h4&gt;
+
+&lt;p&gt;Luckily for you the Redis image in this tutorial &lt;em&gt;redis&lt;/em&gt; supports data persistence. Since data persistence is not a common requirement for a Redis cache, it&amp;rsquo;s not enabled by default. To activate this, you only need to set up a couple of environment variables. Let&amp;rsquo;s do this!&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-cloud service set \
+-e REDIS_APPENDONLY=yes \
+-e REDIS_APPENDFSYNC=always \
+redis --redeploy
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This command defines two new environment variables in the &lt;strong&gt;redis&lt;/strong&gt; service and then redeploys it. Learn more about &lt;code&gt;redis&lt;/code&gt; &lt;a href=&#34;https://github.com/docker-library/redis/&#34; target =&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;With these settings, Redis can create and store its data in a volume. The volume is in &lt;code&gt;/data&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Visit the web endpoint a number of times again, to make sure that everything is working as expected. Then redeploy the Redis service to see if the counter persists even after container is terminated and re-created.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    $ curl lb-1.$DOCKER_ID_USER.cont.dockerapp.io:80
+    &amp;lt;h3&amp;gt;Hello Python users!!&amp;lt;/h3&amp;gt;&amp;lt;b&amp;gt;Hostname:&amp;lt;/b&amp;gt; web-1&amp;lt;br/&amp;gt;&amp;lt;b&amp;gt;Visits:&amp;lt;/b&amp;gt; 1%
+    $ curl lb-1.$DOCKER_ID_USER.cont.dockerapp.io:80
+    &amp;lt;h3&amp;gt;Hello Python users!!&amp;lt;/h3&amp;gt;&amp;lt;b&amp;gt;Hostname:&amp;lt;/b&amp;gt; web-2&amp;lt;br/&amp;gt;&amp;lt;b&amp;gt;Visits:&amp;lt;/b&amp;gt; 2%
+    $ curl lb-1.$DOCKER_ID_USER.cont.dockerapp.io:80
+    &amp;lt;h3&amp;gt;Hello Python users!!&amp;lt;/h3&amp;gt;&amp;lt;b&amp;gt;Hostname:&amp;lt;/b&amp;gt; web-3&amp;lt;br/&amp;gt;&amp;lt;b&amp;gt;Visits:&amp;lt;/b&amp;gt; 3%
+    $ docker-cloud service redeploy redis
+    897c435a-3d56-4c9d-8fd2-20a1be03a25f
+    $ docker-cloud container ps --service redis
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;    NAME     UUID      STATUS        IMAGE                RUN COMMAND      EXIT CODE  DEPLOYED        PORTS
+    cache-1  8193cc1b  ✘ Terminated  redis:staging        /run.sh                  0  10 minutes ago  6379/tcp
+    cache-1  61f63d97  ▶ Running     redis:staging        /run.sh                     37 seconds ago  6379/tcp
+    $ curl lb-1.$DOCKER_ID_USER.cont.dockerapp.io:80
+    &amp;lt;h3&amp;gt;Hello Python users!!&amp;lt;/h3&amp;gt;&amp;lt;b&amp;gt;Hostname:&amp;lt;/b&amp;gt; web-3&amp;lt;br/&amp;gt;&amp;lt;b&amp;gt;Visits:&amp;lt;/b&amp;gt; 4%
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Congratulations! You&amp;rsquo;ve set up data persistence in Docker Cloud!&lt;/p&gt;
+
+&lt;h3 id=&#34;sharing-reusing-data-volumes-between-services&#34;&gt;Sharing/reusing data volumes between services&lt;/h3&gt;
+
+&lt;p&gt;A service&amp;rsquo;s volume can be accessed by another service. To do this you use the &lt;code&gt;--volumes-from&lt;/code&gt; flag when creating the new service.&lt;/p&gt;
+
+&lt;p&gt;You might use this functionality to share data between two services, or to back up, restore, or migrate a volume to a local host or a cloud storage provider (like AWS S3).&lt;/p&gt;
+
+&lt;p&gt;In this next step, you&amp;rsquo;ll download the &lt;code&gt;/data&lt;/code&gt; volume from Redis to your local host using SCP (secure copy).&lt;/p&gt;
+
+&lt;p&gt;First, run a SSH service that mounts the volumes of the redis you want to back up:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ docker-cloud service run -n download -p 2222:22 -e AUTHORIZED_KEYS=&amp;quot;$(cat ~/.ssh/id_rsa.pub)&amp;quot; --volumes-from redis ubuntu
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then run &lt;strong&gt;scp&lt;/strong&gt; to download the data volume files in Redis:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ scp -r -P 2222 root@downloader-1.$DOCKER_ID_USER.svc.dockerapp.io:/data .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You now have a backup copy of the Redis data on your local host machine. :)&lt;/p&gt;
+
+&lt;p&gt;Next: &lt;a href=&#34;../v1.10/docker-cloud/feature-reference/stacks/&#34;&gt;Learn more about Service Stacks&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Define environment variables</title>
+      <link>https://docs.docker.com/v1.10/docker-cloud/tutorials/golang/6_define_environment_variables/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/docker-cloud/tutorials/golang/6_define_environment_variables/</guid>
+      <description>
+
+&lt;h1 id=&#34;define-environment-variables&#34;&gt;Define environment variables&lt;/h1&gt;
+
+&lt;p&gt;Docker lets you externalize configuration - storing data such as encryption keys or external resource addresses in environment variables. Docker Cloud makes it easy to define, share, and update the environment variables of your services.&lt;/p&gt;
+
+&lt;p&gt;At runtime, environment variables are exposed to the application inside the container.&lt;/p&gt;
+
+&lt;p&gt;Open the file in &lt;em&gt;quickstart-go/main.go&lt;/em&gt;, and take a look at the &lt;em&gt;fmt.Fprintf&lt;/em&gt; call in the &lt;em&gt;indexHandler&lt;/em&gt; method:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;fmt.Fprintf(w, &amp;quot;&amp;lt;h1&amp;gt;hello, %s&amp;lt;/h1&amp;gt;\n&amp;lt;b&amp;gt;Hostname: &amp;lt;/b&amp;gt;%s&amp;lt;br&amp;gt;&amp;lt;b&amp;gt;MongoDB Status: &amp;lt;/b&amp;gt;%s&amp;quot;, os.Getenv(&amp;quot;NAME&amp;quot;), hostname, mongostatus)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You&amp;rsquo;ll see that the code uses &lt;strong&gt;os.Getenv(&amp;ldquo;NAME&amp;rdquo;)&lt;/strong&gt; to get the environment variable &lt;strong&gt;NAME&lt;/strong&gt;. If you modify the enviroment variable, the message should change accordingly. Try that by executing:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ docker-cloud service set --env NAME=&amp;quot;Golang users&amp;quot; --redeploy web
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Execute &lt;code&gt;$ docker-cloud container ps --service web&lt;/code&gt; again to get the new container endpoint. You&amp;rsquo;ll see that there are now two &lt;code&gt;web-1&lt;/code&gt; containers, one with a status of &lt;strong&gt;terminated&lt;/strong&gt; and another one &lt;strong&gt;starting&lt;/strong&gt; or &lt;strong&gt;running&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-cloud container ps --service web
+NAME    UUID      STATUS        IMAGE                                      RUN COMMAND      EXIT CODE  DEPLOYED        PORTS
+web-1   01777963  ✘ Terminated  golang-user/quickstart-go:latest                                   -1  23 minutes ago  web-1.borjaburgos.cont.dockerapp.io:49162-&amp;gt;80/tcp
+web-1   1fe3a0a2  ▶ Running     golang-user/quickstart-go:latest                                       2 seconds ago   web-1.borjaburgos.cont.dockerapp.io:49176-&amp;gt;80/tcp
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now curl the new endpoint to see the updated &lt;em&gt;hello, Golang users&lt;/em&gt; greeting.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: if you don&amp;rsquo;t see an endpoint, wait until the container status changes to &lt;strong&gt;running&lt;/strong&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code&gt;    $ curl web-1.$DOCKER_ID_USER.cont.dockerapp.io:49176
+    &amp;lt;h1&amp;gt;hello, Golang users&amp;lt;/h1&amp;gt;
+    &amp;lt;b&amp;gt;Hostname: &amp;lt;/b&amp;gt;web-1&amp;lt;br&amp;gt;&amp;lt;b&amp;gt;MongoDB Status: &amp;lt;/b&amp;gt;Not available%
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Your service now returns &lt;code&gt;hello, Golang users&lt;/code&gt;, good job modifying your service using environment variables!&lt;/p&gt;
+
+&lt;h3 id=&#34;environment-variables-and-the-dockerfile&#34;&gt;Environment Variables and the Dockerfile&lt;/h3&gt;
+
+&lt;p&gt;Environment variables can be set in the Dockerfile, and modified at runtime (as you just did).&lt;/p&gt;
+
+&lt;p&gt;If you are wondering where the default value for the &lt;strong&gt;NAME&lt;/strong&gt; environment variable is set, checkout the file &lt;em&gt;quickstart-go/Dockerfile&lt;/em&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ENV NAME world
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next: &lt;a href=&#34;../v1.10/docker-cloud/tutorials/golang/7_scale_the_service/&#34;&gt;Scale the service&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Define environment variables</title>
+      <link>https://docs.docker.com/v1.10/docker-cloud/tutorials/python/6_define_environment_variables/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/docker-cloud/tutorials/python/6_define_environment_variables/</guid>
+      <description>
+
+&lt;h1 id=&#34;define-environment-variables&#34;&gt;Define environment variables&lt;/h1&gt;
+
+&lt;p&gt;Docker lets you externalize configuration - storing data such as encryption keys or external resource addresses in environment variables. Docker Cloud makes it easy to define, share, and update the environment variables of your services.&lt;/p&gt;
+
+&lt;p&gt;At runtime, environment variables are exposed to the application inside the container.&lt;/p&gt;
+
+&lt;p&gt;Open the file in quickstart-python/app.py, and take a look at the return statement in the method &lt;em&gt;hello()&lt;/em&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;return html.format(name=os.getenv(&#39;NAME&#39;, &amp;quot;world&amp;quot;), hostname=socket.gethostname(), visits=visits)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You&amp;rsquo;ll see that the code uses &lt;strong&gt;os.getenv(&amp;lsquo;NAME&amp;rsquo;, &amp;ldquo;world&amp;rdquo;)&lt;/strong&gt; to get the environment variable &lt;strong&gt;NAME&lt;/strong&gt;. If you modify the environment variable, the message should change accordingly. Try that by executing:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ docker-cloud service set --env NAME=&amp;quot;Python Users&amp;quot; --redeploy web
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Execute &lt;code&gt;$ docker-cloud container ps&lt;/code&gt; again to get the new container endpoint. You&amp;rsquo;ll see that there are now two &lt;code&gt;web-1&lt;/code&gt; containers, one with a status of &lt;strong&gt;terminated&lt;/strong&gt; and another one &lt;strong&gt;starting&lt;/strong&gt; or &lt;strong&gt;running&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-cloud container ps
+NAME                         UUID      STATUS        IMAGE                                          RUN COMMAND      EXIT CODE  DEPLOYED        PORTS
+web-1                        a2ff2247  ✘ Terminated  python-user/quickstart-python:latest           python app.py               40 minutes ago  web-1.borjaburgos.cont.dockerapp.io:49165-&amp;gt;80/tcp
+web-1                        ae20d960  ▶ Running     python-user/quickstart-python:latest           python app.py               20 seconds ago  web-1.borjaburgos.cont.dockerapp.io:49166-&amp;gt;80/tcp
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now curl the new endpoint to see the updated &lt;em&gt;Hello Python Users!&lt;/em&gt; greeting.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: if you don&amp;rsquo;t see an endpoint, wait until the container status changes to &lt;strong&gt;running&lt;/strong&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code&gt;$ curl web-1.$DOCKER_ID_USER.cont.dockerapp.io:49162
+Hello Python Users!&amp;lt;/br&amp;gt;Hostname: e360d05cdb81&amp;lt;/br&amp;gt;Counter: Redis Cache not found, counter disabled.%
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Your service now returns &lt;code&gt;Hello Python Users!&lt;/code&gt;, good job on modifying your service using environment variables!&lt;/p&gt;
+
+&lt;h3 id=&#34;environment-variables-and-the-dockerfile&#34;&gt;Environment Variables and the Dockerfile&lt;/h3&gt;
+
+&lt;p&gt;Environment variables can be set in the Dockerfile, and modified at runtime (as you just did).&lt;/p&gt;
+
+&lt;p&gt;If you are wondering where the default value for the &lt;strong&gt;NAME&lt;/strong&gt; environment variable is set, checkout the file quickstart-python/Dockerfile:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Environment Variables
+ENV NAME World
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next: &lt;a href=&#34;../v1.10/docker-cloud/tutorials/python/7_scale_the_service/&#34;&gt;Scale the service&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Deploy a Golang application</title>
+      <link>https://docs.docker.com/v1.10/docker-cloud/tutorials/golang/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/docker-cloud/tutorials/golang/</guid>
+      <description>
+
+&lt;h1 id=&#34;deploy-a-golang-application&#34;&gt;Deploy a Golang application&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/docker-cloud/tutorials/golang/1_introduction/&#34;&gt;Introduction to deploying a Golang app&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/docker-cloud/tutorials/golang/2_set_up/&#34;&gt;Set up&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/docker-cloud/tutorials/golang/3_prepare_the_app/&#34;&gt;Prepare the app&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/docker-cloud/tutorials/golang/4_push_to_cloud_registry/&#34;&gt;Push a Docker image to Docker Cloud&amp;rsquo;s Registry&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/docker-cloud/tutorials/golang/5_deploy_the_app_as_a_service/&#34;&gt;Deploy the app as a Docker Cloud service&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/docker-cloud/tutorials/golang/6_define_environment_variables/&#34;&gt;Define environment variables&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/docker-cloud/tutorials/golang/7_scale_the_service/&#34;&gt;Scale the service&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/docker-cloud/tutorials/golang/8_view_logs/&#34;&gt;View logs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/docker-cloud/tutorials/golang/9_load-balance_the_service/&#34;&gt;Load-balance the service&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/docker-cloud/tutorials/golang/10_provision_a_data_backend_for_your_service/&#34;&gt;Provision a data backend for your service&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Deploy a Python application</title>
+      <link>https://docs.docker.com/v1.10/docker-cloud/tutorials/python/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/docker-cloud/tutorials/python/</guid>
+      <description>
+
+&lt;h1 id=&#34;deploy-a-python-application&#34;&gt;Deploy a Python application&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/docker-cloud/tutorials/python/1_introduction/&#34;&gt;Deploy a Python app to Docker Cloud&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/docker-cloud/tutorials/python/2_set_up/&#34;&gt;Set up Python application&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/docker-cloud/tutorials/python/3_prepare_the_app/&#34;&gt;Prepare the Python application&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/docker-cloud/tutorials/python/4_push_to_cloud_registry/&#34;&gt;Push an image to Docker Cloud&amp;rsquo;s Registry&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/docker-cloud/tutorials/python/5_deploy_the_app_as_a_service/&#34;&gt;Deploy the app as a Docker Cloud service&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/docker-cloud/tutorials/python/6_define_environment_variables/&#34;&gt;Define environment variables&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/docker-cloud/tutorials/python/7_scale_the_service/&#34;&gt;Scale the service&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/docker-cloud/tutorials/python/8_view_logs/&#34;&gt;View logs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/docker-cloud/tutorials/python/9_load-balance_the_service/&#34;&gt;Load-balance a Python service&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/docker-cloud/tutorials/python/10_provision_a_data_backend_for_your_service/&#34;&gt;Provision a data backend for a Python service&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/docker-cloud/tutorials/python/11_service_stacks/&#34;&gt;Python service stacks&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../v1.10/docker-cloud/tutorials/python/12_data_management_with_volumes/&#34;&gt;Data management with Volumes&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Deploy the app as a Docker Cloud service</title>
+      <link>https://docs.docker.com/v1.10/docker-cloud/tutorials/golang/5_deploy_the_app_as_a_service/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/docker-cloud/tutorials/golang/5_deploy_the_app_as_a_service/</guid>
+      <description>
+
+&lt;h1 id=&#34;deploy-the-app-as-a-docker-cloud-service&#34;&gt;Deploy the app as a Docker Cloud service&lt;/h1&gt;
+
+&lt;p&gt;In this step you will deploy the app as a Docker Cloud Service. Remember that a service is a group of containers of the same &lt;strong&gt;image:tag&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ docker-cloud service run -p 80 --name web $DOCKER_ID_USER/quickstart-go
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you don&amp;rsquo;t have Docker Engine installed locally and you have been following this tutorial, it&amp;rsquo;s likely that you don&amp;rsquo;t have the &lt;code&gt;quickstart-go&lt;/code&gt; image in your private registry at Docker Cloud. For this reason the command above won&amp;rsquo;t work. To deploy the service in this case, you can use the public image &lt;code&gt;dockercloud/quickstart-go&lt;/code&gt; available from Docker Hub. To do this execute the following command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ docker-cloud service run -p 80 --name web dockercloud/quickstart-go
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;run&lt;/code&gt; command will &lt;strong&gt;create and run&lt;/strong&gt; the service using the image &lt;em&gt;golang-user/quickstart-go&lt;/em&gt; or &lt;em&gt;dockercloud/quickstart-go&lt;/em&gt;. The &lt;strong&gt;-p 80&lt;/strong&gt; flag will publish (make publicly accessible) port 80 in the container and map it to a dynamically assigned port in the node.&lt;/p&gt;
+
+&lt;p&gt;It will take up to a few minutes to get your service up and &lt;strong&gt;running&lt;/strong&gt;. To check on the status of your service execute the following command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;NAME         UUID      STATUS          #CONTAINERS  IMAGE                                      DEPLOYED      PUBLICDNS
+web          1ecbf656  ▶ Running                 1  golang-user/quickstart-go:latest           s1 minute ago  web.borjaburgos.svc.dockerapp.io
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Check to make sure that the &lt;strong&gt;STATUS&lt;/strong&gt; is &lt;strong&gt;Running&lt;/strong&gt;. Now let&amp;rsquo;s visit the app at the URL generated by its service name.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-cloud container ps --service web
+NAME                   UUID      STATUS     IMAGE                                          RUN COMMAND          EXIT CODE  DEPLOYED      PORTS
+web-1                  6c89f20e  ▶ Running  golang-user/quickstart-go:latest               python app.py                   1 minute ago  web-1.golang-user.cont.dockerapp.io:49162-&amp;gt;80/tcp
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;strong&gt;PORTS&lt;/strong&gt; column contains the URL we&amp;rsquo;ll use to see our service running in our browser. Open a browser to that URL (in the example above, it is &lt;a href=&#34;web-1.golang-user.cont.dockerapp.io:49162&#34;&gt;web-1.golang-user.cont.dockerapp.io:49162&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;Alternatively, you can use &lt;em&gt;curl&lt;/em&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    $ curl web-1.$DOCKER_ID_USER.cont.dockerapp.io:49162
+    &amp;lt;h1&amp;gt;hello, world&amp;lt;/h1&amp;gt;
+    &amp;lt;b&amp;gt;Hostname: &amp;lt;/b&amp;gt;web-1&amp;lt;br&amp;gt;&amp;lt;b&amp;gt;MongoDB Status: &amp;lt;/b&amp;gt;Not available%
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;CONGRATULATIONS!&lt;/strong&gt; You&amp;rsquo;ve deployed your first service using Docker Cloud.&lt;/p&gt;
+
+&lt;p&gt;Next: &lt;a href=&#34;../v1.10/docker-cloud/tutorials/golang/6_define_environment_variables/&#34;&gt;Define environment variables&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Deploy the app as a Docker Cloud service</title>
+      <link>https://docs.docker.com/v1.10/docker-cloud/tutorials/python/5_deploy_the_app_as_a_service/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/docker-cloud/tutorials/python/5_deploy_the_app_as_a_service/</guid>
+      <description>
+
+&lt;h1 id=&#34;deploy-the-app-as-a-docker-cloud-service&#34;&gt;Deploy the app as a Docker Cloud service&lt;/h1&gt;
+
+&lt;p&gt;In this step you will deploy the app as a Docker Cloud Service. Remember that a service is a group of containers of the same &lt;strong&gt;image:tag&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ docker-cloud service run -p 80 --name web $DOCKER_ID_USER/quickstart-python
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you don&amp;rsquo;t have Docker Engine installed locally and you have been following this tutorial, it&amp;rsquo;s likely that you don&amp;rsquo;t have the &lt;code&gt;quickstart-python&lt;/code&gt; image in your private registry at Docker Cloud. For this reason the command above won&amp;rsquo;t work. To deploy the service in this case, you can use the public image &lt;code&gt;dockercloud/quickstart-python&lt;/code&gt; available from the Docker Hub. To do this execute the following command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ docker-cloud service run -p 80 --name web dockercloud/quickstart-python
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;run&lt;/code&gt; command will &lt;strong&gt;create and run&lt;/strong&gt; the service using the image &lt;em&gt;python-user/quickstart-python&lt;/em&gt; or &lt;em&gt;dockercloud/quickstart-python&lt;/em&gt;. The &lt;strong&gt;-p 80&lt;/strong&gt; flag will publish (make publicly accessible) port 80 in the container and map it to a dynamically assigned port in the node.&lt;/p&gt;
+
+&lt;p&gt;It will take up to a few minutes to get your service up and &lt;strong&gt;running&lt;/strong&gt;. To check on the status of your service execute the following command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-cloud service ps
+NAME                 UUID      STATUS     IMAGE                                          DEPLOYED
+web                  68a6fb2c  ▶ Running  python-user/quickstart-python:latest           1 hour ago
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Check to make sure that the &lt;strong&gt;STATUS&lt;/strong&gt; is &lt;strong&gt;Running&lt;/strong&gt;. Now let&amp;rsquo;s visit the app at the URL generated by its service name.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-cloud container ps
+NAME                   UUID      STATUS     IMAGE                                          RUN COMMAND          EXIT CODE  DEPLOYED      PORTS
+web-1                  6c89f20e  ▶ Running  python-user/quickstart-python:latest           python app.py                   1 minute ago  web-1.python-user.cont.dockerapp.io:49162-&amp;gt;80/tcp
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;strong&gt;PORTS&lt;/strong&gt; column contains the URL we&amp;rsquo;ll use to see our service running in our browser. Open a browser to that URL (in the example above, it is &lt;a href=&#34;web-1.python-user.cont.dockerapp.io:49162&#34;&gt;web-1.python-user.cont.dockerapp.io:49162&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Alternatively, you can use &lt;em&gt;curl&lt;/em&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ curl web-1.$DOCKER_ID_USER.cont.dockerapp.io:49162
+Hello World!&amp;lt;/br&amp;gt;Hostname: web-1&amp;lt;/br&amp;gt;Counter: Redis Cache not found, counter disabled.%
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;CONGRATULATIONS!&lt;/strong&gt; You&amp;rsquo;ve deployed your first service using Docker Cloud.&lt;/p&gt;
+
+&lt;p&gt;Next: &lt;a href=&#34;../v1.10/docker-cloud/tutorials/python/6_define_environment_variables/&#34;&gt;Define environment variables&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

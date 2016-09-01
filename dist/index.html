@@ -1,0 +1,462 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Docker</title>
+    <link rel="stylesheet" href="assets/css/app.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.6/animate.min.css">
+    <script src="assets/js/modernizr.js"></script> 
+  </head>
+  <body>
+    <div class="off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+        <a class="left-off-canvas-toggle" href="#" >
+          <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="35px" height="35px" viewBox="0 0 35 35" enable-background="new 0 0 35 35" xml:space="preserve">
+          <path fill="#3597D4" d="M30.583,9.328c0,0.752-0.539,1.362-1.203,1.362H5.113c-0.664,0-1.203-0.61-1.203-1.362l0,0
+            c0-0.752,0.539-1.362,1.203-1.362H29.38C30.045,7.966,30.583,8.576,30.583,9.328L30.583,9.328z"/>
+          <path fill="#3597D4" d="M30.583,17.09c0,0.752-0.539,1.362-1.203,1.362H5.113c-0.664,0-1.203-0.61-1.203-1.362l0,0
+            c0-0.752,0.539-1.362,1.203-1.362H29.38C30.045,15.728,30.583,16.338,30.583,17.09L30.583,17.09z"/>
+          <path fill="#3597D4" d="M30.583,24.387c0,0.752-0.539,1.362-1.203,1.362H5.113c-0.664,0-1.203-0.61-1.203-1.362l0,0
+            c0-0.752,0.539-1.362,1.203-1.362H29.38C30.045,23.025,30.583,23.635,30.583,24.387L30.583,24.387z"/>
+          </svg>
+        </a>
+        <a class="button secondary small get-started-cta">Get Started</a>
+        <header class="main-header">
+          <div class="row">
+            <div class="large-3 columns">
+              <a href="index.html"><img class="logo" src="assets/images/logo.png"></a>
+            </div>
+            <div class="large-9 columns">
+              <ul class="nav-global">
+                <li><a href="#">Support</a></li>
+                <li><a href="#">Training</a></li>
+                <li><a href="#">Docs</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Sign-in</a></li>
+                <li><a class="button" href="#">Get Started</a></li>
+              </ul>
+              <ul class="nav-main">
+                <li><a href="products.html">Products</a>
+                  <ul>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="what-is-docker.html">What is Docker?</a></li>
+                  </ul>
+                </li>
+                <li><a href="#">Customers</a></li>
+                <li><a href="#">Community</a>
+                  <ul>
+                    <li><a href="#">Meetups</a></li>
+                    <li><a href="#">Events</a></li>
+                    <li><a href="#">Forums</a></li>
+                    <li><a href="#">Scoop.it</a></li>
+                  </ul>
+                </li>
+                <li><a href="#">Partners</a>
+                  <ul>
+                    <li><a href="#">Partner Programs</a></li>
+                  </ul>
+                </li>
+                <li><a href="company.html">Company</a>
+                  <ul>
+                    <li><a href="#">News &amp; Press</a></li>
+                    <li><a href="#">Work at Docker</a></li>
+                    <li><a href="#">Management</a></li>
+                    <li><a href="#">Contact</a></li>
+                  </ul>
+                </li>
+                <li><a href="#">Open Source</a>
+                  <ul>
+                    <li><a href="#">Contribute</a></li>
+                    <li><a href="#">Governance</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </header>
+
+        <!-- Off Canvas Menu -->
+        <aside class="left-off-canvas-menu">
+  <ul class="off-canvas-list">
+    <li class="has-submenu"><a href="#">Products</a>
+        <ul class="left-submenu">
+            <li class="back"><a href="#">Back</a></li>
+            <li><a href="#">Pricing</a></li>
+            <li><a href="#">What Is Docker</a></li>
+            <li><a href="#">Products</a></li>
+            <li><a href="#">Docker Engine</a></li>
+            <li><a href="#">Docker Hub</a></li>
+            <li><a href="#">Docker Registry</a></li>
+            <li><a href="#">Docker Machine</a></li>
+            <li><a href="#">Docker Swarm</a></li>
+            <li><a href="#">Docker Compose</a></li>
+            <li><a href="#">Kitematic</a></li>
+        </ul>
+    </li>
+    <li><a href="#">Customers</a></li>
+    <li class="has-submenu"><a href="#">Community</a>
+        <ul class="left-submenu">
+            <li class="back"><a href="#">Back</a></li>
+            <li><a href="#">Community</a></li>
+            <li><a href="#">Meetups</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">Forum</a></li>
+            <li><a href="#">Scoop.it</a></li>
+        </ul>
+    </li>
+    <li class="has-submenu"><a href="#">Partners</a>
+        <ul class="left-submenu">
+            <li class="back"><a href="#">Back</a></li>
+            <li><a href="#">Partners</a></li>
+            <li><a href="#">Partners Programs</a></li>
+        </ul>
+    </li>
+    <li><a href="#">Company</a></li>
+    <li class="has-submenu"><a href="#">Open Source</a>
+        <ul class="left-submenu">
+            <li class="back"><a href="#">Back</a></li>
+            <li><a href="#">Open Source</a></li>
+            <li><a href="#">Contribute</a></li>
+            <li><a href="#">Governance</a></li>
+        </ul>
+    </li>
+  </ul>
+  <ul class="nav-global-off-canvas">
+    <li><a href="#">Support</a></li>
+    <li><a href="#">Training</a></li>
+    <li><a href="#">Docs</a></li>
+    <li><a href="#">Blog</a></li>
+    <li><a href="#">Sign in</a></li>
+    <li><a href="#">Sign up</a></li>
+  </ul>
+</aside>
+        <!-- close the off-canvas menu -->
+        <a class="exit-off-canvas"></a>
+        
+        <!-- Start Body -->
+        <section class="hero">
+  <div class="row">
+    <div class="medium-6 large-4 columns">
+      <h1>Build, Ship, Run</h1>
+      <p>Docker is an open platform for developers and sysadmins to build, ship and run distributed applications anywhere.</p>
+    </div>
+    <div class="medium-5 large-4 columns">
+      <div class="hero-form">
+        <h4>Get started with Docker</h4>
+          <input type="text" placeholder="Username" />
+          <input type="text" placeholder="Password" />
+          <input type="text" placeholder="Email" />
+          <a href="#" class="button secondary">Get Started</a>
+          <a href="#">Learn More</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="customer-and-news row">
+  <div class="medium-4 columns">
+    <ul div class="small-block-grid-2">
+      <li><img src="assets/images/logo-yelp.png"></li>
+      <li><img src="assets/images/logo-gilt.png"></li>
+      <li><img src="assets/images/logo-bbc.png"></li>
+      <li><img src="assets/images/logo-groupon.png"></li>
+    </ul>
+  </div>
+  <div class="medium-8 columns">
+    <div class="news-item divider">
+      <p class="news-item-title">Announcing Docker 1.6</p>
+      <p class="news-item-description">Unified release across Docker Engine 1.6, Registry 2.0 and Orchestration Tools accelerate developer experience and enhance sysadmin management.</p>
+      <a href="#">Learn More</a>
+    </div>
+  </div>
+</section>
+<!-- BSR SECTION -->
+<section class="bsr-section">
+  <div class="row">
+    <div class="small-12 columns">
+      <h2>What is Docker?</h2>
+      <p>Docker is a platform of open source and commercial software tool.</p>
+    </div>
+    <div class="medium-4 columns wow fadeInUp" data-wow-offset="40" data-wow-duration="1.5s">
+      <div class="bsr-item build-item">
+        <img class="build" src="assets/images/build.svg">
+        <h2>Build</h2>
+        <p>Docker makes setting up dev environments fast, easy.</p>
+        <a class="show-for-medium-up" href="#build">More</a>
+      </div>
+    </div>
+    <div class="medium-4 columns wow fadeInUp" data-wow-offset="40" data-wow-delay="200ms" data-wow-duration="1.5s">
+      <div class="bsr-item build-item">
+        <img class="ship" src="assets/images/ship.svg">
+        <h2>Ship</h2>
+        <p>Docker allows developers to easily package their apps. </p>
+        <a class="show-for-medium-up" href="#ship">More</a>
+      </div>
+    </div>
+    <div class="medium-4 columns wow fadeInUp" data-wow-offset="40" data-wow-delay="300ms" data-wow-duration="1.5s">
+      <div class="bsr-item build-item">
+        <img class="run wow" src="assets/images/run.svg">
+        <h2>Run</h2>
+        <p>Docker helps teams release more software changes faster.</p>
+        <a class="show-for-medium-up" href="#run">More</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Details for Build -->
+  <section id="build" class="bsr-item-detail">
+    <div class="row">
+      <div class="columns">
+        <h3>Build Apps Faster</h3>
+      </div>
+      <div class="medium-8 columns">
+        <p class="lead">Docker makes setting up dev environments fast, easy and eliminates any concerns of inconsistencies between environments so developers can focus on building the best software.</p>
+        <ul>
+          <li>Cras mattis consectetur purus sit amet fermentum.</li>
+          <li>Nullam id dolor id nibh ultricies vehicula ut id elit.</li>
+          <li>Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</li>
+        </ul>
+      </div>
+      <div class="medium-4 columns">
+        <blockquote>“Cras mattis consectetur purus sit amet fermentum. Nullam id dolor id nibh ultricies vehicula ut id elit.”
+        <br><img src="http://placehold.it/50x50">
+        <cite>James Smith, Developer</cite>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- Details for Ship -->
+  <section id="ship" class="bsr-item-detail">
+    <div class="row">
+      <div class="columns">
+        <h3>Ship Apps Quickly</h3>
+      </div>
+      <div class="medium-8 columns">
+        <p class="lead">Docker makes setting up dev environments fast, easy and eliminates any concerns of inconsistencies between environments so developers can focus on building the best software.</p>
+        <ul>
+          <li>Cras mattis consectetur purus sit amet fermentum.</li>
+          <li>Nullam id dolor id nibh ultricies vehicula ut id elit.</li>
+          <li>Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</li>
+        </ul>
+      </div>
+      <div class="medium-4 columns">
+        <blockquote>“Cras mattis consectetur purus sit amet fermentum. Nullam id dolor id nibh ultricies vehicula ut id elit.”
+        <br><img src="http://placehold.it/50x50">
+        <cite>James Smith, Developer</cite>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- Details for run -->
+  <section id="run" class="bsr-item-detail">
+    <div class="row">
+      <div class="columns">
+        <h3>Run Apps Better</h3>
+      </div>
+      <div class="medium-8 columns">
+        <p class="lead">Docker makes setting up dev environments fast, easy and eliminates any concerns of inconsistencies between environments so developers can focus on building the best software.</p>
+        <ul>
+          <li>Cras mattis consectetur purus sit amet fermentum.</li>
+          <li>Nullam id dolor id nibh ultricies vehicula ut id elit.</li>
+          <li>Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</li>
+        </ul>
+      </div>
+      <div class="medium-4 columns">
+        <blockquote>“Cras mattis consectetur purus sit amet fermentum. Nullam id dolor id nibh ultricies vehicula ut id elit.”
+        <br><img src="http://placehold.it/50x50">
+        <cite>James Smith, Developer</cite>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+</section>
+<!-- BENEFITS -->
+
+<section class="benefits">
+  <section class="row">
+    <div class="medium-4 medium-push-8 columns">
+      <img class="wow fadeIn" src="http://placehold.it/400x200">
+    </div>
+    <div class="medium-8 medium-pull-4 columns">
+      <h2>Ship More Software Faster</h2>
+      <p>Cras mattis consectetur purus sit amet fermentum. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam porta sem malesuada magna mollis euismod.</p>
+      <a href="#">More</a>
+    </div>
+  </section>
+  <div class="bubbles wow">
+    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="500px" height="300px" viewBox="0 0 500 300" enable-background="new 0 0 500 300" xml:space="preserve">
+   <circle class="b1" fill="#F4F9FB" cx="481.468" cy="24.171" r="16.592"/>
+   <circle class="b2" fill="#F4F9FB" cx="471.677" cy="72.315" r="13.498"/>
+   <circle class="b3" fill="#F4F9FB" cx="425.501" cy="120.77" r="22.095"/>
+   <circle class="b4" fill="#F4F9FB" cx="412.456" cy="74.045" r="13.498"/>
+   <circle class="b5" fill="#F4F9FB" cx="334.535" cy="118.487" r="32.972"/>
+   <circle class="b6" fill="#F4F9FB" cx="280.636" cy="150.392" r="13.498"/>
+   <circle class="b7" fill="#F4F9FB" cx="232.535" cy="137.279" r="22.095"/>
+   <circle class="b8" fill="#F4F9FB" cx="177.295" cy="128.681" r="13.498"/>
+   <circle class="b9" fill="#F4F9FB" cx="130.815" cy="172.274" r="32.972"/>
+   <circle class="b10" fill="#F4F9FB" cx="71.784" cy="164.967" r="13.498"/>
+   <circle class="b11" fill="#F4F9FB" cx="74.879" cy="214.143" r="16.592"/>
+   <circle class="b12" fill="#F4F9FB" cx="26.015" cy="230.077" r="13.498"/>
+   <circle class="b13" fill="#F4F9FB" cx="15.831" cy="280.152" r="13.498"/>
+</svg>
+  </div>
+  <section class="row">
+    <div class="medium-4 columns">
+      <img class="wow fadeIn" src="http://placehold.it/400x200">
+    </div>
+    <div class="medium-8 columns">
+      <h2>Guarantee your apps work in any environment</h2>
+      <p>Cras mattis consectetur purus sit amet fermentum. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam porta sem malesuada magna mollis euismod.</p>
+      <a href="#">More</a>
+    </div>
+  </section> 
+  <div class="flip">
+    <div class="bubbles wow">
+      <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="500px" height="300px" viewBox="0 0 500 300" enable-background="new 0 0 500 300" xml:space="preserve">
+   <circle class="b1" fill="#F4F9FB" cx="481.468" cy="24.171" r="16.592"/>
+   <circle class="b2" fill="#F4F9FB" cx="471.677" cy="72.315" r="13.498"/>
+   <circle class="b3" fill="#F4F9FB" cx="425.501" cy="120.77" r="22.095"/>
+   <circle class="b4" fill="#F4F9FB" cx="412.456" cy="74.045" r="13.498"/>
+   <circle class="b5" fill="#F4F9FB" cx="334.535" cy="118.487" r="32.972"/>
+   <circle class="b6" fill="#F4F9FB" cx="280.636" cy="150.392" r="13.498"/>
+   <circle class="b7" fill="#F4F9FB" cx="232.535" cy="137.279" r="22.095"/>
+   <circle class="b8" fill="#F4F9FB" cx="177.295" cy="128.681" r="13.498"/>
+   <circle class="b9" fill="#F4F9FB" cx="130.815" cy="172.274" r="32.972"/>
+   <circle class="b10" fill="#F4F9FB" cx="71.784" cy="164.967" r="13.498"/>
+   <circle class="b11" fill="#F4F9FB" cx="74.879" cy="214.143" r="16.592"/>
+   <circle class="b12" fill="#F4F9FB" cx="26.015" cy="230.077" r="13.498"/>
+   <circle class="b13" fill="#F4F9FB" cx="15.831" cy="280.152" r="13.498"/>
+</svg>
+    </div>
+  </div>
+  <section class="row">
+    <div class="medium-4 medium-push-8 columns">
+      <img class="wow fadeIn" src="http://placehold.it/400x200">
+    </div>
+    <div class="medium-8 medium-pull-4 columns">
+      <h2>Quickly and easily update, roll back, change or scale out as needed</h2>
+      <p>Cras mattis consectetur purus sit amet fermentum. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam porta sem malesuada magna mollis euismod.</p>
+      <a href="#">More</a>
+    </div>
+  </section>  
+</section>
+<section class="cta-illustration">
+  <a href="#" class="button secondary wow pulse">Get Started With Docker</a>
+</section>
+
+        <!-- Start Footer -->
+        <footer class="main-footer">
+          <div class="row">
+            <div class="small-6 medium-4 large-2 columns">
+              <h6><a href="#">Products</a></h6>
+              <ul>
+                <li><a href="#">Pricing</a></li>
+                <li><a href="#">What is Docker?</a></li>
+              </ul>
+            </div>
+            <div class="small-6 medium-4 large-2 columns">
+              <h6><a href="#">Customers</a></h6>
+              <ul>
+                <li></a></li>
+              </ul>
+            </div>
+            <div class="small-6 medium-4 large-2 columns">
+              <h6><a href="#">Community</a></h6>
+              <ul>
+                <li><a href="#">Meet Ups</a></li>
+                <li><a href="#">Events</a></li>
+                <li><a href="#">Forumns</a></li>
+                <li><a href="#">Scoop.it</a></li>
+              </ul>
+            </div>
+            <div class="small-6 medium-4 large-2 columns">
+              <h6><a href="#">Partners</a></h6>
+              <ul>
+                <li><a href="#">Partner Programs</a></li>
+              </ul>
+            </div>
+            <div class="small-6 medium-4 large-2 columns">
+              <h6><a href="#">Company</a></h6>
+              <ul>
+                <li><a href="#">News & Press</a></li>
+                <li><a href="#">Work at Docker</a></li>
+                <li><a href="#">Management</a></li>
+                <li><a href="#">Contact</a></li>
+              </ul>
+            </div>
+            <div class="small-6 medium-4 large-2 columns">
+              <h6><a href="#">Open Source</a></h6>
+              <ul>
+                <li><a href="#">Contribute</a></li>
+                <li><a href="#">Governance</a></li>
+              </ul>
+            </div>
+          </div>
+        <hr class="dark-bg">
+          <div class="row">
+            <div class="nav-global-footer small-6 medium-4 large-2 columns">
+              <ul>
+                <li><a href="#">Support</a></li>
+                <li><a href="#">Training</a></li>
+                <li><a href="#">Docs</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Sign-in</a></li>
+              </ul>
+            </div>
+            <div class="nav-global-footer small-6 medium-4 large-2 columns">
+              <ul>
+                <li><a href="#">Status</a></li>
+                <li><a href="#">Security</a></li>
+                <li><a href="#">Swag</a></li>
+                <li><a href="#">Legal Terms</a></li>
+              </ul>
+            </div>
+            <div class="small-12 medium-4 large-2 columns">
+              <h6><a href="#">View Products</a></h6>
+              <ul>
+                <li><a href="#">Docker Engine</a></li>
+                <li><a href="#">Docker Hub</a></li>
+                <li><a href="#">Docker Registry</a></li>
+                <li><a href="#">Docker Machine</a></li>
+                <li><a href="#">Docker Swarm</a></li>
+                <li><a href="#">Docker Compose</a></li>
+                <li><a href="#">Kitematic</a></li>
+              </ul>
+            </div>
+            <div class="medium-8 large-4 columns">
+              <h6>Connect</h6>
+              <p>Subscribe to our newsletter</p>
+              <div class="row collapse">
+                <div class="small-9 columns">
+                  <input class="with-postfix" type="text" placeholder="Email address" />
+                </div>
+                <div class="small-3 columns">
+                  <span class="postfix">Submit</span>
+                </div>
+              </div>
+              <ul class="social-icons">
+                <li><a href="#"><img src="assets/images/social/docker-blog-24.png"></a></li>
+                <li><a href="#"><img src="assets/images/social/facebook-24.png"></a></li>
+                <li><a href="#"><img src="assets/images/social/googleplus-24.png"></a></li>
+                <li><a href="#"><img src="assets/images/social/slideshare-24.png"></a></li>
+                <li><a href="#"><img src="assets/images/social/twitter-24.png"></a></li>
+                <li><a href="#"><img src="assets/images/social/youtube-24.png"></a></li>
+                <li><a href="#"><img src="assets/images/social/linkedin-24.png"></a></li>
+                <li><a href="#"><img src="assets/images/social/reddit.png"></a></li>
+              </ul>
+            </div>
+            <div class="medium-4 large-2 hide-for-small-only columns">
+              <img class="wow fadeIn" src="http://placehold.it/200x300">
+            </div>
+          </div>
+        </footer>
+
+      </div>
+    </div>
+    <script src="assets/js/all.js"></script>
+  </body>
+</html>

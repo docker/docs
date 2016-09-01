@@ -1,0 +1,29 @@
+input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="week"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], input[type="color"], textarea {
+	border-radius: $global-radius;
+}
+
+input::-webkit-input-placeholder {
+	color: $body-font-color;
+	font-weight: 300;
+}
+input::-moz-placeholder {
+	color: $body-font-color;
+	font-weight: 300;
+}
+input:-moz-placeholder {   /* Older versions of Firefox */
+	color: $body-font-color;
+	font-weight: 300;
+}
+input:-ms-input-placeholder { 
+	color: $body-font-color;
+	font-weight: 300;
+}
+span.postfix {
+  background: $secondary-color;
+  border-radius: 0px 5px 5px 0px;
+  border: none;
+  color: #fff;
+}
+input.with-postfix {
+	border-radius: 5px 0px 0px 5px;
+}

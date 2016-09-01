@@ -1,0 +1,50 @@
+.main-header {
+	padding: 20px 0;
+	overflow: visible;
+	position: relative;
+	z-index: 90;
+	background: #fff;
+	.logo {
+		margin-top: 20px;
+		
+		// Chnage this later
+		@media #{$small-only} {
+			display: block;
+			margin: auto;
+			margin-top: 0;
+			max-width: 175px;
+		}
+		@media #{$medium-only} {
+			display: block;
+			margin: auto;
+			margin-top: 0;
+			max-width: 175px;
+		}
+		@media #{$large-up} {
+			margin-left: -14px;
+		}
+	}
+}
+
+.left-off-canvas-toggle {
+	position: absolute;
+	left: 0.9375rem;
+	top: 26px;
+	z-index: 99;
+	@media #{$large-up} {
+		display: none;
+	}
+}
+
+.get-started-cta {
+	position: absolute;
+	right: 0.9375rem;
+	top: 22px;
+	z-index: 99;
+	@media #{$large-up} {
+		display: none;
+	}
+	@media #{$small-only} {
+		display: none;
+	}
+}

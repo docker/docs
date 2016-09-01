@@ -1,0 +1,15 @@
+.hero-sub {
+	background-color: $primary-color;
+	padding: rem-calc(25) 0 0 0;
+	margin-bottom: 2.5rem;
+	text-align: center;
+	@media #{$medium-up} {
+		padding: rem-calc(75) 0 0 0;
+	}
+	h1,h2,h3,h4, p, a {
+		color: #fff;
+	}
+	.landing-hero-des {
+		@media #{$medium-up} {margin-bottom: rem-calc(95);}
+	}
+}

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Faqs on Docker Docs</title>
+    <link>https://docs.docker.com/v1.10/faqs/</link>
+    <description>Recent content in Faqs on Docker Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="https://docs.docker.com/v1.10/faqs/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Troubleshooting</title>
+      <link>https://docs.docker.com/v1.10/faqs/troubleshoot/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/faqs/troubleshoot/</guid>
+      <description>
+
+&lt;h1 id=&#34;troubleshooting&#34;&gt;Troubleshooting&lt;/h1&gt;
+
+&lt;p&gt;Typically, the QuickStart works out-of-the-box, but some scenarios can cause problems.&lt;/p&gt;
+
+&lt;h2 id=&#34;example-errors&#34;&gt;Example errors&lt;/h2&gt;
+
+&lt;p&gt;You might get errors when attempting to connect to a machine (such as with &lt;code&gt;docker-machine env default&lt;/code&gt;) or pull an image from Docker Hub (as with &lt;code&gt;docker run hello-world&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;The errors you get might be specific to certificates, like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  Error checking TLS connection: Error checking and/or regenerating the certs: There was an error validating certificates for host &amp;quot;192.168.99.100:2376&amp;quot;: dial tcp 192.168.99.100:2376: i/o timeout
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Others will explicitly suggest regenerating certificates:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  Error checking TLS connection: Error checking and/or regenerating the certs: There was an error validating certificates for host &amp;quot;192.168.99.100:2376&amp;quot;: x509: certificate is valid for 192.168.99.101, not 192.168.99.100
+  You can attempt to regenerate them using &#39;docker-machine regenerate-certs [name]&#39;.
+  Be advised that this will trigger a Docker daemon restart which will stop running containers.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Or, indicate a network timeout, like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  bash-3.2$ docker run hello-world
+  Unable to find image &#39;hello-world:latest&#39; locally
+  Pulling repository docker.io/library/hello-world
+  Network timed out while trying to connect to https://index.docker.io/v1/repositories/library/hello-world/images. You may want to check your internet connection or if you are behind a proxy.
+  bash-3.2$
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;solutions&#34;&gt;Solutions&lt;/h2&gt;
+
+&lt;p&gt;Here are some quick solutions to help get back on track. These examples assume the Docker host is a machine called &lt;code&gt;default&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;regenerate-certificates&#34;&gt;Regenerate certificates&lt;/h4&gt;
+
+&lt;p&gt;Some errors explicitly tell you to regenerate certificates. You might also try this for other errors that are certificate and /or connectivity related.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  $ docker-machine regenerate-certs default
+    Regenerate TLS machine certs?  Warning: this is irreversible. (y/n): y
+    Regenerating TLS certificates
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;restart-the-docker-host&#34;&gt;Restart the Docker host&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine restart default
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After the machine starts, set the environment variables for the command window.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ eval $(docker-machine env default)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Run &lt;code&gt;docker-machine ls&lt;/code&gt; to verify that the machine is running and that this command window is configured to talk to it, as indicated by an asterisk for the active machine (&lt;strong&gt;*&lt;/strong&gt;).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine ls
+NAME             ACTIVE   DRIVER         STATE     URL                         SWARM   DOCKER    ERRORS
+default          *        virtualbox     Running   tcp://192.168.99.101:2376           v1.10.1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;stop-the-machine-remove-it-and-create-a-new-one&#34;&gt;Stop the machine, remove it, and create a new one.&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine stop default
+  Stopping &amp;quot;default&amp;quot;...
+  Machine &amp;quot;default&amp;quot; was stopped.
+
+$ docker-machine rm default
+  About to remove default
+  Are you sure? (y/n): y
+  Successfully removed default
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can use the command &lt;code&gt;docker-machine create&lt;/code&gt; command with the &lt;code&gt;virtualbox&lt;/code&gt; driver to create a new machine called &lt;code&gt;default&lt;/code&gt; (or any name you want for the machine).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine create --driver virtualbox default
+  Running pre-create checks...
+  (default) Default Boot2Docker ISO is out-of-date, downloading the latest release...
+  (default) Latest release for github.com/boot2docker/boot2docker is v1.10.1
+  (default) Downloading
+  ...
+  Docker is up and running!
+  To see how to connect your Docker Client to the Docker Engine running on this virtual machine, run: docker-machine env default
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Set the environment variables for the command window.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ eval $(docker-machine env default)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Run &lt;code&gt;docker-machine ls&lt;/code&gt; to verify that the new machine is running and that this command window is configured to talk to it, as indicated by an asterisk for the active machine (&lt;strong&gt;*&lt;/strong&gt;).&lt;/p&gt;
+
+&lt;p&gt;&lt;a name=&#34;machine-http-proxy-solutions&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;http-proxies-and-connectivity-errors&#34;&gt;HTTP proxies and connectivity errors&lt;/h2&gt;
+
+&lt;p&gt;A special brand of connectivity errors can be caused by HTTP proxy. If you install Docker Toolbox on a system using a virtual private network (VPN) that uses an HTTP proxy (such as a corporate network), you might encounter errors when the client attempts to connect to the server.&lt;/p&gt;
+
+&lt;p&gt;Here are examples of this type of error:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  $ docker run hello-world
+  An error occurred trying to connect: Post https://192.168.99.100:2376/v1.20/containers/create: Forbidden
+
+  $ docker run ubuntu echo &amp;quot;hi&amp;quot;
+  An error occurred trying to connect: Post https://192.168.99.100:2376/v1.20/containers/create: Forbidden
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;configuring-http-proxy-settings-on-docker-machines&#34;&gt;Configuring HTTP proxy settings on Docker machines&lt;/h3&gt;
+
+&lt;p&gt;When Toolbox creates virtual machines (VMs) it runs &lt;code&gt;start.sh&lt;/code&gt;, where it gets values for &lt;code&gt;HTTP_PROXY&lt;/code&gt;, &lt;code&gt;HTTPS_PROXY&lt;/code&gt; and &lt;code&gt;NO_PROXY&lt;/code&gt;, and passes them as &lt;code&gt;create&lt;/code&gt; options to create the &lt;code&gt;default machine&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;You can reconfigure HTTP proxy settings for private networks on already-created Docker machines (e.g., &lt;code&gt;default&lt;/code&gt;), then change the configuration when you are using the same system on a different network.&lt;/p&gt;
+
+&lt;p&gt;Alternatively, you can modify proxy settings on your machine(s) manually through the configuration file at &lt;code&gt;/var/lib/boot2docker/profile&lt;/code&gt; inside the VM, or configure proxy settings as a part of a &lt;code&gt;docker-machine create&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;p&gt;Both solutions are described below.&lt;/p&gt;
+
+&lt;h4 id=&#34;update-var-lib-boot2docker-profile-on-the-docker-machine&#34;&gt;Update /var/lib/boot2docker/profile on the Docker machine&lt;/h4&gt;
+
+&lt;p&gt;One way to solve this problem is to update the file &lt;code&gt;/var/lib/boot2docker/profile&lt;/code&gt; on an existing machine to specify the proxy settings you want.&lt;/p&gt;
+
+&lt;p&gt;This file lives on the VM itself, so you have to &lt;code&gt;ssh&lt;/code&gt; into the machine, then edit and save the file there.&lt;/p&gt;
+
+&lt;p&gt;You can add your machine addresses as values for a &lt;code&gt;NO_PROXY&lt;/code&gt; setting, and also speicify proxy servers that you know about and you want to use. Typically setting your Docker machine URLs to &lt;code&gt;NO_PROXY&lt;/code&gt; solves this type of connectivity problem, so that example is shown here.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Use &lt;code&gt;ssh&lt;/code&gt; to log in to the virtual machine (e.g., &lt;code&gt;default&lt;/code&gt;).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine ssh default
+docker@default:~$ sudo vi /var/lib/boot2docker/profile
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Add a &lt;code&gt;NO_PROXY&lt;/code&gt; setting to the end of the file similar to the example below.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# replace with your office&#39;s proxy environment
+export &amp;quot;HTTP_PROXY=http://PROXY:PORT&amp;quot;
+export &amp;quot;HTTPS_PROXY=http://PROXY:PORT&amp;quot;
+# you can add more no_proxy with your environment.
+export &amp;quot;NO_PROXY=192.168.99.*,*.local,169.254/16,*.example.com,192.168.59.*&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Restart Docker.&lt;/p&gt;
+
+&lt;p&gt;After you modify the &lt;code&gt;profile&lt;/code&gt; on your VM, restart Docker and log out of the machine.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker@default:~$ sudo /etc/init.d/docker restart
+docker@default:~$ exit
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Re-try Docker commands. Both Docker and Kitematic should run properly now.&lt;/p&gt;
+
+&lt;p&gt;When you move to a different network (for example, leave the office&amp;rsquo;s corporate network and return home), remove or comment out these proxy settings in &lt;code&gt;/var/lib/boot2docker/profile&lt;/code&gt; and restart Docker.&lt;/p&gt;
+
+&lt;h4 id=&#34;create-machines-manually-using-engine-env-to-specify-proxy-settings&#34;&gt;Create machines manually using --engine env to specify proxy settings&lt;/h4&gt;
+
+&lt;p&gt;Rather than reconfigure automatically-created machines, you can delete them and create your &lt;code&gt;default&lt;/code&gt; machine and others manually with the &lt;code&gt;docker-machine create&lt;/code&gt; command, using the &lt;code&gt;--engine env&lt;/code&gt; flag to specify the proxy settings you want.&lt;/p&gt;
+
+&lt;p&gt;Here is an example of creating a &lt;code&gt;default&lt;/code&gt; machine with proxies set to &lt;code&gt;http://example.com:8080&lt;/code&gt; and &lt;code&gt;https://example.com:8080&lt;/code&gt;, and a &lt;code&gt;N0_PROXY&lt;/code&gt; setting for the server &lt;code&gt;example2.com&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker-machine create -d virtualbox \
+--engine-env HTTP_PROXY=http://example.com:8080 \
+--engine-env HTTPS_PROXY=https://example.com:8080 \
+--engine-env NO_PROXY=example2.com \
+default
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To learn more about using &lt;code&gt;docker-machine create&lt;/code&gt;, see the &lt;a href=&#34;https://docs.docker.com/machine/reference/create/&#34;&gt;create&lt;/a&gt; command in the &lt;a href=&#34;https://docs.docker.com/machine/overview/&#34;&gt;Docker Machine&lt;/a&gt; reference.&lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>FAQs</title>
+      <link>https://docs.docker.com/v1.10/faqs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.docker.com/v1.10/faqs/</guid>
+      <description>
+
+&lt;h1 id=&#34;faqs-and-troubleshooting&#34;&gt;FAQs and Troubleshooting&lt;/h1&gt;
+
+&lt;p&gt;This is a frequently asked questions (FAQs) and troubleshooting guide for non-technical users who are learning about Docker, starting with &lt;a href=&#34;https://www.docker.com/products/docker-toolbox&#34;&gt;Docker Toolbox&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;By following the getting started, you&amp;rsquo;ll learn fundamental Docker features by performing some simple tasks.&lt;/p&gt;
+
+&lt;p&gt;In the process of installing and setting up Docker, you might run into problems or have questions about configuration and setup.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;Looking for help with error messages?&lt;/strong&gt;&lt;/em&gt; Go to  &lt;a href=&#34;../v1.10/faqs/troubleshoot/&#34;&gt;Troubleshooting&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

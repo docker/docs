@@ -1,0 +1,25 @@
+.nav-global {
+	@include inline-list;
+	float: right;
+	margin-bottom: 0;
+	@media #{$small-only} {display: none;}
+	@media #{$medium-only} {display: none;}
+	
+	li {margin-left: 1rem;}
+	a {
+		font-size: rem-calc(14);
+		font-weight: 300;
+		color: $body-font-color;
+		padding: rem-calc(10) rem-calc(5);
+		@extend %primary-transition;
+		&:hover {color: $secondary-color;}
+	}
+	a.button {
+		background: $secondary-color;
+		padding: rem-calc(10) rem-calc(30);
+		color: #fff;
+		&:hover {
+			background: darken($secondary-color, 10%);
+		}
+	}
+}
