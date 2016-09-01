@@ -1,0 +1,354 @@
+h1, h2, h3, h4, h5, h6 {
+  color: #0296C9;
+  font-weight: 400;
+}
+
+div#docs.row {
+  max-width: 90rem;
+}
+
+/* Styling for Table of Contents */
+
+#toc {
+  position: absolute;
+  margin-top: 1.8rem;
+  z-index:10;
+  right: 0;
+  background-color: #F4F8FB;
+  border-left: #E6EDF4;
+  border-left-style: outset;
+}
+
+.toc ul > li > ul > li > ul > li > ul >li { display: none; }
+
+nav#TableOfContents ul {
+  list-style: none;
+}
+
+nav#TableOfContents li {
+  line-height: 1.5rem;
+}
+
+/* END: Styling for Table of Contents */
+
+a {
+  color: #EC7900;
+  font-weight: 300;
+  font-variant-ligatures: common-ligatures;
+}
+
+body {
+  color: #050E1A; !important
+  text-shadow:0 0 5px transparent;
+  font-variant-ligatures: common-ligatures;
+}
+
+pre, code {
+  font-variant-ligatures: no-common-ligatures;
+}
+
+pre {
+  border: 1px solid #ffcb94;
+  margin-bottom: 1.5rem;
+}
+code {
+  white-space: nowrap;
+}
+
+pre > code {
+  font-weight: normal;
+  white-space: pre;
+}
+
+blockquote {
+	padding-left: 0;
+}
+blockquote, blockquote p {
+  line-height: 1.6;
+  color: #0296C9;
+}
+
+blockquote p {
+  border-left: 3px solid #0296C9;
+  padding-left: 1rem;
+}
+
+div#buildinfo {
+  visibility: hidden;
+}
+
+#multiple {
+  margin-top: 2rem;
+}
+
+.main-footer {
+  width: 100%;
+  height: 250px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+#docs {
+  margin-bottom: 280px;
+}
+
+.off-canvas-wrap {
+  min-height: 100%;
+}
+
+.inner-wrap {
+  position: static;
+}
+
+[data-accordion] [data-content] {
+  overflow: hidden;
+  max-height: 0;
+  margin-left: 1rem;
+}
+
+/* Basic Theme */
+
+[data-accordion] {
+  line-height: 1;
+}
+
+[data-accordion] [data-control] {
+  color: #556473;
+  width: 100%;
+  outline: 0;
+  text-align: left;
+  font-size: 16px;
+  background-color: #E6EDF4;
+  margin: 0;
+  margin-bottom: 0.5rem;
+  padding: 0.8rem;
+  font-weight: 400;
+  border-radius: 4px;
+  transition: none;
+}
+
+[data-accordion] [data-control]:hover {
+  background-color: #ECF1F5;
+}
+
+
+[data-accordion] [data-link] {
+  display: block;
+  color: #0296C9;
+  width: 100%;
+  text-align: left;
+  font-size: 16px;
+  margin: 0;
+  margin-bottom: 0.3rem;
+  padding: 0.3rem;
+  padding-left: 0.8rem;
+  font-weight: 400;
+  border-radius: 4px;
+  transition: none;
+  line-height: 1.5rem;
+}
+
+[data-accordion] [data-link]:hover {
+  color: #59C9EF;
+}
+
+[data-accordion] [data-link].active {
+  font-weight: 500;
+  color: #556473;
+  cursor: default;
+}
+
+[data-accordion] > [data-control]:after {
+  content: "";
+  position: absolute;
+  right: 10px;
+  top: 16px;
+  font-size: 25px;
+  font-weight: 200;
+  color: #444;
+  height: 15px;
+  width: 24px;
+  background: url('../images/down.png') center center no-repeat;
+  background-size: 50%;
+}
+
+[data-accordion].open > [data-control]:after {
+  -webkit-transform: rotate(-180deg); 
+      -ms-transform: rotate(-180deg); 
+          transform: rotate(-180deg); 
+}
+
+.tutmenu [data-accordion] [data-link] {
+  color: #556473;
+}
+
+.tutmenu [data-accordion] [data-link]:hover {
+  color: black;
+}
+
+.tutmenu [data-accordion] [data-link].active {
+  font-weight: 500;
+  color: white;
+  background-color: #24B8EB;
+  cursor: default;
+}
+
+.tutorialTable {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.tutorialTable td,
+.tutorialTable th
+{
+  border-style: solid;
+  border-width: 1px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  overflow: hidden;
+  padding: 10px 5px;
+  word-break: normal;
+}
+
+.tutorialTable th {
+  font-weight: emphasis;
+}
+
+
+.tutorial {
+  letter-spacing: 0.01rem;
+}
+
+.tutorial a {
+  color: #FF992E;
+}
+
+.tutorial a:hover {
+  color: #FF992E;
+}
+
+.tutorial h1 {
+  color: #24B8EB;
+  font-weight: 300;
+  font-size: 36px;
+  margin-top: 2rem;
+}
+
+.tutorial h2 {
+  color: #556473;
+  font-weight: 500;
+  font-size: 24px;
+  margin-top: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.tutorial h3 {
+  color: #556473;
+  font-weight: 500;
+  font-size: 20px;
+  margin-top: 1.15rem;
+  margin-bottom: .5rem;
+}
+
+.tutorial p {
+  font-size: 16px;
+  line-height: 1.5rem;
+  margin-top: .5rem;
+  margin-bottom: 1rem;
+
+}
+
+.tutorial ul {
+  font-size: 16px;
+  line-height: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.tutorial ol {
+  font-size: 16px;
+  line-height: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.tutorial strong {
+  font-weight: 500;
+}
+
+
+/* Styling for splash */
+table#splashTable{
+  border: none;
+  line-height: 1.5rem;
+  margin-top: .5rem;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+table#splashTable td{
+  vertical-align: top;
+   width: 25%;
+}
+table#splashTable tr.even, table tr.alt, table tr:nth-of-type(even) {
+  background: none;
+  border-style: none:
+}
+
+/* Tables */
+article#content table {
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  width: 100%;
+  word-break: normal;
+    border-collapse:collapse;
+  border-spacing:0;
+}
+
+article#content thead {
+  background-color: #e8e8e8;
+}
+
+article#content tr {
+  border-top: 1px solid #ccc;
+  vertical-align: top;
+}
+
+article#content tr:nth-child(2n) {
+  background-color:#f8f8f8;
+}
+
+article#content th,
+article#content td
+{
+  padding: 6px 13px;
+  vertical-align: top;
+}
+
+article#content td {
+  border: 1px solid #ddd;
+}
+
+article#content th {
+  background-color: #c0c0c0;
+  border: 1px solid #c0c0c0;
+  text-align: left;
+}
+
+/*
+ * Table used for showing code and CLI output, not using borders
+ * font-styling and background-color is the same as <pre> blocks.
+ */
+article#content table.code {
+  font-family: Monaco, Consolas, "Lucida Console", monospace;
+  font-size: 11px;
+}
+
+article#content table.code,
+article#content table.code tr,
+article#content table.code th,
+article#content table.code td
+{
+  background-color: #FCFCFC;
+  border: none;
+  font-weight: normal;
+}
+

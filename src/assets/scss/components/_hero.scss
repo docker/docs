@@ -1,0 +1,23 @@
+.hero {
+	background-color: $primary-color;
+	padding: rem-calc(25) 0 rem-calc(46) 0;
+	position: relative;
+	margin-bottom: 2.5rem;
+	@media #{$medium-up} {
+		padding: rem-calc(50) 0 rem-calc(200) 0;
+	}
+	&::after {
+		@extend %wave;
+	}
+
+	h1,h2,h3,h4, p, a {
+		color: #fff;
+	}
+	p {
+		font-size: rem-calc(18);
+		line-height: 1.75;
+	}
+	.button {
+		display: block;
+	}
+}

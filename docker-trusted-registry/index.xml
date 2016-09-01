@@ -1,0 +1,1228 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Docker-trusted-registries on Docker Docs</title>
+    <link>http://docs-stage.docker.com/docker-trusted-registry/</link>
+    <description>Recent content in Docker-trusted-registries on Docker Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://docs-stage.docker.com/docker-trusted-registry/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Architecture</title>
+      <link>http://docs-stage.docker.com/docker-trusted-registry/architecture/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/docker-trusted-registry/architecture/</guid>
+      <description>
+
+&lt;h1 id=&#34;dtr-architecture&#34;&gt;DTR architecture&lt;/h1&gt;
+
+&lt;p&gt;Docker Trusted Registry (DTR) is a Dockerized application that runs on a Docker
+Universal Control Plane cluster.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-trusted-registry/images/architecture-1.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;containers&#34;&gt;Containers&lt;/h2&gt;
+
+&lt;p&gt;When you install DTR on a node, the following containers are started:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;Name&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;dtr-nginx-&amp;lt;replica_id&amp;gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Receives http and https requests and proxies them to other DTR components. By default it listens to ports 80 and 443 of the host.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;dtr-api-&amp;lt;replica_id&amp;gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Executes the DTR business logic. It serves the DTR web application, and API.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;dtr-registry-&amp;lt;replica_id&amp;gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Implements the functionality for pulling and pushing Docker images. It also handles how images are stored.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;dtr-etcd-&amp;lt;replica_id&amp;gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;A key-value store for persisting DTR configuration settings. Don&amp;rsquo;t use it in your applications, since it&amp;rsquo;s for internal use only.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;dtr-rethinkdb-&amp;lt;replica_id&amp;gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;A database for persisting repository metadata. Don&amp;rsquo;t use it in your applications, since it&amp;rsquo;s for internal use only.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&#34;networks&#34;&gt;Networks&lt;/h2&gt;
+
+&lt;p&gt;To allow containers to communicate, when installing DTR the following networks
+are created:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;Name&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Type&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;dtr-br&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;bridge&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Allows containers on the same node to communicate with each other in a secure way.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;dtr-ol&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;overlay&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Allows containers running on different nodes to communicate. This network is used in high-availability installations, to allow Etcd and RethinkDB containers to replicate their data.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;The communication between all DTR components is secured using TLS. Also, when
+installing DTR, two Certificate Authorities (CAs) are created. These CAs are
+used to create the certificates used by Etcd and RethinkDB when communicating
+across nodes.&lt;/p&gt;
+
+&lt;h2 id=&#34;volumes&#34;&gt;Volumes&lt;/h2&gt;
+
+&lt;p&gt;DTR uses these named volumes for persisting data:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;Volume name&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Location on host (/var/lib/docker/volumes/)&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;dtr-ca-&amp;lt;replica_id&amp;gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;dtr-ca/_data&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;The volume where the private keys and certificates are stored so that containers can use TLS to communicate.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;dtr-etcd-&amp;lt;replica_id&amp;gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;dtr-etcd/_data&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;The volume used by etcd to persist DTR configurations.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;dtr-registry-&amp;lt;replica_id&amp;gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;dtr-registry/_data&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;The volume where images are stored, if DTR is configured to store images on the local filesystem.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;dtr-rethink-&amp;lt;replica_id&amp;gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;dtr-rethink/_data&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;The volume used by RethinkDB to persist DTR data, like users and repositories.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;If you don’t create these volumes, when installing DTR they are created with
+the default volume driver and flags.&lt;/p&gt;
+
+&lt;h2 id=&#34;image-storage&#34;&gt;Image storage&lt;/h2&gt;
+
+&lt;p&gt;By default, Docker Trusted Registry stores images on the filesystem of the host
+where it is running.&lt;/p&gt;
+
+&lt;p&gt;You can also configure DTR to using these cloud storage backends:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Amazon S3&lt;/li&gt;
+&lt;li&gt;OpenStack Swift&lt;/li&gt;
+&lt;li&gt;Microsoft Azure&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For highly available installations, configure DTR to use a cloud storage
+backend or a network filesystem like NFS.&lt;/p&gt;
+
+&lt;h2 id=&#34;high-availability-support&#34;&gt;High-availability support&lt;/h2&gt;
+
+&lt;p&gt;For load balancing and high-availability, you can install multiple replicas of
+DTR, and join them to create a cluster.
+&lt;a href=&#34;../docker-trusted-registry/high-availability/high-availability/&#34;&gt;Learn more about high availability&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/install/system-requirements/&#34;&gt;System requirements&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/install/install-dtr/&#34;&gt;Install DTR&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Auth configuration</title>
+      <link>http://docs-stage.docker.com/docker-trusted-registry/configure/config-auth/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/docker-trusted-registry/configure/config-auth/</guid>
+      <description>
+
+&lt;h1 id=&#34;configure-your-auth-settings&#34;&gt;Configure your auth settings&lt;/h1&gt;
+
+&lt;p&gt;Use the Auth screen to add users and control their access to the Trusted
+Registry. This document explains the three authentication methods and how to
+import users into the Trusted Registry through the UI.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;From the Trusted Registry dashboard, navigate to Settings &amp;gt; Auth.&lt;/li&gt;
+&lt;li&gt;Use the drop down menu to select either Managed or LDAP. The screen refreshes
+reflecting your choice.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Note that once you start using a particular method, you need to stick with your choice.&lt;/p&gt;
+
+&lt;p&gt;There are three authentication methods:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#no-authentication-none&#34;&gt;None&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#managed-authentication&#34;&gt;Managed&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#ldap-authentication&#34;&gt;LDAP&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: If you have issues logging into the Docker Trusted Registry admin web interface after changing the authentication settings, you may need to &lt;a href=&#34;../docker-trusted-registry/monitor-troubleshoot/troubleshoot/&#34;&gt;troubleshoot DTR&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;no-authentication-none&#34;&gt;No authentication (None)&lt;/h2&gt;
+
+&lt;p&gt;No or &lt;code&gt;None&lt;/code&gt; authentication means that everyone can access your Trusted Registry
+web administration site. This is the default setting when you first install the
+Trusted Registry. One of your first configuration tasks is to switch your
+authentication to either managed or LDAP so you can create the Trusted Registry
+administrator. Until you do, you can&amp;rsquo;t create repos, nor push or pull images.
+See the &lt;a href=&#34;../docker-trusted-registry/configure/configuration/&#34;&gt;configuration overview&lt;/a&gt; to manually create an admin account.&lt;/p&gt;
+
+&lt;h2 id=&#34;managed-authentication&#34;&gt;Managed authentication&lt;/h2&gt;
+
+&lt;p&gt;With &lt;code&gt;Managed&lt;/code&gt; authentication, the Trusted Registry admin can manually control users&amp;rsquo; access by setting username/password pairs. The admin can then &lt;a href=&#34;https://docs.docker.com/apidocs/v1.3.3/&#34;&gt;use the API&lt;/a&gt; to give these users global &amp;ldquo;admin&amp;rdquo;, &amp;ldquo;read-write&amp;rdquo; or &amp;ldquo;read-only&amp;rdquo; privileges while assigning them organization, team, or user repository access. Note that you can &lt;strong&gt;only&lt;/strong&gt; set the global role of &lt;code&gt;Admin - all repositories&lt;/code&gt; though the UI for the admin. The global roles for &lt;code&gt;Read-write - all repositories&lt;/code&gt; and &lt;code&gt;Read-only - all repositories&lt;/code&gt; have been deprecated.&lt;/p&gt;
+
+&lt;p&gt;When you create users and assign their roles through the API, you do not need
+to assign those users roles using the Trusted Registry admin UI.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Choose the appropriate button to either add one user, or to upload a CSV file containing username, password pairs, and selection boxes for &amp;ldquo;admin&amp;rdquo;,
+&amp;ldquo;read-write&amp;rdquo;, and &amp;ldquo;read-only&amp;rdquo; roles.&lt;/li&gt;
+&lt;li&gt;Click Save.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;If you make an error, or need to remove a user, you can also delete them from this screen.&lt;/p&gt;
+
+&lt;h2 id=&#34;ldap-authentication&#34;&gt;LDAP authentication&lt;/h2&gt;
+
+&lt;p&gt;Use LDAP authentication to integrate your Trusted Registry into your
+organization&amp;rsquo;s existing LDAP user and authentication database. To improve the performance of the Trusted Registry&amp;rsquo;s Access Control Lists,
+User and Group membership data is synced into Docker Trusted Registry&amp;rsquo;s database
+at a configurable &lt;em&gt;LDAP Sync Interval&lt;/em&gt;. User passwords are not transferred
+during syncing. The Trusted Registry defers to the LDAP server to validate
+username/password pairs.&lt;/p&gt;
+
+&lt;p&gt;LDAP syncing creates new users that that do not already exist in the Trusted Registry. Any existing users that are not found by the LDAP sync are marked as inactive and not deleted. You can also sync team membership with the LDAP group. This is performed after you have finished configuring your settings.&lt;/p&gt;
+
+&lt;p&gt;Because connecting to LDAP involves existing infrastructure external to the
+Trusted Registry and Docker, you need to gather the details required to
+configure the Trusted Registry for your organization&amp;rsquo;s particular LDAP
+implementation.&lt;/p&gt;
+
+&lt;h3 id=&#34;add-additional-users-through-user-sets&#34;&gt;Add additional users through user sets&lt;/h3&gt;
+
+&lt;p&gt;In the User Set section, you can add parameters to further refine your LDAP
+integration. Clicking Add User Set, displays additional User Sets in the UI.
+There is no limit to adding User Sets. Use this additional User Set to target
+other users that may be located in different nodes of your organization. When
+the next LDAP sync occurs, the Trusted Registry will find all the different sets
+of users. The set of Trusted Registry users is the union of all of those sets.&lt;/p&gt;
+
+&lt;p&gt;Each of the parameters are explained in the LDAP Configuration options section
+in this document.&lt;/p&gt;
+
+&lt;h3 id=&#34;test-your-sync&#34;&gt;Test your sync&lt;/h3&gt;
+
+&lt;p&gt;You can test that you have the correct LDAP server information by connecting to
+the LDAP server from inside a Docker container running on the same server as
+your Docker Trusted Registry:&lt;/p&gt;
+
+&lt;p&gt;If the LDAP server is configured to use &lt;em&gt;StartTLS&lt;/em&gt;, then you need to
+add &lt;code&gt;-Z&lt;/code&gt; to the &lt;code&gt;ldapsearch&lt;/code&gt; following command example.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker run --rm -it svendowideit/ldapsearch -h &amp;lt;LDAP Server hostname&amp;gt; -b &amp;lt;User Base DN&amp;gt; -D &amp;lt;Search User DN&amp;gt; -w &amp;lt;Search User Password&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The result of this query should be a (very) long list. If you get an
+authentication error, then the details you have are not sufficient. Contact
+your organization&amp;rsquo;s LDAP team.&lt;/p&gt;
+
+&lt;p&gt;The &lt;em&gt;User Login Attribute&lt;/em&gt; key setting must match the field used in the LDAP
+server for the user&amp;rsquo;s login-name. On OpenLDAP, it&amp;rsquo;s generally &lt;code&gt;uid&lt;/code&gt;, and on
+Microsoft Active Directory servers, it&amp;rsquo;s &lt;code&gt;sAMAccountName&lt;/code&gt;. The &lt;code&gt;ldapsearch&lt;/code&gt;
+output should allow you to confirm which setting you need.&lt;/p&gt;
+
+&lt;h3 id=&#34;ldap-configuration-options&#34;&gt;LDAP Configuration options&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Admin Password&lt;/strong&gt;: &lt;em&gt;required&lt;/em&gt;, use this password to login as the user &lt;code&gt;admin&lt;/code&gt; in case Docker Trusted Registry is unable to authenticate you using your LDAP server. This account may be used to login to the Trusted Registry and correct identity and authentication settings.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;LDAP Server URL&lt;/strong&gt;: &lt;em&gt;required&lt;/em&gt;, defaults to null, LDAP server URL (for example, - ldap://example.com).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Use StartTLS&lt;/strong&gt;: defaults to unchecked, check to enable StartTLS.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;User Base DN&lt;/strong&gt;: &lt;em&gt;required&lt;/em&gt;, defaults to null, user base DN in the form (for example, - dc=example,dc=com).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;User Name Attribute Is Email&lt;/strong&gt;: if your user names in your LDAP server are email addresses, this will replace the @ sign with _ when storing the user since @ signs are not supported by the open source registry user naming scheme.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Scope One Level&lt;/strong&gt;: this value is used to indicate searching all entries one level under the base DN, but not including the base DN and not including any entries under that one level under the base DN.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-trusted-registry/images/ldap-scope-down.png&#34; alt=&#34;LDAP Scope One Level&amp;lt;/configure/settings#auth&amp;gt;&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;User Login Attribute&lt;/strong&gt;: &lt;em&gt;required&lt;/em&gt;, defaults to null, user login attribute (for example - uid or sAMAccountName).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Search User DN&lt;/strong&gt;: &lt;em&gt;required&lt;/em&gt;, defaults to null, search user DN (for example,   domain\username).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Search User Password&lt;/strong&gt;: &lt;em&gt;required&lt;/em&gt;, defaults to null, search user password.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;LDAP Sync Interval&lt;/strong&gt;: &lt;em&gt;required&lt;/em&gt;, defaults to 1h0m0s, sets the interval for Docker Trusted Registry to sync with the LDAP database.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;User Search Filter&lt;/strong&gt;: users on your LDAP server are synced to Docker Trusted Registry&amp;rsquo;s local database using this search filter. Objects in LDAP that match
+this filter and have a valid &amp;ldquo;User Login Attribute&amp;rdquo; are created as a local user
+with the &amp;ldquo;User Login Attribute&amp;rdquo; as their username. Only these users are able to
+login to the Trusted Registry.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Admin LDAP DN&lt;/strong&gt;: &lt;em&gt;required&lt;/em&gt;, this field is used to identify the group object on your LDAP server which is synced to the system administrators list.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Admin Group Member Attribute&lt;/strong&gt;: &lt;em&gt;required&lt;/em&gt;, this value matches the name of the attribute on this group object which corresponds to the Distinguished Name
+of the group member objects.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;confirm-login-with-current-configuration&#34;&gt;Confirm login with current configuration&lt;/h3&gt;
+
+&lt;p&gt;Test your current LDAP configuration before saving it by entering a test
+username and password.   Click Try Login. If the login succeeds, your
+configuration is working.&lt;/p&gt;
+
+&lt;h2 id=&#34;see-also&#34;&gt;See also&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/configure/config-general/&#34;&gt;Configure DTR&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/monitor-troubleshoot/troubleshoot/&#34;&gt;Troubleshoot DTR&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Backups and disaster recovery</title>
+      <link>http://docs-stage.docker.com/docker-trusted-registry/high-availability/backups-and-disaster-recovery/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/docker-trusted-registry/high-availability/backups-and-disaster-recovery/</guid>
+      <description>
+
+&lt;h1 id=&#34;backups-and-disaster-recovery&#34;&gt;Backups and disaster recovery&lt;/h1&gt;
+
+&lt;p&gt;When you decide to start using Docker Trusted Registry on a production
+setting, you should &lt;a href=&#34;../docker-trusted-registry/high-availability/high-availability/&#34;&gt;configure it for high availability&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The next step is creating a backup policy and disaster recovery plan.&lt;/p&gt;
+
+&lt;h2 id=&#34;dtr-data-persistency&#34;&gt;DTR data persistency&lt;/h2&gt;
+
+&lt;p&gt;Docker Trusted Registry persists:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Configurations: the cluster configurations are stored on a key-value store
+that is replicated through all DTR replicas.&lt;/li&gt;
+&lt;li&gt;Repository metadata: the information about the repositories and
+images deployed. This information is replicated through all DTR replicas.&lt;/li&gt;
+&lt;li&gt;Certificates and keys: the certificates, public keys, and private keys that
+are used for mutual TLS communication.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This data is persisted on the host where DTR is running, using named volumes.
+&lt;a href=&#34;../docker-trusted-registry/architecture/&#34;&gt;Learn more about DTR named volumes&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;DTR also persists Docker images on the filesystem of the host running DTR, or
+on a cloud provider, depending on the way DTR is configured.&lt;/p&gt;
+
+&lt;h2 id=&#34;backup-dtr-data&#34;&gt;Backup DTR data&lt;/h2&gt;
+
+&lt;p&gt;To perform a backup of a DTR node, use the &lt;code&gt;docker/dtr backup&lt;/code&gt; command. This
+command creates a backup of DTR:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Configurations,&lt;/li&gt;
+&lt;li&gt;Repository metadata,&lt;/li&gt;
+&lt;li&gt;Certificates and keys used by DTR.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These files are added to a tar archive, and the result is streamed to stdout.&lt;/p&gt;
+
+&lt;p&gt;The backup command does not create a backup of Docker images. You should
+implement a separate backup policy for the Docker images, taking in
+consideration whether your DTR installation is configured to store images on the
+filesystem or using a cloud provider.&lt;/p&gt;
+
+&lt;p&gt;When creating a backup, the resulting .tar file contains sensitive information
+like private keys. You should ensure the backups are stored securely.&lt;/p&gt;
+
+&lt;p&gt;To learn about the options available on the backup command, you can
+&lt;a href=&#34;../docker-trusted-registry/reference/backup/&#34;&gt;check the reference documentation&lt;/a&gt;, or run:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ docker run --rm -it docker/dtr backup --help
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As an example, to create a backup of a DTR node, you can use:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# Get the certificates used by UCP
+$ curl https://$UCP_HOST/ca &amp;gt; ucp-ca.pem
+
+# Create the backup
+$ docker run -it --rm docker/dtr backup \
+  --ucp-ca &amp;quot;$(cat ucp-ca.pem)&amp;quot; \
+  --replica-id 8b6174866010 \
+  --ucp-username $UCP_ADMIN --ucp-password $UCP_PASSWORD \
+  --ucp-url $UCP_HOST &amp;gt; /tmp/backup.tar
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Where:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;--ucp-ca is the certificate used by UCP,&lt;/li&gt;
+&lt;li&gt;--replica-id is the name of the replica to backup,&lt;/li&gt;
+&lt;li&gt;--ucp-username, and --ucp-password are the credentials of a UCP administrator,&lt;/li&gt;
+&lt;li&gt;--ucp-url is the address of UCP.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;restore-dtr-data&#34;&gt;Restore DTR data&lt;/h2&gt;
+
+&lt;p&gt;You can restore a DTR node from a backup using the &lt;code&gt;docker/dtr restore&lt;/code&gt;
+command.
+This command performs a fresh installation of DTR, and reconfigures it with
+the configuration created during a backup.&lt;/p&gt;
+
+&lt;p&gt;The command starts by installing DTR, restores the configurations stored on
+etcd, and then restores the repository metadata stored on RethinkDB. You
+can use the &lt;code&gt;--config-only&lt;/code&gt; option, to only restore the configurations stored
+on etcd.&lt;/p&gt;
+
+&lt;p&gt;This command does not restore Docker images. You should implement a separate
+restore procedure for the Docker images stored in your registry, taking in
+consideration whether your DTR installation is configured to store images on
+the filesystem or using a cloud provider.&lt;/p&gt;
+
+&lt;p&gt;To learn about the options available on the restore command, you can
+&lt;a href=&#34;../docker-trusted-registry/reference/restore/&#34;&gt;check the reference documentation&lt;/a&gt;, or run:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ docker run --rm -it docker/trusted-registry restore --help
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As an example, to install DTR on the host at 192.168.10.100, and restore its
+state from an existing backup:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# Get the certificates used by UCP
+$ curl https://$UCP_HOST/ca &amp;gt; ucp-ca.pem
+
+# Install and restore configurations from an existing backup
+$ docker run -i --rm \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  docker/dtr restore \
+  --ucp-ca &amp;quot;$(cat ucp-ca.pem)&amp;quot; \  
+  --ucp-username $UCP_ADMIN --ucp-password $UCP_PASSWORD \
+  --ucp-url $UCP_HOST --dtr-load-balancer 192.168.10.100 &amp;lt; /tmp/backup.tar
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Where:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;--ucp-ca is the certificate used by UCP,&lt;/li&gt;
+&lt;li&gt;--ucp-username, and --ucp-password are the credentials of a UCP administrator,&lt;/li&gt;
+&lt;li&gt;--ucp-url is the address of UCP,&lt;/li&gt;
+&lt;li&gt;--dtr-load-balancer is the host to where DTR will be installed.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/high-availability/high-availability/&#34;&gt;Set up high availability&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/architecture/&#34;&gt;DTR architecture&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>CS Docker Engine</title>
+      <link>http://docs-stage.docker.com/docker-trusted-registry/cs-engine/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/docker-trusted-registry/cs-engine/</guid>
+      <description>
+
+&lt;h1 id=&#34;docker-cs-engine&#34;&gt;Docker CS Engine&lt;/h1&gt;
+
+&lt;p&gt;This section includes the following topics:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/cs-engine/install/&#34;&gt;Install CS Docker Engine&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/cs-engine/upgrade/&#34;&gt;Upgrade&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/cs-engine/release-notes/release-notes/&#34;&gt;Release notes&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>CS Engine release notes</title>
+      <link>http://docs-stage.docker.com/docker-trusted-registry/cs-engine/release-notes/release-notes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/docker-trusted-registry/cs-engine/release-notes/release-notes/</guid>
+      <description>
+
+&lt;h1 id=&#34;commercially-supported-engine-release-notes&#34;&gt;Commercially supported Engine release notes&lt;/h1&gt;
+
+&lt;p&gt;This document describes the latest changes, additions, known issues, and fixes
+for the commercially supported Docker Engine (CS Engine).&lt;/p&gt;
+
+&lt;p&gt;The CS Engine is functionally equivalent to the corresponding Docker Engine that
+it references. However, a commercially supported release also includes
+back-ported fixes (security-related and priority defects) from the open source.
+It incorporates defect fixes that you can use in environments where new features
+cannot be adopted as quickly for consistency and compatibility reasons.&lt;/p&gt;
+
+&lt;h4 id=&#34;prior-versions&#34;&gt;Prior versions&lt;/h4&gt;
+
+&lt;p&gt;These notes refer to the current and immediately prior releases of the
+CS Engine. For notes on older versions, see the &lt;a href=&#34;../docker-trusted-registry/cs-engine/release-notes/prior-release-notes/&#34;&gt;CS Engine prior release notes archive&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;cs-engine-1-11-2-cs3&#34;&gt;CS Engine 1.11.2-cs3&lt;/h2&gt;
+
+&lt;p&gt;(7 Jun 2016)&lt;/p&gt;
+
+&lt;p&gt;This release addresses the following issues:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Fix potential panic when running &lt;code&gt;docker build&lt;/code&gt;
+&lt;a href=&#34;https://github.com/docker/docker/pull/23032&#34;&gt;#23032&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Fix interpretation of &lt;code&gt;--user&lt;/code&gt; parameter
+&lt;a href=&#34;https://github.com/docker/docker/pull/22998&#34;&gt;#22998&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Fix a bug preventing container statistics from being correctly reported
+&lt;a href=&#34;https://github.com/docker/docker/pull/22955&#34;&gt;#22955&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Fix an issue preventing containers from being restarted after daemon restart
+&lt;a href=&#34;https://github.com/docker/docker/pull/22947&#34;&gt;#22947&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Fix a possible deadlock on image deletion and container attach
+&lt;a href=&#34;https://github.com/docker/docker/pull/22918&#34;&gt;#22918&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Fix an issue causing &lt;code&gt;docker ps&lt;/code&gt; to hange when using devicemapper
+&lt;a href=&#34;https://github.com/docker/docker/pull/22168&#34;&gt;#22168&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Fix a bug preventing to &lt;code&gt;docker exec&lt;/code&gt; into a container when using
+devicemapper &lt;a href=&#34;https://github.com/docker/docker/pull/22168&#34;&gt;#22168&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;cs-engine-1-11-1-cs2&#34;&gt;CS Engine 1.11.1-cs2&lt;/h2&gt;
+
+&lt;p&gt;(17 May 2016)&lt;/p&gt;
+
+&lt;p&gt;This release fixes the following issue which prevented DTR containers to be automatically restarted on a docker daemon restart:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/docker/docker/issues/22486&#34;&gt;https://github.com/docker/docker/issues/22486&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;cs-engine-1-11-1-cs1&#34;&gt;CS Engine 1.11.1-cs1&lt;/h2&gt;
+
+&lt;p&gt;(27 April 2016)&lt;/p&gt;
+
+&lt;p&gt;In this release the CS Engine is supported on RHEL 7.2 OS&lt;/p&gt;
+
+&lt;p&gt;Refer to the &lt;a href=&#34;https://github.com/docker/docker/releases&#34;&gt;detailed list&lt;/a&gt; of all changes since the release of CS Engine 1.10.3-cs3&lt;/p&gt;
+
+&lt;h2 id=&#34;cs-engine-1-10-3-cs3&#34;&gt;CS Engine 1.10.3-cs3&lt;/h2&gt;
+
+&lt;p&gt;(25 April 2016)&lt;/p&gt;
+
+&lt;p&gt;This release addresses the following issue:&lt;/p&gt;
+
+&lt;p&gt;A vulnerability in the Go standard runtime libraries allowed a maliciously crafted client certificate to be used to cause an infinite loop in a TLS server. This can lead to a Denial of Service against the Docker Engine if it is deployed such that it uses TLS client certificate authentication. This vulnerability has been fixed in this release. We consider this a low-impact issue, due to complexity of attack. Customers should consider upgrading if their deployed Docker Engines are exposed to potentially malicious network attackers.&lt;/p&gt;
+
+&lt;p&gt;This issue is resolved by using Go runtime v1.5.4 which was released to address this vulnerability&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/docker/docker/pull/21977&#34;&gt;https://github.com/docker/docker/pull/21977&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/docker/docker/pull/21987&#34;&gt;https://github.com/docker/docker/pull/21987&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;cs-engine-1-10-3-cs2&#34;&gt;CS Engine 1.10.3-cs2&lt;/h2&gt;
+
+&lt;p&gt;(18 March 2016)&lt;/p&gt;
+
+&lt;p&gt;Bug fix release picking up changes from Docker 1.10.3 release.&lt;/p&gt;
+
+&lt;p&gt;Refer to the &lt;a href=&#34;https://github.com/docker/docker/releases/tag/v1.10.3&#34;&gt;detailed list&lt;/a&gt; of all changes since the release of CS Engine 1.10.2-cs1&lt;/p&gt;
+
+&lt;h2 id=&#34;cs-engine-1-10-2-cs1&#34;&gt;CS Engine 1.10.2-cs1&lt;/h2&gt;
+
+&lt;p&gt;(22 February 2016)&lt;/p&gt;
+
+&lt;p&gt;In this release the CS Engine is supported on SUSE Linux Enterprise 12 OS.&lt;/p&gt;
+
+&lt;p&gt;Refer to the &lt;a href=&#34;https://github.com/docker/docker/releases&#34;&gt;detailed list&lt;/a&gt; of all changes since the release of CS Engine 1.9.1.&lt;/p&gt;
+
+&lt;h2 id=&#34;cs-engine-1-9-1-cs3&#34;&gt;CS Engine 1.9.1-cs3&lt;/h2&gt;
+
+&lt;p&gt;(6 January 2016)&lt;/p&gt;
+
+&lt;p&gt;This release addresses the following issues:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The commercially supported Engine 1.9.1-cs3 now supports multi-host networking
+for all the kernels that the base CS Engine is supported on.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: Centos 7 has its firewall enabled by default and it prevents the VXLAN tunnel from communicating. If this applies to you, then after installing the CS Engine, execute the following command in the Linux host:&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;code&gt;sudo firewall-cmd --zone=public --permanent --add-port=4789/udp&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Corrected an issue where Docker didn&amp;rsquo;t remove the Masquerade NAT rule from &lt;code&gt;iptables&lt;/code&gt; when the network was removed. This caused the gateway address to be
+incorrectly propagated as the source address of a connection.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Fixed an issue where if the daemon started multiple containers concurrently, then the &lt;code&gt;/etc/hosts&lt;/code&gt; files were incompletely populated. This issue occurred randomly.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Corrected an issue where the same IP address for different Docker containers resulted in network connection inconsistencies. Now each container has a separate IP address.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Corrected an issue where the IPv6 gateway was not created when using custom networks although the network had a configured gateway.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Fixed an issue where users might have experienced a panic error if the  daemon was started with the &lt;code&gt;—cluster-store&lt;/code&gt; option, but without the &lt;code&gt;—cluster-advertise&lt;/code&gt; option.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;cs-engine-1-9-1-cs2&#34;&gt;CS Engine 1.9.1-cs2&lt;/h2&gt;
+
+&lt;p&gt;(4 December 2015)&lt;/p&gt;
+
+&lt;p&gt;Starting with this release, upgrading minor versions, for example, from 1.9.0 to 1.9.1, is faster and easier.&lt;/p&gt;
+
+&lt;p&gt;You can refer to the detailed list of all changes since the release of CS Engine
+1.9.0
+&lt;a href=&#34;https://github.com/docker/docker/releases&#34;&gt;https://github.com/docker/docker/releases&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Configuration</title>
+      <link>http://docs-stage.docker.com/docker-trusted-registry/configure/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/docker-trusted-registry/configure/</guid>
+      <description>
+
+&lt;h1 id=&#34;configure-dtr&#34;&gt;Configure DTR&lt;/h1&gt;
+
+&lt;p&gt;This section includes the following topics:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/configure/configuration/&#34;&gt;Configuration overview&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/configure/config-general/&#34;&gt;Configure general settings&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/configure/config-security/&#34;&gt;Security configuration&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/configure/config-storage/&#34;&gt;Storage configuration&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/configure/config-auth/&#34;&gt;Auth configuration&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Configuration overview</title>
+      <link>http://docs-stage.docker.com/docker-trusted-registry/configure/configuration/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/docker-trusted-registry/configure/configuration/</guid>
+      <description>
+
+&lt;h1 id=&#34;configure-overview&#34;&gt;Configure overview&lt;/h1&gt;
+
+&lt;p&gt;When you first install Docker Trusted Registry, you need to configure it. Use
+this overview to see what you can configure.&lt;/p&gt;
+
+&lt;p&gt;To start, navigate to the Trusted Registry user interface (UI) &amp;gt; Settings, to
+view configuration options. Configuring is grouped by the following:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/configure/config-general/&#34;&gt;General settings&lt;/a&gt; (ports, proxies, and Notary)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/configure/config-security/&#34;&gt;Security settings&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/configure/config-storage/&#34;&gt;Storage settings&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/install/license/&#34;&gt;License&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/configure/config-auth/&#34;&gt;Authentication settings&lt;/a&gt; (including LDAP)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/repos-and-images/delete-images/&#34;&gt;Garbage collection&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Updates&lt;/li&gt;
+&lt;li&gt;Docker daemon (this is set from the Trusted Registry CLI and not the UI)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Saving changes you&amp;rsquo;ve made to settings will restart various services, as follows:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;General settings: full Docker Trusted Registry restart&lt;/li&gt;
+&lt;li&gt;License change: full Docker Trusted Registry restart&lt;/li&gt;
+&lt;li&gt;SSL change: Nginx reload&lt;/li&gt;
+&lt;li&gt;Storage config: only registries restart&lt;/li&gt;
+&lt;li&gt;Authentication config: no restart&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;However, your first configuration task is to create a system administrator account.&lt;/p&gt;
+
+&lt;h2 id=&#34;get-started-by-creating-your-admin-account&#34;&gt;Get started by creating your admin account&lt;/h2&gt;
+
+&lt;p&gt;When you have finished installing Docker Trusted Registry for the first time, you are unable to do anything until you create a system administrator account. Create it using the authentication method (either Managed or LDAP) that you intend to use in order to manage the Trusted Registry.&lt;/p&gt;
+
+&lt;h3 id=&#34;create-an-admin-using-managed-mode&#34;&gt;Create an admin using managed mode&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Navigate to the Trusted Registry dashboard &amp;gt; Settings &amp;gt; Auth.&lt;/li&gt;
+&lt;li&gt;Select Managed from the Authentication Method drop-down form.&lt;/li&gt;
+&lt;li&gt;Fill out the forms for Username, Password, and ensure to select under Global role, Admin - all repositories.&lt;/li&gt;
+&lt;li&gt;Save your work.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;create-an-admin-using-ldap-mode&#34;&gt;Create an admin using LDAP mode&lt;/h3&gt;
+
+&lt;p&gt;If you create an admin using the LDAP mode, then you will need to create a filter and then sync your data.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Navigate to the Trusted Registry dashboard &amp;gt; Settings &amp;gt; Auth.&lt;/li&gt;
+&lt;li&gt;Select LDAP from the Authentication Method drop-down form.&lt;/li&gt;
+&lt;li&gt;Enter a new Admin Password. This password is also the admin recovery password.&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;At a minimum, enter your information in the following fields and save.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;LDAP Server URL&lt;/li&gt;
+&lt;li&gt;Use StartTLS (you can leave this unchecked)&lt;/li&gt;
+&lt;li&gt;User Base DN&lt;/li&gt;
+&lt;li&gt;User Login Attribute&lt;/li&gt;
+&lt;li&gt;Search User DN&lt;/li&gt;
+&lt;li&gt;Search User Password&lt;/li&gt;
+&lt;li&gt;LDAP Sync Interval&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;docker-daemon-logs&#34;&gt;Docker daemon logs&lt;/h2&gt;
+
+&lt;p&gt;Both the Trusted Registry and the Docker daemon collect and store log messages. To limit duplication of the Docker daemon logs, add the following parameters in a Trusted Registry CLI to the Docker daemon and then restart the daemon.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;docker daemon --log-opt max-size 100m max-file=1&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;see-also&#34;&gt;See also&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/monitor-troubleshoot/monitor/&#34;&gt;Monitor DTR&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/monitor-troubleshoot/troubleshoot/&#34;&gt;Troubleshoot DTR&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Configure general settings</title>
+      <link>http://docs-stage.docker.com/docker-trusted-registry/configure/config-general/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/docker-trusted-registry/configure/config-general/</guid>
+      <description>
+
+&lt;h1 id=&#34;configure-general-settings&#34;&gt;Configure general settings&lt;/h1&gt;
+
+&lt;p&gt;This document describes the general settings you need to configure including using Trusted Content through setting up your Notary server.&lt;/p&gt;
+
+&lt;h2 id=&#34;configure-your-domain-name-and-port-settings&#34;&gt;Configure your domain name and port settings&lt;/h2&gt;
+
+&lt;p&gt;Each setting on this page is explained in the Docker Trusted Registry UI.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Domain Name&lt;/em&gt;: &lt;strong&gt;required&lt;/strong&gt;. By default it is an empty string. It is the fully qualified domain name assigned to the Docker Trusted Registry host.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;HTTP Port&lt;/em&gt;: defaults to 80 and is used as the entry point for the image storage service. To see load balancer status, you can query
+http://&amp;lt;dtr-host&amp;gt;/load_balancer_status.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;HTTPS Port&lt;/em&gt;: defaults to 443, used as the secure entry point for the image storage service.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;HTTP proxy&lt;/em&gt;: defaults to an empty string, proxy server for HTTP requests.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;HTTPS proxy&lt;/em&gt;: defaults to an empty string, proxy server for HTTPS requests.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;No proxy&lt;/em&gt;: defaults to an empty string, proxy bypass for HTTP and HTTPS requests.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Upgrade checking&lt;/em&gt;: enables or disables automatic checking for the Trusted Registry software updates.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you need the Trusted Registry to re-generate a self-signed certificate at
+some point, you can change the domain name. Whenever the domain name does not
+match the current certificate, a new self-signed certificate is generated
+for the new domain. This also works with IP addresses.&lt;/p&gt;
+
+&lt;h2 id=&#34;configure-notary&#34;&gt;Configure Notary&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The Trusted Registry&amp;rsquo;s integration of Docker Notary is an experimental feature. The use of a Notary server with Trusted Registry is not officially supported.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;To use Docker Notary, first deploy your own Notary server and then integrate
+with your Trusted Registry through the Settings page. Then, you&amp;rsquo;ll need to
+configure your Docker clients to use trust. The Trusted Registry proxies
+requests to Notary, so you don&amp;rsquo;t need to explicitly trust Notary&amp;rsquo;s certificate
+from the docker client.&lt;/p&gt;
+
+&lt;p&gt;Once you enable Notary integration and configure your Docker clients, your
+organization can push and pull trusted images. After pushing images in this
+configuration to the Trusted Registry, you can see which image tags were signed
+by viewing the appropriate repositories through Trusted Registry&amp;rsquo;s web
+interface.&lt;/p&gt;
+
+&lt;p&gt;To deploy a Notary server follow the instructions at &lt;a href=&#34;../engine/security/trust/deploying_notary/&#34;&gt;Deploying
+Notary&lt;/a&gt;. You can deploy a Notary
+server on the same machine as the Trusted Registry. If you do this, you can
+connect to the Notary server directly using the IP address of the &lt;code&gt;docker0&lt;/code&gt;
+interface. The interface&amp;rsquo;s address is typically &lt;code&gt;172.17.42.1&lt;/code&gt;. Read more about
+&lt;a href=&#34;../engine/userguide/networking/&#34;&gt;Docker Networking&lt;/a&gt; to learn about the
+&lt;code&gt;docker0&lt;/code&gt; interface. You can also connect using the machine&amp;rsquo;s external IP
+address and port combination provided you expose the proper port.&lt;/p&gt;
+
+&lt;p&gt;Once you&amp;rsquo;ve deployed your Notary server, do the following:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Return to the Trusted Registry in your browser and configure the following
+options:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;em&gt;Notary Server&lt;/em&gt;: This is the domain name or IP address where you deployed the Notary server.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;em&gt;Notary Verify TLS&lt;/em&gt;: This is off by default and you should verify that your connection to Notary works with this turned off before trying to enable it. If Notary&amp;rsquo;s certificate is signed by a public Certificate Authority, you can turn this on and it should work given that the domain name (or IP) matches the one in the certificate.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;em&gt;Notary TLS Root CA&lt;/em&gt;: If you don&amp;rsquo;t use a publicly signed certificate but still want to have a secure connection between
+the Trusted Registry and Notary, then put the root Certificate Authority&amp;rsquo;s certificate in this field. You can also use a self signed certificate at this location.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Once you&amp;rsquo;ve configured the Notary settings, save them. After you save, the
+Trusted Registry tries to connect to Notary to confirm that the address is
+correct. It configures itself as a reverse proxy to the Notary server to make it
+easier for clients to automatically use the correct Notary server.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Configure your Docker client to use content trust operations.&lt;/p&gt;
+
+&lt;p&gt;To configure your Docker client to be able to push signed images to Docker
+Trusted Registry refer to the CLI Reference&amp;rsquo;s &lt;a href=&#34;../engine/reference/commandline/cli/#environment-variables&#34;&gt;Environment Variables
+Section&lt;/a&gt; and
+&lt;a href=&#34;../engine/reference/commandline/cli/#notary&#34;&gt;Notary Section&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;This requires you to set the &lt;code&gt;DOCKER_CONTENT_TRUST&lt;/code&gt; variable and configure
+your system to trust Docker Trusted Registry&amp;rsquo;s TLS certificate if it doesn&amp;rsquo;t
+already.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Use a client to push an image with trust.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Verify the image is signed by visiting the image repository&amp;rsquo;s page through
+the Trusted Registry interface.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;see-also&#34;&gt;See also&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/configure/config-auth/&#34;&gt;Configure authentication&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/configure/config-storage/&#34;&gt;Configure storage settings&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Create a repository</title>
+      <link>http://docs-stage.docker.com/docker-trusted-registry/repos-and-images/create-repo/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/docker-trusted-registry/repos-and-images/create-repo/</guid>
+      <description>
+
+&lt;h2 id=&#34;create-a-repository&#34;&gt;Create a repository&lt;/h2&gt;
+
+&lt;p&gt;Before you can push images to your Docker Trusted Registry, you need to
+create a repository for them.&lt;/p&gt;
+
+&lt;p&gt;To create a new repository, navigate to the &lt;strong&gt;DTR web application&lt;/strong&gt;, and click
+the &lt;strong&gt;New repository&lt;/strong&gt; button.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-trusted-registry/images/create-repo-1.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Add a &lt;strong&gt;name and description&lt;/strong&gt; for the repository, and choose whether your
+repository is public or private:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Public repositories are visible to all users, but can only be changed by
+users granted with permission to write them.&lt;/li&gt;
+&lt;li&gt;Private repositories can only be seen by users that have been granted
+permissions to that repository.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-trusted-registry/images/create-repo-2.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click &lt;strong&gt;Save&lt;/strong&gt; to create the repository. Now you can push your images to this
+repository.&lt;/p&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/repos-and-images/push-and-pull-images/&#34;&gt;Push and pull images&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/repos-and-images/delete-images/&#34;&gt;Delete images&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>DTR tool reference</title>
+      <link>http://docs-stage.docker.com/docker-trusted-registry/reference/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/docker-trusted-registry/reference/</guid>
+      <description>
+
+&lt;h1 id=&#34;dtr-tool-reference&#34;&gt;DTR tool reference&lt;/h1&gt;
+
+&lt;p&gt;This tool has commands to install, configure, and backup Docker
+Trusted Registry (DTR). It also allows uninstalling DTR.
+By default the tool runs in interactive mode. It prompts you for
+the values needed.
+For running this tool in non-interactive mode, there are three
+ways you can use to pass values:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ docker run -it --rm docker/dtr command --option value
+$ docker run -e --rm docker/dtr command ENV_VARIABLE=value
+$ docker run -e --rm docker/dtr command ENV_VARIABLE
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Additional help is available for each command with the &amp;lsquo;--help&amp;rsquo; option.&lt;/p&gt;
+
+&lt;h2 id=&#34;usage&#34;&gt;Usage&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ docker run -it --rm docker/dtr \
+    command [command options]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;options&#34;&gt;Options&lt;/h2&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;Option&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;--help, h&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Show help&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&#34;commands&#34;&gt;Commands&lt;/h2&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;Option&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;install&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Install Docker Trusted Registry on this Docker Engine&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;join&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Add a new replica to an existing DTR cluster&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;reconfigure&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Change DTR configurations&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;remove&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Remove a replica from a DTR cluster&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;restore&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Create a new DTR cluster from an existing backup&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;backup&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Backup a DTR cluster to a tar file and stream it to stdout&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;migrate&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Migrate configurations, accounts, and repository metadata from DTR 1.4.3 to 2.0&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;dumpcerts&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Dump out the TLS certificates used by this DTR instance&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Delete images</title>
+      <link>http://docs-stage.docker.com/docker-trusted-registry/repos-and-images/delete-images/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/docker-trusted-registry/repos-and-images/delete-images/</guid>
+      <description>
+
+&lt;h1 id=&#34;delete-images&#34;&gt;Delete images&lt;/h1&gt;
+
+&lt;p&gt;This document describes the two-step process of removing an image from the
+Trusted Registry. This process is first performed by developers wanting to
+remove their images and marking them for deletion. Then, an administrator
+removes those images mainly through a recurring garbage collection job.&lt;/p&gt;
+
+&lt;h2 id=&#34;understand-the-role-of-images-and-manifests-in-image-deletion&#34;&gt;Understand the role of images and manifests in image deletion&lt;/h2&gt;
+
+&lt;p&gt;Manifests are a type of file that describe images. They reference a list of
+layers and hold metadata about the described image. Manifests can also share
+layers. Tags, which are labels applied to images, point to manifests. You can
+reference an image by tag or directly by the hash of the manifest. If you
+purposefully delete one of those manifests and the image layers referenced by
+that manifest become orphaned, then they can be removed during the garbage
+collection job. In the following diagram, &lt;em&gt;both&lt;/em&gt; manifests point to the first layer, #2543d8.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-trusted-registry/images/gc1.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Since many developers may use a base image for future images, it is possible
+that there will be image layers that will  never be deleted. There might be other
+manifests that point to layers of the base image which could still be used by
+others as seen in the second diagram.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-trusted-registry/images/gc3.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
+
+&lt;p&gt;You need an image to remove.&lt;/p&gt;
+
+&lt;h2 id=&#34;soft-delete-an-image&#34;&gt;Soft delete an image&lt;/h2&gt;
+
+&lt;p&gt;Developers may want to remove an image for several reasons.
+Examples include:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The image is outdated and there is a new version.&lt;/li&gt;
+&lt;li&gt;The image is no longer used.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If a developer removes the manifest of an image, then it is called a soft
+deletion. Developers won&amp;rsquo;t be able to access that image, although physically, it
+it still in the repository.&lt;/p&gt;
+
+&lt;p&gt;You can perform a soft deletion, either from the UI or from the command line.&lt;/p&gt;
+
+&lt;p&gt;From the Trusted Registry dashboard, navigate to Repositories &amp;gt; Tags. Click the trash can next to the images you want to remove. They are now marked for the garbage collection job.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-trusted-registry/images/tag-removal.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;If you prefer to not use the UI, then you can open a Trusted Registry command line and type:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ curl -u &amp;lt;username&amp;gt;:&amp;lt;password&amp;gt; -X DELETE https://&amp;lt;DTR HOST&amp;gt;/api/v0/repositories/&amp;lt;namespace&amp;gt;/&amp;lt;reponame&amp;gt;/manifests/&amp;lt;reference&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can only delete one image at a time and you must also be authenticated as a
+user who has &amp;ldquo;write&amp;rdquo; level access to the repository.&lt;/p&gt;
+
+&lt;h2 id=&#34;set-up-garbage-collection&#34;&gt;Set up garbage collection&lt;/h2&gt;
+
+&lt;p&gt;Trusted Registry administrators can optimize registry storage and free up space.
+They do this by setting up a recurring garbage collection job (cron job) where
+the system searches for any layers that are not referenced by any manifests and
+removes them. Administrators can perform this garbage collection process
+immediately, or more realistically, on a periodic automatic schedule.
+They perform garbage collection of unreferenced layers tags either
+through a Trusted Registry CLI or through the Trusted Registry UI.&lt;/p&gt;
+
+&lt;p&gt;If administrators choose to have the garbage collection process performed
+immediately, they can type in a Trusted Registry CLI:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl -X POST -u &amp;lt;username&amp;gt;:&amp;lt;password&amp;gt; -H &amp;quot;Content-Type: application/json&amp;quot; &amp;quot;https://api/v0/admin/jobs&amp;quot; -d &amp;quot;{ \&amp;quot;job\&amp;quot; : \&amp;quot;registryGC\&amp;quot;}&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;However, it is more common to set up the garbage collection cron job to be performed routinely as seen in the following example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ curl -u &amp;lt;username&amp;gt;:&amp;lt;password&amp;gt; -H &#39;Content-Type: application/json&#39; -X POST https://&amp;lt;DTR
+HOST&amp;gt;/api/v0/admin/settings/registry/garbageCollection/schedule -d &#39;{&amp;quot;schedule&amp;quot;:
+&amp;quot;&amp;lt;schedule&amp;gt;&amp;quot;}&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Trusted Registry administrators can also set the cron job through the Trusted
+Registry UI. Navigate to Settings &amp;gt; Garbage collection to schedule a job.&lt;/p&gt;
+
+&lt;h3 id=&#34;a-cron-job-example&#34;&gt;A cron job example&lt;/h3&gt;
+
+&lt;p&gt;A Trusted Registry cron format has &lt;strong&gt;at most&lt;/strong&gt; four fields representing hour,
+day, month, and day of week respectively. Moreover, administrators can use the
+following shortcuts: &lt;code&gt;@yearly&lt;/code&gt;, &lt;code&gt;@annually&lt;/code&gt;, &lt;code&gt;@monthly&lt;/code&gt;, &lt;code&gt;@weekly&lt;/code&gt;, &lt;code&gt;@daily&lt;/code&gt;,
+&lt;code&gt;@midnight&lt;/code&gt;, &lt;code&gt;@hourly&lt;/code&gt; in either the UI or through the Trusted Registry CLI. If
+administrators choose to use the shortcuts, then only one can be used.&lt;/p&gt;
+
+&lt;p&gt;An example schedule of nightly at midnight would be: &lt;code&gt;0 * * *&lt;/code&gt;. Or alternately,
+for the same schedule, you could enter: @midnight. You can also enter less than
+four parameters if that&amp;rsquo;s all the job requires.&lt;/p&gt;
+
+&lt;p&gt;See the &lt;a href=&#34;https://godoc.org/github.com/robfig/cron&#34;&gt;package cron page&lt;/a&gt; for other
+examples depending on your company&amp;rsquo;s requirements.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The prior link displays examples using more than four fields. When Trusted Registry administrators set up a cron schedule, they are limited to only the four fields representing hour, day, month, and day of week.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Your downtime depends on the number of images and/or layers that are to be
+deleted. Docker recommends performing garbage collection weekly during off time.
+While garbage collection is occurring, anyone who tries to push an image will
+get an error message.&lt;/p&gt;
+
+&lt;h2 id=&#34;view-your-garbage-collection-results&#34;&gt;View your garbage collection results&lt;/h2&gt;
+
+&lt;p&gt;See your results by running the following example in a Trusted Registry CLI:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ curl -u &amp;lt;username&amp;gt;:&amp;lt;password&amp;gt; https://&amp;lt;DTR
+HOST&amp;gt;/api/v0/admin/settings/registry/garbageCollection/lastSavings
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The results are also displayed in the Trusted Registry UI by navigating to Settings &amp;gt; Garbage collection.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Docker Trusted Registry</title>
+      <link>http://docs-stage.docker.com/docker-trusted-registry/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/docker-trusted-registry/</guid>
+      <description>
+
+&lt;h1 id=&#34;welcome-to-docker-trusted-registry&#34;&gt;Welcome to Docker Trusted Registry&lt;/h1&gt;
+
+&lt;p&gt;Docker Trusted Registry (DTR) is the enterprise-grade image storage solution
+from Docker. You install it behind your firewall so that you can securely store
+and manage the Docker images you use in your applications.&lt;/p&gt;
+
+&lt;p&gt;The DTR documentation includes the following topics:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/overview/&#34;&gt;Docker Trusted Registry overview&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/quick-start/&#34;&gt;Quickstart&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/architecture/&#34;&gt;Architecture&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/install/system-requirements/&#34;&gt;System requirements&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/install/install-dtr/&#34;&gt;Install DTR&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/configure/configuration/&#34;&gt;Configuration&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/monitor-troubleshoot/monitor/&#34;&gt;Monitor and troubleshoot&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/high-availability/high-availability/&#34;&gt;High-availability&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/user-management/permission-levels/&#34;&gt;User management&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/repos-and-images/create-repo/&#34;&gt;Repositories and images&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/release-notes/release-notes/&#34;&gt;Release notes&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Docker Trusted Registry overview</title>
+      <link>http://docs-stage.docker.com/docker-trusted-registry/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/docker-trusted-registry/overview/</guid>
+      <description>
+
+&lt;h1 id=&#34;docker-trusted-registry-overview&#34;&gt;Docker Trusted Registry overview&lt;/h1&gt;
+
+&lt;p&gt;Docker Trusted Registry (DTR) is the enterprise-grade image storage solution
+from Docker. You install it behind your firewall so that you can securely store
+and manage the Docker images you use in your applications.&lt;/p&gt;
+
+&lt;h2 id=&#34;image-management&#34;&gt;Image management&lt;/h2&gt;
+
+&lt;p&gt;Docker Trusted Registry can be installed on-premises, or on a virtual private
+cloud. And with it, you can store your Docker images securely, behind your
+firewall.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-trusted-registry/images/overview-1.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can use DTR as part of your continuous integration, and continuous
+delivery processes to build, run, and ship your applications.&lt;/p&gt;
+
+&lt;h2 id=&#34;built-in-security-and-access-control&#34;&gt;Built-in security and access control&lt;/h2&gt;
+
+&lt;p&gt;DTR uses the same authentication mechanism as Docker Universal Control Plane.
+It has a built-in authentication mechanism, and also integrates with LDAP
+and Active Directory. It also supports Role Based Access Control (RBAC).&lt;/p&gt;
+
+&lt;p&gt;This allows you to implement fine-grain access control policies, on who has
+access to your Docker images.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-trusted-registry/images/overview-2.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/architecture/&#34;&gt;DTR architecture&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/install/install-dtr/&#34;&gt;Install DTR&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Get support</title>
+      <link>http://docs-stage.docker.com/docker-trusted-registry/support/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/docker-trusted-registry/support/</guid>
+      <description>
+
+&lt;h1 id=&#34;get-support&#34;&gt;Get support&lt;/h1&gt;
+
+&lt;p&gt;Your Docker Data Center, or Docker Trusted Registry subscription gives you
+access to prioritized support. The service levels depend on your subscription.&lt;/p&gt;
+
+&lt;p&gt;If you need help, you can file a ticket via:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;mailto:support@docker.com&#34;&gt;Email&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://support.docker.com/&#34;&gt;Docker support page&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Be sure to use your company email when filing tickets.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>High-availability</title>
+      <link>http://docs-stage.docker.com/docker-trusted-registry/high-availability/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/docker-trusted-registry/high-availability/</guid>
+      <description>
+
+&lt;h1 id=&#34;configure-dtr-for-high-availability&#34;&gt;Configure DTR for High-availability&lt;/h1&gt;
+
+&lt;p&gt;This section includes the following topics:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/high-availability/high-availability/&#34;&gt;Set up high availability&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/high-availability/backups-and-disaster-recovery/&#34;&gt;Backups and disaster recovery&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

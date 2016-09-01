@@ -1,0 +1,138 @@
+{
+    "docker/apidocs": {
+        "ref": "37b2ce1971effbe363bbd8eb5642ab6178e0fbfe",
+        "repos": [
+            "git@github.com:docker/dhe-deploy.git"
+        ],
+        "sha": "37b2ce1971effbe363bbd8eb5642ab6178e0fbfe"
+    },
+    "docker/cloud-api-docs": {
+        "ref": "4bd58fc74120255dc876b82b16e2adfe4323dbe4",
+        "repos": [
+            "git@github.com:docker/cloud-docs.git"
+        ],
+        "sha": "4bd58fc74120255dc876b82b16e2adfe4323dbe4"
+    },
+    "docker/cloud-api-docs-layout": {
+        "ref": "4bd58fc74120255dc876b82b16e2adfe4323dbe4",
+        "repos": [
+            "git@github.com:docker/cloud-docs.git"
+        ],
+        "sha": "4bd58fc74120255dc876b82b16e2adfe4323dbe4"
+    },
+    "docker/compose": {
+        "ref": "9c69b95112fc6f95be65d77bb878c157b8b81dab",
+        "repos": [
+            "git@github.com:docker/compose.git"
+        ],
+        "sha": "9c69b95112fc6f95be65d77bb878c157b8b81dab"
+    },
+    "docker/docker": {
+        "ref": "9aa451ec5fd6878d10ead96b4e31354c8e5c87f0",
+        "repos": [
+            "git@github.com:docker/docker.git"
+        ],
+        "sha": "9aa451ec5fd6878d10ead96b4e31354c8e5c87f0"
+    },
+    "docker/docker-cloud": {
+        "ref": "4bd58fc74120255dc876b82b16e2adfe4323dbe4",
+        "repos": [
+            "git@github.com:docker/cloud-docs.git"
+        ],
+        "sha": "4bd58fc74120255dc876b82b16e2adfe4323dbe4"
+    },
+    "docker/docker-hub": {
+        "ref": "1dcd3e41eb60c52655671be403b1c125967fb29c",
+        "repos": [
+            "git@github.com:docker/hub2-demo.git"
+        ],
+        "sha": "1dcd3e41eb60c52655671be403b1c125967fb29c"
+    },
+    "docker/docker-trusted-registry": {
+        "ref": "37b2ce1971effbe363bbd8eb5642ab6178e0fbfe",
+        "repos": [
+            "git@github.com:docker/dhe-deploy.git"
+        ],
+        "sha": "37b2ce1971effbe363bbd8eb5642ab6178e0fbfe"
+    },
+    "docker/docs-base": {
+        "ref": "f291e43f15d2d852b8994c0dc75233f703dc989e",
+        "repos": [
+            "git@github.com:docker/docs-base.git"
+        ],
+        "sha": "f291e43f15d2d852b8994c0dc75233f703dc989e"
+    },
+    "docker/kitematic": {
+        "ref": "c0aadc9fef7d8b23c595607948e310e43a8e6510",
+        "repos": [
+            "git@github.com:docker/kitematic.git"
+        ],
+        "sha": "c0aadc9fef7d8b23c595607948e310e43a8e6510"
+    },
+    "docker/machine": {
+        "ref": "6ffcc300aed3a6200ed6a0d47b180dcdf2b9f204",
+        "repos": [
+            "git@github.com:docker/machine.git"
+        ],
+        "sha": "6ffcc300aed3a6200ed6a0d47b180dcdf2b9f204"
+    },
+    "docker/notary": {
+        "ref": "f9cfc7500e0f02c76d7c256cf54eb363d9d69024",
+        "repos": [
+            "git@github.com:docker/notary.git"
+        ],
+        "sha": "f9cfc7500e0f02c76d7c256cf54eb363d9d69024"
+    },
+    "docker/opensource": {
+        "ref": "8dcf7360aa7ada67b26e691fa0578a6133e8d664",
+        "repos": [
+            "git@github.com:docker/opensource.git"
+        ],
+        "sha": "8dcf7360aa7ada67b26e691fa0578a6133e8d664"
+    },
+    "docker/registry": {
+        "ref": "cb0806cddad9874954b91463892e95472636b160",
+        "repos": [
+            "git@github.com:docker/distribution.git"
+        ],
+        "sha": "cb0806cddad9874954b91463892e95472636b160"
+    },
+    "docker/swarm": {
+        "ref": "a449799ade26aa0d62f08bc834c961fabc8401f9",
+        "repos": [
+            "git@github.com:docker/swarm.git"
+        ],
+        "sha": "a449799ade26aa0d62f08bc834c961fabc8401f9"
+    },
+    "docker/toolbox": {
+        "ref": "c577d8fad668eca69bd3abd143f891192ae4c43a",
+        "repos": [
+            "git@github.com:docker/toolbox.git"
+        ],
+        "sha": "c577d8fad668eca69bd3abd143f891192ae4c43a"
+    },
+    "docker/tutorials": {
+        "ref": "6fc03d9184ffbf9ddecd4a8e65d184e5d44da81b",
+        "repos": [
+            "git@github.com:docker/tutorials.git"
+        ],
+        "sha": "6fc03d9184ffbf9ddecd4a8e65d184e5d44da81b"
+    },
+    "docker/ucp": {
+        "ref": "a4ca55d94b71f223d5d287f3b18db2883394f230",
+        "repos": [
+            "git@github.com:docker/orca.git"
+        ],
+        "sha": "a4ca55d94b71f223d5d287f3b18db2883394f230"
+    },
+    "docs.docker.com": {
+        "ref": "refs/heads/v1.11",
+        "repos": [
+            "git@github.com:sfsmithcha/docs.docker.com",
+            "git@github.com:davidwilliamson/docs.docker.com",
+            "git@github.com:SvenDowideit/docs.docker.com",
+            "git@github.com:docker/docs.docker.com"
+        ],
+        "sha": "fb543eb254151a2d469f51606806e654c6435eda"
+    }
+}

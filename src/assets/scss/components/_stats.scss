@@ -1,0 +1,14 @@
+.stats-items {
+  padding: 1rem 0;
+  @include block-grid(1);
+  @media #{$medium-up} {
+    @include block-grid(2);
+  }
+  @media #{$large-up} {
+    @include block-grid(3);
+  }
+  li {
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+}

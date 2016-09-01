@@ -1,0 +1,2194 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ucps on Docker Docs</title>
+    <link>http://docs-stage.docker.com/ucp/</link>
+    <description>Recent content in Ucps on Docker Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://docs-stage.docker.com/ucp/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Access UCP</title>
+      <link>http://docs-stage.docker.com/ucp/access-ucp/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/ucp/access-ucp/</guid>
+      <description>
+
+&lt;h1 id=&#34;access-ucp&#34;&gt;Access UCP&lt;/h1&gt;
+
+&lt;p&gt;This section includes the following topics:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../ucp/access-ucp/web-based-access/&#34;&gt;Web-based access&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../ucp/access-ucp/cli-based-access/&#34;&gt;CLI-based access&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Applications</title>
+      <link>http://docs-stage.docker.com/ucp/applications/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/ucp/applications/</guid>
+      <description>
+
+&lt;h1 id=&#34;ucp-applications&#34;&gt;UCP applications&lt;/h1&gt;
+
+&lt;p&gt;This section includes the following topics:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../ucp/applications/deploy-app-ui/&#34;&gt;Deploy an app from the UI&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../ucp/applications/deploy-app-cli/&#34;&gt;Deploy an app from the CLI&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Architecture</title>
+      <link>http://docs-stage.docker.com/ucp/architecture/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/ucp/architecture/</guid>
+      <description>
+
+&lt;h1 id=&#34;ucp-architecture&#34;&gt;UCP architecture&lt;/h1&gt;
+
+&lt;p&gt;UCP is a containerized application, so the first step to install UCP is
+installing the Commercially Supported (CS) Docker Engine on all the nodes that
+are going to be part of the cluster.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../ucp/images/architecture-1.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;After CS Docker Engine is installed, you install UCP, and join as many
+nodes as you want to the cluster.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../ucp/images/architecture-2.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;architecture&#34;&gt;Architecture&lt;/h2&gt;
+
+&lt;p&gt;A UCP cluster has two types of nodes:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Controller: manages the cluster and persists the cluster configurations.&lt;/li&gt;
+&lt;li&gt;Node: run your containers.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;ucp-controller-node&#34;&gt;UCP controller node&lt;/h3&gt;
+
+&lt;p&gt;When you install Docker UCP on a node, the following containers are started.
+&lt;img src=&#34;../ucp/images/architecture-3.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;Name&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;ucp-proxy&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;A TLS proxy. It allows secure access to the local Docker Engine.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;ucp-controller&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;The UCP application. It uses the key-value store for persisting configurations.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;ucp-swarm-manager&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Provides the clustering capabilities. It uses the key-value store for leader election, and keeping track of cluster members.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;ucp-swarm-join&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Heartbeat to record on the key-value store that this node is alive. If the node goes down, this heartbeat stops, and the node is removed from the cluster.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;ucp-auth-api&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;The centralized API for identity and authentication used by UCP and DTR.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;ucp-auth-worker&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Performs scheduled LDAP synchronizations and cleans data on the ucp-auth-store.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;ucp-auth-store&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Stores authentication configurations, and data for users, organizations and teams.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;ucp-kv&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Used to store the UCP configurations. Don&amp;rsquo;t use it in your applications, since it&amp;rsquo;s for internal use only.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;ucp-cluster-root-ca&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;A certificate authority to sign the certificates used when joining new nodes, and on administrator client bundles.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;ucp-client-root-ca&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;A certificate authority to sign user bundles. Only used when UCP is installed without an external root CA.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&#34;ucp-node&#34;&gt;UCP node&lt;/h3&gt;
+
+&lt;p&gt;When you join a node to a Docker UCP cluster, the following containers are
+started.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../ucp/images/architecture-4.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;Name&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;ucp-proxy&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;A TLS proxy. It allows secure access to the local Docker Engine.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;ucp-swarm-join&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Heartbeat to record on the key-value store that this node is alive. If the node goes down, this heartbeat stops, and the node is dropped from the cluster.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&#34;volumes&#34;&gt;Volumes&lt;/h2&gt;
+
+&lt;p&gt;Docker UCP uses these named volumes for persisting data:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;Node&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Volume name&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Location on host (/var/lib/docker/volumes/)&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;all&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;ucp-client-root-ca&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;ucp-client-root-ca/_data&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;The certificate and key for the UCP root CA. Do not create this volume if you are using your own certificates.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;all&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;ucp-cluster-root-ca&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;ucp-cluster-root-ca/_data&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;The certificate and key for the Swarm root CA.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;all&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;ucp-controller-client-certs&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;ucp-controller-client-certs/_data&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;The UCP Controller Swarm client certificates for the current node.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;all&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;ucp-controller-server-certs&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;ucp-controller-server-certs/_data&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;The controller certificates for the UCP controllers web server.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;controller&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;ucp-kv&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;ucp-kv/_data&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Key value store persistence.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;all&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;ucp-kv-certs&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;ucp-kv-certs/_data&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;The Swarm KV client certificates for the current node (repeated on every node in the cluster).&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;all&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;ucp-node-certs&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;ucp-node-certs/_data&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;The Swarm certificates for the current node (repeated on every node in the cluster).&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;If you don’t create these volumes before when installing UCP, they are created with
+the default volume driver and flags.&lt;/p&gt;
+
+&lt;h2 id=&#34;high-availability-support&#34;&gt;High-availability support&lt;/h2&gt;
+
+&lt;p&gt;For load balancing and high-availability, you can install multiple controller
+nodes and join them to create a cluster.
+&lt;a href=&#34;../ucp/high-availability/set-up-high-availability/&#34;&gt;Learn more about high availability&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../ucp/installation/system-requirements/&#34;&gt;System requirements&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../ucp/installation/plan-production-install/&#34;&gt;Plan a production installation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Backups and disaster recovery</title>
+      <link>http://docs-stage.docker.com/ucp/high-availability/backups-and-disaster-recovery/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/ucp/high-availability/backups-and-disaster-recovery/</guid>
+      <description>
+
+&lt;h1 id=&#34;backups-and-disaster-recovery&#34;&gt;Backups and disaster recovery&lt;/h1&gt;
+
+&lt;p&gt;When you decide to start using Docker Universal Control Plane on a production
+setting, you should
+&lt;a href=&#34;../ucp/high-availability/set-up-high-availability/&#34;&gt;configure it for high availability&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The next step is creating a backup policy and disaster recovery plan.&lt;/p&gt;
+
+&lt;h2 id=&#34;backup-policy&#34;&gt;Backup policy&lt;/h2&gt;
+
+&lt;p&gt;Docker UCP nodes persist data using &lt;a href=&#34;../ucp/architecture/&#34;&gt;named volumes&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;As part of your backup policy you should regularly create backups of the
+controller nodes. Since the nodes used for running user containers don&amp;rsquo;t
+persist data, you can decide not to create any backups for them.&lt;/p&gt;
+
+&lt;p&gt;To perform a backup of a UCP controller node, use the &lt;code&gt;docker/ucp backup&lt;/code&gt;
+command. This creates a tar archive with the contents of the volumes used by
+UCP on that node, and streams it to stdout.&lt;/p&gt;
+
+&lt;p&gt;To create a consistent backup, the backup command temporarily stops the UCP
+containers running on the node where the backup is being performed. User
+containers are not affected by this.&lt;/p&gt;
+
+&lt;p&gt;To have minimal impact on your business, you should:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Schedule the backup to take place outside business hours.&lt;/li&gt;
+&lt;li&gt;Configure UCP for high availability. This allows load-balancing user requests
+across multiple UCP controller nodes.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;backup-command&#34;&gt;Backup command&lt;/h2&gt;
+
+&lt;p&gt;The example below shows how to create a backup of a UCP controller node:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# Create a backup, encrypt it, and store it on /tmp/backup.tar
+$ docker run --rm -i --name ucp \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  docker/ucp backup --interactive \
+  --passphrase &amp;quot;secret&amp;quot; &amp;gt; /tmp/backup.tar
+
+# Decrypt the backup and list its contents
+$ gpg --decrypt /tmp/backup.tar | tar --list
+
+Enter passphrase: secret
+
+/ucp-client-root-ca/
+./ucp-client-root-ca/cert.pem
+./ucp-client-root-ca/config.json
+./ucp-client-root-ca/key.pem
+./ucp-cluster-root-ca/
+# output snipped
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;restore-command&#34;&gt;Restore command&lt;/h2&gt;
+
+&lt;p&gt;The example below shows how to restore a UCP controller node from an existing
+backup:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ docker run --rm -i --name ucp \
+  -v /var/run/docker.sock:/var/run/docker.sock  \
+  docker/ucp restore &amp;lt; backup.tar
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;restore-your-cluster&#34;&gt;Restore your cluster&lt;/h2&gt;
+
+&lt;p&gt;Configuring UCP to have multiple controller nodes allows you tolerate a certain
+amount of node failures. If multiple nodes fail at the same time, causing the
+cluster to go down, you can use an existing backup to recover.&lt;/p&gt;
+
+&lt;p&gt;As an example, if you have a cluster with three controller nodes, A, B, and C,
+and your most recent backup was of node A:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Stop controllers B and C with the &lt;code&gt;stop&lt;/code&gt; command,&lt;/li&gt;
+&lt;li&gt;Restore controller A,&lt;/li&gt;
+&lt;li&gt;Uninstall UCP from controllers B and C,&lt;/li&gt;
+&lt;li&gt;Join nodes B and C as replica controllers to the cluster.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;You should now have your cluster up and running.&lt;/p&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../ucp/high-availability/set-up-high-availability/&#34;&gt;Set up high availability&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../ucp/architecture/&#34;&gt;UCP architecture&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>CLI-based access</title>
+      <link>http://docs-stage.docker.com/ucp/access-ucp/cli-based-access/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/ucp/access-ucp/cli-based-access/</guid>
+      <description>
+
+&lt;h1 id=&#34;cli-based-access&#34;&gt;CLI-based access&lt;/h1&gt;
+
+&lt;p&gt;Docker UCP secures your cluster with role-based access control, so that only
+authorized users can perform changes to the cluster.&lt;/p&gt;
+
+&lt;p&gt;For this reason, when running docker commands on a UCP node, you need to
+authenticate your request using client certificates. When trying to run docker
+commands without a valid certificate, you get an authentication error:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ docker ps
+
+An error occurred trying to connect: Get https://ucp:443/v1.22/containers/json: x509: certificate signed by unknown authority (possibly because of &amp;quot;crypto/rsa: verification error&amp;quot; when trying to verify candidate authority certificate &amp;quot;UCP Client Root CA&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There are two different types of client certificates:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Admin user certificate bundles: allow running docker commands on the
+Docker Engine of any node,&lt;/li&gt;
+&lt;li&gt;User certificate bundles: only allow running docker commands through a UCP
+controller node.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;download-client-certificates&#34;&gt;Download client certificates&lt;/h2&gt;
+
+&lt;p&gt;To download a client certificate bundle, &lt;strong&gt;log into UCP&lt;/strong&gt;, and navigate to your
+&lt;strong&gt;profile page&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../ucp/images/cli-based-access-1.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click the &lt;strong&gt;Create a Client Bundle&lt;/strong&gt; button, to download the certificate bundle.&lt;/p&gt;
+
+&lt;h2 id=&#34;use-client-certificates&#34;&gt;Use client certificates&lt;/h2&gt;
+
+&lt;p&gt;Once you&amp;rsquo;ve downloaded a client certificate bundle, you can use it to
+authenticate your requests.&lt;/p&gt;
+
+&lt;p&gt;Navigate to the directory where you downloaded the bundle, and unzip it. Then
+run the &lt;code&gt;env.sh&lt;/code&gt; script to start using the client certificates.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ unzip ucp-bundle-dave.lauper.zip
+$ cd ucp-bundle-dave.lauper
+$ eval $(&amp;lt;env.sh)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The env.sh script updates the &lt;code&gt;DOCKER_HOST&lt;/code&gt; and &lt;code&gt;DOCKER_CERT_PATH&lt;/code&gt;
+environment variables to use the certificates you downloaded.&lt;/p&gt;
+
+&lt;p&gt;From now on, when you use the Docker CLI client, it includes your client
+certificates as part of the request to the Docker Engine. You can now use the
+&lt;code&gt;docker info&lt;/code&gt; command to see if the certificates are being sent to the Docker
+Engine.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ docker info
+
+Containers: 11
+Nodes: 2
+ ucp: 192.168.99.100:12376
+  └ Status: Healthy
+ ucp-node: 192.168.99.101:12376
+  └ Status: Healthy
+Cluster Managers: 1
+ 192.168.99.104: Healthy
+  └ Orca Controller: https://192.168.99.100:443
+  └ Swarm Manager: tcp://192.168.99.100:3376
+  └ KV: etcd://192.168.99.100:12379
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;download-client-certificates-using-the-rest-api&#34;&gt;Download client certificates using the REST API&lt;/h2&gt;
+
+&lt;p&gt;You can also download client certificate bundles using the UCP REST API. In
+this example we&amp;rsquo;ll be using &lt;code&gt;curl&lt;/code&gt; for making the web requests to the API, and
+&lt;code&gt;jq&lt;/code&gt; to parse the responses.&lt;/p&gt;
+
+&lt;p&gt;To install these tools on an Ubuntu distribution, you can run:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ sudo apt-get update &amp;amp;&amp;amp; apt-get install curl jq
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then you get an authentication token from UCP, and use it to download the
+client certificates.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# Create an environment variable with the user security token
+$ AUTHTOKEN=$(curl -sk -d &#39;{&amp;quot;username&amp;quot;:&amp;quot;&amp;lt;username&amp;gt;&amp;quot;,&amp;quot;password&amp;quot;:&amp;quot;&amp;lt;password&amp;gt;&amp;quot;}&#39; https://&amp;lt;ucp-ip&amp;gt;/auth/login | jq -r .auth_token)
+# Download the client certificate bundle
+$ curl -k -H &amp;quot;Authorization: Bearer $AUTHTOKEN&amp;quot; https://&amp;lt;ucp-ip&amp;gt;/api/clientbundle -o bundle.zip
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../ucp/applications/deploy-app-cli/&#34;&gt;Deploy an app from the UI&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../ucp/applications/deploy-app-ui/&#34;&gt;Deploy an app from the CLI&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Configuration</title>
+      <link>http://docs-stage.docker.com/ucp/configuration/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/ucp/configuration/</guid>
+      <description>
+
+&lt;h1 id=&#34;ucp-configuration&#34;&gt;UCP configuration&lt;/h1&gt;
+
+&lt;p&gt;This section includes the following topics:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../ucp/configuration/multi-host-networking/&#34;&gt;Set up container networking&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../ucp/configuration/dtr-integration/&#34;&gt;Integrate with Docker Trusted Registry&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../ucp/configuration/configure-logs/&#34;&gt;Configure UCP logging&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Configure UCP logging</title>
+      <link>http://docs-stage.docker.com/ucp/configuration/configure-logs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/ucp/configuration/configure-logs/</guid>
+      <description>
+
+&lt;h2 id=&#34;configure-ucp-logging&#34;&gt;Configure UCP logging&lt;/h2&gt;
+
+&lt;p&gt;You can configure UCP for sending logs to a remote logging service:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Login into UCP with an administrator account&lt;/li&gt;
+&lt;li&gt;Navigate to the &lt;strong&gt;Settings&lt;/strong&gt; page&lt;/li&gt;
+&lt;li&gt;Set the information about your logging server, and click
+&lt;strong&gt;Enable Remote Logging&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&#34;../ucp/images/settings-log.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../ucp/configuration/dtr-integration/&#34;&gt;Integrate with DTR&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../ucp/high-availability/set-up-high-availability/&#34;&gt;Set up high availability&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Deploy an app from the CLI</title>
+      <link>http://docs-stage.docker.com/ucp/applications/deploy-app-cli/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/ucp/applications/deploy-app-cli/</guid>
+      <description>
+
+&lt;h1 id=&#34;deploy-an-app-from-the-cli&#34;&gt;Deploy an app from the CLI&lt;/h1&gt;
+
+&lt;p&gt;In this quickstart, you&amp;rsquo;ll learn how to deploy multi-container applications
+with UCP.
+While UCP is intended for deploying multi-container applications, the workflow
+for developing them begins outside of the UCP installation. This page explains
+the recommended workflow for developing applications. Then, it shows you
+step-by-step how to deploy the fully developed application.&lt;/p&gt;
+
+&lt;h2 id=&#34;understand-the-development-workflow&#34;&gt;Understand the development workflow&lt;/h2&gt;
+
+&lt;p&gt;UCP is at the end of the application development workflow. You should only
+deploy, or allowed to be deployed, individual containers or multi-container
+applications that have been systematically developed and tested.&lt;/p&gt;
+
+&lt;p&gt;Your development team should develop in a local environment using the Docker
+open source software (OSS) components. These components include:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Docker Engine&lt;/li&gt;
+&lt;li&gt;Docker Machine (if development is on Mac or Windows)&lt;/li&gt;
+&lt;li&gt;Docker Swarm&lt;/li&gt;
+&lt;li&gt;Docker Compose&lt;/li&gt;
+&lt;li&gt;Docker Hub (for publicly available images)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Developing an application can include using public images from Docker Hub and
+developing new custom images. If there are multiple containers involved, the
+team should configure and test container port configurations. For applications
+that require them, the team may need to create Docker container volumes and
+ensure they are of sufficient size.&lt;/p&gt;
+
+&lt;p&gt;Once the team has developed a microservice application, they should test it
+locally at scale on a Swarm cluster.&lt;/p&gt;
+
+&lt;p&gt;The output of application development should be a Docker Compose file and a set
+of images ready for deployment. These images can be stored in Docker Hub. If
+your company is using Docker Trusted Registry, the team may want to or be
+required to store their application images in the company registry. The team
+must ensure store the images in an accessible registry account.&lt;/p&gt;
+
+&lt;h2 id=&#34;step-1-before-you-begin&#34;&gt;Step 1. Before you begin&lt;/h2&gt;
+
+&lt;p&gt;This example requires that you have UCP deployed.&lt;/p&gt;
+
+&lt;p&gt;When deploying an application to UCP, you work from a local environment using
+the UCP client bundle for your UCP user.  You should never deploy from the
+command-line while directly logged into a UCP node. The deploy on this page,
+requires that your local environment includes the following software:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://git-scm.com/&#34;&gt;Git&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Docker Engine&lt;/li&gt;
+&lt;li&gt;Docker Compose&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;While not always the case, the expectation is your local environment is a
+Windows or Mac machine. If your personal machine is a Linux machine that Docker
+Engine supports, such a configuration works too.&lt;/p&gt;
+
+&lt;h3 id=&#34;windows-or-mac-prerequisites&#34;&gt;Windows or Mac prerequisites&lt;/h3&gt;
+
+&lt;p&gt;Because Docker Engine and UCP both rely on Linux-specific features, you can&amp;rsquo;t
+run natively in Mac or Windows. Instead, you must install the Docker Toolbox
+application. Docker Toolbox installs:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Docker Machine for running &lt;code&gt;docker-machine&lt;/code&gt; commands&lt;/li&gt;
+&lt;li&gt;Docker Engine for running the &lt;code&gt;docker&lt;/code&gt; commands&lt;/li&gt;
+&lt;li&gt;Docker Compose for running the &lt;code&gt;docker-compose&lt;/code&gt; commands&lt;/li&gt;
+&lt;li&gt;Kitematic, the Docker GUI&lt;/li&gt;
+&lt;li&gt;a Quickstart shell preconfigured for a Engine command-line environment&lt;/li&gt;
+&lt;li&gt;Oracle VirtualBox&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These tools enable you to run Engine CLI commands from your Mac OS X or Windows
+shell.&lt;/p&gt;
+
+&lt;p&gt;Your Mac must be running OS X 10.8 &amp;ldquo;Mountain Lion&amp;rdquo; or higher to install Toolbox.
+To check your Mac OS X version, see &lt;a
+href=&#34;https://docs.docker.com/mac/step_one/&#34; target=&#34;_blank&#34;&gt;the Docker Engine
+getting started on Mac&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;On Windows, your machine must have a 64-bit operating system running Windows 7 or
+higher. Additionally, you must make sure that virtualization is enabled on your
+machine. For information on how to check for virtualization, see &lt;a
+href=&#34;https://docs.docker.com/windows/step_one/&#34; target=&#34;_blank&#34;&gt;the Docker
+Engine getting started on Windows&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you haven&amp;rsquo;t already done so, make you have installed Docker Toolbox on your
+local &lt;a href=&#34;https://docs.docker.com/engine/installation/mac/&#34;
+target=&#34;_blank&#34;&gt;Mac OS X&lt;/a&gt; or &lt;a
+href=&#34;https://docs.docker.com/engine/installation/windows/&#34;
+target=&#34;_blank&#34;&gt;Windows machine&lt;/a&gt;.  After a successful installation, continue
+to the next step.&lt;/p&gt;
+
+&lt;h3 id=&#34;about-a-linux-environment&#34;&gt;About a Linux environment&lt;/h3&gt;
+
+&lt;p&gt;If your local environment is Linux, make sure you have installed the &lt;a
+href=&#34;https://docs.docker.com/engine/installation&#34; target=&#34;_blank&#34;&gt;correct
+Docker Engine for your Linux OS&lt;/a&gt;. Also, make sure you have installed &lt;a
+href=&#34;http://docs-stage.docker.com/compose/install/&#34; target=&#34;_blank&#34;&gt;Docker
+Compose&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;step-2-get-the-client-bundle-and-configure-a-shell&#34;&gt;Step 2. Get the client bundle and configure a shell&lt;/h2&gt;
+
+&lt;p&gt;In this step, you download the &lt;em&gt;client bundle&lt;/em&gt;. To issue commands to a UCP node,
+your local shell environment must be configured with the same security
+certificates as the UCP application itself.  The client bundle contains the
+certificates and a script to configure a shell environment.&lt;/p&gt;
+
+&lt;p&gt;Download the bundle and configure your environment.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;If you haven&amp;rsquo;t already done so, log into UCP.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Choose &lt;strong&gt;admin &amp;gt; Profile&lt;/strong&gt; from the right-hand menu.&lt;/p&gt;
+
+&lt;p&gt;Any user can download their certificates. So, if you were logged in under a
+user name such as &lt;code&gt;davey&lt;/code&gt; the path to download bundle is &lt;strong&gt;davey &amp;gt;
+Profile&lt;/strong&gt;. Since you are logged in as &lt;code&gt;admin&lt;/code&gt;, the path is &lt;code&gt;admin&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click &lt;strong&gt;Create Client Bundle&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;The browser downloads the &lt;code&gt;ucp-bundle-admin.zip&lt;/code&gt; file.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Open a shell on your local terminal.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;If you are on Mac or Windows, ensure your shell does not have an active Docker Machine VM.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine ls
+NAME    ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER    ERRORS
+moxie   -        virtualbox   Stopped                                       Unknown   
+test    -        virtualbox   Running   tcp://192.168.99.100:2376           v1.10.1  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;While Machine has a stopped and running host, neither is active in the
+shell. You know this because neither host shows an * (asterisk) indicating
+the shell is configured.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create a directory to hold the deploy information.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ mkdir deploy-app
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Inside of a &lt;code&gt;deploy-app&lt;/code&gt; create a directory to hold your UCP bundle files.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ mkdir deploy-app/bundle
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Change into the &lt;code&gt;deploy-app/bundle&lt;/code&gt; directory and move the downloaded bundle into it.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd deploy-app/bundle
+$ mv ~/Downloads/ucp-bundle-admin.zip .
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Unzip the client bundle.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    $ unzip bundle.zip
+    Archive:  bundle.zip
+    extracting: ca.pem
+    extracting: cert.pem
+    extracting: key.pem
+    extracting: cert.pub
+    extracting: env.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Change into the directory that was created when the bundle was unzipped&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Execute the &lt;code&gt;env.sh&lt;/code&gt; script to set the appropriate environment variables for your UCP deployment&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    $ source env.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Verify that you are connected to UCP by using the &lt;code&gt;docker info&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker info
+Containers: 11
+Running: 11
+Paused: 0
+Stopped: 0
+Images: 22
+... &amp;lt;output snipped&amp;gt;
+Plugins:
+Volume:
+Network:
+Kernel Version: 4.2.0-23-generic
+Operating System: linux
+Architecture: amd64
+CPUs: 3
+Total Memory: 11.58 GiB
+Name: ucp-controller-ucpdemo-0
+ID: DYZQ:I5RM:VM6K:MUFZ:JXCU:H45Y:SFU4:CBPS:OMXC:LQ3S:L2HQ:VEWW
+Labels:
+com.docker.ucp.license_key=QMb9Ux2PKj-IshswTScxsd19n-c8LwtP-pQiDWy2nVtg
+com.docker.ucp.license_max_engines=10
+com.docker.ucp.license_expires=2016-05-03 19:52:02 +0000 UTC
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;step-3-learn-about-the-application&#34;&gt;Step 3: Learn about the application&lt;/h2&gt;
+
+&lt;p&gt;The application you&amp;rsquo;ll be deploying is a voting application. The voting
+application is a dockerized microservice application. It uses a parallel web
+frontend that sends jobs to asynchronous background workers. The application&amp;rsquo;s
+design can accommodate arbitrarily large scale. The diagram below shows the high
+level architecture of the application.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../ucp/images/app-architecture.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The application is fully dockerized with all services running inside of
+containers.&lt;/p&gt;
+
+&lt;p&gt;The frontend consists of an Interlock load balancer with &lt;em&gt;n&lt;/em&gt; frontend web
+servers and associated queues. The load balancer can handle an arbitrary number
+of web containers behind it (&lt;code&gt;frontend01&lt;/code&gt;- &lt;code&gt;frontendN&lt;/code&gt;). The web containers run
+a simple Python Flask application. Each web container accepts votes and queues
+them to a Redis container on the same node. Each web container and Redis queue
+pair operates independently.&lt;/p&gt;
+
+&lt;p&gt;The load balancer together with the independent pairs allows the entire
+application to scale to an arbitrary size as needed to meet demand.&lt;/p&gt;
+
+&lt;p&gt;Behind the frontend is a worker tier which runs on separate nodes. This tier:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;scans the Redis containers&lt;/li&gt;
+&lt;li&gt;dequeues votes&lt;/li&gt;
+&lt;li&gt;deduplicates votes to prevent double voting&lt;/li&gt;
+&lt;li&gt;commits the results to a Postgres container running on a separate node&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Just like the front end, the worker tier can also scale arbitrarily.&lt;/p&gt;
+
+&lt;p&gt;When deploying in UCP, you won&amp;rsquo;t need this exact architecture. For example, you
+won&amp;rsquo;t need the Interlock load balancer. Part of the work of UCP administrator
+may be to polish the application the team created, leaving only what&amp;rsquo;s needed for UCP.&lt;/p&gt;
+
+&lt;p&gt;For example, the team fully &lt;a
+href=&#34;https://github.com/docker/swarm-microservice-demo-v1&#34; target=&#34;_blank&#34;&gt;
+developed and tested through a local environment using the open source Docker
+ecosystem&lt;/a&gt;. The Docker Compose file they created looks like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#
+# Compose file to run the voting app and dependent services
+#
+version: &#39;2&#39;
+services:
+  web-vote-app:
+    build: web-vote-app
+    environment:
+      WEB_VOTE_NUMBER: &amp;quot;01&amp;quot;
+      constraint:node: &amp;quot;=frontend01&amp;quot;
+  vote-worker:
+    build: vote-worker
+    environment:
+      FROM_REDIS_HOST: 1
+      TO_REDIS_HOST: 1
+  results-app:
+    build: results-app
+  redis01:
+    image: redis:3
+  store:
+    image: postgres:9.5
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=pg8675309
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In this &lt;code&gt;docker-compose.file&lt;/code&gt; includes a &lt;code&gt;build&lt;/code&gt; command. You should never
+&lt;code&gt;build&lt;/code&gt; an image against the UCP controller or its nodes. You can find out if
+the team built and stored the images described in the file, or you can build the
+images yourself and push them to a registry. After a little work you could come
+up with a &lt;code&gt;docker-compose.yml&lt;/code&gt; that looks like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;version: &amp;quot;2&amp;quot;
+
+services:
+  voting-app:
+    image: docker/example-voting-app-voting-app
+    ports:
+      - &amp;quot;80&amp;quot;
+    networks:
+      - voteapp
+  result-app:
+    image: docker/example-voting-app-result-app
+    ports:
+      - &amp;quot;80&amp;quot;
+    networks:
+      - voteapp
+  worker:
+    image: docker/example-voting-app-worker
+    networks:
+      - voteapp
+  redis:
+    image: redis
+    ports:
+      - &amp;quot;6379&amp;quot;
+    networks:
+      - voteapp
+    container_name: redis
+  db:
+    image: postgres:9.4
+    volumes:
+      - &amp;quot;db-data:/var/lib/postgresql/data&amp;quot;
+    networks:
+      - voteapp
+    container_name: db
+volumes:
+  db-data:
+
+networks:
+  voteapp:
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This revised compose file uses a set of images stored in Docker Hub. They happen
+to be in Docker repositories because the sample application was built by a
+Docker team. Compose allows you to designate a network and it defaults to
+creating an &lt;code&gt;overlay&lt;/code&gt; network. So, you can specify which networks in UCP to run
+on.  In this case, you won&amp;rsquo;t manually create the networks, you&amp;rsquo;ll let Compose create
+the network for you.&lt;/p&gt;
+
+&lt;h2 id=&#34;step-4-deploy-the-application&#34;&gt;Step 4. Deploy the application&lt;/h2&gt;
+
+&lt;p&gt;In this step, you deploy the application in UCP.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Bring up the shell you configured in the &lt;a href=&#34;#step-2-get-the-client-bundle-and-configure-a-shell&#34;&gt;Step
+2&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Clone the sample compose file onto your local machine..&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git clone https://github.com/nicolaka/voteapp-base.git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The clone command creates a &lt;code&gt;voteapp-base&lt;/code&gt; directory containing the Compose
+file.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Change into the &lt;code&gt;voteapp-base&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd voteapp-base
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Deploy the application.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-compose up
+Creating network &amp;quot;voteappbase_voteapp&amp;quot; with the default driver
+Pulling db (postgres:9.4)...
+ucpdemo-0: Pulling postgres:9.4... : downloaded
+ucpdemo-2: Pulling postgres:9.4... : downloaded
+ucpdemo-1: Pulling postgres:9.4... : downloaded
+Creating db
+Pulling redis (redis:latest)...
+ucpdemo-0: Pulling redis:latest... : downloaded
+ucpdemo-2: Pulling redis:latest... : downloaded
+ucpdemo-1: Pulling redis:latest... : downloaded
+Creating redis
+Pulling worker (docker/example-voting-app-worker:latest)...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Compose creates the &lt;code&gt;voteappbase_voteapp&lt;/code&gt; network and deploys the application.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;From UCP, go to the &lt;strong&gt;Applications&lt;/strong&gt; page inside UCP.&lt;/p&gt;
+
+&lt;p&gt;Your new application should appear in the list.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Expand to the app to see which nodes the application containers are running in.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../ucp/images/votingapp_default.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;step-5-test-the-application&#34;&gt;Step 5. Test the application&lt;/h2&gt;
+
+&lt;p&gt;Now that the application is deployed and running, it&amp;rsquo;s time to test it. To do
+this, you configure a DNS mapping on the node where you are running
+&lt;code&gt;votingapp_web-vote-app_1&lt;/code&gt; container. browser. This maps the &amp;ldquo;votingapp.local&amp;rdquo;
+DNS name to the public IP address of the &lt;code&gt;votingapp_web-vote-app_1&lt;/code&gt; node.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Configure the DNS name resolution on your local machine for browsing.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;On Windows machines this is done by adding &lt;code&gt;votingapp.local &amp;lt;votingapp_web-vote-app_1-public-ip&amp;gt;&lt;/code&gt; to the &lt;code&gt;C:\Windows\System32\Drivers\etc\hosts file&lt;/code&gt;. Modifying this file requires administrator privileges. To open the file with administrator privileges, right-click &lt;code&gt;C:\Windows\System32\notepad.exe&lt;/code&gt; and select &lt;code&gt;Run as administrator&lt;/code&gt;. Once Notepad is open, click &lt;code&gt;file&lt;/code&gt; &amp;gt; &lt;code&gt;open&lt;/code&gt; and open the file and make the edit.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;On OSX machines this is done by adding &lt;code&gt;votingapp.local &amp;lt;votingapp_web-vote-app_1-public-ip&amp;gt;&lt;/code&gt; to &lt;code&gt;/private/etc/hosts&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;On most Linux machines this is done by adding &lt;code&gt;votingapp.local &amp;lt;votingapp_web-vote-app_1-public-ip&amp;gt;&lt;/code&gt; to &lt;code&gt;/etc/hosts&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Be sure to replace &lt;code&gt;&amp;lt;votingapp_web-vote-app_1-public-ip&amp;gt;&lt;/code&gt; with the public IP address of
+your &lt;code&gt;votingapp_web-vote-app_1&lt;/code&gt; node. You can find the &lt;code&gt;votingapp_web-vote-app_1&lt;/code&gt; node&amp;rsquo;s Public IP by
+selecting the node from within the UCP dashboard.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Verify the mapping worked with a &lt;code&gt;ping&lt;/code&gt; command from your local machine.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ping votingapp.local
+Pinging votingapp.local [54.183.164.230] with 32 bytes of data:
+Reply from 54.183.164.230: bytes=32 time=164ms TTL=42
+Reply from 54.183.164.230: bytes=32 time=163ms TTL=42
+Reply from 54.183.164.230: bytes=32 time=169ms TTL=42
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Point your web browser to &lt;code&gt;http://votingapp.local&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../ucp/images/vote-app-test.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Deploy an app from the UI</title>
+      <link>http://docs-stage.docker.com/ucp/applications/deploy-app-ui/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/ucp/applications/deploy-app-ui/</guid>
+      <description>
+
+&lt;h1 id=&#34;deploy-an-app-from-the-ui&#34;&gt;Deploy an app from the UI&lt;/h1&gt;
+
+&lt;p&gt;With Docker Universal Control Plane you can deploy applications from the
+UI. You can define your application on the UI, or import an existing
+docker-compose.yml file.&lt;/p&gt;
+
+&lt;p&gt;In this example, we&amp;rsquo;re going to deploy a WordPress application.&lt;/p&gt;
+
+&lt;h2 id=&#34;deploy-wordpress&#34;&gt;Deploy WordPress&lt;/h2&gt;
+
+&lt;p&gt;On your browser, &lt;strong&gt;log in&lt;/strong&gt; to UCP, and navigate to the &lt;strong&gt;Applications&lt;/strong&gt; page.
+There, click the &lt;strong&gt;Compose Application&lt;/strong&gt; button, to deploy a new application.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../ucp/images/deploy-app-ui-1.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The WordPress application we&amp;rsquo;re going to deploy is composed of two services:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;wordpress: The container that runs Apache, PHP, and WordPress.&lt;/li&gt;
+&lt;li&gt;db: A MariaDB database used for data persistence.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- would be better if this was a docker-compose v2 file--&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yml&#34;&gt;wordpress:
+  image: wordpress
+  links:
+    - db:mysql
+  ports:
+    - 8080:80
+
+db:
+  image: mariadb
+  environment:
+    MYSQL_ROOT_PASSWORD: example
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Copy-paste the application definition to UCP, and name it &amp;lsquo;wordpress&amp;rsquo;.
+You can also upload a docker-compose.yml file from your machine, by clicking on
+the &amp;lsquo;Upload an existing docker-compose.yml&amp;rsquo; link.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../ucp/images/deploy-app-ui-2.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click the &lt;strong&gt;Create&lt;/strong&gt; button, to create the WordPress application.&lt;/p&gt;
+
+&lt;p&gt;Once UCP deploys the WordPress application, you can
+&lt;strong&gt;click on the wordpress_wordpress_1&lt;/strong&gt; container, to see its details.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../ucp/images/deploy-app-ui-3.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In the container details page, search for the &lt;strong&gt;Ports&lt;/strong&gt; the container is
+exposing.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../ucp/images/deploy-app-ui-4.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In this example, WordPress can be accessed at &lt;code&gt;192.168.99.106:8080&lt;/code&gt;.
+Navigate to this address in your browser, to start using the WordPress app you
+just deployed.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../ucp/images/deploy-app-ui-5.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;limitations&#34;&gt;Limitations&lt;/h2&gt;
+
+&lt;p&gt;There are some limitations when deploying application on the UI. You can&amp;rsquo;t
+reference any external files, so the following Docker Compose keywords are not
+supported:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;build&lt;/li&gt;
+&lt;li&gt;dockerfile&lt;/li&gt;
+&lt;li&gt;env_file&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;../ucp/images/deploy-app-ui-6.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;To overcome these limitations, you can
+&lt;a href=&#34;../ucp/applications/deploy-app-cli/&#34;&gt;deploy your apps from the CLI&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Also, UCP doesn&amp;rsquo;t store the compose file used to deploy the application. You can
+use your version control system to persist that file.&lt;/p&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../ucp/applications/deploy-app-cli/&#34;&gt;Deploy an app from the CLI&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Evaluate UCP in a sandbox</title>
+      <link>http://docs-stage.docker.com/ucp/install-sandbox/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/ucp/install-sandbox/</guid>
+      <description>
+
+&lt;h1 id=&#34;evaluate-ucp-in-a-sandbox&#34;&gt;Evaluate UCP in a sandbox&lt;/h1&gt;
+
+&lt;p&gt;This page helps you to learn about Docker Universal Control Plane (UCP) at a
+high-level through installing and running UCP in your local, sandbox
+installation. The installation should be done on a Mac OS X or Windows system.
+If you are experienced with Linux or a technical DevOps user wanting a technical
+deep dive, please feel free to skip this evaluation and go directly to
+&lt;a href=&#34;../ucp/installation/plan-production-install/&#34;&gt;Plan a production installation&lt;/a&gt;
+and then to &lt;a href=&#34;../ucp/installation/install-production/&#34;&gt;Install UCP for production&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;A UCP installation consists of an UCP controller and one or more hosts. These
+instructions use Docker Machine, Docker&amp;rsquo;s provisioning tool, to create several
+local hosts running Docker Engine. Once you create these hosts, you&amp;rsquo;ll install
+UCP and its components on them just as you would in a full-on UCP installation.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: This evaluation installs UCP on top of the open source software version of
+Docker Engine inside of a VirtualBox VM which is running the small-footprint
+&lt;code&gt;boot2docker.iso&lt;/code&gt; Linux. Such a configuration is &lt;strong&gt;not&lt;/strong&gt; supported for UCP in
+production.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;step-1-about-this-example&#34;&gt;Step 1. About this example&lt;/h2&gt;
+
+&lt;p&gt;This example introduces you to UCP by means of a very simple sandbox example.
+You&amp;rsquo;ll create a small UCP installation, deploy a container through UCP, and
+examine the interface.&lt;/p&gt;
+
+&lt;p&gt;For this evaluation installation, you&amp;rsquo;ll use Machine to create two VirtualBox
+VMs. Each VM runs small foot-print Linux image called &lt;code&gt;boot2docker.iso&lt;/code&gt;. Machine
+provisions each VM with the open source Docker Engine.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../ucp/images/explain.png&#34; alt=&#34;Explain setup&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You&amp;rsquo;ll use each of these VMs as a node in a simple UCP installation. The
+installation will have a controller and a node. The installation rests on top of
+a Docker Swarm cluster. The UCP installation process by default secures the cluster via self-signed TLS certificates.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../ucp/images/sandbox.png&#34; alt=&#34;Sandbox&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This example is intended as an introduction for non-technical users wanting to
+explore UCP for themselves. If you are a highly technical user intending to act as
+UCP administration operator, you may prefer to skip this and go straight to
+&lt;a href=&#34;../ucp/installation/plan-production-install/&#34;&gt;Plan a production installation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The command examples in this page were tested for a Mac OSX environment.
+If you are in another, you may need to adjust the commands to use analogous
+commands for you environment.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;step-2-verify-the-prerequisites&#34;&gt;Step 2. Verify the prerequisites&lt;/h2&gt;
+
+&lt;p&gt;Because Docker Engine and UCP both rely on Linux-specific features, you can&amp;rsquo;t
+run natively in Mac or Windows. Instead, you must install the Docker Toolbox
+application. The application installs a VirtualBox Virtual Machine (VM), the
+Docker Engine itself, and the Docker Toolbox management tool. These tools enable
+you to run Engine CLI commands from your Mac OS X or Windows shell.&lt;/p&gt;
+
+&lt;p&gt;Your Mac must be running OS X 10.8 &amp;ldquo;Mountain Lion&amp;rdquo; or higher to perform this
+procedure. To check your Mac OS X version, see &lt;a href=&#34;https://docs.docker.com/mac/step_one/&#34; target=&#34;_blank&#34;&gt;the Docker Engine getting started on Mac&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;On Windows, your machine must have a 64-bit operating system running
+Windows 7 or higher. Additionally, you must make sure that virtualization is
+enabled on your machine. For information on how to check for virtualization, see &lt;a href=&#34;https://docs.docker.com/windows/step_one/&#34; target=&#34;_blank&#34;&gt;the Docker Engine getting started on Windows&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you haven&amp;rsquo;t already done so, make you have installed Docker Toolbox on your local &lt;a href=&#34;https://docs.docker.com/engine/installation/mac/&#34; target=&#34;_blank&#34;&gt;Mac OS X&lt;/a&gt; or &lt;a href=&#34;https://docs.docker.com/engine/installation/windows/&#34; target=&#34;_blank&#34;&gt;Windows machine&lt;/a&gt;.  After a successful installation, continue to the next step.&lt;/p&gt;
+
+&lt;h2 id=&#34;step-3-provision-hosts-with-engine&#34;&gt;Step 3. Provision hosts with Engine&lt;/h2&gt;
+
+&lt;p&gt;In this step, you provision two VMs for your UCP installation. This step is
+purely to enable your evaluation. You would never run UCP in production on local
+VMs with the open source Engine.&lt;/p&gt;
+
+&lt;p&gt;In a production installation, you would use enterprise-grade Linux servers as
+your nodes. These nodes could be on your company&amp;rsquo;s private network or in the
+cloud.  UCP requires that each node be installed with the Commercially Supported
+Docker Engine (CS Engine).&lt;/p&gt;
+
+&lt;p&gt;Set up the nodes for your evaluation:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Open a terminal on your computer.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Use Docker Machine to list any VMs in VirtualBox.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine ls
+NAME         ACTIVE   DRIVER       STATE     URL                         SWARM
+default    *        virtualbox   Running   tcp://192.168.99.100:2376  
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create a VM named &lt;code&gt;node1&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;UCP runs best with a minimum of 1.50 GB in memory and requires a minimum of
+3.00 GB disk space. When you create your virtual host, you supply options to
+size it appropriately.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine create -d virtualbox \
+--virtualbox-memory &amp;quot;2000&amp;quot; \
+--virtualbox-disk-size &amp;quot;5000&amp;quot; node1
+Running pre-create checks...
+Creating machine...
+(node1) Copying /Users/mary/.docker/machine/cache/boot2docker.iso to /Users/mary/.docker/machine/machines/node1/boot2docker.iso...
+(node1) Creating VirtualBox VM...
+(node1) Creating SSH key...
+(node1) Starting the VM...
+(node1) Waiting for an IP...
+Waiting for machine to be running, this may take a few minutes...
+Machine is running, waiting for SSH to be available...
+Detecting operating system of created instance...
+Detecting the provisioner...
+Provisioning with boot2docker...
+Copying certs to the local machine directory...
+Copying certs to the remote machine...
+Setting Docker configuration on the remote daemon...
+Checking connection to Docker...
+Docker is up and running!
+To see how to connect Docker to this machine, run: docker-machine env node1
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create a VM named &lt;code&gt;node2&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine create -d virtualbox \
+--virtualbox-memory &amp;quot;2000&amp;quot; node2
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Use the Machine &lt;code&gt;ls&lt;/code&gt; command to list your hosts.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;NAME         ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER    ERRORS
+node1        -        virtualbox   Running   tcp://192.168.99.104:2376           v1.10.0   
+node2        -        virtualbox   Running   tcp://192.168.99.102:2376           v1.10.0   
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;At this point, all the nodes are in the &lt;code&gt;Running&lt;/code&gt; state. You have your hosts provisioned, now you are ready to install UCP itself.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;step-4-learn-about-the-ucp-tool&#34;&gt;Step 4. Learn about the ucp tool&lt;/h2&gt;
+
+&lt;p&gt;You install UCP by using the Engine CLI to run the &lt;code&gt;ucp&lt;/code&gt; tool. The &lt;code&gt;ucp&lt;/code&gt; tool is
+an image with subcommands to &lt;code&gt;install&lt;/code&gt; a UCP controller or &lt;code&gt;join&lt;/code&gt; a node to a
+UCP controller. The general format of these commands are:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;Docker client&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;&lt;code&gt;run&lt;/code&gt; command with options&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;&lt;code&gt;ucp&lt;/code&gt; image&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Subcommand with options&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;docker&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;run --rm -it&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;docker/ucp&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;install --help&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;docker&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;run --rm -it&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;docker/ucp&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;join --help&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;docker&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;run --rm -it&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;docker/ucp&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;uninstall --help&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;You can these subcommands interactively by passing them the &lt;code&gt;-i&lt;/code&gt; option or by
+passing command-line options. The &lt;code&gt;ucp&lt;/code&gt; tool is designed to make UCP easier to
+install than many enterprise-grade applications. In interactive mode the tool
+works to discover your network topology and suggest default answers to you. This
+evaluation uses the interactive method.&lt;/p&gt;
+
+&lt;p&gt;Regardless of how you use the &lt;code&gt;docker/ucp&lt;/code&gt; tool, the default install supplies
+some quick default options for both data volumes and the certificate authority
+(CA). In a production installation you can optionally:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;use the high availability feature&lt;/li&gt;
+&lt;li&gt;customize the port used by the UCP web application&lt;/li&gt;
+&lt;li&gt;customize the port used by the Swarm manager&lt;/li&gt;
+&lt;li&gt;create your own data volumes&lt;/li&gt;
+&lt;li&gt;use your own TLS certificates&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You&amp;rsquo;ll learn more about these when you &lt;a
+href=&#34;https://docs.docker.com/ucp/plan-production-install/&#34; target=&#34;_blank&#34;&gt;Plan
+a production installation&lt;/a&gt;. For now, in this evaluation sandbox installation,
+you&amp;rsquo;ll use all the default values with one exception, you&amp;rsquo;ll specify a custom
+port for the Swarm manager.&lt;/p&gt;
+
+&lt;h2 id=&#34;step-5-install-the-ucp-controller&#34;&gt;Step 5. Install the UCP controller&lt;/h2&gt;
+
+&lt;p&gt;In this step, you install the UCP controller on the &lt;code&gt;node1&lt;/code&gt; you provisioned
+earlier. A controller serves the UCP application and runs the processes that
+manage an installation&amp;rsquo;s Docker objects.&lt;/p&gt;
+
+&lt;p&gt;In a production installation, a system administrator can implement
+UCP&amp;rsquo;s high availability feature. High availability allows you to designate
+several nodes as controller replicas. In this way, if one controller fails
+a replica node is ready to take its place.&lt;/p&gt;
+
+&lt;p&gt;For this evaluation, you won&amp;rsquo;t need that level of robustness. A single
+host for the controller suffices.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;If you don&amp;rsquo;t already have one, open a terminal on your computer.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Connect the terminal environment to the &lt;code&gt;node1&lt;/code&gt; you created.&lt;/p&gt;
+
+&lt;p&gt;a. Use &lt;code&gt;docker-machine env&lt;/code&gt; command to get the settings.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine env node1
+export DOCKER_TLS_VERIFY=&amp;quot;1&amp;quot;
+export DOCKER_HOST=&amp;quot;tcp://192.168.99.103:2376&amp;quot;
+export DOCKER_CERT_PATH=&amp;quot;/Users/mary/.docker/machine/machines/node1&amp;quot;
+export DOCKER_MACHINE_NAME=&amp;quot;node1&amp;quot;
+# Run this command to configure your shell:
+# eval $(docker-machine env node1)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;b. Run the &lt;code&gt;eval&lt;/code&gt; command to set your environment.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ eval $(docker-machine env node1)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;c. Verify that &lt;code&gt;node1&lt;/code&gt; has an active environment.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine ls
+NAME         ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER    ERRORS
+node1        *        virtualbox   Running   tcp://192.168.99.104:2376           v1.10.0   
+node2        -        virtualbox   Running   tcp://192.168.99.102:2376           v1.10.0   
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;An &lt;code&gt;*&lt;/code&gt; (asterisk) in the &lt;code&gt;ACTIVE&lt;/code&gt; field indicates that the &lt;code&gt;node1&lt;/code&gt; environment is active.&lt;/p&gt;
+
+&lt;p&gt;The client will send the &lt;code&gt;docker&lt;/code&gt; commands in the following steps to the Docker Engine on on &lt;code&gt;node1&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Start the &lt;code&gt;ucp&lt;/code&gt; tool to install interactively.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: If you are on a Windows system, your shell can&amp;rsquo;t resolve the
+&lt;code&gt;$(docker-machine ip node2)&lt;/code&gt; variable. So, replace it with the actual IP
+address.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run --rm -it \
+-v /var/run/docker.sock:/var/run/docker.sock \
+--name ucp docker/ucp install -i \
+--swarm-port 3376 --host-address $(docker-machine ip node1)
+Unable to find image &#39;docker/ucp:latest&#39; locally
+latest: Pulling from docker/ucp
+0198ad4008dc: Pull complete
+291084ae72f3: Pull complete
+Digest: sha256:28b6c9640e5af0caf2b2acbbbfd7c07bdbec6b170f04cbaeea7bb4909d74898d
+INFO[0000] Verifying your system is compatible with UCP
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The first time you run the &lt;code&gt;ucp&lt;/code&gt; tool, the &lt;code&gt;docker run&lt;/code&gt; command pulls its
+image from the Docker Hub. The image contains the &lt;code&gt;ucp&lt;/code&gt; tool. The tool
+downloads if needed and then verifies your system supports UCP. The tool is
+designed to discover the information it needs if it can. This reduces the
+change for human error or mistakes during the install.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Enter a UCP password when prompted and then confirm it.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Please choose your initial UCP admin password:
+Confirm your initial password:
+INFO[0016] Pulling required images... (this may take a while)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The UCP system relies on a set of Docker images running in containers. The &lt;code&gt;ucp&lt;/code&gt; installer gets the latest official UCP images.&lt;/p&gt;
+
+&lt;p&gt;The system prompts you for Subject alternative names (SANs). UCP requires
+that all clients, including the Docker Engine, use a Swarm TLS certificate
+chain signed by the UCP Swarm Root CA. You can provide the certificate
+system with subject alternative names or SANs. The SANs are used to set up
+individual &amp;ldquo;leaf certificates.&amp;rdquo; In this sandbox, you&amp;rsquo;ve already provided the IP address and the &lt;code&gt;ucp&lt;/code&gt; tool discovered this for you and shows it in the controller list.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;WARN[0004] None of the hostnames we&#39;ll be using in the UCP certificates
+[controller 127.0.0.1 172.17.0.1 192.168.99.106] contain a domain
+component.  Your generated certs may fail TLS validation unless you only
+use one of these shortnames or IPs to connect.  You can use the --san
+flag to add more aliases
+
+You may enter additional aliases (SANs) now or press enter to proceed
+with the above list.
+Additional aliases:
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Press enter to proceed with the list the &lt;code&gt;ucp&lt;/code&gt; tool provided.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;INFO[0005] Installing UCP with host address 192.168.99.106 - If this is
+incorrect, please specify an alternative address with the
+&#39;--host-address&#39; flag
+WARN[0000] None of the hostnames we&#39;ll be using in the UCP certificates
+[controller 127.0.0.1 172.17.0.1 192.168.99.106 192.168.99.106] contain
+a domain component.  Your generated certs may fail TLS validation unless
+you only use one of these shortnames or IPs to connect.  You can use the
+--san flag to add more aliases
+INFO[0001] Generating Swarm Root CA
+INFO[0022] Generating UCP Root CA
+INFO[0024] Deploying UCP Containers
+INFO[0028] UCP instance ID: CJQN:ZQVX:B6CC:KFD3:IXN5:FGLF:GXMN:WALD:QFHU:QLSX:ZCBY:CAL7
+INFO[0028] UCP Server SSL: SHA1 Fingerprint=02:36:16:93:B4:21:B7:AD:0A:6C:0F:3C:99:75:18:5D:5A:F7:C4:0C
+INFO[0028] Login as &amp;quot;admin&amp;quot;/(your admin password) to UCP at https://192.168.99.106:443
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When it completes, the &lt;code&gt;ucp&lt;/code&gt; tool prompts you to login into the UCP GUI
+gives you its location. You&amp;rsquo;ll do this and install a license in Step 5,
+below.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;step-6-license-your-installation&#34;&gt;Step 6. License your installation&lt;/h2&gt;
+
+&lt;p&gt;In this step, you log into UCP, get a license, and install it. Docker allows you to run an evaluation version of UCP with a single controller and node for up to 30 days.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Enter the address into your browser to view the UCP login screen.&lt;/p&gt;
+
+&lt;p&gt;Your browser may warn you about the connection. The warning appears because,
+in this evaluation installation, the UCP certificate was issued by a
+built-in certificate authority (CA). Your actions with the install actually
+created the certificate. If you are concerned, the certificate&amp;rsquo;s fingerprint
+is displayed during install and you can compare it.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click the &lt;strong&gt;Advanced&lt;/strong&gt; link and then the &lt;strong&gt;Proceed to&lt;/strong&gt; link.&lt;/p&gt;
+
+&lt;p&gt;The login screen displays.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../ucp/images/login-ani.gif&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Enter &lt;code&gt;admin&lt;/code&gt; for the username along with the password you provided to the &lt;code&gt;install&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;After you enter the correct credentials, the UCP dashboard prompts for a
+license.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../ucp/images/skip-this.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Press &lt;em&gt;Skip for now&lt;/em&gt; to continue to the dashboard.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../ucp/images/dashboard.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The dashboard shows a single node, your controller node. It also shows you a
+banner saying that you need a license.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Follow the link on the UCP &lt;strong&gt;Dashboard&lt;/strong&gt; to the Docker website to get a trial license.&lt;/p&gt;
+
+&lt;p&gt;You must fill out a short form. After you complete the form, you are prompted with some &lt;strong&gt;Installation Steps&lt;/strong&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Press &lt;strong&gt;Next&lt;/strong&gt; until you reach the &lt;strong&gt;Add License&lt;/strong&gt; step.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../ucp/images/get-license.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Press the &lt;strong&gt;Download License&lt;/strong&gt; button.&lt;/p&gt;
+
+&lt;p&gt;Your browser downloads a &lt;code&gt;docker_subscription.lic&lt;/code&gt; file.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Save the file to a safe location.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Return to the UCP Dashboard.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Choose &lt;strong&gt;Settings&lt;/strong&gt; from the &amp;ldquo;hamburger&amp;rdquo; menu on the left side.&lt;/p&gt;
+
+&lt;p&gt;As you move through UCP, the header changes to display the appropriate
+breadcrumbs. In this case you are on the &lt;strong&gt;Dashboard/Settings&lt;/strong&gt;* page.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Scroll down to the &lt;strong&gt;License&lt;/strong&gt; section and click &lt;strong&gt;Choose File&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Locate and upload your file.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../ucp/images/license.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Once you upload the file, the license message disappears from UCP.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Take a minute and explore UCP. At this point, you have a single controller
+running. How many nodes is that? What makes a controller is the containers it
+runs. Locate the Containers page and show the system containers on your
+controller. You&amp;rsquo;ll know you&amp;rsquo;ve succeeded if you see this list:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../ucp/images/controller-containers.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The containers reflect the architecture of UCP.  The containers are running
+Swarm, a key-value store process, and some containers with certificate volumes.
+Explore the other resources.&lt;/p&gt;
+
+&lt;h2 id=&#34;step-7-join-a-node&#34;&gt;Step 7. Join a node&lt;/h2&gt;
+
+&lt;p&gt;In this step, you join your UCP &lt;code&gt;node2&lt;/code&gt; to the controller using the &lt;code&gt;ucp join&lt;/code&gt;
+subcommand. In a UCP production installation, you&amp;rsquo;d do this step for each node
+you want to add.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;If you don&amp;rsquo;t already have one, open a terminal on your computer.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Connect the terminal environment to the &lt;code&gt;node2&lt;/code&gt; you provisioned earlier.&lt;/p&gt;
+
+&lt;p&gt;a. Use &lt;code&gt;docker-machine env&lt;/code&gt; command to get the settings.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine env node2
+export DOCKER_TLS_VERIFY=&amp;quot;1&amp;quot;
+export DOCKER_HOST=&amp;quot;tcp://192.168.99.104:2376&amp;quot;
+export DOCKER_CERT_PATH=&amp;quot;/Users/mary/.docker/machine/machines/node2&amp;quot;
+export DOCKER_MACHINE_NAME=&amp;quot;node2&amp;quot;
+# Run this command to configure your shell:
+# eval $(docker-machine env node2)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;b. Run the &lt;code&gt;eval&lt;/code&gt; command to set your environment.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ eval $(docker-machine env node2)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The client will send the &lt;code&gt;docker&lt;/code&gt; commands in the following steps to the Docker Engine on on &lt;code&gt;controller&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Run the &lt;code&gt;docker/ucp join&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: If you are on a Windows system, your shell can&amp;rsquo;t resolve the
+&lt;code&gt;$(docker-machine ip node2)&lt;/code&gt; variable. So, replace it with the actual IP
+address.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run --rm -it \
+-v /var/run/docker.sock:/var/run/docker.sock \
+--name ucp docker/ucp join -i \
+--host-address $(docker-machine ip node2)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;join&lt;/code&gt; pulls several images and prompts you for the UCL of the UCP Server.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Unable to find image &#39;docker/ucp:latest&#39; locally
+latest: Pulling from docker/ucp
+0198ad4008dc: Pull complete
+291084ae72f3: Pull complete
+Digest: sha256:28b6c9640e5af0caf2b2acbbbfd7c07bdbec6b170f04cbaeea7bb4909d74898d
+Status: Downloaded newer image for docker/ucp:latest
+Please enter the URL to your UCP Server:
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Enter the URL of your server to continue.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Orca server https://192.168.99.106
+Subject: ucp
+Issuer: UCP Root CA
+SHA1 Fingerprint=02:36:16:93:B4:21:B7:AD:0A:6C:0F:3C:99:75:18:5D:5A:F7:C4:0C
+Do you want to trust this server and proceed with the join? (y/n):
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The system prompts you to join the server.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Press &lt;code&gt;y&lt;/code&gt; to continue and the tool prompts you for the username and password for your UCP server.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Please enter your UCP Admin username: admin
+Please enter your UCP Admin password:
+INFO[0027] Pulling required images... (this may take a while)
+WARN[0070] None of the hostnames we&#39;ll be using in the UCP certificates [node1 127.0.0.1 172.17.0.1 192.168.99.108] contain a domain component.  Your generated certs may fail TLS validation unless you only use one of these shortnames or IPs to connect.  You can use the --san flag to add more aliases
+You may enter additional aliases (SANs) now or press enter to proceed with the above list.
+Additional aliases:
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The system continues and prompts you for SANs. In this sandbox, you&amp;rsquo;ve already provided the IP address and the &lt;code&gt;ucp&lt;/code&gt; tool discovered this for you and shows it in the controller list.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Press enter to proceed without providing a SAN.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;WARN[0000] None of the hostnames we&#39;ll be using in the UCP certificates
+[node1 127.0.0.1 172.17.0.1 192.168.99.108 192.168.99.108] contain a
+domain component.  Your generated certs may fail TLS validation unless you
+only use one of these shortnames or IPs to connect.  You can use the --san
+flag to add more aliases        
+INFO[0000] This engine will join UCP and advertise itself with host
+address 192.168.99.108 - If this is incorrect, please specify an
+alternative address with the &#39;--host-address&#39; flag  
+INFO[0000] Verifying your system is compatible with UCP
+INFO[0011] Starting local swarm containers   ’
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Login into UCP with your browser and check to make sure your new node appears.&lt;/p&gt;
+
+&lt;p&gt;The page should display your new node.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../ucp/images/nodes.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;step-8-deploy-a-container&#34;&gt;Step 8. Deploy a container&lt;/h2&gt;
+
+&lt;p&gt;UCP allows you to deploy and manage &amp;ldquo;Dockerized&amp;rdquo; applications in production. An
+application is built up using Docker objects, such as images and containers, and
+Docker resources, such as volumes and networks.&lt;/p&gt;
+
+&lt;p&gt;UCP deploys and manages these objects and resources using remote API calls the
+Engine daemons running on the nodes. For example, the &lt;code&gt;run&lt;/code&gt; action may deploy an
+image in a Docker container. That image might define a service such as an Nginix
+web server or a database like Postgres.&lt;/p&gt;
+
+&lt;p&gt;A UCP operator initiates Engine actions through the UCP dashboard or through the
+Docker Engine CLI. In this step, you deploy a container through the UCP
+dashboard.  The container will run an Nginx server, so you&amp;rsquo;ll need to launch the
+&lt;code&gt;nginx&lt;/code&gt; image inside of it.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Log into the UCP &lt;strong&gt;Dashboard&lt;/strong&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click &lt;strong&gt;Containers&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;The system displays the &lt;strong&gt;Containers&lt;/strong&gt; page. UCP runs some containers that
+support its own operations. These are called &amp;ldquo;system&amp;rdquo; containers and they
+are hidden by default.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click &lt;strong&gt;+ Deploy Container&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;The system displays a dialog with several fields. Using the dialog requires some basic knowledge of Docker objects and their attributes. A UCP admin or operator would typically have this knowledge.  For now, you&amp;rsquo;ll just follow along.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Enter &lt;code&gt;nginx&lt;/code&gt; for the image name.&lt;/p&gt;
+
+&lt;p&gt;An image is simply predefined software you want to run. The software might
+be an actual standalone application or maybe some component software necessary
+to support a complex service.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Enter &lt;code&gt;nginx_server&lt;/code&gt; for the container name.&lt;/p&gt;
+
+&lt;p&gt;This name just identifies the container on your network.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click &lt;strong&gt;Publish Ports&lt;/strong&gt; from the &lt;strong&gt;Overview&lt;/strong&gt; menu.&lt;/p&gt;
+
+&lt;p&gt;A Docker container, like it sounds, is securely isolated from other processes on your network. In fact, the container has its own internal network configuration. If you want to access to a service inside a container, you need to expose a container&amp;rsquo;s port. This container port maps to a port on the node. The node is hosting an instance of Docker Engine, so its port is called the &lt;strong&gt;Host Port&lt;/strong&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Enter &lt;code&gt;443&lt;/code&gt; in the &lt;strong&gt;Port&lt;/strong&gt; and in the &lt;strong&gt;Host Port&lt;/strong&gt; field.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Use the plus sign to add another &lt;strong&gt;Port&lt;/strong&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;For this port, enter &lt;code&gt;80&lt;/code&gt; in the &lt;strong&gt;Port&lt;/strong&gt; and &lt;strong&gt;Host Port&lt;/strong&gt; field.&lt;/p&gt;
+
+&lt;p&gt;When you are done, your dialog looks like the following:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../ucp/images/port_config.png&#34; alt=&#34;Port configuration&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click &lt;strong&gt;Run Container&lt;/strong&gt; to deploy your container.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../ucp/images/display_container.png&#34; alt=&#34;Deployed&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;step-9-view-a-running-service&#34;&gt;Step 9. View a running service&lt;/h2&gt;
+
+&lt;p&gt;At this point, you have deployed a container and you should see the application running. Recall that you deployed an Nginx web server. That server comes with a default page. In this step, you open the running server.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Make sure you are still on the &lt;strong&gt;Containers&lt;/strong&gt; page.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Select the edit icon on the container.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../ucp/images/container_edit.png&#34; alt=&#34;Edit&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The system displays the container&amp;rsquo;s details and some operations you can run on the container.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Scroll down to the ports section.&lt;/p&gt;
+
+&lt;p&gt;You&amp;rsquo;ll see an IP address with port &lt;code&gt;80&lt;/code&gt; for the server.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Copy the IP address to your browser and paste the information you copied.&lt;/p&gt;
+
+&lt;p&gt;You should see the welcome message for nginx.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../ucp/images/welcome_nginx.png&#34; alt=&#34;Port 80&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;step-10-download-a-client-bundle&#34;&gt;Step 10. Download a client bundle&lt;/h2&gt;
+
+&lt;p&gt;In this step, you download the &lt;em&gt;client bundle&lt;/em&gt;. Each node in your UCP cluster is running Engine. A UCP operator can use the Engine CLI client instead of UCP to interact with the Docker objects and resources UCP manages. To issue commands to a UCP node, your local shell environment must be configured with the same security certificates as the UCP application itself.  The client bundle contains the certificates and a script to configure a shell environment.&lt;/p&gt;
+
+&lt;p&gt;Download the bundle and configure your environment.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;If you haven&amp;rsquo;t already done so, log into UCP.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Choose &lt;strong&gt;admin &amp;gt; Profile&lt;/strong&gt; from the right-hand menu.&lt;/p&gt;
+
+&lt;p&gt;Any user can download their certificates. So, if you were logged in under a user name such as &lt;code&gt;davey&lt;/code&gt; the path to download bundle is &lt;strong&gt;davey &amp;gt; Profile&lt;/strong&gt;. Since you are logged in as &lt;code&gt;admin&lt;/code&gt;, the path is &lt;code&gt;admin&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click &lt;strong&gt;Create Client Bundle&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;The browser downloads the &lt;code&gt;ucp-bundle-admin.zip&lt;/code&gt; file.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Open a new shell on your local machine.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make sure your shell is does not have an active Docker Machine host.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine ls
+NAME    ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER    ERRORS
+moxie   -        virtualbox   Stopped                                       Unknown   
+test    -        virtualbox   Running   tcp://192.168.99.100:2376           v1.10.1  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;While Machine has a stopped and running host, neither is active in the shell. You know this because neither host shows an * (asterisk) indicating the shell is configured.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create a directory to hold the deploy information.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ mkdir deploy-app
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Navigate to where the bundle was downloaded, and unzip the client bundle&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    $ unzip bundle.zip
+    Archive:  bundle.zip
+    extracting: ca.pem
+    extracting: cert.pem
+    extracting: key.pem
+    extracting: cert.pub
+    extracting: env.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Change into the directory that was created when the bundle was unzipped&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Execute the &lt;code&gt;env.sh&lt;/code&gt; script to set the appropriate environment variables for your UCP deployment.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    $ source env.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you are on Windows, you may need to set the environment variables manually.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Run &lt;code&gt;docker info&lt;/code&gt; to examine the UCP deployment.&lt;/p&gt;
+
+&lt;p&gt;Your output should show that you are managing UCP vs. a single node.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker info
+Containers: 12
+ Running: 0
+ Paused: 0
+ Stopped: 0
+Images: 17
+Role: primary
+Strategy: spread
+Filters: health, port, dependency, affinity, constraint
+Nodes: 2
+ node1: 192.168.99.106:12376
+  └ Status: Healthy
+  └ Containers: 9
+  └ Reserved CPUs: 0 / 1
+  └ Reserved Memory: 0 B / 3.01 GiB
+  └ Labels: executiondriver=native-0.2, kernelversion=4.1.17-boot2docker, operatingsystem=Boot2Docker 1.10.0 (TCL 6.4.1); master : b09ed60 - Thu Feb  4 20:16:08 UTC 2016, provider=virtualbox, storagedriver=aufs
+  └ Error: (none)
+  └ UpdatedAt: 2016-02-09T12:03:16Z
+ node2: 192.168.99.107:12376
+  └ Status: Healthy
+  └ Containers: 3
+  └ Reserved CPUs: 0 / 1
+  └ Reserved Memory: 0 B / 4.956 GiB
+  └ Labels: executiondriver=native-0.2, kernelversion=4.1.17-boot2docker, operatingsystem=Boot2Docker 1.10.0 (TCL 6.4.1); master : b09ed60 - Thu Feb  4 20:16:08 UTC 2016, provider=virtualbox, storagedriver=aufs
+  └ Error: (none)
+  └ UpdatedAt: 2016-02-09T12:03:11Z
+Cluster Managers: 1
+ 192.168.99.106: Healthy
+  └ Orca Controller: https://192.168.99.106:443
+  └ Swarm Manager: tcp://192.168.99.106:3376
+  └ KV: etcd://192.168.99.106:12379
+Plugins:
+ Volume:
+ Network:
+CPUs: 2
+Total Memory: 7.966 GiB
+Name: ucp-controller-node1
+ID: P5QI:ZFCX:ELZ6:RX2F:ADCT:SJ7X:LAMQ:AA4L:ZWGR:IA5V:CXDE:FTT2
+WARNING: No oom kill disable support
+WARNING: No cpu cfs quota support
+WARNING: No cpu cfs period support
+WARNING: No cpu shares support
+WARNING: No cpuset support
+Labels:
+ com.docker.ucp.license_key=p3vPAznHhbitGG_KM36NvCWDiDDEU7aP_Y9z4i7V4DNb
+ com.docker.ucp.license_max_engines=1
+ com.docker.ucp.license_expires=2016-11-11 00:53:53 +0000 UTC
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;step-11-deploy-with-the-cli&#34;&gt;Step 11. Deploy with the CLI&lt;/h2&gt;
+
+&lt;p&gt;In this exercise, you&amp;rsquo;ll launch another Nginx container. Only this time, you&amp;rsquo;ll use the Engine CLI. Then, you&amp;rsquo;ll look at the result in the UCP dashboard.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Connect the terminal environment to the &lt;code&gt;node2&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ eval &amp;quot;$(docker-machine env node2)&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Change to your user &lt;code&gt;$HOME&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd $HOME
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make a &lt;code&gt;site&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ mkdir site
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Change into the &lt;code&gt;site&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd site
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create an &lt;code&gt;index.html&lt;/code&gt; file.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ echo &amp;quot;my new site&amp;quot; &amp;gt; index.html
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Start a new &lt;code&gt;nginx&lt;/code&gt; container and replace the &lt;code&gt;html&lt;/code&gt; folder with your &lt;code&gt;site&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -d -P -v $HOME/site:/usr/share/nginx/html --name mysite nginx
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This command runs an &lt;code&gt;nginx&lt;/code&gt; image in a container called &lt;code&gt;mysite&lt;/code&gt;. The &lt;code&gt;-P&lt;/code&gt; tells the Engine to expose all the ports on the container.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Open the UCP dashboard in your browser.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Navigate to the &lt;strong&gt;Containers&lt;/strong&gt; page and locate your &lt;code&gt;mysite&lt;/code&gt; container.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../ucp/images/second_node.png&#34; alt=&#34;mysite&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Scroll down to the ports section.&lt;/p&gt;
+
+&lt;p&gt;You&amp;rsquo;ll see an IP address with port &lt;code&gt;80/tcp&lt;/code&gt; for the server. This time, you&amp;rsquo;ll
+find that the port mapped on this container than the one created yourself.
+That&amp;rsquo;s because the command didn&amp;rsquo;t explicitly map a port, so the Engine chose
+mapped the default Nginx port &lt;code&gt;80&lt;/code&gt; inside the container to an arbitrary port
+on the node.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Copy the IP address to your browser and paste the information you copied.&lt;/p&gt;
+
+&lt;p&gt;You should see your &lt;code&gt;index.html&lt;/code&gt; file display instead of the standard Nginx welcome.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../ucp/images/second_node.png&#34; alt=&#34;mysite&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;explore-ucp&#34;&gt;Explore UCP&lt;/h2&gt;
+
+&lt;p&gt;At this point, you&amp;rsquo;ve completed the guided tour of a UCP installation. You&amp;rsquo;ve
+learned how to create a UCP installation by creating two nodes and designating
+one of them as a controller. You&amp;rsquo;ve created a container running a simple web
+server both using UCP and directly on the command line.  You used UCP to get
+information about what you created.&lt;/p&gt;
+
+&lt;p&gt;In a real UCP production installation, UCP admins and operators are expected to
+do similar work every day. While the applications they launch will be more
+complicated, the interaction channels a user can take, the GUI or the
+certificate bundle plus a command line, remain the same.&lt;/p&gt;
+
+&lt;p&gt;Take some time to explore UCP some more. Investigate the documentation for other
+activities you can perform with UCP.&lt;/p&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to Go Next&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../ucp/architecture/&#34;&gt;UCP architecture&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../ucp/installation/system-requirements/&#34;&gt;UCP system requirements&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Get support</title>
+      <link>http://docs-stage.docker.com/ucp/support/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/ucp/support/</guid>
+      <description>
+
+&lt;h1 id=&#34;get-support&#34;&gt;Get support&lt;/h1&gt;
+
+&lt;p&gt;Your Docker Data Center, or Universal Control Plane subscription gives you
+access to prioritized support. The service levels depend on your subscription.&lt;/p&gt;
+
+&lt;p&gt;If you need help, you can file a ticket via:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;mailto:support@docker.com&#34;&gt;Email&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://support.docker.com/&#34;&gt;Docker support page&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Be sure to use your company email when filing tickets.&lt;/p&gt;
+
+&lt;h2 id=&#34;download-a-support-dump&#34;&gt;Download a support dump&lt;/h2&gt;
+
+&lt;p&gt;Docker Support engineers may ask you to provide a UCP support dump. For this:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Log into UCP with an administrator account.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;On the top-right menu, &lt;strong&gt;click your username&lt;/strong&gt;, and choose &lt;strong&gt;Support Dump&lt;/strong&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>High-availability</title>
+      <link>http://docs-stage.docker.com/ucp/high-availability/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/ucp/high-availability/</guid>
+      <description>
+
+&lt;h1 id=&#34;configure-ucp-for-high-availability&#34;&gt;Configure UCP for high availability&lt;/h1&gt;
+
+&lt;p&gt;This section includes the following topics:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../ucp/high-availability/set-up-high-availability/&#34;&gt;Set up high availability&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../ucp/high-availability/replicate-cas/&#34;&gt;Replicate CAs for high availability&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../ucp/high-availability/backups-and-disaster-recovery/&#34;&gt;Backups and disaster recovery&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Install UCP for production</title>
+      <link>http://docs-stage.docker.com/ucp/installation/install-production/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/ucp/installation/install-production/</guid>
+      <description>
+
+&lt;h1 id=&#34;install-ucp-for-production&#34;&gt;Install UCP for production&lt;/h1&gt;
+
+&lt;p&gt;Docker Universal Control Plane (UCP) is a containerized application that can be
+installed on-premises or on a cloud infrastructure.&lt;/p&gt;
+
+&lt;p&gt;If you&amp;rsquo;re installing Docker Datacenter on Azure, &lt;a href=&#34;https://success.docker.com/?cid=ddc-on-azure&#34;&gt;follow this guide&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;step-1-validate-the-system-requirements&#34;&gt;Step 1: Validate the system requirements&lt;/h2&gt;
+
+&lt;p&gt;The first step in installing UCP, is ensuring your
+infrastructure has all the &lt;a href=&#34;../ucp/installation/system-requirements/&#34;&gt;requirements UCP needs to run&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;step-2-install-cs-docker-on-all-nodes&#34;&gt;Step 2: Install CS Docker on all nodes&lt;/h2&gt;
+
+&lt;p&gt;UCP requires you to install Docker CS Engine 1.10 or above on all nodes of
+your UCP cluster.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://docs.docker.com/docker-trusted-registry/cs-engine/install/&#34;&gt;Install CS Docker Engine&lt;/a&gt;
+on each host that you want to be part of the UCP cluster.&lt;/p&gt;
+
+&lt;h2 id=&#34;step-3-customize-named-volumes&#34;&gt;Step 3: Customize named volumes&lt;/h2&gt;
+
+&lt;p&gt;Docker UCP uses &lt;a href=&#34;../ucp/architecture/&#34;&gt;named volumes&lt;/a&gt; to persist data. If you want
+to customize the volume drivers and flags of these volumes, you can create the
+volumes before installing UCP.&lt;/p&gt;
+
+&lt;p&gt;If the volumes don&amp;rsquo;t exist, when installing UCP they are created with the
+default volume driver and flags.&lt;/p&gt;
+
+&lt;h2 id=&#34;step-4-customize-the-ca-used&#34;&gt;Step 4: Customize the CA used&lt;/h2&gt;
+
+&lt;p&gt;The UCP cluster uses TLS to secure all communications. Two Certificate
+Authorities (CA) are used for this:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Cluster root CA: generates certificates for new nodes joining the cluster and
+admin user bundles.&lt;/li&gt;
+&lt;li&gt;Client root CA: generates non-admin user bundles.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You can customize UCP to use certificates signed by an external Certificate
+Authority. These certificates are used instead of the ones generated by the
+client root CA. That way you can use a certificate from a CA that your
+browsers and client tools already trust.&lt;/p&gt;
+
+&lt;p&gt;If you want to use your own certificates:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Log into the host where you intend to instal UCP.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create a volume with the name &lt;code&gt;ucp-controller-server-certs&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Add the following files to the volume top-level directory:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;File&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;ca.pem&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Your root CA certificate.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;cert.pem&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Your signed UCP controller certificate followed by any intermediate certificates.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;key.pem&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Your UCP controller private key.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;step-5-install-the-ucp-controller&#34;&gt;Step 5: Install the UCP controller&lt;/h2&gt;
+
+&lt;p&gt;To install UCP you use the &lt;code&gt;docker/ucp&lt;/code&gt; image. This image has commands to
+install, configure, and backup UCP. To find what commands and options are
+available, check the &lt;a href=&#34;../ucp/reference/install/&#34;&gt;reference documentation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;To install UCP:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Log in to the machine where you want to install UCP.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Use the &lt;code&gt;docker/ucp install&lt;/code&gt; command to install UCP.&lt;/p&gt;
+
+&lt;p&gt;In this example we&amp;rsquo;ll be running the install command interactively, so that
+the command prompts for the necessary configuration values.
+You can also use flags to pass values to the install command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ docker run --rm -it --name ucp \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  docker/ucp install -i \
+  --host-address &amp;lt;$UCP_PUBLIC_IP&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Where:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;i, specify to run the install command interactively,&lt;/li&gt;
+&lt;li&gt;host-address, is the public IP where users or a load balancer can access
+UCP,&lt;/li&gt;
+&lt;li&gt;Also, include the &lt;code&gt;--external-server-cert&lt;/code&gt; flag if you&amp;rsquo;re using server
+certificates signed by an external CA.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;/br&gt;
+When installing Docker UCP, overlay networking is automatically configured
+for you. If you are running Docker CS Engine 1.10, or have custom
+configurations on your Docker CS Engine, you need to restart the Docker
+daemon at this point.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Check that the UCP web application is running.&lt;/p&gt;
+
+&lt;p&gt;In your browser, navigate to the address where you&amp;rsquo;ve installed UCP.&lt;/p&gt;
+
+&lt;p&gt;If you&amp;rsquo;re not using an external CA, your browser warns that UCP is
+an unsafe site. This happens because you&amp;rsquo;re accessing UCP using HTTPS
+but the certificates used by UCP are not trusted by your browser.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../ucp/images/login.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;step-6-license-your-installation&#34;&gt;Step 6: License your installation&lt;/h2&gt;
+
+&lt;p&gt;Now that your UCP controller is installed, you need to license it.
+&lt;a href=&#34;../ucp/installation/license/&#34;&gt;Learn how to license your installation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;step-7-backup-the-controller-cas&#34;&gt;Step 7: Backup the controller CAs&lt;/h2&gt;
+
+&lt;p&gt;For an highly available installation, you can add more controller nodes to
+the UCP cluster. The controller nodes are replicas of each other.
+&lt;a href=&#34;../ucp/high-availability/set-up-high-availability/&#34;&gt;Learn more about high-availability&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;For this, you need to make the CAs on each controller node use the same
+root certificates and keys.
+&lt;a href=&#34;../ucp/high-availability/replicate-cas/&#34;&gt;Learn how to replicate the CAs for high availability&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;This requires creating a backup of the controller for the purposes of
+replicating the root CA. Your backup command might look like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ docker run --rm -i --name ucp \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    docker/ucp backup --root-ca-only --interactive \
+    --passphrase &amp;quot;secret&amp;quot; &amp;gt; /tmp/backup.tar
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;--passphrase&lt;/code&gt; encrypts the backup with the provided passphrase; this is
+optional but recommended for security purposes.&lt;/p&gt;
+
+&lt;h2 id=&#34;step-8-add-controller-replicas-to-the-ucp-cluster&#34;&gt;Step 8: Add controller replicas to the UCP cluster&lt;/h2&gt;
+
+&lt;p&gt;This step is optional.&lt;/p&gt;
+
+&lt;p&gt;For an highly available installation, you can add more controller nodes to
+the UCP cluster. For that, use the &lt;code&gt;docker/ucp join --replica&lt;/code&gt; command.
+&lt;a href=&#34;../ucp/reference/join/&#34;&gt;Learn more about the join command&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;For each node that you want to install as a controller replica:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Log into that node using ssh.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make sure you transfer the backup.tar from the previous step to this node.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Use the join command with the replica option:&lt;/p&gt;
+
+&lt;p&gt;In this example we&amp;rsquo;ll be running the join command interactively, so that
+the command prompts for the necessary configuration values. We&amp;rsquo;ll also
+be passing the backup.tar file from the previous step in order to ensure
+that the CAs are replicated to the new controller node.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ docker run --rm -it --name ucp \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v $BACKUP_PATH/backup.tar:/backup.tar \
+  docker/ucp join -i --replica
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Since UCP configures your Docker Engine for multi-host networking, it might
+prompt you to restart the Docker daemon. To make the installation faster, join
+all replica nodes first, and only then restart the Docker daemon on those nodes.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Repeat steps 1 and 2 on the other nodes you want to set up as replicas.
+Make sure you set up 3, 5, or 7 controllers.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Check the cluster state.&lt;/p&gt;
+
+&lt;p&gt;The Dashboard page of UCP should list all your controller nodes.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../ucp/images/replica-nodes.png&#34; alt=&#34;UCP nodes page&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;step-9-add-more-nodes-to-the-ucp-cluster&#34;&gt;Step 9: Add more nodes to the UCP cluster&lt;/h2&gt;
+
+&lt;p&gt;Now you can add additional nodes to your UCP cluster. These are the nodes that
+will be running your containers.&lt;/p&gt;
+
+&lt;p&gt;For each node that you want to add to your UCP cluster:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Log into that node.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Use the join command, to join the node to the cluster:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ docker run --rm -it --name ucp \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  docker/ucp join -i
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Repeat steps 1 and 2 on the other nodes you want to add to your UCP cluster.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Check the cluster state.&lt;/p&gt;
+
+&lt;p&gt;The Dashboard page of UCP should list all your controller nodes.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../ucp/images/nodes-page.png&#34; alt=&#34;UCP nodes page&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;step-10-download-a-client-certificate-bundle&#34;&gt;Step 10. Download a client certificate bundle&lt;/h2&gt;
+
+&lt;p&gt;To validate that your cluster is correctly configured, you should try accessing
+the cluster with the Docker CLI client. For this, you&amp;rsquo;ll need to get a client
+certificate bundle.
+&lt;a href=&#34;../ucp/access-ucp/cli-based-access/&#34;&gt;Learn more about user bundles&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../ucp/applications/deploy-app-ui/&#34;&gt;Deploy an app from the UI&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../ucp/monitor/monitor-ucp/&#34;&gt;Monitor a UCP cluster&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Install offline</title>
+      <link>http://docs-stage.docker.com/ucp/installation/install-offline/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/ucp/installation/install-offline/</guid>
+      <description>
+
+&lt;h1 id=&#34;install-ucp-offline&#34;&gt;Install UCP offline&lt;/h1&gt;
+
+&lt;p&gt;The procedure to install Docker Universal Control Plane on a host is the same,
+whether that host has access to the internet or not.&lt;/p&gt;
+
+&lt;p&gt;The only difference when installing on an offline host,
+is that instead of pulling the UCP images from Docker Hub, you use a
+computer that is connected to the internet to download a single package with
+all the images. Then you copy that package to the host where you’ll install UCP.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Get the UCP package.&lt;/p&gt;
+
+&lt;p&gt;Use a computer with internet access to download a single package with all UCP
+images. As an example, to download UCP 1.1, run:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ wget https://packages.docker.com/caas/ucp-1.1.1_dtr-2.0.1.tar.gz
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Transfer the package to the offline node.&lt;/p&gt;
+
+&lt;p&gt;Now that you have the UCP package in your machine, you can transfer it to the
+host where you&amp;rsquo;ll be installing Docker UCP. You can use the Secure Copy command
+for this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ scp ucp-1.1.1_dtr-2.0.1.tar.gz $USER@$UCP_HOST:/tmp
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Login into the host where you transferred the images.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Load the UCP images.&lt;/p&gt;
+
+&lt;p&gt;Once the UCP package is transferred to the host, you can use the
+&lt;code&gt;docker load&lt;/code&gt; command, to load the images from the tar archive. On the host
+were you are going to install UCP, run:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ docker load &amp;lt; /tmp/ucp-1.1.1_dtr-2.0.1.tar.gz
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Install Docker UCP.&lt;/p&gt;
+
+&lt;p&gt;Now that the offline host has all the images needed to install UCP,
+you can &lt;a href=&#34;../ucp/installation/install-production/&#34;&gt;install Docker UCP that host&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../ucp/installation/install-production/&#34;&gt;Install UCP for production&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../ucp/installation/system-requirements/&#34;&gt;UCP system requirements&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Installation</title>
+      <link>http://docs-stage.docker.com/ucp/installation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/ucp/installation/</guid>
+      <description>
+
+&lt;h1 id=&#34;install-ucp&#34;&gt;Install UCP&lt;/h1&gt;
+
+&lt;p&gt;This section includes the following topics:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../ucp/installation/system-requirements/&#34;&gt;System requirements&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../ucp/installation/plan-production-install/&#34;&gt;Plan a production installation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../ucp/installation/install-production/&#34;&gt;Install UCP for production&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../ucp/installation/install-offline/&#34;&gt;Install offline&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../ucp/installation/license/&#34;&gt;License UCP&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../ucp/installation/upgrade/&#34;&gt;Upgrade UCP&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../ucp/installation/uninstall/&#34;&gt;Uninstall UCP&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

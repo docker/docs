@@ -1,0 +1,603 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kitematics on Docker Docs</title>
+    <link>http://docs-stage.docker.com/kitematic/</link>
+    <description>Recent content in Kitematics on Docker Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://docs-stage.docker.com/kitematic/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Creating a Local RethinkDB Database for Development</title>
+      <link>http://docs-stage.docker.com/kitematic/rethinkdb-dev-database/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/kitematic/rethinkdb-dev-database/</guid>
+      <description>
+
+&lt;h1 id=&#34;kitematic-tutorial-creating-a-local-rethinkdb-database-for-development&#34;&gt;Kitematic Tutorial: Creating a Local RethinkDB Database for Development&lt;/h1&gt;
+
+&lt;p&gt;In this tutorial, you will:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Create a RethinkDB Container for Development&lt;/li&gt;
+&lt;li&gt;(Advanced) Clone a small Node.js application and write data into RethinkDB.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;setting-up-rethinkdb-in-kitematic&#34;&gt;Setting up RethinkDB in Kitematic&lt;/h3&gt;
+
+&lt;p&gt;First, if you haven&amp;rsquo;t yet done so, &lt;a href=&#34;../kitematic/&#34;&gt;download and start
+Kitematic&lt;/a&gt;. Once open, the app should look like
+this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../kitematic/images/rethink-create.png&#34; alt=&#34;Rethink create button&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click on the &lt;em&gt;Create&lt;/em&gt; button of the &lt;code&gt;rethinkdb&lt;/code&gt; image listing in the recommended
+list as shown above. This will download &amp;amp; run a RethinkDB container within a few
+minutes. Once it&amp;rsquo;s done, you&amp;rsquo;ll have a local RethinkDB database up and running.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../kitematic/images/rethink-container.png&#34; alt=&#34;Rethink container&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s start using it to develop a node.js app. For now, let&amp;rsquo;s figure out which
+IP address and port RethinkDB is listening on. To find out, click the &lt;code&gt;Settings&lt;/code&gt;
+tab and then the &lt;code&gt;Ports&lt;/code&gt; section:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../kitematic/images/rethink-ports.png&#34; alt=&#34;Rethink create button&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can see there that for RethinkDB port &lt;code&gt;28015&lt;/code&gt;, the container is listening on
+host &lt;code&gt;192.168.99.100&lt;/code&gt; and port &lt;code&gt;49154&lt;/code&gt; (in this example - ports may be different
+for you). This means you can now reach RethinkDB via a client driver at
+&lt;code&gt;192.168.99.100:49154&lt;/code&gt;. Again, this IP address may be different for you.&lt;/p&gt;
+
+&lt;h3 id=&#34;advanced-saving-data-into-rethinkdb-with-a-local-node-js-app&#34;&gt;(Advanced) Saving Data into RethinkDB with a local Node.js App&lt;/h3&gt;
+
+&lt;p&gt;Now, you&amp;rsquo;ll create the RethinkDB example chat application running on your local
+OS X system to test drive your new containerized database.&lt;/p&gt;
+
+&lt;p&gt;First, if you don&amp;rsquo;t have it yet, &lt;a href=&#34;http://nodejs.org/&#34;&gt;download and install
+Node.js&lt;/a&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: this example needs Xcode installed. We&amp;rsquo;ll replace it with something
+with fewer dependencies soon.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In your terminal, type:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; $ export RDB_HOST=192.168.99.100 # replace with IP from above step
+ $ export RDB_PORT=49154 # replace with Port from above step
+ $ git clone https://github.com/rethinkdb/rethinkdb-example-nodejs-chat
+ $ cd rethinkdb-example-nodejs-chat
+ $ npm install
+ $ npm start
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now, point your browser to &lt;code&gt;http://localhost:8000&lt;/code&gt;. Congratulations, you&amp;rsquo;ve
+successfully used a RethinkDB container in Kitematic to build a real-time chat
+app. Happy coding!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../kitematic/images/rethinkdb-preview.png&#34; alt=&#34;Rethink app preview&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Frequently Asked Questions</title>
+      <link>http://docs-stage.docker.com/kitematic/faq/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/kitematic/faq/</guid>
+      <description>
+
+&lt;h1 id=&#34;kitematic-frequently-asked-questions&#34;&gt;Kitematic: Frequently Asked Questions&lt;/h1&gt;
+
+&lt;h3 id=&#34;is-kitematic-open-source&#34;&gt;Is Kitematic Open Source?&lt;/h3&gt;
+
+&lt;p&gt;Yes! Our source code is available on
+&lt;a href=&#34;https://github.com/kitematic/kitematic&#34;&gt;GitHub&lt;/a&gt;. Kitematic is open source
+software released under the Apache 2.0 license.&lt;/p&gt;
+
+&lt;h3 id=&#34;how-can-i-contribute-to-kitematic&#34;&gt;How can I contribute to Kitematic?&lt;/h3&gt;
+
+&lt;p&gt;We always welcome (and deeply appreciate!) new contributions to the project. The
+best way to start contributing to Kitematic is to review our doc on &lt;a href=&#34;https://github.com/kitematic/kitematic/blob/master/CONTRIBUTING.md&#34;&gt;contributing&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;how-does-kitematic-work-with-docker&#34;&gt;How does Kitematic work with Docker?&lt;/h3&gt;
+
+&lt;p&gt;Kitematic connects directly to a running instance of Docker and controls it via
+the Docker Remote API.&lt;/p&gt;
+
+&lt;h3 id=&#34;which-platforms-does-kitematic-support&#34;&gt;Which platforms does Kitematic support?&lt;/h3&gt;
+
+&lt;p&gt;Right now Kitematic works on Mac OS X and Windows. Linux is planned in the
+future.  Review our product &lt;a
+href=&#34;https://github.com/kitematic/kitematic/blob/master/ROADMAP.md&#34;&gt;roadmap&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;why-does-kitematic-collect-usage-analytics-and-bug-reports&#34;&gt;Why does Kitematic collect usage analytics and bug reports?&lt;/h3&gt;
+
+&lt;p&gt;Kitematic tracks anonymous errors and analytics to help understand why things go
+wrong and to help understand how users are interacting with the app so we can
+continuously make it better.&lt;/p&gt;
+
+&lt;p&gt;You can opt-out of this anytime via the in-app preferences.&lt;/p&gt;
+
+&lt;h4 id=&#34;what-we-don-t-collect&#34;&gt;What we DON&amp;rsquo;T collect&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Personal information: any information that would allow us to determine a
+specific user of Kitematic&lt;/li&gt;
+&lt;li&gt;Information or data relating to code, containers or Docker images opened via
+Kitematic.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;what-we-do-collect&#34;&gt;What we DO collect&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Anonymous events for actions in the app. We never collect data associated with
+events. For example:
+
+&lt;ul&gt;
+&lt;li&gt;User searched for images (but not what the search query was).&lt;/li&gt;
+&lt;li&gt;User created a container (but not which image, the name of the container or
+any data involved)&lt;/li&gt;
+&lt;li&gt;User opened the preferences pane&lt;/li&gt;
+&lt;li&gt;User deleted a container&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Errors names, messages &amp;amp; stack traces (scrubbed for user names)&lt;/li&gt;
+&lt;li&gt;Operating System, Kitematic and installed VirtualBox versions&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We&amp;rsquo;d love to answer any more questions about this. Feel free to reach us at
+kitematic@docker.com or to open an issue on GitHub.&lt;/p&gt;
+
+&lt;h2 id=&#34;next-steps&#34;&gt;Next Steps&lt;/h2&gt;
+
+&lt;p&gt;For information about known issues in the current release of Kitematic, take a
+look at the &lt;a href=&#34;../kitematic/known-issues/&#34;&gt;Known issues&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Kitematic</title>
+      <link>http://docs-stage.docker.com/kitematic/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/kitematic/</guid>
+      <description>
+
+&lt;h1 id=&#34;kitematic&#34;&gt;Kitematic&lt;/h1&gt;
+
+&lt;p&gt;Kitematic, the Docker GUI, runs on Mac OS X and Windows operating systems. Beginning with the 1.8 Docker release, you use the Docker Toolbox to install Kitematic.  See the &lt;a href=&#34;https://docs.docker.com/installation/mac&#34;&gt;Mac OS X installation guide&lt;/a&gt; or the &lt;a href=&#34;https://docs.docker.com/installation/windows&#34;&gt;Windows installation guide&lt;/a&gt; for details on installing with Docker Toolbox.&lt;/p&gt;
+
+&lt;p&gt;For information about using Kitematic, take a look at the &lt;a href=&#34;../kitematic/userguide/&#34;&gt;User Guide&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Kitematic User Guide: Intro &amp; Overview</title>
+      <link>http://docs-stage.docker.com/kitematic/userguide/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/kitematic/userguide/</guid>
+      <description>
+
+&lt;h1 id=&#34;kitematic-user-guide&#34;&gt;Kitematic user guide&lt;/h1&gt;
+
+&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+
+&lt;p&gt;Kitematic is an open source project built to simplify and streamline using
+Docker on a Mac or Windows (coming soon) PC. Kitematic automates the Docker
+installation and setup process and provides an intuitive graphical user
+interface (GUI) for running Docker containers.  Kitematic integrates with
+&lt;a href=&#34;https://docs.docker.com/machine/&#34;&gt;Docker Machine&lt;/a&gt; to provision a VirtualBox VM
+and install the Docker Engine locally on your machine.&lt;/p&gt;
+
+&lt;p&gt;Once installed, the Kitematic GUI launches and from the home screen you will be
+presented with curated images that you can run instantly. You can search for any
+public images on Docker Hub from Kitematic just by typing in the search bar.
+You can use the GUI to create, run and manage your containers just by clicking
+on buttons. Kitematic allows you to switch back and forth between the Docker CLI
+and the GUI.  Kitematic also automates advanced features such as managing ports
+and configuring volumes.  You can use Kitematic to change environment variables,
+stream logs, and single click terminal into your Docker container all from the
+GUI.&lt;/p&gt;
+
+&lt;p&gt;First, if you haven&amp;rsquo;t yet done so, &lt;a href=&#34;../kitematic/&#34;&gt;download and start
+Kitematic&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;container-list&#34;&gt;Container list&lt;/h2&gt;
+
+&lt;p&gt;Kitematic lists all running and stopped containers on the left side, underneath
+the &amp;ldquo;New Container&amp;rdquo; link.&lt;/p&gt;
+
+&lt;p&gt;The container list includes all containers, even those not started by Kitematic,
+giving you a quick over-view of the state of your Docker daemon.&lt;/p&gt;
+
+&lt;p&gt;You can click on any container to view its logs (the output of the main container
+process), restart, stop or exec &lt;code&gt;sh&lt;/code&gt; in that container. See &lt;a href=&#34;#working-with-a-container&#34;&gt;Working with a
+container&lt;/a&gt; for more details.&lt;/p&gt;
+
+&lt;h2 id=&#34;creating-a-new-container&#34;&gt;Creating a new container&lt;/h2&gt;
+
+&lt;p&gt;The &amp;ldquo;New Container&amp;rdquo; page lets you search for and select from images on the Docker Hub.
+When you&amp;rsquo;ve found the image you want to run, you can click &amp;ldquo;Create&amp;rdquo; to pull, create,
+and run the container.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../kitematic/images/browse-images.png&#34; alt=&#34;Nginx create&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;working-with-a-container&#34;&gt;Working with a container&lt;/h2&gt;
+
+&lt;p&gt;If you select a non-running container, either stopped, or paused, you will be able
+to &amp;ldquo;Restart&amp;rdquo; or &amp;ldquo;Stop&amp;rdquo; the container using the icons. You can also view the entire
+main container process&amp;rsquo; output logs, and in the Settings section you can make
+changes which will be used if you &amp;ldquo;Restart&amp;rdquo; this container.&lt;/p&gt;
+
+&lt;p&gt;By selecting a running container from the left list, you can see some state information
+for your container - either a preview of the HTML output for a container that has a web
+server, the main container process&amp;rsquo; logs, and any container volumes that have been
+configured.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../kitematic/images/cli-redis-container.png&#34; alt=&#34;Redis container in Kitematic&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The summary page will show different things depending on the image metadata. If
+a known &amp;ldquo;web&amp;rdquo; port (see below) is &lt;code&gt;EXPOSED&lt;/code&gt;, then Kitematic assumes its a web page,
+and will show a preview of the site at &lt;code&gt;/&lt;/code&gt;. If other ports are exposed, then it
+will show a list of those ports, and the Docker daemon IP and port they are mapped
+to. If there are any &lt;code&gt;VOLUMES&lt;/code&gt;, then these will be shown. At minimum, the summary
+screen will show the main container process&amp;rsquo; log output.&lt;/p&gt;
+
+&lt;p&gt;The currently detected &amp;ldquo;web&amp;rdquo; ports are, &lt;code&gt;80&lt;/code&gt;, &lt;code&gt;8000&lt;/code&gt;, &lt;code&gt;8080&lt;/code&gt;, &lt;code&gt;3000&lt;/code&gt;, &lt;code&gt;5000&lt;/code&gt;,
+&lt;code&gt;2368&lt;/code&gt;, &lt;code&gt;9200&lt;/code&gt;, and &lt;code&gt;8983&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;viewing-container-logs&#34;&gt;Viewing container logs&lt;/h3&gt;
+
+&lt;p&gt;You can view the entire main container process&amp;rsquo; log output either by clicking on the &amp;ldquo;Logs&amp;rdquo;
+preview image, or by clicking on the &amp;ldquo;Logs&amp;rdquo; tab.&lt;/p&gt;
+
+&lt;p&gt;You can then scroll through the logs from the current running container. Note that
+if you make changes to the container settings, then the container will be restarted,
+so this will reset this log view.&lt;/p&gt;
+
+&lt;h3 id=&#34;starting-a-terminal-in-a-container&#34;&gt;Starting a terminal in a container&lt;/h3&gt;
+
+&lt;p&gt;The &amp;ldquo;Terminal&amp;rdquo; icon at the top of the container summary will &lt;code&gt;docker exec sh &amp;lt;your container&amp;gt;&lt;/code&gt;.
+This will allow you to make quick changes, or to debug a problem.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: Your exec&amp;rsquo;ed &lt;code&gt;sh&lt;/code&gt; process will not have the same environment settings
+as the main container process and its children.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;managing-volumes&#34;&gt;Managing Volumes&lt;/h3&gt;
+
+&lt;p&gt;You can choose to make all of a container&amp;rsquo;s volumes mapped to directories on
+on your Mac by clicking on the folders in the &amp;ldquo;Edit Files&amp;rdquo; section of the
+container summary screen.&lt;/p&gt;
+
+&lt;p&gt;This allows you to manage files in volumes via the Finder.
+Kitematic exposes a container&amp;rsquo;s volume data under &lt;code&gt;~/Documents/Kitematic/&amp;lt;container&#39;s name&amp;gt;/&lt;/code&gt;.
+Quick access to this folder (or directory) is available via the app:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../kitematic/images/volumes-dir.png&#34; alt=&#34;Accessing the volumes directory&#34; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: When you &amp;ldquo;Enable all volumes to edit files in Finder&amp;rdquo;, the Docker
+container will be stopped, removed and re-created with the new &lt;code&gt;volumes&lt;/code&gt;
+flag.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&#34;changing-volume-directories&#34;&gt;Changing Volume Directories&lt;/h4&gt;
+
+&lt;p&gt;Let&amp;rsquo;s say you have an Nginx webserver running via Kitematic (using the
+&lt;code&gt;kitematic/hello-world-nginx&lt;/code&gt; image on DockerHub). However, you don&amp;rsquo;t want to
+use the default directory created for the website_files volume. Instead, you
+already have the HTML, Javascript, and CSS for your website under
+&lt;code&gt;~/workspace/website&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Navigate to the &amp;ldquo;Settings&amp;rdquo; tab of the container, and go to the &amp;ldquo;Volumes&amp;rdquo;. This
+screen allows you to set the mappings individually.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../kitematic/images/change-folder.png&#34; alt=&#34;screen shot 2015-02-28 at 2 48 01 pm&#34; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: When you &amp;ldquo;Change Folders&amp;rdquo;, the Docker
+container will be stopped, removed and re-created with the new &lt;code&gt;volumes&lt;/code&gt;
+flag.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;setting-the-container-name&#34;&gt;Setting the container name&lt;/h3&gt;
+
+&lt;p&gt;By default, Kitematic sets the container name to the same as the image name (or
+with a &lt;code&gt;-&amp;lt;number&amp;gt;&lt;/code&gt; if there are more than one.
+To simplify administration, or when using container linking or volumes, you may
+want to rename it.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: When you rename the container it will be stopped, removed and
+re-created with the new name (due to the default volumes mapping).&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;adding-environment-variables&#34;&gt;Adding Environment variables&lt;/h3&gt;
+
+&lt;p&gt;Many images use environment variables to let you customise them. The &amp;ldquo;General&amp;rdquo;
+&amp;ldquo;Settings&amp;rdquo; tab allows you to add and modify the environment variables used to
+start a container.&lt;/p&gt;
+
+&lt;p&gt;The list of environment variables will show any that have been set on the image
+metadata - for example, using the &lt;code&gt;ENV&lt;/code&gt; instruction in the Dockerfile.&lt;/p&gt;
+
+&lt;p&gt;&lt;TODO: image of the jenkins container&gt;&lt;/p&gt;
+
+&lt;p&gt;When you &amp;ldquo;Save&amp;rdquo; the changed environment variables, the container will be stopped,
+removed and re-created.&lt;/p&gt;
+
+&lt;h3 id=&#34;delete-container&#34;&gt;Delete container&lt;/h3&gt;
+
+&lt;p&gt;On the &amp;ldquo;General&amp;rdquo; &amp;ldquo;Settings&amp;rdquo; tab, you can delete the container. Clicking &amp;ldquo;Delete
+Container&amp;rdquo; will also stop the container if necessary.&lt;/p&gt;
+
+&lt;p&gt;You can also delete a container by clicking the &lt;code&gt;X&lt;/code&gt; icon in the container list.&lt;/p&gt;
+
+&lt;p&gt;Kitematic will prompt you to confirm that you want to delete.&lt;/p&gt;
+
+&lt;h4 id=&#34;list-the-exposed-ports-and-how-to-access-them&#34;&gt;List the exposed Ports and how to access them&lt;/h4&gt;
+
+&lt;p&gt;To see the complete list of exposed ports, go to &amp;ldquo;Settings&amp;rdquo; then &amp;ldquo;Ports&amp;rdquo;. This
+page lists all the container ports exposed, and the IP address and host-only
+network port that you can access use to access that container from your OS X
+system.&lt;/p&gt;
+
+&lt;h2 id=&#34;docker-command-line-access&#34;&gt;Docker Command-line Access&lt;/h2&gt;
+
+&lt;p&gt;You can interact with existing containers in Kitematic or create new containers
+via the Docker Command Line Interface (CLI). Any changes you make on the CLI are
+directly reflected in Kitematic.&lt;/p&gt;
+
+&lt;p&gt;To open a terminal via Kitematic, just press the whale button at the bottom left, as
+shown below:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../kitematic/images/cli-access-button.png&#34; alt=&#34;CLI access button&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;example-creating-a-new-redis-container&#34;&gt;Example: Creating a new Redis container&lt;/h3&gt;
+
+&lt;p&gt;Start by opening a Docker-CLI ready terminal by clicking the whale button as
+described above. Once the terminal opens, enter &lt;code&gt;docker run -d -P redis&lt;/code&gt;. This
+will pull and run a new Redis container via the Docker CLI.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../kitematic/images/cli-terminal.png&#34; alt=&#34;Docker CLI terminal window&#34; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: If you&amp;rsquo;re creating containers from the command line, use &lt;code&gt;docker run -d&lt;/code&gt;
+so that Kitematic can re-create the container when settings are changed via the
+Kitematic user interface. Containers started without &lt;code&gt;-d&lt;/code&gt; will fail to re-start.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Now, go back to Kitematic. The Redis container should now be visible.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../kitematic/images/cli-redis-container.png&#34; alt=&#34;Redis container in Kitematic&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;next-steps&#34;&gt;Next Steps&lt;/h2&gt;
+
+&lt;p&gt;For an example using Kitematic to run a Minecraft server, take a look at
+the &lt;a href=&#34;../kitematic/minecraft-server/&#34;&gt;Minecraft server&lt;/a&gt; page.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Known Issues</title>
+      <link>http://docs-stage.docker.com/kitematic/known-issues/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/kitematic/known-issues/</guid>
+      <description>
+
+&lt;h1 id=&#34;kitematic-known-issues&#34;&gt;Kitematic: Known Issues&lt;/h1&gt;
+
+&lt;p&gt;Kitematic is in beta, so we&amp;rsquo;re still working out the kinks. The most common
+errors occur at the setup stage since creating a VM reliably with VirtualBox can
+be tricky. We are working on this problem.&lt;/p&gt;
+
+&lt;p&gt;In the meantime, below are a list of common errors and solutions that work for
+most people.&lt;/p&gt;
+
+&lt;h2 id=&#34;setup-error-or-hanging-at-99&#34;&gt;Setup Error or Hanging at 99%&lt;/h2&gt;
+
+&lt;p&gt;Sometimes Kitematic doesn&amp;rsquo;t set up VirtualBox properly. Retrying the setup
+usually works (via one of the two retry buttons). If not, try the following
+commands on the command line:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;docker-machine rm -f dev&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;docker-machine create -d virtualbox dev&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Then re-open Kitematic. This usually fixes the issue, but if it persists, feel
+free to view our &lt;a href=&#34;https://github.com/kitematic/kitematic/issues?q=is%3Aopen+is%3Aissue+label%3Abug&#34;&gt;existing GitHub
+issues&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;contributing-fixes&#34;&gt;Contributing Fixes&lt;/h2&gt;
+
+&lt;p&gt;We&amp;rsquo;re always looking for help to make Kitematic better and more reliable! Visit
+&lt;a href=&#34;https://github.com/kitematic/kitematic&#34;&gt;our GitHub page&lt;/a&gt; for docs on how to
+contribute.&lt;/p&gt;
+
+&lt;p&gt;Under the hood, Kitematic uses &lt;a href=&#34;https://github.com/docker/machine&#34;&gt;Docker
+Machine&lt;/a&gt; to provision Docker-enabled VMs via
+VirtualBox. We&amp;rsquo;re still working on a stronger integration with this project.
+Their &lt;a href=&#34;https://github.com/docker/machine&#34;&gt;GitHub repo&lt;/a&gt; is a great place to start
+if you&amp;rsquo;re looking to help fix specific issues around VM provisioning.&lt;/p&gt;
+
+&lt;h2 id=&#34;view-all-issues&#34;&gt;View All Issues&lt;/h2&gt;
+
+&lt;p&gt;For a full list of Kitematic bugs or issues see our &lt;a href=&#34;https://github.com/kitematic/kitematic/issues?q=is%3Aopen+is%3Aissue+label%3Abug&#34;&gt;existing GitHub
+issues&lt;/a&gt; labelled as &lt;code&gt;bug&lt;/code&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Set up a Minecraft Server</title>
+      <link>http://docs-stage.docker.com/kitematic/minecraft-server/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/kitematic/minecraft-server/</guid>
+      <description>
+
+&lt;h1 id=&#34;kitematic-tutorial-set-up-a-minecraft-server&#34;&gt;Kitematic tutorial: Set up a Minecraft server&lt;/h1&gt;
+
+&lt;p&gt;This is a quick tutorial demonstrating how to set up a local Minecraft server
+using Kitematic and Docker.&lt;/p&gt;
+
+&lt;h3 id=&#34;create-minecraft-server-container&#34;&gt;Create Minecraft Server Container&lt;/h3&gt;
+
+&lt;p&gt;First, if you haven&amp;rsquo;t yet done so, &lt;a href=&#34;../kitematic/&#34;&gt;download and start
+Kitematic&lt;/a&gt;. Once installed and running, the app should look like this:&lt;/p&gt;
+
+&lt;p&gt;Create a container from the recommended Minecraft image by clicking the &amp;ldquo;Create&amp;rdquo;
+button.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../kitematic/images/minecraft-create.png&#34; alt=&#34;create Minecraft container&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;After the image finishes downloading, you&amp;rsquo;ll see the home screen for the
+Minecraft container. Your Minecraft server is now up and running inside a Docker
+container. Note that we&amp;rsquo;ve marked the IP and port you can use to connect to
+your Minecraft server in red (your IP and port may be different from what&amp;rsquo;s
+shown).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../kitematic/images/minecraft-port.png&#34; alt=&#34;Minecraft server port and IP info&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;connect-to-minecraft-server&#34;&gt;Connect to Minecraft server&lt;/h3&gt;
+
+&lt;p&gt;Open your Minecraft client, log in with your Minecraft account and click on the
+&amp;ldquo;Multiplayer&amp;rdquo; button.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../kitematic/images/minecraft-login.png&#34; alt=&#34;Minecraft login screen&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click the &amp;ldquo;Add Server&amp;rdquo; button to add the Minecraft server you want to connect
+to.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../kitematic/images/minecraft-login.png&#34; alt=&#34;Add server&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Fill in the &amp;ldquo;Server Address&amp;rdquo; text box with the marked IP and port from Kitematic
+you saw earlier.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../kitematic/images/minecraft-server-address.png&#34; alt=&#34;Minecraft server address&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click on the play button to connect to your Minecraft server and enjoy!&lt;/p&gt;
+
+&lt;h3 id=&#34;change-map-using-docker-volume&#34;&gt;Change map using Docker volume&lt;/h3&gt;
+
+&lt;p&gt;Open the &amp;ldquo;data&amp;rdquo; folder from Kitematic (You&amp;rsquo;ll need to &amp;ldquo;Enable all volumes to edit
+files via Finder&amp;rdquo;). We use Docker Volume to map the folder from the Minecraft
+Docker container onto your computer.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../kitematic/images/minecraft-data-volume.png&#34; alt=&#34;Minecraft data volume&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The Finder will open, allowing you to replace your current map with the new one
+you desire.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../kitematic/images/minecraft-map.png&#34; alt=&#34;Minecraft maps&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Restart your container by clicking the &amp;ldquo;Restart&amp;rdquo; button.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../kitematic/images/minecraft-restart.png&#34; alt=&#34;Restart Minecraft container&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Go back to your Minecraft client and join your server. The new map should load.&lt;/p&gt;
+
+&lt;h2 id=&#34;next-steps&#34;&gt;Next Steps&lt;/h2&gt;
+
+&lt;p&gt;For an example using Kitematic to run Nginx, take a look at the &lt;a href=&#34;../kitematic/nginx-web-server/&#34;&gt;Nginx web
+server&lt;/a&gt; page.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Set up an Nginx web server</title>
+      <link>http://docs-stage.docker.com/kitematic/nginx-web-server/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/kitematic/nginx-web-server/</guid>
+      <description>
+
+&lt;h1 id=&#34;kitematic-tutorial-serving-a-static-website-with-nginx&#34;&gt;Kitematic Tutorial: Serving a Static Website with Nginx&lt;/h1&gt;
+
+&lt;p&gt;In this tutorial, you will:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Download and run a web server container&lt;/li&gt;
+&lt;li&gt;Explore the container&amp;rsquo;s website data natively on your Mac&lt;/li&gt;
+&lt;li&gt;Use volumes to modify the website data&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In this example website we&amp;rsquo;ll be serving the popular 2048 game, as shown below.
+Let&amp;rsquo;s get to it!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../kitematic/images/nginx-2048.png&#34; alt=&#34;2048 game&#34; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;running-the-nginx-web-server-container&#34;&gt;Running the Nginx Web Server Container&lt;/h4&gt;
+
+&lt;p&gt;First, if you haven&amp;rsquo;t yet done so, &lt;a href=&#34;../kitematic/&#34;&gt;download and start
+Kitematic&lt;/a&gt;. Once installed and running, the app should look like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../kitematic/images/nginx-create.png&#34; alt=&#34;Nginx create&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click on the &lt;em&gt;Create&lt;/em&gt; button of the &lt;code&gt;hello-world-nginx&lt;/code&gt; listing as shown above.
+Kitematic will download (also known as pull the image) and then run a tiny Nginx web server
+in a Docker container, allowing it to serve website data to your Mac.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../kitematic/images/nginx-hello-world.png&#34; alt=&#34;download Nginx hello world&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Once it&amp;rsquo;s done downloading you should see a quick preview of the example website
+that comes with the container, as shown below. Click on the preview to see the
+result in your own browser.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../kitematic/images/nginx-preview.png&#34; alt=&#34;Nginx preview&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What just happened?&lt;/strong&gt; Kitematic downloaded the &lt;code&gt;kitematic/hello-world-nginx&lt;/code&gt;
+image from the Docker Hub and then created and ran a Docker Nginx container from
+this image.&lt;/p&gt;
+
+&lt;h4 id=&#34;viewing-the-website-data-in-finder&#34;&gt;Viewing the Website Data in Finder&lt;/h4&gt;
+
+&lt;p&gt;This container exposes website data via a &lt;em&gt;Docker volume&lt;/em&gt;. Kitematic makes
+managing Docker volumes easy - you can edit the data in Finder or with your
+favorite text editor. By default, Kitematic places volumes under &lt;code&gt;~/Kitematic&lt;/code&gt;
+but you can change this in the container settings. To access the files via
+finder, click on the in-app folder icon for a container and &amp;ldquo;Enable all volumes
+to edit via Finder&amp;rdquo;:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../kitematic/images/nginx-data-volume.png&#34; alt=&#34;Nginx data volume&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;A Finder window of the folder should open containing the index.html file we see
+being served by the container.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../kitematic/images/nginx-data-folder.png&#34; alt=&#34;Nginx data folder&#34; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;serving-your-own-website-data&#34;&gt;Serving Your Own Website Data&lt;/h4&gt;
+
+&lt;p&gt;Now let&amp;rsquo;s try serving a more interesting website. &lt;a href=&#34;https://github.com/gabrielecirulli/2048/archive/master.zip&#34;&gt;Download the zipped
+files&lt;/a&gt; for 2048, a
+popular (and addictive) web-based tile game. Extract this zip file into the
+folder you just opened:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../kitematic/images/nginx-2048-files.png&#34; alt=&#34;Website files for 2048&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Switch back to Kitematic and restart the container by clicking the &amp;ldquo;Restart&amp;rdquo;
+button as shown below. Your Nginx container should now be serving 2048.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../kitematic/images/nginx-serving-2048.png&#34; alt=&#34;Nginx running 2048&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What just happened?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Kitematic can map Docker container volumes to directories on your
+Mac. In this case you changed the container&amp;rsquo;s volume data via the Finder to
+serve a website we downloaded.&lt;/p&gt;
+
+&lt;h2 id=&#34;next-steps&#34;&gt;Next Steps&lt;/h2&gt;
+
+&lt;p&gt;For an example using Kitematic to run a Local RethinkDB database, take a look at
+the &lt;a href=&#34;../kitematic/rethinkdb-dev-database/&#34;&gt;RethinkDB development Database&lt;/a&gt; example.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

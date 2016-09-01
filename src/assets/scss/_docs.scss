@@ -1,0 +1,69 @@
+.tabs.vertical{
+	max-width: 100%;
+	width: 100%;
+}
+
+nav ul.tabs{
+	li{
+		list-style: none;
+		position: relative;
+
+		& > ul{
+			transition: max-height 0.5s ease-out;
+			max-height: 0px;
+			overflow: hidden;
+		}
+
+		&:hover > ul{
+			max-height: 500px;
+			transition: max-height 0.6s ease-in;
+		}
+
+		a{
+			background-color: #103f5a;
+			display: block;	
+			line-height: 20px;
+			color: white;
+			padding: 10px 15px;
+			transition: background 300ms ease;
+
+			&:hover{
+				background-color: #242424;
+			}
+		}
+	}	
+
+	&.second-level,
+	&.third-level,
+	&.fourth-level{
+		max-height: 0;
+	}
+
+	&.second-level a{
+		background-color: #1e4d68;
+	}
+	&.third-level a{
+		background-color: #2b5c78;
+	}
+	&.fourth-level a{
+		background-color: #3f6f8a;
+	}
+}
+
+.row{
+	&.content{
+		max-width: 100%;
+
+		.large-3{
+			padding-left: 0;
+			margin-bottom: 50px;
+		}
+	}
+}
+
+@media only screen and (max-width : 939px){
+	.large-3{
+		padding-left: 0;
+		padding-right: 0;
+	}	
+}

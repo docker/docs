@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Toolboxes on Docker Docs</title>
+    <link>http://docs-stage.docker.com/toolbox/</link>
+    <description>Recent content in Toolboxes on Docker Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://docs-stage.docker.com/toolbox/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Docker Toolbox</title>
+      <link>http://docs-stage.docker.com/toolbox/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/toolbox/</guid>
+      <description>
+
+&lt;h1 id=&#34;toolbox&#34;&gt;Toolbox&lt;/h1&gt;
+
+&lt;p&gt;Available for both Windows and Mac, Docker Toolbox installs the Docker Client, Machine, Compose, and Kitematic.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Learn about Docker Toolbox&lt;/strong&gt;. See &lt;a href=&#34;../toolbox/overview/&#34;&gt;Docker Toolbox Overview&lt;/a&gt; for a quick tour of how to install Toolbox, and get started with Docker Machine, Kitematic, and Docker Compose.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Ready to download Toolbox?&lt;/strong&gt;  &lt;a href=&#34;https://www.docker.com/products/docker-toolbox&#34;&gt;Download Docker Toolbox&lt;/a&gt; from products.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Toolbox Overview</title>
+      <link>http://docs-stage.docker.com/toolbox/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://docs-stage.docker.com/toolbox/overview/</guid>
+      <description>
+
+&lt;h1 id=&#34;docker-toolbox-overview&#34;&gt;Docker Toolbox Overview&lt;/h1&gt;
+
+&lt;p&gt;Docker Toolbox is an installer for quick setup and launch of a Docker environment on Mac and Windows systems.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../toolbox/images/toolbox-installer.png&#34; alt=&#34;Toolbox installer&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;what-s-in-the-box&#34;&gt;What&amp;rsquo;s in the box&lt;/h2&gt;
+
+&lt;p&gt;Toolbox includes these Docker tools:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Docker Machine for running &lt;code&gt;docker-machine&lt;/code&gt; commands&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Docker Engine for running the &lt;code&gt;docker&lt;/code&gt; commands&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Docker Compose for running the &lt;code&gt;docker-compose&lt;/code&gt; commands&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Kitematic, the Docker GUI&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;a shell preconfigured for a Docker command-line environment&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Oracle VirtualBox&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;ready-to-get-started&#34;&gt;Ready to get started?&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.docker.com/products/docker-toolbox&#34; target=&#34;_blank&#34;&gt;Download Docker Toolbox&lt;/a&gt; from the product page.&lt;/p&gt;
+
+&lt;h2 id=&#34;next-steps&#34;&gt;Next Steps&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://docs.docker.com/mac/&#34;&gt;Get Started with Docker for Mac OS X&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://docs.docker.com/windows/&#34;&gt;Get Started with Docker for Windows&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://docs.docker.com/kitematic/userguide/&#34;&gt;Learn about Kitematic&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://docs.docker.com/machine/&#34;&gt;Learn about Docker Machine &lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://docs.docker.com/compose/&#34;&gt;Learn about Docker Compose&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
